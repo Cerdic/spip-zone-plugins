@@ -30,7 +30,7 @@ Afin de faciliter votre navigation, nous vous conseillons les actions suivantes 
 En dernier lieu, de nombreux sites web disposent d’un ou plusieurs espaces réservés à leurs administrateurs ou abonnés nécessitant une connexion. Si vous y êtes autorisé, [cliquez ici pour accéder à la plateforme de connexion du site|Des identifiants vous seront demandés->@ecrire@].', # NEW
 
 	// B
-	'backtrace' => 'Spätne vystopovať PHP',
+	'backtrace' => 'PHP na spätné vystopovanie',
 
 	// C
 	'cfg_comment_email' => 'Utilisez les champs ci-dessous pour choisir les adresses email d\'envoi et réception des rapports d\'erreurs ({ces rapports sont envoyés lorsque l\'internaute clique sur le bouton concerné - par défaut, le mail du webmestre est utilisé}).', # NEW
@@ -49,23 +49,23 @@ En dernier lieu, de nombreux sites web disposent d’un ou plusieurs espaces ré
 	// R
 	'referer' => 'Referer',
 	'report_a_bug' => 'Nahlásiť chybu',
-	'report_a_bug_comment' => 'Vous pouvez soumettre un rapport d\'incident sur l\'erreur que vous rencontrez au webmestre du site en cliquant sur le bouton ci-dessous.', # NEW
+	'report_a_bug_comment' => 'Správu o chybe, s ktorou ste sa stretli, môžete poslať webmasterovi stránky kliknutím na tlačidlo.',
 	'report_a_bug_envoyer' => 'Poslať správu',
 	'report_a_bug_message_envoye' => 'OK – Správa o chybe bola odoslaná. Ďakujeme.',
 	'report_a_bug_texte_mail' => 'Stránka "@url@" vypísala @date@ chybový kód HTTP @code@.',
 	'report_a_bug_titre_mail' => '[@sitename@] Správa o chybe HTTP @code@',
 	'report_an_authorized_bug_comment' => 'Si vous pensez qu\'il s\'agit d\'une erreur ou d\'une mauvaise évaluation de vos droits, vous pouvez soumettre un rapport d\'incident au webmestre du site en cliquant sur le bouton ci-dessous. Les informations sont transmises automatiquement (<i>page demandée et vos identifiants</i>).', # NEW
 	'request_auth_message_envoye' => 'OK – Vaša požiadavka bola odoslaná. Ďakujeme.',
-	'request_auth_texte_mail' => 'L\'utilisateur "@user@" a sollicité d\'être autorisé à accéder à la page "@url@" au @date@.', # NEW
+	'request_auth_texte_mail' => 'Používateľ "@user@" požiadal o povolenie k "@url@" dňa @date@.',
 
 	// S
-	'session' => 'Session utilisateur', # NEW
+	'session' => 'Používateľské session',
 	'session_only_notempty_values' => '(vypísané sú iba hodnoty, ktoré nie sú prázdne)',
 	'spip_400' => 'SPIP 400',
 
 	// U
 	'url_complete' => 'Celá internetová adresa',
-	'utilisateur_concerne' => 'Utilisateur concerné : ' # NEW
+	'utilisateur_concerne' => 'Dotknutý používateľ: '
 );
 
 ?>
