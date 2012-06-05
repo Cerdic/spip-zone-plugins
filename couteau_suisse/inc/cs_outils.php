@@ -128,7 +128,10 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	if(isset($outil['contrib']) && strlen($outil['contrib']))
 		$p .= '<p>' . couteauprive_T('contrib', array('url'=>'[->'._URL_CONTRIB.$outil['contrib'].']')) . '</p>';
 
-	return $s . propre($p) . detail_outil($outil_id) . '</div>';
+	$p = $s . propre($p) . detail_outil($outil_id) . '</div>';
+	// Grrr les retours simples de SPIP 3 ...
+	return (defined('_AUTOBR') && strlen(_AUTOBR))?str_replace(_AUTOBR, ' ', $p):$p;
+
 }
 
 // met a jour les outils caches/interdits et renvoie deux listes d'outils actifs et inactifs
