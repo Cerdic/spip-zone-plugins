@@ -378,7 +378,7 @@
 							image_crop();
 						}
 						
-						jQuery('#recadre_x1,#recadre_y1,#recadre_width,#recadre_height,#recadre_x2,#recadre_y2').change(function(){
+						jQuery('#recadre_width,#recadre_height,#recadre_x1,#recadre_y1,#recadre_x2,#recadre_y2').change(function(){
 							if(typeof(ias) == 'object'){
 								var ias_selection = ias.getSelection();
 								var ratio_selected = $('input[name=ratio]:checked').val();
@@ -676,17 +676,15 @@
 											var ratio_l = 16;
 											var ratio_h = 9;
 										}
-										//var largeur_ratio = ((largeur_actuelle*ratio_l)/ratio_h);
 										var largeur_ratio = largeur_actuelle;
 										var hauteur_ratio = ((largeur_actuelle*ratio_h)/ratio_l);
-										//var largeur_cadre_ratio = (((ias_selection.x2 - ias_selection.x1)*ratio_l)/ratio_h);
 										var largeur_cadre_ratio = (ias_selection.x2 - ias_selection.x1);
 										var hauteur_cadre_ratio = (((ias_selection.x2 - ias_selection.x1)*ratio_h)/ratio_l);
-										if(hauteur_ratio <= hauteur_image){
+										if(parseInt(hauteur_ratio) <= hauteur_image){
 											/**
 											 * On redimentionne la hauteur
 											 */
-											if((parseInt($('#recadre_y1').val()) + hauteur_ratio) > hauteur_actuelle){
+											if(parseInt(hauteur_ratio) > hauteur_image){
 												/**
 												 * On va devoir remonter l'image pour qu'elle rentre dans le cadre
 												 */
