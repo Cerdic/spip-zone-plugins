@@ -1,8 +1,12 @@
 #HTTP_HEADER{Content-type:text/javascript}
+if (!jQuery.fn.datepicker){
 #INCLURE{javascript/ui/jquery.ui.core.js}
 #INCLURE{javascript/ui/jquery.ui.widget.js}
 #INCLURE{javascript/ui/jquery.ui.datepicker.js}
+}
+if (!jQuery.fn.multiDatesPicker){
 #INCLURE{javascript/jquery-ui.multidatespicker.js}
+}
 [(#REM)<script>]
 var ajax_image_searching = "<img src='#CHEMIN{images/searching.gif}' width='16' height='16' />";
 var minical = {
