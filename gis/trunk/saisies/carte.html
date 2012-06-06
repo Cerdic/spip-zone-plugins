@@ -174,9 +174,6 @@ var geocoder;]
 		geojson.on("featureparse", function(e){
 			marker = e.layer;
 			e.layer.options.draggable = true;
-			e.layer.on("dragend", function(e){
-				maj_inputs(form_map,e.target._latlng,'click');
-			});
 			if (e.properties && e.properties.icon){
 				e.layer.setIcon(new L.Icon({
 					iconUrl: e.properties.icon,
@@ -195,6 +192,10 @@ var geocoder;]
 		form_map.on('click', function(e) {
 			annuler_geocoder = 0;
 			maj_inputs(form_map,e.latlng,'click');
+		});
+		
+		marker.on("dragend", function(e){
+			maj_inputs(form_map,e.target._latlng,'click');
 		});
 		
 		// mettre à jour le zoom quand on le modifie
