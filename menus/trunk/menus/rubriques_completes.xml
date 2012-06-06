@@ -1,7 +1,7 @@
 <entree>
-	<nom><:menus:nom_menu_rubriques:></nom>
+	<nom><:menus:nom_menu_rubriques_completes:></nom>
 	<rang>04</rang>
-	<description><:menus:description_menu_rubriques:></description>
+	<description><:menus:description_menu_rubriques_completes:></description>
 	<icone>images/menus_rubriques.png</icone>
 	<parametre nom="id_rubrique" label="menus:entree_id_rubrique_ou_courante" />
 	<parametre nom="id_secteur_exclus" label="menus:entree_id_secteur_exclus" />

@@ -2,7 +2,7 @@
 #SET{type_entree, (#ENV{erreurs}|table_valeur{type_entree})}
 #SET{infos, (#ENV{erreurs}|table_valeur{infos_#GET{type_entree}})}
 <fieldset>
-<legend>
+<legend class="legend">
 	[(#ENV{id_menus_entree}|non)
 		[(#GET{infos}|table_valeur{icone}|image_reduire{24})]
 	]

@@ -18,6 +18,10 @@ function menus_upgrade($nom_meta_version_base, $version_cible){
 		array('sql_alter', "TABLE spip_menus ADD COLUMN css tinytext DEFAULT '' NOT NULL"),
 	);
 	
+	$maj['0.5.1'] = array(
+		array('sql_updateq', 'spip_menus_entrees', array('type_entree'=>'rubriques_completes'), 'type_entree = '.sql_quote('rubriques')),
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_version_base, $version_cible, $maj);
 }
