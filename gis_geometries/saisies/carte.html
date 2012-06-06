@@ -149,14 +149,12 @@ var geocoder;]
 		// geocoder
 		//geocoder = new mxn.Geocoder('[(#REM|gis_api_utilisee)]',geocode);]
 		
-		[(#REM) Ici on utilise #ENV{lat} et #ENV{lon}, et pas les valeurs
-		        d'initialisation #GET{init_lat} et #GET{init_lon} qui sont toujours remplies]
-		[(#ENV{lat}|et{#ENV{lon}}|oui)
+		/* <BOUCLE_gis(GIS){id_gis}> */
 		var data = {
 			"type": "FeatureCollection",
-			"features": [(#VAL{91}|chr)]
+			"features": [
 				{"type": "Feature",
-					"geometry": {"type": "Point", "coordinates": [(#VAL{91}|chr)]#ENV{lon}, #ENV{lat}[(#VAL{93}|chr)]},
+					["geometry": (#GEOMETRY|wkt_to_json),]
 					"id":"#ENV{id_gis,oui}",
 					"properties": {
 						"title":[(#ENV{titre,''}|supprimer_numero|json_encode)],
@@ -168,39 +166,72 @@ var geocoder;]
 						"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)],
 						"icon_anchor": [(#VAL{91}|chr)][(#GET{icon_w}|div{2})],[(#GET{icon_h})][(#VAL{93}|chr)]]
 					}
-				}[(#VAL{93}|chr)]
+				}]
 		}
 		var geojson = new L.GeoJSON();
-		geojson.on("featureparse", function(e){
-			marker = e.layer;
-			e.layer.options.draggable = true;
-			e.layer.on("dragend", function(e){
-				maj_inputs(form_map,e.target._latlng,'click');
-			});
-			if (e.properties && e.properties.icon){
-				e.layer.setIcon(new L.Icon({
-					iconUrl: e.properties.icon,
-					iconSize: new L.Point( e.properties.icon_size[(#VAL{91}|chr)]0[(#VAL{93}|chr)], e.properties.icon_size[(#VAL{91}|chr)]1[(#VAL{93}|chr)] ),
-					iconAnchor: new L.Point( e.properties.icon_anchor[(#VAL{91}|chr)]0[(#VAL{93}|chr)], e.properties.icon_anchor[(#VAL{91}|chr)]1[(#VAL{93}|chr)] ),
-				}));
-			}
-			if (e.properties && e.properties.title){
-				e.layer.bindPopup(e.properties.title);
-			}
-		});
 		form_map.addLayer(geojson);
-		geojson.addGeoJSON(data);]
-		
-		// mettre a jour les coordonnees quand on clique la carte
-		form_map.on('click', function(e) {
-			annuler_geocoder = 0;
-			maj_inputs(form_map,e.latlng,'click');
+		geojson.on("featureparse", function(e){
+			if (e.geometryType == 'Polygon' || e.geometryType == 'LineString') {
+				if (e.geometryType == 'Polygon') // virer le dernier point du polygon pour faciliter l'edition
+					e.layer.spliceLatLngs(-1,1);
+				// centrer la carte sur les bounds de l'objet
+				form_map.fitBounds(e.layer.getBounds());
+				// activer l'édition sur l'objet
+				e.layer.editing.enable();
+				// surveiller les changements sur les points de l'objet
+				e.layer.on("edit", function(e){
+					$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.target));
+				});
+			} else if (e.geometryType == 'Point') {
+				// rendre le marker draggable
+				e.layer.options.draggable = true;
+				// surveiller les changements sur le point
+				e.layer.on("dragend", function(e){
+					$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.target));
+				});
+			}
 		});
+		geojson.addGeoJSON(data);
+		/* </BOUCLE_gis> */
+		[(#REM) afficher les outils de dessin uniquement lors de la création d'objet ]
+		
+		drawControl = new L.Control.Draw();
+		form_map.addControl(drawControl);
+		
+		form_map.on('drawend', function(e) {
+			drawControl.removeFrom(form_map);
+			if (L.Marker && (e.marker instanceof L.Marker)) {
+				$('#champ_#ENV{champ_type,type}').val('Point');
+				$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.marker));
+				e.marker.dragging.enable();
+				e.marker.on("dragend", function(e){
+					$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.target));
+				});
+			} else {
+				if (L.Polygon && (e.poly instanceof L.Polygon))
+					$('#champ_#ENV{champ_type,type}').val('Polygon');
+				else if (L.Polyline && (e.poly instanceof L.Polyline))
+					$('#champ_#ENV{champ_type,type}').val('LineString');
+				$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.poly));
+				var center = e.poly.getBounds().getCenter();
+				$('#champ_#ENV{champ_lat,lat}').val(center.lat);
+				$('#champ_#ENV{champ_lon,lon}').val(center.lng);
+				e.poly.editing.enable();
+				e.poly.on("edit", function(e){
+					$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.target));
+					var center = e.target.getBounds().getCenter();
+					$('#champ_#ENV{champ_lat,lat}').val(center.lat);
+					$('#champ_#ENV{champ_lon,lon}').val(center.lng);
+				});
+			}
+		});
+		/* <//B_gis> */
 		
 		// mettre à jour le zoom quand on le modifie
 		form_map.on('zoomend', function(e) {
 			$('#champ_#ENV{champ_zoom,zoom}').val(e.target._zoom);
 		});
+		
 		/*
 		[(#GET{geocoder}|oui)
 		// geocoder si clic...
