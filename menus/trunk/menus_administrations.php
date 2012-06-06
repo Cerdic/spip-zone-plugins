@@ -11,6 +11,7 @@ function menus_upgrade($nom_meta_version_base, $version_cible){
 	
 	$maj['create'] = array(
 		array('creer_base'),
+		array('ecrire_config', 'menus/entrees_masquees', array('rubriques', 'groupe_mots', 'mapage', 'deconnecter', 'secteurlangue')),
 	);
 	
 	$maj['0.5.0'] = array(
@@ -31,6 +32,8 @@ function menus_vider_tables($nom_meta_version_base){
 		
 	// On efface la version enregistrée
 	effacer_meta($nom_meta_version_base);
+	// On efface la config
+	effacer_meta('menus');
 }
 
 ?>
