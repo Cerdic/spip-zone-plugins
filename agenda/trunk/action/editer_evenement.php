@@ -44,20 +44,11 @@ function evenement_inserer($id_article,$id_evenement_source = 0){
 		spip_log("agenda action formulaire article : auteur ".$GLOBALS['visiteur_session']['id_auteur']." n'a pas le droit de creer un evenement dans article $id_article",'agenda');
 		return false;
 	}
-	
-	// Recuperer le statut de l'article (prop par defaut sauf si l'article est publie ou a la poubelle)
-	$statut_evenement='prop';
-	$result = sql_select("statut", "spip_articles", "id_article = '".intval($id_article)."'");
-	if ($row = sql_fetch($result)){
-		if ( $row['statut']=='poubelle' OR $row['statut']=='publie' ) {
-			$statut_evenement=$row['statut'];
-		}
-	}
-	
+
 	$champs = array(
 		"id_evenement_source"=>intval($id_evenement_source),
 		'id_article'=>intval($id_article),
-		'statut' => $statut_evenement,
+		'statut' => 'prop',
 	);
 
 	// Envoyer aux plugins
