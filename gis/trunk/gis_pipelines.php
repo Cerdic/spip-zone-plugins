@@ -24,7 +24,6 @@ function gis_insert_head($flux){
 	
 	$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'dist/leaflet.js') .'"></script>';
 	$flux .="\n".'<script type="text/javascript">/*<![CDATA[*/ L.Icon.Default.imagePath = "' . find_in_path(_DIR_LIB_GIS.'dist/images') .'"; /*]]>*/</script>'."\n";
-	$flux .="\n".'<script type="text/javascript" src="'. find_in_path('lib/leaflet-plugins/control/Scale.js') .'"></script>';
 	$flux .="\n".'<script type="text/javascript" src="'. find_in_path('lib/leaflet-plugins/layer/vector/KML.js') .'"></script>';
 
 	// initialisation des valeurs de config
