@@ -44,9 +44,11 @@ function formulaires_editer_menus_entree_verifier($id_menu,$id_menus_entree='new
 	if ($id_menu = intval(_request('demander_nouvelle_entree'))){
 		// S'il n'y a pas encore de type d'entree de choisi
 		if (!($type_entree = _request('type_entree'))){
+			include_spip('inc/config');
 			$erreurs['id_menu_nouvelle_entree'] = $id_menu;
 			// On charge les différents types d'entrées disponibles
-			$erreurs['entrees'] = menus_lister_disponibles();
+			$masque = array_flip(lire_config('menus/entrees_masquees', array()));
+			$erreurs['entrees'] = array_diff_key(menus_lister_disponibles(), $masque);
 			if (_request('suivant'))
 				$erreurs['type'] = _T('menus:erreur_type_menu');
 		}
