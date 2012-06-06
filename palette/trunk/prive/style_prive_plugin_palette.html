@@ -21,31 +21,36 @@
 .colorpicker {
 	border:thin solid #GET{foncee};
 	background: #fff6f6;
-	text-align:center; height:auto; width: 200px;
-	position: absolute;
+	height:auto;
+	width:200px;
+	position:absolute;
 	display: block;
 	z-index: 99999009; /* ne PAS modifier */
 }
 .colorpicker_bar {
 	background-color:#GET{foncee};
 	color:white;
-	height:16px; font-size: 12px; font-weight:bold; margin: 0; padding: 2px;
+	height:16px;
+	font-size: 12px; font-weight:bold; margin: 0; padding: 2px;
 	text-align: left;
 }
 .colorpicker_close {
 	float:right;
 	font-size: 8px;
 	font-weight:bold;
-	margin: 2px;
-	border:thin solid transparent;
+	padding: 4px;
+	border:none;
 	color:white;
-	-moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
+	background-color:#GET{foncee};
+	height:12px;
 }
 .colorpicker_close:hover {
-	border:thin outset #GET{foncee};
+	padding: 3px;
+	border:1px outset #GET{foncee};
 	background:#GET{claire};color:black
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
 }
 .hover {
 	cursor:pointer;
