@@ -202,7 +202,9 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 				(defined('_CS_PAS_DE_DISTANT')?'('.couteauprive_T('version_distante_off').')':'<span class="cs_version">'.couteauprive_T('version_distante').'</span>')
 				))
 		. chargement_automatique()
-		. '<br/>&bull;&nbsp;['.couteauprive_T('pack_titre') . '|' . couteauprive_T('pack_alt') . '->' . generer_url_ecrire($exec,'cmd=pack#cs_infos') . "]\n\n"
+		. '<br/>&bull;&nbsp;[' . couteauprive_T('pack_titre') . '|' . couteauprive_T('pack_alt') . '->' . generer_url_ecrire($exec,'cmd=pack#cs_infos')
+		. "]<br/>&bull;&nbsp;[" . _T('info_traductions') . '|' . _T('info_traductions') . '->' . generer_url_ecrire($exec,'cmd=trad#cs_infos')
+		. "]\n\n"
 		. couteauprive_T('help3', array(
 			'reset' => generer_url_ecrire($exec,'cmd=resetall'),
 			'hide' => generer_url_ecrire($exec,'cmd=showall'),
@@ -236,8 +238,8 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		'</div><br class="conteneur" /><div class="cs_patience"><br />'.http_img_pack('searching.gif','*','').' ...</div>';
 	flush();
 	echo '<div class="conteneur"><div id="cs_infos" class="cs_infos">',
-		($cmd=='pack' || ($cmd=='descrip' && $outil=='pack'))
-			?cs_description_pack():description_outil2($afficher_outil),
+		function_exists($f='cs_description_'.$cmd) || ($cmd=='descrip' && function_exists($f='cs_description_'.$outil))
+			?$f():description_outil2($afficher_outil),
 		'</div><script type="text/javascript"><!--
 var cs_descripted = "', $afficher_outil, '";
 document.write("<style type=\'text/css\'>#csjs{display:none;}<\/style>");

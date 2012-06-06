@@ -67,6 +67,41 @@ function cs_description_pack() {
 		. fin_cadre_relief(true);
 }
 
+// renvoie la liste des langues dispos sur un module
+
+function cs_liste_langues($module) {
+	$reg = '/' . preg_quote($module) . '_([^./]+)\.php$';
+	$files = preg_files(_DIR_PLUGIN_COUTEAU_SUISSE.'lang/', $reg);
+	$f = create_function('$a', 'return preg_match(",'.$reg.',",$a,$r)?"[[$r[1]->'._CS_TRAD_MODULE.$module.'?lang_orig=fr&lang_cible=$r[1]]]":"";');
+	$files = array_map($f, $files);
+	return join(" ", $files);
+}
+
+function cs_liste_traducteurs($modules) {
+	$modules = array_map('preg_quote', $modules);
+	$reg = '/('.join('|',$modules).')\.xml$';
+	$files = preg_files(_DIR_PLUGIN_COUTEAU_SUISSE.'lang/', $reg);
+	$res = array();
+	foreach($files as $f) {
+		lire_fichier($f, $desc);
+		if(preg_match_all(',<traducteur .*? />,', $desc, $reg)) 
+			foreach($reg[0] as $r) $res[] = '['.extraire_attribut($r, 'nom').'->'.extraire_attribut($r, 'lien').']';
+	}
+	sort($res);
+	return join(", ", array_unique($res));
+}
+
+// renvoie qq infos pour la traduction
+function cs_description_trad() {
+	$modules = array('couteau', 'couteauprive', 'paquet-couteau_suisse');
+	$res = array();
+	foreach($modules as $m) $res[] = "\n-* " . couteauprive_T('trad_mod', array('mod'=>$m)) . cs_liste_langues($m);
+	return debut_cadre_relief('', true)
+		. "<h3 class='titrem'><img src='"._DIR_IMG_PACK."puce-verte.gif' width='9' height='9' alt='-' />&nbsp;" . _T('info_traductions') . '</h3>'
+		. propre(couteauprive_T('trad_help', array('url'=>_CS_TRAD_ACCUEIL, 'trad'=>join('', $res), 'contrib'=>cs_liste_traducteurs($modules)))
+		) . fin_cadre_relief(true);
+}
+
 // renvoie (pour la nouvelle interface) la description d'un outil
 function description_outil2($outil_id) {
 	if(!strlen($outil_id)) return couteauprive_T('outils_cliquez');
