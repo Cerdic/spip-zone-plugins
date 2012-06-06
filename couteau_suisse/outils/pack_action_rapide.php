@@ -16,17 +16,17 @@ if(!defined('_SPIP19300')) {
 function pack_action_rapide() {
 	include_spip('inc/texte'); // pour attribut_html()
 	switch($n = count($GLOBALS['cs_installer'])) {
-		case 0 : $info = _T('couteauprive:pack_nb_zero'); break;
-		case 1 : $info = _T('couteauprive:pack_nb_un'); break;
-		default : $info = _T('couteauprive:pack_nb_plrs', array('nb' => $n));
+		case 0 : $info = couteauprive_T('pack_nb_zero'); break;
+		case 1 : $info = couteauprive_T('pack_nb_un'); break;
+		default : $info = couteauprive_T('pack_nb_plrs', array('nb' => $n));
 	}
 	$liste = $script = '';
 	if($n) {
 		$exec = _request('exec');
-		$fin_delete = _T('couteauprive:pack_delete');
+		$fin_delete = couteauprive_T('pack_delete');
 		$img = defined('_SPIP30000')?chemin_image('poubelle.png'):_DIR_IMG_PACK.'poubelle.gif';
 		$fin_delete = "\" class='pack_delete' title=\"$fin_delete\"><img src=\"$img\" width='12' height='12' alt=\"$fin_delete\" /></a>&nbsp; <a href=\"";
-		$fin_install = _T('couteauprive:pack_installe');
+		$fin_install = couteauprive_T('pack_installe');
 		$img = defined('_SPIP30000')?chemin_image('secteur-12.png'):_DIR_IMG_PACK.'secteur-12.gif';
 		$fin_install = "\" class='pack_install' title=\"$fin_install\"><img src=\"$img\" width='12' height='12' alt=\"$fin_install\" /></a>&nbsp; ";
 		foreach(array_keys($GLOBALS['cs_installer']) as $pack) {
@@ -41,27 +41,27 @@ function pack_action_rapide() {
 		$script = "<script type=\"text/javascript\"><!--
 if (window.jQuery) jQuery(function(){
 	jQuery('a.pack_delete').click( function() { 
-		msg=\"".cs_javascript('couteauprive:pack_supprimer')."\";
+		msg=\"".cs_javascript(couteauprive_T('pack_supprimer'))."\";
 		return window.confirm(msg.replace(/@pack@/,jQuery(this).parent().text().trim())); 
 	});
-	jQuery('a.pack_install').click( function() { 
-		msg=\"".cs_javascript('couteauprive:pack_installer').'\n\n'.cs_javascript('couteauprive:cs_reset2')."\";
+	jQuery('a.pack_install').click( function() {
+		msg=\"".cs_javascript(couteauprive_T('pack_installer')).'\n\n'.cs_javascript(couteauprive_T('cs_reset2'))."\";
 		return window.confirm(msg.replace(/@pack@/,jQuery(this).parent().text().trim())); 
 	});
 }); //--></script>\n";
 	}
 	// appel direct, sans ajax, histoire de mettre a jour le menu :
 	return redirige_action_post('action_rapide', 'sauve_pack', 'admin_couteau_suisse', "cmd=pack#cs_infos",
-			"\n$script<div style='padding:0.4em;'><p>$info</p>$liste<p>"._T('couteauprive:pack_sauver_descrip', array('file' => show_file_options()))
+			"\n$script<div style='padding:0.4em;'><p>$info</p>$liste<p>".couteauprive_T('pack_sauver_descrip', array('file' => show_file_options()))
 			."</p><div style='text-align: center;'><input class='fondo' type='submit' value=\""
-			.attribut_html(_T('couteauprive:pack_sauver')) . "\" /></div></div>"); 
+			.attribut_html(couteauprive_T('pack_sauver')) . "\" /></div></div>"); 
 }
 
 // fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php
 // clic "Sauver la configuration actuelle"
 function pack_sauve_pack_action() {
 	// pour inserer un pack de config dans config/mes_options.php
-	$titre0 = $titre = _T('couteauprive:pack_actuel', array('date'=>cs_date())); $n=0;
+	$titre0 = $titre = couteauprive_T('pack_actuel', array('date'=>cs_date())); $n=0;
 	if(isset($GLOBALS['cs_installer'][$titre]))
 		while(isset($GLOBALS['cs_installer']["$titre (".++$n.')']));
 	if($n) $titre = "$titre ($n)";
