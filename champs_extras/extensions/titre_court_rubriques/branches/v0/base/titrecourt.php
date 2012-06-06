@@ -7,7 +7,7 @@ function titrecourt_declarer_champs_extras($champs = array()){
 		'champ' => 'titre_court', // nom sql
 		'label' => 'titrecourt:titre_court', // chaine de langue 'prefix:cle'
 		'type' => 'ligne', // type de saisie
-		'sql' => "varchar(30) NOT NULL DEFAULT ''", // declaration sql
+		'sql' => "varchar(300) NOT NULL DEFAULT ''", // declaration sql
 	));
 	return $champs;
 }
