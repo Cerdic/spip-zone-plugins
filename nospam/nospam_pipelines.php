@@ -53,7 +53,9 @@ function nospam_recuperer_fond($flux){
  */
 function nospam_formulaire_charger($flux){
 	$form = $flux['args']['form'];
-	if (in_array($form, nospam_lister_formulaires())){
+	if (in_array($form, nospam_lister_formulaires())
+	  AND $flux['data']
+	  AND is_array($flux['data'])){
 		include_spip("inc/nospam");
 		$jeton = creer_jeton($form);
 		$flux['data']['_hidden'] .= "<input type='hidden' name='_jeton' value='$jeton' />";
