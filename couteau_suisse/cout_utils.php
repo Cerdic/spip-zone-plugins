@@ -449,7 +449,7 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 			$cs_metas_pipelines['header_css_ext'] = $temp_css;
 		} else {
 			// css inline
-			$temp = array("<style type=\"text/css\">\n$temp_css\n</style>");
+			$temp = array("<style type=\"text/css\">\n<!--/*--><![CDATA[/*><!--*/\n$temp_css\n/*]]>*/-->\n</style>");
 			if(is_array($cs_metas_pipelines['header_css'])) $temp = array_merge($temp, $cs_metas_pipelines['header_css']);
 			$cs_metas_pipelines['header_css'] = $cs_metas_pipelines['header_css_prive'] = join("\n", $temp);
 		}
