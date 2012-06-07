@@ -1,8 +1,8 @@
 <paquet
 	prefix="imagesactives"
 	categorie="squelette"
-	version="1.0.0-alpha"
-	etat="dev"
+	version="1.0.0"
+	etat="test"
 	compatibilite="[2.0.0;3.1.*["
 	logo="prive/themes/spip/images/images_actives-32.png"
 	documentation="http://www.spip-contrib.net/?article4159"
