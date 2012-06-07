@@ -9,8 +9,8 @@
 function action_twidget_dist(){
 
 	$url = $_SERVER['QUERY_STRING'];
-	$url = preg_replace(",^action=twidget&w=,","",$url);
-	$sd = "";
+	$url = preg_replace(",^action=twidget&w=/?,","",$url);
+	$sd = "api.";
 	if (strncmp($url,'search',6)==0)
 		$sd = "search.";
 	$url = "http://{$sd}twitter.com/".$url;
@@ -25,6 +25,7 @@ function twidget_get_cached_url($url,$force=true) {
 
 	$hash = md5($url);
 	$dir = sous_repertoire(_DIR_CACHE,"twidget");
+
 	if (lire_fichier($f = "$dir/p$hash.txt", $c)
 	  AND $c = unserialize($c)
 		AND time()-$c['time']<_TWIDGET_CACHE)
@@ -45,7 +46,8 @@ function twidget_get_cached_url($url,$force=true) {
 	// intercepter, cacher et relocaliser les avatars
 	preg_match_all(',"profile_image_url":"([^"]*)",Uims',$contenu,$regs,PREG_SET_ORDER);
 	foreach($regs as $reg){
-		$contenu = str_replace($reg[1],twidget_get_cached_avatar($reg[1]),$contenu);
+		$new = twidget_get_cached_avatar($reg[1]);
+		$contenu = str_replace($reg[1],$new,$contenu);
 	}
 
 	ecrire_fichier($f, serialize(array('time'=>time(),'content'=>$contenu)));
@@ -61,7 +63,9 @@ function twidget_get_cached_avatar($img_url){
 	$parts = parse_url($img_url);
 
 	$hash = md5($parts['path']);
-	$ext = substr($parts['path'], strrpos($parts['path'], "."));
+	$ext=".jpg";
+	if ($p = strrpos($parts['path'], "."))
+		$ext = substr($parts['path'], $p);
 
 	$dir = sous_repertoire(_DIR_VAR,"twidget");
 	$dir = sous_repertoire($dir,substr($hash,0,2));
