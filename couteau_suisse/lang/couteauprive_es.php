@@ -49,7 +49,10 @@ Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [
 _ Les balises <code><multi/></code> sont recommandées en cas de site multilingue.[[%alerte_message%]]', # NEW
 	'alerte_urgence:nom' => 'Message d\'alerte', # NEW
 	'attente' => 'Espera...',
-	'auteur_forum:description' => 'Pide a todos los autores de mensajes públicos que rellenen (¡al menos con una letra!) el campo «@_CS_FORUM_NOM@» para evitar las contribuciones completamente anónimas.', # MODIF
+	'auteur_forum:description' => 'Pide a todos los autores de mensajes públicos que rellenen (¡al menos con una letra!) el campo «@_CS_FORUM_NOM@» para evitar las contribuciones completamente anónimas.
+
+Notez que cet outil procède à une vérification JavaScript sur le poste du visiteur.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
+{Attention : Choisir la troisième option annule les 2 premières. Il est important de vérifier que les formulaires de votre squelette sont bien compatibles avec cet outil.}', # MODIF
 	'auteur_forum:nom' => 'Sin foros anónimos',
 	'auteur_forum_deux' => 'Ou, au moins l\'un des deux champs précédents', # NEW
 	'auteur_forum_email' => 'Le champ «@_CS_FORUM_EMAIL@»', # NEW
@@ -300,8 +303,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 - Version du fichier local : ', # NEW
 	'ecran_securite:nom' => 'Ecran de sécurité', # NEW
 	'effaces' => 'Borrados',
-	'en_travaux:description' => 'Permite mostrar un mensaje personalizable durante una fase de mantenimiento en todas las páginas públicas y, eventualmente, en el espacio privado.
-[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]', # MODIF
+	'en_travaux:description' => 'Permite mostrar un mensaje personalizable durante una fase de mantenimiento en todas las páginas públicas y, eventualmente, en el espacio privado.', # MODIF
 	'en_travaux:nom' => 'Sitio en mantenimiento',
 	'erreur:bt' => '<span style=\\"color:red;\\">Atención:</span> la barra de tipografías (version @version@) parece antigua.<br />La Navaja Suiza es compatible con una versión superior o igual a @mini@.', # MODIF
 	'erreur:description' => '¡falta la id en la definición de la herramienta!',
@@ -758,6 +760,20 @@ La función de SPIP utilizada en PHP es  <code>_T(\'cadena\')</code> sin argumen
 
 No te olvides de verificar que la clave <code>\'cadena\'</code> esté bien definida en los ficheros de idiomas. ', # MODIF
 	'toutmulti:nom' => 'Bloques multilingües',
+	'trad_help' => '{{Le Couteau Suisse est bénévolement traduit en plusieurs langues et sa langue mère est le français.}}
+
+N\'hésitez pas à offrir votre contribution si vous décelez quelques soucis dans les textes du plugin. Toute l\'équipe vous en remercie d\'avance.
+
+Pour vous inscrire à l\'espace de traduction : @url@
+
+Pour accéder directement aux traductions des modules du Couteau Suisse, cliquez ci-dessous sur la langue cible de votre choix. Une fois identifié, repérez ensuite le petit crayon qui apparait en survolant le texte traduit puis cliquez dessus.
+
+Vos modifications seront prises en compte quelques jours plus tard sous forme d\'une mise à jour disponible pour le Couteau Suisse. Si votre langue n\'est pas dans la liste, alors le site de traduction vous permettra facilement de la créer.
+
+{{Traductions actuellement disponibles}} :@trad@
+
+{{Merci aux traducteurs actuels}} : @contrib@.', # NEW
+	'trad_mod' => 'Module « @mod@ » : ', # NEW
 	'travaux_masquer_avert' => 'Masquer le cadre indiquant sur le site public qu\'une maintenance est en cours', # NEW
 	'travaux_nocache' => 'Désactiver également le cache de SPIP', # NEW
 	'travaux_nom_site' => '@_CS_NOM_SITE@',

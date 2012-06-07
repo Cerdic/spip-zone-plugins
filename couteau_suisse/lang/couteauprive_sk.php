@@ -772,6 +772,20 @@ The SPIP function used is: <code>_T(\'a_text\')</code> (with no parmameters), an
 
 Do not forget to check that the variable used <code>\'a_text\'</code> is defined in the language files.', # MODIF
 	'toutmulti:nom' => 'Viacjazyčné bloky',
+	'trad_help' => '{{Le Couteau Suisse est bénévolement traduit en plusieurs langues et sa langue mère est le français.}}
+
+N\'hésitez pas à offrir votre contribution si vous décelez quelques soucis dans les textes du plugin. Toute l\'équipe vous en remercie d\'avance.
+
+Pour vous inscrire à l\'espace de traduction : @url@
+
+Pour accéder directement aux traductions des modules du Couteau Suisse, cliquez ci-dessous sur la langue cible de votre choix. Une fois identifié, repérez ensuite le petit crayon qui apparait en survolant le texte traduit puis cliquez dessus.
+
+Vos modifications seront prises en compte quelques jours plus tard sous forme d\'une mise à jour disponible pour le Couteau Suisse. Si votre langue n\'est pas dans la liste, alors le site de traduction vous permettra facilement de la créer.
+
+{{Traductions actuellement disponibles}} :@trad@
+
+{{Merci aux traducteurs actuels}} : @contrib@.', # NEW
+	'trad_mod' => 'Module « @mod@ » : ', # NEW
 	'travaux_masquer_avert' => 'Schovať rám, ktorý uvádza na verejnej stránke, že sa vykonáva údržba',
 	'travaux_nocache' => 'Deaktivovať aj cache SPIPu',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',

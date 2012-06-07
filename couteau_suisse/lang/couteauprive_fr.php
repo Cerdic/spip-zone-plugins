@@ -8,20 +8,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// 2
 	'2pts_non' => ' : non',
 	'2pts_oui' => ' : oui',
-	'trad_mod' => 'Module « @mod@ » : ',
-	'trad_help' => '{{Le Couteau Suisse est bénévolement traduit en plusieurs langues et sa langue mère est le français.}}
-
-N\'hésitez pas à offrir votre contribution si vous décelez quelques soucis dans les textes du plugin. Toute l\'équipe vous en remercie d\'avance.
-
-Pour vous inscrire à l\'espace de traduction : @url@
-
-Pour accéder directement aux traductions des modules du Couteau Suisse, cliquez ci-dessous sur la langue cible de votre choix. Une fois identifié, repérez ensuite le petit crayon qui apparait en survolant le texte traduit puis cliquez dessus.
-
-Vos modifications seront prises en compte quelques jours plus tard sous forme d\'une mise à jour disponible pour le Couteau Suisse. Si votre langue n\'est pas dans la liste, alors le site de traduction vous permettra facilement de la créer.
-
-{{Traductions actuellement disponibles}} :@trad@
-
-{{Merci aux traducteurs actuels}} : @contrib@.',
 
 	// S
 	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par défaut dans la fenêtre de navigation en cours. Mais il peut être utile d\'ouvrir les liens externes au site dans une nouvelle fenêtre extérieure -- cela revient à ajouter {target=&quot;_blank&quot;} à toutes les balises &lt;a&gt; dotées par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois nécessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'étendre au maximum cette fonctionnalité.[[%radio_target_blank3%]]
@@ -807,6 +793,20 @@ La fonction SPIP utilisée en PHP est <code>_T(\'chaine\')</code> sans argument,
 
  N\'oubliez donc pas de vérifier que la clef <code>\'chaine\'</code> est bien définie dans les fichiers de langues.',
 	'toutmulti:nom' => 'Blocs multilingues',
+	'trad_help' => '{{Le Couteau Suisse est bénévolement traduit en plusieurs langues et sa langue mère est le français.}}
+
+N\'hésitez pas à offrir votre contribution si vous décelez quelques soucis dans les textes du plugin. Toute l\'équipe vous en remercie d\'avance.
+
+Pour vous inscrire à l\'espace de traduction : @url@
+
+Pour accéder directement aux traductions des modules du Couteau Suisse, cliquez ci-dessous sur la langue cible de votre choix. Une fois identifié, repérez ensuite le petit crayon qui apparait en survolant le texte traduit puis cliquez dessus.
+
+Vos modifications seront prises en compte quelques jours plus tard sous forme d\'une mise à jour disponible pour le Couteau Suisse. Si votre langue n\'est pas dans la liste, alors le site de traduction vous permettra facilement de la créer.
+
+{{Traductions actuellement disponibles}} :@trad@
+
+{{Merci aux traducteurs actuels}} : @contrib@.',
+	'trad_mod' => 'Module « @mod@ » : ',
 	'travaux_masquer_avert' => 'Masquer le cadre indiquant sur le site public qu\'une maintenance est en cours',
 	'travaux_nocache' => 'Désactiver également le cache de SPIP',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
