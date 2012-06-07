@@ -124,7 +124,7 @@ function photospip_boite_infos($flux){
 				$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_image'), parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit-16.png',false);
 			if($document['id_vignette'] && $document['id_vignette'] > 0){
 				$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_vignette'), parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'mode','vignette'), find_in_path('images/photospip-24.png'), 'edit-16.png',false);
-				$flux['data'] .= icone_horizontale(_T('photospip:bouton_supprimer_vignette_document'), generer_action_auteur('supprimer_document',$document['id_vignette'],parametre_url(self(),'supprimer_vignette','oui')), find_in_path('images/photospip-24.png'), 'supprimer.png',false);
+				$flux['data'] .= icone_horizontale(_T('photospip:bouton_supprimer_vignette_document'), generer_action_auteur('supprimer_document',$document['id_vignette'],parametre_url(self(),'supprimer_vignette','oui')), find_in_path('images/photospip-24.png'), 'supprimer-16.png',false);
 				$flux['data'] .= recuperer_fond('prive/photospip_vignette',array('id_document'=>intval($id_document)));
 			}else if(in_array($document['extension'],array('gif','png','jpg'))){
 				$flux['data'] .= icone_horizontale(_T('photospip:bouton_creer_vignette'), parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'mode','vignette'), find_in_path('images/photospip-24.png'), 'new.png',false);

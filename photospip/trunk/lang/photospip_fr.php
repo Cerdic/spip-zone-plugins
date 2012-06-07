@@ -27,7 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_vignette' => 'Supprimer cette vignette',
 	'bouton_supprimer_vignette_document' => 'Supprimer la vignette de ce document',
 	'bouton_tester' => 'Prévisualiser',
-	'bouton_valider' => 'Appliquer',
 	'bouton_valider_continuer' => 'Valider et continuer',
 	'bouton_valider_fermer' => 'Valider et revenir à la page précédente',
 	
@@ -42,9 +41,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_image_process' => 'Le site n\'utilise pas GD2 pour gérer les images, veuillez l\'utiliser pour leur traitement.',
 	'erreur_nb_versions_atteint' => 'Le nombre de versions différentes de l\'image a été atteint (@nb@). Vous ne pouvez que tester et non appliquer les modifications.',
 	'erreur_previsu' => 'Si le résultat vous satisfait vous pouvez le valider en bas du formulaire, sinon vous pouvez tester d\'autres filtres.',
-	'erreur_sansconf' => 'Vous n\'avez pas configuré votre filtre.',
-	'erreur_sansfiltre' => 'Vous n\'avez pas sélectionné de filtre.',
-	'erreur_sanstest' => 'Le filtre que vous avez essayé ne permet pas d\'&ecirc;tre testé. Vous ne pouvez que l\'appliquer.',
 	'erreur_selectionner_au_moins_une_valeur' => 'Vous devez sélectionner au moins une valeur',
 	'erreur_valeur_numerique' => 'Ce filtre nécessite une valeur numérique comme paramètre',
 	'erreur_valeurs_numeriques' => 'Ce filtre nécessite des valeurs numériques',
@@ -118,14 +114,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type_retour' => 'Que faire après l\'application du filtre ?',
 	'label_type_retour_continuer' => 'Continuer à modifier l\'image',
 	'label_type_retour_retour' => 'Fermer la modification',
-	'label_vider_version' => 'Intervale entre les vidages des versions intermédiaires (en nombre de jours, 0 = jamais) :',
 	'legend_configuration' => 'Configuration du plugin',
 	'legend_configuration_resultats' => 'Configuration des résultats',
 	'legend_configuration_publique' => 'Configuration de la partie publique',
 	'legend_filtres_a_disposition' => 'Filtres à disposition',
 	'legende_filtres_de_couleur' => 'Filtres de coloration',
 	'legende_filtres_format' => 'Modifier le format',
-	'legende_filtres_supplementaires' => 'Filtres supplémentaires',
 	'lien_editer_image' => 'Éditer cette image',
 	'lien_editer_vignette' => 'Éditer la vignette',
 	
@@ -145,7 +139,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'title_version' => 'Version #@version@',
 	'titre_informations_images' => 'Informations du document',
 	'titre_page_image_edit' => 'Édition de l\'image',
-	'titre_versions_precedentes' => 'Précédentes versions',
 	
 	// PUBLIC
 	
@@ -156,18 +149,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_doc' => 'Date de mise en ligne : ',
 	'date_modif_doc' => 'Date de dernière modification : ',
 	'taille_fichier' => 'Taille du fichier : ',
-	'fichier_original' => 'Fichier original : ',
 	'donnees_exif' => 'Données EXIF',
-	'tester' => 'Tester',
-	'revenir_version' => 'Revenir à la version&nbsp;:',
-	'supprimer_version' => 'Supprimer la version&nbsp;:',
 	'image_taille_actuelle' => 'Taille actuelle de l\'image&nbsp;:',
-	
-	//aide
-	'texte_aide' =>'<p>Pour appliquer une modification à votre image, il vous suffit de choisir le type en le cochant à coté de son titre et de procéder à son réglage.</p>
-	<p>Ensuite choisissez entre "tester" ou "appliquer", puis validez.</p>
-	<p><strong>NB :</strong> Ces traitements d\'images sont lourds et peuvent prendre quelque temps avant de s\'effectuer. C\'est pourquoi nous vous recommandons de les "tester" avant (cela créera une prévisualisation). Chaque test repartira de la dernière version. Appliquer créera une nouvelle version disponible.</p>',
-	'modification_pas_autorisee' => 'Vous ne disposez pas des droits nécessaires pour pouvoir modifier ce document',
 	
 );
 ?>
