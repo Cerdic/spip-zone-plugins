@@ -33,7 +33,7 @@ function photospip_header_prive($flux) {
  * On ajoute dans les plugins de jQuery UI le chargement des sliders dans
  * l'espace privé
  */
-function photospip_jqueryui_forcer($plugins) {
+function photospip_jqueryui_plugins($plugins) {
 	if (test_espace_prive()){
 		$plugins[] = 'jquery.ui.slider';
 	}
