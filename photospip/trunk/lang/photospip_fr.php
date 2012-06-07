@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_editer_vignette' => 'Éditer la vignette',
 	'bouton_modifier_document' => 'Modifier les informations du document',
 	'bouton_revenir_version' => 'Revenir à cette version',
+	'bouton_supprimer_previsu' => 'Revenir à la version sans prévisualisation',
 	'bouton_supprimer_version' => 'Supprimer cette version',
 	'bouton_supprimer_vignette' => 'Supprimer cette vignette',
 	'bouton_supprimer_vignette_document' => 'Supprimer la vignette de ce document',
@@ -40,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_form_type_resultat' => 'Vous devez choisir le type de résultat',
 	'erreur_image_process' => 'Le site n\'utilise pas GD2 pour gérer les images, veuillez l\'utiliser pour leur traitement.',
 	'erreur_nb_versions_atteint' => 'Le nombre de versions différentes de l\'image a été atteint (@nb@). Vous ne pouvez que tester et non appliquer les modifications.',
-	'erreur_previsu' => 'Si le résultat vous satisfait vous pouvez le valider en bas du formulaire, sinon vous pouvez tester d\'autres filtres',
+	'erreur_previsu' => 'Si le résultat vous satisfait vous pouvez le valider en bas du formulaire, sinon vous pouvez tester d\'autres filtres.',
 	'erreur_sansconf' => 'Vous n\'avez pas configuré votre filtre.',
 	'erreur_sansfiltre' => 'Vous n\'avez pas sélectionné de filtre.',
 	'erreur_sanstest' => 'Le filtre que vous avez essayé ne permet pas d\'&ecirc;tre testé. Vous ne pouvez que l\'appliquer.',
@@ -168,3 +169,4 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modification_pas_autorisee' => 'Vous ne disposez pas des droits nécessaires pour pouvoir modifier ce document',
 	
 );
+?>

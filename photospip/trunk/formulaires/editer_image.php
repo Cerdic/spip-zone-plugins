@@ -94,7 +94,7 @@ function formulaires_editer_image_charger_dist($id_document='new',$mode=false, $
  * Fonction de vérification du formulaire
  */
 function formulaires_editer_image_verifier_dist($id_document='new',$mode=false, $retour=''){
-	if(!_request('supprimer_vignette') && !_request('supprimer_version') && !_request('revenir_version')){
+	if(!_request('supprimer_vignette') && !_request('supprimer_version') && !_request('revenir_version') && !_request('supprimer_previsu')){
 		/**
 		 * On est soit dans la prévisualisation,
 		 * soit dans l'application d'un filtre
@@ -152,7 +152,8 @@ function formulaires_editer_image_verifier_dist($id_document='new',$mode=false, 
 				$erreurs['message_erreur'] = _T('photospip:erreur_form_filtre_sstest');
 			}
 			else{
-				$erreurs['message'] = 'previsu';
+				$erreurs['message'] = "<strong>"._T('previsualisation')."</strong><br />
+					"._T('photospip:erreur_previsu');
 				if($var_filtre == 'tourner'){
 					$erreurs['filtre'] = 'image_rotation';
 					switch ($angle = _request('params_tourner')) {
@@ -183,7 +184,7 @@ function formulaires_editer_image_verifier_dist($id_document='new',$mode=false, 
 				}
 			}
 		}
-	}else{
+	}else if(!_request('supprimer_previsu') && !_request('supprimer_vignette')){
 		if(!_request('version'))
 			$erreurs['version'] = _T('photospip:erreur_choisir_version');
 	}
@@ -196,6 +197,28 @@ function formulaires_editer_image_verifier_dist($id_document='new',$mode=false, 
 function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $retour=''){
 	$res = array('editable'=>true);
 	$autoclose= '';
+	if(_request('supprimer_previsu')){
+		/**
+		 * Restaurer les inputs à vide
+		 */
+		foreach(array('filtre',
+			'ratio',
+			'recadre_width',
+			'recadre_height',
+			'recadre_x1',
+			'recadre_x2',
+			'recadre_y1',
+			'recadre_y2',
+			'reduire_width',
+			'reduire_height',
+			'passe_partout_width',
+			'passe_partout_height',
+			'type_modification') as $input){
+			if(_request($input))
+				set_request($input,'');	
+		}
+		return $res;
+	}
 	if($mode == 'vignette'){
 		/**
 		 * On est en mode vignette
