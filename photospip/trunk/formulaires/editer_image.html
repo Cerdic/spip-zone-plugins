@@ -40,7 +40,8 @@
 			<B_interd_nb>
 			<ul class="liste-versions">
 				<li class="fieldset">
-					<h3 class="legend">[(#GRAND_TOTAL|singulier_ou_pluriel{photospip:info_nb_versions_une,photospip:info_nb_versions})]</h3>
+					<fieldset>
+					<legend>[(#GRAND_TOTAL|singulier_ou_pluriel{photospip:info_nb_versions_une,photospip:info_nb_versions})]</legend>
 					<BOUCLE_interd_nb(DOCUMENTS_INTERS){id_document}{!par version}> </BOUCLE_interd_nb>
 					<ul>
 					<B_interd>
@@ -69,6 +70,7 @@
 						</li>
 					</B_interd>
 					</ul>
+					</fieldset>
 				</li>
 			</ul>
 			</B_interd_nb>
@@ -77,17 +79,21 @@
 			<ul>
 				#CHEMIN{formulaires/editer_image_format}
 				[<li class="fieldset" id="fragment-format">
-					<h3 class="legend"><:photospip:legende_filtres_format:></h3>
+					<fieldset>
+					<legend><:photospip:legende_filtres_format:></legend>
 					<ul>
 					(#INCLURE{fond=formulaires/editer_image_format,env}|trim)
 					</ul>
+					</fieldset>
 				</li>]
 				
 				[<li class="fieldset" id="fragment-couleurs">
-					<h3 class="legend"><:photospip:legende_filtres_de_couleur:></h3>
+					<fieldset>
+					<legend><:photospip:legende_filtres_de_couleur:></legend>
 					<ul>
 						(#INCLURE{fond=formulaires/editer_image_couleurs,env}|trim)
 					</ul>
+					</fieldset>
 				</li>]
 				<BOUCLE_resultats_sup_un(CONDITION){si #ENV{mode}|!={vignette}|et{#CONFIG{photospip/resultats,#ARRAY{0,remplacer_image,1,creer_nouvelle_image,2,creer_version_image}}|count|>{1}}|oui}>
 				<li>

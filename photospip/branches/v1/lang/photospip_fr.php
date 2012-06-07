@@ -136,7 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_version_retour' => 'Vous êtes revenu à la version #@version@',
 	'message_ok_version_supprimee' => 'La version #@version@ a été supprimée',
 	'message_pas_de_versions' => 'Ce document n\'est pas versionné.',
-	'message_vignette_installe_succes' => 'La vignette a été chargé avec succès',
+	'message_vignette_installe_succes' => 'La vignette a été chargée avec succès',
 
 	// P
 	'photospip' => 'PhotoSPIP',

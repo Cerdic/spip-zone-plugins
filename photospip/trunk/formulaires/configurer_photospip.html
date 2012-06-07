@@ -7,16 +7,19 @@
 		#ACTION_FORMULAIRE{SELF}
 		<ul>
 			<li class="fieldset">
-				<h3 class="legend"><:photospip:legend_configuration:></h3>
+				<fieldset>
+				<legend><:photospip:legend_configuration:></legend>
 				<ul>
 					<li class="editer editer_limite_version">
 						<label for="limite_version"><:photospip:label_limiter_version:></label>
 						<input type="text" name="limite_version" class="text" id="limite_version" value="#ENV{limite_version,10}" maxlength="3" style="width:3em;" />
 					</li>
 				</ul>
+				</fieldset>
 			</li>
 			<li class="fieldset">
-				<h3 class="legend"><:photospip:legend_filtres_a_disposition:></h3>
+				<fieldset>
+				<legend><:photospip:legend_filtres_a_disposition:></legend>
 				<ul>
 					<li class="editer editer_filtres">
 						<label><:photospip:label_choisir_filtres:></label>
@@ -86,9 +89,11 @@
 						</div>]
 					</li>
 				</ul>
+				</fieldset>
 			</li>
 			<li class="fieldset">
-				<h3 class="legend"><:photospip:legend_configuration_resultats:></h3>
+				<fieldset>
+				<legend><:photospip:legend_configuration_resultats:></legend>
 				<ul>
 					<li class="editer editer_resultats[ (#ENV**{erreurs}|table_valeur{resultats}|oui)erreur]">
 						<label><:photospip:label_resultats:></label>
@@ -117,10 +122,12 @@
 						</select> 
 					</li>
 				</ul>
+				</fieldset>
 			</li>
 			[(#REM)
 			<li class="fieldset">
-				<h3 class="legend"><:photospip:legend_configuration_publique:></h3>
+				<fieldset>
+				<legend><:photospip:legend_configuration_publique:></legend>
 				<ul>
 					<li class="editer editer_largeur_previsu">
 						<label for="largeur_previsu"><:photospip:label_largeur_previsu:></label>
@@ -132,6 +139,7 @@
 						<input type="text" name="hauteur_previsu" id="hauteur_previsu" value="#ENV{hauteur_previsu,450}" class="text" maxlength="4" />
 					</li>
 				</ul>
+				</fieldset>
 			</li>]
 		</ul>
 		<p class="boutons">
