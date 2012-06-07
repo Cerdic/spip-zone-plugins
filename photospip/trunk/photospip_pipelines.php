@@ -116,9 +116,10 @@ function photospip_formulaire_verifier($flux){
 function photospip_boite_infos($flux){
 	if ($flux['args']['type']=='document'){
 		$id_document = $flux['args']['id'];
+		include_spip('inc/presentation');
 		if((_request('mode') != 'vignette') && ($document = sql_fetsel('*','spip_documents','id_document='.intval($id_document)))){
-			if(_request('exec') != 'documents_edit')
-				$flux['data'] .= icone_horizontale(_T('photospip:bouton_modifier_document'), parametre_url(generer_url_ecrire('documents_edit','id_document='.$document['id_document']),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit.gif',false);
+			if(_request('exec') != 'document_edit')
+				$flux['data'] .= icone_horizontale(_T('photospip:bouton_modifier_document'), parametre_url(generer_url_ecrire('document_edit','id_document='.$document['id_document']),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit.gif',false);
 			if((_request('exec') != 'image_edit') && in_array($document['extension'], array('jpg', 'png', 'gif')))
 				$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_image'), parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit.gif',false);
 			if($document['id_vignette'] && $document['id_vignette'] > 0){
