@@ -105,8 +105,11 @@ function compositions_affiche_milieu($flux){
 			$config = unserialize($GLOBALS['meta']['compositions']);
 			$aut = autoriser('styliser',$type,$id);
 			include_spip('compositions_fonctions');
-			if (($config['masquer_formulaire'] != 'oui' OR $aut) 
-				AND (is_array(reset(compositions_lister_disponibles($type))) OR ($type == 'rubrique' AND $config['tout_verrouiller'] != 'oui'))
+			if (($config['masquer_formulaire'] != 'oui' OR $aut)
+				AND (
+					($c=compositions_lister_disponibles($type) AND is_array(reset($c)))
+					OR ($type == 'rubrique' AND $config['tout_verrouiller'] != 'oui')
+				  )
 				) {
 				$deplie = $aut ? false : -1;
 				$ids = 'formulaire_editer_composition_objet-' . "$type-$id";
