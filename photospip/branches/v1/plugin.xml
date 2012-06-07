@@ -6,7 +6,7 @@ _ © 2008-2012 - Distribué sous licence GNU/GPL
 	<version>0.5.2</version>
 	<version_base>0.4</version_base>
 	<prefix>photospip</prefix>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<slogan>Modification d'images dans SPIP</slogan>
 	<description>Modifier les images ins&eacute;r&eacute;es dans SPIP en leur appliquant différents filtres</description>
 	<lien>http://photospip.arscenic.org/</lien>
