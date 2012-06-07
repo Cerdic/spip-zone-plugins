@@ -68,8 +68,9 @@ var minical = {
 					}
 				}
 			}
-			//console.log(dates);
 			me.multiDatesPicker('addDates', dates);
+			// toujours retirer la classe active qui n'a pas de sens pour l'affichage
+			jQuery('.ui-state-active',me).removeClass('ui-state-active');
 		}
 	},
 
@@ -101,6 +102,7 @@ var minical = {
 				}
 			});
 		}
+		inst.currentDay=0; // annuler la date active : pas de sens ici
 	},
 	show_loading : function(me){
 		me.animateLoading();
@@ -129,7 +131,10 @@ var minical = {
 				)
 				.each(function(){
 					var me=jQuery(this);
+					// se mettre a la date demandee (pour afficher le bon mois)
 					me.datepicker("setDate" , me.attr('data-year')+"-"+me.attr('data-month')+"-1");
+					// et retirer la classe active qui n'a pas de sens pour l'affichage
+					jQuery('.ui-state-active',me).removeClass('ui-state-active');
 					minical.change_month_year(me.attr('data-year'),me.attr('data-month'),me);
 				})
 				.trigger('miniCalendarLoaded')
