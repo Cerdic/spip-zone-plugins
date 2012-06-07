@@ -1,3 +1,6 @@
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','document','id',#ENV{id_document}}}}
+#BOITE_FERMER
 <BOUCLE_mode_pas_vignette(CONDITION){si #ENV{mode}|!={vignette}|oui}>
 <BOUCLE_doc(DOCUMENTS){id_document}{tout}>
 <div id="versions">

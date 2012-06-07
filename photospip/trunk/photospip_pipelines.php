@@ -130,7 +130,7 @@ function photospip_boite_infos($flux){
 				$flux['data'] .= icone_horizontale(_T('photospip:bouton_creer_vignette'), parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'mode','vignette'), find_in_path('images/photospip-24.png'), 'creer.gif',false);
 			}
 		}elseif((_request('mode') == 'vignette') && ($document = sql_fetsel('*','spip_documents','id_document='.intval($id_document)))){
-			$flux['data'] .= icone_horizontale(_T('photospip:bouton_modifier_document'), generer_url_ecrire('documents_edit','id_document='.$document['id_document']), find_in_path('images/photospip-24.png'), 'edit.gif',false);
+			$flux['data'] .= icone_horizontale(_T('photospip:bouton_modifier_document'), generer_url_ecrire('document_edit','id_document='.$document['id_document']), find_in_path('images/photospip-24.png'), 'edit.gif',false);
 			if(in_array($document['extension'], array('jpg', 'png', 'gif')))
 				$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_image'), generer_url_ecrire('image_edit','id_document='.$document['id_document']), find_in_path('images/photospip-24.png'), 'edit.gif',false);
 		}
