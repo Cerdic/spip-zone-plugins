@@ -300,26 +300,32 @@
 									jQuery('.cache').hide();
 									boxoffset = jQuery('#cboxLoadedContent').offset();
 									boxmargins = jQuery('#cboxContent').height() - jQuery('#cboxLoadedContent').height();
-									container_offset = jQuery('#image-container').offset().top-jQuery('#cboxContent').offset().top;
-									var container_size = jQuery('#image-container').height();
+									container_offset = parseInt(jQuery('#image-container').offset().top)-parseInt(jQuery('#cboxContent').offset().top);
+									var container_size = jQuery('#image-container').outerHeight();
 									var boutons_height = jQuery('#cboxContent .boutons').last().outerHeight();
 									
 									if(container_size < parseInt(jQuery('#cboxLoadedContent').height())){
 										jQuery('#cboxLoadedContent').unbind('scroll').scroll(function() {
+											var limite_bas = jQuery('.formulaire_#FORM-#ENV{id_document}').height()-boutons_height-10;
 											var limite_image = boxoffset.top;
-											var limite_bas = jQuery('#cboxContent .boutons').last().offset().top-boutons_height;
 											var pos_bas = jQuery('#image-container').offset().top+container_size;
-											if((jQuery('#cboxLoadedContent').scrollTop() >= container_offset) && (jQuery('#cboxLoadedContent').scrollTop()+jQuery('#image-container').offset().top < limite_bas)){
+											if((parseInt(jQuery('#cboxLoadedContent').scrollTop()) >= container_offset) && ((parseInt(jQuery('#image-container').offset().top)-parseInt(jQuery('.formulaire_#FORM-#ENV{id_document}').offset().top)+container_size) < limite_bas)){
 												var margintop = jQuery('#cboxLoadedContent').scrollTop()-container_offset+boxmargins;
-												jQuery('#image-container').addClass("image_flottant").animate({"margin-top": margintop+"px"},10,'',function(){
-													if(typeof(ias) == 'object')
-														ias.update();
+												jQuery('#image-container').addClass("image_flottant").animate({"margin-top": margintop+"px"},'','',function(){
+													if((parseInt(jQuery('#image-container').offset().top)-parseInt(jQuery('.formulaire_#FORM-#ENV{id_document}').offset().top)+container_size) >= limite_bas){
+														margintop = jQuery('.formulaire_#FORM-#ENV{id_document}').height()-boutons_height-20-container_size;
+														limite_bas = limite_bas-10;
+														jQuery('#image-container').addClass("image_flottant").animate({"margin-top": margintop+"px"},'','',function(){
+															if(typeof(ias) == 'object')
+															ias.update();
+														});
+														if(typeof(ias) == 'object')
+															ias.update();
+													}
 												});
 											}
-											else if(jQuery('#image-container').hasClass("image_flottant")){
-												// && (jQuery('#cboxLoadedContent').scrollTop() < container_offset)
-												//"margin-top": "0px"
-												jQuery('#image-container').removeClass("image_flottant").animate({'margin-top':'1px'},10,'',function(){
+											else if(jQuery('#image-container').hasClass("image_flottant") && (jQuery('#cboxLoadedContent').scrollTop() < container_offset)){
+												jQuery('#image-container').removeClass("image_flottant").animate({'margin-top':'1px'},'','',function(){
 													if(typeof(ias) == 'object')
 														ias.update();
 												});
