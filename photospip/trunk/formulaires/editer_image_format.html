@@ -77,10 +77,12 @@
 			</div>
 		</li>
 		<li>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_recadre_width})</span>]
 			<label for="recadre_width"><:photospip:label_recadre_width:></label>
 			<input type="number" max="#LARGEUR" min="10" step="1" class="text nombre" id="recadre_width" maxlength="5" style="width:7em" name="recadre_width" value="#ENV{recadre_width}" />
 		</li>
 		<li>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_recadre_height})</span>]
 			<label for="recadre_height"><:photospip:label_recadre_height:></label>
 			<input type="number" max="#HAUTEUR" min="10" step="1" class="text nombre" id="recadre_height" maxlength="5" style="width:7em" name="recadre_height" value="#ENV{recadre_height}" />
 		</li>

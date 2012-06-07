@@ -58,7 +58,7 @@ function formulaires_editer_image_charger_dist($id_document='new',$mode=false, $
 			$valeurs[$input] = _request($input);	
 	}
 	
-	$valeurs['largeur_previsu'] = test_espace_prive()? 800 : lire_config('photospip/largeur_previsu','450');
+	$valeurs['largeur_previsu'] = test_espace_prive() ? 800 : lire_config('photospip/largeur_previsu','800');
 	if($mode != 'vignette'){
 		$limite = lire_config('photospip/limite_version',1000000);
 		$nb_versions = sql_countsel('spip_documents_inters','id_document='.intval($id_document));
@@ -87,7 +87,6 @@ function formulaires_editer_image_charger_dist($id_document='new',$mode=false, $
 		$valeurs['message_erreur'] = _T('photospip:erreur_image_process');
 		$valeurs['editable'] = false;
 	}
-	spip_log($valeurs,'photospip');
 	return $valeurs;
 }
 
@@ -132,6 +131,17 @@ function formulaires_editer_image_verifier_dist($id_document='new',$mode=false, 
 				$erreurs[$var_filtre] = $erreur_param0;
 			if(($var_filtre == 'tourner') && !_request('params_tourner'))
 				$erreurs[$var_filtre] = _T('photospip:erreur_form_filtre_valeur_obligatoire');
+			if($var_filtre == 'image_recadre'){
+				if((strlen($params[0]) && strlen($erreur_param0 = $verifier($params[0],'entier')))
+					OR (strlen($params[1]) && strlen($erreur_param1 = $verifier($params[1],'entier')))
+					){
+					$erreurs[$var_filtre] = _T('photospip:erreur_valeurs_numeriques');
+					if($erreur_param0)
+						$erreurs['image_recadre_width'] = $erreur_param0;
+					if($erreur_param1)
+						$erreurs['image_recadre_height'] = $erreur_param1;
+				}
+			} 
 		}
 		/**
 		 * Ces erreurs ne sont pas de réelles erreurs mais seulement
@@ -173,6 +183,9 @@ function formulaires_editer_image_verifier_dist($id_document='new',$mode=false, 
 				}
 			}
 		}
+	}else{
+		if(!_request('version'))
+			$erreurs['version'] = _T('photospip:erreur_choisir_version');
 	}
 	return $erreurs;
 }

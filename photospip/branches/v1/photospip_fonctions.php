@@ -22,20 +22,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 */
 
-function photospip_appliquer_filtre($balise, $filtre,$param1=NULL,$param2=NULL,$param3=NULL) {
+function photospip_appliquer_filtre($balise, $filtre,$param1=null,$param2=null,$param3=null) {
 	$filtre = chercher_filtre($filtre);
-	spip_log("On a trouvé $filtre",'photospip');
 	if (function_exists($filtre)){
-		spip_log("$filtre($balise,$param1,$param2,$param3);","photospip");
-		if ($param1){
+		if (isset($param1) && $param1){
 			if($filtre == 'image_sepia')
 				$param1 = str_replace('#','',$param1);
 			return $filtre($balise,$param1,$param2,$param3);
-			spip_log("$filtre($balise,$param1,$param2,$param3);","photospip");
 		}
 		else{
 			return $filtre($balise);
-			spip_log("$filtre($balise);","photospip");
 		}
 	} else {
 		return $balise;

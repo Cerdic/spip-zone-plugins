@@ -20,62 +20,54 @@
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
-#modifier_imag;{
+#modifier_image;{
 	width:100%;
 }
 #image-container{
-	position:relative;
-	margin:0 0px;
+	margin:0px;
 	text-align:center;
-}
-
-#modifier_image, #image_modifier{
-	position:relative;
 }
 
 #image_modifier img{
 	vertical-align:bottom;
 }
 
+.formulaire_spip li.editer_version{
+	padding:10px 0;
+	margin:0;
+	overflow:auto;
+	overflow-x:scroll;
+}
 #image-versions{
-	margin: 10px;
-    overflow-x: scroll;
+	margin: 0;
     padding: 0;
     border-spacing:6px 0;
+    width: 10000px;
 }
 
 #image-versions .photospip_version{
-	display:table-cell;
+	float:left;
+	width:80px;
 }
 
 #image-versions .photospip_version label{
-	margin:0 auto;
-	width:auto;
+	width:80px;
+	height:80px;
 	display:block;
+	margin:0;
 	text-align:center;
 }
 
-#versions{
-	padding:0;
-	font-size:.85em;
-	text-align:left;
+#image-versions .photospip_version label img{
+	margin:0 auto;
 }
 
 .photospip_version{
-	position:relative;
 	border:1px solid #ccc;
 	width:80px;
 	margin:1px;
-	height:80px;
 	text-align:center;
 	background:#fff;
-}
-
-.photospip_version label{
-	border:none;
-	line-height:80px;
-	cursor:inherit;
-	display:inline;
 }
 
 button{
@@ -91,18 +83,16 @@ button{
 	border:none;
 }
 
-
 #cboxLoadedContent #modifier_image{
-	float:left;width:50%;padding:0;
+	position:relative;
+	float:left;
+	width:48%;
+	padding:0;
 }
 
 #cboxLoadedContent .editer_image_inputs{
-	float:right;width:49%;margin-left:1%;
-}
-
-#cboxLoadedContent .formulaire_editer_image {
-	overflow:auto;
-	padding:1%;
+	float:right;
+	width:49%;margin-left:1%;
 }
 
 .editer_tourner .tourner_90{
@@ -123,4 +113,3 @@ button{
 	padding:0;
 }
 [(#REM)	</style>]
-

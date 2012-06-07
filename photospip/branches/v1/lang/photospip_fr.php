@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// E
 	'erreur_auth_modifier' => 'Vous n\'êtes pas autoriser à modifier ce document.',
+	'erreur_choisir_version' => 'Choisissez une version',
 	'erreur_doc_numero' => 'Vous devez indiquer un identifiant de document existant.',
 	'erreur_form_filtre' => 'Veuillez indiquer un filtre à appliquer.',
 	'erreur_form_filtre_sstest' => 'Le filtre que vous avez essayé ne permet pas d\'&ecirc;tre testé. Vous ne pouvez que l\'appliquer.',

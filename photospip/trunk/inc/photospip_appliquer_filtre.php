@@ -24,33 +24,23 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * l'image de destination si tout est ok 
  */
 function inc_photospip_appliquer_filtre_dist($src, $dest, $filtre,$params){
-	spip_log("src = $src","photospip");
-	spip_log("dest = $dest","photospip");
-	spip_log("filtre = $filtre","photospip");
-	spip_log("params","photospip");
-	spip_log($params,"photospip");
-	
 	include_spip('inc/filtres');
 	include_spip('public/parametrer');
 	$src_img = '';
 	
 	$filtre = chercher_filtre($filtre);
-	spip_log($filtre,'photospip');
 	if (function_exists($filtre)){
 		if(is_array($params)){
 			if($filtre == 'image_recadre'){
 				$dst_img = $filtre($src,$params[0],$params[1],$params[2]);
-				spip_log("$filtre($src,$params[0],$params[1],$params[2]);","photospip");
 			}else if(in_array($filtre, array('image_passe_partout','image_reduire'))){
 				$dst_img = $filtre($src,$params[0],$params[1]);
-				spip_log("$filtre($src,$params[0],$params[1]);","photospip");
 			}
 			elseif($filtre == 'image_sepia' && $params[0] && !is_null($params[0])){
 				$params[0] = str_replace('#','',$params[0]);
 				$dst_img = $filtre($src,$params[0]);
 			}
 			else if($params[0] && !is_null($params[0])){
-				spip_log("$filtre($src,".$params[0].")","photospip");
 				$dst_img = $filtre($src,$params[0]);
 			}else{
 				spip_log("$filtre($src)","photospip");
@@ -60,8 +50,7 @@ function inc_photospip_appliquer_filtre_dist($src, $dest, $filtre,$params){
 		else{
 			$dst_img = $filtre($src);
 		}
-		$dst_img = extraire_attribut($dst_img,'src');
-		spip_log("après le filtre $filtre dst_img = $dst_img","photospip");		
+		$dst_img = extraire_attribut($dst_img,'src');		
 	}else{
 		spip_log('le filtre n existe pas','photospip');
 		return false;
@@ -69,8 +58,6 @@ function inc_photospip_appliquer_filtre_dist($src, $dest, $filtre,$params){
 	spip_log("dst_img = $dst_img",'photospip');
 	if (preg_match(',^(.*)\?date=(\d+).([^.]+)$,', $dst_img, $match)) {
 		$dst_img = $match[1];
-		spip_log($match,'photospip');
-		spip_log("On enlève la date : dst_img = $dst_img",'photospip');
 	}
 	//$dst_img = preg_replace(',\?date=\d+$,','', $dst_img);
 	if(preg_match("/\.(png|gif|jpe?g)$/i", $src, $regs)) {
@@ -108,8 +95,6 @@ function inc_photospip_appliquer_filtre_dist($src, $dest, $filtre,$params){
 	ImageInterlace($src_img,0);
 
 	$image = $save($src_img,$dest,100);
-	
-	spip_log("dest $dest","photospip");
 	return $image;
 }
 
