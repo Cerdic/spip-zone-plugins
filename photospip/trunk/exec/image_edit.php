@@ -54,6 +54,7 @@ function image_edit_ok($row, $id_document, $mode)
 		'mode'=>$mode,
 		'config_fonc'=>'image_edit_config',
 		'titre'=>$titre,
+		'modale' => 'oui',
 		'mode'=>$mode
 		);
 

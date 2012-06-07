@@ -280,7 +280,7 @@
 								if(!msie)
 									jQuery('input[type=number],input.nombre').spinner('destroy').spinner().parents('li').addClass('has_spinner');
 						   		if(cbox_complete && jQuery('#modifier_image img').width() > jQuery('#modifier_image').width()){
-									jQuery('#image-container img').attr('width','').attr('height','').width('100%').height('auto');
+									jQuery('#image-container img').removeAttr('width').removeAttr('height','').width('100%').height('auto');
 								}
 								
 								

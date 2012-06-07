@@ -132,6 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_image_taille_actuelle' => 'Taille actuelle de l\'image&nbsp;: @largeur@x@hauteur@px.',
 	'message_limite_versions' => 'Le nombre de versions précédentes sont limitées à @limite@.',
+	'message_nouvelle_image_creee' => 'Votre nouvelle image a été créée #@id_document@',
 	'message_ok_version_retour' => 'Vous êtes revenu à la version #@version@',
 	'message_ok_version_supprimee' => 'La version #@version@ a été supprimée',
 	'message_pas_de_versions' => 'Ce document n\'est pas versionné.',
