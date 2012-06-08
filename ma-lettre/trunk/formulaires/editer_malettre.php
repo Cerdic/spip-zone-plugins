@@ -86,6 +86,7 @@ function formulaires_editer_malettre_traiter_dist(){
       					}	
                 
                 // edito
+                include_spip('inc/config');
                 $id_article_edito = lire_config("malettre/id_article_edito");
                 
                 // calcul du patron	
@@ -129,4 +130,4 @@ function formulaires_editer_malettre_traiter_dist(){
 	);
 }
 
-?>
+?> 
