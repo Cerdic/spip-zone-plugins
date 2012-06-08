@@ -1,7 +1,7 @@
 <paquet
 prefix="pb_couleur_rubrique"
 categorie="maintenance"
-version="2.1.0"
+version="2.1.1"
 etat="test"
 compatibilite="[3.0.0;3.*]"
 logo="img_pack/icon.png"
@@ -20,5 +20,6 @@ documentation="http://www.paris-beyrouth.org/tutoriaux-spip/article/le-plugin-pb
 	<utilise nom="palette" compatibilite="[3.0.0;[" />
 	
 	<pipeline nom="affiche_droite" inclure="pb_couleur_rubrique_pipelines.php" />
+	<pipeline nom="header_prive" inclure="pb_couleur_rubrique_pipelines.php" />
 	
 </paquet>

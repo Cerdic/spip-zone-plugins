@@ -10,6 +10,7 @@
 	[(#REM) voir le formulaire si on est admin + voir le formulaire meme apres validation ]
 	[(#SESSION{statut}|=={0minirezo}|oui)
 		[(#CONFIG{pb_couleur_rubrique/afficher}|=={non}|non)
+			<br /><a href="#" class="chargez_couleur" title="chargez la couleur dans la roue chromatique">chargez la couleur</a>
 			[(#FORMULAIRE_COULEUR_RUBRIQUE{#ENV{id_rubrique}})]
 		]
 	]

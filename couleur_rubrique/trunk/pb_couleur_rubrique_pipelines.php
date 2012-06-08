@@ -1,5 +1,10 @@
 <?php
 
+function pb_couleur_rubrique_header_prive($flux){
+    $flux .= '<script type="text/javascript" src="' . _DIR_PLUGIN_PB_COULEUR_RUBRIQUE  .'javascript/script.js"></script>';
+    return $flux;
+}
+
 function pb_couleur_rubrique_affiche_droite($flux) {
 	
         $exec = $flux["args"]["exec"];
