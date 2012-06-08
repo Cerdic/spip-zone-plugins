@@ -101,7 +101,7 @@ function saisies_generer_html($champ, $env=array()){
 	$contexte = array_merge($contexte, $options);
 
 	// Si env est définie dans les options ou qu'il y a des enfants, on ajoute tout l'environnement
-	if (isset($contexte['env']) or is_array($champ['saisies'])) {
+	if (isset($contexte['env']) or (isset($champ['saisies']) AND is_array($champ['saisies']))) {
 		unset($contexte['env']);
 
 		// on sauve l'ancien environnement
@@ -141,11 +141,12 @@ function saisies_generer_html($champ, $env=array()){
 		}
 	}
 	// Sinon la valeur est juste celle du nom
-	else
-		$contexte['valeur'] = $env[$contexte['nom']];
+	else {
+		$contexte['valeur'] = (isset($env[$contexte['nom']]) ? $env[$contexte['nom']] : null);
+	}
 
 	// Si ya des enfants on les remonte dans le contexte
-	if (is_array($champ['saisies']))
+	if (isset($champ['saisies']) and is_array($champ['saisies']))
 		$contexte['saisies'] = $champ['saisies'];
 	
 	// On génère la saisie

@@ -364,8 +364,11 @@ function formidable_generer_saisie_configurable($saisie, $env){
 	$nom = $saisie['options']['nom'];
 	$identifiant = $saisie['identifiant'];
 	// On cherche si ya un formulaire de config
-	$formulaire_config = $env['erreurs']['configurer_'.$nom];
+	$formulaire_config = isset($env['erreurs']['configurer_'.$nom]) ? $env['erreurs']['configurer_'.$nom] : "";
 	// On ajoute une classe
+	if (!isset($saisie['options']['li_class'])) {
+		$saisie['options']['li_class'] = ''; // initialisation
+	}
 	$saisie['options']['li_class'] .= ' configurable';
 	// On ajoute l'option "tout_afficher"
 	$saisie['options']['tout_afficher'] = 'oui';

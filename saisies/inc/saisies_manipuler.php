@@ -264,10 +264,13 @@ function saisies_inserer_html($saisie, $insertion, $ou='fin'){
 	if (!in_array($ou, array('debut', 'fin')))
 		$ou = 'fin';
 	
-	if ($ou == 'debut')
-		$saisie['options']['inserer_debut'] = $insertion.$saisie['options']['inserer_debut'];
-	elseif ($ou == 'fin')
-		$saisie['options']['inserer_fin'] = $saisie['options']['inserer_fin'].$insertion;
+	if ($ou == 'debut') {
+		$saisie['options']['inserer_debut'] =
+			$insertion . (isset($saisie['options']['inserer_debut']) ? $saisie['options']['inserer_debut'] : '');
+	} elseif ($ou == 'fin') {
+		$saisie['options']['inserer_fin'] =
+			(isset($saisie['options']['inserer_debut']) ? $saisie['options']['inserer_fin'] : '') . $insertion;
+	}
 	
 	return $saisie;
 }
