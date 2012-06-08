@@ -253,7 +253,10 @@ function spip2_geshi_regexp_echappements_echapper_callback($matches, $geshi) {
 
 	// rendre inertes les echappements de #[](){}<>
 	$inerte = '-INERTE';
-	$squelette = preg_replace_callback(',\\\\([#[()\]{}<>]|&gt;|&lt;),',
+	// mais eviter d'echapper \<PIPE>, <PIPE> etant deja un echappement de Geshi
+	// normalement les < et > sont justement aussi echapes en &gt et &lt
+	// donc on ne cherche pas la capture de \< ou \>
+	$squelette = preg_replace_callback(',\\\\([#[()\]{}]|&gt;|&lt;),',
 		create_function('$a', "return '$inerte-'.ord(html_entity_decode(\$a[1])).'-';"), $squelette, -1, $esc);
 
 	return $squelette;
@@ -348,6 +351,14 @@ $language_data = array (
 			// echappements
 			101 => '', // \[ \] \{ ...
 			102 => 'color:#FF2100; font-weight:bold;', // les \ dans les echappements
+
+			// autres (eviter des notices php)
+			100  => '',
+			41   => '',
+			'4b' => '',
+			'4c' => '',
+			'4d' => '',
+			'4e' => '',
 			)
 		),
 	'URLS' => array(),
@@ -360,6 +371,10 @@ $language_data = array (
 			GESHI_SEARCH => '^.*$',
 			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_echappements_echapper_callback',
 			GESHI_MODIFIERS => 's',
+			// eviter des notices PHP
+			GESHI_REPLACE => '',
+			GESHI_BEFORE => '',
+			GESHI_AFTER => ''
 			),
 
 
@@ -375,26 +390,46 @@ $language_data = array (
 			GESHI_SEARCH => REG_BALISE_COMPLET,
 			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_balise_callback',
 			GESHI_MODIFIERS => '',
+			// eviter des notices PHP
+			GESHI_REPLACE => '',
+			GESHI_BEFORE => '',
+			GESHI_AFTER => ''
 			),
 		'4b' => array(
 			GESHI_SEARCH => REG_BALISE_COMPLET,
 			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_balise_callback',
 			GESHI_MODIFIERS => '',
+			// eviter des notices PHP
+			GESHI_REPLACE => '',
+			GESHI_BEFORE => '',
+			GESHI_AFTER => ''
 			),
 		'4c' => array(
 			GESHI_SEARCH => REG_BALISE_COMPLET,
 			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_balise_callback',
 			GESHI_MODIFIERS => '',
+			// eviter des notices PHP
+			GESHI_REPLACE => '',
+			GESHI_BEFORE => '',
+			GESHI_AFTER => ''
 			),
 		'4d' => array(
 			GESHI_SEARCH => REG_BALISE_COMPLET,
 			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_balise_callback',
 			GESHI_MODIFIERS => '',
+			// eviter des notices PHP
+			GESHI_REPLACE => '',
+			GESHI_BEFORE => '',
+			GESHI_AFTER => ''
 			),
 		'4e' => array(
 			GESHI_SEARCH => REG_BALISE_COMPLET,
 			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_balise_callback',
 			GESHI_MODIFIERS => '',
+			// eviter des notices PHP
+			GESHI_REPLACE => '',
+			GESHI_BEFORE => '',
+			GESHI_AFTER => ''
 			),
 
 		// Balise (#nom:TITRE**) (les etoiles)
@@ -464,6 +499,10 @@ $language_data = array (
 			GESHI_SEARCH => REG_BOUCLE_CRITERES,
 			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_critere_callback',
 			GESHI_MODIFIERS => '',
+			// eviter des notices PHP
+			GESHI_REPLACE => '',
+			GESHI_BEFORE => '',
+			GESHI_AFTER => ''
 			),
 
 
@@ -575,6 +614,10 @@ $language_data = array (
 			GESHI_SEARCH => '^.*$',
 			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_echappements_remettre_callback',
 			GESHI_MODIFIERS => 's',
+			// eviter des notices PHP
+			GESHI_REPLACE => '',
+			GESHI_BEFORE => '',
+			GESHI_AFTER => ''
 			),
 		// permettre de colorer le \ des echappements differement
 		// attention a \&gt; et \&lt; a la place de \> et \< dans geshi
