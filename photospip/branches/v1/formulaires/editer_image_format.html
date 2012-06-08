@@ -1,4 +1,4 @@
-<BOUCLE_doc(DOCUMENTS){id_document}{mode IN vignette,image,document}{tout}>
+<BOUCLE_doc(DOCUMENTS){id_document}{extension IN gif,png,jpg}{statut?}>
 [(#CONFIG{photospip/image_reduire,on}|=={on}|oui)
 <li class="editer editer_reduire[ (#ENV**{erreurs}|table_valeur{image_reduire}|oui)erreur]">
 	<label for="image_reduire"><:photospip:label_image_reduire:></label>

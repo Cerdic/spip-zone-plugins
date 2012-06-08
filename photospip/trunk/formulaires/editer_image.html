@@ -2,7 +2,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
-	<BOUCLE_document(DOCUMENTS){id_document}{mode IN vignette,image,document}{tout}>
+	<BOUCLE_document(DOCUMENTS){id_document}{extension IN gif,png,jpg}{statut?}>
 	[(#REM)
 		Calcul du ratio entre notre image originale et la prévisualisation
 		Utile pour les opération de recadrage notamment
@@ -40,7 +40,6 @@
 			<B_interd_nb>
 			<ul class="liste-versions">
 				<li class="fieldset">
-					<fieldset>
 					<legend>[(#GRAND_TOTAL|singulier_ou_pluriel{photospip:info_nb_versions_une,photospip:info_nb_versions})]</legend>
 					<BOUCLE_interd_nb(DOCUMENTS_INTERS){id_document}{!par version}> </BOUCLE_interd_nb>
 					<ul>
@@ -70,14 +69,12 @@
 						</li>
 					</B_interd>
 					</ul>
-					</fieldset>
 				</li>
 			</ul>
 			</B_interd_nb>
 			</BOUCLE_si_versions_et_vignettes>
 			<BOUCLE_modifiable(CONDITION){si #ENV{modifiable,oui}|oui}>
 			<ul>
-				#CHEMIN{formulaires/editer_image_format}
 				[<li class="fieldset" id="fragment-format">
 					<fieldset>
 					<legend><:photospip:legende_filtres_format:></legend>

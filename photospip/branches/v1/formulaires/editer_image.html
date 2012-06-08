@@ -2,7 +2,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
-	<BOUCLE_document(DOCUMENTS){id_document}{mode IN vignette,image,document}{tout}>
+	<BOUCLE_document(DOCUMENTS){id_document}{extension IN gif,png,jpg}{statut?}>
 	[(#REM)
 		Calcul du ratio entre notre image originale et la prévisualisation
 		Utile pour les opération de recadrage notamment
