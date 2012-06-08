@@ -161,6 +161,7 @@ function geshi_spip3_colorier($contenu) {
 	$squelette = $contenu; // code a traiter
 
 	// rendre inertes les echappements de #[](){}<>
+	$i = 0;
 	while(false !== strpos($squelette, $inerte = '-INERTE'.$i)) $i++;
 	$squelette = preg_replace_callback(',\\\\([#[()\]{}<>]),',
 		create_function('$a', "return '$inerte-'.ord(\$a[1]).'-';"), $squelette, -1, $esc);
