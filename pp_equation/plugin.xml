@@ -1,0 +1,32 @@
+<plugin>
+	<nom>Porte Plume Equation</nom>
+	<slogan>Extension LaTeX pour Porte-Plume</slogan>
+	<auteur>MMMX</auteur>
+	<licence>GPL v3</licence>
+	<version>0.3.0</version>
+	<etat>dev</etat>
+	<description>Ajoute un bouton au porte-plume permettant le chargemente de boutons pour inserer les raccourci LaTeX.
+	</description>
+	<lien>http://www.spip-contrib.net/2978</lien>
+	<icon>images/euler128.png</icon>
+	<prefix>pp_latex</prefix>
+	<pipeline>
+		<nom>porte_plume_barre_pre_charger</nom>
+		<inclure>pp_latex_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_lien_classe_vers_icone</nom>
+		<inclure>pp_latex_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>pp_latex_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>pp_latex_pipelines.php</inclure>
+	</pipeline>	
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.0.3;3.1.99]" />
+	<necessite id="porte_plume" />
+</plugin>
