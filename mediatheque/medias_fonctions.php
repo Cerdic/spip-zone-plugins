@@ -47,10 +47,16 @@ function boucle_DOCUMENTS($id_boucle, &$boucles) {
 	// sauf s'ils sont distants (taille inconnue)
 	array_unshift($boucle->where,array("'($id_table.taille > 0 OR $id_table.distant=\\'oui\\')'"));
 
-	// Supprimer les vignettes
+	/**
+	 * N'afficher que les modes de documents que l'on accepte
+	 * Utiliser le "pipeline medias_documents_visibles" pour en ajouter
+	 */
 	if (!isset($boucle->modificateur['criteres']['mode'])
 	AND !isset($boucle->modificateur['criteres']['tout'])) {
-		array_unshift($boucle->where,array("'IN'", "'$id_table.mode'", "'(\\'image\\',\\'document\\')'"));
+		$modes = pipeline('medias_documents_visibles',array('image','document'));
+		$f = sql_serveur('quote', $serveur, true);
+		$modes = addslashes(join(',', array_map($f, array_unique($modes))));
+		array_unshift($boucle->where,array("'IN'", "'$id_table.mode'", "'($modes)'"));
 	}
 
 	// Pour une boucle generique (DOCUMENTS) sans critere de lien, verifier
