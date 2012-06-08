@@ -1,0 +1,19 @@
+
+#BOITE_OUVRIR{#CHEMIN_IMAGE{icon-24.png}|balise_img{'',cadre-icone}|concat{La couleur de cette rubrique},'simple','titrem'} 
+
+<div class="couleur_rubrique">
+	[(#ID_RUBRIQUE|pb_couleur_rubrique|oui) 
+	<:pb_couleur_rubrique:la_couleur_actuelle:>
+	<div class="couleur" style="width:70px;height:22px;margin:0 0 2px 2px;background:[#(#ID_RUBRIQUE|pb_couleur_rubrique)];"></div>
+	<strong class="codehex" style="text-transform:uppercase;">[#(#ID_RUBRIQUE|pb_couleur_rubrique)]</strong>
+	]
+	[(#REM) voir le formulaire si on est admin + voir le formulaire meme apres validation ]
+	[(#SESSION{statut}|=={0minirezo}|oui)
+		[(#CONFIG{pb_couleur_rubrique/afficher}|=={non}|non)
+			[(#FORMULAIRE_COULEUR_RUBRIQUE{#ENV{id_rubrique}})]
+		]
+	]
+</div>
+
+#BOITE_FERMER
+

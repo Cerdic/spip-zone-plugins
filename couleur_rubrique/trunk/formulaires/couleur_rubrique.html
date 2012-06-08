@@ -1,0 +1,24 @@
+
+
+<div class="formulaire_spip formulaire_config formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+				<li class="editer_couleur_rubrique_palette">
+					<label for="pb_couleur_rubrique"><:pb_couleur_rubrique:choisir_une_nouvelle_couleur:></label>
+					<input class='palette' type='color' id='pb_couleur_rubrique' name='pb_couleur_rubrique' value='' style="width:70px;" />
+				</li>
+				<li class="supprimer_couleur_rubrique">
+					<label for="supprimer"><:pb_couleur_rubrique:supprimer_la_couleur:></label>
+					<input type="checkbox" name="supprimer" id="supprimer" class="checkbox" value="supprimer" />
+				</li>
+			</ul>
+			<div class="boutons">
+				<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+			</div>
+		</div>
+	</form>
+</div>

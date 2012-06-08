@@ -1,0 +1,24 @@
+<paquet
+prefix="pb_couleur_rubrique"
+categorie="maintenance"
+version="2.1.0"
+etat="test"
+compatibilite="[3.0.0;3.*]"
+logo="img_pack/icon.png"
+documentation="http://www.paris-beyrouth.org/tutoriaux-spip/article/le-plugin-pb-couleur-rubrique"
+	>	
+
+	<nom>Couleur de rubrique</nom>
+	<!-- Une couleur pour chaque rubrique -->
+	
+	<auteur mail="arno@rezo.net">ARNO*</auteur>
+	<auteur lien="http://www.erational.org">sur la base du travail d'erational</auteur>
+	<auteur>adapté à SPIP3 par Chankalan</auteur>
+	
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	
+	<utilise nom="palette" compatibilite="[3.0.0;[" />
+	
+	<pipeline nom="affiche_droite" inclure="pb_couleur_rubrique_pipelines.php" />
+	
+</paquet>
