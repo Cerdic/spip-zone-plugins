@@ -116,4 +116,31 @@ function doc2img_formulaire_verifier($flux) {
 	}
 	return $flux;
 }
+
+/**
+ * Insertion dans le pipeline recuperer_fond (SPIP)
+ * On affiche en dessous des documents les pages converties
+ *
+ * @param array $flux
+ * @return array $flux
+ */
+function doc2img_recuperer_fond($flux){
+	if ($flux['args']['fond']=='modeles/document_desc'){
+		$flux['data']['texte'] .= recuperer_fond('prive/inclure/document_desc_liste_doc2img',$flux['args']['contexte']);
+	}
+	return $flux;
+}
+
+/**
+ * Insertion dans le pipeline medias_documents_visibles (Plugin medias)
+ * On ajoute le fait que les documents ayant comme mode doc2img soient visibles et non pas
+ * supprimés des boucles documents
+ *
+ * @param array $flux
+ * @return array $flux
+ */
+function doc2img_medias_documents_visibles($flux){
+	$flux[] = 'doc2img';
+	return $flux;
+}
 ?>

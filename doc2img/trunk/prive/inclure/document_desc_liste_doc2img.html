@@ -1,0 +1,14 @@
+[(#REM)
+
+
+]
+<B_d2c>
+<div class="doc2img_liste">
+	#ANCRE_PAGINATION
+	<strong>[(#GRAND_TOTAL|singulier_ou_pluriel{doc2img:info_une_page_convertie,doc2img:info_nb_pages_converties})]</strong>
+	<BOUCLE_d2c(DOCUMENTS){mode=doc2img}{objet=document}{id_objet=#ENV{id_document,#ENV{id}}}{par id_document} {statut==.*}{pagination 5 doc#ID_DOCUMENT}>
+		#MODELE{document_desc,id_document,objet=document,id_objet=#ENV{id_document}}
+	</BOUCLE_d2c>
+	[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_d2c>
