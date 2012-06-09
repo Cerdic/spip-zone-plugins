@@ -17,22 +17,28 @@
 	</BOUCLE_trad>
 	#SET{trads,#TOTAL_BOUCLE}
 	</B_trad>	
+	
 	<B_ld>
 		<div class="onglets_traduction rubriques barre_onglet">	
 		<ul  class="clearfix">
 		<BOUCLE_ld(POUR){tableau #GET{langues_dispos}}>
+		
 		[(#GET{langues_traduites}|table_valeur{#VALEUR}|=={#GET{id_trad}}|oui)#SET{ref_#VALEUR,oui}]
 			[(#VALEUR|array_key_exists{#GET{langues_traduites}}|?{
 				[(#VALEUR|=={#GET{lang}}|?{
-					<li class="box_onglet"><strong class="on">[(#GET{ref_#VALEUR}|oui)<div class="ref">*<span><:tra:rubrique_reference:></span></div>][(#VALEUR|traduire_nom_langue)]</strong></li>,
+					<li class="box_onglet"><strong class="on">[(#GET{ref_#VALEUR}|oui)<div class="ref">*<span><:tra:rubrique_reference:></span></div>][(#VALEUR|traduire_nom_langue)]</strong></li>
+					,
 					<li class="traduit box_onglet">[(#GET{ref_#VALEUR}|oui)<div class="ref">*<span><:tra:rubrique_reference:></span></div>]<a href="[(#URL_ECRIRE{rubrique}|parametre_url{id_rubrique,#GET{langues_traduites}|table_valeur{#VALEUR}})]">[(#VALEUR|traduire_nom_langue)]</a></li>
-					})],#SET{non_traduits,oui}
-					[(#VALEUR|=={#GET{lang}}|?{
-						<li class="non_traduit box_onglet"><strong class="on">[(#VALEUR|traduire_nom_langue)][(#GET{ref_#VALEUR}|oui)<span><:tra:rubrique_reference:></span>]</strong></li>,
-						#SET{donnes_trad,#VALEUR|destination_traduction{#GET{id_trad}}}
-						#SET{parent_trad,#GET{donnes_trad}|table_valeur{0}}
-						#SET{trad,#GET{donnes_trad}|table_valeur{1}}	
-						[(#GET{donnes_trad}|table_valeur{2}|oui)#SET{alert,class="avis_source"}]				
+					})]
+					,	
+				#SET{non_traduits,oui}
+				[(#SET{donnees_trad,#VALEUR|destination_traduction{#GET{id_trad}}})]				
+				[(#VALEUR|=={#GET{lang}}|?{
+						<li class="non_traduit box_onglet"><strong class="on">[(#VALEUR|traduire_nom_langue)][(#GET{ref_#VALEUR}|oui)<span><:tra:rubrique_reference:></span>]</strong></li>
+						,
+						#SET{parent_trad,#GET{donnees_trad}|table_valeur{0}}
+						#SET{trad,#GET{donnees_trad}|table_valeur{1}}	
+						[(#GET{donnees_trad}|table_valeur{2}|oui)#SET{alert,class="avis_source"}]				
 						[(#AUTORISER{creerrubriquedans,rubrique,#GET{parent_trad}})<li class="non_traduit onglet"><a[ (#GET{alert})]  href="[(#URL_ECRIRE{rubrique_edit}|parametre_url{new,oui}|parametre_url{id_parent,#GET{parent_trad}}|parametre_url{lang_dest,#VALEUR}|parametre_url{lier_trad,#GET{trad}}|parametre_url{trad_new,#GET{trad_new}}|parametre_url{retour,nav})]">[(#VALEUR|traduire_nom_langue)]</a></li>]
 						})]	
 				})]		

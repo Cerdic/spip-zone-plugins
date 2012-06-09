@@ -3,7 +3,8 @@
 // Détermine l'id_parent de la nouvell rubrique traduite
 function destination_traduction($lang,$id_trad,$creer_racine=''){
 	$id_trad_parent='';
-	if($lang AND intval($id_trad)){
+	$trads=array();
+	if($lang AND $id_trad){
 		// on établit l'id_parent
 		$id_trad_parent=sql_getfetsel('id_parent','spip_rubriques','id_rubrique='.$id_trad);
 	
@@ -24,9 +25,13 @@ function destination_traduction($lang,$id_trad,$creer_racine=''){
 		elseif($id_trad_parent){
 			$trads=destination_traduction($lang,$id_trad_parent,'oui');
 			}
+		else $trads =array(0=>0,1=>$id_trad,2=>'oui');
 
 		return $trads;	
+	
 		}
+	return $trads;	
+		
 	}
 	 
 ?>
