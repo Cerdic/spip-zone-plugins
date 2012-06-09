@@ -28,6 +28,7 @@ function champs_extras_objet($table) {
 **/
 function champs_extras_autorisation($faire, $quoi='', $saisies=array(), $args=array()) {
 	if (!$saisies) return array();
+
 	foreach ($saisies as $cle=>$saisie) {
 		$id = isset($args['id']) ? $args['id'] : $args['id_objet'];
 		if (!autoriser($faire . 'extra', $quoi, $id, '', array(
@@ -184,7 +185,9 @@ function cextras_formulaire_verifier($flux){
 
 		// restreindre la vue selon les autorisations
 		$id_objet = $flux['args']['args'][0]; // ? vraiment toujours ?
-		$saisies = champs_extras_autorisation('modifier', $objet, $saisies, array_merge($flux['args'], array('id' => $id_objet)));
+		$saisies = champs_extras_autorisation('modifier', $objet, $saisies, array_merge($flux['args'], array(
+			'id' => $id_objet,
+			'contexte' => array()))); // nous ne connaissons pas le contexte dans ce pipeline
 
 		foreach ($saisies as $saisie) {
 			// verifier obligatoire
