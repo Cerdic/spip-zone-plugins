@@ -20,7 +20,7 @@ function pp_latex_porte_plume_barre_pre_charger($barres) {
 		"dropMenu"    => ma_barre(),
 		"display"     => true
 	 ));
-	
+	//	print_r($GLOBALS['meta']['adresse_site']);exit;
 	return $barres;
 }
 
@@ -29,7 +29,7 @@ function pp_latex_porte_plume_barre_pre_charger($barres) {
 function pp_latex_porte_plume_lien_classe_vers_icone($flux) {
 	$icones = array(
 		'outil_equation' => 'equation.png',
-		'outil_math' => 'math.png',
+		'outil_math' => 'mathic.png',
 		'outil_formula' => 'dollar.png',
 		'outil_brackets' => 'brackets.png',
 		'outil_squarebrackets' => 'squarebrackets.png',
@@ -56,21 +56,7 @@ function pp_latex_porte_plume_lien_classe_vers_icone($flux) {
 	return array_merge($flux, $icones);
 }
 
-function pp_latex_header_prive($texte) {
-	//$texte.= '<script type="text/javascript" src="' . _DIR_PLUGIN_PP_LATEX . 'javascript/ajoutequationbarre.js" ></script>' . "\n";
-	//
-	$texte.= '<script type="text/javascript" src="' . _DIR_PLUGIN_PP_LATEX . 'javascript/css_selector.js" ></script>' . "\n";
-	return $texte;
-}
-function pp_latex_haffice_milieau($flux) {
-	//$texte.= '<script type="text/javascript" src="' . _DIR_PLUGIN_PP_LATEX . 'javascript/ajoutequationbarre.js" ></script>' . "\n";
-	/*$flux.= '<script type="text/javascript" >
-	var but_help = getElementsBySelector(\'.outil_latexhelp a\');
-				but_help.href="'._DIR_PLUGIN_PP_LATEX.'/doc/latex_symbols.html";
-				alert(but_help.title+" "+but_help.href);
-	</script>' . "\n";*/
-	return $flux;
-}
+
 
 // "selectionType" => "word" implica che dopo una parola, seleziona l'ultima parola
 function ma_barre(){
@@ -90,7 +76,7 @@ return array(
 						array(
                                 "id"        => 'dollar',
                                 "name"      => _T('pp_latex:barre_formula'),
-                                "key"       => "$",
+                                "key"       => "4",
                                 "className" => "outil_formula",
                                 "openWith" => "$$",
                                 "closeWith" => "$$",
@@ -112,7 +98,7 @@ return array(
 						array(
                                 "id"        => 'squarebrackets',
                                 "name"      => _T('pp_latex:barre_squarebrackets'),
-                                "key"       => "è",
+                                //"key"       => "è",
                                 "className" => "outil_squarebrackets",
                                 "openWith" => "\\left[",
                                 "closeWith" => "\\right]",
@@ -143,7 +129,7 @@ return array(
 						array(
                                 "id"        => 'sqrt',
                                 "name"      => _T('pp_latex:barre_sqrt'),
-                                "key"       => "ò",
+                                //"key"       => "ò",
                                 "className" => "outil_sqrt",
                                 "openWith" => "\sqrt{",
                                 "closeWith" => "}",
@@ -154,7 +140,7 @@ return array(
 						array(
                                 "id"        => 'cdot',
                                 "name"      => _T('pp_latex:barre_cdot'),
-                                "key"       => "x",
+                                "key"       => "X",
                                 "className" => "outil_cdot",
                                 "openWith" => "\cdot",
                                 "display"   => true
@@ -163,7 +149,7 @@ return array(
 						array(
                                 "id"        => 'pm',
                                 "name"      => _T('pp_latex:barre_plusminus'),
-                                "key"       => "+",
+                                //"key"       => "+",
                                 "className" => "outil_plusminus",
                                 "openWith" => "\pm",
                                 "display"   => true
@@ -172,7 +158,7 @@ return array(
 						array(
                                 "id"        => 'system',
                                 "name"      => _T('pp_latex:barre_system'),
-                                "key"       => "s",
+                                //"key"       => "S",
                                 "className" => "outil_system",
                                 "openWith" => "$\n\left\{\begin{array}{}\n",
                                 "closeWith" => "ax+by=c\\\\\na_{1}x+b_{1}\ny=c_{1}\n\end{array}\n$",
@@ -183,7 +169,7 @@ return array(
 						array(
                                 "id"        => 'array',
                                 "name"      => _T('pp_latex:barre_array'),
-                                "key"       => "s",
+                                //"key"       => "s",
                                 "className" => "outil_array",
                                 "openWith" => "$\n\begin{array}\left\n",
                                 "closeWith" => "\n\n\\right\end{array}\n$",
@@ -194,7 +180,7 @@ return array(
 						array(
                                 "id"        => 'pedex',
                                 "name"      => _T('pp_latex:barre_pedex'),
-                                "key"       => "",
+                                "key"       => "P",
                                 "className" => "outil_pedex",
                                 "openWith" => "_{",
                                 "closeWith" => "}",
@@ -205,7 +191,7 @@ return array(
 						array(
                                 "id"        => 'vector',
                                 "name"      => _T('pp_latex:barre_vector'),
-                                "key"       => "v",
+                                "key"       => "V",
                                 "className" => "outil_vector",
                                 "openWith" => "\\vec{",
                                 "closeWith" => "}",
@@ -216,19 +202,19 @@ return array(
 						array(
                                 "id"        => 'sum',
                                 "name"      => _T('pp_latex:barre_sum'),
-                                "key"       => "v",
+                                //"key"       => "v",
                                 "className" => "outil_sum",
-                                "openWith" => "\sum",
+                                "openWith" => "\\sum",
                                 "display"   => true,
                                 //"selectionType" => "word"
                         ), 						
 						// PROD               
 						array(
-                                "id"        => 'sum',
+                                "id"        => 'prod',
                                 "name"      => _T('pp_latex:barre_prod'),
-                                "key"       => "v",
+                                "key"       => "P",
                                 "className" => "outil_prod",
-                                "openWith" => "\prod",
+                                "openWith" => "\\prod",
                                 "display"   => true,
                                 //"selectionType" => "word"
                         ), 
@@ -236,16 +222,16 @@ return array(
 						array(
                                 "id"        => 'rightarrow',
                                 "name"      => _T('pp_latex:barre_rightarrow'),
-                                "key"       => "",
+                                //"key"       => "",
                                 "className" => "outil_rightarrow",
-                                "openWith" => "\rightarrow",
+                                "openWith" => "\\rightarrow",
                                 "display"   => true
                         ), 
 						// leftARROW                     
 						array(
                                 "id"        => 'leftarrow',
                                 "name"      => _T('pp_latex:barre_leftarrow'),
-                                "key"       => "",
+                                //"key"       => "",
                                 "className" => "outil_leftarrow",
                                 "openWith" => "\\leftarrow",
                                 "display"   => true
@@ -255,7 +241,7 @@ return array(
 						array(
                                 "id"        => 'leftrightarrow',
                                 "name"      => _T('pp_latex:barre_Leftrightarrow'),
-                                "key"       => "",
+                                //"key"       => "",
                                 "className" => "outil_leftrightarrow",
                                 "openWith" => "\Leftrightarrow",
                                 "display"   => true
@@ -264,7 +250,7 @@ return array(
 						array(
                                 "id"        => 'leftarrow',
                                 "name"      => _T('pp_latex:barre_Rightarrow'),
-                                "key"       => "",
+                                //"key"       => "",
                                 "className" => "outil_rrightarrow",
                                 "openWith" => "\Rightarrow",
                                 "display"   => true
@@ -272,17 +258,15 @@ return array(
 						// help                     
 						array(
                                 "id"        => 'latexhelp',
-                                "name"      => 'aiuto',
+                                "name"      => _T('pp_latex:latex_reference'),
                                 "className" => "outil_latexhelp",
                                 "display"   => true,
-								/* "replaceWith" => "function(h){ helpme();}", 
-								 'functions'         => "
-								 function helpme()
-								 {
-									alert('ciao');
-									var but_help = getElementsBySelector('.outil_latexhelp a');
-									but_help.href=\""._DIR_PLUGIN_PP_LATEX.'/doc/latex_symbols.html";
-								 }'*/
+								"beforeInsert" => "function(h) { window.open('".$GLOBALS['meta']['adresse_site']."/\?page=latex','LaTeX commands','menubar=no,scrollbars=yes,status=0,toolbar=no,location=0,left=300,width=760'); }",
+								//"beforeInsert" => "function(h) { jQuery.modalboxload('".$GLOBALS['meta']['adresse_site']."/\?page=latex'); }",// popin code
+								/* 
+								original document code
+								http://web.ift.uib.no/Fysisk/Teori/KURS/WRK/TeX/
+								*/
 								 
                         ),  
 					);				
