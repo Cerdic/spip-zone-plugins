@@ -41,7 +41,6 @@ function exclure_sect_pre_boucle(&$boucle){
 					));
 		}	
     }
-	$boucle->where[] = $where;
     return $boucle;
 }
 ?>
