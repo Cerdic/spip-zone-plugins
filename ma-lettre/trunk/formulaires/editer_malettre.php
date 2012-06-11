@@ -18,7 +18,7 @@ function formulaires_editer_malettre_charger_dist(){
  * Vérification des valeurs du formulaire
  */
 function formulaires_editer_malettre_verifier_dist(){
-	$erreurs = array();
+	$erreurs = array();    
 	return $erreurs;
 }
 
@@ -41,7 +41,8 @@ function formulaires_editer_malettre_traiter_dist(){
   define('_DIR_PLUGIN_MALETTRE',(_DIR_PLUGINS.end($p)));
   $path_plugin = dirname(__file__)."/../";
   
-   $errorFlag = false;
+  $errorFlag = false;
+  $message = "";
   
                 // ancien editer_malettre
 	              $lettre_title = trim(strip_tags(_request('lettre_title'))); 
@@ -116,12 +117,13 @@ function formulaires_editer_malettre_traiter_dist(){
 
   
   $redirect = "";
+  
   // pas d'erreur, on passe à l'étape suivante: choix destinaires
   if (!$errorFlag) {
       refuser_traiter_formulaire_ajax();
       $redirect = parametre_url(generer_url_ecrire('malettre_envoi'),'lettre_title',$lettre_title );
   }
-
+ 
 	// message
 	return array(
 		"editable" => false,
