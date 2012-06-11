@@ -270,7 +270,7 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 
 	// creer le paquet.xml
 	// en declarant tous les fichiers necessaires
-	$fichiers_coches = $data['paquet']['fichiers'];
+	$fichiers_coches = isset($data['paquet']['fichiers']) ? $data['paquet']['fichiers'] : array();
 	$data['paquet']['fichiers'] = $fichiers;
 	fabriquer_fichier("paquet.xml", $data);
 	// on remet ce qu'avait saisi l'utilisateur
@@ -351,7 +351,7 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 			}
 
 			// fichiers echafaudes par SPIP mais demandes explicitement
-			if (is_array($objet['echafaudages'])) {
+			if (isset($objet['echafaudages']) AND is_array($objet['echafaudages'])) {
 				foreach ($objet['echafaudages'] as $fichier) {
 					fabriquer_fichier($fichier, $data);
 				}
@@ -392,7 +392,7 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 		// sinon la plus proche, avant,
 		// sinon le logo de l'objet, sinon le logo du plugin.
 		foreach (array(32, 24, 16) as $taille) {
-			if (($i = $image['logo'][$taille]['fichier'])
+			if ((isset($image['logo'][$taille]) AND $i = $image['logo'][$taille]['fichier'])
 			OR ($i = $i_precedent)
 			OR ($i = $image['logo'][0]['fichier'])
 			OR ($i = $images['paquet']['logo'][0]['fichier'])) {
@@ -531,7 +531,7 @@ function fabriquer_miniature($prefixe, $src, $nom, $taille=128, $variante='') {
 // pour les objets demandes
 function fabrique_fichiers_paquets($data) {
 	$fichiers = array();
-	if (is_array($data['paquet']['fichiers'])) {
+	if (isset($data['paquet']['fichiers']) AND is_array($data['paquet']['fichiers'])) {
 		$fichiers = $data['paquet']['fichiers'];
 	}
 	

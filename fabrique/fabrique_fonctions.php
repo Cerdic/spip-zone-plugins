@@ -169,13 +169,13 @@ function champ_present($objet, $champ) {
 		}
 	}
 	// id_rubrique, id_secteur
-	if (is_array($objet['rubriques'])) {
+	if (isset($objet['rubriques']) AND is_array($objet['rubriques'])) {
 		if (in_array($champ, $objet['rubriques'])) {
 			return " "; // true
 		}
 	}
 	// lang, langue_choisie, id_trad
-	if (is_array($objet['langues'])) {
+	if (isset($objet['langues']) AND is_array($objet['langues'])) {
 		if (in_array($champ, $objet['langues'])) {
 			return " "; // true
 		}
@@ -227,21 +227,21 @@ function option_presente($objet, $champ) {
 	}
 
 	// id_rubrique, vue_rubrique
-	if (is_array($objet['rubriques'])) {
+	if (isset($objet['rubriques']) AND is_array($objet['rubriques'])) {
 		if (in_array($champ, $objet['rubriques'])) {
 			return " "; // true
 		}
 	}
 
 	// lang, id_trad
-	if (is_array($objet['langues'])) {
+	if (isset($objet['langues']) AND is_array($objet['langues'])) {
 		if (in_array($champ, $objet['langues'])) {
 			return " "; // true
 		}
 	}
 	
 	// menu_edition, outils_rapides
-	if (is_array($objet['boutons'])) {
+	if (isset($objet['boutons']) AND is_array($objet['boutons'])) {
 		if (in_array($champ, $objet['boutons'])) {
 			return " "; // true
 		}
