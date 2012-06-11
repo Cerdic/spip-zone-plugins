@@ -9,23 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'activer_edition_directe' => 'Direkt Edition für :',
-	'article' => 'Artikel',
-	'auteur' => 'Autoren',
-
-	// B
-	'breve' => 'Meldungen',
-
-	// G
-	'groupe_mots' => 'Schlagwortgruppe',
-
-	// M
-	'mot' => 'Schlagwort',
-
-	// R
-	'rubrique' => 'Rubriken',
-
-	// S
-	'site' => 'Websites',
 
 	// T
 	'titre_plugin' => 'Direkte Edition',

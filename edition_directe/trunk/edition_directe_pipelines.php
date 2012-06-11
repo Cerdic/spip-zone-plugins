@@ -45,4 +45,42 @@ function edition_directe_afficher_config_objet($flux){
 }
 
 
+function edition_directe_recuperer_fond($flux){
+	
+	include_spip('inc/config');
+	include_spip('base/objets');
+	$fond=$flux['args']['fond'] ;
+	$contexte=$flux['args']['contexte'] ;
+	$objets=array();
+	$objets=lire_config('edition_directe/objets');
+	
+	// Sie rien n'est choisit, tout est en édition directe
+	if(count($objets)<1){
+		$liste_objets=lister_tables_objets_sql();
+
+		foreach($liste_objets AS $o=>$valeur){
+			$objets[]=$valeur['page'];
+			}
+		}
+	
+	// Insertion du formulaire d'édition	
+	foreach($objets as $objet){
+		  if ($fond == 'prive/squelettes/contenu/'.$objet){
+				$contexte['objet']=$objet;
+				$contexte['id_objet']=$contexte['id_'.$objet];
+				$texte=$flux['data']['texte'];
+				$edition=recuperer_fond('prive/echafaudage/contenu/objet_edit_directe',$contexte,array('ajax'=>true));
+				$patterns = array('/class=\'icone/','/<!--\/hd-->/');
+				$replacements = array('class="icone invisible',$edition.'<!--/hd-->');						
+				$flux['data']['texte'] = preg_replace($patterns,$replacements,$texte);
+		    }
+		//Suppression de la prévisualisation	
+		 if ($fond == 'prive/objets/contenu/'.$objet){			
+				$flux['data']['texte'] = '';
+		    }		    
+		}
+
+ return $flux;   
+}
+
 ?>

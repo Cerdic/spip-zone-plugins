@@ -1,9 +1,9 @@
 <paquet
 	   prefix="edition_directe"
 	   categorie="edition"
-	   version="3.0.1"
+	   version="3.1.0"
 	   etat="test"
-	   compatibilite="[3.0.0-alpha2;3.0.*]"
+	   compatibilite="[3.0.0;3.0.*]"
 	   logo="img/logo_aed_edit_128.png"
 	   documentation="http://www.spip-contrib.net/Edition-directe-3"
 	   >	
@@ -17,11 +17,9 @@
 
 	<pipeline nom="header_prive" inclure="edition_directe_pipelines.php" />
 	<pipeline nom="afficher_config_objet" inclure="edition_directe_pipelines.php" />	
+	<pipeline nom="recuperer_fond" inclure="edition_directe_pipelines.php" />	
 	
 
-	<utilise nom="breves" compatibilite="[1.1.4;[" />
-	<utilise nom="sites" compatibilite="[1.4.1;[" />
-	<utilise nom="mots" compatibilite="[2.1.4;[" />
 	<necessite nom="saisies" compatibilite="[1.14.0;[" />	
 	<menu nom="configurer_edition_directe" titre="edir:titre_plugin" parent="menu_configuration" icone="images/edir-16.png"/>	
 

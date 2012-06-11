@@ -7,23 +7,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'activer_edition_directe' => 'Activer l\'édition directe pour :',
-	'article' => 'Articles',
-	'auteur' => 'Auteurs',
-
-	// B
-	'breve' => 'Brèves',
-
-	// G
-	'groupe_mots' => 'Groupes Mots',
-
-	// M
-	'mot' => 'Mots',
-
-	// R
-	'rubrique' => 'Rubriques',
-
-	// S
-	'site' => 'Sites',
 
 	// T
 	'titre_plugin' => 'Edition directe',

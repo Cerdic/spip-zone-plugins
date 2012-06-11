@@ -9,23 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'activer_edition_directe' => 'فعال سازي ويرايش مستقيم براي: ',
-	'article' => 'مقاله‌ها',
-	'auteur' => 'نويسندگان',
 
-	// B
-	'breve' => 'خبرها',
-
-	// G
-	'groupe_mots' => 'گروه‌واژه‌ها',
-
-	// M
-	'mot' => 'واژه‌ها',
-
-	// R
-	'rubrique' => 'بخش‌ها',
-
-	// S
-	'site' => 'سايت‌ها',
 
 	// T
 	'titre_plugin' => 'ويرايش مستقيم',
