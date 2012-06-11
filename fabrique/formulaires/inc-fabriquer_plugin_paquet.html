@@ -10,7 +10,8 @@
 	[(#SAISIE{input, paquet/nom, label=<:fabrique:label_nom:>, obligatoire=oui})]
 	[(#SAISIE{input, paquet/slogan, label=<:fabrique:label_slogan:>})]
 	[(#SAISIE{textarea, paquet/description, label=<:fabrique:label_description:>, rows=4})]
-	[(#SAISIE{input, paquet/logo/0, label=<:fabrique:label_logo:>, type=file})]
+	[(#REM) valeur vide pour eviter une notice car sinon, la valeur recue est un tableau ]
+	[(#SAISIE{input, paquet/logo/0, label=<:fabrique:label_logo:>, type=file, valeur=''})]
 	</ul>
 	[(#ENV{paquet/logo/0/fichier}|oui)
 		<div class='center'>

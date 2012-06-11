@@ -423,7 +423,11 @@ function fabrique_lister_tables($objets, $quoi='tout') {
 	$hash = md5(serialize($objets));
 	
 	if (!isset($tables[$hash])) {
-		$tables[$hash] = array();
+		$tables[$hash] = array(
+			'tout' => array(),
+			'objets' => array(),
+			'liens' => array(),
+		);
 		foreach ($objets as $o) {
 			// tables principales
 			if ($o['table']) {

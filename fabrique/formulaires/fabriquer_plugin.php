@@ -15,14 +15,13 @@ function formulaires_fabriquer_plugin_charger_dist() {
 	$v_futur = explode('.', $v_spip);
 	array_pop($v_futur);
 	$v_futur = implode('.', $v_futur) . '.*';
-
 	$contexte = array(
 		'fabrique' => array(), // ne sert pas dans ce formulaire, mais un jour peut être
 		'paquet' => array(
-			#'prefixe' => 'Nouveau plugin',
+			'prefixe' => '',// 'Nouveau plugin',
 			'version' => '1.0.0',
 			'auteur' => $GLOBALS['visiteur_session']['nom'],
-			'auteur_lien' => $GLOBALS['visiteur_session']['url'],
+			'auteur_lien' => $GLOBALS['visiteur_session']['url_site'],
 			'categorie' => '',
 			'etat' => 'dev', // c'est du développement au debut, normalement.
 			'compatibilite' => '[' . $v_spip . ';' . $v_futur . ']',
@@ -99,6 +98,8 @@ function formulaires_fabriquer_plugin_verifier_dist(){
 		return array(); // forcer aucune erreur
 	}
 
+	$erreurs = array();
+
 	$paquet = _request('paquet');
 	foreach (array('prefixe', 'version', 'categorie', 'etat', 'nom') as $obli) {
 		if (!$paquet[$obli]) {
@@ -107,7 +108,7 @@ function formulaires_fabriquer_plugin_verifier_dist(){
 	}
 
 	$objets = _request('objets');
-	if (is_array($objects)) {
+	if (is_array($objets)) {
 		foreach ($objets as $c => $o) {
 			foreach (array('nom', 'table') as $obli) {
 				if (!$o[$obli]) {
@@ -244,14 +245,12 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 			}
 		}
 	}
-	// on nettoie les saisies checkbox de vue_liens (equivalent de choisir_objets)
-	// qui peuvent ne rien envoyer
+	// on nettoie les saisies checkbox de vue_liens qui peuvent ne rien envoyer
 	// on nettoie une eventuelle table ayant servi a pre-remplir l'objet
 	foreach ($data['objets'] as $c => $o) {
-		if (!is_array($o['vue_liens'])) {
+		if (!isset($o['vue_liens']) OR !is_array($o['vue_liens'])) {
 			$o['vue_liens'] = array();
 		}
-		$data['objets'][$c]['vue_liens'] = array_filter($o['vue_liens']);
 		unset($data['objets'][$c]['renseigner_avec_table']);
 	}
 

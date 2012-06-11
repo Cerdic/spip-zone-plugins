@@ -47,8 +47,9 @@
 <h3><a href="#description"><:fabrique:legend_logo:></a></h3>
 <div>
 	<ul>
+	[(#REM) valeur vide pour eviter une notice car sinon, la valeur recue est un tableau ]
 	[(#SAISIE{input, objets/#CLE/logo/0,
-		label=<:fabrique:label_logo:>, type=file})]
+		label=<:fabrique:label_logo:>, type=file, valeur=''})]
 	</ul>
 
 	[(#ENV{objets/#CLE/logo/0/fichier}|oui)
@@ -63,7 +64,8 @@
 		<p class='explication'><:fabrique:legend_logo_specifiques_explication:></p>
 		<ul>
 		<BOUCLE_logos(DATA){liste 32,24,16}>
-			[(#SAISIE{input, objets/#_objet:CLE/logo/#VALEUR, label=<:fabrique:label_logo_taille{taille=#VALEUR}:>, type=file})]
+			[(#REM) valeur vide pour eviter une notice car sinon, la valeur recue est un tableau ]
+			[(#SAISIE{input, objets/#_objet:CLE/logo/#VALEUR, label=<:fabrique:label_logo_taille{taille=#VALEUR}:>, type=file, valeur=''})]
 			[(#ENV{[objets/#_objet:CLE/logo/(#VALEUR)/fichier]}|oui)
 				<div class='center'>
 				[(#ENV{[objets/#_objet:CLE/logo/(#VALEUR)/fichier]}|fabrique_miniature_image{#VALEUR})]
