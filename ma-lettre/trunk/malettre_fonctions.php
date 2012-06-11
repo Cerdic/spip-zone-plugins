@@ -21,7 +21,7 @@ function malettre_get_contents($patron,$id_edito=0,$selection,$selection_eve,$la
   // piste denisb: explorer le 3er argument de recuperer_fond $options['compil'][0]
   $texte_patron = str_replace("ecrire/?exec=article&", "?page=article&",$texte_patron);
   $texte_patron = str_replace("ecrire/?exec=rubrique&", "?page=rubrique&",$texte_patron);
-  $texte_patron = str_replace("ecrire/?exec=auteur&", "?page=article&",$texte_patron);
+  $texte_patron = str_replace("ecrire/?exec=auteur&", "?page=auteur&",$texte_patron);
 	
   return $texte_patron;	
   			          	
