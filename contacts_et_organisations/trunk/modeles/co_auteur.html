@@ -6,7 +6,7 @@
 ]
 
 <fieldset class="co_vcard">
-	<BOUCLE_auteur(AUTEURS){id_auteur}{tous}>
+	<BOUCLE_auteur(AUTEURS){id_auteur=#ENV{id}}{tous}>
 		[(#REM) L'auteur est un contact ]
 		<BOUCLE_c(CONTACTS){id_auteur}>
 			<legend><span class="c_ou_o c">[C] </span>[<span class="#EDIT{prenom}">(#PRENOM)</span>&nbsp;][<span class="#EDIT{nom}">(#NOM)]<span class="num_auteur">#ID_AUTEUR</span></legend>
