@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_page_speciale' => 'Pridá odkaz na stránku šablóny pomocou adresy formulára <code>spip.php?page=name&param1=xx&param2=yyy...</code> Takéto stránky často využívajú zásuvné moduly.',
 	'description_menu_page_speciale_zajax' => 'Pridať odkaz do bolu na stránke, na ktorú sa dá dostať progredníctvom adresy typu <code>spip.php?page=name&param1=xx&param2=yyy...</code> Na to treba šablónu typu Z a zásuvný modul <a href="http://www.spip-contrib.net/MediaBox">médiabox.</a>',
 	'description_menu_rubriques_articles' => 'Zobrazí zoznam rubrík, v ktorom môžu byť podrubriky a články včlenené do rôznych úrovní. Podľa predvolených nastavení sa zobrazia všetky rubriky počnúc koreňovým adresárom stránky a budú zotriedené podľa názvu (najprv čísla, potom písmená). Články v danej rubrike budú vždy uvedené po jej podrubrikách.',
-	'description_menu_rubriques_completes' => 'Affiche une liste de rubriques et, si on veut, les sous-rubriques sur plusieurs niveaux. Par défaut, affiche toutes les rubriques depuis la racine, triées par titre (numériquement puis alphabétiquement).', # NEW
+	'description_menu_rubriques_completes' => 'Zobrazí zoznam rubrík a ak existujú, aj podrubrík na mnohých úrovniach. Podľa predvolených nastavení zobrazí všetky rubriky od koreňového adresára zotriedené podľa názvu (najprv podľa čísel potom podľa abecedy).',
 	'description_menu_secteurlangue' => 'This entry can be used by sites which have one language per sector. It displays a menu which lists the sections of the sector corresponding to the language of the page, and if desired the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
 	'description_menu_texte_libre' => 'Jednoducho text, ktorý chcete, alebo kód jazyka SPIP (<:...:>)',
 
@@ -161,7 +161,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_objet' => 'Článok, rubrika alebo iný objekt SPIPU',
 	'nom_menu_page_speciale' => 'Odkaz na šablónu stránky',
 	'nom_menu_page_speciale_zajax' => 'Blok na stránke v SPIPe',
-	'nom_menu_rubriques_completes' => 'Liste ou arborescence de rubriques et d\'articles (avec beaucoup d\'options)', # NEW
+	'nom_menu_rubriques_completes' => 'Zoznam alebo stromová štruktúra  rubrík a článkov (s mnohými možnosťami)',
 	'nom_menu_rubriques_evenements' => 'Udalosti, ktoré sa týkajú rubriky',
 	'nom_menu_secteurlangue' => 'Jazykové sektory',
 	'nom_menu_texte_libre' => 'Potvrdený text',
