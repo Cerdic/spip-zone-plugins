@@ -28,6 +28,6 @@ function action_editer_seo_dist() {
 	if ($err)
 		spip_log("echec editeur seo: $err",_LOG_ERREUR);
 
-	return array($id_article,$err);
+	return array(array($objet, $id_objet),$err);
 }
 ?>

@@ -7,7 +7,7 @@ include_spip('inc/meta');
 function formulaires_configurer_seo_urls_canoniques_charger_dist(){
 
 	$config = unserialize($GLOBALS['meta']['seo']);
-	$valeurs = $config['canonical_url'];
+	$valeurs = isset($config['canonical_url']) ? $config['canonical_url'] : array();
 	
 	$valeurs['editable'] = true;
 	
@@ -20,6 +20,9 @@ function formulaires_configurer_seo_urls_canoniques_charger_dist(){
 
 function formulaires_configurer_seo_urls_canoniques_traiter_dist(){
 	$config = unserialize($GLOBALS['meta']['seo']);
+	if (!isset($config['canonical_url'])) {
+		$config['canonical_url'] = array();
+	}
 	$config['canonical_url']['activate'] = _request('activate','no');
 	$config = serialize($config);
 	ecrire_meta('seo',$config);

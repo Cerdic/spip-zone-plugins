@@ -7,7 +7,7 @@ include_spip('inc/meta');
 function formulaires_configurer_seo_ganalytics_charger_dist(){
 
 	$config = unserialize($GLOBALS['meta']['seo']);
-	$valeurs = $config['analytics'];
+	$valeurs = isset($config['analytics']) ? $config['analytics'] : array('id' => '') ;
 	$valeurs['analytics_id'] = $valeurs['id'];
 	
 	$valeurs['editable'] = true;
@@ -21,6 +21,9 @@ function formulaires_configurer_seo_ganalytics_charger_dist(){
 
 function formulaires_configurer_seo_ganalytics_traiter_dist(){
 	$config = unserialize($GLOBALS['meta']['seo']);
+	if (!isset($config['analytics'])) {
+		$config['analytics'] = array();
+	}
 	$config['analytics']['activate'] = _request('activate','no');
 	$config['analytics']['id'] = _request('analytics_id',''); 
 	$config = serialize($config);

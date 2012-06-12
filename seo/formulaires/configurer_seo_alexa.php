@@ -7,7 +7,7 @@ include_spip('inc/meta');
 function formulaires_configurer_seo_alexa_charger_dist(){
 
 	$config = unserialize($GLOBALS['meta']['seo']);
-	$valeurs = $config['alexa'];
+	$valeurs = isset($config['alexa']) ? $config['alexa'] : array('id' => '');
 	$valeurs['alexa_id'] = $valeurs['id'];
 	
 	$valeurs['editable'] = true;
@@ -21,6 +21,9 @@ function formulaires_configurer_seo_alexa_charger_dist(){
 
 function formulaires_configurer_seo_alexa_traiter_dist(){
 	$config = unserialize($GLOBALS['meta']['seo']);
+	if (!isset($config['alexa'])) {
+		$config['alexa'] = array();
+	}
 	$config['alexa']['activate'] = _request('activate','no');
 	$config['alexa']['id'] = _request('alexa_id',''); 
 	$config = serialize($config);

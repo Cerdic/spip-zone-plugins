@@ -26,6 +26,7 @@ function formulaires_editer_seo_identifier_dist($objet, $id_objet, $retour=''){
 }
 
 function formulaires_editer_seo_verifier($objet, $id_objet, $retour=''){
+	$erreurs = array();
 	return $erreurs;
 }
 

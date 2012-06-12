@@ -7,14 +7,14 @@ include_spip('inc/meta');
 function formulaires_configurer_seo_metas_charger_dist(){
 
 	$config = unserialize($GLOBALS['meta']['seo']);
-	$valeurs = $config['meta_tags'];
-	if(is_array($valeurs['tag'])){
+	$valeurs = isset($config['meta_tags']) ? $config['meta_tags'] : array();
+	if(isset($valeurs['tag']) and is_array($valeurs['tag'])){
 		foreach($valeurs['tag'] as $tag => $val){
 			$valeurs[$tag] = $val;
 			unset($valeurs['tag'][$tag]);
 		}
 	}
-	if(is_array($valeurs['default'])){
+	if(isset($valeurs['default']) and is_array($valeurs['default'])){
 		foreach($valeurs['default'] as $tag => $val){
 			$valeurs['default_'.$tag] = $val;
 			unset($valeurs['default'][$tag]);
@@ -34,7 +34,9 @@ function formulaires_configurer_seo_metas_charger_dist(){
 
 function formulaires_configurer_seo_metas_traiter_dist(){
 	$config = unserialize($GLOBALS['meta']['seo']);
-	
+	if (!isset($config['meta_tags'])) {
+		$config['meta_tags'] = array();
+	}
 	$config['meta_tags']['activate'] = _request('activate','no');
 	$config['meta_tags']['activate_editing'] = _request('activate','no');
 	

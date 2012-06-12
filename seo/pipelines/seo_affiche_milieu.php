@@ -15,7 +15,7 @@ function seo_affiche_milieu($vars) {
 	include_spip('inc/autoriser');
 	include_spip('inc/presentation');
 	$config = unserialize($GLOBALS['meta']['seo']);
-	
+
 	// Rubrique
 	if (in_array($vars["args"]["exec"], array('naviguer','rubrique')) && $vars["args"]["id_rubrique"] != '') {
 		$objet = 'rubrique';
@@ -33,7 +33,9 @@ function seo_affiche_milieu($vars) {
 	if ($config['meta_tags']['activate'] != 'yes' || $config['meta_tags']['activate_editing'] != 'yes') {
 		return $vars;
 	}
-	
+
+	$ret = '';
+
 	$bouton = bouton_block_depliable(_T('seo:meta_tags'), false, "SEO");
 	$ret .= debut_block_depliable(false, "SEO");
 	

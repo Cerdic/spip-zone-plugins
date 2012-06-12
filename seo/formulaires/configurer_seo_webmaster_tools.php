@@ -7,7 +7,7 @@ include_spip('inc/meta');
 function formulaires_configurer_seo_webmaster_tools_charger_dist(){
 
 	$config = unserialize($GLOBALS['meta']['seo']);
-	$valeurs = $config['webmaster_tools'];
+	$valeurs = isset($config['webmaster_tools']) ? $config['webmaster_tools'] : array('id' => '');
 	$valeurs['webmaster_tools_id'] = $valeurs['id'];
 	
 	$valeurs['editable'] = true;
@@ -21,6 +21,9 @@ function formulaires_configurer_seo_webmaster_tools_charger_dist(){
 
 function formulaires_configurer_seo_webmaster_tools_traiter_dist(){
 	$config = unserialize($GLOBALS['meta']['seo']);
+	if (!isset($config['webmaster_tools'])) {
+		$config['webmaster_tools'] = array();
+	}
 	$config['webmaster_tools']['activate'] = _request('activate','no');
 	$config['webmaster_tools']['id'] = _request('webmaster_tools_id',''); 
 	$config = serialize($config);

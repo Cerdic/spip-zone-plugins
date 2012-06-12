@@ -20,6 +20,9 @@ function formulaires_configurer_seo_insert_head_charger_dist(){
 
 function formulaires_configurer_seo_insert_head_traiter_dist(){
 	$config = unserialize($GLOBALS['meta']['seo']);
+	if (!isset($config['insert_head'])) {
+		$config['insert_head'] = array();
+	}
 	$config['insert_head']['activate'] = _request('activate','no');
 	$config = serialize($config);
 	ecrire_meta('seo',$config);
