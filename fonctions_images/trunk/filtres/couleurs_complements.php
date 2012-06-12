@@ -6,13 +6,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * http://www.paris-beyrouth.org/Une-palette-de-couleurs
  */
 function couleur_chroma ($coul, $num) {
-
 	$pos = substr($num, 0, strpos($num, "/")) -  1;
 	$tot = substr($num, strpos($num, "/")+1, strlen($num));
-
-	include_spip("inc/filtres_images");
+	
 	include_spip("filtres/images_complements");
-	$couleurs = couleur_hex_to_dec($coul);
+	$couleurs = _couleur_hex_to_dec($coul);
 	$r= $couleurs["red"];
 	$g= $couleurs["green"];
 	$b= $couleurs["blue"];
@@ -30,7 +28,7 @@ function couleur_chroma ($coul, $num) {
 	$g = $rgb["g"];
 	$b = $rgb["b"];
 
-	$couleurs = couleur_dec_to_hex($r, $g, $b);
+	$couleurs = _couleur_dec_to_hex($r, $g, $b);
 
 	return $couleurs;
 }
@@ -39,9 +37,7 @@ function couleur_chroma ($coul, $num) {
  * Sature (ou desature) une couleur
  */
 function couleur_saturer ($coul, $val=1.2) {
-
-	include_spip("inc/filtres_images");
-	$couleurs = couleur_hex_to_dec($coul);
+	$couleurs = _couleur_hex_to_dec($coul);
 	$r= $couleurs["red"];
 	$g= $couleurs["green"];
 	$b= $couleurs["blue"];
@@ -61,7 +57,7 @@ function couleur_saturer ($coul, $val=1.2) {
 	$g = $rgb["g"];
 	$b = $rgb["b"];
 
-	$couleurs = couleur_dec_to_hex($r, $g, $b);
+	$couleurs = _couleur_dec_to_hex($r, $g, $b);
 
 	return $couleurs;
 }
@@ -71,7 +67,6 @@ function couleur_saturer ($coul, $val=1.2) {
  * dont le d&eacute;coupage est pass&eacute; en param&egrave;tre.
  */
 function couleur_tableau_chroma($coul, $tot=6, $debut=1, $fin=0){
-
 	include_spip("inc/filtres");
 	if($fin==0) $fin = $tot;
 
@@ -92,10 +87,7 @@ function couleur_tableau_chroma($coul, $tot=6, $debut=1, $fin=0){
  * $val entre +/- 0 à 360
  */
 function couleur_teinter ($coul, $val=30) {
-
-	include_spip("inc/filtres_images");
-	include_spip("filtres/images_complements");
-	$couleurs = couleur_hex_to_dec($coul);
+	$couleurs = _couleur_hex_to_dec($coul);
 	$r= $couleurs["red"];
 	$g= $couleurs["green"];
 	$b= $couleurs["blue"];
@@ -115,7 +107,7 @@ function couleur_teinter ($coul, $val=30) {
 	$g = $rgb["g"];
 	$b = $rgb["b"];
 
-	$couleurs = couleur_dec_to_hex($r, $g, $b);
+	$couleurs = _couleur_dec_to_hex($r, $g, $b);
 
 	return $couleurs;
 }
@@ -128,9 +120,7 @@ function couleur_teinter ($coul, $val=30) {
  * Le troisieme parametre permet de rendre plus lumineux ou plus sombre ce qui l'est deja
  */
 function couleur_inverserluminosite($coul,$pourcentage=20, $intensifier=false) {
-	include_spip("inc/filtres_images");
-	include_spip('filtres/images_complements');
-	$couleurs = couleur_hex_to_dec($coul);
+	$couleurs = _couleur_hex_to_dec($coul);
 	$r= $couleurs["red"];
 	$g= $couleurs["green"];
 	$b= $couleurs["blue"];
@@ -159,14 +149,13 @@ function couleur_inverserluminosite($coul,$pourcentage=20, $intensifier=false) {
 	$g = $rgb["g"];
 	$b = $rgb["b"];
 
-	$couleurs = couleur_dec_to_hex($r, $g, $b);
+	$couleurs = _couleur_dec_to_hex($r, $g, $b);
 
 	return $couleurs;
 }
 
 function couleur_foncerluminosite($coul,$pourcentage=20) {
-	include_spip("inc/filtres_images");
-	$couleurs = couleur_hex_to_dec($coul);
+	$couleurs = _couleur_hex_to_dec($coul);
 	$r= $couleurs["red"];
 	$g= $couleurs["green"];
 	$b= $couleurs["blue"];
@@ -183,14 +172,13 @@ function couleur_foncerluminosite($coul,$pourcentage=20) {
 	$g = $rgb["g"];
 	$b = $rgb["b"];
 
-	$couleurs = couleur_dec_to_hex($r, $g, $b);
+	$couleurs = _couleur_dec_to_hex($r, $g, $b);
 
 	return $couleurs;
 }
 
-function couleur_eclaircirluminosite($coul,$pourcentage=20) {
-	include_spip("inc/filtres_images");
-	$couleurs = couleur_hex_to_dec($coul);
+function couleur_eclaircirluminosite($coul,$pourcentage=20) {	
+	$couleurs = _couleur_hex_to_dec($coul);
 	$r= $couleurs["red"];
 	$g= $couleurs["green"];
 	$b= $couleurs["blue"];
@@ -207,7 +195,7 @@ function couleur_eclaircirluminosite($coul,$pourcentage=20) {
 	$g = $rgb["g"];
 	$b = $rgb["b"];
 
-	$couleurs = couleur_dec_to_hex($r, $g, $b);
+	$couleurs = _couleur_dec_to_hex($r, $g, $b);
 
 	return $couleurs;
 }

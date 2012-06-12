@@ -2,8 +2,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/filtres_images_compat');
-
 /* ---------- fonctions de Paris Beyrouth ------------------------- */
 
 /*
@@ -98,7 +96,7 @@ function image_estampage_alpha($im, $trait=1, $prof=1)
 	$dec1 = floor($trait/2);
 	$dec2 = ceil($trait/2);
 
-	$image = image_valeurs_trans($im, "estampage-$trait-$prof");
+	$image = _image_valeurs_trans($im, "estampage-$trait-$prof");
 	if (!$image) return("");
 
 
@@ -143,26 +141,21 @@ function image_estampage_alpha($im, $trait=1, $prof=1)
 				imagesetpixel ($im_, $x, $y, $color);
 			}
 		}
-		$image["fonction_image"]($im_, "$dest");
+		_image_gd_output($im_,$image);
+		imagedestroy($im_);
+		imagedestroy($im);
 	}
 
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-	if (strlen($style) > 1) $tags="$tags style='$style'";
-
-	return "<img src='$dest'$tags />";
+	return _image_ecrire_tag($image,array('src'=>$dest));
 }
 
 
 
-/*
+/**
  * http://www.paris-beyrouth.org/De-saturer-une-image-en-passant-en
  */
-function image_saturer($im, $sat=1)
-{
-	$image = image_valeurs_trans($im, "saturer-$sat");
+function image_saturer($im, $sat=1){
+	$image = _image_valeurs_trans($im, "saturer-$sat");
 	if (!$image) return("");
 
 	$x_i = $image["largeur"];
@@ -207,14 +200,12 @@ function image_saturer($im, $sat=1)
 				$color = ImageColorAllocateAlpha( $im_, $r, $g, $b , $a );
 				imagesetpixel ($im_, $x, $y, $color);				}
 		}
-		$image["fonction_image"]($im_, "$dest");		}
+		_image_gd_output($im_,$image);
+		imagedestroy($im_);
+		imagedestroy($im);
+	}
 
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-
-	return "<img src='$dest'$tags />";
+	return _image_ecrire_tag($image,array('src'=>$dest));
 }
 
 
@@ -225,7 +216,7 @@ function image_niveaux_gris_auto($im, $limite=1000) {
 
 	// $limite=1000: les nuances min et max representent 0,1% du total
 
-	$image = image_valeurs_trans($im, "niveaux_gris_auto-$limite");
+	$image = _image_valeurs_trans($im, "niveaux_gris_auto-$limite");
 	if (!$image) return("");
 
 	$x_i = $image["largeur"];
@@ -316,19 +307,12 @@ function image_niveaux_gris_auto($im, $limite=1000) {
 				imagesetpixel ($im2, $x, $y, $color);
 			}
 		}
-
-		$image["fonction_image"]($im2, "$dest");
+		_image_gd_output($im2,$image);
 		imagedestroy($im2);
 		imagedestroy($im);
 	}
 
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-	if (strlen($style) > 1) $tags="$tags style='$style'";
-
-	return "<img src='$dest'$tags />";
+	return _image_ecrire_tag($image,array('src'=>$dest));
 }
 
 /*
@@ -337,7 +321,7 @@ function image_niveaux_gris_auto($im, $limite=1000) {
 function image_podpod($im, $coul='000000', $deb=0, $fin=70)
 {
 	include_spip("inc/filtres_images");
-	$image = image_valeurs_trans($im, "podpod-$coul-$deb-$fin","png");
+	$image = _image_valeurs_trans($im, "podpod-$coul-$deb-$fin","png");
 	if (!$image) return("");
 
 	$couleurs = couleur_hex_to_dec($coul);
@@ -379,15 +363,12 @@ function image_podpod($im, $coul='000000', $deb=0, $fin=70)
 				imagesetpixel ($im_, $x, $y, $color);
 			}
 		}
-		$image["fonction_image"]($im_, "$dest");
+		_image_gd_output($im2,$image);
+		imagedestroy($im2);
+		imagedestroy($im);
 	}
 
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-
-	return "<img src='$dest'$tags />";
+	return _image_ecrire_tag($image,array('src'=>$dest));
 }
 
 
@@ -407,7 +388,7 @@ function image_courbe($im, $couche, $courb="") {
 		}
 	}
 
-	$image = image_valeurs_trans($im, "courbe-$couche-".serialize($courbe));
+	$image = _image_valeurs_trans($im, "courbe-$couche-".serialize($courbe));
 	if (!$image) return("");
 
 	$x_i = $image["largeur"];
@@ -462,18 +443,12 @@ function image_courbe($im, $couche, $courb="") {
 				imagesetpixel ($im_, $x, $y, $color);
 			}
 		}
-
-		$image["fonction_image"]($im_, "$dest");
+		_image_gd_output($im_,$image);
 		imagedestroy($im_);
 		imagedestroy($im);
 	}
 
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-	if (strlen($style) > 1) $tags="$tags style='$style'";
-	return "<img src='$dest'$tags />";
+	return _image_ecrire_tag($image,array('src'=>$dest));
 }
 
 
@@ -482,7 +457,7 @@ function image_courbe($im, $couche, $courb="") {
  */
 function image_float ($img, $align, $margin=10) {
 
-	$image = image_valeurs_trans($img, "float-$align", "php");
+	$image = _image_valeurs_trans($img, "float-$align", "php");
 	if (!$image) return("");
 
 	$w = $image["largeur"];
@@ -496,7 +471,7 @@ function image_float ($img, $align, $margin=10) {
 	$ret .= "<div style='position: relative; float: $align; width: 0px; height: 0px;'><img src='$im' class='format_png' alt='' style='position: absolute; $align: 0px;' /></div>";
 
 	if ($creer) {
-		$nouveau = image_valeurs_trans(image_reduire($im, 0, $precision),"");
+		$nouveau = _image_valeurs_trans(image_reduire($im, 0, $precision),"");
 		$im_n = $nouveau["fichier"];
 		$x_i = $nouveau["largeur"];
 		$y_i = $nouveau["hauteur"];
@@ -557,7 +532,7 @@ function image_float ($img, $align, $margin=10) {
  */
 function image_contour_alpha($im, $coul='000000', $trait=1)
 {
-	$image = image_valeurs_trans($im, "contour-$coul-$trait", "png");
+	$image = _image_valeurs_trans($im, "contour-$coul-$trait", "png");
 	if (!$image) return("");
 
 	include_spip("inc/filtres_images");
@@ -627,16 +602,12 @@ function image_contour_alpha($im, $coul='000000', $trait=1)
 				imagesetpixel ($im_, $x, $y, $color);
 			}
 		}
-		$image["fonction_image"]($im_, "$dest");
+		_image_gd_output($im_,$image);
+		imagedestroy($im_);
+		imagedestroy($im);
 	}
 
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-	if (strlen($style) > 1) $tags="$tags style='$style'";
-
-	return "<img src='$dest'$tags />";
+	return _image_ecrire_tag($image,array('src'=>$dest));
 }
 
 
@@ -646,7 +617,7 @@ function image_contour_alpha($im, $coul='000000', $trait=1)
  */
 function image_sincity($im)
 {
-	$image = image_valeurs_trans($im, "sincity");
+	$image = _image_valeurs_trans($im, "sincity");
 	if (!$image) return("");
 
 	$x_i = $image["largeur"];
@@ -708,14 +679,12 @@ function image_sincity($im)
 				$color = ImageColorAllocateAlpha( $im_, $r, $g, $b , $a );
 				imagesetpixel ($im_, $x, $y, $color);				}
 		}
-		$image["fonction_image"]($im_, "$dest");		}
+		_image_gd_output($im_,$image);
+		imagedestroy($im_);
+		imagedestroy($im);
+	}
 
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-
-	return "<img src='$dest'$tags />";
+	return _image_ecrire_tag($image,array('src'=>$dest));
 }
 
 
@@ -868,20 +837,13 @@ function image_dispersion($im, $masque, $h=5, $v=5, $pos="") {
 				$color = ImageColorAllocateAlpha( $im_, $r, $g, $b, $a );
 				imagesetpixel ($im_, $x, $y, $color);				}
 		}
-
-		$image["fonction_image"]($im_, "$dest");
+		_image_gd_output($im_,$image);
+		imagedestroy($im2);
 		imagedestroy($im_);
 		imagedestroy($im);
-		imagedestroy($im2);
-
 	}
 
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-	if (strlen($style) > 1) $tags="$tags style='$style'";
-	return "<img src='$dest'$tags />";
+	return _image_ecrire_tag($image,array('src'=>$dest));
 }
 
 /* ------------------ Autres fonctions ---------------------------- */
@@ -973,7 +935,7 @@ function image_reflechir($im, $hauteur=0.5, $alphastart=80, $alphaend=0, $red=12
 	include_spip("inc/filtres_images");
 	//if(!function_exists('imagelayereffect'))
 	//	return;
-	$image = image_valeurs_trans($im, "relechir-$hauteur-$alphastart-$alphaend", "png");
+	$image = _image_valeurs_trans($im, "relechir-$hauteur-$alphastart-$alphaend", "png");
 	if (!$image) return("");
 	$width = $image["largeur"];
 	$height = $image["hauteur"];
@@ -1048,7 +1010,7 @@ function image_reflechir($im, $hauteur=0.5, $alphastart=80, $alphaend=0, $red=12
  */
 function image_negatif($im){
 
-	$image = image_valeurs_trans($im, "negate-");
+	$image = _image_valeurs_trans($im, "negate-");
 
 	if (!$image) return("");
 
@@ -1086,15 +1048,12 @@ function image_negatif($im){
 		        }
 		    }
 	    }
-		$image["fonction_image"]($im_, "$dest");
+		_image_gd_output($im_,$image);
+		imagedestroy($im_);
+		imagedestroy($im);
 	}
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-	if (strlen($style) > 1) $tags="$tags style='$style'";
 
-	return "<img src='$dest'$tags />";
+	return _image_ecrire_tag($image,array('src'=>$dest));
 }
 
 /**
@@ -1145,9 +1104,7 @@ function image_monochrome($img,$largeur=20,$seuil=13){
 // autre image. J'ai (Yohann Prigent) modifie la fonction pour que l'image s'incluse entierement dans l'image originale
 // (avant, il y avait un decalage fait expres)
 // http://www.fotoremix.net/
-function image_merge($im, $masque, $v='left', $h='top')
-	{
-	// SPIP
+function image_merge($im, $masque, $v='left', $h='top'){
 	$image = image_valeurs_trans($im, "merge-$masque-$v-$h");
 	
 	if (!$image) return("");
@@ -1159,8 +1116,7 @@ function image_merge($im, $masque, $v='left', $h='top')
 	$dest = $image["fichier_dest"];
 	$creer = $image["creer"];
 	
-	if ($creer)
-		{
+	if ($creer){
 		// init
 		$enfoncement = 2/3;
 		
@@ -1184,27 +1140,23 @@ function image_merge($im, $masque, $v='left', $h='top')
 		imagefilledrectangle($im_, 0, 0, $x_i + $x_masque, $y_i + $y_masque, imagecolorallocatealpha($im_, 255, 255, 255, 127));
 
 		// estimation du decalage en fonction de $h et $v
-		if ($v == 'left')
-			{
+		if ($v == 'left'){
 			$dest_x = $x_masque;
 			$dest_x_masque = 0;
-			}
-		else
-			{
+		}
+		else{
 			$dest_x = 0;
 			$dest_x_masque = imagesx($im_) - imagesx($im_masque);
-			}
+		}
 		
-		if ($h == 'top')
-			{
+		if ($h == 'top'){
 			$dest_y = $y_masque;
 			$dest_y_masque = 0;
-			}
-		else
-			{
+		}
+		else{
 			$dest_y = 0;
 			$dest_y_masque = imagesy($im_) - imagesy($im_masque);
-			}
+		}
 		
 		// on copie l'image source
 		imagecopymerge($im_, $im, 0, 0, 0, 0, $x_i, $y_i, 100);
@@ -1212,20 +1164,13 @@ function image_merge($im, $masque, $v='left', $h='top')
 		// on copie le masque
 		imagealphablending($im_, true);
 		imagecopy($im_, $im_masque, $dest_x_masque, $dest_y_masque, 0, 0, imagesx($im_masque), imagesy($im_masque));
-		
-		// liberation memoire
-		imagedestroy($im_masque);
-		
-		// SPIP
-		$image["fonction_image"]($im_, "$dest");	
-		}
 
-	// SPIP
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-	
-	return "<img src='$dest'$tags />";
+		_image_gd_output($im_,$image);
+		imagedestroy($im_masque);
+		imagedestroy($im_);
+		imagedestroy($im);
 	}
+
+	return _image_ecrire_tag($image,array('src'=>$dest));
+}
 ?>
