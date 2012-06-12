@@ -31,11 +31,20 @@
 		[(#VAL{_GIS_LAYER_DEFAUT}|defined|oui)
 			[(#SET{layer_defaut,[(#EVAL{_GIS_LAYER_DEFAUT})]})]
 		]
-		
+		[(#VAL{_GIS_LAYER_DEFAUT_FORCE}|defined|oui)
+			[(#SET{layer_readonly,readonly})]
+			[(#SET{layer_disable,disabled})]
+			[(#SET{layer_forcee,[(#EVAL{_GIS_LAYER_DEFAUT_FORCE})]})]
+			[(#SET{layer_explications,<:gis:explication_layer_forcee:>})]
+		]
 		[(#SAISIE{selection,layer_defaut,
 			label=<:gis:cfg_lbl_layer_defaut:>,
 			cacher_option_intro=oui,
 			defaut=#GET{layer_defaut},
+			valeur_forcee=#GET{layer_forcee},
+			readonly=#GET{layer_readonly},
+			disable=#GET{layer_disable},
+			explication=#GET{layer_explications},
 			datas=#GET{layers}})]
 			
 		[(#SAISIE{selection_multiple,layers,
@@ -43,26 +52,6 @@
 			cacher_option_intro=oui,
 			defaut='',
 			datas=#GET{layers}})]
-		
-	[(#REM) 
-		[(#SET{apis,[(#ARRAY{
-				openlayers,<:gis:cfg_lbl_api_openlayers:>,
-				googlev3,<:gis:cfg_lbl_api_googlev3:>})]})]
-		
-
-		[(#VAL{_GIS_APIS_FORCEE}|defined|oui)
-			[(#SET{api_readonly,readonly})]
-			[(#SET{api_disable,disabled})]
-			[(#SET{api_forcee,[(#EVAL{_GIS_APIS_FORCEE})]})]
-			[(#SET{api_explications,<:gis:explication_api_forcee:>})]
-		]
-
-		[(#SAISIE{selection,api,
-			label=<:gis:cfg_lbl_api:>,
-			cacher_option_intro=oui,
-			defaut=#GET{api_defaut},valeur_forcee=#GET{api_forcee},readonly=#GET{api_readonly},disable=#GET{api_disable},explication=#GET{api_explications},
-			datas=#GET{apis}})]
-	]
 	
 		[(#SAISIE{oui_non,geocoder,
 			defaut='',
@@ -127,13 +116,6 @@
 		</B_layers>
 
 		map.setView(new L.LatLng(#ENV{lat,0},#ENV{lon,0}),#ENV{zoom,0});
-		/*
-		map.addControls({
-			pan: true,
-			zoom: '#ENV{control,small}',
-			map_type: true
-		});
-		*/
 		
 		var marker = new L.Marker(new L.LatLng(#ENV{lat,0},#ENV{lon,0}));
 		map.addLayer(marker);

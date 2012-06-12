@@ -55,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_recherche_pas_resultats' => 'Aucun point ne correspond à la recherche.',
 	'erreur_xmlrpc_lat_lon' => 'La latitude et la longitude doivent être passées en argument',
 	'explication_api_forcee' => 'L\'API est imposée par un autre plugin ou squelette.',
+	'explication_layer_forcee' => 'La couche est imposée par un autre plugin ou un squelette.',
 	'explication_maptype_force' => 'Le fond cartographique est imposé par un autre plugin ou squelette.',
 
 	// F

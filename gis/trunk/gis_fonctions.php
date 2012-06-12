@@ -185,35 +185,4 @@ function gis_layer_defaut(){
 	}
 }
 
-/**
- * Définition de l'API à utiliser en prenant compte les defines
- */
-function gis_api_utilisee(){
-	$defaut = 'openlayers';
-	if(defined('_GIS_APIS_FORCEE')){
-		return _GIS_APIS_FORCEE;
-	}else{
-		if(defined('_GIS_APIS_DEFAUT')){
-			$defaut = _GIS_APIS_DEFAUT;
-		}
-		$config = lire_config('gis/api');
-		return $config ? $config : $defaut;
-	}
-}
-
-/**
- * Définition du fond cartographique à utiliser en prenant compte les defines
- */
-function gis_maptype_utilise(){
-	$defaut = 'ROAD';
-	if(defined('_GIS_MAPTYPES_FORCE')){
-		return _GIS_MAPTYPES_FORCE;
-	}else{
-		if(defined('_GIS_MAPTYPES_DEFAUT')){
-			$defaut = _GIS_MAPTYPES_DEFAUT;
-		}
-		$config = lire_config('gis/maptype');
-		return $config ? $config : $defaut;
-	}
-}
 ?>
