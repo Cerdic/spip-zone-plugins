@@ -16,7 +16,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fonctions_images_description' => 'Fournit des filtres pour le traitement des images, essentiellement extraits du site [Paris-Beyrouth->http://www.paris-beyrouth.org/].
 
 {{Filtres proposés :}}
--* en_image (utile pour SPIP < 1.9.3)
 -* couleur_chroma
 -* couleur_saturer
 -* couleur_teinter

@@ -17,8 +17,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 extracted from the website [Paris-Beyrouth->http://www.paris-beyrouth.org/].
 
 {{Proposed filters :}}
--* en_image (usefull for SPIP < 1.9.3)
-		
 -* couleur_chroma
 -* couleur_saturer
 -* couleur_teinter

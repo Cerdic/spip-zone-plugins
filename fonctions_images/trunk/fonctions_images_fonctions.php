@@ -2,9 +2,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-/**
- * Si on est en 2.1 etc...
- */
 if(is_array($GLOBALS['spip_matrice'])){
 	$GLOBALS['spip_matrice']['image_rgb2hsv'] = 'filtres/images_complements.php';
 	$GLOBALS['spip_matrice']['image_hsv2rgb'] = 'filtres/images_complements.php';
@@ -32,21 +29,6 @@ if(is_array($GLOBALS['spip_matrice'])){
 	$GLOBALS['spip_matrice']['couleur_inverserluminosite'] = 'filtres/couleurs_complements.php';
 	$GLOBALS['spip_matrice']['couleur_foncerluminosite'] = 'filtres/couleurs_complements.php';
 	$GLOBALS['spip_matrice']['couleur_eclaircirluminosite'] = 'filtres/couleurs_complements.php';
-}
-else{
-	include_spip('filtres/images_complements');
-	include_spip('filtres/couleurs_complements');
-}
-
-/*
- * autorise les filtres images sur les chemins.
- * #CHEMIN{fichier}|en_image|image_sepia{14579c}
- *
- * Cette fonction est devenue inutile en 1.9.3 [10980]
- *
- */
-function en_image($url, $alt=''){
-	return 	"<img src='". $url ."' alt='". $alt ."' />";
 }
 
 ?>
