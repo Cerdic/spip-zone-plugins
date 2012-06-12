@@ -24,26 +24,25 @@ function gis_insert_head($flux){
 	
 	$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'dist/leaflet.js') .'"></script>';
 	$flux .="\n".'<script type="text/javascript">/*<![CDATA[*/ L.Icon.Default.imagePath = "' . find_in_path(_DIR_LIB_GIS.'dist/images') .'"; /*]]>*/</script>'."\n";
-	$flux .="\n".'<script type="text/javascript" src="'. find_in_path('lib/leaflet-plugins/layer/vector/KML.js') .'"></script>';
+	$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'plugins/layer/vector/KML.js') .'"></script>';
+	$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'plugins/layer/tile/leaflet-providers-0.0.1.js') .'"></script>';
 
 	// initialisation des valeurs de config
 	$config = @unserialize($GLOBALS['meta']['gis']);
 	if (!is_array($config))
-		$config = array();
-	$config = array_merge(array(
-		'api' => 'openlayers'
-	), $config);
+		$config['layers'] = array('openstreetmap_mapnik');
 	
 	include_spip('gis_fonctions');
-	$config['api'] = gis_api_utilisee();
-	if(defined('_GIS_APIS') && !array_key_exists($config['api'],unserialize(_GIS_APIS))){
-		return $flux;
-	}
+	if (!in_array(gis_layer_defaut(),$config['layers']))
+		$config['layers'][] = gis_layer_defaut();
 	
-	// insertion du script de l'api a utiliser
-	if ($config['api'] == 'googlev3') {
+	// insertion des scripts pour google si nécessaire
+	if (in_array('google_roadmap', $config['layers'])
+		OR in_array('google_satellite', $config['layers'])
+		OR in_array('google_terrain', $config['layers']))
+	{
 		$flux .="\n".'<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;language='.$GLOBALS['spip_lang'].'"></script>';
-		$flux .="\n".'<script type="text/javascript" src="'. find_in_path('lib/leaflet-plugins/layer/tile/Google.js') .'"></script>';
+		$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'plugins/layer/tile/Google.js') .'"></script>';
 	}
 	
 	return $flux;

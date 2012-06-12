@@ -22,18 +22,34 @@
 			size=2,
 			maxlength=2})]
 		
+		#SET{layers,#ARRAY}
+		<BOUCLE_layer(DATA){source table, #EVAL{$GLOBALS['gis_layers']}}>
+		#SET{layers,#GET{layers}|array_merge{#ARRAY{#CLE,#VALEUR|table_valeur{nom}}}}
+		</BOUCLE_layer>
+		
+		[(#SET{layer_defaut,openstreetmap_mapnik})]
+		[(#VAL{_GIS_LAYER_DEFAUT}|defined|oui)
+			[(#SET{layer_defaut,[(#EVAL{_GIS_LAYER_DEFAUT})]})]
+		]
+		
+		[(#SAISIE{selection,layer_defaut,
+			label=<:gis:cfg_lbl_layer_defaut:>,
+			cacher_option_intro=oui,
+			defaut=#GET{layer_defaut},
+			datas=#GET{layers}})]
+			
+		[(#SAISIE{selection_multiple,layers,
+			label=<:gis:cfg_lbl_layers:>,
+			cacher_option_intro=oui,
+			defaut='',
+			datas=#GET{layers}})]
+		
+	[(#REM) 
 		[(#SET{apis,[(#ARRAY{
 				openlayers,<:gis:cfg_lbl_api_openlayers:>,
 				googlev3,<:gis:cfg_lbl_api_googlev3:>})]})]
 		
-		[(#VAL{_GIS_APIS}|defined|oui)
-			[(#EVAL{_GIS_APIS}|unserialize|is_array|oui)#SET{apis,#EVAL{_GIS_APIS}|unserialize}]
-		]
-		
-		[(#SET{api_defaut,openlayers})]
-		[(#VAL{_GIS_APIS_DEFAUT}|defined|oui)
-			[(#SET{api_defaut,[(#EVAL{_GIS_APIS_DEFAUT})]})]
-		]
+
 		[(#VAL{_GIS_APIS_FORCEE}|defined|oui)
 			[(#SET{api_readonly,readonly})]
 			[(#SET{api_disable,disabled})]
@@ -46,33 +62,8 @@
 			cacher_option_intro=oui,
 			defaut=#GET{api_defaut},valeur_forcee=#GET{api_forcee},readonly=#GET{api_readonly},disable=#GET{api_disable},explication=#GET{api_explications},
 			datas=#GET{apis}})]
-
-		[(#SET{maptypes,[(#ARRAY{
-				ROAD,<:gis:cfg_lbl_maptype_carte:>,
-				SATELLITE,<:gis:cfg_lbl_maptype_satellite:>,
-				HYBRID,<:gis:cfg_lbl_maptype_hybride:>,
-				PHYSICAL,<:gis:cfg_lbl_maptype_relief:>})]})]
-
-		[(#VAL{_GIS_MAPTYPES}|defined|oui)
-			[(#EVAL{_GIS_MAPTYPES}|unserialize|is_array|oui)#SET{apis,#EVAL{_GIS_MAPTYPES}|unserialize}]
-		]
-
-		[(#SET{maptype_defaut,carte})]
-		[(#VAL{_GIS_MAPTYPES_DEFAUT}|defined|oui)
-			[(#SET{maptype_defaut,[(#EVAL{_GIS_MAPTYPES_DEFAUT})]})]
-		]
-		[(#VAL{_GIS_MAPTYPES_FORCE}|defined|oui)
-			[(#SET{maptype_readonly,readonly})]
-			[(#SET{maptype_disable,disabled})]
-			[(#SET{maptype_force,[(#EVAL{_GIS_MAPTYPES_FORCE})]})]
-			[(#SET{maptype_explications,<:gis:explication_maptype_force:>})]
-		]
-		[(#SAISIE{selection,maptype,
-			label=<:gis:cfg_lbl_maptype:>,
-			cacher_option_intro=oui,
-			defaut=#GET{maptype_defaut},valeur_forcee=#GET{maptype_force},readonly=#GET{maptype_readonly},disable=#GET{maptype_disable},explication=#GET{maptype_explications},
-			datas=#GET{maptypes}})]
-
+	]
+	
 		[(#SAISIE{oui_non,geocoder,
 			defaut='',
 			label=<:gis:cfg_lbl_geocoder:>,
@@ -118,33 +109,22 @@
 		
 		map.attributionControl.setPrefix('');
 		
-		[(#SET{maptype, #REM|gis_maptype_utilise})]
-		// defalut layer
-		[(#REM|gis_api_utilisee|=={openlayers}|oui)
-		var base_layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'});
-		map.addLayer(base_layer);
-		]
-		[(#VAL|gis_api_utilisee|=={googlev3}|oui)
-		var road_layer = new L.Google('ROADMAP');
-		var satelitte_layer = new L.Google('SATELLITE');
-		var terrain_layer = new L.Google('TERRAIN');
-		[(#GET{maptype}|=={ROAD}|oui)
-		var base_layer = road_layer;
-		][(#GET{maptype}|=={SATELLITE}|oui)
-		var base_layer = satelitte_layer;
-		][(#GET{maptype}|=={PHYSICAL}|oui)
-		var base_layer = terrain_layer;
-		]
-		map.addLayer(base_layer);
-		var layersControl = new L.Control.Layers({
-			"<:gis:cfg_lbl_maptype_carte:>": road_layer,
-			"<:gis:cfg_lbl_maptype_satellite:>": satelitte_layer,
-			"<:gis:cfg_lbl_maptype_relief:>": terrain_layer
-		});
-		map.addControl(layersControl);
-		// class noajax sur les controles pour ne pas leur ajouter de hidden
-		$(layersControl._form).addClass('noajax');
-		]
+		//default layer
+		#SET{layer_defaut,#REM|gis_layer_defaut} #SET{layers,#EVAL{$GLOBALS['gis_layers']}}
+		var [(#GET{layer_defaut})] = [new (#GET{layers}|table_valeur{#GET{layer_defaut}/layer})];
+		map.addLayer([(#GET{layer_defaut})]);
+		
+		<B_layers>
+		var layers_control = new L.Control.Layers();
+		layers_control.addBaseLayer([(#GET{layer_defaut})],["(#GET{layers}|table_valeur{#GET{layer_defaut}/nom})"]);
+		<BOUCLE_layers(DATA){source table, #GET{layers}}{si #ENV{control_type,#ENV{controle_type}}|!={non}|et{#ENV{no_control,#ENV{aucun_controle}}|!={oui}}|et{#CONFIG{gis/layers,#ARRAY}|count|>{1}|oui}|oui}>[
+		(#CLE|!={#GET{layer_defaut}}|oui|et{#CLE|in_array{#CONFIG{gis/layers,#ARRAY}}|oui}|oui)
+		layers_control.addBaseLayer([new (#VALEUR|table_valeur{layer})],"[(#VALEUR|table_valeur{nom})]");]
+		</BOUCLE_layers>
+		map.addControl(layers_control);
+		// classe noajax sur le layer_control pour éviter l'ajout de hidden par SPIP
+		$(layers_control._form).addClass('noajax');
+		</B_layers>
 
 		map.setView(new L.LatLng(#ENV{lat,0},#ENV{lon,0}),#ENV{zoom,0});
 		/*

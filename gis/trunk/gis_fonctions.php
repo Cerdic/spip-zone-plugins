@@ -170,6 +170,22 @@ function balise_descriptif_gis_dist($p) {
 }
 
 /**
+ * Définition du fond de carte à utiliser par défaut en prenant compte les defines
+ */
+function gis_layer_defaut(){
+	$defaut = 'openstreetmap_mapnik';
+	if(defined('_GIS_LAYER_DEFAUT_FORCE')){
+		return _GIS_LAYER_DEFAUT_FORCE;
+	}else{
+		if(defined('_GIS_LAYER_DEFAUT')){
+			$defaut = _GIS_LAYER_DEFAUT;
+		}
+		$config = lire_config('gis/layer_defaut');
+		return $config ? $config : $defaut;
+	}
+}
+
+/**
  * Définition de l'API à utiliser en prenant compte les defines
  */
 function gis_api_utilisee(){

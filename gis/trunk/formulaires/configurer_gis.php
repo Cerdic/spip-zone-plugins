@@ -15,14 +15,12 @@ function formulaires_configurer_gis_verifier_dist(){
 		}
 	}
 	
-	// S'il n'y a pas d'erreur on va chercher l'ancienne valeur de l'API pour voir si elle a changé
+	// S'il n'y a pas d'erreur on va chercher l'ancienne couche par défaut pour voir si elle a changé
 	if (empty($erreurs)){
 		include_spip('inc/config');
-		$ancienne_api = lire_config('gis/api');
-		// On la garde en mémoire dans le hit pour une utilisation plus loin
-		set_request('ancienne_api', $ancienne_api);
-		// Si on change d'API, le formulaire ne doit pas etre traiter en ajax car on a besoin que la nouvelle API soit chargee dans gis_inserer_javascript
-		if (_request('api') != $ancienne_api)
+		$layer_defaut = lire_config('gis/layer_defaut');
+		// Si on change la couche par défaut, le formulaire ne doit pas etre traiter en ajax (cas d'ajout d'une couche google)
+		if (_request('layer_defaut') != $layer_defaut)
 			refuser_traiter_formulaire_ajax();
 	}
 	
