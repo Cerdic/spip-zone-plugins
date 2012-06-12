@@ -27,6 +27,7 @@ function action_doc2img_convert_dist(){
     //on lance la conversion du document
     if ($id_document = intval($id_document)) {
     	$convertir = charger_fonction('doc2img_convertir','inc');
+		spip_log('conversion du doc '.$id_document,'doc2img');
     	$convertir($id_document,$action);
     	include_spip('inc/invalideur');
     	suivre_invalideur("id='id_document/$id_document'");

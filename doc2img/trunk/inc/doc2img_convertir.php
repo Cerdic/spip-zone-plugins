@@ -69,8 +69,8 @@ function inc_doc2img_convertir($id_document,$type='full') {
 				spip_log('On supprime les documents','doc2img');
 				spip_log($documents_a_supprimer,'doc2img');
 				$supprimer_document = charger_fonction('supprimer_document','action');
-				foreach ($documents_a_supprimer as $id_document) {
-					$supprimer_document($id_document); // pour les orphelins du contexte, on traite avec la fonction existante
+				foreach ($documents_a_supprimer as $id_document_supprimer) {
+					$supprimer_document($id_document_supprimer); // pour les orphelins du contexte, on traite avec la fonction existante
 				}
 			}
 		    // chaque page est un fichier qu'on sauve dans la table doc2img indexé
