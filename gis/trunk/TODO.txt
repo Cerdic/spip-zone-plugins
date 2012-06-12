@@ -1,7 +1,5 @@
 coder un geocoder maison en js ou utiliser la lib php suivante : https://github.com/willdurand/Geocoder
 
-gestion de couches persos pour les fonds de cartes ; plein de couches à pomper ici https://github.com/seelmann/leaflet-providers
-
 une barre de zoom bien faite à passer en plugin ici : https://github.com/CloudMade/Leaflet/pull/689
 
 Avoir un crayon de modification de point depuis le public
