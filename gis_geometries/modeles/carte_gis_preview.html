@@ -13,14 +13,7 @@
 		
 		map_preview.attributionControl.setPrefix('');
 		
-		[(#SET{maptype, #REM|gis_maptype_utilise})]
-		// defalut layer
-		[(#REM|gis_api_utilisee|=={openlayers}|oui)
-		var base_layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'});
-		][(#VAL|gis_api_utilisee|=={googlev3}|oui)
-		var base_layer = new L.Google('[(#GET{maptype}|replace{ROAD,ROADMAP}|replace{PHYSICAL,TERRAIN})]');
-		]
-		
+		var base_layer = [new (#EVAL{$GLOBALS\['gis_layers'\]}|table_valeur{[(#REM|gis_layer_defaut)]/layer})];
 		map_preview.addLayer(base_layer);
 		
 		map_preview.setView(new L.LatLng([(#LAT)],[(#LON)]),[(#ZOOM|sinon{#CONFIG{gis/zoom,0}})]);
