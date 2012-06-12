@@ -5,8 +5,8 @@
   Distribue sous licence GPL
 
 ]
-
-[(#OBJET|objet_edition_directe|non)
+#SET{objet,#VAL|objets_edition_directe|array_flip}
+[(#GET{objet}|table_valeur{#OBJET}|non)
 	[
 	(#INCLURE{fond=prive/squelettes/inclure/portfolio-documents, env, ajax=documents})
 	]

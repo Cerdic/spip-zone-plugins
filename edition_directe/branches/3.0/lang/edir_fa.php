@@ -10,7 +10,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'activer_edition_directe' => 'فعال سازي ويرايش مستقيم براي: ',
 
-
 	// T
 	'titre_plugin' => 'ويرايش مستقيم',
 
