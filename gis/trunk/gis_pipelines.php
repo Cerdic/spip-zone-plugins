@@ -29,7 +29,7 @@ function gis_insert_head($flux){
 
 	// initialisation des valeurs de config
 	$config = @unserialize($GLOBALS['meta']['gis']);
-	if (!is_array($config))
+	if (!is_array($config['layers']))
 		$config['layers'] = array('openstreetmap_mapnik');
 	
 	include_spip('gis_fonctions');
