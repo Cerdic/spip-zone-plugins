@@ -23,14 +23,12 @@ function edition_directe_affiche_gauche($flux){
 	include_spip('edition_directe_fonctions');
 
 	$objets_edition_directe=objets_edition_directe();
-	if(is_array($objets_edition_directe))$objets_edition_directe=array_flip($objets_edition_directe);
-
 	if ($en_cours = trouver_objet_exec($flux['args']['exec'])
 		AND $type = $en_cours['type']
-		AND $objets_edition_directe[$type]
+		AND in_array($type,$objets_edition_directe)
 		AND $id_table_objet = $en_cours['id_table_objet']
 		AND ($id = intval($flux['args'][$id_table_objet]) OR $id = 0-$GLOBALS['visiteur_session']['id_auteur'])
-	  AND autoriser('joindredocument',$type,$id)){
+		AND autoriser('joindredocument',$type,$id)){
 
 		$flux['data'] .= recuperer_fond('prive/objets/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
 	}
