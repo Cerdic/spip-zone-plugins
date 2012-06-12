@@ -1,16 +1,37 @@
 <?php
 // teste si l'objet est en mode edition directe ou non
-function objet_edition_directe($objet){
+function objets_edition_directe(){
 	include_spip('inc/config');
-	if(!$config=lire_config('edition_directe'))
-	$config=array('article'=>'on');
-	
+
+	// Sie rien n'est choisit, tout est en édition directe	
+	$objets=array();
+	$objets=lire_config('edition_directe/objets');
+
+	if(count($objets)<1){
+		$objets=lister_objets();
+	}
+
 	$pipeline= pipeline('edition_directe_controle',array(
 		    'args'=>array(
 			'objet'=>$objet
 		    ), 
-		    'data'=>$config
+		    'data'=>$objets
 		));
-	return ($pipeline ? $pipeline[$objet]:$config[$objet]);
+	return $objets;
 }
+
+	
+
+function lister_objets(){
+	include_spip('base/objets');	
+	$liste_objets=lister_tables_objets_sql();
+	$objets=array();
+	foreach($liste_objets AS $o=>$valeur){
+		if($valeur['editable'] AND $valeur['page'])$objets[]=$valeur['page'];
+		}
+	return $objets;	
+	}
+
+	
+	
 ?>

@@ -1,7 +1,7 @@
 <paquet
 	   prefix="edition_directe"
 	   categorie="edition"
-	   version="3.1.0"
+	   version="3.1.1"
 	   etat="test"
 	   compatibilite="[3.0.0;3.0.*]"
 	   logo="img/logo_aed_edit_128.png"
@@ -16,7 +16,7 @@
 	<traduire module="edir" reference="fr" gestionnaire="salvatore" />	
 
 	<pipeline nom="header_prive" inclure="edition_directe_pipelines.php" />
-	<pipeline nom="afficher_config_objet" inclure="edition_directe_pipelines.php" />	
+	<pipeline nom="affiche_gauche" inclure="edition_directe_pipelines.php" />	
 	<pipeline nom="recuperer_fond" inclure="edition_directe_pipelines.php" />	
 	
 
