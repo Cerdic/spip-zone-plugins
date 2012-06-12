@@ -56,7 +56,7 @@ function edition_directe_recuperer_fond($flux){
 				$edition=recuperer_fond('prive/echafaudage/contenu/objet_edit_directe',$contexte,array('ajax'=>true));
 				$patterns = array('/class=\'icone/','/<!--\/hd-->/');
 				$replacements = array('class="icone invisible',$edition.'<!--/hd-->');						
-				$flux['data']['texte'] = preg_replace($patterns,$replacements,$texte);
+				$flux['data']['texte'] = preg_replace($patterns,$replacements,$texte,1);
 		    }
 		//Suppression de la prévisualisation	
 		 if ($fond == 'prive/objets/contenu/'.$objet){			
