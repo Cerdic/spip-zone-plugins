@@ -5,15 +5,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/meta');
 
 function formulaires_configurer_seo_alexa_charger_dist(){
-	global $visiteur_session;
-	
+
 	$config = unserialize($GLOBALS['meta']['seo']);
 	$valeurs = $config['alexa'];
 	$valeurs['alexa_id'] = $valeurs['id'];
 	
 	$valeurs['editable'] = true;
 	
-	if (!autoriser('configurer', 'configuration',$visiteur_session)) {
+	if (!autoriser('configurer', 'configuration')) {
 		$valeurs['editable'] = false;
 	}
 	

@@ -5,8 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/meta');
 
 function formulaires_configurer_seo_metas_charger_dist(){
-	global $visiteur_session;
-	
+
 	$config = unserialize($GLOBALS['meta']['seo']);
 	$valeurs = $config['meta_tags'];
 	if(is_array($valeurs['tag'])){
@@ -26,7 +25,7 @@ function formulaires_configurer_seo_metas_charger_dist(){
 
 	$valeurs['editable'] = true;
 	
-	if (!autoriser('configurer', 'configuration',$visiteur_session)) {
+	if (!autoriser('configurer', 'configuration')) {
 		$valeurs['editable'] = false;
 	}
 	

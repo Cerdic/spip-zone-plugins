@@ -5,14 +5,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/meta');
 
 function formulaires_configurer_seo_urls_canoniques_charger_dist(){
-	global $visiteur_session;
-	
+
 	$config = unserialize($GLOBALS['meta']['seo']);
 	$valeurs = $config['canonical_url'];
 	
 	$valeurs['editable'] = true;
 	
-	if (!autoriser('configurer', 'configuration',$visiteur_session)) {
+	if (!autoriser('configurer', 'configuration')) {
 		$valeurs['editable'] = false;
 	}
 	
