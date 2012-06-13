@@ -3,7 +3,7 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function cvt_upload_formulaire_charger($flux){
+function cvtupload_formulaire_charger($flux){
 	$contexte =& $flux['data'];
 	
 	if ($contexte['_champs_fichiers'] and is_array($contexte['_champs_fichiers'])){
@@ -18,7 +18,7 @@ function cvt_upload_formulaire_charger($flux){
 	return $flux;
 }
 
-function cvt_upload_formulaire_verifier($flux){
+function cvtupload_formulaire_verifier($flux){
 	$erreurs =& $flux['data'];
 	
 	// S'il y a des champs fichiers de déclarés
@@ -37,7 +37,7 @@ function cvt_upload_formulaire_verifier($flux){
 		$infos_fichiers = _request('_infos_fichiers');
 		foreach ($champs_fichiers as $champ){
 			if ($_FILES[$champ]){
-				$infos = cvt_upload_deplacer_fichier($_FILES[$champ], $repertoire_tmp);
+				$infos = cvtupload_deplacer_fichier($_FILES[$champ], $repertoire_tmp);
 				if (isset($infos_fichiers[$champ]))
 					$infos_fichiers[$champ] = array_merge($infos_fichiers[$champ], $infos);
 				else
@@ -52,7 +52,7 @@ function cvt_upload_formulaire_verifier($flux){
 	return $flux;
 }
 
-function cvt_upload_formulaire_traiter($flux){
+function cvtupload_formulaire_traiter($flux){
 	// On supprime tous les fichiers maintenant que les traitements sont faits
 	if ($champs_fichiers = _request('_champs_fichiers') and is_array($champs_fichiers)){
 		$repertoire = _DIR_TMP.'cvt_upload/'._request('hash').'/';
@@ -80,7 +80,7 @@ function cvt_upload_formulaire_traiter($flux){
  * @param array $fichier Le morceau de $_FILES concernant le fichier
  * @return array Retourne un tableau d'informations sur le fichier
  */
-function cvt_upload_deplacer_fichier($fichier, $repertoire){
+function cvtupload_deplacer_fichier($fichier, $repertoire){
 	$infos = array();
 	if (is_array($fichier['name'])){
 		foreach ($fichier['name'] as $cle=>$nom){
