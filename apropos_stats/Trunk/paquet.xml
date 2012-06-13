@@ -1,0 +1,22 @@
+<paquet
+	prefix="apropos_stats"
+	categorie="statistique"
+	version="0.0.2"
+	etat="dev"
+	compatibilite="[3.0.1;3.0.*]"
+	logo="prive/themes/spip/images/apropos_stats-64.png"
+	documentation=""
+>
+	<!--
+		Paquet généré le 2012-06-12 17:25:59
+	-->
+
+	<nom>À propos statistiques</nom>
+
+	<auteur lien='http://www.jp.guihard.net'>Jean-Philippe Guihard</auteur>
+
+	<licence></licence>
+	<necessite nom="svpstats" compatibilite="[0.1.0;[" />
+
+
+</paquet>
