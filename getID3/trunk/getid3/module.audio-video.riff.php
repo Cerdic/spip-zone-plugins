@@ -382,6 +382,34 @@ class getid3_riff extends getid3_handler
 					}
 				}
 
+				if (isset($thisfile_riff_WAVE['iXML'][0]['data'])) {
+					// requires functions simplexml_load_string and get_object_vars
+					if ($parsedXML = getid3_lib::XML2array($thisfile_riff_WAVE['iXML'][0]['data'])) {
+						$thisfile_riff_WAVE['iXML'][0]['parsed'] = $parsedXML;
+						if (isset($parsedXML['SPEED']['MASTER_SPEED'])) {
+							@list($numerator, $denominator) = explode('/', $parsedXML['SPEED']['MASTER_SPEED']);
+							$thisfile_riff_WAVE['iXML'][0]['master_speed'] = $numerator / ($denominator ? $denominator : 1000);
+						}
+						if (isset($parsedXML['SPEED']['TIMECODE_RATE'])) {
+							@list($numerator, $denominator) = explode('/', $parsedXML['SPEED']['TIMECODE_RATE']);
+							$thisfile_riff_WAVE['iXML'][0]['timecode_rate'] = $numerator / ($denominator ? $denominator : 1000);
+						}
+						if (isset($parsedXML['SPEED']['TIMESTAMP_SAMPLES_SINCE_MIDNIGHT_LO']) && !empty($parsedXML['SPEED']['TIMESTAMP_SAMPLE_RATE']) && !empty($thisfile_riff_WAVE['iXML'][0]['timecode_rate'])) {
+							$samples_since_midnight = floatval(ltrim($parsedXML['SPEED']['TIMESTAMP_SAMPLES_SINCE_MIDNIGHT_HI'].$parsedXML['SPEED']['TIMESTAMP_SAMPLES_SINCE_MIDNIGHT_LO'], '0'));
+							$thisfile_riff_WAVE['iXML'][0]['timecode_seconds'] = $samples_since_midnight / $parsedXML['SPEED']['TIMESTAMP_SAMPLE_RATE'];
+							$h = floor( $thisfile_riff_WAVE['iXML'][0]['timecode_seconds']       / 3600);
+							$m = floor(($thisfile_riff_WAVE['iXML'][0]['timecode_seconds'] - ($h * 3600))      / 60);
+							$s = floor( $thisfile_riff_WAVE['iXML'][0]['timecode_seconds'] - ($h * 3600) - ($m * 60));
+							$f =       ($thisfile_riff_WAVE['iXML'][0]['timecode_seconds'] - ($h * 3600) - ($m * 60) - $s) * $thisfile_riff_WAVE['iXML'][0]['timecode_rate'];
+							$thisfile_riff_WAVE['iXML'][0]['timecode_string']       = sprintf('%02d:%02d:%02d:%05.2f', $h, $m, $s,       $f);
+							$thisfile_riff_WAVE['iXML'][0]['timecode_string_round'] = sprintf('%02d:%02d:%02d:%02d',   $h, $m, $s, round($f));
+						}
+						unset($parsedXML);
+					}
+				}
+
+
+
 				if (!isset($thisfile_audio['bitrate']) && isset($thisfile_riff_audio[$streamindex]['bitrate'])) {
 					$thisfile_audio['bitrate'] = $thisfile_riff_audio[$streamindex]['bitrate'];
 					$info['playtime_seconds'] = (float) ((($info['avdataend'] - $info['avdataoffset']) * 8) / $thisfile_audio['bitrate']);
@@ -753,18 +781,7 @@ class getid3_riff extends getid3_handler
 											switch ($strhfccType) {
 												case 'vids':
 													$thisfile_riff_raw_strf_strhfccType_streamindex = getid3_riff::ParseBITMAPINFOHEADER(substr($strfData, 0, 40), ($info['fileformat'] == 'riff'));
-													//$thisfile_riff_raw_strf_strhfccType_streamindex['biSize']          = $this->EitherEndian2Int(substr($strfData,  0, 4)); // number of bytes required by the BITMAPINFOHEADER structure
-													//$thisfile_riff_raw_strf_strhfccType_streamindex['biWidth']         = $this->EitherEndian2Int(substr($strfData,  4, 4)); // width of the bitmap in pixels
-													//$thisfile_riff_raw_strf_strhfccType_streamindex['biHeight']        = $this->EitherEndian2Int(substr($strfData,  8, 4)); // height of the bitmap in pixels. If biHeight is positive, the bitmap is a 'bottom-up' DIB and its origin is the lower left corner. If biHeight is negative, the bitmap is a 'top-down' DIB and its origin is the upper left corner
-													//$thisfile_riff_raw_strf_strhfccType_streamindex['biPlanes']        = $this->EitherEndian2Int(substr($strfData, 12, 2)); // number of color planes on the target device. In most cases this value must be set to 1
-													//$thisfile_riff_raw_strf_strhfccType_streamindex['biBitCount']      = $this->EitherEndian2Int(substr($strfData, 14, 2)); // Specifies the number of bits per pixels
-													//$thisfile_riff_raw_strf_strhfccType_streamindex['fourcc']          =                         substr($strfData, 16, 4);  //
-													//$thisfile_riff_raw_strf_strhfccType_streamindex['biSizeImage']     = $this->EitherEndian2Int(substr($strfData, 20, 4)); // size of the bitmap data section of the image (the actual pixel data, excluding BITMAPINFOHEADER and RGBQUAD structures)
-													//$thisfile_riff_raw_strf_strhfccType_streamindex['biXPelsPerMeter'] = $this->EitherEndian2Int(substr($strfData, 24, 4)); // horizontal resolution, in pixels per metre, of the target device
-													//$thisfile_riff_raw_strf_strhfccType_streamindex['biYPelsPerMeter'] = $this->EitherEndian2Int(substr($strfData, 28, 4)); // vertical resolution, in pixels per metre, of the target device
-													//$thisfile_riff_raw_strf_strhfccType_streamindex['biClrUsed']       = $this->EitherEndian2Int(substr($strfData, 32, 4)); // actual number of color indices in the color table used by the bitmap. If this value is zero, the bitmap uses the maximum number of colors corresponding to the value of the biBitCount member for the compression mode specified by biCompression
-													//$thisfile_riff_raw_strf_strhfccType_streamindex['biClrImportant']  = $this->EitherEndian2Int(substr($strfData, 36, 4)); // number of color indices that are considered important for displaying the bitmap. If this value is zero, all colors are important
-
+//echo '<pre>'.print_r($thisfile_riff_raw_strf_strhfccType_streamindex, true).'</pre>';
 													$thisfile_video['bits_per_sample'] = $thisfile_riff_raw_strf_strhfccType_streamindex['biBitCount'];
 
 													if ($thisfile_riff_video_current['codec'] == 'DV') {
@@ -786,23 +803,25 @@ class getid3_riff extends getid3_handler
 								}
 							}
 
-							if (isset($thisfile_riff_raw_strf_strhfccType_streamindex['fourcc']) && getid3_riff::RIFFfourccLookup($thisfile_riff_raw_strf_strhfccType_streamindex['fourcc'])) {
+							if (isset($thisfile_riff_raw_strf_strhfccType_streamindex['fourcc'])) {
 
-								$thisfile_riff_video_current['codec'] = getid3_riff::RIFFfourccLookup($thisfile_riff_raw_strf_strhfccType_streamindex['fourcc']);
-								$thisfile_video['codec']              = $thisfile_riff_video_current['codec'];
-								$thisfile_video['fourcc']             = $thisfile_riff_raw_strf_strhfccType_streamindex['fourcc'];
+								$thisfile_video['fourcc'] = $thisfile_riff_raw_strf_strhfccType_streamindex['fourcc'];
+								if (getid3_riff::RIFFfourccLookup($thisfile_video['fourcc'])) {
+									$thisfile_riff_video_current['codec'] = getid3_riff::RIFFfourccLookup($thisfile_video['fourcc']);
+									$thisfile_video['codec']              = $thisfile_riff_video_current['codec'];
+								}
 
 								switch ($thisfile_riff_raw_strf_strhfccType_streamindex['fourcc']) {
 									case 'HFYU': // Huffman Lossless Codec
 									case 'IRAW': // Intel YUV Uncompressed
 									case 'YUY2': // Uncompressed YUV 4:2:2
 										$thisfile_video['lossless']        = true;
-										$thisfile_video['bits_per_sample'] = 24;
+										//$thisfile_video['bits_per_sample'] = 24;
 										break;
 
 									default:
 										$thisfile_video['lossless']        = false;
-										$thisfile_video['bits_per_sample'] = 24;
+										//$thisfile_video['bits_per_sample'] = 24;
 										break;
 								}
 
@@ -927,14 +946,14 @@ class getid3_riff extends getid3_handler
 
 				if (isset($thisfile_riff[$RIFFsubtype]['COMT'])) {
 					$offset = 0;
-					$CommentCount                                           = getid3_lib::BigEndian2Int(substr($thisfile_riff[$RIFFsubtype]['COMT'][0]['data'], $offset, 2), false);
+					$CommentCount                                   = getid3_lib::BigEndian2Int(substr($thisfile_riff[$RIFFsubtype]['COMT'][0]['data'], $offset, 2), false);
 					$offset += 2;
 					for ($i = 0; $i < $CommentCount; $i++) {
 						$info['comments_raw'][$i]['timestamp']      = getid3_lib::BigEndian2Int(substr($thisfile_riff[$RIFFsubtype]['COMT'][0]['data'], $offset, 4), false);
 						$offset += 4;
 						$info['comments_raw'][$i]['marker_id']      = getid3_lib::BigEndian2Int(substr($thisfile_riff[$RIFFsubtype]['COMT'][0]['data'], $offset, 2), true);
 						$offset += 2;
-						$CommentLength                                      = getid3_lib::BigEndian2Int(substr($thisfile_riff[$RIFFsubtype]['COMT'][0]['data'], $offset, 2), false);
+						$CommentLength                              = getid3_lib::BigEndian2Int(substr($thisfile_riff[$RIFFsubtype]['COMT'][0]['data'], $offset, 2), false);
 						$offset += 2;
 						$info['comments_raw'][$i]['comment']        =                           substr($thisfile_riff[$RIFFsubtype]['COMT'][0]['data'], $offset, $CommentLength);
 						$offset += $CommentLength;
@@ -949,6 +968,18 @@ class getid3_riff extends getid3_handler
 					if (isset($thisfile_riff[$RIFFsubtype][$key][0]['data'])) {
 						$thisfile_riff['comments'][$value][] = $thisfile_riff[$RIFFsubtype][$key][0]['data'];
 					}
+				}
+
+				if (isset($thisfile_riff[$RIFFsubtype]['ID3 '])) {
+					getid3_lib::IncludeDependency(GETID3_INCLUDEPATH.'module.tag.id3v2.php', __FILE__, true);
+					$getid3_temp = new getID3();
+					$getid3_temp->openfile($this->getid3->filename);
+					$getid3_id3v2 = new getid3_id3v2($getid3_temp);
+					$getid3_id3v2->StartingOffset = $thisfile_riff[$RIFFsubtype]['ID3 '][0]['offset'] + 8;
+					if ($thisfile_riff[$RIFFsubtype]['ID3 '][0]['valid'] = $getid3_id3v2->Analyze()) {
+						$info['id3v2'] = $getid3_temp->info['id3v2'];
+					}
+					unset($getid3_temp, $getid3_id3v2);
 				}
 				break;
 
@@ -1501,6 +1532,7 @@ class getid3_riff extends getid3_handler
 							fseek($this->getid3->fp, $RIFFchunk[$chunkname][$thisindex]['offset'] + 8 + $chunksize, SEEK_SET);
 							break;
 
+						case 'iXML':
 						case 'bext':
 						case 'cart':
 						case 'fmt ':
@@ -1510,10 +1542,23 @@ class getid3_riff extends getid3_handler
 						case 'MEXT':
 						case 'DISP':
 							// always read data in
+						case 'JUNK':
+							// should be: never read data in
+							// but some programs write their version strings in a JUNK chunk (e.g. VirtualDub, AVIdemux, etc)
 							if ($chunksize < 1048576) {
-								$RIFFchunk[$chunkname][$thisindex]['data'] = fread($this->getid3->fp, $chunksize);
+								if ($chunksize > 0) {
+									$RIFFchunk[$chunkname][$thisindex]['data'] = fread($this->getid3->fp, $chunksize);
+									if ($chunkname == 'JUNK') {
+										if (preg_match('#^([\\x20-\\x7F]+)#', $RIFFchunk[$chunkname][$thisindex]['data'], $matches)) {
+											// only keep text characters [chr(32)-chr(127)]
+											$info['riff']['comments']['junk'][] = trim($matches[1]);
+										}
+										// but if nothing there, ignore
+										// remove the key in either case
+										unset($RIFFchunk[$chunkname][$thisindex]['data']);
+									}
+								}
 							} else {
-var_dump($info['fileformat']);
 								$info['warning'][] = 'chunk "'.$chunkname.'" at offset '.ftell($this->getid3->fp).' is unexpectedly larger than 1MB (claims to be '.number_format($chunksize).' bytes), skipping data';
 								$nextoffset = ftell($this->getid3->fp) + $chunksize;
 								if (($nextoffset < 0) || !getid3_lib::intValueSupported($nextoffset)) {
@@ -1522,16 +1567,6 @@ var_dump($info['fileformat']);
 								}
 								fseek($this->getid3->fp, $nextoffset, SEEK_SET);
 							}
-							break;
-
-						case 'JUNK':
-							// never read data in
-							$nextoffset = ftell($this->getid3->fp) + $chunksize;
-							if (($nextoffset < 0) || !getid3_lib::intValueSupported($nextoffset)) {
-								$info['warning'][] = 'Unable to parse chunk at offset '.$nextoffset.' because beyond '.round(PHP_INT_MAX / 1073741824).'GB limit of PHP filesystem functions';
-								break 3;
-							}
-							fseek($this->getid3->fp, $nextoffset, SEEK_SET);
 							break;
 
 						default:
@@ -1547,6 +1582,7 @@ var_dump($info['fileformat']);
 									unset($RIFFchunk[$chunkname]);
 								}
 								$RIFFchunk[$LISTchunkParent][$chunkname][$thisindex]['data'] = fread($this->getid3->fp, $chunksize);
+							//} elseif (in_array($chunkname, array('ID3 ')) || (($chunksize > 0) && ($chunksize < 2048))) {
 							} elseif (($chunksize > 0) && ($chunksize < 2048)) {
 								// only read data in if smaller than 2kB
 								$RIFFchunk[$chunkname][$thisindex]['data'] = fread($this->getid3->fp, $chunksize);
@@ -1608,7 +1644,7 @@ var_dump($info['fileformat']);
 	}
 
 
-	static function RIFFparseWAVEFORMATex($WaveFormatExData) {
+	public static function RIFFparseWAVEFORMATex($WaveFormatExData) {
 		// shortcut
 		$WaveFormatEx['raw'] = array();
 		$WaveFormatEx_raw    = &$WaveFormatEx['raw'];
@@ -1694,21 +1730,21 @@ var_dump($info['fileformat']);
 		return true;
 	}
 
-	static function ParseBITMAPINFOHEADER($BITMAPINFOHEADER, $littleEndian=true) {
-		$getid3_lib = new getid3_lib();
+	public static function ParseBITMAPINFOHEADER($BITMAPINFOHEADER, $littleEndian=true) {
+
 		$functionname = ($littleEndian ? 'LittleEndian2Int' : 'BigEndian2Int');
-		$parsed['biSize']          = $getid3_lib->$functionname(substr($BITMAPINFOHEADER,  0, 4)); // number of bytes required by the BITMAPINFOHEADER structure
-		$parsed['biWidth']         = $getid3_lib->$functionname(substr($BITMAPINFOHEADER,  4, 4)); // width of the bitmap in pixels
-		$parsed['biHeight']        = $getid3_lib->$functionname(substr($BITMAPINFOHEADER,  8, 4)); // height of the bitmap in pixels. If biHeight is positive, the bitmap is a 'bottom-up' DIB and its origin is the lower left corner. If biHeight is negative, the bitmap is a 'top-down' DIB and its origin is the upper left corner
-		$parsed['biPlanes']        = $getid3_lib->$functionname(substr($BITMAPINFOHEADER, 12, 2)); // number of color planes on the target device. In most cases this value must be set to 1
-		$parsed['biBitCount']      = $getid3_lib->$functionname(substr($BITMAPINFOHEADER, 14, 2)); // Specifies the number of bits per pixels
+		$parsed['biSize']          = getid3_lib::$functionname(substr($BITMAPINFOHEADER,  0, 4)); // number of bytes required by the BITMAPINFOHEADER structure
+		$parsed['biWidth']         = getid3_lib::$functionname(substr($BITMAPINFOHEADER,  4, 4)); // width of the bitmap in pixels
+		$parsed['biHeight']        = getid3_lib::$functionname(substr($BITMAPINFOHEADER,  8, 4)); // height of the bitmap in pixels. If biHeight is positive, the bitmap is a 'bottom-up' DIB and its origin is the lower left corner. If biHeight is negative, the bitmap is a 'top-down' DIB and its origin is the upper left corner
+		$parsed['biPlanes']        = getid3_lib::$functionname(substr($BITMAPINFOHEADER, 12, 2)); // number of color planes on the target device. In most cases this value must be set to 1
+		$parsed['biBitCount']      = getid3_lib::$functionname(substr($BITMAPINFOHEADER, 14, 2)); // Specifies the number of bits per pixels
 		$parsed['fourcc']          =                            substr($BITMAPINFOHEADER, 16, 4);  // compression identifier
-		$parsed['biSizeImage']     = $getid3_lib->$functionname(substr($BITMAPINFOHEADER, 20, 4)); // size of the bitmap data section of the image (the actual pixel data, excluding BITMAPINFOHEADER and RGBQUAD structures)
-		$parsed['biXPelsPerMeter'] = $getid3_lib->$functionname(substr($BITMAPINFOHEADER, 24, 4)); // horizontal resolution, in pixels per metre, of the target device
-		$parsed['biYPelsPerMeter'] = $getid3_lib->$functionname(substr($BITMAPINFOHEADER, 28, 4)); // vertical resolution, in pixels per metre, of the target device
-		$parsed['biClrUsed']       = $getid3_lib->$functionname(substr($BITMAPINFOHEADER, 32, 4)); // actual number of color indices in the color table used by the bitmap. If this value is zero, the bitmap uses the maximum number of colors corresponding to the value of the biBitCount member for the compression mode specified by biCompression
-		$parsed['biClrImportant']  = $getid3_lib->$functionname(substr($BITMAPINFOHEADER, 36, 4)); // number of color indices that are considered important for displaying the bitmap. If this value is zero, all colors are important
-		unset($getid3_lib);
+		$parsed['biSizeImage']     = getid3_lib::$functionname(substr($BITMAPINFOHEADER, 20, 4)); // size of the bitmap data section of the image (the actual pixel data, excluding BITMAPINFOHEADER and RGBQUAD structures)
+		$parsed['biXPelsPerMeter'] = getid3_lib::$functionname(substr($BITMAPINFOHEADER, 24, 4)); // horizontal resolution, in pixels per metre, of the target device
+		$parsed['biYPelsPerMeter'] = getid3_lib::$functionname(substr($BITMAPINFOHEADER, 28, 4)); // vertical resolution, in pixels per metre, of the target device
+		$parsed['biClrUsed']       = getid3_lib::$functionname(substr($BITMAPINFOHEADER, 32, 4)); // actual number of color indices in the color table used by the bitmap. If this value is zero, the bitmap uses the maximum number of colors corresponding to the value of the biBitCount member for the compression mode specified by biCompression
+		$parsed['biClrImportant']  = getid3_lib::$functionname(substr($BITMAPINFOHEADER, 36, 4)); // number of color indices that are considered important for displaying the bitmap. If this value is zero, all colors are important
+
 		return $parsed;
 	}
 
@@ -1966,7 +2002,7 @@ var_dump($info['fileformat']);
 	}
 
 
-	static function RIFFfourccLookup($fourcc) {
+	public static function RIFFfourccLookup($fourcc) {
 
 		$begin = __LINE__;
 
@@ -2075,6 +2111,7 @@ var_dump($info['fileformat']);
 			FRWT	Darim Vision Forward Motion JPEG (www.darvision.com)
 			FRWU	Darim Vision Forward Uncompressed (www.darvision.com)
 			FLJP	D-Vision Field Encoded Motion JPEG
+			FPS1	FRAPS v1
 			FRWA	SoftLab-Nsk Forward Motion JPEG w/ alpha channel
 			FRWD	SoftLab-Nsk Forward Motion JPEG
 			FVF1	Iterated Systems Fractal Video Frame
