@@ -7,14 +7,11 @@
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
-.infos_son_haut{
+.infosdoc{
 	text-align:#GET{left};
-	font-size:90%;
 	background-color:#GET{claire};
 	padding:5px;
-	-webkit-border-radius:10px;
-	-moz-border-radius: 10px;
-	margin:5px 0;
+	margin:0 0 5px 0;
 }
 .infos_son_haut img.logo{
 	vertical-align:middle;
@@ -22,22 +19,21 @@
 }
 .infos_son_bas{
 	display:none;
-	background-color:#GET{foncee};
+	background-color:#fff;
 	padding: 5px;
 	-webkit-border-radius:10px;
 	-moz-border-radius:10px;
+	border-radius:10px;
 	margin:5px 0;
 	overflow:hidden;
 }
 .infos_son_bas table{
 	width:100%;
-	font-family:verdana;
 	border:0px;
 }
+
 .infos_son_bas table tr td.son_left{
 	width:40%;
-	font-size:80%;
-	color:#222;
 	text-align:#GET{right};
 	padding-#GET{right}: 5px;
 }

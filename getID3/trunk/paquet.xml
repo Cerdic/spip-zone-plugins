@@ -20,7 +20,7 @@
 
 	<pipeline nom="declarer_tables_principales" inclure="base/getid3_base.php" />
 	<pipeline nom="document_desc_actions" inclure="getid3_pipelines.php" />
-	<pipeline nom="editer_contenu_objet" action="editer_contenu_objet" inclure="getid3_pipelines.php" />
 	<pipeline nom="post_edition" action="post_edition" inclure="getid3_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="getid3_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="getid3_pipelines.php" />
 </paquet>
