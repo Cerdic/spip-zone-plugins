@@ -23,11 +23,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * -* 1 en cas d'échec (l'application est là mais retourne une erreur)
  * -* 127 en cas d'absence de l'application
  * 
- * @param unknown_type $valeurs
  * @param boolean $notif : On notifie ou pas?
  */
 function inc_getid3_verifier_binaires_dist($notif=false){
-	spip_log('Verification des binaires','getid3');
 	$erreurs = array();
 	
 	$tags_write = array('mp3','mpc','ogg','flac');
@@ -36,7 +34,7 @@ function inc_getid3_verifier_binaires_dist($notif=false){
 	/**
 	 * Tester vorbiscomment
 	 */
-	exec('vorbiscomment --help',$retour,$retour_int);	
+	exec('vorbiscomment --help',$retour,$retour_int);
 	if($retour_int != 0){
 		ecrire_config('getid3_vorbiscomment_casse', 'oui');
 		$erreurs[] = 'vorbiscomment';
@@ -66,10 +64,8 @@ function inc_getid3_verifier_binaires_dist($notif=false){
 	$tags_write = array_diff($tags_write,$tags_impossible);
 	ecrire_config('getid3_write',serialize($tags_write));
 	
-	if($notif){
+	if((count($erreurs) > 0) && $notif){
 		if ($notifications = charger_fonction('notifications', 'inc')) {
-			spip_log('notifications verifier_binaires','getid3');
-			spip_log($erreurs,'getid3');
 			$notifications('getid3_verifier_binaires', 1,
 				array(
 					'erreurs' => $erreurs

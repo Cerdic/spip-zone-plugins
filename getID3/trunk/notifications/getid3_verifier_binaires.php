@@ -30,8 +30,7 @@ function notifications_getid3_verifier_binaires($quoi, $id, $options){
 		}
 		$destinataires = pipeline('notifications_destinataires',
 			array(
-				'args'=>array('quoi'=>$quoi,'id'=>$id,'options'=>$options)
-			,
+				'args'=>array('quoi'=>$quoi,'id'=>$id,'options'=>$options),
 				'data'=>$tous)
 		);
 		$msg_mail = recuperer_fond('notifications/getid3_verifier_binaires',array('erreurs'=>$options['erreurs'],'nb' => $nb));
@@ -40,7 +39,9 @@ function notifications_getid3_verifier_binaires($quoi, $id, $options){
 		 * et la validité des emails
 		 */
 		notifications_nettoyer_emails($destinataires);
-		notifications_envoyer_mails($destinataires, $msg_mail,$sujet_mail);
+		foreach ($destinataires as $email) {
+			notifications_envoyer_mails($email, $msg_mail);
+		}
 	}
 }
 ?>
