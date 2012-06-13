@@ -1,0 +1,37 @@
+<div class="formulaire_spip formulaire_spipicious ajax" id="formulaire_spipicious[_(#ENV{type})][_(#ENV{id_objet})]">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
+		<div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:spipicious:vos_tags:></legend>
+			<ul>
+				[(#SAISIE{spipicious_del_tags,remove_tags,
+					explication=<:spipicious:explication_suppression_tag:>,
+					id_objet=#ENV{id_objet},
+					objet=#ENV{type},
+					label=''})]
+			</ul>
+		</fieldset>
+		<fieldset>
+		<legend><:spipicious:add_tags:></legend>
+		<ul>
+			[(#SAISIE{input,spipicious_tags,
+				label=<:spipicious:tags:>,
+				explication=<:spipicious:explication_ajout_tag{separateur=;}:>,
+				size=50})]
+		</ul>
+		</fieldset>
+		<p class="boutons">
+			<input type="hidden" name="spipicious_id" id="spipicious_id" value="#ENV{id_objet}" />
+			<input type="hidden" name="spipicious_type" id="spipicious_type" value="#ENV{type}" />
+			<input type="submit" name="add_tags" value="<:bouton_valider:>" class="submit" />
+		</p>
+		</div>
+	</form>]
+</div>
