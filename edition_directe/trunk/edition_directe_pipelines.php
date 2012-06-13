@@ -1,22 +1,5 @@
 <?php
 
-/*function edition_directe_header_prive($flux){
-	
-
-	 
-	include_spip('inc/config');
-	$config=lire_config('edition_directe');
-	
-	$objet=$_REQUEST['exec'];
-	
-	if($objet)$config=objet_edition_directe($objet);
-	
-
-	$flux .= '<link rel="stylesheet" href="'.generer_url_public('edition_directe_styles','id_'.$objet.'='.$_REQUEST['id_'.$objet]).'" type="text/css" media="all" />';
-
-	return $flux;	
- }*/
-
 // Ajouter le formulaire upload
 
 function edition_directe_affiche_gauche($flux){
@@ -50,6 +33,7 @@ function edition_directe_recuperer_fond($flux){
 			  
 				$contexte['objet']=$objet;
 				$contexte['id_objet']=$contexte['id_'.$objet];
+				if($contexte['exec']=='site')$contexte['id_objet']=$contexte['id_syndic'];
 				$texte=$flux['data']['texte'];
 				$edition=recuperer_fond('prive/echafaudage/contenu/objet_edit_directe',$contexte,array('ajax'=>true));
 				$patterns = array('/class=\'icone/','/<!--\/hd-->/');
