@@ -104,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_getid3' => 'GetID3',
+	'titre_infos_techniques' => 'Informations techniques',
 
 	// V
 	'verifier_formulaire' => 'Vérifiez le remplissage du formulaire.'
