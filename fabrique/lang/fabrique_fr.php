@@ -135,6 +135,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreurs' => 'Il y a des erreurs !',
 	'erreur_envoi_fichier' => 'Erreur dans l\'envoi du fichier.',
 	'erreur_chargement_fichier' => 'Le fichier envoyé n\a pas pu être compris. La restauration n\'est pas effectuée.',
+	'erreur_suppression_sauvegarde' => 'L\'ancienne sauvegarde (@dir@) n\'a pu être supprimée. Le plugin par précaution n\'a pas été régénéré.
+		La cause probable est la création par vous même de fichiers supplémentaires dans le plugin qui n\'ont pas des droits suffisants pour être manipulés par le serveur.',
+	'erreur_copie_sauvegarde' => 'La sauvegarde de @dir@ n\'a pu être réalisée. Le plugin par précaution n\'a pas été régénéré.
+		La cause probable provient de droits insufisants ce répertoire source pour le serveur.',
 	'explication_fichiers' => 'Même si vous ne les activez pas ici, certains de ces fichiers seront tout de même créés
 		en fonctions d\'autres options que vous aurez choisies ailleurs, notamment si vous activez un objet éditorial.',
 	'explication_sauvegarde' => 'La Fabrique crée un fichier de sauvegarde (<code>fabrique_{prefixe}.php</code>) à l\'intérieur de chaque plugin qu\'il crée.

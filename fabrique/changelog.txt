@@ -2,6 +2,18 @@ Plugin Fabrique pour SPIP
 Ce plugin génère d'autres plugins !
 -----------------------------------
 
+1.16.1 le 13 06 2012
+--------------------
+* Correction de notices PHP dans le code
+
+Dans l'interface
+* Correction de l'url du site de l'auteur mal préremplie
+* Correction probable de certains affichages d'erreurs
+* Remonter en haut du formulaire après soumission pour bien voir les erreurs éventuelles
+  (ce que fait SPIP par défaut mais qui était perturbé ici par les tabs() et accordions() JS)
+* Retours d'erreurs sur les traitements lorsque les droits des fichiers ne permettent pas
+  de supprimer ou créer la sauvegarde (cela évite de perdre bêtement des données
+  lorsqu'on ajoute des fichiers à la main mais qu'ils n'ont pas suffisamment de droits sur le serveur)
 
 1.16.0 le 02 06 2012
 --------------------

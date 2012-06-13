@@ -1,7 +1,15 @@
 (function($) {
 $(document).ready(function(){
 
-	function formulaire_fabrique_interactions() {
+	function formulaire_fabrique_interactions($is_ajax) {
+		/* Cette variable permet de savoir si on est en ajax, et si du coup il nous faudra repositionner
+		   le navigateur. On dit que la variable est a true par defaut
+		   (plus pratique pour l'appel de onAjaxLoad)
+		*/
+		if (typeof $is_ajax == 'undefined') {
+			$is_ajax = true;
+		}
+
 		/* Faire remonter les erreurs sur l'accordion et l'onglet */
 		$(".formulaire_fabriquer_plugin .sous_parties li.erreur").closest('div')
 			.prev('h4').addClass('erreur')
@@ -89,6 +97,15 @@ $(document).ready(function(){
 							selected: $('#open_tab').val(),
 							select: function(event, ui) {
 								$('#open_tab').val(ui.index);
+							},
+							create: function(event, ui) {
+								/* Se remettre en haut du formulaire après un coup d'ajax
+								   Ce que fait SPIP habituellement, mais accordion() et tabs()
+								   arrivent après et les navigateurs se décalent
+								*/
+								if ($is_ajax) {
+									$('.formulaire_fabriquer_plugin').positionner(false);
+								}
 							}
 						})
 						.find( ".ui-tabs-nav" ).sortable({
@@ -146,9 +163,11 @@ $(document).ready(function(){
 			});
 		}
 		</BOUCLE_skeleditor>
+
 	}
 
-	formulaire_fabrique_interactions();
+
+	formulaire_fabrique_interactions(false); /* ici, on n'est pas ajax */
 	onAjaxLoad(formulaire_fabrique_interactions);
 
 });

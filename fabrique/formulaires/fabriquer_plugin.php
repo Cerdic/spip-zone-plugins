@@ -214,8 +214,26 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 	// on efface l'eventuelle sauvegarde et on colle l'eventuel plugin deja genere a la place
 	supprimer_repertoire($_destination_ancien_plugin);
 	sous_repertoire_complet($_destination_backup);
+	// si la sauvegarde est encore présente, c'est que la suppression s'est mal passée
+	// il vaut mieux quitter en indiquant une erreur
+	if (is_dir($_destination_ancien_plugin)) {
+		fabrique_remettre_contexte($data);
+		return array(
+			'editable'=>'oui',
+			'message_erreur' => _T('fabrique:erreur_suppression_sauvegarde', array('dir'=>$_destination_ancien_plugin))
+		);
+	}
+	
 	if (is_dir($_destination_plugin)) {
-		rename($_destination_plugin, $_destination_ancien_plugin);
+		// try ne fonctionne pas sur rename()
+		if (!@rename($_destination_plugin, $_destination_ancien_plugin)) {
+			// une erreur sur le rename signifie qu'on a pas les droits suffisants sur $_destination_plugin
+			fabrique_remettre_contexte($data);
+			return array(
+				'editable'=>'oui',
+				'message_erreur' => _T('fabrique:erreur_copie_sauvegarde', array('dir'=>$_destination_plugin))
+			);
+		}
 	}
 	if (is_dir($_destination_plugin)) {
 		supprimer_repertoire($_destination_plugin);
@@ -558,6 +576,23 @@ function fabrique_fichiers_paquets($data) {
 }
 
 
+/**
+ * Remet les infos de contexte dans l'environnement
+ * - parce qu'on en ajoute par rapport à ce qui est posté -
+ * afin de réafficher correctement le formulaire si on a des erreurs
+ * dans la partie traiter(), car dans ce cas, le formulaire ne repasse pas dans le charger().
+ *
+ * @param array $data
+ * 		Les infos postées
+**/
+function fabrique_remettre_contexte($data) {
+	// on reintroduit le contexte complet, parce que l'erreur ne repasse pas dans charger() dans ce cas.
+	$data = fabrique_completer_contexte_images($data); // liste des fichiers images presents (pour paquet.xml)
+	$data = fabrique_completer_contexte($data); // raccourcis
+	foreach($data as $nom => $valeur) {
+		set_request($nom, $valeur);
+	}
+}
 
 // on complete avec des donnees qui servent souvent les informations de data.
 // pour se simplifier (un peu) les squelettes, et éviter de multiples calculs
