@@ -81,6 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_year' => 'Année',
 	'legende_ecriture_tags' => 'Écriture des tags',
 	'lien_modifier_id3' => 'Modifier les tags audio',
+	'lien_recuperer_infos' => 'Récupérer les informations du fichier',
 
 	// M
 	'message_cover_defaut_modifiee' => 'Un document a été modifié',
@@ -97,22 +98,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_validation_appliquer_cover' => 'Cette action est définitive. Il n\'est pas possible de revenir en arrière par la suite.',
 	'message_valider_cover_defaut' => 'Validez le formulaire pour associer la pochette par défaut',
 
-	// R
-	'recuperer_infos' => 'Récupérer les informations du fichier',
-
 	// S
-	'son_audiosamplerate' => 'Audio Samplerate :',
-	'son_bitrate' => 'Bitrate :',
 	'son_bitrate_cbr' => 'Bitrate constant',
 	'son_bitrate_vbr' => 'Bitrate variable',
-	'son_bitratemode' => 'Mode :',
-	'son_bits' => 'Bits :',
-	'son_duree' => 'Durée :',
-	'son_encodeur' => 'Encodeur :',
-	'son_extension' => 'Extension :',
-	'son_format' => 'Mime-Type :',
-	'son_infos_techniques' => 'Informations techniques',
-	'son_nom_fichier' => 'Nom du fichier',
 
 	// T
 	'titre_getid3' => 'GetID3',

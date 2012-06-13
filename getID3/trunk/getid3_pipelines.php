@@ -141,7 +141,7 @@ function getid3_document_desc_actions($flux){
 			$flux['data'] .= "<span class='sep'> | </span><a href='$url' target='_blank' class='editbox'>$texte</a>";
 		}
 	}if(($infos['distant'] == 'non') && in_array($infos['extension'],$son_recup_id3)){
-		$texte2 = _T('getid3:recuperer_infos');
+		$texte2 = _T('getid3:lien_recuperer_infos');
 		$action2 = generer_action_auteur('getid3_infos', "0/article/$id_document", $redirect);
 		$flux['data'] .= "<span class='sep'> | </span><a href='$action2'>$texte2</a>";
 	}
@@ -161,7 +161,16 @@ function getid3_taches_generales_cron($taches_generales){
 	return $taches_generales;
 }
 
-
+/**
+ * Insertion dans le pipeline recuperer_fond (SPIP)
+ * 
+ * On affiche les informations du document
+ * 
+ * @param array $flux 
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte du pipeline modifié
+ */
 function getid3_recuperer_fond($flux){
 	if ($flux['args']['fond']=='modeles/document_desc'){
 		if(isset($flux['args']['contexte']['id_document']) && ($flux['args']['contexte']['id_document'] > 0)){
