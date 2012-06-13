@@ -48,7 +48,6 @@ $liste_prefix_extensions_actives = liste_plugin_files(_DIR_PLUGINS_DIST);
 // liste la totalité des plugins di dosier plugin
 $liste_tous_les_plugins = liste_plugin_files(_ROOT_PLUGINS);
 //return "<b>".$params."</b>";
-
 switch ($params) { 
 	// si parametre liste, alors afficher la liste de tout ce qui est actif avec un résumé pour chaque
 	case "liste": 
@@ -57,7 +56,6 @@ switch ($params) {
 
 	/* on s'occupe de la liste des extensions */
 	$liste_extensions_actives = apropos_affiche_les_extension(_DIR_PLUGINS_DIST,$afficheQuoi="resume");
-
 	return $liste_plugins_actifs.$liste_extensions_actives;
 	break;
 	
@@ -67,28 +65,32 @@ switch ($params) {
 	$nbre_ext = count($liste_prefix_extensions_actives);
 	return $nbre_ext+$nbre_pluginsActifs;
 	break;
+	
 	/* si parametre plugins, afficher le nombre de plugin actifs */
 	case "plugins":
 	$nbre_pluginsActifs = count($liste_prefix_plugin_actifs);
 	return $nbre_pluginsActifs;
 	break;
+	
 	/* si paramètre extensions, afficher le nombre d'extensions actives */
 	case "extensions":
 	$nbre_ext = count($liste_prefix_extensions_actives);
 	return $nbre_ext;
 	break;
+	
 	/* si paramètre adisposition, afficher le nombre de plugins du dossier plugins */
 	case "adisposition":
 	$nbre_tous = count($liste_tous_les_plugins);
 	return $nbre_tous;
 	break;
+	
 	/* additionne tout ce qui est disponible e, plugins et extensions */ 
 	case "disponible":
 	$nbre_ext = count($liste_prefix_extensions_actives);
 	$nbre_tous = count($liste_tous_les_plugins);
 	return $nbre_tous+$nbre_ext;
-	//return
 	break;
+
 	/* si paramètre defaut, on récupère le prefixe du plugin pour afficher la description complète de celui-ci */
 	default:
 	//$leResume = count($liste_tous_les_plugins);
@@ -96,6 +98,7 @@ switch ($params) {
 	return "<br />".$leResume."<br />";
 	break; 
 	}
+
 }
 
 function apropos_affiche_les_extension($liste_extensions_actives,$afficheQuoi){
@@ -133,6 +136,11 @@ function apropos_afficher_list($url_page,$liste_plugins, $liste_plugins_actifs, 
 		$info = $get_infos($chemin, false, $dir_plugins);
 		$liste_plugins[$chemin] = strtoupper(trim(typo(translitteration(unicode2charset(html2unicode($info['nom']))))));
 	}	
+
+	// je trie par ordre alphabetique la liste
+	
+	asort($liste_plugins);
+
 	$block_UL = '';
 	// pour chaque plugin, je vais aller chercher les informations complementaires a afficher
 	// en l'occurrence, nom, version, etat, slogan ou description et logo.
@@ -156,12 +164,7 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 // Affichage des différentes informations à récupérer
 // suivants que nous voulions un liste totale des plugins
 // ou juste le description complete d'un seul plugin
-// je cherche la version de Spip car différence entre Spip 2 et Spip 3
-	//recherche la version de Spip
-	$laversion = spip_version();
-	$version_de_spip = $laversion[0];
-	//si version 3 de Spip
-	if ($version_de_spip == '3'){
+
 		$lefichier = '';
 		//recherche la presence d'un fichier paquet.xml
 		if (is_readable($file = "$dir_plugins$plug_file/" . ($desc = "paquet") . ".xml")) {
@@ -215,10 +218,12 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 					$credit = "<div class='apropos-auteur'>"._T('plugin_info_credit')." : ".implode($info['credit'])."</div>";
 				}
 
-				// Version SVn et répertoire du plugin
-				$svn_revision = version_svn_courante($dir_plugins.$plug_file);
-				$leSVN = ($svn_revision<0 ? ' SVN':'').' ['.abs($svn_revision).']'; // version_svn_courante($dir_plugins.$plug_file);	  
-				$infoSVN = "<div class='apropos-svn'>".$leSVN." "._T('repertoire_plugins')." ".$dir."</div>"; 
+				//teste si le numero de version SVn n'est pas vide, dans ce cas, on n'affiche rien			
+				if ($svn_revision !==''){
+					$svn_revision = version_svn_courante($dir_plugins.$plug_file);
+					$leSVN = "SVN ".($svn_revision<0 ? ' SVN':'').' ['.abs($svn_revision).']'; // version_svn_courante($dir_plugins.$plug_file);	  
+				}
+				$infoSVN = "<div class='apropos-svn'>".$leSVN.", "._T('repertoire_plugins')." ".$dir."</div>"; 
 
 		}else{
 
@@ -260,43 +265,7 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 			$auteur =  _T('public:par_auteur') .PtoBR(propre($a, $dir));
 		}
 		}
-	}
 	
-	//si version 2 de Spip
-	if ($version_de_spip == '2'){
-	$get_desc = charger_fonction('afficher_plugin','plugins');
-	$desc = plugin_propre($info['description']);
-	$dir = $dir_plugins.$plug_file;
-	if (($p=strpos($desc, "<br />"))!==FALSE)
-		$desc = substr($desc, 0,$p);
-		$slogan = couper($desc,180);
-		$url = parametre_url($url_page, "plugin", $dir);
-		$leNom = typo($info['nom']);
-		if (isset($info['icon']) and $i = trim($info['icon'])) {
-			include_spip("inc/filtres_images_mini");
-			$i = inserer_attribut(image_reduire("$dir/$i", 32),'alt','Icone du plugin '.$leNom);
-			$i = "<div class='apropos-icon'>$i</div>";
-		} else {
-			$generic = _DIR_PLUGIN_APROPOS."img/generique.png"; //mettre une icone generique si pas d'icone de defini
-			include_spip("inc/filtres_images_mini");
-			$i = inserer_attribut(image_reduire("$generic", 32),'alt','Icone g&eacute;n&eacute;rique pour le plugin '.$leNom);
-			$i = "<div class='apropos-icon'>$i</div>";
-			//$i = '';
-		}
-		$auteur = plugin_propre($info['auteur']) ;		
-			// on recherche la trace d'une arobase pour remplacer par 1 image
-			$lemail = strpos($auteur,'@') ;
-			if ($lemail !== false) {
-				$larobase = "<img src=\""._DIR_PLUGIN_APROPOS."img/arob.png\" alt=\"remplacant\" />";
-				$auteur = preg_replace('/@/', $larobase, $auteur);
-			}
-			// on recherche la trace d'un tag <br /> pour le supprimer
-			$lebr = strpos($auteur,'<br ') ;
-			if ($lebr !== false) {
-				$lepasbr = " ";
-				$auteur = preg_replace('/<br \/>/', $lepasbr, $auteur);
-			}
-	}
 	
 	// on construit l'affichage des informations
 	$leResume = "<div class='resume'>"
