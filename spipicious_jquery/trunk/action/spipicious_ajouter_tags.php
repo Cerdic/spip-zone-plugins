@@ -4,10 +4,10 @@
  * Gestion de tags lies aux auteurs
  *
  * Auteurs :
- * kent1 (kent1@arscenic.info)
+ * kent1 (http://www.kent1.info - kent1@arscenic.info)
  * Erational
  *
- * © 2007-2011 - Distribue sous licence GNU/GPL
+ * © 2007-2012 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -46,21 +46,20 @@ function action_spipicious_ajouter_tags_dist(){
  * @param int $id_groupe
  * @param string $manuel doit on le faire manuellement ou par inc/modifier
  */
-function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$type,$id_table_objet,$id_groupe,$manuel=false){
+function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$type,$id_table_objet,$id_groupe){
 	$tag_analysed = array();
 	$position = 0;
-
 	$statut = 'publie';
-	$table = table_objet_sql($type);
-	$infos_objets = sql_fetsel('*',$table,"$id_table_objet=$id_objet");
-	if(isset($infos_objets['statut']) && ($infos_objets['statut'] != 'publie')){
-		spip_log('Le statut de l objet est pas publié','spipicious');
-		spip_log($infos_objets['statut'],'spipicious');
-		$statut = 'prop';
-	}
 	
 	spip_log($tableau_tags,'spipicious');
 	if (is_array($tableau_tags)) {
+		$table = table_objet_sql($type);
+		$infos_objets = sql_fetsel('*',$table,"$id_table_objet=$id_objet");
+		if(isset($infos_objets['statut']) && ($infos_objets['statut'] != 'publie')){
+			spip_log('Le statut de l objet est pas publié','spipicious');
+			spip_log($infos_objets['statut'],'spipicious');
+			$statut = 'prop';
+		}
 		include_spip('action/editer_mot');
 		foreach ($tableau_tags as $k=>$tag) {
 			$tag = trim($tag);
@@ -70,20 +69,15 @@ function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$typ
 					// doit on creer un nouveau tag ?
 					$id_tag = sql_getfetsel("id_mot","spip_mots","titre=".sql_quote($tag_propre)." AND id_groupe=".intval($id_groupe));
 					if (!$id_tag) { // creation tag
-						if(!$manuel){
-							$id_tag = sql_insertq("spip_mots", array('id_groupe' => intval($id_groupe)));
-							$c = array('titre' => $tag, 'id_groupe' => intval($id_groupe));
-							mot_modifier($id_tag, $c);
-						}else{
-							$row = sql_fetsel("titre", "spip_groupes_mots", "id_groupe=".intval($id_groupe));
-							$id_tag = sql_insertq("spip_mots", array('id_groupe' => intval($id_groupe),'titre' => $tag_propre,'type'=> $row['titre']));
-						}
+						$id_tag = mot_inserer($id_groupe);
+						$c = array('titre' => $tag_propre);
+						mot_modifier($id_tag, $c);
 					}
 				}
 				// on lie le mot au couple type (uniquement si pas deja fait)
 				$result = sql_getfetsel("id_mot",'spip_mots_liens',"id_mot=".intval($id_tag)." AND objet=".sql_quote($objet)." AND id_objet=".intval($id_objet));
 				if (!$result) {
-					sql_insertq("spip_mots_liens",array('id_mot' => intval($id_tag),'objet' => $type, 'id_objet' => intval($id_objet)));
+					mot_associer($id_mot,array($type=>$id_objet));
 				}
 				$result_spipicious = sql_fetsel("*","spip_spipicious","id_mot=".intval($id_tag)." AND id_objet=".intval($id_objet)." AND objet=".sql_quote($type)." AND id_auteur=".intval($id_auteur));
 				if(!$result_spipicious['id_mot']){

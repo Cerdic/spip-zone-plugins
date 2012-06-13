@@ -5,10 +5,10 @@
  * Gestion de tags lies aux auteurs
  *
  * Auteurs :
- * kent1 (kent1@arscenic.info)
+ * kent1 (http://www.kent1.info - kent1@arscenic.info)
  * Erational
  *
- * © 2007-2011 - Distribue sous licence GNU/GPL
+ * © 2007-2012 - Distribue sous licence GNU/GPL
  *
  */
 

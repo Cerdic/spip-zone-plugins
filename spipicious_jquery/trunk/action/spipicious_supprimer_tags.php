@@ -5,10 +5,10 @@
  * Gestion de tags lies aux auteurs
  *
  * Auteurs :
- * kent1 (kent1@arscenic.info)
+ * kent1 (http://www.kent1.info - kent1@arscenic.info)
  * Erational
  *
- * © 2007-2011 - Distribue sous licence GNU/GPL
+ * © 2007-2012 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -38,7 +38,7 @@ function spipicious_supprimer_tags($remove_tags,$id_auteur,$id_objet,$type,$id_t
 	$compte = 0;
 	$tags_removed = array();
 	foreach($remove_tags as $remove_tag){
-
+		inclide_spip('action/editer_mot');
 		// On le vire de notre auteur dans spipicious
 		sql_delete("spip_spipicious","id_auteur=".intval($id_auteur)." AND id_objet=".intval($id_objet)." AND id_mot=".intval($remove_tag)." AND objet=".sql_quote($type)); // on efface le mot associe a l'auteur sur l'objet
 		$invalider = true;
@@ -49,14 +49,13 @@ function spipicious_supprimer_tags($remove_tags,$id_auteur,$id_objet,$type,$id_t
 		// suppression du mot pure et simple dans spip_mots_$type et spip_mot
 		$newt = sql_getfetsel("id_auteur","spip_spipicious","id_mot=".intval($remove_tag));
 		if (!$newt){
-			sql_delete("$table_mot","id_mot=".$remove_tag." AND $id_table_objet=".intval($id_objet));
-			sql_delete("spip_mots","id_mot=$remove_tag"); // on efface le mot si il n'est plus associe a rien
+			mot_supprimer($remove_tag)
 		}
 		else {
 			// Utilisation par un autre utilisateur ok mais utilisation sur le meme id_$type
 			$newt2 = sql_getfetsel("id_auteur","spip_spipicious","id_mot=".intval($remove_tag)." AND id_objet=".intval($id_objet)." AND objet=".sql_quote($type));
 			if(!$newt2){
-				sql_delete("spip_mots_liens","id_mot=".intval($remove_tag)." AND objet=".sql_quote($type)." AND id_objet=".intval($id_objet));
+				mot_dissocier($remove_tag,($type=>$id_objet));
 			}
 		}
 		$message = _T('spipicious:tag_supprime',array('name'=>$titre_mot));
