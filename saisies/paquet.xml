@@ -1,11 +1,11 @@
 <paquet
 	prefix="saisies"
 	categorie="outil"
-	version="1.25.9"
+	version="1.25.10"
 	etat="test"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="images/logo_saisie_48.png"
-	documentation="http://www.spip-contrib.net/Saisies,1347"
+	documentation="http://www.spip-contrib.net/Saisies"
 >
 	<nom>Saisies</nom>
 	<auteur>Matthieu Marcillaud</auteur>

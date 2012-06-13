@@ -3,7 +3,7 @@
 	<slogan>Ecrire facilement des champs de formulaires</slogan>
     <auteur>Matthieu Marcillaud - RastaPopoulos - Joseph</auteur>
     <licence>&#169; 2009-2011 GNU/GPL</licence>
-    <version>1.25.9</version>
+    <version>1.25.10</version>
     <etat>test</etat>
     <categorie>outil</categorie>
     
@@ -20,7 +20,7 @@
 		</multi>
 	</description>
     
-    <lien>http://www.spip-contrib.net/Saisies,1347</lien>
+    <lien>http://www.spip-contrib.net/Saisies</lien>
     <prefix>saisies</prefix>
     <icon>images/logo_saisie_48.png</icon>
     
