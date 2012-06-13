@@ -77,7 +77,7 @@ function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$typ
 				// on lie le mot au couple type (uniquement si pas deja fait)
 				$result = sql_getfetsel("id_mot",'spip_mots_liens',"id_mot=".intval($id_tag)." AND objet=".sql_quote($objet)." AND id_objet=".intval($id_objet));
 				if (!$result) {
-					mot_associer($id_mot,array($type=>$id_objet));
+					mot_associer($id_tag,array($type=>$id_objet));
 				}
 				$result_spipicious = sql_fetsel("*","spip_spipicious","id_mot=".intval($id_tag)." AND id_objet=".intval($id_objet)." AND objet=".sql_quote($type)." AND id_auteur=".intval($id_auteur));
 				if(!$result_spipicious['id_mot']){
