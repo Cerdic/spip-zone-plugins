@@ -1,8 +1,11 @@
 <?php
 /**
  * Plugin GetID3
- * (c) 2008-2010 BoOz et kent1
- * Distribue sous licence GPL
+ * 
+ * Auteurs :
+ * kent1 (http://www.kent1.info - kent1@arscenic.info), BoOz
+ * 2008-2012 - Distribué sous licence GNU/GPL
+ * 
  * Formulaire d'édition des tags ID3 d'un fichier sonore
  */
 

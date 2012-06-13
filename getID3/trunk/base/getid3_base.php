@@ -4,8 +4,8 @@
  * Gestion des métadonnées de fichiers sonores directement dans SPIP
  *
  * Auteurs :
- * Quentin Drouet (kent1), BoOz
- * 2008-2010 - Distribué sous licence GNU/GPL
+ * kent1 (http://www.kent1.info - kent1@arscenic.info), BoOz
+ * 2008-2012 - Distribué sous licence GNU/GPL
  *
  * Définition des tables
  *
