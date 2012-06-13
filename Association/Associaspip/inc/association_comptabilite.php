@@ -408,10 +408,21 @@ function association_passe_parametres_comptables($classes=array()) {
     return $params;
 }
 
-/* on recupere les totaux (recettes et depenses) d'un exercice des differents comptes de la classe specifiee */
-function association_calcul_totaux_comptes_classe($classe, $exercice=0, $destination=0, $direction='-1') {
+/* on recupere les soldes des differents comptes de la classe specifiee pour l'exercice specifie
+ * d'apres http://www.lacompta.ch/MITIC/theorie.php?ID=26 c'est le solde qui est recherche, et il corresponde bien a :
+ *  recettes-depenses=recettes pour les classes 6
+ *  depenses-recettes=depenses pour les classes 7
+ * */
+function association_calcul_soldes_comptes_classe($classe, $exercice=0, $destination=0, $direction='-1') {
     $c_group = (($classe==$GLOBALS['association_metas']['classe_banques'])?'journal':'imputation');
-    $valeurs = (($direction) ? ( ($direction<0)?'SUM('.(($destination)?'a_d':'a_c').'.depense) AS valeurs' : 'SUM('.(($destination)?'a_d':'a_c').'.recette) AS valeurs') : 'SUM('.(($destination)?'a_d':'a_c').'.recette) AS recettes, SUM('.(($destination)?'a_d':'a_c').'.depense) as depenses, SUM('.(($destination)?'a_d':'a_c').'.recette-'.(($destination)?'a_d':'a_c').'.depense) AS soldes' );
+    $valeurs = (($direction)
+	?
+	( ($direction<0)
+	    ?'SUM('.(($destination)?'a_d':'a_c').'.depense-'.(($destination)?'a_d':'a_c').'.recette) AS valeurs'
+	    : 'SUM('.(($destination)?'a_d':'a_c').'.recette-'.(($destination)?'a_d':'a_c').'.depense) AS valeurs'
+	)
+	:
+	'SUM('.(($destination)?'a_d':'a_c').'.recette) AS recettes, SUM('.(($destination)?'a_d':'a_c').'.depense) as depenses, SUM('.(($destination)?'a_d':'a_c').'.recette-'.(($destination)?'a_d':'a_c').'.depense) AS soldes' );
     $c_having = ($direction) ? 'valeurs>0' : ''; // on ne retiendra que les totaux non nuls...
     if ( sql_countsel('spip_asso_plan','active=1') ) { // existence de comptes actifs
 	$p_join = " RIGHT JOIN spip_asso_plan AS a_p ON a_c.$c_group=a_p.code";
@@ -470,7 +481,7 @@ function association_liste_totaux_comptes_classes($classes, $prefixe='', $direct
     $chapitre = '';
     $i = 0;
     foreach ( $liste_classes as $rang => $classe ) {
-	$query = association_calcul_totaux_comptes_classe($classe, $exercice, $destination, $direction );
+	$query = association_calcul_soldes_comptes_classe($classe, $exercice, $destination, $direction );
 	while ($data = sql_fetch($query)) {
 	    echo '<tr>';
 	    $new_chapitre = substr($data['code'], 0, 2);
@@ -593,7 +604,7 @@ class ExportComptes_TXT {
 	}
 	foreach ($this->classes as $laClasse=>$laDirection) {
 	    $this->LignesSimplesCorps($nomClasse, $champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='');
-	    $query = association_calcul_totaux_comptes_classe($laClasse, $this->exercice, $this->destination, $multi?0:$laDirection);
+	    $query = association_calcul_soldes_comptes_classe($laClasse, $this->exercice, $this->destination, $multi?0:$laDirection);
 	    $chapitre = '';
 	    $i = 0;
 	    while ($data = sql_fetch($query)) {
@@ -631,7 +642,7 @@ class ExportComptes_TXT {
 	foreach ($this->classes as $laClasse=>$laDirection) {
 	    $baliseClasse = $nomClasse.'1';
 	    $this->out .= "$indent$balises[$baliseClasse]\n";
-	    $query = association_calcul_totaux_comptes_classe($laClasse, $this->exercice, $this->destination, $laDirection);
+	    $query = association_calcul_soldes_comptes_classe($laClasse, $this->exercice, $this->destination, $laDirection);
 	    $chapitre = '';
 	    $i = 0;
 	    while ($data = sql_fetch($query)) {
@@ -839,7 +850,7 @@ class ExportComptes_PDF extends FPDF {
 	$chapitre = '';
 	$i = 0;
 	foreach ( $liste_classes as $rang => $classe ) { // calcul+affichage par classe
-	    $query = association_calcul_totaux_comptes_classe($classe, $this->exercice, $this->destination, $direction );
+	    $query = association_calcul_soldes_comptes_classe($classe, $this->exercice, $this->destination, $direction );
 	    $this->SetFont('Arial', '', 12); // police : Arial 12px
 	    while ($data = sql_fetch($query)) {
 		$this->SetXY($xc, $yc); // positionne le curseur
