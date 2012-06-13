@@ -12,7 +12,7 @@
 	<licence>GNU/GPL</licence>
 
 
-	<traduire gestionnaire="salvatore" module="crayons" reference="fr" />
+	<traduire gestionnaire="salvatore" module="pp_codes" reference="fr" />
 	
 	<pipeline nom="porte_plume_barre_pre_charger" inclure="pp_codes_pipelines.php" />
 	<pipeline nom="porte_plume_barre_charger" inclure="pp_codes_pipelines.php" />
