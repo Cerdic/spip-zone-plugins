@@ -63,23 +63,26 @@ function inc_getid3_recuperer_infos($id_document){
 			$covers[] = $val;
 		}
 	}
-
+	spip_log($covers,'getid3');
 	if(count($covers) > 0){
 		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
 
 		if(($id_vignette == 0)){
-			include_spip('inc/documents');
-			$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+			include_spip('inc/joindre_document');
+			$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 
 			list($extension,$arg) = fixer_extension_document($covers[0]);
-			$x = $ajouter_documents($covers[0], $covers[0],
-					    $type, $id, 'vignette', $id_document, $actifs);
-		}
-		/**
-		 * On supprime les covers temporaires
-		 */
-		foreach($covers as $fichier){
-			supprimer_fichier($fichier);
+			$cover_ajout = array(array('tmp_name'=>$covers[0],'name'=> basename($covers[0])));
+			spip_log('on ajoute la cover','getid3');
+			spip_log($cover_ajout,'getid3');
+			$ajoute = $ajouter_documents($id_vignette,$cover_ajout,'',0,'vignette');
+
+			if (is_numeric(reset($ajoute))
+			  AND $id_vignette = reset($ajoute)){
+				include_spip('action/editer_document');
+				document_modifier($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
+				recuperer_id3_doc($id_document);
+			}
 		}
 	}else if(strlen($cover_defaut = lire_config('getid3/cover_defaut','')) > 1){
 		/**
@@ -90,14 +93,20 @@ function inc_getid3_recuperer_infos($id_document){
 		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
 	
 		if(($id_vignette == 0)){
-			include_spip('inc/documents');
+			include_spip('inc/joindre_document');
 			include_spip('inc/distant');
 			$cover_defaut = find_in_path(copie_locale($cover_defaut));
-			$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+			$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 
 			list($extension,$arg) = fixer_extension_document($cover_defaut);
-			$x = $ajouter_documents($cover_defaut, $cover_defaut,
-					    $type, $id, 'vignette', $id_document, $actifs);
+			$cover_defaut = array(array('tmp_name'=>$cover_defaut,'name'=> basename($cover_defaut)));
+			$ajoute = $ajouter_documents($id_vignette,$cover_defaut,'',0,'vignette');
+
+			if (is_numeric(reset($ajoute))
+			  AND $id_vignette = reset($ajoute)){
+				include_spip('action/editer_document');
+				document_modifier($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
+			}
 		}
 	}
 	sql_updateq('spip_documents',
@@ -113,7 +122,7 @@ function inc_getid3_recuperer_infos($id_document){
 			'canaux' => $id3['channels']
 		),
 		'id_document='.intval($id_document));
-
+	spip_log($id3,'getid3');
 	return $id3;
 }
 ?>
