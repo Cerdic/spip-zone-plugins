@@ -162,9 +162,9 @@ function getid3_document_desc_actions($flux){
 		$url = parametre_url(generer_url_ecrire('document_id3_editer','id_document='.intval($id_document)),'redirect',$redirect);
 		$texte = _T('getid3:lien_modifier_id3');
 		if($flux['args']['position'] == 'galerie'){
-		$flux['data'] .= "[<a href='$url'>$texte</a>]";
+			$flux['data'] .= "[<a href='$url'>$texte</a>]";
 		}else{
-			$flux['data'] .= "<span class='sep'> | </span><a href='$url'>$texte</a>";
+			$flux['data'] .= "<span class='sep'> | </span><a href='$url' target='_blank' class='editbox'>$texte</a>";
 		}
 	}if(($infos['distant'] == 'non') && in_array($infos['extension'],$son_recup_id3)){
 		$texte2 = _T('getid3:recuperer_infos');

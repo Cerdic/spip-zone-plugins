@@ -13,10 +13,11 @@
 /**
  * Chargement des donnees du formulaire
  *
- * @param int $id l'id du document
- * @return array
+ * @param int $id 
+ * 		l'id du document
+ * @return array $valeurs
  */
-function formulaires_editer_id3_charger($id){
+function formulaires_editer_id3_charger($id,$retour=''){
 	$valeurs = array();
 	$config_id3 = lire_config('getid3',array());
 	$infos_doc = sql_fetsel('*','spip_documents','id_document='.intval($id));
@@ -65,7 +66,7 @@ function formulaires_editer_id3_charger($id){
  * @param int $id
  * @return array
  */
-function formulaires_editer_id3_traiter($id){
+function formulaires_editer_id3_traiter($id,$retour=''){
 	$valeurs = array();
 	
 	$infos = array('title','artist','album','year','genre','comment');
@@ -94,12 +95,10 @@ function formulaires_editer_id3_traiter($id){
 			supprimer_fichier($file);
 		}
 	}
-	if(_request('redirect')){
-		$redirect = parametre_url(urldecode(_request('redirect')),
-			'id_document', $id, '&');
-			
-		include_spip('inc/headers');
-		redirige_par_entete($redirect);
+	if($retour){
+		$res['redirect'] = $retour;
 	}
-	return array('message_ok'=>_T('getid3:message_fichier_maj'),'editable'=>true);
+	$res['editable'] = true;
+	$res['message_ok'] = _T('getid3:message_fichier_maj');
+	return $res;
 }

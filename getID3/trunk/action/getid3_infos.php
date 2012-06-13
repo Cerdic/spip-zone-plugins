@@ -36,9 +36,6 @@ function action_getid3_infos_post($r){
 	$recuperer_infos = charger_fonction('getid3_recuperer_infos','inc');
 	$infos = $recuperer_infos($id_document);
 
-	if(_request("iframe") == 'iframe') {
-		$redirect = parametre_url(urldecode($iframe_redirect),"show_video_infos",join(',',$documents_actifs),'&')."&iframe=iframe";
-	}
 	return $redirect;
 }
 
