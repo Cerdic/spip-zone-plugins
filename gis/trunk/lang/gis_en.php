@@ -40,6 +40,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_api_yandex' => 'Yandex',
 	'cfg_lbl_geocoder' => 'Geocoder',
 	'cfg_lbl_geolocaliser_user_html5' => 'Center the map on the location of the user at the creation step',
+	'cfg_lbl_layer_defaut' => 'Couche par défaut', # NEW
+	'cfg_lbl_layers' => 'Couches proposées', # NEW
 	'cfg_lbl_maptype' => 'Base map',
 	'cfg_lbl_maptype_carte' => 'Map',
 	'cfg_lbl_maptype_hybride' => 'Hybrid',
@@ -55,6 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_recherche_pas_resultats' => 'No point corresponds to the searched text.',
 	'erreur_xmlrpc_lat_lon' => 'Latitude and longitude should be set as arguments',
 	'explication_api_forcee' => 'The is imposed by another plugin or skeleton.',
+	'explication_layer_forcee' => 'La couche est imposée par un autre plugin ou un squelette.', # NEW
 	'explication_maptype_force' => 'The base map is imposed by another plugin or skeleton.',
 
 	// F
