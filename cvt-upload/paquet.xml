@@ -16,5 +16,4 @@
 	<pipeline nom="formulaire_charger" inclure="cvtupload_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="cvtupload_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="cvtupload_pipelines.php" />
-	<pipeline nom="editer_contenu_cvt_upload" inclure="cvtupload_pipelines.php" />
 </paquet>

@@ -7,7 +7,6 @@ function cvt_upload_formulaire_charger($flux){
 	$contexte =& $flux['data'];
 	
 	if ($contexte['_champs_fichiers'] and is_array($contexte['_champs_fichiers'])){
-		//$contexte['_pipelines']['editer_contenu_cvt_upload'] = array('champs_fichiers' => $contexte['_champs_fichiers']);
 		foreach ($contexte['_champs_fichiers'] as $champ){
 			$contexte['_hidden'] .= '<input type="hidden" name="_champs_fichiers[]" value="'.$champ.'" />';
 		}
@@ -72,10 +71,6 @@ function cvt_upload_formulaire_traiter($flux){
 		}
 	}
 	
-	return $flux;
-}
-
-function cvt_upload_editer_contenu_cvt_upload($flux){
 	return $flux;
 }
 

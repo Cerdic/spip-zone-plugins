@@ -21,10 +21,6 @@
 		<nom>formulaire_traiter</nom>
 		<inclure>cvtupload_pipelines.php</inclure>
 	</pipeline>
-	<pipeline>
-		<nom>editer_contenu_cvt_upload</nom>
-		<inclure>cvtupload_pipelines.php</inclure>
-	</pipeline>
 	
 	<necessite id="SPIP" version="[2.1.0;3.0.*]" />
 	<categorie>outil</categorie>
