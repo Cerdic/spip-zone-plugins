@@ -1,0 +1,76 @@
+.autocompleter
+{
+	border: 1px solid #444;
+	min-width: 250px;
+	background-color: #ccc;
+}
+.autocompleter ul li
+{
+	padding: 2px 10px;
+	white-space: nowrap;
+	font-size: 11px;
+}
+.selectAutocompleter
+{
+	background-color:#8B6F92;
+	color:white;
+}
+
+.autocomplete-message {
+	color: orange;
+}
+
+.ac_results {
+	min-width:180px;
+	padding: 0px;
+	border:1px solid #FFFFFF;
+	background-color: white;
+	z-index: 99999;
+}
+
+.ac_results ul {
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.ac_results li {
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: default;
+	display: block;
+	/*
+	if width will be 100% horizontal scrollbar will apear
+	when scroll mode will be used
+	*/
+	/*width: 100%;*/
+	font-size: 11px;
+	/*
+	it is very important, if line-height not setted or setted
+	in relative units scroll will be broken in firefox
+	*/
+	line-height: inherit;
+	word-wrap:break-word;
+	margin-right:15px;
+	overflow:hidden;
+	white-space:nowrap;
+}
+
+.ac_loading {
+	background-color: white;
+	opacity:.7;
+}
+
+.ac_even{
+	background-color: #fff;
+}
+.ac_odd {
+	background-color: #eee;
+}
+
+.ac_over {
+	background-color: #0A246A;
+	color: white;
+}

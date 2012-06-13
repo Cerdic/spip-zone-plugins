@@ -1,0 +1,32 @@
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
+[(#REM)
+
+	Menu de selection d'un mot a partir d'une valeur passee en parametre
+
+]
+[(#REM)
+	Eliminer d'abord les mots deja lies a l'article/breve etc.
+	Attention il FAUT passer un de ces 3 id_xxx en parametre
+]
+[(#SET{rien,<:selecteurgenerique:pas_suggestion:>})]
+
+<BOUCLE_e(MOTS){tout}{id_article?}{id_breve?}{id_rubrique?}{id_syndic?}{doublons}></BOUCLE_e>
+
+[(#REM) Chercher les mots correspondant a la requete ]
+<BOUCLE_s(MOTS){titre LIKE (#ENV*{q})%}
+	{id_groupe IN #ENV{groupes}|explode{','}}
+	{0,20}{par titre}{doublons}{tous}>
+#TITRE[ - (#DESCRIPTIF|textebrut|couper{20})][ ((#TYPE|textebrut))]|[(#TITRE|textebrut)]|#ID_MOT
+</BOUCLE_s>
+#SET{rien,''}
+</B_s>
+<BOUCLE_s1(MOTS){recherche (#ENV*{q})*}
+	{id_groupe IN #ENV{groupes}|explode{','}}
+	{0,20}{!par points}{doublons}{tous}>
+#TITRE[ - (#DESCRIPTIF|textebrut|couper{20})][ ((#TYPE|textebrut))]|[(#TITRE|textebrut)]|#ID_MOT
+</BOUCLE_s1>
+#SET{rien,''}
+</B_s1>
+
+[(#REM) Vraiment on n'a rien trouve ]
+[(#GET{rien})|[(#ENV*{q}|textebrut)]|0]
