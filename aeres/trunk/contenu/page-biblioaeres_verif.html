@@ -114,7 +114,7 @@
 </BOUCLE_pat>
 
 <B_hdr>
-<h2 class="h2">HDR - Habilitations à diriger des recherche</h2>
+<h2 class="h2">HDR - Habilitations à diriger des recherches</h2>
 <BOUCLE_hdr(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type=thesis}{role=author}{type_doc LIKE habilitation à diriger des recherches%}>
 [<h3 class="h3">(#ANNEE|unique{hdr})</h3>]
 <div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>

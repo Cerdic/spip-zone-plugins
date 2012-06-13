@@ -105,7 +105,7 @@
 </B_pat>
 
 <B_hdr>
-<h4 class="h4">HDR - Habilitations à diriger des recherche</h4>
+<h4 class="h4">HDR - Habilitations à diriger des recherches</h4>
 <BOUCLE_hdr(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{zotsip_depuis}{0,#ENV{max,100000}}{json LIKE %#ENV{recherche}%}{!par annee}{par auteurs}{type=thesis}{role=author}{type_doc LIKE habilitation à diriger des recherches%}>
 [[(#COMPTEUR_BOUCLE|>{1}|oui)</ul>]<h5 class="h5">(#ANNEE|=={0}|?{<:zotspip:annee_non_precisee:>,#ANNEE}|unique{#GET{alea}_hdr})</h5><ul class="spip">]
 #INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
