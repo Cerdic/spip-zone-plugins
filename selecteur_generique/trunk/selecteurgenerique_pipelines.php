@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function SelecteurGenerique_jqueryui_forcer($plugins){
+function selecteurgenerique_jqueryui_plugins($plugins){
 	if (defined('DESACTIVER_SELECTEUR_GENERIQUE')
 	AND DESACTIVER_SELECTEUR_GENERIQUE)
 		return $plugins;
@@ -11,15 +11,7 @@ function SelecteurGenerique_jqueryui_forcer($plugins){
 	return $plugins;
 }
 
-function SelecteurGenerique_jquery_plugins($plugins){
-	if (defined('DESACTIVER_SELECTEUR_GENERIQUE')
-	AND DESACTIVER_SELECTEUR_GENERIQUE)
-		return $plugins;
-	
-	$plugins[] = 'javascript/jquery.ui.autocomplete.html.js';
-	return $plugins;
-}
-function SelecteurGenerique_inserer_auteur() {
+function selecteurgenerique_inserer_auteur() {
 
 	$ac = generer_url_ecrire('selecteur_generique');
 	$id_article = _request('id_article');
@@ -75,7 +67,7 @@ EOS;
 
 }
 
-function SelecteurGenerique_inserer_mot() {
+function selecteurgenerique_inserer_mot() {
 	if ($id = _request('id_article')) {
 		$type = 'id_article';
 	} elseif ($id = _request('id_rubrique')) {
@@ -162,7 +154,7 @@ EOS;
 
 }
 
-function SelecteurGenerique_inserer_rubrique() {
+function selecteurgenerique_inserer_rubrique() {
 
 	$ac = parametre_url(generer_url_ecrire('selecteur_generique',
 		'quoi=rubrique'),
@@ -223,7 +215,7 @@ EOS;
 }
 
 // Calcule et insere le javascript necessaire pour la page
-function SelecteurGenerique_inserer_javascript($flux) {
+function selecteurgenerique_inserer_javascript($flux) {
 
 	if (defined('DESACTIVER_SELECTEUR_GENERIQUE')
 	AND DESACTIVER_SELECTEUR_GENERIQUE)
@@ -234,18 +226,18 @@ function SelecteurGenerique_inserer_javascript($flux) {
 
 	if (_request('exec') == 'articles'
 	OR _request('exec') == 'acces_restreint_edit') {
-		$js .= SelecteurGenerique_inserer_auteur();
+		$js .= selecteurgenerique_inserer_auteur();
 	}
 
 	if (_request('exec') == 'articles'
 	OR _request('exec') == 'naviguer'
 	OR _request('exec') == 'breves_voir'
 	OR _request('exec') == 'sites') {
-		$js .= SelecteurGenerique_inserer_mot();
+		$js .= selecteurgenerique_inserer_mot();
 	}
 	if (_request('exec') == 'articles_edit'
 	OR _request('exec') == 'rubriques_edit') {
-		$js .= SelecteurGenerique_inserer_rubrique();
+		$js .= selecteurgenerique_inserer_rubrique();
 	}
 	if ($js){
 		/**
