@@ -1,8 +1,4 @@
-<!-- autoriser=configurer -->
-<!-- refus=<:cfg:refus_configuration_administrateur:> -->
-<!-- nom=getid3 -->
-
-<div class="formulaire_spip formulaire_cfg formulaire_#FORM">
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -12,7 +8,8 @@
 #ACTION_FORMULAIRE{#ENV{action}}
 <ul>
 	<li class="fieldset">
-		<h3 class="legend"><:getid3:legende_ecriture_tags:></h3>
+		<fieldset>
+		<legend><:getid3:legende_ecriture_tags:></legend>
 		<ul>
 			<li class="editer_ecriture_tags">
 				<label><:getid3:label_reecriture_tags:></label>
@@ -36,10 +33,11 @@
 				<input type="text" name="cover_defaut" id="cover_defaut" value="#ENV{cover_defaut}" class="text" />
 			</li>
 		</ul>
+		</fieldset>
 	</li>
 </ul>
 <p class="boutons">
-	<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+	<input type="submit" value="<:bouton_valider:>" class="submit" />
 </p>
 </div>
 </form>
