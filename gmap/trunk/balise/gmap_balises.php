@@ -30,25 +30,53 @@ $GLOBALS['nextMapID'] = 1;
  * paramètres un id d'objet géolocalisable et les balises acceptent d'autres paramètres
  */
 
-$GLOBALS['context_query'] = array(
-	'objet', 'id_objet',
-	'id_document',
-	'id_article',
-	'id_breve',
-	'id_rubrique',
-	'id_secteur',
-	'id_mot',
-	'id_auteur',
-	'type_point'
-);
+// DEPRECATED
+function _gmap_objet_englobant($p)
+{
+	$ret = array();
+
+	// on prend nom de la cle primaire de l'objet pour calculer sa valeur
+	$_id_objet = $p->boucles[$p->id_boucle]->primary;
+    $ret['id_objet'] = champ_sql($_id_objet, $p);
+    $ret['objet'] = $p->boucles[$p->id_boucle]->id_table;
+    $ret['objet_type'] = objet_type($ret['objet']);
+	
+	return $ret;
+}
+
+function _gmap_objets_contexte($p) {
+
+	$contexte = array();
+	$contexte['objet'] = false;
+	$contexte['id_objet'] = false;
+	
+	$idb = $p->id_boucle;
+	while (isset($p->boucles[$idb]) && !$contexte['id_objet']) {
+		$objet = $p->boucles[$p->id_boucle]->id_table;
+		$_id_objet = $p->boucles[$p->id_boucle]->primary;
+		if ($objet !== 'geopoint') {
+			$contexte['objet'] = $objet;
+			$contexte['id_objet'] = champ_sql($_id_objet, $p);
+		}
+		$idb = $boucles[$idb]->id_parent;
+	}
+	
+	return $contexte;
+}
 
 // Au départ : lancer la balise dynamique
 function _gmap_calculer_balise($p, $nom)
 {
+	// Calculer les paramètres dont on a besoin
+	$args = array('objet', 'id_objet', 'id_geopoint', 'type_point');
+	$contexte = _gmap_objets_contexte($p);
+	$params = array($contexte['objet'], $contexte['id_objet']);
+	
 	return calculer_balise_dynamique(
-			$p,		//  le nœud AST pour la balise
-			$nom,	//  le nom de la balise
-			$GLOBALS['context_query']); //  les éléments utilisables de l'environnement	
+			$p,			// le nœud AST pour la balise
+			$nom,		// le nom de la balise
+			$args,		// les éléments utilisables de l'environnement	
+			$params);	// des paramètres supplémentaires passés
 }
 
 // Décomposition d'un paramètre en paire clef/valeur, selon qu'il y a ou non
@@ -78,17 +106,22 @@ function _gmap_split_param($param)
 
 // Dans la partie statique, décoder les paramètres
 // Renvoie un tableau de paramètres nommés contenant :
-// - toujours "objet" et "id_objet"
+// - toujours "objet", "id_objet" et "id_geopoint"
 // - "type_point", une chaine vide s'il n'est pas défini
 // - tous les autres paramètres passés à la balise
 function _gmap_calculer_balise_params($args, $bStrictParams = false)
 {
+	// Redécomposer les arguments
+	$dynargs = array_slice($args, 0, 4);	// objet, id_objet, id_geopoint, type_point
+	$contexte = array_slice($args, 4, 2);	// objet, id_objet
+	$options = array_slice($args, 6);		// les autres paramètres de la balise
+	
 	// Commencer par décoder le paramètres explicites, donc ceux qui sont après ce
 	// qui a été demandé dans la pile
 	$params = array();
-	for ($index = count($GLOBALS['context_query']); $index < count($args); $index++)
+	for ($index = 0; $index < count($options); $index++)
 	{
-		list($key, $value) = _gmap_split_param($args[$index]);
+		list($key, $value) = _gmap_split_param($options[$index]);
 		if (!$key)
 			continue;
 		$params[$key] = $value;
@@ -99,120 +132,94 @@ function _gmap_calculer_balise_params($args, $bStrictParams = false)
 	// savoir quels paramètres il faut passer
 	if (isset($params['query']))
 		$bStrictParams = true;
-	
+		
 	// Inialiser les paramètres implicites
 	$objet = null;
 	$id_objet = null;
+	$id_geopoint = null;
 	$type_point = null;
 	
 	// Traiter le cas "type_point" en premier, il simplifiera la suite
-	if (isset($params["type_point"]))
-	{
+	if (isset($params["type_point"])) {
+	
 		if ($params["type_point"] === true)
-			$type_point = $args[array_search("type_point", $GLOBALS['context_query'], true)];
+			$type_point = $dynargs[3];
 		else
 			$type_point = $params["type_point"];
+			
 		unset($params["type_point"]);
 	}
 	
+	// Id_geopoint
+	if (isset($params["id_geopoint"])) {
+	
+		if ($params["id_geopoint"] === true)
+			$id_geopoint = $dynargs[2];
+		else
+			$id_geopoint = $params["id_geopoint"];
+			
+		unset($params["id_geopoint"]);
+	}
+	
 	// Traiter le cas de "objet" dont peut dépendre le type d'objet choisit
-	if (isset($params["objet"]))
-	{
+	if (isset($params["objet"])) {
+	
 		if (is_string($params["objet"]))
 			$objet = $params["objet"];
+			
 		unset($params["objet"]);
 	}
 	
 	// Finalement, traiter le cas de id_objet qui est prioritaire, mais
 	// seulement si $objet est déjà défini
-	if (isset($params["id_objet"]))
-	{
+	if (isset($params["id_objet"]))	{
+	
 		if ($objet && is_string($params["id_objet"]))
 			$id_objet = $params["id_objet"];
+			
 		unset($params["id_objet"]);
 	}
 	
-	// Là, on a nettoyé les paramètres passés manuellement ($params) de "objet", "id_objet" et
-	// "type_point", si on n'a trouvé aucun objet, on va essayer d'en trouvé un dans la pile
-	
-	// Si on n'a pas de id_objet, mais un objet désigné, le chercher
-	if (!$id_objet && is_string($objet))
-	{
-		$idName = 'id_'.$objet;
-		if (isset($params[$idName]) && is_string($params[$idName]))
-			$id_objet = $params[$idName];
-		else if ($index = array_search($idName, $GLOBALS['context_query'], true))
-			$id_objet = $args[$index];
-	}
-	
-	// Si on n'a pas de id_objet, parcourir les paramètres explicites pour voir si
-	// un type d'objet est désigné (c'est le cas le plus courant : on a mis dans les
-	// paramètre {id_rubrique} ou {id_rubrique=XX})
-	if (!$id_objet)
-	{
+	// Chercher si on a un id_* en paramètre, s'il y en a un, il faut qu'il corresponde
+	// à l'objet de la boucle englobante (en gros, il ne sert à rien...)
+	if (!$id_objet) {
 		// Rechercher le premier paramètre qui correspond à un des paramètres implicites
-		foreach ($params as $key => $value)
-		{
-			if (($key === "objet") || ($key === "id_objet") || ($key === "type_point"))
-				continue;
-			if (in_array($key, $GLOBALS['context_query'], true))
-			{
-				if (preg_match("/^id_([a-z]*)$/i", $key, $matches))
-				{
-					$objet = $matches[1];
-					if ($value === true)
-						$id_objet = $args[array_search($key, $GLOBALS['context_query'], true)];
-					else
-						$id_objet = $value;
-					break;
-				}
-			}
-		}
-	}
-	
-	// Si on n'a toujours rien, parcourir les paramètres implicites dans l'ordre
-	// de préférence
-	// Ici, il serait mieux de prendre la boucle la plus proche, mais je ne sais pas
-	// faire ça dans une balise dynamique : il faudrait décoder les codes PHP renvoyés
-	// pour les valeurs afin de voir lequel a l'indice le plus proche
-	if (!$id_objet && ($bStrictParams !== true))
-	{
-		foreach ($GLOBALS['context_query'] as $index => $name)
-		{
-			if (($name === "objet") || ($name === "id_objet") || ($name === "type_point"))
-				continue;
-			$value = $args[$index];
-			if (isset($value) && is_string($value) && strlen($value))
-			{
-				if (preg_match("/^id_([a-z]*)$/i", $name, $matches))
-				{
-					$objet = $matches[1];
-					$id_objet = $value;
-					break;
-				}
-			}
-		}
-	}
-	
-	// Nettoyer de l'objet trouvé, puis rechercher dans la pile les autres
-	foreach ($params as $name => $value)
-	{
-		// Supprimer si c'est l'objet qu'on a trouvé
-		if ($name === 'id_'.$objet)
-			unset($params[$name]);
-			
-		// Si aucune valeur explicite n'est donnée, tenter de reprendre dans la
-		// pile
-		else if (!is_string($value))
-		{
-			if ($index = array_search($name, $GLOBALS['context_query'], true))
-				$params[$name] = $args[$index];
-			if (!$params[$name] || !strlen($params[$name]))
-				unset($params[$name]);
-		}
-	}
+		foreach ($params as $key => $value) {
 		
-	// Remettre l'objet et le type de point
+			if (($key === "objet") || ($key === "id_objet") || ($key === "id_geopoint") || ($key === "type_point"))
+				continue;
+			if (preg_match("/^id_([a-z]*)$/i", $key, $matches))
+			{
+				if (($value === true) && ($contexte[0] === $matches[1]))
+					$id_objet = $contexte[1];
+				else
+					$id_objet = $value;
+				break;
+			}
+		}
+	}
+	
+	// Si le contexte dynamique contient explicitement objet et id_objet, les utiliser
+	if (!$objet || !$id_objet) {
+		if ($dynargs[0] && strlen($dynargs[0]) && $dynargs[1]) {
+			$objet = $dynargs[0];
+			$id_objet = $dynargs[1];
+		}
+	}
+	
+	// Sinon prendre l'objet de la boucle englobante, passé dans le contexte
+	if ((!$objet || !$id_objet) && ($bStrictParams !== true)) {
+		if ($contexte[0] && strlen($contexte[0]) && $contexte[1]) {
+			$objet = $contexte[0];
+			$id_objet = $contexte[1];
+		}
+	}
+	
+	// Nettoyer de l'objet trouvé
+	if (isset($params['id_'.$objet]))
+		unset($params['id_'.$objet]);
+		
+	// Remettre les objets récupérés
 	if (isset($objet) && isset($id_objet) && is_string($objet) && strlen($objet))
 	{
 		$params['objet'] = $objet;
@@ -220,9 +227,12 @@ function _gmap_calculer_balise_params($args, $bStrictParams = false)
 	}
 	if (isset($type_point) && is_string($type_point) && strlen($type_point))
 		$params['type_point'] = $type_point;
+	if (isset($id_geopoint))
+		$params['id_geopoint'] = $id_geopoint;
 	
 	return $params;
 }
+
 
 
 /*

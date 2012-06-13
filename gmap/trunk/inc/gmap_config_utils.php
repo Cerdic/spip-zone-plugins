@@ -24,7 +24,7 @@ function gmap_apis_connues()
 function gmap_capability($capability)
 {
 	// Spécificités de l'API
-	$api = gmap_lire_config('gmap_api', 'api', 'gma3');
+	$api = gmap_lire_api();
 	$capabilities = charger_fonction("capabilities", "mapimpl/".$api."/public", true);
 	if (!$capabilities)
 		return false;
@@ -70,11 +70,16 @@ function gmap_init_config($bloc, $nom, $valeur)
 // Teste si le plugin est actif (clef google api définie)
 function gmap_est_actif()
 {
-	$api = gmap_lire_config('gmap_api', 'api', 'gma3');
+	$api = gmap_lire_api();
 	$test_actif = charger_fonction("test_actif", "mapimpl/".$api."/public", true);
 	if (!$test_actif)
 		return false;
 	return $test_actif();
+}
+
+// Raccourci pour lire l'API
+function gmap_lire_api() {
+	return gmap_lire_config('gmap_api', 'api', 'gma3');
 }
 
 // Teste si un élément SPIP peut-être géolocalisé

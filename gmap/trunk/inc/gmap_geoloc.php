@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/gmap_config_utils');
 include_spip('inc/gmap_db_utils');
+include_spip('inc/gmap_spip_utils');
 include_spip('gmap_filtres');
 
 // Rechercher en base comment doit être affichée la carte d'une base
@@ -23,7 +24,7 @@ function gmap_get_object_viewport($objet, $id_objet, $profile='interface')
 	// La clef à laquelle se trouvent les configurations dépend du profile et de l'api
 	if (!isset($profile))
 		$profile = 'interface';
-	$api = gmap_lire_config('gmap_api', 'api', 'gma3');
+	$api = gmap_lire_api();
 	$apiConfigKey = 'gmap_'.$api.'_'.$profile;
 	
 	// Initialisation sur le défaut du site
@@ -118,7 +119,7 @@ function gmap_get_object_viewport($objet, $id_objet, $profile='interface')
 function gmap_definir_parametre_carte($objet, $id_objet, $varName = null, $params = null, $profile='interface')
 {
 	// Fonction spécifique à l'API
-	$api = gmap_lire_config('gmap_api', 'api', 'gma3');
+	$api = gmap_lire_api();
 	$parametre_carte = charger_fonction("parametre_carte", "mapimpl/".$api."/public");
 	if (!$parametre_carte)
 		return '';
@@ -344,8 +345,16 @@ function _gmap_find_file($prefix, &$name, $ext, &$fond, $folder, $args = null)
 	//	return $file;
 	//}
 }
-function gmap_trouve_def_file($contexte, $prefix, $ext, $branches = true, $folder = null, $buffer = null, $default = 'default')
+function gmap_trouve_def_file($contexte, $prefix, $ext, $params)
 {
+	/*
+	Transformation pour le buffer général :
+	- regrouper $branches, $folder (?), $buffer et $default (?) dans un $params
+	- ajouter $bufferAmont
+	
+	Ce buffer contient des clefs par $prefix-$objet-$ext
+	*/
+	
 	$result = NULL;
 	$file = FALSE;
 	$fond = NULL;
@@ -353,12 +362,25 @@ function gmap_trouve_def_file($contexte, $prefix, $ext, $branches = true, $folde
 	// Arguments pour _gmap_find_file
 	$args = $branches ? array('contexte' => $contexte) : null;
 	$id_rubrique = 0;
+
+	// Données du contexte
+	$objet = $contexte['objet'];
+	$id_objet = $contexte['id_objet'];
+	$type_point = $contexte['type_point'];
+	
+	// Paramètres du process
+	$branches = (isset($params['branches'])) ? $params['branches'] : true;
+	$folder = (isset($params['sous-dossier'])) ? $params['sous-dossier'] : null;
+	$buffer = (isset($params['buffer-aval'])) ? $params['buffer-aval'] : null;
+	$default = (isset($params['nom-defaut'])) ? $params['nom-defaut'] : 'default';
 	
 	// Si on cherche un fichier lié à un objet
-	if ($contexte['objet'] &&  $contexte['id_objet'])
+	if ($objet &&  $id_objet)
 	{
+		// Rechercher dans le buffer général
+		
 		// Rechercher d'abord s'il y a un fichier spécifique
-		$name = '='.$contexte['objet'].$contexte['id_objet'];
+		$name = '='.$objet.$id_objet;
 		if ($file = _gmap_find_file($prefix, $name, $ext, $fond, $folder, $args))
 		{
 			// Ne pas ajouter dans le buffer : ça n'a pas de sens pour une icone spécifique
@@ -373,10 +395,10 @@ function gmap_trouve_def_file($contexte, $prefix, $ext, $branches = true, $folde
 		// On a aussi besoin de la rubrique
 		if ($branches)
 		{
-			if ($contexte['objet'] === "rubrique")
-				$id_rubrique = $contexte['id_objet'];
+			if ($objet === "rubrique")
+				$id_rubrique = $id_objet;
 			else
-				$id_rubrique = gmap_get_rubrique($contexte['objet'], $contexte['id_objet']);
+				$id_rubrique = gmap_get_rubrique($objet, $id_objet);
 		}
 	}
 	// Sinon, on peut chercher un fichier lié à un point
@@ -396,7 +418,7 @@ function gmap_trouve_def_file($contexte, $prefix, $ext, $branches = true, $folde
 	
 	// Si on n'a pas d'objet, passer directement au défaut
 	$bufferEntry = false;
-	if (!$contexte['objet'] || !$contexte['id_objet'])
+	if (!$objet || !$id_objet)
 	{
 		$fond = $prefix;
 		if ($default && strlen($default))
@@ -407,9 +429,9 @@ function gmap_trouve_def_file($contexte, $prefix, $ext, $branches = true, $folde
 	else
 	{
 		// Rechercher dans le buffer (seulement pour les icones)
-		if (is_array($buffer) && $contexte['type_point'] && $id_rubrique)
+		if (is_array($buffer) && $type_point && $id_rubrique)
 		{
-			$bufferEntry = $contexte['objet'].'-'.$contexte['type_point'].'-'.$id_rubrique;
+			$bufferEntry = $objet.'-'.$type_point.'-'.$id_rubrique;
 			if ($resultInBuffer = $buffer[$bufferEntry])
 			{
 				$result = array('name'=>$resultInBuffer); // On renvoie seulement le nom trouvé, ça indique que l'icone est déjà créée
@@ -424,18 +446,18 @@ function gmap_trouve_def_file($contexte, $prefix, $ext, $branches = true, $folde
 			$args['ids_rubrique'] = array($id_rubrique);
 			while ($id_rubrique = gmap_get_rubrique('rubrique', $id_rubrique))
 				$args['ids_rubrique'][] = $id_rubrique;
-			// Ca fait beaucoup de requêtes, on pourrait optimiser en cachant cette
-			// liste : sur un même carte on va passer ici pour la requête, les définitions
+			// Ça fait beaucoup de requêtes, on pourrait optimiser en cachant cette
+			// liste : sur une même carte on va passer ici pour la requête, les définitions
 			// de marqueurs et les images des marqueurs...
 		}
 		
 		// Recherche le marqueur selon le type
-		$name = $contexte['objet'].'-'.$contexte['type_point'];
+		$name = $objet.'-'.$type_point;
 		if (!$type_point || (strlen($type_point) == 0) ||
 			!($file = _gmap_find_file($prefix, $name, $ext, $fond, $folder, $args)))
 		{
 			// sinon, rechercher seulement avec l'objet
-			$name = $contexte['objet'];
+			$name = $objet;
 			if (!($file = _gmap_find_file($prefix, $name, $ext, $fond, $folder, $args)))
 			{
 				// et avec le type
@@ -505,7 +527,11 @@ class gmap_icon_def_file_parser
 		if (strlen($this->_file) > 0)
 		{
 			// Créer un parseur XML pour décoder la chaîne de requête
-			$parseurXML = xml_parser_create();
+			$parseurXML = xml_parser_create("UTF-8");
+			// ==> Les fichiers sont donc en utf-8 sans BOM.
+			// Il semble qu'en PHP >= 5.0 on puisse passer "" pour indiquer de rechercher le format
+			// à partir des trois premiers octets, dans ce cas, il faut le BOM.
+			// Bref, c'est un peu la merde en fonction des versions de PHP...
 			if ($parseurXML == NULL)
 				return FALSE;
 			xml_set_object($parseurXML, $this);
@@ -723,7 +749,11 @@ function gmap_definition_icone($name, $bSelected = FALSE)
 {
 	$folder = gmap_theme_folder();
 	$branches = false; // fonction utilisée depuis la partie privée uniquement, il n'y a pas de variations
-	if (!($icon = gmap_trouve_def_file(null, $name, 'gmd', $branches, $folder, null, '')) || !isset($icon['file']))
+	if (!($icon = gmap_trouve_def_file(null, $name, 'gmd', array(
+									'branches'=>$branches,
+									'sous-dossier'=>$folder,
+									'buffer-aval'=>null,
+									'nom-defaut'=>''))) || !isset($icon['file']))
 		return 'null';
 	
 	// Récupérer la définition de l'icone
@@ -782,10 +812,12 @@ function gmap_ajoute_icone($name, $defFile, $map)
 function gmap_get_object_info_contents($contexte)
 {
 	$branches = (gmap_lire_config('gmap_optimisations', 'gerer_branches', 'oui') === 'oui') ? true : false;
-	$fond = gmap_trouve_def_file($contexte, 'gmap-info', 'html', $branches, 'modeles');
+	$fond = gmap_trouve_def_file($contexte, 'gmap-info', 'html', array(
+									'branches'=>$branches,
+									'sous-dossier'=>'modeles'));
 	if (!$fond)
 		return "";
-	$page = recuperer_fond($fond['spip-path'], $contexte);
+	$page = gmap_recuperer_fond($fond['spip-path'], $contexte);
 	return $page;
 }
 
@@ -829,7 +861,10 @@ function gmap_ajoute_marqueur($marker, $map, $mapId)
 	if (!$GLOBALS['iconsDefs'.$mapId])
 		$GLOBALS['iconsDefs'.$mapId] = array();
 	$branches = (gmap_lire_config('gmap_optimisations', 'gerer_branches', 'oui') === 'oui') ? true : false;
-	if (($icon = gmap_trouve_def_file($contexte, 'gmap-marker', 'gmd', $branches, gmap_theme_folder(), $GLOBALS['iconsAliases'.$mapId])) &&
+	if (($icon = gmap_trouve_def_file($contexte, 'gmap-marker', 'gmd', array(
+									'branches'=>$branches,
+									'sous-dossier'=>gmap_theme_folder(),
+									'buffer-aval'=>$GLOBALS['iconsAliases'.$mapId]))) &&
 		isset($icon['name']))
 	{
 		// Gérer le buffer
@@ -1013,14 +1048,22 @@ function gmap_ajoute_markers($table, $id, $mapId, $params, $mapInit)
 		{
 			if (isset($params['query']))
 			{
-				if ($queryMatch = gmap_trouve_def_file($contexte, 'gmap-'.$format.'-'.$params['query'], 'html', $branches, 'modeles', null, ''))
+				if ($queryMatch = gmap_trouve_def_file($contexte, 'gmap-'.$format.'-'.$params['query'], 'html', array(
+									'branches'=>$branches,
+									'sous-dossier'=>'modeles',
+									'nom-defaut'=>'')))
 					$queryFile = $queryMatch['spip-path'];
-				else if ($queryMatch = gmap_trouve_def_file($contexte, $params['query'], 'html', $branches, 'modeles', null, ''))
+				else if ($queryMatch = gmap_trouve_def_file($contexte, $params['query'], 'html', array(
+									'branches'=>$branches,
+									'sous-dossier'=>'modeles',
+									'nom-defaut'=>'')))
 					$queryFile = $queryMatch['spip-path'];
 				else
 					spip_log("Requete ".$params['query']." introuvable", "gmap");
 			}
-			else if ($queryMatch = gmap_trouve_def_file($contexte, 'gmap-'.$format, 'html', $branches, 'modeles'))
+			else if ($queryMatch = gmap_trouve_def_file($contexte, 'gmap-'.$format, 'html', array(
+									'branches'=>$branches,
+									'sous-dossier'=>'modeles')))
 				$queryFile = $queryMatch['spip-path'];
 			else
 				$queryFile = find_in_path('gmap-'.$format.'-default');

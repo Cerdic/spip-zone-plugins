@@ -23,6 +23,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/gmap_geoloc');
 include_spip('gmap_filtres');
+include_spip('inc/gmap_spip_utils');
 
 // Balise GEOPOPUP : renvoie les informations sur le marqueur associé à un point sur un objet
 function balise_GEOPOPUP($p)
@@ -75,7 +76,9 @@ function  balise_GEOPOPUP_stat($args, $filtres)
 	if ($id_point)
 		$contexte['id_point'] = $id_point;
 	$branches = (gmap_lire_config('gmap_optimisations', 'gerer_branches', 'oui') === 'oui') ? true : false;
-	$fond = gmap_trouve_def_file($contexte, 'gmap-info', 'html', $branches, 'modeles');
+	$fond = gmap_trouve_def_file($contexte, 'gmap-info', 'html', array(
+									'branches'=>$branches,
+									'sous-dossier'=>'modeles'));
 	
 	// Renvoyer vers la partie dynamique
 	//return array($fond['spip-path'], $objet, $id_objet, $type, $objet_parent, $id_objet_parent, $contenu_seul, $json);
@@ -87,7 +90,7 @@ function  balise_GEOPOPUP_stat($args, $filtres)
 function gmap_geopopup($fond, $objet, $id_objet, $type, $objet_parent, $id_objet_parent, $contenu_seul, $json)
 {
 	$env = array('objet'=>$objet, 'id_objet'=>$id_objet, 'type_point'=>$type, 'id_'.$objet=>$id_objet, 'objet_parent'=>$objet_parent, 'id_objet_parent'=>$id_objet_parent);
-	$return = recuperer_fond($fond, $env);
+	$return = gmap_recuperer_fond($fond, $env);
 	if ($contenu_seul || $json)
 	{
 		if ($contenu_seul)

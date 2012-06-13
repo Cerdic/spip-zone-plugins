@@ -13,37 +13,10 @@
 
 include_spip('base/abstract_sql');
  
-// Ajout des types de documents KML/KMZ s'il n'y sont pas déjà
-function gmap_verif_types_documents()
-{
-    $rowset = sql_select("extension", "spip_types_documents", "extension='kml'");
-    if (!$row = sql_fetch($rowset))
-		sql_insertq("spip_types_documents", array(
-				'titre' => 'Google Earth Placemark',
-				'descriptif' => '',
-				'extension' => 'kml',
-				'mime_type' => 'application/vnd.google-earth.kml+xml',
-				'inclus' => 'non',
-				'upload' => 'oui',
-				'maj' => 'NOW()'));
-	sql_free($rowset);
-    $rowset = sql_select("extension", "spip_types_documents", "extension='kmz'");
-    if (!$row = sql_fetch($rowset))
-		sql_insertq("spip_types_documents", array(
-				'titre' => 'Google Earth Placemark',
-				'descriptif' => '',
-				'extension' => 'kmz',
-				'mime_type' => 'application/vnd.google-earth.kmz',
-				'inclus' => 'non',
-				'upload' => 'oui',
-				'maj' => 'NOW()'));
-	sql_free($rowset);
-}
-
 // Création d'un type de marqueur
 function gmap_cree_type($nom, $descriptif, $objet = "", $visible = "oui", $priorite = 2)
 {
-	sql_insertq("spip_gmap_types", array(
+	sql_insertq("spip_types_geopoints", array(
 		"objet" => $objet,
     	"nom" => $nom,
     	"descriptif" => $descriptif,
@@ -52,7 +25,7 @@ function gmap_cree_type($nom, $descriptif, $objet = "", $visible = "oui", $prior
 }
 function gmap_update_type($id, $nom, $descriptif, $objet = "", $visible = "oui", $priorite = 2)
 {
-	sql_updateq("spip_gmap_types", array(
+	sql_updateq("spip_types_geopoints", array(
 		"objet" => $objet,
     	"nom" => $nom,
     	"descriptif" => $descriptif,
@@ -61,20 +34,10 @@ function gmap_update_type($id, $nom, $descriptif, $objet = "", $visible = "oui",
 		'id_type_point=' . intval($id));
 }
 
-// Création des types de pointeur par défaut
-function gmap_cree_types_defaut()
-{
-	gmap_cree_type("defaut", _T('gmap:marker_def_defaut'), "", "oui", 1);
-	gmap_cree_type("centre", _T('gmap:marker_def_centre'), "", "non", 99);
-	gmap_cree_type("etape", _T('gmap:marker_def_article_etape'), "article", "oui", 4);
-	gmap_cree_type("prise", _T('gmap:marker_def_document_prise'), "document", "oui", 2);
-	gmap_cree_type("visee", _T('gmap:marker_def_document_visee'), "document", "oui", 4);
-}
-
 // Destruction d'un type
 function gmap_delete_type($id)
 {
-	sql_delete('spip_gmap_types', 'id_type_point=' . intval($id));
+	sql_delete('spip_types_geopoints', 'id_type_point=' . intval($id));
 }
 
 // Récupérer tous les types de points
@@ -82,22 +45,22 @@ function gmap_get_all_types()
 {
 	$types = array();
 	/*
-	SELECT spip_gmap_types.id_type_point AS id, spip_gmap_types.nom AS nom, count(*) 
-	 FROM spip_gmap_types JOIN spip_gmap_points ON spip_gmap_types.id_type_point = spip_gmap_points.id_type_point
-	 GROUP BY spip_gmap_types.id_type_point 
+	SELECT spip_types_geopoints.id_type_point AS id, spip_types_geopoints.nom AS nom, count(*) 
+	 FROM spip_types_geopoints JOIN spip_geopoints ON spip_types_geopoints.id_type_point = spip_geopoints.id_type_point
+	 GROUP BY spip_types_geopoints.id_type_point 
 	*/
 	$rowset = sql_select(
 		array(
-			"spip_gmap_types.id_type_point AS id",
-			"spip_gmap_types.objet AS objet",
-			"spip_gmap_types.nom AS nom",
-			"spip_gmap_types.descriptif AS descriptif",
-			"spip_gmap_types.visible AS visible",
-			"spip_gmap_types.priorite AS priorite",
+			"spip_types_geopoints.id_type_point AS id",
+			"spip_types_geopoints.objet AS objet",
+			"spip_types_geopoints.nom AS nom",
+			"spip_types_geopoints.descriptif AS descriptif",
+			"spip_types_geopoints.visible AS visible",
+			"spip_types_geopoints.priorite AS priorite",
 			"count(points.id_point) AS nb_points"),
-		"spip_gmap_types".
-		" LEFT JOIN spip_gmap_points AS points ON spip_gmap_types.id_type_point = points.id_type_point",
-		"", "spip_gmap_types.id_type_point", "spip_gmap_types.id_type_point");
+		"spip_types_geopoints".
+		" LEFT JOIN spip_geopoints AS points ON spip_types_geopoints.id_type_point = points.id_type_point",
+		"", "spip_types_geopoints.id_type_point", "spip_types_geopoints.id_type_point");
 	// L'alias sur les noms des tables est nécessaire parce que spip ne peut pas prendre en 
 	// charge tous les cas dans la transposition des nom de tables : un nom de table précédé
 	// d'une parenthèse n'est pas transposé (cf. _SQL_PREFIXE_TABLE dans ecrire/req/mysql.php).
@@ -117,7 +80,7 @@ function gmap_trouve_type_point($objet = "", $type = "defaut")
 	$id_type = NULL;
 		
 	// Rechercher avec le nom de l'objet
-	$rowsetType = sql_select("id_type_point", "spip_gmap_types", "nom = '".$type."' AND objet='".$objet."'");
+	$rowsetType = sql_select("id_type_point", "spip_types_geopoints", "nom = '".$type."' AND objet='".$objet."'");
 	if ($rowType = sql_fetch($rowsetType))
 		$id_type = $rowType['id_type_point'];
 	sql_free($rowsetType);
@@ -125,7 +88,7 @@ function gmap_trouve_type_point($objet = "", $type = "defaut")
 		return $id_type;
 	
 	// Recherche sans le nom de l'objet
-	$rowsetType = sql_select("id_type_point", "spip_gmap_types", "nom = '".$type."' AND objet=''");
+	$rowsetType = sql_select("id_type_point", "spip_types_geopoints", "nom = '".$type."' AND objet=''");
 	if ($rowType = sql_fetch($rowsetType))
 		$id_type = $rowType['id_type_point'];
 	sql_free($rowsetType);
@@ -143,7 +106,7 @@ function gmap_trouve_type_point($objet = "", $type = "defaut")
 function gmap_get_types($objet)
 {
 	$types = array();
-	$rowset = sql_select("id_type_point AS id, nom", "spip_gmap_types", "objet='".$objet."' OR objet=''");
+	$rowset = sql_select("id_type_point AS id, nom", "spip_types_geopoints", "objet='".$objet."' OR objet=''");
 	while ($row = sql_fetch($rowset))
 		$types[] = $row;
 	return $types;
@@ -158,7 +121,7 @@ function gmap_add_point($objet, $id_objet, $lat, $long, $zoom, $type = "defaut")
 	$id_type_point = gmap_trouve_type_point($objet, $type);
 			
 	// Insérer dans la table
-	$id = sql_insertq("spip_gmap_points", array(
+	$id = sql_insertq("spip_geopoints", array(
 		"longitude" => $long,
 		"latitude" => $lat,
 		"zoom" => $zoom,
@@ -167,7 +130,7 @@ function gmap_add_point($objet, $id_objet, $lat, $long, $zoom, $type = "defaut")
 	// Insérer dans la table des relations
 	if ($id > 0)
 	{
-		sql_insertq("spip_gmap_points_liens", array(
+		sql_insertq("spip_geopoints_liens", array(
 			'id_point' => $id,
 			'id_objet' => $id_objet,
 			'objet' => $objet));
@@ -179,8 +142,8 @@ function gmap_add_point($objet, $id_objet, $lat, $long, $zoom, $type = "defaut")
 // Réutilisation d'un point existant sur un autre objet
 /*function gmap_reuse_point($id_point, $objet, $id_objet)
 {
-	$row = sql_fetsel("objet, id_objet", "spip_gmap_points_liens", "id_point=".$id_point);
-	sql_insertq("spip_gmap_points_liens", array(
+	$row = sql_fetsel("objet, id_objet", "spip_geopoints_liens", "id_point=".$id_point);
+	sql_insertq("spip_geopoints_liens", array(
 		'id_point' => $id_point,
 		'id_objet' => $id_objet,
 		'objet' => $objet));
@@ -193,7 +156,7 @@ function gmap_update_point($objet, $id_objet, $id, $lat, $long, $zoom, $type = "
 	// Vérifier la cohérence de la liaison
 	if (!gmap_check_point_owner($id, $objet, $id_objet))
 	{
-		spip_log("Tentative de modification d'un point affecté à un autre objet", "gmap");
+		spip_log("Tentative de modification d'un point affecté à un autre objet", "gmap"._LOG_AVERTISSEMENT);
 		return FALSE;
 	}
 	
@@ -201,7 +164,7 @@ function gmap_update_point($objet, $id_objet, $id, $lat, $long, $zoom, $type = "
 	$id_type = gmap_trouve_type_point($objet, $type);
 	
 	// Faire la mise à jour
-	$success = sql_updateq("spip_gmap_points",
+	$success = sql_updateq("spip_geopoints",
 		array(
 			"longitude" => $long,
 			"latitude" => $lat,
@@ -218,14 +181,13 @@ function gmap_delete_point($objet, $id_objet, $id)
 	// Vérifier la cohérence de la liaison
 	if (!gmap_check_point_owner($id, $objet, $id_objet))
 	{
-		spip_log("Tentative de modification d'un point affecté à un autre objet", "gmap");
+		spip_log("Tentative de modification d'un point affecté à un autre objet", "gmap"._LOG_AVERTISSEMENT);
 		return FALSE;
 	}
 	
 	// Suppression du point et des liens
-	sql_delete("spip_gmap_labels", "id_point=".$id);
-	sql_delete("spip_gmap_points_liens", "id_point=".$id);
-	sql_delete("spip_gmap_points", "id_point=".$id);
+	sql_delete("spip_geopoints_liens", "id_point=".$id);
+	sql_delete("spip_geopoints", "id_point=".$id);
 	
 	return TRUE;
 }
@@ -233,7 +195,7 @@ function gmap_delete_point($objet, $id_objet, $id)
 // Vérification de la cohérence d'un id de point par rapport à l'objet
 function gmap_check_point_owner($id, $objet, $id_objet)
 {
-	$row = sql_fetsel("objet, id_objet", "spip_gmap_points_liens", "id_point=".$id);
+	$row = sql_fetsel("objet, id_objet", "spip_geopoints_liens", "id_point=".$id);
 	if (!$row)
 		return false;
 	return (($row['objet'] == $objet) && ($row['id_objet'] == $id_objet)) ? TRUE : FALSE;
@@ -305,7 +267,7 @@ function gmap_get_points($objet, $id_objet)
 	$points = array();
 	$rowset = sql_select(
 		array("points.id_point AS id", "points.longitude AS longitude", "points.latitude AS latitude", "points.zoom AS zoom", "types.nom AS type", "types.visible AS visible", "types.priorite AS priorite"),
-		"spip_gmap_points_liens AS liens JOIN spip_gmap_points AS points ON liens.id_point=points.id_point JOIN spip_gmap_types AS types ON points.id_type_point = types.id_type_point",
+		"spip_geopoints_liens AS liens JOIN spip_geopoints AS points ON liens.id_point=points.id_point JOIN spip_types_geopoints AS types ON points.id_type_point = types.id_type_point",
 		"liens.objet = '".$objet."' AND liens.id_objet = ".$id_objet);
 	while ($row = sql_fetch($rowset))
 		$points[] = $row;
@@ -477,7 +439,7 @@ function gmap_compteur($objet = '', $id_objet = 0, $visible = false, $recursive 
 		else
 			$idWhere = "liens.objet='".$objet."' AND liens.id_objet=".$id_objet;
 		if (!strlen($joinLiens))
-			$joinLiens = " JOIN spip_gmap_points_liens AS liens ON liens.id_point = points.id_point";
+			$joinLiens = " JOIN spip_geopoints_liens AS liens ON liens.id_point = points.id_point";
 		$clauseWhere .= $idWhere;
 	}
 	
@@ -486,7 +448,7 @@ function gmap_compteur($objet = '', $id_objet = 0, $visible = false, $recursive 
 	if ($visible)
 	{
 		if (!strlen($joinType))
-			$joinType = " JOIN spip_gmap_types AS types ON types.id_type_point = points.id_type_point";
+			$joinType = " JOIN spip_types_geopoints AS types ON types.id_type_point = points.id_type_point";
 		if (strlen($clauseWhere))
 			$clauseWhere .= " AND ";
 		$clauseWhere .= "types.visible='oui'";
@@ -521,7 +483,7 @@ function gmap_compteur($objet = '', $id_objet = 0, $visible = false, $recursive 
 		}
 			
 		if (!strlen($joinType))
-			$joinType = " JOIN spip_gmap_types AS types ON types.id_type_point = points.id_type_point";
+			$joinType = " JOIN spip_types_geopoints AS types ON types.id_type_point = points.id_type_point";
 		if (strlen($clauseWhere))
 			$clauseWhere .= " AND ";
 		$clauseWhere .= $filtreWhere;
@@ -533,7 +495,7 @@ function gmap_compteur($objet = '', $id_objet = 0, $visible = false, $recursive 
 	// Requête sur l'objet
 	$rowset = sql_select(
 				"count(*) as count",
-				"spip_gmap_points AS points".$joinLiens.$joinType,
+				"spip_geopoints AS points".$joinLiens.$joinType,
 				$clauseWhere);
 	if ($row = sql_fetch($rowset))
 		$count += $row['count'];

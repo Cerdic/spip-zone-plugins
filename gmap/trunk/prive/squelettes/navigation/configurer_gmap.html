@@ -1,0 +1,15 @@
+
+[(#REM) Description de la page ]
+#BOITE_OUVRIR{'','simple'}
+
+	<p><:gmap:info_configuration_gmap:></p>
+
+	[<p><a href="(#URL_ECRIRE{configurer_gmap_html}|parametre_url{page,doc/parametrage}|ancre_url{paramSystem})"><:gmap:info_configuration_help:></a></p>]
+	
+#BOITE_FERMER
+
+[(#REM) information sur l'API geographique ]
+#FORMULAIRE_CONFIGURER_GMAP_STATUS
+
+[(#REM) Remettre le defaut ]
+#INCLURE{fond=prive/squelettes/navigation/configurer,env}

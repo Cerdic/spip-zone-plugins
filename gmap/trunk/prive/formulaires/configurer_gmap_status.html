@@ -1,0 +1,8 @@
+[(#ENV{actif}|non)
+#BOITE_OUVRIR{'','error'}
+	<p><:gmap:alerte_gmap_inactif:></p>
+#BOITE_FERMER][(#ENV{actif}|oui)
+#BOITE_OUVRIR{'','info'}
+	<p><:gmap:info_configuration_gmap_api:><br />
+	#ENV{api_desc}</p>
+#BOITE_FERMER]

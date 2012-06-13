@@ -24,6 +24,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/gmap_geoloc');
 include_spip('inc/gmap_config_utils');
+include_spip('inc/gmap_spip_utils');
 
 // Globales
 $GLOBALS['iconsAliases'] = array(); // ici, on peut avoir un seul buffer : il est valable sur une requête unique, donc pour une seule carte
@@ -89,7 +90,10 @@ function  balise_GEOMARKERICONS_stat($args, $filtres)
 	if ($id_point)
 		$contexte['id_point'] = $id_point;
 	$branches = (gmap_lire_config('gmap_optimisations', 'gerer_branches', 'oui') === 'oui') ? true : false;
-	$icon = gmap_trouve_def_file($contexte, 'gmap-marker', 'gmd', $branches, gmap_theme_folder(), $GLOBALS['iconsAliases']);
+	$icon = gmap_trouve_def_file($contexte, 'gmap-marker', 'gmd', array(
+									'branches'=>$branches,
+									'sous-dossier'=>gmap_theme_folder(),
+									'buffer-aval'=>$GLOBALS['iconsAliases']));
 	
 	// Gérer le buffer
 	if ($icon['file'] && $icon['buffer'])
@@ -150,7 +154,7 @@ function gmap_geomarkericons($icons, $name, $objet, $id_objet, $type, $format, $
 		return '';
 		
 	$env = array('icons'=>$icons, 'name'=>$name, 'prefix'=>$prefix, 'folder'=>$folder);
-	return recuperer_fond($fond, $env);
+	return gmap_recuperer_fond($fond, $env);
 }
 
 ?>

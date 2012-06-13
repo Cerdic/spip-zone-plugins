@@ -1,0 +1,21 @@
+<div class="formulaire_spip configurer_gmap formulaire_configurer formulaire_#FORM">
+<h3 class='titrem'>[<img src="(#CHEMIN_IMAGE{logo-config-optimisations.png})" class="cadre-icone">]<:gmap:configuration_optimisations:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="texte"><p><:gmap:configuration_optimisations_explic:></p></div>
+		<ul>
+			<li class="gerer_selection pleine_largeur titre-checkbox">
+				<input type="checkbox" name="gerer_selection" id="gerer_selection" value="oui"[(#ENV{gerer_selection}|=={oui}) checked="checked"] />&nbsp;<label for="gerer_selection"><:gmap:gerer_selection:></label>
+				<p class="explication"><:gmap:gerer_selection_explic:></p>
+			</li>
+			<li class="gerer_branches pleine_largeur titre-checkbox">
+				<input type="checkbox" name="gerer_branches" id="gerer_branches" value="oui"[(#ENV{gerer_branches}|=={oui}) checked="checked"] />&nbsp;<label for="gerer_branches"><:gmap:gerer_branches:></label>
+				<p class="explication"><:gmap:gerer_branches_explic:></p>
+			</li>
+		</ul>
+		<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>

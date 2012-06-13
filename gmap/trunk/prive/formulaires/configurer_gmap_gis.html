@@ -1,0 +1,46 @@
+<B_api>
+<div class="formulaire_spip configurer_gmap formulaire_configurer formulaire_#FORM">
+<h3 class='titrem'>[<img src="(#CHEMIN_IMAGE{logo-config-gis.png})" class="cadre-icone">]<:gmap:configuration_gis:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <ul>
+	  	#SET{name,api_code}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+	    <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+	    	<label for="#GET{name}"><:gmap:configuration_gis_label:></label>
+			<select name='#GET{name}' id='#GET{name}' size='1'>
+			<BOUCLE_api(DATA){source table, #ENV*{apis}}>
+				<option value='#CLE'[(#CLE|=={#ENV{api_selected}}|oui) selected='selected']>[(#VALEUR{name})]</option>
+			</BOUCLE_api>
+			</select>
+			<p class="texte" id="api_code_desc"></p>
+	    	<p class="explication"><:gmap:configuration_gis_explic:></p>
+	    </li>
+	  </ul>
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>
+</B_api>
+<B_js>
+<script type="text/javascript">
+//<![CDATA['."\n";
+function updateAPIDescription() {
+	var api = jQuery("#api_code").val();
+	var desc = "";
+	switch (api)
+	{
+	<BOUCLE_js(DATA){source table, #ENV*{apis}}>
+	case "#CLE" : desc = "[(#VALEUR{explic}|attribut_html)]"; break;
+	</BOUCLE_js>
+	default : desc = "<:gmap:gis_api_none_desc:>"; break;
+	}
+	jQuery("#api_code_desc").html(desc);
+}
+jQuery("#api_code").change(function() { updateAPIDescription(); });
+jQuery(document).ready(function() { updateAPIDescription(); });
+//]]>
+</script>
+</B_js>

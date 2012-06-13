@@ -20,7 +20,7 @@ function mapimpl_gma2_public_test_actif_dist()
 {
 	// Il faut une clef
 	$key = gmap_lire_config('gmap_api_gma2', 'key');
-	return ($key && ($key != "")) ? true : false;
+	return ($key && strlen($key)) ? true : false;
 }
 
 ?>

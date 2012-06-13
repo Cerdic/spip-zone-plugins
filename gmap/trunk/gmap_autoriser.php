@@ -9,16 +9,19 @@
  *
  */
 
-// Autorisation du plugin
+// Pour le chargement du fichier en pipeline
 function gmap_autoriser()
 {
 }
 
 // Autorisation de la configuration de GMap, uniquement pour le webmestre
+function autoriser_configurer_gmap_dist($faire, $type, $id, $qui, $opt)
+{
+	return autoriser('webmestre') || autoriser('0minirezo');
+} 
 function autoriser_configurer_gmap_bouton_dist($faire, $type, $id, $qui, $opt)
 {
-	// Seulement si on est admin
-	return (autoriser('webmestre'));
+	return autoriser('webmestre') || autoriser('0minirezo');
 } 
 
 ?>

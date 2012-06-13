@@ -1,0 +1,86 @@
+<div class="formulaire_spip configurer_gmap formulaire_configurer formulaire_#FORM">
+<h3 class='titrem'>[<img src="(#CHEMIN_IMAGE{logo-config-rubgeo.png})" class="cadre-icone">]<:gmap:configuration_rubriques:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:gmap:configuration_rubriques_types:></h3>
+					<ul>
+						#SET{name,geopoints_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer long_label editer_#GET{name}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label><:gmap:configuration_rubriques_types_explic:></label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name}},exclus=spip_geopoints}
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:gmap:configuration_rubriques_liste:></h3>
+					<ul>
+						<li class="pleine_largeur">
+							<p class="texte"><:gmap:explication_restriction:></p>
+						</li>
+						#SET{name,tout_le_site}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer pleine_largeur editer_#GET{name}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}"><:gmap:choix_restrictions:></label>
+							<select name="#GET{name}" id="#GET{name}" size="1">
+								<option value="oui"[(#ENV{tout_le_site}|=={oui}) selected="selected"]><:gmap:choix_tout_le_site:></option>
+								<option value="non"[(#ENV{tout_le_site}|=={non}) selected="selected"]><:gmap:choix_restriction_rubriques:></option>
+							</select>
+						</li>
+<script type="text/javascript">
+//<![CDATA[
+function toggleChoixListeRubriques()
+{
+	var bToutLeSite = (jQuery("#tout_le_site").val() === "oui") ? true : false;
+	if (bToutLeSite)
+		jQuery("#choix_liste_rubriques").hide();
+	else
+		jQuery("#choix_liste_rubriques").show();
+}
+jQuery(document).ready(function()
+{
+	jQuery("#tout_le_site").click(function()
+	{
+		toggleChoixListeRubriques();
+	});
+	toggleChoixListeRubriques();
+});
+//]]>
+</script>
+						#SET{name,les_rubriques}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer pleine_largeur editer_#GET{name}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur] choix_liste_rubriques">
+							<p class="explications"><:gmap:explication_liste_rubriques:></p>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<div class="navigateur">#INCLURE{fond=formulaires/selecteur/rubriques,name=#GET{name},selected=#ENV**{#GET{name}},rubriques=1,articles=0}</div>
+							<div class="nettoyeur"></div>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:gmap:geolocalisation_documents:></h3>
+					<ul>
+						#SET{name,hack_modalbox}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer pleine_largeur editer_#GET{name}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<div class="choix choix_#GET{name}">
+								<input type="checkbox" name="#GET{name}" id="#GET{name}" value="oui"[(#ENV{hack_modalbox}|=={oui}) checked="checked"] />
+								<label for="#GET{name}"><:gmap:choix_hack_modalbox:></label>
+							</div>
+							<p class="explication"><:gmap:explication_hack_modalbox:></p>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+		<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>
