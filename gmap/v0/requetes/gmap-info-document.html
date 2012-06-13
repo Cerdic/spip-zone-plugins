@@ -1,0 +1,21 @@
+[(#REM)
+
+	Modèle pour la description d'un document dans les info-bulles de la carte.
+	
+]<BOUCLE_document(DOCUMENTS){id_document}><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" lang="#LANG">
+<head>[
+	<title>(#TITRE|textebrut)</title>][
+	<link href="(#URL_FICHIER{style/gmap-balloon.css}|url_absolue)" rel="stylesheet" type="text/css" />]
+</head>
+<body class="balloon">
+<div class="gmap-balloon">[
+	<h1><a[ href="(#URL_DOCUMENT|url_absolue)"]>(#TITRE)</h1>][
+	<p class="description">(#DESCRIPTIF)</p>][
+	<div class="contents">
+		<p><a[ href="(#URL_DOCUMENT|url_absolue)"]>(#LOGO_DOCUMENT|liens_absolus)</a></p>
+	</div>]
+</div>
+</body>
+</html>
+</BOUCLE_document>

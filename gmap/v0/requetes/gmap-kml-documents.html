@@ -1,0 +1,43 @@
+[(#REM)
+
+	Fichier KML pour récupérer des documents géoréférencées.
+	
+	La requête utilise tous les critères passés dans les paramètres parmi :
+	- aucun paramètres : tous les documents
+	- id_document : un document particulier
+	- id_article : les documents liés à un article
+	- id_rubrique : les documents liés à une rubrique
+
+][(#CACHE{86400})][(#HTTP_HEADER{Content-type: #ENV{mime,text/xml}[; charset=(#CHARSET)]})][(#SET{prefix, #ENV{prefix,gmm}})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:#GET{prefix}="#URL_SITE_SPIP/schemas/GeoMarkers/1.0"[
+	 xsi:SchemaLocation="#URL_SITE_SPIP/schemas/GeoMarkers/1.0 (#URL_FICHIER{schemas/GeoMarkers/1.0/geomarkers.xsd}|url_absolue)"]>
+<Document>[
+
+(#REM) Boucle sur les documents ]
+<BOUCLE_documents(DOCUMENTS){id_document ?}{id_article ?}{id_rubrique ?}><BOUCLE_documents_points(GEOPOINTS){id_document}{meilleur}>
+	<Placemark>[
+		<name>(#TITRE|textebrut)</name>][
+		<description><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#DESCRIPTIF)#EVAL{'chr(93)'}#EVAL{'chr(93)'}></description>]
+		<visibility>1</visibility>
+		<open>0</open>[
+		<atom:link href="(#URL_DOCUMENT|url_absolue)"/>][
+		<styleUrl>(#URL_PAGE{gmap-styles-default}|ancre_url{GMapDocument})</styleUrl>]
+		<ExtendedData>[
+			(#GEOMARKERICONS{format=kml,prefix=#GET{prefix}})]
+			<[(#GET{prefix}):]markerParams[ type="(#TYPE_POINT)"][ zoom="(#ZOOM)"][ objectName="(#OBJET)"][ objectId="(#ID_OBJET)"][ visible="(#VISIBLE)"][ priority="(#PRIORITE)"] />
+		</ExtendedData>[
+		<Style>
+			<BalloonStyle>
+				<bgColor>ffffffff</bgColor>
+				<text><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#GEOPOPUP)#EVAL{'chr(93)'}#EVAL{'chr(93)'}></text>
+			</BalloonStyle>
+		</Style>]
+		<Point>
+			<coordinates>#LONGITUDE,#LATITUDE,0</coordinates>
+		</Point>
+	</Placemark>
+</BOUCLE_documents_points></BOUCLE_documents>
+</Document>
+</kml>

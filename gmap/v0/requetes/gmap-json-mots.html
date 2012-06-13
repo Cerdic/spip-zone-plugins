@@ -1,0 +1,36 @@
+[(#REM)
+
+	Fichier GeoJSON pour récupérer des mots-clefs géoréférencées.
+	
+	La requête utilise tous les critères passés dans les paramètres parmi :
+	- aucun paramètres : tous les mots-celfs
+	- id_mot : un mot-clef particulier
+	- id_groupe : les mots-clefs d'un groupe (peut être combiné avec un autre paramètre)
+	- id_article : tous les mots-clefs d'un article
+	- id_rubrique : tous les mots-clefs d'une rubrique
+	- id_breve : tous les mots-clefs d'une brève
+	- id_document : tous les mots-clefs d'un document
+	- id_forum : tous les mots-clefs d'un forum
+	- id_syndic : tous les mots-clefs d'un site
+
+][(#CACHE{86400})][(#HTTP_HEADER{Content-type: text/plain; charset=utf-8})][(#SET{features, 0})]{	"type": "FeatureCollection",
+	"features": #EVAL{'chr(91)'}[
+
+(#REM) Boucle sur les mots]
+<BOUCLE_mots(MOTS){id_mot ?}{id_groupe ?}{id_article ?}{id_rubrique ?}{id_breve ?}{id_document ?}{id_forum ?}{id_syndic ?}><B_mots_points>[(#GET{features}|>{0}|?{',',''})]<BOUCLE_mots_points(GEOPOINTS){id_mot}{meilleur}{","}>
+	{	"type": "Feature",
+		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
+		"properties": {[
+			"name": (#TITRE|textebrut|texte_json),][
+			"html": (#GEOPOPUP{contenu_seul=oui,json=oui}),][
+			"icon": {(#GEOMARKERICONS{format=json})},][
+			"objet": "(#OBJET)",][
+			"id_objet": (#ID_OBJET),][
+			"visible": "(#VISIBLE)",][
+			"priorite": (#PRIORITE),]
+			"type": "#TYPE_POINT",
+			"zoom": #ZOOM
+			}
+	}</BOUCLE_mots_points>[(#SET{features, #GET{features}|plus{#TOTAL_BOUCLE}})]</B_mots_points></BOUCLE_mots>
+	#EVAL{'chr(93)'}
+}

@@ -1,0 +1,31 @@
+[(#REM)
+
+	Fichier GeoJSON pour récupérer des documents géoréférencées.
+	
+	La requête utilise tous les critères passés dans les paramètres parmi :
+	- aucun paramètres : tous les documents
+	- id_document : un document particulier
+	- id_article : les documents liés à un article
+	- id_rubrique : les documents liés à une rubrique
+
+][(#CACHE{86400})][(#HTTP_HEADER{Content-type: text/plain; charset=utf-8})][(#SET{features, 0})]{	"type": "FeatureCollection",
+	"features": #EVAL{'chr(91)'}[
+
+(#REM) Boucle sur les documents ]
+<BOUCLE_documents(DOCUMENTS){id_document ?}{id_article ?}{id_rubrique ?}><B_documents_points>[(#GET{features}|>{0}|?{',',''})]<BOUCLE_documents_points(GEOPOINTS){id_document}{meilleur}{","}>
+	{	"type": "Feature",
+		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
+		"properties": {[
+			"name": (#TITRE|textebrut|texte_json),][
+			"html": (#GEOPOPUP{contenu_seul=oui,json=oui}),][
+			"icon": {(#GEOMARKERICONS{format=json})},][
+			"objet": "(#OBJET)",][
+			"id_objet": (#ID_OBJET),][
+			"visible": "(#VISIBLE)",][
+			"priorite": (#PRIORITE),]
+			"type": "#TYPE_POINT",
+			"zoom": #ZOOM
+			}
+	}</BOUCLE_documents_points>[(#SET{features, #GET{features}|plus{#TOTAL_BOUCLE}})]</B_documents_points></BOUCLE_documents>
+	#EVAL{'chr(93)'}
+}

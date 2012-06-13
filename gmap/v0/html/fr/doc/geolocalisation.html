@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>G&eacute;olocalisation des objets</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body class="help-page">
+	
+	<h2>Acc&egrave;s &agrave; la g&eacute;olocalisation</h2>
+	<p>Le plugin ins&egrave;re dans les pages d&rsquo;&eacute;dition des objets &eacute;ditoriaux de SPIP (rubrique, article, document, br&egrave;ve, mot-clef et auteur) une interface qui permet de g&eacute;olocaliser l&rsquo;objet. Pour les documents, il faut avoir install&eacute; le plugin M&eacute;diath&egrave;que pour avoir acc&egrave;s &agrave; la page de modification d&rsquo;un document.</p>
+	<p>&nbsp;</p>
+	<p>L&rsquo;interface comporte principalement une carte, une zone d&rsquo;&eacute;dition des marqueurs et un bouton &quot;Enregistrer&quot; qui permet d&rsquo;enregistrer les modifications en base de donn&eacute;es.</p>
+ 	<p class="illustration"><img src="images/geolocalisation-1.jpg" alt="Interface de g&eacute;olocalisation" /></p>
+	
+	<h2>&Eacute;dition des marqueurs</h2>
+	<p>Il est possible d&rsquo;associer plusieurs points &agrave; chaque objet SPIP (la base de donn&eacute;es supporte &eacute;galement l&rsquo;inverse mais je n&rsquo;ai pas encore impl&eacute;ment&eacute; cette fonctionnalit&eacute;).</p>
+	<p>L&rsquo;interface est constitu&eacute;e d&rsquo;un tableau des marqueurs d&eacute;fini, dont un seul, surlign&eacute; en rouge est actif sur la carte&nbsp;:</p>
+ 	<p class="illustration"><img src="images/geolocalisation-4.jpg" alt="&Eacute;dition des marqueurs" /></p>
+	<p>&nbsp;</p>
+	<p>On peut modifier la position, le facteur de zoom associ&eacute; et le type de marqueur. On peut &eacute;galement ajouter de nouveau marqueur gr&acirc;ce &agrave; la commande &quot;ajouter un marqueur&quot; situ&eacute;e en dessous du tableau et supprimer les marqueurs gr&acirc;ce &agrave; la petite croix rouge &agrave; la fin de chaque ligne.</p>
+	<p>&nbsp;</p>
+	<p>Normalement le positionnement du marqueur actif se fait en cliquant sur la carte et la modification du zoom est modifiant le zoom de la carte. Il est &eacute;galement possible d&rsquo;&eacute;diter directement les valeurs mais cela ne met pas &agrave; jour la position de la carte (on peut consid&eacute;rer que c&rsquo;est un bug).</p>
+	<p>&nbsp;</p>
+	<p>Les types de marqueurs peuvent &ecirc;tre &eacute;dit&eacute;s depuis l&rsquo;interface de param&eacute;trage du plugin.</p> 
+
+	<h2>Recherches</h2>
+	<p>Pour faciliter la géolocalisation, l'interface propose des outils de recherche qui dépendent de l'implémentation choisie et du type d'objet géolocalisé.</p>
+	<p>Ces outils sont accessibles en sélectionnant leur nom dans la liste déroulante "Recherche".</p>
+	
+	<h3>G&eacute;olocalisation d'une adresse</h3>
+	<p>Cette fonction n'est disponible que si l'impl&eacute;mentation de carte offre la fonctionnalit&eacute; de <i>geocoding</i>.</p>
+ 	<p class="illustration"><img src="images/geolocalisation-3.jpg" alt="Recherche par adresse" /></p>
+	<p>Apr&egrave;s avoir cliqu&eacute; sur le bouton &quot;Rechercher&quot;, une liste des r&eacute;sultats possibles est affich&eacute;e, chaque point est &eacute;galement repr&eacute;sent&eacute; sur la carte. On peut copier les coordonn&eacute;es sur le point en cours d'&eacute;dition en cliquant sur le petit signe plus &agrave; droite du tableau.</p>
+ 
+	<h3>Coordonn&eacute;es des voisins</h3>
+	<p>Pour les articles et les documents seulement (car ils sont dat&eacute;s), GMap permet de rechercher les cooordonn&eacute;es des points associ&eacute;s &agrave; des objets de m&ecirc;me type proches dans le temps et l'espace.</p>
+ 	<p class="illustration"><img src="images/geolocalisation-2.jpg" alt="R&eacute;cup&eacute;ration des coordonn&eacute;es des voisins" /></p>
+	<p>L'interface permet de d&eacute;finir les contraintes de la recherche (temps, position, arborescence) et le nombre de points affich&eacute;s. Apr&egrave;s la recherche, les meilleurs points sont affich&eacute;s dans le tableau et sur la carte. On peut copier les coordonn&eacute;es sur le point en cours d'&eacute;dition en cliquant sur le petit signe plus &agrave; droite du tableau.</p>
+	
+</body>
+</html>

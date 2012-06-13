@@ -1,0 +1,99 @@
+[(#REM)
+
+	Fichier GeoJSON de requêtes sur une recherche.
+	
+	La requête de recherche consiste à afficher les rubriques, articles, breves et mots-clefs
+	qui répondent au moteur de recherche de SPIP.
+	
+][(#CACHE{86400})][(#HTTP_HEADER{Content-type: text/plain; charset=utf-8})][(#SET{features, 0})]{	"type": "FeatureCollection",
+	"features": #EVAL{'chr(91)'}[
+
+(#REM) Boucle sur les rubriques ]
+<BOUCLE_rubriques(RUBRIQUES){recherche}><B_rubriques_points>[(#GET{features}|>{0}|?{',',''})]<BOUCLE_rubriques_points(GEOPOINTS){id_rubrique}{meilleur}>
+    {	"type": "Feature",
+		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
+		"properties": {[
+			"name": (#TITRE|textebrut|texte_json),][
+			"html": (#GEOPOPUP{contenu_seul=oui,json=oui}),][
+			"icon": {(#GEOMARKERICONS{format=json})},][
+			"objet": "(#OBJET)",][
+			"id_objet": (#ID_OBJET),][
+			"visible": "(#VISIBLE)",][
+			"priorite": (#PRIORITE),]
+			"type": "#TYPE_POINT",
+			"zoom": #ZOOM
+			}
+	}</BOUCLE_rubriques_points>[(#SET{features, #GET{features}|plus{#TOTAL_BOUCLE}})]</B_rubriques_points></BOUCLE_rubriques>[
+	
+(#REM) Boucle sur les articles ]
+<BOUCLE_articles(ARTICLES){recherche}><B_articles_points>[(#GET{features}|>{0}|?{',',''})]<BOUCLE_articles_points(GEOPOINTS){id_article}{meilleur}{","}>
+    {	"type": "Feature",
+		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
+		"properties": {[
+			"name": (#TITRE|textebrut|texte_json),][
+			"html": (#GEOPOPUP{contenu_seul=oui,json=oui}),][
+			"icon": {(#GEOMARKERICONS{format=json})},][
+			"objet": "(#OBJET)",][
+			"id_objet": (#ID_OBJET),][
+			"visible": "(#VISIBLE)",][
+			"priorite": (#PRIORITE),]
+			"type": "#TYPE_POINT",
+			"zoom": #ZOOM
+			}
+	}</BOUCLE_articles_points>[(#SET{features, #GET{features}|plus{#TOTAL_BOUCLE}})]</B_articles_points></BOUCLE_articles>[
+
+
+(#REM) Boucle sur les breves ]
+<BOUCLE_breves(BREVES){recherche}><B_breves_points>[(#GET{features}|>{0}|?{',',''})]<BOUCLE_breves_points(GEOPOINTS){id_breve}{meilleur}{","}>
+	{	"type": "Feature",
+		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
+		"properties": {[
+			"name": (#TITRE|textebrut|texte_json),][
+			"html": (#GEOPOPUP{contenu_seul=oui,json=oui}),][
+			"icon": {(#GEOMARKERICONS{format=json})},][
+			"objet": "(#OBJET)",][
+			"id_objet": (#ID_OBJET),][
+			"visible": "(#VISIBLE)",][
+			"priorite": (#PRIORITE),]
+			"type": "#TYPE_POINT",
+			"zoom": #ZOOM
+			}
+	}</BOUCLE_breves_points>[(#SET{features, #GET{features}|plus{#TOTAL_BOUCLE}})]</B_breves_points></BOUCLE_breves>[
+
+
+(#REM) Boucle sur les auteurs ]
+<BOUCLE_auteurs(AUTEURS){recherche}><B_auteurs_points>[(#GET{features}|>{0}|?{',',''})]<BOUCLE_auteurs_points(GEOPOINTS){id_auteur}{meilleur}{","}>
+	{	"type": "Feature",
+		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
+		"properties": {[
+			"name": (#NOM|textebrut|texte_json),][
+			"html": (#GEOPOPUP{contenu_seul=oui,json=oui}),][
+			"icon": {(#GEOMARKERICONS{format=json})},][
+			"objet": "(#OBJET)",][
+			"id_objet": (#ID_OBJET),][
+			"visible": "(#VISIBLE)",][
+			"priorite": (#PRIORITE),]
+			"type": "#TYPE_POINT",
+			"zoom": #ZOOM
+			}
+	}</BOUCLE_auteurs_points>[(#SET{features, #GET{features}|plus{#TOTAL_BOUCLE}})]</B_auteurs_points></BOUCLE_auteurs>[
+
+
+(#REM) Boucle sur les mots-clefs ]
+<BOUCLE_mots(MOTS){recherche}><B_mots_points>[(#GET{features}|>{0}|?{',',''})]<BOUCLE_mots_points(GEOPOINTS){id_mot}{meilleur}{","}>
+	{	"type": "Feature",
+		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
+		"properties": {[
+			"name": (#TITRE|textebrut|texte_json),][
+			"html": (#GEOPOPUP{contenu_seul=oui,json=oui}),][
+			"icon": {(#GEOMARKERICONS{format=json})},][
+			"objet": "(#OBJET)",][
+			"id_objet": (#ID_OBJET),][
+			"visible": "(#VISIBLE)",][
+			"priorite": (#PRIORITE),]
+			"type": "#TYPE_POINT",
+			"zoom": #ZOOM
+			}
+	}</BOUCLE_mots_points>[(#SET{features, #GET{features}|plus{#TOTAL_BOUCLE}})]</B_mots_points></BOUCLE_mots>
+	#EVAL{'chr(93)'}
+}

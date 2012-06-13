@@ -1,0 +1,23 @@
+[(#REM)
+
+	Modèle pour la description d'un auteur dans les info-bulles de la carte.
+	
+]<BOUCLE_auteur(AUTEURS){id_auteur}><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" lang="#LANG">
+<head>[
+	<title>(#NOM|textebrut)</title>][
+	<link href="(#URL_FICHIER{style/gmap-balloon.css}|url_absolue)" rel="stylesheet" type="text/css" />]
+</head>
+<body class="balloon">
+<div class="gmap-balloon">[
+	<h1><a[ href="(#URL_AUTEUR|url_absolue)"]>(#NOM)</a></h1>][
+	(#BIO|inserer_attribut{class, description})]
+	<div class="contents">[
+		<div class="image"><a href="[(#URL_AUTEUR|url_absolue)]" [title="(#NOM|attribut_html)"]>(#LOGO_AUTEUR|image_reduire{100,100}|liens_absolus)</a></div>][
+		<div class="texte"><p><a[ href="(#URL_SITE)"][ title="(#NOMSITE|attribut_html)"]>(#NOMSITE)</a></p></div>]
+		<div class="lire"><a href="[(#URL_AUTEUR|url_absolue)]"[ title="(#TITRE|attribut_html)"]>voir en ligne</a></div>
+	</div>
+</div>
+</body>
+</html>
+</BOUCLE_auteur>

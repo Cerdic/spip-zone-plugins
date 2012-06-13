@@ -1,0 +1,25 @@
+[(#REM)
+
+	Fichier GeoJSON récupérer des rubriques racines géoréférencées.
+
+][(#CACHE{86400})][(#HTTP_HEADER{Content-type: text/plain; charset=utf-8})][(#SET{features, 0})]{	"type": "FeatureCollection",
+	"features": #EVAL{'chr(91)'}[
+
+(#REM) Boucle sur les rubriques]
+<BOUCLE_rubriques(RUBRIQUES){racine}><B_rubriques_points>[(#GET{features}|>{0}|?{',',''})]<BOUCLE_rubriques_points(GEOPOINTS){id_rubrique}{meilleur}{","}>
+	{	"type": "Feature",
+		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
+		"properties": {[
+			"name": (#TITRE|textebrut|texte_json),][
+			"html": (#GEOPOPUP{contenu_seul=oui,json=oui}),][
+			"icon": {(#GEOMARKERICONS{format=json})},][
+			"objet": "(#OBJET)",][
+			"id_objet": (#ID_OBJET),][
+			"visible": "(#VISIBLE)",][
+			"priorite": (#PRIORITE),]
+			"type": "#TYPE_POINT",
+			"zoom": #ZOOM
+			}
+	}</BOUCLE_rubriques_points>[(#SET{features, #GET{features}|plus{#TOTAL_BOUCLE}})]</B_rubriques_points></BOUCLE_rubriques>
+	#EVAL{'chr(93)'}
+}

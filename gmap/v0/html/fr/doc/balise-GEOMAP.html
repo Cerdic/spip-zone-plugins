@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>La balise #GEOMAP</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body class="help-page">
+	
+	<h2>R&ocirc;le</h2>
+	<p>La balise #GEOMAP permet de faire afficher une carte depuis un squelette. Elle permet &eacute;galement, selon les param&egrave;tres qui lui sont pass&eacute;s d'ajouter des <i>marqueurs</i> sur cette carte.</p>
+
+	<h2>Utilisation</h2>
+	<p>Au plus simple, la balise GEOMAP peut &ecirc;tre int&eacute;gr&eacute;e dans un squelette sans aucun param&egrave;tres&nbsp;:</p>
+	<pre class="code"><span class="spip-syntax">[</span>&lt;div style=&quot;position: relative; display: block; width: 600px; height: 400px;&quot;&gt;
+  <span class="spip-syntax">(</span><span class="spip-balise">#GEOMAP</span><span class="spip-syntax">)</span>
+&lt;/div&gt;<span class="spip-syntax">]</span></pre>
+	<p>&nbsp;</p>
+	<p>Il faut cependant qu&rsquo;elle soit int&eacute;gr&eacute;e dans une div ayant une hauteur explicite (en pixels), la largeur peut &ecirc;tre exprim&eacute;e en pourcentage.</p>
+	<p>Sous cette forme simplifi&eacute;e, la balise produira une carte nue, sans aucun point. Si la balise est plac&eacute;e dans une boucle, la carte sera centr&eacute;e sur l&rsquo;&eacute;l&eacute;ment de la boucle. On peut ensuite se servir des balises #GEOKML et #GEOMARKER pour ajouter du contenu.</p>
+	<p>&nbsp;</p>
+	<p>Mais l&rsquo;usage le plus courant de la balise est de d&eacute;signer explicitement &agrave; la carte un objet de r&eacute;f&eacute;rence (fournissant &agrave; la fois le positionnement initial de la carte et la r&eacute;f&eacute;rence pour chercher les points &agrave; ajouter), et des points&nbsp;:</p>
+	<pre class="code"><span class="spip-syntax">[</span>&lt;div style=&quot;position: relative; display: block; width: 600px; height: 400px;&quot;&gt;
+  <span class="spip-syntax">(</span><span class="spip-balise">#GEOMAP</span><span class="spip-syntax">{id_rubrique, markers=query}</span><span class="spip-syntax">)</span>
+&lt;/div&gt;<span class="spip-syntax">]</span></pre>
+	<p>&nbsp;</p>
+	<p>Sous cette forme la carte affichera les articles g&eacute;olocalis&eacute;s de la rubrique.</p>
+ 	<p class="illustration"><img src="images/GEOMAP-1.jpg" alt="Affichage d'une carte simple" /></p>
+
+	<h3>Requ&ecirc;tes sur les points</h3>
+	<p>Le param&egrave;tre <span class="code">markers</span> peut prendre les valeurs suivantes&nbsp;:</p>
+	<ul>
+		<li><b>local</b>&nbsp;: ajoute seulement le point de l&rsquo;objet de r&eacute;f&eacute;rence.</li>
+		<li><b>childs</b>&nbsp;: ajoute un point pour chaque objet fils g&eacute;olocalis&eacute;.</li>
+		<li><b>recursive</b>&nbsp;: ajoute un point pour chacun des descendants g&eacute;olocalis&eacute;s.</li>
+		<li><b>query</b>&nbsp;: les points sont ajout&eacute;s en faisant une requ&ecirc;te ajax vers le serveur, le fichier demand&eacute; d&eacute;pend du param&egrave;tre <span class="code">query</span>.</li>
+		<li>Une autre valeur&nbsp;: la valeur est alors transf&eacute;r&eacute;e sur le param&egrave;tre query. &Eacute;crire <span class="code">markers=toto</span> est un raccourci de <span class="code">markers=query, query=toto</span>.</li>
+	</ul>
+	<p>&nbsp;</p>
+	<p>Quand <span class="code">markers=query</span> et que le param&egrave;tre <span class="code">query</span> n'est pas d&eacute;fini, les requ&ecirc;tes sont trait&eacute;es par le squelette <span class="code">gmap-kml-default.html</span> qui renvoie tous les enfants g&eacute;olocalis&eacute;s de l'objet de r&eacute;f&eacute;rence.</p>
+	<p>&nbsp;</p>
+	<p>Le param&egrave;tre <span class="code">query</span> peut prendre les valeurs suivantes&nbsp;:</p>
+	<ul>
+		<li>rubriques, articles, documents, breves, auteurs, mots&nbsp;: requ&ecirc;te sur les objets, de diff&eacute;rentes fa&ccedil;on.</li>
+		<li>recherche&nbsp;: requ&ecirc;te tous les objets g&eacute;olocalis&eacute;s r&eacute;pondant &agrave; une requ&ecirc;te du moteur de recherche de SPIP.</li>
+		<li>racine&nbsp;: requ&ecirc;te sur rubriques de la racine.</li>
+		<li>toute autre valeur&nbsp;: la valeur doit &ecirc;tre le nom d'un squelette qui contient une requ&ecirc;te sur des points g&eacute;olocalis&eacute;s.</li>
+	</ul>
+	<p>&nbsp;</p>
+	<p>Tous les param&egrave;tres transmis &agrave; la balise #GEOMAP sont renvoy&eacute;s au squelette qui effectue la requ&ecirc;te, il est donc possible d'utiliser dans ce squelette des param&egrave;tres qui ne sont pas connus de gmap. Attention cependant&nbsp;: ce n'est pas vrai quand on utilise le mod&egrave;le &lt;map&gt; car, lors du passage entre le mod&egrave;le et la balise seul un nombre limit&eacute; de param&egrave;tres est transmis.</p>
+	
+	<h3>Format des r&eacute;ponses</h3>
+	<p>GMap est capable d'interpr&eacute;ter des fichiers aux formats KML et GeoJSON. Le format par d&eacute;faut est KML.</p>
+	<p>Il y a assez peu de diff&eacute;rences pratiques &agrave; l'utilisation de l'un ou l'autre format.</p>
+	<h4>Format KML</h4>
+	<p>Le format KML est maintenant standardis&eacute; par l'OGC, c'est donc un format non propri&eacute;taire. Il est tr&egrave;s r&eacute;pandu et a l'avantage de pouvoir &ecirc;tre lu non seulement dan Google Earth mais aussi dans la plupart des syst&egrave;mes d'information g&eacute;ographique.</p>
+	<p>Le format est bas&eacute; sur du XML, il est donc tr&egrave;s lisible mais assez gourmand. GMap ajoute un certain nombre de d&eacute;finitions qui aloudissent le fichier (pour les icones). Mais ce n'est pas un crit&egrave;re de performance tr&egrave;s important, et vous pouvez largement am&eacute;liorer les performances en param&eacute;trant SPIP pour compresser les r&eacute;ponses.</p>
+	<p>Le principal avantage de choisir ce format est que vous pouvez utiliser le m&ecirc;me fichier pour afficher des points dans GMap que pour les exporter vers une autre application.</p>
+	<h4>Format GeoJSON</h4>
+	<p>Le format GeoJSON a &eacute;t&eacute; ajout&eacute; pour tester s'il permettait d'am&eacute;liorer les performances. Il y a certes une am&eacute;lioration, mais elle est minime. Le fichier &eacute;tant l&eacute;g&egrave;rement plus compact, le transfert est l&eacute;g&egrave;rement plus rapide, mais cet effet est tout &agrave; fait n&eacute;gligeable si vous activer la compression. C&ocirc;t&eacute; client, le fichier est aussi tr&egrave;s l&eacute;g&egrave;rement plus rapide &agrave; d&eacute;coder, mais le gain reste n&eacute;gligeable par rapport au temps d'ajout des points sur la carte (quelques dizaines de millisecondes pour 200 points).</p>
+	<p>C'est un format assez r&eacute;pandu, et vous pouvez le pr&eacute;f&eacute;rer si vous en avez une autre utilisation que la repr&eacute;sentation des points dans GMap.</p>
+
+	<h3>Autres param&egrave;tres</h3>
+	<p>La balise #GEOMAP accepte de nombreux autres param&egrave;tres, d&eacute;crits ci-dessous, qui permettent de surcharger toute l&rsquo;apparence de la carte (et dont beaucoup d&eacute;pendent de la couche d&rsquo;impl&eacute;mentation de la carte).</p>
+	
+	
+	<h2>Param&egrave;tres</h2>
+	<p>Tous les param&egrave;tres sont optionnels.</p>
+	
+	<h3>Param&egrave;tres communs &agrave; toutes les impl&eacute;mentations&nbsp;:</h3>
+	<table>
+		<tr><th>Nom</th><th>Description</th><th>Valeur</th></tr>
+		<tr>
+			<td>map</td>
+			<td>Identifiant unique de la carte.</td>
+			<td>Identifiant num&eacute;rique.</td>
+		</tr>
+		<tr>
+			<td>id_secteur, id_rubrique, id_parent, id_article, id_document, id_breve, id_auteur, id_mot, id_groupe, id_forum, id_syndic</td>
+			<td>La premi&egrave;re occurence d'un identifiant est utilis&eacute;e comme objet de r&eacute;f&eacute;rence pour le centrage de la carte et la recherche des points. Les suivantes peuvent &ecirc;tre transmises au fichier de requ&ecirc;te.</td>
+			<td>{id_article} ou {id_article=39} ou encore {objet=article, id_objet=39}</td>
+		</tr>
+		<tr>
+			<td>markers</td>
+			<td>D&eacute;finition des marqueurs</td>
+			<td>
+				<ul>
+					<li><b>local</b>&nbsp;: seul(s) le(s) marqueur(s) de l'objet sont affich&eacute;s</li>
+					<li><b>childs</b>&nbsp;: les marqueurs de l'objet et de ses descendants de niveau 1 sont affich&eacute;s</li>
+					<li><b>recursive</b>&nbsp;: les marqueurs de l'objet et de tous ses descendants sont affich&eacute;s</li>
+					<li><b>query</b>&nbsp;: la liste des marqueurs provient d'une requ&ecirc;te ajax</li>
+					<li>Autre valeur&nbsp;: nom d'une requ&ecirc;te sp&eacute;ciale, &eacute;quivalent &agrave; markers=query, query=xxx</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>query</td>
+			<td>Nom du fichier de requ&ecirc;te (si <i>markers=query</i>). GMap contient des requ&ecirc;tes pr&eacute;d&eacute;finies pour les objets qu'il traite (rubrique, article, document, br&egrave;ve, auteur et mot-clef) et pour les formulaires de recherche. Quand ce param&egrave;tre est absent, GMap utilise une requ&ecirc;te sur les enfants de l'objet de r&eacute;f&eacute;rence.</td>
+			<td>Chemin relatif du fichier par rapport au path de SPIP (par exemple dossier des squelettes, racine des plugins), sans l'extension .html.</td>
+		</tr>
+		<tr>
+			<td>format</td>
+			<td>Format du fichier de requ&ecirc;te&nbsp;:
+				<ul>
+					<li><b>kml</b> (par d&eacute;faut)&nbsp;: fichiers kml (OGC). Ces fichiers sont explicites et tr&egrave;s standardis&eacute;s. Ils peuvent &ecirc;tre t&eacute;l&eacute;charg&eacute;s et ouverts dans la plupart des outils de cartographie.</li>
+					<li>json&nbsp;: fichiers l&eacute;g&egrave;rement plus l&eacute;gers et plus rapide &agrave; d&eacute;coder, mais moins standards.</li>
+				</ul></td>
+			<td>kml | json</td>
+		</tr>
+		<tr>
+			<td>viewport</td>
+			<td>Surcharge du positionnement de la carte par raport &agrave; un objet. Ce param&egrave;tre peut prendre la valeur <i>site</i> ou d&eacute;signer un objet sous la forme <i>&lt;nom-de-l-objet&gt;&lt;identifiant-de-l-objet&gt;</i>.</td>
+			<td>site | &lt;objet&gt;&lt;id_objet&gt; </td>
+		</tr>
+		<tr>
+			<td>focus</td>
+			<td>Quand ce param&egrave;tre est pr&eacute;sent (la valeur n'est pas utilis&eacute;e), il indique que la carte doit s'autocentrer apr&egrave;s avoir ajouter les points.</td>
+			<td>n.a.</td>
+		</tr>
+		<tr>
+			<td>latitude</td>
+			<td>Latitude du centre de la carte</td>
+			<td>-38.5911137761474</td>
+		</tr>
+		<tr>
+			<td>longitude</td>
+			<td>Longitude du centre de la carte</td>
+			<td>143.036499023438</td>
+		</tr>
+		<tr>
+			<td>zoom</td>
+			<td>Zoom initial de la carte</td>
+			<td></td>
+		</tr>
+	</table>
+	
+	<h3>Param&egrave;tres pour Google Maps V2&nbsp;:</h3>
+	<table>
+		<tr><th>Nom</th><th>Description</th><th>Valeur</th></tr>
+		<tr>
+			<td>fond</td>
+			<td>Fond de carte par d&eacute;faut</td>
+			<td>Parmi <i>plan</i>, <i>satellite</i>, <i>mixte</i>, <i>physic</i>, <i>earth</i></td>
+		</tr>
+		<tr>
+			<td>ctrl_fond</td>
+			<td>Style du contr&ocirc;le de changement du fond de carte</td>
+			<td>Parmi none / button / menu</td>
+		</tr>
+		<tr>
+			<td>ctrl_nav</td>
+			<td>Style du contr&ocirc;le de navigation</td>
+			<td>Parmi none / small / large / 3D</td>
+		</tr>
+		<tr>
+			<td>option_dblclk_zoom</td>
+			<td>Activation du zoom par doucle-click sur la carte</td>
+			<td><i>oui</i> ou <i>non</i></td>
+		</tr>
+		<tr>
+			<td>option_soft_zoom</td>
+			<td>Activation du zoom continu</td>
+			<td><i>oui</i> ou <i>non</i></td>
+		</tr>
+		<tr>
+			<td>option_wheel_zoom</td>
+			<td>Activation du zoom par la molette</td>
+			<td><i>oui</i> ou <i>non</i></td>
+		</tr>
+	</table>
+	
+	<h3>Param&egrave;tres pour Google Maps V3&nbsp;:</h3>
+	<table>
+		<tr><th>Nom</th><th>Description</th><th>Valeur</th></tr>
+		<tr>
+			<td>fond</td>
+			<td>Fond de carte par d&eacute;faut</td>
+			<td>Parmi <i>plan</i>, <i>satellite</i>, <i>mixte</i>, <i>physic</i>, <i>earth</i></td>
+		</tr>
+		<tr>
+			<td>ctrl_fond</td>
+			<td>Style du contr&ocirc;le de changement du fond de carte</td>
+			<td>Parmi none / button / menu</td>
+		</tr>
+		<tr>
+			<td>ctrl_zoom</td>
+			<td>Style du contr&ocirc;le d'&eacute;chelle</td>
+			<td>Parmi none / auto / small / large</td>
+		</tr>
+		<tr>
+			<td>ctrl_pan</td>
+			<td>Style du contr&ocirc;le de d&eacute;placement</td>
+			<td>Parmi none / large</td>
+		</tr>
+		<tr>
+			<td>ctrl_scale</td>
+			<td>Affichage de l'&eacute;chelle</td>
+			<td>Parmi none / default</td>
+		</tr>
+		<tr>
+			<td>ctrl_street</td>
+			<td>Affichage de l'acc&egrave;s &agrave; StreetView</td>
+			<td>Parmi none / default</td>
+		</tr>
+		<tr>
+			<td>ctrl_rotate</td>
+			<td>Affichage du contr&ocirc;le de rotation</td>
+			<td>Parmi none / default</td>
+		</tr>
+		<tr>
+			<td>ctrl_overview</td>
+			<td>Affichage du contr&ocirc;le de localisation rapide</td>
+			<td>Parmi none / open / close</td>
+		</tr>
+		<tr>
+			<td>option_dblclk_zoom</td>
+			<td>Activation du zoom par doucle-click sur la carte</td>
+			<td><i>oui</i> ou <i>non</i></td>
+		</tr>
+		<tr>
+			<td>option_drag</td>
+			<td>Activation du d&eacute;placement de la carte avec la main</td>
+			<td><i>oui</i> ou <i>non</i></td>
+		</tr>
+		<tr>
+			<td>option_wheel_zoom</td>
+			<td>Activation du zoom par la molette</td>
+			<td><i>oui</i> ou <i>non</i></td>
+		</tr>
+		<tr>
+			<td>option_keyboard</td>
+			<td>Activation des commandes clavier</td>
+			<td><i>oui</i> ou <i>non</i></td>
+		</tr>
+	</table>
+	
+</body>
+</html>

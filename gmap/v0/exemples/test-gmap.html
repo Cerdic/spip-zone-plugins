@@ -1,0 +1,82 @@
+#CACHE{86400}
+<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" lang="#LANG">
+
+<head>
+<title>Test du plugin Google Maps in SPIP</title>
+<meta name="author" content="F. ALBERT" />
+#INSERT_HEAD
+</head>
+
+<body>
+
+<p>Utilisation : spip.php?page=test-gmap&id_rubrique=... ou spip.php?page=test-gmap&id_article=...</p>
+
+[(#REM) Tests de la boucle GEOTEST ]
+<p>Test de structure&nbsp;:<br />
+<B_geotest_1>
+Avant<br />
+<BOUCLE_geotest_1(GEOTEST){id_article ?}{id_rubrique ?}{id_document ?}>
+	Une carte peut-être affichée sur rub#ID_RUBRIQUE[>art(#ID_ARTICLE)][>doc(#ID_DOCUMENT)]<br />
+</BOUCLE_geotest_1>
+Après<br />
+</B_geotest_1>
+Il n'y a aucun point sur cet objet<br />
+<//B_geotest_1>
+</p>
+<p>Test des paramètres 1&nbsp;:<br />
+<BOUCLE_geotest_2(GEOTEST){id_article=38}>
+	Une carte peut-être affichée sur [art(#ID_ARTICLE)]<br />
+</BOUCLE_geotest_2></p>
+<p>Test des paramètres 2&nbsp;:<br />
+<BOUCLE_geotest_3(GEOTEST){id_article=38}{recursif}>
+	Une carte peut-être affichée sur [art(#ID_ARTICLE)]<br />
+</BOUCLE_geotest_3></p>
+
+<hr />
+
+[(#REM) Test de boucle GEOPOINTS ]
+<p>Boucle simple : liste des points sur un objet<br />
+<B_simple>
+<BOUCLE_simple(GEOPOINTS){id_article ?}{id_rubrique ?}{id_document ?}>
+	Point sur #OBJET, #ID_OBJET&nbsp;: #ID_POINT, #LONGITUDE, #LATITUDE, #ZOOM, #TYPE_POINT<br />
+</BOUCLE_simple>
+</B_simple>
+	Il n'y a aucun point sur cet objet<br />
+<//B_simple>
+</p>
+
+<hr />
+
+[(#REM) Test de boucle directe sur GMAP_POINTS ]
+<p>Boucle directe : liste des points sur un objet<br />
+<B_directe>
+<BOUCLE_directe(GMAP_POINTS){id_article ?}{id_rubrique ?}{id_document ?}>
+	Point sur #OBJET, #ID_OBJET&nbsp;: #ID_POINT, #LONGITUDE, #LATITUDE, #ZOOM, #TYPE_POINT<br />
+</BOUCLE_directe>
+</B_directe>
+	Il n'y a aucun point sur cet objet<br />
+<//B_directe>
+</p>
+
+<hr />
+
+[(#REM) Tests de la balise GEOPOINTS ]
+<p>Balise seule&nbsp;: [(#GEOPOINTS)]</p>
+<p>Balise seule {recursive,type=defaut}&nbsp;: [(#GEOPOINTS{recursive,type=defaut})]</p>
+<p>Balise seule {id_article,recursif,type=defaut}&nbsp;: [(#GEOPOINTS{id_article,recursif,type=defaut})]</p>
+<p>Balise seule {id_article=37,recursif,type=defaut}&nbsp;: [(#GEOPOINTS{id_article=37,recursif,type=defaut})]</p>
+<p>Balise dans une boucle ARTICLES&nbsp;:
+<BOUCLE_article_geopoints(ARTICLES){id_rubrique ?}{id_article ?}>
+	<br />Points = [(#GEOPOINTS{id_article,recursive,type=defaut})]
+</BOUCLE_article_geopoints>
+</p>
+<p>Balise dans une boucle GEOTEST&nbsp;:
+<BOUCLE_geotest_geopoints(GEOTEST){id_article ?}>
+	<br />Points = [(#GEOPOINTS{id_article,recursive,type=defaut})]
+</BOUCLE_geotest_geopoints>
+</p>
+
+
+</body>
+
+</html>

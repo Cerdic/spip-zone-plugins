@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>Modification des comportements par d&eacute;faut</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body class="help-page">
+	
+	<p>GMap a &eacute;t&eacute; con&ccedil;u pour &ecirc;tre personnalisable, il offre donc de nombreuses possibilit&eacute;s pour red&eacute;finir les cartes.</p>
+	<p>La personnalisation est bas&eacute;e sur un m&eacute;canisme tr&egrave;s proche de celui qu'utilise SPIP au niveau des squelettes&nbsp;: les requ&ecirc;tes sur les points, les icones et le contenu des info-bulles sont d&eacute;finis par des squelettes que l'on peut surcharger pour l'ensemble du site, pour une rubrique ou pour une branche. De plus, les icones et le contenu des info-bulles peuvent &ecirc;tre d&eacute;finis selon le type d'objet et le type de point qu'ils repr&eacute;sentent.</p>
+	
+	
+	<h2>Requ&ecirc;tes sur les points</h2>
+	<p>La combinaison des param&egrave;tres <span class="code">markers</span> et <span class="code">query</span> des balises <a href="balise-GEOMAP.html">#GEOMAP</a> et <a href="balise-GEOMARKER.html">#GEOMARKER</a> permet de r&eacute;cup&eacute;rer les points &agrave; afficher en ex&eacute;cutant une requ&ecirc;te sur le serveur. Cette requ&ecirc;te est d&eacute;finie dans par squelette qui renvoie un fichier au formats KML ou GeoJSON. Il est assez facile de red&eacute;finir des fichier de requ&ecirc;te et de les int&eacute;grer dans le fonctionnement de GMap.</p>
+	<p>GMap contient plusieurs fichiers de requ&ecirc;tes qui peuvent servir d'exemple&nbsp;: <span class="code">gmap-kml-default.html</span>, <span class="code">gmap-kml-articles.html</span>, <span class="code">gmap-kml-documents.html</span>, etc.</p>
+
+	<h3>Syntaxe</h3>
+	<p>Les noms de fichier de requ&ecirc;te respectent la syntaxe suivante&nbsp;:<br />
+		<span class="code"><i>prefix</i>-(&lt;<em>nom d&rsquo;objet</em>&gt;|default)[(-|=)&lt;<em>identifiant de rubrique</em>&gt;]</span>.<br/>
+	Le pr&eacute;fixe par d&eacute;faut est <span class="code">gmap-&lt;<em>format</em>&gt;</span>. Si une requ&ecirc;te sp&eacute;cifique est d&eacute;finie (par <span class="code">markers=&lt;<em>ma requ&ecirc;te</em>&gt;</span> ou <span class="code">markers=query, query=&lt;<em>ma requ&ecirc;te</em>&gt;</span>), GMap testera deux pr&eacute;fixes&nbsp;:</p>
+	<ul>
+		<li><span class="code">gmap-&lt;<em>format</em>&gt;-&lt;<em>ma requ&ecirc;te</em>&gt;</span></li>
+		<li><span class="code">&lt;<em>ma requ&ecirc;te</em>&gt;</span>.</li>
+	</ul>
+	<p>GMap contient des requ&ecirc;tes sp&eacute;cifiques pour les rubriques, les articles, les documents, les br&egrave;ves, les auteurs, les mot-clefs, les rubriques racine et la recherche, cette derni&egrave;re est par exemple formalis&eacute;e dans deux fichiers <span class="code">gmap-kml-recherche.html</span> et <span class="code">gmap-json-recherche.html</span></p>
+
+	<h3>Strat&eacute;gie de recherche</h3>
+	<p>Lors de la compilation du squelette SPIP qui contient la carte (qu'elle soit dans un squelette ou dans un texte), GMap va tester l'existence de plusieurs noms de fichier et utiliser celui qui est le plus sp&eacute;cifique.</p>
+	<p>Par exemple, si la carte a &eacute;t&eacute; cr&eacute;&eacute;e avec les param&egrave;tres <span class="code">id_article=<i>un article de la rubrique 23</i>,markers=query</span> (sans param&egrave;tre <span class="code">query</span> et soit avec <span class="code">format=kml</span> soit sans param&egrave;tre <span class="code">format</span>), GMap va tester l'existence des fichiers suivant et utiliser le premier trouv&eacute;&nbsp;:</p>
+	<ol>
+		<li><span class="code">gmap-kml-<em>article=23</em>.html</span>&nbsp;: fichier sp&eacute;cifique aux articles et &agrave; la rubrique 23.</li>
+		<li><span class="code">gmap-kml-<em>article-23</em>.html</span>&nbsp;: fichier sp&eacute;cifique aux articles et &agrave; la branche sous la rubrique 23.</li>
+		<li><span class="code">gmap-kml-<em>article-2</em>.html</span>&nbsp;: fichier sp&eacute;cifique aux articles et &agrave; aux branches des anc&ecirc;tres.</li>
+		<li><span class="code">gmap-kml-<em>article</em>.html</span>&nbsp;: fichier sp&eacute;cifique aux articles, pour tout le site.</li>
+		<li><span class="code">gmap-kml-<em>default=23</em>.html</span>&nbsp;: fichier sp&eacute;cifique &agrave; la rubrique, pour tous les objets.</li>
+		<li><span class="code">gmap-kml-<em>default-23</em>.html</span>&nbsp;: fichier sp&eacute;cifique &agrave; la branche, pour tous les objets.</li>
+		<li><span class="code">gmap-kml-<em>default-2</em>.html</span>&nbsp;: fichier sp&eacute;cifique &agrave; aux branches des anc&ecirc;tres, pour tous les objets.</li>
+		<li><span class="code">gmap-kml-<em>default</em>.html</span>&nbsp;: fichier g&eacute;n&eacute;rique inclu dans le plugin et valable pour tous les objets de tout le site.</li>
+	</ol>
+	<p>Ces fichiers sont recherch&eacute;s dans le path de SPIP, c&rsquo;est-&agrave;-dire le dossier squelettes et les racines des plugins. Le dernier fichier est forc&eacute;ment trouv&eacute; puisqu&rsquo;il est inclu dans GMap.</p>
+
+	<h3>Comment d&eacute;finir une requ&ecirc;te&nbsp;?</h3>
+	<p>Avant de red&eacute;finir une requ&ecirc;te, il faut d'abord que vous vous posiez les question suivantes&nbsp;:</p>
+	<ol>
+		<li>Est-ce que je veux modifier le comportement par d&eacute;faut de GMap pour tout mon site&nbsp;? Si oui, vous pouvez directement surcharger les fichiers de GMap correspondant aux requ&ecirc;tes que vous utilisez dans le dossier <span class="code">squelettes/</span>.</li>
+		<li>Est-ce que je d&eacute;fini une requ&ecirc;te qui sera utilisable dans tout le site et que j'appelerai par <span class="code">markers=&lt;<em>ma requ&ecirc;te</em>&gt;</span> (ou <span class="code">markers=query, query=&lt;<em>ma requ&ecirc;te</em>&gt;</span>)&nbsp;? Si c'est le cas, vous n'avez qu'&agrave; d&eacute;finir un fichier <span class="code">gmap-kml-&lt;<em>ma requ&ecirc;te</em>&gt;.html</span> dans votre dossier <span class="code">squelette/</span> (l'&eacute;criture <span class="code">&lt;<em>ma requ&ecirc;te</em>&gt;.html</span> est &eacute;galement support&eacute;e, mais elle pr&eacute;sente l'inconv&eacute;nient de ne pas porter d'indication du format).</li>
+		<li>Est-ce que cette requ&ecirc;te remplacera la requ&ecirc;te par d&eacute;faut pour une rubrique ou une branche, pour un type d'objet&nbsp;? Dans ce dernier cas, vous avez int&eacute;r&ecirc;t &agrave; seulement red&eacute;finir un fichier comme <span class="code">gmap-kml-article-2.html</span> dans l'exemple ci-dessus.</li>
+	</ol>
+	<p>&nbsp;</p>
+	<p>Dans le dernier cas, vous devrez encore choisir quel fichier vous souhaitez surcharger. Dans la plupart des cas, il est conseill&eacute; de surcharger le fichier de requ&ecirc;te par d&eacute;faut&nbsp;: les autres sont d&eacute;j&agrave; des requ&ecirc;tes sp&eacute;cifiques.</p>
+	<p>Vous pouvez alors recopier le fichier <span class="code">gmap-kml-default.html</span> (ou <span class="code">gmap-json-default.html</span> si vous pr&eacute;f&eacute;rez le format GeoJSON, voir &agrave; ce sujet la documentation de la balise <a href="balise-GEOMAP.html">#GEOMAP</a>) dans votre dossier <span class="code">squelettes/</span>, le renommer en fonction de l'objet, de la rubrique ou de la branche que vous voulez surcharger (cf. ci-dessus), et commencer &agrave; le modifier.</p>
+	<p>&nbsp;</p>
+	<p>Ces fichiers sont des squelettes qui renvoient un fichier KML ou GeoJSON, ils peuvent donc contenir des boucles. Il faut &eacute;galement savoir que les balise #GEOMAP et #GEOMARKER transmettent au fichier de requ&ecirc;te tous les param&egrave;tres qu'elles re&ccedil;oivent, vous pouvez donc utiliser dans ces squelettes des param&egrave;tres sp&eacute;cifiques (une date par exemple). Attention&nbsp;: ceci n'est pas vrai pour les mod&egrave;les dont les param&egrave;tres sont fig&eacute;s.</p>
+	
+	
+	<h2>Repr&eacute;sentation des points</h2>
+	<p>GMap permet &eacute;galement de d&eacute;finir des icones sp&eacute;cifiques pour chauqe type d'objet, chaque type de point et par rubrique ou branche.</p>
+	<p>Il ne permet par contre pas, dans la version actuelle, de choisir une repr&eacute;sentation sp&eacute;cifique depuis la partie priv&eacute;e du site, il faut forc&eacute;ment ajouter des fichiers sur le serveur.</p>
+	
+	<h3>D&eacute;finition des icones</h3>
+	<p>Les icones utilis&eacute;es sur les cartes ne sont pas de simples images&nbsp;:</p>
+	<ul>
+		<li>Comme elle repr&eacute;sentent un point g&eacute;ographique pr&eacute;cis, elles doivent &ecirc;tre dot&eacute;e d'un point d'ancrage qui permet de les positionner au pixel pr&egrave;s (c'est d'ailleurs pour cela que le terme &quot;icone&quot; est adapt&eacute;).</li>
+		<li>Selon les fournisseurs l'image peut &ecirc;tre s&eacute;par&eacute;e de l'ombrage, ce qui clarifie les cas o&ugrave; plusieurs marqueurs se chevauches et permet de jolis effets sur le d&eacute;placement (dans Google Maps l'ombre s'&eacute;carte comme si on soulevait le marqueur).</li>
+		<li>Selon les fournisseurs aussi, on peut d&eacute;finir un point d'ancrage des info-bulles.</li>
+		<li>GMap introduit la possibilit&eacute; de s&eacute;lectionner les marqueurs, il faut donc d&eacute;finir des images pour l'&eacute;tat s&eacute;lectionn&eacute;.</li>
+	</ul>
+	<p>Pour cette raison, il ne suffit pas de fournir une image pour changer l'apparence des marqueurs. GMap utilise donc un fichier XML de d&eacute;finition des icones qui porte l'extension <b>.gmd</b>.</p>
+	<p>Comme les fichiers de requ&ecirc;tes (voir ci-dessus), les fichiers de d&eacute;finition des icones peuvent &ecirc;tre surcharg&eacute;s selon les objets, les types de points ou les rubriques auxquelles appartiennent les objets repr&eacute;sent&eacute;s.</p>
+	<p>La syntaxe de nommage des fichiers gmd est la suivante&nbsp;:</p>
+	<p><span class="code">gmap-marker-(&lt;<em>nom d&rsquo;objet</em>&gt;|default)[-&lt;<em>type de point</em>&gt;][(-|=)&lt;<em>identifiant de rubrique</em>&gt;].gmd</span></p>
+	<p>&nbsp;</p>
+	<p>GMap contient des d&eacute;finitions d'icones par type d'objet et une d&eacute;finition g&eacute;n&eacute;rique (dans le dossier <span class="code">themes/gmap</span> du plugin). Vous pouvez copier ces fichiers dans votre dossier <span class="code">squelettes/</span> et d&eacute;signer de nouvelles images (avec de nouveaux points d'ancrage, etc.).</p>
+	<p>Par exemple, si vous voulez red&eacute;finir l'apparence des points des articles dans la branche de la rubrique 23, vous devrez cr&eacute;er un fichier <span class="code">squelettes/gmap-marker-article-23.gmd</span>.</p>
+	<p>&nbsp;</p>
+	<p>Vous n'&ecirc;tes pas oblig&eacute;s de reproduire toutes les images incluses dans les fichiers par d&eacute;faut de GMap&nbsp;: par exemple les images en &eacute;tat s&eacute;lectionn&eacute; de vous seront pas utiles si vous n'utilisez pas cette fonction. De m&ecirc;me, les images compl&egrave;tes ou les ombres peuvent &ecirc;tre inutiles selon le fournisseurs de carte que vous avez choisi.</p>
+	<p>&nbsp;</p>
+	<p>Pour faire plus simple, et si vous souhaitez red&eacute;finir les images pour tout le site, vous pouvez vous contenter de red&eacute;finir les images du dossier <span class="code">themes/gmap/images</span> du plugin dans votre dossier <span class="code">squelettes/</span>.</p>
+	
+	<h3>Styles pour les fichiers XML export&eacute;s</h3>
+	<p>Il y a moins de possibilit&eacute;s de param&eacute;trage en ce qui concerne l'interpr&eacute;tation des fichiers KML, par exemple par Google Earth.</p>
+	<p>En effet, la grammaire KML d&eacute;finit les icones soit dans des fichiers de styles isol&eacute;s, soit pour chaque <i>placemark</i> directement dans le KML. Dans l'un comme l'autre cas, le report de toutes les possibilit&eacute;s ci-dessus aurait conduit soit &agrave; une profusion de requ&ecirc;tes sur le serveur, soit &agrave; une profusion de styles &agrave; g&eacute;rer c&ocirc;t&eacute; client.</p>
+	<p>Les styles KML sont donc simplifi&eacute;s&nbsp;: on peut seulement d&eacute;finir une icone par type d'objet, ou, en surchargeant le fichier de requ&ecirc;te <span class="code">gmap-kml-default.html</span>, d&eacute;finir des icones sp&eacute;cifiques.</p>
+	<p>&nbsp;</p>
+	<p>Les styles sont d&eacute;finis dans le fichier <span class="code">gmap-styles-default.html</span> situ&eacute; dans le dossier <span class="code">requetes</span> du plugin. On peut le surcharger dans le dossier <span class="code">squelettes/</span>.</p>
+	<p>Ce fichier d&eacute;fini les styles <i>GMapDefault</i>, <i>GMapRubrique</i>, <i>GMapArticle</i> et <i>GMapDocument</i> utilis&eacute;s par <span class="code">gmap-styles-default.html</span>.</p>
+	<p>&nbsp;</p>
+	<p>La red&eacute;finition du fichier <span class="code">gmap-kml-default.html</span>, qui produit le fichier KML, offre &eacute;videmment plus de posibilit&eacute;s de personnalisation.</p>
+	<p>Comme on peut d&eacute;finir un autre fichier de style, on peut ajouter autant de styles que n&eacute;cessaire, en &eacute;tant seulement limit&eacute; par la logique des boucles.</p>
+		
+		
+	<h2>Contenu des bulles d'information</h2>
+	<p>Selon le m&ecirc;me principe, le contenu des bulles d&rsquo;information est d&eacute;fini dans des fichiers squelettes nomm&eacute;s&nbsp;:<br />
+		<span class="code">gmap-info-(&lt;<em>nom d&rsquo;objet</em>&gt;|default)[-&lt;<em>type de point</em>&gt;][(-|=)&lt;<em>identifiant de rubrique</em>&gt;].html</span>.</p>
+	<p>Ce sont des fichiers squelettes dans lesquels on peut utiliser des boucles SPIP.</p>
+	<p>&nbsp;</p>
+	<p>Le stylage des info-bulles est contenu dans un fichier <span class="code">style/gmap-balloon.css</span>, il permet de red&eacute;finir le look des bulles sans toucher &agrave; leur contenu.</p>
+	<p><b>Attention</b>&nbsp;: en red&eacute;finissant les fichiers <span class="code">gmap-info-*.html</span>, on pourrait penser s&rsquo;affranchir de <span class="code">gmap-balloon.css</span>, mais ce n&rsquo;est vrai que pour les fichiers KML lus dans Google Earth. En effet, en interne, seul le contenu de la balise <span class="code">&lt;body&gt;&lt;/body&gt;</span> est conserv&eacute; et le style des info-bulles se fait en int&eacute;grant <span class="code">gmap-balloon.css</span> dans la page HTML qui contient la carte.</p>
+	<p>&nbsp;</p>
+	<p>Lorsque la fonction de regroupement des info-bulles est activ&eacute;e, l&rsquo;apparence de la barre de navigation est fig&eacute;e, on ne peut la modifier qu&rsquo;en red&eacute;finissant le fichier <span class="code">style/gmap-balloon.css</span>.</p>
+
+	
+</body>
+</html>

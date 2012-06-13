@@ -1,0 +1,23 @@
+[(#REM)
+
+	Modèle pour la description d'une brève dans les info-bulles de la carte.
+	
+]<BOUCLE_breve(BREVES){id_breve}><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" lang="#LANG">
+<head>[
+	<title>(#TITRE|textebrut)</title>][
+	<link href="(#URL_FICHIER{style/gmap-balloon.css}|url_absolue)" rel="stylesheet" type="text/css" />]
+</head>
+<body class="balloon">
+<div class="gmap-balloon">[
+	<h1><a[ href="(#URL_BREVE|url_absolue)"]>(#TITRE)</a></h1>][
+	<div class="contents">[
+		<div class="image"><a[ href="(#URL_BREVE|url_absolue)"][ title="(#TITRE|attribut_html)"]>(#LOGO_BREVE|image_reduire{100,100}|liens_absolus)</a></div>][
+		<div class="texte">(#INTRODUCTION{200}|inserer_attribut{class, description})</div>][
+		<div class="texte"><p><a[ href="(#URL_SITE)"][ title="(#NOM_SITE|attribut_html)"]>(#NOM_SITE)</a></p></div>]
+		<div class="lire"><a href='(#URL_BREVE|url_absolue)'[ title='(#TITRE|attribut_html)']>voir en ligne</a></div>
+	</div>]
+</div>
+</body>
+</html>
+</BOUCLE_breve>

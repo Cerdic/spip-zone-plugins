@@ -1,0 +1,144 @@
+[(#REM)
+
+	Fichier KML de requêtes sur une recherche.
+	
+	La requête de recherche consiste à afficher les rubriques, articles, breves et mots-clefs
+	qui répondent au moteur de recherche de SPIP.
+	
+][(#CACHE{86400})][(#HTTP_HEADER{Content-type: #ENV{mime,text/xml}[; charset=(#CHARSET)]})][(#SET{prefix, #ENV{prefix,gmm}})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:#GET{prefix}="#URL_SITE_SPIP/schemas/GeoMarkers/1.0"[
+	 xsi:SchemaLocation="#URL_SITE_SPIP/schemas/GeoMarkers/1.0 (#URL_FICHIER{schemas/GeoMarkers/1.0/geomarkers.xsd}|url_absolue)"]>
+<Document>[
+
+(#REM) Boucle sur les rubriques ]
+<BOUCLE_rubriques(RUBRIQUES){recherche}><BOUCLE_rubriques_points(GEOPOINTS){id_rubrique}{meilleur}>
+	<Placemark>[
+		<name>(#TITRE|textebrut)</name>][
+		<description><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#DESCRIPTIF)#EVAL{'chr(93)'}#EVAL{'chr(93)'}></description>]
+		<visibility>1</visibility>
+		<open>0</open>[
+		<atom:link href="(#URL_RUBRIQUE|url_absolue)"/>][
+		<styleUrl>(#URL_PAGE{gmap-styles-default}|ancre_url{GMapRubrique})</styleUrl>]
+		<ExtendedData>[
+			(#GEOMARKERICONS{format=kml,prefix=#GET{prefix}})]
+			<[(#GET{prefix}):]markerParams[ type="(#TYPE_POINT)"][ zoom="(#ZOOM)"][ objectName="(#OBJET)"][ objectId="(#ID_OBJET)"][ visible="(#VISIBLE)"][ priority="(#PRIORITE)"] />
+		</ExtendedData>[
+		<Style>
+			<BalloonStyle>
+				<bgColor>ffffffff</bgColor>
+				<text><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#GEOPOPUP)#EVAL{'chr(93)'}#EVAL{'chr(93)'}></text>
+			</BalloonStyle>
+		</Style>]
+		<Point>
+			<coordinates>#LONGITUDE,#LATITUDE,0</coordinates>
+		</Point>
+	</Placemark>
+</BOUCLE_rubriques_points></BOUCLE_rubriques>[
+
+
+(#REM) Boucle sur articles ]
+<BOUCLE_articles(ARTICLES){recherche}><BOUCLE_articles_points(GEOPOINTS){id_article}{meilleur}>
+	<Placemark>[
+		<name>(#TITRE|textebrut)</name>][
+		<description><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#DESCRIPTIF)#EVAL{'chr(93)'}#EVAL{'chr(93)'}></description>]
+		<visibility>1</visibility>
+		<open>0</open>[
+		<atom:link href="(#URL_ARTICLE|url_absolue)"/>][
+		<styleUrl>(#URL_PAGE{gmap-styles-default}|ancre_url{GMapArticle})</styleUrl>]
+		<ExtendedData>[
+			(#GEOMARKERICONS{format=kml,prefix=#GET{prefix}})]
+			<[(#GET{prefix}):]markerParams[ type="(#TYPE_POINT)"][ zoom="(#ZOOM)"][ objectName="(#OBJET)"][ objectId="(#ID_OBJET)"][ visible="(#VISIBLE)"][ priority="(#PRIORITE)"] />
+		</ExtendedData>[
+		<Style>
+			<BalloonStyle>
+				<bgColor>ffffffff</bgColor>
+				<text><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#GEOPOPUP)#EVAL{'chr(93)'}#EVAL{'chr(93)'}></text>
+			</BalloonStyle>
+		</Style>]
+		<Point>
+			<coordinates>#LONGITUDE,#LATITUDE,0</coordinates>
+		</Point>
+	</Placemark>
+</BOUCLE_articles_points></BOUCLE_articles>[
+
+
+(#REM) Boucle sur les breves ]
+<BOUCLE_breves(BREVES){recherche}><BOUCLE_breves_points(GEOPOINTS){id_breve}{meilleur}>
+	<Placemark>[
+		<name>(#TITRE|textebrut)</name>][
+		<description><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#DESCRIPTIF)#EVAL{'chr(93)'}#EVAL{'chr(93)'}></description>]
+		<visibility>1</visibility>
+		<open>0</open>[
+		<atom:link href="(#URL_BREVE|url_absolue)"/>][
+		<styleUrl>(#URL_PAGE{gmap-styles-default}|ancre_url{GMapBreve})</styleUrl>]
+		<ExtendedData>[
+			(#GEOMARKERICONS{format=kml,prefix=#GET{prefix}})]
+			<[(#GET{prefix}):]markerParams[ type="(#TYPE_POINT)"][ zoom="(#ZOOM)"][ objectName="(#OBJET)"][ objectId="(#ID_OBJET)"][ visible="(#VISIBLE)"][ priority="(#PRIORITE)"] />
+		</ExtendedData>[
+		<Style>
+			<BalloonStyle>
+				<bgColor>ffffffff</bgColor>
+				<text><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#GEOPOPUP)#EVAL{'chr(93)'}#EVAL{'chr(93)'}></text>
+			</BalloonStyle>
+		</Style>]
+		<Point>
+			<coordinates>#LONGITUDE,#LATITUDE,0</coordinates>
+		</Point>
+	</Placemark>
+</BOUCLE_breves_points></BOUCLE_breves>[
+
+
+(#REM) Boucle sur les auteurs ]
+<BOUCLE_auteurs(AUTEURS){recherche}><BOUCLE_auteurs_points(GEOPOINTS){id_auteur}{meilleur}>
+	<Placemark>[
+		<name>(#NOM|textebrut)</name>][
+		<description><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#BIO)#EVAL{'chr(93)'}#EVAL{'chr(93)'}></description>]
+		<visibility>1</visibility>
+		<open>0</open>[
+		<atom:link href="(#URL_AUTEUR|url_absolue)"/>][
+		<styleUrl>(#URL_PAGE{gmap-styles-default}|ancre_url{GMapAuteur})</styleUrl>]
+		<ExtendedData>[
+			(#GEOMARKERICONS{format=kml,prefix=#GET{prefix}})]
+			<[(#GET{prefix}):]markerParams[ type="(#TYPE_POINT)"][ zoom="(#ZOOM)"][ objectName="(#OBJET)"][ objectId="(#ID_OBJET)"][ visible="(#VISIBLE)"][ priority="(#PRIORITE)"] />
+		</ExtendedData>[
+		<Style>
+			<BalloonStyle>
+				<bgColor>ffffffff</bgColor>
+				<text><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#GEOPOPUP)#EVAL{'chr(93)'}#EVAL{'chr(93)'}></text>
+			</BalloonStyle>
+		</Style>]
+		<Point>
+			<coordinates>#LONGITUDE,#LATITUDE,0</coordinates>
+		</Point>
+	</Placemark>
+</BOUCLE_auteurs_points></BOUCLE_auteurs>[
+
+
+(#REM) Boucle sur les mots-clefs ]
+<BOUCLE_mots(MOTS){recherche}><BOUCLE_mots_points(GEOPOINTS){id_mot}{meilleur}>
+	<Placemark>[
+		<name>(#TITRE|textebrut)</name>][
+		<description><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#DESCRIPTIF)#EVAL{'chr(93)'}#EVAL{'chr(93)'}></description>]
+		<visibility>1</visibility>
+		<open>0</open>[
+		<atom:link href="(#URL_MOT|url_absolue)"/>][
+		<styleUrl>(#URL_PAGE{gmap-styles-default}|ancre_url{GMapMot})</styleUrl>]
+		<ExtendedData>[
+			(#GEOMARKERICONS{format=kml,prefix=#GET{prefix}})]
+			<[(#GET{prefix}):]markerParams[ type="(#TYPE_POINT)"][ zoom="(#ZOOM)"][ objectName="(#OBJET)"][ objectId="(#ID_OBJET)"][ visible="(#VISIBLE)"][ priority="(#PRIORITE)"] />
+		</ExtendedData>[
+		<Style>
+			<BalloonStyle>
+				<bgColor>ffffffff</bgColor>
+				<text><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#GEOPOPUP)#EVAL{'chr(93)'}#EVAL{'chr(93)'}></text>
+			</BalloonStyle>
+		</Style>]
+		<Point>
+			<coordinates>#LONGITUDE,#LATITUDE,0</coordinates>
+		</Point>
+	</Placemark>
+</BOUCLE_mots_points></BOUCLE_mots>
+</Document>
+</kml>

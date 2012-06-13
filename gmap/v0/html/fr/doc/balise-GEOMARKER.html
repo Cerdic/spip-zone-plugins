@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>La balise #GEOMARKER</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body class="help-page">
+	
+	<h2>R&ocirc;le</h2>
+	<p>Cette balise permet d&rsquo;ajouter manuellement des points sur la carte. Les coordonn&eacute;es peuvent &ecirc;tre fournies explicitement, elle peuvent provenir d&rsquo;un &eacute;l&eacute;ment g&eacute;olocalis&eacute; dans SPIP, ou encore elle peuvent provenir d'une requ&ecirc;te.</p>
+	<p>Par exemple&nbsp;:</p>
+	<pre class="code"><span class="spip-balise">#GEOMARKER</span><span class="spip-syntax">{id_article}</span>
+<span class="spip-balise">#GEOMARKER</span><span class="spip-syntax">{id_article=23}</span>
+<span class="spip-balise">#GEOMARKER</span><span class="spip-syntax">{id_document=119, type=visee}</span>
+<span class="spip-balise">#GEOMARKER</span><span class="spip-syntax">{latitude=38, longitude=-6, titre=un marqueur manuel, icon=gmap-marker-article, texte=toto}</span>
+<span class="spip-balise">#GEOMARKER</span><span class="spip-syntax">{adresse='Montréal; Québec', titre=Montréal au Québec}</span>
+<span class="spip-balise">#GEOMARKER</span><span class="spip-syntax">{id_article=23, markers=documents}</span></pre>
+	<ul>
+		<li>La premi&egrave;re forme ajoute un point correspondant &agrave; l&rsquo;article qui se trouve dans le contexte.</li>
+		<li>La deuxi&egrave;me ajoute le point correspondant &agrave; un article identifi&eacute;.</li>
+		<li>La troisi&egrave;me ajoute le point de types <span class="code">visee</span> associ&eacute;e au document 119.</li>
+		<li>La quatri&egrave;me ajoute un point dont la position est d&eacute;finie manuellement.</li>
+		<li>La cinqui&egrave;me ajoute un point dont la position est d&eacute;finie par une adresse.</li>
+		<li>La sixi&egrave;me ajoute les points issus d'une requ&ecirc;te sur les documents de l'article 23.</li>
+	</ul>
+	<p>Si plusieurs balises GEOMAP sont pr&eacute;sentes, on peut utiliser le param&egrave;tre map=X pour donner un num&eacute;ro &agrave; la carte et lever les ambigu&iuml;t&eacute;s. Sans ce param&egrave;tre, le marqueur sera ajout&eacute; sur la derni&egrave;re carte cr&eacute;&eacute;e au moment o&ugrave; la balise GEOMARKER est interpr&eacute;t&eacute;e.</p>
+	<p>&nbsp;</p>
+	<p>La balise GEOMARKER utilise les m&ecirc;mes param&egrave;tres que la balise <a href="balise-GEOMAP.html">GEOMAP</a> pour d&eacute;signer les points &agrave; ajouter. Par contre les param&egrave;tres d&eacute;signant un objet ou des coordonn&eacute;es ne sont pas utilis&eacute;s pour centrer la carte. L'identifiant d'un objet est utilis&eacute; comme point de d&eacute;part de la recherche des points, alors que les coordonn&eacute;es ne sont utilis&eacute;es que pour ajouter un point manuellement.</p>
+	<p>Il n'est pas possible de combiner plusieurs types d'ajout. Par exemple, la syntaxe suivante n'est pas correcte&nbsp;:</p>
+	<pre class="code"><span class="spip-balise">#GEOMARKER</span><span class="spip-syntax">{id_article=23, markers=documents, latitude=38, longitude=-6, titre=un marqueur manuel, icon=gmap-marker-article, texte=toto}</span></pre>
+	<p>Dans ce cas, les param&egrave;tres de coordonn&eacute;es seront simplement ignor&eacute;s.</p>
+	<p>&nbsp;</p>
+	<p>Comme pour la balise GEOMAP, tous les param&egrave;tres transmis &agrave; la balise #GEOMARKER sont renvoy&eacute;s au squelette qui effectue la requ&ecirc;te (quand <span class="code">markers=query</span>).</p>
+
+	<h2>Param&egrave;tres</h2>
+	<p>Les param&egrave;tres sont en grande partie les m&ecirc;mes que les param&egrave;tres communs &agrave; toutes les impl&eacute;mentations de la balise <a href="balise-GEOMAP.html">GEOMAP</a>, veuillez vous r&eacute;f&eacute;rer &agrave; la documentation de cette derni&egrave;re.</p>
+	<p>Les param&egrave;tres sp&eacute;cifiques &agrave; une impl&eacute;mentation, ainsi que le param&egrave;tre <span class="code">viewport</span> n'ont aucun sens dans le cadre de l'ajout de points, il ne sont donc pas utilis&eacute;s.</p>
+	<p>N'apparaissent ci-dessous que les param&egrave;tres sp&eacute;cifiques ou dont le sens est diff&eacute;rent.</p>
+	<p>&nbsp;</p>
+	<table>
+		<tr><th>Nom</th><th>Description</th><th>Valeur</th></tr>
+		<tr>
+			<td>id_article/id_rubrique...</td>
+			<td>Objet utilis&eacute; comme source de la recherche des points</td>
+			<td>{id_article} ou {id_article=39}, {id_rubrique}, {id_document}, {id_breve}, {id_mot}, {id_auteur}</td>
+		</tr>
+		<tr>
+			<td>type</td>
+			<td>Type du marqueur recherch&eacute; sur un &eacute;l&eacute;ment.</td>
+			<td>Parmi les types d&eacute;finis dans le param&eacute;trage du plugin.</td>
+		</tr>
+		<tr>
+			<td>latitude</td>
+			<td>Latitude du point</td>
+			<td>-38.5911137761474</td>
+		</tr>
+		<tr>
+			<td>longitude</td>
+			<td>Longitude du point</td>
+			<td>143.036499023438</td>
+		</tr>
+		<tr>
+			<td>adresse</td>
+			<td>Adresse du point, au format connu par le geocoder <a href="#note1">(cf. note 1)</a>.</td>
+			<td>Montr&eacute;al; Qu&eacute;bec</td>
+		</tr>
+		<tr>
+			<td>titre</td>
+			<td>Titre du point, affich&eacute; sur le survol du marqueur.</td>
+			<td>texte</td>
+		</tr>
+		<tr>
+			<td>texte</td>
+			<td>Texte du point, affich&eacute; dans l'info-bulle.</td>
+			<td>texte / html</td>
+		</tr>
+		<tr>
+			<td>icon</td>
+			<td>Nom de l'icone utilis&eacute;e pour le marqueur.</td>
+			<td>Nom d'un fichier XML du type gmd <a href="#note1">(cf. note 2)</a>.</td>
+		</tr>
+	</table>
+	<a name="note1"></a><p>Note 1&nbsp;: L'adresse est exprim&eacute;e d'une fa&ccedil;on compr&eacute;hensible par le geocoder de l'impl&eacute;mentation utilis&eacute;e, mais il ne peut comporter de virgules, car SPIP les interpr&egrave;te comme le passage au param&egrave;tre suivant. Pour s&eacute;parer les diff&eacute;rents champs, vous pouvez utiliser des points virgules.</p>
+	<a name="note2"></a><p>Note 2&nbsp;: Le plugin d&eacute;fini par exemple un fichier <span class="code">gmap-marker-default.gmd</span>, pour le d&eacute;signer, le param&egrave;tre <i>icon</i> doit contenir <i>gmap-marker-default</i>. Ces fichiers sont recherch&eacute;s dans le path de SPIP, ils peuvent donc &ecirc;tre positionn&eacute;s dans le dossier <i>squelettes</i>.</p>
+	
+</body>
+</html>

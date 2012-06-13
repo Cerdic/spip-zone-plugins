@@ -1,0 +1,12 @@
+[(#REM)
+
+	Liste des icones écrite dans les fichiers GeoJSON
+	
+]<B_icons>[
+		"name": "(#ENV{name})",]
+		"images" : #EVAL{'chr(91)'}
+	<BOUCLE_icons(POUR){tableau #ENV{icons}}{","}>
+		{[ "type": "(#VALEUR|table_valeur{type})",][ "state": "(#VALEUR|table_valeur{state})",][ "cxSize": (#VALEUR|table_valeur{cxSize}),][ "cySize": (#VALEUR|table_valeur{cySize}),][ "xAnchor": (#VALEUR|table_valeur{xAnchor}),][ "yAnchor": (#VALEUR|table_valeur{yAnchor}),][ "xOffset": (#VALEUR|table_valeur{xOffset}),][ "yOffset": (#VALEUR|table_valeur{yOffset}),] "url": "[(#URL_FICHIER_DEF{#VALEUR|table_valeur{image}, #ENV{folder}}|url_absolue)]" }</BOUCLE_icons>
+		#EVAL{'chr(93)'}
+</B_icons>[
+		"name": "(#ENV{name})"]<//B_icons>

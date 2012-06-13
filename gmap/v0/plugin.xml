@@ -1,0 +1,93 @@
+<plugin>
+	<nom>G&#233;olocalisation et cartographie</nom>
+	<icon>images/logo-gmap.png</icon>
+	<version>0.2.1</version>
+	<version_base>1.0.0</version_base>
+	<etat>test</etat>
+	<auteur>F. ALBERT</auteur>
+	<slogan>G&#233;olocalisation des objets et rendu cartographique param&#233;trable.</slogan>
+	<description>
+	<multi>
+[fr]Dans l&apos;espace priv&#233;, GMap permet d&apos;associer une &#224; plusieurs coordonn&#233;es aux objets &#233;ditoriaux et de param&#233;trer le rendu des cartes.
+_ Dans l&apos;espace public, vous pouvez ins&#233;rer des cartes dans les squelettes ou dans les textes en ma&#238;trisant finement la repr&#233;sentation des points et les informations qui leur sont associ&#233;es.
+	</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Plugin-GMap-geolocalisation-et-cartographie-des-objets</lien>
+	<categorie>divers</categorie>
+	 
+	<install>base/gmap_install.php</install>
+	<prefix>gmap</prefix>
+	<chemin dir='' />
+	<chemin dir='exemples/' />
+	<chemin dir='requetes/' />
+	
+	<bouton id="configurer_gmap" parent="configuration">
+		<icone>images/logo-config-title.gif</icone>
+		<titre>gmap:config_titre_bouton</titre>
+	</bouton>
+	
+    <!-- Options SPIP -->
+	<options>gmap_options.php</options>
+
+    <!-- Installation de la base de données -->
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/gmap_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/gmap_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/gmap_tables.php</inclure>
+	</pipeline>
+
+	<!-- Autorisations, pour le boutons -->
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>gmap_autoriser.php</inclure>
+	</pipeline>
+	
+	<!-- Saisie dans la zone privée -->
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head_prive</action>
+		<inclure>gmap_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<action>saisie_geo_info</action>
+		<inclure>gmap_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>information_exif</nom>
+		<action>get_position</action>
+		<inclure>gmap_pipeline.php</inclure>
+	</pipeline>
+	
+	<!-- Affichage dans la zone publique -->
+	<fonctions>gmap_fonctions.php</fonctions>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<action>affichage_final</action>
+		<inclure>gmap_pipeline.php</inclure>
+	</pipeline>
+	
+	<!-- Pipelines internes GMap -->
+	<pipeline>
+		<nom>gmap_implementations</nom>
+		<action>declare_implementation</action>
+		<inclure>gmap_pipeline_local.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>gmap_outils_geoloc</nom>
+		<action>declare_outil_geoloc</action>
+		<inclure>gmap_pipeline_local.php</inclure>
+	</pipeline>
+		
+	<necessite id="SPIP" version="[2.0.9;2.1.99]" />
+	<necessite id="spip_bonux" version="[1.8.1;]" />
+	<utilise id="medias" version="[1.6.2;]" />
+	
+</plugin>

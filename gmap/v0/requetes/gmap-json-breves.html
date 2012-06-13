@@ -1,0 +1,31 @@
+[(#REM)
+
+	Fichier GeoJSON pour récupérer des brèves géoréférencées.
+	
+	La requête utilise tous les critères passés dans les paramètres parmi :
+	- aucun paramètres : toutes les brèves
+	- id_breve : une brève particulière
+	- id_rubrique ou id_secteur : toutes les brèves d'une rubrique.
+	- id_mot : toutes les brèves ayant un mot-clef
+
+][(#CACHE{86400})][(#HTTP_HEADER{Content-type: text/plain; charset=utf-8})][(#SET{features, 0})]{	"type": "FeatureCollection",
+	"features": #EVAL{'chr(91)'}[
+
+(#REM) Boucle sur les brèves]
+<BOUCLE_breves(BREVES){id_breve ?}{id_secteur ?}{id_rubrique ?}{id_mot ?}><B_breves_points>[(#GET{features}|>{0}|?{',',''})]<BOUCLE_breves_points(GEOPOINTS){id_breve}{meilleur}{","}>
+	{	"type": "Feature",
+		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
+		"properties": {[
+			"name": (#TITRE|textebrut|texte_json),][
+			"html": (#GEOPOPUP{contenu_seul=oui,json=oui}),][
+			"icon": {(#GEOMARKERICONS{format=json})},][
+			"objet": "(#OBJET)",][
+			"id_objet": (#ID_OBJET),][
+			"visible": "(#VISIBLE)",][
+			"priorite": (#PRIORITE),]
+			"type": "#TYPE_POINT",
+			"zoom": #ZOOM
+			}
+	}</BOUCLE_breves_points>[(#SET{features, #GET{features}|plus{#TOTAL_BOUCLE}})]</B_breves_points></BOUCLE_breves>
+	#EVAL{'chr(93)'}
+}

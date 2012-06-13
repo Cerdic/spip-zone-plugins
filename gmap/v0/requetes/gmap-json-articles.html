@@ -1,0 +1,33 @@
+[(#REM)
+
+	Fichier GeoJSON pour récupérer des articles géoréférencés.
+	
+	La requête utilise tous les critères passés dans les paramètres parmi :
+	- aucun paramètre : tous les articles
+	- id_article : un article spécifique
+	- id_rubrique : tous les articles d'une rubrique
+	- id_secteur : tous les articles d'un secteur
+	- id_mot : tous les articles ayant un mot-clef
+	- id_auteur : tous les articles d'un auteur
+
+][(#CACHE{86400})][(#HTTP_HEADER{Content-type: text/plain; charset=utf-8})][(#SET{features, 0})]{	"type": "FeatureCollection",
+	"features": #EVAL{'chr(91)'}[
+
+(#REM) Boucle sur les articles]
+<BOUCLE_articles(ARTICLES){id_article ?}{id_rubrique ?}{id_secteur ?}{id_mot ?}{id_auteur ?}><B_articles_points>[(#GET{features}|>{0}|?{',',''})]<BOUCLE_articles_points(GEOPOINTS){id_article}{meilleur}{","}>
+	{	"type": "Feature",
+		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
+		"properties": {[
+			"name": (#TITRE|textebrut|texte_json),][
+			"html": (#GEOPOPUP{contenu_seul=oui,json=oui}),][
+			"icon": {(#GEOMARKERICONS{format=json})},][
+			"objet": "(#OBJET)",][
+			"id_objet": (#ID_OBJET),][
+			"visible": "(#VISIBLE)",][
+			"priorite": (#PRIORITE),]
+			"type": "#TYPE_POINT",
+			"zoom": #ZOOM
+			}
+	}</BOUCLE_articles_points>[(#SET{features, #GET{features}|plus{#TOTAL_BOUCLE}})]</B_articles_points></BOUCLE_articles>
+	#EVAL{'chr(93)'}
+}

@@ -1,0 +1,30 @@
+[(#REM)
+
+	Fichier GeoJSON pour récupérer des auteurs géoréférencées.
+	
+	La requête utilise tous les critères passés dans les paramètres parmi :
+	- aucun paramètres : tous les auteurs
+	- id_auteur : un auteur particulier
+	- id_article : les auteurs d'un article
+
+][(#CACHE{86400})][(#HTTP_HEADER{Content-type: text/plain; charset=utf-8})][(#SET{features, 0})]{	"type": "FeatureCollection",
+	"features": #EVAL{'chr(91)'}[
+
+(#REM) Boucle sur les auteurs]
+<BOUCLE_auteurs(AUTEURS){id_auteur ?}{id_article ?}><B_auteurs_points>[(#GET{features}|>{0}|?{',',''})]<BOUCLE_auteurs_points(GEOPOINTS){id_auteur}{meilleur}{","}>
+	{	"type": "Feature",
+		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
+		"properties": {[
+			"name": (#NOM|textebrut|texte_json),][
+			"html": (#GEOPOPUP{contenu_seul=oui,json=oui}),][
+			"icon": {(#GEOMARKERICONS{format=json})},][
+			"objet": "(#OBJET)",][
+			"id_objet": (#ID_OBJET),][
+			"visible": "(#VISIBLE)",][
+			"priorite": (#PRIORITE),]
+			"type": "#TYPE_POINT",
+			"zoom": #ZOOM
+			}
+	}</BOUCLE_auteurs_points>[(#SET{features, #GET{features}|plus{#TOTAL_BOUCLE}})]</B_auteurs_points></BOUCLE_auteurs>
+	#EVAL{'chr(93)'}
+}
