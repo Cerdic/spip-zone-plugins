@@ -21,11 +21,10 @@ function getid3_post_edition($flux){
 		static $getid3_done = false;
 		if(!$getid3_done){
 			$id_document = $flux['args']['id_objet'];
-			$son_modif_id3 = array("mp3");
+			$son_modif_id3 = array("mp3,ogg,oga,flac");
 			$son_recup_id3 = array("mp3","ogg","flac","aiff","aif","wav","m4a","oga");
 			$extensions_vignettes = array("png","gif","jpg");
 			$conf_id3 = lire_config('getid3/reecriture_tags',array());
-			$document_orig = sql_fetsel('*','spip_documents','id_vignette='.intval($id_document));
 			$document = sql_fetsel("*", "spip_documents","id_document=".sql_quote($id_document));
 			$extension = $document['extension'];
 			if($flux['args']['operation'] == 'ajouter_document'){
@@ -42,7 +41,7 @@ function getid3_post_edition($flux){
 				 * L'ajout est une vignette
 				 * Insertion de la vignette automatiquement dans le mp3 si changement
 				 */
-				else if(in_any($extension,$extensions_vignettes) 
+				else if(in_any($extension,$extensions_vignettes)
 					&& ($document_orig = sql_fetsel('*','spip_documents','id_vignette='.intval($id_document)))
 					&& ($document_orig['distant'] != 'oui')
 					&& in_array($document_orig['extension'],$son_modif_id3)

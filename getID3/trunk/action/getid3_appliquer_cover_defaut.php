@@ -35,16 +35,23 @@ function action_getid3_appliquer_cover_defaut(){
 	if(count($documents_modifs) > 0){
 		include_spip('inc/documents');
 		include_spip('inc/distant');
+		include_spip('inc/joindre_document');
+		include_spip('action/editer_document');
+		
 		$cover_defaut = find_in_path(copie_locale($cover_defaut));
-		$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 
 		list($extension,$arg) = fixer_extension_document($cover_defaut);
-		
+		$cover_ajout = array(array('tmp_name'=>$cover_defaut,'name'=> basename($cover_defaut)));
+			
 		foreach($documents_modifs as $document_modif){
-			$x = $ajouter_documents($cover_defaut, $cover_defaut,
-				$type, $id, 'vignette', $document_modif, $actifs);
-			if(is_numeric($x) && ($x > 0))
+			$ajoute = $ajouter_documents($id_vignette,$cover_ajout,'',0,'vignette');
+
+			if (is_numeric(reset($ajoute))
+			  AND $id_vignette = reset($ajoute)){
+			  	document_modifier($document_modif,array('id_vignette'=>$id_vignette));
 				$nb_modifs++;
+			}
 		}
 	}
 	
