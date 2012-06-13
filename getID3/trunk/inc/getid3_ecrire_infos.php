@@ -132,8 +132,8 @@ function inc_getid3_ecrire_infos($id_document,$infos=array(),$images=null,$forma
 		}
 		
 		$taille = filesize($document_chemin);
-		include_spip('inc/modifier');
-		revision_document($id_document, array('taille'=>$taille));
+		include_spip('action/editer_document');
+		document_modifier($id_document, array('taille'=>$taille));
 		
 		pipeline('post_edition',
 			array(
