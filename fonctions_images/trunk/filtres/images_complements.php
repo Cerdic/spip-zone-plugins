@@ -1105,7 +1105,7 @@ function image_monochrome($img,$largeur=20,$seuil=13){
 // (avant, il y avait un decalage fait expres)
 // http://www.fotoremix.net/
 function image_merge($im, $masque, $v='left', $h='top'){
-	$image = image_valeurs_trans($im, "merge-$masque-$v-$h");
+	$image = _image_valeurs_trans($im, "merge-$masque-$v-$h");
 	
 	if (!$image) return("");
 	
