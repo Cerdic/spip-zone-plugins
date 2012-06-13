@@ -21,9 +21,11 @@ function inc_getid3_recuperer_infos($id_document){
 	if(!intval($id_document)){
 		return;
 	}
+	
+	include_spip('action/editer_document');
 	include_spip('inc/documents');
 	include_spip('inc/filtres');
-	$document = sql_fetsel("docs.id_document,docs.titre,docs.extension,docs.fichier,docs.taille,docs.mode", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
+	$document = sql_fetsel("*", "spip_documents","id_document=".intval($id_document));
 	$son_chemin = get_spip_doc($document['fichier']);
 
 	$recuperer_id3 = charger_fonction('recuperer_id3','inc');
@@ -63,7 +65,22 @@ function inc_getid3_recuperer_infos($id_document){
 			$covers[] = $val;
 		}
 	}
-	spip_log($covers,'getid3');
+
+	/**
+	 * Les valeurs que l'on mettra en base à la fin
+	 */
+	$valeurs = array(
+			'titre'=>filtrer_entites($document['titre']),
+			'descriptif'=>filtrer_entites($document['descriptif']),
+			'duree'=> $id3['duree_secondes'],
+			'bitrate' => $id3['bitrate'],
+			'bitrate_mode'=>$id3['bitrate_mode'],
+			'audiosamplerate'=>$id3['audiosamplerate'],
+			'encodeur'=>$id3['codec'],
+			'bits'=>$id3['bits'],
+			'canaux' => $id3['channels']
+		);
+
 	if(count($covers) > 0){
 		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
 
@@ -73,15 +90,11 @@ function inc_getid3_recuperer_infos($id_document){
 
 			list($extension,$arg) = fixer_extension_document($covers[0]);
 			$cover_ajout = array(array('tmp_name'=>$covers[0],'name'=> basename($covers[0])));
-			spip_log('on ajoute la cover','getid3');
-			spip_log($cover_ajout,'getid3');
 			$ajoute = $ajouter_documents($id_vignette,$cover_ajout,'',0,'vignette');
 
 			if (is_numeric(reset($ajoute))
 			  AND $id_vignette = reset($ajoute)){
-				include_spip('action/editer_document');
-				document_modifier($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
-				recuperer_id3_doc($id_document);
+			  	$valeurs['id_vignette'] = $id_vignette;
 			}
 		}
 	}else if(strlen($cover_defaut = lire_config('getid3/cover_defaut','')) > 1){
@@ -104,25 +117,13 @@ function inc_getid3_recuperer_infos($id_document){
 
 			if (is_numeric(reset($ajoute))
 			  AND $id_vignette = reset($ajoute)){
-				include_spip('action/editer_document');
-				document_modifier($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
+			  	$valeurs['id_vignette'] = $id_vignette;
 			}
 		}
 	}
-	sql_updateq('spip_documents',
-		array(
-			'titre'=>filtrer_entites($document['titre']),
-			'descriptif'=>filtrer_entites($document['descriptif']),
-			'duree'=> $id3['duree_secondes'],
-			'bitrate' => $id3['bitrate'],
-			'bitrate_mode'=>$id3['bitrate_mode'],
-			'audiosamplerate'=>$id3['audiosamplerate'],
-			'encodeur'=>$id3['codec'],
-			'bits'=>$id3['bits'],
-			'canaux' => $id3['channels']
-		),
-		'id_document='.intval($id_document));
-	spip_log($id3,'getid3');
+	
+	document_modifier($id_document,$valeurs);
+
 	return $id3;
 }
 ?>

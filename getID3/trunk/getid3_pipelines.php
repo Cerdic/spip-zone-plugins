@@ -17,103 +17,110 @@
  * @return $flux le $flux modifié
  */
 function getid3_post_edition($flux){
-	$id_document = $flux['args']['id_objet'];
-	$son_modif_id3 = array("mp3");
-	$son_recup_id3 = array("mp3","ogg","flac","aiff","aif","wav","m4a","oga");
-	$extensions_vignettes = array("png","gif","jpg");
-	$conf_id3 = lire_config('getid3/reecriture_tags',array());
-	$document_orig = sql_fetsel('*','spip_documents','id_vignette='.intval($id_document));
-	
-	if($flux['args']['operation'] == 'ajouter_document'){
-		$document = sql_fetsel("*", "spip_documents","id_document=".intval($id_document));
-		$extension = $document['extension'];
-		/**
-		 * Récupération automatique des infos des fichiers sons à leur insertion
-		 */
-		if(in_any($extension,$son_recup_id3)){
-			$recuperer_infos = charger_fonction('getid3_recuperer_infos','inc');
-			$infos = $recuperer_infos($id_document);
-		}
-		/**
-		 * L'ajout est une vignette
-		 * Insertion de la vignette automatiquement dans le mp3 si changement
-		 */
-		else if(in_any($extension,$extensions_vignettes) 
-			&& ($document_orig = sql_fetsel('*','spip_documents','id_vignette='.intval($id_document)))
-			&& ($document_orig['distant'] != 'oui')
-			&& in_array($document_orig['extension'],$son_modif_id3)
-		){
-			include_spip('inc/documents');
-			
-			$fichier_orig = get_spip_doc($document_orig['fichier']);
-			$recuperer_id3 = charger_fonction('recuperer_id3','inc');
-			$valeurs = $recuperer_id3($fichier_orig);
-			
-			$files[] = get_spip_doc($document['fichier']);
-			
-			foreach($valeurs as $valeur => $info){
-				if(preg_match('/cover/',$valeur) && (count($files) == 0)){
-					$files[] = $info;
-				}else{
-					$valeurs[$valeur] = filtrer_entites($info);
-				}
-			}
-			
-			/**
-			 * On écrit les tags
-			 */
-			$ecrire_id3 = charger_fonction('getid3_ecrire_infos','inc');
-			$err = $ecrire_id3($document_orig['id_document'],$valeurs,$files);
-		}
-	}
-	/**
-	 * Mise à jour des tags des mp3 si besoin
-	 */
-	if($flux['args']['action'] == 'modifier'){
-		$document = sql_fetsel("*", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
-		$extension = $document['extension'];
-		if(in_any($extension,$son_modif_id3)){
-			$update = false;
-			foreach($flux['data'] as $key => $value){
-				if(in_array($key,$conf_id3))
-					$update = true;
-			}
-			if(is_numeric($flux['data']['id_vignette'])){
-				$update = true;
-			}
-			if($update){
-				$files = null;
-				
+	if(in_array($flux['args']['operation'],array('ajouter_document','modifier'))){
+		static $getid3_done = false;
+		if(!$getid3_done){
+			$id_document = $flux['args']['id_objet'];
+			$son_modif_id3 = array("mp3");
+			$son_recup_id3 = array("mp3","ogg","flac","aiff","aif","wav","m4a","oga");
+			$extensions_vignettes = array("png","gif","jpg");
+			$conf_id3 = lire_config('getid3/reecriture_tags',array());
+			$document_orig = sql_fetsel('*','spip_documents','id_vignette='.intval($id_document));
+			$document = sql_fetsel("*", "spip_documents","id_document=".sql_quote($id_document));
+			$extension = $document['extension'];
+			if($flux['args']['operation'] == 'ajouter_document'){
+				spip_log('on ajoute le document','getid3');
+				$getid3_done = true;
 				/**
-				 * On récupère tout d'abord les anciens tags
-				 */	
-				include_spip('inc/documents');
-				$fichier = get_spip_doc($document['fichier']);
-				$recuperer_id3 = charger_fonction('recuperer_id3','inc');
-				$valeurs = $recuperer_id3($fichier);
-				
-				if(is_numeric($flux['data']['id_vignette'])){
-					$files[] = get_spip_doc(sql_getfetsel('fichier','spip_documents','id_document='.intval($flux['data']['id_vignette'])));
+				 * Récupération automatique des infos des fichiers sons à leur insertion
+				 */
+				if(in_any($extension,$son_recup_id3)){
+					$recuperer_infos = charger_fonction('getid3_recuperer_infos','inc');
+					$infos = $recuperer_infos($id_document);
 				}
-				foreach($valeurs as $valeur => $info){
-					if(preg_match('/cover/',$valeur) && (count($files) == 0)){
-						$files[] = $info;
-					}else{
-						$valeurs[$valeur] = filtrer_entites($info);
+				/**
+				 * L'ajout est une vignette
+				 * Insertion de la vignette automatiquement dans le mp3 si changement
+				 */
+				else if(in_any($extension,$extensions_vignettes) 
+					&& ($document_orig = sql_fetsel('*','spip_documents','id_vignette='.intval($id_document)))
+					&& ($document_orig['distant'] != 'oui')
+					&& in_array($document_orig['extension'],$son_modif_id3)
+				){
+					include_spip('inc/documents');
+					
+					$fichier_orig = get_spip_doc($document_orig['fichier']);
+					$recuperer_id3 = charger_fonction('recuperer_id3','inc');
+					$valeurs = $recuperer_id3($fichier_orig);
+					
+					$files[] = get_spip_doc($document['fichier']);
+					
+					foreach($valeurs as $valeur => $info){
+						if(preg_match('/cover/',$valeur) && (count($files) == 0)){
+							$files[] = $info;
+						}else{
+							$valeurs[$valeur] = filtrer_entites($info);
+						}
+					}
+					
+					/**
+					 * On écrit les tags
+					 */
+					$ecrire_id3 = charger_fonction('getid3_ecrire_infos','inc');
+					$err = $ecrire_id3($document_orig['id_document'],$valeurs,$files);
+				}
+			}
+			/**
+			 * Mise à jour des tags des mp3 si besoin
+			 */
+			if($flux['args']['action'] == 'modifier'){
+	        	$getid3_done = true;
+				spip_log('on modifie le document','getid3');
+				
+				if(in_any($extension,$son_modif_id3)){
+					$update = false;
+					foreach($flux['data'] as $key => $value){
+						if(in_array($key,$conf_id3))
+							$update = true;
+					}
+					if(is_numeric($flux['data']['id_vignette'])){
+						$update = true;
+					}
+					if($update){
+						$files = null;
+						
+						/**
+						 * On récupère tout d'abord les anciens tags
+						 */	
+						include_spip('inc/documents');
+						$fichier = get_spip_doc($document['fichier']);
+						$recuperer_id3 = charger_fonction('recuperer_id3','inc');
+						$valeurs = $recuperer_id3($fichier);
+						
+						if(is_numeric($flux['data']['id_vignette'])){
+							$files[] = get_spip_doc(sql_getfetsel('fichier','spip_documents','id_document='.intval($flux['data']['id_vignette'])));
+						}
+						foreach($valeurs as $valeur => $info){
+							if(preg_match('/cover/',$valeur) && (count($files) == 0)){
+								$files[] = $info;
+							}else{
+								$valeurs[$valeur] = filtrer_entites($info);
+							}
+						}
+						
+						if(isset($flux['data']['titre']) && in_array('titre',$conf_id3))
+							$valeurs['title'] = $flux['data']['titre'];
+							
+						if(isset($flux['data']['descriptif']) && in_array('descriptif',$conf_id3))
+							$valeurs['comment'] = $flux['data']['descriptif'];
+							
+						/**
+						 * On écrit les tags
+						 */
+						$ecrire_id3 = charger_fonction('getid3_ecrire_infos','inc');
+						$err = $ecrire_id3($id_document,$valeurs,$files);
 					}
 				}
-				
-				if(isset($flux['data']['titre']) && in_array('titre',$conf_id3))
-					$valeurs['title'] = $flux['data']['titre'];
-					
-				if(isset($flux['data']['descriptif']) && in_array('descriptif',$conf_id3))
-					$valeurs['comment'] = $flux['data']['descriptif'];
-					
-				/**
-				 * On écrit les tags
-				 */
-				$ecrire_id3 = charger_fonction('getid3_ecrire_infos','inc');
-				$err = $ecrire_id3($id_document,$valeurs,$files);
 			}
 		}
 	}
