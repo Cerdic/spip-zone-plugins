@@ -27,12 +27,11 @@ function action_spipicious_ajouter_tags_dist(){
 	$id_auteur = $visiteur_session['id_auteur'];
 	$id_groupe = lire_config('spipicious/groupe_mot','1');
 	$id_table_objet = id_table_objet($type);
-	$table_mot = table_objet_sql('spip_mots_'.table_objet($type));
 
 	$tags = _request('spipicious_tags');
 	$tableau_tags = explode(";",$tags);
 
-	$ajouter_tags = spipicious_ajouter_tags($tableau_tags,$id_auteur,$id_objet,$type,$id_table_objet,$table_mot,$id_groupe);
+	$ajouter_tags = spipicious_ajouter_tags($tableau_tags,$id_auteur,$id_objet,$type,$id_table_objet,$id_groupe);
 	return $ajouter_tags;
 }
 
@@ -44,11 +43,10 @@ function action_spipicious_ajouter_tags_dist(){
  * @param int $id_objet
  * @param string $type
  * @param int $id_table_objet
- * @param string $table_mot la table de liaison mot / objet
  * @param int $id_groupe
  * @param string $manuel doit on le faire manuellement ou par inc/modifier
  */
-function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$type,$id_table_objet,$table_mot,$id_groupe,$manuel=false){
+function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$type,$id_table_objet,$id_groupe,$manuel=false){
 	$tag_analysed = array();
 	$position = 0;
 
@@ -63,7 +61,7 @@ function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$typ
 	
 	spip_log($tableau_tags,'spipicious');
 	if (is_array($tableau_tags)) {
-		include_spip('inc/modifier');
+		include_spip('action/editer_mot');
 		foreach ($tableau_tags as $k=>$tag) {
 			$tag = trim($tag);
 			if(!empty($tag)){
@@ -75,7 +73,7 @@ function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$typ
 						if(!$manuel){
 							$id_tag = sql_insertq("spip_mots", array('id_groupe' => intval($id_groupe)));
 							$c = array('titre' => $tag, 'id_groupe' => intval($id_groupe));
-							revision_mot($id_tag, $c);
+							mot_modifier($id_tag, $c);
 						}else{
 							$row = sql_fetsel("titre", "spip_groupes_mots", "id_groupe=".intval($id_groupe));
 							$id_tag = sql_insertq("spip_mots", array('id_groupe' => intval($id_groupe),'titre' => $tag_propre,'type'=> $row['titre']));
@@ -83,9 +81,9 @@ function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$typ
 					}
 				}
 				// on lie le mot au couple type (uniquement si pas deja fait)
-				$result = sql_getfetsel("id_mot",$table_mot,"id_mot=".intval($id_tag)." AND $id_table_objet=".intval($id_objet));
+				$result = sql_getfetsel("id_mot",'spip_mots_liens',"id_mot=".intval($id_tag)." AND objet=".sql_quote($objet)." AND id_objet=".intval($id_objet));
 				if (!$result) {
-					sql_insertq("$table_mot",array('id_mot' => intval($id_tag),$id_table_objet => intval($id_objet)));
+					sql_insertq("spip_mots_liens",array('id_mot' => intval($id_tag),'objet' => $type, 'id_objet' => intval($id_objet)));
 				}
 				$result_spipicious = sql_fetsel("*","spip_spipicious","id_mot=".intval($id_tag)." AND id_objet=".intval($id_objet)." AND objet=".sql_quote($type)." AND id_auteur=".intval($id_auteur));
 				if(!$result_spipicious['id_mot']){

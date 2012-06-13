@@ -15,10 +15,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 function formulaires_spipicious_ajax_charger($id_objet,$type='article',$retour='') {
-	global $visiteur_session;
-
 	include_spip('inc/autoriser');
-	if(!autoriser('tagger_spipicious',$type,$id_objet,$visiteur_session,$opt)){
+	if(!autoriser('tagger_spipicious',$type,$id_objet)){
 		return array('editable'=> false);
 	}
 

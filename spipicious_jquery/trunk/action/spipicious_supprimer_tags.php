@@ -26,17 +26,15 @@ function action_spipicious_supprimer_tags_dist(){
 	}
 
 	$id_auteur = $visiteur_session['id_auteur'];
-	$id_groupe = lire_config('spipicious/groupe_mot','1');
 	$id_table_objet = id_table_objet($type);
-	$table_mot = table_objet_sql('spip_mots_'.table_objet($type));
 
 	$remove_tags = _request('remove_tags');
 
-	$suppression = spipicious_supprimer_tags($remove_tags,$id_auteur,$id_objet,$type,$id_table_objet,$table_mot,$id_groupe);
+	$suppression = spipicious_supprimer_tags($remove_tags,$id_auteur,$id_objet,$type,$id_table_objet);
 	return $suppression;
 }
 
-function spipicious_supprimer_tags($remove_tags,$id_auteur,$id_objet,$type,$id_table_objet,$table_mot,$id_groupe){
+function spipicious_supprimer_tags($remove_tags,$id_auteur,$id_objet,$type,$id_table_objet){
 	$compte = 0;
 	$tags_removed = array();
 	foreach($remove_tags as $remove_tag){
@@ -58,7 +56,7 @@ function spipicious_supprimer_tags($remove_tags,$id_auteur,$id_objet,$type,$id_t
 			// Utilisation par un autre utilisateur ok mais utilisation sur le meme id_$type
 			$newt2 = sql_getfetsel("id_auteur","spip_spipicious","id_mot=".intval($remove_tag)." AND id_objet=".intval($id_objet)." AND objet=".sql_quote($type));
 			if(!$newt2){
-				sql_delete("$table_mot","id_mot=".intval($remove_tag)." AND $id_table_objet=".intval($id_objet));
+				sql_delete("spip_mots_liens","id_mot=".intval($remove_tag)." AND objet=".sql_quote($type)." AND id_objet=".intval($id_objet));
 			}
 		}
 		$message = _T('spipicious:tag_supprime',array('name'=>$titre_mot));

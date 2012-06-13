@@ -18,11 +18,9 @@ function spipicious_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
 	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-		include_spip('base/spipicious');
 		include_spip('base/create');
 		if (version_compare($current_version,'0.0','<=')){
 			creer_base();
-			ecrire_meta($nom_meta_base_version,$current_version=$version_base,'non');
 
 			/**
 			 * On crée un groupe de mots dédié qui servira à la configuration
