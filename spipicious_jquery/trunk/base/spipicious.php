@@ -51,21 +51,4 @@ function spipicious_declarer_tables_principales($tables_principales){
 
 	return $tables_principales;
 }
-
-function spipicious_declarer_tables_auxiliaires($tables_auxiliaires){
-
-	$spip_mots_documents = array(
-		"id_mot"		=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"id_document"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
-
-	$spip_mots_documents_key = array(
-		"PRIMARY KEY"		=> "id_mot, id_document",
-		"KEY id_document"	=> "id_document");
-
-	$tables_auxiliaires['spip_mots_documents'] = array(
-		'field' => &$spip_mots_documents,
-		'key' => &$spip_mots_documents_key);
-
-	return $tables_auxiliaires;
-}
 ?>
