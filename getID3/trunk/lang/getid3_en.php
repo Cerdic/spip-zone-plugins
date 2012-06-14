@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.mediaspip.net/spip.php?page=tradlang
+// extrait automatiquement de http://trad.spip.org/tradlang_module/getid3?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_album' => 'Album:',
 	'info_artist' => 'Artist:',
+	'info_audiosamplerate' => 'Sample rate:',
 	'info_bitrate' => 'Bitrate:',
 	'info_bitrate_mode' => 'Mode:',
 	'info_bits' => 'Resolution (bits):',
@@ -38,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_encoded_by' => 'Encoded by:',
 	'info_encoding_time' => 'Encoding date:',
 	'info_erreurs' => 'Errors',
+	'info_extension' => 'Extension:',
 	'info_format' => 'Format:',
 	'info_gauche_numero_document' => 'Document number',
 	'info_genre' => 'Genre:',
@@ -45,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_mime' => 'Mime type:',
 	'info_nom_fichier' => 'File name:',
 	'info_original_filename' => 'Original name',
-	'info_original_release_time' => 'Original creation date',
+	'info_original_release_time' => 'Original creation date:',
 	'info_sample_rate' => 'Sample rate:',
 	'info_source' => 'Source:',
 	'info_title' => 'Title:',
@@ -94,14 +96,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_texte_binaires_informer' => 'Please inform your system administrator.',
 	'message_texte_binaires_manquant' => 'Several software needed are not available on your server:',
 	'message_titre_binaire_manquant' => 'A missing software',
-	'message_titre_binaires_manquant' => 'Plusieurs logiciels manquant',
+	'message_titre_binaires_manquant' => 'Missing software', # SOFTWARE has no plural form I believe: "That company sells software, one program or several programs"; "That company sells many different types of software."  "Some" can be removed as well.
 	'message_validation_appliquer_cover' => 'This action is definitive. It won\'t be possible to go back later.',
 	'message_valider_cover_defaut' => 'Submit the form to use the default cover',
 
 	// S
 	'son_bitrate_cbr' => 'Constant bitrate',
 	'son_bitrate_vbr' => 'Variable bitrate',
-	
 
 	// T
 	'titre_getid3' => 'GetID3',
