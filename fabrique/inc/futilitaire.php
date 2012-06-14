@@ -79,11 +79,7 @@ Class Futilitaire {
 	 *    'base/importer_spip_villes.php', 
 	 *    'base/importer_spip_villes_donnees.gz', 
 	 * ));
-	 *
-	 * @param string $source
-	 * 		Répertoire source
-	 * @param string $dest
-	 * 		Répertoire destination
+	 * 
 	 * @param string|array $fichiers
 	 * 		Liste des fichiers a déplacer
 	 * 
@@ -109,7 +105,7 @@ Class Futilitaire {
 			$source = $this->dir_backup . $f;
 			$dest   = $this->dir_dest   . $f;
 			if (!file_exists($source)){
-				$this->log("deplacer_fichiers: Fichier introuvable dans le backup : $dest");
+				$this->log("deplacer_fichiers: Fichier $f introuvable dans le backup : $dest");
 				continue;
 			}
 
@@ -121,6 +117,71 @@ Class Futilitaire {
 			}
 		}
 	}
+
+
+
+	/**
+	 * Deplacer une liste de dossiers/répertoires
+	 * du backup vers le nouveau plugin
+	 * et cree les repertoires manquant si besoin dans le nouveau plugin.
+	 *
+	 * Usage:
+	 * $futil->deplacer_dossiers('lib');
+	 * $futil->deplacer_dossiers(array('lib','actions'));
+	 *
+	 * @param string|array $dossiers
+	 * 		Liste des fichiers a déplacer
+	 * 
+	 * @return null
+	**/
+	public function deplacer_dossiers($dossiers) {
+		static $dirs = array();
+
+		if (!$dossiers OR !$this->dir_dest OR !$this->dir_backup) {
+			$this->log("deplacer_dossiers: Info manquante");
+			return;
+		}
+
+		if (!is_array($dossiers)) {
+			$dossiers = array($dossiers);
+		}
+
+		foreach ($dossiers as $d) {
+			if (!$d) {
+				$this->log("deplacer_dossiers: Dossier vide");
+				continue;
+			}
+			$source = $this->dir_backup . $d;
+			$dest   = $this->dir_dest   . $d;
+			if (!is_dir($source)){
+				$this->log("deplacer_dossiers: Dossier $d introuvable dans le backup : $dest");
+				continue;
+			}
+
+			// cree l'arborescence depuis le chemin
+			$this->log("deplacer_dossiers: Créer arborescence pour $d");
+			$this->creer_arborescence_destination($d, false);
+
+			// copie recursive
+			// http://stackoverflow.com/a/7775949
+			foreach ($iterator =
+					new RecursiveIteratorIterator(
+						new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS),
+							RecursiveIteratorIterator::SELF_FIRST) as $item
+				) {
+				if ($item->isDir()) {
+					if (!mkdir($dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName())) {
+						$this->log("deplacer_dossiers: Creation ratee de " . $iterator->getSubPathName());
+					}
+				} else {
+					if (!copy($item, $dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName())) {
+						$this->log("deplacer_dossiers: Creation ratee de " . $iterator->getSubPathName());
+					}
+				}
+			}
+		}
+	}
+
 
 
 	/**
@@ -135,7 +196,7 @@ Class Futilitaire {
 	 * @return bool
 	 * 		Est-ce que c'est bien cree ?
 	**/
-	public function creer_arborescence_destination($chemin) {
+	public function creer_arborescence_destination($chemin, $is_file = true) {
 		// repertoire de destination deja crees.
 		static $reps = array();
 
@@ -144,10 +205,15 @@ Class Futilitaire {
 			return false;
 		}
 
+		// si c'est un fichier, 
 		// on retrouve le nom du fichier et la base du chemin de destination
-		$dest = explode('/', $chemin);
-		$nom = array_pop($dest);
-		$chemin_dest = implode('/', $dest);
+		if ($is_file) {
+			$dest = explode('/', $chemin);
+			$nom = array_pop($dest);
+			$chemin_dest = implode('/', $dest);
+		} else {
+			$chemin_dest = $chemin;
+		}
 
 		// ne pas creer systematiquement les repertoires tout de meme.
 		if (!isset($reps[$chemin_dest])) {
