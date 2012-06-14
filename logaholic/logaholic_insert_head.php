@@ -48,7 +48,7 @@ document.write(unescape("%3Cscript type="text/javascript" src="" + lwa_server + 
 <script type="text/javascript">
 var lwa = trackPage();
 </script>
-<noscript><a href="http://'.$lwa_server.'//logaholictracker.php?conf=LWA_p'.$id_logaholic.'"></a></noscript>'."\n";
+<noscript><a href="http://'.$lwa_server.'//logaholictracker.php?conf=LWA_p'.$id_logaholic.'"><img src="http://'.$lwa_server.'//logaholictracker.php?conf=LWA_p'.$id_logaholic.'" alt="web stats" border="0" /></a> <a href="http://www.logaholic.com/">Web Analytics</a> by Logaholic</noscript>'."\n";
 
 	}
 	return "";
