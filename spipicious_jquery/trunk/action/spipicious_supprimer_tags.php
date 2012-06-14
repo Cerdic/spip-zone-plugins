@@ -38,7 +38,7 @@ function spipicious_supprimer_tags($remove_tags,$id_auteur,$id_objet,$type,$id_t
 	$compte = 0;
 	$tags_removed = array();
 	foreach($remove_tags as $remove_tag){
-		inclide_spip('action/editer_mot');
+		include_spip('action/editer_mot');
 		// On le vire de notre auteur dans spipicious
 		sql_delete("spip_spipicious","id_auteur=".intval($id_auteur)." AND id_objet=".intval($id_objet)." AND id_mot=".intval($remove_tag)." AND objet=".sql_quote($type)); // on efface le mot associe a l'auteur sur l'objet
 		$invalider = true;
@@ -49,13 +49,13 @@ function spipicious_supprimer_tags($remove_tags,$id_auteur,$id_objet,$type,$id_t
 		// suppression du mot pure et simple dans spip_mots_$type et spip_mot
 		$newt = sql_getfetsel("id_auteur","spip_spipicious","id_mot=".intval($remove_tag));
 		if (!$newt){
-			mot_supprimer($remove_tag)
+			mot_supprimer($remove_tag);
 		}
 		else {
 			// Utilisation par un autre utilisateur ok mais utilisation sur le meme id_$type
 			$newt2 = sql_getfetsel("id_auteur","spip_spipicious","id_mot=".intval($remove_tag)." AND id_objet=".intval($id_objet)." AND objet=".sql_quote($type));
 			if(!$newt2){
-				mot_dissocier($remove_tag,($type=>$id_objet));
+				mot_dissocier($remove_tag,array($type=>$id_objet));
 			}
 		}
 		$message = _T('spipicious:tag_supprime',array('name'=>$titre_mot));
