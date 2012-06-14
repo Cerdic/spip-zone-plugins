@@ -1,4 +1,4 @@
-<traduction module="selecteurgenerique" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/selecteur_generique/lang/" reference="fr">
+<traduction module="selecteurgenerique" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/selecteur_generique/trunk/lang/" reference="fr">
 	<langue code="en" />
 	<langue code="fr" />
 	<langue code="sk" url="http://trad.spip.org/tradlang_module/selecteurgenerique?lang_cible=sk">
