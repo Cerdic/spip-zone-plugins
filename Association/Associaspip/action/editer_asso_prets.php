@@ -49,7 +49,7 @@ function action_editer_asso_prets_dist()
 	// on modifie les informations relatives au pret
 	sql_updateq('spip_asso_prets', $modifs, "id_pret=$id_pret" );
 	// on modifie l'operation comptable associe au don
-	association_modifier_operation_comptable(($fiso_retour>$fiso_sortie)?$date_retour:$date_sortie, $montant*($duree?$duree:1), 0, '['. _T('titre_num', array('titre'=>_T('local:pret'),'num'=>$id_pret) ) ."->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur"."->membre$id_emprunteur]":$emprunteur), $GLOBALS['association_metas']['pc_prets'], $journal, '', $id_compte);
+	association_modifier_operation_comptable(($fiso_retour>$fiso_sortie)?$date_retour:$date_sortie, $montant*($duree?$duree:1), 0, '['. _T('asso:titre_num', array('titre'=>_T('local:pret'),'num'=>$id_pret) ) ."->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur"."->membre$id_emprunteur]":$emprunteur), $GLOBALS['association_metas']['pc_prets'], $journal, '', $id_compte);
 	// on met a jour le statut de la ressource
 	$statut_old = sql_getfetsel('statut', 'spip_asso_ressources', "id_ressource=$id_ressource");
 	if (is_numeric($statut_old)) { /* nouveaux statuts numeriques */
@@ -69,7 +69,7 @@ function action_editer_asso_prets_dist()
 	$id_pret = sql_insertq('spip_asso_prets', $modifs);
 	if ($id_pret) {
 	    // on ajoute l'operation comptable associe au pret
-	    association_ajouter_operation_comptable($date_sortie, $montant*($duree?$duree:1), 0, '['. _T('titre_num', array('titre'=>_T('local:pret'),'num'=>$id_pret) ) ."->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur"."->membre$id_emprunteur]":$emprunteur), $GLOBALS['association_metas']['pc_prets'], $journal, $id_pret);
+	    association_ajouter_operation_comptable($date_sortie, $montant*($duree?$duree:1), 0, '['. _T('asso:titre_num', array('titre'=>_T('local:pret'),'num'=>$id_pret) ) ."->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur"."->membre$id_emprunteur]":$emprunteur), $GLOBALS['association_metas']['pc_prets'], $journal, $id_pret);
 	    // on met a jour le statut de la ressource
 	    $statut_old = sql_getfetsel('statut', 'spip_asso_ressources', "id_ressource=$id_ressource");
 	    if (is_numeric($statut_old)) { /* nouveaux statuts numeriques */
