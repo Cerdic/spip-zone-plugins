@@ -18,6 +18,10 @@
 		<inclure>cvtupload_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>formulaire_fond</nom>
+		<inclure>cvtupload_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>formulaire_traiter</nom>
 		<inclure>cvtupload_pipelines.php</inclure>
 	</pipeline>

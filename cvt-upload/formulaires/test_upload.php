@@ -11,9 +11,11 @@ function formulaires_test_upload_charger(){
 		'plusieurs' => array()
 	);
 	
-	$contexte['_champs_fichiers'] = array('seul', 'plusieurs');
-	
 	return $contexte;
+}
+
+function formulaires_test_upload_fichiers(){
+	return array('seul', 'plusieurs');
 }
 
 function formulaires_test_upload_verifier(){

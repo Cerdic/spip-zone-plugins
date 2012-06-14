@@ -15,5 +15,8 @@
 
 	<pipeline nom="formulaire_charger" inclure="cvtupload_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="cvtupload_pipelines.php" />
+	<pipeline nom="formulaire_fond" inclure="cvtupload_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="cvtupload_pipelines.php" />
+	
+	<utilise nom="saisies" />
 </paquet>

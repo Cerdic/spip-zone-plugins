@@ -3,38 +3,50 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function cvtupload_chercher_fichiers($form, $args){
+	if ($fonction_fichiers = charger_fonction('fichiers', 'formulaires/'.$form, true)
+		and $fichiers = call_user_func_array($fonction_fichiers, $args)
+		and is_array($fichiers)
+	){
+		return $fichiers;
+	}
+	else{
+		return false;
+	}
+}
+
+function cvtupload_repertoire_tmp(){
+	include_spip('inc/session');
+	return session_get('hash_env').'_'._request('hash');
+}
+
 function cvtupload_formulaire_charger($flux){
-	$contexte =& $flux['data'];
-	
-	if ($contexte['_champs_fichiers'] and is_array($contexte['_champs_fichiers'])){
-		foreach ($contexte['_champs_fichiers'] as $champ){
-			$contexte['_hidden'] .= '<input type="hidden" name="_champs_fichiers[]" value="'.$champ.'" />';
-		}
+	// S'il y a des champs fichiers de déclarés
+	if ($champs_fichiers = cvtupload_chercher_fichiers($flux['args']['form'], $flux['args']['args'])){
+		$contexte =& $flux['data'];
 		// S'il n'y a pas déjà une action de configurée, on en force une pour avoir un hash unique par visiteur
 		if (!$contexte['_action'])
-			$contexte['_action'] = array('cvt_upload');
+			$contexte['_action'] = array('cvtupload', 'cvtupload');
 	}
 	
 	return $flux;
 }
 
 function cvtupload_formulaire_verifier($flux){
-	$erreurs =& $flux['data'];
-	
 	// S'il y a des champs fichiers de déclarés
-	if ($champs_fichiers = _request('_champs_fichiers') and is_array($champs_fichiers)){
+	if ($champs_fichiers = cvtupload_chercher_fichiers($flux['args']['form'], $flux['args']['args'])){
+		$erreurs =& $flux['data'];
 		include_spip('inc/filtres');
 		include_spip('inc/documents');
 		include_spip('inc/getdocument');
 		include_spip('inc/charsets');
+		
 		//Si le répertoire temporaire n'existe pas encore, il faut le créer.
-		$repertoire_tmp = _DIR_TMP.'cvt_upload/';
-		if (!is_dir($repertoire_tmp)) mkdir($repertoire_tmp);
-		$repertoire_tmp .= _request('hash').'/';
-		if (!is_dir($repertoire_tmp)) mkdir($repertoire_tmp);
+		$repertoire_tmp = sous_repertoire(_DIR_TMP.'cvtupload/');
+		$repertoire_tmp = sous_repertoire($repertoire_tmp, cvtupload_repertoire_tmp().'/');
 		
 		// On parcourt les champs déclarés comme étant des fichiers
-		$infos_fichiers = _request('_infos_fichiers');
+		$infos_fichiers = _request('_infos_fichiers') ? _request('_infos_fichiers') : array();
 		foreach ($champs_fichiers as $champ){
 			if ($_FILES[$champ]){
 				$infos = cvtupload_deplacer_fichier($_FILES[$champ], $repertoire_tmp);
@@ -44,31 +56,53 @@ function cvtupload_formulaire_verifier($flux){
 					$infos_fichiers[$champ] = $infos;
 			}
 		}
-		if ($erreurs)
-			$erreurs = array_merge($erreurs, $infos_fichiers);
+		set_request('_fichiers', $infos_fichiers);
 	}
-	//var_dump($erreurs);
 	
 	return $flux;
 }
 
-function cvtupload_formulaire_traiter($flux){
-	// On supprime tous les fichiers maintenant que les traitements sont faits
-	if ($champs_fichiers = _request('_champs_fichiers') and is_array($champs_fichiers)){
-		$repertoire = _DIR_TMP.'cvt_upload/'._request('hash').'/';
-		if (is_dir($repertoire)){
-			$infos_fichiers = _request('_infos_fichiers');
-			foreach ($champs_fichiers as $champ){
-				if ($infos_fichiers[$champ]['nom']){
-					unlink($repertoire.$infos_fichiers[$champ]['nom']);
+function cvtupload_formulaire_fond($flux){
+	// Si ça a déjà été posté (après verifier()) et qu'il y a des champs fichiers déclarés
+	if ($flux['args']['je_suis_poste']
+		and $champs_fichiers = cvtupload_chercher_fichiers($flux['args']['form'], $flux['args']['args'])
+	){
+		$fichiers = _request('_fichiers');
+		foreach ($champs_fichiers as $champ){
+			// Si le visiteur a bien réussi a charger un ou plusieurs fichiers dans ce champ
+			if (isset($fichiers[$champ])){
+				include_spip('inc/filtres_images');
+				// Si c'est un champ unique
+				if (isset($fichiers[$champ]['nom'])){
+					$flux['data'] = preg_replace(
+						"#<input[^>]*name=['\"]${champ}[^>]*>#i",
+						image_reduire($fichiers[$champ]['vignette'],32).' '.$fichiers[$champ]['nom'],
+						$flux['data']
+					);
 				}
-				else foreach ($infos_fichiers[$champ] as $fichier){
-					unlink($repertoire.$fichier['nom']);
+				// Sinon c'est un multiple
+				else{
+					foreach($fichiers[$champ] as $cle=>$fichier){
+						$flux['data'] = preg_replace(
+							"#<input[^>]*name=['\"]${champ}[^>]*>#i",
+							image_reduire($fichier['vignette'],32).' '.$fichier['nom'],
+							$flux['data'],
+							1 // seul le premier trouvé est remplacé
+						);
+					}
 				}
 			}
-			// On supprime le répertoire
-			rmdir($repertoire);
 		}
+	}
+	return $flux;
+}
+
+function cvtupload_formulaire_traiter($flux){
+	// S'il y a des champs fichiers de déclarés
+	if ($champs_fichiers = cvtupload_chercher_fichiers($flux['args']['form'], $flux['args']['args'])){
+		// On supprime le répertoire unique comportant les fichiers du visiteur
+		$repertoire = _DIR_TMP.'cvtupload/'.cvtupload_repertoire_tmp().'/';
+		supprimer_repertoire($repertoire);
 	}
 	
 	return $flux;
@@ -81,13 +115,14 @@ function cvtupload_formulaire_traiter($flux){
  * @return array Retourne un tableau d'informations sur le fichier
  */
 function cvtupload_deplacer_fichier($fichier, $repertoire){
+	$vignette_par_defaut = charger_fonction('vignette', 'inc/');
 	$infos = array();
 	if (is_array($fichier['name'])){
 		foreach ($fichier['name'] as $cle=>$nom){
 			// On commence par transformer le nom du fichier pour éviter les conflits
 			$nom = trim(preg_replace('/[\s]+/', '_', strtolower(translitteration($nom))));
 			// Si le fichier a bien un nom et qu'il n'y a pas d'erreur associé à ce fichier
-			if (($nom != null) && ($fichier['error'][$cle] == 0)) {
+			if (($nom != null) and ($fichier['error'][$cle] == 0)) {
 				//On vérifie qu'un fichier ne porte pas déjà le même nom, sinon on lui donne un nom aléatoire + nom original
 				if (file_exists($repertoire.$nom))
 					$nom = $nom.'_'.rand();
@@ -96,8 +131,8 @@ function cvtupload_deplacer_fichier($fichier, $repertoire){
 					$infos[$cle]['nom'] = $nom;
 					// On en déduit l'extension et du coup la vignette
 					$infos[$cle]['extension'] = strtolower(preg_replace('/^.*\.([\w]+)$/i', '$1', $fichier['name'][$cle]));
-					$infos[$cle]['vignette'] = vignette_par_defaut($infos[$cle]['extension'], false, true);
-					//On récupère le tye MIME du fichier aussi
+					$infos[$cle]['vignette'] = $vignette_par_defaut($infos[$cle]['extension'], false, true);
+					//On récupère le type MIME du fichier aussi
 					$infos[$cle]['mime'] = $fichier['type'][$cle];
 				}
 			}
@@ -116,8 +151,8 @@ function cvtupload_deplacer_fichier($fichier, $repertoire){
 				$infos['nom'] = $nom;
 				// On en déduit l'extension et du coup la vignette
 				$infos['extension'] = strtolower(preg_replace('/^.*\.([\w]+)$/i', '$1', $fichier['name']));
-				$infos['vignette'] = vignette_par_defaut($infos['extension'], false, true);
-				//On récupère le tye MIME du fichier aussi
+				$infos['vignette'] = $vignette_par_defaut($infos['extension'], false, true);
+				//On récupère le type MIME du fichier aussi
 				$infos['mime'] = $fichier['type'];
 			}
 		}
