@@ -1,20 +1,16 @@
 <?php
-
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-
-///  Fichier produit par PlugOnet
-// Module: paquet-getid3
-// Langue: en
-// Date: 13-06-2012 10:51:47
-// Items: 2
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.org/tradlang_module/paquet-getid3?lang_cible=en
+// ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// G
+	// G
 	'getid3_description' => 'Read and write audio tags to audio documents
 _ [->http://getid3.sourceforge.net/]',
-	'getid3_slogan' => 'Read and write audio tags',
+	'getid3_slogan' => 'Read and write audio tags'
 );
+
 ?>
