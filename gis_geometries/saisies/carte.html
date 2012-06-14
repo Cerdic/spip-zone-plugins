@@ -135,10 +135,9 @@ var geocoder;]
 		]
 		
 		[(#GET{geocoder}|oui)
-		// geocoder
-		//geocoder = new mxn.Geocoder('[(#REM|gis_api_utilisee)]',geocode);]
+		geocoder = new L.Geocoder(geocode);]
 		
-		/* <BOUCLE_gis(GIS){id_gis}> */
+		<BOUCLE_gis(GIS){id_gis}>
 		var data = {
 			"type": "FeatureCollection",
 			"features": [
@@ -172,16 +171,18 @@ var geocoder;]
 					$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.target));
 				});
 			} else if (e.geometryType == 'Point') {
+				marker = e.layer;
 				// rendre le marker draggable
 				e.layer.options.draggable = true;
 				// surveiller les changements sur le point
 				e.layer.on("dragend", function(e){
 					$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.target));
+					maj_inputs(form_map,e.target._latlng,'click');
 				});
 			}
 		});
 		geojson.addGeoJSON(data);
-		/* </BOUCLE_gis> */
+		</BOUCLE_gis>
 		[(#REM) afficher les outils de dessin uniquement lors de la création d'objet ]
 		
 		drawControl = new L.Control.Draw();
@@ -190,11 +191,14 @@ var geocoder;]
 		form_map.on('drawend', function(e) {
 			drawControl.removeFrom(form_map);
 			if (L.Marker && (e.marker instanceof L.Marker)) {
+				marker = e.marker;
 				$('#champ_#ENV{champ_type,type}').val('Point');
 				$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.marker));
+				maj_inputs(form_map,e.marker._latlng,'click');
 				e.marker.dragging.enable();
 				e.marker.on("dragend", function(e){
 					$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.target));
+					maj_inputs(form_map,e.target._latlng,'click');
 				});
 			} else {
 				if (L.Polygon && (e.poly instanceof L.Polygon))
@@ -214,19 +218,17 @@ var geocoder;]
 				});
 			}
 		});
-		/* <//B_gis> */
+		<//B_gis>
 		
 		// mettre à jour le zoom quand on le modifie
 		form_map.on('zoomend', function(e) {
 			$('#champ_#ENV{champ_zoom,zoom}').val(e.target._zoom);
 		});
 		
-		/*
 		[(#GET{geocoder}|oui)
 		// geocoder si clic...
 		$('a##ENV{nom}_rechercher_geocodage').css("cursor","pointer").click(function(){
-			var address = {};
-			address.address = $("#champ_#ENV{nom}_geocoder").attr("value");
+			var address = $("#champ_#ENV{nom}_geocoder").attr("value");
 			annuler_geocoder = 0;
 			geocoder.geocode(address);
 		});
@@ -238,7 +240,7 @@ var geocoder;]
 				return false;
 			}
 		});]
-		*/
+		
 		[(#ENV{id_gis}|non|ou{#ENV{id_gis}|=={oui}}|et{#CONFIG{gis/geolocaliser_user_html5}|=={on}}|oui)
 		form_map.locate({setView: true, maxZoom: [(#GET{init_zoom})]});]
 		

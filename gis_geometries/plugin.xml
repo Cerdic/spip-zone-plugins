@@ -46,7 +46,7 @@
 		<inclure>gisgeom_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.1.10;3.0.99]" />
-	<necessite id="gis" version="[4.0.0;]" />
+	<necessite id="gis" version="[4.0.2;]" />
 	<necessite id="lib:phayes-geoPHP-7db2aa3" src="https://github.com/phayes/geoPHP/zipball/1.0" />
 	<necessite id="lib:brunob-leaflet.draw-9248774" src="https://github.com/brunob/leaflet.draw/zipball/v1.0.0" />
 	<categorie>divers</categorie>
