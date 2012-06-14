@@ -91,12 +91,12 @@ table.edit_markers tr.deleted {
 	background-color: rgb(190,190,190);
 }
 table.edit_markers tr input.text {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 0.95em;
-    border-style: etched;
+    border-style: inset;
 	border-width: 1px;
 	border-color: rgb(167,167,167);
     background-color: rgb(255,255,255);
+	padding: 0;
 }
 table.edit_markers tr.active input.text {
     border-style: inset;
@@ -111,12 +111,12 @@ table.edit_markers tr.deleted input.text {
     background-color: rgb(168,168,168);
 }
 table.edit_markers tr select.text {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 1em;
-    border-style: etched;
+    border-style: inset;
 	border-width: 1px;
 	border-color: rgb(167,167,167);
     background-color: rgb(255,255,255);
+	padding: 0;
 }
 table.edit_markers tr.active select.text {
     border-style: inset;
@@ -281,7 +281,6 @@ table.geoloc-tool-results tr.active .btn_activate {
 }
 
 .tool-container input, .tool-container select {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 0.9em;
 }
 
@@ -316,11 +315,9 @@ table.geoloc-tool-results tr.active .btn_activate {
 
 /* Saisies */
 .configurer_gmap input.small {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 0.9em;
 }
 .configurer_gmap select.small {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 0.8em;
 }
 
@@ -366,6 +363,14 @@ table.geoloc-tool-results tr.active .btn_activate {
 	margin: 5px 0;
 	padding: 0;
 	padding-left: 130px;
+}
+/* Pas très propre, mais comme les ul des formulaires de configuration définissent
+	la margin à-10px, sinon le picker est en retrait à gauche... */
+.configurer_gmap ul.item_picked {
+	margin: 0;
+}
+.configurer_gmap fieldset h3.legend {
+	margin-bottom: 0.5em;
 }
 
 /* Regroupements */
@@ -441,11 +446,11 @@ table.edit_types {
 	border-collapse: collapse;
 	padding: 0;
 }
-table.edit_types th{
+table.edit_types th {
     text-align: left;
 	padding: 1px 3px;
 }
-table.edit_types td{
+table.edit_types td {
 	padding: 1px 3px;
 }
 table.edit_types tr {
@@ -455,12 +460,12 @@ table.edit_types tr.header {
 	background-color: rgb(220,220,220);
 }
 table.edit_types tr input {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 1em;
-    border-style: etched;
+    border-style: inset;
 	border-width: 1px;
 	border-color: rgb(167,167,167);
     background-color: rgb(255,255,255);
+	padding: 0;
 }
 table.edit_types tr input.nom {
 	width: 80px;
@@ -472,12 +477,15 @@ table.edit_types tr input.priorite {
 	width: 20px;
 }
 table.edit_types tr select {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 1em;
-    border-style: etched;
+    border-style: inset;
 	border-width: 1px;
 	border-color: rgb(167,167,167);
     background-color: rgb(255,255,255);
+	padding: 0;
+}
+table.edit_types tr select.visible {
+	width: 4em;
 }
 table.edit_types .btn_delete {
 	display: block;

@@ -60,7 +60,7 @@ function formulaires_configurer_gmap_geolocui_charger_dist(){
 			$valeurs['les_rubriques'][] = 'rubrique|'.$rub;
 	}
 	
-	$hack_modalbox = gmap_lire_config('gmap_edit_params', 'hack_modalbox', "oui");
+	$valeurs['hack_modalbox'] = gmap_lire_config('gmap_edit_params', 'hack_modalbox', "oui");
 	
 	return $valeurs;
 }
@@ -95,7 +95,7 @@ function formulaires_configurer_gmap_geolocui_traiter_dist(){
 	gmap_ecrire_config('gmap_objets_geo', 'liste', $simple_rubs);
 	
 	// Contournement ModalBox.
-	gmap_ecrire_config('gmap_objets_geo', 'hack_modalbox', ((_request('hack_modalbox') === "oui") ? "oui" : "non"));
+	gmap_ecrire_config('gmap_edit_params', 'hack_modalbox', ((_request('hack_modalbox') === "oui") ? "oui" : "non"));
 
 	return array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
 }
