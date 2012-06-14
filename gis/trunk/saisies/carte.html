@@ -135,8 +135,7 @@ var geocoder;]
 		]
 		
 		[(#GET{geocoder}|oui)
-		// geocoder
-		//geocoder = new mxn.Geocoder('api',geocode);]
+		geocoder = new L.Geocoder(geocode);]
 		
 		[(#REM) Ici on utilise #ENV{lat} et #ENV{lon}, et pas les valeurs
 		        d'initialisation #GET{init_lat} et #GET{init_lon} qui sont toujours remplies]
@@ -191,12 +190,11 @@ var geocoder;]
 		form_map.on('zoomend', function(e) {
 			$('#champ_#ENV{champ_zoom,zoom}').val(e.target._zoom);
 		});
-		/*
+		
 		[(#GET{geocoder}|oui)
 		// geocoder si clic...
 		$('a##ENV{nom}_rechercher_geocodage').css("cursor","pointer").click(function(){
-			var address = {};
-			address.address = $("#champ_#ENV{nom}_geocoder").attr("value");
+			var address = $("#champ_#ENV{nom}_geocoder").attr("value");
 			annuler_geocoder = 0;
 			geocoder.geocode(address);
 		});
@@ -208,7 +206,7 @@ var geocoder;]
 				return false;
 			}
 		});]
-		*/
+		
 		[(#ENV{id_gis}|non|ou{#ENV{id_gis}|=={oui}}|et{#CONFIG{gis/geolocaliser_user_html5}|=={on}}|oui)
 		form_map.locate({setView: true, maxZoom: [(#GET{init_zoom})]});]
 		
