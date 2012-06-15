@@ -15,7 +15,7 @@
 	<icon>piwik.png</icon>
 	<lien>http://www.spip-contrib.net/?article2860</lien>
 	<prefix>piwik</prefix>
-	<install>base/piwik_upgrade.php</install>
+	<install>piwik_administrations.php</install>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>piwik_pipelines.php</inclure>
