@@ -1,8 +1,8 @@
 <paquet
-	prefix="Fonctions_images"
+	prefix="fonctions_images"
 	categorie="multimedia"
-	version="0.6.0"
-	etat="test"
+	version="0.6.1"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="img_pack/fonctions_images_48.png"
 >	
