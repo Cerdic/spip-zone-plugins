@@ -13,9 +13,9 @@
 	<!-- Système d'information géographique -->
 
 	<auteur>b_b</auteur>
-	<auteur>kent1</auteur>
+	<auteur lien="http://www.kent1.info">kent1</auteur>
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
-	<copyright>2011</copyright>
+	<copyright>2011-2012</copyright>
 	<licence>GPL v3</licence>
 	<credit lien="http://mattrich.deviantart.com/art/Picnic-101256405">Icône de mattrich sous licence CC BY-NC-SA</credit>
 
