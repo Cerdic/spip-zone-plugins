@@ -1,7 +1,7 @@
 <paquet
 	prefix="piwik"
 	categorie="statistique"
-	version="0.4.6"
+	version="0.5.0"
 	etat="stable"
 	compatibilite="[2.0.8;3.0.99]"
 	logo="piwik.png"
@@ -13,7 +13,7 @@
 	<!-- Interfacer Spip et Piwik -->
 
 	<auteur>jsb</auteur>
-	<auteur>[kent1->http://www.kent1.info]</auteur>
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
@@ -21,7 +21,7 @@
 
 	<pipeline nom="insert_head" inclure="piwik_pipelines.php" />
 	<pipeline nom="header_prive" inclure="piwik_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="piwik_pipelines.php" />
 
-	<necessite nom="cfg" compatibilite="[1.13.0;[" />
 	<necessite nom="saisies" compatibilite="[1.1;[" />
 </paquet>
