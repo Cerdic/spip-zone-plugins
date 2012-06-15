@@ -50,7 +50,7 @@ L.Geocoder = L.Class.extend({
 	},
 
 	_request: function (url, data) {
-		console.log(data);
+		//console.log(data);
 		$.ajax({
 			//cache: true,
 			context: this,
@@ -64,8 +64,8 @@ L.Geocoder = L.Class.extend({
 	
 	_callback: function (response) {
 		var return_location = {};
-	console.log(response);
-	console.log(typeof(response));
+		//console.log(response);
+		//console.log(typeof(response));
 		if (response instanceof Array && !response.length) {
 			return false;
 		} else {
@@ -81,7 +81,7 @@ L.Geocoder = L.Class.extend({
 				place = response;
 			}
 			var street_components = [];
-		console.log(place);
+			//console.log(place);
 			if (place.address.country) {
 				return_location.country = place.address.country;
 			}
@@ -90,12 +90,16 @@ L.Geocoder = L.Class.extend({
 			}
 			if (place.address.city) {
 				return_location.locality = place.address.city;
+			}else if(place.address.county){
+				street_components.push(place.address.pedestrian);
 			}
 			if (place.address.postcode) {
 				return_location.postcode = place.address.postcode;
 			}
 			if (place.address.road) {
 				street_components.push(place.address.road);
+			}else if(place.address.pedestrian){
+				street_components.push(place.address.pedestrian);
 			}
 			if (place.address.house_number) {
 				street_components.unshift(place.address.house_number);
