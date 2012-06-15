@@ -1,7 +1,7 @@
 <paquet
 	prefix="notation"
 	categorie="communication"
-	version="2.0.3"
+	version="2.0.4"
 	etat="test"
 	compatibilite="[3.0.0-beta;3.0.*]"
 	logo="prive/themes/spip/images/notation-32.png"
@@ -29,8 +29,6 @@
 	<pipeline nom="afficher_config_objet" inclure="notation_pipelines.php" />
 	<pipeline nom="pre_insertion" inclure="notation_pipelines.php" />
 	<pipeline nom="configurer_liste_metas" inclure="notation_pipelines.php" />
-
-	<utilise nom="cfg" compatibilite="[1.10.4;[" />
 
 	<menu nom="notation" titre="notation:notation" parent="menu_activite" icone="images/notation-16.png" />
 

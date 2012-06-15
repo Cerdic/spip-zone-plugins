@@ -6,10 +6,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@get_forums_publics
 function get_notes_publics($id_objet=0, $objet='article') {
 	if ($objet=='article' AND $id_objet) {
-		$obj = sql_fetsel("accepter_note", "spip_articles", "id_article=".intval($id_objet));
+		$obj = sql_getfetsel("accepter_note", "spip_articles", "id_article=".intval($id_objet));
 
 		if (in_array($obj,array('oui','non'))) 
-			return $obj['accepter_note'];
+			return $obj;
 	} else { // dans ce contexte, inutile
 		return $GLOBALS['meta']["notations_publics"];
 	}
@@ -23,11 +23,10 @@ function get_notes_publics($id_objet=0, $objet='article') {
  * @return array
  */
 function formulaires_activer_notes_objet_charger_dist($id_objet, $objet='article'){
+	include_spip('inc/autoriser');
 	if (!autoriser('moderernote', $objet, $id_objet))
 		return false;
-
-	include_spip('inc/presentation');
-	include_spip('base/abstract_sql');
+	
 	$nb_notes = sql_countsel("spip_notations", "objet=".sql_quote($objet)." AND id_objet=".intval($id_objet));
 	return array(
 		'editable' => ($objet=='article')?true:false,
