@@ -15,7 +15,7 @@ function cvtupload_chercher_fichiers($form, $args){
 	}
 }
 
-function cvtupload_repertoire_tmp(){
+function cvtupload_hash(){
 	include_spip('inc/session');
 	return session_get('hash_env').'_'._request('hash');
 }
@@ -41,12 +41,14 @@ function cvtupload_formulaire_verifier($flux){
 		include_spip('inc/getdocument');
 		include_spip('inc/charsets');
 		
+		$hash = cvtupload_hash();
+		
 		//Si le répertoire temporaire n'existe pas encore, il faut le créer.
 		$repertoire_tmp = sous_repertoire(_DIR_TMP.'cvtupload/');
-		$repertoire_tmp = sous_repertoire($repertoire_tmp, cvtupload_repertoire_tmp().'/');
+		$repertoire_tmp = sous_repertoire($repertoire_tmp, $hash.'/');
 		
 		// On parcourt les champs déclarés comme étant des fichiers
-		$infos_fichiers = _request('_infos_fichiers') ? _request('_infos_fichiers') : array();
+		$infos_fichiers = session_get($hash.'_fichiers') ? session_get($hash.'_fichiers') : array();
 		foreach ($champs_fichiers as $champ){
 			if ($_FILES[$champ]){
 				$infos = cvtupload_deplacer_fichier($_FILES[$champ], $repertoire_tmp);
@@ -57,6 +59,7 @@ function cvtupload_formulaire_verifier($flux){
 			}
 		}
 		set_request('_fichiers', $infos_fichiers);
+		session_set($hash.'_fichiers', $infos_fichiers);
 	}
 	
 	return $flux;
@@ -100,9 +103,11 @@ function cvtupload_formulaire_fond($flux){
 function cvtupload_formulaire_traiter($flux){
 	// S'il y a des champs fichiers de déclarés
 	if ($champs_fichiers = cvtupload_chercher_fichiers($flux['args']['form'], $flux['args']['args'])){
+		$hash = cvtupload_hash();
 		// On supprime le répertoire unique comportant les fichiers du visiteur
-		$repertoire = _DIR_TMP.'cvtupload/'.cvtupload_repertoire_tmp().'/';
+		$repertoire = _DIR_TMP.'cvtupload/'.$hash.'/';
 		supprimer_repertoire($repertoire);
+		session_set($hash.'_fichiers', null);
 	}
 	
 	return $flux;
