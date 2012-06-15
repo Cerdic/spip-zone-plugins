@@ -99,27 +99,29 @@ function gestionml_auteurs_listes($config) {
 
 	include_spip('inc/gestionml_api');
 	$resultat = gestionml_api_listes_toutes(true) ;
-	$nom_listes = array_keys($resultat['listes']) ;
-	$listes = array_combine($nom_listes,$nom_listes) ;
-
-	if($config['cacher_admin_restreints']) {
-		$auteurs = sql_allfetsel("auteurs.id_auteur,auteurs.nom", "spip_auteurs AS auteurs LEFT JOIN spip_auteurs_rubriques AS restreints ON auteurs.id_auteur=restreints.id_auteur", "restreints.id_auteur IS NULL AND auteurs.statut='0minirezo'", "nom");
-	} else {
-		$auteurs = sql_allfetsel("id_auteur, nom", "spip_auteurs", "statut='0minirezo'", "", "nom");
-	}
-
-	foreach($auteurs as $ligne){
-		$saisies[] = array(
-			'saisie' => 'selection_multiple',
-			'options' => array(
-				'nom' => 'listes_auteur_'.$ligne['id_auteur'],
-				'label' => _T('gestionml:label_liste_de',array('nom' => $ligne['nom'])),
-				'explication' => _T('gestionml:explication_liste_de',array('nom' => $ligne['nom'])),
-				'cacher_option_intro' => 'oui',
-				'defaut' => $config['listes_auteur_'.$ligne['id_auteur']],
-				'datas' => $listes
-			)
-		) ;
+	if( array_key_exists('listes',$resultat) ) {
+		$nom_listes = array_keys($resultat['listes']) ;
+		$listes = array_combine($nom_listes,$nom_listes) ;
+	
+		if($config['cacher_admin_restreints']) {
+			$auteurs = sql_allfetsel("auteurs.id_auteur,auteurs.nom", "spip_auteurs AS auteurs LEFT JOIN spip_auteurs_rubriques AS restreints ON auteurs.id_auteur=restreints.id_auteur", "restreints.id_auteur IS NULL AND auteurs.statut='0minirezo'", "nom");
+		} else {
+			$auteurs = sql_allfetsel("id_auteur, nom", "spip_auteurs", "statut='0minirezo'", "", "nom");
+		}
+	
+		foreach($auteurs as $ligne){
+			$saisies[] = array(
+				'saisie' => 'selection_multiple',
+				'options' => array(
+					'nom' => 'listes_auteur_'.$ligne['id_auteur'],
+					'label' => _T('gestionml:label_liste_de',array('nom' => $ligne['nom'])),
+					'explication' => _T('gestionml:explication_liste_de',array('nom' => $ligne['nom'])),
+					'cacher_option_intro' => 'oui',
+					'defaut' => $config['listes_auteur_'.$ligne['id_auteur']],
+					'datas' => $listes
+				)
+			) ;
+		}
 	}
 	return $saisies;
 }
@@ -129,7 +131,7 @@ function formulaires_configurer_gestionml_verifier_dist(){
 	
 	if( _request('hebergeur') != "0" ) {
 		include_spip('inc/gestionml_api');
-		$erreurs = gestionml_api_tester(_request('serveur_distant'), _request('identifiant'), _request('mot_de_passe')) ;
+		$erreurs = gestionml_api_tester(_request('serveur_distant'), _request('domaine'), _request('identifiant'), _request('mot_de_passe')) ;
 	}
 	return ($erreurs);
 }

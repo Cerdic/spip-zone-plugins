@@ -23,7 +23,7 @@ function gestionml_upgrade($nom_meta_base_version,$version_cible){
 		}
 		$config = array_merge(array(
 				'hebergeur' => '0',
-				'serveur_distant' => 'https://www.ovh.com/soapi/soapi-re-1.28.wsdl',
+				'serveur_distant' => 'https://www.ovh.com/soapi/soapi-re-1.38.wsdl',
 				'domaine' => 'mondomaine.tld',
 				'identifiant' => '',
 				'mot_de_passe' => '',

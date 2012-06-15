@@ -2,7 +2,7 @@
 	<nom>Gestion ML avec SOAP</nom>
 	<slogan>G&#233;rer les mailing lists chez votre h&#233;bergeur avec le protocole SOAP</slogan>
 	<auteur>Yffic</auteur>
-	<version>0.5.0</version>
+	<version>0.5.1</version>
 	<version_base>0.2</version_base>
 	<etat>test</etat>
 	<description>

@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description' => 'Gestion de Mailing Lists',
 
 	// E
+	'erreur_droits' => 'Droits insuffisants sur les emails de ce domaine',
 	'explication_cacher_admin_restreints' => 'Ne pas afficher les administrateurs restreints dans la liste ci-dessous' ,
 	'explication_domaine' => 'Saisissez votre domaine sans les www' ,
 	'explication_identifiant' => 'Votre identifiant de connexion au serveur SOAP (nic-handle)' ,

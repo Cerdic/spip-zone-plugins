@@ -9,14 +9,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param string $psw : mot de passe de connexion
  *
  */
-function gestionml_api_tester($serveur, $ident, $psw) {
+function gestionml_api_tester($serveur, $domaine, $ident, $psw) {
 	$retour = array() ;
 	try {
 		$soap = new SoapClient($serveur);
+		// Tester la connexion
 		$session = $soap->login($ident, $psw,"fr", false);
+		// Tester l'autorisation
+		$result = $soap->emailAccessByNic($session);
+		if(!in_array($domaine,$result))
+			$retour['message_erreur'] = _T("gestionml:erreur_droits");
 		$soap->logout($session);
 	} catch(SoapFault $fault) {
-		$retour['message_erreur'] .= $fault->faultstring;
+		$retour['message_erreur'] = $fault->faultstring;
 	}
 	return ($retour);
 }
@@ -70,7 +75,7 @@ function gestionml_api_traiter_ovh($toutes,$ovhaction='', $nameML='', $email='')
 
 		//login
 		$session = $soap->login($config['identifiant'], $config['mot_de_passe'],"fr", false);
-      $retour['listes'] = gestionml_api_liste_des_listes($soap->mailingListList($session, $config['domaine']),$toutes);
+		$retour['listes'] = gestionml_api_liste_des_listes($soap->mailingListList($session, $config['domaine']),$toutes);
 
 		switch($ovhaction) {
 			case "" :
