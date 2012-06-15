@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="0.1.0"
 	etat="experimental"
-	compatibilite="[2.1.0;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 >	
 
 	<nom>CVT Upload</nom>
