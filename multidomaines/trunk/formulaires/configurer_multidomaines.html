@@ -1,21 +1,30 @@
-<div class="formulaire_spip formulaire_configurer ajax">
-<form action="#ENV{action}" method="post"><div>
-    #ACTION_FORMULAIRE{#ENV{action}}
-    <ul>
-        <li class="editer_url obligatoire[(#ENV**{erreurs}|table_valeur{url}|oui)erreur]">
-            <label for="url"><:multidomaines:label_editer_url:></label>
-            [<span class="erreur_message">(#ENV**{erreurs}|table_valeur{url})</span>]
-            [<p class="explication">(#VAL{<:multidomaines:precisions_editer_url:>})</p>]
-            <input type='text' name='url' id='url' value="#ENV{url}" class="text" />
-            <div></div>
-        </li>
-        <li class="editer_dossier obligatoire[(#ENV**{erreurs}|table_valeur{squelettes}|oui)erreur]">
-            <label for="squelettes"><:multidomaines:label_squelette:></label>
-            [<span class="erreur_message">(#ENV**{erreurs}|table_valeur{squelettes})</span>]
-            [<p class="explication">(#VAL{<:multidomaines:precisions_squelette:>})</p>]
-            <input type='text' name='squelettes' id='squelettes' value="#ENV{squelettes}" class="text" />
-        </li>
-    </ul>
-    <p class="boutons"><input type="submit" class="submit" value="<:pass_ok:>" /></p>
-</div></form>
+<!-- autoriser=configurer -->
+<!-- refus=<:cfg:refus_configuration_administrateur:> -->
+<!-- nom=multidomaines -->
+
+<div class="formulaire_spip formulaire_cfg formulaire_#FORM">
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+		
+	<form method="post" action="#ENV{action}">
+		<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer_url">
+				<label for="editer_url"><:logaholic:label_editer_url:></label>
+				<p class="explication"><:logaholic:precisions_editer_url:></p>
+				<input type="text" name="editer_url" class="text" id="editer_url" value="#ENV{editer_url}" />
+			</li>
+			<li class="squelette">
+				<label for="squelette"><:logaholic:label_squelette:></label>
+				<p class="explication"><:logaholic:precisions_squelette:></p>
+				<input type="text" name="squelette" class="text" id="squelette" value="#ENV{squelette}" />
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+		</p>
+		</div>
+	</form>
 </div>
