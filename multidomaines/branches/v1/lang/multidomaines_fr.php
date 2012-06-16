@@ -1,6 +1,6 @@
 <?php
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	'titre_multidomaines' => 'Multidomaine',
+	'titre_multidomaines' => 'Multidomaines',
 	'label_url' => 'Url du secteur',
 	'precisions_url' => "l'url doit être valide,ne contenir qu'un domaine et se terminer par un slash. ex: https://sous-dmomaine.domaine.com/",
 	'label_squelette' => 'Dossier des squelettes',
