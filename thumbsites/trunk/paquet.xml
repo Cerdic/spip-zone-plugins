@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="0.7.0"
 	etat="stable"
-	compatibilite="[2.0.0;3.0.99]"
+	compatibilite="[2.0.0;3.0.*]"
 	logo="prive/themes/spip/images/thumbsites-32.png"
 	documentation="http://www.spip-contrib.net/?article2584"
 >	
@@ -11,13 +11,11 @@
 	<nom>Thumbsites</nom> <!-- Une vignette pour les objets sites -->
 	<auteur>Camille Lafitte</auteur>
 	<auteur>Eric Lupinacci</auteur>
-	<copyright>2008</copyright>
+	<copyright>2008-2012</copyright>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 	<traduire module="thumbsites" reference="fr" gestionnaire="salvatore" />
 	
 	<pipeline nom="affiche_gauche" action="affiche_gauche" inclure="thumbsites_pipelines.php" />
-
-	<necessite nom="cfg" compatibilite="[1.7.6;[" />
 
 	<menu nom="configurer_thumbsites" titre="thumbsites:configuration_thumbsites" parent="menu_configuration" icone="images/thumbsites-16.png" />
 </paquet>
