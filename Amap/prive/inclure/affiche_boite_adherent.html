@@ -1,6 +1,6 @@
 <BOUCLE_panier(AMAP_PANIERS){id_auteur}{tous}{age<0}{0,1}>
 	<BOUCLE_aut(AUTEURS){id_auteur}{tous}><a href="[(#URL_ECRIRE{panier_adherent}|parametre_url{id_auteur,#ID_AUTEUR})]"><:amap:les_paniers{nom=#NOM}:></a>
-		(<BOUCLE_totalpanier(AMAP_PANIERS){id_auteur}{age<0} />#TOTAL_BOUCLE<//B_totalpanier>)
+		(<BOUCLE_totalpanier_dispo0(AMAP_PANIERS){id_auteur}{age<0} />#TOTAL_BOUCLE<//B_totalpanier_dispo0>)
 	</BOUCLE_aut>
 </BOUCLE_panier>
 	<BOUCLE_aut1(AUTEURS){id_auteur}{tous}>

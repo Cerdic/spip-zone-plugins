@@ -6,6 +6,7 @@
 	<BOUCLE_auteur(AUTEURS){id_auteur}{tous}>
 		[(#TYPE_ADHERENT|=={adherent}|oui)<INCLURE{fond=prive/inclure/affiche_boite_adherent,env}>]
 		[(#TYPE_ADHERENT|=={producteur}|oui)<INCLURE{fond=prive/inclure/affiche_boite_producteur,env}>]
+		[(#TYPE_ADHERENT|=={''}|oui)<:amap:pas_statuts_nom{nom=#NOM}:>]
 	</BOUCLE_auteur>
 	</div>
 </div>

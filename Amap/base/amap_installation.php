@@ -70,6 +70,7 @@ function amap_vider_tables($nom_meta_version_base){
 	//supprimer toutes les tables
 	include_spip('inc/meta');
 	include_spip('base/abstract_sql');
+	sql_drop_table('spip_amap_disponibles');
 	sql_drop_table('spip_amap_livraisons');
 	sql_drop_table('spip_amap_paniers');
 	sql_drop_table('spip_amap_responsables');

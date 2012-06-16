@@ -13,6 +13,8 @@
 <div class="cadre cadre-info verdana1">
 	<div class="cadre_padding">
 	<:amap:mettre_disposition_explication:>
+	[(#CONFIG{amap/email}|=={oui}|oui)<p /><:amap:mettre_disposition_mail:>]
+	[(#CONFIG{amap/email}|=={non}|oui)<p /><:amap:mettre_disposition_interface{url=#URL_PAGE{disponible}}:>]
 	</div>
 </div>
 <!--/#extra-->
@@ -26,7 +28,8 @@
 		<BOUCLE_aut(AUTEURS){id_auteur}{tous}><:amap:les_paniers{nom=#NOM}:></BOUCLE_aut>
 	</div>
 	<div class="cadre_padding">
-		<INCLURE{fond=prive/inclure/liste_panier_adherent,env}>
+		<INCLURE{fond=prive/inclure/liste_panier_adherent,dispo=0,env}>
+		<INCLURE{fond=prive/inclure/liste_panier_adherent,dispo=1,env}>
 		<INCLURE{fond=prive/inclure/liste_responsable,env}>
 	</div>
 </div>
