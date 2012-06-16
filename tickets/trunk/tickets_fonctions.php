@@ -5,19 +5,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * <BOUCLE(TICKETS)>
  */
-function boucle_TICKETS_dist($id_boucle, &$boucles) {
-	if(!function_exists('lire_config'))
-		include_spip('inc/config');
-
-	if(function_exists('lire_config')){
-		$desactiver_public = lire_config('tickets/general/desactiver_public','off');
-		if (($desactiver_public == 'on') && !test_espace_prive()){
-			array_unshift($boucle->where,array("'='", "'0'", "'1'"));
-		}
-	}
-
-	return calculer_boucle($id_boucle, $boucles);
-}
+//function boucle_TICKETS_dist($id_boucle, &$boucles) {
+//	if(!function_exists('lire_config'))
+//		include_spip('inc/config');
+//
+//	if(function_exists('lire_config')){
+//		$desactiver_public = lire_config('tickets/general/desactiver_public','off');
+//		if (($desactiver_public == 'on') && !test_espace_prive()){
+//			array_unshift($boucle->where,array("'='", "'0'", "'1'"));
+//		}
+//	}
+//
+//	return calculer_boucle($id_boucle, $boucles);
+//}
 /**
  * Crée la liste des options du select des champs :
  * -* jalon

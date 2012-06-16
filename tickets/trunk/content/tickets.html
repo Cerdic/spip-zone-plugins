@@ -1,4 +1,8 @@
-<BOUCLE_si_afficher_public(CONDITION){si #CONFIG{tickets/general/desactiver_public,off}|!={on}|oui}>
+[(#PLUGIN{ZPIP}|et{#CONFIG{tickets/general/desactiver_public,off}|!={on}|oui})
+	[(#SET{affichage_autorise, on})]
+]
+
+<BOUCLE_si_afficher_public(CONDITION){si #GET{affichage_autorise, off}|=={on}|oui}>
 <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><:tickets:tickets:></div>
 
 <div class="ticket contenu-principal">
@@ -115,4 +119,6 @@
 	]
 </div>
 </BOUCLE_si_afficher_public>
+	<p class="notice"><:tickets:message_page_publique_indisponible:></p>
+<//B_si_afficher_public>
 #FILTRE{trim}

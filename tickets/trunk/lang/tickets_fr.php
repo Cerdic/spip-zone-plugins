@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_bouton_radio_desactiver_forum_public' => 'Désactiver l\'utilisation des forums publics.',
+	'cfg_bouton_tickets' => 'Tickets',
 	'cfg_descr_general' => 'Cette page de configuration permet de choisir les valeurs des champs optionnels, la modération des commentaires ainsi que divers autres paramètres.',
 	'cfg_descr_autorisations' => 'Cette page de configuration permet de paramétrer les autorisations pour l\'écriture, la modification, l\'assignation et le commentaire des tickets.',
 	'cfg_explication_cacher_moteurs' => 'Cache les tickets des moteurs de recherche en leur demandant de ne pas indexer leur contenus lorsqu\'ils sont affichés dans l\'espace public.',
@@ -34,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autorisation_webmestre' => 'Autoriser les webmestres uniquement',
 	'cfg_lbl_cacher_moteurs' => 'Cacher des moteurs de recherche',
 	'cfg_lbl_case_joindre_fichiers' => 'Autoriser à joindre un ou plusieurs fichiers aux tickets',
-	'cfg_lbl_case_notification_publique' => 'Être notifié dans l\'espace public plutôt que dans l\'espace privé (Nécessite Zpip)',
+	'cfg_lbl_case_notification_publique' => 'Être notifié dans l\'espace public plutôt que dans l\'espace privé',
 	'cfg_lbl_case_selecteur_navigateur' => 'Disposer d\'un sélecteur de navigateur dans le formulaire d\'édition de ticket',
 	'cfg_lbl_composants' => 'Composants',
 	'cfg_lbl_desactiver_public' => 'Désactiver l\'accès public',
@@ -140,6 +141,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_aucun_ticket_recherche' => 'Aucun ticket ne correspond à votre recherche',
 	'message_automatique' => 'Ceci est un message automatique : n\'y repondez pas.',
 	'message_zpip_inactif' => 'Cette option est désactivée car elle nécessite le plugin ZPIP.',
+	'message_page_publique_indisponible' => 'Cette page est indisponible. vérifiez que ZPIP est activé et que votre configuration du plugin Tickets autorise l\'accès public.',
 
 	// N
 	'no_assignation' => 'Personne',
