@@ -4,7 +4,7 @@
 		version="2.0.0"
 		etat="dev"
 		compatibilite="[3.0.0;3.0.*]"
-		logo="images/logo-72.png"
+		logo="images/multidomaines-72.png"
 		documentation="http://www.spip-contrib.net/article3127"
 		schema="0.0.1"
 >
@@ -15,7 +15,7 @@
 
 	<necessite nom="cextras" compatibilite="[3.0.6;[" />
 
-	<menu nom="multidomaines_bandeau" titre="multidomaines:titre_multidomaines" parent="bando_configuration" icone="images/logo-16.png" action="configurer_multidomaines" />
+	<menu nom="configurer_multidomaines" titre="multidomaines:titre_multidomaines" parent="menu_configuration" icone="images/multidomaines-16.png" />
 
 	<pipeline nom="declarer_champs_extras" inclure="base/multidomaines.php" />
 </paquet>

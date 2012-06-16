@@ -6,8 +6,7 @@ function multidomaines_declarer_champs_extras($champs = array()){
 		'saisie' => 'input',//Type du champs (voir plugin Saisies)
 		'options' => array(
 			'nom' => 'host', 
-			'label' => _T('multidomaines:label_url'), 
-			'label' => _T('multidomaines:precisions_url'), 
+			'label' => _T('multidomaines:label_url'),
 			'sql' => "text NOT NULL DEFAULT ''",
 			'defaut' => '',// Valeur par défaut
 			'restrictions'=>array(	'voir' 		=> array('auteur'=>''),//Tout le monde peut voir
