@@ -40,8 +40,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_api_yandex' => 'Yandex',
 	'cfg_lbl_geocoder' => 'Geocoder',
 	'cfg_lbl_geolocaliser_user_html5' => 'Pri vytváraní vycentrujte mapu na polohe používateľa',
-	'cfg_lbl_layer_defaut' => 'Couche par défaut', # NEW
-	'cfg_lbl_layers' => 'Couches proposées', # NEW
+	'cfg_lbl_layer_defaut' => 'Predvolená vrstva',
+	'cfg_lbl_layers' => 'Navrhované vrstvy',
 	'cfg_lbl_maptype' => 'Základná mapa',
 	'cfg_lbl_maptype_carte' => 'Mapa',
 	'cfg_lbl_maptype_hybride' => 'Zmiešaná',
@@ -57,7 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_recherche_pas_resultats' => 'Vyhľadávania sa netýka žiaden bod.',
 	'erreur_xmlrpc_lat_lon' => 'Zemepisná šírka a dĺžka musia byť odovzdané ako parameter',
 	'explication_api_forcee' => 'Túto aplikáciu používa iný zásuvný modul alebo iná šablóna.',
-	'explication_layer_forcee' => 'La couche est imposée par un autre plugin ou un squelette.', # NEW
+	'explication_layer_forcee' => 'Vrstvu zaviedol iný zásuvný modul alebo iná šablóna.',
 	'explication_maptype_force' => 'Základnú mapu si vyžaduje iný zásuvný modul alebo šablóna.',
 
 	// F
