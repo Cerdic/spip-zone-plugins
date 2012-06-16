@@ -139,6 +139,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mail_texte_message_auto' => 'Ceci est un message automatique : n\'y repondez pas.',
 	'message_aucun_ticket_recherche' => 'Aucun ticket ne correspond à votre recherche',
 	'message_automatique' => 'Ceci est un message automatique : n\'y repondez pas.',
+	'message_zpip_inactif' => 'Cette option est désactivée car elle nécessite le plugin ZPIP.',
 
 	// N
 	'no_assignation' => 'Personne',
