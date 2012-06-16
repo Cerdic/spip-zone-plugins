@@ -8,13 +8,17 @@ function legendes_insert_head($flux){
 	return $flux;
 }
 
-function legendes_jqueryui_forcer($plugins){
+function legendes_jqueryui_plugins($plugins){
 	$plugins[] = "jquery.ui.core";
 	$plugins[] = "jquery.ui.widget";
 	$plugins[] = "jquery.ui.mouse";
 	$plugins[] = "jquery.ui.draggable";
 	$plugins[] = "jquery.ui.resizable";
 	return $plugins;
+}
+
+function legendes_jqueryui_forcer($plugins){
+	return legendes_jqueryui_plugins($plugins);
 }
 
 function legendes_post_edition($flux){
