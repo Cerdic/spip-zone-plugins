@@ -1,9 +1,9 @@
 <paquet
 	prefix="tickets"
 	categorie="divers"
-	version="2.0.3"
+	version="2.0.4"
 	etat="dev"
-	compatibilite="[3.0.0-dev;3.0.99]"
+	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="imgs/logo-bugs.png"
 	schema="1.4"
 	documentation="http://www.spip-contrib.net/Tickets-suivi-de-bugs"
@@ -14,7 +14,7 @@
 
 	<auteur>ARNO*</auteur>
 	<auteur lien="http://www.kent1.info">kent1</auteur>
-	<auteur>Eric Lupinacci</auteur>
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
@@ -36,5 +36,5 @@
 
 	<menu nom="tickets" titre="tickets:titre" parent="bando_publication" icone="images/ticket-16.png" />
 	<menu nom="ticket_edit" parametres="new=oui" titre="tickets:creer_ticket" parent="outils_rapides" icone="images/ticket-16-new.png" />
-	<menu nom="configurer_tickets_general" titre="tickets:cfg_titre_tickets" parent="bando_configuration" icone="images/ticket-16.png" />
+	<menu nom="configurer_tickets" titre="tickets:cfg_titre_tickets" parent="bando_configuration" icone="images/ticket-16.png" />
 </paquet>
