@@ -38,10 +38,7 @@ function gis_insert_head($flux){
 		$config['layers'][] = gis_layer_defaut();
 	
 	// insertion des scripts pour google si nécessaire
-	if (in_array('google_roadmap', $config['layers'])
-		OR in_array('google_satellite', $config['layers'])
-		OR in_array('google_terrain', $config['layers']))
-	{
+	if (in_array(array('google_roadmap', 'google_satellite', 'google_terrain'), $config['layers'])) {
 		$flux .="\n".'<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;language='.$GLOBALS['spip_lang'].'"></script>';
 		$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'plugins/layer/tile/Google.js') .'"></script>';
 	}
