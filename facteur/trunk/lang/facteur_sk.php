@@ -17,13 +17,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_mailer' => 'Nastavenia Poštára',
 	'configuration_smtp' => 'Výber spôsobu odoslania e-mailu',
 	'configuration_smtp_descriptif' => 'Ak si nie ste istý, zvoľte si funkciu mail jazyka PHP.',
-	'corps_email_de_test' => 'Ceci est un email de test accentué', # NEW
+	'corps_email_de_test' => 'Toto je testovací e-mail s diakritikou',
 
 	// E
 	'email_test_envoye' => 'L\'email de test a correctement été envoyé. Si vous ne le recevez pas correctement, vérifiez la configuration de votre serveur ou contactez un administrateur du serveur.', # NEW
 	'erreur' => 'Chyba',
 	'erreur_dans_log' => ' : viac podrobností nájdete v súbore log',
-	'erreur_generale' => 'Il y a une ou plusieurs erreurs de configuration. Veuillez vérifier le contenu du formulaire.', # NEW
+	'erreur_generale' => 'V nastaveniach je jedna alebo viac chýb. Prosím, skontrolujte obsah formulára.',
 	'erreur_invalid_host' => 'Názov servera nie je správny',
 	'erreur_invalid_port' => 'Toto číslo portu nie je správne',
 
@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_filtre_images' => 'Do e-mailov pridávať obrázky, na ktoré sa v nich odkazuje',
 	'facteur_filtre_iso_8859' => 'Zmeniť na ISO-8859-1',
 	'facteur_filtres' => 'Filtre',
-	'facteur_filtres_descriptif' => 'Des filtres peuvent être appliqués aux emails au moment de l\'envoi.', # NEW
+	'facteur_filtres_descriptif' => 'Pri posielaní sa na e-maily môžu použiť filtre.',
 	'facteur_smtp_auth' => 'Vyžaduje sa prihlásenie:',
 	'facteur_smtp_auth_non' => 'nie',
 	'facteur_smtp_auth_oui' => 'áno',
@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_username' => 'Používateľské meno:',
 
 	// N
-	'note_test_configuration' => 'Un email sera envoyé à l\'adresse d\'envoi définie (ou celle du webmaster).', # NEW
+	'note_test_configuration' => 'E-mail bude odoslaný na uvedenú adresu (alebo webmasterovi).',
 
 	// P
 	'personnaliser' => 'Prispôsobiť si tieto nastavenia',
@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// U
 	'utiliser_mail' => 'Používať funkciu mail z PHP',
-	'utiliser_reglages_site' => 'Utiliser les réglages du site SPIP : le nom affiché sera le nom du site SPIP et l\'adresse email sera celle du webmaster', # NEW
+	'utiliser_reglages_site' => 'Použiť nastavenia stránky v SPIPe: zobrazovaný názov je názov stránky a e-mailová adresa je e-mail webmastera',
 	'utiliser_smtp' => 'Používať SMTP',
 
 	// V
