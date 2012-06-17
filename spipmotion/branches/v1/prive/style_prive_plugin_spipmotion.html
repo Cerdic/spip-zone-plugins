@@ -1,0 +1,61 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.infos_video_haut{
+	text-align:#GET{left};
+	font-size:90%;
+	background-color:#GET{claire};
+	padding:5px;
+	-webkit-border-radius:10px;
+	-moz-border-radius: 10px;
+	margin:5px 0;
+}
+.infos_video_haut img.logo{
+	vertical-align:middle;
+	margin: 0 5px;
+}
+.infos_video_bas{
+	display:none;
+	background-color:#GET{foncee};
+	padding: 5px;
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	margin:5px 0;
+	overflow:hidden;
+}
+.infos_son_bas table{
+	width:100%;
+	font-family:verdana;
+	border:0px;
+}
+.infos_son_bas table tr td.son_left{
+	width:40%;
+	font-size:80%;
+	color:#222;
+	text-align:#GET{right};
+	padding-#GET{right}: 5px;
+}
+
+.liste-elements table.liste tr td.enabled,
+.liste-elements table.liste tr td.disabled{
+	color:#fff;
+	text-align:center;
+}
+
+.liste-elements table.liste tr td.enabled{
+	background-color:#53AD20;
+}
+
+.liste-elements table.liste tr td.disabled{
+	background-color:#d40000;
+}
+
+.liste-elements.spipmotion .caption{
+	background-image:url(#CHEMIN{images/spipmotion-24.png});
+}

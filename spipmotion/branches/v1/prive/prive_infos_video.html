@@ -1,0 +1,136 @@
+#CACHE{0}
+<BOUCLE_document(DOCUMENTS){id_document}{tout}>
+<div id="infosdoc-#ID_DOCUMENT">
+	<div id="infos_video_haut_#ID_DOCUMENT" class="infos_video_haut">
+		<strong>[(#LOGO_DOCUMENT||image_reduire{24,24}|inserer_attribut{class,logo})]<a href="#" onclick="if(jQuery('#infos_video_bas_#ID_DOCUMENT').is(':visible')){jQuery('#infos_video_bas_#ID_DOCUMENT').slideUp(); return false;}else{jQuery('#infos_video_bas_#ID_DOCUMENT').slideDown(); return false;}"><:spipmotion:info_infos_techniques:></a></strong>
+		<br class="nettoyeur" />
+
+		<div id="infos_video_bas_#ID_DOCUMENT" class="infos_video_bas">
+			[(#PLUGIN{Player}|oui)
+				[(#EXTENSION|=={flv}|oui)
+				[(#MODELE{doc_video_spipmotion}{id=#ID_DOCUMENT}{largeur=210})]
+				]
+			]
+			<table cellspacing='3' cellpadding='0' style='width: 100%;  font-family: verdana; border: 0px;'>
+				[<tr>
+					<td class="video_left">
+						<:spipmotion:info_nom_fichier:>
+					</td>
+					<td >
+					<strong>(#FICHIER|basename)</strong>
+					</td>
+				</tr>]
+				
+				[(#LARGEUR|>{0}|et{#HAUTEUR}|>{0}|oui)
+				<tr>
+					<td class="video_left">
+						<:spipmotion:info_format:>
+					</td>
+					<td >
+					<strong>#LARGEUR/#HAUTEUR px</strong>
+					</td>
+				</tr>]
+
+				[<tr>
+					<td class="video_left">
+						<:spipmotion:info_duree:>
+					</td>
+					<td >
+					<strong>[(#DUREE|getid3_duree)] ((#DUREE|floor) sec.)</strong>
+					</td>
+				</tr>]
+
+				[<tr>
+					<td class="video_left">
+						<:spipmotion:info_framecount:>
+					</td>
+					<td >
+					<strong>(#FRAMECOUNT)</strong>
+					</td>
+				</tr>]
+
+				[<tr>
+					<td class="video_left">
+						<:spipmotion:info_framerate:>
+					</td>
+					<td >
+					<strong>(#FRAMERATE) img/sec</strong>
+					</td>
+				</tr>]
+
+				[<tr>
+					<td class="video_left">
+						<:spipmotion:info_pixelformat:>
+					</td>
+					<td >
+					<strong>(#PIXELFORMAT)</strong>
+					</td>
+				</tr>]
+
+				[(#BITRATE|>{0}|oui)[<tr>
+					<td class="video_left">
+						<:spipmotion:info_bitrate:>
+					</td>
+					<td >
+					<strong>(#BITRATE|>{1000}|?{[(#BITRATE|div{1000}|floor) kb/s],[(#BITRATE) kb/s]})</strong>
+					</td>
+				</tr>]]
+
+				[(#VIDEOBITRATE|>{0}|oui)[<tr>
+					<td class="video_left">
+						<:spipmotion:info_videobitrate:>
+					</td>
+					<td >
+					<strong>(#VIDEOBITRATE|div{1000}|floor) kb/s</strong>
+					</td>
+				</tr>]]
+
+				[<tr>
+					<td class="video_left">
+						<:spipmotion:info_audiobitrate:>
+					</td>
+					<td >
+					<strong>(#AUDIOBITRATE|div{1000}|floor) kb/s</strong>
+					</td>
+				</tr>]
+
+				[<tr>
+					<td class="video_left">
+						<:spipmotion:info_audiosamplerate:>
+					</td>
+					<td >
+					<strong>(#AUDIOSAMPLERATE) hz</strong>
+					</td>
+				</tr>]
+
+				[<tr>
+					<td class="video_left">
+						<:spipmotion:info_videocodec:>
+					</td>
+					<td >
+					<strong>(#VIDEOCODEC|intval|?{[(#VIDEOCODEC|flv_video_codec_type_to_type)],#VIDEOCODEC})</strong>
+					</td>
+				</tr>]
+
+				[<tr>
+					<td class="video_left">
+						<:spipmotion:info_audiocodec:>
+					</td>
+					<td >
+					<strong>(#AUDIOCODEC|intval|?{[(#AUDIOCODEC|flv_audio_codec_type_to_type)],#AUDIOCODEC})</strong>
+					</td>
+				</tr>]
+
+				[<tr>
+					<td class="video_left">
+						<:spipmotion:info_audiochannels:>
+					</td>
+					<td >
+					<strong>(#AUDIOCHANNELS)</strong>
+					</td>
+				</tr>]
+			</table>
+		</div>
+	</div>
+</div>
+</BOUCLE_document>

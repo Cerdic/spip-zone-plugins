@@ -1,0 +1,61 @@
+[(#REM)
+
+
+Modele pour <doc> modifie pour le plugin Lecteur Flash pour MP3
+http://spip-zone.info/spip.php?article18
+
+Si le document est de format mp3, afficher la vignette si elle est personnalisee
+Afficher le TITRE, le DESCRIPTIF suivi du lecteur flash permettant de faire jouer ce fichier.
+
+Sinon, utiliser le comportement normal.
+]
+<BOUCLE_doc (DOCUMENTS) {id_document}{tout}>
+[(#SET{largeur,
+	[(#ENV{largeur}
+		|sinon{
+			[(#LARGEUR|=={0}|?{400,#LARGEUR})]
+		}
+	)]
+})]
+[(#ENV{largeur}|oui)
+	[(#HAUTEUR|>{0}|oui)
+		[(#SET{diviseur,
+			[(#LARGEUR|div{#ENV{largeur}})]
+		})]
+		[(#SET{hauteur,
+			[(#HAUTEUR|div{#GET{diviseur}})]
+		})]	
+	]
+]
+[(#ENV{largeur}|non)
+	[(#SET{hauteur,
+		[(#HAUTEUR|=={0}|?{400,#HAUTEUR})]
+	})]
+]
+[(#REM) Document Flash (.flv) ? 
+	Documentation: 
+	- player_flv_js.swf -> http://flv-player.net/players/js/documentation/
+	- player_flv_multi.swf -> http://flv-player.net/players/multi/documentation/
+	- player_flv_maxi -> http://flv-player.net/players/maxi/documentation/
+	- player_flv.swf -> http://flv-player.net/players/normal/documentation/
+	- player_flv_mini.swf -> http://flv-player.net/players/mini/documentation/
+]
+[(#TYPE_DOCUMENT|=={Flash Video}|oui)
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+<dt class='spip_doc_titre'>
+<object type="application/x-shockwave-flash" data="#CHEMIN{flash/#PLAYER_FLV_PLAYER}" width="[(#GET{largeur})]" height="[(#GET{hauteur})]">
+<param name="movie" value="#CHEMIN{flash/#PLAYER_FLV_PLAYER}" />
+<param 
+ name="FlashVars"
+ value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=[(#GET{largeur})]&amp;height=[(#GET{hauteur})]&amp;#PLAYER_FLV_FLASHVVARS[&amp;srturl=(#ENV{srturl})]"
+/>
+<param name="wmode" value="opaque" />
+<param name="allowFullScreen" value="true" />
+[<strong>(#TITRE)</strong>]
+[<span><a href="(#URL_DOCUMENT)" rel="enclosure">#URL_DOCUMENT</a></span>]
+</object>
+</dt>
+[<dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>]
+</dl>
+]
+</BOUCLE_doc>

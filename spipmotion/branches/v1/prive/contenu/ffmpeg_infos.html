@@ -1,0 +1,156 @@
+<div class="cadre-trait-couleur cadre">
+[<img src="(#CHEMIN{images/ffmpeg.png})" alt="" style="float:right;margin:10px" />]
+<div class="cadre_padding">
+	<BOUCLE_version(POUR){tableau #ENV{spipmotion_compiler}}>
+	<B_array>
+	<BOUCLE_array(CONDITION){si #VALEUR|is_array|oui}>
+		<B_compiler>
+		<div class="cadre cadre-liste">
+		<div class="titrem">[(#VAL{spipmotion:info_compiler_#CLE}|_T)] :</div>
+		<div class="cadre-padding">
+		<BOUCLE_compiler(POUR){tableau #_version:VALEUR}>
+			<div class="tr_liste" style="padding:5px;border-top:1px solid #AAAAAA;">[(#CLE|is_numeric|non)[(#VAL{spipmotion:info_compiler_#CLE}|_T)] : ][(#VALEUR|?{[(#VALEUR|=={1}|?{<:item_oui:>,#VALEUR})],<:item_non:>})]</div>
+		</BOUCLE_compiler>
+		</div>
+		</div>
+		</B_compiler>
+	</BOUCLE_array>
+	</B_array>
+	[(#CLE|!={build_date}|oui)
+		[(#CLE|!={build_date_timestamp}|oui)
+			<p>[(#VAL{spipmotion:info_compiler_#CLE}|_T)] [(#VALEUR|?{[(#VALEUR|=={1}|?{<:item_oui:>,#VALEUR})],<:item_non:>})]</p>
+		]
+		[(#CLE|=={build_date_timestamp}|oui)
+			<p>[(#VAL{spipmotion:info_compiler_#CLE}|_T)] [(#VALEUR|normaliser_date|affdate)]</p>
+		]
+	]
+	<//B_array>
+	</BOUCLE_version>
+
+	<BOUCLE_siffmpeg2theora(CONDITION){si #ENV{spipmotion_ffmpeg2theora}|table_valeur{ffmpeg2theora}|oui}>
+	<h3 class="h3"><:spipmotion:ffmpeg2theora_install:></h3>
+	<BOUCLE_ffmpeg2theora(POUR){tableau #ENV{spipmotion_ffmpeg2theora}}>
+		[(#CLE|=={ffmpeg2theora}|non)
+			<p>[(#VAL{spipmotion:info_ffmpeg2theora_#CLE}|_T)] [(#VALEUR)]</p>
+		]
+	</BOUCLE_ffmpeg2theora>
+	</BOUCLE_siffmpeg2theora>
+	
+	<BOUCLE_siflvtool2(CONDITION){si #ENV{spipmotion_flvtool2}|table_valeur{flvtool2}|oui}>
+	<h3 class="h3"><:spipmotion:flvtool2_install:></h3>
+	<BOUCLE_flvtool2(POUR){tableau #ENV{spipmotion_flvtool2}}>
+		[(#CLE|=={flvtool2}|non)
+			<p>[(#VAL{spipmotion:info_flvtool2_#CLE}|_T)] [(#VALEUR)]</p>
+		]
+	</BOUCLE_flvtool2>
+	</BOUCLE_siflvtool2>
+	
+	<BOUCLE_siflvtoolplus(CONDITION){si #ENV{spipmotion_flvtoolplus}|table_valeur{flvtoolplus}|oui}>
+	<h3 class="h3"><:spipmotion:flvtoolplus_install:></h3>
+	<BOUCLE_flvtoolplus(POUR){tableau #ENV{spipmotion_flvtoolplus}}>
+		[(#CLE|=={flvtoolplus}|non)
+			<p>[(#VAL{spipmotion:info_flvtoolplus_#CLE}|_T)] [(#VALEUR)]</p>
+		]
+	</BOUCLE_flvtoolplus>
+	</BOUCLE_siflvtoolplus>
+	
+	<BOUCLE_simediainfo(CONDITION){si #ENV{spipmotion_mediainfo}|table_valeur{mediainfo}|oui}>
+	<h3 class="h3"><:spipmotion:mediainfo_install:></h3>
+	<BOUCLE_mediainfo(POUR){tableau #ENV{spipmotion_mediainfo}}>
+		[(#CLE|=={mediainfo}|non)
+			<p>[(#VAL{spipmotion:info_mediainfo_#CLE}|_T)] [(#VALEUR)]</p>
+		]
+	</BOUCLE_mediainfo>
+	</BOUCLE_simediainfo>
+</div>
+</div>
+<B_formats>
+<div class="cadre-trait-couleur cadre">
+<div class="cadre_padding">
+<div class="liste-elements spipmotion ffmpeg_formats" id="ffmpeg_formats">
+<table class="spip liste">
+	<caption><strong class="caption"><:spipmotion:caption_formats_geres:></strong></caption>
+	<thead>
+		<tr class="first_row">
+			<th class="shortname"><:spipmotion:th_format_nom_court:></th>
+			<th class="fullname"><:spipmotion:th_format_nom_complet:></th>
+			<th class="encode"><:spipmotion:th_format_encode:></th>
+			<th class="decode"><:spipmotion:th_format_decode:></th>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_formats(POUR){tableau #ENV{spipmotion_formats}}>
+	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
+		<td class="shortname">#CLE</td>
+		<td class="fullname">[(#VALEUR|table_valeur{fullname})]</td>
+		<td class="encode [(#VALEUR|table_valeur{encode}|?{enabled,disabled})]">[(#VALEUR|table_valeur{encode}|?{<:item_oui:>,<:item_non:>})]</td>
+		<td class="decode [(#VALEUR|table_valeur{decode}|?{enabled,disabled})]">[(#VALEUR|table_valeur{decode}|?{<:item_oui:>,<:item_non:>})]</td>
+	</tr>
+</BOUCLE_formats>
+	</tbody>
+</table>
+</div>
+</div>
+</div>
+</B_formats>
+<//B_formats>
+
+<B_codecs>
+<div class="cadre-trait-couleur cadre">
+<div class="cadre_padding">
+<div class="liste-elements spipmotion ffmpeg_codecs" id="ffmpeg_codecs">
+<table class="spip liste">
+	<caption><strong class="caption"><:spipmotion:caption_codecs_geres:></strong></caption>
+	<thead>
+		<tr class="first_row">
+			<th class="shortname"><:spipmotion:th_format_nom_court:></th>
+			<th class="fullname"><:spipmotion:th_format_nom_complet:></th>
+			<th class="type"><:spipmotion:th_format_type:></th>
+			<th class="encode"><:spipmotion:th_format_encode:></th>
+			<th class="decode"><:spipmotion:th_format_decode:></th>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_codecs(POUR){tableau #ENV{spipmotion_codecs}}>
+	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
+		<td class="shortname">#CLE</td>
+		<td class="fullname">[(#VALEUR|table_valeur{fullname})]</td>
+		<td class="type">[(#VALEUR|table_valeur{type}|ffmpeg_codec_type_to_type)]</td>
+		<td class="encode [(#VALEUR|table_valeur{encode}|?{enabled,disabled})]">[(#VALEUR|table_valeur{encode}|?{<:item_oui:>,<:item_non:>})]</td>
+		<td class="decode [(#VALEUR|table_valeur{decode}|?{enabled,disabled})]">[(#VALEUR|table_valeur{decode}|?{<:item_oui:>,<:item_non:>})]</td>
+	</tr>
+</BOUCLE_codecs>
+	</tbody>
+</table>
+</div>
+</div>
+</div>
+</B_codecs>
+<//B_codecs>
+
+<B_avfilter>
+<div class="cadre-trait-couleur cadre">
+<div class="cadre_padding">
+<div class="liste-elements spipmotion ffmpeg_avfilter" id="ffmpeg_avfilter">
+<table class="spip liste">
+	<caption><strong class="caption"><:spipmotion:caption_avfilter_geres:></strong></caption>
+	<thead>
+		<tr class="first_row">
+			<th class="shortname"><:spipmotion:th_avfilter_nom:></th>
+			<th class="description"><:spipmotion:th_avfilter_description:></th>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_avfilter(POUR){tableau #ENV{spipmotion_avfilters}}>
+	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
+		<td class="shortname">#CLE</td>
+		<td class="description">[(#VALEUR|table_valeur{description})]</td>
+	</tr>
+</BOUCLE_avfilter>
+	</tbody>
+</table>
+</div>
+</div>
+</div>
+</B_avfilter>
+<//B_avfilter>
