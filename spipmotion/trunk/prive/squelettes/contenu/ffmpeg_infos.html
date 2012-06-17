@@ -1,7 +1,8 @@
-<div class="cadre-trait-couleur cadre">
+<h1 class="grostitre"><:spipmotion:titre_page_ffmpeg_infos:></h1>
+#BOITE_OUVRIR
 [<img src="(#CHEMIN{images/ffmpeg.png})" alt="" style="float:right;margin:10px" />]
-<div class="cadre_padding">
-	<BOUCLE_version(POUR){tableau #ENV{spipmotion_compiler}}>
+<div>
+	<BOUCLE_version(POUR){tableau #REM|infos_ffmpeg|table_valeur{spipmotion_compiler}}>
 	<B_array>
 	<BOUCLE_array(CONDITION){si #VALEUR|is_array|oui}>
 		<B_compiler>
@@ -27,46 +28,45 @@
 	<//B_array>
 	</BOUCLE_version>
 
-	<BOUCLE_siffmpeg2theora(CONDITION){si #ENV{spipmotion_ffmpeg2theora}|table_valeur{ffmpeg2theora}|oui}>
+	<BOUCLE_siffmpeg2theora(CONDITION){si #REM|infos_ffmpeg|table_valeur{spipmotion_ffmpeg2theora}|table_valeur{ffmpeg2theora}|oui}>
 	<h3 class="h3"><:spipmotion:ffmpeg2theora_install:></h3>
-	<BOUCLE_ffmpeg2theora(POUR){tableau #ENV{spipmotion_ffmpeg2theora}}>
+	<BOUCLE_ffmpeg2theora(POUR){tableau #REM|infos_ffmpeg|table_valeur{spipmotion_ffmpeg2theora}}>
 		[(#CLE|=={ffmpeg2theora}|non)
 			<p>[(#VAL{spipmotion:info_ffmpeg2theora_#CLE}|_T)] [(#VALEUR)]</p>
 		]
 	</BOUCLE_ffmpeg2theora>
 	</BOUCLE_siffmpeg2theora>
 	
-	<BOUCLE_siflvtool2(CONDITION){si #ENV{spipmotion_flvtool2}|table_valeur{flvtool2}|oui}>
+	<BOUCLE_siflvtool2(CONDITION){si #REM|infos_ffmpeg|table_valeur{spipmotion_flvtool2}|table_valeur{flvtool2}|oui}>
 	<h3 class="h3"><:spipmotion:flvtool2_install:></h3>
-	<BOUCLE_flvtool2(POUR){tableau #ENV{spipmotion_flvtool2}}>
+	<BOUCLE_flvtool2(POUR){tableau #REM|infos_ffmpeg|table_valeur{spipmotion_flvtool2}}>
 		[(#CLE|=={flvtool2}|non)
 			<p>[(#VAL{spipmotion:info_flvtool2_#CLE}|_T)] [(#VALEUR)]</p>
 		]
 	</BOUCLE_flvtool2>
 	</BOUCLE_siflvtool2>
 	
-	<BOUCLE_siflvtoolplus(CONDITION){si #ENV{spipmotion_flvtoolplus}|table_valeur{flvtoolplus}|oui}>
+	<BOUCLE_siflvtoolplus(CONDITION){si #REM|infos_ffmpeg|table_valeur{spipmotion_flvtoolplus}|table_valeur{flvtoolplus}|oui}>
 	<h3 class="h3"><:spipmotion:flvtoolplus_install:></h3>
-	<BOUCLE_flvtoolplus(POUR){tableau #ENV{spipmotion_flvtoolplus}}>
+	<BOUCLE_flvtoolplus(POUR){tableau #REM|infos_ffmpeg|table_valeur{spipmotion_flvtoolplus}}>
 		[(#CLE|=={flvtoolplus}|non)
 			<p>[(#VAL{spipmotion:info_flvtoolplus_#CLE}|_T)] [(#VALEUR)]</p>
 		]
 	</BOUCLE_flvtoolplus>
 	</BOUCLE_siflvtoolplus>
 	
-	<BOUCLE_simediainfo(CONDITION){si #ENV{spipmotion_mediainfo}|table_valeur{mediainfo}|oui}>
+	<BOUCLE_simediainfo(CONDITION){si #REM|infos_ffmpeg|table_valeur{spipmotion_mediainfo}|table_valeur{mediainfo}|oui}>
 	<h3 class="h3"><:spipmotion:mediainfo_install:></h3>
-	<BOUCLE_mediainfo(POUR){tableau #ENV{spipmotion_mediainfo}}>
+	<BOUCLE_mediainfo(POUR){tableau #REM|infos_ffmpeg|table_valeur{spipmotion_mediainfo}}>
 		[(#CLE|=={mediainfo}|non)
 			<p>[(#VAL{spipmotion:info_mediainfo_#CLE}|_T)] [(#VALEUR)]</p>
 		]
 	</BOUCLE_mediainfo>
 	</BOUCLE_simediainfo>
 </div>
-</div>
+#BOITE_FERMER
 <B_formats>
-<div class="cadre-trait-couleur cadre">
-<div class="cadre_padding">
+#BOITE_OUVRIR
 <div class="liste-elements spipmotion ffmpeg_formats" id="ffmpeg_formats">
 <table class="spip liste">
 	<caption><strong class="caption"><:spipmotion:caption_formats_geres:></strong></caption>
@@ -79,7 +79,7 @@
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_formats(POUR){tableau #ENV{spipmotion_formats}}>
+<BOUCLE_formats(POUR){tableau #REM|infos_ffmpeg|table_valeur{spipmotion_formats}}>
 	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 		<td class="shortname">#CLE</td>
 		<td class="fullname">[(#VALEUR|table_valeur{fullname})]</td>
@@ -90,14 +90,12 @@
 	</tbody>
 </table>
 </div>
-</div>
-</div>
+#BOITE_FERMER
 </B_formats>
 <//B_formats>
 
 <B_codecs>
-<div class="cadre-trait-couleur cadre">
-<div class="cadre_padding">
+#BOITE_OUVRIR
 <div class="liste-elements spipmotion ffmpeg_codecs" id="ffmpeg_codecs">
 <table class="spip liste">
 	<caption><strong class="caption"><:spipmotion:caption_codecs_geres:></strong></caption>
@@ -111,7 +109,7 @@
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_codecs(POUR){tableau #ENV{spipmotion_codecs}}>
+<BOUCLE_codecs(POUR){tableau #REM|infos_ffmpeg|table_valeur{spipmotion_codecs}}>
 	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 		<td class="shortname">#CLE</td>
 		<td class="fullname">[(#VALEUR|table_valeur{fullname})]</td>
@@ -123,14 +121,12 @@
 	</tbody>
 </table>
 </div>
-</div>
-</div>
+#BOITE_FERMER
 </B_codecs>
 <//B_codecs>
 
 <B_avfilter>
-<div class="cadre-trait-couleur cadre">
-<div class="cadre_padding">
+#BOITE_OUVRIR
 <div class="liste-elements spipmotion ffmpeg_avfilter" id="ffmpeg_avfilter">
 <table class="spip liste">
 	<caption><strong class="caption"><:spipmotion:caption_avfilter_geres:></strong></caption>
@@ -141,7 +137,7 @@
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_avfilter(POUR){tableau #ENV{spipmotion_avfilters}}>
+<BOUCLE_avfilter(POUR){tableau #REM|infos_ffmpeg|table_valeur{spipmotion_avfilters}}>
 	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 		<td class="shortname">#CLE</td>
 		<td class="description">[(#VALEUR|table_valeur{description})]</td>
@@ -150,7 +146,6 @@
 	</tbody>
 </table>
 </div>
-</div>
-</div>
+#BOITE_FERMER
 </B_avfilter>
 <//B_avfilter>

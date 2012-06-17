@@ -10,7 +10,7 @@
 	Squelette de notification lorsque des binaires nécessaires sont absents
 
 ][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]#CACHE{0}
-[[(#NOM_SITE_SPIP|filtrer_entites|nettoyer_titre_email|trim)]] - <:spipmotion:info_erreurs:> : [(#ENV{nb}|affiche_un_ou_plusieurs{<:spipmotion:message_titre_binaire_manquant|nettoyer_titre_email:>,<:spipmotion:message_titre_binaires_manquant|nettoyer_titre_email:>})]
+[[(#NOM_SITE_SPIP|filtrer_entites|nettoyer_titre_email|trim)]] - <:spipmotion:info_erreurs:> : [(#ENV{nb}|singulier_ou_pluriel{<:spipmotion:message_titre_binaire_manquant|nettoyer_titre_email:>,<:spipmotion:message_titre_binaires_manquant|nettoyer_titre_email:>})]
 [(#ENV{exec}|oui)[(#ENV{nb}|>{1}|non)
 <:spipmotion:message_texte_binaire_manquant:>][(#ENV{nb}|>{1}|oui)
 <:spipmotion:message_texte_binaires_manquant:>]]
