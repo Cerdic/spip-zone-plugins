@@ -241,17 +241,30 @@ function article_import($mon_article) {
 //
 function forum_import($mon_forum) {
 
-	sql_insertq('spip_forum',
-		array('id_objet'=>$mon_forum['id_objet'],
-			'objet'=>'article',
-			'date_heure'=>$mon_forum['date_heure'],
-			'date_thread'=>$mon_forum['date_thread'],
-			'titre'=>$mon_forum['titre'],
-			'texte'=>$mon_forum['texte'],
-			'auteur'=>$mon_forum['auteur'],
-			'email_auteur'=>$mon_forum['email_auteur'],
-			'statut'=>$mon_forum['statut'],
-			'ip'=>$mon_forum['ip'])) ;	
+	if (!spip_version_compare($GLOBALS['spip_version_branche'], '3.0.0', '>=')){
+		sql_insertq('spip_forum',
+			array('id_objet'=>$mon_forum['id_objet'],
+				'objet'=>'article',
+				'date_heure'=>$mon_forum['date_heure'],
+				'date_thread'=>$mon_forum['date_thread'],
+				'titre'=>$mon_forum['titre'],
+				'texte'=>$mon_forum['texte'],
+				'auteur'=>$mon_forum['auteur'],
+				'email_auteur'=>$mon_forum['email_auteur'],
+				'statut'=>$mon_forum['statut'],
+				'ip'=>$mon_forum['ip'])) ;	
+	}else{
+		sql_insertq('spip_forum',
+			array('id_article'=>$mon_forum['id_objet'],
+				'date_heure'=>$mon_forum['date_heure'],
+				'date_thread'=>$mon_forum['date_thread'],
+				'titre'=>$mon_forum['titre'],
+				'texte'=>$mon_forum['texte'],
+				'auteur'=>$mon_forum['auteur'],
+				'email_auteur'=>$mon_forum['email_auteur'],
+				'statut'=>$mon_forum['statut'],
+				'ip'=>$mon_forum['ip'])) ;	
+	}
 	return;
 }
 
