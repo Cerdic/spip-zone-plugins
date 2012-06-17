@@ -1,0 +1,42 @@
+<div id="soapsympa">
+<div class="reload_soapsympa">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<BOUCLE_test(ARTICLES){0,1}>[(#ENV{erreur}|oui)]</BOUCLE_test>
+
+<:soapsympa:abonnes_liste_pas_droit:>
+
+</B_test>
+
+
+#FORMULAIRE_ABOSYMPA_PRIVE{#ENV{listname}}
+
+<br/>
+<table id="abonnees" border="1" cellpadding="5">
+<tr>
+ <th> <:soapsympa:emails_liste:></th>
+
+ <th> <:soapsympa:action:> </th>
+  </tr>
+<BOUCLE_abo(POUR){tableau #ENV{abonnes}}>
+<tr>
+<td class="listaddress">[(#VALEUR|table_valeur{'email'})]</td>
+<td><a href="#" rel="[(#VALEUR|table_valeur{'email'})]" class="signoff"><:soapsympa:signoff:></a></td>
+</tr>
+#SET{total, #TOTAL_BOUCLE}
+</BOUCLE_abo>
+</table>
+<br/>
+<:soapsympa:liste_total_abonnes:> #GET{total}
+
+
+
+<//B_test>
+</div>
+</div>
+
+
+
+
