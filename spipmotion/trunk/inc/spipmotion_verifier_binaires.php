@@ -38,6 +38,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param boolean $notif : On notifie ou pas?
  */
 function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
+	include_spip('inc/config');
 	spip_log('SPIPmotion : Vérification des binaires','spipmotion');
 	$erreurs = array();
 	
@@ -139,6 +140,8 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 			$spipmotion_vignette_sh = find_in_path('script_bash/spipmotion_vignette.sh');
 		}
 		exec($spipmotion_sh." --help",$retour_spipmotionsh,$retour_spipmotionsh_int);
+		spip_log($retour_spipmotionsh_int,'spipmotion');
+		spip_log($retour_spipmotionsh,'spipmotion');
 		if($retour_spipmotionsh_int != 0){
 			ecrire_config('spipmotion_spipmotionsh_casse', 'oui');
 			$erreurs[] = 'spipmotion.sh';

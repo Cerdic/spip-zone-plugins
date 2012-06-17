@@ -22,6 +22,7 @@ function inc_ffmpeg_infos_dist($forcer=false){
 function ffmpeg_recuperer_infos_codecs($forcer){
 	
 	if($forcer){
+		include_spip('inc/config');
 		if(!is_dir(_DIR_CACHE.'spipmotion')){
 			sous_repertoire(_DIR_CACHE,'spipmotion');
 		}
