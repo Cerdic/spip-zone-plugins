@@ -11,6 +11,11 @@ ARTICLES :
 <INCLURE{fond=conversion/joomla2spip-convertir_articles}>
 ]
 
+[(#ENV{conversion}|=={forums}|oui)
+FORUMS : 
+<INCLURE{fond=conversion/joomla2spip-convertir_forums}>
+]
+
 [(#ENV{conversion}|=={urls}|oui)
 URLS : 
 <INCLURE{fond=conversion/joomla2spip-convertir_urls}>

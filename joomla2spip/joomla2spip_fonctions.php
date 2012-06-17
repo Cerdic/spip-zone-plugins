@@ -198,7 +198,15 @@ function article_import($mon_article) {
 	$id_article = insert_article($id_rubrique);	
 	$sql = "UPDATE spip_articles SET id_article = '$ancien_id' WHERE id_article = '$id_article'";
 	spip_query($sql);
-	$sql = "UPDATE spip_auteurs_articles SET id_article = '$ancien_id' WHERE id_article = '$id_article'";
+
+	if (spip_version_compare($GLOBALS['spip_version_branche'], '3.0.0', '>=')){
+		include_spip('action/editer_article');
+		$sql = "UPDATE spip_auteurs_liens SET id_objet = '$ancien_id' WHERE id_objet = '$id_article' AND objet = 'article'";
+	}
+	else{
+		include_spip('inc/modifier');
+		$sql = "UPDATE spip_auteurs_articles SET id_article = '$ancien_id' WHERE id_article = '$id_article'";
+	}
 	spip_query($sql);
 	$id_article = $ancien_id ;
 	// le remplir
@@ -209,12 +217,9 @@ function article_import($mon_article) {
 	) as $champ)
 		$c[$champ] = $mon_article[$champ];
 
-	include_spip('inc/modifier');
 	revisions_articles($id_article, $c);
 
-	
 	// Modification de statut, changement de rubrique ?
-	
 	$c = array();
 	foreach (array(
 		'date', 'statut', 'id_parent'
@@ -224,12 +229,30 @@ function article_import($mon_article) {
 	$err .= instituer_article($id_article, $c);
 
 	// Un lien de trad a prendre en compte
-	$err .= article_referent($id_article, array('lier_trad' => _request('lier_trad')));
+	if (!spip_version_compare($GLOBALS['spip_version_branche'], '3.0.0', '>=')) $err .= article_referent($id_article, array('lier_trad' => _request('lier_trad')));
 	
 	// ajouter les extras
 	
 	
 	return $err; 
+}
+
+//
+//
+function forum_import($mon_forum) {
+
+	sql_insertq('spip_forum',
+		array('id_objet'=>$mon_forum['id_objet'],
+			'objet'=>'article',
+			'date_heure'=>$mon_forum['date_heure'],
+			'date_thread'=>$mon_forum['date_thread'],
+			'titre'=>$mon_forum['titre'],
+			'texte'=>$mon_forum['texte'],
+			'auteur'=>$mon_forum['auteur'],
+			'email_auteur'=>$mon_forum['email_auteur'],
+			'statut'=>$mon_forum['statut'],
+			'ip'=>$mon_forum['ip'])) ;	
+	return;
 }
 
 //

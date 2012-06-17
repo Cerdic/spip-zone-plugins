@@ -35,6 +35,19 @@ Il faut mettre les documents du repertoire images/ de joomla dans un repertoire 
 <a href="./?page=joomla2spip-convertir&conversion=articles">Transferer les articles de joomla vers spip</a>
 
 
+[(#REM) Forum]
+<h2>forum jcomments</h2>
+<p>joomla :
+<BOUCLE_forums(jos_jcomments ?){!par id}> 
+</BOUCLE_forums>#TOTAL_BOUCLE</B_forums>0<//B_forums></p>
+
+<p>spip : 
+<BOUCLE_forumsspip(FORUMS){statut IN prepa,prop,publie}>
+</BOUCLE_forumsspip>#TOTAL_BOUCLE</B_forumsspip>0<//B_forumsspip></p>
+
+<a href="./?page=joomla2spip-convertir&conversion=forums">Transferer les forums jcomments de joomla vers spip</a>
+
+
 [(#REM) urls]
 <h2>URLs</h2>
 <p>joomla :
