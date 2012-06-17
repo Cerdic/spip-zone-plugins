@@ -315,6 +315,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_table_type_attention' => 'Il est conseillé de mettre le nom de la cle primaire, sans son prefixe.',
 
 	'label_table_liens' => 'Créer une table de liens ?',
+	'label_transformer_objet' => 'Transformer les textes de cet objet',
+	'label_transformer_objet_explication' => 'Changera au mieux ce qui se rapporte à un objet (articles, #ID_ARTICLE...) en utilisant la syntaxe prévue pour la fabrique',
 	'label_version' => 'Version',
 	'label_vue_auteurs_liens' => 'La liste sur la vue d\'un auteur&nbsp;?',
 	'label_vue_auteurs_liens_explication' => 'Permet d\'afficher la liste des éléments de cet objet liés à un auteur, sur la page d\'un auteur.',

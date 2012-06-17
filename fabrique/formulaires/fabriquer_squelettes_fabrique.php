@@ -8,7 +8,8 @@ function formulaires_fabriquer_squelettes_fabrique_charger_dist(){
 		'code_resultat' => '',
 		'echappements' => array(
 			'php', 'crochets', 'diese', 'tag_boucle', 'idiome', 'inclure'
-		)
+		),
+		'transformer_objet' => '',
 	);
 }
 
@@ -34,7 +35,7 @@ function formulaires_fabriquer_squelettes_fabrique_traiter_dist(){
 
 	foreach ($echap as $e) {
 		foreach($e as $cherche => $remplace) {
-			$chercher[] = $remplacer;
+			$chercher[] = $remplace;
 			$remplacer[] = '\\' . $remplace;
 		}
 	}
@@ -57,7 +58,40 @@ function formulaires_fabriquer_squelettes_fabrique_traiter_dist(){
 
 	// on remplace.
 	$skel = str_replace($chercher, $remplacer, $skel);
-	
+
+	// 3) Si un texte d'objet doit être transformé, le faire.
+	// Si l'objet est un article :
+	// articles > #LOBJET
+	// ARTICLES > #MOBJET
+	// article  > #TYPE
+	// id_article > #ID_OBJET
+	// ID_ARTICLE > #MID_OBJET
+	// spip_articles > #TABLE
+	if ($table = _request('transformer_objet')) {
+		$objet = table_objet($table);
+		$id_objet = id_table_objet($table);
+		$type = objet_type($table);
+
+		$transform = array(
+			// d'abord les recherches longues
+			// id_article
+			$id_objet             => "#ID_OBJET",
+			strtoupper($id_objet) => "#MID_OBJET",
+			// spip_articles
+			$table                => "#TABLE", 
+			// 'articles' avant 'article'
+			$objet                => "#LOBJET",
+			strtoupper($objet)    => "#MOBJET",
+			// article
+			$type . '_edit'       => "[(#TYPE)]_edit",
+			$type                 => "#TYPE",
+		);
+
+
+		$skel = str_replace(array_keys($transform), array_values($transform), $skel);
+
+	}
+
 	set_request('code_resultat', $skel);
 
 	$res = array(

@@ -561,7 +561,8 @@ function fabrique_fichiers_paquets($data) {
 	if (!in_array('pipelines', $fichiers)) {
 		if (fabrique_necessite_pipeline($data['objets'], 'optimiser_base_disparus')
 		OR  fabrique_necessite_pipeline($data['objets'], 'affiche_enfants')
-		OR  fabrique_necessite_pipeline($data['objets'], 'affiche_auteurs_interventions')) {
+		OR  fabrique_necessite_pipeline($data['objets'], 'affiche_auteurs_interventions')
+		OR  fabrique_necessite_pipeline($data['objets'], 'affiche_milieu')) {
 			$fichiers[] = 'pipelines';
 		}
 	}
