@@ -1,8 +1,8 @@
 [(#REM) Trouver, par rapport à la date du jour, la date de début de la période ]
 [(#SET{date_debut,[(#ENV{date_debut,#DATE}|programmation_debut{#ENV{jour_debut}}|affdate{'Y-m-d'})]})]
 <div class="programmation_agenda">
-	<table summary="En colonne les jours de la semaine, en ligne, le nom des films et à l’intersection, l’heure de projection" class="spip programmation">
-		<caption>Programmation</caption>
+	<table summary="<:agenda:programmation_summary:>" class="spip programmation">
+		<caption><:agenda:programmation_caption:></caption>
 		<thead>
 				<tr class="row_first"><th scope="col">[(#GET{date_debut}|agenda_affdate_debut_fin{[(#GET{date_debut}|programmation_datedecalejours{[(#ENV{duree,7}|moins{1})]})],non, abbr}|typo)] (<abbr title="[<:spip:date_une_semaine|UCFirst:> (#GET{date_debut}|affdate{'W'})]">[(#GET{date_debut}|affdate{'W'})]</abbr>)</th>
 				[(#REM) Affiche la première ligne du tableau donnant les jours concernés ]
@@ -39,7 +39,7 @@
 	</B_Films>
 		<tbody>
 			<tr class="row_even">
-				<td colspan="[(#ENV{duree,7}|plus{1})]">Pas de programmation cette semaine.</td>
+				<td colspan="[(#ENV{duree,7}|plus{1})]"><:agenda:programmation_vide:></td>
 			</tr>
 		</tbody>
 	</table>
@@ -52,7 +52,7 @@
 		{statut=publie}
 		{date_debut<(#GET{precedent}|programmation_datedecalejours{1}|affdate{'Y-m-d'})}
 		{0,1}>
-	[<a href="(#SELF|parametre_url{date_debut,#GET{precedent}})" class='ajax preload'>Période précédente ([(#GET{precedent}|programmation_debut{#ENV{jour_debut}}|affdate{'j/n'})])</a>]
+	[<a href="(#SELF|parametre_url{date_debut,#GET{precedent}})" class='ajax preload'><:agenda:programmation_nav_precedent:> ([(#GET{precedent}|programmation_debut{#ENV{jour_debut}}|affdate{'j/n'})])</a>]
 	#SET{passee,1}
 	</BOUCLE_ProgrammationPassee>
 	[(#REM) Ne pas afficher le bouton Suivant s'il n'y a pas de programmation définie plus tard ]
@@ -61,7 +61,7 @@
 		{date_debut>=(#GET{suivant}|programmation_debut{#ENV{jour_debut}}|affdate{'Y-m-d'})}
 		{0,1}>
 	[(#GET{passee}|oui)|]
-	[<a href="(#SELF|parametre_url{date_debut,#GET{suivant}})" class='ajax preload'>Période suivante ([(#GET{suivant}|programmation_debut{#ENV{jour_debut}}|affdate{'j/n'})])</a>]
+	[<a href="(#SELF|parametre_url{date_debut,#GET{suivant}})" class='ajax preload'><:agenda:programmation_nav_suivant:> ([(#GET{suivant}|programmation_debut{#ENV{jour_debut}}|affdate{'j/n'})])</a>]
 	</BOUCLE_ProgrammationFuture>
 	</div>
 </div>

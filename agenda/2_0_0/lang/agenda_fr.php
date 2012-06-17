@@ -82,6 +82,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'probleme_technique' => 'Un probl&egrave;me technique est survenu. Reessayez plus tard.',
 'participation_prise_en_compte' => 'Votre participation est enregistr&eacute;e',
 'participation_incertaine_prise_en_compte' => 'Votre participation &eacute;ventuelle est enregistr&eacute;e',
+'programmation_caption' => 'Programmation',
+'programmation_nav_precedent' => 'P&eacute;riode pr&eacute;c&eacute;dente',
+'programmation_nav_suivant' => 'P&eacute;riode suivante',
+'programmation_summary' => 'En colonne les jours de la semaine, en ligne, le nom des &eacute;v&eacute;nements programm&eacute;s et &agrave; l\'intersection, l\'heure de d&eacute;but',
+'programmation_vide' => 'Pas de programmation cette semaine.',
 
 'rubriques' => 'Rubriques Agenda',
 'rubrique_dans_une_rubrique_mode_agenda' => 'Cette rubrique permet d\'utiliser les &eacute;v&eacute;nements car elle est dans une rubrique dont le mode agenda a &eacute;t&eacute; activ&eacute;',
