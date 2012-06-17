@@ -82,6 +82,7 @@ function thumbshot($url_site, $refresh=false) {
 	}
 	
 	include_spip("inc/filtres");
+	include_spip('inc/config');
 	$duree = intval(sinon(lire_config('thumbsites/duree_cache'),30)) ;
 
 	if ((!file_exists($thumb_cache)	OR ((time()-3600*24*$duree > filemtime($thumb_cache)) AND $nb > 0))) {
