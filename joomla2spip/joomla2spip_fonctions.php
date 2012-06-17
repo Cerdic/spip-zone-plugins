@@ -318,19 +318,17 @@ return  ;
 //
 // importer auteur
 function joomla2spip_auteur_import($mon_auteur){
-  if($mon_auteur['statut'] == "Super Administrator") $statut = "0minirezo" ;
-  else $statut = "1commite" ;
-  
-  if($mon_auteur['statut'] == "visiteur") $statut = "6forum" ;
-  
-  $email = $mon_auteur['email'];
-  
-  $login = $mon_auteur['login'];
-  $nom = $mon_auteur['nom'];
-  
-  sql_insertq('spip_auteurs', array('email' => $email,'login' => $login,'statut' => $statut,'nom' => $nom));
-  
-  return ;	
+	if($mon_auteur['statut'] == "Super Administrator" || $mon_auteur['statut'] == "Administrator") $statut = "0minirezo" ;
+	else if($mon_auteur['statut'] == "Editor" || $mon_auteur['statut'] == "Publisher") $statut = "1comite" ;
+	else($mon_auteur['statut'] == "visiteur") $statut = "6forum" ;
+
+	$email = $mon_auteur['email'];
+	$login = $mon_auteur['login'];
+	$nom = $mon_auteur['nom'];
+
+	sql_insertq('spip_auteurs', array('email' => $email,'login' => $login,'statut' => $statut,'nom' => $nom));
+
+	return ;	
 }
 
 
