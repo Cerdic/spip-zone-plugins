@@ -13,6 +13,6 @@
 		<action>insert_head</action>
 		<inclure>head.php</inclure>
 	</pipeline>	
-	<necessite id='SPIP' version='[1.9.2;2.1.99]' />
+	<necessite id='SPIP' version='[1.9.2;3.0.*]' />
 	<categorie>navigation</categorie>
 </plugin>
