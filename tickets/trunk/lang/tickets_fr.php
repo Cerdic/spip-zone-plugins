@@ -19,8 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_bouton_radio_desactiver_forum_public' => 'Désactiver l\'utilisation des forums publics.',
 	'cfg_bouton_tickets' => 'Tickets',
-	'cfg_descr_general' => 'Cette page de configuration permet de choisir les valeurs des champs optionnels, la modération des commentaires ainsi que divers autres paramètres.',
 	'cfg_descr_autorisations' => 'Cette page de configuration permet de paramétrer les autorisations pour l\'écriture, la modification, l\'assignation et le commentaire des tickets.',
+	'cfg_descr_general' => 'Cette page de configuration permet de choisir les valeurs des champs optionnels, la modération des commentaires ainsi que divers autres paramètres.',
 	'cfg_explication_cacher_moteurs' => 'Cache les tickets des moteurs de recherche en leur demandant de ne pas indexer leur contenus lorsqu\'ils sont affichés dans l\'espace public.',
 	'cfg_explication_composants' => 'Séparez les composants par le caractère ":".',
 	'cfg_explication_jalons' => 'Séparez les jalons par le caractère ":".',
@@ -140,8 +140,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mail_texte_message_auto' => 'Ceci est un message automatique : n\'y repondez pas.',
 	'message_aucun_ticket_recherche' => 'Aucun ticket ne correspond à votre recherche',
 	'message_automatique' => 'Ceci est un message automatique : n\'y repondez pas.',
-	'message_zpip_inactif' => 'Cette option est désactivée car elle nécessite le plugin ZPIP.',
 	'message_page_publique_indisponible' => 'Cette page est indisponible. vérifiez que ZPIP est activé et que votre configuration du plugin Tickets autorise l\'accès public.',
+	'message_zpip_inactif' => 'Cette option est désactivée car elle nécessite le plugin ZPIP.',
 
 	// N
 	'no_assignation' => 'Personne',

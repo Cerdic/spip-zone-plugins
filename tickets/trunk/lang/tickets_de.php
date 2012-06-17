@@ -20,14 +20,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_bouton_radio_desactiver_forum_public' => 'Désactiver l\'utilisation des forums publics.', # MODIF
-	'cfg_descr_tickets' => 'Konfiguration des Plugins Tickets für SPIP',
+	'cfg_bouton_tickets' => 'Tickets', # NEW
+	'cfg_descr_autorisations' => 'Cette page de configuration permet de paramétrer les autorisations pour l\'écriture, la modification, l\'assignation et le commentaire des tickets.', # NEW
+	'cfg_descr_general' => 'Cette page de configuration permet de choisir les valeurs des champs optionnels, la modération des commentaires ainsi que divers autres paramètres.', # NEW
 	'cfg_explication_cacher_moteurs' => 'Cache les tickets des moteurs de recherche en leur demandant de ne pas indexer leur contenus lorsqu\'ils sont affichés dans l\'espace public.', # NEW
 	'cfg_explication_composants' => 'Séparez les composants par le caractère ":".', # NEW
 	'cfg_explication_jalons' => 'Séparez les jalons par le caractère ":".', # NEW
 	'cfg_explication_projets' => 'Séparez les projets par le caractère ":".', # NEW
 	'cfg_explication_readonly' => 'Cette partie de la configuration est déjà définie autre part.', # NEW
 	'cfg_explication_versions' => 'Séparez les versions par le caractère ":".', # NEW
-	'cfg_form_tickets_autorisations' => 'Zugriffsrechte einstellen',
+	'cfg_form_tickets_autorisations' => 'Zugriffsrechte einstellen', # MODIF
 	'cfg_form_tickets_general' => 'Configuration générale', # MODIF
 	'cfg_inf_type_autorisation' => 'Wenn Sie Status oder Autor als Kriterium festlegen,
 	müssen Sie weiter unten Status oder Autor/en auswählen.',
@@ -57,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lgd_champs_optionnels' => 'Champs optionnels', # NEW
 	'cfg_lgd_champs_options_autres' => 'Autres options', # NEW
 	'cfg_lgd_notifs_forums' => 'Forums et notifications', # NEW
-	'cfg_titre_tickets' => 'Tickets',
+	'cfg_titre_tickets' => 'Tickets', # MODIF
 	'champ_assigner' => 'Zuweisen:', # MODIF
 	'champ_composant' => 'Element:', # MODIF
 	'champ_createur' => 'Créé par :', # MODIF
@@ -142,6 +144,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mail_texte_message_auto' => 'Dies ist eine automatisch erstellte Nachricht: Bitte nicht beantworten.',
 	'message_aucun_ticket_recherche' => 'Aucun ticket ne correspond à votre recherche', # NEW
 	'message_automatique' => 'Dies ist eine automatisch erstellte Nachricht: Bitte nicht beantworten.',
+	'message_page_publique_indisponible' => 'Cette page est indisponible. vérifiez que ZPIP est activé et que votre configuration du plugin Tickets autorise l\'accès public.', # NEW
+	'message_zpip_inactif' => 'Cette option est désactivée car elle nécessite le plugin ZPIP.', # NEW
 
 	// N
 	'no_assignation' => 'Niemand',

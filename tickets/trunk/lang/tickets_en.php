@@ -20,22 +20,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_bouton_radio_desactiver_forum_public' => 'Disable the use of public forums.',
-	'cfg_descr_tickets' => 'Configuration of the Bug reports plugin for SPIP',
+	'cfg_bouton_tickets' => 'Tickets', # NEW
+	'cfg_descr_autorisations' => 'Cette page de configuration permet de paramétrer les autorisations pour l\'écriture, la modification, l\'assignation et le commentaire des tickets.', # NEW
+	'cfg_descr_general' => 'Cette page de configuration permet de choisir les valeurs des champs optionnels, la modération des commentaires ainsi que divers autres paramètres.', # NEW
 	'cfg_explication_cacher_moteurs' => 'Hide bug reports from search engines asking them not to index their content when they are displayed in the public space.',
 	'cfg_explication_composants' => 'Separate the components with the character ":".',
 	'cfg_explication_jalons' => 'Separate the milestones with the character ":".',
 	'cfg_explication_projets' => 'Separate the projects with the character ":".',
 	'cfg_explication_readonly' => 'This part of the configuration is already set somewhere else.',
 	'cfg_explication_versions' => 'Separate the versions with the character ":".',
-	'cfg_form_tickets_autorisations' => 'Setting up permissions',
-	'cfg_form_tickets_general' => 'General setup',
+	'cfg_form_tickets_autorisations' => 'Setting up permissions', # MODIF
+	'cfg_form_tickets_general' => 'General setup', # MODIF
 	'cfg_inf_type_autorisation' => 'If you choose by status or by author, you will be prompted below your selection of status or authors.',
 	'cfg_lbl_autorisation_auteurs' => '	Allow list of authors',
 	'cfg_lbl_autorisation_statuts' => 'Allow by authors status',
 	'cfg_lbl_autorisation_webmestre' => 'Allow webmasters only',
 	'cfg_lbl_cacher_moteurs' => 'Hide from search engines',
 	'cfg_lbl_case_joindre_fichiers' => 'Allow to attach one or more files to bug reports',
-	'cfg_lbl_case_notification_publique' => 'Be notified in public rather than private space (Requires Zpip)',
+	'cfg_lbl_case_notification_publique' => 'Be notified in public rather than private space (Requires Zpip)', # MODIF
 	'cfg_lbl_case_selecteur_navigateur' => 'Having a browser selector in the bug report form',
 	'cfg_lbl_composants' => 'Components',
 	'cfg_lbl_desactiver_public' => 'Disable public access',
@@ -56,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lgd_champs_optionnels' => 'Optional fields',
 	'cfg_lgd_champs_options_autres' => 'Other options',
 	'cfg_lgd_notifs_forums' => 'Forums and notifications',
-	'cfg_titre_tickets' => 'Bug reports',
+	'cfg_titre_tickets' => 'Bug reports', # MODIF
 	'champ_assigner' => 'Assign to:',
 	'champ_composant' => 'Component:',
 	'champ_createur' => 'Created by:',
@@ -140,6 +142,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mail_texte_message_auto' => 'This is an automatic message: please don\'t answer.',
 	'message_aucun_ticket_recherche' => 'No ticket matches your search',
 	'message_automatique' => 'This is an automatic message: please don\'t answer.',
+	'message_page_publique_indisponible' => 'Cette page est indisponible. vérifiez que ZPIP est activé et que votre configuration du plugin Tickets autorise l\'accès public.', # NEW
+	'message_zpip_inactif' => 'Cette option est désactivée car elle nécessite le plugin ZPIP.', # NEW
 
 	// N
 	'no_assignation' => 'No one',
@@ -192,7 +196,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tickets_autorisations' => 'Authorizations',
 	'tickets_derniers_commentaires' => 'Last comments',
 	'tickets_en_cours_auteur' => '@nom@ bug reports being processed',
-	'tickets_general' => 'General',
+	'tickets_general' => 'General', # MODIF
 	'tickets_sticked' => 'Sticked bug reports',
 	'tickets_sur_inscription' => 'Bug report or comment only available for registered users.
 	',
