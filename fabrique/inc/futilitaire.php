@@ -159,7 +159,6 @@ Class Futilitaire {
 			}
 
 			// cree l'arborescence depuis le chemin
-			$this->log("deplacer_dossiers: Créer arborescence pour $d");
 			$this->creer_arborescence_destination($d, false);
 
 			// copie recursive

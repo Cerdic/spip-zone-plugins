@@ -121,12 +121,53 @@ function cle_de_langue($cle, $desc_objet) {
  *
 **/
 function tab_cle_de_langue($tableau, $desc_objet) {
-	foreach($tableau as $c=>$v) {
+	foreach($tableau as $c => $v) {
 		$tableau[$c] = cle_de_langue($v, $desc_objet);
 	}
 	return $tableau;
 }
 
+/**
+ * Cherche s'il existe une chaine de langue pour les cles de tableaux
+ * et ajoute alors la traduction dans la valeur de ce tableau
+ *
+ * @param array $tableau
+ * 		Tableau cle => texte
+ * @param string $prefixe_cle
+ * 		Prefixe ajoute aux cles pour chercher les trads
+ * @param string $sep
+ * 		Séparateur entre l'ancienne valeur et la concaténation de traduction
+ * @return array
+ * 		Le tableau complété
+**/
+function tab_cle_traduite_ajoute_dans_valeur($tableau, $prefixe_cle="", $sep = "&nbsp;: ") {
+	foreach($tableau as $c => $v) {
+		$trad = _T("fabrique:". $prefixe_cle . $c, array(), array('force' => false));
+		if ($trad) {
+			$tableau[$c] = $v . $sep . $trad;
+		} else {
+			$tableau[$c] = $v;
+		}
+	}
+	return $tableau;
+}
+
+/**
+ * Équivalent de wrap() sur les valeurs du tableau
+ * 
+ * @param array $tableau
+ * 		Tableau cle => texte
+ * @param string $balise
+ * 		Balise qui encapsule
+ * @return array $tableau
+ * 		Tableau cle => <balise>texte</balise>
+**/
+function tab_wrap($tableau, $balise) {
+	foreach ($tableau as $c => $v) {
+		$tableau[$c] = wrap($v, $balise);
+	}
+	return $tableau;
+}
 
 
 /**

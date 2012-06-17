@@ -124,6 +124,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'datalist_aide' => 'Certains navigateurs peuvent proposer une autocomplétion
 		en tapant une flèche bas au clavier ou en cliquant 2 fois dans la zone de saisie.',
 
+	'echafaudage_prive/squelettes/contenu/objets.html' => 'Ajoute un champ de recherche',
+	'echafaudage_prive/objets/infos/objet.html' => 'Ajoute le lien de prévisualisation',
+
 	'echappement_php' => '&lt;?php',
 	'echappement_crochets' => '[ ]',
 	'echappement_parentheses' => '( )',
@@ -132,6 +135,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'echappement_idiome' => '&lt;:',
 	'echappement_inclure' => '&lt;INCLURE',
 	'echappement_tag_boucle' => '&lt; de boucle',
+	
 	'erreurs' => 'Il y a des erreurs !',
 	'erreur_envoi_fichier' => 'Erreur dans l\'envoi du fichier.',
 	'erreur_chargement_fichier' => 'Le fichier envoyé n\a pas pu être compris. La restauration n\'est pas effectuée.',
@@ -150,9 +154,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		est basé sur le nom de la table au singulier (comme <code>id_chose</code>). Dans les autres cas,
 		vous devez compléter certaines informations ci-dessous.',
 	'explication_fichiers_echafaudes' => 'SPIP génère automatiquement en cache ces fichiers
-		s\'ils sont absents.
-		Vous pouvez cependant en créer certains afin de les modifier
-		pour changer le comportement par défaut de ce que propose SPIP.',
+		s\'ils sont absents. Vous pouvez cependant en créer certains afin de les modifier
+		pour changer le comportement par défaut de ce que propose SPIP.
+		Par ailleurs, ces fichiers ont parfois des ajouts minimes de fonctionnalités, alors indiquées.',
 	'experimental_explication' => '<strong>Partie expérimentale !</strong><br />
 		La pérennité des saisies n\'est pas garantie.
 		Cette partie peut évoluer ou disparaître dans de futures versions.',
