@@ -1,24 +1,18 @@
 <h1 class="grostitre"><:spipmotion:titre_page_file:></h1>
 
-<div class="cadre cadre-r">
-	<div class="cadre_padding">
-		<h1><:spipmotion:titre_page_file_attente:></h1>
-		#INCLURE{fond=prive/spipmotion/file_attente,env,ajax}
-	</div>
-</div>
+#BOITE_OUVRIR
+	<h1><:spipmotion:titre_page_file_attente:></h1>
+	#INCLURE{fond=prive/spipmotion/file_attente,env,ajax}
+#BOITE_FERMER
 
-<div class="cadre cadre-r">
-	<div class="cadre_padding">
-		<h1><:spipmotion:titre_page_file_encodes:></h1>
-		#INCLURE{fond=prive/spipmotion/file_encodes,env,ajax}
-	</div>
-</div>
+#BOITE_OUVRIR
+	<h1><:spipmotion:titre_page_file_encodes:></h1>
+	#INCLURE{fond=prive/spipmotion/file_encodes,env,ajax}
+#BOITE_FERMER
 
 <BOUCLE_un_encodage(SPIPMOTION_ATTENTES){encode = oui}{0,1}> </BOUCLE_un_encodage>
-<div class="cadre cadre-r">
-	<div class="cadre_padding">
-		<h1><:spipmotion:titre_page_file_stats:></h1>
-		#INCLURE{fond=prive/spipmotion/file_stats,env,ajax}
-	</div>
-</div>
+#BOITE_OUVRIR
+	<h1><:spipmotion:titre_page_file_stats:></h1>
+	#INCLURE{fond=prive/spipmotion/file_stats,env,ajax}
+#BOITE_FERMER
 </B_un_encodage>

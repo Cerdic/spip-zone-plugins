@@ -23,17 +23,18 @@
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/spipmotion.php" />
 	<pipeline nom="taches_generales_cron" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="jquery_plugins" inclure="spipmotion_pipelines.php" />
-	<pipeline nom="jqueryui_forcer" inclure="spipmotion_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="header_prive" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="post_spipmotion_encodage" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="autoriser" inclure="spipmotion_autoriser.php" />
 	<pipeline nom="document_desc_actions" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="pre_boucle" inclure="spipmotion_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="spipmotion_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="spipmotion_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[1.0;[" />
 	<necessite nom="getid3" compatibilite="[0.2;[" />
-	<necessite nom="queue" compatibilite="[0.3.1;[" />
 	<lib nom="flot" lien="http://flot.googlecode.com/files/flot-0.7.zip" />
 
 	<utilise nom="podcast" />

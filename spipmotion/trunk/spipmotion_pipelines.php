@@ -263,9 +263,7 @@ function spipmotion_jquery_plugins($array){
  * @param array $plugins Un tableau des scripts déjà demandé au chargement
  * @retune array $plugins Le tableau complété avec les scripts que l'on souhaite 
  */
-function spipmotion_jqueryui_forcer($plugins){
-	$plugins[] = "jquery.ui.core";
-	$plugins[] = "jquery.ui.widget";
+function spipmotion_jqueryui_plugins($plugins){
 	$plugins[] = "jquery.ui.tabs";
 	return $plugins;
 }
@@ -328,5 +326,50 @@ function spipmotion_pre_boucle($boucle){
 		}
 	}
 	return $boucle;
+}
+
+function spipmotion_formulaire_verifier($flux){
+	if($flux['args']['form'] == 'configurer_spipmotion'){
+		foreach($_POST as $key => $val){
+			if(preg_match('/(bitrate|height|width|frequence_audio|fps|passes|qualite_video|qualite_audio).*/',$key) && $val){
+				if(!ctype_digit($val)){
+					$flux['data'][$key] = _T('spipmotion:erreur_valeur_int');
+				}else if(preg_match('/(height|width).*/',$key) && ($val < 100)){
+					$flux['data'][$key] = _T('spipmotion:erreur_valeur_int_superieur',array('val'=> 100));
+				}
+			}
+		}
+		if(count($erreur) > 0)
+			$flux['data']['message_erreur'] = _T('spipmotion:erreur_formulaire_configuration');
+	}
+	return $flux;
+}
+
+function spipmotion_formulaire_traiter($flux){
+	if($flux['args']['form'] == 'configurer_spipmotion'){
+		$valeurs = $_POST;
+	
+		$verifier_binaires = charger_fonction('spipmotion_verifier_binaires','inc');
+		$erreurs = $verifier_binaires($valeurs);
+		
+		if(!in_array('ffmpeg',$erreurs)){
+			/**
+			 * On récupère les informations du nouveau ffmpeg
+			 */
+			$ffmpeg_infos = charger_fonction('ffmpeg_infos','inc');
+			$ffmpeg_infos(true);
+		}
+	
+		if(count($erreurs) > 0){
+			include_spip('inc/invalideur');
+			suivre_invalideur('1');
+	
+			/**
+			 * On force le rechargement de la page car on a récupéré de nouvelles infos sur ffmpeg
+			 */
+			$flux['data']['redirect'] = self();
+		}
+	}
+	return $flux;
 }
 ?>

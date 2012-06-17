@@ -331,7 +331,6 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
  * @param float $nom_meta_base_version
  */
 function spipmotion_vider_tables($nom_meta_base_version) {
-	include_spip('base/abstract_sql');
 	sql_drop_table("spip_spipmotion_attentes");
 	sql_drop_table("spip_spipmotion_metas");
 	effacer_meta($nom_meta_base_version);
