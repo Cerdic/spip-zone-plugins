@@ -4,8 +4,8 @@
  * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
  *
  * Auteurs :
- * Quentin Drouet (kent1)
- * 2008-2011 - Distribué sous licence GNU/GPL
+ * kent1 (http://www.kent1.info - kent1@arscenic.info)
+ * 2008-2012 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -49,7 +49,6 @@ function spipmotion_declarer_tables_principales($tables_principales){
 	$tables_principales['spip_documents']['field']['audiocodec'] = "VARCHAR(255) DEFAULT '' NOT NULL";
 	$tables_principales['spip_documents']['field']['audiochannels'] = "INTEGER";
 	$tables_principales['spip_documents']['field']['rotation'] = "INTEGER";
-	$tables_principales['spip_documents']['field']['id_orig'] = "BIGINT(21) NOT NULL";
 	$tables_principales['spip_documents']['field']['metadatas'] = "TEXT DEFAULT '' NOT NULL";
 
 	return $tables_principales;

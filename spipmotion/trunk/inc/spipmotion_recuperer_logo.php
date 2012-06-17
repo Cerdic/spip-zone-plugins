@@ -4,7 +4,7 @@
  * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
  *
  * Auteurs :
- * Quentin Drouet (kent1)
+ * kent1 (http://www.kent1.info - kent1@arscenic.info)
  * 2008-2012 - Distribué sous licence GNU/GPL
  *
  */

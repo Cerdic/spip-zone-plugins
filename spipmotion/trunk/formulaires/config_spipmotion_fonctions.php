@@ -1,12 +1,11 @@
 <?php
 /**
  * SPIPmotion
- * Gestion de l'encodage et des métadonnées de vidéos et son directement dans spip
+ * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
  *
  * Auteurs :
- * Quentin Drouet (kent1)
- *
- * 2008-2011 - Distribué sous licence GNU/GPL
+ * kent1 (http://www.kent1.info - kent1@arscenic.info)
+ * 2008-2012 - Distribué sous licence GNU/GPL
  *
  * Fonctions spécifiques au squelette config_spipmotion.html
  **/
