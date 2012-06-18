@@ -44,7 +44,6 @@ function saisie_nom2name($nom) {
  * 		Pile complétée du code php de la balise.
 **/
 function balise_GLOBALS_dist($p) {
-	$p->interdire_scripts = false; // le contenu vient de #SET, donc il est de confiance
 	if (function_exists('balise_ENV'))
 		return balise_ENV($p, '$GLOBALS');
 	else
