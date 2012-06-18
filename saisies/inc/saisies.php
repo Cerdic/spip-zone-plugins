@@ -178,16 +178,16 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles=true){
 	include_spip('inc/verifier');
 	$erreurs = array();
 	$verif_fonction = charger_fonction('verifier','inc',true);
-	
+
 	if ($saisies_masquees_nulles)
 		$formulaire = saisies_verifier_afficher_si($formulaire);
 	
 	$saisies = saisies_lister_par_nom($formulaire);
 	foreach ($saisies as $saisie){
-		$obligatoire = $saisie['options']['obligatoire'];
+		$obligatoire = isset($saisie['options']['obligatoire']) ? $saisie['options']['obligatoire'] : '';
 		$champ = $saisie['options']['nom'];
-		$file = ($saisie['saisie'] == 'input' and $saisie['options']['type'] == 'file');
-		$verifier = $saisie['verifier'];
+		$file = ($saisie['saisie'] == 'input' and isset($saisie['options']['type']) and $saisie['options']['type'] == 'file');
+		$verifier = isset($saisie['verifier']) ? $saisie['verifier'] : false;
 
 		// Si le nom du champ est un tableau indexé, il faut parser !
 		if (preg_match('/([\w]+)((\[[\w]+\])+)/', $champ, $separe)){
@@ -195,7 +195,7 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles=true){
 			preg_match_all('/\[([\w]+)\]/', $separe[2], $index);
 			// On va chercher au fond du tableau
 			foreach($index[1] as $cle){
-				$valeur = $valeur[$cle];
+				$valeur = isset($valeur[$cle]) ? $valeur[$cle] : null;
 			}
 		}
 		// Sinon la valeur est juste celle du nom
@@ -217,10 +217,11 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles=true){
 			$erreurs[$champ] = _T('info_obligatoire');
 		
 		// On continue seulement si ya pas d'erreur d'obligation et qu'il y a une demande de verif
-		if (!$erreurs[$champ] and is_array($verifier) and $verif_fonction){
+		if ((!isset($erreurs[$champ]) or !$erreurs[$champ]) and is_array($verifier) and $verif_fonction){
 			$normaliser = null;
 			// Si le champ n'est pas valide par rapport au test demandé, on ajoute l'erreur
-			if ($erreur_eventuelle = $verif_fonction($valeur, $verifier['type'], $verifier['options'], $normaliser)) {
+			$options = isset($verifier['options']) ? $verifier['options'] : array();
+			if ($erreur_eventuelle = $verif_fonction($valeur, $verifier['type'], $options, $normaliser)) {
 				$erreurs[$champ] = $erreur_eventuelle;
 			} elseif (!is_null($normaliser)) {
 				set_request($champ, $normaliser);
