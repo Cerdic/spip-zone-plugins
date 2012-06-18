@@ -23,12 +23,11 @@ function soapsympa_upgrade($nom_meta_base_version,$version_cible){
 			$config = array();
 		}
 		$config = array_merge(array(
-				'serveur_distant' => 'http://listes.archivistes.org/sympa/wsdl',
-				'remote_host' => 'listes.archivistes.org',
-				'identifiant' => 'SPIP_archivistes_org',
-				'mot_de_passe' => 'archi@vistes#ORG',
-				//'robot' => 'sympa.archivistes.org',
-				'proprietaire' => 'delegation_generale@archivistes.org',
+				'serveur_distant' => 'http://listes.exepmple.org/sympa/wsdl',
+				'remote_host' => 'listes.xemple.org',
+				'identifiant' => 'SPIP_test_org',
+				'mot_de_passe' => 'archi@vtest#ORG',
+				'proprietaire' => 'lismaster@test.org',
 		), $config);
 		ecrire_meta('soapsympa', serialize($config));
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
