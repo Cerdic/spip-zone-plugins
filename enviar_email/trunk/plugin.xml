@@ -1,0 +1,35 @@
+<plugin>
+	<nom>
+		<multi>
+		[es]Enviar email
+		[fr]Envoyer par mail
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+		[es]Enviar la referencia al artículo o a la breve por email
+		[fr]Envoyer la r&#233;f&#233;rence de l'article par mail
+		</multi>
+	</slogan>
+	<auteur>[joseluis->joseluis@digital77.com]</auteur>
+	<licence>GPL - (c) 2006</licence>
+	<version>0.2.0</version>
+	<etat>test</etat>
+	<description>
+		<multi>	
+[es]Enviar la referencia al artículo o a la breve por email
+- Para utilizarla coloca la baliza <code>#ENVIAR_EMAIL**</code> donde quieras que aparezca el enlace (artículos o breves)
+- Los dos ** asteriscos son importantes, no los olvides.
+[fr]Envoyer la r&#233;f&#233;rence de l'article par mail
+- Pour l'utiliser coller la balise <code>#ENVIAR_EMAIL**</code> dans votre squelette
+- les deux ast&#233;risques sont indispensables
+		</multi>
+	</description>
+
+	<lien>http://www.spip-contrib.net/?article2228</lien>
+	<icon>sobre.gif</icon>
+	<fonctions>baliza_enviar_email.php</fonctions>
+	<prefix>enviar_email</prefix>
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
+	<categorie>communication</categorie>
+</plugin>
