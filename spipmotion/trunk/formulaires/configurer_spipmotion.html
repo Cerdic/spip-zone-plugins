@@ -13,7 +13,7 @@
 	<ul>
 		<li class="fieldset">
 			<fieldset>
-				<h3 class="legend"><:spipmotion:options_config:></h3>
+				<legend><:spipmotion:options_config:></legend>
 				<ul>
 					[(#SAISIE{case,encodage_auto,
 						label=<:spipmotion:label_encodage_auto:>,
@@ -30,8 +30,8 @@
 		</li>
 		<li class="fieldset">
 			<fieldset>
-				<h3 class="legend"><:spipmotion:gestion_format_entree:></h3>
-				<h4><:spipmotion:label_extensions_prises_en_charge:></h4>
+				<legend><:spipmotion:gestion_format_entree:></legend>
+				<p><strong><:spipmotion:label_extensions_prises_en_charge:></strong></p>
 				<div class="explication"><:spipmotion:explications_extensions_prises_en_charge:></div>
 				#SET{extensions,#ARRAY|push{m4u}}
 				<ul>
@@ -66,7 +66,8 @@
 						<p><a href="#" class="select_all"><:spipmotion:select_all:></a> <a href="#" class="unselect_all"><:spipmotion:unselect_all:></a></p>
 					</li>
 				</ul>
-				<h4><:spipmotion:label_extensions_prises_en_charge_encodage:></h4>
+				<BOUCLE_si_fichier(CONDITION){si #CONFIG{spipmotion/fichiers_audios,#ARRAY}|array_merge{#CONFIG{spipmotion/fichiers_videos,#ARRAY}}|count|>{0}|oui}>
+				<p><strong><:spipmotion:label_extensions_prises_en_charge_encodage:></strong></p>
 				<div class="explication"><:spipmotion:explications_extensions_prises_en_charge_encodage:></div>
 				<ul>
 					<li>
@@ -92,6 +93,7 @@
 						</B_videos1_encodage>
 					</li>
 				</ul>
+				</BOUCLE_si_fichier>
 			</fieldset>
 		</li>
 		[(#CONFIG{spipmotion/fichiers_audios_encodage,#ARRAY}|array_merge{#CONFIG{spipmotion/fichiers_videos_encodage,#ARRAY}}|count|>{0}|oui)
@@ -100,7 +102,7 @@
 		<B_profils_son_top>
 		<li class="fieldset">
 			<fieldset>
-				<h3 class="legend"><:spipmotion:profils_encodage_son:></h3>
+				<legend><:spipmotion:profils_encodage_son:></legend>
 				<div class="spipmotion_formats">
 					<ul>
 						<BOUCLE_profils_son_top(POUR){tableau #CONFIG{spipmotion/fichiers_audios_sortie,#ARRAY}}>
@@ -119,28 +121,25 @@
 		<B_profils_video_top>
 		<li class="fieldset">
 			<fieldset>
-				<h3 class="legend"><:spipmotion:profils_encodage_video:></h3>
+				<legend><:spipmotion:profils_encodage_video:></legend>
 				<div class="spipmotion_formats">
 					<ul>
 						<BOUCLE_profils_video_top(POUR){tableau #CONFIG{spipmotion/fichiers_videos_sortie,#ARRAY}}>
 						<li><a href="#spipmotion_#VALEUR">#VALEUR</a></li>
 						</BOUCLE_profils_video_top>
 					</ul>
-					<div id="spipmotion_formats_video">
-						<BOUCLE_profils_video(POUR){tableau #CONFIG{spipmotion/fichiers_videos_sortie}}>
-						<ul id="spipmotion_#VALEUR">
-							<INCLURE{fond=formulaires/spipmotion_encodage_video}{valeur=#VALEUR}{env}>
-						</ul>
-						</BOUCLE_profils_video>
+					<BOUCLE_profils_video(POUR){tableau #CONFIG{spipmotion/fichiers_videos_sortie}}>
+					<div id="spipmotion_#VALEUR">
+						<INCLURE{fond=formulaires/spipmotion_encodage_video}{valeur=#VALEUR}{env}>
 					</div>
+					</BOUCLE_profils_video>
 				</div>
 			</fieldset>
 		</li>
 		</B_profils_video_top>
 	</ul>
 	<p class="boutons">
-		<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
-		<input type="reset" value="<:cfg:bouton_effacer:>" class="submit" />
+		<input type="submit" value="<:bouton_valider:>" class="submit" />
 	</p>
 </div>
 </form>
