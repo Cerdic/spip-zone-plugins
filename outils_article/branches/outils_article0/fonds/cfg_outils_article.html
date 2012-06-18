@@ -1,0 +1,257 @@
+#CACHE{0}
+<!-- titre=<:outilsarticle:titre:> -->
+<!-- icone= css/images/configure.png-->
+<!-- descriptif= <:outilsarticle:descriptif:> -->
+<!-- nom=outils_article -->
+
+<style>
+
+
+
+table /* Le tableau en lui-même */
+{
+   margin: auto; /* Centre le tableau */
+   
+   border-collapse: collapse; /* Colle les bordures entre elles */
+}
+
+td /* Les cellules normales */
+{
+   border-bottom: 1px solid #eee;
+   text-align: left; /* Tous les textes des cellules seront centrés*/
+   padding: 5px; /* Petite marge intérieure aux cellules pour éviter que le texte touche les bordures */
+}
+</style>
+
+
+
+
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset><legend><:outilsarticle:elements:></legend>
+<Table >
+<tr>
+	<td>
+		<img src="#CHEMIN{css/images/kdepetit/textemoins.png}">
+		<input type="checkbox" name="texte" [checked="(#ENV{texte})"] />&nbsp;&nbsp;<label><:outilsarticle:taille:>&nbsp;<a href="?exec=cfg&cfg=boutonstexte">(config)</a></label>
+	</td>
+	<td>
+	<input type="checkbox" name="textemoinsint" [checked="(#ENV{textemoinsint})"] />&nbsp;&nbsp;<label><:outilsarticle:intitule:></label>
+	<label for="textemoinsdesc"></label>
+	<input type="text" name="textemoinsdesc" 	id="textemoinsdesc"  value="[(#CONFIG{outils_article/textemoinsdesc}|sinon{<:outilsarticle:textemoins:>})]"  style="display:inline"/>
+	<br />
+	<input type="checkbox" name="texteplusint" [checked="(#ENV{texteplusint})"] />&nbsp;&nbsp;<label><:outilsarticle:intitule:></label>
+	<label for="texteplusdesc"></label>
+	<input type="text" name="texteplusdesc" id="texteplusdesc"  value="[(#CONFIG{outils_article/texteplusdesc}|sinon{<:outilsarticle:texteplus:>})]"  style="display:inline"/>
+	</td>
+	
+</tr>	
+
+<tr>
+	<td>
+		<img src="#CHEMIN{css/images/kdepetit/printer.png}">
+		<input type="checkbox" name="impression" [checked="(#ENV{impression})"] />&nbsp;&nbsp;<label><:outilsarticle:impression:></label>
+	</td>
+	<td>
+		<input type="checkbox" name="impressionint" [checked="(#ENV{impressionint})"] />&nbsp;&nbsp;<label><:outilsarticle:intitule:></label>
+		<label for="impressiondesc"></label>
+		<input type="text" name="impressiondesc" 	id="impressiondesc"  value="[(#CONFIG{outils_article/impressiondesc}|sinon{<:outilsarticle:impression:>})]"  style="display:inline"/>
+	</td>
+</tr>
+
+<tr>
+	<td> 
+		<img src="#CHEMIN{css/images/kdepetit/feed.png}">
+		<input type="checkbox" name="rss" [checked="(#ENV{rss})"] /> &nbsp;&nbsp;<label><:outilsarticle:rss:></label>
+	</td>
+	<td>
+		<input type="checkbox" name="rssint" [checked="(#ENV{rssint})"] />&nbsp;&nbsp;<label><:outilsarticle:intitule:></label>
+		<label for="rssdesc"></label>
+		<input type="text" name="rssdesc" 	id="rssdesc"  value="[(#CONFIG{outils_article/rssdesc}|sinon{<:outilsarticle:rss:>})]"  style="display:inline"/>
+	</td>
+</tr>
+
+<tr>
+<td>  
+	<img src="#CHEMIN{css/images/kdepetit/rss_black.png}">
+    <input type="checkbox" name="rssforum" [checked="(#ENV{rssforum})"] />&nbsp;&nbsp;<label><:outilsarticle:rssforum:></label>
+	</td>
+	<td>
+	<input type="checkbox" name="rssforumint" [checked="(#ENV{rssforumint})"] />&nbsp;&nbsp;<label><:outilsarticle:intitule:></label>
+	<label for="rssforumdesc"></label>
+	<input type="text" name="rssforumdesc" 	id="rssforumdesc"  value="[(#CONFIG{outils_article/rssforumdesc}|sinon{<:outilsarticle:rssforum:>})]"  style="display:inline"/>
+</td>
+</tr>
+
+<tr>
+	<td>
+		<img src="#CHEMIN{css/images/kdepetit/auteur.png}">
+		<input type="checkbox" name="auteur" [checked="(#ENV{auteur})"] />&nbsp;&nbsp;<label><:outilsarticle:auteur:></label>	
+	</td>
+	<td>
+	<input type="checkbox" name="auteurint" [checked="(#ENV{auteurint})"] />&nbsp;&nbsp;<label><:outilsarticle:intitule:></label>
+	<label for="auteurdesc"></label>
+	<input type="text" name="auteurdesc" 	id="auteurdesc"  value="[(#CONFIG{outils_article/auteurdesc}|sinon{<:outilsarticle:auteur:>})]"  style="display:inline"/>
+	</td>
+</tr>
+
+<tr>
+	<td>
+		<img src="#CHEMIN{css/images/kdepetit/chat.png}">
+		<input type="checkbox" name="reagir" [checked="(#ENV{reagir})"] />&nbsp;&nbsp;<label><:outilsarticle:reagir:></label>
+	</td>
+	<td>
+		<input type="checkbox" name="reagirint" [checked="(#ENV{reagirint})"] />&nbsp;&nbsp;<label><:outilsarticle:intitule:></label>
+		<label for="reagirdesc"></label>
+		<input type="text" name="reagirdesc" 	id="reagirdesc"  value="[(#CONFIG{outils_article/reagirdesc}|sinon{<:outilsarticle:reagir:>})]"  style="display:inline"/>
+
+	</td>
+</tr>
+
+<tr>
+	<td>
+		<img src="#CHEMIN{css/images/compteur.png}">
+		<input type="checkbox" name="compteur" [checked="(#ENV{compteur})"] />&nbsp;&nbsp;<label><:outilsarticle:compteur:></label>
+	</td>
+</tr>
+
+<tr>
+	<td>
+	<img src="#CHEMIN{css/images/kdepetit/pdf.png}">
+		<input type="checkbox" name="pdf" [checked="(#ENV{pdf})"] />&nbsp;&nbsp;<label><:outilsarticle:pdf:></label>&nbsp;&nbsp;
+	</td>
+	<td>	
+	<input type="checkbox" name="pdfint" [checked="(#ENV{pdfint})"] />&nbsp;&nbsp;<label><:outilsarticle:intitule:></label>
+	<label for="pdfdesc"></label>
+	<input type="text" name="pdfdesc" 	id="pdfdesc"  value="[(#CONFIG{outils_article/pdfdesc}|sinon{<:outilsarticle:pdf:>})]"  style="display:inline"/>
+	</td>
+</tr>
+
+<tr>
+	<td>
+		<img src="#CHEMIN{css/images/kdepetit/mail.png}">
+		<input type="checkbox" name="mail" [checked="(#ENV{mail})"] />&nbsp;&nbsp;<label><:outilsarticle:mail:></label>
+	</td>
+	<td>
+		<input type="checkbox" name="mailint" [checked="(#ENV{mailint})"] />&nbsp;&nbsp;<label><:outilsarticle:intitule:></label>
+		<label for="maildesc"></label>
+		<input type="text" name="maildesc" 	id="maildesc"  value="[(#CONFIG{outils_article/maildesc}|sinon{<:outilsarticle:mail:>})]"  style="display:inline"/>
+	</td>
+</tr>
+
+<tr>
+	<td>
+		<img src="#CHEMIN{css/images/kdepetit/mail.png}">
+		<input type="checkbox" name="recommander" [checked="(#ENV{recommander})"] />&nbsp;&nbsp;<label><:outilsarticle:recommander:></label>
+	</td>
+	<td>
+		<input type="checkbox" name="recommanderint" [checked="(#ENV{recommanderint})"] />&nbsp;&nbsp;<label><:outilsarticle:intitule:></label>
+		<label for="recommanderdesc"></label>
+		<input type="text" name="recommanderdesc" 	id="recommanderdesc"  value="[(#CONFIG{outils_article/recommanderdesc}|sinon{<:outilsarticle:recommander:>})]"  style="display:inline"/>
+	</td>
+</tr>
+
+<tr>
+	<td>
+		<img src="#CHEMIN{css/images/note.png}">
+		<input type="checkbox" name="note" [checked="(#ENV{note})"] />&nbsp;&nbsp;<label><:outilsarticle:notation:></label>
+	</td>
+	<td>
+	<a href="?exec=notation"><:outilsarticle:configuration:></a>
+	</td>
+</tr>
+
+</table> 
+</fieldset>
+
+<fieldset><legend><:outilsarticle:apparence:></legend>
+<table>
+
+<tr>
+	<td>
+	<input type="checkbox" name="barre" [checked="(#ENV{barre})"] />&nbsp;&nbsp;<label><:outilsarticle:barre:></label>
+	</td>
+	<td>
+	<img src="#CHEMIN{css/images/barre.png}">
+	</td>
+</tr>
+<tr>
+	<td>
+	<input type="checkbox" name="boite" [checked="(#ENV{boite})"] />&nbsp;&nbsp;<label><:outilsarticle:boite:></label>
+	</td>
+	<td>
+	<img src="#CHEMIN{css/images/boite.png}">
+	</td>
+</tr>
+<!--
+<tr>
+	<td>
+	<input type="checkbox" name="pyramide" [checked="(#ENV{pyramide})"] />&nbsp;&nbsp;<label><:outilsarticle:pyramide:></label>
+	</td>
+	<td>
+	<img src="#CHEMIN{css/images/pyramide.png}">
+	</td>
+</tr>
+<tr>
+	<td>
+	<input type="checkbox" name="rond" [checked="(#ENV{rond})"] />&nbsp;&nbsp;<label><:outilsarticle:rond:></label>
+	</td>
+	<td>
+	<img src="#CHEMIN{css/images/rond.png}">
+	</td>
+</tr>
+-->
+</table>
+
+</fieldset>
+
+<fieldset><legend><:outilsarticle:icone:></legend>
+<table>
+<tr>
+<td><img src="#CHEMIN{css/images/basepetit/jakub.png}"></td>
+<td><:outilsarticle:jakukdesc:></td>
+</tr>
+
+<tr>
+<td><img src="#CHEMIN{css/images/kdepetit/kde.png}"></td>
+<td><:outilsarticle:kde:></td>
+</tr>
+
+<tr>
+<td><img src="#CHEMIN{css/images/crystal/crystal.png}"></td>
+<td><:outilsarticle:crystal:></td>
+</tr>
+
+<tr>
+<td><img src="#CHEMIN{css/images/gos/gos.png}"></td>
+<td><:outilsarticle:gos:></td>
+</tr>
+
+<tr>
+<td><img src="#CHEMIN{css/images/osx/osx2.png}"></td>
+<td><:outilsarticle:osx:></td>
+</tr>
+
+
+
+</table>
+
+
+<label for="theme"><:outilsarticle:theme:></label>
+<select name="theme" id="theme">
+	<option value="#CHEMIN{css/images/basepetit}" [(#CONFIG{outils_article/theme}|=={"#CHEMIN{css/images/basepetit}"}|?{selected="selected",})]><:outilsarticle:basepetit:></option>	
+	<option value="#CHEMIN{css/images/basegrand}" [(#CONFIG{outils_article/theme}|=={"#CHEMIN{css/images/basegrand}"}|?{selected="selected",})]><:outilsarticle:basegrand:></option>
+	<option value="#CHEMIN{css/images/kdepetit}" [(#CONFIG{outils_article/theme}|=={"#CHEMIN{css/images/kdepetit}"}|?{selected="selected",})]><:outilsarticle:kdepetit:></option>
+	<option value="#CHEMIN{css/images/kdegrand}" [(#CONFIG{outils_article/theme}|=={"#CHEMIN{css/images/kdegrand}"}|?{selected="selected",})]><:outilsarticle:kdegrand:></option>
+	<option value="#CHEMIN{css/images/crystal}" [(#CONFIG{outils_article/theme}|=={"#CHEMIN{css/images/crystal}"}|?{selected="selected",})]><:outilsarticle:crystal:></option>
+	<option value="#CHEMIN{css/images/gos}" [(#CONFIG{outils_article/theme}|=={"#CHEMIN{css/images/gos}"}|?{selected="selected",})]><:outilsarticle:gos:></option>
+	<option value="#CHEMIN{css/images/osx}" [(#CONFIG{outils_article/theme}|=={"#CHEMIN{css/images/osx}"}|?{selected="selected",})]><:outilsarticle:osx:></option>
+</select>
+</fieldset>
+
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
