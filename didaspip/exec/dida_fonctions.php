@@ -15,6 +15,41 @@ function rmdirr($dossier) {
 //********************************************************
 // Taille d'un dossier
 //*********************************************************
+function dirsize($DirectoryPath) {
+ 
+    // I reccomend using a normalize_path function here
+    // to make sure $DirectoryPath contains an ending slash
+    // (-> http://www.jonasjohn.de/snippets/php/normalize-path.htm)
+ 
+    // To display a good looking size you can use a readable_filesize
+    // function.
+    // (-> http://www.jonasjohn.de/snippets/php/readable-filesize.htm)
+ 
+    $Size = 0;
+ 
+    $Dir = opendir($DirectoryPath);
+ 
+    if (!$Dir)
+        return -1;
+ 
+    while (($File = readdir($Dir)) !== false) {
+ 
+        // Skip file pointers
+        if ($File[0] == '.') continue; 
+ 
+        // Go recursive down, or add the file size
+        if (is_dir($DirectoryPath . $File))     
+		
+            $Size += dirsize($DirectoryPath . $File . DIRECTORY_SEPARATOR);
+        else 
+            $Size += filesize($DirectoryPath . $File);
+    }
+ 
+    closedir($Dir);
+ 
+    return round($Size/1024);
+}
+/* Obsolete
 function dirsize($dossier) {
 	$dir = opendir($dossier);
 	$size = 0;
@@ -30,6 +65,7 @@ function dirsize($dossier) {
 	closedir($dir);
 	return $size;
 }
+*/
 
 //********************************************************
 // Eliminer les caractères interdits
@@ -155,10 +191,11 @@ function recuplistecours (&$listecours) {
 		$titre=$cours;
 		$categ="";
 		//trouver la taille du cours
-		@$taille=round((dirsize(_DIR_IMG."didapages/".$cours)+dirsize("cours/".$cours))/1024); //cette ligne pose problème !
+		$taille=dirsize(_DIR_IMG."didapages/".$cours.DIRECTORY_SEPARATOR);
 		//enregistrer le nom plus titre
 		array_push($listecours,array ($cours,$titre,$categ,$taille));
-		}}
+		}
+	}
 	closedir($dir);
 }
 
