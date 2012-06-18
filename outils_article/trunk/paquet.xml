@@ -17,4 +17,9 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 	<menu nom="configurer_outils_article" titre="outilsarticle:titre" parent="menu_configuration" icone="outilsarticle-16.png" />
+	<utilise id='article_pdf' />
+	<utilise id="enviar_email" />
+	<utilise id="imprimir_documento" />
+	<utilise id="boutonstexte" />
+	<utilise id="notation" />
 </paquet>
