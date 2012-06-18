@@ -19,10 +19,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function inc_spipmotion_recuperer_logo($id_document,$seconde=2){
 	spip_log("SPIPMOTION : recuperation d un logo du document $id_document","spipmotion");
+	/**
+	 * Pas d'id_document, on retourne false
+	 */
 	if(!intval($id_document)){
 		return false;
 	}
-
+	/**
+	 * Le script de génération de vignette n'est pas là, on retourne false
+	 */
+	if($GLOBALS['meta']['spipmotion_spipmotion_vignette_sh_casse'] == 'oui'){
+		spip_log('Erreur : le scrip de génération de vignette n\'est pas dispo','spipmotion');
+		return false;
+	}
 	include_spip('inc/documents');
 	include_spip('inc/filtres_images_mini');
 	$retour = 0;

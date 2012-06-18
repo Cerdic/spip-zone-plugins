@@ -192,7 +192,43 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			ecrire_meta('spipmotion_avfilters',serialize($data['spipmotion_avfilters']),'','spipmotion_metas');
 
 			ecrire_meta('spipmotion_compiler',serialize($data['spipmotion_compiler']),'','spipmotion_metas');
+			
+			/**
+			 * On regarde si spipmotion.sh est utilisable
+			 */
+			$spipmotion_infos_sh = exec($spipmotion_sh.' --help',$retour_spipmotion_sh,$int_spipmotion_sh);
+			spip_log($retour_spipmotion_sh,'spipmotion');
+			if(!empty($retour_spipmotion_sh)){
+				$info = $retour_spipmotion_sh[1];
+				preg_match('/SPIPmotion v([0-9a-z].*)/s',$info,$infos);
+				$data['spipmotion_spipmotion_sh']['spipmotion_sh'] = true;
+				$data['spipmotion_spipmotion_sh']['chemin'] = $spipmotion_sh;
+				$data['spipmotion_spipmotion_sh']['version'] = $infos[1];
+				ecrire_meta('spipmotion_spipmotion_sh',serialize($data['spipmotion_spipmotion_sh']),'','spipmotion_metas');
+			}
 
+			/**
+			 * On regarde si spipmotion_vignettes.sh est utilisable
+			 */
+			if($GLOBALS['spipmotion_metas']['spipmotion_safe_mode'] == 'oui'){
+				$spipmotion_sh_vignettes = $GLOBALS['spipmotion_metas']['spipmotion_safe_mode_exec_dir'].'/spipmotion_vignettes.sh'; 
+			}else{
+				$spipmotion_sh_vignettes = find_in_path('script_bash/spipmotion_vignettes.sh');
+			}
+			$spipmotion_sh_vignettes_infos = exec($spipmotion_sh_vignettes.' --help',$retour_spipmotion_sh_vignettes,$int_spipmotion_sh_vignettes);
+			if(!empty($retour_spipmotion_sh_vignettes)){
+				$info = $retour_spipmotion_sh_vignettes[0];
+				preg_match('/SPIPmotion vignette v([0-9a-z].*)/s',$info,$infos);
+				$data['spipmotion_spipmotion_sh_vignettes']['spipmotion_sh_vignettes'] = true;
+				$data['spipmotion_spipmotion_sh_vignettes']['chemin'] = $spipmotion_sh_vignettes;
+				$data['spipmotion_spipmotion_sh_vignettes']['version'] = $infos[1];
+				ecrire_meta('spipmotion_spipmotion_sh_vignettes',serialize($data['spipmotion_spipmotion_sh_vignettes']),'','spipmotion_metas');
+			}else{
+				$data['spipmotion_spipmotion_sh_vignettes']['spipmotion_sh_vignettes'] = false;
+				if(strlen($spipmotion_sh_vignettes))
+					$data['spipmotion_spipmotion_sh_vignettes']['chemin'] = $spipmotion_sh_vignettes;
+				ecrire_meta('spipmotion_spipmotion_sh_vignettes',serialize($data['spipmotion_spipmotion_sh_vignettes']),'','spipmotion_metas');
+			}
 			/**
 			 * On regarde si ffmpeg2theora est installé
 			 * http://v2v.cc/~j/ffmpeg2theora/
@@ -254,6 +290,8 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 		}
 	}else{
 		$data = array();
+		$data['spipmotion_spipmotion_sh'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_spipmotion_sh']);
+		$data['spipmotion_spipmotion_sh_vignettes'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_spipmotion_sh_vignettes']);
 		$data['spipmotion_compiler'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_compiler']);
 		$data['spipmotion_formats'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_formats']);
 		$data['spipmotion_codecs'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_codecs']);

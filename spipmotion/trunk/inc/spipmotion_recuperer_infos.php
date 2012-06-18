@@ -94,8 +94,8 @@ function inc_spipmotion_recuperer_infos($id_document){
 	}
 
 	if(count($infos) > 0){
-		include_spip('inc/modifier');
-		revision_document($id_document, $infos);
+		include_spip('action/editer_document');
+		document_modifier($id_document, $infos);
 	}
 	return true;
 }

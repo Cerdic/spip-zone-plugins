@@ -18,7 +18,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function inc_spipmotion_mediainfo_dist($chemin,$id_document,$only_cover=false){
 	$infos = array();
 	if(file_exists($chemin)){
-		$metadatas = shell_exec("mediainfo -f --Output=XML $chemin");
+		ob_start();
+		passthru("mediainfo -f --Output=XML $chemin");
+		$metadatas=ob_get_contents();
+		ob_end_clean();
 		include_spip('inc/xml');
 		$arbre = spip_xml_parse($metadatas);
 		spip_xml_match_nodes(",^track type,",$arbre, $tracks);

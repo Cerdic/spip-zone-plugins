@@ -38,10 +38,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param boolean $notif : On notifie ou pas?
  */
 function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
-	include_spip('inc/config');
 	spip_log('SPIPmotion : Vérification des binaires','spipmotion');
 	$erreurs = array();
-	
+	include_spip('inc/config');
 	/**
 	 * On vérifie que safe_mode soit activé ou pas
 	 */
@@ -140,8 +139,6 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 			$spipmotion_vignette_sh = find_in_path('script_bash/spipmotion_vignette.sh');
 		}
 		exec($spipmotion_sh." --help",$retour_spipmotionsh,$retour_spipmotionsh_int);
-		spip_log($retour_spipmotionsh_int,'spipmotion');
-		spip_log($retour_spipmotionsh,'spipmotion');
 		if($retour_spipmotionsh_int != 0){
 			ecrire_config('spipmotion_spipmotionsh_casse', 'oui');
 			$erreurs[] = 'spipmotion.sh';
@@ -171,22 +168,25 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 		}else{
 			exec($spipmotion_sh." --info -version",$retour_ffmpeg,$retour_int_ffmpeg);
 			if($retour_int_ffmpeg != 0){
-				ecrire_config('spipmotion_casse', 'oui');
+				ecrire_config('ffmpeg_casse', 'oui');
 				$erreurs[] = 'ffmpeg';
 			}else{
 				if($GLOBALS['meta']['spipmotion_casse'] == 'oui'){
-					effacer_config('spipmotion_casse');
+					effacer_config('ffmpeg_casse');
 				}
 			}
 		}
 	}
-
-	if(count($erreurs) > 0){
+	/**
+	 * On ne met spipmotion cassé que si on n'a pas ffmpeg ou spipmotion.sh ou ffmpeg2theora
+	 * Les autres restent facultatifs
+	 */
+	if(in_array('ffmpeg',$erreurs) OR in_array('spipmotion.sh',$erreurs) OR in_array('ffmpeg2theora',$erreurs)){
 		ecrire_config('spipmotion_casse', 'oui');
 	}else{
 		effacer_config('spipmotion_casse');
 	}
-	spip_log($erreurs,'test');
+
 	if($notif){
 		if ($notifications = charger_fonction('notifications', 'inc')) {
 			$notifications('spipmotion_verifier_binaires', 1,
