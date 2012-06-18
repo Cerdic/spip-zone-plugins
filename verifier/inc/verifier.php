@@ -54,10 +54,10 @@ function inc_verifier_dist($valeur, $type, $options=null, &$valeur_normalisee=nu
 function verifier_lister_disponibles($repertoire='verifier'){
 	static $verifications = array();
 
-	if (is_null($verifications[$repertoire])){
+	if (!isset($verifications[$repertoire])) {
 		$verifications[$repertoire] = array();
 		$liste = find_all_in_path("$repertoire/", '.+[.]yaml$');
-		
+
 		if (count($liste)){
 			foreach ($liste as $fichier=>$chemin){
 				$type = preg_replace(',[.]yaml$,i', '', $fichier);
@@ -67,13 +67,13 @@ function verifier_lister_disponibles($repertoire='verifier'){
 					and (
 						is_array($verif = verifier_charger_infos($type, $repertoire))
 					)
-				){
+				) {
 					$verifications[$repertoire][$type] = $verif;
 				}
 			}
 		}
 	}
-	
+
 	return $verifications[$repertoire];
 }
 
@@ -94,9 +94,9 @@ function verifier_charger_infos($type_verif, $repertoire='verifier'){
 	$fichier = find_in_path("$repertoire/$type_verif.yaml");
 	$verif = yaml_decode_file($fichier);
 	if (is_array($verif)){
-		$verif['titre'] = $verif['titre'] ? _T_ou_typo($verif['titre']) : $type_verif;
-		$verif['description'] = $verif['description'] ? _T_ou_typo($verif['description']) : '';
-		$verif['icone'] = $verif['icone'] ? find_in_path($verif['icone']) : '';
+		$verif['titre']       = (isset($verif['titre'])       and $verif['titre'])       ? _T_ou_typo($verif['titre']) : $type_verif;
+		$verif['description'] = (isset($verif['description']) and $verif['description']) ? _T_ou_typo($verif['description']) : '';
+		$verif['icone']       = (isset($verif['icone'])       and $verif['icone'])       ? _T_ou_typo($verif['icone']) : '';
 	}
 	return $verif;
 }
