@@ -583,7 +583,10 @@ function espacer($texte, $taille = 0) {
 // tabule a gauche chaque ligne du nombre de tabulations indiquees
 // + on enleve les espaces sur les lignes vides
 function fabrique_tabulations($texte, $nb_tabulations) {
-	$tab = str_pad("\t", $nb_tabulations);
+	$tab = "";
+	if ($nb_tabulations) {
+		$tab = str_pad("\t", $nb_tabulations);
+	}
 	$texte = explode("\n", $texte);
 	foreach ($texte as $c => $ligne) {
 		$l = ltrim(ltrim($ligne), "\t");
