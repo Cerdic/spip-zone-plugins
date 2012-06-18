@@ -4,8 +4,8 @@
  * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
  *
  * Auteurs :
- * Quentin Drouet (kent1)
- * 2008-2011 - Distribué sous licence GNU/GPL
+ * kent1 (http://www.kent1.info - kent1@arscenic.info)
+ * 2008-2012 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -25,7 +25,7 @@ function action_spipmotion_ffmpeg_infos_forcer_dist(){
 	suivre_invalideur("1");
 
 	if(_request('redirect')){
-		$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
+		$redirect = parametre_url(str_replace('&amp;','&',urldecode(_request('redirect'))),'maj_infos','ok','&');
 		redirige_par_entete($redirect);
 	}else{
 		redirige_par_entete(parametre_url(self(),'maj_infos','ok','&'));
