@@ -34,5 +34,21 @@ function saisie_nom2name($nom) {
 	return $premier . '[' . $nom . ']';
 }
 
+/**
+ * Balise beurk #GLOBALS{debut_intertitre}
+ * qui retourne la globale PHP du même nom si elle existe
+ *
+ * @param array $p
+ * 		Pile au niveau de la balise
+ * @return array
+ * 		Pile complétée du code php de la balise.
+**/
+function balise_GLOBALS_dist($p) {
+	$p->interdire_scripts = false; // le contenu vient de #SET, donc il est de confiance
+	if (function_exists('balise_ENV'))
+		return balise_ENV($p, '$GLOBALS');
+	else
+		return balise_ENV_dist($p, '$GLOBALS');
+}
 
 ?>
