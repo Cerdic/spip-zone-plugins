@@ -1,36 +1,66 @@
 <h1 class="grostitre"><:spipmotion:titre_page_ffmpeg_infos:></h1>
+#SET{ffmpeg_infos,#REM|infos_ffmpeg}
 #BOITE_OUVRIR
-[<img src="(#CHEMIN{images/ffmpeg.png})" alt="" style="float:right;margin:10px" />]
-<div>
-	<BOUCLE_version(POUR){tableau #REM|infos_ffmpeg|table_valeur{spipmotion_compiler}}>
-	<B_array>
-	<BOUCLE_array(CONDITION){si #VALEUR|is_array|oui}>
-		<B_compiler>
-		[(#BOITE_OUVRIR{[(#VAL{spipmotion:info_compiler_#CLE}|_T)],'simple'})]
-		<ul class="liste-items">
-		<BOUCLE_compiler(POUR){tableau #_version:VALEUR}>
-			<li class="item">[(#CLE|is_numeric|non)[(#VAL{spipmotion:info_compiler_#CLE}|_T)] : ][(#VALEUR|?{[(#VALEUR|=={1}|?{<:item_oui:>,#VALEUR})],<:item_non:>})]</li>
-		</BOUCLE_compiler>
-		</ul>
-		#BOITE_FERMER
-		</B_compiler>
-	</BOUCLE_array>
-	</B_array>
+<div style="clear:both">
+	<BOUCLE_sispipmotion_sh(CONDITION){si #GET{ffmpeg_infos}|table_valeur{spipmotion_spipmotion_sh}|table_valeur{spipmotion_sh}|oui}>
+	[(#BOITE_OUVRIR{<:spipmotion:spipmotion_sh_install:>,'simple'})]
+	<ul class="liste-items">
+	<BOUCLE_spipmotion_sh(POUR){tableau #GET{ffmpeg_infos}|table_valeur{spipmotion_spipmotion_sh}}>
+		[(#CLE|=={spipmotion_sh}|non)
+			<li class="item">[(#VAL{spipmotion:info_spipmotion_sh_#CLE}|_T)] [(#VALEUR)]</li>
+		]
+	</BOUCLE_spipmotion_sh>
+	</ul>
+	#BOITE_FERMER
+	</BOUCLE_sispipmotion_sh>
+	
+	<BOUCLE_sispipmotion_vignettes_sh(CONDITION){si #GET{ffmpeg_infos}|table_valeur{spipmotion_spipmotion_sh_vignettes}|table_valeur{spipmotion_sh_vignettes}|oui}>
+	[(#BOITE_OUVRIR{<:spipmotion:spipmotion_sh_vignettes_install:>,'simple'})]
+	<ul class="liste-items">
+	<BOUCLE_spipmotion_sh_vignettes(POUR){tableau #GET{ffmpeg_infos}|table_valeur{spipmotion_spipmotion_sh_vignettes}}>
+		[(#CLE|=={spipmotion_sh_vignette}|non)
+			<li class="item">[(#VAL{spipmotion:info_spipmotion_sh_#CLE}|_T)] [(#VALEUR)]</li>
+		]
+	</BOUCLE_spipmotion_sh_vignettes>
+	</ul>
+	#BOITE_FERMER
+	</BOUCLE_sispipmotion_vignettes_sh>
+	</B_sispipmotion_vignettes_sh>
+	[(#BOITE_OUVRIR{<:spipmotion:spipmotion_sh_vignettes_install:>,'error'})]
+	<p class="explication"><:spipmotion:message_erreur_spipmotion_sh_vignettes:></p>
+	<ul class="liste-items">
+	<BOUCLE_spipmotion_sh_vignettes_false(POUR){tableau #GET{ffmpeg_infos}|table_valeur{spipmotion_spipmotion_sh_vignettes}}>
+		[(#CLE|=={spipmotion_sh_vignettes}|non)
+			<li class="item">[(#VAL{spipmotion:info_spipmotion_sh_#CLE}|_T)] [(#VALEUR)]</li>
+		]
+	</BOUCLE_spipmotion_sh_vignettes_false>
+	</ul>
+	#BOITE_FERMER
+	</B_spipmotion_sh_vignettes_false>
+	<//B_sispipmotion_vignettes_sh>
+	
+	<B_version>
+	[(#BOITE_OUVRIR{<:spipmotion:ffmpeg_install:>,'simple'})]
+	<ul class="liste-items">
+	<BOUCLE_version(POUR){tableau #GET{ffmpeg_infos}|table_valeur{spipmotion_compiler}}>
+	[(#VALEUR|is_array|non)
 	[(#CLE|!={build_date}|oui)
 		[(#CLE|!={build_date_timestamp}|oui)
-			<p>[(#VAL{spipmotion:info_compiler_#CLE}|_T)] [(#VALEUR|?{[(#VALEUR|=={1}|?{<:item_oui:>,#VALEUR})],<:item_non:>})]</p>
+			<li class="item">[(#VAL{spipmotion:info_compiler_#CLE}|_T)] [(#VALEUR|?{[(#VALEUR|=={1}|?{<:item_oui:>,#VALEUR})],<:item_non:>})]</li>
 		]
 		[(#CLE|=={build_date_timestamp}|oui)
-			<p>[(#VAL{spipmotion:info_compiler_#CLE}|_T)] [(#VALEUR|normaliser_date|affdate)]</p>
+			<li class="item">[(#VAL{spipmotion:info_compiler_#CLE}|_T)] [(#VALEUR|normaliser_date|affdate)]</li>
 		]
-	]
-	<//B_array>
+	]]
 	</BOUCLE_version>
+	</ul>
+	#BOITE_FERMER
+	</B_version>
 
-	<BOUCLE_siffmpeg2theora(CONDITION){si #REM|infos_ffmpeg|table_valeur{spipmotion_ffmpeg2theora}|table_valeur{ffmpeg2theora}|oui}>
+	<BOUCLE_siffmpeg2theora(CONDITION){si #GET{ffmpeg_infos}|table_valeur{spipmotion_ffmpeg2theora}|table_valeur{ffmpeg2theora}|oui}>
 	[(#BOITE_OUVRIR{<:spipmotion:ffmpeg2theora_install:>,'simple'})]
 	<ul class="liste-items">
-	<BOUCLE_ffmpeg2theora(POUR){tableau #REM|infos_ffmpeg|table_valeur{spipmotion_ffmpeg2theora}}>
+	<BOUCLE_ffmpeg2theora(POUR){tableau #GET{ffmpeg_infos}|table_valeur{spipmotion_ffmpeg2theora}}>
 		[(#CLE|=={ffmpeg2theora}|non)
 			<li class="item">[(#VAL{spipmotion:info_ffmpeg2theora_#CLE}|_T)] [(#VALEUR)]</li>
 		]
@@ -39,10 +69,10 @@
 	#BOITE_FERMER
 	</BOUCLE_siffmpeg2theora>
 	
-	<BOUCLE_siflvtool2(CONDITION){si #REM|infos_ffmpeg|table_valeur{spipmotion_flvtool2}|table_valeur{flvtool2}|oui}>
+	<BOUCLE_siflvtool2(CONDITION){si #GET{ffmpeg_infos}|table_valeur{spipmotion_flvtool2}|table_valeur{flvtool2}|oui}>
 	[(#BOITE_OUVRIR{<:spipmotion:flvtool2_install:>,'simple'})]
 	<ul class="liste-items">
-	<BOUCLE_flvtool2(POUR){tableau #REM|infos_ffmpeg|table_valeur{spipmotion_flvtool2}}>
+	<BOUCLE_flvtool2(POUR){tableau #GET{ffmpeg_infos}|table_valeur{spipmotion_flvtool2}}>
 		[(#CLE|=={flvtool2}|non)
 			<li class="item">[(#VAL{spipmotion:info_flvtool2_#CLE}|_T)] [(#VALEUR)]</li>
 		]
@@ -51,10 +81,10 @@
 	#BOITE_FERMER
 	</BOUCLE_siflvtool2>
 	
-	<BOUCLE_siflvtoolplus(CONDITION){si #REM|infos_ffmpeg|table_valeur{spipmotion_flvtoolplus}|table_valeur{flvtoolplus}|oui}>
+	<BOUCLE_siflvtoolplus(CONDITION){si #GET{ffmpeg_infos}|table_valeur{spipmotion_flvtoolplus}|table_valeur{flvtoolplus}|oui}>
 	[(#BOITE_OUVRIR{<:spipmotion:flvtoolplus_install:>,'simple'})]
 	<ul class="liste-items">
-	<BOUCLE_flvtoolplus(POUR){tableau #REM|infos_ffmpeg|table_valeur{spipmotion_flvtoolplus}}>
+	<BOUCLE_flvtoolplus(POUR){tableau #GET{ffmpeg_infos}|table_valeur{spipmotion_flvtoolplus}}>
 		[(#CLE|=={flvtoolplus}|non)
 			<li class="item">[(#VAL{spipmotion:info_flvtoolplus_#CLE}|_T)] [(#VALEUR)]</li>
 		]
@@ -63,10 +93,10 @@
 	#BOITE_FERMER
 	</BOUCLE_siflvtoolplus>
 	
-	<BOUCLE_simediainfo(CONDITION){si #REM|infos_ffmpeg|table_valeur{spipmotion_mediainfo}|table_valeur{mediainfo}|oui}>
+	<BOUCLE_simediainfo(CONDITION){si #GET{ffmpeg_infos}|table_valeur{spipmotion_mediainfo}|table_valeur{mediainfo}|oui}>
 	[(#BOITE_OUVRIR{<:spipmotion:mediainfo_install:>,'simple'})]
 	<ul class="liste-items">
-	<BOUCLE_mediainfo(POUR){tableau #REM|infos_ffmpeg|table_valeur{spipmotion_mediainfo}}>
+	<BOUCLE_mediainfo(POUR){tableau #GET{ffmpeg_infos}|table_valeur{spipmotion_mediainfo}}>
 		[(#CLE|=={mediainfo}|non)
 			<li class="item">[(#VAL{spipmotion:info_mediainfo_#CLE}|_T)] [(#VALEUR)]</li>
 		]
@@ -76,8 +106,39 @@
 	</BOUCLE_simediainfo>
 </div>
 #BOITE_FERMER
-<B_formats>
+
+[(#REM)
+
+	Les infos spécifiques de FFmpeg
+	
+]
 #BOITE_OUVRIR
+[<img src="(#CHEMIN{images/ffmpeg.png})" alt="" style="float:right;margin:10px" />]
+<BOUCLE_version_ffmpeg(POUR){tableau #GET{ffmpeg_infos}|table_valeur{spipmotion_compiler}}>
+	<B_array_ffmpeg>
+	<BOUCLE_array_ffmpeg(CONDITION){si #VALEUR|is_array|oui}>
+		<B_compiler_ffmpeg>
+		[(#BOITE_OUVRIR{[(#VAL{spipmotion:info_compiler_#CLE}|_T)],'simple'})]
+		<ul class="liste-items">
+		<BOUCLE_compiler_ffmpeg(POUR){tableau #_version_ffmpeg:VALEUR}>
+			<li class="item">[(#CLE|is_numeric|non)[(#VAL{spipmotion:info_compiler_#CLE}|_T)] : ][(#VALEUR|?{[(#VALEUR|=={1}|?{<:item_oui:>,#VALEUR})],<:item_non:>})]</li>
+		</BOUCLE_compiler_ffmpeg>
+		</ul>
+		#BOITE_FERMER
+		</B_compiler_ffmpeg>
+	</BOUCLE_array_ffmpeg>
+	</B_array_ffmpeg>
+	[(#CLE|!={build_date}|oui)
+		[(#CLE|!={build_date_timestamp}|oui)
+			<p>[(#VAL{spipmotion:info_compiler_#CLE}|_T)] [(#VALEUR|?{[(#VALEUR|=={1}|?{<:item_oui:>,#VALEUR})],<:item_non:>})]</p>
+		]
+		[(#CLE|=={build_date_timestamp}|oui)
+			<p>[(#VAL{spipmotion:info_compiler_#CLE}|_T)] [(#VALEUR|normaliser_date|affdate)]</p>
+		]
+	]
+	<//B_array_ffmpeg>
+	</BOUCLE_version_ffmpeg>
+<B_formats>
 <div class="liste-objets spipmotion ffmpeg_formats" id="ffmpeg_formats">
 <table class="spip liste">
 	<caption><strong class="caption"><:spipmotion:caption_formats_geres:></strong></caption>
@@ -90,7 +151,7 @@
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_formats(POUR){tableau #REM|infos_ffmpeg|table_valeur{spipmotion_formats}}>
+<BOUCLE_formats(POUR){tableau #GET{ffmpeg_infos}|table_valeur{spipmotion_formats}}>
 	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 		<td class="shortname">#CLE</td>
 		<td class="fullname">[(#VALEUR|table_valeur{fullname})]</td>
@@ -101,12 +162,10 @@
 	</tbody>
 </table>
 </div>
-#BOITE_FERMER
 </B_formats>
 <//B_formats>
 
 <B_codecs>
-#BOITE_OUVRIR
 <div class="liste-objets spipmotion ffmpeg_codecs" id="ffmpeg_codecs">
 <table class="spip liste">
 	<caption><strong class="caption"><:spipmotion:caption_codecs_geres:></strong></caption>
@@ -120,7 +179,7 @@
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_codecs(POUR){tableau #REM|infos_ffmpeg|table_valeur{spipmotion_codecs}}>
+<BOUCLE_codecs(POUR){tableau #GET{ffmpeg_infos}|table_valeur{spipmotion_codecs}}>
 	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 		<td class="shortname">#CLE</td>
 		<td class="fullname">[(#VALEUR|table_valeur{fullname})]</td>
@@ -132,12 +191,10 @@
 	</tbody>
 </table>
 </div>
-#BOITE_FERMER
 </B_codecs>
 <//B_codecs>
 
 <B_avfilter>
-#BOITE_OUVRIR
 <div class="liste-objets spipmotion ffmpeg_avfilter" id="ffmpeg_avfilter">
 <table class="spip liste">
 	<caption><strong class="caption"><:spipmotion:caption_avfilter_geres:></strong></caption>
@@ -148,7 +205,7 @@
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_avfilter(POUR){tableau #REM|infos_ffmpeg|table_valeur{spipmotion_avfilters}}>
+<BOUCLE_avfilter(POUR){tableau #GET{ffmpeg_infos}|table_valeur{spipmotion_avfilters}}>
 	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 		<td class="shortname">#CLE</td>
 		<td class="description">[(#VALEUR|table_valeur{description})]</td>
@@ -157,6 +214,6 @@
 	</tbody>
 </table>
 </div>
-#BOITE_FERMER
 </B_avfilter>
 <//B_avfilter>
+#BOITE_FERMER

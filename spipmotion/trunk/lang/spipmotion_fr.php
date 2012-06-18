@@ -53,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'extensions_video' => 'Formats vidéos',
 
 	// F
+	'ffmpeg_install' => 'FFMpeg sur votre serveur :',
 	'ffmpeg2theora_install' => 'FFMpeg2Theora sur votre serveur :',
 	'flvtool2_install' => 'FLVtool2 sur votre serveur :',
 	'flvtoolplus_install' => 'FLVtool++ sur votre serveur :',
@@ -125,6 +126,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_relancer_erreurs' => 'Relancer tous les encodages en erreur',
 	'info_rotation' => 'Angle de rotation :',
 	'info_selectionner_fichier_encoder' => 'Vous pouvez encoder un des fichiers suivants',
+	'info_spipmotion_sh_chemin' => 'Chemin du script :',
+	'info_spipmotion_sh_version' => 'Version du script :',
 	'info_statut_encode_en_cours' => 'En cours',
 	'info_statut_encode_erreur' => 'En erreur',
 	'info_statut_encode_non' => 'En attente',
@@ -182,6 +185,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_encodage_sujet_termine' => 'Encodage terminé',
 	'message_encodage_unique_erreur' => 'Le document @id_document@ n\'a pas été correctement encodé en @extension@.',
 	'message_encodage_unique_oui' => 'Le document @id_document@ a été correctement encodé en @extension@.',
+	'message_erreur_spipmotion_sh_vignettes' => 'Le script de génération de vignettes automatique n\'est pas accesssible. Cette fonctionnalité est donc désactivée.',
 	'message_texte_binaire_manquant' => 'Un logiciel nécessaire n\'est pas disponible sur votre serveur :',
 	'message_texte_binaires_informer' => 'Veuillez en informer votre administrateur.',
 	'message_texte_binaires_informer_exec' => 'Votre configuration de PHP ne permet pas d\'exécuter d\'applications.',
@@ -206,6 +210,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'select_all' => 'Tout sélectionner',
 	'spipmotion_boite' => 'Configuration de SPIPmotion',
 	'spipmotion_descriptif' => 'Ce plugin permet d"encoder à la volée des documents audios et vidéos.',
+	'spipmotion_sh_install' => 'Script d\'encodage de SPIPmotion :',
+	'spipmotion_sh_vignettes_install' => 'Script de création de vignettes :',
 
 	// T
 	'th_avfilter_description' => 'Description',

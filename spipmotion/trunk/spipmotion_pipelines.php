@@ -218,6 +218,8 @@ function spipmotion_post_edition($flux){
 			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && !preg_match('/-encoded/',$document['fichier']) OR !$id_doc){
 				include_spip('action/spipmotion_ajouter_file_encodage');
 				spipmotion_genere_file($id_document,$document['objet'],$document['id_objet']);
+				$encodage_direct = charger_fonction('spipmotion_encodage_direct','inc');
+				$encodage_direct();
 			}
 
 			/**
@@ -288,10 +290,12 @@ function spipmotion_post_spipmotion_encodage($flux){
 				);
 				$infos_origine = $recuperer_id3(get_spip_doc($origine['fichier']));
 				
-				$images = array();
-				foreach($infos_origine as $info_origine => $info){
-					if(preg_match('/cover/',$info_origine)){
-						$images[] = $info;
+				if($extension_nouveau == 'mp3'){
+					$images = array();
+					foreach($infos_origine as $info_origine => $info){
+						if(preg_match('/cover/',$info_origine)){
+							$images[] = $info;
+						}
 					}
 				}
 				$infos_encode = array_intersect_key($infos_origine,$infos_write);

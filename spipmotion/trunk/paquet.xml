@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/spipmotion.png"
-	schema="0.8.2"
+	schema="0.8.0"
 	documentation="http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/spipmotion/"
 >	
 
@@ -40,8 +40,6 @@
 	<utilise nom="podcast" />
 	<utilise nom="fonctions_images" compatibilite="];[" />
 
-	<menu nom="spipmotion_file" titre="spipmotion:titre_page_file" parent="naviguer" icone="images/spipmotion-24.png" action="spipmotion_file" />
-	<menu nom="bando_spipmotion_file" titre="spipmotion:titre_page_file" parent="bando_edition" icone="images/spipmotion-16.png" action="spipmotion_file" />
-	<menu nom="ffmpeg_infos" titre="spipmotion:titre_page_ffmpeg_infos" parent="configuration" icone="images/spipmotion-24.png" action="ffmpeg_infos" />
-	<menu nom="bando_ffmpeg_infos" titre="spipmotion:titre_page_ffmpeg_infos" parent="bando_configuration" icone="images/spipmotion-16.png" action="ffmpeg_infos" />
+	<menu nom="pipmotion_file" titre="spipmotion:titre_page_file" parent="menu_edition" icone="images/spipmotion-16.png" action="spipmotion_file" />
+	<menu nom="ffmpeg_install" titre="spipmotion:titre_page_ffmpeg_infos" parent="menu_configuration" icone="images/spipmotion-16.png" action="ffmpeg_infos" />
 </paquet>
