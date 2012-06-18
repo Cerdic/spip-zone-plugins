@@ -16,11 +16,12 @@ function saisies_lister_par_identifiant($contenu, $avec_conteneur=true){
 	
 	if (is_array($contenu)){
 		foreach ($contenu as $ligne){
-			if (is_array($ligne)){
-				if (array_key_exists('saisie', $ligne) and (!is_array($ligne['saisies']) or $avec_conteneur)){
+			if (is_array($ligne)) {
+				$enfants_presents = (isset($ligne['saisies']) and is_array($ligne['saisies']));
+				if (array_key_exists('saisie', $ligne) and (!$enfants_presents or $avec_conteneur)){
 					$saisies[$ligne['identifiant']] = $ligne;
 				}
-				if (is_array($ligne['saisies'])){
+				if ($enfants_presents) {
 					$saisies = array_merge($saisies, saisies_lister_par_identifiant($ligne['saisies']));
 				}
 			}

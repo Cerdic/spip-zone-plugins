@@ -64,6 +64,8 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 function formulaires_construire_formulaire_verifier($identifiant, $formulaire_initial=array(), $options=array()){
 	include_spip('inc/saisies');
 	$erreurs = array();
+	// l'une ou l'autre sera presente
+	$configurer_saisie = $enregistrer_saisie = '';
 
 	// Pas d'erreur si l'on ne demande rien
 	if (!($nom_ou_id = $configurer_saisie  = _request('configurer_saisie')
@@ -164,7 +166,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 		foreach ($liste_verifications as $type_verif => $verif){
 			$saisie_liste_verif['options']['datas'][$type_verif] = $verif['titre'];
 			// Si le type de vérif a des options, on ajoute un fieldset
-			if ($verif['options'] and is_array($verif['options'])){
+			if (isset($verif['options']) and $verif['options'] and is_array($verif['options'])){
 				$groupe = array(
 					'saisie' => 'fieldset',
 					'options' => array(
@@ -408,7 +410,7 @@ function formidable_generer_saisie_configurable($saisie, $env){
 		$saisie['options']['readonly'] = 'oui';
 		
 		// On vire les sous-saisies s'il y en a
-		if ($saisie['saisies'] and is_array($saisie['saisies'])){
+		if (isset($saisie['saisies']) and $saisie['saisies'] and is_array($saisie['saisies'])){
 			$nb_champs_masques = count(saisies_lister_champs($saisie['saisies']));
 			$saisie['saisies'] = array(
 				array(

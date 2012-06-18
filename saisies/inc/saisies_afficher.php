@@ -137,7 +137,7 @@ function saisies_generer_html($champ, $env=array()){
 		preg_match_all('/\[([\w]+)\]/', $separe[2], $index);
 		// On va chercher au fond du tableau
 		foreach($index[1] as $cle){
-			$contexte['valeur'] = $contexte['valeur'][$cle];
+			$contexte['valeur'] = isset($contexte['valeur'][$cle]) ? $contexte['valeur'][$cle] : null;
 		}
 	}
 	// Sinon la valeur est juste celle du nom

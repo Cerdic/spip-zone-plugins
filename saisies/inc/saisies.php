@@ -80,10 +80,13 @@ function saisies_chercher($saisies, $id_ou_nom_ou_chemin, $retourner_chemin=fals
 
 			foreach($saisies as $cle => $saisie){
 				$chemin = array($cle);
+				// notre saisie est la bonne ?
 				if ($nom == ($id ? $saisie['identifiant'] : $saisie['options']['nom'])) {
 					return $retourner_chemin ? $chemin : $saisie;
-				} elseif ($saisie['saisies'] and is_array($saisie['saisies']) and ($retour = saisies_chercher($saisie['saisies'], $nom, $retourner_chemin))) {
-					return $retourner_chemin ? array_merge($chemin, array('saisies'), $retour) : $retour;
+				// sinon a telle des enfants ? et si c'est le cas, cherchons dedans
+				} elseif (isset($saisie['saisies']) and is_array($saisie['saisies']) and $saisie['saisies']
+					and ($retour = saisies_chercher($saisie['saisies'], $nom, $retourner_chemin))) {
+						return $retourner_chemin ? array_merge($chemin, array('saisies'), $retour) : $retour;
 				}
 
 			}
