@@ -1,9 +1,6 @@
 <?php 
-
 function balise_URL_ARTICLE_ABSOLU_dist($p) {
-	
 	include_spip('balise/url_');
-	
 	// Cas particulier des boucles (SYNDIC_ARTICLES)
 	if ($p->type_requete == 'syndic_articles') {
 		$p->code = "vider_url(".champ_sql('url', $p).")";
@@ -15,13 +12,9 @@ function balise_URL_ARTICLE_ABSOLU_dist($p) {
 			$id_article = calculer_balise('id_article', $p)->code;
 		}
 
-		$p->code = "calculer_URL_SECTEUR(sinon(sql_getfetsel('id_secteur','spip_articles','id_article = \"'.".$id_article.".'\"',null,null,1),0)).".generer_generer_url('article', $p);
+		$p->code = "calculer_URL_SECTEUR(sinon(sql_getfetsel('id_secteur','spip_articles','id_article=' . intval($id_article)))).".generer_generer_url('article', $p);
 	}
-	
 	$p->interdire_scripts = false;
 	return $p;
-	
 }
-
-
 ?>

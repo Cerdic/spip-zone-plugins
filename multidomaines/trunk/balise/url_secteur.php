@@ -6,10 +6,7 @@ function balise_URL_SECTEUR_dist($p) {
 	{
 		$value = calculer_balise('id_rubrique', $p)->code;
 	}
-	
     $p->code = 'calculer_URL_SECTEUR('.$value.')';  
 	return $p;
 }
-
-
 ?>

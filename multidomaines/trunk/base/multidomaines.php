@@ -7,6 +7,7 @@ function multidomaines_declarer_champs_extras($champs = array()){
 		'options' => array(
 			'nom' => 'host', 
 			'label' => _T('multidomaines:label_url'),
+			'explication' => _T('multidomaines:precisions_editer_url'),
 			'sql' => "text NOT NULL DEFAULT ''",
 			'defaut' => '',// Valeur par défaut
 			'restrictions'=>array(	'voir' 		=> array('auteur'=>''),//Tout le monde peut voir
