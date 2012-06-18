@@ -269,7 +269,7 @@ function saisies_inserer_html($saisie, $insertion, $ou='fin'){
 			$insertion . (isset($saisie['options']['inserer_debut']) ? $saisie['options']['inserer_debut'] : '');
 	} elseif ($ou == 'fin') {
 		$saisie['options']['inserer_fin'] =
-			(isset($saisie['options']['inserer_debut']) ? $saisie['options']['inserer_fin'] : '') . $insertion;
+			(isset($saisie['options']['inserer_fin']) ? $saisie['options']['inserer_fin'] : '') . $insertion;
 	}
 	
 	return $saisie;
