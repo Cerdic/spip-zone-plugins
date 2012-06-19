@@ -21,7 +21,9 @@ function inc_encodage_dist($source,$attente,$format=''){
 	 * On vérifie que l'on n'a pas déjà une version dans le format souhaité
 	 * Si oui on la supprime avant de la réencoder
 	 */
-	if($id_document = sql_getfetsel('id_document','spip_documents','id_orig='.intval($source['id_document']).' AND extension='.sql_quote($format))){
+	 if($id_document = sql_getfetsel('document.id_document',
+									'spip_documents as document LEFT JOIN spip_documents_liens as lien ON document.id_document=lien.id_document',
+									'lien.id_objet='.intval($source['id_document']).' AND lien.objet='.sql_quote("document").' AND document.extension='.sql_quote($format).' AND document.mode='.sql_quote("conversion"))){
 		spip_log("Il faut supprimer $id_document",'spipmotion');
 		$v = sql_fetsel("id_document,id_vignette,fichier","spip_documents","id_document=".intval($id_document));
 
@@ -80,6 +82,7 @@ function encodage($source,$doc_attente){
 	if($GLOBALS['meta']['spipmotion_casse'] == 'oui')
 		return;
 
+	include_spip('inc/config');
 	$spipmotion_compiler = @unserialize($GLOBALS['spipmotion_metas']['spipmotion_compiler']);
 	$ffmpeg_version = $spipmotion_compiler['ffmpeg_version'] ? $spipmotion_compiler['ffmpeg_version'] : '0.7';
 	$rep_dest = sous_repertoire(_DIR_VAR, 'cache-spipmotion');
@@ -90,6 +93,7 @@ function encodage($source,$doc_attente){
 	$id_objet = $attente['id_objet'];
 
 	$encodeur = lire_config("spipmotion/encodeur_$extension_attente",'');
+	$chemin_ffmpeg = (strlen(lire_config('spipmotion/chemin')) > 0) ? "--p ".lire_config('spipmotion/chemin') : '';
 	if($source['rotation'] == '90'){
 		$encodeur = 'ffmpeg';
 	}
@@ -288,7 +292,7 @@ function encodage($source,$doc_attente){
 		/**
 		 * Encodage du son
 		 */
-		$encodage = $spipmotion_sh.' --e '.$chemin.' --s '.$fichier_temp.' '.$acodec.' '.$audiobitrate_ffmpeg.' '.$audiofreq.' '.$audiochannels_ffmpeg.' -f --p '.lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg").' --log '.$fichier_log;
+		$encodage = $spipmotion_sh.' --e '.$chemin.' --s '.$fichier_temp.' '.$acodec.' '.$audiobitrate_ffmpeg.' '.$audiofreq.' '.$audiochannels_ffmpeg.' -f '.$chemin_ffmpeg.' --log '.$fichier_log;
 		spip_log("$encodage",'spipmotion');
 		$lancement_encodage = exec($encodage,$retour,$retour_int);
 		spip_log($retour_int,'spipmotion');
@@ -372,12 +376,12 @@ function encodage($source,$doc_attente){
 		 * ffmpeg2theora lui a besoin d'une estimation de bitrate
 		 */
 		if(intval($source['videobitrate']) && (intval($source['videobitrate']) < (lire_config("spipmotion/bitrate_$extension_attente","448"))*1000)){
-			if($encodeur == 'ffmpeg2theora'){
+			if(($encodeur == 'ffmpeg2theora') OR ($vcodec == '--vcodec libtheora')){
 				$vbitrate = $source['videobitrate'];
 			}else{
 				$vbitrate = null;
+				$infos_sup_normal .= ' -sameq ';
 			}
-			$infos_sup_normal .= ' -sameq ';
 			$bitrate = "--bitrate ".$source['videobitrate'];
 		}else{
 			$vbitrate = lire_config("spipmotion/bitrate_$extension_attente","448");
@@ -419,10 +423,14 @@ function encodage($source,$doc_attente){
 				$infos_sup_normal .= ' -refs 2';
 			}
 			$infos_sup_normal .= " -aspect $width_finale:$height_finale";
-			if($format)
-				$infos_sup_normal .= ' -f '.$format;
+			//if($format)
+			//	$infos_sup_normal .= ' -f '.$format;
 		}
-
+		if(($vcodec == "--vcodec libtheora") && ($encodeur != 'ffmpeg2theora')){
+			if(in_array('--enable-pthreads',$configuration)){
+				$infos_sup_normal .= " -threads 0 ";
+			}
+		}
 		$fichier_texte = "$dossier$query.txt";
 
 		ecrire_fichier($fichier_texte,$texte);
@@ -454,9 +462,10 @@ function encodage($source,$doc_attente){
 					$rotation = "-vf transpose=1";
 				}
 				$infos_sup_normal_1 = "--params_supp \"-an $preset_1 -passlogfile $pass_log_file $infos_sup_normal $rotation\"";
-				$encodage_1 = $spipmotion_sh." --force true --pass 1 $video_size --e $chemin $vcodec $fps $bitrate $infos_sup_normal_1 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." --log $fichier_log";
+				$encodage_1 = $spipmotion_sh." --force true --pass 1 $video_size --e $chemin $vcodec $fps $bitrate $infos_sup_normal_1 --s $fichier_temp $chemin_ffmpeg --log $fichier_log";
 				spip_log($encodage_1,'spipmotion');
 				$lancement_encodage_1 = exec($encodage_1,$retour_1,$retour_int_1);
+				spip_log($retour_1,'spipmotion');
 				/**
 				 * La première passe est ok 
 				 * On lance la seconde
@@ -473,11 +482,12 @@ function encodage($source,$doc_attente){
 					$metas_orig = @unserialize($source['metas']);
 					
 					$infos_sup_normal_2 = '--params_supp \'-passlogfile '.$pass_log_file.' '.$infos_sup_normal.' '.$rotation.' '.$metadatas.'\'';
-					$fichier_log = "$fichier_log-pass2.log";
-					$encodage = $spipmotion_sh." --force true --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2  --fpre $fichier_texte --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." --log $fichier_log";
+					$encodage = $spipmotion_sh." --force true --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2  --fpre $fichier_texte --s $fichier_temp $chemin_ffmpeg --log $fichier_log";
 					spip_log($encodage,'spipmotion');
 					$lancement_encodage = exec($encodage,$retour,$retour_int);
+					spip_log($retour,'spipmotion');
 				}else{
+					spip_log('SPIPMOTION Erreur : Le retour de l encodage est revenu en erreur','spipmotion'._LOG_CRITICAL);
 					$retour_int = 1;
 				}
 			}else{
@@ -494,7 +504,7 @@ function encodage($source,$doc_attente){
 				if($infos_sup_normal){
 					$infos_sup_normal = "--params_supp \"$infos_sup_normal\"";
 				}
-				$encodage = $spipmotion_sh." --force true $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate_ffmpeg $audiochannels_ffmpeg $bitrate $infos_sup_normal --s $fichier_temp --fpre $fichier_texte --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." --log $fichier_log";
+				$encodage = $spipmotion_sh." --force true $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate_ffmpeg $audiochannels_ffmpeg $bitrate $infos_sup_normal --s $fichier_temp --fpre $fichier_texte $chemin_ffmpeg --log $fichier_log";
 				spip_log($encodage,'spipmotion');
 				$lancement_encodage = exec($encodage,$retour,$retour_int);
 			}
@@ -514,10 +524,12 @@ function encodage($source,$doc_attente){
 		 * NB : la récupération des infos et du logo est faite automatiquement par
 		 * le pipeline post-edition appelé par l'ajout du document
 		 */
-		$mode = 'document';
+		$mode = 'conversion';
 		spip_log('Ajout du document en base','spipmotion');
-		$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
-		$x = $ajouter_documents($fichier_temp, $fichier_final, $type_doc, $id_objet, $mode, '', $actif,'','','');
+		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
+		$doc = array(array('tmp_name'=>$fichier_temp,'name'=>$fichier_final,'mode'=>$mode));
+		$x = $ajouter_documents('new',$doc, 'document', $source['id_document'], $mode);
+		$x = reset($x);
 		spip_log('le nouveau document est le '.$x,'spipmotion');
 		if(intval($x) > 1){
 			supprimer_fichier($fichier_temp);
@@ -538,9 +550,12 @@ function encodage($source,$doc_attente){
 			if((sql_getfetsel('id_vignette','spip_documents','id_document = '.intval($x)) == 0) && ($source['id_vignette'] > 0)){
 				$vignette = sql_fetsel('fichier,extension','spip_documents','id_document='.intval($source['id_vignette']));
 				$fichier_vignette = get_spip_doc($vignette['fichier']);
-				$string_tmp = basename(get_spip_doc($vignette['fichier'])).'-'.mktime();
-				$nom_vignette = md5($string_tmp).'.'.$vignette['extension'];
-				$x2 = $ajouter_documents($fichier_vignette, $nom_vignette, '', '', 'vignette', $x, $actif,'','','');
+				$vignette = array(array('tmp_name'=>$fichier_vignette,'name'=>$fichier_vignette));
+				$x2 = $ajouter_documents('new', $vignette, '', 0, 'vignette');
+				$id_vignette = reset($x2);
+				if (is_numeric($id_vignette)){
+				  	$source['id_vignette'] = $id_vignette;
+				}
 			}
 			/**
 			 * Champs que l'on souhaite réinjecter depuis l'original ni depuis un ancien encodage
@@ -553,16 +568,12 @@ function encodage($source,$doc_attente){
 				$champs_recup['id_licence'] = 0;
 			if(_DIR_PLUGIN_MEDIAS)
 				$champs_recup['credits'] = '';
+			$champs_recup['id_vignette'] = '';
 				
 			$modifs = array_intersect_key($source, $champs_recup);
 			
-			/**
-			 * On ajoute l'id dur document original id_orig
-			 */
-			$modifs['id_orig'] = $attente['id_document'];
-			
-			include_spip('inc/modifier');
-			revision_document($x, $modifs);
+			include_spip('action/editer_document');
+			document_modifier($x, $modifs);
 			
 			$reussite = 'oui';
 		}else{
@@ -587,23 +598,29 @@ function encodage($source,$doc_attente){
 		sql_updateq("spip_spipmotion_attentes",array('encode'=>'erreur','infos' => serialize($infos_encodage)),"id_spipmotion_attente=".intval($doc_attente));
 	}
 
-	if(file_exists(_DIR_RACINE.$query.'-0.log')){
-		supprimer_fichier(_DIR_RACINE.$query.'-0.log');
-	}
-	if(file_exists($pass_log_file)){
-		supprimer_fichier($pass_log_file);
-	}
-	if(file_exists($pass_log_file.'.mbtree')){
-		supprimer_fichier($pass_log_file.'.mbtree');
-	}
-	if(file_exists(_DIR_RACINE.$query.'.mbtree')){
-		supprimer_fichier(_DIR_RACINE.$query.'.mbtree');
-	}
-	if(file_exists($fichier_temp)){
-		supprimer_fichier($fichier_temp);
-	}
-	if(file_exists(_DIR_RACINE.$query.'-pass')){
-		supprimer_fichier(_DIR_RACINE.$query.'-pass');
+	/**
+	 * On supprime les différents fichiers temporaires qui auraient pu être créés
+	 * si on a une réussite
+	 */
+	if($reussite == 'oui'){
+		if(file_exists(_DIR_RACINE.$query.'-0.log')){
+		//	supprimer_fichier(_DIR_RACINE.$query.'-0.log');
+		}
+		if(file_exists($pass_log_file)){
+		//	supprimer_fichier($pass_log_file);
+		}
+		if(file_exists($pass_log_file.'.mbtree')){
+			supprimer_fichier($pass_log_file.'.mbtree');
+		}
+		if(file_exists(_DIR_RACINE.$query.'.mbtree')){
+			supprimer_fichier(_DIR_RACINE.$query.'.mbtree');
+		}
+		if(file_exists($fichier_temp)){
+			supprimer_fichier($fichier_temp);
+		}
+		if(file_exists(_DIR_RACINE.$query.'-pass')){
+			supprimer_fichier(_DIR_RACINE.$query.'-pass');
+		}
 	}
 	pipeline('post_spipmotion_encodage',
 				array(

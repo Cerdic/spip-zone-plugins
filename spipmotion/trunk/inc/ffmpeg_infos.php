@@ -197,7 +197,6 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			 * On regarde si spipmotion.sh est utilisable
 			 */
 			$spipmotion_infos_sh = exec($spipmotion_sh.' --help',$retour_spipmotion_sh,$int_spipmotion_sh);
-			spip_log($retour_spipmotion_sh,'spipmotion');
 			if(!empty($retour_spipmotion_sh)){
 				$info = $retour_spipmotion_sh[1];
 				preg_match('/SPIPmotion v([0-9a-z].*)/s',$info,$infos);
@@ -211,13 +210,13 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			 * On regarde si spipmotion_vignettes.sh est utilisable
 			 */
 			if($GLOBALS['spipmotion_metas']['spipmotion_safe_mode'] == 'oui'){
-				$spipmotion_sh_vignettes = $GLOBALS['spipmotion_metas']['spipmotion_safe_mode_exec_dir'].'/spipmotion_vignettes.sh'; 
+				$spipmotion_sh_vignettes = $GLOBALS['spipmotion_metas']['spipmotion_safe_mode_exec_dir'].'/spipmotion_vignette.sh'; 
 			}else{
-				$spipmotion_sh_vignettes = find_in_path('script_bash/spipmotion_vignettes.sh');
+				$spipmotion_sh_vignettes = find_in_path('script_bash/spipmotion_vignette.sh');
 			}
 			$spipmotion_sh_vignettes_infos = exec($spipmotion_sh_vignettes.' --help',$retour_spipmotion_sh_vignettes,$int_spipmotion_sh_vignettes);
 			if(!empty($retour_spipmotion_sh_vignettes)){
-				$info = $retour_spipmotion_sh_vignettes[0];
+				$info = $retour_spipmotion_sh_vignettes[2];
 				preg_match('/SPIPmotion vignette v([0-9a-z].*)/s',$info,$infos);
 				$data['spipmotion_spipmotion_sh_vignettes']['spipmotion_sh_vignettes'] = true;
 				$data['spipmotion_spipmotion_sh_vignettes']['chemin'] = $spipmotion_sh_vignettes;

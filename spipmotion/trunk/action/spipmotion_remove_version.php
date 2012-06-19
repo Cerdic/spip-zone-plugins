@@ -1,10 +1,10 @@
 <?php
 /**
  * SPIPmotion
- * Suppression d'une version spécifique ou de toutes les versions d'un document encodé
+ * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
  *
  * Auteurs :
- * kent1 (kent1@arscenic.info)
+ * kent1 (http://www.kent1.info - kent1@arscenic.info)
  * 2008-2012 - Distribué sous licence GNU/GPL
  *
  */

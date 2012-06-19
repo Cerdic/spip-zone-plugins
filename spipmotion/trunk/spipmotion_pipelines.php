@@ -24,69 +24,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return $flux Le contexte du pipeline complété
  */
 function spipmotion_document_desc_actions($flux){
-	$id_document = $flux['args']['id_document'];
-	$infos_doc = sql_fetsel('*','spip_documents','id_document='.intval($id_document));
-	include_spip('inc/config');
-	if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && (($video = in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_videos',array()))) OR ($son = in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_audios',array()))))){
-		include_spip('inc/documents');
-		if(file_exists(get_spip_doc($infos_doc['fichier']))){
-			include_spip('inc/autoriser');
-			if(autoriser('modifier','document',$id_document)){
-				$redirect = ancre_url(self(),"doc".$id_document);
-				if($video){
-					$url_action_logo = generer_action_auteur('spipmotion_logo', "0/article/$id_document", $redirect);
-					$texte_logo = _T('spipmotion:recuperer_logo');
-					$flux['data'] .= " | <a href='$url_action_logo'>$texte_logo</a>";
-					if(extension_loaded('ffmpeg')){
-						$texte2 = _T('spipmotion:recuperer_infos');
-						$action2 = generer_action_auteur('spipmotion_infos', "0/article/$id_document", $redirect);
-						$flux['data'] .= " | <a href='$action2'>$texte2</a>";
-					}
-				}
-	
-				$sorties_audio = lire_config('spipmotion/fichiers_audios_sortie',array());
-				$sorties_audio = array_diff($sorties_audio,array($infos_doc['extension']));
-				if(
-					($infos_doc['mode'] != 'conversion')
-					&& in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_videos_encodage',array()))){
-					$statut_encodage = sql_getfetsel('encode','spip_spipmotion_attentes','id_document='.intval($id_document).' AND encode IN ("en_cours","non")');
-					if($statut_encodage == 'en_cours'){
-						$action3 = '';
-						$texte3 = _T('spipmotion:info_document_encodage_en_cours');
-					}elseif ($statut_encodage == 'non'){
-						$action3 = '';
-						$texte3 = _T('spipmotion:document_dans_file_attente');
-					}else{
-						$texte3 = _T('spipmotion:encoder_video');
-						$action3 = generer_action_auteur('spipmotion_ajouter_file_encodage', "0/article/$id_document", $redirect);
-					}
-				}else if(
-					($infos_doc['mode'] != 'conversion')
-					&& in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_audios_encodage',array()))
-					&& (count($sorties_audio)>0)
-				){
-					$statut_encodage = sql_getfetsel('encode','spip_spipmotion_attentes','id_document='.intval($id_document).' AND encode IN ("en_cours","non")');
-					if($statut_encodage == 'en_cours'){
-						$action3 = false;
-						$texte3 = _T('spipmotion:document_dans_file_attente');
-					}elseif ($statut_encodage == 'non'){
-						$action3 = false;
-						$texte3 = _T('spipmotion:document_dans_file_attente');
-					}else{
-						$texte3 = _T('spipmotion:encoder_son');
-						$action3 = generer_action_auteur('spipmotion_ajouter_file_encodage', "0/article/$id_document", $redirect);
-					}
-				}
-				if($action3)
-					$flux['data'] .= " | <a href='$action3'>$texte3</a>";
-				else if($texte3)
-					$flux['data'] .= " | $texte3";
-			}
-		}else{
-			$texte = _T('spipmotion:erreur_document_plus_disponible');
-			$flux['data'] .= " | $texte";
-		}
-	}
+	$flux['data'] .= recuperer_fond('prive/squelettes/inclure/spipmotion_document_desc_action',$flux['args']);
 	return $flux;
 }
 
@@ -150,24 +88,24 @@ function spipmotion_post_edition($flux){
 				$recuperer_logo = charger_fonction("spipmotion_recuperer_logo","inc");
 				$logo = $recuperer_logo($id_document);
 
-				$invalider = true;
-			}
-			/**
-			 * On l'ajoute dans la file d'attente d'encodage si nécessaire
-			 * Si et seulement si on a l'option d'activée dans la conf
-			 */
-			if(lire_config('spipmotion/encodage_auto') == 'on'){
-				$fichier = basename(get_spip_doc($document['fichier']));
-				$racine = preg_replace('/-encoded-(\d)/','',substr($fichier,0,-(strlen($document['extension'])+1)));
-				$racine = preg_replace('/-encoded-(\d+)/','',$racine);
-				$racine = preg_replace('/-encoded/','',$racine);
-				$id_doc = sql_getfetsel('id_document','spip_documents',"fichier LIKE '%$racine%' AND id_document != $id_document AND id_orig=0");
-				if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && !preg_match('/-encoded/',$document['fichier']) OR !$id_doc){
-					include_spip('action/spipmotion_ajouter_file_encodage');
-					spipmotion_genere_file($id_document,$document['objet'],$document['id_objet']);
-					$encodage_direct = charger_fonction('spipmotion_encodage_direct','inc');
-					$encodage_direct();
+				/**
+				 * On l'ajoute dans la file d'attente d'encodage si nécessaire
+				 * Si et seulement si on a l'option d'activée dans la conf
+				 */
+				if(lire_config('spipmotion/encodage_auto') == 'on'){
+					$fichier = basename(get_spip_doc($document['fichier']));
+					$racine = preg_replace('/-encoded-(\d)/','',substr($fichier,0,-(strlen($document['extension'])+1)));
+					$racine = preg_replace('/-encoded-(\d+)/','',$racine);
+					$racine = preg_replace('/-encoded/','',$racine);
+					$id_doc = sql_getfetsel('id_document','spip_documents',"fichier LIKE '%$racine%' AND id_document != $id_document AND id_orig=0");
+					if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && !preg_match('/-encoded/',$document['fichier']) OR !$id_doc){
+						include_spip('action/spipmotion_ajouter_file_encodage');
+						spipmotion_genere_file($id_document,$document['objet'],$document['id_objet']);
+						$encodage_direct = charger_fonction('spipmotion_encodage_direct','inc');
+						$encodage_direct();
+					}
 				}
+				$invalider = true;
 			}
 			/**
 			 * On invalide le cache de cet élément si nécessaire

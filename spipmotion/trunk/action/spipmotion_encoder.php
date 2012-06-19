@@ -4,8 +4,8 @@
  * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
  *
  * Auteurs :
- * Quentin Drouet (kent1)
- * 2008-2011 - Distribué sous licence GNU/GPL
+ * kent1 (http://www.kent1.info - kent1@arscenic.info)
+ * 2008-2012 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -48,7 +48,6 @@ function action_spipmotion_encoder_dist(){
 	//}
 	$nb_encodages = sql_countsel('spip_spipmotion_attentes', "encode='non'");
 	spip_log('Appel de la fonction d encodage','spipmotion');
-	spip_log("Il y a $nb_encodages document(s) à encoder","spipmotion");
 	$en_cours = sql_fetsel('id_spipmotion_attente,maj','spip_spipmotion_attentes',"encode='en_cours'");
 	
 	/**
@@ -57,6 +56,7 @@ function action_spipmotion_encoder_dist(){
 	if(($nb_encodages>0) && ($GLOBALS['meta']['spipmotion_casse'] != 'oui') && !intval($en_cours['id_spipmotion_attente'])){
 		$ps_ffmpeg = exec('ps -C ffmpeg',$retour,$retour_int);
 		if(($retour_int == 1) && (count($retour) >= 3)){
+			spip_log('Il y a a apparemment trop de processus de ffmpeg en cours, on attend donc','spipmotion');
 			$process = false;
 		}else{
 			$process = true;

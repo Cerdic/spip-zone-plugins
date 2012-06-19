@@ -46,6 +46,9 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=2){
 	include_spip('inc/filtres_images_mini');
 	$retour = 0;
 	$document = sql_fetsel("docs.hasvideo,docs.id_document,docs.fichier,docs.duree,docs.id_vignette,docs.mode", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
+	$vignette_existante = sql_getfetsel('id_document','spip_documents','id_document='.intval($document['id_vignette']));
+	if(!$vignette_existante)
+		$vignette_existante = 'new';
 	$chemin_court = $document['fichier'];
 	$chemin = get_spip_doc($chemin_court);
 	
@@ -96,14 +99,15 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=2){
 							if(intval($original['id_vignette']) > 0){
 								$vignette = sql_getfetsel('fichier','spip_documents','id_document='.intval($original['id_vignette']));
 								$vignette = get_spip_doc($vignette);
-								$x = $ajouter_documents($document['id_vignette']?$document['id_vignette']:'new',
+								$x = $ajouter_documents($vignette_existante,
 												array(array('tmp_name'=>$img_finale,'name'=> $img_finale)),
 								    			'', 0, 'vignette');
 								$x = reset($x);
 								if(intval($x)){
 									$vignette = true;
 									$id_vignette = $x;
-									document_modifier($id_document, array('id_vignette'=>$x));
+									if($document['id_vignette'] != $x)
+										document_modifier($id_document, array('id_vignette'=>$x));
 								}
 							    return $x;
 							}
@@ -113,14 +117,15 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=2){
 								$frame = $frame+50;
 								$retour++;
 							}else if(file_exists($img_finale)){
-								$x = $ajouter_documents($document['id_vignette']?$document['id_vignette']:'new',
+								$x = $ajouter_documents($vignette_existante,
 													array(array('tmp_name'=>$img_finale,'name'=> $img_finale)),
 									    			'', 0, 'vignette');
 								$x = reset($x);
 								if(intval($x)){
 									$vignette = true;
 									$id_vignette = $x;
-									document_modifier($id_document, array('id_vignette'=>$x));
+									if($document['id_vignette'] != $x)
+										document_modifier($id_document, array('id_vignette'=>$x));
 								}
 								unlink($img_finale);
 							}else{
@@ -128,14 +133,15 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=2){
 							}
 						}else{
 							if(file_exists($img_finale)){
-								$x = $ajouter_documents($document['id_vignette']?$document['id_vignette']:'new',
+								$x = $ajouter_documents($vignette_existante,
 													array(array('tmp_name'=>$img_finale,'name'=> $img_finale)),
 									    			'', 0, 'vignette');
 								$x = reset($x);
 								if(intval($x)){
 									$vignette = true;
 									$id_vignette = $x;
-									document_modifier($id_document, array('id_vignette'=>$x));
+									if($document['id_vignette'] != $x)
+										document_modifier($id_document, array('id_vignette'=>$x));
 								}
 							}
 						}
