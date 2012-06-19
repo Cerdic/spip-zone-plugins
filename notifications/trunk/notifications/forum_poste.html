@@ -7,23 +7,30 @@
 ][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
 [[(#NOM_SITE_SPIP|textebrut)]] [<:forum:forum_forum:>][ (#TITRE|nettoyer_titre_email)]
 
-<:form_forum_message_auto:>
-
-[(#ENV{par_auteur})
-][
-(#STATUT|=={publie}|oui)<:forum:forum_ne_repondez_pas:>][
-(#STATUT|=={spam}|oui) (SPAM)][
-(#ENV{url}|url_absolue)]
+[
+(#STATUT|=={spam}|oui) ***SPAM***)]
 
 
 ** #TITRE **[
 (#TEXTE|textebrut)
 ][
 
+[----
+(#ENV{par_auteur})
+]
 #NOM_SITE
 (#ENV{url_site})][
 
+<:forum:info_liens_texte:>&nbsp;:
+(#LIENS)
 ----
-(#LIENS)]
+]
+
+[
+(#STATUT|=={publie}|oui)<:forum:forum_ne_repondez_pas:>][
+(#STATUT|=={prop}|oui)<:notifications:message_a_valider:>][
+(#ENV{url}|url_absolue)]
+
+<:form_forum_message_auto:>
 
 #FILTRE{supprimer_tags|filtrer_entites|trim}
