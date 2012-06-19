@@ -45,26 +45,30 @@ function action_editer_asso_dons()
 		// on modifie les operations comptables associees au don
 		if ($GLOBALS['association_metas']['pc_dons']==$GLOBALS['association_metas']['pc_colis']) { /* si dons et colis sont associes a la meme reference, on modifie une seule operation */
 			association_modifier_operation_comptable($date_don, $argent+$valeur, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:don'),'num'=>$id_don) ) ."->don$id_don] &mdash; ". ($id_adherent?"[$bienfaiteur"."->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_dons'], $journal, $id_don, $id_compte);
-		} else { /* sinon on en modifie deux */
+		} else { // sinon on en modifie deux
+			// modification du don en argent
 			association_modifier_operation_comptable($date_don, $argent, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:don'),'num'=>$id_don) ) ."->don$id_don] &mdash; ". ($id_adherent?"[$bienfaiteur"."->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_dons'], $journal, $id_don, $id_compte);
+			// modification du don en nature
 			$association_imputation = charger_fonction('association_imputation', 'inc');
 			$critere = $association_imputation('pc_colis');
 			$critere .= ($critere?' AND ':'') ."id_journal=$id_don";
-			association_modifier_operation_comptable($date_don, $valeur, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:colis'),'num'=>$id_don) ) ."->don$id_don] &mdash; ". ($id_adherent?"[$bienfaiteur"."->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_colis'], $journal, $id_don, sql_getfetsel('id_compte', 'spip_asso_comptes', $critere) );
+			association_modifier_operation_comptable($date_don, $valeur, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:colis'),'num'=>$id_don) ) ."->don$id_don] &mdash; ". ($id_adherent?"[$bienfaiteur"."->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_colis'], '', $id_don, sql_getfetsel('id_compte', 'spip_asso_comptes', $critere) );
 		}
 		// on modifie les informations relatives au don
 		sql_updateq('spip_asso_dons', $modifs, "id_don=$id_don");
-	} else { /* c'est un ajout */
+	} else { // c'est un ajout
 		// on ajoute les informations relatives au don
 		$id_don = sql_insertq('spip_asso_dons', $modifs);
 		if (!$id_don) { // la suite serait aleatoire sans cette cle...
 			$erreur = _T('asso:erreur_sgbdr');
 		} else { // on ajoute les operations comptables associees au don
-			if ($GLOBALS['association_metas']['pc_dons']==$GLOBALS['association_metas']['pc_colis']) { /* si dos et colis sont associes a la meme reference, on ajoute une seule operation */
+			if ($GLOBALS['association_metas']['pc_dons']==$GLOBALS['association_metas']['pc_colis']) { // si argent et colis sont associes a la meme reference, on ajoute une seule operation
 				association_ajouter_operation_comptable($date_don, $argent+$valeur, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:don'),'num'=>$id_don) ) ."->don$id_don] &mdash; ". ($id_adherent?"[$bienfaiteur"."->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_dons'], $journal, $id_don);
-			} else { /* sinon on en insere deux */
+			} else { // sinon on en insere deux
+				// argent
 				association_ajouter_operation_comptable($date_don, $argent, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:don'),'num'=>$id_don) ) ."->don$id_don] &mdash; ". ($id_adherent?"[$bienfaiteur"."->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_dons'], $journal, $id_don);
-				association_ajouter_operation_comptable($date_don, $valeur, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:colis'),'num'=>$id_don) ) ."->don$id_don] &mdash; ". ($id_adherent?"[$bienfaiteur"."->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_colis'], $journal, $id_don);
+				// colis
+				association_ajouter_operation_comptable($date_don, $valeur, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:colis'),'num'=>$id_don) ) ."->don$id_don] &mdash; ". ($id_adherent?"[$bienfaiteur"."->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_colis'], '', $id_don);
 			}
 		}
 	}

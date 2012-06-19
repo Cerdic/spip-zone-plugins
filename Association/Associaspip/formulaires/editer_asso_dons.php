@@ -19,13 +19,12 @@ include_spip('inc/editer');
 function formulaires_editer_asso_dons_charger_dist($id_don='') {
 	/* cet appel va charger dans $contexte tous les champs de la table spip_asso_dons associes a l'id_don passe en param */
 	$contexte = formulaires_editer_objet_charger('asso_dons', $id_don, '', '',  generer_url_ecrire('dons'), '');
-	/* si c'est une nouvelle operation, on charge la date d'aujourd'hui ainsi que un id_compte et journal nuls */
-	if (!$id_don) {
+	if (!$id_don) { // si c'est une nouvelle operation, on charge la date d'aujourd'hui ainsi que un id_compte et journal nuls
 		$contexte['date_don'] = date('Y-m-d');
 		$id_compte = '';
 		$journal = '';
-	} else { /* sinon on recupere l'id_compte correspondant et le journal dans la table des comptes */
-		$compte = sql_fetsel('id_compte,journal', 'spip_asso_comptes', "imputation='".$GLOBALS['association_metas']['pc_dons']."' AND id_journal='$id_don'");
+	} else { // sinon on recupere l'id_compte correspondant et le journal dans la table des comptes
+		$compte = sql_fetsel('id_compte,journal', 'spip_asso_comptes', "imputation=". sql_quote($GLOBALS['association_metas']['pc_dons']) ." AND id_journal='$id_don'");
 		$journal = $compte['journal'];
 		$id_compte = $compte['id_compte'];
 	}
