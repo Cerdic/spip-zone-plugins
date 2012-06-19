@@ -54,12 +54,14 @@ function action_editer_asso_prets_dist()
     if ($id_pret) { // modification
 	// on modifie les informations relatives au pret
 	sql_updateq('spip_asso_prets', $modifs, "id_pret=$id_pret" );
-	// on modifie l'operation comptable associe a la location meme
+	// on modifie l'operation comptable associee a la location meme
 	association_modifier_operation_comptable(($fiso_retour>$fiso_sortie)?$date_retour:$date_sortie, $montant*($duree?$duree:1), 0, '['. _T('asso:titre_num', array('titre'=>_T('local:pret'),'num'=>$id_pret) ) ."->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur"."->membre$id_emprunteur]":$emprunteur), $GLOBALS['association_metas']['pc_prets'], $journal, $id_pret, $id_compte);
-	// on modifie l'operation comptable associe au depot de caution
-	association_modifier_operation_comptable(($date_caution1, $caution, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:caution'),'num'=>$id_pret) ) ."->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur"."->membre$id_emprunteur]":$emprunteur), $GLOBALS['association_metas']['pc_cautions'], _request('mode_caution1'), $id_pret, _request('id_caution1'));
-	// on modifie l'operation comptable associe au retour de caution
-	association_modifier_operation_comptable(($date_caution0, 0, $caution, '['. _T('asso:titre_num', array('titre'=>_T('local:caution'),'num'=>$id_pret) ) ."->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur"."->membre$id_emprunteur]":$emprunteur), $GLOBALS['association_metas']['pc_cautions'], _request('mode_caution0'), $id_pret, _request('id_caution0'));
+	// on modifie l'opertation comptable associee a la caution
+	$association_imputation = charger_fonction('association_imputation', 'inc');
+	$critere = $association_imputation('pc_cautions');
+	$critere .= ($critere?' AND ':'') ."id_journal=$id_pret";
+	association_modifier_operation_comptable(($date_caution1, $caution, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:caution'),'num'=>$id_pret) ) ."->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur"."->membre$id_emprunteur]":$emprunteur), $GLOBALS['association_metas']['pc_cautions'], _request('mode_caution1'), $id_pret, sql_getfetsel('id_compte', 'spip_asso_comptes', "$critere AND recette>0") ); // depot
+	association_modifier_operation_comptable(($date_caution0, 0, $caution, '['. _T('asso:titre_num', array('titre'=>_T('local:caution'),'num'=>$id_pret) ) ."->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur"."->membre$id_emprunteur]":$emprunteur), $GLOBALS['association_metas']['pc_cautions'], _request('mode_caution0'), $id_pret, sql_getfetsel('id_compte', 'spip_asso_comptes', "$critere AND depense>0") ); // restitution
 	// on met a jour le statut de la ressource
 	$statut_old = sql_getfetsel('statut', 'spip_asso_ressources', "id_ressource=$id_ressource");
 	if (is_numeric($statut_old)) { /* nouveaux statuts numeriques */

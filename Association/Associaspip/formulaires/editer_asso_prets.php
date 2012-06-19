@@ -31,7 +31,7 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='')
 		$montant = $contexte['prix_unitaire'] = $ressource['pu'];
 		$caution = $contexte['prix_caution'] = $ressource['prix_caution'];
 	} else { // sinon on recupere l'id_compte correspondant et le journal dans la table des comptes ainsi que les informations relatives au depot de caution
-		$comptes = sql_fetsel('id_compte,journal,recette', 'spip_asso_comptes', "imputation='". sql_quote($GLOBALS['association_metas']['pc_prets']) ."' AND id_journal='$id_pret'");
+		$comptes = sql_fetsel('id_compte,journal,recette', 'spip_asso_comptes', "imputation=". sql_quote($GLOBALS['association_metas']['pc_prets']) ." AND id_journal='$id_pret'");
 		$id_compte = $comptes['id_compte'];
 		$journal = $comptes['journal'];
 		$montant = $comptes['recette'];
@@ -40,12 +40,8 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='')
 		$contexte['date_sortie'] = substr($contexte['date_sortie'],0,10);
 		$contexte['heure_retour'] = substr($contexte['date_retour'],12,5);
 		$contexte['date_retour'] = substr($contexte['date_retour'],0,10);
-		$caution1 = sql_fetsel('id_compte, journal', 'spip_asso_comptes', "imputation='". sql_quote($GLOBALS['association_metas']['pc_cautions']) ."' AND id_journal='$id_pret' AND date='$contexte[date_caution1]' and recette>0 ");
-		$contexte['mode_caution1'] = $caution1['journal'];
-		$contexte['id_caution1'] = $caution1['id_compte'];
-		$caution0 = sql_fetsel('id_compte, journal', 'spip_asso_comptes', "imputation='". sql_quote($GLOBALS['association_metas']['pc_cautions']) ."' AND id_journal='$id_pret' AND date='$contexte[date_caution0]' and depense>0 ");
-		$contexte['mode_caution0'] = $caution0['journal'];
-		$contexte['id_caution0'] = $caution0['id_compte'];
+		$contexte['mode_caution1'] = sql_getfetsel('journal', 'spip_asso_comptes', "imputation=". sql_quote($GLOBALS['association_metas']['pc_cautions']) ." AND id_journal='$id_pret' AND date='$contexte[date_caution1]' and recette>0 ");
+		$contexte['mode_caution0'] = sql_getfetsel('journal', 'spip_asso_comptes', "imputation=". sql_quote($GLOBALS['association_metas']['pc_cautions']) ." AND id_journal='$id_pret' AND date='$contexte[date_caution0]' and depense>0 ");
 	}
 	/* ajout du journal et du montant qui ne se trouvent pas dans la table asso_prets et ne sont donc pas charges par editer_objet_charger */
 	$contexte['journal'] = $journal;
@@ -56,8 +52,6 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='')
 	$contexte['_hidden'] .= "<input type='hidden' name='id_ressource' value='$contexte[id_ressource]' />";
 	$contexte['_hidden'] .= "<input type='hidden' name='ud' value='$contexte[ud]' />";
 	$contexte['_hidden'] .= "<input type='hidden' name='prix_caution' value='$contexte[prix_caution]' />";
-	$contexte['_hidden'] .= "<input type='hidden' name='id_caution1' value='$contexte[id_caution1]' />";
-	$contexte['_hidden'] .= "<input type='hidden' name='id_caution0' value='$contexte[id_caution0]' />";
 
 	/* si une date est indeterminee, c'est que le champ est vide : on ne preremplit rien  */
 	if ($contexte['date_retour']=='0000-00-00')
