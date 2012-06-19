@@ -12,74 +12,13 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Insertion dans le pipeline editer_contenu_objet
- *
+ * Insertion dans le pipeline document_desc_actions (Mediathèque)
+ * 
  * Affiche les boutons supplémentaires de :
  * - récupération de logo dans le cas d'une vidéo
  * - récupération d'informations spécifiques dans le cas d'une video
  * (Dans le cas d'un son, c'est le plugin getID3 qui s'en charge)
  * - bouton de demande d'encodage / de réencodage du son ou de la vidéo
- *
- * @param array $flux Le contexte du pipeline
- * @return $flux Le contexte du pipeline complété
- */
-function spipmotion_editer_contenu_objet($flux){
-	$type_form = $flux['args']['type'];
-	$id_document = $flux['args']['id'];
-	if(is_array($flux['args']) && (in_array($type_form,array('illustrer_document','case_document','document')))){
-		$document = sql_fetsel("docs.id_document, docs.id_orig, docs.extension,docs.mode,docs.distant, L.vu,L.objet,L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
-		$extension = $document['extension'];
-		$type = $document['objet'];
-		$id = $document['id_objet'];
-		if(in_array($type_form,array('case_document','document'))){
-			if($document['distant'] !== 'oui'){
-				$ajouts = '';
-				if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && in_array($extension,lire_config('spipmotion/fichiers_videos',array()))){
-					if($document['id_orig'] > 0){
-						$ajouts .= '<p>'._T('spipmotion:version_encodee_de',array('id_orig'=>$document['id_orig'])).'</p>';
-					}
-					if(extension_loaded('ffmpeg')){
-						$infos_videos = charger_fonction('spipmotion_infos_videos', 'inc');
-						$ajouts .= $infos_videos($id,$id_document,$type);
-					}
-				}
-				if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && in_array($extension,lire_config('spipmotion/fichiers_audios',array()))){
-					if($document['id_orig'] > 0){
-						$flux['data'] .= '<p>'._T('spipmotion:version_encodee_de',array('id_orig'=>$document['id_orig'])).'</p>';
-					}
-					else{
-						$infos_audios = charger_fonction('spipmotion_infos_audios', 'inc');
-						$ajouts .= $infos_audios($id,$id_document,$type);
-					}
-				}
-				if($type_form == 'case_document'){
-					$flux['data'] .= $ajouts;
-				}else{
-					if(preg_match(",<li [^>]*class=[\"']editer_infos.*>(.*)<\/li>,Uims",$flux['data'],$regs)){
-						$infos_doc = recuperer_fond('prive/prive_infos_video', $contexte=array('id_document'=>$id_document));
-						$flux['data'] = preg_replace(",($regs[1]),Uims","\\1".$infos_doc,$flux['data']);
-					}
-				}
-			}
-		}
-		else if(in_array($type_form,array('illustrer_document'))){
-			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && in_array($extension,lire_config('spipmotion/fichiers_videos',array()))){
-				if(preg_match(",<div [^>]*id=[\"'](formulaire_illustrer_document.*)[\"'].*>(.*)<\/div>,Uims",$flux['data'],$regs)){
-					$redirect = ancre_url(self(),$regs[1]);
-					$url_action = generer_action_auteur('spipmotion_logo', "$id/$type/$id_document", $redirect);
-					$texte = _T('spipmotion:lien_recuperer_logo_fichier');
-					$recuperer_vignette = " | <a href='$url_action'>$texte</a>";
-					$flux['data'] = preg_replace(",(<div [^>]*class=[\"']sourceup.*>(.*)<\/div>),Uims","\\2".$recuperer_vignette,$flux['data']);
-				}
-			}
-		}
-	}
-	return $flux;
-}
-
-/**
- * Insertion dans le pipeline document_desc_actions (Mediathèque)
- * On ajoute un lien pour récupérer le logo et relancer les encodages
  * 
  * @param array $flux Le contexte du pipeline
  * @return $flux Le contexte du pipeline complété
@@ -105,7 +44,7 @@ function spipmotion_document_desc_actions($flux){
 			$sorties_audio = lire_config('spipmotion/fichiers_audios_sortie',array());
 			$sorties_audio = array_diff($sorties_audio,array($infos_doc['extension']));
 			if(
-				($infos_doc['id_orig'] == 0)
+				($infos_doc['mode'] != 'conversion')
 				&& in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_videos_encodage',array()))){
 				$statut_encodage = sql_getfetsel('encode','spip_spipmotion_attentes','id_document='.intval($id_document).' AND encode IN ("en_cours","non")');
 				if($statut_encodage == 'en_cours'){
@@ -119,7 +58,7 @@ function spipmotion_document_desc_actions($flux){
 					$action3 = generer_action_auteur('spipmotion_ajouter_file_encodage', "0/article/$id_document", $redirect);
 				}
 			}else if(
-				($infos_doc['id_orig'] == 0)
+				($infos_doc['mode'] != 'conversion')
 				&& in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_audios_encodage',array()))
 				&& (count($sorties_audio)>0)
 			){
@@ -146,6 +85,7 @@ function spipmotion_document_desc_actions($flux){
 	}
 	return $flux;
 }
+
 /**
  * Pipeline Cron de SPIPmotion (SPIP)
  *
@@ -172,6 +112,7 @@ function spipmotion_taches_generales_cron($taches_generales){
  */
 function spipmotion_post_edition($flux){
 	if(in_array($flux['args']['operation'], array('ajouter_document','document_copier_local'))){
+		include_spip('inc/config');
 		$id_document = $flux['args']['id_objet'];
 
 		/**
@@ -209,19 +150,21 @@ function spipmotion_post_edition($flux){
 			}
 			/**
 			 * On l'ajoute dans la file d'attente d'encodage si nécessaire
+			 * Si et seulement si on a l'option d'activée dans la conf
 			 */
-			$fichier = basename(get_spip_doc($document['fichier']));
-			$racine = preg_replace('/-encoded-(\d)/','',substr($fichier,0,-(strlen($document['extension'])+1)));
-			$racine = preg_replace('/-encoded-(\d+)/','',$racine);
-			$racine = preg_replace('/-encoded/','',$racine);
-			$id_doc = sql_getfetsel('id_document','spip_documents',"fichier LIKE '%$racine%' AND id_document != $id_document AND id_orig=0");
-			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && !preg_match('/-encoded/',$document['fichier']) OR !$id_doc){
-				include_spip('action/spipmotion_ajouter_file_encodage');
-				spipmotion_genere_file($id_document,$document['objet'],$document['id_objet']);
-				$encodage_direct = charger_fonction('spipmotion_encodage_direct','inc');
-				$encodage_direct();
+			if(lire_config('spipmotion/encodage_auto') == 'on'){
+				$fichier = basename(get_spip_doc($document['fichier']));
+				$racine = preg_replace('/-encoded-(\d)/','',substr($fichier,0,-(strlen($document['extension'])+1)));
+				$racine = preg_replace('/-encoded-(\d+)/','',$racine);
+				$racine = preg_replace('/-encoded/','',$racine);
+				$id_doc = sql_getfetsel('id_document','spip_documents',"fichier LIKE '%$racine%' AND id_document != $id_document AND id_orig=0");
+				if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && !preg_match('/-encoded/',$document['fichier']) OR !$id_doc){
+					include_spip('action/spipmotion_ajouter_file_encodage');
+					spipmotion_genere_file($id_document,$document['objet'],$document['id_objet']);
+					$encodage_direct = charger_fonction('spipmotion_encodage_direct','inc');
+					$encodage_direct();
+				}
 			}
-
 			/**
 			 * On invalide le cache de cet élément si nécessaire
 			 */
@@ -236,6 +179,15 @@ function spipmotion_post_edition($flux){
 	return $flux;
 }
 
+/**
+ * Insertion dans le pipeline insert_head_css (SPIP)
+ * On ajoute la css de spipmotion dans le public
+ * 
+ * @param string $flux
+ * 		Le contenu du head
+ * @return string $flux
+ * 		Le head modifié
+ */
 function spipmotion_insert_head_css($flux){
 	$flux .= '
 <link rel="stylesheet" href="'.direction_css(find_in_path('spipmotion.css', 'css/', false)).'" type="text/css" media="all" />
@@ -243,6 +195,15 @@ function spipmotion_insert_head_css($flux){
 	return $flux;
 }
 
+/**
+ * Insertion dans le pipeline header_prive (SPIP)
+ * On ajoute la css de spipmotion dans le privé
+ * 
+ * @param string $flux
+ * 		Le contenu du head
+ * @return string $flux
+ * 		Le head modifié
+ */
 function spipmotion_header_prive($flux){
 	$flux .= '
 <link rel="stylesheet" href="'.direction_css(find_in_path('spipmotion.css', 'css/', false)).'" type="text/css" media="all" />
@@ -250,20 +211,32 @@ function spipmotion_header_prive($flux){
 	return $flux;
 }
 
-function spipmotion_jquery_plugins($array){
-	if(!in_array(_DIR_LIB_FLOT.'/jquery.flot.js',$array)){
-		$array[] = _DIR_LIB_FLOT.'/jquery.flot.js';
+/**
+ * Insertion dans le pipeline jquery_plugins (SPIP)
+ * On ajoute deux javascript dans le head
+ * 
+ * @param array $plugins
+ * 		L'array des js insérés
+ * @return array $plugins
+ * 		L'array des js insérés modifié
+ */
+function spipmotion_jquery_plugins($plugins){
+	if(!in_array(_DIR_LIB_FLOT.'/jquery.flot.js',$plugins)){
+		$plugins[] = _DIR_LIB_FLOT.'/jquery.flot.js';
 	}
-	$array[] = 'javascript/spipmotion_flot_extras.js';
-	return $array;
+	$plugins[] = 'javascript/spipmotion_flot_extras.js';
+	return $plugins;
 }
 
 /**
- * Insertion dans le pipeline jqueryui_forcer (plugin jQueryUI)
+ * Insertion dans le pipeline jqueryui_plugin (plugin jQuery UI)
  * 
  * On ajoute le chargement des js pour les tabs (utilisés dans la conf)
- * @param array $plugins Un tableau des scripts déjà demandé au chargement
- * @retune array $plugins Le tableau complété avec les scripts que l'on souhaite 
+ * 
+ * @param array $plugins 
+ * 		Un tableau des scripts déjà demandé au chargement
+ * @retune array $plugins 
+ * 		Le tableau complété avec les scripts que l'on souhaite 
  */
 function spipmotion_jqueryui_plugins($plugins){
 	$plugins[] = "jquery.ui.tabs";
@@ -312,26 +285,15 @@ function spipmotion_post_spipmotion_encodage($flux){
 }
 
 /**
- * Insertion dans le pipeline pre_boucle de SPIP
- * Si on ne passe pas certains critères aux boucles documents dans l'espace public, on n'affiche pas les versions :
- * -* tout
- * -* id_orig
- * -* id_document 
+ * Insertion dans le pipeline formulaire_verifier (SPIP)
+ * 
+ * Vérification de certaines valeurs de la configuration
+ * 
+ * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte du pipeline modifié
  */
-function spipmotion_pre_boucle($boucle){
-	if ($boucle->type_requete == 'documents') {
-		if(!test_espace_prive()){
-			// Restreindre aux mots cles non techniques
-			if (!isset($boucle->modificateur['criteres']['id_orig']) && 
-				!isset($boucle->modificateur['tout']) &&
-				!isset($boucle->modificateur['criteres']['id_document'])) {
-					$boucle->where[]= array("'='", "'id_orig'", "'0'");
-			}		
-		}
-	}
-	return $boucle;
-}
-
 function spipmotion_formulaire_verifier($flux){
 	if($flux['args']['form'] == 'configurer_spipmotion'){
 		foreach($_POST as $key => $val){
@@ -349,6 +311,16 @@ function spipmotion_formulaire_verifier($flux){
 	return $flux;
 }
 
+/**
+ * Insertion dans le pipeline formulaire_traiter (SPIP)
+ * 
+ * Traitement spécifique à la validation du formulaire de configuration
+ * 
+ * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte du pipeline modifié
+ */
 function spipmotion_formulaire_traiter($flux){
 	if($flux['args']['form'] == 'configurer_spipmotion'){
 		$valeurs = $_POST;

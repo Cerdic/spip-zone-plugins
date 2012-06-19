@@ -1,3 +1,4 @@
+[(#AUTORISER{configurer,spipmotion}|sinon_interdire_acces)]
 <h1 class="grostitre"><:spipmotion:titre_page_ffmpeg_infos:></h1>
 #SET{ffmpeg_infos,#REM|infos_ffmpeg}
 #BOITE_OUVRIR
@@ -18,7 +19,7 @@
 	[(#BOITE_OUVRIR{<:spipmotion:spipmotion_sh_vignettes_install:>,'simple'})]
 	<ul class="liste-items">
 	<BOUCLE_spipmotion_sh_vignettes(POUR){tableau #GET{ffmpeg_infos}|table_valeur{spipmotion_spipmotion_sh_vignettes}}>
-		[(#CLE|=={spipmotion_sh_vignette}|non)
+		[(#CLE|=={spipmotion_sh_vignettes}|non)
 			<li class="item">[(#VAL{spipmotion:info_spipmotion_sh_#CLE}|_T)] [(#VALEUR)]</li>
 		]
 	</BOUCLE_spipmotion_sh_vignettes>

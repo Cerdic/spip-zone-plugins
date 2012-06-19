@@ -12,12 +12,10 @@
 	<nom>SPIPMotion</nom>
 	<!-- Encodage de documents multimedia -->
 
-	<auteur lien="http://www.kent1.info">kent1</auteur>
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<pipeline nom="editer_contenu_objet" action="editer_contenu_objet" inclure="spipmotion_pipelines.php" />
-	<pipeline nom="post_edition" action="post_edition" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/spipmotion.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/spipmotion.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/spipmotion.php" />
@@ -26,20 +24,23 @@
 	<pipeline nom="jqueryui_plugins" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="header_prive" inclure="spipmotion_pipelines.php" />
+	<pipeline nom="post_edition" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="post_spipmotion_encodage" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="autoriser" inclure="spipmotion_autoriser.php" />
 	<pipeline nom="document_desc_actions" inclure="spipmotion_pipelines.php" />
-	<pipeline nom="pre_boucle" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="spipmotion_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[1.0;[" />
 	<necessite nom="getid3" compatibilite="[0.2;[" />
+	<necessite nom="medias" compatibilite="[2.7.28;[" />
+	<necessite nom="jqueryui" compatibilite="[1.8.20;[" />
 	<lib nom="flot" lien="http://flot.googlecode.com/files/flot-0.7.zip" />
 
 	<utilise nom="podcast" />
-	<utilise nom="fonctions_images" compatibilite="];[" />
+	<utilise nom="fonctions_images" />
+	<utilise nom="mediaspip_player" />
 
-	<menu nom="pipmotion_file" titre="spipmotion:titre_page_file" parent="menu_edition" icone="images/spipmotion-16.png" action="spipmotion_file" />
-	<menu nom="ffmpeg_install" titre="spipmotion:titre_page_ffmpeg_infos" parent="menu_configuration" icone="images/spipmotion-16.png" action="ffmpeg_infos" />
+	<menu nom="spipmotion_file" titre="spipmotion:titre_page_file" parent="menu_edition" icone="images/spipmotion-16.png" action="spipmotion_file" />
+	<menu nom="ffmpeg_infos" titre="spipmotion:titre_page_ffmpeg_infos" parent="menu_configuration" icone="images/spipmotion-16.png" action="ffmpeg_infos" />
 </paquet>
