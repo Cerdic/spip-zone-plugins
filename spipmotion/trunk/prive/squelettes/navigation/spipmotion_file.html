@@ -1,10 +1,5 @@
 <BOUCLE_autoriser_relancer(CONDITION){si #AUTORISER{configurer}|oui}>
-#BOITE_OUVRIR
-	[<img src="(#CHEMIN{images/spipmotion-24.png})" alt="" class="cadre-icone" width="24" height="24">]
-	<div class="titrem impliable">
-		<:spipmotion:info_reencoder:>
-	</div>
-	<div class="cadre_padding">
+#BOITE_OUVRIR{#CHEMIN_IMAGE{spipmotion-24.png}|balise_img{'',cadre-icone}|concat{#VAL{spipmotion:info_reencoder}|_T|attribut_html},'simple','titrem'}
 		<B_profils_reencoder>
 		<ul class="liste-items">
 			<li class="item">
@@ -17,6 +12,5 @@
 			</BOUCLE_profils_reencoder>
 		</ul>
 		</B_profils_reencoder>
-	</div>
 #BOITE_FERMER
 </BOUCLE_autoriser_relancer>

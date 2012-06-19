@@ -1,7 +1,7 @@
 [(#AUTORISER{configurer,spipmotion}|sinon_interdire_acces)]
 <h1 class="grostitre"><:spipmotion:titre_page_ffmpeg_infos:></h1>
 #SET{ffmpeg_infos,#REM|infos_ffmpeg}
-#BOITE_OUVRIR
+#BOITE_OUVRIR{#CHEMIN_IMAGE{spipmotion-24.png}|balise_img{'',cadre-icone},'simple'}
 <div style="clear:both">
 	<BOUCLE_sispipmotion_sh(CONDITION){si #GET{ffmpeg_infos}|table_valeur{spipmotion_spipmotion_sh}|table_valeur{spipmotion_sh}|oui}>
 	[(#BOITE_OUVRIR{<:spipmotion:spipmotion_sh_install:>,'simple'})]
@@ -113,7 +113,7 @@
 	Les infos spécifiques de FFmpeg
 	
 ]
-#BOITE_OUVRIR
+#BOITE_OUVRIR{#CHEMIN_IMAGE{spipmotion-24.png}|balise_img{'',cadre-icone},'simple'}
 [<img src="(#CHEMIN{images/ffmpeg.png})" alt="" style="float:right;margin:10px" />]
 <BOUCLE_version_ffmpeg(POUR){tableau #GET{ffmpeg_infos}|table_valeur{spipmotion_compiler}}>
 	<B_array_ffmpeg>

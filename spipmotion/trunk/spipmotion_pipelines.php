@@ -71,10 +71,11 @@ function spipmotion_post_edition($flux){
 
 			/**
 			 * Si nous sommes dans un format vidéo que SPIPmotion peut traiter,
-			 * on lui applique certains traitements
+			 * on lui applique certains traitements :
+			 * -* récupération des informations
+			 * -* récupération d'une vignette
 			 * Les fichiers sonores sont gérés par le plugin getID3 pour cela
 			 */
-
 			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && in_array($extension,lire_config('spipmotion/fichiers_videos',array()))){
 				/**
 				 * Récupération des informations de la vidéo
@@ -92,18 +93,11 @@ function spipmotion_post_edition($flux){
 				 * On l'ajoute dans la file d'attente d'encodage si nécessaire
 				 * Si et seulement si on a l'option d'activée dans la conf
 				 */
-				if(lire_config('spipmotion/encodage_auto') == 'on'){
-					$fichier = basename(get_spip_doc($document['fichier']));
-					$racine = preg_replace('/-encoded-(\d)/','',substr($fichier,0,-(strlen($document['extension'])+1)));
-					$racine = preg_replace('/-encoded-(\d+)/','',$racine);
-					$racine = preg_replace('/-encoded/','',$racine);
-					$id_doc = sql_getfetsel('id_document','spip_documents',"fichier LIKE '%$racine%' AND id_document != $id_document AND id_orig=0");
-					if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && !preg_match('/-encoded/',$document['fichier']) OR !$id_doc){
-						include_spip('action/spipmotion_ajouter_file_encodage');
-						spipmotion_genere_file($id_document,$document['objet'],$document['id_objet']);
-						$encodage_direct = charger_fonction('spipmotion_encodage_direct','inc');
-						$encodage_direct();
-					}
+				if((lire_config('spipmotion/encodage_auto') == 'on') && ($mode != 'conversion')){
+					include_spip('action/spipmotion_ajouter_file_encodage');
+					spipmotion_genere_file($id_document,$document['objet'],$document['id_objet']);
+					$encodage_direct = charger_fonction('spipmotion_encodage_direct','inc');
+					$encodage_direct();
 				}
 				$invalider = true;
 			}
@@ -285,7 +279,7 @@ function spipmotion_formulaire_traiter($flux){
 			/**
 			 * On force le rechargement de la page car on a récupéré de nouvelles infos sur ffmpeg
 			 */
-			$flux['data']['redirect'] = self();
+			//$flux['data']['redirect'] = self();
 		}
 	}
 	return $flux;
