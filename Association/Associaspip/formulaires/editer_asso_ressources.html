@@ -27,6 +27,11 @@
 		</fieldset>
 		<fieldset>
 			<legend><:asso:ressources_libelle_location:></legend>
+				<li class="editer_caution">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{caution})</span>]
+					<label for="code"><:asso:ressources_libelle_prix_caution:></label>
+					<input type="[(#HTML5|?{number,text})]" name="prix_caution" [value="(#ENV{prix_caution})"] id="caution"  class="umber float price" />
+				</li>
 				<li class="editer_code">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{code})</span>]
 					<label for="code"><:asso:ressources_libelle_code:></label>

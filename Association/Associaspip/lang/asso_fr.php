@@ -224,8 +224,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_aide_pc_ventes' => "Classe des comptes de produits : FR=701/707/706 (produits fabriqu&eacute;s &agrave; partir de mati&egrave;res premi&egrave;res --601-- / produits achet&eacute;s --607-- / services --et parainages...)",
 	'config_aide_pc_frais2port' => "Classe des comptes de produits : FR=7085 (si enregistr&eacute;s s&eacute;par&eacute;ment --frais accessoires-- car peuvent &ecirc;tre int&eacute;gr&eacute;...) ",
 	'config_aide_pc_activites' => "Classe des comptes de produits : FR=708",
-	'config_aide_pc_ressources' => "Classe des comptes d'immobilisations/charges : FR=210/600? (montant &gt;/&lt; 500&nbsp;&euro;&nsp;; avec/sans amortissement)",
+	'config_aide_pc_ressources' => "Classe des comptes d'immobilisations/charges : FR=210/600? (montant &gt;/&lt; 500&nbsp;&euro;&nbsp;; avec/sans amortissement)",
 	'config_aide_pc_prets' => "Classe des comptes de produits : FR=708",
+	'config_aide_pc_cautions' => "Classe des immobilisations : FR=1651",
 	'config_erreur_pas_de_destination_definie' => 'Pas de destination comptable d&eacute;finie',
 	'config_aide_infofiscal' => 'Dates au format jj/mm/aaaa s&eacute;par&eacute;es par un espace.',
 	'config_aide_recufiscal' => "sigles :
@@ -585,11 +586,13 @@ Commentaire: @commentaire@
 	# Libelle
 	'ressources_libelle_acquisition' => 'Acquisition',
 	'ressources_libelle_location' => 'Location',
+	'ressources_libelle_caution' => 'Cautionnement des pr&ecirc;ts',
 	'ressources_libelle_unite' => 'Unit&eacute;te de temps',
 	'ressources_libelle_code' => 'Code',
 	'ressources_libelle_intitule' => 'Article',
 	'ressources_libelle_date_acquisition' => "Date d'acquisition (AAAA-MM-JJ)",
 	'ressources_libelle_prix_location' => 'Prix de la location (en euros)',
+	'ressources_libelle_prix_caution' => 'Montant de la location (en euros)',
 	'ressources_libelle_statut' => 'Statut',
 	'ressources_libelle_statut_ok' => 'Libre',
 	'ressources_libelle_statut_reserve' => 'R&eacute;serv&eacute;',
@@ -623,6 +626,12 @@ Commentaire: @commentaire@
 	'prets_libelle_duree' => 'Dur&eacute;e',
 	'prets_libelle_num_emprunteur' => "N&deg; de l'emprunteur",
 	'prets_libelle_date_retour' => 'Date de retour',
+	'prets_libelle_caution_hors_compta' => 'Caution non encaiss&eacute;e',
+	'prets_libelle_mode_caution1' => "Mode d'encaissement de la caution",
+	'prets_libelle_mode_caution0' => "Mode de restitution de la caution",
+	'prets_libelle_date_caution1' => 'Date de d&eacute;pot de la caution',
+	'prets_libelle_date_caution0' => 'Date de retrait de la caution',
+	'prets_libelle_caution_hors_compta' => 'Caution non encaiss&eacute;e',
 
 # Exercices Budgetaires
 	# Titres

@@ -617,6 +617,42 @@ Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" es
 					</ul>
 					</fieldset>
 					<fieldset>
+						<legend><:asso:ressources_libelle_caution:></legend>
+					<ul>
+					<B_classeSelect_cautions>
+						<li class="editer_pc_cautions">
+							<label for="pc_cautions"><:asso:config_libelle_num_pc:></label>
+							<em class="explication"><:asso:config_aide_pc_cautions:></em>
+							<select name="pc_cautions" id="pc_cautions">
+								<option value=""><:asso:choisir_ref_compte:></option>
+					<BOUCLE_classeSelect_cautions(ASSO_PLAN){active=1}{fusion classe}{par classe}>
+								<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
+						<BOUCLE_pc_cautions(ASSO_PLAN){classe}{active}{par code}>
+								<option value="#CODE" [(#ENV{pc_cautions}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
+						</BOUCLE_pc_cautions>
+								</optgroup>
+					</BOUCLE_classeSelect_cautions>
+							</select>
+						</li>
+<!--
+						<li class="editer_dc_cautions">
+							<label for="dc_cautions"><:asso:config_libelle_num_dc:></label>
+						<B_dc_cautions>
+							<select name="dc_cautions" id="dc_cautions">
+								<option value=""><:asso:choisir_dest_compte:></option>
+						<BOUCLE_dc_cautions(ASSO_DESTINATION){par intitule}>
+								<option value="#ID_DESTINATION" [(#ENV{dc_cautions}|=={#ID_DESTINATION}|oui) selected="selected"]>#INTITULE</option>
+						</BOUCLE_dc_cautions>
+							</select>
+						</B_dc_cautions>
+							<span class="spip_form_erreur"><:asso:erreur_pas_de_destination:></span>
+						<//B_dc_cautions>
+						</li>
+-->
+					</B_classeSelect_cautions>
+					</ul>
+					</fieldset>
+					<fieldset>
 						<legend><:asso:ressources_libelle_location:></legend>
 					<ul>
 					<B_classeSelect_prets>

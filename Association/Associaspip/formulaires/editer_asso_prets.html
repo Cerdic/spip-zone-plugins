@@ -6,6 +6,29 @@
 		<fieldset>
 			<legend><:asso:prets_entete_reservation:></legend>
 			<ul>
+			[(#ENV{prix_caution}|oui)
+				<li class="editer_date_caution1">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_caution1})</span>]
+					<label for="date_caution1"><:asso:prets_libelle_date_caution1:></label>
+					<input name="date_caution1" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_caution1})"] id="date_caution1" class="date" [(#ENV{date_retour}|oui) readonly="readonly"] />
+				</li>
+				<li class="editer_mode_caution1">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{mode_caution1})</span>]
+					<label for="mode_caution1"><:asso:prets_libelle_mode_caution1:></label>
+					<select name="mode_caution1" id="mode_caution1" [(#ENV{date_retour}|oui) readonly="readonly"]>
+			]
+				<BOUCLE_mode_caution1(ASSO_PLAN) {par code} {active=1}{classe=#META{/association/classe_banques}}{code!=#META{/association/pc_intravirements}}>
+					[(#META{/association/pc_cautions}|oui|et{#ENV{prix_caution}|oui})
+						<option value="#CODE"[(#ENV{mode_caution1}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
+					]
+				</BOUCLE_mode_caution1>
+			[(#ENV{prix_caution}|oui)
+					[(#META{/association/pc_cautions}|non)
+						<option value="" selected="selected"><:asso:prets_libelle_caution_hors_compta:></option>
+					]
+					</select>
+				</li>
+			]
 				<li class="editer_date_sortie">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_sortie})</span>]
 					<label for="date_sortie"><:asso:prets_libelle_date_sortie:></label>
@@ -44,6 +67,29 @@
 				<li class="editer_commentaire_retour">
 					<label for="commentaire_retour"><:asso:libelle_commentaire:></label>
 					<textarea name="commentaire_retour" id="commentaire_retour" rows="3">[(#ENV{commentaire_retour})]</textarea>
+				</li>
+			]
+			[(#ENV{prix_caution}|oui|et{#ENV{id_pret}|oui})
+				<li class="editer_date_caution0">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_caution0})</span>]
+					<label for="date_caution0"><:asso:prets_libelle_date_caution0:></label>
+					<input name="date_caution0" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_caution0})"] id="date_caution0" class="date" [(#ENV{date_cloture}|oui) readonly="readonly"] />
+				</li>
+				<li class="editer_mode_caution0">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{mode_caution0})</span>]
+					<label for="mode_caution0"><:asso:prets_libelle_mode_caution0:></label>
+					<select name="mode_caution0" id="mode_caution1" [(#ENV{date_cloture}|oui) readonly="readonly"]>
+			]
+				<BOUCLE_mode_caution0(ASSO_PLAN) {par code} {active=1}{classe=#META{/association/classe_banques}}{code!=#META{/association/pc_intravirements}}>
+					[(#META{/association/pc_cautions}|oui|et{#ENV{prix_caution}|oui})
+						<option value="#CODE"[(#ENV{mode_caution0}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
+					]
+				</BOUCLE_mode_caution0>
+			[(#ENV{prix_caution}|oui|et{#ENV{id_pret}|oui})
+					[(#META{/association/pc_cautions}|non)
+						<option value="" selected="selected"><:asso:prets_libelle_caution_hors_compta:></option>
+					]
+					</select>
 				</li>
 			]
 			</ul>

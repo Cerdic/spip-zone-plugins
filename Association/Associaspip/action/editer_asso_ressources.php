@@ -27,6 +27,7 @@ function action_editer_asso_ressources()
 	'date_acquisition' => $date_achat,
 	'code' => $code,
 	'intitule' => _request('intitule'),
+	'prix_caution' => association_recupere_montant(_request('prix_caution')),
 	'pu' => association_recupere_montant(_request('pu')),
 	'ud' => _request('pu'),
 	'statut' => $statut,

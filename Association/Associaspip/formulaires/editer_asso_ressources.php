@@ -52,6 +52,8 @@ function formulaires_editer_asso_ressources_charger_dist($id_ressource='')
 		$contexte['pu'] = association_nbrefr($contexte['pu']);
 	if ($contexte['prix_acquisition'])
 		$contexte['prix_acquisition'] = association_nbrefr($contexte['prix_acquisition']);
+	if ($contexte['prix_caution'])
+		$contexte['prix_caution'] = association_nbrefr($contexte['prix_caution']);
 	if (is_numeric($contexte['statut']))
 		$contexte['statut'] = association_nbrefr($contexte['statut']);
 
@@ -80,6 +82,8 @@ function formulaires_editer_asso_ressources_verifier_dist($id_ressource='')
 	/* on verifie que prix de location et d'achat ne soit pas negatifs */
 	if ($erreur = association_verifier_montant(_request('pu')) )
 		$erreurs['pu'] = $erreur;
+	if ($erreur = association_verifier_montant(_request('prix_caution')) )
+		$erreurs['prix_caution'] = $erreur;
 	if ($erreur = association_verifier_montant(_request('prix_acquisition')) )
 		$erreurs['prix_acquisition'] = $erreur;
 	if ($erreur = association_verifier_montant(_request('quantite')) )

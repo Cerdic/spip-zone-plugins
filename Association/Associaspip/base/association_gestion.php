@@ -622,4 +622,14 @@ function association_maj_60038()
 $GLOBALS['association_maj'][60038] = array(
 	array('association_maj_60038')
 );
+
+$GLOBALS['association_maj'][62712] = array(
+// ajout de la caution a la gestion des ressources
+	array('sql_alter', "TABLE spip_asso_ressources ADD prix_caution DECIMAL(19,2) NOT NULL DEFAULT 0 "),
+	array('sql_alter', "TABLE spip_asso_prets ADD prix_caution DECIMAL(19,2) NOT NULL DEFAULT 0 "),
+	array('sql_alter', "TABLE spip_asso_prets ADD date_caution1 DATE NOT NULL DEFAULT '0000-00-00' "),
+	array('sql_alter', "TABLE spip_asso_prets ADD date_caution0 DATE NOT NULL DEFAULT '0000-00-00' "),
+	array('sql_alter', "TABLE spip_asso_prets ADD date_reservation DATETIME DEFAULT NULL "),
+);
+
 ?>

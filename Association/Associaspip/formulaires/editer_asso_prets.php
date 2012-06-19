@@ -19,18 +19,19 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='')
 {
 	/* cet appel va charger dans $contexte tous les champs de la table spip_asso_prets associes a l'id_pret passe en param */
 	$contexte = formulaires_editer_objet_charger('asso_prets', $id_pret, '', '',  generer_url_ecrire('prets'), '');
-	if (!$id_pret) { /* si c'est une nouvelle operation, on charge la date d'aujourd'hui, charge un id_compte et journal null, le statut et le prix de location de base */
+	if (!$id_pret) { // si c'est une nouvelle operation, on charge la date d'aujourd'hui, charge un id_compte et journal null, le statut et les prix de location de base et de caution a deposer
 		$contexte['date_sortie'] = $contexte['date_retour'] = date('Y-m-d');
 		$contexte['date_retour'] = '';
 		$contexte['heure_sortie'] = $contexte['heure_retour'] = date('H:i');
 		$contexte['commentaire_sortie'] = $contexte['commentaire_retour'] = '';
 		$id_compte = $journal = '';
 		$contexte['id_ressource'] = intval(_request('id_ressource'));
-		$ressource = sql_fetsel('pu,ud', 'spip_asso_ressources', "id_ressource=$contexte[id_ressource]");
+		$ressource = sql_fetsel('pu, ud, prix_caution', 'spip_asso_ressources', "id_ressource=$contexte[id_ressource]");
 		$contexte['ud'] = $ressource['ud'];
 		$montant = $contexte['prix_unitaire'] = $ressource['pu'];
-	} else { /* sinon on recupere l'id_compte correspondant et le journal dans la table des comptes */
-		$comptes = sql_fetsel('id_compte,journal,recette', 'spip_asso_comptes', "imputation='".$GLOBALS['association_metas']['pc_prets']."' AND id_journal='$id_pret'");
+		$caution = $contexte['prix_caution'] = $ressource['prix_caution'];
+	} else { // sinon on recupere l'id_compte correspondant et le journal dans la table des comptes ainsi que les informations relatives au depot de caution
+		$comptes = sql_fetsel('id_compte,journal,recette', 'spip_asso_comptes', "imputation='". sql_quote($GLOBALS['association_metas']['pc_prets']) ."' AND id_journal='$id_pret'");
 		$id_compte = $comptes['id_compte'];
 		$journal = $comptes['journal'];
 		$montant = $comptes['recette'];
@@ -39,6 +40,12 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='')
 		$contexte['date_sortie'] = substr($contexte['date_sortie'],0,10);
 		$contexte['heure_retour'] = substr($contexte['date_retour'],12,5);
 		$contexte['date_retour'] = substr($contexte['date_retour'],0,10);
+		$caution1 = sql_fetsel('id_compte, journal', 'spip_asso_comptes', "imputation='". sql_quote($GLOBALS['association_metas']['pc_cautions']) ."' AND id_journal='$id_pret' AND date='$contexte[date_caution1]' and recette>0 ");
+		$contexte['mode_caution1'] = $caution1['journal'];
+		$contexte['id_caution1'] = $caution1['id_compte'];
+		$caution0 = sql_fetsel('id_compte, journal', 'spip_asso_comptes', "imputation='". sql_quote($GLOBALS['association_metas']['pc_cautions']) ."' AND id_journal='$id_pret' AND date='$contexte[date_caution0]' and depense>0 ");
+		$contexte['mode_caution0'] = $caution0['journal'];
+		$contexte['id_caution0'] = $caution0['id_compte'];
 	}
 	/* ajout du journal et du montant qui ne se trouvent pas dans la table asso_prets et ne sont donc pas charges par editer_objet_charger */
 	$contexte['journal'] = $journal;
@@ -48,10 +55,17 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='')
 	$contexte['_hidden'] .= "<input type='hidden' name='id_compte' value='$id_compte' />";
 	$contexte['_hidden'] .= "<input type='hidden' name='id_ressource' value='$contexte[id_ressource]' />";
 	$contexte['_hidden'] .= "<input type='hidden' name='ud' value='$contexte[ud]' />";
+	$contexte['_hidden'] .= "<input type='hidden' name='prix_caution' value='$contexte[prix_caution]' />";
+	$contexte['_hidden'] .= "<input type='hidden' name='id_caution1' value='$contexte[id_caution1]' />";
+	$contexte['_hidden'] .= "<input type='hidden' name='id_caution0' value='$contexte[id_caution0]' />";
 
-	/* si date_retour est indeterminee, c'est que le champ est vide : on ne preremplit rien  */
+	/* si une date est indeterminee, c'est que le champ est vide : on ne preremplit rien  */
 	if ($contexte['date_retour']=='0000-00-00')
 		$contexte['date_retour'] = '';
+	if ($contexte['date_caution1']=='0000-00-00')
+		$contexte['date_caution1'] = '';
+	if ($contexte['date_caution0']=='0000-00-00')
+		$contexte['date_caution0'] = '';
 	/* si id_emprunteur est egal a 0, c'est que le champ est vide, on ne prerempli rien */
 	if (!$contexte['id_emprunteur'])
 		$contexte['id_emprunteur']='';
@@ -107,6 +121,10 @@ function formulaires_editer_asso_prets_verifier_dist($id_pret)
 		$erreurs['date_sortie'] = $erreur;
 	if ($erreur = association_verifier_date(_request('date_retour'), true) )
 		$erreurs['date_retour'] = $erreur;
+	if ($erreur = association_verifier_date(_request('date_caution1'), true) )
+		$erreurs['date_caution1'] = $erreur;
+	if ($erreur = association_verifier_date(_request('date_caution0'), true) )
+		$erreurs['date_caution0'] = $erreur;
 
 	if (count($erreurs)) {
 		$erreurs['message_erreur'] = _T('asso:erreur_titre');

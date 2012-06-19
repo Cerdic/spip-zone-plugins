@@ -54,6 +54,7 @@ rdm */
 		echo '<th>'._T('asso:entete_intitule').'</th>';
 		echo '<th>'._T('asso:entete_code').'</th>';
 		echo '<th>'._T('asso:entete_montant').'</th>';
+		echo '<th>'._T('asso:entete_montant').'</th>';
 		echo '<th colspan="3" class="actions">'._T('asso:entete_action').'</th>';
 		echo "</tr>\n</thead><tbody>";
 		$query = sql_select('*', 'spip_asso_ressources', '','',  'id_ressource') ;
@@ -95,6 +96,7 @@ rdm */
 			echo '<td class="text">'.$data['intitule'].'</td>';
 			echo '<td class="text">'.$data['code'].'</td>';
 			echo '<td class="decimal">'.association_prixfr($data['pu']).'</td>';
+			echo '<td class="decimal">'.association_prixfr($data['prix_caution']).'</td>';
 			echo '<td class="action">', association_bouton('ressources_nav_supprimer', 'suppr-12.gif', 'action_ressources', 'id='.$data['id_ressource']), '</td>';
 			echo '<td class="action">', association_bouton('ressources_nav_editer', 'edit-12.gif', 'edit_ressource', 'id='.$data['id_ressource']), '</td>';
 			echo '<td class="action">', association_bouton('prets_nav_gerer', 'voir-12.png', 'prets', 'id='.$data['id_ressource']), '</td>';
