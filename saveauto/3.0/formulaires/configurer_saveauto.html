@@ -1,15 +1,10 @@
-<!-- autoriser=webmestre -->
-<!-- refus=<:cfg:refus_configuration_webmestre:> -->
-<!-- nom=saveauto -->
-
-#CACHE{0}
 <div class="formulaire_spip formulaire_config formulaire_config_saveauto">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-	<form method="post" action="#SELF">
+	<form method="post" action="#ENV{action}">
 		<div>
-			#ACTION_FORMULAIRE{SELF}
+			#ACTION_FORMULAIRE{#ENV{action}}
 			<ul>
 				<li class="editer_base">
 					<label for="base"><:saveauto:label_nom_base:></label>
@@ -117,8 +112,7 @@
 				</li>
 			</ul>
 			<p class="boutons">
-				<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
-				<input type="submit" name="_cfg_delete" class="reset" value="<:cfg:bouton_effacer:>" />
+				<input type="submit" class="submit" value="<:bouton_valider:>" />
 			</p>
 		</div>
 	</form>
