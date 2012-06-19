@@ -376,7 +376,7 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 			}
 
 			// saisies demandees
-			if (is_array($objet['saisies'])) {
+			if (isset($objet['saisies']) and is_array($objet['saisies'])) {
 				foreach ($objet['saisies'] as $saisie) {
 					fabriquer_fichier('saisies/' . $saisie . '.html', $data);
 					fabriquer_fichier('saisies-vues/' . $saisie . '.html', $data);
