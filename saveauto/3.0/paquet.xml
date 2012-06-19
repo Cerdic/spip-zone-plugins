@@ -4,7 +4,7 @@
 	version="0.8.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
-	logo="img_pack/saveauto-24.png"
+	logo="prive/themes/spip/img_pack/saveauto-24.png"
 	schema="0.1.0"
 	documentation="http://www.spip-contrib.net/Le-plugin-saveauto-sauvegarde"
 >	
@@ -22,6 +22,6 @@
 	<pipeline nom="taches_generales_cron" inclure="saveauto_pipelines.php" />
 
 	<necessite nom="facteur" compatibilite="[1.5.6;[" />
-	<menu nom="configurer_saveauto" titre="saveauto:titre_page_saveauto" parent="menu_configuration" icone="img_pack/sauvegarde-16.png" />
+	<menu nom="configurer_saveauto" titre="saveauto:titre_page_saveauto" parent="menu_configuration" icone="img_pack/saveauto-16.png" />
 	
 </paquet>
