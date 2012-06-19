@@ -12,7 +12,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function infos_ffmpeg(){
-	$infos_ffmpeg = charger_fonction('ffmpeg_infos','inc');
+	$infos_ffmpeg = charger_fonction('spipmotion_ffmpeg_infos','inc');
 	$infos = $infos_ffmpeg();
 	return $infos;
 }

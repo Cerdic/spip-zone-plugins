@@ -11,7 +11,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function inc_encodage_dist($source,$attente,$format=''){
+function inc_spipmotion_encodage_dist($source,$attente,$format=''){
 	if(!is_array($GLOBALS['spipmotion_metas'])){
 		$inc_meta = charger_fonction('meta', 'inc');
 		$inc_meta('spipmotion_metas');

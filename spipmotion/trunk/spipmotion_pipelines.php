@@ -274,7 +274,7 @@ function spipmotion_formulaire_traiter($flux){
 			/**
 			 * On récupère les informations du nouveau ffmpeg
 			 */
-			$ffmpeg_infos = charger_fonction('ffmpeg_infos','inc');
+			$ffmpeg_infos = charger_fonction('spipmotion_ffmpeg_infos','inc');
 			$ffmpeg_infos(true);
 		}
 	

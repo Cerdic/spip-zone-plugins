@@ -30,7 +30,7 @@ function genie_spipmotion_taches_generales($time){
 	$verifier_erreurs_encodages = charger_fonction('spipmotion_erreurs_encodages','inc');
 	$verifier_erreurs_encodages();
 
-	$ffmpeg_infos = charger_fonction('ffmpeg_infos','inc');
+	$ffmpeg_infos = charger_fonction('spipmotion_ffmpeg_infos','inc');
 	$ffmpeg_infos(true);
 	
 	return 1;

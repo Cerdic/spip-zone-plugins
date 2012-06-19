@@ -125,7 +125,7 @@ function spipmotion_install_recuperer_infos(){
 	/**
 	 * On récupère les informations de spipmotion si possible
 	 */
-	$ffmpeg_infos = charger_fonction('ffmpeg_infos','inc');
+	$ffmpeg_infos = charger_fonction('spipmotion_ffmpeg_infos','inc');
 	$ffmpeg_infos(true);
 
 	$ffmpeg_binaires = charger_fonction('spipmotion_verifier_binaires','inc');

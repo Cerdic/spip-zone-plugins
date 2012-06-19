@@ -69,7 +69,7 @@ function action_spipmotion_encoder_dist(){
 			$document = sql_fetsel('*','spip_documents','id_document='.sql_quote($id_document));
 			if($document['id_document']){
 				spip_log('on encode le doc '.$id_document,'spipmotion');
-				$encoder = charger_fonction('encodage','inc');
+				$encoder = charger_fonction('spipmotion_encodage','inc');
 				$encoder($document,$id_doc_attente,$format);
 			}else{
 				sql_delete('spip_spipmotion_attentes','id_document='.sql_quote($id_document));

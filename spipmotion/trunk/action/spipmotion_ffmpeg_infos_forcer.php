@@ -15,7 +15,7 @@ function action_spipmotion_ffmpeg_infos_forcer_dist(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	$ffmpeg_infos = charger_fonction('ffmpeg_infos','inc');
+	$ffmpeg_infos = charger_fonction('spipmotion_ffmpeg_infos','inc');
 	$ffmpeg_infos(true);
 
 	/**
