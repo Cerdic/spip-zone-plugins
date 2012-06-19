@@ -348,4 +348,27 @@ function spipmotion_formulaire_traiter($flux){
 	}
 	return $flux;
 }
+
+
+/**
+ * Insertion dans le pipeline recuperer_fond (SPIP)
+ * 
+ * On affiche les informations du document
+ * 
+ * @param array $flux 
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte du pipeline modifié
+ */
+function spipmotion_recuperer_fond($flux){
+	if ($flux['args']['fond']=='modeles/document_desc'){
+		if(isset($flux['args']['contexte']['id_document']) && ($flux['args']['contexte']['id_document'] > 0)){
+			$extension = sql_getfetsel("extension", "spip_documents","id_document=".intval($flux['args']['contexte']['id_document']));
+			if(in_array($extension,lire_config('spipmotion/fichiers_videos',array()))){
+				$flux['data']['texte'] .= recuperer_fond('prive/squelettes/inclure/prive_infos_video', $flux['args']['contexte']);
+			}
+		}
+	}
+	return $flux;
+}
 ?>

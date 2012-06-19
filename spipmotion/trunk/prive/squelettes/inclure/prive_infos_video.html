@@ -6,12 +6,7 @@
 		<br class="nettoyeur" />
 
 		<div id="infos_video_bas_#ID_DOCUMENT" class="infos_video_bas">
-			[(#PLUGIN{Player}|oui)
-				[(#EXTENSION|=={flv}|oui)
-				[(#MODELE{doc_video_spipmotion}{id=#ID_DOCUMENT}{largeur=210})]
-				]
-			]
-			<table cellspacing='3' cellpadding='0' style='width: 100%;  font-family: verdana; border: 0px;'>
+			<table>
 				[<tr>
 					<td class="video_left">
 						<:spipmotion:info_nom_fichier:>
