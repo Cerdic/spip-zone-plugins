@@ -26,6 +26,7 @@ function exec_prets()
 		$ressource = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
 		$unite = $ressource['ud']?$ressource['ud']:'D';
 		$infos['ressources_libelle_code'] = $ressource['code'];
+		$infos['ressources_libelle_caution'] = association_prixfr($ressource['prix_caution']);
 		if (is_numeric($ressource['statut'])) { /* utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires) */
 			if ($ressource['statut']>0) {
 				$puce = 'verte';

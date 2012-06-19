@@ -637,16 +637,7 @@ Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" es
 <!--
 						<li class="editer_dc_cautions">
 							<label for="dc_cautions"><:asso:config_libelle_num_dc:></label>
-						<B_dc_cautions>
-							<select name="dc_cautions" id="dc_cautions">
-								<option value=""><:asso:choisir_dest_compte:></option>
-						<BOUCLE_dc_cautions(ASSO_DESTINATION){par intitule}>
-								<option value="#ID_DESTINATION" [(#ENV{dc_cautions}|=={#ID_DESTINATION}|oui) selected="selected"]>#INTITULE</option>
-						</BOUCLE_dc_cautions>
-							</select>
-						</B_dc_cautions>
-							<span class="spip_form_erreur"><:asso:erreur_pas_de_destination:></span>
-						<//B_dc_cautions>
+							<span class="explication"><:asso:erreur_pas_de_destination:></span>
 						</li>
 -->
 					</B_classeSelect_cautions>
@@ -682,10 +673,6 @@ Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" es
 						</B_dc_prets>
 							<span class="spip_form_erreur"><:asso:erreur_pas_de_destination:></span>
 						<//B_dc_prets>
-						</li>
-						<li class="prets_courtes_durees">
-							<label for="prets_courtes_durees"><:asso:config_libelle_prets_courts:></label>
-							<input name="prets_courtes_durees" id="prets_courtes_durees" type="checkbox" [(#ENV{prets_longues_durees}|oui) checked="checked"] />
 						</li>
 					</B_classeSelect_prets>
 					</ul>

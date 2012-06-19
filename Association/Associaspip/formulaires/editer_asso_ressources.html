@@ -53,9 +53,7 @@
 						<option value="M"[ (#ENV{ud}|strtoupper|=={M})selected="selected"]><:spip:date_un_mois:></option>
 						<option value="W"[ (#ENV{ud}|strtoupper|=={W})selected="selected"]><:spip:date_une_semaine:></option>
 						<option value="D"[ (#ENV{ud}|strtoupper|=={D}|ou{#ENV{ud}|strtoupper|=={J}})selected="selected"]><:local:jour:></option>
-				[(#META{/association/prets_courtes_durees}|oui)
 						<option value="H"[ (#ENV{ud}|strtoupper|=={H})selected="selected"]><:spip:date_une_heure:></option>
-				]
 					</select>
 				</li>
 				<li class="editer_statut">

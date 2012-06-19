@@ -47,12 +47,6 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='')
 	$contexte['journal'] = $journal;
 	$contexte['montant'] = $montant;
 
-	/* on concatene au _hidden inseres dans $contexte par l'appel a formulaire_editer_objet les id_compte et id_ressource qui seront utilises dans l'action editer_asso_prets */
-	$contexte['_hidden'] .= "<input type='hidden' name='id_compte' value='$id_compte' />";
-	$contexte['_hidden'] .= "<input type='hidden' name='id_ressource' value='$contexte[id_ressource]' />";
-	$contexte['_hidden'] .= "<input type='hidden' name='ud' value='$contexte[ud]' />";
-	$contexte['_hidden'] .= "<input type='hidden' name='prix_caution' value='$contexte[prix_caution]' />";
-
 	/* si une date est indeterminee, c'est que le champ est vide : on ne preremplit rien  */
 	if ($contexte['date_retour']=='0000-00-00')
 		$contexte['date_retour'] = '';
@@ -60,9 +54,11 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='')
 		$contexte['date_caution1'] = '';
 	if ($contexte['date_caution0']=='0000-00-00')
 		$contexte['date_caution0'] = '';
-	/* si id_emprunteur est egal a 0, c'est que le champ est vide, on ne prerempli rien */
+	/* si le champ est vide ou egal a zero, on ne prerempli rien */
 	if (!$contexte['id_emprunteur'])
 		$contexte['id_emprunteur']='';
+	if ( floatval($contexte['prix_caution'])==0 )
+		$contexte['prix_caution'] ='';
 	/* paufiner la presentation des valeurs  */
 	if ($contexte['montant'])
 		$contexte['montant'] = association_nbrefr($contexte['montant']);
@@ -70,6 +66,12 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='')
 		$contexte['prix_unitaire'] = association_nbrefr($contexte['prix_unitaire']);
 	if ($contexte['duree'])
 		$contexte['duree'] = association_nbrefr($contexte['duree']);
+
+	/* on concatene au _hidden inseres dans $contexte par l'appel a formulaire_editer_objet les id_compte et id_ressource qui seront utilises dans l'action editer_asso_prets */
+	$contexte['_hidden'] .= "<input type='hidden' name='id_compte' value='$id_compte' />";
+	$contexte['_hidden'] .= "<input type='hidden' name='id_ressource' value='$contexte[id_ressource]' />";
+	$contexte['_hidden'] .= "<input type='hidden' name='ud' value='$contexte[ud]' />";
+	$contexte['_hidden'] .= "<input type='hidden' name='prix_caution' value='$contexte[prix_caution]' />";
 
 	// on ajoute les metas destinations
 	if ($GLOBALS['association_metas']['destinations']) {

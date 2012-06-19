@@ -207,7 +207,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_categorie_par_defaut' => 'Cat&eacute;gorie de cotisation des nouveaux membres',
 	'config_libelle_affichage_champs_page_membres' => 'S&eacute;lectionner les champs &agrave; afficher sur la page des membres',
 	'config_libelle_virements_internes' => 'R&eacute;f. virements internes',
-	'config_libelle_prets_courts' => 'Utiliser des dur&eacute;es inf&eacute;rieures &agrave; la journ&eacute;e',
 	# Configuration : Options
 	'config_import_auteur_auto_part1' => "&Agrave; la cr&eacute;ation ou modification d'un auteur :",
 	'config_import_auteur_auto_part2' => "l'importer automatiquement comme membre",
@@ -577,6 +576,7 @@ Commentaire: @commentaire@
 	# En-tete
 	'ressources_entete_intitule' => 'Article',
 	'ressources_entete_code' => 'Code',
+	'ressources_entete_caution' => 'Caution',
 	'ressource_pretee' => 'Pr&ecirc;t&eacute;e',
 	# Navigation
 	'ressources_nav_gestion_' => 'Gestion des ressources',
@@ -592,7 +592,7 @@ Commentaire: @commentaire@
 	'ressources_libelle_intitule' => 'Article',
 	'ressources_libelle_date_acquisition' => "Date d'acquisition (AAAA-MM-JJ)",
 	'ressources_libelle_prix_location' => 'Prix de la location (en euros)',
-	'ressources_libelle_prix_caution' => 'Montant de la location (en euros)',
+	'ressources_libelle_prix_caution' => 'Montant de la caution (en euros)',
 	'ressources_libelle_statut' => 'Statut',
 	'ressources_libelle_statut_ok' => 'Libre',
 	'ressources_libelle_statut_reserve' => 'R&eacute;serv&eacute;',

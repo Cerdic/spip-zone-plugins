@@ -26,6 +26,7 @@ function exec_action_ressources()
 		// INTRO : resume ressource
 		$data = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
 		$infos['ressources_libelle_code'] = $data['code'];
+		$infos['ressources_libelle_caution'] = association_prixfr($data['prix_caution']);
 		if (is_numeric($data['statut'])) { /* utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires) */
 			if ($data['statut']>0) {
 				$puce = 'verte';
@@ -56,7 +57,7 @@ function exec_action_ressources()
 			}
 			$type = $data['statut'];
 		}
-		$infos['statut'] =  '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-'.$puce.'.gif" title="'.$data['statut'].'" alt="" /> '. _T("asso:ressource_statut_$type");
+		$infos['statut'] =  '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-'.$puce.'.gif" title="'.$data['statut'].'" alt="" /> '. _T("asso:ressources_statut_$type");
 		$infos['ressource_pretee'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_prets', "id_ressource=$id_ressource"), ));
 		echo totauxinfos_intro($data['intitule'], 'ressource', $id_ressource, $infos ); // indice de popularite
 		// STATS sur la duree et le montant des emprunts
