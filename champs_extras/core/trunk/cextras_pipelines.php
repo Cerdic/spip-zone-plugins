@@ -180,7 +180,6 @@ function cextras_formulaire_verifier($flux){
 		include_spip('inc/saisies');
 
 		$verifier   = charger_fonction('verifier', 'inc', true);
-		$normaliser = charger_fonction('normaliser', 'inc', true);
 		$saisies    = saisies_lister_avec_sql($saisies);
 
 		// restreindre la vue selon les autorisations
