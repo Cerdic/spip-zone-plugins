@@ -66,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_documentation' => '<a href="http://www.spip-contrib.net/Notifications" class="spip_out">به اسناد بنگريد</a>',
 
 	// M
+	'message_a_valider' => 'Message à valider : ', # NEW
 	'message_voir_configuration' => 'به پيكربندي اطلاعيه‌ها بنگريد',
 	'messagerie_interne' => 'پيك داخلي',
 	'messagerie_interne_signaler' => '<strong>خبر يك پيام خصوصي</strong>: اين گزينه‌ را فعال كنيد تا هنگامي كه  نويسندگان يك پيام خصوصي را كه برايشان ارسال شده نديده باشند سايت يك اطلاعيه ارسال كند. سامانه پيش از خبر كردن نويسنده 20 دقيقه صبر خواهد كرد،  براي آنكه نويسنده‌اي كه الان در قسمت شخصي روي خط است اسپم نباشد.

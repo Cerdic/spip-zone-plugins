@@ -67,6 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_documentation' => '<a href="http://www.spip-contrib.net/Notifications" class="spip_out">Porov. s dokumentáciou</a>',
 
 	// M
+	'message_a_valider' => 'Správa na potvrdenie: ',
 	'message_voir_configuration' => 'Zobraziť nastavenia oznamov',
 	'messagerie_interne' => 'Súkromný odkazovač',
 	'messagerie_interne_signaler' => '<strong>Označiť nové súkromné správy:</strong> aktivujte túto možnosť, ak chcete, aby stránka poslala oznam redaktorovi, v prípade, že si neprečítal novú správu vo svojej schránke. Systém počká 20 minút, predtým ako upozorní redaktora, a tak nespamuje redaktora, ktorý je už online v súkromnej zóne.',
