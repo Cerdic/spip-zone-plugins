@@ -34,6 +34,11 @@ Class Futilitaire {
 	public $data = array();
 
 	/**
+	 * @var Futilitaire_Lignes[] Stockage des modifications de lignes a realiser
+	 */
+	public $lignes = array();
+
+	/**
 	 * Le constructeur charge les infos utiles :
 	 * - le tableau $data contenant les saisies utilisateurs
 	 * - le lieu de destination du plugin
@@ -268,6 +273,76 @@ Class Futilitaire {
 		$contenu = implode("\n", $contenu);
 		ecrire_fichier($dest, $contenu);
 	}
+
+	/**
+	 * Facilitateur d'écriture
+	 *
+	 * Cree une nouvelle ligne, la stocke et retourne l'objet cree pour modifications
+	 *
+	 * $futil->inserer($chemin, $debut, $fin, $tabulation)->contenu = X;
+	 * $futil->inserer($chemin, $debut, $fin, $tabulation)->contenu = <<<EOT
+	 * contenu
+	 * EOT;
+	 * 
+	 * $futil->appliquer_lignes();
+	 *
+	 * @param string $chemin
+	 * 		Chemin du fichier a traiter
+	 * @param int $debut
+	 * 		Numero de la ligne a modifier
+	 * @param int $fin
+	 * 		Nombre de lignes supprimées
+	 * @param int $tabulation
+	 * 		Ajout de n caractères de tabulations en début de chaque ligne
+	 * @param string $contenu
+	 * 		Contenu a inserer
+	 * @return Futilitaire_Ligne
+	 * 		Retourne l'objet créé, ce qui permet de le modifier, tout en gardant
+	 * 		ici au passage ce qui a été modifié.
+	**/
+	public function inserer($chemin, $debut, $fin=0, $tabulation=0, $contenu="") {
+		return $this->lignes[] = new Futilitaire_Lignes($chemin, $debut, $fin, $tabulation, $contenu);
+	}
+
+	/**
+	 * Applique les modifications de lignes qui ont été définies avec set_lignes()
+	 *
+	**/
+	public function appliquer_lignes() {
+		// insertion des parties
+		foreach ($this->lignes as $ligne) {
+			$this->ajouter_lignes(
+				$ligne->fichier,
+				$ligne->numero,
+				$ligne->remplace,
+				fabrique_tabulations($ligne->contenu, $ligne->tabulation));
+		}
+		// ces lignes ont été prises en compte !
+		$this->lignes = array();
+	}
 }
+
+
+/**
+ * Espace de rangement d'information pour la modification de contenu d'un fichier
+ *
+**/
+class Futilitaire_Lignes {
+	public $contenu = "";
+	public $fichier = "";
+	public $numero  = 0;
+	public $remplace = 0;
+	public $tabulation = 0;
+
+	// definir rapidement tout
+	public function __construct($fichier, $numero, $remplace=0, $tabulation=0, $contenu="") {
+		$this->fichier    = $fichier;
+		$this->numero     = $numero;
+		$this->remplace   = $remplace;
+		$this->tabulation = $tabulation;
+		$this->contenu    = $contenu;
+	}
+}
+
 
 ?>

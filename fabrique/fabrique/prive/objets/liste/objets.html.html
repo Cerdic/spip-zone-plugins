@@ -30,7 +30,9 @@ Squelette de liste d'un objet
 		|?{'{id_rubrique?}'})][(#OBJET|champ_present{id_secteur}
 		|?{'{id_secteur?}'})][(#OBJET|criteres_champs_id)]{id_mot?}[(#OBJET|options_presentes{#LISTE{auteurs_liens,table_liens}}
 		|?{'{auteurs_liens.id_auteur?}','{id_auteur?}'})]{where?}[(#OBJET|champ_present{statut}
-		|?{'{statut?}'})]{recherche?}{tri \#ENV{par,num #GET{titre}},\#GET{defaut_tri}}{pagination \#ENV{nb,10}}>
+		|?{'{statut?}'})]{recherche?}{tri \#ENV{par,num #GET{titre}},\#GET{defaut_tri}}[(#REM)
+			En plus du TRI, lorsqu'il y a par num sur les objets par defaut, SPIP ajoute un par en plus !
+		]{par #GET{titre}}{pagination \#ENV{nb,10}}>
 		<tr class='[(\#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(\#CHEMIN_IMAGE{#TYPE-16.png}|balise_img)]</td>[
 			<td class='statut'>\[(\#STATUT|puce_statut\{#TYPE,##MID_OBJET[,(#OBJET|champ_present{id_rubrique}|?{\#ID_RUBRIQUE})]\})\]</td>(#OBJET|champ_present{statut})]
