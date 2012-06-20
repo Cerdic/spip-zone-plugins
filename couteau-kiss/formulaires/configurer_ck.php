@@ -90,7 +90,7 @@ function ck_produire_code($c=null){
 	$code .= ck_code_globale('toujours_paragrapher',_request('toujours_paragrapher',$c)?'true':'false');
 
 	// on ne surcharge autobr uniquement si inhibe
-	if(_request('no_autobr'))
+	if(_request('no_autobr',$c))
 		$code .= ck_code_constante('_AUTOBR',"''");
 
 	$code .= ck_code_globale('forcer_lang',_request('forcer_lang',$c)?'true':'false');
