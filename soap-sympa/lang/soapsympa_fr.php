@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'btn_desabonnement_emails' => 'Abonner les emails sélectionnés.',
 'btn_desabonnement_emails' => 'Désabonner les emails sélectionnés.',
 	// C
-	'configurer_soapsympa' => 'Configuration des listes SYMPA',
+	'configurer_soapsympa' => 'Spip ml SYMPA',
 	'choisir_liste' => 'Vous devez choisir une liste.',
 	
 	//D
@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'desabonnement_erreur' => 'Désabonnement échoué. Contacter le webmestre.',
 
 	// E
-	'edition_soapsympa' => 'Gérer les listes SYMPA',
+	'edition_soapsympa' => 'Gérer listes SYMPA',
 	'enregistrement_reussi' => 'Enregistrement réussi !',
 	'email_proprietaire' => 'Email du propriétaire des listes',
 'emails_liste' => 'Courriels',

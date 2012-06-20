@@ -6,7 +6,7 @@
 	</multi>
 	</slogan>
 	<description>
-	  <multi>[fr]Ce plugin est un "web service" relié au système de listes SYMPA. Il permet : 1. De gérer les abonnements aux listes depuis l'espace privé de SPIP. 2. Pour chaque auteur SPIP, de voir et gérer ses abonnements aux listes. 3. De proposer un formulaire d'inscription aux listes depuis le site public. Les services utilisés sont décrits ici http://www.sympa.org/manual/soap. </multi>
+	  <multi>[fr]Ce plugin est un web service relié au système de listes SYMPA. Il permet : 1. De gérer les abonnements aux listes depuis l'espace privé de SPIP. 2. Pour chaque auteur SPIP, de voir et gérer ses abonnements aux listes. 3. De proposer un formulaire d'inscription aux listes depuis le site public. Les services utilisés sont décrits ici http://www.sympa.org/manual/soap. </multi>
 	</description>
 	<lien>http://www.sympa.org/manual/soap</lien>
 	<icon>images/soapsympa-128.png</icon>
@@ -47,22 +47,30 @@
 
 	
 	
-	<necessite id="SPIP" version="[2.1.0;3.0.0-dev)" />
-	<necessite id="saisies" version="[1.5.0;]" />
+	      <necessite id='SPIP' version='[2.1.0;3.0.0-dev)' />
+	      <necessite id='saisies' version='[1.5.0;]' />
 	
-	<bouton id="edition_listes" parent="naviguer">
-	     <titre>soapsympa:edition_soapsympa</titre>
-        <icone>images/soapsympa-24.png</icone>
-	<url>edition_soapsympa</url>  
-              
-    </bouton>
+	      <bouton id='edition_soapsympa' parent='naviguer'>
+	      <titre>soapsympa:edition_soapsympa</titre>
+	      <icone>images/soapsympa-24.png</icone>
+	      </bouton>
+	      
+	      <bouton id='bando_edition_soapsympa' parent='bando_edition'>
+	      <icone>images/soapsympa-16.png</icone>
+	      <titre>soapsympa:edition_soapsympa</titre>
+	      <url>edition_soapsympa</url>  
+	      </bouton>
 	   
-	   <bouton id="configurer_soapsympa" parent="configuration">
-	     <titre>soapsympa:configurer_soapsympa</titre>
-        <icone>images/soapsympa-24.png</icone>
-	<url>configurer_soapsympa</url>  
-              
-    </bouton>
+	      <bouton id='configurer_soapsympa' parent='configuration'>
+	      <titre>soapsympa:configurer_soapsympa</titre>
+	      <icone>images/soapsympa-24.png</icone>
+	      </bouton>
+	      
+		<bouton id='bando_configurer_soapsympa' parent='bando_configuration'>
+		<icone>images/soapsympa-16.png</icone>
+		<titre>soapsympa:configurer_soapsympa</titre>
+		<url>configurer_soapsympa</url> 
+		</bouton>
 
 	<categorie>communication</categorie>
 	
