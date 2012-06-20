@@ -13,16 +13,16 @@
 	<categorie>edition</categorie>
 	<fonctions>mailcrypt_fonctions.php</fonctions>
 	<pipeline>
-		<nom>insert_head</nom>
-		<inclure>mailcrypt_pipelines.php</inclure>
+		<nom>affichage_final</nom>
+		<inclure>mailcrypt_fonctions.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>post_propre</nom>
-		<inclure>mailcrypt_pipelines.php</inclure>
+		<inclure>mailcrypt_fonctions.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>facteur_pre_envoi</nom>
-		<inclure>mailcrypt_pipelines.php</inclure>
+		<inclure>mailcrypt_fonctions.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 </plugin>

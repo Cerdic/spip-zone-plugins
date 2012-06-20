@@ -1,4 +1,36 @@
 <?php
+/**
+ * Plugin MailCrypt
+ */
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+function mailcrypt_post_propre($texte) {
+	return mailcrypt($texte);
+}
+
+function mailcrypt_affichage_final($texte){
+	if ($GLOBALS['html']
+	  AND strpos($texte,"spancrypt")!==false){
+		$js = <<<js
+<script type="text/javascript">/*<![CDATA[*/
+function mc_lancerlien(a,b){	x='ma'+'ilto'+':'+a+'@'+b;	return x;}
+jQuery(function(){
+	jQuery('.spancrypt').empty().append('@');
+	jQuery('a.spip_mail').attr('title',function(i, val) {	return val.replace(/\.\..t\.\./,'@');	});
+});/*]]>*/</script>
+js;
+		if ($p = stripos($texte,"</body>"))
+			$texte = substr_replace($texte,$js,$p,0);
+	}
+	return $texte;
+}
+
+function mailcrypt_facteur_pre_envoi($facteur) {
+	$facteur->Body = maildecrypt($facteur->Body);
+	$facteur->AltBody = maildecrypt($facteur->AltBody);
+	return $facteur;
+}
 
 function mailcrypt_echappe($matches) {
 	return code_echappement($matches[0], 'MAILCRYPT');
