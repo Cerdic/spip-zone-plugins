@@ -172,7 +172,7 @@ function formulaires_configurer_bloc_traiter($bloc,$page){
 			$bloc = $t_bloc_page[0];
 			$type = $t_bloc_page[1];
 			if(!isset($t_bloc_page[2]))
-				$composition = $t_bloc_page[1];
+				$composition = '';
 			else 
 				$composition = $t_bloc_page[2];
 			$id_noisette = sql_insertq(
