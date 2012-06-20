@@ -3,7 +3,7 @@
 	categorie="navigation"
 	version="2.3.1"
 	etat="test"
-	compatibilite="[2.1.0;3.0.99]"
+	compatibilite="[3.0.0;3.0.99]"
 	logo="prive/themes/spip/images/accordeon-32.png"
 	documentation="http://www.spip-contrib.net/?article3763"
 >	
