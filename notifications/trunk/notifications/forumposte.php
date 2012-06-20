@@ -69,7 +69,7 @@ function notifications_forumposte_dist($quoi, $id_forum, $options) {
 	$moderations = array();
 	foreach(array('publie','spam','off') as $statut){
 		if ($statut!==$t['statut']){
-			$moderations["url_moderer_$statut"] = "$id_forum-$statut";
+			$moderations["url_moderer_$statut"] = "$id_forum-$statut-".$t['statut'];
 		}
 	}
 	include_spip("inc/securiser_action");

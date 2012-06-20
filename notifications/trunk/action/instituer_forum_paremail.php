@@ -25,42 +25,49 @@ function action_instituer_forum_paremail_dist() {
 
 	$verif = _action_auteur("$action-$arg", '', $pass, 'alea_ephemere');
 
-	$auth = false;
+	$erreur = _T('notifications:info_moderation_interdite');
 	if ($verif==$hash)
-		$auth = true;
+		$erreur = "";
 
 	// si hash est ok, verifier si l'email correspond a un auteur qui a le droit de faire cette action
-	if ($auth){
+	if (!$erreur){
 		$arg = explode("-",$arg);
 		$id_forum = array_shift($arg);
 		$statut = array_shift($arg);
+		$statut_init = array_shift($arg);
 		// l'email est ce qui reste
 		$email = implode("-",$arg);
 		// reconstituer l'arg pour l'action standard
 		$arg = "$id_forum-$statut";
 
-		if ($message = sql_fetsel("id_objet","objet","spip_forum","id_forum=".intval($id_forum))){
-			// trouver le(s) auteur(s) et verifier leur autorisation
-			$res = sql_select("*","spip_auteurs","email=".sql_quote($email,'','text'));
-			while ($auteur = sql_fetch($res)){
-				if (autoriser("modererforum",$message['objet'],$message['id_objet'],$auteur)){
-					$auth = true;
-					// on ajoute l'exception car on est pas identifie avec cet id_auteur
-					autoriser_exception("modererforum",$message['objet'],$message['id_objet']);
-					break;
+		// on recherche le message en verifiant qu'il a bien le statut
+		if ($message = sql_fetsel("id_objet,objet,statut","spip_forum","id_forum=".intval($id_forum))){
+			if ($message['statut']!=$statut_init){
+				$erreur = _T("notifications:info_moderation_deja_faite",array('id_forum'=>$id_forum,'statut'=>$statut));
+			}
+			else {
+				// trouver le(s) auteur(s) et verifier leur autorisation
+				$res = sql_select("*","spip_auteurs","email=".sql_quote($email,'','text'));
+				while ($auteur = sql_fetch($res)){
+					if (autoriser("modererforum",$message['objet'],$message['id_objet'],$auteur)){
+						$erreur = "";
+						// on ajoute l'exception car on est pas identifie avec cet id_auteur
+						autoriser_exception("modererforum",$message['objet'],$message['id_objet']);
+						break;
+					}
 				}
 			}
 		}
 	}
 
-	if ($auth){
+	if (!$erreur){
 		spip_log("Moderation message $id_forum $statut par $email","moderationparemail"._LOG_INFO_IMPORTANTE);
 		$instituer_forum = charger_fonction("instituer_forum","action");
 		$instituer_forum($arg);
 	}
 
 	// Dans tous les cas on finit sur un minipres qui dit si ok ou echec
-	$titre = ($auth ? "Le message #$id_forum a bien été passé en $statut" : "Vous n'avez pas le droit de moderer ce message");
+	$titre = (!$erreur ? _T("notifications:info_moderation_confirmee_$statut",array('id_forum'=>$id_forum)) : $erreur);
 	include_spip('inc/minipres');
 	echo minipres($titre);
 
