@@ -72,8 +72,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	// si le mail est en texte brut, on l'encapsule dans un modele surchargeable
 	// pour garder le texte brut, il suffit de faire un modele qui renvoie uniquement #ENV*{texte}
 	if ($message_texte AND ! $message_html){
-		$message_html = (_AUTOBR?$message_texte:nl2br($message_texte));
-		$message_html = recuperer_fond("emails/texte",array('texte'=>$message_texte,'html'=>$message_html,'sujet'=>$sujet));
+		$message_html = recuperer_fond("emails/texte",array('texte'=>$message_texte,'html'=>$message_texte,'sujet'=>$sujet));
 	}
 
 	// mode TEST : forcer l'email

@@ -57,5 +57,14 @@ function facteur_addstyle($matches) {
 	return "<".$matches[1].$attributes.$matches[3].">";
 }
 
+/**
+ * Un filtre pour transformer les retour ligne texte en br si besoin (si pas autobr actif)
+ *
+ * @param string $texte
+ * @return string
+ */
+function facteur_nl2br_si_pas_autobr($texte){
+	return (_AUTOBR?$texte:nl2br($texte));
+}
 
 ?>
