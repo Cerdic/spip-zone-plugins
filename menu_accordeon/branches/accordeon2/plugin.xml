@@ -37,7 +37,7 @@
 		<titre>accordeon:titre_menu</titre>
 		<url>configurer_accordeon</url>
 	</bouton>
-	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="jqueryui" />
 	<utilise id="menus" version="[0.8.10;]" />
 </plugin>
