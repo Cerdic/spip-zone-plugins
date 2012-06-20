@@ -105,7 +105,7 @@
 											<tr>
 												<td valign="top">
 													<div class='text' style="color: #303030;font-family: 'Helvetica Neue',Helvetica,Arial;font-size: 16px;line-height: 150%;text-align: left;">
-														[(#ENV*{html}|entites_html|propre|replace{'<br />\s*<br />(\s*<br />)+?','<br /> <br />'})]
+														[(#ENV*{html}|replace{'<','&lt;'}|propre|replace{'<br />\s*<br />(\s*<br />)+?','<br /> <br />'})]
 														<br>
 														<br>
 													</div>
