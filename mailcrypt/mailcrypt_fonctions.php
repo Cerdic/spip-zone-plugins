@@ -11,7 +11,7 @@ function mailcrypt_post_propre($texte) {
 
 function mailcrypt_affichage_final($texte){
 	if ($GLOBALS['html']
-	  AND strpos($texte,"spancrypt")!==false){
+	  AND strpos($texte,"mc_lancerlien")!==false){
 		$js = <<<js
 <script type="text/javascript">/*<![CDATA[*/
 function mc_lancerlien(a,b){	x='ma'+'ilto'+':'+a+'@'+b;	return x;}
