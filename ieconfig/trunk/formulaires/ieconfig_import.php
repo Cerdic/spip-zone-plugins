@@ -186,7 +186,7 @@ function ieconfig_config_locales() {
 		include_spip('inc/yaml');
 		$liste_config = array();
 		$match = ".+[.]yaml$";
-		foreach (array_merge(find_all_in_path('ieconfig/', $match),find_all_in_path('tmp/ieconfig/', $match)) as $fichier => $chemin) {
+		foreach (array_merge(find_all_in_path(_DIR_RACINE.'ieconfig/', $match),find_all_in_path(_DIR_TMP.'ieconfig/', $match)) as $fichier => $chemin) {
 			$config = yaml_decode_file($chemin);
 			// On regarde s'il y a un necessite
 			$ok = true;
