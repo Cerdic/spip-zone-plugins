@@ -3,15 +3,21 @@
 [(#ENV{titre}|oui)
 	#SET{titre, #ENV*{titre}|typo}
 ]
+[(#SET{titre_deconnecter, <:icone_deconnecter:>})]
+#SET{lien_connecte, #ENV{lien_connecte,''}}
 
 [(#ENV{appel_formulaire}|oui)
 	<div class="titre">#GET{titre}</div>
 	<div class="infos"> </div>
 ]
 [(#ENV{appel_menu}|oui)
-	[(#AUTORISER{ecrire})
+	[(#AUTORISER{ecrire}|oui|et{#GET{lien_connecte}|non})
 		<li class="menu-entree item[ (#ENV{css})]">
 			<a href="#EVAL{_DIR_RESTREINT_ABS}" title="[(#GET{titre}|attribut_html)]">#GET{titre}</a>
+	]
+	[(#SESSION{id_auteur}|>{0}|oui|et{#GET{lien_connecte}|=={deconnecter}|oui})
+		<li class="menu-entree item[ (#ENV{css})]">
+			<a href="#URL_LOGOUT" title="[(#GET{titre_deconnecter})]">#GET{titre_deconnecter}</a>
 	]
 	[(#SESSION{id_auteur}|>{0}|non)
 		<li class="menu-entree item[ (#ENV{css})]">

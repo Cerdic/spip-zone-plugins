@@ -7,4 +7,5 @@
 	<parametre nom="titre_connecter" class="multilang" label="menus:entree_titre_connecter" />
 	<parametre nom="css" label="menus:entree_css" />
 	<parametre nom="url" label="menus:entree_url_public" />
+	<parametre nom="lien_connecte" label="menus:entree_lien_connecte" />
 </entree>

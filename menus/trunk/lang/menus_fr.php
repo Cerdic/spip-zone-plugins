@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_rubriques_exclues' => 'Numéros des rubriques à exclure, séparés par des virgules',
 	'entree_id_secteur_exclus' => 'Numéros des secteurs à exclure, séparés par des virgules',
 	'entree_infini' => 'À l\'infini',
+	'entree_lien_connecte' => 'Lien à afficher une fois connecté : laisser vide pour afficher un lien vers l\'espace privé, mettre "rien" pour ne rien afficher, mettre "deconnecter" pour afficher un lien de deconnexion',
 	'entree_mapage' => 'Ma page perso',
 	'entree_masquer_articles_uniques' => 'Si oui et si une rubrique contient un seul article, le masquer ? (mettre "oui" pour cela)',
 	'entree_niveau' => 'Niveau des sous-rubriques',

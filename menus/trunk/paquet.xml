@@ -1,9 +1,9 @@
 <paquet
 	prefix="menus"
 	categorie="navigation"
-	version="1.2.1"
+	version="1.2.2"
 	etat="dev"
-	compatibilite="[3.0.0-dev;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/menu-32.png"
 	documentation="http://www.spip-contrib.net/Plugin-Menus"
 	schema="0.5.1"
