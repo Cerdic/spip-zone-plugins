@@ -43,7 +43,7 @@ function action_instituer_forum_paremail_dist() {
 		// on recherche le message en verifiant qu'il a bien le statut
 		if ($message = sql_fetsel("id_objet,objet,statut","spip_forum","id_forum=".intval($id_forum))){
 			if ($message['statut']!=$statut_init){
-				$erreur = _T("notifications:info_moderation_deja_faite",array('id_forum'=>$id_forum,'statut'=>$statut));
+				$erreur = _T("notifications:info_moderation_deja_faite",array('id_forum'=>$id_forum,'statut'=>$message['statut']));
 			}
 			else {
 				// trouver le(s) auteur(s) et verifier leur autorisation
