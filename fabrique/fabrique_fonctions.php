@@ -471,7 +471,7 @@ function fabrique_lister_tables($objets, $quoi='tout') {
 		);
 		foreach ($objets as $o) {
 			// tables principales
-			if ($o['table']) {
+			if (isset($o['table']) and $o['table']) {
 				$tables[$hash]['objets'][] = $o['table'];
 				$tables[$hash]['tout'][] = $o['table'];
 				// tables de liens
@@ -683,7 +683,7 @@ function filtre_fabrique_lister_objets_editoriaux($objets_fabrique, $inclus=arra
 
 	// les objets de la fabrique
 	foreach ($objets_fabrique as $o) {
-		if (!isset($liste[$o['table']])) {
+		if (isset($o['table']) and !isset($liste[$o['table']])) {
 			$liste[ $o['table'] ] = $o['nom'];
 		}
 	}

@@ -71,7 +71,7 @@ function formulaires_fabriquer_plugin_charger_dist() {
 	// si l'objet a deja ete rempli une fois
 	$accordion = _request('open_accordion', array());
 	foreach ($contexte['objets'] as $c => $o) {
-		if (count($o['champs'])) {
+		if (isset($o['champs']) and count($o['champs'])) {
 			$accordion[$c+1] = 1;
 		}
 	}
@@ -606,7 +606,7 @@ function fabrique_completer_contexte($data) {
 	$data['les_objets'] = $data['les_types'] = $data['les_id_objets'] = array();
 	foreach( $data['objets'] as $c => $o ) {
 		// quelques raccourcis
-		if ($o['table']) {
+		if (isset($o['table']) and $o['table']) {
 			$data['objets'][$c]['objets_surnoms'] = array();
 
 			// si la table est different de spip_xxs
@@ -644,7 +644,7 @@ function fabrique_completer_contexte($data) {
 			}
 		}
 		// mettre les majuscules sur les champs aussi dans mchamp
-		if (is_array($o['champs'])) {
+		if (isset($o['champs']) and is_array($o['champs'])) {
 			foreach ($o['champs'] as $j => $champ) {
 				if (isset($champ['champ'])) {
 					 $data['objets'][$c]['champs'][$j]['mchamp'] = strtoupper($champ['champ']);
