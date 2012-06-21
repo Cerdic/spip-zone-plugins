@@ -23,7 +23,7 @@ function formulaires_trouver_objet_charger($objet, $source, $id_source, $identif
 		);
 }
 
-function formulaires_trouver_objet_verifier($objet, $source, $id_source, $identifiant,$paramselecteur='',$retour,$ancre){
+function formulaires_trouver_objet_verifier($objet, $source, $id_source, $identifiant,$paramselecteur='',$retour='',$ancre=''){
 	// si pas d'id, le selecteur generique n'a pas fonctionne
 	// on fait comment alors ??
 	$id_koi ="id_".$objet;
@@ -35,7 +35,7 @@ function formulaires_trouver_objet_verifier($objet, $source, $id_source, $identi
 	}
 }
 
-function formulaires_trouver_objet_traiter($objet, $source, $id_source, $identifiant,$paramselecteur='',$retour,$ancre){
+function formulaires_trouver_objet_traiter($objet, $source, $id_source, $identifiant,$paramselecteur='',$retour='',$ancre=''){
 	
   // Empecher le traitement en AJAX car on sait que le formulaire va rediriger autre part
      refuser_traiter_formulaire_ajax();
