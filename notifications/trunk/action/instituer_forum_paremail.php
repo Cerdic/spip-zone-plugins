@@ -79,6 +79,6 @@ function action_instituer_forum_paremail_dist() {
 	// Dans tous les cas on finit sur un minipres qui dit si ok ou echec
 	$titre = (!$erreur ? _T("notifications:info_moderation_confirmee_$statut",array('id_forum'=>$id_forum)) : $erreur);
 	include_spip('inc/minipres');
-	echo minipres($titre);
+	echo minipres($titre,"","",true);
 
 }
