@@ -1,0 +1,21 @@
+<paquet
+	prefix="auteurs_syndic"
+	categorie="auteur"
+	version="0.1.1"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.99]"
+	schema="0.1"
+>	
+
+	<nom>Auteurs pour les sites syndiqu&#233;s</nom>
+	<!-- Ajoute la possibilité d'ajouter des auteurs aux sites syndiqués -->
+
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/auteurs_syndic.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/auteurs_syndic.php" />
+	<pipeline nom="post_insertion" inclure="auteurs_syndic_pipelines.php" />
+	<pipeline nom="autoriser" inclure="auteurs_syndic_autoriser.php" />
+</paquet>
