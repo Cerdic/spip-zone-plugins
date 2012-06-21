@@ -1,7 +1,7 @@
 <paquet
 	prefix="legendes"
 	categorie="multimedia"
-	version="1.0.0"
+	version="1.0.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/legendes-128.png"
@@ -25,4 +25,5 @@
 
 	<necessite nom="saisies" compatibilite="[1.1;[" />
 	<necessite nom="jqueryui" compatibilite="[1.8.2;[" />
+	<necessite nom="medias" compatibilite="[2.7.28;[" />
 </paquet>

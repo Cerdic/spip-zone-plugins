@@ -53,6 +53,7 @@ function legendes_post_edition($flux){
 		$id_document = sql_getfetsel('id_document','spip_legendes','id_legende='.intval($flux['args']['id_objet']));
 		if(intval($id_document)){
 			include_spip('inc/modifier');
+			include_spip('action/editer_document');
 			revision_document($id_document, $c=array('maj'=>date('Y-m-d H:i:s')));
 		}
 	}
