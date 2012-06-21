@@ -1,10 +1,10 @@
 <paquet
 	prefix="auteurs_syndic"
 	categorie="auteur"
-	version="0.1.1"
-	etat="dev"
+	version="0.2.0"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
-	schema="0.1"
+	schema="0.2.0"
 >	
 
 	<nom>Auteurs pour les sites syndiqu&#233;s</nom>

@@ -11,42 +11,48 @@
  * Installation / Mise à jour et désinstallation
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('inc/meta');
-include_spip('base/create');
 
 /**
- * 
  * Fonction d'installation et de mise à jour
- * @param unknown_type $nom_meta_version_base
- * @param unknown_type $version_cible
+ * 
+ * @param string $nom_meta_base_version
+ * @param float $version_cible
  */
-function auteurs_syndic_upgrade($nom_meta_version_base, $version_cible){
-
-	$version_actuelle = '0.0';
-	if (
-		(!isset($GLOBALS['meta'][$nom_meta_version_base]))
-		|| (($version_actuelle = $GLOBALS['meta'][$nom_meta_version_base]) != $version_cible)
-	){
-		if (version_compare($version_actuelle,'0.0','=')){
-			// Création des tables
-			include_spip('base/abstract_sql');
-			creer_base();
-			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
-		}
-	}
+function auteurs_syndic_upgrade($nom_meta_base_version, $version_cible){
+	$maj = array();
+	
+	$maj['create'] = array();
+	
+	$maj['0.2.0'] = array(
+		array('auteur_syndic_update_3')
+	);
+	
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 /**
  * 
  * Fonction de désinstallation
- * @param $nom_meta_version_base
+ * @param string $nom_meta_base_version
  */
-function auteurs_syndic_vider_tables($nom_meta_version_base){
-		
+function auteurs_syndic_vider_tables($nom_meta_base_version){
 	// On efface la version entregistrée
-	effacer_meta($nom_meta_version_base);
+	effacer_meta($nom_meta_base_version);
+}
 
+/**
+ * Fonction de mise à jour par rapport à l'ancienne table de liens
+ */
+function auteur_syndic_update_3(){
+	$desc = sql_showtable('spip_auteurs_syndic', true, $connect);
+	if (is_array($desc['field'])) {
+		$liens_auteur = sql_select('*','spip_auteurs_syndic');
+		while($lien = sql_fetch($liens_auteur)){
+			sql_insertq('spip_auteurs_liens',array('id_auteur'=>$lien['id_auteur'],'objet'=>'site','id_objet'=>$lien['id_syndic']));
+		}
+	}
 }
 ?>
