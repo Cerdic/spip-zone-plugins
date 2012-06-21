@@ -53,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_rubriques_exclues' => 'Nummern der auszuschließenden Rubriken, getrennt durch Semikolons.',
 	'entree_id_secteur_exclus' => 'Nummern der auszuschließenden Sektoren, getrennt mit Kommata',
 	'entree_infini' => 'Unendlich',
+	'entree_lien_connecte' => 'Lien à afficher une fois connecté : laisser vide pour afficher un lien vers l\'espace privé, mettre "rien" pour ne rien afficher, mettre "deconnecter" pour afficher un lien de deconnexion', # NEW
 	'entree_mapage' => 'Meine eigene Seite',
 	'entree_masquer_articles_uniques' => 'Wenn ja und falls die Rubrik nur einen Artikel enthält wird dieser maskiert ("oui" eintragen wenn gewünscht).',
 	'entree_niveau' => 'Tiefe der Unterrubriken',

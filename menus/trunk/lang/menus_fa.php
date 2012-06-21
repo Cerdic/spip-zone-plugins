@@ -60,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_rubriques_exclues' => 'تعداد بخش‌ها براي كنارگذاري، جداشده با ويرگول',
 	'entree_id_secteur_exclus' => 'تعداد بخش‌ها براي داخل‌ گذاري، جداشده با ويرگول',
 	'entree_infini' => 'تا بي‌نهايت',
+	'entree_lien_connecte' => 'Lien à afficher une fois connecté : laisser vide pour afficher un lien vers l\'espace privé, mettre "rien" pour ne rien afficher, mettre "deconnecter" pour afficher un lien de deconnexion', # NEW
 	'entree_mapage' => 'صفحه‌ي شخصي من',
 	'entree_masquer_articles_uniques' => 'در اين صورت و اگر يك بخش فقط يك مقاله دارد، آن را مخفي كند؟ (براي اين كار بگذاريد «بله»)',
 	'entree_niveau' => 'سطح زيربخش‌ها',
