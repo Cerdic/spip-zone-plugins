@@ -218,6 +218,9 @@ function formulaires_configurer_ck_traiter_dist(){
 	$code = ck_produire_code();
 	$file = ck_produire_options($code);
 
+	// on relance le hit via un refuser
+	refuser_traiter_formulaire_ajax();
+
 	// ne pas reinjecter dans la saisie
 	set_request('dossier_squelettes');
 
