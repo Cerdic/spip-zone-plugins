@@ -13,7 +13,7 @@ function edition_directe_affiche_gauche($flux){
 		AND ($id = intval($flux['args'][$id_table_objet]) OR $id = 0-$GLOBALS['visiteur_session']['id_auteur'])
 		AND autoriser('joindredocument',$type,$id)){
 
-		$flux['data'] .= recuperer_fond('prive/objets/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
+		if($id>0)$flux['data'] .= recuperer_fond('prive/objets/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
 	}
 
 	return $flux;
@@ -30,10 +30,10 @@ function edition_directe_recuperer_fond($flux){
 	// Insertion du formulaire d'édition	
 	foreach($objets as $objet){
 		  if ($fond == 'prive/squelettes/contenu/'.$objet){
-			  
 				$contexte['objet']=$objet;
 				$contexte['id_objet']=$contexte['id_'.$objet];
 				if($contexte['exec']=='site')$contexte['id_objet']=$contexte['id_syndic'];
+				
 				$texte=$flux['data']['texte'];
 				$edition=recuperer_fond('prive/echafaudage/contenu/objet_edit_directe',$contexte,array('ajax'=>true));
 				$patterns = array('/class=\'icone/','/<!--\/hd-->/');
