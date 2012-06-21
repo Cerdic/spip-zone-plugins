@@ -26,8 +26,12 @@ function action_instituer_forum_paremail_dist() {
 	$verif = _action_auteur("$action-$arg", '', $pass, 'alea_ephemere');
 
 	$erreur = _T('notifications:info_moderation_interdite');
-	if ($verif==$hash)
+
+	if ($hash==_action_auteur("$action-$arg", '', $pass, 'alea_ephemere')
+	  OR $hash==_action_auteur("$action-$arg", '', $pass, 'alea_ephemere_ancien'))
 		$erreur = "";
+	else
+		spip_log("Signature incorrecte pour $arg","moderationparemail"._LOG_INFO_IMPORTANTE);
 
 	// si hash est ok, verifier si l'email correspond a un auteur qui a le droit de faire cette action
 	if (!$erreur){
@@ -56,7 +60,13 @@ function action_instituer_forum_paremail_dist() {
 						break;
 					}
 				}
+				if ($erreur){
+					spip_log("Aucun auteur pour $email autorise a moderer $id_forum","moderationparemail"._LOG_INFO_IMPORTANTE);
+				}
 			}
+		}
+		else {
+			spip_log("Message forum $id_forum introuvable","moderationparemail"._LOG_INFO_IMPORTANTE);
 		}
 	}
 
