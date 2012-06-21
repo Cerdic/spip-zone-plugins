@@ -67,8 +67,12 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 
 	// si c'est un cacul differe, verifier qu'on est dans le bon contexte
 	if ($use_cache==2){
-		if ($cacher = charger_fonction('cacher','public', true))
-			$cacher($contexte_cache, $use_cache, $chemin2, $page, $lastmodified);
+		if ($cacher = charger_fonction('cacher','public', true)){
+			// le nom de chemin genere ici est ignore car faux
+			// mais il faut que l'appel produise bien un chemin
+			// sinon pb de contexte
+			$cacher(is_null($contexte_cache)?array():$contexte_cache, $use_cache, $chemin2, $page, $lastmodified);
+		}
 		else
 			$use_cache = -1;
 		if (intval($use_cache)!==1 OR !$chemin2){
