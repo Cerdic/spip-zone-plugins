@@ -89,16 +89,21 @@ function spipmotion_post_edition($flux){
 				$recuperer_logo = charger_fonction("spipmotion_recuperer_logo","inc");
 				$logo = $recuperer_logo($id_document);
 
+				$invalider = true;
+			}
+			if(
+				($GLOBALS['meta']['spipmotion_casse'] != 'oui')
+				&& ($mode != 'conversion')
+				&& (lire_config('spipmotion/encodage_auto') == 'on') 
+				&& (in_array($extension,lire_config('spipmotion/fichiers_videos',array())) OR in_array($extension,lire_config('spipmotion/fichiers_audios',array())))){
 				/**
 				 * On l'ajoute dans la file d'attente d'encodage si nécessaire
 				 * Si et seulement si on a l'option d'activée dans la conf
 				 */
-				if((lire_config('spipmotion/encodage_auto') == 'on') && ($mode != 'conversion')){
-					include_spip('action/spipmotion_ajouter_file_encodage');
-					spipmotion_genere_file($id_document,$document['objet'],$document['id_objet']);
-					$encodage_direct = charger_fonction('spipmotion_encodage_direct','inc');
-					$encodage_direct();
-				}
+				include_spip('action/spipmotion_ajouter_file_encodage');
+				spipmotion_genere_file($id_document,$document['objet'],$document['id_objet']);
+				$encodage_direct = charger_fonction('spipmotion_encodage_direct','inc');
+				$encodage_direct();
 				$invalider = true;
 			}
 			/**
