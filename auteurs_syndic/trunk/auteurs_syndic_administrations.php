@@ -1,7 +1,13 @@
 <?php
 /**
  * Plugin auteurs_syndic
- * par kent1
+ * Ajouter des auteurs aux sites syndiqués
+ * 
+ * Auteurs :
+ * kent1 (http://www.kent1.info - kent1@arscenic.info)
+ *
+ * © 2010/2012 - Distribue sous licence GNU/GPL
+ * 
  * Installation / Mise à jour et désinstallation
  */
 

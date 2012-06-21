@@ -1,7 +1,13 @@
 <?php
 /**
  * Plugin auteurs_syndic
- * par kent1
+ * Ajouter des auteurs aux sites syndiqués
+ * 
+ * Auteurs :
+ * kent1 (http://www.kent1.info - kent1@arscenic.info)
+ *
+ * © 2010/2012 - Distribue sous licence GNU/GPL
+ * 
  * Les autorisations
  */
 
@@ -28,7 +34,7 @@ function autoriser_site_modifier($faire, $type, $id, $qui, $opt) {
 		return true;
 
 	$t = sql_fetsel("id_rubrique,statut", "spip_syndic", "id_syndic=".sql_quote($id));
-	$auteur = sql_getfetsel("id_auteur", "spip_auteurs_syndic", "id_syndic=".sql_quote($id)." AND id_auteur=".$qui['id_auteur']);
+	$auteur = sql_getfetsel("id_auteur", "spip_auteurs_liens", "objet='site' AND id_objet=".intval($id)." AND id_auteur=".$qui['id_auteur']);
 	
 	return (($t
 		AND autoriser('voir','rubrique',$t['id_rubrique'])
