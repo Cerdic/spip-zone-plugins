@@ -22,7 +22,6 @@ function formulaires_configurer_facteur_charger_dist(){
 		'facteur_smtp_secure' => $GLOBALS['meta']['facteur_smtp_secure'],
 		'facteur_smtp_sender' => $GLOBALS['meta']['facteur_smtp_sender'],
 		'facteur_filtre_images' => $GLOBALS['meta']['facteur_filtre_images'],
-		'facteur_filtre_css' => $GLOBALS['meta']['facteur_filtre_css'],
 		'facteur_filtre_iso_8859' => $GLOBALS['meta']['facteur_filtre_iso_8859'],
 		'_enable_smtp_secure' => (intval(phpversion()) == 5)?' ':'',
 		'facteur_cc' => $GLOBALS['meta']['facteur_cc'],
@@ -125,7 +124,6 @@ function formulaires_configurer_facteur_traiter_dist(){
 	ecrire_meta('facteur_smtp_sender', $facteur_smtp_sender);
 
 	ecrire_meta('facteur_filtre_images', intval(_request('facteur_filtre_images')));
-	ecrire_meta('facteur_filtre_css', intval(_request('facteur_filtre_css')));
 	ecrire_meta('facteur_filtre_iso_8859', intval(_request('facteur_filtre_iso_8859')));
 
 	$facteur_cc = _request('facteur_cc');

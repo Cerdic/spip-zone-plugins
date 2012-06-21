@@ -118,16 +118,11 @@
 					<legend><:facteur:facteur_filtres:></legend>
 					<ul>
 						<li class="editer_facteur_filtres[ (#ENV**{erreurs}|table_valeur{facteur_filtres}|oui)erreur]">
-							<label><:facteur:facteur_smtp_secure:></label>
 							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_smtp_secure})</span>]
 							<p class="explication"><:facteur:facteur_filtres_descriptif:></p>
 							<div class="choix">
 								<input type="checkbox" name="facteur_filtre_images" class="checkbox" value="1" id="facteur_filtre_images"[(#ENV{facteur_filtre_images,''}|=={1}|oui)checked="checked"]/>
 								<label for="facteur_filtre_images"><:facteur:facteur_filtre_images:></label>
-							</div>
-							<div class="choix">
-								<input type="checkbox" name="facteur_filtre_css" class="checkbox" value="1" id="facteur_filtre_css"[(#ENV{facteur_filtre_css,''}|=={1}|oui)checked="checked"]/>
-								<label for="facteur_filtre_css"><:facteur:facteur_filtre_css:></label>
 							</div>
 							<div class="choix">
 								<input type="checkbox" name="facteur_filtre_iso_8859" class="checkbox" value="1" id="facteur_filtre_iso_8859"[(#ENV{facteur_filtre_iso_8859,''}|=={1}|oui)checked="checked"]/>
