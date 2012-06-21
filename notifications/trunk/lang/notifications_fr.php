@@ -56,18 +56,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_public_thread' => '<strong>Fil de discussion</strong> : les participants au même fil de discussion reçoivent les notifications des forums (publics).',
 
 	// I
+	'info_moderation_confirmee_off' => 'Le message #@id_forum@ a bien été supprimé',
+	'info_moderation_confirmee_publie' => 'Le message #@id_forum@ a bien été publié',
+	'info_moderation_confirmee_spam' => 'Le message #@id_forum@ a bien été signalé en SPAM',
+	'info_moderation_deja_faite' => 'Le message #@id_forum@ a déjà été modéré en "@statut@".<br />Connectez-vous dans l\'espace privé pour le modifier.',
+	'info_moderation_interdite' => 'Vous n\'avez pas le droit de moderer ce message',
 	'inscription' => 'Inscription des rédacteurs',
 	'inscription_admins' => 'Administrateurs',
 	'inscription_explication' => 'Quels auteurs reçoivent les notifications lors de l\'inscription de nouveaux rédacteurs ?',
 	'inscription_label' => 'Statut',
 	'inscription_statut_aucun' => 'Aucun',
 	'inscription_statut_webmestres' => 'Webmestres',
-
-	'info_moderation_confirmee_publie' => 'Le message #@id_forum@ a bien été publié',
-	'info_moderation_confirmee_off' => 'Le message #@id_forum@ a bien été supprimé',
-	'info_moderation_confirmee_spam' => 'Le message #@id_forum@ a bien été signalé en SPAM',
-	'info_moderation_interdite' => 'Vous n\'avez pas le droit de moderer ce message',
-	'info_moderation_deja_faite' => 'Le message #@id_forum@ a déjà été modéré en "@statut@".<br />Connectez-vous dans l\'espace privé pour le modifier.',
 
 	// L
 	'lien_documentation' => '<a href="http://www.spip-contrib.net/Notifications" class="spip_out">Cf. documentation</a>',

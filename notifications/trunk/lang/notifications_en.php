@@ -56,6 +56,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_public_thread' => '<strong>Forum thread</strong> : Posters to the same thread get notified when a new comment is posted to the (public) thread.',
 
 	// I
+	'info_moderation_confirmee_off' => 'Message #@id_forum@ has been deleted',
+	'info_moderation_confirmee_publie' => 'Message #@id_forum@ has been published online',
+	'info_moderation_confirmee_spam' => 'Message #@id_forum@ has been reported as SPAM',
+	'info_moderation_deja_faite' => 'Message #@id_forum@ has already been moderated as "@statut@".<br />Log into the private area to edit it.',
+	'info_moderation_interdite' => 'You are not allowed to moderate this message',
 	'inscription' => 'Editors registration',
 	'inscription_admins' => 'Administrators',
 	'inscription_explication' => 'Which authors receive notifications when registering new editors?',
@@ -67,7 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_documentation' => '<a href="http://www.spip-contrib.net/Notifications" class="spip_out">View documentation</a>',
 
 	// M
-	'message_a_valider' => 'Message à valider : ', # NEW
+	'message_a_valider' => 'Message to confirm:',
 	'message_voir_configuration' => 'Look at the notification setup',
 	'messagerie_interne' => 'Private messages',
 	'messagerie_interne_signaler' => '<strong>Notify new private messages</strong> : activate this to get redactors notified when they haven\'t seen a Private Message had been sent to them. Redactors get notified 20 minutes after the Private Message is sent, in order to avoid spam, when the redactor is connected to the private area.',

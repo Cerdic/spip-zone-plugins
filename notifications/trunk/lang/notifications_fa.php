@@ -55,6 +55,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_public_thread' => '<strong>خط گفتگو</strong>: شركت‌كنندگان در همان خط گفتگو اطلاعيه‌هايي از سخنگاه‌ها (همگاني) دريافت مي‌كنند.',
 
 	// I
+	'info_moderation_confirmee_off' => 'Le message #@id_forum@ a bien été supprimé', # NEW
+	'info_moderation_confirmee_publie' => 'Le message #@id_forum@ a bien été publié', # NEW
+	'info_moderation_confirmee_spam' => 'Le message #@id_forum@ a bien été signalé en SPAM', # NEW
+	'info_moderation_deja_faite' => 'Le message #@id_forum@ a déjà été modéré en "@statut@".<br />Connectez-vous dans l\'espace privé pour le modifier.', # NEW
+	'info_moderation_interdite' => 'Vous n\'avez pas le droit de moderer ce message', # NEW
 	'inscription' => 'ثبت سردبيران',
 	'inscription_admins' => 'مديران',
 	'inscription_explication' => 'كدام نويسندگان اطلاعيه ثبت سردبيران جديد را دريافت مي‌كنند؟',
