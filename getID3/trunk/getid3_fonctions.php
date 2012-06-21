@@ -10,6 +10,8 @@
  * Les fonctions du plugin
  */
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
  /**
   * Récupération des informations contenues dans les id3
   * et affichage pour tester (les données sont enregistrées en base)

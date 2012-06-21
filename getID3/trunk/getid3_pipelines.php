@@ -9,6 +9,8 @@
  *
  */
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 /**
  * Insertion dans le pipeline post_edition
  * Récupération d'informations sur le document lors de son insertion en base
@@ -28,7 +30,6 @@ function getid3_post_edition($flux){
 			$document = sql_fetsel("*", "spip_documents","id_document=".sql_quote($id_document));
 			$extension = $document['extension'];
 			if($flux['args']['operation'] == 'ajouter_document'){
-				spip_log('on ajoute le document','getid3');
 				$getid3_done = true;
 				/**
 				 * Récupération automatique des infos des fichiers sons à leur insertion
@@ -74,7 +75,6 @@ function getid3_post_edition($flux){
 			 */
 			if($flux['args']['action'] == 'modifier'){
 	        	$getid3_done = true;
-				spip_log('on modifie le document','getid3');
 				
 				if(in_any($extension,$son_modif_id3)){
 					$update = false;

@@ -9,9 +9,8 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('inc/charsets');	# pour le nom de fichier
 include_spip('inc/actions');
 
 function action_getid3_infos_dist(){

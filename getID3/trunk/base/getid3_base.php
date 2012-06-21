@@ -11,7 +11,7 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function getid3_declarer_tables_principales($tables_principales){
 

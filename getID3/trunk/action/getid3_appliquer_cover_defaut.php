@@ -9,7 +9,7 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function action_getid3_appliquer_cover_defaut(){
 	if(!autoriser('webmestre'))

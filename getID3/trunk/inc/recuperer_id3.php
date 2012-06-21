@@ -9,7 +9,7 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Récupère le contenu des tags id3 et des données audio d'un fichier

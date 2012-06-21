@@ -9,7 +9,7 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Enregistrement en base le contenu des données des tags et des données audio
@@ -90,7 +90,7 @@ function inc_getid3_recuperer_infos($id_document){
 
 			list($extension,$arg) = fixer_extension_document($covers[0]);
 			$cover_ajout = array(array('tmp_name'=>$covers[0],'name'=> basename($covers[0])));
-			$ajoute = $ajouter_documents($id_vignette,$cover_ajout,'',0,'vignette');
+			$ajoute = $ajouter_documents('new',$cover_ajout,'',0,'vignette');
 
 			if (is_numeric(reset($ajoute))
 			  AND $id_vignette = reset($ajoute)){

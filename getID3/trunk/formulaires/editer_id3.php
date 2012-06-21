@@ -9,6 +9,7 @@
  * Formulaire d'édition des tags ID3 d'un fichier sonore
  */
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Chargement des donnees du formulaire
