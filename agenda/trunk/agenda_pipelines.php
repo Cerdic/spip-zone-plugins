@@ -19,7 +19,8 @@ function agenda_affiche_milieu($flux) {
 	if ($e['type']=='rubrique'
 	  AND autoriser('configurer')
 	  AND $e['edition']==false
-	  AND $id_rubrique = intval($flux['args']['id_rubrique'])){
+	  AND $id_rubrique = intval($flux['args']['id_rubrique'])
+	  AND autoriser('modifier', 'rubrique', $id_rubrique)){
 		$activer = true;
 		$res = "";
 		$actif = sql_getfetsel('agenda','spip_rubriques','id_rubrique='.intval($id_rubrique));
