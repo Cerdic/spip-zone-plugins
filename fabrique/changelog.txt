@@ -6,6 +6,7 @@ Ce plugin génère d'autres plugins !
 Dans le plugin généré
 * Nouveau squelette sélectionnable à la place d'un fichier échafaudé : prive/squelettes/contenu/$type.html
 * Les listes d'objets reçoivent en critère optionnels tous les id_xxx déclarés dans les champs de l'objet
+* Correction d'une erreur de boucle dans la vue des saisies
 
 Dans les outils
 * Permettre d'indiquer un objet dans l'échappeur de squelettes, qui permet
