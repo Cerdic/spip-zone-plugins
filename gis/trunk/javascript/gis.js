@@ -50,9 +50,8 @@ L.Geocoder = L.Class.extend({
 	},
 
 	_request: function (url, data) {
-		//console.log(data);
 		$.ajax({
-			//cache: true,
+			cache: true,
 			context: this,
 			data: data,
 			dataType: 'jsonp',
@@ -64,8 +63,6 @@ L.Geocoder = L.Class.extend({
 	
 	_callback: function (response) {
 		var return_location = {};
-		//console.log(response);
-		//console.log(typeof(response));
 		if (response instanceof Array && !response.length) {
 			return false;
 		} else {
@@ -80,8 +77,9 @@ L.Geocoder = L.Class.extend({
 			} else {
 				place = response;
 			}
+			
 			var street_components = [];
-			//console.log(place);
+			
 			if (place.address.country) {
 				return_location.country = place.address.country;
 			}
