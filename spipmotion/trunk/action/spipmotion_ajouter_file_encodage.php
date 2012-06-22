@@ -143,7 +143,6 @@ function spipmotion_genere_file($id_document,$type,$id,$format=''){
 			 * Ajout de la vidéo dans la file d'attente d'encodage si besoin
 			 */
 			if(in_array($extension,lire_config('spipmotion/fichiers_videos_encodage',array()))){
-				spip_log("l'id_orig est $id_document et l'id_document est $id_document","spipmotion");
 				foreach(lire_config('spipmotion/fichiers_videos_sortie',array()) as $extension_sortie){
 					$en_file = sql_getfetsel("id_spipmotion_attente","spip_spipmotion_attentes","id_document=$id_document AND extension ='$extension_sortie' AND encode IN ('en_cours,non')");
 					if(!$en_file){
@@ -162,7 +161,6 @@ function spipmotion_genere_file($id_document,$type,$id,$format=''){
 			 * Ajout du son dans la file d'attente d'encodage si besoin
 			 */
 			else if(in_array($extension,lire_config('spipmotion/fichiers_audios_encodage',array()))){
-				spip_log("l'id_orig est $id_document et l'id_document est $id_document","spipmotion");
 				foreach(lire_config('spipmotion/fichiers_audios_sortie',array()) as $extension_sortie){
 					$en_file = sql_getfetsel("id_spipmotion_attente","spip_spipmotion_attentes","id_document=$id_document AND extension ='$extension_sortie' AND encode IN ('en_cours,non')");
 					if(!$en_file){

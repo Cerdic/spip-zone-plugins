@@ -66,7 +66,7 @@ function spipmotion_post_edition($flux){
 		$fichier = $infos_doc['fichier'];
 
 		if(($mode != 'vignette') && ($infos_doc['distant'] == 'non')){
-			$document = sql_fetsel("docs.id_document, docs.extension,docs.fichier,docs.id_orig,docs.mode,docs.distant, L.vu, L.objet, L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
+			$document = sql_fetsel("docs.id_document, docs.extension,docs.fichier,docs.mode,docs.distant, L.vu, L.objet, L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
 			$extension = $document['extension'];
 
 			/**

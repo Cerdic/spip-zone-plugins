@@ -19,7 +19,7 @@
 	[<itunes:keywords>(#GET{category_string}|trim)</itunes:keywords>]
 	[<media:keywords>(#GET{category_string}|trim)</media:keywords>]
 	<BOUCLE_type(CONDITION){si #ENV{type}|=={itunes}|et{#_document:EXTENSION|in_array{#GET{itunes_formats}}|non}}>
-		<BOUCLE_doc_itunes(DOCUMENTS){id_orig=#_document:ID_DOCUMENT}{extension IN #GET{itunes_formats}}{0,1}>
+		<BOUCLE_doc_itunes(DOCUMENTS){objet=document}{id_objet=#_document:ID_DOCUMENT}{extension IN #GET{itunes_formats}}{0,1}{tout}>
 		[<enclosure url="(#URL_DOCUMENT|url_absolue)"[ length="(#TAILLE)"][ type="(#_document:MIME_TYPE)"] />]
 		</BOUCLE_doc_itunes>
 		[<enclosure url="(#URL_DOCUMENT|url_absolue)"[ length="(#TAILLE)"][ type="(#_document:MIME_TYPE)"] />]
@@ -30,7 +30,7 @@
 	#SET{id_article,#ID_ARTICLE}
 	<media:hash algo="md5">[(#FICHIER|md5)]</media:hash>
 	#SET{nb_versions,0}
-	<BOUCLE_compte_version(DOCUMENTS){id_orig=#_document:ID_DOCUMENT}> </BOUCLE_compte_version>
+	<BOUCLE_compte_version(DOCUMENTS){objet=document}{id_objet=#_document:ID_DOCUMENT}{tout}> </BOUCLE_compte_version>
 	#SET{nb_versions,#GRAND_TOTAL}
 	</B_compte_version>
 
@@ -52,7 +52,7 @@
 			height="(#_document:HAUTEUR|>{0}|?{#_document:HAUTEUR,''})"][
 			lang="(#LANG)"]
          />
-		<BOUCLE_versions(DOCUMENTS){id_orig=#ID_DOCUMENT}>
+		<BOUCLE_versions(DOCUMENTS){objet=document}{id_objet=#ID_DOCUMENT}{tout}>
         <media:content
 			url="[(#URL_DOCUMENT|url_absolue)]"[
 			fileSize="(#TAILLE)"][
