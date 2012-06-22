@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_duree' => 'Duration:',
 	'info_duree_secondes' => 'Duration (seconds):',
 	'info_encoded_by' => 'Encoded by:',
+	'info_encodeur' => 'Encodé par :', # NEW
 	'info_encoding_time' => 'Encoding date:',
 	'info_erreurs' => 'Errors',
 	'info_extension' => 'Extension:',
