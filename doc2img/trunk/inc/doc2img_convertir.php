@@ -23,7 +23,6 @@ function inc_doc2img_convertir($id_document,$type='full') {
 		$type = 'full';
 	
 	if(class_exists('Imagick')){
-
 	    include_spip('inc/documents');
 	    include_spip('inc/flock');
 		include_spip('inc/config');
@@ -52,6 +51,7 @@ function inc_doc2img_convertir($id_document,$type='full') {
 		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 		
 		if($type == 'full'){
+			include_spip('action/editer_document');
 			/**
 			 * Est ce que ce document a déja été converti
 			 * Si oui, on supprime son ancienne conversion
@@ -62,12 +62,9 @@ function inc_doc2img_convertir($id_document,$type='full') {
 			
 			$documents_a_supprimer = array();
 			while($document_doc2img = sql_fetch($documents_doc2img)){
-				spip_log($document_doc2img,'doc2img');
 				$documents_a_supprimer[] = $document_doc2img['id_document'];
 			}
 			if(count($documents_a_supprimer) > 0){
-				spip_log('On supprime les documents','doc2img');
-				spip_log($documents_a_supprimer,'doc2img');
 				$supprimer_document = charger_fonction('supprimer_document','action');
 				foreach ($documents_a_supprimer as $id_document_supprimer) {
 					$supprimer_document($id_document_supprimer); // pour les orphelins du contexte, on traite avec la fonction existante
@@ -112,21 +109,21 @@ function inc_doc2img_convertir($id_document,$type='full') {
 					$image_frame->writeImage($frame_tmp);
 					$files = array(array('tmp_name'=>$frame_tmp,'name'=>$frame_name));
 	        		if(is_numeric($id_vignette) && $id_vignette > 0){
-	        			$x = $ajouter_documents($id_vignette, $files,'', 0, 'vignette');	
+	        			$vignette = $ajouter_documents($id_vignette, $files,'', 0, 'vignette');	
 	        		}else{
-						$x = $ajouter_documents('new', $files,'', 0, 'vignette');
+						$vignette = $ajouter_documents('new', $files,'', 0, 'vignette');
 					}
-					if (is_numeric(reset($x))
-					  AND $id_vignette = reset($x)){
-						include_spip('action/editer_document');
+					if (is_numeric(reset($vignette))
+					  AND $id_vignette = reset($vignette)){
 						document_set($id_document,array("id_vignette" => intval($id_vignette)));
 					}
 		        }
 		        //on libère la frame
 	            $image_frame->clear();
 	            $image_frame->destroy();
-		        $frame++;
-		    } while($frame < $nb_pages );
+				$frame++;
+				document_set(reset($x),array('page'=>$frame));
+		    } while($frame < $nb_pages);
 	    }else{
 	    	do {
 	    		if(in_array($config['format_cible'],array('png','jpg'))){

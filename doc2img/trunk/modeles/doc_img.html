@@ -11,7 +11,7 @@
 		[(#FICHIER|image_reduire{#ENV{largeur,640},#ENV{hauteur,0}}|inserer_attribut{alt,''})]
 		</a>
 	</BOUCLE_d2c>
-    [(#ENV{no_desc}|non)[<p>(#GRAND_TOTAL|singulier_ou_pluriel{<:doc2img:info_desc_page:>,<:doc2img:info_desc_pages:>})</p>]]
+    [(#ENV{no_desc}|non)[<p>(#GRAND_TOTAL|singulier_ou_pluriel{doc2img:info_desc_page,doc2img:info_desc_pages})</p>]]
     [(#ENV{no_pagination}|non)[<p class="pagination">(#PAGINATION{#ENV{type_pagination,page}})</p>]]
 	</div>
 </B_d2c>
