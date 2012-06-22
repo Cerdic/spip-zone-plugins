@@ -402,6 +402,20 @@ table.geoloc-tool-results tr.active .btn_activate {
 .configurer_gmap .config_group .num_other_version_container input#num_other_version{
 	width: 100px;
 }
+.configurer_gmap select.choix_titre {
+	margin: 0; padding: 0;
+	display: inline;
+	width: auto;
+	font-weight: bold;
+	font-size: 0.95em;
+}
+.configurer_gmap input.code-profil {
+	width: 7em;
+}
+.configurer_gmap .a-la-suite {
+	display: inline;
+	width: auto;
+}
 
 /* Tableau de la position par défaut */
 .configurer_gmap table#marker {
