@@ -53,7 +53,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_rubriques_exclues' => 'Numbers of the sections to be excluded, separated by commas',
 	'entree_id_secteur_exclus' => 'Numbers of the sectors to be excluded, separated by commas',
 	'entree_infini' => 'To infinity',
-	'entree_lien_connecte' => 'Lien à afficher une fois connecté : laisser vide pour afficher un lien vers l\'espace privé, mettre "rien" pour ne rien afficher, mettre "deconnecter" pour afficher un lien de deconnexion', # NEW
 	'entree_mapage' => 'My page',
 	'entree_masquer_articles_uniques' => 'If so and if a section contains a only one article, hide it? (put "oui" for this)',
 	'entree_niveau' => 'Sub-sections level',

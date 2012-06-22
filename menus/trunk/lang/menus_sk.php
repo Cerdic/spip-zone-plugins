@@ -53,7 +53,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_rubriques_exclues' => 'Čísla rubrík, ktoré majú byť vylúčené, oddelené čiarkami',
 	'entree_id_secteur_exclus' => 'Čísla sektorov, ktoré majú byť vylúčené, oddelené čiarkami',
 	'entree_infini' => 'Do nekonečna',
-	'entree_lien_connecte' => 'Lien à afficher une fois connecté : laisser vide pour afficher un lien vers l\'espace privé, mettre "rien" pour ne rien afficher, mettre "deconnecter" pour afficher un lien de deconnexion', # NEW
 	'entree_mapage' => 'Moja stránka',
 	'entree_masquer_articles_uniques' => 'Ak áno a ak je v rubrike jeden článok, schovať ju? (ak to tak chcete, označte možnosť "áno")',
 	'entree_niveau' => 'Úroveň podrubrík',
