@@ -11,6 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function gis_insert_head_css($flux){
 	$flux .="\n".'<link rel="stylesheet" href="'. find_in_path(_DIR_LIB_GIS.'dist/leaflet.css') .'" />';
 	$flux .= "\n".'<!--[if lte IE 8]> <link rel="stylesheet" href="'. find_in_path(_DIR_LIB_GIS.'dist/leaflet.ie.css') .'" /> <![endif]-->';
+	$flux .="\n".'<link rel="stylesheet" href="'. find_in_path(_DIR_LIB_GIS.'plugins/leaflet-plugins.css') .'" />';
 	return $flux;
 }
 
@@ -27,6 +28,7 @@ function gis_insert_head($flux){
 	$flux .="\n".'<script type="text/javascript" src="'. find_in_path('javascript/gis.js') .'"></script>';
 	$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'plugins/layer/vector/KML.js') .'"></script>';
 	$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'plugins/layer/tile/leaflet-providers-0.0.1.js') .'"></script>';
+	$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'plugins/control/Control.FullScreen.js') .'"></script>';
 
 	// initialisation des valeurs de config
 	$config = @unserialize($GLOBALS['meta']['gis']);

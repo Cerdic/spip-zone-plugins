@@ -17,6 +17,7 @@
 	- style = non					ne pas styler la carte
 	- zoom_molette|zoom_wheel = non	désactiver le zoom avec la molette de la souris, actif par defaut
 	- type = carte					type de la carte : carte, satellite, relief ou hybride
+	- control_fullscreen = oui		afficher un bouton pour passer la carte en plein écran
 X	- control_zoom|controle_zoom = large	type de controles pour le zoom : large, small
 X	- control_pan|controle_pan = non				ne pas afficher les controles de déplacement dans la carte
 	- control_type|controle_type = non			ne pas afficher les controles de changement de type
@@ -95,8 +96,6 @@ var map[(#GET{id})];
 		// classe noajax sur le layer_control pour éviter l'ajout de hidden par SPIP
 		$(layers_control._form).addClass('noajax');
 		</B_layers>
-
-		
 		
 		map[(#GET{id})].setView(new L.LatLng(#GET{lat},#GET{lon}),#ENV{zoom,#CONFIG{gis/zoom,0}});
 		
@@ -104,21 +103,9 @@ var map[(#GET{id})];
 		
 		[(#ENV{scale}|et{#ENV{no_control,#ENV{aucun_controle}}|!={oui}}|oui)
 			map[(#GET{id})].addControl(new L.Control.Scale());
+		][(#ENV{fullscreen}|et{#ENV{no_control,#ENV{aucun_controle}}|!={oui}}|oui)
+			map[(#GET{id})].addControl(new L.Control.FullScreen());
 		]
-		
-		/*
-		
-		#SET{map_controls,#ARRAY}
-		
-		[(#ENV{overview}|oui)
-			[(#SET{map_controls,#GET{map_controls}|array_merge{#ARRAY{overview,true}}})]
-		]
-		[(#ENV{control_type,#ENV{controle_type}}|!={non}|oui)
-			[(#SET{map_controls,#GET{map_controls}|array_merge{#ARRAY{map_type,true}}})]
-		]
-		
-		map[(#GET{id})].addControls([(#GET{map_controls}|json_encode)]);
-		*/
 
 		[(#ENV{point}|!={non}|oui)
 		jQuery.getJSON("[(#URL_PAGE{gis_json}|url_absolue)]",
