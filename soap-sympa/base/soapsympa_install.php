@@ -17,8 +17,7 @@ function soapsympa_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-	      //$config = lire_config('soapsympa');
-	      $config = unserialize($GLOBALS['meta']['soapsympa']);
+	        $config = unserialize($GLOBALS['meta']['soapsympa']);
 		if (!is_array($config)) {
 			$config = array();
 		}
