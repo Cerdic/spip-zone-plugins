@@ -3,19 +3,32 @@ Ce plugin génère d'autres plugins !
 -----------------------------------
 
 
+
+
+1.16.3 le 23 06 2012
+--------------------
+
 Dans le plugin généré
-* Nouveau squelette sélectionnable à la place d'un fichier échafaudé : prive/squelettes/contenu/$type.html
 * Les listes d'objets reçoivent en critère optionnels tous les id_xxx déclarés dans les champs de l'objet
 * Correction d'une erreur de boucle dans la vue des saisies
+
+Dans les outils
+* Le futilitaire a 2 nouvelles fonctions inserer() et appliquer_lignes(), la première
+  définissant des lignes à modifier/inserer qui seront appliquées par la seconde en temps voulu
+  Ça facilite un peu l'écriture.
+
+
+1.16.2 le 17 06 2012
+--------------------
+
+Dans le plugin généré
+* Nouveau squelette sélectionnable à la place d'un fichier échafaudé : prive/squelettes/contenu/$type.html
 
 Dans les outils
 * Permettre d'indiquer un objet dans l'échappeur de squelettes, qui permet
   alors de transformer les occurences de cet objet par les balises génériques
   pour la fabrique.
-* Le futilitaire a 2 nouvelles fonctions inserer() et appliquer_lignes(), la première
-  définissant des lignes à modifier/inserer qui seront appliquées par la seconde en temps voulu
-  Ça facilite un peu l'écriture.
-
+  
 
 1.16.1 le 13 06 2012
 --------------------
