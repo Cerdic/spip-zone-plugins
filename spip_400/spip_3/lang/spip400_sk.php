@@ -9,12 +9,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// 4
 	'401_error' => 'K požadovanej stránke alebo požadovanému dokumentu nemáte dostatočné prístupové práva.',
-	'401_error_comment_connected' => '{{Veuillez contacter le webmestre du site pour y accéder...}}
+	'401_error_comment_connected' => '{{Na získanie prístupu, prosím, kontaktujte webmastera}}
 
-L\'accès à cette page ou ce document nécessite d\'être dûment autorisé et identifié. Il semble que vos droits d\'accès ne soient pas suffisants ...', # NEW
-	'401_error_comment_notconnected' => '{{Veuillez vous identifier ci-dessous pour y accéder...}}
+Prístup k tejto stránke alebo k tomuto dokumentu musí byť autorizovaný a identifikovaný. Zdá sa, že vaše prístupové práva nie sú dostatočné.',
+	'401_error_comment_notconnected' => '{{Na získanie prístupu sa treba prihlásiť}}
 
-L\'accès à cette page ou ce document nécessite d\'être dûment autorisé et identifié. Si vous y êtes autorisé, connectez-vous via le formulaire ci-dessous.', # NEW
+Prístup k tejto stránke alebo k tomuto dokumentu musí byť autorizovaný a identifikovaný. Ak máte dostatočné práva, prihláste sa pomocou formulára, ktorý sa nachádza nižšie.',
 	'404_error' => 'Požadovaná stránka alebo požadovaný dokument sa na stránke nedá nájsť.',
 	'404_error_comment' => '{{Veuillez nous excuser pour ce contre-temps...}}
 
@@ -33,7 +33,7 @@ En dernier lieu, de nombreux sites web disposent d’un ou plusieurs espaces ré
 	'backtrace' => 'PHP na spätné vystopovanie',
 
 	// C
-	'cfg_comment_email' => 'Utilisez les champs ci-dessous pour choisir les adresses email d\'envoi et réception des rapports d\'erreurs ({ces rapports sont envoyés lorsque l\'internaute clique sur le bouton concerné - par défaut, le mail du webmestre est utilisé}).', # NEW
+	'cfg_comment_email' => 'V poliach, ktoré sa nachádzajú nižšie, si zvoľte e-mailové adresy na posielanie a prijímanie správ o chybách ({tieto správy sa posielajú, keď používateľ klikne na určité tlačidlo – v predvolených nastaveniach sa používa e-mail webmestera}).',
 	'cfg_descr' => 'Tu môžete nastaviť niektoré funkcie zásuvného modulu "Správa chýb HTTP".',
 	'cfg_label_receipt_email' => 'E-mailová adresa príjemcu správ o chybách',
 	'cfg_label_sender_email' => 'E-mailová adresa na posielanie správ o chybách',
@@ -54,7 +54,7 @@ En dernier lieu, de nombreux sites web disposent d’un ou plusieurs espaces ré
 	'report_a_bug_message_envoye' => 'OK – Správa o chybe bola odoslaná. Ďakujeme.',
 	'report_a_bug_texte_mail' => 'Stránka "@url@" vypísala @date@ chybový kód HTTP @code@.',
 	'report_a_bug_titre_mail' => '[@sitename@] Správa o chybe HTTP @code@',
-	'report_an_authorized_bug_comment' => 'Si vous pensez qu\'il s\'agit d\'une erreur ou d\'une mauvaise évaluation de vos droits, vous pouvez soumettre un rapport d\'incident au webmestre du site en cliquant sur le bouton ci-dessous. Les informations sont transmises automatiquement (<i>page demandée et vos identifiants</i>).', # NEW
+	'report_an_authorized_bug_comment' => 'Ak si myslíte, že došlo k chybe alebo nesprávnemu vyhodnoteniu vašich práv, kliknutím na tlačidlo nižšie môžete napísať webmasterovi správu o chybe. Údaje (<i>požadovaná stránka a vaše prihlasovacie údaje</i>) sa posielajú automaticky.',
 	'request_auth_message_envoye' => 'OK – Vaša požiadavka bola odoslaná. Ďakujeme.',
 	'request_auth_texte_mail' => 'Používateľ "@user@" požiadal o povolenie k "@url@" dňa @date@.',
 
