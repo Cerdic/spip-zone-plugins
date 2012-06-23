@@ -101,4 +101,3 @@ if(($exec == 'auteur_infos')||($exec == 'configurer_soapsympa')||($exec == 'soap
 return $flux;
 }
 ?>
-
