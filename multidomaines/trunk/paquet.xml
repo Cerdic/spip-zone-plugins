@@ -1,22 +1,21 @@
 <paquet 
 	prefix="multidomaines"
 	categorie="maintenance"
-	version="2.0.1"
+	version="2.1.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/multidomaines-72.png"
 	documentation="http://www.spip-contrib.net/article3127"
-	schema="0.0.1"
->
+	schema="0.0.2" 
+><!-- plus de base depuis le 23/06/12 suite à suppression de cextras -->
 	<nom>Multidomaines</nom>
 
 	<auteur mail="mailto:bennetteson@free.fr">Nathanaël Louison</auteur>
 	<auteur lien="http://www.pierre-kuhn.org">Pierre KUHN</auteur>
 
-	<necessite nom="cextras" compatibilite="[3.0.6;[" />
-
 	<menu nom="configurer_multidomaines" titre="multidomaines:titre_multidomaines" parent="menu_configuration" icone="images/multidomaines-16.png" />
 
 	<pipeline nom="declarer_champs_extras" inclure="base/multidomaines.php" />
 	<pipeline nom="calculer_URL_SECTEUR" inclure="multidomaines_fonctions.php" />
+	<pipeline nom="" inclure="multidomaines_options.php" />
 </paquet>

@@ -11,7 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //L
 	'label_editer_url' => 'Url par defaut',
-	'label_squelette' => 'Dossier des squelettes',
+	'label_editer_url_secteur' => 'Url du secteur',
+	'label_squelette' => 'Dossier des secteurs',
+	'label_squelette_secteur' => 'Dossiers des squelettes du secteur',
 	'label_url' => 'Url du secteur',
 
 // M
@@ -19,8 +21,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'multidomaines_slogan' => 'Associer des secteurs à un domaine',
 
 //P
+	'precisions_editer_squelettes' => 'vous pouvez écrire plusieurs dossiers squelettes <br /> ex: squelettes:squelettes/sous-dmomaine.domaine.com',
 	'precisions_editer_url' => 'l\'url doit être valide, complète et se terminer par un slash<br /> ex: https://sous-dmomaine.domaine.com/',
 	'precisions_squelette' => 'ex : squelettes',
+	'precisions_squelette_secteur' => 'ex : squelettes/sous-domaine.domaine',
 	'precisions_url' => 'l\'url doit être valide,ne contenir qu\'un domaine et se terminer par un slash. ex: https://sous-dmomaine.domaine.com/',
 
 //T
