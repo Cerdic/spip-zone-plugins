@@ -40,7 +40,7 @@
 					size=5
 				})]
 				[(#CONFIG{piwik_admin}|=={oui}|oui)
-				<li>
+				<li class="editer editer_creer_site">
 					<label><:piwik:label_creer_site:></label>
 					<p class="explication"><:piwik:explication_creer_site:></p>
 					<a href="[(#URL_ACTION_AUTEUR{piwik_creer_site,test&urlsite=[(#CONFIG{piwik/urlpiwik})]&token=[(#CONFIG{piwik/token})],#SELF})]"><:piwik:action_creer_site:></a>
