@@ -1,13 +1,13 @@
 #CACHE{0}
 	
-<div class="formulaire_spip formulaire_configurer_notation_general">
+<div class="formulaire_spip formulaire_#FORM">
 [<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
 [<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>]
 
 <form method="post" action="#ENV{action}"><div>
 #ACTION_FORMULAIRE{#ENV{action}}
 <ul>
-<li class="editer_accepter_note">
+<li class="editer editer_accepter_note">
 	<label for="accepter_note"><:notation:label_accepter_note:></label>
 	<p class="explication"><:notation:explication_accepter_note:></p>
 	<select name="accepter_note" id="accepter_note">

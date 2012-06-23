@@ -12,7 +12,7 @@
 	<form action="#ENV{action}#formulaire_configurer_forums_article_moderation" method="post" enctype='multipart/form-data'><div>
 		[(#ACTION_FORMULAIRE{#ENV{action}})]
 		<ul>
-			<li class='configurer_accepter_note[ (#ENV**{erreurs}|table_valeur{accepter_note}|oui)erreur]'>
+			<li class='editer configurer_accepter_note[ (#ENV**{erreurs}|table_valeur{accepter_note}|oui)erreur]'>
 				<label for='accepter_note'><:notation:info_fonctionnement_note:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{accepter_note})</span>
 				]<select name='accepter_note' id='accepter_note'>

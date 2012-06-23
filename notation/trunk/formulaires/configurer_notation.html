@@ -1,4 +1,4 @@
-<div class="formulaire_spip formulaire_configurer_notation formulaire_configurer_notation_ponderation">
+<div class="formulaire_spip formulaire_#FORM formulaire_configurer_notation_ponderation">
 	[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</div>]
 	[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</div>]
 
@@ -42,7 +42,7 @@
 		<legend><:notation:acces:></legend>
 		<div class="explication"><:notation:info_ip|propre:></div>
 		<ul>
-			<li class="editer_notation_acces">
+			<li class="editer editer_notation_acces">
 				<label><:notation:info_acces:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{acces})</span>]
 				<div class="choix">
@@ -67,7 +67,7 @@
 				</div>
 			</li>
 
-			<li class="editer_notation_modifier_note">
+			<li class="editer editer_notation_modifier_note">
 				<label for="notation_changer_note"><:notation:info_modifications:></label>
 				<div class="choix">
 				<input type="checkbox" name="change_note" class="checkbox" id="notation_changer_note"[ (#ENV{change_note}|=={oui}|oui)checked="checked"] value="oui" />
@@ -80,7 +80,7 @@
 		<fieldset>
 		<legend><:notation:nb_etoiles:></legend>
 			<ul>
-				<li class="editer_notation_etoile">
+				<li class="editer editer_notation_etoile">
 					<label for="notation_etoiles"><:notation:valeur_nb_etoiles:></label>
 					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{acces})</span>]
 					<input type="text" name="nombre" class="radio" value="#ENV{nombre}" size="8" id="notation_etoiles" />
