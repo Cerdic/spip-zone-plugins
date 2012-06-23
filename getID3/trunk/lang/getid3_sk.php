@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_album' => 'Album:',
-	'info_artist' => 'Artiste :', # NEW
+	'info_artist' => 'Umelec:',
 	'info_audiosamplerate' => 'Sample rate :', # NEW
 	'info_bitrate' => 'Bitová rýchlosť:',
 	'info_bitrate_mode' => 'Režim:',
@@ -55,25 +55,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_totaltracks' => 'Celkový počet stôp:',
 	'info_track' => 'Stopa:',
 	'info_track_number' => 'Číslo stopy:',
-	'info_url_artist' => 'Url de l\'artiste :', # NEW
-	'info_url_file' => 'Url du fichier :', # NEW
-	'info_url_payment' => 'Url de paiement :', # NEW
-	'info_url_publisher' => 'Url du site de publication :', # NEW
-	'info_url_source' => 'Url de la source :', # NEW
-	'info_url_station' => 'Url de station (?) :', # NEW
-	'info_utilisation_aucune' => 'Aucune utilisation de ce document', # NEW
-	'info_utilisation_plusieurs' => '@nb@ utilisations', # NEW
-	'info_utilisation_unique' => 'Une utilisation', # NEW
+	'info_url_artist' => 'Url umelca:',
+	'info_url_file' => 'Url súboru:',
+	'info_url_payment' => 'Url pre platbu:',
+	'info_url_publisher' => 'Url stránky publikovania:',
+	'info_url_source' => 'Url zdroja:',
+	'info_url_station' => 'Url stanice (?) :',
+	'info_utilisation_aucune' => 'Žiadne použitie tohto dokumentu',
+	'info_utilisation_plusieurs' => '@nb@ použití',
+	'info_utilisation_unique' => 'Jedno použitie',
 	'info_year' => 'Rok',
 	'install_ajout_champs_documents' => 'GetID3 : Ajout des champs sur spip_documents', # NEW
 	'install_mise_a_jour_base' => 'Mise à jour de la base de getid3 en @version@', # NEW
 
 	// L
 	'label_album' => 'Album',
-	'label_artist' => 'Artiste', # NEW
+	'label_artist' => 'Umelec',
 	'label_comment' => 'Komentár',
-	'label_cover' => 'Pochette', # NEW
-	'label_cover_defaut' => 'Utiliser une pochette par défaut', # NEW
+	'label_cover' => 'Obal',
+	'label_cover_defaut' => 'Použiť predvolený obal',
 	'label_genre' => 'Žáner',
 	'label_reecriture_tags' => 'Réécrire les tags des fichiers à la modification', # NEW
 	'label_reecriture_tags_descriptif' => 'de la description du document', # NEW
