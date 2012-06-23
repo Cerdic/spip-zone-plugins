@@ -49,7 +49,7 @@
 	
 	      <necessite id='SPIP' version='[2.1.0;3.0.0-dev)' />
 	      <necessite id='saisies' version='[1.5.0;]' />
-	      <necessite id='spip-bonux' version='[2.2.0;]' />
+	      <necessite id='spip_bonux' version='[1.0;]' />
 	
 	      <bouton id='edition_soapsympa' parent='naviguer'>
 	      <titre>soapsympa:edition_soapsympa</titre>
