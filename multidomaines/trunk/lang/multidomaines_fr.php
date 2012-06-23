@@ -9,23 +9,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //C
 	'configurations' => 'Ce formulaire va vous permettre de configurer le site de façon général. ',
 
+//E
+	'explications' => 'Le plugin va lire la configuration ce la façon suivante: <br />
+	-* pour trouver le domaine du secteur : Url du secteur puis url par defaut<br />
+	-* pour trouver le squelette du secteur : Chercher le dossier suivant le schéma (www.domaine.fr puis domaine.fr) puis dossiers des squelettes du secteur.<br />
+	Un domaine peut avoir plusieurs dossiers squelettes, il faut les séparé par <b>:</b> (ex:squelettes:squelettes/sous-domaine.domaine.com)
+	',
+
 //L
 	'label_editer_url' => 'Url par defaut',
 	'label_editer_url_secteur' => 'Url du secteur',
 	'label_squelette' => 'Dossier des secteurs',
 	'label_squelette_secteur' => 'Dossiers des squelettes du secteur',
-	'label_url' => 'Url du secteur',
-
-// M
-	'multidomaines_description' => 'Le plug-in Multidomaines permet d\'associer un nom de domaine ou un sous-domaine à un secteur spip. Les balises rajoutées permettent de pointer un lien absolu aussi facilement qu\'avec les balises originales. Il offre la possibilité de faire plusieurs sites avec les mêmes données et/ou un site internet sur plusieurs domaines différents.',
-	'multidomaines_slogan' => 'Associer des secteurs à un domaine',
-
-//P
-	'precisions_editer_squelettes' => 'vous pouvez écrire plusieurs dossiers squelettes <br /> ex: squelettes:squelettes/sous-dmomaine.domaine.com',
-	'precisions_editer_url' => 'l\'url doit être valide, complète et se terminer par un slash<br /> ex: https://sous-dmomaine.domaine.com/',
-	'precisions_squelette' => 'ex : squelettes',
-	'precisions_squelette_secteur' => 'ex : squelettes/sous-domaine.domaine',
-	'precisions_url' => 'l\'url doit être valide,ne contenir qu\'un domaine et se terminer par un slash. ex: https://sous-dmomaine.domaine.com/',
 
 //T
 	'titre_multidomaines' => 'Multidomaines',
