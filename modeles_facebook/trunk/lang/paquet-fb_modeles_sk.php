@@ -8,14 +8,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
-	'fb_modeles_description' => 'Ce plugin propose un ensemble de modèles SPIP pour intégrer simplement et rapidement les modules sociaux du site Facebook :
+	'fb_modeles_description' => 'Tento zásuvný modul ponúka rad šablón SPIPu na ľahké a rýchle zavedenie modulov sociálnej siete Facebook:
 
--*  {{send}} : le bouton « Envoyer » classique (avec commentaire)
--*  {{like}} : le bouton « J\'aime » classique (avec commentaire)
--*  {{like box}} : liste des commentaires des utilisateurs qui ont « aimé »
--*  {{activity}} : liste des activités récentes d\'une page ou d\'un profil
--*  {{comments}} : liste des commentaires et bouton permettant d\'en écrire un
--*  {{live stream}} (expérimental) : boîte de discussion type « chat »', # NEW
+-*  {{Poslať:}} klasické tlačidlo "Poslať" (pri komentári).
+-*  {{Páči sa mi to:}} klasické tlačidlo "Páči sa mi to" (s komentárom).
+-*  {{like box}} : zoznam komentárov od používateľov, ktorým sa daná vec páči.
+-*  {{Aktivita:}}  prehľad poslednej aktivity na stránke alebo profile.
+-*  {{Komentáre:}} zoznam komentárov a tlačidlo, ktoré umožňuje komentár napísať.
+-*  {{live stream}} (experiment): pole s diskusiou ako chat.',
 	'fb_modeles_nom' => 'Šablóny Facebooku',
 	'fb_modeles_slogan' => 'Šablóny na vloženie modulov sociálnej siete Facebook'
 );
