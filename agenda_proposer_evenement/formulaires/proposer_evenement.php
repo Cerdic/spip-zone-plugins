@@ -287,15 +287,14 @@ function propevent_email_confirmation($email,$id_article,$id_evenement,$id_auteu
 		'theme' => lire_config('propevent/proposer_thematique')?sql_getfetsel("titre", "spip_rubriques", "id_rubrique=".intval($article['id_rubrique'])):'',
 	);
 
-	$corps = recuperer_fond("notifications/evenement_propose",$contexte);
-	// envoyer a celui qui a propose
-	#notifications_envoyer_mails($email,$corps);
-
 	$contexte['url_moderation'] = url_absolue(generer_url_entite($id_article, 'article', '', '', false));
+	// envoyer a celui qui a propose
 	$corps = recuperer_fond("notifications/evenement_propose",$contexte);
-
-	// envoyer aux modos !
 	notifications_envoyer_mails($email,$corps);
+	// envoyer aux modos !
+	$corps_modo = recuperer_fond("notifications/evenement_propose_modo",$contexte);
+	$email_modo = lire_config('propevent/email_moderateur');
+	notifications_envoyer_mails($email_modo,$corps_modo);
 	
 }
 ?>
