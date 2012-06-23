@@ -11,7 +11,7 @@
 		<fieldset>
 		<legend><:getid3:legende_ecriture_tags:></legend>
 		<ul>
-			<li class="editer_ecriture_tags">
+			<li class="editer editer_ecriture_tags">
 				<label><:getid3:label_reecriture_tags:></label>
 				<div class="choix">
 					<input type="checkbox" name="reecriture_tags[]" value="titre" id="reecriture_tags_titre"[(#VAL{titre}|in_array{#ENV**{reecriture_tags,#ARRAY}}|oui)checked="checked"] />
@@ -26,7 +26,7 @@
 					<label for="reecriture_tags_logo"><:getid3:label_reecriture_tags_logo:></label>
 				</div>
 			</li>
-			<li class="editer_cover_defaut">
+			<li class="editer editer_cover_defaut">
 				<label><:getid3:label_cover_defaut:></label>
 				[<div>(#ENV{cover_defaut}|image_reduire{150,150}|inserer_attribut{alt,""})</div>]
 				<p class="explication"><:getid3:explication_cover_defaut:></p>
