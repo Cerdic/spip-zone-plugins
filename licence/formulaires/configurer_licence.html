@@ -7,7 +7,7 @@
 <form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
-		<li class="editer_licence_defaut[ (#ENV**{erreurs}|table_valeur{licence_defaut}|oui)erreur]">
+		<li class="editer editer_licence_defaut[ (#ENV**{erreurs}|table_valeur{licence_defaut}|oui)erreur]">
 			<label for="licence_defaut"><:licence:cfg_lbl_licence_defaut:></label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{licence_defaut})</span>]
 			<select name="licence_defaut" id="licence_defaut">
