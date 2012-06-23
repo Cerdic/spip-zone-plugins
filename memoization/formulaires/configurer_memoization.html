@@ -12,11 +12,10 @@
 		[(#REM) ------------------------ Memoization --------------------- ]
 		<fieldset>
 			<h3 class="legend"><:memoization:legend_cache_methode:></h3>
-			<p class="explication"><:memoization:methodes_grisees:></p>
 			<ul>
-				<li class="editer_methode">
+				<li class="editer editer_methode">
 					<label for="methode"><:memoization:label_methode:></label>
-
+					<p class="explication"><:memoization:methodes_grisees:></p>
 					<select name="methode" id="methode">
 						<option value=""><:memoization:option_methode_defaut:>[
 							((#VAL|memoization_methode))]</option>
@@ -51,7 +50,7 @@
 		<fieldset id="memcache_options">
 			<h3 class="legend"><:memoization:legend_memcache:></h3>
 			<ul>
-				<li class="editer_memcache_servers">
+				<li class="editer editer_memcache_servers">
 					<label for="memcache_servers"><:memoization:label_memcache_serveurs:></label>
 					<p class="explication">(<:memoization:explication_memcache_servers:>)</p>
 					<textarea name="memcache_servers" id="memcache_servers" class="textarea">[(#ENV{memcache_servers}|sinon{localhost:11211})]</textarea>
@@ -69,7 +68,6 @@
 			methode_memcache();
 			$("#methode")
 			.bind('change', methode_memcache);
-		
 		// -->
 		</script>
 		[(#REM) ------------------------ BOUTON OK ------------------------ ]
