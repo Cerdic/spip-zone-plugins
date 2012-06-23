@@ -13,10 +13,8 @@
 <div>
 #ACTION_FORMULAIRE{#ENV{action}}
 <ul>
-
-
 #SET{erreurs,#ENV**{erreurs}|table_valeur{barretypo}}
-<li class="editer_barretypo[ (#GET{erreurs}|oui)erreur]">
+<li class="editer editer_barretypo[ (#GET{erreurs}|oui)erreur]">
 	<label for="barretypo"><:crayons:label_barre_typo:></label>
 	[<span class='erreur_message'>(#GET{erreurs})</span>]
 	<div class="choix">
@@ -26,9 +24,8 @@
 	</div>
 </li>
 
-
 #SET{erreurs,#ENV**{erreurs}|table_valeur{msgNoChange}}
-<li class="editer_messages[ (#GET{erreurs}|oui)erreur]">
+<li class="editer editer_messages[ (#GET{erreurs}|oui)erreur]">
 	<label><:crayons:label_message:></label>
 	[<span class='erreur_message'>(#GET{erreurs})</span>]
 	<div class="choix">
@@ -41,9 +38,8 @@
 	</div>
 </li>
 
-
 #SET{erreurs,#ENV**{erreurs}|table_valeur{filet}}
-<li class="editer_effets[ (#GET{erreurs}|oui)erreur]">
+<li class="editer editer_effets[ (#GET{erreurs}|oui)erreur]">
 	<label><:crayons:label_effets:></label>
 	[<span class='erreur_message'>(#GET{erreurs})</span>]
 	<div class="choix">
@@ -62,7 +58,7 @@
 
 
 #SET{erreurs,#ENV**{erreurs}|table_valeur{reduire_logo}}
-<li class="editer_reduire_logo[ (#GET{erreurs}|oui)erreur]">
+<li class="editer editer_reduire_logo[ (#GET{erreurs}|oui)erreur]">
 	<label><:crayons:label_reduire_logo:></label>
 	[<span class='erreur_message'>(#GET{erreurs})</span>]
 	<p class='explication'><:crayons:explication_reduire_logo:></p>
@@ -73,7 +69,7 @@
 	<h3 class="legend"><:crayons:legend_editer_prive:></h3>
 	<ul>
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{espaceprive}}
-		<li class="editer_reduire_logo[ (#GET{erreurs}|oui)erreur]">
+		<li class="editer editer_reduire_logo[ (#GET{erreurs}|oui)erreur]">
 			<label><:crayons:label_espaceprive:></label>
 			[<span class='erreur_message'>(#GET{erreurs})</span>]
 			<div class="choix">
@@ -82,7 +78,7 @@
 			</div>
 		</li>
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{exec_autorise}}
-		<li class="editer_exec_autorise[ (#GET{erreurs}|oui)erreur]">
+		<li class="editer editer_exec_autorise[ (#GET{erreurs}|oui)erreur]">
 			<label><:crayons:label_exec_autorise:></label>
 			[<span class='erreur_message'>(#GET{erreurs})</span>]
 			<p class='explication'><:crayons:explication_exec_autorise:></p>
@@ -93,14 +89,14 @@
 
 
 <li class="fieldset fieldset_crayons_upload experimental">
-	<h3 class="legend">UPLOAD de documents</h3>
+	<h3 class="legend"><:crayons:legend_documents:></h3>
 	<ul>
-		<li class="editer_reduire_logo[ (#GET{erreurs}|oui)erreur]">
-			<label>exp&#233;rimental</label>
+		<li class="editer editer_reduire_logo[ (#GET{erreurs}|oui)erreur]">
+			<label><:crayons:info_experimental:></label>
 			[<span class='erreur_message'>(#GET{erreurs})</span>]
 			<div class="choix">
 				<input type="checkbox" name="upload" class="checkbox"  value='on' id='upload'[ (#ENV{upload}|oui)checked="checked"] />
-				<label for='upload'>Autoriser l'ajout de documents par glisser/d&#233;poser sur le crayon article.texte</label>
+				<label for='upload'><:crayons:label_upload_document:></label>
 			</div>
 		</li>
 	</ul>
