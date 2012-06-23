@@ -14,10 +14,9 @@
 						<h3 class="legend"><:menus:formulaire_partie_identification:></h3>
 						<ul>
 							#SET{obli,'obligatoire'}
-
 							#SET{name,titre}
 							#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-							<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 								<label for="#GET{name}"><:menus:formulaire_titre:></label>
 								[<span class='erreur_message'>(#GET{erreurs})</span>]
 								<input type="text" class="text multilang" name="#GET{name}" id="#GET{name}" size="40" value="#ENV{#GET{name}}" />
@@ -25,7 +24,7 @@
 
 							#SET{name,identifiant}
 							#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-							<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 								<label for="#GET{name}"><:menus:formulaire_identifiant:></label>
 								<div class="explication"><:menus:formulaire_identifiant_explication:></div>
 								[<span class='erreur_message'>(#GET{erreurs})</span>]
@@ -34,7 +33,7 @@
 
 							#SET{name,css}
 							#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-							<li class="editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+							<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
 								<label for="#GET{name}"><:menus:formulaire_css:></label>
 								<div class="explication"><:menus:formulaire_css_explication:></div>
 								[<span class='erreur_message'>(#GET{erreurs})</span>]
@@ -43,16 +42,16 @@
 
 							[(#REM) Seulement si c'est un nouveau et qu'il y a le plugin YAML)]
 							[(#ENV{nouveau}|oui)
-							[(#PLUGIN{yaml}|oui)
-							#SET{name,import}
-							#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-							<li class="editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
-								<label for="#GET{name}"><:menus:formulaire_importer:></label>
-								<div class="explication"><:menus:formulaire_importer_explication:></div>
-								[<span class='erreur_message'>(#GET{erreurs})</span>]
-								<input type="file" class="file" name="#GET{name}" id="#GET{name}" size="20" value="#ENV{#GET{name}}" />
-							</li>
-							]
+								[(#PLUGIN{yaml}|oui)
+									#SET{name,import}
+									#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+									<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+										<label for="#GET{name}"><:menus:formulaire_importer:></label>
+										<div class="explication"><:menus:formulaire_importer_explication:></div>
+										[<span class='erreur_message'>(#GET{erreurs})</span>]
+										<input type="file" class="file" name="#GET{name}" id="#GET{name}" size="20" value="#ENV{#GET{name}}" />
+									</li>
+								]
 							]
 						</ul>
 
