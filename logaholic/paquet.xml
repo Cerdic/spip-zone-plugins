@@ -11,7 +11,7 @@
 	<nom>Logaholic</nom>
 	<!-- Utiliser le service Logaholic -->
 
-	<auteur>[Pierre KUHN->http://www.pierre-kuhn.org]</auteur>
+	<auteur lien="http://www.pierre-kuhn.org">Pierre KUHN</auteur>
 
 	<pipeline nom="insert_head_css" inclure="logaholic_insert_head.php" />
 
