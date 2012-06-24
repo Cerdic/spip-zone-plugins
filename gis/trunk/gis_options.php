@@ -2,7 +2,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-define('_DIR_LIB_GIS','lib/leaflet-gis-4.0.3/');
+define('_DIR_LIB_GIS','lib/leaflet-gis-4.0.4/');
 
 $GLOBALS['logo_libelles']['id_gis'] = _T('gis:libelle_logo_gis');
 
@@ -45,7 +45,11 @@ $GLOBALS['gis_layers'] = array (
 	),
 	'mapquestopen_osm' => array(
 		'nom' => 'Mapquest Open',
-		'layer' => 'L.TileLayer.MapQuestOpen()'
+		'layer' => 'L.TileLayer.MapQuestOpen.OSM()'
+	),
+	'mapquestopen_aerial' => array(
+		'nom' => 'Mapquest Open Aerial',
+		'layer' => 'L.TileLayer.MapQuestOpen.Aerial()'
 	),
 	'mapbox_simple' => array(
 		'nom' => 'MapBox Simple',
@@ -74,6 +78,30 @@ $GLOBALS['gis_layers'] = array (
 	'stamen_watercolor' => array(
 		'nom' => 'Stamen Watercolor',
 		'layer' => 'L.TileLayer.Stamen.Watercolor()'
+	),
+	'esri_worldstreetmap' => array(
+		'nom' => 'Esri WorldStreetMap',
+		'layer' => 'L.TileLayer.Esri.WorldStreetMap()'
+	),
+	'esri_delorme' => array(
+		'nom' => 'Esri DeLorme',
+		'layer' => 'L.TileLayer.Esri.DeLorme()'
+	),
+	'esri_worldtopomap' => array(
+		'nom' => 'Esri WorldTopoMap',
+		'layer' => 'L.TileLayer.Esri.WorldTopoMap()'
+	),
+	'esri_worldimagery' => array(
+		'nom' => 'Esri WorldImagery',
+		'layer' => 'L.TileLayer.Esri.WorldImagery()'
+	),
+	'esri_oceanbasemap' => array(
+		'nom' => 'Esri OceanBasemap',
+		'layer' => 'L.TileLayer.Esri.OceanBasemap()'
+	),
+	'esri_natgeoworldmap' => array(
+		'nom' => 'Esri NatGeoWorldMap',
+		'layer' => 'L.TileLayer.Esri.NatGeoWorldMap()'
 	),
 );
 
