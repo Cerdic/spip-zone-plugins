@@ -1,6 +1,6 @@
 nom: '<:noizetier:nom_bloctexte:>'
 description: '<:noizetier:description_bloctexte:>'
-icon: 'img/ic_bloctexte.png'
+icon: 'texte-24.png'
 parametres:
   -
     saisie: 'input'
