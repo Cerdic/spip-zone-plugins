@@ -28,17 +28,14 @@ function soapsympa_api_tester($serveur, $ident, $psw) {
 	}
 	return $retour;
 }
-
-
 /**
 * Ajout des abonnements sur la page de visualisation d'un auteur
 **/
-
 function soapsympa_affiche_milieu($flux) {
 
 $exec = _request('exec');
 	  
-if(($exec == 'auteur_infos')||($exec == 'configurer_soapsympa')||($exec == 'soapsympa_review')||($exec == 'edition_soapsympa')) {
+if(($exec == 'auteur_infos')||($exec == 'auteur')||($exec == 'configurer_soapsympa')||($exec == 'soapsympa_review')||($exec == 'edition_soapsympa')) {
     //on récupere les réglages du plugins (clés du serveur Sympa)
    $conf = unserialize($GLOBALS['meta']['soapsympa']);
 
@@ -48,16 +45,17 @@ if(($exec == 'auteur_infos')||($exec == 'configurer_soapsympa')||($exec == 'soap
    // $Sympa->remote_host = $conf['remote_host']; pas utile pour l (instant
     //$Sympa->SYMPA_ROBOT = $conf['robot']; pas utile pour l (instant
 
-      if(($exec == 'auteur_infos')&&(autoriser('gerer_abonnements'))) {
+      if((($exec == 'auteur_infos')||($exec == 'auteur'))&&(autoriser('gerer_abonnements'))) {
 
 	$Id = _request('id_auteur');
 	$email = sql_getfetsel("email","spip_auteurs","id_auteur=$Id");
 
 	if($email) {		 
 	  $contexte['email'] = $email;
-	  $flux['data'] .= recuperer_fond('prive/boite/abonnements', $contexte, array('ajax'=>true));	
+	  $contexte['id_auteur'] = $Id;
+	  $flux['data'] .= recuperer_fond('prive/boite/abonnements', $contexte);	
 	  }
-      }//fin if auteur_infos
+      }//fin if auteur
 
     //Page de configuration et d edition du plugin on affiche la liste des listes 
     if(($exec == 'configurer_soapsympa')||($exec == 'edition_soapsympa')) {
@@ -69,32 +67,26 @@ if(($exec == 'auteur_infos')||($exec == 'configurer_soapsympa')||($exec == 'soap
 	      $i = 0;
 	      foreach ($res as $list) {
 		    list ($list->listName,$list->listDomain) = explode("@",$list->listAddress);
-		    $Listes[$i]['listaddress'] = $list->listAddress ;
-		    $Listes[$i]['listname'] = $list->listName ;
-		    $Listes[$i]['subject'] = $list->subject ;
+		    $Listes[$i]['listaddress'] = utf8_decode($list->listAddress) ;
+		    $Listes[$i]['listname'] = utf8_decode($list->listName) ;
+		    $Listes[$i]['subject'] = utf8_decode($list->subject) ;
 		    $i++;
 		    
 	      }
 
 	$contexte['listoflists'] = $Listes;
-	//$flux['data'] .= var_dump($contexte);
 	$flux['data'] .= recuperer_fond('prive/boite/configuration', $contexte, array('ajax'=>true));
-	  }
+	}
     }//fin if exec = configurer_soapsympa
 
 
     //Page abonnés d'une liste (review)
     if($exec == 'soapsympa_review') {
-	
         $List = _request('list');	
 	$Listname = explode("@",$List);
 	$contexte['listname'] = $Listname[0];
 	$flux['data'] .= recuperer_fond('prive/boite/abonnes_liste', $contexte, array('ajax'=>true));
-	
     }//fin if exec = review
-
-		
-
 		
 }//fin ensuite retour des valeurs dans le flux
 	

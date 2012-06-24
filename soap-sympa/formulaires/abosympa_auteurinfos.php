@@ -20,10 +20,10 @@ function formulaires_abosympa_auteurinfos_charger_dist($email = ""){
 		foreach ($res as $list) {
 		
 		$ListeAbo[$i]['statut'] = $list[isOwner] ? "propriétaire" : ($list[isEditor] ? "modérateur" : "utilisateur");
-		$ListeAbo[$i]['subject'] = $list[subject];
-		$ListeAbo[$i]['listaddress'] = $list[listAddress];
+		$ListeAbo[$i]['subject'] = utf8_decode($list[subject]);
+		$ListeAbo[$i]['listaddress'] = utf8_decode($list[listAddress]);
 		$listname = explode("@",$list[listAddress]);
-		$ListeAbo[$i]['listname'] = $listname[0];
+		$ListeAbo[$i]['listname'] = utf8_decode($listname[0]);
 		$i++;          
 		}
 		}
@@ -35,19 +35,19 @@ function formulaires_abosympa_auteurinfos_charger_dist($email = ""){
 		$ListeNonAbo = array(array());
 		$i = 0;
 		foreach ($res as $list) {
-		      list ($list->listName,$list->listDomain) = explode("@",$list->listAddress);
-		      $res1 = $Sympa->ami($list->listAddress,"subscriber", $Sympa->USER_EMAIL);
-		      $res2 = $Sympa->ami($list->listAddress,"owner", $Sympa->USER_EMAIL);
-		      $res3 = $Sympa->ami($list->listAddress,"editor", $Sympa->USER_EMAIL);
+		    list ($list->listName,$list->listDomain) = explode("@",$list->listAddress);
+		    $res1 = $Sympa->ami($list->listAddress,"subscriber", $Sympa->USER_EMAIL);
+		    $res2 = $Sympa->ami($list->listAddress,"owner", $Sympa->USER_EMAIL);
+		    $res3 = $Sympa->ami($list->listAddress,"editor", $Sympa->USER_EMAIL);
 
 		    if (($res1)||($res2)||($res3)) {
 			next;//on n'affiche pas les listes auxquelle l utilisateur est deja abonné ou est propriétaire
-		      }else{  
-		      $ListeNonAbo[$i]['listaddress'] = $list->listAddress ;
-		      $ListeNonAbo[$i]['listname'] = $list->listName ;
-		      $ListeNonAbo[$i]['subject'] = $list->subject ;
+		    }else{  
+		      $ListeNonAbo[$i]['listaddress'] = utf8_decode($list->listAddress) ;
+		      $ListeNonAbo[$i]['listname'] = utf8_decode($list->listName) ;
+		      $ListeNonAbo[$i]['subject'] = utf8_decode($list->subject) ;
 		      $i++;
-		      }
+		    }
 		}
 	}
 
@@ -80,15 +80,15 @@ function formulaires_abosympa_auteurinfos_verifier_dist($email= ""){
 	if($case == ''){
 		$erreurs['erreur_liste'] .= _T("soapsympa:no_list_selected");
 		spip_log("Aucune liste selectionnee","soapsympa");
-	    }
+	}
 	
 
-   //message d'erreur
-   if (count($erreurs)) {
-      $erreurs['message_erreur'] .= _T('soapsympa:verifier_formulaire');
-   }
+   	//message d'erreur
+   	if (count($erreurs)) {
+      	$erreurs['message_erreur'] .= _T('soapsympa:verifier_formulaire');
+   	}
 
-   return $erreurs; // si c'est vide, traiter sera appele, sinon le formulaire sera resoumis
+	return $erreurs; // si c'est vide, traiter sera appele, sinon le formulaire sera resoumis
 }
 
 function formulaires_abosympa_auteurinfos_traiter_dist($email = ""){
@@ -104,8 +104,6 @@ function formulaires_abosympa_auteurinfos_traiter_dist($email = ""){
 	//instanciation de la classe SOAP-SYMPA 
 	$Sympa = new SympaTrustedApp($conf['serveur_distant'], $conf['identifiant'], $conf['mot_de_passe']);
 
-
-	
 	$nb_listes = 0;
 	foreach($lists as $id_abosympa) {
 	$nb_listes++;
@@ -124,8 +122,6 @@ function formulaires_abosympa_auteurinfos_traiter_dist($email = ""){
 		}
 
 	}
-		
-
 	
 	$message_listes .= "<br class='nettoyeur' />";
 	if ($probleme==false) {

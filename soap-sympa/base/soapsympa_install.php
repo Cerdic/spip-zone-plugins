@@ -22,11 +22,11 @@ function soapsympa_upgrade($nom_meta_base_version,$version_cible){
 			$config = array();
 		}
 		$config = array_merge(array(
-				'serveur_distant' => 'http://listes.exepmple.org/sympa/wsdl',
-				'remote_host' => 'listes.xemple.org',
-				'identifiant' => 'SPIP_test_org',
+				'serveur_distant' => 'http://listes.exemple.org/sympa/wsdl',
+				'remote_host' => 'listes.exemple.org',
+				'identifiant' => 'SPIP_exemple_org',
 				'mot_de_passe' => 'archi@vtest#ORG',
-				'proprietaire' => 'lismaster@test.org',
+				'proprietaire' => 'listmaster@exemple.org',
 		), $config);
 		ecrire_meta('soapsympa', serialize($config));
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
@@ -41,6 +41,7 @@ function soapsympa_upgrade($nom_meta_base_version,$version_cible){
  */
 function soapsympa_vider_tables($nom_meta_base_version) {
 	effacer_meta($nom_meta_base_version);
+	effacer_meta("soapsympa");
 }
 
 ?>
