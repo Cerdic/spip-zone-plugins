@@ -1,6 +1,6 @@
 nom: '<:menus:noisette_nom_noisette:>'
 description: '<:menus:noisette_description:>'
-icon: 'images/menus-24.png'
+icon: 'menu-24.png'
 parametres:
   -
     saisie: 'menu'
