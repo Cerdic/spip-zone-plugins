@@ -29,6 +29,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_reduire_logo' => 'Logo verkleinern wenn es
  gr&ouml;&szlig;er als x Pixel ist.Beispiel: 100. (0 = niemals)', # MODIF
 
+	// I
+	'info_experimental' => 'Expérimental', # NEW
+
 	// L
 	'label_activer_barre_typo' => 'Funktionsleisten f&uuml;r die Stifte aktivieren?',
 	'label_activer_crayons_prive' => 'Stifte im Redaktionssystem aktivieren',
@@ -42,6 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_abandon' => 'bei Abbruch',
 	'label_msg_no_change' => 'wenn keine &Auml;nderung',
 	'label_reduire_logo' => 'Logos verkleinern',
+	'label_upload_document' => 'Autoriser l\'ajout de documents par glisser/déposer sur le crayon article.texte', # NEW
 	'label_yellow_fade' => 'Ausblenden',
 	'legend_controleur_hyperlien' => 'Hyperlien', # NEW
 	'legend_controleur_logo' => 'Logoe wählen:',
@@ -49,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_controleur_qui' => 'Qui ?', # NEW
 	'legend_controleur_vignette' => 'Thumbnail wählen:',
 	'legend_controleur_vignette_remplacer' => 'Remplacer cette vignette', # NEW
+	'legend_documents' => 'Upload de documents', # NEW
 	'legend_editer_prive' => 'Stifte im Redaktionssystem (experimentell)',
 	'legend_introduction_article' => 'Texte introductif de l\'article', # NEW
 

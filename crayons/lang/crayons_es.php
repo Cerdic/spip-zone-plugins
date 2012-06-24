@@ -29,6 +29,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_reduire_logo' => 'Reducir el logotipo si va mas allá
   del tamaño indicado en píxeles. Ejemplo: 100. (0 = nunca)',
 
+	// I
+	'info_experimental' => 'Expérimental', # NEW
+
 	// L
 	'label_activer_barre_typo' => '¿Activar la barra tipográfica en los lápices?',
 	'label_activer_crayons_prive' => 'Activar los lápices en el espacio privado.',
@@ -42,6 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_abandon' => 'Cuando se abandona',
 	'label_msg_no_change' => 'Si no hay cambios',
 	'label_reduire_logo' => 'Reducir el tamaño de los logotipos',
+	'label_upload_document' => 'Autoriser l\'ajout de documents par glisser/déposer sur le crayon article.texte', # NEW
 	'label_yellow_fade' => 'Fundido',
 	'legend_controleur_hyperlien' => 'Enlace hipertexto',
 	'legend_controleur_logo' => 'Elegir un logotipo:',
@@ -49,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_controleur_qui' => '¿Quién?',
 	'legend_controleur_vignette' => 'Escoger una viñeta:',
 	'legend_controleur_vignette_remplacer' => 'Reemplazar esta viñeta',
+	'legend_documents' => 'Upload de documents', # NEW
 	'legend_editer_prive' => 'Edición en el espacio privado (experimental)',
 	'legend_introduction_article' => 'Texto introductivo del artículo',
 

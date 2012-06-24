@@ -28,6 +28,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_introduction_article' => 'L\'introduction d\'un article affiche le descriptif de l\'article, sinon affiche ses 600 premiers caractères (chapeau puis texte).', # NEW
 	'explication_reduire_logo' => 'Reduir el logotip si sobrepassa la mida màxima indicada en píxels. Exemple: 100. (0 = mai)', # MODIF
 
+	// I
+	'info_experimental' => 'Expérimental', # NEW
+
 	// L
 	'label_activer_barre_typo' => 'Activar la barra tipogràfica a els llapis?',
 	'label_activer_crayons_prive' => 'Activar llapis a la part privada.',
@@ -41,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_abandon' => 'Sobre l\'abandonament',
 	'label_msg_no_change' => 'Si no hi ha canvi',
 	'label_reduire_logo' => 'Reduir els logotips',
+	'label_upload_document' => 'Autoriser l\'ajout de documents par glisser/déposer sur le crayon article.texte', # NEW
 	'label_yellow_fade' => 'Sense interès',
 	'legend_controleur_hyperlien' => 'Hyperlien', # NEW
 	'legend_controleur_logo' => 'Escollir un logotip:',
@@ -48,6 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_controleur_qui' => 'Qui ?', # NEW
 	'legend_controleur_vignette' => 'Escollir una vinyeta:',
 	'legend_controleur_vignette_remplacer' => 'Remplacer cette vignette', # NEW
+	'legend_documents' => 'Upload de documents', # NEW
 	'legend_editer_prive' => 'Editar l\'espai privat (experimental)',
 	'legend_introduction_article' => 'Texte introductif de l\'article', # NEW
 

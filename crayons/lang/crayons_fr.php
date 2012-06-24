@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_experimental' => 'Expérimental',
-	
+
 	// L
 	'label_activer_barre_typo' => 'Activer la barre typographique dans les crayons ?',
 	'label_activer_crayons_prive' => 'Activer crayons pour la partie privée.',
