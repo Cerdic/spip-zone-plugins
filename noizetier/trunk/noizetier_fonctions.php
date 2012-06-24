@@ -319,7 +319,7 @@ function noizetier_charger_infos_page($dossier,$page, $info=""){
 		if ($xml != '') {
 			$infos_page['nom'] = _T_ou_typo(spip_xml_aplatit($xml['nom']));
 			$infos_page['description'] = isset($xml['description']) ? _T_ou_typo(spip_xml_aplatit($xml['description'])) : '';
-			$infos_page['icon'] = isset($xml['icon']) ? reset($xml['icon']) : '';
+			$infos_page['icon'] = isset($xml['icon']) ? reset($xml['icon']) : 'page-24.png';
 			// Decomposition des blocs
 			if (spip_xml_match_nodes(',^bloc,', $xml, $blocs)){
 				$infos_page['blocs'] = array();
@@ -372,17 +372,17 @@ function noizetier_blocs_defaut(){
 			'contenu' => array(
 				'nom' => _T('noizetier:nom_bloc_contenu'),
 				'description' => _T('noizetier:description_bloc_contenu'),
-				'icon' => 'img/ic_bloc_contenu.png'
+				'icon' => 'bloc-contenu-24.png'
 				),
 			'navigation' => array(
 				'nom' => _T('noizetier:nom_bloc_navigation'),
 				'description' => _T('noizetier:description_bloc_navigation'),
-				'icon' => 'img/ic_bloc_navigation.png'
+				'icon' => 'bloc-extra-24.png'
 				),
 			'extra' => array(
 				'nom' => _T('noizetier:nom_bloc_extra'),
 				'description' => _T('noizetier:description_bloc_extra'),
-				'icon' => 'img/ic_bloc_extra.png'
+				'icon' => 'bloc-extra-24.png'
 				),
 		);
 		$blocs_defaut = pipeline('noizetier_blocs_defaut',$blocs_defaut);

@@ -2,7 +2,7 @@
 <fieldset>
 <legend>
 	[(#ENV{id_noisette}|non)
-		[(#CHEMIN{#GET{infos}|table_valeur{icon}}|image_reduire{24})] 
+		[<img src="(#CHEMIN_IMAGE{#GET{infos}|table_valeur{icon}}|sinon{#CHEMIN{#GET{infos}|table_valeur{icon}}|image_reduire{24}|extraire_attribut{src}})" />]
 	]
 	[<span style="vertical-align:middle;">(#GET{infos}|table_valeur{nom})</span>]
 </legend>
