@@ -1,13 +1,7 @@
-
 table.spipmotion{
 	margin:1em 0;
 	width:100%;
 	border-spacing:0;
-}
-
-table.spipmotion th, table.spipmotion td{
-	margin:0;
-	padding:2px;
 }
 
 table.spipmotion .temps{

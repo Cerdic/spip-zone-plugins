@@ -9,7 +9,7 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Insertion dans le pipeline document_desc_actions (Mediathèque)
@@ -121,22 +121,6 @@ function spipmotion_post_edition($flux){
 }
 
 /**
- * Insertion dans le pipeline insert_head_css (SPIP)
- * On ajoute la css de spipmotion dans le public
- * 
- * @param string $flux
- * 		Le contenu du head
- * @return string $flux
- * 		Le head modifié
- */
-function spipmotion_insert_head_css($flux){
-	$flux .= '
-<link rel="stylesheet" href="'.direction_css(find_in_path('spipmotion.css', 'css/', false)).'" type="text/css" media="all" />
-';
-	return $flux;
-}
-
-/**
  * Insertion dans le pipeline header_prive (SPIP)
  * On ajoute la css de spipmotion dans le privé
  * 
@@ -162,10 +146,12 @@ function spipmotion_header_prive($flux){
  * 		L'array des js insérés modifié
  */
 function spipmotion_jquery_plugins($plugins){
-	if(!in_array(_DIR_LIB_FLOT.'/jquery.flot.js',$plugins)){
-		$plugins[] = _DIR_LIB_FLOT.'/jquery.flot.js';
+	if(test_espace_prive()){
+		if(!in_array(_DIR_LIB_FLOT.'/jquery.flot.js',$plugins)){
+			$plugins[] = _DIR_LIB_FLOT.'/jquery.flot.js';
+		}
+		$plugins[] = 'javascript/spipmotion_flot_extras.js';
 	}
-	$plugins[] = 'javascript/spipmotion_flot_extras.js';
 	return $plugins;
 }
 

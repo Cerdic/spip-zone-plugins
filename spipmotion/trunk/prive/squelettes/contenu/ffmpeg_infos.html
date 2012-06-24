@@ -153,7 +153,7 @@
 	</thead>
 	<tbody>
 <BOUCLE_formats(POUR){tableau #GET{ffmpeg_infos}|table_valeur{spipmotion_formats}}>
-	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
+	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})"]>
 		<td class="shortname">#CLE</td>
 		<td class="fullname">[(#VALEUR|table_valeur{fullname})]</td>
 		<td class="encode [(#VALEUR|table_valeur{encode}|?{spipmotion_enabled,spipmotion_disabled})]">[(#VALEUR|table_valeur{encode}|?{<:item_oui:>,<:item_non:>})]</td>
@@ -181,7 +181,7 @@
 	</thead>
 	<tbody>
 <BOUCLE_codecs(POUR){tableau #GET{ffmpeg_infos}|table_valeur{spipmotion_codecs}}>
-	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
+	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})"]>
 		<td class="shortname">#CLE</td>
 		<td class="fullname">[(#VALEUR|table_valeur{fullname})]</td>
 		<td class="type">[(#VALEUR|table_valeur{type}|ffmpeg_codec_type_to_type)]</td>
@@ -207,7 +207,7 @@
 	</thead>
 	<tbody>
 <BOUCLE_avfilter(POUR){tableau #GET{ffmpeg_infos}|table_valeur{spipmotion_avfilters}}>
-	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
+	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})"]>
 		<td class="shortname">#CLE</td>
 		<td class="description">[(#VALEUR|table_valeur{description})]</td>
 	</tr>

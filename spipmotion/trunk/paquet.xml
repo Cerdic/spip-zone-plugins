@@ -22,7 +22,6 @@
 	<pipeline nom="taches_generales_cron" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="jquery_plugins" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="spipmotion_pipelines.php" />
-	<pipeline nom="insert_head_css" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="header_prive" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="post_edition" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="post_spipmotion_encodage" inclure="spipmotion_pipelines.php" />
