@@ -64,6 +64,6 @@ function formulaires_editer_lettre_traiter_dist($id_lettre,$id_rubrique,$retour)
 
 	$retour = parametre_url($retour,'id_lettre',$lettre->id_lettre);
 
-	return array('message_ok'=>'ok','redirect'=>$retour);
+	return array('message_ok'=>'ok','id_lettre'=>$lettre->id_lettre,'redirect'=>$retour);
 }
 ?>
