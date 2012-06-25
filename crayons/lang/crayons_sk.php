@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   maximálnu veľkosť (v pixeloch). Príklad: 100 (0 = nikdy).',
 
 	// I
-	'info_experimental' => 'Expérimental', # NEW
+	'info_experimental' => 'Experimentálny',
 
 	// L
 	'label_activer_barre_typo' => 'Aktivovať klávesový panel pre "Farbičky"?',
@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_abandon' => 'Pri zrušení',
 	'label_msg_no_change' => 'Ak sa neurobí žiadna zmena',
 	'label_reduire_logo' => 'Zmenšiť logá',
-	'label_upload_document' => 'Autoriser l\'ajout de documents par glisser/déposer sur le crayon article.texte', # NEW
+	'label_upload_document' => 'Povoliť pridávanie súborov pomocou farbičky article.texte',
 	'label_yellow_fade' => 'Tieň',
 	'legend_controleur_hyperlien' => 'Hypertextový odkaz',
 	'legend_controleur_logo' => 'Vyberte logo:',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_controleur_qui' => 'Kto?',
 	'legend_controleur_vignette' => 'Vyberte miniatúru:',
 	'legend_controleur_vignette_remplacer' => 'Nahradiť túto miniatúru',
-	'legend_documents' => 'Upload de documents', # NEW
+	'legend_documents' => 'Nahrávanie súborov',
 	'legend_editer_prive' => 'Použiť v súkromnej zóne (experimentálne)',
 	'legend_introduction_article' => 'Úvodný text článku',
 
