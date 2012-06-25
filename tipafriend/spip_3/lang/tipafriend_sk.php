@@ -139,7 +139,7 @@ Ak je zásuvný modul {{[CFG: nástroj na nastavenie->http://www.spip-contrib.ne
 -* [Režim "šablóna SPIP"->@mode_spip@] ({kompatibilné s distribúciou})',
 
 	// L
-	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] distribuovaný pod licenciou [GNU GPL v3.->http://www.opensource.org/licenses/gpl-3.0.html]',
+	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] distribuovaný s licenciou [GNU GPL v3.->http://www.opensource.org/licenses/gpl-3.0.html]',
 
 	// M
 	'mail_body_01' => '@nom_exped@ (kontakt: @mail_exped@) vás pozýva, aby ste si pozreli tento dokument zo stránky @nom_site@, možno vás bude zaujímať.',
