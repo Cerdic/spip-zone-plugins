@@ -1,0 +1,71 @@
+<!--  descriptif=Options des copies des flux RSS en articles <p><a href="http://www.spip-contrib.net/Plugin-Flux-RSS-en-articles">Documentation</a></p> -->
+<!--  titre=Copie RSS en articles -->
+
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_rssarticle' id="formulaire_configurer_rssarticle">
+
+    <form method="post" action="#SELF">
+    <div>
+        #ACTION_FORMULAIRE{#ENV{action}}
+        <ul>
+            <li class="fieldset">
+                <fieldset>
+                    <h3 class="legend"><:rssarticle:statut_article_importe:></h3>
+                        <ul>
+                            <select name="import_statut">
+                                <option value="prop"[(#ENV{import_statut}|=={prop}|?{' selected="selected"'})]><:sites:info_statut_site_3:></option>
+                                <option value="publie"[(#ENV{import_statut}|=={publie}|?{' selected="selected"'})]><:sites:info_statut_site_2:></option>
+                            </select>
+                        </ul>
+                </fieldset>
+            </li>
+            <li class="fieldset">
+                <fieldset>
+                    <h3 class="legend"><:rssarticle:mode:></h3>
+                        <ul>
+                            <div class="choix">
+                                <input class="radio" type="radio" name="mode" value="auto" [(#ENV{mode}|=={auto}?{checked='checked',''})] id="mode_auto"/>
+                                <label for="mode_auto"><:rssarticle:mode_auto:></label>
+                            </div>
+                            <div class="choix">
+                                <input type="radio" name="mode" value="manuel" [(#ENV{mode}|=={manuel}?{checked='checked',''})] id="mode_manuel"/>
+                                <label for="mode_manuel"><:rssarticle:mode_manuel:></label>
+                            </div>
+                        </ul>
+                </fieldset>
+            </li>
+            <li class="fieldset">
+                <fieldset>
+                    <h3 class="legend"><:rssarticle:cron_interval:></h3>
+                    <input type="text" name="cron_interval_value" value="[(#ENV{cron_interval_value}|!={''}|?{#ENV{cron_interval_value},600})]" size="6" class="fondl" id="cron_interval_value"/>
+                    <label for="cron_interval_value"><:rssarticle:cron_interval_timer:></label>
+                </fieldset>
+            </li>
+            <li class=fieldset>
+                <fieldset>
+                    <h3 class="legend"><:rssarticle:suivi_syndic:></h3>
+                    <ul>
+                        <li class="editer_email_alerte">
+                            <input type="checkbox" name="email_alerte"[ checked="(#ENV{email_alerte}|!={''}|?{'checked'})"] class="fondl" id="email_alerte"/>
+                            <label for="email_alerte"><:rssarticle:email_alerte:></label>
+                        </li>
+                        <li class="editer_email_suivi">
+                            <input type="text" name="email_suivi" value="[(#ENV{email_suivi})]" size="20" class="fondl" id="email_suivi"/>
+                            <label for="email_suivi"><:rssarticle:email_alerte_email:></label>
+                        </li>
+                    </ul>
+                </fieldset>
+            </li>
+            <li class="fieldset">
+                <fieldset>
+                    <h3 class="legend"><:rssarticle:copie_logo:></h3>
+                      <input type="checkbox" name="copie_logo"[ checked="(#ENV{copie_logo}|!={''}|?{'checked'})"] class="fondl" id="copie_logo" />
+                      <labelfor="copie_logo"><:rssarticle:copie_logo:></label>
+                </fieldset>
+            </li>
+
+            <input type="submit" name="_cfg_ok" value="<:OK:>"  class="fondo"/>  
+            <input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
+        </ul>
+    </div>
+    </form>
+</div>

@@ -1,0 +1,21 @@
+<paquet
+	prefix="rssarticle"
+	categorie="edition"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.2;3.0.*]"
+	logo="prive/themes/spip/images/rssarticle-64.png"
+	documentation="http://www.spip-contrib.net/Plugin-Flux-RSS-en-articles"
+	schema="1.0.0" 
+>
+
+	<nom>Flux RSS en articles</nom>
+	<auteur lien='http://www.erationnal.org'>erational</auteur>
+	<licence>GNU/GPL v3</licence>
+        <pipeline nom="declarer_tables_principales" inclure="base/rssarticle.php"/>
+        <pipeline nom="declarer_tables_interfaces" inclure="base/rssarticle.php"/>
+        <pipeline nom="declarer_tables_auxiliaires" inclure="base/rssarticle.php"/>
+        <pipeline nom="taches_generales_cron" inclure="rssarticle_pipelines.php"/>
+        <pipeline nom="affiche_milieu" inclure="rssarticle_pipelines.php"/>
+	<menu nom="configurer_rssarticle" titre="rssarticle:configuration_rssarticle" parent="menu_configuration" icone="prive/themes/spip/images/rssarticle-16.png" />
+</paquet>
