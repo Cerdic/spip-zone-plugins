@@ -1099,11 +1099,17 @@ function image_monochrome($img,$largeur=20,$seuil=13){
 		return true;
 }
 
-// une fonction importee du plugin fotoremix (qui d'ailleurs devrait très prochainement faire son
-// entree sur la spip-zone, je l'espere) qui permettait a la base de "decorer" une image avec une
-// autre image. J'ai (Yohann Prigent) modifie la fonction pour que l'image s'incluse entierement dans l'image originale
-// (avant, il y avait un decalage fait expres)
-// http://www.fotoremix.net/
+/* une fonction importee du plugin fotoremix par Yohann Prigent 
+*
+* remplace aussi cette mise contribution :
+* http://www.spip-contrib.net/Filtre-image_superpose
+* 
+* 
+* @param unknown_type $img
+* @param unknown_type $masque
+* @param string $v alignement vertical
+* @return  string $v alignement horizontal
+*/
 function image_merge($im, $masque, $v='left', $h='top'){
 	$image = _image_valeurs_trans($im, "merge-$masque-$v-$h");
 	
@@ -1119,6 +1125,7 @@ function image_merge($im, $masque, $v='left', $h='top'){
 	if ($creer){
 		// init
 		$enfoncement = 2/3;
+    $masque = find_in_path($masque);
 		
 		// on definit l'image de masque
 		$im_masque = @imagecreatefrompng($masque);

@@ -29,7 +29,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 -* image_float
 -* image_niveaux_gris_auto
 -* image_podpod
--* image_saturer',
+-* image_saturer
+-* image_merge',
 	'fonctions_images_nom' => 'Fonctions d\'images',
 	'fonctions_images_slogan' => 'Filtres pour le traitement des images',
 );
