@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'personaliser_nav' => 'Prispôsobiť toto menu',
 
 	// S
-	'sous_licence' => 'pod licenciou',
+	'sous_licence' => 's licenciou',
 
 	// Z
 	'zapl_loading' => 'Vykonávajú sa zmeny',
