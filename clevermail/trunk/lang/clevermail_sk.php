@@ -261,7 +261,7 @@ veuillez cliquer sur ce lien :
 	'news1' => 'Novinky č. 1',
 	'news_depuis' => 'Novinky od',
 	'nom' => 'Meno',
-	'nom_formulaire_clevermail' => 'Registračný formulár do mailing listu',
+	'nom_formulaire_clevermail' => 'Registračný formulár do e-mailovej konferencie',
 	'nombre_messages' => 'Počet správ na odoslanie',
 	'nouveau_message' => 'nová správa',
 	'nouveaux_abonnes_et' => ' a ',
