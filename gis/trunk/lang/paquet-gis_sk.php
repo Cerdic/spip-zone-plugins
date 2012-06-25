@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// G
-	'gis_description' => 'Ce plugin permet de créer des points géolocalisés qui peuvent être attachés aux objets de SPIP afin de les afficher sur des cartes dans les pages de votre site. Ces dernières peuvent utiliser l\'interface de différents fournisseurs grâce à la librairie Mapstraction.', # NEW
+	'gis_description' => 'Tento zásuvný modul umožňuje vytvárať zemepisné body, ktoré môžete pripojiť k objektom SPIPu, aby sa dali zobraziť na mapách na stránkach vášho webu. Vďaka knižnici Leaflet môžete používať rozhranie od rôznych výrobcov.',
 	'gis_slogan' => 'Geografický informačný systém'
 );
 
