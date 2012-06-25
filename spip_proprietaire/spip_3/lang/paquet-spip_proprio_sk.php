@@ -10,15 +10,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'spip_proprio_description' => 'Tento zásuvný modul vám umožňuje automatické vytváranie {{informácií právneho charakteru,}} {{podmienok používania stránky}} a informácií o {{autorských právach}} k vašej stránke v SPIPe.
 
--* La page de configuration du plugin, accessible depuis l\'onglet "Configuration" de l\'espace privé de SPIP, vous permet de saisir différentes informations sur l\'éditeur du site, son hébergeur et son créateur.
--* <u>Les textes légaux se basent par défaut sur la législation en vigueur en France ({au 1er janvier 2010})</u> et représentent en grande partie le {{minimum légal pour tout site web}}. Ils sont modifiables dans un fichier de langue spécifique pour vous permettre de les personnaliser.
--* Un ensemble de modèles est disponible : 
-- des outils pour valoriser votre site SPIP : vCard, cartes de visites, blocs d\'informations ...
-- des outils pour organiser votre site SPIP : deux nouveaux modèles de {header} et de {pied}, basés sur les squelettes de la distribution de SPIP (\'inc-header.html\' et \'inc-pied.html\'), présentant les informations de copyright et un accès à la page de mentions légales. 
+-* Stránka s nastaveniami zásuvného modulu, dostupná cez kartu "Konfigurácia" v súkromnej zóne SPIPu, vám umožňuje zadať rôzne údaje o vydavateľovi stránky, poskytovateľovi webhostingu pre stránku a tvorcovi stránky.
+-* <u>Informácie právneho charakteru v predvolených nastaveniach vychádzajú z aktuálne platnej legislatívy vo Francúzsku ({od 1. januára 2010})</u> a spĺňajú veľkú časť z {{právneho minima pre každú internetovú stránku.}} Dajú sa upraviť v jazykovom súbore pre konkrétny jazyk, aby ste si ich mohli prispôsobiť.
+-* K dispozícii máte niekoľko šablón: 
+- nástroje na vylepšenie stránky v SPIPe: vCard, vizitky, bloky s údajmi atď.
+- nástroje na usporiadanie stránky v SPIPe: dve nové šablóny pre {hlavičku} a {pätu} vytvorené podľa distribúcie SPIPu (\'inc-header.html\' a \'inc-pied.html\') s uvedením informácií o autorských právach a prístupe k stránke s informáciami právneho charakteru.
 
-Certaines icônes du plugin, dans les modèles publics, proviennent du set "{{[bwpx.icns->http://paularmstrongdesigns.com/portfolio/bwpx-icns/]}}" de {{Paul Armstrong}}, distribué sous licence {Creative Commons Attribution-Share Alike 3.0} (US).
+Niektoré ikony zásuvného modulu vo verejných šablónach sú zo sady {{"[bwpx.icns->http://paularmstrongdesigns.com/portfolio/bwpx-icns/]",}} ktorú vytvoril {{Paul Armstrong}} a ktorá je distribuovaná s licenciou {Creative Commons Attribution-Share Alike 3.0.}
 
-Les icônes de l\'espace privé proviennent du projet {{[GNOME->http://www.gnome.org/]}}.', # MODIF
+Ikony súkromnej zóny sú z projektu {{[GNOME.->http://www.gnome.org/]}}',
 	'spip_proprio_slogan' => 'Automatické vytvorenie informácií právneho charakteru, podmienok používania stránky a poznámky o autorských právach'
 );
 
