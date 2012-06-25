@@ -1,13 +1,13 @@
 <paquet
 	prefix="contact"
 	categorie="communication"
-	version="0.10.0"
+	version="0.10.1"
 	etat="stable"
 	compatibilite="[3.0.0-dev;3.1.0["
 	logo="prive/themes/spip/images/contact-32.png"
 	schema="0.2.0"
 	documentation="http://www.spip-contrib.net/Formulaire-de-contact-avance"
->	
+>
 
 	<nom>Formulaire de contact avanc&#233;</nom>
 	<!-- Cette extension propose un formulaire de contact avec de multiples options -->
