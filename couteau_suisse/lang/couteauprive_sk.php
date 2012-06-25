@@ -46,7 +46,7 @@ Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [
 	'aff_tout:nom' => 'Zobraziť všetky',
 	'alerte_urgence:description' => 'Affiche en tête de toutes les pages publiques un bandeau d\'alerte pour diffuser le message d\'urgence défini ci-dessous.
 _ Les balises <code><multi/></code> sont recommandées en cas de site multilingue.[[%alerte_message%]]', # NEW
-	'alerte_urgence:nom' => 'Message d\'alerte', # NEW
+	'alerte_urgence:nom' => 'Upozornenie',
 	'attente' => 'Čaká sa...',
 	'auteur_forum:description' => 'Požiadajte všetkých autorov verejných stráv, aby vyplnili (aspoň jedným písmenom!) meno a/alebo email, aby sa predišlo úplne anonymným správam. Majte na pamäti, že tento nástroj vykonáva overenie cez Javascript v prehliadači používateľa. [[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
 {Upozornenie: Tretia možnosť ruší ostatné. Je dôležité overiť si, že formuláre vašej šablóny sú kompatibilné s týmto nástrojom.}',
@@ -61,12 +61,12 @@ _ Les balises <code><multi/></code> sont recommandées en cas de site multilingu
 @puce@ Aký typ autorov by sa mal objaviť na stránke autorov?
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]',
 	'auteurs:nom' => 'Stránka autorov',
-	'autobr:description' => 'Použije sa na niektoré filtre SPIPU na text, {|post_autobr} všetky zlomy na nové riadky sa nahradia zlomom na jeden nový riadok <br />.[[%alinea%]][[->%alinea2%]]', # MODIF
+	'autobr:description' => 'Používa sa na spracovanie určitého textu v SPIPe filtrom {|post_autobr}, ktorý všetky nové prázdne riadky nahradí jediným zlomom riadka v HTML &lt;br />.',
 	'autobr:description1' => 'Rompant avec une tradition historique, SPIP 3 tient désormais compte par défaut des alinéas (retours de ligne simples) dans ses contenus. Vous pouvez ici désactiver ce comportement et revenir à l\'ancien système où le retour de ligne simple n\'est pas reconnu -- à l\'instar du langage HTML.', # NEW
-	'autobr:description2' => 'Objets contenant cette balise (non exhaustif) :
-- Articles : @ARTICLES@.
-- Rubriques : @RUBRIQUES@.
-- Forums : @FORUMS@.', # NEW
+	'autobr:description2' => 'Objekty s týmto tagom (nie celý zoznam):
+- Články: @ARTICLES@.
+- Rubriky: @RUBRIQUES@.
+- Diskusné fóra: @FORUMS@.',
 	'autobr:nom' => 'Automatické zlomy riadkov',
 	'autobr_non' => 'Vnútorné tagy &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Články a verejné správy (tagy @BALISES@)',
@@ -423,8 +423,8 @@ Pozor! Na to, aby fungoval, tento nástroj potrebuje  zásuvný modul {Zaoblené
 	// L
 	'label:admin_travaux' => 'Zatvoriť verejnú stránku pre:',
 	'label:alinea' => 'Oblasť použitia:',
-	'label:alinea2' => 'Sauf :', # NEW
-	'label:alinea3' => 'Désactiver la prise en compte des alinéas :', # NEW
+	'label:alinea2' => 'Okrem:',
+	'label:alinea3' => 'Deaktivovať vkladanie odsekov:',
 	'label:arret_optimisation' => 'Stop SPIP from emptying the wastebin automatically:',
 	'label:auteur_forum_nom' => 'The visitor must specify:',
 	'label:auto_sommaire' => 'Systematic creation of a summary:',
@@ -643,7 +643,7 @@ Na to, aby ostal zachovaný prístup k pôvodnému obrázku odrážky SPIPu (ma
 	// R
 	'raccourcis' => 'Active Penknife typographical shortcuts:',
 	'raccourcis_barre' => 'Klávesové skratky modulu Vreckový nožík',
-	'rafraichir' => 'Afin de terminer la configuration du plugin, merci d\'actualiser la page courante.', # NEW
+	'rafraichir' => 'Ďakujeme, že po dokončení nastavovania zásuvného modulu aktualizujete túto stránku.',
 	'reserve_admin' => 'Access restricted to administrators',
 	'rss_actualiser' => 'Aktualizovať',
 	'rss_attente' => 'Čaká sa na RSS...',
@@ -662,7 +662,7 @@ Na to, aby ostal zachovaný prístup k pôvodnému obrázku odrážky SPIPu (ma
 Dossier stockant les sessions : @_DIR_SESSIONS@
 
 Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.', # NEW
-	'sessions_anonymes:nom' => 'Sessions anonymes', # NEW
+	'sessions_anonymes:nom' => 'Anonymné sessiony',
 	'set_options:description' => 'Preselects the type of interface (simplified or advanced) for all editors, both existing and future ones. At the same time the button offering the choice between the two interfaces is also removed.[[%radio_set_options4%]]',
 	'set_options:nom' => 'Type of private interface',
 	'sf_amont' => 'Upstream',
@@ -785,7 +785,7 @@ Vos modifications seront prises en compte quelques jours plus tard sous forme d\
 {{Traductions actuellement disponibles}} :@trad@
 
 {{Merci aux traducteurs actuels}} : @contrib@.', # NEW
-	'trad_mod' => 'Module « @mod@ » : ', # NEW
+	'trad_mod' => 'Modul "@mod@": ',
 	'travaux_masquer_avert' => 'Schovať rám, ktorý uvádza na verejnej stránke, že sa vykonáva údržba',
 	'travaux_nocache' => 'Deaktivovať aj cache SPIPu',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
