@@ -19,8 +19,9 @@ function formulaires_configurer_gis_verifier_dist(){
 	if (empty($erreurs)){
 		include_spip('inc/config');
 		$layer_defaut = lire_config('gis/layer_defaut');
-		// Si on change la couche par défaut, le formulaire ne doit pas etre traiter en ajax (cas d'ajout d'une couche google)
-		if (_request('layer_defaut') != $layer_defaut)
+		// Si on change la couche par défaut ou si une couche google est présente dans la conf, le formulaire ne doit pas etre traiter en ajax
+		if ((_request('layer_defaut') != $layer_defaut)
+			OR (count(array_intersect(array('google_roadmap', 'google_satellite', 'google_terrain'), _request('layers'))) > 0))
 			refuser_traiter_formulaire_ajax();
 	}
 	
