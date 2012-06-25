@@ -363,7 +363,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 _ {{Zásuvný modul SpipBB sa stále vyvíja. Používate ho na svoje vlastné riziko.}}
 
 _ [Prístup na riadiaci panel-> .?exec=spipbb_configuration]',
-	'plugin_licence' => 'Distribuované pod licenciou GPL licence',
+	'plugin_licence' => 'Distribuované s licenciou GPL licence',
 	'plugin_lien' => '[Pozrite si dokumentáciu zásuvného modulu zo Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => 'Túto verziu zásuvného modulu memôžete použiť s vašou verziou SPIPU!',
 	'plugin_nom' => 'SpipBB: Riadenie diskusných fór SPIPU',
