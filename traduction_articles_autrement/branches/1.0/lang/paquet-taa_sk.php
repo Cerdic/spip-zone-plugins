@@ -8,11 +8,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
-	'taa_description' => 'Modification de l\'interface privée de spip afin de donner à l\'utilisateur une autre approche de la traductions des articles tout en maintenant le système de traduction original de spip. Pour pouvoir utiliser l\'affichage compact des listes d\'articles (option disponible via cfg), il faut installer le plugin [afficher_objets->http://files.spip.org/spip-zone/afficher_objets.zip].
+	'taa_description' => 'Úprava rozhrania súkromnej zóny spipu, aby mohol používateľ zmeniť prístup k prekladom článkov a súčasne si ponechať pôvodný systém spipu na preklad. Na to, aby ste mohli využívať kompaktné zobrazenie zoznamov článkov (táto možnosť je k dispozícii prostredníctvom cfg), musíte si naištalovať zásuvný modul [afficher_objets.->http://files.spip.org/spip-zone/afficher_objets.zip]
 	 
-	 Les listes compactes fonctionnent maintenant également sur un site avec du multilinguisme par section. Il faut pour cela installer le plugin [Traduction entre rubrique->http://files.spip.org/spip-zone/tradrub.zip]
+	 Kompaktné zoznamy teraz fungujú aj na stránke s viacjazyčnými rubrikami. V tom prípade si treba nainštalovať zásuvný modul [Preklad medzi rubrikami.->http://files.spip.org/spip-zone/tradrub.zip]
 	 
-	 Et pour pour pouvoir profiter d\'un système de traduction dans le sens du présent plugin, installez en plus le plugin [Traductions rubriques autrement->http://files.spip.org/spip-zone/traduction_rubriques_autrement.zip]. Les boutons de traduction seront affichés en haut de la rubrique avec la possibilité de créer les traductions manquantes en cliquant sur l\'onglet en gris. Le plugin essayera de chercher la rubrique correspondante dans le secteur de la langue, si la rubrique parente est bien traduite.', # NEW
+	 A aby ste mohli využívať systém na preklad, ktorý ponúka tento zásuvný modul, nainštalujte si zásuvný modul [Iný preklad rubrík.->http://files.spip.org/spip-zone/traduction_rubriques_autrement.zip] Tlačidlá prekladu sa zobrazia v hornej časti rubriky s možnosťou vytvoriť chýbajúce preklady kliknutím na sivú kartu. Zásuvný modul sa pokúsi nájsť príslušnú rubriku v sektore pre daný jazyk, ak je preložená nadradená rubrika.',
 	'taa_slogan' => 'Uľahčite si prekladanie článkov.'
 );
 

@@ -11,6 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'affichage_liste_compacte_desactive' => 'Deaktivovať kompaktné zobrazenie  zoznamu článkov',
 
 	// C
+	'cfg_limiter_secteur' => 'Panel s jazykmi nezobrazovať v sektore:',
+	'cfg_utiliser_langues' => 'Používať tieto jazyky:',
 	'changer_langue' => 'Zmeniť jazyk článku',
 
 	// F
@@ -27,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'options' => 'Upraviť možnosti jazykov',
+	'oui' => 'Áno',
 
 	// R
 	'rang' => 'Hodnotenie',
