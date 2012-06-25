@@ -10,8 +10,8 @@
 		<fieldset>
 			<legend><:contact:configuration_destinataires:></legend>
 			<ul class="decaler">
-				<li class="editer_choix_destinataires haut pleine_largeur">
-					<label><:contact:configuration_destinataires_explication:></label>
+				<li class="editer editer_choix_destinataires haut pleine_largeur">
+					<label for="choix_destinataires"><:contact:configuration_destinataires_explication:></label>
 						<B_auteurs>
 						<select name="choix_destinataires[]" id="choix_destinataires" multiple="multiple" size="[(#GRAND_TOTAL|<{26}|?{#GRAND_TOTAL,25})]">
 						<BOUCLE_auteurs(AUTEURS){tous}{email!=''}{par nom}>
@@ -22,7 +22,7 @@
 					</select>
 					</B_auteurs>
 				</li>
-				<li class="editer_type_choix haut pleine_largeur">
+				<li class="editer editer_type_choix haut pleine_largeur">
 					<label><:contact:configuration_regle_liste_explication:></label>
 					<div class="choix">
 						<input type="radio" name="type_choix" id="tous" class="radio" value="tous"[ checked="checked"(#ENV{type_choix}|=={tous}|ou{#ENV{type_choix}|non}|oui)] />
@@ -37,7 +37,7 @@
 						<label for="tous_et"><:contact:configuration_destinataires_tous_et:></label>
 					</div>
 				</li>
-				<li class="editer_type_choix haut pleine_largeur">
+				<li class="editer editer_type_choix haut pleine_largeur">
 					<div class="choix">
 						<input type="radio" name="type_choix" id="un" class="radio" value="un"[ checked="checked"(#ENV{type_choix}|=={un}|oui)] />
 						<label for="un"><:contact:configuration_destinataires_un:></label>
@@ -51,7 +51,7 @@
 						<label for="un_et"><:contact:configuration_destinataires_un_et:></label>
 					</div>
 				</li>
-				<li class="editer_type_choix haut pleine_largeur">
+				<li class="editer editer_type_choix haut pleine_largeur">
 					<div class="choix">
 						<input type="radio" name="type_choix" id="plusieurs" class="radio" value="plusieurs"[ checked="checked"(#ENV{type_choix}|=={plusieurs}|oui)] />
 						<label for="plusieurs"><:contact:configuration_destinataires_plusieurs:></label>
@@ -85,7 +85,7 @@
 			<legend><:contact:infos_collecte:></legend>
 			<ol id="editer_champs" class="numeroter">
 				<BOUCLE_champs(POUR){tableau #GET{champs}}>
-				<li class="editer_champ pleine_largeur agrondir" title="<:contact:deplacement_possible:>" style="overflow:visible;">
+				<li class="editer editer_champ pleine_largeur agrondir" title="<:contact:deplacement_possible:>" style="overflow:visible;">
 					[(#CLE|match{mail|sujet|texte}|oui)
 					<div class="choix">
 						<input type="text" name="champs[(#VAL{&#91;&#93;}|html_entity_decode)]" id="champ_#CLE" class="text" style="display:none;" value="#CLE" readonly='readonly' />
@@ -112,7 +112,7 @@
 			<legend><:contact:configuration_champs_message:></legend>
 			[<p class="attention">(#EVAL{PORTE_PLUME_PUBLIC}|non|ou{#CONFIG{barre_outils_public}|=={non}|oui})<:contact:configuration_barre_impossible:></p>]
 			<ul>
-				<li class="editer_barre">
+				<li class="editer editer_barre">
 					<label><:contact:configuration_champs_message_explication:></label>
 					<div class="choix">
 						<input type="radio" name="barre" id="no_b" class="radio" value="no_barre"[ checked="checked"(#ENV{barre}|=={no_barre}|ou{[(#CONFIG{contact/barre}|non)]}|oui)] />
@@ -137,7 +137,7 @@
 		<fieldset>
 			<legend><:contact:configuration_pj:></legend>
 			<ul>
-				<li class="editer_autoriser_pj">
+				<li class="editer editer_autoriser_pj">
 					[(#REM) : On teste si le plugin facteur est présent pour pourvoir envoyer les pièces jointes ]
 					[(#PLUGIN{facteur}|oui)
 					<div class="choix">
@@ -153,7 +153,6 @@
 						<option value="5" [selected="selected" (#ENV{nb_max_pj}|=={5}|oui)]>5</option>
 					</select>
 					]
-
 					[(#PLUGIN{facteur}|non)
 					<p class="explication"><:contact:configuration_pj_facteur_absent:></p>
 					]
@@ -164,7 +163,7 @@
 		<fieldset>
 			<legend><:contact:champ_civilite:></legend>
 			<ul>
-				<li class="editer_champ_civi_mademoiselle">
+				<li class="editer editer_champ_civi_mademoiselle">
 					<p class="explication"><:contact:champ_civi_explication:></p>
 					<div class="choix">
 						<input type="checkbox" name="champ_civi_mademoiselle" id="champ_civi_mademoiselle" class="checkbox" value="true" [checked="checked"(#ENV{champ_civi_mademoiselle}|=={true}|oui)] />
@@ -177,7 +176,7 @@
 		<fieldset>
 			<legend><:contact:sauv_message:></legend>
 			<ul>
-				<li class="editer_sauvegarder_contacts">
+				<li class="editer editer_sauvegarder_contacts">
 					<p class="explication"><:contact:sauv_message_explication:></p>
 					<div class="choix">
 						<input type="checkbox" name="sauvegarder_contacts" id="sauvegarder_contacts" class="checkbox" value="true" [checked="checked"(#ENV{sauvegarder_contacts}|=={true}|oui)] />
@@ -191,7 +190,7 @@
 		<fieldset>
 			<legend><:contact:configuration_intro:></legend>
 			<ul>
-				<li class="editer_texte pleine_largeur">
+				<li class="editer editer_texte pleine_largeur">
 					<p class="explication"><:contact:configuration_intro_explication:></p>
 					<textarea name="texte" id="texte" rows="10" cols="40">#ENV{texte}</textarea>
 				</li>
@@ -201,7 +200,7 @@
 		<fieldset>
 			<legend><:contact:configuration_texteinfolettre:></legend>
 			<ul>
-				<li class="editer_texteinfolettre pleine_largeur">
+				<li class="editer editer_texteinfolettre pleine_largeur">
 					<p class="explication"><:contact:configuration_texteinfolettre_explication:></p>
 					<textarea name="texteinfolettre" id="texteinfolettre" rows="2" cols="40">[(#ENV{texteinfolettre})]</textarea>
 				</li>
