@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fermer' => 'Zatvoriť',
 
 	// I
-	'inscription' => 'Registrácia na <@liste@>',
+	'inscription' => 'Registrácia do <@liste@>',
 
 	// M
 	'mail_removed' => '
