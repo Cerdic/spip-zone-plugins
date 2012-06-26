@@ -1,64 +1,57 @@
-<div id="calendrier">
-	<div id="entete-calendar">
-						<h3><a href="#URL_PAGE{agenda}" title="<:seminaire:a_venir:>" ><:seminaire:titre_agenda:></a></h3>
+[(#SET{urljson,[(#ENV{urljson}
+						|parametre_url{id_rubrique,#ENV{id_rubrique,#ENV{urljson}|parametre_url{id_rubrique}}}
+						|parametre_url{id_article,#ENV{id_article,#ENV{urljson}|parametre_url{id_article}}}
+						|parametre_url{id_mot,#ENV{id_mot,#ENV{urljson}|parametre_url{id_mot}}}
+						|parametre_url{lang,#ENV{lang,#ENV{urljson}|parametre_url{lang}}}
+						)]})
+]<div id="calendar" class="calendriermini minicalendar">
+	<h2 class="menu-titre"><a href="#URL_PAGE{calendrier-zpip}"><:seminaire:titre_agenda:></a></h2>
+	<div class="calendar-container"
+					data-json="#GET{urljson}"
+					data-year="[(#ENV{date}|affdate{Y})]"
+					data-month="[(#ENV{date}|affdate{n})]"
+					data-url="#ENV{self}"
+					data-vardate="#ENV{var_date}"
+					>[(#REM)
+
+		Contenu alternatif statique pour les Bot et les utilisateurs sans JS
+		]<div class="alt">
+			#SET{start,#ENV{date}|affdate{Y-m-01}|strtotime}
+			#SET{end,#VAL{Y-m-01}|date{#GET{start}|plus{2764800}}|strtotime}
+			#SET{url,#GET{urljson}|parametre_url{start,#GET{start},'&'}|parametre_url{end,#GET{end},'&'}|url_absolue}
+			<strong>[(#ENV{date}|affdate_mois_annee)]&nbsp;:</strong>
+			<B_alt>
+			<ul class="liste-items">
+			<BOUCLE_alt(DATA){source json,#GET{url}}><BOUCLE_dates(DATA){source table,#VALEUR{start}|calendriermini_intervalle{#VALEUR{end}}}>[
+				<li class="item"><a href="[(#ENV{self}|parametre_url{#ENV{var_date},#VALEUR})]">(#VALEUR|affdate|unique)</a></li>
+				]</BOUCLE_dates></BOUCLE_alt>
+			</ul>
+			</B_alt>
+			<p><:minical:aucune_date:></p>
+			<//B_alt>
+			<p class="pagination">
+			#SET{prev,#VAL{Y-m-01}|date{#GET{start}|moins{172800}}}
+			#SET{next,#VAL{Y-m-01}|date{#GET{end}}}
+			<a href="[(#ENV{self}|parametre_url{#ENV{var_date},#GET{prev}|affdate{Y-m-d}})]">[(#GET{prev}|affdate_mois_annee)]</a>
+			| <a href="[(#ENV{self}|parametre_url{#ENV{var_date},#GET{next}|affdate{Y-m-d}})]">[(#GET{next}|affdate_mois_annee)]</a>
+			</p>
+		</div>
 	</div>
-<table summary="<:icone_calendrier:>" width="100%" border="0" cellpadding="1" cellspacing="0" style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:.6em; text-align: center;">
-					<caption>[
-						<a class="ajax"
-							href="(#ENV{self}|parametre_url{#ENV{var_date},[(#ENV{date}|Agenda_moisdecal{-1,'Y-m'})]})"
-							title="[(#ENV{date}|Agenda_moisdecal{-1,'Y-m'}|affdate_mois_annee)]">&#171;
-						</a>]
-						[(#ENV{date}|affdate_mois_annee)]
-						[
-						<a class="ajax"
-							href="(#ENV{self}|parametre_url{#ENV{var_date},[(#ENV{date}|Agenda_moisdecal{1,'Y-m'})]})"
-							title="[(#ENV{date}|Agenda_moisdecal{1,'Y-m'}|affdate_mois_annee)]">&#187;
-						</a>]
-					</caption>
+</div>[
+(#REM) --------------------------------------------------------------------------------------------------
 
-					<thead>
-						<tr>
-							<th scope="col"><abbr title="<:date_jour_2:>"><:date_jour_2|spip_substr{0,1}|strtoupper:></abbr></th>
-							<th scope="col"><abbr title="<:date_jour_3:>"><:date_jour_3|spip_substr{0,1}|strtoupper:></abbr></th>
-							<th scope="col"><abbr title="<:date_jour_4:>"><:date_jour_4|spip_substr{0,1}|strtoupper:></abbr></th>
-							<th scope="col"><abbr title="<:date_jour_5:>"><:date_jour_5|spip_substr{0,1}|strtoupper:></abbr></th>
-							<th scope="col"><abbr title="<:date_jour_6:>"><:date_jour_6|spip_substr{0,1}|strtoupper:></abbr></th>
-							<th scope="col"><abbr title="<:date_jour_7:>"><:date_jour_7|spip_substr{0,1}|strtoupper:></abbr></th>
-							<th scope="col"><abbr title="<:date_jour_1:>"><:date_jour_1|spip_substr{0,1}|strtoupper:></abbr></th>
-						</tr>
-					</thead>
+Chargement du javascript du mini-calendrier
 
-					<tbody>
-			[(#REM)
-			Simplification: On commence par calculer les evenements qui:
-					(1) commencent avant le debut du mois suivant le mois demande (borne_fin_mois est en fait le 1er jour du mois suivant)
-						ET
-					(2) finissent apres le debut du mois demande (1er jour inclus)
-				Sont donc inclus:
-					(a) les evenements qui commencent dans le mois demande (test 1)
-						et dont la fin est necessairement apres le debut du mois demande (test 2 vrai aussi)
-					(b) les evenements qui finissent dans le mois demande (test 2)
-						et dont le debut est necessairement avant la fin du mois demande (test 1 vrai aussi)
-					(c) les evenements qui commencent avant le mois demande (test 1) ET finissent apres le mois demande (test 2)
-				Plus simple depuis qu'on dispose du calcul des bornes de debut et fin de mois... et plus de doublons :-)
-			Correction: on tronque le jour de la date pour bien partir du debut de mois quelle que soit la date demandee:
-					2009-12-15 donne quand meme borne_debut_mois==2009-12-01 et borne_fin_mois==2010-01-01
-						au lieu de borne_debut_mois==2009-12-15 et borne_fin_mois==2010-01-15
-			]
-			#SET{'borne_debut_mois', (#ENV{#ENV{var_date},#ENV{date}}|affdate{'Y-m'}|Agenda_moisdecal{0,'Y-m-d'})}
-			#SET{'borne_fin_mois', (#ENV{#ENV{var_date},#ENV{date}}|affdate{'Y-m'}|Agenda_moisdecal{1,'Y-m-d'})}
-			<!-- le debut de mois est #GET{'borne_debut_mois'}, le debut du suivant est #GET{'borne_fin_mois'} -->
-			<BOUCLE_calendrier2(EVENEMENTS)
-			{id_mot?}
-			{date_debut < #GET{'borne_fin_mois'}} 
-			{date_fin >= #GET{'borne_debut_mois'}}>[
-			(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,[(#TITRE|addslashes)][-(#NAME|attribut_html)],#DESCRIPTIF,#LIEU,
-				[(#URL_PAGE{aujour}|parametre_url{#ENV{var_date},[(#DATE_DEBUT|affdate{'Y-m-d'})]})]})
-			]</BOUCLE_calendrier2>
-			
-			[(#REM) Puis on les affiche dans un agenda]
-			[(#ENV{#ENV{var_date},#ENV{date}}|agenda_mini)]
-					</tbody>
-				</table>
-<div class="clearer"></div>
-</div>
+]<script type='text/javascript'>/*<![CDATA[*/
+if (window.jQuery){jQuery(function(){
+		jQuery.getScript('[(#PRODUIRE{fond=javascript/calendrier_mini.js,lang=#ENV{lang}}|compacte)]',function(){minical.init('.minicalendar .calendar-container');});
+});}/*]]>*/</script>[
+(#REM) --------------------------------------------------------------------------------------------------
+
+Chargement de la css que l'on importe inline pour eviter un hit (performance)
++ fixer la css de background pour les boutons precedent/suivant
+
+]<style type="text/css">
+[(#INCLURE{css/minical.css}|compacte{css})]
+.calendriermini .ui-datepicker-header .ui-icon {background-image: url("#CHEMIN{css/img/month_prev_next-32x16.png}");}
+</style>

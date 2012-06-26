@@ -1,12 +1,23 @@
 <?php
-// Module: seminaire
-// Langue: fr
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
+ 
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
-$GLOBALS[$GLOBALS['idx_lang']] = array(	
-	//pour le formulaire de s&eacute;minaires
+	// S
+	'seminaire_titre' => 'Séminaire LATP',
+
+	// C
+	'cfg_exemple' => 'Exemple',
+	'cfg_exemple_explication' => 'Explication de cet exemple',
+	'cfg_titre_parametrages' => 'Paramétrages',
+
+	// T
+	'titre_page_configurer_seminaire' => 'seminaire',
 	'titre_evenement'			 =>		'Titre à préciser',
+	
+		//pour le formulaire de s&eacute;minaires
 	'evenement_titre'			 =>		'Titre de l&rsquo;expos&eacute;',
 	'name'						 => 	'Nom de l&rsquo;intervenant',
 	'attention_mot_cle'			 =>		'Il faut IMPERATIVEMENT mettre un mot cl&eacute; sur l&rsquo;&eacute;v&eacute;nement',
@@ -39,5 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_install_groupe_categories' => 'erreur &agrave; la cr&eacute;ation du groupe',
 	'mots_cles_categories'		 =>		'Les diff&eacute;rentes cat&eacute;gories de s&eacute;minaires, groupes de travail et &eacute;v&eacute;nements exceptionnels',
 	'abonnement'				 =>		'S&rsquo;abonner au calendrier',
+
 );
+
 ?>
