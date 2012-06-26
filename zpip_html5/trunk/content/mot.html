@@ -19,10 +19,9 @@
 		<ul class="liste-items">
 			<BOUCLE_articles(ARTICLES) {id_mot} {par popularite}{inverse} {pagination 50}>
 			<li class="item">
-			<article>
 				<a href="#URL_ARTICLE">#TITRE</a>
-				<div class="small">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr>][, <:par_auteur:> (#LESAUTEURS)]</div></li>
-			</article>
+				<div class="small">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr>][, <:par_auteur:> (#LESAUTEURS)]</div>
+			</li>
 			</BOUCLE_articles>
 		</ul>
 		[<p class="pagination">(#PAGINATION)</p>]
