@@ -10,7 +10,7 @@
 >
 
 	<nom>Flux RSS en articles</nom>
-	<auteur lien='http://www.erationnal.org'>erational</auteur>
+	<auteur lien='http://www.erational.org'>erational</auteur>
 	<licence>GNU/GPL v3</licence>
         <pipeline nom="declarer_tables_principales" inclure="base/rssarticle.php"/>
         <pipeline nom="declarer_tables_interfaces" inclure="base/rssarticle.php"/>
