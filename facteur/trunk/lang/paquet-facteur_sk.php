@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
-	'facteur_description' => 'Facteur s\'occupe de la distribution des courriels au format HTML, texte ou mixte ; via SMTP ou non', # NEW
+	'facteur_description' => 'Poštár slúži na doručovanie e-mailov vo formáte HTML, v textovej alebo v zmiešanej podobe či už cez SMTP, alebo nie',
 	'facteur_nom' => 'Poštár',
 	'facteur_slogan' => 'Posiela vašu poštu'
 );
