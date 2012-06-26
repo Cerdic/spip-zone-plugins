@@ -35,9 +35,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_envoye' => 'E-mail bol odoslaný do skupiny: @liste@.',
 	'email_oublie' => 'Zabudli ste svoju e-mailovú adresu',
 	'emailliste_abomailman' => 'E-mailová adresa skupiny',
-	'emailliste_abosympa' => 'L\'adresse e-mail de l\'administrateur Sympa', # NEW
-	'emailliste_subscribe' => 'Abonnement', # NEW
-	'emailliste_unsubscribe' => 'Désabonnement', # NEW
+	'emailliste_abosympa' => 'E-mailová adresa administrátora (Sympa)',
+	'emailliste_subscribe' => 'Prihlásenie na odoberanie',
+	'emailliste_unsubscribe' => 'Odhlásenie sa z odoberania',
 	'emails_a_renseigner' => 'E-maily pre informácie',
 	'envoi_apercu' => 'Anketa',
 	'envoi_confirmer' => 'Potvrdiť a poslať',
@@ -53,8 +53,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_email_liste_oublie' => 'E-mailová adresa skupiny je povinný údaj',
 	'erreur_nobot' => 'Registrácia sa z technických príčin neuskutočnila',
 	'explication_email_subscribe' => 'E-mail na prihlásenie sa na odoberanie v podobe<code>suffixe+subscribe@exemple.org</code>',
-	'explication_email_sympa' => 'Si ce champ est renseigné, la liste est considérée comme une liste de serveur "Sympa", dans le cas contraire comme une liste "Mailman" ou "ezmlm".', # NEW
-	'explication_email_unsubscribe' => 'Email de désabonnement', # NEW
+	'explication_email_sympa' => 'Ak toto pole vyplníte, skupina bude považovaná za skupinu servera Sympa, v opačnom prípade za skupinu servera "Mailman" alebo "ezmlm".',
+	'explication_email_unsubscribe' => 'E-mail na odhlásenie',
 
 	// I
 	'icone_ajouter_liste' => 'Pridať novú skupinu',
@@ -64,12 +64,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_abomailman_aucun' => 'Žiadna skupina',
 	'info_abomailmans_1' => 'Jedna skupina',
 	'info_abomailmans_nb' => '@nb@ skupín',
-	'info_sisympa' => '[Obligatoire si liste Sympa]', # NEW
-	'insciption_listes_legende' => 'Abonnement aux listes de diffusion', # NEW
-	'inscription_lettres_legende' => 'Abonnement aux listes de diffusion et de discussions', # NEW
+	'info_sisympa' => '(Povinné pre skupinu Sympa)',
+	'insciption_listes_legende' => 'Odoberanie príspevkov e-mailových skupín',
+	'inscription_lettres_legende' => 'Odoberanie príspevkov e-mailových a diskusných skupín',
 
 	// J
-	'je_m_abonne' => 'Cochez pour valider l\'abonnement ou le désabonnement.', # NEW
+	'je_m_abonne' => 'Označením príslušného poľa potvrďte svoje prihlásenie alebo odhlásenie.',
 
 	// L
 	'label_etat_liste' => 'Stav skupiny',
@@ -77,11 +77,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type_ml' => 'Diskusná skupina',
 	'label_type_news' => 'E-mailová skupina',
 	'langue_liste' => 'Jazyk skupiny',
-	'legende_inscription_ml' => 'Inscription à la liste de discussion', # NEW
-	'legende_inscription_news' => 'Inscription à la liste de diffusion', # NEW
-	'legende_inscriptions_ml' => 'Inscription aux listes de discussion', # NEW
-	'legende_inscriptions_news' => 'Inscription aux listes de diffusion', # NEW
-	'les_listes_mailmans' => 'Les listes mailmans, sympa ou ezmlm renseignées', # NEW
+	'legende_inscription_ml' => 'Registrácia do diskusnej skupiny',
+	'legende_inscription_news' => 'Registrácia do e-mailovej skupiny',
+	'legende_inscriptions_ml' => 'Registrácia do diskusných skupín',
+	'legende_inscriptions_news' => 'Registrácia do e-mailových skupín',
+	'les_listes_mailmans' => 'Informované skupiny mailmans, sympa alebo ezmlm',
 	'lire_article' => 'Čítať článok',
 	'liste_creee' => 'Skupina číslo @id@ (@titre@) bola vytvorená.',
 	'liste_non_existante' => 'Požadovaná skupina neexistuje alebo bola vymazaná',
@@ -90,12 +90,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_updatee' => 'Skupina číslo @id@ (@titre@) bola aktualizovaná.',
 
 	// M
-	'message' => 'Introduction à votre courrier, avant le contenu issu du site', # NEW
-	'message_confirm_suite' => 'Pour valider votre demande, répondez à la demande de confirmation que vous allez recevoir par mail.', # NEW
-	'message_confirmation_a' => 'Une demande d\'abonnement aux listes suivantes vient d\'être envoyée :', # NEW
-	'message_confirmation_d' => 'Une demande de désabonnement aux listes suivantes vient d\'être envoyée. ', # NEW
-	'message_confirmation_unique_a' => 'Une demande d\'abonnement à la liste suivante vient d\'être envoyée :', # NEW
-	'message_confirmation_unique_d' => 'Une demande de désabonnement à la liste suivante vient d\'être envoyée. ', # NEW
+	'message' => 'Úvod do e-mailu pred obsahom stránky',
+	'message_confirm_suite' => 'Ak chcete potvrdiť požiadavku, postupujte podľa pokynov, ktoré dostanete e-mailom.',
+	'message_confirmation_a' => 'Bola odoslaná požiadavka na prihlásenie na odoberanie príspevkov týchto skupín:',
+	'message_confirmation_d' => 'Požiadavka na odhlásenie z odoberania príspevkov týchto skupín bola odoslaná.',
+	'message_confirmation_unique_a' => 'Bola odoslaná požiadavka na odoberanie príspevkov z tejto skupiny:',
+	'message_confirmation_unique_d' => 'Požiadavka na odhlásenie sa z odoberania príspevkov z tejto skupiny bola odoslaná.',
 	'mot' => 'A vypísať články s kľúčovým slovom ',
 
 	// N
@@ -123,7 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'template' => 'Vyberte si šablónu a jej obsah',
 	'template_defaut' => 'Predvolená šablóna',
-	'template_defaut_info' => 'Si le fichier modele_choisi.txt.html existe, la newsletter sera envoyée en mode html + texte. Sinon seule la version html sera expédiée.', # NEW
+	'template_defaut_info' => 'Ak súbor modele_choisi.txt.html existuje, bulletin bude odoslaný vo verzii html aj ako text. Inak bude odoslaný iba vo verzii html.',
 	'texte_descriptif' => 'Popis',
 	'titre_abomailman' => 'Názov skupiny',
 	'titre_liste_obligatoire' => 'Názov skupiny je povinný údaj',
@@ -131,9 +131,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
 	'verifier_formulaire' => 'Skontrolujte, ako ste vyplnili formulár.',
-	'veut_s_abonner' => 'veut s\'abonner', # NEW
-	'veut_se_desabonner' => 'veut se désabonner', # NEW
-	'voir_modele_depuis' => 'Voir un exemple du modèle avec', # NEW
+	'veut_s_abonner' => 'chcem sa prihlásiť',
+	'veut_se_desabonner' => 'chcem sa odhlásiť',
+	'voir_modele_depuis' => 'Zobraziť príklad šablóny s ',
 	'votre_email' => 'Váš e-mail'
 );
 
