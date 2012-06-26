@@ -45,7 +45,7 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=2){
 	include_spip('inc/documents');
 	include_spip('inc/filtres_images_mini');
 	$retour = 0;
-	$document = sql_fetsel("docs.hasvideo,docs.id_document,docs.fichier,docs.duree,docs.id_vignette,docs.mode", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
+	$document = sql_fetsel("*", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
 	$vignette_existante = sql_getfetsel('id_document','spip_documents','id_document='.intval($document['id_vignette']));
 	if(!$vignette_existante)
 		$vignette_existante = 'new';
@@ -64,7 +64,7 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=2){
 		$dossier_temp = _DIR_VAR;
 		$fichier_temp = "$dossier_temp$query.jpg";
 		while(!$vignette && ($seconde < $document['duree'])){
-			$cmd_vignette = $spipmotion_sh.' --e '.$chemin.' --s '.$fichier_temp.' --ss '.$seconde;
+			$cmd_vignette = $spipmotion_sh.' --e '.$chemin.' --size '.$document['largeur'].'x'.$document['hauteur'].' --s '.$fichier_temp.' --ss '.$seconde;
 			$lancement_vignette = exec($cmd_vignette,$retour_vignette,$retour_int);
 			if($retour_int >= 126){
 				$erreur = _T('spipmotion:erreur_script_spipmotion_non_executable');
