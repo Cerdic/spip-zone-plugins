@@ -2,6 +2,7 @@
 	<nom>GCalendar</nom>
 	<slogan>Utiliser Google Calendar</slogan>
 	<auteur>[Gilles Quiniou->mailto:gilles@quiniou.net], [Mehdi Cherifi (Superyms)->mailto:superyms@gmail.com]</auteur>
+	<categorie>date</categorie>
 	<licence>GNU/GPL</licence>
 	<version>1.0.10</version>
 	<etat>stable</etat>
