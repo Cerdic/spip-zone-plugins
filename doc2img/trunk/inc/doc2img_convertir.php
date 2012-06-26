@@ -28,7 +28,7 @@ function inc_doc2img_convertir($id_document,$type='full') {
 		include_spip('inc/config');
 
 	    $config = lire_config('doc2img',array());
-
+		$format_cible = $config['format_cible'] ? $config['format_cible'] : 'png';
 	    $document = doc2img_document($id_document);
 
 	    /**
@@ -80,7 +80,7 @@ function inc_doc2img_convertir($id_document,$type='full') {
 		        	$image_frame->setResolution($resolution,$resolution);
 	        	}
 				$image_frame->readImage($document['fichier'].'['.$frame.']');
-				$image_frame->setImageFormat($config['format_cible']);
+				$image_frame->setImageFormat($format_cible);
 				if(is_numeric($config['compression']) && ($config['compression'] > 50) && ($config['compression'] <= 100)){
 					$image_frame->setImageCompressionQuality($config['compression']);
 				}
@@ -89,7 +89,7 @@ function inc_doc2img_convertir($id_document,$type='full') {
 		        //$dimensions = doc2img_ratio($image_frame,$config);
 	
 		        //nom du fichier cible, c'est à dire la frame (image) indexée
-		        $frame_name = $document['name'].'-'.$frame.'.'.$config['format_cible'];
+		        $frame_name = $document['name'].'-'.$frame.'.'.$format_cible;
 				$dest = $document['cible_url'].$frame_name;
 		        //on sauvegarde la page
 		        
@@ -103,9 +103,9 @@ function inc_doc2img_convertir($id_document,$type='full') {
 				$files = array(array('tmp_name'=>$dest,'name'=>$frame_name));
 				$x = $ajouter_documents('new', $files,'document', $id_document, 'doc2img');
 
-		        if(($frame == 0) && ($config['logo_auto']=='on') && in_array($config['format_cible'],array('png','jpg'))){
+		        if(($frame == 0) && ($config['logo_auto']=='on') && in_array($format_cible,array('png','jpg'))){
 		        	$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
-					$frame_tmp = $document['cible_url'].$document['name'].'-logo.'.$config['format_cible'];
+					$frame_tmp = $document['cible_url'].$document['name'].'-logo.'.$format_cible;
 					$image_frame->writeImage($frame_tmp);
 					$files = array(array('tmp_name'=>$frame_tmp,'name'=>$frame_name));
 	        		if(is_numeric($id_vignette) && $id_vignette > 0){
@@ -126,20 +126,20 @@ function inc_doc2img_convertir($id_document,$type='full') {
 		    } while($frame < $nb_pages);
 	    }else{
 	    	do {
-	    		if(in_array($config['format_cible'],array('png','jpg'))){
+	    		if(in_array($format_cible,array('png','jpg'))){
 			        //on accede à la page $frame
 		        	$image_frame = new Imagick();
 		        	if(is_numeric($resolution) && ($resolution <= '600') && ($resolution > $identify['resolution']['x'])){
 			        	$image_frame->setResolution($resolution,$resolution);
 		        	}
 					$image_frame->readImage($document['fichier'].'['.$frame.']');
-					$image_frame->setImageFormat($config['format_cible']);
+					$image_frame->setImageFormat($format_cible);
 					if(is_numeric($config['compression']) && ($config['compression'] > 50) && ($config['compression'] <= 100)){
 						$image_frame->setImageCompressionQuality($config['compression']);
 					}
 		
 			        //nom du fichier cible, c'est à dire la frame (image) indexée
-			        $frame_name = $document['name'].'-logo.'.$config['format_cible'];
+			        $frame_name = $document['name'].'-logo.'.$format_cible;
 		
 			        //on sauvegarde la page
 		            $image_frame->writeImage($document['cible_url'].$frame_name);

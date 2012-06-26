@@ -21,6 +21,7 @@ function doc2img_upgrade($nom_meta_base_version,$version_cible){
 	include_spip('inc/meta');
 	include_spip('base/abstract_sql');
 	include_spip('base/create');
+	include_spip('inc/config');
 	$current_version = 0.0;
 
 	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
