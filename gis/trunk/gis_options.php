@@ -6,6 +6,8 @@ define('_DIR_LIB_GIS','lib/leaflet-gis-4.0.4/');
 
 $GLOBALS['logo_libelles']['id_gis'] = _T('gis:libelle_logo_gis');
 
+$config = @unserialize($GLOBALS['meta']['gis']);
+
 $GLOBALS['gis_layers'] = array (
 	'openstreetmap_mapnik' => array(
 		'nom' => 'OpenStreetMap',
@@ -30,6 +32,10 @@ $GLOBALS['gis_layers'] = array (
 	'google_terrain' => array(
 		'nom' => 'Google Terrain',
 		'layer' => 'L.Google("TERRAIN")'
+	),
+	'bing_aerial' => array(
+		'nom' => 'Bing Aerial',
+		'layer' => 'L.BingLayer("'.$config['api_key_bing'].'")'
 	),
 	'thunderforest_opencyclemap' => array(
 		'nom' => 'Thunderforest OpenCycleMap',

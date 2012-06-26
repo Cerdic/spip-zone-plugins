@@ -44,6 +44,10 @@ function gis_insert_head($flux){
 		$flux .="\n".'<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;language='.$GLOBALS['spip_lang'].'"></script>';
 		$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'plugins/layer/tile/Google.js') .'"></script>';
 	}
+	// insertion du script pour bing si nécessaire
+	if (in_array('bing_aerial', $config['layers'])) {
+		$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'plugins/layer/tile/Bing.js') .'"></script>';
+	}
 	
 	return $flux;
 }
