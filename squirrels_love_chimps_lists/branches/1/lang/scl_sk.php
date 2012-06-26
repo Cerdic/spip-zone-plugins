@@ -8,33 +8,33 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'abonnement_mailinglist' => 'Abonnement à la mailingliste', # NEW
-	'abonnement_mailinglists' => 'Prihlásenie sa na odoberanie príspevkov e-mailovej konferencie',
+	'abonnement_mailinglist' => 'Odoberanie príspevkov e-mailovej skupiny',
+	'abonnement_mailinglists' => 'Prihlásenie sa na odoberanie príspevkov e-mailovej skupiny',
 	'actualiser_mailinglists_actualise' => 'Keď sa profil autora aktualizuje (synchronizovať diskusnú skupinu)',
 	'actualiser_mailinglists_ajout' => 'Keď bude pridaný autor',
-	'actualiser_mailinglists_enlever' => 'Keď je autor odstránený – presunutý do koša (vylúčený z e-mailovej konferencie)',
+	'actualiser_mailinglists_enlever' => 'Keď je autor odstránený – presunutý do koša (vylúčený z e-mailovej skupiny)',
 
 	// B
-	'bypass_ml_opt_in' => 'Outrepasser le double opt-in de MailChimp. Les auteurs nouvellement enregistrés ne reçoivent pas de mail de confirmation de MailChimp (MailChimp <a target="_blank" href="http://www.mailchimp.com/kb/article/how-does-confirmed-optin-or-double-optin-work">recommande de ne pas en abuser</a>, donc prudence!)', # NEW
+	'bypass_ml_opt_in' => 'Prepísať duplicitné prihlásenie do MailChimpu. Noví zaregistrovaní autori nedostávajú e-mail na potvrdenie z MailChimpu (MailChimp <a target="_blank" href="http://www.mailchimp.com/kb/article/how-does-confirmed-optin-or-double-optin-work">odporúča sa nemeniť to,</a> takže si na to dajte pozor!)',
 
 	// C
 	'champ_spip' => 'Polia SPIPu',
 	'champs_extras' => 'Deklarujte polia, ktoré budete používať',
 	'champs_extras_explication' => 'uveďte polia pre každú tabuľku, ktorú budete používať',
-	'champs_supp' => 'Quels informations additionnelles de SPIP voulez-vous utiliser pour la synchronisation avec MailChimp (l\'email est toujours synchronisé)', # NEW
-	'champs_supp_mapping' => 'Utilisez le tableau suivant pour accorder les champs SPIP aux champs MailChimp', # NEW
+	'champs_supp' => 'Aké ďalšie údaje zo SPIPu chcete využívať na synchronizáciu s MailChimpom (e-mail sa synchronizuje vždy)',
+	'champs_supp_mapping' => 'Pomocou tejto tabuľky priraďte polia SPIPu poliam MailChimpu',
 	'champs_utilises' => 'Použité polia',
-	'choisir_liste' => 'Vous devez d\'abord <a href="@url@">choisir au moins une liste</a>', # NEW
-	'choix_mailinglists' => 'Ktorá e-mailová konferencia sa má aktualizovať automaticky',
-	'choix_mailinglists_abonnement' => 'Choisissez la/les listes', # NEW
-	'config_squirrel_chimp_lists' => 'Listes', # NEW
+	'choisir_liste' => 'Najprv si musíte <a href="@url@">vybrať aspoň jednu skupinu</a>',
+	'choix_mailinglists' => 'Ktorá e-mailová skupina sa má aktualizovať automaticky',
+	'choix_mailinglists_abonnement' => 'Vyberte si skupiny',
+	'config_squirrel_chimp_lists' => 'Skupiny',
 
 	// D
 	'declarer_champs_extras' => 'Deklarujte doplnkové polia SPIPu',
-	'demande_desincription_ok' => 'Votre adresse "@email@" a également été retirée de Mailchimp. Au revoir.', # NEW
-	'demande_inscription_envoyee1' => 'Un mail vous a été envoyé à l\'adresse "@email@".', # NEW
-	'demande_inscription_envoyee2' => 'Pour valider votre abonnement, vous devez cliquer sur le lien dans l\'email que vous avez reçu.', # NEW
-	'demande_inscription_envoyee3' => 'Vérifiez éventuellement dans votre dossier SPAM ou dans votre corbeille si jamais vous ne trouvez pas cet email.', # NEW
+	'demande_desincription_ok' => 'Vaša adresa "@email@" bola odstránená aj z Mailchimpu. Do videnia.',
+	'demande_inscription_envoyee1' => 'E-mail bol odoslaný na adresu "@email@".',
+	'demande_inscription_envoyee2' => 'Ak chcete potvrdiť svoju registráciu na odoberanie príspevkov skupiny, musíte kliknúť na odkaz v emaile, ktorý dostanete.',
+	'demande_inscription_envoyee3' => 'V prípade, že neviete nájsť tento e-mail, skúste prípadne skontrolovať priečinok SPAM alebo sa pozrieť do Koša.',
 	'demande_inscription_envoyee_ok' => 'Vaše prihlásenie na odoberanie bolo zaregistrované.',
 	'donnees_personnelles' => 'Vaše osobné údaje',
 
@@ -46,22 +46,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exemple' => 'Príklad',
 
 	// G
-	'gestion_listes' => 'Gestion des listes', # NEW
+	'gestion_listes' => 'Riadenie skupín',
 
 	// I
-	'id_liste' => 'id liste', # NEW
-	'id_separe_virgules' => 'ID1,ID2,..', # NEW
-	'inscrits_list' => 'Nombre d\'inscrits', # NEW
+	'id_liste' => 'č. skupiny',
+	'id_separe_virgules' => 'ID1,ID2,..',
+	'inscrits_list' => 'Počet registrovaných',
 
 	// L
-	'listes_mailchimp' => 'Les listes MailChimp gérées par SPIP', # NEW
+	'listes_mailchimp' => 'Skupiny MailChimp vytvorené v SPIPe',
 
 	// M
-	'mailinglists' => 'E-mailové konferencie',
+	'mailinglists' => 'E-mailové skupiny',
 	'mailinglists_dispos' => 'Dostupné diskusné skupiny:',
 	'modele' => 'Šablóna:',
 	'modeles' => 'Šablóny:',
-	'modeles_form_abonnement' => 'Formulaire Abonnement', # NEW
+	'modeles_form_abonnement' => 'Formulár na prihlásenie na odoberanie príspevkov',
 
 	// N
 	'nom' => 'Priezvisko a meno',
@@ -71,25 +71,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_accorder' => 'Nezadané',
 
 	// Q
-	'quand_actualiser_mailinglists' => 'Quand voulez-vous actualiser les listes choisies ?', # NEW
+	'quand_actualiser_mailinglists' => 'Kedy chcete aktualizovať vybrané skupiny?',
 
 	// S
 	'sync_actualise' => 'aktualizované:',
 	'sync_ajoute' => 'pridané:',
-	'sync_auteurs' => 'Synchroniser les auteurs vers MailChimp', # NEW
+	'sync_auteurs' => 'Synchronizovať autorov cez MailChimp',
 	'sync_echec' => 'zlyhanie',
-	'sync_echec_batch' => 'Échec de la souscription en masse', # NEW
+	'sync_echec_batch' => 'Chyba hromadného prihlásenia na odoberanie',
 	'sync_erreurs' => 'Chyby:',
 	'sync_message' => 'Správa:',
 	'sync_ok' => 'Synchronizácia bola úspešná:',
 
 	// T
 	'tables_extras' => 'Deklarovať tabuľky, ktoré sa budú používať',
-	'tables_extras_explication' => 'Indiquez le(s)table(s) séparée(s) par virgule, chaque table declarée doit obligatoirement contenir un champ "id_auteur"', # NEW
-	'tout' => 'Toutes les listes', # NEW
+	'tables_extras_explication' => 'Zadajte tabuľky oddelené čiarkami, v každej tabuľke musí byť pole "id_auteur"',
+	'tout' => 'Všetky skupiny',
 
 	// U
-	'une_liste' => 'Une seule liste' # NEW
+	'une_liste' => 'Iba jedna skupina'
 );
 
 ?>

@@ -180,7 +180,7 @@ function donnees_sync($id_liste_spip='',$table='',$identifiant='',$where_add='')
 
 	
 	// les utilisateurs spip
-	$sql=sql_select($champs,$from,$where,$groupby,$orderby,$limit,$having,$serveur,$option);
+	$sql=sql_select($champs,$from,$where,$groupby,$orderby,$limit);
 	
 	// Préparation de l'array a envoyer à mailchimp
 	$batch=array();
