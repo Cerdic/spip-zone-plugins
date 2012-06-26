@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_comment_appid' => 'Identifiant d\'une application propre à vote site ; cela nécessite d\'avoir créé l\'application.', # NEW
 	'cfg_comment_border_color' => 'Zadajte kód farby v šestnástkovej sústave AJ S úvodnou mriežkou.',
 	'cfg_comment_colorscheme' => 'Sélectionnez ici le profil prédéterminé par les modules qui sera utilisé pour l\'affichage.', # NEW
-	'cfg_comment_font' => 'Sélectionnez ici la police de caractère qui sera utilisée pour l\'affichage des modules.', # NEW
+	'cfg_comment_font' => 'Tu si môžete vybrať písmo, ktoré sa použije na zobrazenie modulov.',
 	'cfg_comment_identifiants' => '{{Utilisez les champs ci-dessous pour préciser les différents identifiants que vous souhaitez utiliser.}} Ils ne sont pas obligatoires, mais peuvent permettre notamment de suivre des statistiques précises proposées par Facebook.', # NEW
 	'cfg_comment_pageid' => 'Identifiant d\'une page ; cela nécessite d\'avoir créé la page.', # NEW
 	'cfg_comment_reglages' => '{{Vous pouvez ici choisir certains réglages concernant les outils javascript de Facebook.}} Par défaut, les modèles utilisent le langage XFBML ({SDK javascript Facebook}) mais vous pouvez désactiver cette fonctionnalité, les outils seront alors chargés en frames.', # NEW
@@ -31,7 +31,7 @@ Pour inclure les balises "Open Graph" en en-tête de vos pages publiques, vous d
 	'cfg_label_font' => 'Predvolené písmo',
 	'cfg_label_pageid' => 'Prihlásenie pre stránku "Page ID"',
 	'cfg_label_titre' => 'Nastavenia šablón Facebooku',
-	'cfg_label_url_page' => 'URL de page ou profil', # NEW
+	'cfg_label_url_page' => 'URL stránky alebo profilu',
 	'cfg_label_userid' => 'Prihlásenie používateľa "User ID"',
 	'cfg_label_xfbml' => 'Použitie XFBML',
 	'cfg_reglages' => 'Predvolené nastavenia',
