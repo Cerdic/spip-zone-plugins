@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'corps_email_de_test' => 'Toto je testovací e-mail s diakritikou',
 
 	// E
-	'email_test_envoye' => 'L\'email de test a correctement été envoyé. Si vous ne le recevez pas correctement, vérifiez la configuration de votre serveur ou contactez un administrateur du serveur.', # NEW
+	'email_test_envoye' => 'Testovací e-mail bol úspešne odoslaný. Ak ho nedostanete, skontrolujte nastavenia svojho servera alebo sa obráťte na administrátora servera.',
 	'erreur' => 'Chyba',
 	'erreur_dans_log' => ' : viac podrobností nájdete v súbore log',
 	'erreur_generale' => 'V nastaveniach je jedna alebo viac chýb. Prosím, skontrolujte obsah formulára.',
@@ -33,9 +33,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_bcc' => 'Skrytá kópia (BCC):',
 	'facteur_cc' => 'Kópia (CC):',
 	'facteur_copies' => 'Kópie:',
-	'facteur_copies_descriptif' => 'Un email sera envoyé en copie aux adresses définies. Une seule adresse en copie et/ou une seule adresse en copie cachée.', # NEW
+	'facteur_copies_descriptif' => 'Kópia e-mailu sa pošle na zadané adresy. Na jednu adresu bude odoslaná bežná kópia a/lebo skrytá kópia.',
 	'facteur_filtre_accents' => 'Diakritiku meniť na entity html (užitočné najmä pre Hotmail).',
-	'facteur_filtre_css' => 'Transformer les styles contenus entre <head> et </head> en des styles "en ligne", utile pour les webmails car les styles en ligne ont la priorité sur les styles externes.', # NEW
+	'facteur_filtre_css' => 'Zmeniť štýly medzi <head> a </head> na "in-line" štýly, užitočné pre webmaily, lebo in-line štýly majú prednosť pred externými.',
 	'facteur_filtre_images' => 'Do e-mailov pridávať obrázky, na ktoré sa v nich odkazuje',
 	'facteur_filtre_iso_8859' => 'Zmeniť na ISO-8859-1',
 	'facteur_filtres' => 'Filtre',
@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_secure_ssl' => 'SSL',
 	'facteur_smtp_secure_tls' => 'TLS',
 	'facteur_smtp_sender' => 'Vypísanie chýb (nepovinné)',
-	'facteur_smtp_sender_descriptif' => 'Définit dans l\'entête du mail l\'adresse email de retour des erreurs (ou Return-Path), et lors d\'un envoi via la méthode SMTP cela définit aussi l\'adresse de l\'envoyeur.', # NEW
+	'facteur_smtp_sender_descriptif' => 'Zadané v hlavičke návratnej e-mailovej adresy pri chybe (alebo Return-Path) a pri jej odoslaní metódou SMTP je aj adresou odosielateľa.',
 	'facteur_smtp_username' => 'Používateľské meno:',
 
 	// N
