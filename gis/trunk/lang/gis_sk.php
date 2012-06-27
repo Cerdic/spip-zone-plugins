@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_descr_gis' => 'Geografický informačný systém.<br /><a href="http://www.spip-contrib.net/3887" class="spip_out">Prejsť na dokumentáciu.</a>',
 	'cfg_inf_adresse' => 'Zobrazí ďalšie polia adresy (krajinu, mesto, štát, adresu a pod.)',
+	'cfg_inf_bing' => 'La couche Bing Aerial nécessite une clé à créer sur <a href=\'@url@\' class="spip_out">le site de Bing</a>.', # NEW
 	'cfg_inf_cloudmade' => 'Táto aplikácia potrebuje kľúč na vytvorenie <a href=\'@url@\' class="spip_out">stránky v Cloude.</a>',
 	'cfg_inf_geocoder' => 'Aktivovať funkciu geokódera (vyhľadávanie z jednej adresy, zistenie adresy zo súradníc).',
 	'cfg_inf_geolocaliser_user_html5' => 'Ak to povoľuje prehliadač používateľa, na určenie predvolenej polohy pri vytváraní nového bodu sa ukladá približná geografická poloha používateľa.',
@@ -30,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_api_cloudmade' => 'CloudMade',
 	'cfg_lbl_api_google' => 'Google Maps v2',
 	'cfg_lbl_api_googlev3' => 'Google Maps v3',
+	'cfg_lbl_api_key_bing' => 'Clé Bing', # NEW
 	'cfg_lbl_api_key_cloudmade' => 'Kľúč CloudMade',
 	'cfg_lbl_api_key_google' => 'Kľúč GoogleMaps',
 	'cfg_lbl_api_key_yandex' => 'Kľúč Yandex',

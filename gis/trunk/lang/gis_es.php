@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_descr_gis' => 'Sistema de Información Geográfica.<br /><a href="http://www.spip-contrib.net/3887">Ir a la documentación</a>.', # MODIF
 	'cfg_inf_adresse' => 'Mostrar campos adicionales de dirección (país, ciudad, región, dirección...)', # MODIF
+	'cfg_inf_bing' => 'La couche Bing Aerial nécessite une clé à créer sur <a href=\'@url@\' class="spip_out">le site de Bing</a>.', # NEW
 	'cfg_inf_cloudmade' => 'Está API necesita una clave a generar en <a href=\'@url@\'>el sitio de CloudMade</a>.', # MODIF
 	'cfg_inf_geocoder' => 'Activar las funciones del geocoder (búsqueda desde una dirección, recuperación de la dirección a partir de las coordenadas).', # MODIF
 	'cfg_inf_geolocaliser_user_html5' => 'Si el navegador del usuario lo permite, su ubicación geográfica aproximada esta recuperada y será la posición por omisión cuando se crearó un nuevo punto.', # MODIF
@@ -30,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_api_cloudmade' => 'CloudMade',
 	'cfg_lbl_api_google' => 'Google Maps v2',
 	'cfg_lbl_api_googlev3' => 'Google Maps v3',
+	'cfg_lbl_api_key_bing' => 'Clé Bing', # NEW
 	'cfg_lbl_api_key_cloudmade' => 'Clave CloudMade', # MODIF
 	'cfg_lbl_api_key_google' => 'Clave GoogleMaps', # MODIF
 	'cfg_lbl_api_key_yandex' => 'Clave Yandex', # MODIF
