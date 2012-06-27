@@ -31,8 +31,8 @@ function commhtml_porte_plume_lien_classe_vers_icone($flux) {
 function commhtml_pre_propre($texte) {
 	if (test_espace_prive())
 		$texte = preg_replace('#\<\!--(.+)--\>#U','<span style="color:green;">&lt;!--$1--&gt;</span>',$texte);
-	/* else
-		$texte = preg_replace('#\<\!--(.+)--\>#U','',$texte); */
+	 else
+		$texte = preg_replace('#\<\!--(.+)--\>#U','',$texte);
 	return $texte;
 }
 
