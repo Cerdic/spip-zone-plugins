@@ -21,13 +21,13 @@ Prístup k tejto stránke alebo k tomuto dokumentu musí byť autorizovaný a�
 Niektoré stránky nie sú trvalé alebo stále menia svoju URL ({internetovú adresu, ktorá sa zadáva do panela v prehliadači}). 
 
 Na vylepšenie navigácie vám radíme urobiť tieto veci:
--* vérifiez l’URL que vous avez saisie dans la barre d’adresse de votre navigateur et assurez-vous qu’elle soit complète,
--* accédez [au plan du site|Liste exhaustive des pages du site->@plan@] pour rechercher la page souhaitée,
--* effectuez une recherche dans la zone de recherche de la page en saisissant des mots clés de la page souhaitée,
--* retournez à l’[accueil du site|Retour en page d’accueil->@sommaire@] pour pour repartir depuis la racine de la hiérarchie,
--* transmettez un rapport d’erreur aux administrateurs du site afin de corriger le lien rompu en utilisant le bouton ci-dessous.
+-* skontrolujte adresu, ktorú ste zadali do panela s adresou vo svojom prehliadači a uistite sa, že je kompletná,
+-* choďte na [mapu stránky|Celý zoznam stránok na webe->@plan@] a vyhľadajte požadovanú stránku,
+-* vykonajte vyhľadávanie stránky vo vyhľadávacom poli zadaním jej kľúčových slov,
+-* vráťte sa na [úvodnú stránku|Vrátiť sa na úvodnú stránku->@sommaire@] a dostanete sa na začiatok hierarchie webu,
+-* pomocou tlačidla, ktoré sa nachádza nižšie, pošlite správu o chybe administrátorom stránky, aby opravili nefungujúci odkaz.
 
-En dernier lieu, de nombreux sites web disposent d’un ou plusieurs espaces réservés à leurs administrateurs ou abonnés nécessitant une connexion. Si vous y êtes autorisé, [cliquez ici pour accéder à la plateforme de connexion du site|Des identifiants vous seront demandés->@ecrire@].', # MODIF
+V poslednom rade veľa internetových stránok má viac vyhradených zón pre administrátorov alebo abonentov, do ktorých sa treba prihlásiť. Ak ste sa prihlásili, [ak sa chcete dostať na prihlasovaciu stránku, kliknite sem|Budú sa od vás vyžadovať prihlasovacie údaje->@ecrire@].',
 
 	// B
 	'backtrace' => 'PHP na spätné vystopovanie',
