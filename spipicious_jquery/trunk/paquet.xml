@@ -31,6 +31,5 @@
 
 	<necessite nom="selecteurgenerique" compatibilite="[0.7;[" />
 	<necessite nom="saisies" compatibilite="[1.1;[" />
-
-	<utilise nom="nuage" compatibilite="[3.2.1;[" />
+	<necessite nom="nuage" compatibilite="[3.2.1;[" />
 </paquet>
