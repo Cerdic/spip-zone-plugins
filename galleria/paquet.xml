@@ -1,0 +1,15 @@
+<paquet
+	prefix="galleria"
+	categorie="multimedia"
+	version="1.1.0"
+	etat="stable"
+	compatibilite="[1.9.0;3.0.*]"
+	logo="galleria.png"
+	documentation="http://www.spip-contrib.net/Galleria"
+>
+	<nom>Galleria plugin pour SPIP</nom>
+	<auteur>LUU-THO Th&#224;nh</auteur>
+
+	<pipeline nom="insert_head" inclure="head.php" />
+	<pipeline nom="header_prive" inclure="head.php" />
+</paquet>

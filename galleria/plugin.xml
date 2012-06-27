@@ -61,7 +61,7 @@ ex : <code><galleria22></code> a gallery in the article 22 ; <code><galleria22|l
 | version 1.0.0 | support of the critical options |
 		</multi>
 	</description>
-	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.0.*]" />
 	<categorie>multimedia</categorie>
 	<lien>http://www.spip-contrib.net/Galleria</lien>
 	<prefix>galleria</prefix>
