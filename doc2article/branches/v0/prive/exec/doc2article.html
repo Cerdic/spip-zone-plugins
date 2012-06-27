@@ -1,0 +1,18 @@
+<h1><:doc2article:titre_page_doc2article:></h1>
+<div class='cadre-formulaire-editer'>
+	<div class="entete-formulaire">
+		<h2><:doc2article:titre_bloc_import:></h2>
+	</div>
+	#FORMULAIRE_DOC2ARTICLE
+</div>
+
+<!--#navigation-->
+
+<div class="cadre infos cadre-info">
+<BOUCLE_file(DOC2ARTICLE) /> #SET{total,#GRAND_TOTAL}
+<p><:doc2article:nb_file_attente{nb=#GET{total}}:></p>
+<//B_file>
+<p><a href="#URL_ECRIRE{doc2article_file}"><:doc2article:lien_file_attente:></a></p>
+</div>
+
+<!--/#navigation-->
