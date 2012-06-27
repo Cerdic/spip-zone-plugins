@@ -28,6 +28,7 @@ function champs_extras_objet($table) {
 **/
 function champs_extras_autorisation($faire, $quoi='', $saisies=array(), $args=array()) {
 	if (!$saisies) return array();
+	include_spip('inc/autoriser');
 
 	foreach ($saisies as $cle=>$saisie) {
 		$id = isset($args['id']) ? $args['id'] : $args['id_objet'];
