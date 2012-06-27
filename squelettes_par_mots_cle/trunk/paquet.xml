@@ -2,8 +2,8 @@
 	prefix="squelettesmots"
 	categorie="outil"
 	version="3.1.0"
-	etat="test"
-	compatibilite="[3.0.0-dev;3.0.99]"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/squelettesmots-32.png"
 	documentation="http://www.spip-contrib.net/SPMC-Squelette-par-mot-cle-V2-0"
 >	
