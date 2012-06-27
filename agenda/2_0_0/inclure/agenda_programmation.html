@@ -45,23 +45,24 @@
 	</table>
 	<//B_Films>
 	<div class="programmation_nav">
-	[(#SET{precedent,[(#GET{date_debut}|programmation_datedecalejours{-[(#ENV{duree,7}|moins{1})]}|affdate{'Y-m-d'})]})]
-	[(#SET{suivant,[(#GET{date_debut}|programmation_datedecalejours{#ENV{duree,7}}|affdate{'Y-m-d'})]})]
+	[(#SET{precedent,[(#GET{date_debut}|programmation_datedecalejours{-[(#ENV{duree,7})]}|affdate{'Y-m-d'}|programmation_debut{#ENV{jour_debut}}|affdate{'Y-m-d'})]})]
+	[(#SET{suivant,[(#GET{date_debut}|programmation_datedecalejours{#ENV{duree,7}}|affdate{'Y-m-d'}|programmation_debut{#ENV{jour_debut}}|affdate{'Y-m-d'})]})]
 	[(#REM) Ne pas afficher le bouton Précédent s'il n'y a pas de programmation définie avant ]
 	<BOUCLE_ProgrammationPassee(EVENEMENTS){branche?}{id_article?}
 		{statut=publie}
-		{date_debut<(#GET{precedent}|programmation_datedecalejours{1}|affdate{'Y-m-d'})}
+		{date_debut>=(#GET{precedent})}
+		{date_debut<(#GET{date_debut})}
 		{0,1}>
-	[<a href="(#SELF|parametre_url{date_debut,#GET{precedent}})" class='ajax preload'><:agenda:programmation_nav_precedent:> ([(#GET{precedent}|programmation_debut{#ENV{jour_debut}}|affdate{'j/n'})])</a>]
+	[<a href="(#SELF|parametre_url{date_debut,#GET{precedent}})" class='ajax preload'><:agenda:programmation_nav_precedent:> ([(#GET{precedent}|affdate{'j/n'})])</a>]
 	#SET{passee,1}
 	</BOUCLE_ProgrammationPassee>
 	[(#REM) Ne pas afficher le bouton Suivant s'il n'y a pas de programmation définie plus tard ]
 	<BOUCLE_ProgrammationFuture(EVENEMENTS){branche?}{id_article?}
 		{statut=publie}
-		{date_debut>=(#GET{suivant}|programmation_debut{#ENV{jour_debut}}|affdate{'Y-m-d'})}
+		{date_debut>=(#GET{suivant})}
 		{0,1}>
 	[(#GET{passee}|oui)|]
-	[<a href="(#SELF|parametre_url{date_debut,#GET{suivant}})" class='ajax preload'><:agenda:programmation_nav_suivant:> ([(#GET{suivant}|programmation_debut{#ENV{jour_debut}}|affdate{'j/n'})])</a>]
+	[<a href="(#SELF|parametre_url{date_debut,#GET{suivant}})" class='ajax preload'><:agenda:programmation_nav_suivant:> ([(#GET{suivant}|affdate{'j/n'})])</a>]
 	</BOUCLE_ProgrammationFuture>
 	</div>
 </div>
