@@ -9,9 +9,7 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
-include_spip('inc/meta');
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 	$maj = array();
