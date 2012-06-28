@@ -102,10 +102,11 @@ function ck_produire_code($c=null){
 
 
 	// cache
-	if (strlen($c = _request('cache_strategie',$c))){
-		if ($c==-1) $code .= "if (\$_SERVER['REQUEST_TIME']<".(time()+24*3600).") ";
-		$code .= ck_code_constante('_NO_CACHE',intval($c));
+	if (strlen($cs = _request('cache_strategie',$c))){
+		if ($cs==-1) $code .= "if (\$_SERVER['REQUEST_TIME']<".(time()+24*3600).") ";
+		$code .= ck_code_constante('_NO_CACHE',intval($cs));
 	}
+
 	$code .= ck_code_globale('derniere_modif_invalide',_request('derniere_modif_invalide',$c)?'true':'false');
 	$code .= ck_code_constante('_DUREE_CACHE_DEFAUT',intval(_request('cache_duree',$c)));
 	$code .= ck_code_constante('_DELAI_CACHE_resultats',intval(_request('cache_duree_recherche',$c)));
