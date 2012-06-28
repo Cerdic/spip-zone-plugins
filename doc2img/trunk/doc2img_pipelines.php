@@ -28,8 +28,15 @@ function doc2img_post_edition($flux) {
             	if(($infos_doc['mode'] != 'vignette')
             		&& ($infos_doc['distant'] == 'non')
             		&& in_array($infos_doc['extension'],$types_autorises)){
-			    		$convertir = charger_fonction('doc2img_convertir','inc');
-			    		$convertir($id_document);
+            			if(defined('_DIR_PLUGIN_FACD')){
+            				include_spip('action/facd_ajouter_conversion');
+							facd_ajouter_conversion_file($id_document,'doc2img_convertir',null,null,'doc2img');
+							$conversion_directe = charger_fonction('facd_convertir_direct','inc');
+							$conversion_directe();
+            			}else{
+			    			$convertir = charger_fonction('doc2img_convertir','inc');
+			    			$convertir($id_document);
+			    		}
             	}
     }
 	if($flux['args']['operation'] == 'supprimer_document'){

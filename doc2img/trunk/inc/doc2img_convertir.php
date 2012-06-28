@@ -21,11 +21,21 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function inc_doc2img_convertir($id_document,$type='full') {
 	if(!in_array($type,array('full','vignette')))
 		$type = 'full';
-	
+
+	$ret = array();
 	if(class_exists('Imagick')){
 	    include_spip('inc/documents');
 	    include_spip('inc/flock');
 		include_spip('inc/config');
+		
+		/**
+		 * Si cette action est lancée en CRON, on ne peut supprimer les documents ensuite
+		 * TODO trouver mieux
+		 */
+		if(!isset($GLOBALS['visiteur_session'])
+		OR !is_array($GLOBALS['visiteur_session'])){
+			$GLOBALS['visiteur_session'] = sql_fetsel('*','spip_auteurs','webmestre="oui"');
+		}
 
 	    $config = lire_config('doc2img',array());
 		$format_cible = $config['format_cible'] ? $config['format_cible'] : 'png';
@@ -67,7 +77,7 @@ function inc_doc2img_convertir($id_document,$type='full') {
 			if(count($documents_a_supprimer) > 0){
 				$supprimer_document = charger_fonction('supprimer_document','action');
 				foreach ($documents_a_supprimer as $id_document_supprimer) {
-					$supprimer_document($id_document_supprimer); // pour les orphelins du contexte, on traite avec la fonction existante
+					$supprimer_document($id_document_supprimer);
 				}
 			}
 		    // chaque page est un fichier qu'on sauve dans la table doc2img indexé
@@ -164,7 +174,8 @@ function inc_doc2img_convertir($id_document,$type='full') {
 		        $frame++;
 		    } while($frame < 1 );
 	    }
-	    return true;
+		$ret['success'] = true;
+	    return $ret;
 	}else{
 		spip_log('Erreur Doc2Img : La class doc2img n est pas disponible');
 		return false;
