@@ -1,0 +1,22 @@
+[(#AUTORISER{configurer,facd}|sinon_interdire_acces)]
+<h1 class="grostitre"><:facd:titre_page_file:></h1>
+
+#BOITE_OUVRIR
+[(#INCLURE{fond=prive/liste/facd_conversions,
+	titre=<:facd:liste_attente_tous:>,
+	sinon=<:facd:liste_attente_aucun:>,
+	statut=#ARRAY{en_cours,non},
+	nb=30,
+	env,
+	ajax})]
+#BOITE_FERMER
+
+#BOITE_OUVRIR
+[(#INCLURE{fond=prive/liste/facd_conversions,
+	titre=<:facd:liste_convert_tous:>,
+	sinon=<:facd:liste_convert_aucun:>,
+	statut=oui,
+	nb=30,
+	env,
+	ajax})]
+#BOITE_FERMER

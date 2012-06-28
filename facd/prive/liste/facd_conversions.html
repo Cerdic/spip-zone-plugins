@@ -1,0 +1,79 @@
+[(#SET{defaut_tri,#ARRAY{
+	maj,-1,
+	id_facd_conversion,-1,
+	id_document,-1,
+	id_auteur,-1,
+	extension,1
+}})
+]<B_conversions>
+#ANCRE_PAGINATION
+<div class="liste-elements conversions">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:info_tous_articles_presents:>}) [((#GRAND_TOTAL))]</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='id'>[(#TRI{id_facd_conversion,<:facd:thead_id:>,ajax})]</th>
+			<th class='id_document'>[(#TRI{id_document,<:facd:thead_id_document:>,ajax})]</th>
+			<th class='id_auteur'>[(#TRI{id_auteur,<:facd:thead_id_auteur:>,ajax})]</th>
+			<th class='fonction'><:facd:thead_fonction:></th>
+			<th class='extension'>[(#TRI{extension,<:facd:thead_extension:>,ajax})]</th>
+			<th class='duree_conversion'><abbr title="<:facd:thead_duree_conversion:>"><:facd:thead_duree:></abbr></th>
+			<th class='maj'>[(#TRI{maj,<:date:>,ajax})]</th>
+			[(#ENV{statut}|!={oui}|oui)
+			<th class='statut'>[(#TRI{statut,<:facd:thead_statut:>,ajax})]</th>
+			]
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_conversions(FACD_CONVERSIONS){statut IN #ENV{statut,non}}{tri #ENV{order,id_facd_conversion},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})] #STATUT">
+			<td class='id'>##ID_FACD_CONVERSION</td>
+			<td class='id_document'>#ID_DOCUMENT</td>
+			<td class='id_auteur'>#INFO_NOM{auteur,#ID_AUTEUR}</td>
+			<td class='fonction'>#FONCTION</td>
+			<td class='extension'>#EXTENSION</td>
+			<td class='duree_conversion'>
+			[(#INFOS|table_valeur{debut_conversion}|is_numeric|et{#INFOS|table_valeur{fin_conversion}|is_numeric}|oui)
+				#SET{duree,#INFOS|table_valeur{fin_conversion}|moins{#INFOS|table_valeur{debut_conversion}}}
+				[(#VAL{H:i:s}|gmdate{#GET{duree}})]
+			]</td>
+			<td class='maj'>#MAJ</td>
+			[(#ENV{statut}|!={oui}|oui)
+			<td class='statut'>[(#STATUT|=={erreur}|oui)
+				#SET{erreur,oui}
+				[(#AUTORISER{relancerencodage,facd,#ID_FACD_CONVERSION}|oui)
+					[(#BOUTON_ACTION{[(#VAL{facd:info_statut_conversion_#STATUT}|_T)],[(#URL_ACTION_AUTEUR{facd_relancer_conversion,#ID_FACD_CONVERSION,[(#SELF|parametre_url{log,''}|parametre_url{relance,''})]})],ajax,'',<:facd:label_relancer_conversion|attribut_html:>})]]
+				[(#AUTORISER{relancerconversion,facd,#ID_FACD_CONVERSION}|non)[(#VAL{facd:info_statut_conversion_#STATUT}|_T)]]
+				[(#INFOS|table_valeur{log}|strlen|>{1}|oui)<a href="[(#SELF|parametre_url{log,#ID_FACD_CONVERSION})]" class="ajax"><:facd:info_voir_log_erreur:></a>]
+			]
+			[(#STATUT|=={erreur}|non)
+				[(#VAL{facd:info_statut_conversion_#STATUT}|_T)]
+			]
+			</td>]
+		</tr>
+	</BOUCLE_conversions>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GET{erreur}|=={oui}|et{#AUTORISER{configurer,facd}}|oui)
+<div class="actions">
+	[(#BOUTON_ACTION{<:facd:info_relancer_erreurs:>,[(#URL_ACTION_AUTEUR{facd_relancer_conversion,'tout',[(#SELF|parametre_url{log,''}|parametre_url{relance,''})]})],ajax})]
+</div>]
+[(#ENV{statut}|=={oui}|non)
+<div class="actions">
+<a href="[(#SELF|parametre_url{relance,''}|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]})]" id="facd_recharge_file" class="ajax"><:facd:lien_recharger:></a>
+</div>
+<script type="text/javascript">
+	var refresh = function(){
+		if($('.conversions tbody tr').not('.erreur').size() > 0){
+			$('#facd_recharge_file').click();
+		}
+	}
+	clearTimeout(refresh);
+	setTimeout(refresh,30000);
+</script>
+]
+</div>
+</B_conversions>[
+<div class="liste-elements conversions"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_conversions>
