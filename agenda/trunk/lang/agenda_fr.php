@@ -10,7 +10,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activite_editoriale' => 'Activité Éditoriale',
 	'afficher_calendrier' => 'Afficher le calendrier',
 	'agenda' => 'Agenda',
-	'ajouter_mots_cles' => 'Ajouter des mots-clés',
 	'ajouter_repetition' => 'Ajouter des répétitions',
 	'ajouter_un_evenement' => 'ajouter un événement à cet article',
 	'annee_precedente' => 'année précédente',
@@ -61,9 +60,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'fermer' => 'fermer',
 
-	// G
-	'groupes_mots' => 'Groupes de mots-clé',
-
 	// I
 	'icone_creer_evenement' => 'Créer un nouvel événement',
 	'icone_modifier_evenement' => 'Modifier l\'événement',
@@ -89,7 +85,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_un_evenement' => '1 événement',
 	'info_un_inscrit' => 'Un inscrit',
 	'inscrits' => 'Inscriptions',
-	'item_mots_cles_association_evenements' => 'aux événements',
 
 	// L
 	'label_inscription' => 'Inscription en ligne',
@@ -108,7 +103,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mois_suivant' => 'mois suivant',
 
 	// N
-	'nb_mots_clefs' => '@nb@ mots-clés',
 	'nb_repetitions' => '@nb@ répétitions',
 
 	// P
@@ -145,7 +139,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'toutes_rubriques' => 'Toutes',
 
 	// U
-	'un_mot_clef' => '1 mot-clé',
 	'une_repetition' => '1 répétition',
 
 	// V

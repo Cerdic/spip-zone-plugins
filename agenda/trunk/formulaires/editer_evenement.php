@@ -32,11 +32,6 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_arti
 		$valeurs['horaire'] = 'oui';
 	}
 
-	// les mots
-	$valeurs['mots'] = array();
-	if (intval($id_evenement))
-		$valeurs['mots'] = sql_allfetsel('id_mot','spip_mots_liens','objet="evenement" AND id_objet='.intval($id_evenement));
-
 	// les repetitions
 	$valeurs['repetitions'] = array();
 	if (intval($id_evenement)){

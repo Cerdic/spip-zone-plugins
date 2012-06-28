@@ -118,9 +118,6 @@ function evenement_modifier($id_evenement, $set=null){
 		$c))
 		return $err;
 
-	if (!is_null($mots = _request('mots',$set)))
-		evenement_associer_mots($id_evenement,$mots);
-
 	if (!is_null($repetitions = _request('repetitions',$set)))
 		agenda_action_revision_evenement_repetitions($id_evenement,$repetitions);
 
@@ -132,7 +129,7 @@ function evenement_modifier($id_evenement, $set=null){
 }
 
 
-function agenda_action_revision_evenement_repetitions($id_evenement,$repetitions="",$liste_mots=array()){
+function agenda_action_revision_evenement_repetitions($id_evenement,$repetitions=""){
 	include_spip('inc/filtres');
 	$repetitions = preg_split(",[^0-9\-\/],",$repetitions);
 	// gestion des repetitions
@@ -144,7 +141,7 @@ function agenda_action_revision_evenement_repetitions($id_evenement,$repetitions
 				$rep[] = $date;
 		}
 	}
-	agenda_action_update_repetitions($id_evenement, $rep, $liste_mots);
+	agenda_action_update_repetitions($id_evenement, $rep);
 }
 
 function agenda_action_update_repetitions($id_evenement,$repetitions){
@@ -164,12 +161,6 @@ function agenda_action_update_repetitions($id_evenement,$repetitions){
 		$places = $row['places'];
 		if ($id_evenement_source!=0)
 			return; // pas un evenement source donc rien a faire ici
-
-		include_spip('action/editer_liens');
-		$liens = objet_trouver_liens(array('mot'=>'*'),array('evenement'=>$id_evenement));
-		$mots = array();
-		foreach($liens as $l)
-			$mots[] = $l['mot'];
 
 		$repetitions_updated = array();
 		// mettre a jour toutes les repetitions deja existantes ou les supprimer si plus lieu
@@ -203,12 +194,9 @@ function agenda_action_update_repetitions($id_evenement,$repetitions){
 						"inscription" => $update_inscription,
 						"places" => $update_places,
 						"id_article" => $id_article),"id_evenement=".intval($row['id_evenement']));
-
-				evenement_associer_mots($row['id_evenement'], $mots);
 			}
 			else {
 				// il est supprime
-				sql_delete("spip_mots_liens","objet='evenement' AND id_objet=".$row['id_evenement']);
 				sql_delete("spip_evenements","id_evenement=".$row['id_evenement']);
 			}
 		}
@@ -238,29 +226,11 @@ function agenda_action_update_repetitions($id_evenement,$repetitions){
 							"inscription" => $update_inscription,
 							"places" => $update_places,
 							"id_article" => $id_article),"id_evenement=".intval($id_evenement_new));
-					agenda_action_revision_evenement_mots($id_evenement_new, $liste_mots);
 				}
 			}
 		}
 	}
 }
-
-/**
- * Associer une liste de mots a un evenement
- * Modifie la liste des mots lies pour qu'elle corresponde exactement a $mots
- *
- * @param int $id_evenement
- * @param array $mots
- * @return void
- */
-function evenement_associer_mots($id_evenement,$mots){
-	include_spip('action/editer_liens');
-	// associer les mots fournis
-	objet_associer(array('mot'=>$mots),array('evenement'=>$id_evenement));
-	// enlever les autres
-	objet_dissocier(array('mot'=>array('NOT',$mots)),array('evenement'=>$id_evenement));
-}
-
 
 /**
  * Instituer un evenement
@@ -388,7 +358,6 @@ function agenda_action_supprime_repetitions($supp_evenement){
 	$res = sql_select("id_evenement", "spip_evenements", "id_evenement_source=".intval($supp_evenement));
 	while ($row = sql_fetch($res)){
 		$id_evenement = $row['id_evenement'];
-		sql_delete("spip_mots_evenements", "id_evenement=".intval($id_evenement));
 		sql_delete("spip_evenements", "id_evenement=".intval($id_evenement));
 	}
 }
@@ -399,7 +368,6 @@ function agenda_action_supprime_evenement($id_article,$supp_evenement){
 		"id_article=" . intval($id_article),
 		"id_evenement=" . intval($supp_evenement)));
 	if (intval($id_evenement) AND $id_evenement == $supp_evenement){
-		sql_delete("spip_mots_evenements", "id_evenement=".intval($id_evenement));
 		sql_delete("spip_evenements", "id_evenement=".intval($id_evenement));
 		agenda_action_supprime_repetitions($id_evenement);
 	}
@@ -413,5 +381,4 @@ function agenda_action_supprime_evenement($id_article,$supp_evenement){
 function agenda_action_insert_evenement($id_article,$id_evenement_source = 0){return evenement_inserer($id_article,$id_evenement_source);}
 function action_evenement_set($id_evenement, $set=null){return evenement_modifier($id_evenement, $set);}
 function agenda_action_instituer_evenement($id_evenement, $c) {return evenement_instituer($id_evenement,$c);}
-function agenda_action_revision_evenement_mots($id_evenement,$liste_mots){return evenement_associer_mots($id_evenement,$liste_mots);}
 ?>
