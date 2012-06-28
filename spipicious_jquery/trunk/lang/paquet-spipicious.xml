@@ -1,4 +1,7 @@
 <traduction module="paquet-spipicious" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/spipicious_jquery/trunk/lang/" reference="fr">
 	<langue code="en" />
 	<langue code="fr" />
+	<langue code="sk" url="http://trad.spip.org/tradlang_module/paquet-spipicious?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	</langue>
 </traduction>
