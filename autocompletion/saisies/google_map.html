@@ -1,0 +1,185 @@
+#SET{google_map_id, #ENV{google_map_id}|!={''}|?{ #ENV{google_map_id}, 'no_map_canvas'}}
+
+#SET{google_map_largeur, #ENV{google_map_largeur}|>{10}|?{ #ENV{google_map_largeur}, 0}}
+#SET{google_map_hauteur, #ENV{google_map_hauteur}|>{10}|?{ #ENV{google_map_hauteur}, 0}}
+
+#SET{google_map_input_reference_ville, #ENV{google_map_input_reference_ville}|!={''}|?{ #ENV{google_map_input_reference_ville}, 'autocompletion_ville'}}
+#SET{google_map_input_reference_cp, #ENV{google_map_input_reference_cp}|!={''}|?{ #ENV{google_map_input_reference_cp}, 'autocompletion_cp'}}
+
+#SET{google_map_centre_latitude, #ENV{google_map_centre_latitude}|!={''}|?{ #ENV{google_map_centre_latitude}, 46.763056}}
+#SET{google_map_centre_longitude, #ENV{google_map_centre_longitude}|!={''}|?{ #ENV{google_map_centre_longitude}, 2.424722}}
+
+#SET{google_marqueur_latitude, #ENV{google_marqueur_latitude}|!={''}|?{ #ENV{google_marqueur_latitude}, false}}
+#SET{google_marqueur_longitude, #ENV{google_marqueur_longitude}|!={''}|?{ #ENV{google_marqueur_longitude}, false}}
+#SET{google_marqueur_draggable, #ENV{google_marqueur_draggable}|=={on}|?{ true, false }}
+#SET{google_map_scrollwheel, #ENV{google_map_scrollwheel}|=={on}|?{ true, false }}
+#SET{google_map_type_map, #ENV{google_map_type_map}|!={''}|?{ #ENV{google_map_type_map}, SATELLITE }}
+
+#SET{google_map_zoom, #ENV{google_map_zoom}|>{0}|?{#ENV{google_map_zoom},4}}
+#SET{google_map_autocompletion_zoom, #ENV{google_map_autocompletion_zoom}|>{0}|?{#ENV{google_map_autocompletion_zoom},8}}
+
+[(#GET{google_map_id} == {'no_map_canvas'}|oui)
+ <div class="success" >
+     <:autocompletion:message_nouvelle_gmap:>
+ </div>
+]
+[(#GET{google_map_id} == {'no_map_canvas'}|non)
+<div id="[(#GET{google_map_id})]"></div>
+]
+
+<script type="text/javascript" >
+
+    var class_ville   = '[(#GET{google_map_input_reference_ville})]';
+    var element_ville = 'input.'+class_ville;
+    var class_cp      = '[(#GET{google_map_input_reference_cp})]';
+    var element_cp    = 'input.'+class_cp;
+
+    $(document).ready(function() {
+
+        console.log(class_ville + '|' + class_cp);
+
+        if( $(element_cp).length > 0 && $(element_ville).length > 0){
+            
+            if($('#[(#GET{google_map_id})]').length > 0){
+                
+                $('#[(#GET{google_map_id})]').width( '[(#GET{google_map_largeur})]px');
+                $('#[(#GET{google_map_id})]').height('[(#GET{google_map_hauteur})]px');
+                
+                var options = {
+                    center: new google.maps.LatLng( [(#GET{google_map_centre_latitude})] , [(#GET{google_map_centre_longitude})] ),
+                    zoom: [(#GET{google_map_zoom})],
+                    scrollwheel: [(#GET{google_map_scrollwheel})],
+                    mapTypeId: google.maps.MapTypeId.[(#GET{google_map_type_map})]
+                };
+
+                map = new google.maps.Map(document.getElementById('[(#GET{google_map_id})]'), options);
+//                geocoder = new google.maps.Geocoder();   
+                    
+                 marker = new google.maps.Marker({
+                [(#GET{google_marqueur_latitude}!={false}|et{#GET{google_marqueur_longitude}!={false}}) 
+                    position: new google.maps.LatLng([(#GET{google_marqueur_latitude})], [(#GET{google_marqueur_longitude})]),
+                ]
+                    map: map,
+                    draggable: [(#GET{google_marqueur_draggable})]
+                 }); 
+            }
+            $(function (){
+                $( element_cp + ", " + element_ville ).autocomplete({
+                    source: function (request, response){
+                        var objData = {};
+                        if ($(this.element).hasClass(class_cp)){
+                            objData = {
+                                codePostal: request.term, 
+                                maxRows: 20
+                            };
+                        }
+                        else{
+                            objData = {
+                                ville: request.term, 
+                                cpRef: $(element_cp).val(),
+                                maxRows: 30
+                            };
+                        }
+                        $.ajax({
+                            url: "#CHEMIN{inc/autocompletion.php}",
+                            dataType: "json",
+                            data: objData,
+                            type: 'POST',
+                            success: function (data){
+                                response($.map(data, function (item){
+                                    return {
+                                        label: function (){
+                                            if(item.message){                                                
+                                                return item.message;
+                                            }
+                                            else{
+                                                return ""+ item.CodePostal + " - " + item.Ville;
+                                            }
+                                         },
+                                        value: function (){
+                                            if ($(this).hasClass(class_cp)){
+                                                return item.CodePostal;
+                                            }
+                                            else if(item.message){                                                
+                                                return request.term;
+                                            }
+                                            else{
+                                                return item.Ville;
+                                            }
+                                         },
+                                        current: request.term,
+                                        cp: item.CodePostal,
+                                        ville: item.Ville,
+                                        latitude: item.Latitude,
+                                        longitude: item.Longitude,
+                                        message:item.message
+                                    }
+                                }));
+                            }
+                        });
+                    },
+                    minLength: 2,
+                    delay: 200, 
+                    select: function(event, ui) {
+                        if(ui.item.message){
+                            return false;
+                        }
+                        else{
+                            if($(element_ville).val()==''){
+                                $(element_ville).val(ui.item.ville);
+                            }
+                            if($(element_cp).val()==''){
+                                $(element_cp).val(ui.item.cp);                            
+                            }
+        //                    $("input.autocompletion_latitude").val(ui.item.latitude);
+        //                    $("input.autocompletion_longitude").val(ui.item.longitude);
+                            if($('#[(#GET{google_map_id})]').length > 0){
+                                if( ui.item.ville == $(element_ville).val()){  
+                                    var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
+                                    marker.setPosition(location);
+                                    map.setZoom([(#GET{google_map_autocompletion_zoom})]);
+                                    map.setCenter(location);   
+                                }
+                            }                        
+                        }
+                    }
+                })
+[(#REM)
+//                .each(function() {
+//                    $(this).data("autocomplete")._renderItem = function( ul, item ) { 
+//                        if(item.message){
+//                            return $( "<li></li>" )
+//                               .append("<a>" + item.message +"</a>" )
+//                               .appendTo( ul );
+//                        }
+//                        else{
+//                            return $( "<li></li>" )
+//                               .append("<a>" + highlight(item.cp, item.current ) + "-"+ highlight(item.ville, item.current ) +"</a>" )
+//                               .appendTo( ul );
+//                            
+//                        }
+//                    }
+//                })
+]
+            ;
+            });
+        }
+        else{
+             if( $('#[(#GET{google_map_id})]').length > 0 ){
+             
+                $('#[(#GET{google_map_id})]').append('<:autocompletion:message_pas_correspondance_ville_cp_gmap:>');
+                $('#[(#GET{google_map_id})]').addClass('notice');
+                console.log('<:autocompletion:message_pas_correspondance_ville_cp_gmap:>');
+             }
+        }
+
+    });
+    
+[(#REM)
+//    function highlight(s, t) {
+//        var matcher = new RegExp("("+$.ui.autocomplete.escapeRegex(t)+")", "ig" );
+//        return s.replace(matcher, "<strong>$1</strong>");    
+//    }
+]
+ 
+</script>

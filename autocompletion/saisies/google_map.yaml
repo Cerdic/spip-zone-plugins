@@ -1,0 +1,132 @@
+
+titre: '<:autocompletion:google_map_titre:>'
+description: '<:autocompletion:google_map_explication:>'
+icone: 'images/google_map.png'
+options:
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'description'
+      label: '<:saisies:option_groupe_description:>'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'label'
+          label: '<:saisies:option_label_label:>'
+          explication: '<:saisies:option_label_explication:>'
+          size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'google_map_id'
+          label: '<:autocompletion:google_map_id_label:>'
+          explication: '<:autocompletion:google_map_id_explication:>'
+          defaut: 'map_canvas'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'parametres'
+      label: '<:autocompletion:google_map_parametres_label:>'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'google_map_largeur'
+          label: '<:autocompletion:google_map_largeur_label:>'
+          explication: '<:autocompletion:google_map_largeur_explication:>'
+          defaut: '200'
+        verifier:
+          type: 'entier'
+          options:
+            min: 10
+      -
+        saisie: 'input'
+        options:
+          nom: 'google_map_hauteur'
+          label: '<:autocompletion:google_map_hauteur_label:>'
+          explication: '<:autocompletion:google_map_hauteur_explication:>'
+          defaut: '200'
+        verifier:
+          type: 'entier'
+          options:
+            min: 10
+      -
+        saisie: 'input'
+        options:
+          nom: 'google_map_zoom'
+          label: '<:autocompletion:google_map_zoom_label:>'
+          explication: '<:autocompletion:google_map_zoom_explication:>'
+          defaut: '4'
+      -
+        saisie: 'oui_non'
+        options:
+          nom: 'google_map_scrollwheel'
+          label: '<:autocompletion:google_map_scrollwheel_label:>'
+          explication: '<:autocompletion:google_map_scrollwheel_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'google_map_centre_latitude'
+          label: '<:autocompletion:google_map_centre_latitude_label:>'
+          explication: '<:autocompletion:google_map_centre_latitude_explication:>'
+          defaut: '46.763056'
+      -
+        saisie: 'input'
+        options:
+          nom: 'google_map_centre_longitude'
+          label: '<:autocompletion:google_map_centre_longitude_label:>'
+          explication: '<:autocompletion:google_map_centre_longitude_explication:>'
+          defaut: '2.424722'
+      -
+        saisie: 'input'
+        options:
+          nom: 'google_map_type_map'
+          label: '<:autocompletion:google_map_type_map_label:>'
+          explication: '<:autocompletion:google_map_type_map_explication:>'
+          defaut: 'ROADMAP'
+      -
+        saisie: 'input'
+        options:
+          nom: 'google_marqueur_latitude'
+          label: '<:autocompletion:google_marqueur_latitude_label:>'
+          explication: '<:autocompletion:google_marqueur_latitude_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'google_marqueur_longitude'
+          label: '<:autocompletion:google_marqueur_longitude_label:>'
+          explication: '<:autocompletion:google_marqueur_longitude_explication:>'
+      -
+        saisie: 'oui_non'
+        options:
+          nom: 'google_marqueur_draggable'
+          label: '<:autocompletion:google_marqueur_draggable_label:>'
+          explication: '<:autocompletion:google_marqueur_draggable_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'google_map_autocompletion_zoom'
+          label: '<:autocompletion:google_map_autocompletion_zoom_label:>'
+          explication: '<:autocompletion:google_map_autocompletion_zoom_explication:>'
+          defaut: '10'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'champs_references'
+      label: '<:autocompletion:google_map_champs_references_label:>'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'google_map_input_reference_ville'
+          label: '<:autocompletion:google_map_input_reference_ville_label:>'
+          explication: '<:autocompletion:google_map_input_reference_ville_explication:>'
+          defaut: 'autocompletion_ville'
+      -
+        saisie: 'input'
+        options:
+          nom: 'google_map_input_reference_cp'
+          label: '<:autocompletion:google_map_input_reference_cp_label:>'
+          explication: '<:autocompletion:google_map_input_reference_cp_explication:>'
+          defaut: 'autocompletion_cp'
