@@ -20,8 +20,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function notifications_spipmotion_encodage_dist($quoi, $id, $options){
 	spip_log('notif encodage','spipmotion');
-	$en_cours = sql_countsel('spip_spipmotion_attentes','id_document = '.intval($options['source']['id_document']).' AND encode IN ("non","en_cours","erreur")');
-	$infos_encodage = sql_fetsel('*','spip_spipmotion_attentes','id_spipmotion_attente ='.intval($id));
+	include_spip('inc/config');
+	$en_cours = sql_countsel('spip_facd_conversions','id_document = '.intval($options['source']['id_document']).' AND statut IN ("non","en_cours","erreur")');
+	$infos_encodage = sql_fetsel('*','spip_facd_conversions','id_facd_conversion ='.intval($id));
 
 	$options['encodage_restant'] = $en_cours;
 
@@ -31,8 +32,8 @@ function notifications_spipmotion_encodage_dist($quoi, $id, $options){
 		 * On ne notifie que le webmestre si spipmotion est en mode debug
 		 * On lui envoie le log également si possible
 		 */
-		$infos_encodage = sql_fetsel('*','spip_spipmotion_attentes','id_spipmotion_attente ='.intval($id));
-		$options['encodage_statut'] = $infos_encodage['encode'];
+		$infos_encodage = sql_fetsel('*','spip_facd_conversions','id_facd_conversion ='.intval($id));
+		$options['encodage_statut'] = $infos_encodage['statut'];
 
 		$tous = array();
 		$result = sql_select("email","spip_auteurs","webmestre='oui'");
@@ -48,7 +49,7 @@ function notifications_spipmotion_encodage_dist($quoi, $id, $options){
 			,
 				'data'=>$tous)
 		);
-		$msg_mail = recuperer_fond('notifications/spipmotion_encodage_webmestre',array('id_spipmotion_attente'=>$id,'fichier_log'=>$options['fichier_log']));
+		$msg_mail = recuperer_fond('notifications/spipmotion_encodage_webmestre',array('id_facd_conversion'=>$id,'fichier_log'=>$options['fichier_log']));
 
 		/**
 		 * Nettoyage de la liste d'emails en vérifiant les doublons
@@ -59,7 +60,7 @@ function notifications_spipmotion_encodage_dist($quoi, $id, $options){
 		notifications_envoyer_mails($destinataires, $msg_mail,$sujet_mail);
 	}
 	if($en_cours == 0){
-		$msg_mail = recuperer_fond('notifications/spipmotion_encodage_termine',array('id_spipmotion_attente'=>$id));
+		$msg_mail = recuperer_fond('notifications/spipmotion_encodage_termine',array('id_facd_conversion'=>$id));
 
 		$tous = array();
 		$tous[] = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($infos_encodage['id_auteur']));

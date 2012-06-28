@@ -6,20 +6,14 @@
  	Distribue sous licence GPL
 
 ][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
-<BOUCLE_attente(SPIPMOTION_ATTENTES){id_spipmotion_attente}{tout}><BOUCLE_document(DOCUMENTS){id_document}{tout}>
-[[(#NOM_SITE_SPIP|nettoyer_titre_email|filtrer_entites|trim)]] - [(#VAL{spipmotion:message_encodage_sujet_[(#_attente:ENCODE)]}|_T|nettoyer_titre_email|filtrer_entites|trim)] : ##_attente:ID_SPIPMOTION_ATTENTE
+<BOUCLE_attente(FACD_CONVERSIONS){id_facd_conversion}{tout}><BOUCLE_document(DOCUMENTS){id_document}{tout}>
+[[(#NOM_SITE_SPIP|nettoyer_titre_email|filtrer_entites|trim)]] - [(#VAL{spipmotion:message_encodage_sujet_[(#_attente:STATUT)]}|_T|nettoyer_titre_email|filtrer_entites|trim)] : ##_attente:ID_FACD_CONVERSION
 #SET{id_document,#ID_DOCUMENT} #SET{extension,#_attente:EXTENSION}
-[(#_attente:ENCODE|=={oui}|oui)
-<:spipmotion:message_encodage_unique_oui{id_document=#GET{id_document},extension=#GET{extension}}:>][(#_attente:ENCODE|=={erreur}|oui)
-<:spipmotion:message_encodage_unique_erreur{id_document=#GET{id_document},extension=#GET{extension}}:>][
-(#SET{objet,[(#_attente:OBJET)]})][
-(#SET{id_objet,[(#_attente:ID_OBJET)]})][
-(#GET{objet}|=={article}|oui)#SET{url,#URL_ARTICLE{#GET{id_objet}}][
-(#GET{objet}|=={rubrique}|oui)#SET{url,#URL_RUBRIQUE{#_attente:ID_OBJET}}]
-<:spipmotion:message_encodage_objet_lie{objet=#GET{objet},id_objet=#GET{id_objet}}:>
-[(#INFO_TITRE{#GET{objet},#GET{id_objet}}|sinon{<:info_sans_titre:>})]&nbsp;-&nbsp;[(#INFO_STATUT{#GET{objet},#GET{id_objet}}|=={publie}|oui)[#URL_SITE_SPIP/(#GET{url})]][(#INFO_STATUT{#GET{objet},#GET{id_objet}}|=={publie}|non)<:spipmotion:info_objet_non_publie:>]
+[(#_attente:STATUT|=={oui}|oui)
+<:spipmotion:message_encodage_unique_oui{id_document=#GET{id_document},extension=#GET{extension}}:>][(#_attente:STATUT|=={erreur}|oui)
+<:spipmotion:message_encodage_unique_erreur{id_document=#GET{id_document},extension=#GET{extension}}:>]
 
-[(#ENCODE|=={erreur}|oui)
+[(#STATUT|=={erreur}|oui)
 -----------------
 <:spipmotion:message_encodage_erreur_log:>
 -----------------
