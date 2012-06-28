@@ -694,10 +694,12 @@ class ExportComptes_TXT {
 
 }
 
-define('FPDF_FONTPATH', 'font/');
-include_spip('fpdf');
-include_spip('inc/charsets');
-include_spip('inc/association_plan_comptable');
+if (test_plugin_actif('FPDF')) {
+
+    define('FPDF_FONTPATH', 'font/');
+    include_spip('fpdf');
+    include_spip('inc/charsets');
+    include_spip('inc/association_plan_comptable');
 
 class ExportComptes_PDF extends FPDF {
 
@@ -932,6 +934,8 @@ class ExportComptes_PDF extends FPDF {
 	$this->yy = $yc; // on sauve la position du curseur dans la page
     }
 
-}
+} // fin classe
+
+} // fin if
 
 ?>
