@@ -1,0 +1,26 @@
+<paquet
+	prefix="doc2article"
+	categorie="edition"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/doc2article-32.png"
+	schema="0.0.1"
+>	
+
+	<nom>doc2article</nom>
+	<!-- Importer l'ensemble des fichiers du répertoire tmp/upload et créer un article par fichier automatiquement -->
+
+	<auteur>b_b</auteur>
+	<auteur>kent1</auteur>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/doc2article.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/doc2article.php" />
+	<pipeline nom="taches_generales_cron" inclure="doc2article_pipelines.php" />
+	<pipeline nom="doc2article_preparer_article" />
+
+	<necessite nom="crud" compatibilite="[0.3.4;[" />
+	<necessite nom="saisies" compatibilite="[1.9.9;[" />
+
+	<menu nom="doc2article" titre="doc2article:icone_doc2article" parent="bando_publication" icone="images/doc2article-16.png" />
+</paquet>

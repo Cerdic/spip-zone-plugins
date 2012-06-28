@@ -43,10 +43,9 @@ function action_doc2article_importer_dist($arg=null){
 		$article = $crud('create','articles',null,$valeurs_article);
 		
 		// corriger l'id_auteur attribué automatiquement par action/editer_article
-		sql_delete('spip_auteurs_articles', 'id_article='.$article['result']['id']);
-		sql_insertq('spip_auteurs_articles', array('id_auteur' => $doc2article['id_auteur'], 'id_article' => $article['result']['id']));
-		// update de l'article car action/editer_article ne permet pas tout
-		sql_updateq('spip_articles', $valeurs_article, 'id_article='.$article['result']['id']);
+		include_spip('action/editer_liens');
+		objet_dissocier(array("auteur"=>"*"), array("article"=>$article['result']['id']));
+		objet_associer(array("auteur"=>$doc2article['id_auteur']), array("article"=>$article['result']['id']));
 		
 		if(!$article['success']) {
 			$err = _T('doc2article:erreur_creation_article');
