@@ -15,13 +15,10 @@ var element_cp    = 'input.'+class_cp;
 var id_map        = 'map_canvas';
 var element_map   = 'div#'+id_map;
 
-
-    
 $(document).ready(function() {
-    
+
     if( $(element_cp).length > 0 && $(element_ville).length > 0){
-        
-        
+
         // Initialisation de la Google map
         if($(element_map).length > 0){
             initialize();

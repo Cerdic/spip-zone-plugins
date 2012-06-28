@@ -43,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'message_pas_resultat_cp'         => "Aucun résultat",
     'message_pas_correspondance_ville_cp_gmap' => "Problème de correspondance entre la Google map et les classes css des villes et codes postaux.",
     'message_nouvelle_gmap'           => "Nouvelle Google map pour géolocalisation"
-    
+
 );
 
 ?>

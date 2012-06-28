@@ -1,7 +1,7 @@
 
 titre: '<:autocompletion:google_map_titre:>'
 description: '<:autocompletion:google_map_explication:>'
-icone: 'images/google_map.png'
+icone: 'images/autocompletion_google_map_icon.png'
 options:
   -
     saisie: 'fieldset'
@@ -35,7 +35,7 @@ options:
           nom: 'google_map_largeur'
           label: '<:autocompletion:google_map_largeur_label:>'
           explication: '<:autocompletion:google_map_largeur_explication:>'
-          defaut: '200'
+          defaut: '400'
         verifier:
           type: 'entier'
           options:
