@@ -20,7 +20,7 @@ include_spip('inc/actions');
 function action_spipmotion_ajouter_file_encodage_dist(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	if (!preg_match(",^(-?)(\d+)\W(\w+)\W?(\d*)\W?(\w*)$,", $arg, $r)){
+	if (!preg_match(",^(-?)(\d+)\W?(\w*)$,", $arg, $r)){
 		spip_log("action_spipmotion_ajouter_file_encodage_dist incompris: " . $arg);
 		$redirect = urldecode(_request('redirect'));
 		return $redirect;
@@ -33,75 +33,12 @@ function action_spipmotion_ajouter_file_encodage_dist(){
 }
 
 function action_spipmotion_ajouter_file_encodage_post($r){
-	list(, $sign, $id, $type, $id_document,$format) = $r;
+	list(, $sign, $id_document,$format) = $r;
 	
-	spipmotion_genere_file($id_document,$type,$id,$format);
+	spipmotion_genere_file($id_document,$format);
 	
-	$encodage_direct = charger_fonction('spipmotion_encodage_direct','inc');
-	$encodage_direct();
-}
-
-/**
- * Supprime les versions du document que l'on souhaite encoder
- * - Supprime les fichiers existants et leurs insertions en base
- * - Supprime la présence de ces documents dans la file d'attente
- *
- * Cette fonction n'est plus utilisée puisqu'on supprime uniquement au niveau du
- * lancement de l'encodage
- * 
- * @param int $id_document L'id_document original
- * @param string $extension L'extension spécifique à supprimer
- */
-function spipmotion_supprimer_versions($id_document,$extension=null){
-	
-	if($extension){
-		$v = sql_select("lien.id_document,document.id_vignette,document.fichier",
-						"spip_documents as document LEFT JOIN spip_documents_liens as lien ON document.id_document=lien.id_document",
-						"lien.id_objet=".intval($id_document)." AND lien.objet='document' AND document.extension=".sql_quote($extension));
-	}else{
-		$v = sql_select("lien.id_document,document.id_vignette,document.fichier",
-						"spip_documents as document LEFT JOIN spip_documents_liens as lien ON document.id_document=lien.id_document",
-						"lien.id_objet=".intval($id_document)." AND lien.objet='document'");
-	}
-
-	include_spip('inc/documents');
-	/**
-	 * Pour chaque version du document original
-	 */
-	while($version = sql_fetch($v)){
-		/**
-		 * On ajoute l'id_document dans la liste des documents
-		 * à supprimer de la base
-		 * On supprime le fichier correspondant
-		 */
-		$liste[] = $version['id_document'];
-		if (@file_exists($f = get_spip_doc($version['fichier']))) {
-			supprimer_fichier($f);
-		}
-
-		/**
-		 * Si le document a une vignette :
-		 * - On ajoute l'id_document dans la liste à supprimer
-		 * - On supprime le fichier correspondant à la vignette
-		 */
-		if($version['id_vignette'] > 0){
-			$liste[] = $version['id_vignette'];
-			$fichier = sql_getfetsel('fichier','spip_documents','id_document='.$version['id_vignette']);
-			if (@file_exists($f = get_spip_doc($fichier))) {
-				supprimer_fichier($f);
-			}
-		}
-
-	}
-	if(is_array($liste)){
-		$in = sql_in('id_document', $liste);
-		sql_delete("spip_documents", $in);
-		sql_delete("spip_documents_liens", $in);
-		sql_delete("spip_spipmotion_attentes", "id_document=".intval($id_document).' AND encode != '.sql_quote('oui'));
-	}
-
-	include_spip('inc/invalideur');
-	suivre_invalideur(1);
+	$conversion_directe = charger_fonction('facd_convertir_direct','inc');
+	$conversion_directe();
 }
 
 /**
@@ -110,16 +47,13 @@ function spipmotion_supprimer_versions($id_document,$extension=null){
  * On ajoute des conversions possibles que si le document en cours n'est pas lui-même une conversion
  *
  * @param int $id_document l'id du document original
- * @param unknown_type $type
- * @param unknown_type $id
  */
-function spipmotion_genere_file($id_document,$type,$id,$format=''){
+function spipmotion_genere_file($id_document,$format=''){
 	$infos_doc = sql_fetsel('extension,mode','spip_documents','id_document='.intval($id_document));
 	$extension = $infos_doc['extension'];
 	$mode_orig = $infos_doc['mode'];
-
-	$invalider = false;
 	if($mode_orig != 'conversion'){
+		include_spip('action/facd_ajouter_conversion');
 		include_spip('inc/config');
 		if($format && (
 				(in_array($format,lire_config('spipmotion/fichiers_videos_sortie',array()))
@@ -127,33 +61,25 @@ function spipmotion_genere_file($id_document,$type,$id,$format=''){
 				OR (in_array($format,lire_config('spipmotion/fichiers_audios_sortie',array()))
 					&& in_array($extension,lire_config('spipmotion/fichiers_audios_encodage',array())))
 			)){
-			$en_file = sql_getfetsel("id_spipmotion_attente","spip_spipmotion_attentes","id_document=".intval($id_document)." AND extension =".sql_quote($format)." AND encode IN ('en_cours,non,erreur')");
+			$en_file = sql_getfetsel("id_facd_conversion","spip_facd_conversions","id_document=".intval($id_document)." AND extension =".sql_quote($format)." AND statut IN ('en_cours,non,erreur')");
 			if(!$en_file){
-				$invalider = true;
-				$document = sql_fetsel("docs.id_document, docs.extension,docs.fichier,docs.mode,docs.distant, L.vu, L.objet, L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
-				$id_doc_attente = sql_insertq("spip_spipmotion_attentes", array('id_document'=>$id_document,'objet'=>$document['objet'],'id_objet'=>$document['id_objet'],'encode'=>'non','id_auteur'=> $GLOBALS['visiteur_session']['id_auteur'],'extension'=>$format));
-				spip_log("on ajoute un document dans la file d'attente : $id_doc_attente","spipmotion");
+				facd_ajouter_conversion_file($id_document,'spipmotion_encodage',$format,null,'conversion');
 			}
-			else{
+			else
 				spip_log("Ce document existe deja dans la file d'attente","spipmotion");
-			}
 		}else if(!$format){
 			spip_log('on relance l encodage pour tous les formats','spipmotion');
 			/**
 			 * Ajout de la vidéo dans la file d'attente d'encodage si besoin
 			 */
 			if(in_array($extension,lire_config('spipmotion/fichiers_videos_encodage',array()))){
-				foreach(lire_config('spipmotion/fichiers_videos_sortie',array()) as $extension_sortie){
-					$en_file = sql_getfetsel("id_spipmotion_attente","spip_spipmotion_attentes","id_document=$id_document AND extension ='$extension_sortie' AND encode IN ('en_cours,non')");
+				foreach(lire_config('spipmotion/fichiers_videos_sortie',array()) as $format){
+					$en_file = sql_getfetsel("id_facd_conversion","spip_facd_conversions","id_document=".intval($id_document)." AND extension ='$extension_sortie' AND statut IN ('en_cours,non')");
 					if(!$en_file){
-						$document = sql_fetsel("docs.id_document, docs.extension,docs.fichier,docs.mode,docs.distant, L.vu, L.objet, L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
-						$id_doc_attente = sql_insertq("spip_spipmotion_attentes", array('id_document'=>$id_document,'objet'=>$document['objet'],'id_objet'=>$document['id_objet'],'encode'=>'non','id_auteur'=> $GLOBALS['visiteur_session']['id_auteur'],'extension'=>$extension_sortie));
-						spip_log("on ajoute une video dans la file d'attente : $id_doc_attente","spipmotion");
-						$invalider = true;
+						facd_ajouter_conversion_file($id_document,'spipmotion_encodage',$format,null,'conversion');
 					}
-					else{
+					else
 						spip_log("Cette video existe deja dans la file d'attente","spipmotion");
-					}
 				}
 			}
 
@@ -161,24 +87,17 @@ function spipmotion_genere_file($id_document,$type,$id,$format=''){
 			 * Ajout du son dans la file d'attente d'encodage si besoin
 			 */
 			else if(in_array($extension,lire_config('spipmotion/fichiers_audios_encodage',array()))){
-				foreach(lire_config('spipmotion/fichiers_audios_sortie',array()) as $extension_sortie){
-					$en_file = sql_getfetsel("id_spipmotion_attente","spip_spipmotion_attentes","id_document=$id_document AND extension ='$extension_sortie' AND encode IN ('en_cours,non')");
+				foreach(lire_config('spipmotion/fichiers_audios_sortie',array()) as $format){
+					$en_file = sql_getfetsel("id_facd_conversion","spip_facd_conversions","id_document=".intval($id_document)." AND extension ='$extension_sortie' AND statut IN ('en_cours,non')");
 					if(!$en_file){
-						$invalider = true;
-						$document = sql_fetsel("docs.id_document, docs.extension,docs.fichier,docs.mode,docs.distant, L.vu, L.objet, L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
-						$id_doc_attente = sql_insertq("spip_spipmotion_attentes", array('id_document'=>$id_document,'objet'=>$document['objet'],'id_objet'=>$document['id_objet'],'encode'=>'non','id_auteur'=> $GLOBALS['visiteur_session']['id_auteur'],'extension'=>$extension_sortie));
-						spip_log("on ajoute un son dans la file d'attente : $id_doc_attente","spipmotion");
+						facd_ajouter_conversion_file($id_document,'spipmotion_encodage',$format,null,'conversion');
 					}
-					else{
+					else
 						spip_log("Ce son existe deja dans la file d'attente","spipmotion");
-					}
 				}
 			}
 		}
-		if($invalider){
-			include_spip('inc/invalideur');
-			suivre_invalideur(1);
-		}
 	}
+	return true;
 }
 ?>

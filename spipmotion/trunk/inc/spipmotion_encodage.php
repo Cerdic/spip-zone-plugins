@@ -11,12 +11,26 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function inc_spipmotion_encodage_dist($source,$attente,$format=''){
+function inc_spipmotion_encodage_dist($id_document,$options = array()){
+	spip_log($options,'spipmotion');
 	if(!is_array($GLOBALS['spipmotion_metas'])){
 		$inc_meta = charger_fonction('meta', 'inc');
 		$inc_meta('spipmotion_metas');
 	}
+	/**
+	 * On vérifie s'il y a des ffmpeg en cours sur le serveur,
+	 * s'il y en a 3 ou plus, on attend
+	 */
+	$ps_ffmpeg = exec('ps -C ffmpeg',$retour,$retour_int);
+	if(($retour_int == 1) && (count($retour) >= 3)){
+		spip_log('Il y a a apparemment trop de processus de ffmpeg en cours, on attend donc','spipmotion');
+		$ret['success'] = true;
+		$ret['statut'] = 'non';
+		return $ret;
+	}
 	
+	$format = $options['format'];
+	$source = sql_fetsel('*','spip_documents','id_document='.intval($id_document));
 	/**
 	 * On vérifie que l'on n'a pas déjà une version dans le format souhaité
 	 * Si oui on la supprime avant de la réencoder
@@ -56,16 +70,13 @@ function inc_spipmotion_encodage_dist($source,$attente,$format=''){
 			$in = sql_in('id_document', $liste);
 			sql_delete("spip_documents", $in);
 			sql_delete("spip_documents_liens", $in);
-			sql_delete("spip_spipmotion_attentes", "id_document=".intval($id_document).' AND encode != '.sql_quote('oui').' AND extension='.sql_quote($format).' AND id_spipmotion_attente!='.intval($attente));
+			sql_delete("spip_facd_conversions", "id_document=".intval($id_document).' AND statut != '.sql_quote('oui').' AND format='.sql_quote($format).' AND id_facd_conversion!='.intval($options['id_facd_conversion']));
 		}
-
-		include_spip('inc/invalideur');
-		suivre_invalideur(1);
 	}
 	/**
 	 * Puis on lance l'encodage
 	 */
-	return encodage($source,$attente);
+	return encodage($source,$options);
 }
 
 /**
@@ -74,23 +85,25 @@ function inc_spipmotion_encodage_dist($source,$attente,$format=''){
  * @param array $source Les informations du fichier source
  * @param int $doc_attente id_spipmotion_attente L'id de la file d'attente
  */
-function encodage($source,$doc_attente){
+function encodage($source,$options){
+	$ret = array();
+	spip_log('On encode le document : '.$source,'spipmotion');
 	/**
 	 * Si le chemin vers le binaire FFMpeg n'existe pas,
 	 * la configuration du plugin crée une meta spipmotion_casse
 	 */
-	if($GLOBALS['meta']['spipmotion_casse'] == 'oui')
-		return;
-
+	if($GLOBALS['meta']['spipmotion_casse'] == 'oui'){
+		$ret['success'] = false;
+		$ret['erreur'] = 'spipmotion_casse';
+		return ;
+	}
+	
 	include_spip('inc/config');
 	$spipmotion_compiler = @unserialize($GLOBALS['spipmotion_metas']['spipmotion_compiler']);
 	$ffmpeg_version = $spipmotion_compiler['ffmpeg_version'] ? $spipmotion_compiler['ffmpeg_version'] : '0.7';
 	$rep_dest = sous_repertoire(_DIR_VAR, 'cache-spipmotion');
 
-	$attente = sql_fetsel("*","spip_spipmotion_attentes","id_spipmotion_attente=".intval($doc_attente));
-	$extension_attente = $attente['extension'];
-	$type_doc = $attente['objet'];
-	$id_objet = $attente['id_objet'];
+	$extension_attente = $options['format'];
 
 	$encodeur = lire_config("spipmotion/encodeur_$extension_attente",'');
 	$chemin_ffmpeg = (strlen(lire_config('spipmotion/chemin')) > 0) ? "--p ".lire_config('spipmotion/chemin') : '';
@@ -275,14 +288,6 @@ function encodage($source,$doc_attente){
 	}else{
 		$spipmotion_sh = find_in_path('script_bash/spipmotion.sh');
 	}
-	
-	/**
-	 * On change le statut d'encodage à en_cours pour
-	 * - changer les messages sur le site (ce media est en cours d'encodage par exemple)
-	 * - indiquer si nécessaire le statut
-	 */
-	$infos_encodage = array('debut_encodage' => time());
-	sql_updateq("spip_spipmotion_attentes",array('encode'=>'en_cours','infos' => serialize($infos_encodage)),"id_spipmotion_attente=".intval($doc_attente));
 
 	/**
 	 * Encodage
@@ -297,10 +302,11 @@ function encodage($source,$doc_attente){
 		$lancement_encodage = exec($encodage,$retour,$retour_int);
 		spip_log($retour_int,'spipmotion');
 		if($retour_int == 0){
-			$encodage_ok = true;
+			$ret['success'] = true;
 		}else if($retour_int >= 126){
-			$erreur = _T('spipmotion:erreur_script_spipmotion_non_executable');
-			ecrire_fichier($fichier_log,$erreur);
+			$ret['success'] = false;
+			$ret['erreur'] = _T('spipmotion:erreur_script_spipmotion_non_executable');
+			ecrire_fichier($fichier_log,$ret['erreur']);
 		}
 	}
 
@@ -390,16 +396,16 @@ function encodage($source,$doc_attente){
 
 		$texte .= intval($vbitrate) ? "vb=".$vbitrate."000\n" : "";
 		$bitrate = intval($vbitrate) ? "--bitrate ".$vbitrate : "";
-
+		
+		$configuration = array();
+		if(is_array($spipmotion_compiler['configuration'])){
+			$configuration = $spipmotion_compiler['configuration'];
+		}
 		/**
 		 * Paramètres supplémentaires pour encoder en h264
 		 */
 		if($vcodec == '--vcodec libx264'){
 			$preset_quality = lire_config("spipmotion/vpreset_$extension_attente",'slow');
-			$configuration = array();
-			if(is_array($spipmotion_compiler['configuration'])){
-				$configuration = $spipmotion_compiler['configuration'];
-			}
 			if(in_array('--enable-pthreads',$configuration)){
 				$infos_sup_normal .= " -threads 0 ";
 			}
@@ -511,14 +517,15 @@ function encodage($source,$doc_attente){
 		}
 
 		if($retour_int == 0){
-			$encodage_ok = true;
+			$ret['success'] = true;
 		}else if($retour_int >= 126){
-			$erreur = _T('spipmotion:erreur_script_spipmotion_non_executable');
-			ecrire_fichier($fichier_log,$erreur);
+			$ret['success'] = false;
+			$ret['erreur'] = _T('spipmotion:erreur_script_spipmotion_non_executable');
+			ecrire_fichier($fichier_log,$ret['erreur']);
 		}
 	}
 
-	if($encodage_ok && file_exists(get_spip_doc($source['fichier']))){
+	if($ret['success'] && file_exists(get_spip_doc($source['fichier']))){
 		/**
 		 * Ajout du nouveau document dans la base de donnée de SPIP
 		 * NB : la récupération des infos et du logo est faite automatiquement par
@@ -530,24 +537,15 @@ function encodage($source,$doc_attente){
 		$doc = array(array('tmp_name'=>$fichier_temp,'name'=>$fichier_final,'mode'=>$mode));
 		$x = $ajouter_documents('new',$doc, 'document', $source['id_document'], $mode);
 		$x = reset($x);
-		spip_log('le nouveau document est le '.$x,'spipmotion');
+		spip_log('le nouveau document est le '.$x,'facd');
 		if(intval($x) > 1){
 			supprimer_fichier($fichier_temp);
-			
-			/**
-			 * Modification de la file d'attente
-			 * - On marque le document comme correctement encodé
-			 * - On ajoute la date de fin d'encodage
-			 */
-			
-			$infos_encodage['fin_encodage'] = time();
-			spip_log('Insertion du temps final d encodage : '.$infos_encodage['fin_encodage'],'spipmotion');
-			sql_updateq("spip_spipmotion_attentes",array('encode'=>'oui','infos' => serialize($infos_encodage)),"id_spipmotion_attente=".intval($doc_attente));
-
 			/**
 			 * Tentative de récupération d'un logo du document original
+			 * si pas déjà de vignette
 			 */
-			if((sql_getfetsel('id_vignette','spip_documents','id_document = '.intval($x)) == 0) && ($source['id_vignette'] > 0)){
+			$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document = '.intval($x));
+			if((!$id_vignette OR ($id_vignette == 0)) && ($source['id_vignette'] > 0)){
 				$vignette = sql_fetsel('fichier,extension','spip_documents','id_document='.intval($source['id_vignette']));
 				$fichier_vignette = get_spip_doc($vignette['fichier']);
 				$vignette = array(array('tmp_name'=>$fichier_vignette,'name'=>$fichier_vignette));
@@ -556,6 +554,8 @@ function encodage($source,$doc_attente){
 				if (is_numeric($id_vignette)){
 				  	$source['id_vignette'] = $id_vignette;
 				}
+			}else{
+				$source['id_vignette'] = $id_vignette;
 			}
 			/**
 			 * Champs que l'on souhaite réinjecter depuis l'original ni depuis un ancien encodage
@@ -574,18 +574,19 @@ function encodage($source,$doc_attente){
 			
 			include_spip('action/editer_document');
 			document_modifier($x, $modifs);
-			
-			$reussite = 'oui';
+			spip_log($modifs,'facd');
+			$ret['id_document'] = $x;
+			$ret['success'] = true;
 		}else{
-			sql_updateq("spip_spipmotion_attentes",array('encode'=>'non'),"id_spipmotion_attente=".intval($doc_attente));
 			spip_log('Il y a une erreur, le fichier n est pas copié','spipmotion');
-			$reussite = 'non';
+			$ret['erreur'] = 'Il y a une erreur, le fichier n est pas copié';
+			$ret['success'] = false;
 		}
 	}else if(!file_exists(get_spip_doc($source['fichier']))){
 		spip_log('Le document original a été supprimé entre temps','spipmotion');
 		supprimer_fichier($fichier_temp);
-		$reussite = 'non';
-		sql_delete("spip_spipmotion_attentes","id_spipmotion_attente=".intval($doc_attente));
+		$ret['erreur'] = 'Le document original a été supprimé entre temps';
+		$ret['success'] = false;
 	}
 	/**
 	 * Si l'encodage n'est pas ok ...
@@ -594,15 +595,16 @@ function encodage($source,$doc_attente){
 	else{
 		$infos_encodage['fin_encodage'] = time();
 		$infos_encodage['log'] = spip_file_get_contents($fichier_log);
-		$reussite = 'non';
-		sql_updateq("spip_spipmotion_attentes",array('encode'=>'erreur','infos' => serialize($infos_encodage)),"id_spipmotion_attente=".intval($doc_attente));
+		$ret['info'] = $infos_encodage;
+		$ret['erreur'] = 'Encodage en erreur';
+		$ret['success'] = false;
 	}
 
 	/**
 	 * On supprime les différents fichiers temporaires qui auraient pu être créés
 	 * si on a une réussite
 	 */
-	if($reussite == 'oui'){
+	if($ret['success']){
 		if(file_exists(_DIR_RACINE.$query.'-0.log')){
 		//	supprimer_fichier(_DIR_RACINE.$query.'-0.log');
 		}
@@ -626,20 +628,15 @@ function encodage($source,$doc_attente){
 				array(
 					'args' => array(
 						'id_document' => $x,
-						'id_document_orig' => $attente['id_document'],
+						'id_document_orig' => $source['id_document'],
 						'reussite' => $reussite
 					),
 					'data' => ''
 				)
 			);
-	/**
-	 * Invalidation du cache
-	 */
-	include_spip('inc/invalideur');
-	suivre_invalideur("0",true);
 
 	if ($notifications = charger_fonction('notifications', 'inc')) {
-		$notifications('spipmotion_encodage', intval($doc_attente),
+		$notifications('spipmotion_encodage', intval($options['id_facd_conversion']),
 			array(
 				'id_document' => $x,
 				'source' => $source,
@@ -647,6 +644,6 @@ function encodage($source,$doc_attente){
 			)
 		);
 	}
-	return $x;
+	return $ret;
 }
 ?>

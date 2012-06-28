@@ -11,9 +11,6 @@
  
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-if(!defined('_DIR_LIB_FLOT')){
-	define('_DIR_LIB_FLOT',_DIR_RACINE.'lib/flot');
-}
 
 if(!isset($GLOBALS['spipmotion_metas']) OR !is_array($GLOBALS['spipmotion_metas'])){
 	$inc_meta = charger_fonction('meta', 'inc');

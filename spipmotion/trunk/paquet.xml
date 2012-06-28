@@ -20,12 +20,10 @@
 	<pipeline nom="declarer_tables_principales" inclure="base/spipmotion.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/spipmotion.php" />
 	<pipeline nom="taches_generales_cron" inclure="spipmotion_pipelines.php" />
-	<pipeline nom="jquery_plugins" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="header_prive" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="post_edition" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="post_spipmotion_encodage" inclure="spipmotion_pipelines.php" />
-	<pipeline nom="autoriser" inclure="spipmotion_autoriser.php" />
 	<pipeline nom="document_desc_actions" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="spipmotion_pipelines.php" />
@@ -35,7 +33,7 @@
 	<necessite nom="getid3" compatibilite="[0.2;[" />
 	<necessite nom="medias" compatibilite="[2.7.28;[" />
 	<necessite nom="jqueryui" compatibilite="[1.8.20;[" />
-	<lib nom="flot" lien="http://flot.googlecode.com/files/flot-0.7.zip" />
+	<necessite nom="facd" compatibilite="[0.1.0;[" />
 
 	<utilise nom="podcast" />
 	<utilise nom="fonctions_images" />

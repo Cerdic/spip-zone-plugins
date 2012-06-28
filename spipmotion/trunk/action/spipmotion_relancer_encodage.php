@@ -33,8 +33,8 @@ function action_spipmotion_relancer_encodage_dist(){
 		$update = 'ok_tout';
 	}
 	
-	$encodage_direct = charger_fonction('spipmotion_encodage_direct','inc');
-	$encodage_direct();
+	$conversion_directe = charger_fonction('fact_convertir_direct','inc');
+	$conversion_directe();
 	
 	if(_request('redirect')){
 		$redirect = urldecode(_request('redirect'));

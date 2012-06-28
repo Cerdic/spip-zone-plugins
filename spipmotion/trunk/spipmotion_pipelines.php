@@ -12,7 +12,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Insertion dans le pipeline document_desc_actions (Mediathèque)
+ * Insertion dans le pipeline document_desc_actions (medias)
  * 
  * Affiche les boutons supplémentaires de :
  * - récupération de logo dans le cas d'une vidéo
@@ -38,7 +38,6 @@ function spipmotion_document_desc_actions($flux){
  * @param array $taches_generales Un array des tâches du cron de SPIP
  */
 function spipmotion_taches_generales_cron($taches_generales){
-	$taches_generales['spipmotion_file'] = 3*60;
 	$taches_generales['spipmotion_taches_generales'] = 24*60*60;
 	return $taches_generales;
 }
@@ -56,12 +55,12 @@ function spipmotion_post_edition($flux){
 	if(in_array($flux['args']['operation'], array('ajouter_document','document_copier_local'))){
 		include_spip('inc/config');
 		$id_document = $flux['args']['id_objet'];
-
+		spip_log('post edition de spipmotion','facd');
 		/**
 		 * Il n'est pas nécessaire de récupérer la vignette d'une vignette
 		 * ni ses infos.
 		 */
-		$infos_doc = sql_fetsel('fichier,mode,distant','spip_documents','id_document='.intval($id_document));
+		$infos_doc = sql_fetsel('fichier,mode,distant,extension','spip_documents','id_document='.intval($id_document));
 		$mode = $infos_doc['mode'];
 		$fichier = $infos_doc['fichier'];
 
@@ -86,9 +85,11 @@ function spipmotion_post_edition($flux){
 				/**
 				 * Récupération d'un logo de la vidéo
 				 */
+				spip_log('récup du logo de spipmotion','facd');
 				$recuperer_logo = charger_fonction("spipmotion_recuperer_logo","inc");
 				$logo = $recuperer_logo($id_document);
-
+				spip_log('on sort du logo','facd');
+				spip_log($logo,'facd');
 				$invalider = true;
 			}
 			if(
@@ -102,8 +103,8 @@ function spipmotion_post_edition($flux){
 				 */
 				include_spip('action/spipmotion_ajouter_file_encodage');
 				spipmotion_genere_file($id_document,$document['objet'],$document['id_objet']);
-				$encodage_direct = charger_fonction('spipmotion_encodage_direct','inc');
-				$encodage_direct();
+				$conversion_directe = charger_fonction('facd_convertir_direct','inc');
+				$conversion_directe();
 				$invalider = true;
 			}
 			/**
@@ -114,8 +115,6 @@ function spipmotion_post_edition($flux){
 				suivre_invalideur("id='id_$type/$id'");
 			}
 		}
-	}else if($flux['args']['operation'] == 'supprimer_documents'){
-		sql_delete('spip_spipmotion_attentes','id_document = '.$flux['args']['id_objet'].' AND encode!='.sql_quote('oui'));
 	}
 	return $flux;
 }
@@ -134,25 +133,6 @@ function spipmotion_header_prive($flux){
 <link rel="stylesheet" href="'.direction_css(find_in_path('spipmotion.css', 'css/', false)).'" type="text/css" media="all" />
 ';
 	return $flux;
-}
-
-/**
- * Insertion dans le pipeline jquery_plugins (SPIP)
- * On ajoute deux javascript dans le head
- * 
- * @param array $plugins
- * 		L'array des js insérés
- * @return array $plugins
- * 		L'array des js insérés modifié
- */
-function spipmotion_jquery_plugins($plugins){
-	if(test_espace_prive()){
-		if(!in_array(_DIR_LIB_FLOT.'/jquery.flot.js',$plugins)){
-			$plugins[] = _DIR_LIB_FLOT.'/jquery.flot.js';
-		}
-		$plugins[] = 'javascript/spipmotion_flot_extras.js';
-	}
-	return $plugins;
 }
 
 /**
@@ -204,10 +184,6 @@ function spipmotion_post_spipmotion_encodage($flux){
 			}
 		}
 	}
-	
-	$encodage_direct = charger_fonction('spipmotion_encodage_direct','inc');
-	$encodage_direct();
-	
 	return $flux;
 }
 
