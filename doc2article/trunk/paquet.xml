@@ -13,6 +13,7 @@
 
 	<auteur>b_b</auteur>
 	<auteur>kent1</auteur>
+	<credit lien="http://www.fatcow.com/">Ic&#244;ne CC-BY de FatCow</credit>
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/doc2article.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/doc2article.php" />
