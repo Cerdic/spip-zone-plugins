@@ -37,8 +37,10 @@ if (window.jQuery){
 		jQuery(me).parent().find('label>em').html(l).removeClass(l>=0?'nok':'ok').addClass(l>=0?'ok':'nok');
 	}
 	function status_length_count(){
-		jQuery('#status').keyup(function(){status_length_update(this);});
-		status_length_update(jQuery('#status'));
+		if (jQuery('#status').length){
+			jQuery('#status').keyup(function(){status_length_update(this);});
+			status_length_update(jQuery('#status'));
+		}
 	}
 	jQuery('document').ready(status_length_count);
 	onAjaxLoad(status_length_count);
