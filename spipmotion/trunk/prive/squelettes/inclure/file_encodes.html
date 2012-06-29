@@ -4,7 +4,7 @@
 ]
 #SET{dates, #ARRAY}
 #SET{nombre_date,#ARRAY}
-<BOUCLE_spipmotion_encodes_total(SPIPMOTION_ATTENTES){par id_spipmotion_attente}{inverse}{encode = oui}>
+<BOUCLE_spipmotion_encodes_total(FACD_CONVERSIONS){par id_facd_conversion}{inverse}{encode = oui}>
 	[(#SET{date_new,[(#MAJ|affdate{Y-m-d})]})]
 	#SET{
 		nombre_date,
@@ -53,9 +53,9 @@
 		</tr>
 	</thead>
 	<tbody class="ajax">
-<BOUCLE_spipmotion_encodes(SPIPMOTION_ATTENTES){encode = oui}{par id_spipmotion_attente}{inverse}{pagination #ENV{pagination,20}}>
+<BOUCLE_spipmotion_encodes(FACD_CONVERSIONS){statut = oui}{par id_facd_conversion}{inverse}{pagination #ENV{pagination,20}}>
 	<tr class="tr_liste[ (#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]">
-		<td>##ID_SPIPMOTION_ATTENTE</td>
+		<td>##ID_FACD_CONVERSION</td>
 		<td>
 			<a href="[(#SELF|parametre_url{id_document,#ID_DOCUMENT})]" title="<:spipmotion:titre_previsu:>" class="ajax">
 			#ID_DOCUMENT

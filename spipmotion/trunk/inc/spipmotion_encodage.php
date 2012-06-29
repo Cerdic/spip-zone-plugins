@@ -83,7 +83,7 @@ function inc_spipmotion_encodage_dist($id_document,$options = array()){
  * Fonction de lancement de l'encodage
  *
  * @param array $source Les informations du fichier source
- * @param int $doc_attente id_spipmotion_attente L'id de la file d'attente
+ * @param int $doc_attente id_facd_conversion L'id de la file d'attente
  */
 function encodage($source,$options){
 	$ret = array();
