@@ -73,7 +73,7 @@ function inc_getid3_recuperer_infos($id_document){
 			'titre'=>filtrer_entites($document['titre']),
 			'descriptif'=>filtrer_entites($document['descriptif']),
 			'duree'=> $id3['duree_secondes'],
-			'bitrate' => $id3['bitrate'],
+			'bitrate' => intval($id3['bitrate']),
 			'bitrate_mode'=>$id3['bitrate_mode'],
 			'audiosamplerate'=>$id3['audiosamplerate'],
 			'encodeur'=>$id3['codec'],
