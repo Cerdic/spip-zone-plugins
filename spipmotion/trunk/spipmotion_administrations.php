@@ -52,6 +52,9 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 	$maj['0.8.0'] = array(
 		array('sql_alter',array('TABLE spip_documents CHANGE `metas` `metadatas` TEXT DEFAULT "" NOT NULL'))
 	);
+	$maj['1.1.0'] = array(
+		array('spipmotion_peuple_facd',array())
+	);
 	/**
 	 * TODO : générer un htaccess dans le répertoire script_bash/
 	 * TODO : insérer une préconfiguration par défaut
@@ -120,5 +123,36 @@ function spipmotion_install_recuperer_infos(){
 	 */
 	include_spip('inc/invalideur');
 	suivre_invalideur("1");
+}
+
+/**
+ * On peuple facd avant suppression de spip_spipmotion_attentes
+ * 
+ * On fait attention à renommer les deux éléments debut_conversion et fin_conversion
+ */
+function spipmotion_peuple_facd(){
+	$res = sql_select("*","spip_spipmotion_attentes");
+	while($row = sql_fetch($res)){
+		$infos = @unserialize($row['infos']);
+		if(is_array($infos)){
+			$infos['debut_conversion'] = $infos['debut_encodage'];
+			unset($infos['debut_encodage']);
+			$infos['fin_conversion'] = $infos['fin_encodage'];
+			unset($infos['fin_encodage']);
+			$infos = serialize($infos);
+		}
+		sql_insertq('spip_facd_conversions',array(
+												'id_auteur' => $row['id_auteur'],
+												'id_document' => $row['id_document'],
+												'statut' => $row['encode'],
+												'fonction'=> 'spipmotion_encodage',
+												'extension'=>$row['extension'],
+												'infos'=> $infos,
+												'maj'=>$row['maj']));
+		sql_delete('spip_spipmotion_attentes','id_spipmotion_attente='.intval($row['id_spipmotion_attente']));
+		if (time() >= _TIME_OUT)
+			return;
+	}
+	sql_drop_table('spip_spipmotion_attentes');
 }
 ?>

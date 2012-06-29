@@ -22,7 +22,6 @@
 		<BOUCLE_last10(FACD_CONVERSIONS documents){extension = #VALEUR}{statut = oui}{0,#ENV{nb,20}}{!par id_facd_conversion}>
 		
 		[(#SET{duree_conversion,[(#INFOS|table_valeur{fin_conversion}|moins{#INFOS|table_valeur{debut_conversion}})]})]
-		
 		#SET{encodage_duree_seconde,#DUREE|div{#GET{duree_conversion}}}
 		#SET{encodage_octet_seconde,#TAILLE|div{#GET{duree_conversion}}}
 		
