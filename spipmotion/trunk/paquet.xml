@@ -38,6 +38,5 @@
 	<utilise nom="podcast" />
 	<utilise nom="fonctions_images" />
 
-	<menu nom="spipmotion_file" titre="spipmotion:titre_page_file" parent="menu_edition" icone="images/spipmotion-16.png" action="spipmotion_file" />
 	<menu nom="ffmpeg_infos" titre="spipmotion:titre_page_ffmpeg_infos" parent="menu_configuration" icone="images/spipmotion-16.png" action="ffmpeg_infos" />
 </paquet>

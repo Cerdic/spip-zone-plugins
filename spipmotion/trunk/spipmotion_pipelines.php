@@ -272,6 +272,12 @@ function spipmotion_recuperer_fond($flux){
 			}
 		}
 	}
+	if ($flux['args']['fond']=='prive/squelettes/contenu/facd'){
+		$flux['data']['texte'] .= recuperer_fond('prive/squelettes/inclure/file_stats', $flux['args']['contexte']);
+	}
+	if ($flux['args']['fond']=='prive/squelettes/navigation/facd'){
+		$flux['data']['texte'] .= recuperer_fond('prive/squelettes/navigation/spipmotion_file', $flux['args']['contexte']);
+	}
 	return $flux;
 }
 ?>
