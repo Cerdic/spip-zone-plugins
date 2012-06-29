@@ -1,7 +1,7 @@
 <paquet
 	prefix="getid3"
 	categorie="multimedia"
-	version="1.1.1"
+	version="1.1.2"
 	etat="stable"
 	compatibilite="[3.0.2;3.0.99]"
 	logo="images/id3v2.png"
@@ -12,7 +12,7 @@
 	<!-- Lire et écrire les tags audio -->
 
 	<auteur mail="booz@rezo.net">BoOz</auteur>
-	<auteur lien="http://www.kent1.info">kent1</auteur>
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
 
 	<copyright>2008-2012</copyright>
 
@@ -23,4 +23,6 @@
 	<pipeline nom="post_edition" action="post_edition" inclure="getid3_pipelines.php" />
 	<pipeline nom="recuperer_fond" inclure="getid3_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="getid3_pipelines.php" />
+	
+	<utilise nom="licence" />
 </paquet>

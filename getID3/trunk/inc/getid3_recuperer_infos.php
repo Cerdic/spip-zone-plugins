@@ -30,7 +30,7 @@ function inc_getid3_recuperer_infos($id_document){
 
 	$recuperer_id3 = charger_fonction('recuperer_id3','inc');
 	$id3 = $recuperer_id3($son_chemin);
-
+	
 	/**
 	 * On remplit les champs de base de SPIP avec ce dont on dispose
 	 *
@@ -46,12 +46,14 @@ function inc_getid3_recuperer_infos($id_document){
 		$document['titre'] = preg_replace('/_/',' ',$titre);
 	}
 
-	if(($document['descriptif'] == '') && $id3['comments']){
+	if(($document['descriptif'] == '') && ($id3['comments'] OR $id3['comments'])){
 		/**
 		 * Ne pas prendre les comments foireux d'itunes
 		 */
 		if(!preg_match('/0000[a-b|0-9]{4}/',$id3['comments']))
 			$document['descriptif'] = utf8_encode($id3['comments']);
+		if(($document['descriptif'] == '') && !preg_match('/0000[a-b|0-9]{4}/',$id3['comment']))
+			$document['descriptif'] = utf8_encode($id3['comment']);
 	}
 
 	/**
@@ -65,7 +67,10 @@ function inc_getid3_recuperer_infos($id_document){
 			$covers[] = $val;
 		}
 	}
-
+	
+	$credits = $id3['copyright_message']?$id3['copyright_message']:$id3['copyright'];
+	if($credits != '')
+		$credits = utf8_encode($credits);
 	/**
 	 * Les valeurs que l'on mettra en base à la fin
 	 */
@@ -78,9 +83,33 @@ function inc_getid3_recuperer_infos($id_document){
 			'audiosamplerate'=>$id3['audiosamplerate'],
 			'encodeur'=>$id3['codec'],
 			'bits'=>$id3['bits'],
+			'credits'=>$credits,
 			'canaux' => $id3['channels']
 		);
-
+	
+	/**
+	 * Si on a du contenu dans les messages de copyright, 
+	 * on essaie de trouver la licence, si on a le plugin Licence
+	 * 
+	 * Pour l'instant uniquement valable sur les CC
+	 */
+	if(defined('_DIR_PLUGIN_LICENCE') && ((strlen($id3['copyright_message']) > 0) OR strlen($id3['copyright']) > 0)){
+		foreach(array($id3['copyright_message'],$id3['copyright']) as $contenu){
+			if(preg_match('/http:\/\/creativecommons.org\/licenses\/(.[a-z|-]*)\//',$contenu,$matches)){
+				include_spip('inc/licence');
+				$licence_id = 'cc-'.$matches[1];
+				foreach($GLOBALS['licence_licences'] as $id_licence=>$licence_info){
+					if($licence_info['abbr'] == $licence_id){
+						$valeurs['id_licence'] = $id_licence;
+						break;
+					}
+				}
+				if(intval($valeurs['id_licence']))
+					break;
+			}
+		}
+	}
+	
 	if(count($covers) > 0){
 		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
 
