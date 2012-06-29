@@ -53,21 +53,14 @@ function spipmotion_taches_generales_cron($taches_generales){
  */
 function spipmotion_post_edition($flux){
 	if(in_array($flux['args']['operation'], array('ajouter_document','document_copier_local'))){
-		include_spip('inc/config');
 		$id_document = $flux['args']['id_objet'];
-		spip_log('post edition de spipmotion','facd');
 		/**
-		 * Il n'est pas nécessaire de récupérer la vignette d'une vignette
+		 * Il n'est pas nécessaire de récupérer la vignette d'une vignette ni d'un document distant
 		 * ni ses infos.
 		 */
-		$infos_doc = sql_fetsel('fichier,mode,distant,extension','spip_documents','id_document='.intval($id_document));
-		$mode = $infos_doc['mode'];
-		$fichier = $infos_doc['fichier'];
-
-		if(($mode != 'vignette') && ($infos_doc['distant'] == 'non')){
-			$document = sql_fetsel("docs.id_document, docs.extension,docs.fichier,docs.mode,docs.distant, L.vu, L.objet, L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
-			$extension = $document['extension'];
-
+		$infos_doc = sql_fetsel('mode,distant,extension','spip_documents','id_document='.intval($id_document));
+		if(($infos_doc['mode'] != 'vignette') && ($infos_doc['distant'] == 'non')){
+			include_spip('inc/config');
 			/**
 			 * Si nous sommes dans un format vidéo que SPIPmotion peut traiter,
 			 * on lui applique certains traitements :
@@ -75,7 +68,7 @@ function spipmotion_post_edition($flux){
 			 * -* récupération d'une vignette
 			 * Les fichiers sonores sont gérés par le plugin getID3 pour cela
 			 */
-			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && in_array($extension,lire_config('spipmotion/fichiers_videos',array()))){
+			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_videos',array()))){
 				/**
 				 * Récupération des informations de la vidéo
 				 */
@@ -85,24 +78,24 @@ function spipmotion_post_edition($flux){
 				/**
 				 * Récupération d'un logo de la vidéo
 				 */
-				spip_log('récup du logo de spipmotion','facd');
 				$recuperer_logo = charger_fonction("spipmotion_recuperer_logo","inc");
 				$logo = $recuperer_logo($id_document);
-				spip_log('on sort du logo','facd');
-				spip_log($logo,'facd');
 				$invalider = true;
 			}
 			if(
 				($GLOBALS['meta']['spipmotion_casse'] != 'oui')
-				&& ($mode != 'conversion')
-				&& (lire_config('spipmotion/encodage_auto') == 'on') 
-				&& (in_array($extension,lire_config('spipmotion/fichiers_videos',array())) OR in_array($extension,lire_config('spipmotion/fichiers_audios',array())))){
+				&& ($infos_doc['mode'] != 'conversion')
+				&& (lire_config('spipmotion/encodage_auto','off') == 'on') 
+				&& (in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_videos',array())) OR in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_audios',array())))){
 				/**
 				 * On l'ajoute dans la file d'attente d'encodage si nécessaire
 				 * Si et seulement si on a l'option d'activée dans la conf
 				 */
 				include_spip('action/spipmotion_ajouter_file_encodage');
-				spipmotion_genere_file($id_document,$document['objet'],$document['id_objet']);
+				spipmotion_genere_file($id_document);
+				/**
+				 * On lance une conversion directe en tache de fond
+				 */
 				$conversion_directe = charger_fonction('facd_convertir_direct','inc');
 				$conversion_directe();
 				$invalider = true;
@@ -112,26 +105,10 @@ function spipmotion_post_edition($flux){
 			 */
 			if($invalider){
 				include_spip('inc/invalideur');
-				suivre_invalideur("id='id_$type/$id'");
+				suivre_invalideur("id='id_document/$id_document'");
 			}
 		}
 	}
-	return $flux;
-}
-
-/**
- * Insertion dans le pipeline header_prive (SPIP)
- * On ajoute la css de spipmotion dans le privé
- * 
- * @param string $flux
- * 		Le contenu du head
- * @return string $flux
- * 		Le head modifié
- */
-function spipmotion_header_prive($flux){
-	$flux .= '
-<link rel="stylesheet" href="'.direction_css(find_in_path('spipmotion.css', 'css/', false)).'" type="text/css" media="all" />
-';
 	return $flux;
 }
 

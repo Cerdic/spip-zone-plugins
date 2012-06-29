@@ -53,7 +53,7 @@ function action_spipmotion_ajouter_file_encodage_tout_post($format=false){
 	}
 	$fichiers = sql_select('*','spip_documents',sql_in('extension',$formats).' AND mode!="conversion"');
 	while($fichier = sql_fetch($fichiers)){
-		spipmotion_genere_file($fichier['id_document'],'','',$format);
+		spipmotion_genere_file($fichier['id_document'],$format);
 	}
 	
 	$conversion_directe = charger_fonction('fact_convertir_direct','inc');
