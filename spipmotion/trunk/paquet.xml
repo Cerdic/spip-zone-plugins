@@ -35,6 +35,7 @@
 	<necessite nom="facd" compatibilite="[0.1.0;[" />
 
 	<utilise nom="podcast" />
+	<utilise nom="licence" />
 	<utilise nom="fonctions_images" />
 
 	<menu nom="ffmpeg_infos" titre="spipmotion:titre_page_ffmpeg_infos" parent="menu_configuration" icone="images/spipmotion-16.png" action="ffmpeg_infos" />

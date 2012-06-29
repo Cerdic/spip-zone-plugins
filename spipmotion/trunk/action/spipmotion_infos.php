@@ -9,9 +9,8 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('inc/charsets');	# pour le nom de fichier
 include_spip('inc/actions');
 
 function action_spipmotion_infos_dist(){
@@ -20,28 +19,24 @@ function action_spipmotion_infos_dist(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	if (!preg_match(",^(-?)(\d+)\W(\w+)\W?(\d*)\W?(\d*)$,", $arg, $r)){
+	if (!intval($arg)){
 		spip_log("action_infos_video_dist incompris: " . $arg);
-		$redirect = urldecode(_request('redirect'));
 		return;
 	}
 	else{
-		action_spipmotion_infos_post($r);
-		if(_request("iframe") == 'iframe') {
-			$redirect = parametre_url(urldecode($iframe_redirect),"show_video_infos",join(',',$documents_actifs),'&')."&iframe=iframe";
-		}else if(_request('redirect')){
+		action_spipmotion_infos_post($arg);
+		if(_request('redirect')){
 			$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
+			return $redirect;
 		}
-		return $redirect;
 	}
 }
 
-function action_spipmotion_infos_post($r){
-	list(, $sign, $id_objet, $objet, $id_document, $suite) = $r;
+function action_spipmotion_infos_post($id_document){
 
 	$recuperer_infos = charger_fonction('spipmotion_recuperer_infos','inc');
 	$infos = $recuperer_infos($id_document);
-
+	return $infos;
 }
 
 ?>

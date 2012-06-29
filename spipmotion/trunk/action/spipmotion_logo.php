@@ -9,7 +9,7 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
 
@@ -17,10 +17,10 @@ function action_spipmotion_logo_dist(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	
-	if (!preg_match(",^(-?)(\d+)\W(\w+)\W?(\d*)\W?(\d*)$,", $arg, $r)){
+	if (!intval($arg)){
 		spip_log("action_logo_video_dist incompris: " . $arg);
 	} else {
-		$id_logo = action_infos_video_post($r);
+		$id_logo = action_infos_video_post($arg);
 	}
 	
 	if(_request('redirect')){
@@ -29,8 +29,7 @@ function action_spipmotion_logo_dist(){
 	return $redirect;
 }
 
-function action_infos_video_post($r){
-	list(, $sign, $id, $type, $id_document, $suite) = $r;
+function action_infos_video_post($id_document){
 	$recuperer_logo = charger_fonction('spipmotion_recuperer_logo','inc');
 	$x = $recuperer_logo($id_document);
 
