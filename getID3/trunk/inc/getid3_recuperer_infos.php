@@ -37,7 +37,7 @@ function inc_getid3_recuperer_infos($id_document){
 	 * -* titre
 	 * -* descriptif
 	 */
-	if($document['titre'] == ''){
+	if(($document['titre'] == '') && isset($id3['title'])){
 		$document['titre'] = preg_replace('/_/',' ',utf8_encode($id3['title']));
 	}
 	if($document['titre'] == ''){
@@ -46,15 +46,29 @@ function inc_getid3_recuperer_infos($id_document){
 		$document['titre'] = preg_replace('/_/',' ',$titre);
 	}
 
-	if(($document['descriptif'] == '') && ($id3['comments'] OR $id3['comments'])){
+	if($document['descriptif'] == ''){
 		/**
 		 * Ne pas prendre les comments foireux d'itunes
 		 */
-		if(!preg_match('/0000[a-b|0-9]{4}/',$id3['comments']))
+		if(isset($id3['comments']) && !preg_match('/0000[a-b|0-9]{4}/',$id3['comments']))
 			$document['descriptif'] = utf8_encode($id3['comments']);
-		if(($document['descriptif'] == '') && !preg_match('/0000[a-b|0-9]{4}/',$id3['comment']))
-			$document['descriptif'] = utf8_encode($id3['comment']);
+		else{
+			if(isset($id3['artist']))
+				$document['descriptif'] .= utf8_encode($id3['artist'])."\n";
+			if(isset($id3['album']))
+				$document['descriptif'] .= utf8_encode($id3['album'])."\n";
+			if(isset($id3['year']))
+				$document['descriptif'] .= utf8_encode($id3['year'])."\n";
+			if(isset($id3['genre']))
+				$document['descriptif'] .= utf8_encode($id3['genre'])."\n";
+			if(isset($id3['track_number']))
+				$document['descriptif'] .= utf8_encode($id3['track_number'])."\n";
+			if(isset($id3['comment']) && !preg_match('/0000[a-b|0-9]{4}/',$id3['comment']))
+				$document['descriptif'] .= "\n".utf8_encode($id3['comment'])."\n";
+		}
 	}
+
+	if($document['descriptif'] == '')
 
 	/**
 	 * Les covers potentielles
@@ -70,7 +84,7 @@ function inc_getid3_recuperer_infos($id_document){
 	
 	$credits = $id3['copyright_message']?$id3['copyright_message']:$id3['copyright'];
 	if($credits != '')
-		$credits = utf8_encode($credits);
+		$credits = filtrer_entites(utf8_encode($credits));
 	/**
 	 * Les valeurs que l'on mettra en base à la fin
 	 */
@@ -87,6 +101,9 @@ function inc_getid3_recuperer_infos($id_document){
 			'canaux' => $id3['channels']
 		);
 	
+	if(isset($id3['date'])){
+		$valeurs['date'] = $id3['date'];
+	}
 	/**
 	 * Si on a du contenu dans les messages de copyright, 
 	 * on essaie de trouver la licence, si on a le plugin Licence
