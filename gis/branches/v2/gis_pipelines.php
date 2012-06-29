@@ -28,7 +28,7 @@ function gis_inserer_javascript($flux){
 	if ($config['api'] == 'microsoft')
 		$flux .="\n".'<script type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6"></script>'."\n";
 	if ($config['api'] == 'openlayers')
-		$flux .="\n".'<script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>'."\n";
+		$flux .="\n".'<script type="text/javascript" src="http://openlayers.org/api/2.11/OpenLayers.js"></script>'."\n";
 	if ($config['api'] == 'ovi')
 		$flux .="\n".'<script type="text/javascript" src="http://api.maps.ovi.com/jsl.js"></script>'."\n";
 	if ($config['api'] == 'yandex')
