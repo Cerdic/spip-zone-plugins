@@ -37,6 +37,7 @@
 	<necessite nom="facteur" compatibilite="[1.5.1;[" />
 	<necessite nom="YAML" compatibilite="[1.5;[" />
 	<necessite nom="saisies" compatibilite="[1.9.6;[" />
+	<necessite nom="grenier" compatibilite="[0.2.1;[" />
 
 	<menu nom="lettres_tous" titre="lettresprive:lettres_information" parent="bando_edition" icone="images/lettre-16.png" action="lettres_tous" />
 	<menu nom="abonnes_tous" titre="lettresprive:abonnes" parent="bando_reactions" icone="images/lettre-abonne-16.png" action="abonnes_tous" />
