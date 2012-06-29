@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_conversion_erreur' => 'En erreur',
 	'info_statut_conversion_non' => 'En attente',
 	'info_statut_conversion_oui' => 'Converti',
+	'info_tous_docs_facd' => 'Documents de la file d\'attente',
 	
 	'lien_convertir_document' => 'Convertir ce document',
 	'lien_recharger' => 'Recharger',
@@ -29,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_convert_aucun' => 'Aucun document converti',
 	'liste_convert_tous' => 'Documents convertis',
 	
+	'thead_date' => 'Date',
 	'thead_duree' => 'Durée',
 	'thead_duree_conversion' => 'Durée de conversion',
 	'thead_extension' => 'Format',
@@ -36,10 +38,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'thead_id_auteur' => 'Auteur',
 	'thead_id' => 'ID',
 	'thead_id_document' => 'Document original',
-	'thead_objet_attache' => 'Attaché à l\'objet',
+	'thead_nombre' => 'Nombre',
 	'thead_statut' => 'Statut',
 	'titre_page_file' => 'File d\'attente du module de conversion des medias',
 	'titre_page_file_menu' => 'File d\'attente de conversion',
+	'titre_page_file_convertis_jour' => 'Conversions par date',
 	
 	'version_encodee_de' => 'Ce document est une conversion du document @id_orig@'
 

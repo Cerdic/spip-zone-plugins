@@ -5,7 +5,7 @@
 [(#INCLURE{fond=prive/liste/facd_conversions,
 	titre=<:facd:liste_attente_tous:>,
 	sinon=<:facd:liste_attente_aucun:>,
-	statut=#ARRAY{en_cours,non},
+	statut=#ARRAY{en_cours,erreur,non},
 	nb=30,
 	env,
 	ajax})]
@@ -16,7 +16,14 @@
 	titre=<:facd:liste_convert_tous:>,
 	sinon=<:facd:liste_convert_aucun:>,
 	statut=oui,
+	duree=oui,
 	nb=30,
+	env,
+	ajax})]
+#BOITE_FERMER
+
+#BOITE_OUVRIR
+[(#INCLURE{fond=prive/liste/facd_date,
 	env,
 	ajax})]
 #BOITE_FERMER

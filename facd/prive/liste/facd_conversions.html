@@ -1,3 +1,17 @@
+[(#REM)
+
+	Affiche une liste des conversion de la table de FACD
+	
+	Peut prendre en paramètre :
+		- titre string : le titre du tableau (facd:info_tous_docs_facd par défaut);
+		- sinon string : le texte qui s'affiche si aucun élément n'est à afficher (vide par défaut);
+		- statut string ou array : les statuts à afficher (oui,en_cours,erreur,non);
+		- order string : le tri par défaut (id_facd_conversion par défaut);
+		- nb int : le nombre d'élément de la liste paginée (10 par défaut);
+		- duree string 'oui' : si équivaut à oui, ajoutera une colonne de la durée de la conversion;  
+
+]
+
 [(#SET{defaut_tri,#ARRAY{
 	maj,-1,
 	id_facd_conversion,-1,
@@ -8,8 +22,8 @@
 ]<B_conversions>
 #ANCRE_PAGINATION
 <div class="liste-elements conversions">
-<table class='spip liste'>
-[<caption><strong class="caption">(#ENV*{titre,<:info_tous_articles_presents:>}) [((#GRAND_TOTAL))]</strong></caption>]
+<table class='spip liste facd'>
+[<caption><strong class="caption">(#ENV*{titre,<:facd:info_tous_docs_facd:>}) [((#GRAND_TOTAL))]</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class='id'>[(#TRI{id_facd_conversion,<:facd:thead_id:>,ajax})]</th>
@@ -17,7 +31,7 @@
 			<th class='id_auteur'>[(#TRI{id_auteur,<:facd:thead_id_auteur:>,ajax})]</th>
 			<th class='fonction'><:facd:thead_fonction:></th>
 			<th class='extension'>[(#TRI{extension,<:facd:thead_extension:>,ajax})]</th>
-			<th class='duree_conversion'><abbr title="<:facd:thead_duree_conversion:>"><:facd:thead_duree:></abbr></th>
+			[(#ENV{duree}|=={oui}|oui)<th class='duree_conversion'><abbr title="<:facd:thead_duree_conversion:>"><:facd:thead_duree:></abbr></th>]
 			<th class='maj'>[(#TRI{maj,<:date:>,ajax})]</th>
 			[(#ENV{statut}|!={oui}|oui)
 			<th class='statut'>[(#TRI{statut,<:facd:thead_statut:>,ajax})]</th>
@@ -32,16 +46,16 @@
 			<td class='id_auteur'>#INFO_NOM{auteur,#ID_AUTEUR}</td>
 			<td class='fonction'>#FONCTION</td>
 			<td class='extension'>#EXTENSION</td>
-			<td class='duree_conversion'>
+			[(#ENV{duree}|=={oui}|oui)<td class='duree_conversion'>
 			[(#INFOS|table_valeur{debut_conversion}|is_numeric|et{#INFOS|table_valeur{fin_conversion}|is_numeric}|oui)
 				#SET{duree,#INFOS|table_valeur{fin_conversion}|moins{#INFOS|table_valeur{debut_conversion}}}
 				[(#VAL{H:i:s}|gmdate{#GET{duree}})]
-			]</td>
+			]</td>]
 			<td class='maj'>#MAJ</td>
 			[(#ENV{statut}|!={oui}|oui)
 			<td class='statut'>[(#STATUT|=={erreur}|oui)
 				#SET{erreur,oui}
-				[(#AUTORISER{relancerencodage,facd,#ID_FACD_CONVERSION}|oui)
+				[(#AUTORISER{relancerconversion,facd,#ID_FACD_CONVERSION}|oui)
 					[(#BOUTON_ACTION{[(#VAL{facd:info_statut_conversion_#STATUT}|_T)],[(#URL_ACTION_AUTEUR{facd_relancer_conversion,#ID_FACD_CONVERSION,[(#SELF|parametre_url{log,''}|parametre_url{relance,''})]})],ajax,'',<:facd:label_relancer_conversion|attribut_html:>})]]
 				[(#AUTORISER{relancerconversion,facd,#ID_FACD_CONVERSION}|non)[(#VAL{facd:info_statut_conversion_#STATUT}|_T)]]
 				[(#INFOS|table_valeur{log}|strlen|>{1}|oui)<a href="[(#SELF|parametre_url{log,#ID_FACD_CONVERSION})]" class="ajax"><:facd:info_voir_log_erreur:></a>]
@@ -59,6 +73,12 @@
 <div class="actions">
 	[(#BOUTON_ACTION{<:facd:info_relancer_erreurs:>,[(#URL_ACTION_AUTEUR{facd_relancer_conversion,'tout',[(#SELF|parametre_url{log,''}|parametre_url{relance,''})]})],ajax})]
 </div>]
+[(#REM)
+
+	Si le statut n'est pas oui et que l'on a des erreurs, on affiche un bouton de rechargement
+	clické toutes les 30 sec en js
+	
+]
 [(#ENV{statut}|=={oui}|non)
 <div class="actions">
 <a href="[(#SELF|parametre_url{relance,''}|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]})]" id="facd_recharge_file" class="ajax"><:facd:lien_recharger:></a>

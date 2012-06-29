@@ -16,7 +16,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Insertion dans le pipeline taches_generales_cron
  *
  * Vérifie la présence à intervalle régulier de fichiers à convertir
- * dans la file d'attente
+ * dans la file d'attente et lance le premier
+ * 
+ * On exécute la tache toutes les 2 minutes
  *
  * @param array $taches_generales Un array des tâches du cron de SPIP
  * @return L'array des taches complété
@@ -28,7 +30,8 @@ function facd_taches_generales_cron($taches_generales){
 
 /**
  * Insertion dans le pipeline jquery_plugins (SPIP)
- * On ajoute deux javascript dans le head
+ * On ajoute deux javascript dans le head si on est dans l'espace privé
+ * pour gérer les statistiques de conversion (page ?exec=facd)
  * 
  * @param array $plugins
  * 		L'array des js insérés
@@ -50,6 +53,8 @@ function facd_jquery_plugins($plugins){
  *
  * Intervient à chaque modification d'un objet de SPIP
  * notamment lors de l'ajout d'un document
+ * 
+ * On supprime les conversions en attente de l'objet supprimé
  *
  * @return $flux Le contexte de pipeline complété
  * @param array $flux Le contexte du pipeline

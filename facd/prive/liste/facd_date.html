@@ -1,0 +1,102 @@
+#SET{dates, #ARRAY}
+#SET{nombre_date,#ARRAY}
+<BOUCLE_facd_total(FACD_CONVERSIONS){par id_facd_conversion}{inverse}{statut = oui}>
+	[(#SET{date_new,[(#MAJ|affdate{Y-m-d})]})]
+	#SET{
+		nombre_date,
+		#GET{nombre_date}|array_merge{
+			#ARRAY{
+				#GET{date_new},
+				#GET{nombre_date}|table_valeur{#GET{date_new},0}|plus{1}
+			}
+		}
+	}
+	#SET{dates,#GET{dates}|push{#GET{date_new}}}
+</BOUCLE_facd_total>
+#SET{dates,#GET{dates}|array_unique}
+
+<B_facd_jours>
+#SET{total,#GRAND_TOTAL}
+#ANCRE_PAGINATION
+<div class="liste-elements conversions">
+<table class="spip list facd" id="graph_conversions_dates_table">
+	[<caption><strong class="caption">(#ENV*{titre,<:facd:titre_page_file_convertis_jour:>}) [((#GRAND_TOTAL))]</strong></caption>]
+	<thead>
+		<tr class="row_first">
+			<th class='date'><:facd:thead_date:></th>
+			<th class='nombre'><:facd:thead_nombre:></th>
+		</tr>
+	</thead>
+	<tbody class="ajax">
+	<BOUCLE_facd_jours(POUR){tableau #GET{dates}}{pagination #ENV{nb,10}}{par valeur}{inverse}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="date">
+				<abbr title="#VALEUR">
+					[(#VALEUR|affdate)]
+				</abbr>
+			</td>
+			[<td class="nombre">
+				<abbr title="[(#GET{nombre_date}|table_valeur{#VALEUR})]">(#GET{nombre_date}|table_valeur{#VALEUR})</abbr>
+			</td>]
+		</tr>
+	</BOUCLE_facd_jours>
+	</tbody>
+</table>
+[<div class="pagination">(#PAGINATION{page})</div>]
+<div id="graph_conversions_dates" class="facd_graphs"></div>
+<script type="text/javascript"><!--
+	jQuery(document).ready(function(){
+		var dates = [];
+		var dates_labels = [];
+		var dates_ticks = [];
+
+		i=0;
+		$('#graph_conversions_dates_table tr').not('.row_first').each(function(){
+			var temps = $(this).find('.nombre abbr').attr('title');
+			dates.push([i,temps]);
+			var label = facd_plot_trim($(this).find('.date').text());
+			dates_labels.push(label);
+			var tick = facd_plot_trim($(this).find('.date abbr').attr('title'));
+			dates_ticks.push([i,tick]);
+			i++;
+		});
+
+		var data = [{ data: dates }];
+		var options = {
+			bars : {show:true},
+			yaxis : {},
+			xaxis : {ticks:dates_ticks},
+			grid : { hoverable: true, clickable: true, autoHighlight : true,borderColor : '#ccc' }
+		};
+		if($("#graph_conversions_dates").height() == 0){
+			$("#graph_conversions_dates").height(300)
+		}
+		$.plot($("#graph_conversions_dates"), data, options);
+
+		var previousPoint = null;
+		$("#graph_conversions_dates").bind("plothover", function (event, pos, item) {
+			if (item) {
+				if (previousPoint != item.dataIndex) {
+					previousPoint = item.dataIndex;
+					$("#facd_tooltip").remove();
+					var x = item.datapoint[0].toFixed(2),
+						y = item.datapoint[1].toFixed(2);
+
+					var index = item.dataIndex;
+					content = dates_labels[index];
+					content += '<br />'+item.datapoint[1];
+					facd_plot_showtooltip(
+						item.pageX,
+						item.pageY,
+						content,'facd_tooltip');
+				}
+			}
+			else {
+				$("#facd_tooltip").remove();
+				previousPoint = null;
+			}
+		});
+	});
+//--></script>
+</div>
+</B_facd_jours>
