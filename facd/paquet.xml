@@ -17,6 +17,7 @@
 	<pipeline nom="declarer_tables_principales" inclure="base/facd.php" />
 	<pipeline nom="post_edition" inclure="facd_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="facd_pipelines.php" />
+	<pipeline nom="jquery_plugins" inclure="facd_pipelines.php" />
 	<pipeline nom="autoriser" inclure="facd_autoriser.php" />
 
 	<menu nom="facd" titre="facd:titre_page_file_menu" parent="menu_administration" />
