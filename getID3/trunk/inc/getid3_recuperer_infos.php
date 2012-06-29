@@ -68,14 +68,13 @@ function inc_getid3_recuperer_infos($id_document){
 		}
 	}
 
-	if($document['descriptif'] == '')
-
 	/**
 	 * Les covers potentielles
 	 * On ne tente de récupération de vignettes que lorsque l'on n'a pas de vignettes
 	 * associée au document
 	 * On ne met en vignette de document que la première que l'on trouve
 	 */
+	$covers = array();
 	foreach($id3 as $key=>$val){
 		if(preg_match('/cover/',$key)){
 			$covers[] = $val;
@@ -83,8 +82,10 @@ function inc_getid3_recuperer_infos($id_document){
 	}
 	
 	$credits = $id3['copyright_message']?$id3['copyright_message']:$id3['copyright'];
+	
 	if($credits != '')
 		$credits = filtrer_entites(utf8_encode($credits));
+	
 	/**
 	 * Les valeurs que l'on mettra en base à la fin
 	 */
