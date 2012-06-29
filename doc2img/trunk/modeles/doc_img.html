@@ -8,7 +8,8 @@
 	[(#ENV{no_pagination}|non)[<p class="pagination">(#PAGINATION{#ENV{type_pagination,page}})</p>]]
 	<BOUCLE_d2c(DOCUMENTS){mode=doc2img}{objet=document}{id_objet=#ENV{id_document,#ENV{id}}}{par id_document} {statut==.*}{pagination 1}>
 		<a href="#URL_DOCUMENT" class="mediabox">
-		[(#FICHIER|image_reduire{#ENV{largeur,640},#ENV{hauteur,0}}|inserer_attribut{alt,''})]
+		#SET{titre,#ENV{titre,#TITRE}|sinon{#FICHIER|basename}|couper{20}}
+		[(#FICHIER|image_reduire{#ENV{largeur,640},#ENV{hauteur,0}}|inserer_attribut{alt,#VAL{doc2img:info_alt_image}|_T{#ARRAY{titre,#GET{titre},page,#PAGE}}|attribut_html})]
 		</a>
 	</BOUCLE_d2c>
     [(#ENV{no_desc}|non)[<p>(#GRAND_TOTAL|singulier_ou_pluriel{doc2img:info_desc_page,doc2img:info_desc_pages})</p>]]
