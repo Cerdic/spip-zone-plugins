@@ -58,12 +58,12 @@
 
 		i=0;
 		$('#graph_stats_table tr.tr_liste').each(function(){
-			var format = spipmotion_plot_trim($(this).find('.format').text());
+			var format = facd_plot_trim($(this).find('.format').text());
 			formats_ticks.push([i,format]);
 			formats_labels.push(format);
-			var duree = spipmotion_plot_trim($(this).find('.stat_duree').text());
+			var duree = facd_plot_trim($(this).find('.stat_duree').text());
 			stats_duree.push([i,duree]);
-			var taille = spipmotion_plot_trim($(this).find('.stat_taille abbr').attr('title'));
+			var taille = facd_plot_trim($(this).find('.stat_taille abbr').attr('title'));
 			stats_taille.push([i,taille]);
 			i++;
 		});
@@ -82,21 +82,21 @@
 			if (item) {
 				if (previousPoint != item.dataIndex) {
 					previousPoint = item.dataIndex;
-					$("#spipmotion_tooltip").remove();
+					$("#facd_tooltip").remove();
 					var x = item.datapoint[0].toFixed(2),
 						y = item.datapoint[1].toFixed(2);
 
 					var index = item.dataIndex;
 					content = formats_labels[index];
 					content += '<br />'+item.datapoint[1];
-					spipmotion_plot_showtooltip(
+					facd_plot_showtooltip(
 						item.pageX,
 						item.pageY,
-						content,'spipmotion_tooltip');
+						content,'facd_tooltip');
 				}
 			}
 			else {
-				$("#spipmotion_tooltip").remove();
+				$("#facd_tooltip").remove();
 				previousPoint = null;
 			}
 		});
@@ -116,21 +116,21 @@
 			if (item) {
 				if (previousPoint_taille != item.dataIndex) {
 					previousPoint_taille = item.dataIndex;
-					$("#spipmotion_tooltip").remove();
+					$("#facd_tooltip").remove();
 					var x = item.datapoint[0].toFixed(2),
 						y = item.datapoint[1].toFixed(2);
 
 					var index = item.dataIndex;
 					content = formats_labels[index];
 					content += '<br />'+item.datapoint[1]+'Mb';
-					spipmotion_plot_showtooltip(
+					facd_plot_showtooltip(
 						item.pageX,
 						item.pageY,
-						content,'spipmotion_tooltip');
+						content,'facd_tooltip');
 				}
 			}
 			else {
-				$("#spipmotion_tooltip").remove();
+				$("#facd_tooltip").remove();
 				previousPoint_taille = null;
 			}
 		});
