@@ -12,7 +12,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activite_editoriale' => 'Redakčná činnosť',
 	'afficher_calendrier' => 'Zobraziť kalendár',
 	'agenda' => 'Kalendár udalostí',
-	'ajouter_mots_cles' => 'Pridať kľúčové slová',
 	'ajouter_repetition' => 'Pridať opakovania',
 	'ajouter_un_evenement' => 'pridať udalosť k tomuto článku',
 	'annee_precedente' => 'predchádzajúci rok',
@@ -63,9 +62,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'fermer' => 'zatvoriť',
 
-	// G
-	'groupes_mots' => 'Skupiny kľúčových slov',
-
 	// I
 	'icone_creer_evenement' => 'Vytvoriť novú udalosť',
 	'icone_modifier_evenement' => 'Upraviť udalosť',
@@ -91,7 +87,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_un_evenement' => '1 udalosť',
 	'info_un_inscrit' => 'Jedno prihlásenie',
 	'inscrits' => 'Registrácie',
-	'item_mots_cles_association_evenements' => 'k udalostiam',
 
 	// L
 	'label_inscription' => 'Registrácia online',
@@ -110,7 +105,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mois_suivant' => 'ďalší mesiac',
 
 	// N
-	'nb_mots_clefs' => '@nb@ kľúčových slov',
 	'nb_repetitions' => '@nb@ opakovaní',
 
 	// P
@@ -147,7 +141,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'toutes_rubriques' => 'Všetky',
 
 	// U
-	'un_mot_clef' => '1 kľúčové slovo',
 	'une_repetition' => '1 opakovanie',
 
 	// V

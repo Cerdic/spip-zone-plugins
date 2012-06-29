@@ -12,7 +12,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activite_editoriale' => 'Redaktionelle Aktivität',
 	'afficher_calendrier' => 'Kalender anzeigen',
 	'agenda' => 'Kalender',
-	'ajouter_mots_cles' => 'Schlagworte hinzufügen',
 	'ajouter_repetition' => 'Wiederholungen hinzufügen',
 	'ajouter_un_evenement' => 'diesem Artikel ein Event hinzufügen',
 	'annee_precedente' => 'Jahr davor', # MODIF
@@ -63,9 +62,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'fermer' => 'Schließen',
 
-	// G
-	'groupes_mots' => 'Schlagwortgruppe',
-
 	// I
 	'icone_creer_evenement' => 'Neue Veranstaltung anlegen',
 	'icone_modifier_evenement' => 'Event Bearbeiten',
@@ -91,7 +87,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_un_evenement' => 'ein Event',
 	'info_un_inscrit' => 'Un inscrit', # NEW
 	'inscrits' => 'Anmeldungen',
-	'item_mots_cles_association_evenements' => 'zu den Events',
 
 	// L
 	'label_inscription' => 'Online-Anmeldungen',
@@ -110,7 +105,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mois_suivant' => 'nächster Monat',
 
 	// N
-	'nb_mots_clefs' => '@nb@ Schlagworte',
 	'nb_repetitions' => '@nb@ Wiederholungen',
 
 	// P
@@ -147,7 +141,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'toutes_rubriques' => 'Alle',
 
 	// U
-	'un_mot_clef' => '1 Schlagwort',
 	'une_repetition' => '1 Wiederholung',
 
 	// V
