@@ -2,9 +2,10 @@
 
 #SET{chemin,prive/squelettes/navigation/}
 #SET{objets,(#VAL{objets}|objets_config)}
-
+[(#BOITE_OUVRIR{<:spip:titre_cadre_raccourcis:>,info})]
 <BOUCLE_objets(POUR){tableau #GET{objets}}>
 	[(#CHEMIN{[(#GET{chemin})][(#CLE)]_shortcuts.html}|oui)
-		[(#INCLURE{fond=[(#GET{chemin})][(#CLE)]_shortcuts_3}{env})]
+		[(#INCLURE{fond=[(#GET{chemin})][(#CLE)]_shortcuts}{env})]
 	]
 </BOUCLE_objets>	
+#BOITE_FERMER
