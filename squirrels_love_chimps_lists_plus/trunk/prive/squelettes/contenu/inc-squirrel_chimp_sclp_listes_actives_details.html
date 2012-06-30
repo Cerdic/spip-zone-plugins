@@ -56,8 +56,4 @@
 	</BOUCLE_listes_spip_privees>
 	</ul>
 </B_listes_spip_privees>
-	#SET{stats,}
-			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-				<td class="id">[(#VALEUR|table_valeur{id})]</td>
-				<td class="name">[(#VALEUR|table_valeur{name})]</td> 
-				<td class="member_count">[(#GET{stats}|table_valeur{member_count})]
+	#SET{stats,''}
