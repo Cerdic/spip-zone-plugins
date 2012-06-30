@@ -55,8 +55,6 @@ include_spip('inc/config');
 		$extra=charger_fonction($part.'_config_charger','formulaires');
 		$valeurs=$extra($valeurs);
 		}
-
-		
 	
 	return $valeurs;
 }
