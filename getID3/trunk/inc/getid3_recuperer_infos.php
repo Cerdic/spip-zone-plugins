@@ -102,9 +102,18 @@ function inc_getid3_recuperer_infos($id_document){
 			'canaux' => $id3['channels']
 		);
 	
-	if(isset($id3['date'])){
-		$valeurs['date'] = $id3['date'];
+	if((isset($id3['date']) OR isset($id3['original_release_time']) OR isset($id3['encoded_time']))){
+		if(preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/',$id3['date']))
+			$valeurs['date'] = $id3['date'];
+		else if(preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/',$id3['original_release_time']))
+			$valeurs['date'] = $id3['original_release_time'];
+		else if(preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/',$id3['encoded_time']))
+			$valeurs['date'] = $id3['encoded_time'];
+		
+		if(isset($valeurs['date']) && (strlen($valeurs['date'])=='10'))
+			$valeurs['date'] = $valeurs['date'].' 00:00:00';
 	}
+
 	/**
 	 * Si on a du contenu dans les messages de copyright, 
 	 * on essaie de trouver la licence, si on a le plugin Licence

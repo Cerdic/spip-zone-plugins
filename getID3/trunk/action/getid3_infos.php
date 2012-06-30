@@ -14,28 +14,23 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/actions');
 
 function action_getid3_infos_dist(){
-	global $redirect;
-
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	if (!preg_match(",^(-?)(\d+)\W(\w+)\W?(\d*)\W?(\d*)$,", $arg, $r)){
+	if (!intval($arg)){
 		spip_log("action_getid3_infos_dist incompris: " . $arg);
-		$redirect = urldecode(_request('redirect'));
-		return;
 	}
 	else{
-		action_getid3_infos_post($r);
+		action_getid3_infos_post($arg);
 	}
 }
 
-function action_getid3_infos_post($r){
-	list($arg, $sign, $id_objet, $objet, $id_document, $suite) = $r;
+function action_getid3_infos_post($id_document){
 
 	$recuperer_infos = charger_fonction('getid3_recuperer_infos','inc');
 	$infos = $recuperer_infos($id_document);
 
-	return $redirect;
+	return $infos;
 }
 
 ?>

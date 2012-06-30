@@ -148,7 +148,7 @@ function getid3_document_desc_actions($flux){
 		}
 	}if(($infos['distant'] == 'non') && in_array($infos['extension'],$son_recup_id3)){
 		$texte2 = _T('getid3:lien_recuperer_infos');
-		$action2 = generer_action_auteur('getid3_infos', "0/article/$id_document", $redirect);
+		$action2 = generer_action_auteur('getid3_infos', "$id_document", $redirect);
 		$flux['data'] .= "<span class='sep'> | </span><a href='$action2' class='ajax'>$texte2</a>";
 	}
 	return $flux;
