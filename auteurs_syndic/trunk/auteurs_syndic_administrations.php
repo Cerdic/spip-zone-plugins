@@ -52,7 +52,10 @@ function auteur_syndic_update_3(){
 		$liens_auteur = sql_select('*','spip_auteurs_syndic');
 		while($lien = sql_fetch($liens_auteur)){
 			sql_insertq('spip_auteurs_liens',array('id_auteur'=>$lien['id_auteur'],'objet'=>'site','id_objet'=>$lien['id_syndic']));
+			if (time() >= _TIME_OUT)
+				return;
 		}
 	}
+	sql_drop_table('spip_auteurs_syndic');
 }
 ?>
