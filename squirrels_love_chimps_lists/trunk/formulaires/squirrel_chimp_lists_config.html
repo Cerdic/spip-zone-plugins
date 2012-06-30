@@ -2,6 +2,7 @@
 <fieldset class="donnees_lists">
 	<legend><:scl:gestion_listes:></legend>
 	#SET{apikey,#CONFIG{squirrel_chimp/apiKey}}
+	
 	<ul>
 		<li class="squirrel_chimp_mailinglists[ (#ENV**{erreurs}|table_valeur{mailinglists}|oui)erreur]">
 			<label><:scl:choix_mailinglists:></label>

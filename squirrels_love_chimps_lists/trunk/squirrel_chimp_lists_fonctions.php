@@ -91,7 +91,7 @@ function champs_listes($apiKey,$listId,$multi=''){
 
 // filtre pour obtenir le champs MailChimp
 function champs_liste($apiKey='',$listId,$multi=''){
-	
+	include_spip('inc/config');	
 	// initialisation d'un objet mailchimp	
 	if(!$api){
 		$apikey=lire_config('squirrel_chimp/apiKey');
@@ -199,6 +199,8 @@ function donnees_sync($id_liste_spip='',$table='',$identifiant='',$where_add='')
 
 // Détermine les champs Spip à prendre en compte pour la concordance 
 function champs_pour_concordance($id_liste=''){
+	include_spip('inc/config');	
+	
 	$concordances=lire_config('squirrel_chimp/mapping');
 	
 	if($id_liste)$concordances=$concordances[$id_liste];
@@ -214,7 +216,7 @@ function champs_pour_concordance($id_liste=''){
  * lists(string apikey, array filters, int start, int limit)
  * http://apidocs.mailchimp.com/api/1.3/lists.func.php
  */
-function recuperer_listes($apiKey,$filters='',$start='',$limit='100'){
+function recuperer_listes($apiKey,$filters='',$start='0',$limit='100'){
 	
 	# API mailchimp
 	include_spip('inc/1.3/MCAPI.class');
