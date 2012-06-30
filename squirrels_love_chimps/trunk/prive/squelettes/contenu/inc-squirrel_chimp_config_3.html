@@ -9,7 +9,7 @@
 
 [(#REM) Menu d'onglets des objets déclarées et qui dispose d'un squelette type "formulaires/config_NOM_OBJET_DECLARE.html"]
 <B_objets>
-	<ul class="menu_mailchimp barre_onglet">
+	<ul class="menu_mailchimp barre_onglet clearfix">
 	<BOUCLE_objets(POUR){tableau #GET{objets}}>
 		[(#REM) Etablit le prefixe du fichier du languue pour l'affichage du titre de l'onglet]
 		#SET{fichier_langue,#CLE}
@@ -17,9 +17,16 @@
 			[(#SET{fichier_langue,#VALEUR|table_valeur{fichier_langue}})]
 			]
 			[(#CHEMIN{[(#GET{chemin})][(#CLE)]_config.html}|oui)
-			<li class="onglet [ (#ENV{part}|=={#CLE}|non)onglet_off]"><a  href="[(#SELF|parametre_url{part,#CLE})]">
-				[(#SPIP_VERSION|version_compare{2.1, <}|?{[(#GET{fichier_langue}|recuperer_chaine{config_#CLE})],[(#VAL{#GET{fichier_langue}:config_#CLE}|_T)]})]
-				</a></li>
+			<li>
+				[(#ENV{part}|=={#CLE}|?{
+					<strong class="on">[(#VAL{#GET{fichier_langue}:config_#CLE}|_T)] </strong>
+					,
+					<a  href="[(#SELF|parametre_url{part,#CLE})]">
+					[(#VAL{#GET{fichier_langue}:config_#CLE}|_T)]
+					</a>				
+				})]
+
+			</li>
 			]
 	</BOUCLE_objets>
 	</ul>
