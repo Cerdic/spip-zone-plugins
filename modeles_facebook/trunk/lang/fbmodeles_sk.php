@@ -9,16 +9,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cf_navigation' => 'Pozri [stĺpec s navigáciou->@url@]',
-	'cfg_comment_appid' => 'Identifiant d\'une application propre à vote site ; cela nécessite d\'avoir créé l\'application.', # NEW
+	'cfg_comment_appid' => 'Identifikátor na hlasovaciu stránku aplikácie; aplikácia sa musí vytvoriť.',
 	'cfg_comment_border_color' => 'Zadajte kód farby v šestnástkovej sústave AJ S úvodnou mriežkou.',
-	'cfg_comment_colorscheme' => 'Sélectionnez ici le profil prédéterminé par les modules qui sera utilisé pour l\'affichage.', # NEW
+	'cfg_comment_colorscheme' => 'Tu vyberte predvolený profil podľa modulov, ktoré sa použijú na zobrazenie.',
 	'cfg_comment_font' => 'Tu si môžete vybrať písmo, ktoré sa použije na zobrazenie modulov.',
 	'cfg_comment_identifiants' => '{{Utilisez les champs ci-dessous pour préciser les différents identifiants que vous souhaitez utiliser.}} Ils ne sont pas obligatoires, mais peuvent permettre notamment de suivre des statistiques précises proposées par Facebook.', # NEW
-	'cfg_comment_pageid' => 'Identifiant d\'une page ; cela nécessite d\'avoir créé la page.', # NEW
+	'cfg_comment_pageid' => 'Identifikátor stránky; stránku treba vytvoriť.',
 	'cfg_comment_reglages' => '{{Vous pouvez ici choisir certains réglages concernant les outils javascript de Facebook.}} Par défaut, les modèles utilisent le langage XFBML ({SDK javascript Facebook}) mais vous pouvez désactiver cette fonctionnalité, les outils seront alors chargés en frames.', # NEW
-	'cfg_comment_url_page' => 'Adresse URL complète de votre page ou profil Facebook ; elle sera utilisée par défaut par les modèles (URL du type "<code>http://www.facebook.com/...</code>").', # NEW
-	'cfg_comment_userid' => 'Identifiant(s) utilisateur(s) des administrateurs des plugins. Vous pouvez en indiquer plusieurs en les séparant par une virgule.', # NEW
-	'cfg_comment_xfbml' => 'Utilisation de la bibliothèque javascript du SDK Facebook et du langage associé. Si vous choisissez "non", les modules seront présentés en iframe.', # NEW
+	'cfg_comment_url_page' => 'Celá internetová adresa vašej stránky alebo vášho profilu na Facebooku; budú ju využívať šablóny v predvolených nastaveniach (URL typu "<code>http://www.facebook.com/...</code>").',
+	'cfg_comment_userid' => 'Prihlacovací (-ie) údaj(e) administrátorov zásuvných modulov. Môžete ich zadať viac, a oddeliť ich čiarkami.',
+	'cfg_comment_xfbml' => 'Využitie javaskriptovej knižnice SDK Facebook a priradeného jazyka. Ak si zvolíte možnosť "nie", moduly budú zobrazené v režime "in-iframe" (v ráme).',
 	'cfg_descr' => 'Vous devez ici définir les différents identifiants fournis par le système Facebook.<br /><br />Plus d\'infos : [->http://www.facebook.com/insights/].
 
 Pour inclure les balises "Open Graph" en en-tête de vos pages publiques, vous devez insérer le modèle "insert_head_og" en lui passant l\'environnement : {{#MODELE{insert_head_og}{env}}}.
@@ -78,7 +78,7 @@ Les différents blocs ci-dessous vous présentent un exemple de chaque modèle a
 	'javascript_inactif' => 'Javascript je vo vašom prehliadači vypnutý. Niektoré funkcie nebudú fungovať.',
 
 	// L
-	'licence' => 'Plugin pour SPIP 2.0+ : {{"Facebook Models" - copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] sous licence [GPL->http://www.opensource.org/licenses/gpl-3.0.html] }}.', # NEW
+	'licence' => 'Zásuvný modul pre SPIP >2.0: {{"Šablóny pre Facebook" – copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] s licenciou [GPL->http://www.opensource.org/licenses/gpl-3.0.html].}}',
 
 	// N
 	'new_window' => 'Nové okno',
