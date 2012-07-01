@@ -8,13 +8,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_appliquer_cover_defaut' => 'Appliquer la pochette par défaut à tous les documents sonores sans vignette', # NEW
+	'bouton_appliquer_cover_defaut' => 'Predvolený obal použiť na všetky súbory so zvukmi bez miniatúry',
 
 	// E
 	'erreur_formats_ecriture_impossible' => 'Zápis značiek do týchto formátov sa nedá vykonať:',
 	'erreur_logiciels_indisponibles' => 'Momentálne nemôžete zapisovať značky do všetkých dostupných formátov.  Niektoré programy nie sú totiž k dispozícii.',
 	'erreur_necessite' => 'vyžaduje si @soft@',
-	'explication_cover_defaut' => 'À la mise en ligne de fichiers sonores, une vignette par défaut (URL à mettre ci-dessous) est associée au fichier son. Si l\'option de réécriture des tags à la modification du logoest activée, la pochette des tags id3 sera également mise à jour.', # NEW
+	'explication_cover_defaut' => 'V súboroch so zvukmi na internete je predvolená miniatúra (URL nastavte nižšie) priradená k súboru so zvukom. Ak je aktivovaná možnosť prepisovania značiek úpravy log, obal so značkami id3 bude aktualizovaný tiež.',
 
 	// F
 	'formulaire_modifier_id3' => 'Upraviť metadata súboru:',
@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_album' => 'Album:',
 	'info_artist' => 'Umelec:',
-	'info_audiosamplerate' => 'Sample rate :', # NEW
+	'info_audiosamplerate' => 'Rýchlosť ukážky:',
 	'info_bitrate' => 'Bitová rýchlosť:',
 	'info_bitrate_mode' => 'Režim:',
 	'info_bits' => 'Rozlíšenie (v bitoch):',
@@ -31,16 +31,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_codec' => 'Kodek:',
 	'info_comment' => 'Komentár:',
 	'info_comments' => 'Komentáre:',
-	'info_commercial_information' => 'Informations commerciales :', # NEW
+	'info_commercial_information' => 'Obchodné informácie:',
 	'info_copyright' => 'Autorské práva:',
-	'info_copyright_message' => 'Message de copyright :', # NEW
+	'info_copyright_message' => 'Informácia o autorských právach:',
 	'info_duree' => 'Dĺžka:',
 	'info_duree_secondes' => 'Dĺžka (v sekundách):',
-	'info_encoded_by' => 'Encodé par :', # NEW
-	'info_encodeur' => 'Encodé par :', # NEW
-	'info_encoding_time' => 'Date d\'encodage :', # NEW
+	'info_encoded_by' => 'Zakódoval:',
+	'info_encodeur' => 'Zakódoval:',
+	'info_encoding_time' => 'Dátum zakódovania:',
 	'info_erreurs' => 'Chyby',
-	'info_extension' => 'Extension :', # NEW
+	'info_extension' => 'Prípona:',
 	'info_format' => 'Formát:',
 	'info_gauche_numero_document' => 'Súbor číslo',
 	'info_genre' => 'Žáner:',
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nom_fichier' => 'Názov súboru:',
 	'info_original_filename' => 'Pôvodný názov',
 	'info_original_release_time' => 'Dátum vytvorenia originálu:',
-	'info_sample_rate' => 'Sample rate :', # NEW
+	'info_sample_rate' => 'Rýchlosť ukážky:',
 	'info_source' => 'Zdroj:',
 	'info_title' => 'Názov:',
 	'info_totaltracks' => 'Celkový počet stôp:',
@@ -65,8 +65,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_utilisation_plusieurs' => '@nb@ použití',
 	'info_utilisation_unique' => 'Jedno použitie',
 	'info_year' => 'Rok',
-	'install_ajout_champs_documents' => 'GetID3 : Ajout des champs sur spip_documents', # NEW
-	'install_mise_a_jour_base' => 'Mise à jour de la base de getid3 en @version@', # NEW
+	'install_ajout_champs_documents' => 'GetID3: Pridávanie polí spip_documents',
+	'install_mise_a_jour_base' => 'Aktualizovať databázu getid3 na verziu @version@',
 
 	// L
 	'label_album' => 'Album',
@@ -75,10 +75,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_cover' => 'Obal',
 	'label_cover_defaut' => 'Použiť predvolený obal',
 	'label_genre' => 'Žáner',
-	'label_reecriture_tags' => 'Réécrire les tags des fichiers à la modification', # NEW
-	'label_reecriture_tags_descriptif' => 'de la description du document', # NEW
-	'label_reecriture_tags_logo' => 'du logo du document', # NEW
-	'label_reecriture_tags_titre' => 'du titre du document', # NEW
+	'label_reecriture_tags' => 'Prepísať značky súborov pri zmene',
+	'label_reecriture_tags_descriptif' => 'z popisu súboru',
+	'label_reecriture_tags_logo' => 'z loga súboru',
+	'label_reecriture_tags_titre' => 'z názvu súboru',
 	'label_title' => 'Názov',
 	'label_verifier_logiciels' => 'Znova skontrolovať softvér',
 	'label_year' => 'Rok',
@@ -89,21 +89,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_cover_defaut_modifiee' => 'Súbor bol upravený',
 	'message_cover_defaut_modifiees' => 'bolo upravených @nb@ súborov',
-	'message_erreur_document_distant_ecriture' => 'Ce document est «distant» et ne peut donc pas être modifié.', # NEW
-	'message_extension_invalide_ecriture' => 'Le format de ce fichier n\'est pas pris en charge.', # NEW
+	'message_erreur_document_distant_ecriture' => 'Tento dokument je "vzdialený", a preto sa nedá upravovať.',
+	'message_extension_invalide_ecriture' => 'Formát tohto súboru nie je podporovaný.',
 	'message_fichier_maj' => 'Súbor bol aktualizovaný.',
-	'message_infos_document_distant' => 'Ce document est distant. Aucune information ne peut en être récupérée.', # NEW
-	'message_texte_binaire_manquant' => 'Un logiciel nécessaire n\'est pas disponible sur votre serveur :', # NEW
+	'message_infos_document_distant' => 'Tento dokument je vzdialený. Nedajú sa o ňom získať žiadne informácie.',
+	'message_texte_binaire_manquant' => 'Na vašom serveri nie je dostupný jeden potrebný program:',
 	'message_texte_binaires_informer' => 'Prosím, kontaktujte svojho administrátora.',
-	'message_texte_binaires_manquant' => 'Plusieurs logiciels nécessaires ne sont pas disponibles sur votre serveur :', # NEW
+	'message_texte_binaires_manquant' => 'Na vašom serveri nie je dostupných niekoľko potrebných programov:',
 	'message_titre_binaire_manquant' => 'Chýba softvér',
 	'message_titre_binaires_manquant' => 'Ďalší softvér, ktorý chýba',
-	'message_validation_appliquer_cover' => 'Cette action est définitive. Il n\'est pas possible de revenir en arrière par la suite.', # NEW
-	'message_valider_cover_defaut' => 'Validez le formulaire pour associer la pochette par défaut', # NEW
+	'message_validation_appliquer_cover' => 'Táto akcia je definitívna. Nedá sa neskôr odvolať.',
+	'message_valider_cover_defaut' => 'Ak chcete nastaviť predvolený obal, potvrďte formulár',
 
 	// S
-	'son_bitrate_cbr' => 'Bitrate constant', # NEW
-	'son_bitrate_vbr' => 'Bitrate variable', # NEW
+	'son_bitrate_cbr' => 'Konštanta bitovej rýchlosti',
+	'son_bitrate_vbr' => 'Premenná bitovej rýchlosti',
 
 	// T
 	'titre_getid3' => 'GetID3',
