@@ -62,6 +62,7 @@ function gestionml_api_traiter_ovh($toutes,$ovhaction='', $nameML='', $email='')
 	if( $nameML == '' ) $nameML = _request('nameML') ;
 	if( $email == '' ) $email = _request('email') ;
 
+	include_spip('inc/config');
 	$config = lire_config('gestionml',array());
 
 	try {
