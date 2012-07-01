@@ -24,25 +24,18 @@ function action_doc2img_convert_dist(){
 	$arg = $securiser_action();
 	$arg = explode('-',$arg);
 	list($id_document, $action) = $arg;
-    //on lance la conversion du document
-    if ($id_document = intval($id_document)) {
-    	$convertir = charger_fonction('doc2img_convertir','inc');
-		spip_log('conversion du doc '.$id_document,'doc2img');
-		if(defined('_DIR_PLUGIN_FACD')){
-			include_spip('action/facd_ajouter_conversion');
-			facd_ajouter_conversion_file($id_document,'doc2img_convertir',null,$action,'doc2img');
-			$conversion_directe = charger_fonction('facd_convertir_direct','inc');
-			$conversion_directe();
-		}else{
-    		$convertir($id_document,$action);
-    	}
+
+    if ($id_document = intval($id_document)){
+		include_spip('action/facd_ajouter_conversion');
+		facd_ajouter_conversion_file($id_document,'doc2img_convertir',null,$action,'doc2img');
+		$conversion_directe = charger_fonction('facd_convertir_direct','inc');
+		$conversion_directe();
     	include_spip('inc/invalideur');
     	suivre_invalideur("id='id_document/$id_document'");
     }
 
     if(_request('redirect')){
-		$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
+		$GLOBALS['redirect'] = str_replace('&amp;','&',urldecode(_request('redirect')));
 	}
-	return $redirect;
 }
 ?>

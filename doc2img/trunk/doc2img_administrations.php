@@ -85,16 +85,15 @@ function doc2img_upgrade($nom_meta_base_version,$version_cible){
 			maj_tables('spip_documents');
 			doc2img_update_to_docs();
 			ecrire_meta($nom_meta_base_version,$current_version='0.94','non');
-			//sql_query("DROP TABLE spip_doc2img");
 		}
 	}
 }
 
 function doc2img_update_to_docs(){
 	include_spip('inc/documents');
+	include_spip('action/editer_document');
 	$doc2imgs = sql_select('*','spip_doc2img');
 	$ajouter_documents = charger_fonction('ajouter_documents', 'action');
-	include_spip('action/editer_document');
 	while($doc2img = sql_fetch($doc2imgs)){
 		/**
 		 * On déplace le document dans la table des documents
@@ -113,11 +112,13 @@ function doc2img_update_to_docs(){
 			sql_delete('spip_doc2img','id_document='.intval($id_document).' AND fichier='.sql_quote($doc2img['fichier']));
 			spip_unlink(get_spip_doc($doc2img['fichier']));
 		}
+		if (time() >= _TIME_OUT)
+			return;
 	}
+	sql_drop_table('spip_doc2img');
 }
 // Supprimer les éléments du plugin
 function doc2img_vider_tables($nom_meta_base_version) {
-	include_spip('base/abstract_sql');
 	sql_drop_table('spip_doc2img');
 	effacer_meta('doc2img');
 	effacer_meta($nom_meta_base_version);
