@@ -1,0 +1,11 @@
+
+#SET{requete,#ARRAY{}|gestionml_api_listes_toutes}
+
+<BOUCLE_contenu(POUR){tableau #GET{requete}}>
+[(#CLE|=={listes}|oui)
+   <INCLURE{fond=prive/inc-tablistes}{tab=#VALEUR}>
+]
+[(#CLE|=={listes}|non)
+	#CLE #VALEUR
+]
+</BOUCLE_contenu>
