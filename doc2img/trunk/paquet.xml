@@ -25,5 +25,5 @@
 	<pipeline nom="medias_documents_visibles" inclure="doc2img_pipelines.php" />
 
 	<necessite nom="medias" compatibilite="[1.6.12;[" />
-	<necessite nom="facd" compatibilite="[0.1.1;[" />
+	<necessite nom="facd" compatibilite="[0.0.1;[" />
 </paquet>

@@ -18,10 +18,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		- full converti tout le document
  * 		- vignette converti la première page en vignette du document
  */
-function inc_doc2img_convertir($id_document,$type='full') {
-	if(!in_array($type,array('full','vignette')))
-		$type = 'full';
-
+function inc_doc2img_convertir($id_document,$opt='full') {
+	if(!in_array($opt,array('full','vignette'))){
+		if(isset($opt['options']) && in_array($opt['options'],array('full','vignette'))){
+			$type = $opt['options'];
+		}else{
+			$type = 'full';
+		}
+	}else{
+		$type = $opt;
+	}
 	$ret = array();
 	if(class_exists('Imagick')){
 	    include_spip('inc/documents');
@@ -47,12 +53,6 @@ function inc_doc2img_convertir($id_document,$type='full') {
 	     * On libère la ressource automatiquement si on utilise la class
 	     * car on réouvre chaque page par la suite
 	     */
-		$image = new Imagick($document['fichier']);
-		$identify = $image->identifyImage();
-		$identify2 = $image->getImageProperties();
-		$nb_pages = $image->getNumberImages();
-		$image->clear();
-		$image->destroy();
 
 	    $frame = 0;
 
@@ -61,6 +61,12 @@ function inc_doc2img_convertir($id_document,$type='full') {
 		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 		
 		if($type == 'full'){
+			$image = new Imagick($document['fichier']);
+			$identify = $image->identifyImage();
+			$identify2 = $image->getImageProperties();
+			$nb_pages = $image->getNumberImages();
+			$image->clear();
+			$image->destroy();
 			include_spip('action/editer_document');
 			/**
 			 * Est ce que ce document a déja été converti
@@ -83,7 +89,6 @@ function inc_doc2img_convertir($id_document,$type='full') {
 		    // chaque page est un fichier qu'on sauve dans la table doc2img indexé
 		    // par son numéro de page
 		    do {
-		    	spip_log("Conversion de la page $frame",'doc2img');
 		        //on accede à la page $frame
 	        	$image_frame = new Imagick();
 	        	if(is_numeric($resolution) && ($resolution <= '600') && ($resolution > $identify['resolution']['x'])){
@@ -114,11 +119,11 @@ function inc_doc2img_convertir($id_document,$type='full') {
 				$x = $ajouter_documents('new', $files,'document', $id_document, 'doc2img');
 
 		        if(($frame == 0) && ($config['logo_auto']=='on') && in_array($format_cible,array('png','jpg'))){
-		        	$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
+		        	$id_vignette = $document['id_vignette'];
 					$frame_tmp = $document['cible_url'].$document['name'].'-logo.'.$format_cible;
 					$image_frame->writeImage($frame_tmp);
 					$files = array(array('tmp_name'=>$frame_tmp,'name'=>$frame_name));
-	        		if(is_numeric($id_vignette) && $id_vignette > 0){
+	        		if(is_numeric($id_vignette) && ($id_vignette > 0)){
 	        			$vignette = $ajouter_documents($id_vignette, $files,'', 0, 'vignette');	
 	        		}else{
 						$vignette = $ajouter_documents('new', $files,'', 0, 'vignette');
@@ -127,7 +132,9 @@ function inc_doc2img_convertir($id_document,$type='full') {
 					  AND $id_vignette = reset($vignette)){
 						document_set($id_document,array("id_vignette" => intval($id_vignette)));
 					}
+					spip_unlink($document['cible_url'].$frame_tmp);
 		        }
+		        spip_unlink($document['cible_url'].$frame_name);
 		        //on libère la frame
 	            $image_frame->clear();
 	            $image_frame->destroy();
@@ -137,7 +144,6 @@ function inc_doc2img_convertir($id_document,$type='full') {
 	    }else{
 	    	do {
 	    		if(in_array($format_cible,array('png','jpg'))){
-			        //on accede à la page $frame
 		        	$image_frame = new Imagick();
 		        	if(is_numeric($resolution) && ($resolution <= '600') && ($resolution > $identify['resolution']['x'])){
 			        	$image_frame->setResolution($resolution,$resolution);
@@ -153,10 +159,12 @@ function inc_doc2img_convertir($id_document,$type='full') {
 		
 			        //on sauvegarde la page
 		            $image_frame->writeImage($document['cible_url'].$frame_name);
-					$files = array(array('tmp_name'=>$document['cible_url'].$frame_name,'name'=>$frame_name));
+					$image_frame->clear();
+		            $image_frame->destroy();
 					
-					$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
-		        	if(is_numeric($id_vignette)){
+					$files = array(array('tmp_name'=>$document['cible_url'].$frame_name,'name'=>$frame_name));
+					$id_vignette = $document['id_vignette'];
+		        	if(is_numeric($id_vignette) && ($id_vignette > 0)){
 	        			$x = $ajouter_documents($id_vignette, $files,'', 0, 'vignette');	
 	        		}else{
 						$x = $ajouter_documents('new', $files,'', 0, 'vignette');
@@ -166,8 +174,7 @@ function inc_doc2img_convertir($id_document,$type='full') {
 						include_spip('action/editer_document');
 						document_set($id_document,array("id_vignette" => intval($id_vignette)));
 					}
-		            $image_frame->clear();
-		            $image_frame->destroy();
+					spip_unlink($document['cible_url'].$frame_name);
 	            }else{
 					spip_log("DOC2IMG : le format de sortie sélectionné dans la configuration ne permet pas de créer une vignette",'doc2img');
 	            }
@@ -252,19 +259,15 @@ function doc2img_document($id_document) {
     );
 
     //chemin relatif du fichier
-    $fichier = get_spip_doc($fichier['fichier']);
-
-    //nom complet du fichier : recherche ce qui suit le dernier / et retire ce dernier
-    // $resultat[0] = $resultat[1]/$resultat[2].$resultat[3]
-    preg_match('/(.*)\/(.*)\.(.\w*)/i', $fichier, $result);
+    $fichier_reel = get_spip_doc($fichier['fichier']);
 
     //url relative du repertoire contenant le fichier , on retire aussi le / en fin
-    $document['fichier'] = $fichier;
+    $document['fichier'] = $fichier_reel;
 
     //information sur le nom du fichier
     $document['extension'] = $fichier['extension'];
-    $document['name'] = $result[2];
-    $document['fullname'] = basename($fichier);
+    $document['name'] = basename($fichier_reel);
+	$document['id_vignette'] = $fichier['id_vignette'];
 
     //creation du repertoire cible
     //url relative du repertoire cible

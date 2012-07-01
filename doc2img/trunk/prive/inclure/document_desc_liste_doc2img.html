@@ -2,6 +2,30 @@
 
 
 ]
+<B_facd_attentes>
+	#BOITE_OUVRIR{'',notice}
+	<BOUCLE_facd_attentes(FACD_CONVERSIONS){id_document=#ID_DOCUMENT}{statut IN "en_cours","non","erreur"}{0,1}>
+	<p id="em_attentes_#ENV{id_document}">
+		[(#STATUT|=={non}|oui)<:facd:info_document_dans_file_attente:>]
+		[(#STATUT|=={non}|non)<:facd:info_document_conversion:>]
+	</p>
+	</BOUCLE_facd_attentes>
+	#BOITE_PIED
+	<a href="[(#SELF|parametre_url{relance,''}|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]})]" id="facd_recharge_#ID_DOCUMENT" class="bouton ajax"><:facd:lien_recharger:></a>
+	#BOITE_FERMER
+	<script type="text/javascript">
+	if(jQuery('#em_attentes_#ENV{id_document}').size() > 0){
+		var refresh_#ID_DOCUMENT = function(){
+			jQuery('#facd_recharge_#ID_DOCUMENT').click();
+		}
+		if(typeof(t_#ENV{id_document}) != 'undefined')
+			clearTimeout(t_#ENV{id_document});
+		t_#ID_DOCUMENT = setTimeout(refresh_#ENV{id_document},30000);
+	}else if(typeof(t_#ENV{id_document}) != 'undefined'){
+		clearTimeout(t_#ENV{id_document});
+	}
+	</script>
+</B_facd_attentes>
 <B_d2c>
 <div class="doc2img_liste">
 	#ANCRE_PAGINATION
