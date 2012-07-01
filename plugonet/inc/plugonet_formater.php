@@ -2,7 +2,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-function inc_plugonet_formater($traitement, $erreurs, $duree) {
+function inc_plugonet_formater($traitement, $erreurs, $duree, $affichage_complet='true') {
 	// Nombre de fichiers traites
 	$nb_fichiers = count($erreurs);	
 
@@ -40,8 +40,9 @@ function inc_plugonet_formater($traitement, $erreurs, $duree) {
 				
 				// On formate le texte d'erreur ou de notice
 				$texte[$bloc] .= formater_un_plugin(
-										$message, 
-										$_pluginxml, 
+										$message,
+										$_pluginxml,
+										$affichage_complet,
 										($_valeur !== true ? $_valeur : null));
 					
 				// On a bien trouve une erreur pour ce fichier xml
@@ -54,7 +55,7 @@ function inc_plugonet_formater($traitement, $erreurs, $duree) {
 		}
 		// Si on a pas trouve d'erreur on affiche un message de succes pour le plugin
 		if (!$erreur_trouvee)
-				$texte['succes'] .= formater_un_plugin('', $_pluginxml);
+				$texte['succes'] .= formater_un_plugin('', $_pluginxml, $affichage_complet);
 	}
 
 	// Construction du message de synthese
@@ -92,19 +93,24 @@ function inc_plugonet_formater($traitement, $erreurs, $duree) {
 	return array($resume, $analyse);
 }
 
-function formater_un_plugin($item, $pluginxml, $erreurs=array()) {
+function formater_un_plugin($item, $pluginxml, $affichage_complet=true, $erreurs=array()) {
 	include_spip('inc/layer');
 
 	$contenu = '';
 	$titre = _T($item, array('nb' => $pluginxml . ' :'));
-	if (!$erreurs)
+	if (!$affichage_complet)
+		$texte_titre = '';
+	else
+		$texte_titre = $item ? $titre : $pluginxml;
+	if (!$erreurs) {
 		// Generation ok, erreur de lecture, erreur d'information
 		// -- On donne juste le message simple d'erreur ou de succes dans un bloc non depliable
-		$contenu = '<div style="margin-bottom: 1em;"><strong>' . 
-					($item ? $titre : $pluginxml) . 
+		$contenu = '<div style="margin-bottom: 1em;"><strong>' .
+					$texte_titre .
 					'</strong></div>';
+	}
 	else {
-		$contenu .= bouton_block_depliable($item ? $titre : $pluginxml, false) .
+		$contenu .= bouton_block_depliable($texte_titre, false) .
 		            debut_block_depliable(false);
 		foreach ($erreurs as $_erreur) {
              $contenu .= "<p style=\"padding-left:2em;\">\n\tL$_erreur[1] : $_erreur[0]\n</p>";
