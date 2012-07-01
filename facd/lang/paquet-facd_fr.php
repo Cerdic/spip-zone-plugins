@@ -1,19 +1,13 @@
 <?php
-
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-
-///  Fichier produit par PlugOnet
-// Module: paquet-facd
-// Langue: fr
-// Date: 27-06-2012 12:36:23
-// Items: 2
-
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/facd/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// F
+	// F
 	'facd_description' => 'Gestion de file d\'attente pour la conversion de documents.',
-	'facd_slogan' => 'Gestion de file d\'attente pour la conversion de documents',
+	'facd_slogan' => 'Gestion de file d\'attente pour la conversion de documents'
 );
+
 ?>
