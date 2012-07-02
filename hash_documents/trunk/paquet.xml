@@ -1,8 +1,8 @@
 <paquet
 	prefix="hasher"
 	categorie="performance"
-	version="1.3.0"
-	etat="stable"
+	version="2.0.0"
+	etat="test"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="prive/themes/spip/images/hasher-32.png"
 	documentation="http://www.spip-contrib.net/Le-plugin-hash_documents"
