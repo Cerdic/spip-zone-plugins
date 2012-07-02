@@ -15,6 +15,23 @@ function seo_affichage_final($flux) {
 
     if (!defined('_SEO_FORCER_SQUELETTE'))
         return $flux;
+
+    $meta_tags = calculer_meta_tags();
+    $head = array();
+
+    preg_match('/<head>(.*)<\/head>/mis',$flux,$head);
+    $head = $head[1];
+
+    foreach($meta_tags as $key => $value) {
+        $meta = generer_meta_tags(array($key => $value));
+        $head_meta = preg_replace("/(<\s*$key.*?>.*?<\/\s*$key.*?>)/mi",$meta,$head);
+        $head_meta = preg_replace("/(<\s*meta\s*name=\"$key\"\s*content=\".*?\".*?>)/mi",$meta,$head_meta);
+        if ($head == $head_meta)
+            $head_meta .= "\n".$meta;
+        $head = $head_meta;
+    }
+    
+    $flux = preg_replace('/<head>(.*)<\/head>/mis',$head,$flux);
     
     return $flux;
 }
