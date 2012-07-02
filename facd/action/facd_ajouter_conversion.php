@@ -58,7 +58,7 @@ function facd_ajouter_conversion_file($id_document,$fonction='',$format='',$opti
 											'statut'=>'non'
 									)
 								);
-			spip_log("on ajoute un document dans la file d'attente : $id_doc_attente","facd");
+			spip_log("On ajoute le document $id_document dans la file d'attente : $id_facd_conversion","facd");
 			$invalider = true;
 		}
 		else{
