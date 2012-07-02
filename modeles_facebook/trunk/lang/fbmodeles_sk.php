@@ -38,7 +38,7 @@ Pour inclure les balises "Open Graph" en en-tête de vos pages publiques, vous d
 
 	// D
 	'defaut' => 'Predvolené',
-	'doc_chapo' => 'Le plugin Modèles Facebook pour SPIP 2.0 ({et plus}) propose un ensemble de modèles, ou noisettes, permettant d\'utiliser simplement et rapidement les plugins sociaux proposés par Facebook.', # NEW
+	'doc_chapo' => 'Zásuvný modul Šablóny pre Facebook pre SPIP 2.0 ({a vyšší}) ponúka rad šablón alebo orieškov umožňujúcich jednoducho a rýchlo využívať zásuvné moduly sociálnej siete, ktoré poskytuje Facebook.',
 	'doc_en_ligne' => 'Dokumentácia',
 	'doc_titre_court' => 'Dokumentácia Šablón Facebooku',
 	'doc_titre_page' => 'Stránka s dokumentáciou zásuvného modulu Šablóny Facebooku',
