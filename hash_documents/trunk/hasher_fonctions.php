@@ -37,13 +37,13 @@ function hasher_adresser_document($doc, $rev=false) {
  */
 function hasher_deplacer_document($id_document, $corriger=false, $rev=false) {
 
-// 1. recuperer les donnees du document
+	// 1. recuperer les donnees du document
 	// et verifier qu'on peut le hasher
 	if (!$id_document = intval($id_document))
 		return false;
 	if (!$s = spip_query('SELECT fichier FROM spip_documents WHERE id_document='.$id_document)
 	OR !$t = spip_fetch_array($s)) {
-		spip_log("Erreur hasher_deplacer_document select doc=$id_document ".var_export($s, true), 'hash');
+		spip_log("Erreur hasher_deplacer_document select doc=$id_document ".var_export($s, true), 'hash'. _LOG_ERREUR);
 		return false;
 	}
 	$src = $t['fichier'];
@@ -56,13 +56,13 @@ function hasher_deplacer_document($id_document, $corriger=false, $rev=false) {
 
 	// On fabrique le nom  du fichier dest
 	if (!$dest = hasher_adresser_document($src, $rev)) {
-		spip_log("Erreur hasher_adresser_document($src) rev : $rev", 'hash');
+		spip_log("Erreur hasher_adresser_document($src) rev : $rev", 'hash'. _LOG_ERREUR);
 		return false;
 	}
 
 	// si le src n'existe pas, ciao, enfin presque
 	if (!file_exists($dir_ref.$src)) {
-		spip_log("Erreur hasher_deplacer_document fichier $dir_ref $src n'existe pas", 'hash');
+		spip_log("Erreur hasher_deplacer_document fichier $dir_ref $src n'existe pas", 'hash'. _LOG_ERREUR);
 
 		// si le src n'existe pas, on verifie qu'il n'a pas deja ete déplace (ie le dest existe),
 		// et si oui, on modifie juste le chemin en base... 
@@ -70,14 +70,14 @@ function hasher_deplacer_document($id_document, $corriger=false, $rev=false) {
 			if(file_exists(_DIR_IMG.$dest)){
 				// on note la destination finale
 				if (!spip_query('UPDATE spip_documents SET fichier="'.$img.$dest.'" WHERE id_document='.$id_document)) {
-					spip_log("erreur update correction $img $dest doc $id_document", 'hash');
+					spip_log("Erreur update correction $img $dest doc $id_document", 'hash'. _LOG_ERREUR);
 					return false;
 				} else {
-					spip_log("hasher_deplacer_document fichier "._DIR_IMG."$dest existe deja, Table corrigee", 'hash');
+					spip_log("hasher_deplacer_document fichier "._DIR_IMG."$dest existe deja, Table corrigee", 'hash'._LOG_INFO);
 					return true ;
 				}
 			} else {
-				spip_log("hasher_deplacer_document fichier "._DIR_IMG."$dest n'existe pas", 'hash');
+				spip_log("hasher_deplacer_document fichier "._DIR_IMG."$dest n'existe pas", 'hash'._LOG_INFO);
 			}
 		}
 		return false ;
@@ -93,7 +93,7 @@ function hasher_deplacer_document($id_document, $corriger=false, $rev=false) {
 	// 2. creer au besoin les sous-repertoires
 	if (!is_dir(_DIR_IMG.$dir = dirname($dest))
 	AND !mkdir(_DIR_IMG.$dir, _SPIP_CHMOD, /* recursive, php5 */ true)) {
-		spip_log("erreur hasher_deplacer_document mkdir($dir)", 'hash');
+		spip_log("Erreur hasher_deplacer_document mkdir($dir)", 'hash'. _LOG_ERREUR);
 		return false;
 	}
 
@@ -101,18 +101,18 @@ function hasher_deplacer_document($id_document, $corriger=false, $rev=false) {
 	// on note les fichiers en cours de deplacement avec un - devant ; si
 	// ca casse on saura reparer
 	if (!spip_query('UPDATE spip_documents SET fichier=CONCAT("-", fichier) WHERE id_document='.$id_document)) {
-		spip_log("erreur update 1", 'hash');
+		spip_log("Erreur update 1", 'hash'. _LOG_ERREUR);
 		return false;
 	}
 	// on deplace
 	if (!rename($dir_ref.$src, _DIR_IMG.$dest)) {
-		spip_log("erreur rename", 'hash');
+		spip_log("Erreur rename", 'hash'. _LOG_ERREUR);
 		spip_query('UPDATE spip_documents SET fichier="'.$src.'" WHERE id_document='.$id_document);
 		return false;
 	}
 	// on note la destination finale
 	if (!spip_query('UPDATE spip_documents SET fichier="'.$img.$dest.'" WHERE id_document='.$id_document)) {
-		spip_log("erreur update 2", 'hash');
+		spip_log("Erreur update 2", 'hash'. _LOG_ERREUR);
 		return false;
 	}
 
@@ -130,11 +130,12 @@ function hasher_deplacer_document($id_document, $corriger=false, $rev=false) {
  * @return bool
  */
 function hasher_deplacer_n_documents($n, $corriger=false, $rev=false) {
+	spip_log("hasher_deplacer_n_documents n $n corriger $corriger", 'hash'. _LOG_INFO);
 	if (!$n = intval($n)
 	OR !$s = spip_query($q = "SELECT id_document FROM spip_documents WHERE fichier REGEXP '^(IMG/)?[^/]+/"
 	. ($rev ? "./././" : "")
 	."[^/]+$' AND distant='non' ORDER BY date DESC LIMIT $n")) {
-		spip_log("erreur requete $q", 'hash');
+		spip_log("Erreur requete $q", 'hash'. _LOG_ERREUR);
 		return false;
 	}
 
@@ -176,4 +177,12 @@ function hasher_post_edition($flux) {
 	return $flux;
 }
 
+function htaccess_est_installe($htaccess){
+	if (!lire_fichier($htaccess, $contenu)
+	OR !preg_match(',hash_404,', $contenu)) {
+		return false ;
+	} else {
+		return true ;
+	}
+}
 ?>

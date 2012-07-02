@@ -7,10 +7,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
-# Si spip est range a la racine du domaine
-RewriteRule .* ../index.php?action=hash_404 [L] 
-# Pour un mutualise, vaut mieux travailler en url absolue
-#RewriteRule .* /index.php?action=hash_404 [L]
+RewriteRule .* ../index.php?action=hash_404 [L]
 
 */
 function action_hash_404_dist(){
