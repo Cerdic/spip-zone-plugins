@@ -61,7 +61,7 @@ function generer_google_analytics(){
  * - Meta Titre / Description / etc.
  * @return string $flux
  */
-function generer_meta_tags(){
+function calculer_meta_tags(){
 
 	/* CONFIG */
 	$config = unserialize($GLOBALS['meta']['seo']);
@@ -114,7 +114,15 @@ function generer_meta_tags(){
 			}				
 			break;
 	}
-	
+
+	return $meta_tags;
+}
+
+function generer_meta_tags($meta_tags = null) {
+    //Set meta list if not provided
+    if (!is_array($meta_tags))
+        $meta_tags = calculer_meta_tags();
+        
 	// Print the result on the page
 	foreach ($meta_tags as $name => $content) {
 		if ($content != '')
@@ -122,8 +130,8 @@ function generer_meta_tags(){
 				$flux .= '<title>'. htmlspecialchars(supprimer_numero(textebrut(propre($content)))) .'</title>'."\n";
 			else
 				$flux .= '<meta name="'. $name .'" content="'. htmlspecialchars(textebrut(propre($content))) .'" />'."\n";
-	}
 
+	}
 	return $flux;
 }
 

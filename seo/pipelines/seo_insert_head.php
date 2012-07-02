@@ -29,7 +29,8 @@ function seo_insert_head($flux) {
 		}
 		/* META TAGS */
 		if ($config['meta_tags']['activate'] == 'yes') {
-			$flux .= generer_meta_tags();
+		    $meta_tags = calculer_meta_tags();
+			$flux .= generer_meta_tags($meta_tags);
 		}
 		/* META GOOGLE WEBMASTER TOOLS */
 		if ($config['webmaster_tools']['activate'] == 'yes' && $objet == 'sommaire') {
