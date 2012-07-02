@@ -1,10 +1,10 @@
 <paquet
 	prefix="sclp"
 	categorie="communication"
-	version="1.0.0"
-	schema="0.2.13" 	
+	version="1.0.1"
+	schema="0.2.14" 	
 	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[2.0.15;3.0.*]"
 	logo="prive/themes/spip/images/logo_slclp.png"
 	documentation="http://www.spip-contrib.net/Squirrels-Love-Chimps"
 >
