@@ -14,20 +14,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_tout_decocher' => 'Uncheck all',
 
 	// D
-	'details_generation_paquetxml_erreur' => 'The paquet.xml of the plugin listed below has not been generated because of errors occurred during generation. Please see the information below to make the necessary corrections.',
-	'details_generation_paquetxml_erreur_pluriel' => 'The paquet.xml of the @nb@ plugins listed below were not generated because of errors occurred during generation. Please see the information below to make the necessary corrections.',
-	'details_generation_paquetxml_notice' => 'The paquet.xml of the plugin listed below has been successfully created but its source plugin.xml contains errors. Please check the plugin.xml and the resulting files (paquet.xml, language files) to determine if corrections are necessary.',
-	'details_generation_paquetxml_notice_pluriel' => 'The paquet.xml of the @nb@ plugins listed below were successfully created but their plugin.xml source contain errors. Please check the plugin.xml and the resulting files (paquet.xml, language files) to determine if corrections are necessary.',
-	'details_generation_paquetxml_succes' => 'The paquet.xml of the plugin listed below has been generated correctly.',
-	'details_generation_paquetxml_succes_pluriel' => 'The paquet.xml of the @nb@ plugins listed below were successfully created.',
-	'details_validation_paquetxml_erreur' => 'The formal validation of the plugin.xml listed below revealed errors. Please see the information below to make corrections.',
-	'details_validation_paquetxml_erreur_pluriel' => 'The formal validation of the @nb@ plugin.xml listed below revealed errors. Please see the information below to make corrections.',
-	'details_validation_paquetxml_succes' => 'The formal validation of the plugin.xml listed below showed no error.',
-	'details_validation_paquetxml_succes_pluriel' => 'The formal validation of the @nb@ plugin.xml listed below showed no error.',
-	'details_verification_pluginxml_erreur' => 'The verification of the plugin.xml listed below revealed errors. Please see the information below to make corrections if necessary (all errors related to the use of a, code, br tags... in the description are not to be considered).',
-	'details_verification_pluginxml_erreur_pluriel' => 'The verification of the @nb@ plugin.xml listed below revealed errors. Please see the information below to make corrections if necessary (all errors related to the use of a, code, br tags... in the description are not to be considered).',
-	'details_verification_pluginxml_succes' => 'The verification of the plugin.xml listed below revealed no mistake.',
-	'details_verification_pluginxml_succes_pluriel' => 'The verification of the @nb@ plugin.xml listed below revealed no mistake.',
+	'details_generation_paquetxml_erreur' => 'The paquet.xml of the plugin listed below has not been generated because of errors occurred during generation. Please see the information below to make the necessary corrections.', # MODIF
+	'details_generation_paquetxml_erreur_pluriel' => 'The paquet.xml of the @nb@ plugins listed below were not generated because of errors occurred during generation. Please see the information below to make the necessary corrections.', # MODIF
+	'details_generation_paquetxml_notice' => 'The paquet.xml of the plugin listed below has been successfully created but its source plugin.xml contains errors. Please check the plugin.xml and the resulting files (paquet.xml, language files) to determine if corrections are necessary.', # MODIF
+	'details_generation_paquetxml_notice_pluriel' => 'The paquet.xml of the @nb@ plugins listed below were successfully created but their plugin.xml source contain errors. Please check the plugin.xml and the resulting files (paquet.xml, language files) to determine if corrections are necessary.', # MODIF
+	'details_generation_paquetxml_succes' => 'The paquet.xml of the plugin listed below has been generated correctly.', # MODIF
+	'details_generation_paquetxml_succes_pluriel' => 'The paquet.xml of the @nb@ plugins listed below were successfully created.', # MODIF
+	'details_validation_paquetxml_erreur' => 'The formal validation of the plugin.xml listed below revealed errors. Please see the information below to make corrections.', # MODIF
+	'details_validation_paquetxml_erreur_pluriel' => 'The formal validation of the @nb@ plugin.xml listed below revealed errors. Please see the information below to make corrections.', # MODIF
+	'details_validation_paquetxml_succes' => 'The formal validation of the plugin.xml listed below showed no error.', # MODIF
+	'details_validation_paquetxml_succes_pluriel' => 'The formal validation of the @nb@ plugin.xml listed below showed no error.', # MODIF
+	'details_verification_pluginxml_erreur' => 'The verification of the plugin.xml listed below revealed errors. Please see the information below to make corrections if necessary (all errors related to the use of a, code, br tags... in the description are not to be considered).', # MODIF
+	'details_verification_pluginxml_erreur_pluriel' => 'The verification of the @nb@ plugin.xml listed below revealed errors. Please see the information below to make corrections if necessary (all errors related to the use of a, code, br tags... in the description are not to be considered).', # MODIF
+	'details_verification_pluginxml_succes' => 'The verification of the plugin.xml listed below revealed no mistake.', # MODIF
+	'details_verification_pluginxml_succes_pluriel' => 'The verification of the @nb@ plugin.xml listed below revealed no mistake.', # MODIF
 
 	// I
 	'index_aide_paqxmlaut' => 'The <code>auteur</code> tag',
