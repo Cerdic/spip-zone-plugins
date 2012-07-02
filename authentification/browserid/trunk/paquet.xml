@@ -1,0 +1,19 @@
+<paquet
+	prefix="browserid"
+	categorie="auteur"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="];["
+	logo="prive/themes/spip/images/browserid-32.png"
+	documentation="http://www.spip-contrib.net/4005"
+>	
+
+	<nom>BrowserID</nom>
+	<!-- Authentification des visiteurs via BrowserID -->
+
+	<auteur>Fil</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	
+	<pipeline nom="autoriser" inclure="inc/browserid_autoriser.php" />
+	
+</paquet>
