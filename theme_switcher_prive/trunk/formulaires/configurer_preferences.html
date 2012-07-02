@@ -19,13 +19,18 @@
 				</div>
 				<div class="choix">
 					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_2'[(#ENV{#GET{name}}|=={spip2}|oui)checked="checked" ]value="spip2" #GET{disable}/>
-					<label for="[(#GET{name})]_1"><:theme_switcher_prive:lien_theme_spip_2:></label>
+					<label for="[(#GET{name})]_2"><:theme_switcher_prive:lien_theme_spip_2:></label>
 					<:theme_switcher_prive:explication_spip2|propre:>
 				</div>
 				<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_2'[(#ENV{#GET{name}}|=={vector_icons}|oui)checked="checked" ]value="vector_icons" #GET{disable}/>
-					<label for="[(#GET{name})]_1"><:theme_switcher_prive:lien_theme_vector_icons:></label>
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_3'[(#ENV{#GET{name}}|=={vector_icons}|oui)checked="checked" ]value="vector_icons" #GET{disable}/>
+					<label for="[(#GET{name})]_3"><:theme_switcher_prive:lien_theme_vector_icons:></label>
 					<:theme_switcher_prive:explication_vector_icons|propre:>
+				</div>
+				<div class="choix">
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_4'[(#ENV{#GET{name}}|=={vector_icons_2}|oui)checked="checked" ]value="vector_icons_2" #GET{disable}/>
+					<label for="[(#GET{name})]_4"><:theme_switcher_prive:lien_theme_vector_icons_2:></label>
+					<:theme_switcher_prive:explication_vector_icons_2|propre:>
 				</div>
 			</li>
 		  	#SET{name,spip_ecran}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}

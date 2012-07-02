@@ -31,6 +31,7 @@ function theme_switcher_prive_header_prive($flux) {
         if ($interface == "spip_dist") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('spip_dist', parametres_css_prive()).'" id="css_spip_dist" />';
 	else if ($interface == "spip2") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('spip_2', parametres_css_prive()).'" id="css_spip2" />';
         else if ($interface == "vector_icons") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('vector_icons', parametres_css_prive()).'" id="css_vector_icons" />';
+	else if ($interface == "vector_icons_2") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('vector_icons_2', parametres_css_prive()).'" id="css_vector_icons_2" />';
 
 	return $flux;
 }
