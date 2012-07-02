@@ -1,0 +1,17 @@
+<paquet
+	prefix="theme_prive_spip2"
+	categorie="theme"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0-rc;3.0.*]"
+	logo="images/theme_prive_spip2-32.png"
+	documentation=""
+>
+
+	<nom>Th&egrave;me priv&eacute; Spip 2</nom>
+
+	<auteur lien='www.mister-graphx.com'>Mist. GraphX</auteur>
+
+	<licence>GNU/GPL</licence>
+
+</paquet>
