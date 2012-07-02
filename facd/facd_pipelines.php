@@ -60,7 +60,7 @@ function facd_jquery_plugins($plugins){
  * @param array $flux Le contexte du pipeline
  */
 function facd_post_edition($flux){
-	if($flux['args']['operation'] == 'supprimer_documents'){
+	if($flux['args']['operation'] == 'supprimer_document'){
 		sql_delete('spip_facd_conversions','id_document = '.$flux['args']['id_objet'].' AND statut!='.sql_quote('oui'));
 	}
 	return $flux;
