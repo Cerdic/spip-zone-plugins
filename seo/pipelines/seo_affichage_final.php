@@ -31,6 +31,8 @@ function seo_affichage_final($flux) {
         $head = $head_meta;
     }
     
+    $head = "<head>".$head."</head>";
+    
     $flux = preg_replace('/<head>(.*)<\/head>/mis',$head,$flux);
     
     return $flux;
