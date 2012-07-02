@@ -16,24 +16,18 @@
 	- height|hauteur = 400px		hauteur de la carte, 400px par defaut
 	- style = non					ne pas styler la carte
 	- zoom_molette|zoom_wheel = non	désactiver le zoom avec la molette de la souris, actif par defaut
-	- type = carte					type de la carte : carte, satellite, relief ou hybride
 	- control_fullscreen = oui		afficher un bouton pour passer la carte en plein écran
-X	- control_zoom|controle_zoom = large	type de controles pour le zoom : large, small
-X	- control_pan|controle_pan = non				ne pas afficher les controles de déplacement dans la carte
 	- control_type|controle_type = non			ne pas afficher les controles de changement de type
 	- no_control|aucun_controle = oui				ne pas afficher les controles de la carte
-X	- overview = oui				afficher un mini carte de situation
 	- scale = oui					afficher l'échelle de la carte
 	- limit|limite = 500					nombre max de marqueurs à afficher, 500 par defaut
 	- objets = gis					type d'objets à afficher (fichier json/gis_xx qui génère la source de donnees)
 	- autocenterandzoom|centrer_auto = oui		centrer et zoomer la carte automatiquement pour afficher tous les marqueurs
-    - autofocus_marker = oui                                                permet de forcer l'affichage d'une seule infobulle à la fois 
 	- kml = 12						kml à superposer à la carte (id_document ou url)
 	- localize_visitor|localiser_visiteur = oui		centrer la carte sur la position du visiteur (API geolocation HTML5)
 	- point = non					si elle vaut "non" cette option n'affichera pas de points du tout (utile pour n'afficher qu'un kml par exemple)
-	- ajaxload = non                si elle vaut "non" cette option désactive l'init de la carte sur l'event ajaxload 
+X	- ajaxload = non                si elle vaut "non" cette option désactive l'init de la carte sur l'event ajaxload 
 
-X : plus dispo
 ]
 
 [(#SET{width,#ENV{width,#ENV{largeur,100%}}})]
