@@ -232,8 +232,11 @@ function balise_SEO_META_BRUTE($p){
     return $p;
 }
 function calculer_balise_META_BRUTE($_nom){	
-	$retour = generer_meta_brute($_nom);
-	return $retour;
+    $metas = calculer_meta_tags();
+    $meta = $metas[$_nom];
+    if (!$meta)
+        return "";
+    return $meta;
 }
 
 /**
