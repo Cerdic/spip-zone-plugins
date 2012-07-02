@@ -47,7 +47,6 @@ function inc_facd_convertir_dist($id_document,$id_facd,$format=false){
 		$res['erreur'] = 'fonction_conversion_inexistante';
 		$reussite = false;
 	}
-	spip_log($res,'spipmotion');
 	
 	$infos['fin_conversion'] = time();
 	if(is_array($res)){
