@@ -1,0 +1,19 @@
+<paquet
+	prefix="theme_switcher_prive"
+	categorie="theme"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0-rc;3.0.*]"
+	logo="images/theme_switcher_prive-32.png"
+	documentation=""
+>
+
+	<nom>Switcher th&egrave;me priv&eacute;</nom>
+
+	<auteur>Arnaud Bérard (Mist. GraphX)</auteur>
+
+	<licence>GNU/GPL</licence>
+	
+	<pipeline nom="header_prive" inclure="theme_switcher_prive_pipelines.php" />
+
+</paquet>
