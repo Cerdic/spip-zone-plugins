@@ -38,30 +38,30 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_modifier_formulaire' => 'Upraviť formulár',
 	'editer_nouveau' => 'Nový formulár',
 	'editer_redirige_url' => 'Adresa presmerovania po potvrdení',
-	'editer_redirige_url_explication' => 'Laissez vide si vous souhaitez rester sur la même page', # NEW
+	'editer_redirige_url_explication' => 'Nevypĺňajte, ak chcete zostať na rovnakej stránke',
 	'editer_titre' => 'Názov',
 	'erreur_autorisation' => 'Na úpravu formulárov na tejto stránke nemáte dostatočné práva.',
 	'erreur_base' => 'Počas ukladania sa vyskytla technická chyba.',
 	'erreur_generique' => 'V týchto poliach sú chyby, prosím, skontrolujte ich pred odoslaním.',
-	'erreur_identifiant' => 'Cet identifiant est déjà utilisé.', # NEW
+	'erreur_identifiant' => 'Tento identifikátor sa už používa.',
 	'erreur_importer_forms' => 'Chyba počas nahrávania formulára Forms&Tables',
 	'erreur_importer_wcs' => 'Chyba počas nahrávania formulára W.C.S',
 	'erreur_importer_yaml' => 'Chyba počas nahrávania súboru YAML',
 	'erreur_inexistant' => 'Formulár neexistuje.',
 
 	// F
-	'formulaires_aucun' => 'Il n\'y a pour l\'instant aucun formulaire.', # NEW
+	'formulaires_aucun' => 'Momentálne tu nie je žiaden formulár.',
 	'formulaires_dupliquer' => 'Skopírovať formulár',
 	'formulaires_dupliquer_copie' => '(kópia)',
-	'formulaires_introduction' => 'Créez et configurez ici les formulaires de votre site.', # NEW
+	'formulaires_introduction' => 'Tu vytvoríte a nastavíte formuláre pre svoju stránku.',
 	'formulaires_nouveau' => 'Vytvoriť nový formulár',
 	'formulaires_supprimer' => 'Odstrániť formulár',
-	'formulaires_supprimer_confirmation' => 'Attention, cela supprimera aussi tous les résultats. Êtes-vous sûr de vouloir supprimer ce formulaire ?', # NEW
+	'formulaires_supprimer_confirmation' => 'Pozor, takto vymažete všetky výsledky. Určite chcete odstrániť tento formulár?',
 	'formulaires_tous' => 'Všetky formuláre',
 
 	// I
 	'identification_par_cookie' => 'Podľa cookie',
-	'identification_par_id_auteur' => 'Par l\'identifiant (id_auteur) de la personne authentifiée', # NEW
+	'identification_par_id_auteur' => 'Podľa identifikátora (id_auteur) prihláseného človeka',
 	'importer_formulaire' => 'Nahrať formulár',
 	'importer_formulaire_fichier_label' => 'Súbor, ktorý sa má nahrať',
 	'importer_formulaire_format_label' => 'Formát súboru',
@@ -76,13 +76,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_nom_noisette_formulaire' => 'Formulár',
 
 	// R
-	'reponse_intro' => '@auteur@ a répondu au formulaire @formulaire@', # NEW
+	'reponse_intro' => '@auteur@ vyplnil(a) formulár @formulaire@',
 	'reponse_numero' => 'Odpoveď číslo:',
 	'reponse_statut' => 'Táto odpoveď je:',
 	'reponse_supprimer' => 'Odstrániť túto odpoveď',
-	'reponse_supprimer_confirmation' => 'Êtes-vous sûr de vouloir supprimer cette réponse ?', # NEW
+	'reponse_supprimer_confirmation' => 'Určite chcete vymazať túto odpoveď?',
 	'reponses_analyse' => 'Analýza odpovedí',
-	'reponses_anonyme' => 'Anonyme', # NEW
+	'reponses_anonyme' => 'Anonym',
 	'reponses_auteur' => 'Používateľ',
 	'reponses_exporter' => 'Exportovať odpovede',
 	'reponses_ip' => 'IP adresa',
@@ -90,29 +90,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_liste_prop' => 'Odpovede čakajúce na potvrdenie',
 	'reponses_liste_publie' => 'Všetky platné odpovede',
 	'reponses_voir_detail' => 'Zobraziť odpoveď',
-	'retour_aucun_traitement' => 'Votre réponse a bien été envoyée, mais aucun traitement n\'a été défini pour ce formulaire. Il ne fait donc rien. :)', # NEW
+	'retour_aucun_traitement' => 'Vaša odpoveď bola odoslaná, ale k tomuto formuláru nebola definovaná žiadna funkcia. Nič neurobí. :-)',
 
 	// T
 	'traitements_aide_memoire' => 'Pomocná pamäť:',
 	'traitements_avertissement_creation' => 'Les modifications sur les champs du formulaire ont été enregistrées avec succès. Vous pouvez maintenant définir quels traitements seront effectués lors de l\'utilisation du formulaire.', # NEW
 	'traitements_avertissement_modification' => 'Les modifications sur les champs du formulaire ont été enregistrées avec succès. <strong>Certains traitements doivent peut-être être reconfigurés en conséquence.</strong>', # NEW
 	'traitements_champ_aucun' => 'Žiadne',
-	'traiter_email_description' => 'Poste le résultat du formulaire par courriel à une liste de destinataires.', # NEW
+	'traiter_email_description' => 'Výstup z formulára odošle na e-mailové adresy príjemcov.',
 	'traiter_email_horodatage' => 'Formulár "@formulaire@" odoslaný @date@ o @heure@.',
-	'traiter_email_message_erreur' => 'Une erreur est survenue lors de l\'envoi du courriel.', # NEW
+	'traiter_email_message_erreur' => 'Pri odosielaní e-mailu sa vyskytla chyba.',
 	'traiter_email_message_ok' => 'Vaša správa bola odoslaná.',
 	'traiter_email_option_activer_accuse_label' => 'Potvrdenie o prijatí správy',
-	'traiter_email_option_activer_accuse_label_case' => 'Envoyer aussi un courriel à l\'adresse de l\'envoyeur avec un message de confirmation.', # NEW
-	'traiter_email_option_destinataires_explication' => 'Choisissez le champ qui correspondra aux destinataires du message.', # NEW
+	'traiter_email_option_activer_accuse_label_case' => 'Poslať e-mail aj na adresu odosielateľa so žiadosťou o potvrdenie.',
+	'traiter_email_option_destinataires_explication' => 'Vyberte si pole, v ktorom budú príjemcovia správy.',
 	'traiter_email_option_destinataires_label' => 'Príjemcovia',
 	'traiter_email_option_destinataires_plus_explication' => 'Zoznam adries oddelený čiarkami.',
 	'traiter_email_option_destinataires_plus_label' => 'Ďalší príjemcovia',
-	'traiter_email_option_envoyeur_courriel_explication' => 'Choisissez le champ qui contiendra le courriel de l\'envoyeur.', # NEW
+	'traiter_email_option_envoyeur_courriel_explication' => 'Vyberte si pole, ktoré bude obsahovať e-mailovú adresu odosielateľa.',
 	'traiter_email_option_envoyeur_courriel_label' => 'E-mail odosielateľa',
-	'traiter_email_option_envoyeur_nom_explication' => 'Construisez ce nom à l\'aide des @raccourcis@ (cf. l\'aide mémoire). Si vous ne mettez rien, ce sera le nom du site.', # NEW
+	'traiter_email_option_envoyeur_nom_explication' => 'Vytvorte názov pomocou @raccourcis@ (prečítajte si pomocníka). Ak neurobíte nič, bude tým názvom názov stránky.',
 	'traiter_email_option_envoyeur_nom_label' => 'Meno odosielateľa',
 	'traiter_email_option_sujet_accuse_label' => 'Predmet potvrdenia o prijatí',
-	'traiter_email_option_sujet_explication' => 'Construisez le sujet à l\'aide des @raccourcis@. Si vous ne mettez rien, le sujet sera construit automatiquement.', # NEW
+	'traiter_email_option_sujet_explication' => 'Vytvorte predmet pomocou @raccourcis@. Ak neurobíte nič, predmet bude vytvorený automaticky.',
 	'traiter_email_option_sujet_label' => 'Predmet správy',
 	'traiter_email_option_vrai_envoyeur_explication' => 'Certains serveurs SMTP ne permettent pas d\'utiliser un courriel arbitraire pour le champ "From". Pour cette raison Formidable insère par défaut le courriel de l\'envoyeur dans le champ "Reply-To". Cocher ici pour insèrer le courriel dans le champ "From".', # NEW
 	'traiter_email_option_vrai_envoyeur_label' => 'Vložiť e-mail odosielateľa do poľa "From" (= "Od koho")',
@@ -131,7 +131,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_option_modifiable_explication' => 'Môžu návštevníci potom upraviť svoje odpovede?',
 	'traiter_enregistrement_option_modifiable_label' => 'Odpovede, ktoré sa dajú upraviť',
 	'traiter_enregistrement_option_multiple_explication' => 'Môže ten istý človek odpovedať na formulár viackrát?',
-	'traiter_enregistrement_option_multiple_label' => 'Réponses multiples', # NEW
+	'traiter_enregistrement_option_multiple_label' => 'Duplicitné odpovede',
 	'traiter_enregistrement_titre' => 'Uložiť výsledky',
 
 	// V
