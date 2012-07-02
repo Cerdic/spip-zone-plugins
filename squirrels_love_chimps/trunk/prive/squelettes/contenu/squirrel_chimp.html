@@ -1,4 +1,4 @@
-[(#ENV{afficher}|oui)#SET{afficher,_#ENV{afficher}}]
+[(#ENV{afficher}|oui)#SET{afficher,_#ENV{afficher,page}}]
 <INCLURE{fond=prive/squelettes/contenu/squirrel_chimp#GET{afficher}_3,env,ajax}/>
 	
 

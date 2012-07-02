@@ -53,10 +53,9 @@ function exec_squirrel_chimp_dist(){
 
 
 	//Insertion du contenu des différentes page : defaut ou appelé par la variable afficher
-	$afficher = _request('afficher')?'_'._request('afficher'):'';
-	
+	$afficher = _request('afficher')?_request('afficher'):'page';
 
-	echo recuperer_fond('prive/squelettes/contenu/squirrel_chimp'.$afficher,$contexte,array("ajax"=>true));
+	echo recuperer_fond('prive/squelettes/contenu/squirrel_chimp_'.$afficher,$contexte,array("ajax"=>true));
 
 	// ...
 	// fin contenu
