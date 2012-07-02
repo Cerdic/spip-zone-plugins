@@ -3,7 +3,7 @@
 	categorie="auteur"
 	version="1.0.0"
 	etat="dev"
-	compatibilite="];["
+	compatibilite="[3.0.0;3.0.99]"
 	logo="prive/themes/spip/images/browserid-32.png"
 	documentation="http://www.spip-contrib.net/4005"
 >	
