@@ -15,15 +15,25 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
+/*
+Valeurs par defaut :
+#SET{claire,##ENV{couleur_claire,edf3fe}} [claire: (#GET{claire});]
+#SET{foncee,##ENV{couleur_foncee,3874b0}} [foncee: (#GET{foncee});]
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}} [left: (#GET{left});]
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}} [right: (#GET{right});]
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}} [rtl: (#GET{rtl});]
+#SET{dir,#ENV{ltr}|choixsiegal{left,ltr,rtl}} [dir: (#GET{dir});]
+
+#SET{font-size,#ENV{font-size,0.8125em}} [font-size: (#GET{font-size});]
+#SET{line-height,#ENV{line-height,1.385em}} [line-height: (#GET{line-height});]
+#SET{margin-bottom,#ENV{margin-bottom,#GET{line-height}}} [margin-bottom: (#GET{margin-bottom});]
+#SET{text-indent,#ENV{text-indent,50px}} [text-indent: (#GET{text-indent});]
+#SET{font-family,#ENV*{font-family,'Helvetica, Arial, sans-serif'}} [font-family: (#GET{font-family});]
+#SET{background-color,#ENV{background-color,#F8F7F3}} [background-color : (#GET{background-color});]
+#SET{color,#ENV{color,#000000}} [color: (#GET{color});]
 
 
-#SET{claire,##ENV{couleur_claire,edf3fe}}
-#SET{foncee,##ENV{couleur_foncee,3874b0}}
-#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
-#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
-#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
-#SET{rtl_inv,#ENV{ltr}|choixsiegal{right,'',_rtl}}
-#SET{chemin_img_pack,#EVAL{_DIR_IMG_PACK}}
+*/
 
 
 [(#INCLURE{#VAL{clear.css}|find_in_theme|direction_css{#GET{dir}}|substr{#VAL{_DIR_RACINE}|constant|strlen}})]
@@ -70,7 +80,7 @@
 #bando_haut ul.deroulant li { /*position:relative; */float:#ENV{left}; display: block; }
 #bando_haut ul.deroulant li ul li {float:none;position:static;}
 #bando_haut ul.deroulant li.actif,
-#bando_haut ul.deroulant li.actif_tempo { background-color: #[(#ENV{claire}|couleur_eclaircir|couleur_eclaircir)]; z-index: 100; }
+#bando_haut ul.deroulant li.actif_tempo { background-color: #[(#ENV{claire}|couleur_eclaircir|couleur_eclaircir|couleur_eclaircir)]; z-index: 100; }
 #bando_haut ul.deroulant li ul {border: 1px solid #aaaaaa; border-top: 0; text-align:#ENV{left}; height: auto; width: auto; display: block; position:absolute; #ENV{left}:-3000em;margin-#ENV{left}:-1px; }
 #bando_haut ul.deroulant li.actif ul,
 #bando_haut ul.deroulant li.actif_tempo ul { #ENV{left}:auto;}
@@ -78,17 +88,19 @@
 #bando_haut ul.deroulant li ul li { background-color: #fff;border-top: 1px solid #CCCCCC; }
 #bando_haut ul.deroulant li ul li a {  }
 #bando_haut ul.deroulant li ul li a:hover,
-#bando_haut ul.deroulant li ul li a:focus { background-color: #[(#ENV{claire}|couleur_eclaircir|couleur_eclaircir)]; }
+#bando_haut ul.deroulant li ul li a:focus { background-color: #[(#ENV{claire}|couleur_eclaircir|couleur_eclaircir|couleur_eclaircir)]; }
 
 
 
-#bando_identite { line-height:2em; background: #[(#GET{foncee}|couleur_foncer|couleur_foncer)]; color: #F5F5F5; overflow:hidden; border-bottom:1px solid #222; z-index:10;position:relative;}
+#bando_identite {
+    line-height:2em; background: #[(#GET{foncee}|couleur_foncer|couleur_foncer)];
+    color: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; overflow:hidden; border-bottom:1px solid #222; z-index:10;position:relative;}
 #bando_identite p { width: 50%; padding: 1px 0; margin:0;}
 #bando_identite p img { vertical-align: middle; }
 #bando_identite p.nom_site_spip { width: 45%; float:#ENV{right};text-align:#ENV{right}; }
 #bando_identite p.session { width: 55%; float:#ENV{left}; text-align:#ENV{left}; }
 #bando_identite p.session .menu_lang {  }
-#bando_identite a, #bando_identite strong, #identite a { color: #afafaf; }
+#bando_identite a, #bando_identite strong, #identite a { color:#[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
 #bando_identite a:hover { text-decoration: underline; }
 
 
@@ -142,7 +154,10 @@
 #bando_outils ul.rapides li.bouton{ float:#ENV{left}; }
 #bando_outils ul.rapides li.bouton a{ display:block; padding:2px;background-position:center;background-repeat:no-repeat; }
 #bando_outils ul.rapides li.bouton a span { visibility:hidden;display:block;height:24px;width:24px;overflow:hidden; }
-#bando_outils ul.rapides li.bouton a:hover, #bando_outils ul.rapides li.bouton a:focus{background-color:#[(#ENV{claire}|couleur_eclaircir)];}
+#bando_outils ul.rapides li.bouton a:hover, #bando_outils ul.rapides li.bouton a:focus{
+    background-color:#[(#ENV{claire}|couleur_eclaircir|couleur_eclaircir)];
+    }
+
 #bando_outils ul.rapides li.bouton{ margin-top:0px;}
 
 #bando_outils #rapides {float:#ENV{right};}
@@ -168,18 +183,15 @@
 #bando_navigation #masquer_outils span{ display: none; }
 
 
-/* par defaut on style pour des icones standards en 48px
-Les styles pour les icones pochoir de diala sont dans themes/spip/style_prive_theme
-*/
+/* #MARK : style_prive_theme */
 
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a { }
+/* pour les icones pochoir de diala */
+.navigation_avec_icones #bando_navigation ul.deroulant > li > a { background-color: #[(#GET{claire}|couleur_eclaircir)];}
 .navigation_avec_icones #bando_navigation ul.deroulant > li > a:hover,
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a:focus { background-color: #[(#ENV{claire}|couleur_eclaircir)]; }
+.navigation_avec_icones #bando_navigation ul.deroulant > li > a:focus { background-color: #GET{claire}; }
 
-.navigation_avec_icones #bando_navigation ul li a {background-position:center 5px;background-repeat:no-repeat;padding-top:60px;}
-.navigation_avec_icones #bando_navigation ul li ul li a {margin-#ENV{left}:7px; margin-#ENV{right}: 1.0em; background-position:[(#ENV{left})] center;margin-top:0;padding-#ENV{left}:24px;padding-top:0.8em;}
-
-.navigation .sous_navigation .item a {display:block;background-position:left center;margin-left:7px;padding:2px;padding-left:24px;background-repeat:no-repeat;}
+.navigation_avec_icones #bando_navigation ul li a {background-position:center top;background-repeat:no-repeat;padding-top:60px;}
+.navigation_avec_icones #bando_navigation ul li ul li a {margin-#GET{left}:7px;background-position:[(#GET{left})] center;margin-top:0;padding-#GET{left}:30px;padding-top:0.8em;}
 
 
 /* messages de statut et d'avertissement dans le bandeau */
@@ -194,13 +206,9 @@ div.en_lignes { /*font-size: 10px;*/}
 bacground-image:none;
 }
 
-
-/* #MARK : style_prive_theme */
-
-/* pour les icones pochoir de diala */
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a { background-color: #[(#GET{claire}|couleur_eclaircir)];}
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a:hover,
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a:focus { background-color: #GET{claire}; }
-
-.navigation_avec_icones #bando_navigation ul li a {background-position:center top;background-repeat:no-repeat;padding-top:60px;}
-.navigation_avec_icones #bando_navigation ul li ul li a {margin-#GET{left}:7px;background-position:[(#GET{left})] center;margin-top:0;padding-#GET{left}:30px;padding-top:0.8em;}
+/*
+* #MARK : Contenu
+*/
+.large #contenu {
+width:740px;
+}
