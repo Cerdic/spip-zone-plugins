@@ -14,7 +14,8 @@
 	<auteur>kent1</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
-
+	
+	<necessite nom="jqueryui" compatibilite="[1.8.20;[" />
 	<pipeline nom="header_prive" action="inserer_javascript" inclure="selecteurgenerique_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="selecteurgenerique_pipelines.php" />
 </paquet>

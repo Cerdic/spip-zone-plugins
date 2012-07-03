@@ -35,5 +35,6 @@
 		<inclure>selecteur_generique_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[3.0.0;3.0.99]" />
+	<necessite id="jqueryui" version="[1.8.20;[" />
 	<categorie>outil</categorie>
 </plugin>

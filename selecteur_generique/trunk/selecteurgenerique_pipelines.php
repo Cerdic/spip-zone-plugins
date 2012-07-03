@@ -6,7 +6,7 @@ function selecteurgenerique_jqueryui_plugins($plugins){
 	if (defined('DESACTIVER_SELECTEUR_GENERIQUE')
 	AND DESACTIVER_SELECTEUR_GENERIQUE)
 		return $plugins;
-	
+	$plugins[] = 'jquery.ui.position';
 	$plugins[] = 'jquery.ui.autocomplete';
 	return $plugins;
 }
