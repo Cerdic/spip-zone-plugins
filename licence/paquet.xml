@@ -1,7 +1,7 @@
 <paquet
 	prefix="licence"
 	categorie="divers"
-	version="0.4.0"
+	version="0.4.1"
 	etat="stable"
 	compatibilite="[2.0.10;3.0.99]"
 	logo="img_pack/licence_logo.png"
@@ -18,6 +18,7 @@
 	<traduire module="licence" reference="fr" gestionnaire="salvatore" />
 
 	<pipeline nom="declarer_tables_principales" inclure="base/licence.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/licence.php" />
 	<pipeline nom="ieconfig_metas" inclure="licence_ieconfig_metas.php" />
 	<pipeline nom="affiche_milieu" inclure="licence_pipelines3.php" />
 	<pipeline nom="pre_insertion" inclure="licence_pipelines3.php" />
