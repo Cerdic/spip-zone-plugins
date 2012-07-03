@@ -26,4 +26,19 @@ function getid3_declarer_tables_principales($tables_principales){
 	return $tables_principales;
 }
 
+/**
+ * Insertion dans le pipeline declarer_tables_objets_sql (SPIP)
+ * On ajoute nos champs dans les champs editables de la table spip_documents
+ */
+function getid3_declarer_tables_objets_sql($tables){
+	$tables['spip_documents']['champs_editables'][] = 'duree';
+	$tables['spip_documents']['champs_editables'][] = 'bitrate';
+	$tables['spip_documents']['champs_editables'][] = 'bitrate_mode';
+	$tables['spip_documents']['champs_editables'][] = 'audiosamplerate';
+	$tables['spip_documents']['champs_editables'][] = 'encodeur';
+	$tables['spip_documents']['champs_editables'][] = 'bits';
+	$tables['spip_documents']['champs_editables'][] = 'canaux';
+	
+	return $tables;
+}
 ?>
