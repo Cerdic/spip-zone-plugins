@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'echanger_formulaire_forms_importer' => 'formuláre Forms & Tables (.xml)',
 	'echanger_formulaire_wcs_importer' => 'W.C.S. (.wcs)',
-	'echanger_formulaire_yaml_importer' => 'Formidable (.yaml)', # NEW
+	'echanger_formulaire_yaml_importer' => 'Formidable (.yaml)',
 	'editer_apres_choix_formulaire' => 'Formulár, znova',
 	'editer_apres_choix_redirige' => 'Presmerovať na novú adresu',
 	'editer_apres_choix_rien' => 'Vôbec nič',
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_identifiant_explication' => 'Zadajte jedinečný textový identifikátor, ktorý vám umožní rýchlo vyvolať formulár.',
 	'editer_menu_champs' => 'Nastaviť polia',
 	'editer_menu_formulaire' => 'Nastaviť formulár',
-	'editer_menu_traitements' => 'Configurer les traitements', # NEW
+	'editer_menu_traitements' => 'Nastaviť funkcie',
 	'editer_message_ok' => 'Správa spätnej väzby',
 	'editer_message_ok_explication' => 'Môžete upraviť správu, ktorá sa používateľovi zobrazí po odoslaní platného formulára.',
 	'editer_modifier_formulaire' => 'Upraviť formulár',
@@ -94,8 +94,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'traitements_aide_memoire' => 'Pomocná pamäť:',
-	'traitements_avertissement_creation' => 'Les modifications sur les champs du formulaire ont été enregistrées avec succès. Vous pouvez maintenant définir quels traitements seront effectués lors de l\'utilisation du formulaire.', # NEW
-	'traitements_avertissement_modification' => 'Les modifications sur les champs du formulaire ont été enregistrées avec succès. <strong>Certains traitements doivent peut-être être reconfigurés en conséquence.</strong>', # NEW
+	'traitements_avertissement_creation' => 'Zmeny polí formulára boli úspešne uložené. Teraz môžete určiť, aké funkcie sa použijú pri spracúvaní formulára.',
+	'traitements_avertissement_modification' => 'Zmeny v poliach formulára boli úspešne uložené. <strong>Niektoré funkcie možno budú musieť byť kvôli ním prestavené.</strong>',
 	'traitements_champ_aucun' => 'Žiadne',
 	'traiter_email_description' => 'Výstup z formulára odošle na e-mailové adresy príjemcov.',
 	'traiter_email_horodatage' => 'Formulár "@formulaire@" odoslaný @date@ o @heure@.',
@@ -114,7 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_sujet_accuse_label' => 'Predmet potvrdenia o prijatí',
 	'traiter_email_option_sujet_explication' => 'Vytvorte predmet pomocou @raccourcis@. Ak neurobíte nič, predmet bude vytvorený automaticky.',
 	'traiter_email_option_sujet_label' => 'Predmet správy',
-	'traiter_email_option_vrai_envoyeur_explication' => 'Certains serveurs SMTP ne permettent pas d\'utiliser un courriel arbitraire pour le champ "From". Pour cette raison Formidable insère par défaut le courriel de l\'envoyeur dans le champ "Reply-To". Cocher ici pour insèrer le courriel dans le champ "From".', # NEW
+	'traiter_email_option_vrai_envoyeur_explication' => 'Niektoré servery SMTP neumožňujú používať ľubovoľný e-mail pre pole "From" (Od koho). Z tohto dôvodu Formidable podľa predvolených nastavení vkladá e-mail odosielateľa do poľa "Reply-To". Ak chcete, aby bol vložený do poľa "From", zaškrtnite túto možnosť tu.',
 	'traiter_email_option_vrai_envoyeur_label' => 'Vložiť e-mail odosielateľa do poľa "From" (= "Od koho")',
 	'traiter_email_page' => '<a href="@url@">Z tejto stránky.</a>',
 	'traiter_email_sujet' => '@nom@ vám napísal(a).',
@@ -126,7 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_erreur_deja_repondu' => 'Tento formulár ste už vyplnili.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'Odpoveď, ktorú chcete upraviť, sa nedá nájsť.',
 	'traiter_enregistrement_option_identification_explication' => 'Ak sa odpovede dajú upraviť, aký spôsob sa použije ako prvý, aby sa zistilo, či sa odpoveď menila?',
-	'traiter_enregistrement_option_identification_label' => 'Identification', # NEW
+	'traiter_enregistrement_option_identification_label' => 'Identifikácia',
 	'traiter_enregistrement_option_moderation_label' => 'Kontrola',
 	'traiter_enregistrement_option_modifiable_explication' => 'Môžu návštevníci potom upraviť svoje odpovede?',
 	'traiter_enregistrement_option_modifiable_label' => 'Odpovede, ktoré sa dajú upraviť',
@@ -138,7 +138,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'voir_exporter' => 'Exportovať formulár',
 	'voir_numero' => 'Formulár číslo:',
 	'voir_reponses' => 'Zobraziť odpovede',
-	'voir_traitements' => 'Traitements' # NEW
+	'voir_traitements' => 'Funkcie'
 );
 
 ?>
