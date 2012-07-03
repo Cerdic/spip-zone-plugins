@@ -18,7 +18,6 @@
 	<pipeline nom="affiche_milieu" inclure="media_pipelines.php" />
 	<pipeline nom="configurer_liste_metas" inclure="media_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="media_pipelines.php" />
-	<pipeline nom="insert_head" inclure="media_pipelines.php" />
 	<pipeline nom="header_prive" inclure="media_pipelines.php" />
 	<pipeline nom="pre_liens" inclure="media_pipelines.php" />
 	<pipeline nom="ieconfig_metas" inclure="media_pipelines.php" />

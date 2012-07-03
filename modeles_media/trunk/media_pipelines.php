@@ -3,7 +3,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function media_affiche_milieu($flux){
 	
-	if ($flux['args']['exec']=='config_fonctions'){
+	if ($flux['args']['exec']=='configurer_avancees'){
 		$flux['data'] .= recuperer_fond('prive/configurer/media',array());
 	}
 
@@ -25,16 +25,7 @@ function media_configurer_liste_metas($metas){
 }
 
 function media_insert_head_css($flux){
-	static $done = false;
-	if (!$done) {
-		$done = true;
-		$flux .= '<link rel="stylesheet" href="'.find_in_path('css/media.css').'" type="text/css" media="all" />';
-	}
-	return $flux;
-}
-
-function media_insert_head($flux){
-	$flux = media_insert_head_css($flux); // au cas ou il n'est pas implemente
+	$flux .= '<link rel="stylesheet" href="'.find_in_path('css/media.css').'" type="text/css" media="all" />';
 	return $flux;
 }
 
