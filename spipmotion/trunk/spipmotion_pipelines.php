@@ -64,16 +64,16 @@ function spipmotion_post_edition($flux){
 			/**
 			 * Si nous sommes dans un format vidéo que SPIPmotion peut traiter,
 			 * on lui applique certains traitements :
-			 * -* récupération des informations
 			 * -* récupération d'une vignette
+			 * La récupération des infos est faite directement via metadata/video lors de l'insertion
 			 * Les fichiers sonores sont gérés par le plugin getID3 pour cela
 			 */
 			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_videos',array()))){
 				/**
 				 * Récupération des informations de la vidéo
 				 */
-				$recuperer_infos = charger_fonction('spipmotion_recuperer_infos','inc');
-				$infos = $recuperer_infos($id_document);
+				//$recuperer_infos = charger_fonction('spipmotion_recuperer_infos','inc');
+				//$infos = $recuperer_infos($id_document);
 
 				/**
 				 * Récupération d'un logo de la vidéo

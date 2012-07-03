@@ -9,13 +9,15 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Récupération des métadonnées via MediaInfo
- * @param string $chemin
+ * 
+ * @param string $chemin : le chemin du fichier à analyser
+ * @return array $infos : un tableau des informations récupérées
  */
-function inc_spipmotion_mediainfo_dist($chemin,$id_document,$only_cover=false){
+function inc_spipmotion_mediainfo_dist($chemin){
 	$infos = array();
 	if(file_exists($chemin)){
 		ob_start();
