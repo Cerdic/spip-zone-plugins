@@ -12,22 +12,39 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Enregistrement en base le contenu des données des tags et des données audio
+ * Récupération des informations d'un document ou d'un fichier audio
+ * Si on a un id_document (en premier argument) on enregistre en base dans cette fonction
+ * Si on a seulement un chemin de fichier (en second argument), on retourne un tableau des metas
  *
- * @param int $id_document
+ * @param int/null $id_document : id_document duquel on doit récupérer les infos
+ * @param string/false $fichier : chemin du fichier duquel on doit récupérer les infos
  */
 
-function inc_getid3_recuperer_infos($id_document){
-	if(!intval($id_document)){
-		return;
+function inc_getid3_recuperer_infos($id_document=null,$fichier=false){
+	if(!intval($id_document) && !$fichier){
+		return false;
 	}
 	
-	include_spip('action/editer_document');
-	include_spip('inc/documents');
-	include_spip('inc/filtres');
-	$document = sql_fetsel("*", "spip_documents","id_document=".intval($id_document));
-	$son_chemin = get_spip_doc($document['fichier']);
-
+	/**
+	 * Récupérer le fichier si on part d'un id_document
+	 */
+	$document = array();
+	
+	if(intval($id_document)){
+		include_spip('action/editer_document');
+		include_spip('inc/documents');
+		include_spip('inc/filtres');
+		$document = sql_fetsel("*", "spip_documents","id_document=".intval($id_document));
+		$son_chemin = get_spip_doc($document['fichier']);
+		if(!file_exists($son_chemin))
+			return false;
+	}else{
+		$son_chemin = $fichier;
+	}
+	
+	/**
+	 * Récupération des metas du fichier
+	 */
 	$recuperer_id3 = charger_fonction('recuperer_id3','inc');
 	$id3 = $recuperer_id3($son_chemin);
 	
@@ -37,16 +54,16 @@ function inc_getid3_recuperer_infos($id_document){
 	 * -* titre
 	 * -* descriptif
 	 */
-	if(($document['titre'] == '') && isset($id3['title'])){
+	if((!isset($document['titre']) OR ($document['titre'] == '')) && isset($id3['title'])){
 		$document['titre'] = preg_replace('/_/',' ',utf8_encode($id3['title']));
 	}
 	if($document['titre'] == ''){
-		$titre = strtolower(array_shift(explode('.',basename($document['fichier']))));
+		$titre = strtolower(array_shift(explode('.',basename($son_chemin))));
 		$titre = utf8_encode($titre);
 		$document['titre'] = preg_replace('/_/',' ',$titre);
 	}
 
-	if($document['descriptif'] == ''){
+	if(!isset($document['descriptif']) OR ($document['descriptif'] == '')){
 		/**
 		 * Ne pas prendre les comments foireux d'itunes
 		 */
@@ -76,14 +93,13 @@ function inc_getid3_recuperer_infos($id_document){
 	 */
 	$covers = array();
 	foreach($id3 as $key=>$val){
-		if(preg_match('/cover/',$key)){
+		if(preg_match('/cover/',$key))
 			$covers[] = $val;
-		}
 	}
 	
 	$credits = $id3['copyright_message']?$id3['copyright_message']:$id3['copyright'];
 	
-	if($credits != '')
+	if(!isset($document['credits']) OR ($document['credits'] == '') && ($credits != ''))
 		$credits = filtrer_entites(utf8_encode($credits));
 	
 	/**
@@ -137,8 +153,11 @@ function inc_getid3_recuperer_infos($id_document){
 		}
 	}
 	
-	if(count($covers) > 0){
-		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
+	if((count($covers) > 0)){
+		if(intval($id_document))
+			$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
+		else
+			$id_vignette = 0;
 
 		if(($id_vignette == 0)){
 			include_spip('inc/joindre_document');
@@ -159,7 +178,10 @@ function inc_getid3_recuperer_infos($id_document){
 		 * On ajoute la cover par défaut si elle existe comme vignette de document et
 		 * comme cover du fichier
 		 */
-		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
+		if(intval($id_document)) 
+			$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
+		else
+			$id_vignette = 0;
 	
 		if(($id_vignette == 0)){
 			include_spip('inc/joindre_document');
@@ -178,8 +200,9 @@ function inc_getid3_recuperer_infos($id_document){
 		}
 	}
 	
-	document_modifier($id_document,$valeurs);
-
-	return $id3;
+	if(intval($id_document))
+		document_modifier($id_document,$valeurs);
+	
+	return $valeurs;
 }
 ?>
