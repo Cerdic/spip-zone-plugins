@@ -34,9 +34,8 @@ function action_spipmotion_ajouter_file_encodage_tout_dist(){
 	}
 	if(_request('redirect')){
 		$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
-		//redirige_par_entete($redirect);
+		$GLOBALS['redirect'] = $redirect;
 	}
-	return $redirect;
 }
 
 function action_spipmotion_ajouter_file_encodage_tout_post($format=false){

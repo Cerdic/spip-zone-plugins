@@ -11,14 +11,10 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('inc/actions');
-
 function action_spipmotion_infos_dist(){
-	global $redirect;
-
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-
+	spip_log($GLOBALS['redirect'],'test');
 	if (!intval($arg)){
 		spip_log("action_infos_video_dist incompris: " . $arg);
 		return;
@@ -27,7 +23,8 @@ function action_spipmotion_infos_dist(){
 		action_spipmotion_infos_post($arg);
 		if(_request('redirect')){
 			$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
-			return $redirect;
+			$GLOBALS['redirect'] = $redirect;
+			spip_log($GLOBALS['redirect'],'test');
 		}
 	}
 }

@@ -19,6 +19,7 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/spipmotion.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/spipmotion.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/spipmotion.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/spipmotion.php" />
 	<pipeline nom="taches_generales_cron" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="spipmotion_pipelines.php" />
 	<pipeline nom="post_edition" inclure="spipmotion_pipelines.php" />

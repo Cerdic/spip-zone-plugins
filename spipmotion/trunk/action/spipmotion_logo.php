@@ -11,8 +11,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('inc/actions');
-
 function action_spipmotion_logo_dist(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
@@ -25,8 +23,8 @@ function action_spipmotion_logo_dist(){
 	
 	if(_request('redirect')){
 		$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
+		$GLOBALS['redirect'] = $redirect;
 	}
-	return $redirect;
 }
 
 function action_infos_video_post($id_document){

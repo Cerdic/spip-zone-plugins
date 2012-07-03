@@ -56,4 +56,27 @@ function spipmotion_declarer_tables_auxiliaires($tables_auxiliaires){
 	);
 	return $tables_auxiliaires;
 }
+
+/**
+ * Insertion dans le pipeline declarer_tables_objets_sql (SPIP)
+ * On ajoute nos champs dans les champs editables de la table spip_documents
+ */
+function spipmotion_declarer_tables_objets_sql($tables){
+	$tables['spip_documents']['champs_editables'][] = 'duree';
+	$tables['spip_documents']['champs_editables'][] = 'hasvideo';
+	$tables['spip_documents']['champs_editables'][] = 'framecount';
+	$tables['spip_documents']['champs_editables'][] = 'framerate';
+	$tables['spip_documents']['champs_editables'][] = 'pixelformat';
+	$tables['spip_documents']['champs_editables'][] = 'bitrate';
+	$tables['spip_documents']['champs_editables'][] = 'videobitrate';
+	$tables['spip_documents']['champs_editables'][] = 'videocodec';
+	$tables['spip_documents']['champs_editables'][] = 'hasaudio';
+	$tables['spip_documents']['champs_editables'][] = 'audiobitrate';
+	$tables['spip_documents']['champs_editables'][] = 'audiocodec';
+	$tables['spip_documents']['champs_editables'][] = 'audiochannels';
+	$tables['spip_documents']['champs_editables'][] = 'rotation';
+	$tables['spip_documents']['champs_editables'][] = 'metadatas';
+	
+	return $tables;
+}
 ?>
