@@ -377,7 +377,7 @@ function noizetier_blocs_defaut(){
 			'navigation' => array(
 				'nom' => _T('noizetier:nom_bloc_navigation'),
 				'description' => _T('noizetier:description_bloc_navigation'),
-				'icon' => 'bloc-extra-24.png'
+				'icon' => 'bloc-navigation-24.png'
 				),
 			'extra' => array(
 				'nom' => _T('noizetier:nom_bloc_extra'),
