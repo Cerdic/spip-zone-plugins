@@ -14,20 +14,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_tout_decocher' => 'Odznačiť všetko',
 
 	// D
-	'details_generation_paquetxml_erreur' => 'Súbor paquet.xml zásuvného modulu, ktorý je uvedený nižšie, nebol vytvorený kvôli chybám, ktoré sa vyskytli počas jeho vytvárania. Prosím, prečítajte si informácie, ktoré sú uvedené nižšie a podľa nich vykonajte potrebné úpravy.', # MODIF
-	'details_generation_paquetxml_erreur_pluriel' => 'Súbory paquet.xml @nb@ zásuvných modulov, ktoré sú uvedené nižšie, neboli vytvorené kvôli chybám, ktoré sa vyskytli počas ich vytvárania. Prosím, prečítajte si informácie, ktoré sú uvedené nižšie a podľa nich vykonajte potrebné úpravy.', # MODIF
-	'details_generation_paquetxml_notice' => 'Súbor paquet.xml zásuvného modulu, ktorý je uvedený nižšie, bol úspešne vytvorený, ale v jeho zdrojovom súbore plugin.xml sú chyby. Prosím skontrolujte súbor plugin.xml a súbory, ktoré z neho vznikli (paquet.xml, jazykové súbory) a zistite, či netreba vykonať nejaké úpravy.', # MODIF
-	'details_generation_paquetxml_notice_pluriel' => 'Súbory paquet.xml @nb@ zásuvných modulov, ktoré sú uvedené nižšie, boli úspešne vytvorené, ale v ich zdrojových súboroch plugin.xml sú chyby. Prosím skontrolujte súbory plugin.xml a súbory, ktoré z týchto súborov vznikli (súbory paquet.xml, jazykové súbory) a zistite, či netreba vykonať nejaké úpravy.', # MODIF
-	'details_generation_paquetxml_succes' => 'Súbor paquet.xml zásuvného modulu uvedeného nižšie bol úspešne vytvorený.', # MODIF
-	'details_generation_paquetxml_succes_pluriel' => 'Súbory paquet.xml @nb@ zásuvných modulov uvedených nižšie boli úspešne vytvorené.', # MODIF
-	'details_validation_paquetxml_erreur' => 'Formálna kontrola súboru plugin.xml, ktorý je uvedený nižšie, odhalila chyby. Prosím, prečítajte si informácie, ktoré sú uvedené nižšie a podľa nich vykonajte potrebné úpravy.', # MODIF
-	'details_validation_paquetxml_erreur_pluriel' => 'Formálna kontrola súborov @nb@ plugin.xml, ktoré sú uvedené nižšie, odhalila chyby. Prosím, prečítajte si informácie, ktoré sú uvedené nižšie a podľa nich vykonajte potrebné úpravy.', # MODIF
-	'details_validation_paquetxml_succes' => 'Pri formálnej kontrole súboru plugin.xml uvedeného nižšie sa nenašla žiadna chyba.', # MODIF
-	'details_validation_paquetxml_succes_pluriel' => 'Pri formálnej kontrole @nb@ súborov plugin.xml uvedených nižšie sa nenašla žiadna chyba.', # MODIF
-	'details_verification_pluginxml_erreur' => 'Kontrola súboru plugin.xml, ktorý je uvedený nižšie, odhalila chyby. Prosím, prečítajte si informácie nižšie a ak je to potrebné vykonajte úpravy (neberú sa do úvahy žiadne chyby, ktoré sa týkajú použitia tagov a, code, br... v popise).', # MODIF
-	'details_verification_pluginxml_erreur_pluriel' => 'Kontrola @nb@ súborov plugin.xml, ktoré sú uvedené nižšie, odhalila chyby. Prosím, prečítajte si informácie nižšie a ak je to potrebné vykonajte úpravy (neberú sa do úvahy žiadne chyby, ktoré sa týkajú použitia tagov a, code, br... v popise).', # MODIF
-	'details_verification_pluginxml_succes' => 'Kontrola súboru plugin.xml uvedeného nižšie nenašla žiadnu chybu.', # MODIF
-	'details_verification_pluginxml_succes_pluriel' => 'Kontrola @nb@ súborov plugin.xml uvedených nižšie nenašla žiadnu chybu.', # MODIF
+	'details_generation_paquetxml_erreur' => 'Súbor paquet.xml zásuvného modulu nebol vytvorený kvôli chybám, ktoré sa vyskytli počas jeho vytvárania. Prosím, prečítajte si informácie, ktoré sú uvedené nižšie a podľa nich vykonajte potrebné úpravy.',
+	'details_generation_paquetxml_erreur_pluriel' => 'Súbory paquet.xml @nb@ zásuvných modulov neboli vytvorené kvôli chybám, ktoré sa vyskytli počas ich vytvárania. Prosím, prečítajte si informácie, ktoré sú uvedené nižšie a podľa nich vykonajte potrebné úpravy.',
+	'details_generation_paquetxml_notice' => 'Súbor paquet.xml zásuvného modulu bol úspešne vytvorený, ale v jeho zdrojovom súbore plugin.xml sú chyby. Prosím skontrolujte súbor plugin.xml a súbory, ktoré z neho vznikli (paquet.xml, jazykové súbory) a zistite, či netreba vykonať nejaké úpravy.',
+	'details_generation_paquetxml_notice_pluriel' => 'Súbory paquet.xml @nb@ zásuvných modulov boli úspešne vytvorené, ale v ich zdrojových súboroch plugin.xml sú chyby. Prosím skontrolujte súbory plugin.xml a súbory, ktoré z týchto súborov vznikli (súbory paquet.xml, jazykové súbory) a zistite, či netreba vykonať nejaké úpravy.',
+	'details_generation_paquetxml_succes' => 'Súbor paquet.xml zásuvného modulu bol úspešne vytvorený.',
+	'details_generation_paquetxml_succes_pluriel' => 'Súbory paquet.xml @nb@ zásuvných modulov boli úspešne vytvorené.',
+	'details_validation_paquetxml_erreur' => 'Formálna kontrola súboru plugin.xml odhalila chyby. Prosím, prečítajte si informácie, ktoré sú uvedené nižšie a podľa nich vykonajte potrebné úpravy.',
+	'details_validation_paquetxml_erreur_pluriel' => 'Formálna kontrola súborov @nb@ plugin.xml odhalila chyby. Prosím, prečítajte si informácie, ktoré sú uvedené nižšie a podľa nich vykonajte potrebné úpravy.',
+	'details_validation_paquetxml_succes' => 'Pri formálnej kontrole súboru plugin.xml sa nenašla žiadna chyba.',
+	'details_validation_paquetxml_succes_pluriel' => 'Pri formálnej kontrole @nb@ súborov plugin.xml sa nenašla žiadna chyba.',
+	'details_verification_pluginxml_erreur' => 'Kontrola súboru plugin.xml odhalila chyby. Prosím, prečítajte si informácie nižšie a ak je to potrebné vykonajte úpravy (neberú sa do úvahy žiadne chyby, ktoré sa týkajú použitia tagov a, code, br... v popise).',
+	'details_verification_pluginxml_erreur_pluriel' => 'Kontrola @nb@ súborov plugin.xml odhalila chyby. Prosím, prečítajte si informácie nižšie a ak je to potrebné vykonajte úpravy (neberú sa do úvahy žiadne chyby, ktoré sa týkajú použitia tagov a, code, br... v popise).',
+	'details_verification_pluginxml_succes' => 'Kontrola súboru plugin.xml nenašla žiadnu chybu.',
+	'details_verification_pluginxml_succes_pluriel' => 'Kontrola @nb@ súborov plugin.xml nenašla žiadnu chybu.',
 
 	// I
 	'index_aide_paqxmlaut' => 'Tag <code>auteur</code>',
