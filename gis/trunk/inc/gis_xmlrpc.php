@@ -33,7 +33,7 @@ function spip_liste_gis($args) {
 		$where[] = 'lien.id_objet='.intval($args['id_objet']).' AND lien.objet='.sql_quote($args['objet']);
 	}
 	
-	if(in_array('distance',$order)){
+	if(in_array('distance',$order) OR in_array('!distance',$order)){
 		$distance = true;
 		$lat = $args['lat'];
 		$lon = $args['lon'];
@@ -81,6 +81,8 @@ function spip_liste_gis($args) {
  * -* login
  * -* pass
  * -* id_gis (Obligatoire)
+ * -* lat : si disponible avec lon, on ajoute la distance dans les infos
+ * -* lon : si disponible avec lat, on ajoute la distance dans les infos
  */
 function spip_lire_gis($args){
 	global $spip_xmlrpc_serveur;
@@ -97,6 +99,15 @@ function spip_lire_gis($args){
 	$res = $spip_xmlrpc_serveur->read($args_gis);
 	if(!$res)
 		return $spip_xmlrpc_serveur->error;
+	
+	if(isset($args['lat']) && is_numeric($args['lat']) && isset($args['lon']) && is_numeric($args['lon'])){
+		$lat = $args['lat'];
+		$lon = $args['lon'];
+		$what[] = 'gis.id_gis';
+		$what[] = "(6371 * acos( cos( radians(\"$lat\") ) * cos( radians( gis.lat ) ) * cos( radians( gis.lon ) - radians(\"$lon\") ) + sin( radians(\"$lat\") ) * sin( radians( gis.lat ) ) ) ) AS distance";
+		$distance = sql_fetsel($what,"spip_gis AS gis","gis.id_gis=".intval($args['id_gis']));
+		$res['result'][0]['distance'] = $distance['distance'];
+	}
 	
 	if(autoriser('modifier','gis',$args['id_gis'],$GLOBALS['visiteur_session']))
 		$res['result'][0]['modifiable'] = 1;
