@@ -1,0 +1,36 @@
+<BOUCLE_doc (DOCUMENTS types_documents) {id_document=#ENV{id}} {tout}>
+[(#REM)
+	Modèle spécifique pour TIFF car doit être inclus avec <object> et non avec <img> (erreur dans spip_types_documents).
+	Afin d'être cohérent avec les autres images, la toolbar est désactivée par défaut.
+]
+[(#SET{alt,#ENV{alt}|sinon{#ENV{titre}}|sinon{titre}})]
+[(#SET{alt,#GET{alt}|=={titre}|?{#TITRE|sinon{#TYPE_DOCUMENT|concat{' - '}|concat{#TAILLE|taille_en_octets}},#GET{alt}}})]
+[(#SET{obj,[<object data='(#URL_DOCUMENT)' type='#MIME_TYPE'[ width='(#MEDIA_TAILLE{largeur})'][ height='(#MEDIA_TAILLE{hauteur})'] >
+	<param name='src' value='#URL_DOCUMENT' />
+	[(#ID_DOCUMENT|appliquer_filtre{#MIME_TYPE})]
+	[(#ENV*|env_to_params{#MEDIA_IGNORE_PARAMS})]
+	[(#ENV{toolbar}|non)<param name='toolbar' value='off' />]
+	<!--#EVAL**{chr(91)}if lte IE 6 #EVAL**{chr(93)}>
+	<embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs{#MEDIA_IGNORE_PARAMS})][ width='(#MEDIA_TAILLE{largeur})'][ height='(#MEDIA_TAILLE{hauteur})'][(#ENV{toolbar}|non)toolbar='off'] /></embed>
+	<!#EVAL**{chr(91)}endif#EVAL**{chr(93)}-->
+	#GET{alt}
+</object>]})]
+[(#MEDIA_AFFICHER_LEGENDE|et{#HTML5|non})
+	<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+	<dt>#GET{obj}</dt>
+	#MEDIA_LEGENDE{'dl',#GET{width}}
+	</dl>
+]
+[(#MEDIA_AFFICHER_LEGENDE|non|et{#HTML5|non})
+	<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>#GET{obj}</span>
+]
+[(#MEDIA_AFFICHER_LEGENDE|et{#HTML5})
+	<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+	#GET{obj}
+	<figcaption>#MEDIA_LEGENDE{'dl',#GET{width}}</figcaption>
+	</figure>
+]
+[(#MEDIA_AFFICHER_LEGENDE|non|et{#HTML5})
+	<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>#GET{obj}</figure>
+]
+</BOUCLE_doc>

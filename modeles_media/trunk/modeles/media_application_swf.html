@@ -1,0 +1,36 @@
+<BOUCLE_doc (DOCUMENTS types_documents) {id_document=#ENV{id}} {tout}>
+	#SET{hauteur,#MEDIA_TAILLE{hauteur}} #SET{largeur,#MEDIA_TAILLE{largeur}}
+	[(#ENV{controls}=={PlayButton}|?{#SET{hauteur,25},''})][
+	 (#ENV{controls}=={PlayButton}|?{#SET{largeur,40},''})][
+	 (#ENV{controls}=={PositionSlider}|?{#SET{hauteur,25},''})][
+	 (#ENV{controls}=={PositionSlider}|?{#SET{largeur,#GET{largeur}|moins{40}},''})
+	]
+	[(#SET{alt,#ENV{alt}|sinon{#ENV{titre}}|sinon{titre}})]
+	[(#SET{alt,#GET{alt}|=={titre}|?{#TITRE|sinon{#TYPE_DOCUMENT|concat{' - '}|concat{#TAILLE|taille_en_octets}},#GET{alt}}})]
+	[(#SET{obj,[<object classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' 
+ codebase='http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=#ENV{version,'6,0,0,0'}' 
+ width='#GET{largeur}' height='#GET{hauteur}'>
+		<param name='movie' value='(#URL_DOCUMENT)' />
+		[(#ENV{quality,''}|?{'',' '})<param name="quality" value="high" />]
+		[(#ENV*|env_to_params)]
+		<!--#EVAL**{chr(91)}if !IE#EVAL**{chr(93)}> <-->
+		<object data="#URL_DOCUMENT" width='#GET{largeur}' height='#GET{hauteur}' type="application/x-shockwave-flash">
+			[(#ENV{quality,''}|?{'',' '})<param name="quality" value="high" />]
+			[(#ENV*|env_to_params)]
+			<param name="pluginurl" value="http://www.macromedia.com/go/getflashplayer" />
+			#GET{alt}
+		</object>
+		<!--> <!#EVAL**{chr(91)}endif#EVAL**{chr(93)}-->
+		<!--#EVAL**{chr(91)}if IE#EVAL**{chr(93)}>#GET{alt}<!#EVAL**{chr(91)}endif#EVAL**{chr(93)}-->
+
+	</object>]})]
+	[(#MEDIA_AFFICHER_LEGENDE)
+		<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_application media_application_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+		<dt>#GET{obj}</dt>
+		#MEDIA_LEGENDE{'dl',#GET{largeur}}
+		</dl>
+	]
+	[(#MEDIA_AFFICHER_LEGENDE|non)
+		<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_application media_application_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>#GET{obj}</span>
+	]
+</BOUCLE_doc>

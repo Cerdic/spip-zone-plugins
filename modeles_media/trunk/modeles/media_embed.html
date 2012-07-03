@@ -1,0 +1,6 @@
+<BOUCLE_ext(DOCUMENTS types_documents) {id_document=#ENV{id}} {tout}>
+[(#CHEMIN{modeles/media_[(#MIME_TYPE|groupe_mime)]_#EXTENSION.html}|oui)
+	[(#INCLURE{fond=modeles/media_[(#MIME_TYPE|groupe_mime)]_#EXTENSION}{id=#ID_DOCUMENT}{env})]]
+[(#CHEMIN{modeles/media_[(#MIME_TYPE|groupe_mime)]_#EXTENSION.html}|non)
+	[(#INCLURE{fond=modeles/media_[(#MIME_TYPE|groupe_mime)]}{id=#ID_DOCUMENT}{env})]]
+</BOUCLE_ext>
