@@ -21,8 +21,7 @@
 	<pipeline nom="header_prive" inclure="media_pipelines.php" />
 	<pipeline nom="pre_liens" inclure="media_pipelines.php" />
 	<pipeline nom="ieconfig_metas" inclure="media_pipelines.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="media_pipelines.php" />
 
 	<necessite nom="medias" />
-
-	<utilise nom="inserer_modeles" />
 </paquet>

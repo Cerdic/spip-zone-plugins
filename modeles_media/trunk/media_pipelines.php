@@ -47,4 +47,11 @@ function media_pre_liens($texte) {
 	return $texte;
 }
 
+// Ajouter le modèle media à la liste des modèles de documents
+function media_declarer_tables_objets_sql($tables){
+	$tables['spip_documents']['modeles'][] = 'media';
+	return $tables;
+}
+
+
 ?>
