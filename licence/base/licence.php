@@ -20,7 +20,9 @@ function licence_declarer_tables_principales($tables_principales){
  */
 function licence_declarer_tables_objets_sql($tables){
 	$tables['spip_articles']['champs_editables'][] = 'id_licence';
+	$tables['spip_articles']['champs_versionnes'][] = 'id_licence';
 	$tables['spip_documents']['champs_editables'][] = 'id_licence';
+	$tables['spip_documents']['champs_versionnes'][] = 'id_licence';
 	
 	return $tables;
 }
