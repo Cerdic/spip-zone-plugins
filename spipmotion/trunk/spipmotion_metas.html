@@ -1,0 +1,23 @@
+<BOUCLE_document(DOCUMENTS){si #AUTORISER{modifier,document,#ID_DOCUMENT}}{id_document}{tout}>
+<BOUCLE_tracks(POUR){tableau #METADATAS|unserialize}>
+<h3>#CLE</h3>
+<ul>
+<BOUCLE_infos(POUR){tableau #VALEUR}>
+	<BOUCLE_ss_infos(POUR){tableau #VALEUR}>
+	<li><strong>#CLE</strong> :
+	<B_ss_ss_infos>
+	<ul> 
+	<BOUCLE_ss_ss_infos(POUR){tableau #VALEUR}>
+		<li>#CLE - #VALEUR</li>
+	</BOUCLE_ss_ss_infos>
+	</ul>
+	</B_ss_ss_infos>
+	</li>
+	</BOUCLE_ss_infos>
+</BOUCLE_infos>
+</ul>
+</BOUCLE_tracks>
+</BOUCLE_document>
+</B_document>
+
+<//B_document>

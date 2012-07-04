@@ -14,7 +14,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function action_spipmotion_infos_dist(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	spip_log($GLOBALS['redirect'],'test');
 	if (!intval($arg)){
 		spip_log("action_infos_video_dist incompris: " . $arg);
 		return;

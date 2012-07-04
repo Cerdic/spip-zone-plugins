@@ -58,6 +58,9 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 	$maj['1.1.1'] = array(
 		array('spipmotion_remove_idorig',array())
 	);
+	$maj['1.1.2'] = array(
+		array('maj_tables',array('spip_documents')),
+	);
 	/**
 	 * TODO : générer un htaccess dans le répertoire script_bash/
 	 * TODO : insérer une préconfiguration par défaut

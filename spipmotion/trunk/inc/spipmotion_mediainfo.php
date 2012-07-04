@@ -43,6 +43,19 @@ function inc_spipmotion_mediainfo_dist($chemin){
 				$infos['hauteur'] = $info[0]['Height'][0];
 				$infos['largeur'] = $info[0]['Width'][0];
 				$infos['videocodec'] = $info[0]['Format'][0];
+				$infos['videocodecid'] = $info[0]['Codec_ID'][0] ? $info[0]['Codec_ID'][0] : strtolower($info[0]['Format'][0]);
+				if($infos['videocodecid'] == 'avc1'){
+					if(isset($info[0]['Format_profile'][0])){
+						if(preg_match('/^Baseline.*/',$info[0]['Format_profile'][0]))
+							$infos['videocodecid'] = 'avc1.42E01E';
+						if(preg_match('/^Main.*/',$info[0]['Format_profile'][0]))
+							$infos['videocodecid'] = 'avc1.4D401E';
+						if(preg_match('/^High.*/',$info[0]['Format_profile'][0]))
+							$infos['videocodecid'] = 'avc1.64001E';
+					}
+				}else if($infos['videocodec'] == 'Sorenson Spark'){
+					$infos['videocodecid'] = 'h263';
+				}
 				$infos['framerate'] = $info[0]['Frame_rate'][0];
 				$infos['framecount'] = $info[0]['Frame_count'][0];
 				$infos['rotation'] = intval($info[0]['Rotation'][0]);
@@ -55,6 +68,13 @@ function inc_spipmotion_mediainfo_dist($chemin){
 				$infos['canaux'] = $info[0]['Channel_s_'][0];
 				$infos['audiosamplerate'] = $info[0]['Sampling_rate'][0];
 				$infos['audiocodec'] = $info[0]['Codec'][0];
+				if($infos['audiocodec'] == 'AAC LC'){
+					$infos['audiocodecid'] = 'mp4a.40.2';
+				}else if($infos['audiocodec'] == 'MPA1L3'){
+					$infos['audiocodecid'] = 'mp3a';
+				}else{
+					$infos['audiocodecid'] = $info[0]['Codec_ID'][0] ? $info[0]['Codec_ID'][0] : strtolower($info[0]['Codec'][0]);
+				}
 			}
 		}
 	}
@@ -64,6 +84,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 	if(!$infos['hasvideo']){
 		$infos['hasvideo'] = 'non';
 	}
+	spip_log($infos,'spipmotion');
 	$infos['metadatas'] = serialize($metas);
 	return $infos;
 }

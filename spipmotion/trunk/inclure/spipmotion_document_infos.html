@@ -1,5 +1,8 @@
 <BOUCLE_doc(DOCUMENTS){id_document}{tout}>
 <div class="infos_techniques">
+	[(#METADATAS|strlen|oui)
+		<a href="[(#URL_PAGE{spipmotion_metas}|parametre_url{id_document,#ID_DOCUMENT})]" class="mediabox"><:spipmotion:lien_voir_metadatas:></a>
+	]
 	[<p>
 		<strong>
 			<:spipmotion:info_nom_fichier:>
