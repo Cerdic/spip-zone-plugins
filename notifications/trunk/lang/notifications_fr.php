@@ -57,8 +57,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_lien_publier_commentaire' => 'Publier ce commentaire',
-	'info_lien_supprimer_commentaire' => 'Supprimer ce commentaire',
 	'info_lien_signaler_spam_commentaire' => 'Signaler comme SPAM',
+	'info_lien_supprimer_commentaire' => 'Supprimer ce commentaire',
 	'info_moderation_confirmee_off' => 'Le message #@id_forum@ a bien été supprimé',
 	'info_moderation_confirmee_publie' => 'Le message #@id_forum@ a bien été publié',
 	'info_moderation_confirmee_spam' => 'Le message #@id_forum@ a bien été signalé en SPAM',

@@ -55,6 +55,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_public_thread' => '<strong>خط گفتگو</strong>: شركت‌كنندگان در همان خط گفتگو اطلاعيه‌هايي از سخنگاه‌ها (همگاني) دريافت مي‌كنند.',
 
 	// I
+	'info_lien_publier_commentaire' => 'Publier ce commentaire', # NEW
+	'info_lien_signaler_spam_commentaire' => 'Signaler comme SPAM', # NEW
+	'info_lien_supprimer_commentaire' => 'Supprimer ce commentaire', # NEW
 	'info_moderation_confirmee_off' => 'Le message #@id_forum@ a bien été supprimé', # NEW
 	'info_moderation_confirmee_publie' => 'Le message #@id_forum@ a bien été publié', # NEW
 	'info_moderation_confirmee_spam' => 'Le message #@id_forum@ a bien été signalé en SPAM', # NEW

@@ -56,6 +56,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_public_thread' => '<strong>Forum thread</strong>: Posters to the same thread get notified when a new comment is posted to the (public) thread.',
 
 	// I
+	'info_lien_publier_commentaire' => 'Publier ce commentaire', # NEW
+	'info_lien_signaler_spam_commentaire' => 'Signaler comme SPAM', # NEW
+	'info_lien_supprimer_commentaire' => 'Supprimer ce commentaire', # NEW
 	'info_moderation_confirmee_off' => 'Message #@id_forum@ has been deleted',
 	'info_moderation_confirmee_publie' => 'Message #@id_forum@ has been published online',
 	'info_moderation_confirmee_spam' => 'Message #@id_forum@ has been reported as SPAM',

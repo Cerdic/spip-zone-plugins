@@ -56,6 +56,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_public_thread' => '<strong>Téma:</strong> diskutujúci v rovnakom vlákne dostávajú oznamy z (verejných) diskusných fór.',
 
 	// I
+	'info_lien_publier_commentaire' => 'Publier ce commentaire', # NEW
+	'info_lien_signaler_spam_commentaire' => 'Signaler comme SPAM', # NEW
+	'info_lien_supprimer_commentaire' => 'Supprimer ce commentaire', # NEW
 	'info_moderation_confirmee_off' => 'Príspevok #@id_forum@ bol vymazaný',
 	'info_moderation_confirmee_publie' => 'Príspevok #@id_forum@ bol publikovaný',
 	'info_moderation_confirmee_spam' => 'Príspevok #@id_forum@ bol nahlásený ako SPAM',
