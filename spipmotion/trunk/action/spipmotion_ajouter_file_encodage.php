@@ -25,6 +25,7 @@ function action_spipmotion_ajouter_file_encodage_dist(){
 		$redirect = urldecode(_request('redirect'));
 		return $redirect;
 	}
+
 	action_spipmotion_ajouter_file_encodage_post($r);
 	if(_request('redirect')){
 		$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
@@ -35,10 +36,12 @@ function action_spipmotion_ajouter_file_encodage_dist(){
 function action_spipmotion_ajouter_file_encodage_post($r){
 	list(, $sign, $id_document,$format) = $r;
 	
-	spipmotion_genere_file($id_document,$format);
+	$id_facd = spipmotion_genere_file($id_document,$format);
 	
-	$conversion_directe = charger_fonction('facd_convertir_direct','inc');
-	$conversion_directe();
+	if(intval($id_facd)){
+		$conversion_directe = charger_fonction('facd_convertir_direct','inc');
+		$conversion_directe();
+	}
 }
 
 /**
@@ -63,7 +66,7 @@ function spipmotion_genere_file($id_document,$format=''){
 			)){
 			$en_file = sql_getfetsel("id_facd_conversion","spip_facd_conversions","id_document=".intval($id_document)." AND extension =".sql_quote($format)." AND statut IN ('en_cours,non,erreur')");
 			if(!$en_file){
-				facd_ajouter_conversion_file($id_document,'spipmotion_encodage',$format,null,'conversion');
+				$id_facd = facd_ajouter_conversion_file($id_document,'spipmotion_encodage',$format,null,'conversion');
 			}
 			else
 				spip_log("Ce document existe deja dans la file d'attente","spipmotion");
@@ -76,7 +79,7 @@ function spipmotion_genere_file($id_document,$format=''){
 				foreach(lire_config('spipmotion/fichiers_videos_sortie',array()) as $format){
 					$en_file = sql_getfetsel("id_facd_conversion","spip_facd_conversions","id_document=".intval($id_document)." AND extension ='$extension_sortie' AND statut IN ('en_cours,non')");
 					if(!$en_file){
-						facd_ajouter_conversion_file($id_document,'spipmotion_encodage',$format,null,'conversion');
+						$id_facd = facd_ajouter_conversion_file($id_document,'spipmotion_encodage',$format,null,'conversion');
 					}
 					else
 						spip_log("Cette video existe deja dans la file d'attente","spipmotion");
@@ -90,7 +93,7 @@ function spipmotion_genere_file($id_document,$format=''){
 				foreach(lire_config('spipmotion/fichiers_audios_sortie',array()) as $format){
 					$en_file = sql_getfetsel("id_facd_conversion","spip_facd_conversions","id_document=".intval($id_document)." AND extension ='$extension_sortie' AND statut IN ('en_cours,non')");
 					if(!$en_file){
-						facd_ajouter_conversion_file($id_document,'spipmotion_encodage',$format,null,'conversion');
+						$id_facd = facd_ajouter_conversion_file($id_document,'spipmotion_encodage',$format,null,'conversion');
 					}
 					else
 						spip_log("Ce son existe deja dans la file d'attente","spipmotion");
@@ -98,6 +101,6 @@ function spipmotion_genere_file($id_document,$format=''){
 			}
 		}
 	}
-	return true;
+	return $id_facd;
 }
 ?>
