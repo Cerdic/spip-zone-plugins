@@ -435,6 +435,7 @@ function liens_implicite_site_dist($texte,$id,$type,$args,$ancre,$connect=''){
  */
 function traiter_lien_implicite ($ref, $texte='', $pour='url', $connect='')
 {
+	$cible = ($connect ? $connect : (isset($GLOBALS['lien_implicite_cible_public'])?$GLOBALS['lien_implicite_cible_public']:null));
 	if (!($match = typer_raccourci($ref))) return false;
 	@list($type,,$id,,$args,,$ancre) = $match;
 # attention dans le cas des sites le lien doit pointer non pas sur
@@ -442,11 +443,11 @@ function traiter_lien_implicite ($ref, $texte='', $pour='url', $connect='')
 	if ($f = charger_fonction("implicite_$type","liens",true))
 		$url = $f($texte,$id,$type,$args,$ancre,$connect);
 	if (!$url)
-		$url = generer_url_entite($id,$type,$args,$ancre,$connect ? $connect : NULL);
+		$url = generer_url_entite($id,$type,$args,$ancre,$cible);
 	if (!$url) return false;
 	if (is_array($url)) {
 		@list($type,$id) = $url;
-		$url = generer_url_entite($id,$type,$args,$ancre,$connect ? $connect : NULL);
+		$url = generer_url_entite($id,$type,$args,$ancre,$cible);
 	}
 	if ($pour === 'url') return $url;
 	$r = traiter_raccourci_titre($id, $type, $connect);
