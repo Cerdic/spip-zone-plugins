@@ -57,9 +57,9 @@ Le plugin propose également un modèle générant des informations {{Open Graph
 ', # NEW
 
 	// E
-	'exemple' => '{{{Exemple}}}
+	'exemple' => '{{{Príklad}}}
 
-Les différents blocs ci-dessous vous présentent un exemple de chaque modèle avec des valeurs fictives. Reportez-vous au modèle correspondant pour les options.', # NEW
+Rôzne bloky, ktoré sa nachádzajú nižšie, slúžia ako príklad každej šablóny s fiktívnymi hodnotami. Ak chcete nastaviť možnosti, prejdite na konkrétnu šablónu.',
 
 	// F
 	'fb_modeles' => 'Šablóny Facebooku',
