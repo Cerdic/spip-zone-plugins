@@ -1,7 +1,7 @@
 <paquet
 	prefix="jquerycorner"
 	categorie="multimedia"
-	version="0.4.1"
+	version="0.4.2"
 	etat="test"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="prive/themes/spip/images/jquerycorner-32.png"
