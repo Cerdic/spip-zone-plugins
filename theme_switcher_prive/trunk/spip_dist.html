@@ -34,6 +34,7 @@ Valeurs par defaut :
 
 [(#INCLURE{#VAL{clear.css}|find_in_theme|direction_css{#GET{dir}}|substr{#VAL{_DIR_RACINE}|constant|strlen}})]
 [(#INCLURE{#VAL{layout.css}|find_in_theme|direction_css{#GET{dir}}|substr{#VAL{_DIR_RACINE}|constant|strlen}})]
+[(#INCLURE{#CHEMIN{inc/elastic.layout.css}})]
 
 <BOUCLE_css(POUR){tableau #LISTE{typo.css,grids.css,bando.css,icons.css,lists.css,forms.css,picker.css,box_skins.css,jquery-ui.css,content.css,exceptions.css,theme.css}}>
 [(#SET{fond,[(#VALEUR|concat{.html}|find_in_theme|substr{[(#VAL{_DIR_RACINE}|constant|strlen)],[(#VAL{-5}|intval)]})]})]

@@ -47,6 +47,11 @@
 					onchange="if (this.checked) jQuery('body').addClass('large').removeClass('etroit'); else jQuery('body').removeClass('large').addClass('etroit');"/>
 					<label for="[(#GET{name})]_large"><:info_grand_ecran:></label>
 				</div>
+				<div class="choix">
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_elastic'[(#ENV{#GET{name}}|=={elastic}|oui)checked="checked" ]value="elastic"
+					onchange="if (this.checked) jQuery('body').addClass('elastic').removeClass('elastic'); else jQuery('body').removeClass('elastic').addClass('elastic');"/>
+					<label for="[(#GET{name})]_elastic"><:theme_switcher_prive:info_elastic:></label>
+				</div>
 			</li>
 			#SET{name,display_navigation}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
