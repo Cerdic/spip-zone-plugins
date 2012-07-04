@@ -17,6 +17,9 @@ function clevermail_post_create($lst_id) {
 				'date' => date("Y-m-d",$last_create),
 				'lst_id' => intval($lst_id),
 			);
+		  if (!_CLEVERMAIL_AGE_PLACE_SUR_DERNIER_ENVOI) {
+			unset($contexte['date']);
+		  }
 		  // on passe la globale lien_implicite_cible_public en true
 		  // pour avoir les liens internes en public (en non prive d'apres le contexte)
 		  // credit de l'astuce: denisb & rastapopoulos & erational
@@ -37,6 +40,9 @@ function clevermail_post_create($lst_id) {
   				'date' => date("Y-m-d",$last_create),
   				'lst_id' => intval($lst_id),
   			);
+		  if (!_CLEVERMAIL_AGE_PLACE_SUR_DERNIER_ENVOI) {
+			unset($contexte['date']);
+		  }
   		  // on passe la globale lien_implicite_cible_public en true
 		  // pour avoir les liens internes en public (en non prive d'apres le contexte)
 		  // credit de l'astuce: denisb & rastapopoulos & erational

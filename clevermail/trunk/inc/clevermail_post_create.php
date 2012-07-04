@@ -20,7 +20,13 @@ function clevermail_post_create($lst_id) {
 		  if (!_CLEVERMAIL_AGE_PLACE_SUR_DERNIER_ENVOI) {
 			unset($contexte['date']);
 		  }
+		  // on passe la globale lien_implicite_cible_public en true
+		  // pour avoir les liens internes en public (en non prive d'apres le contexte)
+		  // credit de l'astuce: denisb & rastapopoulos & erational
+		  $GLOBALS['lien_implicite_cible_public'] = true;
 		  $post['pst_html'] = recuperer_fond($list['lst_url_html'], $contexte);
+		  // on revient a la config initiale
+		  unset($GLOBALS['lien_implicite_cible_public']);
 	  }
 	  
 	  // Traitement de la source texte
@@ -37,7 +43,13 @@ function clevermail_post_create($lst_id) {
 		  if (!_CLEVERMAIL_AGE_PLACE_SUR_DERNIER_ENVOI) {
 			unset($contexte['date']);
 		  }
+		  // on passe la globale lien_implicite_cible_public en true
+		  // pour avoir les liens internes en public (en non prive d'apres le contexte)
+		  // credit de l'astuce: denisb & rastapopoulos & erational
+		  $GLOBALS['lien_implicite_cible_public'] = true;
   		  $post['pst_text'] = recuperer_fond($list['lst_url_text'], $contexte);
+		  // on revient a la config initiale
+		  unset($GLOBALS['lien_implicite_cible_public']);
   	  }
       $post['pst_text'] = strip_tags($post['pst_text']);
   	} else {

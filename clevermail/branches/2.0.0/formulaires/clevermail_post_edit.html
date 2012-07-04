@@ -20,7 +20,7 @@
 	       #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 	       #SET{obli,'obligatoire'}
 	       <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	         <label for="#GET{name}"><:clevermail:contenu_html:></label>
+	         <label for="#GET{name}"><:clevermail:label_contenu_html:></label>
 	         [<span class='erreur_message'>(#GET{erreurs})</span>]
 	         <textarea name="#GET{name}" id="#GET{name}" cols="80" rows="10" wrap="virtual" class="textarea">#ENV{#GET{name}}</textarea>
 	       </li>
@@ -28,7 +28,7 @@
          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
          #SET{obli,'obligatoire'}
          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-           <label for="#GET{name}"><:clevermail:contenu_text:></label>
+           <label for="#GET{name}"><:clevermail:label_contenu_text:></label>
            [<span class='erreur_message'>(#GET{erreurs})</span>]
            <textarea name="#GET{name}" id="#GET{name}" cols="80" rows="10" wrap="virtual" class="textarea">#ENV{#GET{name}}</textarea>
          </li>

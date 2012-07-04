@@ -38,6 +38,7 @@
         ]
       </li>
     </ul>
+    #ENV{err_msg}
     [(#ENV{err_msg}|!={''}|oui)
       [(#ENV{err_lst}|=={#LST_ID}|oui)
         <p class="error">[(#VAL{clevermail:#ENV{err_msg}}|_T)]</p>
