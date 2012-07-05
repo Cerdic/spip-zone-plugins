@@ -168,6 +168,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_recuperer_logo_fichier' => 'le fichier lui-même',
 	'lien_supprimer_version' => 'Supprimer la version @version@',
 	'lien_supprimer_versions' => 'Supprimer toutes les versions du document',
+	'lien_voir_metadatas' => 'Voir l\'ensemble des métadonnées',
 
 	// M
 	'mediainfo_install' => 'MediaInfo sur votre serveur :',

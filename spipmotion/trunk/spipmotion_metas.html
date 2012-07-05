@@ -1,14 +1,14 @@
 <BOUCLE_document(DOCUMENTS){si #AUTORISER{modifier,document,#ID_DOCUMENT}}{id_document}{tout}>
 <BOUCLE_tracks(POUR){tableau #METADATAS|unserialize}>
 <h3>#CLE</h3>
-<ul>
+<ul class="liste-items">
 <BOUCLE_infos(POUR){tableau #VALEUR}>
 	<BOUCLE_ss_infos(POUR){tableau #VALEUR}>
-	<li><strong>#CLE</strong> :
+	<li class="item"><strong>#CLE</strong> :
 	<B_ss_ss_infos>
-	<ul> 
+	<ul class="liste-items"> 
 	<BOUCLE_ss_ss_infos(POUR){tableau #VALEUR}>
-		<li>#CLE - #VALEUR</li>
+		<li class="item">#CLE - #VALEUR</li>
 	</BOUCLE_ss_ss_infos>
 	</ul>
 	</B_ss_ss_infos>
