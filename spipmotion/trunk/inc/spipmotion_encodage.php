@@ -40,7 +40,7 @@ function inc_spipmotion_encodage_dist($id_document,$options = array()){
 									'lien.id_objet='.intval($source['id_document']).' AND lien.objet='.sql_quote("document").' AND document.extension='.sql_quote($format).' AND document.mode='.sql_quote("conversion"))){
 		spip_log("Il faut supprimer $id_document",'spipmotion');
 		$v = sql_fetsel("id_document,id_vignette,fichier","spip_documents","id_document=".intval($id_document));
-
+		
 		include_spip('inc/documents');
 		/**
 		 * On ajoute l'id_document dans la liste des documents
@@ -48,7 +48,7 @@ function inc_spipmotion_encodage_dist($id_document,$options = array()){
 		 * On supprime le fichier correspondant
 		 */
 		$liste[] = $v['id_document'];
-		if (@file_exists($f = get_spip_doc($v['fichier']))) {
+		if (sql_count('spip_documents','fichier='.sql_quote($v['fichier']) == '1') && @file_exists($f = get_spip_doc($v['fichier']))) {
 			supprimer_fichier($f);
 		}
 
@@ -61,7 +61,7 @@ function inc_spipmotion_encodage_dist($id_document,$options = array()){
 			spip_log("on supprime sa vignette également","spipmotion");
 			$liste[] = $v['id_vignette'];
 			$fichier = sql_getfetsel('fichier','spip_documents','id_document='.$v['id_vignette']);
-			if (@file_exists($f = get_spip_doc($fichier))) {
+			if (sql_count('spip_documents','fichier='.sql_quote($fichier) == '1') && @file_exists($f = get_spip_doc($fichier))) {
 				supprimer_fichier($f);
 			}
 		}
