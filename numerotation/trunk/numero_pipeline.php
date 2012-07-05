@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function numero_affiche_droite($flux){
 	if (in_array($flux['args']['exec'], array('rubriques', 'rubrique')) and autoriser('numeroter', 'rubrique', $flux['args']['id_rubrique'])){
 		$out = "";

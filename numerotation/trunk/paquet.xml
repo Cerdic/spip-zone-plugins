@@ -1,9 +1,9 @@
 <paquet
 	prefix="numero"
 	categorie="navigation"
-	version="1.0.0"
-	etat="test"
-	compatibilite="[3.0.0-dev;3.0.*]"
+	version="1.0.1"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="numero.gif"
 	documentation="http://www.spip-contrib.net/Numerotation-Rapide"
 >	
