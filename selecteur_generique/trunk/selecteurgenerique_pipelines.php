@@ -3,8 +3,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function selecteurgenerique_jqueryui_plugins($plugins){
-	if (defined('DESACTIVER_SELECTEUR_GENERIQUE')
-	AND DESACTIVER_SELECTEUR_GENERIQUE)
+	if ((defined('DESACTIVER_SELECTEUR_GENERIQUE')
+	AND DESACTIVER_SELECTEUR_GENERIQUE) OR !test_espace_prive()) 
 		return $plugins;
 	$plugins[] = 'jquery.ui.position';
 	$plugins[] = 'jquery.ui.autocomplete';
