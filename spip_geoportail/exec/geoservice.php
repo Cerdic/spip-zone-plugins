@@ -53,11 +53,19 @@ function exec_geoservice()
 		echo fin_boite_info(true)."<br/>";
 
 		// Logo de la rubrique
-		$iconifier = charger_fonction('iconifier', 'inc');
-		$GLOBALS['logo_libelles']['id_geoservice'] = _T('geoportail:logo_service');
-		if ($GLOBALS['spip_version_code']>2) $b=false;
-		else $b=autoriser('modifier', 'geoservice');
-		echo $iconifier('id_geoservice', $id_geoservice, 'geoservice', $b);
+		if ($GLOBALS['spip_version_branche']>=3) 
+		{	$GLOBALS['logo_libelles']['geoservice'] = _T('geoportail:logo_service');
+			echo "<div class='lat'>"
+				.recuperer_fond('prive/objets/editer/logo',array('objet'=>'geoservice','id_objet'=>$id_geoservice,'editable'=>autoriser('modifier', 'geoservice')))
+				."</div>";
+		}
+		else
+		{	$iconifier = charger_fonction('iconifier', 'inc');
+			$GLOBALS['logo_libelles']['id_geoservice'] = _T('geoportail:logo_service');
+			if ($GLOBALS['spip_version_branche']>2) $b=false;
+			else $b=autoriser('modifier', 'geoservice');
+			echo $iconifier('id_geoservice', $id_geoservice, 'geoservice', $b);
+		}
 			
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'geoservice','id_geoservice'=>$id_geoservice),'data'=>''))
 		.creer_colonne_droite('', true)
@@ -74,7 +82,7 @@ function exec_geoservice()
 					false);
 			echo $rep;
 			
-			if ($GLOBALS['spip_version_code']>2) echo gros_titre (textebrut(typo($row['titre'])),puce_statut($row['statut']), false);
+			if ($GLOBALS['spip_version_branche']>2) echo gros_titre (textebrut(typo($row['titre'])),puce_statut($row['statut']), false);
 			else gros_titre (textebrut(typo($row['titre'])),'puce-'.puce_statut($row['statut']).'.gif');
 			echo $row['type'];
 			echo " - ".$row['zone'];
@@ -90,9 +98,9 @@ function exec_geoservice()
 			{	
 				$statut = $row['statut'];
 				$form = _T('geoportail:statut')." : <select class=fondl name=statut >"
-					."<option value=prop ".($statut=='prop'?"SELECTED":"")." >"._T("info_statut_site_3")."</option>"
-					."<option value=publie ".($statut=='publie'?"SELECTED":"").">"._T("info_statut_site_2")."</option>"
-					."<option value=refuse ".($statut=='refuse'?"SELECTED":"").">"._T("info_statut_site_4")."</option>"
+					."<option value=prop ".($statut=='prop'?"SELECTED":"")." >"._T("geoportail:propose")."</option>"
+					."<option value=publie ".($statut=='publie'?"SELECTED":"").">"._T("geoportail:publie")."</option>"
+					."<option value=refuse ".($statut=='refuse'?"SELECTED":"").">"._T("geoportail:poubelle")."</option>"
 					."</select>\n"
 					."<input type='submit' id='valider_statut' name='valider_statut' class='fondo' value='"._T('spip:bouton_valider')."' style='margin:0 1em;' />";
 				echo "<div style='padding:2em 3em 1em 1em; text-align:center;'>";

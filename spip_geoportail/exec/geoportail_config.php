@@ -16,7 +16,7 @@ include_spip('inc/presentation');
 include_spip('inc/config');
 
 function exec_geoportail_config()
-{	global $connect_statut, $connect_toutes_rubriques, $couleur_foncee, $couleur_claire;
+{	global $spip_version_branche, $connect_statut, $connect_toutes_rubriques, $couleur_foncee, $couleur_claire;
 
 	// Administrateur global seulement
 	if ($GLOBALS['connect_statut'] == "0minirezo" AND $connect_toutes_rubriques)
@@ -28,19 +28,28 @@ function exec_geoportail_config()
 		echo debut_gauche('',true);
 		
 		// Logo de la rubrique
-		$iconifier = charger_fonction('iconifier', 'inc');
-		$GLOBALS['logo_libelles']['id_geoservice'] = _T('geoportail:logo_spip');
-		if ($GLOBALS['spip_version_code']>2) $b=false;
-		else $b=autoriser('modifier', 'geoservice');
-		echo debut_cadre_trait_couleur("", true)
-			.$iconifier('id_geoservice', 0, 'geoservice', $b)
-			._T("geoportail:logo_info")
-			.fin_cadre_trait_couleur(true);
+		if ($spip_version_branche>=3) 
+		{	$GLOBALS['logo_libelles']['geoservice'] = _T('geoportail:logo_spip');
+			echo "<div class='lat'>"
+				.recuperer_fond('prive/objets/editer/logo',array('objet'=>'geoservice','id_objet'=>0,'editable'=>autoriser('modifier', 'geoservice')))
+				._T("geoportail:logo_info")
+				."</div>";
+		}
+		else
+		{	$iconifier = charger_fonction('iconifier', 'inc');
+			$GLOBALS['logo_libelles']['id_geoservice'] = _T('geoportail:logo_spip');
+			if ($GLOBALS['spip_version_branche']>2) $b=false;
+			else $b=autoriser('modifier', 'geoservice');
+			echo debut_cadre_trait_couleur("", true)
+				.$iconifier('id_geoservice', 0, 'geoservice', $b)
+				._T("geoportail:logo_info")
+				.fin_cadre_trait_couleur(true);
+		}
 	
 		echo creer_colonne_droite('', true);
 		 
-		$res = icone_horizontale(_T('geoportail:cles'), generer_url_ecrire("geoportail_config"), "racine-site-24.gif","rien.gif", false);
-		$res .= icone_horizontale(_T('geoportail:options'), generer_url_ecrire("geoportail_config_options"), "administration-24.gif","rien.gif", false);
+		$res = icone_horizontale(_T('geoportail:cles'), generer_url_ecrire("geoportail_config"), ($spip_version_branche>=3?"racine-24.png":"racine-site-24.gif"),"rien.gif", false);
+		$res .= icone_horizontale(_T('geoportail:options'), generer_url_ecrire("geoportail_config_options"), ($spip_version_branche>=3?"configuration-24.png":"administration-24.gif"),"rien.gif", false);
 		$res .= icone_horizontale(_T('geoportail:rgc'), generer_url_ecrire("geoportail_config_rgc"), "breve-24.gif","rien.gif", false);
 		$res .= icone_horizontale(_T('geoportail:geoservices'), generer_url_ecrire("geoservice_tous"), "site-24.gif","rien.gif", false);
 		echo bloc_des_raccourcis($res);

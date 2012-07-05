@@ -16,7 +16,7 @@ include_spip('inc/presentation');
 include_spip('inc/config');
 
 function exec_geoportail_config_rgc()
-{	global $connect_statut, $connect_toutes_rubriques, $couleur_foncee, $couleur_claire;
+{	global $spip_version_branche, $connect_statut, $connect_toutes_rubriques, $couleur_foncee, $couleur_claire;
 
 	// Administrateur global seulement
 	if ($GLOBALS['connect_statut'] == "0minirezo" AND $connect_toutes_rubriques)
@@ -27,8 +27,8 @@ function exec_geoportail_config_rgc()
 
 		echo debut_gauche('',true);
 
-		$res = icone_horizontale(_T('geoportail:cles'), generer_url_ecrire("geoportail_config"), "racine-site-24.gif","rien.gif", false);
-		$res .= icone_horizontale(_T('geoportail:options'), generer_url_ecrire("geoportail_config_options"), "administration-24.gif","rien.gif", false);
+		$res = icone_horizontale(_T('geoportail:cles'), generer_url_ecrire("geoportail_config"), ($spip_version_branche>=3?"racine-24.png":"racine-site-24.gif"),"rien.gif", false);
+		$res .= icone_horizontale(_T('geoportail:options'), generer_url_ecrire("geoportail_config_options"), ($spip_version_branche>=3?"configuration-24.png":"administration-24.gif"),"rien.gif", false);
 		$res .= icone_horizontale(_T('geoportail:rgc'), generer_url_ecrire("geoportail_config_rgc"), "breve-24.gif","rien.gif", false);
 		$res .= icone_horizontale(_T('geoportail:geoservices'), generer_url_ecrire("geoservice_tous"), "site-24.gif","rien.gif", false);
 		echo bloc_des_raccourcis($res);
@@ -49,9 +49,10 @@ function exec_geoportail_config_rgc()
 		$form = debut_cadre_trait_couleur("breve-24.gif", true, "", _T('geoportail:rgc'))
 			."<p>"._T('geoportail:rgc_info')."</p>";
 		// Scanner le repertoire rgc
-		$dir = opendir(_FULLDIR_PLUGIN_GEOPORTAIL."rgc");
+		//$dir = opendir(_FULLDIR_PLUGIN_GEOPORTAIL."rgc");
+		$dir = @opendir(url_absolue(_DIR_PLUGIN_GEOPORTAIL)."rgc");
 		$count = 0;
-		while ($file = readdir($dir))
+		while ($file = @readdir($dir))
 		{	if (is_dir($file)) continue;
 			if (!preg_match("/^rgc\..*\.txt/", $file)) continue;
 			$rgc = preg_replace (array("/^rgc\./","/\.txt/"),"", $file);
@@ -71,7 +72,7 @@ function exec_geoportail_config_rgc()
 				$count++;
 			}
 		}
-		closedir($dir);
+		@closedir($dir);
 
 		$form .= fin_cadre_trait_couleur(true);		
 		

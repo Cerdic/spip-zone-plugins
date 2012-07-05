@@ -2,9 +2,9 @@
 	<nom>SPIP-G&#233;oportail</nom>
 	<auteur>[Jean-Marc Viglino->http://www.spip-contrib.net/_Viglino-Jean-Marc_]</auteur>
 	<slogan>Afficher des objets SPIP sur une carte</slogan>
-	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 	<licence>GNU/GPL, BSD pour l'API Geoportail/OpenLayers</licence>
-	<version>1.03</version>
+	<version>1.10</version>
 	<icon>img/geoportail.gif</icon>
 	<etat>test</etat>
 	<description>
@@ -42,11 +42,18 @@ Pour visualiser des exemples d'affichage de carte Geoportail, OSM, Google Maps, 
 		<nom>header_prive</nom>
 		<inclure>geoportail_pipelines.php</inclure>
 	</pipeline>
+	<!-- Boutons en v1.9 - v2 -->
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
 		<inclure>geoportail.php</inclure>
 	</pipeline>
+	<!-- Bouton en v3 -->
+	<bouton id='geoportail' parent='menu_configuration'>
+		<titre>geoportail:geoportail</titre>
+		<icone>images/geo-24.png</icone>
+		<url>geoportail_config</url>
+	</bouton>
 	<pipeline>
 		<nom>affiche_milieu</nom>
 		<inclure>geoportail.php</inclure>

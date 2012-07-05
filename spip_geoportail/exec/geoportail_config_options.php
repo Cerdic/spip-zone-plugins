@@ -17,7 +17,7 @@ include_spip('inc/config');
 include_spip('public/geoportail_boucles');
 
 function exec_geoportail_config_options()
-{	global $connect_statut, $connect_toutes_rubriques, $couleur_foncee, $couleur_claire;
+{	global $spip_version_branche, $connect_statut, $connect_toutes_rubriques, $couleur_foncee, $couleur_claire;
 
 	// Administrateur global seulement
 	if ($GLOBALS['connect_statut'] == "0minirezo" AND $connect_toutes_rubriques)
@@ -29,19 +29,28 @@ function exec_geoportail_config_options()
 		echo debut_gauche('',true);
 
 		// Logo de la rubrique
-		$iconifier = charger_fonction('iconifier', 'inc');
-		$GLOBALS['logo_libelles']['id_geoservice'] = _T('geoportail:logo_spip');
-		if ($GLOBALS['spip_version_code']>2) $b=false;
-		else $b=autoriser('modifier', 'geoservice');
-		echo debut_cadre_trait_couleur("", true)
-			.$iconifier('id_geoservice', 0, 'geoservice', $b)
-			._T("geoportail:logo_info")
-			.fin_cadre_trait_couleur(true);
+		if ($spip_version_branche>=3) 
+		{	$GLOBALS['logo_libelles']['geoservice'] = _T('geoportail:logo_spip');
+			echo "<div class='lat inner'>"
+				.recuperer_fond('prive/objets/editer/logo',array('objet'=>'geoservice','id_objet'=>0,'editable'=>autoriser('modifier', 'geoservice')))
+				._T("geoportail:logo_info")
+				."</div>";
+		}
+		else
+		{	$iconifier = charger_fonction('iconifier', 'inc');
+			$GLOBALS['logo_libelles']['id_geoservice'] = _T('geoportail:logo_spip');
+			if ($GLOBALS['spip_version_branche']>2) $b=false;
+			else $b=autoriser('modifier', 'geoservice');
+			echo debut_cadre_trait_couleur("", true)
+				.$iconifier('id_geoservice', 0, 'geoservice', $b)
+				._T("geoportail:logo_info")
+				.fin_cadre_trait_couleur(true);
+		}
 	
 		echo creer_colonne_droite('', true);
 		 
-		$res = icone_horizontale(_T('geoportail:cles'), generer_url_ecrire("geoportail_config"), "racine-site-24.gif","rien.gif", false);
-		$res .= icone_horizontale(_T('geoportail:options'), generer_url_ecrire("geoportail_config_options"), "administration-24.gif","rien.gif", false);
+		$res = icone_horizontale(_T('geoportail:cles'), generer_url_ecrire("geoportail_config"), ($spip_version_branche>=3?"racine-24.png":"racine-site-24.gif"),"rien.gif", false);
+		$res .= icone_horizontale(_T('geoportail:options'), generer_url_ecrire("geoportail_config_options"), ($spip_version_branche>=3?"configuration-24.png":"administration-24.gif"),"rien.gif", false);
 		$res .= icone_horizontale(_T('geoportail:rgc'), generer_url_ecrire("geoportail_config_rgc"), "breve-24.gif","rien.gif", false);
 		$res .= icone_horizontale(_T('geoportail:geoservices'), generer_url_ecrire("geoservice_tous"), "site-24.gif","rien.gif", false);
 		echo bloc_des_raccourcis($res);
@@ -103,9 +112,10 @@ function exec_geoportail_config_options()
 				."<input type='checkbox' name='hover' id='hover' $ghover><label for=hover>"._T('geoportail:geoportail_hover')."</label>"
 				."<input type='submit' name='setpopup' class='fondo' style='margin-left:3em;' value='"._T('bouton_valider')."' />"
 				."</p>"
-			.fin_cadre_relief(true)
+			.fin_cadre_relief(true);
 		/* Geoservices */
-			.debut_cadre_relief("site-24.gif", true, "", _T('geoportail:geoservices'))
+		if ($spip_version_branche<3)
+		$form .= debut_cadre_relief("site-24.gif", true, "", _T('geoportail:geoservices'))
 				. _T('geoportail:info_geoservice')
 				."<p><input type='checkbox' name='service' id='service' $gservice><label for=service>"._T('geoportail:geoportail_services')."</label>"
 				."<input type='submit' name='geoservice' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' /></p>"
@@ -126,7 +136,7 @@ function exec_geoportail_config_options()
 			._T('spip:info_documents')."</label>"
 			;
 
-		if ($GLOBALS['spip_version_code']>2) $form .= "<br/><input type='checkbox' name='docauto' id='docauto' $gdocauto style='margin-left:2em;'><label for=docauto>"._T('geoportail:info_documents_auto')."</label>";
+		if ($GLOBALS['spip_version_branche']>2) $form .= "<br/><input type='checkbox' name='docauto' id='docauto' $gdocauto style='margin-left:2em;'><label for=docauto>"._T('geoportail:info_documents_auto')."</label>";
 		
 		$form .= "<br/><input type='checkbox' name='rubrique' id='rubrique' $grubrique><label for=rubrique>"._T('spip:icone_rubriques')."</label>"
 			."</td><td valign=top><input type='checkbox' name='mot' id='mot' $gmot><label for=mot>"._T('spip:icone_mots_cles')."</label>"

@@ -79,6 +79,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'rgc_use_geonames'	=> 'Vous utilisez Geonames.',
 'rgc_par_geonames'	=> 'Powered by <a href=\'http://www.geonames.org\'>Geonames</a>',
 
+'publie'		=> 'Publi&eacute;',
+'propose'		=> 'Propos&eacute;',
+'poubelle'		=> 'A la poubelle',
+
 'config'		=> 'Configuration',
 
 // Correspondance code => nom de la zone Geoportail :

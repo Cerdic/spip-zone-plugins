@@ -26,8 +26,17 @@ if (!function_exists(sql_insert))
 
 if (!function_exists(icone_inline))
 {
+if (!function_exists(icone_verticale))
+{
 	function icone_inline($texte, $lien, $fond, $fonction="", $align="", $ajax=false, $javascript='')	
 	{	return icone($texte, $lien, $fond, $fonction, $align, false);
 	}
+}
+else 
+{
+	function icone_inline($texte, $lien, $fond, $fonction="", $align="", $ajax=false, $javascript='')	
+	{	return icone_verticale($texte, $lien, $fond, $fonction, $align, false);
+	}
+}
 }
 ?>

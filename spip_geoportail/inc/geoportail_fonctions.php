@@ -77,7 +77,6 @@ function geoportail_table_geoservices ($id_rubrique=0)
 	$fond = recuperer_fond ('fonds/geoservices_table',$contexte);
 	if ($fond)
 	echo "\n"
-//		. bandeau_titre_boite2("<b>&nbsp;"._T("geoportail:geoservices")."</b>", "site-24.gif", $couleur_claire, 'black', false)
 		. debut_cadre("trait-couleur", "site-24.gif", "", "<b>&nbsp;"._T("geoportail:geoservices")."</b>", $couleur_claire, 'black', false)
 		. $fond
 		. fin_cadre(true)
@@ -110,7 +109,7 @@ function geoportail_affiche_milieu($flux)
 					'zone'			=> _request('zone')
 				);
 	// Articles
-	if ($exec == 'articles' && $GLOBALS['meta']['geoportail_geoarticle']) 
+	if (($exec == 'article' ||$exec == 'articles') && $GLOBALS['meta']['geoportail_geoarticle']) 
 	{	$id_article = $contexte['id_objet'] = $flux['args']['id_article'];
 		if ($GLOBALS['meta']['geoportail_geodocument']) $contexte['id_article'] = $flux['args']['id_article'];
 		$contexte['objet'] = 'article';
@@ -123,12 +122,13 @@ function geoportail_affiche_milieu($flux)
 		}
 	}
 	// Auteurs
-	else if ($exec == 'auteur_infos' && $GLOBALS['meta']['geoportail_geoauteur']) 
+	else if (($exec=='infos_perso' || $exec=='auteur' || $exec == 'auteur_infos') && $GLOBALS['meta']['geoportail_geoauteur']) 
 	{	$contexte['id_objet'] = $flux['args']['id_auteur'];
 		$contexte['objet'] = 'auteur';
+		if ($exec=='infos_perso') $contexte['id_objet'] = $GLOBALS['auteur_session']['id_auteur'];
 	}
 	// Rubriques
-	else if ($exec == 'naviguer' && $GLOBALS['meta']['geoportail_georubrique']) 
+	else if (($exec=='rubrique' || $exec == 'naviguer') && $GLOBALS['meta']['geoportail_georubrique']) 
 	{	$id_rubrique = $contexte['id_objet'] = $flux['args']['id_rubrique'];
 		$contexte['objet'] = 'rubrique';
 		// position de la rubrique mere
@@ -140,7 +140,7 @@ function geoportail_affiche_milieu($flux)
 		}
 	}
 	// Documents (utile avec le plugin mediatheque)
-	else if ($exec == 'documents_edit' && $GLOBALS['meta']['geoportail_geodocument']) 
+	else if (($exec=='document_edit' || $exec == 'documents_edit') && !$flux['args']['popin'] && $GLOBALS['meta']['geoportail_geodocument']) 
 	{	$id_document = $contexte['id_objet'] = $flux['args']['id_document'];
 		$contexte['objet'] = 'document';
 		$contexte['deplier'] = _request('deplier')? " ":"";;
@@ -197,7 +197,34 @@ function geoportail_affiche_milieu($flux)
 	Recherche automatique d'un georef dans le ficher (si cas geoportail_geodocument_auto)
 */
 function geoportail_document_desc_actions($flux)
-{	if ($flux['args']['position']=='document_desc' && $GLOBALS['meta']['geoportail_geodocument'])
+{	/* SPIP v3 */
+	if ($flux['args']['position']=='galerie' && $GLOBALS['meta']['geoportail_geodocument'])
+	{	// Georeferencement de l'objet
+		$id_document = $flux['args']['id_document'];
+		include_spip('public/geoportail_boucles');
+		$info =_T('geoportail:georef');
+		$result = spip_fetch_array(spip_query("SELECT * FROM spip_geopositions WHERE id_objet=$id_document AND objet='document'"));
+		if ($result)
+		{	$lon=$result['lon'];
+			$lat=$result['lat'];
+			$info = "(".geoportail_longitude($lon,true).", ".geoportail_latitude($lat,true).")";
+		}
+
+		if ($GLOBALS['spip_version_branche']<3) $url = generer_url_ecrire("documents_edit","id_document=$id_document&deplier=1#georef",true);
+		else $url = generer_url_ecrire("document_edit","id_document=$id_document&deplier=1#georef",true);
+		$flux['data'] .= '<br/><a style="opacity:1;" href="'
+		.$url
+		.'" title="'._T('geoportail:geo_document').'">'.$info.'</a>';
+/*
+		$url = generer_url_ecrire("document_edit","id_document=$id_document&deplier=1#georef",true);
+
+		$flux['data'] .= '<br/><a style="opacity:1;" href="'
+		.$url
+		.'" title="'._T('geoportail:geo_document').'">'.$info.'</a>';
+		*/
+	}
+	/* SPIP v2 */
+	if ($flux['args']['position']=='document_desc' && $GLOBALS['meta']['geoportail_geodocument'])
 	{	$id_document = $flux['args']['id_document'];
 		if (autoriser('modifier','document', $id_document))
 		{	// Georeferencement de l'objet
@@ -222,8 +249,10 @@ function geoportail_document_desc_actions($flux)
 				}
 			}
 
+			if ($GLOBALS['spip_version_branche']<3) $url = generer_url_ecrire("documents_edit","id_document=$id_document&deplier=1#georef",true);
+			else $url = generer_url_ecrire("document_edit","id_document=$id_document&deplier=1#georef",true);
 			$flux['data'] .= '<br/><a style="opacity:1;" href="'
-			.generer_url_ecrire("documents_edit","id_document=$id_document&deplier=1#georef",true)
+			.$url
 			.'" title="'._T('geoportail:geo_document').'">'.$info.'</a>';
 		}
 	}

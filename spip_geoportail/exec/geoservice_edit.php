@@ -15,6 +15,8 @@
 include_spip('inc/presentation');
 include_spip('inc/config');
 include_spip('inc/geoportail_autorisations');
+include_spip('inc/geoportail_fonctions');
+include_spip('inc/compat_192');
 
 function exec_geoservice_edit()
 {	// Gestion 
@@ -65,7 +67,7 @@ function exec_geoservice_edit()
 		.debut_droite('',true);
 
 		// Formulaire de saisie
-		echo debut_cadre_formulaire("site-24.gif", true);
+		echo debut_cadre_enfonce("", true);
 		if ($id_geoservice) $url = generer_url_ecrire('geoservice',"id_geoservice=$id_geoservice");
 		else $url = generer_url_ecrire('geoservice_tous');
 		$rep = icone_inline(_T('icone_retour'), 
@@ -90,7 +92,7 @@ function exec_geoservice_edit()
 			$form,
 			" method='post' name='formulaire'"
 		);
-		echo "</div>". fin_cadre_formulaire(true);
+		echo "</div>".fin_cadre_enfonce(true);
 		
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'geoservice_edit','id_geoservice'=>$id_geoservice),'data'=>''));
 		

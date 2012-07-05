@@ -14,6 +14,7 @@
 
 include_spip('inc/presentation');
 include_spip('inc/config');
+include_spip('inc/geoportail_fonctions');
 
 function exec_geoservice_tous()
 {	$id_rubrique = _request('id_rubrique');

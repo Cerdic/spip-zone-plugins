@@ -22,12 +22,12 @@ $(document).ready(changeTypeService);
 </script>
 
 <:geoportail:geoservice_nom:> :
-<input class=formo name=titre  value="[(#TITRE|entites_html)]" />
+<input class=formo name=titre  value="[(#TITRE|entites_html)]" style="width:100%" />
 <?php
 		$id_rubrique = #ID_RUBRIQUE;
 		$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 
-		$opt = $chercher_rubrique($id_rubrique, 'rubrique', true, true);
+		$opt = $chercher_rubrique($id_rubrique, 'rubrique', '', 2);
 
 		$msg = _T('titre_cadre_interieur_rubrique');
 
@@ -48,7 +48,7 @@ $(document).ready(changeTypeService);
 
 <span class="param wms wfs kml wms-c">
 <:geoportail:geoservice_url:> :
-<input class=formo name=url id=url value="[(#ENV{url_geoservice}|entites_html)]" />
+<input class="formo" name="url" id="url" style="width:100%" value="[(#ENV{url_geoservice}|entites_html)]" />
 <br/></span>
 
 <span class="param wfs kml wms-c" style="color:red; font-weight:bold; display:none;">
@@ -56,10 +56,10 @@ Fonctionnalit&eacute; non impl&eacute;ment&eacute;e...<br/></span>
 
 <span class="param wms">
 <:geoportail:geoservice_map:> :
-<input class=formo name=map  value="[(#MAP|entites_html)]" />
+<input class="formo" name="map" style="width:100%" value="[(#MAP|entites_html)]" />
 <br/></span><span class="param wms geoportail">
 <:geoportail:geoservice_layers:> :
-<input class=formo type=text name=layers value="[(#LAYERS|entites_html)]"  />
+<input class="formo" type="text" name="layers" style="width:100%" value="[(#LAYERS|entites_html)]"  />
 <br/></span><span class="param wms">
 <:geoportail:geoservice_format:> : 
 <select name=format >
@@ -73,9 +73,9 @@ Fonctionnalit&eacute; non impl&eacute;ment&eacute;e...<br/></span>
 <br/>
 <br/>
 
-<div class=cadre-e-noir>
+<div class='cadre-e-noir inner'>
 <div style="position: relative;">
-<div style="position: absolute; top: -15px; left: 10px;"><img alt="" src="#CHEMIN{images/suivi-petition-24.gif}"/></div></div>
+<div style="position: absolute; top: -15px; left: 10px;"><img alt="" src="#CHEMIN{img/suivi.gif}"/></div></div>
 <div class=cadre-e style="padding:0.5em 1em;">
 <label class='geoservice' ><:geoportail:minzoom:> : </label><input class=formo style="display:inline; width:60px;" type=text name=minzoom id="minzoom" size=5 value="[(#MINZOOM|entites_html)]" />
 <label class='geoservice' ><:geoportail:maxzoom:> : </label><input class=formo style="display:inline; width:60px;" type=text name=maxzoom id="maxzoom" size=5 value="[(#MAXZOOM|entites_html)]" />
@@ -91,17 +91,17 @@ Fonctionnalit&eacute; non impl&eacute;ment&eacute;e...<br/></span>
 </div></div>
 
 <br/>
-<div class=cadre-e-noir>
+<div class='cadre-e-noir inner'>
 <div style="position: relative;">
-<div style="position: absolute; top: -15px; left: 10px;"><img alt="" src="#CHEMIN{images/vignette-24.png}"/></div></div>
+<div style="position: absolute; top: -15px; left: 10px;"><img alt="" src="#CHEMIN{img/img.png}"/></div></div>
 <div class=cadre-e style="padding:0.5em 1em;">
 <:geoportail:logo:> : <input class=formo style="display:inline; width:200px;"  type=text name=logo value="#LOGO"/>
 <br/>
-<:geoportail:link:> : <input class=formo type=text name=link size=40 value="[(#LINK|entites_html)]" />
+<:geoportail:link:> : <input class=formo type=text name=link size=40 style="width:100%" value="[(#LINK|entites_html)]" />
 </div></div>
 
 <br/>
 <:geoportail:geoservice_descriptif:> :
-<textarea class=forml rows=6 name=descriptif>[
+<textarea class=forml rows=6 style="width:100%" name=descriptif>[
 (#DESCRIPTIF**|entites_html)
 ]</textarea>

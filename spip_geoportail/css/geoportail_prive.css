@@ -94,3 +94,16 @@ a.mode
 	display:block;
 	text-decoration:none;
 }
+
+/** Pour spip v3
+*/
+.geoportail_config .cadre-icone
+{	width:auto!important;
+}
+.geoservice_tous .inner,
+.geoservice .inner,
+.geoportail_config_options .inner,
+.geoportail_config_rgc .inner,
+.geoportail_config .inner
+{	border-width:2px;
+}
