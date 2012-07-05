@@ -34,62 +34,61 @@ function selecteurgenerique_verifier_js($flux){
 			 * ui.position.js
 			 */
 			if(strpos($flux,'jquery.ui.position.js')===FALSE){
-				$position = find_in_path('prive/javascript/ui/jquery.ui.widget.js');
+				$position = find_in_path('prive/javascript/ui/jquery.ui.position.js');
 				$flux .= "
 <script type='text/javascript' src='$position'></script>
 ";
 			/**
 			 * Finalement on insère l'autocompleteur
 			 */
-			$autocompleter = find_in_path('javascript/jquery.autocomplete.js');
+			$autocompleter = find_in_path('prive/javascript/ui/jquery.ui.autocomplete.js');
 			
 			$contenu .= "
 <script type='text/javascript' src='$autocompleter'></script>
 ";
 		};
-		
-		/**
-		 * On insère également les fonctions de bases supplémentaires
-		 */
-		if(strpos($flux,'selecteur_generique_functions')===FALSE){
-			$functions = find_in_path('javascript/selecteur_generique_functions.js');
-			$contenu .= "
+	}
+	/**
+	 * On insère également les fonctions de bases supplémentaires
+	 */
+	if(strpos($flux,'selecteur_generique_functions')===FALSE){
+		$functions = find_in_path('javascript/selecteur_generique_functions.js');
+		$contenu .= "
 <script type='text/javascript' src='$functions'></script>
 ";
-		};
+	};
 		
+	/**
+	 * On intègre la CSS qui va bien également et ses dépendances
+	 */
+	if(strpos($flux,'jquery.ui.autocomplete.css')===FALSE){
 		/**
-		 * On intègre la CSS qui va bien également et ses dépendances
+		 * ui.core.css
 		 */
-		if(strpos($flux,'jquery.ui.autocomplete.css')===FALSE){
-			/**
-			 * ui.core.css
-			 */
-			if(strpos($flux,'jquery.ui.core.css')===FALSE){
-				$ui_css = find_in_path('css/jquery.ui.core.css');
-				$contenu .= "
+		if(strpos($flux,'jquery.ui.core.css')===FALSE){
+			$ui_css = find_in_path('css/jquery.ui.core.css');
+			$contenu .= "
 <link rel='stylesheet' href='$ui_css' type='text/css' media='all' />
 ";
-			}
-			/**
-			 * ui.autocomplete.css
-			 */
-			if(strpos($flux,'jquery.ui.autocomplete.css')===FALSE){
-				$autocomplete_css = find_in_path('css/jquery.ui.autocomplete.css');
-				$contenu .= "
+		}
+		/**
+		 * ui.autocomplete.css
+		 */
+		if(strpos($flux,'jquery.ui.autocomplete.css')===FALSE){
+			$autocomplete_css = find_in_path('css/jquery.ui.autocomplete.css');
+			$contenu .= "
 <link rel='stylesheet' href='$autocomplete_css' type='text/css' media='all' />
 ";
-			}
+		}
 
-			/**
-			 * ui.theme.css
-			 */
-			if(strpos($flux,'jquery.ui.theme.css')===FALSE){
-				$theme_css = find_in_path('css/jquery.ui.theme.css');
-				$contenu .= "
+		/**
+		 * ui.theme.css
+		 */
+		if(strpos($flux,'jquery.ui.theme.css')===FALSE){
+			$theme_css = find_in_path('css/jquery.ui.theme.css');
+			$contenu .= "
 <link rel='stylesheet' href='$theme_css' type='text/css' media='all' />
 ";
-			}
 		}
 	}
 	return $contenu;
