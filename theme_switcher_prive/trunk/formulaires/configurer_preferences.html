@@ -13,7 +13,7 @@
 				<label><:theme_switcher_prive:label_theme:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_1'[(#ENV{#GET{name}}|=={spip}|oui)checked="checked" ]value="spip" #GET{disable}/>
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_1'[(#ENV{#GET{name}}|=={spip_dist}|oui)checked="checked" ]value="spip_dist" #GET{disable}/>
 					<label for="[(#GET{name})]_1"><:theme_switcher_prive:lien_theme_spip_dist:></label>
 					<:theme_switcher_prive:explication_spip_dist|propre:>
 				</div>
