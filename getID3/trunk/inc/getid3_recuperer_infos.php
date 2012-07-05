@@ -137,16 +137,10 @@ function inc_getid3_recuperer_infos($id_document=null,$fichier=false){
 	 * Pour l'instant uniquement valable sur les CC
 	 */
 	if(defined('_DIR_PLUGIN_LICENCE') && ((strlen($id3['copyright_message']) > 0) OR strlen($id3['copyright']) > 0)){
-		foreach(array($id3['copyright_message'],$id3['copyright']) as $contenu){
-			if(preg_match('/http:\/\/creativecommons.org\/licenses\/(.[a-z|-]*)\//',$contenu,$matches)){
-				include_spip('inc/licence');
-				$licence_id = 'cc-'.$matches[1];
-				foreach($GLOBALS['licence_licences'] as $id_licence=>$licence_info){
-					if($licence_info['abbr'] == $licence_id){
-						$valeurs['id_licence'] = $id_licence;
-						break;
-					}
-				}
+		include_spip('licence_fonctions');
+		if(function_exists('licence_recuperer_texte')){
+			foreach(array($id3['copyright_message'],$id3['copyright']) as $contenu){
+				$valeurs['id_licence'] = licence_recuperer_texte($contenu);
 				if(intval($valeurs['id_licence']))
 					break;
 			}

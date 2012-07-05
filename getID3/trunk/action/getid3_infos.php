@@ -22,6 +22,10 @@ function action_getid3_infos_dist(){
 	}
 	else{
 		action_getid3_infos_post($arg);
+		if(_request('redirect')){
+			$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
+			$GLOBALS['redirect'] = $redirect;
+		}
 	}
 }
 
