@@ -10,9 +10,15 @@ div.messages-alertes {text-align: right;background: #fff;padding: 5px;width: 770
 .elastic .largeur {width:95%;}
 .elastic #conteneur,.elastic .table_page { width: 100%; }
 .elastic div.messages-alertes {width: 964px;}
-.elastic #navigation { width:200px; }
+.elastic #navigation {float:left; width:200px; }
 .elastic #extra { float: right; clear:none; width: 200px; }
-.elastic #contenu { float: left; margin-left: 17px; width: 60%; }
+.elastic #contenu {
+    float:none;
+    margin-left: 220px;
+    margin-right:220px;
+    overflow:hidden;
+    width: auto;
+    }
 
 /* les formulaires sont en 600px en config large */
 body.elastic.edition #contenu,
