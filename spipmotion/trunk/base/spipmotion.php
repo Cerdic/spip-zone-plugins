@@ -28,7 +28,7 @@ function spipmotion_declarer_tables_principales($tables_principales){
 	$tables_principales['spip_documents']['field']['audiocodecid'] = "VARCHAR(255) DEFAULT '' NOT NULL";
 	$tables_principales['spip_documents']['field']['audiochannels'] = "INTEGER";
 	$tables_principales['spip_documents']['field']['rotation'] = "INTEGER";
-	$tables_principales['spip_documents']['field']['metadatas'] = "TEXT DEFAULT '' NOT NULL";
+	$tables_principales['spip_documents']['field']['metadatas'] = "LONGTEXT DEFAULT '' NOT NULL";
 
 	return $tables_principales;
 }

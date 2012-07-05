@@ -31,13 +31,13 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 		array('spipmotion_install_recuperer_infos',array()),
 	);
 	$maj['0.7.2'] = array(
-		array('sql_alter',array('TABLE spip_documents CHANGE `pixelformat` `pixelformat` VARCHAR(255) DEFAULT "" NOT NULL'))
+		array('sql_alter','TABLE spip_documents CHANGE `pixelformat` `pixelformat` VARCHAR(255) DEFAULT "" NOT NULL')
 	);
 	$maj['0.7.3'] = array(
 		array('spipmotion_install_recuperer_infos',array())
 	);
 	$maj['0.7.4'] = array(
-		array('sql_alter',array('TABLE spip_documents CHANGE `framerate` `framerate` FLOAT'))
+		array('sql_alter','TABLE spip_documents CHANGE `framerate` `framerate` FLOAT')
 	);
 	$maj['0.7.6'] = array(
 		array('maj_tables',array('spip_documents')),
@@ -50,7 +50,7 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 		array('spipmotion_install_recuperer_infos',array()),
 	);
 	$maj['0.8.0'] = array(
-		array('sql_alter',array('TABLE spip_documents CHANGE `metas` `metadatas` TEXT DEFAULT "" NOT NULL'))
+		array('sql_alter','TABLE spip_documents CHANGE `metas` `metadatas` TEXT DEFAULT "" NOT NULL')
 	);
 	$maj['1.1.0'] = array(
 		array('spipmotion_peuple_facd',array())
@@ -60,6 +60,10 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 	);
 	$maj['1.1.2'] = array(
 		array('maj_tables',array('spip_documents')),
+	);
+	$maj['1.1.3'] = array(
+		array('sql_alter','TABLE spip_documents CHANGE `metadatas` `metadatas` LONGTEXT NOT NULL'),
+		
 	);
 	/**
 	 * TODO : générer un htaccess dans le répertoire script_bash/
