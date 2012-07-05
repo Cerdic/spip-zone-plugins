@@ -80,7 +80,7 @@ if (!empty($cp) || !empty($ville)) {
         $champs[] =  "(". "CASE WHEN "."(". "code_postal LIKE '".sql_quote($cp)."%'" .") "." THEN 1 ELSE 2 END" .") as type_result";
         $message .= _T('autocompletion:message_pas_resultat_cp');
     }
-    
+
     $limit   = (!empty($maxRows))? $maxRows : '';
     
     if ($liste_des_communes = sql_select($champs, $from, $where, $groupby, $orderby, $limit)) {
