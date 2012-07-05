@@ -14,7 +14,8 @@ function socialtags_choix(){
 		$a = $service['lesauteurs'];
 		$d = $service['descriptif'];
 
-		$image = find_in_path('images/'.$a.'.png');
+		$image = 'data:image/png;base64,'.base64_encode(file_get_contents(find_in_path('images/'.$a.'.png')));
+		//$image = find_in_path('images/'.$a.'.png');
 		$checked = in_array($a, $cfg) ? ' checked="checked"' : '';
 
 		$retour .= "<div class='choix'>
