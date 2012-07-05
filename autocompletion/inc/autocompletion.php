@@ -24,19 +24,18 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 include_spip('base/abstract_sql');
 
-$ville   = ( _request('ville') )?   _request('ville')   : '' ;
-$cp      = ( _request('codePostal') )?      _request('codePostal')      : '' ;
-$cpRef = ( _request('cpRef'))?  _request('cpRef') : '' ;
-$maxRows = ( _request('maxRows'))?  _request('maxRows') : '' ;
-$delim 	= ",- "; // Les differents separateurs possible
-$message = '';
-$infos = array(); 
+$ville      = (_request('ville'))?      trim(_request('ville'))      : '' ;
+$cp         = (_request('codePostal'))? trim(_request('codePostal')) : '' ;
+$cpRef      = (_request('cpRef'))?      trim(_request('cpRef'))      : '' ;
+$maxRows    = (_request('maxRows'))?    trim(_request('maxRows'))    : '' ;
+$delim      = ",- "; // Les differents separateurs possible
+$message    = '';
+$infos      = array(); 
  
 if (!empty($cp) || !empty($ville)) {
 
     $liste   = array();
-    
-//    $where   = array();
+
     $where   = '';
     $groupby = array();
     $orderby = array(); 
@@ -56,36 +55,33 @@ if (!empty($cp) || !empty($ville)) {
             }
             $tok = strtok($delim);
         }
-        
+
         if($cpRef){
-            $whereVille[] = "code_postal LIKE '$cpRef%'";
-            $whereCpRef[] = "code_postal LIKE '$cpRef%'";
-            $orderby[] = "CASE WHEN "."(". join("\n\tAND ", $whereVille) .") "." THEN 1 ELSE 2 END";
-            $message .= str_replace("%cp", $cpRef, _T('autocompletion:message_pas_resultat_commune_cp') ) ;
+            $whereVille[]   = "code_postal LIKE '".sql_quote($cpRef)."%'";
+            $whereCpRef[]   = "code_postal LIKE '".sql_quote($cpRef)."%'";
+            $orderby[]      = "CASE WHEN "."(". join("\n\tAND ", $whereVille) .") "." THEN 1 ELSE 2 END";
+            $message       .= str_replace("%cp", $cpRef, _T('autocompletion:message_pas_resultat_commune_cp') ) ;
         }
         else{
-            $orderby[] = "CASE WHEN "."(". "lib_commune LIKE '".$ville."%'" .") "." THEN 1 ELSE 2 END";
+            $orderby[] = "CASE WHEN "."(". "lib_commune LIKE '".sql_quote($ville)."%'" .") "." THEN 1 ELSE 2 END";
         }
-        // Ce champ 'type r√©sult' permet de controler s'il y a un r√©sultat en correspondance √† la recherche
+        // Ce champ 'type résult' permet de controler s'il y a un résultat en correspondance à la recherche
         $champs[] =  "(". "CASE WHEN "."(". join("\n\tAND ", $whereVille) .") "." THEN 1 ELSE 2 END" .") as type_result";
         
         $where .= "(". join("\n\tAND ", $whereVille) .") ";
         $where .= (!empty($whereCpRef))? "OR (". join("\n\tAND ", $whereCpRef) .") " : '';
-        
     
         $orderby[] = "lib_commune, code_postal";
     }
     
     if($cp){
-        $where[] = "code_postal LIKE '$cp%'";
+        $where[] = "code_postal LIKE '".sql_quote($cp)."%'";
         $orderby[] = "code_postal, lib_commune";
-        $champs[] =  "(". "CASE WHEN "."(". "code_postal LIKE '$cp%'" .") "." THEN 1 ELSE 2 END" .") as type_result";
+        $champs[] =  "(". "CASE WHEN "."(". "code_postal LIKE '".sql_quote($cp)."%'" .") "." THEN 1 ELSE 2 END" .") as type_result";
         $message .= _T('autocompletion:message_pas_resultat_cp');
     }
     
     $limit   = (!empty($maxRows))? $maxRows : '';
-    
-//    echo sql_get_select($champs, $from, $where, $groupby, $orderby, $limit);
     
     if ($liste_des_communes = sql_select($champs, $from, $where, $groupby, $orderby, $limit)) {
         $resultat = false;
@@ -98,22 +94,3 @@ if (!empty($cp) || !empty($ville)) {
     if($resultat === true) echo json_encode($liste);
     else echo json_encode(array_merge ($infos, $liste));
 }
-
-/*
- * Requ√®te SQL pour recherceh ville avec code postal pr√© remplis
-
-SELECT code_postal CodePostal, lib_commune Ville, latitude Latitude, longitude Longitude
-FROM spip_communes
-WHERE (lib_commune LIKE '%le%'
-	AND lib_commune LIKE '%pu%'
-	AND code_postal LIKE '43000%')
-      OR (code_postal LIKE '43000%')
-ORDER BY 
-    CASE WHEN (lib_commune LIKE '%le%'
-                AND lib_commune LIKE '%pu%'
-                AND code_postal LIKE '43000%')
-         THEN 1
-    ELSE 2 END, 
-    lib_commune, code_postal
-
- */
