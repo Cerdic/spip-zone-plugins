@@ -18,4 +18,21 @@ function licence_affiche($id_licence,$logo_non,$lien_non){
 	return recuperer_fond('licence/licence',$licence);
 }
 
+/**
+ * Fonction tentant de récupérer une licence cachée dans un texte
+ * @param string $texte le texte à analyser
+ * @return int $id_licence l'identifiant numérique de la licence trouvée ou false 
+ */
+function licence_recuperer_texte($texte){
+	if(preg_match('/http:\/\/creativecommons.org\/licenses\/(.[a-z|-]*)\//',$texte,$matches)){
+		include_spip('inc/licence');
+		$licence_id = 'cc-'.$matches[1];
+		foreach($GLOBALS['licence_licences'] as $id_licence=>$licence_info){
+			if($licence_info['abbr'] == $licence_id){
+				return $id_licence;
+			}
+		}
+	}
+	return false;
+}
 ?>
