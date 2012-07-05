@@ -43,14 +43,18 @@ function twidget_get_cached_url($url,$force=true) {
 	include_spip('inc/distant');
 	$contenu = recuperer_page($url);
 
-	// intercepter, cacher et relocaliser les avatars
-	preg_match_all(',"profile_image_url":"([^"]*)",Uims',$contenu,$regs,PREG_SET_ORDER);
-	foreach($regs as $reg){
-		$new = twidget_get_cached_avatar($reg[1]);
-		$contenu = str_replace($reg[1],$new,$contenu);
+	// ne pas cacher une requete qui echoue (twitter fail)
+	if ($contenu){
+		// intercepter, cacher et relocaliser les avatars
+		preg_match_all(',"profile_image_url":"([^"]*)",Uims',$contenu,$regs,PREG_SET_ORDER);
+		foreach($regs as $reg){
+			$new = twidget_get_cached_avatar($reg[1]);
+			$contenu = str_replace($reg[1],$new,$contenu);
+		}
+
+		ecrire_fichier($f, serialize(array('time'=>time(),'content'=>$contenu)));
 	}
 
-	ecrire_fichier($f, serialize(array('time'=>time(),'content'=>$contenu)));
 	return $contenu;
 
 }
