@@ -18,6 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array $infos : un tableau des informations récupérées
  */
 function inc_spipmotion_mediainfo_dist($chemin){
+	include_spip('inc/filtres');
 	$infos = array();
 	if(file_exists($chemin)){
 		ob_start();
@@ -32,6 +33,20 @@ function inc_spipmotion_mediainfo_dist($chemin){
 			if($track == 'track type="General"'){
 				$infos['titre'] = $info[0]['Title'][0] ? $info[0]['Title'][0] : ($info[0]['Movie_name'][0] ? $info[0]['Movie_name'][0] : $info[0]['Track_name '][0]);
 				$infos['descriptif'] = $info[0]['Description'][0] ? $info[0]['Description'][0] : $info[0]['desc'][0];
+				if($infos['descriptif'] == ''){
+					if(isset($info[0]['Performer'][0]))
+						$infos['descriptif'] .= utf8_encode($info[0]['Performer'][0])."\n";
+					if(isset($info[0]['Album'][0]))
+						$infos['descriptif'] .= utf8_encode($info[0]['Album'][0])."\n";
+					if(isset($info[0]['Recorded_date'][0]))
+						$infos['descriptif'] .= utf8_encode($info[0]['Recorded_date'][0])."\n";
+					if(isset($info[0]['Genre'][0]))
+						$infos['descriptif'] .= utf8_encode($info[0]['Genre'][0])."\n";
+					if(isset($info[0]['Track_name_Position'][0]))
+						$infos['descriptif'] .= $info[0]['Track_name_Position'][0].($info[0]['Track_name_Total'][0] ? '/'.$info[0]['Track_name_Total'][0]:'')."\n";
+					if(isset($info[0]['Performer_Url'][0]))
+						$infos['descriptif'] .= "\n".utf8_encode($info[0]['Performer_Url'][0])."\n";
+				}
 				$infos['credits'] .= $info[0]['Performer'][0]? $info[0]['Performer'][0].($info[0]['Copyright'][0] ? ' - '.$info[0]['Copyright'][0] : '') : $info[0]['Copyright'][0] ;
 				$infos['duree'] = $info[0]['Duration'][0] / 1000;
 				$infos['bitrate'] = $info[0]['Overall_bit_rate'][0];
@@ -40,7 +55,6 @@ function inc_spipmotion_mediainfo_dist($chemin){
 				 */
 				if($info[0]['Cover_Data'][0]){
 					$mime = array_shift(explode(' ',$info[0]['Cover_MIME'][0]));
-					spip_log($mime,'test');
 					switch ($mime) {
 						case 'image/jpg':
 							$ext = 'jpg';
@@ -68,17 +82,38 @@ function inc_spipmotion_mediainfo_dist($chemin){
 						}
 					}
 					
-					if((isset($id3['date']) OR isset($id3['original_release_time']) OR isset($id3['encoded_time']))){
-							if(preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/',$id3['date']))
-								$valeurs['date'] = $id3['date'];
-							else if(preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/',$id3['original_release_time']))
-								$valeurs['date'] = $id3['original_release_time'];
-							else if(preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/',$id3['encoded_time']))
-								$valeurs['date'] = $id3['encoded_time'];
-							
-							if(isset($valeurs['date']) && (strlen($valeurs['date'])=='10'))
-								$valeurs['date'] = $valeurs['date'].' 00:00:00';
+					/**
+					 * On tente de trouver une date correcte?
+					 * 
+					 * Soit dans :
+					 * -* Original_Released_date
+					 * -* Recorded_date
+					 * -* Encoded_date
+					 */
+					foreach(array($info[0]['Original_Released_date'][0],$info[0]['Encoded_date'][0]) as $date){
+						$date = trim(str_replace('UTC','',$date));
+						if(preg_match('#^[0-9]{4}-[0-9]{1,2}- [0-9]{1}$#',$date)){
+							$date = preg_replace("#\.|/| #i",'0',$date,1);
 						}
+						$date = preg_replace("#\.|/| #i",'-',$date);
+						if(preg_match('#^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}$#',$date)){
+							list($annee,$mois,$jour) = explode('-',$date);
+							if (checkdate($mois, $jour, $annee)){
+								// normaliser
+								if ($date = recup_date($date)){
+									if ($date = mktime($date[3], $date[4], 0, (int)$date[1], (int)$date[2], (int)$date[0])) {
+										$date = date("Y-m-d H:i:s", $date);
+										$date = vider_date($date); // enlever les valeurs considerees comme nulles (1 1 1970, etc...)
+										if ($date) {
+											$infos['date'] = $date;
+											break;
+										}
+									}
+								}
+							}
+						}
+					}
+					
 					/**
 					 * Si on a du contenu dans les messages de copyright, 
 					 * on essaie de trouver la licence, si on a le plugin Licence
@@ -95,7 +130,6 @@ function inc_spipmotion_mediainfo_dist($chemin){
 							}
 						}
 					}
-					spip_log($infos,'test');
 				}
 			}
 			if($track == 'track type="Video"'){
@@ -146,6 +180,8 @@ function inc_spipmotion_mediainfo_dist($chemin){
 	if(!$infos['hasvideo']){
 		$infos['hasvideo'] = 'non';
 	}
+
+	$metas['Retrieved infos in database'] = $infos;
 	spip_log($infos,'spipmotion');
 	$infos['metadatas'] = serialize($metas);
 	return $infos;
