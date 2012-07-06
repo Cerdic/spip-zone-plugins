@@ -11,8 +11,9 @@ var selecteur_format = function(data){
 			row = row.split("|");
 			parsed[parsed.length] = {
 				data: row,
-				value: row[0],
+				label: row[0],
 				entry: row[1],
+				value: row[2],
 				result: row[2]
 			};
 		}
