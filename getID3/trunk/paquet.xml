@@ -1,11 +1,11 @@
 <paquet
 	prefix="getid3"
 	categorie="multimedia"
-	version="1.1.4"
+	version="1.2.0"
 	etat="stable"
 	compatibilite="[3.0.2;3.0.99]"
 	logo="images/id3v2.png"
-	schema="0.3.2"
+	schema="0.4.0"
 >	
 
 	<nom>GetId3</nom>

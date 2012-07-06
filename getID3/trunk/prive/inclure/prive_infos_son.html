@@ -47,7 +47,7 @@
 						<:getid3:info_bitrate:>
 					</td>
 					<td >
-						<strong>(#BITRATE|>{0}|oui)#BITRATE bps</strong>
+						<strong>(#AUDIOBITRATE|>{0}|oui)#AUDIOBITRATE bps</strong>
 					</td>
 				</tr>]
 
@@ -56,7 +56,7 @@
 						<:getid3:info_bitrate_mode:>
 					</td>
 					<td >
-						<strong><abbr title="[(#BITRATE_MODE|=={cbr}|?{<:getid3:son_bitrate_cbr:>})][(#BITRATE_MODE|=={vbr}|?{<:getid3:son_bitrate_vbr:>})]">(#BITRATE_MODE)</abbr></strong>
+						<strong><abbr title="[(#AUDIOBITRATEMODE|=={cbr}|?{<:getid3:son_bitrate_cbr:>})][(#AUDIOBITRATEMODE|=={vbr}|?{<:getid3:son_bitrate_vbr:>})]">(#AUDIOBITRATEMODE)</abbr></strong>
 					</td>
 				</tr>]
 
@@ -83,7 +83,7 @@
 						<:getid3:info_channels:>
 					</td>
 					<td >
-						<strong>(#CANAUX)</strong>
+						<strong>(#AUDIOCHANNELS)</strong>
 					</td>
 				</tr>]
 				[<tr>

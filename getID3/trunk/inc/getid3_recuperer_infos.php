@@ -110,12 +110,13 @@ function inc_getid3_recuperer_infos($id_document=null,$fichier=false){
 			'descriptif'=>filtrer_entites($document['descriptif']),
 			'duree'=> $id3['duree_secondes'],
 			'bitrate' => intval($id3['bitrate']),
-			'bitrate_mode'=>$id3['bitrate_mode'],
+			'audiobitrate' => intval($id3['bitrate']),
+			'audiobitratemode'=>$id3['bitrate_mode'],
+			'audiochannels' => $id3['channels'],
 			'audiosamplerate'=>$id3['audiosamplerate'],
 			'encodeur'=>$id3['codec'],
 			'bits'=>$id3['bits'],
-			'credits'=>$credits,
-			'canaux' => $id3['channels']
+			'credits'=>$credits
 		);
 	
 	if((isset($id3['date']) OR isset($id3['original_release_time']) OR isset($id3['encoded_time']))){
