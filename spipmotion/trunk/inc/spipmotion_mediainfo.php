@@ -162,11 +162,9 @@ function inc_spipmotion_mediainfo_dist($chemin){
 				$infos['hasaudio'] = 'oui';
 				$infos['audiobitrate'] = $info[0]['Bit_rate'][0];
 				$infos['audiochannels'] = $info[0]['Channel_s_'][0];
-				$infos['canaux'] = $info[0]['Channel_s_'][0];
 				$infos['audiochannels'] = $info[0]['Channel_s_'][0];
 				$infos['audiosamplerate'] = $info[0]['Sampling_rate'][0];
 				$infos['audiocodec'] = $info[0]['Codec'][0];
-				$infos['bitrate_mode'] = strtolower($info[0]['Bit_rate_mode'][0]);
 				$infos['audiobitratemode'] = strtolower($info[0]['Bit_rate_mode'][0]);
 				if($infos['audiocodec'] == 'AAC LC'){
 					$infos['audiocodecid'] = 'mp4a.40.2';
