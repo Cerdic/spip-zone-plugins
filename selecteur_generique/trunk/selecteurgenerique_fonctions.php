@@ -35,7 +35,7 @@ function selecteurgenerique_verifier_js($flux){
 			 */
 			if(strpos($flux,'jquery.ui.position.js')===FALSE){
 				$position = find_in_path('prive/javascript/ui/jquery.ui.position.js');
-				$flux .= "
+				$contenu .= "
 <script type='text/javascript' src='$position'></script>
 ";
 			/**
