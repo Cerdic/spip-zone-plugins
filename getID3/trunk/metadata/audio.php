@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function metadata_audio($file){
 	$metas = array();
 	$recuperer_infos = charger_fonction('getid3_recuperer_infos','inc');
-	$metas = $recuperer_infos(false,$file);
+	$metas = $recuperer_infos($file);
 	return $metas;
 }
 

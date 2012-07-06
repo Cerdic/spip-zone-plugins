@@ -20,33 +20,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string/false $fichier : chemin du fichier duquel on doit récupérer les infos
  */
 
-function inc_getid3_recuperer_infos($id_document=null,$fichier=false){
-	if(!intval($id_document) && !$fichier){
+function inc_getid3_recuperer_infos($fichier=false){
+	if(!$fichier OR !file_exists($fichier)){
 		return false;
-	}
-	
-	/**
-	 * Récupérer le fichier si on part d'un id_document
-	 */
-	$document = array();
-	
-	if(intval($id_document)){
-		include_spip('action/editer_document');
-		include_spip('inc/documents');
-		include_spip('inc/filtres');
-		$document = sql_fetsel("*", "spip_documents","id_document=".intval($id_document));
-		$son_chemin = get_spip_doc($document['fichier']);
-		if(!file_exists($son_chemin))
-			return false;
-	}else{
-		$son_chemin = $fichier;
 	}
 	
 	/**
 	 * Récupération des metas du fichier
 	 */
 	$recuperer_id3 = charger_fonction('recuperer_id3','inc');
-	$id3 = $recuperer_id3($son_chemin);
+	$id3 = $recuperer_id3($fichier);
 	
 	/**
 	 * On remplit les champs de base de SPIP avec ce dont on dispose
@@ -54,34 +37,34 @@ function inc_getid3_recuperer_infos($id_document=null,$fichier=false){
 	 * -* titre
 	 * -* descriptif
 	 */
-	if((!isset($document['titre']) OR ($document['titre'] == '')) && isset($id3['title'])){
-		$document['titre'] = preg_replace('/_/',' ',utf8_encode($id3['title']));
+	if(isset($id3['title']){
+		$id3['titre'] = preg_replace('/_/',' ',utf8_encode($id3['title']));
 	}
-	if($document['titre'] == ''){
+	if(!isset($id3['title']){
 		$titre = strtolower(array_shift(explode('.',basename($son_chemin))));
 		$titre = utf8_encode($titre);
-		$document['titre'] = preg_replace('/_/',' ',$titre);
+		$id3['titre'] = preg_replace('/_/',' ',$titre);
 	}
 
-	if(!isset($document['descriptif']) OR ($document['descriptif'] == '')){
+	if(!isset($id3['descriptif'])){
 		/**
 		 * Ne pas prendre les comments foireux d'itunes
 		 */
 		if(isset($id3['comments']) && !preg_match('/0000[a-b|0-9]{4}/',$id3['comments']))
-			$document['descriptif'] = utf8_encode($id3['comments']);
+			$id3['descriptif'] = utf8_encode($id3['comments']);
 		else{
 			if(isset($id3['artist']))
-				$document['descriptif'] .= utf8_encode($id3['artist'])."\n";
+				$id3['descriptif'] .= utf8_encode($id3['artist'])."\n";
 			if(isset($id3['album']))
-				$document['descriptif'] .= utf8_encode($id3['album'])."\n";
+				$id3['descriptif'] .= utf8_encode($id3['album'])."\n";
 			if(isset($id3['year']))
-				$document['descriptif'] .= utf8_encode($id3['year'])."\n";
+				$id3['descriptif'] .= utf8_encode($id3['year'])."\n";
 			if(isset($id3['genre']))
-				$document['descriptif'] .= utf8_encode($id3['genre'])."\n";
+				$id3['descriptif'] .= utf8_encode($id3['genre'])."\n";
 			if(isset($id3['track_number']))
-				$document['descriptif'] .= utf8_encode($id3['track_number'])."\n";
+				$id3['descriptif'] .= utf8_encode($id3['track_number'])."\n";
 			if(isset($id3['comment']) && !preg_match('/0000[a-b|0-9]{4}/',$id3['comment']))
-				$document['descriptif'] .= "\n".utf8_encode($id3['comment'])."\n";
+				$id3['descriptif'] .= "\n".utf8_encode($id3['comment'])."\n";
 		}
 	}
 
@@ -97,17 +80,14 @@ function inc_getid3_recuperer_infos($id_document=null,$fichier=false){
 			$covers[] = $val;
 	}
 	
-	$credits = $id3['copyright_message']?$id3['copyright_message']:$id3['copyright'];
-	
-	if(!isset($document['credits']) OR ($document['credits'] == '') && ($credits != ''))
-		$credits = filtrer_entites(utf8_encode($credits));
+	$id3['credits'] = $id3['copyright_message']?$id3['copyright_message']:$id3['copyright'];
 	
 	/**
 	 * Les valeurs que l'on mettra en base à la fin
 	 */
 	$valeurs = array(
-			'titre'=>filtrer_entites($document['titre']),
-			'descriptif'=>filtrer_entites($document['descriptif']),
+			'titre'=>filtrer_entites($id3['titre']),
+			'descriptif'=>filtrer_entites($id3['descriptif']),
 			'duree'=> $id3['duree_secondes'],
 			'bitrate' => intval($id3['bitrate']),
 			'audiobitrate' => intval($id3['bitrate']),
@@ -116,7 +96,7 @@ function inc_getid3_recuperer_infos($id_document=null,$fichier=false){
 			'audiosamplerate'=>$id3['audiosamplerate'],
 			'encodeur'=>$id3['codec'],
 			'bits'=>$id3['bits'],
-			'credits'=>$credits
+			'credits'=>$id3['credits']
 		);
 	
 	if((isset($id3['date']) OR isset($id3['original_release_time']) OR isset($id3['encoded_time']))){
@@ -194,9 +174,6 @@ function inc_getid3_recuperer_infos($id_document=null,$fichier=false){
 			}
 		}
 	}
-	
-	if(intval($id_document))
-		document_modifier($id_document,$valeurs);
 	
 	return $valeurs;
 }

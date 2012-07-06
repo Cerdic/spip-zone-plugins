@@ -26,21 +26,29 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
   */
 function recuperer_id3_doc($id_document,$retour=true){
 	$recuperer_id3 = charger_fonction('getid3_recuperer_infos','inc');
-	$id3_content = $recuperer_id3($id_document);
-
-	if($retour){
-		$output = '';
-		foreach($id3_content as $cle => $val){
-			if(preg_match('/cover/',$cle)){
-				$output .= ($val) ? '<img src='.url_absolue($val).' /><br /><br />' : '';
+	$fichier = sql_getfetsel('fichier','spip_documents','id_document='.intval($id_document));
+	if($fichier){
+		include_spip('inc/documents');
+		$fichier = get_spip_doc($fichier);
+		if(file_exists($fichier)){
+			$id3_content = $recuperer_id3($fichier);
+		
+			if($retour){
+				$output = '';
+				foreach($id3_content as $cle => $val){
+					if(preg_match('/cover/',$cle)){
+						$output .= ($val) ? '<img src='.url_absolue($val).' /><br /><br />' : '';
+					}else{
+						$output .= ($val) ? _T('getid3:info_'.$cle).' '.$val.'<br />' : '';
+					}
+				}
 			}else{
-				$output .= ($val) ? _T('getid3:info_'.$cle).' '.$val.'<br />' : '';
+				$output = $id3_content;
 			}
+			return $output;
 		}
-	}else{
-		$output = $id3_content;
 	}
-	return $output;
+	return false;
 }
 
 /**
