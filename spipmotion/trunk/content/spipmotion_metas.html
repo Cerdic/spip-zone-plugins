@@ -1,7 +1,5 @@
 <B_document>
 <h1 class="h1"><:spipmotion:titre_page_metas_doc{id=#ENV{id_document}}:></h1>
-[(#AUTORISER{modifier,document,#ID_DOCUMENT}|oui) autorisé]
-[(#AUTORISER{modifier,article,28}|oui) autorisé]
 <BOUCLE_document(DOCUMENTS){si #AUTORISER{modifier,document,#ID_DOCUMENT}|oui}{id_document}{tout}>
 <BOUCLE_tracks(POUR){tableau #METADATAS|unserialize}>
 <h2>#CLE</h2>
