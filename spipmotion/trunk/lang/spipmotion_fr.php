@@ -35,6 +35,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'encoder_video_version' => '(Ré)encoder uniquement la version @version@ de cette vidéo',
 	'erreur_binaire' => 'Un ou plusieurs logiciels nécessaires au bon fonctionnement du plugin ne sont pas disponibles sur votre système.',
 	'erreur_chemin_ffmpeg' => 'Aucun encodage ne pourra être effectué car le chemin ne fonctionne pas.',
+	'erreur_document_inexistant' => 'Ce document n\'existe pas.',
+	'erreur_document_interdit' => 'Vous n\'avez pas les droits suffisants pour accéder à cette page',
 	'erreur_document_plus_disponible' => 'Ce document n\'est plus disponible sur le site',
 	'erreur_formulaire_configuration' => 'Le formulaire contient au moins une erreur.',
 	'erreur_script_spipmotion_non_executable' => 'Le script spipmotion.sh n\'a pas été trouvé ou n\'est pas exécutable.',
@@ -247,6 +249,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_file_encodes' => 'Liste des encodages terminés',
 	'titre_page_file_encodes_jour' => 'Encodages par date',
 	'titre_page_file_stats' => 'Statistiques d\'encodage',
+	'titre_page_metas_doc' => 'Métadonnées du document #@id@',
 	'titre_previsu' => 'Prévisualisation',
 
 	// U

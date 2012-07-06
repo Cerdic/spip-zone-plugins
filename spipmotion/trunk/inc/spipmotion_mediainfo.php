@@ -35,6 +35,68 @@ function inc_spipmotion_mediainfo_dist($chemin){
 				$infos['credits'] .= $info[0]['Performer'][0]? $info[0]['Performer'][0].($info[0]['Copyright'][0] ? ' - '.$info[0]['Copyright'][0] : '') : $info[0]['Copyright'][0] ;
 				$infos['duree'] = $info[0]['Duration'][0] / 1000;
 				$infos['bitrate'] = $info[0]['Overall_bit_rate'][0];
+				/**
+				 * Récupération de la cover
+				 */
+				if($info[0]['Cover_Data'][0]){
+					$mime = array_shift(explode(' ',$info[0]['Cover_MIME'][0]));
+					spip_log($mime,'test');
+					switch ($mime) {
+						case 'image/jpg':
+							$ext = 'jpg';
+					 	case 'image/png':
+							$ext = 'png';
+						case 'image/gif':
+							$ext = 'gif';
+						default:
+							$ext = 'jpg';
+					}
+					$tmp_file = 'spipmotion-'.str_replace(' ','_',$infos['titre']).'.'.$ext;
+		            $dest = sous_repertoire(_DIR_VAR, 'cache-spipmotion_logo');
+					$dest = $dest.$tmp_file;
+					if ($ok = ecrire_fichier($dest, base64_decode(array_shift(explode(' / ',$info[0]['Cover_Data'][0]))))){
+						include_spip('inc/joindre_document');
+						$ajouter_documents = charger_fonction('ajouter_documents', 'action');
+			
+						list($extension,$arg) = fixer_extension_document($dest);
+						$cover_ajout = array(array('tmp_name'=>$dest,'name'=> basename($dest)));
+						$ajoute = $ajouter_documents('new',$cover_ajout,'',0,'vignette');
+			
+						if (is_numeric(reset($ajoute))
+						  AND $id_vignette = reset($ajoute)){
+						  	$infos['id_vignette'] = $id_vignette;
+						}
+					}
+					
+					if((isset($id3['date']) OR isset($id3['original_release_time']) OR isset($id3['encoded_time']))){
+							if(preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/',$id3['date']))
+								$valeurs['date'] = $id3['date'];
+							else if(preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/',$id3['original_release_time']))
+								$valeurs['date'] = $id3['original_release_time'];
+							else if(preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/',$id3['encoded_time']))
+								$valeurs['date'] = $id3['encoded_time'];
+							
+							if(isset($valeurs['date']) && (strlen($valeurs['date'])=='10'))
+								$valeurs['date'] = $valeurs['date'].' 00:00:00';
+						}
+					/**
+					 * Si on a du contenu dans les messages de copyright, 
+					 * on essaie de trouver la licence, si on a le plugin Licence
+					 * 
+					 * Pour l'instant uniquement valable sur les CC
+					 */
+					if(defined('_DIR_PLUGIN_LICENCE') && ((strlen($infos['descriptif']) > 0) OR strlen($infos['credits']) > 0)){
+						include_spip('licence_fonctions');
+						if(function_exists('licence_recuperer_texte')){
+							foreach(array($infos['descriptif'],$infos['credits']) as $contenu){
+								$infos['id_licence'] = licence_recuperer_texte($contenu);
+								if(intval($infos['id_licence']))
+									break;
+							}
+						}
+					}
+					spip_log($infos,'test');
+				}
 			}
 			if($track == 'track type="Video"'){
 				if(!$infos['titre'])
