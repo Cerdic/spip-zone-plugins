@@ -63,7 +63,9 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 	);
 	$maj['1.1.3'] = array(
 		array('sql_alter','TABLE spip_documents CHANGE `metadatas` `metadatas` LONGTEXT NOT NULL'),
-		
+	);
+	$maj['1.1.4'] = array(
+		array('maj_tables',array('spip_documents')),
 	);
 	/**
 	 * TODO : générer un htaccess dans le répertoire script_bash/

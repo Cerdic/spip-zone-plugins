@@ -50,6 +50,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 				$infos['credits'] .= $info[0]['Performer'][0]? $info[0]['Performer'][0].($info[0]['Copyright'][0] ? ' - '.$info[0]['Copyright'][0] : '') : $info[0]['Copyright'][0] ;
 				$infos['duree'] = $info[0]['Duration'][0] / 1000;
 				$infos['bitrate'] = $info[0]['Overall_bit_rate'][0];
+				$infos['encodeur'] = $info[0]['Writing_library'][0];
 				/**
 				 * Récupération de la cover
 				 */
@@ -162,8 +163,11 @@ function inc_spipmotion_mediainfo_dist($chemin){
 				$infos['audiobitrate'] = $info[0]['Bit_rate'][0];
 				$infos['audiochannels'] = $info[0]['Channel_s_'][0];
 				$infos['canaux'] = $info[0]['Channel_s_'][0];
+				$infos['audiochannels'] = $info[0]['Channel_s_'][0];
 				$infos['audiosamplerate'] = $info[0]['Sampling_rate'][0];
 				$infos['audiocodec'] = $info[0]['Codec'][0];
+				$infos['bitrate_mode'] = strtolower($info[0]['Bit_rate_mode'][0]);
+				$infos['audiobitratemode'] = strtolower($info[0]['Bit_rate_mode'][0]);
 				if($infos['audiocodec'] == 'AAC LC'){
 					$infos['audiocodecid'] = 'mp4a.40.2';
 				}else if($infos['audiocodec'] == 'MPA1L3'){

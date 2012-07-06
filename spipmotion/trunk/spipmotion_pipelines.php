@@ -17,7 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Affiche les boutons supplémentaires de :
  * - récupération de logo dans le cas d'une vidéo
  * - récupération d'informations spécifiques dans le cas d'une video
- * (Dans le cas d'un son, c'est le plugin getID3 qui s'en charge)
+ * (Dans le cas d'un son, c'est le plugin getID3 qui s'en charge si présent)
  * - bouton de demande d'encodage / de réencodage du son ou de la vidéo
  * 
  * @param array $flux Le contexte du pipeline
@@ -65,16 +65,9 @@ function spipmotion_post_edition($flux){
 			 * Si nous sommes dans un format vidéo que SPIPmotion peut traiter,
 			 * on lui applique certains traitements :
 			 * -* récupération d'une vignette
-			 * La récupération des infos est faite directement via metadata/video lors de l'insertion
-			 * Les fichiers sonores sont gérés par le plugin getID3 pour cela
+			 * La récupération des infos est faite directement via metadata/video et metadat/audio lors de l'insertion
 			 */
 			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_videos',array()))){
-				/**
-				 * Récupération des informations de la vidéo
-				 */
-				//$recuperer_infos = charger_fonction('spipmotion_recuperer_infos','inc');
-				//$infos = $recuperer_infos($id_document);
-
 				/**
 				 * Récupération d'un logo de la vidéo
 				 */
