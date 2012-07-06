@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_descr_gis' => 'Geographic Information System.<br /><a href="http://www.spip-contrib.net/3887" class="spip_out">Link to the documentation</a>.',
 	'cfg_inf_adresse' => 'Displays additional address fields (country, city, state, address ...)',
-	'cfg_inf_bing' => 'La couche Bing Aerial nécessite une clé à créer sur <a href=\'@url@\' class="spip_out">le site de Bing</a>.', # NEW
+	'cfg_inf_bing' => 'The Bing Aerial layer needs a key you can create on <a href=\'@url@\' class="spip_out">the Bing website</a>.',
 	'cfg_inf_cloudmade' => 'This API needs a key you can create on <a href=\'@url@\' class="spip_out">the CloudMade website</a>.',
 	'cfg_inf_geocoder' => 'Enable geocoder functions (search from an address, recovery of the address from the coordinates).',
 	'cfg_inf_geolocaliser_user_html5' => 'If the user\'s browser allows it, its approximate geographic location is retrieved to give the default position when creating a new point.',
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_api_cloudmade' => 'CloudMade',
 	'cfg_lbl_api_google' => 'Google Maps v2',
 	'cfg_lbl_api_googlev3' => 'Google Maps v3',
-	'cfg_lbl_api_key_bing' => 'Clé Bing', # NEW
+	'cfg_lbl_api_key_bing' => 'Bing key',
 	'cfg_lbl_api_key_cloudmade' => 'CloudMade API key',
 	'cfg_lbl_api_key_google' => 'GoogleMaps API key',
 	'cfg_lbl_api_key_yandex' => 'Yandex API key',
