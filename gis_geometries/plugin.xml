@@ -1,7 +1,7 @@
 <plugin>
 	<nom>GIS Geometries</nom>
 	<auteur>b_b</auteur>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<version_base>1.0.0</version_base>
 	<licence>GNU/GPL</licence>
 	<etat>stable</etat>
