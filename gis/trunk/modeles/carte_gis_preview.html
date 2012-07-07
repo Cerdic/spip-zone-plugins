@@ -87,6 +87,10 @@
 		<BOUCLE_kml(DOCUMENTS){tous}{objet}{id_objet}{extension=kml}>
 		map_preview.addLayer(new L.KML('[(#URL_DOCUMENT|url_absolue)]', {async: true}));
 		</BOUCLE_kml>
+		[(#REM) On ajoute les GPX attachés à l'objet ]
+		<BOUCLE_gpx(DOCUMENTS){tous}{objet}{id_objet}{extension=kml}>
+		map_preview.addLayer(new L.GPX('[(#URL_DOCUMENT|url_absolue)]', {async: true}));
+		</BOUCLE_gpx>
 	}
 
 	$(function(){

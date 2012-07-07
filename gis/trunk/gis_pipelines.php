@@ -27,6 +27,7 @@ function gis_insert_head($flux){
 	$flux .="\n".'<script type="text/javascript">/*<![CDATA[*/ L.Icon.Default.imagePath = "' . find_in_path(_DIR_LIB_GIS.'dist/images') .'"; /*]]>*/</script>'."\n";
 	$flux .="\n".'<script type="text/javascript" src="'. find_in_path('javascript/gis.js') .'"></script>';
 	$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'plugins/layer/vector/KML.js') .'"></script>';
+	$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'plugins/layer/vector/GPX.js') .'"></script>';
 	$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'plugins/layer/tile/leaflet-providers-0.0.1.js') .'"></script>';
 	$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'plugins/control/Control.FullScreen.js') .'"></script>';
 
