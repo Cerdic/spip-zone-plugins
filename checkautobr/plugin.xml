@@ -2,7 +2,7 @@
 	<nom>CheckAutoBR: outil de conversion des sauts de ligne &para;</nom>
 	<auteur>Fil</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<etat>test</etat>
 	<description>Convertir les sauts de ligne dans les vieux articles
 	<a href="?exec=checkautobr">checkautobr &para;</a>

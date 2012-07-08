@@ -1,7 +1,7 @@
 <?php
 
 function checkautobr_ajoute_bouton_autobr($x) {
-
+	include_spip('inc/presentation');
 	if ($x['args']['exec'] == 'articles'
 	AND $id_article = intval($x['args']['id_article'])
 	AND autoriser('article', 'modifier', $id_article)
