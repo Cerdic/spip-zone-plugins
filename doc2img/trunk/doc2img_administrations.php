@@ -108,7 +108,7 @@ function doc2img_update_to_docs(){
 			 * - on supprime le document en base
 			 * - on supprime le fichier physique
 			 */
-			document_set($x,array("page" => $doc2img['page']));
+			document_modifier($x,array("page" => $doc2img['page']));
 			sql_delete('spip_doc2img','id_document='.intval($id_document).' AND fichier='.sql_quote($doc2img['fichier']));
 			spip_unlink(get_spip_doc($doc2img['fichier']));
 		}

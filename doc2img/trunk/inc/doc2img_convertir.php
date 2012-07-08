@@ -1,6 +1,6 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Fonction autonome convertissant un document donné en paramètre
@@ -130,7 +130,7 @@ function inc_doc2img_convertir($id_document,$opt='full') {
 					}
 					if (is_numeric(reset($vignette))
 					  AND $id_vignette = reset($vignette)){
-						document_set($id_document,array("id_vignette" => intval($id_vignette)));
+						document_modifier($id_document,array("id_vignette" => intval($id_vignette)));
 					}
 					spip_unlink($document['cible_url'].$frame_tmp);
 		        }
@@ -139,7 +139,7 @@ function inc_doc2img_convertir($id_document,$opt='full') {
 	            $image_frame->clear();
 	            $image_frame->destroy();
 				$frame++;
-				document_set(reset($x),array('page'=>$frame));
+				document_modifier(reset($x),array('page'=>$frame));
 		    } while($frame < $nb_pages);
 	    }else{
 	    	do {
@@ -172,7 +172,7 @@ function inc_doc2img_convertir($id_document,$opt='full') {
 					if (is_numeric(reset($x))
 					  AND $id_vignette = reset($x)){
 						include_spip('action/editer_document');
-						document_set($id_document,array("id_vignette" => intval($id_vignette)));
+						document_modifier($id_document,array("id_vignette" => intval($id_vignette)));
 					}
 					spip_unlink($document['cible_url'].$frame_name);
 	            }else{
