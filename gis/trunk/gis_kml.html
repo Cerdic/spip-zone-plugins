@@ -7,46 +7,7 @@ version="1.0" encoding="#CHARSET" ?>
 [<name>(#NOM_SITE_SPIP|texte_backend)</name>]
 [<description>(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)</description>]
 <BOUCLE_gis(GIS gis_liens){id_gis ?}{id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{id_mot ?}{id_auteur ?}{id_syndic ?}{recherche ?}{0, #ENV{limit,500}}>
-	<Placemark id="#gis[(#ID_GIS)]">
-		<name>[(#TITRE|sinon{#INFO_TITRE{#OBJET,#ID_OBJET}}|supprimer_numero|texte_backend)]</name>
-		<atom:link rel="related" href="[(#ID_OBJET|generer_url_entite{#OBJET}|url_absolue)]" />
-		<description>
-			<![CDATA[
-				[(#DESCRIPTIF|texte_backend)]
-			]]>
-		</description>
-		[<Point>
-			<coordinates>(#LON),[(#LAT)]</coordinates>
-		</Point>]
-		[(#SET{logo_doc,''})]
-		[(#LOGO_GIS|oui)
-		[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{28,28}|image_recadre{28,28}|image_recadre{32,32,center}})]]
-		[(#LOGO_GIS|non)
-		[(#CHEMIN{images/marker_defaut.png}|oui)[
-			(#SET{logo_doc,#CHEMIN{images/marker_defaut.png}|image_passe_partout{28,28}|image_recadre{28,28}})]
-		]]
-		[(#GET{logo_doc}|oui)
-		#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
-		#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
-		#SET{icon_anchorPoint,''}
-		<Style>
-			<IconStyle>
-				<scale>1.0</scale>
-				[<Icon>
-					<href>(#GET{logo_doc}|extraire_attribut{src}|url_absolue)</href>
-				</Icon>]
-				<hotSpot x="0.5"  y="0.5" xunits="pixels" yunits="pixels"/>
-			</IconStyle>
-		</Style>
-		<ExtendedData>
-			[<Data name="iconSize">
-				<value>(#GET{icon_w}),[(#GET{icon_h})]</value>
-			</Data>]
-			<Data name="iconAnchor">
-				<value>0.5,0.5</value>
-			</Data>
-		</ExtendedData>]
-	</Placemark>
+	[(#INCLURE{fond=inclure/kml-item,id_gis,objet,id_objet})]
 </BOUCLE_gis>
 </Document>
 </kml>
