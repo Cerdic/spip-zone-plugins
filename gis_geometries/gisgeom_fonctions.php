@@ -54,4 +54,18 @@ function wkt_to_kml($wkt) {
 	return $geometry->out('kml');
 }
 
+/**
+ * Filtre wkt_to_gpx converti une chaine au format WKT en GPX
+ * 
+ * @param string $wkt
+ * @return string
+ */
+function wkt_to_gpx($wkt) {
+	if (!$wkt) return false;
+	// include_spip cherche les fichier .php, on utilise find_in_path avec l'option $include à true
+	find_in_path(_DIR_LIB_GEOPHP.'geoPHP.inc', '', true);
+	$geometry = geoPHP::load($wkt,'wkt');
+	return $geometry->out('gpx');
+}
+
 ?>

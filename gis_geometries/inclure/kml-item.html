@@ -1,16 +1,8 @@
-#HTTP_HEADER{Content-Type: application/vnd.google-earth.kml+xml;charset=#CHARSET}[(#ENV**{dl}
-|?{#HTTP_HEADER{Content-Disposition: attachment; filename=#CONFIG{gis/nom_fichier_kml}|sinon{gis}|concat{.kml}},''})]<?xml 
-version="1.0" encoding="#CHARSET" ?>
-<kml xmlns="http://www.opengis.net/kml/2.2"
-	xmlns:atom="http://www.w3.org/2005/Atom">
-<Document>
-[<name>(#NOM_SITE_SPIP|texte_backend)</name>]
-[<description>(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)</description>]
-<BOUCLE_gis(GIS gis_liens){id_gis ?}{id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{id_mot ?}{id_auteur ?}{id_syndic ?}{recherche ?}{0, #ENV{limit,500}}>
+<BOUCLE_gis(GIS){id_gis}>
 	<Placemark id="#gis[(#ID_GIS)]">
-		<name>[(#TITRE|sinon{#INFO_TITRE{#OBJET,#ID_OBJET}}|supprimer_numero|texte_backend)]</name>
-		<atom:link rel="related" href="[(#ID_OBJET|generer_url_entite{#OBJET}|url_absolue)]" />
-		<description>
+		<name>[(#TITRE|supprimer_numero|texte_backend)]</name>[
+		<atom:link rel="related" href="(#ID_OBJET|generer_url_entite{#OBJET}|url_absolue)" />
+		]<description>
 			<![CDATA[
 				[(#DESCRIPTIF|texte_backend)]
 			]]>
@@ -46,5 +38,3 @@ version="1.0" encoding="#CHARSET" ?>
 		</ExtendedData>]
 	</Placemark>
 </BOUCLE_gis>
-</Document>
-</kml>
