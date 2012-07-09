@@ -169,6 +169,9 @@ var geocoder;]
 				// surveiller les changements sur les points de l'objet
 				e.layer.on("edit", function(e){
 					$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.target));
+					var center = e.target.getBounds().getCenter();
+					$('#champ_#ENV{champ_lat,lat}').val(center.lat);
+					$('#champ_#ENV{champ_lon,lon}').val(center.lng);
 				});
 			} else if (e.geometryType == 'Point') {
 				marker = e.layer;

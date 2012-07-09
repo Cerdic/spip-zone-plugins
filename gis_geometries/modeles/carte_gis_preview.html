@@ -80,8 +80,7 @@
 			});
 			map_preview.addLayer(geojson);
 			geojson.addGeoJSON(data);
-			[(#GET{autocenter}|oui)
-			map_preview.fitBounds(geojson.getBounds());]
+			map_preview.fitBounds(geojson.getBounds());
 		}
 		[(#REM) On ajoute les KML attachés à l'objet ]
 		<BOUCLE_kml(DOCUMENTS){tous}{objet}{id_objet}{extension=kml}>
