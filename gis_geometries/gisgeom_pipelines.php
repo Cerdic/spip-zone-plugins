@@ -47,7 +47,7 @@ function gisgeom_header_prive($flux){
 function gisgeom_recuperer_fond($flux){
 	if ($flux['args']['fond'] == 'formulaires/editer_gis') {
 		$saisie = recuperer_fond('formulaires/inc-editer_gis-geom',$flux['data']['contexte']);
-		$flux['data']['texte'] = preg_replace('%<li class="editer editer_lat.*?</li>%is', $saisie.'$0', $flux['data']['texte']);
+		$flux['data']['texte'] = preg_replace('%<!--extra-->%is', '$0'.$saisie, $flux['data']['texte']);
 	}
 	return $flux;
 }
@@ -72,6 +72,27 @@ function gisgeom_formulaire_charger($flux){
 }
 
 /**
+ * Outrepasser les champs obligatoires du formulaire editer_gis si on importe un fichier lors de la création
+ *
+ * @param $flux
+ * @return mixed
+ */
+function gisgeom_formulaire_verifier($flux){
+	if ($flux['args']['form'] == 'editer_gis' AND $_FILES['import']) {
+		include_spip('action/ajouter_documents');
+		$infos_doc = verifier_upload_autorise($_FILES['import']['name']);
+		if (in_array($infos_doc['extension'], array('gpx', 'kml'))) {
+			unset($flux['data']['titre']);
+			unset($flux['data']['zoom']);
+		} else {
+			$flux['data']['import'] = _T('medias:erreur_upload_type_interdit', array('nom'=>$_FILES['import']['name']));
+		}
+	}
+	return $flux;
+}
+
+/**
+ * Gestion de l'import de fichiers GPX et KML
  * Passer la valeur du champ geo lors de l'insertion d'un objet
  * (un champ GEOMETRY ne peut être nul si la table comporte un index spatial basé sur celui-ci)
  * 
@@ -79,6 +100,40 @@ function gisgeom_formulaire_charger($flux){
  * @return mixed
  */
 function gisgeom_pre_insertion($flux){
+	if (!_request('geojson') AND $_FILES['import']) {
+		include_spip('action/ajouter_documents');
+		$infos_doc = verifier_upload_autorise($_FILES['import']['name']);
+		$fichier = $_FILES['import']['tmp_name'];
+		$import = '';
+		lire_fichier($fichier, $donnees);
+		if ($donnees) {
+			find_in_path(_DIR_LIB_GEOPHP.'geoPHP.inc', '', true);
+			$geometry = geoPHP::load($donnees,$infos_doc['extension']);
+			set_request('geojson', $geometry->out('json'));
+			// titre et descriptif du gis à partir des infos du fichier si pas de titre posté
+			if (!_request('titre')) {
+				if ($infos_doc['extension'] == 'gpx') {
+					$infos['titre'] = textebrut(extraire_balise($donnees, 'name'));
+					$infos['descriptif'] = textebrut(extraire_balise($donnees, 'desc'));
+				}
+				if ($infos_doc['extension'] == 'kml') {
+					include_spip('inc/xml');
+					$arbre = spip_xml_parse($donnees);
+					spip_xml_match_nodes(",^Document,",$arbre, $documents);
+					foreach($documents as $document => $info){
+						$infos['titre'] = preg_replace('/<!\[cdata\[(.*?)\]\]>/is', '$1', $info[0]['name'][0]);
+						$infos['descriptif'] = preg_replace('/<!\[cdata\[(.*?)\]\]>/is', '$1', $info[0]['description'][0]);
+					}
+				}
+				set_request('titre', $infos['titre']);
+				set_request('descriptif', $infos['descriptif']);
+			}
+			// renseigner les coordonnées de l'objet à partir de son centroid
+			$centroid = $geometry->getCentroid();
+			set_request('lat', $centroid->getY());
+			set_request('lon', $centroid->getX());
+		}
+	}
 	if (_request('geojson') AND $flux['args']['table'] == 'spip_gis') {
 		include_spip('gisgeom_fonctions');
 		$wkt = json_to_wkt(_request('geojson'));

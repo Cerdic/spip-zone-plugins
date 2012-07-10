@@ -1,6 +1,17 @@
-[(#SAISIE{hidden,geojson,
-	defaut='',
-	obligatoire=oui})]
-[(#SAISIE{hidden,type,
-	defaut='',
-	obligatoire=oui})]
+<ul>
+	[(#SAISIE{hidden,geojson,
+		defaut='',
+		obligatoire=oui})]
+	[(#SAISIE{hidden,type,
+		defaut='',
+		obligatoire=oui})]
+	[(#ENV{id_gis}|intval|non)
+	<li class="fieldset import">
+	<fieldset><ul>
+		[(#SAISIE{input,import,
+			type=file,
+			label=<:gis:label_import:>,
+			explication=<:gis:explication_import:>})]
+	</ul></fieldset>
+	</li>]
+</ul>
