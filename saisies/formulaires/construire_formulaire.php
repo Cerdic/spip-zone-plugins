@@ -143,7 +143,10 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 			$chemin_nom
 		);
 	}
-	
+
+	// liste des options de vérification
+	$verif_options = array();
+
 	// S'il y a un groupe "validation" alors on va construire le formulaire des vérifications
 	if ($chemin_validation = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][validation]", true)){
 		include_spip('inc/verifier');
@@ -162,7 +165,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 				'datas' => array()
 			)
 		);
-		$verif_options = array();
+
 		foreach ($liste_verifications as $type_verif => $verif){
 			$saisie_liste_verif['options']['datas'][$type_verif] = $verif['titre'];
 			// Si le type de vérif a des options, on ajoute un fieldset
@@ -196,7 +199,10 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 				$vraies_erreurs["saisie_modifiee_${nom}[options][nom]"] = _T('saisies:erreur_option_nom_unique');
 		}
 		// On regarde s'il a été demandé un type de vérif
-		if (($type_verif = $saisie_modifiee['verifier']['type']) != '' and $verif_options[$type_verif]){
+		if (isset($saisie_modifiee['verifier']['type'])
+		  and (($type_verif = $saisie_modifiee['verifier']['type']) != '')
+		  and $verif_options[$type_verif])
+		{
 			// On ne vérifie que les options du type demandé
 			$vraies_erreurs = array_merge($vraies_erreurs, saisies_verifier($verif_options[$type_verif]['saisies']));
 		}
@@ -316,19 +322,23 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 		}
 		
 		// On regarde s'il y a des options de vérification à modifier
-		if (($type_verif = $saisie_modifiee['verifier']['type']) != ''){
+		if (isset($saisie_modifiee['verifier']['type'])
+		  and ($type_verif = $saisie_modifiee['verifier']['type']) != '')
+		{
 			$saisie_modifiee['verifier'] = array(
 				'type' => $type_verif,
 				'options' => $saisie_modifiee['verifier'][$type_verif]
 			);
 		}
-		else
+		else {
 			unset($saisie_modifiee['verifier']);
-	
-		
+		}
+
 		// On récupère les options postées en enlevant les chaines vides
 		$saisie_modifiee['options'] = array_filter($saisie_modifiee['options'], 'saisie_option_contenu_vide');
-		if ($saisie_modifiee['verifier']['options']) $saisie_modifiee['verifier']['options'] = array_filter($saisie_modifiee['verifier']['options'], 'saisie_option_contenu_vide');
+		if (isset($saisie_modifiee['verifier']['options']) and $saisie_modifiee['verifier']['options']) {
+			$saisie_modifiee['verifier']['options'] = array_filter($saisie_modifiee['verifier']['options'], 'saisie_option_contenu_vide');
+		}
 		
 		// On désinfecte à la main
 		if (is_array($saisie_modifiee['options']))
@@ -469,7 +479,11 @@ function formidable_generer_saisie_configurable($saisie, $env){
 		}
 		else{
 			$env2["saisie_modifiee_$nom"] = $env2['_saisies_par_nom'][$nom];
-			$env2["saisie_modifiee_$nom"]['verifier'][$env2["saisie_modifiee_$nom"]['verifier']['type']] = $env2["saisie_modifiee_$nom"]['verifier']['options'];
+			// il n'y a pas toujours de verification...
+			if (isset($env2["saisie_modifiee_$nom"]['verifier'])) {
+				$env2["saisie_modifiee_$nom"]['verifier'][ $env2["saisie_modifiee_$nom"]['verifier']['type'] ]
+					= $env2["saisie_modifiee_$nom"]['verifier']['options'];
+			}
 		}
 		
 		$env2['fond_generer'] = 'inclure/generer_saisies';
