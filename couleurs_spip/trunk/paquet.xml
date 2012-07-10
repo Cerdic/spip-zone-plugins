@@ -1,0 +1,20 @@
+<paquet
+	prefix="couleurs_spip"
+	categorie="edition"
+	version="3.0.0"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="couleurs_spip.png"
+	documentation="http://plugins.spip.net/couleurs_spip"
+>	
+
+	<nom>Couleurs Spip</nom>
+	<!-- Des textes en couleur -->
+
+       <auteur>Dominique Wojylac</auteur>
+	
+	<pipeline nom="post_propre" inclure="couleurs_spip_pipelines.php" />
+	<pipeline nom="header_prive" inclure="couleurs_spip_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="couleurs_spip_pipelines.php" />
+	
+</paquet>
