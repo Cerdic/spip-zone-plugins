@@ -7,12 +7,16 @@ function cvtupload_chercher_fichiers($form, $args){
 	if ($fonction_fichiers = charger_fonction('fichiers', 'formulaires/'.$form, true)
 		and $fichiers = call_user_func_array($fonction_fichiers, $args)
 		and is_array($fichiers)
+		and $fichiers = pipeline(
+			'formulaire_fichiers',
+			array('args'=>array('form'=>$form, 'args'=>$args), 'data'=>$fichiers)
+		)
+		and is_array($fichiers)
 	){
 		return $fichiers;
 	}
-	else{
-		return false;
-	}
+
+	return false;
 }
 
 function cvtupload_hash(){
@@ -76,10 +80,10 @@ function cvtupload_formulaire_fond($flux){
 			if (isset($fichiers[$champ])){
 				include_spip('inc/filtres_images');
 				// Si c'est un champ unique
-				if (isset($fichiers[$champ]['nom'])){
+				if (isset($fichiers[$champ]['name'])){
 					$flux['data'] = preg_replace(
 						"#<input[^>]*name=['\"]${champ}[^>]*>#i",
-						image_reduire($fichiers[$champ]['vignette'],32).' '.$fichiers[$champ]['nom'],
+						image_reduire($fichiers[$champ]['vignette'],32).' '.$fichiers[$champ]['name'],
 						$flux['data']
 					);
 				}
@@ -88,7 +92,7 @@ function cvtupload_formulaire_fond($flux){
 					foreach($fichiers[$champ] as $cle=>$fichier){
 						$flux['data'] = preg_replace(
 							"#<input[^>]*name=['\"]${champ}[^>]*>#i",
-							image_reduire($fichier['vignette'],32).' '.$fichier['nom'],
+							image_reduire($fichier['vignette'],32).' '.$fichier['name'],
 							$flux['data'],
 							1 // seul le premier trouvé est remplacé
 						);
@@ -116,8 +120,9 @@ function cvtupload_formulaire_traiter($flux){
 /*
  * Déplace un fichier uploadé dans un endroit temporaire et retourne des informations dessus
  *
- * @param array $fichier Le morceau de $_FILES concernant le fichier
- * @return array Retourne un tableau d'informations sur le fichier
+ * @param array $fichier Le morceau de $_FILES concernant le ou les fichiers
+ * @param string $$repertoire Chemin de destination des fichiers
+ * @return array Retourne un tableau d'informations sur le fichier ou un tableau de tableaux si plusieurs fichiers. Ce tableau est compatible avec l'action "ajouter_un_fichier" de SPIP.
  */
 function cvtupload_deplacer_fichier($fichier, $repertoire){
 	$vignette_par_defaut = charger_fonction('vignette', 'inc/');
@@ -133,7 +138,8 @@ function cvtupload_deplacer_fichier($fichier, $repertoire){
 					$nom = $nom.'_'.rand();
 				// Déplacement du fichier vers le dossier de réception temporaire + récupération d'infos
 				if (deplacer_fichier_upload($fichier['tmp_name'][$cle], $repertoire.$nom, true)) {
-					$infos[$cle]['nom'] = $nom;
+					$infos[$cle]['tmp_name'] = $repertoire.$nom;
+					$infos[$cle]['name'] = $nom;
 					// On en déduit l'extension et du coup la vignette
 					$infos[$cle]['extension'] = strtolower(preg_replace('/^.*\.([\w]+)$/i', '$1', $fichier['name'][$cle]));
 					$infos[$cle]['vignette'] = $vignette_par_defaut($infos[$cle]['extension'], false, true);
@@ -153,7 +159,8 @@ function cvtupload_deplacer_fichier($fichier, $repertoire){
 				$nom = $nom.'_'.rand();
 			// Déplacement du fichier vers le dossier de réception temporaire + récupération d'infos
 			if (deplacer_fichier_upload($fichier['tmp_name'], $repertoire.$nom, true)) {
-				$infos['nom'] = $nom;
+				$infos['tmp_name'] = $repertoire.$nom;
+				$infos['name'] = $nom;
 				// On en déduit l'extension et du coup la vignette
 				$infos['extension'] = strtolower(preg_replace('/^.*\.([\w]+)$/i', '$1', $fichier['name']));
 				$infos['vignette'] = $vignette_par_defaut($infos['extension'], false, true);
