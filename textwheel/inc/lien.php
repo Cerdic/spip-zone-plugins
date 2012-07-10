@@ -331,6 +331,11 @@ function virtuel_redirige($virtuel, $url=false){
 	return !$url ? $m[3] : traiter_lien_implicite($m[3]);
 }
 
+/* Compatibilite avec SPIP 2.1 */
+function chapo_redirige($chapo, $url=false) {
+	virtuel_redirige($chapo, $url);
+}
+
 // Ne pas afficher le chapo si article virtuel
 // http://doc.spip.org/@nettoyer_chapo
 function nettoyer_chapo($chapo){
