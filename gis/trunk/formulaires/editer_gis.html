@@ -12,38 +12,45 @@
 			[(#SAISIE{hidden,objet})]
 			[(#SAISIE{hidden,id_objet})]
 			[(#SAISIE{carte,editer_gis_#ENV{id_gis},env})]
-			[(#SAISIE{input,lat,
-				label=<:gis:lat:>,
-				defaut=#ENV{lat,#CONFIG{gis/lat,0}},
-				obligatoire=oui})]
-			[(#SAISIE{input,lon,
-				label=<:gis:lon:>,
-				defaut=#ENV{lon,#CONFIG{gis/lon,0}},
-				obligatoire=oui})]
-			[(#SAISIE{input,zoom,
-				label=<:gis:zoom:>,
-				defaut=#ENV{zoom,#CONFIG{gis/zoom,0}},
-				size=2,
-				maxlength=2,
-				obligatoire=oui})]
-			[(#SAISIE{input,titre,
-				defaut=#INFO_TITRE{#OBJET,#ID_OBJET},
-				label=<:info_titre:>,
-				obligatoire=oui})]
-			[(#SAISIE{textarea,descriptif,
-				label=<:info_descriptif:>,
-				rows=5})]
-			[(#CONFIG{gis/adresse}|=={on}|?{#SET{input_type,input},#SET{input_type,hidden}})]
-			[(#SAISIE{#GET{input_type},adresse,
-				label=<:gis:label_adress:>})]
-			[(#SAISIE{#GET{input_type},code_postal,
-				label=<:gis:label_code_postal:>})]
-			[(#SAISIE{#GET{input_type},ville,
-				label=<:gis:label_ville:>})]
-			[(#SAISIE{#GET{input_type},region,
-				label=<:gis:label_region:>})]
-			[(#SAISIE{#GET{input_type},pays,
-				label=<:gis:label_pays:>})]
+			<li class="fieldset">
+			<fieldset><ul>
+				[(#SAISIE{input,lat,
+					label=<:gis:lat:>,
+					defaut=#ENV{lat,#CONFIG{gis/lat,0}},
+					obligatoire=oui})]
+				[(#SAISIE{input,lon,
+					label=<:gis:lon:>,
+					defaut=#ENV{lon,#CONFIG{gis/lon,0}},
+					obligatoire=oui})]
+				[(#SAISIE{input,zoom,
+					label=<:gis:zoom:>,
+					defaut=#ENV{zoom,#CONFIG{gis/zoom,0}},
+					size=2,
+					maxlength=2,
+					obligatoire=oui})]
+				[(#SAISIE{input,titre,
+					defaut=#INFO_TITRE{#OBJET,#ID_OBJET},
+					label=<:info_titre:>,
+					obligatoire=oui})]
+				[(#SAISIE{textarea,descriptif,
+					label=<:info_descriptif:>,
+					rows=5})]
+			</ul></fieldset>
+			</li>
+			<li class="fieldset adresse"[(#CONFIG{gis/adresse}|=={on}|non) style="display: none;"]>
+			<fieldset><ul>
+				[(#SAISIE{input,adresse,
+					label=<:gis:label_adress:>})]
+				[(#SAISIE{input,code_postal,
+					label=<:gis:label_code_postal:>})]
+				[(#SAISIE{input,ville,
+					label=<:gis:label_ville:>})]
+				[(#SAISIE{input,region,
+					label=<:gis:label_region:>})]
+				[(#SAISIE{input,pays,
+					label=<:gis:label_pays:>})]
+			</ul></fieldset>
+			</li>
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
