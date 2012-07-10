@@ -102,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lon' => 'Zemepisná dĺžka',
 
 	// T
+	'telecharger_gis' => 'Télécharger au format @format@', # NEW
 	'texte_ajouter_gis' => 'Pridať geolokalizovaný bod',
 	'texte_creer_associer_gis' => 'Vytvoriť a prepojiť geolokalizovaný bod',
 	'texte_creer_gis' => 'Vytvoriť geolokalizovaný bod',

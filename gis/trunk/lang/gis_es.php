@@ -102,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lon' => 'Longitud',
 
 	// T
+	'telecharger_gis' => 'Télécharger au format @format@', # NEW
 	'texte_ajouter_gis' => 'Ajouter un point géolocalisé', # NEW
 	'texte_creer_associer_gis' => 'Créer et associer un point géolocalisé', # NEW
 	'texte_creer_gis' => 'Créer un point géolocalisé', # NEW

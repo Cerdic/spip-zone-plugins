@@ -102,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lon' => 'Longitude',
 
 	// T
+	'telecharger_gis' => 'Télécharger au format @format@', # NEW
 	'texte_ajouter_gis' => 'Add a location-based point',
 	'texte_creer_associer_gis' => 'Create and link a location-based point',
 	'texte_creer_gis' => 'Create a location-based point',
