@@ -1,0 +1,45 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi titre,1,
+	id_groupe,1
+}})
+]
+<B_liste_mot>
+#ANCRE_PAGINATION
+<div class="liste-objets groupes_mots">
+<span class='image_loading'>&nbsp;</span>
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{mots:info_1_groupe_mots,mots:info_nb_groupe_mots}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{multi titre,<:info_titre:>,ajax})]</th>
+			<th class='utilisations' scope='col'></th>
+			<th class='id' scope='col'>[(#TRI{id_groupe,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_mot(GROUPES_MOTS){id_parent ?}{id_mot?}{id_groupe_racine ?}{where?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		#SET{url_edit,#AUTORISER{modifier,groupe_mots,#ID_GROUPE}|?{#ID_GROUPE|generer_url_entite{groupe_mots}|parametre_url{redirect,#ENV{retour}},''}}
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='picto'>[(#VAL|puce_statut{groupe_mots,#ID_GROUPE,#ID_PARENT})]</td>
+			<td class='titre principale'>[(#LOGO_GROUPE_MOTS|image_reduire{20,26})][<a href="(#GET{url_edit})">][(#RANG). ]#TITRE[</a>(#GET{url_edit}|oui)]</td>
+			<td class='utilisations secondaire'>
+				#SET{g,''}#SET{m,''}
+				<BOUCLE_g(GROUPES_MOTS){id_parent}> </BOUCLE_g>
+					[(#SET{g,[(#GRAND_TOTAL|singulier_ou_pluriel{mots:info_1_groupe_mots,mots:info_nb_groupe_mots})]})]
+				</B_g>
+				<BOUCLE_m(MOTS){id_groupe}> </BOUCLE_m>
+					[(#SET{m,[(#GRAND_TOTAL|singulier_ou_pluriel{info_1_mot_cle,info_nb_mots_cles})]})]
+				</B_m>
+				[(#LISTE{#GET{g},#GET{m}}|array_filter|implode{', '})]
+			</td>
+			<td class='id'>[<a href="(#GET{url_edit})">]#ID_GROUPE[</a>(#GET{url_edit}|oui)]</td>
+		</tr>
+	</BOUCLE_liste_mot>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_mot>[
+<div class="liste-objets groupes_mots caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_mot>

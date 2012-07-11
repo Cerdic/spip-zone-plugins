@@ -1,0 +1,55 @@
+[(#REM)
+
+	Surcharge de mots/prive/objets/liste/mots_associer-select-unseul.html
+
+	Modfie le squelette comme suit :
+	- cherche un mot a remplacer dans toute la branche
+	- le groupe de ce mot dans le name, est celui de la racine (= celui arrivant de l'environnement)
+	- liste les mots du groupe de façon arborescente
+
+]#SET{selected,''}
+<select
+<BOUCLE_remplacer(MOTS){branche_groupe}{id_mot IN #ENV{exclus}}{0,1}>
+	#SET{expose,mot-#ID_MOT-#OBJET-#ID_OBJET}
+	name="remplacer_lien[mot-#ID_MOT-#OBJET-#ID_OBJET][groupe#ID_GROUPE_RACINE]"
+</BOUCLE_remplacer>
+	#SET{expose,#ENV{ajouter_lien}|table_valeur{groupe#ID_GROUPE_RACINE}}}
+	#SET{selected,#GET{expose}|oui}
+	name="ajouter_lien[groupe#ID_GROUPE]"
+<//B_remplacer>
+id="ajouter_lien-groupe#ID_GROUPE"
+	onchange="jQuery(this).siblings('input.submit').css('visibility','visible');"
+>
+<option value="x">&nbsp;</option>
+
+
+	<BOUCLE_mots_racine(MOTS){id_groupe}{par num titre, multi titre}>
+		#SET{value,mot-#ID_MOT-#OBJET-#ID_OBJET}
+		<option value="#GET{value}"[(#GET{value}|=={#GET{expose}}|oui)selected="selected" class="on"]>#TITRE</option>
+	</BOUCLE_mots_racine>
+
+	[(#REM) on encapsule juste pour la récursion ]
+	<BOUCLE_groupe(GROUPES_MOTS){id_groupe}>
+	[(#REM) Sous groupes et récursion ]
+	<BOUCLE_groupes(GROUPES_MOTS){id_parent}{par num titre, multi titre}>
+
+		[(#REM) au moins un mot dans la branche ]
+		<BOUCLE_compte(MOTS){branche_groupe}> </BOUCLE_compte>
+		<optgroup class="profondeur#GET{profondeur}" label="[(#VAL{ &nbsp; &nbsp; &nbsp;}|str_repeat{#GET{profondeur}})][(#TITRE|attribut_html)]">
+
+			<BOUCLE_mots(MOTS){id_groupe}{par num titre, multi titre}>
+				#SET{value,mot-#ID_MOT-#OBJET-#ID_OBJET}
+				<option class="profondeur#GET{profondeur}" value="#GET{value}"[(#GET{value}|=={#GET{expose}}|oui)selected="selected" class="on"]>[(#VAL{ &nbsp; &nbsp;}|str_repeat{#GET{profondeur}})]#TITRE</option>
+			</BOUCLE_mots>
+
+		</optgroup>
+		#SET{profondeur,#GET{profondeur}|plus{1}}
+		<BOUCLE_recursion(BOUCLE_groupes) />
+		#SET{profondeur,#GET{profondeur}|moins{1}}
+		
+		</B_compte>
+
+	</BOUCLE_groupes>
+	</BOUCLE_groupe>
+</select>
+<input type="submit" class="submit" name="groupe#ID_GROUPE" value="<:bouton_changer:>"[(#GET{selected}|non)style="visibility:hidden;"]/>

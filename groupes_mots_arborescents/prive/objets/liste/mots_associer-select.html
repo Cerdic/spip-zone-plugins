@@ -1,0 +1,49 @@
+[(#REM)
+
+	Surcharge de mots/prive/objets/liste/mots_associer-select.html
+
+	Modfie le squelette comme suit :
+	- liste les mots du groupe de façon arborescente
+	- le surlignement se fait en cherchant la clé de lien dans le groupe racine
+
+]#SET{selected,''}#SET{profondeur,0}
+[(#REM) Seulement s'il y a des mots possibles à ajouter ]
+<BOUCLE_compte_racine(MOTS){branche_groupe}{id_mot !IN #ENV{exclus}}> </BOUCLE_compte_racine>
+	<select name="ajouter_lien[groupe#ID_GROUPE]" id="ajouter_lien-groupe#ID_GROUPE"
+	  onchange="jQuery(this).siblings('input.submit').css('visibility','visible');"
+	>
+	<option value="x">&nbsp;</option>
+
+	<BOUCLE_mots_racine(MOTS){id_groupe}{id_mot !IN #ENV{exclus}}{par num titre, multi titre}>
+		#SET{value,mot-#ID_MOT-#OBJET-#ID_OBJET}
+		<option value="#GET{value}"[(#GET{value}|=={#ENV{ajouter_lien}|table_valeur{groupe#ID_GROUPE_RACINE}}|oui)selected="selected" class="on"]>#TITRE</option>
+	</BOUCLE_mots_racine>
+
+	[(#REM) on encapsule juste pour la récursion ]
+	<BOUCLE_groupe(GROUPES_MOTS){id_groupe}>
+	[(#REM) Sous groupes et récursion ]
+	<BOUCLE_groupes(GROUPES_MOTS){id_parent}{par num titre, multi titre}>
+
+		[(#REM) au moins un mot dans la branche ]
+		<BOUCLE_compte(MOTS){branche_groupe}{id_mot !IN #ENV{exclus}}> </BOUCLE_compte>
+		<optgroup class="profondeur#GET{profondeur}" label="[(#VAL{ &nbsp; &nbsp; &nbsp;}|str_repeat{#GET{profondeur}})][(#TITRE|attribut_html)]">
+
+			<BOUCLE_mots(MOTS){id_groupe}{id_mot !IN #ENV{exclus}}{par num titre, multi titre}>
+				#SET{value,mot-#ID_MOT-#OBJET-#ID_OBJET}
+				<option class="profondeur#GET{profondeur}" value="#GET{value}"[(#GET{value}|=={#ENV{ajouter_lien}|table_valeur{groupe#ID_GROUPE_RACINE}}|oui)selected="selected" class="on"]>[(#VAL{ &nbsp; &nbsp;}|str_repeat{#GET{profondeur}})]#TITRE</option>
+			</BOUCLE_mots>
+
+		</optgroup>
+		#SET{profondeur,#GET{profondeur}|plus{1}}
+		<BOUCLE_recursion(BOUCLE_groupes) />
+		#SET{profondeur,#GET{profondeur}|moins{1}}
+		
+		</B_compte>
+
+	</BOUCLE_groupes>
+	</BOUCLE_groupe>
+
+
+	</select>
+	<input type="submit" class="submit" name="groupe#ID_GROUPE" value="<:bouton_ajouter:>"[(#GET{selected}|non)style="visibility:hidden;"]/>
+</B_compte_racine>

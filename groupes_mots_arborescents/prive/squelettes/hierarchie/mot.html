@@ -1,0 +1,18 @@
+[(#REM)
+	Surcharge de mots/prive/squelettes/hierarchie/mot.html
+
+	Modifié pour afficher la hierarchie des groupes
+
+]<!-- hierarchie -->
+<a href="#URL_ECRIRE{mots}"><:mots:icone_mots_cles:></a>
+<BOUCLE_hierarchie(MOTS){id_mot}>
+	<BOUCLE_hierarchie_gr(HIERARCHIE_GROUPES_MOTS){id_groupe}{tout}>
+	&gt; <a href="[(#ID_GROUPE|generer_url_entite{groupe_mots})]">#TITRE</a>
+	</BOUCLE_hierarchie_gr>
+&gt; <strong class="on">#TITRE</strong>
+</BOUCLE_hierarchie>
+	<BOUCLE_hierarchie_gr_new(HIERARCHIE_GROUPES_MOTS){id_groupe}{tout}{si #ENV{id_groupe}}>
+	&gt; <a href="[(#ID_GROUPE|generer_url_entite{groupe_mots})]">#TITRE</a>
+	</BOUCLE_hierarchie_gr_new>
+&gt; <strong class="on"><:mots:texte_nouveau_mot:></strong>
+<//B_hierarchie>

@@ -1,0 +1,6 @@
+<INCLURE{fond=prive/objets/liste/groupes_mots-admin,id_parent,par=titre,ajax,env} />
+[(#AUTORISER{creer,groupe_mots,'','',#ARRAY{id_groupe,#ID_PARENT}})
+	[(#URL_ECRIRE{groupe_mots_edit,new=oui&id_parent=#ID_PARENT}|parametre_url{redirect,#SELF}
+		|icone_verticale{<:gma:icone_creation_sous_groupe_mots:>,groupe_mots-24.png,new,right})]
+]
+<div class='nettoyeur'></div>

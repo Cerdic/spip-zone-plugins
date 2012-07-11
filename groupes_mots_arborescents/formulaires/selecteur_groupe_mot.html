@@ -1,0 +1,20 @@
+[(#REM)
+	Surcharge de mots/formulaires/selecteur_groupe_mot.html
+
+	Modifie le sélecteur de la sorte :
+	- Liste les groupes de façon récursive
+
+]<B_groupes>
+<select[ name='(#ENV{name})'][ id='(#ENV{id})']>
+<BOUCLE_groupes(GROUPES_MOTS){racine}{par titre}{tables_liees==#VAL{'(^|,)'}|concat{#ENV{table,.*},'($|,)'}}>
+<option value='#ID_GROUPE'[(#EXPOSE{' '})selected='selected']>[(#TITRE|supprimer_tags|texte_backend)]</option>
+	#SET{profondeur,1}
+	<BOUCLE_enfants(GROUPES_MOTS){id_parent}{par titre}>
+		<option value='#ID_GROUPE'[(#EXPOSE{' '})selected='selected']>[(#VAL{&gt; }|str_repeat{#GET{profondeur}})][(#TITRE|supprimer_tags|texte_backend)]</option>
+		#SET{profondeur,#GET{profondeur}|plus{1}}
+		<BOUCLE_recursif(BOUCLE_enfants) />
+		#SET{profondeur,#GET{profondeur}|moins{1}}
+	</BOUCLE_enfants>
+</BOUCLE_groupes>
+</select>
+</B_groupes>

@@ -1,0 +1,35 @@
+<paquet
+	prefix="gma"
+	categorie="navigation"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/gma-64.png"
+	documentation=""
+	schema="1.0.0" 
+>
+
+	<nom>Groupes arborescents de mots clés</nom>
+
+	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs --> 
+	<auteur lien='http://www.magraine.net'>Marcillaud Matthieu</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies" compatibilite="[1.21.0;]" />
+	<necessite nom="mots"    compatibilite="[2.4.0;]" />
+
+	<pipeline nom="autoriser" inclure="gma_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/gma.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/gma.php" />
+	<pipeline nom="afficher_complement_objet"  inclure="gma_pipelines.php" />
+	<pipeline nom="formulaire_charger"         inclure="gma_pipelines.php" />
+	<pipeline nom="formulaire_verifier"        inclure="gma_pipelines.php" />
+	<pipeline nom="formulaire_fond"            inclure="gma_pipelines.php" />
+	<pipeline nom="pre_insertion"              inclure="gma_pipelines.php" />
+	<pipeline nom="pre_edition"                inclure="gma_pipelines.php" />
+	<pipeline nom="post_edition"               inclure="gma_pipelines.php" />
+
+	<pipeline nom="groupes_mots_arborescents_heritages" action="" />
+
+</paquet>
