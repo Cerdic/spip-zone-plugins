@@ -9,7 +9,7 @@
 	documentation="http://www.spip-contrib.net/Abomailmans-pour-s-abonner-a-des-listes-de-diffusion"
 >	
 
-	<nom>Abonnement &#224; des listes de diffusion</nom>
+	<nom>Abonnement à des listes de diffusion</nom>
 	<!-- Interfacer vos listes de diffusions mailman, ezmlm ou sympa avec votre SPIP -->
 
 	<auteur lien="http://www.netaktiv.com">NetAktiv</auteur>
