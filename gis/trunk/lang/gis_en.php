@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_recherche_pas_resultats' => 'No point corresponds to the searched text.',
 	'erreur_xmlrpc_lat_lon' => 'Latitude and longitude should be set as arguments',
 	'explication_api_forcee' => 'The is imposed by another plugin or skeleton.',
+	'explication_import' => 'Importer un fichier au format GPX ou KML.', # NEW
 	'explication_layer_forcee' => 'The layer is imposed by another plugin or skeleton.',
 	'explication_maptype_force' => 'The base map is imposed by another plugin or skeleton.',
 
@@ -91,6 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_adress' => 'Address',
 	'label_code_postal' => 'Postal code',
+	'label_import' => 'Importer', # NEW
 	'label_pays' => 'Country',
 	'label_rechercher_address' => 'Search for an address',
 	'label_rechercher_point' => 'Search for a point',

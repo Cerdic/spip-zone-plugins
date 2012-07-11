@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_recherche_pas_resultats' => 'Vyhľadávania sa netýka žiaden bod.',
 	'erreur_xmlrpc_lat_lon' => 'Zemepisná šírka a dĺžka musia byť odovzdané ako parameter',
 	'explication_api_forcee' => 'Túto aplikáciu používa iný zásuvný modul alebo iná šablóna.',
+	'explication_import' => 'Importer un fichier au format GPX ou KML.', # NEW
 	'explication_layer_forcee' => 'Vrstvu zaviedol iný zásuvný modul alebo iná šablóna.',
 	'explication_maptype_force' => 'Základnú mapu si vyžaduje iný zásuvný modul alebo šablóna.',
 
@@ -91,6 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_adress' => 'Adresa',
 	'label_code_postal' => 'PSČ',
+	'label_import' => 'Importer', # NEW
 	'label_pays' => 'Krajina',
 	'label_rechercher_address' => 'Vyhľadať adresu',
 	'label_rechercher_point' => 'Vyhľadať bod',
