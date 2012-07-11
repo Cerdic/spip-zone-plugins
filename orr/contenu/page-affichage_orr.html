@@ -1,0 +1,130 @@
+<html>
+    <div>
+        <div id = "datepickers"></div>
+    </div>
+
+     <div>
+         <table border="1">
+
+    <caption> <span id="nommois">[(#ENV{date}|affdate{nom_mois})]</span> </caption>
+
+    <thead>
+        <th>Ressources</th>
+        <th><span id="lundi">Lundi_[(#ENV{date}|joursemaine{lundi})]</span></th>
+        <th><span id="mardi">Mardi_[(#ENV{date}|joursemaine{mardi})]</span></th>
+        <th><span id="mercredi">Mercredi_[(#ENV{date}|joursemaine{mercredi})]</span></th>
+        <th><span id="jeudi">Jeudi_[(#ENV{date}|joursemaine{jeudi})]</span></th>
+        <th><span id="vendredi">Vendredi_[(#ENV{date}|joursemaine{vendredi})]</span></th>
+        <th><span id="samedi">Samedi_[(#ENV{date}|joursemaine{samedi})]</span></th>
+        <th><span id="dimanche">Dimanche_[(#ENV{date}|joursemaine{dimanche})]</span></th>
+    </thead>
+         <tbody>
+    <BOUCLE_ressource(spip_orr_ressources)>
+       <tr class="tr_plus">
+           <td>#ID_ORR_RESSOURCE. #ORR_RESSOURCE_NOM</td>
+           <td VALIGN=TOP ALIGN=CENTER id="lundi"><a id="touche_lundi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{date}|datesemaine{lundi}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=lundi,ajax=cellule}{idressource=#ID_ORR_RESSOURCE} /></td>
+           <td VALIGN=TOP ALIGN=CENTER id="mardi"><a id="touche_mardi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{date}|datesemaine{mardi}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=mardi,ajax=cellule}{idressource=#ID_ORR_RESSOURCE} /></td>
+           <td VALIGN=TOP ALIGN=CENTER id="mercredi"><a id="touche_mercredi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{date}|datesemaine{mercredi}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=mercredi,ajax=cellule}{idressource=#ID_ORR_RESSOURCE} /></td>
+           <td VALIGN=TOP ALIGN=CENTER id="jeudi"><a id="touche_jeudi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{date}|datesemaine{jeudi}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=jeudi,ajax=cellule}{idressource=#ID_ORR_RESSOURCE} /></td>
+           <td VALIGN=TOP ALIGN=CENTER id="vendredi"><a id="touche_vendredi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{date}|datesemaine{vendredi}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=vendredi,ajax=cellule}{idressource=#ID_ORR_RESSOURCE} /></td>
+           <td VALIGN=TOP ALIGN=CENTER id="samedi"><a id="touche_samedi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{date}|datesemaine{samedi}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=samedi,ajax=cellule}{idressource=#ID_ORR_RESSOURCE} /></td>
+           <td VALIGN=TOP ALIGN=CENTER id="dimanche"><a id="touche_dimanche_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{date}|datesemaine{dimanche}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=dimanche,ajax=cellule}{idressource=#ID_ORR_RESSOURCE} /></td>
+       </tr>
+    </BOUCLE_ressource>
+</tbody>
+</table>
+
+</div>
+
+
+
+<script>
+    jQuery(document).ready(function(){
+        jQuery( "#datepickers" ).datepicker({
+            dateFormat : 'yy-mm-dd',
+            onSelect : function (dateText) {
+                var data = { date : dateText };
+                //~ Determination des 5 jours de la semaines
+                var dateLundi = Date.parse(dateText);
+                if (!dateLundi.is().monday()) {
+                    dateLundi.last().monday();
+                    }
+                var lundi = dateLundi.toString('yyyy-MM-dd');
+                var mardi = dateLundi.addDays(1).toString('yyyy-MM-dd');
+                var mercredi = dateLundi.addDays(1).toString('yyyy-MM-dd');
+                var jeudi = dateLundi.addDays(1).toString('yyyy-MM-dd');
+                var vendredi = dateLundi.addDays(1).toString('yyyy-MM-dd');
+                var samedi = dateLundi.addDays(1).toString('yyyy-MM-dd');
+                var dimanche = dateLundi.addDays(1).toString('yyyy-MM-dd');
+                var dimancheplus = dateLundi.addDays(1).toString('yyyy-MM-dd');
+                 //~ ecriture de la nouvelle url
+                jQuery(".tr_plus a ").each( function() {
+                    var url = "[(#URL_PAGE{formulaire_reservation})]";
+                    var idtouche = jQuery(this).attr("id");
+                    var dateLien = "coucou";
+                    var contenuId = idtouche.split("_");
+                     switch (contenuId[1])  {
+                     case "lundi" :
+                     var dateLien = lundi;
+                     break;
+                     case "mardi" :
+                     var dateLien = mardi;
+                     break;
+                     case "mercredi" :
+                     var dateLien = mercredi;
+                     break;
+                     case "jeudi" :
+                     var dateLien = jeudi;
+                     break;
+                     case "vendredi" :
+                     var dateLien = vendredi;
+                     break;
+                     case "samedi" :
+                     var dateLien = samedi;
+                     break;
+                     case "dimanche" :
+                     var dateLien = dimanche;
+                     break;
+                     }
+                    url += "&id_ressource=" + contenuId[2];
+                    url += "&ma_date=" + dateLien;
+                    jQuery(this).attr("href", url);
+                });
+                //requete ajax pour récupérer les 7 dates de la semaines
+                //correspondantes à la date du datepicker
+                jQuery.ajax ({
+                    url : "http://localhost/spip/plugins/fabrique_auto/orr/action.php",
+                    data : data,
+                    complete : function (xhr, result)
+                    {
+                        if (result != "success") return;
+                        var response = xhr.responseText;
+                        $("#lundi").html($(response).find("p").eq(0));
+                        $("#mardi").html($(response).find("p").eq(1));
+                        $("#mercredi").html($(response).find("p").eq(2));
+                        $("#jeudi").html($(response).find("p").eq(3));
+                        $("#vendredi").html($(response).find("p").eq(4));
+                        $("#samedi").html($(response).find("p").eq(5));
+                        $("#dimanche").html($(response).find("p").eq(6));
+                        $("#nommois").html($(response).find("p").eq(7));
+                    }
+                });
+                console.log(lundi);
+                ajaxReload('cellule', {
+                    args:{
+                        lundi:lundi,
+                        mardi:mardi,
+                        mercredi:mercredi,
+                        jeudi:jeudi,
+                        vendredi:vendredi,
+                        samedi:samedi,
+                        dimanche:dimanche,
+                        dimancheplus:dimancheplus,
+                        },
+                   });
+            }
+        });
+    });
+        </script>
+
+</html>
