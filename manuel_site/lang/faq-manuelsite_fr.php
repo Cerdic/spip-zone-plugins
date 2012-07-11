@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 -* Si l’image doit être intégrée au texte d’un article, tout dépend de son contenu : si c’est un portrait, une hauteur de 200px devrait suffire sinon gare aux rides ; si c’est un beau paysage, on peut aller jusqu’à {{@largeur_max@}} pixels max de large.
 -* Si l’image est prévue pour le porte-folio d’un article, ne pas dépasser 1000 pixels de large ou 600 pixels de haut.
 
-{Attention, le poids max à ne pas dépasser est de 150M sans quoi le téléchargement sera refusé}.',
+{Attention, le poids max à ne pas dépasser est de {{@poids_max@}}Mo sans quoi le téléchargement sera refusé}.',
 	'img_nombre' => 'Il est possible d’envoyer en un clic plusieurs photos dans un article :
 -* Copier les photos choisies dans un dossier de votre disque dur
 -* Les redimensionner à la bonne taille
