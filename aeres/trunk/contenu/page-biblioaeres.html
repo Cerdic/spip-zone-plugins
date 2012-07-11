@@ -63,7 +63,7 @@
 
 <h2 class="h2">Bibliographie générale de l'unité</h2>
 <div class="formulaire_spip">
-	<div class="explication">Cette liste est restreinte aux publications des membres de l'unité.</div>
+	<div class="explication">Cette liste est restreinte aux publications des membres de l'unité. (Cette liste des membres est définie dans la configuration du plugin).</div>
 	<form method="get" action="spip.php"><div>
 	<input type="hidden" name="page" value="biblioaeres_unite" />
 	<ul>
@@ -89,14 +89,18 @@
 				<option value="oui"><:oui:></option>
 			</select>
 		</li>
+		<li>
+			<label for="auteurs">Personnaliser la liste des membres</label>
+			<div class="explication">Vous pouvez sélectionner plusieurs membres de l'unité. Utilisez les touches CTRL et SHIFT. La bibliographie produite sera alors restreinte aux membres sélectionnés.</div>
+			<select multiple id="auteurs" name="auteurs[]" class="select" size="10">
+				<BOUCLE_membres(POUR){tableau #AERES_MEMBRES}>
+				<option value="#VALEUR">#VALEUR</option>
+				</BOUCLE_membres>
+			</select>
+		</li>
 	</ul>
 	<p class='boutons'>
 		<input type='submit' class='submit' value='Afficher' />
 	</p>
 	</form></div>
 </div>
-
-
-
-
-
