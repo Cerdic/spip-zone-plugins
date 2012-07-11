@@ -1,7 +1,7 @@
 <paquet
 	prefix="motus"
 	categorie="maintenance"
-	version="1.0.1"
+	version="1.1.0"
 	etat="stable"
 	compatibilite="[3.0.0-beta;3.0.*]"
 	logo="images/motus.png"
@@ -18,7 +18,8 @@
 
 	<pipeline nom="autoriser" inclure="motus_autorisations.php" />
 	<pipeline nom="declarer_champs_extras" inclure="base/motus.php" />
+	<pipeline nom="groupes_mots_arborescents_heritages" inclure="base/motus.php" />
 
 	<necessite nom="cextras" compatibilite="[2.1.0;[" />
-	<necessite nom="saisies" compatibilite="[1.18.0;[" />
+	<necessite nom="saisies" compatibilite="[1.25.14;[" />
 </paquet>
