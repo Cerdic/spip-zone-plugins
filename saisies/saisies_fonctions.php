@@ -50,4 +50,54 @@ function balise_GLOBALS_dist($p) {
 		return balise_ENV_dist($p, '$GLOBALS');
 }
 
+/**
+ * Liste les éléments du sélecteur générique triés
+ *
+ * Les éléments sont triés par objets puis par identifiants
+ * 
+ * @example
+ *     L'entrée :
+ *     'rubrique|3,rubrique|5,article|2'
+ *     Retourne :
+ *     array(
+ *        0 => array('objet'=>'article', 'id_objet' => 2),
+ *        1 => array('objet'=>'rubrique', 'id_objet' => 3),
+ *        2 => array('objet'=>'rubrique', 'id_objet' => 5),
+ *     )
+ *
+ * @param string $selected
+ *     Liste des objets sélectionnés
+ * @return array
+ *     Liste des objets triés
+**/
+function picker_selected_par_objet($selected) {
+	$res = array();
+	$liste = picker_selected($selected);
+	// $liste : la sortie dans le désordre
+	if (!$liste) {
+		return $res;
+	}
+
+	foreach ($liste as $l) {
+		if (!isset($res[ $l['objet'] ])) {
+			$res[ $l['objet'] ] = array();
+		}
+		$res[$l['objet']][] = $l['id_objet'];
+	}
+	// $res est trié par objet, puis par identifiant
+	ksort($res);
+	foreach ($res as $objet => $ids) {
+		sort($res[$objet]);
+	}
+
+	// on remet tout en file
+	$liste = array();
+	foreach ($res as $objet=>$ids) {
+		foreach ($ids as $id) {
+			$liste[] = array('objet' => $objet, 'id_objet' => $id);
+		}
+	}
+
+	return $liste;
+}
 ?>
