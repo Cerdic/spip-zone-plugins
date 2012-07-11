@@ -63,6 +63,10 @@ function zotspip_calculer_reference($csljson,$annee,$style,$souligne,$date,$lang
 				foreach ($data->author as $cle => $author)
 					if ($author->family == trim($aut_souligne[0]) && $author->given == trim($aut_souligne[1]))
 						$data->author[$cle]->family = '§§'.$data->author[$cle]->family.'§§';
+			if (is_array($data->editor))
+				foreach ($data->editor as $cle => $editor)
+					if ($editor->family == trim($aut_souligne[0]) && $editor->given == trim($aut_souligne[1]))
+						$data->editor[$cle]->family = '§§'.$data->editor[$cle]->family.'§§';
 		}
 	}
 	
