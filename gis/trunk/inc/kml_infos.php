@@ -126,6 +126,10 @@ function inc_kml_infos($id_document){
 				}
 			}
 		}
+		if(isset($infos['titre']))
+			$infos['titre'] = preg_replace('/<!\[cdata\[(.*?)\]\]>/is', '$1', $info[0]['name'][0]);
+		if(isset($infos['descriptif']))
+			$infos['descriptif'] = preg_replace('/<!\[cdata\[(.*?)\]\]>/is', '$1', $info[0]['description'][0]);
 	}else
 		return false;
 	
