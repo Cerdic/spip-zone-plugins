@@ -2,7 +2,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-define('_DIR_LIB_GIS','lib/leaflet-gis-4.0.4/');
+define('_DIR_LIB_GIS','lib/leaflet-gis-4.0.7/');
 
 $GLOBALS['logo_libelles']['id_gis'] = _T('gis:libelle_logo_gis');
 
@@ -72,6 +72,10 @@ $GLOBALS['gis_layers'] = array (
 	'mapbox_lacquer' => array(
 		'nom' => 'MapBox Lacquer',
 		'layer' => 'L.TileLayer.MapBox.Lacquer()'
+	),
+	'mapbox_warden' => array(
+		'nom' => 'MapBox Warden',
+		'layer' => 'L.TileLayer.MapBox.Warden()'
 	),
 	'stamen_toner' => array(
 		'nom' => 'Stamen Toner',
