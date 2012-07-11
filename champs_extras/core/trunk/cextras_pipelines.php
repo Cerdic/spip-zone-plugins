@@ -198,7 +198,10 @@ function cextras_formulaire_verifier($flux){
 				$flux['data'][$nom] = _T('info_obligatoire');
 			
 			// verifier (api) + normalisation
-			} elseif ($verifier AND isset($saisie['verifier']) and $verif = $saisie['verifier']['type']) {
+			} elseif ($verifier
+			   AND isset($saisie['verifier']['type'])
+			   AND $verif = $saisie['verifier']['type'])
+			{
 				$options = isset($saisie['verifier']['options']) ? $saisie['verifier']['options'] : array();
 				$normaliser = null;
 				if ($erreur = $verifier(_request($nom), $verif, $options, $normaliser)) {
