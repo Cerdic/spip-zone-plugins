@@ -19,10 +19,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_comment_url_page' => 'Celá internetová adresa vašej stránky alebo vášho profilu na Facebooku; budú ju využívať šablóny v predvolených nastaveniach (URL typu "<code>http://www.facebook.com/...</code>").',
 	'cfg_comment_userid' => 'Prihlacovací (-ie) údaj(e) administrátorov zásuvných modulov. Môžete ich zadať viac, a oddeliť ich čiarkami.',
 	'cfg_comment_xfbml' => 'Využitie javaskriptovej knižnice SDK Facebook a priradeného jazyka. Ak si zvolíte možnosť "nie", moduly budú zobrazené v režime "in-iframe" (v ráme).',
-	'cfg_descr' => 'Vous devez ici définir les différents identifiants fournis par le système Facebook.<br /><br />Plus d\'infos : [->http://www.facebook.com/insights/].
+	'cfg_descr' => 'Tu musíte definovať rôzne identifikátory, ktoré vám poskytla sociálna sieť Facebook.<br /><br />Viac informácií: [->http://www.facebook.com/insights/].
 
-Pour inclure les balises "Open Graph" en en-tête de vos pages publiques, vous devez insérer le modèle "insert_head_og" en lui passant l\'environnement : {{#MODELE{insert_head_og}{env}}}.
-<br /><br />Plus d\'infos : [->http://developers.facebook.com/docs/opengraph/].', # NEW
+Na vkladanie značiek (resp. tagov) "Open Graph" do hlavičky svojich publikovaných stránok musíte vložiť šablónu "insert_head_og" vložením prostredia: {{#MODELE{insert_head_og}{env}}}.
+<br /><br />Viac informácií: [http://developers.facebook.com/docs/opengraph/.->http://developers.facebook.com/docs/opengraph/]',
 	'cfg_descr_titre' => 'Šablóny Facebooku',
 	'cfg_identifiants' => 'Prihlásenie na Facebook',
 	'cfg_label_appid' => 'Prihlásenie pre aplikáciu "App ID"',
@@ -90,9 +90,9 @@ Rôzne bloky, ktoré sa nachádzajú nižšie, slúžia ako príklad každej ša
 	// P
 	'page_test' => 'Testovacia stránka (lokálne)',
 	'page_test_in_new_window' => 'Testovacia stránka v novom okne',
-	'personnalisation' => '{{{Personnalisation}}}
+	'personnalisation' => '{{{Prispôsobenie}}}
 
-Chaque modèle présente son contenu dans un bloc de type <code>div</code> portant des classes CSS du type <code>fb_modeles fb_XXX</code> où {{XXX}} est le nom du modèle. Cela permet une personnalisation des styles pour l\'ensemble des modèles et pour chacun d\'eux.
+Každá šablóna má svoj text v bloku <code>div,</code> ktorý súvisí s tredami CSS typu <code>fb_modeles fb_XXX,</code> kde {{XXX}} je názov šablóny. To umožňuje prispôsobenie štýlon pre všetky šablóny spolu i pre každú osobitne.
 
 
 Par exemple pour le module Facebook "Send" :
@@ -100,7 +100,7 @@ Par exemple pour le module Facebook "Send" :
 <div class="fb_modeles fb_send">
      ... contenu ... 
 </div>
-</cadre>', # NEW
+</cadre>',
 
 	// S
 	'sep' => '----',
