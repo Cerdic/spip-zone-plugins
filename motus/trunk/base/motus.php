@@ -1,6 +1,16 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Déclarer le champs extras
+ *
+ * Ajoute un champ «rubrique_on» sur les groupes de mots
+ *
+ * @param array $champs
+ *     Description des champs extras pour chaque table SQL
+ * @return array
+ *     Description des champs extras complétée 
+**/
 function motus_declarer_champs_extras($champs = array()){
 	$champs['spip_groupes_mots']['rubriques_on'] = array(
 		'saisie' => 'selecteur', // Type du champs (voir plugin Saisies)
@@ -13,9 +23,9 @@ function motus_declarer_champs_extras($champs = array()){
 			'whitelist' => array('rubriques'),
 			'multiple' => 'oui',
 		),
-        'verifier' => array());
+		'verifier' => array());
 
-	return $champs;	
+	return $champs;
 }
 
 ?>
