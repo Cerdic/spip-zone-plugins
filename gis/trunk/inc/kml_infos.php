@@ -127,9 +127,9 @@ function inc_kml_infos($id_document){
 			}
 		}
 		if(isset($infos['titre']))
-			$infos['titre'] = preg_replace('/<!\[cdata\[(.*?)\]\]>/is', '$1', $info[0]['titre'][0]);
+			$infos['titre'] = preg_replace('/<!\[cdata\[(.*?)\]\]>/is', '$1',$infos['titre']);
 		if(isset($infos['descriptif']))
-			$infos['descriptif'] = preg_replace('/<!\[cdata\[(.*?)\]\]>/is', '$1', $info[0]['descriptif'][0]);
+			$infos['descriptif'] = preg_replace('/<!\[cdata\[(.*?)\]\]>/is', '$1', $infos['descriptif']);
 	}else
 		return false;
 	
