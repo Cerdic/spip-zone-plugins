@@ -50,6 +50,7 @@ function spip_query_path($document = NULL, $string = NULL, $options = array()) {
 	if (is_string($document)) {
 		$document = charset2unicode($document);
 		$document = gma_echappe_CDATA($document);
+		$options += array('replace_entities' => true);
 	}
 
 	// lancer
