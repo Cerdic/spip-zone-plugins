@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'forum' => 'Diskusné fóra sú podľa predvolených nastavení aktivované v článkoch  @complement@; dajú sa deaktivovať jedno po druhom. Návštevníci môžu reagovať na vaše články. Ak niekto pošle príspevok k vášmu článku, dostanete o tom oznam cez e-mail.  Malé negatívum: spamy, ktoré nie je vždy ľahké nájsť a ktoré budete musieť usmerniť manuálne. Ak chcete spracovať príspevok v diskusnom fóre (vymazať ho, ak sa vám nepáči, alebo ho označiť ako spam, ak to je spam):
 -* Ak ste prihlásený (-á), na verejne prístupnej stránke na stránke s článkom sú dve tlačidlá "Odstrániť príspevok" alebo "SPAM"
--* V súkromnej zóne cez menu Aktivita / Riadiť diskusné fóra',
+-* V súkromnej zóne cez menu Aktivita / Riadiť diskusné fóra', # MODIF
 	'forum_q' => 'Ako riadiť diskusné fóra?',
 
 	// I
@@ -18,12 +18,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 -* Ak bude obrázok zaradený do textu článku, všetko závisí od jeho vlastností: ak je orientovaný na výšku, výška 200 px by mala stačiť, v opačnom prípade treba dať pozor na nedokonalosti v zobrazení; ak je orientovaný na šírku, môže mať maximálnu šírku až {{@largeur_max@}} pixelov.
 -* Ak bude obrázok súčasťou portfólia k článku, neodporúča sa prekročiť šírku 1 000 pixelov a výšku 600 pixelov.
 
-{Pozor, maximálna veľkosť nesmie prekročiť 150 MB, inak sa obrázok nebude dať stiahnuť.}',
+{Pozor, maximálna veľkosť nesmie prekročiť 150 MB, inak sa obrázok nebude dať stiahnuť.}', # MODIF
 	'img_nombre' => 'Do článku sa dá do článku poslať viac fotiek jedným klikom:
 -* Vybrané fotky skopírujte do priečinka na svojom pevnom disku
 -* Upravte ich veľkosť
 -* Vytvorte z nich súbor zip
--* Tento súbor zip pripojte k článku. Na konci sťahovania sa vás systém spýta, čo chcete so súborom urobiť, napríklad môžete všetky fotky vložiť do portfólia.',
+-* Tento súbor zip pripojte k článku. Na konci sťahovania sa vás systém spýta, čo chcete so súborom urobiť, napríklad môžete všetky fotky vložiť do portfólia.', # MODIF
 	'img_nombre_q' => 'Ako ľahko napĺňať portfólio?',
 	'img_ou_doc' => 'Na vkladanie obrázkov do textu článku používa najmä tag <code><imgXX|center>.</code> Ak však chcete zobraziť pod obrázkom jeho nadpis alebo popis, použite tag <code><docXX|center>.</code>',
 	'img_ou_doc_q' => '<code><imgXX> alebo <docXX>?</code>',
@@ -33,12 +33,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'son' => 'Uložte si zvukový záznam vo formáte mp3 v režime mono s frekvenciou 11 alebo 22 kHz a bitovou rýchlosťou (rýchlosť pri kompresii) 64 kb/s (alebo viac, ak chcete vyššiu kvalitu).
 	
 Súbor mp3 zaraďte do článku ako obrázok a dajte mu nadpis, prípadne pridajte popis a poďakovanie (spolu)autorom. Nakoniec ho vložte do článku na miesto, na ktoré chcete  <code><docXX|center|player></code>. Na verejne prístupnej stránke sa zobrazí ikona USB kľúča, aby návštevníci mohli zvukový záznam spustiť.
-_ {Pozor, maximálna veľkosť súboru je 150 MB alebo časový úsek približne 225 minút}',
+_ {Pozor, maximálna veľkosť súboru je 150 MB alebo časový úsek približne 225 minút}', # MODIF
 	'son_audacity' => 'Na prácu s audio súborom môžete využiť program Audacity (Mac, Windows, Linux), ktorý sa dá stiahnuť odtiaľto [->http://audacity.sourceforge.net/]. Niekoľko tipov:
 -* Po inštalácii programu budete potrebovať aj knižnicu na kódovanie lame mp3 [->http://audacity.sourceforge.net/help/faq?s=install&item=lame-mp3].
 -* Ak chcete súbor previesť do režimu mono: Menu {Stopy/Stereo stopy do mono}
 -* Ak chcete vytvoriť súbor mp3: Menu {Súbor/Exportovať}
--* Ak chcete nastaviť bitovú rýchlosť: Menu {Súbor/Exportovať/Možnosti/Kvalita}',
+-* Ak chcete nastaviť bitovú rýchlosť: Menu {Súbor/Exportovať/Možnosti/Kvalita}', # MODIF
 	'son_audacity_q' => 'Ako pripraviť súbor so zvukom?',
 	'son_q' => 'Ako pridať k článku súbor so zvukom?',
 
@@ -52,7 +52,7 @@ _ {Pozor, maximálna veľkosť súboru je 150 MB alebo časový úsek približn
 	'video_320x240' => 'Uložte svoje video vo formáte flv (streaming flash) s rozmermi 320 x 240 pixelov s bitovou rýchlosťou (rýchlosť pri kompresii) 400 kb/s a v režime mono 64 kb/s. Ak chcete súbor videa kovertovať,  môžete využiť program avidemux (Mac, Windows, Linux), ktorý si môžete stiahnuť zo stránky [www.avidemux.org/.->http://www.avidemux.org/] 
 
 Vytvorený súbor zaraďte do článku ako pripojený dokument, dajte mu nadpis, prípadne pridajte podpis a poďakovanie autorom aj veľkosť (šírka 320, výška 240). Nakoniec ho pridajte do článku na miesto, na ktoré chcete <code><docXX|center|video></code>. Na verejne prístupnej stránke sa zobrazí ikona USB kľúča, aby si návštevníci mohli video prehrať. 
-_ {Pozor, maximálna veľkosť súboru je 150 MB alebo časový úsek približne 37,5 minúty}',
+_ {Pozor, maximálna veľkosť súboru je 150 MB alebo časový úsek približne 37,5 minúty}', # MODIF
 	'video_320x240_q' => 'Ako pridať video k článku?',
 	'video_dist' => 'Ak sa vaše video nachádza na stránke DailyMotion, YouTube alebo Viméo  a máte ho na novej karte vášho prehliadača, prejdite na stránku, kde sa video nachádza a skopírujte internetovú adresu videa. Na stránke úprav svojho článku kliknite na tlačidlo "Pridať video" a prilepte jeho internetovú adresu. Potom vložte do textu článku <code><videoXX|center></code>',
 	'video_dist_q' => 'Ako k článku pridať video z dailymotion (youtube, atď.)?'
