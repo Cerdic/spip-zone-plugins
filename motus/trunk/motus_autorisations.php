@@ -43,7 +43,15 @@ function autoriser_spip_groupes_mots_modifierextra_rubriques_on($faire,$type,$id
 	if (!isset($desc['field']['id_groupe_racine'])) {
 		return true;
 	}
-	$id_racine = sql_getfetsel('id_groupe_racine', 'spip_groupes_mots', 'id_groupe=' . $id);
+
+	// si c'est une creation de groupe
+	// on retourne false si on crée un goupe dans un parent connu
+	if ($id == 'oui'){
+		return (bool)!_request('id_parent');
+	}
+
+	// sinon on cherche la racine du groupe
+	$id_racine = sql_getfetsel('id_groupe_racine', 'spip_groupes_mots', 'id_groupe=' . sql_quote($id));
 	// vrai si la racine est notre groupe 
 	return ($id_racine == $id);
 }
