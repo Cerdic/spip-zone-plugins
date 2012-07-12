@@ -1,11 +1,11 @@
 <paquet
 	prefix="gma"
 	categorie="navigation"
-	version="1.0.1"
+	version="1.1.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/gma-64.png"
-	documentation=""
+	documentation="http://www.spip-contrib.net/?article4193"
 	schema="1.0.0" 
 >
 
@@ -16,8 +16,9 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[1.21.0;]" />
-	<necessite nom="mots"    compatibilite="[2.4.8;]" />
+	<necessite nom="saisies"   compatibilite="[1.21.0;]" />
+	<necessite nom="mots"      compatibilite="[2.4.8;]" />
+	<necessite nom="querypath" compatibilite="[1.0.0;]" />
 
 	<pipeline nom="autoriser" inclure="gma_autorisations.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/gma.php" />

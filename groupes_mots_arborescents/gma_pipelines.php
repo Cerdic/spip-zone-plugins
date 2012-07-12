@@ -101,7 +101,7 @@ function gma_formulaire_fond($flux) {
 		$qp = spip_query_path($html, 'body');
 
 		// la parenté sur tous
-		// on recupere le selecteur et on l'ajoute après le titre...
+		// on récupère le sélecteur et on l'ajoute après le titre...
 		$selecteur_parent = recuperer_fond('formulaires/selecteur_groupe_parent', $env);
 		$qp->top('body')->find('li.editer_titre')->after($selecteur_parent);
 
