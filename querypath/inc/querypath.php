@@ -63,7 +63,7 @@ function spip_query_path($document = NULL, $string = NULL, $options = array()) {
 		// car ils seront automatiquement doublés (cf. https://bugs.php.net/bug.php?id=54429)
 		// On les échappe ici automatiquement.
 		// Il ne faudrait peut être pas le faire si <?xml est là...
-		$document = gma_echappe_CDATA($document);
+		$document = querypath_echappe_CDATA($document);
 	}
 	// indiquer que les ajouts tel que ->after()
 	// doivent transformer les entités HTML présentes,
