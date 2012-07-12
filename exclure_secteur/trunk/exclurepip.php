@@ -15,7 +15,7 @@ function exclure_sect_pre_boucle(&$boucle){
         $exclut = exclure_sect_choisir($crit,$type);    
         
         if ($exclut !='z'){
-        	$boucle->where[] = "sql_in(id_secteur,$exclut,'NOT')";   
+        	$boucle->where[] = "sql_in('id_secteur','$exclut','NOT')";   
         }
     }
     
@@ -24,7 +24,7 @@ function exclure_sect_pre_boucle(&$boucle){
         $crit = $boucle->criteres;
         $exclut = exclure_sect_choisir($crit,$type);       
         if ($exclut !='z'){
-        	$boucle->where[] = "sql_in(id_rubrique,$exclut,'NOT')";       
+        	$boucle->where[] = "sql_in('id_rubrique','$exclut','NOT')";       
         }
     }
     
@@ -32,7 +32,7 @@ function exclure_sect_pre_boucle(&$boucle){
         $crit = $boucle->criteres;
         $exclut = exclure_sect_choisir($crit,$type);        
 		
-		$select_article = "sql_get_select('id_article', 'spip_articles', sql_in('id_secteur',$exclut))";
+		$select_article = "sql_get_select('id_article', 'spip_articles', sql_in('id_secteur','$exclut'))";
 		if ($exclut !='z'){
 			$where = array(sql_quote('NOT'),
 					array(sql_quote('AND'),
