@@ -1,0 +1,21 @@
+<paquet
+	prefix="querypath"
+	categorie="outil"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[3.0.0-dev;3.1.*]"
+	logo="prive/themes/spip/images/querypath-64.png"
+	documentation=""
+>
+	<!--
+		Paquet généré le 2012-07-12 14:06:05
+	-->
+
+	<nom>Query Path</nom>
+
+	<auteur lien='http://www.magraine.net/'>Marcillaud Matthieu</auteur>
+
+	<licence>GNU/GPL</licence>
+
+
+</paquet>
