@@ -156,6 +156,39 @@ function gma_pre_insertion($flux) {
 	return $flux;
 }
 
+
+
+/**
+ * Insère des modifications lors de la création de groupes et de mots
+ * 
+ * Lors de la création d'un groupe de mot :
+ * - Ajoute l'id_groupe_racine si le groupe est à la racine
+ *
+ * @param array $flux
+ * 		Données du pipeline
+ * @return array
+ * 		Données du pipeline complétées
+**/
+function gma_post_insertion($flux) {
+	// lors de la création d'un groupe
+	if ($flux['args']['table'] == 'spip_groupes_mots')
+	{
+		$id_groupe = $flux['args']['id_objet'];
+		// si le groupe est à la racine,
+		// c'est a dire que 'id_groupe_racine' n'est pas défini ou nul
+		// c'est que nous avons créé un groupe racine. Il faut mettre
+		// id_groupe_racine sur id_groupe, maintenant qu'on le connait. 
+		if (!isset($flux['data']['id_groupe_racine']) OR !$flux['data']['id_groupe_racine']) {
+			sql_updateq(
+				'spip_groupes_mots',
+				array('id_groupe_racine' => $id_groupe),
+				'id_groupe=' . sql_quote($id_groupe));
+		}
+	}
+
+}
+
+
 /**
  * Insère des modifications lors de l'édition des groupes ou des mots
  * 
