@@ -42,19 +42,19 @@ Na vkladanie značiek (resp. tagov) "Open Graph" do hlavičky svojich publikovan
 	'doc_en_ligne' => 'Dokumentácia',
 	'doc_titre_court' => 'Dokumentácia Šablón Facebooku',
 	'doc_titre_page' => 'Stránka s dokumentáciou zásuvného modulu Šablóny Facebooku',
-	'documentation' => '{{{Utilisation du plugin}}}
+	'documentation' => '{{{Použivanie zásuvného modulu}}}
 
-Comme montré ci-dessus, les modèles s\'incluent directement en leur passant les options souhaitées.
+Ako vidno vyššie, šablóny sa používajú priamo podľa zvolených nastavení.
 
-Chaque modèle peut recevoir une liste d\'options, dont certaines sont nécessaires à son affichage. Pour une liste complète, reportez-vous aux informations des en-tête de fichiers de modèles, dans le répertoire "<code>modeles/</code>" du plugin.
+Každá šablóna môže mať niekoľko nastavení, z ktorých niektoré sú potrebné na jej zobrazenie. Kompletný zoznam nastavení nájdete v hlavičke súborov šablóny v priečinku <code>"modeles/"</code> zásuvného modulu.
 
-Le plugin propose également un modèle générant des informations {{Open Graph}}, les metas informations utilisées par Facebook, propres à chaque objet SPIP. Pour l\'utiliser, vous devez ajouter manuellement en en-tête de vos squelettes le modèle "{{insert_head_og}}".
+Zásuvný modul ponúka aj informácie súvisiace s vytvorením šablóny {{Open Graph}}, meta dáta, ktoré využíva Facebook, samostatne pre každý objekt SPIPu. Na to, aby ste túto funkciu mohli využívať, musíte do hlavičky svojich šablón manuálne pridať šablónu  "{{insert_head_og}}".
 
-{{Attention - }}Ce modèle nécessite de recevoir l\'environnement courant, vous devez donc l\'inclure dans chacun des squelettes de pages ({"article.html", "rubrique.html" ...}) et non dans l\'inclusion globale en en-tête ({"inc_head.html"}) en indiquant : 
+{{Pozor}} – táto šablóna si vyžaduje aktuálne prostredie, musíte ju vložiť do šablóny každej stránky  ({"article.html", "rubrique.html" ...}) a nielen do globálnej hlavičky ({"inc_head.html"}), a to takto: 
 <cadre class=\'spip\'>
 {{#MODELE{insert_head_og}{env}}}
 </cadre>
-', # NEW
+',
 
 	// E
 	'exemple' => '{{{Príklad}}}
@@ -68,11 +68,11 @@ Rôzne bloky, ktoré sa nachádzajú nižšie, slúžia ako príklad každej ša
 	'info_doc' => 'Ak sa vám táto stránka nezobrazuje správne, [kliknite sem.->@link@]',
 	'info_doc_titre' => 'Poznámka o zobrazení tejto stránky',
 	'info_skel_contrib' => 'Stránka s kompletnou dokumentáciou spip-contribu online: [->http://www.spip-contrib.fr/?article3567].',
-	'info_skel_doc' => 'Cette page de documentation est conçue sous forme de squelette SPIP fonctionnant avec la distribution standard ({fichiers du répertoire "squelettes-dist/"}). Si vous ne parvenez pas à visualiser la page, ou que votre site utilise ses propres squelettes, les liens ci-dessous vous permettent de gérer son affichage :
+	'info_skel_doc' => 'Táto stránka dokumentácie je vytvorená ako šablóna SPIPu, ktorá funguje spolu so štandardne distribuovanou verziou ({súbory adresára "squelettes-dist/"}). Ak túto stránku neviete zobraziť alebo ak vaša stránka používa vlastné šablóny, s úpravou zobrazenia tejto stránky dokumentácie vám pomôžu tieto odkazy:
 
--* [Mode "texte simple"->@mode_brut@] ({html simple + balise INSERT_HEAD})
--* [Mode "squelette Zpip"->@mode_zpip@] ({squelette Z compatible})
--* [Mode "squelette SPIP"->@mode_spip@] ({compatible distribution})', # NEW
+-* [formát "neformátovaný text"->@mode_brut@] ({jednoduché HTML + tag INSERT_HEAD})
+-* [formát "šablóna Zpip"->@mode_zpip@] ({kompatibilné so šablónou Z})
+-* [formát "šablóna SPIPu"->@mode_spip@] ({kompatibilné s distribuovanou verziou})',
 
 	// J
 	'javascript_inactif' => 'Javascript je vo vašom prehliadači vypnutý. Niektoré funkcie nebudú fungovať.',
