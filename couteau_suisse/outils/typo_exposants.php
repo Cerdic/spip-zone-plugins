@@ -37,7 +37,7 @@ function typo_exposants_installe_dist() {
 		'/(?<=\b[DP])(r)(?=[\s\.-])/',	// Dr, Pr suivis d'un espace d'un point ou d'un tiret
 
 		"/m(?:$carre)/", '/(?<=\bm)([23])\b/',	 // m2, m3, m²
-		'/(?<=\b[Mm])([nd]s?)\b/',	// millions, milliards
+		'/(?<=\bM)(ios?|r?ds?)\b/',	// millions, milliards
 		'/(?<=\bV)(ve)\b/', '/(?<=\bC)(ies?)\b/',	// Vve et Cie(s)
 		"/(?<=\bS)(t(?:$eaigu1)s?)(?=\W)/", "/(?<=\W)(?:E|$eaigu2)ts\b/",	 // Societes(s), Etablissements
 
