@@ -23,8 +23,12 @@ function nospam_hash_env() {
 /**
  * Calcule une cle de jeton pour un formulaire
  *
- * @param string $form nom du formulaire
- * @return string cle calculee
+ * @param string $form
+ *   nom du formulaire
+ * @param string $qui
+ *   identifiant du visiteur a qui est attribue le jeton
+ * @return string
+ *   cle calculee
  */
 function creer_jeton($form, $qui=NULL) {
 	$time = date('Y-m-d-H');
@@ -117,7 +121,10 @@ function analyser_spams($texte) {
 	// sur les raccourcis.
 	
 	// on ne tient pas compte des blocs <code> et <cadre> ni de leurs contenus
-	$texte_humain = preg_replace(',<(code|cadre)\s*[^>]*>.*</\1>,UimsS', ' ', $texte);
+	include_spip("inc/texte_mini");
+	if (!function_exists('echappe_html')) // SPIP 2.x
+		include_spip("inc/texte");
+	$texte_humain = echappe_html($texte);
 	// on repère dans ce qui reste la présence de style= ou class= qui peuvent
 	// servir à masquer du contenu
 	$hidden = ",\s(?:style|class)=[^>]+>,UimsS";
