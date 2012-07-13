@@ -31,6 +31,4 @@
 
 	<menu nom="sondages" titre="sondage:titre_sondages" parent="menu_edition" icone="images/sondage-16.png" action="sondages" /> 
 	<menu nom="sondage_creer" titre="sondage:icone_creer_sondage" parent="outils_rapides" icone="images/sondage-new-16.png" action="sondage_edit" parametres="new=oui" /> 
-	<menu nom="avis" titre="avi:titre_avis" parent="menu_edition" icone="images/avi-16.png" action="avis" /> 
-	<menu nom="avi_creer" titre="avi:icone_creer_avi" parent="outils_rapides" icone="images/avi-new-16.png" action="avi_edit" parametres="new=oui" /> 
 </paquet>
