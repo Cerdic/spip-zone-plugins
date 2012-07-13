@@ -34,8 +34,17 @@ function accesrestreint_pre_boucle(&$boucle){
 				$securise = true;
 				break;
 			case 'evenements':
-			case 'signatures':
+			case 'petitions':
 				$t = $boucle->id_table . '.id_article';
+				$boucle->select = array_merge($boucle->select, array($t));
+				$boucle->where[] = accesrestreint_articles_accessibles_where($t);
+				$securise = true;
+				break;
+			case 'signatures':
+				// ajouter une jointure sur petitions si besoin
+				$t = array_search("spip_petitions", $boucle->from);
+				if (!$t) $t = trouver_jointure_champ("id_petition", $boucle);
+				$t = $t . '.id_article';
 				$boucle->select = array_merge($boucle->select, array($t));
 				$boucle->where[] = accesrestreint_articles_accessibles_where($t);
 				$securise = true;

@@ -1,9 +1,9 @@
 <paquet
 	prefix="accesrestreint"
 	categorie="auteur"
-	version="3.6.1"
-	etat="test"
-	compatibilite="[3.0.0-dev;3.0.*]"
+	version="3.6.2"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/zone-32.png"
 	schema="0.4.1"
 	documentation="http://www.spip-contrib.net/Acces-Restreint-3-0"
