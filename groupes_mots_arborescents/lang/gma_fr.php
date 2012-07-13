@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_parent_sur_groupe' => 'Le parent du groupe ne peut pas être ce groupe lui-même !',
+	'erreur_parent_sur_groupe_enfant' => 'Le parent du groupe ne peut pas être un de ses enfants !',
 
 	// G
 	'gma_titre' => 'Groupes arborescents de mots clés',

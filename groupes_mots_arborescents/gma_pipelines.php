@@ -68,9 +68,17 @@ function gma_formulaire_verifier($flux) {
 	if ($flux['args']['form'] == 'editer_groupe_mot') {
 		// tester que le parent ne vaut pas le groupe
 		if ($id_parent = _request('id_parent')
-		and $id_groupe = _request('id_groupe')
-		and $id_parent == $id_groupe) {
+		and $id_groupe = _request('id_groupe'))
+		{
+			if ($id_parent == $id_groupe) {
 				$flux['data']['id_parent'] = _T('gma:erreur_parent_sur_groupe');
+			}
+			elseif (
+			  include_spip('gma_fonctions') // calcul_branche_groupe_in
+			  and in_array($id_parent, explode(',', calcul_branche_groupe_in($id_groupe))))
+			{
+				$flux['data']['id_parent'] = _T('gma:erreur_parent_sur_groupe_enfant');
+			}
 		}
 	}
 	return $flux;
@@ -216,6 +224,9 @@ function gma_pre_edition($flux) {
 		if ($id_parent_ancien != $id_parent_nouveau
 		// que le nouveau parent n'est pas notre groupe !
 		and $id_groupe != $id_parent_nouveau
+		// et que le groupe parent n'est pas un de nos enfants
+		and include_spip('gma_fonctions') // calcul_branche_groupe_in
+		and !in_array($id_parent_nouveau, explode(',', calcul_branche_groupe_in($id_groupe)))
 		) {
 			$id_racine = '';
 			// soit c'est la racine
