@@ -3,7 +3,7 @@
 	<slogan>Générer une bibliographie au format AERES à partir de ZotSpip</slogan>
 	<auteur>[Joseph Larmarange->http://www.spip-contrib.net/Joseph]</auteur>
 	<licence>GPL v3</licence>
-	<version>1.2.0</version>
+	<version>1.3.0</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<description>Ce plugin fournit une interface pour faciliter la réalisation d'une bibliographie au format AERES. Les auteurs peuvent indiquer en ligne des corrections à effectuer ou bien indiquer des références à ajouter.</description>

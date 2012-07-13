@@ -176,3 +176,36 @@
 </BOUCLE_ap>
 
 [(#ENV{compteur}|oui)[<div style="text-align:right;">Total : (#GET{total}|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb}).</div>]]
+
+<BOUCLE_test_stats(CONDITION){si #ENV{stats}}>
+<B_stats_auteurs>
+<h2 class="h2">Statistiques par auteur</h2>
+<table class="spip">
+<tr>
+	<th>Nom</th>
+	<th>ACL</th>
+	<th>DO</th>
+	<th>OS</th>
+	<th>CH</th>
+	<th>Total</th>
+</tr>
+<BOUCLE_stats_auteurs(POUR){tableau #GET{auteurs}}{par valeur}>
+#SET{total,0}
+<tr>
+	<td>#VALEUR</td>
+	<td><BOUCLE_stats_acl(ZITEMS){auteur=#VALEUR}{annee>=#GET{debut}}{annee<=#GET{fin}}{type=journalArticle}{role=author} />#TOTAL_BOUCLE[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]<//B_stats_acl></td>
+	<td><BOUCLE_stats_do(ZITEMS){auteur=#VALEUR}{annee>=#GET{debut}}{annee<=#GET{fin}}{type IN book,journalArticle}{role=editor}{!id_zitem IN #GET{exclure_do}} />#TOTAL_BOUCLE[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]<//B_stats_do></td>
+	<td><BOUCLE_stats_os(ZITEMS){auteur=#VALEUR}{annee>=#GET{debut}}{annee<=#GET{fin}}{type=book}{role=author} />#TOTAL_BOUCLE[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]<//B_stats_os></td>
+	<td>
+	<BOUCLE_test_ch_stats(CONDITION){si #CONFIG{aeres/conference_actes,cact}|=={cact}}>
+		<BOUCLE_stats_ch(ZITEMS){auteur=#VALEUR}{annee>=#GET{debut}}{annee<=#GET{fin}}{type=bookSection}{role=author}{!publication=''} />#TOTAL_BOUCLE[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]<//B_stats_ch>
+	</BOUCLE_test_ch_stats>
+		<BOUCLE_stats_ch2(ZITEMS){auteur=#VALEUR}{annee>=#GET{debut}}{annee<=#GET{fin}}{type IN bookSection, conferencePaper}{role=author}{!publication=''} />#TOTAL_BOUCLE[(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]<//B_stats_ch2>
+	<//B_test_ch_stats>
+	</td>
+	<td>#GET{total}</td>
+</tr>
+</BOUCLE_stats_auteurs>
+</table>
+</B_stats_auteurs>
+</BOUCLE_test_stats>
