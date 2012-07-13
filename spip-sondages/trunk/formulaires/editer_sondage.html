@@ -17,7 +17,8 @@
 					]
 					(#VAL|chercher_rubrique{#ENV{id_sondage},#ENV{id_parent},'sondage',#ENV{id_secteur},'',0,form_simple})
 			</li>]
-
+            
+            [(#SAISIE{textarea,texte,obligatoire=none,label=<:sondage:label_texte:>})]
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
