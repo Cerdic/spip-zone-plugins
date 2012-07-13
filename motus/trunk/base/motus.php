@@ -1,4 +1,10 @@
 <?php
+/**
+ * Déclarations relatives à la base de données
+ *
+ * @package Motus\SQL
+**/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**

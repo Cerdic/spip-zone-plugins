@@ -4,6 +4,8 @@
  * Définition d'autorisations 
  *
  * Essentiellement des surcharges d'autorisations du plugin mots
+ * 
+ * @package Motus\Autorisations
 **/
 
 /** Fonction d'appel du pipeline **/
@@ -21,7 +23,7 @@ function motus_autoriser(){}
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
  */
-function autoriser_spip_groupes_mots_voirextra_rubriques_on($faire,$type,$id,$qui,$opt) {
+function autoriser_spip_groupes_mots_voirextra_rubriques_on_dist($faire,$type,$id,$qui,$opt) {
 	return true;
 }
 
@@ -37,7 +39,7 @@ function autoriser_spip_groupes_mots_voirextra_rubriques_on($faire,$type,$id,$qu
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
  */
-function autoriser_spip_groupes_mots_modifierextra_rubriques_on($faire,$type,$id,$qui,$opt) {
+function autoriser_spip_groupes_mots_modifierextra_rubriques_on_dist($faire,$type,$id,$qui,$opt) {
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table('spip_groupes_mots');
 	if (!isset($desc['field']['id_groupe_racine'])) {

@@ -1,6 +1,8 @@
 <?php
 /**
- * Fichier gérant l'installation et désinstallation du plugin 
+ * Fichier gérant l'installation et désinstallation du plugin
+ *
+ * @package Motus\Installation
 **/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -25,7 +27,7 @@ function motus_upgrade($nom_meta_base_version,$version_cible){
 }
 
 /**
- * Dénstallation du plugin
+ * Désinstallation du plugin
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
