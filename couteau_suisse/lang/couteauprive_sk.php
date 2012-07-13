@@ -44,8 +44,8 @@ Hodnota 1~000~000 pixelov sa zdá byť rozumná na nastavenie, ak máte málo do
 
 Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.', # NEW
 	'aff_tout:nom' => 'Zobraziť všetky',
-	'alerte_urgence:description' => 'Affiche en tête de toutes les pages publiques un bandeau d\'alerte pour diffuser le message d\'urgence défini ci-dessous.
-_ Les balises <code><multi/></code> sont recommandées en cas de site multilingue.[[%alerte_message%]]', # NEW
+	'alerte_urgence:description' => 'V hornej časti všetkých verejne prístupných stránok zobrazí pútač s upozornením o rozširovaní nebezpečenstva tak, ako je definovaný nižšie.
+_ Na viacjazyčnej stránke sa odporúča používať tagy <code><multi/></code>.[[%alerte_message%]]',
 	'alerte_urgence:nom' => 'Upozornenie',
 	'attente' => 'Čaká sa...',
 	'auteur_forum:description' => 'Požiadajte všetkých autorov verejných stráv, aby vyplnili (aspoň jedným písmenom!) meno a/alebo email, aby sa predišlo úplne anonymným správam. Majte na pamäti, že tento nástroj vykonáva overenie cez Javascript v prehliadači používateľa. [[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
@@ -547,9 +547,13 @@ La liste ci-dessus offre la possibilité de lancer le processus de mise à jour 
 
 Note : les paquets <code>.zip</code> n\'étant pas reconstruits instantanément, il se peut que vous soyez obligé d\'attendre un certain délai avant de pouvoir effectuer la totale mise à jour d\'un plugin tout récemment modifié.', # NEW
 	'maj_auto:nom' => 'Automatické aktualizácie',
-	'masquer:description' => 'Cet outil permet de masquer sur le site public et sans modification particulière de vos squelettes, les contenus (rubriques ou articles) qui ont le mot-clé défini ci-dessous. Si une rubrique est masquée, toute sa branche l\'est aussi.[[%mot_masquer%]]
+	'masquer:description' => 'Tento nástroj vám umožňuje schovať na verejnej stránke bez akejkoľvek zmeny svojich šablón obsah (rubriky alebo články), ktorého kľúčové slová sú zadané nižšie. Ak schováte rubriku, bude schovaná aj celá jej vetva.[[%mot_masquer%]]
 
-Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère <code>{tout_voir}</code> aux boucles de votre squelette.', # NEW
+Ak chcete zobraziť skrytý obsah, stačí, keď do cyklov svojej šablóny pridáte kritérium <code>{tout_voir}</code>.
+
+Publikované objekty, ale skryté pred verejnosťou:
+-* Rubriky: @_RUB@.
+-* Články: @_ART@.',
 	'masquer:nom' => 'Šifrovanie odkazu',
 	'meme_rubrique:description' => 'Určte počet objektov vypísaných na paneli s názvom "<:info_meme_rubrique:>", ktorý sa nachádza na niektorých stránkach súkromnej zóny.[[%meme_rubrique%]]',
 	'message_perso' => 'Veľká vďaka prekladateľom, ktorí sa dostali až sem. Pat ;-)',
@@ -657,11 +661,11 @@ Na to, aby ostal zachovaný prístup k pôvodnému obrázku odrážky SPIPu (ma
 	'sauf_admin' => 'Všetci okrem administrátorov',
 	'sauf_admin_redac' => 'Každý okrem administrátorov a redaktorov',
 	'sauf_identifies' => 'Každý okrem vymenovaných autorov',
-	'sessions_anonymes:description' => 'Chaque semaine, cet outil vérifie les sessions anonymes et supprime les fichiers qui sont trop anciens (plus de @_NB_SESSIONS3@ jours) afin de ne pas surcharger le serveur, notamment en cas de SPAM sur le forum.
+	'sessions_anonymes:description' => 'Tento nástroj každý týždeň kontroluje anonymné sessiony a maže súbory, ktoré sú príliš staré  (viac ako @_NB_SESSIONS3@ dní), aby sa zabránilo preťaženiu servera, najmä v prípade SPAMU na diskusných fórach.
 
-Dossier stockant les sessions : @_DIR_SESSIONS@
+Priečinok, kde sa ukladajú sessiony: @_DIR_SESSIONS@
 
-Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.', # NEW
+Na vašej stránke je teraz @_NB_SESSIONS1@ súbor(ov)  session, @_NB_SESSIONS2@ sa týkajú anonymných sessionov.',
 	'sessions_anonymes:nom' => 'Anonymné sessiony',
 	'set_options:description' => 'Preselects the type of interface (simplified or advanced) for all editors, both existing and future ones. At the same time the button offering the choice between the two interfaces is also removed.[[%radio_set_options4%]]',
 	'set_options:nom' => 'Type of private interface',
@@ -674,10 +678,10 @@ Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSI
 _ Tag je k dispozícii na zobrazenie tabuľky smajlíkov v šablónach: #SMILEYS.
 _ Obrázky: [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Smajlíky',
-	'soft_scroller:description' => 'Gives a slow scroll effect when a visitor clicks on a link with an anchor tag. This helps the visitor to know where they are in a long text.
+	'soft_scroller:description' => 'Ponúka efekt pomalého posúvania, keď návštevní klikne na odkaz s odkazom na kotvu. V dlhom texte to pomáha návštevníkom zorientovať sa, kde sa nachádzajú.
 
-N.B. In order to work, this tool needs to be used in «DOCTYPE XHTML» pages (not HTML!). It also requires two {jQuery} plugins: {ScrollTo} et {LocalScroll}. The Penknife can install them itself if you check the following two boxes. [[%scrollTo%]][[->%LocalScroll%]]
-@_CS_PLUGIN_JQUERY192@', # MODIF
+Pozor, na to aby tento nástroj fungoval, musí byť použitý na stránkach «DOCTYPE XHTML» (nie HTML!). Vyžaduje si aj dva zásuvné moduly {jQuery}: {ScrollTo} a {LocalScroll}. Modul Vreckový nožík ich môže nainštalovať, ak zaškrtnete tieto dve políčka. [[%scrollTo%]][[->%LocalScroll%]]
+@_CS_PLUGIN_JQUERY192@',
 	'soft_scroller:nom' => 'Ľahké kotvy',
 	'sommaire:description' => 'Builds a summary of your articles in order to access the main headings quickly (HTML tags &lt;h3>A Subtitle&lt;/h3> or SPIP subtitle shortcuts in the form: <code>{{{My subtitle}}}</code>).
 
@@ -928,12 +932,12 @@ Jednoducho do šablóny pridajte <code><INCLURE{fond=fonds/visiteurs_connectes}>
 	'votre_choix' => 'Váš výber:',
 
 	// W
-	'webmestres:description' => 'For SPIP, a {{webmaster}} means an {{administrator}} who has an FTP access to the site. By default, from SPIP 2.0 on, this is assumed to be the administrator whose <code>id_auteur=1</code>. Webmasters defined here have the privelege of no longer needing to use FTP to validate important actions on the site, such as upgrading the database format or restoring a backup.
+	'webmestres:description' => 'V SPIPe je {{webmaster}}  {{administrator,}} ktorý má k stránke prístup cez FTP. Podľa predvolených nastavení počnúc SPIPom 2.0 sa predpokladá, že je to  administrátor, ktorého <code>id_auteur=1</code>. Webmasteri, ktorí sú definovaní tu, majú privilégium, že už viac nemusia používať FTP na potvrdzovanie dôležitých úkonov na stránke, ako sú aktualizovanie formátu databázy alebo obnova zo zálohy. 
 
-Current webmasters: {@_CS_LISTE_WEBMESTRES@}.
-_ Eligible administrators: {@_CS_LISTE_ADMINS@}.
+Aktuálni webmasteri: {@_CS_LISTE_WEBMESTRES@}.
+_ Spôsobilí administrátori: {@_CS_LISTE_ADMINS@}.
 
-As a webmaster yourself, you can change this list od IDs. Use a colon as a separator if there are more than one. e.g. "1:5:6".[[%webmestres%]]', # MODIF
+Ako webmaster môžete meniť tento zoznam ID. Ak ich je viac, ako oddeľovač použite dvojbodku, napr.  "1:5:6".[[%webmestres%]]',
 	'webmestres:nom' => 'Zoznam webmasterov',
 
 	// X
