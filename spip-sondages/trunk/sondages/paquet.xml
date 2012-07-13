@@ -1,0 +1,36 @@
+<paquet
+	prefix="sondages"
+	categorie="divers"
+	version="2.0.0"
+	etat="dev"
+	compatibilite="[3.0.3;3.0.*]"
+	logo="prive/themes/spip/images/sondages-64.png"
+	documentation=""
+	schema="3.0" 
+>
+	<!--
+		Paquet généré le 2012-07-13 15:27:11
+	-->
+
+	<nom>Spip-sondages</nom>
+
+	<auteur lien='www.maieul.net'>Maïeul Rouquette d&#039;après Artego</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
+
+	<pipeline nom="autoriser" inclure="sondages_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/sondages.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/sondages.php" /> 
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/sondages.php" /> 
+	<pipeline nom="affiche_enfants" inclure="sondages_pipelines.php" /> 
+	<pipeline nom="affiche_milieu" inclure="sondages_pipelines.php" /> 
+	<pipeline nom="affiche_auteurs_interventions" inclure="sondages_pipelines.php" /> 
+	<pipeline nom="optimiser_base_disparus" inclure="sondages_pipelines.php" /> 
+
+	<menu nom="sondages" titre="sondage:titre_sondages" parent="menu_edition" icone="images/sondage-16.png" action="sondages" /> 
+	<menu nom="sondage_creer" titre="sondage:icone_creer_sondage" parent="outils_rapides" icone="images/sondage-new-16.png" action="sondage_edit" parametres="new=oui" /> 
+	<menu nom="avis" titre="avi:titre_avis" parent="menu_edition" icone="images/avi-16.png" action="avis" /> 
+	<menu nom="avi_creer" titre="avi:icone_creer_avi" parent="outils_rapides" icone="images/avi-new-16.png" action="avi_edit" parametres="new=oui" /> 
+</paquet>

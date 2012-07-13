@@ -1,0 +1,33 @@
+[(#SET{defaut_tri,#ARRAY{
+	id_avi,1,
+	points,-1
+}})]<B_liste_avis>
+#ANCRE_PAGINATION
+<div class="liste-objets avis">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{avi:info_1_avi,avi:info_nb_avis}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='' scope='col'>[(#TRI{,<:avi:label_:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_avi,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_avis(AVIS){id_sondage?}{id_choix?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num },#GET{defaut_tri}}{par }{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{avi-16.png}|balise_img)]</td>
+			<td class=' principale'>[(#LOGO_AVI|image_reduire{20,26})]<a href="[(#ID_AVI|generer_url_entite{avi})]" title="<:info_numero_abbreviation|attribut_html:> #ID_AVI">[(#RANG). ]#</a></td>
+			<td class='id'>[(#AUTORISER{modifier,avi,#ID_AVI}|?{
+				<a href="[(#URL_ECRIRE{avi_edit,id_avi=#ID_AVI})]">#ID_AVI</a>,
+				#ID_AVI
+			})]</td>
+		</tr>
+	</BOUCLE_liste_avis>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_avis>[
+<div class="liste-objets avis caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_avis>

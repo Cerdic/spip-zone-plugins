@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/sondages, par=titre, env, ajax, sinon=<:sondage:info_aucun_sondage:>}>
+
+[(#AUTORISER{creer,sondage})
+	[(#URL_ECRIRE{sondage_edit,new=oui}|icone_verticale{<:sondage:icone_creer_sondage:>,sondage,new,right})]
+]

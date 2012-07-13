@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,sondage,#ID_SONDAGE}|sinon_interdire_acces)]
+<BOUCLE_sondage(SONDAGES){id_sondage}{statut==.*}{si #ENV{exec}|=={sondage}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,sondage,#ID_SONDAGE})
+		[(#ID_SONDAGE|afficher_qui_edite{sondage}|non)
+			[(#URL_ECRIRE{sondage_edit,id_sondage=#ID_SONDAGE}|icone_verticale{<:sondage:icone_modifier_sondage:>,sondage,edit,right ajax preload})]
+		]
+		[(#ID_SONDAGE|afficher_qui_edite{sondage}|oui)
+			[(#URL_ECRIRE{sondage_edit,id_sondage=#ID_SONDAGE}|icone_verticale{#ID_SONDAGE|afficher_qui_edite{sondage},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{sondage-24.png}|balise_img{sondage,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{sondage,#ID_SONDAGE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/sondage,id=#ID_SONDAGE,id_sondage=#ID_SONDAGE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,sondage,#ID_SONDAGE})
+	[(#ID_SONDAGE|afficher_qui_edite{sondage}|non)
+		[(#URL_ECRIRE{sondage_edit,id_sondage=#ID_SONDAGE}|icone_verticale{<:sondage:icone_modifier_sondage:>,sondage,edit,right ajax preload})]
+	]
+	[(#ID_SONDAGE|afficher_qui_edite{sondage}|oui)
+		[(#URL_ECRIRE{sondage_edit,id_sondage=#ID_SONDAGE}|icone_verticale{#ID_SONDAGE|afficher_qui_edite{sondage},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,sondage,id,#ID_SONDAGE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_sondage>
+[(#ENV**{exec}|=={sondage_edit}|?{#INCLURE{fond=prive/squelettes/contenu/sondage_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_sondage>
