@@ -1,12 +1,11 @@
 <paquet 
 	prefix="multidomaines"
 	categorie="maintenance"
-	version="2.1.0"
+	version="2.1.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/multidomaines-72.png"
 	documentation="http://www.spip-contrib.net/article3127"
-	schema="0.0.2" 
 ><!-- plus de base depuis le 23/06/12 suite à suppression de cextras -->
 	<nom>Multidomaines</nom>
 

@@ -5,22 +5,24 @@ include_spip('inc/config');
 $options = lire_config('multidomaines');
 $GLOBALS['multidomaine_id_secteur_courant'] = NULL;
 
-foreach ($options as $cle => $valeur) {
-	if (strpos($cle, 'editer_url_') === 0) {
-		if (empty($valeur)) {
-			$valeur = $options['editer_url'];
-		}
-		list(,,$id_secteur) = explode('_', $cle);
-		$partie_url = parse_url($valeur);
-		if (!isset($partie_url['port'])) {
-			$partie_url['port'] = $partie_url['scheme'] == 'https'? 443:80;
-		}
-		if ($partie_url['host'] == $_SERVER['HTTP_HOST'] AND $partie_url['port'] == $_SERVER['SERVER_PORT']) {
-			$GLOBALS['multidomaine_id_secteur_courant'] = $id_secteur;
-			if ($options['squelette_' .$id_secteur]) {
-				$GLOBALS['dossier_squelettes'] = trim($GLOBALS['dossier_squelettes'] .':'. $options['squelette_' .$id_secteur], ':');
+if (is_array($options)) {
+	foreach ($options as $cle => $valeur) {
+		if (strpos($cle, 'editer_url_') === 0) {
+			if (empty($valeur)) {
+				$valeur = $options['editer_url'];
 			}
-			else {multidomaines_squelettespardefaut_dist();}
+			list(,,$id_secteur) = explode('_', $cle);
+			$partie_url = parse_url($valeur);
+			if (!isset($partie_url['port'])) {
+				$partie_url['port'] = $partie_url['scheme'] == 'https'? 443:80;
+			}
+			if ($partie_url['host'] == $_SERVER['HTTP_HOST'] AND $partie_url['port'] == $_SERVER['SERVER_PORT']) {
+				$GLOBALS['multidomaine_id_secteur_courant'] = $id_secteur;
+				if ($options['squelette_' .$id_secteur]) {
+					$GLOBALS['dossier_squelettes'] = trim($GLOBALS['dossier_squelettes'] .':'. $options['squelette_' .$id_secteur], ':');
+				}
+				else {multidomaines_squelettespardefaut_dist();}
+			}
 		}
 	}
 }
