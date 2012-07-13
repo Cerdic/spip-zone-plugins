@@ -1,13 +1,25 @@
 <?php
 
 /**
+ * Actions sur les pipelines
+ * 
+ * @package Mots_Techniques\Pipelines
+**/
+
+/**
  * Prendre en compte les criteres "technique" et "tout"
  * sur les boucles mots et groupes_mots
- * (on restreint par defaut aux mots cles non techniques)
+ * 
+ * On restreint par defaut aux mots cles non techniques
+ *
+ * @param array $boucle
+ *     Description de la boucle
+ * @return array
+ *     Description complétée de la boucle
  */
 function mots_techniques_pre_boucle($boucle){
 	// MOTS
-	
+
 	// le marqueur_skel (du fichier d'options de ce plugin)
 	// force un cache different du squelette compilé pour
 	// l'espace public ou l'espace prive.
@@ -15,7 +27,7 @@ function mots_techniques_pre_boucle($boucle){
 	if (test_espace_prive()) {
 		return $boucle;
 	}
-	
+
 	if ($boucle->type_requete == 'mots') {
 		$id_table = $boucle->id_table;
 		// Restreindre aux mots cles non techniques
@@ -38,7 +50,7 @@ function mots_techniques_pre_boucle($boucle){
 				$boucle->where[] = array("'='", "'groupes.technique'", "'\"\"'");
 		}
 
-	// GROUPES_MOTS		
+	// GROUPES_MOTS
 	} 
 	 elseif ($boucle->type_requete == 'groupes_mots') {
 		$id_table = $boucle->id_table;
@@ -46,8 +58,8 @@ function mots_techniques_pre_boucle($boucle){
 		// Restreindre aux mots cles non techniques
 		if (!isset($boucle->modificateur['criteres']['technique']) && 
 			!isset($boucle->modificateur['tout'])) {
-				$boucle->where[] = array("'='", "'$mtechnique'", "'\"\"'");				
-		}		
+				$boucle->where[] = array("'='", "'$mtechnique'", "'\"\"'");	
+		}
 	}
 	return $boucle;
 }
