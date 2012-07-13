@@ -7,13 +7,13 @@
 		<ul>
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer editer_cacher_login_classique[ (#GET{erreurs}|oui)erreur]">
-				<label><:browserid:affichage:></label>[
+				<label><:persona:affichage:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
-				<p class="explication"><:browserid:explication_cacher_login_classique:></p>
+				<p class="explication"><:persona:explication_cacher_login_classique:></p>
 				<div class="choix">
 					<input type="checkbox" name="cacher_login_classique" id="cacher_login_classique" class="checkbox" value="true" [checked="checked"(#ENV{cacher_login_classique}|=={true}|oui)] />
-					<label for="cacher_login_classique"><:browserid:cacher_login_classique:></label>
+					<label for="cacher_login_classique"><:persona:cacher_login_classique:></label>
 				</div>
 			</li>
 		</ul>

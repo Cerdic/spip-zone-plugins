@@ -1,40 +1,40 @@
 #HTTP_HEADER{Content-Type: text/javascript; charset=#CHARSET}
 /*
- *  Plugin BrowserID pour SPIP
+ *  Plugin persona pour SPIP
  *
  *  (c) Fil 2012 - Licence GNU/GPL
  *
  */
 
-[(#INCLURE{javascript/browserid.js})]
+[(#INCLURE{javascript/persona.js})]
 
 /*
  * fonction demandant au client de verifier l'assertion renvoyee
- * par browserid
+ * par persona
  */
-function browserid_verify_client(assertion) {
+function persona_verify_client(assertion) {
   if (assertion) {
-    $.post("https://browserid.org/verify",
+    $.post("https://persona.org/verify",
       {
       assertion: assertion,
       audience: window.location.href.replace(/(\/\/.*?)\/.*/, '$1')
-      }, browserid_welcome
+      }, persona_welcome
     );
   }
 }
 
 
 /*
- * fonction demandant au serveur de verifier l'assertion browserid
+ * fonction demandant au serveur de verifier l'assertion persona
  * et de nous loger sur SPIP au passage, si le site est ainsi configure'
  */
-function browserid_verify_server(assertion) {
+function persona_verify_server(assertion) {
   if (assertion) {
-    $.post("?action=browserid_verify",
+    $.post("?action=persona_verify",
       {
       assertion: assertion,
       audience: window.location.href.replace(/(\/\/.*?)\/.*/, '$1')
-      }, browserid_welcome
+      }, persona_welcome
     );
   }
 }
@@ -43,7 +43,7 @@ function browserid_verify_server(assertion) {
 /*
  * Fonction appelee quand on a reussi a se connecter
  */
-function browserid_welcome(e) {
+function persona_welcome(e) {
   // console.log(e);
   if (e.status == "okay") {
     if (url) {
@@ -56,15 +56,15 @@ function browserid_welcome(e) {
       }
     }
     if (e.message) {
-      browserid_message(e.message);
+      persona_message(e.message);
     }
     if (e.action) {
       eval(e.action);
     }
   } else {
-    browserid_message('something was wrong: '+(e.reason || ""));
+    persona_message('something was wrong: '+(e.reason || ""));
   }
 }
 
 /* definir a minima une fonction d'alerte */
-if (!browserid_message) browserid_message = alert;
+if (!persona_message) persona_message = alert;

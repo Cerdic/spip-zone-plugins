@@ -1,6 +1,6 @@
 [(#REM)
 /*
- *  Plugin BrowserID pour SPIP
+ *  Plugin persona pour SPIP
  *
  *  (c) Fil 2012 - Licence GNU/GPL
  *
@@ -11,7 +11,7 @@
 	le formulaire de login normal continue de fonctionner ;
 	on pourrait le desactiver avec une config
 ]
-<div id="browserid_traditionnel">
+<div id="persona_traditionnel">
 <INCLURE{fond=prive/formulaires/login,env} />
 </div>
 
@@ -21,46 +21,46 @@
 	[(#AUTORISER{ecrire}|?{document.location = url;})]
 ]
 
-function browserid_message(m) {
-	$("#browserid_login .message")
+function persona_message(m) {
+	$("#persona_login .message")
 	.html(m);
 }
 
-function browserid_login() {
-	navigator.id.getVerifiedEmail(browserid_verify_server);
-	browserid_message("Veuillez autoriser les popups");
+function persona_login() {
+	navigator.id.getVerifiedEmail(persona_verify_server);
+	persona_message("Veuillez autoriser les popups");
 }
 
-function browserid_start() {
-	browserid_message("connexion BrowserID en cours…");
-//	$.getScript('?page=browserid.js&v=8', browserid_login);
-	browserid_login();
+function persona_start() {
+	persona_message("connexion persona en cours…");
+//	$.getScript('?page=persona.js&v=8', persona_login);
+	persona_login();
 }
 /*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
 
-<div id="browserid_login">
+<div id="persona_login">
 	<div class="formulaire_spip formulaire_login">
-		<div class="explication"><:browserid:explication_login:></div>
+		<div class="explication"><:persona:explication_login:></div>
 		<p class="boutons">
-			[<button onclick="browserid_start();">(#CHEMIN{images/sign_in_red.png}|balise_img)</button>]
+			[<button onclick="persona_start();">(#CHEMIN{images/sign_in_red.png}|balise_img)</button>]
 		</p>
 		<div class="message"></div>
 		<div class="explication">
-			<a id="toggle_login_classique" href='javascript:;'><:browserid:form_masquer:></a>
+			<a id="toggle_login_classique" href='javascript:;'><:persona:form_masquer:></a>
 		</div>
 	</div>
 </div>
 
 <script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 $(document).ready(function() {
-	if (!$("#browserid_traditionnel .erreur").size()){
-		[(#CONFIG{browserid/cacher_login_classique,''}|=={true}|oui)
-			$("#browserid_traditionnel").hide();
-			$("a#toggle_login_classique").text("<:browserid:form_afficher:>");
+	if (!$("#persona_traditionnel .erreur").size()){
+		[(#CONFIG{persona/cacher_login_classique,''}|=={true}|oui)
+			$("#persona_traditionnel").hide();
+			$("a#toggle_login_classique").text("<:persona:form_afficher:>");
 		]
 		$("a#toggle_login_classique").click(function(){
-				$(this).text($(this).text() == "<:browserid:form_masquer:>" ? "<:browserid:form_afficher:>" : "<:browserid:form_masquer:>");
-				$("#browserid_traditionnel").slideToggle();
+				$(this).text($(this).text() == "<:persona:form_masquer:>" ? "<:persona:form_afficher:>" : "<:persona:form_masquer:>");
+				$("#persona_traditionnel").slideToggle();
 				return false;
 			});
 	}
@@ -68,5 +68,5 @@ $(document).ready(function() {
 
 /*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
 
-[<script src="(#URL_PAGE{browserid.js}|parametre_url{v,9})" type="text/javascript"></script>]
+[<script src="(#URL_PAGE{persona.js}|parametre_url{v,9})" type="text/javascript"></script>]
 

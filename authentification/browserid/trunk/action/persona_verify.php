@@ -1,16 +1,16 @@
 <?php
 
 /*
- *  Plugin BrowserID pour SPIP
+ *  Plugin persona pour SPIP
  *
  *  (c) Fil 2011 - Licence GNU/GPL
  *
  */
 
-define('_BROWSERID_VERIFY', "https://browserid.org/verify");
+define('_persona_VERIFY', "https://persona.org/verify");
 
 
-function browserid_auth_loger($auteur, &$a) {
+function persona_auth_loger($auteur, &$a) {
 	include_spip('inc/auth');
 	include_spip('inc/texte');
 	auth_loger($auteur);
@@ -21,7 +21,7 @@ function browserid_auth_loger($auteur, &$a) {
 
 }
 
-function action_browserid_verify() {
+function action_persona_verify() {
 
 	$a = array();
 
@@ -36,13 +36,13 @@ function action_browserid_verify() {
 		}
 		else {
 			include_spip('inc/distant');
-			$d = recuperer_page(_BROWSERID_VERIFY, false, false, null,
+			$d = recuperer_page(_persona_VERIFY, false, false, null,
 			$data = array(
 				'assertion' => $assertion,
 				'audience' => $audience
 			)
-			# forcer l'absence de boundary : browserid.org/verify ne le tolere pas
-			# cf. https://github.com/mozilla/browserid/issues/649
+			# forcer l'absence de boundary : persona.org/verify ne le tolere pas
+			# cf. https://github.com/mozilla/persona/issues/649
 			, $boundary = false
 			);
 
@@ -60,7 +60,7 @@ function action_browserid_verify() {
 					$auteur = sql_fetsel('*', 'spip_auteurs', 'email='.sql_quote($a['email']));
 
 					if ($auteur) {
-						browserid_auth_loger($auteur, $a);
+						persona_auth_loger($auteur, $a);
 
 						# envoyer une action javascript
 #						if ($auteur['statut'] == '0minirezo') {
@@ -95,7 +95,7 @@ function action_browserid_verify() {
 								'login' => $a['email']
 							));
 							$auteur = sql_fetsel('*', 'spip_auteurs', 'email='.sql_quote($a['email']));
-							browserid_auth_loger($auteur, $a);
+							persona_auth_loger($auteur, $a);
 						}
 					}
 

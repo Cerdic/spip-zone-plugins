@@ -1,0 +1,21 @@
+<plugin>
+	<nom>persona</nom>
+	<auteur>Fil</auteur>
+	<version>0.7.0</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Authentification des visiteurs via Mozilla persona
+	</description>
+	<prefix>
+	persona
+	</prefix>
+	<icon>prive/themes/spip/images/persona-32.png</icon>
+	<!-- https://www.persona.org/i/icon.png -->
+
+	<categorie>auteur</categorie>
+	<lien>http://www.spip-contrib.net/4005</lien>
+	<chemin dir='' />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+</plugin>

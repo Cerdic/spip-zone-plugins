@@ -1,0 +1,23 @@
+﻿<?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// A
+	'affichage' => 'Affichage',
+	
+	// C
+	'cacher_login_classique' => 'Masquer ?',
+	'configurer_titre' => 'Configurer Browser ID',
+	
+	// E
+	'explication_cacher_login_classique' => 'En cochant cette case, le formulaire classique de login sera masqué par défaut sur la page de connexion. Seul le bouton "persona" sera donc visible. Sous ce bouton, un lien permet de démasquer le formulaire.',
+	'explication_login' => 'Vous pouvez vous connecter grâce à votre Browser ID (<a href="http://fr.wikipedia.org/wiki/persona" target="_blank">aide</a>)' ,
+	
+	// F
+	'form_afficher' => 'Afficher le formulaire de login classique',
+	'form_masquer' => 'Masquer le formulaire de login classique',
+);
+
+?>
