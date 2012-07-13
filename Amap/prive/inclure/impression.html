@@ -22,17 +22,37 @@
 		</BOUCLE_rub>
 		</table>
 	</li>
+	<p></p>
+	<li>
+		<:amap:impression_paniers_fonction_mois:>
+		<table border="0" width="100%">
+		<BOUCLE_rub1(RUBRIQUES){titre = '001. Distribution'}>
+		<B_paniers_mois>
+			<BOUCLE_paniers_mois(EVENEMENTS){id_rubrique}{par date_debut}>
+				[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
+					<td class="center">
+						<a href="[(#URL_ECRIRE{pdf_paniers_mois}|parametre_url{date_distribution,#DATE_DEBUT|affdate{Y-m}})]">
+						[(#DATE_DEBUT|affdate{'m/Y'}|unique)]
+						</a>
+					</td>
+				[(#COMPTEUR_BOUCLE|alterner{'','','','','</tr>'})]
+			</BOUCLE_paniers_mois>
+			[(#TOTAL_BOUCLE|alterner{'</tr>', '', '', '', ''})]
+		<//B_paniers_mois>
+		</BOUCLE_rub1>
+		</table>
+	</li>
 <!--
 	<p></p>
 	<li>
 		<:amap:impression_responsables_fonction_date:>
 		<table border="0" width="100%">
-		<BOUCLE_rub1(RUBRIQUES){titre = '001. Distribution'}>
+		<BOUCLE_rub2(RUBRIQUES){titre = '001. Distribution'}>
 		<B_responsable>
 			<BOUCLE_responsable(EVENEMENTS){id_rubrique}{par date_debut}>
 				[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
 					<td class="center">
-						<a href="[(#URL_ECRIRE{pdf_responsables}|parametre_url{mois_distribution,#DATE_DEBUT|affdate{Y-m-01}})]">
+						<a href="[(#URL_ECRIRE{pdf_responsables}|parametre_url{mois_distribution,#DATE_DEBUT|affdate{Y-m}})]">
 						[(#DATE_DEBUT|affdate{'m/Y'}|unique)]
 						</a>
 					</td>
@@ -40,7 +60,7 @@
 			</BOUCLE_responsable>
 			[(#TOTAL_BOUCLE|alterner{'</tr>', '', '', '', ''})]
 		<//B_responsable>
-		</BOUCLE_rub1>
+		</BOUCLE_rub2>
 		</table>
 	</li>
 -->

@@ -36,10 +36,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_paniers_pour_nom' => 'Créer des paniers pour @nom@.',
 
 	// D
+	'date' => 'Date',
 	'date_distribution' => 'Date de la distribution',
 	'date_livraison' => 'Date de la livraison',
 	'depuis_le' => 'depuis le',
 	'distribution_paniers' => 'Distribution des paniers du @nb@',
+	'distribution_paniers_mois' => 'Distribution des paniers du @date_debut@ au @date_fin@',
 
 	// E
 	'enregistrement' => 'Enregistrement',
@@ -60,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'impression_donnees' => 'Impression de données',
 	'impression_explication' => 'Seulement les dates contenant au minimum un panier sont cliquables et ouvrent une nouvelle fenêtre.',
 	'impression_paniers_fonction_date' => 'Impression des paniers en fonction d\'une date :',
+	'impression_paniers_fonction_mois' => 'Impression des paniers en fonction d\'un mois :',
 	'impression_responsables_fonction_date' => 'Impression des responsables en fonction d\'un mois :',
 
 	// L
