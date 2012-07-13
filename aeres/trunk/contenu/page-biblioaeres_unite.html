@@ -177,7 +177,7 @@
 
 [(#ENV{compteur}|oui)[<div style="text-align:right;">Total : (#GET{total}|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb}).</div>]]
 
-<BOUCLE_test_stats(CONDITION){si #ENV{stats}}>
+<BOUCLE_test_stats(CONDITION){si #ENV{stats}|et{#SESSION{statut}|=={0minirezo}}}>
 <B_stats_auteurs>
 <h2 class="h2">Statistiques par auteur</h2>
 <table class="spip">
