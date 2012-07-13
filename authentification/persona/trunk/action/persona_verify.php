@@ -7,7 +7,7 @@
  *
  */
 
-define('_persona_VERIFY', "https://persona.org/verify");
+define('_PERSONA_VERIFY', "https://persona.org/verify");
 
 
 function persona_auth_loger($auteur, &$a) {
@@ -36,7 +36,7 @@ function action_persona_verify() {
 		}
 		else {
 			include_spip('inc/distant');
-			$d = recuperer_page(_persona_VERIFY, false, false, null,
+			$d = recuperer_page(_PERSONA_VERIFY, false, false, null,
 			$data = array(
 				'assertion' => $assertion,
 				'audience' => $audience
