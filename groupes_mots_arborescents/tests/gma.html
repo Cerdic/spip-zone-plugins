@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>[#NOM_SITE_SPIP] - test groupes de mots arborescents - </title>
+<style type="text/css">
+body{font-size:100%;}
+h1{
+	font-size:100%;
+	color:#E84D08;
+	border-bottom:1px solid #E84D08;
+	text-align:left;
+}
+h2{
+	font-size:100%;
+	color:#4A8CC5;
+	text-align:left;
+}
+h3 {
+	font-size:90%;
+	color:#B977D8;
+	text-align:left;
+}
+h4 {
+	font-size:90%;
+	color:#EA5A86;
+	text-align:left;
+}
+</style>
+</head>
+<body>
+
+<h1>Affichage de la hiérarchie complète des groupes et des premiers mots de chaque groupe</h1>
+
+#SET{p,3}
+<B_racine>
+<ul>
+	<BOUCLE_racine(GROUPES_MOTS){racine}{par num titre, multi titre}>
+	<li><h2>#TITRE</h2>
+
+		<B_mots>
+			<p>
+				<strong>#TOTAL_BOUCLE mots : </strong>
+			<BOUCLE_mots(MOTS){id_groupe}{par num titre, multi titre}{", "}>#TITRE</BOUCLE_mots>
+			</p>
+		</B_mots>
+
+		<B_sous_groupes>
+		<ul>
+			<BOUCLE_sous_groupes(GROUPES_MOTS){id_parent}{par num titre, multi titre}>
+			<li><h#GET{p}>#TITRE</h#GET{p}>
+
+				<B_mots_enfants>
+					<p>
+						<strong>#TOTAL_BOUCLE mots :</strong> 
+					<BOUCLE_mots_enfants(MOTS){id_groupe}{par num titre, multi titre}{", "}>#TITRE</BOUCLE_mots_enfants>
+					</p>
+				</B_mots_enfants>
+			
+				#SET{p,#GET{p}|plus{1}}
+				<BOUCLE_groupes_recursifs(BOUCLE_sous_groupes) />
+				#SET{p,#GET{p}|moins{1}}
+			</li>
+			</BOUCLE_sous_groupes>
+		</ul>
+		</B_sous_groupes>
+	</li>
+	</BOUCLE_racine>
+</ul>
+<B_racine>
+	
+</body>
+</html>
