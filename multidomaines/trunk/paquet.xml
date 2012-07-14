@@ -6,7 +6,8 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/multidomaines-72.png"
 	documentation="http://www.spip-contrib.net/article3127"
-><!-- plus de base depuis le 23/06/12 suite à suppression de cextras -->
+	schema="0.0.2" 
+>
 	<nom>Multidomaines</nom>
 
 	<auteur mail="mailto:bennetteson@free.fr">Nathanaël Louison</auteur>
@@ -14,7 +15,6 @@
 
 	<menu nom="configurer_multidomaines" titre="multidomaines:titre_multidomaines" parent="menu_configuration" icone="images/multidomaines-16.png" />
 
-	<pipeline nom="declarer_champs_extras" inclure="base/multidomaines.php" />
 	<pipeline nom="calculer_URL_SECTEUR" inclure="multidomaines_fonctions.php" />
 	<pipeline nom="" inclure="multidomaines_options.php" />
 </paquet>
