@@ -1,7 +1,7 @@
 <plugin>
-	<nom>persona</nom>
+	<nom>Persona</nom>
 	<auteur>Fil</auteur>
-	<version>0.7.0</version>
+	<version>1.0.0</version>
 	<etat>
 	dev
 	</etat>
