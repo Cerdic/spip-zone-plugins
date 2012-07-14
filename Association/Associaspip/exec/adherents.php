@@ -51,17 +51,18 @@ function exec_adherents()
 			echo recuperer_fond('prive/inc_cadre_etiquette');
 			echo fin_cadre_enfonce(true);
 		}
-		//Filtre ID et groupe : si le filtre id est actif, on ignore le filtre groupe
+		//Filtres ID et groupe : si le filtre id est actif, on ignore le filtre groupe
 		$id = intval(_request('id'));
 		if (!$id) {
 			$id = _T('asso:adherent_libelle_id_auteur');
-			//Filtre groupe
 			$id_groupe = intval(_request('groupe'));
 		} else {
 			$critere = "a.id_auteur=$id";
 			$id_groupe = 0;
 		}
-		if (test_plugin_actif('FPDF')) {
+		// on appelle ici la fonction qui calcule le code du formulaire/tableau de membres pour pouvoir recuperer la liste des membres affiches a transmettre pour la generation du pdf
+		list($where_adherents, $jointure_adherents, $code_liste_membres) = adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne, $id_groupe);
+		if (test_plugin_actif('FPDF')) { // liste
 			echo debut_cadre_enfonce('',true);
 			echo '<h3>'. _T('plugins_vue_liste') .'</h3>';
 			echo '<div class="formulaire_spip formulaire_asso_listemembres">';
@@ -78,13 +79,11 @@ function exec_adherents()
 			}
 			// on ajoute aussi le mail
 			$res .= '<div class="choix"><input type="checkbox" name="champs[email]" id="listemembres_email" /><label for="listemembres_email">'._T('asso:adherent_libelle_email').'</label></div>';
-			if (test_plugin_actif('COORDONNEES')) { // si le plugin coordonnees est actif, on ajoute l'adresse et le telephone
+			if (test_plugin_actif('COORDONNEES')) { // on ajoute l'adresse et le telephone
 				$res .= '<div class="choix"><input type="checkbox" name="champs[adresse]" id="listemembres_adresse" /><label for="listemembres_adresse">'._T('coordonnees:adresses').'</label></div>';
 				$res .= '<div class="choix"><input type="checkbox" name="champs[telephone]" id="listemembres_telephone" /><label for="listemembres_telephone"><label for="listemembres_telephone">'._T('coordonnees:numeros').'</label></div>';
 			}
-			// on appelle ici la fonction qui calcule le code du formulaire/tableau de membres pour pouvoir recuperer la liste des membres affiches a transmettre pour la generation du pdf
-			list($where_adherents, $jointure_adherents, $code_liste_membres) = adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne, $id_groupe);
-			/* on fait suivre la liste des auteurs a afficher */
+			// on fait suivre la liste des auteurs a afficher
 			$res .= '<input type="hidden" name="where_adherents" value="'.$where_adherents.'" />';
 			$res .= '<input type="hidden" name="jointure_adherents" value="'.$jointure_adherents.'" />';
 			$res .= '<input type="hidden" name="statut_interne" value="'.$statut_interne.'" />';
