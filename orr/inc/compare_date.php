@@ -1,9 +1,6 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-//$date=$_REQUEST["date"];
-//$id=1;
-
 function compare_date($date,$id){
         if ($result = sql_select(
                                 array(
@@ -20,14 +17,20 @@ function compare_date($date,$id){
                                 "ressource.id_orr_ressource=$id")
                                 )){
                                     while ($r = sql_fetch($result)){
-                                    if (($r[orr_date_debut]<$date)and($date<$r[orr_date_fin])){
-                                        $retour=1;
-                                        break;
-                                    }
-                                    else $retour=0;
+                                        if (($r[orr_date_debut]<$date)and($date<$r[orr_date_fin])){
+                                            $retour=2;
+                                            break;
+                                        }
+                                        if (($r[orr_date_debut]>$date)and($date<$r[orr_date_fin])){
+                                            $retour=1;
+                                            break;
+                                        }
+                                        if (($r[orr_date_debut]<$date)and($date>$r[orr_date_fin])){
+                                            $retour=3;
+                                            break;
+                                        }
                                     }
         }
     return $retour;
 }
-
 ?>
