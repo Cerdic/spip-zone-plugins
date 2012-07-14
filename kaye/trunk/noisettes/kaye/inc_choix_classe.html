@@ -1,0 +1,22 @@
+[(#REM) <!-- choix de la classe pour le cahier de texte --> ]
+
+<div>
+		<form action="" method="post" target="_self">		
+		 <select name="classe">
+			<option selected="selected">Choisissez une classe</option>
+			
+			<BOUCLE_classes(CLASSES){par titre}>
+            <option value="#ID_CLASSE"[(#EVAL{_request('classe')}|=={#ID_CLASSE}|?{' selected="selected"',''})] >#TITRE</option>
+            </BOUCLE_classes>
+			
+		</select>
+		<input name="choisir" type="submit" value="choisir">
+</form>
+</div>
+
+<B_recup_nom>
+</br>
+<BOUCLE_recup_nom(CLASSES){id_classe=#EVAL{_request('classe')}}>
+[<h1>(#TITRE)</h1>]
+</BOUCLE_recup_nom>
+</B_recup_nom>

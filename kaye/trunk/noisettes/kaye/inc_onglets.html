@@ -1,0 +1,40 @@
+<div>
+
+				<div id="tabs">
+					<ul>
+						<li><a href="#tabs-1">Lundi</a></li>
+						<li><a href="#tabs-2">Mardi</a></li>
+						[(#CONFIG{kaye/mercredi}|=={on}|?{' '})
+						<li><a href="#tabs-3">Mercredi</a></li>
+						]
+						<li><a href="#tabs-4">Jeudi</a></li>
+						<li><a href="#tabs-5">Vendredi</a></li>
+						[(#CONFIG{kaye/samedi}|=={on}|?{' '})
+						<li><a href="#tabs-6">Samedi</a></li>
+						]
+					</ul>
+					<div id="tabs-1">
+						<INCLURE{fond=noisettes/kaye/inc_choix_jour_semaine}{jour="lundi"}{env}{ajax}>
+					</div>
+					<div id="tabs-2">
+						<INCLURE{fond=noisettes/kaye/inc_choix_jour_semaine}{jour="mardi"}{env}{ajax}>
+					</div>
+					[(#CONFIG{kaye/mercredi}|=={on}|?{' '})
+					<div id="tabs-3">
+						<INCLURE{fond=noisettes/kaye/inc_choix_jour_semaine}{jour="mercredi"}{env}{ajax}>
+					</div>
+					]
+					<div id="tabs-4">
+						<INCLURE{fond=noisettes/kaye/inc_choix_jour_semaine}{jour="jeudi"}{env}{ajax}>
+					</div>
+					<div id="tabs-5">
+						<INCLURE{fond=noisettes/kaye/inc_choix_jour_semaine}{jour="vendredi"}{env}{ajax}>
+					</div>
+					[(#CONFIG{kaye/samedi}|=={on}|?{' '})
+					<div id="tabs-6">
+						<INCLURE{fond=noisettes/kaye/inc_choix_jour_semaine}{jour="samedi"}{env}{ajax}>
+					</div>
+					]
+				</div>
+
+</div>

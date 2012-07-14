@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1, 
+	id_classe,1,
+	points,-1
+}})]<B_liste_classes>
+#ANCRE_PAGINATION
+<div class="liste-objets classes">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{classe:info_1_classe,classe:info_nb_classes}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:classe:label_titre:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_classe,<:info_numero_abbreviation:>,ajax})]</th>
+			<!-- <th></th> -->
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_classes(CLASSES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{classe-16.png}|balise_img)]</td>
+			<td class='titre principale'>[(#LOGO_CLASSE|image_reduire{20,26})]<a href="[(#ID_CLASSE|generer_url_entite{classe})]" title="<:info_numero_abbreviation|attribut_html:> #ID_CLASSE">[(#RANG). ]#TITRE</a></td>
+			<td class='id'>[(#AUTORISER{modifier,classe,#ID_CLASSE}|?{
+				<a href="[(#URL_ECRIRE{classe_edit,id_classe=#ID_CLASSE})]">#ID_CLASSE</a>,
+				#ID_CLASSE
+			})]</td>
+			<!-- <td>[(#AUTORISER{supprimer,classe,#ID_CLASSE}|oui)
+				[(#URL_ACTION_AUTEUR{supprimer_classe,#ID_CLASSE,#ID_PARENT|?{#URL_ECRIRE{classe,id_classe=#ID_PARENT},#URL_ECRIRE{classes}}}|icone_horizontale{<:classe:icone_supprimer_classe:>,classe,del})]
+				]
+			</td> -->
+		</tr>
+	</BOUCLE_liste_classes>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_classes>[
+<div class="liste-objets classes caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_classes>

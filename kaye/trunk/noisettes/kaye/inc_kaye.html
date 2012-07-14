@@ -1,0 +1,8 @@
+<INCLURE{fond=noisettes/kaye/inc_choix_classe}>	
+[(#CONFIG{kaye/kaye_vue}|=={tableau}|?{' '})
+	<INCLURE{fond=noisettes/kaye/inc_liste_devoirs}{classe}>
+]
+[(#CONFIG{kaye/kaye_vue}|=={onglets}|?{' '})
+	<INCLURE{fond=noisettes/kaye/inc_onglets}{env}{ajax}>
+]
+

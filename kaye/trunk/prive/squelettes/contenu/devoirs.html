@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/devoirs, par=matiere, env, ajax, sinon=<:devoir:info_aucun_devoir:>}>
+
+[(#AUTORISER{creer,devoir})
+	[(#URL_ECRIRE{devoir_edit,new=oui}|icone_verticale{<:devoir:icone_creer_devoir:>,devoir,new,right})]
+]

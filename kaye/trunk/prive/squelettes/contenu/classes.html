@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/classes, par=titre, env, ajax, sinon=<:classe:info_aucun_classe:>}>
+
+[(#AUTORISER{creer,classe})
+	[(#URL_ECRIRE{classe_edit,new=oui}|icone_verticale{<:classe:icone_creer_classe:>,classe,new,right})]
+]

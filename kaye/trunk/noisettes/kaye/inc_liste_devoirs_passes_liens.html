@@ -1,0 +1,13 @@
+[(#ENV{afficher_devoirs_passes}|=={oui}|oui)
+	<a class="ajax" href="[(#SELF|parametre_url{afficher_devoirs_passes,''})]">
+	Cacher les devoirs passés</a>
+]
+[(#ENV{afficher_devoirs_passes}|=={oui}|non)
+	<a class="ajax" href="[(#SELF|parametre_url{afficher_devoirs_passes,oui})]">
+	Afficher les devoirs passés</a>
+]
+
+[(#ENV{afficher_devoirs_passes}|=={oui}|oui)
+	<INCLURE{fond=noisettes/kaye/inc_liste_devoirs_passes}{classe} />
+]
+
