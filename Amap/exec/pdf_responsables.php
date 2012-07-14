@@ -10,10 +10,18 @@ function exec_pdf_responsables(){
 		echo minipres();
 	} else {
 
-	$pdf=new PDF();
-	$date_distribution = $_GET["mois_distribution"];
+	$mois_distribution = $_GET["mois_distribution"];
 
-	$pdf->titre = _T('amap:responsables_distribution_paniers', array('nb'=>date('m/Y',strtotime($date_distribution))));
+	// Calcul date de début et de fin
+	$mois_distri_debut = strtotime($mois_distribution);
+	$mois_distri_fin = strtotime($mois_distribution. ' next month - 1 day');
+
+	$mois_distri_debut_chaine = date('d/m/Y',$mois_distri_debut);
+	$mois_distri_fin_chaine = date('d/m/Y',$mois_distri_fin);
+
+	//Construction du pdf
+	$pdf=new PDF();
+	$pdf->titre = _T('amap:responsables_distribution_paniers_mois', array('date_debut'=>$mois_distri_debut_chaine,'date_fin'=>$mois_distri_fin_chaine));
 	$pdf->Open();
 	$pdf->AddPage();
 
@@ -21,15 +29,15 @@ function exec_pdf_responsables(){
 	//On definit les colonnes (champs,largeur,intitule,alignement)
 	$pdf->TitreChapitre(1,_T('amap:responsables'));
 	$pdf->AddCol('nom',40,_T('amap:nom'),'L');
-	$pdf->AddCol('date_distribution',40,_T('amap:date_distribution'),'L');
+	$pdf->AddCol('date_distribution',40,_T('amap:date'),'L');
+	$pdf->AddCol('signature',40,_T('amap:signature'),'L');
 	$prop=array(
 		'HeaderColor'=>array(255,150,100),
 		'color1'=>array(224,235,255),
 		'color2'=>array(255,255,255),
 		'padding'=>2);
-	$pdf->Query_extended(sql_select("a.nom as nom, b.date_distribution as date_distribution, a.id_auteur as id_auteur", "spip_amap_responsables b LEFT JOIN spip_auteurs a ON a.id_auteur=b.id_auteur", "date_distribution = MONTH(date)=".sql_quote(date($date_distribution, 'm')),"" , "nom"), $prop, $date_distribution, "id_auteur");
+	$pdf->Query_extended(sql_select("a.nom as nom,  DATE_FORMAT(b.date_distribution,'à %k:%i le %d/%m/%Y') as date_distribution, a.id_auteur as id_auteur", "spip_amap_responsables b LEFT JOIN spip_auteurs a ON a.id_auteur=b.id_auteur", "date_distribution BETWEEN ".sql_quote(date('Y-m-j H:i:s',$mois_distri_debut)).' AND '.sql_quote(date('Y-m-j H:i:s',$mois_distri_fin)),"" , "nom"), $prop, $type_panier_extension, "id_auteur");
 
 	$pdf->Output();
 	}
 }
-?>

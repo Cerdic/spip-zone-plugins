@@ -135,7 +135,7 @@ Je récupère le panier du @date_distribution@ produit par @nom_producteur@
 	// R
 	'recupere_panier' => 'Récupéré le panier',
 	'responsables' => 'Responsables',
-	'responsables_distribution_paniers' => 'Responsables des distributions pour le mois de @nb@',
+	'responsables_distribution_paniers_mois' => 'Responsables des distributions pour le mois du @date_debut@ au @date_fin@',
 	'responsables_explication' => 'Sur cette page vous trouverez la liste des responsables avec la dates de distribution à laquelle il a été associé. Ce tableau est affichable sur le site via un article en mettant le code <liste|distributions>',
 	'reste_panier_distribuer' => 'Il nous reste encore 1 panier à distribuer',
 	'reste_panier_recuperer' => 'Il vous reste encore 1 panier à recupérer',

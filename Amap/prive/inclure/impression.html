@@ -31,7 +31,7 @@
 			<BOUCLE_paniers_mois(EVENEMENTS){id_rubrique}{par date_debut}>
 				[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
 					<td class="center">
-						<a href="[(#URL_ECRIRE{pdf_paniers_mois}|parametre_url{date_distribution,#DATE_DEBUT|affdate{Y-m}})]">
+						<a href="[(#URL_ECRIRE{pdf_paniers_mois}|parametre_url{mois_distribution,#DATE_DEBUT|affdate{Y-m}})]">
 						[(#DATE_DEBUT|affdate{'m/Y'}|unique)]
 						</a>
 					</td>
@@ -42,7 +42,6 @@
 		</BOUCLE_rub1>
 		</table>
 	</li>
-<!--
 	<p></p>
 	<li>
 		<:amap:impression_responsables_fonction_date:>
@@ -53,7 +52,7 @@
 				[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
 					<td class="center">
 						<a href="[(#URL_ECRIRE{pdf_responsables}|parametre_url{mois_distribution,#DATE_DEBUT|affdate{Y-m}})]">
-						[(#DATE_DEBUT|affdate{'m/Y'}|unique)]
+						[(#DATE_DEBUT|affdate{m-Y}|unique)]
 						</a>
 					</td>
 				[(#COMPTEUR_BOUCLE|alterner{'','','','','</tr>'})]
@@ -63,5 +62,4 @@
 		</BOUCLE_rub2>
 		</table>
 	</li>
--->
 </ul>
