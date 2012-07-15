@@ -51,9 +51,9 @@ rdm */
 		echo "<thead>\n<tr>";
 		echo '<th>'._T('asso:entete_id').'</th>';
 		echo '<th>&nbsp;</th>';
-		echo '<th>'._T('asso:entete_intitule').'</th>';
+		echo '<th>'._T('asso:ressources_entete_intitule').'</th>';
 		echo '<th>'._T('asso:entete_code').'</th>';
-		echo '<th>'._T('asso:entete_montant').'</th>';
+		echo '<th>'._T('asso:ressources_entete_montant').'</th>';
 		echo '<th>'._T('asso:ressources_entete_caution').'</th>';
 		echo '<th colspan="3" class="actions">'._T('asso:entete_action').'</th>';
 		echo "</tr>\n</thead><tbody>";
@@ -95,7 +95,7 @@ rdm */
 			echo '<td class="actions">'. association_bouton('','puce-'.$puce.'.gif', '', '', 'title="'.$data['statut'].'"') .'</td>';
 			echo '<td class="text">'.$data['intitule'].'</td>';
 			echo '<td class="text">'.$data['code'].'</td>';
-			echo '<td class="decimal">'.association_prixfr($data['pu']).'</td>';
+			echo '<td class="decimal">'.association_prixfr($data['pu']).' / '.association_dureefr(1,$data['ud']).'</td>';
 			echo '<td class="decimal">'.association_prixfr($data['prix_caution']).'</td>';
 			echo '<td class="action">', association_bouton('ressources_nav_supprimer', 'suppr-12.gif', 'action_ressources', 'id='.$data['id_ressource']), '</td>';
 			echo '<td class="action">', association_bouton('ressources_nav_editer', 'edit-12.gif', 'edit_ressource', 'id='.$data['id_ressource']), '</td>';

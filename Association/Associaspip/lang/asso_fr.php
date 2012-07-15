@@ -576,6 +576,7 @@ Commentaire: @commentaire@
 	# En-tete
 	'ressources_entete_intitule' => 'Article',
 	'ressources_entete_code' => 'Code',
+	'ressources_entete_montant' => 'Location',
 	'ressources_entete_caution' => 'Caution',
 	'ressource_pretee' => 'Pr&ecirc;t&eacute;e',
 	# Navigation
