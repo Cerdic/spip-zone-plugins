@@ -40,9 +40,9 @@ Hodnota 1~000~000 pixelov sa zdá byť rozumná na nastavenie, ak máte málo do
 	'action_rapide' => 'Rýchla akcia, iba ak viete, čo robíte!',
 	'action_rapide_non' => 'Rapid action, available when this tool is activated:',
 	'admins_seuls' => 'Len administrátori',
-	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
+	'aff_tout:description' => 'Niekedy je užitočné zobraziť všetky rubriky alebo všetkých autorov stránky bez ohľadu na ich stav, resp. funkciu (napr. pri vývoji). Podľa predvolených nastavení SPIP nepublikuje informáciu o tom, že autori a rubriky majú aspoň jeden publikovaný redakčný objekt.
 
-Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.', # NEW
+Dá sa to zmeniť pomocou kritéria [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], ale tento nástroj zautomatizuje tento proces, a tak nemusíte pridávať toto kritérium do všetkých cyklov svojich šablón pre RUBRIKY a/lebo ČLÁNKY.',
 	'aff_tout:nom' => 'Zobraziť všetky',
 	'alerte_urgence:description' => 'V hornej časti všetkých verejne prístupných stránok zobrazí pútač s upozornením o rozširovaní nebezpečenstva tak, ako je definovaný nižšie.
 _ Na viacjazyčnej stránke sa odporúča používať tagy <code><multi/></code>.[[%alerte_message%]]',
@@ -728,11 +728,11 @@ _ Example:~{<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
 
 @puce@ If you are running several mutualised sites, you can specify here the default value for all the local sites (SPIP 2.0 mini).[[%duree_cache_mutu% heures]]', # MODIF
 	'spip_cache:description1' => '@puce@ Podľa predvolených nastavení SPIP registruje všetky verejne prístupné stránky a ukladá ich do cache, aby sa potom rýchlejšie načítali. Dočasné deaktivovanie cache môže pomôcť pri vývoji stránky. [[%radio_desactive_cache3%]]',
-	'spip_cache:description2' => '@puce@ Four options to configure the cache: <q1>
-_ • {Normal usage}: SPIP places all the calculated pages of the public site in the cache in order to speed up their delivery. After a certain time the cache is recalculated and stored again.
-_ • {Permanent cache}: the cache is never recalculated (time limits in the templates are ignored).
-_ • {No cache}: temporarily deactivating the cache can be useful when the site is being developed. With this option, nothing is cached on disk.
-_ • {Cache checking}: similar to the preceding option. However, all results are written to disk in order to be able to check them.</q1>[[%radio_desactive_cache4%]]', # MODIF
+	'spip_cache:description2' => '@puce@ Na nastavenie fungovania cache SPIPu máte štyri možnosti: <q1>
+_ • {Bežné používanie:} SPIP uloží všetky obnovené stránky verejne prístupnej stránky do cache, aby sa zrýchlilo ich načítavanie. Po istom čase sa cache obnoví a stránky sa uložia nanovo.
+_ • {Trvalá cache:} časové limity na vyprázdnenie cache sa budú ignorovať.
+_ • {Žiadna cache:} dočasné deaktivovanie cache môže napomôcť pri vytváraní stránky.  Pri tejto možnosti sa nebude nič ukladať na disk.
+_ • {Kontrola cache:} rovnaké ako predchádzajúca možnosť. Všetky výsledky sa však zapisujú na disk, aby sa dali skontrolovať.</q1>[[%radio_desactive_cache4%]]',
 	'spip_cache:description3' => '@puce@ Rozšírenie "Compresser" dostupné v SPIPe umožňuje skomprimovať rôzne prvky CSS a JavaScript z vašich stránok a uložiť ich do statickej cache. Tak sa zrýchli zobrazenie stránky a obmedzí sa počet požiadaviek na server, ako aj výsledná veľkosť súborov.',
 	'spip_cache:nom' => 'SPIP and the cache',
 	'spip_ecran:description' => 'Nastaví šírku obrazovky pre každého v súkromnej zóne. Úzka obrazovka zobrazí dva stĺpce a široká obrazovka zobrazí tri. Predvolené nastavenia nechávajú používateľa, aby sa rozhodol sám, čo sa uloží v cookie prehliadača.[[%spip_ecran%]]',
@@ -776,19 +776,19 @@ The SPIP function used is: <code>_T(\'a_text\')</code> (with no parmameters), an
 
 Do not forget to check that the variable used <code>\'a_text\'</code> is defined in the language files.', # MODIF
 	'toutmulti:nom' => 'Viacjazyčné bloky',
-	'trad_help' => '{{Le Couteau Suisse est bénévolement traduit en plusieurs langues et sa langue mère est le français.}}
+	'trad_help' => '{{Modul Vreckový nožík dobrovoľníci prekladajú do mnohých jazykov a jeho rodným jazykom je francúzština.}}
 
-N\'hésitez pas à offrir votre contribution si vous décelez quelques soucis dans les textes du plugin. Toute l\'équipe vous en remercie d\'avance.
+Ak nájdete nejaké chyby v textoch zásuvného modulu, pokojne môžete ponúknuť vlastnú verziu. Celý tím vám vopred ďakuje.
 
-Pour vous inscrire à l\'espace de traduction : @url@
+Registrácia do prekladateľskej zóny: @url@
 
-Pour accéder directement aux traductions des modules du Couteau Suisse, cliquez ci-dessous sur la langue cible de votre choix. Une fois identifié, repérez ensuite le petit crayon qui apparait en survolant le texte traduit puis cliquez dessus.
+Na to, aby mali priamy prístup k prekladom modulu Vreckový nožík, kliknite na cieľový jazyk podľa vlastného výberu. Po prihlásení nájdite malú ceruzku, ktorá sa (pri prejdení myšou) nachádza pri preloženom texte a kliknite na ňu.
 
-Vos modifications seront prises en compte quelques jours plus tard sous forme d\'une mise à jour disponible pour le Couteau Suisse. Si votre langue n\'est pas dans la liste, alors le site de traduction vous permettra facilement de la créer.
+Vaše zmeny sa prejavia o niekoľko dni neskôr ako aktualizácia modulu Vreckový nožík. Ak váš jazyk nie je v zozname, stránka prekladu vám umožní ľahko ho  doplniť.
 
-{{Traductions actuellement disponibles}} :@trad@
+{{Momentálne dostupné preklady:}} @trad@
 
-{{Merci aux traducteurs actuels}} : @contrib@.', # NEW
+{{Ďakujeme súčasným prekladateľom:}} @contrib@.',
 	'trad_mod' => 'Modul "@mod@": ',
 	'travaux_masquer_avert' => 'Schovať rám, ktorý uvádza na verejnej stránke, že sa vykonáva údržba',
 	'travaux_nocache' => 'Deaktivovať aj cache SPIPu',
