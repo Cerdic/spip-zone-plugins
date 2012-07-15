@@ -34,7 +34,7 @@
 
 .onglets_traduction .danger{background: #ffffff;}
 
-.bouton_options{float:right;}
+a.bouton_options{float:right;background: none;}
 
 .nettoyeur{clear:both;}
 
@@ -45,7 +45,7 @@
 
 .lang{ margin-right:5px;}
 
-.changer{float:left;margin-bottom:5px}
+.changer{float:left;margin:0 0 5px 5px}
 
 .liste-elements table.spip tr.trads{background:#dfdfdf}
 

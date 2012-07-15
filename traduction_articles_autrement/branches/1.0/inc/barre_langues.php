@@ -1,6 +1,8 @@
 <?php
 function inc_barre_langues_dist($id_article){
 	include_spip('inc/config');
+	include_spip('inc/actions');
+	
 	$row = sql_fetsel("*", "spip_articles", "id_article=$id_article");
 		
 	$id_rubrique = $row['id_rubrique'];
@@ -32,6 +34,8 @@ function inc_barre_langues_dist($id_article){
 		while($row=sql_fetch($sql)){
 			$traductions[$row['lang']]=$row['id_article'];
 			}
+		$clic = _T('trad_delier');	
+		$options = '<div class="options delier ajax">'.icone_verticale($clic, redirige_action_auteur('traduction',$id_article.'-article-0',"article&amp;id_article=$id_article"), "traductions-24.gif", "supprimer.gif",'right', false).'</div>';		
 		}
 	// L'article n'est pas traduit	
 	else{
@@ -40,6 +44,15 @@ function inc_barre_langues_dist($id_article){
 		
 		// Seul l'aticle présent est pris dans l'array traductions
 		$traductions[$row['lang']]=$row['id_article'];
+		
+		$options =  '<div class="options form_lier"><h2>'._T('taa:lier_traduction').'</h2>'.redirige_action_auteur("traduction",
+			$id_article.'-article',
+			"article",
+			"id_article=$id_article",
+			("<label for='lier_trad'>" . _T('trad_lier') . "</label>" .
+			"\n<input type='text' class='fondl' name='lier_trad' id='lier_trad' size='5' />\n"),
+			_T('bouton_valider'),
+			" class='fondl'").'</div>';
 		}
 	
 	// Pour chaque langue présente on crée un bouton
@@ -91,10 +104,10 @@ function inc_barre_langues_dist($id_article){
 					$onglets_traduction.= '<li class="non_traduit box_onglet"><a href="'.generer_url_ecrire($objet.'_edit','new=oui&lier_trad='.$id_trad.'&lang_dest='.$value).'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></li>';				
 				}
 
-				$action=redirige_action_auteur ('changer_langue',$id_article,$objet,"id_article=$id_article");
+				$action=redirige_action_auteur ('changer_langue',$id_article.'-'.$value,$objet,"id_article=$id_article");
 				// Si le plugin traduction rubriques est activé on affiche pas les onglets changement de langue car la langue se change en modifiant la rubrique
 				if(!$section){
-					$changer_traduction.='<li class="lang box_onglet"><a href="'.parametre_url($action,'changer_lang',$value).'">'.traduire_nom_langue($value).'</a></li>';					
+					$changer_traduction.='<li class="item  lang box_onglet"><a href="'.parametre_url($action,'changer_lang',$value).'">'.traduire_nom_langue($value).'</a></li>';					
 					}
 
 				}
