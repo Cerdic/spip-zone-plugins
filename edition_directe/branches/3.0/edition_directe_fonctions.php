@@ -29,6 +29,7 @@ function lister_objets(){
 
 	//Récupère les préférence de l'auteurs, pour éventuellement désactiver un objet
 	$prefs=session_get('prefs');
+	if(!is_array($prefs))$prefs=unserialize($prefs);
 	
 	$objets=array();
 	foreach($liste_objets AS $o=>$valeur){
