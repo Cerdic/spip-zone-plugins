@@ -21,13 +21,18 @@ function objets_edition_directe(){
 }
 
 	
-
+// Liste les objets disponible pour l'édition directe
 function lister_objets(){
 	include_spip('base/objets');	
+	include_spip('inc/session');	
 	$liste_objets=lister_tables_objets_sql();
+
+	//Récupère les préférence de l'auteurs, pour éventuellement désactiver un objet
+	$prefs=session_get('prefs');
+	
 	$objets=array();
 	foreach($liste_objets AS $o=>$valeur){
-		if($valeur['editable'] AND $valeur['page'])$objets[]=$valeur['page'];
+		if($valeur['editable'] AND $valeur['page'] AND $prefs['edition_directe'][$valeur['page']]!='inactive')$objets[]=$valeur['page'];
 		}
 	return $objets;	
 	}
