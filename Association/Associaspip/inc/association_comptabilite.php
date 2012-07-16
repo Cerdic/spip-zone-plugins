@@ -116,15 +116,10 @@ function association_ajouter_operation_comptable($date, $recette, $depense, $jus
 	'justification' => $justification
     ));
     modifier_contenu('asso_compte', $id_compte, '', array());
-    // on laisse passer ce qui est peut-etre une erreur,
-    // pour ceux qui ne definisse pas de plan comptable.
-    // Mais ce serait bien d'envoyer un message d'erreur au navigateur
-    // plutot que de le signaler seulement dans les log
-    if (!$imputation) {
+    if (!$imputation) { // On laisse passer ce qui est peut-etre une erreur, pour ceux qui ne definisse pas de plan comptable. Mais ce serait bien d'envoyer un message d'erreur au navigateur plutot que de le signaler seulement dans les log
 	spip_log("imputation manquante : id_compte=$id_compte, date=$date, recette=$recette, depense=$depense, journal=$journal, id_journal=$id_journal, justification=$justification",'associaspip');
     }
-    /* Si on doit gerer les destinations */
-    if ($GLOBALS['association_metas']['destinations']=='on') {
+    if ($GLOBALS['association_metas']['destinations']=='on') { // Si on doit gerer les destinations
 	association_ajouter_destinations_comptables($id_compte, $recette, $depense);
     }
     return $id_compte;
@@ -134,38 +129,34 @@ function association_ajouter_operation_comptable($date, $recette, $depense, $jus
 /* modifier une operation dans spip_asso_comptes ainsi que si necessaire dans spip_asso_destination_op */
 function association_modifier_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal, $id_compte)
 {
+    $err = '';
     include_spip('base/association');
     if ( sql_countsel('spip_asso_comptes', "id_compte=$id_compte AND vu ") ) { // il ne faut pas modifier une operation verouillee !!!
 	spip_log("modification d'operation comptable : id_compte=$id_compte, date=$date, recette=$recette, depense=$depense, imputation=$imputation, journal=$journal, id_journal=$id_journal, justification=$justification",'associaspip');
 	return $err = _T('asso:operation_non_modifiable');
     }
-    /* Si on doit gerer les destinations */
-    if ($GLOBALS['association_metas']['destinations']=='on') {
+    if ($GLOBALS['association_metas']['destinations']=='on') { // Si on doit gerer les destinations
 	$err = association_ajouter_destinations_comptables($id_compte, $recette, $depense);
     }
-    /* on passe par modifier_contenu (et non sql_updateq) pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere */
-    include_spip('inc/modifier');
-    // tester $id_journal, si il est null, ne pas le modifier afin de ne pas endommager l'entree dans la base en editant directement depuis le libre de comptes
-    if ($id_journal) {
-	modifier_contenu('asso_compte', $id_compte, '', array(
-	    'date' => $date,
-	    'imputation' => $imputation,
-	    'recette' => $recette,
-	    'depense' => $depense,
-	    'journal' => $journal,
-	    'id_journal' => $id_journal,
-	    'justification' => $justification)//,
-	);
-    } else {
-	modifier_contenu('asso_compte', $id_compte, '', array(
-	    'date' => $date,
-	    'imputation' => $imputation,
-	    'recette' => $recette,
-	    'depense' => $depense,
-	    'journal' => $journal,
-	    'justification' => $justification)//,
-	);
+    $modifs = array(
+	'date' => $date,
+	'imputation' => $imputation,
+	'recette' => $recette,
+	'depense' => $depense,
+	'journal' => $journal,
+	'justification' => $justification)//,
+    );
+    if ($id_journal) { // si id_journal est null, ne pas le modifier afin de ne pas endommager l'entree dans la base en editant directement depuis le livre de comptes
+	$modifs['id_journal'] = $id_journal;
     }
+    // on passe par modifier_contenu (et non sql_updateq) pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere
+    include_spip('inc/modifier');
+    modifier_contenu(
+	'asso_compte',
+	$id_compte,
+	'',
+	$modifs
+    );
     return $err;
 }
 
