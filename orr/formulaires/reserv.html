@@ -114,7 +114,7 @@
             }
             else{
                 // vérifie que date_fin soit postérieur à date_debut
-                if (datedebut > datefin){
+                if (datedebut >= datefin){
                     $("#date_fin").css("border-color","#FF0000");
                     $("#date_fin").next(".error-message").css("color","#FF0000").html("X mauvaise date !!");
                     valid = false;
