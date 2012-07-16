@@ -1,7 +1,7 @@
 <paquet
 	prefix="agenda"
 	categorie="date"
-	version="3.6.5"
+	version="3.6.6"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/evenement-32.png"
@@ -38,7 +38,7 @@
 	<necessite nom="calendriermini" compatibilite="[2.0.0;[" />
 
 	<menu nom="evenements" titre="agenda:evenements" parent="menu_edition" icone="images/evenement-16.png" />
-	<menu nom="evenement_edit" titre="agenda:creer_evenement" parent="outils_rapides" icone="images/evenement-new-16.png" />
+	<menu nom="evenement_creer" titre="agenda:creer_evenement" parent="outils_rapides" action="evenement_edit" icone="images/evenement-new-16.png" />
 
 	<chemin path="./" />
 	<chemin path="squelettes" type='public'/>

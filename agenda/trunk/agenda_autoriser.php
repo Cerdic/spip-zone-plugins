@@ -10,9 +10,11 @@
 /* pour que le pipeline ne rale pas ! */
 function agenda_autoriser(){}
 
-function autoriser_evenement_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	if (isset($opt['contexte']['id_article']))
-		return autoriser('creerevenementdans','article',$opt['contexte']['id_article'],$qui);
+function autoriser_evenementcreer_menu_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
+	autoriser('creer','evenement',$id,$qui,$opt);
+}
+
+function autoriser_evenements_menu_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
 	return true;
 }
 

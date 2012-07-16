@@ -1,3 +1,4 @@
+[(#AUTORISER{menu,_evenements}|sinon_interdire_acces)]
 <h1 class="grostitre"><:agenda:agenda:></h1>
 <BOUCLE_expose(RUBRIQUES){id_rubrique}{statut==.*}>
 #BOITE_OUVRIR{'','note'}
@@ -10,5 +11,6 @@
 <div id="liste_des_evenements">
 	[(#INCLURE{fond=prive/objets/liste/evenements-post}{env})]
 </div>
-
+[(#AUTORISER{creer,evenement}|oui)
 [(#URL_ECRIRE{evenement_edit,id_evenement=new}|parametre_url{id_article,#ID_ARTICLE}|icone_verticale{<:agenda:creer_evenement:>,evenement-24.png,new,right})]
+]
