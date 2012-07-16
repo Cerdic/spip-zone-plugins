@@ -43,12 +43,41 @@
             stepMinute: 15,
             minuteGrid:15,
             hourGrid:4,
-            // bloque les minDate des datepickers en fonction de la date entrée dans l'un deux deux datepickers (debut ou fin)
-            onSelect: function(date){
-                var option = this.id == 'date_debut' ? 'minDate' : 'maxDate';
-                datepickers.not('#'+this.id).datepicker('option',option,date);
-            }
-        });
+				onClose: function(dateText, inst) {
+					var endDateTextBox = $('#date_fin');
+					if (endDateTextBox.val() != '') {
+						var testStartDate = new Date(dateText);
+						var testEndDate = new Date(endDateTextBox.val());
+						if (testStartDate > testEndDate)
+						endDateTextBox.val(dateText);
+					}
+					else {
+					endDateTextBox.val(dateText);
+					}
+				},
+				onSelect: function (selectedDateTime){
+					var start = $(this).datetimepicker('getDate');
+					$('#date_fin').datetimepicker('option', 'minDate', new Date(start.getTime()));
+				}
+            });
+            $('#date_fin').datetimepicker({
+				onClose: function(dateText, inst) {
+					var startDateTextBox = $('#date_debut');
+					if (startDateTextBox.val() != '') {
+						var testStartDate = new Date(startDateTextBox.val());
+						var testEndDate = new Date(dateText);
+						if (testStartDate > testEndDate)
+							startDateTextBox.val(dateText);
+					}
+					else {
+						startDateTextBox.val(dateText);
+					}
+				},
+				onSelect: function (selectedDateTime){
+					var end = $(this).datetimepicker('getDate');
+					$('#date_debut').datetimepicker('option', 'maxDate', new Date(end.getTime()) );
+				}
+            });
         // action de controle du formulaire lorsque l'on clique sur le bouton envoyé
         $('#envoyer').click(function(){
             var valid     = true;
