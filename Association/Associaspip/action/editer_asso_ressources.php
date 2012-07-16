@@ -37,17 +37,25 @@ function action_editer_asso_ressources()
     $id_compte = intval(_request('id_compte'));
     $journal = _request('journal');
     include_spip('inc/association_comptabilite');
+    include_spip('inc/modifier'); // on passe par modifier_contenu pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere
     if ($id_ressource) {/* c'est une modification */
 	// on modifie les operations comptables associees a l'acquisition
 	association_modifier_operation_comptable($date_achat, 0, $prix_achat, '['. _T('asso:titre_num', array('titre'=>_T('local:ressource'),'num'=>"'$code' &times;&nbsp;$statut") ) ."->ressource$id_ressource] ", $GLOBALS['association_metas']['pc_ressources'], $journal, $id_ressource, $id_compte);
 	// on modifie les informations relatives a la ressource
-	sql_updateq('spip_asso_ressources', $champs, "id_ressource=$id_ressource");
+	modifier_contenu(
+	    'asso_membre', // table a modifier
+	    $id_ressource, // identifiant
+	    '', // parametres
+	    $champs // champs a modifier
+	);
+#	sql_updateq('spip_asso_ressources', $champs, "id_ressource=$id_ressource");
     } else { /* c'est un ajout */
 	$id_ressource = sql_insertq('spip_asso_ressources', $champs );
 	if (!$id_ressource) { // la suite serait aleatoire sans cette cle...
 	    $erreur = _T('asso:erreur_sgbdr');
 	} else { // on ajoute les operations comptables associees a l'acquisition
 	    association_ajouter_operation_comptable($date_achat, 0, $prix_achat, '['. _T('asso:titre_num', array('titre'=>_T('local:ressource'),'num'=>"'$code' &times;&nbsp;$statut") ) ."->ressource$id_ressource] ", $GLOBALS['association_metas']['pc_ressources'], $journal, $id_ressource);
+	    modifier_contenu('asso_ressources', $id_ressource, '', array());
 	}
     }
 

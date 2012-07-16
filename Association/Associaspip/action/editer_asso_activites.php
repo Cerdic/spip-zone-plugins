@@ -42,11 +42,17 @@ function action_editer_asso_activites_dist()
     $id_compte = intval(_request('id_compte'));
     $journal = _request('journal');
     include_spip('inc/association_comptabilite');
+    include_spip('inc/modifier'); // on passe par modifier_contenu pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere
     if ($id_activite) { /* c'est une modification */
 	// on modifie les operations comptables associees a la participation
 	association_modifier_operation_comptable($date_paiement, $montant, 0, '['. _T('asso:titre_num', array('titre'=>_T('evenement'),'num'=>$evenement) ) ."->activite$evenement] &mdash; ". ($id_adherent?"[$participant"."->membre$id_adherent]":$participant)." +$inscrits", $GLOBALS['association_metas']['pc_activites'], $journal, $id_activite, $id_compte);
 	// on modifie les informations relatives a la participation
-	sql_updateq('spip_asso_activites', $modifs,  "id_activite=$id_activite");
+	modifier_contenu(
+	    'asso_activites', // table a modifier
+	    $id_activite, // identifiant
+	    '', // parametres
+	    $modifs // champs a modifier
+	);
     } else { /* c'est un ajout */
 	// on enregistre l'inscription/participation a l'activite
 	$id_activite = sql_insertq('spip_asso_activites', $modifs);
@@ -54,6 +60,7 @@ function action_editer_asso_activites_dist()
 	    $erreur = _T('asso:erreur_sgbdr');
 	} else { // on ajoute l'operation comptable associee a la participation
 	    association_ajouter_operation_comptable($date_paiement, $montant, 0, '['. _T('asso:titre_num', array('titre'=>_T('evenement'),'num'=>$evenement) ) ."->activite$evenement] &mdash; ". ($id_adherent?"[$participant"."->membre$id_adherent]":$participant), $GLOBALS['association_metas']['pc_activites'], $journal, $id_activite);
+	    modifier_contenu('asso_activites', $id_activite, '', array());
 	}
     }
 

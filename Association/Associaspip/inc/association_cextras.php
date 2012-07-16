@@ -19,6 +19,7 @@ function association_objets_extensibles($objets){
 		'asso_membre' => _T('asso:membres'), // Adherent(e)s/Membres
 		'asso_compte' => _T('asso:comptes'), // Grand Livre/Journal Comptable
 		'asso_activite' => _T('asso:activites'), // Inscriptions et Participations financiere des membres aux activites
+		'asso_ressource' => _T('asso:ressources'), // Ressources (par ex. livres) pretes
 	));
 }
 ?>

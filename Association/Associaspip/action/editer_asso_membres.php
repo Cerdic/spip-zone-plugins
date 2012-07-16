@@ -33,9 +33,14 @@ function action_editer_asso_membres()
 	if ($GLOBALS['association_metas']['id_asso']=='on')
 		$modifs['id_asso'] = _request('id_asso');
 	include_spip('base/association');
-	/* on passe par modifier_contenu pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere */
+	// on passe par modifier_contenu pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere
 	include_spip('inc/modifier');
-	modifier_contenu('asso_membre', $id_auteur, '', $modifs);
+	modifier_contenu(
+		'asso_membre', // table a modifier
+		$id_auteur, // identifiant
+		'', // parametres
+		$modifs // champs a modifier
+	);
 
 	return (array($id_auteur,''));
 }
