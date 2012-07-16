@@ -40,6 +40,6 @@
 <BOUCLE_checkbox(POUR){tableau #GET{datas}}>
 <div class="#ENV{choix,choix}">
 	<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id="champ_[(#ENV{nom}|saisie_nom2classe)]_#COMPTEUR_BOUCLE"[ (#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)checked="checked"] value="#CLE"[(#CLE|in_array{#GET{disabled}}|oui) disabled="disabled"] />
-	<label for="champ_[(#ENV{nom}|saisie_nom2classe)]_#COMPTEUR_BOUCLE">#VALEUR</label>
+	<label for="champ_[(#ENV{nom}|saisie_nom2classe)]_#COMPTEUR_BOUCLE">[(#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)<strong>]#VALEUR[(#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)</strong>]</label>
 </div>
 </BOUCLE_checkbox>
