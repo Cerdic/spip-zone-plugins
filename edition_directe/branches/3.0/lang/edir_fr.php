@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'desactiver_edition_directe_objet' => 'Désactiver l\'édition directe pour l\'objet ',
-	
+
 	// T
 	'titre_plugin' => 'Edition directe',
 
