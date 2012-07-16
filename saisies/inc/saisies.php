@@ -170,8 +170,7 @@ function saisie_identifier($saisie, $regenerer = false) {
  * Vérifier tout un formulaire tel que décrit avec les Saisies
  *
  * @param array $formulaire Le contenu d'un formulaire décrit dans un tableau de Saisies
- * @param bool $saisies_masquees_nulles   Si TRUE, les saisies masquees selon afficher_si ne seront pas verifiees, leur valeur etant forcee a NULL.
- *                                        Cette valeur NULL est transmise a traiter (via set_request).
+ * @param bool $saisies_masquees_nulles Si TRUE, les saisies masquées selon afficher_si ne seront pas verifiées, leur valeur étant forcée a NULL. Cette valeur NULL est transmise à traiter (via set_request).
  * @return array Retourne un tableau d'erreurs
  */
 function saisies_verifier($formulaire, $saisies_masquees_nulles=true){
@@ -214,7 +213,7 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles=true){
 				))
 			)
 		)
-			$erreurs[$champ] = _T('info_obligatoire');
+			$erreurs[$champ] = $saisie['options']['erreur_obligatoire'] ? $saisie['options']['erreur_obligatoire'] : _T('info_obligatoire');
 		
 		// On continue seulement si ya pas d'erreur d'obligation et qu'il y a une demande de verif
 		if ((!isset($erreurs[$champ]) or !$erreurs[$champ]) and is_array($verifier) and $verif_fonction){

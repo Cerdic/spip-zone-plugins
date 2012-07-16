@@ -108,6 +108,12 @@ options:
         options:
           nom: 'obligatoire'
           label: '<:saisies:option_obligatoire_label:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'erreur_obligatoire'
+          label: '<:saisies:option_erreur_obligatoire_label:>'
+          explication: '<:saisies:option_erreur_obligatoire_explication:>'
 defaut:
   options:
     label: '<:saisies:saisie_selection_multiple_titre:>'
