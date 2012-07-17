@@ -9,10 +9,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'activer_edition_directe' => 'Direkt Edition für :',
-	'activer_edition_directe_objet' => 'Activer l\'édition directe pour l\'objet ', # NEW
+	'activer_edition_directe_objet' => 'Aktivierung der Direkten Edition für das Objekt ',
 
 	// D
-	'desactiver_edition_directe_objet' => 'Désactiver l\'édition directe pour l\'objet ', # NEW
+	'desactiver_edition_directe_objet' => 'Désactiver l\'édition directe pour l\'objet ', # Deaktivierung der Direkten Edition für das Objekt
 
 	// T
 	'titre_plugin' => 'Direkte Edition',
