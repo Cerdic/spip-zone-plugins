@@ -52,11 +52,18 @@ function formulaires_reserv_verifier_dist($id,$date_deb){
     include_spip('inc/compare_date');
     $date_debut = date("Y-m-d H:i:s", mktime ($heured,$minuted,0, $moisd, $jourd, $anneed));
     $date_fin   = date("Y-m-d H:i:s", mktime ($heuref,$minutef,0, $moisf, $jourf, $anneef));
-    if (compare_date($date_debut,$id)) {
+    $retour_debut=compare_date($date_debut,$id);
+    $retour_fin=compare_date($date_fin,$id);
+
+    if ($retour_debut=="2") {
         $erreurs['date_debut'] = "Il y a déja une réservation à ce moment là !";
     }
-    if (compare_date($date_fin,$id)) {
+    if ($retour_fin=="2") {
         $erreurs['date_fin'] = "Il y a déja une réservation à ce moment là !";
+    }
+    if ($retour_debut=="1" and $retour_fin=="3") {
+        $erreurs['date_fin'] = "Il y a déja une réservation à ce moment là !";
+        $erreurs['date_debut'] = "Il y a déja une réservation à ce moment là !";
     }
     if (count($erreurs)) {
         $erreurs['message_erreur'] = 'Votre saisie contient des erreurs !';
@@ -82,7 +89,7 @@ function formulaires_reserv_traiter_dist($id,$date_deb){
     $date_fin   = date("Y-m-d H:i:s", mktime ($heuref,$minutef,0, $moisf, $jourf, $anneef));
 
     $retour['message_ok'] = "bravo";
-    $retour['redirect'] = "#CHEMIN{contenu/page-forum}";
+    $retour['redirect'] = "spip.php?page=affichage_orr";
 
     $objet = "orr_reservation";
     // utilisation API editer_objet pour l'insertion en BDD'

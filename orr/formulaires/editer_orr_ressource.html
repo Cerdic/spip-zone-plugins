@@ -7,6 +7,12 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_orr_ressource' value='#ENV{id_orr_ressource}' />
 		<ul>
+			<li class="editer_nom_ressource obligatoire[ (#ENV**{erreurs}|table_valeur{message}|oui)erreur]">
+				<label for="champ_nom_ressource"><:nom_ressource:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{message})</span>]
+				<input type="text" id="toto" name="nom_reservation" value="" />
+				<span class="error-message"></span>
+			</li>
 
 			[(#SAISIE{input, orr_ressource_nom, obligatoire=oui,
 				label=<:orr_ressource:label_orr_ressource_nom:>,
@@ -22,3 +28,19 @@
 	</div></form>
 	]
 </div>
+<script type="text/javascript">
+
+$("#toto").ColorPicker({
+onSubmit: function(hsb, hex, rgb, el) {
+		$(el).val(hex);
+		$(el).ColorPickerHide();
+	},
+	onBeforeShow: function () {
+		$(this).ColorPickerSetColor(this.value);
+	}
+})
+.bind('keyup', function(){
+	$(this).ColorPickerSetColor(this.value);
+});
+
+</script>
