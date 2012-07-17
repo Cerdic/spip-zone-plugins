@@ -1,0 +1,38 @@
+#SET{jour,#ENV{jour}}
+#SET{jourplusun,#ENV{jourplus}}
+#SET{idressource,#ENV{idressource}}
+
+[(#REM) affichage d'une reservation de plusieurs jours - Premier Jour ]
+<BOUCLE_affichreserv2(ORR_RESERVATIONS){id_orr_ressource=#ENV{idressource}}{orr_date_debut > #GET{jour}}{orr_date_debut < #GET{jourplusun}}{orr_date_fin > #GET{jourplusun}}>
+<div>
+    <p id="dir_#ENV{idressource}_2#COMPTEUR_BOUCLE" class="nomreservation">#ORR_RESERVATION_NOM <img src="#CHEMIN{img/bas.png}" alt="bas" /></p>
+    <p id="click_dir_#ENV{idressource}_2#COMPTEUR_BOUCLE" id="dir_lundi_#ENV{idressource}_2#COMPTEUR_BOUCLE_click"style="">[(#ORR_DATE_DEBUT|affdate{'h:i'})]-->...</p>
+    <hr/>
+</div>
+</BOUCLE_affichreserv2>
+
+[(#REM) affichage d'une reservation plusieurs jours - Jour milieu ]
+<BOUCLE_affichreserv3(ORR_RESERVATIONS){id_orr_ressource=#ENV{idressource}}{orr_date_debut < #GET{jour}}{orr_date_fin > #GET{jour}}{orr_date_fin > #GET{jourplusun}}>
+<div>
+    <p id="dir_#ENV{idressource}_3#COMPTEUR_BOUCLE_[(#GET{jour}|affdate{jour})]" class="nomreservation">#ORR_RESERVATION_NOM <img src="#CHEMIN{img/bas.png}" alt="bas" /></p>
+    <p id="click_dir_#ENV{idressource}_3#COMPTEUR_BOUCLE_[(#GET{jour}|affdate{jour})]" style="">...<-->...</p>
+    <hr/>
+</div>
+</BOUCLE_affichreserv3>
+
+[(#REM) affichage d'une reservation plusieurs jours - Dernier Jour ]
+<BOUCLE_affichreserv4(ORR_RESERVATIONS){id_orr_ressource=#ENV{idressource}}{orr_date_debut < #GET{jour}}{orr_date_fin > #GET{jour}}{orr_date_fin < #GET{jourplusun}}>
+<div>
+    <p id="dir_#ENV{idressource}_5#COMPTEUR_BOUCLE" class="nomreservation">#ORR_RESERVATION_NOM <img src="#CHEMIN{img/bas.png}" alt="bas" /></p>
+    <p id="click_dir_#ENV{idressource}_5#COMPTEUR_BOUCLE" style="">...-->[(#ORR_DATE_FIN|affdate{"H:i"})]</p>
+    <hr/>
+</div>
+</BOUCLE_affichreserv4>
+
+[(#REM) affichage pour reservation d'une journée ]
+<BOUCLE_AffichReserv1(ORR_RESERVATIONS){id_orr_ressource=#ENV{idressource}}{orr_date_debut > #GET{jour}}{orr_date_fin < #GET{jourplusun}}>
+<div>
+    <p id="dir_#ENV{idressource}_#COMPTEUR_BOUCLE" class="nomreservation">#ORR_RESERVATION_NOM <img src="#CHEMIN{img/bas.png}" alt="bas" /></p>
+    <p id="click_dir_#ENV{idressource}_#COMPTEUR_BOUCLE" style="">[(#ORR_DATE_DEBUT|affdate{'H:i'})]   [(#ORR_DATE_FIN|affdate{"H:i"})]</p>
+</div>
+</BOUCLE_AffichReserv1>
