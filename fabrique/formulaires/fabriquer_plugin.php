@@ -93,6 +93,7 @@ function formulaires_fabriquer_plugin_charger_dist() {
 
 
 function formulaires_fabriquer_plugin_verifier_dist(){
+
 	// cas d'action qui n'ont pas a être testées ici.
 	if (_request('f_action')) {
 		return array(); // forcer aucune erreur
@@ -727,7 +728,7 @@ function fabrique_renseigner_objet($objet) {
 
 	// 'spip_articles' ou
 	// 'autreconnect:spip_articles'
-	list($connect, $table) = explode(':', $table);
+	list($connect, $table) = str_pad(explode(':', $table), 2, null);
 	if (!$table) {
 		$table = $connect;
 		$connect = '';

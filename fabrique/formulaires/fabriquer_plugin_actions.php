@@ -202,6 +202,9 @@ function fabrique_recuperer_et_stocker_les_images($data) {
 	// _FILES[paquet][name][logo][taille]
 	// _FILES[objets][name][n][logo][taille] n : numero de l'objet
 	foreach (array('paquet', 'objets') as $type) {
+		// aucun objet declarer, pas la peine de chercher le reste.
+		if (!isset($_FILES[$type])) continue;
+
 		// on cherche s'il y a une numero d'objet intercale dans le tableau.
 		$prof = !isset($_FILES[$type]['name']['logo']); // paquet : 0 / objet : 1
 		$names = $prof ? $_FILES[$type]['name'] : array($_FILES[$type]['name']);
