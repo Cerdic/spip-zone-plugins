@@ -1,6 +1,13 @@
 <traduction module="edir" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/edition_directe/trunk/lang/" reference="fr">
-	<langue code="de" />
-	<langue code="en" />
+	<langue code="de" url="http://trad.spip.org/tradlang_module/edir?lang_cible=de">
+		<traducteur nom="Rainer Müller" lien="http://trad.spip.org/auteur/rainer-muller" />
+	</langue>
+	<langue code="en" url="http://trad.spip.org/tradlang_module/edir?lang_cible=en">
+		<traducteur nom="Rainer Müller" lien="http://trad.spip.org/auteur/rainer-muller" />
+	</langue>
+	<langue code="es" url="http://trad.spip.org/tradlang_module/edir?lang_cible=es">
+		<traducteur nom="Rainer Müller" lien="http://trad.spip.org/auteur/rainer-muller" />
+	</langue>
 	<langue code="fa" url="http://trad.spip.org/tradlang_module/edir?lang_cible=fa">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
 	</langue>
