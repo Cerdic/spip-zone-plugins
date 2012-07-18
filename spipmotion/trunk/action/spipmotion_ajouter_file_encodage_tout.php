@@ -55,7 +55,7 @@ function action_spipmotion_ajouter_file_encodage_tout_post($format=false){
 		spipmotion_genere_file($fichier['id_document'],$format);
 	}
 	
-	$conversion_directe = charger_fonction('fact_convertir_direct','inc');
+	$conversion_directe = charger_fonction('facd_convertir_direct','inc');
 	$conversion_directe();
 }
 ?>
