@@ -541,11 +541,11 @@ _ • {predvolený:} automatické nahrádzanie (od verzie 2.0).
 	// M
 	'mailcrypt:description' => 'Hides all the email links in your textes and replaces them with a Javascript link which activates the visitor\'s email programme when the link is clicked. This antispam tool attempts to prevent web robots from collecting email addresses which have been placed in forums or in the text displayed by the tags in your templates.',
 	'mailcrypt:nom' => 'Šifrovanie pošty',
-	'maj_auto:description' => 'Cet outil vous permet de gérer facilement la mise à jour de vos différents plugins, récupérant notamment le numéro de révision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouvé sur <code>zone.spip.org</code>.
+	'maj_auto:description' => 'Tento nástroj vám umožňuje ľahko riadiť aktualizáciu rôznych zásuvných modulov, vrátane zistenia čísla revízie v súbore <code>svn.revision</code> a jeho porovnanie s tým, ktoré sa nachádza na stránke <code>zone.spip.org</code>.
 
-La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tentez de procéder manuellement à la mise à jour du plugin.
+Zoznam, ktorý sa nachádza vyššie, vám ponúka možnosť spustiť automatickú aktualizáciu   každého zásuvného modulu SPIPu, ktorý bol predtým nainštalovaný v priečinku <code>plugins/auto/</code>. Ostatné zásuvné moduly z priečinku <code>plugins/</code> alebo <code>extensions/</code> sú uvedené len pre vašu informáciu. Ak sa nenájde vzdialená revízia, skúste zásuvný modul nainštalovať manuálne.
 
-Note : les paquets <code>.zip</code> n\'étant pas reconstruits instantanément, il se peut que vous soyez obligé d\'attendre un certain délai avant de pouvoir effectuer la totale mise à jour d\'un plugin tout récemment modifié.', # NEW
+Poznámka: balíky <code>.zip</code> sa nevytvoria nanovo ihneď; môže sa stať, že predtým, ako budete môcť začať s úplnou aktualizáciou zásuvného modulu, ktorý bol nedávno zmenený, budete musieť nejaký čas počkať.',
 	'maj_auto:nom' => 'Automatické aktualizácie',
 	'masquer:description' => 'Tento nástroj vám umožňuje schovať na verejnej stránke bez akejkoľvek zmeny svojich šablón obsah (rubriky alebo články), ktorého kľúčové slová sú zadané nižšie. Ak schováte rubriku, bude schovaná aj celá jej vetva.[[%mot_masquer%]]
 
@@ -628,11 +628,11 @@ Ak zásuvný modul obnovíte kliknutím na balík, modul Vreckový nožík sa s�
 	'paragrapher2:description' => 'The SPIP function <code>paragrapher()</code> inserts the tags <p> and </p> around all texts which do not have paragraphs. In order to have a finer control over your styles and layout, you can give a uniform look to your texts throughout the site.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Odseky',
 	'pipelines' => 'Entry points used:',
-	'previsualisation:description' => 'Par défaut, SPIP permet de prévisualiser un article dans sa version publique et stylée, mais uniquement lorsque celui-ci a été « proposé à l’évaluation ». Hors cet outil permet aux auteurs de prévisualiser également les articles pendant leur rédaction. Chacun peut alors prévisualiser et modifier son texte à sa guise.
+	'previsualisation:description' => 'Podľa predvolených nastavení SPIP umožňuje zobraziť ukážku článku, ako bude vyzerať po publikovaní a použití štýlov, ale iba v prípade, že článok bol "odoslaný na schválnenie". Okrem toho si autori môžu zobraziť aj ukážky článkov, ktoré sa upravujú. Každý si môže zobraziť túto ukážku a upravovať text tak, ako chce.
 
 
 
-@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que vos rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », vous devez l’autoriser (dans le menu {[Configuration&gt;Fonctions avancées->./?exec=config_fonctions]} de l’espace privé).', # NEW
+@puce@ Pozor! Táto funkcia nezasahuje do práv na zobrazenie ukážky textu. Ak chcete, aby mali vaši redaktori naozaj právo na zobrazenie ukážok článkov, ktoré sa upravujú, musíte to povoliť (v menu {[Konfigurácia&gt;Pokročilé funkcie->./?exec=config_fonctions]} v súkromnej zóne).',
 	'previsualisation:nom' => 'Zobrazujú sa články',
 	'puceSPIP' => 'Povoliť klávesové skratky "*"',
 	'puceSPIP_aide' => 'Odrážka SPIPU: <b>*</b>',
