@@ -48,10 +48,7 @@
 				<input type="text" name="id_asso" value="[(#ENV{id_asso})]" id="id_asso"  class="text" />
 			</li>
 		]
-			<li class="editer_commentaire">
-				<label for="commentaire"><:asso:adherent_libelle_commentaires:></label>
-				<textarea name="commentaire" id="commentaire"  rows="3">[(#ENV{commentaire})]</textarea>
-			</li>
+			<<INCLURE{fond=inc/saisir_commentaires, commentaire }>
 		</ul>
 		[(#REM)<!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
 		<!--extra-->
@@ -89,7 +86,7 @@
 		</div>
 	<B_groupes_non_membre>
 		<p class="boutons">
-			<input type="submit" value="<:pass_ok:>" class="submit" name="bsubmit" />
+			<input type="submit" value="<:asso:bouton_modifier:>" class="submit" name="bsubmit" />
 		</p>
     </form>
 </div>

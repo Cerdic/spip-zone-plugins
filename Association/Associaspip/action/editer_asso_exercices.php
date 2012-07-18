@@ -25,9 +25,9 @@ function action_editer_asso_exercices_dist()
 	'fin' => association_recupere_date(_request('fin')),
     );
     include_spip('base/association');
-    if ($id_exercice) { /* modification */
+    if ($id_exercice) { // modification
 	sql_updateq('spip_asso_exercices', $champs, "id_exercice=$id_exercice");
-    } else { /* ajout */
+    } else { // ajout
 	$id_exercice = sql_insertq('spip_asso_exercices', $champs);
 	if (!$id_exercice)
 	    $erreur = _T('asso:erreur_sgbdr');

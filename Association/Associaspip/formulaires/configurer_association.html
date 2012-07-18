@@ -2,8 +2,7 @@
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
     <form name="formulaire_#FORM" method="post" action="#ENV{action}">
-	<div>
-		#ACTION_FORMULAIRE{#ENV{action}}
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<ul>
 			<li class="fieldset">
 				<!-- Informations sur l'association -->
@@ -697,6 +696,5 @@ Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" es
 		<p class="boutons">
 			<input type="submit" value="<:pass_ok:>" class="submit" />
 		</p>
-	</div>
 	</form>
 </div>

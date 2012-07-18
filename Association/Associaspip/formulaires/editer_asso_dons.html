@@ -2,8 +2,7 @@
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
     <form name="formulaire_#FORM" method="post" action="#ENV{action}">
-	<div>
-		#ACTION_FORMULAIRE{#ENV{action}}
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<ul>
 			<li class="editer_date_don">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_don})</span>]
@@ -31,14 +30,8 @@
 				<input type="text" name="contrepartie" [value="(#ENV{contrepartie})"] id="contrepartie"  class="text" />
 				[(#META{/association/recufiscal}|et{#PLUGIN{fpdf}}|oui)<em class="explication"><:asso:dons_aide_contrepartie:></em>]
 			</li>
-			<li class="editer_commentaire">
-				<label for="commentaire"><:asso:remarques:></label>
-				<textarea name="commentaire" id="commentaire"  rows="3">[(#ENV{commentaire})]</textarea>
-			</li>
+			<INCLURE{fond=inc/saisir_commentaires, commentaire }>
 		</ul>
-		<p class="boutons">
-			<input type="submit" value="<:pass_ok:>" class="submit" />
-		</p>
-	</div>
+		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_don} }>
 	</form>
 </div>

@@ -2,8 +2,7 @@
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
     <form name="formulaire_#FORM" method="post" action="#ENV{action}">
-	<div>
-		#ACTION_FORMULAIRE{#ENV{action}}
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<fieldset>
 			<legend><:asso:ressources_libelle_acquisition:></legend>
 			<ul>
@@ -86,17 +85,11 @@
 					</div>
 			] [(#REM)<!-- Anciens statuts textuels -->]
 				</li>
-				<li class="editer_commentaire">
-					<label for="commentaire"><:asso:libelle_commentaire:></label>
-					<textarea name="commentaire" id="commentaire"  class="formo" rows="3">[(#ENV{commentaire})]</textarea>
-				</li>
+				<INCLURE{fond=inc/saisir_commentaires, commentaire }>
 			</ul>
 		</fieldset>
 		[(#REM)<!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
 		<!--extra-->
-		<p class="boutons">
-			<input type="submit" value="<:pass_ok:>" class="submit" />
-		</p>
-	</div>
+		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_ressource} }>
 	</form>
 </div>

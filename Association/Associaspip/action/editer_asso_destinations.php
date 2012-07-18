@@ -23,9 +23,9 @@ function action_editer_asso_destinations_dist()
 	'commentaire' => _request('commentaire'),
     );
     include_spip('base/association');
-    if ($id_destination) { /* modification */
+    if ($id_destination) { // modification
 	sql_updateq('spip_asso_destination', $champs, "id_destination=$id_destination");
-    } else { /* ajout */
+    } else { // ajout
 	$id_destination = sql_insertq('spip_asso_destination', $champs);
 	if (!$id_destination)
 	    $erreur = _T('asso:erreur_sgbdr');

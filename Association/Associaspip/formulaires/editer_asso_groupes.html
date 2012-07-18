@@ -2,18 +2,14 @@
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
     <form name="formulaire_#FORM" method="post" action="#ENV{action}">
-	<div>
-		#ACTION_FORMULAIRE{#ENV{action}}
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<ul>
 			<li class="editer_nom">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{nom_groupe})</span>]
 				<label for="nom"><:asso:nom_groupe:></label>
 				<input [(#ENV{_autorisation}|oui) disabled="disabled" [value="(#VAL{asso:groupe_#ENV{id_groupe}}|_T)"]] type="text" name="nom" [(#ENV{_autorisation}|non) [value="(#ENV{nom})"]] id="nom" class="text" />
 			</li>
-			<li class="editer_commentaires">
-				<label for="commentaires"><:asso:commentaires:></label>
-				<textarea name="commentaires" id="commentaires" rows="3">[(#ENV{commentaires})]</textarea>
-			</li>
+			<INCLURE{fond=inc/saisir_commentaires, commentaire }>
 		 [(#ENV{_autorisation}|non)
 			<li class="editer_affichage">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{affichage})</span>]
@@ -22,9 +18,6 @@
 			</li>
 		]
 		</ul>
-		<p class="boutons">
-			<input type="submit" value="<:pass_ok:>" class="submit" />
-		</p>
-	</div>
+		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_groupe} }>
 	</form>
 </div>

@@ -30,20 +30,15 @@ function action_editer_asso_plan()
 		'commentaire' => _request('commentaire'),
 		'type_op' => _request('type_op'),
 	);
-	if (!$id_plan) { /* insertion */
+	if (!$id_plan) { // ajout
 		$id_plan = sql_insertq('spip_asso_plan', $champs);
-	} else { /* c'est une modification */
+	} else { // modification
 		sql_updateq('spip_asso_plan', $champs, "id_plan=$id_plan");
-		$code_initial = _request('code_initial'); /* la fonction charger insere aussi le code initial dans une variable, on le recupere pour verifier si le code a ete modifie */
-		if (($code_initial != '') && ($code_initial != $code)) { /* le code a ete modifie, il faut repercuter la modification dans la table des comptes */
-			if ($code_initial[0]==$GLOBALS['association_metas']['classe_banques']) {
-				$colonne = 'journal'; /* pour les comptes financiers, le code du compte est stocke dans la colonne journal */
-			} else {
-				$colonne = 'imputation'; /* sinon le code du compte est stocke dans la colonne imputation */
-			}
+		$code_initial = _request('code_initial'); // la fonction charger insere aussi le code initial dans une variable, on le recupere pour verifier si le code a ete modifie
+		if (($code_initial != '') && ($code_initial != $code)) { // le code a ete modifie, il faut repercuter la modification dans la table des comptes
+			$colonne = ($code_initial[0]==$GLOBALS['association_metas']['classe_banques']) ? 'journal' : 'imputation'; // pour les comptes financiers, le code du compte est stocke dans la colonne journal sinon le code du compte est stocke dans la colonne imputation
 			sql_updateq('spip_asso_comptes', array($colonne => $code), "$colonne='$code_initial'");
-			/* il faut aussi verifier si ce code initial est utilise par un pc_XXX de la configuration afin de modifier la meta si besoin */
-			switch ($code_initial) {
+			switch ($code_initial) { // il faut aussi verifier si ce code initial est utilise par un pc_XXX de la configuration afin de modifier la meta si besoin
 				case $GLOBALS['association_metas']['pc_cotisations']:
 					ecrire_meta('pc_cotisations', $code, 'oui', 'association_metas');
 					break;
@@ -71,13 +66,11 @@ function action_editer_asso_plan()
 			}
 		}
 	}
-
-	/* si la gestion comptable est activee, on verifie que le plan comptable modifie est valide. Si il ne l'est pas, on desactive la gestion comptable */
-	if ($GLOBALS['association_metas']['comptes']) {
+	if ($GLOBALS['association_metas']['comptes']) { // si la gestion comptable est activee, on verifie que le plan comptable modifie est valide. Si il ne l'est pas, on desactive la gestion comptable
 		include_spip('inc/association_comptabilite');
 		if (!association_valider_plan_comptable()) {
 			ecrire_meta('comptes', 0, 'oui', 'association_metas');
-			/* on desactive les autres modules si ils sont actives */
+			// on desactive les autres modules si ils sont actives
 			if ($GLOBALS['association_metas']['dons'])
 				ecrire_meta('dons', 0, 'oui', 'association_metas');
 			if ($GLOBALS['association_metas']['ventes'])

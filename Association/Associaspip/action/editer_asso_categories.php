@@ -24,12 +24,12 @@ function action_editer_asso_categories_dist()
 	'valeur' => _request('valeur'),
 	'duree' => association_recupere_montant(_request('duree')),
 	'cotisation' => association_recupere_montant(_request('cotisation')),
-	'commentaires' => _request('commentaires'),
+	'commentaires' => _request('commentaire'),
     );
     include_spip('base/association');
-    if ($id_categorie) { /* modification */
+    if ($id_categorie) { // modification
 	sql_updateq('spip_asso_categories', $champs, "id_categorie=$id_categorie");
-    } else { /* ajout */
+    } else { // ajout
 	$id_categorie = sql_insertq('spip_asso_categories', $champs);
 	if (!$id_categorie)
 	    $erreur = _T('asso:erreur_sgbdr');

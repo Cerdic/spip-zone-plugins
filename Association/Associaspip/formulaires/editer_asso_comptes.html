@@ -115,8 +115,6 @@
 		</ul>
 		[(#REM)<!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
 		<!--extra-->
-		<p class="boutons">
-			<input type="submit" value="<:pass_ok:>" class="submit" />
-		</p>
+		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_compte} }>
 	</form>
 </div>

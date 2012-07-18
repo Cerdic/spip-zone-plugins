@@ -1,8 +1,7 @@
 <div class="formulaire_spip formulaire_#FORM">
 	[<p class='erreur'>(#ENV*{message_erreur})</p>]
 	<form method="post" action="#ENV{action}">
-	<div>
-		#ACTION_FORMULAIRE{#ENV{action}}
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<ul>
 			<li class="editer_nom_meta">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{nom_meta})</span>]
@@ -10,9 +9,6 @@
 				<input type="text" name="nom_meta" [value="(#ENV{nom_meta})"] id="nom_meta"  class="text" />
 			</li>
 		</ul>
-		<p class="boutons">
-			<input type="submit" value="<:pass_ok:>" class="submit" />
-		</p>
-	</div>
+		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{nom_meta} }>
 	</form>
 </div>

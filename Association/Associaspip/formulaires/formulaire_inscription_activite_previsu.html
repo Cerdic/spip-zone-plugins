@@ -53,13 +53,8 @@
 				<label for="montant"><:asso:activite_libelle_montant_inscription:></label>
 				<input name="montant" id="montant" type="[(#HTML5|?{number,text})]" class="number integer" value="[(#ENV{montant})]" />
 			</li>
-			<li class="editer_commentaire">
-				<label for="commentaire"><:asso:activite_libelle_commentaires:></label>
-				<textarea name="commentaire" id="commentaire" rows="3">[(#ENV{commentaire})]</textarea>
-			</li>
+			<INCLURE{fond=inc/saisir_commentaires, commentaire }>
 		</ul>
-		<p class="boutons">
-			<input type="submit" name="bouton" class="spip_bouton" value="[(#ENV{bouton})]" />
-		</p>
+		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_activite} }>
 	</form>
 </div>

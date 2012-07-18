@@ -2,8 +2,7 @@
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
     <form name="formulaire_#FORM" method="post" action="#ENV{action}">
-	<div>
-		#ACTION_FORMULAIRE{#ENV{action}}
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<ul>
 			<li class="editer_intitule">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{intitule})</span>]
@@ -20,14 +19,8 @@
 				<label for="duree"><:asso:exercice_libelle_fin:></label>
 				<input name="fin" type="[(#HTML5|?{date,text})]" [value="(#ENV{fin})"] id="fin" class="date" />
 			</li>
-			<li class="editer_commentaire">
-				<label for="commentaire"><:asso:libelle_commentaire:></label>
-				<textarea name="commentaire" id="commentaire" rows="3">[(#ENV{commentaire})]</textarea>
-			</li>
+			<INCLURE{fond=inc/saisir_commentaires, commentaire }>
 		</ul>
-		<p class="boutons">
-			<input type="submit" value="<:asso:bouton_envoyer:>" class="submit" />
-		</p>
-	</div>
+		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_exercice} }>
 	</form>
 </div>

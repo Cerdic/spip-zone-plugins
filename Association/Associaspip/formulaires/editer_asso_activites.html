@@ -2,8 +2,7 @@
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
     <form name="formulaire_#FORM" method="post" action="#ENV{action}">
-	<div>
-		#ACTION_FORMULAIRE{#ENV{action}}
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<fieldset>
 			<legend>Inscription</legend>
 			<ul>
@@ -18,10 +17,7 @@
 					<label for="nombre_inscrits"><:asso:activite_libelle_nombre_inscrit:></label>
 					<input name="inscrits" type="[(#HTML5|?{number,text})]" [value="(#ENV{inscrits})"] id="nombre_inscrits" class="number integer" [(#ENV{date_paiement}|oui) readonly="readonly"]/>
 				</li>
-				<li class="editer_commentaire">
-					<label for="commentaire"><:asso:libelle_commentaire:></label>
-					<textarea name="commentaire" id="commentaire" rows="3">[(#ENV{commentaire})]</textarea>
-				</li>
+				<INCLURE{fond=inc/saisir_commentaires, commentaire }>
 			</ul>
 			[(#REM)<!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
 			<!--extra-->
@@ -42,9 +38,6 @@
 				<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, env}>
 			</ul>
 		</fieldset>
-		<p class="boutons">
-			<input type="submit" value="<:asso:bouton_envoyer:>" class="submit" />
-		</p>
-	</div>
+		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_activite} }>
 	</form>
 </div>

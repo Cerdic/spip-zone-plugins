@@ -94,8 +94,6 @@
 			]
 			</ul>
 		</fieldset>
-		<p class="boutons">
-			<input type="submit" value="[(#ENV{id_pret}|?{<:asso:bouton_modifier:>,<:asso:bouton_ajouter:>})]" class="submit" />
-		</p>
+		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_pret} }>
 	</form>
 </div>

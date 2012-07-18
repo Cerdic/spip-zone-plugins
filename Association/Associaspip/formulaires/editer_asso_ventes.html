@@ -64,15 +64,10 @@
 					<label for="frais_envoi"><:asso:frais_d_envoi_en_e__:></label>
 					<input type="[(#HTML5|?{number,text})]" name="frais_envoi" [value="(#ENV{frais_envoi})"] id="frais_envoi"  class="number float price" />
 				</li>
-				<li class="editer_commentaire">
-					<label for="commentaire"><:asso:libelle_commentaire:></label>
-					<textarea name="commentaire" id="commentaire"  rows="3">[(#ENV{commentaire})]</textarea>
-				</li>
+				<INCLURE{fond=inc/saisir_commentaires, commentaire }>
 			</ul>
 		</fieldset>
 		<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, champs_legende=Paiement, env}>
-		<p class="boutons">
-			<input type="submit" value="[(#ENV{id_vente}|?{<:asso:bouton_modifier:>,<:asso:bouton_ajouter:>})]" class="submit" />
-		</p>
+		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_vente} }>
 	</form>
 </div>

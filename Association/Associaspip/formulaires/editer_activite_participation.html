@@ -2,8 +2,7 @@
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
     <form name="formulaire_#FORM" method="post" action="#ENV{action}">
-	<div>
-		#ACTION_FORMULAIRE{#ENV{action}}
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<ul>
 			<INCLURE{fond=inc/choisir_mbr_nom, champ_id=id_adherent, valeur_id=#ENV{id_adherent}, champ_nom=nom, valeur_nom=#ENV{nom} lecture_seule=1}>
 			<li class="editer_commentaire">
@@ -27,9 +26,6 @@
 			</li>
 			<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, env>
 		</ul>
-		<p class="boutons">
-			<input type="submit" value="<:asso:bouton_envoyer:>" class="submit" />
-		</p>
-	</div>
+		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_activite} }>
 	</form>
 </div>

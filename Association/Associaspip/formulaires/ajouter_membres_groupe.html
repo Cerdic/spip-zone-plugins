@@ -3,8 +3,7 @@
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
     <form name="formulaire_#FORM" method="post" action="#ENV{action}">
-    <div>
-	#ACTION_FORMULAIRE{#ENV{action}}
+	<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 	<h3 class="legend"><:asso:ajouter_membres_au_groupe:></h3>
 	<p class="pagination">#PAGINATION</p>
 	<ul>
@@ -17,10 +16,7 @@
 	    </li>
 </BOUCLE_membres>
 	</ul>
-	<p class="boutons">
-	    <input type="submit" value="<:asso:ajouter:>" class="submit" />
-	</p>
-    </div>
+	<INCLURE{fond=inc/bouton_validation, pass_ok=0 }>
     </form>
 </div>
 </B_membres>

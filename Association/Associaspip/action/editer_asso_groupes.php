@@ -20,13 +20,13 @@ function action_editer_asso_groupes_dist()
     $erreur = '';
     $champs = array(
 	'nom' => _request('nom'),
-	'commentaires' => _request('commentaires'),
+	'commentaires' => _request('commentaire'),
 	'affichage' => intval(_request('affichage')),
     );
     include_spip('base/association');
-    if ($id_groupe) { /* modification */
+    if ($id_groupe) { // modification
 	sql_updateq('spip_asso_groupes', $champs, "id_groupe=$id_groupe");
-    } else { /* ajout */
+    } else { // ajout
 	$id_groupe = sql_insertq('spip_asso_groupes', $champs);
 	if (!$id_groupe)
 	    $erreur = _T('asso:erreur_sgbdr');

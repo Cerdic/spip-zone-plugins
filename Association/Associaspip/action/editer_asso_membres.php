@@ -25,7 +25,7 @@ function action_editer_asso_membres()
 		'nom_famille' => _request('nom_famille'),
 #		'fonction' => _request('fonction'),
 	);
-	/* pour ne pas ecraser les champs quand ils sont desactives */
+	// pour ne pas ecraser les champs quand ils sont desactives
 	if ($GLOBALS['association_metas']['civilite']=='on')
 		$modifs['sexe'] = _request('sexe');
 	if ($GLOBALS['association_metas']['prenom']=='on')
@@ -44,4 +44,5 @@ function action_editer_asso_membres()
 
 	return (array($id_auteur,''));
 }
+
 ?>

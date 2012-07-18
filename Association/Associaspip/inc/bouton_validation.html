@@ -1,0 +1,13 @@
+[(#REM)<!-- simple bouton de validation (donc "valider" ou "ok" normalement) contextualise au contexte d'edition :
+- "ajouter" /"creer" pour un nouvel enregistrement,
+- "modifier" pour un enregistrement existant.
+
+parametres =
+- pass_ok (texte) : identifiant de l'enregistrement en cours d'edition
+
+maj:2012-06-15; version:0.1.0; licence:GPL; copyleft:gilcot; -->]
+
+#CACHE{0}
+<p class="boutons">
+	<input type="submit" value="[(#ENV{pass_ok}|?{<:asso:bouton_modifier:>,<:asso:bouton_ajouter:>})]" class="submit" />
+</p>
