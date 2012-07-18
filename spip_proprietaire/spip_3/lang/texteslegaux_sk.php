@@ -17,10 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 - {{[vizitka človeka zodpovedného za stránku,->@responsable@]}}
 - {{[vizitka administrátora,->@administrateur@]}}
 - {{[vizika webmastera.->@webmaster@]}}',
-	'conditions_utilisation_abus' => '{{{Abuse}}}
+	'conditions_utilisation_abus' => '{{{Zneužite stránky}}}
 
-Pursuant to [French law n° 2004-575 of 21 june 2004 on confidence in the digital economy|See the text (legifrance.gouv.fr) [fr]->http://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000801164], to report a content issue or if you are a victim of fraudulent use of the site {{[@nom_site@->@url_site@]}}, please contact the administrator site by e-mail: [@proprietaire_mail_administratif@->mailto:@proprietaire_mail_administratif@].
-', # NEW
+Podľa [francúzskeho zákona č.  2004-575 z 21. júna 2004 o dôverných informáciách v digitálnej ekonomike|Zobraziť text (legifrance.gouv.fr) [fr]->http://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000801164], ak chcete nahlásiť pochybný text na stránke alebo ak ste sa stali obeťou zneužitia stránky {{[@nom_site@->@url_site@],}} prosím, kontaktujte administrátora stránky prostredníctvom e-mailu: [@proprietaire_mail_administratif@->mailto:@proprietaire_mail_administratif@].',
 	'conditions_utilisation_cookies' => '{{{Cookies}}}
 
 Some personal information and some witnesses markers may be recorded by {{[@nom_site@->@url_site@]}} on the personal computer of the user without his permission ({"cookies" or "Java applets"}). Unless explicitly stated otherwise [*], these technical procedures are not essential for the proper functioning of {{[@nom_site@->@url_site@]}} and their use can of course be disabled in the browser used by the Internet user without its navigation may be affected. {{None of this information is retained by the site after disconnecting from the Internet.}}
@@ -86,10 +85,9 @@ Internetovú stránku {{[@nom_site@->@url_site@]}} prevádzkuje jej šéfredakto
 
 	// M
 	'mention_cnil' => 'Tento nadpisom {{[@nom_site@->@url_site@]}} mal predmet  deklarácie u {{<abbr title="Francúzska štátna komisia pre počítačové slobody - Commission Nationale de l\'informatique et des Libertés - www.cnil.fr">CNIL</abbr>}} dňa @date_cnil@, zaregistrovaná pod číslom {{@numero_cnil@.}}',
-	'mentions_legales_copyright' => '{{{Contents and copyright}}}
+	'mentions_legales_copyright' => '{{{Obsah stránky a autorské práva}}}
 
-Pursuant to [articles L. 111-1 et L. 123-1 of the French Intellectual Property Code|See the text (legifrance.gouv.fr) [fr]->http://www.legifrance.gouv.fr/affichCode.do?cidTexte=LEGITEXT000006069414], the entire contents of this site ({texts, images, videos and any media in general}), unless explicitly stated otherwise, is {{protected by copyright}}. Reproduction, even partial, of the contents of pages on this site without prior agreement of @proprietaire_forme@ [{{@proprietaire_nom@}}->#proprietaire] is strictly prohibited.
-', # MODIF
+Podľa [paragrafov L. 111-1 a L. 123-1 francúzskeho zákona o duševnom vlastníctve|Zobraziť text (legifrance.gouv.fr) [fr]->http://www.legifrance.gouv.fr/affichCode.do?cidTexte=LEGITEXT000006069414] je celý obsah tejto stránky ({texty, obrázky, videá a akékoľvek multimédiá vo všeobecnosti}) {{chránený autorskými právami,}} ak nie je uvedené inak. Rozširovanie obsahu stránok tejto internetovej stránky, i čiatočné,  bez predchádzajúceho súhlasu  @proprietaire_forme@ [{{@proprietaire_nom@}}->#proprietaire] je prísne zakázané.',
 	'mentions_legales_fonctionnement' => '{{{Fungovanie stránky}}}
 
 Stránky a obsah týchto stránok je vytvorený v programe {{SPIP,}} v slobodnom softvéri, distribuovanom s licenciou GNU / GPL ({licencia General Public License}). Môžete ho slobodne využívať na vytvorenie svojej vlastnej internetovej stránky. Ak chcete zistiť viac informácií, navštívte stránku: [spip.net.->http://www.spip.net]
