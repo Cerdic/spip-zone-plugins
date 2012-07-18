@@ -144,7 +144,7 @@ function association_modifier_operation_comptable($date, $recette, $depense, $ju
 	'recette' => $recette,
 	'depense' => $depense,
 	'journal' => $journal,
-	'justification' => $justification)//,
+	'justification' => $justification,
     );
     if ($id_journal) { // si id_journal est null, ne pas le modifier afin de ne pas endommager l'entree dans la base en editant directement depuis le livre de comptes
 	$modifs['id_journal'] = $id_journal;
