@@ -12,17 +12,17 @@
          	<legend><:rssconfig:label_articles_a_inclure:></legend>
 				<p class="explication"><:rssconfig:explication_articles_a_inclure:></p>
 				<ul>
-					<li class="editer_nb_art[ (#ENV**{erreurs}|table_valeur{nb_art}|oui)erreur]">
+					<li class="editer editer_nb_art[ (#ENV**{erreurs}|table_valeur{nb_art}|oui)erreur]">
 						<label for='nb_art'><:rssconfig:label_nb_art:></label>
 						<p class="explication"><:rssconfig:explication_nb_art:></p>
 						<input type="text" name="nb_art" class="text" id="nb_art" value="#ENV*{nb_art,10}" />
 					</li>
-					<li class="editer_age_art[ (#ENV**{erreurs}|table_valeur{age_art}|oui)erreur]">
+					<li class="editer editer_age_art[ (#ENV**{erreurs}|table_valeur{age_art}|oui)erreur]">
 						<label for='age_art'><:rssconfig:label_age_art:></label>
 						<p class="explication"><:rssconfig:explication_age_art:></p>
 						<input type="text" name="age_art" class="text" id="age_art" value="#ENV*{age_art,3}" />
 					</li>
-               <li class="editer_age_modif[ (#ENV**{erreurs}|table_valeur{age_modif}|oui)erreur]">
+               <li class="editer editer_age_modif[ (#ENV**{erreurs}|table_valeur{age_modif}|oui)erreur]">
                   <label for='age_modif'><:rssconfig:label_age_modif:></label>
                   <p class="explication"><:rssconfig:explication_age_modif:></p>
                   <input type="text" name="age_modif" class="text" id="age_modif" value="#ENV*{age_modif,0}" />
@@ -34,7 +34,7 @@
       	<fieldset>
          	<legend><:rssconfig:label_options_articles:></legend>
 				<ul>
-					<li class="editer_creator[ (#ENV**{erreurs}|table_valeur{creator}|oui)erreur]">
+					<li class="editer editer_creator[ (#ENV**{erreurs}|table_valeur{creator}|oui)erreur]">
 						<label for='creator'><:rssconfig:label_creator:></label>
 						<p class="explication"><:rssconfig:explication_creator:></p>
 						<select name="creator" id="creator">
@@ -43,7 +43,7 @@
 							<option value="nom_site_spip"[(#ENV{creator}|=={nom_site_spip}|oui)selected="selected"]><:rssconfig:label_choix_creator_nom_site_spip:></option>
 						</select>
 					</li>
-					<li class="editer_syndication_integrale[ (#ENV**{erreurs}|table_valeur{syndication_integrale}|oui)erreur]">
+					<li class="editer editer_syndication_integrale[ (#ENV**{erreurs}|table_valeur{syndication_integrale}|oui)erreur]">
 						<label><:rssconfig:label_syndication_integrale:></label>
 						<p class="explication"><:rssconfig:explication_syndication_integrale:></p>
 						<div class="choix">
@@ -55,7 +55,7 @@
 							<label for='syndication_integrale_off'><:item_non:></label>
 						</div>
 					</li>
-					<li class="editer_diffuser_rubrique[ (#ENV**{erreurs}|table_valeur{diffuser_rubrique}|oui)erreur]">
+					<li class="editer editer_diffuser_rubrique[ (#ENV**{erreurs}|table_valeur{diffuser_rubrique}|oui)erreur]">
                   <label><:rssconfig:label_diffuser_rubrique:></label>
                   <p class="explication"><:rssconfig:explication_diffuser_rubrique:></p>
                   <div class="choix">
@@ -67,7 +67,7 @@
                      <label for='diffuser_rubrique_off'><:item_non:></label>
                   </div>
                </li>
-               <li class="editer_diffuser_mots[ (#ENV**{erreurs}|table_valeur{diffuser_mots}|oui)erreur]">
+               <li class="editer editer_diffuser_mots[ (#ENV**{erreurs}|table_valeur{diffuser_mots}|oui)erreur]">
                   <label><:rssconfig:label_diffuser_mots:></label>
                   <p class="explication"><:rssconfig:explication_diffuser_mots:></p>
                   <div class="choix">
@@ -79,7 +79,7 @@
                      <label for='diffuser_mots_off'><:item_non:></label>
                   </div>
                </li>
-               <li class="editer_diffuser_documents[ (#ENV**{erreurs}|table_valeur{diffuser_documents}|oui)erreur]">
+               <li class="editer editer_diffuser_documents[ (#ENV**{erreurs}|table_valeur{diffuser_documents}|oui)erreur]">
                   <label><:rssconfig:label_diffuser_documents:></label>
                   <p class="explication"><:rssconfig:explication_diffuser_documents:></p>
                   <div class="choix">
@@ -99,7 +99,7 @@
          	<legend><:rssconfig:label_rubriques:></legend>
 				<p class="explication"><:rssconfig:explication_rubriques:></p>
 				<ul>
-					<li class="editer_rubriques[ (#ENV**{erreurs}|table_valeur{rubriques}|oui)erreur]">
+					<li class="editer editer_rubriques[ (#ENV**{erreurs}|table_valeur{rubriques}|oui)erreur]">
 						<label for='rubriques_a_inclure'><:rssconfig:label_rubriques_a_inclure:></label>
                   [(#REM) Si le selecteur de rubrique est present (dans bonux pour spip2, dans le core pour spip3), on l'utilise) ]
                   [(#CHEMIN{formulaires/selecteur/rubriques.html}|oui) 
