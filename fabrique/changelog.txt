@@ -4,6 +4,12 @@ Ce plugin génère d'autres plugins !
 
 
 
+1.16.4 le 18 07 2012
+--------------------
+
+* Diverses notices PHP
+* Coquille sur str_pad à la place de array_pad
+
 
 1.16.3 le 23 06 2012
 --------------------

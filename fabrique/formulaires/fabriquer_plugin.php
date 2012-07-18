@@ -728,7 +728,7 @@ function fabrique_renseigner_objet($objet) {
 
 	// 'spip_articles' ou
 	// 'autreconnect:spip_articles'
-	list($connect, $table) = str_pad(explode(':', $table), 2, null);
+	list($connect, $table) = array_pad(explode(':', $table), 2, null);
 	if (!$table) {
 		$table = $connect;
 		$connect = '';
