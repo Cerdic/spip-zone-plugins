@@ -43,6 +43,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer_le_lien' => 'Zrušiť odkazy',
 	'supprimer_le_lien_deux_cotes' => 'Zrušiť oba odkazy',
 
+	// T
+	'type' => 'Type', # NEW
+	'type_liaison' => 'Type de liaison', # NEW
+
 	// V
 	'voir' => 'Zobraziť'
 );

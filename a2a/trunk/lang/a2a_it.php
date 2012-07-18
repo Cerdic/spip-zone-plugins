@@ -43,6 +43,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer_le_lien' => 'Scollega',
 	'supprimer_le_lien_deux_cotes' => 'Délier des deux cotés', # NEW
 
+	// T
+	'type' => 'Type', # NEW
+	'type_liaison' => 'Type de liaison', # NEW
+
 	// V
 	'voir' => 'Vedi'
 );
