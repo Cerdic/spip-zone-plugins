@@ -5,7 +5,8 @@
 [(#INCLURE{fond=prive/liste/facd_conversions,
 	titre=<:facd:liste_attente_tous:>,
 	sinon=<:facd:liste_attente_aucun:>,
-	statut=#ARRAY{en_cours,erreur,non},
+	statut=#ARRAY{0,en_cours,1,erreur,2,non},
+	order=maj,
 	nb=30,
 	env,
 	ajax})]

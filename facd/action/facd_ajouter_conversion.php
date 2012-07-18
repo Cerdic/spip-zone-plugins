@@ -24,7 +24,7 @@ function action_facd_ajouter_conversion_dist(){
 	$arg = $securiser_action();
 	list($id_document,$fonction,$format,$options,$mode) = explode('/',$arg);
 	$id_facd_conversion = facd_ajouter_conversion_file($id_document,$fonction,$format,$options,$mode);
-	$convertir_direct = charger_fonction('fact_convertir_direct','inc');
+	$convertir_direct = charger_fonction('facd_convertir_direct','inc');
 	$convertir_direct();
 	return array($id_facd_conversion);
 }
