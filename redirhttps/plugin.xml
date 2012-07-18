@@ -18,5 +18,5 @@
 
 	<options>redirhttps_options.php</options>
 
-	<necessite id="SPIP" version="[2.1.11;3.0.0]" />
+	<necessite id="SPIP" version="[2.1.11;3.0.99]" />
 </plugin>
