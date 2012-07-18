@@ -1,6 +1,6 @@
 <?php
 
-function babbi_headeur_css($flux){
+function babbi_insert_head_css($flux){
 	static $done = false;
 	if (!$done) {
 		$done = true;
@@ -9,9 +9,9 @@ function babbi_headeur_css($flux){
 	return $flux;
 }
 
-function babbi_headeur($flux){
+function babbi_insert_head($flux){
 	$flux .= "<script type='text/javascript' src='".find_in_path('js/menu_babbi.js')."'></script>\n";
-	$flux .= babbi_headeur_css(''); // compat pour les vieux spip
+	$flux .= babbi_insert_head_css(''); // compat pour les vieux spip
 	return $flux;
 }
 ?>
