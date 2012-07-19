@@ -45,11 +45,31 @@
 
 </div>
     <script type="text/javascript">
+                     					var hautbas =true;
+
 		jQuery(document).ready(function(){
+					           				                       	console.log(hautbas);
+
+
 			$(".nomreservation").bind("click",function(event){
 				event.stopPropagation();
 				recupereDir(this);
-				$("#"+"click_"+idDir).fadeToggle();
+				$("#"+"click_"+idDir).toggle("slow", function(){
+                     if ( hautbas == true ){
+				     $("#"+idDir+" .changeclic").attr("src","#CHEMIN{img/haut.png}");
+				       hautbas = false;
+				 console.log(hautbas);
+
+					}else{
+					 $("#"+idDir+" .changeclic").attr("src","#CHEMIN{img/bas.png}");
+					   hautbas = true;
+					                   	console.log(hautbas);
+
+					}
+
+
+				});
+
 			});
 		});
 
@@ -59,3 +79,4 @@
 		idDir = $(classe).attr("id");
 	}
 	</script>
+
