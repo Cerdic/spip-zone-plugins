@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_editors' => '&Agrave; ne pas confondre avec la maison d\'&eacute;dition. Pour les chapitres d\'ouvrage, indiquez ici les personnes ayant dirig&eacute; le le livre. La syntaxe est identique &agrave; celle des auteurs&nbsp;: utilisez la virgule pour s&eacute;parer le nom du pr&eacute;nom et le point-virgule pour s&eacute;parer plusieurs &eacute;diteurs.',
 	'explication_pages' => 'Nombre total de pages (livres, rapports...) ou page de d&eacute;but et page de fin (articles, chapitres...). Dans ce second cas, utilisez le tiret (-) entre la page de d&eacute;but et la page de fin. Exemple&nbsp: <i>125-136</i>.',
 	'explication_publisher' => 'S\'il y a plusieurs &eacute;diteurs, les s&eacute;parer par une virgule.',
+	'export_format' => 'Télécharger la référence au format @format@',
 	'in' => 'in',
 	'item_book' => 'livre',
 	'item_chapter' => 'chapitre de livre',
