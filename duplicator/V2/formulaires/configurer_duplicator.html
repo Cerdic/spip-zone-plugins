@@ -1,0 +1,28 @@
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	<h3 class="titrem"><:duplicator:configuration_duplicator:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+<fieldset><legend><:duplicator:texte_duplicator:></legend>
+
+<label for="sizeLimit"><:duplicator:choix_type:></label>
+<p>
+<input type="checkbox" name="duplic_article" [checked="(#ENV{duplic_article}|!={''}|?{'checked'})"] /> Duplication sur les articles<br />
+<input type="checkbox" name="duplic_rubrique"  [checked="(#ENV{duplic_rubrique}|!={''}|?{'checked'})"] /> Duplication sur les rubriques
+</p>
+
+</fieldset>
+
+
+<div>
+<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+</div>
+</form>
+]
+</div>
+

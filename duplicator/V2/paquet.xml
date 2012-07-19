@@ -1,0 +1,23 @@
+<paquet
+	prefix="duplicator"
+	categorie="edition"
+	version="0.2.0"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="images/apsulis.png"
+	documentation="http://www.spip-contrib.net/Plugin-Duplicator"
+>	
+
+	<nom>Duplicator</nom>
+	<!-- Dupliquer une rubrique et son contenu -->
+
+	<auteur lien="http://demo.apsulis.com">Apsulis</auteur>
+
+	<copyright>2010</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="boite_infos" inclure="duplicator_pipeline.php" />
+
+	<menu nom="configurer_duplicator" titre="duplicator:configuration_duplicator" parent="menu_configuration" icone="images/duplicator.gif" />
+</paquet>
