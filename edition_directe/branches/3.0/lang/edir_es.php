@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'activer_edition_directe' => 'Activar la Edición Directa para:', 
+	'activer_edition_directe' => 'Activar la Edición Directa para:',
 	'activer_edition_directe_objet' => 'Activar la Edición Directa para el objeto ',
 
 	// D
