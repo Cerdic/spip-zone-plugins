@@ -1,8 +1,8 @@
 <paquet
 	prefix="cooliris"
 	categorie="multimedia"
-	version="1.1.1"
-	etat="dev"
+	version="2.0.0"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/cooliris-32.png"
 	meta="cooliris"
