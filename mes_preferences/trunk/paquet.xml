@@ -1,0 +1,19 @@
+<paquet
+	prefix="mes_preferences"
+	categorie="theme"
+	version="0.1.1"
+	etat="dev"
+	compatibilite="[3.0.0-rc;3.0.*]"
+	logo="images/mes_preferences-32.png"
+	documentation=""
+>
+
+	<nom>Mes Pr&eacute;f&eacute;rences</nom>
+
+	<auteur>Arnaud Bérard (Mist. GraphX)</auteur>
+
+	<licence>GNU/GPL</licence>
+	
+	<pipeline nom="header_prive" inclure="mes_preferences_pipelines.php" />
+
+</paquet>
