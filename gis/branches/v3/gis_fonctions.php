@@ -1,6 +1,9 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 include_spip('inc/config');
+include_spip('inc/json');
 
 /** 
  * Filtre dec_to_dms, http://www.statemaster.com/encyclopedia/Geographic-coordinate-conversion
