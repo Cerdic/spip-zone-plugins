@@ -2,6 +2,4 @@
 <INCLURE{fond=inclure/rubriques}{id_rubrique}>
 
 #FORMULAIRE_RECHERCHE
-
-
-<INCLURE{fond=inclure/agenda}{env}{self}{ajax}>
+[(#PLUGIN{agenda}|oui)[(#CALENDRIER_MINI{#ENV{date},'date',#URL_PAGE{jour},#URL_PAGE{calendrier_mini_event.json}})]]
