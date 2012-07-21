@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'seminaire_titre' => 'Séminaire LATP',
+	'seminaire_titre' => 'Séminaire',
 
 	// C
 	'cfg_exemple' => 'Exemple',
