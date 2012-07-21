@@ -90,6 +90,16 @@ function exec_geoportail_config()
 			._T('geoportail:cle_geoportail').' : '
 			."&nbsp;<input type='text' name='geoportail_key' class='fondl' value=\"$geoportail_key\" size=30>"
 			."<input type='submit' name='modifier' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />"
+			
+			/* Mode debug */
+			/*
+			. debut_cadre_trait_couleur("administration-24.gif", true, "", _T('geoportail:geoportail_api'))
+			. '<p>'._T('geoportail:geoportail_api_info').'</p>'
+			. fin_cadre_trait_couleur(true)
+			*/
+			. ($geoportail_js ? "<br/>".$geoportail_js : "")
+			. "<br/><input type='checkbox' name='gpp3' id='gpp3' ".($GLOBALS['meta']['geoportail_gpp3'] ? "CHECKED":"")."><label for='gpp3'>"._T('geoportail:gpp3')."</label>"
+			
 			."</p>"
 			.fin_cadre_relief(true)
 
@@ -139,12 +149,7 @@ function exec_geoportail_config()
 
 			. fin_cadre_trait_couleur(true);
 		
-		/* Mode debug */
-		$form .= debut_cadre_trait_couleur("administration-24.gif", true, "", _T('geoportail:geoportail_api'))
-			. '<p>'._T('geoportail:geoportail_api_info').'</p>'
-			. ($geoportail_js ? $geoportail_js : "")
-			. fin_cadre_trait_couleur(true);	
-					
+				
 		/* Formulaire */
 		echo generer_action_auteur('geoportail_config',
 			'geoportail_config',

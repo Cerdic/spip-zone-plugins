@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cle_geoportail'		=> 'Cl&eacute; d\'utilisation G&eacute;oportail',
 'geoportail_key'		=> 'Consultez le site du G&eacute;oportail pour obtenir une cl&eacute; : <a href="http://api.ign.fr/geoportail/" title="API Geoportail">http://api.ign.fr/geoportail/</a>.',
 'local_js'				=> 'Utiliser le code javascript local.',
+'gpp3'					=> 'Utiliser une cl&eacute; API v.2.0.0beta.',
 'cle_bing'				=> 'Cl&eacute; d\'utilisation BING',
 'geoportail_bing_key'	=> 'Consultez le site de Bing Map pour obtenir une cl&eacute; : <a href="http://bingmapsportal.com/" title="API BING Map">http://bingmapsportal.com/</a>.',
 'cle_yahoo'				=> 'Cl&eacute; d\'utilisation YAHOO',

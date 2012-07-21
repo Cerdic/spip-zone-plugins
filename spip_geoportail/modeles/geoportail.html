@@ -113,6 +113,7 @@ jQuery.geoportail.addMap(
 
 			<B_services>
 			// Ajouter les services disponibles dans les geoservices en fonction de son niveau d'affichage
+			//{id_rubrique IN #GET{rubriques}}{zone IN WLD,#GET{zone}}{statut=publie}{par niveau}
 			<BOUCLE_services(GEOSERVICES){id_rubrique IN #GET{rubriques}}{zone IN WLD,#GET{zone}}{statut=publie}{par niveau}>
 				jQuery.geoportail.addGeoservice ( map, "#TYPE", "#TITRE", '[(#DESCRIPTIF|texte_script|replace{\r,<br\/>}|replace{\n,<br\/>}|replace{</,<\/})]',
 					{	id: #ID_GEOSERVICE,

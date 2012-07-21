@@ -212,7 +212,7 @@ jQuery.geoportail =
 			div.appendChild(ovDiv);
 		}
 		// photo ou carte ?
-		var fond = photo ? 'ORTHOIMAGERY.ORTHOPHOTOS:WMSC' : 'GEOGRAPHICALGRIDSYSTEMS.MAPS:WMSC';
+		var fond = photo ? 'ORTHOIMAGERY.ORTHOPHOTOS' : 'GEOGRAPHICALGRIDSYSTEMS.MAPS';
 		// Recuperer la couche
 		var worldMapPrms = map.getMap().catalogue.getLayerParameters('WLD', fond);
 		worldMapPrms.options.territory = 'WLD';

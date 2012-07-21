@@ -43,6 +43,8 @@ function action_geoportail_config_dist()
 			ecrire_meta('geoportail_yahoo_key',$_POST['yahoo_key']);
 			if (isset($_POST['js'])) ecrire_meta('geoportail_js', true);
 			else effacer_meta ('geoportail_js');
+			if (isset($_POST['gpp3'])) ecrire_meta('geoportail_gpp3', true);
+			else effacer_meta ('geoportail_gpp3');
  			ecrire_metas();
  		}
  		// Autoriser les services
