@@ -17,7 +17,7 @@
 		<td><div class="#EDIT{matiere} matiere">#MATIERE</div></td>
 		<td><div class="#EDIT{texte} texte">#TEXTE</div></td>
 		<td>
-		<BOUCLE_doc(DOCUMENTS){id_objet=#ID_DEVOIR}{objet=devoir}></BOUCLE_doc>
+		<!--<BOUCLE_doc(DOCUMENTS){id_objet=#ID_DEVOIR}{objet=devoir}><ul><li>[(#LOGO_DOCUMENT|#URL_DOCUMENT)]</li><li>#TITRE</li></ul></BOUCLE_doc>-->
 		<BOUCLE_doc2(spip_documents_liens){id_objet=#ID_DEVOIR}{objet=devoir}>
            <BOUCLE_affiche_doc(spip_documents){id_document= #ID_DOCUMENT}>
               #PUCE [(#LOGO_DOCUMENT|#URL_DOCUMENT)] #TITRE <br>
