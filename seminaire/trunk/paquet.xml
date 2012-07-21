@@ -3,12 +3,12 @@
 	categorie="date"
 	version="2.0.0"
 	etat="dev"
-	compatibilite="[3.0.0-rc;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/seminaire-64.png"
 	documentation="http://www.spip-contrib.net/Seminaire-LATP"
 	schema="1.0.0" 
 >
-	<nom>Séminaire LATP</nom>
+	<nom>Séminaire</nom>
 
 	<auteur lien='http://www.spip-contrib.net/Amaury-Adon'>Amaury Adon</auteur>
 
