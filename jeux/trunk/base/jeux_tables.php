@@ -8,19 +8,27 @@ global $tables_jointures;
 
 $table_des_tables['jeux'] = 'jeux';
 $table_des_tables['jeux_resultats'] = 'jeux_resultats';
-$jeux = array(
-	'id_jeu' => 'bigint(21) NOT NULL',
-	'date'		=> 'timestamp',
-	'type_jeu' => 'text NOT NULL',
-	'titre_prive' => 'text NOT NULL',
-	'contenu' => 'text NOT NULL',
-	'statut' => "varchar(10) DEFAULT '0' NOT NULL",
-	'type_resultat'=>"varchar(10) DEFAULT '0' NOT NULL"
-);
 
+function jeux_declarer_tables_objets_sql($table){
+    $table['spip_jeux'] = array(
+    'principale' =>"oui",
+    'field'     => array(
+	       'id_jeu'        => 'bigint(21) NOT NULL',
+	       'date'          => 'timestamp',
+	       'type_jeu'      => 'text NOT NULL',
+	       'titre'         => 'text NOT NULL',
+	       'contenu'       => 'text NOT NULL',
+	       'statut'        => "varchar(10) DEFAULT '0' NOT NULL",
+	       'type_resultat' =>"varchar(10) DEFAULT '0' NOT NULL"
+        ),
+     'date'     => 'date',
+     'titre'    => "titre, '' AS lang",
+     'key'      =>  array('PRIMARY KEY' =>'id_jeu')
+     );
+  
+    return $table;
+}
 
-$jeux_key = array(
-	'PRIMARY KEY' =>'id_jeu');
 $jeux_resultats = array(
 	'id_resultat' => 'bigint(21) NOT NULL',
 	'id_jeu'		=> 'bigint(21) NOT NULL',
@@ -35,8 +43,7 @@ $jeux_resultats_key=array('PRIMARY KEY' =>'id_resultat',
 	'KEY id_auteur' =>'id_auteur'
 );
 
-$tables_principales['spip_jeux'] =
-	array('field' => &$jeux, 'key' => &$jeux_key);
+
 $tables_principales['spip_jeux_resultats'] =
 	array('field' => &$jeux_resultats, 'key' => &$jeux_resultats_key);
 

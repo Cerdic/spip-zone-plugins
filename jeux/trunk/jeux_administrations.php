@@ -6,7 +6,7 @@ function jeux_upgrade($nom_meta_base_version,$version_cible){
 	include_spip('base/abstract_sql');
     include_spip('base/jeux_tables');
     $maj = array();
-    $maj['create']  = array(array('creer_base'));
+    $maj['create']  = array(array('creer_base'),array('maj_tables',array('spip_jeux')));
     $maj['0.11']    = array(array('jeux_upgrade_0_11'));
     $maj['0.12']    = array(array('jeux_upgrade_0_12'));
     $maj['0.13']    = array(array('jeux_upgrade_0_13'));
@@ -96,5 +96,4 @@ function jeux_upgrade_0_17(){
 	if (!isset($desc['field']['resultat_unique']))
 		sql_alter("TABLE spip_jeux ADD `resultat_unique` VARCHAR(10) NOT NULL DEFAULT 'non'");
 }
-
 ?>
