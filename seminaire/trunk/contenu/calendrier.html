@@ -2,6 +2,7 @@
 <div id="calendrier"></div>
 <link rel='stylesheet' type='text/css' href='#CHEMIN{lib/fullcalendar/fullcalendar.css}' />
 <link rel='stylesheet' type='text/css' href='#CHEMIN{calendrier.css}' />
+<link rel='stylesheet' type='text/css' href='#CHEMIN{styles/calendrier-seminaire.css}' />
 <script type='text/javascript' src='#CHEMIN{lib/fullcalendar/fullcalendar.js}'></script>
 <script type="text/javascript">
 jQuery(document).ready(function() {
@@ -9,6 +10,7 @@ jQuery(document).ready(function() {
 	// page is now ready, initialize the calendar...
 
 	$('#calendrier').fullCalendar({
+			weekends: false, // will hide Saturdays and Sundays
 			editable: false,
 			events: "[(#URL_ACTION_AUTEUR{quete_calendrier_prive,calendrier}|replace{'&amp;','&'})]",
 			header: {
@@ -32,6 +34,9 @@ jQuery(document).ready(function() {
 				if (bool) $('#loading').show();
 				else $('#loading').hide();
 			},
+			firstHour: 8,
+			minTime: 8,
+			maxTime: 18,
 			timeFormat: {
 				// for agendaWeek and agendaDay
 				agenda: "H'h'mm{ - H'h'mm}", // 5h00 - 6h30
