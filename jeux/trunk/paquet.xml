@@ -4,7 +4,7 @@
 	version="3.0.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.99]"
-	logo="img/jeux-48.png"
+	logo="prive/themes/spip/images/jeux-48.png"
 	schema="0.17"
 	documentation="http://www.spip-contrib.net/Des-jeux-dans-vos-articles"
 >	
@@ -23,7 +23,7 @@
 	<pipeline nom="declarer_tables_objets_surnoms" inclure="jeux_pipelines.php" />
 	<pipeline nom="affichage_final" inclure="jeux_pipelines.php" />
 
-	<menu nom="jeux" titre="jeux:jeux" parent="menu_edition" icone="img/jeu-16.png" action ="jeux" parametres="" />
-	<menu nom="jeu_creer" titre="jeux:nouveau_jeu" parent="outils_rapides" icone="img/jeu-16.png" action ="jeux_edit" parametres="nouveau=oui" />
+	<menu nom="jeux" titre="jeux:jeux" parent="menu_edition" icone="images/jeu-16.png" action ="jeux" parametres="" />
+	<menu nom="jeu_creer" titre="jeux:nouveau_jeu" parent="outils_rapides" icone="images/jeu-16.png" action ="jeux_edit" parametres="nouveau=oui" />
 
 </paquet>
