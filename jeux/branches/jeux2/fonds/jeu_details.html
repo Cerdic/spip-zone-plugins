@@ -1,0 +1,25 @@
+<B_resultats>
+<table  class='arial2' cellpadding='2' cellspacing='0' style='width: 100%; border: 0px;'>
+<tr class="titrem">
+		<th>[(#ENV{par}|!=={nom}|oui)<a class='ajax' href="[(#SELF|parametre_url{par,nom})]">]<:jeux:auteur:>[(#ENV{par}|!=={nom}|oui)</a>]</th>
+		<th>[(#ENV{par}|!=={date}|oui)<a class='ajax' href="[(#SELF|parametre_url{par,date})]">]<:date:>[(#ENV{par}|!=={date}|oui)</a>]</th>
+		<th style="text-align:center">[(#ENV{par}|oui)<a class='ajax' href="[(#SELF|parametre_url{par,''})]">]<:jeux:resultat:>[(#ENV{par}|oui)</a>]</th>
+		
+</tr></thead>
+#PAGINATION
+<BOUCLE_resultats(JEUX_RESULTATS spip_auteurs) {id_jeu} {par #ENV{par}, round(resultat_court / total, 3)} {inverse #ENV{par}|=={nom}|?{0,1}}{pagination 30}><!-- {statut==refuse|publie} -->
+<tr class ="tr_liste">
+	<td><a href="?exec=jeux_resultats_auteur&id_auteur=#ID_AUTEUR">#NOM</a></td>
+	<td>[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]</td>
+	<td style="text-align:center">#RESULTAT_COURT / #TOTAL</td>
+	[<td>(#TYPE_RESULTAT)</td>]
+</tr>
+[<tr>
+	<td colspan="3">(#RESULTAT_LONG)</td>
+</tr>]
+
+</BOUCLE_resultats>
+</table>
+</B_resultats>
+<br/><:jeux:aucun_resultat:>
+<//B_resultats>

@@ -1,0 +1,41 @@
+#---------------------------------------------------#
+#  Plugin  : jeux                                   #
+#  Auteur  : Patrice Vanneufville, 2006             #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
+#  Licence : GPL                                    #
+#--------------------------------------------------------------------------#
+#  Documentation : http://www.spip-contrib.net/Des-jeux-dans-vos-articles  #
+#--------------------------------------------------------------------------#
+/*
+
+ Insere une grille d'escalettre dans vos articles !
+---------------------------------------------------
+Proposition de regle : Ajouter au mot précédent la lettre inscrite 
+à gauche de l'Escalettre pour former un nouveau mot.
+Pluriels autorisés, à condition de modifier le sens du mot du dessus.
+Conjugaisons interdites, sauf infinitifs et participes.
+
+separateurs obligatoires : [escalettre], [solution]
+separateurs optionnels   : [titre], [texte]
+
+Exemple de syntaxe dans l'article :
+-----------------------------------
+
+<jeux>
+	[escalettre]
+	VAR
+	+E
+	+S
+	+U
+	+E
+	+X
+	+P
+	[solution]
+	VAR
+	RAVE
+	AVERS
+	SAVEUR
+	VAREUSE
+	VERSEAUX
+	VESPERAUX
+</jeux>

@@ -1,0 +1,17 @@
+<B_jeux>
+[<h2>(#GRAND_TOTAL|corbeille_affiche_un_ou_plusieurs{jeux:jeux_corbeille_un,jeux:jeux_corbeille_tous})</h2>]
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='liste_items jeux checkables'>
+<BOUCLE_jeux(JEUX){statut}{pagination 5}{!par date}{recherche ?}>
+<li class='item'>
+<label for='jeu-#ID_JEU'><:corbeille:selectionner:></label><input type='checkbox' name='elements[]' value='#ID_JEU'[ (#ID_JEU|in_any{#ENV{elements}}|oui)checked='checked']/>
+<h3>[##ID_JEU - (#TITRE_PRIVE|sinon{<jeux:sans_titre_prive:>})]</h3>
+<smal>[(#DATE|affdate)][ (#DATE|heures)]:[(#DATE|minutes)]</small>
+<!-- # INTRODUCTION -->
+- [(#TITRE_PUBLIC|sinon{<:info_sans_titre:>})]
+<p class='actions'>[<a href='#URL_ECRIRE{jeux_voir,id_jeu=#ID_JEU}'><:corbeille:voir:></a>]</p>
+</li>
+</BOUCLE_jeux>
+</ul>
+[<p class='pagination'>(#PAGINATION)</p>]
+</B_jeux>
