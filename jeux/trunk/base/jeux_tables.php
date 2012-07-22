@@ -10,19 +10,14 @@ $table_des_tables['jeux'] = 'jeux';
 $table_des_tables['jeux_resultats'] = 'jeux_resultats';
 $jeux = array(
 	'id_jeu' => 'bigint(21) NOT NULL',
-	'date'		=> 'timestamp');
-if (isset($GLOBALS['meta']['jeux_base_version'])) {
-	$jeux = array_merge($jeux, array(
-		'type_jeu' => 'text NOT NULL',
-		'titre_prive' => 'text NOT NULL',
-	));
-}
-$jeux = array_merge($jeux, array(
+	'date'		=> 'timestamp',
+	'type_jeu' => 'text NOT NULL',
+	'titre_prive' => 'text NOT NULL',
 	'contenu' => 'text NOT NULL',
 	'statut' => "varchar(10) DEFAULT '0' NOT NULL",
 	'type_resultat'=>"varchar(10) DEFAULT '0' NOT NULL"
-	)
 );
+
 
 $jeux_key = array(
 	'PRIMARY KEY' =>'id_jeu');
