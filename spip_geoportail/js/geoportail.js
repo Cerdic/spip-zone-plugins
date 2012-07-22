@@ -986,8 +986,7 @@ jQuery.geoportail =
 			if (l.length > 0) l[0].setVisibility(false);
 		}
 		else if (this.layer) 
-		{	var l = this.layer.map.getLayersByName("ADDRESSES.CROSSINGS:OPENLS");
-			if (l.length > 0) l[0].setVisibility(false);
+		{	this.layer.setVisibility(false);
 		}
 		// pour les autres cartes
 		if (typeof (selectAdresse) == 'function') selectAdresse(f);
