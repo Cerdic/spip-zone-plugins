@@ -25,5 +25,6 @@
 
 	<menu nom="jeux" titre="jeux:jeux" parent="menu_edition" icone="images/jeu-16.png" action ="jeux" parametres="" />
 	<menu nom="jeu_creer" titre="jeux:nouveau_jeu" parent="outils_rapides" icone="images/jeu-16.png" action ="jeux_edit" parametres="nouveau=oui" />
+	<menu nom="configurer_jeux" titre="jeux:configuration_jeux" parent="menu_configuration" icone="images/jeux-16.png" />
 
 </paquet>

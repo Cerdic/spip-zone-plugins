@@ -11,7 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'corriger' => "Corriger",
 'verifier'  => 'V&eacute;rifier',
 'verifier_validite' => 'V&eacute;rifier la validit&eacute;',
-
+'configuration_jeux'=>'Configurer les jeux',
+'titre_page_configurer_jeux'=>'Configuration du plugin jeux',
 'afficher_solution' => 'Afficher la solution',
 'solution' => 'Solution',
 'reponse' => 'R&eacute;ponse',
@@ -163,7 +164,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'options' => 'Options',
 
 'total'     =>'Total',
-// Corbeille
+
   'jeux_corbeille_tous' => "@nb@ jeux dans la corbeille",
   'jeux_corbeille_un' => "1 jeu dans la corbeille",
   'jeux_tous' => 'Tous les jeux',

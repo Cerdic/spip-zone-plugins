@@ -1,0 +1,44 @@
+<div class='formulaire_spip formulaire_configurer'>
+<form method="post" action="#ENV{action}">
+#ACTION_FORMULAIRE{#ENV{action}}
+<fieldset>
+    <legend><:jeux:cfg_scores:></legend>
+    <ul>
+       <li>
+       <label for="type_resultat"><:jeux:cfg_type_resultat:></label>
+        <select name="type_resultat"> 
+            <option value="dernier"[ selected="(#CONFIG{jeux/type_resultat}|=={dernier}|?{selected})"]><:jeux:resultat2_dernier:></option>
+	       <option value="premier"[ selected="(#CONFIG{jeux/type_resultat}|=={premier}|?{selected})"]><:jeux:resultat2_premier:></option>
+	       <option value="meilleur"[ selected="(#CONFIG{jeux/type_resultat}|=={meilleur}|?{selected})"]><:jeux:resultat2_meilleur:></option>
+	       <option value="meilleurs"[ selected="(#CONFIG{jeux/type_resultat}|=={meilleurs}|?{selected})"]><:jeux:resultat2_meilleurs:></option>
+	       <option value="tous"[ selected="(#CONFIG{jeux/type_resultat}|=={tous}|?{selected})"]><:jeux:resultat2_tous:></option>
+	       <option value="aucun"[ selected="(#CONFIG{jeux/type_resultat}|=={aucun}|?{selected})"]><:jeux:resultat2_aucun:></option>
+        </select>
+        </li>
+     </ul>
+</fieldset>
+<fieldset>
+<legend><:jeux:cfg_affichage:></legend>
+    <ul>
+    <li>
+        <label for="cfg_reponse"><:jeux:cfg_donner_reponse:></label>
+        <input type="checkbox" name="cfg_reponse" [checked="(#CONFIG{jeux/cfg_reponse}|!={''}|?{'checked'})"] class="fondl" />
+    </li>
+	<li>
+        <label for="cfg_indices"><:jeux:cfg_donner_indices:></label>
+        <input type="checkbox" name="cfg_indices" [checked="(#CONFIG{jeux/cfg_indices}|!={''}|?{'checked'})"] class="fondl" />
+	</li>
+	</ul>
+</fieldset>
+<fieldset>
+<legend><:jeux:cfg_correction:></legend>
+    <ul>
+    <li>
+        <label for="cfg_solution"><:jeux:cfg_donner_solution:></label>
+        <input type="checkbox" name="cfg_solution" [checked="(#CONFIG{jeux/cfg_solution}|!={''}|?{'checked'})"] class="fondl" />
+	</li>
+	</ul>
+</fieldset>
+<p class='boutons'><input type="submit"  value="<:valider:>" /></p>
+</form>
+</div>
