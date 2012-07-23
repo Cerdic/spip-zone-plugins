@@ -18,7 +18,6 @@
 	<pipeline nom="pre_propre" inclure="jeux_pipelines.php" />
 	<pipeline nom="post_propre" inclure="jeux_pipelines.php" />
 	<pipeline nom="header_prive" inclure="jeux_pipelines.php" />
-	<pipeline nom="ajouter_boutons" inclure="jeux_boutons.php" />
 	<pipeline nom="taches_generales_cron" inclure="jeux_pipelines.php" />
 	<pipeline nom="declarer_tables_objets_surnoms" inclure="jeux_pipelines.php" />
 	<pipeline nom="affichage_final" inclure="jeux_pipelines.php" />
