@@ -12,7 +12,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
 	xmlns:atom="http://www.w3.org/2005/Atom"
 >
-[(#CONFIG{rssconfig/activer}|=={oui}|oui)
+[(#CONFIG{rssconfig/activer}|!={non}|oui)
 <channel[ xml:lang="(#LANG)"]>
 	<title>[(#NOM_SITE_SPIP|textebrut|texte_backend)]</title>
 	<link>#URL_SITE_SPIP/</link>
