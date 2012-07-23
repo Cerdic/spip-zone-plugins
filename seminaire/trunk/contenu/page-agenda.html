@@ -7,15 +7,29 @@
 ]
 <INCLURE{fond=contenu/calendrier,env} />
 
-<B_ev>
-	[<h1>(#TOTAL_BOUCLE|singulier_ou_pluriel{agenda:info_un_evenement,agenda:info_nombre_evenements})</h1>]
-	<ul class="liste-items evenements">
-	<BOUCLE_ev(EVENEMENTS){!evenement_passe #ENV{date_debut,#ENV{date}}}{!evenement_a_venir #ENV{date_debut,#ENV{date}}|agenda_moisdecal{1,'Y-m-d H:i:00'}}{par date_debut}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>
-		<li class="item">
-			#MODELE{evenement_vevent}
-		</li>
-	</BOUCLE_ev>
-	</ul>
-</B_ev>
-<h1><:agenda:info_aucun_evenement:></h1>
-<//B_ev>
+
+
+<BOUCLE_mot_evenement(MOTS){type=Type}>
+<h3 class="agenda">[(#DESCRIPTIF|attribut_html)]</h3>
+	<BOUCLE_mot_articles(MOTS){type=Catégorie}>
+		<BOUCLE_article_evenement(ARTICLES){titre_mot=#TITRE}{par num titre}{inverse}>
+			<B_ev>
+			<ul>
+			<li><h4>#_mot_articles:TITRE</h4></li>
+			<ul>
+			<BOUCLE_ev(EVENEMENTS){!evenement_passe #ENV{date_debut,#ENV{date}}}{!evenement_a_venir #ENV{date_debut,#ENV{date}}|agenda_moisdecal{1,'Y-m-d H:i:00'}}{par date_debut}{id_article}{id_evenement_source?}{titre_mot=#_mot_evenement:TITRE}>
+					<li>#MODELE{evenement_vevent}</li>
+			</BOUCLE_ev>
+			</ul>
+			</ul>
+			</B_ev>
+			</BOUCLE_article_evenement>
+
+	</BOUCLE_mot_articles>
+
+</BOUCLE_mot_evenement>
+
+
+<span class="bouton">
+<a href="#URL_ECRIRE{evenement_edit,new=oui&id_article=#ID_ARTICLE}" class='noajax creer'><:seminaire:creer_evenement:></a>
+</span>
