@@ -9,6 +9,25 @@
 		<ul>
 		<li class="fieldset">
       	<fieldset>
+         	<legend><:rssconfig:label_activation:></legend>
+				<p class="explication"><:rssconfig:explication_activation:></p>
+				<ul>
+					<li class="editer editer_activer[ (#ENV**{erreurs}|table_valeur{activer}|oui)erreur]">
+                  <label><:rssconfig:label_activer:></label>
+                  <div class="choix">
+                     <input type="radio" name="activer" class="radio" id="activer_on" value="oui" [(#ENV{activer,oui}|=={oui}|oui) checked="checked"] />
+                     <label for='activer_on'><:item_oui:></label>
+                  </div>
+                  <div class="choix">
+                     <input type="radio" name="activer" class="radio" id="activer_off" value="non" [(#ENV{activer,oui}|=={non}|oui) checked="checked"] />
+                     <label for='activer_off'><:item_non:></label>
+                  </div>
+               </li>
+				</ul>
+         </fieldset>
+      </li>
+		<li class="fieldset">
+      	<fieldset>
          	<legend><:rssconfig:label_articles_a_inclure:></legend>
 				<p class="explication"><:rssconfig:explication_articles_a_inclure:></p>
 				<ul>

@@ -1,7 +1,7 @@
 <paquet
 	prefix="rssconfig"
 	categorie="squelette"
-	version="1.3.0"
+	version="1.4.0"
 	etat="test"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/rssconfig-32.png"

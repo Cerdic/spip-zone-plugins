@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_rssconfig' => 'Configurer le flux RSS',
 	
 	// E
+	'explication_activation' => 'Par défaut, SPIP propose un flux rss des derniers articles publiés. Vous pouvez ici désactiver la production de ce flux (un fichier vide sera néanmoins proposé; si vous utilisez le plugin zvide, le lien ne sera pas inclu dans l\'entête des pages html).',
 	'explication_age_art' => 'Indiquez un nombre de jours. Les articles ayant un âge inférieur à ce critère seront inclus dans le flux. Mettez 0 pour ne pas utiliser ce critère.',
 	'explication_age_modif' => 'Inclure également les articles plus anciens mais modifiés récemment ? Indiquez l\'âge de la modification en jours, 0 si vous ne souhaitez pas inclure les articles modifiés récemment.',
 	'explication_articles_a_inclure' => 'Par défaut, SPIP inclut dans le flux les 10 derniers articles publiés ainsi que les articles publiés il y a moins de trois jours. Vous pouvez modifier ci-dessous ces deux critères.',
@@ -23,6 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_syndication_integrale' => 'Diffuser les articles dans leur intégralité ? (Si non, seul un résumé sera diffusé.)',
 	
 	// L
+	'label_activation' => 'Activation',
+	'label_activer' => 'Activer ?',
 	'label_age_art' => 'Critère d\'âge',
 	'label_age_modif' => 'Modifiés récemment',
 	'label_articles_a_inclure' => 'Articles à inclure',
