@@ -82,4 +82,15 @@ function oresource_jquery_plugins($scripts){
     $scripts[] = "javascript/date.js";
     return $scripts;
 }
+/**
+ * insertion du css
+ **/
+function oresource_insert_head_css($flux){
+	$css = find_in_path('orr.css');
+	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='$css' />\n";
+    return $flux;
+
+}
+
+
 ?>

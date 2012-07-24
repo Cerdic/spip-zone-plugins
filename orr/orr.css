@@ -1,0 +1,47 @@
+table {
+	border-collapse: collapse;
+	text-align: center;
+}
+td.largeurcol{
+	vertical-align:top;
+}
+#premierjour {
+	border-top : 1px solid red ;
+	border-bottom : 1px solid red ;
+	border-left : 1px solid red ;
+	}
+#jourmilieu {
+	border-top : 1px solid red ;
+	border-bottom : 1px solid red ;
+}
+#dernierjour {
+	border-top : 1px solid red ;
+	border-bottom : 1px solid red ;
+	border-right : 1px solid red ;
+}
+.ui-tpicker-grid-label{
+	width: 154px ;
+	margin-left: -20% ;
+	}
+th, td{
+	padding : 5px;
+	}
+
+td#jeudi, th#jeudith{
+	background-color : #D6D6D6 ;
+}
+
+#motcle{
+	width : 200px;
+/*
+	float : left;
+*/
+	}
+
+#datepick{
+/*
+	float : left;
+*/
+}
+
+

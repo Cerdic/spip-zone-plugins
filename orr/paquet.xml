@@ -29,6 +29,8 @@
 	<pipeline nom="affiche_auteurs_interventions" inclure="oresource_pipelines.php" /> 
 	<pipeline nom="optimiser_base_disparus" inclure="oresource_pipelines.php" /> 
     <pipeline nom="jquery_plugins" inclure="oresource_pipelines.php" />
+    <pipeline nom="insert_head_css" inclure="oresource_pipelines.php" />
+    
 
 	<menu nom="orr_ressources" titre="orr_ressource:titre_orr_ressources" parent="menu_edition" icone="images/orr_ressource-16.png" action="orr_ressources" /> 
 </paquet>
