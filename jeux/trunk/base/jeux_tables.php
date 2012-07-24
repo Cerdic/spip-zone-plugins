@@ -43,7 +43,8 @@ function jeux_declarer_tables_objets_sql($table){
         ),
      'texte_changer_statut'=>'jeu:texte_changer_statut_jeu',
      'champs_editables'  => array('titre', 'texte','type_resultat'),
-     'champs_versionnes' => array('titre', 'texte')
+     'champs_versionnes' => array('titre', 'texte'),
+     'champs_contenu' => array('texte')
      );
   
     return $table;
