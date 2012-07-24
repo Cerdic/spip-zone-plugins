@@ -8,7 +8,7 @@
 <INCLURE{fond=contenu/calendrier,env} />
 
 
-
+<h2>Les événements de [(#DATE_DEBUT|affdate_mois_annee)]</h2>
 <BOUCLE_mot_evenement(MOTS){type=Type}>
 <h3 class="agenda">[(#DESCRIPTIF|attribut_html)]</h3>
 	<BOUCLE_mot_articles(MOTS){type=Catégorie}>
