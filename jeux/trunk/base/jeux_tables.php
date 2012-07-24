@@ -17,7 +17,7 @@ function jeux_declarer_tables_objets_sql($table){
 	       'date'          => 'timestamp',
 	       'type_jeu'      => 'TEXT NOT NULL',
 	       'titre'         => 'TEXT NOT NULL',
-	       'contenu'       => 'TEXT NOT NULL',
+	       'texte'       => 'TEXT NOT NULL',
 	       'statut'        => "varchar(255) DEFAULT '0' NOT NULL",
 	       'type_resultat' =>"varchar(10) DEFAULT '0' NOT NULL",
 	       'resultat_unique'=>"VARCHAR(10) NOT NULL DEFAULT 'non'"
@@ -42,7 +42,7 @@ function jeux_declarer_tables_objets_sql($table){
 	       )
         ),
      'texte_changer_statut'=>'jeu:texte_changer_statut_jeu',
-     'champs_editables'  => array('titre', 'texte'),
+     'champs_editables'  => array('titre', 'texte','type_resultat'),
      'champs_versionnes' => array('titre', 'texte')
      );
   

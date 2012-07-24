@@ -15,6 +15,7 @@ function jeux_upgrade($nom_meta_base_version,$version_cible){
     $maj['0.16']    = array(array('jeux_upgrade_0_16'));
     $maj['0.17']    = array(array('jeux_upgrade_0_17'));
     $maj['0.18']    = array(array('jeux_upgrade_0_18'));
+    $maj['0.19']    = array(array('jeux_upgrade_0_19'));
     maj_plugin($nom_meta_base_version,$version_cible,$maj);
     
 }
@@ -101,5 +102,9 @@ function jeux_upgrade_0_17(){
 function jeux_upgrade_0_18(){
     // changement du champ statut pour suivre le modèle chat
     sql_alter("TABLE spip_jeux CHANGE `statut` `statut` varchar(255) DEFAULT '0' NOT NULL");
+}
+function jeux_upgrade_0_19(){
+    // renommer contenu en texte
+    sql_alter("TABLE spip_jeux CHANGE `contenu` `texte` TEXT DEFAULT '' NOT NULL");
 }
 ?>
