@@ -15,7 +15,7 @@
             [(#SAISIE{textarea,texte,obligatoire=none,label=<:jeu:label_texte:>})]
             
             [(#SET{choix_type_resultat,[(#ARRAY{defaut,<:jeux:resultat2_defaut:>,premier,<:jeux:resultat2_premier:>,dernier,<:jeux:resultat2_dernier:>,meilleur,<:jeux:resultat2_meilleur:>,meilleurs,<:jeux:resultat2_meilleurs:>,tous,<:jeux:resultat2_tous:>,aucun,<:jeux:resultat2_aucun:>})]})]
-            [(#GET{choix_type_resultat}|var_dump)]
+            
             [(#SAISIE{selection,type_resultat,label=<:jeux:type_resultat:>,obligatoire=oui,datas=#GET{choix_type_resultat},defaut=defaut})]
 
 		</ul>
