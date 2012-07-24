@@ -7,7 +7,7 @@
 
 [<div class="champ contenu_type_resultat[ (#TYPE_RESULTAT*|strlen|?{'',vide})]">
 	<label><:jeu:label_type_resultat:> : </label>
-	<span dir='#LANG_DIR'>(#TYPE_RESULTAT)</span>
+	<span dir='#LANG_DIR'>(#VAL{jeux:resultat2_}|concat{#TYPE_RESULTAT}|_T)</span>
 </div>]
 
 [<div class="champ contenu_type_jeu[ (#TYPE_JEU*|strlen|?{'',vide})]">
