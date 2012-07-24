@@ -50,6 +50,11 @@ function formulaires_editer_jeu_traiter_dist($id_jeu='new', $id_rubrique=0, $ret
 			}
 		}
 	}
+	// Inserer le type de jeu
+	$type_jeu = jeux_trouver_nom(_request('texte'));
+    $type_jeu = strlen($type_jeu)?$type_jeu:_T('jeux:jeu_vide');
+    sql_updateq('spip_jeux',array('type_jeu'=>$type_jeu),'id_jeu='.intval($res['id_jeu']));
+    
 	return $res;
 
 }
