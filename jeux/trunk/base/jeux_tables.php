@@ -18,12 +18,28 @@ function jeux_declarer_tables_objets_sql($table){
 	       'type_jeu'      => 'text NOT NULL',
 	       'titre'         => 'text NOT NULL',
 	       'contenu'       => 'text NOT NULL',
-	       'statut'        => "varchar(10) DEFAULT '0' NOT NULL",
+	       'statut'        => "varchar(255) DEFAULT '0' NOT NULL",
 	       'type_resultat' =>"varchar(10) DEFAULT '0' NOT NULL"
         ),
      'date'     => 'date',
      'titre'    => "titre, '' AS lang",
-     'key'      =>  array('PRIMARY KEY' =>'id_jeu')
+     'key'      =>  array('PRIMARY KEY' =>'id_jeu'),
+     'statut_textes_instituer' => 	array(
+	       'prepa' => 'texte_statut_en_cours_redaction',
+	       'prop' => 'texte_statut_propose_evaluation',
+	       'publie' => 'texte_statut_publie',
+	       'refuse' => 'texte_statut_refuse',
+	       'poubelle' => 'texte_statut_poubelle',
+      ),
+    'statut'=> array(
+	   array(
+		'champ' => 'statut',
+		'publie' => 'publie',
+		'previsu' => 'publie,prop,prepa',
+		'post_date' => 'date',	
+		'exception' => array('statut','tout')
+	       )
+        ),
      );
   
     return $table;

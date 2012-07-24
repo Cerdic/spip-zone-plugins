@@ -14,6 +14,7 @@ function jeux_upgrade($nom_meta_base_version,$version_cible){
     $maj['0.15']    = array(array('jeux_upgrade_0_15'));
     $maj['0.16']    = array(array('jeux_upgrade_0_16'));
     $maj['0.17']    = array(array('jeux_upgrade_0_17'));
+    $maj['0.18']    = array(array('jeux_upgrade_0_18'));
     maj_plugin($nom_meta_base_version,$version_cible,$maj);
     
 }
@@ -95,5 +96,10 @@ function jeux_upgrade_0_17(){
 		sql_alter('TABLE spip_jeux CHANGE `nom` `type_jeu` TEXT');
 	if (!isset($desc['field']['resultat_unique']))
 		sql_alter("TABLE spip_jeux ADD `resultat_unique` VARCHAR(10) NOT NULL DEFAULT 'non'");
+}
+
+function jeux_upgrade_0_18(){
+    // changement du champ statut pour suivre le modèle chat
+    sql_alter("TABLE spip_jeux CHANGE `statut` `statut` varchar(255) DEFAULT '0' NOT NULL");
 }
 ?>
