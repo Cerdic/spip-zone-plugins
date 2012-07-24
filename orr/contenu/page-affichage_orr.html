@@ -1,9 +1,19 @@
 <html>
 
-    <div id="">
-		<div>
-			<div id = "datepickers"></div>
-		</div>
+<!--
+    <div id="letout">
+-->
+
+		<div id="partiehaute">
+	<div id="motcle">
+		#FORMULAIRE_MOTSCLEF
+	</div>
+
+	<div id="datepick">
+		<div id = "datepickers"></div>
+	</div>
+</div>
+
 		<br/>
 		<br/>
 		<div id="affichageTableau">
@@ -14,13 +24,16 @@
 				<INCLURE{fond=inc-tableau,ajax=tableau}>
 			</div>
 		</div>
+<!--
 	</div>
+-->
 
 
 
 <script>
 
     jQuery(document).ready(function(){
+
         dateselectionne = new Date();
         joursemaine(dateselectionne);
              tabAjax();
@@ -28,8 +41,6 @@
         jQuery( "#datepickers" ).datepicker({
             dateFormat : 'yy-mm-dd',
             onSelect : function (dateText){
-                //~ var data = { date : dateText };
-                //~ Determination des 5 jours de la semaines
                 dateselectionne = Date.parse(dateText);
                 joursemaine(dateselectionne);
                 tabAjax();
@@ -50,9 +61,27 @@
 			joursemaine(dateselectionne);
             tabAjax();
 		});
-
-
-
+		jQuery("#envoyer").click(function(){
+		var motscle = jQuery("#motscles").val().toString();
+		motscle=motscle.replace(",",":");
+			ajaxReload('tableau', {
+						args:{
+							motcle:motscle,
+							},
+			});
+		return false;
+        });
+        jQuery("#tous").click(function(){
+		//~ var motscle = "liste ";
+		var motscle = "";
+		console.log(motscle);
+			ajaxReload('tableau', {
+						args:{
+							motcle:motscle,
+							},
+			});
+		return false;
+        });
 	});
 
 function joursemaine(dateactive)

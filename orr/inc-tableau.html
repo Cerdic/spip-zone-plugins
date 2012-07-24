@@ -6,51 +6,53 @@
 #SET{samedi,#ENV{jour6}}
 #SET{dimanche,#ENV{jour7}}
 #SET{plusun,#ENV{jour8}}
+#SET{motcle1,#ENV{motcle}}
 
 
+#SET{mots_choisis, #ARRAY}
+<BOUCLE_themes(MOTS){type=orr}>
+  #SET{mots_choisis, #GET{mots_choisis}|push{#ID_MOT}}
+</BOUCLE_themes>
+#SET{motcle2,#GET{motcle1,#GET{mots_choisis}}}
+
+
+[(#GET{motcle1}|?{#SET{motcle2,#VAL{#ENV{motcle}|explode{:}}},#SET{motcle2,#GET{mots_choisis}}})]
  <div>
 
-	<table border="1">
+	<table border="1px">
 
     <caption>[(#GET{jeudi}|affdate{nom_mois})]</caption>
 
 		<thead>
 			<th>Ressources</th>
-			<th>Lundi_[(#GET{lundi}|affdate{jour})]</th>
-			<th>Mardi_[(#GET{mardi}|affdate{jour})]</th>
-			<th>Mercredi_[(#GET{mercredi}|affdate{jour})]</th>
-			<th>Jeudi_[(#GET{jeudi}|affdate{jour})]</th>
-			<th>Vendredi_[(#GET{vendredi}|affdate{jour})]</th>
-			<th>Samedi_[(#GET{Samedi}|affdate{jour})]</th>
-			<th>Dimanche_[(#GET{dimanche}|affdate{jour})]</th>
+			<th class="largeurcol">Lundi_[(#GET{lundi}|affdate{jour})]</th>
+			<th class="largeurcol">Mardi_[(#GET{mardi}|affdate{jour})]</th>
+			<th class="largeurcol">Mercredi_[(#GET{mercredi}|affdate{jour})]</th>
+			<th class="largeurcol" id="jeudith">Jeudi_[(#GET{jeudi}|affdate{jour})]</th>
+			<th class="largeurcol">Vendredi_[(#GET{vendredi}|affdate{jour})]</th>
+			<th class="largeurcol">Samedi_[(#GET{samedi}|affdate{jour})]</th>
+			<th class="largeurcol">Dimanche_[(#GET{dimanche}|affdate{jour})]</th>
 		</thead>
 		<tbody>
-    <BOUCLE_ressource(spip_orr_ressources)>
+    <BOUCLE_ressource(spip_orr_ressources){id_mot IN #GET{motcle2}}>
 			<tr class="tr_plus">
 				<td>#ID_ORR_RESSOURCE. #ORR_RESSOURCE_NOM</td>
-				<td VALIGN=TOP ALIGN=CENTER id="lundi"><a id="touche_lundi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour1}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{lundi},jourplus=#GET{mardi}} /></td>
-				<td VALIGN=TOP ALIGN=CENTER id="mardi"><a id="touche_mardi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour2}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{mardi},jourplus=#GET{mercredi}} /></td>
-				<td VALIGN=TOP ALIGN=CENTER id="mercredi"><a id="touche_mercredi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour3}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{mercredi},jourplus=#GET{jeudi}} /></td>
-				<td VALIGN=TOP ALIGN=CENTER id="jeudi"><a id="touche_jeudi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour4}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{jeudi},jourplus=#GET{vendredi}} /></td>
-				<td VALIGN=TOP ALIGN=CENTER id="vendredi"><a id="touche_vendredi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour5}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{vendredi},jourplus=#GET{samedi}} /></td>
-				<td VALIGN=TOP ALIGN=CENTER id="samedi"><a id="touche_samedi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour6}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{samedi},jourplus=#GET{dimanche}} /></td>
-				<td VALIGN=TOP ALIGN=CENTER id="dimanche"><a id="touche_dimanche_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour7}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{dimanche},jourplus=#GET{plusun}} /></td>
+				<td  id="lundi" class="largeurcol"><a id="touche_lundi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour1}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{lundi},jourplus=#GET{mardi},couleur=#ORR_RESSOURCE_COULEUR} /></td>
+				<td  id="mardi" class="largeurcol"><a id="touche_mardi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour2}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{mardi},jourplus=#GET{mercredi},couleur=#ORR_RESSOURCE_COULEUR} /></td>
+				<td  id="mercredi" class="largeurcol"><a id="touche_mercredi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour3}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{mercredi},jourplus=#GET{jeudi},couleur=#ORR_RESSOURCE_COULEUR} /></td>
+				<td  id="jeudi" class="largeurcol"><a id="touche_jeudi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour4}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{jeudi},jourplus=#GET{vendredi},couleur=#ORR_RESSOURCE_COULEUR} /></td>
+				<td  id="vendredi" class="largeurcol"><a id="touche_vendredi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour5}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{vendredi},jourplus=#GET{samedi},couleur=#ORR_RESSOURCE_COULEUR} /></td>
+				<td  id="samedi" class="largeurcol"><a id="touche_samedi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour6}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{samedi},jourplus=#GET{dimanche},couleur=#ORR_RESSOURCE_COULEUR} /></td>
+				<td  id="dimanche" class="largeurcol"><a id="touche_dimanche_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour7}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{dimanche},jourplus=#GET{plusun},couleur=#ORR_RESSOURCE_COULEUR} /></td>
 			</tr>
     </BOUCLE_ressource>
 </tbody>
 </table>
-
-
-
-
 </div>
+
     <script type="text/javascript">
-                     					var hautbas =true;
-
+        var hautbas =true;
 		jQuery(document).ready(function(){
-					           				                       	console.log(hautbas);
-
-
 			$(".nomreservation").bind("click",function(event){
 				event.stopPropagation();
 				recupereDir(this);
@@ -58,18 +60,11 @@
                      if ( hautbas == true ){
 				     $("#"+idDir+" .changeclic").attr("src","#CHEMIN{img/haut.png}");
 				       hautbas = false;
-				 console.log(hautbas);
-
 					}else{
 					 $("#"+idDir+" .changeclic").attr("src","#CHEMIN{img/bas.png}");
 					   hautbas = true;
-					                   	console.log(hautbas);
-
 					}
-
-
 				});
-
 			});
 		});
 
