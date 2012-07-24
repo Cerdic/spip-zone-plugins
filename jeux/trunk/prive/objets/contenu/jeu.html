@@ -17,7 +17,7 @@
 
 [<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
 	<label><:jeu:label_texte:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{texte} texte'>(#TEXTE*|traite_contenu_jeu{#ID_JEU})</span>
+	<div dir='#LANG_DIR' class='#EDIT{texte} texte'>(#VAL{<jeux>}|concat{#TEXTE*}|concat{"</jeux>"}|traite_contenu_jeu{#ID_JEU})</div>
 </div>]
 
 </BOUCLE_jeu>

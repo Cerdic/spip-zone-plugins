@@ -1,2 +1,2 @@
 [(#REM) Modele qui peut enregistrer les scores ]
-<BOUCLE_jeu(JEUX){id_jeu=#ENV{id}}>[(#TEXTE*|traite_contenu_jeu{#ID_JEU})]</BOUCLE_jeu>
+<BOUCLE_jeu(JEUX){id_jeu=#ENV{id}}>[(#VAL{<jeux>}|concat{#TEXTE*}|concat{</jeux>}|traite_contenu_jeu{#ID_JEU})]</BOUCLE_jeu>
