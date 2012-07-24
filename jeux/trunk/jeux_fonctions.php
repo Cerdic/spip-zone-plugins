@@ -11,13 +11,7 @@
 
 include_spip('base/jeux_tables');
 
-function boucle_JEUX($id_boucle, &$boucles) {
-	$boucle = &$boucles[$id_boucle];
-	$id_table = $boucle->id_table;
-	$mstatut = $id_table .'.statut';
 
-	return calculer_boucle($id_boucle, $boucles);
-}
 
 // filtre retournant un lien cliquable si $nb!=0, sinon un simple tiret
 function jeux_lien_jeu($nb='0', $exec='', $id_jeu=0) {
