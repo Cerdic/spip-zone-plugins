@@ -6,7 +6,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'info_1_jeu'               =>'Liste des jeux',
     'icone_creer_jeu'          =>'Créer un jeu',
     'icone_modifier_jeu'       =>'Modifier le jeu',
-    'info_aucun_jeu'          =>'Aucune jeu',
+    'info_aucun_jeu'            =>'Aucune jeu',
+    'label_texte'               =>'Texte',
+    'label_titre'               =>'Titre',
+    'texte_changer_statut_jeu'  =>'Le statut de ce jeu est :',
     'titre_jeux'               =>'Jeux',
     'titre_logo_jeu'           =>'Logo du jeu'
 );
