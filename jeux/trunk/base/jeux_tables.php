@@ -19,7 +19,8 @@ function jeux_declarer_tables_objets_sql($table){
 	       'titre'         => 'TEXT NOT NULL',
 	       'contenu'       => 'TEXT NOT NULL',
 	       'statut'        => "varchar(255) DEFAULT '0' NOT NULL",
-	       'type_resultat' =>"varchar(10) DEFAULT '0' NOT NULL"
+	       'type_resultat' =>"varchar(10) DEFAULT '0' NOT NULL",
+	       'resultat_unique'=>"VARCHAR(10) NOT NULL DEFAULT 'non'"
         ),
      'date'     => 'date',
      'titre'    => "titre, '' AS lang",
