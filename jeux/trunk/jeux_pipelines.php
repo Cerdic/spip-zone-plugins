@@ -107,18 +107,6 @@ function jeux_affichage_final($flux) {
 
 
 
-function jeux_affiche_droite($flux){
-	if (in_array($flux['args']['exec'],array('articles_edit','breves_edit','rubriques_edit','mots_edit'))){
-		include_spip('exec/inc_boites_infos');
-		$flux['data'] .= boite_info_jeux_edit();
-	}
-	
-	if (in_array($flux['args']['exec'],array('auteur_infos'))){
-		include_spip('exec/inc_boites_infos');			
-		$flux['data'] .= boite_infos_spip_auteur($flux['args']['id_auteur']);  
-	}
-	return $flux;
-}
 
 function jeux_taches_generales_cron($taches_generales){
 	$taches_generales['jeux_nettoyer_base'] = 3600*48;
