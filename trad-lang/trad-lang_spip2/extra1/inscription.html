@@ -6,9 +6,6 @@
 	#LOGIN_PUBLIC
 ]
 
-[(#REM) Inscription au site ]
-#FORMULAIRE_INSCRIPTION
-
 <BOUCLE_menu_navigation_haut(MENUS?){identifiant LIKE navigation_haut%}{par num titre, titre}>
 <div class="menu">
 #INCLURE{fond=inclure/menu, env, identifiant=#IDENTIFIANT}
