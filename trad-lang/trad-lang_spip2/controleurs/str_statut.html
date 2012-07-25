@@ -9,14 +9,6 @@
 <fieldset>
 <legend>TRADLANG ##ID_TRADLANG</legend>
 <ul>
-	<li class="editer editer_statut">
-		<label for="statut_#ID_TRADLANG"><:tradlang:label_tradlang_status:></label>
-		<select class="text crayon_active" name="#ENV{name_statut}" id="statut_#ID_TRADLANG" style="width:#ENV{largeur}px;text-align:#LANG_LEFT;" dir="#LANG_DIR">
-			<option value="OK"[(#STATUT|=={OK}|oui)selected="selected"]><:tradlang:str_status_traduit:></option>
-			<option value="MODIF"[(#STATUT|=={MODIF}|oui)selected="selected"]><:tradlang:str_status_modif:></option>
-			<option value="NEW"[(#STATUT|=={NEW}|oui)selected="selected"]><:tradlang:str_status_new:></option>
-		</select>
-	</li>
 	<BOUCLE_orig(TRADLANGS){id=#ID}{module=#MODULE}{lang=#VAL{lang_orig}|_request|sinon{#LANG_MERE}}>
 	<li class="editer original">
 		<div>
@@ -29,6 +21,14 @@
 		<label for="str_#ID_TRADLANG"><:tradlang:label_tradlang_str:></label>
 		<textarea class="crayon-active" name="#ENV{name_str}" id="str_#ID_TRADLANG"
 		 style="width:#ENV{largeur}px;text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
+	</li>
+	<li class="editer editer_statut">
+		<label for="statut_#ID_TRADLANG"><:tradlang:label_tradlang_status:></label>
+		<select class="text crayon_active" name="#ENV{name_statut}" id="statut_#ID_TRADLANG" style="width:#ENV{largeur}px;text-align:#LANG_LEFT;" dir="#LANG_DIR">
+			<option value="OK"[(#STATUT|=={OK}|oui)selected="selected"]><:tradlang:str_status_traduit:></option>
+			<option value="MODIF"[(#STATUT|=={MODIF}|oui)selected="selected"]><:tradlang:str_status_modif:></option>
+			<option value="NEW"[(#STATUT|=={NEW}|oui)selected="selected"]><:tradlang:str_status_new:></option>
+		</select>
 	</li>
 </ul>
 </fieldset>

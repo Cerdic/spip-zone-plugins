@@ -7,15 +7,6 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			<li class="editer editer_statut obligatoire[(#ENV{erreurs}|table_valeur{statut}|oui)erreur]">
-				<label for="statut"><:tradlang:label_tradlang_status:></label>[
-				<span class="erreur_message">(#ENV{erreurs}|table_valeur{statut})</span>]
-				<select class="text crayon_active" name="statut" id="statut">
-					<option value="OK"[(#STATUT|=={OK}|oui)selected="selected"]><:tradlang:str_status_traduit:></option>
-					<option value="MODIF"[(#STATUT|=={MODIF}|oui)selected="selected"]><:tradlang:str_status_modif:></option>
-					<option value="NEW"[(#STATUT|=={NEW}|oui)selected="selected"]><:tradlang:str_status_new:></option>
-				</select>
-			</li>
 			<li class="editer readonly">
 				<BOUCLE_orig(TRADLANGS){id=#ENV{id}}{lang=#ENV{lang_orig}}{0,1}>
 				#SET{comm_orig,#COMM}
@@ -48,6 +39,15 @@
 				<span class="erreur_message">(#ENV{erreurs}|table_valeur{comm})</span>]
 				<p class="explication"><:tradlang:explication_comm:></p>
 				<textarea class="texte" name="comm" id="comm" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#ENV*{comm}|entites_html)]</textarea>
+			</li>
+			<li class="editer editer_statut obligatoire[(#ENV{erreurs}|table_valeur{statut}|oui)erreur]">
+				<label for="statut"><:tradlang:label_tradlang_status:></label>[
+				<span class="erreur_message">(#ENV{erreurs}|table_valeur{statut})</span>]
+				<select class="text crayon_active" name="statut" id="statut">
+					<option value="OK"[(#STATUT|=={OK}|oui)selected="selected"]><:tradlang:str_status_traduit:></option>
+					<option value="MODIF"[(#STATUT|=={MODIF}|oui)selected="selected"]><:tradlang:str_status_modif:></option>
+					<option value="NEW"[(#STATUT|=={NEW}|oui)selected="selected"]><:tradlang:str_status_new:></option>
+				</select>
 			</li>
 		</ul>
 		<p class='boutons'>
