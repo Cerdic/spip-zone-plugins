@@ -3,11 +3,14 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-    'info_1_jeu'               =>'Liste des jeux',
+    'info_1_jeu'               =>'Un jeu',
+    'info_1_resultat'           =>'Un résultat',
     'icone_creer_jeu'          =>'Créer un jeu',
     'icone_modifier_jeu'       =>'Modifier le jeu',
-    'info_aucun_jeu'            =>'Aucune jeu',
+    'info_aucun_jeu'            =>'Aucun jeu',
+    'info_aucun_resultat'       =>'Aucun résultat',
     'info_nb_jeux'              =>'@nb@ jeux',
+    'info_nb_resultats'         =>'@nb@ résultats',
     'info_texte'                =>'Texte',
     'info_type_resultat'        =>'Type de résultat',
     'label_texte'               =>'Texte',
