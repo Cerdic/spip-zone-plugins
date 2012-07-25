@@ -114,19 +114,20 @@ function jeux_taches_generales_cron($taches_generales){
 }
 
 
-
-// SPIP >= 2.0 : c'est genie_ et pas cron_
-function genie_jeux_nettoyer_base($t) {
-	// plugins Corbeille ou Couteau Suisse : pas d'optimisation automatique
-	if(defined('_DIR_PLUGIN_CORBEILLE') || defined('_CORBEILLE_SANS_OPTIM')) return;
-	$sel = sql_select('id_jeu', 'spip_jeux', "statut='poubelle'");
-	while ($r = sql_fetch($sel)) $ids[] = $r['id_jeu'];
-	if (count($ids)) {
-		sql_delete('spip_jeux', sql_in('id_jeu', $ids));
-		sql_delete('spip_jeux_resultats', sql_in('id_jeu', $ids));
-		spip_log('Le plugin Jeux vide la poubelle WHERE `id_jeu` IN '.join(',',$ids),'jeux');
-	}
+/**
+ * Optimiser la base de donnees en supprimant les liens orphelins
+ * de l'objet vers quelqu'un et de quelqu'un vers l'objet.
+ *
+ * @param int $n
+ * @return int
+ */
+function jeux_optimiser_base_disparus($flux){
+	include_spip('action/editer_liens');
+	$flux['data'] += objet_optimiser_liens(array('jeux'=>'*'),'*');
+	return $flux;
 }
+
+
 
 // SPIP >=2.0 : association type objet/table
 function jeux_declarer_tables_objets_surnoms($surnoms) {
