@@ -22,8 +22,9 @@
 	<pipeline nom="declarer_tables_objets_surnoms" inclure="jeux_pipelines.php" />
 	<pipeline nom="affichage_final" inclure="jeux_pipelines.php" />
 
-	<menu nom="jeux" titre="jeux:jeux" parent="menu_edition" icone="images/jeu-16.png" action ="jeux" parametres="" />
-	<menu nom="jeu_creer" titre="jeux:nouveau_jeu" parent="outils_rapides" icone="images/jeu-new-16.png" action ="jeu_edit" parametres="new=oui" />
+	<menu nom="jeux" titre="jeux:jeux" parent="menu_edition" icone="images/jeu-16.png" action ="jeux" />
+	<menu nom="jeu_edit" titre="jeux:nouveau_jeu" parent="outils_rapides" icone="images/jeu-new-16.png" parametres="new=oui" />
 	<menu nom="configurer_jeux" titre="jeux:configuration_jeux" parent="menu_configuration" icone="images/jeu-16.png" />
+	
     <necessite nom="saisies" />
 </paquet>
