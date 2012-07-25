@@ -135,4 +135,21 @@ function jeux_declarer_tables_objets_surnoms($surnoms) {
 	return $surnoms;
 }
 
+// Afficher liens vers les résultats de l'auteur
+function jeux_affiche_gauche($flux){
+     if ($flux['args']['exec'] == 'auteur') {
+        $flux['data'].= boite_ouvrir('','info');
+        $flux['data'].= '<a href="'.generer_url_ecrire('jeux_resultats','id_auteur='.$flux['args']['id_auteur']).'">'._T('jeux:voir_resultats').'</a>';
+        $flux['data'].= boite_fermer();  
+        
+     }
+      if ($flux['args']['exec'] == 'infos_perso') {
+        $flux['data'].= boite_ouvrir('','info');
+        $flux['data'].= '<a href="'.generer_url_ecrire('jeux_resultats','id_auteur='.$GLOBALS['auteur_session']['id_auteur']).'">'._T('jeux:voir_resultats').'</a>';
+        $flux['data'].= boite_fermer();  
+        
+     }
+    return $flux;    
+}
+
 ?>
