@@ -13,6 +13,7 @@
 	<auteur lien="http://www.maieul.net">Ma&#239;eul Rouquette</auteur>
 	<licence>GNU/LGPL - (c) 2006-2012</licence>
 
+    <pipeline nom="autoriser" inclure="jeux_autorisations.php" /> 
     <pipeline nom="declarer_tables_objets_sql" inclure="jeux_pipelines.php" />
 	<pipeline nom="insert_head" inclure="jeux_pipelines.php" />
 	<pipeline nom="pre_propre" inclure="jeux_pipelines.php" />
