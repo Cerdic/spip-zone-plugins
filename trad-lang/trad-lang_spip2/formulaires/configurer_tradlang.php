@@ -4,7 +4,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function formulaires_configurer_tradlang_charger_dist(){
 	$valeurs = @unserialize($GLOBALS['meta']['tradlang']);
-	spip_log($valeurs);
 	if (!is_array($valeurs))
 		$valeurs = array();
 	
