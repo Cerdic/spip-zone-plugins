@@ -18,7 +18,7 @@
 		<tr class='first_row'>
             <th scope="col">[(#TRI{titre,<:jeu:label_titre:>,ajax})]</th>
             <th scope="col">[(#TRI{nom,<:jeu:label_nom:>,ajax})]</th>
-            <th scope="col">[(#TRI{resultat,<:jeu:label_resultat:>,ajax})]</th>
+            <th scope="col">[(#TRI{resultat_court,<:jeu:label_resultat:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -26,7 +26,7 @@
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td><a href="#URL_ECRIRE{jeu,id_jeu=#ID_JEU}">#TITRE</a></td>
 			<td><a href="#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}">#NOM</a></td>
-			<td>#RESULTAT</td>
+			<td>#RESULTAT_COURT</td>
 		</tr>
 	</BOUCLE_liste_resultats>
 	</tbody>
