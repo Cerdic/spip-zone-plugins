@@ -1,31 +1,31 @@
-<traduction module="crayons" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/crayons/lang/" reference="fr">
-	<langue code="ast" url="http://trad.spip.org/tradlang_module/crayons?lang_cible=ast">
-		<traducteur nom="Xuacu" lien="http://trad.spip.org/auteur/xuacu" />
+<traduction module="crayons" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/crayons/lang/" reference="fr">
+	<langue code="ast" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=ast">
+		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
 	</langue>
 	<langue code="ca" />
 	<langue code="de" />
-	<langue code="en" url="http://trad.spip.org/tradlang_module/crayons?lang_cible=en">
-		<traducteur nom="Paolo" lien="http://trad.spip.org/auteur/paolo" />
-		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
+	<langue code="en" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=en">
+		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.org/tradlang_module/crayons?lang_cible=es">
-		<traducteur nom="severo" lien="http://trad.spip.org/auteur/severo" />
+	<langue code="es" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=es">
+		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.org/tradlang_module/crayons?lang_cible=fa">
-		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=fa">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" />
-	<langue code="fr_tu" url="http://trad.spip.org/tradlang_module/crayons?lang_cible=fr_tu">
-		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=fr_tu">
+		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 	</langue>
-	<langue code="it" url="http://trad.spip.org/tradlang_module/crayons?lang_cible=it">
-		<traducteur nom="Fil" lien="http://trad.spip.org/auteur/fil" />
+	<langue code="it" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=it">
+		<traducteur nom="Fil" lien="http://trad.spip.net/auteur/fil" />
 	</langue>
-	<langue code="nl" url="http://trad.spip.org/tradlang_module/crayons?lang_cible=nl">
-		<traducteur nom="mpossoz" lien="http://trad.spip.org/auteur/mpossoz" />
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=nl">
+		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/crayons?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 	<langue code="zh" />
 </traduction>
