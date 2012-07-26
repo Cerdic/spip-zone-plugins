@@ -1,9 +1,9 @@
-<traduction module="spipproprio" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/spip_proprietaire/spip_3/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.org/tradlang_module/spipproprio?lang_cible=en">
-		<traducteur nom="merce" lien="http://trad.spip.org/auteur/merce" />
+<traduction module="spipproprio" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/spip_proprietaire/spip_3/lang/" reference="fr">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/spipproprio?lang_cible=en">
+		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
 	</langue>
 	<langue code="fr" />
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/spipproprio?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/spipproprio?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
