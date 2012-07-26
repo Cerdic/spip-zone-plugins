@@ -1,34 +1,34 @@
-<traduction module="spipbb" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/spipBB/dev/2_1_0/lang/" reference="fr">
-	<langue code="ast" url="http://trad.spip.org/tradlang_module/spipbb?lang_cible=ast">
-		<traducteur nom="Xuacu" lien="http://trad.spip.org/auteur/xuacu" />
+<traduction module="spipbb" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/spipBB/dev/2_1_0/lang/" reference="fr">
+	<langue code="ast" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=ast">
+		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
 	</langue>
-	<langue code="ca" url="http://trad.spip.org/tradlang_module/spipbb?lang_cible=ca">
-		<traducteur nom="merce" lien="http://trad.spip.org/auteur/merce" />
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=ca">
+		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
 	</langue>
-	<langue code="de" url="http://trad.spip.org/tradlang_module/spipbb?lang_cible=de">
-		<traducteur nom="klaus++" lien="http://trad.spip.org/auteur/klaus" />
+	<langue code="de" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=de">
+		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.org/tradlang_module/spipbb?lang_cible=en">
-		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
-		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
-		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
+	<langue code="en" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=en">
+		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" />
-	<langue code="fa" url="http://trad.spip.org/tradlang_module/spipbb?lang_cible=fa">
-		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=fa">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" />
-	<langue code="fr_tu" url="http://trad.spip.org/tradlang_module/spipbb?lang_cible=fr_tu">
-		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=fr_tu">
+		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 	</langue>
 	<langue code="gl" />
 	<langue code="km" />
-	<langue code="nl" url="http://trad.spip.org/tradlang_module/spipbb?lang_cible=nl">
-		<traducteur nom="mpossoz" lien="http://trad.spip.org/auteur/mpossoz" />
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=nl">
+		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 	</langue>
 	<langue code="pt" />
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/spipbb?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 	<langue code="tr" />
 </traduction>
