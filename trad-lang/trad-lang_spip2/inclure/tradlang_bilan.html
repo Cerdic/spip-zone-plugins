@@ -1,8 +1,8 @@
 #SET{langues,#ARRAY}
 #SET{langues_vides,#ARRAY}
 #SET{langues_preferees_auteur,#INFO_LANGUES_PREFEREES{auteur,#SESSION{id_auteur}}|unserialize}
-<BOUCLE_si_pas_langues(CONDITION){si #ENV{langues_choisies,#GET{langues_preferees_auteur}}|is_array|non|et{#CONFIG{tradlang/limiter_langues_bilan}|=={on}|oui}|oui}>
-#SET{langues_utilisees,#ARRAY}
+<BOUCLE_si_pas_langues(CONDITION){si #ENV{langues_choisies,#GET{langues_preferees_auteur}}|is_array|non|ou{#ENV{langues_choisies,#GET{langues_preferees_auteur}}|count|>{1}|non}|et{#CONFIG{tradlang/limiter_langues_bilan}|=={on}|oui}|oui}>
+#SET{langues_utilisees,#ARRAY} 
 #SET{nb_utilisees,#CONFIG{tradlang/limiter_langues_bilan_nb,10}}
 <BOUCLE_10_langues(TRADLANGS){statut=OK}{fusion lang}{!par COUNT(*)}{0,#GET{nb_utilisees}}>
 #SET{langues_utilisees,#GET{langues_utilisees}|push{#LANG}}
@@ -40,7 +40,7 @@
 	</div>]
 ]]
 [(#ENV{langues_choisies}|is_array|non)
-[(#GET{langues_preferees_auteur}|is_array|non)
+[(#GET{langues_preferees_auteur}|is_array|non|ou{#GET{langues_preferees_auteur}|count|>{0}|non})
 [(#GET{langues_utilisees}|is_array|oui)
 	[(#SET{langues_string,[(#VAL{traduire_nom_langue}|array_map{#GET{langues_utilisees}}|implode{', '})]})]
 	<div class="notice">
@@ -76,7 +76,7 @@
 	<tbody>
 	<BOUCLE_modules_lang(TRADLANG_MODULES){priorite}>
 	<tr class="module #MODULE[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-		<td>[(#FORMULAIRE_FAVORI{tradlang_module,#ID_TRADLANG_MODULE}) ]<a href="[(#SELF|parametre_url{id_tradlang_module,#ID_TRADLANG_MODULE})]" title="<:tradlang:lien_voir_bilan_module{module=#MODULE,nom_mod=#NOM_MOD}|attribut_html:>">[(#NOM_MOD)]</a></td>
+		<td class="#EDIT{nom_mod}">[(#FORMULAIRE_FAVORI{tradlang_module,#ID_TRADLANG_MODULE}) ]<a href="[(#SELF|parametre_url{id_tradlang_module,#ID_TRADLANG_MODULE})]" title="<:tradlang:lien_voir_bilan_module{module=#MODULE,nom_mod=#NOM_MOD}|attribut_html:>">[(#NOM_MOD)]</a></td>
 		#SET{full,''}
 		#SET{langue_mere,#LANG_MERE}
 		<BOUCLE_compte_langue_mere(TRADLANGS){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
