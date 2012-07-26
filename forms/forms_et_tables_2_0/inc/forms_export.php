@@ -60,7 +60,7 @@ function Forms_formater_reponse($ligne, $valeurs, $structure, $format, $separate
 	// Prendre les differents champs dans l'ordre
 	foreach ($structure as $champ => $t) {
 	
-		if ( !isset($valeurs[$champ]) ) {
+		if ( !isset($valeurs[$champ])  AND $t['type']!='multiple') {
 			$ligne[$champ] = "";
 			
 		} else {
