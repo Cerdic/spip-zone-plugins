@@ -1,0 +1,192 @@
+<script language="JavaScript">
+/*******************************************************************************
+La partie TRADUCTION
+FONCTIONNEMENT :
+- sur appui du bouton "traduire", la fonction traduire() est appelée,
+- cette fonction parse la page à la recherche des input et textarea,
+- les valeurs de ces champs sont stockées en tableau, l'index correspondant au ID du champs
+- ensuite, on lance un appel ajax qui parcoure le tableau, index par index. Un index -> une demande de traduction
+- le résultat de la traduction est renvoyée en callback resultat_traduction()
+- qui remplit un autre tableau t_resultat. A chaque résultat, on passe à la traduction suivante.
+- Quand on a tous les résultats, on met à jour la page
+*/
+
+var t_atraduire_txt = new Array();
+var t_atraduire_id = new Array();
+var t_traduit_txt = new Array();
+var t_traduit_id = new Array();
+var from = "#ENV{lang}";
+
+window.onload=init_tradauto;
+
+function init_tradauto()
+{
+	// On stocke toutes les value des input de type text dans un tableau
+	var t_input = document.getElementsByTagName('input');
+	for (var i = 0 ; i < t_input.length ; i ++)
+		if (t_input[i].type == "text")
+		{
+			if (t_input[i].value.length > 10000) alert ("ATTENTION : la longueur ("+t_input[i].value.length+" ar.) du champs input "+t_input[i].id+" dépasse le maximum de 10000 caractères.\nLa traduction sera effective pour les 10000 premiers caractères.\nVous devrez complèter la traduction pour les car. au délà.\nIl est également possible que cela provoque une erreur 414 (requête trop longue).");
+			t_atraduire_txt.push(prepare_texte(t_input[i].value));
+			t_atraduire_id.push([t_input[i].id]);
+		}
+
+	// idem pour les textarea -> value dans un tableau
+	var t_textarea = document.getElementsByTagName('textarea');
+	for (var i = 0 ; i < t_textarea.length ; i ++)
+	{
+		if (t_textarea[i].value.length > 10000) alert ("ATTENTION : la longueur ("+t_textarea[i].value.length+" car.) du champs textarea "+t_textarea[i].id+" dépasse le maximum de 10000 caractères.\nLa traduction sera effective pour les 10000 premiers caractères.\nVous devrez complèter la traduction pour les car. au délà.\nIl est également possible que cela provoque une erreur 414 (requête trop longue).");
+		t_atraduire_txt.push(prepare_texte(t_textarea[i].value));
+		t_atraduire_id.push([t_textarea[i].id]);
+	}
+}
+
+
+// Dépile un élément à traduire dans le tableau
+// et fait la requête de traduction
+function traduire()
+{
+	if (t_atraduire_txt.length > 0)
+	{
+		// Récupère le code langue sélectionnée
+		var selectElmt = document.getElementById("select_langues");
+		var to = selectElmt.options[selectElmt.selectedIndex].value;
+		setCookie("tradauto_select_langue", to, 100);
+
+		text = t_atraduire_txt.pop();
+		var s = document.createElement("script");
+		s.src = "http://api.microsofttranslator.com/V2/Ajax.svc/Translate" +
+		    "?appId=Bearer " + "#ENV{tradauto_token}" +
+		    "&from=" + encodeURIComponent(from) +
+		    "&to=" + encodeURIComponent(to) +
+		    "&oncomplete=resultat_traduction" +
+		    "&text=" + encodeURIComponent(text);
+
+		document.body.appendChild(s);
+		document.getElementsByTagName('body')[0].style.cursor = 'wait'; // Sablier
+		tradauto_msg("Traduction en cours. Patientez...");
+	}
+	else
+	{
+		document.getElementsByTagName('body')[0].style.cursor = 'default'; // curseur par défaut
+		tradauto_msg("Traduction effectuée");
+
+		// On a tout traduit, on met à jour la page
+		for (var i = 0 ; i < t_traduit_txt.length ; i ++)
+		{
+			document.getElementById(t_traduit_id[i]).value =  t_traduit_txt[i];
+//alert(document.getElementById(t_traduit_id[i]).value);
+		}
+
+		alert("Traduction effectuée avec succès.\nVous pouvez maintenant corriger la traduction et/ou enregistrer.")
+	}
+}
+
+// callback pour le retour du résultat de traduction
+function resultat_traduction(response)
+{
+//	alert(response);
+	t_traduit_txt.push(restitue_texte(response));
+  t_traduit_id.push(t_atraduire_id.pop());
+	traduire(); // on passe à l'élément suivant
+}
+
+
+// Affiche un message sur la page
+function tradauto_msg(unechaine)
+{
+	var a = document.getElementById("msg_tradauto");
+	if (a) a.innerHTML = unechaine;
+}
+
+function getCookie(c_name)
+{
+var i,x,y,ARRcookies=document.cookie.split(";");
+for (i=0;i<ARRcookies.length;i++)
+  {
+  x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+  y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+  x=x.replace(/^\s+|\s+$/g,"");
+  if (x==c_name)
+    {
+    return unescape(y);
+    }
+  }
+}
+
+function setCookie(c_name,value,exdays)
+{
+var exdate=new Date();
+exdate.setDate(exdate.getDate() + exdays);
+var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+document.cookie=c_name + "=" + c_value;
+}
+
+// Cette fonction remplace certaines séquences (saut de ligne, etc.),
+// par des tag html de façon à ce que l'API MT les ignore.
+// A utiliser conjointement avec restitue_texte pour remettre les bonnes séquences après traduction
+var t_exclus = new Array();
+function prepare_texte(texte)
+{
+	texte = texte.replace(/\n/g,'<t_cr>');
+
+	// Remplacement des chaines à exclure de la traduction par <t_xxx> où xxx est un index
+  cae = "[(#ENV*{tradauto_exclus}|replace{\r}|replace{\n,|||})]"; // les chaines à exclure sont dans CFG
+	t_cae = cae.split("|||");
+	if (t_cae.length > 0)
+	{
+		for (i in t_cae)
+		{
+			var pattern = t_cae[i];
+			var reg=new RegExp(pattern, "g");
+			m = texte.match(reg);
+			for (t in m)
+			{
+		//alert("AVANT"+t+texte);
+				t_exclus.push(m[t]); // enregistre la chaine exclue dans un tableau
+		    texte = texte.replace(m[t], '<t_'+t_exclus.length+'>'); // et remplace la chaine par <t_xxx>
+//alert("PATTERN="+pattern+"\nN="+m.length+"\nTAG="+'<t_'+t_exclus.length+">\nAPRES"+t+texte);
+			}
+		}
+	}
+	return texte;
+}
+
+// Utilisée pour remettre les bonnes séquences dans le texte traduit
+function restitue_texte(texte)
+{
+	texte = texte.replace(/ ?&lt; ?/g,'<');
+	texte = texte.replace(/ &gt; ?/g,'>');
+	texte = texte.replace(/ ?<t_cr> ?/g,'\n');
+//alert(texte);
+
+	// Restitue les exclusions
+	m = texte.match(/<t_(\d+)>/g);
+	for (i in m)
+	{
+		n = m[i].match(/\d+/);
+		e = t_exclus[n-1];
+
+//alert(m[i]+"   "+n+"    "+e);
+//alert("AVANT"+i+texte);
+    texte = texte.replace(m[i], e)
+//alert("APRES"+i+texte);
+	}
+
+	return texte;
+}
+
+
+</script>
+
+<div class="entete-formulaire">
+
+	<select id="select_langues">
+    <BOUCLE_option(POUR){tableau #ENV{tradauto_lang}}>
+    	<option value="#CLE">#VALEUR</option>
+    </BOUCLE_option>
+	</select>
+
+	<input class="submit" type="submit" value="Traduire" name="traduire" onClick="traduire()">
+	<span id="msg_tradauto"></span>
+</div>
