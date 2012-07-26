@@ -1,15 +1,15 @@
-<traduction module="csvimport" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/csv_import/lang/" reference="fr">
+<traduction module="csvimport" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/csv_import/lang/" reference="fr">
 	<langue code="ca" />
 	<langue code="de" />
-	<langue code="en" url="http://trad.spip.org/tradlang_module/csvimport?lang_cible=en">
-		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
+	<langue code="en" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=en">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="fa" />
 	<langue code="fr" />
 	<langue code="fr_tu" />
 	<langue code="gl" />
 	<langue code="it" />
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/csvimport?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
