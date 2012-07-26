@@ -4,7 +4,7 @@
     [en]Calculator for hydraulic</multi></nom>
     <auteur>David Dorchies, Médéric Dulondel</auteur>
     <licence>GNU/GLP</licence>
-    <version>0.5.2</version>
+    <version>0.6.1</version>
     <necessite id="lib:dist" src="https://bitbucket.org/cleonello/jqplot/downloads/jquery.jqplot.1.0.0b2_r1012.zip" />
     <slogan>
         <multi>[fr]Des calculs d'hydraulique sous SPIP !
@@ -19,6 +19,7 @@ Les formulaires de calcul disponibles sont :
 -* &lt;formulaire|courbe_remous&gt; : Calcul d'une courbe de remous dans un canal à section paramétrée &#224; surface libre
 -* &lt;formulaire|lechapt_calmon&gt; : Calculs pour une conduite circulaire en charge avec la formule de Lechapt et Calmon
 -* &lt;formulaire|calcul_normale_critique&gt; : Calcul des paramètres hydrauliques d'une section paramétrée
+-* &lt;formulaire|calcul_ouvrages&gt; : Calcul des paramètres hydrauliques d'un ouvrage (seuil, vanne...)
 [en]Calculator for performing calculations in hydraulic adapted to canals and rivers. The plugin comes
 as forms to be inserted into articles, sections or skeletons.
 
@@ -26,6 +27,7 @@ Calculation forms available:
 -* &lt;formulaire|courbe_remous&gt; : Calculation of a backwater curve in a parametrized section channel with free surface
 -* &lt;formulaire|lechapt_calmon&gt; : Calculations on hydraulic head for a circular pipe with Lechapt and Calmon formula
 -* &lt;formulaire|calcul_normale_critique&gt; : Calculation of hydraulic parameters in a parametrized section
+-* &lt;formulaire|calcul_ouvrages&gt; : Calculation of hydraulic parameters of a device (weir, gate...)
     </multi>
     </description>
     <icon>logo32.png</icon>

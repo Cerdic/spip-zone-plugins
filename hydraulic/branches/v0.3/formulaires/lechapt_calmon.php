@@ -37,190 +37,185 @@
  * MA 02110-1301, USA.
  *
  */
- 
+
 // Cette fonction renvoit tous les indices des champs présents dans le formulaire.
 function mes_champs_coeff_materiau() {
-	$mes_champs_coeff = array('L','M','N','Q','D','J','Lg');
-	return $mes_champs_coeff;
+    $mes_champs_coeff = array('L','M','N','Q','D','J','Lg');
+    return $mes_champs_coeff;
 }
 
 // Cette fonction renvoit seulement les paramètres fixes, ainsi que leur code pour le dictionnaires des langues
 function mes_champs_sans_coeff_materiau(){
-	$mes_champs_sans_coeff = array(
-		'Q' => _T('hydraulic:param_Q'),
-		'D' => _T('hydraulic:param_D'),
-		'J' => _T('hydraulic:param_J'),
-		'Lg' => _T('hydraulic:param_Lg')
-	);
-	
-	return $mes_champs_sans_coeff;
+    $mes_champs_sans_coeff = array('Q','D','J','Lg');
+
+    return $mes_champs_sans_coeff;
 }
 
-// Découpe le paramètre champs en suivant les "_" et renvoit l'avant derner morceau.
-function id_decoupe($champs){
-	$decoup = explode('_', $champs, 3);
-	return $decoup[count($decoup)-1];
-}
 
-/* 
+/*
  * Tableau des données pour chaque type de tuyau. Ces valeurs sont associées
  * aux numéros des options du select (voir page lechapt_calmon.php)
  */
 function mes_saisies_materiau() {
-	$type_materiaux = array(
-	
-				'1'          => array(
-									   'L' =>1.863,
-									   'M' =>2,
-									   'N' =>5.33			
-				),
-				
-				'2'          => array(
-									   'L' =>1.601,
-									   'M' =>1.975,
-									   'N' =>5.25			
-				),
-				
-				'3'          => array(
-									   'L' =>1.40,
-									   'M' =>1.96,
-									   'N' =>5.19			
-				),
-				
-				'4'          => array(
-									   'L' =>1.16,
-									   'M' =>1.93,
-									   'N' =>5.11			
-				),
-				
-				'5'          => array(
-									   'L' =>1.1,
-									   'M' =>1.89,
-									   'N' =>5.01			
-				),
-				
-				'6'          => array(
-									   'L' =>1.049,
-									   'M' =>1.86,
-									   'N' =>4.93			
-				),
-				
-				'7'          => array(
-									   'L' =>1.01,
-									   'M' =>1.84,
-									   'N' =>4.88			
-				),
-				
-				'8'          => array(
-									   'L' =>0.916,
-									   'M' =>1.78,
-									   'N' =>4.78			
-				),
-				
-				'9'          => array(
-									   'L' =>0.971,
-									   'M' =>1.81,
-									   'N' =>4.81			
-				),
-	);
-		
+    $type_materiaux = array(
+
+                '1'          => array(
+                                       'L' =>1.863,
+                                       'M' =>2,
+                                       'N' =>5.33
+                ),
+
+                '2'          => array(
+                                       'L' =>1.601,
+                                       'M' =>1.975,
+                                       'N' =>5.25
+                ),
+
+                '3'          => array(
+                                       'L' =>1.40,
+                                       'M' =>1.96,
+                                       'N' =>5.19
+                ),
+
+                '4'          => array(
+                                       'L' =>1.16,
+                                       'M' =>1.93,
+                                       'N' =>5.11
+                ),
+
+                '5'          => array(
+                                       'L' =>1.1,
+                                       'M' =>1.89,
+                                       'N' =>5.01
+                ),
+
+                '6'          => array(
+                                       'L' =>1.049,
+                                       'M' =>1.86,
+                                       'N' =>4.93
+                ),
+
+                '7'          => array(
+                                       'L' =>1.01,
+                                       'M' =>1.84,
+                                       'N' =>4.88
+                ),
+
+                '8'          => array(
+                                       'L' =>0.916,
+                                       'M' =>1.78,
+                                       'N' =>4.78
+                ),
+
+                '9'          => array(
+                                       'L' =>0.971,
+                                       'M' =>1.81,
+                                       'N' =>4.81
+                ),
+    );
+
   return $type_materiaux;
-  
+
 }
 
-function champs_obligatoires_lcalmon(){
-	/* 
-	 * Ce tableau contient la liste de tous les champs du formulaire.
-	 * La suite de cette fonction se chargera de supprimer les valeurs non obligatoires.
-	 */
-	$tChOblig = mes_champs_coeff_materiau();
-	$tChUtil = mes_champs_sans_coeff_materiau();
-	
-	$choix_champs = array();
-	foreach($tChUtil as $cle=>$valeur){
-		$choix_champs[$cle] = _request('choix_champs_'.$cle);
-	}
+function champs_obligatoires($bCalc = false){
+    /*
+     * Ce tableau contient la liste de tous les champs du formulaire.
+     * La suite de cette fonction se chargera de supprimer les valeurs non obligatoires.
+     */
+    $tChOblig = mes_champs_coeff_materiau();
+    $tChCalc = mes_champs_sans_coeff_materiau();
 
-	foreach($choix_champs as $cle=>$valeur){
-		// Si le choix du select est de calculer une valeur...
-		if(substr($valeur, 0,3) != 'val'){
-			foreach($tChOblig as $cle1=>$valeur1){
-				if($cle == $valeur1){
-					// ... alors on peut supprimer de notre tableau le champs calculé (il n'est pas obligatoire car grisé)
-					unset($tChOblig[$cle1]);
-					// Permet de tasser le tableau
-					$tChOblig = array_values($tChOblig);
-				}
-			}
-		}
-		// Si le choix du select est de faire varier une valeur alors on ajoute les 3 champs nécessaires
-		if(substr($valeur, 0, 3) == 'var'){
-			$tChOblig[] = 'val_min_'.$cle;
-			$tChOblig[] = 'val_max_'.$cle;
-			$tChOblig[] = 'pas_var_'.$cle;
-		}	
-	}
-	$tChOblig[] = 'prec_lc';
-	
-	return $tChOblig;
+    $choix_champs = array();
+    foreach($tChCalc as $valeur){
+        $choix_champs[$valeur] = _request('choix_champs_'.$valeur);
+    }
+
+    foreach($choix_champs as $cle=>$valeur){
+        // Si le choix du select est de calculer une valeur...
+        if(substr($valeur, 0,3) != 'val'){
+            foreach($tChOblig as $cle1=>$valeur1){
+                if($cle == $valeur1){
+                    // ... alors on peut supprimer de notre tableau le champs calculé (il n'est pas obligatoire car grisé)
+                    unset($tChOblig[$cle1]);
+                    // Permet de tasser le tableau
+                    $tChOblig = array_values($tChOblig);
+                }
+            }
+        }
+        // Si le choix du select est de faire varier une valeur alors on ajoute les 3 champs nécessaires
+        if(substr($valeur, 0, 3) == 'var'){
+            $tChOblig[] = 'val_min_'.$cle;
+            $tChOblig[] = 'val_max_'.$cle;
+            $tChOblig[] = 'pas_var_'.$cle;
+        }
+    }
+    $tChOblig[] = 'rPrec';
+
+    if($bCalc) {
+        return $tChCalc;
+    }
+    else {
+        return $tChOblig;
+    }
 }
 
-function formulaires_lechapt_calmon_charger_dist() { 
-	$valeurs = array(
-		'mes_saisies_materiaux' => mes_saisies_materiau(),
-		'tableau_caract' => mes_champs_sans_coeff_materiau(),
-		'typeMateriau' => 1,
-		'prec_lc' => 0.001,
-		'L' => 1.863,
-		'M' => 2,
-		'N' => 5.33,
-		'Q' => 3,
-		'D' => 1.2,
-		'J' => 0.634482025,
-		'Lg'=> 100
-	);
-  
-	$mes_champs = mes_champs_sans_coeff_materiau();
-	// On parcourt tous le tableau des indices, et on initialise les valeurs des boutons radios, et des champs de variation
-	foreach($mes_champs as $cle=>$valeur){
-		if($cle == 'Q'){
-			$valeurs['choix_champs_'.$cle] = 'calcul_val_'.$cle;
-		}
-		else{
-			$valeurs['choix_champs_'.$cle] = 'val_fixe_'.$cle;
-		}
-		
-		$valeurs['val_min_'.$cle] = 1;
-		$valeurs['val_max_'.$cle] = 2;
-		$valeurs['pas_var_'.$cle] = 0.1;
-	}
-	
+function formulaires_lechapt_calmon_charger_dist() {
+    $valeurs = array(
+        'mes_saisies_materiaux' => mes_saisies_materiau(),
+        'tableau_caract' => mes_champs_sans_coeff_materiau(),
+        'typeMateriau' => 1,
+        'rPrec' => 0.001,
+        'L' => 1.863,
+        'M' => 2,
+        'N' => 5.33,
+        'Q' => 3,
+        'D' => 1.2,
+        'J' => 0.634482025,
+        'Lg'=> 100
+    );
+
+    $mes_champs = mes_champs_sans_coeff_materiau();
+    // On parcourt tous le tableau des indices, et on initialise les valeurs des boutons radios, et des champs de variation
+    foreach($mes_champs as $cle){
+        if($cle == 'Q'){
+            $valeurs['choix_champs_'.$cle] = 'calcul_val_'.$cle;
+        }
+        else{
+            $valeurs['choix_champs_'.$cle] = 'val_fixe_'.$cle;
+        }
+
+        $valeurs['val_min_'.$cle] = 1;
+        $valeurs['val_max_'.$cle] = 2;
+        $valeurs['pas_var_'.$cle] = 0.1;
+    }
+
     return $valeurs;
 }
 
-function formulaires_lechapt_calmon_verifier_dist(){	
+function formulaires_lechapt_calmon_verifier_dist(){
     $erreurs = array();
     $datas = array();
-    $tChOblig= champs_obligatoires_lcalmon();
+    $tChOblig= champs_obligatoires();
     // Vérifier que les champs obligatoires sont bien là :
     foreach($tChOblig as $obligatoire) {
-		if (_request($obligatoire) == NULL) {
-			$erreurs[$obligatoire] = _T('hydraulic:champ_obligatoire');
+        if (_request($obligatoire) == NULL) {
+            $erreurs[$obligatoire] = _T('hydraulic:champ_obligatoire');
         }
         // Les coefficients des matériaux doivent être strictement positifs
         else if(($obligatoire == 'L' || $obligatoire == 'M' || $obligatoire == 'N') && _request($obligatoire) == 0){
-			$erreurs[$obligatoire] = _T('hydraulic:valeur_positive');			
-		}
+            $erreurs[$obligatoire] = _T('hydraulic:valeur_positive');
+        }
         else {
             $datas[$obligatoire] = _request($obligatoire);
         }
     }
 
-	// Gestion des valeurs négatives
+    // Gestion des valeurs négatives
     foreach($datas as $champ=>$data) {
         if ($data < 0) $erreurs[$champ] = _T('hydraulic:valeur_positive_nulle');
     }
-    
+
     if (count($erreurs)) {
         $erreurs['message_erreur'] = _T('hydraulic:saisie_erreur');
     }
@@ -229,269 +224,70 @@ function formulaires_lechapt_calmon_verifier_dist(){
 }
 
 function formulaires_lechapt_calmon_traiter_dist(){
-    global $spip_lang;
-	include_spip('hyd_inc/cache');
-    include_spip('hyd_inc/log.class');
-    include_spip('hyd_inc/graph.class');
-	
-	 /***************************************************************************
+     /***************************************************************************
     *                        Calcul de Lechapt et calmon
     ****************************************************************************/
-    $echo = '';
-	$ValCal = '';
-	$result = array();
-	$choix_radio = array();
-	$tabLibelle = array();
-	$champs_materiau_coeff = mes_champs_coeff_materiau();
-	$champs_materiau_sans_coeff = mes_champs_sans_coeff_materiau();
-	$tChOblig = champs_obligatoires_lcalmon();
-    $iPrec=(int)-log10(_request('prec_lc'));
-
-    //On récupère les données
-    foreach($tChOblig as $champ) {
-        if (_request($champ)){
-            $datas[$champ] = _request($champ);
-        }
-
-        $datas[$champ] = str_replace(',','.',$datas[$champ]); // Bug #574
+    include_spip('hyd_inc/cache');
+    include_spip('hyd_inc/log.class');
+    include_spip('hyd_inc/charge_datas');
+    $datas = charge_datas();
+    //spip_log($datas,'hydraulic');
+    // On transforme les champs du tableau en variables
+    foreach($datas as $cle=>&$valeur){
+        ${$cle} = &$valeur;
     }
 
-    // On ajoute la langue en cours pour différencier le fichier de cache par langue
-    $datas['sLang'] = $spip_lang;
-
-    // Nom du fichier en cache pour calcul déjà fait
-    $CacheFileName=md5(serialize($datas));
-
-	// On transforme les champs du tableau en variables
-	foreach($champs_materiau_coeff as $champs){
-		${$champs} = _request($champs);
-	}
-	
-	// On récupère les différents choix effectué sur les boutons radios ainsi que les libelles de tous les paramètres
-	foreach($champs_materiau_sans_coeff as $cle=>$valeur){
-		$choix_radio[$cle] = _request('choix_champs_'.$cle);
-		$tabLibelle[$cle] = _T('hydraulic:param_'.$cle);
-	}
-
-	$min = 0;
-	$max = 0;
-	$pas = 1;
-	$i = 0;
-		
-	foreach($choix_radio as $ind){
-		// Si il y a une valeur a calculer
-		if(substr($ind, 0, 3) == 'cal'){
-			$ValCal = id_decoupe($ind);
-		}
-		// Sinon si une valeur varie
-		else if(substr($ind, 0, 3) == 'var'){
-			// alors on récupère sa valeur maximum, minimum et son pas de variation
-			$min = _request('val_min_'.id_decoupe($ind));
-			$max = _request('val_max_'.id_decoupe($ind));
-			$pas = _request('pas_var_'.id_decoupe($ind));
-			// On fait pointer la variable qui varie sur l'indice de parcours du tableau i 
-			${id_decoupe($ind)} = &$i;
-		}
-	}
-	
-	// Pour afficher correctement la valeur maximum
-	$max += $pas/2;
-	
-	$bNoCache = false; // true pour débugage
+    $bNoCache = true; // true pour débugage
     if(!$bNoCache && is_file(HYD_CACHE_DIRECTORY.$CacheFileName)) {
         // On récupère toutes les données dans un cache déjà créé
-        $result = ReadCacheFile($CacheFileName);
+        list($tAbs,$tRes) = ReadCacheFile($CacheFileName);
     }
     else {
-		/*
-		 * Selon la variable à calculer, on gère les valeurs = à 0  et les valeurs infinies
-		 * et on fait le valcul correspondant.
-		 */
-		switch($ValCal){
-			case 'Q':
-				if($Lg == 0 && _request('choix_champs_Lg') != 'varier_val_Lg'){
-					$result[] = 0;
-				}
-				else{			
-					for($i = $min; $i <= $max; $i+= $pas){
-						if($i == 0 && _request('choix_champs_Lg') == 'varier_val_Lg'){
-							$result[] = INF;
-						}
-						else{
-							$result[] = pow(((($J*pow($D, $N))/$L)*(1000/$Lg)), 1/$M);
-						}
-					}
-				}
-			break;
-			
-			case 'D': 
-				if($J == 0 && _request('choix_champs_J') != 'varier_val_J'){
-					$result[] = 0;
-				}
-				else{
-					for($i = $min; $i <= $max; $i+= $pas){
-						if($i == 0 && _request('choix_champs_J') == 'varier_val_J'){
-							$result[] = INF;
-						}
-						else{
-							$result[] = pow(((($L*pow($Q, $M))/$J)*($Lg/1000)), 1/$N);
-						}
-					}
-				}
-			break;
-			
-			case 'J':
-				if($D == 0 && _request('choix_champs_D') != 'varier_val_D'){
-					$result[] = 0;
-				}
-				else{
-					for($i = $min; $i <= $max; $i+= $pas){
-						if($i == 0 && _request('choix_champs_D') == 'varier_val_D'){
-							$result[] = INF;
-						}
-						else{
-							$result[] = (($L*pow($Q, $M))/pow($D, $N))*($Lg/1000) ;
-						}
-					}
-				}
-			break;
-			
-			case 'Lg':
-				if($Q == 0 && _request('choix_champs_Q') != 'varier_val_Q'){
-					$result[] = 0;
-				}
-				else{
-					for($i = $min; $i <= $max; $i+= $pas){
-						if($i == 0 && _request('choix_champs_Q') == 'varier_val_Q'){
-							$result[] = INF;
-						}
-						else{
-							$result[] = (($J*pow($D, $N))/($L*pow($Q,$M)))*1000 ;
-						}
-					}
-				}
+        /*
+         * Selon la variable à calculer, on gère les valeurs = à 0  et les valeurs infinies
+         * et on fait le valcul correspondant.
+         */
+        $tDiv0 = array('Q'=>'Lg', 'D'=>'J', 'J'=>'D', 'Lg'=>'Q');
+        $Div0 = $tDiv0[$ValCal];
 
-			break;
-		}
-		
-		//Enregistrement des données dans fichier cache
-        WriteCacheFile($CacheFileName,$result);
-	}
-	/***************************************************************************
+        if(${$Div0} == 0 && _request("choix_champs_$Div0") != "varier_val_$Div0"){
+            $tRes[] = 0;
+        }
+        else{
+            $tRes = array(); // Tableau des résultats (ordonnées)
+            $tAbs = array(); // Tableau des abscisses
+            for($i = $min; $i <= $max; $i+= $pas){
+                $tAbs[] = $i;
+                if($i == 0 && _request("choix_champs_$Div0") == "varier_val_$Div0"){
+                    $tRes[] = INF;
+                }
+                else{
+                    switch($ValCal){
+                        case 'Q':
+                            $tRes[] = pow(((($J*pow($D, $N))/$L)*(1000/$Lg)), 1/$M);
+                            break;
+                        case 'D':
+                            $tRes[] = pow(((($L*pow($Q, $M))/$J)*($Lg/1000)), 1/$N);
+                            break;
+                        case 'J':
+                            $tRes[] = (($L*pow($Q, $M))/pow($D, $N))*($Lg/1000);
+                            break;
+                        case 'Lg':
+                            $tRes[] = (($J*pow($D, $N))/($L*pow($Q,$M)))*1000;
+                    }
+                }
+            }
+        }
+
+        //Enregistrement des données dans fichier cache
+        WriteCacheFile($CacheFileName,array($tabs,$tRes));
+    }
+    /***************************************************************************
     *                   Affichage du tableau de données
     ****************************************************************************/
-	$cptValVar = 1;
-	$i = 0;
-	$tabClass = array();
-	
-	// On compte le nombre de valeur qui varie
-	foreach($tabLibelle as $cle=>$valeur){
-		if(substr(_request('choix_champs_'.$cle), 0, 3) == 'var'){
-			$cptValVar++;
-		}
-	}
-	// On répertorie toutes les valeurs selon leur type dans un tableau
-	foreach($tabLibelle as $cle=>$valeur){
-		if(substr(_request('choix_champs_'.$cle), 0, 3) == 'cal'){
-			$tabClass['cal'] = $tabLibelle[$cle];
-		}
-		else if(substr(_request('choix_champs_'.$cle), 0, 3) == 'var'){
-			$tabClass['var'] = $tabLibelle[$cle];
-		}
-		else if(substr(_request('choix_champs_'.$cle), 0, 3) == 'var' || $cptValVar == 1){
-			$tabClass['var'] = $tabLibelle[$cle];
-			$cptValVar--;
-		}
-		else if(substr(_request('choix_champs_'.$cle), 0, 3) == 'val'){
-			$tabClass['val'.$i] = $tabLibelle[$cle];
-			$i++;
-		}
-	}
-	
-	// On génère les entêtes du tableau de résulats
-	$echo.='<table class="spip">
-			<thead>
-				<tr class="row_first">';
-				
-				foreach($tabClass as $cle=>$valeur){
-					if(substr($cle, 0, 3) == 'val'){
-						$echo.= '<th scope="col" rowspan="2">'.$tabClass[$cle].'</th>';
-					}
-				}
-
-	$echo.= '		<th style="text-align:center;" scope="col" rowspan="2">'._T('hydraulic:abscisse').'<br/>'.$tabClass['var'].'</th>
-					<th style="text-align:center;" scope="col" rowspan="2">'._T('hydraulic:ordonnee').'<br/>'.$tabClass['cal'].'</th>
-				</tr>	
-			</thead>
-			<tbody>';
-	
-	$i=0;
-	$tabAbs = array();
-	
-	if($cptValVar != 0){
-		$ValeurVarie = $min;
-	}
-	else{
-		$ValeurVarie = _request(substr($tabClass['var'],0,1));
-	}
-	
-	// On insère les différents résultats dans le tableau correspondant.
-	foreach($result as $indice){
-		$i++;
-		$echo.= '<tr class="align_right ';
-		$echo.=($i%2==0)?'row_even':'row_odd';
-		$echo.='">';
-		
-				foreach($tabClass as $cle=>$valeur){
-					if(substr($cle, 0, 3) == 'val'){
-						$echo.= '<td>';
-						$decoup = explode(':', $tabClass[$cle], 2);
-						$echo.= _request($decoup[0]).'</td>';
-					}
-				}	
-				
-		$echo.= '<td>'.$ValeurVarie.'</td><td>'.format_nombre($indice, $iPrec).'</td>';		
-		$echo.= '</tr>';	
-		$tabAbs[] = $ValeurVarie;
-		$ValeurVarie+= $pas;
-	}	
-	
-    $echo.=	'</tbody>
-        </table>';
-
-	// Si la première valeur est infinie alors ...
-	if(is_infinite($result[0])){
-		// ... on supprime cette valeur
-		unset($result[0]);
-		// ... on tasse le tableau des résultats
-		$result = array_values($result);
-		// ... on supprime l'abscisse correspond
-		unset($tabAbs[0]);
-		// ... on tasse le tableau des abscisses
-		$tabAbs = array_values($tabAbs);
-	}
-
-    /***************************************************************************
-    *                        Affichage du graphique
-    ****************************************************************************/
-
-	// Si notre tableau de résultats contient plus d'une ligne alors on l'affiche.
-	if(count($result) > 1){
-		$oGraph = new cGraph();
-		// Ligne de Lechapt et calmon
-		if(isset($result)) {
-			$oGraph->AddSerie(
-				_T('hydraulic:param_'.$ValCal),
-				$tabAbs,
-				$result,
-				'#00a3cd',
-				'lineWidth:3, showMarker:true, markerOptions:{style:\'filledCircle\', size:8}');
-		}
-		// Récupération du graphique
-		$echo .= $oGraph->GetGraph('ligne_lechapt_calmon',400,600);
-		$echo .= $tabClass['var'];
-	}
-	$res['message_ok'] = $echo;
+    spip_log($datas,'hydraulic');
+    include_spip('hyd_inc/affiche_resultats');
+    $res['message_ok'] = AfficheResultats($datas, $tAbs, $tRes);
     return $res;
 }
 ?>
