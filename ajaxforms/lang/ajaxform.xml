@@ -1,27 +1,27 @@
-<traduction module="ajaxform" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/ajaxforms/lang/" reference="fr">
-	<langue code="ast" url="http://trad.spip.org/tradlang_module/ajaxform?lang_cible=ast">
-		<traducteur nom="Xuacu" lien="http://trad.spip.org/auteur/xuacu" />
+<traduction module="ajaxform" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/ajaxforms/lang/" reference="fr">
+	<langue code="ast" url="http://trad.spip.net/tradlang_module/ajaxform?lang_cible=ast">
+		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
 	</langue>
-	<langue code="ca" url="http://trad.spip.org/tradlang_module/ajaxform?lang_cible=ca">
-		<traducteur nom="merce" lien="http://trad.spip.org/auteur/merce" />
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/ajaxform?lang_cible=ca">
+		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
 	</langue>
 	<langue code="de" />
-	<langue code="en" url="http://trad.spip.org/tradlang_module/ajaxform?lang_cible=en">
-		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
-		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+	<langue code="en" url="http://trad.spip.net/tradlang_module/ajaxform?lang_cible=en">
+		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.org/tradlang_module/ajaxform?lang_cible=fa">
-		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/ajaxform?lang_cible=fa">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" />
-	<langue code="fr_tu" url="http://trad.spip.org/tradlang_module/ajaxform?lang_cible=fr_tu">
-		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
-		<traducteur nom="orlammd" lien="http://trad.spip.org/auteur/orlammd" />
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/ajaxform?lang_cible=fr_tu">
+		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
+		<traducteur nom="orlammd" lien="http://trad.spip.net/auteur/orlammd" />
 	</langue>
-	<langue code="pt_br" url="http://trad.spip.org/tradlang_module/ajaxform?lang_cible=pt_br">
-		<traducteur nom="Ricardo Porto" lien="http://trad.spip.org/auteur/ricardo-porto" />
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/ajaxform?lang_cible=pt_br">
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/ajaxform?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/ajaxform?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
