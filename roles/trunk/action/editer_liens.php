@@ -13,12 +13,25 @@
 /**
  * API d'édition de liens
  *
+ * Cette API gère la création, modification et suppressions de liens
+ * entre deux objets éditoriaux par l'intermédiaire de tables de liaison
+ * tel que spip_xx_liens.
+ * 
+ * L'unicité est assurée dans les fonctions sur le trio (id_x, objet, id_objet)
+ * par défaut, ce qui correspond à la déclaration de clé primaire.
+ *
+ * Des rôles peuvent être déclarés pour des liaisons. À ce moment là,
+ * une colonne spécifique doit être présente dans la table de liens
+ * et l'unicité est alors assurée sur le quatuor (id_x, objet, id_objet, role)
+ * et la clé primaire adaptée en conséquence.
+ * 
  * @package SPIP\Liens\API
  */
  
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-
+// charger la gestion les rôles sur les objets
+include_spip('inc/roles');
 
 
 /**
@@ -58,9 +71,14 @@ function objet_associable($objet){
  * et pour lesquels une table spip_xxx_liens existe
  * (auteurs, documents, mots)
  *
- * on peut passer optionnellement une qualification du (des) lien(s) qui sera
- * alors appliquee dans la foulee.
- * En cas de lot de liens, c'est la meme qualification qui est appliquee a tous
+ * On peut passer optionnellement une qualification du (des) lien(s) qui sera
+ * alors appliquée dans la foulée. Lorsqu'une des qualification concerne
+ * un champ de rôle déclaré, la liaison se crée avec ce rôle. Si un champ de
+ * rôle est déclaré pour ce type de liaison, mais qu'il n'est pas présent
+ * dans cette qualification, on affecte automatiquement le rôle défini
+ * par défaut.
+ * 
+ * En cas de lot de liens, c'est la même qualification qui est appliquée à tous
  * 
  * @api
  * @param array $objets_source
@@ -69,7 +87,7 @@ function objet_associable($objet){
  * @return bool|int
  */
 function objet_associer($objets_source, $objets_lies, $qualif = null){
-	$modifs = objet_traiter_liaisons('lien_insert', $objets_source, $objets_lies);
+	$modifs = objet_traiter_liaisons('lien_insert', $objets_source, $objets_lies, $qualif);
 
 	if ($qualif)
 		objet_qualifier_liens($objets_source, $objets_lies, $qualif);
@@ -92,13 +110,23 @@ function objet_associer($objets_source, $objets_lies, $qualif = null){
  * un * pour $objet,$id_objet permet de traiter par lot
  * seul le type de l'objet source ne peut pas accepter de joker et doit etre explicite
  *
+ * S'il y a des rôles possibles entre les 2 objets, et qu'aucune condition
+ * sur la colonne du rôle n'est transmise, on ne supprime que les liens
+ * avec le rôle par défaut. Si on veut supprimer tous les rôles,
+ * il faut spécifier $cond => array('role' => '*')
+ * 
  * @api
  * @param array $objets_source
  * @param array|string $objets_lies
+ * @param array|null $cond
+ *     Condition du where supplémentaires
+ *
+ *     À l'exception de l'index 'role' qui permet de sélectionner un rôle
+ *     ou tous les rôles (*), en s'affranchissant du vrai nom de la colonne.
  * @return bool|int
  */
-function objet_dissocier($objets_source,$objets_lies){
-	return objet_traiter_liaisons('lien_delete',$objets_source,$objets_lies);
+function objet_dissocier($objets_source,$objets_lies, $cond=null){
+	return objet_traiter_liaisons('lien_delete',$objets_source,$objets_lies, $cond);
 }
 
 
@@ -152,12 +180,14 @@ function objet_qualifier_liens($objets_source,$objets_lies,$qualif){
  * )
  * 
  * @api
- * @param array $objets_source
- * @param array|string $objets_lies
+ * @param array $objets_source      Couples (objets_source => identifiants) (objet qui a la table de lien)
+ * @param array|string $objets_lies Couples (objets_lies => identifiants)
+ * @param array|null $cond          Condition du where supplémentaires
  * @return array
+ *     Liste des trouvailles
  */
-function objet_trouver_liens($objets_source,$objets_lies){
-	return objet_traiter_liaisons('lien_find',$objets_source,$objets_lies);
+function objet_trouver_liens($objets_source,$objets_lies,$cond=null){
+	return objet_traiter_liaisons('lien_find',$objets_source,$objets_lies,$cond);
 }
 
 
@@ -229,6 +259,7 @@ function objet_dupliquer_liens($objet,$id_source,$id_cible){
 /**
  * Fonction générique qui
  * applique une operation de liaison entre un ou des objets et des objets listés
+ * 
  * $objets_source et $objets_lies sont de la forme
  * array($objet=>$id_objets,...)
  * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
@@ -243,9 +274,18 @@ function objet_dupliquer_liens($objet,$id_source,$id_cible){
  *
  * @internal
  * @param string $operation
+ *     Nom de la fonction PHP qui traitera l'opération
  * @param array $objets_source
+ *     Liste de ou des objets source
+ *     De la forme array($objet=>$id_objets,...), où $id_objets peut lui
+ *     même être un scalaire ou un tableau pour une liste d'objets du même type
  * @param array $objets_lies
- * @param array $set
+ *     Liste de ou des objets liés
+ *     De la forme array($objet=>$id_objets,...), où $id_objets peut lui
+ *     même être un scalaire ou un tableau pour une liste d'objets du même type
+ * @param null|array $set
+ *     Liste de coupels champs valeur, soit array(champs => valeur)
+ *     En fonction des opérations il peut servir à différentes utilisations
  * @return bool|int|array
  */
 function objet_traiter_liaisons($operation,$objets_source,$objets_lies, $set = null){
@@ -290,45 +330,80 @@ function objet_traiter_liaisons($operation,$objets_source,$objets_lies, $set = n
  * $objets et de la forme
  * array($objet=>$id_objets,...)
  *
- * Retourne le nombre d'insertions realisees
+ * Retourne le nombre d'insertions réalisées
  *
  * @internal
- * @param string $objet_source
- * @param string $primary
- * @param sgring $table_lien
- * @param int $id
- * @param array $objets
+ * @param string $objet_source  Objet source de l'insertion (celui qui a la table de liaison)
+ * @param string $primary       Nom de la clé primaire de cet objet
+ * @param sgring $table_lien    Nom de la table de lien de cet objet
+ * @param int $id               Identifiant de l'objet sur lesquels on va insérer des liaisons
+ * @param array $objets         Liste des liaisons à faire, de la forme array($objet=>$id_objets)
+ * @param array $qualif
+ *     Liste des qualifications à appliquer (qui seront faites par lien_set()),
+ *     dont on cherche un rôle à insérer également.
+ *     Si l'objet dispose d'un champ rôle, on extrait des qualifications
+ *     le rôle s'il est présent, sinon on applique le rôle par défaut.
  * @return bool|int
+ *     Nombre d'insertions faites, false si échec.
  */
-function lien_insert($objet_source,$primary,$table_lien,$id,$objets) {
+function lien_insert($objet_source,$primary,$table_lien,$id,$objets,$qualif) {
 	$ins = 0;
 	$echec = null;
+	if (is_null($qualif)) $qualif = array();
+
 	foreach($objets as $objet => $id_objets){
 		if (!is_array($id_objets)) $id_objets = array($id_objets);
+
+		// role, colonne, where par défaut
+		list($role, $colonne_role, $cond) =
+			roles_trouver_dans_qualif($objet_source, $objet, $qualif);
+
 		foreach($id_objets as $id_objet) {
 			$objet = ($objet=='*')?$objet:objet_type($objet); # securite
+
+			$insertions = array(
+				'id_objet' => $id_objet,
+				'objet'    => $objet,
+				$primary   => $id
+			);
+			// rôle en plus s'il est défini
+			if ($role) $insertions += array(
+				$colonne_role => $role
+			);
+			$args = array(
+				'table_lien'      => $table_lien,
+				'objet_source'    => $objet_source,
+				'id_objet_source' => $id,
+				'objet'           => $objet,
+				'id_objet'        => $id_objet,
+				'role'            => $role,
+				'colonne_role'    => $colonne_role,
+				'action'          => 'insert',
+			);
+
 			// Envoyer aux plugins
 			$id_objet = pipeline('pre_edition_lien',
 				array(
-					'args' => array(
-						'table_lien' => $table_lien,
-						'objet_source' => $objet_source,
-						'id_objet_source' => $id,
-						'objet' => $objet,
-						'id_objet' => $id_objet,
-						'action'=>'insert',
-					),
+					'args' => $args,
 					'data' => $id_objet
 				)
 			);
-			if ($id_objet=intval($id_objet)
-				AND !sql_getfetsel(
-								$primary,
-								$table_lien,
-								array('id_objet='.intval($id_objet), 'objet='.sql_quote($objet), $primary.'='.intval($id))))
-			{
+			/* [todo] POUR la 3.1
+			// Envoyer aux plugins
+			$insertions = pipeline('pre_edition_lien',
+				array(
+					'args' => $args,
+					'data' => $insertions
+				)
+			);
+			*/
 
-					$e = sql_insertq($table_lien, array('id_objet' => $id_objet, 'objet'=>$objet, $primary=>$id));
+			$where = lien_where($primary, $id, $objet, $id_objet, $cond);
+
+			if ($id_objet=intval($insertions['id_objet'])
+				AND !sql_getfetsel($primary, $table_lien, $where)) {
+
+					$e = sql_insertq($table_lien, $insertions);
 					if ($e!==false) {
 						$ins++;
 						lien_propage_date_modif($objet,$id_objet);
@@ -336,14 +411,8 @@ function lien_insert($objet_source,$primary,$table_lien,$id,$objets) {
 						// Envoyer aux plugins
 						pipeline('post_edition_lien',
 							array(
-								'args' => array(
-									'table_lien' => $table_lien,
-									'objet_source' => $objet_source,
-									'id_objet_source' => $id,
-									'objet' => $objet,
-									'id_objet' => $id_objet,
-									'action'=>'insert',
-								),
+								'args' => $args,
+								#'data' => $insertions # [todo] POUR la 3.1
 								'data' => $id_objet
 							)
 						);
@@ -360,13 +429,14 @@ function lien_insert($objet_source,$primary,$table_lien,$id,$objets) {
  * Fabriquer la condition where en tenant compte des jokers *
  *
  * @internal
- * @param string $primary
- * @param int|string|array $id_source
- * @param string $objet
- * @param int|string|array $id_objet
- * @return array
+ * @param string $primary               Nom de la clé primaire
+ * @param int|string|array $id_source   Identifiant de la clé primaire
+ * @param string $objet                 Nom de l'objet lié
+ * @param int|string|array $id_objet    Identifiant de l'objet lié
+ * @param array $cond                   Conditions par défaut
+ * @return array                        Liste des conditions
  */
-function lien_where($primary, $id_source, $objet, $id_objet){
+function lien_where($primary, $id_source, $objet, $id_objet, $cond=array()){
 	if ((!is_array($id_source) AND !strlen($id_source))
 	  OR !strlen($objet)
 	  OR (!is_array($id_objet) AND !strlen($id_objet)))
@@ -377,7 +447,9 @@ function lien_where($primary, $id_source, $objet, $id_objet){
 		$not = array_shift($id_source);
 		$id_source = reset($id_source);
 	}
-	$where = array();
+
+	$where = $cond;
+
 	if ($id_source!=='*')
 		$where[] = (is_array($id_source)?sql_in(addslashes($primary),array_map('intval',$id_source),$not):addslashes($primary) . ($not?"<>":"=") . intval($id_source));
 	elseif ($not)
@@ -408,44 +480,75 @@ function lien_where($primary, $id_source, $objet, $id_objet){
  * array($objet=>$id_objets,...)
  * un * pour $id,$objet,$id_objets permet de traiter par lot
  *
+ * On supprime tous les liens entre les objets indiqués par défaut,
+ * sauf s'il y a des rôles déclarés entre ces 2 objets, auquel cas on ne
+ * supprime que les liaisons avec le role déclaré par défaut si rien n'est
+ * précisé dans $cond. Il faut alors passer $cond=array('role'=>'*') pour
+ * supprimer tous les roles, ou array('role'=>'un_role') pour un role précis.
+ * 
  * @internal
  * @param string $objet_source
  * @param string $primary
  * @param sgring $table_lien
  * @param int $id
  * @param array $objets
+ * @param array|null $cond
+ *     Conditions where par défaut.
+ *     Un cas particulier est géré lorsque l'index 'role' est présent (ou absent)
  * @return bool|int
  */
-function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
+function lien_delete($objet_source,$primary,$table_lien,$id,$objets,$cond=null){
+
 	$retire = array();
 	$dels = 0;
 	$echec = false;
+	if (is_null($cond)) $cond = array();
+
 	foreach($objets as $objet => $id_objets){
 		$objet = ($objet=='*')?$objet:objet_type($objet); # securite
 		if (!is_array($id_objets) OR reset($id_objets)=="NOT") $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
+			list($cond, $colonne_role, $role) = roles_creer_condition_role($objet_source, $objet, $cond);
 			// id_objet peut valoir '*'
-			$where = lien_where($primary, $id, $objet, $id_objet);
+			$where = lien_where($primary, $id, $objet, $id_objet, $cond);
+
 			// lire les liens existants pour propager la date de modif
-			$liens = sql_allfetsel("$primary,id_objet,objet",$table_lien,$where);
+			$select = "$primary,id_objet,objet";
+			if ($colonne_role) $select .= ",$colonne_role";
+			$liens = sql_allfetsel($select,$table_lien,$where);
+
 			// iterer sur les liens pour permettre aux plugins de gerer
-			foreach($liens as $l){
+			foreach($liens as $l) {
+
+				$args = array(
+					'table_lien' => $table_lien,
+					'objet_source' => $objet_source,
+					'id_objet_source' => $l[$primary],
+					'objet' => $l['objet'],
+					'id_objet' => $l['id_objet'],
+					'colonne_role' => $colonne_role,
+					'role' => ($colonne_role ? $l[$colonne_role] : ''),
+					'action'=>'delete',
+				);
+
 				// Envoyer aux plugins
 				$id_o = pipeline('pre_edition_lien',
 					array(
-						'args' => array(
-							'table_lien' => $table_lien,
-							'objet_source' => $objet_source,
-							'id_objet_source' => $l[$primary],
-							'objet' => $l['objet'],
-							'id_objet' => $l['id_objet'],
-							'action'=>'delete',
-						),
+						'args' => $args,
 						'data' => $l['id_objet']
 					)
 				);
-				if ($id_o=intval($id_o)){
-					$where = lien_where($primary, $l[$primary], $l['objet'], $id_o);
+
+				/* [TODO] pour SPIP 3.1
+				// Envoyer aux plugins
+				$l = pipeline('pre_edition_lien',
+					array(
+						'args' => $args,
+						'data' => $l
+					)
+				);*/
+				if ($id_o=intval($l['id_objet'])) {
+					$where = lien_where($primary, $l[$primary], $l['objet'], $id_o, $cond);
 					$e = sql_delete($table_lien, $where);
 					if ($e!==false){
 						$dels+=$e;
@@ -454,25 +557,33 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
 					}
 					else
 						$echec = true;
-					$retire[] = array('source'=>array($objet_source=>$l[$primary]),'lien'=>array($l['objet']=>$id_o),'type'=>$l['objet'],'id'=>$id_o);
+					$retire[] = array(
+						'source' => array($objet_source=>$l[$primary]),
+						'lien'   => array($l['objet']=>$id_o),
+						'type'   => $l['objet'],
+						'role'   => ($colonne_role ? $l[$colonne_role] : ''),
+						'id'     => $id_o
+					);
 					// Envoyer aux plugins
 					pipeline('post_edition_lien',
 						array(
-							'args' => array(
-								'table_lien' => $table_lien,
-								'objet_source' => $objet_source,
-								'id_objet_source' => $l[$primary],
-								'objet' => $l['objet'],
-								'id_objet' => $id_o,
-								'action'=>'delete',
-							),
+							'args' => $args,
 							'data' => $id_o
 						)
 					);
+					/* [TODO] Pour SPIP 3.1
+					// Envoyer aux plugins
+					pipeline('post_edition_lien',
+						array(
+							'args' => $args,
+							'data' => $l
+						)
+					);*/
 				}
 			}
 		}
 	}
+
 	pipeline('trig_supprimer_objets_lies',$retire);
 
 	return ($echec?false:$dels);
@@ -556,13 +667,19 @@ function lien_optimise($objet_source,$primary,$table_lien,$id,$objets){
  * $qualif = array('vu'=>'oui');
  *
  * @internal
- * @param string $objet_source
- * @param string $primary
- * @param sgring $table_lien
- * @param int $id
- * @param array $objets
+ * @param string $objet_source  Objet source de l'insertion (celui qui a la table de liaison)
+ * @param string $primary       Nom de la clé primaire de cet objet
+ * @param sgring $table_lien    Nom de la table de lien de cet objet
+ * @param int $id               Identifiant de l'objet sur lesquels on va insérer des liaisons
+ * @param array $objets         Liste des liaisons à faire, de la forme array($objet=>$id_objets)
  * @param array $qualif
+ *     Liste des qualifications à appliquer.
+ * 
+ *     Si l'objet dispose d'un champ rôle, on extrait des qualifications
+ *     le rôle s'il est présent, sinon on applique les qualifications
+ *     sur le rôle par défaut.
  * @return bool|int
+ *     Nombre de modifications faites, false si échec.
  */
 function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 	$echec = null;
@@ -577,16 +694,59 @@ function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 	}
 	unset($qualif['objet']);
 	unset($qualif['id_objet']);
-	foreach($objets as $objet => $id_objets){
+	foreach($objets as $objet => $id_objets) {
+
+		// role, colonne, where par défaut
+		list($role, $colonne_role, $cond) =
+			roles_trouver_dans_qualif($objet_source, $objet, $qualif);
+
 		$objet = ($objet=='*')?$objet:objet_type($objet); # securite
 		if (!is_array($id_objets) OR reset($id_objets)=="NOT") $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
-			$where = lien_where($primary, $id, $objet, $id_objet);
+
+			$args = array(
+				'table_lien'      => $table_lien,
+				'objet_source'    => $objet_source,
+				'id_objet_source' => $id,
+				'objet'           => $objet,
+				'id_objet'        => $id_objet,
+				'role'            => $role,
+				'colonne_role'    => $colonne_role,
+				'action'          => 'modifier',
+			);
+
+			// Envoyer aux plugins
+			$id_objet = pipeline('pre_edition_lien',
+				array(
+					'args' => $args,
+					'data' => $id_objet,
+				)
+			);
+			/* [TODO] pour la 3.1
+			// Envoyer aux plugins
+			$qualif = pipeline('pre_edition_lien',
+				array(
+					'args' => $args,
+					'data' => $qualif,
+				)
+			);*/
+
+			$where = lien_where($primary, $id, $objet, $id_objet, $cond);
 			$e = sql_updateq($table_lien,$qualif,$where);
-			if ($e===false)
+
+			if ($e===false) {
 				$echec = true;
-		  else
-			  $ok++;
+			} else {
+				// Envoyer aux plugins
+				pipeline('post_edition_lien',
+					array(
+						'args' => $args,
+						#'data' => $qualif, # [TODO] POUR la 3.1
+						'data' => $id_objet
+					)
+				);
+				$ok++;
+			}
 		}
 	}
 	return ($echec?false:$ok);
@@ -601,21 +761,31 @@ function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
  * array($objet=>$id_objets,...)
  * un * pour $id,$objet,$id_objets permet de traiter par lot
  *
- *
+ * Le tableau de condition peut avoir un index 'role' indiquant de
+ * chercher un rôle précis, ou * pour tous les roles (alors équivalent
+ * à l'absence de l'index)
+ * 
  * @internal
  * @param string $objet_source
  * @param string $primary
  * @param sgring $table_lien
  * @param int $id
  * @param array $objets
+ * @param array|null $cond
+ *     Condition du where par défaut
+ * 
+ *     On peut passer un index 'role' pour sélectionner uniquement
+ *     le role défini dedans (et '*' pour tous les rôles). 
  * @return array
  */
-function lien_find($objet_source,$primary,$table_lien,$id,$objets){
+function lien_find($objet_source,$primary,$table_lien,$id,$objets,$cond=null){
 	$trouve = array();
 	foreach($objets as $objet => $id_objets){
 		$objet = ($objet=='*')?$objet:objet_type($objet); # securite
+		// gerer les roles s'il y en a dans $cond
+		list($cond) = roles_creer_condition_role($objet_source, $objet, $cond, true);
 		// lien_where prend en charge les $id_objets sous forme int ou array
-		$where = lien_where($primary, $id, $objet, $id_objets);
+		$where = lien_where($primary, $id, $objet, $id_objets, $cond);
 		$liens = sql_allfetsel('*',$table_lien,$where);
 		// ajouter les entrees objet_source et objet cible par convenance
 		foreach($liens as $l) {
@@ -634,7 +804,16 @@ function lien_find($objet_source,$primary,$table_lien,$id,$objets){
  * @param string $objet
  * @param array|int $ids
  */
-function lien_propage_date_modif($objet,$ids){
+function lien_propage_date_modif($objet,$ids) {
+	static $done = array();
+	$hash = md5($objet . serialize($ids));
+
+	// sql_updateq, peut être un rien lent.
+	// On évite de l'appeler 2 fois sur les mêmes choses
+	if (isset($done[$hash])) {
+		return;
+	}
+
 	$trouver_table = charger_fonction('trouver_table','base');
 
 	$table = table_objet_sql($objet);
@@ -644,5 +823,7 @@ function lien_propage_date_modif($objet,$ids){
 		$where = (is_array($ids)?sql_in($primary, array_map('intval',$ids)):"$primary=".intval($ids));
 		sql_updateq($table, array('date_modif'=>date('Y-m-d H:i:s')), $where);
 	}
+
+	$done[$hash] = true;
 }
 ?>
