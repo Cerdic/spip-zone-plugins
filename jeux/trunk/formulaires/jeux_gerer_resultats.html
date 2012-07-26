@@ -4,16 +4,11 @@
     
 	<ul>
 	   
-	   [(#ID_AUTEUR|oui)[(#SET{label,<:jeux_gerer_resultats:pour_auteur:>})]]
-	   [(#ID_JEU|oui)[(#SET{label,<:jeux_gerer_resultats:pour_jeu:>})]]
-	   [(#ID_AUTEUR|ou{#ID_JEU}|non)[(#SET{label,<:jeux_gerer_resultats:pour_tous:>})]]
-	   
-	   [(#SAISIE{radio,faire,datas=#ARRAY{supprimer,<:jeux_gerer_resultats:supprimer:>,
-	                           compacter,<:jeux_gerer_resultats:compacter:>},label=#GET{label}})]
+	   #GENERER_SAISIES{#ENV{saisies}}
 	                           
 	   [(#ENV**{erreurs}|table_valeur{non_confirme}|oui)
 	   <li class='editer_confirmer obligatoire erreur'>
-	       <label for='confirmer'><:jeux_gerer_resultats:confirmer_choix:></label>
+	       <label for='confirmer'><span class='erreur_message'><:jeux_gerer_resultats:confirmer_choix:></span></label>
 	       <input type="checkbox" name="confirmer" />
 	   </li>
 	   ]
