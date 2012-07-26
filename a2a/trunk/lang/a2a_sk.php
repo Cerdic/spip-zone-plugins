@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/a2a?lang_cible=sk
+// extrait automatiquement de http://trad.spip.net/tradlang_module/a2a?lang_cible=sk
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -44,8 +44,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer_le_lien_deux_cotes' => 'Zrušiť oba odkazy',
 
 	// T
-	'type' => 'Type', # NEW
-	'type_liaison' => 'Type de liaison', # NEW
+	'type' => 'Typ',
+	'type_liaison' => 'Typ prepojenia',
 
 	// V
 	'voir' => 'Zobraziť'
