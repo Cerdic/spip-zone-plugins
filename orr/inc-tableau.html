@@ -1,11 +1,23 @@
-#SET{lundi,#ENV{jour1}}
-#SET{mardi,#ENV{jour2}}
-#SET{mercredi,#ENV{jour3}}
-#SET{jeudi,#ENV{jour4}}
-#SET{vendredi,#ENV{jour5}}
-#SET{samedi,#ENV{jour6}}
-#SET{dimanche,#ENV{jour7}}
-#SET{plusun,#ENV{jour8}}
+#SET{jourj,#ENV{jourj}}
+#SET{lundi,#GET{jourj}|joursemaine{lundi,date}}
+#SET{mardi,#GET{jourj}|joursemaine{mardi,date}}
+#SET{mercredi,#GET{jourj}|joursemaine{mercredi,date}}
+#SET{jeudi,#GET{jourj}|joursemaine{jeudi,date}}
+#SET{vendredi,#GET{jourj}|joursemaine{vendredi,date}}
+#SET{samedi,#GET{jourj}|joursemaine{samedi,date}}
+#SET{dimanche,#GET{jourj}|joursemaine{dimanche,date}}
+#SET{plusun,#GET{jourj}|joursemaine{plusun,date}}
+
+#SET{lundijour,#GET{jourj}|joursemaine{lundi,jour}}
+#SET{mardijour,#GET{jourj}|joursemaine{mardi,jour}}
+#SET{mercredijour,#GET{jourj}|joursemaine{mercredi,jour}}
+#SET{jeudijour,#GET{jourj}|joursemaine{jeudi,jour}}
+#SET{vendredijour,#GET{jourj}|joursemaine{vendredi,jour}}
+#SET{samedijour,#GET{jourj}|joursemaine{samedi,jour}}
+#SET{dimanchejour,#GET{jourj}|joursemaine{dimanche,jour}}
+
+
+
 #SET{motcle1,#ENV{motcle}}
 
 
@@ -25,25 +37,25 @@
 
 		<thead>
 			<th>Ressources</th>
-			<th class="largeurcol">Lundi_[(#GET{lundi}|affdate{jour})]</th>
-			<th class="largeurcol">Mardi_[(#GET{mardi}|affdate{jour})]</th>
-			<th class="largeurcol">Mercredi_[(#GET{mercredi}|affdate{jour})]</th>
-			<th class="largeurcol" id="jeudith">Jeudi_[(#GET{jeudi}|affdate{jour})]</th>
-			<th class="largeurcol">Vendredi_[(#GET{vendredi}|affdate{jour})]</th>
-			<th class="largeurcol">Samedi_[(#GET{samedi}|affdate{jour})]</th>
-			<th class="largeurcol">Dimanche_[(#GET{dimanche}|affdate{jour})]</th>
+			<th class="largeurcol">Lundi_#GET{lundijour}</th>
+			<th class="largeurcol">Mardi_#GET{mardijour}</th>
+			<th class="largeurcol">Mercredi_#GET{mercredijour}</th>
+			<th class="largeurcol" id="jeudith">Jeudi_#GET{jeudijour}</th>
+			<th class="largeurcol">Vendredi_#GET{vendredijour}</th>
+			<th class="largeurcol">Samedi_#GET{samedijour}</th>
+			<th class="largeurcol">Dimanche_#GET{dimanchejour}</th>
 		</thead>
 		<tbody>
     <BOUCLE_ressource(spip_orr_ressources){id_mot IN #GET{motcle2}}>
 			<tr class="tr_plus">
 				<td>#ID_ORR_RESSOURCE. #ORR_RESSOURCE_NOM</td>
-				<td  id="lundi" class="largeurcol"><a id="touche_lundi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour1}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{lundi},jourplus=#GET{mardi},couleur=#ORR_RESSOURCE_COULEUR} /></td>
-				<td  id="mardi" class="largeurcol"><a id="touche_mardi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour2}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{mardi},jourplus=#GET{mercredi},couleur=#ORR_RESSOURCE_COULEUR} /></td>
-				<td  id="mercredi" class="largeurcol"><a id="touche_mercredi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour3}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{mercredi},jourplus=#GET{jeudi},couleur=#ORR_RESSOURCE_COULEUR} /></td>
-				<td  id="jeudi" class="largeurcol"><a id="touche_jeudi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour4}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{jeudi},jourplus=#GET{vendredi},couleur=#ORR_RESSOURCE_COULEUR} /></td>
-				<td  id="vendredi" class="largeurcol"><a id="touche_vendredi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour5}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{vendredi},jourplus=#GET{samedi},couleur=#ORR_RESSOURCE_COULEUR} /></td>
-				<td  id="samedi" class="largeurcol"><a id="touche_samedi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour6}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{samedi},jourplus=#GET{dimanche},couleur=#ORR_RESSOURCE_COULEUR} /></td>
-				<td  id="dimanche" class="largeurcol"><a id="touche_dimanche_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#ENV{jour7}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{dimanche},jourplus=#GET{plusun},couleur=#ORR_RESSOURCE_COULEUR} /></td>
+				<td  id="lundi" class="largeurcol"><a id="touche_lundi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#GET{lundi}}|parametre_url{'ressource',#ORR_RESSOURCE_NOM})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{lundi},jourplus=#GET{mardi},couleur=#ORR_RESSOURCE_COULEUR} /></td>
+				<td  id="mardi" class="largeurcol"><a id="touche_mardi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#GET{mardi}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{mardi},jourplus=#GET{mercredi},couleur=#ORR_RESSOURCE_COULEUR} /></td>
+				<td  id="mercredi" class="largeurcol"><a id="touche_mercredi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#GET{mercredi}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{mercredi},jourplus=#GET{jeudi},couleur=#ORR_RESSOURCE_COULEUR} /></td>
+				<td  id="jeudi" class="largeurcol"><a id="touche_jeudi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#GET{jeudi}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{jeudi},jourplus=#GET{vendredi},couleur=#ORR_RESSOURCE_COULEUR} /></td>
+				<td  id="vendredi" class="largeurcol"><a id="touche_vendredi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#GET{vendredi}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{vendredi},jourplus=#GET{samedi},couleur=#ORR_RESSOURCE_COULEUR} /></td>
+				<td  id="samedi" class="largeurcol"><a id="touche_samedi_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#GET{samedi}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{samedi},jourplus=#GET{dimanche},couleur=#ORR_RESSOURCE_COULEUR} /></td>
+				<td  id="dimanche" class="largeurcol"><a id="touche_dimanche_#ID_ORR_RESSOURCE" href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'ma_date',#GET{dimanche}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a><INCLURE{fond=cellule}{idressource=#ID_ORR_RESSOURCE,jour=#GET{dimanche},jourplus=#GET{plusun},couleur=#ORR_RESSOURCE_COULEUR} /></td>
 			</tr>
     </BOUCLE_ressource>
 </tbody>
@@ -51,19 +63,27 @@
 </div>
 
     <script type="text/javascript">
-        var hautbas =true;
+        var hautbas =0;
 		jQuery(document).ready(function(){
 			$(".nomreservation").bind("click",function(event){
+				var boucle = 0;
 				event.stopPropagation();
 				recupereDir(this);
-				$("#"+"click_"+idDir).toggle("slow", function(){
-                     if ( hautbas == true ){
-				     $("#"+idDir+" .changeclic").attr("src","#CHEMIN{img/haut.png}");
-				       hautbas = false;
-					}else{
-					 $("#"+idDir+" .changeclic").attr("src","#CHEMIN{img/bas.png}");
-					   hautbas = true;
-					}
+				var classe = idDir.split(" ");
+				$("."+classe[0]+".cache").toggle("slow", function(){
+						if (boucle == 0) {
+							 if ( hautbas%2 == 0 ){
+							 $("."+classe[0]+" .changeclic").attr("src","#CHEMIN{img/haut.png}");
+								hautbas++;
+								console.log("paire");
+							}else{
+							 $("."+classe[0]+" .changeclic").attr("src","#CHEMIN{img/bas.png}");
+								hautbas++;
+								console.log("impaire");
+							}
+						boucle++;
+						console.log(boucle);
+						}
 				});
 			});
 		});
@@ -71,7 +91,7 @@
 	var idDir;
 	function recupereDir(classe)
 	{
-		idDir = $(classe).attr("id");
+		idDir = $(classe).attr("class");
 	}
 	</script>
 

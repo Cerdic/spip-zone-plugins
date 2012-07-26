@@ -31,17 +31,22 @@ td#jeudi, th#jeudith{
 	background-color : #D6D6D6 ;
 }
 
-#motcle{
-	width : 200px;
-/*
-	float : left;
-*/
+#motscles, #motcle{
+	width : 150px;
+	float:left;
 	}
 
 #datepick{
-/*
-	float : left;
-*/
+	width : 200px;
+	float:right;
+	}
+
+#contenu{
+width: 980px;
+}
+
+#affichageTableau{
+clear:both;
 }
 
 

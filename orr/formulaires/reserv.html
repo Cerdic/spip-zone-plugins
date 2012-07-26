@@ -43,6 +43,8 @@
             stepMinute: 15,
             minuteGrid:15,
             hourGrid:4,
+            addSliderAccess: true,
+			sliderAccessArgs: { touchonly: false },
 			onClose: function(dateText, inst) {
 				var endDateTextBox = $('#date_fin');
 				if (endDateTextBox.val() != '') {
@@ -95,7 +97,7 @@
             else{
                 $("#champ_nom_ressource").css("border-color","#04F935");
                 $("#champ_nom_ressource").next(".error-message").html("");
-
+//~ //~
             }
             // Pour le champ date_debut, vérifie sa présence
             if ($("#date_debut").val() == ""){
@@ -106,7 +108,7 @@
             else{
                 $("#date_debut").css("border-color","#04F935");
                 $("#date_debut").next(".error-message").html("");
-
+//~ //~
             }
             // Pour le champ date_fin, vérifie sa présence
             if ($("#date_fin").val() == ""){
@@ -126,22 +128,7 @@
                     $("#date_fin").next(".error-message").html("");
                 }
             }
-            //~ jQuery.ajax ({
-                    //~ url : "http://localhost/spip/plugins/fabrique_auto/orr/action_reserv.php",
-                    //~ data : data,
-                    //~ complete : function (xhr, result)
-                    //~ {
-                        //~ if (result != "success")
-                        //~ {
-						//~ alert("perdu");
-                        //~ return;
-						//~ }
-                        //~ var response = xhr.responseText;
-                        //~ alert(response);
-                        //~ valid=false;
-                    //~ }
-            //~ });
-            //~ valid=false;
+
             return valid;
         });
     });

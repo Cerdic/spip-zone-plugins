@@ -44,30 +44,19 @@ function formulaires_reserv_verifier_dist($id,$date_deb){
     list($heuref,$minutef,$secondef) = explode(':',$tempsf);
     $timestampd = mktime($heured,$minuted,$seconded,$jourd,$moisd,$anneed);
     $timestampf = mktime($heuref,$minutef,$secondef,$jourf,$moisf,$anneef);
-    if ($timestampd>$timestampf){
-        $erreurs['date_fin'] = "date de fin antérieur à la date de début";
+    if ($timestampd>=$timestampf){
+        $erreurs['date_fin'] = "date de fin antérieur  ou égale à la date de début";
     }
 
     // les dates choisies sont libres
     include_spip('inc/compare_date');
     $date_debut = date("Y-m-d H:i:s", mktime ($heured,$minuted,0, $moisd, $jourd, $anneed));
     $date_fin   = date("Y-m-d H:i:s", mktime ($heuref,$minutef,0, $moisf, $jourf, $anneef));
-    $retour_debut=compare_date($date_debut,$id);
-    $retour_fin=compare_date($date_fin,$id);
-
-    if ($retour_debut=="2") {
-        $erreurs['date_debut'] = "Il y a déja une réservation à ce moment là !";
-    }
-    if ($retour_fin=="2") {
-        $erreurs['date_fin'] = "Il y a déja une réservation à ce moment là !";
-    }
-    if ($retour_debut=="1" and $retour_fin=="3") {
-        $erreurs['date_fin'] = "Il y a déja une réservation à ce moment là !";
-        $erreurs['date_debut'] = "Il y a déja une réservation à ce moment là !";
-    }
-    if (count($erreurs)) {
-        $erreurs['message_erreur'] = 'Votre saisie contient des erreurs !';
-    }
+    $resultat=compare_date($date_debut,$date_fin,$id);
+	if ($resultat == "1"){
+		//~ $erreurs['date_debut'] = 'Vos dates de réservations ne sont pas libres !';
+		$erreurs['date_fin'] = 'Vos dates de réservations ne sont pas libres !';
+	}
     return $erreurs;
 }
 
@@ -86,10 +75,11 @@ function formulaires_reserv_traiter_dist($id,$date_deb){
     list($heuref,$minutef) = explode(':',$heure_fin);
 
     $date_debut = date("Y-m-d H:i:s", mktime ($heured,$minuted,0, $moisd, $jourd, $anneed));
+    $jourj = date("Y-m-d", mktime ($heured,$minuted,0, $moisd, $jourd, $anneed));
     $date_fin   = date("Y-m-d H:i:s", mktime ($heuref,$minutef,0, $moisf, $jourf, $anneef));
 
     $retour['message_ok'] = "bravo";
-    $retour['redirect'] = "spip.php?page=affichage_orr";
+    $retour['redirect'] = "spip.php?page=affichage_orr&jourj=$jourj";
 
     $objet = "orr_reservation";
     // utilisation API editer_objet pour l'insertion en BDD'

@@ -1,12 +1,9 @@
 <html>
 
-<!--
-    <div id="letout">
--->
 
-		<div id="partiehaute">
+<div id="partiehaute">
 	<div id="motcle">
-		#FORMULAIRE_MOTSCLEF
+		<INCLURE{fond=inc-selection_mots}>
 	</div>
 
 	<div id="datepick">
@@ -20,46 +17,47 @@
 			<div id="icones">
 				<span id="gauche"><img src="#CHEMIN{img/precedent.png}" alt="haut" /></span>&nbsp;<span id="aujourdhui"><img src="#CHEMIN{img/aujourdhui.png}" alt="haut" /></span>&nbsp;<span id="droite"><img src="#CHEMIN{img/suivant.png}" alt="bas" /></span>
 			</div>
-			<div>
+			<div id="tableau">
 				<INCLURE{fond=inc-tableau,ajax=tableau}>
 			</div>
 		</div>
-<!--
-	</div>
--->
 
 
 
 <script>
 
-    jQuery(document).ready(function(){
+	jQuery(document).ready(function(){
+		[(#ENV{jourj}|?{
+			jourj = "[(#ENV{jourj})]",
+			dateselectionne = new Date()
+			jourj = dateselectionne.toString('yyyy-MM-dd')})];
+		tabAjax();
 
-        dateselectionne = new Date();
-        joursemaine(dateselectionne);
-             tabAjax();
 
-        jQuery( "#datepickers" ).datepicker({
-            dateFormat : 'yy-mm-dd',
-            onSelect : function (dateText){
-                dateselectionne = Date.parse(dateText);
-                joursemaine(dateselectionne);
-                tabAjax();
+		jQuery("#datepickers").datepicker({
+			dateFormat : 'yy-mm-dd',
+			onSelect : function (dateText){
+				dateselectionne = Date.parse(dateText);
+				jourj = dateselectionne.toString('yyyy-MM-dd');
+				tabAjax()
 			},
 		});
 		jQuery("#gauche").bind("click",function(event){
 			dateselectionne = dateselectionne.addDays(-1);
-			joursemaine(dateselectionne);
-            tabAjax();
+			jourj = dateselectionne.toString('yyyy-MM-dd');
+			tabAjax();
 		});
 		jQuery("#droite").bind("click",function(event){
 			dateselectionne = dateselectionne.addDays(1);
-			joursemaine(dateselectionne);
-            tabAjax();
+			jourj = dateselectionne.toString('yyyy-MM-dd');
+			tabAjax();
+
 		});
 		jQuery("#aujourdhui").bind("click",function(event){
 			dateselectionne = new Date();
-			joursemaine(dateselectionne);
-            tabAjax();
+			jourj = dateselectionne.toString('yyyy-MM-dd');
+			tabAjax();
+
 		});
 		jQuery("#envoyer").click(function(){
 		var motscle = jQuery("#motscles").val().toString();
@@ -84,32 +82,12 @@
         });
 	});
 
-function joursemaine(dateactive)
-{
-		jour1 = dateactive.addDays(-3).toString('yyyy-MM-dd 00:00:00');
-		jour2 = dateactive.addDays(1).toString('yyyy-MM-dd 00:00:00');
-		jour3 = dateactive.addDays(1).toString('yyyy-MM-dd 00:00:00');
-		jour4 = dateactive.addDays(1).toString('yyyy-MM-dd 00:00:00');
-		jour5 = dateactive.addDays(1).toString('yyyy-MM-dd 00:00:00');
-		jour6 = dateactive.addDays(1).toString('yyyy-MM-dd 00:00:00');
-		jour7 = dateactive.addDays(1).toString('yyyy-MM-dd 00:00:00');
-		jour8 = dateactive.addDays(1).toString('yyyy-MM-dd 00:00:00');
-		jour9 = dateactive.addDays(-4).toString('yyyy-MM-dd 00:00:00');
-
-	}
 function tabAjax(){
-       ajaxReload('tableau', {
-                    args:{
-                        jour1:jour1,
-                        jour2:jour2,
-                        jour3:jour3,
-                        jour4:jour4,
-                        jour5:jour5,
-                        jour6:jour6,
-                        jour7:jour7,
-                        jour8:jour8,
-                        },
-        });
+		ajaxReload('tableau', {
+					args:{
+						jourj:jourj,
+						},
+		});
 	}
 
 </script>
