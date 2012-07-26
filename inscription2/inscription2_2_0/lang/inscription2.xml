@@ -1,26 +1,26 @@
-<traduction module="inscription2" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/inscription2/inscription2_2_0/lang/" reference="fr">
+<traduction module="inscription2" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/inscription2/inscription2_2_0/lang/" reference="fr">
 	<langue code="ast" />
-	<langue code="ca" url="http://trad.spip.org/tradlang_module/inscription2?lang_cible=ca">
-		<traducteur nom="merce" lien="http://trad.spip.org/auteur/merce" />
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/inscription2?lang_cible=ca">
+		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
 	</langue>
-	<langue code="de" url="http://trad.spip.org/tradlang_module/inscription2?lang_cible=de">
-		<traducteur nom="klaus++" lien="http://trad.spip.org/auteur/klaus" />
+	<langue code="de" url="http://trad.spip.net/tradlang_module/inscription2?lang_cible=de">
+		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.org/tradlang_module/inscription2?lang_cible=en">
-		<traducteur nom="Paolo" lien="http://trad.spip.org/auteur/paolo" />
+	<langue code="en" url="http://trad.spip.net/tradlang_module/inscription2?lang_cible=en">
+		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 	</langue>
 	<langue code="es" />
-	<langue code="fa" url="http://trad.spip.org/tradlang_module/inscription2?lang_cible=fa">
-		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/inscription2?lang_cible=fa">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" />
-	<langue code="fr_tu" url="http://trad.spip.org/tradlang_module/inscription2?lang_cible=fr_tu">
-		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/inscription2?lang_cible=fr_tu">
+		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 	</langue>
 	<langue code="gl" />
 	<langue code="it" />
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/inscription2?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/inscription2?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 	<langue code="tr" />
 </traduction>
