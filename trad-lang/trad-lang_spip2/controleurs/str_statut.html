@@ -34,6 +34,7 @@
 </fieldset>
 <script type='text/javascript'>
 	var contenu_orig = '[(#STR**|tradlang_utf8|entites_html|replace{"\n","_"}|replace{"\r",""}|replace{"\t",""})]';
+	var statut_orig = '#STATUT';
 	var me = cQuery(".tradlang-str_statut-#_a:ID_TRADLANG");
 	var id = me.crayon().find('form');
 	var vars = cQuery('#str_orig_#ID_TRADLANG').val().match('@[^@]+@','gi');
@@ -54,7 +55,7 @@
 		}
 		var newstatut = cQuery(id).find('#statut_#ID_TRADLANG').val();
 		var new_contenu = cQuery(id).find('#str_#ID_TRADLANG').val().replace(/\n/g,'_').replace(/\r/g,'').replace(/\t/g,'');
-		if((new_contenu != contenu_orig) && (newstatut != 'OK'))
+		if((new_contenu != contenu_orig) && (newstatut == statut_orig))
 			if(!window.confirm('<:tradlang:crayon_changer_statut|filtrer_entites|texte_script:>')){
 				veto.veto = true;
 			}
