@@ -1,18 +1,18 @@
-<traduction module="palette" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/palette/trunk/lang/" reference="fr">
-	<langue code="ast" url="http://trad.spip.org/tradlang_module/palette?lang_cible=ast">
-		<traducteur nom="Xuacu" lien="http://trad.spip.org/auteur/xuacu" />
+<traduction module="palette" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/palette/trunk/lang/" reference="fr">
+	<langue code="ast" url="http://trad.spip.net/tradlang_module/palette?lang_cible=ast">
+		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
 	</langue>
 	<langue code="ca" />
 	<langue code="de" />
-	<langue code="en" url="http://trad.spip.org/tradlang_module/palette?lang_cible=en">
-		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
+	<langue code="en" url="http://trad.spip.net/tradlang_module/palette?lang_cible=en">
+		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 	</langue>
 	<langue code="fa" />
 	<langue code="fr" />
-	<langue code="fr_tu" url="http://trad.spip.org/tradlang_module/palette?lang_cible=fr_tu">
-		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/palette?lang_cible=fr_tu">
+		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/palette?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/palette?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
