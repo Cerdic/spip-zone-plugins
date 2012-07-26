@@ -1,12 +1,12 @@
-<traduction module="gravatar" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/gravatar/lang/" reference="fr">
+<traduction module="gravatar" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/gravatar/lang/" reference="fr">
 	<langue code="de" />
 	<langue code="en" />
-	<langue code="fa" url="http://trad.spip.org/tradlang_module/gravatar?lang_cible=fa">
-		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=fa">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" />
 	<langue code="it" />
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/gravatar?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
