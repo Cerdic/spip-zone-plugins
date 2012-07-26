@@ -1,19 +1,19 @@
-<traduction module="thumbsites" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/thumbsites/trunk/lang/" reference="fr">
-	<langue code="ast" url="http://trad.spip.org/tradlang_module/thumbsites?lang_cible=ast">
-		<traducteur nom="Xuacu" lien="http://trad.spip.org/auteur/xuacu" />
+<traduction module="thumbsites" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/thumbsites/trunk/lang/" reference="fr">
+	<langue code="ast" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=ast">
+		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
 	</langue>
 	<langue code="ca" />
 	<langue code="de" />
 	<langue code="en" />
-	<langue code="fa" url="http://trad.spip.org/tradlang_module/thumbsites?lang_cible=fa">
-		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=fa">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" />
 	<langue code="fr_tu" />
-	<langue code="pt_br" url="http://trad.spip.org/tradlang_module/thumbsites?lang_cible=pt_br">
-		<traducteur nom="Ricardo Porto" lien="http://trad.spip.org/auteur/ricardo-porto" />
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=pt_br">
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/thumbsites?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
