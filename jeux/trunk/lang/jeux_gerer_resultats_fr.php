@@ -8,6 +8,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pour_auteur'   =>'Pour cet auteur :',
 'pour_jeu'      =>'Pour ce jeu :',
 'pour_tous'     =>'Pour tout les résultats :',
+'resultats_compactes'   =>'Résultats compactés !',
+'resultats_supprimes'   =>'Résultats supprimés !',
 'supprimer'     =>'Supprimer les résultats'
+
 );
 ?>

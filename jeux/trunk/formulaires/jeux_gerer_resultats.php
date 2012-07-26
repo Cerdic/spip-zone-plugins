@@ -27,22 +27,25 @@ function formulaires_jeux_gerer_resultats_saisies($param=array()){
     return $saisies;
 }
 
-function formulaires_jeux_gerer_resultats_charger($param=array()){
+function formulaires_jeux_gerer_resultats_charger($param=array(),$return=''){
     $param['saisies'] = formulaires_jeux_gerer_resultats_saisies($param);
     return $param;
 }
-function formulaires_jeux_gerer_resultats_verifier($param=array()){
+function formulaires_jeux_gerer_resultats_verifier($param=array(),$return=''){
     $erreurs = array();
     if (!_request('confirmer') and _request('faire')){
         $erreurs['non_confirme']=true;
     }
     return $erreurs;
 }
-function formulaires_jeux_gerer_resultats_traiter($param=array()){
+function formulaires_jeux_gerer_resultats_traiter($param=array(),$return=''){
     $faire = _request('faire');
     $id_auteur  =   $param['id_auteur'];
     $id_jeu     =   $param['id_jeu'];
     
+    if ($return){
+        $param['redirect']=$return;  
+    }
     // Supprimer
     if ($faire == 'supprimer'){
         if($id_auteur){
@@ -53,7 +56,8 @@ function formulaires_jeux_gerer_resultats_traiter($param=array()){
         }
         else{
             sql_delete('spip_jeux_resultats');   
-        }  
+        }
+        $param['message_ok']=_T('jeux_gerer_resultats:resultats_supprimes');  
     }
     // Compacter
     if ($faire == 'compacter'){
@@ -69,6 +73,7 @@ function formulaires_jeux_gerer_resultats_traiter($param=array()){
               formulaire_gerer_resultats_compacter_auteur($auteur['id_auteur']);     
             }
         }
+        $param['message_ok']=_T('jeux_gerer_resultats:resultats_compactes');
     }
     
     return $param;
