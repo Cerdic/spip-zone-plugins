@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/saisies?lang_cible=fr_tu
+// extrait automatiquement de http://trad.spip.net/tradlang_module/saisies?lang_cible=fr_tu
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -75,6 +75,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_disable_avec_post_label' => 'Désactiver mais poster',
 	'option_disable_explication' => 'Le champ ne peut plus obtenir le focus.',
 	'option_disable_label' => 'Désactiver le champ',
+	'option_erreur_obligatoire_explication' => 'Vous pouvez personnaliser le message d\'erreur affiché pour indiquer l\'obligation (sinon laisser vide).', # NEW
+	'option_erreur_obligatoire_label' => 'Message d\'obligation', # NEW
 	'option_explication_explication' => 'Si besoin, une courte phrase décrivant l\'objet du champ.',
 	'option_explication_label' => 'Explication',
 	'option_groupe_affichage' => 'Affichage',

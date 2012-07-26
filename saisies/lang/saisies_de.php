@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/saisies?lang_cible=de
+// extrait automatiquement de http://trad.spip.net/tradlang_module/saisies?lang_cible=de
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -75,6 +75,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_disable_avec_post_label' => 'Senden trotz Deaktivierung',
 	'option_disable_explication' => 'Das Feld erhält keinen Fokus.',
 	'option_disable_label' => 'Feld deaktivieren',
+	'option_erreur_obligatoire_explication' => 'Vous pouvez personnaliser le message d\'erreur affiché pour indiquer l\'obligation (sinon laisser vide).', # NEW
+	'option_erreur_obligatoire_label' => 'Message d\'obligation', # NEW
 	'option_explication_explication' => 'Falls erforderlich kurze Beschreibung des Feldobjekts',
 	'option_explication_label' => 'Erläuterung',
 	'option_groupe_affichage' => 'Anzeige',

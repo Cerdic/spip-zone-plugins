@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/saisies?lang_cible=sk
+// extrait automatiquement de http://trad.spip.net/tradlang_module/saisies?lang_cible=sk
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -75,6 +75,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_disable_avec_post_label' => 'Disabled but posted.',
 	'option_disable_explication' => 'Na pole sa nedá zacieliť.',
 	'option_disable_label' => 'Disable the field',
+	'option_erreur_obligatoire_explication' => 'Vous pouvez personnaliser le message d\'erreur affiché pour indiquer l\'obligation (sinon laisser vide).', # NEW
+	'option_erreur_obligatoire_label' => 'Message d\'obligation', # NEW
 	'option_explication_explication' => 'If necessary, a short sentence describing the subject field.',
 	'option_explication_label' => 'Vysvetlenie',
 	'option_groupe_affichage' => 'Zobraziť',
