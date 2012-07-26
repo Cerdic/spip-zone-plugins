@@ -1,0 +1,15 @@
+<div class="formulaire_spip formulaire_jeux_gerer_resultats">
+<form action="#ENV{action}" method="post"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+	<ul>
+	   [(#ID_AUTEUR|oui)[(#SET{label,<:jeux_gerer_resultats:pour_auteur:>})]]
+	   [(#ID_JEU|oui)[(#SET{label,<:jeux_gerer_resultats:pour_jeu:>})]]
+	   [(#ID_AUTEUR|ou{#ID_JEU}|non)[(#SET{label,<:jeux_gerer_resultats:pour_tous:>})]]
+	   
+	   [(#SAISIE{radio,action,datas=#ARRAY{supprimer,<:jeux_gerer_resultats:supprimer:>,
+	                           compacter,<:jeux_gerer_resultats:compacter:>},label=#GET{label}})]
+	</ul>
+	<p class="boutons"><input type="submit" class="submit" value="<:pass_ok:>" /></p>
+</div></form>
+</div>
