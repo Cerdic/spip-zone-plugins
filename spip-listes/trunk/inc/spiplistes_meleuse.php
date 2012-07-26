@@ -34,6 +34,12 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+include_spip ('inc/utils');
+include_spip ('inc/filtres');    /* email_valide() */
+include_spip ('inc/acces');      /* creer_uniqid() */
+include_spip('inc/charsets');
+include_spip('inc/mail');
+
 include_spip('inc/spiplistes_api_globales');
 
 /**
@@ -571,8 +577,71 @@ function spiplistes_meleuse ($last_time) {
 								}
 
 								$email_a_envoyer[$format_abo]->SetAddress($email, $nom_auteur);
+								
+								$to = $email;
+								/**
+								 * @todo les caractères accentués ne passent pas dans le sujet. A revoir.
+								 */
+								$subject = $objet_texte;
+								
+								$body = array(
+											  'html' => $email_a_envoyer['html']->Body,
+											  'texte' => $email_a_envoyer['texte']->AltBody
+											  );
+								
+								/**
+								 * @todo completer l'adresse from par le nom de l'émetteur
+								 * du style 'John Doe' <jd@foo.bar>
+								 */
+								$from = $from; // $fromname?
+								
+								$headers = array (
+												'Reply-To: '.$email_reply_to,
+												'Return-Path: '.$return_path
+												);
+								$headers = array (
+												'Reply-To' => $email_reply_to,
+												'Return-Path' => $return_path
+												);
+								
+								
+								// marche pas
+								$headers = array (
+												'Reply-To: reply2me@foo.bar',
+												'Return-Path: return-path@foo.bar'
+												);
+								// marche pas
+								$headers = array (
+												'Reply-To' => 'reply2me@foo.bar',
+												'Return-Path' => 'return-path@foo.bar'
+												);
+								// marche pas
+								$headers = 'Reply-To: reply2me@quesaco.org';
+								/**
+								 * @todo le header est perdu au passage. Vérifier facteur ?
+								 */
+								
+								
+								$format = $format_abo;
+
+								
+								
+								
+								
+								
 								// envoie le mail																
-								if($simuler_envoi || $email_a_envoyer[$format_abo]->send()) {
+								//if($simuler_envoi || $email_a_envoyer[$format_abo]->send()) {
+								
+								if ( $simuler_envoi ||
+									spiplistes_envoyer_mail (
+																$to,
+																$subject,
+																$body,
+																$from,
+																$headers,
+																$format
+															 ) 
+									) {
 									$nb_emails_envoyes++;
 									$nb_emails[$format_abo]++;
 									if($log_voir_destinataire) {

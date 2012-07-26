@@ -28,10 +28,11 @@
 
 if(!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip ("inc/utils");
-include_spip ("inc/filtres");    /* email_valide() */
-include_spip ("inc/acces");      /* creer_uniqid() */
+include_spip ('inc/utils');
+include_spip ('inc/filtres');    /* email_valide() */
+include_spip ('inc/acces');      /* creer_uniqid() */
 include_spip('inc/charsets');
+include_spip('inc/mail');
 
 include_spip('base/abstract_sql');
 
@@ -1748,14 +1749,16 @@ function spiplistes_preparer_message ($objet, $patron, $contexte) {
  * @param string $headers
  * @param string $format
  * @staticvar string|bool $opt_simuler_envoi
- * @version CP-20110618
+ * @version CP-20120726
  */
-function spiplistes_envoyer_mail ($to
-								  , $subject
-								  , $message
-								  , $from = false
-								  , $headers = ''
-								  , $format = 'texte') {
+function spiplistes_envoyer_mail (
+								  $to,
+								  $subject,
+								  $message,
+								  $from = false,
+								  $headers = '',
+								  $format = 'texte'
+								  ) {
 	
 	static $opt_simuler_envoi;
 	if(!$opt_simuler_envoi) {
@@ -1817,10 +1820,24 @@ function spiplistes_envoyer_mail ($to
 		$email_a_envoyer->SMTPKeepAlive = true;
 		if($fromname) $email_a_envoyer->FromName = $fromname ; 
 
-		if ($result = $email_a_envoyer->send())
-		{
-			$email_a_envoyer->SmtpClose();
-		}
+		//if ($result = $email_a_envoyer->send())
+		//{
+		//	$email_a_envoyer->SmtpClose();
+		//}
+		
+		$headers = array (
+			'Errors-To: '.$return_path ,
+			'Reply-To: '.$reply_to ,
+			'Return-Path: '.$return_path
+		);
+		
+		$result = envoyer_mail (
+			$to ,
+			$subject ,
+			$message ,
+			$from ,
+			$headers
+		);
 		
 		spiplistes_debug_log ('EMAIL FROM '.$from.' TO '.$to.' : '.($result ? 'OK' : 'ERROR'));
 	}
