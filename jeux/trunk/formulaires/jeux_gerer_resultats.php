@@ -42,9 +42,10 @@ function formulaires_jeux_gerer_resultats_traiter($param=array()){
     $faire = _request('faire');
     $id_auteur  =   $param['id_auteur'];
     $id_jeu     =   $param['id_jeu'];
+    
     // Supprimer
     if ($faire == 'supprimer'){
-        if($param['id_auteur']){
+        if($id_auteur){
             sql_delete('spip_jeux_resultats', "id_auteur=$id_auteur");  
         }
         elseif($id_jeu){
@@ -54,9 +55,41 @@ function formulaires_jeux_gerer_resultats_traiter($param=array()){
             sql_delete('spip_jeux_resultats');   
         }  
     }
+    // Compacter
+    if ($faire == 'compacter'){
+        if($id_auteur){ 
+            formulaire_gerer_resultats_compacter_auteur($id_auteur);
+        }
+        elseif($id_jeu){
+            formulaire_gerer_resultats_compacter_jeu($id_jeu);
+        }
+        else{
+            $auteurs = sql_select('id_auteur','spip_jeux_resultats','',array('id_auteur')); // tout les auteurs
+            while ($auteur = sql_fetch($auteurs)){
+              formulaire_gerer_resultats_compacter_auteur($auteur['id_auteur']);     
+            }
+        }
+    }
     
-
-
     return $param;
+}
+
+function formulaire_gerer_resultats_compacter_auteur($id_auteur){
+    $liste = array();
+    $jeux  = sql_select('id_jeu','spip_jeux_resultats',"id_auteur=$id_auteur",array('id_jeu')); // jeu où l'auteur à un résultats
+    while ($jeu=sql_fetch($jeux)){
+            $id_jeu=$jeu['id_jeu'];
+            $liste[] = sql_getfetsel('id_resultat','spip_jeux_resultats',"id_auteur=$id_auteur AND id_jeu=$id_jeu",'',"date DESC");
+    }
+    sql_delete('spip_jeux_resultats', "id_auteur=$id_auteur AND ".sql_in('id_resultat', $liste, 'NOT')); 
+}
+function formulaire_gerer_resultats_compacter_jeu($id_jeu){
+    $liste = array();
+    $auteurs  = sql_select('id_auteur','spip_jeux_resultats',"id_jeu=$id_jeu",array('id_auteur')); // auteur où l'auteur à un résultats
+    while ($auteur=sql_fetch($auteurs)){
+        $id_auteur=$auteur['id_auteur'];
+        $liste[] = sql_getfetsel('id_resultat','spip_jeux_resultats',"id_auteur=$id_auteur AND id_jeu=$id_jeu",'',"date DESC");
+    }
+    sql_delete('spip_jeux_resultats', "id_jeu=$id_jeu AND ".sql_in('id_resultat', $liste, 'NOT'));   
 }
 ?>
