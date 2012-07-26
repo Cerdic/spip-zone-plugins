@@ -1,0 +1,24 @@
+<plugin>
+	<nom>Tradauto</nom>
+	<slogan>Partez à la conquête du Monde avec le Traducteur automatique</slogan>
+	<auteur>Bruno de Goyrans</auteur>
+	<version>0.0.0</version>
+	<version_base>0.0</version_base>
+
+	<icon>images/tradauto-64.png</icon>
+	<description>
+	 Traduction automatique des données éditoriales (articles, rubriques, etc.) dans l'espace privé.
+	</description>
+	<lien></lien>
+	<licence>(c) 2012 - GNU/LGPL</licence>
+
+	<etat>test</etat>
+	<prefix>tradauto</prefix>
+	<categorie>edition</categorie>
+
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<action>ajout_bouton</action>
+		<inclure>tradauto.php</inclure>
+	</pipeline>
+</plugin>
