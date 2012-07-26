@@ -1,9 +1,9 @@
-<traduction module="paquet-edition_directe" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/edition_directe/trunk/lang/" reference="fr">
+<traduction module="paquet-edition_directe" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/edition_directe/trunk/lang/" reference="fr">
 	<langue code="de" />
 	<langue code="en" />
 	<langue code="es" />
 	<langue code="fr" />
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/paquet-edition_directe?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-edition_directe?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
