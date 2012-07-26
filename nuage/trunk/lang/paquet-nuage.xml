@@ -1,12 +1,12 @@
-<traduction module="paquet-nuage" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/nuage/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.org/tradlang_module/paquet-nuage?lang_cible=en">
-		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
+<traduction module="paquet-nuage" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/nuage/trunk/lang/" reference="fr">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-nuage?lang_cible=en">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.org/tradlang_module/paquet-nuage?lang_cible=fa">
-		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/paquet-nuage?lang_cible=fa">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" />
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/paquet-nuage?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-nuage?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
