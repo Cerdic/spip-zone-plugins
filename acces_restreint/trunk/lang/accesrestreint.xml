@@ -1,39 +1,39 @@
-<traduction module="accesrestreint" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/acces_restreint/trunk/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.org/tradlang_module/accesrestreint?lang_cible=ar">
-		<traducteur nom="&lt;span lang=&#039;fr&#039;&gt;George&lt;/span&gt;" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
+<traduction module="accesrestreint" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/acces_restreint/trunk/lang/" reference="fr">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=ar">
+		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="ast" url="http://trad.spip.org/tradlang_module/accesrestreint?lang_cible=ast">
-		<traducteur nom="Xuacu" lien="http://trad.spip.org/auteur/xuacu" />
+	<langue code="ast" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=ast">
+		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
 	</langue>
 	<langue code="br" />
 	<langue code="ca" />
-	<langue code="de" url="http://trad.spip.org/tradlang_module/accesrestreint?lang_cible=de">
-		<traducteur nom="klaus++" lien="http://trad.spip.org/auteur/klaus" />
+	<langue code="de" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=de">
+		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.org/tradlang_module/accesrestreint?lang_cible=en">
-		<traducteur nom="sQuonk" lien="http://trad.spip.org/auteur/squonk" />
-		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
+	<langue code="en" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=en">
+		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" />
-	<langue code="fa" url="http://trad.spip.org/tradlang_module/accesrestreint?lang_cible=fa">
-		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=fa">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" />
-	<langue code="fr_tu" url="http://trad.spip.org/tradlang_module/accesrestreint?lang_cible=fr_tu">
-		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
-		<traducteur nom="orlammd" lien="http://trad.spip.org/auteur/orlammd" />
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=fr_tu">
+		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
+		<traducteur nom="orlammd" lien="http://trad.spip.net/auteur/orlammd" />
 	</langue>
 	<langue code="gl" />
-	<langue code="nl" url="http://trad.spip.org/tradlang_module/accesrestreint?lang_cible=nl">
-		<traducteur nom="mpossoz" lien="http://trad.spip.org/auteur/mpossoz" />
-		<traducteur nom="Suske" lien="http://trad.spip.org/auteur/suske" />
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=nl">
+		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
+		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
-	<langue code="pt_br" url="http://trad.spip.org/tradlang_module/accesrestreint?lang_cible=pt_br">
-		<traducteur nom="Ricardo Porto" lien="http://trad.spip.org/auteur/ricardo-porto" />
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=pt_br">
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
 	<langue code="ro" />
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/accesrestreint?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 	<langue code="tr" />
 </traduction>
