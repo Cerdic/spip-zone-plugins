@@ -40,21 +40,23 @@ function formulaires_jeux_gerer_resultats_verifier($param=array()){
 }
 function formulaires_jeux_gerer_resultats_traiter($param=array()){
     $faire = _request('faire');
-    
+    $id_auteur  =   $param['id_auteur'];
+    $id_jeu     =   $param['id_jeu'];
     // Supprimer
     if ($faire == 'supprimer'){
         if($param['id_auteur']){
-            sql_delete('spip_jeux_resultats', "id_auteur=".$param['id_auteur']);  
+            sql_delete('spip_jeux_resultats', "id_auteur=$id_auteur");  
         }
-        elseif($param['id_jeu']){
-            sql_delete('spip_jeux_resultats', "id_jeu=".$param['id_jeu']);
+        elseif($id_jeu){
+            sql_delete('spip_jeux_resultats', "id_jeu=$id_jeu");
         }
         else{
             sql_delete('spip_jeux_resultats');   
         }  
     }
     
-    
+
+
     return $param;
 }
 ?>
