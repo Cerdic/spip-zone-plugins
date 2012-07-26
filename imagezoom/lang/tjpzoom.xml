@@ -1,30 +1,30 @@
-<traduction module="tjpzoom" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/imagezoom/lang/" reference="fr">
+<traduction module="tjpzoom" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/imagezoom/lang/" reference="fr">
 	<langue code="ast" />
 	<langue code="ca" />
-	<langue code="de" url="http://trad.spip.org/tradlang_module/tjpzoom?lang_cible=de">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="de" url="http://trad.spip.net/tradlang_module/tjpzoom?lang_cible=de">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
-	<langue code="en" url="http://trad.spip.org/tradlang_module/tjpzoom?lang_cible=en">
-		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
+	<langue code="en" url="http://trad.spip.net/tradlang_module/tjpzoom?lang_cible=en">
+		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 	</langue>
 	<langue code="es" />
-	<langue code="fa" url="http://trad.spip.org/tradlang_module/tjpzoom?lang_cible=fa">
-		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/tjpzoom?lang_cible=fa">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" />
-	<langue code="fr_tu" url="http://trad.spip.org/tradlang_module/tjpzoom?lang_cible=fr_tu">
-		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/tjpzoom?lang_cible=fr_tu">
+		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 	</langue>
 	<langue code="gl" />
 	<langue code="km" />
 	<langue code="lb" />
 	<langue code="nl" />
-	<langue code="pt_br" url="http://trad.spip.org/tradlang_module/tjpzoom?lang_cible=pt_br">
-		<traducteur nom="Ricardo Porto" lien="http://trad.spip.org/auteur/ricardo-porto" />
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/tjpzoom?lang_cible=pt_br">
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
 	<langue code="ro" />
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/tjpzoom?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/tjpzoom?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 	<langue code="tr" />
 </traduction>
