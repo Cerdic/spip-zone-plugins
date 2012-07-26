@@ -72,7 +72,7 @@ function spiplistes_log ($texte, $level = LOG_WARNING) {
 			);
 		}
 		else {
-			spip_log ($texte, _SPIPLISTES_PREFIX);
+			spip_log ( $texte, $f = _SPIPLISTES_PREFIX.'.'.LOG_WARNING );
 		}
 		
 	}
@@ -81,8 +81,9 @@ function spiplistes_log ($texte, $level = LOG_WARNING) {
 		// Taille du log SPIP trop courte en 192
 		// Ne pas envoyer si DEBUG sinon tronque sans cesse
 		// En SPIP 193, modifier globale $taille_des_logs pour la rotation
-		spip_log ($texte, _SPIPLISTES_PREFIX);
+		spip_log ( $texte, $f = _SPIPLISTES_PREFIX.'.'.LOG_WARNING );
 	}
+
 	return (true);
 }
 
