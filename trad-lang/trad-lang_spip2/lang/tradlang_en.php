@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/tradlang?lang_cible=en
+// extrait automatiquement de http://trad.spip.net/tradlang_module/tradlang?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -81,6 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_tradlang_module' => 'No language module',
 	'info_chaine_jamais_modifiee' => 'This string has never been edited.',
 	'info_chaine_originale' => 'This string is the source',
+	'info_contributeurs' => 'Contributeurs', # NEW
 	'info_filtrer_status' => 'Filter by status:',
 	'info_langue_mere' => '(parent language)',
 	'info_langues_non_preferees' => 'Other languages :',
@@ -297,6 +298,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_commentaires_chaines' => 'Comments on this string',
 	'titre_form_import_step_1' => 'Step 1 : upload your file',
 	'titre_form_import_step_2' => 'Step 2 : check your modifications',
+	'titre_inscription' => 'Inscription', # NEW
 	'titre_logo_tradlang_module' => 'Module\'s logo',
 	'titre_modifications_chaines' => 'Recent changes in this string',
 	'titre_modifier' => 'Edit',
@@ -306,7 +308,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_profil_autre' => 'Edit his profile',
 	'titre_recherche_tradlang' => 'Language strings
 	',
+	'titre_revisions_ses' => 'Ses contributions', # NEW
 	'titre_revisions_sommaire' => 'Recent changes',
+	'titre_revisions_vos' => 'Vos contributions', # NEW
 	'titre_tradlang' => 'Trad-lang',
 	'titre_tradlang_chaines' => 'Language string',
 	'titre_tradlang_module' => 'Trad-lang language modules',

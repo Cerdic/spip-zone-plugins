@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/tradlang?lang_cible=ar
+// extrait automatiquement de http://trad.spip.net/tradlang_module/tradlang?lang_cible=ar
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -81,6 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_tradlang_module' => 'لا توجد اي سلسلة لغة',
 	'info_chaine_jamais_modifiee' => 'لم يتم تعديل هذه السلسلة أبداً.',
 	'info_chaine_originale' => 'هذه السلسلة هي السلسلة الأصلية',
+	'info_contributeurs' => 'Contributeurs', # NEW
 	'info_filtrer_status' => 'الترشيح حسب الوضعية:',
 	'info_langue_mere' => '(اللغة الأم)',
 	'info_langues_non_preferees' => 'اللغات الأخرى:',
@@ -296,6 +297,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_commentaires_chaines' => 'تعليق على هذه السلسلة',
 	'titre_form_import_step_1' => 'الخطوة ١: إرسال ملفك',
 	'titre_form_import_step_2' => 'الخطوة ٢: التدقيق في تعديلاتك',
+	'titre_inscription' => 'Inscription', # NEW
 	'titre_logo_tradlang_module' => 'شعار الوحدة',
 	'titre_modifications_chaines' => 'أحدث تعديلات هذه السلسلة',
 	'titre_modifier' => 'تعديل',
@@ -304,7 +306,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_profil_auteur' => 'تحرير سيرتك',
 	'titre_profil_autre' => 'تحرير سيرته',
 	'titre_recherche_tradlang' => 'سلاسل اللغة',
+	'titre_revisions_ses' => 'Ses contributions', # NEW
 	'titre_revisions_sommaire' => 'أحدث التعديلات',
+	'titre_revisions_vos' => 'Vos contributions', # NEW
 	'titre_tradlang' => 'Trad-lang',
 	'titre_tradlang_chaines' => 'سلاسل اللغة',
 	'titre_tradlang_module' => 'وحدة لغة',

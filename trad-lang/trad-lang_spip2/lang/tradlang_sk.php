@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/tradlang?lang_cible=sk
+// extrait automatiquement de http://trad.spip.net/tradlang_module/tradlang?lang_cible=sk
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -81,6 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_tradlang_module' => 'Žiaden jazykový modul',
 	'info_chaine_jamais_modifiee' => 'Tento reťazec sa ešte nikto nikdy neupravoval.',
 	'info_chaine_originale' => 'Tento reťazec je reťazec originálu',
+	'info_contributeurs' => 'Contributeurs', # NEW
 	'info_filtrer_status' => 'Filtrovať podľa stavu:',
 	'info_langue_mere' => '(jazyk autora)',
 	'info_langues_non_preferees' => 'Iné jazyky:',
@@ -296,6 +297,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_commentaires_chaines' => 'Komentáre k tomuto reťazcu',
 	'titre_form_import_step_1' => '1. krok: Pošlite svoj súbor',
 	'titre_form_import_step_2' => '2. krok: Potvrdenie vašich zmien',
+	'titre_inscription' => 'Inscription', # NEW
 	'titre_logo_tradlang_module' => 'Logo modulu',
 	'titre_modifications_chaines' => 'Posledné zmeny tohto reťazca',
 	'titre_modifier' => 'Upraviť',
@@ -304,7 +306,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_profil_auteur' => 'Upraviť profil',
 	'titre_profil_autre' => 'Upraviť jeho/jej profil',
 	'titre_recherche_tradlang' => 'Jazykové reťazce',
+	'titre_revisions_ses' => 'Ses contributions', # NEW
 	'titre_revisions_sommaire' => 'Posledné zmeny',
+	'titre_revisions_vos' => 'Vos contributions', # NEW
 	'titre_tradlang' => 'Trad-lang',
 	'titre_tradlang_chaines' => 'Jazykové reťazce',
 	'titre_tradlang_module' => 'Jazykový modul',

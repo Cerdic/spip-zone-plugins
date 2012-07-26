@@ -1,13 +1,13 @@
-<traduction module="tradlang" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/trad-lang/trad-lang_spip2/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.org/tradlang_module/tradlang?lang_cible=ar">
-		<traducteur nom="&lt;span lang=&#039;fr&#039;&gt;George&lt;/span&gt;" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
+<traduction module="tradlang" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/trad-lang/trad-lang_spip2/lang/" reference="fr">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=ar">
+		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="en" url="http://trad.spip.org/tradlang_module/tradlang?lang_cible=en">
-		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
-		<traducteur nom="Paolo" lien="http://trad.spip.org/auteur/paolo" />
+	<langue code="en" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=en">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 	</langue>
 	<langue code="fr" />
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/tradlang?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
