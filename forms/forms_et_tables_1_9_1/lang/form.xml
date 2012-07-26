@@ -1,4 +1,4 @@
-<traduction module="form" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/forms/forms_et_tables_1_9_1/lang/" reference="fr">
+<traduction module="form" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/forms/forms_et_tables_1_9_1/lang/" reference="fr">
 	<langue code="ast" />
 	<langue code="ca" />
 	<langue code="de" />
@@ -12,8 +12,8 @@
 	<langue code="nl" />
 	<langue code="pt_br" />
 	<langue code="ro" />
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/form?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/form?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 	<langue code="tr" />
 </traduction>
