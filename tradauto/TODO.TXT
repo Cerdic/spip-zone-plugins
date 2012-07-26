@@ -1,0 +1,4 @@
+- gérer les textes dépassant 10000 car.
+- Utiliser AddTranslation et AddTranslationArray pour donner des traductions de mots
+- Quand on édite une image à partir d'un article, le bouton "Traduire" est bien affiché dans la boite modale d'édition de l'image, mais ce bouton n'aura un effet que sur le texte de l'article, pas sur celui du texte de l'image (titre, description). Pour traduire les textes des images, passer par la médiathèque.
+- Traduire le texte des boutons, les textes de la configuration, etc.
