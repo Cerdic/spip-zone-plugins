@@ -485,6 +485,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'boite_agenda_titre_' => 'Planning des diffusions '
 , 'boite_agenda_legende' => 'Sur @nb_jours@ jours'
 , 'boite_agenda_voir_jours' => 'Voir sur les @nb_jours@ jours coulants'
+, 'fichier_introuvable' => 'Fichier @fichier@ introuvable'
 
 // inc/spiplistes_api.php
 // inc/spiplistes_api_abstract_sql.php

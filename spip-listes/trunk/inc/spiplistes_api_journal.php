@@ -307,7 +307,7 @@ $(document).ready(function(){
 /**
  * @return string le contenu du journal (log) du plugin
  */
-function spiplistes_journal_lire ($logname = NULL, $logdir = NULL, $logsuf = NULL) {
+function spiplistes_journal_lire ($logname = NULL, $logdir = _DIR_LOG, $logsuf = NULL) {
 	// definition des constantes 1.9.3 pour les SPIP anterieurs
 	if (!defined('_DIR_LOG')){
 		define('_DIR_LOG',defined('_DIR_TMP')?_DIR_TMP:_DIR_SESSION);
@@ -321,16 +321,13 @@ function spiplistes_journal_lire ($logname = NULL, $logdir = NULL, $logsuf = NUL
 	
 	$logname = ($logname === NULL ? _FILE_LOG : $logname);
 	
-	$logfile = ($logdir===NULL ? _DIR_LOG : $logdir)
-			. (test_espace_prive()?'prive_':'') //distinguer les logs prives et publics
-	  		. $logname
-			. ($logsuf === NULL ? _FILE_LOG_SUFFIX : $logsuf);
-
+	$logfile = $logdir.$logname.'.log';
+	
 	$result =
 		(file_exists($logfile))
 		//? file_get_contents($logfile, false, null, 0, 2048)
 		? file_get_contents($logfile)
-		: _T('fichier_introuvable', array('fichier', $logfile))
+		: _T('spiplistes:fichier_introuvable', array('fichier' => $logfile))
 		;
 	
 	$result = ""
