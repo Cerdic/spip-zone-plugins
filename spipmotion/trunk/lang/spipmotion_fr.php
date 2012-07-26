@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/spipmotion/lang
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/spipmotion/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -55,8 +55,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'extensions_video' => 'Formats vidéos',
 
 	// F
-	'ffmpeg_install' => 'FFMpeg sur votre serveur :',
 	'ffmpeg2theora_install' => 'FFMpeg2Theora sur votre serveur :',
+	'ffmpeg_install' => 'FFMpeg sur votre serveur :',
 	'flvtool2_install' => 'FLVtool2 sur votre serveur :',
 	'flvtoolplus_install' => 'FLVtool++ sur votre serveur :',
 	'framerate' => 'Nombre d\'images par seconde',

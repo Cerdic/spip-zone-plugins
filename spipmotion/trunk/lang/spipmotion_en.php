@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.mediaspip.net/spip.php?page=tradlang
+// extrait automatiquement de http://trad.spip.net/tradlang_module/spipmotion?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -37,6 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'encoder_video_version' => '(Re)encode only the @version@ version of this video',
 	'erreur_binaire' => 'One or several softwares needed for the plugin are not available on the system.',
 	'erreur_chemin_ffmpeg' => 'No encoding can be performed because the path does not work.',
+	'erreur_document_inexistant' => 'Ce document n\'existe pas.', # NEW
+	'erreur_document_interdit' => 'Vous n\'avez pas les droits suffisants pour accéder à cette page', # NEW
 	'erreur_document_plus_disponible' => 'This document is not available on the website anymore',
 	'erreur_formulaire_configuration' => 'The form contains at least one error.',
 	'erreur_script_spipmotion_non_executable' => 'The script spipmotion.sh was not found or is not executable.',
@@ -56,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'ffmpeg2theora_install' => 'FFMpeg2Theora on your server:',
+	'ffmpeg_install' => 'FFMpeg sur votre serveur :', # NEW
 	'flvtool2_install' => 'Flvtool2 on your server:',
 	'flvtoolplus_install' => 'FLVtool + + on your server:',
 	'framerate' => 'Frame rate',
@@ -127,6 +130,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_relancer_erreurs' => 'Resume all encodings in error',
 	'info_rotation' => 'Rotation angle:',
 	'info_selectionner_fichier_encoder' => 'You can encode one of the following files',
+	'info_spipmotion_sh_chemin' => 'Chemin du script :', # NEW
+	'info_spipmotion_sh_version' => 'Version du script :', # NEW
 	'info_statut_encode_en_cours' => 'Ongoing',
 	'info_statut_encode_erreur' => 'Error',
 	'info_statut_encode_non' => 'Waiting',
@@ -167,6 +172,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_recuperer_logo_fichier' => 'the file itself',
 	'lien_supprimer_version' => 'Remove the @version@ version',
 	'lien_supprimer_versions' => 'Remove all the versions of the document',
+	'lien_voir_metadatas' => 'Voir l\'ensemble des métadonnées', # NEW
 
 	// M
 	'mediainfo_install' => 'MediaInfo on your server:',
@@ -184,6 +190,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_encodage_sujet_termine' => 'Encoding success',
 	'message_encodage_unique_erreur' => 'The document #@id_document@ was not properly encoded to @extension@.',
 	'message_encodage_unique_oui' => 'The document #@id_document@ has been properly encoded to @extension@.',
+	'message_erreur_spipmotion_sh_vignettes' => 'Le script de génération de vignettes automatique n\'est pas accesssible. Cette fonctionnalité est donc désactivée.', # NEW
 	'message_texte_binaire_manquant' => 'A necessary software is not available on your server:',
 	'message_texte_binaires_informer' => 'Please inform your system administrator.',
 	'message_texte_binaires_informer_exec' => 'Your PHP configuration does not allow to run applications.',
@@ -208,6 +215,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'select_all' => 'Select all',
 	'spipmotion_boite' => 'Configuration of SPIPmotion',
 	'spipmotion_descriptif' => 'This plugin allows to encode audio and video files.',
+	'spipmotion_sh_install' => 'Script d\'encodage de SPIPmotion :', # NEW
+	'spipmotion_sh_vignettes_install' => 'Script de création de vignettes :', # NEW
 
 	// T
 	'th_avfilter_description' => 'Description',
@@ -242,6 +251,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_file_encodes' => 'List of realized encodings',
 	'titre_page_file_encodes_jour' => 'Encodings by date',
 	'titre_page_file_stats' => 'Encodings statistics',
+	'titre_page_metas_doc' => 'Métadonnées du document #@id@', # NEW
 	'titre_previsu' => 'Preview',
 
 	// U
