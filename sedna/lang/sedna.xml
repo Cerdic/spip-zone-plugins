@@ -1,4 +1,4 @@
-<traduction module="sedna" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/sedna/lang/" reference="fr">
+<traduction module="sedna" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/sedna/lang/" reference="fr">
 	<langue code="ast" />
 	<langue code="bg" />
 	<langue code="br" />
@@ -7,8 +7,8 @@
 	<langue code="cpf_hat" />
 	<langue code="cs" />
 	<langue code="de" />
-	<langue code="en" url="http://trad.spip.org/tradlang_module/sedna?lang_cible=en">
-		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
+	<langue code="en" url="http://trad.spip.net/tradlang_module/sedna?lang_cible=en">
+		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 	</langue>
 	<langue code="eo" />
 	<langue code="es" />
@@ -30,8 +30,8 @@
 	<langue code="pt" />
 	<langue code="pt_br" />
 	<langue code="ro" />
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/sedna?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/sedna?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 	<langue code="sv" />
 	<langue code="tr" />
