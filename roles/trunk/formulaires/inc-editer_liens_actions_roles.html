@@ -1,0 +1,32 @@
+#SET{presents,#ENV{id}|roles_presents_sur_id{#ENV{objet_source},#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
+
+<div class="btn-group">
+<a data-toggle="dropdown" href="#" title="Modifier les rôles" class="btn btn-mini dropdown-toggle">Modifier
+	<span class="caret"></span>
+</a>
+	<ul class="dropdown-menu">
+<B_roles_presents>
+	<li class='dropdown-header'>Enlever un rôle</li>
+<BOUCLE_roles_presents(DATA){source table,#ENV{roles/roles/choix}}{valeur IN #GET{presents}}>
+	<li>
+		<button name="supprimer_lien\[#ENV{cle}-#VALEUR\]" class="link btn btn-mini delete">
+		[(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})] [(#VALEUR|role{#ENV{table_source}})]
+		</button>
+	</li>
+</BOUCLE_roles_presents>
+	<li class="divider"></li>
+</B_roles_presents>
+
+<B_roles_absents>
+	<li class='dropdown-header'>Ajouter un rôle</li>
+<BOUCLE_roles_absents(DATA){source table,#ENV{roles/roles/choix}}{valeur !IN #GET{presents}}>
+	<li>
+		<button name="ajouter_lien\[#ENV{cle}-#VALEUR\]" class="link btn btn-mini delete">
+		[(#CHEMIN_IMAGE{inserer-8.png}|balise_img{'+'})] [(#VALEUR|role{#ENV{table_source}})]
+		</button>
+	</li>
+</BOUCLE_roles_absents>
+
+</li>
+</ul>
+</div>

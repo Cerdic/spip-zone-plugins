@@ -1,0 +1,10 @@
+
+
+Surcharge les fichiers du core 3.0.x suivants :
+
+  * prive/formulaires/editer_liens.php
+  * ecrire/action/editer_liens.php
+
+  Cf. http://thread.gmane.org/gmane.comp.web.spip.devel/63059
+
+
