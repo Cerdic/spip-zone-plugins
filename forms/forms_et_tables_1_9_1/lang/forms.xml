@@ -1,4 +1,4 @@
-<traduction module="forms" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/forms/forms_et_tables_1_9_1/lang/" reference="fr">
+<traduction module="forms" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/forms/forms_et_tables_1_9_1/lang/" reference="fr">
 	<langue code="ar" />
 	<langue code="ast" />
 	<langue code="ca" />
@@ -7,15 +7,15 @@
 	<langue code="es" />
 	<langue code="fa" />
 	<langue code="fr" />
-	<langue code="fr_tu" url="http://trad.spip.org/tradlang_module/forms?lang_cible=fr_tu">
-		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/forms?lang_cible=fr_tu">
+		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 	</langue>
 	<langue code="gl" />
 	<langue code="it" />
 	<langue code="nl" />
 	<langue code="pt_br" />
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/forms?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/forms?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 	<langue code="tr" />
 </traduction>
