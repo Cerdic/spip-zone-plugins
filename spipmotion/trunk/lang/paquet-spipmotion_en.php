@@ -1,19 +1,15 @@
 <?php
-
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-
-///  Fichier produit par PlugOnet
-// Module: paquet-spipmotion
-// Langue: en
-// Date: 17-06-2012 14:22:50
-// Items: 2
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.net/tradlang_module/paquet-spipmotion?lang_cible=en
+// ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// S
+	// S
 	'spipmotion_description' => 'Create a Youtube or Dailymotion like website...',
-	'spipmotion_slogan' => 'Encoding media documents',
+	'spipmotion_slogan' => 'Encoding media documents'
 );
+
 ?>
