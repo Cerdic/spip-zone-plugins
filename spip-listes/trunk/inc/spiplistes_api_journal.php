@@ -305,19 +305,15 @@ $(document).ready(function(){
 }
 
 /**
+ * Lit le contenu du fichier de log dedie' spip-listes.log
+ * SPIP 3: spip_log() prefixe le message de
+ * - 'Pri:' lorsque le message est envoye' a partir du BO
+ * - 'Pub:' a partir du FO
+ * 
+ * @version CP-20120726
  * @return string le contenu du journal (log) du plugin
  */
 function spiplistes_journal_lire ($logname = NULL, $logdir = _DIR_LOG, $logsuf = NULL) {
-	// definition des constantes 1.9.3 pour les SPIP anterieurs
-	if (!defined('_DIR_LOG')){
-		define('_DIR_LOG',defined('_DIR_TMP')?_DIR_TMP:_DIR_SESSION);
-	}
-	if (!defined('_FILE_LOG_SUFFIX')){
-		define('_FILE_LOG_SUFFIX','.log');
-	}
-	if (!defined('_FILE_LOG')){
-		define('_FILE_LOG','spip');
-	}
 	
 	$logname = ($logname === NULL ? _FILE_LOG : $logname);
 	
