@@ -16,6 +16,7 @@
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{jeu:info_1_resultat,jeu:info_nb_resultats}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
+		    <th scope="col">[(#TRI{date,<:jeu:label_date:>,ajax})]</th>
             <th scope="col">[(#TRI{titre,<:jeu:label_titre:>,ajax})]</th>
             <th scope="col">[(#TRI{nom,<:jeu:label_nom:>,ajax})]</th>
             <th scope="col">[(#TRI{resultat_court,<:jeu:label_resultat:>,ajax})]</th>
@@ -24,6 +25,7 @@
 	<tbody>
 	<BOUCLE_liste_resultats(JEUX_RESULTATS spip_jeux spip_auteurs){id_jeu?}{id_auteur?}{pagination #ENV{nb,10}}{tri titre,#GET{defaut_tri}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+		    <td>[(#DATE|affdate_heure)]</td>
 			<td><a href="#URL_ECRIRE{jeu,id_jeu=#ID_JEU}">#TITRE</a></td>
 			<td><a href="#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}">#NOM</a></td>
 			<td>#RESULTAT_COURT</td>

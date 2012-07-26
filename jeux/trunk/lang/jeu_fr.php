@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'info_nb_resultats'         =>'@nb@ résultats',
     'info_texte'                =>'Texte',
     'info_type_resultat'        =>'Type de résultat',
+    'label_date'                =>'Date',
     'label_nom'                 =>'Auteur',
     'label_resultat'            =>'Résultat',
     'label_texte'               =>'Texte',
