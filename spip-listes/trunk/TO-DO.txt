@@ -4,7 +4,9 @@
 // $LastChangedDate$
 
 
-TO-DO:
+TODO:
+
++ depuis 2.0.0, utilisation de facteur -> nettoyer le code (supprimer phpmailer)
 
 + a verifier: un courrier a destination d'une liste qui n'existe plus n'est pas supprime'. Boucle
 infinie. A supprimer par la meleuse. (la trieuse ne peut plus rien y faire).
