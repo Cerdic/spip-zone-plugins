@@ -1,7 +1,7 @@
 <div class="formulaire_spip formulaire_jeux_gerer_resultats">
 <form action="#ENV{action}" method="post"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
-  
+    
 	<ul>
 	   
 	   [(#ID_AUTEUR|oui)[(#SET{label,<:jeux_gerer_resultats:pour_auteur:>})]]
@@ -10,6 +10,13 @@
 	   
 	   [(#SAISIE{radio,faire,datas=#ARRAY{supprimer,<:jeux_gerer_resultats:supprimer:>,
 	                           compacter,<:jeux_gerer_resultats:compacter:>},label=#GET{label}})]
+	                           
+	   [(#ENV**{erreurs}|table_valeur{non_confirme}|oui)
+	   <li class='editer_confirmer obligatoire erreur'>
+	       <label for='confirmer'><:jeux_gerer_resultats:confirmer_choix:></label>
+	       <input type="checkbox" name="confirmer" />
+	   </li>
+	   ]
 	</ul>
 	<p class="boutons"><input type="submit" class="submit" value="<:pass_ok:>" /></p>
 </div></form>
