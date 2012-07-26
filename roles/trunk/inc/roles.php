@@ -103,7 +103,7 @@ function roles_presents($objet, $objet_destination='') {
 **/
 function roles_colonne($objet, $objet_destination) {
 	if ($roles = roles_presents($objet, $objet_destination)) {
-		return $roles['colonne_role'];
+		return $roles['colonne'];
 	}
 	return '';
 }
