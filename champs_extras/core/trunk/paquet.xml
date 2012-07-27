@@ -1,11 +1,11 @@
 <paquet
 	prefix="cextras"
 	categorie="outil"
-	version="3.0.6"
+	version="3.0.7"
 	etat="test"
 	compatibilite="[3.0.0-beta2;3.0.*]"
 	logo="images/cextras-64.png"
-	documentation="http://www.spip-contrib.net/?article4028"
+	documentation="http://www.spip-contrib.net/?article4068"
 >
 
 	<nom>Champs Extras</nom>
