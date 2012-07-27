@@ -1,5 +1,5 @@
 [(#SET{defaut_tri,#ARRAY{
-	titre,1, 
+	titre_prive,1, 
 	date,-1, 
 	id_jeu,1
 }})]<B_liste_jeux>
@@ -17,7 +17,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_jeux(JEUX){where?}{statut?}{recherche?}{tri #ENV{par,num titre_prive},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_jeux(JEUX){where?}{statut?}{recherche?}{tri #ENV{par,num titre_prive},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='statut'>[(#STATUT|puce_statut{jeu,#ID_JEU,#ID_RUBRIQUE})]</td> 
 			<td class='titre principale'>[(#LOGO_JEU|image_reduire{20,26})]<a href="[(#ID_JEU|generer_url_entite{jeu})]" title="<:info_numero_abbreviation|attribut_html:> #ID_JEU">[(#RANG). ]#TITRE_PRIVE</a></td>
