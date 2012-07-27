@@ -15,6 +15,7 @@
 [(#ENV{retourajax,''}|oui)
 	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 	<div class="ajax">
+	<script type="text/javascript">/*<!\[CDATA\[*/var date_picker_loading = false;/*\]\]>*/</script>
 ]
 	#FORMULAIRE_EDITER_EVENEMENT{#ENV{id_evenement,oui},#ENV{id_article},#GET{redirect},#ENV{associer_objet}}
 [(#ENV{retourajax,''}|oui)
