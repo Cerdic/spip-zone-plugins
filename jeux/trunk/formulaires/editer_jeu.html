@@ -8,8 +8,8 @@
 		<input type='hidden' name='id_jeu' value='#ENV{id_jeu}' />
 		<ul>
 
-			[(#SAISIE{input, titre, obligatoire=oui,
-				label=<:jeu:label_titre:>})]
+			[(#SAISIE{input, titre_prive, obligatoire=oui,
+				label=<:jeu:label_titre_prive:>})]
 
             
             [(#SAISIE{textarea,texte,obligatoire=oui,label=<:jeu:label_texte:>})]

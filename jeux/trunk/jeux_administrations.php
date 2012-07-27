@@ -17,6 +17,7 @@ function jeux_upgrade($nom_meta_base_version,$version_cible){
     $maj['0.17']    = array(array('jeux_upgrade_0_17'));
     $maj['0.18']    = array(array('jeux_upgrade_0_18'));
     $maj['0.19']    = array(array('jeux_upgrade_0_19'));
+    $maj['0.20']    = array(array('jeux_upgrade_0_20'));
     maj_plugin($nom_meta_base_version,$version_cible,$maj);
     
 }
@@ -107,5 +108,11 @@ function jeux_upgrade_0_18(){
 function jeux_upgrade_0_19(){
     // renommer contenu en texte
     sql_alter("TABLE spip_jeux CHANGE `contenu` `texte` TEXT DEFAULT '' NOT NULL");
+}
+function jeux_upgrade_0_20(){
+    // remettre titre_prive pour les quelques versions de la 3.0 bugué
+    $desc = sql_showtable('spip_jeux', true);
+    if (isset($desc['field']['titre']))
+	sql_alter('TABLE spip_jeux CHANGE `titre` `titre_prive` TEXT');
 }
 ?>

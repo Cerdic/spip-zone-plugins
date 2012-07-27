@@ -10,17 +10,17 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
-			<th class='titre' scope='col'>[(#TRI{titre,<:jeu:label_titre:>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{titre_prive,<:jeu:label_titre_prive:>,ajax})]</th>
 			<th class='type_jeu' scope='col'>[(#TRI{type_jeu,<:jeu:label_type_jeu:>,ajax})]</th>
 			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
 			<th class='id' scope='col'>[(#TRI{id_jeu,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_jeux(JEUX){where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_jeux(JEUX){where?}{statut?}{recherche?}{tri #ENV{par,num titre_prive},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='statut'>[(#STATUT|puce_statut{jeu,#ID_JEU,#ID_RUBRIQUE})]</td> 
-			<td class='titre principale'>[(#LOGO_JEU|image_reduire{20,26})]<a href="[(#ID_JEU|generer_url_entite{jeu})]" title="<:info_numero_abbreviation|attribut_html:> #ID_JEU">[(#RANG). ]#TITRE</a></td>
+			<td class='titre principale'>[(#LOGO_JEU|image_reduire{20,26})]<a href="[(#ID_JEU|generer_url_entite{jeu})]" title="<:info_numero_abbreviation|attribut_html:> #ID_JEU">[(#RANG). ]#TITRE_PRIVE</a></td>
 			<td class='type_jeu'>#TYPE_JEU</td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
 			<td class='id'>[(#AUTORISER{modifier,jeu,#ID_JEU}|?{

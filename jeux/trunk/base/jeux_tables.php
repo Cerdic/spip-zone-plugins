@@ -10,14 +10,14 @@ function jeux_declarer_tables_objets_sql($table){
 	       'id_jeu'        => 'bigint(21) NOT NULL',
 	       'date'          => 'timestamp',
 	       'type_jeu'      => 'TEXT NOT NULL',
-	       'titre'         => 'TEXT NOT NULL',
+	       'titre_prive'         => 'TEXT NOT NULL',
 	       'texte'       => 'TEXT NOT NULL',
 	       'statut'        => "varchar(255) DEFAULT '0' NOT NULL",
 	       'type_resultat' =>"varchar(10) DEFAULT '0' NOT NULL",
 	       'resultat_unique'=>"VARCHAR(10) NOT NULL DEFAULT 'non'"
         ),
      'date'     => 'date',
-     'titre'    => "titre, '' AS lang",
+     'titre'    => "titre_prive, '' AS lang",
      'key'      =>  array('PRIMARY KEY' =>'id_jeu'),
      'statut_textes_instituer' => 	array(
 	       'prepa' => 'texte_statut_en_cours_redaction',
