@@ -33,6 +33,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spiplistes_api_globales');
 
+if (!defined('_DIR_PLUGIN_SPIPLISTES_IMG_PACK')) include_spip('spiplistes_options');
+
 function exec_spiplistes_courrier_edit(){
 
 	include_spip('inc/barre');
@@ -194,13 +196,12 @@ function exec_spiplistes_courrier_edit(){
 		// 
 		. '<div id="ajax-loader" align="right">'
 			. '<script type="text/javascript">'.$eol
-			. 'document.write(\'<img src="' . _DIR_PLUGIN_SPIPLISTES_IMG_PACK . 'ajax_indicator.gif" alt="" />\');'	
+			. 'document.write(\'<img src="' . _DIR_PLUGIN_SPIPLISTES.'prive/themes/spip/images/' . 'ajax_indicator.gif" alt="" />\');'.$eol
 			. '</script>'.$eol
 			. '<noscript>'.$eol
 			. spiplistes_boite_alerte (_T('spiplistes:javascript_inactif'), true)
 			. $eol
 			. '</noscript>'.$eol
-			//. '<img src="' . _DIR_PLUGIN_SPIPLISTES_IMG_PACK . 'ajax_indicator.gif" alt="" />'
 			. '</div>'.$eol
 		;
 	
