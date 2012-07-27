@@ -49,25 +49,26 @@ function jeux_declarer_tables_objets_sql($table){
   
     return $table;
 }
-
-$jeux_resultats = array(
-	'id_resultat' => 'bigint(21) NOT NULL',
-	'id_jeu'		=> 'bigint(21) NOT NULL',
-	'id_auteur'		=> 'bigint(21) NOT NULL',
-	'date'			=>	'timestamp',
-	'resultat_court' =>	'int(12)',
-	'resultat_long' =>	'text NOT NULL',
-	'total'			=>	'int(12) NOT NULL'
+function jeux_declarer_tables_principales($tables_principales){
+    $jeux_resultats = array(
+	   'id_resultat' => 'bigint(21) NOT NULL',
+	   'id_jeu'		=> 'bigint(21) NOT NULL',
+   	   'id_auteur'		=> 'bigint(21) NOT NULL',
+   	    'date'			=>	'timestamp',
+	   'resultat_court' =>	'int(12)',
+	   'resultat_long' =>	'text NOT NULL',
+	   'total'			=>	'int(12) NOT NULL'
 	);
-$jeux_resultats_key=array('PRIMARY KEY' =>'id_resultat',
-	'KEY id_jeu' =>'id_jeu',
-	'KEY id_auteur' =>'id_auteur'
-);
+    $jeux_resultats_key=array('PRIMARY KEY' =>'id_resultat',
+   	    'KEY id_jeu' =>'id_jeu',
+	   'KEY id_auteur' =>'id_auteur'
+    );
 
 
 $tables_principales['spip_jeux_resultats'] =
-	array('field' => &$jeux_resultats, 'key' => &$jeux_resultats_key);
-
+	array('field' => $jeux_resultats, 'key' => $jeux_resultats_key);
+return $tables_principales;
+}
 
 global $table_des_traitements;
 $table_des_traitements['CONTENU'][]= 'propre(%s)';
