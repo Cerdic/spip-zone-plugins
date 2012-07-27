@@ -1,7 +1,7 @@
 <paquet
 	prefix="SpipClear"
 	categorie="squelette"
-	version="0.2.0"
+	version="0.2.1"
 	etat="stable"
 	logo="images/spipclear-128.png"
 	compatibilite="[2.0.6;3.0.99]"
@@ -22,7 +22,7 @@
 
 	<pipeline nom="styliser" inclure="spipclear_pipelines.php" />
 
-	<necessite nom="CalendrierMini" compatibilite="[0.3;[" />
+	<necessite nom="calendriermini" compatibilite="[0.5.1;[" />
 
 	<menu nom="spipclear_cfg" titre="spipclear:bouton_configurer" parent="menu_squelette" icone="images/spipclear.png" action="configurer_spipclear" />
 </paquet>
