@@ -29,15 +29,16 @@ function formulaires_editer_jeu_charger_dist($id_jeu='new', $id_rubrique=0, $ret
  * Verifier les champs postes et signaler d'eventuelles erreurs
  */
 function formulaires_editer_jeu_verifier_dist($id_jeu='new', $id_rubrique=0, $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	return formulaires_editer_objet_verifier('jeu',$id_jeu, array('titre'));
+	return formulaires_editer_objet_verifier('jeu',$id_jeu, array('titre_prive'));
 }
 
 /**
  * Traiter les champs postes
  */
 function formulaires_editer_jeu_traiter_dist($id_jeu='new', $id_rubrique=0, $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+    
 	$res = formulaires_editer_objet_traiter('jeu',$id_jeu,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
- 
+    
 	// Un lien a prendre en compte ?
 	if ($associer_objet AND $id_jeu = $res['id_jeu']) {
 		list($objet, $id_objet) = explode('|', $associer_objet);
