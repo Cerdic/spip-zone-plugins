@@ -1,8 +1,6 @@
 #CACHE{0}
 [(#REM)
 
-	Vue pour le crayon jeux:contenu
-	Ca buggue serieux sous SPIP 1.92 : le type est 'jeux' et non 'jeu' !
 
 	Juste pour le bonheur de tester les limites : la classe
 	imagereduire_NNN associee a #EDIT{contenu} provoque l'application
@@ -14,8 +12,8 @@
 
 <BOUCLE_j(JEUX){id_jeu=#ENV{id_jeux}}{statut==.}>
 [(#GET{r}|?{
-	[(#CONTENU*|traite_contenu_jeu{#ID_JEU}|image_reduire{#GET{r},0})]
+	[(#MODELE{jeu,id=#ID_JEU,statut=#STATUT}|image_reduire{#GET{r},0})]
 ,
-	[(#CONTENU*|traite_contenu_jeu{#ID_JEU})]
+	[(#MODELE{jeu,id=#ID_JEU,statut=#STATUT})]
 })]
 </BOUCLE_j>
