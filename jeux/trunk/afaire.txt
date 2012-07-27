@@ -1,5 +1,4 @@
 - Vérifier que les jeux supprimés soient biens supprimés en base.
 - Modifier la manière dont les tables sont déclarés, pour utiliser de préférence une pipeline
-- Corriger les images : supprimer les vieilles, corriger l'image d'ajout (le + n'est pas réglementaire)
 - utiliser le champ resultat_unique (quelle est déjà la fonction ?)
 - chaînes de langues : trier
