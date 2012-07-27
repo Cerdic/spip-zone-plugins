@@ -17,7 +17,7 @@ function autoriser_jeux_menu_dist($faire, $type, $id, $qui, $opts){
 } 
 
 // bouton d'outils rapides
-function autoriser_jeux_creer_menu_dist($faire, $type, $id, $qui, $opts){
+function autoriser_jeucreer_menu_dist($faire, $type, $id, $qui, $opts){
 	return autoriser('creer', 'jeu', '', $qui, $opts);
 } 
 
