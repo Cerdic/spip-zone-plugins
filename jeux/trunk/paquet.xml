@@ -27,6 +27,6 @@
 	<menu nom="jeux" titre="jeux:jeux" parent="menu_edition" icone="images/jeu-16.png" />
 	<menu nom="jeu_edit" titre="jeux:nouveau_jeu" parent="outils_rapides" icone="images/jeu-new-16.png" parametres="new=oui" />
 	<menu nom="configurer_jeux" titre="jeux:configuration_jeux" parent="menu_configuration" icone="images/jeu-16.png" />
-	<menu nom="jeux_resultat" titre="jeux:resultats_jeux" parent="menu_activite" icone="images/jeu-16.png" />
+	<menu nom="jeux_resultats" titre="jeux:resultats_jeux" parent="menu_activite" icone="images/jeu-16.png" />
     <necessite nom="saisies" />
 </paquet>
