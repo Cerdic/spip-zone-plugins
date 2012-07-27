@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //B
 'boss' => 'Administrateur', // Oubli
+'bouton_configurer' => 'Configurer SpipClear', // CFG
 
 //C
 'calendrier' => 'Calendrier', // Non utilise
@@ -43,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'de' => 'de', // Non utilise
 
 //E
+'explication_configurer' => 'Consulter la <a href="http://www.spip-contrib.net/Spip-Clear" class="spip_out">documentation</a> sur SPIP-Contrib.',
 
 //F
 'fil_rss' => 'Fil RSS des billets',
@@ -106,6 +108,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_erreur1' => 'La recherche de',
 'texte_erreur2' => 'ne donne aucun r&eacute;sultat.',
 'titre_erreur' => 'Erreur :',
+'titre_configurer' => 'Configurer SpipClear',
+'titre_form_configurer' => 'Configuration',
 'trackback' => 'trackback', // Non utilise
 'trackbacks' => 'trackbacks', // Non utilise
 'trackbacks_pour_faire' => 'Pour faire un trackback sur ce billet', // Non utilise

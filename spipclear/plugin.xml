@@ -6,6 +6,7 @@
 	<version>0.2.0</version>
 	<etat>stable</etat>
 	<prefix>SpipClear</prefix>
+	<icon>images/spipclear-128.png</icon>
 	<description>
 		SpipClear est con&#231;u pour transformer un secteur en blog ou carnet web. Pour cela, il s'inspire de DotClear, un syst&#232;me de gestion de blog d&#233;velopp&#233; en php par Neokraft.net. Il est n&#233;cessaire de cr&#233;er, a minima, les pages sommaire, article-x et rubrique-x pour activer le blog sur le secteur choisi.
 	</description>
@@ -17,7 +18,16 @@
 		<inclure>spipclear_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.6;2.1.99]" />
-	<necessite id="cfg" version="[1.10.4;]" />
 	<necessite id="CalendrierMini" version="[0.3;]" />
 	<categorie>squelette</categorie>
+	<bouton id="spipclear_cfg" parent="configuration">
+		<icone>images/spipclear.png</icone>
+		<titre>spipclear:bouton_configurer</titre>
+		<url>configurer_spipclear</url>
+	</bouton>
+	<bouton id='spipclear_cfg21' parent='bando_squelette'>
+		<icone>images/spipclear.png</icone>
+		<titre>spipclear:bouton_configurer</titre>
+		<url>configurer_spipclear</url>
+	</bouton>
 </plugin>

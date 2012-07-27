@@ -1,0 +1,88 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	<h3 class="titrem"><:spipclear:titre_form_configurer:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<p class="explication"><:spipclear:explication_configurer:></p>
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer_spipclear_sommaire">
+				<label>Sommaire</label>
+				<p class="explication"><:spipclear:look_sommaire:></p>
+				<div class="choix">
+					<input type="checkbox" name="sommaire_spipclear" id="sommaire_spipclear"[ (#ENV{sommaire_spipclear}|=={on}|?{checked="checked",''})] />
+					<label for="sommaire_spipclear"><:spipclear:sommaire_spipclear:></label>
+				</div>
+				<div class="choix">
+					<input type="checkbox" name="articles_entiers" id="articles_entiers"[ (#ENV{articles_entiers}|=={on}|?{checked="checked",''})] />
+					<label for="articles_entiers"><:spipclear:sommaire_articles_entiers:></label>
+				</div>
+				<div class="choix">
+					<input type="checkbox" name="bloc_post_tags" id="bloc_post_tags"[ (#ENV{bloc_post_tags}|=={on}|?{checked="checked",''})] />
+					<label for="bloc_post_tags"><:spipclear:sommaire_afficher_tags:></label>
+				</div>
+			</li>
+			<li class="editer_spipclear_navigation">
+				<label>Navigation</label>
+				<p class="explication"><:spipclear:look_navigation:></p>
+				<div class="choix">
+					<input type="checkbox" name="navigation_desactiver_calendrier" id="navigation_desactiver_calendrier"[ (#ENV{navigation_desactiver_calendrier}|=={on}|?{checked="checked",''})] />
+					<label for="navigation_desactiver_calendrier"><:spipclear:navigation_desactiver_calendrier:></label>
+				</div>
+			</li>
+			<li class="editer_secteur">#SET{secteurs,#CONFIG{spipclear/secteurs,#ARRAY{0,-1}}}
+				<label><:spipclear:secteurs_spipclear:></label>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{secteurs})</span>]
+				<select name="secteurs[]" multiple="multiple" size="9">
+					<option value="-1"[ (#VAL{-1}|in_array{#GET{secteurs}}|?{'selected="selected"'})]><:spipclear:secteur_spipclear_aucun:></option>
+					<BOUCLE_racine(RUBRIQUES){racine}{tout}>
+					<option value="#ID_SECTEUR"[ (#ID_SECTEUR|in_array{#GET{secteurs}}|?{'selected="selected"'})]>#TITRE</option>
+					</BOUCLE_racine>
+				</select>
+			</li>
+			<li class="editer_spipclear_choix_theme">
+				<label><:spipclear:legend_theme:></label>
+				<p class="explication"><:spipclear:info_choix_theme:></p>
+				<div class="choix">
+					<input type="radio" name="choix_theme" id="choix_theme_non" class="radio" value="0"[ (#ENV{choix_theme}|!={1}|?{checked="checked",''})] />
+					<label for="choix_theme_non"><:spipclear:label_theme_defaut:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="choix_theme" id="choix_theme_oui" class="radio" value="1"[ (#ENV{choix_theme}|=={1}|?{checked="checked",''})] />
+					<label for="choix_theme_oui"><:spipclear:label_theme_perso:></label>
+				</div>
+			</li>
+			<li class="editer_spipclear_nom_theme">
+				<p class="explication"><:spipclear:label_nom_theme:></p>
+				<input type="text" name="nom_theme" id="nom_theme" class="text" value="[(#ENV{nom_theme})]" size="32" />
+				[(#SET{chemin_theme, [themes/(#CONFIG{spipclear/nom_theme})/]})]
+				<p class="explication"><:spipclear:themes_installes:></p>
+				[(#ENV{nom_theme}|lister_themes)]
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
+	<script type="text/javascript">
+	//<![CDATA[
+		jQuery(document).ready(function() {
+			[(#ENV{choix_theme}|!={1}|?{jQuery(".editer_spipclear_nom_theme").hide();})]
+			jQuery("input[name='choix_theme']").click(function() {
+				if (jQuery("input[name='choix_theme']:checked").val() == 1){
+					jQuery(".editer_spipclear_nom_theme").show();
+					jQuery(this).blur();
+				}
+				else
+					jQuery(".editer_spipclear_nom_theme").hide();
+			});
+			jQuery(".theme").click(function() {
+				jQuery("input[name='nom_theme']").val($(this).attr("id"));
+				return false;
+			});
+		});
+	//]]>
+	</script>
+</div>

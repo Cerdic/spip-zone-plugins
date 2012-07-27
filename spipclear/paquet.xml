@@ -3,6 +3,7 @@
 	categorie="squelette"
 	version="0.2.0"
 	etat="stable"
+	logo="images/spipclear-128.png"
 	compatibilite="[2.0.6;3.0.99]"
 	documentation="http://www.spip-contrib.net/SpipClear-2-1"
 >	
@@ -12,7 +13,7 @@
 
 	<auteur>James</auteur>
 	<auteur>Ben</auteur>
-	<auteur>Eric Lupinacci</auteur>
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
 	<auteur>Bruno</auteur>
 
 	<copyright>2009</copyright>
@@ -22,4 +23,6 @@
 	<pipeline nom="styliser" inclure="spipclear_pipelines.php" />
 
 	<necessite nom="CalendrierMini" compatibilite="[0.3;[" />
+
+	<menu nom="spipclear_cfg" titre="spipclear:bouton_configurer" parent="menu_squelette" icone="images/spipclear.png" action="configurer_spipclear" />
 </paquet>
