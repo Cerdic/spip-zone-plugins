@@ -1,4 +1,3 @@
-
 <?php
 
 #---------------------------------------------------#
@@ -91,8 +90,6 @@ function jeux_insert_head($flux){
 	return $flux . _JEUX_HEAD2;
 }
 
-
-
 // Le pipeline affichage_final, execute a chaque hit sur toute la page
 // Recherche tous les "title=JEUX-HEAD(...)" --> et incorporation a la place de _JEUX_HEAD2
 // dans <head> des fichiers js et css necessaires.
@@ -105,6 +102,10 @@ function jeux_affichage_final($flux) {
  	$header = html_entity_decode(join("\n",$liste));
 	return str_replace(_JEUX_HEAD2, $header."\n\n", $flux);
 }
+
+
+
+
 
 
 
@@ -126,6 +127,7 @@ function jeux_optimiser_base_disparus($flux){
 	$flux['data'] += optimiser_sansref('spip_jeux_resultats','id_resultat',$res);
 	return $flux;
 }
+
 
 
 
