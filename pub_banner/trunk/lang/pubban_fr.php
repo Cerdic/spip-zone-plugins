@@ -8,7 +8,7 @@
  * @subpackage	Languages
  */
 
-$GLOBALS['i18n_pubban_fr'] = array(
+$GLOBALS['idx_lang'] = array(
 	'oui'=>'Oui',
 	'non'=>'Non',
 	'pour'=>'Pour',
@@ -421,7 +421,7 @@ Les nombreuses &eacute;tudes statistiques montrent que les banni&egrave;res publ
 	'valider_pour_forcer' => 'Validez &agrave; nouveau pour forcer l\'enregistrement de cette valeur ...',
 
 // W //
-	'width' => 'Largeur',
+	'width' => 'Largeur'
 	
 
 );
