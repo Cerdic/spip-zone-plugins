@@ -118,6 +118,12 @@ function jeux_affichage_final($flux) {
 function jeux_optimiser_base_disparus($flux){
 	include_spip('action/editer_liens');
 	$flux['data'] += objet_optimiser_liens(array('jeux'=>'*'),'*');
+	// Supprimer les résultats sans auteurs
+	$res           = sql_select   ("spip_jeux_resultats.id_resultat AS id","spip_jeux_resultats LEFT JOIN spip_auteurs ON spip_jeux_resultats.id_auteur = spip_auteurs.id_auteur","spip_auteurs.id_auteur IS NULL");     
+	$flux['data'] += optimiser_sansref('spip_jeux_resultats','id_resultat',$res);
+	// Supprimer les résultats sans jeux
+	$res           = sql_select   ("spip_jeux_resultats.id_resultat AS id","spip_jeux_resultats LEFT JOIN spip_jeux ON spip_jeux_resultats.id_jeu = spip_jeux.id_jeu","spip_jeux.id_jeu IS NULL");     
+	$flux['data'] += optimiser_sansref('spip_jeux_resultats','id_resultat',$res);
 	return $flux;
 }
 
