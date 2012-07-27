@@ -1,13 +1,29 @@
 <?php
-
+/**
+ * 
+ * Trad-lang v2
+ * Plugin SPIP de traduction de fichiers de langue
+ * © Florent Jugla, Fil, kent1
+ * 
+ * Fichier des fonctions spécifiques du plugin
+ */
+ 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Fonction d'export d'une langue d'un module en .po
+ * 
+ * @param string $module Le module à exporter
+ * @param string $langue La langue à exporter
+ * @param string $dir_lang Le répertoire où stocker les fichiers de langue
+ * @return string $fichier Le fichier final
+ */
 function export_lang_po_dist($module,$langue,$dir_lang){
 	/**
 	 * Le fichier final
-	 * local/cache-lang/module_lang.php
+	 * local/cache-lang/module_lang.po
 	 */
-	$fic_exp = $dir_lang."/".$module."_".$langue.".po";
+	$fichier = $dir_lang."/".$module."_".$langue.".po";
 
 	$tab = "\t";
 
@@ -26,7 +42,6 @@ function export_lang_po_dist($module,$langue,$dir_lang){
 		$str = $row['str'];
 
 		$oldmd5 = md5($str);
-		//$str = unicode_to_utf_8(html_entity_decode($str, ENT_NOQUOTES, 'utf-8'));
 		$str = unicode_to_utf_8(
 			html_entity_decode(
 				preg_replace('/&([lg]t;)/S', '&amp;\1', $str),
@@ -41,11 +56,13 @@ msgid \"".$row['id']."\"
 msgstr \"".str_replace('"','\"',$str)."\"\n";
 	}
 
-	$fd = fopen($fic_exp, 'w');
+	$fd = fopen($fichier, 'w');
 
 	$contenu = join("\n",$x);
 	
-	# ecrire le fichier
+	/**
+	 * Ecriture du fichier
+	 */
 	fwrite($fd,
 	'# This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 # extrait automatiquement de '.$url_trad.'
@@ -59,8 +76,10 @@ msgstr ""
 '
 . str_replace("\r\n", "\n", $contenu)
 	);
+
 	fclose($fd);
-	@chmod($fic_exp, 0666);
-	return $fic_exp;
+	@chmod($fichier, 0666);
+
+	return $fichier;
 }
 ?>
