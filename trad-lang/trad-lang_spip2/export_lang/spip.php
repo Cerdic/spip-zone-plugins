@@ -1,7 +1,23 @@
 <?php
+/**
+ * 
+ * Trad-lang v2
+ * Plugin SPIP de traduction de fichiers de langue
+ * © Florent Jugla, Fil, kent1
+ * 
+ * Fichier des fonctions spécifiques du plugin
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Fonction d'export d'une langue d'un module SPIP en php
+ * 
+ * @param string $module Le module à exporter
+ * @param string $langue La langue à exporter
+ * @param string $dir_lang Le répertoire où stocker les fichiers de langue
+ * @return string $fichier Le fichier final
+ */
 function export_lang_spip_dist($module,$langue,$dir_lang){
 	/**
 	 * Le fichier final
@@ -29,7 +45,6 @@ function export_lang_spip_dist($module,$langue,$dir_lang){
 		$str = $row['str'];
 
 		$oldmd5 = md5($str);
-		//$str = unicode_to_utf_8(html_entity_decode($str, ENT_NOQUOTES, 'utf-8'));
 		$str = unicode_to_utf_8(
 			html_entity_decode(
 				preg_replace('/&([lg]t;)/S', '&amp;\1', $str),
@@ -41,19 +56,25 @@ function export_lang_spip_dist($module,$langue,$dir_lang){
 		$x[]="$tab".var_export($row['id'],1).' => ' .var_export($str,1).','.$row['comm'] ;
 	}
 
-	// historiquement les fichiers de lang de spip_loader ne peuvent pas etre securises
+	/**
+	 * historiquement les fichiers de lang de spip_loader ne peuvent pas etre securises
+	 */
 	$secure = ($module == 'tradloader')
 		? ''
 		: "if (!defined('_ECRIRE_INC_VERSION')) return;\n\n";
 
 	$fd = fopen($fic_exp, 'w');
 
-	# supprimer la virgule du dernier item
+	/**
+	 * On supprime la virgule du dernier item
+	 */
 	$x[count($x)-1] = preg_replace('/,([^,]*)$/', '\1', $x[count($x)-1]);
 
 	$contenu = join("\n",$x);
 	
-	# ecrire le fichier
+	/**
+	 * On écrit le fichier
+	 */
 	fwrite($fd,
 	'<'.'?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
@@ -68,8 +89,10 @@ function export_lang_spip_dist($module,$langue,$dir_lang){
 
 ?'.'>'
 	);
+	
 	fclose($fd);
 	@chmod($fic_exp, 0666);
+	
 	return $fic_exp;
 }
 ?>
