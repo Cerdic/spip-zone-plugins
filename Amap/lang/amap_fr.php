@@ -1,5 +1,6 @@
 <?php
-
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/Amap/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -9,8 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_modifier' => 'Modifier',
 	'action_supprimer' => 'Supprimer',
 	'adherent' => 'Adhérent',
-	'adherents_jour' => 'Adhérents du jour', // pas d'accent c'est utiliser dans le pdf des paniers
-	'adherent_sans_type_panier_sans_type_adherent' => 'Vos adhérents n\'ont pas encore de type de panier affecté ou de type d\'adhérent.', 
+	'adherent_sans_type_panier_sans_type_adherent' => 'Vos adhérents n\'ont pas encore de type de panier affecté ou de type d\'adhérent.',
+	'adherents_jour' => 'Adhérents du jour',
 	'adhesion' => 'Adhésion (ex:2008)',
 	'adhesion_auteur' => 'Adhésion :',
 	'administrateur' => 'Administrateur',
@@ -24,13 +25,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									<p><strong>LE NON RESPECT DE CES QUELQUES PRINCIPES ENTRAINERA UN DYSFONCTIONNEMENT DU PLUGIN AMAP</strong></p>',
 	'aucun_panier_pour_nom' => 'Nous n\'avons aucun panier pour @nom@.',
 	'aucun_panier_produit_par_nom' => 'Nous n\'avons aucun panier produit par "@nom@".',
-	'autorise_envoie_email_label' => 'Voulez vous envoyez des mails ?',
 	'autorise_envoie_email_explication' => 'L\'envoie de email est utiliser pour la mise a disposition des paniers et la reprise. Non est conseiller pour de grosses amap, à la place on vous propose une interphase de gestion.',
+	'autorise_envoie_email_label' => 'Voulez vous envoyez des mails ?',
 	'avant_le' => 'avant le',
 
 	// C
-	'confirmation_envoi' => 'Votre mise a disposition du panier du @date_distribution@ est confimée, nous vous remercions.',
 	'configurer_amap' => 'Configuration du plugin AMAP',
+	'confirmation_envoi' => 'Votre mise a disposition du panier du @date_distribution@ est confimée, nous vous remercions.',
 	'contenu_panier' => 'Contenu du panier',
 	'contenu_panier_explication' => 'Vous pouvez rédiger votre contenu de la même façon que dans SPIP.',
 	'creer_paniers_pour_nom' => 'Créer des paniers pour @nom@.',
@@ -57,13 +58,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'grand' => 'Grand',
 
 	// I
-	'information_amap' => 'Information AMAP',
 	'impression' => 'Impression',
 	'impression_donnees' => 'Impression de données',
 	'impression_explication' => 'Seulement les dates contenant au minimum un panier sont cliquables et ouvrent une nouvelle fenêtre.',
 	'impression_paniers_fonction_date' => 'Impression des paniers en fonction d\'une date :',
 	'impression_paniers_fonction_mois' => 'Impression des paniers en fonction d\'un mois :',
 	'impression_responsables_fonction_date' => 'Impression des responsables en fonction d\'un mois :',
+	'information_amap' => 'Information AMAP',
 
 	// L
 	'les_livraisons' => 'Les livraisons',
@@ -72,7 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'les_paniers_dispo' => 'Les paniers disponible de @nom@',
 	'les_responsabilites' => 'Les responsabilités de @nom@',
 	'liste_amapiens' => 'Liste des amapiens',
-	'liste_amapiens_enregistres'  => 'Liste des amapiens enregistrés',
+	'liste_amapiens_enregistres' => 'Liste des amapiens enregistrés',
 	'liste_livraisons' => 'Liste des livraisons',
 	'liste_paniers' => 'Liste des paniers',
 	'liste_paniers_distribuer_le' => 'Liste des paniers à distribuer le',
@@ -90,7 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mini_doc' => 'Mini documentation',
 
 	// N
-	'nom'  => 'NOM',
+	'nom' => 'NOM',
 
 	// P
 	'panier' => 'Panier',
@@ -143,25 +144,25 @@ Je récupère le panier du @date_distribution@ produit par @nom_producteur@
 	'reste_paniers_recuperer' => 'Il vous reste encore @nb@ paniers à recupérer',
 	'retour_auteur' => 'Retour sur la page auteur de @nom@',
 
-	//S
+	// S
 	'signature' => 'Signature',
 
 	// T
 	'table_vide_aucun_enregistrement' => 'Cette table est actuellement vide :
 										<br />Elle ne contient aucun enregistrement.',
-	'type_panier' => 'Type de panier',
-	'type_panier_auteur' => 'Type de panier :',
 	'type_adherent' => 'Type d\'adhérent',
 	'type_adherent_auteur' => 'Type d\'adhérent :',
+	'type_panier' => 'Type de panier',
+	'type_panier_auteur' => 'Type de panier :',
 
-	//U
+	// U
 	'utiliser_entete_colone_tri' => 'Utiliser les entêtes de colonne pour classer les amapiens (en noir l\'ordre de tri actif et en vert les ordres disponibles).',
 
 	// V
 	'visiteur' => 'Visiteur',
 	'vos_paniers' => 'Vos paniers',
 	'vous_etes_responsable_distribution' => 'Vous êtes responsables pour la distribution suivante :',
-	'vous_etes_responsable_distributions' => 'Vous êtes responsables pour les distributions suivante :',
+	'vous_etes_responsable_distributions' => 'Vous êtes responsables pour les distributions suivante :'
 );
 
 ?>
