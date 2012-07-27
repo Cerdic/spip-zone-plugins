@@ -12,12 +12,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Sauvegarde d'une langue d'un module dans son fichier
  * 
- * @param array $module les information d'un module
- * @param object $langue la langue cible
- * @return 
+ * @param string $module le nom d'un module d'un module (par défaut local/cache-lang/$module)
+ * @param string $langue la langue cible
+ * @param string $dir_lang le répertoire de stockage des fichiers de langue
+ * @return string $fic_exp le chemin complet du fichier de langue
  */
 function inc_tradlang_sauvegarde_module_dist($module,$langue,$dir_lang=false){
 	include_spip('inc/flock');
+	include_spip('inc/filtres'); # Pour url_absolue
 
 	if(!$dir_lang){
 		$dir_lang = _DIR_VAR.'cache-lang/'.$module;
@@ -31,89 +33,82 @@ function inc_tradlang_sauvegarde_module_dist($module,$langue,$dir_lang=false){
 			return false;	
 		}
 	}
-	// Debut du fichier de langue
-	$lang_prolog = "<"."?php\n// This is a SPIP language file  --  Ceci est un fichier langue de SPIP\nif (!defined('_ECRIRE_INC_VERSION')) return;\n\n";
-	// Fin du fichier de langue
-	$lang_epilog = "\n?".">\n";
-
+	
+	$id_tradlang_module = sql_getfetsel('id_tradlang_module','spip_tradlang_modules','module='.sql_quote($module));
+	
+	/**
+	 * L'URL du site de traduction
+	 */
+	$url_trad = parametre_url(url_absolue(generer_url_entite($id_tradlang_module,'tradlang_module')),'lang_cible',$langue);
+	
+	/**
+	 * Le fichier final
+	 * local/cache-lang/module_lang.php
+	 */
 	$fic_exp = $dir_lang."/".$module."_".$langue.".php";
-	$tab = array();
-	$conflit = array();  
-	$tab = tradlang_lirelang($module, $langue);
 
-	ksort($tab);
-	reset($tab);
-	$initiale = "";
-	$texte = $lang_prolog;
-	$texte .= "\$GLOBALS[\$GLOBALS['idx_lang']] = array(\n";
+	$tab = "\t";
 
-	while (list($code, $chaine) = each($tab)){
-		if (!array_key_exists($code, $conflit)){
-			if ($initiale != strtoupper($code[0])){
-				$initiale = strtoupper($code[0]);
-				$texte .= "\n// $initiale\n";
-			}
-			$texte .= "'".$code."' => '".texte_script($chaine)."',\n";
-		}
+	$res=sql_select("id,str,comm,statut","spip_tradlangs","module=".sql_quote($module)." AND lang=".sql_quote($langue),"id");
+	$x=array();
+	$prev="";
+	$tous = $lorigine; // on part de l'origine comme ca on a tout meme si c'est pas dans la base de donnees (import de salvatore/lecteur.php)
+	while ($row=sql_fetch($res)) {
+		$tous[$row['id']] = $row;
+	}
+	ksort($tous);
+	foreach ($tous as $row) {
+		if ($prev!=strtoupper($row['id'][0])) $x[] = "\n$tab// ".strtoupper($row['id'][0]);
+		$prev=strtoupper($row['id'][0]);
+		if (strlen($row['statut']) && ($row['statut'] != 'OK'))
+			$row['comm'] .= ' '.$row['statut'];
+		if (trim($row['comm'])) $row['comm']=" # ".trim($row['comm']); // on rajoute les commentaires ?
+
+		$str = $row['str'];
+
+		$oldmd5 = md5($str);
+		//$str = unicode_to_utf_8(html_entity_decode($str, ENT_NOQUOTES, 'utf-8'));
+		$str = unicode_to_utf_8(
+			html_entity_decode(
+				preg_replace('/&([lg]t;)/S', '&amp;\1', $str),
+				ENT_NOQUOTES, 'utf-8')
+		);
+		$newmd5 = md5($str);
+		if ($oldmd5 !== $newmd5) sql_updateq("spip_tradlangs",array('md5'=>$newmd5), "md5=".sql_quote($oldmd5)." AND module=".sql_quote($module));
+
+		$x[]="$tab".var_export($row['id'],1).' => ' .var_export($str,1).','.$row['comm'] ;
 	}
 
-	// ecriture des chaines en conflit
-	if (count($conflit)){
-		ksort($conflit);
-		reset($conflit);
-		$texte .= "\n\n// PLUS_UTILISE\n";
-		
-		while (list($code, $chaine) = each($conflit))
-			$texte .= "'".$code."' => '".texte_script($chaine)."',\n";
-	}
+	// historiquement les fichiers de lang de spip_loader ne peuvent pas etre securises
+	$secure = ($module == 'tradloader')
+		? ''
+		: "if (!defined('_ECRIRE_INC_VERSION')) return;\n\n";
 
-	$texte = preg_replace("/\,\n$/", "\n\n);\n", $texte);
-	$texte .= $lang_epilog;
+	$fd = fopen($fic_exp, 'w');
 
-	ecrire_fichier($fic_exp,$texte);
+	# supprimer la virgule du dernier item
+	$x[count($x)-1] = preg_replace('/,([^,]*)$/', '\1', $x[count($x)-1]);
+
+	$contenu = join("\n",$x);
+	
+	# ecrire le fichier
+	fwrite($fd,
+	'<'.'?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de '.$url_trad.'
+// ** ne pas modifier le fichier **
+'
+."\n".$secure.'$GLOBALS[$GLOBALS[\'idx_lang\']] = array(
+'
+. str_replace("\r\n", "\n", $contenu)
+.'
+);
+
+?'.'>'
+	);
+	fclose($fd);
 	@chmod($fic_exp, 0666);
   
 	return $fic_exp;
-}
-
-/**
- * Récupération dans la base de donnée du contenu d'un module de langue dans 
- * une langue définie
- * 
- * @param array $module Les informations du module
- * @param object $langue La langue cible
- * @param object $type [optional]
- * @return 
- */
-function tradlang_lirelang($module, $langue, $type=""){
-	$ret = array();
-
-	if ($type=="md5"){
-		$res = sql_select("id,md5","spip_tradlangs","module='$module' AND lang='$langue' AND !ISNULL(md5)","","id ASC");
-		while($row = sql_fetch($res))
-		$ret[$row["id"]] = $row["md5"];
-	}
-	else{
-		$res = sql_select("id,str,statut","spip_tradlangs","module = '$module' AND lang='$langue'","","id ASC");
-		
-		while($row = sql_fetch($res)){
-			if (($row["statut"] != "") && ($row["statut"] != "OK"))
-				$statut = "<".$row["statut"].">";
-			else
-				$statut = "";
-			$ret[$row["id"]] = $statut.$row["str"];
-		}
-
-		// initialise la chaine de tag timestamp sauvegarde
-		$quer = "SELECT MAX(maj) as maj FROM spip_tradlangs ".
-			"WHERE module = '".$module."' AND lang='".$langue."'";
-		$res = sql_query($quer);
-		$row = sql_fetch($res);
-		$maj = $row["maj"];
-
-		$ret["zz_timestamp_nepastraduire"] = $maj;
-	}
-
-	return $ret;
 }
 ?>
