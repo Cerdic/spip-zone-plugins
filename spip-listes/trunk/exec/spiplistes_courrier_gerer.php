@@ -659,11 +659,13 @@ function exec_spiplistes_courrier_gerer () {
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
 		, spiplistes_html_signature(_SPIPLISTES_PREFIX)
 		, fin_gauche(), fin_page();
-
 } // end function exec_spiplistes_courrier_gerer ()
 
 function spiplistes_icone_oeil () {
-	return("<img src='"."oeil-16.png' alt='' width='16' height='16' border='0' />");
+	// Pas de constant sur le chemin des images ?
+	// Forcer sur la distrib de SL !
+	$src = _DIR_PLUGIN_SPIPLISTES.'prive/themes/spip/images/oeil-16.png';
+	return ( '<img src="' . $src . '" alt="" width="16" height="16" border="0" />');
 }
 
 /* retourne l'id auteur depuis l'email */
