@@ -1,7 +1,7 @@
 <paquet
 	prefix="jeux"
 	categorie="divers"
-	version="3.0.2"
+	version="3.0.3"
 	etat="test"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="prive/themes/spip/images/jeux-48.png"
@@ -31,7 +31,6 @@
 	<pipeline nom="post_propre" inclure="jeux_pipelines.php" />
 	<pipeline nom="header_prive" inclure="jeux_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="jeux_pipelines.php" />
-	<pipeline nom="declarer_tables_objets_surnoms" inclure="jeux_pipelines.php" />
 	<pipeline nom="affichage_final" inclure="jeux_pipelines.php" />
 	<pipeline nom="affiche_gauche" inclure="jeux_pipelines.php" />
 

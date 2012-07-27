@@ -130,13 +130,6 @@ function jeux_optimiser_base_disparus($flux){
 
 
 
-
-// SPIP >=2.0 : association type objet/table
-function jeux_declarer_tables_objets_surnoms($surnoms) {
-	$surnoms['jeu'] = 'jeux';
-	return $surnoms;
-}
-
 // Afficher liens vers les résultats de l'auteur
 function jeux_affiche_gauche($flux){
      if ($flux['args']['exec'] == 'auteur') {
