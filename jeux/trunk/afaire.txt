@@ -1,4 +1,4 @@
 - Vérifier que les jeux supprimés soient biens supprimés en base.
-- Modifier la manière dont les tables sont déclarés, pour utiliser de préférence une pipeline
+- Gérer correctement le traitement automatique sur le champs texte des jeux
 - utiliser le champ resultat_unique (quelle est déjà la fonction ?)
 - chaînes de langues : trier
