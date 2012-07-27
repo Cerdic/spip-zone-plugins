@@ -1,33 +1,14 @@
 <?php
 
 /**
- * Enregistrer la date d'inscription dans la base au traitement du formulaire d'inscription
- * Enregistrer la date d'inscription dans la base au traitement du formulaire editer auteur si il y a creation
+ * Enregistrer la date d'inscription lors de l'insertion d'un auteur en base
  *
  * @param array $flux
  * @return array
  */
-function date_inscription_formulaire_traiter($flux){
-	if ($flux['args']['form']=='inscription'){
-		$mail = _request('mail_inscription');
-		if (function_exists('test_inscription'))
-			$f = 'test_inscription';
-		else 	$f = 'test_inscription_dist';
-		$desc = $f($mode, $mail, $flux['args']['args'][0], $flux['args']['args'][2]);
-		if (is_array($desc)
-		  AND $mail = $desc['email']){
-			include_spip('base/abstract_sql');
-			sql_updateq("spip_auteurs", array("date_inscription"=>"NOW()"),"statut='nouveau' AND email=" . sql_quote($mail));
-		}
-	}
-	if ($flux['args']['form']=='editer_auteur'){
-		if (!intval($flux['args']['args'][0])
-			AND intval($flux['data']['id_auteur'])
-		){
-			$id_auteur = $flux['data']['id_auteur'];
-			include_spip('base/abstract_sql');
-			sql_updateq("spip_auteurs", array("date_inscription"=>"NOW()"),"id_auteur=$id_auteur");
-		}
+function date_inscription_pre_insertion($flux){
+	if ($flux['args']['table']=='spip_auteurs'){
+		$flux['data']['date_inscription'] = date('Y-m-d H:i:s');
 	}
 	return $flux;
 }

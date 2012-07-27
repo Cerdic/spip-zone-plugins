@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]Date d'inscription [en]Registration date [es]Fecha de inscripci&#243;n</multi></nom>
 	<auteur>b_b</auteur>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<prefix>date_inscription</prefix>
@@ -24,7 +24,7 @@
 		<inclure>base/date_inscription.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>formulaire_traiter</nom>
+		<nom>pre_insertion</nom>
 		<inclure>date_inscription_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
