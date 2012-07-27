@@ -73,9 +73,9 @@ function tradlang_post_edition($flux){
  * On ajoute les javascript dans le head
  */
 function tradlang_insert_head($flux){
-	$flux .= '<script type="text/javascript" src="'.find_in_path('tradlang.js').'" ></script>'."\n";
+	$flux .= '<script type="text/javascript" src="'.find_in_path('javascript/tradlang.js').'" ></script>'."\n";
 	if(defined('_DIR_PLUGIN_TOOLTIP')){
-		$flux .= '<script type="text/javascript" src="'.find_in_path('tradlang_tooltip.js').'" ></script>'."\n";
+		$flux .= '<script type="text/javascript" src="'.find_in_path('javascript/tradlang_tooltip.js').'" ></script>'."\n";
 	}
 	return $flux;
 }
@@ -88,7 +88,7 @@ function tradlang_insert_head_css($flux){
 	static $done = false;
 	if (!$done) {
 		$done = true;
-		$flux .= '<link rel="stylesheet" href="'.find_in_path('tradlang.css').'" type="text/css" />';
+		$flux .= '<link rel="stylesheet" href="'.find_in_path('css/tradlang.css').'" type="text/css" />';
 		$flux .= '<link rel="stylesheet" href="'.generer_url_public('tradlang.css').'" type="text/css" />';
 	}
 	return $flux;
