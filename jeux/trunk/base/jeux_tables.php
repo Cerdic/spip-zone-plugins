@@ -4,6 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 function jeux_declarer_tables_objets_sql($table){
+    
     $table['spip_jeux'] = array(
     'principale' =>"oui",
     'field'     => array(
@@ -64,8 +65,12 @@ function jeux_declarer_tables_principales($tables_principales){
     return $tables_principales;
 }
 
-function jeux_declarer_table_interfaces($tables){
+function jeux_declarer_tables_interfaces($tables){
+
     $tables['table_des_traitements']['TEXTE']['jeux']= 'propre(%s)';
+    $tables['table_des_tables']['jeux']='jeux';
+    $tables['table_des_tables']['jeux_resultats']='jeux_resultats';
+
     return $tables;
 }
 ?>
