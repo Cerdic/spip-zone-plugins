@@ -1,13 +1,7 @@
 <?php
 
 // declaration des tables du plugin jeux //
-global $table_des_tables;
-global $tables_principales;
-include_spip('base/serial'); // pour eviter une reinit posterieure des tables modifiees
-global $tables_jointures;
 
-$table_des_tables['jeux'] = 'jeux';
-$table_des_tables['jeux_resultats'] = 'jeux_resultats';
 
 function jeux_declarer_tables_objets_sql($table){
     $table['spip_jeux'] = array(
@@ -70,8 +64,8 @@ function jeux_declarer_tables_principales($tables_principales){
     return $tables_principales;
 }
 
-global $table_des_traitements;
-$table_des_traitements['CONTENU'][]= 'propre(%s)';
-
-
+function jeux_declarer_table_interfaces($tables){
+    $tables['table_des_traitements']['TEXTE']['jeux']= 'propre(%s)';
+    return $tables;
+}
 ?>
