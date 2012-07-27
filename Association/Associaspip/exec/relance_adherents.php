@@ -17,7 +17,7 @@ include_spip ('inc/navigation_modules');
 include_spip ('inc/mail');
 //include_spip ('inc/charsets');
 
-function exec_action_relances()
+function exec_relance_adherents()
 {
 	if (!autoriser('editer_membres', 'association')) {
 			include_spip('inc/minipres');
@@ -29,7 +29,7 @@ function exec_action_relances()
 		// datation et raccourcis
 		icones_association('');
 		debut_cadre_association('relance-24.png', 'relance_de_cotisations');
-		echo recuperer_fond('prive/editer/relance_adherents');
+		echo recuperer_fond('prive/editer/relancer_adherents');
 		fin_page_association();
 	}
 }

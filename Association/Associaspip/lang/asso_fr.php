@@ -480,7 +480,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique",
 	'aucune_adresse_trouvee_pour_les_membres' => 'Aucune adresse trouv&eacute;e pour les membres : ',
 	'ecrire_a' => '&Eacute;crire &agrave;',
 	'a' => '&agrave',
-	'aide_relance' => '...', //!\ a rajouter
+	'aide_relance' => "Cette page vous permet d'envoyer un message de relance aux membres <i>$eacute;chu</i>s dont l'adresse de courriel est connu. Le statut de ces membres passe alors $agrave; celui de <i>relanc$eacute;</i>s. ",
 	# cotisation
 	'gestion_cotisations_limitee' => 'La gestion comptable &eacute;tant desactiv&eacute;e, seule la date de validit&eacute; est prise en charge par la gestion des cotisations.',
 
