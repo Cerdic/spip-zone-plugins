@@ -65,20 +65,13 @@ function jeux_declarer_tables_principales($tables_principales){
     );
 
 
-$tables_principales['spip_jeux_resultats'] =
+    $tables_principales['spip_jeux_resultats'] =
 	array('field' => $jeux_resultats, 'key' => $jeux_resultats_key);
-return $tables_principales;
+    return $tables_principales;
 }
 
 global $table_des_traitements;
 $table_des_traitements['CONTENU'][]= 'propre(%s)';
 
-// Declarations pour la corbeille (plugin Corbeille, ou Couteau Suisse)
-global $corbeille_params;
-$corbeille_params['jeux'] = array (
-	"statut" => 'poubelle',
-	"tableliee"=> array('spip_jeux_resultats'),
-	"libelle" => 'jeux:jeux',
-);
 
 ?>
