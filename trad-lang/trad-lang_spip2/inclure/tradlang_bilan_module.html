@@ -46,6 +46,7 @@
 			</th>
 			<th></th>
 			<th></th>
+			<th></th>
 		</tr>
 	</thead>
 	<B_modules_lang>
@@ -126,6 +127,9 @@
 		<td>
 			[(#BOUTON_ACTION{<:tradlang:bouton_exporter_fichier:>,[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#CLE})],#SELF})]})]
 		</td>
+		<td>
+			[(#BOUTON_ACTION{<:tradlang:bouton_exporter_fichier_po:>,[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#CLE}|concat{/po})],#SELF})]})]
+		</td>
 	</tr>
 	</BOUCLE_langues_totales>
 	[(#SET{total_modules,#TOTAL_BOUCLE})]
@@ -153,6 +157,7 @@
 				<div class="new" style="left: [(#GET{percent_ok_full}|plus{[(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)]})]px; width: [(#GET{percent_ok_new})]px"> </div>
 			</div>
 		</td>
+		<td></td>
 		<td></td>
 		<td></td>
 	</tfoot>
