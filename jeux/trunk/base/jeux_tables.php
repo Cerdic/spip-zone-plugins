@@ -19,7 +19,7 @@ function jeux_declarer_tables_objets_sql($table){
 	       'resultat_unique'=>"VARCHAR(10) NOT NULL DEFAULT 'non'"
         ),
      'date'     => 'date',
-     'titre'    => "titre_prive, '' AS lang",
+     'titre'    => "titre_prive AS titre, '' AS lang",
      'key'      =>  array('PRIMARY KEY' =>'id_jeu'),
      'statut_textes_instituer' => 	array(
 	       'prepa' => 'texte_statut_en_cours_redaction',
@@ -38,8 +38,8 @@ function jeux_declarer_tables_objets_sql($table){
 	       )
         ),
      'texte_changer_statut'=>'jeu:texte_changer_statut_jeu',
-     'champs_editables'  => array('titre', 'texte','type_resultat'),
-     'champs_versionnes' => array('titre', 'texte'),
+     'champs_editables'  => array('titre_prive', 'texte','type_resultat'),
+     'champs_versionnes' => array('titre_prive', 'texte'),
      'champs_contenu' => array('type_jeu','texte','type_resultat')
      );
   
