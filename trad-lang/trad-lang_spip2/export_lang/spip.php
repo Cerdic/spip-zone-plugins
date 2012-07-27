@@ -23,7 +23,7 @@ function export_lang_spip_dist($module,$langue,$dir_lang){
 	 * Le fichier final
 	 * local/cache-lang/module_lang.php
 	 */
-	$fic_exp = $dir_lang."/".$module."_".$langue.".php";
+	$fichier = $dir_lang."/".$module."_".$langue.".php";
 
 	$tab = "\t";
 
@@ -63,7 +63,7 @@ function export_lang_spip_dist($module,$langue,$dir_lang){
 		? ''
 		: "if (!defined('_ECRIRE_INC_VERSION')) return;\n\n";
 
-	$fd = fopen($fic_exp, 'w');
+	$fd = fopen($fichier, 'w');
 
 	/**
 	 * On supprime la virgule du dernier item
@@ -91,8 +91,8 @@ function export_lang_spip_dist($module,$langue,$dir_lang){
 	);
 	
 	fclose($fd);
-	@chmod($fic_exp, 0666);
+	@chmod($fichier, 0666);
 	
-	return $fic_exp;
+	return $fichier;
 }
 ?>
