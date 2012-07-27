@@ -10,6 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'roles_titre' => 'Rôles',
 	'role_titre'  => 'Rôle',
+
+	// S
+	'selectionner_roles' => 'Sélectionner le ou les rôles souhaités',
 );
 
 ?>
