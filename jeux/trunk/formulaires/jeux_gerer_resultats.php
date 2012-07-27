@@ -28,6 +28,9 @@ function formulaires_jeux_gerer_resultats_saisies($param=array()){
 }
 
 function formulaires_jeux_gerer_resultats_charger($param=array(),$return=''){
+    if (!autoriser('gerer','resultats')){
+        return false;   
+    }
     $param['saisies'] = formulaires_jeux_gerer_resultats_saisies($param);
     return $param;
 }
