@@ -23,10 +23,19 @@
 	<pipeline nom="declarer_tables_objets_surnoms" inclure="jeux_pipelines.php" />
 	<pipeline nom="affichage_final" inclure="jeux_pipelines.php" />
 	<pipeline nom="affiche_gauche" inclure="jeux_pipelines.php" />
-
+    
+    <traduire module="jeu" lang="fr" />
+    <traduire module="jeux" lang="fr" />
+    <traduire module="jeux_gerer_resultats" lang="fr" />
+    <traduire module="motscroises" lang="fr" />
+    <traduire module="pendu" lang="fr" />
+    <traduire module="qcm" lang="fr" />
+    <traduire module="sudoku" lang="fr" />
+    
 	<menu nom="jeux" titre="jeux:jeux" parent="menu_edition" icone="images/jeu-16.png" />
 	<menu nom="jeu_creer" titre="jeux:nouveau_jeu" parent="outils_rapides" icone="images/jeu-new-16.png" parametres="new=oui" action="jeu_edit" />
 	<menu nom="configurer_jeux" titre="jeux:configuration_jeux" parent="menu_configuration" icone="images/jeu-16.png" />
 	<menu nom="jeux_resultats" titre="jeux:resultats_jeux" parent="menu_activite" icone="images/jeu-laurier.png" />
+    
     <necessite nom="saisies" />
 </paquet>
