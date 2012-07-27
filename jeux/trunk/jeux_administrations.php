@@ -20,11 +20,11 @@ function jeux_upgrade($nom_meta_base_version,$version_cible){
     
 }
 
-function jeux_vider_tables() {
+function jeux_vider_tables($nom_meta_base_version) {
 	include_spip('base/abstract_sql');
 	sql_drop_table('spip_jeux');
 	sql_drop_table("spip_jeux_resultats");
-	effacer_meta('jeux_base_version');
+	effacer_meta($nom_meta_base_version);
 
 }
 
