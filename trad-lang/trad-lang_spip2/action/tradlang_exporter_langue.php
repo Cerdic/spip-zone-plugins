@@ -23,18 +23,30 @@ function action_tradlang_exporter_langue_dist(){
 	$type = $r[4] ? $r[4] : false;
 	spip_log($r,'tradlang');
 	spip_log($type,'tradlang');
-	include_spip('inc/autoriser');
-	if($lang_cible && intval($id_tradlang_module) && autoriser('modifier','tradlang') && sql_countsel('spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($lang_cible))){
+	if($lang_cible && intval($id_tradlang_module) && sql_countsel('spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($lang_cible))){
 		$module = sql_getfetsel('module','spip_tradlang_modules','id_tradlang_module='.intval($id_tradlang_module));
 		$tradlang_sauvegarde_module = charger_fonction('tradlang_sauvegarde_module','inc');
 		$fichier = $tradlang_sauvegarde_module($module,$lang_cible,false,$type);
 		if(file_exists($fichier)){
-			header('Content-Type: application/x-httpd-php;');
+			switch($type){
+				case 'po':
+					header('Content-Type: application/x-gettext;');
+				break;
+				default:
+					header('Content-Type: application/x-httpd-php;');
+			}
 			header('Content-Length: '.filesize($fichier));
+			header("Pragma: public"); // required
+    		header("Expires: 0");
+    		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+    		header("Cache-Control: private",false); // required for certain browsers 
 			header('Content-Disposition: attachment; filename="'.basename($fichier).'"');
+			header('Content-Transfer-Encoding: binary'); 
 			header("Expires: 0");
 			header("Cache-Control: no-cache, must-revalidate");
-			header("Pragma: no-cache"); 
+			ob_clean();
+    		flush();
+			//header("Pragma: no-cache"); 
 			readfile($fichier);
 			die();
 		}else{

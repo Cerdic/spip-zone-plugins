@@ -20,7 +20,7 @@ function export_lang_po_dist($module,$langue,$dir_lang){
 	}
 	ksort($tous);
 	foreach ($tous as $row) {
-		if ($prev!=strtoupper($row['id'][0])) $x[] = "\n# ".strtoupper($row['id'][0]);
+		if ($prev!=strtoupper($row['id'][0])) $x[] = "\n# ".strtoupper($row['id'][0])."\n";
 		$prev=strtoupper($row['id'][0]);
 		if (strlen($row['statut']) && ($row['statut'] != 'OK'))
 			$row['comm'] .= ' '.$row['statut'];
@@ -39,7 +39,8 @@ function export_lang_po_dist($module,$langue,$dir_lang){
 		if ($oldmd5 !== $newmd5) sql_updateq("spip_tradlangs",array('md5'=>$newmd5), "md5=".sql_quote($oldmd5)." AND module=".sql_quote($module));
 
 		$x[]=($row['comm'] ? "#".$row['comm']."\n" : "").
-"msgid \"".$row['id']."\"
+"#, php-format
+msgid \"".$row['id']."\"
 msgstr \"".str_replace('"','\"',$str)."\"\n";
 	}
 
@@ -57,11 +58,15 @@ msgstr \"".str_replace('"','\"',$str)."\"\n";
 	
 	# ecrire le fichier
 	fwrite($fd,
-	'msgid ""
-msgstr ""
-
-# This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+	'# This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 # extrait automatiquement de '.$url_trad.'
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: SPIP Trad Lang 2.0.5\n"
+"X-Poedit-SourceCharset: utf-8\n"
 '
 . str_replace("\r\n", "\n", $contenu)
 	);
