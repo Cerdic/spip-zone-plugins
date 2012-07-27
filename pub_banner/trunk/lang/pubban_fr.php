@@ -8,7 +8,7 @@
  * @subpackage	Languages
  */
 
-$GLOBALS['idx_lang'] = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 	'oui'=>'Oui',
 	'non'=>'Non',
 	'pour'=>'Pour',
