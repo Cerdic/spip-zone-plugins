@@ -1,16 +1,17 @@
+<BOUCLE_auteurs(AUTEURS){id_auteur}{tout}>
+<h1><:jeux:resultats_auteur{nom=#NOM}:></h1>
+</BOUCLE_auteurs>
+<BOUCLE_jeux(JEUX){id_jeu}{tout}>
+<h1><:jeux:resultats_jeu{titre=#TITRE_PRIVE,id=#ID_JEU}:></h1>
+</BOUCLE_jeux>
+[(#ID_JEU|ou{#ID_AUTEUR}|non)<h1><:jeux:resultats:></h1>]
 [(#SET{defaut_tri,#ARRAY{
 	titre_prive,1,
 	nom,1
 }})]<B_liste_resultats>
 #ANCRE_PAGINATION
-<BOUCLE_auteurs(AUTEURS){id_auteur}{tout}>
-<h1><:jeux:resultats_auteur{nom=#NOM}:></h1>
-</BOUCLE_auteurs>
-<BOUCLE_jeux(JEUX){id_jeu}{tout}>
-<h1><:jeux:resultats_jeu{titre=#TITRE,id=#ID_JEU}:></h1>
-</BOUCLE_jeux>
 
-[(#ID_JEU|ou{#ID_AUTEUR}|non)<h1><:jeux:resultats:></h1>]
+
 <div class="liste-objets jeux_resultats">
 <table class='spip liste'>
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{jeu:info_1_resultat,jeu:info_nb_resultats}})</strong></caption>]
@@ -36,5 +37,5 @@
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_liste_resultats>[
-<div class="liste-objets jeux_resultats caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+<div class="liste-objets jeux_resultats caption-wrap"><strong class="caption">(#ENV*{sinon,<:jeux:aucun_resultat:>})</strong></div>
 ]<//B_liste_resultats>
