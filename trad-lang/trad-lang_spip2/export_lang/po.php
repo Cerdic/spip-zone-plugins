@@ -13,15 +13,12 @@ function export_lang_po_dist($module,$langue,$dir_lang){
 
 	$res=sql_select("id,str,comm,statut","spip_tradlangs","module=".sql_quote($module)." AND lang=".sql_quote($langue),"id");
 	$x=array();
-	$prev="";
 	$tous = $lorigine; // on part de l'origine comme ca on a tout meme si c'est pas dans la base de donnees (import de salvatore/lecteur.php)
 	while ($row=sql_fetch($res)) {
 		$tous[$row['id']] = $row;
 	}
 	ksort($tous);
 	foreach ($tous as $row) {
-		if ($prev!=strtoupper($row['id'][0])) $x[] = "\n# ".strtoupper($row['id'][0])."\n";
-		$prev=strtoupper($row['id'][0]);
 		if (strlen($row['statut']) && ($row['statut'] != 'OK'))
 			$row['comm'] .= ' '.$row['statut'];
 		if (trim($row['comm'])) $row['comm']=" # ".trim($row['comm']); // on rajoute les commentaires ?
@@ -44,15 +41,7 @@ msgid \"".$row['id']."\"
 msgstr \"".str_replace('"','\"',$str)."\"\n";
 	}
 
-	// historiquement les fichiers de lang de spip_loader ne peuvent pas etre securises
-	$secure = ($module == 'tradloader')
-		? ''
-		: "if (!defined('_ECRIRE_INC_VERSION')) return;\n\n";
-
 	$fd = fopen($fic_exp, 'w');
-
-	# supprimer la virgule du dernier item
-	$x[count($x)-1] = preg_replace('/,([^,]*)$/', '\1', $x[count($x)-1]);
 
 	$contenu = join("\n",$x);
 	
