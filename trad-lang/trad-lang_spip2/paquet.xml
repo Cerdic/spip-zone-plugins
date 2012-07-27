@@ -1,7 +1,7 @@
 <paquet
 	prefix="tradlang"
 	categorie="outil"
-	version="2.0.3"
+	version="2.0.4"
 	etat="test"
 	compatibilite="[3.0.0-dev;["
 	logo="images/spip_lang.png"

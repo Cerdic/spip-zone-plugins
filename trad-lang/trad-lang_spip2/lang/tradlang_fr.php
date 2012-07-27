@@ -10,8 +10,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_activer_lang' => 'Activer la langue "@lang@" pour ce module',
+	'bouton_exporter_fichier' => 'Exporter le fichier',
 	'bouton_exporter_fichier_langue' => 'Exporter le fichier de langue en "@lang@"',
 	'bouton_exporter_fichier_langue_original' => 'Exporter le fichier de langue original ("@lang_mere@")',
+	'bouton_exporter_fichier_zip' => 'Exporter les fichiers en zip',
 	'bouton_precedent' => 'Etape précédente',
 	'bouton_suivant' => 'Etape suivante',
 	'bouton_supprimer_langue_module' => 'Supprimer cette langue du module',

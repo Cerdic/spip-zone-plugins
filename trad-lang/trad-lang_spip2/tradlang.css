@@ -1,19 +1,19 @@
 #bilan_traduction{
 	width:100%;
 	overflow:auto;
-	font-size:.9em;
 }
 .page_traduction table.spip{
 	width:100%;
 }
 
-table.liste_traductions{
+table.liste_traductions,table.bilan{
 	font-size:.9em;
 	margin:10px 0 15px;
 	width:100%;
+}
+table.liste_traductions{
 	table-layout:fixed;
 }
-
 table.liste_traductions td, table.liste_traductions th{
 	text-overflow:ellipsis;
 	overflow:hidden;

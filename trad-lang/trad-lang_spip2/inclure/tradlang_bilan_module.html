@@ -19,6 +19,9 @@
 <p><:tradlang:info_module_traduit_langues{nb=#GET{langues_nb}}:></p>
 <p><a href="[(#SELF|parametre_url{id_tradlang_module,''})]"><:tradlang:lien_trier_langue_non:></a></p>
 
+<div class="actions">
+[(#BOUTON_ACTION{<:tradlang:bouton_exporter_fichier_zip:>,[(#URL_ACTION_AUTEUR{tradlang_exporter_zip,[(#ID_TRADLANG_MODULE)],#SELF})]})]
+</div>
 <table class="bilan spip liste tablesorter">
 	<thead>
 		<tr class="row_first">
@@ -41,6 +44,7 @@
 			<th class="avancement">
 				<:tradlang:th_avancement:>
 			</th>
+			<th></th>
 			<th></th>
 		</tr>
 	</thead>
@@ -119,6 +123,9 @@
 			<:tradlang:bouton_traduire:>
 			</a>]
 		</td>
+		<td>
+			[(#BOUTON_ACTION{<:tradlang:bouton_exporter_fichier:>,[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#CLE})],#SELF})]})]
+		</td>
 	</tr>
 	</BOUCLE_langues_totales>
 	[(#SET{total_modules,#TOTAL_BOUCLE})]
@@ -146,6 +153,7 @@
 				<div class="new" style="left: [(#GET{percent_ok_full}|plus{[(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)]})]px; width: [(#GET{percent_ok_new})]px"> </div>
 			</div>
 		</td>
+		<td></td>
 		<td></td>
 	</tfoot>
 	</tbody>
