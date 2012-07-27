@@ -1,5 +1,5 @@
 <?php
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 # il s'agit ici de proposer des textes a trous.
 
 #---------------------------------------------------#

@@ -1,5 +1,5 @@
 <?php
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 // transforme la notation FEN en notation classique
 function FEN2classic($fen) {
   global $diag_echecs_globales;

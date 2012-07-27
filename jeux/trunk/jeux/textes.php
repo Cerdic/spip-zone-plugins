@@ -1,5 +1,5 @@
 <?php
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 #   TODO : ajouter des lettrines
 #          inserer le texte dans un cadre sympa
 #          possibilite d'inerer une image...

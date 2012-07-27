@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 function jeux_upgrade($nom_meta_base_version,$version_cible){
     include_spip('inc/meta');
     include_spip('base/upgrade');

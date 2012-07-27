@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 function jeux_ajouter_resultat($id_jeu, $resultat, $total, $resultat_long=''){
 	$id_auteur = $GLOBALS["auteur_session"]['id_auteur'];
 	if (!$id_auteur) return;

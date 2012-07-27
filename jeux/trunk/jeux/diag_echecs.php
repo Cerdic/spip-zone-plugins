@@ -1,5 +1,5 @@
 <?php
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 #---------------------------------------------------#
 #  Plugin  : jeux , diagrammes d'echecs             #
 #  Auteur  : Patrice Vanneufville, 2006             #

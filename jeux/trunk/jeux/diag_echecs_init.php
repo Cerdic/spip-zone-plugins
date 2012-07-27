@@ -1,5 +1,5 @@
 <?php
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 /* Taille des images en pixels (29 ou 35) */
 //$image_size = 35;
 

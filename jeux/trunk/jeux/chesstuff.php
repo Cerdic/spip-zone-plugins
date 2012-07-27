@@ -1,5 +1,5 @@
 <?php
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 #---------------------------------------------------#
 #  Plugin  : jeux                                   #
 #  Auteur  : Patrice Vanneufville, 2011             #
