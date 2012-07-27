@@ -7,6 +7,7 @@ function jeux_declarer_tables_objets_sql($table){
     
     $table['spip_jeux'] = array(
     'principale' =>"oui",
+    'type'=>'jeu',
     'field'     => array(
 	       'id_jeu'        => 'bigint(21) NOT NULL',
 	       'date'          => 'timestamp',
