@@ -1,3 +1,4 @@
+
 <?php
 
 #---------------------------------------------------#
@@ -90,7 +91,7 @@ function jeux_insert_head($flux){
 	return $flux . _JEUX_HEAD2;
 }
 
-// pipeline affiche_gauche
+
 
 // Le pipeline affichage_final, execute a chaque hit sur toute la page
 // Recherche tous les "title=JEUX-HEAD(...)" --> et incorporation a la place de _JEUX_HEAD2
@@ -105,13 +106,6 @@ function jeux_affichage_final($flux) {
 	return str_replace(_JEUX_HEAD2, $header."\n\n", $flux);
 }
 
-
-
-
-function jeux_taches_generales_cron($taches_generales){
-	$taches_generales['jeux_nettoyer_base'] = 3600*48;
-	return $taches_generales;
-}
 
 
 /**
