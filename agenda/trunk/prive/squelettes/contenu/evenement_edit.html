@@ -19,7 +19,7 @@
 	#FORMULAIRE_EDITER_EVENEMENT{#ENV{id_evenement,oui},#ENV{id_article},#GET{redirect},#ENV{associer_objet}}
 [(#ENV{retourajax,''}|oui)
 	</div>
-	<script type="text/javascript">/*<!\[CDATA\[*/if (window.jQuery) jQuery('#navigation>div,#extra>div').ajaxReload({args:{exec:'#ENV{exec}'}});/*\]\]>*/</script>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}', '#navigation,#chemin');/*\]\]>*/</script>
 ]
 [(#ENV{id_evenement,''}|intval|oui)
 <div class="ajax">

@@ -10,3 +10,5 @@
 #PIPELINE{afficher_config_objet,#ARRAY{args,#ARRAY{type,evenement,id,#ID_EVENEMENT},data,''}}
 
 </BOUCLE_nav>
+[(#ENV{exec}|=={evenement_edit}|oui)<INCLURE{fond=prive/squelettes/navigation/evenement_edit,env} />]
+<//B_nav>
