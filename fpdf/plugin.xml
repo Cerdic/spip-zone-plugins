@@ -16,7 +16,7 @@
 	<prefix>fpdf</prefix>
 
 	<icon>prive/themes/spip/images/logo-64.png</icon>
-	<lien></lien>
+	<lien>http://contrib.spip.net/?article4185</lien>
 
 	<categorie>divers</categorie>
 </plugin>
