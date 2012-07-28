@@ -1,0 +1,55 @@
+#CACHE{0}
+<div class="formulaire_spip ajax" id="formulaire_abosympa">
+[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
+
+<form method='post' action='#ENV{action}' enctype='multipart/form-data' id='abosympa_listes'>
+<div>
+[(#REM) declarer les hidden qui declencheront le service du formulaire
+parametre : url d'action ]
+#ACTION_FORMULAIRE{#ENV{action}}
+<fieldset>
+<legend>#GET{legende}</legend>
+<ul>
+<li class="abo_nom[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
+<label for="nom"><:soapsympa:nom:></label>
+[<span class='erreur_message'>(#ENV*{erreur_email})</span>]
+<input name="nom" id="nom" type="text" class="text" value="#ENV{nom}" />
+</li>
+<li class="obligatoire abo_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
+<label for="email_listes"><:soapsympa:email_abonnement:></label>
+
+<input name="email" id="email_listes" type="text" class="text" value="#ENV{email}" />
+</li>
+
+<li class="abo_listes[ (#ENV**{erreurs}|table_valeur{listes}|oui)erreur]">
+[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{listes})</span>]
+<ul>
+<li class="editer_listes">
+
+<BOUCLE_listes(POUR){tableau #ENV{listes}}>
+<div class="choix">
+<label for="[(#VALEUR|table_valeur{'listname'})]">[(#VALEUR|table_valeur{'listname'})]</label>
+<input name="listes[]" type="checkbox" id="[(#VALEUR|table_valeur{'listname'})]" value="[(#VALEUR|table_valeur{'listname'})]"[(#GRAND_TOTAL|=={1}|oui) checked="checked"] />
+[<p class="explications">
+(#VALEUR|table_valeur{'subject'})
+</p>]
+</div>
+</BOUCLE_listes>
+
+</li>
+</ul>
+</li>
+</ul>
+
+<p class="boutons">
+<input name="abonnement" type="submit" value="<:soapsympa:btn_abonnement:>" class="submit" />
+<input name="desabonnement" type="submit" value="<:soapsympa:btn_desabonnement:>" class="submit" />
+</p>
+</fieldset>
+</div>
+</form>
+<!--</B_listes>-->
+</BOUCLE_editable>
+</div>

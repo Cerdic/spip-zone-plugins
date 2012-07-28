@@ -1,0 +1,23 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_abonnement_single formfx" id="formulaire_abosympa_single">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+   
+      <form method='post' action='#ENV{action}'>
+         <div class="abonnement">
+            #ACTION_FORMULAIRE{#ENV{action}}
+            <ul>
+               
+               <li class="editer_email obligatoire[ (#GET{erreurs}|oui)erreur]">
+                  [<span class='erreur_message'>(#ENV*{erreur_email})</span>]
+		  <label>#ENV{listname}</label>
+                  <input name="email" id="email" type="text" value="<:soapsympa:votre_email:>" onclick="this.value=''" />
+               </li>
+            </ul>
+            <p class="boutons"><input type="submit" class="submit" value="<:bouton_valider:>" /></p>
+         </div>
+      </form>
+   
+</div>
