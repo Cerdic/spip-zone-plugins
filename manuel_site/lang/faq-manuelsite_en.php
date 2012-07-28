@@ -46,10 +46,10 @@ _ {Please note that the max size of a file is 150M, about a length of 225 minute
 	'trier_q' => 'How to manage the display order of articles / sections / documents?',
 
 	// V
-	'video_320x240' => 'Prepare your video in FLV format (streaming flash) with a size of 320x240 pixels, a bitrate (compression) of 400kbps and a sound mono/64kbps. To convert a video file, you can use avidemux software (Mac, Windows, Linux) download here [->http://www.avidemux.org/].
+	'video_320x240' => 'Prepare your video in FLV format (streaming flash) with a size of 320x240 pixels, a bitrate (compression) of 400kbps and a sound mono/64kbps. To convert a video file, you can use avidemux software (Mac, Windows, Linux) that you can download here [->http://www.avidemux.org/].
 
-Associate the file created with your article as an attachment, give it a title, description and possibly a credit, and size (width 320, height 240). Finally put in the body of your article where you want <code><docXX|center|video></code>. A flash drive will appear in your public site to allow visitors to play the video.
-_ {Please note that the max size of a file is 150M, about a length of 37.5 minutes}', # MODIF
+Associate the created file with your article as an attachment, give it a title, a description, a credit, and a size (width 320, height 240). Finally put in the body of your article where you want <code><docXX|center|video></code>. A flash player will appear in your public site to allow visitors to play the video.
+_ {Please note that the max size of a file is 150M, for an approximate length of 37.5 minutes}',
 	'video_320x240_q' => 'How to add a video to an article?',
 	'video_dist' => 'If your video is hosted on DailyMotion, YouTube or Vimeo, in a new tab of your browser, go to the page viewing of the video, and copy the url. In the edit page of your article click "Add Video" and paste the URL. Then insert into the text of the article <code><videoXX|center></code>',
 	'video_dist_q' => 'How to add a video dailymotion (youtube,...) to an article?'
