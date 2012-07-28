@@ -50,7 +50,7 @@ function pendu_pendu($js, $indexJeux) {
  $proposition = '<input class="pendu_deviner" type="button" readonly=\"readonly" value="ABCDEF" name="cache">';
  $reset = '<input class="pendu_reset" type="button" value="'._T('jeux:rejouer').'" onclick="pendu_init('.$indexJeux.')">'; 
  $images = '';
- $path = _DIR_PLUGIN_JEUX.'img/pendu'.jeux_config('pendu').'/';
+ $path = find_in_path('img/pendu'.jeux_config('pendu')).'/';
  $images_init = preg_split('/\s*,\s*/', jeux_config(1));
  for($i=0; $i<=$nb_images-1; $i++)
  	$images .= "<img class=\"no_image_filtrer pendu_image\" name=\"pict{$indexJeux}_$i\" src=\"$path".$images_init[$i]."\" />";
@@ -92,7 +92,7 @@ function jeux_pendu($texte, $indexJeux, $form=true) {
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('pendu', $texte);
   // initialisation des images de pendu
-  $path = _DIR_PLUGIN_JEUX.'img/pendu'.jeux_config('pendu').'/';
+  $path = find_in_path('img/pendu'.jeux_config('pendu')).'/';
   lire_fichier ($path.'config.ini', $images);
   jeux_config_init($images);
   $i=1; $c=0; $js2=false;

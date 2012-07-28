@@ -13,11 +13,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('jeux_config');
 
 
-if (!defined('_DIR_PLUGIN_JEUX')){
-	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-	$p=_DIR_PLUGINS.end($p); if ($p[strlen($p)-1]!='/') $p.='/';
-	define('_DIR_PLUGIN_JEUX', $p);
-}
 
 // 4 fonctions pour traiter la valeur du parametre de configuration place apres le separateur [config]
 global $jeux_config;
