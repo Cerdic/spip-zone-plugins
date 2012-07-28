@@ -7,7 +7,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-// classe PHP et les services SOAP
+/**
+* appel classe PHP et les services SOAP
+**/
 include_spip('inc/soapsympa_trustedapp');
 include_spip('inc/autoriser');
 
@@ -35,7 +37,7 @@ function soapsympa_affiche_milieu($flux) {
 
 $exec = _request('exec');
 	  
-if(($exec == 'auteur_infos')||($exec == 'auteur')||($exec == 'configurer_soapsympa')||($exec == 'soapsympa_review')||($exec == 'edition_soapsympa')) {
+if(($exec == 'auteur_infos')||($exec == 'configurer_soapsympa')||($exec == 'soapsympa_review')||($exec == 'edition_soapsympa')) {
     //on récupere les réglages du plugins (clés du serveur Sympa)
    $conf = unserialize($GLOBALS['meta']['soapsympa']);
 
@@ -45,7 +47,7 @@ if(($exec == 'auteur_infos')||($exec == 'auteur')||($exec == 'configurer_soapsym
    // $Sympa->remote_host = $conf['remote_host']; pas utile pour l (instant
     //$Sympa->SYMPA_ROBOT = $conf['robot']; pas utile pour l (instant
 
-      if((($exec == 'auteur_infos')||($exec == 'auteur'))&&(autoriser('gerer_abonnements'))) {
+      if(($exec == 'auteur_infos')&&(autoriser('gerer_abonnements'))) {
 
 	$Id = _request('id_auteur');
 	$email = sql_getfetsel("email","spip_auteurs","id_auteur=$Id");
