@@ -13,7 +13,7 @@
 	<slogan>Lire des sons et des vid&#233;os</slogan>
 	<icon>images/logo-32.png</icon>
 	<auteur>BoOz, C&#233;dric, erational, CP.</auteur>
-	<version>0.77.0</version>
+	<version>0.77.1</version>
 	<etat>stable</etat>
 	<description>Ce plugin permet la lecture et l’affichage de sons ou de vid&#233;os. Il ajoute des lecteurs flash adapt&#233;s aux formats .mp3 et .flv. Il agit sur tous les <code><docXX|player></code> ins&#233;r&#233;s dans les textes, aussi bien que dans les squelettes.
 
