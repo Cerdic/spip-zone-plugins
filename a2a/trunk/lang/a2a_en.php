@@ -44,8 +44,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer_le_lien_deux_cotes' => 'Unlink both sides',
 
 	// T
-	'type' => 'Type', # NEW
-	'type_liaison' => 'Type de liaison', # NEW
+	'type' => 'Type',
+	'type_liaison' => 'Type of link',
 
 	// V
 	'voir' => 'See'
