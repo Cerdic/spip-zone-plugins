@@ -3,6 +3,15 @@ description: '<:socialtags:description_noisette_facebook_like:>'
 icon: 'noisettes/socialtags_facebook_like.png'
 parametres:
   -
+    saisie: 'url'
+    options:
+      nom: 'href'
+      label: '<:socialtags:noisette_label_href:>'
+      defaut: 'http://www.facebook.com/'
+      obligatoire: 'oui'
+    verifier:
+      type: 'url'
+  -
     saisie: 'radio'
     options:
       nom: 'bouton_action'

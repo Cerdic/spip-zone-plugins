@@ -1,3 +1,4 @@
+#SET{href,#ENV{href}}
 #SET{width,#ENV{width,490}}
 #SET{bouton_action,#ENV{bouton_action,like}}
 #SET{show_faces,#ENV{show_faces,true}}
@@ -16,4 +17,4 @@
 }(document, 'script', 'facebook-jssdk'));
 /*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
 
-<div class="fb-like" [(#ENV{afficher_send}|oui)data-send="true"] data-width="#GET{width}" data-show-faces="#GET{show_faces}" data-action="#GET{bouton_action}" data-font="arial" data-layout="#GET{layout}" data-colorscheme="#GET{colorscheme}"></div>
+<div class="fb-like" data-href="#GET{href}" [(#ENV{afficher_send}|oui)data-send="true"] data-width="#GET{width}" data-show-faces="#GET{show_faces}" data-action="#GET{bouton_action}" data-font="arial" data-layout="#GET{layout}" data-colorscheme="#GET{colorscheme}"></div>
