@@ -12,8 +12,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_activer_lang' => 'تفعيل اللغة "@lang@" لهذه الوحدة',
+	'bouton_exporter_fichier' => 'Exporter le fichier', # NEW
 	'bouton_exporter_fichier_langue' => 'تصدير ملف اللغة بالـ«@lang@»',
 	'bouton_exporter_fichier_langue_original' => 'تصدير ملف اللغة الأصلي («@lang_mere@»)',
+	'bouton_exporter_fichier_po' => 'Exporter le fichier en .po', # NEW
+	'bouton_exporter_fichier_zip' => 'Exporter les fichiers en zip', # NEW
 	'bouton_precedent' => 'الخطوة السابقة',
 	'bouton_suivant' => 'الخطوة التالية',
 	'bouton_supprimer_langue_module' => 'حذف هذه اللغة من الوحدة',
