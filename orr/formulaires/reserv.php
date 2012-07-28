@@ -1,19 +1,26 @@
 <?php
 
-function formulaires_reserv_charger_dist($id,$date_deb){
-    list($annee,$mois,$jour)=explode('-',$date_deb);
-    $date_deb = date("d/m/Y H:i:s", mktime(0, 0, 0, $mois, $jour, $annee));
+function formulaires_reserv_charger_dist($idressource,$date_deb,$date_f,$nom,$idresa){
+    list($dated,$heured)            = explode(' ',$date_deb);
+    list($anneed,$moisd,$jourd)     = explode('-',$dated);
+    list($heured,$minuted,$econded) = explode(':',$heured);
+    $date_deb = date("d/m/Y H:i:s", mktime($heured, $minuted, $seconded, $moisd, $jourd, $anneed));
+
+    list($datef,$heuref)            = explode(' ',$date_f);
+    list($anneef,$moisf,$jourf)     = explode('-',$datef);
+    list($heuref,$minutef,$econdef) = explode(':',$heuref);
+    $date_f = date("d/m/Y H:i:s", mktime($heuref, $minutef, $secondef, $moisf, $jourf, $anneef));
     $valeurs = array(
         "nom_ressource"   => "",
-        "nom_reservation" => "",
-        "id_ressource"    => $id,
+        "nom_reservation" => $nom,
+        "id_ressource"    => $idressource,
         "date_debut"      => $date_deb,
-        "date_fin"        => $date_deb,
+        "date_fin"        => $date_f,
     );
     return $valeurs;
 }
 
-function formulaires_reserv_verifier_dist($id,$date_deb){
+function formulaires_reserv_verifier_dist($idressource,$date_deb,$date_f,$nom,$idresa){
     $date_debut      = _request('date_debut');
     $date_fin        = _request('date_fin');
     $erreurs = array();
@@ -52,7 +59,7 @@ function formulaires_reserv_verifier_dist($id,$date_deb){
     include_spip('inc/compare_date');
     $date_debut = date("Y-m-d H:i:s", mktime ($heured,$minuted,0, $moisd, $jourd, $anneed));
     $date_fin   = date("Y-m-d H:i:s", mktime ($heuref,$minutef,0, $moisf, $jourf, $anneef));
-    $resultat=compare_date($date_debut,$date_fin,$id);
+    $resultat=compare_date($date_debut,$date_fin,$idressource,$idresa);
 	if ($resultat == "1"){
 		//~ $erreurs['date_debut'] = 'Vos dates de réservations ne sont pas libres !';
 		$erreurs['date_fin'] = 'Vos dates de réservations ne sont pas libres !';
@@ -61,7 +68,7 @@ function formulaires_reserv_verifier_dist($id,$date_deb){
 }
 
 
-function formulaires_reserv_traiter_dist($id,$date_deb){
+function formulaires_reserv_traiter_dist($idressource,$date_deb,$date_f,$nom,$idresa){
     $nom_reservation = _request('nom_reservation');
     $date_debut      = _request('date_debut');
     $date_fin        = _request('date_fin');
@@ -81,21 +88,27 @@ function formulaires_reserv_traiter_dist($id,$date_deb){
     $retour['message_ok'] = "bravo";
     $retour['redirect'] = "spip.php?page=affichage_orr&jourj=$jourj";
 
-    $objet = "orr_reservation";
     // utilisation API editer_objet pour l'insertion en BDD'
+    $objet = "orr_reservation";
     include_spip('action/editer_objet');
-    $id_objet = objet_inserer($objet);
     $set = array (
-        'id_orr_ressource'    => $id,
+        'id_orr_ressource'    => $idressource,
         'orr_reservation_nom' => $nom_reservation,
         'orr_date_debut'      => $date_debut,
         'orr_date_fin'        => $date_fin
     );
+
+	if ($idresa>"0"){
+		$id_objet=$idresa;
+	}else{
+		$id_objet = objet_inserer($objet);
+	}
+
     objet_modifier($objet, $id_objet, $set);
     // utilisation de l'API editer_liens pour la gestion de la table de lien entre
     // une reservation et une ressource
     include_spip('action/editer_liens');
-    objet_associer(array("orr_reservation"=>$id_objet), array("orr_ressource"=>$id));
+    objet_associer(array("orr_reservation"=>$id_objet), array("orr_ressource"=>$idressource));
 
     return $retour;
 }

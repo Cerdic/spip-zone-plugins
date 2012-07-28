@@ -1,6 +1,18 @@
-     <p>#ENV{ressource}</p>
-    <p>la date : #ENV{ma_date}</p>
+    <p><h2>#ENV{id_ressource} - #ENV{nom_ressource}</h2></p>
+    <p>id reservation : #ENV{id_reservation}</p>
+   </p>
+      #SET{id,#ENV{id_reservation}}
 
-    <div class="ajax">
-		#FORMULAIRE_RESERV{#ENV{id_ressource},#ENV{ma_date}}
+        [(#GET{id}|?{
+			#SET{date_fin,#INFO_ORR_DATE_FIN{orr_reservations,#GET{id}}}
+			#SET{date_debut,#INFO_ORR_DATE_DEBUT{orr_reservations,#GET{id}}}
+			,
+			#SET{date_fin,#ENV{ma_date}}
+			#SET{date_debut,#ENV{ma_date}}
+			}
+			)]
+	#SET{nom_reservation,#INFO_ORR_RESERVATION_NOM{orr_reservations,#GET{id}}}
+      <p>nom de la reservation : #GET{nom_reservation}</p>
+	<div class="ajax">
+		#FORMULAIRE_RESERV{#ENV{id_ressource},#GET{date_debut},#GET{date_fin},#GET{nom_reservation},#GET{id}}
 	</div>
