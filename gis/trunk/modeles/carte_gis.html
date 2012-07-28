@@ -28,6 +28,7 @@
 	- localize_visitor|localiser_visiteur = oui		centrer la carte sur la position du visiteur (API geolocation HTML5)
 	- point = non					si elle vaut "non" cette option n'affichera pas de points du tout (utile pour n'afficher qu'un kml par exemple)
 X	- ajaxload = non                si elle vaut "non" cette option désactive l'init de la carte sur l'event ajaxload 
+	- media = non									permet de passer le critère 'media' (pour les documents)
 
 ]
 
@@ -112,6 +113,7 @@ var map[(#GET{id})];
 				id_article : (#ENV{id_article}|trim),][
 				id_breve : (#ENV{id_breve}|trim),][
 				id_document : (#ENV{id_document}|trim),][
+				media : "(#ENV{media}|trim)",][
 				id_mot : (#ENV{id_mot}|trim),][
 				id_groupe : (#ENV{id_groupe}|trim),][
 				id_auteur : (#ENV{id_auteur}|trim),][
