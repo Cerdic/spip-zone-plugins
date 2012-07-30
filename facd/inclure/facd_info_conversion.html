@@ -1,9 +1,13 @@
 <BOUCLE_attente(FACD_CONVERSIONS){id_document}{statut IN en_cours,non}{!par maj}{0,1}>
-[(#STATUT|=={non}|oui)<a href="[(#SELF|parametre_url{relance,''}|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]})]" id="facd_recharge_#ID_DOCUMENT" class="ajax" title="<:facd:lien_recharger:>"><:facd:info_document_dans_file_attente:></a>]
-[(#STATUT|=={en_cours}|oui)<a href="[(#SELF|parametre_url{relance,''}|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]})]" id="facd_recharge_#ID_DOCUMENT" class="ajax" title="<:facd:lien_recharger:>"><:facd:info_document_conversion:></a>]
+[(#STATUT|=={non}|oui)<a href="[(#SELF|parametre_url{relance,''}|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]})]" id="facd_recharge_#ID_DOCUMENT" class="facd_reload" class="ajax" title="<:facd:lien_recharger:>"><:facd:info_document_dans_file_attente:></a>]
+[(#STATUT|=={en_cours}|oui)<a href="[(#SELF|parametre_url{relance,''}|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]})]" id="facd_recharge_#ID_DOCUMENT" class="facd_reload" class="ajax" title="<:facd:lien_recharger:>"><:facd:info_document_conversion:></a>]
 <script type="text/javascript">
 	var refresh_#ID_DOCUMENT = function(){
-		$('#facd_recharge_#ID_DOCUMENT').click();
+		if($('a.facd_reload').size() == 1){
+			$('a#facd_recharge_#ID_DOCUMENT').click();
+		}else if($('a.facd_reload').eq(0).attr('id') == 'facd_recharge_#ID_DOCUMENT'){
+			$('a#facd_recharge_#ID_DOCUMENT').click();
+		}
 	}
 	clearTimeout(refresh_#ID_DOCUMENT);
 	setTimeout(refresh_#ID_DOCUMENT,15000);
