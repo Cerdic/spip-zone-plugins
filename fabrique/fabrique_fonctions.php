@@ -409,7 +409,14 @@ function _tableau_options_presentes($func, $tableau, $options, $type='') {
 			$res = $r;
 			$first = true;
 		} else {
-			$res = array_intersect($res, $r);
+			#$res = array_intersect($res, $r);
+			// array_intersect() ne prend pas en compte les sous tableaux
+			foreach ($res as $i => $v) {
+				if (false === array_search($v, $r)) {
+					unset($res[$i]);
+				}
+			}
+			$res = array_values($res);
 		}
 	}
 
