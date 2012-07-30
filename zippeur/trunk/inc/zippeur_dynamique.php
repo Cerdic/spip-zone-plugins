@@ -22,10 +22,13 @@ function zippeur_creer_fichier($squel,$chemin,$options=array()){
 	ecrire_fichier($chemin,$contenu);
 }
 
-function zippeur_copier_fichier($orig,$dest){
+function zippeur_copier_fichier($orig,$dest,$find_in_path=True){
 	zippeur_creer_arbo($dest);
 	defined('_DIR_SITE') ? $chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES : $chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES ;
-	copy(find_in_path($orig),$chemin.$dest);
+	if ($find_in_path)
+	   copy(find_in_path($orig),$chemin.$dest);
+	else
+	   copy($orig,$chemin.$dest);
 }
 
 function zippeur_copier_dossier($orig,$dest){
@@ -34,6 +37,7 @@ function zippeur_copier_dossier($orig,$dest){
     defined('_DIR_SITE') ? $chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES : $chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES ;
     $path = find_in_path($orig);
     $fichiers=preg_files($path);
+
     foreach ($fichiers as $f){
         $arbo = str_replace($path.'/','',$f);
         zippeur_creer_arbo($arbo);
