@@ -5,7 +5,7 @@
 	<version>2.0.0</version>
 	<version_base>0.3</version_base>
   	<categorie>multimedia</categorie>
-   <etat>test</etat>
+   <etat>stable</etat>
 	<lien>http://www.spip-contrib.net/Zippeur</lien>
 	<icon>images/zip.png</icon>
 	<description>Il est parfois utile, notamment quand un article comprend beaucoup de documents joints, de proposer l’ensemble des documents sous forme de zip. Ce plugin permet à SPIP de g&#233;n&#233;rer une archive zip &#224; partir d’une liste de documents.</description>
@@ -27,7 +27,7 @@
 	<version>2.0.0</version>
 	<version_base>0.3</version_base>
   	<categorie>multimedia</categorie>
-   <etat>test</etat>
+   <etat>stable</etat>
 	<icon>images/zip.png</icon>
 	<description>Il est parfois utile, notamment quand un article comprend beaucoup de documents joints, de proposer l’ensemble des documents sous forme de zip. Ce plugin permet à SPIP de g&#233;n&#233;rer une archive zip &#224; partir d’une liste de documents.</description>
 	<install>base/zippeur.php</install>
