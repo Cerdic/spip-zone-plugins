@@ -129,7 +129,7 @@
 	[(#SET{texte_bouton,[(#VAL{tradlang:bouton_activer_lang}|_T{#ARRAY{lang,#ENV{lang_cible}}})]})]
 	[(#AUTORISER{modifier,tradlang}|oui)
 		[(#ENV{lang_cible}|langue_possible|oui)
-			[<p>(#GET{total_inexistants}|singulier_ou_pluriel{tradlang:nb_item_langue_inexistant,tradlang:nb_items_langue_inexistants,nb,#ARRAY{langue,#ENV{lang_cible},langue_longue,#GET{langue_longue}}})</p>]
+			[<div class="error">(#GET{total_inexistants}|singulier_ou_pluriel{tradlang:nb_item_langue_inexistant,tradlang:nb_items_langue_inexistants,nb,#ARRAY{langue,#ENV{lang_cible},langue_longue,#GET{langue_longue}}})</div>]
 		<div class="actions">
 			[(#BOUTON_ACTION{#GET{texte_bouton},[(#URL_ACTION_AUTEUR{tradlang_creer_langue_cible,#ID_TRADLANG_MODULE,#SELF}|parametre_url{lang_crea,#ENV{lang_cible}})]})]
 		</div>]
