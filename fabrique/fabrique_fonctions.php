@@ -192,8 +192,56 @@ function fabriquer_tableau_chaines($objet) {
 			}
 		}
 	}
+	// les rôles définis
+	if ($roles = fabrique_description_roles($objet)) {
+		foreach ($roles['roles_trads'] as $cle => $texte) {
+			$chaines[ $cle ] = $texte;
+		}
+	}
+
 	ksort($chaines);
 	return $chaines;
+}
+
+/*
+ * Retourne la description des rôles pour un objet
+ *
+ * @param array $objet Descrption de l'objet
+ * @return array Description des roles
+ *     4 index :
+ *     - roles_colonne : la colonne utilisée, toujours 'role'
+ *     - roles_titre : couples clé du role, clé de langue du role
+ *     - roles_objets : tableau objet => liste des clés de roles
+ *     - roles_trads : couples clé de langue => Texte
+ *     - roles_defaut : la clé du role par défaut
+ */
+function fabrique_description_roles($objet) {
+	$desc = array();
+	// les rôles définis
+	if (!options_presentes($objet, array('table_liens', 'roles'))
+	OR !($roles = trim($objet['roles']))) {
+		return $desc;
+	}
+	$desc['roles_colonne'] = 'role';
+	$desc['roles_titres'] = array(); # cle => cle_langue
+	$desc['roles_objets'] = array();
+	$desc['roles_trads']  = array(); # cle_langue => Texte
+	$desc['roles_defaut']  = '';
+
+	$roles = explode("\n", $roles);
+	foreach ($roles as $i=>$r) {
+		list($cle, $texte) = explode(',', $r, 2);
+		$cle = trim($cle);
+		if (!$i) $desc['roles_defaut'] = $cle; # la valeur par défaut est la première indiquée
+		$cle_langue = 'role_' . $cle;
+		$desc['roles_titres'][$cle] = $objet['type'] . ':' . $cle_langue;
+		$desc['roles_trads'][$cle_langue] = trim($texte);
+	}
+	$liens = array_map('table_objet', $objet['vue_liens']);
+	foreach ($liens as $l) {
+		$desc['roles_objets'][$l] = array_keys($desc['roles_titres']);
+	}
+	return $desc;
 }
 
 

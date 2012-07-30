@@ -362,6 +362,14 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 				fabriquer_fichier("prive/objets/liste/objets_associer_fonctions.php", $data); // pff
 				// ce fichier est nécessaire
 				fabriquer_fichier("prive/squelettes/contenu/objet_edit.html", $data);
+
+				// la meme chose avec des roles s'il y en a
+				if (option_presente($objet, 'roles')) {
+					fabriquer_fichier("prive/objets/liste/objets_roles_lies.html", $data);
+					fabriquer_fichier("prive/objets/liste/objets_roles_lies_fonctions.php", $data); // pff
+					fabriquer_fichier("prive/objets/liste/objets_roles_associer.html", $data);
+					fabriquer_fichier("prive/objets/liste/objets_roles_associer_fonctions.php", $data); // pff
+				}
 			}
 
 			// si traductions demandees, creer le fichier de pre-chargement

@@ -157,6 +157,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		s\'ils sont absents. Vous pouvez cependant en créer certains afin de les modifier
 		pour changer le comportement par défaut de ce que propose SPIP.
 		Par ailleurs, ces fichiers ont parfois des ajouts minimes de fonctionnalités, alors indiquées.',
+	'explication_roles' => 'De façon expérimentale, des rôles peuvent être gérés sur les liaisons en
+		utilisant le plugin «Rôles».',
 	'experimental_explication' => '<strong>Partie expérimentale !</strong><br />
 		La pérennité des saisies n\'est pas garantie.
 		Cette partie peut évoluer ou disparaître dans de futures versions.',
@@ -284,6 +286,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_recherche_explication' => 'Ponderation de la recherche dans ce champ. Toute valeur comprise entre 1 et 10
 		indiquera que SPIP peut chercher dans ce champ lors d\'une recherche sur l\'objet.
 		Laisser vide pour ne pas chercher dedans.',
+	'label_roles' => 'Liste des rôles',
+	'label_roles_explication' => 'Chaque ligne décrit un rôle : <code>code du rôle,Titre du rôle</code>.
+		Le premier rôle est considéré comme le rôle à appliquer par défaut. Exemple : <code>traducteur,Traducteur</code>',
 	'label_slogan' => 'Slogan',
 	'label_saisies' => 'Saisies',
 	'label_saisies_explication' => 'Créer des saisies et leurs vues',
@@ -351,6 +356,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_paquet' => 'Paquet',
 	'legend_pre_construire' => 'Pré construire',
 	'legend_resultat' => 'Résultat',
+	'legend_roles' => 'Rôles',
 	'legend_rubriques' => 'Rubriques',
 	'legend_saisie' => 'Saisie',
 	'legend_statut' => 'Statuts',

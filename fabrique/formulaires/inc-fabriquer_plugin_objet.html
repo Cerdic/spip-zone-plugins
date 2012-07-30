@@ -334,7 +334,7 @@
 
 
 <h3><a href="#liaisons"><:fabrique:legend_liaisons:></a></h3>
-<div>
+<div class='sous_parties'>
 	<fieldset>[(#SET{o,[(#GET{objets}|sinon{objets})]})]
 		<legend class='legend'><:fabrique:legend_liaisons_objet_liens{objet=#GET{o}}:></legend>
 		<ul>
@@ -347,6 +347,26 @@
 			datas=[(#ENV{objets}|fabrique_lister_objets_editoriaux{#ENV{objets/#CLE/vue_liens, #ARRAY}, #LISTE{#TABLE}})],
 			li_class=saisie_choisir_objets})]
 		</ul>
+
+
+		<div class='parties'>
+			<div class="group" id='objet-roles'>
+				<h4><a href="#objet#CLE-inserer-roles"><:fabrique:legend_roles:></a></h4>
+				<div>
+					<p class='experimental'><:fabrique:experimental_explication:></p>
+					<p class='explication'><:fabrique:explication_roles:></p>
+
+					<ul>
+						#SET{rows,#ENV{objets/#CLE/roles}|explode{#EVAL{'"\n"'}}|count|max{4}}
+						[(#SAISIE{textarea, objets/#CLE/roles,
+							label=<:fabrique:label_roles:>,
+							explication=<:fabrique:label_roles_explication:>,
+							rows=#GET{rows}, li_class=haut})]
+					</ul>
+				</div>
+			</div>
+		</div>
+
 	</fieldset>
 
 	<fieldset>
@@ -362,6 +382,8 @@
 		</ul>
 	</fieldset>
 </div>
+
+
 
 
 

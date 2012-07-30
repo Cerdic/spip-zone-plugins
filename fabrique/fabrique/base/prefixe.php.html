@@ -47,8 +47,8 @@ function [(#PREFIXE)]_declarer_tables_objets_sql($tables) {
 		'champs_editables'  => [(#CHAMPS|champs_option_presente{editable,  champ}|ecrire_tableau)],
 		'champs_versionnes' => [(#CHAMPS|champs_option_presente{versionne, champ}|ecrire_tableau)],
 		'rechercher_champs' => array(<BOUCLE_recherches(DATA){source tableau,#CHAMPS}{recherche >=1 }{", "}>["(#VALEUR{champ})"] => #VALEUR{recherche}</BOUCLE_recherches>),
-		'tables_jointures'  => array(['(#NOM_TABLE_LIENS)']),
-		['statut_textes_instituer' => array(
+		'tables_jointures'  => array(['(#NOM_TABLE_LIENS)']),[
+		'statut_textes_instituer' => array(
 			'prepa'    => 'texte_statut_en_cours_redaction',
 			'prop'     => 'texte_statut_propose_evaluation',
 			'publie'   => 'texte_statut_publie',
@@ -65,6 +65,16 @@ function [(#PREFIXE)]_declarer_tables_objets_sql($tables) {
 			)
 		),
 		'texte_changer_statut' => '#TYPE:texte_changer_statut_#TYPE',(#STATUT|oui)]
+		#SET{roles,#VALEUR|fabrique_description_roles}<BOUCLE_roles(CONDITION){si #GET{roles}}>
+		'roles_colonne' => '#GET{roles/roles_colonne}',
+		'roles_titres' => array(<BOUCLE_rtitres(DATA){source table,#GET{roles/roles_titres}}>
+			'#CLE'=>'#VALEUR',</BOUCLE_rtitres>
+		),
+		'roles_objets' => array(<BOUCLE_robjets(DATA){source table,#GET{roles/roles_objets}}>
+			'#CLE' => array(
+				'choix' => [(#VALEUR|ecrire_tableau)],
+				'defaut' => '#GET{roles/roles_defaut}'),</BOUCLE_robjets>
+		),</BOUCLE_roles>
 
 	);
 </BOUCLE_objets_editoriaux>
@@ -81,11 +91,12 @@ function [(#PREFIXE)]_declarer_tables_auxiliaires($tables) {
 		'field' => array(
 			[(#VAL{["(#ID_OBJET)"]} |espacer)] => "bigint(21) DEFAULT '0' NOT NULL",
 			[(#VAL{'"id_objet"'}    |espacer)] => "bigint(21) DEFAULT '0' NOT NULL",
-			[(#VAL{'"objet"'}       |espacer)] => "VARCHAR(25) DEFAULT '' NOT NULL",
+			[(#VAL{'"objet"'}       |espacer)] => "VARCHAR(25) DEFAULT '' NOT NULL",[
+			[(#VAL{'"role"'}         |espacer)] => "VARCHAR(25) DEFAULT ''",(#VALEUR|options_presentes{#LISTE{table_liens,roles}})]
 			[(#VAL{'"vu"'}          |espacer)] => "VARCHAR(6) DEFAULT 'non' NOT NULL"
 		),
 		'key' => array(
-			[(#VAL{'"PRIMARY KEY"'}     |espacer)] => "#ID_OBJET,id_objet,objet",
+			[(#VAL{'"PRIMARY KEY"'}     |espacer)] => "#ID_OBJET,id_objet,objet[(#VALEUR|options_presentes{#LISTE{table_liens,roles}}|?{',role'})]",
 			[(#VAL{["KEY (#ID_OBJET)"]} |espacer)] => "#ID_OBJET"
 		)
 	);</BOUCLE_objets_liens>

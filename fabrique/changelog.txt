@@ -4,6 +4,12 @@ Ce plugin génère d'autres plugins !
 
 
 
+1.17.0 le 30 07 2012
+--------------------
+
+* Expérimental : gestion des rôles (simples) sur les tables de liaison
+* Notice PHP
+
 1.16.4 le 18 07 2012
 --------------------
 
