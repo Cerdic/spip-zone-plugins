@@ -52,3 +52,10 @@ clear:both;
 img.stylo{
 float:left;}
 
+#poubelle{
+float:right;
+padding-right:30px;}
+
+.poubelle_visible{display:auto;}
+.poubelle_cache{display:none;}
+
