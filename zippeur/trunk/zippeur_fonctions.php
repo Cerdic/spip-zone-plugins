@@ -7,6 +7,7 @@ function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=a
 		$date = date("Y-m-d H:i:s",time());
 	}
 	defined('_DIR_SITE') ? $chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES.$dossier : $chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES.$dossier;
+	supprimer_repertoire($chemin);
 	sous_repertoire($chemin);
 	
 	// création des fichiers dynamiques	
