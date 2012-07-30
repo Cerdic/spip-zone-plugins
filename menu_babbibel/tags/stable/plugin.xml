@@ -41,13 +41,13 @@
 
 	<pipeline>
 		<nom>insert_head</nom>
-		<action>headeur</action>
+		<action>insert_head</action>
 		<inclure>fonctions_menu.php</inclure>
 	</pipeline>
 
 	<pipeline>
 		<nom>insert_head_css</nom>
-		<action>headeur_css</action>
+		<action>insert_head_css</action>
 		<inclure>fonctions_menu.php</inclure>
 	</pipeline>
 
