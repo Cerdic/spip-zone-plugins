@@ -15,7 +15,7 @@ function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=a
 		zippeur_creer_fichier($dyn[0],$dossier.'/'.$dyn[1],$dyn[2]);	
 	}
 	foreach ($statiques as $stat){
-		if (is_dir(find_in_path($stat[0]))
+		if (is_dir(find_in_path($stat[0])))
 		  zippeur_copier_dossier($stat[0],$dossier.'/'.$stat[1]);
 		else
 		  zippeur_copier_fichier($stat[0],$dossier.'/'.$stat[1]);
