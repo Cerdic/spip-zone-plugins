@@ -33,8 +33,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spiplistes_api_globales');
 
-if (!defined('_DIR_PLUGIN_SPIPLISTES_IMG_PACK')) include_spip('spiplistes_options');
-
 function exec_spiplistes_courrier_edit(){
 
 	include_spip('inc/barre');
@@ -150,29 +148,39 @@ function exec_spiplistes_courrier_edit(){
 		//. spiplistes_boite_autocron() // ne pas gener l'edition
 		. pipeline('affiche_droite', array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
 		. debut_droite($rubrique, true)
-                .'<div class="cadre-formulaire-editer">';
-
-
-
+		;
 
 	$page_result .= ""
 		// le bloc pour apercu (retour ajax)
-		. '<div class="entete-formulaire">'
-
-		. "<img src='"._DIR_IMG_PACK."/rien.gif' width='10'></td>\n"
+		. "<div id='apercu-courrier' style='clear:both;tex-align:center'></div>\n"
+		//
+		// debut_cadre_formulaire
+		. '<div class="cadre-formulaire">'.$eol
+		. "<a name='haut-block' id='haut-block'></a>\n"
+		// 
+		//
+		// bloc titre
+		. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n"
+		. "<tr width='100%'>"
+		. "<td>"
+		. $gros_bouton_retour
+		. "</td>"
+		. "<td><img src='"._DIR_IMG_PACK."/rien.gif' width='10'></td>\n"
+		. "<td width='100%'>"
 		. ($id_courrier ? _T('spiplistes:modifier_un_courrier__') : _T('spiplistes:creer_un_courrier_') )."<br />\n"
 		. spiplistes_gros_titre($titre, '', true)
-
-		. "</div>\n"
+		. "</td>\n"
+		. "</tr></table>\n"
+		. "<hr />\n"
 		;
 		//
 		// debut formulaire
 	
-	$page_result .= '<div class="ajax">'
+	$page_result .= ""
 		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER
 											  , ($id_courrier ? "id_courrier=$id_courrier" : "")
 											  )
-			."' method='post' name='formulaire_courrier_edit' id='formulaire_courrier_edit' class=\"formulaire_spip\">\n"
+			."' method='post' name='formulaire_courrier_edit' id='formulaire_courrier_edit'>\n"
 		. "<input type='hidden' name='modifier_message' value=\"oui\" />\n"
 		. "<input type='hidden' name='id_courrier' value='$id_courrier' />\n"
 		//
@@ -187,21 +195,22 @@ function exec_spiplistes_courrier_edit(){
 		//
 		// generer le contenu
 		// Reprise du Formulaire adapte de abomailman () // MaZiaR - NetAktiv	// tech@netaktiv.com
-		. debut_cadre_relief('stock_insert-slide.gif', true)
+		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_insert-slide.gif', true)
 		//. bouton_block_invisible(md5(_T('spiplistes:charger_patron')))
 		. spiplistes_bouton_block_depliable($titre_block_depliable, false, md5(_T('spiplistes:charger_patron')))
 		. "<span class='verdana2 triangle_label' onclick=\"javascript:$('#triangle".$compteur_block."').click();\">"
-			. "</span>\n"
+			. '</span>'.$eol
 		. spiplistes_debut_block_invisible(md5(_T('spiplistes:charger_patron')))
 		// 
 		. '<div id="ajax-loader" align="right">'
 			. '<script type="text/javascript">'.$eol
-			. 'document.write(\'<img src="' . _DIR_PLUGIN_SPIPLISTES.'prive/themes/spip/images/' . 'ajax_indicator.gif" alt="" />\');'.$eol
+			. 'document.write(\'<img src="' . _DIR_PLUGIN_SPIPLISTES_IMG_PACK . 'ajax_indicator.gif" alt="" />\');'	
 			. '</script>'.$eol
 			. '<noscript>'.$eol
 			. spiplistes_boite_alerte (_T('spiplistes:javascript_inactif'), true)
 			. $eol
 			. '</noscript>'.$eol
+			//. '<img src="' . _DIR_PLUGIN_SPIPLISTES_IMG_PACK . 'ajax_indicator.gif" alt="" />'
 			. '</div>'.$eol
 		;
 	
@@ -356,11 +365,11 @@ function exec_spiplistes_courrier_edit(){
 		. (($id_temp!==false) ? '<input type="hidden" name="id_temp" value="' . $id_temp . '" />'.$eol : '')
 		//
 		// fin formulaire
-		. '</form></div></div>'.$eol
-
-
+		. '</form>'.$eol
+		// fin_cadre_formulaire
+		. '</div>'.$eol
 		;
-                
+	
 	echo($page_result);
 
 	// COURRIER EDIT FIN ---------------------------------------------------------------

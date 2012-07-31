@@ -223,7 +223,7 @@ $(document).ready(function(){
 				, 'margin-top': '0.25em'
 			});
 
-			/*
+			/**
 			 * le bouton close positionné à droite
 			 */
 			$('#spiplistes-log-close').css({
