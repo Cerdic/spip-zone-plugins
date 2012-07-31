@@ -22,7 +22,8 @@ function nospam_verifier_formulaire_forum_dist($flux){
 		include_spip("inc/nospam");
 		// regarder si il y a du contenu en dehors des liens !
 		$caracteres = compter_caracteres_utiles(_request('texte'));
-		if ($caracteres < 10){
+		$min_length = (defined('_FORUM_LONGUEUR_MINI') ? _FORUM_LONGUEUR_MINI : 10);
+		if ($caracteres < $min_length){
 			$flux['data']['texte'] = _T('forum_attention_dix_caracteres');
 			unset($flux['data']['previsu']);
 		}
