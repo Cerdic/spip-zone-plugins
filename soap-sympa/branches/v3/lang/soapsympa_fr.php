@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'abonnement_ok' => 'Abonnement réussi !',
 	'abonnement_erreur' => 'Abonnement échoué. Contacter le webmestre.',
 
-//B
+	//B
 	'btn_abonnement_lists' => 'Abonner l\'auteur aux listes sélectionnées.',
 	'btn_desabonnement_lists' => 'Désabonner l\'auteur aux listes sélectionnées.',
 	'btn_desabonnement_emails' => 'Abonner les emails sélectionnés.',
