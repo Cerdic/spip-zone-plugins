@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip ('inc/navigation_modules');
 
-function exec_voir_groupe()
+function exec_membres_groupe()
 {
 	$id_groupe = intval(_request('id'));
 	if (!autoriser('voir_groupes', 'association', $id_groupe)) {

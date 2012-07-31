@@ -70,7 +70,7 @@ function exec_association()
 			echo '<li>'.$GLOBALS['association_metas']['declaration']."</li>\n";
 		if ($GLOBALS['association_metas']['prefet'])
 			echo '<li>'.$GLOBALS['association_metas']['prefet']."</li>\n";
-		/* afficher les metas definies par l'utilisateur si il y en a */
+		// afficher les metas definies par l'utilisateur si il y en a
 		$query = sql_select('nom,valeur', 'spip_association_metas', "nom LIKE 'meta_utilisateur_%'");
 		while ($row = sql_fetch($query)) {
 			echo '<li>'. ucfirst(_T(str_replace('meta_utilisateur_', '', $row['nom']))).'&nbsp;:&nbsp;'.$row['valeur']."</li>\n";
@@ -78,7 +78,7 @@ function exec_association()
 		echo "</ul>";
 		echo fin_cadre_enfonce(true);
 		echo "</div>\n";
-		/* affiche tous les groupes devant l'etre */
+		// affiche tous les groupes devant l'etre
 		$queryGroupesAffiches = sql_select('id_groupe, nom', 'spip_asso_groupes', 'affichage>0', '', 'affichage');
 		while ($row = sql_fetch($queryGroupesAffiches)) {
 			echo '<div class="vcard" id="vcard-group'.$row['id_groupe'].'"><a class="include" href="#vcard-asso"></a>',

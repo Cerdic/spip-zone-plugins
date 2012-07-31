@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip ('inc/navigation_modules');
 
-function exec_voir_activites()
+function exec_inscrits_activite()
 {
 	if (!autoriser('associer', 'activites')) {
 		include_spip('inc/minipres');
@@ -48,15 +48,19 @@ function exec_voir_activites()
 		}
 		icones_association(array('activites','annee='.substr($evenement['date_debut'],0,4)), $res);
 		debut_cadre_association('activites.gif', 'activite_titre_inscriptions_activites');
-	// PAGINATION ET FILTRES
-		echo "<table class='asso_tablo_filtres'><tr>\n<td width='70%'></td><td width='30%' class='formulaire'>";
-		echo '<form method="post" action="'. generer_url_ecrire('voir_activites') .'"><div>';
+	// FILTRES
+		echo '<form method="get" action="'. generer_url_ecrire('inscrits_activite') .'">';
+		echo "\n<input type='hidden' name='exec' value='inscrits_activite' />\n";
 		echo '<input type="hidden" name="id" value="'.$id_evenement.'" />';
+		echo "\n<table width='100%' class='asso_tablo_filtres'><tr>";
+		echo '<td id="filtre_statut">';
 		echo '<select name="statut" onchange="form.submit()">';
 		echo '<option value="0"'. ((!$statut)?' selected="selected"':'') .'>'._T('asso:activite_entete_toutes').'</option>';
 		echo '<option value="+1"'. (($statut>0)?' selected="selected"':'') .'>'._T('asso:activite_entete_validees').'</option>';
 		echo '<option value="-1"'. (($statut<0)?' selected="selected"':'') .'>'._T('asso:activite_entete_impayees').'</option>';
-		echo "</select></div></form></td></tr></table>\n";
+		echo '</select></td>';
+		echo '<noscript><td><input type="submit" value="'._T('asso:bouton_filtrer').'" /></td></noscript>';
+		echo '</tr></table></form>';
 	//TABLEAU
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_activite'>\n";
 		echo "<thead>\n<tr>";

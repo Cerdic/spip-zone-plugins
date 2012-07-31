@@ -17,11 +17,11 @@ include_spip('inc/navigation_modules');
 
 function exec_adherents()
 {
-	if (!autoriser('voir_membres', 'association', 0)) { /* on s'assure qu'il n'y ai pas d'id associe a la demande d'autorisation sur voir_membres car on les consulte tous */
+	if (!autoriser('voir_membres', 'association', 0)) {  // on s'assure qu'il n'y ai pas d'id associe a la demande d'autorisation sur voir_membres car on les consulte tous
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		/* recuperation des variables */
+		// recuperation des variables
 		$critere = request_statut_interne(); // peut appeler set_request
 		$statut_interne = _request('statut_interne');
 		$lettre = _request('lettre');
@@ -194,9 +194,9 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe,
 			$auteurs .= '<td class="organisation-unit">';
 			$query_groupes = sql_select('g.nom as nom_groupe, g.id_groupe as id_groupe', 'spip_asso_groupes g LEFT JOIN spip_asso_groupes_liaisons l ON g.id_groupe=l.id_groupe', 'l.id_auteur='.$id_auteur);
 			if ($row_groupes = sql_fetch($query_groupes)) {
-				$auteurs .= '<a href="'. generer_url_ecrire('voir_groupe', 'id='.$row_groupes['id_groupe']) .'">'.$row_groupes['nom_groupe'].'</a>';
+				$auteurs .= '<a href="'. generer_url_ecrire('membres_groupe', 'id='.$row_groupes['id_groupe']) .'">'.$row_groupes['nom_groupe'].'</a>';
 				while ($row_groupes = sql_fetch($query_groupes)) {
-					$auteurs .= ', <a href="'.generer_url_ecrire('voir_groupe', 'id='.$row_groupes['id_groupe']).'">'.$row_groupes['nom_groupe'].'</a>';
+					$auteurs .= ', <a href="'.generer_url_ecrire('membres_groupe', 'id='.$row_groupes['id_groupe']).'">'.$row_groupes['nom_groupe'].'</a>';
 				}
 			}
 			$auteurs .= '</td>';
@@ -220,7 +220,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe,
 		. '<a href="'. generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur) .'">'.$icone.'</a></td>'
 		. '<td class="action">'. association_bouton('adherent_label_ajouter_cotisation', 'cotis-12.gif', 'ajout_cotisation','id='.$id_auteur) .'</td>'
 		. '<td class="action">'. association_bouton('adherent_label_modifier_membre', 'edit-12.gif', 'edit_adherent','id='.$id_auteur) .'</td>'
-		. '<td class="action">'. association_bouton('adherent_label_voir_membre', 'voir-12.png', 'voir_adherent','id='.$id_auteur) .'</td>'
+		. '<td class="action">'. association_bouton('adherent_label_voir_membre', 'voir-12.png', 'adherent','id='.$id_auteur) .'</td>'
 		. '<td class="action"><input name="id_auteurs[]" type="checkbox" value="'.$id_auteur.'" /></td>'
 		. "</tr>\n";
 	}

@@ -65,7 +65,7 @@ function exec_activites()
 		}
 		debut_cadre_association('activites.gif','activite_titre_toutes_activites');
 		// FILTRES
-		echo '<form method="get" action="'.generer_url_ecrire('activites').'">';
+		echo '<form method="get" action="'. generer_url_ecrire('activites') .'">';
 		echo "\n<input type='hidden' name='exec' value='activites' />";
 		echo "\n<table width='100%' class='asso_tablo_filtres'><tr>";
 		echo '<td id="filtre_annee">'. association_selectionner_annee($annee, 'evenements', 'debut') .'</td>';
@@ -97,7 +97,7 @@ function exec_activites()
 			}
 			echo '</select></td>';
 		}
-		echo '<noscript><td><input type="submit" value="'._T('asso:bouton_filtrer').'" /></noscript></td>';
+		echo '<noscript><td><input type="submit" value="'._T('asso:bouton_filtrer').'" /></td></noscript>';
 		echo '</tr></table></form>';
 		//TABLEAU
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_activites'>\n";
@@ -127,7 +127,7 @@ function exec_activites()
 			echo '<td class="integer">'.$inscrits['total'].'</td>';
 			echo '<td class="actions">'. association_bouton('activite_bouton_modifier_article', 'edit-12.gif', 'articles', 'id_article='.$data['id_article']) . '</td>';
 			echo '<td class="actions">'. association_bouton('activite_bouton_ajouter_inscription', 'creer-12.gif', 'edit_activite', 'id_evenement='.$data['id_evenement']) . '</td>';
-			echo '<td class="actions">'. association_bouton('activite_bouton_voir_liste_inscriptions', 'voir-12.png', 'voir_activites', 'id='.$data['id_evenement']) . '</td>';
+			echo '<td class="actions">'. association_bouton('activite_bouton_voir_liste_inscriptions', 'voir-12.png', 'inscrits_activite', 'id='.$data['id_evenement']) . '</td>';
 			echo "</tr>\n";
 		}
 		echo "</tbody>\n</table>\n";
