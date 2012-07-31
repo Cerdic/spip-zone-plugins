@@ -68,7 +68,8 @@ function formulaires_csoapsympa_verifier_dist(){
 
 	if (!isset($erreurs['serveur_distant'])){
 		include_spip('soapsympa_pipeline');
-		$erreurs = soapsympa_api_tester(_request('serveur_distant'), _request('identifiant'), _request('mot_de_passe')) ;
+		//test pour savoir si le serveur wsdl est bien configure et si le mots de passe sont bons
+		$erreurs = soapsympa_api_tester(_request('serveur_distant'), _request('identifiant'), _request('mot_de_passe'), _request('proprietaire')) ;
 	}
 	return $erreurs;
 }

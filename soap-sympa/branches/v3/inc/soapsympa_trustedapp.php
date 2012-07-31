@@ -129,7 +129,7 @@ class SympaTrustedApp {
 		return $this->client->authenticateRemoteAppAndRun($this->username, $this->password, "USER_EMAIL=$mail", 'amI', array($list, $function, $mail));
 	}
 
-
+	
 	//SOAP
 	private $client;
 	public $wsdl;

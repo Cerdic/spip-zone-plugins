@@ -19,12 +19,21 @@ include_spip('inc/autoriser');
  * @param string $psw : mot de passe de connexion
  *
  */
-function soapsympa_api_tester($serveur, $ident, $psw){
+function soapsympa_api_tester($serveur, $ident, $psw, $email){
 	$retour = array();
 	try {
 		$soap = new SympaTrustedApp($serveur, $ident, $psw);
 		if (!$soap -> wsdl)
 			$retour['message_erreur'] = _T('soapsympa:erreur_configuration_wsdl');
+		if ($soap -> wsdl) {
+			$soap->USER_EMAIL = $email;
+			$res = $soap->complexlists($soap->USER_EMAIL);//si ce service ne fonctionne pas alors les identifiants sont faux !
+			if (gettype($res)!='array')
+			    $retour['message_erreur'] = _T('soapsympa:erreur_mot_de_passe_wsdl');
+			
+		}
+
+
 	} catch (SoapFault $fault) {
 		$retour['message_erreur'] = $fault->faultstring;
 	}
@@ -64,7 +73,7 @@ function soapsympa_affiche_milieu($flux){
 		//Page de configuration et d edition du plugin on affiche la liste des listes
 		if (($exec=='configurer_soapsympa') || ($exec=='edition_soapsympa')){
 			$Sympa->USER_EMAIL = $conf['proprietaire'];
-			$res = $Sympa->complexLists($Sympa->USER_EMAIL);
+			$res = $Sympa->complexlists($Sympa->USER_EMAIL);
 			if (isset($res) && gettype($res)=='array'){
 
 				$Listes = array(array());
@@ -80,11 +89,6 @@ function soapsympa_affiche_milieu($flux){
 
 				$contexte['listoflists'] = $Listes;
 				$flux['data'] .= recuperer_fond('prive/boite/configuration', $contexte, array('ajax' => true));
-			}else{
-			
-			$flux['data'] .= _T('erreur_mot_de_passe_wsdl');
-
-
 			}
 		}
 		//fin if exec = configurer_soapsympa
