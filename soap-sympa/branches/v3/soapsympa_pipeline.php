@@ -80,6 +80,11 @@ function soapsympa_affiche_milieu($flux){
 
 				$contexte['listoflists'] = $Listes;
 				$flux['data'] .= recuperer_fond('prive/boite/configuration', $contexte, array('ajax' => true));
+			}else{
+			
+			$flux['data'] .= _T('erreur_mot_de_passe_wsdl');
+
+
 			}
 		}
 		//fin if exec = configurer_soapsympa
