@@ -328,7 +328,7 @@ function spiplistes_email_from_default () {
 		else {
 			spiplistes_log('ERROR: sender email address missing');
 		}
-        error_log ('FROM: '.$from);
+        //error_log ('FROM: '.$from);
 	}
 	return ( $from );
 }
