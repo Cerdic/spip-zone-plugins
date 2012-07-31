@@ -14,9 +14,15 @@ class SympaTrustedApp {
 	}
 
 	public function InitializeSOAP(){
-		$this->client = new SoapClient($this->wsdl);
+		try {
+			$this->client = new SoapClient($this->wsdl,array('exceptions'=>true));
+    }
+		catch (Exception $e) {
+			$this->client = null;
+			$this->wsdl = false;
+			spip_log($e->getMessage(),"sympa"._LOG_ERREUR);
+    }
 	}
-
 
 	#SOAP calls
 
