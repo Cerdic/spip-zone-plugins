@@ -67,10 +67,10 @@ ex : <code><galleria22></code> a gallery in the article 22 ; <code><galleria22|l
 	<prefix>galleria</prefix>
 	<pipeline>
 	 <nom>insert_head</nom>
-	 <inclure>head.php</inclure>
+	 <inclure>galleria_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
-		<inclure>head.php</inclure>
+		<inclure>galleria_pipelines.php</inclure>
 	</pipeline>
 </plugin>
