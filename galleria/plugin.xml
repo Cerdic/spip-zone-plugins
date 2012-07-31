@@ -14,7 +14,7 @@ _ [emthanh@free.fr->emthanh@free.fr]
 			[en]Image gallery with Galleria
 		</multi>
 	</slogan>
-	<version>1.2.0</version>
+	<version>1.2.1</version>
 	<icon>galleria.png</icon>
 	<etat>stable</etat>
 	<description>
@@ -72,5 +72,6 @@ ex : <code><galleria22></code> a gallery in the article 22 ; <code><galleria22|l
 	<pipeline>
 		<nom>header_prive</nom>
 		<inclure>galleria_pipelines.php</inclure>
+		<action>insert_head</action>
 	</pipeline>
 </plugin>
