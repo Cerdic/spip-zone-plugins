@@ -2,7 +2,7 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations             *
  *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
+ *  Copyright (c) 2007 Bernard Blazin & Franï¿½ois de Montlivault (V1)       *
  *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -15,24 +15,25 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip ('inc/navigation_modules');
 
-function exec_supprimer_groupe()
+function exec_suppr_plan()
 {
-	if (!autoriser('editer_groupes', 'association', $id_groupe)) {
+	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_groupe = intval(_request('id'));
-		onglets_association('gestion_groupes');
-		// INFO
-		$groupe = sql_fetsel('*', 'spip_asso_groupes', "id_groupe=$id_groupe" );
-		$infos['ordre_affichage_groupe'] = $groupe['affichage'];
-		$infos['commentaires'] = $groupe['commentaires'];
-		$infos['destination_entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe")) );
-		echo totauxinfos_intro($groupe['nom'], 'groupe', $id_groupe, $infos );
+		$id_plan = intval(_request('id'));
+		onglets_association('plan_comptable');
+		// info
+		$plan = sql_fetsel('*', 'spip_asso_plan', "id_plan=$id_plan");
+		$infos['entete_code'] = $plan['code'];
+		$infos['solde_initial'] = association_prixfr($plan['solde_anterieur']);
+		$infos['entete_date'] = association_datefr($plan['date_anterieure']);
+		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_comptes',"imputation='$plan[code]' OR journal='$plan[code]'")) );
+		echo totauxinfos_intro($plan['intitule'], 'plan', $id_plan, $infos );
 		// datation et raccourcis
 		icones_association('');
-		debut_cadre_association('annonce.gif', 'suppression_de_groupe');
-		bloc_confirmer_suppression('groupe',$id_groupe);
+		debut_cadre_association('euro-39.gif', 'suppression_de_compte');
+		echo bloc_confirmer_suppression('plan', $id_plan,'plan');
 		fin_page_association();
 	}
 }

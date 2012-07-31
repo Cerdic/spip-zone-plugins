@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip ('inc/navigation_modules');
 
-function exec_action_prets()
+function exec_suppr_pret()
 {
 	if (!autoriser('associer', 'activites')) {
 			include_spip('inc/minipres');
@@ -26,7 +26,7 @@ function exec_action_prets()
 		onglets_association('titre_onglet_prets');
 		$data = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
 		$infos['ressources_libelle_code'] = $data['code'];
-		if (is_numeric($data['statut'])) { /* utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires) */
+		if (is_numeric($data['statut'])) { // utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires)
 			if ($data['statut']>0) {
 				$puce = 'verte';
 				$type = 'ok';
@@ -38,7 +38,7 @@ function exec_action_prets()
 				$type = 'reserve';
 			}
 		} else {
-			switch($data['statut']){ /* utilisation des anciens 4+ statuts textuels (etat de reservation) */
+			switch($data['statut']){ // utilisation des anciens 4+ statuts textuels (etat de reservation)
 				case 'ok':
 					$puce = 'verte';
 					break;

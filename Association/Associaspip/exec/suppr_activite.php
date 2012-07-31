@@ -10,33 +10,33 @@
 \***************************************************************************/
 
 
-if (!defined('_ECRIRE_INC_VERSION'))
-	return;
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip ('inc/navigation_modules');
 
-function exec_action_dons()
+function exec_suppr_activite()
 {
-	if (!autoriser('associer', 'dons')) {
+	if (!autoriser('associer', 'activites')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_don = intval(_request('id'));
-		$don = sql_fetsel('*', 'spip_asso_dons', "id_don=$id_don");
-		if (!$don) {
+		$id_activite = intval(_request('id'));
+		$activite = sql_fetsel('*', 'spip_asso_dons', "id_don=$id_don");
+		if (!$activite) {
 			include_spip('inc/minipres');
 			echo minipres(_T('zxml_inconnu_id') . $id_don);
 		} else {
-			onglets_association('titre_onglet_dons');
+			onglets_association('titre_onglet_activite');
 			// info
-			$infos['argent'] = association_prixfr($don['argent']);
-			$infos['colis'] = ($don['valeur'] ? '('.association_prixfr($don['valeur']).')<br />' : '') .$don['colis'];
-			$infos['contrepartie'] = $don['contrepartie'];
-			totauxinfos_intro(association_calculer_lien_nomid($don['bienfaiteur'],$don['id_adherent']), 'don', $id_don, $infos );
+			$infos['evenement'] = sql_getfetsel('titre', 'spip_evenements', 'id_evenement='.intval($activite['id_evenement']) );
+			$infos['date'] = association_datefr($activite['date_inscription']);
+			$infos['activite_entete_inscrits'] = association_prixfr($activite['inscrits']);
+			$infos['entete_montant'] = association_prixfr($activite['montant']);
+			totauxinfos_intro(association_calculer_lien_nomid($activite['nom'],$activite['id_adherent']), 'activite', $id_activite, $infos );
 			// datation et raccourcis
 			icones_association('');
-			debut_cadre_association('dons-24.gif', 'action_sur_les_dons');
-			echo bloc_confirmer_suppression('don', $id_don);
+			debut_cadre_association('activites.gif', 'activite_titre_inscriptions_activites');
+			echo bloc_confirmer_suppression('activite', $id_activite);
 			fin_page_association();
 		}
 	}

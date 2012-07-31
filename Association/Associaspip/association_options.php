@@ -60,7 +60,7 @@ function association_bouton_modifier($objet, $args='', $tag='td')
 function association_bouton_supprimer($objet, $args='', $tag='td')
 {
 	$res = ($tag?"<$tag class='action'>":'');
-	$res .= association_bouton('bouton_supprimer', 'suppr-12.gif', "action_$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#x2327;"'); // 8 pluriel contre 3 singulier
+	$res .= association_bouton('bouton_supprimer', 'suppr-12.gif', "suppr_$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#x2327;"'); // 8 pluriel contre 3 singulier
 	$res .= ($tag?"</$tag>":'');
 	return $res;
 }

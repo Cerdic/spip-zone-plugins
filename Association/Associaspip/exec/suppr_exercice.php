@@ -16,7 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip('inc/navigation_modules');
 
-function exec_action_exercice()
+function exec_suppr_exercice()
 {
 	if (!autoriser('associer', 'exercices')) {
 		include_spip('inc/minipres');

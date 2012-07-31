@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip ('inc/navigation_modules');
 
-function exec_action_ventes()
+function exec_suppr_vente()
 {
 	if (!autoriser('associer', 'ventes')) {
 		include_spip('inc/minipres');

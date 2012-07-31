@@ -95,7 +95,7 @@ function exec_prets()
 			echo '<td class="n">'.association_calculer_nom_membre($auteur['sexe'], $auteur['prenom'], $auteur['nom_famille'],'span');
 			echo '</td><td class="date">'.association_dureefr($data['duree'],$unite) .'</td>';
 			echo '<td class="date">'. ($data['date_retour']<$data['date_sortie'] ? '&nbsp' : association_datefr($data['date_retour'],'dtend') ) .'</td>';
-			echo '<td class="action">'. association_bouton('prets_nav_annuler', 'suppr-12.gif', 'action_prets', 'id_pret='.$data['id_pret'].'&id_ressource='.$id_ressource) .'</td>';
+			echo '<td class="action">'. association_bouton('prets_nav_annuler', 'suppr-12.gif', 'suppr_pret', 'id_pret='.$data['id_pret'].'&id_ressource='.$id_ressource) .'</td>';
 			echo '<td class="action">' . association_bouton('prets_nav_editer', 'edit-12.gif', 'edit_pret', 'id_pret='.$data['id_pret']) . '</td>';
 			echo "</tr>\n";
 		}

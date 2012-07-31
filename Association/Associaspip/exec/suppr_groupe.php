@@ -15,21 +15,24 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip ('inc/navigation_modules');
 
-function exec_action_destination()
+function exec_suppr_groupe()
 {
-	if (!autoriser('associer', 'comptes')) {
+	if (!autoriser('editer_groupes', 'association', $id_groupe)) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_destination = intval(_request('id'));
-		onglets_association('plan_comptable');
-		// INTRO :
-		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_destination_op',"id_destination=$id_destination")) );
-		echo totauxinfos_intro(sql_getfetsel('intitule','spip_asso_destination',"id_destination=$id_destination"), 'destination', $id_destination, $infos );
+		$id_groupe = intval(_request('id'));
+		onglets_association('gestion_groupes');
+		// INFO
+		$groupe = sql_fetsel('*', 'spip_asso_groupes', "id_groupe=$id_groupe" );
+		$infos['ordre_affichage_groupe'] = $groupe['affichage'];
+		$infos['commentaires'] = $groupe['commentaires'];
+		$infos['destination_entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe")) );
+		echo totauxinfos_intro($groupe['nom'], 'groupe', $id_groupe, $infos );
 		// datation et raccourcis
 		icones_association('');
-		debut_cadre_association('euro-39.gif', 'suppression_de_destination');
-		bloc_confirmer_suppression('destination',$id_destination);
+		debut_cadre_association('annonce.gif', 'suppression_de_groupe');
+		bloc_confirmer_suppression('groupe',$id_groupe);
 		fin_page_association();
 	}
 }

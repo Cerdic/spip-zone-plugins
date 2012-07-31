@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip ('inc/navigation_modules');
 
-function exec_action_ressources()
+function exec_suppr_ressource()
 {
 	$id_ressource = intval(_request('id'));
 	if (!autoriser('associer', 'ressources') OR !$id_ressource) {
@@ -27,7 +27,7 @@ function exec_action_ressources()
 		$data = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
 		$infos['ressources_libelle_code'] = $data['code'];
 		$infos['ressources_libelle_caution'] = association_prixfr($data['prix_caution']);
-		if (is_numeric($data['statut'])) { /* utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires) */
+		if (is_numeric($data['statut'])) { // utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires)
 			if ($data['statut']>0) {
 				$puce = 'verte';
 				$type = 'ok';
@@ -39,7 +39,7 @@ function exec_action_ressources()
 				$type = 'reserve';
 			}
 		} else {
-			switch($data['statut']){ /* utilisation des anciens 4+ statuts textuels (etat de reservation) */
+			switch($data['statut']){ // utilisation des anciens 4+ statuts textuels (etat de reservation)
 				case 'ok':
 					$puce = 'verte';
 					break;
