@@ -18,13 +18,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 function chosen_jquery_plugins($flux) {
 	$flux[] = 'lib/chosen/chosen.jquery.js'; # lib originale
-	$flux[] = 'javascript/spip_chosen.js';    # chargements SPIP automatiques
+	$flux[] = 'javascript/spip_chosen.js';   # chargements SPIP automatiques
 	return $flux;
 }
 
 
 /**
- * Ajoute Chosen aux css chargées
+ * Ajoute Chosen aux css chargées dans le privé
  * 
  * @param string $texte Contenu du head HTML concernant les CSS
  * @return string       Contenu du head HTML concernant les CSS
@@ -32,9 +32,42 @@ function chosen_jquery_plugins($flux) {
 function chosen_header_prive_css($texte) {
 
 	$css = find_in_path('lib/chosen/chosen.css');
-	$texte .= "<link rel='stylesheet' type='text/css' media='all' href='$css' />\n";
+	$texte .= "<link rel='stylesheet' type='text/css' media='all' href='".direction_css($css)."' />\n";
 
 	return $texte;
+}
+
+/**
+ * Ajoute Chosen aux css chargées dans le public
+ * 
+ * @param string $texte Contenu du head HTML concernant les CSS
+ * @return string       Contenu du head HTML concernant les CSS
+**/
+function chosen_insert_head_css($flux) {
+	include_spip('inc/config');
+	$config = lire_config('chosen',array());
+	if ($config['active']=='oui'){
+		$css = find_in_path('lib/chosen/chosen.css');
+		$flux .= '<link rel="stylesheet" href="'.direction_css($css).'" type="text/css" media="all" />';
+	}
+	return $flux;
+}
+
+/**
+ * Ajoute Chosen aux css chargées dans le public
+ * 
+ * @param string $texte Contenu du head HTML concernant les CSS
+ * @return string       Contenu du head HTML concernant les CSS
+**/
+function chosen_insert_head($flux) {
+	include_spip('inc/config');
+	$config = lire_config('chosen',array());
+	if ($config['active']=='oui' && strlen($config['selecteur_commun']) > 0){
+		$flux .= '<script type="text/javascript">/* <![CDATA[ */
+			var selecteur_chosen = "'.$config['selecteur_commun'].'";
+/* ]]> */</script>'."\n";
+	}
+	return $flux;
 }
 
 ?>

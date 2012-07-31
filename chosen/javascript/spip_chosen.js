@@ -38,7 +38,8 @@ jQuery(document).ready(function(){
 
 	/* lance Chosen sur les .chosen */
 	spip_chosen = function() {
-		$("select.chosen").chosen();
+		var selecteur = selecteur_chosen ? selecteur_chosen+',' : '';
+		$(selecteur +" select.chosen").chosen();
 		spip_chosen_title();
 		spip_chosen_table_width();
 	}
