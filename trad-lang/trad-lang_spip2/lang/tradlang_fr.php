@@ -72,6 +72,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_sauvegarde_locale' => 'Sauvegardera les fichiers dans le dossier squelette du site',
 	'explication_sauvegarde_post_edition' => 'Sauvegardera les fichiers temporaires à chaque modification de chaine de langue',
 
+	// F
+	'favoris_ses_modules' => 'Ses modules favoris',
+	'favoris_vos_modules' => 'Vos modules favoris',
+	
 	// I
 	'icone_modifier_tradlang' => 'Modifier cette chaine de langue',
 	'icone_modifier_tradlang_module' => 'Modifier ce module de langue',
@@ -305,8 +309,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_modifier' => 'Modifier',
 	'titre_page_configurer_tradlang' => 'Configuration du plugin Trad-lang',
 	'titre_page_tradlang_module' => 'Module #@id@ : @module@',
-	'titre_profil_auteur' => 'Éditer votre profil',
-	'titre_profil_autre' => 'Éditer son profil',
+	'titre_profil_auteur' => 'Éditez votre profil',
+	'titre_profil_autre' => 'Éditez son profil',
 	'titre_recherche_tradlang' => 'Chaines de langue',
 	'titre_revisions_ses' => 'Ses contributions',
 	'titre_revisions_sommaire' => 'Dernières modifications',

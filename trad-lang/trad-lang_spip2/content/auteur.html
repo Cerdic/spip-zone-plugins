@@ -26,7 +26,7 @@
 	[(#ENV{vue}|in_array{#ARRAY{0,profil}}|non)
 		<INCLURE{fond=liste/articles-auteur,id_auteur,env,ajax} />
 		[(#PLUGIN{mesfavoris}|oui)
-		[(#SET{titre,[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:mesfavoris:vos_favoris:>,<:mesfavoris:ses_favoris:>})]})]
+		[(#SET{titre,[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:tradlang:favoris_vos_modules:>,<:tradlang:favoris_ses_modules:>})]})]
 		[(#SET{bouton_ajout,[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{non,oui})]})]
 		<INCLURE{fond=inclure/mesfavoris,id_auteur=#ID_AUTEUR,titre=#GET{titre},bouton_ajout=#GET{bouton_ajout},ajax}>]
 		[(#CONFIG{objets_versions}|unserialize|is_array|?{#SET{objets_versions,#CONFIG{objets_versions}|unserialize},#SET{objets_versions,#ARRAY}})]
