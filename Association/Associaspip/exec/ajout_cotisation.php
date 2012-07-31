@@ -36,7 +36,7 @@ function exec_ajout_cotisation()
 			'voir_adherent' => array('edit-24.gif', 'voir_adherent', "id=$id_auteur"), // item de langue...
 		));
 		debut_cadre_association('annonce.gif', 'nouvelle_cotisation');
-		echo recuperer_fond('prive/editer/editer_cotisations', array (
+		echo recuperer_fond('prive/editer/ajouter_cotisation', array (
 			'id_auteur' => $id_auteur,
 			'nom_prenom' => association_calculer_nom_membre($row['sexe'], $row['prenom'], $row['nom_famille']),
 			'categorie' => $row['categorie'],

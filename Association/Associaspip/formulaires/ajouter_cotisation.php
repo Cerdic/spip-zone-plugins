@@ -17,10 +17,10 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/autoriser');
 
-function formulaires_editer_cotisations_charger_dist($id_auteur, $nom_prenom, $id_categorie, $validite)
+function formulaires_ajouter_cotisation_charger_dist($id_auteur, $nom_prenom, $id_categorie, $validite)
 {
-	/* la validite et le montant de la cotisation */
-	if ($id_categorie) { /* si le membre a une categorie */
+	// la validite et le montant de la cotisation
+	if ($id_categorie) { // si le membre a une categorie
 		$categorie = sql_fetsel('duree, cotisation', 'spip_asso_categories', "id_categorie=". intval($id_categorie));
 		list($annee, $mois, $jour) = explode('-', $validite);
 		if ($jour==0 OR $mois==0 OR $annee==0)
@@ -32,30 +32,30 @@ function formulaires_editer_cotisations_charger_dist($id_auteur, $nom_prenom, $i
 		$contexte['validite'] = date('Y-m-d');
 		$contexte['montant'] = 0;
 	}
-	/* la justification */
+	// la justification
 	$contexte['justification'] = _T('asso:nouvelle_cotisation') ." [$nom_prenom"."->membre$id_auteur]";
-	/* pour passer securiser action */
+	// pour passer securiser action
 	$contexte['_action'] = array('editer_cotisations',$id_auteur);
-	/* on passe aussi les destinations si besoin */
+	// on passe aussi les destinations si besoin
 	if ($GLOBALS['association_metas']['destinations']) {
 		$contexte['id_dest'] = '';
 		$contexte['montant_dest'] = '';
 		$contexte['unique_dest'] = '';
-		$contexte['defaut_dest'] = $GLOBALS['association_metas']['dc_cotisations']; /* ces variables sont recuperees par la balise dynamique directement dans l'environnement */
+		$contexte['defaut_dest'] = $GLOBALS['association_metas']['dc_cotisations']; // ces variables sont recuperees par la balise dynamique directement dans l'environnement
 	}
 	return $contexte;
 }
 
-function formulaires_editer_cotisations_verifier_dist($id_auteur, $nom_prenom, $categorie, $validite) {
+function formulaires_ajouter_cotisation_verifier_dist($id_auteur, $nom_prenom, $categorie, $validite) {
 	$erreurs = array();
 	if ($GLOBALS['association_metas']['comptes']) {
-		/* verifier que le montant est bien positif ou nul */
+		// verifier que le montant est bien positif ou nul
 		if ($erreur = association_verifier_montant(_request('montant')) )
 			$erreurs['montant'] = $erreur;
-		/* verifier validite et date */
+		// verifier validite de la date
 		if ($erreur = association_verifier_date(_request('date')) )
 			$erreurs['date'] = $erreur;
-		/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération, sauf si on a deja une erreur de montant */
+		// verifier si besoin que le montant des destinations correspond bien au montant de l'opération, sauf si on a deja une erreur de montant
 		if (($GLOBALS['association_metas']['destinations']) && !array_key_exists('montant', $erreurs)) {
 			include_spip('inc/association_comptabilite');
 			if ($err_dest = association_verifier_montant_destinations(_request('montant'))) {
@@ -72,18 +72,18 @@ function formulaires_editer_cotisations_verifier_dist($id_auteur, $nom_prenom, $
 	return $erreurs;
 }
 
-function formulaires_editer_cotisations_traiter_dist($id_auteur, $nom_prenom, $categorie, $validite) {
-	/* partie de code grandement inspiree du code de formulaires_editer_objet_traiter dans ecrire/inc/editer.php */
+function formulaires_ajouter_cotisation_traiter_dist($id_auteur, $nom_prenom, $categorie, $validite) {
+	// partie de code grandement inspiree du code de formulaires_editer_objet_traiter dans ecrire/inc/editer.php
 	$res = array();
 	// eviter la redirection forcee par l'action...
 	set_request('redirect');
-	$action_cotisation = charger_fonction('cotisation','action');
+	$action_cotisation = charger_fonction('ajouter_cotisation','action');
 	list($id_auteur,$err) = $action_cotisation($id_auteur);
 	if ($err OR !$id_auteur) {
 		$res['message_erreur'] = ($err?$err:_T('erreur_traite'));
 	} else {
 		$res['message_ok'] = '';
-		$res['redirect'] = generer_url_ecrire('adherents'); /* on renvoit sur la page adherents mais on perd a l'occasion d'eventuel filtres inseres avant d'arriver au formulaire de cotisation... */
+		$res['redirect'] = generer_url_ecrire('adherents'); // on renvoit sur la page adherents mais on perd a l'occasion d'eventuel filtres inseres avant d'arriver au formulaire de cotisation...
 	}
 	return $res;
 }
