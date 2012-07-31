@@ -17,7 +17,7 @@
 #SET{pasdebut,""}
 [(#ENV{debut}|?{#SET{pasdebut,"(...) "}})]
 [
-(#REM) L'extrait est encadré par des quotes et contient l'intertitre
+(#REM) L'extrait est encadrÃ© par des quotes et contient l'intertitre
 ]
 [(#GET{quote}
 	|concat{"{{{",#GET{intertitre},"}}}",#GET{pasdebut},#GET{extrait},"(...)</quote>"}

@@ -53,6 +53,14 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 	static $pass = 0;
 	$pass++;
 
+	// $GLOBALS['debut_intertitre'] et $GLOBALS['fin_intertitre']
+	// n'existent plus en SPIP 3 ?????
+	if ( !isset ( $GLOBALS['debut_intertitre'] ) ) {
+		//error_log ( 'debut_intertitre: INCONNU');
+		$GLOBALS['debut_intertitre'] = "<h3 class='mon_style_h3'>";
+		$GLOBALS['fin_intertitre'] = "</h3>";
+	}
+
 	// définition de la balise pour les titres des sections %num% sera remplacé 
 	// par la profondeur de la section
 	// les raccourcis soient remplacés par des headlines (<hx>)
@@ -62,7 +70,7 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 	// on trouve combien ajouter au level pour être dans le bon niveau de titres quand on génère la balise <hx>
 	// sinon par defaut on ajoute 2 pour garder les niveaux du script original
 	if($GLOBALS['debut_intertitre']) {
-		$find = @preg_match("/(\<h)([0-9])/",$GLOBALS['debut_intertitre'],$matches);
+		$find = preg_match( "/(\<h)([0-9])/",$GLOBALS['debut_intertitre'], $matches );
 		if($matches) {
 			$level_base = $matches[2] -1; // on déduit 1 pour être au bon niveau ensuite : ce sera 1 + nombre d'astérisques trouvées
 		}
@@ -72,8 +80,8 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 	}
 	
 	// on cherche les noms de section commençant par des * et #
-	$my_debut_intertitre=trim($debut_intertitre); //astuce des trim trouvée là : http://www.spip-contrib.net/Generation-automatique-de#forum383092
-	$my_fin_intertitre=trim($fin_intertitre);
+	$my_debut_intertitre=trim($GLOBALS['debut_intertitre']); //astuce des trim trouvée là : http://www.spip-contrib.net/Generation-automatique-de#forum383092
+	$my_fin_intertitre=trim($GLOBALS['fin_intertitre']);
 
 	// pour que les différents niveaux d'intertitres soient gérés quand on repasse sur le texte dans le cadre d'un filtre avec tableseule
 	if ($tableseule) {
@@ -90,6 +98,9 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 					$texte,
 					$matches
 	);
+	
+	//error_log ( 'debut_intertitre: '.$GLOBALS['debut_intertitre']);
+	//error_log ( 'fin_intertitre: '.$fin_intertitre);
 	
 	$table = '';
 
@@ -223,7 +234,7 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 		 */
 		$search = str_replace ("'", '\'', $matches[0][$j]);
 		
-		if ($ancre && ($pos = strpos($texte, $search)) !== false)
+		if ($ancre && $search && (($pos = strpos($texte, $search)) !== false))
 		{
 			//IntertitresTdm_log ('search: '.$search.' pos: '.$pos);
 			
@@ -240,8 +251,6 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 			$s .= substr ($texte, $pos + $len_search);
 			$texte = $s;
 		}
-		
-		
 	}
 
    //on finit la table

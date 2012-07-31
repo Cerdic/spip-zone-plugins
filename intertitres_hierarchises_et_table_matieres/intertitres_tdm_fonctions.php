@@ -3,13 +3,13 @@
  *   +----------------------------------+
  *    Nom du Filtre :    extrait_titres,extrait_emphaseforte...
  *   +----------------------------------+
- *    Date : 19 décembre 2006
- *    Auteur :  Bertrand Marne (extraction à sciencesnat point org)
+ *    Date : 19 dÃ©cembre 2006
+ *    Auteur :  Bertrand Marne (extraction Ã  sciencesnat point org)
  *   +-------------------------------------+
  *    Fonctions de ces filtres :
  *   Ces filtres extraient des infos des articles comme:
  *   Les titres de parties, les mots en emphase ou les URL
- *   Il sert à faire ressortir les éléments sémantiques (taggés
+ *   Il sert Ã  faire ressortir les Ã©lÃ©ments sÃ©mantiques (taggÃ©s
  *   par les raccourcis Spip, donc s'utilise avec #TEXTE*)
  *   +-------------------------------------+ 
  *  
@@ -32,7 +32,7 @@ function extrait_emphaseforte($texte) {
 	$key = key($matches[1]);
 	$val = current($matches[1]);
 	while(list ($key, $val) = each ($matches[1])){
-		$sortie .= "«".$val."»; ";
+		$sortie .= "Â«".$val."Â»; ";
 	};
 	return $sortie;
 }
@@ -43,7 +43,7 @@ function extrait_emphase($texte) {
 	$key = key($matches[1]);
 	$val = current($matches[1]);
 	while(list ($key, $val) = each ($matches[1])){
-		$sortie .= "«".$val."»; ";
+		$sortie .= "Â«".$val."Â»; ";
 	};
 	return $sortie;
 }
@@ -84,9 +84,9 @@ function extrait_partie ($texte,$ancre,$debut=0,$taille) {
 }
 
 function nettoie_des_modeles ($texte) {
-	//retire les modeles du plugin pour éviter les plantages circulaires
+	//retire les modeles du plugin pour Ã©viter les plantages circulaires
 	$texte=preg_replace("/<(extrait|extrait_partie|renvoi|table_des_matieres)(.*?)>/","",$texte);
-	//retire les notes du texte, pour éviter les doublons de notes !
+	//retire les notes du texte, pour Ã©viter les doublons de notes !
 	$texte=preg_replace("/(\[\[)(.*?)(\]\])/","",$texte);
 	return $texte;
 }
