@@ -22,13 +22,30 @@ function chosen_jquery_plugins($flux) {
 	return $flux;
 }
 
+/**
+ * Ajoute Chosen aux css chargées dans le privé
+ * 
+ * @param string $texte Contenu du head HTML concernant les CSS
+ * @return string       Contenu du head HTML concernant les CSS
+ */
+function chosen_header_prive($texte) {
+	$texte .= '<script type="text/javascript">/* <![CDATA[ */
+			var langue_chosen = {
+				placeholder_text_single : "'.texte_script(_T('chosen:lang_select_an_option')).'",
+				placeholder_text_multiple : "'.texte_script(_T('chosen:lang_select_some_option')).'",
+				no_results_text : "'.texte_script(_T('chosen:lang_no_result')).'"
+			}
+/* ]]> */</script>'."\n";
+
+	return $texte;
+}
 
 /**
  * Ajoute Chosen aux css chargées dans le privé
  * 
  * @param string $texte Contenu du head HTML concernant les CSS
  * @return string       Contenu du head HTML concernant les CSS
-**/
+ */
 function chosen_header_prive_css($texte) {
 
 	$css = find_in_path('lib/chosen/chosen.css');
@@ -65,6 +82,11 @@ function chosen_insert_head($flux) {
 	if ($config['active']=='oui' && strlen($config['selecteur_commun']) > 0){
 		$flux .= '<script type="text/javascript">/* <![CDATA[ */
 			var selecteur_chosen = "'.$config['selecteur_commun'].'";
+			var langue_chosen = {
+				placeholder_text_single : "'.texte_script(_T('chosen:lang_select_an_option')).'",
+				placeholder_text_multiple : "'.texte_script(_T('chosen:lang_select_some_option')).'",
+				no_results_text : "'.texte_script(_T('chosen:lang_no_result')).'",
+			}
 /* ]]> */</script>'."\n";
 	}
 	return $flux;

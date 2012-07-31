@@ -38,8 +38,9 @@ jQuery(document).ready(function(){
 
 	/* lance Chosen sur les .chosen */
 	spip_chosen = function() {
-		var selecteur = selecteur_chosen ? selecteur_chosen+',' : '';
-		$(selecteur +" select.chosen").chosen();
+		var selecteur = (typeof(selecteur_chosen) != 'undefined') ? selecteur_chosen+',' : '';
+		var options = (typeof(options_chosen) == 'object') ? $.extend(options_chosen, ((typeof(langue_chosen) == 'object') ? langue_chosen : {})) : ((typeof(langue_chosen) == 'object') ? langue_chosen : {});
+		$(selecteur +" select.chosen").chosen(options);
 		spip_chosen_title();
 		spip_chosen_table_width();
 	}
