@@ -14,14 +14,23 @@ class SympaTrustedApp {
 	}
 
 	public function InitializeSOAP(){
+
+		$this->client = null;
+		$local_wsdl = sous_repertoire(_DIR_CACHE,"wsdl").md5($this->wsdl);
+		include_spip("inc/distant");
+		recuperer_page($this->wsdl,$local_wsdl);
 		try {
-			$this->client = new SoapClient($this->wsdl,array('exceptions'=>true));
+			if ($local_wsdl AND file_exists($local_wsdl))
+				$this->client = new SoapClient($local_wsdl,array('exceptions'=>true));
     }
 		catch (Exception $e) {
 			$this->client = null;
-			$this->wsdl = false;
 			spip_log($e->getMessage(),"sympa"._LOG_ERREUR);
     }
+
+		if (!$this->client){
+			$this->wsdl = false;
+		}
 	}
 
 	#SOAP calls
@@ -29,6 +38,7 @@ class SympaTrustedApp {
 	//Adds a user to a list
 	//if $quiet, doesn't send welcome file
 	public function add($list, $mail, $quiet){
+		if (!$this->client) return false;
 		return $this->client->authenticateRemoteAppAndRun(
 			$this->username, $this->password, "USER_EMAIL=$this->USER_EMAIL",
 			'add',
@@ -37,6 +47,7 @@ class SympaTrustedApp {
 	}
 
 	public function subscribe($list, $name){
+		if (!$this->client) return false;
 		return $this->client->authenticateRemoteAppAndRun(
 			$this->username, $this->password, "USER_EMAIL=$this->USER_EMAIL",
 			'subscribe',
@@ -48,6 +59,7 @@ class SympaTrustedApp {
 	//Deletes a user from a list
 	//if $quiet, doesn't send quit notification
 	public function del($list, $mail, $quiet){
+		if (!$this->client) return false;
 		return $this->client->authenticateRemoteAppAndRun(
 			$this->username, $this->password, "USER_EMAIL=$this->USER_EMAIL",
 			'del',
@@ -56,6 +68,7 @@ class SympaTrustedApp {
 	}
 
 	public function signoff($list, $email){
+		if (!$this->client) return false;
 		return $this->client->authenticateRemoteAppAndRun(
 			$this->username, $this->password, "USER_EMAIL=$this->USER_EMAIL",
 			'signoff',
@@ -64,6 +77,7 @@ class SympaTrustedApp {
 	}
 
 	public function which($mail = false){
+		if (!$this->client) return false;
 		if ($mail===false) $mail = $this->USER_EMAIL;
 		$SoapAnswer = $this->client->authenticateRemoteAppAndRun($this->username, $this->password, "USER_EMAIL=$mail", 'which', null);
 		$i = 0;
@@ -79,6 +93,7 @@ class SympaTrustedApp {
 	}
 
 	public function complexlists($mail){
+		if (!$this->client) return false;
 		try {
 			$SoapAnswer = $this->client->authenticateRemoteAppAndRun($this->username, $this->password, "USER_EMAIL=$mail", 'complexLists', null);
 
@@ -90,6 +105,7 @@ class SympaTrustedApp {
 
 
 	public function review($list, $mail = false){
+		if (!$this->client) return false;
 		if ($mail===false) $mail = $this->USER_EMAIL;
 
 		$SoapAnswer = $this->client->authenticateRemoteAppAndRun($this->username, $this->password, "USER_EMAIL=$mail", 'review', array($list));
@@ -99,6 +115,7 @@ class SympaTrustedApp {
 
 
 	public function info($list){
+		if (!$this->client) return false;
 		try {
 			$SoapAnswer = $this->client->authenticateRemoteAppAndRun($this->username, $this->password, "USER_EMAIL=$this->USER_EMAIL", 'info', array($list));
 			return $SoapAnswer;
@@ -108,7 +125,7 @@ class SympaTrustedApp {
 	}
 
 	public function ami($list, $function, $mail){
-
+		if (!$this->client) return false;
 		return $this->client->authenticateRemoteAppAndRun($this->username, $this->password, "USER_EMAIL=$mail", 'amI', array($list, $function, $mail));
 	}
 

@@ -38,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'identifiant' => 'Identifiant',
 	'nom_domaine' => 'Nom de domaine des listes',
 	'serveur_wsdl' => 'URL du serveur wsdl',
+	'erreur_configuration_wsdl' => 'La configuration du serveur WSDL est incorrecte',
 
 	// I
 	// L

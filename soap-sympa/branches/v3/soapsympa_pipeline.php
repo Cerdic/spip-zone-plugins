@@ -23,6 +23,8 @@ function soapsympa_api_tester($serveur, $ident, $psw){
 	$retour = array();
 	try {
 		$soap = new SympaTrustedApp($serveur, $ident, $psw);
+		if (!$soap->info)
+			$retour['message_erreur'] = _T('soapsympa:erreur_configuration_wsdl');
 	} catch (SoapFault $fault) {
 		$retour['message_erreur'] .= $fault->faultstring;
 	}

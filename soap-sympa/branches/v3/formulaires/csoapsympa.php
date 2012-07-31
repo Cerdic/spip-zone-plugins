@@ -60,11 +60,15 @@ return $valeurs;
 
 function formulaires_csoapsympa_verifier_dist(){
 	$erreurs = array() ;
-	
-	if( _request('serveur_distant') != "0" ) {
+
+	foreach (array('serveur_distant','identifiant','mot_de_passe','proprietaire') as $obli){
+		if (!_request($obli))
+			$erreurs[$obli] = _T('info_obligatoire');
+	}
+
+	if (!isset($erreurs['serveur_distant'])){
 		include_spip('soapsympa_pipeline');
-		//a revoir
-		//$erreurs = soapsympa_api_tester(_request('serveur_distant'), _request('identifiant'), _request('mot_de_passe')) ;
+		$erreurs = soapsympa_api_tester(_request('serveur_distant'), _request('identifiant'), _request('mot_de_passe')) ;
 	}
 	return $erreurs;
 }
