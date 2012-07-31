@@ -435,6 +435,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
    @objet@. L&#8217;annulation est impossible ici.'
 , 'des_formats' => 'des formats'
 , 'des_listes' => 'des listes'
+, 'des_courriers' => 'des courriers'
 , 'des_abonnements' => 'des abonnements'
 , 'confirmer_supprimer_formats' => 'Supprimer les formats de r&#233;ception des abonn&#233;s.'
 , 'nettoyer_table_formats' => 'Nettoyer la table des formats.'
