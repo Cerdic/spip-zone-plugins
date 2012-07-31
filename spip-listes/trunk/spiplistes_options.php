@@ -38,8 +38,6 @@ define('_SIGNALER_ECHOS', false); // horrible
 
 define('_SPIPLISTES_PREFIX_LOG', 'MEL: ');
 
-//define('_DIR_PLUGIN_SPIPLISTES_IMG_PACK', _DIR_PLUGIN_SPIPLISTES.'img_pack/');
-
 // nombre max de chiffres ajoutes au login (creation abo)
 define('_SPIPLISTES_MAX_LOGIN_NN', 32766);
 

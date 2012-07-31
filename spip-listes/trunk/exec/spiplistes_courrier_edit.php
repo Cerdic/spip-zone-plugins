@@ -134,8 +134,8 @@ function exec_spiplistes_courrier_edit(){
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 	
-	$page_result = ""
-		. '<br class="debut-page" />'.PHP_EOL
+	$page_result = ''
+		. '<br class="debut-page" />'.$eol
 		. spiplistes_gros_titre($titre_page, '', true)
 		. barre_onglets($rubrique, $sous_rubrique)
 		. debut_gauche($rubrique, true)
@@ -147,28 +147,31 @@ function exec_spiplistes_courrier_edit(){
 		. spiplistes_boite_raccourcis(true)
 		//. spiplistes_boite_autocron() // ne pas gener l'edition
 		. pipeline('affiche_droite', array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
-		. debut_droite($rubrique, true)
 		;
-
-	$page_result .= ""
+		
+	$page_result .= debut_droite($rubrique, true);
+		
+	$page_result .= '<div id="courrier-contenu">'.$eol;
+	
+	$page_result .= ''
 		// le bloc pour apercu (retour ajax)
-		. "<div id='apercu-courrier' style='clear:both;tex-align:center'></div>\n"
+		. '<div id="apercu-courrier"></div>'.$eol
 		//
 		// debut_cadre_formulaire
 		. '<div class="cadre-formulaire">'.$eol
 		. "<a name='haut-block' id='haut-block'></a>\n"
-		// 
-		//
+		;
+		
+	$page_result .= ''
 		// bloc titre
-		. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n"
+		. "<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n"
 		. "<tr width='100%'>"
 		. "<td>"
 		. $gros_bouton_retour
-		. "</td>"
-		. "<td><img src='"._DIR_IMG_PACK."/rien.gif' width='10'></td>\n"
-		. "<td width='100%'>"
-		. ($id_courrier ? _T('spiplistes:modifier_un_courrier__') : _T('spiplistes:creer_un_courrier_') )."<br />\n"
-		. spiplistes_gros_titre($titre, '', true)
+		. '</td>'
+		. '<td id="cel-titre" width="100%">'.$eol
+		. ($id_courrier ? _T('spiplistes:modifier_un_courrier__') : _T('spiplistes:creer_un_courrier_') )
+		. '<h1>'.$titre.'</h1>'
 		. "</td>\n"
 		. "</tr></table>\n"
 		. "<hr />\n"
@@ -187,31 +190,31 @@ function exec_spiplistes_courrier_edit(){
 		// bloc sujet du courrier
 		. "<label for='sujet_courrier'>"._T('spiplistes:sujet_courrier').":</label>\n"
 		. "<input id='sujet_courrier' type='text' class='formo' name='titre' value=\"$titre\" size='40' $clearonfocus />\n"
-		. "<p style='margin-bottom:1.75em;'>"._T('spiplistes:courrier_edit_desc')."</p>\n"
+		. "<p style='margin-bottom:1.75em;'>"._T('spiplistes:courrier_edit_desc').'</p>'.$eol
 		;
 		
 	$titre_block_depliable = _T('spiplistes:generer_le_contenu');
+	$ico_loader = chemin_image ( 'ajax_indicator.gif' );
 	$page_result .= ''
 		//
 		// generer le contenu
 		// Reprise du Formulaire adapte de abomailman () // MaZiaR - NetAktiv	// tech@netaktiv.com
-		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_insert-slide.gif', true)
+		. debut_cadre_relief( chemin_image ( 'stock_insert-slide.gif' ), true)
 		//. bouton_block_invisible(md5(_T('spiplistes:charger_patron')))
 		. spiplistes_bouton_block_depliable($titre_block_depliable, false, md5(_T('spiplistes:charger_patron')))
 		. "<span class='verdana2 triangle_label' onclick=\"javascript:$('#triangle".$compteur_block."').click();\">"
 			. '</span>'.$eol
 		. spiplistes_debut_block_invisible(md5(_T('spiplistes:charger_patron')))
 		// 
-		. '<div id="ajax-loader" align="right">'
+		. '<div id="ajax-loader" align="right">'.$eol
 			. '<script type="text/javascript">'.$eol
-			. 'document.write(\'<img src="' . _DIR_PLUGIN_SPIPLISTES_IMG_PACK . 'ajax_indicator.gif" alt="" />\');'	
+			. 'document.write(\'<img src="' . $ico_loader . '" alt="" />\');'	
 			. '</script>'.$eol
 			. '<noscript>'.$eol
 			. spiplistes_boite_alerte (_T('spiplistes:javascript_inactif'), true)
 			. $eol
 			. '</noscript>'.$eol
-			//. '<img src="' . _DIR_PLUGIN_SPIPLISTES_IMG_PACK . 'ajax_indicator.gif" alt="" />'
-			. '</div>'.$eol
+		. '</div>'.$eol // #ajax-loader
 		;
 	
 	if(strpos($GLOBALS['meta']['langues_multilingue'], ",") !== false) {
@@ -351,7 +354,7 @@ function exec_spiplistes_courrier_edit(){
 	//
 	// bloc du courrier (titre, texte), toujours visible
 	$page_result .= ''
-		. '<label for="texte_courrier">'._T('spiplistes:texte_courrier').'</label>'
+		. '<label for="texte_courrier" style="display:bloc">'._T('spiplistes:texte_courrier').'</label>'
 		. afficher_barre('document.formulaire_courrier_edit.message')
 		. '<textarea id="texte_courrier" name="message" '.$GLOBALS['browser_caret'].' class="porte_plume_partout barre_inserer formo" rows="20" cols="40" wrap=soft>'.$eol
 		. $texte
@@ -366,9 +369,11 @@ function exec_spiplistes_courrier_edit(){
 		//
 		// fin formulaire
 		. '</form>'.$eol
-		// fin_cadre_formulaire
-		. '</div>'.$eol
+		. '</div>'.$eol // fin_cadre_formulaire
 		;
+	
+	$page_result .= '</div>'.$eol; // fin #courrier-contenu
+	
 	
 	echo($page_result);
 

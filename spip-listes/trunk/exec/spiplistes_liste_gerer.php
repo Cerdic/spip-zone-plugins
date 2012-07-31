@@ -497,7 +497,7 @@ function exec_spiplistes_liste_gerer () {
 		. spiplistes_gros_titre($titre_page, '', true)
 		. barre_onglets($rubrique, $sous_rubrique)
 		. debut_gauche($rubrique, true)
-		. spiplistes_boite_info_id(_T('spiplistes:liste_numero'), $id_liste, true)
+		. spiplistes_boite_info_id(_T('spiplistes:liste_numero_'), $id_liste, true)
 		. spiplistes_naviguer_paniers_listes(_T('spiplistes:aller_aux_listes_'), true)
 		. spiplistes_boite_patron($flag_editable, $id_liste, _SPIPLISTES_EXEC_LISTE_GERER, 'btn_grand_patron'
 			, _SPIPLISTES_PATRONS_DIR, _T('spiplistes:patron_grand_')

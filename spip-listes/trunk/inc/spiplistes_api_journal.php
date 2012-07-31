@@ -234,7 +234,7 @@ $(document).ready(function(){
 				, 'width': '24px'
 				, 'height': '24px'
 				, 'cursor': 'pointer'
-				, 'background': 'url(". find_in_path(_DIR_PLUGIN_SPIPLISTES_IMG_PACK . "close-24.png").") no-repeat top right'
+				, 'background': 'url(". chemin_image( 'close-24.png' ) . ") no-repeat top right'
 			});
 			
 			/*
@@ -243,7 +243,7 @@ $(document).ready(function(){
 			$('#spiplistes-log-result').css({
 				'width': 'auto'
 				, 'height': '360px'
-				, 'background': 'url(". find_in_path(_DIR_PLUGIN_SPIPLISTES_IMG_PACK . "searching.gif").") no-repeat top center'
+				, 'background': 'url(". chemin_image ( 'searching.gif' ) . ") no-repeat top center'
 			});
 			
 			/*
@@ -260,7 +260,7 @@ $(document).ready(function(){
 				'width': '12px'
 				, 'height': '12px'
 				, 'margin-left': 'auto'
-				, 'background': 'url(". find_in_path(_DIR_PLUGIN_SPIPLISTES_IMG_PACK . "reload-12.png").") no-repeat top right'
+				, 'background': 'url(". chemin_image( 'reload-12.png' ) . ") no-repeat top right'
 			});
 			$('#spiplistes-log-close').attr('title', '" . _T('spiplistes:fermer_journal'). "');
 			$('#spiplistes-log-reload-btn').attr('title', '" . _T('spiplistes:recharger_journal'). "');

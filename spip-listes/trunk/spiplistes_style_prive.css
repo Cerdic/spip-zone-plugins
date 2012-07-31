@@ -42,6 +42,17 @@ br.debut-page {margin-top:2em}
 .spiplistes .supprimer_cet_abo span {display:none}
 .spiplistes .previsu-content {background-color:#fff;border:1px solid #000;overflow:auto;width:500px;height:40em;}
 .spiplistes .previsu-edit {background-color:#fff;border:1px solid #000;}
+
+#courrier-contenu {border:1px solid #aaa;padding: 1em; background-color: #fff;width: auto}
+#courrier-contenu #cel-titre {line-height:1.0em;padding: 0 1ex;vertical-align: middle}
+#courrier-contenu #sujet_courrier {font-weight: 700; font-size: 90%}
+#courrier-contenu .entete-formulaire span img {float:left}
+#courrier-contenu #apercu-courrier {clear:both;tex-align:center}
+#courrier-contenu div.bd {padding-top; padding-bottom: 0}
+#courrier-contenu div.bd h3,
+#courrier-contenu div.bd span.titre {margin-bottom: 0;margin-top: 0}
+#courrier-contenu #texte_courrier {width:100%; margin: 0}
+
 #spiplistes_l_recherche img {margin:0;border:0;float:left;width:26px;height:20px;display:block}
 table.spiplistes-abos {	border:1px solid gray }
 table.spiplistes-abos tr.onglets { border-bottom: 10px solid #ccc;line-height:1.8em;margin-bottom:1em;padding:1em }
@@ -64,7 +75,7 @@ ul.liste-listes li .description { font-size:90%;color:gray }
 ul.liste-listes li .periodicite { font-size:90% }
 ul.liste-format, ul.liste-format-desabo { padding-left:0;margin:0;list-style:none }
 ul.liste-format li, ul.liste-format-desabo li { display:block }
-/* supprimes les <p> ajout�s aux infos par 193 */
+/* supprimes les <p> ajoutés aux infos par 193 */
 ul.meta-info-liste p { display:inline }
 /* maintenance */
 #sl-modif-fmt {

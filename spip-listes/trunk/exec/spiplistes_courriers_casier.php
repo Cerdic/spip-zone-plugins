@@ -52,7 +52,7 @@ function spiplistes_pile_messages_progr () {
 	}
 	
 	$pile_result = ''
-		. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_timer.gif', true, ''
+		. debut_cadre_enfonce( chemin_image( 'stock_timer.gif' ), true, ''
 			, _T('spiplistes:messages_automatiques').spiplistes_plugin_aide(_SPIPLISTES_EXEC_AIDE, "casier_courriers"))
 		. "\n"
 		. "<table class='spiplistes-tab' width='100%'  border='0' cellspacing='1' cellpadding='0'>\n" 

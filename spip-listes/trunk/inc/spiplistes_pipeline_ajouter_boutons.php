@@ -13,6 +13,10 @@ if(!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/spiplistes_api_globales');
 
+/**
+ * CP-20120731
+ * @deprecated
+ */
 function spiplistes_ajouterBoutons($boutons_admin) {
 
 	if($GLOBALS['connect_statut'] == "0minirezo") {
