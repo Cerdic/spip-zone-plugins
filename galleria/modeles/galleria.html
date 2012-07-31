@@ -7,9 +7,10 @@
 </BOUCLE_galleria>
 </div>
 [<p class="pagination">(#PAGINATION)</p>]
-<script>
+<script>/*<![CDATA[*/
   Galleria.loadTheme('[(#CHEMIN{galleria/themes/[(#ENV{theme, "classic"})]/galleria.[(#ENV{theme, "classic"})].min.js})]');
-  $("#galleria[(#ENV{id})]").galleria({[
+	jQuery(function(){
+		jQuery("#galleria[(#ENV{id})]").galleria({[
     autoplay: (#ENV{autoplay}),][
     carousel: (#ENV{carousel}),][
     carouselFollow: (#ENV{carouselFollow}),][
@@ -58,6 +59,7 @@
     transitionSpeed: (#ENV{transitionSpeed}),]
     width: [(#ENV{width, "750"})],
     height: [(#ENV{height, "500"})]
-  });
-</script>
+  	});
+	});
+/*]]>*/</script>
 </B_galleria>

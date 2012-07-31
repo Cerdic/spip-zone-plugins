@@ -14,7 +14,7 @@ _ [emthanh@free.fr->emthanh@free.fr]
 			[en]Image gallery with Galleria
 		</multi>
 	</slogan>
-	<version>1.1.0</version>
+	<version>1.1.1</version>
 	<icon>galleria.png</icon>
 	<etat>stable</etat>
 	<description>
@@ -61,7 +61,7 @@ ex : <code><galleria22></code> a gallery in the article 22 ; <code><galleria22|l
 | version 1.0.0 | support of the critical options |
 		</multi>
 	</description>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.2;3.0.99]" />
 	<categorie>multimedia</categorie>
 	<lien>http://www.spip-contrib.net/Galleria</lien>
 	<prefix>galleria</prefix>
