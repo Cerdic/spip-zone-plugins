@@ -24,11 +24,11 @@ function soapsympa_upgrade($nom_meta_base_version,$version_cible){
 
 function soapsympa_create(){
 	include_spip('inc/config');
-	ecrire_config('soapsympa/serveur_distant','http://listes.test.org/sympa/wsdl');
-	ecrire_config('soapsympa/remote_host','listes.test.org');
-	ecrire_config('soapsympa/identifiant','SPIP_test_org');
-	ecrire_config('soapsympa/mot_de_passe','archi@test#ORG');
-	ecrire_config('soapsympa/proprietaire','listmaster@nomdomaine.org');
+	ecrire_config('soapsympa/serveur_distant','');
+	ecrire_config('soapsympa/remote_host','');
+	ecrire_config('soapsympa/identifiant','');
+	ecrire_config('soapsympa/mot_de_passe','');
+	ecrire_config('soapsympa/proprietaire','');
 }
 
 /**

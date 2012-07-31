@@ -86,7 +86,6 @@ $config = array_merge($config, array(
 				'remote_host' => _request('remote_host'),
 				'identifiant' => _request('identifiant'),
 				'mot_de_passe' => _request('mot_de_passe'),
-				//'robot' => _request('robot'),
 				'proprietaire' => _request('proprietaire'),
 		));
 		ecrire_meta('soapsympa', serialize($config));

@@ -23,10 +23,10 @@ function soapsympa_api_tester($serveur, $ident, $psw){
 	$retour = array();
 	try {
 		$soap = new SympaTrustedApp($serveur, $ident, $psw);
-		if (!$soap->info)
+		if (!$soap -> wsdl)
 			$retour['message_erreur'] = _T('soapsympa:erreur_configuration_wsdl');
 	} catch (SoapFault $fault) {
-		$retour['message_erreur'] .= $fault->faultstring;
+		$retour['message_erreur'] = $fault->faultstring;
 	}
 	return $retour;
 }
