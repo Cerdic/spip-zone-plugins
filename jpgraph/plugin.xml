@@ -3,7 +3,7 @@
 	<slogan>Biblioth&#232;que graphique pour g&#233;n&#233;rer des graphes</slogan>
 	<auteur>Mise en plugin [erational->http://www.erational.org], Olivier Gautier</auteur>
 	<licence>QPL 1.0</licence>
-	<version>0.3.0</version>
+	<version>0.3.1</version>
 	<description>
   	Int&#233;gration de la biblioth&#232;que JpGraph, pour r&#233;aliser des graphes (histogrammes, courbes, camemberts, ...). Requiert PHP5.1 avec l'extension GD
   
@@ -14,7 +14,7 @@
 	<icon>img/jpgraph.png</icon>
 	<lien>http://www.spip-contrib.net/plugin-JpGraph</lien>
 	<fonctions>jpgraph_fonctions.php</fonctions>
-	<necessite id="SPIP" version='[2.0.0;2.1.99]' />
+	<necessite id="SPIP" version='[2.0.0;3.1.99[' />
 	<necessite id="lib:jpgraph-3.0.7" src="http://jpgraph.net/download/download.php?p=1" />
 	<categorie>multimedia</categorie>
 </plugin>
