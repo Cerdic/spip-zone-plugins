@@ -34,9 +34,9 @@ function soapsympa_api_tester($serveur, $ident, $psw){
  **/
 function soapsympa_affiche_milieu($flux){
 
-	$exec = _request('exec');
+	$exec = $flux['args']['exec'];
 
-	if (($exec=='auteur_infos') || ($exec=='auteur') || ($exec=='configurer_soapsympa') || ($exec=='soapsympa_review') || ($exec=='edition_soapsympa')){
+	if (in_array($exec,array('auteur_infos','auteur','configurer_soapsympa','soapsympa_review','edition_soapsympa'))){
 		//on récupere les réglages du plugins (clés du serveur Sympa)
 		$conf = unserialize($GLOBALS['meta']['soapsympa']);
 
