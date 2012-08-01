@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   // S
   'statut_article_importe' => 'Statut des articles import&eacute;s',
   'suivi_syndic' => 'Suivi de la syndication',
+  'site_maj' => 'Option enregistrée',
   
   // E
   'email_alerte' => 'Pr&eacute;venir par email &agrave; chaque nouvelle syndication en articles ?',

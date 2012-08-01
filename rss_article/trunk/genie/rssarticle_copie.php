@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin RSS article pour Spip 2.0
+ * Plugin RSS article pour Spip 3.0
  * Licence GPL
  * 
  *
@@ -13,23 +13,16 @@ include_spip('inc/filtres');
 include_spip('inc/distant');
 include_spip('inc/chercher_logo');
 include_spip('inc/rubriques');
+include_spip('inc/config');
 
 function genie_rssarticle_copie_dist($t){  
-  
-  // si cfg dispo, on charge les valeurs
-  if (function_exists(lire_config))  {          
-        if (lire_config('rssarticle/import_statut')=="publie")       $import_statut="publie"; else  $import_statut="prop";     
-        if (lire_config('rssarticle/mode')=="auto")       $mode_auto=true; else  $mode_auto=false;  
-        if (lire_config('rssarticle/email_alerte')=="on") $email_alerte=true; else  $email_alerte=false;
-        if (lire_config('rssarticle/copie_logo')=="on")   $copie_logo=true; else  $copie_logo=false;        
-        $email_suivi = lire_config('rssarticle/email_suivi'); 
-  } else { // sinon valeur par defaut
-        $import_statut = "prop";         // statut des articles importés: prop(proposé),publie(publié) 
-        $mode_auto=false;                // mode: manuel     
-        $email_alerte = false;           // envoi email  ?
-        $email_suivi = $GLOBALS['meta']['adresse_suivi']; // adresse de suivi editorial
-        $copie_logo = false;            // reprendre le logo du site        
-  }
+
+  // configuration (ou valeurs par defaut)    
+  if (lire_config('rssarticle/import_statut')=="publie")       $import_statut="publie"; else  $import_statut="prop";     
+  if (lire_config('rssarticle/mode')=="auto")       $mode_auto=true; else  $mode_auto=false;  
+  if (lire_config('rssarticle/email_alerte')=="on") $email_alerte=true; else  $email_alerte=false;
+  if (lire_config('rssarticle/copie_logo')=="on")   $copie_logo=true; else  $copie_logo=false;        
+  $email_suivi = lire_config('rssarticle/email_suivi'); 
   
   // autres valeurs
   $accepter_forum =	substr($GLOBALS['meta']['forums_publics'],0,3);
@@ -91,7 +84,7 @@ function genie_rssarticle_copie_dist($t){
             $auteurs= explode(", ",$a['lesauteurs']);            
             foreach ($auteurs as $k => $auteur) {                       
                  if ($current_id_auteur = rssarticle_get_id_auteur($auteur))
-                      sql_insertq( 'spip_auteurs_articles', array('id_auteur'=>$current_id_auteur, 'id_article'=>$id_article));                
+                      sql_insertq( 'spip_auteurs_liens', array('id_auteur'=>$current_id_auteur, 'id_objet'=>$id_article, 'objet'=>'article'));                
             }
             
             // tags a convertir en documents distants 
@@ -197,7 +190,7 @@ function extraire_enclosures($tags) {
 /*
 UPDATE `spip_syndic_articles` SET statut="publie";
 TRUNCATE TABLE `spip_articles`;
-TRUNCATE TABLE `spip_auteurs_articles`;
+DELETE FROM `spip_auteurs_liens` WHERE id_auteur > 1;
 DELETE FROM `spip_auteurs` WHERE id_auteur > 1; 
 */
 

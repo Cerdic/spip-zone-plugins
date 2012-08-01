@@ -52,8 +52,7 @@ function formulaires_editer_rssarticle_traiter_dist($id_syndic='new', $retour=''
      	sql_updateq('spip_syndic',array('rssarticle'=> 'non'),'id_syndic='.intval($id_syndic)); 
   }
 	
-  include_spip('inc/headers');
-  $message .= redirige_par_entete("./?exec=sites&id_syndic=$id_syndic");
+  $message = _T("rssarticle:site_maj");
 
 	return $message;
 	

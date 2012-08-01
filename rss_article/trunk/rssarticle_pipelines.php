@@ -27,23 +27,20 @@ function rssarticle_taches_generales_cron($taches_generales){
  */
 function rssarticle_affiche_milieu($flux) {
     if ($flux['args']['exec'] == 'site'){
-    // si cfg dispo, on charge les valeurs
-      if (function_exists(lire_config))  {
-        if (lire_config('rssarticle/mode')=="auto")
-            $mode_auto=true; else  $mode_auto=false;
-        }else{ // sinon valeur par defaut
-            $mode_auto=false;                // mode: manuel  
-        }
-
+        include_spip('inc/config');
+        if (lire_config('rssarticle/mode')=="auto") $mode_auto=true; else  $mode_auto=false;
+        
         if (!$mode_auto) {
             $contexte['id_syndic'] = $flux["args"]["id_syndic"];
-            $out = debut_cadre_relief(_DIR_PLUGIN_RSSARTICLE."prive/themes/spip/images/rssarticle-32.png", true, '',_T("rssarticle:activer_recopie_intro"));
+            //$out = debut_cadre_relief(_DIR_PLUGIN_RSSARTICLE."prive/themes/spip/images/rssarticle-32.png", true, '',_T("rssarticle:activer_recopie_intro"));
             $out .= "\n<div id='bloc_rssarticle'>";
             $out .= "\n". recuperer_fond('prive/contenu/rssarticle',$contexte,array('ajax'=>false));
             $out .= "\n</div>";
-            $out .= "\n". fin_cadre_relief(true);
+            //$out .= "\n". fin_cadre_relief(true);
             if ($p=strpos($flux['data'],'<!--affiche_milieu-->'))
                 $flux['data'] = substr_replace($flux['data'],$out,$p,0);
+                
+               
         }
     }
     return $flux;
