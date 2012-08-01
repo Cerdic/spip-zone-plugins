@@ -106,8 +106,6 @@ function tradlang_dir_lang(){
 		$squelettes = $dossier_squelettes ? $dossier_squelettes : 'squelettes';
 	}
 	if(!is_dir($dir_lang=_DIR_RACINE.$squelettes.'/lang')){
-		spip_log('pas de rep lang?','tradlang');
-		spip_log($squelettes.'/lang','tradlang');
 		return false;
 	}
 	return $dir_lang;
@@ -205,7 +203,7 @@ function critere_langues_preferees_dist($idb,&$boucles,$crit){
 
 function prepare_langues_preferees($serveur='') {
 	include_spip('inc/lang_liste');
-	if(isset($GLOBALS['visiteur_session']['id_auteur']) && $GLOBALS['visiteur_session']['id_auteur'] > 1){
+	if(isset($GLOBALS['visiteur_session']['id_auteur']) && $GLOBALS['visiteur_session']['id_auteur'] >= 1){
 		$langues_preferees = sql_getfetsel('langues_preferees','spip_auteurs','id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
 		if($langues_preferees && count(unserialize($langues_preferees)) > 0)
 			$langues_array = unserialize($langues_preferees);
