@@ -56,9 +56,8 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 	// $GLOBALS['debut_intertitre'] et $GLOBALS['fin_intertitre']
 	// n'existent plus en SPIP 3 ?????
 	if ( !isset ( $GLOBALS['debut_intertitre'] ) ) {
-		//error_log ( 'debut_intertitre: INCONNU');
-		$GLOBALS['debut_intertitre'] = "<h3 class='mon_style_h3'>";
-		$GLOBALS['fin_intertitre'] = "</h3>";
+		$GLOBALS['debut_intertitre'] = '<h3 class="spip">';
+		$GLOBALS['fin_intertitre'] = '</h3>';
 	}
 
 	// définition de la balise pour les titres des sections %num% sera remplacé 
