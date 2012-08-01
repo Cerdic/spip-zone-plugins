@@ -8,6 +8,7 @@
 	<description>
 	Ce plugin rajoute des raccourcis typographiques pour g&#233;rer des niveaux d'intertitres, num&#233;rot&#233;s ou non, dans Spip (Ce plugin peut r&#233;utiliser les intertitres des enluminures typographiques). Il permet aussi d&#39;ajouter dans l&#39;article, une table des mati&#232;res qui liste les intertitres contenus dans l'article gr&#226;ce &#224; un mod&#232;le. D'autres mod&#232;les permettent de se r&#233;f&#233;rer &#224; une sous-partie d'un article dans un autre article (en citant le titre, extrait ou rien).
 	</description>
+	<icon>itdm-64.png</icon>
 	<licence>GNU/GPL v2</licence>
 	<lien>http://www.spip-contrib.net/Des-intertitres-hierarchises-et</lien>
 	<options>intertitres_tdm_options.php</options>
