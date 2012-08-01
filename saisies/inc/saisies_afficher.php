@@ -185,7 +185,7 @@ function saisies_generer_vue($saisie, $env=array(), $env_obligatoire=array()){
 	$contexte = array_merge($contexte, $options);
 
 	// Si env est définie dans les options ou qu'il y a des enfants, on ajoute tout l'environnement
-	if(isset($contexte['env']) or (isset($saisie['saisies']) AND is_array($saisie['saisies']))){
+	if (isset($contexte['env']) or (isset($saisie['saisies']) AND is_array($saisie['saisies']))){
 		unset($contexte['env']);
 
 		// on sauve l'ancien environnement
@@ -222,8 +222,10 @@ function saisies_generer_vue($saisie, $env=array(), $env_obligatoire=array()){
 		}
 	}
 	// Sinon la valeur est juste celle du nom
-	else
-		$contexte['valeur'] = $env[$contexte['nom']];
+	else {
+		// certains n'ont pas de nom (fieldset)
+		$contexte['valeur'] = isset($env[$contexte['nom']]) ? $env[$contexte['nom']] : '';
+	}
 
 	// Si ya des enfants on les remonte dans le contexte
 	if (isset($saisie['saisies']) AND is_array($saisie['saisies']))
