@@ -74,6 +74,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_sauvegarde_locale' => 'Uloží súbory na stránku do priečinka "squelettes"',
 	'explication_sauvegarde_post_edition' => 'Uloží dočasné súbory vždy, keď zmeníte text jazykového reťazca',
 
+	// F
+	'favoris_ses_modules' => 'Ses modules favoris', # NEW
+	'favoris_vos_modules' => 'Vos modules favoris', # NEW
+
 	// I
 	'icone_modifier_tradlang' => 'Upraviť tento jazykový reťazec',
 	'icone_modifier_tradlang_module' => 'Upraviť tento jazykový modul',
@@ -306,8 +310,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_modifier' => 'Upraviť',
 	'titre_page_configurer_tradlang' => 'Nastavenia zásuvného modulu Trad-lang',
 	'titre_page_tradlang_module' => 'Modul #@id@ : @module@',
-	'titre_profil_auteur' => 'Upraviť profil',
-	'titre_profil_autre' => 'Upraviť jeho/jej profil',
+	'titre_profil_auteur' => 'Upraviť profil', # MODIF
+	'titre_profil_autre' => 'Upraviť jeho/jej profil', # MODIF
 	'titre_recherche_tradlang' => 'Jazykové reťazce',
 	'titre_revisions_ses' => 'Jeho/jej príspevky',
 	'titre_revisions_sommaire' => 'Posledné zmeny',

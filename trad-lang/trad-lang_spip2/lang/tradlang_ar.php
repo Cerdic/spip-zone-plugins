@@ -74,6 +74,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_sauvegarde_locale' => 'سيحفظ الملفات في مجلد squelettes في الموقع',
 	'explication_sauvegarde_post_edition' => 'سيحفظ الملفات المؤقتة لدى كل تعديل في سلسلة لغة',
 
+	// F
+	'favoris_ses_modules' => 'Ses modules favoris', # NEW
+	'favoris_vos_modules' => 'Vos modules favoris', # NEW
+
 	// I
 	'icone_modifier_tradlang' => 'تعديل سلسلة اللغة هذه',
 	'icone_modifier_tradlang_module' => 'تعديل وحدة اللغة هذه',
@@ -306,8 +310,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_modifier' => 'تعديل',
 	'titre_page_configurer_tradlang' => 'إعداد ملحق Trad-lang',
 	'titre_page_tradlang_module' => 'الوحدة #@id@ : @module@',
-	'titre_profil_auteur' => 'تحرير سيرتك',
-	'titre_profil_autre' => 'تحرير سيرته',
+	'titre_profil_auteur' => 'تحرير سيرتك', # MODIF
+	'titre_profil_autre' => 'تحرير سيرته', # MODIF
 	'titre_recherche_tradlang' => 'سلاسل اللغة',
 	'titre_revisions_ses' => 'Ses contributions', # NEW
 	'titre_revisions_sommaire' => 'أحدث التعديلات',

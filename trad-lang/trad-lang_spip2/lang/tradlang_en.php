@@ -74,6 +74,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_sauvegarde_locale' => 'Will save the files in the "squelettes" folder of the site',
 	'explication_sauvegarde_post_edition' => 'Will save temporary files each time you change a language string',
 
+	// F
+	'favoris_ses_modules' => 'Ses modules favoris', # NEW
+	'favoris_vos_modules' => 'Vos modules favoris', # NEW
+
 	// I
 	'icone_modifier_tradlang' => 'Edit this language string',
 	'icone_modifier_tradlang_module' => 'Edit this language module',
@@ -307,8 +311,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_modifier' => 'Edit',
 	'titre_page_configurer_tradlang' => 'Setup of the Trad-lang plugin',
 	'titre_page_tradlang_module' => 'Module #@id@ : @module@',
-	'titre_profil_auteur' => 'Edit your profile',
-	'titre_profil_autre' => 'Edit his profile',
+	'titre_profil_auteur' => 'Edit your profile', # MODIF
+	'titre_profil_autre' => 'Edit his profile', # MODIF
 	'titre_recherche_tradlang' => 'Language strings
 	',
 	'titre_revisions_ses' => 'His contributions',

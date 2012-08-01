@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'favoris_ses_modules' => 'Ses modules favoris',
 	'favoris_vos_modules' => 'Vos modules favoris',
-	
+
 	// I
 	'icone_modifier_tradlang' => 'Modifier cette chaine de langue',
 	'icone_modifier_tradlang_module' => 'Modifier ce module de langue',
