@@ -630,7 +630,7 @@ class Videopian {
 			self::$video->player_url = 'http://vimeo.com/moogaloop.swf?clip_id='.self::$id;
 			
 			# XML data URL
-			$file_data = 'http://www.vimeo.com/moogaloop/load/clip:'.self::$id;
+			$file_data = 'http://vimeo.com/api/v2/video/'.self::$id.'.xml';
 			self::$video->xml_url = 'http://vimeo.com/api/clip/'.self::$id.'/xml';
 			
 			# XML
