@@ -43,11 +43,14 @@
 			},
 		});
 		jQuery("#gauche").bind("click",function(event){
+			dateselectionne=Date.parse(jourj);
 			dateselectionne = dateselectionne.addDays(-1);
+
 			jourj = dateselectionne.toString('yyyy-MM-dd');
 			tabAjax();
 		});
 		jQuery("#droite").bind("click",function(event){
+			dateselectionne=Date.parse(jourj);
 			dateselectionne = dateselectionne.addDays(1);
 			jourj = dateselectionne.toString('yyyy-MM-dd');
 			tabAjax();
