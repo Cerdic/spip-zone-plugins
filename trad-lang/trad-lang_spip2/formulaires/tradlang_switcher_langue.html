@@ -10,7 +10,6 @@
 			<ul>
 		]
 		<li class="editer editer_#ENV{name}">
-		<BOUCLE_module_langue_dispo_sur(TRADLANGS tradlang_modules){module?}{id_tradlang_module?}{lang != #ENV{lang_exclue}}{fusion lang}{par lang}{0,1}>
 			<select name="#ENV{name}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]"[(#ENV{multiple}|oui) multiple="multiple" size="[(#ENV{size,10})]"] id="#ENV{name}">
 				[(#ENV{option_vide}|oui)
 				<option value="">--</option>]
@@ -27,7 +26,7 @@
 				</B_module_langue_dispo_pref>
 				<B_module_langue_dispo>
 				[(#GET{optgroup}|=={oui})<optgroup label="<:tradlang:info_langues_non_preferees|attribut_html:>">]
-				<BOUCLE_module_langue_dispo(TRADLANGS tradlang_modules){!langues_preferees}{module?}{id_tradlang_module?}{lang != #ENV{lang_exclue}}{fusion lang}{par lang}>
+				<BOUCLE_module_langue_dispo(TRADLANGS tradlang_modules){!langues_preferees}{module?}{id_tradlang_module?}{lang != #ENV{lang_exclue}}{fusion lang}{par lang}{tout}>
 					[(#ENV{multiple}|non)
 					<option value="#LANG"[(#LANG|=={#ENV{#ENV{name}}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option>]
 					[(#ENV{multiple}|oui)
@@ -36,7 +35,6 @@
 				[(#GET{optgroup}|=={oui})</optgroup>]
 				</B_module_langue_dispo>
 			</select>
-		</BOUCLE_module_langue_dispo_sur>
 		[(#ENV{titre}|oui)
 				</fieldset>
 			</li>
