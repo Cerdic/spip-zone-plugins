@@ -164,7 +164,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nous_vous_suggerons' => 'Nous vous sugg&eacute;rons :',
 'etape' => 'Eactue;tape',
 'rubrique_produit' => 'Rubrique du produit',
-'configurer_spipthelia' => 'Interface Th&eacute;lia'
+'configurer_spipthelia' => 'Interface Th&eacute;lia',
+'visualiser_commandes' => 'Visualiser mes commandes'
 
 );
 ?>

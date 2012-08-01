@@ -107,6 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message_creation_compte' => 'I set up my account to be able to order on this website',
 'mes_adresses_livraison' => 'My delivery adresses',
 'modifier_adresse_livraison' => 'Modify a delivery adress',
+'mes_identifiants' => 'My IDs',
 'libelle_adresse' => 'Adress label',
 'mdp_oublie' => 'Password lost or forgotten',
 'mdp_oublie_message' => 'Register your email to receive your password',
