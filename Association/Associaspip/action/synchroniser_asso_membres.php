@@ -22,10 +22,13 @@ function action_synchroniser_asso_membres() {
 		$where = "statut <> '5poubelle'";
 	} else {
 		$liste_statuts = array();
-		if (_request('visiteurs')) $liste_statuts[] = '6forum';
-		if (_request('redacteurs')) $liste_statuts[] = '1comite';
-		if (_request('administrateurs')) $liste_statuts[] = '0minirezo';
-		$where = sql_in("statut", $liste_statuts)." OR (statut='nouveau' AND ".sql_in("bio", $liste_statuts).")"; // cas des redacteurs jamais connectes : leur statut est dans le champ bio
+		if (_request('visiteurs'))
+			$liste_statuts[] = '6forum';
+		if (_request('redacteurs'))
+			$liste_statuts[] = '1comite';
+		if (_request('administrateurs'))
+			$liste_statuts[] = '0minirezo';
+		$where = sql_in('statut', $liste_statuts) ." OR (statut='nouveau' AND ". sql_in('bio', $liste_statuts) .')'; // cas des redacteurs jamais connectes : leur statut est dans le champ bio
 	}
 
 	if (!_request('forcer')) { // on recupere les id de tous les membres deja presents pour ne pas les traiter
@@ -35,7 +38,7 @@ function action_synchroniser_asso_membres() {
 			while ($id_membre = sql_fetch($id_membres)) {
 				$liste_membres[] = $id_membre['id_auteur'];
 			}
-			$where = '('.$where.') AND '.sql_in("id_auteur", $liste_membres, "NOT");
+			$where = '('.$where.') AND '. sql_in('id_auteur', $liste_membres, 'NOT');
 		}
 	}
 

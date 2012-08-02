@@ -1,0 +1,30 @@
+<div class="formulaire_spip formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>
+	<div class="onglet" style="text-align:center; margin:0.5em auto; width:50%;"><a href="#URL_ECRIRE{inscrits_activite}"><:asso:menu2_titre_gestion_membres:></a></div>]
+[(#ENV{editable})
+	<form method="post" action="#ENV{action}">
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
+		<h3 class="legend"><:asso:synchroniser_choix:></h3>
+		<ul>
+			<li class="editer_imp">
+				<label><:agenda:liste_inscrits:></label>
+				<div class="choix">
+					<label for="imp_oui"><:agenda:label_reponse_jyparticipe:></label>
+					<input type="checkbox" name="imp" id="imp_oui" value="oui" />
+				</div>
+				<div class="choix">
+					<label for="imp_non"><:agenda:label_reponse_jyparticipe_pas:></label>
+					<input type="checkbox" name="imp" id="imp_non" value="non" />
+				</div>
+				<div class="choix">
+					<label for="imp_nsp"><:agenda:label_reponse_jyparticipe_peutetre:></label>
+					<input type="checkbox" name="imp" id="imp_nsp" value="?" />
+				</div>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" value="<:pass_ok:>" class="submit" />
+		</p>
+	</form>
+]
+</div>
