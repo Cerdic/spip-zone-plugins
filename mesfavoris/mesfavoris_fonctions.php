@@ -60,7 +60,6 @@ function mesfavoris_critere_where($primary,$id_table,$table_objet,$objet,$type){
 }
 
 function mesfavoris_definir_type($type){
-	spip_log("type = $type",'test');
 	if($type == 'oui'){
 		return 'IN';
 	}else if($type == 'non'){
@@ -79,7 +78,6 @@ function mesfavoris_definir_type($type){
  * @return array $objets Les id des objets à éviter 
  */
 function prepare_mesfavoris($objet,$type,$server=''){
-	//spip_log($type,'test');
 	$objets_favoris = sql_select('id_objet','spip_favoris','objet='.sql_quote($objet).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
 	$objet= array();
 	while($objet = sql_fetch($objets_favoris)){
