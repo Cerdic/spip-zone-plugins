@@ -23,8 +23,12 @@ function formulaires_mesabonnes_charger_dist($type_abonnement = "subscribe")
 function formulaires_mesabonnes_verifier_dist()
 {
 	$erreurs = array();
+  
+  if (strlen(_request('nobot'))>0)
+		$erreurs['message_erreur'] = _T('rien_a_faire_ici');
+  
 	// verifier que si un email a été saisi, il est bien valide :
-	include_spip('inc/filtres');
+	include_spip('inc/filtres');  
 	if (!_request('mesabos_email'))
 		$erreurs['mesabos_email'] = _T('form_prop_indiquer_email');
 	else if (!email_valide(_request('mesabos_email')))
