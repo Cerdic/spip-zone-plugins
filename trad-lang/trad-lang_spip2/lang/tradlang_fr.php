@@ -21,6 +21,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_module' => 'Supprimer ce module',
 	'bouton_traduire' => 'Traduire',
 	'bouton_upload_langue_module' => 'Envoyer un fichier de langue',
+	'bouton_vos_favoris_oui' => 'Vos modules favoris',
+	'bouton_vos_favoris_non' => 'Vos modules non favoris',
+	'bouton_vos_favoris_tous' => 'Tous les modules',
 
 	// C
 	'cfg_form_tradlang_autorisations' => 'Les autorisations',
@@ -199,6 +202,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'menu_info_interface' => 'Affiche un lien menant vers l\'interface de traduction',
 	'menu_titre_interface' => 'Interface de traduction',
+	'message_afficher_vos_modules' => 'Afficher les modules :',
 	'message_aucun_resultat_chaine' => 'Aucun résultat correspondant à vos critères dans les chaînes de langue.',
 	'message_aucun_resultat_statut' => 'Aucune chaine ne correspond au statut demandé.',
 	'message_aucune_nouvelle_langue_dispo' => 'Ce module est disponible dans toutes les langues possibles',
@@ -231,6 +235,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_items_langue_inexistants' => '@nb@ items sont inexistants dans la langue "@langue_longue@" (@langue@).',
 	'nb_items_langue_mere' => 'La langue principale de ce module comporte @nb@ items.',
 	'notice_affichage_limite' => 'L\'affichage est limité à @nb@ chaînes de langue non traduites.',
+	'notice_aucun_module_favori_priorite' => 'Aucun module de la priorité "@priorite@" ne correspond.',
 
 	// R
 	'readme' => 'Ce plugin permet de gérer les fichiers langues',
