@@ -1,4 +1,10 @@
 <?php
+/**
+ * Plugin mesfavoris
+ * (c) 2009-2012 Olivier Sallou, Cedric Morin
+ * Distribue sous licence GPL
+ *
+ */
 
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;

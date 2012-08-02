@@ -1,12 +1,12 @@
 <?php
-/*
+/**
  * Plugin mesfavoris
  * (c) 2009-2012 Olivier Sallou, Cedric Morin
  * Distribue sous licence GPL
  *
  */
 
- if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function mesfavoris_declarer_tables_interfaces($interface){
 	// 'spip_' dans l'index de $tables_principales
@@ -18,8 +18,8 @@ function mesfavoris_declarer_tables_interfaces($interface){
 /**
  * Declaration des tables principales
  *
- * @param array $tables_principales
- * @return array
+ * @param array $tables_principales Un array de description des tables
+ * @return array $tables_principales L'Array de description complété
  */
 function mesfavoris_declarer_tables_principales($tables_principales){
 	$spip_favoris = array(
@@ -43,7 +43,7 @@ function mesfavoris_declarer_tables_principales($tables_principales){
 }
 
 /**
- * Upgrade des tables
+ * Mise à jour des tables
  *
  * @param string $nom_meta_base_version
  * @param string $version_cible
@@ -77,7 +77,7 @@ function mesfavoris_upgrade($nom_meta_base_version,$version_cible){
 
 
 /**
- * Desinstallation
+ * Desinstallation du plugin
  *
  * @param string $nom_meta_base_version
  */
