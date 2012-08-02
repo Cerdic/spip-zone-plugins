@@ -1,4 +1,11 @@
 <?php
+/**
+ * Plugin mesfavoris
+ * (c) 2009-2012 Olivier Sallou, Cedric Morin
+ * Distribue sous licence GPL
+ *
+ */
+
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -11,13 +18,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Si l'utilisateur est connecté {!mesfavoris} retourne les éléments non favoris
  * Si l'utilisateur n'est pas connecté, on retourne tout, pas de modification de la boucle
  * 
- * Ce critère est sessionné, il retournera donc un résultat différent pour chaque auteur
+ * On accepte également les paramètres suivants :
+ * {mesfavoris oui} : agit comme {mesfavoris}
+ * {mesfavoris non} : agit comme {!mesfavoris}
+ * {mesfavoris aucun} : n'agit pas du tout
+ * 
+ * Attention :ce critère est sessionné, il retournera donc un résultat différent pour chaque auteur
  * 
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
  * @return void
-**/
+ */
 function critere_mesfavoris_dist($idb,&$boucles,$crit){
 	$boucle = &$boucles[$idb];
     $id_table = $boucle->id_table;
@@ -26,16 +38,34 @@ function critere_mesfavoris_dist($idb,&$boucles,$crit){
 	$objet = objet_type($primary,$boucle->serveur);
 	$not = $crit->not;
 	
-	if(!$not && ($GLOBALS['visiteur_session']['id_auteur'] >= 1)){
-		$boucle->join['favoris'] = array("'".$boucle->id_table."'", "'id_objet'", "'".$boucle->primary."'", "'favoris.objet='.sql_quote('$objet')");
-		$boucle->from['favoris'] = 'spip_favoris';
-		$boucle->group[] = $primary;
-		$boucle->where[] = array("'='","'favoris.id_auteur'",$GLOBALS['visiteur_session']['id_auteur']);
-	}
-	else if($not && ($GLOBALS['visiteur_session']['id_auteur'] >= 1)){
-		$in =  implode(',',prepare_mesfavoris($objet,$boucle->serveur));
-		$c = "sql_in('".$id_table.'.'.$primary."','$in', '')";
-		$boucle->where[] = array("'NOT'", $c);
+	/**
+	 * On récupère un paramètre potentiel
+	 */
+	$type = !isset($crit->param[0][0]) ? "''"
+		: calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucle->id_parent);
+	
+	/**
+	 * Ce paramètre modifie principalement le $not 
+	 * ou invalide le critère
+	 */
+	if($type == "'oui'")
+		unset($not);
+	if($type == "'non'")
+		$not=true;
+
+	if($type != "'aucun'"){
+		if(!$not){
+			$boucle->join['favoris'] = array("'".$boucle->id_table."'", "'id_objet'", "'".$boucle->primary."'", "'favoris.objet='.sql_quote('$objet')");
+			$boucle->from['favoris'] = 'spip_favoris';
+			$boucle->group[] = $primary;
+			$boucle->where[] = array("'='","'favoris.id_auteur'",'$GLOBALS["visiteur_session"]["id_auteur"]');
+			spip_log($boucle->where,'test');
+		}
+		else if($not){
+			$in = "prepare_mesfavoris($objet," . '$serveur' . ")";
+			$c = "sql_in('$id_table.$primary',$in, '')";
+			$boucle->where[] = array("'NOT'", $c);
+		}
 	}
 	
 	$boucles[$idb]->descr['session'] = true;
