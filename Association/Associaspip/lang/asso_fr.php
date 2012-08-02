@@ -823,18 +823,19 @@ Commentaire: @commentaire@
 	'eti_espace_etiquettesl' => 'Espace entre &eacute;tiquettes largeur',
 	'eti_espace_etiquettesh' => 'Espace entre &eacute;tiquettes hauteur',
 	'etiquette_aucun_choix' => 'Aucun statut interne s&eacute;lectionn&eacute;',
+	'etiquette_aucune_impression' => 'Aucune &eacute;tiquette &agrave; imprimer',
+	'etiquette_fichier_telecharger' => '<a href="@fichier@">Telecharger le fichier</a>',
 	'info_doc_etiquette'=> "Cette page permet le param&eacute;trage du g&eacute;n&eacute;rateur d'&eacute;tiquettes, il permet ainsi de renseigner le g&eacute;n&eacute;rateur sur le format du papier sur lequel seront imprim&eacute;es les &eacute;tiquettes, la taille des &eacute;tiquettes ...",
 	'disposition_des_etiquettes' => 'Espace entre &eacute;tiquettes hauteur',
 	'contenu_des_etiquettes' => 'Contenu des &eacute;tiquettes',
 	'parametrage_des_etiquettes' => 'Param&eacute;trage des &eacute;tiquettes',
-	'enregistrer' => 'Enregistrer',
-	'imprimer' => 'Imprimer',
 	'info_etiquette'=>'Imprimer les &eacute;tiquettes de vos cartes de membres, de vos courriers papiers...',
 	'etiquettes'=>'&Eacute;tiquettes',
 	'titre_page_config_etiquette'=>'Param&eacute;trage des &eacute;tiquettes',
 	'membre_sans_email'=>'Uniquement les menbres sans email',
 	'format_des_pages' => 'Format des pages',
 	'marges_des_etiquettes' => 'Marge des &eacute;tiquettes',
+	'config_enregistree' => 'La configuration a &eacute;t&eacute; bien enregistr&eacute;e.',
 
 # Categories
 	# Categories : entetes

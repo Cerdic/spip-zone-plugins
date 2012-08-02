@@ -48,7 +48,7 @@ function exec_adherents()
 		icones_association(array(), $res);
 		if ( test_plugin_actif('FPDF') && test_plugin_actif('COORDONNEES') ) { // etiquettes
 			echo debut_cadre_enfonce('',true);
-			echo recuperer_fond('prive/inc_cadre_etiquette');
+			echo recuperer_fond('prive/editer/imprimer_etiquettes');
 			echo fin_cadre_enfonce(true);
 		}
 		//Filtres ID et groupe : si le filtre id est actif, on ignore le filtre groupe
