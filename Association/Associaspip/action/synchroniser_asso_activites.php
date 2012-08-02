@@ -13,7 +13,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function action_synchroniser_asso_membres() {
+function action_synchroniser_asso_activites() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$securiser_action();
