@@ -21,7 +21,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * On accepte également les paramètres suivants :
  * {mesfavoris oui} : agit comme {mesfavoris}
  * {mesfavoris non} : agit comme {!mesfavoris}
- * {mesfavoris aucun} : n'agit pas du tout
+ * {mesfavoris ignore} : n'agit pas du tout
+ * 
+ * On peu également utiliser l'écriture {mesfavoris #ENV{favs,oui}}
  * 
  * Attention :ce critère est sessionné, il retournera donc un résultat différent pour chaque auteur
  * 
@@ -36,6 +38,8 @@ function critere_mesfavoris_dist($idb,&$boucles,$crit){
 	$primary = $boucles[$idb]->primary;
 	
 	$objet = objet_type($primary,$boucle->serveur);
+	$id_table_objet = $primary;
+	$table_objet = table_objet_sql($primary);
 	$not = $crit->not;
 	
 	/**
@@ -43,35 +47,28 @@ function critere_mesfavoris_dist($idb,&$boucles,$crit){
 	 */
 	$type = !isset($crit->param[0][0]) ? "''"
 		: calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucle->id_parent);
-	
-	/**
-	 * Ce paramètre modifie principalement le $not 
-	 * ou invalide le critère
-	 */
-	if($type == "'oui'")
-		unset($not);
-	if($type == "'non'")
-		$not=true;
 
-	if($type != "'aucun'"){
-		if(!$not){
-			$boucle->join['favoris'] = array("'".$boucle->id_table."'", "'id_objet'", "'".$boucle->primary."'", "'favoris.objet='.sql_quote('$objet')");
-			$boucle->from['favoris'] = 'spip_favoris';
-			$boucle->group[] = $primary;
-			$boucle->where[] = array("'='","'favoris.id_auteur'",'$GLOBALS["visiteur_session"]["id_auteur"]');
-			spip_log($boucle->where,'test');
-		}
-		else if($not){
-			$in = "prepare_mesfavoris($objet," . '$serveur' . ")";
-			$c = "sql_in('$id_table.$primary',$in, '')";
-			$boucle->where[] = array("'NOT'", $c);
-		}
-	}
-	
+	$boucle->where[] = mesfavoris_critere_where($primary,$id_table,$table_objet,$objet,$type);
 	$boucles[$idb]->descr['session'] = true;
 	
 }
 
+function mesfavoris_critere_where($primary,$id_table,$table_objet,$objet,$type){
+	$in = "sql_in('$primary', prepare_mesfavoris($objet,$type), '')";
+	$type1 = "mesfavoris_definir_type($type)";
+	return "$type1 ? array($type1,'$primary','('.sql_get_select('zzza.$primary','$table_objet as zzza',$in,'','','','',\$connect).')'):''";
+}
+
+function mesfavoris_definir_type($type){
+	spip_log("type = $type",'test');
+	if($type == 'oui'){
+		return 'IN';
+	}else if($type == 'non'){
+		return 'NOT IN';
+	}else{
+		return false;
+	}
+}
 /**
  * Fonction de préparation du critère {!mesfavoris}
  * 
@@ -81,7 +78,8 @@ function critere_mesfavoris_dist($idb,&$boucles,$crit){
  * @param string $server Le serveur
  * @return array $objets Les id des objets à éviter 
  */
-function prepare_mesfavoris($objet,$server=''){
+function prepare_mesfavoris($objet,$type,$server=''){
+	//spip_log($type,'test');
 	$objets_favoris = sql_select('id_objet','spip_favoris','objet='.sql_quote($objet).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
 	$objet= array();
 	while($objet = sql_fetch($objets_favoris)){
