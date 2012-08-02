@@ -12,7 +12,7 @@ function socialtags_choix(){
 		$t = $service['titre'];
 		$u = $service['url'];
 		$a = $service['lesauteurs'];
-		$d = $service['descriptif'];
+		$d = isset($service['descriptif']) ? $service['descriptif'] : '';
 
 		$image = 'data:image/png;base64,'.base64_encode(file_get_contents(find_in_path('images/'.$a.'.png')));
 		//$image = find_in_path('images/'.$a.'.png');
