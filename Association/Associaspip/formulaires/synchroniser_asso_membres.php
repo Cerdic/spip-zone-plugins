@@ -20,12 +20,12 @@ function formulaires_synchroniser_asso_membres_charger_dist()
 {
 
 	// rien a charger, c'est un formulaire basique
-	$contexte['_action'] = array('synchro_asso_membres',''); // pour passer securiser action
+	$contexte['_action'] = array('synchroniser_asso_membres',''); // pour passer securiser action
 
 	return $contexte;
 }
 
-function formulaires_synchroniser_asso_membres_charger_dist()
+function formulaires_synchroniser_asso_membres_verifier_dist()
 {
 
 	$erreurs = array();
@@ -34,7 +34,7 @@ function formulaires_synchroniser_asso_membres_charger_dist()
 	return $erreurs;
 }
 
-function formulaires_synchroniser_asso_membres_traiter() {
+function formulaires_synchroniser_asso_membres_traiter_dist() {
 	$res = array();
 	$synchro = charger_fonction('synchroniser_asso_membres','action');
 	$nb_insertion = $synchro(); // la fonction action retourne le nombre d'insertion realisees

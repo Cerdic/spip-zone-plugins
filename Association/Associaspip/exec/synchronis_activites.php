@@ -23,8 +23,20 @@ function exec_synchronis_activites()
 	} else {
 		$id_evenement = intval(_request('id'));
 		onglets_association('synchroniser_asso_membres');
-		// Notice
-		echo propre(_T('asso:synchroniser_note'));
+		// INTRO : Rappel Infos Evenement
+		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement") ;
+		$infos['evenement_date_du'] = association_datefr($evenement['date_debut'],'dtstart').' '.substr($data['date_debut'],10,6);
+		$infos['evenement_date_au'] = association_datefr($evenement['date_fin'],'dtend').' '.substr($data['date_debut'],10,6);
+		$infos['evenement_lieu'] = $evenement['lieu'];
+		echo totauxinfos_intro($evenement['titre'], 'evenement', $id_evenement, $infos, 'agenda');
+		// TOTAUX : nombres d'inscrits par etat de paiement
+		$liste_libelles = $liste_effectifs = array();
+		$liste_libelles['oui'] = _T('agenda:label_reponse_jyparticipe');
+		$liste_libelles['nsp'] = _T('agenda:label_reponse_jyparticipe_peutetre');
+		$liste_libelles['non'] = _T('agenda:label_reponse_jyparticipe_pas');
+		$liste_effectifs['oui'] = sql_getfetsel('COUNT(*)', 'spip_evenements_participants', "id_evenement=$id_evenement AND reponse='oui' ");
+		$liste_effectifs['non'] = sql_getfetsel('COUNT(*)', 'spip_evenements_participants', "id_evenement=$id_evenement AND reponse='non' ");
+		$liste_effectifs['nsp'] = sql_getfetsel('COUNT(*)', 'spip_evenements_participants', "id_evenement=$id_evenement AND reponse='?' ");
 		// datation et raccourcis
 		icones_association('');
 		debut_cadre_association('reload-32.png', 'options_synchronisation');

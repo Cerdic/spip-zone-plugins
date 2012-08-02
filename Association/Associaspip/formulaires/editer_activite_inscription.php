@@ -18,7 +18,7 @@ include_spip('inc/editer');
 function formulaires_editer_activite_inscription_charger_dist($id_activite='')
 {
 	/* charger dans $contexte tous les champs de la table spip_asso_activites associes a l'id_activite passe en param */
-	$contexte = formulaires_editer_objet_charger('asso_activites', $id_activite, '', '',  generer_url_ecrire('voir_activites','id='.intval(_request('id_evenement'))), '');
+	$contexte = formulaires_editer_objet_charger('asso_activites', $id_activite, '', '',  generer_url_ecrire('inscrits_activite','id='.intval(_request('id_evenement'))), '');
 	if (!$id_activite) { /* si c'est un ajout */
 		$contexte['id_evenement'] = intval(_request('id_evenement'));
 		if ( !sql_countsel('spip_evenements', 'id_evenement='. $contexte['id_evenement']) )
@@ -70,7 +70,7 @@ function formulaires_editer_activite_inscription_verifier_dist($id_activite='')
 
 function formulaires_editer_activite_inscription_traiter_dist($id_activite='')
 {
-	return formulaires_editer_objet_traiter('asso_activites', $id_activite, '', '',  generer_url_ecrire('voir_activites','id='.intval(_request('id_evenement'))), '');
+	return formulaires_editer_objet_traiter('asso_activites', $id_activite, '', '',  generer_url_ecrire('inscrits_activite','id='.intval(_request('id_evenement'))), '');
 }
 
 ?>

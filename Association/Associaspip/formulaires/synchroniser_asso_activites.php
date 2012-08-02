@@ -19,12 +19,14 @@ include_spip('inc/autoriser');
 function formulaires_synchroniser_asso_activites_charger_dist($id_evenement='')
 {
 	// rien a charger, c'est un formulaire basique
-	$contexte['_action'] = array('synchro_asso_activites',''); // pour passer securiser action
+//	$contexte = formulaires_editer_objet_charger('evenements', $id_evenement, '', '',  generer_url_ecrire('inscrits_activite','id='.$id_evenement), '');
+	$contexte['_hidden'] .= "<input type='hidden' name='id_evenement' value='$id_evenement' />"; // passer le parametre par formulaire
+	$contexte['_action'] = array('synchroniser_asso_activites',''); // pour passer securiser action
 
 	return $contexte;
 }
 
-function formulaires_synchroniser_asso_activites_charger_dist($id_evenement='')
+function formulaires_synchroniser_asso_activites_verifier_dist($id_evenement='')
 {
 	$erreurs = array();
 	// pas de verification non plus
@@ -32,7 +34,7 @@ function formulaires_synchroniser_asso_activites_charger_dist($id_evenement='')
 	return $erreurs;
 }
 
-function formulaires_synchroniser_asso_activites_traiter($id_evenement='') {
+function formulaires_synchroniser_asso_activites_traiter_dist($id_evenement='') {
 	$res = array();
 	$synchro = charger_fonction('synchroniser_asso_activites','action');
 	$nb_insertion = $synchro(); // la fonction action retourne le nombre d'insertion realisees
