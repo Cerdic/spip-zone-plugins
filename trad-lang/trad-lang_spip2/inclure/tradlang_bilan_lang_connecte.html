@@ -7,12 +7,27 @@
 
 <p><a href="[(#SELF|parametre_url{langue_modules,''})]"><:tradlang:lien_trier_langue_non:></a></p>
 
+[(#SESSION{id_auteur}|>={1}|et{#PLUGIN{mesfavoris}|oui}|oui)
+	<div class="actions">
+		<p><:tradlang:message_afficher_vos_modules:></p>
+		[(#ENV{mesfavoris,oui}|=={oui}|non)
+		[<a href="(#SELF|parametre_url{mesfavoris,oui})" class="bouton ajax"><:tradlang:bouton_vos_favoris_oui:></a>]
+		]
+		[(#ENV{mesfavoris,oui}|=={non}|non)
+		[<a href="(#SELF|parametre_url{mesfavoris,non})" class="bouton ajax"><:tradlang:bouton_vos_favoris_non:></a>]
+		]
+		[(#ENV{mesfavoris,oui}|=={aucun}|non)
+		[<a href="(#SELF|parametre_url{mesfavoris,aucun})" class="bouton ajax"><:tradlang:bouton_vos_favoris_tous:></a>]
+		]
+	</div>
+]
 <BOUCLE_priorites(TRADLANG_MODULES){fusion priorite}>
 [(#SET{total_ok_full,0})]
 [(#SET{total_modif_full,0})]
 [(#SET{total_new_full,0})]
 [(#SET{total_chaines,0})]
 <h3 class="h3">#PRIORITE</h3>
+<B_modules_lang>
 <div class="bilan">
 <table class="spip liste tablesorter">
 	<thead>
@@ -41,7 +56,7 @@
 	</thead>
 	<B_modules_lang>
 	<tbody>
-	<BOUCLE_modules_lang(TRADLANG_MODULES){priorite}>
+	<BOUCLE_modules_lang(TRADLANG_MODULES){mesfavoris #ENV{mesfavoris,oui}}{priorite}>
 	<tr class="module #MODULE[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 		<td>[(#FORMULAIRE_FAVORI{tradlang_module,#ID_TRADLANG_MODULE}) ]<a href="[(#SELF|parametre_url{langue_modules,''}|parametre_url{id_tradlang_module,#ID_TRADLANG_MODULE})]" title="<:tradlang:lien_voir_bilan_module{module=#MODULE,nom_mod=#NOM_MOD}|attribut_html:>">[(#NOM_MOD)]</a></td>
 		<BOUCLE_compte_langue_mere(TRADLANGS){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
@@ -157,8 +172,12 @@
 		<td></td>
 	</tfoot>
 	</tbody>
-	</B_modules_lang>
 </table>
+</B_modules_lang>
+<div class="notice">
+	<:tradlang:notice_aucun_module_favori_priorite{priorite=#PRIORITE}:>
+</div>
+<//B_modules_lang>
 </B_langues_totales>
 <//B_langues_totales>
 </div>
