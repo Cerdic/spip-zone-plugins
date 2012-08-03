@@ -19,7 +19,19 @@ function tablesorter_insert_head($flux){
 	<script type="text/javascript">/* <![CDATA[ */
 	(function($){
 		$(function(){
-			var tablesorter_init = function(){$("table.spip").not(".ss_tablesort").tablesorter();}
+			var tablesorter_init = function(){
+				$("table.spip").not(".ss_tablesort").each(function(){
+					var options = {};
+					if($(this).find("th.ts_disabled").size() >= 1){
+					    $(this).find("th").each(function(index,value){
+					    	options.headers = {};
+					        if($(this).is(".ts_disabled"))
+					        	options.headers[index] = {sorter : false}; 
+					    });
+					}
+					$(this).tablesorter(options);
+				});
+			}
 			tablesorter_init();
 			onAjaxLoad(tablesorter_init);
 		});
