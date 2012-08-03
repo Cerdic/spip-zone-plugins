@@ -69,6 +69,8 @@ function &Crayons_affichage_final(&$page) {
 		list(,$crayon,$type,$champ,$id) = $reg;
 		if (_DEBUG_CRAYONS) spip_log("autoriser('modifier', $type, $id, NULL, array('champ'=>$champ))","crayons_distant");
 		if (autoriser('modifier', $type, $id, NULL, array('champ'=>$champ))) {
+			if(!isset($droits['.' . $crayon]))
+				$droits['.' . $crayon] = 0;
 			$droits['.' . $crayon]++;
 			$droits_accordes ++;
 		}
@@ -119,8 +121,9 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode='page'
 
 
 	// Est-ce que PortePlume est la ?
-	$meta_crayon = unserialize($GLOBALS['meta']['crayons']);
-	if ($meta_crayon['barretypo']) {
+	$meta_crayon = isset($GLOBALS['meta']['crayons']) ? unserialize($GLOBALS['meta']['crayons']): array();
+	$pp = '';
+	if (isset($meta_crayon['barretypo']) && $meta_crayon['barretypo']) {
 		if (function_exists('chercher_filtre')
 		AND $f = chercher_filtre('info_plugin')
 		AND $f('PORTE_PLUME','est_actif')) {

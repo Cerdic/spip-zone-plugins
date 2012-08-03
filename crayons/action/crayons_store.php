@@ -134,11 +134,11 @@ function crayons_store($options = array()) {
 	}
 	
 	// un champ invalide ... ou rien ==> on ne fait rien ! 
-	if ($return['$invalides'])
+	if (isset($return['$invalides']) && $return['$invalides'])
 		return $return;
 
 	// une quelconque erreur ... ou rien ==> on ne fait rien !
-	if ($return['$erreur'])
+	if (isset($return['$erreur']) && $return['$erreur'])
 		return $return;
 
 	// on traite toutes les modifications
