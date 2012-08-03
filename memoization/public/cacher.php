@@ -209,7 +209,8 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 
 // http://doc.spip.org/@public_cacher_dist
 function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmodified) {
-
+	$chemin_cache_session = false;
+	
 	/* compat SPIP 1.9 */
 	if (is_null($contexte) AND function_exists('nettoyer_uri'))
 		$contexte = array('uri' => nettoyer_uri());
@@ -218,12 +219,12 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 	if (!isset($memo)) {
 		include_spip('inc/memoization');
 		$cfg = @unserialize($GLOBALS['meta']['memoization']);
-		$memo = new MCache($cfg['pages'] ? $cfg['pages'] : $cfg['methode']);
+		$memo = new MCache(isset($cfg['pages']) ? $cfg['pages'] : $cfg['methode']);
 	}
 
 	/* compat SPIP 1.9 */
 	if (is_array($page) AND !isset($page['entetes']['X-Spip-Cache']))
-		$page['duree'] = $page['entetes']['X-Spip-Cache'] = $GLOBALS['delais'];
+		$page['duree'] = $page['entetes']['X-Spip-Cache'] = isset($GLOBALS['delais']) ? $GLOBALS['delais'] : null;
 
 	// Second appel, destine a l'enregistrement du cache sur le disque
 	if (isset($chemin_cache)) return creer_cache($page, $chemin_cache, $memo);
