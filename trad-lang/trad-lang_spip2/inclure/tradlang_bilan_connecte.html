@@ -79,7 +79,6 @@
 			<th><:tradlang:th_module:></th>
 			<th><:tradlang:th_langue_mere:></th>
 			<BOUCLE_langues_totales(POUR){tableau #GET{langues}}>
-			[(#SET{total_#CLE,0})]
 			<th class="lang #CLE">
 				[(#SET{langue_longue,[(#CLE|traduire_nom_langue)]})]
 				<a href="[(#SELF|parametre_url{id_tradlang_module,''}|parametre_url{langue_modules,#CLE})]" title="<:tradlang:lien_voir_bilan_lang{lang=#CLE,langue_longue=#GET{langue_longue}}|attribut_html:>">[(#CLE)]</a>
@@ -113,6 +112,9 @@
 			[(#CLE|=={#LANG_MERE}|oui)
 				[(#SET{percent,100})]
 			]
+			[(#_modules_lang:COMPTEUR_BOUCLE|=={1}|oui)
+			#SET{total_#CLE,0}
+			]
 			[(#SET{total_#CLE,[(#GET{total_#CLE}|plus{#GET{percent,0}})]})]
 			[(#SET{traduites,#TOTAL_BOUCLE})]
 			[(#SET{langue,#CLE})]
@@ -126,7 +128,7 @@
 		</BOUCLE_langue_module>
 	</tr>
 	</BOUCLE_modules_lang>
-	[(#SET{total_modules,#TOTAL_BOUCLE})]
+	[(#SET{total_modules,#GRAND_TOTAL})]
 	<tfoot>
 		<td><:tradlang:tfoot_total:></td>
 		<td></td>
