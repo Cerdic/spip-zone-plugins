@@ -99,9 +99,9 @@ function menus_charger_infos($type, $info=""){
 					foreach (array_keys($parametres) as $parametre){
 						list($balise, $attributs) = spip_xml_decompose_tag($parametre);
 						$entree['parametres'][$attributs['nom']] = array(
-							'label' => $attributs['label'] ? _T($attributs['label']) : $attributs['nom'],
-							'obligatoire' => $attributs['obligatoire'] == 'oui' ? true : false,
-							'class' => $attributs['class'] ? $attributs['class'] : ''
+							'label' => (isset($attributs['label']) && $attributs['label']) ? _T($attributs['label']) : $attributs['nom'],
+							'obligatoire' => (isset($attributs['obligatoire']) && $attributs['obligatoire'] == 'oui') ? true : false,
+							'class' => (isset($attributs['class']) && $attributs['class']) ? $attributs['class'] : ''
 						);
 					}
 				}
