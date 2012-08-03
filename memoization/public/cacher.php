@@ -280,7 +280,7 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 
 	// Si un calcul, recalcul [ou preview, mais c'est recalcul] est demande,
 	// on supprime le cache
-	if (($GLOBALS['var_mode'] OR (defined('_VAR_MODE') && _VAR_MODE)) &&
+	if (((isset($GLOBALS['var_mode']) && $GLOBALS['var_mode']) OR (defined('_VAR_MODE') && _VAR_MODE)) &&
 		(isset($_COOKIE['spip_session'])
 		|| isset($_COOKIE['spip_admin'])
 		|| @file_exists(_ACCESS_FILE_NAME))
@@ -301,7 +301,7 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 
 	// determiner la validite de la page
 	if ($page) {
-		$use_cache = cache_valide($page, $page['lastmodified']);
+		$use_cache = cache_valide($page, isset($page['lastmodified']) ? $page['lastmodified']:null);
 		// le contexte implicite n'est pas stocke dans le cache, mais il y a equivalence
 		// par le nom du cache. On le reinjecte donc ici pour utilisation eventuelle au calcul
 		$page['contexte_implicite'] = $contexte_implicite;
