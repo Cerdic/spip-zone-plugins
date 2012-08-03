@@ -293,8 +293,9 @@ class Crayon {
 
 			// petit truc crado pour mettre la barre typo si demandee
 			// pour faire propre il faudra reprogrammer la bt en jquery
-			$meta_crayon = unserialize($GLOBALS['meta']['crayons']);
-			if ($meta_crayon['barretypo']
+			$meta_crayon = isset($GLOBALS['meta']['crayons']) ? unserialize($GLOBALS['meta']['crayons']) : array();
+			if (isset($meta_crayon['barretypo'])
+			AND $meta_crayon['barretypo']
 			AND $type == 'texte') {
 				// Pas la peine de mettre cette barre si PortePlume est la
 				if (
