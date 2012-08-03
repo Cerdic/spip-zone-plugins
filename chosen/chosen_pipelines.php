@@ -63,7 +63,7 @@ function chosen_header_prive_css($texte) {
 function chosen_insert_head_css($flux) {
 	include_spip('inc/config');
 	$config = lire_config('chosen',array());
-	if ($config['active']=='oui'){
+	if (isset($config['active']) and $config['active']=='oui'){
 		$css = find_in_path('lib/chosen/chosen.css');
 		$flux .= '<link rel="stylesheet" href="'.direction_css($css).'" type="text/css" media="all" />';
 	}
@@ -79,9 +79,9 @@ function chosen_insert_head_css($flux) {
 function chosen_insert_head($flux) {
 	include_spip('inc/config');
 	$config = lire_config('chosen',array());
-	if ($config['active']=='oui' && strlen($config['selecteur_commun']) > 0){
+	if (isset($config['active']) and $config['active']=='oui') {
 		$flux .= '<script type="text/javascript">/* <![CDATA[ */
-			var selecteur_chosen = "'.$config['selecteur_commun'].'";
+			var selecteur_chosen = "' . trim($config['selecteur_commun']) . '";
 			var langue_chosen = {
 				placeholder_text_single : "'.texte_script(_T('chosen:lang_select_an_option')).'",
 				placeholder_text_multiple : "'.texte_script(_T('chosen:lang_select_some_option')).'",
