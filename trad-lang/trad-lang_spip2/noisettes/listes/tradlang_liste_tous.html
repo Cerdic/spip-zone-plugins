@@ -100,18 +100,19 @@
 </B_si_edit>
 <B_statut>
 	[(#GRAND_TOTAL|>{1}|oui)
-	<p class="filtrer"><:tradlang:info_filtrer_status:>
-	[(#ENV{statut}|oui)<a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,''}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="ajax"><:tradlang:lien_aucun_status:></a><span class="sep"> | </span>]
+	<div class="actions"><p class="filtrer"><:tradlang:info_filtrer_status:>
+	[(#ENV{statut}|oui)<a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,''}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="ajax bouton"><:tradlang:lien_aucun_status:></a><span class="sep"> | </span>]
 	[(#ENV{statut}|non)<:tradlang:lien_aucun_status:><span class="sep"> | </span>]]
 <BOUCLE_statut(TRADLANGS){module}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{fusion statut}{'<span class="sep"> | </span>'}>
 [(#GRAND_TOTAL|>{1}|oui)
-	[(#STATUT|!={#ENV{statut}}|oui)<a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,#STATUT}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="ajax">#STATUT</a>]
+	[(#STATUT|!={#ENV{statut}}|oui)<a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,#STATUT}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="ajax bouton">#STATUT</a>]
 	[(#STATUT|!={#ENV{statut}}|non)#STATUT]
 ]
 #SET{statut,#STATUT}
 </BOUCLE_statut>
 [(#GRAND_TOTAL|>{1}|oui)
-</p>]
+</p></div>]
+
 [(#REM) 
 	Si un seul statut et pas celui de l'environnement c'est qu'on aura pas de résultats après
 ]
@@ -241,7 +242,7 @@
 			<th class="statut">
 				<:tradlang:th_status:>
 			</th>
-			<th class="modifier">
+			<th class="modifier ts_disabled">
 				&nbsp;
 			</th>
 		</tr>
