@@ -23,6 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_module' => 'Delete this module',
 	'bouton_traduire' => 'Translate',
 	'bouton_upload_langue_module' => 'Upload a language file',
+	'bouton_vos_favoris_non' => 'Vos modules non favoris', # NEW
+	'bouton_vos_favoris_oui' => 'Vos modules favoris', # NEW
+	'bouton_vos_favoris_tous' => 'Tous les modules', # NEW
 
 	// C
 	'cfg_form_tradlang_autorisations' => 'Authorizations',
@@ -75,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_sauvegarde_post_edition' => 'Will save temporary files each time you change a language string',
 
 	// F
-	'favoris_ses_modules' => 'His favorites modules',
+	'favoris_ses_modules' => 'Their favorites modules',
 	'favoris_vos_modules' => 'Your favorites modules',
 
 	// I
@@ -178,14 +181,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_export' => 'Automatically export the current file.',
 	'lien_page_depart' => 'Back to the main page?',
 	'lien_profil_auteur' => 'Your profile',
-	'lien_profil_autre' => 'His profile',
+	'lien_profil_autre' => 'Their profile',
 	'lien_proportion' => 'Proportion of strings displayed',
 	'lien_recharger_page' => 'Reload the page.',
 	'lien_recherche_avancee' => 'Advanced search',
 	'lien_retour' => 'Back',
 	'lien_retour_module' => 'Back to the module "@module@"',
 	'lien_retour_page_auteur' => 'Back to your page',
-	'lien_retour_page_auteur_autre' => 'Back to his page',
+	'lien_retour_page_auteur_autre' => 'Back to their page',
 	'lien_revenir_traduction' => 'Back to the translation page',
 	'lien_sauvegarder' => 'Backup / Restore the current file.',
 	'lien_telecharger' => '[Download]',
@@ -201,6 +204,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'menu_info_interface' => 'Displays a link to the translation interface',
 	'menu_titre_interface' => 'Translation interface',
+	'message_afficher_vos_modules' => 'Afficher les modules :', # NEW
 	'message_aucun_resultat_chaine' => 'No results matching your criteria in the language strings.',
 	'message_aucun_resultat_statut' => 'No string matches the requested status.',
 	'message_aucune_nouvelle_langue_dispo' => 'This module is available in all languages',
@@ -234,6 +238,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_items_langue_inexistants' => '@nb@ items does not exists in the language "@langue_longue@" (@langue@).',
 	'nb_items_langue_mere' => 'The main language of this module includes @nb@ items.',
 	'notice_affichage_limite' => 'Only @nb@ untranslated strings are displayed.',
+	'notice_aucun_module_favori_priorite' => 'Aucun module de la priorité "@priorite@" ne correspond.', # NEW
 
 	// R
 	'readme' => 'This plugin allows you to manage the language files',
@@ -312,10 +317,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_configurer_tradlang' => 'Setup of the Trad-lang plugin',
 	'titre_page_tradlang_module' => 'Module #@id@ : @module@',
 	'titre_profil_auteur' => 'Edit your profile',
-	'titre_profil_autre' => 'Edit his profile',
+	'titre_profil_autre' => 'Edit their profile',
 	'titre_recherche_tradlang' => 'Language strings
 	',
-	'titre_revisions_ses' => 'His contributions',
+	'titre_revisions_ses' => 'Their contributions',
 	'titre_revisions_sommaire' => 'Recent changes',
 	'titre_revisions_vos' => 'Your contributions',
 	'titre_tradlang' => 'Trad-lang',

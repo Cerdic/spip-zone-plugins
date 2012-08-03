@@ -23,6 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_module' => 'Odstrániť tento modul',
 	'bouton_traduire' => 'Prekladať',
 	'bouton_upload_langue_module' => 'Poslať jazykový súbor',
+	'bouton_vos_favoris_non' => 'Vos modules non favoris', # NEW
+	'bouton_vos_favoris_oui' => 'Vos modules favoris', # NEW
+	'bouton_vos_favoris_tous' => 'Tous les modules', # NEW
 
 	// C
 	'cfg_form_tradlang_autorisations' => 'Povolenia',
@@ -201,6 +204,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'menu_info_interface' => 'Zobrazí odkaz na prekladateľské rozhranie',
 	'menu_titre_interface' => 'Prekladateľské rozhranie',
+	'message_afficher_vos_modules' => 'Afficher les modules :', # NEW
 	'message_aucun_resultat_chaine' => 'Vašim kritériám nevyhovujú v jazykových reťazcoch žiadne výsledky.',
 	'message_aucun_resultat_statut' => 'Tento stav nemá nastavený žiaden reťazec.',
 	'message_aucune_nouvelle_langue_dispo' => 'Tento modul je dostupný vo všetkých jazykoch',
@@ -233,6 +237,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_items_langue_inexistants' => 'V jazyku "@langue_longue@" (@langue@) neexistuje @nb@ položiek.',
 	'nb_items_langue_mere' => 'Hlavný jazyk tohto modulu obsahuje @nb@ položiek.',
 	'notice_affichage_limite' => 'Zobrazenie je obmedzené na @nb@ nepreložené jazykové reťazce.',
+	'notice_aucun_module_favori_priorite' => 'Aucun module de la priorité "@priorite@" ne correspond.', # NEW
 
 	// R
 	'readme' => 'Tento modul umožňuje správu jazykových súborov',

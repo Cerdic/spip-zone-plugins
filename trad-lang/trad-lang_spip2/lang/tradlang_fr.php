@@ -21,8 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_module' => 'Supprimer ce module',
 	'bouton_traduire' => 'Traduire',
 	'bouton_upload_langue_module' => 'Envoyer un fichier de langue',
-	'bouton_vos_favoris_oui' => 'Vos modules favoris',
 	'bouton_vos_favoris_non' => 'Vos modules non favoris',
+	'bouton_vos_favoris_oui' => 'Vos modules favoris',
 	'bouton_vos_favoris_tous' => 'Tous les modules',
 
 	// C

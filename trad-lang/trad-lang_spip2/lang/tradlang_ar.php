@@ -23,6 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_module' => 'حذف هذه الوحدة',
 	'bouton_traduire' => 'ترجمة',
 	'bouton_upload_langue_module' => 'إرسال ملف لغة',
+	'bouton_vos_favoris_non' => 'Vos modules non favoris', # NEW
+	'bouton_vos_favoris_oui' => 'Vos modules favoris', # NEW
+	'bouton_vos_favoris_tous' => 'Tous les modules', # NEW
 
 	// C
 	'cfg_form_tradlang_autorisations' => 'الأذونات',
@@ -201,6 +204,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'menu_info_interface' => 'يعرض رابط يقود الى واجهة الترجمة',
 	'menu_titre_interface' => 'واجهة الترجمة',
+	'message_afficher_vos_modules' => 'Afficher les modules :', # NEW
 	'message_aucun_resultat_chaine' => 'لم تسترجع معايير بحثك في سلاسل اللغة أية نتائج.',
 	'message_aucun_resultat_statut' => 'لا توجد اي سلسلة تناسب الوضعية المطلوبة.',
 	'message_aucune_nouvelle_langue_dispo' => 'هذه الوحدة متوافرة في كل اللغات الممكنة',
@@ -233,6 +237,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_items_langue_inexistants' => 'هناك @nb@ بند لا وجود لها في اللغة «@langue_longue@» (@langue@).',
 	'nb_items_langue_mere' => 'تحتوي اللغة الأساسية لهذه الوحدة على @nb@ بند.',
 	'notice_affichage_limite' => 'لا تعرض هذه الصفحة أكثر من @nb@ سلسلة نص غير مترجمة. ',
+	'notice_aucun_module_favori_priorite' => 'Aucun module de la priorité "@priorite@" ne correspond.', # NEW
 
 	// R
 	'readme' => 'يتيح هذا الملحق إدارة ملفات اللغات',
