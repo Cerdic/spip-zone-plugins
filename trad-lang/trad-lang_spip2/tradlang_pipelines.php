@@ -100,7 +100,7 @@ function tradlang_insert_head_css($flux){
  * pour éviter de bloquer ces langues dans la configuration du multilinguisme
  */
 function tradlang_pre_boucle($boucle){
-	if(($boucle->nom == 'calculer_langues_utilisees') && $boucle->id_boucle == 'tradlang'){
+	if(isset($boucle->nom) && ($boucle->nom == 'calculer_langues_utilisees') && ($boucle->id_boucle == 'tradlang')){
 		array_unshift($boucle->where,array("'='", "'$id_table." ."id_tradlang'", "'0'"));
 	}
 	return $boucle;

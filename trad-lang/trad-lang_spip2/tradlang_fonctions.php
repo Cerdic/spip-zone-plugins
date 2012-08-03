@@ -175,7 +175,7 @@ function boucle_TRADLANGS_dist($id_boucle, &$boucles) {
 		array_unshift($boucle->where,array("'NOT LIKE'", "'$id_table." ."module'", "'\"contrib\"'"));
 		array_unshift($boucle->where,array("'!='", "'$id_table." ."id'", "'\"zz_timestamp_nepastraduire\"'"));
 	}
-	if(($boucle->nom == 'calculer_langues_utilisees') && $boucle->id_boucle == 'tradlang'){
+	if(isset($boucle->nom) && ($boucle->nom == 'calculer_langues_utilisees') && $boucle->id_boucle == 'tradlang'){
 		array_unshift($boucle->where,array("'='", "'$id_table." ."id_tradlang'", "'0'"));
 	}
 	return calculer_boucle($id_boucle, $boucles);
@@ -196,7 +196,7 @@ function critere_langues_preferees_dist($idb,&$boucles,$crit){
     $id_table = $boucle->id_table;
 	$not = ($crit->not ? '' : 'NOT');
 	$primary = 'lang';
-	$c = "sql_in('".$id_table.'.'.$primary."', prepare_langues_preferees(".$boucle->serveur.")".($not=='NOT' ? "" : ",'NOT'").")";
+	$c = "sql_in('".$id_table.'.'.$primary."', prepare_langues_preferees()".($not=='NOT' ? "" : ",'NOT'").")";
 	$boucle->where[] = $c;
 	$boucles[$idb]->descr['session'] = true;
 }
