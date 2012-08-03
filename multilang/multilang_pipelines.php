@@ -3,10 +3,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Insertion dans le pipeline insert_head_css
+ * Insertion dans le pipeline insert_head_css (SPIP)
  * si on a configuré multilang pour s'insérer dans l'espace public
  *
- * @param $flux
+ * @param string $flux Le contenu du head CSS
+ * @return string $flux Le contenu du head CSS modifié
  */
 function multilang_insert_head_css($flux){
 	include_spip('inc/config');
@@ -24,10 +25,11 @@ function multilang_insert_head_css($flux){
 }
 
 /**
- * Insertion dans le pipeline insert_head_prive
+ * Insertion dans le pipeline insert_head_prive (SPIP)
  * Ajoute css et javascript dans le <head> privé
  *
- * @param string $flux Le contenu du head privé
+ * @param string $flux Le contenu du head
+ * @return string $flux Le contenu du head modifié
  */
 function multilang_insert_head_prive($flux){
 	include_spip('inc/config');
@@ -39,10 +41,11 @@ function multilang_insert_head_prive($flux){
 }
 
 /**
- * Insertion dans le pipeline insert_head
+ * Insertion dans le pipeline insert_head (SPIP)
  * si on a configuré multilang pour s'insérer dans l'espace public
  *
- * @param $flux
+ * @param string $flux Le contenu du head
+ * @return string $flux Le contenu du head modifié
  */
 function multilang_insert_head($flux){
 	include_spip('inc/config');
@@ -59,42 +62,42 @@ function multilang_insert_head($flux){
  * La fonction de modification du $flux pour l'insertion dans le head qu'il
  * soit privé ou public
  *
- * @param string $flux Le head de la page où l'on se trouve
  * @param array $config La configuration du plugin
+ * @return string $data Le contenu textuel qui sera inséré dans le head
  */
 function multilang_inserer_head($config=array()){
 	if(count($langues = explode(',',$GLOBALS["meta"]["langues_multilingue"])) > 1){
 
 		$root = '' ;
 
-		if($config['siteconfig']){
+		if(isset($config['siteconfig']) && $config['siteconfig']){
 			$root .= 'div#configurer-accueil,div.formulaire_configurer_identite' ; // Config Site
 		}
-		if($config['article']) { // Articles
+		if(isset($config['article']) && $config['article']) { // Articles
 			$root .= ',div.formulaire_editer_article';
 		}
-		if($config['breve']) { // Breves
+		if(isset($config['breve']) && $config['breve']) { // Breves
 			$root .= ',div.formulaire_editer_breve';
 		}
-		if($config['rubrique']) { // Rubriques
+		if(isset($config['rubrique']) && $config['rubrique']) { // Rubriques
 			$root .= ',div.formulaire_editer_rubrique';
 		}
-		if($config['auteur']) { // Auteurs
+		if(isset($config['auteur']) && $config['auteur']) { // Auteurs
 			$root .= ',div.formulaire_editer_auteur';
 		}
-		if($config['document']) {  // Docs dans page de presentation rubrique ou article,
+		if(isset($config['document']) && $config['document']) {  // Docs dans page de presentation rubrique ou article,
 			$root .= ',div#portfolio_portfolio,div#portfolio_documents' ;
 		}
-		if($config['site']) { // Sites
+		if(isset($config['site']) && $config['site']) { // Sites
 			$root .= ',div.formulaire_editer_site';
 		}
-		if($config['evenement']) { // Evenements
+		if(isset($config['evenement']) && $config['evenement']) { // Evenements
 			$root .= ',div.formulaire_editer_evenement';
 		}
-		if($config['motcle']) { // Mots
+		if(isset($config['motcle']) && $config['motcle']) { // Mots
 			$root .= ',div.formulaire_editer_mot,div.formulaire_editer_groupe_mot';
 		}
-		if($config['gis']) { // GIS
+		if(isset($config['gis']) && $config['gis']) { // GIS
 			$root .= ',div.formulaire_editer_gis';
 		}
 
@@ -170,40 +173,49 @@ function multilang_inserer_head($config=array()){
 	return $data;
 }
 
+/**
+ * Insertion dans le pipeline affichage_final (SPIP)
+ * 
+ * Sur la page crayons.js, on insère également notre javascript pour être utilisable
+ * dans les crayons
+ * 
+ * @param string $flux Le contenu de la page
+ * @return string $flux Le contenu de la page modifiée 
+ */
 function multilang_affichage_final($flux){
 	if($_REQUEST['page'] == 'crayons.js'){
 		$root = '' ;
 		include_spip('inc/config');
 		$config = lire_config('multilang',array());
 		if(($config['multilang_public'] == 'on') && ($config['multilang_crayons'] == 'on')){
-			if($config['siteconfig']){
+			if(isset($config['siteconfig']) && $config['siteconfig']){
 				$root .= ',input[type=hidden][name*=name_][value|=meta-valeur]';
 			}
-			if($config['article']) { // Articles
+			if(isset($config['article']) && $config['article']) { // Articles
 				$root .= ',input[type=hidden][name*=name_][value|=article]:not(input[value|=article-logo])';
 			}
-			if($config['breve']) { // Breves
+			if(isset($config['breve']) && $config['breve']) { // Breves
 				$root .= ',input[type=hidden][name*=name_][value|=breve]:not(input[value|=breve-logo])';
 			}
-			if($config['rubrique']) { // Rubriques
+			if(isset($config['rubrique']) && $config['rubrique']) { // Rubriques
 				$root .= ',input[type=hidden][name*=name_][value|=rubrique]:not(input[value|=rubrique-logo])';
 			}
-			if($config['auteur']) { // Auteurs
+			if(isset($config['auteur']) && $config['auteur']) { // Auteurs
 				$root .= ',input[type=hidden][name*=name_][value|=auteur]:not(input[value|=auteur-logo])';
 			}
-			if($config['document']) {  // Docs dans page de presentation rubrique ou article,
+			if(isset($config['document']) && $config['document']) {  // Docs dans page de presentation rubrique ou article,
 				$root .= ',input[type=hidden][name*=name_][value|=document]:not(input[value|=document-vignette])' ;
 			}
-			if($config['site']) { // Sites
+			if(isset($config['site']) && $config['site']) { // Sites
 				$root .= ',input[type=hidden][name*=name_][value|=site]';
 			}
-			if($config['evenement']) { // Evenements
+			if(isset($config['evenement']) && $config['evenement']) { // Evenements
 				$root .= ',input[type=hidden][name*=name_][value|=evenement]:not(input[value|=evenement-logo])';
 			}
-			if($config['motcle']) { // Mots
+			if(isset($config['motcle']) && $config['motcle']) { // Mots
 				$root .= ',input[type=hidden][name*=name_][value|=mot]:not(input[value|=mot-logo])';
 			}
-			if($config['gis']) { // GIS
+			if(isset($config['gis']) && $config['gis']) { // GIS
 				$root .= ',input[type=hidden][name*=name_][value|=gis]:not(input[value|=gis-logo])';
 			}
 			$texte = '
