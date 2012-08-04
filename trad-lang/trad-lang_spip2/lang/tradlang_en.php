@@ -24,8 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_traduire' => 'Translate',
 	'bouton_upload_langue_module' => 'Upload a language file',
 	'bouton_vos_favoris_non' => 'Vos modules non favoris', # NEW
-	'bouton_vos_favoris_oui' => 'Vos modules favoris', # NEW
-	'bouton_vos_favoris_tous' => 'Tous les modules', # NEW
+	'bouton_vos_favoris_oui' => 'Your favorite modules',
+	'bouton_vos_favoris_tous' => 'All the modules',
 
 	// C
 	'cfg_form_tradlang_autorisations' => 'Authorizations',
@@ -204,7 +204,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'menu_info_interface' => 'Displays a link to the translation interface',
 	'menu_titre_interface' => 'Translation interface',
-	'message_afficher_vos_modules' => 'Afficher les modules :', # NEW
+	'message_afficher_vos_modules' => 'Show modules:',
 	'message_aucun_resultat_chaine' => 'No results matching your criteria in the language strings.',
 	'message_aucun_resultat_statut' => 'No string matches the requested status.',
 	'message_aucune_nouvelle_langue_dispo' => 'This module is available in all languages',
