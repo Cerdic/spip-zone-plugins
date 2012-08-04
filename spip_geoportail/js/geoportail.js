@@ -135,7 +135,7 @@ jQuery.geoportail =
 			// Afficher les documents associes
 			var k;
 			for (k = 0; k < carte.doc.length; k++)
-				this.addLayer(carte, carte.doc[k]['extension'], carte.doc[k]['id_document'], carte.doc[k]['titre'], carte.doc[k]['fichier'], carte.doc[k]['nozoom']);
+				this.addLayer(carte, carte.doc[k]['extension'], carte.doc[k]['id_document'], carte.doc[k]['titre'], carte.doc[k]['fichier'], carte.doc[k]['nozoom'], { spipStyle:carte.doc[k]['options'] } );
 			// Afficher des images
 			if (carte.img.length) 
 			{	// Style de la couche
@@ -371,8 +371,8 @@ jQuery.geoportail =
 	},
 
 	// Ajouter un nouveau document a afficher
-	addDoc: function(id_map, ext, id_document, titre, fic, nozoom) {
-		ext = ext.toUpperCase();
+	addDoc: function(id_map, ext, id_document, titre, fic, nozoom, opts) 
+	{	ext = ext.toUpperCase();
 		// Verifier OK
 		if (ext != 'GPX' && ext != 'KML' && ext != 'GXT') return;
 		// &amp; => & (sinon on les code 2 fois)
@@ -380,7 +380,7 @@ jQuery.geoportail =
 		// Ajouter
 		var carte = this.getCarte(id_map);
 		if (carte) {
-			carte.doc[carte.doc.length] = { extension: ext, titre: titre, id_document: id_document, fichier: fic, nozoom: nozoom };
+			carte.doc[carte.doc.length] = { extension: ext, titre: titre, id_document: id_document, fichier: fic, nozoom: nozoom, options:opts };
 		}
 	},
 
@@ -496,7 +496,7 @@ jQuery.geoportail =
 	*/
 	addLayer: function(carte, type, id_document, name, url, nozoom, opts) 
 	{	// Recherche des styles dans le css
-		function setStyle(style, id) 
+		function setStyle(style, id, opts) 
 		{	var stl = jQuery('#'+id);
 			if (!stl.length) stl = jQuery("<div id='"+id+"'></div>").appendTo("body").hide();
 			style.defaultStyle = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
@@ -507,6 +507,11 @@ jQuery.geoportail =
 			style.defaultStyle.strokeColor = stl.css('borderBottomColor');
 			style.defaultStyle.strokeDashstyle = stl.css('borderBottomStyle').replace('ted', '').replace('ed', '');
 			style.defaultStyle.opacity = 1;
+			if (opts)
+			{	if (opts.color) style.defaultStyle.strokeColor = opts.color;
+				if (opts.style) style.defaultStyle.strokeDashstyle = opts.style;
+				if (Number(opts.width)) style.defaultStyle.strokeWidth = Number(opts.width);
+			}
 		}
 
 		var map = carte.map;
@@ -524,7 +529,7 @@ jQuery.geoportail =
 		}
 		if (l) 
 		{	// Recherche des styles
-			setStyle(l.styleMap.styles['default'], 'geoportailDefaultStyle');
+			setStyle(l.styleMap.styles['default'], 'geoportailDefaultStyle', opts.spipStyle);
 			setStyle(l.styleMap.styles['select'], 'geoportailSelectStyle');
 			
 			// Permettre la selection du layer
