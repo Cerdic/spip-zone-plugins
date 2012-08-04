@@ -7,10 +7,11 @@
 <form method='post' action='#ENV{action}'>
 <div class="abonnement">
 #ACTION_FORMULAIRE{#ENV{action}}
-<p class="abonne"><:soapsympa:listes_abonne:></p>
+
 	<B_abo>
-	<table id="abonnees" border="1" cellpadding="5">
-	<tr>
+	<table id="abonnees" class="spip" summary="<:soapsympa:listes_abonne:>" cellpadding="5">
+	<caption><:soapsympa:listes_abonne:></caption>
+	<tr class="row_first">
 	 <th> <:soapsympa:adresse_liste:></th>
 	 <th><:soapsympa:statut:></th>
 	 <th>  </th>
@@ -30,11 +31,11 @@
 	</B_abo>
 
 
-<p class="nonabonne"><:soapsympa:listes_nonabonne:></p>
+
 	<B_nonabo>
-	<table id="nonabonnees" border="1" cellpadding="5">
-	
-	<tr>
+	<table class="spip" id="nonabonnees" cellpadding="5">
+	    <caption><:soapsympa:listes_nonabonne:></caption>
+	<tr class="row_first">
 	 <th> <:soapsympa:adresse_liste:></th>
 
 	 <th>  </th>

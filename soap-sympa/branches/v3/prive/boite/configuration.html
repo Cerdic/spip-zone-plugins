@@ -1,12 +1,9 @@
-[(#SET{identifiant,soapsympa_conf})]
-[(#SET{icone,[(#CHEMIN{images/soapsympa-24.png}|url_absolue)]})]
-
-[(#VAL{e}|debut_cadre{#GET{icone},'',[(#VAL{<:soapsympa:liste_des_listes:>})]})]
-
+#BOITE_OUVRIR{'','info'}
 
 <div id="soapsympa">
-<table id="abonnees" border="1" cellpadding="5">
-<tr>
+<table class="spip" summary="<:soapsympa:liste_des_listes:>" id="abonnees" cellpadding="5">
+<caption><:soapsympa:liste_des_listes:></caption>
+<tr class="row_first">
  <th> <:soapsympa:adresse_liste:></th>
 <th> <:soapsympa:description_liste:></th>
  <th> <:soapsympa:action:> </th>
@@ -22,5 +19,5 @@
 </table>
 
 </div>
-[(#VAL{e}|fin_cadre)]
+#BOITE_FERMER
 
