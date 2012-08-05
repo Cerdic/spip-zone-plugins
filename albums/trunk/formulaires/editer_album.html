@@ -1,3 +1,10 @@
+[(#REM)
+	Formulaire de création/édition d'un album
+][(#REM)
+	Inclus dans /prive/squelettes/contenu/albums_complement_objet.html
+	Inclus dans /prive/squelettes/contenu/albums_complement_objet.html
+]
+
 <div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_album,nouveau}'>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -5,45 +12,32 @@
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}' name='formulaire_editer_album' id='formulaire_editer_album'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		
-		#SET{associer_objet,#EVAL{_request('associer_objet');}}
-		
-		[<!--(#REM) uniquement si new=oui et associer_objet present dans l'environnement -->]
-		[(#EVAL{_request('new')}|=={oui}|et{#GET{associer_objet,non}|!={non}}|oui)
-			[(#SAISIE{hidden,statut,valeur=publie})]
-		]
-		[<!--(#REM) uniquement si associer_objet present dans l'environnement -->]
-		[(#GET{associer_objet,non}|!={non}|oui)
-			[(#SAISIE{hidden, associer_objet, valeur=#GET{associer_objet}})]
-		]
-		[(#SAISIE{hidden, id_album, valeur=#ENV{id_album}})]
-		
+		<input type='hidden' name='id_album' value='#ENV{id_album}' />
 		<ul>
-		[<!--(#REM) si 'associer_objet' dans l'environnement et option activée dans config, on definit un titre par defaut -->]
-		[(#CONFIG{albums/utiliser_titre_defaut}|et{#GET{associer_objet}}|oui) 
-		#SET{tableau_associer, #GET{associer_objet}|explode{'|'}}
-		#SET{objet,#GET{tableau_associer}|table_valeur{0}}
-		#SET{id_objet,#GET{tableau_associer}|table_valeur{1}}
-		#SET{titre_defaut,#GET{objet}|champ{titre,#GET{id_objet}}}
-		]
-		[<!--(#REM) Titre -->]
-		[(#SAISIE{input, titre, 
-			label=<:album:label_titre:>, 
-			obligatoire=oui,
-			defaut=#GET{titre_defaut}})]
-		[<!--(#REM) Catégorie -->]
-		[(#CONFIG{albums/afficher_champ_categorie}|oui)
-			[(#SAISIE{input, categorie, 
-			label=<:album:label_categorie:>})]
-		]
-		[<!--(#REM) Descriptif -->]
-		[(#CONFIG{albums/afficher_champ_descriptif}|oui)
-			[(#SAISIE{textarea, descriptif, 
-			label=<:album:label_descriptif:>, 
-			rows=4})]
-		]	
+
+			[(#REM) un lien à prendre en compte ? -> statut=publie ]
+			[(#ENV{associer_objet}|oui)
+				[(#SAISIE{hidden,statut,valeur=publie})]
+			]
+
+			[(#REM) Titre, si l'option est activée dans la config, on définit un titre par defaut ]
+			[(#CONFIG{albums/utiliser_titre_defaut}|oui)
+				#SET{titre_defaut,#INFO_TITRE{#ENV{objet},#ENV{id_objet}}}
+			]
+			[(#SAISIE{input, titre, 
+				label=<:album:label_titre:>, 
+				obligatoire=oui,
+				defaut=#GET{titre_defaut}})]
+
+			[(#REM) Descriptif ]
+			[(#CONFIG{albums/afficher_champ_descriptif}|oui)
+				[(#SAISIE{textarea, descriptif, 
+				label=<:album:label_descriptif:>, 
+				rows=4})]
+			]
+
 		</ul>
-		
+
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class='boutons'[ style="direction: (#LANG_DIR|=={ltr}|?{rtl,ltr})"]>
