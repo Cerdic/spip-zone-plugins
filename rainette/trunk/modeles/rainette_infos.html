@@ -1,4 +1,9 @@
 [(#REM)<!-- 
-	Afficher les informations generales de la ville de code #ENV{code} avec le sous-modele #ENV{sous_modele}
+	Afficher les informations generales
+	- du lieu de code #ENV{code}
+	- avec le sous-modele #ENV{sous_modele}
+	- en utilisant le service #ENV{service}
  -->]
-[(#ENV{code}|rainette_coasse_infos{#ENV{sous_modele,infos_ville}})]
+[(#ENV{code}|rainette_coasse_infos{
+				#ENV{sous_modele,infos_ville},
+				#ENV{service, weather}})]

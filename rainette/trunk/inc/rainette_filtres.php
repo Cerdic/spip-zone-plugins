@@ -6,7 +6,6 @@
  * @param string chemin
  * @param string extension
  * @return string image correspondant au code de temps
- * @author Pierre Basson
  **/
 # cf pour le choix des icones http://liquidweather.net/icons.php
 function rainette_icone_meteo($code_icon, $taille='petit', $chemin='', $extension="png"){
@@ -86,10 +85,12 @@ function rainette_afficher_unite($valeur, $type_valeur=''){
  * @param string $lieu
  * @param int $nb_jours_affiche
  * @return string
- * @author Cedric Morin
  */
-function rainette_coasse_previsions($lieu, $type='x_jours', $jour=0, $modele='previsions_24h'){
-	include_spip('inc/rainette_utils');
+function rainette_coasse_previsions($lieu, $type='x_jours', $jour=0, $modele='previsions_24h', $service='weather'){
+
+	// En fonction du service, on inclut le fichier des fonctions
+	// Le principe est que chaque service propose la même liste de fonctions d'interface dans un fichier unique
+	include_spip("services/${service}_utils");
 
 	if ($type == '1_jour') {
 		$jour = min($jour, _RAINETTE_JOURS_PREVISION-1);
@@ -135,9 +136,11 @@ function rainette_coasse_conditions($lieu, $modele='conditions_tempsreel', $serv
 	// Le principe est que chaque service propose la même liste de fonctions d'interface dans un fichier unique
 	include_spip("services/${service}_utils");
 
+	// Recuperation du tableau des conditions courantes
 	$nom_fichier = charger_meteo($lieu, 'conditions');
 	lire_fichier($nom_fichier,$tableau);
 	$tableau = unserialize($tableau);
+
 	// On ajoute le lieu et le service au contexte fourni au modele
 	$tableau['code'] = $lieu;
 	$tableau['service'] = $service;
@@ -146,12 +149,20 @@ function rainette_coasse_conditions($lieu, $modele='conditions_tempsreel', $serv
 	return $texte;
 }
 
-function rainette_coasse_infos($lieu, $modele='infos_ville'){
-	include_spip('inc/rainette_utils');
+function rainette_coasse_infos($lieu, $modele='infos_ville', $service='weather'){
+	// En fonction du service, on inclut le fichier des fonctions
+	// Le principe est que chaque service propose la même liste de fonctions d'interface dans un fichier unique
+	include_spip("services/${service}_utils");
 
+	// Recuperation du tableau des conditions courantes
 	$nom_fichier = charger_meteo($lieu, 'infos');
 	lire_fichier($nom_fichier,$tableau);
 	$tableau = unserialize($tableau);
+
+	// On ajoute le lieu et le service au contexte fourni au modele
+	$tableau['code'] = $lieu;
+	$tableau['service'] = $service;
+
 	$texte = recuperer_fond("modeles/$modele", $tableau);			
 	return $texte;
 }
