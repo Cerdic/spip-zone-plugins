@@ -782,12 +782,12 @@ Cet outil est compatible avec : « [.->sommaire] ».',
 	'titres_typo:nom' => 'Intertitres en image',
 	'tous' => 'Tous',
 	'toutes_couleurs' => 'Les 36 couleurs des styles css :@_CS_EXEMPLE_COULEURS@',
-	'toutmulti:aide' => 'Blocs multilingues : <b><:trad:></b>',
-	'toutmulti:description' => 'À l\'instar de ce vous pouvez déjà faire dans vos squelettes, cet outil vous permet d\'utiliser librement les chaînes de langues (de SPIP ou de vos squelettes) dans tous les contenus de votre site (articles, titres, messages, etc.) à l\'aide du raccourci <code><:chaine:></code>.
+	'toutmulti:aide' => 'Blocs multilingues : <b><:ma_chaine:></b>',
+	'toutmulti:description' => 'À l\'instar de ce vous pouvez déjà faire dans vos squelettes, cet outil vous permet d\'utiliser librement les chaînes de langues (de SPIP ou de vos squelettes) dans tous les contenus de votre site (articles, titres, messages, etc.) à l\'aide du raccourci <code><:</code><code>ma_chaine:></code>.
 
 Consultez [ici ->http://www.spip.net/fr_article2128.html] la documentation de SPIP à ce sujet.
 
-Cet outil accepte également les arguments introduits par SPIP 2.0. Par exemple, le raccourci <code><:ma_chaine{nom=Charles Martin, age=37}:></code> permet de passer deux paramètres à la chaîne suivante : <code>\'ma_chaine\'=>"Bonjour, je suis @nom@ et j\'ai @age@ ans"</code>.
+Cet outil accepte également les arguments introduits par SPIP 2.0. Par exemple, le raccourci <code><:</code><code>ma_chaine{nom=Charles Martin, age=37}:></code> permet de passer deux paramètres à la chaîne suivante : <code>\'ma_chaine\'=>"Bonjour, je suis @nom@ et j\'ai @age@ ans"</code>.
 
 La fonction SPIP utilisée en PHP est <code>_T(\'chaine\')</code> sans argument, et  <code>_T(\'chaine\', array(\'arg1\'=>\'un texte\', \'arg2\'=>\'un autre texte\'))</code> avec arguments.
 
