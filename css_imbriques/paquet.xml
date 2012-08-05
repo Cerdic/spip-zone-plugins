@@ -1,0 +1,18 @@
+<paquet
+	prefix="css_imbriques"
+	categorie="outil"
+	version="3.0.0"
+	documentation="http://www.paris-beyrouth.org/tutoriaux-spip/article/plugin-spip-pre-processeur-de-css"
+	etat="stable"
+	compatibilite="[3.0.0;3.*]"
+>	
+	<nom>CSS imbriqu&#233;s</nom>
+
+	<auteur lien="http://www.paris-beyrouth.org">ARNO*</auteur>
+	<licence lien="http://www.gnu.org/licenses/lgpl.html">GNU/LGPL</licence>
+
+	<chemin path="/" />
+
+</paquet>
+
+
