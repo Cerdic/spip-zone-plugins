@@ -42,6 +42,12 @@ function cs_lien($lien, $texte='') {
 // filtre pour ajouter un <span> autour d'un texte
 function cs_span($texte, $attr='') { return "<span $attr>$texte</span>"; }
 
+// raccourci pour afficher le statut d'un auteur
+function cs_auteur_statut($row) {
+	$puce_statut = charger_fonction('puce_statut', 'inc');
+	return $puce_statut(0, $row['statut'], 0, 'auteur');
+}
+
 // Controle (basique!) des 3 balises usuelles p|div|span eventuellement coupees
 // Attention : simple traitement pour des balises non imbriquees
 function cs_safebalises($texte) {
