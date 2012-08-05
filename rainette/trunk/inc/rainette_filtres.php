@@ -83,18 +83,18 @@ function rainette_afficher_unite($valeur, $type_valeur=''){
  * Charger le fichier des infos meteos jour par jour
  * et rendre l'affichage pour les N premiers jours
  *
- * @param string $code_meteo
+ * @param string $lieu
  * @param int $nb_jours_affiche
  * @return string
  * @author Cedric Morin
  */
-function rainette_coasse_previsions($code_meteo, $type='x_jours', $jour=0, $modele='previsions_24h'){
+function rainette_coasse_previsions($lieu, $type='x_jours', $jour=0, $modele='previsions_24h'){
 	include_spip('inc/rainette_utils');
 
 	if ($type == '1_jour') {
 		$jour = min($jour, _RAINETTE_JOURS_PREVISION-1);
 		
-		$nom_fichier = charger_meteo($code_meteo, 'previsions');
+		$nom_fichier = charger_meteo($lieu, 'previsions');
 		lire_fichier($nom_fichier,$tableau);
 		$tableau = unserialize($tableau);
 		// Si jour=0 (aujourd'hui), on complete par le tableau du lendemain matin
@@ -117,7 +117,7 @@ function rainette_coasse_previsions($code_meteo, $type='x_jours', $jour=0, $mode
 		if ($jour == 0) $jour = _RAINETTE_JOURS_PREVISION;
 		$jour = min($jour, _RAINETTE_JOURS_PREVISION);
 		
-		$nom_fichier = charger_meteo($code_meteo, 'previsions');
+		$nom_fichier = charger_meteo($lieu, 'previsions');
 		lire_fichier($nom_fichier,$tableau);
 		$tableau = unserialize($tableau);
 		$texte = "";
@@ -129,21 +129,27 @@ function rainette_coasse_previsions($code_meteo, $type='x_jours', $jour=0, $mode
 	return $texte;
 }
 
-function rainette_coasse_conditions($code_meteo, $modele='conditions_tempsreel'){
-	include_spip('inc/rainette_utils');
+function rainette_coasse_conditions($lieu, $modele='conditions_tempsreel', $service='weather'){
 
-	$nom_fichier = charger_meteo($code_meteo, 'conditions');
+	// En fonction du service, on inclut le fichier des fonctions
+	// Le principe est que chaque service propose la même liste de fonctions d'interface dans un fichier unique
+	include_spip("services/${service}_utils");
+
+	$nom_fichier = charger_meteo($lieu, 'conditions');
 	lire_fichier($nom_fichier,$tableau);
 	$tableau = unserialize($tableau);
-	$tableau['code'] = $code_meteo;
-	$texte = recuperer_fond("modeles/$modele", $tableau);			
+	// On ajoute le lieu et le service au contexte fourni au modele
+	$tableau['code'] = $lieu;
+	$tableau['service'] = $service;
+
+	$texte = recuperer_fond("modeles/$modele", $tableau);
 	return $texte;
 }
 
-function rainette_coasse_infos($code_meteo, $modele='infos_ville'){
+function rainette_coasse_infos($lieu, $modele='infos_ville'){
 	include_spip('inc/rainette_utils');
 
-	$nom_fichier = charger_meteo($code_meteo, 'infos');
+	$nom_fichier = charger_meteo($lieu, 'infos');
 	lire_fichier($nom_fichier,$tableau);
 	$tableau = unserialize($tableau);
 	$texte = recuperer_fond("modeles/$modele", $tableau);			
