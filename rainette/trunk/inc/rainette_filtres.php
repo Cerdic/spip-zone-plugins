@@ -88,7 +88,7 @@ function rainette_afficher_unite($valeur, $type_valeur=''){
  * @return string
  * @author Cedric Morin
  */
-function rainette_croaaaaa_previsions($code_meteo, $type='x_jours', $jour=0, $modele='previsions_24h'){
+function rainette_coasse_previsions($code_meteo, $type='x_jours', $jour=0, $modele='previsions_24h'){
 	include_spip('inc/rainette_utils');
 
 	if ($type == '1_jour') {
@@ -129,7 +129,7 @@ function rainette_croaaaaa_previsions($code_meteo, $type='x_jours', $jour=0, $mo
 	return $texte;
 }
 
-function rainette_croaaaaa_conditions($code_meteo, $modele='conditions_tempsreel'){
+function rainette_coasse_conditions($code_meteo, $modele='conditions_tempsreel'){
 	include_spip('inc/rainette_utils');
 
 	$nom_fichier = charger_meteo($code_meteo, 'conditions');
@@ -140,7 +140,7 @@ function rainette_croaaaaa_conditions($code_meteo, $modele='conditions_tempsreel
 	return $texte;
 }
 
-function rainette_croaaaaa_infos($code_meteo, $modele='infos_ville'){
+function rainette_coasse_infos($code_meteo, $modele='infos_ville'){
 	include_spip('inc/rainette_utils');
 
 	$nom_fichier = charger_meteo($code_meteo, 'infos');
