@@ -1,0 +1,27 @@
+[(#REM)
+	Partie contenu de la page meteo affichant les conditions temps reels, la previsions du jour
+	et les previsions des n prochains jours
+	Un seul parametre d'appel, le code de la ville nomme "ville"
+]
+      
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:rainette:meteo|ucfirst:></strong></p>
+
+#SET{nom_ville, #RAINETTE_INFOS{#ENV{ville, FRXX0076}, ville}}
+<div class="cartouche">
+	<h1 class="h1"><:rainette:meteo_consultation{ville=#GET{nom_ville}}:></h1>
+	<p class="info-publi">
+		<small>
+			[<:rainette:longitude|ucfirst:>&nbsp;(#RAINETTE_INFOS{#ENV{ville, FRXX0076}, longitude}|rainette_afficher_unite{angle})]
+			[, <:rainette:latitude:>&nbsp;(#RAINETTE_INFOS{#ENV{ville, FRXX0076}, latitude}|rainette_afficher_unite{angle})]
+		</small>
+	</p>
+</div>
+<br class="nettoyeur"/>
+
+<h2 class="h2"><:rainette:meteo_conditions|ucfirst:></h2>
+[(#MODELE{rainette_conditions,code=#ENV{ville, FRXX0076},sous_modele=conditions_tempsreel})]
+<br class="nettoyeur"/>
+
+<h2 class="h2"><:rainette:meteo_previsions_n_jours{nbj=#EVAL{_RAINETTE_JOURS_PREVISION}}|ucfirst:></h2>
+[(#MODELE{rainette_previsions,code=#ENV{ville, FRXX0076},type=x_jours,jour=#EVAL{_RAINETTE_JOURS_PREVISION},sous_modele=previsions_24h})]
