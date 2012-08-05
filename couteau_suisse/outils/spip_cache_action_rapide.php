@@ -5,7 +5,7 @@
 
 include_spip('inc/invalideur');
 //include_spip('inc/actions');
-include_spip('inc/actions_compat');
+//include_spip('inc/actions_compat');
 
 // Compatibilite SPIP < 2.0
 if(!defined('_SPIP19300')) {

@@ -3,7 +3,7 @@
 // module inclu dans la description de l'outil en page de configuration
 
 //include_spip('inc/actions');
-include_spip('inc/actions_compat');
+//include_spip('inc/actions_compat');
 
 function corbeille_action_rapide() {
 	foreach(cs_corbeille_table_infos() as $table=>$obj) {
