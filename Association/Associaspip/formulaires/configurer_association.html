@@ -228,6 +228,75 @@ Cette fonctionnalite n'est possible que si le plugin "FPDF" est active... -->]
 					</ul>
 				</fieldset>
 			</li>
+[(#REM)<!-- DEB-conf :: petit morceau lie aux listes a telecharger pour impression
+Cette fonctionnalite n'est possible que si le plugin "FPDF" est active... -->]
+		[(#PLUGIN{fpdf}|oui)
+			<li class="fieldset">
+				<!-- Options des pages PDF -->
+				<fieldset>
+					<h3 class="legend"><:asso:config_libelle_fpdf:></h3>
+					<em class="explication"><:asso:config_aide_fpdf:></em>
+					<fieldset>
+						<legend><:asso:config_fpdf_page:></legend>
+						<ul>
+							<li class="editer_fpdf_orientation">
+								<label for="fpdf_orientation"><:asso:config_fpdf_orientation:></label>
+								<select name="fpdf_orientation" id="fpdf_orientation">
+									<option value="P"[ (#ENV{fpdf_orientation}|strtoupper|=={P}|oui)selected="selected"]><:asso:config_fpdf_portrait:></option>
+									<option value="L"[ (#ENV{fpdf_orientation}|strtoupper|=={L}|oui) selected="selected"]><:asso:config_fpdf_landscape:></option>
+								</select>
+							</li>
+							<li class="editer_fpdf_unit">
+								<label for="fpdf_unit"><:asso:config_fpdf_unit:></label>
+								<select name="fpdf_unit" id="fpdf_unit">
+									<option value="pt"[ (#ENV{fpdf_unit}|strtolower|=={pt}|oui)selected="selected"]><:asso:config_fpdf_point:></option>
+									<option value="cm"[ (#ENV{fpdf_unit}|strtolower|=={cm}|oui) selected="selected"]><:asso:config_fpdf_centimeter:></option>
+									<option value="mm"[ (#ENV{fpdf_unit}|strtolower|=={mm}|oui) selected="selected"]><:asso:config_fpdf_millimeter:></option>
+									<option value="in"[ (#ENV{fpdf_unit}|strtolower|=={in}|oui) selected="selected"]><:asso:config_fpdf_inch:></option>
+								</select>
+							</li>
+							<li class="editer_fpdf_format">
+								<label for="fpdf_format"><:asso:config_fpdf_format:></label>
+								<select name="fpdf_format" id="fpdf_format">
+									<option value="A3"[ (#ENV{fpdf_unit}|ucfirst|=={A3}|oui)selected="selected"]><:asso:config_fpdf_a3:></option>
+									<option value="A4"[ (#ENV{fpdf_unit}|ucfirst|=={A4}|oui) selected="selected"]><:asso:config_fpdf_a4:></option>
+									<option value="A5"[ (#ENV{fpdf_unit}|ucfirst|=={A5}|oui) selected="selected"]><:asso:config_fpdf_legal:></option>
+									<option value="Legal"[ (#ENV{fpdf_unit}|ucfirst|=={Legal}|oui) selected="selected"]><:asso:config_fpdf_legal:></option>
+									<option value="Letter"[ (#ENV{fpdf_unit}|ucfirst|=={Letter}|oui) selected="selected"]><:asso:config_fpdf_letter:></option>
+								</select>
+							</li>
+						</ul>
+					</fieldset>
+
+					<fieldset>
+						<legend><:asso:config_fpdf_font:></legend>
+						<ul>
+							<li>
+							</li>
+						</ul>
+					</fieldset>
+
+					<fieldset>
+						<legend><:asso:fpdf_libelle_tablecolors:></legend>
+						<ul>
+							<li>
+								<label for="fpdf_rowhead"><:asso:config_fpdf_rowhead:></label>
+								<input type="text" class="palette" name="fpdf_rowhead"value="[(#ENV{fpdf_rowhead})]" />
+							</li>
+							<li>
+								<label for="fpdf_roweven"><:asso:config_fpdf_roweven:></label>
+								<input type="text" class="palette" name="fpdf_roweven"value="[(#ENV{fpdf_rowhead})]" />
+							</li>
+							<li>
+								<label for="fpdf_rowodd"><:asso:config_fpdf_rowodd:></label>
+								<input type="text" class="palette" name="fpdf_rowodd"value="[(#ENV{fpdf_rowodd})]" />
+							</li>
+						</ul>
+					</fieldset>
+				</fieldset>
+			</li>
+		]
+[(#REM)<!-- FIN-conf :: petit morceau lie aux listes a telecharger pour impression -->]
 [(#REM)<!-- DEB-conf :: gros morceau lie a la compta
 Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" est active... -->]
 		<B_plan_comptable>

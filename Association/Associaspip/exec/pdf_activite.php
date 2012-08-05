@@ -21,7 +21,7 @@ function exec_pdf_activite()
 		echo minipres();
 	} else {
 		$id_evenement = intval(_request('id'));
-		$pdf=new PDF();
+		$pdf = new PDF();
 		$pdf->titre = utf8_decode(_T('asso:activite_titre_inscriptions_activites'));
 		$pdf->Open();
 		$pdf->AddPage();
@@ -31,7 +31,7 @@ function exec_pdf_activite()
 		$pdf->AddCol('id_adherent',20,'N°','R');
 		$pdf->AddCol('inscrits',10,_T('asso:activite_entete_inscrits'),'R');
 		$pdf->AddCol('montant',20,utf8_decode(_T('asso:entete_montant')),'R');
-		$prop=array(
+		$prop = array(
 			'HeaderColor'=>array(255,150,100),
 			'color1'=>array(224,235,255),
 			'color2'=>array(255,255,255),

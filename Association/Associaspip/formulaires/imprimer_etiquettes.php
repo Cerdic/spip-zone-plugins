@@ -66,7 +66,7 @@ function formulaires_imprimer_etiquettes_traiter_dist()
 	$indice_ligne = 0;
 	$num_page = 1;
 
-	$pdf=new PDF('P','mm','A4',false);
+	$pdf=new PDF('P', 'mm', array($GLOBALS['association_metas']['etiquette_largeur_page'],$GLOBALS['association_metas']['etiquette_hauteur_page']),false);
 	$pdf->titre = _T('asso:adherent_titre_liste_actifs');
 	$pdf->Open();
 	$pdf->AddPage();
