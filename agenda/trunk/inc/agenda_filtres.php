@@ -102,9 +102,9 @@ function critere_agendafull_dist($idb, &$boucles, $crit)
 	elseif (count($crit->param) > 3)
 		$boucle->where[]= array("'AND'",
 					array("'>='",
-					      "'DATE_FORMAT($date_fin, \'%Y%m%d\')'",
+					      "'DATE_FORMAT($date_deb, \'%Y%m%d\')'",
 					      ("sql_quote($annee . $mois . $jour$quote_end)")),
-					array("'<='", "'DATE_FORMAT($date_deb, \'%Y%m%d\')'", ("sql_quote($annee . $mois . $jour$quote_end)")));
+					array("'<='", "'DATE_FORMAT($date_fin, \'%Y%m%d\')'", ("sql_quote($annee2 . $mois2 . $jour2$quote_end)")));
 	// sinon on prend tout
 }
 
