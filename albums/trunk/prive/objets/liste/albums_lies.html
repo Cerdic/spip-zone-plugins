@@ -1,96 +1,86 @@
-[(#SET{defaut_tri,#ARRAY{
-	multi titre,1,
-	date,1,
-	statut,1,
-}})
+[(#REM)
+	Affiche la liste des albums liés à un objet.
+][(#REM)
+	inclus dans /prive/squelettes/contenu/albums_complement_objet.html
 ]
-#SET{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
-#SET{nb_pagination,#ENV{nb_pagination,10}}
 
-<div class="liste[ (#ENV{classe})]">
-	<B_liste_album>
+<B_liste_album>
+#ANCRE_PAGINATION
+<div class="liste-objets">
+	<table class='spip liste'>
+		<tbody>
+		<BOUCLE_liste_album(ALBUMS liens){tout}{objet}{id_objet}{statut?}{!par vu, date, titre}{pagination #ENV{nb,10}}>
 
-	#ANCRE_PAGINATION
-
-	[<h3 class="titre">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{album:info_1_album,album:info_nb_albums}})</h3>]
-
-	[<p class='pagination'>(#PAGINATION{prive})</p>]
-
-	<ul>
-
-	<BOUCLE_liste_album(ALBUMS){tout}{id_album IN #GET{selection}}{where?}{statut?}{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #GET{nb_pagination}}>
-	<li>
+		<tr class='inactif' id='[infos_album(#ID_ALBUM)]'>
 		
-		[<!--(#REM) VUE PLIEE -->]
-		<table><tr>
-			
-			[<!--(#REM) logo -->]
-			<td class='logo clic_pliable' scope='col'>[(#MODELE{logo_album}{taille=50})]</td>
-			
-			[<!--(#REM) informations (titre, nb documents etc.) -->]
-			<td class='infos clic_pliable' scope='col'>
-			<h3>
-			<BOUCLE_vu(albums_liens){id_album}{id_objet}>
-			[(#VU|=={oui}|oui)
-			[<span class='vu'>(#CHEMIN_IMAGE{vu-16-10.png}|balise_img|inserer_attribut{title,<:album:info_album_vu:>}|inserer_attribut{alt,<:medias:document_vu:>})</span>]
-			]
-			</BOUCLE_vu>
-			[(#RANG). ][(#TITRE|sinon{<em><:album:texte_sans_titre:></em>})]
-			</h3>
-			<h4>[(#STATUT|puce_statut{album})][ N°(#ID_ALBUM)]</h4>
-			<B_nb_documents>[(#GRAND_TOTAL|singulier_ou_pluriel{album:info_1_document,album:info_nb_documents})]
-			<BOUCLE_nb_documents(DOCUMENTS liens album){id_album}{tout}> </BOUCLE_nb_documents><em><:album:info_album_vide:></em><//B_nb_documents>
-			</B_liste_album>
+			[(#REM) Logo ]
+			<td rowspan='2' class='logo'>
+				<a href="[(#ID_ALBUM|generer_url_entite{album})]" title="album n°[(#ID_ALBUM)]">
+				[(#MODELE{logo_album}{taille=48})]
+				</a>
 			</td>
 			
-			[<!--(#REM) descriptif -->]
-			<td class='descriptif clic_pliable' scope='col'>
-			[(#DESCRIPTIF|couper{200})]
+			[(#REM) Infos (titre, statut, numéro  et nb documents) ]
+			<td class='infos clic'[ (#DESCRIPTIF|?{'','colspan="2"'})]><span class='puce-gauche'></span>
+			<ul>
+				<li>
+				[(#VU|=={oui}|oui)
+					[(#CHEMIN_IMAGE{vu-16-10.png}|balise_img{<:medias:document_vu:>}|inserer_attribut{title,<:medias:document_vu:>})]
+				]
+				[<strong>(#TITRE)</strong>]
+				</li>
+			
+				<li>
+					[(#REM) [(#STATUT|puce_statut{album})] ]
+					[(#MODELE{statut_album, objet=album, id_objet=#ID_ALBUM, statut=#STATUT, exclus=#LISTE{'prepa'}}{env})]
+					[&nbsp;N°(#ID_ALBUM)]
+				</li>
+				<li>
+					[(#INCLURE{fond=prive/squelettes/inclure/albums_nb_documents, id_album=#ID_ALBUM, ajax=documents})]
+				</li>
+			</ul>
 			</td>
 			
-			[<!--(#REM) action : delier & modifier -->]
-			<td class='action' scope='col'>
-			<BOUCLE_vu2(albums_liens){id_album}{id_objet}>
-			<a href="[(#URL_ECRIRE{album_edit,id_album=#ID_ALBUM}|parametre_url{redirect,#ENV{redirect}})]" class="editbox" title="<:album:icone_modifier_album:>">
-			[(#CHEMIN_IMAGE{edit-16.png}|balise_img{'album:texte_modifier'})]
-			</a>
-			[(#VU|=={oui}|non)
-			[(#BOUTON_ACTION{
-				[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})],
-				#URL_ACTION_AUTEUR{editer_liens_albums,delier/#ID_ALBUM/#OBJET/#ID_OBJET,#SELF},
-				'ajax button link delete'
-			})]
-			]
-			[(#VU|=={oui}|oui)
-			[(#CHEMIN_IMAGE{supprimer-12.png}|image_nb|image_gamma{40}|inserer_attribut{title,<:album:info_retirer_vu:><:album:info_album_vu:>}|inserer_attribut{class,'bouton_off'})]				
-			]
-			</BOUCLE_vu2>
-			</td>
+			[(#REM) Descriptif ]
+			[<td class='descriptif clic'>
+				(#DESCRIPTIF|couper{200})
+			</td>]
 			
-		</tr></table>
+			[(#REM) Boutons actions éditer/délier ]
+			<td class='action'>
+				#SET{redirect,#SELF|ancre_url{albums}}
+				<a href="[(#URL_ECRIRE{album_edit,id_album=#ID_ALBUM}|parametre_url{redirect,#GET{redirect}})]" class="editbox" title="<:album:icone_modifier_album:>">
+				[(#CHEMIN_IMAGE{edit-16.png}|balise_img{'album:texte_modifier'})]
+				</a>
+				[(#VU|=={oui}|?{
+					[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{<:medias:document_vu:>,bouton_off}|inserer_attribut{title,<:medias:document_vu:>}|image_nb|image_gamma{40})],
+					[(#BOUTON_ACTION{
+						[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'album:icone_supprimer_album'})],
+						[(#URL_ACTION_AUTEUR{edition_albums,delier/#ID_ALBUM/[(#ENV{associer_objet})],#SELF})],'button link ajax'}
+					)]
+				})]
+			</td>
+		</tr>
 
-		[<!--(#REM) VUE DEPLIEE -->]
-		<div class='conteneur_album_portfolio pliable'>
-		<div class='album_portfolio [ (#EXPOSE|unique)]'>
-		
-			[<!--(#REM) PORTFOLIO -->]
-			[(#INCLURE{fond=prive/squelettes/inclure/albums_portfolio-documents, objet=album, id_objet=#ID_ALBUM, ajax=documents})]
-		
-			[<!--(#REM) BOUTON AJOUT -->]
-			<div class='album_bouton_ajout'>
-			[(#INCLURE{fond=prive/squelettes/inclure/ajouter-documents, objet=album, id_objet=#ID_ALBUM, ajax})]
-			</div>
-		
-			<div class='nettoyeur'></div>
-		
-		</div>
-		</div>
-	
-	</li>
-	</BOUCLE_liste_album>
-	<div class="nettoyeur"></div>
-	</ul>
+		[(#REM) VUE DEPLIEE : DOCUMENTS ]
+		<tr class='pliable' id='[portfolios_album(#ID_ALBUM)]'>
+			<td colspan='[(#DESCRIPTIF|?{4,3})]'>
+				<div class='conteneur_portfolios clearfix'>
+				<div class='portfolios clearfix'>
+				[(#REM) PORTFOLIO ]
+				[(#INCLURE{fond=prive/squelettes/inclure/albums_portfolio-documents, objet=album, id_objet=#ID_ALBUM, ajax=documents})]
+				[(#REM) BOUTON AJOUT ]
+				[(#INCLURE{fond=prive/squelettes/inclure/ajouter-documents, objet=album, id_objet=#ID_ALBUM, ajax})]
+				</div>
+				</div>
+			</td>
+		</tr>
 
-	</B_liste_album>
+		</BOUCLE_liste_album>
+		</tbody>
+	</table>
+</div>
 
-</div><!-- fin liste_albums -->
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+
+</B_liste_album>

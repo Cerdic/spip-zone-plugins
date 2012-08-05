@@ -1,73 +1,232 @@
-[(#SET{defaut_tri,#ARRAY{
-	statut,1,
-	multi titre,1,
-}})
+[(#REM)
+	Affiche une liste d'albums
+	Paramètres d'inclusion :
+		liste = (texte)		associer / galerie / selecteur
+		selection = (tableau d'ids)
+		statut = (texte)	publie|refuse|poubelle
+		navigation = (liste)	parents, divers, contenus
+		header = (liste)	tri, thead
+		colonnes = (liste)	recherche, statut, logo, id, titre, infos, descriptif, contenu, liaison
+		actions = (liste)	associer, statut, choisir
+][(#REM)
+	inclus dans /prive/squelettes/contenu/albums_complement_objet.html
+	inclus dans /prive/squelettes/inclure/albums_navigation.html
 ]
 
-#SET{debut,#ENV{debutalbuml,#EVAL{_request("debutalbuml");}}}
-<input type="hidden" name="debutalbuml" value="#GET{debut}" />
-<B_liste_album>
-[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
-a mis a jour la valeur avec la page reelle]
-#SET{debut,#ENV{debutalbuml,#EVAL{_request("debutalbuml");}}}
+[(#SET{defaut_tri,#ARRAY{
+	date,-1,
+	id_album,1,
+	multi titre,1
+}})
+]
+[(#REM) Variables indiquant les éléments à afficher ]
+<BOUCLE_header(DATA){liste #ENV{header}}>
+#SET{#VAL{header_}|concat{#VALEUR},oui}
+</BOUCLE_header>
+<BOUCLE_colonnes(DATA){liste #ENV{colonnes}}>
+#SET{#VAL{colonne_}|concat{#VALEUR},oui}
+</BOUCLE_colonnes>
+<BOUCLE_actions(DATA){liste #ENV{actions}}>
+#SET{#VAL{action_}|concat{#VALEUR},oui}
+</BOUCLE_actions>
 
+
+
+<B_albums>
 #ANCRE_PAGINATION
 
-[<!--(#REM) TITRE BLOC ALBUMS -->]
-[<h3>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{album:info_1_album,album:info_nb_albums}})</h3>]
+<div class='entete clearfix'>
+	[<h2>(#ENV{recherche}|?{
+		[(#GRAND_TOTAL|singulier_ou_pluriel{album:info_resultat_recherche_un,album:info_resultat_recherche_plus})],
+		[(#GRAND_TOTAL|objet_afficher_nb{album})]
+	})</h2>]
+	[(#GRAND_TOTAL|>{#ENV{nb}}|ou{#ENV{recherche}}|ou{#GET{header_recherche}}|oui)
+		#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+	]
+</div>
 
-[<p class='pagination'>(#PAGINATION{prive})</p>]
+<div class="liste-objets">
 
-<ul class='liste_albums'>
+	<navigation>
+	[(#GET{header_tri}|oui)
+	<div class='pagination tri'>
+		[(#TRI{'>', #CHEMIN_IMAGE{tri-asc-16.png}|balise_img{<:par_tri_croissant:>}})]
+		[(#TRI{'<', #CHEMIN_IMAGE{tri-desc-16.png}|balise_img{<:par_tri_decroissant:>}})]
+		[(#TRI{id_album, <:medias:par_id:>})]
+		[(#TRI{date, <:medias:par_date:>})]
+		[(#TRI{titre, <:medias:par_titre:>})]
+	</div>
+	]
+	[<div class='pagination'>(#PAGINATION{prive})</div>]
+	</navigation>
 
-	<BOUCLE_liste_album(ALBUMS){tout}{where?}{recherche?}{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} albuml}>
-	<li>
-		
-		[<!--(#REM) HEADER -->]
-		<table class="album_header"><tr>
-			
-			[<!--(#REM) statut -->]
-			<td class='statut' scope='col'>
-			[(#STATUT|puce_statut{album})]
+	<table class='spip liste'>
+
+		[(#GET{header_thead}|oui)
+		<thead>
+			[(#GET{colonne_statut}|oui)		<th></th> ]
+			[(#GET{colonne_logo}|oui)		<th><:album:heading_logo:></th> ]
+			[(#GET{colonne_id}|oui)			<th class='id'><:album:heading_id:></th> ]
+			[(#GET{colonne_titre}|oui)		<th><:album:heading_titre:></th> ]
+			[(#GET{colonne_infos}|oui)		<th><:album:heading_infos:></th> ]
+			[(#GET{colonne_descriptif}|oui)		<th><:album:heading_descriptif:></th> ]
+			[(#GET{colonne_contenu}|oui)		<th><:album:heading_contenu:></th> ]
+			[(#GET{colonne_liaison}|oui)		<th><:album:heading_liaison:></th> ]
+			[(#ENV{actions}|oui)			<th></th> ]
+		</thead>
+		]
+
+		<tbody>
+		<BOUCLE_albums(ALBUMS liens){id_album IN #ENV{selection}}{id_album !IN #ENV{exclus}}{objet?}{statut ?IN #ENV{statut}|explode{'|'}}{vu?}{recherche?}{orphelins?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr>
+
+			[(#REM) Statut ]
+			[(#GET{colonne_statut}|oui)
+			<td class='statut'>
+			[(#MODELE{statut_album, objet=album, id_objet=#ID_ALBUM, statut=#STATUT, exclus=#LISTE{'prepa'}}{env})]
 			</td>
-			
-			[<!--(#REM) logo -->]
-			<td class='logo' scope='col'><div class='conteneur_logo'>
-			<B_logo>
-			<span class='decoration_logo'></span>
-			<BOUCLE_logo(DOCUMENTS liens album){id_album}{tout}{0,1}>
-			[(#FICHIER|image_passe_partout{52,52}|image_recadre{50,50,center}|image_masque{#CHEMIN_IMAGE{album_masque-50.png}}|inserer_attribut{class,spip_logos})]
-			</BOUCLE_logo>
-			[(#CHEMIN_IMAGE{album_vide-50.png}|balise_img{album:texte_album_vide}|inserer_attribut{class,spip_logos})]
-			<//B_logo>
-			</div></td>
-			
-			[<!--(#REM) informations (titre, nb documents etc.) -->]
-			<td class='infos' scope='col'>
-			<h3>
-			<BOUCLE_vu(albums_liens){id_album}{0,1}>
-			[<span class='vu'>(#CHEMIN_IMAGE{vu-16-10.png}|balise_img|inserer_attribut{title,<:album:info_album_associe:>}|inserer_attribut{alt,<:medias:document_vu:>})</span>]
-			</BOUCLE_vu>
-			<a href="#URL_ECRIRE{album,id_album=#ID_ALBUM}">
-			[(#RANG). ][(#TITRE|sinon{<em><:album:texte_sans_titre:></em>})]
-			</a>
-			</h3>
-			[<h4>N°(#ID_ALBUM)</h4>]
-			<B_nb_documents>[(#GRAND_TOTAL|singulier_ou_pluriel{album:info_1_document,album:info_nb_documents})]
-			<BOUCLE_nb_documents(DOCUMENTS liens album){id_album}{tout}> </BOUCLE_nb_documents><em><:album:info_album_vide:></em><//B_nb_documents>
-			</B_liste_album>
-			</td>
-			
-			[<!--(#REM) descriptif -->]
-			<td class='descriptif scope='col'>
-			[(#DESCRIPTIF|couper{200})]
-			</td>
-			
-		</tr></table>
-	
-	</li>
-	</BOUCLE_liste_album>
-<div class="nettoyeur"></div>
-</ul>
+			]
 
-</B_liste_album>
+			[(#REM) Logo ]
+			[(#GET{colonne_logo}|oui)
+			<td class='logo'>
+			[(#MODELE{logo_album}{taille=#ENV{logo,48}})]
+			</td>
+			]
+
+			[(#REM) ID ]
+			[(#GET{colonne_id}|oui)
+			<td class='id'>
+			[(#ID_ALBUM)]
+			</td>
+			]
+
+			[(#REM) Titre ]
+			[(#GET{colonne_titre}|oui)
+			<td class='titre'>
+				[<strong>
+				<a href="[(#ID_ALBUM|generer_url_entite{album})]" title="album n°[(#ID_ALBUM)]">
+				(#TITRE)
+				</a>
+				</strong>]
+			</td>
+			]
+
+			[(#REM) Infos (titre, statut, numéro  et nb documents) ]
+			[(#GET{colonne_infos}|oui)
+			<td class='infos'>
+			<ul>
+				<li>
+				[(#GET{vu}|=={oui}|oui)
+					[(#CHEMIN_IMAGE{vu-16-10.png}|balise_img{<:medias:document_vu:>}|inserer_attribut{title,<:medias:document_vu:>})]
+				]
+				[<strong>(#TITRE)</strong>]
+				</li>
+				<li>
+					[(#STATUT|puce_statut{album})][&nbsp;N°(#ID_ALBUM)]
+				</li>
+				<li>
+					[(#GET{colonne_contenu}|non)
+					[(#INCLURE{fond=prive/squelettes/inclure/albums_nb_documents, id_album=#ID_ALBUM, ajax=documents})]
+					]
+				</li>
+			</ul>
+			</td>
+			]
+
+			[(#REM) Descriptif ]
+			[(#GET{colonne_descriptif}|oui)
+			<td class='descriptif'>
+				[(#DESCRIPTIF)]
+			</td>
+			]
+
+			[(#REM) Contenu détaillé ]
+			<BOUCLE_afficher_contenu(CONDITION){si #GET{colonne_contenu}}>
+			<td class='contenu'>
+			#SET{medias,#ARRAY}
+			<BOUCLE_documents(DOCUMENTS){id_album}{tout}>
+			[(#GET{medias}|find{#MEDIA}|non) #SET{medias,#GET{medias}|push{#MEDIA}} ]
+			</BOUCLE_documents>
+			[(#CHEMIN_IMAGE{icone-vide-16.png}|balise_img{album:info_album_vide})]
+			<//B_documents>
+			<B_medias>
+			<ul>
+				<BOUCLE_medias(DATA){liste #GET{medias}}>
+				<BOUCLE_compteur(DOCUMENTS){id_album}{tout}{media = #VALEUR} />
+				<li>
+				[(#CHEMIN_IMAGE{#VAL{media-}|concat{#VALEUR|strtolower}|concat{-16.png}}|balise_img{#VALEUR})]
+				[(#GRAND_TOTAL|singulier_ou_pluriel{#VAL{medias:un_}|concat{#VALEUR},#VAL{medias:des_}|concat{#VALEUR}|concat{s}})]
+				</li>
+				<//B_compteur>
+				</BOUCLE_medias>
+			</ul>
+			</B_medias>
+			</td>
+			</BOUCLE_afficher_contenu>
+
+			[(#REM) Liaison ]
+			<BOUCLE_afficher_liaison(CONDITION){si #GET{colonne_liaison}}>
+			<td class='liaison' scope='col'>
+			<B_liaison>
+			<ul>
+				<BOUCLE_liaison(ALBUMS liens){id_album}{par objet}{tout}>
+				<li>
+				[(#VU|=={oui}|oui)
+				[<span class='vu'>(#CHEMIN_IMAGE{vu-16-10.png}|balise_img|inserer_attribut{title,<:medias:document_vu:>}|inserer_attribut{alt,<:album:info_album_vu:>})</span>]
+				 ]
+				<a href="[(#URL_ECRIRE{#OBJET,id_#OBJET=#ID_OBJET})]">#OBJET N°#ID_OBJET</a>
+				</li>
+				</BOUCLE_liaison>
+			</ul>
+			</B_liaison>
+			</td>
+			</BOUCLE_afficher_liaison>
+
+			[(#REM) Actions : associer, mettre à la poubelle ]
+			<BOUCLE_afficher_actions(CONDITION){si #ENV{actions}|oui}>
+			<td class='action'>
+
+			[(#GET{action_associer}|oui)
+				[(#BOUTON_ACTION{
+					[(#CHEMIN_IMAGE{ajouter-16.png}|balise_img{<:album:icone_associer_album:>})],
+					[(#URL_ACTION_AUTEUR{edition_albums,lier/#ID_ALBUM/[(#ENV{associer_objet})],#SELF})],
+					'button link ajax'}
+				)]
+			]
+			[(#GET{action_choisir}|oui)
+			<input type="radio" name="[(#ENV{nom})]" id="radio[(#ID_ALBUM)]" value="[(#ID_ALBUM)]">
+			]
+			</td>
+			</BOUCLE_afficher_actions>
+
+		</tr>
+		</BOUCLE_albums>
+		</tbody>
+	</table>
+
+	[<p class='pagination'>(#PAGINATION{prive})</p>]
+
+</div>
+</B_albums>
+
+<div class='entete bas clearfix'>
+	[(#ENV{recherche}|oui)
+		<:album:info_resultat_recherche_aucun:>
+	]
+	[(#ENV{recherche}|non)
+		#SET{nb_albums_total,#VAL{album}|table_objet_sql|sql_countsel{#ARRAY{objet=album}}}
+		[(#GET{nb_albums_total}=={0}|oui)
+			<:album:info_aucun_album:>
+		]
+		[(#GET{nb_albums_total}=={0}|non)
+			[(#ENV{liste}|=={associer}|oui) <:album:info_aucun_album_supplementaire:> ]
+			[(#ENV{liste}|=={galerie}|oui) <:album:info_aucun_album_criteres:> ]
+		]
+	]
+	[(#GRAND_TOTAL|>{#ENV{nb}}|ou{#ENV{recherche}}|ou{#GET{afficher_recherche}}|oui)
+		#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+	]
+</div>
+
+<//B_albums>
