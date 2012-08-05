@@ -1,0 +1,121 @@
+[(#REM)
+	Affiche les albums liés à un objet, permet d'en créer/associer d'autres.
+][(#REM)
+	Appelé par le pipeline 'afficher_complement_objet'
+]
+
+#SET{nombre_pagination,5}
+#SET{self, #SELF|parametre_url{id_album_ajoute,''}}
+
+[(#REM) définition des variables afficher_xxx ]
+#SET{nb_albums_total,#VAL{album}|table_objet_sql|sql_countsel{#ARRAY{objet=album}}}
+#SET{nb_albums_lies,#VAL{albums}|lister_objets_lies{#ENV{objet},#ENV{id_objet},''}|count}
+#SET{nb_albums_libres,#GET{nb_albums_total}|moins{#GET{nb_albums_lies}}}
+[(#GET{nb_albums_libres}|>{0}|oui)	#SET{afficher_associer,oui} ]
+[(#GET{nb_albums_lies}|>{0}|oui)	#SET{afficher_lies,oui} ]
+
+[(#REM) définition des albums à ne pas afficher dans la liste 'associer' ]
+#SET{exclus,#VAL{albums}|lister_objets_lies{#ENV{objet},#ENV{id_objet},''}}
+
+
+<a name='albums'></a>
+
+
+<!-- HEADER -->
+[(#GET{afficher_lies}|oui)
+	<div class='header'>
+	[(#VAL{album}|objet_icone{16}|concat{#GET{nb_albums_lies}|objet_afficher_nb{album}}|wrap{<h3 class='titrem'>})]
+	</div>
+]
+
+
+<!-- LISTE ALBUMS LIES -->
+[(#GET{afficher_lies}|oui)
+	<div id='lies' class='lies' class='ajax'>
+	[(#INCLURE{fond=prive/objets/liste/albums_lies,
+		nb=#GET{nombre_pagination}}{env})]
+	</div>
+]
+
+
+<!-- AJOUTER : onglets & entete-->
+[(#ENV{albums}|match{creer|associer}|oui)
+<div class='onglets'>
+	[(#SELF|parametre_url{albums,creer}|parametre_url{recherche,''}|lien_ou_expose{<:album:onglet_creer_album:>,#ENV{albums}|=={creer},'spip_lien ajax preload',<:album:texte_creer_album:>})]
+	[(#SELF|parametre_url{albums,associer}|parametre_url{recherche,''}|lien_ou_expose{<:album:onglet_associer_album:>,#ENV{albums}|=={associer},'spip_lien ajax preload',<:album:texte_associer_album:>})]
+	[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{title,<:album:icone_fermer:>}|wrap{<a href='[(#SELF|parametre_url{albums,''}|parametre_url{recherche,''})]' class='ajax preload fermer'>})]
+</div>
+<div class='entete_ajouter'><h4>
+	[(#ENV{albums}|=={creer}|oui)
+		[(#CHEMIN_IMAGE{album-new-24}|balise_img)] <:album:texte_creer_album:>
+	]
+	[(#ENV{albums}|=={associer}|oui)
+		[(#GET{afficher_associer}|?{
+			[(#CHEMIN_IMAGE{icone-lien-24.png}|balise_img)] <:album:texte_associer_album:>,
+			[(#CHEMIN_IMAGE{icone-vide-24.png}|balise_img)] <:album:info_aucun_album_supplementaire:>
+		})]
+	]
+</h4></div>
+]
+
+
+<!-- AJOUTER : FORMULAIRE CREATION -->
+[(#ENV{albums}|=={creer}|oui)
+	<div id='creer' class='creer' class='ajax'>
+	[(#FORMULAIRE_EDITER_ALBUM{oui,
+		#SELF|parametre_url{albums,''}|ancre_url{albums},
+		#ENV{associer_objet},
+		#ENV{lier_trad}})]
+	</div>
+]
+
+
+<!-- AJOUTER : FORMULAIRE ASSOCIATION -->
+[(#ENV{albums}|=={associer}|et{#GET{afficher_associer}}|oui)
+	<div id='associer' class='associer' class='ajax'>
+	[(#INCLURE{fond=prive/squelettes/inclure/albums_navigation_listes,
+		liste=associer,
+		exclus=#GET{exclus},
+		statut='publie|refuse',
+		navigation=#LISTE{contenus},
+		colonnes=#LISTE{logo,infos,descriptif,contenu},
+		actions=#LISTE{associer},
+		nb=#GET{nombre_pagination},
+		objet=''}
+		{env})]
+	</div>
+]
+
+
+<!-- ICONE ajouter -->
+[(#ENV{albums}|non)
+	[(#SET{label,<:album:icone_ajouter_album:>})]
+	[(#GET{self}|parametre_url{albums,creer}|icone_verticale{#GET{label},album,new,'ajax preload right'}inserer_attribut{title,#GET{label}})]
+]
+
+
+<script type="text/javascript">/*<![CDATA[*/
+$(document).ready(
+function (){
+
+	$("tr.pliable td").hide();
+	// après création d'un album, il est déplié
+	#SET{id,#EVAL{_request('id_album_ajoute')}}
+	[(#GET{id}|oui)
+		$("#[portfolios_album(#GET{id})] td").show();
+		$("#[portfolios_album(#GET{id})]").toggleClass("deplie");
+		$("#[infos_album(#GET{id})]").toggleClass("actif").toggleClass("inactif");
+	]
+
+	// plier/deplier le portfolio d un album
+	$("body").off("click", ".clic");
+	$("body").on("click", ".clic",
+		function() {
+			$(this).parent("tr").toggleClass("actif").toggleClass("inactif");
+			$(this).parent("tr").next("tr.pliable").toggleClass("deplie");
+			$(this).parent("tr").next("tr.pliable").children("td").toggle();
+		}
+	);
+}
+);
+/*]]>*/</script>

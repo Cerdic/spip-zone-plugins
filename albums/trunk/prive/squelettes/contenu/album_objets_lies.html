@@ -1,0 +1,42 @@
+[(#REM)
+	Affiche la liste des objets auxquels un album est lié.
+][(#REM)
+	Appelé par la pipeline 'affiche_milieu'
+]
+
+<B_objets_associes>
+#BOITE_OUVRIR{'','simple objets_associes liste-objets'}
+
+
+	<h3><:album:info_association:></h3>
+
+	<table class='spip liste'>
+	<tbody>
+	<BOUCLE_objets_associes(ALBUMS liens objets){id_album}{tout}{par objet}>
+	#SET{info,#OBJET&nbsp;n°#ID_OBJET}
+	#SET{titre,#INFO_TITRE{#OBJET,#ID_OBJET}}
+	#SET{alt,#GET{info}&nbsp;:&nbsp;#GET{titre}}
+	#SET{url,#ID_OBJET|generer_url_entite{#OBJET}}
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+		[<td class='icone'>
+			(#OBJET|objet_icone{16}|inserer_attribut{title,#GET{alt}})
+		</td>]
+		[<td class='info'>
+			(#GET{info})
+		</td>]
+		[<td class='titre'>
+			<a href="[(#GET{url})]" title='[(#GET{alt})]'>(#GET{titre})</a>
+		</td>]
+		[<td class='action'>
+			(#BOUTON_ACTION{
+				[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{<:album:icone_delier_album:>})],
+				#URL_ACTION_AUTEUR{edition_albums,delier/#ID_ALBUM/#OBJET/#ID_OBJET,#SELF},'button link ajax'}
+			)
+		</td>]
+	</tr>
+	</BOUCLE_objets_associes>
+	</tbody>
+	</table>
+
+#BOITE_FERMER
+</B_objets_associes>

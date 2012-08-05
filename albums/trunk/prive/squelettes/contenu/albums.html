@@ -1,2 +1,23 @@
+[(#REM)
+	Page affichant la liste complète des albums
+]
+
 [(#AUTORISER{administrer,albums}|sinon_interdire_acces)]
-<INCLURE{fond=prive/squelettes/inclure/albums_navigation_galerie, objet, ajax, env} />
+
+<div id='albums'>
+
+	<div class='galerie'>
+	[(#INCLURE{fond=prive/squelettes/inclure/albums_navigation_listes,
+			liste=galerie,
+			navigation=#LISTE{parents, divers, contenus},
+			header=#LISTE{tri, thead, recherche},
+			colonnes=#LISTE{statut, logo, id, titre, descriptif, contenu, liaison},
+			nb=10}
+			{env}{ajax})]
+	</div>
+
+	[(#AUTORISER{creer,album})
+		[(#URL_ECRIRE{album_edit,new=oui}|icone_verticale{<:album:icone_creer_album:>,album,new,right})]
+	]
+
+</div>

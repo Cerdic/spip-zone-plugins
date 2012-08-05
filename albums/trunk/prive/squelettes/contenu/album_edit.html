@@ -1,1 +1,34 @@
-<INCLURE{fond=prive/echafaudage/contenu/objet_edit,objet=album,id_objet=#ID_ALBUM,env}>
+[(#REM)
+	Page de création/édition d'un album
+]
+
+[(#ID_OBJET|oui)
+	[(#AUTORISER{modifier,album,#ID_ALBUM}|sinon_interdire_acces)]
+][(#ID_OBJET|non)
+	[(#AUTORISER{creer,album}|sinon_interdire_acces)]
+]
+
+#SET{redirect,#ENV{redirect}|sinon{#ID_ALBUM|?{#ID_ALBUM|generer_url_entite{album},#URL_ECRIRE{albums}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_ALBUM|oui)
+		[(#GET{redirect}|icone_verticale{Retour,album,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_ALBUM|?{<:album:icone_modifier_album:>,<:album:icone_creer_album:>})]
+		<h1>(#ENV{titre,#INFO_TITRE{album,#ID_ALBUM}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_ALBUM|generer_url_entite{album}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_ALBUM{#ENV{id_album,oui}, #GET{redirect}, #ENV{associer_objet}, #ENV{lier_trad}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>
