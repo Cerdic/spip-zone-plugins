@@ -13,7 +13,7 @@
 *
 * Parametres :
 * - id_geoportail		: identifiant de la carte (unique de preference !)
-* - id_article			: id de l'article si on veut afficher les documents de l'article 
+* - article				: numero de l'article si on veut afficher les documents de l'article 
 * - id_rubrique			: affichage des services lies a une rubrique
 * - id_secteur			: affichage des services lies a un secteur
 * - width, height		: largeur, hauteur (utiliser pc au lieu de % dans les URI) par defaut, ceux du css
@@ -54,7 +54,6 @@ global $geoportail_force;
 if (_DIR_RESTREINT!="" || $geoportail_force) 
 {
 ?>
-
 [(#REM) Rubriques pour les geoservices ]
 #SET{rubriques,#ARRAY{site,0,rub,#ID_RUBRIQUE,sect,#ID_SECTEUR}}
 
@@ -137,7 +136,7 @@ jQuery.geoportail.addMap(
 );
 
 // Ajouter les documents (si dans un article)
-<BOUCLE_gpx(DOCUMENTS){id_article}{extension IN gpx,kml}>
+<BOUCLE_gpx(DOCUMENTS){id_article=#ENV{article}}{extension IN gpx,kml}>
 	$.geoportail.addDoc (#ENV{id_geoportail,0}, "[(#EXTENSION|sinon{[(#FICHIER|substr{-3})]})]", #ID_DOCUMENT, "#TITRE", "#URL_DOCUMENT", [(#ENV{align}|=={center}|?{false,true})]);
 </BOUCLE_gpx>
 
