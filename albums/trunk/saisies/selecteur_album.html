@@ -1,27 +1,18 @@
 [(#REM)
-
-Saisis qui liste les albums
-
-  Parametres :
-  - class : classe(s) css ajoutes au select
-  - multiple : si quelquechose est passe, le select est multiple, sinon, c'est un select simple
-    Dans le cas multiple, defaut et valeur doivent etre un array, sinon un int
-  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
-    (seulement si non multiple)
-  - cacher_option_intro : pas de premier option vide  (defaut:"")
-  - defaut : valeur par defaut si pas présente dans l'environnement
-  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
-
+	Saisie qui liste les albums
 ]
 
-<div class='albums'>
-[(#INCLURE{fond=prive/objets/liste/albums_selecteur,
-	nb_pagination=5,
-	classe=selecteur,
-	cacher_tri=oui,
-	cacher_statut=oui,
-	cacher_id=oui,
-	cacher_descriptif=oui,
-	afficher_infos_compactes=oui,
-	ajax,env})]
+<div id='albums'>
+
+	<div class='selecteur'>
+	[(#INCLURE{fond=prive/squelettes/inclure/albums_navigation_listes,
+			liste=selecteur,
+			colonnes=#LISTE{id, titre},
+			logo=16,
+			statut=publie,
+			actions=#LISTE{choisir},
+			nb=10}
+			{env}{ajax})]
+	</div>
+
 </div>
