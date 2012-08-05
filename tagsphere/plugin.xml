@@ -3,7 +3,7 @@
 	<slogan>Nuage de mots cl&#233;s en 3D</slogan>
 	<icon>icone.png</icon>
 	<auteur>christophe vallois</auteur>
-	<version>0.3.0</version>
+	<version>0.4.0</version>
 	<etat>stable</etat>
 	<description>Affiche les mots cl&#233; du site sous la forme d'un nuage 3D</description>
 	<lien>http://www.spip-contrib.net/Plugin-TagSphere</lien>
@@ -13,6 +13,6 @@
 		<action>insert_head</action>
 		<inclure>head.php</inclure>
 	</pipeline>	
-	<necessite id='SPIP' version='[1.9.2;3.0.*]' />
+	<necessite id='SPIP' version='[1.9.2;3.0.99]' />
 	<categorie>navigation</categorie>
 </plugin>
