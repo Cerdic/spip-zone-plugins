@@ -75,7 +75,8 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		cout_exec_redirige('cmd=resetjs');
 	}
 	// installation personnalisee
-	if(strlen($pack = _request('pack')) && isset($GLOBALS['cs_installer'][$pack]['outils'])) {
+	$pack = _request('pack');
+	if(strlen($pack) && isset($GLOBALS['cs_installer'][$pack])) {
 		if($cmd=='install'){
 			spip_log("Installation personnalisee de '$pack' par l'auteur id=$connect_id_auteur");
 			// installer le pack et rediriger
@@ -83,12 +84,12 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		} elseif($cmd=='delete'){
 			spip_log("Suppression de '$pack' par l'auteur id=$connect_id_auteur");
 			$p = preg_quote($pack,'/');
-			$r = "[$]GLOBALS\['cs_installer'\]\['$p'\] *=";
+			$r = "[$]GLOBALS\['cs_installer'\]\['$p'\]\s*=";
 			cs_ecrire_config(
 				array("/$r/", "/# [^\\n\\r]+[\\n\\r]+if\(0\) {$r}.*?# $p #[\\n\\r]+/s"),
-				array('if(0) \0', ''));
+				array('if(0) \\0', ''));
 			// simplement prendre en compte la supression
-			cout_exec_redirige('cmd=pack', false);
+			cout_exec_redirige('cmd=pack#cs_infos', false);
 		}
 	}
 	// reset des variables d'un outil

@@ -140,7 +140,7 @@ function cout_install_pack($pack, $redirige=false) {
 	ecrire_meta('tweaks_actifs', serialize($metas_outils));
 	ecrire_meta('tweaks_variables', serialize($metas_vars));
 	// tout recompiler
-	if($redirige) cout_exec_redirige();
+	if($redirige) cout_exec_redirige('cmd=pack#cs_infos');
 }
 
 // redirige vers la page exec en cours en vue une reinitialisation du Couteau Suisse

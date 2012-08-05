@@ -201,8 +201,9 @@ function cs_canonicalize($address) {
 // manipule le fichier config/mes_options.php
 function cs_ecrire_config($regexpr, $replace, $ajout_sinon='') {
 	$fo = cs_spip_file_options(1);
-	$t='';
-	if ($fo && strlen($regexpr) && strlen($replace)) {
+	$t = '';
+	if ($fo && ((is_array($regexpr) && count($regexpr)) || strlen($regexpr))
+	  && ((is_array($replace) && count($replace)) || strlen($replace))) {
 		if (lire_fichier($fo, $t) && strlen($t)) {
 			$t = preg_replace($regexpr, $replace, $t, 1);
 			if(ecrire_fichier($fo, $t)) return;
