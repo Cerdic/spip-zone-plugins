@@ -1,0 +1,23 @@
+<paquet
+	prefix="details_interface"
+	categorie="theme"
+	version="3.0.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+>	
+	<nom>Détails d'interface</nom>
+
+	<auteur lien="http://www.paris-beyrouth.org">ARNO*</auteur>
+	<licence>GNU/GPL</licence>
+	
+	
+	<pipeline nom="header_prive" action="header_prive" inclure="details_interface.php" />
+
+
+	<chemin path="squelettes" />
+	<chemin path="images" />
+	<utilise nom="css_imbriques" compatibilite="[3.0;[" />
+
+</paquet>
+
+
