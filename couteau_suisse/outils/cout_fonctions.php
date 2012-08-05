@@ -109,7 +109,7 @@ function cs_liste_contribs($coupe = 999, $join = "</li><li>") {
 	sort($contribs);
 	return '[{{' . couteauprive_T('docgen') . '}}->' . _URL_CONTRIB . '2166]' 
 		. $join . '[{{' . couteauprive_T('docwiki') . '}}->' . _URL_CONTRIB . '2793]'
-		. $join . join($join, $contribs);
+		. (count($contribs)?$join.join($join, $contribs):'');
 }
 
 // renvoie un champ d'un objet en base
