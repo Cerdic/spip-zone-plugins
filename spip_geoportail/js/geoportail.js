@@ -1139,7 +1139,7 @@ jQuery.geoportail =
 		var lien = null;
 		if (att.url) 
 		{	// Affichage des images
-			if (att.extension in {'jpg':'','gif':'','png':''}) lien = "<a href=\"javascript:jQuery.geoportail.afficheImage('" + att.url + "','"+att.name.replace(/"/g,'\\\'')+"')\">";
+			if (att.extension in {'jpg':'','gif':'','png':''}) lien = "<a href=\"javascript:jQuery.geoportail.afficheImage('" + att.url + "','"+att.name.replace(/"/g,'\\\'').replace(/&/g,'&#38;')+"')\">";
 			else lien = "<a href='" + att.url + "'>";
 		}
 		if (att.logo) html += (lien ? lien : "") + att.logo + (lien ? "</a>" : "");
