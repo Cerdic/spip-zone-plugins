@@ -1,25 +1,30 @@
-[<!--(#REM) Définit un logo pour les albums  
-<!-- sélection du logo, dans l'ordre :
-1- (...)+logo		-> logo
-2- ()			-> icone vide
-3- (image?)		-> icone image recadree
-4- (!image)		-> icone générique
--->]
-
+[(#REM) 
+	Définit un logo pour les albums  
+	sélection du logo, dans l'ordre :
+	1- (...)+logo		-> logo
+	2- ()			-> icone vide
+	3- (image?)		-> icone image recadrée
+	4- (!image)		-> icone générique
+]
+#CACHE{0}
 #SET{taille, #ENV{taille}}
 #SET{taille_passe_partout, #GET{taille}|plus{2}}
 
-[<!--(#REM) l'album contient-t-il une image ?  -->]
+[(#REM) l'album contient-t-il une image ?  ]
 <BOUCLE_icone_image(DOCUMENTS liens album){media==image}{id_album}{tout}{0,1}>
 #SET{icone_image,#FICHIER}
 </BOUCLE_icone_image>
 
-[<!--(#REM) l'album est-il vide ?  -->]
+[(#REM) l'album est-il vide ?  ]
 <BOUCLE_test_contenu(DOCUMENTS liens album){id_album}{tout}> </BOUCLE_test_contenu>
 #SET{vide,oui} <//B_test_contenu>
 
-<div class='conteneur_logo'>
-[(#LOGO_ALBUM|ou{#GET{icone_image}}|oui) <span class="decoration_logo_#GET{taille}"></span> ]
+<div class='albums logo' style="width:[(#GET{taille})px]; height:[(#GET{taille})px];">
+
+[(#LOGO_ALBUM|ou{#GET{icone_image}}|oui) 
+	<span class="decoration_logo" style="width:[(#GET{taille})px]; height:[(#GET{taille})px]; background-image:url('[(#CHEMIN_IMAGE{album-decoration-[(#GET{taille})].png})]');"></span>
+]
+
 [(#LOGO_ALBUM|image_passe_partout{#GET{taille_passe_partout},#GET{taille_passe_partout}}
 	|image_recadre{#GET{taille},#GET{taille},center}
 	|image_masque{#CHEMIN_IMAGE{album-masque-#GET{taille}.png}}
@@ -42,5 +47,6 @@
 		]
 	}
 )]
+
 </div>
 

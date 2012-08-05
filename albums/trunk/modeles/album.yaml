@@ -1,5 +1,5 @@
 nom: 'album'
-logo: 'images/album-24.png'
+logo: 'prive/themes/spip/images/album-24.png'
 icone_barre: 'album.png'
 parametres:
   -

@@ -6,13 +6,20 @@
 
 -------------------------------------------------------------- */
 
-.album {}
-.album li { float: left; margin: 0 10px 10px 0; }
-.album li .spip_logos { float: none; margin: 0; }
+.album					{}
 
-/* Alignements */
-.album.center {}
-.album.left {}
-.album.right {}
+/* VUE EN ICONES */
+.album.vue_icones li			{ float: left; margin: 0 10px 10px 0; }
+.album.vue_icones li .spip_logos	{ float: none; margin: 0; }
+.album.vue_icones figure		{ display: table; width: 1px;} /* pour empecher le titre de dépasser */
+  .album.vue_icones a,
+  .album.vue_icones figcaption,
+  .album.vue_icone img 			{ display: table-row; }
 
-/* end */
+/* VUE EN LISTE */
+.album.vue_liste 			{}
+
+/* ALIGNEMENTS */
+.album.center				{}
+.album.left				{}
+.album.right				{}
