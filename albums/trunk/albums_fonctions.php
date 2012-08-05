@@ -25,36 +25,86 @@ function critere_ALBUMS_orphelins_dist($idb, &$boucles, $crit) {
 	$boucle->where[]= $where;
 }
 
-// retire un element d une liste concatenee
-function supprimer_element_concat($balise, $element, $delimiteur){
-	$element = (string)$element;
+
+/**
+ * Retirer une valeur d'un tabeau
+ * param array $table_balise
+ * param string $valeur
+ *
+ * exemple : #GET{tableau}|table_retirer_valeur{'valeur'}
+ */
+function table_retirer_valeur($table_balise, $valeur){
+
+	$valeur = (string)$valeur;
+	unset($table_balise[array_search($valeur, $table_balise)]); # supprime la valeur du tableau
+
+	return $table_balise;
+}
+
+
+/**
+ * Ajouter ou retirer un parametre d'une chaine en forme de liste concatenee
+ * Utile pour generer un lien en y ajoutant/supprimant un parametre
+ * @param string $balise
+ * @param string $parametre =	param1|param2|...
+ * @param string $delimiteur =	|/-, ...
+ * @param string $action =	toggle,ajouter,retirer
+ *
+ * exemples : 
+ * valeur initale : parametres = paramA|paramB|paramC|paramD
+ * ----------
+ * #ENV{parametres}|toggle_parametre{'paramB',toggle,'|'}
+ * retour : parametres = paramA|paramC|paramD
+ * ----------
+ * #ENV{parametres}|toggle_parametre{'paramB|paramC'}
+ * retour : parametres = paramA|paramD
+ */
+function toggle_parametre($balise, $parametre, $action='toggle', $delimiteur='|'){
+
 	$delimiteur = (string)$delimiteur;
-	// tranforme la liste en tableau
-	$tableau = explode($delimiteur, $balise);
-	// supprime l element du tableau
-	unset($tableau[array_search($element, $tableau)]);
-	// recree la liste
-	$balise = implode($delimiteur, $tableau);
-	
+	$parametre = (string)$parametre;
+	$action = (string)$action;
+	$table_balise = explode($delimiteur, $balise); # tableau des anciens parametres
+	$table_parametres = explode($delimiteur, $parametre); # tableau des nouveaux parametres
+
+	switch ($action) {
+		case 'toggle':
+			foreach ($table_parametres as $parametre){
+				if (!empty($balise)){
+					// si le parametre est present, on le retire
+					if (in_array($parametre, $table_balise)) {
+						unset($table_balise[array_search($parametre, $table_balise)]); # supprime le parametre du tableau
+						$balise = implode($delimiteur, $table_balise); # recree la liste
+					}
+					//sinon on le rajoute
+					else {
+						array_push($table_balise, $parametre);
+						$balise = implode($delimiteur, $table_balise);
+					}
+				}
+				else {
+					$balise = $parametre;
+				}
+			}
+			break;
+		case 'retirer':
+			foreach ($table_parametres as $parametre){
+				if (!empty($balise) AND in_array($parametre, $table_balise)){
+					unset($table_balise[array_search($parametre, $table_balise)]);
+					$balise = implode($delimiteur, $table_balise);
+				}
+			}
+			break;
+		case 'ajouter':
+			foreach ($table_parametres as $parametre){
+				array_push($table_balise, $parametre);
+				$balise = implode($delimiteur, $table_balise);
+			}
+			break;
+	}
+
 	return $balise;
 }
 
-// renvoie un champ d un objet
-function champ($balise, $champ, $id) {
-	$id_objet = 'id_' . $balise;
-	$table_objet = 'spip_' . $balise . 's';
-	$trouver_table = charger_fonction('trouver_table', 'base');
-	$test_table = $trouver_table($table_objet);
-	
-	if (isset($test_table)){
-		$fetch_titre = sql_select($champ,"$table_objet","$id_objet=$id");
-		$table_titre = sql_fetch($fetch_titre);
-		$titre = $table_titre['titre'];
-		
-		return $titre;
-	} else {
-		return false;
-	}
-}
 
 ?>

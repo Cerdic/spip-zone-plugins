@@ -1,113 +1,101 @@
 <?php
+/**
+ * Plugin Albums
+ * Licence GNU/GPL
+ */
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Configuration des contenus
- * @param array $flux
- * @return array
- */
-function albums_affiche_milieu($flux){
-	if ($flux["args"]["exec"] == "configurer_contenu") {
-		$flux["data"] .=  recuperer_fond('prive/squelettes/inclure/configurer',array('configurer'=>'configurer_albums'));
-	}
-	return $flux;
-}
-
-
-/**
- * Pipeline afficher_complement_objet
- * afficher les albums sur les fiches objet
- * sur lesquelles ils ont ete actives
- * 
- * @param  $flux
- * @return
- */
+ * Albums sur la page de visualisation des objets
+**/
 function albums_afficher_complement_objet($flux) {
+	$texte = "";
+	$e = trouver_objet_exec($flux['args']['exec']);
+	$type = $flux['args']['type'];
 
-	if ($type=$flux['args']['type']
-		AND $id=intval($flux['args']['id'])
-		AND (autoriser('ajouteralbum',$type,$id))) {
-
-		$texte = recuperer_fond('prive/objets/contenu/albums_objet', array(
+	if (!$e['edition'] AND in_array(table_objet_sql($type),lire_config('albums/objets'))) {
+		$texte .= '<div id="albums">';
+		$texte .= recuperer_fond('prive/squelettes/contenu/albums_complement_objet', array(
 			'table_source' => 'albums',
-			'objet_source' => 'album',
 			'objet' => $type,
-			'id_objet' => $id,
-		));
+			'id_objet' => intval($flux['args']['id']),
+			'associer_objet' => $type . '|' . intval($flux['args']['id'])
+			),
+			array('ajax'=>true)
+		);
+		$texte .= '</div>';
+	}
+
+	if ($texte) {
 		if ($p=strpos($flux['data'],"<!--afficher_complement_objet-->"))
 			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
 		else
 			$flux['data'] .= $texte;
 	}
-	
+
 	return $flux;
-	
 }
 
 
 /**
- * (Pas utilise pour l instant)
- * Compter les albums dans un objet
- *
- * @param array $flux
- * @return array
- */
-function albums_objet_compte_enfants($flux){
-	if ($objet = $flux['args']['objet']
-	  AND $id=intval($flux['args']['id_objet'])) {
-		// juste les publies ?
-		if (array_key_exists('statut', $flux['args']) and ($flux['args']['statut'] == 'publie')) {
-			$flux['data']['album'] = sql_countsel('spip_albums AS D JOIN spip_albums_liens AS L ON D.id_album=L.id_album', "L.objet=".sql_quote($objet)."AND L.id_objet=".intval($id)." AND (D.statut='publie')");
-		} else {
-			$flux['data']['album'] = sql_countsel('spip_albums AS D JOIN spip_albums_liens AS L ON D.id_album=L.id_album', "L.objet=".sql_quote($objet)."AND L.id_objet=".intval($id)." AND (D.statut='publie' OR D.statut='prepa')");
-		}
+* Objets associes sur la page de visualisation d'un album
+**/
+function albums_affiche_milieu($flux){
+	$texte = "";
+	$e = trouver_objet_exec($flux['args']['exec']);
+
+	if (!$e['edition'] AND $e['type']=='album') {
+		$texte .= '<div id="albums">';
+		$texte .= recuperer_fond('prive/squelettes/contenu/album_objets_lies', array(
+			'id_album' => $flux['args'][$e['id_table_objet']]
+			),
+			array('ajax'=>true)
+		);
+		$texte .= '</div>';
 	}
+
+	if ($texte) {
+		if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
+			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
+		else
+			$flux['data'] .= $texte;
+	}
+
 	return $flux;
 }
 
 
 /**
- * Associer un album a un objet
- *
- * @param array $flux
- * @return array
+ * Compagnons
  */
-function albums_post_insertion($flux) {
-	
-	// LIENS
-	// si variable $associer_objet renseignée...
-	if ($associer_objet = _request('associer_objet') AND isset($associer_objet) AND preg_match(',^\w+\|[0-9]+$,',$associer_objet)){
+function albums_compagnon_messages($flux) {
 
-		$objet_source = objet_type($flux['args']['table']);		// objet_source nouvellement créé (album...)
-		$id_objet_source = $flux['args']['id_objet']; 			// id_objet_source nouvellement créé (id_album...)
-		list($objet,$id_objet) = explode('|',$associer_objet);		// objet et id_objet
+	$exec = $flux['args']['exec'];
+	$pipeline = $flux['args']['pipeline'];
+	$aides = &$flux['data'];
 
-		// si l'objet source est un album, qu'il y a un objet et un id_objet valides...
-		if (	
-			$objet_source == 'album'
-			AND isset($objet)
-			AND isset($id_objet)
-			
-		){
-			// si autorisation modifier objet...
-			if (autoriser('modifier',$objet,$id_objet)){
-				include_spip('action/editer_liens');
-				objet_associer(array($objet_source=>$id_objet_source),array($objet=>$id_objet));
-				if (isset($flux['args']['redirect']))
-					$flux['args']['redirect'] = parametre_url ($flux['args']['redirect'], "id_lien_ajoute", $id_objet_source, '&');
+	switch ($pipeline) {
+		case 'affiche_milieu':
+			switch ($exec) {
+				case 'albums':
+					$aides[] = array(
+						'id' => 'albums_info',
+						'titre' => _T('album:c_albums_info'),
+						'texte' => _T('album:c_albums_info_texte'),
+						'statuts'=> array('1comite', '0minirezo', 'webmestre')
+					);
+					break;
 			}
-		}
-		
+			break;
 	}
-
 	return $flux;
 }
 
 
 /**
  * Mise a jour des liens apres edition
- * @param array $flux
- * @return array
+ * (hum, a revoir...)
  */
 function albums_post_edition($flux){
 	// si on institue un objet, mettre ses albums lies a jour
@@ -121,7 +109,7 @@ function albums_post_edition($flux){
 			$marquer_doublons_album($flux['data'],$flux['args']['id_objet'],$type,id_table_objet($type, $flux['args']['serveur']),$table_objet,$flux['args']['table'], '', $flux['args']['serveur']);
 		}
 
-		if($flux['args']['action']=='instituer' OR isset($flux['data']['statut'])){
+		/*if($flux['args']['action']=='instituer' OR isset($flux['data']['statut'])){
 			include_spip('base/abstract_sql');
 			$id = $flux['args']['id_objet'];
 			$albums = array_map('reset',sql_allfetsel('id_album','spip_albums_liens','id_objet='.intval($id).' AND objet='.sql_quote($type)));
@@ -129,7 +117,7 @@ function albums_post_edition($flux){
 			foreach($albums as $id_album)
 				// mettre a jour le statut si necessaire
 				objet_instituer($id_album);
-		}
+		}*/
 	}
 	else {
 		if ($flux['args']['table']!=='spip_albums'){
@@ -142,14 +130,18 @@ function albums_post_edition($flux){
 }
 
 
-// CSS PUBLIC
+/**
+* Css sur les pages publiques
+*/
 function albums_insert_head_css($flux) {
 	$flux .= '<link rel="stylesheet" href="'.find_in_path('css/albums.css').'" type="text/css" media="all" />';
 	return $flux;
 }
 
 
-// Optimiser la base de donnee en supprimant les liens orphelins
+/**
+* Optimiser la base de donnee en supprimant les liens orphelins
+*/
 function albums_optimiser_base_disparus($flux){
 
 	// albums a la pouvelle
