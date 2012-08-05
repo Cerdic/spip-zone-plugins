@@ -24,7 +24,10 @@ function spam_installe_dist() {
 			$t[4][] = $reg[1].preg_replace(',[^imsxeAESUXu],','',$reg[2]);
 		else $t[0][] = $v;
 	}
-	$t[1] = count($t[1])?'/'.join('|',$t[1]).'/i':'';
+	if(count($t[1])) {
+		$t[1] = '/'.join('|',$t[1]).'/i';
+		if($GLOBALS['meta']['charset'] == 'utf-8') $t[1] .= 'u';
+	} else $t[1] = '';
 	$t[2] = count($t[2])?'/&#(?:'.join('|',$t[2]).');/i':'';
 	$spam_mots = defined('_spam_IPS')?spam_liste_mots(_spam_IPS):array();
 	array_walk($spam_mots, 'spam_walk');
@@ -49,7 +52,7 @@ function spam_liste_mots($texte) {
 	for($i=0; $i<$c; $i++) if (($s = trim($split[$i])) != ""){
 		if (($i & 1) && ($i != $c-1)) {
 			// on touche pas au texte entre deux ""
-			$split2[] = $s;
+			$split2[] = $split[$i];
 		} else {
 			// on rassemble tous les separateurs : \s\t\n
 			$temp = preg_replace("/[\s\t\n\r]+/", "\t", $s);
