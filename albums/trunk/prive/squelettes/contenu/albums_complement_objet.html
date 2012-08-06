@@ -88,7 +88,7 @@
 
 
 <!-- ICONE ajouter -->
-[(#ENV{albums}|non)
+[(#AUTORISER{creer,album}|et{#ENV{albums}|non}|oui)
 	[(#SET{label,<:album:icone_ajouter_album:>})]
 	[(#GET{self}|parametre_url{albums,creer}|icone_verticale{#GET{label},album,new,'ajax preload right'}inserer_attribut{title,#GET{label}})]
 ]
