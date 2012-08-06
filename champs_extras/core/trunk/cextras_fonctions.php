@@ -31,6 +31,13 @@ function balise_CHAMP_EXTRA_dist($p) {
 // retourne un champ extra donne (le tableau de description des options de saisies)
 // ou un des attributs de ce tableau
 function calculer_balise_CHAMP_EXTRA($objet, $colonne, $demande='') {
+	// Si la balise n'est pas dans une boucle, on cherche un objet explicite dans le premier argument
+	// de la forme "spip_tables/colonne"
+	if (!$objet and $decoupe = split('/', $colonne) and is_array($decoupe) and count($decoupe) == 2){
+		$objet = $decoupe[0];
+		$colonne = $decoupe[1];
+	}
+	
 	// recuperer la liste des champs extras existants
 	include_spip('cextras_pipelines');
 	if (!$saisies = champs_extras_objet( $table = table_objet_sql($objet) )) {
