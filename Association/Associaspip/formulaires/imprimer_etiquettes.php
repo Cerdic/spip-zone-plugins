@@ -66,13 +66,13 @@ function formulaires_imprimer_etiquettes_traiter_dist()
 	$indice_ligne = 0;
 	$num_page = 1;
 
-	$pdf=new PDF('P', 'mm', array($GLOBALS['association_metas']['etiquette_largeur_page'],$GLOBALS['association_metas']['etiquette_hauteur_page']),false);
+	$pdf = new PDF(false, array($GLOBALS['association_metas']['etiquette_largeur_page'],$GLOBALS['association_metas']['etiquette_hauteur_page']), 'mm', 'P');
 	$pdf->titre = _T('asso:adherent_titre_liste_actifs');
 	$pdf->Open();
 	$pdf->AddPage();
 	$pdf->SetAutoPageBreak(0 ,0);
 	$pdf->AliasNbPages();
-	$pdf->SetFont('Arial','',8);
+	$pdf->SetFontSize(8);
 
 	$affiche_civilite = $GLOBALS['association_metas']['etiquette_avec_civilite'];
 
@@ -119,26 +119,26 @@ function formulaires_imprimer_etiquettes_traiter_dist()
 		$pdf->SetLeftMargin($posx);
 		//$pdf->setX($posx);
 		$pdf->setY($posy);
-		$pdf->SetFont('Arial','',7);
+		$pdf->SetFontSize(7);
 #		$pdf->Cell(0,5,($indice+1).' -'.$etiquette['ligne1'],0,2); // active l'affichage des  id_adresse-id_auteur au dessus de l'etiquette d'adresse : utile en deboguage
 		$pdf->Cell(0,5,' ',0,2); // cree une petite ligne vide : a mettre en lieu et place de la precedente en phase finale
-		$pdf->SetFont('Arial','B',9);
+		$pdf->AdaptFont(9,'B');
 		$pdf->Cell(0,5,utf8_decode($etiquette['ligne2']),0,2);
-		$pdf->SetFont('Arial','',8);
+		$pdf->SetFontSize(8);
 		if ($etiquette['ligne3'] >'') {
 			$pdf->Cell(0,5,utf8_decode($etiquette['ligne3']),0,2);
 		}
 		if ($etiquette['ligne4'] >'') {
 			$pdf->Cell(0,5,utf8_decode($etiquette['ligne4']),0,2);
 		}
-		$pdf->SetFont('Arial','B',9);
+		$pdf->AdaptFont(9,'B');
 		if ($etiquette['ligne5'] >'') {
 			$pdf->cell(0,5,utf8_decode($etiquette['ligne5']),0,2);
 		}
 		if ($etiquette['ligne6'] >'') {
 			$pdf->cell(0,5,utf8_decode($etiquette['ligne6']),0,2);
 		}
-		$pdf->SetFont('Arial','',8);
+		$pdf->SetFontSize(8);
 		if ($etiquette['ligne7'] >'') {
 			$pdf->cell(0,5,utf8_decode($etiquette['ligne7']),0,2);
 		}

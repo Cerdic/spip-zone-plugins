@@ -67,9 +67,6 @@ function exec_pdf_adherents()
 			$telephones = association_recuperer_telephones($liste_id_auteurs);
 		}
 		$prop = array(
-			'HeaderColor'=>array(255,150,100),
-			'color1'=>array(224,235,255),
-			'color2'=>array(255,255,255),
 			'padding'=>2
 		);
 		$order = 'id_auteur';
@@ -96,7 +93,7 @@ function exec_pdf_adherents()
 			}
 		}
 
-		$pdf->Query_extended(sql_select('*, c.libelle as categorie','spip_asso_membres m LEFT JOIN spip_asso_categories c ON m.categorie = c.id_categorie', sql_in('id_auteur', $liste_id_auteurs), '', $order), $prop, $adresses_tels, 'id_auteur');
+		$pdf->Query(sql_select('*, c.libelle as categorie','spip_asso_membres m LEFT JOIN spip_asso_categories c ON m.categorie = c.id_categorie', sql_in('id_auteur', $liste_id_auteurs), '', $order), $prop, $adresses_tels, 'id_auteur');
 		$pdf->Output();
 	}
 }

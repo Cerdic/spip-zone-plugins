@@ -695,12 +695,10 @@ if (test_plugin_actif('FPDF')) {
 class ExportComptes_PDF extends FPDF {
 
     // variables de parametres de mise en page
-    var $largeur = 210; // format A4
-    var $hauteur = 297; // format A4
-    var $marge_gauche = 10;
-    var $marge_droite = 10;
-    var $marge_haut = 10;
-    var $marge_bas = 10;
+    var $largeur = $GLOBALS['association_metas']['fpdf_widht']; // 210 = format A4
+    var $hauteur = $GLOBALS['association_metas']['fpdf_height']; // 297 = format A4
+    var $marge_gauche = $marge_droite = $GLOBALS['association_metas']['fpdf_marginl'];
+    var $marge_haut = $marge_bas = $GLOBALS['association_metas']['fpdf_margint'];
     var $icone_h = 20;
     var $icone_v = 20;
     var $space_v = 2;
@@ -741,7 +739,8 @@ class ExportComptes_PDF extends FPDF {
 	// typo par defaut
 	$this->SetFont('Arial', '', 12);
 	// engager la page
-	$this->AddPage();
+	// http://fpdf.org/en/doc/addpage.htm
+	$this->AddPage($GLOBALS['association_metas']['fpdf_orientation'], $GLOBALS['association_metas']['fpdf_format']?$GLOBALS['association_metas']['fpdf_format']:array($GLOBALS['association_metas']['fpdf_widht'], $GLOBALS['association_metas']['fpdf_height']) );
     }
 
     // Pied de pages : redefinition de FPDF::Footer() qui est automatiquement appele par FPDF::AddPage() et FPDF::Close() !

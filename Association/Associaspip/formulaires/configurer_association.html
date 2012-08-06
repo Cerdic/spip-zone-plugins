@@ -265,31 +265,42 @@ Cette fonctionnalite n'est possible que si le plugin "FPDF" est active... -->]
 									<option value="Letter"[ (#ENV{fpdf_unit}|ucfirst|=={Letter}|oui) selected="selected"]><:asso:config_fpdf_letter:></option>
 								</select>
 							</li>
-						</ul>
-					</fieldset>
-
-					<fieldset>
-						<legend><:asso:config_fpdf_font:></legend>
-						<ul>
 							<li>
+								<label for="fpdf_marginl"><:asso:config_fpdf_marginh></label>
+								<input type="[(#HTML5|?{number,text})" class="number, integer" name="fpdf_marginl" id="fpdf_marginl" value="[(#ENV{fpdf_marginl,10})]" />
+							</li>
+							<li>
+								<label for="fpdf_margint"><:asso:config_fpdf_marginv></label>
+								<input type="[(#HTML5|?{number,text})" class="number, integer" name="fpdf_margint" id="fpdf_margint" value="[(#ENV{fpdf_margint,10})]" />
+							</li>
+							<li>
+								<label for="fpdf_font"><:asso:config_fpdf_font:></label>
+								<select name="fpdf_font" id="fpdf_font">
+									<option value="courrier"[ (#ENV{fpdf_font}|strtolower|=={courrier}|oui) selected="selected"]>Courrier</option>
+									<option value="helvetica"[ (#ENV{fpdf_font}|strtolower|=={helvetica}|oui) selected="selected"]>Helvetica</option>
+									<option value="symbol"[ (#ENV{fpdf_font}|strtolower|=={symbol}|oui) selected="selected"]>Symbol</option>
+									<option value="tahoma"[ (#ENV{fpdf_font}|strtolower|=={tahoma}|oui) selected="selected"]>Tahoma</option>
+									<option value="times"[ (#ENV{fpdf_font}|strtolower|=={times}|oui) selected="selected"]>Times</option>
+									<option value="zapfdingbats"[ (#ENV{fpdf_font}|strtolower|=={zapfdingbats}|oui) selected="selected"]>Zapf Dingbats</option>
+								</select>
 							</li>
 						</ul>
 					</fieldset>
 
 					<fieldset>
-						<legend><:asso:fpdf_libelle_tablecolors:></legend>
+						<legend><:asso:fpdf_tablecolors:></legend>
 						<ul>
 							<li>
 								<label for="fpdf_rowhead"><:asso:config_fpdf_rowhead:></label>
-								<input type="text" class="palette" name="fpdf_rowhead"value="[(#ENV{fpdf_rowhead})]" />
+								<input type="text" class="palette" name="fpdf_rowhead" id="fpdf_rowhead" value="[(#ENV{fpdf_rowhead,FF9664})]" />
 							</li>
 							<li>
 								<label for="fpdf_roweven"><:asso:config_fpdf_roweven:></label>
-								<input type="text" class="palette" name="fpdf_roweven"value="[(#ENV{fpdf_rowhead})]" />
+								<input type="text" class="palette" name="fpdf_roweven" id="fpdf_roweven" value="[(#ENV{fpdf_roweven,E0EBFF})]" />
 							</li>
 							<li>
 								<label for="fpdf_rowodd"><:asso:config_fpdf_rowodd:></label>
-								<input type="text" class="palette" name="fpdf_rowodd"value="[(#ENV{fpdf_rowodd})]" />
+								<input type="text" class="palette" name="fpdf_rowodd" id="fpdf_rowodd" value="[(#ENV{fpdf_rowodd,FFFFFF})]" />
 							</li>
 						</ul>
 					</fieldset>

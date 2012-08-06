@@ -32,9 +32,6 @@ function exec_pdf_activite()
 		$pdf->AddCol('inscrits',10,_T('asso:activite_entete_inscrits'),'R');
 		$pdf->AddCol('montant',20,utf8_decode(_T('asso:entete_montant')),'R');
 		$prop = array(
-			'HeaderColor'=>array(255,150,100),
-			'color1'=>array(224,235,255),
-			'color2'=>array(255,255,255),
 			'padding'=>2
 		);
 		$pdf->Table("SELECT * FROM spip_asso_activites WHERE id_evenement=$id_evenement ORDER BY nom, date_inscription", $prop);
