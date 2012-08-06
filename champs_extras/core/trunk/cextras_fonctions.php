@@ -32,7 +32,7 @@ function balise_CHAMP_EXTRA_dist($p) {
 // ou un des attributs de ce tableau
 function calculer_balise_CHAMP_EXTRA($objet, $colonne, $demande='') {
 	// Si la balise n'est pas dans une boucle, on cherche un objet explicite dans le premier argument
-	// de la forme "spip_tables/colonne"
+	// de la forme "trucs/colonne" ou "spip_trucs/colonne"
 	if (!$objet and $decoupe = explode('/', $colonne) and is_array($decoupe) and count($decoupe) == 2){
 		$objet = $decoupe[0];
 		$colonne = $decoupe[1];
