@@ -9,6 +9,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // declaration vide pour ce pipeline.
 function albums_autoriser(){}
 
+// administrer
+function autoriser_albums_administrer_dist($faire,$quoi,$id,$qui,$options) {
+	return $qui['statut'] == '0minirezo';
+}
+
 // creer
 function autoriser_album_creer_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite')); 
@@ -32,25 +37,6 @@ function autoriser_album_supprimer_dist($faire, $type, $id, $qui, $opt) {
 // associer (lier / delier)
 function autoriser_associeralbums_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
-}
-
-// ajouter un album a un objet editorial
-function autoriser_ajouteralbum_dist($faire, $type, $id, $qui, $opt){
-	return
-		(
-			$type=='article' OR in_array(table_objet_sql($type),lire_config('albums/objets'))
-		)
-		AND (
-		  (
-			  $id>0
-		    AND autoriser('modifier', $type, $id, $qui, $opt)
-		  )
-			OR (
-				$id<0
-				AND abs($id) == $qui['id_auteur']
-				AND autoriser('ecrire', $type, $id, $qui, $opt)
-			)
-		);
 }
 
 /**
