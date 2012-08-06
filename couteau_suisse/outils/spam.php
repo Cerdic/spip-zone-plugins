@@ -13,22 +13,22 @@ function spam_installe_dist() {
 		// des regexpr ou ips (sans delimiteurs)
 		array(), array(), array(), array()
 	);
+	// essai de mouliner correctement les bordures de mot en utf-8
+	if($GLOBALS['meta']['charset'] == 'utf-8') { $b1 = '(^|[\P{L}])'; $b2='([\P{L}]|$)'; $b3='u'; }
+		else { $b1 = '\\b'; $b2='\\b'; $b3=''; }
 	// repere les mots entiers entre parentheses, les regexpr entre slashes et les caracteres unicodes
 	$spam_mots = defined('_spam_MOTS')?spam_liste_mots(_spam_MOTS):array();
 	foreach($spam_mots as $v) {
 		if(preg_match(',^\((.+)\)$,', $v, $reg))
-			$t[1][] = '\b'.preg_quote($reg[1], '/').'\b';
+			$t[1][] = $b1.preg_quote($reg[1], '/').$b2;
 		elseif(preg_match(',^\/(&#)?(.*?)(;?)\/$,', $v, $reg))
 			$t[($reg[2] && $reg[3])?2:1][]=$reg[2];
-		elseif(preg_match(',^(\/.*\/)([a-z]+)$,i', $v, $reg))
+		elseif(preg_match(',^(\/.*\/)([a-z]+)$,i'.$b3, $v, $reg))
 			$t[4][] = $reg[1].preg_replace(',[^imsxeAESUXu],','',$reg[2]);
 		else $t[0][] = $v;
 	}
-	if(count($t[1])) {
-		$t[1] = '/'.join('|',$t[1]).'/i';
-		if($GLOBALS['meta']['charset'] == 'utf-8') $t[1] .= 'u';
-	} else $t[1] = '';
-	$t[2] = count($t[2])?'/&#(?:'.join('|',$t[2]).');/i':'';
+	$t[1] = count($t[1])?'/'.join('|',$t[1]).'/i'.$b3:'';
+	$t[2] = count($t[2])?'/&#(?:'.join('|',$t[2]).');/i'.$b3:'';
 	$spam_mots = defined('_spam_IPS')?spam_liste_mots(_spam_IPS):array();
 	array_walk($spam_mots, 'spam_walk');
 	$t[3] = count($spam_mots)?'/^(?:' . join('|', $spam_mots) . ')$/':'';

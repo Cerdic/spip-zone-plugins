@@ -14,8 +14,8 @@ function spam_filtre_de_test($texte) {
 function spam_filtre_de_test_array($textes) {
 	$spam = cs_lire_data_outil('spam');
 	$test = false;
-	foreach($textes as $texte) cs_test_spam($spam, $texte, $test);
-	return $test?'ko':'ok';
+	foreach($textes as $texte) if(cs_test_spam($spam, $texte, $test)) return 'ko';
+	return 'ok';
 }
 
 function spam_filtre_de_test_ip($texte, $liste=false) {
