@@ -1,18 +1,18 @@
-<traduction module="edir" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/edition_directe/trunk/lang/" reference="fr">
-	<langue code="de" url="http://trad.spip.org/tradlang_module/edir?lang_cible=de">
-		<traducteur nom="Rainer Müller" lien="http://trad.spip.org/auteur/rainer-muller" />
+<traduction module="edir" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/edition_directe/trunk/lang/" reference="fr">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/edir?lang_cible=de">
+		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
 	</langue>
-	<langue code="en" url="http://trad.spip.org/tradlang_module/edir?lang_cible=en">
-		<traducteur nom="Rainer Müller" lien="http://trad.spip.org/auteur/rainer-muller" />
+	<langue code="en" url="http://trad.spip.net/tradlang_module/edir?lang_cible=en">
+		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
 	</langue>
-	<langue code="es" url="http://trad.spip.org/tradlang_module/edir?lang_cible=es">
-		<traducteur nom="Rainer Müller" lien="http://trad.spip.org/auteur/rainer-muller" />
+	<langue code="es" url="http://trad.spip.net/tradlang_module/edir?lang_cible=es">
+		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.org/tradlang_module/edir?lang_cible=fa">
-		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/edir?lang_cible=fa">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" />
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/edir?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/edir?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
