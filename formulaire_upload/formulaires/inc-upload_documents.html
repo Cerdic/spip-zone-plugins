@@ -19,7 +19,7 @@
 			<label for="surrpimer_[(#ID_DOCUMENT)]_#ENV{objet}_#ENV{id_objet}"><:formupload:remove:></label>
 		</div>
 		<h4 class="#EDIT{titre}">[(#TITRE|sinon{[(#FICHIER|basename|couper{20})]})]</h4>
-		[<div class="spip_doc_descriptif #EDIT{descriptif}">(#DESCRIPTIF|sinon{<:info_descriptif:>})</div>]
+		[<div class="spip_doc_descriptif #EDIT{descriptif}">(#DESCRIPTIF)</div>]
 	</div>
 	<br class='nettoyeur' />
 	[(#CONFIG{formupload/insert_code}|?{' ',''})

@@ -56,7 +56,7 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
 		include_spip('action/joindre');
 		$joindre1 = charger_fonction('joindre1', 'inc');
 		if(!$joindre1($files, 'document', $type, $id_objet, 0, $hash, $redirect, $documents_actifs, $iframe_redirect))
-			$res['message_erreur'] = _T('gis:erreur_copie_impossible');
+			$res['message_erreur'] = _T('formupload:erreur_copie_impossible');
 		$invalider = true;
 		$res['message_ok'] = _T("formupload:msg_doc_added");
 	}
