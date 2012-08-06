@@ -24,15 +24,15 @@ function exec_pdf_adherents()
 		$where = _request('where_adherents');
 		$jointure = _request('jointure_adherents');
 		$statut = _request('statut_interne');
-
+		// la requete de base
 		$query = sql_select('a.id_auteur AS id_auteur','spip_asso_membres' .  " a $jointure", $where, '', 'nom_famille ');
+		// tableau des resultats
 		$liste_id_auteurs = array();
 		while ($data = sql_fetch($query)) {
 			$liste_id_auteurs[] = $data['id_auteur'];
 		}
 
 		$pdf = new PDF();
-
 		if ($statut) {
 			$pdf->titre = _T('asso:adherent_titre_liste_'.$statut);
 		} else {
@@ -46,9 +46,13 @@ function exec_pdf_adherents()
 		$sent = _request('champs');
 		foreach ($champs['field'] as $k => $v) {
 			if ($sent[$k]=='on') {
-				$type = strpos($v, 'text');
-				$p = ($type===false) ? 'R' : (($type==0) ? 'L' : 'C');
-				$n = ($type===false) ? 20 : (($type==0) ? 45 : 25);
+#				$type = strpos($v, 'text');
+				$type_txt = preg_match('#(char|text|var)#',$v);
+				$type_num = preg_match('#(dec|int|float)#',$v);
+#				$p = ($type===false) ? 'R' : (($type==0) ? 'L' : 'C');
+				$p = $type_txt?'L':($type_num?'R':'C');
+#				$n = ($type===false) ? 20 : (($type==0) ? 45 : 25);
+				$n = $type_txt?45:($type_num?20:25);
 				$pdf->AddCol($k,$n,_T('asso:adherent_libelle_' . $k), $p);
 			}
 		}

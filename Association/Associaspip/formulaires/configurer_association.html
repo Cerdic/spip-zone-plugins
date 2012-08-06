@@ -258,19 +258,19 @@ Cette fonctionnalite n'est possible que si le plugin "FPDF" est active... -->]
 							<li class="editer_fpdf_format">
 								<label for="fpdf_format"><:asso:config_fpdf_format:></label>
 								<select name="fpdf_format" id="fpdf_format">
-									<option value="A3"[ (#ENV{fpdf_unit}|ucfirst|=={A3}|oui)selected="selected"]><:asso:config_fpdf_a3:></option>
-									<option value="A4"[ (#ENV{fpdf_unit}|ucfirst|=={A4}|oui) selected="selected"]><:asso:config_fpdf_a4:></option>
-									<option value="A5"[ (#ENV{fpdf_unit}|ucfirst|=={A5}|oui) selected="selected"]><:asso:config_fpdf_legal:></option>
-									<option value="Legal"[ (#ENV{fpdf_unit}|ucfirst|=={Legal}|oui) selected="selected"]><:asso:config_fpdf_legal:></option>
-									<option value="Letter"[ (#ENV{fpdf_unit}|ucfirst|=={Letter}|oui) selected="selected"]><:asso:config_fpdf_letter:></option>
+									<option value="A3"[ (#ENV{fpdf_format}|ucfirst|=={A3}|oui)selected="selected"]><:asso:config_fpdf_a3:></option>
+									<option value="A4"[ (#ENV{fpdf_format}|ucfirst|=={A4}|oui) selected="selected"]><:asso:config_fpdf_a4:></option>
+									<option value="A5"[ (#ENV{fpdf_format}|ucfirst|=={A5}|oui) selected="selected"]><:asso:config_fpdf_a5:></option>
+									<option value="Legal"[ (#ENV{fpdf_format}|ucfirst|=={Legal}|oui) selected="selected"]><:asso:config_fpdf_legal:></option>
+									<option value="Letter"[ (#ENV{fpdf_format}|ucfirst|=={Letter}|oui) selected="selected"]><:asso:config_fpdf_letter:></option>
 								</select>
 							</li>
 							<li>
-								<label for="fpdf_marginl"><:asso:config_fpdf_marginh></label>
+								<label for="fpdf_marginl"><:asso:config_fpdf_marginh:></label>
 								<input type="[(#HTML5|?{number,text})" class="number, integer" name="fpdf_marginl" id="fpdf_marginl" value="[(#ENV{fpdf_marginl,10})]" />
 							</li>
 							<li>
-								<label for="fpdf_margint"><:asso:config_fpdf_marginv></label>
+								<label for="fpdf_margint"><:asso:config_fpdf_marginv:></label>
 								<input type="[(#HTML5|?{number,text})" class="number, integer" name="fpdf_margint" id="fpdf_margint" value="[(#ENV{fpdf_margint,10})]" />
 							</li>
 							<li>

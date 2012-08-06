@@ -60,7 +60,7 @@ function formulaires_imprimer_etiquettes_traiter_dist()
 	include_spip('inc/acces');
 	include_spip('pdf/extends');
 	$pas_horizontal = (($GLOBALS['association_metas']['etiquette_largeur_page']-$GLOBALS['association_metas']['etiquette_marge_gauche_page']-$GLOBALS['association_metas']['etiquette_marge_droite_page']-($GLOBALS['association_metas']['etiquette_nb_colonne']-1)*$GLOBALS['association_metas']['etiquette_espace_etiquettesl'])/$GLOBALS['association_metas']['etiquette_nb_colonne'])+$GLOBALS['association_metas']['etiquette_espace_etiquettesl'];
-	$pas_vertical$GLOBALS['association_metas']['etiquette_hauteur_page']-$GLOBALS['association_metas']['etiquette_marge_haut_page']-$GLOBALS['association_metas']['etiquette_marge_bas_page']-($GLOBALS['association_metas']['etiquette_nb_ligne']-1)*$GLOBALS['association_metas']['etiquette_espace_etiquettesh'])/$GLOBALS['association_metas']['etiquette_nb_ligne']+$GLOBALS['association_metas']['etiquette_espace_etiquettesh'];
+	$pas_vertical = ($GLOBALS['association_metas']['etiquette_hauteur_page']-$GLOBALS['association_metas']['etiquette_marge_haut_page']-$GLOBALS['association_metas']['etiquette_marge_bas_page']-($GLOBALS['association_metas']['etiquette_nb_ligne']-1)*$GLOBALS['association_metas']['etiquette_espace_etiquettesh'])/$GLOBALS['association_metas']['etiquette_nb_ligne']+$GLOBALS['association_metas']['etiquette_espace_etiquettesh'];
 	$tab_etiquette = array();
 	$indice_colonne = 0;
 	$indice_ligne = 0;

@@ -39,7 +39,7 @@ class PDF extends FPDF
 		);
 		// reinitialiser les marges
 		if ( is_numeric($GLOBALS['association_metas']['fpdf_marginl']) AND is_numeric($GLOBALS['association_metas']['fpdf_margint']) )
-			$this->SetMargins($GLOBALS['association_metas']['fpdf_marginl'], $GLOBALS['association_metas']['fpdf_margint'] )
+			$this->SetMargins($GLOBALS['association_metas']['fpdf_marginl'], $GLOBALS['association_metas']['fpdf_margint'] );
 		// meta pour le fichier PDF
 		$this->SetAuthor('Associaspip');
 		$this->SetCreator('FPDF');
@@ -89,7 +89,7 @@ class PDF extends FPDF
 			$this->Ln(10); // Saut de ligne : 10pt de haut
 		}
 		if($this->ProcessingTable)
-			$this->TableHeader() // Imprime l'en-tete du tableau si necessaire
+			$this->TableHeader(); // Imprime l'en-tete du tableau si necessaire
 	}
 
     // Pied de pages : redefinition de FPDF::Footer() qui est automatiquement appele par FPDF::AddPage() et FPDF::Close() !
@@ -183,7 +183,7 @@ class PDF extends FPDF
 	function AddCol($field=-1, $width=-1, $caption='', $align='L') {
 		if($field==-1)
 			$field = count($this->aCols);
-		$this->aCols[] = array('f'=>$field, 'c'=>html_entity_decode($caption), 'w'=>$width, 'a'=>$align);
+		$this->aCols[] = array('f'=>$field, 'c'=>utf8_decode(html_entity_decode($caption)), 'w'=>$width, 'a'=>$align);
 	}
 
 	/* Fonction modifiee pour Associaspip
@@ -198,7 +198,7 @@ class PDF extends FPDF
 	 * le parametre data doit donc etre un tableau de la forme: valeur_champ_jointure => array(champs1=>valeur, champs2=>valeur, ..)  afin d'inserer
 	 * dans le resultat de la requete les champs champs1 et champ2 en jointure = sur le champs fourni dans l'autre parametre
 	**/
-	function Query($res, $prop=array(), $data=array(), $champ_jointure=array() ) {
+	function Query($res, $prop=array(), $data=array(), $champ_jointure='' ) {
 		// Traite les proprietes
 		if(!isset($prop['width']))
 			$prop['width'] = 0;
@@ -211,23 +211,23 @@ class PDF extends FPDF
 		$cMargin = $this->cMargin;
 		$this->cMargin = $prop['padding'];
 		if(!isset($prop['HeaderColor']))
-			$prop['HeaderColor'] = hex2rgb($GLOBALS['association_metas']['fpdf_rowhead']);
+			$prop['HeaderColor'] = $this->hex2rgb($GLOBALS['association_metas']['fpdf_rowhead']);
 		$this->HeaderColor = $prop['HeaderColor'];
 		if(!isset($prop['color1']))
-			$prop['color1'] = hex2rgb($GLOBALS['association_metas']['fpdf_roweven']);
+			$prop['color1'] = $this->hex2rgb($GLOBALS['association_metas']['fpdf_roweven']);
 		if(!isset($prop['color2']))
-			$prop['color2'] = hex2rgb($GLOBALS['association_metas']['fpdf_rowodd']);
-		// Traite les donnees
-		$this->RowColors = array($prop['color1'],$prop['color2']);
+			$prop['color2'] = $this->hex2rgb($GLOBALS['association_metas']['fpdf_rowodd']);
+		// Initialiser l'affichage des donnees
+		$this->RowColors = array($prop['color1'],$prop['color2']); // Indique l'alternance des couleurs de fond
 		$this->CalcWidths($prop['width'],$prop['align']); // Calcule les largeurs des colonnes
 		$this->TableHeader(); // Imprime l'en-tete
+		$this->AdaptFont(8); // Police 8pt
 		// Imprime les lignes
-		$this->AdaptFont(8);
 		$this->ColorIndex = 0;
 		$this->ProcessingTable = true;
 		// partie du code modifiee pour etendre la fonction Query
 		while($row = sql_fetch($res)) {
-			if (is_array($data[$row[$champ_jointure]])
+			if (is_array($data[$row[$champ_jointure]]))
 				$row = array_merge($row,$data[$row[$champ_jointure]]);
 			$this->RowMulticell($row);
 		}
@@ -238,7 +238,7 @@ class PDF extends FPDF
 	}
 
 	// idem que Query sauf qu'on lui passe le texte de la requete SQL et non la ressource du resultat de la requete
-	function Table($query, $prop=array(), $data=array(), $champ_jointure=array() ){
+	function Table($query, $prop=array(), $data=array(), $champ_jointure='' ){
 		$this->Query(spip_query($query), $prop, $data, $champ_jointure); // execute la requete
 	}
 
