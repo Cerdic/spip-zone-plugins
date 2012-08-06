@@ -46,6 +46,15 @@ function albums_affiche_milieu($flux){
 	$e = trouver_objet_exec($flux['args']['exec']);
 
 	if (!$e['edition'] AND $e['type']=='album') {
+
+		// auteurs
+		$texte .= recuperer_fond('prive/objets/editer/liens', array(
+			'table_source' => 'auteurs',
+			'objet' => $e['type'],
+			'id_objet' => $flux['args'][$e['id_table_objet']]
+		));
+
+		// objets associes
 		$texte .= '<div id="albums">';
 		$texte .= recuperer_fond('prive/squelettes/contenu/album_objets_lies', array(
 			'id_album' => $flux['args'][$e['id_table_objet']]
