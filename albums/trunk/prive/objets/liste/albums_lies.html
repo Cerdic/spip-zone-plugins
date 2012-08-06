@@ -48,17 +48,21 @@
 			
 			[(#REM) Boutons actions éditer/délier ]
 			<td class='action'>
-				#SET{redirect,#SELF|ancre_url{albums}}
-				<a href="[(#URL_ECRIRE{album_edit,id_album=#ID_ALBUM}|parametre_url{redirect,#GET{redirect}})]" class="editbox" title="<:album:icone_modifier_album:>">
-				[(#CHEMIN_IMAGE{edit-16.png}|balise_img{'album:texte_modifier'})]
-				</a>
-				[(#VU|=={oui}|?{
-					[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{<:medias:document_vu:>,bouton_off}|inserer_attribut{title,<:medias:document_vu:>}|image_nb|image_gamma{40})],
-					[(#BOUTON_ACTION{
-						[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'album:icone_supprimer_album'})],
-						[(#URL_ACTION_AUTEUR{edition_albums,delier/#ID_ALBUM/[(#ENV{associer_objet})],#SELF})],'button link ajax'}
-					)]
-				})]
+				[(#AUTORISER{modifier,album}|oui)
+					#SET{redirect,#SELF|ancre_url{albums}}
+					<a href="[(#URL_ECRIRE{album_edit,id_album=#ID_ALBUM}|parametre_url{redirect,#GET{redirect}})]" class="editbox" title="<:album:icone_modifier_album:>">
+					[(#CHEMIN_IMAGE{edit-16.png}|balise_img{'album:texte_modifier'})]
+					</a>
+				]
+				[(#AUTORISER{associeralbums,album}|oui)
+					[(#VU|=={oui}|?{
+						[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{<:medias:document_vu:>,bouton_off}|inserer_attribut{title,<:medias:document_vu:>}|image_nb|image_gamma{40})],
+						[(#BOUTON_ACTION{
+							[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'album:icone_supprimer_album'})],
+							[(#URL_ACTION_AUTEUR{edition_albums,delier/#ID_ALBUM/[(#ENV{associer_objet})],#SELF})],'button link ajax'}
+						)]
+					})]
+				]
 			</td>
 		</tr>
 
