@@ -151,40 +151,42 @@ var geocoder;]
 						#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
 						#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
 						["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
-						"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)],
-						"icon_anchor": [(#VAL{91}|chr)][(#GET{icon_w}|div{2})],[(#GET{icon_h})][(#VAL{93}|chr)]]
+						"icon_size": \[#GET{icon_w},#GET{icon_h}\],
+						"icon_anchor": \[[(#GET{icon_w}|div{2})],[(#GET{icon_h})]\]]
 					}
 				}]
 		}
-		var geojson = new L.GeoJSON();
-		form_map.addLayer(geojson);
-		geojson.on("featureparse", function(e){
-			if (e.geometryType == 'Polygon' || e.geometryType == 'LineString') {
-				if (e.geometryType == 'Polygon') // virer le dernier point du polygon pour faciliter l'edition
-					e.layer.spliceLatLngs(-1,1);
-				// centrer la carte sur les bounds de l'objet
-				form_map.fitBounds(e.layer.getBounds());
-				// activer l'édition sur l'objet
-				e.layer.editing.enable();
-				// surveiller les changements sur les points de l'objet
-				e.layer.on("edit", function(e){
-					$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.target));
-					var center = e.target.getBounds().getCenter();
-					$('#champ_#ENV{champ_lat,lat}').val(center.lat);
-					$('#champ_#ENV{champ_lon,lon}').val(center.lng);
-				});
-			} else if (e.geometryType == 'Point') {
-				marker = e.layer;
-				// rendre le marker draggable
-				e.layer.options.draggable = true;
-				// surveiller les changements sur le point
-				e.layer.on("dragend", function(e){
-					$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.target));
-					maj_inputs(form_map,e.target._latlng,'click');
-				});
+		var geojson = new L.geoJson('', {
+			onEachFeature: function (feature, layer) {
+				console.log(feature);
+				console.log(layer);
+				if (feature.geometry.type == 'Polygon' || feature.geometry.type == 'LineString') {
+					if (feature.geometry.type == 'Polygon') // virer le dernier point du polygon pour faciliter l'edition
+						layer.spliceLatLngs(-1,1);
+					// centrer la carte sur les bounds de l'objet
+					form_map.fitBounds(layer.getBounds());
+					// activer l'édition sur l'objet
+					layer.editing.enable();
+					// surveiller les changements sur les points de l'objet
+					layer.on("edit", function(e){
+						$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.target));
+						var center = e.target.getBounds().getCenter();
+						$('#champ_#ENV{champ_lat,lat}').val(center.lat);
+						$('#champ_#ENV{champ_lon,lon}').val(center.lng);
+					});
+				} else if (feature.geometry.type == 'Point') {
+					marker = layer;
+					// rendre le marker draggable
+					layer.options.draggable = true;
+					// surveiller les changements sur le point
+					layer.on("dragend", function(e){
+						$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.target));
+						maj_inputs(form_map,e.target._latlng,'click');
+					});
+				}
 			}
-		});
-		geojson.addGeoJSON(data);
+		}).addTo(form_map);
+		geojson.addData(data);
 		</BOUCLE_gis>
 		[(#REM) afficher les outils de dessin uniquement lors de la création d'objet ]
 		
