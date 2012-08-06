@@ -142,9 +142,9 @@ var geocoder;]
 		[(#ENV{lat}|et{#ENV{lon}}|oui)
 		var data = {
 			"type": "FeatureCollection",
-			"features": [(#VAL{91}|chr)]
+			"features": \[
 				{"type": "Feature",
-					"geometry": {"type": "Point", "coordinates": [(#VAL{91}|chr)]#ENV{lon}, #ENV{lat}[(#VAL{93}|chr)]},
+					"geometry": {"type": "Point", "coordinates": \[#ENV{lon}, #ENV{lat}\]},
 					"id":"#ENV{id_gis,oui}",
 					"properties": {
 						"title":[(#ENV{titre,''}|supprimer_numero|json_encode)],
@@ -153,28 +153,29 @@ var geocoder;]
 						#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
 						#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
 						["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
-						"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)],
-						"icon_anchor": [(#VAL{91}|chr)][(#GET{icon_w}|div{2})],[(#GET{icon_h})][(#VAL{93}|chr)]]
+						"icon_size": \[#GET{icon_w},#GET{icon_h}\],
+						"icon_anchor": \[[(#GET{icon_w}|div{2})],[(#GET{icon_h})]\]]
 					}
-				}[(#VAL{93}|chr)]
+				}\]
 		}
-		var geojson = new L.GeoJSON();
-		geojson.on("featureparse", function(e){
-			marker = e.layer;
-			e.layer.options.draggable = true;
-			if (e.properties && e.properties.icon){
-				e.layer.setIcon(new L.Icon({
-					iconUrl: e.properties.icon,
-					iconSize: new L.Point( e.properties.icon_size[(#VAL{91}|chr)]0[(#VAL{93}|chr)], e.properties.icon_size[(#VAL{91}|chr)]1[(#VAL{93}|chr)] ),
-					iconAnchor: new L.Point( e.properties.icon_anchor[(#VAL{91}|chr)]0[(#VAL{93}|chr)], e.properties.icon_anchor[(#VAL{91}|chr)]1[(#VAL{93}|chr)] ),
-				}));
+		
+		var geojson = new L.geoJson('', {
+			onEachFeature: function (feature, layer) {
+				marker = layer;
+				layer.options.draggable = true;
+				if (feature.properties && feature.properties.icon){
+					layer.setIcon(new L.Icon({
+						iconUrl: feature.properties.icon,
+						iconSize: new L.Point( feature.properties.icon_size\[0\], feature.properties.icon_size\[1\] ),
+						iconAnchor: new L.Point( feature.properties.icon_anchor\[0\], feature.properties.icon_anchor\[1\] ),
+					}));
+				}
+				if (feature.properties && feature.properties.title){
+					layer.bindPopup(feature.properties.title);
+				}
 			}
-			if (e.properties && e.properties.title){
-				e.layer.bindPopup(e.properties.title);
-			}
-		});
-		form_map.addLayer(geojson);
-		geojson.addGeoJSON(data);]
+		}).addTo(form_map);
+		geojson.addData(data);]
 		
 		// mettre a jour les coordonnees quand on clique la carte
 		form_map.on('click', function(e) {

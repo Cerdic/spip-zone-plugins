@@ -34,8 +34,8 @@
 						#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
 						#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
 						["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
-						"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)],
-						"icon_anchor": [(#VAL{91}|chr)][(#GET{icon_w}|div{2})],[(#GET{icon_h})][(#VAL{93}|chr)]]
+						"icon_size": \[#GET{icon_w},#GET{icon_h}\],
+						"icon_anchor": \[[(#GET{icon_w}|div{2})],[(#GET{icon_h})]\]]
 					}
 				}
 		</BOUCLE_points>
@@ -57,29 +57,29 @@
 						#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
 						#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
 						["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
-						"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)],
-						"icon_anchor": [(#VAL{91}|chr)][(#GET{icon_w}|div{2})],[(#GET{icon_h})][(#VAL{93}|chr)]]
+						"icon_size": \[#GET{icon_w},#GET{icon_h}\],
+						"icon_anchor": \[[(#GET{icon_w}|div{2})],[(#GET{icon_h})]\]]
 					}
 				}]
 		};
 		</BOUCLE_point>
 		<//B_points>
 		if (data) {
-			var geojson = new L.GeoJSON();
-			geojson.on("featureparse", function(e){
-				if (e.properties && e.properties.icon){
-					e.layer.setIcon(new L.Icon({
-						iconUrl: e.properties.icon,
-						iconSize: new L.Point( e.properties.icon_size[0], e.properties.icon_size[1] ),
-						iconAnchor: new L.Point( e.properties.icon_anchor[0], e.properties.icon_anchor[1] ),
-					}));
+			var geojson = new L.geoJson('', {
+				onEachFeature: function (feature, layer) {
+					if (feature.properties && feature.properties.icon){
+						layer.setIcon(new L.Icon({
+							iconUrl: feature.properties.icon,
+							iconSize: new L.Point( feature.properties.icon_size\[0\], feature.properties.icon_size\[1\] ),
+							iconAnchor: new L.Point( feature.properties.icon_anchor\[0\], feature.properties.icon_anchor\[1\] ),
+						}));
+					}
+					if (feature.properties && feature.properties.title){
+						layer.bindPopup(feature.properties.title);
+					}
 				}
-				if (e.properties && e.properties.title){
-					e.layer.bindPopup(e.properties.title);
-				}
-			});
-			map_preview.addLayer(geojson);
-			geojson.addGeoJSON(data);
+			}).addTo(map_preview);
+			geojson.addData(data);
 			[(#GET{autocenter}|oui)
 			map_preview.fitBounds(geojson.getBounds());]
 		}

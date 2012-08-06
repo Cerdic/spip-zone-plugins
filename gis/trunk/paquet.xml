@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="4.0.10"
+	version="4.1.0"
 	schema="2.0.2"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
@@ -28,7 +28,7 @@
 
 	<utilise nom="selecteur_generique" compatibilite="[1.12;]" />
 	<necessite nom="saisies" compatibilite="[1.19.0;]" />
-	<lib nom="leaflet-gis-4.0.7" lien="https://github.com/downloads/brunob/Leaflet/leaflet-gis-4.0.7.zip" />
+	<lib nom="leaflet-gis-4.1.0" lien="https://github.com/downloads/brunob/Leaflet/leaflet-gis-4.1.0.zip" />
 
 	<pipeline
 		nom="declarer_tables_interfaces"

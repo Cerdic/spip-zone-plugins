@@ -16,7 +16,7 @@
 	- height|hauteur = 400px		hauteur de la carte, 400px par defaut
 	- style = non					ne pas styler la carte
 	- zoom_molette|zoom_wheel = non	désactiver le zoom avec la molette de la souris, actif par defaut
-	- control_fullscreen = oui		afficher un bouton pour passer la carte en plein écran
+	- fullscreen = oui				afficher un bouton pour passer la carte en plein écran
 	- control_type|controle_type = non			ne pas afficher les controles de changement de type
 	- no_control|aucun_controle = oui				ne pas afficher les controles de la carte
 	- scale = oui					afficher l'échelle de la carte
@@ -127,21 +127,21 @@ var map[(#GET{id})];
 			},
 			function(data) {
 				if (data){
-					var geojson = new L.GeoJSON();
-					geojson.on("featureparse", function(e){
-						if (e.properties && e.properties.icon){
-							e.layer.setIcon(new L.Icon({
-								iconUrl: e.properties.icon,
-								iconSize: new L.Point( e.properties.icon_size[(#VAL{91}|chr)]0[(#VAL{93}|chr)], e.properties.icon_size[(#VAL{91}|chr)]1[(#VAL{93}|chr)] ),
-								iconAnchor: new L.Point( e.properties.icon_anchor[(#VAL{91}|chr)]0[(#VAL{93}|chr)], e.properties.icon_anchor[(#VAL{91}|chr)]1[(#VAL{93}|chr)] ),
-							}));
+					var geojson = new L.geoJson('', {
+						onEachFeature: function (feature, layer) {
+							if (feature.properties && feature.properties.icon){
+								layer.setIcon(new L.Icon({
+									iconUrl: feature.properties.icon,
+									iconSize: new L.Point( feature.properties.icon_size\[0\], feature.properties.icon_size\[1\] ),
+									iconAnchor: new L.Point( feature.properties.icon_anchor\[0\], feature.properties.icon_anchor\[1\] ),
+								}));
+							}
+							if (feature.properties && feature.properties.title){
+								layer.bindPopup(feature.properties.title);
+							}
 						}
-						if (e.properties && e.properties.title){
-							e.layer.bindPopup(e.properties.title);
-						}
-					});
-					map[(#GET{id})].addLayer(geojson);
-					geojson.addGeoJSON(data);
+					}).addTo(map[(#GET{id})]);
+					geojson.addData(data);
 					[(#ENV{autocenterandzoom,#ENV{centrer_auto}}|oui)
 					map[(#GET{id})].fitBounds(geojson.getBounds());]
 				}
