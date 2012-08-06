@@ -45,7 +45,8 @@ function action_edition_albums_dist(){
 	//Changer le statut d'un album
 	elseif (in_array($action, array('preparer','proposer','publier','refuser','supprimer'))
 	AND list(, $statut, $id_album) = explode('/', $arg)
-	AND intval($id_album)){
+	AND intval($id_album)
+	AND autoriser('modifier', 'album', $id_album)){
 		include_spip('action/editer_objet');
 		objet_modifier("album", $id_album, array("statut" => $statut));
 	}
