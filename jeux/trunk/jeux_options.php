@@ -18,7 +18,4 @@ include_spip('inc/jeux_autoriser');
 if (!isset($GLOBALS['spip_pipeline']['jeux_caracteristiques']))
 	$GLOBALS['spip_pipeline']['jeux_caracteristiques']=''; 
 
-// (pour info : SPIP 2.0 => 12691, SPIP 2.1 => 15133, SPIP 2.2 => ??, SPIP 3.0 => 17743)
-if ($GLOBALS['spip_version_code']>=17743) @define('_SPIP30000', 1);
-
 ?>

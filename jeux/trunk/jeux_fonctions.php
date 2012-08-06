@@ -94,28 +94,7 @@ function balise_NETTOYER_URI_dist($p) {
 	return $p;
 }
 
-/* filtres de compatibilite SPIP 2 & 3 */
 
-function jeux_puce_statut($statut){
-	if(defined('_SPIP30000')) include_spip('inc/puce_statut');
-	return puce_statut($statut);
-}
-
-function jeux_icone_horizontale($texte, $lien, $fond){
-	return defined('_SPIP30000')
-		?icone_base($lien, $texte, $fond, "", "horizontale", "")
-		:icone_horizontale($texte, $lien, $fond, "", false, "");
-}
-
-// Cadre formulaires
-function jeux_debut_cadre_formulaire($style='', $foo=false){
-	return defined('_SPIP30000')?"\n<div class='cadre-formulaire'>":debut_cadre_formulaire('', true);
-}
-function jeux_fin_cadre_formulaire(){
-	return  defined('_SPIP30000')?"</div>\n":fin_cadre_formulaire(true);
-}
-
-/* Fin compatibilites */
 
 include_spip('public/interfaces');
 global $table_des_traitements;
