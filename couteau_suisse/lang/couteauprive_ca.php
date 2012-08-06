@@ -786,7 +786,7 @@ Aquesta eina és compatible amb: « [.->sommaire] ».',
 	'titres_typo:nom' => 'Subtítols en imatge',
 	'tous' => 'Tots',
 	'toutes_couleurs' => 'Els 36 colors dels estils CSS :@_CS_EXEMPLE_COULEURS@',
-	'toutmulti:aide' => 'Blocs multilingües : <b><:trad:></b>',
+	'toutmulti:aide' => 'Blocs multilingües : <b><:trad:></b>', # MODIF
 	'toutmulti:description' => 'De manera semblant al que ja podeu fer en els vostres esquelets, aquesta eina us permet utilitzar lliurement les cadenes de llengües (d\'SPIP o dels vostres esquelets) en tots els continguts del vostre lloc Web (articles, títols, missatges, etc.) amb l\'ajuda de la drecera <code><:chaine:></code>.
 
 Consulteu [aquí ->http://www.spip.net/ca_article2191.html] la documentació d\'SPIP que fa referència a aquest tema.
@@ -795,7 +795,7 @@ Aquesta eina accepta igualment els arguments introduïts per SPIP 2.0. Per exemp
 
 La funció SPIP utilitzada en PHP és <code>_T(\'chaine\')</code> sense argument, i <code>_T(\'chaine\', array(\'arg1\'=>\'un texte\', \'arg2\'=>\'un autre texte\'))</code> amb arguments.
 
-Per tant, no oblideu verificar que la clau  <code>\'chaine\'</code> està ben definida en els fitxers de llengües. ',
+Per tant, no oblideu verificar que la clau  <code>\'chaine\'</code> està ben definida en els fitxers de llengües. ', # MODIF
 	'toutmulti:nom' => 'Blocs multilingües',
 	'trad_help' => '{{Le Couteau Suisse est bénévolement traduit en plusieurs langues et sa langue mère est le français.}}
 

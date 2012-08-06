@@ -783,7 +783,7 @@ This tool is compatible with: " [.->sommaire] ".',
 	'titres_typo:nom' => 'Sub-headings as images',
 	'tous' => 'All',
 	'toutes_couleurs' => 'The 36 colours in CSS styles: @_CS_EXEMPLE_COULEURS@',
-	'toutmulti:aide' => 'Multilingual blocks: <b><:trad:></b>',
+	'toutmulti:aide' => 'Multilingual blocks: <b><:trad:></b>', # MODIF
 	'toutmulti:description' => 'Makes it possible to use the shortcut <code><:a_text:></code> in order to place multilingual blocks from language files, whether SPIP\'s own or your customised ones, anywhere in the text, titles, etc. of an article.
 
 More information on this can be found in [this article->http://www.spip.net/en_article2444.html].
@@ -792,7 +792,7 @@ User variables can also be added to the shortcuts. This feature was introduced w
 
 The SPIP PHP function used is: <code>_T(\'a_text\')</code> (with no parameters), and <code>_T(\'a_text\', array(\'arg1\'=>\'some words\', \'arg2\'=>\'other words\'))</code> (with parameters).
 
-Do not forget to check that the variable used <code>\'a_text\'</code> is defined in the language files.',
+Do not forget to check that the variable used <code>\'a_text\'</code> is defined in the language files.', # MODIF
 	'toutmulti:nom' => 'Multilingual blocks',
 	'trad_help' => '{{Le Couteau Suisse est bénévolement traduit en plusieurs langues et sa langue mère est le français.}}
 

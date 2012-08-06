@@ -752,7 +752,7 @@ Cet outil est compatible avec : « [.->sommaire] ».', # NEW
 	'titres_typo:nom' => 'Intertitres en image', # NEW
 	'tous' => 'Toos',
 	'toutes_couleurs' => 'Los 36 colores de los estilos css :@_CS_EXEMPLE_COULEURS@',
-	'toutmulti:aide' => 'Bloques multillingües: <b><:trad:></b>',
+	'toutmulti:aide' => 'Bloques multillingües: <b><:trad:></b>', # MODIF
 	'toutmulti:description' => 'Del mesmu mou que ya podíes facelo nes tos cadarmes, esta ferramienta te permite utilizar llibremente les cadenes de llingües (de SPIP o de les cadarmes) nel conteníu ensembre del sitiu (artículos, títulos, mensaxes, etc.) con l\'aida de l\'atayu <code><:cadena:></code>.
 
 Consulta [equí ->http://www.spip.net/fr_article2128.html] la documentación de SPIP pa esti asuntu.

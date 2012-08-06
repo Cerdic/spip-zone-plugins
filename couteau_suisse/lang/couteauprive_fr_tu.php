@@ -779,7 +779,7 @@ Cet outil est compatible avec : « [.->sommaire] ».',
 	'titres_typo:nom' => 'Intertitres en image',
 	'tous' => 'Tous',
 	'toutes_couleurs' => 'Les 36 couleurs des styles css :@_CS_EXEMPLE_COULEURS@',
-	'toutmulti:aide' => 'Blocs multilingues : <b><:trad:></b>',
+	'toutmulti:aide' => 'Blocs multilingues : <b><:trad:></b>', # MODIF
 	'toutmulti:description' => 'À l\'instar de ce tu peux déjà faire dans tes squelettes, cet outil te permet d\'utiliser librement les chaînes de langues (de SPIP ou de tes squelettes) dans tous les contenus de ton site (articles, titres, messages, etc.) à l\'aide du raccourci <code><:chaine:></code>.
 
 Consulte [ici ->http://www.spip.net/fr_article2128.html] la documentation de SPIP à ce sujet.
@@ -788,7 +788,7 @@ Cet outil accepte également les arguments introduits par SPIP 2.0. Par exemple,
 
 La fonction SPIP utilisée en PHP est <code>_T(\'chaine\')</code> sans argument, et  <code>_T(\'chaine\', array(\'arg1\'=>\'un texte\', \'arg2\'=>\'un autre texte\'))</code> avec arguments.
 
- N\'oublie donc pas de vérifier que la clef <code>\'chaine\'</code> est bien définie dans les fichiers de langues.',
+ N\'oublie donc pas de vérifier que la clef <code>\'chaine\'</code> est bien définie dans les fichiers de langues.', # MODIF
 	'toutmulti:nom' => 'Blocs multilingues',
 	'trad_help' => '{{Le Couteau Suisse est bénévolement traduit en plusieurs langues et sa langue mère est le français.}}
 

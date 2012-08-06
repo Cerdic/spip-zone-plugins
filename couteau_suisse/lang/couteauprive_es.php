@@ -749,7 +749,7 @@ Cet outil est compatible avec : « [.->sommaire] ».', # NEW
 	'titres_typo:nom' => 'Intertitres en image', # NEW
 	'tous' => 'Todos',
 	'toutes_couleurs' => 'Los 36 colores de los estilos css: @_CS_EXEMPLE_COULEURS@',
-	'toutmulti:aide' => 'Bloques multilingües: <b><:trad:></b>',
+	'toutmulti:aide' => 'Bloques multilingües: <b><:trad:></b>', # MODIF
 	'toutmulti:description' => 'Del mismo modo que puedes hacer en los esqueletos, esta herramienta te permite utilizar libremente las cadenas de idioma (de SPIP o de tus esqueletos) en todos los contenidos del sitio (artículos, títulos, mensajes, etc.) con ayuda del atajo <code><:cadena:></code>.
 
 Consulta [aquí ->http://www.spip.net/es_article2247.html] la documentación de SPIP sobre el tema.

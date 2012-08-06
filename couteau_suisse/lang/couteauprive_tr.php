@@ -722,7 +722,7 @@ Cet outil est compatible avec : « [.->sommaire] ».', # NEW
 	'titres_typo:nom' => 'Intertitres en image', # NEW
 	'tous' => 'Hepsi',
 	'toutes_couleurs' => 'Css stillerinin 36 rengi :@_CS_EXEMPLE_COULEURS@',
-	'toutmulti:aide' => 'Çok dilli bloklar : <b><:trad:></b>',
+	'toutmulti:aide' => 'Çok dilli bloklar : <b><:trad:></b>', # MODIF
 	'toutmulti:description' => 'SPIP\'in dil zincirlerinin (çoklu blokların) makalelerde, başlıklarda ve mesajlarda serbestçe kullanılabilmesi için <code><:chaine:></code> kısayolunu sunar. 
 _ Kullanılan SPIP fonksiyonu şudur : <code>_T(\'zincir\')</code>.
 

@@ -753,7 +753,7 @@ Cet outil est compatible avec : « [.->sommaire] ».', # NEW
 	'titres_typo:nom' => 'Intertitres en image', # NEW
 	'tous' => 'Todos',
 	'toutes_couleurs' => 'As 36 cores dos estilos css :@_CS_EXEMPLE_COULEURS@',
-	'toutmulti:aide' => 'Bloques multilingües : <b><:trad:></b>',
+	'toutmulti:aide' => 'Bloques multilingües : <b><:trad:></b>', # MODIF
 	'toutmulti:description' => 'Ao instar isto, pode facelo xa nos seus esqueletos, esta utilidade permítelle usar librementemente as cadeas de linguas de SPIP ou dos seus esqueletos: nos contidos do seu web (artigos, títulos, mensaxes, etc.) coa axuda co atallo <code><:chaine:></code>.
 
 Consulte [aqui->http://www.spip.net/fr_article2128.html] a documentación de SPIP sobre este asunto.

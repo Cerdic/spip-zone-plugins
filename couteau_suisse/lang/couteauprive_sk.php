@@ -765,7 +765,7 @@ Tento nástroj je kompatibilný s nástrojom: "[.->sommaire]".',
 	'titres_typo:nom' => 'Medzititulok v obrázku',
 	'tous' => 'Všetko',
 	'toutes_couleurs' => '36 farieb v štýloch CSS: @_CS_EXEMPLE_COULEURS@',
-	'toutmulti:aide' => 'Multilingual blocks: <b><:trad:></b>',
+	'toutmulti:aide' => 'Multilingual blocks: <b><:trad:></b>', # MODIF
 	'toutmulti:description' => 'Makes it possible to use the shortcut <code><:a_text:></code> in order to place multilingual blocks from language files, whether SPIP\'s own or your customised ones, anywhere in the text, titles, etc. of an article.
 
 More information on this can be found in [this article->http://www.spip.net/en_article2444.html].

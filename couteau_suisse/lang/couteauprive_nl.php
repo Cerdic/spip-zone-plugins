@@ -734,7 +734,7 @@ Cet outil est compatible avec : « [.->sommaire] ».', # NEW
 	'titres_typo:nom' => 'Intertitres en image', # NEW
 	'tous' => 'Iedereen',
 	'toutes_couleurs' => 'De 36 kleuren van de css stijlen :@_CS_EXEMPLE_COULEURS@',
-	'toutmulti:aide' => 'Meertalige blokken : <b><:trad:></b>',
+	'toutmulti:aide' => 'Meertalige blokken : <b><:trad:></b>', # MODIF
 	'toutmulti:description' => 'À l\'instar de ce vous pouvez déjà faire dans vos squelettes, cet outil vous permet d\'utiliser librement les chaînes de langues (de SPIP ou de vos squelettes) dans tous les contenus de votre site (articles, titres, messages, etc.) à l\'aide du raccourci <code><:chaine:></code>.
  
 Consultez [ici ->http://www.spip.net/fr_article2128.html] la documentation de SPIP à ce sujet.
