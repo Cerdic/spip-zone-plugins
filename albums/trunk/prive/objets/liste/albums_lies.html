@@ -43,7 +43,7 @@
 			
 			[(#REM) Descriptif ]
 			[<td class='descriptif clic'>
-				(#DESCRIPTIF|couper{200})
+				(#DESCRIPTIF|couper{100})
 			</td>]
 			
 			[(#REM) Boutons actions éditer/délier ]
@@ -54,15 +54,17 @@
 					[(#CHEMIN_IMAGE{edit-16.png}|balise_img{'album:texte_modifier'})]
 					</a>
 				]
-				[(#AUTORISER{associeralbums,album}|oui)
-					[(#VU|=={oui}|?{
-						[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{<:medias:document_vu:>,bouton_off}|inserer_attribut{title,<:medias:document_vu:>}|image_nb|image_gamma{40})],
-						[(#BOUTON_ACTION{
-							[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'album:icone_supprimer_album'})],
-							[(#URL_ACTION_AUTEUR{edition_albums,delier/#ID_ALBUM/[(#ENV{associer_objet})],#SELF})],'button link ajax'}
-						)]
-					})]
-				]
+				[(#SET{titre,#AUTORISER{associer, album, #ENV{associer_objet}}|?{#VU|=={oui}|?{<:medias:document_vu:>,''},<:avis_operation_impossible:>}})]
+				[(#AUTORISER{associer, album, #ENV{associer_objet}}|et{#VU|=={non}}|?{
+					[(#BOUTON_ACTION{
+						[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'album:icone_supprimer_album'})],
+						[(#URL_ACTION_AUTEUR{edition_albums,delier/#ID_ALBUM/[(#ENV{associer_objet})],#SELF})],'button link ajax'}
+					)],
+					[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{#GET{titre},'supprimer off'}
+						|inserer_attribut{title,#GET{titre}}
+						|image_nb
+						|image_gamma{40})]
+				})]
 			</td>
 		</tr>
 

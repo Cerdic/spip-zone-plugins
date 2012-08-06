@@ -30,7 +30,7 @@ function action_edition_albums_dist(){
 	AND list(, $id_album, $objet_liaison) = explode('/', $arg)
 	AND list($objet, $id_objet) = explode('|', $objet_liaison)
 	AND intval($id_album)
-	AND autoriser('associeralbums', $objet, $id_objet)){
+	AND autoriser('associer', 'album', $objet_liaison)){
 		include_spip('action/editer_liens');
 		switch ($action) {
 			case 'lier':

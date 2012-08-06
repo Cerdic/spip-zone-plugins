@@ -27,12 +27,12 @@
 /** ONGLETS : créer et associer**/
 #albums .onglets			{display:table; width:100%; font-weight:bold; margin-top:1.5em;}
   #albums .onglets a,
-  #albums .onglets strong		{display:table-cell; width:50%; padding:.2em .8em; background-color:#fff; border:1px solid #dfdfdf; border-left:none; border-bottom:1px solid #GET{foncee}; font-size:.92em; text-align:center; text-transform:uppercase;}
+  #albums .onglets strong		{display:table-cell; padding:.2em .8em; background-color:#fff; border:1px solid #dfdfdf; border-left:none; border-bottom:1px solid #GET{foncee}; font-size:.92em; text-align:center; text-transform:uppercase;}
   #albums .onglets a:first-child,
   #albums .onglets strong:first-child	{border-left:1px solid #dfdfdf;}
 #albums .onglets a:hover		{background-color:#GET{claire+}; text-decoration:none; color:#GET{gris_fonce};}
 #albums .onglets strong.on		{background-color:#GET{fond_actif}; border:#GET{bordure_actif}; border-bottom:none;}
-#albums .onglets .fermer 		{width:0; padding:.3em;}
+#albums .onglets .fermer 		{width:1%; max-width:24px; padding:.3em;}
 #albums .onglets .fermer img		{vertical-align:middle;}
 
 /** ENTETE **/
@@ -69,6 +69,7 @@
 #albums td.action			{width:38px; text-align:right;}
   #albums  td.contenu,
   #albums  td.liaison			{min-width:8em;}
+#albums .supprimer.off			{margin-right:3px;}
 /** LISTES : entete **/
 #albums .entete h2			{display:inline; margin:0; font-size:1.3em;}
 /** LISTES : pagination **/
@@ -147,7 +148,8 @@
 #albums .objets_associes .liste			{margin:0; width:80%; float:right; border-top:none;}
 #albums .objets_associes td			{border-width:0; border-bottom-width:1px; padding:.2em;}
 #albums .objets_associes tr:last-child td	{border-bottom:none;}
-#albums .objets_associes .icone			{display:table-cell; width:28px;}
+#albums .objets_associes tr.expose td		{background-color:[#(#GET{claire}|couleur_luminance{.15})];}
+#albums .objets_associes .icone			{display:table-cell; width:36px; padding-left:0; text-align:right;}
 #albums .objets_associes .icone img		{vertical-align:middle;}
 #albums .objets_associes .action		{width:20px;}
 

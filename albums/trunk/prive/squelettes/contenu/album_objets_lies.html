@@ -17,24 +17,35 @@
 	#SET{titre,#INFO_TITRE{#OBJET,#ID_OBJET}}
 	#SET{alt,#GET{info}&nbsp;:&nbsp;#GET{titre}}
 	#SET{url,#ID_OBJET|generer_url_entite{#OBJET}}
-	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-		[<td class='icone'>
-			(#OBJET|objet_icone{16}|inserer_attribut{title,#GET{alt}})
-		</td>]
+	#SET{auteurs_objet,#ARRAY}
+	<BOUCLE_auteurs_objet(AUTEURS){objet}{id_objet}>#SET{auteurs_objet, #GET{auteurs_objet}|push{#ID_AUTEUR}}</BOUCLE_auteurs_objet>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][(#GET{auteurs_objet}|find{#SESSION{id_auteur}}|oui) expose]">
+		<td class='icone'>
+			[(#GET{auteurs_objet}|find{#SESSION{id_auteur}}|oui)
+				[(#SESSION{statut}|puce_statut{auteur}|inserer_attribut{title,''})]
+			]
+			[(#OBJET|objet_icone{16}|inserer_attribut{title,#GET{alt}})]
+		</td>
 		[<td class='info'>
 			(#GET{info})
 		</td>]
 		[<td class='titre'>
 			<a href="[(#GET{url})]" title='[(#GET{alt})]'>(#GET{titre})</a>
 		</td>]
-		[(#AUTORISER{associeralbums,album}|oui)
-		[<td class='action'>
-			(#BOUTON_ACTION{
+		#SET{associer_objet, #OBJET|concat{'|'}|concat{#ID_OBJET}}
+		<td class='action'>
+		[(#AUTORISER{associer, album, #GET{associer_objet}}|?{
+			[(#BOUTON_ACTION{
 				[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{<:album:icone_delier_album:>})],
 				#URL_ACTION_AUTEUR{edition_albums,delier/#ID_ALBUM/#OBJET/#ID_OBJET,#SELF},'button link ajax'}
-			)
-		</td>]
-		]
+			)],
+			[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{<:avis_operation_impossible:>,supprimer off}
+				|inserer_attribut{title,<:avis_operation_impossible:>}
+				|image_nb
+				|image_gamma{40})]
+		})]
+		</td>
+		
 	</tr>
 	</BOUCLE_objets_associes>
 	</tbody>

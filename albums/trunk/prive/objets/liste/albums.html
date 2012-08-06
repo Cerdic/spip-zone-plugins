@@ -77,7 +77,7 @@
 		]
 
 		<tbody>
-		<BOUCLE_albums(ALBUMS liens){id_album IN #ENV{selection}}{id_album !IN #ENV{exclus}}{objet?}{statut ?IN #ENV{statut}|explode{'|'}}{vu?}{recherche?}{orphelins?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<BOUCLE_albums(ALBUMS liens){id_album IN #ENV{selection}}{id_album !IN #ENV{exclus}}{auteurs_liens.id_auteur?}{id_mot?}{objet?}{statut ?IN #ENV{statut}|explode{'|'}}{vu?}{recherche?}{orphelins?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr>
 
 			[(#REM) Statut ]
@@ -137,7 +137,10 @@
 			[(#REM) Descriptif ]
 			[(#GET{colonne_descriptif}|oui)
 			<td class='descriptif'>
-				[(#DESCRIPTIF)]
+				[(#ENV{liste}|=={associer}|?{
+					[(#DESCRIPTIF|couper{80})],
+					#DESCRIPTIF|couper{200}
+				})]
 			</td>
 			]
 
@@ -186,8 +189,7 @@
 			[(#REM) Actions : associer, mettre à la poubelle ]
 			<BOUCLE_afficher_actions(CONDITION){si #ENV{actions}|oui}>
 			<td class='action'>
-
-			[(#GET{action_associer}|oui)
+			[(#GET{action_associer}|et{#AUTORISER{associer,album,#ENV{associer_objet}}}|oui)
 				[(#BOUTON_ACTION{
 					[(#CHEMIN_IMAGE{ajouter-16.png}|balise_img{<:album:icone_associer_album:>})],
 					[(#URL_ACTION_AUTEUR{edition_albums,lier/#ID_ALBUM/[(#ENV{associer_objet})],#SELF})],
