@@ -153,10 +153,10 @@ body {
 				line-height: 125%;
 			}
 			.surtitre {
-				margin-bottom: 12px;
+				margin-bottom: 8px;
 			}
 			.soustitre {
-				margin-top: 12px;
+				margin-top: 8px;
 			}
 		}
 		.bd {
@@ -250,6 +250,32 @@ div.titrem, h3.titrem {
 		. :hover {
 			img {
 				background-color: #aaa;
+			}
+		}
+	}
+}
+
+#navigation {
+	.formulaire_spip {
+		border-color: ##ENV{claire};
+		font-size: 90%;
+		line-height: 120%;
+
+		h3.titrem {
+			background-color: ##ENV{claire};
+			color: white;
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+		input.text, input.password, textarea {
+			font-size: 0.9em;
+			line-height: 125%;
+			padding: 3px;
+		}
+		
+		p.boutons {
+			input.submit {
+				padding: 2px 5px;
 			}
 		}
 	}
@@ -371,6 +397,8 @@ div.titrem, h3.titrem {
 }
 
 #chemin {
+	font-size: 85%;
+	line-height: 120%;
 	.bouton_deplacer {
 		font-size: 10px;
 		color: ##ENV{lien};
@@ -537,11 +565,30 @@ div.titrem, h3.titrem {
 	border: 0px;
 }
 .en-edition {
+	font-size: 95%;
+	line-height: 120%;
+
 	button.submit {
 		background-color: transparent;
 		border: 0;
 		color: red;
 		cursor: pointer;
+	}
+	
+	.bd {
+		padding: 0;
+		padding-bottom: 5px;
+		
+		.liste-items  {
+			border-top: 1px solid white;
+			
+			li {
+				border-bottom: 1px solid white;
+				padding-left: 10px;
+				padding-right: 10px;
+				
+			}
+		}
 	}
 }
 .barre_onglet ul {
