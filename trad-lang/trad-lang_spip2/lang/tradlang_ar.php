@@ -12,20 +12,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_activer_lang' => 'تفعيل اللغة "@lang@" لهذه الوحدة',
-	'bouton_exporter_fichier' => 'Exporter le fichier', # NEW
+	'bouton_exporter_fichier' => 'تصدير الملف',
 	'bouton_exporter_fichier_langue' => 'تصدير ملف اللغة بالـ«@lang@»',
 	'bouton_exporter_fichier_langue_original' => 'تصدير ملف اللغة الأصلي («@lang_mere@»)',
-	'bouton_exporter_fichier_po' => 'Exporter le fichier en .po', # NEW
-	'bouton_exporter_fichier_zip' => 'Exporter les fichiers en zip', # NEW
+	'bouton_exporter_fichier_po' => 'تصدير الملف بتنسيق po.',
+	'bouton_exporter_fichier_zip' => 'تصدير الملف بتنسيق مضغوط (zip)',
 	'bouton_precedent' => 'الخطوة السابقة',
 	'bouton_suivant' => 'الخطوة التالية',
 	'bouton_supprimer_langue_module' => 'حذف هذه اللغة من الوحدة',
 	'bouton_supprimer_module' => 'حذف هذه الوحدة',
 	'bouton_traduire' => 'ترجمة',
 	'bouton_upload_langue_module' => 'إرسال ملف لغة',
-	'bouton_vos_favoris_non' => 'Vos modules non favoris', # NEW
-	'bouton_vos_favoris_oui' => 'Vos modules favoris', # NEW
-	'bouton_vos_favoris_tous' => 'Tous les modules', # NEW
+	'bouton_vos_favoris_non' => 'وحداتك غير المفضلة',
+	'bouton_vos_favoris_oui' => 'وحداتك المفضلة',
+	'bouton_vos_favoris_tous' => 'كل الوحدات',
 
 	// C
 	'cfg_form_tradlang_autorisations' => 'الأذونات',
@@ -78,8 +78,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_sauvegarde_post_edition' => 'سيحفظ الملفات المؤقتة لدى كل تعديل في سلسلة لغة',
 
 	// F
-	'favoris_ses_modules' => 'Ses modules favoris', # NEW
-	'favoris_vos_modules' => 'Vos modules favoris', # NEW
+	'favoris_ses_modules' => 'وحداته (ها) المفضلة',
+	'favoris_vos_modules' => 'وحداتك المفضلة',
 
 	// I
 	'icone_modifier_tradlang' => 'تعديل سلسلة اللغة هذه',
@@ -91,7 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_tradlang_module' => 'لا توجد اي سلسلة لغة',
 	'info_chaine_jamais_modifiee' => 'لم يتم تعديل هذه السلسلة أبداً.',
 	'info_chaine_originale' => 'هذه السلسلة هي السلسلة الأصلية',
-	'info_contributeurs' => 'Contributeurs', # NEW
+	'info_contributeurs' => 'المساهمون',
 	'info_filtrer_status' => 'الترشيح حسب الوضعية:',
 	'info_langue_mere' => '(اللغة الأم)',
 	'info_langues_non_preferees' => 'اللغات الأخرى:',
@@ -118,7 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_tradlang' => '@nb@ سلسلة لغة',
 	'info_nb_tradlang_module' => '@nb@ وحدة لغة',
 	'info_percent_chaines' => '@traduites@ / @total@ سلسلة مترجمة الى «[@langue@] @langue_longue@»',
-	'info_revisions_stats' => 'Révisions', # NEW
+	'info_revisions_stats' => 'التعديلات',
 	'info_status_ok' => 'موافق',
 	'info_str' => 'نص سلسلة اللغة',
 	'info_traduire_module_lang' => 'ترجمة الوحدة «@module@» الى @langue_longue@ (@lang@)',
@@ -205,7 +205,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'menu_info_interface' => 'يعرض رابط يقود الى واجهة الترجمة',
 	'menu_titre_interface' => 'واجهة الترجمة',
-	'message_afficher_vos_modules' => 'Afficher les modules :', # NEW
+	'message_afficher_vos_modules' => 'عرض الوحدات:',
 	'message_aucun_resultat_chaine' => 'لم تسترجع معايير بحثك في سلاسل اللغة أية نتائج.',
 	'message_aucun_resultat_statut' => 'لا توجد اي سلسلة تناسب الوضعية المطلوبة.',
 	'message_aucune_nouvelle_langue_dispo' => 'هذه الوحدة متوافرة في كل اللغات الممكنة',
@@ -238,7 +238,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_items_langue_inexistants' => 'هناك @nb@ بند لا وجود لها في اللغة «@langue_longue@» (@langue@).',
 	'nb_items_langue_mere' => 'تحتوي اللغة الأساسية لهذه الوحدة على @nb@ بند.',
 	'notice_affichage_limite' => 'لا تعرض هذه الصفحة أكثر من @nb@ سلسلة نص غير مترجمة. ',
-	'notice_aucun_module_favori_priorite' => 'Aucun module de la priorité "@priorite@" ne correspond.', # NEW
+	'notice_aucun_module_favori_priorite' => 'لا توجد اي وحدة مناسبة بأفضلية «@priorite@». ',
 
 	// R
 	'readme' => 'يتيح هذا الملحق إدارة ملفات اللغات',
@@ -310,20 +310,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_commentaires_chaines' => 'تعليق على هذه السلسلة',
 	'titre_form_import_step_1' => 'الخطوة ١: إرسال ملفك',
 	'titre_form_import_step_2' => 'الخطوة ٢: التدقيق في تعديلاتك',
-	'titre_inscription' => 'Inscription', # NEW
+	'titre_inscription' => 'تسجيل',
 	'titre_logo_tradlang_module' => 'شعار الوحدة',
 	'titre_modifications_chaines' => 'أحدث تعديلات هذه السلسلة',
 	'titre_modifier' => 'تعديل',
 	'titre_page_configurer_tradlang' => 'إعداد ملحق Trad-lang',
 	'titre_page_tradlang_module' => 'الوحدة #@id@ : @module@',
-	'titre_profil_auteur' => 'تحرير سيرتك', # MODIF
-	'titre_profil_autre' => 'تحرير سيرته', # MODIF
+	'titre_profil_auteur' => 'تحرير سيرتك',
+	'titre_profil_autre' => 'تحرير سيرته (سيرتها)',
 	'titre_recherche_tradlang' => 'سلاسل اللغة',
-	'titre_revisions_ses' => 'Ses contributions', # NEW
+	'titre_revisions_ses' => 'مساهماته (ها)',
 	'titre_revisions_sommaire' => 'أحدث التعديلات',
-	'titre_revisions_vos' => 'Vos contributions', # NEW
-	'titre_stats_trads_journalieres' => 'Nombre de révisions journalières', # NEW
-	'titre_stats_trads_mensuelles' => 'Nombre de révisions mensuelles', # NEW
+	'titre_revisions_vos' => 'مساهماتك',
+	'titre_stats_trads_journalieres' => 'عدد التعديلات اليومية',
+	'titre_stats_trads_mensuelles' => 'عدد التعديلات الشهري',
 	'titre_tradlang' => 'Trad-lang',
 	'titre_tradlang_chaines' => 'سلاسل اللغة',
 	'titre_tradlang_module' => 'وحدة لغة',

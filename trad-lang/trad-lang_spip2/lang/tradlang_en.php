@@ -23,9 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_module' => 'Delete this module',
 	'bouton_traduire' => 'Translate',
 	'bouton_upload_langue_module' => 'Upload a language file',
-	'bouton_vos_favoris_non' => 'Vos modules non favoris', # NEW
+	'bouton_vos_favoris_non' => 'Your not so favourite modules',
 	'bouton_vos_favoris_oui' => 'Your favorite modules',
-	'bouton_vos_favoris_tous' => 'All the modules',
+	'bouton_vos_favoris_tous' => 'All modules',
 
 	// C
 	'cfg_form_tradlang_autorisations' => 'Authorizations',
@@ -118,7 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_tradlang' => '@nb@ language strings',
 	'info_nb_tradlang_module' => '@nb@ language modules',
 	'info_percent_chaines' => '@traduites@ / @total@ translated strings',
-	'info_revisions_stats' => 'Révisions', # NEW
+	'info_revisions_stats' => 'Revisions',
 	'info_status_ok' => 'OK',
 	'info_str' => 'Text of the language string',
 	'info_traduire_module_lang' => 'Translate the module "@module@" in @langue_longue@ (@lang@)',
@@ -239,7 +239,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_items_langue_inexistants' => '@nb@ items does not exists in the language "@langue_longue@" (@langue@).',
 	'nb_items_langue_mere' => 'The main language of this module includes @nb@ items.',
 	'notice_affichage_limite' => 'Only @nb@ untranslated strings are displayed.',
-	'notice_aucun_module_favori_priorite' => 'Aucun module de la priorité "@priorite@" ne correspond.', # NEW
+	'notice_aucun_module_favori_priorite' => 'No module of priority "@priorite@" correspond.',
 
 	// R
 	'readme' => 'This plugin allows you to manage the language files',
@@ -324,8 +324,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_revisions_ses' => 'Their contributions',
 	'titre_revisions_sommaire' => 'Recent changes',
 	'titre_revisions_vos' => 'Your contributions',
-	'titre_stats_trads_journalieres' => 'Nombre de révisions journalières', # NEW
-	'titre_stats_trads_mensuelles' => 'Nombre de révisions mensuelles', # NEW
+	'titre_stats_trads_journalieres' => 'Number of daily revisions',
+	'titre_stats_trads_mensuelles' => 'Number of monthly revisions',
 	'titre_tradlang' => 'Trad-lang',
 	'titre_tradlang_chaines' => 'Language string',
 	'titre_tradlang_module' => 'Trad-lang language modules',
