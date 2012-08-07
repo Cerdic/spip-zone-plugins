@@ -22,7 +22,7 @@ function formulaires_editer_album_identifier_dist($id_album='new', $retour='', $
 function formulaires_editer_album_charger_dist($id_album='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('album',$id_album,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 
-	// Si on cree l'album sur un objet, il est publie par defaut et eventuellement titre par defaut 
+	// Si on cree l'album sur un objet, on le publie et eventuellement titre par defaut
 	if ($associer_objet){
 		// Statut
 		$valeurs['statut'] = 'publie';
@@ -33,7 +33,6 @@ function formulaires_editer_album_charger_dist($id_album='new', $retour='', $ass
 			$valeurs['titre_defaut'] = generer_info_entite($id_objet, $objet, 'titre');
 		}
 	}
-	else {$valeurs['statut'] = 'prepa';}
 
 	return $valeurs;
 
@@ -54,15 +53,6 @@ function formulaires_editer_album_traiter_dist($id_album='new', $retour='', $ass
 
 	// Un lien a prendre en compte ?
 	if ($associer_objet AND $id_album = $res['id_album']) {
-
-		// Statut = publie
-		/*
-		if (autoriser('modifier', 'album', $id_album)){
-			include_spip('action/editer_objet');
-			objet_modifier("album", $id_album, array("statut" => 'publie'));
-		}*/
-
-		// Creation du lien
 		list($objet, $id_objet) = explode('|', $associer_objet);
 		if ($objet AND $id_objet AND autoriser('modifier', $objet, $id_objet)) {
 			include_spip('action/editer_liens');

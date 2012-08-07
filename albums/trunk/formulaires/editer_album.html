@@ -13,7 +13,7 @@
 	<form method='post' action='#ENV{action}' name='formulaire_editer_album' id='formulaire_editer_album'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_album' value='#ENV{id_album}' />
-		<input type='hidden' name='statut' value='#ENV{statut}' />
+		[<input type='hidden' name='statut' value='(#ENV{statut})' />]
 		<ul>
 
 			[(#SAISIE{input, titre, 
@@ -25,7 +25,8 @@
 			[(#CONFIG{albums/afficher_champ_descriptif}|oui)
 				[(#SAISIE{textarea, descriptif, 
 				label=<:album:label_descriptif:>, 
-				rows=4})]
+				rows=4,
+				inserer_barre=edition})]
 			]
 
 		</ul>
