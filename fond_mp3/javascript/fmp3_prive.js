@@ -1,4 +1,4 @@
-/*
+/**
  * javascript/fmp3_prive.js
  * 
  * $LastChangedRevision$
@@ -19,17 +19,17 @@ jQuery(document).ready(function() {
 	var cible_id = "";
 	
 	/* page article ? */
-	if(request_uri.match(/^\?exec=articles&id_article=/)) 
+	if(request_uri.match(/^\?exec=article[s]?&id_article=/)) 
 	{
-		var article_id = request_uri.replace(/^\?exec=articles&id_article=([0-9]+).*$/, "$1");
+		var article_id = request_uri.replace(/^\?exec=article[s]?&id_article=([0-9]+).*$/, "$1");
 		if(article_id > 0)
 		{
 			var cible_id = "#iconifier-" + article_id;
 		}
 	}
 
-	/* page rubrique ? */
-	if(request_uri.match(/^\?exec=naviguer&id_rubrique=/)) 
+	/* page rubrique SPIP <= 2 ? */
+	else if(request_uri.match(/^\?exec=naviguer&id_rubrique=/)) 
 	{
 		var rubrique_id = request_uri.replace(/^\?exec=naviguer&id_rubrique=([0-9]+).*$/, "$1");
 		if(rubrique_id > 0)
@@ -37,8 +37,21 @@ jQuery(document).ready(function() {
 			var cible_id = "#iconifier-" + rubrique_id;
 		}
 	}
-	/* page de configuration principale ? */
-	else if(request_uri.match(/^\?exec=configuration/)) 
+	/* page rubrique SPIP >= 3 ? */
+	else if(request_uri.match(/^\?exec=rubrique&id_rubrique=/)) 
+	{
+		var rubrique_id = request_uri.replace(/^\?exec=rubrique&id_rubrique=([0-9]+).*$/, "$1");
+		if(rubrique_id > 0)
+		{
+			var cible_id = "#iconifier-" + rubrique_id;
+		}
+	}
+	
+	/* page de configuration principale du site ? */
+	else if(
+			request_uri.match(/^\?exec=configuration/) ||
+			request_uri.match(/^\?exec=configurer_identite/)
+			) 
 	{
 		var cible_id = "#iconifier-0";
 	}
@@ -127,7 +140,21 @@ jQuery(document).ready(function() {
 	 */
 	if((fmp3_boite_son_url.length > 0) && (cible_id.length > 0))
 	{
+		/**
+		 * SPIP 3 ne connait plus iconifier.
+		 * Dommage !
+		 * Cibler le bloc logo de l'objet
+		 */
+		if ( fmp3_spip_version_3 )
+		{
+			cible_id = "div.formulaire_editer_logo";
+		}
+		
+		/**
+		 * Coller la boite edition du son juste après
+		 */
 		$(cible_id).after("<div id=\"fmp3_boite_son\"></div>");
+		
 		if ($("#fmp3_boite_son").html() == "") {
 			$.ajax({
 				type: "POST"
@@ -136,7 +163,12 @@ jQuery(document).ready(function() {
 				, success: function(msg){
 					$("#fmp3_boite_son").html(msg);
 				}
+				,
+				error: function(jqXHR, textStatus, errorThrown) {
+				  // Une erreur s'est produite lors de la requete
+				}
 			});
+			
 		}
 	}
 

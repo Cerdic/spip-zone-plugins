@@ -284,10 +284,11 @@ $(document).ready(function(){
 	return($result);
 }
 
-/*
+/**
  * @return: le contenu du journal (log) du plugin
  */
-function fmp3_journal_lire ($logname = NULL, $logdir = NULL, $logsuf = NULL) {
+function fmp3_journal_lire ($logname = NULL, $logdir = NULL, $logsuf = NULL)
+{
 	// definition des constantes 1.9.3 pour les SPIP anterieurs
 	if (!defined('_DIR_LOG')){
 		define('_DIR_LOG',defined('_DIR_TMP')?_DIR_TMP:_DIR_SESSION);
@@ -301,20 +302,40 @@ function fmp3_journal_lire ($logname = NULL, $logdir = NULL, $logsuf = NULL) {
 	
 	$logname = ($logname === NULL ? _FILE_LOG : $logname);
 	
-	$logfile = 
+	if ( fmp3_spip_version_3 () )
+	{
+		// SPIP3 n'aime pas les chiffres dans ce nom de fichier
+		preg_match('/^([a-z_]*)\.?(\d)?$/iS', (string) $logname, $regs);
+		if (!isset($regs[1]) OR !$logname = $regs[1])
+		{
+			$logname = null;
+		}
+		
+		$logfile = ($logdir===NULL ? _DIR_LOG : $logdir)
+			. $logname
+			. ($logsuf === NULL ? _FILE_LOG_SUFFIX : $logsuf)
+			;
+		
+	}
+	else
+	{
+		$logfile = 
 		(fmp3_spip_est_inferieur_193())
 		? _DIR_TMP . $logname . '.log' 
 		: ($logdir===NULL ? _DIR_LOG : $logdir)
 			. (test_espace_prive()?'prive_':'') //distinguer les logs prives et publics
 	  		. $logname
 			. ($logsuf === NULL ? _FILE_LOG_SUFFIX : $logsuf)
+			;
+	}
+	
 		;
 
 	$result =
 		(file_exists($logfile))
 		//? file_get_contents($logfile, false, null, 0, 2048)
 		? file_get_contents($logfile)
-		: _T('fichier_introuvable', array('fichier', $logfile))
+		: _T('fichier_introuvable', array('fichier' => $logfile))
 		;
 	
 	$result = ""

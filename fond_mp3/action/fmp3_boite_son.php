@@ -76,7 +76,14 @@ function action_fmp3_boite_son_dist () {
 	
 	if (preg_match("/^(\w+),(\d+)$/", $args, $r)) 
 	{
-		$objet = $r[1];
+		if ( fmp3_spip_version_3() &&
+						!function_exists ( 'determine_upload' )
+						)
+					{
+						include_spip('inc/documents');
+					}
+					
+					$objet = $r[1];
 		$id_objet = intval($r[2]);
 		
 		if(!$autoriser_modifier) {
@@ -126,6 +133,8 @@ function action_fmp3_boite_son_dist () {
 				if (!$source['size'])
 				{
 					$source = _request('source');
+					
+					
 					$source_path = determine_upload() . $source;
 					$source = array(
 						'name' => $source

@@ -22,6 +22,7 @@ $GLOBALS['i18n_fmp3_fr'] = array(
 	, 'pas_acces_a_la_page' => "L'acc&#232;s &#224; cette page ne vous est pas autoris&#233;e."
 	
 	, 'configuration_fmp3' => "Configuration de l'illustration sonore"
+	, 'configurer_fond_sonore' => "Configurer le fond sonore"
 	
 	, 'info_replier' => "Replier"
 	, 'info_titre_article' => "Son de l'article"

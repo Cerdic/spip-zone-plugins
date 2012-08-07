@@ -25,11 +25,9 @@ function fmp3_ajouter_onglets ($flux) {
 		$flux['data'][_FMP3_PREFIX] = new Bouton( 
 			_DIR_FMP3_IMAGES."fmp3-24.png"
 			, _T("fmp3:portfolio_fmp3")
-			, generer_url_ecrire(fmp3_configure)
+			, generer_url_ecrire('fmp3_configure')
 			)
 			;
 	}
 	return ($flux);
 }
-
-?>

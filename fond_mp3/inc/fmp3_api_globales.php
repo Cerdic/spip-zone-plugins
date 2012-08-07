@@ -56,8 +56,18 @@ include_spip('inc/utils');
  * si reseau local, activer le log de dev
  * Vous pouvez forcer l'option en placant define("_FMP3_DEBUG", true) dans *_options.php
  */
-if(!defined("_FMP3_DEBUG")) {
-	define("_FMP3_DEBUG", preg_match('/^(192\.168|127\.0)/', $_SERVER['SERVER_ADDR']));
+if( !defined ( '_FMP3_DEBUG')
+   && (
+	$_SERVER['SERVER_ADDR'] ==  '::1' || // IPv6 ?
+	$_SERVER['SERVER_ADDR'] ==  '127.0.0.1' || // IPv4 ?
+	preg_match('/^192\.168/', $_SERVER['SERVER_ADDR'])
+   )
+)
+{
+	define ( '_FMP3_DEBUG', TRUE );
+}
+else {
+	define ( '_FMP3_DEBUG', FALSE );
 }
 
 function fmp3_spip_est_inferieur_193 () {
@@ -69,16 +79,44 @@ function fmp3_spip_est_inferieur_193 () {
 }
 
 /**
- * Journal de bord.
+ * Detection SPIP 3.0.*
+ * @return bool
  */
-function fmp3_log ($message, $flag = null, $force = true) {
-	if(!empty($message) && $force) {
+function fmp3_spip_version_3 ()
+{
+	static $is;
+	
+	if( $is === NULL )
+	{
+		$is = ( isset ( $GLOBALS['spip_version_branche'] ) )
+			? version_compare( $GLOBALS['spip_version_branche'], '3.0.4', '>=' )
+			: FALSE
+			;
+	}
+	return ( $is );
+}
+
+/**
+ * Ecrire dans le journal de bord.
+ */
+function fmp3_log ( $message, $flag = null, $force = true )
+{
+	static $logname;
+	
+	if ( $logname === NULL )
+	{
+		$logname = _FMP3_PREFIX;
+	}
+	
+	if( !empty($message) && $force )
+	{
 		$flag = 
 			($flag === null)
 			? ""
 			: " " . (!$flag ? "ERROR" : "OK")
-			;
-		spip_log($message.$flag, _FMP3_PREFIX);
+			;		
+		
+		spip_log( $message.$flag, $logname );
 	}
 }
 

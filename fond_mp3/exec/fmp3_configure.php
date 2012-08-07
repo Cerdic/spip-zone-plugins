@@ -64,6 +64,7 @@ function exec_fmp3_configure () {
 		, $connect_id_auteur
 		;
 
+	//fmp3_log ( 'exec configure' );
 	// la configuration est réservée aux admins tt rubriques
 	$autoriser = ($connect_statut == "0minirezo") && $connect_toutes_rubriques;
 
