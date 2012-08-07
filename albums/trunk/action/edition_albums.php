@@ -22,7 +22,7 @@ function action_edition_albums_dist(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	$table_arg = explode('/', $arg);
-	$action = $table_arg[0]; #on fait un list() des autres arguments apres car ils different pour les actions 'associer' et 'statuts'
+	$action = $table_arg[0]; #on fait un list() des autres arguments apres car ils different selon les actions
 	include_spip('inc/autoriser');
 
 	//Associer/dissocier un album a un autre objet editorial
@@ -49,6 +49,21 @@ function action_edition_albums_dist(){
 	AND autoriser('modifier', 'album', $id_album)){
 		include_spip('action/editer_objet');
 		objet_modifier("album", $id_album, array("statut" => $statut));
+	}
+
+	// Supprimer definitivement un album
+	elseif ($action == 'eradiquer'
+	AND list(,$id_album) = explode('/', $arg)
+	AND intval($id_album)){
+		$valide = sql_getfetsel('id_album','spip_albums','id_album='.$id_album);
+		if($valide && autoriser('supprimer','album',$valide)){
+			sql_delete("spip_albums", "id_album=".$id_album);
+			$id_album = 0;
+			include_spip('inc/invalideur');
+			suivre_invalideur("id='id_album/$id_album'");
+			return $id_album;
+		}
+		return false;
 	}
 
 }
