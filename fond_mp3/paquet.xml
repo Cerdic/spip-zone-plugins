@@ -1,0 +1,28 @@
+
+<!--  
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	 -->
+
+
+<paquet 
+	prefix="fmp3" 
+	categorie="multimedia" 
+	version="3.0.0" 
+	etat="test" 
+	compatibilite="[3.0.0-alpha2;[" 
+	logo="images/fmp3-64.png" 
+	documentation="http://www.quesaco.org/Illustration-sonore-mp3">
+	<nom>Fond MP3</nom>
+	
+	<pipeline nom="header_prive" inclure="inc/fmp3_pipeline_header_prive.php" />
+	
+	<pipeline nom="insert_head" inclure="inc/fmp3_pipeline_insert_head.php" />
+	
+	<menu nom="fmp3_configure" titre="fmp3:configurer_fond_sonore"
+		  parent="bando_configuration" icone="images/fmp3-16.png"
+		  action="fmp3_configure" />
+	
+
+</paquet>
