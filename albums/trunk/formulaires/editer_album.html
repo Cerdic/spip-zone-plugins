@@ -13,21 +13,13 @@
 	<form method='post' action='#ENV{action}' name='formulaire_editer_album' id='formulaire_editer_album'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_album' value='#ENV{id_album}' />
+		<input type='hidden' name='statut' value='#ENV{statut}' />
 		<ul>
 
-			[(#REM) un lien à prendre en compte ? -> statut=publie ]
-			[(#ENV{associer_objet}|oui)
-				[(#SAISIE{hidden,statut,valeur=publie})]
-			]
-
-			[(#REM) Titre, si l'option est activée dans la config, on définit un titre par defaut ]
-			[(#CONFIG{albums/utiliser_titre_defaut}|oui)
-				#SET{titre_defaut,#INFO_TITRE{#ENV{objet},#ENV{id_objet}}}
-			]
 			[(#SAISIE{input, titre, 
 				label=<:album:label_titre:>, 
 				obligatoire=oui,
-				defaut=#GET{titre_defaut}})]
+				defaut=#ENV{titre_defaut}})]
 
 			[(#REM) Descriptif ]
 			[(#CONFIG{albums/afficher_champ_descriptif}|oui)
