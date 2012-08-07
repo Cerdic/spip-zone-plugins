@@ -60,14 +60,14 @@ function albums_declarer_tables_objets_sql($tables){
 			array(
 				'champ'		=> 'statut',
 				'publie'	=> 'publie',
-				'previsu'	=> 'publie',
+				'previsu'	=> 'prepa,publie',
 				'post_date'	=> 'date',
 				'exception'	=> array('statut','tout')
 			)
 		),
 		'statut_textes_instituer' => array(
+			'prepa'			=> 'album:texte_statut_prepa',
 			'publie'		=> 'album:texte_statut_publie',
-			'refuse'		=> 'album:texte_statut_refuse',
 			'poubelle'		=> 'texte_statut_poubelle',
 		),
 		'texte_changer_statut'		=> 'album:texte_changer_statut',
