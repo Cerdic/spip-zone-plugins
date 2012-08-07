@@ -68,7 +68,6 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 		exec('ffmpeg2theora',$retour_ffmpeg2theora,$retour_ffmpeg2theora_int);
 		if($retour_ffmpeg2theora_int != 0){
 			ecrire_config('spipmotion_ffmpeg2theora_casse', 'oui');
-			$erreurs[] = 'ffmpeg2theora';
 		}else{
 			effacer_config('spipmotion_ffmpeg2theora_casse');
 		}
