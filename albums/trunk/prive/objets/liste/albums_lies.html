@@ -31,8 +31,10 @@
 				</li>
 			
 				<li>
-					[(#REM) [(#STATUT|puce_statut{album})] ]
-					[(#MODELE{statut_album, objet=album, id_objet=#ID_ALBUM, statut=#STATUT, exclus=#LISTE{'prepa'}}{env})]
+					[(#AUTORISER{modifier,album,#ID_ALBUM}|?{
+						[(#MODELE{statut_album, objet=album, id_objet=#ID_ALBUM, statut=#STATUT}{env})],
+						[(#STATUT|puce_statut{album})]
+					})]
 					[&nbsp;N°(#ID_ALBUM)]
 				</li>
 				<li>

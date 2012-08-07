@@ -7,7 +7,7 @@
 		navigation = (liste)	parents, divers, contenus
 		header = (liste)	tri, thead
 		colonnes = (liste)	recherche, statut, logo, id, titre, infos, descriptif, contenu, liaison
-		actions = (liste)	associer, statut, choisir
+		actions = (liste)	associer, supprimer, choisir
 ][(#REM)
 	inclus dans /prive/squelettes/contenu/albums_complement_objet.html
 	inclus dans /prive/squelettes/inclure/albums_navigation.html
@@ -83,7 +83,10 @@
 			[(#REM) Statut ]
 			[(#GET{colonne_statut}|oui)
 			<td class='statut'>
-			[(#MODELE{statut_album, objet=album, id_objet=#ID_ALBUM, statut=#STATUT, exclus=#LISTE{'prepa'}}{env})]
+				[(#AUTORISER{modifier,album,#ID_ALBUM}|?{
+					[(#MODELE{statut_album, objet=album, id_objet=#ID_ALBUM, statut=#STATUT}{env})],
+					[(#STATUT|puce_statut{album})]
+				})]
 			</td>
 			]
 
@@ -123,7 +126,11 @@
 				[<strong>(#TITRE)</strong>]
 				</li>
 				<li>
-					[(#STATUT|puce_statut{album})][&nbsp;N°(#ID_ALBUM)]
+					[(#AUTORISER{modifier,album,#ID_ALBUM}|?{
+						[(#MODELE{statut_album, objet=album, id_objet=#ID_ALBUM, statut=#STATUT}{env})],
+						[(#STATUT|puce_statut{album})]
+					})]
+					[&nbsp;N°(#ID_ALBUM)]
 				</li>
 				<li>
 					[(#GET{colonne_contenu}|non)
@@ -186,7 +193,7 @@
 			</td>
 			</BOUCLE_afficher_liaison>
 
-			[(#REM) Actions : associer, mettre à la poubelle ]
+			[(#REM) Actions : associer, mettre à la poubelle, choisir ]
 			<BOUCLE_afficher_actions(CONDITION){si #ENV{actions}|oui}>
 			<td class='action'>
 			[(#GET{action_associer}|et{#AUTORISER{associer,album,#ENV{associer_objet}}}|oui)
@@ -194,6 +201,15 @@
 					[(#CHEMIN_IMAGE{ajouter-16.png}|balise_img{<:album:icone_associer_album:>})],
 					[(#URL_ACTION_AUTEUR{edition_albums,lier/#ID_ALBUM/[(#ENV{associer_objet})],#SELF})],
 					'button link ajax'}
+				)]
+			]
+			[(#GET{action_supprimer}|et{#AUTORISER{supprimer,album,#ID_ALBUM}}|oui)
+				[(#SET{message,#EVAL{_request('clic')}|is_null|?{#VAL{<:album:avis_suppression_album:>},''}})]
+				[(#BOUTON_ACTION{
+					[(#CHEMIN_IMAGE{poubelle-16.png}|balise_img{<:album:icone_supprimer_album:>})],
+					[(#URL_ACTION_AUTEUR{edition_albums,eradiquer/#ID_ALBUM, #SELF|parametre_url{clic,oui}})],
+					'button link ajax',
+					#GET{message}}
 				)]
 			]
 			[(#GET{action_choisir}|oui)

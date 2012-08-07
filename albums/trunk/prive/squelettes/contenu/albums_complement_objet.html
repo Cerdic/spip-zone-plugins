@@ -44,7 +44,7 @@
 
 
 <!-- ICONE AJOUTER -->
-[(#AUTORISER{ajouteralbumdans, #OBJET, #ID_OBJET}|et{#ENV{albums}|is_null}|oui)
+[(#AUTORISER{ajouter,album,#ENV{associer_objet}}|et{#ENV{albums}|is_null}|oui)
 	[(#SET{label,<:album:icone_ajouter_album:>})]
 	[(#GET{self}|parametre_url{albums,#GET{ajouter}}|icone_verticale{#GET{label},album,new,'ajax preload right'}inserer_attribut{title,#GET{label}})]
 ]
