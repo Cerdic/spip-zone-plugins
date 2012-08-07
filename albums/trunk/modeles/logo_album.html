@@ -7,11 +7,11 @@
 	4- (!image)		-> icone générique
 ]
 #CACHE{0}
-#SET{taille, #ENV{taille}}
+#SET{taille, #ENV{taille,48}}
 #SET{taille_passe_partout, #GET{taille}|plus{2}}
 
 [(#REM) l'album contient-t-il une image ?  ]
-<BOUCLE_icone_image(DOCUMENTS liens album){media==image}{id_album}{tout}{0,1}>
+<BOUCLE_icone_image(DOCUMENTS liens album){media==image}{id_album}{par num titre,titre}{tout}{0,1}>
 #SET{icone_image,#FICHIER}
 </BOUCLE_icone_image>
 
@@ -22,25 +22,25 @@
 <div class='albums logo' style="width:[(#GET{taille})px]; height:[(#GET{taille})px];">
 
 [(#LOGO_ALBUM|ou{#GET{icone_image}}|oui) 
-	<span class="decoration_logo" style="width:[(#GET{taille})px]; height:[(#GET{taille})px]; background-image:url('[(#CHEMIN_IMAGE{album-decoration-[(#GET{taille})].png})]');"></span>
+	<span class="decoration_logo" style="width:[(#GET{taille})px]; height:[(#GET{taille})px]; background-image:url('[(#CHEMIN_IMAGE{album-decoration-128.png}|image_reduire{#GET{taille}}|extraire_attribut{src})]');"></span>
 ]
 
 [(#LOGO_ALBUM|image_passe_partout{#GET{taille_passe_partout},#GET{taille_passe_partout}}
 	|image_recadre{#GET{taille},#GET{taille},center}
-	|image_masque{#CHEMIN_IMAGE{album-masque-#GET{taille}.png}}
-	|inserer_attribut{class,spip_logos}
-	|inserer_attribut{class,deco}
-	||sinon {
+	|image_masque{#CHEMIN_IMAGE{album-masque-128.png}|image_reduire{#GET{taille}}}
+	|inserer_attribut{class,'spip_logos deco'}
+	|sinon {
 		[(#GET{vide}|oui)
-			[(#CHEMIN_IMAGE{album-vide-#GET{taille}.png}|balise_img{<:album:texte_album_vide:>,'spip_logos deco'})]
+			[(#CHEMIN_IMAGE{album-vide-128.png}
+				|balise_img{<:album:texte_album_vide:>,'spip_logos deco'}
+				|image_reduire{#GET{taille}})]
 		]
 		[(#GET{vide}|non)
 			[(#GET{icone_image}|image_passe_partout{#GET{taille_passe_partout},#GET{taille_passe_partout}}
 				|image_recadre{#GET{taille},#GET{taille},center}
-				|image_masque{#CHEMIN_IMAGE{album-masque-#GET{taille}.png}}
-				|inserer_attribut{class,spip_logos}
-				|inserer_attribut{class,deco}
-				||sinon {
+				|image_masque{#CHEMIN_IMAGE{album-masque-128.png}|image_reduire{#GET{taille}}}
+				|inserer_attribut{class,'spip_logos deco'}
+				|sinon {
 					[(#CHEMIN_IMAGE{album-#GET{taille}.png}|balise_img{<:album:titre_album:>,'spip_logos'})]
 				}
 			)]
