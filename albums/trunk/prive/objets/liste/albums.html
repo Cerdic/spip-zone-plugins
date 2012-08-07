@@ -145,8 +145,8 @@
 			[(#GET{colonne_descriptif}|oui)
 			<td class='descriptif'>
 				[(#ENV{liste}|=={associer}|?{
-					[(#DESCRIPTIF|couper{80})],
-					#DESCRIPTIF|couper{200}
+					#DESCRIPTIF|couper{80},
+					#DESCRIPTIF
 				})]
 			</td>
 			]
