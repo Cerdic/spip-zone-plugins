@@ -52,8 +52,9 @@ function formulaires_etiquettes_charger_dist($groupe, $id_groupe, $name, $aide_n
 			$mots = array();
 			foreach ($liens as $l)
 				$mots[] = $l['id_mot'];
-
-			$mots = sql_allfetsel('titre','spip_mots',sql_in('id_mot',$mots));
+			
+			// On récupère les titres des mots mais seulement ceux du bon groupe
+			$mots = sql_allfetsel('titre','spip_mots',array(sql_in('id_mot',$mots), 'id_groupe = '.$valeurs['id_groupe']));
 			foreach ($mots as $mot){
 				// S'il y a des espaces ou virgules on entoure de guillemets
 				if (strcspn($mot['titre'], ' ,"')!=strlen($mot['titre']))
