@@ -177,7 +177,7 @@
 
 			[(#REM) Liaison ]
 			<BOUCLE_afficher_liaison(CONDITION){si #GET{colonne_liaison}}>
-			<td class='liaison' scope='col'>
+			<td class='liaison'>
 			<B_liaison>
 			<ul>
 				<BOUCLE_liaison(ALBUMS liens){id_album}{par objet}{tout}>
@@ -186,6 +186,18 @@
 				[<span class='vu'>(#CHEMIN_IMAGE{vu-16-10.png}|balise_img|inserer_attribut{title,<:medias:document_vu:>}|inserer_attribut{alt,<:album:info_album_vu:>})</span>]
 				 ]
 				<a href="[(#URL_ECRIRE{#OBJET,id_#OBJET=#ID_OBJET})]">#OBJET N°#ID_OBJET</a>
+				#SET{associer_objet, #OBJET|concat{'|'}|concat{#ID_OBJET}}
+				[(#SET{titre,#AUTORISER{associer, album, #GET{associer_objet}}|?{#VU|=={oui}|?{<:medias:document_vu:>,''},<:avis_operation_impossible:>}})]
+				[(#AUTORISER{associer, album, #GET{associer_objet}}|et{#VU|=={non}}|?{
+					[(#BOUTON_ACTION{
+						[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'album:icone_supprimer_album'})],
+						[(#URL_ACTION_AUTEUR{edition_albums,delier/#ID_ALBUM/[(#GET{associer_objet})],#SELF})],'button link ajax'}
+					)],
+					[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{#GET{titre},'supprimer off'}
+						|inserer_attribut{title,#GET{titre}}
+						|image_nb
+						|image_gamma{40})]
+				})]
 				</li>
 				</BOUCLE_liaison>
 			</ul>
