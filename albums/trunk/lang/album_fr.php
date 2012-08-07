@@ -3,26 +3,29 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'avis_suppression_album'	=> "L'album va être supprimé, cette action est irréversible. Êtes vous sûr ?",
 
 	// C
 	'cfg_titre_albums'		=> "Albums",
 	'c_albums_info'			=> "Gestion des albums",
-	'c_albums_info_texte'		=> "<div class='albums'>
-	Les onglets & filtres permettent de sélectionner les albums selon plusieurs critères :
-	<ul>
-	<li><strong>Onglets 1er rang:</strong> objets auxquels les albums sont liés.</li>
-	<li><strong>Filtres 2ème rang:</strong>
+	'c_albums_info_texte'		=> 
+		"<div class='albums'>
+		Vous pouvez sélectionner les albums selon plusieurs critères :
 		<ul>
-		<li>statuts des albums</li>
-		<li>vus = albums insérés dans un texte.</li>
-		<li>inutilisés = albums sans lien avec un objet éditorial.</li>
+		<li><strong>1er rang:</strong> objets auxquels les albums sont liés.</li>
+		<li><strong>2ème rang:</strong>
+			<ul>
+			<li>statuts des albums</li>
+			<li>vus = albums insérés dans un texte.</li>
+			<li>inutilisés = albums sans lien avec un objet éditorial.</li>
+			</ul>
+		</li>
+		<li><strong>3ème rang:</strong> types de médias contenus (plusieurs choix simultanés possibles).</li>
 		</ul>
-	</li>
-	<li><strong>Filtres 3ème rang:</strong> types de médias contenus (plusieurs choix simultanés possibles).</li>
-	</ul>
-	<p>Enfin, les icones à droite de la liste permettent de changer le statut d'un album.</p>
-	<p><a href='http://contrib.spip.net/Albums-3971'>Documentation en ligne</a></p>
-	</div>",
+		<p>Les albums ont 3 statuts : non publié (prepa), publié et à la poubelle. La puce à gauche permet de le changer rapidement.
+		Si un album est à la poubelle, vide et inutilisé, une icône apparaît à droite qui permet de le supprimer définitivement.</p>
+		<p><a href='http://contrib.spip.net/Albums-v2'>Documentation en ligne</a></p>
+		</div>",
 
 	// E
 	'explication_affichage_modele'		=> "La pérennité de ces options n'est pas garantie !",
@@ -95,8 +98,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_albums'				=> "Albums",
 	'titre_page_configurer_albums'		=> "Configurer les Albums",
 	'titre_logo_album'			=> "Logo",
+	'texte_statut_prepa'			=> "non publié",
 	'texte_statut_publie'			=> "publié",
-	'texte_statut_refuse'			=> "non publié",
 	'texte_creer_album'			=> "Créer un nouvel album",
 	'texte_ajouter_album'			=> "Ajouter un album",
 	'texte_associer_album'			=> "Associer un album existant",
