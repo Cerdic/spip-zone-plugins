@@ -14,6 +14,7 @@ function albums_upgrade($nom_meta_base_version, $version_cible){
 	$maj = array();
 
 	include_spip('inc/config');
+	include_spip('base/abstract_sql');
 
 	# Premiere installation  creation des tables
 	$maj['create'] = array(
@@ -23,13 +24,18 @@ function albums_upgrade($nom_meta_base_version, $version_cible){
 	# Version 2.0.2 : meta + suppression colonne categorie
 	$maj['2.0.2'] = array(
 		# On supprime la colonne 'categorie'
-		array('sql_alert','TABLE spip_albums DROP COLUMN categorie'),
+		array('sql_alter','TABLE spip_albums DROP COLUMN categorie'),
 		# Configuration : valeurs par defaut
 		array(ecrire_config('albums/afficher_champ_descriptif', 'on'),
 			ecrire_config('albums/objets', array('spip_articles')),
 			ecrire_config('albums/afficher_champ_descriptif', 'on'),
 			ecrire_config('albums/vue_icones', array('titre')),
 			ecrire_config('albums/vue_liste', array('icone', 'mimetype', 'poids', 'dimensions'))),
+	);
+
+	# Version 2.0.4 : on utilise le statut prepa au lieu de refuse
+	$maj['2.0.4'] = array(
+		sql_updateq('spip_albums', array('statut' => 'prepa'), 'statut = '.sql_quote('refuse')),
 	);
 
 	# On active l'ajout de documents aux albums
