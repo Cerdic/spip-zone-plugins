@@ -22,7 +22,7 @@ function exec_pdf_comptesbilan()
 		echo minipres();
 	} else {
 		include_spip('inc/association_comptabilite');
-		$pdf = new ExportComptes_PDF();
+		$pdf = new ExportComptes_PDF($GLOBALS['association_metas']['fpdf_orientation']?$GLOBALS['association_metas']['fpdf_orientation']:'P', $GLOBALS['association_metas']['fpdf_unit']?$GLOBALS['association_metas']['fpdf_unit']:'mm', $GLOBALS['association_metas']['fpdf_format']?$GLOBALS['association_metas']['fpdf_format']:( ($GLOBALS['association_metas']['fpdf_widht'] AND $GLOBALS['association_metas']['fpdf_height'])?array($GLOBALS['association_metas']['fpdf_widht'],$GLOBALS['association_metas']['fpdf_height']):'A4') );
 		$pdf->init();
 		$pdf->association_cartouche_pdf('cpte_bilan_titre_general');
 		$classes_bilan = array();
