@@ -35,7 +35,7 @@ function albums_upgrade($nom_meta_base_version, $version_cible){
 
 	# Version 2.0.4 : on utilise le statut prepa au lieu de refuse
 	$maj['2.0.4'] = array(
-		array('sql_updateq', 'spip_albums', array('statut' => 'prepa'), 'statut = '.sql_quote('refuse')),
+		array(sql_updateq('spip_albums', array('statut' => 'prepa'), 'statut = '.sql_quote('refuse'))),
 	);
 
 	# On active l'ajout de documents aux albums
