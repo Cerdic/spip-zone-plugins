@@ -97,8 +97,13 @@ function toggle_parametre($balise, $parametre, $action='toggle', $delimiteur='|'
 			break;
 		case 'ajouter':
 			foreach ($table_parametres as $parametre){
-				array_push($table_balise, $parametre);
-				$balise = implode($delimiteur, $table_balise);
+				if (!empty($balise)){
+					array_push($table_balise, $parametre);
+					$balise = implode($delimiteur, $table_balise);
+				}
+				else {
+					$balise = $parametre;
+				}
 			}
 			break;
 	}
