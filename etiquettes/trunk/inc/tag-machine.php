@@ -326,7 +326,7 @@ class Tag {
 			if (!count(objet_trouver_liens(array('mot'=>$this->id_mot),array($type=>$id))))
 				objet_associer(array('mot'=>$this->id_mot),array($type=>$id));
 		}
-		else spip_log("id_objet non défini");
+		else spip_log("Tag-machine : id_objet non défini", _LOG_ERREUR);
 		
 	}
 	
