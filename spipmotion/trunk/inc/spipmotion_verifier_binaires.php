@@ -64,6 +64,9 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 	else{
 		/**
 		 * Tester ffmpeg2theora
+		 * ffmpeg2theora n'est pas indispensable au bon fonctionnement
+		 * On n'envoie pas de mail de notification
+		 * On ne bloquera pas les encodages
 		 */
 		exec('ffmpeg2theora',$retour_ffmpeg2theora,$retour_ffmpeg2theora_int);
 		if($retour_ffmpeg2theora_int != 0){
