@@ -6,6 +6,12 @@
  * © 2007 - 2012
  */
 
+/**
+ * Fonction pour le pipeline, n'a rien a effectuer
+ *
+*/
+function abomailmans_autoriser(){}
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // autorisation des boutons
