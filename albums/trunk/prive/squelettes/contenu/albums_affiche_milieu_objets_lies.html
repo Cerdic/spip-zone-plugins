@@ -1,0 +1,21 @@
+[(#REM)
+	Affiche la liste des objets auxquels un album est lié.
+][(#REM)
+	Appelé par la pipeline 'affiche_milieu'
+]
+
+<BOUCLE_test_afficher(ALBUMS liens objets){id_album}{0,1}> #SET{afficher,oui} </BOUCLE_test_afficher>
+
+[(#GET{afficher}|oui)
+<div class='albums'>
+#BOITE_OUVRIR{'','simple liste-objets'}
+
+
+	<h3><:album:info_association:> :</h3>
+
+	[(#INCLURE{fond=prive/squelettes/inclure/inc-albums_objets_lies,
+		afficher=#LISTE{auteur, icone, info, titre, bouton, expose}}{env})]
+
+#BOITE_FERMER
+</div>
+]

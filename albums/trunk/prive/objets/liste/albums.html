@@ -1,13 +1,14 @@
 [(#REM)
 	Affiche une liste d'albums
 	Paramètres d'inclusion :
-		liste = (texte)		associer / galerie / selecteur
-		selection = (tableau d'ids)
-		statut = (texte)	publie|refuse|poubelle
-		navigation = (liste)	parents, divers, contenus
-		header = (liste)	tri, thead
-		colonnes = (liste)	recherche, statut, logo, id, titre, infos, descriptif, contenu, liaison
-		actions = (liste)	associer, supprimer, choisir
+		liste (texte) =		associer ou galerie ou selecteur
+		selection (tableau d'ids)
+		exclus (tableau d'ids)
+		statut (texte) =	prepa|publie|poubelle
+		navigation (liste) =	parents, divers, contenus
+		header (liste) =	tri, thead
+		colonnes (liste) =	recherche, statut, logo, id, titre, infos, descriptif, contenu, liaison
+		actions (liste) =	associer, supprimer, choisir
 ][(#REM)
 	inclus dans /prive/squelettes/contenu/albums_complement_objet.html
 	inclus dans /prive/squelettes/inclure/albums_navigation.html
@@ -83,10 +84,7 @@
 			[(#REM) Statut ]
 			[(#GET{colonne_statut}|oui)
 			<td class='statut'>
-				[(#AUTORISER{modifier,album,#ID_ALBUM}|?{
-					[(#MODELE{statut_album, objet=album, id_objet=#ID_ALBUM, statut=#STATUT}{env})],
-					[(#STATUT|puce_statut{album})]
-				})]
+				[(#MODELE{puce_statut_album, objet=album, id_objet=#ID_ALBUM, statut=#STATUT}{env})]
 			</td>
 			]
 
@@ -126,15 +124,12 @@
 				[<strong>(#TITRE)</strong>]
 				</li>
 				<li>
-					[(#AUTORISER{modifier,album,#ID_ALBUM}|?{
-						[(#MODELE{statut_album, objet=album, id_objet=#ID_ALBUM, statut=#STATUT}{env})],
-						[(#STATUT|puce_statut{album})]
-					})]
+					[(#MODELE{puce_statut_album, objet=album, id_objet=#ID_ALBUM, statut=#STATUT}{env})]
 					[&nbsp;N°(#ID_ALBUM)]
 				</li>
 				<li>
 					[(#GET{colonne_contenu}|non)
-					[(#INCLURE{fond=prive/squelettes/inclure/albums_nb_documents, id_album=#ID_ALBUM, ajax=documents})]
+					[(#INCLURE{fond=prive/squelettes/inclure/inc-albums_nb_documents, id_album=#ID_ALBUM, ajax=documents})]
 					]
 				</li>
 			</ul>
@@ -178,54 +173,28 @@
 			[(#REM) Liaison ]
 			<BOUCLE_afficher_liaison(CONDITION){si #GET{colonne_liaison}}>
 			<td class='liaison'>
-			<B_liaison>
-			<ul>
-				<BOUCLE_liaison(ALBUMS liens){id_album}{par objet}{tout}>
-				<li>
-				[(#VU|=={oui}|oui)
-				[<span class='vu'>(#CHEMIN_IMAGE{vu-16-10.png}|balise_img|inserer_attribut{title,<:medias:document_vu:>}|inserer_attribut{alt,<:album:info_album_vu:>})</span>]
-				 ]
-				<a href="[(#URL_ECRIRE{#OBJET,id_#OBJET=#ID_OBJET})]">#OBJET N°#ID_OBJET</a>
-				#SET{associer_objet, #OBJET|concat{'|'}|concat{#ID_OBJET}}
-				[(#SET{titre,#AUTORISER{associer, album, #GET{associer_objet}}|?{#VU|=={oui}|?{<:medias:document_vu:>,''},<:avis_operation_impossible:>}})]
-				[(#AUTORISER{associer, album, #GET{associer_objet}}|et{#VU|=={non}}|?{
-					[(#BOUTON_ACTION{
-						[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'album:icone_supprimer_album'})],
-						[(#URL_ACTION_AUTEUR{edition_albums,delier/#ID_ALBUM/[(#GET{associer_objet})],#SELF})],'button link ajax'}
-					)],
-					[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{#GET{titre},'supprimer off'}
-						|inserer_attribut{title,#GET{titre}}
-						|image_nb
-						|image_gamma{40})]
-				})]
-				</li>
-				</BOUCLE_liaison>
-			</ul>
-			</B_liaison>
+			[(#INCLURE{fond=prive/squelettes/inclure/inc-albums_objets_lies,
+				id_album=#ID_ALBUM,
+				afficher=#LISTE{auteur, info, bouton}}{env})]
 			</td>
 			</BOUCLE_afficher_liaison>
 
 			[(#REM) Actions : associer, mettre à la poubelle, choisir ]
 			<BOUCLE_afficher_actions(CONDITION){si #ENV{actions}|oui}>
 			<td class='action'>
-			[(#GET{action_associer}|et{#AUTORISER{associer,album,#ENV{associer_objet}}}|oui)
-				[(#BOUTON_ACTION{
-					[(#CHEMIN_IMAGE{ajouter-16.png}|balise_img{<:album:icone_associer_album:>})],
-					[(#URL_ACTION_AUTEUR{edition_albums,lier/#ID_ALBUM/[(#ENV{associer_objet})],#SELF})],
-					'button link ajax'}
-				)]
+			[(#GET{action_associer}|oui)
+				[(#INCLURE{fond=prive/squelettes/inclure/inc-albums_boutons_actions,
+					bouton=associer,
+					id_album=#ID_ALBUM}{env})]
 			]
-			[(#GET{action_supprimer}|et{#AUTORISER{supprimer,album,#ID_ALBUM}}|oui)
-				[(#SET{message,#EVAL{_request('clic')}|is_null|?{#VAL{<:album:avis_suppression_album:>},''}})]
-				[(#BOUTON_ACTION{
-					[(#CHEMIN_IMAGE{poubelle-16.png}|balise_img{<:album:icone_supprimer_album:>})],
-					[(#URL_ACTION_AUTEUR{edition_albums,eradiquer/#ID_ALBUM, #SELF|parametre_url{clic,oui}})],
-					'button link ajax',
-					#GET{message}}
-				)]
+			[(#GET{action_supprimer}|oui)
+				[(#INCLURE{fond=prive/squelettes/inclure/inc-albums_boutons_actions,
+					bouton=supprimer,
+					id_album=#ID_ALBUM}{env})]
 			]
 			[(#GET{action_choisir}|oui)
-			<input type="radio" name="[(#ENV{nom})]" id="radio[(#ID_ALBUM)]" value="[(#ID_ALBUM)]">
+				[(#SAISIE{radio,[radio(#ID_ALBUM)]})]
+				[(#REM) <input type="radio" name="[(#ENV{nom})]" id="radio[(#ID_ALBUM)]" value="[(#ID_ALBUM)]"> ]
 			]
 			</td>
 			</BOUCLE_afficher_actions>

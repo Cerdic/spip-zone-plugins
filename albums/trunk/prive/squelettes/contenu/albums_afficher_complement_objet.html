@@ -38,6 +38,7 @@
 [(#GET{afficher_lies}|oui)
 	<div id='lies' class='lies' class='ajax'>
 	[(#INCLURE{fond=prive/objets/liste/albums_lies,
+		statut='prepa|publie|poubelle',
 		nb=#GET{nombre_pagination}}{env})]
 	</div>
 ]
@@ -56,7 +57,7 @@
 [(#GET{autorise_creer}|oui)
 	[(#SELF|parametre_url{albums,creer}|parametre_url{recherche,''}|lien_ou_expose{<:album:onglet_creer_album:>,#ENV{albums}|=={creer},'spip_lien ajax preload',<:album:texte_creer_album:>})]
 ]
-[(#GET{autorise_associer}|oui)
+[(#GET{autorise_associer}|et{#GET{afficher_associer}}|oui)
 	[(#SELF|parametre_url{albums,associer}|parametre_url{recherche,''}|lien_ou_expose{<:album:onglet_associer_album:>,#ENV{albums}|=={associer},'spip_lien ajax preload',<:album:texte_associer_album:>})]
 ]
 	[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{title,<:album:icone_fermer:>}|wrap{<a href='[(#SELF|parametre_url{albums,''}|parametre_url{recherche,''})]' class='ajax preload fermer'>})]
@@ -92,7 +93,7 @@
 	[(#INCLURE{fond=prive/squelettes/inclure/albums_navigation_listes,
 		liste=associer,
 		exclus=#GET{exclus},
-		statut='publie|refuse',
+		statut='prepa|publie|poubelle',
 		navigation=#LISTE{contenus},
 		colonnes=#LISTE{logo,infos,descriptif,contenu},
 		actions=#LISTE{associer},
