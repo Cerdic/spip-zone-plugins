@@ -720,7 +720,7 @@ Ce sommaire est compatible avec « [.->decoupe] » et « [.->titres_typo] »
 	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots, tout comme les balises en clair &lt;a>&lt;/a>, sont interdits : veuillez inciter vos rédacteurs à utiliser les raccourcis de liens au format SPIP.
 
 @puce@ Listez ici les séquences interdites en les séparant par des espaces.[[%spam_mots%]]
-<q1>• Pour une expression avec des espaces, placez-la entre guillemets.
+<q1>• Pour une expression avec des espaces, placez-la entre guillemets, ou utilisez le «+» pour remplacer l\'espace.
 _ • Pour spécifier un mot entier, mettez-le entre parenthèses. Exemple~:~{(asses)}.
 _ • Pour une expression régulière, vérifiez bien la syntaxe et placez-la entre slashes puis entre guillemets.
 _ Exemple~:~{<html>"/@test\\.(com|fr)/"</html>}.
