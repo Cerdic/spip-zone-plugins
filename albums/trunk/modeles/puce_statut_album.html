@@ -40,22 +40,29 @@
 
 <span class='puce_objet albums'>
 
+	<BOUCLE_autorisation(CONDITION){si #AUTORISER{modifier,#OBJET,#ID_OBJET}}>
+
 	<span class='puce_objet_fixe'>
 	[(#CHEMIN_IMAGE{#VAL{puce-}|concat{#GET{statuts_tous}|table_valeur{#STATUT}}|concat{-8.png}}|balise_img{'','statut'})]
 	</span>
 
 	<span class='puce_objet_popup' style="[width: (#GET{width})px;][ margin-left: -(#GET{decalage})px;]">
 	<BOUCLE_statuts_popup(DATA){source table, #GET{statuts}}>
-	[(#SET{message,#CLE|!={publie}|et{#EVAL{_request('clic')}|is_null}|?{#VAL{<:confirm_changer_statut:>},''}})]
+	[(#SET{message,#CLE|!={publie}|et{#EVAL{_request('message')}|!={statut}}|?{#VAL{<:confirm_changer_statut:>},''}})]
 	#SET{action, #GET{statuts_tous}|table_valeur{#VALEUR}}
 	#SET{titre, #ENV{objet}|objet_info{statut_textes_instituer}|table_valeur{#VALEUR}|_T}
-
 	[(#BOUTON_ACTION{
 		[(#CHEMIN_IMAGE{#VAL{puce-}|concat{#GET{statuts_tous}|table_valeur{#VALEUR}}|concat{-8.png}}|balise_img{#GET{titre}})],
 		[(#URL_ACTION_AUTEUR{edition_albums, #GET{action}/#VALEUR/[(#ENV{id_objet})], #ENV{retour,#SELF}|parametre_url{clic,oui}})], link button ajax,
 		#GET{message}})]
-
 	</BOUCLE_statuts_popup>
 	</span>
+
+	</BOUCLE_autorisation>
+
+	<span class='puce_objet_fixe'>
+	[(#CHEMIN_IMAGE{#VAL{puce-}|concat{#GET{statuts_tous}|table_valeur{#STATUT}}|concat{-8.png}}|balise_img{'','statut'})]
+	</span>
+	<//B_autorisation>
 
 </span>
