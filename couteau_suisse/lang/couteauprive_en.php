@@ -71,7 +71,7 @@ _ Les balises <code><multi/></code> sont recommandées en cas de site multilingu
 	'autobr:nom' => 'Automatic line breaks',
 	'autobr_non' => 'All site text between &lt;alinea>&lt;/alinea> tags',
 	'autobr_oui' => 'All article text and public messages  (the #TEXTE tag)',
-	'autobr_racc' => 'Line breaks: <b>&lt;alinea>&lt;/alinea></b>', # MODIF
+	'autobr_racc' => 'Line breaks: <b>&lt;alinea>&lt;/alinea></b>',
 
 	// B
 	'balise_set:description' => 'In order to reduce the complexity of code segments like <code>#SET{x,#GET{x}|a_filter}</code>, this tool offers you the following short-cut: <code>#SET_UN_FILTRE{x}</code>. The filter applied to a variable is therefore passed in the name of the tag.
@@ -150,7 +150,7 @@ _ • A search field starting from %select_max_auteurs% author(s).</q1>',
 	'chatons:description' => 'Replace <code>:name</code> style tags with smiley images in the text.
 _ This tool will replace these shortcuts with the images of the same name found in the <code>mon_squelette_toto/img/chatons/</code> directory, or else, by default, those found in <code>couteau_suisse/img/chatons/</code>.',
 	'chatons:nom' => 'Smileys',
-	'citations_bb:description' => 'In order to respect the HTML usages in the SPIP content of your site (articles, sections, etc.), this tool replaces the markup &lt;quote> by the markup &lt;q> when there are no line returns. In fact, quotations must be surrounded by &lt;q> tags and the quotations containing paragraphs must be surrounded by &lt;blockquote> tags.', # MODIF
+	'citations_bb:description' => 'In order to respect the HTML usage in the SPIP content of your site (articles, sections, etc.), this tool replaces the markup &lt;quote&gt; by the markup  &lt;q&gt; when there are no line returns. In fact, quotations must be surrounded by &lt;q&gt; tags and the quotations containing paragraphs must be surrounded by  &lt;blockquote&gt;.',
 	'citations_bb:nom' => 'Well delimited citations',
 	'class_spip:description1' => 'Here you can define some SPIP shortcuts. An empty value is equivalent to using the default.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{SPIP shortcuts}}.
