@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_exporter_fichier' => 'Exportovať súbor',
 	'bouton_exporter_fichier_langue' => 'Exportovať jazykový súbor "@lang@"',
 	'bouton_exporter_fichier_langue_original' => 'Exportovať jazykový súbor originálu ("@lang_mere@")',
-	'bouton_exporter_fichier_po' => 'Exporter le fichier en .po', # NEW
+	'bouton_exporter_fichier_po' => 'Exportovať súbor do .po',
 	'bouton_exporter_fichier_zip' => 'Exportovať súbory ako zipy',
 	'bouton_precedent' => 'Predchádzajúci krok',
 	'bouton_suivant' => 'Ďalší krok',
@@ -23,9 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_module' => 'Odstrániť tento modul',
 	'bouton_traduire' => 'Prekladať',
 	'bouton_upload_langue_module' => 'Poslať jazykový súbor',
-	'bouton_vos_favoris_non' => 'Vos modules non favoris', # NEW
-	'bouton_vos_favoris_oui' => 'Vos modules favoris', # NEW
-	'bouton_vos_favoris_tous' => 'Tous les modules', # NEW
+	'bouton_vos_favoris_non' => 'Vaše neobľúbené moduly',
+	'bouton_vos_favoris_oui' => 'Vaše obľúbené moduly',
+	'bouton_vos_favoris_tous' => 'Všetky moduly',
 
 	// C
 	'cfg_form_tradlang_autorisations' => 'Povolenia',
@@ -78,8 +78,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_sauvegarde_post_edition' => 'Uloží dočasné súbory vždy, keď zmeníte text jazykového reťazca',
 
 	// F
-	'favoris_ses_modules' => 'Ses modules favoris', # NEW
-	'favoris_vos_modules' => 'Vos modules favoris', # NEW
+	'favoris_ses_modules' => 'Jeho/jej obľúbené moduly',
+	'favoris_vos_modules' => 'Vaše obľúbené moduly',
 
 	// I
 	'icone_modifier_tradlang' => 'Upraviť tento jazykový reťazec',
@@ -118,7 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_tradlang' => '@nb@ jazykových reťazcov',
 	'info_nb_tradlang_module' => '@nb@ jazykových modulov',
 	'info_percent_chaines' => '@traduites@/@total@ preložených reťazcov do jazyka "[@langue@] @langue_longue@"',
-	'info_revisions_stats' => 'Révisions', # NEW
+	'info_revisions_stats' => 'Zmeny',
 	'info_status_ok' => 'OK',
 	'info_str' => 'Text jazykového reťazca',
 	'info_traduire_module_lang' => 'Preložiť modul "@module@" do @langue_longue@ (@lang@)',
@@ -205,7 +205,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'menu_info_interface' => 'Zobrazí odkaz na prekladateľské rozhranie',
 	'menu_titre_interface' => 'Prekladateľské rozhranie',
-	'message_afficher_vos_modules' => 'Afficher les modules :', # NEW
+	'message_afficher_vos_modules' => 'Zobraziť moduly:',
 	'message_aucun_resultat_chaine' => 'Vašim kritériám nevyhovujú v jazykových reťazcoch žiadne výsledky.',
 	'message_aucun_resultat_statut' => 'Tento stav nemá nastavený žiaden reťazec.',
 	'message_aucune_nouvelle_langue_dispo' => 'Tento modul je dostupný vo všetkých jazykoch',
@@ -238,7 +238,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_items_langue_inexistants' => 'V jazyku "@langue_longue@" (@langue@) neexistuje @nb@ položiek.',
 	'nb_items_langue_mere' => 'Hlavný jazyk tohto modulu obsahuje @nb@ položiek.',
 	'notice_affichage_limite' => 'Zobrazenie je obmedzené na @nb@ nepreložené jazykové reťazce.',
-	'notice_aucun_module_favori_priorite' => 'Aucun module de la priorité "@priorite@" ne correspond.', # NEW
+	'notice_aucun_module_favori_priorite' => 'Žiaden modul s prioritou "@priorite@" sa nezhoduje.',
 
 	// R
 	'readme' => 'Tento modul umožňuje správu jazykových súborov',
@@ -316,14 +316,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_modifier' => 'Upraviť',
 	'titre_page_configurer_tradlang' => 'Nastavenia zásuvného modulu Trad-lang',
 	'titre_page_tradlang_module' => 'Modul #@id@ : @module@',
-	'titre_profil_auteur' => 'Upraviť profil', # MODIF
-	'titre_profil_autre' => 'Upraviť jeho/jej profil', # MODIF
+	'titre_profil_auteur' => 'Upraví váš profil',
+	'titre_profil_autre' => 'Upraví jeho/jej profil',
 	'titre_recherche_tradlang' => 'Jazykové reťazce',
 	'titre_revisions_ses' => 'Jeho/jej príspevky',
 	'titre_revisions_sommaire' => 'Posledné zmeny',
 	'titre_revisions_vos' => 'Vaše príspevky',
-	'titre_stats_trads_journalieres' => 'Nombre de révisions journalières', # NEW
-	'titre_stats_trads_mensuelles' => 'Nombre de révisions mensuelles', # NEW
+	'titre_stats_trads_journalieres' => 'Počet zmien za deň',
+	'titre_stats_trads_mensuelles' => 'Počet zmien za mesiac',
 	'titre_tradlang' => 'Trad-lang',
 	'titre_tradlang_chaines' => 'Jazykové reťazce',
 	'titre_tradlang_module' => 'Jazykový modul',
