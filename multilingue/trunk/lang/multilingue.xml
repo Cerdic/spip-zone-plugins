@@ -1,4 +1,13 @@
 <traduction module="multilingue" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/multilingue/trunk/lang/" reference="fr">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/multilingue?lang_cible=de">
+		<traducteur nom="abelass" lien="http://trad.spip.net/auteur/abelass" />
+	</langue>
+	<langue code="en" url="http://trad.spip.net/tradlang_module/multilingue?lang_cible=en">
+		<traducteur nom="abelass" lien="http://trad.spip.net/auteur/abelass" />
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/multilingue?lang_cible=es">
+		<traducteur nom="abelass" lien="http://trad.spip.net/auteur/abelass" />
+	</langue>
 	<langue code="fr" />
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/multilingue?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
