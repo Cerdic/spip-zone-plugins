@@ -9,8 +9,8 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function licence_declarer_tables_principales($tables_principales){
-	$tables_principales['spip_documents']['field']['id_licence'] = "bigint(21) NOT NULL DEFAULT ''";
-	$tables_principales['spip_articles']['field']['id_licence'] = "bigint(21) NOT NULL DEFAULT ''";
+	$tables_principales['spip_documents']['field']['id_licence'] = "bigint(21) NOT NULL DEFAULT '0'";
+	$tables_principales['spip_articles']['field']['id_licence'] = "bigint(21) NOT NULL DEFAULT '0'";
 	return $tables_principales;
 }
 
