@@ -11,7 +11,7 @@
 
 <h2>Les événements de [(#DATE_DEBUT|affdate_mois_annee)]</h2>
 
-<div class='plier_deplier'><a href='#' onclick='jQuery("li.item.court").removeClass("court");return false;' class='noajax'><:seminaire:lien_tout_deplier:></a> | <a href='#' onclick='set_vevent();return false;' class='noajax'><:seminaire:lien_tout_replier:></a></div>
+<div class='plier_deplier'><a href='#' onclick='jQuery(".renseignements").show();return false;' class='noajax'><:seminaire:lien_tout_deplier:></a> | <a href='#' onclick='jQuery(".renseignements").hide();return false;' class='noajax'><:seminaire:lien_tout_replier:></a></div>
 
 
 <BOUCLE_mot_evenement(MOTS){type=Type}>
