@@ -55,7 +55,6 @@
 	//FIN CONFIGURATION DU PAIEMENT PAYBOX
 	    	
 	$lang = $_SESSION['langue_paybox'];
-	$confirm = $GLOBALS['meta']['adresse_site'].'/'.find_in_path("/paiement/paybox/paiement_paybox_confirmation.php");
 	$retourok = $GLOBALS['meta']['adresse_site']."/?page=transaction_merci";
 	$retourko = $GLOBALS['meta']['adresse_site']."/?page=transaction_regret";
 	

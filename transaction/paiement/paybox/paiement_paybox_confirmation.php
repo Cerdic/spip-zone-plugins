@@ -1,4 +1,7 @@
 <?php
+
+	//Note : aprs avoir renommŽ ce fichier avec un nom personnalisŽ, vous devez communiquer son url ˆ PAYBOX pour reevoir les confirmations de paiement
+	
 	//Charger SPIP
 	if (!defined('_ECRIRE_INC_VERSION')) {
 		// recherche du loader SPIP.
