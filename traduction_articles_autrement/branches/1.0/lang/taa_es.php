@@ -8,11 +8,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'affichage_liste_compacte_desactive' => 'Désactivet l\'affichage compacte des liste des articles', # NEW
+	'affichage_liste_compacte_desactive' => 'Desactivar la lista compacta de artículos',
 
 	// C
-	'cfg_limiter_secteur' => 'Ne pas afficher la barre de langue dans le secteur :', # NEW
-	'cfg_utiliser_langues' => 'Utiliser les langues suivantes :', # NEW
+	'cfg_limiter_secteur' => 'No mostrar el menú de idiomas en el sector:',
+	'cfg_utiliser_langues' => 'Usar los idiomas siguientes:',
 	'changer_langue' => 'Cambiar el idioma del artículo',
 
 	// F
@@ -22,21 +22,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lier_traduction' => 'Añadir una traducción',
 
 	// M
-	'modifier_options_langue' => 'options', # NEW
+	'modifier_options_langue' => 'opciones',
 
 	// N
 	'necesite_afficher_objet' => 'Esta opción necesita la instalación del plugin',
 
 	// O
-	'options' => 'Opciones', # MODIF
-	'oui' => 'Oui', # NEW
+	'options' => 'Modificar las opciones de idioma',
+	'oui' => 'Si',
 
 	// R
-	'rang' => 'Rang', # NEW
+	'rang' => 'Rango',
 
 	// T
 	'titre_plugin' => 'Traducción de articulos repensada',
-	'traductions' => 'Traducciones', # MODIF
+	'traductions' => 'Traducciones',
 
 	// V
 	'voir_traductions' => 'Ver las traducciones en detalle'

@@ -8,11 +8,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'affichage_liste_compacte_desactive' => 'Die Kompaktansicht der Artikellisten deaktivieren', # MODIF
+	'affichage_liste_compacte_desactive' => 'Die Kompaktansicht der Artikellisten deaktivieren',
 
 	// C
-	'cfg_limiter_secteur' => 'Ne pas afficher la barre de langue dans le secteur :', # NEW
-	'cfg_utiliser_langues' => 'Utiliser les langues suivantes :', # NEW
+	'cfg_limiter_secteur' => 'Ne pas afficher la barre de langue dans le secteur :', # In de folgenden Sektoren das Sprachmenü nicht anzeigen:
+	'cfg_utiliser_langues' => 'Die folgenden Sprachen benutzen:',
 	'changer_langue' => 'Die Sprache des Artikels ändern',
 
 	// F
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'options' => 'Sprachoptionen verändern',
-	'oui' => 'Oui', # NEW
+	'oui' => 'Ja',
 
 	// R
 	'rang' => 'Rang',
