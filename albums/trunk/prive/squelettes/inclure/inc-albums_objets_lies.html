@@ -1,0 +1,71 @@
+[(#REM)
+	Liste des objets auxquels un album est lié.
+	Paramètres d'inclusion :
+		afficher (liste) =	icone, info, titre, bouton
+		id_album (balise)
+][(#REM)
+	Inclus dans /prive/squelettes/contenu/album_objets_lies.html
+]
+
+[(#REM) Variables indiquant les éléments à afficher ]
+<BOUCLE_afficher(DATA){liste #ENV{afficher,#LISTE{info}}}>
+#SET{#VAL{afficher_}|concat{#VALEUR},oui}
+</BOUCLE_afficher>
+
+
+<table class='spip liste boite objets-lies'>
+<tbody>
+<BOUCLE_objets_associes(ALBUMS liens objets){id_album}{par objet}>
+#SET{info,#OBJET&nbsp;n°#ID_OBJET} 
+#SET{titre,#INFO_TITRE{#OBJET,#ID_OBJET}}
+#SET{alt,#GET{info}&nbsp;:&nbsp;#GET{titre}}
+#SET{auteurs_objet,#ARRAY}
+<BOUCLE_auteurs_objet(AUTEURS){objet}{id_objet}>#SET{auteurs_objet, #GET{auteurs_objet}|push{#ID_AUTEUR}}</BOUCLE_auteurs_objet>
+<tr [class='(#GET{auteurs_objet}|find{#SESSION{id_auteur}}|et{#GET{afficher_expose}}|oui)expose']>
+
+[(#GET{afficher_auteur}|oui)
+	<td class='icone'>
+		[(#GET{auteurs_objet}|find{#SESSION{id_auteur}}|oui)
+			[(#SESSION{statut}|puce_statut{auteur}
+				|inserer_attribut{title,#VAL{<:album:info_auteur:>}})]
+		]
+	</td>
+]
+
+[(#GET{afficher_icone}|oui)
+	<td class='icone'>
+		[(#OBJET|objet_icone{16}|inserer_attribut{title,#GET{alt}})]
+	</td>
+]
+
+[(#GET{afficher_info}|oui)
+	<td class='info'>
+		[(#VU|=={oui}|oui)
+			[(#CHEMIN_IMAGE{vu-album-12.png}|balise_img{<:album:info_album_vu:>,''}|inserer_attribut{title,<:medias:document_vu:>})]
+		]
+		<a href='[(#ID_OBJET|generer_url_entite{#OBJET})]' title='[(#GET{alt})]'>
+		[(#GET{info})]
+		</a>
+	</td>
+]
+
+[(#GET{afficher_titre}|oui)
+	<td class='titre'>
+		[(#GET{titre})]
+	</td>
+]
+
+[(#GET{afficher_bouton}|oui)
+	<td class='action'>
+	[(#INCLURE{fond=prive/squelettes/inclure/inc-albums_boutons_actions,
+		bouton=dissocier,
+		id_album=#ID_ALBUM, 
+		associer_objet=#OBJET|concat{'|'}|concat{#ID_OBJET},
+		vu=#VU}{env})]
+	</td>
+]
+
+</tr>
+</BOUCLE_objets_associes>
+</tbody>
+</table>
