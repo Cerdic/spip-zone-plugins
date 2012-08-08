@@ -21,29 +21,15 @@ function videos_affiche_gauche($flux) {
 
 	include_spip('inc/autoriser');
 		
-	// Si c'est un article en édition ou un article dans le privé, on propose le formulaire, si l'article n'existe pas encore, on ne fait rien
-	if(($flux["args"]["exec"] == 'articles_edit' || $flux["args"]["exec"] == 'articles' || $flux["args"]["exec"] == 'article') && $flux["args"]["id_article"] != ''){
-		$type_objet = 'article';
-		$id_type_objet = 'id_article';
-		$id_objet   = $flux["args"]["id_article"];
+	if (in_array($flux['args']['exec'],$GLOBALS['medias_exec_colonne_document'])
+		AND $table = preg_replace(",_edit$,","",$flux['args']['exec'])
+		AND $type = objet_type($table)
+		AND $id_table_objet = id_table_objet($type)
+		AND ($id = intval($flux['args'][$id_table_objet]) OR $id = 0-$GLOBALS['visiteur_session']['id_auteur'])
+	  AND (autoriser('joindredocument',$type,$id))){
+		$flux['data'] .= recuperer_fond('prive/contenu/videos_affiche_boite',array('objet'=>$type,'id_objet'=>$id));
 	}
-	// Si c'est une rubrique, on ne fait rien
-	elseif($flux["args"]["exec"] == 'naviguer' && $flux["args"]["id_rubrique"] != ''){
-		$type_objet = 'rubrique';
-		$id_type_objet = 'id_rubrique';
-		$id_objet   = $flux["args"]["id_rubrique"];
-	}
-	// Sinon, et bien on ne fait rien non plus
-	else{
-		return $flux;
-	}
-
-	$fond = 'prive/contenu/videos_affiche_boite';
-	$flux["data"] .= recuperer_fond($fond,array(
-			'id_objet' => $id_objet,
-			'objet' => $type_objet
-	));
-
+	
 	return $flux;
 }
 
