@@ -15,8 +15,8 @@ function albums_afficher_complement_objet($flux) {
 	$type = $flux['args']['type'];
 
 	if (!$e['edition'] AND in_array(table_objet_sql($type),lire_config('albums/objets'))) {
-		$texte .= '<div id="albums">';
-		$texte .= recuperer_fond('prive/squelettes/contenu/albums_complement_objet', array(
+		$texte .= '<div id="albums" class="albums">';
+		$texte .= recuperer_fond('prive/squelettes/contenu/albums_afficher_complement_objet', array(
 			'table_source' => 'albums',
 			'objet' => $type,
 			'id_objet' => intval($flux['args']['id']),
@@ -39,7 +39,7 @@ function albums_afficher_complement_objet($flux) {
 
 
 /**
-* Objets associes sur la page de visualisation d'un album
+* Objets associes et auteur sur la page de visualisation d'un album
 **/
 function albums_affiche_milieu($flux){
 	$texte = "";
@@ -47,21 +47,17 @@ function albums_affiche_milieu($flux){
 
 	if (!$e['edition'] AND $e['type']=='album') {
 
-		// auteurs
-		$texte .= recuperer_fond('prive/objets/editer/liens', array(
-			'table_source' => 'auteurs',
-			'objet' => $e['type'],
-			'id_objet' => $flux['args'][$e['id_table_objet']]
+		// auteur
+		$texte .= recuperer_fond('prive/squelettes/contenu/albums_affiche_milieu_auteur', array(
+			'id_album' => $flux['args'][$e['id_table_objet']]
 		));
 
 		// objets associes
-		$texte .= '<div id="albums">';
-		$texte .= recuperer_fond('prive/squelettes/contenu/album_objets_lies', array(
+		$texte .= recuperer_fond('prive/squelettes/contenu/albums_affiche_milieu_objets_lies', array(
 			'id_album' => $flux['args'][$e['id_table_objet']]
 			),
 			array('ajax'=>true)
 		);
-		$texte .= '</div>';
 	}
 
 	if ($texte) {
