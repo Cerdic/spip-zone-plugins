@@ -9,13 +9,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_traduction' => 'Ajouter une traduction',
-	'avis_rubrique_source' => 'Vous devez d\'abord traduire toutes les rubrique parentes', # NEW
+	'avis_rubrique_source' => 'Tu dois d\'abord traduire toutes les rubrique parentes',
 
 	// R
 	'rubrique_reference' => '(rubrique de référence)',
 
 	// T
-	'trad_delier_rubrique' => 'Ne plus lier cette rubrique à ces traductions' # NEW
+	'trad_delier_rubrique' => 'Ne plus lier cette rubrique à ces traductions'
 );
 
 ?>

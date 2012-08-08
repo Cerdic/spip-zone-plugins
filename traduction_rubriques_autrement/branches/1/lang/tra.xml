@@ -10,8 +10,11 @@
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/tra?lang_cible=en">
 		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
+		<traducteur nom="abelass" lien="http://trad.spip.net/auteur/abelass" />
 	</langue>
-	<langue code="es" />
+	<langue code="es" url="http://trad.spip.net/tradlang_module/tra?lang_cible=es">
+		<traducteur nom="abelass" lien="http://trad.spip.net/auteur/abelass" />
+	</langue>
 	<langue code="eu" url="http://trad.spip.net/tradlang_module/tra?lang_cible=eu">
 		<traducteur nom="otalazt" lien="http://trad.spip.net/auteur/otalazt" />
 	</langue>
@@ -21,6 +24,7 @@
 	<langue code="fr" />
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/tra?lang_cible=fr_tu">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
+		<traducteur nom="abelass" lien="http://trad.spip.net/auteur/abelass" />
 	</langue>
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/tra?lang_cible=pt_br">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
