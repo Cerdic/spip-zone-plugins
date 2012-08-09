@@ -229,6 +229,9 @@ function is_traitements_outil($traitement, $fonction, &$set_traitements_utilises
 	if(strncmp('traitement', $traitement, 10)!=0) return false;
 	if($ok = preg_match(',^traitement:([A-Z_]+)/?([a-z]+)?:(pre|post)_([a-zA-Z0-9_-]+)$,', $traitement, $t)) {
 		if(!strlen($t[2])) $t[2] = 0;
+		// 'typo' et 'propre' ne cohabitent pas : le premier l'emporte !
+		if($t[4]=='typo') { if(isset($set_traitements_utilises[$t[1]][$t[2]]['propre'])) $t[4]='propre'; }
+		elseif($t[4]=='propre') { if(isset($set_traitements_utilises[$t[1]][$t[2]]['typo'])) $t[4]='typo'; }
 		$set_traitements_utilises[$t[1]][$t[2]][$t[4]][$t[3]][] = $fonction;
 	} elseif($ok = preg_match(',^traitement:([A-Z]+)$,', $traitement, $t))
 		$set_traitements_utilises[$t[1]][0][0][] = $fonction;
@@ -495,13 +498,16 @@ jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};\
 			$infos_pipelines['insert_head'.($type=='css'?'_css':'')]['inline'][] = "cs_header_hit(\$flux, '$type');";
 		}
 	}
+	// liste des pivots pour les traitements que l'on peut decliner sous la forme pre_{pivot} ou post_{pivot}
 	// SPIP 2.0 ajoute les parametres "TYPO" et $connect aux fonctions typo() et propre()
+	// SPIP 3.0 ajoute le parametre $Pile[0]
+	$pp = defined('_SPIP30000')?',$Pile[0])':')';
 	$liste_pivots = defined('_SPIP19300')
 		?array(
 			// Fonctions pivots : on peut en avoir plusieurs pour un meme traitement
 			// Exception : 'typo' et 'propre' ne cohabitent pas ensemble
-			'typo' => defined('_TRAITEMENT_TYPO')?_TRAITEMENT_TYPO:'typo(%s,"TYPO",$connect)', // guillemets doubles requises pour le compilo
-			'propre' => defined('_TRAITEMENT_RACCOURCIS')?_TRAITEMENT_RACCOURCIS:'propre(%s,$connect)',
+			'typo' => defined('_TRAITEMENT_TYPO')?_TRAITEMENT_TYPO:('typo(%s,"TYPO",$connect'.$pp), // guillemets doubles requises pour le compilo
+			'propre' => defined('_TRAITEMENT_RACCOURCIS')?_TRAITEMENT_RACCOURCIS:('propre(%s,$connect'.$pp),
 		):array(
 			'typo' => 'typo(%s)',
 			'propre' => 'propre(%s)',
@@ -510,9 +516,10 @@ jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};\
 	$traitements_post_propre = 0;
 	foreach($traitements_utilises as $bal=>$balise) {
 		foreach($balise as $obj=>$type_objet) {
+			/* code mort : is_traitements_outil() verifie deja la non compatibilite de propre et typo...
 			// ici, on fait attention de ne pas melanger propre et typo
 			if(array_key_exists('typo', $type_objet) && array_key_exists('propre', $type_objet)) 
-				die(var_dump($type_objet) . "<br/>>> <b>#$bal/$obj</b><br/>" . couteauprive_T('erreur:traitements'));
+				die(var_dump($type_objet) . "<br/>>> <b>#$bal/$obj</b><br/>" . couteauprive_T('erreur:traitements')); */
 			$traitements_type_objet = &$traitements_utilises[$bal][$obj];
 			foreach($type_objet as $f=>$fonction)  {
 				// pas d'objet precis
@@ -545,7 +552,10 @@ jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};\
 			if(defined('_SPIP20100') && $obj==='forums') $temp = "safehtml($temp)";
 			$traitements_type_objet = "\$GLOBALS['table_des_traitements']['$bal'][" . ($obj=='0'?'':"'$obj'") . "]='$temp';";
 		}
-		$traitements_utilises[$bal] = join("\n", $traitements_utilises[$bal]);		
+		$traitements_utilises[$bal] = join("\n", $traitements_utilises[$bal]);
+		// specificite SPIP 3.0 : supprimer_numeros sur les TITRE et les NOM
+		if(defined('_SPIP30000') && ($bal=='TITRE' || $bal=='NOM')) 
+			$traitements_utilises[$bal] = str_replace('%s', 'supprimer_numero(%s)', $traitements_utilises[$bal]);
 	}
 	// mes_options.php : ajout des traitements
 	if(count($traitements_utilises))
