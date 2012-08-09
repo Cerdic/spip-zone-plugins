@@ -14,6 +14,9 @@
 		<tbody>
 		<BOUCLE_liste_album(ALBUMS liens){objet}{id_objet}{statut ?IN #ENV{statut}|explode{'|'}}{!par vu, date, titre}{pagination #ENV{nb,10}}>
 
+		[(#REM) pas autorisé et album vide ? pas de dépliage (classe 'clic') ]
+		#SET{clic, #AUTORISER{modifier,album,#ID_ALBUM}|?{'clic',#VAL{documents}|lister_objets_lies{album,#ID_ALBUM,''}|count|>{0}|?{clic,''}}}
+
 		<tr class='inactif' id='[infos_album(#ID_ALBUM)]'>
 		
 			[(#REM) Logo ]
@@ -24,11 +27,17 @@
 			</td>
 			
 			[(#REM) Infos (titre, statut, numéro  et nb documents) ]
-			<td class='infos clic'[ (#DESCRIPTIF|?{'','colspan="2"'})]><span class='puce-gauche'></span>
+			<td class='infos[ (#GET{clic})]'[ (#DESCRIPTIF|?{'','colspan="2"'})]><span class='puce-gauche'></span>
 			<ul>
 				<li>
+				<BOUCLE_auteur(AUTEURS){id_album}>
+				[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
+					[(#SESSION{statut}|puce_statut{auteur}|inserer_attribut{title,#VAL{<:album:info_auteur:>}})]
+				]
+				</BOUCLE_auteur>
 				[(#VU|=={oui}|oui)
-					[(#CHEMIN_IMAGE{vu-album-16.png}|balise_img{<:medias:document_vu:>}|inserer_attribut{title,<:medias:document_vu:>})]
+					[(#SET{titre,#VAL{<:album:titre_album:>&nbsp;}|concat{<:medias:document_vu:>}|strtolower})]
+					[(#CHEMIN_IMAGE{vu-album-12.png}|balise_img{<:album:info_album_vu:>,''}|inserer_attribut{title,#GET{titre}})]
 				]
 				[<strong>(#TITRE)</strong>]
 				</li>
@@ -44,7 +53,7 @@
 			</td>
 			
 			[(#REM) Descriptif ]
-			[<td class='descriptif clic'>
+			[<td class='descriptif[ (#GET{clic})]'>
 				(#DESCRIPTIF|couper{100})
 			</td>]
 			
@@ -69,10 +78,22 @@
 			<td colspan='[(#DESCRIPTIF|?{4,3})]'>
 				<div class='conteneur_portfolios clearfix'>
 				<div class='portfolios clearfix'>
+
 				[(#REM) PORTFOLIO ]
-				[(#INCLURE{fond=prive/squelettes/inclure/albums_portfolio-documents, objet=album, id_objet=#ID_ALBUM, ajax=documents})]
+				[(#SET{autorise,#AUTORISER{modifier,album,#ID_ALBUM}|?{oui,''}})]
+				[(#INCLURE{fond=prive/squelettes/inclure/inc-albums_portfolio,
+					objet=album,
+					id_objet=#ID_ALBUM,
+					autorise=#GET{autorise},
+					ajax=documents})]
+
 				[(#REM) BOUTON AJOUT DOCUMENTS ]
-				[(#INCLURE{fond=prive/squelettes/inclure/ajouter-documents, objet=album, id_objet=#ID_ALBUM, ajax})]
+				[(#AUTORISER{modifier,album,#ID_ALBUM}|oui)
+					[(#INCLURE{fond=prive/squelettes/inclure/ajouter-documents,
+						objet=album,
+						id_objet=#ID_ALBUM,
+						ajax})]
+				]
 				</div>
 				</div>
 			</td>
