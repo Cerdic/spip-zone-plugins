@@ -725,7 +725,7 @@ _ • Pour une expression régulière devant agir sur des caractères HTML, plac
 _ Exemple~:~{<html>"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/"</html>}.</q1>
 
 @puce@ Certaines adresses IP peuvent également être bloquées à la source. Sache toutefois que derrière ces adresses (souvent variables), il peut y avoir plusieurs utilisateurs, voire un réseau entier.[[%spam_ips%]]
-<q1>• Utilise le caractère «*» pour plusieurs chiffres, «?» pour un seul et les crochets pour des classes de chiffres.</q1>',
+<q1>• Utilise le caractère «*» pour plusieurs chiffres, «?» pour un seul et les crochets pour des classes de chiffres.</q1>', # MODIF
 	'spam:nom' => 'Lutte contre le SPAM',
 	'spam_ip' => 'Blocage IP de @ip@ :',
 	'spam_test_ko' => 'Ce message serait bloqué par le filtre anti-SPAM !',

@@ -729,7 +729,7 @@ _ • To use a regular expression that works on HTML characters, place the text 
 _ Example:~{<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
 
 @puce@ Certain IP addresses can also be blocked at their source. But remember that behind these addresses (often variable in nature) there may be a multitude of individual users or even an entire network.[[%spam_ips%]]
-<q1>• Use the \\"*\\" character to match several unknown characters, \\"?\\" for any single character, and brackets for classes of characters.</q1>',
+<q1>• Use the \\"*\\" character to match several unknown characters, \\"?\\" for any single character, and brackets for classes of characters.</q1>', # MODIF
 	'spam:nom' => 'Fight against SPAM',
 	'spam_ip' => 'IP blocking of @ip@:',
 	'spam_test_ko' => 'This message would be blocked by the anti-SPAM filter!',

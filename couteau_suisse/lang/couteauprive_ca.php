@@ -732,7 +732,7 @@ _ • Per una expressió regular que tingui efecte sobre els caràcters HTML, si
 _ Exemple~:~{<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
 
 @puce@ Algunes adreces IP es poden bloquejar també a la font. Sapigueu, no obstant, que al darrera d\'aquestes adreces (sovint variables), pot haver-hi diversos usuaris, una xarxa sencera.[[%spam_ips%]]
-<q1>• Utilitzeu el caràcter «*» per diverses xifres, «?» per només una i els claudàtors per les classes de xifres.</q1>',
+<q1>• Utilitzeu el caràcter «*» per diverses xifres, «?» per només una i els claudàtors per les classes de xifres.</q1>', # MODIF
 	'spam:nom' => 'Lluita contra l\'SPAM',
 	'spam_ip' => 'Bloqueig IP de @ip@ :',
 	'spam_test_ko' => 'Aquest missatge serà bloquejat pel filtre anti-SPAM!',
