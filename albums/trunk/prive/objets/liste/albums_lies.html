@@ -34,7 +34,7 @@
 				</li>
 			
 				<li>
-					[(#MODELE{puce_statut_album, objet=album, id_objet=#ID_ALBUM, statut=#STATUT}{env})]
+					[(#INCLURE{fond=prive/squelettes/inclure/inc-albums_puce_statut, objet=album, id_objet=#ID_ALBUM, statut=#STATUT}{env})]
 					[&nbsp;N°(#ID_ALBUM)]
 				</li>
 				<li>
