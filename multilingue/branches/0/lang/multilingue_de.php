@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'multilingue_titre' => 'Mehrsprachige Webseite Leichtgemacht',
 
 	// P
-	'precision_menu_select' => 'Ne fonctionnerait uniquement si vous utilisez les noisettes originales du plugin', # Funktioniert nur wenn Sie die ursprünglichen INCLUREs des Plugins benutzen
+	'precision_menu_select' => 'Funktioniert nur wenn Sie die ursprünglichen INCLUREs des Plugins benutzen',
 
 	// T
 	'titre_page_configurer_multilingue' => 'Einstellungen von Mehrsprachige Webseite Leichtgemacht'
