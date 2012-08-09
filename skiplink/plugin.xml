@@ -31,5 +31,5 @@ Ce plugin propose des liens facilitant la navigation dans la page (liens d'acc&#
 	<nom>insert_head_css</nom>
 	<inclure>skiplink_pipelines.php</inclure>
 </pipeline>
-<necessite id='SPIP' version='[2.1.0;2.1.99]' />
+<necessite id='SPIP' version='[2.1.0;3.0.99]' />
 </plugin>
