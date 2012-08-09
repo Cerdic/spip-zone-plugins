@@ -41,7 +41,8 @@
 [(#GET{afficher_info}|oui)
 	<td class='info'>
 		[(#VU|=={oui}|oui)
-			[(#CHEMIN_IMAGE{vu-album-12.png}|balise_img{<:album:info_album_vu:>,''}|inserer_attribut{title,<:medias:document_vu:>})]
+			[(#SET{titre,#VAL{<:album:titre_album:>&nbsp;}|concat{<:medias:document_vu:>}|strtolower})]
+			[(#CHEMIN_IMAGE{vu-album-12.png}|balise_img{<:album:info_album_vu:>,''}|inserer_attribut{title,#GET{titre}})]
 		]
 		<a href='[(#ID_OBJET|generer_url_entite{#OBJET})]' title='[(#GET{alt})]'>
 		[(#GET{info})]
