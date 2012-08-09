@@ -209,7 +209,7 @@ function liste_outils() {
 			$href = generer_url_ecrire(_request('exec'),"cmd=descrip&outil=");
 			foreach(${$temp} as $j=>$v)
 				${$temp}[$j] = preg_replace(',^(.*)\|(.*)\|(.*)$,', '<a class="cs_href" id="$3" href="'.$href.'$3">$1</a>', $v);
-			${$temp} = join("<br/>\n", ${$temp});
+			${$temp} = '<ul><li>'.join("</li><li>\n", ${$temp}).'</li></ul>';
 			if(strlen(${$temp})) ${'result'.$temp} .= $titre
 				. "<div id='sous_liste_$id' class='sous_liste'>" . ${$temp} . '</div>';
 			$id++;
@@ -231,6 +231,7 @@ function liste_outils() {
 	.	'</div></div></form>'
 	. '<div class="cs_liste cs_actifs">' . $fieldset . '#22BB22;">' . couteauprive_T('outils_actifs') . '</legend>'
 	. $results_actifs . '</fieldset>'
+	. '<div style="float:left; width:60%"><form><input type="text" size="10" value="'._T('info_rechercher').'" name="cs_rech" class="recherche cs_rech" accesskey="r" onfocus="this.value=\'\';cs_Recherche(\'\')" onkeyup="cs_Recherche(this.value);"><span id="results"></span></form></div>'
 	. '<div style="text-align: right;"><a id="cs_tous_a" title="' . couteauprive_T('outils_selectionactifs') . '" href="#">'
 	. couteauprive_T('outils_selectiontous') . '</a></div>'
 	. '</div></div>');

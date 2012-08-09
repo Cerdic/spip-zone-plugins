@@ -109,6 +109,13 @@ div.cs_intros_inner {
 	font-size:90%;
 }
 
+ol, ul, li {
+	margin: 0; padding: 0; font-size: 100%; font: inherit; vertical-align: baseline;
+}
+ol, ul {
+	list-style: none;
+}
+
 .cs_sobre {
 	background:transparent none repeat scroll 0% !important;
 	border:medium none !important;
@@ -126,6 +133,15 @@ div.cs_intros_inner {
 
 .cs_droite {
 	text-align:right;
+}
+
+.cs_rech {
+	font-size:85%;
+	width:75%;
+	padding:0;
+}
+#results {
+	font-size:85%;
 }
 
 /* rss */
@@ -237,7 +253,7 @@ if(window.jQuery) jQuery(function(){
 	jQuery('a.cs_href').click( function() {
 		jQuery(this).toggleClass('outil_on');
 		set_selected();
-		set_categ(this.parentNode.id);
+		set_categ(this.parentNode.parentNode.parentNode.id); // div>ul>li>a
 		return cs_href_click(this, false);
 	})
 	.dblclick(function(){
@@ -245,7 +261,7 @@ if(window.jQuery) jQuery(function(){
 		jQuery('div.categorie span').addClass('light');
 		jQuery(this).addClass('outil_on');
 		set_selected();
-		set_categ(this.parentNode.id);
+		set_categ(this.parentNode.parentNode.parentNode.id); // div>ul>li>a
 		outils_toggle();
 		return false;
 	});
@@ -353,6 +369,27 @@ function cs_Categorie2(i,e){
 		j.prev().children('span.light').removeClass('cs_hidden');
 	}
 }
+
+function cs_Recherche(value){
+	if(value=='') {
+		jQuery('#cs_outils .cs_href').each(function(index) {this.setAttribute('style','');});
+		jQuery('#results').text('');
+		return;
+	}
+	value = value.toLowerCase();
+	jQuery('#cs_reset_a').click();
+	var nb = 0;
+	var table = jQuery('#cs_outils .cs_href');
+	for(i=0; i<table.length; i++){
+		var pos = jQuery(table[i]).text();
+		pos = pos.toLowerCase().indexOf(value, 0);
+		table[i].parentNode.setAttribute('style', pos>=0?'':'display:none');
+		if(pos>=0) nb++
+	}
+	jQuery('#results').text(' ('+nb+')');
+	jQuery('.sous_liste').each(function(index) {set_categ(this.id);});
+}
+
 
 [(#VAL{_SPIP30000}|defined|oui)
 // fonctions du grenier amenee a disparaitre
