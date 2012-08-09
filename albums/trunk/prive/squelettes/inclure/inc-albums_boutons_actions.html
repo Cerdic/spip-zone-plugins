@@ -51,7 +51,8 @@
 		#VU|=={oui}|?{#VAL{<:avis_operation_impossible:>}|concat{' : '}|concat{<:medias:document_vu:>},''},
 		<:avis_operation_impossible:>}
 	})]
-	[(#AUTORISER{associer, album, #ENV{associer_objet}}|et{#VU|=={non}}|?{
+	[(#AUTORISER{associer, album, #ENV{associer_objet}}|oui)
+		[(#VU|=={non}|?{
 		[(#BOUTON_ACTION{
 			[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'album:icone_supprimer_album'})],
 			[(#URL_ACTION_AUTEUR{edition_albums,delier/#ID_ALBUM/[(#ENV{associer_objet})], #ENV{retour,#SELF}})],'button link ajax'}
@@ -60,7 +61,8 @@
 			|inserer_attribut{title,#GET{titre}}
 			|image_nb
 			|image_gamma{40})]
-	})]
+		})]
+	]
 ]
 
 
