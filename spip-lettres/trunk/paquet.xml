@@ -1,7 +1,7 @@
 <paquet
 	prefix="lettres"
 	categorie="communication"
-	version="5.6.5"
+	version="5.6.6"
 	etat="dev"
 	compatibilite="[3.0.0-dev;["
 	logo="prive/images/lettre-48.png"

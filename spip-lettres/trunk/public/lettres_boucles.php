@@ -20,7 +20,7 @@ function boucle_LETTRES_dist($id_boucle, &$boucles) {
 	if (!isset($boucle->modificateur['criteres']['statut'])) {
 		if (!$GLOBALS['var_preview']) {
 			if (!isset($boucle->modificateur['tout']))
-				array_unshift($boucle->where, array("'IN'", "'$mstatut'", "'(\"envoyee\",\"envoi_en_cours\")'"));
+				$boucle->modificateur['criteres']['statut'] = true;
 		}
 	}
 	return calculer_boucle($id_boucle, $boucles); 
