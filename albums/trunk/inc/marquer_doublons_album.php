@@ -1,13 +1,17 @@
 <?php
+/**
+ * Plugin Albums
+ * Licence GNU/GPL
+ * Base sur inc/marquer_doublons_doc.php du plugin 'medias'
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // On liste tous les champs susceptibles de contenir des albums
-// la dist ne regarde que chapo et texte, on laisse comme ca, mais ca permet d etendre a descriptif ou toto depuis d autre plugin comme agenda ou grappe
+// la dist ne regarde que chapo et texte, on laisse comme ca, mais ca permet d'etendre a descriptif ou toto depuis d'autres plugins
 $GLOBALS['albums_liste_champs'][] = 'texte';
 $GLOBALS['albums_liste_champs'][] = 'chapo';
  
-// http://doc.spip.org/@marquer_doublons_albumuments
 function inc_marquer_doublons_album_dist($champs,$id,$type,$id_table_objet,$table_objet,$spip_table_objet, $desc=array(), $serveur=''){
 	$champs_selection=array();
 
@@ -22,7 +26,7 @@ function inc_marquer_doublons_album_dist($champs,$id,$type,$id_table_objet,$tabl
 		$desc = $trouver_table($table_objet, $serveur);
 	}
 	$load = "";
-	// charger le champ manquant en cas de modif partielle de l	'objet
+	// charger le champ manquant en cas de modif partielle de l'objet
 	// seulement si le champ existe dans la table demande
 
 	$champs_a_traiter = "";

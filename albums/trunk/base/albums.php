@@ -68,7 +68,7 @@ function albums_declarer_tables_objets_sql($tables){
 		'statut_textes_instituer' => array(
 			'prepa'			=> 'album:texte_statut_prepa',
 			'publie'		=> 'album:texte_statut_publie',
-			'poubelle'		=> 'texte_statut_poubelle',
+			'poubelle'		=> 'album:texte_statut_poubelle',
 		),
 		'texte_changer_statut'		=> 'album:texte_changer_statut',
 	);

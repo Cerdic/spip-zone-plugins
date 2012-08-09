@@ -5,6 +5,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'avis_suppression_album'	=> "L'album va être supprimé, cette action est irréversible. Êtes vous sûr ?",
 
+	// B
+	'bouton_dissocier'		=> "Dissocier",
+	'bouton_associer'		=> "Associer",
+	'bouton_supprimer'		=> "Supprimer définitivement",
+
 	// C
 	'cfg_titre_albums'		=> "Albums",
 	'c_albums_info'			=> "Gestion des albums",
@@ -100,7 +105,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_configurer_albums'		=> "Configurer les Albums",
 	'titre_logo_album'			=> "Logo",
 	'texte_statut_prepa'			=> "non publié",
-	'texte_statut_publie'			=> "publié",
+	'texte_statut_publie'			=> "publié en ligne",
+	'texte_statut_poubelle'			=> "à la poubelle",
 	'texte_creer_album'			=> "Créer un nouvel album",
 	'texte_ajouter_album'			=> "Ajouter un album",
 	'texte_associer_album'			=> "Associer un album existant",

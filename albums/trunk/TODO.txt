@@ -2,7 +2,7 @@
 TRUCS MANQUANTS :
 -----------------
 
-1: Créer et compléter certains critères de sélection
+1: CRITERES
  * critère 'orphelin' :	fonctionne, mais !orphelin ne marche pas.
  * critère 'contenu' :	pouvoir sélectionner des albums en fonction des types de média contenus.
  			ex : 
@@ -10,11 +10,23 @@ TRUCS MANQUANTS :
  			{contenu IN #ARRAY{audio,video}} -> albums avec audio OU video
  			{contenu} -> albums non vides
  			{!contenu} -> albums vides
- 
+
+2: BALISES
+ * balise #CONTENU ? 
+   Sans argument, elle pourrait renvoyer un tableau 'index => type de document'
+   0 => file
+   1 => audio
+   Et avec un argument #CONTENU{detail}, un tableau 'type de document => nombre de documents '
+   file => 6
+   video => 2
+
+3 : MODELES
+ * Option pour la taille des images
+
  -----
  BUGS :
  -----
  * Quand on ajoute des documents à un album, le nombre affiché est bien mis à jour.
- En revanche, ce n'est pas le cas quand on en retire.
+ Ce n'est pas le cas quand on en retire.
  
  * Idem dans le cas d'un album inséré dans le texte : si on change son statut au moyen du raccourci dans le modèle, la liste des albums n'est pas mise à jour.

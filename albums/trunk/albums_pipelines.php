@@ -99,8 +99,8 @@ function albums_compagnon_messages($flux) {
 
 
 /**
- * Mise a jour des liens apres edition
- * (hum, a revoir...)
+ * Mise a jour des liens vers les albums apres edition d'un objet
+ * Base sur la pipeline du plugin 'medias'
  */
 function albums_post_edition($flux){
 	// si on institue un objet, mettre ses albums lies a jour
@@ -113,16 +113,6 @@ function albums_post_edition($flux){
 			$marquer_doublons_album = charger_fonction('marquer_doublons_album','inc');
 			$marquer_doublons_album($flux['data'],$flux['args']['id_objet'],$type,id_table_objet($type, $flux['args']['serveur']),$table_objet,$flux['args']['table'], '', $flux['args']['serveur']);
 		}
-
-		/*if($flux['args']['action']=='instituer' OR isset($flux['data']['statut'])){
-			include_spip('base/abstract_sql');
-			$id = $flux['args']['id_objet'];
-			$albums = array_map('reset',sql_allfetsel('id_album','spip_albums_liens','id_objet='.intval($id).' AND objet='.sql_quote($type)));
-			include_spip('action/editer_objet');
-			foreach($albums as $id_album)
-				// mettre a jour le statut si necessaire
-				objet_instituer($id_album);
-		}*/
 	}
 	else {
 		if ($flux['args']['table']!=='spip_albums'){
