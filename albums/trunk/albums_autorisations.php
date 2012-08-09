@@ -32,18 +32,18 @@ function autoriser_albumcreer_menu_dist($faire, $type='', $id=0, $qui=NULL, $opt
 
 /**
  * Autorisation a afficher les albums dans le menu
- * = autorisation administrer
+ * = autorisation creer
  */ 
 function autoriser_albums_menu_dist($faire, $type='', $id=0, $qui=NULL, $opts=NULL){
-	return autoriser('administrer','album',$id,$qui,$opts);
+	return autoriser('creer','album',$id,$qui,$opts);
 }
 
 /**
  * Autorisation a administrer les albums
- * Admins
+ * Admins et redacteurs
  */ 
-function autoriser_albums_administrer_dist($faire, $type, $id, $qui, $opts) {
-	return $qui['statut'] == '0minirezo';
+function autoriser_album_administrer_dist($faire, $type, $id, $qui, $opts) {
+	return autoriser('creer','album',$id,$qui,$opts);
 }
 
 /**
@@ -80,14 +80,6 @@ function autoriser_album_associer_dist($faire, $type, $associer_objet, $qui, $op
  */ 
 function autoriser_album_voir_dist($faire, $type, $id, $qui, $opts) {
 	return true;
-}
-
-/**
- * Autorisation a modifier le logo d'un album
- * = autoriser modifier album
- */
-function autoriser_album_iconifier_dist($faire, $quoi){
-	return autoriser('modifier', 'album', $id, $qui, $opts);
 }
 
 /**
@@ -141,7 +133,7 @@ function autoriser_autoassocieralbum_dist($faire, $type, $id, $qui, $opts) {
  *     - false : serveur SQL indisponible
  */
 function auteurs_objet($objet='album', $id_objet, $cond=''){
-	return sql_allfetsel("id_auteur", "spip_auteurs_liens", "objet='$objet' AND id_objet=".intval($id_objet). ($cond ? " AND $cond" : ''));
+	return sql_allfetsel("id_auteur", "spip_auteurs_liens", "objet='$objet' AND id_objet=".sql_quote($id_objet). ($cond ? " AND $cond" : ''));
 }
 
 ?>
