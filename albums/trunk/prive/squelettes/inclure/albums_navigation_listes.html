@@ -56,19 +56,22 @@
 	HTML
 ]
 
-[(#REM) Onglets : parents ]
+[(#REM) Onglets : objets parents et albums auteur]
 <BOUCLE_afficher_parents(CONDITION){si #GET{navigation_parents}}>
 <div class='onglets_simple premier clearfix'>
+<ul class='auteur'>
+	[<li class='first'>(#GET{self}|parametre_url{id_auteur,''}|lien_ou_expose{<:album:onglet_tous:>,#ENV{id_auteur,''}|=={''},ajax})</li>]
+	[<li>(#GET{self}|parametre_url{id_auteur,#SESSION{id_auteur}}|lien_ou_expose{'mes albums', #ENV{id_auteur}|=={#SESSION{id_auteur}}, ajax})</li>]
+</ul>
 <ul class='parents'>
 	[<li class='first'>(#GET{self}|parametre_url{objet,''}|lien_ou_expose{<:album:onglet_tous:>,#ENV{objet,''}|=={''},ajax})</li>]
 	<BOUCLE_objets_actives(DATA){source table, #CONFIG{albums/objets}}>
-	<BOUCLE_objets_presents(ALBUMS liens){objet=#VALEUR|objet_info{type}}{tout}>
+	<BOUCLE_objets_presents(ALBUMS liens){objet=#VALEUR|objet_info{type}}>
 	[<li>(#GET{self}|parametre_url{objet,#OBJET}
-		|lien_ou_expose{#OBJET|concat{'s ('}|concat{#TOTAL_BOUCLE}|concat{')'}, #OBJET|=={#ENV{objet}}, ajax}
-		|inserer_attribut{title,#TOTAL_BOUCLE|objet_afficher_nb{album}|concat{&nbsp;<:album:info_dans_objet:>&nbsp;#OBJETs}}
+		|lien_ou_expose{#OBJET|objet_info{info_nb_objets}|_T|replace{@nb@}, #OBJET|=={#ENV{objet}}, ajax}
 		|unique)</li>]
 	</BOUCLE_objets_presents>
-	[<li><strong class='off'>(#VALEUR|objet_info{type}|unique)s</strong></li>]
+	[(#VALEUR|oui) <li><strong class='off'>[(#VALEUR|objet_info{info_nb_objets}|_T|replace{@nb@})]</strong></li> ]
 	<//B_objets_presents>
 	</BOUCLE_objets_actives>
 </ul>
