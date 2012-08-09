@@ -77,8 +77,6 @@
 .albums .liste-objets navigation .pagination	{display:table-cell;}
 .albums .liste-objets navigation .tri		{display:table-cell;}
 
-
-
 /* LISTES : associer */
 .albums .associer .liste-objets		{border:#GET{bordure_actif};}
 
@@ -91,6 +89,7 @@
   .albums .galerie td.id		{text-align:center;}
 .albums .galerie td.id			{width:1.5em; font-size:1.5em; color:#555753;}
 .albums .galerie td.action		{width:48px;}
+.albums .galerie table li img			{vertical-align:middle;}
 /* objets lies */
 .albums .galerie .objets-lies		{background:none;}
   .albums .galerie .objets-lies tr,
@@ -237,7 +236,9 @@
 /* ONGLETS */
 /***********/
 
-.albums .onglets_simple.premier strong.off {color:#d3d7cf; border-color:#d3d7cf; border-bottom-color:#GET{foncee};}
+.albums .onglets_simple.premier ul li:last-child	{margin-right:2em;}
+.albums .onglets_simple.premier strong.off {opacity:.4; border-color:#999; border-bottom:none; font-weight:normal;}
+.albums .onglets_simple.premier ul.parents 	{font-size:.9em;}
 
 .albums .filtres			{margin: .5em 0;}
 .albums .filtres li			{display:inline-block; margin:0 .5em;}
