@@ -26,18 +26,18 @@ add_outil( array(
 */
 
 
-// typographie sur les #TITRE et #NOM d'objets sous SPIP 3.0
-// cet outil est place en tete car il modifie le pivot de #TITRE et #NOM (propre remplace typo)
+// typographie sur les #TITRE et #NOM d'objets
+// cet outil est place en tete car il modifie le pivot de #TITRE et #NOM
 add_outil( array(
 	'id' => 'titres_typographies',
 	'categorie'   => 'typo-corr',
+	// constante generique pour SPIP 3.0 :
 	'code:spip_options' => 'define(\'_TRAITEMENT_TYPO_SANS_NUMERO\', \'PtoBR(propre(supprimer_numero(%s), $connect, $Pile[0]))\');',
 	// pour etre compatible avec les autres outils, on provoque un changement de pivot (propre a la place de typo) :
 	'traitement:TITRE:post_propre,
 	 traitement:TITRE/mots:post_propre,
 	 traitement:NOM:post_propre' => 'PtoBR',
 	'auteur' => 'Ma&iuml;eul Rouquette',
-	'version-min' => 17743, // SPIP 3.0 mini
 ));
 
 add_variables( array(
