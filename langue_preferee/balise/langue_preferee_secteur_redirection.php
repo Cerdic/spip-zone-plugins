@@ -40,7 +40,7 @@ function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION_dyn($liste_rub_exclues="")
 	// Recuperation des langues des secteurs
 	$langues_secteurs = array();
 	include_spip('base/abstract_sql');
-	$query = 'SELECT DISTINCT(lang) FROM spip_rubriques WHERE id_parent=0 AND statut='publie' GROUP BY lang';
+	$query = 'SELECT DISTINCT(lang) FROM spip_rubriques WHERE id_parent=0 AND statut="publie" GROUP BY lang';
 	if ($res = sql_query($query)) { // was spip_query($query)) {
 		while($row = sql_fetch($res)) { // was spip_fetch_array
 			$langues_secteurs[] = $row['lang'];
