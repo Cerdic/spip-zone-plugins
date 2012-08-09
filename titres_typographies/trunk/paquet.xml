@@ -3,6 +3,7 @@
 	categorie="edition"
 	version="1.0.1"
 	etat="test"
+	documentation="http://contrib.spip.net/Titres-typographies"
 	compatibilite="[3.0;3.0.99]"
 	logo="titres_typographies.jpg"
 >	
