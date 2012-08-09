@@ -32,6 +32,6 @@
 		<inclure>inc/lido_pipeline_ajouter_onglets.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[1.9.2;2.1.14]" />
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
 	<categorie>communication</categorie>
 </plugin>
