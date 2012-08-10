@@ -13,7 +13,7 @@ function videos_insert_head($flux){
 }
 
 function videos_jquery_plugins($scripts){
-	$scripts[] = "lib/html5media-1.1.4/api/html5media.min.js";
+	$scripts[] = "lib/html5media-1.1.5/api/html5media.min.js";
 	return $scripts;
 }
 
