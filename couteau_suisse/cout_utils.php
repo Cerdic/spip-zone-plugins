@@ -52,7 +52,7 @@ function add_outil($tableau) {
 	// desactiver l'outil si les fichiers distants ne sont pas permis
 	if(defined('_CS_PAS_D_OUTIL_DISTANT') && isset($tableau['fichiers_distants']))
 		$tableau['version-max'] = '0';
-	foreach($tableau as $i=>$v) {
+	foreach($tableau as $i=>$v) {		
 		// parametres multiples separes par des virgules
 		if(strpos($i,',')!==false) {
 			$a = explode(',', $i);
@@ -388,10 +388,10 @@ function cs_initialise_includes($count_metas_outils) {
 					if(isset($outil['distant_pipelines']))
 						$infos_pipelines[$pipe2]['inclure'][] = "lib/$inc/distant_pipelines_".cs_basename($outil['distant_pipelines'], '.php');
 					// fonction a appeler
-					$infos_pipelines[$pipe2]['fonction'][] = $fonc;
+					if(strlen($fonc)) $infos_pipelines[$pipe2]['fonction'][] = $fonc;
 				} elseif(is_pipeline_outil_inline($pipe, $pipe2)) {
 					// code inline
-					$infos_pipelines[$pipe2]['inline'][] = cs_optimise_if(cs_parse_code_js($fonc));
+					if(strlen($fonc)) $infos_pipelines[$pipe2]['inline'][] = cs_optimise_if(cs_parse_code_js($fonc));
 				} elseif(is_traitements_outil($pipe, $fonc, $traitements_utilises)) {
 					// rien a faire : $traitements_utilises est rempli par is_traitements_outil()
 				}
