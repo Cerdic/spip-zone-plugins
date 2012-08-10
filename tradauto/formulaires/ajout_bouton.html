@@ -39,6 +39,8 @@ function init_tradauto()
 		t_atraduire_txt.push(prepare_texte(t_textarea[i].value));
 		t_atraduire_id.push([t_textarea[i].id]);
 	}
+//alert ("Qté de chaine à traduire="+t_atraduire_txt.length);
+//for (i in t_atraduire_txt) 	alert(t_atraduire_txt[i]);
 }
 
 
@@ -46,6 +48,7 @@ function init_tradauto()
 // et fait la requête de traduction
 function traduire()
 {
+//alert ("t_atraduire_txt.length="+t_atraduire_txt.length );
 	if (t_atraduire_txt.length > 0)
 	{
 		// Récupère le code langue sélectionnée
@@ -130,19 +133,23 @@ function prepare_texte(texte)
 {
 	texte = texte.replace(/\n/g,'<t_cr>');
 
+
 	// Remplacement des chaines à exclure de la traduction par <t_xxx> où xxx est un index
   cae = "[(#ENV*{tradauto_exclus}|replace{\r}|replace{\n,|||})]"; // les chaines à exclure sont dans CFG
 	t_cae = cae.split("|||");
+//alert(t_cae);
 	if (t_cae.length > 0)
 	{
 		for (i in t_cae)
 		{
 			var pattern = t_cae[i];
 			var reg=new RegExp(pattern, "g");
+//alert("texte="+texte);
+//alert("reg="+reg);
 			m = texte.match(reg);
 			for (t in m)
 			{
-		//alert("AVANT"+t+texte);
+//alert("AVANT"+t+texte);
 				t_exclus.push(m[t]); // enregistre la chaine exclue dans un tableau
 		    texte = texte.replace(m[t], '<t_'+t_exclus.length+'>'); // et remplace la chaine par <t_xxx>
 //alert("PATTERN="+pattern+"\nN="+m.length+"\nTAG="+'<t_'+t_exclus.length+">\nAPRES"+t+texte);
@@ -157,7 +164,7 @@ function restitue_texte(texte)
 {
 	texte = texte.replace(/ ?&lt; ?/g,'<');
 	texte = texte.replace(/ &gt; ?/g,'>');
-	texte = texte.replace(/ ?<t_cr> ?/g,'\n');
+
 //alert(texte);
 
 	// Restitue les exclusions
@@ -172,7 +179,7 @@ function restitue_texte(texte)
     texte = texte.replace(m[i], e)
 //alert("APRES"+i+texte);
 	}
-
+	texte = texte.replace(/ ?<t_cr> ?/g,'\n');
 	return texte;
 }
 
