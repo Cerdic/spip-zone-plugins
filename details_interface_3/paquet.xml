@@ -16,7 +16,7 @@
 
 	<chemin path="squelettes" />
 	<chemin path="images" />
-	<utilise nom="css_imbriques" compatibilite="[3.0;[" />
+	<necessite nom="css_imbriques" compatibilite="[3.0;[" />
 
 </paquet>
 
