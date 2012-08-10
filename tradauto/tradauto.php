@@ -9,13 +9,22 @@ include_spip('inc/translator');
 //****************************************************
 function tradauto_ajout_bouton($flux)
 {
+ 	$clientID = lire_config('tradauto/clientID');
+	if (empty($clientID))
+	{
+		echo "ERREUR Tradauto : Le plugin n'est pas encore configuré.";
+		return $flux;
+	}
+
 	$translator = new Translator();
 
 
   $flux['args']['contexte']['tradauto_token'] = urlencode($translator->get_token()); // On stocke le token dans le contexte pour réutilisation par le formulaire javascript
 
 	include_spip('inc/cfg_config');
-	$flux['args']['contexte']['tradauto_exclus'] = str_replace('"', '\"', lire_config('tradauto/mt_exclus'));
+	$f = array("\\", "\"");
+	$r =  array("\\\\", "\\\"");
+	$flux['args']['contexte']['tradauto_exclus'] = trim(str_replace($f , $r, lire_config('tradauto/mt_exclus')));
 	$flux['args']['contexte']['tradauto_lang'] = (array)$translator->GetLanguages($flux['args']['contexte']['lang']); //$translator->GetLanguagesForTranslate();
 
 //	if ($flux['args']['type']=='article')
@@ -28,68 +37,6 @@ function tradauto_ajout_bouton($flux)
 //print_r($flux); exit;
 	return $flux;
 }
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-
-	    //Create the authorization Header string.
-	    $authHeader = "Authorization: Bearer ". $accessToken;
-
-	    //Create the Translator Object.
-	    $translatorObj = new HTTPTranslator();
-
-	    //Input String.
-	    $inputStr = 'This is the sample string.';
-	    //HTTP Detect Method URL.
-	    $detectMethodUrl = "http://api.microsofttranslator.com/V2/Http.svc/Detect?text=".urlencode($inputStr);
-	    //Call the curlRequest.
-	    $strResponse = $translatorObj->curlRequest($detectMethodUrl, $authHeader);
-	    //Interprets a string of XML into an object.
-	    $xmlObj = simplexml_load_string($strResponse);
-	    foreach((array)$xmlObj[0] as $val){
-	        $languageCode = $val;
-	    }
-
-	    /*
-	     * Get the language Names from languageCodes.
-	     */
-/*
-	    $locale = 'en';
-	    $getLanguageNamesurl = "http://api.microsofttranslator.com/V2/Http.svc/GetLanguageNames?locale=$locale";
-	    //Create the Request XML format.
-	    $requestXml = $translatorObj->createReqXML($languageCode);
-	    //Call the curlRequest.
-	    $curlResponse = $translatorObj->curlRequest($getLanguageNamesurl, $authHeader, $requestXml);
-
-	    //Interprets a string of XML into an object.
-	    $xmlObj = simplexml_load_string($curlResponse);
-	    echo "<table border=2px>";
-	    echo "<tr>";
-	    echo "<td><b>LanguageCodes</b></td><td><b>Language Names</b></td>";
-	    echo "</tr>";
-	    foreach($xmlObj->string as $language){
-	        echo "<tr><td>".$inputStr."</td><td>". $languageCode."(".$language.")"."</td></tr>";
-	    }
-	    echo "</table>";
-	} catch (Exception $e) {
-	    echo "Exception: " . $e->getMessage() . PHP_EOL;
-	}
-
-*/
-
-
-
-
 
 
 ?>
