@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	//T
 	'titre' => "Type de l'article : ",
-	'type_defaut'=>"Article",
+	'type_defaut'=>"Article classique",
 	'type_1'=>"Nom du type 1",
 	'type_2'=>"Nom du type 2"
 );
