@@ -198,13 +198,14 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	$t = '';
 	if(isset($GLOBALS['cs_installer'])) foreach(array_keys($GLOBALS['cs_installer']) as $pack)
 		$t .= "\n_ " . couteauprive_T('pack_du', array('pack'=>"{[{$pack}|".couteauprive_T('pack_installe').'->' . generer_url_ecrire($exec,'cmd=install&pack='.urlencode($pack)) . ']}'));
+	$tr = defined('_SPIP30000')?_T('info_traductions'):ucfirst(_T('afficher_trad'));
 	$t = couteauprive_T('help2', array(
 			'version' => $cs_version.$cs_revision.'<br/>'.
 				(defined('_CS_PAS_DE_DISTANT')?'('.couteauprive_T('version_distante_off').')':'<span class="cs_version">'.couteauprive_T('version_distante').'</span>')
 				))
 		. chargement_automatique()
 		. '<br/>&bull;&nbsp;[' . couteauprive_T('pack_titre') . '|' . couteauprive_T('pack_alt') . '->' . generer_url_ecrire($exec,'cmd=pack#cs_infos')
-		. "]<br/>&bull;&nbsp;[" . _T('info_traductions') . '|' . _T('info_traductions') . '->' . generer_url_ecrire($exec,'cmd=trad#cs_infos')
+		. ']<br/>&bull;&nbsp;[' . $tr . '|' . $tr . '->' . generer_url_ecrire($exec,'cmd=trad#cs_infos')
 		. "]\n\n"
 		. couteauprive_T('help3', array(
 			'reset' => generer_url_ecrire($exec,'cmd=resetall'),

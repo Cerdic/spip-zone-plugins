@@ -97,7 +97,8 @@ function cs_description_trad() {
 	$res = array();
 	foreach($modules as $m) $res[] = "\n-* " . couteauprive_T('trad_mod', array('mod'=>$m)) . cs_liste_langues($m);
 	return debut_cadre_relief('', true)
-		. "<h3 class='titrem'><img src='"._DIR_IMG_PACK."puce-verte.gif' width='9' height='9' alt='-' />&nbsp;" . _T('info_traductions') . '</h3>'
+		. "<h3 class='titrem'><img src='"._DIR_IMG_PACK."puce-verte.gif' width='9' height='9' alt='-' />&nbsp;"
+		. (defined('_SPIP30000')?_T('info_traductions'):ucfirst(_T('afficher_trad'))) . '</h3>'
 		. propre(couteauprive_T('trad_help', array('url'=>_CS_TRAD_ACCUEIL, 'trad'=>join('', $res), 'contrib'=>cs_liste_traducteurs($modules)))
 		) . fin_cadre_relief(true);
 }
