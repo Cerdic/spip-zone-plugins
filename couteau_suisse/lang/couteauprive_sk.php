@@ -763,6 +763,11 @@ Dostupné písma: @_CS_FONTS@]][[%i_largeur% px]][[%i_hauteur% pt]][[%i_padding%
 
 Tento nástroj je kompatibilný s nástrojom: "[.->sommaire]".',
 	'titres_typo:nom' => 'Medzititulok v obrázku',
+	'titres_typographies:description' => 'Par défaut, les raccourcis typographiques de SPIP <html>({, {{, etc.)</html> ne s\'appliquent pas aux titres d\'objets dans vos squelettes.
+_ Cet outil active donc l\'application automatique des raccourcis typographiques de SPIP sur toutes les balises #TITRE et apparentées (#NOM pour un auteur, etc.).
+
+Exemple d\'utilisation : le titre d\'un livre cité dans le titre d\'un article, à mettre en italique.', # NEW
+	'titres_typographies:nom' => 'Titres typographiés', # NEW
 	'tous' => 'Všetko',
 	'toutes_couleurs' => '36 farieb v štýloch CSS: @_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Multilingual blocks: <b><:trad:></b>', # MODIF

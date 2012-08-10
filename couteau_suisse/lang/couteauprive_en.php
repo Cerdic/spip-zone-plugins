@@ -781,6 +781,11 @@ Available fonts: @_CS_FONTS@]][[%i_largeur% px]][[%i_hauteur% pt]][[%i_padding% 
 
 This tool is compatible with: " [.->sommaire] ".',
 	'titres_typo:nom' => 'Sub-headings as images',
+	'titres_typographies:description' => 'Par défaut, les raccourcis typographiques de SPIP <html>({, {{, etc.)</html> ne s\'appliquent pas aux titres d\'objets dans vos squelettes.
+_ Cet outil active donc l\'application automatique des raccourcis typographiques de SPIP sur toutes les balises #TITRE et apparentées (#NOM pour un auteur, etc.).
+
+Exemple d\'utilisation : le titre d\'un livre cité dans le titre d\'un article, à mettre en italique.', # NEW
+	'titres_typographies:nom' => 'Titres typographiés', # NEW
 	'tous' => 'All',
 	'toutes_couleurs' => 'The 36 colours in CSS styles: @_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Multilingual blocks: <b><:trad:></b>', # MODIF
