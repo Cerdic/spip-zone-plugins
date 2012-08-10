@@ -15,7 +15,8 @@ class Translator
 
 	public $clientID; //Client ID of the application.
 	public $clientSecret;	//Client Secret key of the application.
-	public $accessToken;
+	public $accessToken; // Le token d'accès au service
+	public $accessTokenDate; // La date de création du token. Un token microsoft expire au bout de 10min.
 	public $mt; // Microsoft Translator object
   public $authHeader;
 
@@ -46,6 +47,7 @@ class Translator
 		{
 			$authObj = new AccessTokenAuthentication();
 			$this->accessToken = $authObj->getTokens(self::GRANT_TYPE, self::URL_SCOPE, $this->clientID, $this->clientSecret, self::URL_AUTH);
+			$this->accessTokenDate = time();
     	$this->authHeader = "Authorization: Bearer ". $this->accessToken;
 		}
 		catch (Exception $e) {
@@ -56,11 +58,26 @@ class Translator
 	}
 
 
+	//**************************************************
+	// Vérifie l'age du token. Si >=10min (600s), le renouvelle
+	//**************************************************
+	function TokenUpdate()
+	{
+		if ((time() - $this->accessTokenDate) >= 500) // marge de 100s
+		{
+			echo "<br>TOKENUPDATE : ".date("c");
+			$this->get_token();
+		}
+	}
+
+
 	//*************************************************************************************
 	// Renvoie une liste des codes des langues prise en charge par le service de traduction
 	//*************************************************************************************
 	function GetLanguagesForTranslate()
 	{
+		$this->TokenUpdate();
+
 		try
 		{
 			//Call Curl Request.//
@@ -87,6 +104,8 @@ class Translator
 	//***************************************************************************************
 	function GetLanguageNames($languageCodes, $locale)
 	{
+		$this->TokenUpdate();
+
 		try
 		{
 	    //Create the XML string for passing the values.
@@ -124,6 +143,8 @@ class Translator
 	//***************************************************************************************
 	function GetLanguages($locale)
 	{
+		$this->TokenUpdate();
+
 		$languageCodes = $this->GetLanguagesForTranslate();
     $languages = $this->GetLanguageNames($languageCodes, $locale);
 		return array_combine($languageCodes, $languages);
@@ -131,26 +152,37 @@ class Translator
 
 	//***************************************************************************************
 	// Traduit une chaine $inputStr dans une langue $fromLanguage vers une langue $toLanguage
+	// resultat dans &$result
+	// renvoie true si OK
+	// $contenType = 'text/plain' ou "text/html"
 	//***************************************************************************************
-	function Translate($inputStr, $fromLanguage, $toLanguage, $contentType='text/plain')
+	function Translate($inputStr, $fromLanguage, $toLanguage, &$result, $contentType='text/plain')
 	{
+		$this->TokenUpdate();
+//sleep(1); $result=$inputStr; return true;  // pour tester sans consommer du quota
 
 		try
 		{
+			$translatedStr = "";
     	$params = "text=".urlencode($inputStr)."&to=$toLanguage&from=$fromLanguage&contentType=$contentType";
 			//Call Curl Request.//
 			$strResponse = $this->mt->curlRequest(self::URL_Translate."?$params", $this->authHeader);
-
+//echo "<br>strResponse="; var_dump($strResponse);
 			// Interprets a string of XML into an object.
 			$xmlObj = simplexml_load_string($strResponse);
 	    foreach((array)$xmlObj[0] as $val){
 	        $translatedStr = $val;
 	    }
 
-			return $translatedStr;
+//var_dump($translatedStr);
+			if (!is_string($translatedStr)) {echo "Class Translator:Translate : ERREUR : le résultat de traduction est vide.<br>inputStr=$inputStr"; var_dump($strResponse); return false;}
+
+      $result = $translatedStr;
+			return true;
 
 		} catch (Exception $e) {
 		    echo "Class Translator:Translate : Exception: " . $e->getMessage() . PHP_EOL;
+				return false;
 		}
 	}
 
