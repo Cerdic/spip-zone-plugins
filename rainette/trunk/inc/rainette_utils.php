@@ -54,12 +54,13 @@ function charger_meteo($lieu, $mode='previsions', $service='weather') {
 		// Traitement du fichier d'infos
 		if (!file_exists($f)) {
 			$urler = "${service}_service2url";
-			$flux = $urler($lieu, $mode);
+			$url = $urler($lieu, $mode);
 
-			include_spip('inc/xml');
-			$xml = spip_xml_load($flux);
+			$acquerir = "${service}_url2flux";
+			$flux = $acquerir($url);
+
 			$convertir = "${service}_xml2infos";
-			$tableau = $convertir($xml, $lieu);
+			$tableau = $convertir($flux, $lieu);
 			ecrire_fichier($f, serialize($tableau));
 		}
 	}
@@ -72,8 +73,9 @@ function charger_meteo($lieu, $mode='previsions', $service='weather') {
 			$urler = "${service}_service2url";
 			$flux = $urler($lieu, $mode);
 
-			include_spip('inc/xml');
-			$xml = spip_xml_load($flux);
+			$acquerir = "${service}_url2flux";
+			$flux = $acquerir($url);
+
 			$convertir = ($mode == 'previsions') ? "${service}_xml2previsions" : "${service}_xml2conditions";
 			$tableau = $convertir($xml, $lieu);
 			ecrire_fichier($f, serialize($tableau));

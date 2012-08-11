@@ -28,6 +28,14 @@ function wwo_service2url($lieu, $mode) {
 	return $url;
 }
 
+function wwo_url2flux($url) {
+
+	include_spip('inc/xml');
+	$flux = spip_xml_load($url);
+
+	return $flux;
+}
+
 /**
  * lire le xml fournit par le service meteo et en extraire les infos interessantes
  * retournees en tableau jour par jour
