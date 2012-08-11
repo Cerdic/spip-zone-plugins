@@ -19,13 +19,15 @@ if(!defined('_SPIP19300')) {
 	} }
 }
 
-function boites_privees_installe($flux){
-	if(defined('boites_privees_TRI_AUTEURS')) {
+// cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
+function boites_privees_installe_dist(){
+	if(defined('_SPIP30000') && defined('boites_privees_TRI_AUTEURS')) {
 		include_spip('base/abstract_sql');
 		// verifier que le champ 'ordre' est bien present, sinon on le cree
 		if(!sql_count(spip_query("SHOW COLUMNS FROM spip_auteurs_liens LIKE 'ordre'")))
 			spip_query("ALTER TABLE spip_auteurs_liens ADD ordre INT NOT NULL");
 	}
+	return false;
 }
 
 function boites_privees_affiche_gauche($flux){
