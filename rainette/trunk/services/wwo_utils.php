@@ -1,4 +1,7 @@
 <?php
+// free.worldweatheronline.com/feed/weather.ashx?key=30e3b46523060112120708&q=Paris,France&cc=no&fx=yes&format=xml&num_of_days=5&extra=localObsTime&includeLocation=yes
+define('_RAINETTE_WWO_URL_BASE', 'http://free.worldweatheronline.com/feed/weather.ashx');
+
 /**
  * lire le xml fournit par le service meteo et en extraire les infos interessantes
  * retournees en tableau jour par jour

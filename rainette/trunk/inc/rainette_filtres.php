@@ -36,6 +36,7 @@ function rainette_resume_meteo($code_icon){
 function rainette_afficher_direction($direction){
 	static $liste_direction = 'N:NNE:NE:ENE:E:ESE:SE:SSE:S:SSW:SW:WSW:W:WNW:NW:NNW';
 	
+	include_spip('inc/rainette_utils');
 	$direction_abregee = (intval($direction)) ? angle2direction($direction) : $direction;
 	if (!in_array($direction_abregee, explode(':', $liste_direction)))
 		return _T('rainette:valeur_indeterminee');
