@@ -122,15 +122,23 @@ function weather_xml2conditions($xml){
 
 function weather_xml2infos($xml, $lieu){
 	$tableau = array();
-	$regexp = 'loc id=\"'.$lieu.'\"';
-	$n = spip_xml_match_nodes(",^$regexp,",$xml,$infos);
+
+	// On stocke systematiquement le code du lieu
+	$tableau['code_meteo'] = $lieu;
+
+	// On stocke les informations disponibles dans un tableau standard
+	$regexp = 'loc id=\"' . $lieu . '\"';
+	$n = spip_xml_match_nodes(",^$regexp,", $xml, $infos);
 	if ($n==1){
-		$infos = reset($infos['loc id="'.$lieu.'"']);
+		$infos = reset($infos['loc id="' . $lieu . '"']);
 		// recuperer la date de debut des conditions
-		$tableau['code_meteo'] = $lieu;
 		$tableau['ville'] = $infos['dnam'][0];
+		$tableau['region'] = '';
+
 		$tableau['longitude'] = floatval($infos['lon'][0]);
 		$tableau['latitude'] = floatval($infos['lat'][0]);
+
+		$tableau['population'] = '';
 		$tableau['zone'] = intval($infos['zone'][0]);
 	}
 	return $tableau;

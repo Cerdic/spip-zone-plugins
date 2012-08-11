@@ -71,13 +71,13 @@ function charger_meteo($lieu, $mode='previsions', $service='weather') {
 		  || !filemtime($f)
 		  || (time()-filemtime($f)>$reload_time)) {
 			$urler = "${service}_service2url";
-			$flux = $urler($lieu, $mode);
+			$url = $urler($lieu, $mode);
 
 			$acquerir = "${service}_url2flux";
 			$flux = $acquerir($url);
 
 			$convertir = ($mode == 'previsions') ? "${service}_xml2previsions" : "${service}_xml2conditions";
-			$tableau = $convertir($xml, $lieu);
+			$tableau = $convertir($xml);
 			ecrire_fichier($f, serialize($tableau));
 		}
 	}
@@ -92,14 +92,71 @@ function charger_infos($lieu='', $type_infos='', $service='weather') {
 
 	$nom_fichier = charger_meteo($lieu, 'infos', $service);
 	lire_fichier($nom_fichier,$tableau);
-	if (!$type_infos)
+	if (!isset($type_infos) OR !$type_infos)
 		return $tableau;
 	else {
 		$tableau = unserialize($tableau);
 		$info = $tableau[strtolower($type_infos)];
-		if (!$info) $info = ucfirst($type_infos) . "(" . $lieu . ")";
 		return $info;
 	}
+}
+
+
+/**
+ * Transforme un objet SimpleXML en tableau PHP
+ *
+ * @param object $obj
+ * @return array
+**/
+// http://www.php.net/manual/pt_BR/book.simplexml.php#108688
+// xaviered at gmail dot com 17-May-2012 07:00
+function simplexml2array($obj) {
+
+	// Cette fonction getDocNamespaces() est longue sur de gros xml
+	# $namespace = $obj->getDocNamespaces(true);
+	$namespace[NULL] = NULL;
+
+	$children = array();
+	$attributes = array();
+	$name = strtolower((string)$obj->getName());
+
+	$text = trim((string)$obj);
+	if( strlen($text) <= 0 ) {
+		$text = NULL;
+	}
+
+	// get info for all namespaces
+	if (is_object($obj)) {
+		foreach( $namespace as $ns=>$nsUrl ) {
+			// atributes
+			$objAttributes = $obj->attributes($ns, true);
+			foreach( $objAttributes as $attributeName => $attributeValue ) {
+				$attribName = strtolower(trim((string)$attributeName));
+				$attribVal = trim((string)$attributeValue);
+				if (!empty($ns)) {
+					$attribName = $ns . ':' . $attribName;
+				}
+				$attributes[$attribName] = $attribVal;
+			}
+
+			// children
+			$objChildren = $obj->children($ns, true);
+			foreach( $objChildren as $childName=>$child ) {
+				$childName = strtolower((string)$childName);
+				if( !empty($ns) ) {
+					$childName = $ns.':'.$childName;
+				}
+				$children[$childName][] = simplexml2array($child);
+			}
+		}
+	}
+
+	return array(
+		'name'=>$name,
+		'text'=>$text,
+		'attributes'=>$attributes,
+		'children'=>$children
+	);
 }
 
 ?>

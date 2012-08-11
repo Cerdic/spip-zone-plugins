@@ -15,11 +15,11 @@ function wwo_service2cache($lieu, $mode) {
 function wwo_service2url($lieu, $mode) {
 
 	$url = _RAINETTE_WWO_URL_BASE
+		.  '?key=' . '30e3b46523060112120708'
 		.  '&format=xml&extra=localObsTime'
-		.  'q=' . str_replace(' ', '', trim($lieu))
-		.  '?key=' . '30e3b46523060112120708';
+		.  '&q=' . str_replace(' ', '', trim($lieu));
 	if ($mode == 'infos') {
-		$url .= '&includeLocation=yes';
+		$url .= '&includeLocation=yes&cc=no&fx=no';
 	}
 	else {
 		$url .= ($mode == 'previsions') ? '&cc=no&fx=yes&num_of_days=' . _RAINETTE_WWO_JOURS_PREVISIONS : '&cc=yes&fx=no';
@@ -30,10 +30,13 @@ function wwo_service2url($lieu, $mode) {
 
 function wwo_url2flux($url) {
 
-	include_spip('inc/xml');
-	$flux = spip_xml_load($url);
+	include_spip('inc/distant');
+	$flux = recuperer_page($url);
 
-	return $flux;
+	include_spip('inc/rainette_utils');
+	$xml = @simplexml2array(simplexml_load_string($flux));
+
+	return $xml;
 }
 
 /**
@@ -128,17 +131,27 @@ function wwo_xml2conditions($xml){
 
 function wwo_xml2infos($xml, $lieu){
 	$tableau = array();
-	$regexp = 'loc id=\"'.$lieu.'\"';
-	$n = spip_xml_match_nodes(",^$regexp,",$xml,$infos);
-	if ($n==1){
-		$infos = reset($infos['loc id="'.$lieu.'"']);
-		// recuperer la date de debut des conditions
-		$tableau['code_meteo'] = $lieu;
-		$tableau['ville'] = $infos['dnam'][0];
-		$tableau['longitude'] = floatval($infos['lon'][0]);
-		$tableau['latitude'] = floatval($infos['lat'][0]);
-		$tableau['zone'] = intval($infos['zone'][0]);
+
+	// On stocke systematiquement le code du lieu
+	$tableau['code_meteo'] = $lieu;
+
+	// On stocke les informations disponibles dans un tableau standard
+	if (isset($xml['children']['nearest_area'][0]['children'])) {
+		$area = $xml['children']['nearest_area'][0]['children'];
+
+		if (isset($area['areaname'])) {
+			$tableau['ville'] = $area['areaname'][0]['text'];
+			$tableau['ville'] .= (isset($area['country'])) ? ', ' . $area['country'][0]['text'] : '';
+		}
+		$tableau['region'] = (isset($area['region'])) ? $area['region'][0]['text'] : '';
+
+		$tableau['longitude'] = (isset($area['longitude'])) ? floatval($area['longitude'][0]['text']) : '';
+		$tableau['latitude'] = (isset($area['latitude'])) ? floatval($area['latitude'][0]['text']) : '';
+
+		$tableau['population'] = (isset($area['population'])) ? intval($area['population'][0]['text']) : '';
+		$tableau['zone'] = '';
 	}
+
 	return $tableau;
 }
 
