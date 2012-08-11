@@ -1,12 +1,12 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="4.1.0"
+	version="4.1.1"
 	schema="2.0.2"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/gis.png"
-	documentation="http://www.spip-contrib.net/GIS2"
+	documentation="http://contrib.spip.net/4189"
 >
 
 	<nom>GIS</nom>
@@ -28,7 +28,7 @@
 
 	<utilise nom="selecteur_generique" compatibilite="[1.12;]" />
 	<necessite nom="saisies" compatibilite="[1.19.0;]" />
-	<lib nom="leaflet-gis-4.1.0" lien="https://github.com/downloads/brunob/Leaflet/leaflet-gis-4.1.0.zip" />
+	<lib nom="leaflet-gis-4.1.1" lien="https://github.com/downloads/brunob/Leaflet/leaflet-gis-4.1.1.zip" />
 
 	<pipeline
 		nom="declarer_tables_interfaces"
