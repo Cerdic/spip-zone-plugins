@@ -2,21 +2,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-/*
-// Recuperer le reglage des forums publics de l'article x
-// http://doc.spip.org/@get_forums_publics
-function get_forums_publics($id_objet=0, $objet='article') {
-
-	if ($objet=='article' AND $id_objet) {
-		$obj = sql_fetsel("accepter_forum", "spip_articles", "id_article=".intval($id_objet));
-
-		if ($obj) return $obj['accepter_forum'];
-	} else { // dans ce contexte, inutile
-		return substr($GLOBALS['meta']["forums_publics"],0,3);
-	}
-	return $GLOBALS['meta']["forums_publics"];
-}*/
-
 /**
  * Charger
  *
@@ -26,21 +11,10 @@ function get_forums_publics($id_objet=0, $objet='article') {
  */
 function formulaires_tri_auteurs_charger_dist($id_objet=0, $objet='article'){
 	if (defined('boites_privees_TRI_AUTEURS') && $id_objet && autoriser('modifier', $objet, $id_objet)) {
-	/*	include_spip('inc/presentation');
-		include_spip('base/abstract_sql');
-		$nb_forums = sql_countsel("spip_forum", "objet=".sql_quote($objet)." AND id_objet=".intval($id_objet)." AND statut IN ('publie', 'off', 'prop', 'spam')");
-		$editable = ($objet=='article')?true:false;
-		if (!$editable AND !$nb_forums)
-			return false;
-	*/
-
 		return array(
 			'objet' => $objet,
 			'id_objet' => $id_objet,
-			'editable' => $objet=='article',
-	/*		'accepter_forum' => get_forums_publics($id_objet, $objet),
-			'_suivi_forums' => $nb_forums?_T('forum:icone_suivi_forum', array('nb_forums' => $nb_forums)):"",
-	*/	);
+			'editable' => $objet=='article');
 	}
 	return false;
 }
