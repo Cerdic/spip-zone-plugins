@@ -13,8 +13,21 @@ function balise_RAINETTE_INFOS($p) {
 	return $p;
 }
 
-function calculer_infos($code, $type, $service) {
+function calculer_infos($lieu, $type, $service) {
+
+	// Traitement des cas ou les arguments sont vides
+	if (!$lieu) return '';
+	if (!$service) $service = 'weather';
+
 	include_spip('inc/rainette_utils');
-	return charger_infos($code, $type, $service);
+	$nom_fichier = charger_meteo($lieu, 'infos', $service);
+	lire_fichier($nom_fichier,$tableau);
+	if (!isset($type) OR !$type)
+		return $tableau;
+	else {
+		$tableau = unserialize($tableau);
+		$info = $tableau[strtolower($type)];
+		return $info;
+	}
 }
 ?>

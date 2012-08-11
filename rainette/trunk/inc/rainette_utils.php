@@ -84,23 +84,6 @@ function charger_meteo($lieu, $mode='previsions', $service='weather') {
 	return $f;
 }
 
-function charger_infos($lieu='', $type_infos='', $service='weather') {
-
-	// Traitement des cas ou les arguments sont vides
-	if (!$lieu) return '';
-	if (!$service) $service = 'weather';
-
-	$nom_fichier = charger_meteo($lieu, 'infos', $service);
-	lire_fichier($nom_fichier,$tableau);
-	if (!isset($type_infos) OR !$type_infos)
-		return $tableau;
-	else {
-		$tableau = unserialize($tableau);
-		$info = $tableau[strtolower($type_infos)];
-		return $info;
-	}
-}
-
 
 /**
  * Transforme un objet SimpleXML en tableau PHP
