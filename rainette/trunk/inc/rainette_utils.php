@@ -39,11 +39,14 @@ function angle2direction($degre) {
  */
 function charger_meteo($lieu, $mode='previsions', $service='weather') {
 
+	// Traitement des cas ou les arguments sont vides
+	if (!$mode) $mode = 'previsions';
+	if (!$service) $service = 'weather';
+
 	// En fonction du service, on inclut le fichier des fonctions
 	// Le principe est que chaque service propose la même liste de fonctions d'interface dans un fichier unique
 	include_spip("services/${service}_utils");
 
-	$lieu = strtoupper($lieu);
 	$f = service2cache($lieu, $mode);
 
 	if ($mode == 'infos') {
@@ -73,7 +76,11 @@ function charger_meteo($lieu, $mode='previsions', $service='weather') {
 }
 
 function charger_infos($lieu='', $type_infos='', $service='weather') {
+
+	// Traitement des cas ou les arguments sont vides
 	if (!$lieu) return '';
+	if (!$service) $service = 'weather';
+
 	$nom_fichier = charger_meteo($lieu, 'infos', $service);
 	lire_fichier($nom_fichier,$tableau);
 	if (!$type_infos)

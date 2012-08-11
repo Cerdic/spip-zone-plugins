@@ -1,19 +1,22 @@
 <?php
+define('_RAINETTE_WEATHER_URL_BASE', 'http://xml.weather.com/weather/local/');
+define('_RAINETTE_WEATHER_JOURS_PREVISION', 10);
+define('_RAINETTE_WEATHER_SYSTEME_MESURE','m');
 
 function service2cache($lieu, $mode) {
 
 	$dir = sous_repertoire(_DIR_CACHE, 'rainette');
 	$dir = sous_repertoire($dir, 'weather');
-	$f = $dir . $lieu . "_" . $mode . ".txt";
+	$f = $dir . strtoupper($lieu) . "_" . $mode . ".txt";
 
 	return $f;
 }
 
 function service2url($lieu, $mode) {
 
-	$url = 'http://xml.weather.com/weather/local/' . $lieu . '?unit=' . _RAINETTE_SYSTEME_MESURE;
+	$url = _RAINETTE_WEATHER_URL_BASE . strtoupper($lieu) . '?unit=' . _RAINETTE_WEATHER_SYSTEME_MESURE;
 	if ($mode != 'infos') {
-		$url .= ($mode == 'previsions') ? '&dayf=' . _RAINETTE_JOURS_PREVISION : '&cc=*';
+		$url .= ($mode == 'previsions') ? '&dayf=' . _RAINETTE_WEATHER_JOURS_PREVISION : '&cc=*';
 	}
 
 	return $url;

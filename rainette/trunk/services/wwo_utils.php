@@ -1,22 +1,28 @@
 <?php
 // free.worldweatheronline.com/feed/weather.ashx?key=30e3b46523060112120708&q=Paris,France&cc=no&fx=yes&format=xml&num_of_days=5&extra=localObsTime&includeLocation=yes
 define('_RAINETTE_WWO_URL_BASE', 'http://free.worldweatheronline.com/feed/weather.ashx');
+define('_RAINETTE_WWO_JOURS_PREVISIONS', 5);
 
 function service2cache($lieu, $mode) {
 
 	$dir = sous_repertoire(_DIR_CACHE, 'rainette');
-	$dir = sous_repertoire($dir, 'weather');
-	$dir = sous_repertoire($dir, substr(md5($lieu), 0, 1));
-	$f = $dir . $lieu . "_" . $mode . ".txt";
+	$dir = sous_repertoire($dir, 'wwo');
+	$f = $dir . str_replace(array(',', '+'), '-', $lieu) . "_" . $mode . ".txt";
 
 	return $f;
 }
 
 function service2url($lieu, $mode) {
 
-	$url = 'http://xml.weather.com/weather/local/' . $lieu . '?unit=' . _RAINETTE_SYSTEME_MESURE;
-	if ($mode != 'infos') {
-		$url .= ($mode == 'previsions') ? '&dayf=' . _RAINETTE_JOURS_PREVISION : '&cc=*';
+	$url = _RAINETTE_WWO_URL_BASE
+		.  '&format=xml&extra=localObsTime'
+		.  'q=' . str_replace(' ', '', trim($lieu))
+		.  '?key=' . '30e3b46523060112120708';
+	if ($mode == 'infos') {
+		$url .= '&includeLocation=yes';
+	}
+	else {
+		$url .= ($mode == 'previsions') ? '&cc=no&fx=yes&num_of_days=' . _RAINETTE_WWO_JOURS_PREVISIONS : '&cc=yes&fx=no';
 	}
 
 	return $url;

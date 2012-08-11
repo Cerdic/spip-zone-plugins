@@ -5,7 +5,7 @@ function balise_RAINETTE_INFOS($p) {
 	$code_meteo = isset($code_meteo) ? str_replace('\'', '"', $code_meteo) : '""';
 	$type_info = interprete_argument_balise(2,$p);
 	$type_info = isset($type_info) ? str_replace('\'', '"', $type_info) : '""';
-	$service = interprete_argument_balise(2,$p);
+	$service = interprete_argument_balise(3,$p);
 	$service = isset($service) ? str_replace('\'', '"', $service) : '"weather"';
 
 	$p->code = 'calculer_infos('.$code_meteo.', '.$type_info.', '.$service.')';
