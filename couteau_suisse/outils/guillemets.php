@@ -80,7 +80,7 @@ function typo_guillemets_rempl($texte){
 //		$texte = preg_replace('/(<[^>]+"[^>]*>)/Umse', 'cs_code_echappement("\\1", "GUILL")', $texte);
 		;
 	// choix de la langue, de la constante et de la chaine de remplacement
-	if (!$lang = $GLOBALS['lang_objet']) $lang = $GLOBALS['spip_lang'];
+	$lang = isset($GLOBALS['lang_objet'])?$GLOBALS['lang_objet']:$GLOBALS['spip_lang'];
 	$constante = '_GUILLEMETS_'.$lang;
 	$guilles = defined($constante)?constant($constante):_GUILLEMETS_defaut;
 	
