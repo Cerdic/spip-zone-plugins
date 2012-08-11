@@ -45,17 +45,21 @@ function charger_meteo($lieu, $mode='previsions', $service='weather') {
 
 	// En fonction du service, on inclut le fichier des fonctions
 	// Le principe est que chaque service propose la même liste de fonctions d'interface dans un fichier unique
-	include_spip("services/${service}_utils");
+	include_spip("services/${service}");
 
-	$f = service2cache($lieu, $mode);
+	$cacher = "${service}_service2cache";
+	$f = $cacher($lieu, $mode);
 
 	if ($mode == 'infos') {
 		// Traitement du fichier d'infos
 		if (!file_exists($f)) {
-			$flux = service2url($lieu, $mode);
+			$urler = "${service}_service2url";
+			$flux = $urler($lieu, $mode);
+
 			include_spip('inc/xml');
 			$xml = spip_xml_load($flux);
-			$tableau = xml2infos($xml, $lieu);
+			$convertir = "${service}_xml2infos";
+			$tableau = $convertir($xml, $lieu);
 			ecrire_fichier($f, serialize($tableau));
 		}
 	}
@@ -65,10 +69,13 @@ function charger_meteo($lieu, $mode='previsions', $service='weather') {
 		if (!file_exists($f)
 		  || !filemtime($f)
 		  || (time()-filemtime($f)>$reload_time)) {
-			$flux = service2url($lieu, $mode);
+			$urler = "${service}_service2url";
+			$flux = $urler($lieu, $mode);
+
 			include_spip('inc/xml');
 			$xml = spip_xml_load($flux);
-			$tableau = ($mode == 'previsions') ? xml2previsions($xml) : xml2conditions($xml);
+			$convertir = ($mode == 'previsions') ? "${service}_xml2previsions" : "${service}_xml2conditions";
+			$tableau = $convertir($xml, $lieu);
 			ecrire_fichier($f, serialize($tableau));
 		}
 	}
