@@ -1,11 +1,11 @@
 <?php
-function code2icone($icon){
+function code2icone($icon) {
 	$r = "na";
 	if (($icon >= 1) && ($icon < 48)) $r = strval($icon);
 	return $r;
 }
 
-function angle2direction($degre){
+function angle2direction($degre) {
 	$dir = '';
 	switch(round($degre / 22.5) % 16)
 	{
@@ -27,6 +27,63 @@ function angle2direction($degre){
 		case 15: $dir = 'NNW'; break;
 	}
 	return $dir;
+}
+
+/**
+ * charger le fichier des infos meteos correspondant au code
+ * si le fichier analyse est trop vieux ou absent, on charge le xml et on l'analyse
+ * puis on stocke les infos apres analyse
+ *
+ * @param string $lieu
+ * @return string
+ */
+function charger_meteo($lieu, $mode='previsions', $service='weather') {
+
+	// En fonction du service, on inclut le fichier des fonctions
+	// Le principe est que chaque service propose la même liste de fonctions d'interface dans un fichier unique
+	include_spip("services/${service}_utils");
+
+	$lieu = strtoupper($lieu);
+	$f = service2cache($lieu, $mode);
+
+	if ($mode == 'infos') {
+		// Traitement du fichier d'infos
+		if (!file_exists($f)) {
+			$flux = service2url($lieu, $mode);
+			include_spip('inc/xml');
+			$xml = spip_xml_load($flux);
+			$tableau = xml2infos($xml, $lieu);
+			ecrire_fichier($f, serialize($tableau));
+		}
+	}
+	else {
+		// Traitement du fichier de donnees requis
+		$reload_time = ($mode == 'previsions') ? _RAINETTE_RELOAD_TIME_PREVISIONS : _RAINETTE_RELOAD_TIME_CONDITIONS;
+		if (!file_exists($f)
+		  || !filemtime($f)
+		  || (time()-filemtime($f)>$reload_time)) {
+			$flux = service2url($lieu, $mode);
+			include_spip('inc/xml');
+			$xml = spip_xml_load($flux);
+			$tableau = ($mode == 'previsions') ? xml2previsions($xml) : xml2conditions($xml);
+			ecrire_fichier($f, serialize($tableau));
+		}
+	}
+	return $f;
+}
+
+function charger_infos($lieu='', $type_infos='') {
+	if (!$lieu) return '';
+	$nom_fichier = charger_meteo($lieu, 'infos');
+	lire_fichier($nom_fichier,$tableau);
+	if (!$type_infos)
+		return $tableau;
+	else {
+		$tableau = unserialize($tableau);
+		$info = $tableau[strtolower($type_infos)];
+		if (!$info) $info = ucfirst($type_infos) . "(" . $lieu . ")";
+		return $info;
+	}
 }
 
 ?>

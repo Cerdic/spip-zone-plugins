@@ -88,15 +88,12 @@ function rainette_afficher_unite($valeur, $type_valeur=''){
  * @return string
  */
 function rainette_coasse_previsions($lieu, $type='x_jours', $jour=0, $modele='previsions_24h', $service='weather'){
-
-	// En fonction du service, on inclut le fichier des fonctions
-	// Le principe est que chaque service propose la même liste de fonctions d'interface dans un fichier unique
-	include_spip("services/${service}_utils");
+	include_spip('inc/rainette_utils');
 
 	if ($type == '1_jour') {
 		$jour = min($jour, _RAINETTE_JOURS_PREVISION-1);
 		
-		$nom_fichier = charger_meteo($lieu, 'previsions');
+		$nom_fichier = charger_meteo($lieu, 'previsions', $service);
 		lire_fichier($nom_fichier,$tableau);
 		$tableau = unserialize($tableau);
 		// Si jour=0 (aujourd'hui), on complete par le tableau du lendemain matin
@@ -119,7 +116,7 @@ function rainette_coasse_previsions($lieu, $type='x_jours', $jour=0, $modele='pr
 		if ($jour == 0) $jour = _RAINETTE_JOURS_PREVISION;
 		$jour = min($jour, _RAINETTE_JOURS_PREVISION);
 		
-		$nom_fichier = charger_meteo($lieu, 'previsions');
+		$nom_fichier = charger_meteo($lieu, 'previsions', $service);
 		lire_fichier($nom_fichier,$tableau);
 		$tableau = unserialize($tableau);
 		$texte = "";
@@ -132,13 +129,10 @@ function rainette_coasse_previsions($lieu, $type='x_jours', $jour=0, $modele='pr
 }
 
 function rainette_coasse_conditions($lieu, $modele='conditions_tempsreel', $service='weather'){
-
-	// En fonction du service, on inclut le fichier des fonctions
-	// Le principe est que chaque service propose la même liste de fonctions d'interface dans un fichier unique
-	include_spip("services/${service}_utils");
+	include_spip('inc/rainette_utils');
 
 	// Recuperation du tableau des conditions courantes
-	$nom_fichier = charger_meteo($lieu, 'conditions');
+	$nom_fichier = charger_meteo($lieu, 'conditions', $service);
 	lire_fichier($nom_fichier,$tableau);
 	$tableau = unserialize($tableau);
 
@@ -151,12 +145,10 @@ function rainette_coasse_conditions($lieu, $modele='conditions_tempsreel', $serv
 }
 
 function rainette_coasse_infos($lieu, $modele='infos_ville', $service='weather'){
-	// En fonction du service, on inclut le fichier des fonctions
-	// Le principe est que chaque service propose la même liste de fonctions d'interface dans un fichier unique
-	include_spip("services/${service}_utils");
+	include_spip('inc/rainette_utils');
 
 	// Recuperation du tableau des conditions courantes
-	$nom_fichier = charger_meteo($lieu, 'infos');
+	$nom_fichier = charger_meteo($lieu, 'infos', $service);
 	lire_fichier($nom_fichier,$tableau);
 	$tableau = unserialize($tableau);
 

@@ -2,6 +2,26 @@
 // free.worldweatheronline.com/feed/weather.ashx?key=30e3b46523060112120708&q=Paris,France&cc=no&fx=yes&format=xml&num_of_days=5&extra=localObsTime&includeLocation=yes
 define('_RAINETTE_WWO_URL_BASE', 'http://free.worldweatheronline.com/feed/weather.ashx');
 
+function service2cache($lieu, $mode) {
+
+	$dir = sous_repertoire(_DIR_CACHE, 'rainette');
+	$dir = sous_repertoire($dir, 'weather');
+	$dir = sous_repertoire($dir, substr(md5($lieu), 0, 1));
+	$f = $dir . $lieu . "_" . $mode . ".txt";
+
+	return $f;
+}
+
+function service2url($lieu, $mode) {
+
+	$url = 'http://xml.weather.com/weather/local/' . $lieu . '?unit=' . _RAINETTE_SYSTEME_MESURE;
+	if ($mode != 'infos') {
+		$url .= ($mode == 'previsions') ? '&dayf=' . _RAINETTE_JOURS_PREVISION : '&cc=*';
+	}
+
+	return $url;
+}
+
 /**
  * lire le xml fournit par le service meteo et en extraire les infos interessantes
  * retournees en tableau jour par jour
@@ -10,9 +30,8 @@ define('_RAINETTE_WWO_URL_BASE', 'http://free.worldweatheronline.com/feed/weathe
  * ne gere pas encore le jour et la nuit de la date courante suivant l'heure!!!!
  * @param array $xml
  * @return array
- * @author Cedric Morin
  */
-function xml2tab_previsions($xml){
+function xml2previsions($xml){
 	$tableau = array();
 	$n = spip_xml_match_nodes(",^dayf,",$xml,$previsions);
 	if ($n==1){
@@ -64,7 +83,7 @@ function xml2tab_previsions($xml){
 	return $tableau;
 }
 
-function xml2tab_conditions($xml){
+function xml2conditions($xml){
 	$tableau = array();
 	$n = spip_xml_match_nodes(",^cc,",$xml,$conditions);
 	if ($n==1){
@@ -93,76 +112,20 @@ function xml2tab_conditions($xml){
 	return $tableau;
 }
 
-function xml2tab_infos($xml, $code_meteo){
+function xml2infos($xml, $lieu){
 	$tableau = array();
-	$regexp = 'loc id=\"'.$code_meteo.'\"';
+	$regexp = 'loc id=\"'.$lieu.'\"';
 	$n = spip_xml_match_nodes(",^$regexp,",$xml,$infos);
 	if ($n==1){
-		$infos = reset($infos['loc id="'.$code_meteo.'"']);
+		$infos = reset($infos['loc id="'.$lieu.'"']);
 		// recuperer la date de debut des conditions
-		$tableau['code_meteo'] = $code_meteo;
+		$tableau['code_meteo'] = $lieu;
 		$tableau['ville'] = $infos['dnam'][0];
 		$tableau['longitude'] = floatval($infos['lon'][0]);
 		$tableau['latitude'] = floatval($infos['lat'][0]);
 		$tableau['zone'] = intval($infos['zone'][0]);
 	}
 	return $tableau;
-}
-
-/**
- * charger le fichier des infos meteos correspondant au code
- * si le fichier analyse est trop vieux ou absent, on charge le xml et on l'analyse
- * puis on stocke les infos apres analyse
- *
- * @param string $code_meteo
- * @return string
- * @author Cedric Morin
- */
-function charger_meteo($code_meteo, $mode='previsions'){
-	$code_meteo = strtoupper($code_meteo);
-	$dir = sous_repertoire(_DIR_CACHE,"rainette");
-	$dir = sous_repertoire($dir,substr(md5($code_meteo),0,1));
-	$f = $dir . $code_meteo . "_".$mode . ".txt";
-
-	if ($mode == 'infos') {
-		// Traitement du fichier d'infos
-		if (!file_exists($f)) {
-			$flux = "http://xml.weather.com/weather/local/".$code_meteo."?unit="._RAINETTE_SYSTEME_MESURE;
-			include_spip('inc/xml');
-			$xml = spip_xml_load($flux);
-			$tableau = xml2tab_infos($xml, $code_meteo);
-			ecrire_fichier($f, serialize($tableau));
-		}
-	}
-	else {
-		// Traitement du fichier de donnees requis
-		$reload_time = ($mode == 'previsions') ? _RAINETTE_RELOAD_TIME_PREVISIONS : _RAINETTE_RELOAD_TIME_CONDITIONS;
-		if (!file_exists($f)
-		  || !filemtime($f)
-		  || (time()-filemtime($f)>$reload_time)) {
-			$flux = "http://xml.weather.com/weather/local/".$code_meteo."?unit="._RAINETTE_SYSTEME_MESURE;
-			$flux .= ($mode == 'previsions') ? "&dayf="._RAINETTE_JOURS_PREVISION : "&cc=*";
-			include_spip('inc/xml');
-			$xml = spip_xml_load($flux);
-			$tableau = ($mode == 'previsions') ? xml2tab_previsions($xml) : xml2tab_conditions($xml);
-			ecrire_fichier($f, serialize($tableau));
-		}
-	}
-	return $f;
-}
-
-function charger_infos($code_meteo='', $type_infos=''){
-	if (!$code_meteo) return '';
-	$nom_fichier = charger_meteo($code_meteo, 'infos');
-	lire_fichier($nom_fichier,$tableau);
-	if (!$type_infos)
-		return $tableau;
-	else {
-		$tableau = unserialize($tableau);
-		$info = $tableau[strtolower($type_infos)];
-		if (!$info) $info = ucfirst($type_infos) . "(" . $code_meteo . ")";
-		return $info;
-	}
 }
 
 ?>

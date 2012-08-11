@@ -4,7 +4,6 @@
 	- avec le sous-modele #ENV{sou_modele}
 	- en utilisant le service #ENV{service}
  -->]
-	[(#ENV**|unserialize|foreach)]
 [(#ENV{code}|rainette_coasse_conditions{
 				#ENV{sous_modele,conditions_tempsreel},
 				#ENV{service, weather}})]
