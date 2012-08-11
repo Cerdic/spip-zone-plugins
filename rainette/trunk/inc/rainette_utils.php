@@ -72,9 +72,9 @@ function charger_meteo($lieu, $mode='previsions', $service='weather') {
 	return $f;
 }
 
-function charger_infos($lieu='', $type_infos='') {
+function charger_infos($lieu='', $type_infos='', $service='weather') {
 	if (!$lieu) return '';
-	$nom_fichier = charger_meteo($lieu, 'infos');
+	$nom_fichier = charger_meteo($lieu, 'infos', $service);
 	lire_fichier($nom_fichier,$tableau);
 	if (!$type_infos)
 		return $tableau;
