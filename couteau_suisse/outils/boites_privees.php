@@ -19,6 +19,15 @@ if(!defined('_SPIP19300')) {
 	} }
 }
 
+function boites_privees_installe($flux){
+	if(defined('boites_privees_TRI_AUTEURS')) {
+		include_spip('base/abstract_sql');
+		// verifier que le champ 'ordre' est bien present, sinon on le cree
+		if(!sql_count(spip_query("SHOW COLUMNS FROM spip_auteurs_liens LIKE 'ordre'")))
+			spip_query("ALTER TABLE spip_auteurs_liens ADD ordre INT NOT NULL");
+	}
+}
+
 function boites_privees_affiche_gauche($flux){
 	$exec = &$flux['args']['exec'];
 	if(defined('boites_privees_TRI_AUTEURS') && ($exec=='article' || $exec=='articles')) {
@@ -95,13 +104,12 @@ function boites_privees_pre_boucle($flux) {
 	return $flux;
 }
 
+// function listant les auteurs d'un objet, tries suivant le champ 'ordre'
 function sqlfield_auteurs_objet($id_objet, $type_objet, $alias, $serveur) {
 	static $res = array();
 	if(!isset($r[$i = "$id_objet,$type_objet,$serveur"])) {
-		$t = sql_allfetsel('*','spip_auteurs_liens', "objet=$type_objet", '','','','',$serveur);
-		// hack qui conserve l'ordre de la table malgre les cles primaires
-		$r = array(); foreach($t as $e) if($e['id_objet'] == $id_objet) $r[] = $e["id_auteur"];
-		$r[$i] = count($r)?'FIELD('.$alias.'.id_auteur,'.join($r, ',').')':''; 
+		$t = sql_allfetsel('id_auteur','spip_auteurs_liens', "(objet=$type_objet) AND (id_objet = $id_objet)", '','ordre','','',$serveur);
+		$r[$i] = count($t)>1?'FIELD('.$alias.'.id_auteur,'.join(array_map('reset', $t), ',').')':'';
 	}
 	return $r[$i];
 }

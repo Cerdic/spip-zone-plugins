@@ -129,18 +129,7 @@ function cs_champ_sql($id, $champ='texte', $objet='article') {
 	return '';
 }
 
-// fonctions du grenier a remplacer par CVT sous SPIP 3.0
-function AjaxCompat() { return defined('_SPIP30000')?"<script type=\"text/javascript\"><!--
-function AjaxSqueeze2(trig, id, callback, event) {
-	var target = jQuery('#'+id);
-	// position du demandeur dans le DOM (le donner direct serait mieux)
-	if (!target.size()) return true;
-	return !AjaxSqueezeNode(trig, target, callback, event);
-}
-function AjaxNamedSubmit2(input) {
-	jQuery('<input type=\"hidden\" />').attr('name', input.name).attr('value', input.value).insertAfter(input);
-	return true;
-}//--></script>":'';
-}
+// recaler un contenu de fond. Exemple : #FILTRE{cs_recaler}
+function cs_impossible($chaine='') { return _T('avis_operation_impossible'); }
 
 ?>

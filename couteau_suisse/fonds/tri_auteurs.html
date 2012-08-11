@@ -1,6 +1,7 @@
 #CACHE{0}
 [(#REM)
-	champs disponibles : id_article
+	fond utilisable sous SPIP v2.x.x maxi
+	champ disponible : id_article
 	il faut 2 auteurs minimum
 ]
 <BOUCLE_aut0(AUTEURS){id_article}{0,1}{doublons}> </BOUCLE_aut0>
@@ -22,7 +23,6 @@
 </table>
 <input type="hidden" name="bp_article" value="#ID_ARTICLE" />
 <input type="hidden" name="bp_auteur" value="" />
-[(#REM|AjaxCompat)]
 
 </BOUCLE_art>
 </B_aut1>
