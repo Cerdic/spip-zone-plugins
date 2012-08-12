@@ -112,8 +112,8 @@ function tri_auteurs_sqlfield($id_objet, $type_objet, $alias, $serveur) {
 	static $res = array();
 	if(!isset($r[$i = "$id_objet,$type_objet,$serveur"])) {
 		$t = defined('_SPIP30000')
-			?sql_allfetsel('id_auteur','spip_auteurs_liens', "(objet='$type_objet') AND (id_objet = $id_objet)", '','ordre','','',$serveur)
-			:sql_allfetsel('id_auteur','spip_auteurs_articles', "id_article = $id_objet", '','ordre','','',$serveur);
+			?sql_allfetsel('id_auteur','spip_auteurs_liens', "objet=$type_objet AND id_objet=$id_objet", '','ordre','','',$serveur)
+			:sql_allfetsel('id_auteur','spip_auteurs_articles', "id_article=$id_objet", '','ordre','','',$serveur);
 		$r[$i] = count($t)>1?'FIELD('.$alias.'.id_auteur,'.join(array_map('reset', $t), ',').')':'';
 	}
 	return $r[$i];
