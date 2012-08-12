@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function tooltip_insert_head_css($flux) {
-	$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('css/tooltip.css').'" media="all" />'."\n";
+	$flux .= '<link rel="stylesheet" type="text/css" href="'.direction_css(find_in_path('css/tooltip.css')).'" media="all" />'."\n";
 	return $flux;
 }
 
