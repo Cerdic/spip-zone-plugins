@@ -24,7 +24,7 @@ function mesfavoris_insert_head_css($flux){
 
 	if (!$config OR !$css=find_in_path("mesfavoris-$config.css"))
 		$css = find_in_path("mesfavoris-32.css");
-	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='$css' />\n";
+	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='".direction_css($css)."' />\n";
 	return $flux;
 }
 
