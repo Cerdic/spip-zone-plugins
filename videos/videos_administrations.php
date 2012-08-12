@@ -46,4 +46,13 @@ function videos_upgrade($nom_meta_base_version,$version_cible){
 	$desc = $trouver_table('spip_types_documents');
 	if(array_key_exists('media',$desc['field'])) sql_updateq('spip_types_documents',array('media'=>'video'),"extension REGEXP '^dist_'");
 }
+
+function videos_vider_tables($nom_meta_base_version) {
+	sql_delete("spip_types_documents", "extension='dist_daily'");
+	sql_delete("spip_types_documents", "extension='dist_vimeo'");
+	sql_delete("spip_types_documents", "extension='dist_youtu'");
+	sql_delete("spip_types_documents", "extension='dist_cubox'");
+
+	effacer_meta($nom_meta_base_version);
+}
 ?>
