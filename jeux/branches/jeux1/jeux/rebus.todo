@@ -1,0 +1,74 @@
+<?php
+
+# le code de ce fichier php reste encore à ecrire...
+
+#---------------------------------------------------#
+#  Plugin  : jeux                                   #
+#  Auteur  : Patrice Vanneufville, 2006             #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
+#  Licence : GPL                                    #
+#--------------------------------------------------------------------------#
+#  Documentation : http://www.spip-contrib.net/Des-jeux-dans-vos-articles  #
+#--------------------------------------------------------------------------#
+/*
+
+Insere un rebus dans vos articles !
+-----------------------------------------------------
+
+separateurs obligatoires : [rebus], [solution]
+separateurs optionnels   : [titre], [texte]
+paramètres de configurations par defaut :
+	solution=oui	// Afficher la solution ?
+
+Exemple de syntaxe dans l'article :
+-----------------------------------
+
+<jeux>
+	[rebus]
+	A.1.2.C.4.
+	[solution]
+	à un de ces quatre !
+
+	[rebus]
+	<img4>
+	[solution]
+	devinez !
+</jeux>
+
+*/
+// fonctions d'affichage
+function rebus_titre($texte) {
+ return $texte?"<p class=\"jeux_titre rebus_titre\">$texte</p>":'';
+}
+function rebus_rebus($texte) {
+ return $texte?"<p class=\"jeux_question rebus_rebus\">$texte</p>":'';
+}
+function rebus_reponse($texte, $id) {
+ if (!jeux_config('reponse')) return '';
+ include_spip('inc/filtrer');
+ $image = image_typo($texte, 'taille=10');
+ $image = aligner_droite(filtrer('image_flip_vertical', filtrer('image_flip_horizontal', $image)));
+ $texte = jeux_block_invisible($id, _T('jeux:reponse'), $image);
+ return $texte?"<span class=\"rebus_reponse\">$texte</span>":'';
+}
+
+// fonction principale 
+function jeux_rebus($texte, $indexJeux) {
+  $html = false;
+  jeux_block_init();
+  
+  // parcourir tous les #SEPARATEURS
+  $tableau = jeux_split_texte('rebus', $texte);
+  jeux_config_init("
+		solution=oui	// Afficher de la reponse ?
+  ", false);
+  foreach($tableau as $i => $valeur) if ($i & 1) {
+	 if ($valeur==_JEUX_TITRE) $html .= rebus_titre($tableau[$i+1]);
+	  elseif ($valeur==_JEUX_REBUS) $html .= rebus_rebus($tableau[$i+1]);
+	  elseif ($valeur==_JEUX_SOLUTION) $html .= rebus_reponse($tableau[$i+1], "rebus_{$indexJeux}_$i");
+	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
+  }
+  return $html;
+}
+
+?>

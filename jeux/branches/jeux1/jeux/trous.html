@@ -1,0 +1,24 @@
+[(#REM)
+
+	Affiche le score d'un jeu a l'issue d'une correction.
+	Champs disponibles : 
+		id_jeu (a la correction)
+		correction (vrai/faux)
+		titre (titre public)
+		texte (pret a l'emploi)
+		indices (bloc div)
+		fond_score (resultat de 'fonds/jeu_score.html')
+		
+		bizarre : #SELF ne prend pas en compte id_jeu en backoffice... d'ou : #REM|nettoyer_uri
+
+]<div class="jeux_cadre jeux_trous">
+	@@FORM_JEUX_DEBUT@@
+	[<div class="jeux_titre">(#ENV*{titre})<hr /></div>]
+	#ENV*{texte}
+	[(#REM|sinon{'jeux:indices'}|_T|jeux_block_depliable{#ENV*{indices}})]
+	[(#ENV**{correction}|?{'',' '})<div style="text-align:center;"><input type="submit" value="<:jeux:corriger:>" class="jeux_bouton"></div>]
+	[(#ENV**{correction}|?{' ',''})
+		#ENV*{fond_score}<div class="jeux_bouton_reset">&#091; <a href="[(#REM|nettoyer_uri|parametre_url{var_mode,recalcul})]"><:jeux:recommencer:></a> &#093;</div>
+	]
+	@@FORM_JEUX_FIN@@
+</div>

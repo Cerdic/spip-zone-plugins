@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut) - ] <:jeux:resultats:></title>
+[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_jeu">
+<div id="page">
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+	<h1 class="entry-title"><:jeux:resultats:></h1>
+   
+   	<INCLURE{fond=modeles/resultats_tableau}{ajax}{pagination=#ENV{pagination,10}}{debut_jeux}>
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div>
+</body></html>

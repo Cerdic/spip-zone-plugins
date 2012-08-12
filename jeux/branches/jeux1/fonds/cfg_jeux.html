@@ -1,0 +1,29 @@
+<!-- titre=<:jeux:jeux:> -->
+<!-- descriptif=
+
+[(#REM|sinon{<:jeux:liste_jeux:>}|icone_horizontale{#URL_ECRIRE{jeux_tous},#CHEMIN{img/jeux-tous.png},'',0})]
+<BOUCLE_tous_resultats(JEUX_RESULTATS){0,1}>
+[(#AUTORISER{gererresultats}) [(#REM|sinon{<:jeux:gerer_resultats:>}|icone_horizontale{#URL_ECRIRE{jeux_gerer_resultats},#CHEMIN{img/jeu-laurier.png},'',0})]]
+</BOUCLE_tous_resultats>
+[(#REM|sinon{<:jeux:doc_jeux:>}|icone_horizontale{http://www.spip-contrib.net/Des-jeux-dans-vos-articles,#CHEMIN{img/jeu-24.png},'',0})]
+[(#REM|sinon{<:jeux:doc_scores:>}|icone_horizontale{http://www.spip-contrib.net/Des-jeux-avec-des-scores,#CHEMIN{img/jeu-24.png},'',0})]
+
+-->
+
+[(#REM) icone=img/jeu-cfg.png]
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+<h2 style="text-align:center;"><:jeux:configuration_generale:></h2><hr/>
+<label><:jeux:type_resultat:><br/>
+<select name="type_resultat"> 
+    <option value="dernier"[ selected="(#CONFIG{jeux/type_resultat}|=={dernier}|?{selected})"]><:jeux:resultat2_dernier:></option>
+	<option value="premier"[ selected="(#CONFIG{jeux/type_resultat}|=={premier}|?{selected})"]><:jeux:resultat2_premier:></option>
+	<option value="meilleur"[ selected="(#CONFIG{jeux/type_resultat}|=={meilleur}|?{selected})"]><:jeux:resultat2_meilleur:></option>
+	<option value="meilleurs"[ selected="(#CONFIG{jeux/type_resultat}|=={meilleurs}|?{selected})"]><:jeux:resultat2_meilleurs:></option>
+	<option value="tous"[ selected="(#CONFIG{jeux/type_resultat}|=={tous}|?{selected})"]><:jeux:resultat2_tous:></option>
+	<option value="aucun"[ selected="(#CONFIG{jeux/type_resultat}|=={aucun}|?{selected})"]><:jeux:resultat2_aucun:></option>
+</select>
+
+</label>
+<p align="right"><input class="fondo"  type="submit" name="_cfg_ok" value="<:valider:>" /></p>
+</form>
