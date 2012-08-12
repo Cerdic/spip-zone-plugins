@@ -1,0 +1,30 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	<h3 class="titrem"><:rainette:titre_form_configurer_weather:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<p><:rainette:info_configurer_weather:></p>
+		<ul>
+			<li class="editer editer_unite obligatoire[ (#ENV**{erreurs}|table_valeur{unite}|oui)erreur]">
+				<label><:rainette:label_systeme_unite:></label>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{unite})</span>]
+				<div class="choix">
+					<input type="radio" name="unite" class="radio" id="unite_metrique" value="m"[(#ENV{unite, m}|=={m}|oui)checked="checked"] />
+					<label for="unite_metrique"><:rainette:label_unite_metrique:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="unite" class="radio" id="unite_usimperial" value="s"[(#ENV{unite, m}|=={s}|oui)checked="checked"] />
+					<label for="unite_usimperial"><:rainette:label_unite_usimperial:></label>
+				</div>
+			</li>
+		</ul>
+
+		<input type="hidden" name="_meta_casier" value="rainette/weather" />
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
+</div>

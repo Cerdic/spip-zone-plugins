@@ -1,4 +1,8 @@
 <?php
+
+define ('_RAINETTE_RELOAD_TIME_PREVISIONS',2*3600); // pas la peine de recharger un flux de moins de 2h
+define ('_RAINETTE_RELOAD_TIME_CONDITIONS',1800); // pas la peine de recharger un flux de moins de 30mn
+
 function code2icone($icon) {
 	$r = "na";
 	if (($icon >= 1) && ($icon < 48)) $r = strval($icon);
@@ -77,7 +81,7 @@ function charger_meteo($lieu, $mode='previsions', $service='weather') {
 			$flux = $acquerir($url);
 
 			$convertir = ($mode == 'previsions') ? "${service}_xml2previsions" : "${service}_xml2conditions";
-			$tableau = $convertir($xml);
+			$tableau = $convertir($flux);
 			ecrire_fichier($f, serialize($tableau));
 		}
 	}
@@ -140,6 +144,38 @@ function simplexml2array($obj) {
 		'attributes'=>$attributes,
 		'children'=>$children
 	);
+}
+
+function kilometre2mile($km) {
+	return 0.6215*$km;
+}
+
+function celsius2farenheit($c) {
+	return $c*9/5 + 32;
+}
+
+function millimetre2inch($mm) {
+	return $mm/25.4;
+}
+
+function millibar2inch($mbar) {
+	return $mbar/33.86;
+}
+
+function temperature2ressenti($temperature, $vitesse_vent) {
+
+	// La temperature ressentie n'est calculee que pour des temperatures ambiantes comprises entre
+	// -50°C et +10°C
+	if (($temperature >= -50) AND ($temperature <= 10)) {
+		if ($vitesse_vent > 4.8)
+			$ressenti = 13.12 + 0.6215*$temperature + (0.3965*$temperature - 11.37)*pow($vitesse_vent, 0.16);
+		else
+			$ressenti = $temperature + 0.2*(0.1345*$temperature - 1.59)*$vitesse_vent;
+	}
+	else
+		$ressenti = $temperature;
+
+	return $ressenti;
 }
 
 ?>

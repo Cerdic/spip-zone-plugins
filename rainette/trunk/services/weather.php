@@ -1,7 +1,7 @@
 <?php
+
 define('_RAINETTE_WEATHER_URL_BASE', 'http://xml.weather.com/weather/local/');
 define('_RAINETTE_WEATHER_JOURS_PREVISION', 10);
-define('_RAINETTE_WEATHER_SYSTEME_MESURE','m');
 
 function weather_service2cache($lieu, $mode) {
 
@@ -14,7 +14,10 @@ function weather_service2cache($lieu, $mode) {
 
 function weather_service2url($lieu, $mode) {
 
-	$url = _RAINETTE_WEATHER_URL_BASE . strtoupper($lieu) . '?unit=' . _RAINETTE_WEATHER_SYSTEME_MESURE;
+	include_spip('inc/config');
+	$unite = lire_config('rainette/wwo/unite');
+
+	$url = _RAINETTE_WEATHER_URL_BASE . strtoupper($lieu) . '?unit=' . $unite;
 	if ($mode != 'infos') {
 		$url .= ($mode == 'previsions') ? '&dayf=' . _RAINETTE_WEATHER_JOURS_PREVISION : '&cc=*';
 	}

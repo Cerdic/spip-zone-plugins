@@ -1,5 +1,5 @@
 <?php
-// free.worldweatheronline.com/feed/weather.ashx?key=30e3b46523060112120708&q=Paris,France&cc=no&fx=yes&format=xml&num_of_days=5&extra=localObsTime&includeLocation=yes
+
 define('_RAINETTE_WWO_URL_BASE', 'http://free.worldweatheronline.com/feed/weather.ashx');
 define('_RAINETTE_WWO_JOURS_PREVISIONS', 5);
 
@@ -14,8 +14,11 @@ function wwo_service2cache($lieu, $mode) {
 
 function wwo_service2url($lieu, $mode) {
 
+	include_spip('inc/config');
+	$cle = lire_config('rainette/wwo/inscription');
+
 	$url = _RAINETTE_WWO_URL_BASE
-		.  '?key=' . '30e3b46523060112120708'
+		.  '?key=' . $cle
 		.  '&format=xml&extra=localObsTime'
 		.  '&q=' . str_replace(' ', '', trim($lieu));
 	if ($mode == 'infos') {
@@ -102,30 +105,54 @@ function wwo_xml2previsions($xml){
 
 function wwo_xml2conditions($xml){
 	$tableau = array();
-	$n = spip_xml_match_nodes(",^cc,",$xml,$conditions);
-	if ($n==1){
-		$conditions = reset($conditions['cc']);
-		// recuperer la date de derniere mise a jour des conditions
-		if ($conditions) {
-			$date_maj = $conditions['lsup'][0];
-			$date_maj = strtotime(preg_replace(',\slocal\s*time\s*,ims','',$date_maj));
-			$tableau['derniere_maj'] = date('Y-m-d H:i:s',$date_maj);
-			// station d'observation (peut etre differente de la ville)
-			$tableau['station'] = $conditions['obst'][0];
-			// Liste des conditions meteo
-			$tableau['temperature_reelle'] = intval($conditions['tmp'][0]);
-			$tableau['temperature_ressentie'] = intval($conditions['flik'][0]);
-			$tableau['code_icone'] = intval($conditions['icon'][0]);
-			$tableau['pression'] = intval($conditions['bar'][0]['r'][0]);
-			$tableau['tendance_pression'] = $conditions['bar'][0]['d'][0];
-			$tableau['vitesse_vent'] = intval($conditions['wind'][0]['s'][0]);
-			$tableau['angle_vent'] = intval($conditions['wind'][0]['d'][0]);
-			$tableau['direction_vent'] = $conditions['wind'][0]['t'][0];
-			$tableau['humidite'] = intval($conditions['hmid'][0]);
-			$tableau['point_rosee'] = intval($conditions['dewp'][0]);
-			$tableau['visibilite'] = intval($conditions['vis'][0]);
+
+	// On stocke les informations disponibles dans un tableau standard
+	if (isset($xml['children']['current_condition'][0]['children'])) {
+		$conditions = $xml['children']['current_condition'][0]['children'];
+
+		// Date d'observation
+		$date_maj = (isset($conditions['localobsdatetime'])) ? ', ' . $conditions['localobsdatetime'][0]['text'] : '';
+		$tableau['derniere_maj'] = date('Y-m-d H:i:s', strtotime($date_maj));
+		// Station d'observation
+		$tableau['station'] = '';
+
+		// Liste des conditions meteo extraite dans le systeme metrique
+		$tableau['vitesse_vent'] = (isset($conditions['windspeedkmph'])) ? intval($conditions['windspeedkmph'][0]['text']) : '';
+		$tableau['angle_vent'] = (isset($conditions['winddirdegree'])) ? intval($conditions['winddirdegree'][0]['text']) : '';
+		$tableau['direction_vent'] = (isset($conditions['winddir16point'])) ? $conditions['winddir16point'][0]['text'] : '';
+
+		$tableau['temperature_reelle'] = (isset($conditions['temp_c'])) ? intval($conditions['temp_c'][0]['text']) : '';
+		$tableau['temperature_ressentie'] = temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']);
+
+		$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity'][0]['text']) : '';
+		$tableau['point_rosee'] = '';
+
+		$tableau['pression'] = (isset($conditions['pressure'])) ? intval($conditions['pressure'][0]['text']) : '';
+		$tableau['tendance_pression'] = '';
+
+		$tableau['visibilite'] = (isset($conditions['visibility'])) ? intval($conditions['visibility'][0]['text']) : '';
+
+		$tableau['code_icone'] = (isset($conditions['weathercode'])) ? intval($conditions['weathercode'][0]['text']) : '';
+		$tableau['url_icone'] = (isset($conditions['weathericonurl'])) ? $conditions['weathericonurl'][0]['text'] : '';
+		$tableau['desc_icone'] = (isset($conditions['weatherdesc'])) ? $conditions['weatherdesc'][0]['text'] : '';
+
+		// On convertit les informations exprimees en systeme metrique dans le systeme US si besoin
+		include_spip('inc/config');
+		$unite = lire_config('rainette/wwo/unite');
+		if ($unite == 's') {
+			include_spip('inc/rainette_utils');
+			$tableau['temperature_reelle'] = (isset($conditions['temp_f']))
+				? intval($conditions['temp_f'][0]['text'])
+				: celsius2farenheit($tableau['temperature_reelle']);
+			$tableau['temperature_ressentie'] = celsius2farenheit($tableau['temperature_ressentie']);
+			$tableau['vitesse_vent'] = (isset($conditions['windspeedmiles']))
+				? intval($conditions['windspeedmiles'][0]['text'])
+				: kilometre2mile($tableau['vitesse_vent']);
+			$tableau['visibilite'] = kilometre2mile($tableau['visibilite']);
+			$tableau['pression'] = millibar2inch($tableau['pression']);
 		}
 	}
+
 	return $tableau;
 }
 
@@ -137,18 +164,18 @@ function wwo_xml2infos($xml, $lieu){
 
 	// On stocke les informations disponibles dans un tableau standard
 	if (isset($xml['children']['nearest_area'][0]['children'])) {
-		$area = $xml['children']['nearest_area'][0]['children'];
+		$infos = $xml['children']['nearest_area'][0]['children'];
 
-		if (isset($area['areaname'])) {
-			$tableau['ville'] = $area['areaname'][0]['text'];
-			$tableau['ville'] .= (isset($area['country'])) ? ', ' . $area['country'][0]['text'] : '';
+		if (isset($infos['areaname'])) {
+			$tableau['ville'] = $infos['areaname'][0]['text'];
+			$tableau['ville'] .= (isset($infos['country'])) ? ', ' . $infos['country'][0]['text'] : '';
 		}
-		$tableau['region'] = (isset($area['region'])) ? $area['region'][0]['text'] : '';
+		$tableau['region'] = (isset($infos['region'])) ? $infos['region'][0]['text'] : '';
 
-		$tableau['longitude'] = (isset($area['longitude'])) ? floatval($area['longitude'][0]['text']) : '';
-		$tableau['latitude'] = (isset($area['latitude'])) ? floatval($area['latitude'][0]['text']) : '';
+		$tableau['longitude'] = (isset($infos['longitude'])) ? floatval($infos['longitude'][0]['text']) : '';
+		$tableau['latitude'] = (isset($infos['latitude'])) ? floatval($infos['latitude'][0]['text']) : '';
 
-		$tableau['population'] = (isset($area['population'])) ? intval($area['population'][0]['text']) : '';
+		$tableau['population'] = (isset($infos['population'])) ? intval($infos['population'][0]['text']) : '';
 		$tableau['zone'] = '';
 	}
 

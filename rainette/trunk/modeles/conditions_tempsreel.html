@@ -14,7 +14,7 @@
 		</div>
 		<div class="maj">
 			<:rainette:derniere_maj|ucfirst:>&nbsp;:[&nbsp;(#ENV{derniere_maj}|affdate_heure)]<br/>
-			<:rainette:station_observation|ucfirst:>&nbsp;:[&nbsp;(#ENV{station})]
+			[<:rainette:station_observation|ucfirst:>&nbsp;:&nbsp;(#ENV{station})]
 		</div>
 	</div>
 	
@@ -27,8 +27,8 @@
 		<span><:rainette:pression|ucfirst:></span><br/>
 		[(#ENV{pression}|rainette_afficher_unite{pression})]
 		[ (#ENV{tendance_pression}|rainette_afficher_tendance{icone})]<br/><br/>
-		<span><:rainette:point_rosee|ucfirst:></span><br/>
-		[(#ENV{point_rosee}|rainette_afficher_unite{temperature})]<br/><br/>
+		[<span><:rainette:point_rosee|ucfirst:></span><br/>
+		(#ENV{point_rosee}|rainette_afficher_unite{temperature})<br/><br/>]
 		<span><:rainette:visibilite|ucfirst:></span><br/>
 		[(#ENV{visibilite}|rainette_afficher_unite{distance})]
 	</div>
