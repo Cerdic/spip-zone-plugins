@@ -61,8 +61,8 @@
 		<li>
 			<div class="graph" title="<:tradlang:info_module_traduit_pc{pc=#GET{percent_ok}}:>">
 				<div class="ok"[ style="width: (#GET{percent_ok})px"]> </div>
-				<div class="modif" style="[left: (#GET{percent_ok})px;][width: (#GET{percent_modif})px]"></div>
-				<div class="new" style="left: [(#GET{percent_ok}|plus{#GET{percent_modif}})]px; width: #GET{percent_new}px"> </div>
+				<div class="modif" style="[#LANG_LEFT: (#GET{percent_ok})px;][width: (#GET{percent_modif})px]"></div>
+				<div class="new" style="#LANG_LEFT: [(#GET{percent_ok}|plus{#GET{percent_modif}})]px; width: #GET{percent_new}px"> </div>
 			</div>
 		</li>
 	</ul>]
