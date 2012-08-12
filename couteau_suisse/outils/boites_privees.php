@@ -21,12 +21,7 @@ if(!defined('_SPIP19300')) {
 
 // cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
 function boites_privees_installe_dist(){
-	if(defined('_SPIP30000') && defined('boites_privees_TRI_AUTEURS')) {
-		include_spip('base/abstract_sql');
-		// verifier que le champ 'ordre' est bien present, sinon on le cree
-		if(!sql_count(spip_query("SHOW COLUMNS FROM spip_auteurs_liens LIKE 'ordre'")))
-			spip_query("ALTER TABLE spip_auteurs_liens ADD ordre INT NOT NULL");
-	}
+	tri_auteurs_verifie_table(); // OPTIM : ne le faire qu'a l'activation de la lame ou de la boite ?
 	return false;
 }
 
@@ -96,24 +91,67 @@ function cs_pipeline_boite_privee(&$flux, $endroit) {
 	return $flux;
 }
 
-// pipeline utilise sous SPIP>=3, histoire de respecter l'ordre de stockage des auteurs d'objets
+// pipeline utilise sous SPIP>=2.1, histoire de respecter l'ordre de stockage des auteurs d'objets
 function boites_privees_pre_boucle($flux) {
-	if(defined('boites_privees_TRI_AUTEURS') && $flux->type_requete=='auteurs' 
-			&& count($L1 = $flux->join) && count($w = &$flux->where)>1 && $w[0][0]=="'='" && $w[1][0]=="'='") {
-		$L1 = array_keys($L1); // alias de la jointure
-		$flux->order[] = 'sqlfield_auteurs_objet('.$w[0][2].','.$w[1][2].','._q($L1[0]).','._q($flux->serveur).')';
-	}
+	if(!defined('boites_privees_TRI_AUTEURS') || $flux->type_requete!='auteurs' 
+			|| !count($L1 = $flux->join) || !count($w = &$flux->where)>1) return $flux;
+	// alias de la jointure
+	$L1 = array_keys($L1);
+	if(defined('_SPIP30000')) { 
+		if($w[0][0]=="'='" && $w[1][0]=="'='")
+			// SPIP v3 : 2 liens (sur objet et id_objet)
+			$flux->order[] = 'tri_auteurs_sqlfield('.$w[0][2].','.$w[1][2].','._q($L1[0]).','._q($flux->serveur).')';
+	} elseif($w[0][0]=="'='")
+		// SPIP v2.1 : 1 lien (sur id_article)
+		$flux->order[] = 'tri_auteurs_sqlfield('.$w[0][2].',\'article\','._q($L1[0]).','._q($flux->serveur).')';
 	return $flux;
 }
 
 // function listant les auteurs d'un objet, tries suivant le champ 'ordre'
-function sqlfield_auteurs_objet($id_objet, $type_objet, $alias, $serveur) {
+function tri_auteurs_sqlfield($id_objet, $type_objet, $alias, $serveur) {
 	static $res = array();
 	if(!isset($r[$i = "$id_objet,$type_objet,$serveur"])) {
-		$t = sql_allfetsel('id_auteur','spip_auteurs_liens', "(objet=$type_objet) AND (id_objet = $id_objet)", '','ordre','','',$serveur);
+		$t = defined('_SPIP30000')
+			?sql_allfetsel('id_auteur','spip_auteurs_liens', "(objet='$type_objet') AND (id_objet = $id_objet)", '','ordre','','',$serveur)
+			:sql_allfetsel('id_auteur','spip_auteurs_articles', "id_article = $id_objet", '','ordre','','',$serveur);
 		$r[$i] = count($t)>1?'FIELD('.$alias.'.id_auteur,'.join(array_map('reset', $t), ',').')':'';
 	}
 	return $r[$i];
+}
+
+// verifier que le champ 'ordre' est bien present dans la table des liens, sinon on le cree
+// cette fonction ($complet=true) permet egalement une mise a jour en cas de creation du champ 'ordre' sur un site existant
+function tri_auteurs_verifie_table($complet=false) {
+	global $metas_outils; 
+	if(!defined('_SPIP20100') || //!defined('boites_privees_TRI_AUTEURS')) return;
+		!isset($metas_outils['boites_privees']['actif']) || !$metas_outils['boites_privees']['actif']) return;
+
+	include_spip('base/abstract_sql');
+	$table = defined('_SPIP30000')?'spip_auteurs_liens':'spip_auteurs_articles';
+	if(!sql_count(spip_query("SHOW COLUMNS FROM $table LIKE 'ordre'")))
+		spip_query("ALTER TABLE $table ADD ordre INT NOT NULL");
+	if($complet) {
+		// mise a jour du champ 'ordre' pour les articles a plusieurs auteurs et n'ayant jamais ete tries grace a ce champ
+		if(defined('_SPIP30000')) {
+			$q1 = sql_select('id_objet, COUNT(*) as nb', $table, "objet='article' AND ordre=0", 'id_objet', '','', "nb>1");
+			while($r1 = sql_fetch($q1)) {
+				$q2 = sql_select('id_auteur', $table, "objet='article' AND ordre=0 AND id_objet=".$r1['id_objet']);
+				$j = $r1['nb'] + 999; $i = 0;
+				while($r2 = sql_fetch($q2))
+					sql_update($table, array('ordre'=>$i++ - $j), 
+						"objet='article' AND ordre=0 AND id_objet=$r1[id_objet] AND id_auteur=".$r2['id_auteur']);
+			}
+		} else {
+			$q1 = sql_select('id_article, COUNT(*) as nb', $table, "ordre=0", 'id_article', '','', "nb>1");
+			while($r1 = sql_fetch($q1)) {
+				$q2 = sql_select('id_auteur', $table, "ordre=0 AND id_article=".$r1['id_article']);
+				$j = $r1['nb'] + 999; $i = 0;
+				while($r2 = sql_fetch($q2))
+					sql_update($table, array('ordre'=>$i++ - $j), 
+						"ordre=0 AND id_article=$r1[id_article] AND id_auteur=".$r2['id_auteur']);
+			}
+		}
+	} // $complet
 }
 
 function cs_boite_rss() {

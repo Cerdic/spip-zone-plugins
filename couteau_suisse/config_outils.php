@@ -583,7 +583,7 @@ add_outil( array(
 	'pipeline:affiche_droite' => 'boites_privees_affiche_droite',
 	'pipeline:affiche_gauche' => 'boites_privees_affiche_gauche',
 	// controle de la boucle AUTEURS afin de respecter l'ordre des auteurs stockes en base
-	'pipeline:pre_boucle' => defined('_SPIP30000')?'boites_privees_pre_boucle':'',
+	'pipeline:pre_boucle' => defined('_SPIP20100')?'boites_privees_pre_boucle':'',
 	'code:fonctions' => 'include_spip("outils/boites_privees");',
 	// Pour la constante _CS_RSS_SOURCE
 #	'pipelinecode:pre_description_outil' => 'if($id=="boites_privees") include_spip("cout_define");',

@@ -34,7 +34,9 @@ function formulaires_tri_auteurs_traiter_dist($id_objet=0, $objet='article'){
 		$monter = _request('bp_auteur')>0;
 		include_spip('base/abstract_sql');
 		// liste des auteurs de l'article
-		$a = sql_allfetsel('id_auteur, ordre', 'spip_auteurs_liens', "objet='article' AND id_objet=$id_article", '', 'ordre');
+		$a = defined('_SPIP30000')
+			?sql_allfetsel('id_auteur, ordre', 'spip_auteurs_liens', "objet='article' AND id_objet=$id_article", '', 'ordre')
+			:sql_allfetsel('id_auteur, ordre', 'spip_auteurs_articles', "id_article=$id_article", '', 'ordre');
 		$c = count($a);
 		// recherche des auteurs a permuter
 		for($i=$j=0;$i<$c;$i++)
@@ -44,8 +46,9 @@ function formulaires_tri_auteurs_traiter_dist($id_objet=0, $objet='article'){
 		$tmp = $a[$i]; $a[$i] = $a[$j]; $a[$j] = $tmp;
 		// mise a jour en base 
 		// note : l'ordre est un nombre negatif, permettant aux auteurs ajoutes ulterieurement d'etre les derniers (ordre 0 par defaut)
-		for($i=0;$i<$c;$i++)
-			sql_update('spip_auteurs_liens', array('ordre'=>$i-$c), "objet='article' AND id_objet=$id_article AND id_auteur=".$a[$i]['id_auteur']);
+		for($i=0;$i<$c;$i++) defined('_SPIP30000')
+			?sql_update('spip_auteurs_liens', array('ordre'=>$i-$c), "objet='article' AND id_objet=$id_article AND id_auteur=".$a[$i]['id_auteur'])
+			:sql_update('spip_auteurs_articles', array('ordre'=>$i-$c), "id_article=$id_article AND id_auteur=".$a[$i]['id_auteur']);
 
 		include_spip('inc/invalideur');
 		suivre_invalideur("id='$objet/$id_objet'");

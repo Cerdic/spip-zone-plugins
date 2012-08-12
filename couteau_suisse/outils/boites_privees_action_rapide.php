@@ -6,10 +6,10 @@ module mon_outil_action_rapide.php inclu :
  - apres l'appel de ?exec=action_rapide&arg=boites_privees|argument
 */
 
-if(defined('_SPIP30000')) {
+if(defined('_SPIP20100')) {
 
+	// Nouveaute SPIP 2.1 : se baser sur un nouveau champ 'ordre' de la table spip_auteurs_liens
 	// Fonction qui affiche le formulaire CVT triant les auteurs d'un article : 
-	// Nouveauté SPIP 3 : se baser sur un nouveau champ 'ordre' de la table spip_auteurs_liens
 	function action_rapide_tri_auteurs($id_article=0) {
 		return cadre_depliable(find_in_path('img/couteau-24.gif'),
 			cs_div_configuration().'<b>'._T('couteau:tri_auteurs').'</b>',
@@ -71,9 +71,7 @@ if(defined('_SPIP30000')) {
 		$monter = _request('bp_auteur')>0;
 	
 		if(!defined('_SPIP19300')) include_spip('outils/boites_privees'); // pour les fonctions SQL
-		$s = defined('_SPIP30000')
-			?sql_select('id_auteur', 'spip_auteurs_liens', "objet='article' AND id_objet=$id_article")
-			:sql_select('id_auteur', 'spip_auteurs_articles', "id_article=$id_article");
+		$s = sql_select('id_auteur', 'spip_auteurs_articles', "id_article=$id_article");
 		$i=0; $j=0;
 		while ($a = sql_fetch($s)) {
 			if($a['id_auteur']==$id_auteur) { $i = $a['id_auteur']; break; }
@@ -83,16 +81,9 @@ if(defined('_SPIP30000')) {
 		if(!$monter && $i && ($a = sql_fetch($s))) $j = $a['id_auteur'];
 		spip_log("action_rapide_tri_auteurs, article $id_article : echange entre l'auteur $i et l'auteur $j");
 		if($i && $j) {
-			if(defined('_SPIP30000')) {
-				// SPIP >= 3.0
-				sql_update('spip_auteurs_liens', array('id_auteur'=>-99), "objet='article' AND id_objet=$id_article AND id_auteur=$i");
-				sql_update('spip_auteurs_liens', array('id_auteur'=>$i), "objet='article' AND id_objet=$id_article AND id_auteur=$j");
-				sql_update('spip_auteurs_liens', array('id_auteur'=>$j), "objet='article' AND id_objet=$id_article AND id_auteur=-99");
-			} else {
-				sql_update('spip_auteurs_articles', array('id_auteur'=>-99), "id_article=$id_article AND id_auteur=$i");
-				sql_update('spip_auteurs_articles', array('id_auteur'=>$i), "id_article=$id_article AND id_auteur=$j");
-				sql_update('spip_auteurs_articles', array('id_auteur'=>$j), "id_article=$id_article AND id_auteur=-99");
-			}
+			sql_update('spip_auteurs_articles', array('id_auteur'=>-99), "id_article=$id_article AND id_auteur=$i");
+			sql_update('spip_auteurs_articles', array('id_auteur'=>$i), "id_article=$id_article AND id_auteur=$j");
+			sql_update('spip_auteurs_articles', array('id_auteur'=>$j), "id_article=$id_article AND id_auteur=-99");
 		}
 		// action terminee, pret pour la redirection exec !
 		return;
