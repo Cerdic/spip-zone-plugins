@@ -13,4 +13,5 @@
 
 	<auteur>Pierre Andrews (Mortimer)</auteur>
 	<auteur>ARNO*</auteur>
+	<pipeline nom="header_prive_css" inclure="coloration_code_pipelines.php" />
 </paquet>
