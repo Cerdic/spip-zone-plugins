@@ -121,6 +121,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tendance_texte_rising' => 'en hausse',
 	'tendance_texte_steady' => 'stable',
 
+	'titre_form_configurer_weather' => 'Service Weather.com&reg;',
+	'titre_form_configurer_wwo' => 'Service World Weather Online',
+	'titre_page_configurer' => 'Configuration du plugin Rainette',
+
 	// U
 	'unite_angle_metrique' => '°',
 	'unite_angle_standard' => '°',

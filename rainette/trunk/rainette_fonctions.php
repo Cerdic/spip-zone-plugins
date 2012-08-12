@@ -108,10 +108,15 @@ function rainette_afficher_tendance($tendance_en, $methode='texte', $chemin='', 
 	return $html;
 }
 
-function rainette_afficher_unite($valeur, $type_valeur='') {
+function rainette_afficher_unite($valeur, $type_valeur='', $service='weather') {
+
+	if (!$service) $service = 'weather';
+	include_spip('inc/config');
+	$unite = lire_config("rainette/${service}/unite");
+
 	$valeur_affichee = '';
 	if ($valeur) {
-		$suffixe = (_RAINETTE_SYSTEME_MESURE == 'm') ? 'metrique' : 'standard';
+		$suffixe = ($unite == 'm') ? 'metrique' : 'standard';
 		$espace = (($type_valeur == 'temperature') ||
 				   ($type_valeur == 'pourcentage') || ($type_valeur == 'angle')) ? '' : '&nbsp;';
 		$valeur_affichee = strval($valeur).$espace._T('rainette:unite_'.$type_valeur.'_'.$suffixe);
