@@ -31,6 +31,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// H
 	'humidite' => 'humidité',
 
+	// I
+	'info_configurer_unite' => 'Choisissez le système d\'unité dans lequel seront exprimées les données météorologiques.',
+	'info_configurer_cle' => 'Ce service nécessite une clé d\'inscription pour être utilisé. Veuillez acquérir cette clé sur @url@ et la saisir ci-dessous.',
+
 	// J
 	'jour' => 'jour',
 
@@ -38,6 +42,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'latitude' => 'latitude',
 	'lever_soleil' => 'lever du soleil',
 	'longitude' => 'longitude',
+
+	'label_unite' => 'Système d\'unité',
+	'label_unite_metrique' => 'Système métrique',
+	'label_unite_standard' => 'Système US impérial',
+	'label_cle' => 'Clé d\'inscription',
 
 	// M
 	'meteo' => 'météo',

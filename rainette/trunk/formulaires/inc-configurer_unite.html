@@ -1,0 +1,13 @@
+<li class="editer editer_unite[ (#ENV**{erreurs}|table_valeur{unite}|oui)erreur]">
+	<p class="explication"><:rainette:info_configurer_unite:></p>
+	<label><:rainette:label_unite:></label>
+	[<span class='erreur'>(#ENV**{erreurs}|table_valeur{unite})</span>]
+	<div class="choix">
+		<input type="radio" name="unite" class="radio" id="unite_metrique" value="m"[(#ENV{unite, m}|=={m}|oui)checked="checked"] />
+		<label for="unite_metrique"><:rainette:label_unite_metrique:></label>
+	</div>
+	<div class="choix">
+		<input type="radio" name="unite" class="radio" id="unite_standard" value="s"[(#ENV{unite, m}|=={s}|oui)checked="checked"] />
+		<label for="unite_standard"><:rainette:label_unite_standard:></label>
+	</div>
+</li>

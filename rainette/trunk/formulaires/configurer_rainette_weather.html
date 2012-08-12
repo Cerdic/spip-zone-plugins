@@ -6,20 +6,8 @@
 
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<p><:rainette:info_configurer_weather:></p>
 		<ul>
-			<li class="editer editer_unite obligatoire[ (#ENV**{erreurs}|table_valeur{unite}|oui)erreur]">
-				<label><:rainette:label_systeme_unite:></label>
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{unite})</span>]
-				<div class="choix">
-					<input type="radio" name="unite" class="radio" id="unite_metrique" value="m"[(#ENV{unite, m}|=={m}|oui)checked="checked"] />
-					<label for="unite_metrique"><:rainette:label_unite_metrique:></label>
-				</div>
-				<div class="choix">
-					<input type="radio" name="unite" class="radio" id="unite_usimperial" value="s"[(#ENV{unite, m}|=={s}|oui)checked="checked"] />
-					<label for="unite_usimperial"><:rainette:label_unite_usimperial:></label>
-				</div>
-			</li>
+			<INCLURE{fond=formulaires/inc-configurer_unite, env} />
 		</ul>
 
 		<input type="hidden" name="_meta_casier" value="rainette/weather" />
