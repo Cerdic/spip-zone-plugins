@@ -1,4 +1,6 @@
 <?php
+// pour tester la MAJ !
+# $GLOBALS['meta']['couteau_suisse_base_version']='1.4';
 
 if(!defined('_SPIP20100')) {
 	// Versions SPIP anterieures a 2.1
@@ -109,8 +111,10 @@ if(defined('_LOG_CS')) cs_log("cout_upgrade : $nom_meta_base_version => $version
 }
 
 function cs_le_test($current_version, &$tmp, $new) {
-	if($test = version_compare($current_version, $tmp=$new, '<'))
+	if($test = version_compare($current_version, $tmp=$new, '<')) {
 		echo '<h4>',_T('couteau:titre'),' - Upgrade ',$tmp,'</h4>';
+		$GLOBALS['cs_base_update'] = 1;
+	}
 	return $test;
 }
 

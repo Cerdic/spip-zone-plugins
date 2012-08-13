@@ -34,6 +34,11 @@ add_outil( array(
 	// constante generique pour SPIP 3.0 :
 	'code:spip_options' => 'define(\'_TRAITEMENT_TYPO_SANS_NUMERO\', \'PtoBR(propre(supprimer_numero(%s), $connect, $Pile[0]))\');',
 	// pour etre compatible avec les autres outils, on provoque un changement de pivot (propre a la place de typo) :
+	/* inserer :
+		$table_des_traitements['TITRE'][]= 'PtoBR(propre(%s))';
+		$table_des_traitements['TITRE']['mots']= 'PtoBR(propre(%s))';
+		etc...
+		note : $table_des_traitements['TITRE']['forums'] est protege plus tard */
 	'traitement:TITRE:post_propre,
 	 traitement:TITRE/mots:post_propre,
 	 traitement:TITRE/forums:post_propre,

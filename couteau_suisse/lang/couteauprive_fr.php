@@ -656,7 +656,7 @@ Afin de conserver l\'accès à la puce image originale de SPIP (le petit triangl
 	// R
 	'raccourcis' => 'Raccourcis typographiques actifs du Couteau Suisse :',
 	'raccourcis_barre' => 'Les raccourcis typographiques du Couteau Suisse',
-	'rafraichir' => 'Afin de terminer la configuration du plugin, merci d\'actualiser la page courante.',
+	'rafraichir' => 'Afin de terminer la configuration du plugin, cliquez ici pour recalculer la page courante.',
 	'reserve_admin' => 'Accès réservé aux administrateurs.',
 	'rss_actualiser' => 'Actualiser',
 	'rss_attente' => 'Attente RSS...',
