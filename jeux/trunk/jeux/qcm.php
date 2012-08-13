@@ -314,7 +314,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 						. (strlen($prec)?"<div class=\"qcm_precision\">$prec</div>":'<br />');
 				}
 			}
-			if (count($temp)) $codeHTML.='<div class="qcm_reponse"><span class="qcm_correction_juste">'._T('jeux:Correction').'</span></div>'.join('', $temp);
+			if (count($temp)) $codeHTML.='<div class="qcm_reponse"><span class="qcm_correction_juste">'._T('jeux:correction').'</span></div>'.join('', $temp);
 		}
 	} // jeux_config('solution')
 

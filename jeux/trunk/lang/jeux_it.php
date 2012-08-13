@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'reponseFausse' => "La risposta &egrave; sbagliata",
 'reponseNulle' => "Non hai ancora risposto",
 'bonneReponse' => "La risposta esatta &egrave;:",
-'Correction' => "Correzione:",
+'correction' => "Correzione:",
 
 'erreur_taille_grille' => "Errore: dimensioni errate",
 'erreur_syntaxe' => "Errore di sintassi",
