@@ -1,7 +1,7 @@
 <paquet
 	prefix="couteau_suisse"
 	categorie="maintenance"
-	version="1.8.84"
+	version="1.8.85"
 	etat="stable"
 	compatibilite="[1.9.2;3.0.99]"
 	logo="img/couteau-50.gif"
@@ -48,6 +48,8 @@
 	<pipeline nom="pre_description_outil" inclure="cout_pipelines.php" />
 	<pipeline nom="fichier_distant" inclure="cout_pipelines.php" />
 	<pipeline nom="porte_plume_cs_pre_charger" inclure="cout_pipelines.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="cout_pipelines.php" />
+	
 
 	<menu nom="csconfig" titre="couteauprive:titre" parent="menu_configuration" icone="images/couteau-16.png" action ="admin_couteau_suisse" parametres="" />
 

@@ -549,17 +549,26 @@ jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};\
 				$temp = "cs_nettoie($temp)";
 			}
 			// traitement particulier des forums (SPIP>=2.1)
-			if(defined('_SPIP20100') && $obj==='forums') $temp = "safehtml($temp)";
-			$traitements_type_objet = "\$GLOBALS['table_des_traitements']['$bal'][" . ($obj=='0'?'':"'$obj'") . "]='$temp';";
+			if($obj==='forums') {
+				if(defined('_SPIP20100')) $temp = "safehtml($temp)";
+				if(defined('_SPIP30000')) {
+					if(in_array($bal, array('TEXTE','TITRE','NOTES','NOM_SITE'))) $temp = str_replace('%s', 'interdit_html(%s)', $temp);
+					elseif(in_array($bal, array('URL_SITE','AUTEUR','EMAIL_AUTEUR'))) $temp = str_replace('%s', 'vider_url(%s)', $temp);
+				}
+				
+			}
+			$traitements_type_objet = "\t\$traitements['$bal'][" . ($obj=='0'?'0':"'$obj'") . "]='$temp';";
 		}
 		$traitements_utilises[$bal] = join("\n", $traitements_utilises[$bal]);
 		// specificite SPIP 3.0 : supprimer_numeros sur les TITRE et les NOM
 		if(defined('_SPIP30000') && ($bal=='TITRE' || $bal=='NOM')) 
 			$traitements_utilises[$bal] = str_replace('%s', 'supprimer_numero(%s)', $traitements_utilises[$bal]);
 	}
-	// mes_options.php : ajout des traitements
+	// mes_options.php : ajout des traitements (peut-etre les passer en pipeline 'table_des_traitements' inline directement ?)
 	if(count($traitements_utilises))
-		$infos_fichiers['code_options'][] = "\n// Table des traitements\n" . join("\n", $traitements_utilises);
+		$infos_fichiers['code_options'][] = "\n// Table des traitements sur les balises\nfunction cs_table_des_traitements(&\$traitements) {\n"
+			. join("\n", $traitements_utilises)	. "\n}" 
+			. (defined('_SPIP19300')?'':"\ncs_table_des_traitements(\$GLOBALS['table_des_traitements']);");
 	$infos_fichiers['code_options'][] = "\$GLOBALS['cs_post_propre']=$traitements_post_propre;";
 	// ecriture des fichiers mes_options et mes_fonctions
 	ecrire_fichier_en_tmp($infos_fichiers, 'spip_options');

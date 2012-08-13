@@ -36,6 +36,7 @@ add_outil( array(
 	// pour etre compatible avec les autres outils, on provoque un changement de pivot (propre a la place de typo) :
 	'traitement:TITRE:post_propre,
 	 traitement:TITRE/mots:post_propre,
+	 traitement:TITRE/forums:post_propre,
 	 traitement:NOM:post_propre' => 'PtoBR',
 	'auteur' => 'Ma&iuml;eul Rouquette',
 ));
@@ -98,10 +99,11 @@ add_outil( array(
 	'id' => 'supprimer_numero',
 	/* inserer :
 		$table_des_traitements['TITRE'][]= 'typo(supprimer_numero(%s))';
-		$table_des_traitements['TYPE']['mots']= 'typo(supprimer_numero(%s))';
-		$table_des_traitements['NOM'][]= 'typo(supprimer_numero(%s))'; */
+		$table_des_traitements['TITRE']['mots']= 'typo(supprimer_numero(%s))';
+		etc... */
 	'traitement:TITRE:pre_typo,
 	 traitement:TITRE/mots:pre_typo,
+	 traitement:TITRE/forums:pre_typo,
 	 traitement:NOM:pre_typo,
 	 traitement:TYPE/mots:pre_typo' => 'supprimer_numero',
 	'categorie' => 'public',

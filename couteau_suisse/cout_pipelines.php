@@ -151,6 +151,11 @@ function couteau_suisse_arbo_creer_chaine_url($flux){
 function couteau_suisse_propres_creer_chaine_url($flux){
 	return eval_metas_pipelines($flux, 'propres_creer_chaine_url');
 }
+// pipelines SPIP>=2.0
+function couteau_suisse_declarer_tables_interfaces($flux){
+	if(function_exists('cs_table_des_traitements')) cs_table_des_traitements($flux['table_des_traitements']);
+	return eval_metas_pipelines($flux, 'declarer_tables_interfaces');
+}
 
 // eux fonctions obsoletes, conservees pour SPIP<3.0 :
 // le contenu du sous-menu est gere par les lames elles-memes
