@@ -1,3 +1,6 @@
 <traduction module="paquet-minibando" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/minibando/trunk/lang/" reference="fr">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/paquet-minibando?lang_cible=ar">
+		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
+	</langue>
 	<langue code="fr" />
 </traduction>
