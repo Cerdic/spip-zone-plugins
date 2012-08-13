@@ -1,0 +1,78 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]Vid&#233;o(s)
+			[en]Video(s)
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+			[fr]Interface de gestion et mod&#232;les d'insertion de vid&#233;os
+			[en]Management interface and integration models of videos
+		</multi>
+	</slogan>
+	<auteur>[XDjuj@apsulis.com->http://demo.apsulis.com]</auteur>
+	<licence>GPL &#169; 2010</licence>
+	
+	<version>0.9.8</version>
+	<version_base>0.3</version_base>
+	<!-- <version_html5media>1.1.5</version_html5media> -->
+	<!-- Le fichier semble trop lourd (env. 20mo car contient des médias de test) pour être téléchargé -->
+	<!-- <necessite id="lib:html5media-1.1.5" src="https://github.com/downloads/etianen/html5media/html5media-1.1.5.zip" /> -->
+	
+	<icon>theme/img/videos-32.png</icon>
+	<etat>dev</etat>
+	<description>
+		<multi>
+		[fr]Ce plugin permet d&#8217;int&#233;grer, &#224; partir d&#8217;un
+			simple copier/coller d&#8217;URL, des vid&#233;os h&#233;berg&#233;es
+			sur les principales plateformes (Dailymotion, Vimeo, Youtube, CultureBox)
+			et de les g&#233;rer comme des documents spip. Il permet &#233;galement
+			l&#8217;affichage HTML5 des vid&#233;os aux formats MP4, H264, Ogg,
+			WebM et Mkv m&#234;me dans les navigateurs mobiles.
+		[en]This plugin allows the integration, using a simple copy/paste of URL,
+			of videos hosted on major platforms (Dailymotion, Vimeo, YouTube, Culturebox)
+			and manage them as spip documents. It also allows the HTML5 display
+			of video in MP4, H.264, Ogg, WebM anf Mkv formats, even in mobile browsers.
+		</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/?article3636</lien>
+	<prefix>videos</prefix>
+	<!-- Base de données -->
+	<install>base/videos_sql.php</install>
+	
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>videos_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+		<inclure>videos_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>jquery_plugins</nom>
+		<inclure>videos_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+        <nom>affiche_gauche</nom>
+        <inclure>videos_pipelines.php</inclure>
+    </pipeline>
+
+	<bouton id='videos' parent='configuration'>
+		<icone>theme/img/videos-24.png</icone>
+		<titre>videos:titre_admin</titre>
+		<url>configurer_videos</url>
+	</bouton>
+	<bouton id='videos2' parent='bando_squelette'>
+		<icone>theme/img/videos-16.png</icone>
+		<titre>videos:titre_admin</titre>
+		<url>configurer_videos</url>
+	</bouton>
+	
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+	<necessite id="medias" version="[1.6.0;]" />
+	<utilise id="cfg" version="[1.9.4;]" />
+	
+	<categorie>multimedia</categorie>
+</plugin>

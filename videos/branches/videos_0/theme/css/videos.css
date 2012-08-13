@@ -1,0 +1,2 @@
+.playerVideo figure{margin:0;background-color:#494949;} /* Compense les défauts constatés sur FF notamment sous Mac */
+.playerVideo video{background-color:#000000;} /* C'est toujours plus classe */

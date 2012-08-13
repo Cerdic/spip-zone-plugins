@@ -1,0 +1,21 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM" id="formulaire_#FORM">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method='post' action='#ENV{action}'><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="editer_url">
+			<label>
+				[<em>*(#ENV*{message_ok}|oui) <:videos:label_ajouter_autre_video:></em><br />]
+				<:videos:label_url:>
+			</label>
+			<input type="text" class="text" size="22" id="video_url" name="video_url" value="[(#ENV*{message_ok}|?{'',#ENV{video_url}})]"/>
+		</li>
+	</ul>
+	<p class="boutons">
+		<input type="submit" value="<:videos:valider:>" name='valider' />
+	</p>
+	</div>
+</form>
+</div>
