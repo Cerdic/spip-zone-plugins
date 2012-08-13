@@ -10,17 +10,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'add' => 'إضافة',
 	'add_to' => 'إضافة إلى قائمة المفضلات',
-	'ajoute_le' => 'Ajouté le', # MODIF
+	'ajoute_le' => 'أضيف في',
 
 	// C
 	'configurer' => 'إعداد',
 
 	// L
-	'label_style_formulaire16' => 'Petit (16px)', # NEW
-	'label_style_formulaire24' => 'Moyen (24px)', # NEW
-	'label_style_formulaire32' => 'Grand (32px)', # NEW
-	'legend_formulaire_public' => 'Formulaire public', # NEW
-	'legend_style_formulaire' => 'Style du formulaire', # NEW
+	'label_style_formulaire16' => 'صغير (١٦ نقطة)',
+	'label_style_formulaire24' => 'متوسط (٢٤ نقطة)',
+	'label_style_formulaire32' => 'كبير (٣٢ نقطة)',
+	'legend_formulaire_public' => 'استمارة عمومية',
+	'legend_style_formulaire' => 'نمط الاستمارة',
 	'login_first' => 'المعذرة، يجب عليك التسجيل قبل القيام بهذه الخطوة. الرجاء إدخال المعرف وكلمة السر ثم إعادة المحاولة.',
 
 	// M
@@ -31,10 +31,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'remove_from' => 'سحب من قائمة المفضلات',
 
 	// S
-	'ses_favoris' => 'Ses favoris', # NEW
+	'ses_favoris' => 'المفضلة لديه (ها)',
 
 	// V
-	'vos_favoris' => 'Vos favoris' # Utile pour modifier le titre de l'inclusion NEW
+	'vos_favoris' => 'المفضلة لديك' # Utile pour modifier le titre de l'inclusion
 );
 
 ?>
