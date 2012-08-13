@@ -36,3 +36,9 @@
 </B_liste_jeux>[
 <div class="liste-objets jeux caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]<//B_liste_jeux>
+
+[(#CHEMIN{images/jeu-16.png}|debut_cadre_enfonce{1, '', <:jeux:modules_dispos|bouton_block_depliable{invisible, modules}:>})]
+[(#VAL{0}|debut_block_depliable{modules})]
+[(#VAL|table_jeux_caracteristiques)]
+[(#VAL|fin_block)]
+[(#VAL{1}|fin_cadre_enfonce)]
