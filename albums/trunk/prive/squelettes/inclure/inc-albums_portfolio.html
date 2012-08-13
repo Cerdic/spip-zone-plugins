@@ -3,7 +3,7 @@
 	Fork du squelette du plugin 'medias',
 	-> Ajout d'un identifiant unique aux blocs illustrations, portfolio et documents (+script)
 	-> Ajout d'autorisation pour inclure les boutons d'actions
-	-> Utilise un inclure au lieu du modele pour les images
+	-> Ajout d'un style pour cacher les boutons d'action si pas autorisé (hack grossier...)
 ][(#REM)
 	inclus dans le squelette /prive/objets/liste/albums_lies.html
 ]
@@ -17,7 +17,7 @@
 <div class="liste_items documents" id="illustrations[_(#GET{suffixe})]">
 [<p class="pagination">(#PAGINATION)</p>]
 <BOUCLE_illustrations(DOCUMENTS documents_liens types_documents){inclus=image}{mode=image}{id_objet}{objet}{par num titre,date,id_document}{pagination 50}{statut?}>
-	#INCLURE{fond=prive/squelettes/inclure/inc-albums_portfolio_document_desc,id_document,id_objet,objet,autorise}
+	#MODELE{document_desc,id_document,id_objet,objet}
 </BOUCLE_illustrations>
 [(#TOTAL_BOUCLE|>{20}|oui)<p class="pagination">#PAGINATION</p>]
 [(#ENV{autorise}|oui)
@@ -33,7 +33,7 @@
 <div class="liste_items documents" id="portfolio[_(#GET{suffixe})]">
 [<p class="pagination">(#PAGINATION)</p>]
 <BOUCLE_portfolio(DOCUMENTS documents_liens types_documents){inclus=image}{mode=document}{id_objet}{objet}{par num titre,date,id_document}{pagination 50}{statut?}>
-	#INCLURE{fond=prive/squelettes/inclure/inc-albums_portfolio_document_desc,id_document,id_objet,objet,autorise}
+	#MODELE{document_desc,id_document,id_objet,objet}
 </BOUCLE_portfolio>
 [(#TOTAL_BOUCLE|>{20}|oui)<p class="pagination">#PAGINATION</p>]
 [(#ENV{autorise}|oui)
@@ -49,7 +49,7 @@
 <div class="liste_items documents" id="documents[_(#GET{suffixe})]">
 [<p class="pagination">(#PAGINATION)</p>]
 <BOUCLE_documents(DOCUMENTS documents_liens types_documents){inclus!=image}{mode!=vignette}{id_objet}{objet}{par num titre,date,id_document}{pagination 50}{statut?}>
-	#INCLURE{fond=prive/squelettes/inclure/inc-albums_portfolio_document_desc,id_document,id_objet,objet,autorise}
+	#MODELE{document_desc,id_document,id_objet,objet,autorise}
 </BOUCLE_documents>
 [(#TOTAL_BOUCLE|>{20}|oui)<p class="pagination">#PAGINATION</p>]
 [(#ENV{autorise}|oui)
@@ -58,6 +58,15 @@
 </div>
 #SET{nbdocs,#GET{nbdocs}|plus{#GRAND_TOTAL}}
 </B_documents>
+
+[(#REM) hack pour cacher les boutons d'action si necessaire ]
+[(#ENV{autorise}|non)
+<style type="text/css">
+.albums #portfolios .item .mode,
+.albums #portfolios .item .actions,
+.albums #portfolios .item .tourner	{display:none;}
+</style>
+]
 
 <script type="text/javascript">/*<![CDATA[*/
 [(#REM) var multifile='[(#CHEMIN{javascript/jquery.multifile.js}|texte_script)]'; ]
