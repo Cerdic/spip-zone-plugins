@@ -9,7 +9,11 @@ if(!defined('_SPIP20100')) {
 		if(defined('_LOG_CS')) cs_log("couteau_suisse_install($action)");
 		include_spip('inc/meta');
 		include_spip('inc/plugin');
-		$t = plugin_get_infos('couteau_suisse');
+		if(isset($GLOBALS['meta']['plugin'])) {
+			$t = unserialize($GLOBALS['meta']['plugin']);
+			$t = $t['COUTEAU_SUISSE']['dir'];
+		}
+		$t = plugin_get_infos(strlen($t)?$t:'couteau_suisse');
 		switch ($action){
 			case 'test':
 				// affichage d'un lien ici, puisque le pipeline 'affiche_gauche' n'est pas pris en compte dans 'admin_plugin'...
