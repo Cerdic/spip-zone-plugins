@@ -9,21 +9,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return mixed
  */
 function gisgeom_insert_head_css($flux){
-	$flux .="\n".'<link rel="stylesheet" href="'. find_in_path(_DIR_LIB_LEAFLETDRAW.'Control.Draw.css') .'" />';
-	return $flux;
-}
-
-/**
- * Insertion des scripts du plugin dans les pages publiques
- *
- * @param $flux
- * @return mixed
- */
-function gisgeom_insert_head($flux){
-	// insertion des scripts de gisgeom
-	$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_LEAFLETDRAW.'Control.Draw.js') .'"></script>';
-	$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_LEAFLETDRAW.'Map.Draw.js') .'"></script>';
-	$flux .="\n".'<script type="text/javascript" src="'. find_in_path('javascript/gisgeom.js') .'"></script>';
+	$flux .= "\n".'<link rel="stylesheet" href="'. find_in_path(_DIR_LIB_LEAFLETDRAW.'Control.Draw.css') .'" />';
 	return $flux;
 }
 
@@ -34,7 +20,6 @@ function gisgeom_insert_head($flux){
  */
 function gisgeom_header_prive($flux){
 	$flux .= gisgeom_insert_head_css('');
-	$flux .= gisgeom_insert_head('');
 	return $flux;
 }
 
@@ -48,6 +33,12 @@ function gisgeom_recuperer_fond($flux){
 	if ($flux['args']['fond'] == 'formulaires/editer_gis') {
 		$saisie = recuperer_fond('formulaires/inc-editer_gis-geom',$flux['data']['contexte']);
 		$flux['data']['texte'] = preg_replace('%<!--extra-->%is', '$0'.$saisie, $flux['data']['texte']);
+	}
+	if ($flux['args']['fond'] == 'javascript/gis.js') {
+		$ajouts = "\n". spip_file_get_contents(find_in_path(_DIR_LIB_LEAFLETDRAW.'Control.Draw.js'));
+		$ajouts .= "\n". spip_file_get_contents(find_in_path(_DIR_LIB_LEAFLETDRAW.'Map.Draw.js'));
+		$ajouts .= "\n". spip_file_get_contents(find_in_path('javascript/gisgeom.js'));
+		$flux['data']['texte'] .= $ajouts;
 	}
 	return $flux;
 }
