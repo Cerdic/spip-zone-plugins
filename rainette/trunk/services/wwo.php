@@ -42,7 +42,7 @@ function wwo_url2flux($url) {
 	return $xml;
 }
 
-function wwo_code2icone($meteo) {
+function wwo_meteo2icone($meteo) {
 	static $wwo2weather = array(
 							'395'=> array('41','46'),
 							'392'=> array('41','46'),

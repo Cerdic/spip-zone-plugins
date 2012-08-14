@@ -33,7 +33,7 @@ function weather_url2flux($url) {
 	return $flux;
 }
 
-function weather_code2icone($meteo) {
+function weather_meteo2icone($meteo) {
 	$icone = 'na';
 	if (($meteo >= 1) && ($meteo < 48)) $icone = strval($meteo);
 	return $icone;
