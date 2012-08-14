@@ -1,4 +1,4 @@
-<traduction module="videos" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/videos/lang/" reference="fr">
+<traduction module="videos" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/videos/trunk/lang/" reference="fr">
 	<langue code="en" />
 	<langue code="fr" />
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/videos?lang_cible=sk">
