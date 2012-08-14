@@ -1,172 +1,132 @@
 <?php
-if (!defined("_ECRIRE_INC_VERSION")) return;
-// This is a SPIP language file
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.net/tradlang_module/jeux?lang_cible=en
+// ** ne pas modifier le fichier **
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'alphabet' =>	"ABCDEFGHIJKLMNOPQRSTUVWXYZ-",
-'aucun_jeu'	=> 'No game',
-'votre_choix' => "Your answer: ",
-'votre_reponse' => "Your answer: ",
-'corriger' => "Check",
-'verifier'  => 'Check',
-'verifier_validite' => 'Check the validity ',
+	// A
+	'afficher_solution' => 'Show the solution',
+	'alphabet' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ-',
+	'aucune_erreur' => 'No error',
+	'auteur' => 'Auteur',
 
-'afficher_solution' =>'Show the solution',
-'solution' =>'Solution',
-'reponse' =>'Answer',
-'indices' => 'Clues',
-'score' => 'Score:',
+	// B
+	'bonneReponse' => 'The correct answer is:',
+	'bravo' => 'Congratulation !',
 
-'point' => "&nbsp;pt",
-'points' => "&nbsp;pts",
+	// C
+	'cfg_affichage' => 'L\'affichage du jeu',
+	'cfg_correction' => 'La correction du jeu',
+	'cfg_donner_indices' => 'Afficher des indices',
+	'cfg_donner_reponse' => 'Afficher la réponse',
+	'cfg_donner_solution' => 'Donner les bonnes réponses',
+	'cfg_introduction' => 'Les paramètres regroupés ici correspondent à la configuration par défaut de l\'ensemble des jeux du site. Ils peuvent être surchargées au cas par cas grâce à la configuration interne des jeux (séparateur [config]).<br/><br/>Il est possible que certains jeux n\'utilisent pas certains des paramètres listés ci-dessous.',
+	'cfg_scores' => 'Les scores du jeu',
+	'cfg_type_resultat' => 'Enregistrement des scores :',
+	'colonne_n' => 'column @n@',
+	'configuration_jeux' => 'Configurer les jeux', # NEW
+	'correction' => 'Correction:',
+	'corriger' => 'Check',
 
-'ligne_n' =>'row @n@',
-'colonne_n' =>'column @n@',
+	// E
+	'erreur_scripts' => 'Scripts not allowed: you can not play this game here!',
+	'erreur_syntaxe' => 'Syntax error',
+	'erreur_taille_grille' => 'Error: invalid size',
+	'explication_jeu' => 'Le titre privé sert simplement à identifier le jeu en partie privée.<br /><br />Le contenu du jeu doit suivre la syntaxe décrite dans <a href="http://www.spip-contrib.net/Des-jeux-dans-vos-articles">la documentation</a> du plugin.<br /><br />Ici, les balises &lt;jeux> et &lt;/jeux> sont inutiles.',
+	'explication_modules' => 'Voici la liste des modules présents sur ce site.
 
-'reinitialiser' => 'Reset',
-'recommencer' => 'Restart',
-'rejouer' => 'Rejouer',
-'reset' => 'Reset',
+- Les signatures sont les séparateurs indispensables qui permettent l\'identification du jeu par le compilateur.
+- Les séparateurs optionnels sont par définition, au choix de l\'auteur du jeu.
+- La configuration montre ici les paramètres utilisés par défaut, mais que l\'on peut modifier dans la section [config].
 
-'grille_valide' =>'The grid is valid',
-'grille_invalide' =>'The grid is invalid',
-'aucune_erreur' =>'No error',
-'une_erreur' => 'An error',
-'n_erreurs' => '@n@ errors',
-'n_vides' => '@n@ empty cells',
-'une_vide' => 'One empty cell',
-'bravo' => "Congratulation !",
+Veuillez vous reporter à la documentation du plugin pour bien maîtriser les différents séparateurs.', # NEW
 
-'reponseJuste' => "You were correct!",
-'reponseFausse' => "You were incorrect!",
-'reponseNulle' => "You didn't answer this question!",
-'bonneReponse' => "The correct answer is:",
-'correction' => "Correction:",
+	// G
+	'grille_invalide' => 'The grid is invalid',
+	'grille_valide' => 'The grid is valid',
 
-'erreur_taille_grille' => "Error: invalid size",
-'erreur_syntaxe' => "Syntax error",
-'erreur_spip' => "This Spip version is too old to play this game!",
-'erreur_scripts' => "Scripts not allowed: you can not play this game here!",
+	// I
+	'indices' => 'Clues',
 
-// espace prive
+	// J
+	'jeu_type' => 'Type',
+	'jeu_vide' => 'VIDE',
+	'jeux' => 'Games',
 
-'jeux' => 'Games',
-'jeux_' => 'Games:',
-'jeu_numero' => 'Jeu num&eacute;ro @id@ (@nom@)',
-'jeu_court' => 'Jeu n&deg;@id@ (@nom@)',
-'jeu_numero_court' => 'ID',
-'jeu_type' => 'Type',
-'jeu_titre' => 'Titre',
-'auteur' => 'Auteur',
+	// L
+	'ligne_n' => 'row @n@',
 
-'nouveau_jeu' => 'New game',
-'explication_jeu'=> 'Le titre priv&eacute; sert simplement &agrave; identifier le jeu en partie priv&eacute;e.<br /><br />Le contenu du jeu doit suivre la syntaxe d&eacute;crite dans <a href="http://www.spip-contrib.net/Des-jeux-dans-vos-articles">la&nbsp;documentation</a> du plugin.<br /><br />Ici, les balises &lt;jeux> et &lt;/jeux> sont inutiles.',
-'modifier_jeu' => 'Modifier le jeu num&eacute;ro @id@',
-'modifier_ce_jeu' => 'Modifier ce jeu',
-'voir_jeu' => 'Voir le jeu',
-'liste_jeux' => 'Liste des jeux',
-'liste_articles_jeux' => 'Liste des articles contenant du jeu "inline"',
-'retourner_jeu' => 'Retourner au jeu',
-'jeu_titre_prive' => 'Titre priv&eacute;',
-'jeu_titre_public' => 'Titre public',
-'jeu_titre_prive_' => 'Titre priv&eacute; :',
-'jeu_titre_public_' => 'Titre public :',
-'jeu_contenu' => 'Contenu du jeu',
-'jeu_vide' => 'VIDE',
+	// M
+	'modules_dispos' => 'Modules disponibles', # NEW
+	'multi_jeux' => 'Multi Jeux', # NEW
 
-'derniere_modif' => 'Derni&egrave;re modification',
-'resultat' => 'R&eacute;sultat',
-'resultats' => 'R&eacute;sultats',
-'resultats_auteur' => 'Les r&eacute;sultats de @nom@',
-'resultats_auteur_' => "R&eacute;sultats de l&#8217;auteur",
-'voir_ses_resultats' => 'Voir ses r&eacute;sultats',
-'resultats_jeu' => 'Les r&eacute;sultats du jeu num&eacute;ro @id@ (@nom@)',
-'resultats_jeu_' => 'R&eacute;sultats du jeu',
-'nb_resultats' => 'Nombre de r&eacute;sultats',
-'gerer_resultats' => 'G&eacute;rer les r&eacute;sultats',
-'gerer_ses_resultats' => 'G&eacute;rer ses r&eacute;sultats',
-'voir_resultats' => 'Voir les r&eacute;sultats',
-'type_resultat' => 'Type de r&eacute;sultats',
-'cfg_type_resultat' => 'Enregistrement des scores&nbsp;:',
-'cfg_donner_solution' => 'Donner les bonnes r&eacute;ponses',
-'cfg_introduction'=> 'Les param&egrave;tres regroup&eacute;s ici correspondent &agrave; la configuration par d&eacute;faut de l\'ensemble des jeux du site. Ils peuvent &ecirc;tre surcharg&eacute;es au cas par cas gr&acirc;ce &agrave; la configuration interne des jeux (s&eacute;parateur [config]).<br/><br/>Il est possible que certains jeux n\'utilisent pas certains des param&egrave;tres list&eacute;s ci-dessous.',
-'cfg_scores' => "Les scores du jeu",
-'cfg_correction' => "La correction du jeu",
-'configuration_defaut' => 'Configuration par d&eacute;faut&nbsp;:',
-'cfg_affichage' => 'L\'affichage du jeu',
-'cfg_donner_indices' => 'Afficher des indices',
-'cfg_donner_reponse' => 'Afficher la r&eacute;ponse',
+	// N
+	'n_erreurs' => '@n@ errors',
+	'n_vides' => '@n@ empty cells',
+	'nouveau_jeu' => 'New game',
 
-'gerer_resultats_jeu' => 'G&eacute;rer les r&eacute;sultats du jeu num&eacute;ro @id@ (@nom@)',
-'aucun_resultat' => 'Aucun r&eacute;sultat',
+	// O
+	'options' => 'Options', # NEW
 
-'supprimer_tout_tout' => 'Effacer TOUS les r&eacute;sultats',
-'supprimer_tout_jeu' => 'Effacer TOUS les r&eacute;sultats du jeu',
-'supprimer_tout_auteur' => "Effacer TOUS les r&eacute;sultats de l&#8217;auteur",
-'supprimer_confirmer' => 'Confimer la suppression de ces r&eacute;sultats',
-'explication_supprimer_tout'=> 'Cette commande efface <i>tous</i> les r&eacute;sultats des diff&eacute;rents jeux&hellip;',
-'explication_supprimer_jeu'=> 'Cette commande efface <i>tous</i> les r&eacute;sultats du jeu&hellip;',
-'explication_supprimer_auteur'=> 'Cette commande efface <i>tous</i> les r&eacute;sultats de l&#8217;auteur&hellip;',
-'confirmation' => 'Confirmation',
-'confirmation_supprimer_tout' => '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir effacer TOUS les r&eacute;sultats&nbsp;?',
-'confirmation_supprimer_jeu' => '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir effacer TOUS les r&eacute;sultats du jeu&nbsp;?',
-'confirmation_supprimer_auteur' => '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir effacer TOUS les r&eacute;sultats de l&#8217;auteur&nbsp;?',
-'gerer_resultats_auteur' => 'G&eacute;rer les r&eacute;sultats de @nom@',
-'infos_auteur'  => 'Informations',
-'gerer_resultats_tout'  => 'G&eacute;rer les r&eacute;sultats de tous les jeux',
-'configurer_jeux' => 'Configurer le plugin Jeux',
+	// P
+	'point' => ' pt',
+	'points' => ' pts',
 
-'sans_titre_prive' => 'Sans titre priv&eacute;',
-'sans_type' => 'Sans type',
-'introuvable' => 'Aucun jeu dans le contenu !',
-'pas_de_jeu' => "D&eacute;sol&eacute;, ce jeu n'existe pas !",
-'pas_d_auteur' => "D&eacute;sol&eacute;, cet auteur est inconnu !",
-'inserer_jeu' => "Ins&eacute;rer des jeux",
-'inserer_jeu_explication' =>"Vous pouvez ins&eacute;rer des jeux en &eacute;crivant &#60;jeuyyy&#62;, o&ugrave; yyy est l'ID du jeu",
+	// R
+	'recommencer' => 'Restart',
+	'reinitialiser' => 'Reset',
+	'rejouer' => 'Rejouer',
+	'reponse' => 'Answer',
+	'reponseFausse' => 'You were incorrect!',
+	'reponseJuste' => 'You were correct!',
+	'reponseNulle' => 'You didn\'t answer this question!',
+	'resultat' => 'Résultat',
+	'resultat2_' => 'Non défini ?',
+	'resultat2_aucun' => 'Pas d\'enregistrement',
+	'resultat2_defaut' => 'Selon la configuration générale du plugin',
+	'resultat2_dernier' => 'Pour chaque auteur, le dernier résultat uniquement',
+	'resultat2_meilleur' => 'Pour chaque auteur, le meilleur résultat uniquement',
+	'resultat2_meilleurs' => 'L\'ensemble des meilleurs résultats',
+	'resultat2_premier' => 'Pour chaque auteur, le premier résultat uniquement',
+	'resultat2_tous' => 'Tous les résultats',
+	'resultat_aucun' => 'Aucun',
+	'resultat_defaut' => 'Par défaut',
+	'resultat_dernier' => 'Le dernier',
+	'resultat_meilleur' => 'Le meilleur',
+	'resultat_meilleurs' => 'Les meilleurs',
+	'resultat_premier' => 'Le premier',
+	'resultat_tous' => 'Tous',
+	'resultats' => 'Résultats',
+	'resultats_auteur' => 'Les résultats de @nom@',
+	'resultats_jeu' => 'Les résultats du jeu numéro @id@ (@nom@)',
+	'resultats_jeux' => 'Résultats des jeux', # NEW
 
-'compacter_tout_tout' => 'Compacter TOUS les r&eacute;sultats',
-'compacter_tout_jeu' => 'Compacter TOUS les r&eacute;sultats du jeu',
-'compacter_tout_auteur' => "Compacter TOUS les r&eacute;sultats de l&#8217;auteur",
-'explication_compacter_tout'=>"Cette commande  efface <i>tous</i> les r&eacute;sultats des diff&eacute;rents jeux, sauf le dernier pour chaque couple jeu/auteur",
-'explication_compacter_jeu'=>"Cette commande  efface <i>tous</i> les r&eacute;sultats de ce jeu, sauf le dernier pour chaque auteur",
-'explication_compacter_auteur'=>"Cette commande  efface <i>tous</i> les r&eacute;sultats de cet auteur, sauf le dernier pour chaque jeu",
-'confirmation_compacter_tout' => '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir compacter TOUS les r&eacute;sultats&nbsp;?',
-'confirmation_compacter_auteur' => '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir compacter les r&eacute;sultats de cet auteur&nbsp;?',
-'confirmation_compacter_jeu' => '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir compacter les r&eacute;sultats de ce jeu&nbsp;?',
-'compacter_confirmer' => 'Confirmer le compactage de ces r&eacute;sultats',
-'statut_jeu'  	=>'Statut du jeu&nbsp;: ',
-'configuration_interne' => 'Configuration interne du jeu&nbsp;: ',
-'configuration_generale' => 'Configuration g&eacute;n&eacute;rale du plugin',
+	// S
+	'sans_titre_prive' => 'Sans titre privé',
+	'sans_type' => 'Sans type',
+	'score' => 'Score:',
+	'solution' => 'Solution',
 
-'resultat_defaut' => 'Par d&eacute;faut',
-'resultat_aucun' => 'Aucun',
-'resultat_premier' => 'Le premier',
-'resultat_dernier' => 'Le dernier',
-'resultat_meilleur' => 'Le meilleur',
-'resultat_meilleurs' => 'Les meilleurs',
-'resultat_tous' => 'Tous',
-'resultat2_' => 'Non d&eacute;fini ?',
-'resultat2_defaut' => 'Selon la configuration g&eacute;n&eacute;rale du plugin',
-'resultat2_aucun' => 'Pas d\'enregistrement',
-'resultat2_premier' => 'Pour chaque auteur, le premier r&eacute;sultat uniquement',
-'resultat2_dernier' => 'Pour chaque auteur, le dernier r&eacute;sultat uniquement',
-'resultat2_meilleur' => 'Pour chaque auteur, le meilleur r&eacute;sultat uniquement',
-'resultat2_meilleurs' => 'L\'ensemble des meilleurs r&eacute;sultats',
-'resultat2_tous' => 'Tous les r&eacute;sultats',
-'titre_xml' => 'Des jeux dans vos articles',
+	// T
+	'titre_page_configurer_jeux' => 'Configuration du plugin jeux', # NEW
+	'total' => 'Total', # NEW
+	'type_resultat' => 'Type de résultats',
 
-'doc_jeux' => 'Documentation g&eacute;n&eacute;rale',
-'doc_scores' => 'Documentation sur les scores',
-'modules_dispos' => 'Modules disponibles',
-'options' => 'Options',
+	// U
+	'une_erreur' => 'An error',
+	'une_vide' => 'One empty cell',
 
-// Corbeille
-  'jeux_corbeille_tous' => "@nb@ jeux dans la corbeille",
-  'jeux_corbeille_un' => "1 jeu dans la corbeille",
-  'jeux_tous' => 'Tous les jeux',
-
+	// V
+	'verifier' => 'Check',
+	'verifier_validite' => 'Check the validity ',
+	'voir_auteur' => 'Voir l\'auteur', # NEW
+	'voir_jeu' => 'Voir le jeu',
+	'voir_resultats' => 'Voir les résultats',
+	'votre_choix' => 'Your answer: ',
+	'votre_reponse' => 'Your answer: '
 );
-
 
 ?>
