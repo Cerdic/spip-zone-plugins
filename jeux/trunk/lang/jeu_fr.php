@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'titre_jeux'               =>'Jeux',
     'titre_logo_jeu'           =>'Logo du jeu',
 	'titre_modules_dispos' => 'Modules disponibles',
-	'explication_jeu_edit'=>'Le titre priv&eacute; sert simplement &agrave; identifier le jeu en partie priv&eacute;e.<br /><br />Le contenu du jeu doit suivre la syntaxe d&eacute;crite dans <a href=\'http://www.spip-contrib.net/Des-jeux-dans-vos-articles\'>la&nbsp;documentation</a> du plugin.<br /><br />Ici les balises &lt;jeux> et &lt;/jeux> sont inutiles.',
+	'explication_jeu_edit'=>'Le titre priv&eacute; sert simplement &agrave; identifier le jeu en partie priv&eacute;e.<br />Le contenu du jeu doit suivre la syntaxe d&eacute;crite dans <a href=\'http://www.spip-contrib.net/Des-jeux-dans-vos-articles\'>la&nbsp;documentation</a> du plugin.<br />Ici les balises &lt;jeux> et &lt;/jeux> sont inutiles.',
 	'explication_modules' => 'Voici la liste des modules pr&eacute;sents sur ce site.
 
 - Les signatures sont les s&eacute;parateurs indispensables qui permettent l\'identification du jeu par le compilateur.

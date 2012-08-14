@@ -6,11 +6,11 @@
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_jeu' value='#ENV{id_jeu}' />
+		<p><:jeu:explication_jeu_edit:></p>
 		<ul>
 
 			[(#SAISIE{input, titre_prive, obligatoire=oui,
 				label=<:jeu:label_titre_prive:>})]
-
             
             [(#SAISIE{textarea,texte,obligatoire=oui,label=<:jeu:label_texte:>})]
             
