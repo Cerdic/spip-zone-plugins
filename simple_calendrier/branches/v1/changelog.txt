@@ -1,6 +1,10 @@
 Plugin Simple Calendrier pour SPIP 2.1
 ------------------------------------------
 
+1.2.7 le 14/08/2012
+--------------------
+- Correction : les évènements en statut 'poubelle' étaient comptabilisés au niveau des filtres de la page ?exec=evenement_tous
+
 1.2.6 le 26/05/2012 
 --------------------
 - Correction : prise en compte de la publication/dépublication automatique des rubriques (Alexandre).

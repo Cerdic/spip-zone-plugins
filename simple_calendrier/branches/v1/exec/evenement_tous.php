@@ -320,8 +320,9 @@ function simplecal_get_liste_annees($id_rubrique){
 
     $select1 = "distinct DATE_FORMAT(date_debut,'%Y') as annee";
     $select2 = "distinct DATE_FORMAT(date_fin,'%Y') as annee";
-    $where1 = "date_debut not like '%0000%'";
-    $where2 = "date_fin not like '%0000%'";
+    $where0 = "statut != 'poubelle'";
+    $where1 = " and date_debut not like '%0000%'";
+    $where2 = " and date_fin not like '%0000%'";
     
     if ($id_rubrique!=0){
         $where_rub = " and id_rubrique = ".$id_rubrique;
@@ -335,8 +336,8 @@ function simplecal_get_liste_annees($id_rubrique){
     $where_rub_exclure = simplecal_get_where_rubrique_exclure();
     // ----------------------
         
-    $liste_a1 = sql_allfetsel($select1, $from, $where1.$where_rub.$where_rub_exclure, "", $order_by, "");
-    $liste_a2 = sql_allfetsel($select2, $from, $where2.$where_rub.$where_rub_exclure, "", $order_by, "");
+    $liste_a1 = sql_allfetsel($select1, $from, $where0.$where1.$where_rub.$where_rub_exclure, "", $order_by, "");
+    $liste_a2 = sql_allfetsel($select2, $from, $where0.$where2.$where_rub.$where_rub_exclure, "", $order_by, "");
 
     $annees = array();
     
@@ -358,8 +359,8 @@ function simplecal_get_liste_annees($id_rubrique){
     
     $tab = array();
     foreach ($annees as $annee){
-        $where = "(date_debut like '%".$annee."%' OR date_fin like '%".$annee."%')";
-        $nb = sql_countsel($from, $where.$where_rub.$where_rub_exclure);
+        $where = " and (date_debut like '%".$annee."%' OR date_fin like '%".$annee."%')";
+        $nb = sql_countsel($from, $where0.$where.$where_rub.$where_rub_exclure);
         $tab[] = array("annee"=>$annee, "nb"=>$nb);
     }
     
@@ -375,8 +376,9 @@ function simplecal_get_liste_mois($annee, $id_rubrique){
     
     $select1 = "distinct DATE_FORMAT(date_debut,'%m') as mois";
     $select2 = "distinct DATE_FORMAT(date_fin,'%m') as mois";
-    $where1 = "date_debut like '%".$annee."%'";
-    $where2 = "date_fin like '%".$annee."%'";
+    $where0 = "statut != 'poubelle'";
+    $where1 = " and date_debut like '%".$annee."%'";
+    $where2 = " and date_fin like '%".$annee."%'";
     if ($id_rubrique!=0){
         $where_rub = " and id_rubrique = ".$id_rubrique;
     } else {
@@ -389,8 +391,8 @@ function simplecal_get_liste_mois($annee, $id_rubrique){
     $where_rub_exclure = simplecal_get_where_rubrique_exclure();
     // ----------------------
     
-    $liste_m1 = sql_allfetsel($select1, $from, $where1.$where_rub.$where_rub_exclure, "", $order_by, "");
-    $liste_m2 = sql_allfetsel($select2, $from, $where2.$where_rub.$where_rub_exclure, "", $order_by, "");
+    $liste_m1 = sql_allfetsel($select1, $from, $where0.$where1.$where_rub.$where_rub_exclure, "", $order_by, "");
+    $liste_m2 = sql_allfetsel($select2, $from, $where0.$where2.$where_rub.$where_rub_exclure, "", $order_by, "");
 
     
     $tab_mois = array();
@@ -413,8 +415,8 @@ function simplecal_get_liste_mois($annee, $id_rubrique){
     
     $tab = array();
     foreach ($tab_mois as $mois){
-        $where = "(date_debut like '%".$annee."-".$mois."%' OR date_fin like '%".$annee."-".$mois."%')";
-        $nb = sql_countsel($from, $where.$where_rub.$where_rub_exclure);
+        $where = " and (date_debut like '%".$annee."-".$mois."%' OR date_fin like '%".$annee."-".$mois."%')";
+        $nb = sql_countsel($from, $where0.$where.$where_rub.$where_rub_exclure);
         $tab[] = array("mois"=>$mois, "nb"=>$nb);
     }
     
@@ -424,11 +426,9 @@ function simplecal_get_liste_mois($annee, $id_rubrique){
 
 function simplecal_get_nb_tous($id_rubrique){
     $from = "spip_evenements as e";
-    
+    $where = "e.statut != 'poubelle'";
     if ($id_rubrique != 0){
-        $where = "id_rubrique=$id_rubrique";
-    } else {
-        $where = "";
+        $where .= " and id_rubrique=$id_rubrique";
     }
     
     // ----------------------
@@ -444,7 +444,8 @@ function simplecal_get_nb_tous($id_rubrique){
 
 function simplecal_get_nb_avenir($id_rubrique){
     $from = "spip_evenements as e";
-    $where = " (e.date_debut >= DATE_FORMAT(NOW(),'%Y-%m-%d')";
+    $where = "e.statut != 'poubelle'";
+    $where .= " AND (e.date_debut >= DATE_FORMAT(NOW(),'%Y-%m-%d')";
     $where .= " OR e.date_fin >= DATE_FORMAT(NOW(),'%Y-%m-%d'))";
     
     if ($id_rubrique != 0){
