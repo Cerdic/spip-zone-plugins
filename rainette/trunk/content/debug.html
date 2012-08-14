@@ -10,31 +10,32 @@
 
 
 [(#REM) Les informations d'une ville - weather ]
-#SET{nom_ville, #RAINETTE_INFOS{FRXX0076, ville, weather}}
+#SET{code, FRXX0076}
+#SET{nom_ville, #RAINETTE_INFOS{#GET{code}, ville, weather}}
 <div class="cartouche">
 	<h1 class="h1"><:rainette:meteo_consultation{ville=#GET{nom_ville}}:></h1>
 	<p>Weather.com</p>
 	<p class="info-publi">
 		<small>
 			[<:rainette:longitude|ucfirst:>&nbsp;(#RAINETTE_INFOS{
-													FRXX0076,
+													#GET{code},
 													longitude,
 													weather}|rainette_afficher_unite{angle})]
 			[, <:rainette:latitude:>&nbsp;(#RAINETTE_INFOS{
-											FRXX0076,
+											#GET{code},
 											latitude,
 											weather}|rainette_afficher_unite{angle})]
 		</small>
 	</p>
-	[<p>Population : (#RAINETTE_INFOS{FRXX0076, population, weather})</p>]
-	[<p>R&eacute;gion : (#RAINETTE_INFOS{FRXX0076, region, weather})</p>]
-	[<p>Zone DVD : (#RAINETTE_INFOS{FRXX0076, zone, weather})</p>]
+	[<p>Population : (#RAINETTE_INFOS{#GET{code}, population, weather})</p>]
+	[<p>R&eacute;gion : (#RAINETTE_INFOS{#GET{code}, region, weather})</p>]
+	[<p>Zone DVD : (#RAINETTE_INFOS{#GET{code}, zone, weather})</p>]
 </div>
 <br class="nettoyeur"/>
 
 <h2 class="h2"><:rainette:meteo_conditions|ucfirst:></h2>
 [(#MODELE{rainette_conditions,
-	code=FRXX0076,
+	code=#GET{code},
 	sous_modele=conditions_tempsreel,
 	service=weather})]
 <br class="nettoyeur"/>
@@ -42,30 +43,31 @@
 
 
 [(#REM) Les informations d'une ville - wwo ]
-#SET{nom_ville, #RAINETTE_INFOS{'Paris,France', ville, wwo}}
+#SET{code, 'Paris,France'}
+#SET{nom_ville, #RAINETTE_INFOS{#GET{code}, ville, wwo}}
 <div class="cartouche">
 	<h1 class="h1"><:rainette:meteo_consultation{ville=#GET{nom_ville}}:></h1>
 	<p>World Weather Online</p>
 	<p class="info-publi">
 		<small>
 			[<:rainette:longitude|ucfirst:>&nbsp;(#RAINETTE_INFOS{
-													'Paris,France',
+													#GET{code},
 													longitude,
 													wwo}|rainette_afficher_unite{angle})]
 			[, <:rainette:latitude:>&nbsp;(#RAINETTE_INFOS{
-											'Paris,France',
+											#GET{code},
 											latitude,
 											wwo}|rainette_afficher_unite{angle})]
 		</small>
 	</p>
-	[<p>Population : (#RAINETTE_INFOS{'Paris,France', population, wwo})</p>]
-	[<p>R&eacute;gion : (#RAINETTE_INFOS{'Paris,France', region, wwo})</p>]
-	[<p>Zone DVD : (#RAINETTE_INFOS{'Paris,France', zone, wwo})</p>]
+	[<p>Population : (#RAINETTE_INFOS{#GET{code}, population, wwo})</p>]
+	[<p>R&eacute;gion : (#RAINETTE_INFOS{#GET{code}, region, wwo})</p>]
+	[<p>Zone DVD : (#RAINETTE_INFOS{#GET{code}, zone, wwo})</p>]
 </div>
 <br class="nettoyeur"/>
 
 
-#SET{code, 'Paris,France'}
+#SET{code, #GET{code}}
 <h2 class="h2"><:rainette:meteo_conditions|ucfirst:></h2>
 [(#MODELE{rainette_conditions,
 	code=#GET{code},

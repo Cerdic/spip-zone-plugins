@@ -3,10 +3,19 @@
 define ('_RAINETTE_RELOAD_TIME_PREVISIONS',2*3600); // pas la peine de recharger un flux de moins de 2h
 define ('_RAINETTE_RELOAD_TIME_CONDITIONS',1800); // pas la peine de recharger un flux de moins de 30mn
 
-function code2icone($icon) {
-	$r = "na";
-	if (($icon >= 1) && ($icon < 48)) $r = strval($icon);
-	return $r;
+function code2icone($meteo, $service='weather') {
+
+	// Traitement des cas ou les arguments sont vides
+	if (!$service) $service = 'weather';
+
+	// En fonction du service, on inclut le fichier des fonctions
+	// Le principe est que chaque service propose la même liste de fonctions d'interface dans un fichier unique
+	include_spip("services/${service}");
+
+	$iconifier = "${service}_code2icone";
+	$icone = $iconifier($meteo);
+
+	return $icone;
 }
 
 function angle2direction($degre) {

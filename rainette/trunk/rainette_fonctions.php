@@ -36,38 +36,35 @@ function calculer_infos($lieu, $type, $service) {
 }
 
 // Filtres du plugin utilisables dans les squelettes et modeles
-/**
- * filtre rainette_icone_meteo
- *
- * @param string temps
- * @param string chemin
- * @param string extension
- * @return string image correspondant au code de temps
- **/
-# cf pour le choix des icones http://liquidweather.net/icons.php
-function rainette_icone_meteo($code_icon, $taille='petit', $chemin='', $extension="png"){
+// cf pour le choix des icones http://liquidweather.net/icons.php
+function rainette_icone_meteo($meteo, $taille='petit', $service='weather', $chemin='', $extension="png"){
 	$html_icone = '';
 	include_spip('inc/rainette_utils');
 	if (!$chemin) $chemin = _RAINETTE_ICONES_PATH.$taille.'/';
-	$temps = code2icone($code_icon);
+	$temps = code2icone($meteo, $service);
 
 	// Le dossier personnalise ou le dossier passe en argument a bien l'icone requise
 	if ($img = find_in_path($chemin.$temps.'.'.$extension)) {
 		list ($l,$h) = @getimagesize($img);
-		$html_icone = '<img src="'.$img.'" alt="'.rainette_resume_meteo($code_icon).'" title="'.rainette_resume_meteo($code_icon).'" width="'.$l.'" height="'.$h.'" />';
+		$html_icone = '<img src="'.$img.'" alt="'.rainette_resume_meteo($meteo).'" title="'.rainette_resume_meteo($meteo).'" width="'.$l.'" height="'.$h.'" />';
 	}
 	// Le dossier personnalise n'a pas d'image, on prend l'icone par defaut dans le repertoire img_meteo/
 	elseif (($chemin = 'img_meteo/'.$taille.'/') && ($img = find_in_path($chemin.$temps.'.'.$extension))) {
 		list ($l,$h) = @getimagesize($img);
-		$html_icone = '<img src="'.$img.'" alt="'.rainette_resume_meteo($code_icon).'" title="'.rainette_resume_meteo($code_icon).'" width="'.$l.'" height="'.$h.'" />';
+		$html_icone = '<img src="'.$img.'" alt="'.rainette_resume_meteo($meteo).'" title="'.rainette_resume_meteo($meteo).'" width="'.$l.'" height="'.$h.'" />';
 	}
 	return $html_icone;
 }
 
-function rainette_resume_meteo($code_icon){
+function rainette_resume_meteo($meteo){
 	include_spip('inc/rainette_utils');
-	$resume = ucfirst(_T('rainette:meteo_'.code2icone($code_icon)));
-	return $resume;
+
+	// On utilise l'option de _T permettant de savoir si un item existe ou pas
+	$resume = _T('rainette:meteo_' . $meteo, array(), array('force' => false));
+	if (!$resume)
+		$resume = _T('rainette:meteo_na');
+
+	return ucfirst($resume." ($meteo)");
 }
 
 function rainette_afficher_direction($direction){
@@ -182,7 +179,7 @@ function rainette_coasse_conditions($lieu, $modele='conditions_tempsreel', $serv
 	$tableau = unserialize($tableau);
 
 	// On ajoute le lieu et le service au contexte fourni au modele
-	$tableau['code'] = $lieu;
+	$tableau['lieu'] = $lieu;
 	$tableau['service'] = $service;
 
 	$texte = recuperer_fond("modeles/$modele", $tableau);
@@ -198,7 +195,7 @@ function rainette_coasse_infos($lieu, $modele='infos_ville', $service='weather')
 	$tableau = unserialize($tableau);
 
 	// On ajoute le lieu et le service au contexte fourni au modele
-	$tableau['code'] = $lieu;
+	$tableau['lieu'] = $lieu;
 	$tableau['service'] = $service;
 
 	$texte = recuperer_fond("modeles/$modele", $tableau);

@@ -33,6 +33,12 @@ function weather_url2flux($url) {
 	return $flux;
 }
 
+function weather_code2icone($meteo) {
+	$icone = 'na';
+	if (($meteo >= 1) && ($meteo < 48)) $icone = strval($meteo);
+	return $icone;
+}
+
 /**
  * lire le xml fournit par le service meteo et en extraire les infos interessantes
  * retournees en tableau jour par jour
@@ -101,23 +107,30 @@ function weather_xml2conditions($xml){
 		$conditions = reset($conditions['cc']);
 		// recuperer la date de derniere mise a jour des conditions
 		if ($conditions) {
+			// Date d'observation
 			$date_maj = $conditions['lsup'][0];
 			$date_maj = strtotime(preg_replace(',\slocal\s*time\s*,ims','',$date_maj));
 			$tableau['derniere_maj'] = date('Y-m-d H:i:s',$date_maj);
 			// station d'observation (peut etre differente de la ville)
 			$tableau['station'] = $conditions['obst'][0];
+
 			// Liste des conditions meteo
-			$tableau['temperature_reelle'] = intval($conditions['tmp'][0]);
-			$tableau['temperature_ressentie'] = intval($conditions['flik'][0]);
-			$tableau['code_icone'] = intval($conditions['icon'][0]);
-			$tableau['pression'] = intval($conditions['bar'][0]['r'][0]);
-			$tableau['tendance_pression'] = $conditions['bar'][0]['d'][0];
 			$tableau['vitesse_vent'] = intval($conditions['wind'][0]['s'][0]);
 			$tableau['angle_vent'] = intval($conditions['wind'][0]['d'][0]);
 			$tableau['direction_vent'] = $conditions['wind'][0]['t'][0];
+
+			$tableau['temperature_reelle'] = intval($conditions['tmp'][0]);
+			$tableau['temperature_ressentie'] = intval($conditions['flik'][0]);
+
 			$tableau['humidite'] = intval($conditions['hmid'][0]);
 			$tableau['point_rosee'] = intval($conditions['dewp'][0]);
+
+			$tableau['pression'] = intval($conditions['bar'][0]['r'][0]);
+			$tableau['tendance_pression'] = $conditions['bar'][0]['d'][0];
+
 			$tableau['visibilite'] = intval($conditions['vis'][0]);
+
+			$tableau['code_icone'] = intval($conditions['icon'][0]);
 		}
 	}
 	return $tableau;
@@ -125,9 +138,6 @@ function weather_xml2conditions($xml){
 
 function weather_xml2infos($xml, $lieu){
 	$tableau = array();
-
-	// On stocke systematiquement le code du lieu
-	$tableau['code_meteo'] = $lieu;
 
 	// On stocke les informations disponibles dans un tableau standard
 	$regexp = 'loc id=\"' . $lieu . '\"';
