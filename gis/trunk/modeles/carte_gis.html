@@ -51,7 +51,7 @@ X	- ajaxload = non                si elle vaut "non" cette option désactive l'i
 
 <div id="map[(#GET{id})]" class="carte_gis"[(#ENV{style}|!={'non'}|?{' '})style="[width:(#GET{width});][ height:(#GET{height});]"]></div>
 
-<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+<script type="text/javascript">/*<!\[CDATA\[*/
 
 var map[(#GET{id})];
 
@@ -179,10 +179,12 @@ var map[(#GET{id})];
 	}
 
 	$(function(){
-		init_map[(#GET{id})]();
+		jQuery.getScript('[(#PRODUIRE{fond=javascript/gis.js}|compacte)]',function(){
+			init_map[(#GET{id})]();
+		});
 		//[(#ENV{ajaxload}|!={non}|oui)onAjaxLoad(init_map[(#GET{id})]);]
 	});
 
 })(jQuery);
-/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/
+/*\]\]>*/
 </script>

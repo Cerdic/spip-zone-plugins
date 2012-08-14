@@ -140,7 +140,9 @@
 	}
 
 	$(function(){
-		init_config();
+		jQuery.getScript('[(#PRODUIRE{fond=javascript/gis.js}|compacte)]',function(){
+			init_config();
+		});
 		//onAjaxLoad(init_config);
 	});
 

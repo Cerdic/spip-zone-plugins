@@ -94,7 +94,9 @@
 	}
 
 	$(function(){
-		init_map_preview();
+		jQuery.getScript('[(#PRODUIRE{fond=javascript/gis.js}|compacte)]',function(){
+			init_map_preview();
+		});
 		//onAjaxLoad(init_map_preview(true));
 	});
 

@@ -23,14 +23,6 @@ function gis_insert_head_css($flux){
  */
 function gis_insert_head($flux){
 	
-	$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'dist/leaflet.js') .'"></script>';
-	$flux .="\n".'<script type="text/javascript">/*<![CDATA[*/ L.Icon.Default.imagePath = "' . find_in_path(_DIR_LIB_GIS.'dist/images') .'"; /*]]>*/</script>'."\n";
-	$flux .="\n".'<script type="text/javascript" src="'. find_in_path('javascript/gis.js') .'"></script>';
-	$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'plugins/layer/vector/KML.js') .'"></script>';
-	$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'plugins/layer/vector/GPX.js') .'"></script>';
-	$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'plugins/layer/tile/leaflet-providers-0.0.1.js') .'"></script>';
-	$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'plugins/control/Control.FullScreen.js') .'"></script>';
-
 	// initialisation des valeurs de config
 	$config = @unserialize($GLOBALS['meta']['gis']);
 	if (!is_array($config['layers']))
@@ -43,11 +35,6 @@ function gis_insert_head($flux){
 	// insertion des scripts pour google si nécessaire
 	if (count(array_intersect(array('google_roadmap', 'google_satellite', 'google_terrain'), $config['layers'])) > 0) {
 		$flux .="\n".'<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;language='.$GLOBALS['spip_lang'].'"></script>';
-		$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'plugins/layer/tile/Google.js') .'"></script>';
-	}
-	// insertion du script pour bing si nécessaire
-	if (in_array('bing_aerial', $config['layers'])) {
-		$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'plugins/layer/tile/Bing.js') .'"></script>';
 	}
 	
 	return $flux;
