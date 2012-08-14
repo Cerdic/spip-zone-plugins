@@ -71,10 +71,12 @@ function jeux_declarer_tables_interfaces($tables){
     $tables['table_des_tables']['jeux']='jeux';
     $tables['table_des_tables']['jeux_resultats']='jeux_resultats';
 
+	$table_des_traitements = &$tables['table_des_traitements'];
 //    $tables['table_des_traitements']['TEXTE']['jeux']= 'propre(%s)';
-	if (!isset($tables['table_des_traitements']['TITRE_PUBLIC']))
-		$tables['table_des_traitements']['TITRE_PUBLIC'] = $table_des_traitements['TITRE'];
-
+	if (!isset($table_des_traitements['TITRE_PUBLIC']))
+		$table_des_traitements['TITRE_PUBLIC'] = $table_des_traitements['TITRE'];
+	if (!isset($table_des_traitements['TITRE_PRIVE']))
+		$table_des_traitements['TITRE_PRIVE'] = $table_des_traitements['TITRE'];
     return $tables;
 }
 ?>

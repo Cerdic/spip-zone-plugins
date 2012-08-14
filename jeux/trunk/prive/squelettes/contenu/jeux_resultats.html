@@ -2,7 +2,8 @@
 <h1><:jeux:resultats_auteur{nom=#NOM}:></h1>
 </BOUCLE_auteurs>
 <BOUCLE_jeux(JEUX){id_jeu}{tout}>
-<h1><:jeux:resultats_jeu{titre=#TITRE_PRIVE,id=#ID_JEU}:></h1>
+<h1><:jeux:resultats_jeu{titre=#TYPE_JEU,id=#ID_JEU}:></h1>
+<h3>#TITRE_PRIVE</h3>
 </BOUCLE_jeux>
 [(#ID_JEU|ou{#ID_AUTEUR}|non)<h1><:jeux:resultats:></h1>]
 [(#SET{defaut_tri,#ARRAY{
@@ -25,12 +26,15 @@
 	</thead>
 	<tbody>
 	<BOUCLE_liste_resultats(JEUX_RESULTATS spip_jeux spip_auteurs){id_jeu?}{id_auteur?}{pagination #ENV{nb,10}}{tri titre_prive,#GET{defaut_tri}}>
-		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+		<tr class='row_odd odd'>
 		    <td>[(#DATE|affdate_heure)]</td>
 			<td><a href="#URL_ECRIRE{jeu,id_jeu=#ID_JEU}">#TITRE_PRIVE</a></td>
 			<td><a href="#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}">#NOM</a></td>
-			<td>#RESULTAT_COURT</td>
+			<td>#RESULTAT_COURT / #TOTAL</td>
 		</tr>
+[		<tr class='row_even even'>
+            <td colspan="4"> &nbsp; (#RESULTAT_LONG)</td>
+		</tr>]
 	</BOUCLE_liste_resultats>
 	</tbody>
 </table>

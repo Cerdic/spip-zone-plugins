@@ -96,8 +96,8 @@ function balise_NETTOYER_URI_dist($p) {
 
 function table_jeux_caracteristiques() {
 	global $jeux_caracteristiques;
-	$res = _T('jeux:explication_modules')
-		. "\n\n| {{"._T('jeux:jeux').'}} | {{'._T('public:signatures_petition').'}} | {{'._T('jeux:options').'}} | {{'._T('spip:icone_configuration_site').'}} |';
+	$res = _T('jeu:explication_modules')
+		. "\n\n| {{"._T('jeux:jeux').'}} | {{'._T('public:signatures_petition').'}} | {{'._T('jeu:label_options').'}} | {{'._T('spip:icone_configuration_site').'}} |';
 	foreach($jeux_caracteristiques['TYPES'] as $j=>$t) {
 		include_spip('jeux/'.$j);
 		$config = function_exists($f='jeux_'.$j.'_init')?trim($f()):'';
@@ -108,5 +108,10 @@ function table_jeux_caracteristiques() {
 	}
 	return propre($res);
 }
+
+function jeux_icone_horizontale($texte, $lien, $fond){
+	return icone_base($lien, $texte, $fond, "", "horizontale", "");
+}
+
 
 ?>
