@@ -18,7 +18,7 @@ function zippeur_creer_arbo($chemin,$fichier='oui'){
 }
 function zippeur_creer_fichier($squel,$chemin,$options=array()){
 	zippeur_creer_arbo($chemin);
-	$chemin = zippeur_chemin_dossier_local.$chemin ; 
+	$chemin = zippeur_chemin_dossier_local().$chemin ; 
 	$contenu = recuperer_fond($squel,$options);
 	ecrire_fichier($chemin,$contenu);
 }
