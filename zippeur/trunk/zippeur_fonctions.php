@@ -27,10 +27,17 @@ function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=a
 	
 	// création des fichiers dynamiques	
 	foreach ($dynamiques as $dyn){
+		if ($dyn[1]==''){ 	// si le 2 argument est vide, alors pas de souci, on prend le chemin tel quel
+			$dyn[1] = $dyn[0];
+		}
 		zippeur_creer_fichier($dyn[0],$dossier.'/'.$dyn[1],$dyn[2]);	
 	}
 	// Les fichiers statiques
 	foreach ($statiques as $stat){
+		if ($stat[1]==''){		// si le 2 argument est vide, alors pas de souci, on prend le chemin tel quel
+			$stat[1] = $stat[0]; 
+		}
+		
 		if (is_dir(find_in_path($stat[0])))
 		  zippeur_copier_dossier($stat[0],$dossier.'/'.$stat[1]);
 		else
@@ -39,6 +46,10 @@ function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=a
 	// Et ceux où la notion de chemin ne s'applique pas
 	foreach ($sanspath as $sp){
 	   defined('_DIR_SITE') ? $p = _DIR_SITE.$sp[0] : $p = _DIR_RACINE.$sp[0];
+	   if ($sp[1]==''){			// si le 2 argument est vide, alors pas de souci, on prend le chemin tel quel
+			$sp[1] = $sp[0];
+	   }
+	   
 	   zippeur_copier_fichier($p, $dossier.'/'.$sp[1]);
 	}
 	return zippeur(array($chemin),$date,$cmd,$dossier,$chemin);
