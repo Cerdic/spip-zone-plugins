@@ -61,6 +61,7 @@ function videos_install($action,$prefix,$version_cible){
 			break;
 		case 'uninstall':
 			videos_vider_tables('videos_base_version');
+			videos_vider_tables('videos');
 		 	break;
 	}
 }
