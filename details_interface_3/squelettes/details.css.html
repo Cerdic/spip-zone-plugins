@@ -7,10 +7,9 @@ body {
 	background-color: #[(#ENV{claire}|couleur_luminance{0.01}|couleur_saturation{0.015})];
 }
 #bando_identite {
-	background-color: #[(#ENV{claire}|couleur_luminance{0.03})];
 	font-size: 90%;
 	a {
-		color: #999;
+		color: #777;
 		
 		. :hover {
 			color: #333;
@@ -23,7 +22,7 @@ body {
 			a {
 				font-weight: normal;
 				text-decoration: none;
-				color: #999;
+				color: #666;
 				
 				. :hover {
 					color: black;
@@ -78,8 +77,8 @@ body {
 
 #bando_outils {
 	border-top: 1px solid #999;
-	background-color: #777;
-	-spip-gradient: top, #686868, #969696;
+	background-color: #555;
+	-spip-gradient: top, #444, #666;
 }
 .navigation_avec_icones {
 	#bando_navigation {
@@ -138,10 +137,10 @@ body {
 	
 	.inner {
 		border: 0px;
-		-spip-box-shadow:  0px 0px 10px #dddddd;
+		-spip-box-shadow:  0px 0px 20px #f0f0f0;
 
 		. :hover {
-			-spip-box-shadow:  0px 0px 10px #dddddd;
+			-spip-box-shadow:  0px 0px 20px #eeeeee;
 		}
 		
 		.hd {
@@ -493,9 +492,32 @@ div.titrem, h3.titrem {
 		font-size: 80%;
 		font-family: 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;
 	}
+	.contenu_descriptif, .contenu_nom_site {
+		border: 0;
+		background-color: #eee;
+		margin-left: -15px;
+		margin-right: -15px;
+		
+		padding: 10px 15px;
+		
+		.label {
+			font-family: 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;
+			font-size: 0.8em;
+			display: block;
+			margin-bottom: 0.5em;
+			color: #999;
+			font-weight: normal;
+		}
+	}
 	.contenu_notes {
 		background-color: transparent;
-		border-top: 1px solid #aaa;
+		border-top: 0px solid #ccc;
+		background-color: #eee;
+		margin-left: -15px;
+		margin-right: -15px;
+		
+		padding: 10px 15px;
+
 		.label {
 			font-family: 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;
 			display: block;
@@ -507,6 +529,9 @@ div.titrem, h3.titrem {
 			p {
 				margin: 0.5em 0;
 				
+				.spip_note_ref {
+					margin-left: -28px;
+				}
 			}
 		}
 	}
@@ -537,6 +562,16 @@ div.titrem, h3.titrem {
 }
 .fiche_objet .formulaire_spip {
 	border: 1px solid #ddd;
+	
+	. .formulaire_dater {
+		border: 0;
+		-spip-border-radius: 0;
+		margin-left: -15px;
+		margin-right: -15px;
+		
+		padding: 10px 15px;
+		background-color: #eee;
+	}
 }
 
 .onglets_simple {
