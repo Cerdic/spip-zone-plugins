@@ -7,7 +7,7 @@ function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=a
 		$date = date("Y-m-d H:i:s",time());
 	}
 	$chemin = zippeur_chemin_dossier_local().$dossier;
-	supprimer_repertoire($chemin);
+	function_exists('supprimer_repertoire') ?  supprimer_repertoire($chemin) : spip_log("Version de SPIP < 3, possibilité de mélange dans un repertoire dynamique",'zippeur');
 	sous_repertoire($chemin);
 	
 	// création des fichiers dynamiques	
