@@ -224,6 +224,13 @@ h1, .h1 {
 		}
 	}
 }
+.liste-objets-lies {
+	. .auteurs, . .mots {
+		thead {
+			display: none;
+		}
+	}
+}
 .icone, .en-edition {
 	line-height: 120%;
 }
@@ -571,6 +578,18 @@ div.titrem, h3.titrem {
 		
 		padding: 10px 15px;
 		background-color: #eee;
+
+		label {	
+			font-size: 85%;
+			font-weight: normal;
+		}
+		input.text {
+			padding: 3px;
+		}
+		p.boutons {
+			-spip-border-radius: 0px;
+			margin: 0px -15px -10px -15px;;
+		}
 	}
 }
 
