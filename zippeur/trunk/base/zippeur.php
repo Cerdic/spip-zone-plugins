@@ -17,6 +17,10 @@ function zippeur_upgrade($nom_meta_base_version,$version_cible){
                		ecrire_config('zippeur/zippeur_cmd', 'PclZip');
                 	ecrire_meta($nom_meta_base_version,$current_version="0.3");
                 }
+                if (version_compare($current_version,"0.4","<")){
+               		maj_tables('spip_zippeur');
+                	ecrire_meta($nom_meta_base_version,$current_version="0.4");
+                }
                 ecrire_metas();
 				
 				

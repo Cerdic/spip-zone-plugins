@@ -6,6 +6,7 @@ function zippeur_declarer_tables_principales($table){
 			'id_zip'		=> "INT",
 			'nom'			=> "text",
 			'date_modif'	=> "datetime",
+			'delai_suppression'=>"INT",
 			'fichiers'=>"INT"
 			),
 			

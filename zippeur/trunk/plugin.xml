@@ -3,7 +3,7 @@
 	<slogan>Zippez facilement vos fichiers</slogan>
 	<auteur>[Maïeul Rouquette->http://www.maieul.net], Julien Coste-Louret</auteur>
 	<version>3.0.0</version>
-	<version_base>0.3</version_base>
+	<version_base>0.4</version_base>
   	<categorie>multimedia</categorie>
    <etat>dev</etat>
 	<lien>http://www.spip-contrib.net/Zippeur</lien>
@@ -25,7 +25,7 @@
 	<slogan>Zippez facilement vos fichiers</slogan>
 	<auteur>[Maïeul Rouquette->http://www.maieul.net], Julien Coste-Louret</auteur>
 	<version>3.0.0</version>
-	<version_base>0.3</version_base>
+	<version_base>0.4</version_base>
   	<categorie>multimedia</categorie>
    <etat>dev</etat>
 	<icon>images/zip.png</icon>
