@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur' => 'Autor',
 
 	// B
-	'bonneReponse' => 'Die richtige Antwort ist:',
+	'bonneReponse' => 'Die richtige Antwort ist:', # MODIF
 	'bravo' => 'Herzlichen Glückwunsch!',
 
 	// C
@@ -32,24 +32,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'corriger' => 'Antwort',
 
 	// E
-	'erreur_scripts' => 'Skripte verboten: Dieses Spiel kann nicht ausgeführt zerden!',
+	'erreur_scripts' => 'Skripte verboten: Dieses Spiel kann nicht ausgeführt zerden!', # MODIF
 	'erreur_syntaxe' => 'Syntaxfehler',
 	'erreur_taille_grille' => 'Fehler: Ungültige Grö',
-	'explication_jeu' => 'Der interne Titel dient nur dazu, das Spiel im
-	Redaktionsbereich zu bezeichnen.<br /><br />
-	Der Inhalt des Spiels muss in der in der
-	<a href="http://www.spip-contrib.net/Des-jeux-dans-vos-articles">
-	Dokumentation</a> beschriebenen Syntax formuliert werden.
-	<br /><br />
-	Bei intern verwalteten Spielen sind die Tags &lt;jeux> und &lt;/jeux>
-	überflüssig.',
-	'explication_modules' => 'Voici la liste des modules présents sur ce site.
-
-- Les signatures sont les séparateurs indispensables qui permettent l\'identification du jeu par le compilateur.
-- Les séparateurs optionnels sont par définition, au choix de l\'auteur du jeu.
-- La configuration montre ici les paramètres utilisés par défaut, mais que l\'on peut modifier dans la section [config].
-
-Veuillez vous reporter à la documentation du plugin pour bien maîtriser les différents séparateurs.', # NEW
 
 	// G
 	'grille_invalide' => 'Ungültiges Raster',
@@ -79,61 +64,61 @@ Veuillez vous reporter à la documentation du plugin pour bien maîtriser les di
 	'options' => 'Options', # NEW
 
 	// P
-	'point' => ' Punkt',
-	'points' => ' Punkte',
+	'point' => ' Punkt', # MODIF
+	'points' => ' Punkte', # MODIF
 
 	// R
 	'recommencer' => 'Neuer Versuch',
-	'reinitialiser' => 'Neuer Versuch',
+	'reinitialiser' => 'Neuer Versuch', # MODIF
 	'rejouer' => 'Nochmals spielen',
-	'reponse' => 'Antwort',
-	'reponseFausse' => 'Falsch!',
-	'reponseJuste' => 'Richtig!',
-	'reponseNulle' => 'Unbeantwortet!',
-	'resultat' => 'Ergebnis',
+	'reponse' => 'Antwort', # MODIF
+	'reponseFausse' => 'Falsch!', # MODIF
+	'reponseJuste' => 'Richtig!', # MODIF
+	'reponseNulle' => 'Unbeantwortet!', # MODIF
+	'resultat' => 'Ergebnis', # MODIF
 	'resultat2_' => 'Non défini ?', # NEW
 	'resultat2_aucun' => 'Pas d\'enregistrement',
-	'resultat2_defaut' => 'Selon la configuration générale du plugin',
-	'resultat2_dernier' => 'Pour chaque auteur, le dernier résultat uniquement',
-	'resultat2_meilleur' => 'Pour chaque auteur, le meilleur résultat uniquement',
-	'resultat2_meilleurs' => 'L\'ensemble des meilleurs résultats',
-	'resultat2_premier' => 'Pour chaque auteur, le premier résultat uniquement',
-	'resultat2_tous' => 'Tous les résultats',
+	'resultat2_defaut' => 'Selon la configuration générale du plugin', # MODIF
+	'resultat2_dernier' => 'Pour chaque auteur, le dernier résultat uniquement', # MODIF
+	'resultat2_meilleur' => 'Pour chaque auteur, le meilleur résultat uniquement', # MODIF
+	'resultat2_meilleurs' => 'L\'ensemble des meilleurs résultats', # MODIF
+	'resultat2_premier' => 'Pour chaque auteur, le premier résultat uniquement', # MODIF
+	'resultat2_tous' => 'Tous les résultats', # MODIF
 	'resultat_aucun' => 'Aucun',
-	'resultat_defaut' => 'Par défaut',
+	'resultat_defaut' => 'Par défaut', # MODIF
 	'resultat_dernier' => 'Le dernier',
 	'resultat_meilleur' => 'Le meilleur',
 	'resultat_meilleurs' => 'Les meilleurs',
 	'resultat_premier' => 'Le premier',
 	'resultat_tous' => 'Tous',
-	'resultats' => 'Ergebnisse',
-	'resultats_auteur' => 'Die Ergebnisse von @nom@',
-	'resultats_jeu' => 'Ergebnisse von Spiel no. @id@ (@nom@)',
+	'resultats' => 'Ergebnisse', # MODIF
+	'resultats_auteur' => 'Die Ergebnisse von @nom@', # MODIF
+	'resultats_jeu' => 'Ergebnisse von Spiel no. @id@ (@nom@)', # MODIF
 	'resultats_jeux' => 'Résultats des jeux', # NEW
 
 	// S
-	'sans_titre_prive' => 'Ohne internen Titel',
+	'sans_titre_prive' => 'Ohne internen Titel', # MODIF
 	'sans_type' => 'Ohne Typ',
-	'score' => 'Ergebnis:',
+	'score' => 'Ergebnis:', # MODIF
 	'solution' => 'Lösung',
 
 	// T
 	'titre_page_configurer_jeux' => 'Configuration du plugin jeux', # NEW
 	'total' => 'Total', # NEW
-	'type_resultat' => 'Enregistrement des scores :',
+	'type_resultat' => 'Enregistrement des scores :', # MODIF
 
 	// U
 	'une_erreur' => 'Ein Fehler',
 	'une_vide' => 'Eine leere Zelle',
 
 	// V
-	'verifier' => 'Überprüfen',
-	'verifier_validite' => 'Validität überprüfen ',
+	'verifier' => 'Überprüfen', # MODIF
+	'verifier_validite' => 'Validität überprüfen ', # MODIF
 	'voir_auteur' => 'Voir l\'auteur', # NEW
 	'voir_jeu' => 'Spiel ansehen',
-	'voir_resultats' => 'Ergebnisse ansehen',
+	'voir_resultats' => 'Ergebnisse ansehen', # MODIF
 	'votre_choix' => 'Deine Antwort: ',
-	'votre_reponse' => 'Deine Antwort: '
+	'votre_reponse' => 'Deine Antwort: ' # MODIF
 );
 
 ?>

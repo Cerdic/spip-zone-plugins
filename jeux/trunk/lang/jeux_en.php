@@ -14,35 +14,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur' => 'Auteur',
 
 	// B
-	'bonneReponse' => 'The correct answer is:',
+	'bonneReponse' => 'The correct answer is:', # MODIF
 	'bravo' => 'Congratulation !',
 
 	// C
 	'cfg_affichage' => 'L\'affichage du jeu',
 	'cfg_correction' => 'La correction du jeu',
 	'cfg_donner_indices' => 'Afficher des indices',
-	'cfg_donner_reponse' => 'Afficher la réponse',
-	'cfg_donner_solution' => 'Donner les bonnes réponses',
-	'cfg_introduction' => 'Les paramètres regroupés ici correspondent à la configuration par défaut de l\'ensemble des jeux du site. Ils peuvent être surchargées au cas par cas grâce à la configuration interne des jeux (séparateur [config]).<br/><br/>Il est possible que certains jeux n\'utilisent pas certains des paramètres listés ci-dessous.',
+	'cfg_donner_reponse' => 'Afficher la réponse', # MODIF
+	'cfg_donner_solution' => 'Donner les bonnes réponses', # MODIF
+	'cfg_introduction' => 'Les paramètres regroupés ici correspondent à la configuration par défaut de l\'ensemble des jeux du site. Ils peuvent être surchargées au cas par cas grâce à la configuration interne des jeux (séparateur [config]).<br/><br/>Il est possible que certains jeux n\'utilisent pas certains des paramètres listés ci-dessous.', # MODIF
 	'cfg_scores' => 'Les scores du jeu',
-	'cfg_type_resultat' => 'Enregistrement des scores :',
+	'cfg_type_resultat' => 'Enregistrement des scores :', # MODIF
 	'colonne_n' => 'column @n@',
 	'configuration_jeux' => 'Configurer les jeux', # NEW
 	'correction' => 'Correction:',
 	'corriger' => 'Check',
 
 	// E
-	'erreur_scripts' => 'Scripts not allowed: you can not play this game here!',
+	'erreur_scripts' => 'Scripts not allowed: you can not play this game here!', # MODIF
 	'erreur_syntaxe' => 'Syntax error',
 	'erreur_taille_grille' => 'Error: invalid size',
-	'explication_jeu' => 'Le titre privé sert simplement à identifier le jeu en partie privée.<br /><br />Le contenu du jeu doit suivre la syntaxe décrite dans <a href="http://www.spip-contrib.net/Des-jeux-dans-vos-articles">la documentation</a> du plugin.<br /><br />Ici, les balises &lt;jeux> et &lt;/jeux> sont inutiles.',
-	'explication_modules' => 'Voici la liste des modules présents sur ce site.
-
-- Les signatures sont les séparateurs indispensables qui permettent l\'identification du jeu par le compilateur.
-- Les séparateurs optionnels sont par définition, au choix de l\'auteur du jeu.
-- La configuration montre ici les paramètres utilisés par défaut, mais que l\'on peut modifier dans la section [config].
-
-Veuillez vous reporter à la documentation du plugin pour bien maîtriser les différents séparateurs.', # NEW
 
 	// G
 	'grille_invalide' => 'The grid is invalid',
@@ -72,61 +64,61 @@ Veuillez vous reporter à la documentation du plugin pour bien maîtriser les di
 	'options' => 'Options', # NEW
 
 	// P
-	'point' => ' pt',
-	'points' => ' pts',
+	'point' => ' pt', # MODIF
+	'points' => ' pts', # MODIF
 
 	// R
 	'recommencer' => 'Restart',
-	'reinitialiser' => 'Reset',
+	'reinitialiser' => 'Reset', # MODIF
 	'rejouer' => 'Rejouer',
-	'reponse' => 'Answer',
-	'reponseFausse' => 'You were incorrect!',
-	'reponseJuste' => 'You were correct!',
-	'reponseNulle' => 'You didn\'t answer this question!',
-	'resultat' => 'Résultat',
-	'resultat2_' => 'Non défini ?',
+	'reponse' => 'Answer', # MODIF
+	'reponseFausse' => 'You were incorrect!', # MODIF
+	'reponseJuste' => 'You were correct!', # MODIF
+	'reponseNulle' => 'You didn\'t answer this question!', # MODIF
+	'resultat' => 'Résultat', # MODIF
+	'resultat2_' => 'Non défini ?', # MODIF
 	'resultat2_aucun' => 'Pas d\'enregistrement',
-	'resultat2_defaut' => 'Selon la configuration générale du plugin',
-	'resultat2_dernier' => 'Pour chaque auteur, le dernier résultat uniquement',
-	'resultat2_meilleur' => 'Pour chaque auteur, le meilleur résultat uniquement',
-	'resultat2_meilleurs' => 'L\'ensemble des meilleurs résultats',
-	'resultat2_premier' => 'Pour chaque auteur, le premier résultat uniquement',
-	'resultat2_tous' => 'Tous les résultats',
+	'resultat2_defaut' => 'Selon la configuration générale du plugin', # MODIF
+	'resultat2_dernier' => 'Pour chaque auteur, le dernier résultat uniquement', # MODIF
+	'resultat2_meilleur' => 'Pour chaque auteur, le meilleur résultat uniquement', # MODIF
+	'resultat2_meilleurs' => 'L\'ensemble des meilleurs résultats', # MODIF
+	'resultat2_premier' => 'Pour chaque auteur, le premier résultat uniquement', # MODIF
+	'resultat2_tous' => 'Tous les résultats', # MODIF
 	'resultat_aucun' => 'Aucun',
-	'resultat_defaut' => 'Par défaut',
+	'resultat_defaut' => 'Par défaut', # MODIF
 	'resultat_dernier' => 'Le dernier',
 	'resultat_meilleur' => 'Le meilleur',
 	'resultat_meilleurs' => 'Les meilleurs',
 	'resultat_premier' => 'Le premier',
 	'resultat_tous' => 'Tous',
-	'resultats' => 'Résultats',
-	'resultats_auteur' => 'Les résultats de @nom@',
-	'resultats_jeu' => 'Les résultats du jeu numéro @id@ (@nom@)',
+	'resultats' => 'Résultats', # MODIF
+	'resultats_auteur' => 'Les résultats de @nom@', # MODIF
+	'resultats_jeu' => 'Les résultats du jeu numéro @id@ (@nom@)', # MODIF
 	'resultats_jeux' => 'Résultats des jeux', # NEW
 
 	// S
-	'sans_titre_prive' => 'Sans titre privé',
+	'sans_titre_prive' => 'Sans titre privé', # MODIF
 	'sans_type' => 'Sans type',
-	'score' => 'Score:',
+	'score' => 'Score:', # MODIF
 	'solution' => 'Solution',
 
 	// T
 	'titre_page_configurer_jeux' => 'Configuration du plugin jeux', # NEW
 	'total' => 'Total', # NEW
-	'type_resultat' => 'Type de résultats',
+	'type_resultat' => 'Type de résultats', # MODIF
 
 	// U
 	'une_erreur' => 'An error',
 	'une_vide' => 'One empty cell',
 
 	// V
-	'verifier' => 'Check',
-	'verifier_validite' => 'Check the validity ',
+	'verifier' => 'Check', # MODIF
+	'verifier_validite' => 'Check the validity ', # MODIF
 	'voir_auteur' => 'Voir l\'auteur', # NEW
 	'voir_jeu' => 'Voir le jeu',
-	'voir_resultats' => 'Voir les résultats',
+	'voir_resultats' => 'Voir les résultats', # MODIF
 	'votre_choix' => 'Your answer: ',
-	'votre_reponse' => 'Your answer: '
+	'votre_reponse' => 'Your answer: ' # MODIF
 );
 
 ?>
