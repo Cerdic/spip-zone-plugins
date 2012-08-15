@@ -156,10 +156,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'resultat2_meilleurs' => 'L\'ensemble des meilleurs r&eacute;sultats',
 'resultat2_tous' => 'Tous les r&eacute;sultats',
 'titre_xml' => 'Des jeux dans vos articles',
+'multi_jeux' => 'Multi Jeux',
 
 'doc_jeux' => 'Documentation g&eacute;n&eacute;rale',
 'doc_scores' => 'Documentation sur les scores',
 'modules_dispos' => 'Modules disponibles',
+'explication_modules' => 'Voici la liste des modules pr&eacute;sents sur ce site.
+
+- Les signatures sont les s&eacute;parateurs indispensables qui permettent l\'identification du jeu par le compilateur.
+- Les s&eacute;parateurs optionnels sont par d&eacute;finition, au choix de l\'auteur du jeu.
+- La configuration montre ici les param&egrave;tres utilis&eacute;s par d&eacute;faut, mais que l\'on peut modifier dans la section [config].
+
+Veuillez vous reporter &agrave; la documentation du plugin pour bien ma&icirc;triser les diff&eacute;rents s&eacute;parateurs.',
 'options' => 'Options',
 
 'total'     =>'Total',

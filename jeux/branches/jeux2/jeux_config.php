@@ -100,7 +100,7 @@ $jeux_caracteristiques = array(
 
 // nom court a donner aux jeux
   'TYPES' => array(
-	'multi_jeux' => _L('Multi Jeux'),
+	'multi_jeux' => _T('jeux:multi_jeux'),
 	'sudoku' => _T('sudoku:titre_court'),
 //	'kakuro' => _T('kakuro:titre_court'),
 	'mots_croises' => _T('motscroises:titre_court'),
