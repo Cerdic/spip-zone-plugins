@@ -18,6 +18,11 @@
        <nom>declarer_tables_principales</nom>
        <inclure>zippeur_pipelines.php</inclure>
    </pipeline>
+   <pipeline>
+   		<nom>taches_generales_cron</nom>
+   		<inclure>zippeur_pipelines.php</inclure>
+   	</pipeline>
+   	<options>zippeur_options.php</options>
 	<licence>GPL</licence>
 </plugin>
 <plugin spip='[3.0.0-dev;3.0.99]'>
@@ -37,6 +42,11 @@
        <nom>declarer_tables_principales</nom>
        <inclure>zippeur_pipelines.php</inclure>
    </pipeline>
+   <pipeline>
+   		<nom>taches_generales_cron</nom>
+   		<inclure>zippeur_pipelines.php</inclure>
+   	</pipeline>
+   	<options>zippeur_options.php</options>
 	<licence>GPL</licence>
 	<lien>http://www.spip-contrib.net/Zippeur</lien>
 </plugin>
