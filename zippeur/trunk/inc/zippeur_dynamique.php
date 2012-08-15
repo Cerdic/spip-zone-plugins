@@ -1,11 +1,18 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function zippeur_chemin_dossier_local()
+	
+	if (!$chemin) {
+		defined('_DIR_SITE') ? static $chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES : static $chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES;
+	}
+	return $chemin;
+}
 
 function zippeur_creer_arbo($chemin,$fichier='oui'){
 	$arbo = explode('/',$chemin);
 	
-	defined('_DIR_SITE') ? $chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES : $chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES;
+	$chemin = zippeur_chemin_dossier_local();
 	if ($fichier == 'oui'){
 		array_pop($arbo);
 	}
@@ -17,14 +24,14 @@ function zippeur_creer_arbo($chemin,$fichier='oui'){
 }
 function zippeur_creer_fichier($squel,$chemin,$options=array()){
 	zippeur_creer_arbo($chemin);
-	defined('_DIR_SITE') ? $chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES.$chemin : $chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES.$chemin;
+	$chemin = zippeur_chemin_dossier_local.$chemin ; 
 	$contenu = recuperer_fond($squel,$options);
 	ecrire_fichier($chemin,$contenu);
 }
 
 function zippeur_copier_fichier($orig,$dest,$find_in_path=True){
 	zippeur_creer_arbo($dest);
-	defined('_DIR_SITE') ? $chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES : $chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES ;
+	$chemin = zippeur_chemin_dossier_local() ;
 	if ($find_in_path)
 	   copy(find_in_path($orig),$chemin.$dest);
 	else
@@ -34,7 +41,7 @@ function zippeur_copier_fichier($orig,$dest,$find_in_path=True){
 function zippeur_copier_dossier($orig,$dest){
     zippeur_creer_arbo($dest,'non');
     
-    defined('_DIR_SITE') ? $chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES : $chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES ;
+    $chemin = zippeur_chemin_dossier_local() ;
     $path = find_in_path($orig);
     $fichiers=preg_files($path);
 

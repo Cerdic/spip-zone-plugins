@@ -6,7 +6,7 @@ function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=a
 	if ($date == '') {
 		$date = date("Y-m-d H:i:s",time());
 	}
-	defined('_DIR_SITE') ? $chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES.$dossier : $chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES.$dossier;
+	$chemin = zippeur_chemin_dossier_local().$dossier;
 	supprimer_repertoire($chemin);
 	sous_repertoire($chemin);
 	
@@ -33,7 +33,7 @@ function zippeur($array,$date,$cmd,$nom='',$plat='oui',$delai=0){
 	$nom == '' ? $nom = md5(serialize($array)) : $nom = $nom;
 	$cmd =='' ? $cmd = lire_config('zippeur/zippeur_cmd'):$cmd=$cmd;
 	
-	defined('_DIR_SITE') ? $chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES.'cache-zip/'.$nom.".zip" : $chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES.'cache-zip/'.$nom.".zip";
+	$chemin = zippeur_chemin_dossier_local().'cache-zip/'.$nom.".zip" ;
 	include_spip('inc/flock');
 	$enbase = sql_fetsel('id_zip,fichiers,date_modif','spip_zippeur',"`nom`='$nom'");
 	/* On vérifie si le zip existe*/
@@ -58,7 +58,7 @@ function zippeur($array,$date,$cmd,$nom='',$plat='oui',$delai=0){
 function zippeur_zipper($chemin,$array,$cmd,$plat){
 	$temps_un=explode(" ",microtime());
 	if($cmd=='PclZip'){include_spip('inc/pclzip');}
-	defined('_DIR_SITE') ? sous_repertoire(_DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES,'cache-zip') : sous_repertoire(_DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES,'cache-zip');
+	sous_repertoire(zippeur_chemin_dossier_local(),'cache-zip'); 
 	supprimer_fichier($chemin);
 	$fichiers = 0;
 	if($cmd=='PclZip')
