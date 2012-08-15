@@ -21,6 +21,10 @@ function zippeur_upgrade($nom_meta_base_version,$version_cible){
                		maj_tables('spip_zippeur');
                 	ecrire_meta($nom_meta_base_version,$current_version="0.4");
                 }
+                if (version_compare($current_version,"0.5","<")){
+               		maj_tables('spip_zippeur');
+                	ecrire_meta($nom_meta_base_version,$current_version="0.5");
+                }
                 ecrire_metas();
 				
 				

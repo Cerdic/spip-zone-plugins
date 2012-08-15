@@ -55,7 +55,7 @@ function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=a
 	return zippeur(array($chemin),$date,$cmd,$dossier,$chemin);
 }
 
-function zippeur($array,$date,$cmd,$nom='',$plat='oui',$delai='0'){
+function zippeur($array,$date,$cmd='',$nom='',$plat='oui',$delai='0'){
 	$delai = valeur_numerique($delai);
 	$nom == '' ? $nom = md5(serialize($array)) : $nom = $nom;
 	$cmd =='' ? $cmd = lire_config('zippeur/zippeur_cmd'):$cmd=$cmd;
@@ -70,10 +70,10 @@ function zippeur($array,$date,$cmd,$nom='',$plat='oui',$delai='0'){
 		{
 			spip_log("Zippage de $nom.zip avec cmd=$cmd","zippeur");
 			if ($enbase['id_zip']){
-				sql_updateq("spip_zippeur",array("delai_suppression"=>$delai,"date_modif"=>$date,'fichiers'=>count($array)),"id_zip=".$enbase['id_zip']);	
+				sql_updateq("spip_zippeur",array("delai_suppression"=>$delai,"date_modif"=>$date,'date_zip'=>date('Y-m-d H-i-s'),'fichiers'=>count($array)),"id_zip=".$enbase['id_zip']);	
 			}
 			else{
-				sql_insertq("spip_zippeur",array("delai_suppression"=>$delai,"nom"=>$nom,"date_modif"=>$date,'fichiers'=>count($array)));	
+				sql_insertq("spip_zippeur",array("delai_suppression"=>$delai,"nom"=>$nom,"date_modif"=>$date,'date_zip'=>date('Y-m-d H-i-s'),'fichiers'=>count($array)));	
 			}
 		}
 	}
