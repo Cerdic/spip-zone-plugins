@@ -59,8 +59,18 @@ function videos_install($action,$prefix,$version_cible){
 		case 'install':
 			videos_upgrade('videos_base_version',$version_cible);
 			break;
-		// case 'uninstall':
-		// 	// Ce qu'on voudra faire
-		// 	break;
+		case 'uninstall':
+			videos_vider_tables('videos_base_version');
+		 	break;
 	}
 }
+
+function videos_vider_tables($nom_meta_base_version) {
+	sql_delete("spip_types_documents", "extension='dist_daily'");
+	sql_delete("spip_types_documents", "extension='dist_vimeo'");
+	sql_delete("spip_types_documents", "extension='dist_youtu'");
+	sql_delete("spip_types_documents", "extension='dist_cubox'");
+
+	effacer_meta($nom_meta_base_version);
+}
+?>
