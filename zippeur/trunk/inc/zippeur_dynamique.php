@@ -1,13 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function zippeur_chemin_dossier_local()
-	
-	if (!$chemin) {
-		defined('_DIR_SITE') ? static $chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES : static $chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES;
-	}
-	return $chemin;
-}
+
 
 function zippeur_creer_arbo($chemin,$fichier='oui'){
 	$arbo = explode('/',$chemin);

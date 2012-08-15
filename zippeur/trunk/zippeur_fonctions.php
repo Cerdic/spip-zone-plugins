@@ -1,6 +1,21 @@
 <?php
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function zippeur_chemin_dossier_local(){
+	
+	if (!$chemin) {
+		static $chemin = '';
+		if (defined('_DIR_SITE')) {
+			$chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES;
+			}
+		else{
+			$chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES;
+		}
+	}
+	return $chemin;
+}
+
 include_spip('inc/zippeur_dynamique');
 function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=array(),$sanspath=array(),$delai=0){
 	if ($date == '') {
