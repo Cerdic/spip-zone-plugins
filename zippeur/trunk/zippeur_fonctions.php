@@ -55,7 +55,8 @@ function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=a
 	return zippeur(array($chemin),$date,$cmd,$dossier,$chemin);
 }
 
-function zippeur($array,$date,$cmd,$nom='',$plat='oui',$delai=0){
+function zippeur($array,$date,$cmd,$nom='',$plat='oui',$delai='0'){
+	$delai = valeur_numerique($delai);
 	$nom == '' ? $nom = md5(serialize($array)) : $nom = $nom;
 	$cmd =='' ? $cmd = lire_config('zippeur/zippeur_cmd'):$cmd=$cmd;
 	
