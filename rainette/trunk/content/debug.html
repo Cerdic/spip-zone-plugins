@@ -40,7 +40,9 @@
 	service=weather})]
 <br class="nettoyeur"/>
 
-
+<br />
+<hr />
+<br />
 
 [(#REM) Les informations d'une ville - wwo ]
 #SET{code, 'Paris,France'}
@@ -66,11 +68,46 @@
 </div>
 <br class="nettoyeur"/>
 
-
-#SET{code, #GET{code}}
 <h2 class="h2"><:rainette:meteo_conditions|ucfirst:></h2>
 [(#MODELE{rainette_conditions,
 	code=#GET{code},
 	sous_modele=conditions_tempsreel,
 	service=wwo})]
+<br class="nettoyeur"/>
+
+<br />
+<hr />
+<br />
+
+
+
+[(#REM) Les informations d'une ville - wunderground ]
+#SET{code, 'Paris,France'}
+#SET{nom_ville, #RAINETTE_INFOS{#GET{code}, ville, wunderground}}
+<div class="cartouche">
+	<h1 class="h1"><:rainette:meteo_consultation{ville=#GET{nom_ville}}:></h1>
+	<p>Wunderground.com</p>
+	<p class="info-publi">
+		<small>
+			[<:rainette:longitude|ucfirst:>&nbsp;(#RAINETTE_INFOS{
+													#GET{code},
+													longitude,
+													wunderground}|rainette_afficher_unite{angle})]
+			[, <:rainette:latitude:>&nbsp;(#RAINETTE_INFOS{
+											#GET{code},
+											latitude,
+											wunderground}|rainette_afficher_unite{angle})]
+		</small>
+	</p>
+	[<p>Population : (#RAINETTE_INFOS{#GET{code}, population, wunderground})</p>]
+	[<p>R&eacute;gion : (#RAINETTE_INFOS{#GET{code}, region, wunderground})</p>]
+	[<p>Zone DVD : (#RAINETTE_INFOS{#GET{code}, zone, wunderground})</p>]
+</div>
+<br class="nettoyeur"/>
+
+<h2 class="h2"><:rainette:meteo_conditions|ucfirst:></h2>
+[(#MODELE{rainette_conditions,
+	code=#GET{code},
+	sous_modele=conditions_tempsreel,
+	service=wunderground})]
 <br class="nettoyeur"/>

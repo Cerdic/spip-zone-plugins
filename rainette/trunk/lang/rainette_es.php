@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'longitude' => 'longitud',
 
 	// M
-	'meteo' => 'meteorología',
+	'meteo' => 'tiempo',
 	'meteo_0' => 'tornado',
 	'meteo_1' => 'tempestad tropical',
 	'meteo_10' => 'lluvia heladiza',
@@ -92,12 +92,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meteo_8' => 'llovizna heladiza',
 	'meteo_9' => 'llovizna',
 	'meteo_conditions' => 'condiciones actuales',
-	'meteo_consultation' => 'Consultez la météo de @ville@', # NEW
-	'meteo_de' => 'Météo de @ville@', # NEW
+	'meteo_consultation' => 'Consulte el tiempo para @ville@',
+	'meteo_de' => 'Tiempo para @ville@',
 	'meteo_na' => 'desconocido',
 	'meteo_previsions' => 'pronóstico',
-	'meteo_previsions_aujourdhui' => 'prévisions pour aujourd\'hui', # NEW
-	'meteo_previsions_n_jours' => 'prévisions à @nbj@ jours', # NEW
+	'meteo_previsions_aujourdhui' => 'pronóstico para hoy',
+	'meteo_previsions_n_jours' => 'pronósticos a @nbj@ días',
 
 	// N
 	'nuit' => 'noche',
@@ -110,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'risque_precipitation' => 'riesgo de precip.',
 
 	// S
-	'station_observation' => 'estación',
+	'station_observation' => 'observatorio',
 
 	// T
 	'temperature_max' => 'max.',

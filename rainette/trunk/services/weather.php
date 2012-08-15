@@ -36,6 +36,7 @@ function weather_url2flux($url) {
 function weather_meteo2icone($meteo) {
 	$icone = 'na';
 	if (($meteo >= 1) && ($meteo < 48)) $icone = strval($meteo);
+
 	return $icone;
 }
 
@@ -97,6 +98,7 @@ function weather_xml2previsions($xml){
 		// trier par date
 		ksort($tableau);
 	}
+
 	return $tableau;
 }
 
@@ -131,8 +133,11 @@ function weather_xml2conditions($xml){
 			$tableau['visibilite'] = intval($conditions['vis'][0]);
 
 			$tableau['code_icone'] = intval($conditions['icon'][0]);
+			$tableau['url_icone'] = '';
+			$tableau['desc_icone'] = '';
 		}
 	}
+
 	return $tableau;
 }
 
@@ -154,6 +159,7 @@ function weather_xml2infos($xml, $lieu){
 		$tableau['population'] = '';
 		$tableau['zone'] = intval($infos['zone'][0]);
 	}
+
 	return $tableau;
 }
 
