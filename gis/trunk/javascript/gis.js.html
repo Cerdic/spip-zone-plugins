@@ -2,7 +2,7 @@
 
 [(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_GIS})dist/leaflet.js]})]})]
 
-[L.Icon.Default.imagePath = "(#CHEMIN{#EVAL{_DIR_LIB_GIS}dist/images})";]
+[L.Icon.Default.imagePath = "(#CHEMIN{#EVAL{_DIR_LIB_GIS}dist/images}|url_absolue)";]
 
 [(#INCLURE{javascript/gis_geocoder.js})]
 
