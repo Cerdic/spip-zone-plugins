@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_relancer_tout' => 'Reconvert all documents',
+	'bouton_relancer_tout' => 'Reconvert all the documents',
 	'bouton_relancer_tout_format' => 'Reconvert all documents in @format@',
 	'bouton_relancer_tout_format_message' => 'Are you sure you want to restart the conversion of all files in the @format@ format.',
 	'bouton_relancer_tout_message' => 'Are you sure you want to restart the conversion of all files',
