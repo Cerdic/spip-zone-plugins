@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_telecharger_fichier_log' => 'Download the log file of @date@',
 
 	// E
-	'entete_log_avertissement_nonmais' => 'AVERTISSEMENT : items n\'appartenant pas au module', # NEW
+	'entete_log_avertissement_nonmais' => 'WARNING : items n\'appartenant pas au module', # NEW
 	'entete_log_avertissement_peutetre_definition' => 'WARNING: items maybe undefined',
 	'entete_log_avertissement_peutetre_utilisation' => 'WARNING: items maybe not used',
 	'entete_log_date_creation' => 'File generated on @log_date_jour@ at @log_date_heure@.',
