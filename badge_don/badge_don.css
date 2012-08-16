@@ -1,3 +1,3 @@
-#badge_don { position: fixed; bottom: 0; right: 0; z-index : 100000; width: 100px; height: 100px; text-indent: -30000em;
-	background: transparent url(images/badge_don.png) left top no-repeat; opacity : 0.8; }
-#badge_don:hover { opacity: 1; }
+#badge_don { position: fixed; bottom: 0; right: 0; z-index : 100000; }
+#badge_don a { display: block; width: 100px; height: 100px; text-indent: -30000em; background: transparent url(images/badge_don.png) left top no-repeat; opacity: 0.8; }
+#badge_don a:hover { opacity: 1; }
