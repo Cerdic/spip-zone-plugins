@@ -226,8 +226,8 @@ function wwo_xml2infos($xml, $lieu){
 		}
 		$tableau['region'] = (isset($infos['region'])) ? $infos['region'][0]['text'] : '';
 
-		$tableau['longitude'] = (isset($infos['longitude'])) ? floatval($infos['longitude'][0]['text']) : '';
-		$tableau['latitude'] = (isset($infos['latitude'])) ? floatval($infos['latitude'][0]['text']) : '';
+		$tableau['longitude'] = (isset($infos['longitude'])) ? round(floatval($infos['longitude'][0]['text']), 2) : '';
+		$tableau['latitude'] = (isset($infos['latitude'])) ? round(floatval($infos['latitude'][0]['text']), 2) : '';
 
 		$tableau['population'] = (isset($infos['population'])) ? intval($infos['population'][0]['text']) : '';
 		$tableau['zone'] = '';

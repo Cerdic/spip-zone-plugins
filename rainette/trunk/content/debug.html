@@ -40,6 +40,9 @@
 	service=weather})]
 <br class="nettoyeur"/>
 
+[(#GET{code}|rainette_debug{infos, weather})]
+[(#GET{code}|rainette_debug{conditions, weather})]
+
 <br />
 <hr />
 <br />
@@ -75,10 +78,12 @@
 	service=wwo})]
 <br class="nettoyeur"/>
 
+[(#GET{code}|rainette_debug{infos, wwo})]
+[(#GET{code}|rainette_debug{conditions, wwo})]
+
 <br />
 <hr />
 <br />
-
 
 
 [(#REM) Les informations d'une ville - wunderground ]
@@ -111,3 +116,6 @@
 	sous_modele=conditions_tempsreel,
 	service=wunderground})]
 <br class="nettoyeur"/>
+
+[(#GET{code}|rainette_debug{infos, wunderground})]
+[(#GET{code}|rainette_debug{conditions, wunderground})]

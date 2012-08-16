@@ -1,7 +1,7 @@
 <?php
 
-define ('_RAINETTE_RELOAD_TIME_PREVISIONS',2*3600); // pas la peine de recharger un flux de moins de 2h
-define ('_RAINETTE_RELOAD_TIME_CONDITIONS',1800); // pas la peine de recharger un flux de moins de 30mn
+define ('_RAINETTE_RELOAD_TIME_PREVISIONS',2*3600); // pas la peine de recharger des previsions de moins de 2h
+define ('_RAINETTE_RELOAD_TIME_CONDITIONS',1800); // pas la peine de recharger les conditions courantes de moins de 30mn
 
 function meteo2icone($meteo, $service='weather') {
 
@@ -44,7 +44,7 @@ function angle2direction($degre) {
 
 /**
  * charger le fichier des infos meteos correspondant au code
- * si le fichier analyse est trop vieux ou absent, on charge le xml et on l'analyse
+ * si le fichier cache est trop vieux ou absent, on charge le xml et on l'analyse
  * puis on stocke les infos apres analyse
  *
  * @param string $lieu
@@ -61,40 +61,28 @@ function charger_meteo($lieu, $mode='previsions', $service='weather') {
 	include_spip("services/${service}");
 
 	$cacher = "${service}_service2cache";
-	$f = $cacher($lieu, $mode);
+	$cache = $cacher($lieu, $mode);
 
-	if ($mode == 'infos') {
+	$reload_time = ($mode == 'previsions') ? _RAINETTE_RELOAD_TIME_PREVISIONS : _RAINETTE_RELOAD_TIME_CONDITIONS;
+
+	if (!file_exists($cache)
+	OR (($mode != 'infos') AND (!filemtime($cache) OR (time()-filemtime($cache)>$reload_time)))) {
 		// Traitement du fichier d'infos
-		if (!file_exists($f)) {
-			$urler = "${service}_service2url";
-			$url = $urler($lieu, $mode);
+		$urler = "${service}_service2url";
+		$url = $urler($lieu, $mode);
 
-			$acquerir = "${service}_url2flux";
-			$flux = $acquerir($url);
+		$acquerir = "${service}_url2flux";
+		$flux = $acquerir($url);
 
+		if ($mode == 'infos')
 			$convertir = "${service}_xml2infos";
-			$tableau = $convertir($flux, $lieu);
-			ecrire_fichier($f, serialize($tableau));
-		}
-	}
-	else {
-		// Traitement du fichier de donnees requis
-		$reload_time = ($mode == 'previsions') ? _RAINETTE_RELOAD_TIME_PREVISIONS : _RAINETTE_RELOAD_TIME_CONDITIONS;
-		if (!file_exists($f)
-		  || !filemtime($f)
-		  || (time()-filemtime($f)>$reload_time)) {
-			$urler = "${service}_service2url";
-			$url = $urler($lieu, $mode);
-
-			$acquerir = "${service}_url2flux";
-			$flux = $acquerir($url);
-
+		else
 			$convertir = ($mode == 'previsions') ? "${service}_xml2previsions" : "${service}_xml2conditions";
-			$tableau = $convertir($flux);
-			ecrire_fichier($f, serialize($tableau));
-		}
+		$tableau = $convertir($flux, $lieu);
+		ecrire_fichier($cache, serialize($tableau));
 	}
-	return $f;
+
+	return $cache;
 }
 
 

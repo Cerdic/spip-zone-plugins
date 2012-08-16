@@ -57,7 +57,7 @@ function wunderground_url2flux($url) {
 	return $xml;
 }
 
-function wunderground_meteo2icone($meteo) {
+function wunderground_meteo2icone($meteo, $periode=0) {
 	static $wunderground2weather = array(
 							'chanceflurries'=> array('41','46'),
 							'chancerain'=> array('39','45'),
@@ -81,11 +81,8 @@ function wunderground_meteo2icone($meteo) {
 							'snow'=> array('16','16'),
 							'sunny'=> array('32','31'),
 							'tstorms'=> array('4','4'),
-							'tstorms'=> array('4','4'),
 							'thunderstorms'=> array('4','4'),
 							'thunderstorm'=> array('4','4'),
-							'Thunderstorms'=> array('4','4'),
-							'Thunderstorm'=> array('4','4'),
 							'unknown'=> array('4','4'),
 							'cloudy'=> array('26','26'),
 							'scatteredclouds'=> array('30','29'),
@@ -93,7 +90,44 @@ function wunderground_meteo2icone($meteo) {
 
 	$icone = 'na';
 	if (array_key_exists($meteo,  $wunderground2weather))
-		$icone = strval($wunderground2weather[$meteo][0]);
+		$icone = strval($wunderground2weather[$meteo][$periode]);
+	return $icone;
+}
+
+function wunderground_code2meteo($meteo, $periode=0) {
+	static $wunderground2weather = array(
+							'chanceflurries'=> array('41','46'),
+							'chancerain'=> array('39','45'),
+							'chancesleet'=> array('39','45'),
+							'chancesleet'=> array('41','46'),
+							'chancesnow'=> array('41','46'),
+							'chancetstorms'=> array('38','47'),
+							'chancetstorms'=> array('38','47'),
+							'clear'=> array('32','31'),
+							'cloudy'=> array('26','26'),
+							'flurries'=> array('15','15'),
+							'fog'=> array('20','20'),
+							'hazy'=> array('21','21'),
+							'mostlycloudy'=> array('28','27'),
+							'mostlysunny'=> array('34','33'),
+							'partlycloudy'=> array('30','29'),
+							'partlysunny'=> array('28','27'),
+							'sleet'=> array('5','5'),
+							'rain'=> array('11','11'),
+							'sleet'=> array('5','5'),
+							'snow'=> array('16','16'),
+							'sunny'=> array('32','31'),
+							'tstorms'=> array('4','4'),
+							'thunderstorms'=> array('4','4'),
+							'thunderstorm'=> array('4','4'),
+							'unknown'=> array('4','4'),
+							'cloudy'=> array('26','26'),
+							'scatteredclouds'=> array('30','29'),
+							'overcast'=> array('26','26'));
+
+	$icone = 'na';
+	if (array_key_exists($meteo,  $wunderground2weather))
+		$icone = strval($wunderground2weather[$meteo][$periode]);
 	return $icone;
 }
 
@@ -173,9 +207,7 @@ function wunderground_xml2conditions($xml){
 		$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
 		// Station d'observation
 		$tableau['station'] = (isset($conditions['observation_location']))
-			? $conditions['observation_location'][0]['children']['city'][0]['text']
-			. ', '
-			. $conditions['observation_location'][0]['children']['country_iso3166'][0]['text']
+			? trim($conditions['observation_location'][0]['children']['full'][0]['text'], ',')
 			: '';
 
 		// Identification des suffixes d'unite pour choisir le bon champ
@@ -202,11 +234,23 @@ function wunderground_xml2conditions($xml){
 		$tableau['pression'] = (isset($conditions['pressure_'.$up])) ? intval($conditions['pressure_'.$up][0]['text']) : '';
 		$tableau['tendance_pression'] = (isset($conditions['pressure_trend'])) ? $tendance2weather[intval($conditions['pressure_trend'][0]['text'])] : '';
 
-		$tableau['visibilite'] = (isset($conditions['visibility_'.$ud]) OR $conditions['visibility_'.$ud]!='N/A') ? intval($conditions['visibility_'.$ud][0]['text']) : '';
+		$tableau['visibilite'] = (isset($conditions['visibility_'.$ud])) ? intval($conditions['visibility_'.$ud][0]['text']) : '';
 
 		$tableau['code_icone'] = (isset($conditions['icon'])) ? $conditions['icon'][0]['text'] : '';
 		$tableau['url_icone'] = (isset($conditions['icon_url'])) ? $conditions['icon_url'][0]['text'] : '';
 		$tableau['desc_icone'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['text'] : '';
+
+		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
+		// Pour ce service (cas actuel) le nom du fichier icone commence par "nt_" pour la nuit.
+		// TODO : prendre en compte a terme le nouvel indicateur de jour/nuit dans une prochaine version de WUI
+		$icone = basename($tableau['url_icone']);
+		if (strpos($icone, 'nt_') === false)
+			$tableau['periode'] = 0; // jour
+		else
+			$tableau['periode'] = 1; // nuit
+
+		// Determination du code meteo dans le systeme meteo de weather.com
+		$tableau['meteo'] = wunderground_code2meteo($tableau['nom_icone'], $tableau['periode']);
 	}
 
 	return $tableau;
@@ -225,8 +269,8 @@ function wunderground_xml2infos($xml, $lieu){
 		}
 		$tableau['region'] = '';
 
-		$tableau['longitude'] = (isset($infos['lon'])) ? floatval($infos['lon'][0]['text']) : '';
-		$tableau['latitude'] = (isset($infos['lat'])) ? floatval($infos['lat'][0]['text']) : '';
+		$tableau['longitude'] = (isset($infos['lon'])) ? round(floatval($infos['lon'][0]['text']), 2) : '';
+		$tableau['latitude'] = (isset($infos['lat'])) ? round(floatval($infos['lat'][0]['text']), 2) : '';
 
 		$tableau['population'] = '';
 		$tableau['zone'] = '';

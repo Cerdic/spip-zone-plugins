@@ -116,7 +116,7 @@ function rainette_afficher_unite($valeur, $type_valeur='', $service='weather') {
 		$suffixe = ($unite == 'm') ? 'metrique' : 'standard';
 		$espace = (($type_valeur == 'temperature') ||
 				   ($type_valeur == 'pourcentage') || ($type_valeur == 'angle')) ? '' : '&nbsp;';
-		$valeur_affichee = strval($valeur).$espace._T('rainette:unite_'.$type_valeur.'_'.$suffixe);
+		$valeur_affichee = strval($valeur) . $espace . _T('rainette:unite_'.$type_valeur.'_'.$suffixe);
 	}
 	return $valeur_affichee;
 }
@@ -200,6 +200,23 @@ function rainette_coasse_infos($lieu, $modele='infos_ville', $service='weather')
 
 	$texte = recuperer_fond("modeles/$modele", $tableau);
 	return $texte;
+}
+
+function rainette_debug($lieu, $mode='previsions', $service='weather') {
+	include_spip('inc/rainette_utils');
+
+	// Recuperation du tableau des conditions courantes
+	$nom_fichier = charger_meteo($lieu, $mode, $service);
+	if ($nom_fichier) {
+		lire_fichier($nom_fichier,$tableau);
+		$tableau = unserialize($tableau);
+
+		// On ajoute le lieu et le service au contexte fourni au modele
+		$tableau['lieu'] = $lieu;
+		$tableau['service'] = $service;
+
+		var_dump($tableau);
+	}
 }
 
 ?>
