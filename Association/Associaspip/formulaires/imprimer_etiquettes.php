@@ -79,8 +79,15 @@ function formulaires_imprimer_etiquettes_traiter_dist()
 	$table = array('m'=>'spip_asso_membres', 'al'=>'spip_adresses_liens','a'=>'spip_adresses');
 	$where = "al.objet='auteur' AND al.id_objet=m.id_auteur AND al.id_adresse=a.id_adresse AND ( (code_postal<>'' AND ville<>'') OR (boite_postale<>'') )";
 	$statut_interne = _request('statut_interne');
-	if($statut_interne!='tous'){
+	if ($statut_interne=='') {
+		$statut_interne = 'tous';
+	}
+	if ($statut_interne!='tous'){
 		$where .= ' AND statut_interne = '.sql_quote($statut_interne);
+	}
+	$filtre_categorie = _request('filtre_categorie');
+	if ($filtre_categorie){
+		$where .= ' AND categore = '.sql_quote($filtre_categorie);
 	}
 	$filtre_email = _request('filtre_email');
 	if($filtre_email) {
@@ -148,7 +155,7 @@ function formulaires_imprimer_etiquettes_traiter_dist()
 	if ($indice==0) {
 		$message .= _T('asso:etiquette_aucune_impression');
 	} else {
-		$nom_fic = 'etiquette.pdf';
+		$nom_fic = "etiquettes_$statut_interne_". ($filtre_categorie?$filtre_categorie:0) .'_'. ($filtre_email?'avec':'sans'). 'email.pdf';
 		$pdf->Output($nom_fic, 'D');
 		$message .= _T('asso:etiquette_fichier_telecharger', array('fichier'=>$nom_fic) );
 	}

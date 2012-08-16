@@ -8,6 +8,16 @@
 				<label for="statut_interne"><:asso:adherent_libelle_statut:></label>
 				[(#ENV{statut_interne}|instituer_statut_interne_ici)]
 			</li>
+			<li class="editer_filtre_categorie">
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{categorie})</span>]
+				<label for="fittre_categorie"><:asso:adherent_libelle_categorie:></label>
+				<select name="fittre_categorie" id="fittre_categorie">
+					<option value="0"><:asso:tous:></option>
+				<BOUCLE_categorieAimprimer(ASSO_CATEGORIES){par libelle}>
+					<option value="#ID_CATEGORIE"[ (#ENV{filtre_categorie}|=={#ID_CATEGORIE}|oui) selected="selected"]>#LIBELLE</option>
+				</BOUCLE_categorieAimprimer>
+				</select>
+			</li>
 			<li class="editer_filtre_email">
 				<div class="choix">
 					<input type="checkbox" name="filtre_email" id="filtre_email" value="oui" [(#ENV{filtre_email}|oui) checked="checked"]/>
