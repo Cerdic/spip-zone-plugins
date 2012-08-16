@@ -90,6 +90,7 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 	if(array_key_exists('taille',$desc['field'])) if($infosVideo) $champs['taille'] = $infosVideo->duration;
 	if(array_key_exists('credits',$desc['field'])) if($infosVideo) $champs['credits'] = $infosVideo->author;
 	if(array_key_exists('statut',$desc['field'])) $champs['statut'] = 'publie';
+	if(array_key_exists('media',$desc['field'])) $champs['media'] = 'video';
 
 	/* Cas de la présence d'une vignette à attacher */
 	if($logoDocument){
