@@ -62,6 +62,7 @@ ou :
 Pour l'affichage des indices, veillez a ce que la premiere
 expression ne soit pas une expression reguliere
 
+TODO : passer en objet pour eviter les globales
 */
 
 // configuration par defaut : jeu_{mon_jeu}_init()
@@ -76,15 +77,14 @@ function jeux_trous_init() {
 	";
 }
 
-function trous_inserer_le_trou($indexJeux, $indexTrou, $size, $corriger) {
+function trous_inserer_le_trou($indexJeux, $indexTrou, $size) {
 	global $propositionsTROUS, $scoreTROUS, $score_detailTROUS;
 	// Initialisation du code a retourner
-	$nomVarSelect = "var{$indexJeux}_T{$indexTrou}";
 	$mots = $propositionsTROUS[$indexTrou];
-	$prop = trim($_POST[$nomVarSelect]);
-	$oups = $disab = $color = '';
+	$prop = $oups = $disab = $color = '';
 	// en cas de correction
-	if($corriger) {
+	if(jeux_form_correction($indexJeux)) {
+		$prop = jeux_form_reponse($indexJeux, $indexTrou, 'T');
 		$ok = strlen($prop) && jeux_in_liste($prop, $mots);
 		if($ok) ++$scoreTROUS;
 		if(jeux_config('couleurs')) $color = $ok?' juste':' faux';
@@ -102,8 +102,9 @@ function trous_inserer_le_trou($indexJeux, $indexTrou, $size, $corriger) {
 		$score_detailTROUS[] = 'T'.($indexTrou+1).":$prop:".($ok?'1':'0');
 		$disab = " disabled='disabled'";
 	}
-	$codeHTML = "<input name='$nomVarSelect' class='jeux_input trous$color' size='$size' type='text'$disab' value=\"$prop\" />";
-//	if($corriger) $codeHTML .= '(T'.($indexTrou+1).":$prop/".$GLOBALS['meta']['charset']."[".join('|',$mots)."]:".($ok?'1':'0').'pt)';
+	list($idInput, $nameInput) = jeux_idname($indexJeux, $indexTrou, 'T');
+	$codeHTML = "<input id='sidInput' name='$nameInput' class='jeux_input trous$color' size='$size' type='text'$disab' value=\"$prop\" />";
+//	if(jeux_form_correction($indexJeux)) $codeHTML .= '(T'.($indexTrou+1).":$prop/".$GLOBALS['meta']['charset']."[".join('|',$mots)."]:".($ok?'1':'0').'pt)';
 	return $oups . $codeHTML;
 }
 
@@ -116,7 +117,7 @@ function trous_inserer_les_trous($chaine, $indexJeux) {
 	if (($sizeInput = intval(jeux_config('taille')))==0)
 		foreach($propositionsTROUS as $trou) foreach($trou as $mot) $sizeInput = max($sizeInput, strlen($mot));
 	$chaine = $texteAvant.jeux_rem('TROU-DEBUT', $indexTROU, '', 'span')
-		. trous_inserer_le_trou($indexJeux, $indexTROU, $sizeInput, isset($_POST["var_correction_".$indexJeux]))
+		. trous_inserer_le_trou($indexJeux, $indexTROU, $sizeInput)
 		. jeux_rem('TROU-FIN', $indexTROU, '', 'span')
 		. $texteApres; 
 	}
@@ -149,7 +150,6 @@ function jeux_trous($texte, $indexJeux, $form=true) {
 	$titre = $html = false;
 	$indexTrou = $scoreTROUS = 0;
 	$score_detailTROUS = array();
-	
 	// parcourir tous les #SEPARATEURS
 	$tableau = jeux_split_texte('trous', $texte); 
 	foreach($tableau as $i => $valeur) if ($i & 1) {
@@ -165,8 +165,8 @@ function jeux_trous($texte, $indexJeux, $form=true) {
 	}
 	// reinserer les trous mis en forme
 	$texte = trous_inserer_les_trous($html, $indexJeux);
-	// correction ?
-	$correction = isset($_POST["var_correction_".$indexJeux]);
+	// mode correction ?
+	$correction = jeux_form_correction($indexJeux);
 	if($correction) sort($score_detailTROUS);
 	$id_jeu = _request('id_jeu');
 	// recuperation du fond 'jeux/trous.html'
@@ -175,8 +175,8 @@ function jeux_trous($texte, $indexJeux, $form=true) {
 		array('id_jeu' => $id_jeu, 'titre' => $titre,
 			'texte' => $texte, 'correction' => $correction,
 			'indices' => jeux_config('indices')?trous_afficher_indices($indexJeux):'',
-			'fond_score' => !$correction?''
-				:jeux_afficher_score($scoreTROUS, $indexTrou, $id_jeu, join(', ', $score_detailTROUS), $categ_score),
+			'fond_score' => $correction?
+				jeux_afficher_score($scoreTROUS, $indexTrou, $id_jeu, join(', ', $score_detailTROUS), $categ_score):'',
 		)
 	);
 	// mise en place du formulaire

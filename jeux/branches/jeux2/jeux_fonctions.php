@@ -46,8 +46,9 @@ $GLOBALS['cs_introduire'][] = 'pas_de_balise_jeux';
 
 // ajoute l'id_jeu du jeu a sa config interne et traite le jeu grace a propre()
 // ce filtre doit agir sur #CONTENU*
-function traite_contenu_jeu($texte, $id_jeu) {
-	return propre(str_replace(_JEUX_FIN, "[config]id_jeu=$id_jeu"._JEUX_FIN, $texte));
+// dans le cas d'un formulaire CVT, il faut egalement $cvt='oui' et $indexJeux
+function traite_contenu_jeu($texte, $id_jeu, $jeu_cvt='non', $indexJeux=0) {
+	return propre(str_replace(_JEUX_FIN, "[config]jeu_cvt=$jeu_cvt\nindex_jeux=$indexJeux\nid_jeu=$id_jeu"._JEUX_FIN, $texte));
 }
 
 // renvoie le titre public du jeu que l'on peut trouver grace au separateur [titre]

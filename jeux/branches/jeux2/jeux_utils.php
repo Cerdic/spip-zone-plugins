@@ -75,7 +75,7 @@ function jeux_split_texte($jeu, &$texte) {
    if ($reg[1]==_JEUX_CONFIG && $i+1<count($tableau)) jeux_config_ecrase($tableau[$i+1]); 
   }
   return $tableau;
-}  
+}
 
 // transforme un texte en listes html 
 function jeux_listes($texte) {
@@ -87,7 +87,9 @@ function jeux_listes($texte) {
 
 // retourne un tableau de mots ou d'expressions a partir d'un texte
 function jeux_liste_mots($texte) {
-	$texte = filtrer_entites(trim(echappe_retour($texte)));
+	// corrections typo eventuelles
+	$texte = str_replace(array('&#8217;','&laquo;&nbsp;','&nbsp;&raquo;','&laquo; ',' &raquo;'), array("'",'"','"','"','"'), echappe_retour($texte));
+	$texte = filtrer_entites(trim($texte));
 	$split = explode('"', $texte);
 	$c = count($split);
 	$split2 = array();
@@ -189,7 +191,7 @@ function jeux_liste_les_jeux(&$texte) {
 	return array_unique($liste);
 }
 
-// decode les jeux, si le module jeux/lejeu.php est present
+// decode les jeux si les modules jeux/lejeu.php sont presents
 // retourne la liste des jeux trouves et inclut la bibliotheque si $indexJeux existe
 function jeux_decode_les_jeux(&$texte, $indexJeux=NULL) {
 	global $jeux_caracteristiques, $scoreMULTIJEUX;
@@ -324,27 +326,52 @@ function jeux_javascript($b) {
  return $f?'<script type="text/javascript" src="'.$f."\"></script>\n":'';
 }
 
-// pour obtenir un bloc depliable
+// renvoie un bloc depliable
 function jeux_block_depliable($texte, $block) {
  if (!strlen($texte)) return '';
  return "<div class='jeux_deplie jeux_replie'>$texte</div><div class='jeux_deplie_contenu jeux_invisible'>$block</div>";
 }
 
+// renvoie le couple array(id, name) pour construire un input
+// les index doivent etre positifs
+function jeux_idname($indexJeux, $index=-1, $prefixe='', $index2=-1, $prefixe2='') {
+	$indexJeux = 'reponses' . $indexJeux;
+	if($index<0) return array($indexJeux, $indexJeux);
+	if($index2<0) return array($indexJeux.'-'.$prefixe.$index, $indexJeux.'['.$prefixe.$index.']');
+	return array($indexJeux.'-'.$prefixe.$index.'-'.$prefixe2.$index2, $indexJeux.'['.$prefixe.$index.']['.$prefixe2.$index2.']');
+}
+
+// renvoie la reponse trimee du formulaire (NULL si n'existe pas)
+function jeux_form_reponse($indexJeux, $index=-1, $prefixe='', $index2=-1, $prefixe2='') {
+  	$reponse = _request('reponses'.$indexJeux);
+	if($index>=0 && is_array($reponse)) $reponse = isset($reponse[$prefixe.$index])?$reponse[$prefixe.$index]:NULL;
+	if($index2>=0 && is_array($reponse)) $reponse = isset($reponse[$prefixe2.$index2])?$reponse[$prefixe2.$index2]:NULL;
+	if(is_string($reponse) && strlen($reponse)) $reponse = trim($reponse);
+	return $reponse;
+}
+
+// indique si on doit corriger ou non
+function jeux_form_correction($indexJeux) {
+	return intval(_request('correction'.$indexJeux))?true:false;
+}
+
 // deux fonctions qui encadrent un jeu dans un formulaire
 function jeux_form_debut($name, $indexJeux, $class="", $method="post", $action="") {
+	$id_jeu = intval(jeux_config('id_jeu'));
+	$cvt = jeux_config('jeu_cvt')?'oui':'non';
+	$hidden = "<div><input type='hidden' name='id_jeu' value='$id_jeu' />\n"
+		."<input type='hidden' name='debut_index_jeux' value='$GLOBALS[debut_index_jeux]' />\n"
+		."<input type='hidden' name='index_jeux' value='$indexJeux' />\n"
+		."<input type='hidden' name='correction$indexJeux' value='1' /></div>\n";
+	if(jeux_config('jeu_cvt')) return $hidden;
 	if (strlen($name)) $name=" id='$name$indexJeux'";
 	if (strlen($class)) $class=" class='$class'";
 	if (strlen($method)) $method=" method='$method'";
 	/*if (strlen($action))*/ $action=" action='$action#JEU$indexJeux'";
-	$id_jeu = intval(jeux_config('id_jeu'));
-	return "\n<form".$name.$class.$method.$action." >\n"
-		."<div><input type='hidden' name='id_jeu' value='$id_jeu' />\n"
-		."<input type='hidden' name='debut_index_jeux' value='{$GLOBALS['debut_index_jeux']}' />\n"
-		."<input type='hidden' name='index_jeux' value='$indexJeux' />\n"
-		."<input type='hidden' name='var_correction_$indexJeux' value='1' /></div>\n";
+	return "\n<form".$name.$class.$method.$action." >\n".$hidden;
 }
 function jeux_form_fin() {
-	return "\n</form>\n";
+	return jeux_config('jeu_cvt')?'':"\n</form>\n";
 }
 
 ?>

@@ -10,24 +10,27 @@
 #  Documentation : http://www.spip-contrib.net/Des-jeux-dans-vos-articles  #
 #--------------------------------------------------------------------------#
 
+#ini_set('display_errors','1'); error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 include_spip('jeux_utils');
 // tableau de parametres exploitables par les plugins
 global $jeux_config;
 
 // fonction pre-traitement, pipeline pre_propre
-// insersion de quelques balises de reconnaissance
-function jeux_pre_propre($texte) { 
+// insertion de quelques balises de reconnaissance
+function jeux_pre_propre($texte) {
 	// s'il n'est pas present dans un formulaire envoye,
 	// l'identifiant du jeu est choisi au hasard...
 	// ca peut servir en cas d'affichage de plusieurs articles par page.
-	// en passant tous les jeux en ajax, ce ne sera plus la peine.
+	// cet identifiant pourrait etre remplace par l'id_jeu d'un jeu present en base
 	static $indexJeux = null;
 	if(!isset($GLOBALS['debut_index_jeux']))
-		$GLOBALS['debut_index_jeux'] = isset($_POST['debut_index_jeux'])?$_POST['debut_index_jeux']:rand(10000, 99999);
+		$GLOBALS['debut_index_jeux'] = _request('debut_index_jeux')?_request('debut_index_jeux'):rand(10000, 99999);
 
 	if (strpos($texte, _JEUX_DEBUT)===false || strpos($texte, _JEUX_FIN)===false) return $texte;
 	if(isset($indexJeux)) ++$indexJeux;
 		else $indexJeux = $GLOBALS['debut_index_jeux'];
+	// en cas de formulaire CVT ajax, le jeu est toujours unique et son $indexJeux est deja connu
+	$indexJeuxReel = (_request('var_ajax')=='form' && _request('jeu_cvt')=='oui' && _request('index_jeux'))?_request('index_jeux'):$indexJeux;
 
 	// isoler le jeu...
 	list($texteAvant, $suite) = explode(_JEUX_DEBUT, $texte, 2); 
@@ -35,7 +38,8 @@ function jeux_pre_propre($texte) {
 
 	// ...decoder le texte obtenu en fonction des signatures et inclure le jeu
 	$liste = jeux_liste_les_jeux($texte);
-	jeux_decode_les_jeux($texte, $indexJeux);
+	jeux_decode_les_jeux($texte, $indexJeuxReel);
+
 	// calcul des fichiers necessaires pour le header
 	if(count($liste)) {
 		// on oblige qd meme jeux.css et jeux.js si un jeu est detecte
@@ -48,10 +52,10 @@ function jeux_pre_propre($texte) {
 	} else $header = '';
 
 	return $texteAvant . $header
-		.jeux_rem('PLUGIN-DEBUT', $indexJeux, join('/', $liste))
-		."<div id=\"JEU$indexJeux\" class=\"jeux_global\">$texte</div>"
-#		."<div id=\"JEU$indexJeux\" class=\"jeux_global ajax\">$texte</div>"
-		.jeux_rem('PLUGIN-FIN', $indexJeux).jeux_pre_propre($texteApres);
+		. jeux_rem('PLUGIN-DEBUT', $indexJeuxReel, join('/', $liste))
+		. "<div id=\"JEU$indexJeux\" class=\"jeux_global\">$texte</div>"
+#		. "<div id=\"JEU$indexJeux\" class=\"jeux_global ajax\">$texte</div>"
+		. jeux_rem('PLUGIN-FIN', $indexJeuxReel).jeux_pre_propre($texteApres);
 }
 
 // fonction post-traitement, pipeline post_propre
