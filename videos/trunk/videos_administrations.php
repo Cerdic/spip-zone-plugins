@@ -41,10 +41,15 @@ function videos_upgrade($nom_meta_base_version,$version_cible){
 		}
 	}
 	
-	// Si présence du champ MEDIA : on MAJ
+	// Si présence du champ MEDIA_DEFAUT : on MAJ
 	$trouver_table=charger_fonction('trouver_table','base');	
 	$desc = $trouver_table('spip_types_documents');
 	if(array_key_exists('media_defaut',$desc['field'])) sql_updateq('spip_types_documents',array('media_defaut'=>'video'),"extension REGEXP '^dist_'");
+
+	// Si présence du champ MEDIA : on MAJ
+	$trouver_table=charger_fonction('trouver_table','base');	
+	$desc = $trouver_table('spip_documents');
+	if(array_key_exists('media',$desc['field'])) sql_updateq('spip_documents',array('media'=>'video'),"extension REGEXP '^dist_'");
 }
 
 function videos_vider_tables($nom_meta_base_version) {
