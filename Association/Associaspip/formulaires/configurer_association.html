@@ -288,8 +288,20 @@ Cette fonctionnalite n'est possible que si le plugin "FPDF" est active... -->]
 					</fieldset>
 
 					<fieldset>
-						<legend><:asso:fpdf_tablecolors:></legend>
+						<legend><:asso:fpdf_table:></legend>
 						<ul>
+							<li>
+								<label for="fpdf_tablealign"><:asso:config_fpdf_tablealign:></label>
+								<select name="fpdf_tablealign" id="fpdf_tablealign">
+									<option value="L"[ (#ENV{fpdf_tablealign}|strtoupper|=={L}|oui) selected="selected"]><:asso:config_fpdf_left:></option>
+									<option value="C"[ (#ENV{fpdf_tablealign}|strtoupper|=={C}|oui) selected="selected"]><:asso:config_fpdf_center:></option>
+									<option value="R"[ (#ENV{fpdf_tablealign}|strtoupper|=={R}|oui) selected="selected"]><:asso:config_fpdf_right:></option>
+								</select>
+							</li>
+							<li>
+								<label for="fpdf_marginc"><:asso:config_fpdf_marginc:></label>
+								<input type="[(#HTML5|?{number,text})]" class="number integer" name="fpdf_marginc" id="fpdf_marginc" value="[(#ENV{fpdf_marginc,2})]" />
+							</li>
 							<li>
 								<label for="fpdf_rowhead"><:asso:config_fpdf_rowhead:></label>
 								<input type="text" class="palette" name="fpdf_rowhead" id="fpdf_rowhead" value="[(#ENV{fpdf_rowhead,FF9664})]" />

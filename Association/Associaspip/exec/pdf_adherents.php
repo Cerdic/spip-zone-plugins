@@ -70,9 +70,6 @@ function exec_pdf_adherents()
 			$pdf->AddCol('telephone',30 ,_T('coordonnees:label_numero'), 'C');
 			$telephones = association_recuperer_telephones($liste_id_auteurs);
 		}
-		$prop = array(
-			'padding'=>2
-		);
 		$order = 'id_auteur';
 		if ($sent['nom_famille']=='on')
 			$order = 'nom_famille' . ",$order";
@@ -97,7 +94,7 @@ function exec_pdf_adherents()
 			}
 		}
 
-		$pdf->Query(sql_select('*, c.libelle as categorie','spip_asso_membres m LEFT JOIN spip_asso_categories c ON m.categorie = c.id_categorie', sql_in('id_auteur', $liste_id_auteurs), '', $order), $prop, $adresses_tels, 'id_auteur');
+		$pdf->Query(sql_select('*, c.libelle as categorie','spip_asso_membres m LEFT JOIN spip_asso_categories c ON m.categorie = c.id_categorie', sql_in('id_auteur', $liste_id_auteurs), '', $order), $adresses_tels, 'id_auteur');
 		$pdf->Output();
 	}
 }

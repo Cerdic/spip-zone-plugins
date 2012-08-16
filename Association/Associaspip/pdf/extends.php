@@ -109,7 +109,7 @@ class PDF extends FPDF
 		if($fill)
 			$this->SetFillColor($this->HeaderColor[0],$this->HeaderColor[1],$this->HeaderColor[2]);
 		foreach($this->aCols as $col)
-			$this->Cell($col['w'],6,utf8_decode($col['c']),1,0,'C',$fill);
+			$this->Cell($col['w'],6,utf8_decode(html_entity_decode($col['c'])),1,0,'C',$fill);
 		$this->Ln();
 	}
 
@@ -121,7 +121,7 @@ class PDF extends FPDF
 		if($fill)
 			$this->SetFillColor($this->RowColors[$ci][0],$this->RowColors[$ci][1],$this->RowColors[$ci][2]);
 		foreach($this->aCols as $col)
-			$this->Cell($col['w'],5,utf8_decode($data[$col['f']]),1,0,$col['a'],$fill);
+			$this->Cell($col['w'],5,utf8_decode(html_entity_decode($data[$col['f']])),1,0,$col['a'],$fill);
 		$this->Ln();
 		$this->ColorIndex = 1-$ci;
 	}
@@ -150,7 +150,7 @@ class PDF extends FPDF
 		$y = $this->GetY();
 		foreach($this->aCols as $col) {
 			$this->SetX($x);
-			$this->MultiCell($col['w'],5*$max_nb_lignes/$nb_lignes[$col['f']],utf8_decode($data[$col['f']]),1,$col['a'],$fill);
+			$this->MultiCell($col['w'],5*$max_nb_lignes/$nb_lignes[$col['f']],utf8_decode(html_entity_decode($data[$col['f']])),1,$col['a'],$fill);
 			$this->SetY($this->GetY()-5*$max_nb_lignes);
 			$x += $col['w'];
 		}
@@ -198,16 +198,16 @@ class PDF extends FPDF
 	 * le parametre data doit donc etre un tableau de la forme: valeur_champ_jointure => array(champs1=>valeur, champs2=>valeur, ..)  afin d'inserer
 	 * dans le resultat de la requete les champs champs1 et champ2 en jointure = sur le champs fourni dans l'autre parametre
 	**/
-	function Query($res, $prop=array(), $data=array(), $champ_jointure='' ) {
+	function Query($res, $data=array(), $champ_jointure='', $prop=array() ) {
 		// Traite les proprietes
 		if(!isset($prop['width']))
 			$prop['width'] = 0;
 		if($prop['width']==0)
 			$prop['width'] = $this->w-$this->lMargin-$this->rMargin;
 		if(!isset($prop['align']))
-			$prop['align'] = 'C';
+			$prop['align'] = $GLOBALS['association_metas']['fpdf_tablealign']?$GLOBALS['association_metas']['fpdf_tablealign']:'C';
 		if(!isset($prop['padding']))
-			$prop['padding'] = $this->cMargin;
+			$prop['padding'] = $GLOBALS['association_metas']['fpdf_marginc']?$GLOBALS['association_metas']['fpdf_marginc']:2;
 		$cMargin = $this->cMargin;
 		$this->cMargin = $prop['padding'];
 		if(!isset($prop['HeaderColor']))
@@ -238,7 +238,7 @@ class PDF extends FPDF
 	}
 
 	// idem que Query sauf qu'on lui passe le texte de la requete SQL et non la ressource du resultat de la requete
-	function Table($query, $prop=array(), $data=array(), $champ_jointure='' ){
+	function Table($query, $data=array(), $champ_jointure='', $prop=array() ){
 		$this->Query(spip_query($query), $prop, $data, $champ_jointure); // execute la requete
 	}
 

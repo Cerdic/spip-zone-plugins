@@ -31,10 +31,7 @@ function exec_pdf_activite()
 		$pdf->AddCol('id_adherent',20,'N°','R');
 		$pdf->AddCol('inscrits',10,_T('asso:activite_entete_inscrits'),'R');
 		$pdf->AddCol('montant',20,utf8_decode(_T('asso:entete_montant')),'R');
-		$prop = array(
-			'padding'=>2
-		);
-		$pdf->Table("SELECT * FROM spip_asso_activites WHERE id_evenement=$id_evenement ORDER BY nom, date_inscription", $prop);
+		$pdf->Table("SELECT * FROM spip_asso_activites WHERE id_evenement=$id_evenement ORDER BY nom, date_inscription");
 		$pdf->Output();
 	}
 }
