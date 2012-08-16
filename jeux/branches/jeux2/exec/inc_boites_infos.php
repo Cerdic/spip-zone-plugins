@@ -3,6 +3,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // pour tous les recuperer_fond()
 include_spip('public/assembler');
+// manquerait parfois ??
+include_spip('jeux_fonctions'); 
 
 // Pagination sur les jeux disponibles
 function jeux_navigation_pagination() {
