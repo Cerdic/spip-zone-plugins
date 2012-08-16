@@ -8,8 +8,12 @@ body {
 }
 #bando_identite {
 	font-size: 90%;
-	a {
-		color: #777;
+	padding: 1px 0px;
+	background-color: #[(#ENV{foncee}|couleur_luminance{0.15})];
+
+	color: #[(#ENV{foncee}|couleur_luminance{0.6})];;
+	a, strong {
+		color: #[(#ENV{foncee}|couleur_luminance{0.7})];;
 		
 		. :hover {
 			color: #333;
@@ -37,7 +41,7 @@ body {
 					-spip-border-bottom-right-radius: 5px;
 				}
 				li.actif, li.actif_tempo {
-					background-color: #[(#ENV{claire}|couleur_luminance{0.03})];;
+					background-color: #[(#ENV{foncee}|couleur_luminance{0.15})];;
 					
 					a:hover {
 						background-color: transparent;
@@ -77,8 +81,8 @@ body {
 
 #bando_outils {
 	border-top: 1px solid #999;
-	background-color: #555;
-	-spip-gradient: top, #444, #666;
+	background-color: #444;
+	-spip-gradient: top, #555555, #333333;
 }
 .navigation_avec_icones {
 	#bando_navigation {
@@ -393,6 +397,7 @@ div.titrem, h3.titrem {
 			font-size: 10px;
 			color: ##ENV{lien};
 		}
+		
 	}
 	. :hover {
 		.toggle_box_link {
@@ -514,6 +519,13 @@ div.titrem, h3.titrem {
 			margin-bottom: 0.5em;
 			color: #999;
 			font-weight: normal;
+		}
+	}
+	.contenu_nom_site {
+		.label, .nom_site {
+			display: inline-block;
+			padding: 0;
+			margin: 0;
 		}
 	}
 	.contenu_notes {
