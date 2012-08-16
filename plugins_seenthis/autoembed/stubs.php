@@ -1567,7 +1567,7 @@ array( /*  http://500px.com/photo/4778494 */
     'title' => '500px',
     'website' => 'http://500px.com',
     'url-match' => 'http://(.*\.)?500px\.com/photo/.*',
-    'fetch-match' => '<meta property=\"og:image\" content=\"([^\"]*)\"\/>',
+    'fetch-match' => '<meta content=\"([^\"]*)\" property=\"og:image\" \/>',
     'embed-width' => '280',
     'embed-height' => '280',
     'image-src' => '$2',
