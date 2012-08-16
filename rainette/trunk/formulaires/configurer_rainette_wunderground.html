@@ -7,11 +7,18 @@
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			<INCLURE{fond=formulaires/inc-configurer_unite, env} />
+			<INCLURE{fond=formulaires/inc-configurer_unite,
+				service=wunderground,
+				env} />
 			#SET{url, <a class="spip_out" href="http://www.wunderground.com/weather/api/">Wunderground.com</a>}
 			<INCLURE{fond=formulaires/inc-configurer_cle,
+				service=wunderground,
 				url=#GET{url},
 				taille=16,
+				env } />
+			<INCLURE{fond=formulaires/inc-configurer_affichage,
+				service=wunderground,
+				element=icone,
 				env } />
 		</ul>
 

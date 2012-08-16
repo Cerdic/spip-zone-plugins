@@ -7,7 +7,9 @@
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			<INCLURE{fond=formulaires/inc-configurer_unite, env} />
+			<INCLURE{fond=formulaires/inc-configurer_unite,
+				service=weather,
+				env} />
 		</ul>
 
 		<input type="hidden" name="_meta_casier" value="rainette/weather" />

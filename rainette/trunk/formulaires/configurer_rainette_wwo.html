@@ -7,9 +7,12 @@
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			<INCLURE{fond=formulaires/inc-configurer_unite, env} />
+			<INCLURE{fond=formulaires/inc-configurer_unite,
+				service=wwo,
+				env} />
 			#SET{url, <a class="spip_out" href="http://www.worldweatheronline.com/register.aspx">World Weather Online</a>}
 			<INCLURE{fond=formulaires/inc-configurer_cle,
+				service=wwo,
 				url=#GET{url},
 				taille=22,
 				env } />

@@ -1,0 +1,13 @@
+<li class="editer editer_#ENV{element}[ (#ENV**{erreurs}|table_valeur{#ENV{element}}|oui)erreur]">
+	<p class="explication">[(#VAL{rainette:info_configurer_}|concat{#ENV{element}}|_T)]</p>
+	<label>[(#VAL{rainette:label_element_}|concat{#ENV{element}}|_T)]</label>
+	[<span class='erreur'>(#ENV**{erreurs}|table_valeur{#ENV{element}})</span>]
+	<div class="choix">
+		<input type="radio" name="#ENV{element}" class="radio" id="icone_weather" value="weather"[(#ENV{icone, weather}|=={weather}|oui)checked="checked"] />
+		<label for="icone_weather"><:rainette:label_icone_weather:></label>
+	</div>
+	<div class="choix">
+		<input type="radio" name="#ENV{element}" class="radio" id="icone_standard" value="natif"[(#ENV{icone, weather}|=={natif}|oui)checked="checked"] />
+		<label for="icone_standard"><:rainette:label_icone_natif:></label>
+	</div>
+</li>
