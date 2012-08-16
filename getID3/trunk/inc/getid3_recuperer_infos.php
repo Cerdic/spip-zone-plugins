@@ -37,10 +37,10 @@ function inc_getid3_recuperer_infos($fichier=false){
 	 * -* titre
 	 * -* descriptif
 	 */
-	if(isset($id3['title']){
+	if(isset($id3['title'])){
 		$id3['titre'] = preg_replace('/_/',' ',utf8_encode($id3['title']));
 	}
-	if(!isset($id3['title']){
+	if(!isset($id3['title'])){
 		$titre = strtolower(array_shift(explode('.',basename($son_chemin))));
 		$titre = utf8_encode($titre);
 		$id3['titre'] = preg_replace('/_/',' ',$titre);
