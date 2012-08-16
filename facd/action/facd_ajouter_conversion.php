@@ -1,13 +1,11 @@
 <?php
 /**
- * FACD
- * File d'Attente de Conversion de Documents
+ * Action d'ajout de document dans la file d'attente
  *
- * Auteurs :
- * b_b
- * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2010-2012 - Distribué sous licence GNU/GPL
- *
+ * @plugin FACD pour SPIP
+ * @author b_b
+ * @author kent1 (http://www.kent1.info - kent1@arscenic.info)
+ * @license GPL
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -17,6 +15,9 @@ include_spip('inc/actions');
 
 /**
  * Fonction d'ajout dans la file d'attente
+ * 
+ * @return array
+ * 	Un tableau contenant l'identifiant dans la liste d'attente
  */
 function action_facd_ajouter_conversion_dist(){
 	

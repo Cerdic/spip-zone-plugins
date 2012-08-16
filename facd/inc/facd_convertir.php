@@ -1,17 +1,27 @@
 <?php
 /**
- * FACD
- * File d'Attente de Conversion de Documents
+ * Fonction de conversion de document
  *
- * Auteurs :
- * b_b
- * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2010-2012 - Distribué sous licence GNU/GPL
- *
+ * @plugin FACD pour SPIP
+ * @author b_b
+ * @author kent1 (http://www.kent1.info - kent1@arscenic.info)
+ * @license GPL
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Fonction qui lance la conversion d'un document
+ * 
+ * @param int $id_document
+ * 	Identifiant numérique du document à convertir
+ * @param int $id_facd
+ * 	Identifiant numérique dans la liste d'attente
+ * @param string/false $format
+ * 	Le format attendu
+ * @return bool $reussite
+ * 	True si la conversion a réussi, false dans le cas contraire
+ */
 function inc_facd_convertir_dist($id_document,$id_facd,$format=false){
 	/**
 	 * On change le statut de conversion à en_cours pour
@@ -54,10 +64,17 @@ function inc_facd_convertir_dist($id_document,$id_facd,$format=false){
 			$infos = array_merge($infos,$res['infos']);
 		}
 		if($res['success']){
-			// modification de la file d'attente, on marque le document comme correctement converti
+			/**
+			 * Modification de la file d'attente : 
+			 * on marque le document comme correctement converti
+			 */
 			sql_updateq("spip_facd_conversions",array('statut'=>'oui','infos'=>serialize($infos)),"id_facd_conversion=".intval($id_facd));
 			$reussite = true;
 		}else if(isset($res['erreur'])){
+			/**
+			 * Modification de la file d'attente : 
+			 * on marque le document comme étant en erreur
+			 */
 			$info['erreur'] = $res['erreur'];
 			sql_updateq("spip_facd_conversions",array('statut'=>'erreur','infos'=>serialize($infos)),"id_facd_conversion=".intval($id_facd));
 			$reussite = false;
@@ -79,6 +96,9 @@ function inc_facd_convertir_dist($id_document,$id_facd,$format=false){
 	include_spip('inc/invalideur');
 	suivre_invalideur("0",true);
 
+	/**
+	 * On lance un encodage direct pour éviter d'attendre le prochain cron
+	 */
 	$conversion_directe = charger_fonction('facd_convertir_direct','inc');
 	$conversion_directe();
 	

@@ -1,17 +1,25 @@
 <?php
 /**
- * FACD
- * File d'Attente de Conversion de Documents
+ * Fichier des pipelines de déclaration de tables
  *
- * Auteurs :
- * b_b
- * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2010-2012 - Distribué sous licence GNU/GPL
- *
+ * @plugin FACD pour SPIP
+ * @author b_b
+ * @author kent1 (http://www.kent1.info - kent1@arscenic.info)
+ * @license GPL
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Déclarer la table spip_facd_conversions dans la liste des tables pour pouvoir :
+ * - la créer
+ * - la mettre à jour
+ * 
+ * @param array $tables_principales
+ * 	Un tableau de description des tables
+ * @param array $tables_principales
+ * 	Le tableau complété
+ */
 function facd_declarer_tables_principales($tables_principales){
 	/**
 	 * - id_facd_conversion int identifiant numérique
@@ -48,7 +56,14 @@ function facd_declarer_tables_principales($tables_principales){
 	return $tables_principales;
 }
 
-// Declarer dans la table des tables pour sauvegarde
+/**
+ * Déclaration dans la table des tables pour sauvegarde
+ * 
+ * @param array $interface
+ * 	Un tableau de description des tables
+ * @return array $interface
+ * 	Le table de description des tables complété 
+ */
 function facd_declarer_tables_interfaces($interfaces){
 	$interfaces['table_des_tables']['facd_conversions'] = 'facd_conversions';
 	return $interfaces;

@@ -1,13 +1,11 @@
 <?php
 /**
- * FACD
- * File d'Attente de Conversion de Documents
+ * Fichier des autorisations spécifique au plugin
  *
- * Auteurs :
- * b_b
- * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2010-2012 - Distribué sous licence GNU/GPL
- *
+ * @plugin FACD pour SPIP
+ * @author b_b
+ * @author kent1 (http://www.kent1.info - kent1@arscenic.info)
+ * @license GPL
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

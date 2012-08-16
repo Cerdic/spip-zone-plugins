@@ -1,20 +1,19 @@
 <?php
 /**
- * FACD
- * File d'Attente de Conversion de Documents
- *
- * Auteurs :
- * b_b
- * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2010-2012 - Distribué sous licence GNU/GPL
- *
+ * Fichier des fonctions utilisées en CRON
+ * 
+ * @plugin FACD pour SPIP
+ * @author b_b
+ * @author kent1 (http://www.kent1.info - kent1@arscenic.info)
+ * @license GPL
  */
 
 /**
  * Fonction appelée par le génie de SPIP à intervalle régulier
+ * On lance une conversion
  * 
- * @return
  * @param object $time
+ * @return int
  */
 function genie_facd_conversion($time)  {
 	spip_log('début de tache cron','facd');
