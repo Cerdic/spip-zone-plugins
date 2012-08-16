@@ -19,20 +19,21 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		L'id numérique du document
  * @param int $frame
  * 		La frame à capturer
+ * @param array $infos
+ * 		Un array de description du document
+ * @param bool $only_return
+ * 		Si true, on ne modifie pas le document, on retourne uniquement la nouvelle id_vignette
+ * @return int|false $id_vignette
+ * 		L'identifiant de la nouvelle vignette si elle existe ou false 
  */
-function inc_spipmotion_recuperer_logo($id_document,$seconde=2){
+function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$infos=false,$only_return=false){
 	spip_log("SPIPMOTION : recuperation d un logo du document $id_document","spipmotion");
+	$id_vignette = false;
 	/**
 	 * Pas d'id_document, on retourne false
 	 */
-	if(!intval($id_document)){
+	if(!intval($id_document) && (!$fichier OR !file_exists($fichier))){
 		spip_log('SPIPMOTION Erreur : pas de bon id_document fourni pour la génération de vignette','spipmotion'._LOG_CRITIQUE);
-		return false;
-	}
-	
-	include_spip('inc/autoriser');
-	if(!autoriser('modifier','document',$id_document)){
-		spip_log('SPIPMOTION Erreur : tentative de récupération de logo sans autorisation de modification du document','spipmotion'._LOG_CRITIQUE);
 		return false;
 	}
 	/**
@@ -45,13 +46,33 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=2){
 	include_spip('inc/documents');
 	include_spip('inc/filtres_images_mini');
 	$retour = 0;
-	$document = sql_fetsel("*", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
-	$vignette_existante = sql_getfetsel('id_document','spip_documents','id_document='.intval($document['id_vignette']));
-	if(!$vignette_existante)
-		$vignette_existante = 'new';
-	$chemin_court = $document['fichier'];
-	$chemin = get_spip_doc($chemin_court);
 	
+	if(intval($id_document)){
+		include_spip('inc/autoriser');
+		if(!autoriser('modifier','document',$id_document)){
+			spip_log('SPIPMOTION Erreur : tentative de récupération de logo sans autorisation de modification du document','spipmotion'._LOG_CRITIQUE);
+			return false;
+		}
+		$document = sql_fetsel("*", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
+		$vignette_existante = sql_getfetsel('id_document','spip_documents','id_document='.intval($document['id_vignette']));
+		if(!$vignette_existante)
+			$vignette_existante = 'new';
+		$chemin_court = $document['fichier'];
+		$chemin = get_spip_doc($chemin_court);
+		$string_temp = "$id-$type-$id_document";
+	}
+	else if($fichier && is_array($infos) && $only_return){
+		$chemin = $fichier;
+		$document = $infos;
+		$string_temp = "$fichier-".date("Y-m-dHis");
+	}else{
+		spip_log('Mauvais arguments pour récupérer la vignette','spipmotion');
+		return false;
+	}
+	if(!$document['duree'] OR $document['duree'] == ''){
+		spip_log('Erreur : le document n a pas de durée','spipmotion');
+		return false;
+	}
 	if($document['hasvideo'] == 'oui'){
 		$vignette = false;
 		if($GLOBALS['spipmotion_metas']['spipmotion_safe_mode'] == 'oui'){
@@ -59,7 +80,7 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=2){
 		}else{
 			$spipmotion_sh = find_in_path('script_bash/spipmotion_vignette.sh');
 		}
-		$string_temp = "$id-$type-$id_document";
+		
 		$query = md5($string_temp);
 		$dossier_temp = _DIR_VAR;
 		$fichier_temp = "$dossier_temp$query.jpg";
@@ -106,14 +127,14 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=2){
 								if(intval($x)){
 									$vignette = true;
 									$id_vignette = $x;
-									if($document['id_vignette'] != $x)
+									if(!$only_return && ($document['id_vignette'] != $x))
 										document_modifier($id_document, array('id_vignette'=>$x));
 								}
 							    return $x;
 							}
 							return false;
 						}else if(!filtrer('image_monochrome',$fichier_temp)){
-								unlink($img_finale);
+								spip_unlink($img_finale);
 								$frame = $frame+50;
 								$retour++;
 							}else if(file_exists($img_finale)){
@@ -124,10 +145,10 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=2){
 								if(intval($x)){
 									$vignette = true;
 									$id_vignette = $x;
-									if($document['id_vignette'] != $x)
+									if(!$only_return && ($document['id_vignette'] != $x))
 										document_modifier($id_document, array('id_vignette'=>$x));
 								}
-								unlink($img_finale);
+								spip_unlink($img_finale);
 							}else{
 								return false;
 							}
@@ -140,9 +161,10 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=2){
 								if(intval($x)){
 									$vignette = true;
 									$id_vignette = $x;
-									if($document['id_vignette'] != $x)
+									if(!$only_return && ($document['id_vignette'] != $x))
 										document_modifier($id_document, array('id_vignette'=>$x));
 								}
+								spip_unlink($img_finale);
 							}
 						}
 					}
@@ -151,7 +173,9 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=2){
 				return false;	
 			}
 		}
+	}else{
+		spip_log('Erreur : ce document n a pas de piste video','spipmotion');
 	}
-	return $x;
+	return $id_vignette;
 }
 ?>

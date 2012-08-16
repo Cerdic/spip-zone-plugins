@@ -12,7 +12,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function inc_spipmotion_encodage_dist($id_document,$options = array()){
-	spip_log($options,'spipmotion');
 	if(!is_array($GLOBALS['spipmotion_metas'])){
 		$inc_meta = charger_fonction('meta', 'inc');
 		$inc_meta('spipmotion_metas');
@@ -48,7 +47,7 @@ function inc_spipmotion_encodage_dist($id_document,$options = array()){
 		 * On supprime le fichier correspondant
 		 */
 		$liste[] = $v['id_document'];
-		if (sql_count('spip_documents','fichier='.sql_quote($v['fichier']) == '1') && @file_exists($f = get_spip_doc($v['fichier']))) {
+		if (($nb = sql_countsel('spip_documents','fichier='.sql_quote($v['fichier'])) == '1') && @file_exists($f = get_spip_doc($v['fichier']))) {
 			supprimer_fichier($f);
 		}
 
@@ -61,7 +60,7 @@ function inc_spipmotion_encodage_dist($id_document,$options = array()){
 			spip_log("on supprime sa vignette également","spipmotion");
 			$liste[] = $v['id_vignette'];
 			$fichier = sql_getfetsel('fichier','spip_documents','id_document='.$v['id_vignette']);
-			if (sql_count('spip_documents','fichier='.sql_quote($fichier) == '1') && @file_exists($f = get_spip_doc($fichier))) {
+			if (($nb = sql_countsel('spip_documents','fichier='.sql_quote($fichier)) == '1') && @file_exists($f = get_spip_doc($fichier))) {
 				supprimer_fichier($f);
 			}
 		}
@@ -70,7 +69,7 @@ function inc_spipmotion_encodage_dist($id_document,$options = array()){
 			$in = sql_in('id_document', $liste);
 			sql_delete("spip_documents", $in);
 			sql_delete("spip_documents_liens", $in);
-			sql_delete("spip_facd_conversions", "id_document=".intval($id_document).' AND statut != '.sql_quote('oui').' AND format='.sql_quote($format).' AND id_facd_conversion!='.intval($options['id_facd_conversion']));
+			sql_delete("spip_facd_conversions", "id_document=".intval($id_document).' AND statut != '.sql_quote('oui').' AND extension='.sql_quote($format).' AND id_facd_conversion!='.intval($options['id_facd_conversion']));
 		}
 	}
 	/**
@@ -87,7 +86,7 @@ function inc_spipmotion_encodage_dist($id_document,$options = array()){
  */
 function encodage($source,$options){
 	$ret = array();
-	spip_log('On encode le document : '.$source,'spipmotion');
+	spip_log('On encode le document : '.$source['id_document'],'spipmotion');
 	/**
 	 * Si le chemin vers le binaire FFMpeg n'existe pas,
 	 * la configuration du plugin crée une meta spipmotion_casse
@@ -535,46 +534,47 @@ function encodage($source,$options){
 		spip_log('Ajout du document en base','spipmotion');
 		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 		$doc = array(array('tmp_name'=>$fichier_temp,'name'=>$fichier_final,'mode'=>$mode));
+
+		/**
+		 * Tentative de récupération d'un logo du document original
+		 * si pas déjà de vignette
+		 */
+		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document = '.intval($x));
+		if((!$id_vignette OR ($id_vignette == 0)) && ($source['id_vignette'] > 0)){
+			$vignette = sql_fetsel('fichier,extension','spip_documents','id_document='.intval($source['id_vignette']));
+			$fichier_vignette = get_spip_doc($vignette['fichier']);
+			$vignette = array(array('tmp_name'=>$fichier_vignette,'name'=>$fichier_vignette));
+			$x2 = $ajouter_documents('new', $vignette, '', 0, 'vignette');
+			$id_vignette = reset($x2);
+			if (is_numeric($id_vignette)){
+			  	$source['id_vignette'] = $id_vignette;
+			}
+		}else{
+			$source['id_vignette'] = $id_vignette;
+		}
+		/**
+		 * Champs que l'on souhaite réinjecter depuis l'original ni depuis un ancien encodage
+		 */
+		$champs_recup = array('titre' => '','descriptif' => '');
+		if(_DIR_PLUGIN_PODCAST)
+			$champs_recup['podcast'] = 0;
+			$champs_recup['explicit'] = 'non';
+		if(_DIR_PLUGIN_LICENCES)
+			$champs_recup['id_licence'] = 0;
+		if(_DIR_PLUGIN_MEDIAS)
+			$champs_recup['credits'] = '';
+		$champs_recup['id_vignette'] = '';
+			
+		$modifs = array_intersect_key($source, $champs_recup);
+		foreach($modifs as $champs=>$val){
+			set_request($champs,$val);
+		}
+
 		$x = $ajouter_documents('new',$doc, 'document', $source['id_document'], $mode);
 		$x = reset($x);
 		spip_log('le nouveau document est le '.$x,'facd');
 		if(intval($x) > 1){
 			supprimer_fichier($fichier_temp);
-			/**
-			 * Tentative de récupération d'un logo du document original
-			 * si pas déjà de vignette
-			 */
-			$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document = '.intval($x));
-			if((!$id_vignette OR ($id_vignette == 0)) && ($source['id_vignette'] > 0)){
-				$vignette = sql_fetsel('fichier,extension','spip_documents','id_document='.intval($source['id_vignette']));
-				$fichier_vignette = get_spip_doc($vignette['fichier']);
-				$vignette = array(array('tmp_name'=>$fichier_vignette,'name'=>$fichier_vignette));
-				$x2 = $ajouter_documents('new', $vignette, '', 0, 'vignette');
-				$id_vignette = reset($x2);
-				if (is_numeric($id_vignette)){
-				  	$source['id_vignette'] = $id_vignette;
-				}
-			}else{
-				$source['id_vignette'] = $id_vignette;
-			}
-			/**
-			 * Champs que l'on souhaite réinjecter depuis l'original ni depuis un ancien encodage
-			 */
-			$champs_recup = array('titre' => '0','descriptif' => '0');
-			if(_DIR_PLUGIN_PODCAST)
-				$champs_recup['podcast'] = 0;
-				$champs_recup['explicit'] = 'non';
-			if(_DIR_PLUGIN_LICENCES)
-				$champs_recup['id_licence'] = 0;
-			if(_DIR_PLUGIN_MEDIAS)
-				$champs_recup['credits'] = '';
-			$champs_recup['id_vignette'] = '';
-				
-			$modifs = array_intersect_key($source, $champs_recup);
-			
-			include_spip('action/editer_document');
-			document_modifier($x, $modifs);
-			spip_log($modifs,'facd');
 			$ret['id_document'] = $x;
 			$ret['success'] = true;
 		}else{

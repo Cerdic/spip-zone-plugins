@@ -49,8 +49,12 @@ function inc_spipmotion_mediainfo_dist($chemin){
 				}
 				$infos['credits'] .= $info[0]['Performer'][0]? $info[0]['Performer'][0].($info[0]['Copyright'][0] ? ' - '.$info[0]['Copyright'][0] : '') : $info[0]['Copyright'][0] ;
 				$infos['duree'] = $info[0]['Duration'][0] / 1000;
+				if(!$infos['duree'])
+					$infos['duree'] = isset($info[0]['duration'][0]) ? (($info[0]['duration'][0] > 1000) ? ($info[0]['duration'][0]/1000) :$info[0]['duration'][0]) : '';
 				$infos['bitrate'] = $info[0]['Overall_bit_rate'][0];
 				$infos['encodeur'] = $info[0]['Writing_library'][0];
+				if(!$infos['encodeur'])
+					$infos['encodeur'] = $info[0]['Writing_application'][0];
 				/**
 				 * Récupération de la cover
 				 */

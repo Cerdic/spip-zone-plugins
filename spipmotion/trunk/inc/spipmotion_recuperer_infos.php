@@ -17,11 +17,18 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Si on a un id_document (en premier argument) on enregistre en base dans cette fonction
  * Si on a seulement un chemin de fichier (en second argument), on retourne un tableau des metas
  * 
- * @param int/false $id_document id_document sur lequel récupérer les informations
- * @param string/null $fichier chemin du fichier à analyser
- * @return array $infos Un tableau des informations récupérées
+ * @param int/false $id_document 
+ *   id_document sur lequel récupérer les informations
+ * @param string/null $fichier 
+ *   chemin du fichier à analyser si pas de id_document
+ * @param bool $logo
+ *   si true, récupère une vignette du document
+ * @param bool $only_return
+ * 	si true, on n'insère rien en base depuis cette fonction (devra être fait après)
+ * @return array $infos 
+ * 	 Un tableau des informations récupérées
  */
-function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null){
+function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=false,$only_return=false){
 	if((!intval($id_document) && !isset($fichier)) OR ($GLOBALS['meta']['spipmotion_casse'] == 'oui')){
 		spip_log('SPIPMOTION est cassé','spipmotion');
 		return false;
@@ -35,6 +42,7 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null){
 		$fichier = get_spip_doc($chemin);
 		$extension = $document['extension'];
 	}else{
+		spip_log("SPIPMOTION : recuperation des infos du document $fichier","spipmotion");
 		$extension = strtolower(array_pop(explode('.',basename($fichier))));
 	}
 
@@ -73,9 +81,12 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null){
 	if(file_exists($fichier.'._tmp')){
 		rename($fichier.'._tmp',$fichier);
 	}
+	if(file_exists($fichier.'._temp')){
+		rename($fichier.'._temp',$fichier);
+	}
 	
 	/**
-	 * Récupération des métadonnées par mediainfo et le cas échéant par la class ffmpeg-pho
+	 * Récupération des métadonnées par mediainfo
 	 */
 	if(!$GLOBALS['meta']['spipmotion_mediainfo_casse']){
 		$mediainfo = charger_fonction('spipmotion_mediainfo','inc');
@@ -94,6 +105,22 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null){
 		}	
 	}
 	
+	/**
+	 * Si les champs sont vides, on ne les enregistre pas
+	 * Par contre s'ils sont présents dans le $_POST ou $_GET,
+	 * on les utilise (fin de conversion où on récupère le titre et autres infos du document original)
+	 */
+	foreach(array('titre','descriptif','credit') as $champ){
+		if(!isset($infos[$champ]))
+			$infos[$champ] = '';
+		if(is_null($infos[$champ]) OR ($infos[$champ]=='')){
+			if(_request($champ)){
+				$infos[$champ] = _request($champ);
+			}else {
+				unset($infos[$champ]);	
+			}
+		}
+	}
 	$infos['taille'] = @intval(filesize($fichier));
 
 	// Filesize tout seul est limité à 2Go
@@ -101,10 +128,29 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null){
 	if($infos['taille'] == '2147483647'){
 		$infos['taille'] = sprintf("%u", filesize($fichier));
 	}
-
-	if(intval($id_document) && (count($infos) > 0)){
-		include_spip('action/editer_document');
-		document_modifier($id_document, $infos);
+	
+	if($logo){
+		$recuperer_logo = charger_fonction("spipmotion_recuperer_logo","inc");
+		$id_vignette = $recuperer_logo($id_document,2,$fichier,$infos,true);
+		spip_log('l id vignette est '.$id_vignette);
+		if(intval($id_vignette))
+			$infos['id_vignette'] = $id_vignette;
+	}else{
+		spip_log('on ne récup pas de logo');
+	}
+	/**
+	 * Si on a $only_return à true, on souhaite juste retourner les metas, sinon on les enregistre en base
+	 * Utile pour metadatas/video par exemple
+	 */
+	if(!$only_return && (intval($id_document) && (count($infos) > 0))){
+		foreach($infos as $champ=>$val){
+			if($document[$champ] == $val)
+				unset($infos[$champ]);
+		}
+		if(count($infos) > 0){
+			include_spip('action/editer_document');
+			document_modifier($id_document, $infos);
+		}
 		return true;
 	}
 	return $infos;

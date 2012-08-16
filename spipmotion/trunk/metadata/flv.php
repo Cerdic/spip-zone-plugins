@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function metadata_flv_dist($file){
 	$metas = array();
 	$spipmotion_recuperer_infos = charger_fonction('spipmotion_recuperer_infos','inc');
-	$metas = $spipmotion_recuperer_infos(false,$file);
+	$metas = $spipmotion_recuperer_infos(false,$file,true,true);
 	return $metas;
 }
 

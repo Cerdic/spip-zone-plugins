@@ -67,14 +67,6 @@ function spipmotion_post_edition($flux){
 			 * -* récupération d'une vignette
 			 * La récupération des infos est faite directement via metadata/video et metadat/audio lors de l'insertion
 			 */
-			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_videos',array()))){
-				/**
-				 * Récupération d'un logo de la vidéo
-				 */
-				$recuperer_logo = charger_fonction("spipmotion_recuperer_logo","inc");
-				$logo = $recuperer_logo($id_document);
-				$invalider = true;
-			}
 			if(
 				($GLOBALS['meta']['spipmotion_casse'] != 'oui')
 				&& ($infos_doc['mode'] != 'conversion')
