@@ -39,8 +39,7 @@ function verifier_comparaison_champ_dist($valeur, $options=array()){
 		case 'egal_type':
 			return $valeur === $valeur_champ ? '' : _T('verifier:erreur_comparaison_egal_type', array('nom_champ'=>$nom_champ));
 			break;
-		case 'egal':
-		case default:
+		default:
 			return $valeur == $valeur_champ ? '' : _T('verifier:erreur_comparaison_egal', array('nom_champ'=>$nom_champ));
 			break;
 	}
