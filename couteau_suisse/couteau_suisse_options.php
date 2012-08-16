@@ -1,4 +1,7 @@
 <?php
+//Pour voir les spip_log, il faut dans mes_options.php (voir inc/utils)
+#define ('_LOG_FILTRE_GRAVITE',8);
+
 // Ce fichier est charge a chaque hit //
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
@@ -37,10 +40,9 @@ elseif (version_compare($GLOBALS['spip_version_code'],'1.9200','>='))
 	@define('_SPIP19200', 1);
 else @define('_SPIP19100', 1);
 
-// chemin du fichier de fonctions
-define('_COUT_FONCTIONS_PHP', find_in_path('couteau_suisse_fonctions.php'));
 // globales de controles de passes
-$GLOBALS['cs_options'] = $GLOBALS['cs_fonctions'] = $GLOBALS['cs_fonctions_essai'] = $GLOBALS['cs_init'] = $GLOBALS['cs_utils'] = $GLOBALS['cs_verif'] = 0;
+$GLOBALS['cs_options'] /*= $GLOBALS['cs_fonctions'] = $GLOBALS['cs_fonctions_essai'] */
+	= $GLOBALS['cs_init'] = $GLOBALS['cs_utils'] = $GLOBALS['cs_verif'] = $GLOBALS['cs_outils'] = 0;
 // parametres d'url concernant le plugin ?
 $GLOBALS['cs_params'] = isset($_GET['cs'])?explode(',', urldecode($_GET['cs'])):array();
 // fichiers/dossiers temporaires pour le Couteau Suisse
@@ -49,7 +51,7 @@ define('_DIR_CS_TMP', sous_repertoire(_DIR_TMP, 'couteau-suisse'));
 // pour voir les erreurs ?
 if (in_array('report', $GLOBALS['cs_params'])) 
 	{ define('_CS_REPORT', 1); error_reporting(E_ALL ^ E_NOTICE); }
-elseif (in_array('reportall', $GLOBALS['cs_params']) && $auteur_session['statut']=='0minirezo')
+elseif (in_array('reportall', $GLOBALS['cs_params']) && isset($auteur_session['statut']) && $auteur_session['statut']=='0minirezo')
 	{ define('_CS_REPORTALL', 1); @define('_LOG_CS', 1); error_reporting(E_ALL); }
 
 // liste des outils et des variables
@@ -148,8 +150,8 @@ else {
 
 	// a-t-on voulu inclure couteau_suisse_fonctions.php ?
 	if ($GLOBALS['cs_fonctions_essai']) {
-		if(defined('_LOG_CS')) cs_log(" -- inclusion de : "._COUT_FONCTIONS_PHP);
-		@include(_COUT_FONCTIONS_PHP);
+		if(defined('_LOG_CS')) cs_log(" -- lancement de cs_charge_fonctions()");
+		cs_charge_fonctions();
 	}
 
 	if(defined('_LOG_CS')) cs_log(" FIN : couteau_suisse_options, cs_spip_options = $GLOBALS[cs_spip_options], cs_options = $GLOBALS[cs_options], cs_fonctions_essai = $GLOBALS[cs_fonctions_essai]");
