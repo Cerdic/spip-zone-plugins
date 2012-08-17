@@ -182,6 +182,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'geoarticles'	=> 'G&eacute;or&eacute;f&eacute;rencement des articles',
 'geoauteurs'	=> 'G&eacute;or&eacute;f&eacute;rencement des auteurs',
 
+'gpx_z'			=> 'Altitude : ',
+'gpx_zmin'		=> 'Zmin : ',
+'gpx_zmax'		=> 'Zmax : ',
+'gpx_dist'		=> 'Distance : ',
+'gpx_laps'		=> 'Dur&eacute;e : ',
+'gpx_tps'		=> 'Temps : ',
+
 'icone_geoportail' => 'G&eacute;oportail'
 
 );

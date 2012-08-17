@@ -139,16 +139,20 @@ function geoportail_affiche_milieu($flux)
 			if ($a) $contexte['pos_article'] = $a['lon'].",".$a['lat'].",".$a['zoom'];
 		}
 	}
-	// Documents (utile avec le plugin mediatheque)
+	// Documents 
 	else if (($exec=='document_edit' || $exec == 'documents_edit') && !$flux['args']['popin'] && $GLOBALS['meta']['geoportail_geodocument']) 
-	{	$id_document = $contexte['id_objet'] = $flux['args']['id_document'];
-		$contexte['objet'] = 'document';
-		$contexte['deplier'] = _request('deplier')? " ":"";;
-		// Rechercher le georef dans le fichier (s'il existe)...
-		include_spip('inc/geoupload');
-		$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
-		if ($document['distant'] != 'oui' && geoportail_get_coord(_DIR_IMG.$document['fichier'],$document['extension'],$lon,$lat))
-		{	$contexte['pos_fichier'] = "$lon,$lat,12";
+	{	// Pour le plugin mediatheque en 2.x
+		if ($exec=='document_edit' && $GLOBALS['spip_version_branche']<3) $contexte['id_objet'] = 0;
+		else
+		{	$id_document = $contexte['id_objet'] = $flux['args']['id_document'];
+			$contexte['objet'] = 'document';
+			$contexte['deplier'] = _request('deplier')? " ":"";;
+			// Rechercher le georef dans le fichier (s'il existe)...
+			include_spip('inc/geoupload');
+			$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
+			if ($document['distant'] != 'oui' && geoportail_get_coord(_DIR_IMG.$document['fichier'],$document['extension'],$lon,$lat))
+			{	$contexte['pos_fichier'] = "$lon,$lat,12";
+			}
 		}
 	}
 	// Mots

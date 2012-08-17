@@ -21,6 +21,20 @@
 {	body { display:inherit !important; }
 }
 
+/** Affichage des profils */
+.profil
+{	margin:1em 0;
+}
+.profil .profilMap
+{	height:150px; 
+	display:block;
+}
+.profil td
+{	width:25%;
+	text-align:center;
+	font-size:12px;
+}
+
 /** Thickbox au dessus ! */
 #TB_overlay
 {	z-index:2000;

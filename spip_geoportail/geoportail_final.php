@@ -58,7 +58,7 @@ jQuery.geoportail.versionAPI = "'.$version.'";</script>
 	}
 	*/
 	if (strpos($page, '<!--_SPIP_GEOPORTAIL_GMAP-->'))
-	{	$api .= '<script src="http://maps.google.com/maps/api/js?v=3.6&sensor=false"></script>';
+	{	$api .= '<script src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script>';
 		$header .= '<link id="__GoogleOpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/'.$version.'/theme/default/google.css"/>';
 	}
 		

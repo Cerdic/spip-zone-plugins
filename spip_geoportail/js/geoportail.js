@@ -18,6 +18,8 @@ jQuery.geoportail =
 	cartes: new Array(),
 	// Liste des fonctions d'initialisation (chargees par onload)
 	cinit: new Array(),
+	// Liste de profils
+	profils: new Array(),
 	// hash code
 	hash: null,
 
@@ -157,6 +159,11 @@ jQuery.geoportail =
 					feature.attributes = img.attributes;
 					l.addFeatures(feature);
 				}
+			}
+			// Affichage des profils
+			for (var p = 0; p < this.profils.length; p++) 
+			{	var pf = new jQuery.geoportail.elevation(this.profils[p].div, this.profils[p].options);
+				pf.loadGPX(this.profils[p].fichier);
 			}
 			// Fonctions d'initialisation
 			for (var f = 0; f < this.cinit.length; f++) {
@@ -390,6 +397,12 @@ jQuery.geoportail =
 		if (carte) {
 			carte.img[carte.img.length] = { titre: titre, lon: lon, lat: lat, id_document: id_document, attributes: attributes, logo: logo, align: align, taille: Number(taille) };
 		}
+	},
+	
+	// Ajouter un profil
+	addProfil: function (fichier, div, options)
+	{	if (!options) options = {};
+		this.profils.push ({ fichier:fichier, div:div, options:options });
 	},
 
 	/** Supprimer une couche de la carte
@@ -1378,7 +1391,7 @@ function geoportail_selectionnable (l, hover)
 					this.select(feature);
 					jQuery.geoportail.popupFeature(feature, pos, true); 
 				}: null, 
-				out: function (feature) { if (feature.popup && feature.popup.hover) this.unselectAll(); }
+				out:  hover ? function (feature) { if (feature.popup && feature.popup.hover) this.unselectAll(); } : null 
 			}
 		}
 	var layers;

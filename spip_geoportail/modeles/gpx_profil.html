@@ -1,0 +1,35 @@
+[(#REM)
+	Affichage d'un profil sur un fichier GPX.
+	/!\ Le fichier GPX doit contenir des informations d'altitude
+	- id_geoportail : pour l'affichage le curseur sur une carte lors du survol du profil
+	- centrer : Centrer la carte sur le point ? 0: ne pas centrer, 1: centrer la carte, defaut: centrer si sort de la carte
+	- symbol : symbol du point a afficher sur la carte : poi,auto,velo,rando ou rando2
+	- couleur : couleur du profil (blue ou #00F ou #0000FF)
+	- zmin, zmax : bornes pour l'echelle des Z 
+	- amplitude : amplitude du Z (si ne defini pas zmin et zmax)
+	- graduations : graduation de l'axe des Z
+
+	Exemple (afficher le document 4, avec un lien avec la carte 0) :
+	<gpx4|profil|id_geoportail=0>
+]
+<div id='profil_#ID_GPX' class='profil'>
+<div id='[profil_(#ID_GPX)_map]' class='profilMap' style='[height:(#HAUTEUR);][width:(#LARGEUR);]'></div>
+<table class='profil_info' width=100% cellpadding=0 cellspacing=0 >
+<tr class='info_profil'>
+	<td><:geoportail:gpx_zmin:> <span class='zmin'></span></td>
+	<td><:geoportail:gpx_zmax:> <span class='zmax'></span></td>
+	<td><:geoportail:gpx_dist:> <span class='dist'></span></td>
+	<td><:geoportail:gpx_laps:> <span class='temps'></span></td>
+</tr><tr class='info_trace' style='display:none'>
+	<td><:geoportail:gpx_z:> <span class='zmax'></span></td>
+	<td><:geoportail:gpx_dist:> <span class='dist'></span></td>
+	<td><:geoportail:gpx_tps:> <span class='temps'></span></td>
+</tr>
+</table>
+</div>
+
+<BOUCLE_doc(DOCUMENTS){id_document=#ID_GPX}{extension=gpx}>
+<script language="javascript">
+	jQuery.geoportail.addProfil('#FICHIER','profil_#ID_GPX',{['id_geoportail':Number("(#ENV{id_geoportail})"),]['zmin':"(#ENV{zmin})",]['zmax':"(#ENV{zmax})",]['centerMap':Number("(#ENV{centrer})"),]['graduation':Number("(#ENV{graduations})"),]['amplitude':Number("(#ENV{amplitude})"),]['symbol':"(#ENV{symbol})_",]'color':"#ENV{couleur,blue}"});
+</script>
+</BOUCLE_doc>

@@ -32,6 +32,7 @@ function geoportail_insert_head($flux)
 '
 <script type="text/javascript" src="'._DIR_PLUGIN_GEOPORTAIL.'js/geoportail.js"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GEOPORTAIL.'js/jquery.dialog.js"></script>
+<script type="text/javascript" src="'._DIR_PLUGIN_GEOPORTAIL.'js/geoprofil.js"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GEOPORTAIL.'js/jquery.cookie.js"></script>
 <script type="text/javascript">
 '
