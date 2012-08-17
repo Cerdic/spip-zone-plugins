@@ -6,6 +6,9 @@
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" />
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/paquet-ancresdouces?lang_cible=nl">
+		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
+	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-ancresdouces?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
