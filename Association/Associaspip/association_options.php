@@ -713,7 +713,7 @@ function totauxinfos_intro($titre, $type='', $id=0, $DesLignes=array(), $Prefixe
 	}
 	if ($ChampsExtras) {
 		$res .= '<div class="verdana1 spip_xx-small">';
-		$res .= pipeline('afficher_contenu_objet', array ('args'=>array('type'=>$ChampsExtras, 'id_objet'=>$id, 'contexte'=>array()), 'data'=>''))
+		$res .= pipeline('afficher_contenu_objet', array ('args'=>array('type'=>$ChampsExtras, 'id_objet'=>$id, 'contexte'=>array()), 'data'=>''));
 		$res .= '</div>';
 	}
 	return $res;
