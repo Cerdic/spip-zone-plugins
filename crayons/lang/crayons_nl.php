@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
    de maximale grootte in pixels. Voorbeeld: 100. (0 = nooit)',
 
 	// I
-	'info_experimental' => 'Expérimental', # NEW
+	'info_experimental' => 'Experimenteel',
 
 	// L
 	'label_activer_barre_typo' => 'Draai het typografie roer in de potloden ?',
@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_abandon' => 'Abandon zuid',
 	'label_msg_no_change' => 'Als er geen verandering',
 	'label_reduire_logo' => 'Verminderen logos',
-	'label_upload_document' => 'Autoriser l\'ajout de documents par glisser/déposer sur le crayon article.texte', # NEW
+	'label_upload_document' => 'Bijvoegen van documenten door drag en drop op het article.texte potlood toelaten',
 	'label_yellow_fade' => 'Fade',
 	'legend_controleur_hyperlien' => 'Hyperlien',
 	'legend_controleur_logo' => 'Kies een logo :',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_controleur_qui' => 'Dat ?',
 	'legend_controleur_vignette' => 'Selecteer een miniatuur :',
 	'legend_controleur_vignette_remplacer' => 'Vervang deze tag',
-	'legend_documents' => 'Upload de documents', # NEW
+	'legend_documents' => 'Upload van documenten',
 	'legend_editer_prive' => 'Bewerk de private deel (experimentele)',
 	'legend_introduction_article' => 'Aanhef van artikel',
 
