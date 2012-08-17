@@ -40,29 +40,21 @@ function exec_adherent(){
 				$statut='visiteur'; break;
 		}
 		onglets_association('titre_onglet_membres');
-		// INFOs
+		// INFOS
 		if ($adresses[$id_auteur])
 			$infos['adresses'] = $adresses[$id_auteur];
 		if ($emails[$id_auteur])
 			$infos['emails'] = $emails[$id_auteur];
 		if ($telephones[$id_auteur])
 			$infos['numeros'] =  $telephones[$id_auteur];
-		echo '<div class="vcard">'. totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos, 'coordonnees') .'</div>';
-		$coord = '';
 		if ($full) {
-			$coord .= '<p>'.$categorie.'</p>';
 			$infos['adherent_libelle_categorie'] = $categorie;
 		}
-		$coord .= '<p>'._T('asso:adherent_libelle_date_validite').'<br/>'.association_datefr($data['validite']).'</p>';
 		$infos['adherent_libelle_validite'] = association_datefr($data['validite']);
 		if ($GLOBALS['association_metas']['id_asso']) {
-			$coord .= '<p>'. ($data['id_asso']?_T('asso:adherent_libelle_reference_interne').'<br/>'.$data['id_asso']:_T('asso:pas_de_reference_interne_attribuee')) .'</p>';
-			$infos['adherent_libelle_reference_interne'] = $data['id_asso'];
+			$infos['adherent_libelle_reference_interne'] = ($data['id_asso']?_T('asso:adherent_libelle_reference_interne').'<br/>'.$data['id_asso']:_T('asso:pas_de_reference_interne_attribuee')) ;
 		}
-		echo '<div class="vcard" style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.$coord.'</div>';
-//		echo '<div class="vcard">'. totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos ) .'</div>';
-		// Afficher les champs extras
-		echo '<div style="text-align: center" class="verdana1 spip_xx-small">'. pipeline('afficher_contenu_objet', array ('args'=>array('type'=>'asso_membre', 'id_objet'=>$id_auteur, 'contexte'=>array()), 'data'=>'')) .'</div>';
+		echo '<div class="vcard">'. totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos, 'coordonnees', 'asso_membre') .'</div>';
 		// datation et raccourcis
 		if ($full)
 			$res['adherent_label_modifier_membre'] = array('edit-24.gif', 'edit_adherent', "id=$id_auteur");
