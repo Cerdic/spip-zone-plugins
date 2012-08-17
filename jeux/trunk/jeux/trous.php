@@ -142,13 +142,15 @@ function trous_liste_reponses($mots) {
 
 // traitement du jeu : jeu_{mon_jeu}()
 function jeux_trous($texte, $indexJeux, $form=true) {
+	// initialisation
 	$trous_[$indexJeux] = array(
 		'propositions'=> array(), 
 		'score' => 0, 'score_detaille' => array()
 	); 
 	$trous = &$trous_[$indexJeux];
-	$titre = $html = false;	$indexTrou = 0;
-	// parcourir tous les #SEPARATEURS
+	$titre = $html = false;
+	$indexTrou = 0;
+  // parcourir tous les [separateurs]
 	$tableau = jeux_split_texte('trous', $texte); 
 	foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
@@ -164,19 +166,20 @@ function jeux_trous($texte, $indexJeux, $form=true) {
 	// reinserer les trous mis en forme
 	$texte = trous_inserer_les_trous($trous, $html, $indexJeux);
 	// mode correction ?
-	$correction = jeux_form_correction($indexJeux);
-	if($correction) sort($trous['score_detaille']);
+	if($correction = jeux_form_correction($indexJeux))
+		sort($trous['score_detaille']);
 	$id_jeu = _request('id_jeu');
 	// recuperation du fond 'jeux/trous.html'
 	include_spip('public/assembler');
-	$fond = recuperer_fond('jeux/trous', 
-		array('id_jeu' => $id_jeu, 'titre' => $titre,
-			'texte' => $texte, 'correction' => $correction,
-			'indices' => jeux_config('indices')?trous_afficher_indices($trous):'',
-			'fond_score' => $correction?
-				jeux_afficher_score($trous['score'], $indexTrou, $id_jeu, join(', ', $trous['score_detaille']), $categ_score):'',
-		)
-	);
+	$fond = recuperer_fond('jeux/trous', array(
+		'id_jeu' => $id_jeu,
+		'titre' => $titre,
+		'texte' => $texte,
+		'correction' => $correction,
+		'indices' => jeux_config('indices')?trous_afficher_indices($trous):'',
+		'fond_score' => $correction?
+			jeux_afficher_score($trous['score'], $indexTrou, $id_jeu, join(', ', $trous['score_detaille']), $categ_score):'',
+	));
 	// mise en place du formulaire
 	$fond = str_replace(
 		array('@@FORM_JEUX_DEBUT@@', '@@FORM_JEUX_FIN@@', '@@FORM_CORRIGER@@', '@@RECOMMENCER@@'), 
