@@ -1,9 +1,14 @@
 <?php
-/**
- * Plugin Spip-jeus
- * (c) 2012 Maïeul Rouquette d&#039;après Artego
- * Licence GNU/GPL
- */
+#---------------------------------------------------#
+#  Plugin  : Jeux                                   #
+#  Auteur  : Patrice Vanneufville, 2006             #
+#  Gestion des scores : Maieul Rouquette, 2007      #
+#  Portage SPIP3 : Maieul Rouquette d'apres Artego  #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
+#  Licence : GNU/GPL (c) 2012                       #
+#--------------------------------------------------------------------------#
+#  Documentation : http://www.spip-contrib.net/Des-jeux-dans-vos-articles  #
+#--------------------------------------------------------------------------#
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 

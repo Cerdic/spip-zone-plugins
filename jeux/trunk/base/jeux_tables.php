@@ -77,6 +77,8 @@ function jeux_declarer_tables_interfaces($tables){
 		$table_des_traitements['TITRE_PUBLIC'] = $table_des_traitements['TITRE'];
 	if (!isset($table_des_traitements['TITRE_PRIVE']))
 		$table_des_traitements['TITRE_PRIVE'] = $table_des_traitements['TITRE'];
+	if (!isset($table_des_traitements['TEXTE_JEU']))
+		$table_des_traitements['TEXTE_JEU'] = $table_des_traitements['TEXTE'];
     return $tables;
 }
 ?>

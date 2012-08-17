@@ -92,23 +92,21 @@ function affichage_grille_mc($tableau_grille, $indexJeux, $form, $solution=false
 			$classnoir = ' class="jeux_noir' . ($ligne==$hauteur?($colonne==$largeur?' jeux_bas jeux_droite':' jeux_bas'):($colonne==$largeur?' jeux_droite':'')) . '"';
 		    // s'il s'agit d'un noir
 		    if ($cellule == "*") { 
-					$noires = $jeux_couleurs[jeux_config('fondnoir')];
-					$noires = "rgb($noires[0], $noires[1], $noires[2])";
-			    	$grille .= "\t\t<td$classnoir style=\"background-color:$noires; color:$noires;\">*</td>\n";
-				}
-				else if ($solution)
-					$grille .= "\t\t<td$class>$cellule</td>\n" ;
-				else {
-					$name = 'GR'.$indexJeux.'x'.$colonne.'x'.$ligne;
-					$valeur = _request($name);
-					$grille .= "\t\t<td$class><label for=\"$name\">"
-						. _T('jeux:ligne_n', array('n'=>$entete_ligne)).';'
-						. _T('jeux:colonne_n', array('n'=>$entete_colonne)).'</label>'
-						. '<input type="text" maxlength="1" '
-						. ((isset($valeur) and $valeur!='')? 'value="'.$valeur:'')
-						.'" name="'.$name.'" id="'.$name.'" />'
-						. "</td>\n" ;
-				}
+				$noires = $jeux_couleurs[jeux_config('fondnoir')];
+				$noires = "rgb($noires[0], $noires[1], $noires[2])";
+				$grille .= "\t\t<td$classnoir style=\"background-color:$noires; color:$noires;\">*</td>\n";
+			}
+			else if ($solution)
+				$grille .= "\t\t<td$class>$cellule</td>\n" ;
+			else {
+				list($id, $name) = jeux_idname($indexJeux, $colonne, 'C', $ligne, 'L'); 
+				$value = jeux_form_reponse($indexJeux, $colonne, 'C', $ligne, 'L');
+				$value = strlen($value)?' value="'.$value.'"':'';
+				$grille .= "\t\t<td$class><label for=\"$name\">"
+					. _T('jeux:ligne_n', array('n'=>$entete_ligne)).';'
+					. _T('jeux:colonne_n', array('n'=>$entete_colonne)).'</label>'
+					. "<input type='text' maxlength='1'$value name='$name' id='$id' /></td>\n" ;
+			}
 		} // foreach
                                                     
         $grille = $grille."\t</tr>\n";}		
@@ -117,10 +115,13 @@ function affichage_grille_mc($tableau_grille, $indexJeux, $form, $solution=false
 	
 	$grille.="</table>\n";
 	
-	if (!$solution) $grille .= 
-		(jeux_config('solution')?"<p><input id=\"affiche_solution_$indexJeux\" name=\"affiche_solution_{$indexJeux}[]\" type=\"checkbox\" class=\"jeux_cocher\" value=\"1\" /><label for=\"affiche_solution_$indexJeux\" >"._T('jeux:afficher_solution')."</label></p>\n":'')
-		.'<p><input type="submit" value="'._T('jeux:verifier')."\" name=\"bouton_envoi_$indexJeux\" /></p>"
+	if (!$solution) {
+		list($id, $name) = jeux_idname($indexJeux, 'SOL'); 
+		$grille .= 
+		(jeux_config('solution')?"<p><input id='$id' name='$name' type='checkbox' class='jeux_cocher' value='1' /><label for='$id' >"._T('jeux:afficher_solution')."</label></p>\n":'')
+		.'<p><input type="submit" value="'._T('jeux:verifier')."\" name='submit' /></p>"
 		.($form?jeux_form_fin():'');
+	}
 
 	return $grille;
 }
@@ -140,7 +141,7 @@ function comparaison_grille($tableau_grille, $indexJeux) {
         foreach ($contenu_ligne as $colonne =>$cellule) {
             //compare les valeurs du tableau PHP avec les variables POST
 			if ($cellule!='*') {
-				$input = trim(_request('GR'.$indexJeux.'x'.($colonne+1).'x'.($ligne+1)));
+				$input = jeux_form_reponse($indexJeux, $colonne+1, 'C', $ligne+1, 'L');
 				$total++; // nombre de case total
 	            if ($input=='') $vides++;
     	         elseif (strtoupper($input)!=strtoupper($cellule)) $erreurs++;
@@ -152,17 +153,17 @@ function comparaison_grille($tableau_grille, $indexJeux) {
 
 // renvoie le nombre d'erreurs et de cases vides
 function calcul_erreurs_grille($solution, $indexJeux) {
-	if (_request("bouton_envoi_$indexJeux") == '') return '';
-	else {
-	  list($nbr_erreurs, $nbr_vides,$total) = comparaison_grille($solution, $indexJeux); 
-	  // on insere le resultat dans la base de donnee
-	  if ($_POST['id_jeu']){
+	if (!jeux_form_correction($indexJeux)) return '';
+	list($nbr_erreurs, $nbr_vides,$total) = comparaison_grille($solution, $indexJeux); 
+	$id_jeu = _request('id_jeu');
+	// on insere le resultat dans la base de donnee
+	if ($id_jeu){
 	  	include_spip('base/jeux_ajouter_resultat');
-		jeux_ajouter_resultat($_POST['id_jeu'], $total-$nbr_erreurs-$nbr_vides, $total, "erreurs=$nbr_erreurs, vides=$nbr_vides");
-	  }
+		jeux_ajouter_resultat($id_jeu, $total-$nbr_erreurs-$nbr_vides, $total, "erreurs=$nbr_erreurs, vides=$nbr_vides");
+	}
 
-	  // on retourne ce qu'on affiche
-	  return '<div class="jeux_erreur">'
+	// on retourne ce qu'on affiche
+	return '<div class="jeux_erreur">'
 		. (($nbr_erreurs==0)?_T('jeux:aucune_erreur'):(
 		 ($nbr_erreurs==1)?_T('jeux:une_erreur'):_T("jeux:n_erreurs", array('n'=>$nbr_erreurs))
 		))
@@ -170,7 +171,6 @@ function calcul_erreurs_grille($solution, $indexJeux) {
 		 ($nbr_vides==1)?' - '._T('jeux:une_vide'):' - '._T("jeux:n_vides", array('n'=>$nbr_vides))
 		))
 		. '</div><br />';
-	}
 }
 
 // retourne une liste compactee alphabetique ou numerique
@@ -231,13 +231,12 @@ function jeux_mots_croises($texte, $indexJeux, $form=true) {
 	  elseif ($valeur==_JEUX_SOLUTION) $solution = calcul_tableau_grille($tableau[$i+1]);
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
 	}
-	$affiche_solution = _request('affiche_solution_'.$indexJeux);
 	return 	'<div class="mots_croises">'
 			. calcul_erreurs_grille($solution, $indexJeux)
 			. affichage_grille_mc($solution, $indexJeux, $form)
 			. affichage_definitions($horizontal, $vertical)
 	// solution
-			. (($affiche_solution[0] == 1)? affichage_grille_mc($solution, $indexJeux, $form, true) : '')
+			. (jeux_form_reponse($indexJeux, 'SOL') ? affichage_grille_mc($solution, $indexJeux, $form, true) : '')
 			. '</div><br class="jeux_nettoyeur"/>';
 }
 ?>

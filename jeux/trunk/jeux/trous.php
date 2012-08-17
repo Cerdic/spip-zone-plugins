@@ -76,17 +76,15 @@ function jeux_trous_init() {
 	";
 }
 
-function trous_inserer_le_trou($indexJeux, $indexTrou, $size, $corriger) {
-	global $propositionsTROUS, $scoreTROUS, $score_detailTROUS;
+function trous_inserer_le_trou(&$trous, $indexJeux, $indexTrou, $size) {
 	// Initialisation du code a retourner
-	$nomVarSelect = "var{$indexJeux}_T{$indexTrou}";
-	$mots = $propositionsTROUS[$indexTrou];
-	$prop = trim($_POST[$nomVarSelect]);
-	$oups = $disab = $color = '';
+	$mots = $trous['propositions'][$indexTrou];
+	$prop = $oups = $disab = $color = '';
 	// en cas de correction
-	if($corriger) {
+	if(jeux_form_correction($indexJeux)) {
+		$prop = jeux_form_reponse($indexJeux, $indexTrou, 'T');
 		$ok = strlen($prop) && jeux_in_liste($prop, $mots);
-		if($ok) ++$scoreTROUS;
+		if($ok) ++$trous['score'];
 		if(jeux_config('couleurs')) $color = $ok?' juste':' faux';
 		if(!$ok && jeux_config('solution')) {
 			if(!strlen($prop)) {
@@ -99,24 +97,24 @@ function trous_inserer_le_trou($indexJeux, $indexTrou, $size, $corriger) {
 		}
 //$solution = ' <span class="juste">('.trous_liste_reponses($mots).')</span> ';
 		// on renseigne le resultat detaille
-		$score_detailTROUS[] = 'T'.($indexTrou+1).":$prop:".($ok?'1':'0');
+		$trous['score_detaille'][] = 'T'.($indexTrou+1).":$prop:".($ok?'1':'0');
 		$disab = " disabled='disabled'";
 	}
-	$codeHTML = "<input name='$nomVarSelect' class='jeux_input trous$color' size='$size' type='text'$disab' value=\"$prop\" />";
-//	if($corriger) $codeHTML .= '(T'.($indexTrou+1).":$prop/".$GLOBALS['meta']['charset']."[".join('|',$mots)."]:".($ok?'1':'0').'pt)';
+	list($idInput, $nameInput) = jeux_idname($indexJeux, $indexTrou, 'T');
+	$codeHTML = "<input id='sidInput' name='$nameInput' class='jeux_input trous$color' size='$size' type='text'$disab' value=\"$prop\" />";
+//	if(jeux_form_correction($indexJeux)) $codeHTML .= '(T'.($indexTrou+1).":$prop/".$GLOBALS['meta']['charset']."[".join('|',$mots)."]:".($ok?'1':'0').'pt)';
 	return $oups . $codeHTML;
 }
 
-function trous_inserer_les_trous($chaine, $indexJeux) {
-	global $propositionsTROUS;
+function trous_inserer_les_trous(&$trous, $chaine, $indexJeux) {
 	if (preg_match(',<ATTENTE_TROU>([0-9]+)</ATTENTE_TROU>,', $chaine, $regs)) {
 	$indexTROU = intval($regs[1]);
 	list($texteAvant, $texteApres) = explode($regs[0], $chaine, 2); 
-	$texteApres = trous_inserer_les_trous($texteApres, $indexJeux);
+	$texteApres = trous_inserer_les_trous($trous, $texteApres, $indexJeux);
 	if (($sizeInput = intval(jeux_config('taille')))==0)
-		foreach($propositionsTROUS as $trou) foreach($trou as $mot) $sizeInput = max($sizeInput, strlen($mot));
+		foreach($trous['propositions'] as $trou) foreach($trou as $mot) $sizeInput = max($sizeInput, strlen($mot));
 	$chaine = $texteAvant.jeux_rem('TROU-DEBUT', $indexTROU, '', 'span')
-		. trous_inserer_le_trou($indexJeux, $indexTROU, $sizeInput, isset($_POST["var_correction_".$indexJeux]))
+		. trous_inserer_le_trou($trous, $indexJeux, $indexTROU, $sizeInput)
 		. jeux_rem('TROU-FIN', $indexTROU, '', 'span')
 		. $texteApres; 
 	}
@@ -125,9 +123,8 @@ function trous_inserer_les_trous($chaine, $indexJeux) {
 
 // renvoyer l'ensemble des solutions dans le desordre...
 // si plusieurs solutions sont possibles, seule la premiere est retenue
-function trous_afficher_indices($indexJeux) {
-	global $propositionsTROUS;
-	foreach ($propositionsTROUS as $prop) 
+function trous_afficher_indices(&$trous) {
+	foreach ($trous['propositions'] as $prop) 
 		$indices[] = preg_match(',(.*)/M$,', $prop[0], $reg)?$reg[1]:$prop[0];
 	shuffle($indices);
 	return '<div class="jeux_indices"><html>'.str_replace(array("'",'&#8217;'),"&#039;",charset2unicode(join(' -&nbsp;', $indices))).'</html></div>';
@@ -145,11 +142,12 @@ function trous_liste_reponses($mots) {
 
 // traitement du jeu : jeu_{mon_jeu}()
 function jeux_trous($texte, $indexJeux, $form=true) {
-	global $propositionsTROUS, $scoreTROUS, $score_detailTROUS;
-	$titre = $html = false;
-	$indexTrou = $scoreTROUS = 0;
-	$score_detailTROUS = array();
-	
+	$trous_[$indexJeux] = array(
+		'propositions'=> array(), 
+		'score' => 0, 'score_detaille' => array()
+	); 
+	$trous = &$trous_[$indexJeux];
+	$titre = $html = false;	$indexTrou = 0;
 	// parcourir tous les #SEPARATEURS
 	$tableau = jeux_split_texte('trous', $texte); 
 	foreach($tableau as $i => $valeur) if ($i & 1) {
@@ -159,24 +157,24 @@ function jeux_trous($texte, $indexJeux, $form=true) {
 	  elseif ($valeur==_JEUX_TROU) {
 		// remplacement des trous par : <ATTENTE_TROU>ii</ATTENTE_TROU>
 		$html .= "<ATTENTE_TROU>$indexTrou</ATTENTE_TROU>";
-		$propositionsTROUS[$indexTrou] = jeux_liste_mots($tableau[$i+1]);
+		$trous['propositions'][$indexTrou] = jeux_liste_mots($tableau[$i+1]);
 		$indexTrou++;
 	  }
 	}
 	// reinserer les trous mis en forme
-	$texte = trous_inserer_les_trous($html, $indexJeux);
-	// correction ?
-	$correction = isset($_POST["var_correction_".$indexJeux]);
-	if($correction) sort($score_detailTROUS);
+	$texte = trous_inserer_les_trous($trous, $html, $indexJeux);
+	// mode correction ?
+	$correction = jeux_form_correction($indexJeux);
+	if($correction) sort($trous['score_detaille']);
 	$id_jeu = _request('id_jeu');
 	// recuperation du fond 'jeux/trous.html'
 	include_spip('public/assembler');
 	$fond = recuperer_fond('jeux/trous', 
 		array('id_jeu' => $id_jeu, 'titre' => $titre,
 			'texte' => $texte, 'correction' => $correction,
-			'indices' => jeux_config('indices')?trous_afficher_indices($indexJeux):'',
-			'fond_score' => !$correction?''
-				:jeux_afficher_score($scoreTROUS, $indexTrou, $id_jeu, join(', ', $score_detailTROUS), $categ_score),
+			'indices' => jeux_config('indices')?trous_afficher_indices($trous):'',
+			'fond_score' => $correction?
+				jeux_afficher_score($trous['score'], $indexTrou, $id_jeu, join(', ', $trous['score_detaille']), $categ_score):'',
 		)
 	);
 	// mise en place du formulaire
@@ -189,8 +187,6 @@ function jeux_trous($texte, $indexJeux, $form=true) {
 			jeux_bouton(jeux_config('bouton_refaire'), $id_jeu)):'', 
 		$fond
 	);
-	// nettoyage
-	unset($propositionsTROUS, $scoreTROUS, $score_detailTROUS);
 	return $fond;
 }
 ?>

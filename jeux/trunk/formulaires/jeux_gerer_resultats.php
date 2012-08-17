@@ -27,21 +27,21 @@ function formulaires_jeux_gerer_resultats_saisies($param=array()){
     return $saisies;
 }
 
-function formulaires_jeux_gerer_resultats_charger($param=array(),$return=''){
+function formulaires_jeux_gerer_resultats_charger_dist($param=array(),$return=''){
     if (!autoriser('gerer','resultats')){
         return false;   
     }
     $param['saisies'] = formulaires_jeux_gerer_resultats_saisies($param);
     return $param;
 }
-function formulaires_jeux_gerer_resultats_verifier($param=array(),$return=''){
+function formulaires_jeux_gerer_resultats_verifier_dist($param=array(),$return=''){
     $erreurs = array();
     if (!_request('confirmer') and _request('faire')){
         $erreurs['non_confirme']=true;
     }
     return $erreurs;
 }
-function formulaires_jeux_gerer_resultats_traiter($param=array(),$return=''){
+function formulaires_jeux_gerer_resultats_traiter_dist($param=array(),$return=''){
     $faire = _request('faire');
     $id_auteur  =   $param['id_auteur'];
     $id_jeu     =   $param['id_jeu'];

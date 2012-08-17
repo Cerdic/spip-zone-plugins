@@ -1,4 +1,5 @@
 <?php
+#ini_set('display_errors','1'); error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 if (!defined("_ECRIRE_INC_VERSION")) return;
 #---------------------------------------------------#
 #  Plugin  : Jeux                                   #
@@ -11,8 +12,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 #--------------------------------------------------------------------------#
 
 include_spip('base/jeux_tables');
-
-
+include_spip('jeux_utils');
+// tableau de parametres exploitables par les plugins
+global $jeux_config;
 
 // filtre retournant un lien cliquable si $nb!=0, sinon un simple tiret
 function jeux_lien_jeu($nb='0', $exec='', $id_jeu=0) {
@@ -40,9 +42,25 @@ function pas_de_balise_jeux($texte) {
 $GLOBALS['cs_introduire'][] = 'pas_de_balise_jeux';
 
 // ajoute l'id_jeu du jeu a sa config interne et traite le jeu grace a propre()
-// ce filtre doit agir sur #CONTENU*
-function traite_contenu_jeu($texte, $id_jeu) {
-	return propre(str_replace(_JEUX_FIN, "[config]id_jeu=$id_jeu"._JEUX_FIN, $texte));
+// ce filtre doit agir sur #TEXTE* sans balises <jeux/>
+// dans le cas d'un formulaire CVT, il faut egalement $jeuCVT='oui' et $indexJeux 
+function traite_contenu_jeu($texte, $id_jeu, $jeuCVT='non', $indexJeux=0) { 
+	return propre(str_replace(_JEUX_FIN, "[config]jeu_cvt=$jeuCVT\nindex_jeux=$indexJeux\nid_jeu=$id_jeu"._JEUX_FIN, $texte));
+}
+
+// complete la config d'un jeu brut non encore decode
+function ajoute_config_jeu($texte, $config=array()) {
+	// separateurs inutiles ici, le texte est celui d'un seul jeu
+	$texte = str_replace(array(_JEUX_DEBUT, _JEUX_FIN), '', $texte);
+	if(!is_array($config)) return $texte . "\n[config]" . $config;
+	array_walk($config, create_function('&$v,&$k','$v = trim($k)."=".trim($v);'));
+	return $texte . "[config]" . join("\n", $config);
+}
+
+// fonction de traitement appelant directement une fonction de pipeline
+function jeux_traitement_pre_propre($texte, $texte_brut=false) {
+	include_spip('jeux_pipelines');
+	return jeux_pre_propre($texte, $texte_brut);
 }
 
 // renvoie le titre public du jeu que l'on peut trouver grace au separateur [titre]
@@ -66,13 +84,24 @@ function balise_TITRE_PUBLIC_dist($p) {
 	return $p;
 }
 
-// interpretation du jeu, equivalent a : #CONTENU*|traite_contenu_jeu{#ID_JEU}
-function balise_CONTENU_PROPRE_dist($p) {
-	$id = champ_sql('id_jeu', $p);
-	$texte = champ_sql('contenu', $p);
-	$p->code = "traite_contenu_jeu($texte, $id)";
+// interpretation du texte d'un jeu present en base apres avoir complete sa config interne
+// utilisation : #TEXTE_JEU{key1, value1, key2, value2,...}
+// qui creera avant l'interpretation du jeu une nouvelle section [config]key1=value1, key2=value2, etc.
+// parametre necessaire aux jeux en base : id_jeu
+// parametre necessaires aux jeux affiches en CVT : jeu_cvt='oui' et index_jeux
+function balise_TEXTE_JEU_dist($p) {
+	$id_jeu = champ_sql('id_jeu', $p);
+	$texte = champ_sql('texte', $p);
+	$args = ''; $n = 1;
+	while($k = interprete_argument_balise($n++, $p))
+		if($v = interprete_argument_balise($n++, $p)) $args .= " . \"\\n\" . $k . '=' . $v";
+	// ajout des parametres trouves en argument a la config interne du jeu
+	// puis lancement du decodage du jeu, c'est mieux de le faire au plus tot.
+	$p->code = "jeux_traitement_pre_propre(ajoute_config_jeu($texte, 'id_jeu = ' . intval($id_jeu)$args), true)";
+	// le traitement de la balise #TEXTE_JEU fera le reste.
 	return $p;
 }
+
 
 // traduction longue du type de resultat
 function balise_TYPE_RESULTAT_LONG_dist($p) {

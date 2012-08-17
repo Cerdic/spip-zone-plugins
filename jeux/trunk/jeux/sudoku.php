@@ -78,14 +78,13 @@ function affichage_sudoku($tableau_sudoku, $indexJeux, $form=true, $solution=fal
 			else if ($solution)
 				$grille .= "\t\t<td$class>$cellule</td>\n" ;
 			else {
-				$name = 'GR'.$indexJeux.'x'.$colonne.'x'.$ligne;
+				list($id, $name) = jeux_idname($indexJeux, $colonne, 'C', $ligne, 'L'); 
+				$value = jeux_form_reponse($indexJeux, $colonne, 'C', $ligne, 'L');
+				$value = strlen($value)?' value="'.$value.'"':'';
 				$grille .= "\t\t<td$class><label for=\"$name\">"
 					._T('jeux:ligne_n',Array('n'=>$ligne)).';'
 					._T('jeux:colonne_n',Array('n'=>$colonne)).'</label>'
-					. '<input type="text" maxlength="1" '
-					. ((isset($_POST[$name]) and $_POST[$name]!='')? 'value="'.$_POST[$name]:'')
-					.'" name="'.$name.'" id="'.$name.'" />'
-					. "</td>\n" ;
+					. "<input type='text' maxlength='1'$value name='$name' id='$id' /></td>\n" ;
 			}
 		} // foreach
 
@@ -94,11 +93,15 @@ function affichage_sudoku($tableau_sudoku, $indexJeux, $form=true, $solution=fal
 	// fin affichage des lignes
 	$grille.="</table>\n";
 	
-	if (!$solution) $grille .= 
+	if (!$solution){
+		list($id, $name) = jeux_idname($indexJeux, 'SOL'); 
+		$grille .= 
 		(jeux_config('regle')?'<div class="jeux_regle">'.definir_puce()._T('sudoku:regle',Array('hauteur'=>$li,'largeur'=>$lj, 'max'=>$largeur)).'</div>' : '')
-		.(jeux_config('solution')?"<p><input id=\"affiche_solution_$indexJeux\" name=\"affiche_solution_{$indexJeux}[]\" type=\"checkbox\" class=\"jeux_cocher\" value=\"1\" /><label for=\"affiche_solution_$indexJeux\" >"._T('jeux:afficher_solution')."</label></p>\n":'')
-		.'<p><input type="submit" value="'._T('jeux:verifier_validite')."\" name=\"bouton_envoi_$indexJeux\" /></p>"
+		.(jeux_config('solution')?"<p><input id='$id' name='$name' type='checkbox' class='jeux_cocher' value='1' /><label for='$id' >"
+			._T('jeux:afficher_solution')."</label></p>\n":'')
+		.'<p><input type="submit" value="'._T('jeux:verifier_validite')."\" name='submit' /></p>"
 		.($form?jeux_form_fin():'');
+	}
 
 	return $grille;
 }
@@ -155,7 +158,7 @@ function sudoku_validite($tableau_sudoku, $solution, $indexJeux) {
     $vides=0;
     foreach($tableau_sudoku as $ligne => $contenu_ligne) {
         foreach ($contenu_ligne as $colonne => $cellule) {
-			$input = trim(_request('GR'.$indexJeux.'x'.($colonne+1).'x'.($ligne+1)));
+			$input = jeux_form_reponse($indexJeux, $colonne+1, 'C', $ligne+1, 'L');
 			if ($input=='' && $cellule=='-') $vides++;
 			if ($input!='' && $cellule=='-') $tableau_sudoku[$ligne][$colonne] = $input;
 		}
@@ -165,16 +168,14 @@ function sudoku_validite($tableau_sudoku, $solution, $indexJeux) {
 
 // renvoie la validite et le nombre de cases vides
 function calcul_erreurs_sudoku($tableau_sudoku, $solution, $indexJeux) {
-	if (_request("bouton_envoi_$indexJeux") == '') return '';
-	else {
-	  list($valide, $nbr_vides) = sudoku_validite($tableau_sudoku, $solution, $indexJeux); 
-	  return '<div class="jeux_erreur">'
+	if (!jeux_form_correction($indexJeux)) return '';
+	list($valide, $nbr_vides) = sudoku_validite($tableau_sudoku, $solution, $indexJeux); 
+	return '<div class="jeux_erreur">'
 		. _T('jeux:grille_'.($valide?'':'in').'valide')
 		. (($nbr_vides==0)?(($nbr_erreurs==0)?'. '._T('jeux:bravo'):''):(
 		 ($nbr_vides==1)?' - '._T('jeux:une_vide'):' - '._T("jeux:n_vides", Array('n'=>$nbr_vides))
 		))
 		. '</div><br />';
-	}
 }
 
 // configuration par defaut : jeu_{mon_jeu}_init()
@@ -196,11 +197,10 @@ function jeux_sudoku($texte, $indexJeux, $form=true) {
 	  elseif ($valeur==_JEUX_SOLUTION) $solution = calcul_tableau_sudoku($tableau[$i+1]);
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
 	}
-	
 	return  ($titre?"<div class=\"jeux_titre sudoku_titre\">$titre</div>":'')
 			. calcul_erreurs_sudoku($sudoku, $solution, $indexJeux)
 			. affichage_sudoku($sudoku, $indexJeux, $form)
 	// solution
-			. (($_POST['affiche_solution_'.$indexJeux][0] == 1)? affichage_sudoku($solution, $indexJeux, $form, true) : '');
+			. (jeux_form_reponse($indexJeux, 'SOL') ? affichage_sudoku($solution, $indexJeux, $form, true) : '');
 }
 ?>
