@@ -332,7 +332,7 @@ function jeux_qcm($texte, $indexJeux, $form=true) {
   $titre = $horizontal = $vertical = $solution = $html = $categ_score = false;
   $id_jeu = _request('id_jeu');
 
-  // parcourir tous les #SEPARATEURS, remplir $tableau et mettre a jour $indexJeux si ajax
+  // parcourir tous les [separateurs]
   $tableau = jeux_split_texte('qcm', $texte);
   foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
@@ -372,7 +372,6 @@ function jeux_qcm($texte, $indexJeux, $form=true) {
   // ajout du javascript s'il faut afficher une par une
   $js = jeux_config('une_par_une')?'<script type="text/javascript">qcm_affichage_une_par_une();</script>':'';
 
-  unset($qcms_[$indexJeux]);
   return $tete.$texte.$pied.'</div>'.$js;
 }
 

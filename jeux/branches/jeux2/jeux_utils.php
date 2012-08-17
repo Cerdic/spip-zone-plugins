@@ -114,8 +114,7 @@ function jeux_minuscules($texte) {
 	return init_mb_string()?mb_strtolower($texte,$GLOBALS['meta']['charset']):strtolower($texte);
 }
 function jeux_in_liste($texte, $liste=array()) {
-	// eviter un pb d'apostrophe par exemple
-	$texte = filtrer_entites(corriger_typo($texte));
+	$texte = filtrer_entites($texte);
 	$texte_m = jeux_minuscules($texte);
 	foreach($liste as $expr) {
 		// interpretation des expressions regulieres grace aux virgules : ,un +mot,i
@@ -124,7 +123,10 @@ function jeux_in_liste($texte, $liste=array()) {
 		} elseif(strpos($expr, '/M')===($len=strlen($expr)-2)) {
 			if(substr($expr,0,$len)===$texte) return true;
 		} else {
-			if(jeux_minuscules($expr)===$texte_m) return true;
+			$expr = jeux_minuscules($expr);
+			// corriger_typo peut eviter un pb d'apostrophe par exemple
+			if($expr===$texte_m || $expr===corriger_typo($texte_m)) 
+				return true;
 		}
 	}
 	return false;
@@ -240,9 +242,12 @@ function jeux_trouver_titre_public($texte) {
 }
 
 // retourne la configuration interne, si le separateur [config] est present
-function jeux_trouver_configuration_interne($texte) {
+// si strlen($param)>0 alors la valeur d'un parametre en particulier est renvoyee
+// si $param=='' alors un tableau associatif est renvoye
+function jeux_trouver_configuration_interne($texte, $param=false) {
   $texte = jeux_sans_balise($texte);
   $configuration_interne = array();
+  $ok_param = false;
   // cas particulier des multi-jeux
   if($p=strpos($texte,'['._JEUX_MULTI_JEUX.']')) $texte = substr($texte,0,$p);
   // parcourir tous les #SEPARATEURS
@@ -250,12 +255,17 @@ function jeux_trouver_configuration_interne($texte) {
   foreach($tableau as $i => $valeur) if ($i & 1) {
 	if ($valeur==_JEUX_CONFIG) {
 		$lignes = preg_split(",[\r\n]+,", $tableau[$i+1]);
-		foreach ($lignes as $ligne) {
-			$ligne = trim($ligne);
-		 	if(strlen($ligne)) $configuration_interne[] = preg_replace(',\s*=\s*,', ' = ', $ligne);
+		foreach ($lignes as $ligne) if(strlen($ligne = trim($ligne))) {
+			$configuration_interne[] = $ligne = preg_replace(',\s*=\s*,', ' = ', $ligne);
+			if($param!==false) {
+				list(,$k, $v) = jeux_parse_ligne_config($ligne);
+				if($param==='') $ok_param[$k] = $v;
+				elseif($k == $param) $ok_param = $v;
+			}
 		}
 	}
   }
+  if($param!==false) return $ok_param;
   sort($configuration_interne);
   return $configuration_interne;
 }
