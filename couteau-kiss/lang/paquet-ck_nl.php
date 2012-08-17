@@ -8,11 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'ck_description' => 'Simplicité, efficacité, légèreté.
-_ Un couteau qui tient vraiment dans la poche en
-une unique page de configuration pour les réglages cachés de SPIP.',
+	'ck_description' => 'Eenvoudigheid, efficiëntie, lichtheid.
+_ Een mes dat echt in de zak kan met een eenkel configuratie pagina om de verborgen afstellingen van SPIP te beheren.',
 	'ck_nom' => 'Het KISS Mes',
-	'ck_slogan' => 'Simplifier certains réglages SPIP'
+	'ck_slogan' => 'Enkele afstellingen va SPIP vereenvoudigen'
 );
 
 ?>

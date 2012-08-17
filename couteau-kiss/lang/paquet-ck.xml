@@ -8,7 +8,9 @@
 	<langue code="fr" />
 	<langue code="gl" />
 	<langue code="it" />
-	<langue code="nl" />
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/paquet-ck?lang_cible=nl">
+		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
+	</langue>
 	<langue code="pt_br" />
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-ck?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
