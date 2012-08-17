@@ -28,7 +28,7 @@ function exec_inscrits_activite()
 		$infos['evenement_date_du'] = association_datefr($evenement['date_debut'],'dtstart').' '.substr($data['date_debut'],10,6);
 		$infos['evenement_date_au'] = association_datefr($evenement['date_fin'],'dtend').' '.substr($data['date_debut'],10,6);
 		$infos['evenement_lieu'] = $evenement['lieu'];
-		echo totauxinfos_intro($evenement['titre'], 'evenement', $id_evenement, $infos, 'agenda');
+		echo totauxinfos_intro($evenement['titre'], 'evenement', $id_evenement, $infos, 'agenda', 'evenement');
 		// STATS sur les participations (nombre de personnes inscrites et montant paye)
 		echo totauxinfos_stats('participations', 'activites', array('activite_entete_inscrits'=>'inscrits','entete_montant'=>'montant',), "id_evenement=$id_evenement");
 		// TOTAUX : nombres d'inscrits par etat de paiement

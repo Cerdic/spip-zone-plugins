@@ -697,7 +697,7 @@ function bloc_infos($TitreObjet,$NumObjet,$DesLignes=array(),$PrefixeLangue='ass
 
 // Rappels sur l'objet dans le bloc infos
 // C'est un resume ou une petite presentation de l'objet en cours d'edition/lecture : ces informations permettent de situer le contexte de la page et n'apparaissent pas dans le bloc central !
-function totauxinfos_intro($titre,$type='',$id=0,$DesLignes=array(),$PrefixeLangue='asso')
+function totauxinfos_intro($titre, $type='', $id=0, $DesLignes=array(), $PrefixeLangue='asso', $ChampsExtras='')
 {
 	$res = '';
 	if ($type) {
@@ -710,6 +710,11 @@ function totauxinfos_intro($titre,$type='',$id=0,$DesLignes=array(),$PrefixeLang
 			$res .= '<dt>'. _T("$PrefixeLangue:$dt") .'</dt><dd>'. propre($dd) .'</dd>'; // propre() encadre dans P...
 		}
 		$res .= '</dl>';
+	}
+	if ($ChampsExtras) {
+		$res .= '<div style="text-align: center" class="verdana1 spip_xx-small">';
+		$res .= pipeline('afficher_contenu_objet', array ('args'=>array('type'=>$ChampsExtras, 'id_objet'=>$id, 'contexte'=>array()), 'data'=>''))
+		$res .= '</div>';
 	}
 	return $res;
 }

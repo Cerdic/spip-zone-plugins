@@ -58,7 +58,7 @@ function exec_prets()
 			$type = $ressource['statut'];
 		}
 		$infos['statut'] =  '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-'.$puce.'.gif" title="'.$ressource['statut'].'" alt="" /> '. _T("asso:ressources_libelle_statut_$type");
-		echo totauxinfos_intro($ressource['intitule'], 'ressource', $id_ressource, $infos );
+		echo totauxinfos_intro($ressource['intitule'], 'ressource', $id_ressource, $infos, 'asso', 'asso_ressource');
 		// TOTAUX : nombres d'emprunts de la ressource depuis le debut
 		$liste_libelles = $liste_effectifs = array();
 		$liste_libelles['pair'] = _T('asso:prets_restitues'); // restitues, termines, anciens, ...
