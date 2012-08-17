@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 #---------------------------------------------------#
 #  Plugin  : Jeux                                   #
 #  Auteur  : Patrice Vanneufville, 2006             #
@@ -10,7 +11,6 @@
 #--------------------------------------------------------------------------#
 
 include_spip('jeux_config');
-
 
 if (!defined('_DIR_PLUGIN_JEUX')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));

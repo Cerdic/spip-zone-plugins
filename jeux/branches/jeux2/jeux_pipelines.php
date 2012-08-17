@@ -53,8 +53,8 @@ function jeux_pre_propre($texte) {
 
 	return $texteAvant . $header
 		. jeux_rem('PLUGIN-DEBUT', $indexJeuxReel, join('/', $liste))
-		. "<div id=\"JEU$indexJeux\" class=\"jeux_global\">$texte</div>"
-#		. "<div id=\"JEU$indexJeux\" class=\"jeux_global ajax\">$texte</div>"
+		. "<div id=\"JEU$indexJeuxReel\" class=\"jeux_global\">$texte</div>"
+#		. "<div id=\"JEU$indexJeuxReel\" class=\"jeux_global ajax\">$texte</div>"
 		. jeux_rem('PLUGIN-FIN', $indexJeuxReel).jeux_pre_propre($texteApres);
 }
 
