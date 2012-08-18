@@ -320,7 +320,7 @@ function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 				$distant = pipeline('fichier_distant', array('outil'=>$outil['id'], 'fichier_local'=>$file, 
 						'fichier_distant'=>$outil[$i], 'message'=>'', 'texte'=>$distant, 'actif'=>$actif));
 				$file = $distant['fichier_local'];
-				$message = $distant['message'] . "\n_ " . couteauprive_T('copie_vers', array('dir'=>dirname($distant['fichier_local']).'/'));
+				$message = $distant['message'] . "\n_ " . couteauprive_T('copie_vers', array('dir'=>cs_root_canonicalize(dirname($distant['fichier_local']).'/')));
 				$distant = $distant['texte'];
 				if(preg_match(',\.php\d?$,', $file)) {
 					$test = preg_replace(',^.*?\<\?php|\?\>.*?$,', '', $distant);
