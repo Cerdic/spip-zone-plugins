@@ -54,7 +54,7 @@ function exec_adherent(){
 		if ($GLOBALS['association_metas']['id_asso']) {
 			$infos['adherent_libelle_reference_interne'] = ($data['id_asso']?_T('asso:adherent_libelle_reference_interne').'<br/>'.$data['id_asso']:_T('asso:pas_de_reference_interne_attribuee')) ;
 		}
-		echo '<div class="vcard">'. totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos, 'coordonnees', 'asso_membre') .'</div>';
+		echo '<div class="vcard">'. totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos, 'asso', 'asso_membre') .'</div>';
 		// datation et raccourcis
 		if ($full)
 			$res['adherent_label_modifier_membre'] = array('edit-24.gif', 'edit_adherent', "id=$id_auteur");

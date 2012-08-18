@@ -78,10 +78,10 @@ function exec_adherents()
 				}
 			}
 			// on ajoute aussi le mail
-			$res .= '<div class="choix"><input type="checkbox" name="champs[email]" id="listemembres_email" /><label for="listemembres_email">'._T('asso:adherent_libelle_email').'</label></div>';
+			$res .= '<div class="choix"><input type="checkbox" name="champs[email]" id="listemembres_email" /><label for="listemembres_email">'. _T('asso:adherent_libelle_email') .'</label></div>';
 			if (test_plugin_actif('COORDONNEES')) { // on ajoute l'adresse et le telephone
-				$res .= '<div class="choix"><input type="checkbox" name="champs[adresse]" id="listemembres_adresse" /><label for="listemembres_adresse">'._T('coordonnees:adresses').'</label></div>';
-				$res .= '<div class="choix"><input type="checkbox" name="champs[telephone]" id="listemembres_telephone" /><label for="listemembres_telephone"><label for="listemembres_telephone">'._T('coordonnees:numeros').'</label></div>';
+				$res .= '<div class="choix"><input type="checkbox" name="champs[adresse]" id="listemembres_adresse" /><label for="listemembres_adresse">'. _T('coordonnees:adresses') .'</label></div>';
+				$res .= '<div class="choix"><input type="checkbox" name="champs[telephone]" id="listemembres_telephone" /><label for="listemembres_telephone">'. _T('coordonnees:numeros') .'</label></div>';
 			}
 			// on fait suivre la liste des auteurs a afficher
 			$res .= '<input type="hidden" name="where_adherents" value="'.$where_adherents.'" />';

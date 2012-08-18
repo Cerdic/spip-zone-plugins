@@ -155,7 +155,7 @@ function formulaires_imprimer_etiquettes_traiter_dist()
 	if ($indice==0) {
 		$message .= _T('asso:etiquette_aucune_impression');
 	} else {
-		$nom_fic = "etiquettes_$statut_interne_". ($filtre_categorie?$filtre_categorie:0) .'_'. ($filtre_email?'avec':'sans'). 'email.pdf';
+		$nom_fic = 'etiquettes_'.$statut_interne.'_'. ($filtre_categorie?$filtre_categorie:0) .'_'. ($filtre_email?'avec':'sans'). 'email.pdf';
 		$pdf->Output($nom_fic, 'D');
 		$message .= _T('asso:etiquette_fichier_telecharger', array('fichier'=>$nom_fic) );
 	}

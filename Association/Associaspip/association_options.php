@@ -809,6 +809,46 @@ function totauxinfos_montants($legende='',$somme_recettes=0,$somme_depenses=0)
 	return $res.'</tbody></table>';
 }
 
+// bloc affichant le formulaire pour genere le PDF de la/le liste/tableau
+function bloc_listepdf($objet, $araams=array(), $prefixeLibelle='', $champsExclus=array() )
+{
+	$res = '';
+	if (test_plugin_actif('FPDF')) { // liste
+		$res .= debut_cadre_enfonce('',true);
+		$res .= '<h3>'. _T('asso:plugins_vue_liste') .'</h3>';
+		$res .= '<div class="formulaire_spip formulaire_asso_liste{$objet}s">';
+		$champsPresents = description_table("spip_asso_{objet}s");
+		$champsExtras = '';
+		$frm = '<ul><li class="edit_champs">';
+		foreach ($champsPresents['field'] as $k => $v) { // donner le menu des choix
+			if ( !in_array($k,$champsExclus) ) { // affichable/selectionnable
+				$lang_clef = $prefixeLibelle.'_'.$k;
+				$lang_texte = _T('asso:'.$lang_clef);
+				if ( $lang_clef!=str_replace(' ', '_', $lang_texte) ) { // champ natif du plugin (libelle declare)
+					$frm .= "<div class='choix'><input type='checkbox' name='champs[$k]' id='liste_${objet}s_$k' /><label for='liste_${objet}s_$k'>$lang_texte</label></div>";
+				}
+			}
+		}
+		// on ajoute aussi le mail
+		$frm .= '<div class="choix"><input type="checkbox" name="champs[email]" id="liste_'.$objet.'s_email" /><label for="liste_'.$objet.'_s_email">'. _T('asso:adherent_libelle_email') .'</label></div>';
+		$res .= generer_form_ecrire("pdf_$objet", $frm, '', '');
+		if (test_plugin_actif('COORDONNEES')) { // on ajoute l'adresse et le telephone
+			$frm .= '<div class="choix"><input type="checkbox" name="champs[adresse]" id="liste_'.$objet.'_s_adresse" /><label for="liste_'.$objet.'_s_adresse">'. _T('coordonnees:adresses') .'</label></div>';
+			$frm .= '<div class="choix"><input type="checkbox" name="champs[telephone]" id="liste_'.$objet.'_s_telephone" /><label for="liste_'.$objet.'_s_telephone">'. _T('coordonnees:numeros') .'</label></div>';
+		}
+		foreach ($params as $k => $v) { // on fait suivre les autres parametres dont la liste des auteurs a afficher
+			$frm .= "<input type='hidden' name='$k' value='$v' />";
+		}
+		$frm .= '</li></ul>';
+		$frm .= '<p class="boutons"><input type="submit" value="'. _T('asso:bouton_imprimer') .'" /></p>';
+		$res .= generer_form_ecrire("pdf_${objet}s", $frm, '', '');
+		$res .= '</div>';
+		$res .= fin_cadre_enfonce(true);
+	}
+
+	return $res;
+}
+
 // pour executer les squelettes comportant la balise Meta
 include_spip('balise/meta');
 // charger les metas donnees
