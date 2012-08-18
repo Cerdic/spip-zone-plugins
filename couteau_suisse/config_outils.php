@@ -17,14 +17,6 @@ cs_log("inclusion de config_outils.php");
 //-----------------------------------------------------------------------------//
 //                               options                                       //
 //-----------------------------------------------------------------------------//
-/*
-add_outil( array(
-	'id' => 'revision_nbsp',
-	'code:options' => '$GLOBALS["activer_revision_nbsp"] = true; $GLOBALS["test_i18n"] = true ;',
-	'categorie' => 'admin',
-));
-*/
-
 
 // typographie sur les #TITRE et #NOM d'objets
 // cet outil est place en tete car il modifie le pivot de #TITRE et #NOM
@@ -480,16 +472,91 @@ add_outil( array(
 	'pipelinecode:pre_description_outil' => 'if($id=="cs_comportement") {
 $tmp=(!%%spip_options_on%%||!$flux["actif"]||defined("_CS_SPIP_OPTIONS_OK"))?"":"<span style=\"color:red\">"._T("couteauprive:cs_spip_options_erreur")."</span>";
 $texte=str_replace(array("@_CS_FILE_OPTIONS_ERR@","@_CS_DIR_TMP@","@_CS_FILE_OPTIONS@"),
-	array($tmp,cs_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),show_file_options()),$texte);
+	array($tmp,cs_root_canonicalize(_DIR_TMP),show_file_options()),$texte);
 }',
 ));
 
+add_variables( array(
+	'nom' => 'filtre_gravite',
+	'format' => _format_NOMBRE,
+	'radio' => array(0 => '_EMERGENCY (0)', 1 => '_ALERT (1)', 2 => '_CRITICAL (2)', 3 => '_ERROR (3)', 4 => '_WARNING (4)', 5 => '_NOTICE (5)', 6 => '_INFO (6)', 7 => '_DEBUG (7)', 8 => '_TRACE :'),
+	'radio/ligne' => 3,
+	'defaut' => 5,
+	'code:%s<8' => "defined('_LOG_FILTRE_GRAVITE') || define('_LOG_FILTRE_GRAVITE',%s);",
+	'code:%s==8' => "defined('_LOG_FILTRE_GRAVITE') || define('_LOG_FILTRE_GRAVITE',_LOG_FILTRE_GRAVITE_TRACE);",
+), array(
+	'nom' => 'filtre_gravite_trace',
+	'format' => _format_NOMBRE,
+	'defaut' => 8,
+	'code:%s>=0' => "define('_LOG_FILTRE_GRAVITE_TRACE',%s);",
+), array(
+	'nom' => 'log_brut',
+	'check' => 'couteauprive:log_brut',
+	'defaut' => 0,
+	'code:%s' => "defined('_LOG_BRUT') || define('_LOG_BRUT',%s);",
+), array(
+	'nom' => 'dir_log',
+	'label' => '@_CS_CHOIX@',
+	'format' => _format_CHAINE,
+	'defaut' => '',
+	'code:strlen(%s)' => "defined('_DIR_LOG') || define('_DIR_LOG', _ROOT_RACINE.%s); echo '!!'._DIR_LOG;",
+	'action' => '%s = strlen(%s=trim(%s))?cs_root_canonicalize(%s."/", _DIR_RACINE):"";',
+), array(
+	'nom' => 'file_log',
+	'format' => _format_CHAINE,
+	'taille' => 10,
+	'defaut' => "'spip'",
+	'code:%s' => "defined('_FILE_LOG') || define('_FILE_LOG',%s);",
+), array(
+	'nom' => 'file_log_suffix',
+	'format' => _format_CHAINE,
+	'taille' => 10,
+	'defaut' => "'.log'",
+	'code:%s' => "defined('_FILE_LOG_SUFFIX') || define('_FILE_LOG_SUFFIX',%s);",
+), array(
+	'nom' => 'max_log',
+	'format' => _format_NOMBRE,
+	'defaut' => 100, // lignes
+	'code:%s>0 && %s<>100' => "defined('_MAX_LOG') || define('_MAX_LOG',%s);",
+), array(
+	'nom' => 'log_fileline',
+	'check' => 'couteauprive:log_fileline',
+	'defaut' => 0,
+	'code:%s>0 && %s<>100' => "defined('_LOG_FILELINE') || define('_LOG_FILELINE',%s);",
+), array(
+	'nom' => 'taille_des_logs',
+	'format' => _format_NOMBRE,
+	'defaut' => 100, // Ko (0 : pas de log)
+	'code:%s>=0 && %s<>100' => "\$GLOBALS['taille_des_logs']=%s;",
+), array(
+	'nom' => 'nombre_de_logs',
+	'format' => _format_NOMBRE,
+	'defaut' => 4, // (0 : pas de log)
+	'code:%s>=0 && %s<>4' => "\$GLOBALS['nombre_de_logs']=%s;",
+));
+add_outil( array(
+	'id' => 'spip_log',
+	'description' => '<:spip_log::>' . (defined('_SPIP30000')?'[[->@puce@ %log_fileline%]][[->@puce@ %log_brut%]]<:spip_log:2:>':''),
+	'code:spip_options' => (defined('_SPIP30000')?'%%filtre_gravite_trace%%%%filtre_gravite%%%%log_brut%%%%log_fileline%%':'')
+		. '%%dir_log%%%%file_log%%%%file_log_suffix%%%%max_log%%%%taille_des_logs%%%%nombre_de_logs%%',
+	'categorie' =>'devel',
+	'pipelinecode:pre_description_outil' => 'if($id=="spip_log")
+	$texte=str_replace(array("@DIR_LOG@","@SPIP_OPTIONS@"),
+	array("<code>".cs_root_canonicalize(_DIR_LOG)."</code>",!defined("_CS_SPIP_OPTIONS_OK")?"<br/>"._T("couteauprive:detail_spip_options2"):""),$texte);',
+));
+
+add_outil( array(
+	'id' => 'test_i18n',
+	'code:spip_options' => '$GLOBALS["test_i18n"] = true ;',
+	'categorie' => 'devel',
+	'pipelinecode:pre_description_outil' => 'if($id=="test_i18n") $texte.=_T("Lorem_ipsum_dolor");',
+));
 
 add_outil( array(
 	'id' => 'xml',
 	'code:options' => "\$GLOBALS['xhtml']='sax';",
 	'auteur' => 'Ma&iuml;eul Rouquette',
-	'categorie' =>'public',
+	'categorie' =>'devel',
 	'version-min' => '1.9200',
 ));
 
@@ -541,7 +608,7 @@ add_variables( array(
 add_outil( array(
 	'id' => 'en_travaux',
 	'code:options' => "%%message_travaux%%%%prive_travaux%%%%admin_travaux%%%%avertir_travaux%%%%titre_travaux%%",
-	'categorie' => 'admin',
+	'categorie' => 'devel',
 	'auteur' => "Arnaud Ventre pour l'id&eacute;e originale",
 	'pipeline:affichage_final' => 'en_travaux_affichage_final',
 	'pipelinecode:pre_description_outil' => 'if($id=="en_travaux") $texte=str_replace(array("@_CS_TRAVAUX_TITRE@","@_CS_NOM_SITE@"),
@@ -596,6 +663,7 @@ add_outil( array(
 #	'pipelinecode:pre_description_outil' => 'if($id=="boites_privees") include_spip("cout_define");',
 ));
 
+// TODO : compat SPIP 3.0 ?
 add_variables( array(
 	'nom' => 'max_auteurs_page',
 	'format' => _format_NOMBRE,
@@ -606,7 +674,7 @@ add_variables( array(
 ), array(
 	'nom' => 'auteurs_1',	'check' => 'info_redacteurs',	'defaut' => 1,	'code:%s' => "'1comite',",
 ), array(
-	'nom' => 'auteurs_5',	'check' => 'info_statut_site_4',	'defaut' => 1,	'code:%s' => "'5poubelle',",
+	'nom' => 'auteurs_5',	'check' => defined('_SPIP30000')?'texte_statut_poubelle':'info_statut_site_4',	'defaut' => 1,	'code:%s' => "'5poubelle',",
 ), array(
 	'nom' => 'auteurs_6',	'check' => 'info_visiteurs',	'defaut' => 0,	'code:%s' => "'6forum',",
 ), array(
@@ -743,7 +811,7 @@ add_outil( array(
 // intertitres typo, outil compatible avec 'sommaire' :
 add_variables( array(
 	'nom' => 'i_align',
-	'radio' => array('left' => 'left', 'right' => 'right', 'center' => 'center'),
+	'radio' => array('left' => '_left', 'right' => '_right', 'center' => '_center'),
 	'defaut' => "'left'",
 ), array(
 	'nom' => 'i_padding',

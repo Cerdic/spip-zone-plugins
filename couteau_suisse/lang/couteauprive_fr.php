@@ -8,6 +8,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// 2
 	'2pts_non' => ' : non',
 	'2pts_oui' => ' : oui',
+	
+	'test_i18n:nom' => 'Traductions manquantes',
+	'test_i18n:description' => 'Toutes les chaînes de langue qui ne sont pas internationalisées (donc présentes dans les fichiers lang/*_XX.php) vont apparaitre en rouge.
+_ Utile pour n\'en oublier aucune !
+
+@puce@ Un test : ',
+	'spip_log:nom' => 'SPIP et les logs',
+	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]',
+	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
+[[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]',
+	'log_brut' => 'Données écrites en format brut (non HTML)',
+	'log_fileline' => 'Informations supplémentaires de débogage',
+	'label:nombre_de_logs' => 'Rotation des fichiers :',
+	'label:filtre_gravite' => 'Gravité maximale acceptée :',
 
 	// S
 	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par défaut dans la fenêtre de navigation en cours. Mais il peut être utile d\'ouvrir les liens externes au site dans une nouvelle fenêtre extérieure -- cela revient à ajouter {target=&quot;_blank&quot;} à toutes les balises &lt;a&gt; dotées par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois nécessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'étendre au maximum cette fonctionnalité.[[%radio_target_blank3%]]
@@ -136,6 +150,7 @@ _ • Un champ de recherche à partir de %select_max_auteurs% auteurs(s).</q1>',
 	'cache_permanent' => 'Cache permanent',
 	'cache_sans' => 'Pas de cache',
 	'categ:admin' => '1. Administration',
+	'categ:devel' => '55. Développement',
 	'categ:divers' => '60. Divers',
 	'categ:interface' => '10. Interface privée',
 	'categ:public' => '40. Affichage public',
@@ -269,7 +284,7 @@ Cet outil peut être couplé avec « [.->sommaire] ».',
 	'detail_pipelines' => 'Pipelines :',
 	'detail_raccourcis' => 'Voici la liste des raccourcis typographiques reconnus par cet outil.',
 	'detail_spip_options' => '{{Note}} : En cas de dysfonctionnement de cet outil, placez les options SPIP en amont grâce à l\'outil «@lien@».',
-	'detail_spip_options2' => 'Il est recommandé de placer les options SPIP en amont grâce à l\'outil «[.->cs_comportement]».',
+	'detail_spip_options2' => 'Il est recommandé ici de placer les options SPIP en amont grâce à l\'outil «[.->cs_comportement]».',
 	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont grâce à l\'outil «@lien@».',
 	'detail_surcharge' => 'Outil surchargé :',
 	'detail_traitements' => 'Traitements :',
@@ -970,7 +985,9 @@ En tant que webmestre vous-même, vous avez ici les droits de modifier cette lis
 	'webmestres:nom' => 'Liste des webmestres',
 
 	// X
-	'xml:description' => 'Active le validateur xml pour l\'espace public tel qu\'il est décrit dans la [documentation->http://www.spip.net/fr_article3541.html]. Un bouton intitulé « Analyse XML » est ajouté aux autres boutons d\'administration.',
+	'xml:description' => 'Active le validateur XML pour l\'espace public tel qu\'il est décrit dans la [documentation de SPIP->http://www.spip.net/fr_article3541.html]. Cet outil n\'est visible que des administrateurs du site : un bouton intitulé « Analyse XML » est ajouté aux autres boutons d\'administration.
+
+@puce@ Utile notamment pour valider la syntaxe de vos pages finales, et résoudre les problèmes d\'accessibilité du Web aux déficients visuels.',
 	'xml:nom' => 'Validateur XML'
 );
 

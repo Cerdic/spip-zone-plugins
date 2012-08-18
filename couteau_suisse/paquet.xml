@@ -1,7 +1,7 @@
 <paquet
 	prefix="couteau_suisse"
 	categorie="maintenance"
-	version="1.8.89"
+	version="1.8.90"
 	etat="stable"
 	compatibilite="[1.9.2;3.0.99]"
 	logo="img/couteau-50.gif"
@@ -40,6 +40,7 @@
 	<pipeline nom="arbo_creer_chaine_url" inclure="cout_pipelines.php" />
 	<pipeline nom="propres_creer_chaine_url" inclure="cout_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="cout_pipelines.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="cout_pipelines.php" />
 	<!-- pipelines exterieurs -->
 	<pipeline nom="porte_plume_barre_pre_charger" inclure="cout_pipelines.php" />
 	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="cout_pipelines.php" />
@@ -48,7 +49,6 @@
 	<pipeline nom="pre_description_outil" inclure="cout_pipelines.php" />
 	<pipeline nom="fichier_distant" inclure="cout_pipelines.php" />
 	<pipeline nom="porte_plume_cs_pre_charger" inclure="cout_pipelines.php" />
-	<pipeline nom="declarer_tables_interfaces" inclure="cout_pipelines.php" />
 	
 
 	<menu nom="csconfig" titre="couteauprive:titre" parent="menu_configuration" icone="images/couteau-16.png" action ="admin_couteau_suisse" parametres="" />
