@@ -1,0 +1,15 @@
+<div class="formulaire_spip formulaire_configurer_a2a" id="formulaire_configurer_a2a">
+
+<form method='post' action='#ENV{action}'>
+	
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class='editer_types editer'>
+				<label for="types"><:a2a:configurer_types:></a></label>
+				<p class="explication"><:a2a:explication_types:></p>
+				<textarea name="types" id='types' row='10' cols='80'>[(#ENV{types})]</textarea>
+			</li>
+		</ul>
+	<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
+</form>
+</div>
