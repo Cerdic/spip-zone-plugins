@@ -422,6 +422,7 @@ add_outil( array(
 
 add_variables( array(
 	'nom' => 'ecran_actif',
+	'label' => '@_CS_CHOIX@',
 	'check' => 'couteauprive:ecran_activer',
 	'defaut' => 1,
 	// code d'appel en realpath() pour config/mes_options.php (SPIP < 2.1)
@@ -496,7 +497,6 @@ add_variables( array(
 	'code:%s' => "defined('_LOG_BRUT') || define('_LOG_BRUT',%s);",
 ), array(
 	'nom' => 'dir_log',
-	'label' => '@_CS_CHOIX@',
 	'format' => _format_CHAINE,
 	'defaut' => '',
 	'code:strlen(%s)' => "defined('_DIR_LOG') || define('_DIR_LOG', _ROOT_RACINE.%s); echo '!!'._DIR_LOG;",
