@@ -21,4 +21,5 @@
 	<pipeline nom="affiche_milieu" action="affiche_milieu" inclure="a2a_pipelines.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/a2a.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/a2a.php" />
+	<menu nom="configurer_a2a" parent="menu_edition" titre="a2a:configurer_a2a" icone="images/a2a-16.png" />
 </paquet>

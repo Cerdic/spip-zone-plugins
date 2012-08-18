@@ -9,7 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'appliquer_type_liaison' => 'Type de liaison :',
 	'appliquer_type_liaison_explication' => 'Décrivez le type de lien à appliquer lors de la liaison. Utilisez de préférence un code ou un mot court.',
 	'articles_lies' => 'ARTICLES LIÉS',
-
+	// C
+	'configurer_a2a'	=>'Configurer les relations entres articles',
 	// E
 	'explication_navigateur' => 'Cliquez sur [Ajouter] pour naviguer dans l\'arborescence du site afin de sélectionner les articles à lier.',
 
