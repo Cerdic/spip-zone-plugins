@@ -109,6 +109,7 @@ function wwo_meteo2icone($meteo) {
  * @return array
  */
 function wwo_xml2previsions($xml){
+	include_spip('inc/xml');
 	$tableau = array();
 	$n = spip_xml_match_nodes(",^dayf,",$xml,$previsions);
 	if ($n==1){

@@ -141,6 +141,7 @@ function wunderground_code2meteo($meteo, $periode=0) {
  * @return array
  */
 function wunderground_xml2previsions($xml){
+	include_spip('inc/xml');
 	$tableau = array();
 	$n = spip_xml_match_nodes(",^dayf,",$xml,$previsions);
 	if ($n==1){
