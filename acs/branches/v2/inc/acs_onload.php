@@ -69,7 +69,7 @@ define('_DIR_COMPOSANTS', find_in_path('composants'));
 // dispatch public / privé
 if ((_DIR_RESTREINT != '') && ($_POST['action'] != 'poster_forum_prive')) {
 	// Sauts de ligne 
-	$GLOBALS['spip_pipeline']['pre_propre'] .= '|post_autobr';  
+	$GLOBALS['spip_pipeline']['pre_propre'] .= '|post_autobr';
 }
 else {
   require_once _DIR_ACS.'inc/acs_onload_ecrire.php';
