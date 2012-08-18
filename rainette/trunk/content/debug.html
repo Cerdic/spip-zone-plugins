@@ -48,7 +48,7 @@
 <br />
 
 [(#REM) Les informations d'une ville - wwo ]
-#SET{code, 'Paris,France'}
+#SET{code, #ENV{ville,'Paris,France'}}
 #SET{nom_ville, #RAINETTE_INFOS{#GET{code}, ville, wwo}}
 <div class="cartouche">
 	<h1 class="h1"><:rainette:meteo_consultation{ville=#GET{nom_ville}}:></h1>
@@ -87,7 +87,7 @@
 
 
 [(#REM) Les informations d'une ville - wunderground ]
-#SET{code, 'Paris,France'}
+#SET{code, #ENV{ville,'Paris,France'}}
 #SET{nom_ville, #RAINETTE_INFOS{#GET{code}, ville, wunderground}}
 <div class="cartouche">
 	<h1 class="h1"><:rainette:meteo_consultation{ville=#GET{nom_ville}}:></h1>
