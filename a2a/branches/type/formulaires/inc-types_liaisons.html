@@ -1,11 +1,13 @@
 <B_liaisons>
-<ul><li class="editer_type_liaison">
+<ul><li class="editer_type_liaison[(#ENV**{erreurs}|table_valeur{type_obligatoire}|oui) erreur][(#CONFIG{a2a/type_obligatoire}|non) obligatoire]">
 <label for="type_liaison"><:a2a:type_liaison:></label>
+[(#ENV**{erreurs}|table_valeur{type_obligatoire}|oui)<p class='message_erreur'><:a2a:type_obligatoire:></p>]
 <select name="type_liaison" id="type_liaison">
 	[(#CONFIG{a2a/type_obligatoire}|non)<option value=""></option>]
 <BOUCLE_liaisons(DATA){source csv, #CONFIG{a2a/types}}>
-
-	<option value="[(#VALEUR|table_valeur{0})]">[(#VALEUR|table_valeur{1}|_T)]</value>
+	
+	<option value="[(#VALEUR|table_valeur{0})]">[(#VALEUR|table_valeur{1}|_T)]</option>
+	
 </BOUCLE_liaisons>
 </select>
 </li>

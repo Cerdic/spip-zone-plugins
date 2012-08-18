@@ -19,6 +19,10 @@ function formulaires_recherche_a2a_charger($id_article){
 }
 
 function formulaires_recherche_a2a_verifier($id_article){
+	$erreurs=array();
+	if (lire_config('a2a/type_obligatoire') and _request('type_liaison')==''){ //des fois qu'il y en a qui tenteraity d'imposer des liaisons vides via firebug
+		$erreurs['type_obligatoire'] = _T('a2a:type_obligatoire');
+	}
 	$erreurs['message_erreur'] = _T('a2a:pas_de_resultat');
 	return $erreurs;
 }
