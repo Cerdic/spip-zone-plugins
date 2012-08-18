@@ -5,9 +5,14 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 			<li class='editer_types editer'>
-				<label for="types"><:a2a:configurer_types:></a></label>
+				<label for="types"><:a2a:types:></label>
 				<p class="explication"><:a2a:explication_types:></p>
 				<textarea name="types" id='types' row='10' cols='80'>[(#ENV{types})]</textarea>
+			</li>
+			<li class='editer_type_obligatoire editer'>
+				<label for='type_obligatoire'><:a2a:type_obligatoire:></label>
+				<input type="checkbox" id="type_obligatoire"[ checked="checked"(#ENV{type_obligatoire}|oui)] name="type_obligatoire" />
+			</li>
 			</li>
 		</ul>
 	<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>

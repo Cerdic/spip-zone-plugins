@@ -2,6 +2,7 @@
 <ul><li class="editer_type_liaison">
 <label for="type_liaison"><:a2a:type_liaison:></label>
 <select name="type_liaison" id="type_liaison">
+	[(#CONFIG{a2a/type_obligatoire}|non)<option value=""></option>]
 <BOUCLE_liaisons(DATA){source csv, #CONFIG{a2a/types}}>
 
 	<option value="[(#VALEUR|table_valeur{0})]">[(#VALEUR|table_valeur{1}|_T)]</value>

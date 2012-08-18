@@ -6,12 +6,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'appliquer_type_liaison' => 'Type de liaison :',
-	'appliquer_type_liaison_explication' => 'Décrivez le type de lien à appliquer lors de la liaison. Utilisez de préférence un code ou un mot court.',
 	'articles_lies' => 'ARTICLES LIÉS',
 	// C
 	'configurer_a2a'	=>'Configurer les relations entres articles',
-	'configurer_types'	=>'Types de liaison',
 	// E
 	'explication_navigateur' => 'Cliquez sur [Ajouter] pour naviguer dans l\'arborescence du site afin de sélectionner les articles à lier.',
 	'explication_types'		=>'Vous pouvez définir des types de relations : indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par défaut. La description peut être une chaîne de langue.',
@@ -46,6 +43,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'type' => 'Type',
+	'types'=>'Types de liaison',
+	'type_obligatoire'=>'Obligation de typer les liaisons',
 	'type_liaison' => 'Type de liaison',
 
 	// V
