@@ -50,10 +50,11 @@ function description_outil_une_variable($index, &$outil, &$variable, &$label, &$
 		$i = 0; $nb = isset($cs_variable['radio/ligne'])?intval($cs_variable['radio/ligne']):0;
 		foreach($radios as $code=>$traduc) {
 			$br = (($nb>0) && ( ++$i % $nb == 0))?'</ul><ul>':''; 
+			$traduc = strncmp($traduc, '_', 1)===0?substr($traduc, 1):_T($traduc);
 			$res .=
 				"<li><label><input id=\"label_{$variable}_$code\" class=\"cs_input_checkbox\" type=\"radio\""
 				.($valeur==$code?' checked="checked"':'')." value=\"$code\" name=\"$variable\"$disab />"
-				.($valeur==$code?'<b>':'')._T($traduc).($valeur==$code?'</b>':'')
+				.($valeur==$code?'<b>':'').$traduc.($valeur==$code?'</b>':'')
 				."</label></li>$br";
 		}
 		return $res.'</ul>'.$comment._VAR_OUTIL;
@@ -84,7 +85,7 @@ function description_outil_une_variable($index, &$outil, &$variable, &$label, &$
 	// ... ou un textarea ... ou une case input
 	if(!$actif)
 		return $label.'<html>'.(strlen($valeur)?nl2br(echapper_tags($valeur)):'&nbsp;'.couteauprive_T('variable_vide')).'</html>';
-	$len = $nombre?6:0;
+	$len = $nombre?6:(isset($cs_variable['taille'])?$cs_variable['taille']:0);
 	$width = $len?'':'style="width:98.8%;" ';
 	$lignes = !isset($cs_variable['lignes']) || $nombre?0:strval($cs_variable['lignes']);
 	return $label .
@@ -104,6 +105,8 @@ function description_outil_input1_callback($matches) {
 	if(!strlen($matches[1])) return "<fieldset><div>$matches[2]</div></fieldset>";
 	// retour a la ligne : [[-->qq chose]]
 	if($matches[1]=='-') return "<fieldset> <div>$matches[2]</div></fieldset>";
+	// fusion dans un <li> de boutons radio : [[radio->qq chose]]
+	elseif($matches[1]=='radio') return "<fusionradio>$matches[2]</li></ul></div></fieldset>";
 	// format complet : [[label->qq chose]]
 	return "<fieldset><legend>$matches[1]</legend><div>$matches[2]</div></fieldset>";
 }
@@ -247,8 +250,10 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 		$res = preg_replace_callback(',<:label:([a-zA-Z_][a-zA-Z0-9_-]*):>,', 'description_outil_label_callback', $res);
 	// remplacement des blocs avec style. ex : <q2>bla bla</q2>
 	$res = preg_replace(',</q(\d)>,','</div>', preg_replace(',<q(\d)>,','<div class="q$1">', $res));
-	// remplacement des inputs successifs sans label : [[%var1%]][[->%var2%]] ou [[%var1%]][[-->%var2%]]
+	// remplacement des inputs successifs sans label : [[%var1%]][[radio->%var2%]] ou [[%var1%]][[-->%var2%]]
 	$res = preg_replace(',(<br />)?</fieldset><fieldset>( ?<div>),', '$2', $res);
+	// fusion dans <li> : [[%var1%]][[radio->%var2%]] (var1 doit etre de type radio !)
+	$res = str_replace('</li></ul></div></fieldset><fusionradio>', '', $res);
 	// remplacement de diverses constantes
 	$res = str_replace(array('@puce@', '@_CS_CHOIX@','@_CS_ASTER@','@_CS_PLUGIN_JQUERY192@'),
 		array(definir_puce(), couteauprive_T('votre_choix'), '<sup>(*)</sup>', defined('_SPIP19300')?'':couteauprive_T('detail_jquery3')), $res);

@@ -189,13 +189,31 @@ function cs_echappe_balises($balises, $fonction, $texte, $arg=NULL){
 }
 
 // retourne un chemin canonique a partir d'un chemin contenant des ../
-function cs_canonicalize($address) {
-	$address = str_replace('\\', '/', str_replace('//', '/', $address));
-	$address = explode('/', $address);
-	$keys = array_keys($address, '..');
-	foreach($keys as $keypos => $key) array_splice($address, $key - ($keypos * 2 + 1), 2);
-	$address = implode('/', $address);
-	return preg_replace(',([^.])\./,', '\1', $address);
+function cs_canonicalize($file) {
+	$file = str_replace('//', '/', str_replace('\\', '/', $file));
+	$file = explode('/', $file);
+	$keys = array_keys($file, '..');
+	foreach($keys as $keypos => $key) if($key) array_splice($file, $key - ($keypos * 2 + 1), 2);
+	$file = implode('/', $file);
+	return preg_replace(',([^.])\./,', '\1', $file);
+}
+
+// retourne un chemin canonique base sur la racine du site
+// $relatif est le chemin relatif dans lequel on veut situer $file
+function cs_root_canonicalize($file, $relatif='') {
+	static $root, $lenroot;
+//echo " ($file => ";
+	$file = cs_canonicalize($file);
+//echo "$file) ";
+	if(!isset($root)) $lenroot = strlen($root = cs_canonicalize(_ROOT_RACINE));
+	// complet sur la racine du serveur
+	if(strncmp($file, $root, $lenroot)===0) return substr($file, $lenroot);
+	// complet sur la racine du site
+	if(strncmp($file, '/', 1)===0) return substr($file, 1);
+	// relatif
+	$file = cs_canonicalize(getcwd().'/'.$relatif.'/'.$file);
+	if(strncmp($file, $root, $lenroot)===0) return substr($file, $lenroot);
+	return $file;
 }
 
 // manipule le fichier config/mes_options.php

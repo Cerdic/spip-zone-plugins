@@ -38,13 +38,19 @@ cs_log($metas_vars, 'metas_vars :');
 		$final = corriger_caracteres(_request($var));
 		if (in_array($var, $metas_vars['_nombres'])) $final = intval($final);
 		spip_log("Outil du Couteau Suisse ($outil). Demande de modification sur une variable par l'auteur id=$connect_id_auteur : %$var% = $final");
-		// et on modifie les metas !
-		if(!isset($cs_variables[$var]['externe'])) $metas_vars[$var] = $final;
+		// pas de modification de variable si l'outil utilise une variable externe
+		$ok_modif = !isset($cs_variables[$var]['externe']);
+		// action eventuelle apres validation
 		if(isset($cs_variables[$var]['action'])) {
-			$action = str_replace('%s', $final, $cs_variables[$var]['action']);
+			$action = '$_CS_DATA = '.var_export($final, 1)."; ";
+			$action = ($ok_modif?$action:"/* Variable non modifiable : $action */ ")
+				. str_replace('%s', '$_CS_DATA', $cs_variables[$var]['action']);
 			spip_log("Outil du Couteau Suisse ($outil). Demande d'action sur cette variable : ".$action);
 			eval($action);
+			$final = $_CS_DATA;
 		}
+		// et on modifie les metas !
+		if($ok_modif) $metas_vars[$var] = $final;
 			
 	} else 
 		spip_log("Outil du Couteau Suisse n°$index. Modification interdite de la variable %$var% par l'auteur id=$connect_id_auteur !!");

@@ -49,7 +49,7 @@ function get_liste_fonts() {
 
 // Montrer le fichier mes_options.php en cours
 function show_file_options() {
-	return cs_canonicalize(str_replace("../", "", _DIR_RESTREINT_ABS).cs_spip_file_options(3));
+	return cs_root_canonicalize(cs_spip_file_options(3));
 }
 
 ?>

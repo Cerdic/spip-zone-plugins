@@ -24,7 +24,7 @@ function outils_devdebug_config_dist() {
 		'id' => 'devdebug',
         'contrib' => 3572,
         'auteur' => 'Piero Wbmstr',
-        'categorie' => 'divers',
+        'categorie' => 'devel',
 		'code:options' => "%%devdebug_mode%%%%devdebug_espace%%%%devdebug_niveau%%devdebug_charger_debug();\n",
 		'autoriser' => "autoriser('webmestre')",
 		'description' => '<:devdebug::>[[%devdebug_mode%]][[%devdebug_espace%]][[%devdebug_niveau%]]',
