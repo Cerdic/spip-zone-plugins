@@ -19,7 +19,7 @@ function mailcrypt_init() {
 
 // filtre surchargeable pour la balise #EMAIL protegee en public mais pas en prive
 function mailcrypt_email_dist($texte) {
-	if(strpos($texte, '@')===false) return $texte;
+	if(!defined('_MAILCRYPT_TRAITE_EMAIL') || strpos($texte, '@')===false) return $texte;
 	if(function_exists('mailcrypt_email')) return mailcrypt_email($texte);
 	return test_espace_prive()?$texte:mailcrypt($texte);
 }

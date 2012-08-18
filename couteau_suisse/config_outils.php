@@ -1148,12 +1148,22 @@ add_outil( array(
 ));
 
 // attention : mailcrypt doit etre place apres liens_orphelins
+add_variable( array(
+	'nom' => 'balise_email',
+	'check' => 'couteauprive:mailcrypt_balise_email',
+	'defaut' => 1,
+	'format' => _format_NOMBRE,
+	'label' => '@_CS_CHOIX@',
+	'code:%s' => "define('_MAILCRYPT_TRAITE_EMAIL', '1');",
+));
 add_outil( array(
 	'id' => 'mailcrypt',
 	'categorie'	=> 'securite',
 	'auteur' 	=> "Alexis Roussel, Paolo, Pat",
 	'contrib'	=> 2443,
 	'jquery'	=> 'oui',
+	'code:options' => '%%balise_email%%',
+	'description' => '<:mailcrypt::>[[%balise_email%]]',
 	'pipelinecode:post_propre' => "if(strpos(\$flux, '@')!==false) \$flux=cs_echappe_balises('', 'mailcrypt', \$flux);",
 	'code:js' => "function lancerlien(a,b){ x='ma'+'ilto'+':'+a+'@'+b; return x; }",
 	// jQuery pour remplacer l'arobase image par l'arobase texte
