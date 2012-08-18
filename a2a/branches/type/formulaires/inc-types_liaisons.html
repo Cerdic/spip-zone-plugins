@@ -1,0 +1,12 @@
+<B_liaisons>
+<ul><li class="editer_type">
+<label for="type"><:a2a:type_liaison:></label>
+<select name="type" id="type">
+<BOUCLE_liaisons(DATA){source csv, #CONFIG{a2a/types}}>
+
+	<option value="[(#VALEUR|table_valeur{0})]">[(#VALEUR|table_valeur{1}|_T)]</value>
+</BOUCLE_liaisons>
+</select>
+</li>
+</ul>
+</B_liaisons>
