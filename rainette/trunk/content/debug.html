@@ -10,7 +10,7 @@
 
 
 [(#REM) Les informations d'une ville - weather ]
-#SET{code, FRXX0076}
+#SET{code, #ENV{code,FRXX0076}}
 #SET{nom_ville, #RAINETTE_INFOS{#GET{code}, ville, weather}}
 <div class="cartouche">
 	<h1 class="h1"><:rainette:meteo_consultation{ville=#GET{nom_ville}}:></h1>
