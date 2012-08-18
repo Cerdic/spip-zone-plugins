@@ -542,6 +542,7 @@ _ • {Predefinido} : substitución automática de orixe (a partir da version 2.
 	// M
 	'mailcrypt:description' => 'Oculta todas as ligazóns de correo presentes nos seus textos e substitúeos por unha ligazón Javascript que permite activar o programa de correo do lector. Esta ferramenta antispam tenta impedir os robots de colleita de enderezos electrónicos deixados en claro nos foros ou nas balizas dos seus esqueletos.',
 	'mailcrypt:nom' => 'MailCrypt',
+	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de vos squelettes', # NEW
 	'maj_auto:description' => 'Esta ferramenta permítelle xestionarfacilmente a actualización dos seus diferentes módulos, recuperando especialmente o número de revisión contido no ficheiro <code>svn.revision</code> e comparando aquel encontrado en <code>zone.spip.org</code>.
 
 A lista seguinte ofrece a posibilidade de lanzar o proceso de actualización automática de SPIP sobre cada un dos módulos previamente instalados no cartafol <code>plugins/auto/</code>. Os outros códulos encóntranse no cartafol <code>plugins/</code> e lístanse simplemente a título informativo. Se a revisión remota non se pode encontrar, intente proceder manualmente coa actualización do módulo.

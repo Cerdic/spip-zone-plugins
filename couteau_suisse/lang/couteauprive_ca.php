@@ -558,6 +558,7 @@ _ • {Par defecte): substitució automàtica d\'origen (a partir de la versió 
 	// M
 	'mailcrypt:description' => 'Amaga tots els enllaços de correus presents als vostres textos substituint-los per un enllaç JavaScript que permet malgrat tot activar la missatgeria del lector. Aquesta eina antispam impedeix que els robots recullin les adreces electròniques deixades visibles als fòrums o a les etiquetes dels vostres esquelets.',
 	'mailcrypt:nom' => 'MailCrypt',
+	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de vos squelettes', # NEW
 	'maj_auto:description' => 'Aquesta eina us permet gestionar fàcilment l\'actualització dels vostres connectors (plugins), recuperant sobretot el número de revisió que conté el fitxer <code>svn.revision</code> i comparant-lo amb el trobat a <code>zone.spip.org</code>.
 
 La llista de més amunt ofereix la possibilitat de llançar el procés d\'actualització automàtic d\'SPIP a cadascun dels connectors (plugins) instal·lats prèviament a la carpeta <code>plugins/auto/</code>. El altres plugins que es troben a dins de la carpeta <code>plugins/</code> només es llisten com a mera informació. Si la revisió a distància no s\'ha trobat, proveu llavors de fer l\'actualització del connector manualment.

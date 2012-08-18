@@ -540,6 +540,7 @@ _ • {Predetermináu}: reemplazu automáticu d\'orixe (a partir de la versión 
 	// M
 	'mailcrypt:description' => 'Mazcarita toos los enllaces de corréu presentes nos testos y los camuda por un enllaz JavaScript que permite lo mesmo activar la mensaxería del llector. Esta ferramienta escontra\'l corréu puxarra tenta torgar que los robots collechen les señes electróniques escrites en claro nos foros o nes balices de les tos cadarmes.',
 	'mailcrypt:nom' => 'MailCrypt',
+	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de vos squelettes', # NEW
 	'maj_auto:description' => 'Cet outil vous permet de gérer facilement la mise à jour de vos différents plugins, récupérant notamment le numéro de révision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouvé sur <code>zone.spip.org</code>.
 
 La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> ou <code>extensions/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tentez de procéder manuellement à la mise à jour du plugin.
