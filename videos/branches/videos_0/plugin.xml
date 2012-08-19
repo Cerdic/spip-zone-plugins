@@ -72,7 +72,7 @@
 	
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="medias" version="[1.6.0;]" />
-	<utilise id="cfg" version="[1.9.4;]" />
+	<necessite id="spip_bonux" version="[2.3.0;]" />
 	
 	<categorie>multimedia</categorie>
 </plugin>
