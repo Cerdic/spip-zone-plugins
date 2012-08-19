@@ -199,25 +199,25 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	echo debut_gauche('', true);
 	$t = '';
 	if(isset($GLOBALS['cs_installer'])) foreach(array_keys($GLOBALS['cs_installer']) as $pack)
-		$t .= "\n_ " . couteauprive_T('pack_du', array('pack'=>"{[{$pack}|".couteauprive_T('pack_installe').'->' . generer_url_ecrire($exec,'cmd=install&pack='.urlencode($pack)) . ']}'));
+		$t .= '<br/>&bull;&nbsp;' . couteauprive_T('pack_du', array('pack'=>"{[{$pack}|".couteauprive_T('pack_installe').'->' . generer_url_ecrire($exec,'cmd=install&pack='.urlencode($pack)) . ']}'));
 	$tr = defined('_SPIP30000')?_T('info_traductions'):ucfirst(_T('afficher_trad'));
-	$t = couteauprive_T('help2', array(
+	$t = '<div>' . couteauprive_T('help2', array(
 			'version' => $cs_version.$cs_revision.'<br/>'.
 				(defined('_CS_PAS_DE_DISTANT')?'('.couteauprive_T('version_distante_off').')':'<span class="cs_version">'.couteauprive_T('version_distante').'</span>')
 				))
 		. chargement_automatique()
-		. '<br/>&bull;&nbsp;[' . couteauprive_T('pack_titre') . '|' . couteauprive_T('pack_alt') . '->' . generer_url_ecrire($exec,'cmd=pack#cs_infos')
+		. '</div><div>&bull;&nbsp;[' . couteauprive_T('pack_titre') . '|' . couteauprive_T('pack_alt') . '->' . generer_url_ecrire($exec,'cmd=pack#cs_infos')
 		. ']<br/>&bull;&nbsp;[' . $tr . '|' . $tr . '->' . generer_url_ecrire($exec,'cmd=trad#cs_infos')
-		. "]\n\n"
+		. "]</div><div>"
 		. couteauprive_T('help3', array(
 			'reset' => generer_url_ecrire($exec,'cmd=resetall'),
 			'hide' => generer_url_ecrire($exec,'cmd=showall'),
 			'contribs' => "\n_ &bull; " . cs_liste_contribs(25, "\n_ &bull; "),
-			'install' => $t
-	));
-	if(function_exists('redirige_action_post')) $t = redirige_action_post('charger_plugin', '', 'admin_couteau_suisse', '', $t); // SPIP >= 2.0
-	$t = '<div class="cs_aide">'.couteauprive_T('help')."\n\n$t</div>";
-	echo debut_boite_info(true), propre($t), fin_boite_info(true);
+			'install' => $t))
+		. '</div>';
+	if(function_exists('redirige_action_post')) $t = redirige_action_post('charger_plugin', '', 'admin_couteau_suisse', '', propre($t)); // SPIP >= 2.0
+	$t = '<div class="cs_aide">'.propre('<div>'.couteauprive_T('help').'</div>').$t.'</div>';
+	echo debut_boite_info(true), $t, fin_boite_info(true);
 //	if(strlen($t = cs_aide_raccourcis()))
 //		echo debut_boite_info(true), $t, fin_boite_info(true);
 	$t = cs_aide_pipelines($outils_affiches_actifs);

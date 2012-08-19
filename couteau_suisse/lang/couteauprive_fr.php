@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par défaut dans la fenêtre de navigation en cours. Mais il peut être utile d\'ouvrir les liens externes au site dans une nouvelle fenêtre extérieure -- cela revient à ajouter {target=&quot;_blank&quot;} à toutes les balises &lt;a&gt; dotées par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois nécessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'étendre au maximum cette fonctionnalité.[[%radio_target_blank3%]]
 
-@puce@ SPIP permet de relier des mots à leur définition grâce au raccourci typographique <code>[?mot]</code>. Par défaut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l’encyclopédie libre wikipedia.org. À vous de choisir l\'adresse à utiliser. <br />Lien de test : [?SPIP][[%url_glossaire_externe2%]]',
+@puce@ SPIP permet de relier des mots à leur définition grâce au raccourci typographique <code>[?mot]</code>. Par défaut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l\'encyclopédie libre wikipedia.org. À vous de choisir l\'adresse à utiliser. <br />Lien de test : [?SPIP][[%url_glossaire_externe2%]]',
 	'SPIP_liens:description1' => '@puce@ SPIP a prévu un style CSS pour les liens «~mailto:~» : une petite enveloppe devrait apparaître devant chaque lien lié à un courriel; mais puisque tous les navigateurs ne peuvent pas l\'afficher (notamment IE6, IE7 et SAF3), à vous de voir s\'il faut conserver cet ajout.
 _ Lien de test : [->test@test.com] (rechargez la page entièrement).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP et les liens… externes',
@@ -340,7 +340,7 @@ Attention : certains outils du Couteau Suisse nécessitent les fonctions de {jQu
 	'f_jQuery:nom' => 'Désactive jQuery',
 	'filets_sep:aide' => 'Filets de Séparation : <b>__i__</b> où <b>i</b> est un nombre de <b>0</b> à <b>@max@</b>.<br />Autres filets disponibles : @liste@',
 	'filets_sep:description' => 'Insère des filets de séparation, personnalisables par des feuilles de style, dans tous les textes de SPIP.
-_ La syntaxe est : &quot;__code__&quot;, où &quot;code&quot; représente soit le numéro d’identification (de 0 à 7) du filet à insérer en relation directe avec les styles correspondants, soit le nom d\'une image placée dans le dossier plugins/couteau_suisse/img/filets.',
+_ La syntaxe est : &quot;__code__&quot;, où &quot;code&quot; représente soit le numéro d\'identification (de 0 à 7) du filet à insérer en relation directe avec les styles correspondants, soit le nom d\'une image placée dans le dossier plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Filets de Séparation',
 	'filtrer_javascript:description' => 'Pour gérer l\'insertion de JavaScript dans les articles, trois modes sont disponibles :
 - <i>jamais</i> : le JavaScript est refusé partout
@@ -366,7 +366,7 @@ Les blocs multi s\'affichent alors toujours dans la langue demandée par le visi
 
 	// G
 	'glossaire:aide' => 'Un texte sans glossaire : <b>@_CS_SANS_GLOSSAIRE@</b>',
-	'glossaire:description' => '@puce@ Gestion d’un glossaire interne lié à un ou plusieurs groupes de mots-clés. Inscrivez ici le nom des groupes en  les séparant par les deux points « : ». En laissant vide la case qui  suit (ou en tapant &quot;Glossaire&quot;), c’est le groupe &quot;Glossaire&quot; qui sera utilisé.[[%glossaire_groupes%]]
+	'glossaire:description' => '@puce@ Gestion d\'un glossaire interne lié à un ou plusieurs groupes de mots-clés. Inscrivez ici le nom des groupes en  les séparant par les deux points « : ». En laissant vide la case qui  suit (ou en tapant &quot;Glossaire&quot;), c\'est le groupe &quot;Glossaire&quot; qui sera utilisé.[[%glossaire_groupes%]]
 
 @puce@ Pour chaque mot, vous avez la possibilité de choisir le nombre maximal de liens créés dans vos textes. Toute valeur nulle ou négative implique que tous les mots reconnus seront traités. [[%glossaire_limite% par mot-clé]]
 
@@ -629,7 +629,7 @@ Objets publiés mais masqués du public :
 Si les droits d\'écriture le permettent, le code PHP ci-dessous pourra prendre place dans le fichier {{/config/mes_options.php}} et ajoutera un lien de réinitialisation sur cette page du pack « {@pack@} ». Bien sûr il vous est possible de changer son nom.
 
 Si vous réinitialisez le plugin en cliquant sur un pack, le Couteau Suisse se reconfigurera automatiquement en fonction des paramètres prédéfinis dans ce pack.',
-	'pack_du' => '• du pack @pack@',
+	'pack_du' => 'Du pack @pack@',
 	'pack_installe' => 'Mise en place d\'un pack de configuration',
 	'pack_installer' => 'Êtes-vous sûr de vouloir réinitialiser le Couteau Suisse et installer le pack « @pack@ » ?',
 	'pack_nb_plrs' => 'Il y a actuellement @nb@ « packs de configuration » disponibles :',
@@ -645,9 +645,9 @@ Si vous réinitialisez le plugin en cliquant sur un pack, le Couteau Suisse se r
 	'paragrapher2:description' => 'La fonction SPIP <code>paragrapher()</code> insère des balises &lt;p&gt; et &lt;/p&gt; dans tous les textes qui sont dépourvus de paragraphes. Afin de gérer plus finement vos styles et vos mises en page, vous avez la possibilité d\'uniformiser l\'aspect des textes de votre site.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Paragrapher',
 	'pipelines' => 'Pipelines utilisés :',
-	'previsualisation:description' => 'Par défaut, SPIP permet de prévisualiser un article dans sa version publique et stylée, mais uniquement lorsque celui-ci a été « proposé à l’évaluation ». Hors cet outil permet aux auteurs de prévisualiser également les articles pendant leur rédaction. Chacun peut alors prévisualiser et modifier son texte à sa guise.
+	'previsualisation:description' => 'Par défaut, SPIP permet de prévisualiser un article dans sa version publique et stylée, mais uniquement lorsque celui-ci a été « proposé à l\'évaluation ». Hors cet outil permet aux auteurs de prévisualiser également les articles pendant leur rédaction. Chacun peut alors prévisualiser et modifier son texte à sa guise.
 
-@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que vos rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », vous devez l’autoriser (dans le menu {[Configuration&gt;Fonctions avancées->./?exec=config_fonctions]} de l’espace privé).',
+@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que vos rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », vous devez l\'autoriser (dans le menu {[Configuration&gt;Fonctions avancées->./?exec=config_fonctions]} de l\'espace privé).',
 	'previsualisation:nom' => 'Prévisualisation des articles',
 	'puceSPIP' => 'Autoriser le raccourci «*»',
 	'puceSPIP_aide' => 'Une puce SPIP : <b>*</b>',
@@ -682,7 +682,7 @@ Dossier stockant les sessions : @_DIR_SESSIONS@
 
 Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.',
 	'sessions_anonymes:nom' => 'Sessions anonymes',
-	'set_options:description' => 'Sélectionne d\'office le type d’interface privée (simplifiée ou avancée) pour tous les rédacteurs déjà existant ou à venir et supprime le bouton correspondant du bandeau des petites icônes.[[%radio_set_options4%]]',
+	'set_options:description' => 'Sélectionne d\'office le type d\'interface privée (simplifiée ou avancée) pour tous les rédacteurs déjà existant ou à venir et supprime le bouton correspondant du bandeau des petites icônes.[[%radio_set_options4%]]',
 	'set_options:nom' => 'Type d\'interface privée',
 	'sf_amont' => 'En amont',
 	'sf_tous' => 'Tous',
@@ -698,7 +698,7 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]',
 Attention, cet outil a besoin pour fonctionner de pages au «DOCTYPE XHTML» (non HTML !) et de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si vous cochez les cases suivantes. [[%scrollTo%]][[-->%LocalScroll%]]
 @_CS_PLUGIN_JQUERY192@',
 	'soft_scroller:nom' => 'Ancres douces',
-	'sommaire:description' => 'Construit un sommaire pour le texte de vos articles et de vos rubriques afin d’accéder rapidement aux gros titres (balises HTML &lt;@h3@>Un gros titre&lt;/@h3@>) ou aux intertitres SPIP (de syntaxe <code>{{{Un intertitre}}}</code>).
+	'sommaire:description' => 'Construit un sommaire pour le texte de vos articles et de vos rubriques afin d\'accéder rapidement aux gros titres (balises HTML &lt;@h3@>Un gros titre&lt;/@h3@>) ou aux intertitres SPIP (de syntaxe <code>{{{Un intertitre}}}</code>).
 
 Pour information, l\'outil « [.->class_spip] » permet de choisir la balise &lt;hN> utilisée pour les intertitres de SPIP.
 
@@ -709,7 +709,7 @@ Pour information, l\'outil « [.->class_spip] » permet de choisir la balise &
 @puce@ Les ancres du sommaire peuvent être calculées à partir du titre et non ressembler à : {outil_sommaire_NN}. Cette option donne également accès à la syntaxe <code>{{{Mon titre<mon_ancre>}}}</code> qui permet de choisir l\'ancre utilisée.[[%jolies_ancres%]]
 
 @puce@ Fixez ici le comportement du plugin concernant la création du sommaire: 
-_ • Systématique pour chaque article (une balise <code>@_CS_SANS_SOMMAIRE@</code> placée n’importe où à l’intérieur du texte de l’article créera une exception).
+_ • Systématique pour chaque article (une balise <code>@_CS_SANS_SOMMAIRE@</code> placée n\'importe où à l\'intérieur du texte de l\'article créera une exception).
 _ • Uniquement pour les articles contenant la balise <code>@_CS_AVEC_SOMMAIRE@</code>.
 
 [[%auto_sommaire%]]
@@ -975,7 +975,7 @@ Ajoutez simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> dans v
 	'votre_choix' => 'Votre choix :',
 
 	// W
-	'webmestres:description' => 'Un {{webmestre}} au sens SPIP est un {{administrateur}} ayant accès à l\'espace FTP. Par défaut et à partir de SPIP 2.0, il est l\'administrateur <code>id_auteur=1</code> du site. Les webmestres ici définis ont le privilège de ne plus être obligés de passer par FTP pour valider les opérations sensibles du site, comme la mise à jour de la base de données ou la restauration d’un dump.
+	'webmestres:description' => 'Un {{webmestre}} au sens SPIP est un {{administrateur}} ayant accès à l\'espace FTP. Par défaut et à partir de SPIP 2.0, il est l\'administrateur <code>id_auteur=1</code> du site. Les webmestres ici définis ont le privilège de ne plus être obligés de passer par FTP pour valider les opérations sensibles du site, comme la mise à jour de la base de données ou la restauration d\'un dump.
 
 Webmestre(s) actuel(s) : {@_CS_LISTE_WEBMESTRES@}.
 _ Administrateur(s) éligible(s) : {@_CS_LISTE_ADMINS@}.
