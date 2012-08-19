@@ -138,6 +138,7 @@ _ • A search field starting from %select_max_auteurs% author(s).</q1>',
 	'cache_permanent' => 'Permanent cache',
 	'cache_sans' => 'No cache',
 	'categ:admin' => '1. Administration',
+	'categ:devel' => '55. Développement', # NEW
 	'categ:divers' => '60. Miscellaneous',
 	'categ:interface' => '10. Private interface',
 	'categ:public' => '40. Public site',
@@ -268,7 +269,7 @@ This tool may be combined with "[.->sommaire]".',
 	'detail_pipelines' => 'Pipelines:',
 	'detail_raccourcis' => 'Here is a list of the typographical short-cuts recognised by this tool.',
 	'detail_spip_options' => '{{Note}}: If this tool malfunctions, give the SPIP options priority by using the "@lien@" utility.',
-	'detail_spip_options2' => 'It is recommended to give the SPIP options priority using the «[.->cs_comportement]» utility.',
+	'detail_spip_options2' => 'It is recommended to give the SPIP options priority using the «[.->cs_comportement]» utility.', # MODIF
 	'detail_spip_options_ok' => '{{Note}}: This tool currently gives the SPIP options priority using the "@lien@" utility.',
 	'detail_surcharge' => 'Tool overloaded:',
 	'detail_traitements' => 'Treatment:',
@@ -462,9 +463,9 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:dossier_squelettes' => 'Directory(ies) to use:',
 	'label:duree_cache' => 'Duration of local cache:',
 	'label:duree_cache_mutu' => 'Duration of mutualised cache:',
-	'label:ecran_actif' => '@_CS_CHOIX@',
 	'label:enveloppe_mails' => 'Small envelope before email addresses:',
 	'label:expo_bofbof' => 'Place in superscript: <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>',
+	'label:filtre_gravite' => 'Gravité maximale acceptée :', # NEW
 	'label:forum_lgrmaxi' => 'Value (in characters):',
 	'label:glossaire_groupes' => 'Group(s) used:',
 	'label:glossaire_js' => 'Technique used:',
@@ -495,6 +496,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:message_travaux' => 'Your maintenance message:',
 	'label:moderation_admin' => 'Automatically validate messages from:',
 	'label:mot_masquer' => 'Keyword hiding the contents:',
+	'label:nombre_de_logs' => 'Rotation des fichiers :', # NEW
 	'label:ouvre_note' => 'Opening and closing markers of footnotes',
 	'label:ouvre_ref' => 'Opening and closing markers of footnote links',
 	'label:paragrapher' => 'Always insert paragraphs:',
@@ -550,6 +552,8 @@ _ • {By default}: automatic replacement (from SPIP version 2.0).
 [[%liens_orphelins%]]',
 	'liens_orphelins:description1' => '[[If the URL is more than %long_url% characters long, SPIP will reduce it to %coupe_url% characters]].',
 	'liens_orphelins:nom' => 'Fine URLs',
+	'log_brut' => 'Données écrites en format brut (non HTML)', # NEW
+	'log_fileline' => 'Informations supplémentaires de débogage', # NEW
 
 	// M
 	'mailcrypt:description' => 'Hides all the email links in your textes and replaces them with a Javascript link which activates the visitor\'s email programme when the link is clicked. This antispam tool attempts to prevent web robots from collecting email addresses which have been placed in forums or in the text displayed by the tags in your templates.',
@@ -754,6 +758,10 @@ _ • {Cache checking}: similar to the preceding option. However, all results ar
 	'spip_cache:nom' => 'SPIP and the cache',
 	'spip_ecran:description' => 'Specify the screen width imposed on everyone in the private zone. A narrow screen will display two columns and a wide screen will display three. The default settings leaves the user to make their own choice which will be stored in a browser cookie.[[%spip_ecran%]]',
 	'spip_ecran:nom' => 'Screen width',
+	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
+[[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
+	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
+	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'Authors in statistics',
 	'statuts_spip' => 'Only the following SPIP status:',
 	'statuts_tous' => 'Every status',
@@ -764,6 +772,11 @@ _ • {Cache checking}: similar to the preceding option. However, all results ar
 	'supprimer_numero:nom' => 'Delete the number',
 
 	// T
+	'test_i18n:description' => 'Toutes les chaînes de langue qui ne sont pas internationalisées (donc présentes dans les fichiers lang/*_XX.php) vont apparaitre en rouge.
+_ Utile pour n\'en oublier aucune !
+
+@puce@ Un test : ', # NEW
+	'test_i18n:nom' => 'Traductions manquantes', # NEW
 	'titre' => 'The Swiss Army Knife',
 	'titre_parent:description' => 'Within a loop, it is common to want to show the title of the parent of the current object. You normally need to use a second loop to do this, but a new tag #TITRE_PARENT makes the syntax easier. In the case of a MOTS loop, the tag gives the title of the keyword group. For other objects (articles, sections, news items, etc.) it gives the title of the parent section (if one such exists).
 
@@ -966,7 +979,7 @@ As a webmaster yourself, you have the administrative power to change this list o
 	'webmestres:nom' => 'List of webmasters',
 
 	// X
-	'xml:description' => 'Activates the XML validator for the public site, as described in the [documentation->http://www.spip.net/en_article3582.html]. An « Analyse XML » button is added to the other admin buttons.',
+	'xml:description' => 'Activates the XML validator for the public site, as described in the [documentation->http://www.spip.net/en_article3582.html]. An « Analyse XML » button is added to the other admin buttons.', # MODIF
 	'xml:nom' => 'XML validator'
 );
 

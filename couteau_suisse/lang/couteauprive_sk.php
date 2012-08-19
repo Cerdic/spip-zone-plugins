@@ -128,6 +128,7 @@ Príklady: <code>#SET{x,1}#SET_PLUS{x,2}</code> alebo <code>#SET{x,avions}#SET_R
 	'cache_permanent' => 'Trvalá cache',
 	'cache_sans' => 'Žiadna cache',
 	'categ:admin' => '1. Administrácia',
+	'categ:devel' => '55. Développement', # NEW
 	'categ:divers' => '60. Rôzne',
 	'categ:interface' => '10. Private interface',
 	'categ:public' => '40. Verejná stránka',
@@ -260,7 +261,7 @@ Tento nástroj môžete spojiť s nástrojom "[zhrnutie.->sommaire]".',
 	'detail_pipelines' => 'Potrubie:',
 	'detail_raccourcis' => 'Tento nástroj upravil nasledovné klávesové skratky.',
 	'detail_spip_options' => '{{Poznámka:}} Ak tento nástroj nefunguje, určte prioritu nastaveniam SPIPU pomocou utility "@lien@".',
-	'detail_spip_options2' => 'Odporúča sa určiť prioritu nastavení SPIPU pomocou nástroja "[.->cs_comportement]".',
+	'detail_spip_options2' => 'Odporúča sa určiť prioritu nastavení SPIPU pomocou nástroja "[.->cs_comportement]".', # MODIF
 	'detail_spip_options_ok' => '{{Poznámka:}} Tento nástroj momentálne určuje prioritu nastavení SPIPU pomocou utility "@lien@".',
 	'detail_surcharge' => 'Preťažený nástroj:',
 	'detail_traitements' => 'Riešenie:',
@@ -449,9 +450,9 @@ Pozor! Na to, aby fungoval, tento nástroj potrebuje  zásuvný modul {Zaoblené
 	'label:dossier_squelettes' => 'Directory(ies) to use:',
 	'label:duree_cache' => 'Duration of local cache:',
 	'label:duree_cache_mutu' => 'Duration of mutualised cache:',
-	'label:ecran_actif' => '@_CS_CHOIX@',
 	'label:enveloppe_mails' => 'Malá obálka pred e-mailovou adresou:',
 	'label:expo_bofbof' => 'Na horný index meniť: <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>',
+	'label:filtre_gravite' => 'Gravité maximale acceptée :', # NEW
 	'label:forum_lgrmaxi' => 'Value (in characters):',
 	'label:glossaire_groupes' => 'Group(s) used:',
 	'label:glossaire_js' => 'Technique used:',
@@ -482,6 +483,7 @@ Pozor! Na to, aby fungoval, tento nástroj potrebuje  zásuvný modul {Zaoblené
 	'label:message_travaux' => 'Vaša správa týkajúca sa údržby:',
 	'label:moderation_admin' => 'Automaticky schvaľovať príspevky od:',
 	'label:mot_masquer' => 'Kľúčové slovo skrývajúce obsah:',
+	'label:nombre_de_logs' => 'Rotation des fichiers :', # NEW
 	'label:ouvre_note' => 'Otváracie a uzatváracie označenia koncových poznámok',
 	'label:ouvre_ref' => 'Otváracie a uzatváracie označenia odkazov na koncové poznámky',
 	'label:paragrapher' => 'Vždy vkladať odseky:',
@@ -537,6 +539,8 @@ _ • {predvolený:} automatické nahrádzanie (od verzie 2.0).
 [[%liens_orphelins%]]',
 	'liens_orphelins:description1' => '[[Ak má internetová adresa viac ako %long_url% znakov, SPIP ju zmenší na %coupe_url% znakov]].',
 	'liens_orphelins:nom' => 'Pekné www adresy',
+	'log_brut' => 'Données écrites en format brut (non HTML)', # NEW
+	'log_fileline' => 'Informations supplémentaires de débogage', # NEW
 
 	// M
 	'mailcrypt:description' => 'Hides all the email links in your textes and replaces them with a Javascript link which activates the visitor\'s email programme when the link is clicked. This antispam tool attempts to prevent web robots from collecting email addresses which have been placed in forums or in the text displayed by the tags in your templates.',
@@ -738,6 +742,10 @@ _ • {Kontrola cache:} rovnaké ako predchádzajúca možnosť. Všetky výsled
 	'spip_cache:nom' => 'SPIP and the cache',
 	'spip_ecran:description' => 'Nastaví šírku obrazovky pre každého v súkromnej zóne. Úzka obrazovka zobrazí dva stĺpce a široká obrazovka zobrazí tri. Predvolené nastavenia nechávajú používateľa, aby sa rozhodol sám, čo sa uloží v cookie prehliadača.[[%spip_ecran%]]',
 	'spip_ecran:nom' => 'Šírka obrazovky',
+	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
+[[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
+	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
+	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'Autori v štatistikách',
 	'statuts_spip' => 'Iba tento status SPIPU:',
 	'statuts_tous' => 'Všetky stavy',
@@ -748,6 +756,11 @@ _ • {Kontrola cache:} rovnaké ako predchádzajúca možnosť. Všetky výsled
 	'supprimer_numero:nom' => 'Delete the number',
 
 	// T
+	'test_i18n:description' => 'Toutes les chaînes de langue qui ne sont pas internationalisées (donc présentes dans les fichiers lang/*_XX.php) vont apparaitre en rouge.
+_ Utile pour n\'en oublier aucune !
+
+@puce@ Un test : ', # NEW
+	'test_i18n:nom' => 'Traductions manquantes', # NEW
 	'titre' => 'Vreckový nožík',
 	'titre_parent:description' => 'Within a loop it is common to want to show the title of the parent of the current object. You normally need to use a second loop to do this, but a new tag #TITRE_PARENT makes the syntax easier. In the case of a MOTS loop, the tag gives the title of the keyword group. For other objetcs (articles, sections, news items, etc.) it gives the title of the parent section (if it exists).
 
@@ -947,7 +960,7 @@ Ako webmaster môžete meniť tento zoznam ID. Ak ich je viac, ako oddeľovač p
 	'webmestres:nom' => 'Zoznam webmasterov',
 
 	// X
-	'xml:description' => 'Activates the XML validator for the public site, as described in the [documentation->http://www.spip.net/en_article3582.html]. An « Analyse XML » button is added to the other admin buttons.',
+	'xml:description' => 'Activates the XML validator for the public site, as described in the [documentation->http://www.spip.net/en_article3582.html]. An « Analyse XML » button is added to the other admin buttons.', # MODIF
 	'xml:nom' => 'Validátor XML'
 );
 

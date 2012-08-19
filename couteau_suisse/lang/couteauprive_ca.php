@@ -138,6 +138,7 @@ _ • Un camp de cerca a partir de %select_max_auteurs% autor(s).</q1>',
 	'cache_permanent' => 'Memòria cau permanent',
 	'cache_sans' => 'Sense memòria cau',
 	'categ:admin' => '1. Administració',
+	'categ:devel' => '55. Développement', # NEW
 	'categ:divers' => '60. Divers',
 	'categ:interface' => '10. Interfície privada',
 	'categ:public' => '40. Visualització pública',
@@ -271,7 +272,7 @@ Aquesta eina es pot acompanyar amb « [.->sommaire] ».',
 	'detail_pipelines' => 'Pipelines :',
 	'detail_raccourcis' => 'Llista de dreceres tipogràfiques reconegudes per aquesta eina.',
 	'detail_spip_options' => '{{Nota}}: En cas de disfunció d\'aquesta eina, poseu abans les opcions SPIP gràcies a l\'eina «@lien@».',
-	'detail_spip_options2' => 'És recomanable posar més amunt les opcions gràcies a l\'eina «[.->cs_comportement]».',
+	'detail_spip_options2' => 'És recomanable posar més amunt les opcions gràcies a l\'eina «[.->cs_comportement]».', # MODIF
 	'detail_spip_options_ok' => '{{Nota}}: Aquesta eina posa actualment les opcions SPIP més amunt gràcies a l\'eina «@lien@».',
 	'detail_surcharge' => 'Eina sobrecarregada:',
 	'detail_traitements' => 'Tractaments :',
@@ -466,9 +467,9 @@ Atenció, aquesta eina necessita per funcionar el plugin {jQuery}: {Round Corner
 	'label:dossier_squelettes' => 'Carpeta(es) a utilitzar:',
 	'label:duree_cache' => 'Durada de la memòria cau local:',
 	'label:duree_cache_mutu' => 'Durada de la memòria cau en mutualització:',
-	'label:ecran_actif' => '@_CS_CHOIX@',
 	'label:enveloppe_mails' => 'Petit sobre davant dels correus electrònics:',
 	'label:expo_bofbof' => 'Escriptura com exponents de: <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>',
+	'label:filtre_gravite' => 'Gravité maximale acceptée :', # NEW
 	'label:forum_lgrmaxi' => 'Valor (en caràcters):',
 	'label:glossaire_groupes' => 'Grup(s) utilitzat(s):',
 	'label:glossaire_js' => 'Tècnica utilitzada:',
@@ -499,6 +500,7 @@ Atenció, aquesta eina necessita per funcionar el plugin {jQuery}: {Round Corner
 	'label:message_travaux' => 'El vostre missatge de manteniment:',
 	'label:moderation_admin' => 'Validar automàticament els missatges de: ',
 	'label:mot_masquer' => 'Paraula clau amagant els continguts:',
+	'label:nombre_de_logs' => 'Rotation des fichiers :', # NEW
 	'label:ouvre_note' => 'Obertura i tancament de les notes a peu de pàgina',
 	'label:ouvre_ref' => 'Obertura i tancament de les crides de les notes a peu de pàgina',
 	'label:paragrapher' => 'Sempre paràgrafs:',
@@ -554,6 +556,8 @@ _ • {Par defecte): substitució automàtica d\'origen (a partir de la versió 
 [[%liens_orphelins%]]',
 	'liens_orphelins:description1' => '[[Si l\'URL trobat sobrepassa els %long_url% caràcters, SPIP el redueix llavors a %coupe_url% caràcters]].',
 	'liens_orphelins:nom' => 'URLs bonics',
+	'log_brut' => 'Données écrites en format brut (non HTML)', # NEW
+	'log_fileline' => 'Informations supplémentaires de débogage', # NEW
 
 	// M
 	'mailcrypt:description' => 'Amaga tots els enllaços de correus presents als vostres textos substituint-los per un enllaç JavaScript que permet malgrat tot activar la missatgeria del lector. Aquesta eina antispam impedeix que els robots recullin les adreces electròniques deixades visibles als fòrums o a les etiquetes dels vostres esquelets.',
@@ -757,6 +761,10 @@ _ • {Control de la memòria cau}: opció idèntica a l\'anterior, amb una escr
 	'spip_cache:nom' => 'SPIP i la memòria cau…',
 	'spip_ecran:description' => 'Determina l\'amplada de la pantalla imposada a tots a la part privada. Una pantalla estreta presentarà dues columnes i una pantalla ampla en presentarà tres. ésentera trois. La configuració per defecta deixa que l\'usuari trii, emmagatzemant en una galeta la tria feta.[[%spip_ecran%]]',
 	'spip_ecran:nom' => 'Amplada de pantalla',
+	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
+[[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
+	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
+	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'Els autors en stat',
 	'statuts_spip' => 'Només els statuts SPIP següents:',
 	'statuts_tous' => 'Tots els statuts',
@@ -767,6 +775,11 @@ _ • {Control de la memòria cau}: opció idèntica a l\'anterior, amb una escr
 	'supprimer_numero:nom' => 'Suprimeix el número',
 
 	// T
+	'test_i18n:description' => 'Toutes les chaînes de langue qui ne sont pas internationalisées (donc présentes dans les fichiers lang/*_XX.php) vont apparaitre en rouge.
+_ Utile pour n\'en oublier aucune !
+
+@puce@ Un test : ', # NEW
+	'test_i18n:nom' => 'Traductions manquantes', # NEW
 	'titre' => 'El Ganivet Suís',
 	'titre_parent:description' => 'Al si d\'un bucle, és corrent voler mostrar el títol del parent de l\'objecte en curs. Tradicionalment, n\'hi hauria prou utilitzant un segon bucle, però aquesta nova etiqueta #TITRE_PARENT alleugerarà l\'escriptura dels vostres esquelets. El resultat que torna és: el títol del grup d\'una paraula clau o el de la secció parenta (si existeix) de qualsevol altre objecte (article, secció, breu, etc.).
 
@@ -974,7 +987,7 @@ Vosaltres mateixos, com a webmestres, teniu els drets de modificar aquesta llist
 	'webmestres:nom' => 'Llista de webmestres',
 
 	// X
-	'xml:description' => 'Activa el validador xml per l\'espai públic tal i com està descrit a la [documentació->http://www.spip.net/ca_article3577.html]. Un botó anomenat « Anàlisi XML » s\'afegeix als altres botons d\'administració.',
+	'xml:description' => 'Activa el validador xml per l\'espai públic tal i com està descrit a la [documentació->http://www.spip.net/ca_article3577.html]. Un botó anomenat « Anàlisi XML » s\'afegeix als altres botons d\'administració.', # MODIF
 	'xml:nom' => 'Validador XML'
 );
 

@@ -138,6 +138,7 @@ _ • Un champ de recherche à partir de %select_max_auteurs% auteurs(s).</q1>',
 	'cache_permanent' => 'Cache permanent',
 	'cache_sans' => 'Pas de cache',
 	'categ:admin' => '1. Administration',
+	'categ:devel' => '55. Développement', # NEW
 	'categ:divers' => '60. Divers',
 	'categ:interface' => '10. Interface privée',
 	'categ:public' => '40. Affichage public',
@@ -271,7 +272,7 @@ Cet outil peut être couplé avec « [.->sommaire] ».',
 	'detail_pipelines' => 'Pipelines :',
 	'detail_raccourcis' => 'Voici la liste des raccourcis typographiques reconnus par cet outil.',
 	'detail_spip_options' => '{{Note}} : En cas de dysfonctionnement de cet outil, place les options SPIP en amont grâce à l\'outil «@lien@».',
-	'detail_spip_options2' => 'Il est recommandé de placer les options SPIP en amont grâce à l\'outil «[.->cs_comportement]».',
+	'detail_spip_options2' => 'Il est recommandé de placer les options SPIP en amont grâce à l\'outil «[.->cs_comportement]».', # MODIF
 	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont grâce à l\'outil «@lien@».',
 	'detail_surcharge' => 'Outil surchargé :',
 	'detail_traitements' => 'Traitements :',
@@ -461,9 +462,9 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:dossier_squelettes' => 'Dossier(s) à utiliser :',
 	'label:duree_cache' => 'Durée du cache local :',
 	'label:duree_cache_mutu' => 'Durée du cache en mutualisation :',
-	'label:ecran_actif' => '@_CS_CHOIX@',
 	'label:enveloppe_mails' => 'Petite enveloppe devant les mails :',
 	'label:expo_bofbof' => 'Mise en exposants pour : <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>',
+	'label:filtre_gravite' => 'Gravité maximale acceptée :', # NEW
 	'label:forum_lgrmaxi' => 'Valeur (en caractères) :',
 	'label:glossaire_groupes' => 'Groupe(s) utilisé(s) :',
 	'label:glossaire_js' => 'Technique utilisée :',
@@ -494,6 +495,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:message_travaux' => 'Ton message de maintenance :',
 	'label:moderation_admin' => 'Valider automatiquement les messages des : ',
 	'label:mot_masquer' => 'Mot-clé masquant les contenus :',
+	'label:nombre_de_logs' => 'Rotation des fichiers :', # NEW
 	'label:ouvre_note' => 'Ouverture et fermeture des notes de bas de page',
 	'label:ouvre_ref' => 'Ouverture et fermeture des appels de notes de bas de page',
 	'label:paragrapher' => 'Toujours paragrapher :',
@@ -549,6 +551,8 @@ _ • {Par défaut} : remplacement automatique d\'origine (à partir de la versi
 [[%liens_orphelins%]]',
 	'liens_orphelins:description1' => '[[Si l\'URL rencontrée dépasse les %long_url% caractères, alors SPIP la réduit à %coupe_url% caractères]].',
 	'liens_orphelins:nom' => 'Belles URLs',
+	'log_brut' => 'Données écrites en format brut (non HTML)', # NEW
+	'log_fileline' => 'Informations supplémentaires de débogage', # NEW
 
 	// M
 	'mailcrypt:description' => 'Masque tous les liens de courriels présents dans tes textes en les remplaçant par un lien JavaScript permettant quand même d\'activer la messagerie du lecteur. Cet outil antispam tente d\'empêcher les robots de collecter les adresses électroniques laissées en clair dans les forums ou dans les balises de tes squelettes.',
@@ -750,6 +754,10 @@ _ • {Contrôle du cache} : option identique à la précédente, avec une écri
 	'spip_cache:nom' => 'SPIP et le cache…',
 	'spip_ecran:description' => 'Détermine la largeur d\'écran imposée à tous en partie privée. Un écran étroit présentera deux colonnes et un écran large en présentera trois. Le réglage par défaut laisse l\'utilisateur choisir, son choix étant stocké dans un cookie.[[%spip_ecran%]]',
 	'spip_ecran:nom' => 'Largeur d\'écran',
+	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
+[[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
+	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
+	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'Les auteurs en stat',
 	'statuts_spip' => 'Uniquement les statuts SPIP suivants :',
 	'statuts_tous' => 'Tous les statuts',
@@ -760,6 +768,11 @@ _ • {Contrôle du cache} : option identique à la précédente, avec une écri
 	'supprimer_numero:nom' => 'Supprime le numéro',
 
 	// T
+	'test_i18n:description' => 'Toutes les chaînes de langue qui ne sont pas internationalisées (donc présentes dans les fichiers lang/*_XX.php) vont apparaitre en rouge.
+_ Utile pour n\'en oublier aucune !
+
+@puce@ Un test : ', # NEW
+	'test_i18n:nom' => 'Traductions manquantes', # NEW
 	'titre' => 'Le Couteau Suisse',
 	'titre_parent:description' => 'Au sein d\'une boucle, il est courant de vouloir afficher le titre du parent de l\'objet en cours. Traditionnellement, il suffirait d\'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT allégera l\'écriture de tes squelettes. Le résultat renvoyé est : le titre du groupe d\'un mot-clé ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, brève, etc.).
 
@@ -967,7 +980,7 @@ En tant que webmestre toi-même, tu as ici les droits de modifier cette liste d\
 	'webmestres:nom' => 'Liste des webmestres',
 
 	// X
-	'xml:description' => 'Active le validateur xml pour l\'espace public tel qu\'il est décrit dans la [documentation->http://www.spip.net/fr_article3541.html]. Un bouton intitulé « Analyse XML » est ajouté aux autres boutons d\'administration.',
+	'xml:description' => 'Active le validateur xml pour l\'espace public tel qu\'il est décrit dans la [documentation->http://www.spip.net/fr_article3541.html]. Un bouton intitulé « Analyse XML » est ajouté aux autres boutons d\'administration.', # MODIF
 	'xml:nom' => 'Validateur XML'
 );
 

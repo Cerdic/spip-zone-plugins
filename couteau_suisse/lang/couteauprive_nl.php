@@ -127,6 +127,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'cache_permanent' => 'Permanent dekblad',
 	'cache_sans' => 'Geen dekblad',
 	'categ:admin' => '1. Administratie',
+	'categ:devel' => '55. Développement', # NEW
 	'categ:divers' => '60. Diversen',
 	'categ:interface' => '10. Interface privée',
 	'categ:public' => '40. Openbare display',
@@ -436,9 +437,9 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:dossier_squelettes' => 'Te gebruiken dossier(s) :',
 	'label:duree_cache' => 'Duur van het plaatselijke dekblad :',
 	'label:duree_cache_mutu' => 'Duur van het dekblad in mutualisatie :',
-	'label:ecran_actif' => '@_CS_CHOIX@', # NEW
 	'label:enveloppe_mails' => 'Klein briefje voor de mails :',
 	'label:expo_bofbof' => 'Mise en exposants pour : <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>', # NEW
+	'label:filtre_gravite' => 'Gravité maximale acceptée :', # NEW
 	'label:forum_lgrmaxi' => 'Waarde (in karakters) :',
 	'label:glossaire_groupes' => 'Gebruikte(n) groep(en) :',
 	'label:glossaire_js' => 'Gebruikte techniek :',
@@ -469,6 +470,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:message_travaux' => 'Uw bericht van onderhoud :',
 	'label:moderation_admin' => 'Valider automatiquement les messages des : ', # NEW
 	'label:mot_masquer' => 'Mot-clé masquant les contenus :', # NEW
+	'label:nombre_de_logs' => 'Rotation des fichiers :', # NEW
 	'label:ouvre_note' => 'Ouverture et fermeture des notes de bas de page', # NEW
 	'label:ouvre_ref' => 'Ouverture et fermeture des appels de notes de bas de page', # NEW
 	'label:paragrapher' => 'Nog steeds paragraaf :',
@@ -523,6 +525,8 @@ _ • {Étendu} : sont remplacés en plus les liens du type {<html>moi@spip.net<
 [[%liens_orphelins%]]', # MODIF
 	'liens_orphelins:description1' => '[[Si l\'URL rencontrée dépasse les %long_url% caractères, alors SPIP la réduit à %coupe_url% caractères]].', # NEW
 	'liens_orphelins:nom' => 'Mooi URLs',
+	'log_brut' => 'Données écrites en format brut (non HTML)', # NEW
+	'log_fileline' => 'Informations supplémentaires de débogage', # NEW
 
 	// M
 	'mailcrypt:description' => 'Masque tous les liens de courriels présents dans vos textes en les remplaçant par un lien Javascript permettant quand même d\'activer la messagerie du lecteur. Cet outil antispam tente d\'empêcher les robots de collecter les adresses électroniques laissées en clair dans les forums ou dans les balises de vos squelettes.', # MODIF
@@ -707,6 +711,10 @@ _ • {Contrôle du cache} : option identique à la précédente, avec une écri
 	'spip_cache:nom' => 'SPIP en het dekblad…',
 	'spip_ecran:description' => 'Détermine la largeur d\'écran imposée à tous en partie privée. Un écran étroit présentera deux colonnes et un écran large en présentera trois. Le réglage par défaut laisse l\'utilisateur choisir, son choix étant stocké dans un cookie.[[%spip_ecran%]]', # NEW
 	'spip_ecran:nom' => 'Largeur d\'écran', # NEW
+	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
+[[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
+	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
+	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'De auteurs in stat',
 	'statuts_spip' => 'Alleen de volgende SPIP statuten :',
 	'statuts_tous' => 'Alle statuten',
@@ -717,6 +725,11 @@ _ • {Contrôle du cache} : option identique à la précédente, avec une écri
 	'supprimer_numero:nom' => 'Schaft het nummer af',
 
 	// T
+	'test_i18n:description' => 'Toutes les chaînes de langue qui ne sont pas internationalisées (donc présentes dans les fichiers lang/*_XX.php) vont apparaitre en rouge.
+_ Utile pour n\'en oublier aucune !
+
+@puce@ Un test : ', # NEW
+	'test_i18n:nom' => 'Traductions manquantes', # NEW
 	'titre' => 'Het Zwitserland Mes',
 	'titre_parent:description' => 'Au sein d\'une boucle, il est courant de vouloir afficher le titre du parent de l\'objet en cours. Traditionnellement, il suffirait d\'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT allégera l\'écriture de vos squelettes. Le résultat renvoyé est : le titre du groupe d\'un mot-clé ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, brève, etc.).
 
@@ -919,7 +932,7 @@ Als webmestre zelf, hebt u hier de rechten om deze lijst van ids te wijzigen  ge
 	'webmestres:nom' => 'Webmestres lijst',
 
 	// X
-	'xml:description' => 'Actief validateur xml voor de openbare ruimte zoals hij in  [documentatie->http://www.spip.net/en_article3582.html]  wordt beschreven. Een knoop getiteld « Analyse XML » wordt aan de andere knopen van bestuur toegevoegd.',
+	'xml:description' => 'Actief validateur xml voor de openbare ruimte zoals hij in  [documentatie->http://www.spip.net/en_article3582.html]  wordt beschreven. Een knoop getiteld « Analyse XML » wordt aan de andere knopen van bestuur toegevoegd.', # MODIF
 	'xml:nom' => 'XML Validatie'
 );
 

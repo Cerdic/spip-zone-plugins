@@ -128,6 +128,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'cache_permanent' => 'Caché permanente',
 	'cache_sans' => 'Ensin caché',
 	'categ:admin' => '1. Alministración',
+	'categ:devel' => '55. Développement', # NEW
 	'categ:divers' => '60. Diversos',
 	'categ:interface' => '10. Interfaz privada',
 	'categ:public' => '40. Asoleyamientu públicu',
@@ -448,9 +449,9 @@ Atención, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Round Co
 	'label:dossier_squelettes' => 'Direutoriu(os) a utilizar:',
 	'label:duree_cache' => 'Duración de la caché local:',
 	'label:duree_cache_mutu' => 'Duración de la caché en mutualización:',
-	'label:ecran_actif' => '@_CS_CHOIX@', # NEW
 	'label:enveloppe_mails' => 'Sobre pequeñu delantre los correos:',
 	'label:expo_bofbof' => 'Escribir como exponentes: <html>St(e)(s), Bx, Bd(s) y Fb(s)</html>',
+	'label:filtre_gravite' => 'Gravité maximale acceptée :', # NEW
 	'label:forum_lgrmaxi' => 'Valor (en carauteres):',
 	'label:glossaire_groupes' => 'Grupu(os) utilizao(s):',
 	'label:glossaire_js' => 'Téunica utilizada:',
@@ -481,6 +482,7 @@ Atención, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Round Co
 	'label:message_travaux' => 'El mensaxe de mantenimientu:',
 	'label:moderation_admin' => 'Validar automáticamente los mensaxes de los: ',
 	'label:mot_masquer' => 'Mot-clé masquant les contenus :', # NEW
+	'label:nombre_de_logs' => 'Rotation des fichiers :', # NEW
 	'label:ouvre_note' => 'Apertura y zarre de les notes de pie de páxina',
 	'label:ouvre_ref' => 'Apertura y zarre de les llamáes a notes de pie de páxina',
 	'label:paragrapher' => 'Facer párrafos siempre:',
@@ -536,6 +538,8 @@ _ • {Predetermináu}: reemplazu automáticu d\'orixe (a partir de la versión 
 [[%liens_orphelins%]]', # MODIF
 	'liens_orphelins:description1' => '[[Si l\'URL rencontrée dépasse les %long_url% caractères, alors SPIP la réduit à %coupe_url% caractères]].', # NEW
 	'liens_orphelins:nom' => 'URLs guapes',
+	'log_brut' => 'Données écrites en format brut (non HTML)', # NEW
+	'log_fileline' => 'Informations supplémentaires de débogage', # NEW
 
 	// M
 	'mailcrypt:description' => 'Mazcarita toos los enllaces de corréu presentes nos testos y los camuda por un enllaz JavaScript que permite lo mesmo activar la mensaxería del llector. Esta ferramienta escontra\'l corréu puxarra tenta torgar que los robots collechen les señes electróniques escrites en claro nos foros o nes balices de les tos cadarmes.',
@@ -723,6 +727,10 @@ _ • {Control de caché}: opción identica a la precedente, con escritura nel d
 	'spip_cache:nom' => 'SPIP y la caché…',
 	'spip_ecran:description' => 'Détermine la largeur d\'écran imposée à tous en partie privée. Un écran étroit présentera deux colonnes et un écran large en présentera trois. Le réglage par défaut laisse l\'utilisateur choisir, son choix étant stocké dans un cookie.[[%spip_ecran%]]', # NEW
 	'spip_ecran:nom' => 'Largeur d\'écran', # NEW
+	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
+[[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
+	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
+	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'Autores por estatutu',
 	'statuts_spip' => 'Únicamente los estatutos SPIP siguientes:',
 	'statuts_tous' => 'Tolos estatutos',
@@ -733,6 +741,11 @@ _ • {Control de caché}: opción identica a la precedente, con escritura nel d
 	'supprimer_numero:nom' => 'Suprime\'l númberu',
 
 	// T
+	'test_i18n:description' => 'Toutes les chaînes de langue qui ne sont pas internationalisées (donc présentes dans les fichiers lang/*_XX.php) vont apparaitre en rouge.
+_ Utile pour n\'en oublier aucune !
+
+@puce@ Un test : ', # NEW
+	'test_i18n:nom' => 'Traductions manquantes', # NEW
 	'titre' => 'La Navaya Suiza',
 	'titre_parent:description' => 'Dientro d\'un bucle, ye corriente que se quiera amosar el títulu del padre de l\'oxetu en cursu. Tradicionalmente, había que utilizar un segundu bucle, pero esta nueva baliza #TITRE_PARENT va allixerar la escritura de les cadarmes. El resultáu devueltu ye: el títulu del grupu d\'una pallabra-clave o el de la estaya padre (si esiste) de los demás oxetos (artículu, estaya, breve, etc.).
 
@@ -937,7 +950,7 @@ Por ser webmaster tú mesmu, equi tienes permisos pa iguar esta llista de ids --
 	'webmestres:nom' => 'Llista de webmasters',
 
 	// X
-	'xml:description' => 'Activa el validador xml pa l\'espaciu públicu como ta esplicao na [documentación->http://www.spip.net/fr_article3541.html]. Améstase un botón tituláu «Análisis XML» a los otros botones d\'alministración.',
+	'xml:description' => 'Activa el validador xml pa l\'espaciu públicu como ta esplicao na [documentación->http://www.spip.net/fr_article3541.html]. Améstase un botón tituláu «Análisis XML» a los otros botones d\'alministración.', # MODIF
 	'xml:nom' => 'Validador XML'
 );
 

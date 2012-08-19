@@ -131,6 +131,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'cache_permanent' => 'Caché permanente',
 	'cache_sans' => 'Non hai caché',
 	'categ:admin' => '1. Administración',
+	'categ:devel' => '55. Développement', # NEW
 	'categ:divers' => '60. Varios',
 	'categ:interface' => '10. Interface privada',
 	'categ:public' => '40. Exposición pública',
@@ -450,9 +451,9 @@ Atención, esta ferramenta, precisa para funcionar do módulo {jQuery} : {Round 
 	'label:dossier_squelettes' => 'Cartafol para utilizar :',
 	'label:duree_cache' => 'Duración da caché local :',
 	'label:duree_cache_mutu' => 'Duración da caché en mutualización :',
-	'label:ecran_actif' => '@_CS_CHOIX@', # NEW
 	'label:enveloppe_mails' => 'Pequeno cadro diante dos enderezos de correo:',
 	'label:expo_bofbof' => 'Mostrar en superíndice cando : <html>St(e)(s), Bx, Bd(s) e Fb(s)</html>',
+	'label:filtre_gravite' => 'Gravité maximale acceptée :', # NEW
 	'label:forum_lgrmaxi' => 'Valor (en caracteres) :',
 	'label:glossaire_groupes' => 'Grupo(s) usado(s) :',
 	'label:glossaire_js' => 'Técnica usada :',
@@ -483,6 +484,7 @@ Atención, esta ferramenta, precisa para funcionar do módulo {jQuery} : {Round 
 	'label:message_travaux' => 'A súa mensaxe de mantemento :',
 	'label:moderation_admin' => 'Validar automaticamente as mensaxes desde: ',
 	'label:mot_masquer' => 'Mot-clé masquant les contenus :', # NEW
+	'label:nombre_de_logs' => 'Rotation des fichiers :', # NEW
 	'label:ouvre_note' => 'Abrir e cerrar as notas a rodapé',
 	'label:ouvre_ref' => 'Abrir e cerrar as chamadas de notas a rodapé',
 	'label:paragrapher' => 'Paragrafar sempre :',
@@ -538,6 +540,8 @@ _ • {Predefinido} : substitución automática de orixe (a partir da version 2.
 [[%liens_orphelins%]]', # MODIF
 	'liens_orphelins:description1' => '[[Si l\'URL rencontrée dépasse les %long_url% caractères, alors SPIP la réduit à %coupe_url% caractères]].', # NEW
 	'liens_orphelins:nom' => 'URL fermosas',
+	'log_brut' => 'Données écrites en format brut (non HTML)', # NEW
+	'log_fileline' => 'Informations supplémentaires de débogage', # NEW
 
 	// M
 	'mailcrypt:description' => 'Oculta todas as ligazóns de correo presentes nos seus textos e substitúeos por unha ligazón Javascript que permite activar o programa de correo do lector. Esta ferramenta antispam tenta impedir os robots de colleita de enderezos electrónicos deixados en claro nos foros ou nas balizas dos seus esqueletos.',
@@ -725,6 +729,10 @@ _ • {Control da caché} : opción idéntica á precedente, con unha escritura 
 	'spip_cache:nom' => 'SPIP e a memoria caché…',
 	'spip_ecran:description' => 'Détermine la largeur d\'écran imposée à tous en partie privée. Un écran étroit présentera deux colonnes et un écran large en présentera trois. Le réglage par défaut laisse l\'utilisateur choisir, son choix étant stocké dans un cookie.[[%spip_ecran%]]', # NEW
 	'spip_ecran:nom' => 'Largeur d\'écran', # NEW
+	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
+[[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
+	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
+	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'Os estado dos autores',
 	'statuts_spip' => 'Unicamente os estados SPIP seguintes :',
 	'statuts_tous' => 'Todos os estados',
@@ -735,6 +743,11 @@ _ • {Control da caché} : opción idéntica á precedente, con unha escritura 
 	'supprimer_numero:nom' => 'Suprime o número',
 
 	// T
+	'test_i18n:description' => 'Toutes les chaînes de langue qui ne sont pas internationalisées (donc présentes dans les fichiers lang/*_XX.php) vont apparaitre en rouge.
+_ Utile pour n\'en oublier aucune !
+
+@puce@ Un test : ', # NEW
+	'test_i18n:nom' => 'Traductions manquantes', # NEW
 	'titre' => 'A Navalla Suíza',
 	'titre_parent:description' => 'No interior dun bucle, é frecuente querer mostrar o título do pai do obxecto en curso. Tradicionalmente, cumpría utilizar un segundo bucle, mais esta nova baliza #TITRE_PARENT alixeirará a escrita dos seus esqueletes. O resultado devolto é este : o título dun grupo de palabras clave ou o da sección pai (de existir) de calquera outro obxecto (artigo, sección, breve, etc.).
 
@@ -937,7 +950,7 @@ En tanto que webmáster, ten dereito a modificar esta lista de id -- separados p
 	'webmestres:nom' => 'Lista de webmásters',
 
 	// X
-	'xml:description' => 'Activa o validador xml para o espazo público tal como se describe na [documentación->http://www.spip.net/fr_article3541.html]. Un botón titulado « Analise XML » foi engadido aos outros botóns de administración.',
+	'xml:description' => 'Activa o validador xml para o espazo público tal como se describe na [documentación->http://www.spip.net/fr_article3541.html]. Un botón titulado « Analise XML » foi engadido aos outros botóns de administración.', # MODIF
 	'xml:nom' => 'Validador XML'
 );
 

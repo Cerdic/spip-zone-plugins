@@ -119,6 +119,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'cache_permanent' => 'Kalıcı önbellek',
 	'cache_sans' => 'Önbellek yok',
 	'categ:admin' => '1. Yönetim',
+	'categ:devel' => '55. Développement', # NEW
 	'categ:divers' => '6. Diğer',
 	'categ:interface' => '10. Özel arayüz',
 	'categ:public' => '4. Kamusal gösterim',
@@ -423,9 +424,9 @@ Dikkat, bu gereç çalışmak için {Round Corners} {jQuery} eklentisine gereksi
 	'label:dossier_squelettes' => 'Kullanılacak dizinler :',
 	'label:duree_cache' => 'Yerel önbelleğin süresi :',
 	'label:duree_cache_mutu' => 'Ön bellek süresi :',
-	'label:ecran_actif' => '@_CS_CHOIX@', # NEW
 	'label:enveloppe_mails' => 'E-postaların önündeki küçük zarf :',
 	'label:expo_bofbof' => 'Şu karakterleri üssel hale getirir : <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>',
+	'label:filtre_gravite' => 'Gravité maximale acceptée :', # NEW
 	'label:forum_lgrmaxi' => 'Değer (karakter cinsinden) :',
 	'label:glossaire_groupes' => 'Kullanılan gruplar :',
 	'label:glossaire_js' => 'Kullanılan teknik :',
@@ -456,6 +457,7 @@ Dikkat, bu gereç çalışmak için {Round Corners} {jQuery} eklentisine gereksi
 	'label:message_travaux' => 'Bakım mesajınız :',
 	'label:moderation_admin' => 'Mesajları otomatik olarak onaylanacaklar : ',
 	'label:mot_masquer' => 'Mot-clé masquant les contenus :', # NEW
+	'label:nombre_de_logs' => 'Rotation des fichiers :', # NEW
 	'label:ouvre_note' => 'Dipnotların açılıp kapatılması',
 	'label:ouvre_ref' => 'Dipnot çağrılarının açılıp kapatılması',
 	'label:paragrapher' => 'Daima paragraflanmalı :',
@@ -510,6 +512,8 @@ _ • {Yaygın} : şu tipteki bağlar da değiştirilir {<html>moi@spip.net</htm
 [[%liens_orphelins%]]', # MODIF
 	'liens_orphelins:description1' => '[[Si l\'URL rencontrée dépasse les %long_url% caractères, alors SPIP la réduit à %coupe_url% caractères]].', # NEW
 	'liens_orphelins:nom' => 'Güzel URL\'ler',
+	'log_brut' => 'Données écrites en format brut (non HTML)', # NEW
+	'log_fileline' => 'Informations supplémentaires de débogage', # NEW
 
 	// M
 	'mailcrypt:description' => 'Metinlerinizde bulunan tüm bağları maskeler ve bir Javascript bağ yardımıyla okuyucunun mesajlaşmasını aktive etme olanağı tanır. Bu anti-spam gereci robotların, forumlarda veya iskeletlerde kullanılan komutlarda açıkta bırakılan elektronik adresleri toplamasını engellemeye çalışır.',
@@ -695,6 +699,10 @@ _ • {Önbelleğin kontrolü} : bu seçenek bir öncekiyle aynıdır ama tüm s
 	'spip_cache:nom' => 'SPIP ve önbellek…',
 	'spip_ecran:description' => 'Détermine la largeur d\'écran imposée à tous en partie privée. Un écran étroit présentera deux colonnes et un écran large en présentera trois. Le réglage par défaut laisse l\'utilisateur choisir, son choix étant stocké dans un cookie.[[%spip_ecran%]]', # NEW
 	'spip_ecran:nom' => 'Largeur d\'écran', # NEW
+	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
+[[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
+	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
+	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'Stat durumundaki yazarlar',
 	'statuts_spip' => 'Sadece şu SPIP statüsü :',
 	'statuts_tous' => 'Tüm statüler',
@@ -705,6 +713,11 @@ _ • {Önbelleğin kontrolü} : bu seçenek bir öncekiyle aynıdır ama tüm s
 	'supprimer_numero:nom' => 'Numarayı sil',
 
 	// T
+	'test_i18n:description' => 'Toutes les chaînes de langue qui ne sont pas internationalisées (donc présentes dans les fichiers lang/*_XX.php) vont apparaitre en rouge.
+_ Utile pour n\'en oublier aucune !
+
+@puce@ Un test : ', # NEW
+	'test_i18n:nom' => 'Traductions manquantes', # NEW
 	'titre' => 'İsviçre Çakısı',
 	'titre_parent:description' => 'Bir döngünün ortasında o anki nesnenin "ebeveyninin" başlığını göstermek çok olağandır. Geleneksel biçimde ikinci bir döngü kullanılırdı ama yeni #TITRE_PARENT komutu iskeletlerinizin yazılma yükünü hafifletiyor. Geri döndürülen sonuç : bir anahtar-sözcüğün grubun veya diğer nesnelerin (makale, bölüm, kısa haber vb.) bir üst bölümün (eğer mevcutsa) başlığıdır.
 
@@ -900,7 +913,7 @@ Site yöneticisi olarak siz de burada -- eğer birden fazlaysa iki noktayla birb
 	'webmestres:nom' => 'Webmaster listesi',
 
 	// X
-	'xml:description' => 'Xml onaylayıcısını, kamusal alan için [şu belgede->http://www.spip.net/fr_article3541.html] belirtildiği gibi aktive eder. « Analyse XML » başlıklı bir düğme diğer yönetim düğmelerine eklenecektir.',
+	'xml:description' => 'Xml onaylayıcısını, kamusal alan için [şu belgede->http://www.spip.net/fr_article3541.html] belirtildiği gibi aktive eder. « Analyse XML » başlıklı bir düğme diğer yönetim düğmelerine eklenecektir.', # MODIF
 	'xml:nom' => 'XML onaylayıcısı'
 );
 
