@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'supprimer_le_lien' => 'Délier',
 	'supprimer_le_lien_deux_cotes' => 'Délier des deux cotés',
+	'sup_pb'=>'Impossible de supprimer les types de liaisons suivantes : des liaisons les utilisent. Il vous faut donc modifier au préalable ces liaions.',
 
 	// T
 	'type' => 'Type',
@@ -47,6 +48,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_obligatoire'=>'Obligation de typer les liaisons',
 	'type_liaison' => 'Type de liaison',
 
+	// U
+	'utilise_par_articles' => ', utilisé par les les liaisons des articles :',
 	// V
 	'voir' => 'Voir'
 );

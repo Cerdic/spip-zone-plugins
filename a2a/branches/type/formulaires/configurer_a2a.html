@@ -3,13 +3,36 @@
 <form method='post' action='#ENV{action}'>
 		[(#ENV{message_ok}|?{
 			#SET{types,#ENV{types}|a2a_types2array},
-			#SET{types,#ENV{types}}})]
+			#ENV**{erreurs}|table_valeur{sup_pb}|?{#SET{types,#ENV{types}|a2a_types2array},
+							#SET{types,#ENV{types}}
+						}}
+						)]
 		
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			<li class='editer_types editer'>
+			<li class='editer_types editer[(#ENV**{erreurs}|table_valeur{sup_pb}|oui) erreur]'>
 				<label for="types"><:a2a:types:></label>
 				<p class="explication"><:a2a:explication_types:></p>
+				
+				<B_sup_pb>
+				<div class='erreur_message'>
+				<p><:a2a:sup_pb:></p>
+				<ul class='spip'>
+				<BOUCLE_sup_pb(DATA){source tableau, #ENV**{erreurs}|table_valeur{sup_pb}}>
+					<li>#CLE ([(#CLE|a2a_traduire_type)])<:a2a:utilise_par_articles:> 
+					<B_sup_pb_art>
+					<ul class='spip'>
+					<BOUCLE_sup_pb_art(DATA){source tableau, #VALEUR}>
+						<li><a href="[(#URL_ECRIRE{article,id_article=#VALEUR|table_valeur{id_article}}|parametre_url{articles_lies_visibles,oui}|ancre_url{pave_a2a})]">#INFO_TITRE{article,#VALEUR|table_valeur{id_article}}</a></li>
+					</BOUCLE_sup_pb_art>
+					</ul>
+					<B_sup_pb_art>
+					</li>
+				</BOUCLE_sup_pb>
+				</ul>
+				</div>
+				</B_sup_pb>
+				
 				<textarea name="types" id='types' row='10' cols='80'>
 <BOUCLE_types(DATA){source tableau, #GET{types}}{par cle}{"
 "}>#CLE,#VALEUR</BOUCLE_types></textarea>
