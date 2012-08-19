@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="images/a2a-64.png"
-	schema="0.4.0"
+	schema="0.5.0"
 	documentation="http://www.spip-contrib.net/a2a"
 >	
 

@@ -3,7 +3,7 @@
 // Transforme en tableau une liste de type de la forme :
 // type, texte
 // type2, texte2
-function a2a_types2array($type){
+function a2a_types_liaisons2array($type){
 	$tableau 	= array();
 	$lignes 	= explode("\n",$type);
 	foreach ($lignes as $l){
@@ -22,10 +22,10 @@ function formulaires_configurer_a2a_charger(){
 
 function formulaires_configurer_a2a_verifier(){
 	$erreurs = array();
-	$types 	= a2a_types2array(_request('types'));
-	$types_actuels = lire_config('a2a/types');
-	$diff 	= array_diff_key($types_actuels,$types); // les clefs supprimés 
-	$sup_pb = array(); // tableau associatifs listant les types supprimés problématiques, car il y a des relations portant ce type
+	$types_liaisons 	= a2a_types_liaisons2array(_request('types_liaisons'));
+	$types_liaisons_actuels = lire_config('a2a/types_liaisons');
+	$diff 	= array_diff_key($types_liaisons_actuels,$types_liaisons); // les clefs supprimés 
+	$sup_pb = array(); // tableau associatifs listant les types_liaisons supprimés problématiques, car il y a des relations portant ce type
 	foreach ($diff as $type=>$nom){
 		$relations = sql_allfetsel('id_article','spip_articles_lies','type_liaison='.sql_quote($type));
 		
@@ -42,7 +42,7 @@ function formulaires_configurer_a2a_verifier(){
 
 function formulaires_configurer_a2a_traiter(){
 	$cfg = array();
-	$cfg['types']  = a2a_types2array(_request('types'));
+	$cfg['types_liaisons']  = a2a_types_liaisons2array(_request('types_liaisons'));
 	$cfg['type_obligatoire'] = _request('type_obligatoire');
 	ecrire_config('a2a',$cfg);
 	$cfg['message_ok']='oui';

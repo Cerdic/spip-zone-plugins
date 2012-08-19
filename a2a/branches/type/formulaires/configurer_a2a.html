@@ -2,24 +2,24 @@
 
 <form method='post' action='#ENV{action}'>
 		[(#ENV{message_ok}|?{
-			#SET{types,#ENV{types}|a2a_types2array},
-			#ENV**{erreurs}|table_valeur{sup_pb}|?{#SET{types,#ENV{types}|a2a_types2array},
-							#SET{types,#ENV{types}}
+			#SET{types_liaisons,#ENV{types_liaisons}|a2a_types_liaisons2array},
+			#ENV**{erreurs}|table_valeur{sup_pb}|?{#SET{types_liaisons,#ENV{types_liaisons}|a2a_types_liaisons2array},
+							#SET{types_liaisons,#ENV{types_liaisons}}
 						}}
 						)]
 		
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			<li class='editer_types editer[(#ENV**{erreurs}|table_valeur{sup_pb}|oui) erreur]'>
-				<label for="types"><:a2a:types:></label>
-				<p class="explication"><:a2a:explication_types:></p>
+			<li class='editer_types_liaisons editer[(#ENV**{erreurs}|table_valeur{sup_pb}|oui) erreur]'>
+				<label for="types_liaisons"><:a2a:types_liaisons:></label>
+				<p class="explication"><:a2a:explication_types_liaisons:></p>
 				
 				<B_sup_pb>
 				<div class='erreur_message'>
 				<p><:a2a:sup_pb:></p>
 				<ul class='spip'>
 				<BOUCLE_sup_pb(DATA){source tableau, #ENV**{erreurs}|table_valeur{sup_pb}}>
-					<li>#CLE ([(#CLE|a2a_traduire_type)])<:a2a:utilise_par_articles:> 
+					<li>#CLE ([(#CLE|a2a_traduire_type_liaisons)])<:a2a:utilise_par_articles:> 
 					<B_sup_pb_art>
 					<ul class='spip'>
 					<BOUCLE_sup_pb_art(DATA){source tableau, #VALEUR}>
@@ -33,9 +33,9 @@
 				</div>
 				</B_sup_pb>
 				
-				<textarea name="types" id='types' row='10' cols='80'>
-<BOUCLE_types(DATA){source tableau, #GET{types}}{par cle}{"
-"}>#CLE,#VALEUR</BOUCLE_types></textarea>
+				<textarea name="types_liaisons" id='types_liaisons' row='10' cols='80'>
+<BOUCLE_types_liaisons(DATA){source tableau, #GET{types_liaisons}}{par cle}{"
+"}>#CLE,#VALEUR</BOUCLE_types_liaisons></textarea>
 			</li>
 			<li class='editer_type_obligatoire editer'>
 				<label for='type_obligatoire'><:a2a:type_obligatoire:></label>
