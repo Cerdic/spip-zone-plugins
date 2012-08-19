@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/multidomaines-72.png"
-	documentation="http://www.spip-contrib.net/article3127"
+	documentation="http://www.spip-contrib.net/article4182"
 	schema="0.0.2" 
 >
 	<nom>Multidomaines</nom>
