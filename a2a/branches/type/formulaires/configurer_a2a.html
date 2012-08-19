@@ -1,13 +1,18 @@
 <div class="formulaire_spip formulaire_configurer_a2a" id="formulaire_configurer_a2a">
 
 <form method='post' action='#ENV{action}'>
-	
+		[(#ENV{message_ok}|?{
+			#SET{types,#ENV{types}|a2a_types2array},
+			#SET{types,#ENV{types}}})]
+		
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 			<li class='editer_types editer'>
 				<label for="types"><:a2a:types:></label>
 				<p class="explication"><:a2a:explication_types:></p>
-				<textarea name="types" id='types' row='10' cols='80'>[(#ENV{types})]</textarea>
+				<textarea name="types" id='types' row='10' cols='80'>
+<BOUCLE_types(DATA){source tableau, #GET{types}}{par cle}{"
+"}>#CLE,#VALEUR</BOUCLE_types></textarea>
 			</li>
 			<li class='editer_type_obligatoire editer'>
 				<label for='type_obligatoire'><:a2a:type_obligatoire:></label>
