@@ -283,7 +283,8 @@ function cs_spip_file_options($code) {
 // nettoyage des separateurs
 function cs_nettoie(&$flux) {
 	if(strpos($flux, '"csfoo ')===false) return $flux;
-	return preg_replace(',<pp>\s*</p>,', '', preg_replace(','._CS_HTMLX.',', '', $flux));
+	return preg_replace(','._CS_HTMLX.',', '', $flux);
+//	return preg_replace(',<pp>\s*</p>,', '', preg_replace(','._CS_HTMLX.',', '', $flux));
 }
 
 if(defined('_SPIP30000')) {

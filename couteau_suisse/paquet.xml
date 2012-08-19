@@ -1,7 +1,7 @@
 <paquet
 	prefix="couteau_suisse"
 	categorie="maintenance"
-	version="1.8.90"
+	version="1.8.91"
 	etat="stable"
 	compatibilite="[1.9.2;3.0.99]"
 	logo="img/couteau-50.gif"
@@ -21,6 +21,7 @@
 	<chemin path='' />
 
 	<pipeline nom="affichage_final" inclure="cout_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="cout_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="cout_pipelines.php" />
 	<pipeline nom="insert_head" inclure="cout_pipelines.php" />
 	<pipeline nom="header_prive" inclure="cout_pipelines.php" />

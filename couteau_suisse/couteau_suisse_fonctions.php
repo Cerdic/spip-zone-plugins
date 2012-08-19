@@ -15,7 +15,7 @@ function cs_charge_fonctions() {
 	// initialisation si couteau_suisse_options est OK (fin de compilation par exemple)
 	if(!isset($GLOBALS['cs_init']) || !$GLOBALS['cs_init']) {
 		if(isset($GLOBALS['cs_options']) && $GLOBALS['cs_options']) {
-			if(!$GLOBALS['cs_fonctions']) {
+			if(!isset($GLOBALS['cs_fonctions']) || !$GLOBALS['cs_fonctions']) {
 				// inclusion des fonctions pre-compilees
 				if(defined('_LOG_CS')) cs_log("INCL : "._DIR_CS_TMP.'mes_fonctions.php');
 				@include(_DIR_CS_TMP.'mes_fonctions.php');

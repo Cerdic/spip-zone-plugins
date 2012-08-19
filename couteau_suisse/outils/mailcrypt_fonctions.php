@@ -63,4 +63,15 @@ function maildecrypt($texte) {
 	// traiter les title
 	return str_replace(_mailcrypt_AROBASE_JS, '@', $texte);
 }
+
+// pipeline recuperer_fond
+function mailcrypt_recuperer_fond($flux) {
+	static $fonds;
+	if(defined('_MAILCRYPT_FONDS_DEMAILCRYPT')) {
+		if(!isset($fonds)) $fonds = array_map('trim', explode(':', trim(_MAILCRYPT_FONDS_DEMAILCRYPT,':')));
+		if(in_array($flux['args']['fond'], $fonds)) $flux['data']['texte'] = maildecrypt($flux['data']['texte']);
+	}
+	return $flux;
+}
+
 ?>

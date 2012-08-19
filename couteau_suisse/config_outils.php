@@ -499,7 +499,7 @@ add_variables( array(
 	'nom' => 'dir_log',
 	'format' => _format_CHAINE,
 	'defaut' => '',
-	'code:strlen(%s)' => "defined('_DIR_LOG') || define('_DIR_LOG', _ROOT_RACINE.%s); echo '!!'._DIR_LOG;",
+	'code:strlen(%s)' => "defined('_DIR_LOG') || define('_DIR_LOG', _ROOT_RACINE.%s);",
 	'action' => '%s = strlen(%s=trim(%s))?cs_root_canonicalize(%s."/", _DIR_RACINE):"";',
 ), array(
 	'nom' => 'file_log',
@@ -1216,13 +1216,23 @@ add_outil( array(
 ));
 
 // attention : mailcrypt doit etre place apres liens_orphelins
-add_variable( array(
+add_variables( array(
 	'nom' => 'balise_email',
 	'check' => 'couteauprive:mailcrypt_balise_email',
 	'defaut' => 1,
-	'format' => _format_NOMBRE,
 	'label' => '@_CS_CHOIX@',
-	'code:%s' => "define('_MAILCRYPT_TRAITE_EMAIL', '1');",
+	'code:%s' => "define('_MAILCRYPT_TRAITE_EMAIL', '1');\n",
+), array(
+	'nom' => 'fonds_demailcrypt',
+	'check' => 'couteauprive:mailcrypt_fonds',
+	'defaut' => 0,
+	'label' => '@_CS_CHOIX@',
+), array(
+	'nom' => 'fonds_demailcrypt2',
+	'format' => _format_CHAINE,
+	'lignes' => 4,
+	'defaut' => '"notifications/formulaire_email:\nnotifications/formulaire_accuse"',
+	'code' => "if(%%fonds_demailcrypt%%) define('_MAILCRYPT_FONDS_DEMAILCRYPT', %s);",
 ));
 add_outil( array(
 	'id' => 'mailcrypt',
@@ -1230,8 +1240,8 @@ add_outil( array(
 	'auteur' 	=> "Alexis Roussel, Paolo, Pat",
 	'contrib'	=> 2443,
 	'jquery'	=> 'oui',
-	'code:options' => '%%balise_email%%',
-	'description' => '<:mailcrypt::>[[%balise_email%]]',
+	'code:options' => '%%balise_email%%%%fonds_demailcrypt2%%',
+	'description' => '<:mailcrypt::>[[%balise_email%]][[->%fonds_demailcrypt%]][[->%fonds_demailcrypt2%]]',
 	'pipelinecode:post_propre' => "if(strpos(\$flux, '@')!==false) \$flux=cs_echappe_balises('', 'mailcrypt', \$flux);",
 	'code:js' => "function lancerlien(a,b){ x='ma'+'ilto'+':'+a+'@'+b; return x; }",
 	// jQuery pour remplacer l'arobase image par l'arobase texte
@@ -1243,6 +1253,7 @@ add_outil( array(
 	'code:css' => 'span.spancrypt {background:transparent url(' . url_absolue(find_in_path('img/mailcrypt/leure.gif'))
 		. ') no-repeat scroll 0.1em center; padding-left:12px; text-decoration:none;}',
 	'traitement:EMAIL' => 'mailcrypt_email_dist',
+	 	'pipeline:recuperer_fond'   => 'mailcrypt_recuperer_fond',
 	// compatibilite avec le plugin facteur
  	'pipelinecode:facteur_pre_envoi'   => 'include_spip("public/parametrer"); // charger mes_fonctions
 $flux->Body = maildecrypt($flux->Body);

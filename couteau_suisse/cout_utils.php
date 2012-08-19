@@ -762,6 +762,6 @@ function cs_outils_concernes($key, $off=false){
 		$s .= ($s?' - ':'')."[.->$o[id]]".(isset($metas_outils[$o[id]]['actif']) && $metas_outils[$o[id]]['actif']?' ('.couteauprive_T('outil_actif_court').')':'');
 	if(!$s) return '';
 	$s = couteauprive_T('outils_'.($off?'desactives':'concernes')).$s;
-	return "<q1><q3>$s</q3></q1>";
+	return "<q4>$s</q4>";
 }
 ?>
