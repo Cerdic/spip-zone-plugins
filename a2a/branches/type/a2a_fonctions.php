@@ -1,6 +1,10 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function a2a_traduire_type($type){
+	$types = lire_config('a2a/types');
+	return _T($types[$type]);	
+}
 function lister_articles_lies($id_article, $ordre){
 	return sql_allfetsel('id_article_lie','spip_articles_lies','id_article=' . sql_quote($id_article),'',"rang $ordre");
 }
