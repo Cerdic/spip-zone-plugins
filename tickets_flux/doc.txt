@@ -5,20 +5,32 @@ Ajoute une page qui affiche une liste de tickets : spip.php?page=tickets_flux
 Si on installe ce plugin sur plusieurs sites et que l'on déclare ces sites dans les sites syndiqués, on peut centraliser le suivi des tickets sur une page : spip.php?page=tickets_flux_suivi
 
 
+Notes
+=====
+
+Cette premiere version du plugin fonctionne "par dessus" la syndication des sites SPIP; c'est à dire que l'on ne va pas chercher directement les détails d'un ticket
+pour construire la page de centralisation : on utilise une boucle syndic_articles.
+
+On pourrait imaginer une variante où le flux est construit de telle sorte qu'il n'y ait plus besoin d'une boucle syndic_articles pour afficher le détail
+des tickets d'un site.
+
+
 Améliorations
 =============
 
-1. choix du type de tickets depuis l'url (sévérité, statut...)
-2. lien vers la page du ticket en question, une fois cliqué sur le titre du ticket
+- choix du type de tickets depuis l'url (sévérité, statut...)
+- lien vers la page du ticket en question, une fois cliqué sur le titre du ticket
 - sur la page de centralisation : visualiser où en est la consommation de crédits pour chaque site
 - faire afficher un picto pour signifier le degré d'importance de chaque ticket, à la fois dans le flux RSS et sur la page de centralisation
 - faire en sorte que le bloc d'un site puisse se plier/déplier
-
-<del>3. page centralisatrice à la manière d'un netvibes</del>
-
 - lors de l'importation d'un nouveau flux, le titre est le nom du site; devrait être : le nom du site + tickets les plus récents, ou "activité maintenance"
 - sur la page ?page=tickets_flux_suivi : ajouter possiblité de tri par ordre alphabétique (ou par nombre de tickets non finis...)
 - si on ne trouve aucun ticket non fini sur un site, afficher un picto vert indiquant "Aucun ticket en cours !"
+
+Fait
+====
+- page centralisatrice à la manière d'un netvibes
+
 
 A faire
 =======

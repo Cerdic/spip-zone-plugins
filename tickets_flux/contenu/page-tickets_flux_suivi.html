@@ -11,7 +11,7 @@
 <BOUCLE_resumes(SYNDIC){statut=publie}{0,10}{par url_site}>
 
 	<dl class="site">
-		<dt><a href=="#URL_SITE">#NOM_SITE</a><a href="[(#URL_ECRIRE{sites}|parametre_url{id_syndic,#ID_SYNDIC})]"><img class="bouton" src="#CHEMIN{img/cfg-16.png}" width="16" hight="16" alt="picto modifier site" /></a></dt>
+		<dt><a href=="#URL_SITE">[(#NOM_SITE|couper{20})]</a><a href="[(#URL_ECRIRE{sites}|parametre_url{id_syndic,#ID_SYNDIC})]"><img class="bouton" src="#CHEMIN{img/cfg-16.png}" width="16" hight="16" alt="picto modifier site" /></a></dt>
 		<dd>
 			[(#REM)
 				Les tickets.

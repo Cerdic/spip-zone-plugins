@@ -18,8 +18,21 @@
 	line-height:2.2em;}
 .page_tickets_flux_suivi dl.site dt a {color:white;}
 
+.page_tickets_flux_suivi dl.site dd {margin-left:0}
+
 .page_tickets_flux_suivi dl img.bouton {
 	float:right;
 	margin-right:12px;
 	margin-top:0.5em;}
+
+.page_tickets_flux_suivi dl.ticket {margin:6px auto;}
+
+.page_tickets_flux_suivi dl.ticket > dt {
+	background-image:url(img/ticket-16.png);
+	background-position:middle top;
+	background-repeat:no-repeat;
+	padding-left:18px;
+	margin-bottom:0.5em;
+}
+
 .page_tickets_flux_suivi dl.ticket dd {margin-left:0}
