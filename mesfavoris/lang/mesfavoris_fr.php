@@ -23,6 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'mes_favoris' => 'Mes favoris',
+	
+	// N
+	'info_nombre_favoris_objet' => 'Ajouté @nb@ fois en favori.', # Pas utile dans le plugin lui-même mais peut l'être dans les squelettes 
 
 	// R
 	'remove' => 'Retirer',
