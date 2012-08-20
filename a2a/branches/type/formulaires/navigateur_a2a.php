@@ -14,10 +14,14 @@ function formulaires_navigateur_a2a_charger($id_article){
 }
 
 function formulaires_navigateur_a2a_verifier($id_article){
-	$erreurs=array();
-	if (lire_config('a2a/type_obligatoire') and _request('type_liaison')==''){ //des fois qu'il y en a qui tenteraity d'imposer des liaisons vides via firebug
-		$erreurs['type_obligatoire'] = _T('a2a:type_obligatoire');
-		return $erreurs;
+	$nv_type_liaison=_request('type_liaison');
+	if ($nv_type_liaison!=''){
+		if (!in_array($nv_type_liaison,$types_liaions)){
+			return array('message_erreur'=>_T('a2a:type_inexistant'));
+		}
+	}
+	elseif(lire_config('a2a/type_obligatoire')){
+		return array('message_erreur'=>_T('a2a:type_inexistant'));
 	}
 }
 
