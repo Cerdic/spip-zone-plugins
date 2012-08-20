@@ -46,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sup_pb'=>'Impossible de supprimer les types de liaisons suivantes : des liaisons les utilisent. Il vous faut donc modifier au préalable ces liaions.',
 
 	// T
+	'td_pb'=>'Vous demandez l\'interdiction de lier plusieurs fois deux mêmes articles. Or certains articles possèdent plusieurs liaisons avec d\'autres articles. Corrigez cela avant.',
 	'type' => 'Type',
 	'types_liaisons'=>'Types de liaison',
 	'type_inexistant'=>'Type de liaison inexistant',

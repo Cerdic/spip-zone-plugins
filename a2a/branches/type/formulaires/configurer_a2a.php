@@ -44,6 +44,16 @@ function formulaires_configurer_a2a_verifier(){
 			$erreurs['ob_pb'] = $relations;	
 		} 	
 	}
+	
+	// teste si on enlève la possiblité de liaisons multiples
+	
+	if (!_request('types_differents')){
+		$liaison_total = sql_allfetsel('id_article, id_article_lie, COUNT(type_liaison) as liaison_total', 'spip_articles_lies',''," id_article, id_article_lie",'','','liaison_total>1');
+		if (count($liaison_total) > 0){
+			$erreurs['td_pb'] = $liaison_total;
+		}
+		
+	}
 	return $erreurs;
 
 }

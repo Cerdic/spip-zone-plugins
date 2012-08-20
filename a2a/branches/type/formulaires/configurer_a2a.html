@@ -54,9 +54,20 @@
 				<input type="checkbox" id="type_obligatoire"[ checked="checked"(#ENV{type_obligatoire}|oui)] name="type_obligatoire" />
 			</li>
 			
-			<li class="editer_types_differents editer">
+			<li class="editer_types_differents editer[(#ENV**{erreurs}|table_valeur{td_pb}|oui) erreur]">
+
 				<label for='types_differents'><:a2a:types_differents:></label>
 				<input type="checkbox" id="types_differents"[ checked="checked"(#ENV{types_differents}|oui)] name="types_differents" />
+								<B_td_pb>
+				<div class='erreur_message'>
+				<p><:a2a:td_pb:></p>
+				<ul class='spip'>
+				<BOUCLE_td_pb(DATA){source tableau,#ENV**{erreurs}|table_valeur{td_pb}}>
+						<li><a href="[(#URL_ECRIRE{article,id_article=#VALEUR|table_valeur{id_article}}|parametre_url{articles_lies_visibles,oui}|ancre_url{pave_a2a})]">#INFO_TITRE{article,#VALEUR|table_valeur{id_article}}</a> ([(#INFO_TITRE{article,#VALEUR|table_valeur{id_article_lie}})] : [(#VALEUR|table_valeur{liaison_total})])</li>
+				</BOUCLE_td_pb>
+				</ul>
+				</B_td_pb>
+				
 			</li>
 		</ul>
 	<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
