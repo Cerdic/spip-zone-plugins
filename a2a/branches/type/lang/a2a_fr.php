@@ -22,7 +22,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_lier_article' => 'Lier à un ou des articles',
 	'lier_cet_article' => 'Lier',
 	'lier_cet_article_deux_cotes' => 'Lier des deux cotés',
-
+	//
+	
+	'ob_pb'=>'Il n\'est pas possible de rendre obligatoire le type de liaison : en effet les articles ci-dessous possèdent des liaisons non typées. Typez les d\'abords, puis rendez-obligatoire le typage.',
 	// P
 	'pas_articles_lies' => 'Pas d\'articles liés',
 	'pas_de_resultat' => 'Pas de résultats',

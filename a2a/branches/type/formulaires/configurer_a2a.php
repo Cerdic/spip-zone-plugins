@@ -36,6 +36,14 @@ function formulaires_configurer_a2a_verifier(){
 	if (count($sup_pb) > 0){ // si un pb
 		$erreurs['sup_pb'] = $sup_pb;
 	}
+	// teste si on rend obligatoire les types de liaisons qu'il n'existe pas de liaison non typées
+	
+	if (_request('type_obligatoire')=='on'){
+		$relations = sql_allfetsel('id_article','spip_articles_lies','type_liaison='.sql_quote(''));
+		if (count($relations) > 0){
+			$erreurs['ob_pb'] = $relations;	
+		} 	
+	}
 	return $erreurs;
 
 }

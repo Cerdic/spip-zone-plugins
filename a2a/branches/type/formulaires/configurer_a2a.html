@@ -1,9 +1,10 @@
 <div class="formulaire_spip formulaire_configurer_a2a" id="formulaire_configurer_a2a">
 
 <form method='post' action='#ENV{action}'>
+		
 		[(#ENV{message_ok}|?{
 			#SET{types_liaisons,#ENV{types_liaisons}|a2a_types_liaisons2array},
-			#ENV**{erreurs}|table_valeur{sup_pb}|?{#SET{types_liaisons,#ENV{types_liaisons}|a2a_types_liaisons2array},
+			#ENV**{erreurs}|?{#SET{types_liaisons,#ENV{types_liaisons}|a2a_types_liaisons2array},
 							#SET{types_liaisons,#ENV{types_liaisons}}
 						}}
 						)]
@@ -37,7 +38,18 @@
 <BOUCLE_types_liaisons(DATA){source tableau, #GET{types_liaisons}}{par cle}{"
 "}>#CLE,#VALEUR</BOUCLE_types_liaisons></textarea>
 			</li>
-			<li class='editer_type_obligatoire editer'>
+			<li class='editer_type_obligatoire editer[(#ENV**{erreurs}|table_valeur{ob_pb}|oui) erreur]'>
+				<B_ob_pb>
+				<div class='erreur_message'>
+				<p><:a2a:ob_pb:></p>
+				<ul class='spip'> 
+				
+				<BOUCLE_ob_pb(DATA){source tableau, #ENV**{erreurs}|table_valeur{ob_pb}}>
+					<li><a href="[(#URL_ECRIRE{article,id_article=#VALEUR|table_valeur{id_article}}|parametre_url{articles_lies_visibles,oui}|ancre_url{pave_a2a})]">#INFO_TITRE{article,#VALEUR|table_valeur{id_article}}</a></li>
+				</BOUCLE_ob_pb>
+				</ul>
+				</div>
+				</B_ob_pb>
 				<label for='type_obligatoire'><:a2a:type_obligatoire:></label>
 				<input type="checkbox" id="type_obligatoire"[ checked="checked"(#ENV{type_obligatoire}|oui)] name="type_obligatoire" />
 			</li>
