@@ -810,31 +810,40 @@ function totauxinfos_montants($legende='',$somme_recettes=0,$somme_depenses=0)
 }
 
 // bloc affichant le formulaire pour genere le PDF de la/le liste/tableau
-function bloc_listepdf($objet, $araams=array(), $prefixeLibelle='', $champsExclus=array() )
+function bloc_listepdf($objet, $params=array(), $prefixeLibelle='', $champsExclus=array(), $coords=true)
 {
 	$res = '';
 	if (test_plugin_actif('FPDF')) { // liste
 		$res .= debut_cadre_enfonce('',true);
-		$res .= '<h3>'. _T('asso:plugins_vue_liste') .'</h3>';
+		$res .= '<h3>'. _T('plugins_vue_liste') .'</h3>';
 		$res .= '<div class="formulaire_spip formulaire_asso_liste{$objet}s">';
-		$champsPresents = description_table("spip_asso_{objet}s");
-		$champsExtras = '';
+		$champsPresents = description_table("spip_asso_${objet}s");
+		$champsExtras = array();
+		$icExtras = @unserialize(str_replace('O:10:"ChampExtra"', 'a', $GLOBALS['meta']['iextras']));
+		if (!is_array($icExtras))
+			$icExtras = array();
+		foreach ($icExtras as $icExtra) {
+			if ($icExtra['table']=="asso_$objet") // 'table' ou '_type'
+				$champsExtras[$icExtra['champ']] = $icExtra['label'];
+		}
 		$frm = '<ul><li class="edit_champs">';
 		foreach ($champsPresents['field'] as $k => $v) { // donner le menu des choix
-			if ( !in_array($k,$champsExclus) ) { // affichable/selectionnable
-				$lang_clef = $prefixeLibelle.'_'.$k;
+			if ( !in_array($k,$champsExclus) ) { // affichable/selectionnable (champ ayant un libelle declare et connu)
+				$lang_clef = $prefixeLibelle.$k;
 				$lang_texte = _T('asso:'.$lang_clef);
-				if ( $lang_clef!=str_replace(' ', '_', $lang_texte) ) { // champ natif du plugin (libelle declare)
+				if ( $lang_clef!=str_replace(' ', '_', $lang_texte) ) { // champ natif du plugin
 					$frm .= "<div class='choix'><input type='checkbox' name='champs[$k]' id='liste_${objet}s_$k' /><label for='liste_${objet}s_$k'>$lang_texte</label></div>";
+				} elseif( array_key_exists($k,$champsExtras) ) { // champs rajoute via cextra
+					$frm .= "<div class='choix'><input type='checkbox' name='champs[$k]' id='liste_${objet}s_$k' /><label for='liste_${objet}s_$k'>$champsExtras[$k]</label></div>";
 				}
 			}
 		}
-		// on ajoute aussi le mail
-		$frm .= '<div class="choix"><input type="checkbox" name="champs[email]" id="liste_'.$objet.'s_email" /><label for="liste_'.$objet.'_s_email">'. _T('asso:adherent_libelle_email') .'</label></div>';
-		$res .= generer_form_ecrire("pdf_$objet", $frm, '', '');
-		if (test_plugin_actif('COORDONNEES')) { // on ajoute l'adresse et le telephone
-			$frm .= '<div class="choix"><input type="checkbox" name="champs[adresse]" id="liste_'.$objet.'_s_adresse" /><label for="liste_'.$objet.'_s_adresse">'. _T('coordonnees:adresses') .'</label></div>';
-			$frm .= '<div class="choix"><input type="checkbox" name="champs[telephone]" id="liste_'.$objet.'_s_telephone" /><label for="liste_'.$objet.'_s_telephone">'. _T('coordonnees:numeros') .'</label></div>';
+		if ($coords) {
+			$frm .= '<div class="choix"><input type="checkbox" name="champs[email]" id="liste_'.$objet.'s_email" /><label for="liste_'.$objet.'_s_email">'. _T('asso:adherent_libelle_email') .'</label></div>'; // on ajoute aussi l'adresse electronique principale (table spip_auteurs ou spip_emails)
+			if (test_plugin_actif('COORDONNEES')) {
+				$frm .= '<div class="choix"><input type="checkbox" name="champs[adresse]" id="liste_'.$objet.'_s_adresse" /><label for="liste_'.$objet.'_s_adresse">'. _T('coordonnees:adresses') .'</label></div>'; // on ajoute aussi l'adresse postale (table spip_adresses)
+				$frm .= '<div class="choix"><input type="checkbox" name="champs[telephone]" id="liste_'.$objet.'_s_telephone" /><label for="liste_'.$objet.'_s_telephone">'. _T('coordonnees:numeros') .'</label></div>'; // on ajoute aussi le numero de telephone (table spip_numeros)
+			}
 		}
 		foreach ($params as $k => $v) { // on fait suivre les autres parametres dont la liste des auteurs a afficher
 			$frm .= "<input type='hidden' name='$k' value='$v' />";

@@ -62,37 +62,14 @@ function exec_adherents()
 		}
 		// on appelle ici la fonction qui calcule le code du formulaire/tableau de membres pour pouvoir recuperer la liste des membres affiches a transmettre pour la generation du pdf
 		list($where_adherents, $jointure_adherents, $code_liste_membres) = adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne, $id_groupe);
-		if (test_plugin_actif('FPDF')) { // liste
-			echo debut_cadre_enfonce('',true);
-			echo '<h3>'. _T('plugins_vue_liste') .'</h3>';
-			echo '<div class="formulaire_spip formulaire_asso_listemembres">';
-			$champs = description_table('spip_asso_membres');
-			$res = '<ul><li class="edit_champs">';
-			foreach ($champs['field'] as $k => $v) {
-				if (!((!$GLOBALS['association_metas']['civilite'] && $k=='sexe') OR (!$GLOBALS['association_metas']['prenom'] && $k=='prenom') OR (!$GLOBALS['association_metas']['id_asso'] && $k=='id_asso'))) {
-					$libelle = 'adherent_libelle_'.$k;
-					$trad = _T('asso:'.$libelle);
-					if ($libelle!=str_replace(' ', '_', $trad)) {
-						$res .= "<div class='choix'><input type='checkbox' name='champs[$k]' id='listemembres_$k' /><label for='listemembres_$k'>$trad</label></div>";
-					}
-				}
-			}
-			// on ajoute aussi le mail
-			$res .= '<div class="choix"><input type="checkbox" name="champs[email]" id="listemembres_email" /><label for="listemembres_email">'. _T('asso:adherent_libelle_email') .'</label></div>';
-			if (test_plugin_actif('COORDONNEES')) { // on ajoute l'adresse et le telephone
-				$res .= '<div class="choix"><input type="checkbox" name="champs[adresse]" id="listemembres_adresse" /><label for="listemembres_adresse">'. _T('coordonnees:adresses') .'</label></div>';
-				$res .= '<div class="choix"><input type="checkbox" name="champs[telephone]" id="listemembres_telephone" /><label for="listemembres_telephone">'. _T('coordonnees:numeros') .'</label></div>';
-			}
-			// on fait suivre la liste des auteurs a afficher
-			$res .= '<input type="hidden" name="where_adherents" value="'.$where_adherents.'" />';
-			$res .= '<input type="hidden" name="jointure_adherents" value="'.$jointure_adherents.'" />';
-			$res .= '<input type="hidden" name="statut_interne" value="'.$statut_interne.'" />';
-			$res .= '</li></ul>';
-			$res .= '<p class="boutons"><input type="submit" value="'. _T('asso:bouton_imprimer') .'" /></p>';
-			echo generer_form_ecrire('pdf_adherents', $res, '', '');
-			echo '</div>';
-			echo fin_cadre_enfonce(true);
-		}
+		$champsExclus = array();
+		if ( !$GLOBALS['association_metas']['civilite'] )
+			$champsExclus[] = 'sexe';
+		if ( !$GLOBALS['association_metas']['prenom'] )
+			$champsExclus[] = 'prenom';
+		if ( !$GLOBALS['association_metas']['id_asso'] )
+			$champsExclus[] = 'id_asso';
+		echo bloc_listepdf('membre', array('where_adherents'=>$where_adherents, 'jointure_adherents'=>$jointure_adherents, 'statut_interne'=>$statut_interne), 'adherent_libelle_', $champsExclus, true);
 		debut_cadre_association('annonce.gif', 'adherent_titre_liste_actifs');
 		// FILTRES
 		echo "<table width='100%' class='asso_tablo_filtres'>\n<tr>";

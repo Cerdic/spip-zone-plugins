@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip('pdf/extends');
 
-function exec_pdf_adherents()
+function exec_pdf_membres()
 {
 	if (!autoriser('voir_membres', 'association', 0)) { // on s'assure qu'il n'y ai pas d'id associe a la demande d'autorisation sur voir_membres car on les consulte tous
 		include_spip('inc/minipres');
@@ -48,7 +48,7 @@ function exec_pdf_adherents()
 			if ($sent[$k]=='on') {
 #				$type = strpos($v, 'text');
 				$type_txt = preg_match('#(char|text|var)#',$v);
-				$type_num = preg_match('#(dec|int|float)#',$v);
+				$type_num = preg_match('#(dec|int|date|float)#',$v);
 #				$p = ($type===false) ? 'R' : (($type==0) ? 'L' : 'C');
 				$p = $type_txt?'L':($type_num?'R':'C');
 #				$n = ($type===false) ? 20 : (($type==0) ? 45 : 25);
