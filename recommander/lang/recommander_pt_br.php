@@ -4,11 +4,11 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
-	'destinataire' => "Destinat&aacute;rio:",
+	'destinataire' => "Destinat&aacute;rio",
 
 	// R
-	'recommander' => 'Recomenda a leitura',  // ???
-	'recommander_lecture'=> "Bom dia, @from@ recomenda a leitura deste texto: ", // ??
+	'recommander' => '<MODIF>Recomenda a leitura',
+	'recommander_lecture'=> "<MODIF>Bom dia, @from@ recomenda a leitura deste texto: ", // ??
 	'recommander_message'=> "Recomanda",
 	'recommander_titre' => 'Ler em @nom_site@ --',
 );

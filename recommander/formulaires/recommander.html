@@ -6,18 +6,18 @@
 <form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
-		<li class="editer_recommander_from[ (#ENV**{erreurs}|table_valeur{recommander_from}|oui)erreur]">
+		<li class="editer editer_recommander_from[ (#ENV**{erreurs}|table_valeur{recommander_from}|oui)erreur]">
 			<label for='recommander_from'><:form_pet_votre_email:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{recommander_from})</span>
 			]<input type='text' class='text forml' id='recommander_from' name='recommander_from' value='#ENV*{recommander_from}' />
 		</li>
-		<li class="editer_recommander_to[ (#ENV**{erreurs}|table_valeur{recommander_to}|oui)erreur]">
+		<li class="editer editer_recommander_to[ (#ENV**{erreurs}|table_valeur{recommander_to}|oui)erreur]">
 			<label for='recommander_to'><:recommander:destinataire:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{recommander_to})</span>
 			]<input type='text' class='text forml formo' id='recommander_to' name='recommander_to' value='#ENV*{recommander_to}' />
 		</li>
-		<li class="editer_recommander_message[ (#ENV**{erreurs}|table_valeur{recommander_message}|oui)erreur]">
-			<label for='recommander_message'><:forum_texte:></label>[
+		<li class="editer editer_recommander_message[ (#ENV**{erreurs}|table_valeur{recommander_message}|oui)erreur]">
+			<label for='recommander_message'>[(#VAL{forum_texte}|_T{#ARRAY,#ARRAY{force,''}}|strlen|?{<:forum_texte:>,<:forum:forum_texte:>})]</label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{recommander_message})</span>
 			]<textarea class='text forml' id='recommander_message' name='recommander_message' rows='5' cols='30'>#ENV*{recommander_message}</textarea>
 		</li>
