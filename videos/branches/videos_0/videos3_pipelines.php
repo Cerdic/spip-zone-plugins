@@ -19,6 +19,8 @@ function videos_jquery_plugins($scripts){
 
 function videos_affiche_gauche($flux) {
 
+	include_spip('inc/autoriser');
+
 	if ($en_cours = trouver_objet_exec($flux['args']['exec'])
 		AND $en_cours['edition']!==false // page edition uniquement
 		AND $type = $en_cours['type']
