@@ -53,6 +53,10 @@
 				<label for='type_obligatoire'><:a2a:type_obligatoire:></label>
 				<input type="checkbox" id="type_obligatoire"[ checked="checked"(#ENV{type_obligatoire}|oui)] name="type_obligatoire" />
 			</li>
+			
+			<li class="editer_types_differents editer">
+				<label for='types_differents'><:a2a:types_differents:></label>
+				<input type="checkbox" id="types_differents"[ checked="checked"(#ENV{types_differents}|oui)] name="type_differents" />
 			</li>
 		</ul>
 	<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>

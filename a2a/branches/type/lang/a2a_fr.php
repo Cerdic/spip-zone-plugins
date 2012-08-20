@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_inexistant'=>'Type de liaison inexistant',
 	'type_obligatoire'=>'Obligation de typer les liaisons',
 	'type_liaison' => 'Type de liaison',
+	'types_differents'	=> 'Possibilité de relier plusieurs fois des articles, avec un type différent à chaque fois',
 
 	// U
 	'utilise_par_articles' => ', utilisé par les les liaisons des articles :',

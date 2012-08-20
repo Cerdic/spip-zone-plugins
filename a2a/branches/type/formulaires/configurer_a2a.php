@@ -52,6 +52,7 @@ function formulaires_configurer_a2a_traiter(){
 	$cfg = array();
 	$cfg['types_liaisons']  = a2a_types_liaisons2array(_request('types_liaisons'));
 	$cfg['type_obligatoire'] = _request('type_obligatoire');
+	$cfg['types_differents'] = _request('types_differents');
 	ecrire_config('a2a',$cfg);
 	$cfg['message_ok']='oui';
 	return $cfg;
