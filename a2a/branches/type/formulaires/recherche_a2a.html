@@ -23,7 +23,7 @@
 </form>
 
 	#SET{exclure,#ARRAY{0,#ID_ARTICLE_ORIG}}
-	<BOUCLE_doublons(ARTICLES_LIES){id_article = #ID_ARTICLE_ORIG}>
+	<BOUCLE_doublons(ARTICLES_LIES){id_article = #ID_ARTICLE_ORIG}{si !#CONFIG{a2a/types_differents}}>
 	#SET{exclure,#GET{exclure}|push{#ID_ARTICLE_LIE}}
 	</BOUCLE_doublons>
 	[(#ENV*{recherche}|match{^art\d+$}|oui)
