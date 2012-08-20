@@ -9,7 +9,13 @@ function formulaires_a2a_changer_typeliaison_charger_dist($id_article,$id_articl
 function formulaires_a2a_changer_typeliaison_verifier_dist($id_article,$id_article_lie,$type_liaison){
 	$nv_type_liaison	=	_request('type_liaison');
 	$types_liaions		= 	array_keys(lire_config('a2a/types_liaisons'));
-	if (!in_array($nv_type_liaison,$types_liaions)){
+	
+	if ($nv_type_liaison!=''){
+		if (!in_array($nv_type_liaison,$types_liaions)){
+			return array('message_erreur'=>_T('a2a:type_inexistant'));
+		}
+	}
+	elseif(lire_config('a2a/type_obligatoire')){
 		return array('message_erreur'=>_T('a2a:type_inexistant'));
 	}
 	if (!autoriser('modifier','article',$id_article)){
