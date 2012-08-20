@@ -106,7 +106,8 @@ function pages_editer_contenu_objet($flux){
     	$value = $args['contexte']['champ_page'] ? $args['contexte']['champ_page'] : $args['contexte']['page'];
     	$remplace .= '<input type="text" class="text" name="champ_page" id="id_page" value="'.$value.'" />';
     	$remplace .= '</li>';
-		$flux['data'] = preg_replace($cherche, $remplace, $flux['data']);
+		$flux['data'] = preg_replace($cherche, $remplace, $flux['data'],1);
+		$flux['data'] = preg_replace($cherche, '', $flux['data']);
 	
 	}
 	
