@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // R
-	'recommander_description' => '"Recommend a pages to a friend" functionnality.
+	'recommander_description' => '"Recommend a page to a friend" functionnality.
 			
 We add it in a skeleton like this :
 <code>#RECOMMANDER{title of the page,URL of the page,introduction of the page,subject}</code>
