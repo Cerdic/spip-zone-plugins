@@ -1,3 +1,5 @@
+<INCLURE{fond=entete}{id_article}{type_page=agenda}{lang}>
+
 [(#REM)
 
   Squelette
@@ -5,10 +7,10 @@
   Distribue sous licence GPL
 
 ]
-<p id="chemin"><a href="#URL_SITE_SPIP"><:accueil_site:></a> &gt; agenda scientifique</p>
+
 	
 <div id="texte">
-<INCLURE{fond=contenu/calendrier,env} />
+[(#REM) on n'inclut pas ça pour l'instant dans le kitcnrs, problème d'affichage !<INCLURE{fond=contenu/calendrier,env} />]
 
 
 <h2>Les événements de [(#DATE_DEBUT|affdate_mois_annee)]</h2>
@@ -45,4 +47,5 @@
 <script type="text/javascript" src="#CHEMIN{javascript/toggle.js}"></script>
 <INCLURE{fond=javascript/rechargement,env} />
 </span>
-</div>
+
+<INCLURE{fond=pied}{lang}>
