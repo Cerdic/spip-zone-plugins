@@ -41,8 +41,8 @@ body {
 					-spip-border-bottom-right-radius: 5px;
 				}
 				li.actif, li.actif_tempo {
-					background-color: #[(#ENV{foncee}|couleur_luminance{0.15})];;
-					
+					background-color: #[(#ENV{foncee}|couleur_luminance{0.15})];
+					-spip-box-shadow:  0px 0px 10px #[(#ENV{foncee}|couleur_luminance{0.25})] inset;
 					a:hover {
 						background-color: transparent;
 					}
@@ -78,11 +78,15 @@ body {
 	margin-left: 24px;
 	width: 525px;
 }
-
 #bando_outils {
 	border-top: 1px solid #999;
 	background-color: #444;
 	-spip-gradient: top, #555555, #333333;
+	
+	ul.deroulant {
+		font-size: 0.9em;
+		line-height: 120%;
+	}
 }
 .navigation_avec_icones {
 	#bando_navigation {
@@ -121,9 +125,14 @@ body {
 	}
 }
 
+.liste_items .item, .liste-items .item {
+
+}
+
 .simple .inner {
 	-spip-border-radius: 5px;
 	border: 1px solid #e7e7e7;
+
 	
 	. :hover {
 			-spip-box-shadow:  0px 0px 2px #dddddd;
@@ -138,7 +147,6 @@ body {
 	}
 }
 #contenu .fiche_objet {
-	
 	.inner {
 		border: 0px;
 		-spip-box-shadow:  0px 0px 20px #f0f0f0;
@@ -176,22 +184,73 @@ h1, .h1 {
 .sous-rub {
 	.inner {
 		border: 0;
-		background-color: #f7f7f7;
+		background-color: #[(#ENV{foncee}|couleur_luminance{0.15})];
+		-spip-box-shadow:  0px 0px 10px #[(#ENV{foncee}|couleur_luminance{0.20})] inset;
+
+		. :hover {
+		-spip-box-shadow:  0px 0px 10px #[(#ENV{foncee}|couleur_luminance{0.20})] inset;
+		}
 		
 		.hd {
 			background-color: transparent;
 			font-size: 100%;
 		}
+		.bd {
+			padding: 0;
+			
+			.liste-items {
+				font-size: 0.85em;
+				line-height: 120%;
+				
+				.item {
+					padding: 0px;
+					
+					a {
+						padding: 5px 18px;
+						display: block;
+					}
+					
+					. :hover {
+						background-color: #[(#ENV{foncee}|couleur_luminance{0.25})];
+						a {
+							color: black;
+						}
+					}
+				}	
+			}
+		}
 	}
 }
+
 
 .liste-objets {
 	-spip-border-top-left-radius: 5px;
 	-spip-border-top-right-radius: 5px;
+	position: relative;
+	z-index: 2;
+	display: block;
 
 	. :hover {
-		-spip-box-shadow:  0px 0px 2px #dddddd;
+		-spip-box-shadow:  0px 0px 0px #dddddd;
 	}
+	. :before, . :after {
+	  -spip-box-shadow: 0 15px 10px rgba(0, 0, 0, .5);
+	  -spip-transform: rotate(-3deg);
+	  position: absolute;
+	  left: 10px;
+	  bottom: 20px;
+	  z-index: -1;
+	  width: 50%;
+	  max-width: 300px;
+	  height: 20%;
+	  content: "";
+	}
+	. :after {
+	  -spip-transform: rotate(3deg);	
+	  left: auto;
+	  right: 10px;
+	}
+	
 	
 	table {
 		background: transparent;
@@ -677,5 +736,21 @@ div.titrem, h3.titrem {
 	-spip-border-top-left-radius: 5px;	
 	-spip-border-top-right-radius: 5px;	
 	
+}
+
+.navigation .sous_navigation .item {
+	padding: 0px;
+	a {
+		margin: 0;
+		padding: 10px;
+		padding-left: 34px;
+		background-position: 10px center;
+		
+		. :hover, . :focus {
+			background-color: #[(#ENV{foncee}|couleur_luminance{0.15})];
+			-spip-box-shadow:  0px 0px 10px #[(#ENV{foncee}|couleur_luminance{0.20})] inset;
+			color: black;
+		}
+	}
 }
 #FILTRE{css_imbriques_decouper}
