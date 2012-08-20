@@ -532,6 +532,7 @@ _ • {Étendu} : sont remplacés en plus les liens du type {<html>moi@spip.net<
 	'mailcrypt:description' => 'Masque tous les liens de courriels présents dans vos textes en les remplaçant par un lien Javascript permettant quand même d\'activer la messagerie du lecteur. Cet outil antispam tente d\'empêcher les robots de collecter les adresses électroniques laissées en clair dans les forums ou dans les balises de vos squelettes.', # MODIF
 	'mailcrypt:nom' => 'MailCrypt',
 	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de vos squelettes', # NEW
+	'mailcrypt_fonds' => 'Ne pas protéger les fonds suivants :<br /><q4>{Séparez-les par les deux points «~:~» et vérifiez bien que ces fonds restent totalement inaccessibles aux robots du Net.}</q4>', # NEW
 	'maj_auto:description' => 'Cet outil vous permet de gérer facilement la mise à jour de vos différents plugins, récupérant notamment le numéro de révision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouvé sur <code>zone.spip.org</code>.
 
 La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tentez de procéder manuellement à la mise à jour du plugin.
@@ -599,7 +600,7 @@ Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère
 Deze PHP code kan plaats in het bestand /config/mes_options.php nemen en zal een band van réinitialisatie op deze bladzijde van het pakijs {Pakijs Huidige} toevoegen. Natuurlijk is het u mogelijk om zijn naam hieronder te veranderen.
 
 Als u plugin réinitialiserd door op een pakijs te klikken, reconfiguratie van het Zwitserland mes  automatisch in functie van het pakijs voor bepaald parameters.', # MODIF
-	'pack_du' => '• van het pakijs @pack@',
+	'pack_du' => '• van het pakijs @pack@', # MODIF
 	'pack_installe' => 'Het invoeren van een configuratie pakijs',
 	'pack_installer' => 'Êtes-vous sûr de vouloir réinitialiser le Couteau Suisse et installer le pack « @pack@ » ?', # NEW
 	'pack_nb_plrs' => 'Il y a actuellement @nb@ « packs de configuration » disponibles.', # MODIF
@@ -652,7 +653,7 @@ Dossier stockant les sessions : @_DIR_SESSIONS@
 
 Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.', # NEW
 	'sessions_anonymes:nom' => 'Sessions anonymes', # NEW
-	'set_options:description' => 'Selecteert automatisch het soort particuliere interface (vereenvoudigd of geavanceerd) voor alle redacteuren reeds bestaand of om te komen en schaft de kleine ikonen hoofdband overeenkomstige af.[[%radio_set_options4%]]',
+	'set_options:description' => 'Selecteert automatisch het soort particuliere interface (vereenvoudigd of geavanceerd) voor alle redacteuren reeds bestaand of om te komen en schaft de kleine ikonen hoofdband overeenkomstige af.[[%radio_set_options4%]]', # MODIF
 	'set_options:nom' => 'Soort particuliere interface',
 	'sf_amont' => 'Voorafgaand',
 	'sf_tous' => 'Iedereen',

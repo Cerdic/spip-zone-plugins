@@ -519,6 +519,7 @@ _ • {Yaygın} : şu tipteki bağlar da değiştirilir {<html>moi@spip.net</htm
 	'mailcrypt:description' => 'Metinlerinizde bulunan tüm bağları maskeler ve bir Javascript bağ yardımıyla okuyucunun mesajlaşmasını aktive etme olanağı tanır. Bu anti-spam gereci robotların, forumlarda veya iskeletlerde kullanılan komutlarda açıkta bırakılan elektronik adresleri toplamasını engellemeye çalışır.',
 	'mailcrypt:nom' => 'MailCrypt',
 	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de vos squelettes', # NEW
+	'mailcrypt_fonds' => 'Ne pas protéger les fonds suivants :<br /><q4>{Séparez-les par les deux points «~:~» et vérifiez bien que ces fonds restent totalement inaccessibles aux robots du Net.}</q4>', # NEW
 	'maj_auto:description' => 'Cet outil vous permet de gérer facilement la mise à jour de vos différents plugins, récupérant notamment le numéro de révision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouvé sur <code>zone.spip.org</code>.
 
 La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> ou <code>extensions/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tentez de procéder manuellement à la mise à jour du plugin.
@@ -586,7 +587,7 @@ Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère
 Bu PHP kodu /config/mes_options.php dosyasında yer alır ve bu sayfaya "{Güncel Paket} paketinin". sıfırlanmsını sağlayan bağlantıyı ekler. Tabii aşağıdaki ismi değiştirebilirsiniz.
 
 Eğer eklentiyi bir pakete tıklayarak sıfırlarsanız İsviçre Çakısı kendisini paketteki önceden tanımlı parametreleri kullanarak yeniden konfigüre edecektir.', # MODIF
-	'pack_du' => '• @pack@ paketinin',
+	'pack_du' => '• @pack@ paketinin', # MODIF
 	'pack_installe' => 'Bir konfigürasyon paketini yükle',
 	'pack_installer' => 'İsviçre Çakısı\'nı yeniden başlatmak ve « @pack@ » paketini kurmak istediğinizden emin misiniz ?',
 	'pack_nb_plrs' => 'Şu anda güncel @nb@ « konfigürasyon paketi » var.', # MODIF
@@ -637,7 +638,7 @@ Dossier stockant les sessions : @_DIR_SESSIONS@
 
 Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.', # NEW
 	'sessions_anonymes:nom' => 'Sessions anonymes', # NEW
-	'set_options:description' => 'Mevcut veya gelecek tüm redaktörler veya özel arayüzü seçer (basit veya gelişmiş) ve küçük ikonlar bandına ait düğmeyi siler.[[%radio_set_options4%]]',
+	'set_options:description' => 'Mevcut veya gelecek tüm redaktörler veya özel arayüzü seçer (basit veya gelişmiş) ve küçük ikonlar bandına ait düğmeyi siler.[[%radio_set_options4%]]', # MODIF
 	'set_options:nom' => 'Özel arayüz tipi',
 	'sf_amont' => 'En amont', # NEW
 	'sf_tous' => 'Hepsi',

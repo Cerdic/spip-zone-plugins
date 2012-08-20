@@ -545,6 +545,7 @@ _ • {Predetermináu}: reemplazu automáticu d\'orixe (a partir de la versión 
 	'mailcrypt:description' => 'Mazcarita toos los enllaces de corréu presentes nos testos y los camuda por un enllaz JavaScript que permite lo mesmo activar la mensaxería del llector. Esta ferramienta escontra\'l corréu puxarra tenta torgar que los robots collechen les señes electróniques escrites en claro nos foros o nes balices de les tos cadarmes.',
 	'mailcrypt:nom' => 'MailCrypt',
 	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de vos squelettes', # NEW
+	'mailcrypt_fonds' => 'Ne pas protéger les fonds suivants :<br /><q4>{Séparez-les par les deux points «~:~» et vérifiez bien que ces fonds restent totalement inaccessibles aux robots du Net.}</q4>', # NEW
 	'maj_auto:description' => 'Cet outil vous permet de gérer facilement la mise à jour de vos différents plugins, récupérant notamment le numéro de révision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouvé sur <code>zone.spip.org</code>.
 
 La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> ou <code>extensions/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tentez de procéder manuellement à la mise à jour du plugin.
@@ -612,7 +613,7 @@ Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère
 Si los permisos d\'escritura lo autoricen, el códigu PHP d\'embaxo podrá amestase nel archivu {{/config/mes_options.php}} apaecerá nesta páxina un enllaz pal reaniciu del paquete «{@pack@}». Y ye dafechu posible camuda-y el nome.
 
 Si reanicies el plugin calcando nun paquete, la Navaya Suiza reconfigurarase automáticamente en función de los parámetros predefinios nesti paquete.', # MODIF
-	'pack_du' => '• del paquete @pack@',
+	'pack_du' => '• del paquete @pack@', # MODIF
 	'pack_installe' => 'Afitamientu d\'un paquete de configuración',
 	'pack_installer' => '¿Tas seguru de que quies reinicializar la Navaya Suiza e instalar el paquete « @pack@ »?',
 	'pack_nb_plrs' => 'Actualmente hai @nb@ « paquetes de configuración » disponibles.', # MODIF
@@ -663,7 +664,7 @@ Dossier stockant les sessions : @_DIR_SESSIONS@
 
 Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.', # NEW
 	'sessions_anonymes:nom' => 'Sessions anonymes', # NEW
-	'set_options:description' => 'Seleiciona d\'oficiu el tipu d’interfaz privada (simplificada o avanzada) pa tolos redactores esistentes o futuros y desanicia el botón correspondiente na barra d\'iconos amenorgaos.[[%radio_set_options4%]]',
+	'set_options:description' => 'Seleiciona d\'oficiu el tipu d’interfaz privada (simplificada o avanzada) pa tolos redactores esistentes o futuros y desanicia el botón correspondiente na barra d\'iconos amenorgaos.[[%radio_set_options4%]]', # MODIF
 	'set_options:nom' => 'Tipu d\'interfaz privada',
 	'sf_amont' => 'Enriba',
 	'sf_tous' => 'Toos',

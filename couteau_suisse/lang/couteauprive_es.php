@@ -544,6 +544,7 @@ _ • {Extendido}: se reemplazan además los enlaces del tipo {<html>yo@spip.net
 	'mailcrypt:description' => 'Enmascara todos los enlaces de correo presentes en los textos y los reemplaza por un enlace JavaScript que permite activar igual la aplicación de correo del lector. Esta herramienta antispam intenta impedir que los robots recojan las direcciones electrónicas escritas en claro en los foros o en las balizas de tus esqueletos.',
 	'mailcrypt:nom' => 'MailCrypt',
 	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de vos squelettes', # NEW
+	'mailcrypt_fonds' => 'Ne pas protéger les fonds suivants :<br /><q4>{Séparez-les par les deux points «~:~» et vérifiez bien que ces fonds restent totalement inaccessibles aux robots du Net.}</q4>', # NEW
 	'maj_auto:description' => 'Cet outil vous permet de gérer facilement la mise à jour de vos différents plugins, récupérant notamment le numéro de révision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouvé sur <code>zone.spip.org</code>.
 
 La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> ou <code>extensions/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tentez de procéder manuellement à la mise à jour du plugin.
@@ -611,7 +612,7 @@ Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère
 Si los permisos de escritura lo permiten, este código PHP puede situarse en el archivo {{/config/mes_options.php}} y añadir un enlace de reinicialización en esta página del paquete «{@pack@}». Por supuesto puedes cambiarle el nombre.
 
 Si reinicializas el plugin pulsando en un paquete, la Navaja Suiza volverá a configurarse automáticamente en función de los parámetros predefinidos en ese paquete.', # MODIF
-	'pack_du' => '• del pack @pack@',
+	'pack_du' => '• del pack @pack@', # MODIF
 	'pack_installe' => 'Colocación de un pack de configuración',
 	'pack_installer' => '¿Confirmas que deseas reinicializar la Navaja Suiza e instalar el paquete « @pack@ »?',
 	'pack_nb_plrs' => 'Actualmente hay @nb@ «paquetes de configuración» disponibles.', # MODIF
@@ -662,7 +663,7 @@ Dossier stockant les sessions : @_DIR_SESSIONS@
 
 Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.', # NEW
 	'sessions_anonymes:nom' => 'Sessions anonymes', # NEW
-	'set_options:description' => 'Selecciona automáticamente el tipo de interfaz privada (simplificada o avanzada) para todos los redactores existentes o futuros y suprime el botón correspondiente de la banda de pequeños iconos.[[%radio_set_options4%]]',
+	'set_options:description' => 'Selecciona automáticamente el tipo de interfaz privada (simplificada o avanzada) para todos los redactores existentes o futuros y suprime el botón correspondiente de la banda de pequeños iconos.[[%radio_set_options4%]]', # MODIF
 	'set_options:nom' => 'Tipo de interfaz privada',
 	'sf_amont' => 'Anterior',
 	'sf_tous' => 'Todos',

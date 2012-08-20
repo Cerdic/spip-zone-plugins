@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'SPIP_liens:description' => '@puce@ Podľa prvotných nastavení sa všetky stránky odkazy otvárajú v aktuálnom okne. Ale môže byť užitočné otvárať externé odkazy v novom okne, tzv. pridať {target="_blank"} ku všetkým tagom odkazov z tried SPIPU {spip_out}, {spip_url} alebo {spip_glossaire}. Niekedy je potrebné pridať niektorú z týchto tried do šablón stránky (html súborov), aby bola táto funkcia efektívna v plnom rozsahu.[[%radio_target_blank3%]]
 
-@puce@ SPIP poskytuje skratku <code>[?word]</code> na prepájanie slova a jeho definície. Podľa prvotných nastavení (alebo ak pole nevyplníte), ako externý slovník sa použije wikipedia.org. Môžete si vybrať inú adresu. <br />Testovací odkaz: [?SPIP][[%url_glossaire_externe2%]]',
+@puce@ SPIP poskytuje skratku <code>[?word]</code> na prepájanie slova a jeho definície. Podľa prvotných nastavení (alebo ak pole nevyplníte), ako externý slovník sa použije wikipedia.org. Môžete si vybrať inú adresu. <br />Testovací odkaz: [?SPIP][[%url_glossaire_externe2%]]', # MODIF
 	'SPIP_liens:description1' => '@puce@ SPIP obsahuje štýl CSS pre odkazy na e-mailové odkazy - malá obálka sa zobrazuje pred každým odkazom "mailto". Nie všetky prehliadače ju však vedia zobraziť(konkrétne IE6, IE7 a SAF3). Je na vás, aby ste sa rozhodli, či využijete toto rozšírenie.
 _ Testovací odkaz:[->test@test.com] (Na otestovanie znova načítajte stránku.)[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP a externé odkazy',
@@ -330,7 +330,7 @@ Pozor: Niektoré nástroje modulu Vreckový nožík si vyžadujú, aby bol {jQue
 	'f_jQuery:nom' => 'Deactivate jQuery',
 	'filets_sep:aide' => 'Oddeľovacie čiary: <b>__i__</b> alebo <b>i</b> je číslo.<br />Iné dostupné čiary: @liste@',
 	'filets_sep:description' => 'Vloží oddeľujúce čiary do hocijakého textu v SPIPe, čo sa dá prispôsobiť v súbore so štýlom.
-_ Syntax je: "__code__", ke "code" je buď identifikačné číslo (od 0 do 7) čiary, ktorú chcete vložiť a ktorá je prepojená s príslušným štýlom, alebo názov obrázka v priečinku plugins/couteau_suisse/img/filets.',
+_ Syntax je: "__code__", ke "code" je buď identifikačné číslo (od 0 do 7) čiary, ktorú chcete vložiť a ktorá je prepojená s príslušným štýlom, alebo názov obrázka v priečinku plugins/couteau_suisse/img/filets.', # MODIF
 	'filets_sep:nom' => 'Dividing lines',
 	'filtrer_javascript:description' => 'Na ovládanie JavaScriptu, ktorý sa vkladá priamo do textu článkov sú k dispozícii tri možnosti:
 - <i>nikdy:</i> JavaScript je všade zakázaný, 
@@ -546,6 +546,7 @@ _ • {predvolený:} automatické nahrádzanie (od verzie 2.0).
 	'mailcrypt:description' => 'Hides all the email links in your textes and replaces them with a Javascript link which activates the visitor\'s email programme when the link is clicked. This antispam tool attempts to prevent web robots from collecting email addresses which have been placed in forums or in the text displayed by the tags in your templates.',
 	'mailcrypt:nom' => 'Šifrovanie pošty',
 	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de vos squelettes', # NEW
+	'mailcrypt_fonds' => 'Ne pas protéger les fonds suivants :<br /><q4>{Séparez-les par les deux points «~:~» et vérifiez bien que ces fonds restent totalement inaccessibles aux robots du Net.}</q4>', # NEW
 	'maj_auto:description' => 'Tento nástroj vám umožňuje ľahko riadiť aktualizáciu rôznych zásuvných modulov, vrátane zistenia čísla revízie v súbore <code>svn.revision</code> a jeho porovnanie s tým, ktoré sa nachádza na stránke <code>zone.spip.org</code>.
 
 Zoznam, ktorý sa nachádza vyššie, vám ponúka možnosť spustiť automatickú aktualizáciu   každého zásuvného modulu SPIPu, ktorý bol predtým nainštalovaný v priečinku <code>plugins/auto/</code>. Ostatné zásuvné moduly z priečinku <code>plugins/</code> alebo <code>extensions/</code> sú uvedené len pre vašu informáciu. Ak sa nenájde vzdialená revízia, skúste zásuvný modul nainštalovať manuálne.
@@ -617,7 +618,7 @@ Publikované objekty, ale skryté pred verejnosťou:
 Tento kód PHP môžete uložiť do súboru /config/mes_options.php. Na stránku "balíka {@pack@}" umiestni odkaz na obnovenie. Samozrejme, jeho názov môžete zmeniť nižšie.
 
 Ak zásuvný modul obnovíte kliknutím na balík, modul Vreckový nožík sa sám nastaví podľa hodnôt definovaných v tomto balíku.',
-	'pack_du' => '• of the pack @pack@',
+	'pack_du' => '• of the pack @pack@', # MODIF
 	'pack_installe' => 'Inštalácia balíka s nastaveniami',
 	'pack_installer' => 'Are you sure you want to re-initialise the Penknife and install the « @pack@ » pack?',
 	'pack_nb_plrs' => 'V tejto chvíli je k dispozícii @nb@ "balíkov s nastaveniami".',
@@ -637,7 +638,7 @@ Ak zásuvný modul obnovíte kliknutím na balík, modul Vreckový nožík sa s�
 
 
 
-@puce@ Pozor! Táto funkcia nezasahuje do práv na zobrazenie ukážky textu. Ak chcete, aby mali vaši redaktori naozaj právo na zobrazenie ukážok článkov, ktoré sa upravujú, musíte to povoliť (v menu {[Konfigurácia&gt;Pokročilé funkcie->./?exec=config_fonctions]} v súkromnej zóne).',
+@puce@ Pozor! Táto funkcia nezasahuje do práv na zobrazenie ukážky textu. Ak chcete, aby mali vaši redaktori naozaj právo na zobrazenie ukážok článkov, ktoré sa upravujú, musíte to povoliť (v menu {[Konfigurácia&gt;Pokročilé funkcie->./?exec=config_fonctions]} v súkromnej zóne).', # MODIF
 	'previsualisation:nom' => 'Zobrazujú sa články',
 	'puceSPIP' => 'Povoliť klávesové skratky "*"',
 	'puceSPIP_aide' => 'Odrážka SPIPU: <b>*</b>',
@@ -672,7 +673,7 @@ Priečinok, kde sa ukladajú sessiony: @_DIR_SESSIONS@
 
 Na vašej stránke je teraz @_NB_SESSIONS1@ súbor(ov)  session, @_NB_SESSIONS2@ sa týkajú anonymných sessionov.',
 	'sessions_anonymes:nom' => 'Anonymné sessiony',
-	'set_options:description' => 'Preselects the type of interface (simplified or advanced) for all editors, both existing and future ones. At the same time the button offering the choice between the two interfaces is also removed.[[%radio_set_options4%]]',
+	'set_options:description' => 'Preselects the type of interface (simplified or advanced) for all editors, both existing and future ones. At the same time the button offering the choice between the two interfaces is also removed.[[%radio_set_options4%]]', # MODIF
 	'set_options:nom' => 'Type of private interface',
 	'sf_amont' => 'Upstream',
 	'sf_tous' => 'Všetko',
@@ -956,7 +957,7 @@ Jednoducho do šablóny pridajte <code><INCLURE{fond=fonds/visiteurs_connectes}>
 Aktuálni webmasteri: {@_CS_LISTE_WEBMESTRES@}.
 _ Spôsobilí administrátori: {@_CS_LISTE_ADMINS@}.
 
-Ako webmaster môžete meniť tento zoznam ID. Ak ich je viac, ako oddeľovač použite dvojbodku, napr.  "1:5:6".[[%webmestres%]]',
+Ako webmaster môžete meniť tento zoznam ID. Ak ich je viac, ako oddeľovač použite dvojbodku, napr.  "1:5:6".[[%webmestres%]]', # MODIF
 	'webmestres:nom' => 'Zoznam webmasterov',
 
 	// X

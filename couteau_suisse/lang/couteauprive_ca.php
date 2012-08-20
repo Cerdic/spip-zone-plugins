@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'SPIP_liens:description' => '@puce@ Tots els enllaços del lloc s\'obren, per defecte, a la mateixa finestra de navegació en la que esteu. Però pot ser útil obrir els enllaços externs al lloc en una nova finestra exterior -- això es pot aconseguir afegint {target="_blank"} a totes les etiquetes &lt;a&gt; dotades per SPIP del tipus {spip_out}, {spip_url} o {spip_glossaire}. A vegades pot ser necessari afegir una d\'aquestes classes als enllaços de l\'esquelet del lloc (fitxers html) per tal d\'ampliar al màxim aquesta funcionalitat.[[%radio_target_blank3%]]
 
-@puce@ SPIP permet lligar paraules amb la seva definició gràcies a la drecera tipogràfica <code>[?mot]</code>. Per defecte (o si deixeu buida la casella de més avall), el glossari extern us retorna cap a l\'enciclopèdia lliure wikipedia.org. Us toca a vosaltres escollir quina adreça voleu utilitzar. <br />Enllaç de prova: [?SPIP][[%url_glossaire_externe2%]]',
+@puce@ SPIP permet lligar paraules amb la seva definició gràcies a la drecera tipogràfica <code>[?mot]</code>. Per defecte (o si deixeu buida la casella de més avall), el glossari extern us retorna cap a l\'enciclopèdia lliure wikipedia.org. Us toca a vosaltres escollir quina adreça voleu utilitzar. <br />Enllaç de prova: [?SPIP][[%url_glossaire_externe2%]]', # MODIF
 	'SPIP_liens:description1' => '@puce@ SPIP ha previst un estil CSS pels enllaços «~mailto:~»: un petit sobre hauria d\'aparèixer al davant de cada enllaç lligat a un correu electrònic; però com que no tots els navegadors el poden mostrar (sobretot IE6, IE7 i SAF3), heu de veure si voleu conservar aquest afegit.
 _ Enllaç de test: [->test@test.com] (recarregueu la pàgina completament).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP i els enllaços externs',
@@ -343,7 +343,7 @@ Atenció: certes eines del Ganivet Suís necessiten les funcions de {jQuery}. ',
 	'f_jQuery:nom' => 'Desactiva jQuery',
 	'filets_sep:aide' => 'Línies de Separació: <b>__i__</b> o <b>i</b> és un nombre de <b>0</b> a <b>@max@</b>.<br />Altres línies disponibles: @liste@',
 	'filets_sep:description' => 'Insereix línies de separació, que es poden personalitzar per fulls d\'estil, a tots els textos d\'SPIP.
-_ La sintaxi és: "__code__", o "code" representa o bé el número d\'identificació (de 0 a 7) de la línia a inserir en relació directa amb els estils corresponents, o bé el nom d\'una imatge situada a dins de la carpeta plugins/couteau_suisse/img/filets.',
+_ La sintaxi és: "__code__", o "code" representa o bé el número d\'identificació (de 0 a 7) de la línia a inserir en relació directa amb els estils corresponents, o bé el nom d\'una imatge situada a dins de la carpeta plugins/couteau_suisse/img/filets.', # MODIF
 	'filets_sep:nom' => 'Línies de Separació',
 	'filtrer_javascript:description' => 'Per gestionar la inserció de JavaScript a dins dels articles, podem fer-ho de tres maneres:
 - <i>mai</i>: el JavaScript és rebutjat a tot arreu
@@ -563,6 +563,7 @@ _ • {Par defecte): substitució automàtica d\'origen (a partir de la versió 
 	'mailcrypt:description' => 'Amaga tots els enllaços de correus presents als vostres textos substituint-los per un enllaç JavaScript que permet malgrat tot activar la missatgeria del lector. Aquesta eina antispam impedeix que els robots recullin les adreces electròniques deixades visibles als fòrums o a les etiquetes dels vostres esquelets.',
 	'mailcrypt:nom' => 'MailCrypt',
 	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de vos squelettes', # NEW
+	'mailcrypt_fonds' => 'Ne pas protéger les fonds suivants :<br /><q4>{Séparez-les par les deux points «~:~» et vérifiez bien que ces fonds restent totalement inaccessibles aux robots du Net.}</q4>', # NEW
 	'maj_auto:description' => 'Aquesta eina us permet gestionar fàcilment l\'actualització dels vostres connectors (plugins), recuperant sobretot el número de revisió que conté el fitxer <code>svn.revision</code> i comparant-lo amb el trobat a <code>zone.spip.org</code>.
 
 La llista de més amunt ofereix la possibilitat de llançar el procés d\'actualització automàtic d\'SPIP a cadascun dels connectors (plugins) instal·lats prèviament a la carpeta <code>plugins/auto/</code>. El altres plugins que es troben a dins de la carpeta <code>plugins/</code> només es llisten com a mera informació. Si la revisió a distància no s\'ha trobat, proveu llavors de fer l\'actualització del connector manualment.
@@ -630,7 +631,7 @@ Per forçar la publicació de continguts amagats, n\'hi ha prou afegint el crite
 Si els drets d\'escriptura ho permeten, el codi PHP que hi ha més avall es podrà situar a dins del fitxer {{/config/mes_options.php}} i afegirà un enllaç de tornar a carregar en aquesta pàgina del pack « {@pack@} ». Evidentment, podreu canviar el seu nom.
 
 Si torneu a carregar el connector fent un clic sobre un pack, el Ganivet Suís es tornarà a configurar automàticament en funció dels paràmetres definits prèviament en aquest paquet.',
-	'pack_du' => '• del pack @pack@',
+	'pack_du' => '• del pack @pack@', # MODIF
 	'pack_installe' => 'Instal·lació d\'un pack de configuració',
 	'pack_installer' => 'Està segur de voler reinicialitzar el Gavinet Suís i d\'instal·lar el pack « @pack@ » ?',
 	'pack_nb_plrs' => 'Actualment hi ha @nb@ «paquets de configuració» disponibles:',
@@ -650,7 +651,7 @@ Si torneu a carregar el connector fent un clic sobre un pack, el Ganivet Suís e
 
 
 
-@puce@ Atenció: aquesta funcionalitat no modifica pas els drets de previsualització. Per tal que els vostres redactors tingui efectivament el dret de previsualitzar els seus articles «en procés de correcció», heu d\'autoritzar-los (al menú {[Configuració Funcions avançades->./?exec=config_fonctions]} de l’espai privat).',
+@puce@ Atenció: aquesta funcionalitat no modifica pas els drets de previsualització. Per tal que els vostres redactors tingui efectivament el dret de previsualitzar els seus articles «en procés de correcció», heu d\'autoritzar-los (al menú {[Configuració Funcions avançades->./?exec=config_fonctions]} de l’espai privat).', # MODIF
 	'previsualisation:nom' => 'Previsualització dels articles',
 	'puceSPIP' => 'Autoritzar la drecera «*»',
 	'puceSPIP_aide' => 'Un símbol SPIP : <b>*</b>',
@@ -685,7 +686,7 @@ Dossier stockant les sessions : @_DIR_SESSIONS@
 
 Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.', # NEW
 	'sessions_anonymes:nom' => 'Sessions anonymes', # NEW
-	'set_options:description' => 'Selecciona d\'entrada el tipus d\'interfície privada (simple o avançada) per tots els redactors ja existents o per aquells que poden venir i suprimeix el botó corresponent de la banda on hi ha les icones petites.[[%radio_set_options4%]]',
+	'set_options:description' => 'Selecciona d\'entrada el tipus d\'interfície privada (simple o avançada) per tots els redactors ja existents o per aquells que poden venir i suprimeix el botó corresponent de la banda on hi ha les icones petites.[[%radio_set_options4%]]', # MODIF
 	'set_options:nom' => 'Tipus d\'interfície privada',
 	'sf_amont' => 'Més amunt',
 	'sf_tous' => 'Tots',
@@ -720,7 +721,7 @@ _ • Només pels articles que continguin l\'etiqueta <code>@_CS_AVEC_SOMMAIRE@<
 @puce@ Per defecte, el Ganivet Suís insereix automàticament el resum a la capçalera de l\'article. Però vosaltres teniu la possibilitat de situar-lo a qualsevol indret a dins de la vostra plantilla gràcies a una etiqueta #CS_SOMMAIRE.
 [[%balise_sommaire%]]
 
-Aquest resum es compatible amb « [.->decoupe] » i « [.->titres_typo] ».',
+Aquest resum es compatible amb « [.->decoupe] » i « [.->titres_typo] ».', # MODIF
 	'sommaire:nom' => 'Resum automàtic',
 	'sommaire_ancres' => 'àncores escollides: <b><html>{{{Mon Titre&lt;mon_ancre&gt;}}}</html></b>', # MODIF
 	'sommaire_avec' => 'Un text amb sumari:  <b>@_CS_AVEC_SOMMAIRE@</b>',
@@ -983,7 +984,7 @@ Afegiu simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> a les v
 Webmestre(s) actual(s): {@_CS_LISTE_WEBMESTRES@}.
 _ Administrador(s) elegible(s): {@_CS_LISTE_ADMINS@}.
 
-Vosaltres mateixos, com a webmestres, teniu els drets de modificar aquesta llista d\'ids -- separats pels dos punts « : » si són diversos. Exemple: «1:5:6».[[%webmestres%]]',
+Vosaltres mateixos, com a webmestres, teniu els drets de modificar aquesta llista d\'ids -- separats pels dos punts « : » si són diversos. Exemple: «1:5:6».[[%webmestres%]]', # MODIF
 	'webmestres:nom' => 'Llista de webmestres',
 
 	// X

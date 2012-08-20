@@ -547,6 +547,7 @@ _ • {Predefinido} : substitución automática de orixe (a partir da version 2.
 	'mailcrypt:description' => 'Oculta todas as ligazóns de correo presentes nos seus textos e substitúeos por unha ligazón Javascript que permite activar o programa de correo do lector. Esta ferramenta antispam tenta impedir os robots de colleita de enderezos electrónicos deixados en claro nos foros ou nas balizas dos seus esqueletos.',
 	'mailcrypt:nom' => 'MailCrypt',
 	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de vos squelettes', # NEW
+	'mailcrypt_fonds' => 'Ne pas protéger les fonds suivants :<br /><q4>{Séparez-les par les deux points «~:~» et vérifiez bien que ces fonds restent totalement inaccessibles aux robots du Net.}</q4>', # NEW
 	'maj_auto:description' => 'Esta ferramenta permítelle xestionarfacilmente a actualización dos seus diferentes módulos, recuperando especialmente o número de revisión contido no ficheiro <code>svn.revision</code> e comparando aquel encontrado en <code>zone.spip.org</code>.
 
 A lista seguinte ofrece a posibilidade de lanzar o proceso de actualización automática de SPIP sobre cada un dos módulos previamente instalados no cartafol <code>plugins/auto/</code>. Os outros códulos encóntranse no cartafol <code>plugins/</code> e lístanse simplemente a título informativo. Se a revisión remota non se pode encontrar, intente proceder manualmente coa actualización do módulo.
@@ -614,7 +615,7 @@ Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère
 Se os permisos de escritura o permiten, ocódigo PHP seguinte poderá poñerse no ficheiro {{/config/mes_options.php}} e engadirá unha ligazón de reiniciación sobre esta páxina "do paquete « {@pack@} ». Desde logo pódelle cambiar ese nome.
 
 De reiniciar o módulo premendo sobre un paquete, a Navalla Suíza reconfigurarase automaticamente en función dos parámetros predeterminados no paquete.', # MODIF
-	'pack_du' => '• do paquete @pack@',
+	'pack_du' => '• do paquete @pack@', # MODIF
 	'pack_installe' => 'Actualización dun paquete de configuración',
 	'pack_installer' => 'Está seguro de querer reiniciar a Navalla Suíza e instalar o paquete « @pack@ » ?',
 	'pack_nb_plrs' => 'Hai actualmente @nb@ « paquetes de configuración » dispoñíbeis:',
@@ -665,7 +666,7 @@ Dossier stockant les sessions : @_DIR_SESSIONS@
 
 Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.', # NEW
 	'sessions_anonymes:nom' => 'Sessions anonymes', # NEW
-	'set_options:description' => 'Seleccione o tipo de interface privada predeterminada (simplificada ou avanzada) para todos os redactores xa existentes ou futuros e suprima o botón correspondente da barra de iconas.[[%radio_set_options4%]]',
+	'set_options:description' => 'Seleccione o tipo de interface privada predeterminada (simplificada ou avanzada) para todos os redactores xa existentes ou futuros e suprima o botón correspondente da barra de iconas.[[%radio_set_options4%]]', # MODIF
 	'set_options:nom' => 'Tipo de interface privada',
 	'sf_amont' => 'Fluxo ascendente',
 	'sf_tous' => 'Todos',

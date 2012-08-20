@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par défaut dans la fenêtre de navigation en cours. Mais il peut être utile d\'ouvrir les liens externes au site dans une nouvelle fenêtre extérieure -- cela revient à ajouter {target=\\"_blank\\"} à toutes les balises &lt;a&gt; dotées par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois nécessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'étendre au maximum cette fonctionnalité.[[%radio_target_blank3%]]
 
-@puce@ SPIP permet de relier des mots à leur définition grâce au raccourci typographique <code>[?mot]</code>. Par défaut (ou si tu laisses vide la case ci-dessous), le glossaire externe renvoie vers l’encyclopédie libre wikipedia.org. À toi de choisir l\'adresse à utiliser. <br />Lien de test : [?SPIP][[%url_glossaire_externe2%]]',
+@puce@ SPIP permet de relier des mots à leur définition grâce au raccourci typographique <code>[?mot]</code>. Par défaut (ou si tu laisses vide la case ci-dessous), le glossaire externe renvoie vers l’encyclopédie libre wikipedia.org. À toi de choisir l\'adresse à utiliser. <br />Lien de test : [?SPIP][[%url_glossaire_externe2%]]', # MODIF
 	'SPIP_liens:description1' => '@puce@ SPIP a prévu un style CSS pour les liens «~mailto:~» : une petite enveloppe devrait apparaître devant chaque lien lié à un courriel; mais puisque tous les navigateurs ne peuvent pas l\'afficher (notamment IE6, IE7 et SAF3), à toi de voir s\'il faut conserver cet ajout.
 _ Lien de test : [->test@test.com] (recharge la page entièrement).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP et les liens… externes',
@@ -341,7 +341,7 @@ Attention : certains outils du Couteau Suisse nécessitent les fonctions de {jQu
 	'f_jQuery:nom' => 'Désactive jQuery',
 	'filets_sep:aide' => 'Filets de Séparation : <b>__i__</b> où <b>i</b> est un nombre de <b>0</b> à <b>@max@</b>.<br />Autres filets disponibles : @liste@',
 	'filets_sep:description' => 'Insère des filets de séparation, personnalisables par des feuilles de style, dans tous les textes de SPIP.
-_ La syntaxe est : "__code__", où "code" représente soit le numéro d’identification (de 0 à 7) du filet à insérer en relation directe avec les styles correspondants, soit le nom d\'une image placée dans le dossier plugins/couteau_suisse/img/filets.',
+_ La syntaxe est : "__code__", où "code" représente soit le numéro d’identification (de 0 à 7) du filet à insérer en relation directe avec les styles correspondants, soit le nom d\'une image placée dans le dossier plugins/couteau_suisse/img/filets.', # MODIF
 	'filets_sep:nom' => 'Filets de Séparation',
 	'filtrer_javascript:description' => 'Pour gérer l\'insertion de JavaScript dans les articles, trois modes sont disponibles :
 - <i>jamais</i> : le JavaScript est refusé partout
@@ -371,7 +371,7 @@ Les blocs multi s\'affichent alors toujours dans la langue demandée par le visi
 
 @puce@ Pour chaque mot, tu as la possibilité de choisir le nombre maximal de liens créés dans tes textes. Toute valeur nulle ou négative implique que tous les mots reconnus seront traités. [[%glossaire_limite% par mot-clé]]
 
-@puce@ Deux solutions te sont offertes pour générer la petite fenêtre automatique qui apparaît lors du survol de la souris. [[%glossaire_js%]][[->%glossaire_abbr%]]',
+@puce@ Deux solutions te sont offertes pour générer la petite fenêtre automatique qui apparaît lors du survol de la souris. [[%glossaire_js%]][[->%glossaire_abbr%]]', # MODIF
 	'glossaire:nom' => 'Glossaire interne',
 	'glossaire_abbr' => 'Ignorer les balises <code><abbr></code> et <code><acronym></code>',
 	'glossaire_css' => 'Solution CSS',
@@ -558,6 +558,7 @@ _ • {Par défaut} : remplacement automatique d\'origine (à partir de la versi
 	'mailcrypt:description' => 'Masque tous les liens de courriels présents dans tes textes en les remplaçant par un lien JavaScript permettant quand même d\'activer la messagerie du lecteur. Cet outil antispam tente d\'empêcher les robots de collecter les adresses électroniques laissées en clair dans les forums ou dans les balises de tes squelettes.',
 	'mailcrypt:nom' => 'MailCrypt',
 	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de vos squelettes', # NEW
+	'mailcrypt_fonds' => 'Ne pas protéger les fonds suivants :<br /><q4>{Séparez-les par les deux points «~:~» et vérifiez bien que ces fonds restent totalement inaccessibles aux robots du Net.}</q4>', # NEW
 	'maj_auto:description' => 'Cet outil te permet de gérer facilement la mise à jour de tes différents plugins, récupérant notamment le numéro de révision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouvé sur <code>zone.spip.org</code>.
 
 La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> ou <code>extensions/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tente de procéder manuellement à la mise à jour du plugin.
@@ -625,7 +626,7 @@ Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère
 Si les droits d\'écriture le permettent, le code PHP ci-dessous pourra prendre place dans le fichier {{/config/mes_options.php}} et ajoutera un lien de réinitialisation sur cette page du pack « {@pack@} ». Bien sûr il t\'est possible de changer son nom.
 
 Si tu réinitialises le plugin en cliquant sur un pack, le Couteau Suisse se reconfigurera automatiquement en fonction des paramètres prédéfinis dans ce pack.',
-	'pack_du' => '• du pack @pack@',
+	'pack_du' => '• du pack @pack@', # MODIF
 	'pack_installe' => 'Mise en place d\'un pack de configuration',
 	'pack_installer' => 'Es-tu sûr de vouloir réinitialiser le Couteau Suisse et installer le pack « @pack@ » ?',
 	'pack_nb_plrs' => 'Il y a actuellement @nb@ « packs de configuration » disponibles.',
@@ -643,7 +644,7 @@ Si tu réinitialises le plugin en cliquant sur un pack, le Couteau Suisse se rec
 	'pipelines' => 'Pipelines utilisés :',
 	'previsualisation:description' => 'Par défaut, SPIP permet de prévisualiser un article dans sa version publique et stylée, mais uniquement lorsque celui-ci a été « proposé à l’évaluation ». Hors cet outil permet aux auteurs de prévisualiser également les articles pendant leur rédaction. Chacun peut alors prévisualiser et modifier son texte à sa guise.
 
-@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que tes rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », tu dois l’autoriser (dans le menu {[Configuration&gt;Fonctions avancées->./?exec=config_fonctions]} de l’espace privé).',
+@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que tes rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », tu dois l’autoriser (dans le menu {[Configuration&gt;Fonctions avancées->./?exec=config_fonctions]} de l’espace privé).', # MODIF
 	'previsualisation:nom' => 'Prévisualisation des articles',
 	'puceSPIP' => 'Autoriser le raccourci «*»',
 	'puceSPIP_aide' => 'Une puce SPIP : <b>*</b>',
@@ -678,7 +679,7 @@ Dossier stockant les sessions : @_DIR_SESSIONS@
 
 Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.', # NEW
 	'sessions_anonymes:nom' => 'Sessions anonymes', # NEW
-	'set_options:description' => 'Sélectionne d\'office le type d’interface privée (simplifiée ou avancée) pour tous les rédacteurs déjà existant ou à venir et supprime le bouton correspondant du bandeau des petites icônes.[[%radio_set_options4%]]',
+	'set_options:description' => 'Sélectionne d\'office le type d’interface privée (simplifiée ou avancée) pour tous les rédacteurs déjà existant ou à venir et supprime le bouton correspondant du bandeau des petites icônes.[[%radio_set_options4%]]', # MODIF
 	'set_options:nom' => 'Type d\'interface privée',
 	'sf_amont' => 'En amont',
 	'sf_tous' => 'Tous',
@@ -713,7 +714,7 @@ _ • Uniquement pour les articles contenant la balise <code>@_CS_AVEC_SOMMAIRE@
 @puce@ Par défaut, le Couteau Suisse insère automatiquement le sommaire en tête d\'article. Mais tu as ce sommaire ailleurs dans ton squelette grâce à une balise #CS_SOMMAIRE.
 [[%balise_sommaire%]]
 
-Ce sommaire est compatible avec « [.->decoupe] » et « [.->titres_typo] ».',
+Ce sommaire est compatible avec « [.->decoupe] » et « [.->titres_typo] ».', # MODIF
 	'sommaire:nom' => 'Sommaire automatique',
 	'sommaire_ancres' => 'Ancres choisies : <b><html>{{{Mon Titre<mon_ancre>}}}</html></b>',
 	'sommaire_avec' => 'Un texte avec sommaire : <b>@_CS_AVEC_SOMMAIRE@</b>',
@@ -976,7 +977,7 @@ Ajoute simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> dans te
 Webmestre(s) actuel(s) : {@_CS_LISTE_WEBMESTRES@}.
 _ Administrateur(s) éligible(s) : {@_CS_LISTE_ADMINS@}.
 
-En tant que webmestre toi-même, tu as ici les droits de modifier cette liste d\'ids -- séparés par les deux points « : » s\'ils sont plusieurs. Exemple : «1:5:6».[[%webmestres%]]',
+En tant que webmestre toi-même, tu as ici les droits de modifier cette liste d\'ids -- séparés par les deux points « : » s\'ils sont plusieurs. Exemple : «1:5:6».[[%webmestres%]]', # MODIF
 	'webmestres:nom' => 'Liste des webmestres',
 
 	// X
