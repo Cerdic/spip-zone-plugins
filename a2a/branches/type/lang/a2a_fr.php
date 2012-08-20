@@ -46,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'type' => 'Type',
 	'types'=>'Types de liaison',
+	'type_inexistant'=>'Type de liaison inexistant',
 	'type_obligatoire'=>'Obligation de typer les liaisons',
 	'type_liaison' => 'Type de liaison',
 

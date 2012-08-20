@@ -1,15 +1,20 @@
-<div>
+<div class="formulaire_spip formulaire_a2a_changer_typeliaison">
 
 <form method='post' action='#ENV{action}'>
 #ACTION_FORMULAIRE{#ENV{action}}
 			<B_liaison>
-			
+				[<div class='erreur'><span class='erreur_message'>(#ENV{message_erreur})</span>]
 				<select name="type_liaison">
+				[(#CONFIG{a2a/type_obligatoire}|non)
+					<option value=''></option>
+				]
 				<BOUCLE_liaison(DATA){source tableau, #CONFIG{a2a/types_liaisons}}{par valeur}>
 					<option value="#CLE"[(#CLE|=={#ENV{type_liaison}}|oui) selected="selected"]>#VALEUR</option>
 				</BOUCLE_liaison>
 				</select>
+				
 				<input type='submit' name="save" class='submit' value='<:a2a:changer_type_liaison:>' />
+				[</div>(#ENV{message_erreur}|oui)]
 			</B_liaison>
 				
 		
