@@ -5,7 +5,11 @@
 						|parametre_url{lang,#ENV{lang,#ENV{urljson}|parametre_url{lang}}}
 						)]})
 ]<div id="calendar" class="calendriermini minicalendar">
-	<h2 class="menu-titre"><a href="[(#URL_PAGE{calendrier-zpip}|parametre_url{date_debut,#DATE|affdate{Y-m-d}})]"><:seminaire:titre_agenda:></a></h2>
+
+[(#REM) On ne renvoie pas vers la même page selon que l'on utilise kitcnrs ou un squelette Z]
+    [(#PLUGIN{kitcnrs}|?{' ',''})<h2 class="menu-titre"><a href="[(#URL_PAGE{calendrier-kitcnrs}|parametre_url{date_debut,#DATE|affdate{Y-m-d}})]"><:seminaire:titre_agenda:></a></h2>]
+    [(#PLUGIN{kitcnrs}|?{'',' '})<h2 class="menu-titre"><a href="[(#URL_PAGE{calendrier-zpip}|parametre_url{date_debut,#DATE|affdate{Y-m-d}})]"><:seminaire:titre_agenda:></a></h2>]
+
 	<div class="calendar-container"
 					data-json="#GET{urljson}"
 					data-year="[(#ENV{date}|affdate{Y})]"
