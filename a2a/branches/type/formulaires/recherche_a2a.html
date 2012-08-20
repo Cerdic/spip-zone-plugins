@@ -23,9 +23,11 @@
 </form>
 
 	#SET{exclure,#ARRAY{0,#ID_ARTICLE_ORIG}}
-	<BOUCLE_doublons(ARTICLES_LIES){id_article = #ID_ARTICLE_ORIG}{si !#CONFIG{a2a/types_differents}}>
+	
+	<BOUCLE_doublons(ARTICLES_LIES){id_article = #ID_ARTICLE_ORIG}{si #CONFIG{a2a/types_differents}|non}>
 	#SET{exclure,#GET{exclure}|push{#ID_ARTICLE_LIE}}
 	</BOUCLE_doublons>
+	
 	[(#ENV*{recherche}|match{^art\d+$}|oui)
 		[(#SET{recherche,[(#ENV{recherche}|substr{3})]})]
 		<INCLURE{fond=formulaires/inclure/recherche_id}{id_article_orig}{recherche=#GET{recherche}}{type_liaison}{exclure=#GET{exclure}} />]
