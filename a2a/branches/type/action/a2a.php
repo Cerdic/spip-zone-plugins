@@ -71,12 +71,12 @@ function action_a2a_lier_article_dist($id_article_cible, $id_article_source, $ty
 }
 
 
-function action_a2a_supprimer_lien_dist($id_article_cible, $id_article,$type=null){
+function action_a2a_supprimer_lien_dist($id_article_cible, $id_article,$type_liaison,$type=null){
 	include_spip('inc/utils');
 
 	$contexte = array();
 	
-	$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article) . 'AND id_article_lie=' . sql_quote($id_article_cible));
+	$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article) . 'AND id_article_lie=' . sql_quote($id_article_cible)  . 'AND type_liaison=' . sql_quote($type_liaison));
 
 	// on recupere les articles lies dont le rang est superieur a celui a supprimer
 	$res = sql_select('*', 'spip_articles_lies', 'id_article=' . sql_quote($id_article) . 'AND rang>' . sql_quote($rang));
@@ -87,11 +87,12 @@ function action_a2a_supprimer_lien_dist($id_article_cible, $id_article,$type=nul
 	
 	sql_delete('spip_articles_lies',  array(
 		'id_article = ' . sql_quote($id_article), 
-		'id_article_lie = ' . sql_quote($id_article_cible)
+		'id_article_lie = ' . sql_quote($id_article_cible),
+		'type_liaison=' . sql_quote($type_liaison)
 		));
 	
 	if($type == 'both'){
-		$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article_cible) . 'AND id_article_lie=' . sql_quote($id_article));
+		$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article_cible) . 'AND id_article_lie=' . sql_quote($id_article)  . 'AND type_liaison=' . sql_quote($type_liaison));
 
 		// on recupere les articles lies dont le rang est superieur a celui a supprimer
 		$res = sql_select('*', 'spip_articles_lies', 'id_article=' . sql_quote($id_article_cible) . 'AND rang>' . sql_quote($rang));
@@ -102,7 +103,8 @@ function action_a2a_supprimer_lien_dist($id_article_cible, $id_article,$type=nul
 	
 		sql_delete('spip_articles_lies',  array(
 			'id_article = ' . sql_quote($id_article_cible), 
-			'id_article_lie = ' . sql_quote($id_article)
+			'id_article_lie = ' . sql_quote($id_article),
+			'type_liaison=' . sql_quote($type_liaison)
 			));
 	}
 	return true;
