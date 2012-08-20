@@ -1,9 +1,11 @@
 .page_tickets_flux_suivi dl.site {
 	display:inline-block;
 	width:23%;
+	height:362px;
+	overflow:hidden;
 	border:1px solid gray;
 	-webkit-border-radius: 10px;border-radius: 10px;
-	padding:6px;
+	padding-bottom:12px;
 	vertical-align:top;
 }
 
@@ -14,11 +16,17 @@
     border-radius: 10px 10px 0 0;
 	-webkit-border-radius: 10px 10px 0 0;
 	margin:-7px;
-	margin-bottom:6px;
+	margin-bottom:0;
 	line-height:2.2em;}
+
 .page_tickets_flux_suivi dl.site dt a {color:white;}
 
-.page_tickets_flux_suivi dl.site dd {margin-left:0}
+.page_tickets_flux_suivi dl.site > dd {
+	padding:6px;
+	height:336px;
+	margin-left:0;
+	overflow-y:auto;
+}
 
 .page_tickets_flux_suivi dl img.bouton {
 	float:right;

@@ -25,7 +25,7 @@
 			<BOUCLE_tickets(SYNDIC_ARTICLES){id_syndic}{!par date}{0,3}>
 			<dl class="ticket">
 				<dt>#TITRE #COMPTEUR_BOUCLE</dt>
-				<dd>#DESCRIPTIF</dd>
+				<dd>[(#DESCRIPTIF|couper{100})]</dd>
 				<dd>[(#DATE|affdate)]</dd>
 				<dd>#STATUT</dd>
 			</dl>

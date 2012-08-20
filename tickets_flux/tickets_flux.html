@@ -21,7 +21,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 	</image>
 ]
 
-<BOUCLE_10recents(TICKETS) {par date}{inverse}{0,10}{unique}>
+<BOUCLE_10recents(TICKETS) {par date}{inverse}{0,10}{statut=ouvert}{unique}>
 <INCLURE{fond=inc-rss-ticket}{id_ticket}>
 </BOUCLE_10recents>
 
