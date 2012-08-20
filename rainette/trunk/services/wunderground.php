@@ -94,7 +94,7 @@ function wunderground_meteo2icone($meteo, $periode=0) {
 	return $icone;
 }
 
-function wunderground_code2meteo($meteo, $periode=0) {
+function wunderground_meteo2weather($meteo, $periode=0) {
 	static $wunderground2weather = array(
 							'chanceflurries'=> array('41','46'),
 							'chancerain'=> array('39','45'),
@@ -212,6 +212,7 @@ function wunderground_xml2conditions($xml){
 			: '';
 
 		// Identification des suffixes d'unite pour choisir le bon champ
+		// -> wunderground fournit toujours les valeurs dans les deux systemes d'unites
 		include_spip('inc/config');
 		$unite = lire_config('rainette/wunderground/unite');
 		if ($unite == 'm')
@@ -221,7 +222,7 @@ function wunderground_xml2conditions($xml){
 		list($ut, $up, $ud, $uv) = $suffixes;
 
 
-		// Liste des conditions meteo extraite dans le systeme metrique
+		// Liste des conditions meteo extraites dans le systeme demande
 		$tableau['vitesse_vent'] = (isset($conditions['wind_'.$uv])) ? intval($conditions['wind_'.$uv][0]['text']) : '';
 		$tableau['angle_vent'] = (isset($conditions['wind_degrees'])) ? intval($conditions['wind_degrees'][0]['text']) : '';
 		$tableau['direction_vent'] = (isset($conditions['wind_dir'])) ? $conditions['wind_dir'][0]['text'] : '';
@@ -237,9 +238,12 @@ function wunderground_xml2conditions($xml){
 
 		$tableau['visibilite'] = (isset($conditions['visibility_'.$ud])) ? intval($conditions['visibility_'.$ud][0]['text']) : '';
 
-		$tableau['code_icone'] = (isset($conditions['icon'])) ? $conditions['icon'][0]['text'] : '';
+		// Code meteo, resume et icone natifs au service
+		$tableau['meteo'] = (isset($conditions['icon'])) ? $conditions['icon'][0]['text'] : '';
 		$tableau['url_icone'] = (isset($conditions['icon_url'])) ? $conditions['icon_url'][0]['text'] : '';
-		$tableau['desc_icone'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['text'] : '';
+		$tableau['resume'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['text'] : '';
+		// TODO : Pour compatibilite avec les anciens modeles -> a virer a terme
+		$tableau['code_icone'] = $tableau['meteo'];
 
 		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
 		// Pour ce service (cas actuel) le nom du fichier icone commence par "nt_" pour la nuit.
@@ -251,13 +255,13 @@ function wunderground_xml2conditions($xml){
 			$tableau['periode'] = 1; // nuit
 
 		// Determination du code meteo dans le systeme meteo de weather.com
-		$tableau['meteo'] = wunderground_code2meteo($tableau['nom_icone'], $tableau['periode']);
+		$tableau['meteo_weather'] = wunderground_meteo2weather($tableau['meteo'], $tableau['periode']);
 	}
 
 	return $tableau;
 }
 
-function wunderground_xml2infos($xml, $lieu){
+function wunderground_xml2infos($xml){
 	$tableau = array();
 
 	// On stocke les informations disponibles dans un tableau standard

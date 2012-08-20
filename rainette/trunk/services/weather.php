@@ -12,6 +12,7 @@ function weather_service2cache($lieu, $mode) {
 	return $f;
 }
 
+
 function weather_service2url($lieu, $mode) {
 
 	include_spip('inc/config');
@@ -25,6 +26,7 @@ function weather_service2url($lieu, $mode) {
 	return $url;
 }
 
+
 function weather_url2flux($url) {
 
 	include_spip('inc/xml');
@@ -33,12 +35,14 @@ function weather_url2flux($url) {
 	return $flux;
 }
 
+
 function weather_meteo2icone($meteo) {
 	$icone = 'na';
 	if (($meteo >= 0) && ($meteo < 48)) $icone = strval($meteo);
 
 	return $icone;
 }
+
 
 /**
  * lire le xml fournit par le service meteo et en extraire les infos interessantes
@@ -102,6 +106,7 @@ function weather_xml2previsions($xml){
 	return $tableau;
 }
 
+
 function weather_xml2conditions($xml){
 	$tableau = array();
 	$n = spip_xml_match_nodes(",^cc,",$xml,$conditions);
@@ -142,6 +147,7 @@ function weather_xml2conditions($xml){
 
 	return $tableau;
 }
+
 
 function weather_xml2infos($xml, $lieu){
 	$tableau = array();

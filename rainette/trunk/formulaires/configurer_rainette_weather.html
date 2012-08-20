@@ -6,10 +6,25 @@
 
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:rainette:legende_configurer_inscription:></legend>
+			<p><:rainette:info_configurer_cle_aucune:></p>
+		</fieldset>
+
+		<fieldset>
+			<legend><:rainette:legende_configurer_affichage:></legend>
+			<ul>
+				<INCLURE{fond=formulaires/inc-configurer_unite,
+					service=weather,
+					env} />
+			</ul>
+		</fieldset>
+
+		<fieldset>
+			<legend><:rainette:legende_configurer_utilisation:></legend>
+			<p><:rainette:info_utilisation_weather:></p>
+		</fieldset>
 		<ul>
-			<INCLURE{fond=formulaires/inc-configurer_unite,
-				service=weather,
-				env} />
 		</ul>
 
 		<input type="hidden" name="_meta_casier" value="rainette/weather" />

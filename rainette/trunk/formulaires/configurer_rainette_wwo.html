@@ -6,17 +6,32 @@
 
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
-			<INCLURE{fond=formulaires/inc-configurer_unite,
-				service=wwo,
-				env} />
-			#SET{url, <a class="spip_out" href="http://www.worldweatheronline.com/register.aspx">World Weather Online</a>}
-			<INCLURE{fond=formulaires/inc-configurer_cle,
-				service=wwo,
-				url=#GET{url},
-				taille=22,
-				env } />
-		</ul>
+		<fieldset>
+			<legend><:rainette:legende_configurer_inscription:></legend>
+			<ul>
+				#SET{url, <a class="spip_out" href="http://www.worldweatheronline.com/register.aspx">World Weather Online</a>}
+				<INCLURE{fond=formulaires/inc-configurer_cle,
+					service=wwo,
+					url=#GET{url},
+					taille=22,
+					env } />
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend><:rainette:legende_configurer_affichage:></legend>
+			<ul>
+				<INCLURE{fond=formulaires/inc-configurer_condition,
+					service=wwo,
+					env } />
+				<INCLURE{fond=formulaires/inc-configurer_unite,
+					service=wwo,
+					env} />
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend><:rainette:legende_configurer_utilisation:></legend>
+			<p><:rainette:info_utilisation_wwo:></p>
+		</fieldset>
 
 		<input type="hidden" name="_meta_casier" value="rainette/wwo" />
 		<p class="boutons">

@@ -34,6 +34,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_configurer_unite' => 'Choisissez le système d\'unité dans lequel seront exprimées les données météorologiques.',
 	'info_configurer_cle' => 'Ce service nécessite une clé d\'inscription pour être utilisé. Veuillez acquérir cette clé sur @url@ et la saisir ci-dessous.',
+	'info_configurer_cle_aucune' => 'Ce service ne nécessite aucune clé d\'inscription pour être utilisé.',
+	'info_configurer_condition' => 'Choisissez le mode d\'affichage du résumé et de l\'icone représentatifs d\'une condition météorologique donnée.',
+	'info_utilisation_weather' => 'Les conditions....',
+	'info_utilisation_wwo' => 'Les conditions....',
+	'info_utilisation_wunderground' => 'Les conditions....',
 
 	// J
 	'jour' => 'jour',
@@ -47,6 +52,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_unite_metrique' => 'Système métrique',
 	'label_unite_standard' => 'Système US impérial',
 	'label_cle' => 'Clé d\'inscription',
+	'label_condition' => 'Conditions météorologiques',
+	'label_condition_native' => 'Utilisation du résumé et de l\'icone fourni par ce service',
+	'label_condition_weather' => 'Utilisation du résumé et de l\'icone du service Weather.com (nécessite une conversion approximative de la condition)',
+	'legende_configurer_affichage' => 'Affichages des données',
+	'legende_configurer_inscription' => 'Enregistrement',
+	'legende_configurer_utilisation' => 'Conditions d\'utilisation',
 
 	// M
 	'meteo' => 'météo',

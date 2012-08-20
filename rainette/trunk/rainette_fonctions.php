@@ -36,7 +36,6 @@ function calculer_infos($lieu, $type, $service) {
 }
 
 // Filtres du plugin utilisables dans les squelettes et modeles
-// cf pour le choix des icones http://liquidweather.net/icons.php
 function rainette_icone_meteo($meteo, $taille='petit', $service='weather', $chemin='', $extension="png"){
 	$html_icone = '';
 	include_spip('inc/rainette_utils');
