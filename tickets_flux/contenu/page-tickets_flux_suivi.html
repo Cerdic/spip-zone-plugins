@@ -1,26 +1,32 @@
+[(#REM)
+	Les sites suivis. ]
 <h1><:tickets_flux:sites_suivis:></h1>
+<BOUCLE_tous_les_sites(SYNDIC){statut=publie}{0,10}{', '}{par url_site}>#NOM_SITE</BOUCLE_tous_les_sites>
 
-<BOUCLE_tous_les_sites(SYNDIC){statut=publie}{0,10}{', '}>#NOM_SITE</BOUCLE_tous_les_sites>
-
-
-<h2><:tickets_flux:resumes:></h2>
 
 [(#REM)
 	Les blocs contenant les résumés de chaque site suivi. ]
-<BOUCLE_resumes(SYNDIC){statut=publie}{0,10}>
+<h2><:tickets_flux:resumes:></h2>
+
+<BOUCLE_resumes(SYNDIC){statut=publie}{0,10}{par url_site}>
 
 	<dl class="site">
-		<dt><a href=="#URL_SITE">#NOM_SITE</a></dt>
+		<dt><a href=="#URL_SITE">#NOM_SITE</a><a href="[(#URL_ECRIRE{sites}|parametre_url{id_syndic,#ID_SYNDIC})]"><img class="bouton" src="#CHEMIN{img/cfg-16.png}" width="16" hight="16" alt="picto modifier site" /></a></dt>
 		<dd>
 			[(#REM)
-				Les tickets. ]
+				Les tickets.
+				Chaque ticket est un article du site syndiqué.
+				Du coup, apparemment on ne peut récupérer ni le id_ticket, ni le statut de chaque ticket
+				(sauf peut-etre dans le champ "tags" ? à tester;
+				testé; la réponse est : non; les tags sont des liens)
+			]
 
 			[(#REM) voir si on peut pas les mettre en micro-formats html, reconnus par les navigateurs...]
 			<BOUCLE_tickets(SYNDIC_ARTICLES){id_syndic}{!par date}{0,3}>
 			<dl class="ticket">
-				<dt>#TITRE</dt>
+				<dt>#TITRE #COMPTEUR_BOUCLE</dt>
 				<dd>#DESCRIPTIF</dd>
-				<dd>#DATE</dd>
+				<dd>[(#DATE|affdate)]</dd>
 				<dd>#STATUT</dd>
 			</dl>
 			</BOUCLE_tickets>

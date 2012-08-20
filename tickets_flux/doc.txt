@@ -12,6 +12,7 @@ Améliorations
 2. lien vers la page du ticket en question, une fois cliqué sur le titre du ticket
 - sur la page de centralisation : visualiser où en est la consommation de crédits pour chaque site
 - faire afficher un picto pour signifier le degré d'importance de chaque ticket, à la fois dans le flux RSS et sur la page de centralisation
+- faire en sorte que le bloc d'un site puisse se plier/déplier
 
 <del>3. page centralisatrice à la manière d'un netvibes</del>
 
