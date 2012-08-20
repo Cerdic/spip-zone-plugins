@@ -96,7 +96,7 @@ function pages_editer_contenu_objet($flux){
 	
 		// On cherche et remplace l'édition de la rubrique
 		$cherche = "/<li[^>]*class=('|\")editer editer_parent.*?<\/li>/is";
-		$remplace = '<li class="editer_page obligatoire'.($erreurs['champ_page'] ? ' erreur' : '').'">';
+		$remplace = '<li class="editer editer_page obligatoire'.($erreurs['champ_page'] ? ' erreur' : '').'">';
 		$remplace .= '<input type="hidden" name="id_parent" value="-1" />';
 		$remplace .= '<input type="hidden" name="id_rubrique" value="-1" />';
 		$remplace .= '<input type="hidden" name="modele" value="page" />';
