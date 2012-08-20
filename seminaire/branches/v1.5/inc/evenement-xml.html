@@ -1,26 +1,26 @@
-     <components>
-      <vevent>
-       <properties>
-        <dtstart>
-          <date-time>[(#DATE_DEBUT|date_ical)]</date-time>
-        </dtstart>
-        <summary>
+<components>
+  <vevent>
+    <properties>
+      <dtstart>
+        <date-time>[(#DATE_DEBUT|date_ical)]</date-time>
+      </dtstart>
+      <summary>
          <text>[(#EVTITRE|textebrut)]</text>
-        </summary>
-        <location>
+      </summary>
+      <location>
          <text>[(#LIEU|PtoBR|textebrut)]</text>
-        </location>
-        <status>CONFIRMED</status>
-        <description>
-         <text>
-[(#ABSTRACT|textebrut)]
-		</text>
-        </description>
-        <categories>
+      </location>
+      <status>CONFIRMED</status>
+      <description>
+        <text>
+          [(#ABSTRACT|textebrut)]
+    		</text>
+      </description>
+      <categories>
 			<BOUCLE_article(ARTICLES) {id_article=#ID_ARTICLE}>
 				[(#TITRE|textebrut)]
 			</BOUCLE_article>
-		</categories>
-       </properties>
-      </vevent>
-     </components>
+		  </categories>
+   </properties>
+  </vevent>
+</components>
