@@ -1,0 +1,18 @@
+<div>
+
+<form method='post' action='#ENV{action}'>
+#ACTION_FORMULAIRE{#ENV{action}}
+			<B_liaison>
+			
+				<select name="type_liaison">
+				<BOUCLE_liaison(DATA){source tableau, #CONFIG{a2a/types_liaisons}}{par valeur}>
+					<option value="#CLE"[(#CLE|=={#ENV{type_liaison}}|oui) selected="selected"]>#VALEUR</option>
+				</BOUCLE_liaison>
+				</select>
+				<input type='submit' name="save" class='submit' value='<:a2a:changer_type_liaison:>' />
+			</B_liaison>
+				
+		
+	
+</form>
+</div>
