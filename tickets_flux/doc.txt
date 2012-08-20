@@ -13,6 +13,8 @@ Améliorations
 
 <del>3. page centralisatrice à la manière d'un netvibes</del>
 
+- lors de l'importation d'un nouveau flux, le titre est le nom du site; devrait être : le nom du site + tickets les plus récents, ou "activité maintenance"
+- sur la page ?page=tickets_flux_suivi : ajouter possiblité de tri par ordre alphabétique (ou nombre de tickets pas finis...)
 
 A faire
 =======

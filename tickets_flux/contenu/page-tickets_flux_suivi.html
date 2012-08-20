@@ -7,7 +7,7 @@
 
 [(#REM)
 	Les blocs contenant les résumés de chaque site suivi. ]
-<BOUCLE_resumes(SYNDIC){statut=publie}{0,1}>
+<BOUCLE_resumes(SYNDIC){statut=publie}{0,10}>
 
 	<dl class="site">
 		<dt>#NOM_SITE</dt>
@@ -15,8 +15,8 @@
 			[(#REM)
 				Les tickets. ]
 
-			[(#REM) voir si on peut pas les mettre en micro-formats, html, reconnus par les navigateurs...]
-			<BOUCLE_tickets(SYNDIC_ARTICLES){id_syndic}{!par date}{0,1}>
+			[(#REM) voir si on peut pas les mettre en micro-formats html, reconnus par les navigateurs...]
+			<BOUCLE_tickets(SYNDIC_ARTICLES){id_syndic}{!par date}{0,3}>
 			<dl class="ticket">
 				<dt>#TITRE</dt>
 				<dd>#DESCRIPTIF</dd>
