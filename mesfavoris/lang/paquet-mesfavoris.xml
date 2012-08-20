@@ -3,6 +3,9 @@
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="fr" />
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/paquet-mesfavoris?lang_cible=ru">
+		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
+	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-mesfavoris?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
