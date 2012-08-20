@@ -1,0 +1,18 @@
+Description
+===========
+
+Ajoute une page qui affiche une liste de tickets : spip.php?page=tickets_flux
+Si on installe ce plugin sur plusieurs sites et que l'on déclare ces sites dans les sites syndiqués, on peut centraliser le suivi des tickets sur une page : spip.php?page=tickets_flux_suivi
+
+
+Améliorations
+=============
+
+1. choix du type de tickets depuis l'url (sévérité, statut...)
+2. lien vers la page du ticket en question, une fois cliqué sur le titre du ticket
+
+<del>3. page centralisatrice à la manière d'un netvibes</del>
+
+
+A faire
+=======

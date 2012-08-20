@@ -1,0 +1,32 @@
+<h1><:tickets_flux:sites_suivis:></h1>
+
+<BOUCLE_tous_les_sites(SYNDIC){statut=publie}{0,10}{', '}>#NOM_SITE</BOUCLE_tous_les_sites>
+
+
+<h2><:tickets_flux:resumes:></h2>
+
+[(#REM)
+	Les blocs contenant les résumés de chaque site suivi. ]
+<BOUCLE_resumes(SYNDIC){statut=publie}{0,1}>
+
+	<dl class="site">
+		<dt>#NOM_SITE</dt>
+		<dd>
+			[(#REM)
+				Les tickets. ]
+
+			[(#REM) voir si on peut pas les mettre en micro-formats, html, reconnus par les navigateurs...]
+			<BOUCLE_tickets(SYNDIC_ARTICLES){id_syndic}{!par date}{0,1}>
+			<dl class="ticket">
+				<dt>#TITRE</dt>
+				<dd>#DESCRIPTIF</dd>
+				<dd>#DATE</dd>
+				<dd>#STATUT</dd>
+			</dl>
+			</BOUCLE_tickets>
+
+		</dd>
+	</dl>
+
+</BOUCLE_resumes>
+
