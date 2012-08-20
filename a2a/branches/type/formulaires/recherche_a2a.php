@@ -19,7 +19,9 @@ function formulaires_recherche_a2a_charger($id_article){
 }
 
 function formulaires_recherche_a2a_verifier($id_article){
-	if ($nv_type_liaison!=''){
+	$nv_type_liaison=_request('type_liaison');
+	$types_liaions	= 	array_keys(lire_config('a2a/types_liaisons'));
+	if ($nv_type_liaison){
 		if (!in_array($nv_type_liaison,$types_liaions)){
 			return array('message_erreur'=>_T('a2a:type_inexistant'));
 		}
