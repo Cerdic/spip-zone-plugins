@@ -13,6 +13,7 @@ function a2a_upgrade($nom_meta_base_version,$version_cible){
 	$maj['0.3.0'] = array(array('sql_alter',array('TABLE spip_articles_lies CHANGE rang rang bigint(21) NOT NULL DEFAULT "0"')));
 	$maj['0.4.0'] = array(array('maj_tables',array('spip_articles_lies')));
 	$maj['0.5.0'] = array(array('a2a_maj_050'));
+	$maj['0.6.0'] = array(array('a2a_maj_060'));
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -23,6 +24,11 @@ function a2a_maj_050(){
 	
 }	
 
+function a2a_maj_060(){
+	sql_alter("TABLE spip_articles_lies CHANGE type_liaison type_liaison  VARCHAR(25)");
+	sql_alter("TABLE spip_articles_lies DROP PRIMARY KEY");
+	sql_alter("TABLE spip_articles_lies ADD PRIMARY KEY (id_article,id_article_lie,type_liaison)");
+}	
 
 function a2a_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_articles_lies");
