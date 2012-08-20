@@ -7,4 +7,5 @@
     <description>Ajoute un flux RSS des tickets ouverts. Voir en ligne <a href="../spip.php?page=tickets_flux">spip.php?page=tickets_flux</a>. Permet d'uniformiser ce flux entre plusieurs sites dans le cadre de la maintenance d'un parc. Voir en ligne <a href="../spip.php?page=tickets_flux">spip.php?page=tickets_flux_suivi</a></description>
     <options>tickets_flux_options.php</options>
     <necessite id="SPIP" version='[2.0.0;2.1.99]' />
+    <necessite id="ticketskiss" version="[1.0;]" />
 </plugin>

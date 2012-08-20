@@ -10,11 +10,14 @@ Améliorations
 
 1. choix du type de tickets depuis l'url (sévérité, statut...)
 2. lien vers la page du ticket en question, une fois cliqué sur le titre du ticket
+- sur la page de centralisation : visualiser où en est la consommation de crédits pour chaque site
+- faire afficher un picto pour signifier le degré d'importance de chaque ticket, à la fois dans le flux RSS et sur la page de centralisation
 
 <del>3. page centralisatrice à la manière d'un netvibes</del>
 
 - lors de l'importation d'un nouveau flux, le titre est le nom du site; devrait être : le nom du site + tickets les plus récents, ou "activité maintenance"
-- sur la page ?page=tickets_flux_suivi : ajouter possiblité de tri par ordre alphabétique (ou nombre de tickets pas finis...)
+- sur la page ?page=tickets_flux_suivi : ajouter possiblité de tri par ordre alphabétique (ou par nombre de tickets non finis...)
+- si on ne trouve aucun ticket non fini sur un site, afficher un picto vert indiquant "Aucun ticket en cours !"
 
 A faire
 =======
