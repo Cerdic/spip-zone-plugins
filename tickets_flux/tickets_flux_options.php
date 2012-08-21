@@ -4,6 +4,6 @@
  *
  */
 
-$syndication_integrale = "oui";
+$syndication_integrale = true;
 
 ?>

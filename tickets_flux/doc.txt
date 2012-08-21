@@ -5,6 +5,10 @@ Ajoute une page qui affiche une liste de tickets : spip.php?page=tickets_flux
 Si on installe ce plugin sur plusieurs sites et que l'on déclare ces sites dans les sites syndiqués, on peut centraliser le suivi des tickets sur une page : spip.php?page=tickets_flux_suivi
 
 
+Fonctionnement
+==============
+Sur une page de flux, on a seulement les données provenant du champ "descriptif" du ticket. Pour obtenir le détail il faut que la variable
+
 Notes
 =====
 
@@ -18,7 +22,7 @@ des tickets d'un site.
 Améliorations
 =============
 
-- choix du type de tickets depuis l'url (sévérité, statut...)
+- choix du type de tickets depuis l'url (sévérité, statut...); peut-etre plusierus types de flux ? tickets_flux, amelioration_flux...
 - lien vers la page du ticket en question, une fois cliqué sur le titre du ticket
 - sur la page de centralisation : visualiser où en est la consommation de crédits pour chaque site
 - faire afficher un picto pour signifier le degré d'importance de chaque ticket, à la fois dans le flux RSS et sur la page de centralisation
@@ -34,3 +38,12 @@ Fait
 
 A faire
 =======
+- les liens dans les tickets devraient pointer vers le ticket en question
+
+
+Evolutions
+==========
+
+- actuellement on a un flux par site; l'idées serait de mettre les tickets les plus urgents dans un seul flux
+- avoir un flux "urgences" avec des tickets provenant de plusieurs sites, classés par urgence
+- avoir un flux "améliorations", ou "mises à jour", avec les données de plusieurs sites

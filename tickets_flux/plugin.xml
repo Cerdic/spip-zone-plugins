@@ -8,4 +8,6 @@
     <options>tickets_flux_options.php</options>
     <necessite id="SPIP" version='[2.0.0;2.1.99]' />
     <necessite id="ticketskiss" version="[1.0;]" />
+    <utilise id="iterateurs" version="[1.0;]" />
+
 </plugin>
