@@ -239,7 +239,7 @@ class PDF extends FPDF
 
 	// idem que Query sauf qu'on lui passe le texte de la requete SQL et non la ressource du resultat de la requete
 	function Table($query, $data=array(), $champ_jointure='', $prop=array() ){
-		$this->Query(spip_query($query), $prop, $data, $champ_jointure); // execute la requete
+		$this->Query(spip_query($query), $data, $champ_jointure, $prop); // execute la requete
 	}
 
 }

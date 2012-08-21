@@ -21,7 +21,7 @@ function exec_pdf_membres()
 		echo minipres();
 	} else {
 		// on recupere ce qu'il faut pour faire la requete SQL pour generer la liste d'id_auteurs dont on a besoin pour recuperer les adresses et telephones
-		$where = _request('where_adherents');
+		$where = htmlspecialchars_decode(_request('where_adherents'));
 		$jointure = _request('jointure_adherents');
 		$statut = _request('statut_interne');
 		// la requete de base
@@ -42,7 +42,16 @@ function exec_pdf_membres()
 		$pdf->AddPage();
 
 		//On définit les colonnes (champs,largeur,intitulé,alignement)
-		$champs = description_table('spip_asso_membres');
+		$icExtras = @unserialize(str_replace('O:10:"ChampExtra"', 'a', $GLOBALS['meta']['iextras']));
+		if (!is_array($icExtras))
+			$icExtras = array();
+		$champsExtras = array();
+		foreach ($icExtras as $icExtra) {
+			if ($icExtra['table']=="asso_$objet")
+				$champsExtras[$icExtra['champ']] = $icExtra['label'];
+		}
+		$desc_table = charger_fonction('trouver_table', 'base'); // cf. http://programmer.spip.net/sql_showtable,619
+		$champs = $desc_table('spip_asso_membres');
 		$sent = _request('champs');
 		foreach ($champs['field'] as $k => $v) {
 			if ($sent[$k]=='on') {
@@ -53,21 +62,23 @@ function exec_pdf_membres()
 				$p = $type_txt?'L':($type_num?'R':'C');
 #				$n = ($type===false) ? 20 : (($type==0) ? 45 : 25);
 				$n = $type_txt?45:($type_num?20:25);
-				$pdf->AddCol($k,$n,_T('asso:adherent_libelle_' . $k), $p);
+				$lang_clef = 'adherent_libelle_'. $k;
+				$lang_trad = _T("asso:$lang_clef");
+				$pdf->AddCol($k,$n, utf8_decode(html_entity_decode($lang_clef!=str_replace(' ', '_', $lang_trad)?$lang_trad:$champsExtras[$k])) , $p);
 			}
 		}
 		// ainsi que les colonnes pour les champs hors table spip_asso_membres
 		include_spip('inc/association_coordonnees');
 		if ($sent['email']=='on') {
-			$pdf->AddCol('email',45 ,_T('asso:adherent_libelle_email'), 'C');
+			$pdf->AddCol('email',45 , utf8_decode(html_entity_decode(_T('asso:adherent_libelle_email'))), 'C');
 			$emails =  association_recuperer_emails($liste_id_auteurs);
 		}
 		if ($sent['adresse']=='on') {
-			$pdf->AddCol('adresse',45 ,_T('coordonnees:label_adresse'), 'L');
+			$pdf->AddCol('adresse',45 , utf8_decode(html_entity_decode(_T('coordonnees:label_adresse'))), 'L');
 			$adresses =  association_recuperer_adresses($liste_id_auteurs, '', "\n"," ");
 		}
 		if ($sent['telephone']=='on') {
-			$pdf->AddCol('telephone',30 ,_T('coordonnees:label_numero'), 'C');
+			$pdf->AddCol('telephone',30 , utf8_decode(html_entity_decode(_T('coordonnees:label_numero'))), 'C');
 			$telephones = association_recuperer_telephones($liste_id_auteurs);
 		}
 		$order = 'id_auteur';

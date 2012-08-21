@@ -816,19 +816,20 @@ function bloc_listepdf($objet, $params=array(), $prefixeLibelle='', $champsExclu
 	if (test_plugin_actif('FPDF')) { // liste
 		$res .= debut_cadre_enfonce('',true);
 		$res .= '<h3>'. _T('plugins_vue_liste') .'</h3>';
-		$res .= '<div class="formulaire_spip formulaire_asso_liste{$objet}s">';
-		$champsPresents = description_table("spip_asso_${objet}s");
-		$champsExtras = array();
+		$res .= '<div class="formulaire_spip formulaire_asso_liste_'.$objet.'s">';
 		$icExtras = @unserialize(str_replace('O:10:"ChampExtra"', 'a', $GLOBALS['meta']['iextras']));
 		if (!is_array($icExtras))
 			$icExtras = array();
+		$champsExtras = array();
 		foreach ($icExtras as $icExtra) {
-			if ($icExtra['table']=="asso_$objet") // 'table' ou '_type'
+			if ($icExtra['table']=="asso_$objet") // c'est un champ extra de la 'table' ou '_type' en cours d'usage
 				$champsExtras[$icExtra['champ']] = $icExtra['label'];
 		}
 		$frm = '<ul><li class="edit_champs">';
+		$desc_table = charger_fonction('trouver_table', 'base'); // http://doc.spip.org/@description_table deprecier donc preferer http://programmer.spip.net/trouver_table,620
+		$champsPresents = $desc_table("spip_asso_${objet}s");
 		foreach ($champsPresents['field'] as $k => $v) { // donner le menu des choix
-			if ( !in_array($k,$champsExclus) ) { // affichable/selectionnable (champ ayant un libelle declare et connu)
+			if ( !in_array($k, $champsExclus) ) { // affichable/selectionnable (champ ayant un libelle declare et connu)
 				$lang_clef = $prefixeLibelle.$k;
 				$lang_texte = _T('asso:'.$lang_clef);
 				if ( $lang_clef!=str_replace(' ', '_', $lang_texte) ) { // champ natif du plugin
@@ -846,7 +847,7 @@ function bloc_listepdf($objet, $params=array(), $prefixeLibelle='', $champsExclu
 			}
 		}
 		foreach ($params as $k => $v) { // on fait suivre les autres parametres dont la liste des auteurs a afficher
-			$frm .= "<input type='hidden' name='$k' value='$v' />";
+			$frm .= '<input type="hidden" name="'.$k.'" value="'. htmlspecialchars($v, ENT_QUOTES, $GLOBALS['meta']['charset']) .'" />'; // http://stackoverflow.com/questions/46483/htmlentities-vs-htmlspecialchars
 		}
 		$frm .= '</li></ul>';
 		$frm .= '<p class="boutons"><input type="submit" value="'. _T('asso:bouton_imprimer') .'" /></p>';
