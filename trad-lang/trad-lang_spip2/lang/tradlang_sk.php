@@ -238,7 +238,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_items_langue_inexistants' => 'V jazyku "@langue_longue@" (@langue@) neexistuje @nb@ položiek.',
 	'nb_items_langue_mere' => 'Hlavný jazyk tohto modulu obsahuje @nb@ položiek.',
 	'notice_affichage_limite' => 'Zobrazenie je obmedzené na @nb@ nepreložené jazykové reťazce.',
-	'notice_aucun_module_favori_priorite' => 'Žiaden modul s prioritou "@priorite@" sa nezhoduje.',
+	'notice_aucun_module_favori_priorite' => 'Žiadny taký modul s prioritou "@priorite@" sa nenašiel.',
 
 	// R
 	'readme' => 'Tento modul umožňuje správu jazykových súborov',
