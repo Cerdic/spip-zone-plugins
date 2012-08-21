@@ -21,7 +21,7 @@ des tickets d'un site.
 
 Améliorations
 =============
-
+- pouvoir attribuer un mot clé aux sites syndiqués qui doivent être listés par la boucle qui affiche tous les sites; avec une variable de configuration ou une valeur avec cfg (afin d'éviter de lister TOUS les sites syndiqués d'un site);
 - choix du type de tickets depuis l'url (sévérité, statut...); peut-etre plusierus types de flux ? tickets_flux, amelioration_flux...
 - lien vers la page du ticket en question, une fois cliqué sur le titre du ticket
 - sur la page de centralisation : visualiser où en est la consommation de crédits pour chaque site
