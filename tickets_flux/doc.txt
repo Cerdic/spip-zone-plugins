@@ -38,7 +38,8 @@ Fait
 
 A faire
 =======
-- les liens dans les tickets devraient pointer vers le ticket en question
+- les liens dans les tickets devraient pointer vers le ticket en question (en cours...)
+- remplacer les codes des tickets, soit par un picto, soit par leur nom vrai
 
 
 Evolutions

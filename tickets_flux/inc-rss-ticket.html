@@ -20,12 +20,13 @@
 		]
 	[&lt;div class='rss_texte'&gt;(#TEXTE|
 			image_reduire{500,0}|ptobr|texte_backend)&lt;/div&gt;
-	][&lt;div class="hyperlien"&gt;<:voir_en_ligne|html2unicode:> : &lt;a href="(#URL_ECRIRE{ticket_afficher}|parametre_url{id_ticket,#ID_TICKET})" class="spip_out"&gt;[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]}|texte_backend)]&lt;/a&gt;&lt;/div&gt;
+	][&lt;div class="hyperlien"&gt;<:voir_en_ligne|html2unicode:> : &lt;a href="(#URL_ECRIRE{ticket_afficher}|parametre_url{id_ticket,#ID_TICKET})" class="spip_out"&gt;[(#URL_ECRIRE{ticket_afficher}|parametre_url{id_ticket,#ID_TICKET})]&lt;/a&gt;&lt;/div&gt;
 	]
+	[&lt;div class='rss_auteurs'&gt;(#LES_AUTEURS|texte_backend)&lt;/div&gt;]
 	[&lt;div class='rss_exemple'&gt;(#EXEMPLE|texte_backend)&lt;/div&gt;]
-	[&lt;div class='rss_sev'&gt;(#SEVERITE|texte_backend)&lt;/div&gt;]
-	[&lt;div class='rss_type'&gt;(#TYPE|texte_backend)&lt;/div&gt;]
-	[&lt;div class='rss_statut'&gt;(#STATUT|texte_backend)&lt;/div&gt;]
+	[&lt;div class='rss_sev'&gt;<:tickets_flux:severite|html2unicode:>(#SEVERITE|texte_backend)&lt;/div&gt;]
+	[&lt;div class='rss_type'&gt;<:tickets_flux:type|html2unicode:>(#TYPE|texte_backend)&lt;/div&gt;]
+	[&lt;div class='rss_statut'&gt;<:tickets_flux:statut|html2unicode:>(#STATUT|texte_backend)&lt;/div&gt;]
 	</content:encoded>
 ]
 

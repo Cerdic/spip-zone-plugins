@@ -10,9 +10,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // R
     'resumes' => "Résumés",
 	// S
-	'sites_suivis' => 'Sites suivis',
+	'severite' => "Sévérité",
+    'sites_suivis' => 'Sites suivis',
+    'statut' => 'Statut',
     // T
     'titre_page' => "Les tickets du site ",
+    'type' => "Type",
 
     );
 
