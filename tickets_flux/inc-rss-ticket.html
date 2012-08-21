@@ -2,8 +2,8 @@
 <BOUCLE_un_ticket(TICKETS){id_ticket}>
 	<item[ xml:lang="(#LANG)"]>
 		<title>[(#TITRE|supprimer_tags|texte_backend)]</title>
-		<link>#URL_TICKET</link>
-		[<guid isPermaLink="true">(#URL_TICKET|url_absolue)</guid>]
+		<link>[(#URL_ECRIRE{ticket_afficher}|parametre_url{id_ticket,#ID_TICKET})]</link>
+		[<guid isPermaLink="true">(#URL_ECRIRE{ticket_afficher}|parametre_url{id_ticket,#ID_TICKET})</guid>]
 		[<dc:date>(#DATE|date_iso)</dc:date>]
 		<dc:format>text/html</dc:format>
 		[<dc:language>(#LANG)</dc:language>]
@@ -20,7 +20,7 @@
 		]
 	[&lt;div class='rss_texte'&gt;(#TEXTE|
 			image_reduire{500,0}|ptobr|texte_backend)&lt;/div&gt;
-	][&lt;div class="hyperlien"&gt;<:voir_en_ligne|html2unicode:> : &lt;a href="(#URL_TICKET)" class="spip_out"&gt;[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]}|texte_backend)]&lt;/a&gt;&lt;/div&gt;
+	][&lt;div class="hyperlien"&gt;<:voir_en_ligne|html2unicode:> : &lt;a href="(#URL_ECRIRE{ticket_afficher}|parametre_url{id_ticket,#ID_TICKET})" class="spip_out"&gt;[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]}|texte_backend)]&lt;/a&gt;&lt;/div&gt;
 	]
 	[&lt;div class='rss_exemple'&gt;(#EXEMPLE|texte_backend)&lt;/div&gt;]
 	[&lt;div class='rss_sev'&gt;(#SEVERITE|texte_backend)&lt;/div&gt;]
