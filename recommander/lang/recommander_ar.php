@@ -1,17 +1,20 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.net/tradlang_module/recommander?lang_cible=ar
+// ** ne pas modifier le fichier **
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
 	// D
-	'destinataire' => "&#1573;&#1604;&#1609;",
+	'destinataire' => 'إلى',
 
 	// R
-	'recommander' => '<MODIF>&#1573;&#1606;&#1588;&#1585; &#1575;&#1604;&#1605;&#1602;&#1575;&#1604;',
-	'recommander_lecture'=> "<MODIF>&#1571;&#1607;&#1604;&#1575;, @from@ &#1610;&#1606;&#1589;&#1581;&#1603; &#1604;&#1602;&#1585;&#1575;&#1569;&#1577; &#1575;&#1604;&#1605;&#1602;&#1575;&#1604;: ",
-	'recommander_message'=> "&#1573;&#1606;&#1588;&#1585;",
-	'recommander_titre' => '&#1573;&#1602;&#1585;&#1575;&#1569; &#1601;&#1610; @nom_site@ --',
+	'recommander' => 'إنشر المقال', # MODIF
+	'recommander_lecture' => 'أهلا, @from@ ينصحك لقراءة المقال: ', # MODIF
+	'recommander_message' => 'إنشر',
+	'recommander_titre' => 'إقراء في @nom_site@ --'
 );
-
 
 ?>
