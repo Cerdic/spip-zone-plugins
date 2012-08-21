@@ -1,0 +1,13 @@
+
+
+<h1>tentative de listing de tous les sites SPIP du serveur</h1>
+
+<ul>
+
+<BOUCLE_sites(DATA){source glob, /sites/*/html}>
+<li>#CLE :
+<a href="[http://(#VALEUR|substr{7,50}|replace{'/html/',''})]">[http://(#VALEUR|substr{7,50}|replace{'/html/',''})]</a>
+</li>
+</BOUCLE_sites>
+
+</ul>

@@ -1,13 +1,13 @@
 <plugin>
     <nom>Tickets flux</nom>
     <prefix>tickets_flux</prefix>
-    <version>0.1.0</version>
-    <etat>dev</etat>
-    <auteur>cym</auteur>
+    <version>0.1.1</version>
+    <etat>experimental</etat>
+    <auteur>Cyril MARION</auteur>
+    <licence>GPL</licence>
     <description>Ajoute un flux RSS des tickets ouverts. Voir en ligne <a href="../spip.php?page=tickets_flux">spip.php?page=tickets_flux</a>. Permet d'uniformiser ce flux entre plusieurs sites dans le cadre de la maintenance d'un parc. Voir en ligne <a href="../spip.php?page=tickets_flux_suivi">spip.php?page=tickets_flux_suivi</a></description>
     <options>tickets_flux_options.php</options>
     <necessite id="SPIP" version='[2.0.0;2.1.99]' />
     <necessite id="ticketskiss" version="[1.0;]" />
-    <utilise id="iterateurs" version="[1.0;]" />
-
+    <utilise id="iterateurs" version="[0.6.0;]" />
 </plugin>
