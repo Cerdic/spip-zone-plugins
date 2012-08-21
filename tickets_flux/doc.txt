@@ -31,6 +31,7 @@ Améliorations
 - lors de l'importation d'un nouveau flux, le titre est le nom du site; devrait être : le nom du site + tickets les plus récents, ou "activité maintenance"
 - sur la page ?page=tickets_flux_suivi : ajouter possiblité de tri par ordre alphabétique (ou par nombre de tickets non finis...)
 - si on ne trouve aucun ticket non fini sur un site, afficher un picto vert indiquant "Aucun ticket en cours !"
+- passer en SPIP 3.x :-P
 
 Fait
 ====
