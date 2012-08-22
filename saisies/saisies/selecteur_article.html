@@ -11,6 +11,7 @@
   - multiple : si oui, on peut selectionner plusieurs articles
   - afficher_langue : si oui, on affiche la langue de l'objet selectionne
   - afficher_art_dans_langue_interface : si oui, on n'affiche que les articles de la langue de l'interface
+  - limite_branche : branche dans laquelle on limite le selecteur
   - defaut : valeur par defaut si pas présente dans l'environnement
   - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
 	 
@@ -36,4 +37,5 @@
 	afficher_langue=#ENV{afficher_langue,''},
 	filtrer_langue_article=#GET{filtrer_langue_article,''},
 	select=[(#ENV{multiple}|?{0,1})],
+	limite_branche=#ENV{limite_branche,''},
 	rubriques=0})]
