@@ -1,0 +1,85 @@
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+#CACHE{0}
+
+
+<div class="articles liste-objets selection-articles">
+<!--
+[<base href="(#EVAL{_DIR_PB_REL})" >]
+-->
+<!--
+[<base href="(#EVAL{_DIR_PB_REL})" >]
+-->
+<B_selection>
+<div class='cadre cadre-liste'>
+<table id="selection_articles" class="spip liste">
+	<caption>
+		<strong class="caption" [style="background-image:url((#CHEMIN{imgs/emblem-favorite.png}));"]>
+			Sélection d’articles
+		</strong>
+	</caption>
+	
+
+<BOUCLE_selection(ARTICLES pb_selection){statut==prop|prepa|publie|refuse|poubelle}{par ordre}{spip_pb_selection.id_rubrique=#ENV{id_rubrique}}>
+	<tr class='tr_liste' id="selection#ID_ARTICLE">
+		[(#REM)
+			[<td><img src="(#EVAL{puce_statut_article_dist([(#ID_ARTICLE)], "[(#STATUT)]", "[(#ID_RUBRIQUE)]", 'article', 0) }|extraire_attribut{src}|url_absolue)" alt="" /></td>]
+		]
+
+		[(#EVAL{autoriser('modifier','rubrique', [(#ENV{id_rubrique})])==1}|?{" ",""})
+		<td>
+			[(#EVAL{#COMPTEUR_BOUCLE!=1}|?{" ",""})
+				<div><a href="#" onclick="$('#pave_selection').load('?action=selection_interface&amp;id_rubrique=#ENV{id_rubrique}&amp;remonter_ordre=#ID_ARTICLE'); return false;"><img src="#CHEMIN{imgs/fleche-haut.gif}" /></a></div> 
+			]
+			[(#EVAL{#COMPTEUR_BOUCLE!=#TOTAL_BOUCLE}|?{" ",""})
+				<div><a href="#" onclick="$('#pave_selection').load('?action=selection_interface&amp;id_rubrique=#ENV{id_rubrique}&amp;descendre_ordre=#ID_ARTICLE'); return false;"><img src="#CHEMIN{imgs/fleche-bas.gif}" /></a></div> 
+			]
+		</td>
+		]
+		<td>
+		[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})]
+		</td>
+		<td class="arial2" style="width: 100%;"><a href="?exec=article&amp;id_article=#ID_ARTICLE">[(#SURTITRE)<br />]<b>#TITRE</b>[<br />(#SOUSTITRE)]</a></td>
+		<td class="arial1" style="white-space:nowrap;">[(#DATE|affdate)]</td>
+		<td style='vertical-align: middle; text-align: center; padding: 0px 20px; width:70px;'>[<a href="?exec=article&amp;id_article=#ID_ARTICLE" [style="display: block; height:(#LOGO_ARTICLE|image_reduire{70,60}|extraire_attribut{height})px]"><img src="(#LOGO_ARTICLE|image_reduire{70,60}|extraire_attribut{src}|url_absolue)" [style="(#LOGO_ARTICLE|image_reduire{70,60}|extraire_attribut{style})]"  /></a>]</td>
+		<td class="arial1"><b style="white-space: nowrap;">N°#ID_ARTICLE</b></td>
+		[(#EVAL{autoriser('modifier','rubrique', [(#ENV{id_rubrique})])==1}|?{" ",""})
+		<td>
+			<a title='Retirer de la liste' onclick="$('#pave_selection').load('?action=selection_interface&amp;id_rubrique=#ENV{id_rubrique}&amp;supprimer_ordre=#ID_ARTICLE'); return false;" href="#">[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</a>
+		</td>
+		]
+	</tr>	
+</BOUCLE_selection>
+</table></div>
+
+<script>
+	$(function() {
+		$( "#selection_articles" ).sortable({items:"tr.tr_liste"});
+		$( "#selection_articles" ).disableSelection();
+		$( "#selection_articles" ).bind("sortupdate", function(event, ui) {
+			var ordre = $(this).sortable('toArray').toString();
+			$('#pave_selection').load('?action=selection_interface&id_rubrique=#ENV{id_rubrique}&nouvel_ordre='+ordre);
+
+		});
+	});
+</script>
+</B_selection>
+
+
+[(#EVAL{autoriser('modifier','rubrique', [(#ENV{id_rubrique})])==1}|?{" ",""})
+	<form onsubmit="valeur=Math.floor($('#ajouter_selection').attr('value')); if (valeur > 0){ $('#pave_selection').load('?action=selection_interface&amp;id_rubrique=#ENV{id_rubrique}&amp;ajouter_selection='+valeur); }; return false;" action="index.php" method="get">
+      <div style=" padding: 5px 10px;">
+         <input type="hidden" name="exec" value="rubrique" />
+         <input type="hidden" name="id_rubrique" value="#ENV{id_rubrique}" />
+			<div style="float: right;">
+				 <input id="ajouter_selection" type="text" />
+				 <input type="submit" value="Ajouter" class="fondo" />
+			</div>
+         <label for="ajouter_selection">Sélectionner l'article numéro : </label>
+         <div class="nettoyeur"></div>
+      </div>
+	</form>
+
+]
+
+
+</div>
