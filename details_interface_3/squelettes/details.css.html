@@ -125,9 +125,6 @@ body {
 	}
 }
 
-.liste_items .item, .liste-items .item {
-
-}
 
 .simple .inner {
 	-spip-border-radius: 5px;
@@ -204,7 +201,7 @@ h1, .h1 {
 				
 				.item {
 					padding: 0px;
-					
+										
 					a {
 						padding: 5px 18px;
 						display: block;
@@ -217,6 +214,9 @@ h1, .h1 {
 						}
 					}
 				}	
+				> .item:last-child {
+					border-bottom: 0px;
+				}
 			}
 		}
 	}
@@ -728,14 +728,14 @@ div.titrem, h3.titrem {
 		border-color: #ccc;
 		
 		strong.on {
-					background-color: #[(#ENV{foncee}|couleur_luminance{0.55})];
-					-spip-box-shadow:  0px 0px 10px #[(#ENV{foncee}|couleur_luminance{0.75})] inset;
+					background-color: #[(#ENV{foncee})];
+					-spip-box-shadow:  0px 0px 10px #[(#ENV{foncee}|couleur_luminance{0.80})] inset;
 		
 		}
 		
 		a {
 			background-color: #eeeeee;
-			-spip-gradient: top, #ffffff, #dddddd;
+			-spip-gradient: top, #ffffff, #eeeeee;
 			
 			. :hover, . :focus {
 				background-color: white;
