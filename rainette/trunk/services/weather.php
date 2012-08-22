@@ -137,11 +137,14 @@ function weather_xml2conditions($xml){
 
 			$tableau['visibilite'] = intval($conditions['vis'][0]);
 
-			$tableau['code_icone'] = intval($conditions['icon'][0]);
-			$tableau['url_icone'] = '';
-			$tableau['desc_icone'] = '';
+			$tableau['code_meteo'] = intval($conditions['icon'][0]);
+			$tableau['icon_meteo'] = '';
+			$tableau['desc_meteo'] = $conditions['t'][0];
+
 			$tableau['periode'] = '';
-			$tableau['meteo'] = $tableau['code_icone'];
+
+			$tableau['icone'] = $tableau['code_meteo'];
+			$tableau['resume'] = meteo2resume($tableau['code_meteo']);
 		}
 	}
 

@@ -36,38 +36,40 @@ function calculer_infos($lieu, $type, $service) {
 }
 
 // Filtres du plugin utilisables dans les squelettes et modeles
-function rainette_icone_meteo($meteo, $taille='petit', $service='weather', $chemin='', $extension="png"){
-	$html_icone = '';
-	include_spip('inc/rainette_utils');
-	if (!$chemin) $chemin = _RAINETTE_ICONES_PATH.$taille.'/';
-	$temps = meteo2icone($meteo, $service);
+function rainette_icone_meteo($icone, $taille='petit', $service='weather', $chemin='', $extension="png"){
 
-	// Le dossier personnalise ou le dossier passe en argument a bien l'icone requise
-	if ($img = find_in_path($chemin.$temps.'.'.$extension)) {
-		list ($l,$h) = @getimagesize($img);
-		$html_icone = '<img src="'.$img.'" alt="etat meteo" title="'.rainette_resume_meteo($meteo).'" width="'.$l.'" height="'.$h.'" />';
+	$html_icone = '';
+
+	if (is_array($icone)) {
+		list ($l,$h) = @getimagesize($icone['url']);
+		$html_icone = '<img src="'.$icone['url'].'" alt="etat meteo" title="'.rainette_resume_meteo($icone['code']).'" width="'.$l.'" height="'.$h.'" />';
 	}
-	// Le dossier personnalise n'a pas d'image, on prend l'icone par defaut dans le repertoire img_meteo/
-	elseif (($chemin = 'img_meteo/'.$taille.'/') && ($img = find_in_path($chemin.$temps.'.'.$extension))) {
-		list ($l,$h) = @getimagesize($img);
-		$html_icone = '<img src="'.$img.'" alt="etat meteo" title="'.rainette_resume_meteo($meteo).'" width="'.$l.'" height="'.$h.'" />';
+	else {
+		if (!$chemin) $chemin = _RAINETTE_ICONES_PATH.$taille.'/';
+
+		// Le dossier personnalise ou le dossier passe en argument a bien l'icone requise
+		if ($img = find_in_path($chemin.$icone.'.'.$extension)) {
+			list ($l,$h) = @getimagesize($img);
+			$html_icone = '<img src="'.$img.'" alt="etat meteo" title="'.rainette_resume_meteo($icone).'" width="'.$l.'" height="'.$h.'" />';
+		}
+		// Le dossier personnalise n'a pas d'image, on prend l'icone par defaut dans le repertoire img_meteo/
+		elseif (($chemin = 'img_meteo/'.$taille.'/') && ($img = find_in_path($chemin.$icone.'.'.$extension))) {
+			list ($l,$h) = @getimagesize($img);
+			$html_icone = '<img src="'.$img.'" alt="etat meteo" title="'.rainette_resume_meteo($icone).'" width="'.$l.'" height="'.$h.'" />';
+		}
 	}
+
 	return $html_icone;
 }
 
 function rainette_resume_meteo($meteo){
 	include_spip('inc/rainette_utils');
 
-	// On utilise l'option de _T permettant de savoir si un item existe ou pas
-	$resume = _T('rainette:meteo_' . $meteo, array(), array('force' => false));
-	if (!$resume)
-		$resume = _T('rainette:meteo_na');
-
-	return ucfirst($resume." ($meteo)");
+	return meteo2resume($meteo);
 }
 
 function rainette_afficher_direction($direction){
-	static $liste_direction = 'N:NNE:NE:ENE:E:ESE:SE:SSE:S:SSW:SW:WSW:W:WNW:NW:NNW';
+	static $liste_direction = 'N:NNE:NE:ENE:E:ESE:SE:SSE:S:SSW:SW:WSW:W:WNW:NW:NNW:V';
 
 	include_spip('inc/rainette_utils');
 	$direction_abregee = (intval($direction)) ? angle2direction($direction) : $direction;

@@ -1,10 +1,10 @@
 <?php
 
-define('_RAINETTE_WUNDERGROUND_URL_BASE', 'http://api.wunderground.com/api');
+define('_RAINETTE_WUNDERGROUND_URL_BASE_REQUETE', 'http://api.wunderground.com/api');
+define('_RAINETTE_WUNDERGROUND_URL_BASE_ICONE', 'http://icons.wxug.com/i/c');
 define('_RAINETTE_WUNDERGROUND_JOURS_PREVISIONS', 3);
 define('_RAINETTE_WUNDERGROUND_SUFFIXE_METRIQUE', 'c:mb:km:kph');
 define('_RAINETTE_WUNDERGROUND_SUFFIXE_STANDARD', 'f:in:mi:mph');
-
 
 function wunderground_service2cache($lieu, $mode) {
 
@@ -37,9 +37,14 @@ function wunderground_service2url($lieu, $mode) {
 		$query = $pays . '/' . $ville;
 	}
 
-	$url = _RAINETTE_WUNDERGROUND_URL_BASE
+	// Identification de la langue du resume
+	// TODO : creer une fonction de transcodage prefixe spip vers prefixe wunderground
+	$langue = strtoupper($GLOBALS['spip_lang']);
+
+	$url = _RAINETTE_WUNDERGROUND_URL_BASE_REQUETE
 		.  '/' . $cle
 		.  '/' . $demande
+		.  '/lang:' . $langue
 		.  '/q'
 		.  '/' . $query . '.xml';
 
@@ -57,42 +62,6 @@ function wunderground_url2flux($url) {
 	return $xml;
 }
 
-function wunderground_meteo2icone($meteo, $periode=0) {
-	static $wunderground2weather = array(
-							'chanceflurries'=> array('41','46'),
-							'chancerain'=> array('39','45'),
-							'chancesleet'=> array('39','45'),
-							'chancesleet'=> array('41','46'),
-							'chancesnow'=> array('41','46'),
-							'chancetstorms'=> array('38','47'),
-							'chancetstorms'=> array('38','47'),
-							'clear'=> array('32','31'),
-							'cloudy'=> array('26','26'),
-							'flurries'=> array('15','15'),
-							'fog'=> array('20','20'),
-							'hazy'=> array('21','21'),
-							'mostlycloudy'=> array('28','27'),
-							'mostlysunny'=> array('34','33'),
-							'partlycloudy'=> array('30','29'),
-							'partlysunny'=> array('28','27'),
-							'sleet'=> array('5','5'),
-							'rain'=> array('11','11'),
-							'sleet'=> array('5','5'),
-							'snow'=> array('16','16'),
-							'sunny'=> array('32','31'),
-							'tstorms'=> array('4','4'),
-							'thunderstorms'=> array('4','4'),
-							'thunderstorm'=> array('4','4'),
-							'unknown'=> array('4','4'),
-							'cloudy'=> array('26','26'),
-							'scatteredclouds'=> array('30','29'),
-							'overcast'=> array('26','26'));
-
-	$icone = 'na';
-	if (array_key_exists($meteo,  $wunderground2weather))
-		$icone = strval($wunderground2weather[$meteo][$periode]);
-	return $icone;
-}
 
 function wunderground_meteo2weather($meteo, $periode=0) {
 	static $wunderground2weather = array(
@@ -195,9 +164,7 @@ function wunderground_xml2previsions($xml){
 
 function wunderground_xml2conditions($xml){
 	$tableau = array();
-
-	// Tableau de conversion de la tendance de pression
-	static $tendance2weather = array(0 => 'steady', 1 => 'rising', 2 => 'falling');
+	include_spip('inc/rainette_utils');
 
 	// On stocke les informations disponibles dans un tableau standard
 	if (isset($xml['children']['current_observation'][0]['children'])) {
@@ -207,6 +174,7 @@ function wunderground_xml2conditions($xml){
 		$date_maj = (isset($conditions['observation_epoch'])) ? intval($conditions['observation_epoch'][0]['text']) : 0;
 		$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
 		// Station d'observation
+		// TODO : pour l'instant le champ full n'est pas complet et a une virgule apres la ville - http://gsfn.us/t/329p4
 		$tableau['station'] = (isset($conditions['observation_location']))
 			? trim($conditions['observation_location'][0]['children']['full'][0]['text'], ',')
 			: '';
@@ -225,7 +193,11 @@ function wunderground_xml2conditions($xml){
 		// Liste des conditions meteo extraites dans le systeme demande
 		$tableau['vitesse_vent'] = (isset($conditions['wind_'.$uv])) ? intval($conditions['wind_'.$uv][0]['text']) : '';
 		$tableau['angle_vent'] = (isset($conditions['wind_degrees'])) ? intval($conditions['wind_degrees'][0]['text']) : '';
-		$tableau['direction_vent'] = (isset($conditions['wind_dir'])) ? $conditions['wind_dir'][0]['text'] : '';
+		// TODO : a confirmer suite a la reponse au post - http://gsfn.us/t/32w74
+		// -> La documentation indique que les directions uniques sont fournies sous forme de texte comme North
+		//    alors que les autres sont des acronymes. On passe donc tout en acronyme
+		$tableau['direction_vent'] = (isset($conditions['wind_dir']))
+			? (strlen($conditions['wind_dir'][0]['text']) <= 3 ? $conditions['wind_dir'][0]['text'] : strtoupper(substr($conditions['wind_dir'][0]['text'], 0, 1))) : '';
 
 		$tableau['temperature_reelle'] = (isset($conditions['temp_'.$ut])) ? intval($conditions['temp_'.$ut][0]['text']) : '';
 		$tableau['temperature_ressentie'] = (isset($conditions['feelslike_'.$ut])) ? intval($conditions['feelslike_'.$ut][0]['text']) : '';
@@ -234,28 +206,38 @@ function wunderground_xml2conditions($xml){
 		$tableau['point_rosee'] = (isset($conditions['dewpoint_'.$ut])) ? intval($conditions['dewpoint_'.$ut][0]['text']) : '';
 
 		$tableau['pression'] = (isset($conditions['pressure_'.$up])) ? intval($conditions['pressure_'.$up][0]['text']) : '';
-		$tableau['tendance_pression'] = (isset($conditions['pressure_trend'])) ? $tendance2weather[intval($conditions['pressure_trend'][0]['text'])] : '';
+		$tableau['tendance_pression'] = (isset($conditions['pressure_trend'])) ? intval($conditions['pressure_trend'][0]['text']) : '';
 
 		$tableau['visibilite'] = (isset($conditions['visibility_'.$ud])) ? intval($conditions['visibility_'.$ud][0]['text']) : '';
 
 		// Code meteo, resume et icone natifs au service
-		$tableau['meteo'] = (isset($conditions['icon'])) ? $conditions['icon'][0]['text'] : '';
-		$tableau['url_icone'] = (isset($conditions['icon_url'])) ? $conditions['icon_url'][0]['text'] : '';
-		$tableau['resume'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['text'] : '';
-		// TODO : Pour compatibilite avec les anciens modeles -> a virer a terme
-		$tableau['code_icone'] = $tableau['meteo'];
+		$tableau['code_meteo'] = (isset($conditions['icon'])) ? $conditions['icon'][0]['text'] : '';
+		$tableau['icon_meteo'] = (isset($conditions['icon_url'])) ? $conditions['icon_url'][0]['text'] : '';
+		$tableau['desc_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['text'] : '';
 
 		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
 		// Pour ce service (cas actuel) le nom du fichier icone commence par "nt_" pour la nuit.
 		// TODO : prendre en compte a terme le nouvel indicateur de jour/nuit dans une prochaine version de WUI
-		$icone = basename($tableau['url_icone']);
+		$icone = basename($tableau['icon_meteo']);
 		if (strpos($icone, 'nt_') === false)
 			$tableau['periode'] = 0; // jour
 		else
 			$tableau['periode'] = 1; // nuit
 
-		// Determination du code meteo dans le systeme meteo de weather.com
-		$tableau['meteo_weather'] = wunderground_meteo2weather($tableau['meteo'], $tableau['periode']);
+		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
+		$condition = lire_config('rainette/wunderground/condition');
+		if ($condition == 'wunderground') {
+			// On affiche les conditions natives fournies par le service
+			$tableau['icone']['code'] = $tableau['code_meteo'];
+			$tableau['icone']['url'] = copie_locale($tableau['icon_meteo']);
+			$tableau['resume'] = ucfirst($tableau['desc_meteo']);
+		}
+		else {
+			// On affiche les conditions traduites dans le systeme weather.com
+			$meteo = wunderground_meteo2weather($tableau['code_meteo'], $tableau['periode']);
+			$tableau['icone'] = $meteo;
+			$tableau['resume'] = meteo2resume($meteo);
+		}
 	}
 
 	return $tableau;

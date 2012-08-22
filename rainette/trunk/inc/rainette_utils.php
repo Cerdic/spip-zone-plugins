@@ -18,6 +18,16 @@ function meteo2icone($meteo, $service='weather') {
 	return $icone;
 }
 
+function meteo2resume($meteo){
+
+	// On utilise l'option de _T permettant de savoir si un item existe ou pas
+	$resume = _T('rainette:meteo_' . $meteo, array(), array('force' => false));
+	if (!$resume)
+		$resume = _T('rainette:meteo_na');
+
+	return ucfirst($resume." ($meteo)");
+}
+
 function angle2direction($degre) {
 	$dir = '';
 	switch(round($degre / 22.5) % 16)

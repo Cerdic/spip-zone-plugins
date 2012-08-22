@@ -42,63 +42,6 @@ function wwo_url2flux($url) {
 	return $xml;
 }
 
-function wwo_meteo2icone($meteo) {
-	static $wwo2weather = array(
-							'395'=> array('41','46'),
-							'392'=> array('41','46'),
-							'389'=> array('38','47'),
-							'386'=> array('37','47'),
-							'377'=> array('6','6'),
-							'374'=> array('6','6'),
-							'371'=> array('14','14'),
-							'368'=> array('13','13'),
-							'365'=> array('6','6'),
-							'362'=> array('6','6'),
-							'359'=> array('11','11'),
-							'356'=> array('11','11'),
-							'353'=> array('9','9'),
-							'350'=> array('18','18'),
-							'338'=> array('16','16'),
-							'335'=> array('16','16'),
-							'332'=> array('14','14'),
-							'329'=> array('14','14'),
-							'326'=> array('13','13'),
-							'323'=> array('13','13'),
-							'320'=> array('18','18'),
-							'317'=> array('18','18'),
-							'314'=> array('8','8'),
-							'311'=> array('8','8'),
-							'308'=> array('40','40'),
-							'305'=> array('39','45'),
-							'302'=> array('11','11'),
-							'299'=> array('39','45'),
-							'296'=> array('9','9'),
-							'293'=> array('9','9'),
-							'284'=> array('10','10'),
-							'281'=> array('9','9'),
-							'266'=> array('9','9'),
-							'263'=> array('9','9'),
-							'260'=> array('20','20'),
-							'248'=> array('20','20'),
-							'230'=> array('16','16'),
-							'227'=> array('15','15'),
-							'200'=> array('38','47'),
-							'185'=> array('10','10'),
-							'182'=> array('18','18'),
-							'179'=> array('16','16'),
-							'176'=> array('40','49'),
-							'143'=> array('20','20'),
-							'122'=> array('26','26'),
-							'119'=> array('28','27'),
-							'116'=> array('30','29'),
-							'113'=> array('32','31'));
-
-	$icone = 'na';
-	if (array_key_exists($meteo,  $wwo2weather))
-		$icone = strval($wwo2weather[$meteo][0]);
-	return $icone;
-}
-
 
 function wwo_meteo2weather($meteo, $periode=0) {
 	static $wwo2weather = array(
@@ -227,8 +170,8 @@ function wwo_xml2conditions($xml){
 		$conditions = $xml['children']['current_condition'][0]['children'];
 
 		// Date d'observation
-		$date_maj = (isset($conditions['localobsdatetime'])) ? ', ' . $conditions['localobsdatetime'][0]['text'] : '';
-		$tableau['derniere_maj'] = date('Y-m-d H:i:s', strtotime($date_maj));
+		$date_maj = (isset($conditions['localobsdatetime'])) ? strtotime($conditions['localobsdatetime'][0]['text']) : '';
+		$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
 		// Station d'observation
 		$tableau['station'] = '';
 
@@ -265,20 +208,34 @@ function wwo_xml2conditions($xml){
 		}
 
 		// Code meteo, resume et icone natifs au service
-		$tableau['meteo'] = (isset($conditions['weathercode'])) ? intval($conditions['weathercode'][0]['text']) : '';
-		$tableau['url_icone'] = (isset($conditions['weathericonurl'])) ? $conditions['weathericonurl'][0]['text'] : '';
-		$tableau['resume'] = (isset($conditions['weatherdesc'])) ? $conditions['weatherdesc'][0]['text'] : '';
-		// TODO : Pour compatibilite avec les anciens modeles -> a virer a terme
-		$tableau['code_icone'] = $tableau['meteo'];
+		$tableau['code_meteo'] = (isset($conditions['weathercode'])) ? intval($conditions['weathercode'][0]['text']) : '';
+		$tableau['icon_meteo'] = (isset($conditions['weathericonurl'])) ? $conditions['weathericonurl'][0]['text'] : '';
+		$tableau['desc_meteo'] = (isset($conditions['weatherdesc'])) ? $conditions['weatherdesc'][0]['text'] : '';
 
 		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
 		// Pour ce service aucun indicateur n'est disponible
-		// -> on fait une approximation pour la nuit de 9PM a 5AM
+		// -> on utilise le nom de l'icone qui contient l'indication "night"
 		// TODO : a verifier si autre moyen
-		$tableau['periode'] = 0; // jour
+		$icone = basename($tableau['icon_meteo']);
+		if (strpos($icone, '_night') === false)
+			$tableau['periode'] = 0; // jour
+		else
+			$tableau['periode'] = 1; // nuit
 
-		// Determination du code meteo dans le systeme meteo de weather.com
-		$tableau['meteo_weather'] = wwo_meteo2weather($tableau['meteo'], $tableau['periode']);
+		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
+		$condition = lire_config('rainette/wwo/condition');
+		if ($condition == 'wwo') {
+			// On affiche les conditions natives fournies par le service
+			$tableau['icone']['code'] = $tableau['code_meteo'];
+			$tableau['icone']['url'] = copie_locale($tableau['icon_meteo']);
+			$tableau['resume'] = ucfirst($tableau['desc_meteo']);
+		}
+		else {
+			// On affiche les conditions traduites dans le systeme weather.com
+			$meteo = wwo_meteo2weather($tableau['code_meteo'], $tableau['periode']);
+			$tableau['icone'] = $meteo;
+			$tableau['resume'] = meteo2resume($meteo);
+		}
 	}
 
 	return $tableau;

@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'direction_SSE' => 'sud sud-est',
 	'direction_SSW' => 'sud sud-ouest',
 	'direction_SW' => 'sud-ouest',
+	'direction_V' => 'variable',
 	'direction_W' => 'ouest',
 	'direction_WNW' => 'ouest nord-ouest',
 	'direction_WSW' => 'ouest sud-ouest',
