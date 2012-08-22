@@ -211,7 +211,8 @@ Idem pour changer le fond, si l\'option ci-dessous le permet :@_CS_EXEMPLE_COULE
 @_CS_ASTER@Le format de ces balises personnalisées doit lister des couleurs existantes ou définir des couples «balise=couleur», le tout séparé par des virgules. Exemples : «gris, rouge», «faible=jaune, fort=rouge», «bas=#99CC11, haut=brown» ou encore «gris=#DDDDCC, rouge=#EE3300». Pour le premier et le dernier exemple, les balises autorisées sont : <code>[gris]</code> et <code>[rouge]</code> (<code>[fond gris]</code> et <code>[fond rouge]</code> si les fonds sont permis).',
 	'couleurs:nom' => 'Tout en couleurs',
 	'couleurs_fonds' => ', <b>[fond coul]texte[/coul]</b>, <b>[bg coul]texte[/coul]</b>',
-	'cs_comportement:description' => '@puce@ {{Logs.}} Obtenez de nombreux renseignements à propos du fonctionnement du Couteau Suisse dans les fichiers {spip.log} que l\'on peut trouver dans le répertoire : {<html>@_CS_DIR_TMP@</html>}[[%log_couteau_suisse%]]
+	'cs_comportement:description' => '@puce@ {{Logs.}} Obtenez de nombreux renseignements à propos du fonctionnement du Couteau Suisse dans les fichiers {spip.log} que l\'on peut trouver dans le répertoire : {<html>@_CS_DIR_LOG@</html>}.
+_ Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».[[%log_couteau_suisse%]]
 
 @puce@ {{Options SPIP.}} SPIP ordonne les plugins dans un ordre spécifique. Afin d\'être sûr que le Couteau Suisse soit en tête et gère en amont certaines options de SPIP, alors cochez l\'option suivante. Si les droits de votre serveur le permettent, le fichier {<html>@_CS_FILE_OPTIONS@</html>} sera automatiquement modifié pour inclure le fichier {<html>@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php</html>}.
 
@@ -220,6 +221,7 @@ Idem pour changer le fond, si l\'option ci-dessous le permet :@_CS_EXEMPLE_COULE
 @puce@ {{Requêtes externes.}} D\'une part, le Couteau Suisse vérifie régulièrement l\'existence d\'une version plus récente de son code et informe sur sa page de configuration d\'une mise à jour éventuellement disponible. D\'autre part, ce plugin comporte certains outils qui peuvent nécessiter d\'importer des librairies distantes.
 
 Si les requêtes externes de votre serveur posent des problèmes ou par souci d\'une meilleure sécurité, cochez les cases suivantes.[[%distant_off%]][[->%distant_outils_off%]]',
+	'cs_comportement_ko' => '{{Note :}} ce paramètre requiert un filtre de gravité réglé à plus de @gr2@ au lieu de @gr1@ actuellement.',
 	'cs_comportement:nom' => 'Comportements du Couteau Suisse',
 	'cs_distant_off' => 'Les vérifications de versions distantes',
 	'cs_distant_outils_off' => 'Les outils du Couteau Suisse ayant des fichiers distants',
@@ -761,6 +763,7 @@ _ • {Contrôle du cache} : option identique à la précédente, avec une écri
 	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour la journalisation des évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
 [[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en logs.}</q3>]][[Autres réglages :->@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]',
 	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en logs d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP. Le niveau par défaut est le niveau 5.',
+	'spip_log:description3' => '@puce@ Les logs du Couteau Suisse s\'activent ici : «[.->cs_comportement]».',
 	'spip_log:nom' => 'SPIP et les logs',
 	'stat_auteurs' => 'Les auteurs en stat',
 	'statuts_spip' => 'Uniquement les statuts SPIP suivants :',

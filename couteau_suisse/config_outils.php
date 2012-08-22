@@ -303,7 +303,7 @@ add_variable( array(
 	'format' => _format_CHAINE,
 	'defaut' => "'masquer'",
 	'code' => "define('_MOT_MASQUER', %s);",
-	'commentaire' => '!sql_countsel("spip_mots", "titre="._q(%s))?"<span style=\"color:red\">"._T("couteauprive:erreur_mot", array("mot"=>%s))."</span>":""',
+	'commentaire' => '!sql_countsel("spip_mots", "titre="._q(%s))?"<spanred>"._T("couteauprive:erreur_mot", array("mot"=>%s))."</span>":""',
 ));
 add_outil( array(
 	'id' => 'masquer',
@@ -450,6 +450,8 @@ add_variables( array(
 	'nom' => 'log_couteau_suisse',
 	'check' => 'couteauprive:cs_log_couteau_suisse',
 	'defaut' => 0,
+	'commentaire' => '(!defined("_SPIP30000") || _LOG_FILTRE_GRAVITE>=_LOG_INFO)?""
+			:_T("couteauprive:cs_comportement_ko", array("gr1"=>"{{"._LOG_FILTRE_GRAVITE."}}","gr2"=>"{{"._LOG_INFO." (INFO)}}"))',
 ), array(
 	'nom' => 'spip_options_on',
 	'check' => 'couteauprive:cs_spip_options_on',
@@ -471,9 +473,11 @@ add_outil( array(
 	'id' => 'cs_comportement',
 	'code:spip_options' => "%%distant_off%% %%distant_outils_off%%",
 	'pipelinecode:pre_description_outil' => 'if($id=="cs_comportement") {
-$tmp=(!%%spip_options_on%%||!$flux["actif"]||defined("_CS_SPIP_OPTIONS_OK"))?"":"<span style=\"color:red\">"._T("couteauprive:cs_spip_options_erreur")."</span>";
-$texte=str_replace(array("@_CS_FILE_OPTIONS_ERR@","@_CS_DIR_TMP@","@_CS_FILE_OPTIONS@"),
-	array($tmp,cs_root_canonicalize(_DIR_TMP),show_file_options()),$texte);
+$tmp=(!%%spip_options_on%%||!$flux["actif"]||defined("_CS_SPIP_OPTIONS_OK"))?"":"<spanred>"._T("couteauprive:cs_spip_options_erreur")."</span>";
+$texte=str_replace(
+	array("@_CS_FILE_OPTIONS_ERR@","@_CS_DIR_TMP@","@_CS_DIR_LOG@","@_CS_FILE_OPTIONS@"),
+	array($tmp,cs_root_canonicalize(_DIR_TMP),cs_root_canonicalize(defined("_DIR_LOG")?_DIR_LOG:_DIR_TMP),show_file_options()),
+	$texte);
 }',
 ));
 
@@ -536,7 +540,7 @@ add_variables( array(
 ));
 add_outil( array(
 	'id' => 'spip_log',
-	'description' => '<:spip_log::>' . (defined('_SPIP30000')?'[[->@puce@ %log_fileline%]][[->@puce@ %log_brut%]]<:spip_log:2:>[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]':''),
+	'description' => '<:spip_log::>' . (defined('_SPIP30000')?'[[->@puce@ %log_fileline%]][[->@puce@ %log_brut%]]<:spip_log:2:>[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]':'') . '<:spip_log:3:>',
 	'code:spip_options' => (defined('_SPIP30000')?'%%filtre_gravite_trace%%%%filtre_gravite%%%%log_brut%%%%log_fileline%%':'')
 		. '%%dir_log%%%%file_log%%%%file_log_suffix%%%%max_log%%%%taille_des_logs%%%%nombre_de_logs%%',
 	'categorie' =>'devel',
@@ -927,7 +931,7 @@ function cs_compter_visiteurs(){ return count(preg_files(_DIR_TMP.'visites/','.'
 function action_visiteurs_connectes(){ echo cs_compter_visiteurs(); return true; }",
 	'version-min' => '1.9200', // pour la balise #ARRAY
 	'pipelinecode:pre_description_outil' => 'if($id=="visiteurs_connectes") if($GLOBALS["meta"]["activer_statistiques"]!="oui")
-		$texte.="\n\n<span style=\\"color:red;\\">"._T("couteauprive:visiteurs_connectes:inactif")."</span>";',
+		$texte.="\n\n<spanred>"._T("couteauprive:visiteurs_connectes:inactif")."</span>";',
 
 	//	une mise a jour toutes les 120 sec ?
 /*	'code:js' => 'function Timer_visiteurs_connectes(){
