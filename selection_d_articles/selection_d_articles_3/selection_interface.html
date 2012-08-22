@@ -67,7 +67,7 @@
 
 [(#EVAL{autoriser('modifier','rubrique', [(#ENV{id_rubrique})])==1}|?{" ",""})
 	<form onsubmit="valeur=Math.floor($('#ajouter_selection').attr('value')); if (valeur > 0){ $('#pave_selection').load('?action=selection_interface&amp;id_rubrique=#ENV{id_rubrique}&amp;ajouter_selection='+valeur); }; return false;" action="index.php" method="get">
-      <div style=" padding: 5px 10px;">
+      <div style=" padding: 5px 10px; background:#FFF">
          <input type="hidden" name="exec" value="rubrique" />
          <input type="hidden" name="id_rubrique" value="#ENV{id_rubrique}" />
 			<div style="float: right;">
