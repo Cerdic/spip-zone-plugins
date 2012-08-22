@@ -42,14 +42,7 @@ function exec_pdf_membres()
 		$pdf->AddPage();
 
 		//On définit les colonnes (champs,largeur,intitulé,alignement)
-		$icExtras = @unserialize(str_replace('O:10:"ChampExtra"', 'a', $GLOBALS['meta']['iextras']));
-		if (!is_array($icExtras))
-			$icExtras = array();
-		$champsExtras = array();
-		foreach ($icExtras as $icExtra) {
-			if ($icExtra['table']=="asso_$objet")
-				$champsExtras[$icExtra['champ']] = $icExtra['label'];
-		}
+		$champsExtras = recuperer_iextras("asso_$objet");
 		$desc_table = charger_fonction('trouver_table', 'base'); // cf. http://programmer.spip.net/sql_showtable,619
 		$champs = $desc_table('spip_asso_membres');
 		$sent = _request('champs');

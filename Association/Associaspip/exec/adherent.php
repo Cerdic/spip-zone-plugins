@@ -41,12 +41,6 @@ function exec_adherent(){
 		}
 		onglets_association('titre_onglet_membres');
 		// INFOS
-		if ($adresses[$id_auteur])
-			$infos['adresses'] = $adresses[$id_auteur];
-		if ($emails[$id_auteur])
-			$infos['emails'] = $emails[$id_auteur];
-		if ($telephones[$id_auteur])
-			$infos['numeros'] =  $telephones[$id_auteur];
 		if ($full) {
 			$infos['adherent_libelle_categorie'] = $categorie;
 		}
@@ -54,6 +48,12 @@ function exec_adherent(){
 		if ($GLOBALS['association_metas']['id_asso']) {
 			$infos['adherent_libelle_reference_interne'] = ($data['id_asso']?_T('asso:adherent_libelle_reference_interne').'<br/>'.$data['id_asso']:_T('asso:pas_de_reference_interne_attribuee')) ;
 		}
+		if ($adresses[$id_auteur])
+			$infos['adresses'] = $adresses[$id_auteur];
+		if ($emails[$id_auteur])
+			$infos['emails'] = $emails[$id_auteur];
+		if ($telephones[$id_auteur])
+			$infos['numeros'] =  $telephones[$id_auteur];
 		echo '<div class="vcard">'. totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos, 'asso', 'asso_membre') .'</div>';
 		// datation et raccourcis
 		if ($full)

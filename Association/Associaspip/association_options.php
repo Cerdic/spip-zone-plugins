@@ -677,19 +677,26 @@ function instituer_statut_interne_ici($auteur=array()){
 	return $instituer_statut_interne($auteur);
 }
 
+// recupeer la liste des colonne=>libelle d'un objet etendu
+function recuperer_iextras($ObjetEtendu)
+{
+	$ChampsExtrasGeres = @unserialize(str_replace('O:10:"ChampExtra"', 'a', $GLOBALS['meta']['iextras'])); // "iextras (interface)" stocke la liste des champs geres dans un meta. Ce meta est un tableau d'objets (un par champ extra) manipules par "cextras (core)". Il n'est helas pas evident d'utiliser ces methodes car l'API n'est pas assez documente... Mais en transformant l'objet-PHP an tableau-PHP on a ce dont on a besoin...
+	if ( !is_array($ChampsExtrasGeres) )
+		return array(); // fin : Champs Extras 2 non installe ou pas d'objet etendu.
+	$champsExtrasVoulus = array();
+	foreach ($ChampsExtrasGeres as $ChampExtra) {
+		if ($ChampExtra['table']==$ObjetEtendu) // c'est un champ extra de la 'table' ou du '_type' d'objet qui nous interesse
+			$champsExtrasVoulus[$ChampExtra['champ']] = $ChampExtra['label'];
+	}
+	return $champsExtrasVoulus;
+}
+
 // bloc infos integral (colonne gauche)
 // Rem: une certaine similitude avec http://programmer.spip.org/boite_infos :)
-function bloc_infos($TitreObjet,$NumObjet,$DesLignes=array(),$PrefixeLangue='asso')
+function bloc_infos($TitreObjet, $NumObjet, $DesLignes=array(), $PrefixeLangue='asso', $ObjetEtendu='')
 {
 	$res = debut_boite_info(true);
-	$res .= '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'. _T("$PrefixeLangue:$TitreObjet") .'<br /><span class="spip_xx-large">'.$NumObjet.'</span></div>';
-	if (count($DesLignes)) {
-		$res .= '<div class="verdana1 spip_xx-small">';
-		foreach ($DesLignes as $p) {
-			$res .= propre($p); // propre() encadre dans P...
-		}
-		$res .= '</div>';
-	}
+	$res .= totauxinfos_intro($TitreObjet, $TitreObjet, $NumObjet, $DesLignes, $PrefixeLangu, $ObjetEtendu);
 	$res .= association_date_du_jour();
 	$res .= fin_boite_info(true);
 	return $res;
@@ -697,25 +704,34 @@ function bloc_infos($TitreObjet,$NumObjet,$DesLignes=array(),$PrefixeLangue='ass
 
 // Rappels sur l'objet dans le bloc infos
 // C'est un resume ou une petite presentation de l'objet en cours d'edition/lecture : ces informations permettent de situer le contexte de la page et n'apparaissent pas dans le bloc central !
-function totauxinfos_intro($titre, $type='', $id=0, $DesLignes=array(), $PrefixeLangue='asso', $ChampsExtras='')
+function totauxinfos_intro($titre, $type='', $id=0, $DesLignes=array(), $PrefixeLangue='asso', $ObjetEtendu='')
 {
 	$res = '';
 	if ($type) {
-		$res .= '<div style="text-align: center" class="verdana1 spip_x-small">'. _T('asso:titre_num', array('titre'=>_T("local:$type"), 'num'=>$id) ) .'</div>';
+		$res .= '<div style="text-align: center" class="verdana1 spip_x-small">'. _T('asso:titre_num', array('titre'=>_T("local:$type"), 'num'=>$id) ) .'</div>'; // presentation propre a Associaspip qui complete par un autre titre (voir ci-apres). Dans un SPIP traditionnel on aurait plutot : $res .= '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'. _T("$PrefixeLangue:$type") .'<br /><span class="spip_xx-large">'.$id.'</span></div>';
 	}
 	$res .= '<div style="text-align: center" class="verdana1 spip_medium">'.$titre.'</div>';
-	if (count($DesLignes)) {
+	if ( count($DesLignes) OR $ObjetEtendu )
 		$res .= '<dl class="verdana1 spip_xx-small">';
-		foreach ($DesLignes as $dt=>$dd) {
-			$res .= '<dt>'. _T("$PrefixeLangue:$dt") .'</dt><dd>'. propre($dd) .'</dd>'; // propre() encadre dans P...
+	foreach ($DesLignes as $dt=>$dd) {
+		$res .= '<dt>'. _T("$PrefixeLangue:$dt") .'</dt><dd>'. propre($dd) .'</dd>'; // propre() encadre dans P... Cette presentation est propre a Associaspip. Habituellement on a : $res .= "<div class='$dt'><strong>". _T("$PrefixeLangue:$dt") ."</strong> $dd</div>";
+	}
+	if ($ObjetEtendu) {
+/* Le code suivant fonctionne, mais :
+-* il manque le formatage correct des donnees, surtout pour les listes (cas par exemple des : auteurs, mots cles, documents, enums definis dans l'interface).
+-* seuls les champs extras crees manuellement (par l'interface donc) sont pris en compte, pas ceux rajoutes via pipeline par d'autres plugins.
+		$champsExtras = recuperer_iextras($ObjetEtendu);
+		if ( count($champsExtras) ) {
+			$donneesExtras = sql_fetsel(array_keys($champsExtras), "spip_${ObjetEtendu}s", 'id_'.($type?$type:$ObjetEtendu).'='.intval($id) ); // on recupere les donnees... (il faut que le nom de la table soit le pluriel en "-s" de l'objet et que l'identifiant soit l'objet prefixe de "id_" :-S)
+			foreach ($champsExtras as $col_name => $col_label) {
+				$res .= '<dt>'. $col_label .'</dt><dd>'. propre($donneesExtras[$col_name]) .'</dd>'; // propre() encadre dans P... Cette presentation est propre a Associaspip. L'appel au pipeline "afficher_contenu_objet" remplace tout le "foreach" avec plutot : $res .= "<div class='$col_name'><strong>$col_label</strong> $donneesExtras[$col_name]</div>";
+			}
 		}
+du coup, on readapte : */
+		$res .= '<dt>+</dt><dd>'. pipeline('afficher_contenu_objet', array('args'=>array('type'=>$ObjetEtendu, 'id_objet'=>$id, 'contexte'=>array()), 'data'=>'',) ) .'</dd>';
+	}
+	if ( count($DesLignes) OR $ObjetEtendu )
 		$res .= '</dl>';
-	}
-	if ($ChampsExtras) {
-		$res .= '<div class="verdana1 spip_xx-small">';
-		$res .= pipeline('afficher_contenu_objet', array ('args'=>array('type'=>$ChampsExtras, 'id_objet'=>$id, 'contexte'=>array()), 'data'=>''));
-		$res .= '</div>';
-	}
 	return $res;
 }
 
@@ -817,14 +833,7 @@ function bloc_listepdf($objet, $params=array(), $prefixeLibelle='', $champsExclu
 		$res .= debut_cadre_enfonce('',true);
 		$res .= '<h3>'. _T('plugins_vue_liste') .'</h3>';
 		$res .= '<div class="formulaire_spip formulaire_asso_liste_'.$objet.'s">';
-		$icExtras = @unserialize(str_replace('O:10:"ChampExtra"', 'a', $GLOBALS['meta']['iextras']));
-		if (!is_array($icExtras))
-			$icExtras = array();
-		$champsExtras = array();
-		foreach ($icExtras as $icExtra) {
-			if ($icExtra['table']=="asso_$objet") // c'est un champ extra de la 'table' ou '_type' en cours d'usage
-				$champsExtras[$icExtra['champ']] = $icExtra['label'];
-		}
+		$champsExtras = recuperer_iextras("asso_$objet");
 		$frm = '<ul><li class="edit_champs">';
 		$desc_table = charger_fonction('trouver_table', 'base'); // http://doc.spip.org/@description_table deprecier donc preferer http://programmer.spip.net/trouver_table,620
 		$champsPresents = $desc_table("spip_asso_${objet}s");
