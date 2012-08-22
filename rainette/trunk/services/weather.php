@@ -16,7 +16,7 @@ function weather_service2cache($lieu, $mode) {
 function weather_service2url($lieu, $mode) {
 
 	include_spip('inc/config');
-	$unite = lire_config('rainette/wwo/unite');
+	$unite = lire_config('rainette/wwo/unite', 'm');
 
 	$url = _RAINETTE_WEATHER_URL_BASE . strtoupper($lieu) . '?unit=' . $unite;
 	if ($mode != 'infos') {

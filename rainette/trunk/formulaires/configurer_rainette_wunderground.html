@@ -20,12 +20,25 @@
 		<fieldset>
 			<legend><:rainette:legende_configurer_affichage:></legend>
 			<ul>
-				<INCLURE{fond=formulaires/inc-configurer_condition,
-					service=wunderground,
-					env } />
 				<INCLURE{fond=formulaires/inc-configurer_unite,
 					service=wunderground,
 					env} />
+
+				<INCLURE{fond=formulaires/inc-configurer_condition,
+					service=wunderground,
+					env } />
+
+				<li class="editer editer_theme[ (#ENV**{erreurs}|table_valeur{theme}|oui)erreur]" id="theme_wunderground">
+					<p class="explication"><:rainette:info_configurer_theme:></p>
+					<label><:rainette:label_theme:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{theme})</span>]
+				<BOUCLE_themes_wunderground(DATA) {liste a,b,c,d,e,f,g,h,i,k}>
+					<div class="choix">
+						<input type="radio" name="theme" class="radio" id="#ENV{service}_theme_#VALEUR" value="#VALEUR"[(#ENV{theme, a}|=={#VALEUR}|oui)checked="checked"] />
+						<label for="#ENV{service}_theme_#VALEUR">[(#VAL{rainette:label_theme_wunderground_}|concat{#VALEUR}|_T)]</label>
+					</div>
+				</BOUCLE_themes_wunderground>
+				</li>
 			</ul>
 		</fieldset>
 		<fieldset>
@@ -39,3 +52,22 @@
 		</p>
 	</div></form>
 </div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{condition, weather}|=={weather}|oui)
+			jQuery("#theme_wunderground").hide();
+		]
+		jQuery("input[name='condition']").change(function() {
+			if (jQuery("input[name='condition']:checked").val() == 'wunderground') {
+				jQuery("#theme_wunderground").show();
+			}
+			else {
+				jQuery("#theme_wunderground").hide();
+			}
+			jQuery(this).blur();
+		});
+	});
+//]]>
+</script>

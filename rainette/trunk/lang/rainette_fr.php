@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_utilisation_weather' => 'Les conditions....',
 	'info_utilisation_wwo' => 'Les conditions....',
 	'info_utilisation_wunderground' => 'Les conditions....',
+	'info_configurer_theme' => 'Choisissez le thème d\'icônes utilisé dans les affichages.',
 
 	// J
 	'jour' => 'jour',
@@ -49,6 +50,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lever_soleil' => 'lever du soleil',
 	'longitude' => 'longitude',
 
+	'label_theme' => 'Thème d\'icônes',
+	'label_theme_wunderground_a' => 'Default',
+	'label_theme_wunderground_b' => 'Smiley',
+	'label_theme_wunderground_c' => 'Generic',
+	'label_theme_wunderground_d' => 'Old school',
+	'label_theme_wunderground_e' => 'Cartoon',
+	'label_theme_wunderground_f' => 'Clip art',
+	'label_theme_wunderground_g' => 'Simple',
+	'label_theme_wunderground_h' => 'Comtemporary',
+	'label_theme_wunderground_i' => 'Minimalist',
+	'label_theme_wunderground_k' => 'Incredible',
 	'label_unite' => 'Système d\'unité',
 	'label_unite_metrique' => 'Système métrique',
 	'label_unite_standard' => 'Système US impérial',

@@ -193,7 +193,7 @@ function wwo_xml2conditions($xml){
 
 		// On convertit les informations exprimees en systeme metrique dans le systeme US si besoin
 		include_spip('inc/config');
-		$unite = lire_config('rainette/wwo/unite');
+		$unite = lire_config('rainette/wwo/unite', 'm');
 		if ($unite == 's') {
 			include_spip('inc/rainette_utils');
 			$tableau['temperature_reelle'] = (isset($conditions['temp_f']))
@@ -223,7 +223,7 @@ function wwo_xml2conditions($xml){
 			$tableau['periode'] = 1; // nuit
 
 		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
-		$condition = lire_config('rainette/wwo/condition');
+		$condition = lire_config('rainette/wwo/condition', 'wwo');
 		if ($condition == 'wwo') {
 			// On affiche les conditions natives fournies par le service
 			$tableau['icone']['code'] = $tableau['code_meteo'];

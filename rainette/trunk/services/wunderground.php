@@ -182,7 +182,7 @@ function wunderground_xml2conditions($xml){
 		// Identification des suffixes d'unite pour choisir le bon champ
 		// -> wunderground fournit toujours les valeurs dans les deux systemes d'unites
 		include_spip('inc/config');
-		$unite = lire_config('rainette/wunderground/unite');
+		$unite = lire_config('rainette/wunderground/unite', 'm');
 		if ($unite == 'm')
 			$suffixes = explode(':', _RAINETTE_WUNDERGROUND_SUFFIXE_METRIQUE);
 		else
@@ -225,11 +225,14 @@ function wunderground_xml2conditions($xml){
 			$tableau['periode'] = 1; // nuit
 
 		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
-		$condition = lire_config('rainette/wunderground/condition');
+		$condition = lire_config('rainette/wunderground/condition', 'wunderground');
 		if ($condition == 'wunderground') {
 			// On affiche les conditions natives fournies par le service
 			$tableau['icone']['code'] = $tableau['code_meteo'];
-			$tableau['icone']['url'] = copie_locale($tableau['icon_meteo']);
+
+			$theme = lire_config('rainette/wunderground/theme', 'a');
+			$url = _RAINETTE_WUNDERGROUND_URL_BASE_ICONE . '/' . $theme . '/' . $tableau['code_meteo'] . '.gif';
+			$tableau['icone']['url'] = copie_locale($url);
 			$tableau['resume'] = ucfirst($tableau['desc_meteo']);
 		}
 		else {
