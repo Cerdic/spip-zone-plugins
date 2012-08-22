@@ -1,3 +1,11 @@
+.calendriermini .ui-datepicker-title {
+	margin: 0 1.8em !important;/*important parce qu'il faut surcharger un style inline*/
+	font-size:0.9em;
+}
+.menu-titre{
+	text-align:center;
+}
+
 .fc-button-content{
 	height:1.5em;
 	line-height:1.5em;
