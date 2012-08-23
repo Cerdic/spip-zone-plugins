@@ -1,6 +1,6 @@
 <?php
 // pour tester la MAJ !
-# $GLOBALS['meta']['couteau_suisse_base_version']='1.4';
+# $GLOBALS['meta']['couteau_suisse_base_version']='1.5';
 
 if(!defined('_SPIP20100')) {
 	// Versions SPIP anterieures a 2.1
@@ -94,20 +94,16 @@ if(defined('_LOG_CS')) cs_log("cout_upgrade : $nom_meta_base_version => $version
 				effacer_meta($meta);
 			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
 		}
-		if (cs_le_test($current_version, $tmp, '1.2')){
-			effacer_meta('tweaks_contribs');
-			// MAJ forcee de certains fichiers distants
-			cs_maj_forcee(array('previsualisation','maj_auto'));
-			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
-		}
-		if (cs_le_test($current_version, $tmp, '1.4')){
-			cs_maj_forcee(array('masquer', 'jcorner'));
-			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
-		}
 		if (cs_le_test($current_version, $tmp, '1.5')){
 			// nouveau champ 'ordre'
 			include_spip('outils/boites_privees');
 			tri_auteurs_verifie_table(true);
+			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
+		}
+		if (cs_le_test($current_version, $tmp, '1.6')){
+			effacer_meta('tweaks_contribs');
+			// MAJ forcee de certains fichiers distants
+			cs_maj_forcee(array('masquer', 'jcorner', 'previsualisation', 'maj_auto'));
 			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
 		}
 		ecrire_metas(); # Pour SPIP 1.92

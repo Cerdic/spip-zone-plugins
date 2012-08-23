@@ -763,7 +763,7 @@ _ • {Contrôle du cache} : option identique à la précédente, avec une écri
 	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour la journalisation des évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
 [[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en logs.}</q3>]][[Autres réglages :->@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]',
 	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en logs d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP. Le niveau par défaut est le niveau 5.',
-	'spip_log:description3' => '@puce@ Les logs du Couteau Suisse s\'activent ici : «[.->cs_comportement]».',
+	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».',
 	'spip_log:nom' => 'SPIP et les logs',
 	'stat_auteurs' => 'Les auteurs en stat',
 	'statuts_spip' => 'Uniquement les statuts SPIP suivants :',

@@ -333,6 +333,7 @@ function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 			else $erreur = $statut = '<span style="color:red">'.couteauprive_T('distant_echoue').'</span>';
 		} else $erreur = $statut = couteauprive_T('distant_inactif');
 		$a[] = '[{'.basename($file)."}->{$outil[$i]}]\n_ ".$statut.$message;
+		if($erreur) $outil['erreurs']['fichiers_distants'][$outil[$i]] = -1;
 	}
 	if($tester) return $a;
 	$a = '<ul style="margin:0.6em 0 0.6em 4em;"><li>' . join("</li><li style='margin-top:0.4em;'>", $a) . '</li></ul>';

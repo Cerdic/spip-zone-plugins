@@ -121,8 +121,11 @@ if($log) cs_log("$rand -- ecriture metas");
  	foreach($metas_outils as $nom=>$o) 
 		if(isset($o['actif']) && $o['actif'] && isset($o['maj_distant']) && $o['maj_distant']) {
 			cs_action_fichiers_distants($outils[$nom], true, true);
-			$metas_outils[$nom]['maj_distant'] = 0;
-			$test = 1;
+			if(!isset($outils[$nom]['erreurs']['fichiers_distants'])) {
+				$metas_outils[$nom]['maj_distant'] = 0;
+				$test = 1;
+			} else 
+				spip_log("Erreur - cs_action_fichiers_distants() : l'outil \"$nom\" ne peut mettre a jour ses fichiers distants !");
 		}
 	if($test) ecrire_meta('tweaks_actifs', serialize($metas_outils));
 	ecrire_metas(); # Pour SPIP 1.92
