@@ -1,7 +1,7 @@
 <plugin>
     <nom>Tickets flux</nom>
     <prefix>tickets_flux</prefix>
-    <version>0.1.2</version>
+    <version>0.1.3</version>
     <etat>experimental</etat>
     <auteur>Cyril MARION</auteur>
     <licence>GPL</licence>
@@ -14,6 +14,6 @@
    	</pipeline>
 
     <necessite id="SPIP" version='[2.0.0;2.1.99]' />
-    <necessite id="ticketskiss" version="[1.0;]" />
+    <necessite id="ticketskiss" version="[1.0.0;]" />
     <utilise id="iterateurs" version="[0.6.0;]" />
 </plugin>
