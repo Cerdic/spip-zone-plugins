@@ -12,7 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define('_DELAI_NOTIFICATION_MESSAGERIE', 60 * 20);
 
 // Les notifications de la messagerie privee et de son forum se font par cron
-// base sur le champ 'vu' de spip_auteurs_messages
+// base sur le champ 'vu' de spip_auteurs_liens
 // L'idee est
 // 1) de ne pas spammer les gens qui sont en ligne
 // 2) de ne pas notifier un auteur qu'on vient d'ajouter a une discussion,
@@ -26,7 +26,9 @@ function genie_notifications_dist($time) {
 	include_spip('base/abstract_sql');
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 
-	$s = sql_select("lien.id_auteur,lien.id_message, message.titre, message.texte, message.date_heure as date, auteur.nom, auteur.email, auteur.en_ligne","spip_auteurs_messages AS lien, spip_messages AS message, spip_auteurs AS auteur","lien.id_message = message.id_message AND lien.id_auteur = auteur.id_auteur AND lien.`vu`='non'");
+    $s = sql_select("lien.id_auteur,lien.id_objet,lien.objet,message.titre,message.texte, message.date_heure as date, auteur.nom,auteur.email,auteur.en_ligne",
+"spip_auteurs_liens AS lien, spip_messages AS message,spip_auteurs AS auteur",
+"lien.objet='message' AND lien.id_objet = message.id_message AND lien.id_auteur = auteur.id_auteur AND lien.vu='non'");
 	while ($t = sql_fetch($s)) {
 		// si le message est tout nouveau (ou n'a pas de date), on l'ignore
 		if (!$d = strtotime($t['date'])
@@ -68,7 +70,7 @@ function genie_notifications_dist($time) {
 	  "] ["._T('onglet_messagerie')."] ".typo($t['titre']);
 
 		// Ne pas recommencer la prochaine, meme en cas de plantage du mail :)
-		sql_updateq("spip_auteurs_messages",array('vu'=>'oui'),"id_auteur=".intval($t['id_auteur'])." AND id_message=".intval($t['id_message']));
+		sql_updateq("spip_auteurs_liens",array('vu'=>'oui'),"id_auteur=".intval($t['id_auteur'])." AND id_message=".intval($t['id_message']));
 		$envoyer_mail($t['email'], $subject, $body);
 	}
 
