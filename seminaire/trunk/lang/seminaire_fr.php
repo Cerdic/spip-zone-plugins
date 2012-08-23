@@ -15,9 +15,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'abonnement'				 =>		'S&rsquo;abonner au calendrier',
 
 	// C
-	'cfg_exemple' => 'Exemple',
-	'cfg_exemple_explication' => 'Explication de cet exemple',
-	'cfg_titre_parametrages' => 'Paramétrages',
+	'cfg_exemple'				 => 	'Exemple',
+	'cfg_exemple_explication'	 => 	'Explication de cet exemple',
+	'cfg_titre_parametrages'	 => 	'Paramétrages',
 	'choix_mot'					 =>		'Type d&rsquo;&eacute;v&eacute;nement',
 	'creer_evenement'			 =>		'Ajouter un &eacute;v&eacute;nement', 
 
@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_install_groupe_categories' => 'erreur &agrave; la cr&eacute;ation du groupe',
 	'evenement_titre'			 =>		'Titre de l&rsquo;expos&eacute;',
 	'evenements_depuis_debut'	 =>		'Archives',	
+	'evenements_du_jour'		 =>		'Les &eacute;v&eacute;nements du jour',	
 	'exemple'					 =>		'Par exemple : CMI - Salle R164',
 
 	// L
