@@ -75,7 +75,7 @@ if(!isset($tables['spip_auteurs_elargis'] ))
 $tables['spip_auteurs_elargis'] = array(
 		'principale' => 'non',
 		'field' => array(
-				"id"			=> "bigint(21) NOT NULL",
+				"id"			=> "bigint(21) NOT NULL AUTO_INCREMENT",
 				"id_auteur"		=> "bigint(21) NOT NULL"
 				),
 		'key' => array(
