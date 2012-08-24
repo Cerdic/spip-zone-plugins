@@ -1,7 +1,7 @@
 <paquet
 	prefix="chess"
 	categorie="divers"
-	version="0.9.3"
+	version="0.9.4"
 	etat="stable"
 	compatibilite="[1.9.0;3.0.99]"
 	logo="chess32.png"
