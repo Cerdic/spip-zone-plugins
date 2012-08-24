@@ -55,6 +55,7 @@ function maildecrypt($texte) {
 	mailcrypt_init();
 
 	// traiter les <span class='spancrypt'>chez</span>
+	// \s+ est pour le compresseur HTML qui ajoute des CR partout !
 	$texte = preg_replace(',<span\s+class=[\'"]spancrypt[\'"]>(.*)</span>,Umsi','@',$texte);
 	// traiter les liens
 	$texte = preg_replace(
