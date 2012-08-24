@@ -60,7 +60,7 @@ function cron_spiplistes_cron ($last_time) {
 	include_spip('base/spiplistes_tables');
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_api_courrier');
-	include_spip('inc/spiplistes_api_abstract_sql');
+	//include_spip('inc/spiplistes_api_abstract_sql'); // obsolete
 
 	$prefix_log = 'CRON: ';
 

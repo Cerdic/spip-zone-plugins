@@ -187,8 +187,9 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 			 * si retour de formulaire,
 			 * modifie le format de reception
 			 */
-			if($abo_format = _request('abo_format')) {
-				spiplistes_format_abo_modifier($id_auteur, $abo_format);
+			if ( $abo_format = _request('abo_format') )
+			{
+				spiplistes_format_abo_modifier ( $id_auteur, $abo_format );
 			}
 			
 			// recupere le format d'abonnement de id_auteur

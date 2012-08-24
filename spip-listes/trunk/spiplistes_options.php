@@ -17,7 +17,7 @@ include_spip('base/abstract_sql');
 // include_spip ('base/spip-listes');
 include_spip('base/spiplistes_tables');
 include_spip('inc/spiplistes_api_globales');
-include_spip('inc/spiplistes_api_abstract_sql');
+//include_spip('inc/spiplistes_api_abstract_sql'); // obsolete
 
 define('_SPIPLISTES_PREFIX', 'spiplistes');
 

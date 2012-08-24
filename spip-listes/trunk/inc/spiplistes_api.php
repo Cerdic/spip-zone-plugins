@@ -36,7 +36,7 @@ include_spip('inc/mail');
 
 include_spip('base/abstract_sql');
 
-include_spip('inc/spiplistes_api_abstract_sql');
+//include_spip('inc/spiplistes_api_abstract_sql'); // obsolete
 include_spip('inc/spiplistes_api_globales');
 
 /**
@@ -266,7 +266,7 @@ function spiplistes_abonnements_desabonner_statut ($id_auteur, $listes_statuts) 
 			$sql_where = " id_auteur=".sql_quote($id_auteur)." AND id_liste IN (" . implode(",", $listes) . ")";
 			sql_delete("spip_auteurs_listes", $sql_where);
 		}
-		return(spiplistes_format_abo_modifier($id_auteur));
+		return ( spiplistes_format_abo_modifier($id_auteur) );
 	}
 	return(false);
 }
@@ -853,7 +853,7 @@ function spiplistes_format_abo_supprimer ($arg)
 /**
  * Modifier le format abonne
  * 
- * si id_auteur est int, la fonctin vérifié si existant.
+ * si id_auteur est int, la fonction verifie si existant.
  * 	-> le modifie si existe
  * 	sinon, le crée.
  * Si c'est un tableau, il doit contenir les id_auteur
@@ -868,21 +868,21 @@ function spiplistes_format_abo_supprimer ($arg)
  * @todo supprimer cette particularité insert si int ?
  * {@link spiplistes_format_abo_ajouter()}
  */
-function spiplistes_format_abo_modifier ($id_auteur, $format = 'non') {
+function spiplistes_format_abo_modifier ( $id_auteur, $format = 'non' ) {
 	
 	static $sql_table = 'spip_auteurs_elargis';
 
-	if($format = spiplistes_format_valide($format))
+	if ( $format = spiplistes_format_valide($format) )
 	{
 		$sql_champs = array('`spip_listes_format`' => sql_quote($format));
 		
-		if($id_auteur == 'tous') {
+		if ( $id_auteur == 'tous' ) {
 			// appliquer le meme format a tous les abos
 			$sql_result = sql_update($sql_table, $sql_champs, 1);
 			$action = 'UPDATE';
 			$log_ids = 'ALL';
 		}
-		else if (is_array ($id_auteur) && count ($id_auteur))
+		else if ( is_array ($id_auteur) && count ($id_auteur) )
 		{
 			$ids = implode(',', $id_auteur);
 			$sql_where = 'id_auteur IN ('.$ids.')';
@@ -894,17 +894,20 @@ function spiplistes_format_abo_modifier ($id_auteur, $format = 'non') {
 		}
 		else if(($id_auteur = intval($id_auteur)) > 0)
 		{
-			if(($cur_format = spiplistes_format_abo_demande($id_auteur)) !== FALSE)
+			if( ( $cur_format = spiplistes_format_abo_demande ( $id_auteur ) ) !== FALSE )
 			{
-				if(!$cur_format) {
+				if ( !$cur_format )
+				{
 					// si inexistant faire un insert 
 					$sql_champs = array(
-						'id_auteur' => $id_auteur
-						, '`spip_listes_format`' => $format
+						'id_auteur' => $id_auteur,
+						'spip_listes_format' => $format
 					);
-					$sql_result = sql_insertq($sql_table, $sql_champs);
+					$sql_result = sql_insertq ( $sql_table, $sql_champs );
 					$action = "insert";
-				} else {
+				}
+				else
+				{
 					// sinon update
 					$sql_where = 'id_auteur='.sql_quote($id_auteur).' LIMIT 1'; 
 					$sql_result = sql_update($sql_table, $sql_champs, $sql_where);

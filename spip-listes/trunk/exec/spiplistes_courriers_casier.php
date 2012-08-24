@@ -35,7 +35,7 @@ include_spip('inc/spiplistes_api');
 include_spip('inc/spiplistes_api_courrier');
 include_spip('inc/plugin');
 include_spip('inc/spiplistes_lister_courriers_listes');
-include_spip('inc/spiplistes_api_abstract_sql');
+//include_spip('inc/spiplistes_api_abstract_sql'); // obsolete
 
 /**
  * Construction de la boite des envois programmés.

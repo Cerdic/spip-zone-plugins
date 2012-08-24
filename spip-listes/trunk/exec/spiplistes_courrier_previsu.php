@@ -63,7 +63,7 @@ function exec_spiplistes_courrier_previsu () {
 	include_spip('inc/lang');
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_api_courrier');
-	include_spip('inc/spiplistes_api_abstract_sql');
+	//include_spip('inc/spiplistes_api_abstract_sql'); // obsolete
 	include_spip('public/assembler');
 	
 	spiplistes_debug_log ('ACTION: exec_spiplistes_courrier_previsu()');
