@@ -201,7 +201,7 @@ function liste_outils() {
 				${$test}[] .= $outil['nom'] . '|' . $outil['index'] . '|' . $outil['id'];
 		}
 		$nb_actifs += count($s_actifs);
-		foreach(array('s_actifs', 's_inactifs') as $temp) {
+		foreach(array('s_actifs', 's_inactifs') as $temp) if(count(${$temp})) {
 			sort(${$temp});
 			$reset=_request('cmd')=='resetjs'?"\ncs_EffaceCookie('sous_liste_$id');":'';
 			$titre = "<span class='light cs_hidden'> (".count(${$temp}).")</span>";
