@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_titre'			 =>		'Titre de l&rsquo;expos&eacute;',
 	'evenements_depuis_debut'	 =>		'Archives',	
 	'evenements_du_jour'		 =>		'Les &eacute;v&eacute;nements du jour',	
+	'evenements_seul'			 =>		'D&eacute;tails d&rsquo;un &eacute;v&eacutenement',	
 	'exemple'					 =>		'Par exemple : CMI - Salle R164',
 
 	// L

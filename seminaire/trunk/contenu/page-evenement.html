@@ -1,0 +1,26 @@
+
+<BOUCLE_contenu(spip_evenements){id_evenement}>
+
+[(#REM) Fil d'Ariane et conteneur pour les squelettes Z ]
+[(#PLUGIN{Z}|oui)<p id='hierarchie'><a href='#URL_SITE_SPIP/'><:accueil_site:></a>[ &gt; <strong class='on'>(#TITRE|couper{80})</strong>]</p>
+
+<div class="contenu-principal">]
+
+[(#REM) conteneur pour le kitcnrs]
+
+[(#PLUGIN{kitcnrs}|oui)<div class="texte">] 
+
+<div id="texte">
+	<div class='cartouche'>
+		<h1 class='h1 #EDIT{titre}'>#TITRE</h1>
+	</div>
+	
+	#MODELE{evenement_vevent}
+			
+	<p>Pour en savoir plus sur cet événement, consultez l'article 
+		<a href="#URL_ARTICLE{#ID_ARTICLE}">#INFO_TITRE{article, #ID_ARTICLE}</a>
+	</p>
+</div>
+
+[<div class='notes surlignable'><h2 class='h2 pas_surlignable'><:info_notes:></h2>(#NOTES)</div>]
+</BOUCLE_contenu>

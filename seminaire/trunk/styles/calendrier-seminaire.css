@@ -12,7 +12,9 @@
 	padding:0.2em;
 	font-size:0.9em;
 	}
-
+.fc-content{
+clear:none !important;
+}
 .plier_deplier {
 float: right;
 font-size: 0.9em;

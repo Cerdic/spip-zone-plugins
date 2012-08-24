@@ -1,4 +1,5 @@
-[(#PLUGIN{kitcnrs}|?{' ',''})<INCLURE{fond=entete}{type_page=evenement}{lang}>]
+[(#PLUGIN{kitcnrs}|oui)
+<INCLURE{fond=entete}{type_page=evenement}{lang}>
 <INCLURE{fond=contenu/page-jour}{env}>
-
-[(#PLUGIN{kitcnrs}|?{' ',''})<INCLURE{fond=pied}>]
+<INCLURE{fond=pied}>]
+[(#PLUGIN{Z}|oui) <INCLURE{fond=structure}{env}{type=page}{composition=jour} />]
