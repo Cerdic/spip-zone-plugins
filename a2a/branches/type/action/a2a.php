@@ -25,6 +25,7 @@ function action_a2a_dist(){
 
 
 function action_a2a_lier_article_dist($id_article_cible, $id_article_source, $type=null, $type_liaison=''){
+	include_spip('inc/config');
 	//on verifie que cet article n'est pas deja lie
 	if (
 		
