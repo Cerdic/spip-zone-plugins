@@ -77,7 +77,7 @@ function description_outil_une_variable($index, &$outil, &$variable, &$label, &$
 	// ... ou une case a cocher
 	elseif(isset($cs_variable['check'])) {
 		if(!$actif)
-			return $label._T($cs_variable['check'])._T($valeur?'couteauprive:2pts_oui':'couteauprive:2pts_non');
+			return $label._T($cs_variable['check']).couteauprive_T($valeur?'2pts_oui':'2pts_non');
 		return $label.'<label><input type="checkbox" '.($valeur?' checked="checked"':'')." value=\"1\" name=\"$variable\" $disab/>"
 			.($valeur?'<b>':'')._T($cs_variable['check']).($valeur?'</b>':'').'</label>'
 			. $comment._VAR_OUTIL;
@@ -177,7 +177,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 			// lames natives : reconstitution d'une description eventuellement morcelee
 			// exemple : <:mon_outil:3:> est remplace par couteauprive_T('mon_outil:description3')
 			$descrip = preg_replace_callback(',<:([a-z_][a-z0-9_-]*):([0-9]*):>,i', 
-				create_function('$m','return _T("couteauprive:$m[1]:description$m[2]");'), $descrip);
+				create_function('$m','return couteauprive_T($m[1].":description".$m[2]);'), $descrip);
 		// chaines de langue personnalisees
 		$descrip = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $descrip);
 	}
@@ -255,13 +255,14 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	// fusion dans <li> : [[%var1%]][[radio->%var2%]] (var1 doit etre de type radio !)
 	$res = str_replace('</li></ul></div></fieldset><fusionradio>', '', $res);
 	// remplacement de diverses constantes
-	$res = str_replace(array('@puce@','<spanred>','@_CS_CHOIX@','@_CS_ASTER@'),
-		array(definir_puce(),'<span style="color:red">',couteauprive_T('votre_choix'), '<sup>(*)</sup>'), $res);
+	$res = str_replace(array('@puce@','<spanred>','@_CS_CHOIX@','@_CS_ASTER@','@_DIR_CS_ROOT@'),
+		array(definir_puce(),'<span style="color:red">',couteauprive_T('votre_choix'), '<sup>(*)</sup>',
+			cs_root_canonicalize(_DIR_PLUGIN_COUTEAU_SUISSE)), $res);
 	if(!defined('_SPIP19300')) $res = str_replace('@_CS_PLUGIN_JQUERY192@', couteauprive_T('detail_jquery3'), $res);
 	// remplacement des constantes qui restent de forme @_CS_XXXX@
 	if(strpos($res,'@_CS')!==false) 
 		$res = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 
-			create_function('$matches','return defined($matches[1])?constant($matches[1]):(\' (\'._T(\'couteauprive:outil_inactif\').\')\');'), $res);
+			create_function('$matches','return defined($matches[1])?constant($matches[1]):(\' (\'.couteauprive_T(\'outil_inactif\').\')\');'), $res);
 	// remplacement des liens vers un autre outil
 	$res = description_outil_liens($res);
 

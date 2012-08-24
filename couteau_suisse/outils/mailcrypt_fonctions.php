@@ -51,11 +51,11 @@ function mailcrypt($texte) {
 }
 
 function maildecrypt($texte) {
-	if(strpos($texte, 'spancrypt')===false && strpos($texte, 'lancerlien')===false) return $texte;
+	if(strpos($texte, 'spancrypt')===false) return $texte;
 	mailcrypt_init();
 
 	// traiter les <span class='spancrypt'>chez</span>
-	$texte = preg_replace(',<span class=[\'"]spancrypt[\'"]>(.*)</span>,U','@',$texte);
+	$texte = preg_replace(',<span\s+class=[\'"]spancrypt[\'"]>(.*)</span>,Umsi','@',$texte);
 	// traiter les liens
 	$texte = preg_replace(
 		',href="#" (title=["\'].*?["\']) onclick="location.href=lancerlien\(\'(\S*?)\'\,\'(\S*?)\'\); return false;",',

@@ -298,7 +298,7 @@ function cs_action_rapide($outil_id, $actif=true) {
 // gere les fichiers distants d'un outil
 function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 	if(!isset($outil['fichiers_distants'])) return '';
-	$lib = sous_repertoire(_DIR_PLUGIN_COUTEAU_SUISSE, 'lib');
+	$lib = sous_repertoire(_DIR_RACINE, 'lib');
 	$actif = $outil['actif'];
 	$a = array();
 	foreach($outil['fichiers_distants'] as $i) {

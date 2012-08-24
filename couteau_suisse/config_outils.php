@@ -1235,7 +1235,7 @@ add_variables( array(
 	'nom' => 'fonds_demailcrypt2',
 	'format' => _format_CHAINE,
 	'lignes' => 4,
-	'defaut' => '"notifications/formulaire_email:\nnotifications/formulaire_accuse"',
+	'defaut' => '"saisies-vues/_base:\notifications/formulaire_email:\nnotifications/formulaire_accuse"',
 	'code' => "if(%%fonds_demailcrypt%%) define('_MAILCRYPT_FONDS_DEMAILCRYPT', %s);",
 ));
 add_outil( array(
@@ -1563,8 +1563,7 @@ foreach (find_all_in_path('outils/', '\w+_config\.xml$') as $f) {
 global $outils;
 foreach (find_all_in_path('outils/', '\w+_config\.php$') as $f) 
 if(preg_match(',^([^.]*)_config$,', basename($f, '.php'),$regs)){
-	if($outil = charger_fonction($regs[0], 'outils'))
-		$outil(preg_match(',couteau_suisse/outils/,', $f));
+	if($outil = charger_fonction($regs[0], 'outils')) $outil();
 	/*else {
 		// compatibilite ...	
 		include $f;
@@ -1574,7 +1573,7 @@ if(preg_match(',^([^.]*)_config$,', basename($f, '.php'),$regs)){
 			add_outil($cs_temp);
 		}
 	}*/
-	if(isset($outils[$regs[1]]) && strpos($f, '/couteau_suisse/outils/'.$regs[1])===false)
+	if(isset($outils[$regs[1]]) && strncmp($f, _DIR_PLUGIN_COUTEAU_SUISSE, strlen(_DIR_PLUGIN_COUTEAU_SUISSE))!=0)
 		$outils[$regs[1]]['perso'] = 1;
 }
 

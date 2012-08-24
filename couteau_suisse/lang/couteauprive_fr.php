@@ -146,8 +146,8 @@ _ • Un champ de recherche à partir de %select_max_auteurs% auteurs(s).</q1>',
 	'categ:typo-racc' => '30. Raccourcis typographiques',
 	'certaines_couleurs' => 'Seules les balises définies ci-dessous@_CS_ASTER@ :',
 	'chatons:aide' => 'Chatons : @liste@',
-	'chatons:description' => 'Insère des images (ou chatons pour les {tchats}) dans tous les textes où apparaît une chaîne du genre {{<code>:nom</code>}}.
-_ Cet outil remplace ces raccourcis par les images du même nom qu\'il trouve dans votre dossier <code>mon_squelette_toto/img/chatons/</code>, ou par défaut, le dossier <code>couteau_suisse/img/chatons/</code>.',
+	'chatons:description' => 'Insère des images (ou chatons pour les {tchats}) dans tous les textes où apparaît une chaîne du genre «{{<code>:nom</code>}}».
+_ Cet outil remplace ces raccourcis par les images du même nom qu\'il trouve dans votre dossier <code>dossier_de_mon_squelette/img/chatons/</code>, ou par défaut, dans le dossier <code>@_DIR_CS_ROOT@img/chatons/</code>.',
 	'chatons:nom' => 'Chatons',
 	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de votre site (articles, rubriques, etc.), cet outil remplace les balises &lt;quote&gt; par des balises &lt;q&gt; quand il n\'y a pas de retour à la ligne. En effet, les citations courtes doivent être entourées par &lt;q&gt; et les citations contenant des paragraphes par &lt;blockquote&gt;.',
 	'citations_bb:nom' => 'Citations bien balisées',
@@ -341,7 +341,7 @@ Attention : certains outils du Couteau Suisse nécessitent les fonctions de {jQu
 	'f_jQuery:nom' => 'Désactive jQuery',
 	'filets_sep:aide' => 'Filets de Séparation : <b>__i__</b> où <b>i</b> est un nombre de <b>0</b> à <b>@max@</b>.<br />Autres filets disponibles : @liste@',
 	'filets_sep:description' => 'Insère des filets de séparation, personnalisables par des feuilles de style, dans tous les textes de SPIP.
-_ La syntaxe est : &quot;__code__&quot;, où &quot;code&quot; représente soit le numéro d\'identification (de 0 à 7) du filet à insérer en relation directe avec les styles correspondants, soit le nom d\'une image placée dans le dossier plugins/couteau_suisse/img/filets.',
+_ La syntaxe est : «__code__», où «code» représente soit le numéro d\'identification (de 0 à 7) du filet à insérer en relation directe avec les styles correspondants, soit le nom d\'une image placée dans le dossier <code>dossier_de_mon_squelette/img/filets/</code>, ou par défaut, dans le dossier <code>@_DIR_CS_ROOT@img/filets/</code>.',
 	'filets_sep:nom' => 'Filets de Séparation',
 	'filtrer_javascript:description' => 'Pour gérer l\'insertion de JavaScript dans les articles, trois modes sont disponibles :
 - <i>jamais</i> : le JavaScript est refusé partout
