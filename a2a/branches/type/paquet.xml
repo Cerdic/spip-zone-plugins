@@ -1,7 +1,7 @@
 <paquet
 	prefix="a2a"
 	categorie="navigation"
-	version="1.0.1"
+	version="1.0.2"
 	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="images/a2a-64.png"
@@ -24,3 +24,4 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/a2a.php" />
 	<menu nom="configurer_a2a" parent="menu_configuration" titre="a2a:cfg_a2a" icone="images/a2a-16.png" />
 </paquet>
+

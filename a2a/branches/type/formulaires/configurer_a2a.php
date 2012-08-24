@@ -17,7 +17,10 @@ function a2a_types_liaisons2array($type){
 	return $tableau;
 }
 function formulaires_configurer_a2a_charger(){
-	return lire_config('a2a');	
+	if ($cfg=lire_config('a2a'))
+		return $cfg;
+	else
+		return array();
 }
 
 function formulaires_configurer_a2a_verifier(){
