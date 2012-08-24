@@ -232,7 +232,7 @@ function liste_outils() {
 	.	'</div></div></form>'
 	. '<div class="cs_liste cs_actifs">' . $fieldset . '#22BB22;">' . couteauprive_T('outils_actifs') . '</legend>'
 	. $results_actifs . '</fieldset>'
-	. '<div style="float:left; width:60%"><form><input type="text" size="10" value="'._T('info_rechercher').'" name="cs_rech" class="recherche cs_rech" accesskey="r" onfocus="this.value=\'\';cs_Recherche(\'\')" onkeyup="cs_Recherche(this.value);"><span id="results"></span></form></div>'
+	. '<div style="float:left; width:60%"><form><input type="text" size="10" value="'._T('info_rechercher').'" name="cs_rech" id="cs_rech" class="recherche cs_rech" accesskey="r" onfocus="if(this.value==cs_init_recherche)this.value=\'\';" onkeyup="cs_Recherche(this.value);"><span id="results"></span></form></div>'
 	. '<div style="text-align: right;"><a id="cs_tous_a" title="' . couteauprive_T('outils_selectionactifs') . '" href="#">'
 	. couteauprive_T('outils_selectiontous') . '</a></div>'
 	. '</div></div>');

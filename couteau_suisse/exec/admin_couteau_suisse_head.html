@@ -158,13 +158,17 @@ ol, ul {
 </style>
 
 <script type="text/javascript"><!--
-var cs_selected, cs_descripted;
+var cs_selected, cs_descripted, cs_init_recherche;
+
+jQuery.fn.cs_show=function(){
+	return this.removeClass('cs_hidden');
+};
+jQuery.fn.cs_hide=function(){return this.addClass('cs_hidden');};
+jQuery.fn.cs_toggle=function(){return this.toggleClass('cs_hidden');};
 
 function set_selected() {
 	cs_selected = new Array();
-	jQuery('a.outil_on').each( function(i){
-		cs_selected[i] = this.id;
-	});
+	jQuery('a.outil_on').each( function(i){cs_selected[i] = this.id;});
 	if(cs_selected.length) {
 			jQuery('div.cs_toggle div').show();
 			jQuery('#cs_toggle_p').html('('+cs_selected.length+')');
@@ -172,9 +176,19 @@ function set_selected() {
 }
 
 function set_categ(id) {
-	nb = jQuery('#'+id+' a.outil_on').length;
-	if(nb>0) jQuery('#'+id).prev().children().removeClass('light');
-		else jQuery('#'+id).prev().children().addClass('light');
+	// nombre d'outil en gras
+	var nb1 = jQuery('#'+id+' a').parent().not('.cs_hidden').length;
+	// nombre d'outil en gras
+	var nb2 = jQuery('#'+id+' a.outil_on').parent().not('.cs_hidden').length;
+	// titre de categorie en cours
+	var titre = jQuery('#'+id).prev();
+	// cacher son titre ?
+	if(nb1>0) titre.show();	else titre.hide();
+	// nombre d'outils dans la categorie
+	var cible = titre.children('span');
+	if(nb2>0) cible.removeClass('light');
+		else cible.addClass('light');
+	cible.html(' ('+nb1+')');
 }
 
 function outils_toggle() {
@@ -209,6 +223,8 @@ function cs_href_click(this_, force) {
 }
 
 if(window.jQuery) jQuery(function(){
+	// Valeur initiale du champ de recherche d'outils 
+	cs_init_recherche = jQuery('#cs_rech')[0].value;
 	// decalage a supprimer sur FF2
 	if(jQuery.browser.mozilla) jQuery('input.cs_sobre').css('margin-left','-3px');
 	
@@ -228,9 +244,9 @@ if(window.jQuery) jQuery(function(){
 	jQuery('div.cs_liste script').remove();
 	// clic sur un titre de categorie
 	jQuery('div.categorie, div.cs_intros').click( function() {
-		jQuery(this).children().toggleClass('cs_hidden');
+		jQuery(this).children().cs_toggle();
 		next = jQuery(this).next();
-		next.toggleClass('cs_hidden');
+		next.cs_toggle();
 		cs_EcrireCookie(next[0].id, '+'+next[0].className, dixans);
 		// annulation du clic
 		return false;
@@ -241,9 +257,9 @@ if(window.jQuery) jQuery(function(){
 		b = jQuery(id+' a.cs_href').length;
 		if(a==b) jQuery(id+' a.outil_on').removeClass('outil_on');
 		else jQuery(id+' a.cs_href').addClass('outil_on');
-		jQuery(this).children().addClass('cs_hidden');
+		jQuery(this).children().cs_hide();
 		next = jQuery(this).next();
-		next.removeClass('cs_hidden');
+		next.cs_show();
 		cs_EcrireCookie(next[0].id, '+'+next[0].className, dixans);
 		set_selected();
 		set_categ(this.nextSibling.id);
@@ -314,8 +330,8 @@ var input_init=function(){
 }
 function bloc_variables(index, domElement) {
 //alert(this.name+' - '+this.value);
-	jQuery('.groupe_'+this.name).addClass('cs_hidden');
-	jQuery('.valeur_'+this.name+'_'+this.value).removeClass('cs_hidden');
+	jQuery('.groupe_'+this.name).cs_hide();
+	jQuery('.valeur_'+this.name+'_'+this.value).cs_show();
 }
 if(typeof onAjaxLoad=='function') onAjaxLoad(input_init);
 
@@ -366,15 +382,16 @@ function cs_Categorie2(i,e){
 	var c=cs_LireCookie(this.id);
 	if(c===null || c.match('cs_hidden')) {
 		var j=jQuery(this);
-		j.addClass('cs_hidden');
-		j.prev().children('span.light').removeClass('cs_hidden');
+		j.cs_hide();
+		j.prev().children('span.light').cs_show();
 	}
 }
 
 function cs_Recherche(value){
 	if(value=='') {
-		jQuery('#cs_outils .cs_href').each(function(index) {this.setAttribute('style','');});
+		jQuery('#cs_outils .sous_liste li').each(function(index) {jQuery(this).cs_show();});
 		jQuery('#results').text('');
+		jQuery('.sous_liste').each(function(i) {set_categ(this.id);});
 		return;
 	}
 	value = value.toLowerCase();
@@ -384,11 +401,12 @@ function cs_Recherche(value){
 	for(i=0; i<table.length; i++){
 		var pos = jQuery(table[i]).text();
 		pos = pos.toLowerCase().indexOf(value, 0);
-		table[i].parentNode.setAttribute('style', pos>=0?'':'display:none');
-		if(pos>=0) nb++
+		var cible = jQuery(table[i].parentNode); // <li>/<li>
+		if(pos>=0) { cible.cs_show(); nb++; }
+		else cible.cs_hide();
 	}
 	jQuery('#results').text(' ('+nb+')');
-	jQuery('.sous_liste').each(function(index) {set_categ(this.id);});
+	jQuery('.sous_liste').each(function(i) {set_categ(this.id);});
 }
 
 // fonctions du grenier a remplacer par CVT sous SPIP 3.0
