@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'types_differents'	=> 'Possibilité de relier plusieurs fois des articles, avec un type différent à chaque fois',
 
 	// U
-	'utilise_par_articles' => ', utilisé par les les liaisons des articles :',
+	'utilise_par_articles' => ', utilisé par les liaisons des articles :',
 	// V
 	'voir' => 'Voir'
 );
