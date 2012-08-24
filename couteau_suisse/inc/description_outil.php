@@ -42,9 +42,9 @@ function description_outil_une_variable($index, &$outil, &$variable, &$label, &$
 	// si la variable necessite des boutons radio
 	if(is_array($radios = &$cs_variable['radio'])) {
 		if(!$actif) {
-			$code = _T($radios[$valeur]);
+			$code = strncmp($code=$radios[$valeur], '_', 1)===0?substr($code, 1):_T($code);
 			return "<input type=\"hidden\" name=\"$variable\" class=\"cs_hidden_checkbox\" value=\"$code\" />"
-				. $label . (strlen($valeur)?ucfirst($code):'&nbsp;-');
+				. $label . (strlen($valeur)?ucfirst($code):'&nbsp;-').' ';
 		}
 		$res = "$label <ul>";
 		$i = 0; $nb = isset($cs_variable['radio/ligne'])?intval($cs_variable['radio/ligne']):0;
@@ -249,11 +249,13 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	for($i=0;$i<2;$i++) if(strpos($res,'<:label:')!==false) 
 		$res = preg_replace_callback(',<:label:([a-zA-Z_][a-zA-Z0-9_-]*):>,', 'description_outil_label_callback', $res);
 	// remplacement des blocs avec style. ex : <q2>bla bla</q2>
-	$res = preg_replace(',</q(\d)>,','</div>', preg_replace(',<q(\d)>,','<div class="q$1">', $res));
+	if(strpos($res, '<q')!==false)
+		$res = preg_replace(',</q(\d)>,','</div>', preg_replace(',<q(\d)>,','<div class="q$1">', $res));
 	// remplacement des inputs successifs sans label : [[%var1%]][[radio->%var2%]] ou [[%var1%]][[-->%var2%]]
-	$res = preg_replace(',(<br />)?</fieldset><fieldset>( ?<div>),', '$2', $res);
+	$res = preg_replace(',<(br />)?/fieldset><fieldset>( ?<div>),', '$2', $res);
 	// fusion dans <li> : [[%var1%]][[radio->%var2%]] (var1 doit etre de type radio !)
-	$res = str_replace('</li></ul></div></fieldset><fusionradio>', '', $res);
+	if(strpos($res, '<fusion')!==false)
+		$res = str_replace(array('</li></ul></div></fieldset><fusionradio>','</div></fieldset><fusionradio>'), '', $res);
 	// remplacement de diverses constantes
 	$res = str_replace(array('@puce@','<spanred>','@_CS_CHOIX@','@_CS_ASTER@','@_DIR_CS_ROOT@'),
 		array(definir_puce(),'<span style="color:red">',couteauprive_T('votre_choix'), '<sup>(*)</sup>',
