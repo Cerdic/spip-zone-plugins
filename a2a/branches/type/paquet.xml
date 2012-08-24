@@ -1,7 +1,7 @@
 <paquet
 	prefix="a2a"
 	categorie="navigation"
-	version="1.0.0"
+	version="1.0.1"
 	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="images/a2a-64.png"
