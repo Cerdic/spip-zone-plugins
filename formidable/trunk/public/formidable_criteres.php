@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 	// {tri_donnee champ}
 /**
- * Depuis la boucle FORMULAIRES_REPONSES, trier les rÈsulats en fonction d'un champ
+ * Depuis la boucle FORMULAIRES_REPONSES, trier les r√©sulats en fonction d'un champ
  * de la table FORMULAIRES_REPONSES_CHAMPS
  * {tri_selon_donnee} 
  *
@@ -17,10 +17,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * @ 2005,2006 - Distribue sous licence GNU/GPL
  */
 
-function critere_tri_selon_donnee_dist($idb, &$boucles, $crit) { // Garder cette fontion pour compatibilite
+function critere_tri_selon_donnee_dist($idb, &$boucles, $crit) { // Garder cette fontion pour compatibilit√©
 	critere_tri_selon_reponse_dist($idb, $boucles, $crit) ;
 }
 function critere_tri_selon_reponse_dist($idb, &$boucles, $crit) {
@@ -41,7 +41,7 @@ function critere_tri_selon_reponse_dist($idb, &$boucles, $crit) {
 }
 
 // {recherche_donnee} ou {recherche_donnee susan}
-// IntÈgralement pompÈ et adaptÈ de Forms&Tables
+// Int√©gralement pomp√© et adapt√© de Forms&Tables
 function critere_recherche_reponse_dist($idb, &$boucles, $crit) {
 	global $table_des_tables;
 	$boucle = &$boucles[$idb];

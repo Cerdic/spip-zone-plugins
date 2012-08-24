@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'construire_action_supprimer' => 'L&ouml;schen',
 'construire_ajouter_champ' => 'Feld hinzuf&uuml;gen',
 'construire_attention_enregistrer' => 'Speichern der &Auml;nderungen nicht vergessen!',
-'construire_attention_modifie' => 'Das Formular wurde ge&auml;ndert. Sie können es vor dem Ausf&uuml;hren der Modifikationen neu initialisieren.',
+'construire_attention_modifie' => 'Das Formular wurde ge&auml;ndert. Sie kÃ¶nnen es vor dem Ausf&uuml;hren der Modifikationen neu initialisieren.',
 'construire_attention_supprime' => 'Sie haben Felder gel&ouml;scht. Bitte best&auml;tigen sie die &Auml;nderungen vor dem Speichern.',
 'construire_aucun_champs' => 'Dieses Formular enth&auml;lt keine Felder.',
 
@@ -85,7 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_aucun_traitement' => 'Ihre Antwort wurde gesendet, jedoch wurde keine Verarbeitungsoption f&uuml;r das Formular festgelegt. Deshalb geschieht mit den Daten aus diesem Formular &uuml;berhaupt nichts. :)',
 
 'traitements_aide_memoire' => 'Merkzettel:',
-'traitements_avertissement_creation' => 'Die &Auml;nderungen der Felder des Formulars wurden erfolgreich gespeichert. Jetzt k&ouml;nnen sie festlege, welche Verarbeitungsschritte nach dem Senden des Formulars ausgeführt werden.',
+'traitements_avertissement_creation' => 'Die &Auml;nderungen der Felder des Formulars wurden erfolgreich gespeichert. Jetzt k&ouml;nnen sie festlege, welche Verarbeitungsschritte nach dem Senden des Formulars ausgefÃ¼hrt werden.',
 'traitements_avertissement_modification' => 'Die &Auml;nderungen der Felder des Formulars wurden erfolgreich gespeichert. <strong>Manche Verarbeitungsoptionen m&uuml;ssen entsprechend neu konfiguriert werden.</strong>',
 'traitements_champ_aucun' => 'Kein',
 'traiter_email_description' => 'Sendet das Ergebnis des Formulars an eine Empf&auml;ngerliste.',
