@@ -50,6 +50,7 @@
 
 	<pipeline>
 		<nom>edition_directe_controle</nom>
+		<action></action>
 	</pipeline>
 	
 	<fonctions>edition_directe_fonctions.php</fonctions>
