@@ -208,6 +208,7 @@ Idem om de bodem te veranderen, als de keuze hieronder het toelaat:@_CS_EXEMPLE_
 
 @puce@ {{Requêtes externes.}} \'Le Couteau Suisse\' verifieert regelmatig het bestaan van een recentere versie en geeft de informatie door waar deze  ter beschikking is. Indien dit een probleem vertoont bij u server probeer dan de volgende link.[[%distant_off%]]', # MODIF
 	'cs_comportement:nom' => 'Gedrag van het Zwitserland Mes',
+	'cs_comportement_ko' => '{{Note :}} ce paramètre requiert un filtre de gravité réglé à plus de @gr2@ au lieu de @gr1@ actuellement.', # NEW
 	'cs_distant_off' => 'De verificaties van verwijderde versies',
 	'cs_distant_outils_off' => 'De werktuigen van het Zwitserland Mes die verwijderde bestanden hebben',
 	'cs_log_couteau_suisse' => 'Uitvoerige logs van het Zwitserland Mes',
@@ -715,6 +716,7 @@ _ • {Contrôle du cache} : option identique à la précédente, avec une écri
 	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
 [[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
 	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
+	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».', # NEW
 	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'De auteurs in stat',
 	'statuts_spip' => 'Alleen de volgende SPIP statuten :',

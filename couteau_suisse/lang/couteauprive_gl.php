@@ -213,6 +213,7 @@ Idem para trocar o fondo, se a opción seguinte o permite :@_CS_EXEMPLE_COULEURS
 
 @puce@ {{Consultas externas.}} A Navalla Suíza verifica regularmente a existencia dunha versión máis recente do seu código e informa na súa páxina de configuración dunha actualización eventualmente dispoñible. Se as consultas externas do seu servidor dan problemas, escolla a caixa seguinte.[[%distant_off%]]', # MODIF
 	'cs_comportement:nom' => 'Comportamentos da Navalla Suíza',
+	'cs_comportement_ko' => '{{Note :}} ce paramètre requiert un filtre de gravité réglé à plus de @gr2@ au lieu de @gr1@ actuellement.', # NEW
 	'cs_distant_off' => 'Comprobación de versións distantes',
 	'cs_distant_outils_off' => 'Les outils du Couteau Suisse ayant des fichiers distants', # NEW
 	'cs_log_couteau_suisse' => 'Os logs detallados da Navalla Suíza',
@@ -733,6 +734,7 @@ _ • {Control da caché} : opción idéntica á precedente, con unha escritura 
 	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
 [[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
 	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
+	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».', # NEW
 	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'Os estado dos autores',
 	'statuts_spip' => 'Unicamente os estados SPIP seguintes :',

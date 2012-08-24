@@ -149,7 +149,7 @@ _ • A search field starting from %select_max_auteurs% author(s).</q1>',
 	'certaines_couleurs' => 'Only the tags defined below @_CS_ASTER@:',
 	'chatons:aide' => 'Smileys: @liste@',
 	'chatons:description' => 'Replace <code>:name</code> style tags with smiley images in the text.
-_ This tool will replace these shortcuts with the images of the same name found in the <code>mon_squelette_toto/img/chatons/</code> directory, or else, by default, those found in <code>couteau_suisse/img/chatons/</code>.',
+_ This tool will replace these shortcuts with the images of the same name found in the <code>mon_squelette_toto/img/chatons/</code> directory, or else, by default, those found in <code>couteau_suisse/img/chatons/</code>.', # MODIF
 	'chatons:nom' => 'Smileys',
 	'citations_bb:description' => 'In order to respect the HTML usage in the SPIP content of your site (articles, sections, etc.), this tool replaces the markup &lt;quote&gt; by the markup  &lt;q&gt; when there are no line returns. In fact, quotations must be surrounded by &lt;q&gt; tags and the quotations containing paragraphs must be surrounded by  &lt;blockquote&gt;.',
 	'citations_bb:nom' => 'Well delimited citations',
@@ -218,8 +218,9 @@ In the same way, to change the background colour if the following option allows:
 
 @puce@ {{External requests.}} The Swiss Army Knife regularly checks for new versions of itself and shows any available updates on its configuration page.  In addition, this plugin contains certain tools which may be required for importing remote libraries.
 
-If the external requests involved do not work from your server, or you wish to lock down a possible security weakness, check these boxes to turn them off.[[%distant_off%]][[->%distant_outils_off%]]',
+If the external requests involved do not work from your server, or you wish to lock down a possible security weakness, check these boxes to turn them off.[[%distant_off%]][[->%distant_outils_off%]]', # MODIF
 	'cs_comportement:nom' => 'Behaviour of the Swiss Army Knife',
+	'cs_comportement_ko' => '{{Note :}} ce paramètre requiert un filtre de gravité réglé à plus de @gr2@ au lieu de @gr1@ actuellement.', # NEW
 	'cs_distant_off' => 'Checks of remote versions',
 	'cs_distant_outils_off' => 'The Swiss Knife tools which have remote files',
 	'cs_log_couteau_suisse' => 'Detailed logs of the Swiss Army Knife',
@@ -762,6 +763,7 @@ _ • {Cache checking}: similar to the preceding option. However, all results ar
 	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
 [[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
 	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
+	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».', # NEW
 	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'Authors in statistics',
 	'statuts_spip' => 'Only the following SPIP status:',

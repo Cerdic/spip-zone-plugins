@@ -221,8 +221,8 @@ _ Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».
 @puce@ {{Requêtes externes.}} D\'une part, le Couteau Suisse vérifie régulièrement l\'existence d\'une version plus récente de son code et informe sur sa page de configuration d\'une mise à jour éventuellement disponible. D\'autre part, ce plugin comporte certains outils qui peuvent nécessiter d\'importer des librairies distantes.
 
 Si les requêtes externes de votre serveur posent des problèmes ou par souci d\'une meilleure sécurité, cochez les cases suivantes.[[%distant_off%]][[->%distant_outils_off%]]',
-	'cs_comportement_ko' => '{{Note :}} ce paramètre requiert un filtre de gravité réglé à plus de @gr2@ au lieu de @gr1@ actuellement.',
 	'cs_comportement:nom' => 'Comportements du Couteau Suisse',
+	'cs_comportement_ko' => '{{Note :}} ce paramètre requiert un filtre de gravité réglé à plus de @gr2@ au lieu de @gr1@ actuellement.',
 	'cs_distant_off' => 'Les vérifications de versions distantes',
 	'cs_distant_outils_off' => 'Les outils du Couteau Suisse ayant des fichiers distants',
 	'cs_log_couteau_suisse' => 'Les logs détaillés du Couteau Suisse',

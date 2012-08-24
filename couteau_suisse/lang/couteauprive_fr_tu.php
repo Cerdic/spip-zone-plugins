@@ -149,7 +149,7 @@ _ • Un champ de recherche à partir de %select_max_auteurs% auteurs(s).</q1>',
 	'certaines_couleurs' => 'Seules les balises définies ci-dessous@_CS_ASTER@ :',
 	'chatons:aide' => 'Chatons : @liste@',
 	'chatons:description' => 'Insère des images (ou chatons pour les {tchats}) dans tous les textes où apparaît une chaîne du genre {{<code>:nom</code>}}.
-_ Cet outil remplace ces raccourcis par les images du même nom qu\'il trouve dans ton dossier <code>mon_squelette_toto/img/chatons/</code>, ou par défaut, le dossier <code>couteau_suisse/img/chatons/</code>.',
+_ Cet outil remplace ces raccourcis par les images du même nom qu\'il trouve dans ton dossier <code>mon_squelette_toto/img/chatons/</code>, ou par défaut, le dossier <code>couteau_suisse/img/chatons/</code>.', # MODIF
 	'chatons:nom' => 'Chatons',
 	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de ton site (articles, rubriques, etc.), cet outil remplace les balises &lt;quote&gt; par des balises &lt;q&gt; quand il n\'y a pas de retour à la ligne. En effet, les citations courtes doivent être entourées par &lt;q&gt; et les citations contenant des paragraphes par &lt;blockquote&gt;.',
 	'citations_bb:nom' => 'Citations bien balisées',
@@ -221,8 +221,9 @@ Idem pour changer le fond, si l\'option ci-dessous le permet :@_CS_EXEMPLE_COULE
 
 @puce@ {{Requêtes externes.}} D\'une part, le Couteau Suisse vérifie régulièrement l\'existence d\'une version plus récente de son code et informe sur sa page de configuration d\'une mise à jour éventuellement disponible. D\'autre part, ce plugin comporte certains outils qui peuvent nécessiter d\'importer des librairies distantes.
 
-Si les requêtes externes de ton serveur posent des problèmes ou par souci d\'une meilleure sécurité, coche les cases suivantes.[[%distant_off%]][[->%distant_outils_off%]]',
+Si les requêtes externes de ton serveur posent des problèmes ou par souci d\'une meilleure sécurité, coche les cases suivantes.[[%distant_off%]][[->%distant_outils_off%]]', # MODIF
 	'cs_comportement:nom' => 'Comportements du Couteau Suisse',
+	'cs_comportement_ko' => '{{Note :}} ce paramètre requiert un filtre de gravité réglé à plus de @gr2@ au lieu de @gr1@ actuellement.', # NEW
 	'cs_distant_off' => 'Les vérifications de versions distantes',
 	'cs_distant_outils_off' => 'Les outils du Couteau Suisse ayant des fichiers distants',
 	'cs_log_couteau_suisse' => 'Les logs détaillés du Couteau Suisse',
@@ -758,6 +759,7 @@ _ • {Contrôle du cache} : option identique à la précédente, avec une écri
 	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
 [[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
 	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
+	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».', # NEW
 	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'Les auteurs en stat',
 	'statuts_spip' => 'Uniquement les statuts SPIP suivants :',

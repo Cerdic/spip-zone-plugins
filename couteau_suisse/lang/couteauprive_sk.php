@@ -139,7 +139,7 @@ Príklady: <code>#SET{x,1}#SET_PLUS{x,2}</code> alebo <code>#SET{x,avions}#SET_R
 	'certaines_couleurs' => 'Len tagy definované nižšie @_CS_ASTER@:',
 	'chatons:aide' => 'Smajlíky: @liste@',
 	'chatons:description' => 'Nahradiť <code>názov</code> obrázkami smajlíkov.
-_ Tento nástroj nahradí skratky obrázkami s rovnakým názvom, ktoré sa našli v priečinku <code>mon_squelette_toto/img/chatons/</code>, alebo podľa predvolených nastavení v priečinku <code>couteau_suisse/img/chatons/</code>.',
+_ Tento nástroj nahradí skratky obrázkami s rovnakým názvom, ktoré sa našli v priečinku <code>mon_squelette_toto/img/chatons/</code>, alebo podľa predvolených nastavení v priečinku <code>couteau_suisse/img/chatons/</code>.', # MODIF
 	'chatons:nom' => 'Smajlíky',
 	'citations_bb:description' => 'Na dodržanie HTML v spipovskom obsahu vašej stránky (články, rubriky, atď.) tento nástroj nahradí označenie <quote> označením <q> tam, kde je prázdny riadok. ',
 	'citations_bb:nom' => 'Dobre označené citácie',
@@ -210,6 +210,7 @@ Rovnako na zmenu písma, ak je povolená táto možnosť:@_CS_EXEMPLE_COULEURS3@
 
 @puce@ {{External requests.}} The Penknife checks regularly for new versions of the plugin and shows available updates on its configuration page. If the external requests involved do not work from your server, check this box to turn this off.[[%distant_off%]]', # MODIF
 	'cs_comportement:nom' => 'Správanie sa modulu Vreckový nožík',
+	'cs_comportement_ko' => '{{Note :}} ce paramètre requiert un filtre de gravité réglé à plus de @gr2@ au lieu de @gr1@ actuellement.', # NEW
 	'cs_distant_off' => 'Checks of remote versions',
 	'cs_distant_outils_off' => 'Nástroje modulu Vreckový nožík so vzdialenými súbormiVypočuť',
 	'cs_log_couteau_suisse' => 'Detailed logs of the Penknife',
@@ -746,6 +747,7 @@ _ • {Kontrola cache:} rovnaké ako predchádzajúca možnosť. Všetky výsled
 	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
 [[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
 	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
+	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».', # NEW
 	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'Autori v štatistikách',
 	'statuts_spip' => 'Iba tento status SPIPU:',

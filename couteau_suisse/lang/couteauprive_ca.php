@@ -149,7 +149,7 @@ _ • Un camp de cerca a partir de %select_max_auteurs% autor(s).</q1>',
 	'certaines_couleurs' => 'Només les etiquetes definides més avall@_CS_ASTER@ :',
 	'chatons:aide' => 'Emoticones: @liste@',
 	'chatons:description' => 'Insereix imatges (o emoticones pels {xats}) en tots els textos on apareix una cadena del tipus <code>:nom</code>.
-_ Aquesta eina substitueix aquestes dreceres per les imatges amb el mateix nom que troba a dins de la vostra carpeta <code>mon_squelette_toto/img/chatons/</code>, o per defecte, la carpeta <code>couteau_suisse/img/chatons/</code>.',
+_ Aquesta eina substitueix aquestes dreceres per les imatges amb el mateix nom que troba a dins de la vostra carpeta <code>mon_squelette_toto/img/chatons/</code>, o per defecte, la carpeta <code>couteau_suisse/img/chatons/</code>.', # MODIF
 	'chatons:nom' => 'Emoticones',
 	'citations_bb:description' => 'Per tal de respectar els usos en HTML a dins dels continguts SPIP del vostre lloc (articles, seccions, etc.), aquesta eina substitueix les etiquetes &lt;quote&gt; per etiquetes &lt;q&gt; quan no hi ha salt de línia. Efectivament, les citacions curtes han d\'estar envoltades per &lt;q&gt; i les citacions que contenen paràgrafs per &lt;blockquote&gt;.',
 	'citations_bb:nom' => 'Citacions ben etiquetades',
@@ -221,8 +221,9 @@ Dos exemples idèntics per canviar el color del text:@_CS_EXEMPLE_COULEURS2@
 
 @puce@ {{Peticions externes.}} D\'una banda, el Ganivet Suís verifica regularment si existeix una versió més recent del seu codi i informa a la seva pàgina de configuració que hi ha una actualització disponible. Per l\'altra, aquest connector necessita per funcionar certes eines que poden necessitar la importació de llibreries distants.
 
-Si els requeriments externs del vostre servidor us posen problemes o teniu problemes de millora de seguretat, marqueu les següents caselles.[[%distant_off%]][[->%distant_outils_off%]]',
+Si els requeriments externs del vostre servidor us posen problemes o teniu problemes de millora de seguretat, marqueu les següents caselles.[[%distant_off%]][[->%distant_outils_off%]]', # MODIF
 	'cs_comportement:nom' => 'Comportaments del Ganivet Suís',
+	'cs_comportement_ko' => '{{Note :}} ce paramètre requiert un filtre de gravité réglé à plus de @gr2@ au lieu de @gr1@ actuellement.', # NEW
 	'cs_distant_off' => 'Les verificacions de versions distants',
 	'cs_distant_outils_off' => 'Les eines del Ganivet Suís que tenen fitxers distants',
 	'cs_log_couteau_suisse' => 'Els logs detallats del Ganivet Suís',
@@ -765,6 +766,7 @@ _ • {Control de la memòria cau}: opció idèntica a l\'anterior, amb una escr
 	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
 [[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
 	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
+	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».', # NEW
 	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'Els autors en stat',
 	'statuts_spip' => 'Només els statuts SPIP següents:',
