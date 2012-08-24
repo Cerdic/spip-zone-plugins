@@ -27,7 +27,7 @@ function formulaires_configurer_a2a_verifier(){
 	$diff 	= array_diff_key($types_liaisons_actuels,$types_liaisons); // les clefs supprimés 
 	$sup_pb = array(); // tableau associatifs listant les types_liaisons supprimés problématiques, car il y a des relations portant ce type
 	foreach ($diff as $type=>$nom){
-		$relations = sql_allfetsel('id_article','spip_articles_lies','type_liaison='.sql_quote($type));
+		$relations = sql_allfetsel('id_article','spip_articles_lies','type_liaison='.sql_quote($type),'id_article');
 		
 		if (count($relations) > 0){
 			$sup_pb[$type] = $relations;	
@@ -39,7 +39,7 @@ function formulaires_configurer_a2a_verifier(){
 	// teste si on rend obligatoire les types de liaisons qu'il n'existe pas de liaison non typées
 	
 	if (_request('type_obligatoire')=='on'){
-		$relations = sql_allfetsel('id_article','spip_articles_lies','type_liaison='.sql_quote(''));
+		$relations = sql_allfetsel('id_article','spip_articles_lies','type_liaison='.sql_quote(''),'id_article');
 		if (count($relations) > 0){
 			$erreurs['ob_pb'] = $relations;	
 		} 	
