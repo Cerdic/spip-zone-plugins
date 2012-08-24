@@ -3,4 +3,7 @@
 	<langue code="en" />
 	<langue code="fr" />
 	<langue code="pt_br" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/recommander?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+	</langue>
 </traduction>
