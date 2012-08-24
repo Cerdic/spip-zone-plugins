@@ -18,9 +18,9 @@
 	<description>
 		<multi>
 [fr]Ce plugin est destin&#233; &#224; lire en ligne des parties d&#39;&#233;checs gr&#226;ce &#224; des fichiers PGN.
-_ Il suffit d&#39;ins&#233;rer dans un article la balise &#60;chessXX&#62; o&#249; XX est le num&#233;ro de l&#39;article et de t&#233;l&#233;charger les documents pgn.
-[en]This plugin allows to read chess games on line with their pgn file.
-_ To insert the widget you have just to write in your article the tag &#60;chessXX&#62; where XX is the number of the article, then upload the pgn files.
+_ Il suffit d&#39;ins&#233;rer dans un article la balise &#60;chessXX&#62; o&#249; XX est le num&#233;ro de l&#39;article et de t&#233;l&#233;charger les documents PGN.
+[en]This plugin allows to read chess games on line with their PGN file.
+_ To insert the widget you have just to write in your article the tag &#60;chessXX&#62; where XX is the number of the article, then upload the PGN files.
 	  </multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-Chess</lien>
