@@ -155,6 +155,11 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		// mises a jour eventuelles de la base
 		$installer_plugins = charger_fonction('installer', 'plugins');
 		$infos = $installer_plugins('couteau_suisse', 'install');
+		if(!$infos) {
+			// probablement SVP
+			list(,$v)=explode('auto/', _DIR_PLUGIN_COUTEAU_SUISSE);
+			$infos = $installer_plugins('auto/'.$v, 'install');
+		}
 		if($infos && $infos['install_test'])
 			 echo $infos['install_test'][1], '<p style="color:red;">', 
 			 	_T($infos['install_test'][0]?'plugin_info_install_ok':'avis_operation_echec'), '</p>';
