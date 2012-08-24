@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'articles_lies' => 'ARTICLES LIÉS',
 	// C
 	'changer_type_liaison'=>'Changer',
+	'cfg_a2a'	=>'Relations entre articles',
 	'configurer_a2a'	=>'Configurer les relations entre articles',
 	// E
 	'explication_navigateur' => 'Cliquez sur [Ajouter] pour naviguer dans l\'arborescence du site afin de sélectionner les articles à lier.',
