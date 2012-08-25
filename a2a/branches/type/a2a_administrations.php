@@ -39,6 +39,7 @@ function a2a_maj_070(){
 
 function a2a_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_articles_lies");
+	effacer_config('a2a');
 	effacer_meta($nom_meta_base_version);
 	ecrire_metas();
 }
