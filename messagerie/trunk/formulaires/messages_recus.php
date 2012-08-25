@@ -30,6 +30,8 @@ function formulaires_messages_recus_charger_dist($url_repondre=""){
 function formulaires_messages_recus_traiter_dist($url_repondre=""){
 	include_spip('base/abstract_sql');
 	include_spip('inc/texte');
+	include_spip('inc/messagerie');
+
 	$liste = _request('selectionne');
 	$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
 	if (is_array($liste) && count($liste)) {
