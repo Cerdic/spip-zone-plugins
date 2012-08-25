@@ -1,0 +1,35 @@
+<plugin>
+<nom>COG-GPS</nom>
+<icon>images/coggps-32.png</icon>
+<auteur>
+<!-- Auteur du plugin -->
+Guillaume Wauquier &#169; 2012
+</auteur>
+<licence>GPL</licence>
+<version>1.0</version>
+<version_base>1.0</version_base>
+<etat>stable</etat>
+<prefix>coggps</prefix>
+<description>
+Outils pour ajouter faciliement la position GPS du centroid de chaque commune présente dans la table cog_communes
+</description>
+<lien>http://contrib.spip.net/COG-Toutes-les-communes-departements-regions</lien> <!-- URI de documentation -->
+<install>base/coggps_install.php</install>
+
+
+<!-- Pipelines -->
+<pipeline>
+    <nom>declarer_tables_principales</nom>
+    <inclure>base/coggps.php</inclure>
+</pipeline>
+<pipeline>
+    <nom>affiche_gauche</nom>
+    <inclure>coggps_pipelines.php</inclure>
+</pipeline>
+
+
+
+
+<necessite id="cog" version="[1.0;]" />
+<necessite id='SPIP' version='[2.0.0;]' />
+</plugin>
