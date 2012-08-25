@@ -288,7 +288,7 @@ if(!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p>
 function chargement_automatique() {
 	// si le plugin est installe par procedure automatique, on permet la mise a jour directe (SPIP >= 2.0)
 	$arg_chargeur = $GLOBALS['spip_version_base']>=15828?'url_zip_plugin2':'url_zip_plugin'; // eq. SPIP >= 2.1.2
-	$res = preg_match(',plugins/auto/couteau_suisse/$,',_DIR_PLUGIN_COUTEAU_SUISSE)?
+	$res = strpos(_DIR_PLUGIN_COUTEAU_SUISSE,'plugins/auto/')!==false?
 		"<input type='hidden' name='$arg_chargeur' value='http://files.spip.org/spip-zone/couteau_suisse.zip' />"
 		. "<br/><div class='cs_sobre'><input type='submit' value='&bull; " . attribut_html(couteauprive_T('version_update')) . "' class='cs_sobre' title='"
 		. attribut_html(couteauprive_T('version_update_title')) . "' /></div>"

@@ -294,7 +294,7 @@ function cs_aide_pipelines($outils_affiches_actifs) {
 		. '<br /><b>' . couteauprive_T('outils_caches') . "</b> $ca1"
 		. (!$ca2?'':('<br /><b>' . couteauprive_T('outils_non_parametrables') . "</b> $ca2"))
 		.'<br /><b>' . couteauprive_T('pipelines') . '</b> '.count($aide)
-		. '</p><p style="font-size:80%; margin-left:0.4em; line-height: 1.3em;">' . join("<br />", $aide) . '</p>';
+		. '</p><p style="font-size:80%; line-height: 1.4em;">' . join("<br />", $aide) . '</p>';
 }
 
 // sauve la configuration dans un fichier tmp/couteau-suisse/config.php

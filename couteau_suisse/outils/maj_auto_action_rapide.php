@@ -163,6 +163,7 @@ function maj_auto_action_rapide() {
 		$extension = in_array($p, $plugins_extensions, true);
 		$auto = preg_match(',^auto/,', $p);
 		$infos = plugin_get_infos_maj($p, $stop=time()-$time>$timeout, $extension?_DIR_PLUGINS_DIST:_DIR_PLUGINS);
+		if(!defined('_SPIP30000') && strtoupper($infos['necessite'][0]['id'])=='SPIP') array_shift($infos['necessite']);
 		$maj_lib = $checked = '';
 		if($stop)
 			$maj_lib = '<span class="cs_relancer">'.'Temps serveur &eacute;coul&eacute; : [poursuivre->#].'.'</span>';
@@ -203,7 +204,7 @@ function maj_auto_action_rapide() {
 				$nom .= "<br/>" . _T('couteau:maj_verif') . "<br/>$zip_log<br/>{$bouton}[->$infos[zip_trac]]<label>";
 			$bouton = '&nbsp;';
 		}
-		foreach(array('necessite'=>_T('plugin_info_necessite'), 'utilise'=>_L('Utilise :'), 'procure'=>_L('Procure :')) as $k=>$v)
+		foreach(array('necessite'=>defined('_SPIP30000')?_T('plugin_info_necessite'):_L('N&eacute;cessite :'), 'utilise'=>_L('Utilise :'), 'procure'=>_L('Procure :')) as $k=>$v)
 			if(isset($infos[$k]) && count($infos[$k]))
 				$nom .= "<br/>$v {".join('}, {', array_map('array_shift', $infos[$k])).'}';
 		${$actif?'html_actifs':($extension?'html_extensions':'html_inactifs')}[] = "|$bouton|$nom|$rev|";
