@@ -1,0 +1,24 @@
+
+<h1><:cp:liste_des_tables_cp:></h1>
+[(#SET{tab_table,#CP_TABLE})]
+<table>
+<BOUCLE_table(POUR){tableau #GET{tab_table}}>
+<tr>
+<td>[(#VALEUR|table_valeur{nom})]</td>
+<td>[(#PLUGIN{tabledata}|oui)<a href="[(#URL_ECRIRE{tabledata})]&table=spip_#CLE&debrid=aGnFJwE">Afficher la table</a>]</td>
+</tr>
+</BOUCLE_table>
+</table>
+
+
+<!--#navigation-->
+<div class='cadre cadre-info'>
+[(#AUTORISER{modifier, cp})
+[(#URL_ECRIRE{cp_import}|cp_icone_horizontale{<:cp:importer_les_cp:>, #CHEMIN{images/cp-24.png},creer.gif}|cp_bloc_des_raccourcis)]
+
+]
+
+</div>
+<!--/#navigation-->
+
+
