@@ -1,7 +1,5 @@
 .formulaire_ecrire_message form label,
-.formulaire_recommander form label {}
 .formulaire_ecrire_message form textarea#texte {height:10em;}
-.formulaire_recommander form textarea#texte {width:320px;height:5em;}
 
 .formulaire_ecrire_message form span.dest {padding:3px;background:#F4FFBF;border:1px solid #89AF02;display:block;float:left;margin:0 4px 3px 0;}
 .formulaire_ecrire_message form span.dest.hover {background:#EEFF9F;}
