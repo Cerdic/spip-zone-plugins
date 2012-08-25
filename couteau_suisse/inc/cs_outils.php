@@ -72,7 +72,7 @@ function cs_description_pack() {
 function cs_liste_langues($module) {
 	$reg = '/' . preg_quote($module) . '_([^./]+)\.php$';
 	$files = preg_files(_DIR_PLUGIN_COUTEAU_SUISSE.'lang/', $reg);
-	$f = create_function('$a', 'return preg_match(",'.$reg.',",$a,$r)?"[[$r[1]->'._CS_TRAD_MODULE.$module.'?lang_orig=fr&lang_cible=$r[1]]]":"";');
+	$f = create_function('$a', 'return preg_match(",'.$reg.',",$a,$r)?($r[1]=="fr"?"[fr]":"[[$r[1]->'._CS_TRAD_MODULE.$module.'?lang_orig=fr&lang_cible=$r[1]]]"):"";');
 	$files = array_map($f, $files);
 	return join(" ", $files);
 }
