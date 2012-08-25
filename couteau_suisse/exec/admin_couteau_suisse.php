@@ -210,7 +210,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 			'version' => $cs_version.$cs_revision.'<br/>'.
 				(defined('_CS_PAS_DE_DISTANT')?'('.couteauprive_T('version_distante_off').')':'<span class="cs_version">'.couteauprive_T('version_distante').'</span>')
 				))
-		. chargement_automatique()
+		. chargement_automatique($dir)
 		. '</div><div>&bull;&nbsp;[' . couteauprive_T('pack_titre') . '|' . couteauprive_T('pack_alt') . '->' . generer_url_ecrire($exec,'cmd=pack#cs_infos')
 		. ']<br/>&bull;&nbsp;[' . $tr . '|' . $tr . '->' . generer_url_ecrire($exec,'cmd=trad#cs_infos')
 		. "]</div><div>"
@@ -285,11 +285,19 @@ if(!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p>
 }
 
 // clic pour la mise a jour du Couteau Suisse
-function chargement_automatique() {
+function chargement_automatique($dir) {
+	$zip = 'http://files.spip.org/spip-zone/couteau_suisse.zip';
+	$auto = strpos(_DIR_PLUGIN_COUTEAU_SUISSE,'plugins/auto/')!==false;
+	if($auto && defined('_SPIP30000')) {
+		//  passage par SVP ?
+		include_spip('outils/maj_auto_action_rapide');
+		maj_auto_svp_query($dir, $infos);
+		if($infos['id_paquet']) $zip = $infos['id_paquet'];
+	}
 	// si le plugin est installe par procedure automatique, on permet la mise a jour directe (SPIP >= 2.0)
 	$arg_chargeur = $GLOBALS['spip_version_base']>=15828?'url_zip_plugin2':'url_zip_plugin'; // eq. SPIP >= 2.1.2
-	$res = strpos(_DIR_PLUGIN_COUTEAU_SUISSE,'plugins/auto/')!==false?
-		"<input type='hidden' name='$arg_chargeur' value='http://files.spip.org/spip-zone/couteau_suisse.zip' />"
+	$res = $auto?
+		"<input type='hidden' name='$arg_chargeur' value='$zip' />"
 		. "<br/><div class='cs_sobre'><input type='submit' value='&bull; " . attribut_html(couteauprive_T('version_update')) . "' class='cs_sobre' title='"
 		. attribut_html(couteauprive_T('version_update_title')) . "' /></div>"
 		:"";

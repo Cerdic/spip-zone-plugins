@@ -163,7 +163,7 @@ function maj_auto_action_rapide() {
 	foreach ($plugins as $p) {
 		$actif = in_array($p, $plugins_actifs, true);
 		$extension = in_array($p, $plugins_extensions, true);
-		$auto = preg_match(',^auto/,', $p);
+		$auto = strncmp($p, 'auto/', 5)==0;
 		$infos = plugin_get_infos_maj($p, $stop=time()-$time>$timeout, $extension?_DIR_PLUGINS_DIST:_DIR_PLUGINS);
 		if(!defined('_SPIP30000') && strtoupper($infos['necessite'][0]['id'])=='SPIP') array_shift($infos['necessite']);
 		$maj_lib = $checked = '';
