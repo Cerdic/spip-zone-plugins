@@ -88,8 +88,8 @@ function tradlang_insert_head_css($flux){
 	static $done = false;
 	if (!$done) {
 		$done = true;
-		$flux .= '<link rel="stylesheet" href="'.find_in_path('css/tradlang.css').'" type="text/css" />';
-		$flux .= '<link rel="stylesheet" href="'.generer_url_public('tradlang.css').'" type="text/css" />';
+		$flux .= '<link rel="stylesheet" href="'.direction_css(find_in_path('css/tradlang.css')).'" type="text/css" />';
+		$flux .= '<link rel="stylesheet" href="'.parametre_url(generer_url_public('tradlang.css'),'ltr',$GLOBALS['spip_lang_left']).'" type="text/css" />';
 	}
 	return $flux;
 }
