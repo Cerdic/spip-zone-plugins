@@ -1,11 +1,11 @@
 <paquet
 	prefix="a2a"
 	categorie="navigation"
-	version="1.1.1"
+	version="1.1.2"
 	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="images/a2a-64.png"
-	schema="0.6.0"
+	schema="0.7.0"
 	documentation="http://www.spip-contrib.net/a2a"
 >	
 
