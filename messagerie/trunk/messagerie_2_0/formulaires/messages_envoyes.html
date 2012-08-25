@@ -1,0 +1,47 @@
+<div class='ajax'>
+<BOUCLE_envoyes(MESSAGES){id_auteur=#SESSION{id_auteur}}{statut!=poub}{pagination 1}{!par date_heure}>
+<div class="formulaire_spip formulaire_#ENV{form}" id="formulaire_#ENV{form}#ENV{id}">
+<br class='bugajaxie' />
+[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
+[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>]
+[(#ENV{editable})
+<form method='post' action='#ENV{action}#formulaire_#ENV{form}#ENV{id}' enctype='multipart/form-data' class='ajax'>
+
+[(#REM) declarer les hidden qui declencheront le service du formulaire
+parametre : url d'action ]
+#ACTION_FORMULAIRE{#ENV{action}}
+
+[(#REM) les champs de saisie]
+<fieldset><ul>
+
+#SET{name,selection} #SET{obli,''} #SET{erreur,#ENV*{erreurs}|table_valeur{#GET{name}}}
+<li class="[saisie_(#GET{name})][ (#GET{obli}|sinon{facultatif})][ (#GET{erreur}|oui)erreur]">
+<label for='#GET{name}' class='nocmx'>[(#VAL{messagerie}|concat{':label_',#GET{name}}|_T)]
+[(#GET{obli}|?{' '})<em><:formulaires:info_obligatoire:></em>]
+</label>[<span
+ class='erreur_message'>(#GET{erreur})</span>]<select name='#GET{name}' id='#GET{name}' class='select'>
+<option value='sel'><:ecrire_message:selection_selectionner:></option>
+<option value='none'><:ecrire_message:selection_aucun:></option>
+<option value='all'><:ecrire_message:selection_tous:></option>
+</select>
+<input type="submit" name='effacer' class='submit' value="<:ecrire_message:label_effacer:>" />
+</li></ul></fieldset>
+
+<INCLURE{fond=liste/messages_envoyes}{ajax}{id_auteur=#SESSION{id_auteur}}{id_message=#EVAL{_request('id_message')}}{date_last=#DATE_HEURE}{nombre=#GRAND_TOTAL}{env}>
+</form>
+]
+</div>
+<script type='text/javascript'>(function($){
+	$(function(){
+		$('select#selection').change(function(){
+			var val = $(this).attr('value');
+			if (val=='none') $('ul.envoyes div.message input[type=checkbox]').attr('checked','');
+			if (val=='all') $('ul.envoyes div.message input[type=checkbox]').attr('checked','checked');
+		});
+	});
+}(jQuery));
+</script>
+</BOUCLE_envoyes>
+<:messagerie:aucun_message_envoye:>
+<//B_envoyes>
+</div>

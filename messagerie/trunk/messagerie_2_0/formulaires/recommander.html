@@ -1,0 +1,52 @@
+<div class="ajax formulaire formulaire_#ENV{form}" id="formulaire_#ENV{form}#ENV{id}">
+[(#REM) pour IE qui sinon se perd dans l'ajax !, ne pas retirer]<br class='bugajaxie' />
+[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[(#ENV**{editable}|?{' '})
+<form method='post' action='#ENV{action}' class='ajax'>
+
+[(#REM) declarer les hidden qui declencheront le service du formulaire 
+parametre : url d'action ]
+#ACTION_FORMULAIRE{#ENV{action}}
+
+[(#REM) les champs de saisie]
+<fieldset><legend><:recommander:recommander_a_un_ami:></legend><ol>
+
+#SET{name,destinataire}#SET{obli,obligatoire}
+#SET{erreur,#ENV**{erreurs}|table_valeur{#GET{name}}}
+<li class="text [champ_(#GET{name})] [(#GET{obli}|sinon{facultatif})] [ (#GET{erreur}|?{'erreur'})]">
+<label for='#GET{name}' class='nocmx'>[(#ENV{form}|concat{':label_',#GET{name}}|_T)]
+[(#GET{obli}|?{' '})<em><:formulaires:info_obligatoire:></em>]
+</label><div class='faux_input'>
+<span class='details'><span class='dest' style='display:none;'><img src='#CHEMIN{habillage/croix.gif}' alt='X' /></span>[(#INCLURE{fond=formulaires/ecrire_message_destinataires}{destinataires=#ENV*{destinataires}})]</span>
+<input type="text" name='#GET{name}' id='#GET{name}' value="#ENV*{#GET{name}}" class='text' size='20' /></div>
+<div class='spacer'></div>
+[<span class='erreur'>(#GET{erreur})</span>]
+</li>
+
+#SET{name,texte}#SET{obli,facultatif}
+#SET{erreur,#ENV**{erreurs}|table_valeur{#GET{name}}}
+#SET{valeur,#ENV*{#GET{name}}}
+<li class="textarea [champ_(#GET{name})] [(#GET{obli}|sinon{facultatif})][ (#GET{erreur}|?{'erreur'})]">
+<label for='#GET{name}'>[(#ENV{form}|concat{':label_',#GET{name}}|_T)]
+[(#GET{obli}|?{' '})<em><:formulaires:info_obligatoire:></em>]
+</label><textarea name='#GET{name}' id='#GET{name}' class=''>#ENV*{#GET{name}}</textarea>
+[<span class='erreur'>(#GET{erreur})</span>]
+</li>
+
+[(#REM) Piege a robots spammeurs ]
+<li class='antispam' style='display:none;'><label for="nobotnobot-#ID"><:antispam_champ_vide:></label>
+<input type="text" name="nobotnobot" id="nobotnobot-#ID" value="#ENV{nobotnobot}" size="10" />
+</li>
+</ol></fieldset>
+
+<div class='bouton'><input type="submit" name='valider' value="[(#ENV{form}|concat{':label_envoyer'}|_T)]" /></div>
+<div class='legende_obligatoire'><em><:formulaires:info_obligatoire:></em> <:formulaires:info_obligatoire_legende:></div>
+
+</form>
+[(#INCLURE{fond=formulaires/pied_generique})]
+]
+<script type='text/javascript' src='#CHEMIN{javascript/jquery.autocompleter.js}'></script>
+<script type='text/javascript' src='#CHEMIN{formulaires/ecrire_message/ecrire_message.js}'></script>
+<script type='text/javascript'>var url_find_friend='[(#URL_PAGE{autocomplete_auteur}|parametre_url{dummy,'',&})]';</script>
+</div>
