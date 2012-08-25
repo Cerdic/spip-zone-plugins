@@ -2,7 +2,7 @@
 	prefix="messagerie"
 	categorie="communication"
 	version="3.0.0"
-	etat="stable"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="habillage/messagerie-32.png"
 	schema="1.0.0"
