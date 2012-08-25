@@ -1,5 +1,5 @@
 <div class='ajax'>
-<BOUCLE_envoyes(MESSAGES){id_auteur=#SESSION{id_auteur}}{statut!=poub}{pagination 1}{!par date_heure}>
+<BOUCLE_envoyes(MESSAGES){type=normal}{id_auteur=#SESSION{id_auteur}}{statut!=poub}{pagination 1}{!par date_heure}>
 <div class="formulaire_spip formulaire_#ENV{form}" id="formulaire_#ENV{form}#ENV{id}">
 <br class='bugajaxie' />
 [<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
