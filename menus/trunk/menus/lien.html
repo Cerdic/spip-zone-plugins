@@ -2,9 +2,9 @@
 
 [(#ENV{appel_formulaire}|oui)
 	<div class="titre">#GET{titre}</div>
-	<div class="infos">[(#ENV*{url}|typo)]</div>
+	<div class="infos">[(#ENV*{url}|extraire_multi)]</div>
 ]
 [(#ENV{appel_menu}|oui)
 	<li class="menu-entree item[ (#ENV{css})]">
-		<a href="[(#ENV*{url}|typo)]" title="[(#GET{titre}|attribut_html)]"[ class="(#ENV{css_lien})"]>#GET{titre}</a>
+		<a href="[(#ENV*{url}|extraire_multi)]" title="[(#GET{titre}|attribut_html)]"[ class="(#ENV{css_lien})"]>#GET{titre}</a>
 ]
