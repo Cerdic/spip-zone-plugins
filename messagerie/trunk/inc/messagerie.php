@@ -99,32 +99,6 @@ function messagerie_mailer($objet, $texte, $emails_dest=array()){
 	return false;
 }
 
-// /**
-//  * Marquer un message comme lu
-//  *
-//  * @param int $id_auteur
-//  * @param array $liste
-//  */
-// function messagerie_marquer_lus($id_auteur,$liste){
-// 	$liste = array_map('intval',$liste);
-// 	sql_updateq('spip_auteurs_messages',array('vu'=>'oui'),array('id_auteur='.intval($id_auteur),'id_message IN ('.implode(',',$liste).')'));
-// 	include_spip('inc/invalideur');
-// 	suivre_invalideur("message/".implode(',',$liste));
-// }
-// 
-// /**
-//  * Marquer un message comme non lu
-//  *
-//  * @param int $id_auteur
-//  * @param array $liste
-//  */
-// function messagerie_marquer_non_lus($id_auteur,$liste){
-// 	$liste = array_map('intval',$liste);
-// 	sql_updateq('spip_auteurs_messages',array('vu'=>'non'),array('id_auteur='.intval($id_auteur),'id_message IN ('.implode(',',$liste).')'));
-// 	include_spip('inc/invalideur');
-// 	suivre_invalideur("message/".implode(',',$liste));
-// }
-
 /**
  * Effacer un message
  *
