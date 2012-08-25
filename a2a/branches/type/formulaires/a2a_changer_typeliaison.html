@@ -8,11 +8,11 @@
 				[(#CONFIG{a2a/type_obligatoire}|non)
 					<option value=''></option>
 				]
-				<BOUCLE_liaison(DATA){source tableau, #CONFIG{a2a/types_liaisons}}{par valeur}>
+				
+				<BOUCLE_liaison(DATA){source tableau, #TYPES_LIAISONS}{par valeur}>
 					<option value="#CLE"[(#CLE|=={#ENV{type_liaison}}|oui) selected="selected"]>#VALEUR</option>
 				</BOUCLE_liaison>
 				</select>
-				
 				<input type='submit' name="save" class='submit' value='<:a2a:changer_type_liaison:>' />
 				[</div>(#ENV{message_erreur}|oui)]
 			</B_liaison>

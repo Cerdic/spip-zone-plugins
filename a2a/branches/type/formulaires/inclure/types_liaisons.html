@@ -4,7 +4,7 @@
 [<p class='erreur_message'>(#ENV**{message_erreur})</p>]
 <select name="type_liaison" id="type_liaison">
 	[(#CONFIG{a2a/type_obligatoire}|non)<option value=""></option>]
-<BOUCLE_liaisons(DATA){source tableau, #CONFIG{a2a/types_liaisons}}>
+<BOUCLE_liaisons(DATA){source tableau, #TYPES_LIAISONS}>
 	
 	<option value="#CLE">[(#VALEUR|_T)]</option>
 	

@@ -2,7 +2,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function a2a_traduire_type_liaisons($type){
-	$types_liaisons = lire_config('a2a/types_liaisons');
+	$types_liaisons = lister_types_liaisons();
 	return _T($types_liaisons[$type]);	
 }
 function lister_articles_lies($id_article, $ordren,$type_liaison=null){
@@ -23,5 +23,19 @@ function balise_ARTICLES_LIES($p) {
 	return $p;
 }
 
-?>
+function lister_types_liaisons(){
+	// fournit tout les types de liaisons ita est : define + cfg.
+	include_spip('inc/cfg');
+	if ($GLOBALS['a2a_types_liaisons'])
+		$types_liaisons = array_merge(lire_config('a2a/types_liaisons'),$GLOBALS['a2a_types_liaisons']);	
+	else 
+		$types_liaisons = lire_config('a2a/types_liaisons');
+	asort($types_liaisons);
+	return $types_liaisons;
+}
+function balise_TYPES_LIAISONS($p){
+	$p->code = "lister_types_liaisons()";
+	return $p;	
+}
 
+?>
