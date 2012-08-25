@@ -42,7 +42,7 @@ Some components take care of these optionnal plugins :
 	<lien>http://acs.geomaticien.org</lien>
 	<auteur>Daniel FAIVRE</auteur>
 	<licence>GPL - (c) 2007-2012</licence>
-	<version>0.8.9</version>
+	<version>0.8.10</version>
 	<etat>stable</etat>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees

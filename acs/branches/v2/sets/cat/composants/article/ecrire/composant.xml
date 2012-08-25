@@ -3,8 +3,8 @@
   <nom>Article</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2012 - licence GPL</auteur>
-  <version>0.8.8</version>
-	<necessite id='acs' version='[0.8.8;]' />
+  <version>0.8.10</version>
+	<necessite id='acs' version='[0.8.9;]' />
   <group>content</group>
 
   <param>

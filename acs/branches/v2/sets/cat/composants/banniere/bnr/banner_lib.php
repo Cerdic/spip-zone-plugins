@@ -14,31 +14,23 @@ function getBanners($path = '.', $exclut = "")
 	return $r;
 	}
 
-
- function expFp($folder = ".", $filetype = "", $exclut="")
-    {
+ function expFp($folder = ".", $filetype = "", $exclut="") {
     $currdir=getcwd();
     if ($folder && @is_dir("$currdir/$folder"))
         chdir("$currdir/$folder");
     $dh = opendir(".");
 		$a_files = array();
-      while(false !== ($file = readdir($dh)))
-        {
-        // insert all the files in an array
-        if(is_file($file) &&
-            ( strtoupper( substr( $file,(-1*strlen($filetype))))==strtoupper($filetype)) &&
-						($file != $exclut)
-					)
-            $a_files[] = $file;
-        if (@is_dir($file) && $file!="." && $file!=".." && $file!=".xvpics")
-            $a_files[$file] = expFp($file, $filetype);
-        }
+    while(false !== ($file = readdir($dh))) {
+    	if (@is_dir($file)) continue;
+      // insert all the files except $exclut in an array
+      if (is_file($file) &&
+        ( strtoupper( substr( $file,(-1*strlen($filetype))))==strtoupper($filetype)) &&
+				($file != $exclut))
+        $a_files[] = $file;
+    }
     closedir($dh);
     chdir($currdir);
- //    if (is_array($a_files))
- //        array_multisort($a_files);
     return $a_files;
-    }
-
+}
 
 ?>
