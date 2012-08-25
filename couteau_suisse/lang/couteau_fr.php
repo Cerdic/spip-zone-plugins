@@ -47,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_verif' => 'Vérifiez préalablement l\'archive qui vous convient :',
 	'maj_verif2' => 'Attention : après avoir cliqué sur le bouton ci-dessus, vérifiez bien que l\'archive téléchargée correspond au plugin qu\'il vous faut mettre à jour.',
 	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu être identifié.',
+	'maj_tiers' => 'Nécessite/Utilise/Procure',
 	'msg_publies' => 'Uniquement les messages publiés',
 
 	// N

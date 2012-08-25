@@ -130,6 +130,8 @@ function info_maj_spip_ext($ver_min, $rev_min, $min3){
 
 function maj_auto_action_rapide() {
 	$arg_chargeur = $GLOBALS['spip_version_base']>=15828?'url_zip_plugin2':'url_zip_plugin'; // eq. SPIP >= 2.1.2
+	$tiers = array_map(create_function('$v','return _T("couteau:2pts", array("objet"=>$v));'), explode('/', _T('couteau:maj_tiers')));
+	$tiers = array('necessite'=> $tiers[0], 'utilise'=> $tiers[1], 'procure'=> $tiers[2]);
 	$time = time();
 	$timeout = ini_get('max_execution_time');
 	$timeout = $timeout?min(30,floor($timeout/2)):10;
@@ -204,8 +206,8 @@ function maj_auto_action_rapide() {
 				$nom .= "<br/>" . _T('couteau:maj_verif') . "<br/>$zip_log<br/>{$bouton}[->$infos[zip_trac]]<label>";
 			$bouton = '&nbsp;';
 		}
-		foreach(array('necessite'=>defined('_SPIP30000')?_T('plugin_info_necessite'):_L('N&eacute;cessite :'), 'utilise'=>_L('Utilise :'), 'procure'=>_L('Procure :')) as $k=>$v)
-			if(isset($infos[$k]) && count($infos[$k]))
+		// relations exterieures
+		foreach($tiers as $k=>$v) if(isset($infos[$k]) && count($infos[$k]))
 				$nom .= "<br/>$v {".join('}, {', array_map('array_shift', $infos[$k])).'}';
 		${$actif?'html_actifs':($extension?'html_extensions':'html_inactifs')}[] = "|$bouton|$nom|$rev|";
 	}
