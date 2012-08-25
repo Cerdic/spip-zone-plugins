@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'maj_actu' => 'Forcer l\'actualisation distante',
 	'maj_liste' => 'Liste des plugins détectés :',
-	'maj_maj' => 'Mettre à jour le plugin sélectionné',
+	'maj_maj' => 'Mettre à jour le(s) plugin(s) sélectionné(s)',
 	'maj_ok' => 'Ce [plugin->@zip@] semble [à jour->@url@].',
 	'maj_rev' => 'Rév. @revision@',
 	'maj_rev_ko' => 'La [révision distante->@url@] n\'a pas pu être trouvée.',

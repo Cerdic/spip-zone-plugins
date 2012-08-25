@@ -4,7 +4,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 //include_spip('inc/actions');
-include_spip('inc/actions_compat');
+//include_spip('inc/actions_compat');
 include_spip('inc/distant');
 include_spip('inc/presentation');
 if(version_compare(PHP_VERSION, '5.0.0', '>='))	
@@ -44,6 +44,51 @@ if(!function_exists('info_maj_spip')) {
 	}
 }
 
+function maj_auto_js() {
+	return http_script("
+jQuery(document).ready(function() {
+	var ch = jQuery('#maj_auto_div .maj_checked');
+	var re = jQuery('.cs_relancer a');
+	if(ch.length) ch[0].checked = true;
+	else if(!re.length){
+		jQuery('#maj_auto_div :submit').parent().remove();
+		jQuery('#maj_auto_div :radio').attr('disabled','disabled');
+	}
+	if(!jQuery('#maj_auto_div :radio:checked').length && jQuery('#maj_auto_div :radio').length)
+		jQuery('#maj_auto_div :radio:first')[0].checked = true;
+	var ch = jQuery('#maj_auto_div :checkbox');
+	if(ch.length==1) ch.hide();
+	re.click(function() {
+		cs_href_click(jQuery('#maj_auto')[0], true);
+		return false;
+	});
+	jQuery('#maj_auto_div thead').click( function() {
+		var span = jQuery('span', this);
+		if(!span.length) return true;
+		jQuery(this).next().toggleClass('cs_hidden');
+		cs_EcrireCookie(span[0].id, '+'+span[0].className, dixans);
+		span.toggleClass('cs_hidden');
+		// annulation du clic
+		return false;
+	}).each(maj_lire_cookie);
+	jQuery('.select_plugin').click( function() {
+		var checks = jQuery('#maj_auto_div :checkbox:checked').length;
+		var radios = jQuery('#maj_auto_div :radio');
+		if(checks) radios.hide(); else radios.show();
+	});
+
+function maj_lire_cookie(i,e){
+	var span = jQuery('span', this);
+	if(!span.length) return;
+	jQuery(this).attr('style', 'cursor:pointer;')
+	var c = cs_LireCookie(span[0].id);
+	if(c!==null && c.match('cs_hidden')) {
+		jQuery(this).next().addClass('cs_hidden');
+		span.removeClass('cs_hidden');
+	}
+}
+});"); }
+
 function info_maj_spip2(){
 	if (!autoriser('webmestre')) return "";
 	include_spip('inc/presentation');
@@ -82,6 +127,7 @@ function info_maj_spip_ext($ver_min, $rev_min, $min3){
 	return $res;
 }
 
+
 function maj_auto_action_rapide() {
 	$arg_chargeur = $GLOBALS['spip_version_base']>=15828?'url_zip_plugin2':'url_zip_plugin'; // eq. SPIP >= 2.1.2
 	$time = time();
@@ -108,7 +154,11 @@ function maj_auto_action_rapide() {
 	// tous, mais les actifs d'abord...
 	$plugins = array_unique(array_merge($plugins_actifs, $plugins_extensions, liste_plugin_files()));
 	$html_actifs = $html_inactifs = $html_extensions = array();
-	foreach ($plugins as $p) /*if(preg_match(',^auto/,', $p))*/ {
+	if(defined('_SPIP30000')) {
+		include_spip('exec/admin_plugin');
+		echo svp_presenter_actions_realisees();
+	}
+	foreach ($plugins as $p) {
 		$actif = in_array($p, $plugins_actifs, true);
 		$extension = in_array($p, $plugins_extensions, true);
 		$auto = preg_match(',^auto/,', $p);
@@ -133,19 +183,29 @@ function maj_auto_action_rapide() {
 		$nom = preg_replace(",[\n\r]+,",' ',$infos['nom']). '&nbsp;(v' .$infos['version'] . ')' . ($maj_lib?"\n_ {{".$maj_lib.'}}':'');
 		$rev = $infos['rev_local']?_T('couteau:maj_rev', array('revision' => $infos['rev_local'])):'';
 		if(strlen($infos['commit'])) $rev .= (strlen($rev)?'<br/>':'') . cs_date_court($infos['commit']);
-		if($infos['svn']) $rev .= '<br/>SVN';		
+		if($infos['svn']) $rev .= '<br/><span style="font-variant:small-caps;">svn</span>';
+		if($infos['id_paquet']>0) $rev .= '<span style="font-variant:small-caps;">&nbsp;svp</span>';
+			elseif($infos['id_paquet']<0) $rev .= '<span style="font-variant:small-caps;">&nbsp;old</span>';
+		$id_paquet = abs($infos['id_paquet']);
 		if(!strlen($rev)) $rev = '&nbsp;';
 		$zip_log = (strlen($infos['zip_log']) && $infos['zip_log']!=$infos['zip_trac'])
 			?"<label><input type='radio' value='$infos[zip_log]'$checked name='$arg_chargeur'/>[->$infos[zip_log]]</label>":'';
 		$bouton = '&nbsp;';
-		if($auto && !$stop) $bouton = strlen($infos['zip_trac'])
-			?"<input type='radio' value='$infos[zip_trac]'$checked name='$arg_chargeur'/>"
-			:'<center style="margin-top:0.6em;font-weight:bold;"><acronym title="'._T('couteau:maj_zip_ko').'">&#63;</acronym></center>';
+		if(!$stop) {
+			if($infos['maj_dispo'] && $id_paquet) // bouton pour SVP
+				$bouton = "<input type='radio' value='$id_paquet'$checked name='$arg_chargeur'/><br/><input type='checkbox' class='checkbox select_plugin' name='ids_paquet[]' value='$id_paquet'>";
+			elseif($auto) $bouton = strlen($infos['zip_trac'])
+				?"<input type='radio' value='$infos[zip_trac]'$checked name='$arg_chargeur'/>"
+				:'<center style="margin-top:0.6em;font-weight:bold;"><acronym title="'._T('couteau:maj_zip_ko').'">&#63;</acronym></center>';
+		}
 		if(strlen($zip_log)) {
 			if (!$stop)
-				$nom .= "\n_ "._T('couteau:maj_verif') . "\n_ $zip_log\n_ {$bouton}[->$infos[zip_trac]]<label>";
+				$nom .= "<br/>" . _T('couteau:maj_verif') . "<br/>$zip_log<br/>{$bouton}[->$infos[zip_trac]]<label>";
 			$bouton = '&nbsp;';
 		}
+		foreach(array('necessite'=>_T('plugin_info_necessite'), 'utilise'=>_L('Utilise :'), 'procure'=>_L('Procure :')) as $k=>$v)
+			if(isset($infos[$k]) && count($infos[$k]))
+				$nom .= "<br/>$v {".join('}, {', array_map('array_shift', $infos[$k])).'}';
 		${$actif?'html_actifs':($extension?'html_extensions':'html_inactifs')}[] = "|$bouton|$nom|$rev|";
 	}
 	
@@ -160,43 +220,7 @@ function maj_auto_action_rapide() {
 		. "<div style='text-align: right;'><input class='fondo' type='submit' value=\""
 		. attribut_html(_T('couteau:maj_maj'))
 		. '" /><p><i>'._T('couteau:maj_verif2').'</i></p></div></fieldset></div>'
-		. http_script("
-jQuery(document).ready(function() {
-	var ch = jQuery('#maj_auto_div .maj_checked');
-	var re = jQuery('.cs_relancer a');
-	if(ch.length) ch[0].checked = true;
-	else if(!re.length){
-		jQuery('#maj_auto_div :submit').parent().remove();
-		jQuery('#maj_auto_div :radio').attr('disabled','disabled');
-	}
-	if(!jQuery('#maj_auto_div :radio:checked').length && jQuery('#maj_auto_div :radio').length)
-		jQuery('#maj_auto_div :radio:first')[0].checked = true;
-	re.click(function() {
-		cs_href_click(jQuery('#maj_auto')[0], true);
-		return false;
-	});
-	jQuery('#maj_auto_div thead').click( function() {
-		var span = jQuery('span', this);
-		if(!span.length) return true;
-		jQuery(this).next().toggleClass('cs_hidden');
-		cs_EcrireCookie(span[0].id, '+'+span[0].className, dixans);
-		span.toggleClass('cs_hidden');
-		// annulation du clic
-		return false;
-	}).each(maj_lire_cookie);
-
-function maj_lire_cookie(i,e){
-	var span = jQuery('span', this);
-	if(!span.length) return;
-	jQuery(this).attr('style', 'cursor:pointer;')
-	var c = cs_LireCookie(span[0].id);
-	if(c!==null && c.match('cs_hidden')) {
-		jQuery(this).next().addClass('cs_hidden');
-		span.removeClass('cs_hidden');
-	}
-}
-
-});");
+		. maj_auto_js();
 	$html2 = "\n<div class='cs_sobre'><input class='cs_sobre' type='submit' value=\"["
 		. attribut_html(_T('couteau:maj_actu'))	. ']" /></div>';
 
@@ -259,8 +283,10 @@ function plugin_get_infos_maj($p, $timeout=false, $DIR_PLUGINS=_DIR_PLUGINS) {
 		$url_origine = str_replace(array(_MAJ_SVN_TRAC,_MAJ_SVN_DEBUT), _MAJ_LOG_DEBUT, $url_origine);
 		// prise en compte du recent demenagement de la Zone...
 		$url_origine = preg_replace(',/_plugins_/_(?:stable|dev|test)_/,','/_plugins_/', $url_origine);
-		//$infos['zip_trac'] = 'SVN';
 	}
+	// URL http:// inattendu
+	if(strncmp($url_origine, 'http://', 7)!==0) $url_origine='';
+	$infos['id_paquet'] = 0; // SVP
 	$infos['url_origine'] = strlen($url_origine)?$url_origine._MAJ_LOG_FIN:'';
 	$infos['rev_local'] = abs($rev_local);
 	$infos['rev_rss'] = intval(maj_auto_rev_distante($infos['url_origine'], $timeout, ', \[(\d+)\],', $lastmodified));
@@ -269,8 +295,16 @@ function plugin_get_infos_maj($p, $timeout=false, $DIR_PLUGINS=_DIR_PLUGINS) {
 	$infos['zip_log'] = $infos['zip_trac'] = '';
 	$p2 = preg_match(',^auto/(.*)$,', $p, $regs)?$regs[1]:'';
 	if(strlen($p2)) {
+//echo "<hr/>$p -> $infos[prefix]<br/>";
+		if(defined('_SPIP30000')) {
+			// supposition du passage par SVP ?
+			maj_auto_svp_query($p, $infos);
+			// ce plugin passe en negatif s'il n'a pas ete installe par SVP
+			if(strpos($p2,$infos['prefix'].'/v')===false) $infos['id_paquet'] *= -1;
+		}
 		// supposition du nom d'archive sur files.spip.org
-		if(intval(maj_auto_rev_distante($f = _MAJ_ZIP.$p2.'.zip', $timeout))) $infos['zip_trac'] = $f;
+		if(!$infos['zip_trac'] && intval(maj_auto_rev_distante($f = _MAJ_ZIP.$p2.'.zip', $timeout)))
+			$infos['zip_trac'] = $f;
 		// nom de l'archive recemment installee par chargeur
 		if(lire_fichier(sous_repertoire(_DIR_CACHE, 'chargeur').$p2.'/install.log', $log)
 				&& preg_match(',[\n\r]source: *([^\n\r]+),msi', $log, $regs)
@@ -280,6 +314,54 @@ function plugin_get_infos_maj($p, $timeout=false, $DIR_PLUGINS=_DIR_PLUGINS) {
 		if(!$infos['zip_trac']) $infos['zip_trac'] = $infos['zip_log'];
 	}
 	return $infos;
+}
+
+// fonction cherchant un fichier zip valide dans les paquets de SVP
+// retourne array($id_paquet, $url_zips, $nom_zip)
+function maj_auto_svp_query($dir, &$infos) {
+	// Recherche en base du plugin local, puis du paquet distant
+	if($x=sql_fetsel('id_paquet,id_plugin,version,nom_archive','spip_paquets','src_archive='._q($dir)))
+		if($y=sql_fetsel('id_paquet,p.id_depot,p.version,nom_archive,src_archive,url_archives,url_brouteur',
+			array('spip_paquets AS p', 'spip_depots AS d'), array('p.id_plugin='.$x['id_plugin'], 'p.id_depot>0'))) {
+		$infos['id_paquet'] = $x['id_paquet'];
+		// info : si $x['version']<>$y['version'] alors SVP propose une mise a jour disponible
+		// construction du paquet zip
+		if(strlen($y['nom_archive']) && intval(maj_auto_rev_distante($f = $y['url_archives'].'/'.$y['nom_archive'], $timeout))) 
+			$infos['zip_trac'] = $f;
+//echo "<hr>$dir -> $infos[prefix]<br>SQL LOCAL = "; print_r($x); echo "<br>SQL DISTANT = "; print_r($y);
+	}
+}
+
+// fonction manipulant les fonctions CVT de SVP (cf. svp/formulaires/admin_plugin.php)
+function maj_auto_svp_maj_plugin($ids_paquet=array()) {
+	// actualiser la liste des paquets locaux systematiquement
+	include_spip('inc/svp_depoter_local');
+	// sans forcer tout le recalcul en base, mais en récupérant les erreurs XML
+	$valeurs['erreurs_xml'] = array();
+	svp_actualiser_paquets_locaux(false, $valeurs['erreurs_xml']);
+
+	$actions = $messages = $retour = array();
+	foreach ($ids_paquet as $i)	$actions[$i] = 'up';
+	// lancer les verifications
+	if(count($actions)) {
+		// faire appel au decideur pour determiner la liste exacte des commandes apres
+		// verification des dependances
+		include_spip('inc/svp_decider');
+		svp_decider_verifier_actions_demandees($actions, $messages);
+	} else
+		$messages['decideur_erreurs'][] = _T('svp:message_erreur_aucun_plugin_selectionne');
+	if(!count($messages['decideur_erreurs'])) {
+		// recuperer les actions puis les envoyer a l'actionneur
+		$actions = unserialize(_request('_todo'));
+		if(!count($actions))
+			$messages['decideur_actions'][] = _T('svp:message_erreur_aucun_plugin_selectionne');
+		include_spip('inc/svp_actionner');
+		svp_actionner_traiter_actions_demandees($actions, $retour, $redirect);
+		$action = charger_fonction('actionner', 'action');
+		$action();
+	}
+	include_spip('inc/headers');
+	redirige_par_entete(_request('redirect'));
 }
 
 // fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php
