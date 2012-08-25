@@ -11,7 +11,7 @@
 
 <div class="texte entry-content">
 	<:adxmenu:exemple|propre:>
-#ADXMENU{1:2:3}
+#ADXMENU{tout!2:3}
 	<p>&nbsp;</p>
 [(#SET{url_cfg,[(#EVAL{function_exists('lire_config')}|=={1}|?{<a href="[(#URL_ECRIRE{cfg,cfg=adxmenu})]"><:adxmenu:page_de_configuration:></a>,<small><:adxmenu:pas_cfg_installe:></small>})]})]
 	<:adxmenu:documentation{bloc_cfg=#GET{url_cfg}}|propre:>

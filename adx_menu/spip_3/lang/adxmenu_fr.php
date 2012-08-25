@@ -20,7 +20,9 @@ Le plugin est bas&eacute; sur le script \'ADXmenu\', version 4.21, de [Aleksanda
 
 -* \'secteurs\' pour pr&eacute;senter tous vos secteurs en t&ecirc;te de menu ({valeur par d&eacute;faut}),
 -* \'tout\' pour pr&eacute;senter toutes vos rubriques en t&ecirc;te de menu,
--* une liste d\'ID de rubriques, s&eacute;par&eacute;s par deux points (ex "1:2").',
+-* une liste d\'ID de rubriques, s&eacute;par&eacute;s par deux-points (ex "1:2").
+
+Pour exclure une ou plusieurs rubriques, listez les identifiants &agrave; exclure, s&eacute;par&eacute;s par deux-points et pr&eacute;c&eacute;d&eacute;s par un point d\'exclamation ("tout!3:5").',
 	'bouton_reset' => 'R&eacute;initialiser',
 	'enregistrer_les_modifications' => 'Enregsitrer les modifications',
 	'effacer_les_modifications' => 'Effacer les modifications',
