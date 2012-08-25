@@ -11,6 +11,17 @@
 		
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
+			<B_types_liaisons_non_modifiables>
+			
+			<li>
+				<p class='explication'><:a2a:types_liaisons_non_modifiables:></P>
+				<ul class='spip'>
+				<BOUCLE_types_liaisons_non_modifiables(DATA){source tableau,#EVAL{$GLOBALS['a2a_types_liaisons'];}}{par cle}>
+					<li>#CLE ([(#VALEUR|_T)])</li>
+				</BOUCLE_types_liaisons_non_modifiables>
+				</ul>
+			</li>
+			</B_types_liaisons_non_modifiables>
 			<li class='editer_types_liaisons editer[(#ENV**{erreurs}|table_valeur{sup_pb}|oui) erreur]'>
 				<label for="types_liaisons"><:a2a:types_liaisons:></label>
 				<p class="explication"><:a2a:explication_types_liaisons:></p>

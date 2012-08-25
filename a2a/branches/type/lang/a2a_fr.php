@@ -54,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_obligatoire'=>'Obligation de typer les liaisons',
 	'type_liaison' => 'Type de liaison',
 	'types_differents'	=> 'Possibilité de relier plusieurs fois des articles, avec un type différent à chaque fois',
+	'types_liaisons_non_modifiables'=>'Les types de liaisons suivants ne sont pas modifiables via la configuration',
 
 	// U
 	'utilise_par_articles' => ', utilisé par les liaisons des articles :',
