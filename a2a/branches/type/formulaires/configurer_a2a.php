@@ -27,6 +27,9 @@ function formulaires_configurer_a2a_verifier(){
 	$erreurs = array();
 	$types_liaisons 	= a2a_types_liaisons2array(_request('types_liaisons'));
 	$types_liaisons_actuels = lire_config('a2a/types_liaisons');
+	if ($GLOBALS['a2a_types_liaisons']){
+		$types_liaisons = array_merge($types_liaisons,$GLOBALS['a2a_types_liaisons']);
+	}
 	$diff 	= array_diff_key($types_liaisons_actuels,$types_liaisons); // les clefs supprimés 
 	$sup_pb = array(); // tableau associatifs listant les types_liaisons supprimés problématiques, car il y a des relations portant ce type
 	foreach ($diff as $type=>$nom){
