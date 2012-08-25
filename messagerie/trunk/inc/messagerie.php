@@ -8,6 +8,7 @@
 
 
 include_spip('inc/filtres');
+include_spip('inc/messages');
 include_spip('base/abstract_sql');
 
 if (!defined('_EMAIL_GENERAL'))
@@ -35,38 +36,6 @@ function messagerie_verifier($obligatoires = array()){
 	return $erreurs;
 }
 
-/**
- * Selectionner les destinataires en distinguant emails et id_auteur
- *
- * @param unknown_type $dests
- * @return unknown
- */
-function messagerie_destiner($dests){
-	$dests = pipeline('messagerie_destiner',$dests);
-	
-	// separer les destinataires auteur des destinataires email
-	$auteurs_dest = array();
-	$email_dests = array();
-	foreach ($dests as $id){
-		// il se peut que l'id recupere l'ancre qui suit avec certains ie ... :(
-		if (preg_match(',[0-9]+#[a-z_0-9]+,',$id))
-			$id = intval($id);
-		if (is_numeric($id))
-			$auteurs_dest[] = $id;
-		elseif ($id!=_EMAIL_GENERAL)
-			$email_dests[] = $id;
-	}
-	if (count($email_dests)) {
-		// retrouver les id des emails
-		$res = sql_select('id_auteur,email','spip_auteurs','email IN ('.implode(',',array_map('sql_quote',$email_dests)).')');
-		$auteurs_dest_found = array();
-		while ($row = spip_fetch_array($res)){
-			$auteurs_dest_found[] = $row['id_auteur'];
-		}
-		$auteurs_dest = array_merge($auteurs_dest,$auteurs_dest_found);
-	}
-	return array($auteurs_dest,$email_dests);
-}
 
 /**
  * Envoyer un message par la messagerie interne
@@ -96,14 +65,14 @@ function messagerie_messager($objet, $texte, $auteurs_dest=array(),$general = fa
 			$insert = array();
 			if (!$general) {
 				foreach($auteurs_dest as $id)
-					$insert[] = array('id_message'=>$id_message,'id_auteur'=>$id,'vu'=>'non');
+					$insert[] = array('objet'=>'message', 'id_objet'=>$id_message,'id_auteur'=>$id,'vu'=>'non');
 			}
 			else {
 				$res = sql_select('id_auteur','spip_auteurs');
 				while ($row = sql_fetch($res))
-					$insert[] = array('id_message'=>$id_message,'id_auteur'=>$row['id_auteur'],'vu'=>'non');
+					$insert[] = array('objet'=>'message', 'id_objet'=>$id_message,'id_auteur'=>$row['id_auteur'],'vu'=>'non');
 			}
-			sql_insertq_multi('spip_auteurs_messages',$insert);
+			sql_insertq_multi('spip_auteurs_liens',$insert);
 
 			$out = $id_message;			
 		}
@@ -130,31 +99,31 @@ function messagerie_mailer($objet, $texte, $emails_dest=array()){
 	return false;
 }
 
-/**
- * Marquer un message comme lu
- *
- * @param int $id_auteur
- * @param array $liste
- */
-function messagerie_marquer_lus($id_auteur,$liste){
-	$liste = array_map('intval',$liste);
-	sql_updateq('spip_auteurs_messages',array('vu'=>'oui'),array('id_auteur='.intval($id_auteur),'id_message IN ('.implode(',',$liste).')'));
-	include_spip('inc/invalideur');
-	suivre_invalideur("message/".implode(',',$liste));
-}
-
-/**
- * Marquer un message comme non lu
- *
- * @param int $id_auteur
- * @param array $liste
- */
-function messagerie_marquer_non_lus($id_auteur,$liste){
-	$liste = array_map('intval',$liste);
-	sql_updateq('spip_auteurs_messages',array('vu'=>'non'),array('id_auteur='.intval($id_auteur),'id_message IN ('.implode(',',$liste).')'));
-	include_spip('inc/invalideur');
-	suivre_invalideur("message/".implode(',',$liste));
-}
+// /**
+//  * Marquer un message comme lu
+//  *
+//  * @param int $id_auteur
+//  * @param array $liste
+//  */
+// function messagerie_marquer_lus($id_auteur,$liste){
+// 	$liste = array_map('intval',$liste);
+// 	sql_updateq('spip_auteurs_messages',array('vu'=>'oui'),array('id_auteur='.intval($id_auteur),'id_message IN ('.implode(',',$liste).')'));
+// 	include_spip('inc/invalideur');
+// 	suivre_invalideur("message/".implode(',',$liste));
+// }
+// 
+// /**
+//  * Marquer un message comme non lu
+//  *
+//  * @param int $id_auteur
+//  * @param array $liste
+//  */
+// function messagerie_marquer_non_lus($id_auteur,$liste){
+// 	$liste = array_map('intval',$liste);
+// 	sql_updateq('spip_auteurs_messages',array('vu'=>'non'),array('id_auteur='.intval($id_auteur),'id_message IN ('.implode(',',$liste).')'));
+// 	include_spip('inc/invalideur');
+// 	suivre_invalideur("message/".implode(',',$liste));
+// }
 
 /**
  * Effacer un message
@@ -164,7 +133,7 @@ function messagerie_marquer_non_lus($id_auteur,$liste){
  */
 function messagerie_effacer($id_auteur,$liste){
 	$liste = array_map('intval',$liste);
-	sql_updateq('spip_auteurs_messages',array('vu'=>'pou'),array('id_auteur='.intval($id_auteur),'id_message IN ('.implode(',',$liste).')'));
+	sql_updateq('spip_auteurs_liens',array('vu'=>'pou'),array('id_auteur='.intval($id_auteur), 'objet="message"', 'id_objet IN ('.implode(',',$liste).')'));
 	include_spip('inc/invalideur');
 	suivre_invalideur("message/".implode(',',$liste));
 }

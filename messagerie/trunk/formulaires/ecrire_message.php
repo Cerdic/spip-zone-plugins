@@ -29,7 +29,7 @@ function formulaires_ecrire_message_charger_dist($redirect="",$destinataire=""){
 	}
 	if ($repondre = _request('repondre')){
 
-		$row = sql_fetsel('id_auteur','spip_auteurs_messages','id_message='.intval($repondre));
+		$row = sql_fetsel('id_auteur','spip_auteurs_liens',array('id_objet='.intval($repondre), 'objet="message"'));
 		if (isset($row["id_auteur"]) && $row["id_auteur"] == $GLOBALS['visiteur_session']['id_auteur']){
 		    $row = sql_fetsel('id_auteur,titre,texte,date_heure','spip_messages','id_message='.intval($repondre));
 		    if (isset($valeurs['destinataires']))
@@ -59,7 +59,7 @@ function formulaires_ecrire_message_charger_dist($redirect="",$destinataire=""){
  * @return array
  */
 function formulaires_ecrire_message_verifier_dist($redirect=""){
-	include_spip('inc/messages');
+	include_spip('inc/messagerie');
 	return messagerie_verifier(array('objet','texte_message'));
 }
 
@@ -71,7 +71,7 @@ function formulaires_ecrire_message_verifier_dist($redirect=""){
  */
 function formulaires_ecrire_message_traiter_dist($redirect=""){
 	include_spip('inc/texte');
-	include_spip('inc/messages');
+	include_spip('inc/messagerie');
 
 	$objet = typo(_request('objet'));
 	$texte = _request('texte_message');

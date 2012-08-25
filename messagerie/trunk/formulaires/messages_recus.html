@@ -1,5 +1,5 @@
 <div class='ajax'>
-<BOUCLE_recus(MESSAGES spip_auteurs_messages){auteurs_messages.id_auteur=#SESSION{id_auteur}}{auteurs_messages.vu!=pou}{pagination 1}{!par date_heure}>
+<BOUCLE_recus(MESSAGES spip_auteurs_liens){id_auteur=#SESSION{id_auteur}}{spip_auteurs_liens.vu!=pou}{pagination 1}{!par date_heure}>
 <div class="formulaire_spip formulaire_#ENV{form}" id="formulaire_#ENV{form}#ENV{id}">
 <br class='bugajaxie' />
 [<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
