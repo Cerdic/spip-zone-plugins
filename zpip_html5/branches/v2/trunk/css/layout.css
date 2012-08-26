@@ -1,0 +1,36 @@
+/* --------------------------------------------------------------
+
+   layout.css
+   Disposition des blocs principaux
+
+-------------------------------------------------------------- */
+
+/* ------------------------------------------
+/* Disposition a l'ecran des blocs principaux
+/* ------------------------------------------ */
+body { background: #f9f9f9; margin: 0; padding: 0; text-align: center; }
+
+.page { position: relative; background: #fff; width: 58em; margin: 1em auto; padding:1em 2em; text-align: left; border:3px solid #ddd; }
+
+.header { width: 100%; margin: 0; border-bottom: 2px solid #46839B; }
+
+.container { clear: both; overflow: hidden; margin-top:/*@margin-bottom*/1.5em/*/@*/; }
+.content { float:left; width:65%;}
+
+.extra1 { float: right; width: 30%; overflow: hidden; margin-bottom:/*@margin-bottom*/1.5em/*/@*/; }
+.extra2 { float: right; clear:right; width: 30%; overflow: hidden; margin-bottom:/*@margin-bottom*/1.5em/*/@*/; }
+
+.footer { clear: both; width: 100%; margin: 1em 0 0 0; padding: 0.60em 0; border: 2px solid #ddd; background:#f9f9f9; text-align: center; font-size: 0.90em; }
+.footer a { /*color:#666;*/ } /* ne pas utiliser de selecteur trop precis, et eviter de toucher aux liens */
+.footer img { vertical-align: middle; }
+
+/* Gabarit d'impression */
+@media print {
+	.extra1,
+	.extra1,
+	.footer { display: none; }
+	.page,
+	.content { width: auto; }
+}
+
+/* end */

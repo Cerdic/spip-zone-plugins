@@ -1,0 +1,21 @@
+<plugin>
+	<nom>Zpip-dist HTML5</nom>
+	<slogan><multi>[fr]Zpip-dist HTML 5 pour SPIP 3 + Z-core[en]Zpip-dist HTML 5 for SPIP 3 + Z-core</multi></slogan>
+	<auteur>Loiseau2nuit, davux, Matthieu Marcillaud, C&#233;dric Morin, Romy T&ecirc;tue, Collectif SPIP</auteur>
+	<icon>img/z5.png</icon>
+	<licence>GNU/GPL</licence>
+	<version>2.0-dev</version>
+	<etat>dev</etat>
+	<description>
+		<multi>
+			[fr]Squelettes HTML5 par défaut pour SPIP 3 + Z-core : modulaires et exemplaires.
+			[en]HTML5 default skeleton for SPIP 3 + Z-core : modular and flexible
+		</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Zpip-dist-en-HTML5</lien>
+	<prefix>Z5</prefix>
+	<options>z5_options.php</options>
+	<categorie>squelette</categorie>
+	<necessite id="SPIP" version="[3.0-dev;]" />
+	<necessite id="Zcore" version="[2.0.0-dev;]" />
+</plugin>

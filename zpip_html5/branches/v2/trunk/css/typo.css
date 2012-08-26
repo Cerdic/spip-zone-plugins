@@ -1,0 +1,142 @@
+/* --------------------------------------------------------------
+
+   typo.css.html
+   Base typographique
+   Cf.: http://www.spip-contrib.net/3820
+
+-------------------------------------------------------------- */
+
+.valeurs_de_base {
+font-size:/*@font-size*/0.8125em/*/@*/;
+font-family:/*@font-family*/"Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif/*/@*/;
+font-family:/*@font-family-mono*/'andale mono','lucida console',monospace/*/@*/;
+text-indent:/*@text-indent*/50px/*/@*/;
+line-height:/*@line-height*/1.5em/*/@*/;
+line-height:/*@demi-line-height*/0.75em/*/@*/;
+margin-bottom:/*@margin-bottom*/1.5em/*/@*/;
+margin-bottom:/*@demi-margin-bottom*/0.75em/*/@*/;
+color:/*@color*/#333/*/@*/;
+background-color:/*@background-color*/#FFFFFF/*/@*/;
+}
+
+html { font-size: 100.01%; } /* Cf.: http://www.pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
+body { background: /*@background-color*/#FFFFFF/*/@*/; font: /*@font-size*/0.8125em/*/@*///*@line-height*/1.5em/*/@*/ /*@font-family*/"Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif/*/@*/; color: /*@color*/#333/*/@*/; }
+
+/* Titraille / Intertitres */
+h1,h2,h3,h4,h5,h6,
+.h1,.h2,.h3,.h4,.h5,.h6 { margin: 0; padding: 0; font-size: 100%; font-weight: normal; }
+hr { height: 1px; margin:/*@margin-bottom*/1.5em/*/@*/ 0; border: 0; background: /*@color*/#333/*/@*/; color: /*@color*/#333/*/@*/; }
+
+/* Titraille Blueprint
+Cf. : http://www.blueprintcss.org/tests/parts/elements.html
+h1 { font-size: 3em; line-height: 1; margin-bottom: 0.5em; }
+h2 { font-size: 2em; margin-bottom: 0.75em; }
+h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }
+h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; }
+h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
+h6 { font-size: 1em; font-weight: bold; }*/
+
+h1,.h1 {font-size: 2em; line-height:/*@line-height*/1.5em/*/@*/;margin-bottom: /*@demi-margin-bottom*/0.75em/*/@*/; }
+/*
+#SET{coeff,#GET{line-height}|plus{2}|div{2}|div{#GET{line-height}}}
+#SET{coeffinv,#VAL{1}|div{#GET{coeff}}}
+h2,.h2 {[ font-size: (#GET{line-height}|mult{#GET{coeff}})em];[ line-height: (#GET{coeffinv}|mult{2})em];[ margin-bottom: (#GET{coeffinv})em;]}
+*/
+h2,.h2 { font-size: 1.75em; line-height: 1.71428em; margin-bottom: 0.857em;}
+
+h3,.h3 { font-size: /*@line-height*/1.5em/*/@*/; line-height: 1; margin-bottom: 1em; font-weight: bold;}
+/*
+#SET{coeff,#GET{line-height}|plus{1}|div{2}|div{#GET{line-height}}}
+#SET{coeffinv,#VAL{1}|div{#GET{coeff}}}
+h4,.h4 {[ font-size: (#GET{line-height}|mult{#GET{coeff}})em];[ line-height: (#GET{coeffinv})em];[ margin-bottom: (#GET{coeffinv})em;]font-weight: bold; }
+*/
+h4,.h4 { font-size: 1.25em; line-height: 1.2em; margin-bottom: 1.2em;font-weight: bold; }
+
+h5,.h5 { font-size: 1em; font-weight: bold; margin-bottom: /*@margin-bottom*/1.5em/*/@*/; }
+h6,.h6 { font-size: 1em; font-weight: bold; }
+
+/* Enrichissements typographiques */
+strong, b { font-weight: bold; }
+em, i { font-style: italic; }
+small, .small { font-size: 80%; }
+big, .big { font-size: 150%; }
+abbr[title], acronym[title] { border-bottom: .1em dotted; cursor: help; }
+@media print { abbr[title]:after { content: " (" attr(title) ")"; } }
+dfn { font-weight: bold; font-style: italic; }
+del { text-decoration: line-through; }
+ins { text-decoration: none; background-color: #FFC; }
+sup, sub { font-size: .8em; font-variant: normal; line-height: 0; }
+sup { vertical-align: super; }
+.ie sup { vertical-align: text-top; }
+sub { vertical-align: sub; }
+.ie sub { vertical-align: text-bottom; }
+.caps { font-variant: small-caps; }
+
+/* Listes */
+ul, ol, li, dl, dt, dd {}
+ul ul, ol ol, ul ol, ol ul { margin-top: 0; margin-bottom: 0; }
+
+dl dt { font-weight: bold; }
+dl dd {}
+
+/* Tableaux */
+table { margin-bottom: /*@margin-bottom*/1.5em/*/@*/; width: 100%; }
+th { font-weight: bold; }
+thead th, tbody th { background: #c3d9ff; }
+th,td,caption {padding: /*@demi-line-height*/0.75em/*/@*/; }
+tbody tr:nth-child(even) td,
+tbody tr.even td { background: #e5ecf9; }
+tfoot { font-style: italic; }
+caption { background: #eee; }
+
+/* Citations, code et poesie */
+q { font-style: italic; }
+blockquote { padding: 0 /*@text-indent*/50px/*/@*/; font-style: italic; }
+cite { font-style: italic; }
+
+address { font-style: italic; }
+
+pre,code,kbd,samp,var,tt { font-family: /*@font-family-mono*/'andale mono','lucida console',monospace/*/@*/; font-size: 1em; }
+pre { margin:/*@margin-bottom*/1.5em/*/@*/ 0;
+	/* Cf.: http://perishablepress.com/press/2010/06/01/wrapping-content/ /
+	white-space: pre;           /* CSS 2.0 */
+	white-space: pre-wrap;      /* CSS 2.1 */
+	white-space: pre-line;      /* CSS 3.0 */
+	white-space: -pre-wrap;     /* Opera 4-6 */
+	white-space: -o-pre-wrap;   /* Opera 7 */
+	white-space: -moz-pre-wrap; /* Mozilla */
+	white-space: -hp-pre-wrap;  /* HP Printers */
+	word-wrap: break-word;      /* IE 5+ */
+}
+kbd { background-color: /*@color*/#333/*/@*/; color: /*@background-color*/#FFFFFF/*/@*/; }
+samp { font-weight: bold; }
+var { font-style: italic; }
+
+/* Paragraphes */
+p, .p, dl, dd, blockquote, address, pre, table, fieldset { margin-bottom: /*@margin-bottom*/1.5em/*/@*/; }
+
+/* Liens */
+a {}
+a:hover {}
+a[hreflang]:after { content: "\0000a0(" attr(hreflang) ")"; }
+@media print {
+	a, a:visited { color: /*@color*/#333/*/@*/; text-decoration: underline; }
+	.ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; } /* Don't show links for images, or javascript/internal links */
+}
+
+.on { font-weight: bold; }
+
+/**
+* Print styles from HTML5 Boilerplate
+* Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/
+*/
+@media print {
+	pre, blockquote { page-break-inside: avoid; }
+	thead { display: table-header-group; } /* css-discuss.incutio.com/wiki/Printing_Tables */
+	tr, img { page-break-inside: avoid; }
+	@page { margin: 0.5cm; }
+	p, h2, h3 { orphans: 3; widows: 3; }
+	h2, h3 { page-break-after: avoid; }
+}
+
+/* end */

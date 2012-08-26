@@ -1,0 +1,13 @@
+[(#REM) Rubriques trouvees ]
+<B_rubriques>
+<section class="liste resultats rubriques">
+	#ANCRE_PAGINATION
+	<h2 class="h2"><:rubriques:> (#GRAND_TOTAL)</h2>
+	<ul class="liste-items">
+		<BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse} {pagination 5}>
+		<li class="item"><a href="#URL_RUBRIQUE">#TITRE</a></li>
+		</BOUCLE_rubriques>
+	</ul>
+	[<nav class="pagination">(#PAGINATION)</nav>]
+</section>
+</B_rubriques>

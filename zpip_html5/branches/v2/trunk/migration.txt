@@ -1,0 +1,17 @@
+Passage de Zpip 1.x a Z-dist 2.0 :
+- suppression des prefixes page- sur les squelettes
+- renommage des dossiers pour les conventions utilisees en html/css :
+	- contenu -> content
+	- navigation -> extra1
+	- extra -> extra2
+
+- pied et entete deviennent des blocs comme les autres et sont renommes
+  egalement comme html (header/footer)
+  - inclure/entete.html -> header/dist.html
+  - inclure/pied.html -> footer/dist.html
+
+- ajout de <body> dans body.html
+- modification de structure.html :
+  - suppression de <body>
+  - suppression de la prise en charge de var_zajax qui est gere par Z-core et provoque l'appel de ajax.html
+  

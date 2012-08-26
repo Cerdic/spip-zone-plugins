@@ -1,0 +1,7 @@
+/* Portfolio */
+.documents_portfolio { clear: both; margin: /*@margin-bottom*/1.5em/*/@*/ auto; text-align: center; }
+.documents_portfolio .spip_logos { float: none; margin: 6px 3px 0 3px; border: 4px solid #DDD; }
+.documents_portfolio a.on .spip_logos { border-color: #222; }
+.documents_portfolio a:focus .spip_logos,
+.documents_portfolio a:hover .spip_logos,
+.documents_portfolio a:active .spip_logos { border-color: #444; }

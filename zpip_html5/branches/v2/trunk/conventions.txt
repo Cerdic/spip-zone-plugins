@@ -1,0 +1,160 @@
+Le layout intègre 6 entités logiques de contenu qui structure dans le html a sa guise.
+Les 6 entités sont nommées ici selon la convention ci-dessous, eu égard à leur contenu informationnel
+et sans préjuger d'une quelconque structure définie par le theme :
+
+header	fournit la présentation de la page et d'identité
+nav constitue la navigation principale du site - peut être vide
+content	contient l'information principale de la page
+extra1	fournit des élements de navigation secondaire
+extra2 fournit des eléments d'information connexes
+footer	fournit des éléments de repérages et de rappels secondaires
+
+
+header
+
+- un lien bloc .accueil contenant
+	- le logo eventuel [x], encadré par un element a
+	- le nom du site
+		dans un #nom_site_spip, qui peut être porté par toute balise. Il appartient au theme de fixer si il doit se comporter comme un block ou comme un inline
+		qui peut contenir un element a
+	- le slogan du site
+		dans un #slogan_site_spip
+
+Peut contenir
+- .formulaire_menu_lang  le formulaire de changement de langue qui n'apparaitra que sur les sites multilingues
+
+nav
+	si elle est non vide, est structurée d'éléments imbriqués de classes
+	.menu-liste
+		encadre un lot de .menu-entree
+		contient exlusivement des elements .menu-entree
+	.menu-entree doit etre dans un element .menu-liste
+		contient un unique element a
+		peut contenir un unique element .sep contenant un separateur textuel
+		peut contenir des sous groupes .menu-entree
+
+	cette convention permet par exemple
+		une navigation hierarchisée de type ul.menu-liste/li.menu-entree a un ou plusieurs niveau
+		une navigation plate constituée d'une suite de liens
+
+	le theme devra prendre en charge au moins l'affichage du premier niveau de navigation
+	le theme pourra prendre en charge l'affichage d'un eventuel menu déroulant a 1 ou plusieurs niveaux si le squelette les fournit
+
+content
+
+	#hierarchie le fil d'ariane,
+		des liens 'a'
+		des elements separateurs '.sep'
+		un element en exergue '.on'
+
+	.cartouche	le cartouche de présentation du contenu
+		.titre	le titre
+		.spip_logos le logo
+		.surtitre
+		.soustitre
+		.traductions
+		.info-publi	Infos de publication
+			.published	date de publication
+			.auteurs	auteur de publication, avec seperateurs .sep eventuels
+			.past-published	date de publication anterieure
+
+	.postmeta cartouche de présentation des réactions
+		.date
+		a.comments
+		a.readmore
+
+		.post-info
+		.post-info a
+
+	.introduction
+	.descriptif
+	.chapo
+	.texte
+	.hyperlien
+	.ps
+	.notes
+
+	Portfolios :
+	.documents_portfolio (classe et pas id car il pourrait en avoir plusieurs)
+
+	Forums :
+		garder la structure de la dist ?
+
+	Petitions :
+		garder la structure de la dist ?
+
+
+extra1
+
+Peut contenir
+- une navigation de second niveau, structurée comme nav, par .menu-liste, .menu-entree, .sep et a
+- Le formulaire de recherche. Les themes qui voudront le placer visuellement dans le bandeau supérieur procèderont par un positionnement absolu
+
+des intertitres .hx
+des listes d'items
+...
+
+extra2
+...
+
+
+
+footer
+	peut contenir
+		TBD des registres horizontaux
+		TBD des colonnes verticales
+
+
+
+
+Elements généraux
+
+les intertitrages
+	.h1, .h2, .h3, .h4, .h5, .h6
+la pagination
+	.pagination contient a, .on et .separateur
+
+les listes d'items (liste d'articles, de breves, de rubriques ...)
+	.liste	: bloc englobant
+		peut contenir des p, .hx, .pagination ...
+		contient au moins un ul.liste-items
+			qui contient un ou des li.item
+
+les formulaires
+	selon convention décrite dans http://www.spip.net/fr_article3791.html
+
+les tableaux de données
+	tables.spip
+		tr
+		tr.row_odd
+		tr.row_even
+			th, td
+
+les liens :
+	a
+	a.spip_note /* liens vers notes de bas de page */
+	a.spip_ancre /* liens internes a la page */
+	a.spip_in /* liens internes */
+	a.spip_out /* liens sortants */
+	a.external ?
+	a.spip_url /* liens url sortants */
+	a.spip_glossaire /* liens vers encyclopedie */
+
+
+les documents :
+	.spip_documents, .spip_documents_right, .spip_documents_left
+		img, peut etre dans un 'a'
+		.spip_doc_titre
+		.spip_doc_descriptif
+
+la "typo" (cf spip_styles.css)
+	.spip_code du code inline
+	.spip_cadre du code en block
+	acronym
+	abbr
+	blockquote.spip
+	blockquote.spip_poesie
+
+hr.spip
+.nettoyeur { clear: both; height: 0; margin: 0; padding: 0; border: 0; line-height: 1px; font-size: 1px; }
+.invisible { position: absolute; top: -3000em; height: 1%; }
