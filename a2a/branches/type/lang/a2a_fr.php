@@ -14,7 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explication_navigateur' => 'Cliquez sur [Ajouter] pour naviguer dans l\'arborescence du site afin de sélectionner les articles à lier.',
 	'explication_types_liaisons'		=>'Vous pouvez définir des types de relations : indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par défaut. La description peut être une chaîne de langue.',
-
+	'explication_type_obligatoire'=>'Vous pouvez imposer de typer les liaisons',
+	'explication_types_differents'=>'Cochez cette case pour permettre de lier plusieurs fois les deux mêmes articles, en changeant le type à chaque fois',
 	// I
 	'info_nombre_articles_lies' => '@nb@ articles liés',
 	'info_un_article_lie' => '1 article lié',
@@ -51,9 +52,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type' => 'Type',
 	'types_liaisons'=>'Types de liaison',
 	'type_inexistant'=>'Type de liaison inexistant',
-	'type_obligatoire'=>'Obligation de typer les liaisons',
+	'type_obligatoire'=>'Typage obligatoire',
 	'type_liaison' => 'Type de liaison',
-	'types_differents'	=> 'Possibilité de relier plusieurs fois des articles, avec un type différent à chaque fois',
+	'types_differents'	=> 'Liaisons multiples',
 	'types_liaisons_non_modifiables'=>'Les types de liaisons suivants ne sont pas modifiables via la configuration',
 
 	// U

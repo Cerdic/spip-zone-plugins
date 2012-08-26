@@ -51,7 +51,8 @@
 			</li>
 			<li class='editer_type_obligatoire editer[(#ENV**{erreurs}|table_valeur{ob_pb}|oui) erreur]'>
 				<label for='type_obligatoire'><:a2a:type_obligatoire:></label>
-				<input type="checkbox" id="type_obligatoire"[ checked="checked"(#ENV{type_obligatoire}|oui)] name="type_obligatoire" />
+				<p class='explication'><input type="checkbox" id="type_obligatoire"[ checked="checked"(#ENV{type_obligatoire}|oui)] name="type_obligatoire" /><:a2a:explication_type_obligatoire:></P>
+				
 				
 				<B_ob_pb>
 				<div class='erreur_message'>
@@ -69,7 +70,7 @@
 			<li class="editer_types_differents editer[(#ENV**{erreurs}|table_valeur{td_pb}|oui) erreur]">
 
 				<label for='types_differents'><:a2a:types_differents:></label>
-				<input type="checkbox" id="types_differents"[ checked="checked"(#ENV{types_differents}|oui)] name="types_differents" />
+				<p class='explication'><input type="checkbox" id="types_differents"[ checked="checked"(#ENV{types_differents}|oui)] name="types_differents" /><:a2a:explication_types_differents:></p>
 								<B_td_pb>
 				<div class='erreur_message'>
 				<p><:a2a:td_pb:></p>
