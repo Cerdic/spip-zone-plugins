@@ -1,8 +1,8 @@
 <B_Recherche>
 	<ul class="resultats">
 <BOUCLE_Recherche(ARTICLES){id_article=#ENV{recherche}}{!id_article IN #ENV{exclure}}{tout}{!lang_select}>
-	<li><div class='ajax'>#FORMULAIRE_AJOUTE_A2A{#ID_ARTICLE_ORIG,#ID_ARTICLE}</div>
-	</li>
+	[<li><div class='ajax'>(#FORMULAIRE_AJOUTE_A2A{#ID_ARTICLE_ORIG,#ID_ARTICLE})</div>
+	</li>]
 </BOUCLE_Recherche>
 	</ul>
 </B_Recherche>
