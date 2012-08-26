@@ -1,0 +1,14 @@
+<div class="formulaire_spip formulaire_ajoute_a2a ajax" id="formulaire_ajoute_a2a">
+<br class='bugajaxie' />
+<form method='post' action='#ENV{action}#formulaire_ajoute_a2a' enctype='multipart/form-data'>
+	
+		#ACTION_FORMULAIRE{#ENV{action}}
+	<div class='content'>
+				[<strong class="titre">(#INFO_TITRE{article,#ID_ARTICLE_DEST})</strong>]
+		
+		<INCLURE{fond=formulaires/inclure/types_liaisons}{message_erreur} />
+		<button name="lier"><:a2a:lier_cet_article:></button>
+		<button name="lier_2"><:a2a:lier_cet_article_deux_cotes:></button>
+	</div>
+</form>
+</div>
