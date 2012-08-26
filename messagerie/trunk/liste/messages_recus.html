@@ -2,7 +2,7 @@
 <B_recus>
 [<p class='pagination'>(#PAGINATION{page})</p>]
 <ul class='liste_items messages recus'>
-<BOUCLE_recus(MESSAGES auteurs_liens){type=normal}{auteurs_liens.id_auteur=#ENV{id_auteur}}{auteurs_liens.vu!=pou}{!par date_heure}{pagination 10}>
+<BOUCLE_recus(MESSAGES auteurs_liens){type=normal}{auteurs_liens.id_auteur=#ENV{id_auteur}}{auteurs_liens.vu!=poub}{!par date_heure}{pagination 10}>
 <li class='item[ (#EXPOSE{on})
 <?php include_spip('inc/messages');messagerie_marquer_lus('#ENV{id_auteur}',array('#ID_MESSAGE'));?>
 ]' id='message_#ID_MESSAGE'><div class='message[ (#VU|=={non}|?{new})]'><input type='checkbox' name='selectionne[]' value='#ID_MESSAGE' class='checkbox' /><a href='[(#SELF|parametre_url{id_message,''})]' class='plier' title='<:messagerie:replier:>' onclick="jQuery('#message_#ID_MESSAGE').removeClass('on');return false;"><img src='[(#CHEMIN{habillage/replier.png}|sinon{#CHEMIN{habillage/replier.gif}})]' alt='<:messagerie:replier:>' /></a>

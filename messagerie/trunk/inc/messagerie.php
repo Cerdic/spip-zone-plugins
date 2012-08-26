@@ -107,7 +107,7 @@ function messagerie_mailer($objet, $texte, $emails_dest=array()){
  */
 function messagerie_effacer($id_auteur,$liste){
 	$liste = array_map('intval',$liste);
-	sql_updateq('spip_auteurs_liens',array('vu'=>'pou'),array('id_auteur='.intval($id_auteur), 'objet="message"', 'id_objet IN ('.implode(',',$liste).')'));
+	sql_updateq('spip_auteurs_liens',array('vu'=>'poub'),array('id_auteur='.intval($id_auteur), 'objet="message"', 'id_objet IN ('.implode(',',$liste).')'));
 	include_spip('inc/invalideur');
 	suivre_invalideur("message/".implode(',',$liste));
 }
