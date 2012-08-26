@@ -30,11 +30,11 @@
 	
 	[(#ENV*{recherche}|match{^art\d+$}|oui)
 		[(#SET{recherche,[(#ENV{recherche}|substr{3})]})]
-		<INCLURE{fond=formulaires/inclure/recherche_id}{id_article_orig}{recherche=#GET{recherche}}{type_liaison}{exclure=#GET{exclure}} />]
+		<INCLURE{fond=formulaires/inclure/recherche_id}{id_article_orig}{recherche=#GET{recherche}}{type_liaison}{exclure=#GET{exclure}}{ajax} />]
 	[(#ENV*{recherche}|match{^art\d+$}|non)
 		[(#ENV*{recherche}|oui)
 			[(#ENV*{recherche_titre}|oui)
-				<INCLURE{fond=formulaires/inclure/recherche_titre}{id_article_orig}{recherche}{type_liaison}{exclure=#GET{exclure}} />]
+				<INCLURE{fond=formulaires/inclure/recherche_titre}{id_article_orig}{recherche}{type_liaison}{exclure=#GET{exclure}}{ajax} />]
 			[(#ENV*{recherche_titre}|non)
-				<INCLURE{fond=formulaires/inclure/recherche_libre}{id_article_orig}{recherche}{type_liaison}{exclure=#GET{exclure}} />]]]
+				<INCLURE{fond=formulaires/inclure/recherche_libre}{id_article_orig}{recherche}{type_liaison}{exclure=#GET{exclure}}{ajax} />]]]
 </div>
