@@ -195,7 +195,7 @@ function maj_auto_action_rapide() {
 			?"<label><input type='radio' value='$infos[zip_log]'$checked name='$arg_chargeur'/>[->$infos[zip_log]]</label>":'';
 		$bouton = '&nbsp;';
 		if(!$stop) {
-			if($infos['maj_dispo'] && $id_paquet) // bouton pour SVP
+			if(/*$infos['maj_dispo'] &&*/ $id_paquet) // bouton pour SVP
 				$bouton = "<input type='radio' value='$id_paquet.$infos[id_depot]'$checked name='$arg_chargeur'/><br/><input type='checkbox' class='checkbox select_plugin' name='ids_paquet[]' value='$id_paquet.$infos[id_depot]'>";
 			elseif($auto) $bouton = strlen($infos['zip_trac'])
 				?"<input type='radio' value='$infos[zip_trac]'$checked name='$arg_chargeur'/>"

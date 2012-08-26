@@ -234,8 +234,8 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>'')),
 		debut_droite('', true),
+		($outil<>'maj_auto' && defined('_SPIP30000') && include_spip('exec/admin_plugin'))?svp_presenter_actions_realisees():'',
 		debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),true,'','&nbsp;'.couteauprive_T('outils_liste')),
-		(defined('_SPIP30000') && include_spip('exec/admin_plugin'))?svp_presenter_actions_realisees():'',
 		'<div class="titrem cs_intros">', couper($t = couteauprive_T('outil_intro'), 50),
 		'</div><div id="cs_infos_1" class="sous_liste cs_intros_inner">', $t, '</div>';
 	if(strlen($t = cs_aide_raccourcis()))
