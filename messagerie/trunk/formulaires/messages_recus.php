@@ -17,7 +17,6 @@ function formulaires_messages_recus_charger_dist($url_repondre=""){
 		$url_repondre = _URL_ENVOYER_MESSAGE;
 	include_spip('inc/lien');
 	$valeurs = array('_url_ecrire_message'=>calculer_url($url_repondre));
-
 	return $valeurs;
 }
 
@@ -41,9 +40,8 @@ function formulaires_messages_recus_traiter_dist($url_repondre=""){
 		elseif (_request('marquer_non_lus'))
 			messagerie_marquer_non_lus($id_auteur,$liste);
 		elseif (_request('effacer'))
-			messagerie_effacer($id_auteur,$liste);
+			messagerie_effacer_message_recu($id_auteur,$liste);
 	}
-	
 	return array(true,"");
 }
 

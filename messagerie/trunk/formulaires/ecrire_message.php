@@ -91,21 +91,13 @@ function formulaires_ecrire_message_traiter_dist($redirect=""){
 		$general = true;
 
 	if ($id_message = messagerie_messager($objet, $texte, $auteurs_dests,$general)){
-		// notifions l'envoi d'un message
-		$notification = charger_fonction('notifications','inc');
-		$notification('envoyermessage',$id_message,array('destinataires'=>$auteurs_dests,'abstract'=>couper($objet.' '.$texte,30)));
 
 		// et invalidons les pages en cache faisant reference au message
 		include_spip('inc/invalideur');
 		suivre_invalideur("envoyermessage/$id_message");
 		$ok = true;
 	}
-	$texte = textebrut($texte);
-	$texte = pipeline('messagerie_signer_message',$texte);
-	$objet = textebrut($objet);
-	if (messagerie_mailer($objet,$texte,$email_dests)){
-		$ok = true;
-	}
+
 	if ($ok){
 		$out = _T("ecrire_message:message_envoye");
 		if (!$redirect AND defined('_REDIRECT_POST_ENVOI_MESSAGE'))
