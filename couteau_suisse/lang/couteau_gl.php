@@ -39,13 +39,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'maj_actu' => 'Forzar a actualización remota',
 	'maj_liste' => 'Lista de módulos detectados :',
-	'maj_maj' => 'Actualizar o módulo selecccionado',
+	'maj_maj' => 'Actualizar o módulo selecccionado', # MODIF
 	'maj_ok' => 'Este [módulo->@zip@] parece [actualizado->@url@].',
 	'maj_rev' => 'Rev. @revision@',
 	'maj_rev_ko' => 'A [revisión remota ->@url@] non foi posíbel encontrala.',
 	'maj_rev_ok' => 'A revisión [@revision@->@url@] está [dispoñíbel->@zip@].',
 	'maj_spip' => 'Après avoir mis à jour tous vos plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.', # NEW
 	'maj_svn' => 'Este módulo SVN parece [actualizado->@url@].',
+	'maj_tiers' => 'Nécessite/Utilise/Procure', # NEW
 	'maj_verif' => 'Verifique previamente o arquivo que corresponda :',
 	'maj_verif2' => 'Atención : despois de ter premido sobre o botón seguinte, comprobe que o arquivo descargado corresponde co módulo que cómpre actualizar.',
 	'maj_zip_ko' => 'O ficheiro .zip remoto non puido ser identificado.',

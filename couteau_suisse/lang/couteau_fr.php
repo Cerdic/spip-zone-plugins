@@ -44,10 +44,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_rev_ok' => 'La révision [@revision@->@url@] est [disponible->@zip@].',
 	'maj_spip' => 'Après avoir mis à jour tous vos plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.',
 	'maj_svn' => 'Ce plugin SVN semble [à jour->@url@].',
+	'maj_tiers' => 'Nécessite/Utilise/Procure',
 	'maj_verif' => 'Vérifiez préalablement l\'archive qui vous convient :',
 	'maj_verif2' => 'Attention : après avoir cliqué sur le bouton ci-dessus, vérifiez bien que l\'archive téléchargée correspond au plugin qu\'il vous faut mettre à jour.',
 	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu être identifié.',
-	'maj_tiers' => 'Nécessite/Utilise/Procure',
 	'msg_publies' => 'Uniquement les messages publiés',
 
 	// N

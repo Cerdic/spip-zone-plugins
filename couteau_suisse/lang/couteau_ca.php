@@ -39,13 +39,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'maj_actu' => 'Forçar l\'actualització distant',
 	'maj_liste' => 'Llista dels plugins detectats: ',
-	'maj_maj' => 'Actualitzar el plugin seleccionat',
+	'maj_maj' => 'Actualitzar el plugin seleccionat', # MODIF
 	'maj_ok' => 'Aquest [plugin->@zip@] sembla [a dia->@url@].',
 	'maj_rev' => 'Rév. @revision@',
 	'maj_rev_ko' => 'La [revisió a distància->@url@] no s\'ha trobat.',
 	'maj_rev_ok' => 'La revisió [@revision@->@url@] està [disponible->@zip@].',
 	'maj_spip' => 'Després d\'haver actualitzar tots els connectors amb precaució, és recomanable que actualitzeu el propi SPIP clicant a l\'enllaç que hi ha més amunt i seguint les instruccions que s\'hi donen.',
 	'maj_svn' => 'Aquest plugin SVN sembla [al dia->@url@].',
+	'maj_tiers' => 'Nécessite/Utilise/Procure', # NEW
 	'maj_verif' => 'Verifiqueu prèviament l\'arxiu que us convé:',
 	'maj_verif2' => 'Atenció: després de clicar el botó que hi ha més amunt, verifiqueu bé que l\'arxiu descarregat correspongui al plugin que us calia actualitzar. ',
 	'maj_zip_ko' => 'No s\'ha pogut identificar el fitxer .zip distant.',

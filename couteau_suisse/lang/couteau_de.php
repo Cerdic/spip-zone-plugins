@@ -39,13 +39,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'maj_actu' => 'Update erzwingen',
 	'maj_liste' => 'Liste der gefundenen Plugins:',
-	'maj_maj' => 'Ausgewähltes Plugin aktualisieren',
+	'maj_maj' => 'Ausgewähltes Plugin aktualisieren', # MODIF
 	'maj_ok' => 'Dieses[Plugin->@zip@] scheint [auf dem neuesten Stand->@url@] zu sein.',
 	'maj_rev' => 'Rev. @revision@',
 	'maj_rev_ko' => 'Die [Revision->@url@] konnte nicht gefunden werden.',
 	'maj_rev_ok' => 'Die Revision [@revision@->@url@] ist [verfügbar->@zip@].',
 	'maj_spip' => 'Wenn sie alle Plugins mit Bedacht auf den neuesten Stand gebracht haben, sollten sie SPIP selber ebenfalls updaten, indem sie auf den untenstehenden Link klicken und den Anweisungen folgen.',
 	'maj_svn' => 'Dieses SVN Plugin scheint [aktuell->@url@] zu sein.',
+	'maj_tiers' => 'Nécessite/Utilise/Procure', # NEW
 	'maj_verif' => 'Prüfen sie vorab, welche Archiv sie verwenden möchten:',
 	'maj_verif2' => 'Achtng: Nachdem sie auf diese Schaltfläche geklickt haben, prüfen sie bitte genau, ob das Archiv, das geladen werden soll, auch dem Plugin entspricht, das sie updaten wollen.',
 	'maj_zip_ko' => 'Die externe ZIP-Datei konnte nicht identifiziert werden.',

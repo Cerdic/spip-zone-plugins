@@ -39,13 +39,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'maj_actu' => 'Nanútiť aktualizáciu na diaľku',
 	'maj_liste' => 'Zoznam nájdených zásuvných modulov:',
-	'maj_maj' => 'Aktualizovať vybratý zásuvný modul',
+	'maj_maj' => 'Aktualizovať vybratý zásuvný modul', # MODIF
 	'maj_ok' => 'Zdá sa, že tento [zásuvný modul->@zip@] je [aktuálny.->@url@]',
 	'maj_rev' => 'Ver. @revision@',
 	'maj_rev_ko' => '[Vzdialenú verziu->@url@] sa nepodarilo nájsť.',
 	'maj_rev_ok' => '[K dispozícii->@zip@] je verzia [@revision@.->@url@]',
 	'maj_spip' => 'Potom, čo ste starostlivo aktualizovali všetky zásuvné moduly, sa veľmi odporúča aktualizovať aj SPIP tak, že kliknete na odkaz vyššie a dodržíte odporúčané pokyny.',
 	'maj_svn' => 'Zdá sa, že tento zásuvný modul SVN je [aktuálny.->@url@]',
+	'maj_tiers' => 'Nécessite/Utilise/Procure', # NEW
 	'maj_verif' => 'Najprv skontrolujte, ktorý archív je pre vás vhodný:',
 	'maj_verif2' => 'Pozor! Po kliknutí na tlačidlo sa uistite, že súbor, ktorý ste si stiahli, sa zhoduje so zásuvným modulom, ktorý chcete aktualizovať.',
 	'maj_zip_ko' => 'Vzdialený súbor .zip sa nepodarilo identifikovať.',

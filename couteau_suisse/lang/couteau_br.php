@@ -39,13 +39,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'maj_actu' => 'Hizivadenn dre heg', # MODIF
 	'maj_liste' => 'Roll an adveziantoù kavet :',
-	'maj_maj' => 'Hizivaat an adveziant diuzet',
+	'maj_maj' => 'Hizivaat an adveziant diuzet', # MODIF
 	'maj_ok' => 'Evit doare eo bet [hizivaet->@url@] an [adveziant-se->@zip@]',
 	'maj_rev' => 'Adwel. @revision@',
 	'maj_rev_ko' => 'N\'eus ket bet gallet kavout an [adweladenn a-bell->@url@].',
 	'maj_rev_ok' => 'gallout a reer [kavout->@zip@] an [@revision@->@url@].',
 	'maj_spip' => 'Après avoir mis à jour tous vos plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.', # NEW
 	'maj_svn' => 'Evit doare eo bet [hizivaet->@url@] an adveziant SVN-mañ.',
+	'maj_tiers' => 'Nécessite/Utilise/Procure', # NEW
 	'maj_verif' => 'Gwiriit da gentañ an diell a zere deoc\'h :',
 	'maj_verif2' => 'Diwallit : goude bezañ kliket war ar bouton a-us, gwiriit mat e klot an diell pellgarget gant an adveziant zo da hizivaat.',
 	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu être identifié.', # NEW

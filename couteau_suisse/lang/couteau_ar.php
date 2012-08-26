@@ -39,13 +39,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'maj_actu' => 'فرض التحديث البعيد',
 	'maj_liste' => 'لائحة الملحقات التي تم العثور عليها:',
-	'maj_maj' => 'تحديث الملحق المحدد',
+	'maj_maj' => 'تحديث الملحق المحدد', # MODIF
 	'maj_ok' => 'هذا [الملحق->@zip@] يبدو [حديثاً->@url@].',
 	'maj_rev' => 'الإصدار @revision@',
 	'maj_rev_ko' => 'لم يتم العثور على [التحديث البعيد->@url@]. ',
 	'maj_rev_ok' => 'الإصدار [@revision@->@url@] [متوافر->@zip@].',
 	'maj_spip' => 'Après avoir mis à jour tous vos plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.', # NEW
 	'maj_svn' => 'Ce plugin SVN semble [à jour->@url@].', # NEW
+	'maj_tiers' => 'Nécessite/Utilise/Procure', # NEW
 	'maj_verif' => 'Vérifiez préalablement l\'archive qui vous convient :', # NEW
 	'maj_verif2' => 'Attention : après avoir cliqué sur le bouton ci-dessus, vérifiez bien que l\'archive téléchargée correspond au plugin qu\'il vous faut mettre à jour.', # NEW
 	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu être identifié.', # NEW

@@ -46,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_rev_ok' => 'La revisión [@revision@->@url@] está [disponible->@zip@].', # NEW
 	'maj_spip' => 'Après avoir mis à jour tous vos plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.', # NEW
 	'maj_svn' => 'Este plugin SVN parece [actualizado->@url@].', # NEW
+	'maj_tiers' => 'Nécessite/Utilise/Procure', # NEW
 	'maj_verif' => 'Vérifiez préalablement l\'archive qui vous convient :', # NEW
 	'maj_verif2' => 'Attention : après avoir cliqué sur le bouton ci-dessus, vérifiez bien que l\'archive téléchargée correspond au plugin qu\'il vous faut mettre à jour.', # NEW
 	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu être identifié.', # NEW
