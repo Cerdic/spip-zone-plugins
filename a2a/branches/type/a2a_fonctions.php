@@ -25,7 +25,7 @@ function balise_ARTICLES_LIES($p) {
 
 function lister_types_liaisons(){
 	// fournit tout les types de liaisons ita est : define + cfg.
-	include_spip('inc/cfg');
+	include_spip('inc/config');
 	if ($GLOBALS['a2a_types_liaisons'])
 		$types_liaisons = array_merge(lire_config('a2a/types_liaisons'),$GLOBALS['a2a_types_liaisons']);	
 	else 
