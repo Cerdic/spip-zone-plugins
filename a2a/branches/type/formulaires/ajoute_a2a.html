@@ -1,3 +1,11 @@
+<BOUCLE_deja_relie(ARTICLES_LIES){id_article=#ID_ARTICLE_ORIG}{id_article_lie=#ID_ARTICLE_DEST}/>
+[(#CONFIG{a2a/type_obligatoire}|?{
+	[(#TOTAL_BOUCLE|plus{1}|>{#TYPES_LIAISONS|count}|oui)#SET{deja_relie,oui}],
+	[(#TOTAL_BOUCLE|>{#TYPES_LIAISONS|count}|oui)#SET{deja_relie,oui}]
+})]
+
+<//B_deja_relie>
+[(#GET{deja_relie}|non)
 <div class="formulaire_spip formulaire_ajoute_a2a ajax" id="formulaire_ajoute_a2a">
 <br class='bugajaxie' />
 <form method='post' action='#ENV{action}#formulaire_ajoute_a2a' enctype='multipart/form-data'>
@@ -12,3 +20,4 @@
 	</div>
 </form>
 </div>
+]
