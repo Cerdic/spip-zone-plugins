@@ -12,9 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ' : oui',
 
 	// S
-	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par défaut dans la fenêtre de navigation en cours. Mais il peut être utile d\'ouvrir les liens externes au site dans une nouvelle fenêtre extérieure -- cela revient à ajouter {target=\\"_blank\\"} à toutes les balises &lt;a&gt; dotées par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois nécessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'étendre au maximum cette fonctionnalité.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par défaut dans la fenêtre de navigation en cours. Mais il peut être utile d\'ouvrir les liens externes au site dans une nouvelle fenêtre extérieure -- cela revient à ajouter {target=&quot;_blank&quot;} à toutes les balises &lt;a&gt; dotées par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois nécessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'étendre au maximum cette fonctionnalité.[[%radio_target_blank3%]]
 
-@puce@ SPIP permet de relier des mots à leur définition grâce au raccourci typographique <code>[?mot]</code>. Par défaut (ou si tu laisses vide la case ci-dessous), le glossaire externe renvoie vers l’encyclopédie libre wikipedia.org. À toi de choisir l\'adresse à utiliser. <br />Lien de test : [?SPIP][[%url_glossaire_externe2%]]', # MODIF
+@puce@ SPIP permet de relier des mots à leur définition grâce au raccourci typographique <code>[?mot]</code>. Par défaut (ou si tu laisses vide la case ci-dessous), le glossaire externe renvoie vers l\'encyclopédie libre wikipedia.org. À toi de choisir l\'adresse à utiliser. <br />Lien de test : [?SPIP][[%url_glossaire_externe2%]]',
 	'SPIP_liens:description1' => '@puce@ SPIP a prévu un style CSS pour les liens «~mailto:~» : une petite enveloppe devrait apparaître devant chaque lien lié à un courriel; mais puisque tous les navigateurs ne peuvent pas l\'afficher (notamment IE6, IE7 et SAF3), à toi de voir s\'il faut conserver cet ajout.
 _ Lien de test : [->test@test.com] (recharge la page entièrement).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP et les liens… externes',
@@ -46,8 +46,8 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et t\'évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de tes squelettes.',
 	'aff_tout:nom' => 'Affiche tout',
 	'alerte_urgence:description' => 'Affiche en tête de toutes les pages publiques un bandeau d\'alerte pour diffuser le message d\'urgence défini ci-dessous.
-_ Les balises <code><multi/></code> sont recommandées en cas de site multilingue.[[%alerte_message%]]', # NEW
-	'alerte_urgence:nom' => 'Message d\'alerte', # NEW
+_ Les balises <code><multi/></code> sont recommandées en cas de site multilingue.[[%alerte_message%]]',
+	'alerte_urgence:nom' => 'Message d\'alerte',
 	'attente' => 'Attente...',
 	'auteur_forum:description' => 'Incite tous les auteurs de messages publics à fournir (d\'au moins d\'une lettre !) un nom et/ou un courriel afin d\'éviter les contributions totalement anonymes. Note que cet outil procède à une vérification JavaScript sur le poste du visiteur.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
 {Attention : Choisir la troisième option annule les 2 premières. Il est important de vérifier que les formulaires de ton squelette sont bien compatibles avec cet outil.}',
@@ -62,16 +62,16 @@ _ Les balises <code><multi/></code> sont recommandées en cas de site multilingu
 @puce@ Quels statuts d\'auteurs peuvent être listés sur cette page ?
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]',
 	'auteurs:nom' => 'Page des auteurs',
-	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML <br />.[[%alinea%]][[->%alinea2%]]', # MODIF
-	'autobr:description1' => 'Rompant avec une tradition historique, SPIP 3 tient désormais compte par défaut des alinéas (retours de ligne simples) dans ses contenus. Vous pouvez ici désactiver ce comportement et revenir à l\'ancien système où le retour de ligne simple n\'est pas reconnu -- à l\'instar du langage HTML.', # NEW
+	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML &lt;br />.',
+	'autobr:description1' => 'Rompant avec une tradition historique, SPIP 3 tient désormais compte par défaut des alinéas (retours de ligne simples) dans ses contenus. Tu peux ici désactiver ce comportement et revenir à l\'ancien système où le retour de ligne simple n\'est pas reconnu -- à l\'instar du langage HTML.',
 	'autobr:description2' => 'Objets contenant cette balise (non exhaustif) :
 - Articles : @ARTICLES@.
 - Rubriques : @RUBRIQUES@.
-- Forums : @FORUMS@.', # NEW
+- Forums : @FORUMS@.',
 	'autobr:nom' => 'Retours de ligne automatiques',
 	'autobr_non' => 'À l\'intérieur des balises &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)',
-	'autobr_racc' => 'Retours de ligne : <b><alinea></alinea></b>', # MODIF
+	'autobr_racc' => 'Retours de ligne : <b>&lt;alinea>&lt;/alinea></b>',
 
 	// B
 	'balise_set:description' => 'Afin d\'alléger les écritures du type <code>#SET{x,#GET{x}|un_filtre}</code>, cet outil t\'offre le raccourci suivant : <code>#SET_UN_FILTRE{x}</code>. Le filtre appliqué à une variable passe donc dans le nom de la balise.
@@ -138,7 +138,7 @@ _ • Un champ de recherche à partir de %select_max_auteurs% auteurs(s).</q1>',
 	'cache_permanent' => 'Cache permanent',
 	'cache_sans' => 'Pas de cache',
 	'categ:admin' => '1. Administration',
-	'categ:devel' => '55. Développement', # NEW
+	'categ:devel' => '55. Développement',
 	'categ:divers' => '60. Divers',
 	'categ:interface' => '10. Interface privée',
 	'categ:public' => '40. Affichage public',
@@ -148,8 +148,8 @@ _ • Un champ de recherche à partir de %select_max_auteurs% auteurs(s).</q1>',
 	'categ:typo-racc' => '30. Raccourcis typographiques',
 	'certaines_couleurs' => 'Seules les balises définies ci-dessous@_CS_ASTER@ :',
 	'chatons:aide' => 'Chatons : @liste@',
-	'chatons:description' => 'Insère des images (ou chatons pour les {tchats}) dans tous les textes où apparaît une chaîne du genre {{<code>:nom</code>}}.
-_ Cet outil remplace ces raccourcis par les images du même nom qu\'il trouve dans ton dossier <code>mon_squelette_toto/img/chatons/</code>, ou par défaut, le dossier <code>couteau_suisse/img/chatons/</code>.', # MODIF
+	'chatons:description' => 'Insère des images (ou chatons pour les {tchats}) dans tous les textes où apparaît une chaîne du genre «{{<code>:nom</code>}}».
+_ Cet outil remplace ces raccourcis par les images du même nom qu\'il trouve dans ton dossier <code>dossier_de_mon_squelette/img/chatons/</code>, ou par défaut, dans le dossier <code>@_DIR_CS_ROOT@img/chatons/</code>.',
 	'chatons:nom' => 'Chatons',
 	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de ton site (articles, rubriques, etc.), cet outil remplace les balises &lt;quote&gt; par des balises &lt;q&gt; quand il n\'y a pas de retour à la ligne. En effet, les citations courtes doivent être entourées par &lt;q&gt; et les citations contenant des paragraphes par &lt;blockquote&gt;.',
 	'citations_bb:nom' => 'Citations bien balisées',
@@ -213,7 +213,8 @@ Idem pour changer le fond, si l\'option ci-dessous le permet :@_CS_EXEMPLE_COULE
 @_CS_ASTER@Le format de ces balises personnalisées doit lister des couleurs existantes ou définir des couples «balise=couleur», le tout séparé par des virgules. Exemples : «gris, rouge», «faible=jaune, fort=rouge», «bas=#99CC11, haut=brown» ou encore «gris=#DDDDCC, rouge=#EE3300». Pour le premier et le dernier exemple, les balises autorisées sont : <code>[gris]</code> et <code>[rouge]</code> (<code>[fond gris]</code> et <code>[fond rouge]</code> si les fonds sont permis).',
 	'couleurs:nom' => 'Tout en couleurs',
 	'couleurs_fonds' => ', <b>[fond coul]texte[/coul]</b>, <b>[bg coul]texte[/coul]</b>',
-	'cs_comportement:description' => '@puce@ {{Logs.}} Obtiens de nombreux renseignements à propos du fonctionnement du Couteau Suisse dans les fichiers {spip.log} que l\'on peut trouver dans le répertoire : {<html>@_CS_DIR_TMP@</html>}[[%log_couteau_suisse%]]
+	'cs_comportement:description' => '@puce@ {{Logs.}} Obtiens de nombreux renseignements à propos du fonctionnement du Couteau Suisse dans les fichiers {spip.log} que l\'on peut trouver dans le répertoire : {<html>@_CS_DIR_LOG@</html>}.
+_ Configure les options de journalisation grâce à l\'outil «[.->spip_log]».[[%log_couteau_suisse%]]
 
 @puce@ {{Options SPIP.}} SPIP ordonne les plugins dans un ordre spécifique. Afin d\'être sûr que le Couteau Suisse soit en tête et gère en amont certaines options de SPIP, alors coche l\'option suivante. Si les droits de ton serveur le permettent, le fichier {<html>@_CS_FILE_OPTIONS@</html>} sera automatiquement modifié pour inclure le fichier {<html>@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php</html>}.
 
@@ -221,9 +222,9 @@ Idem pour changer le fond, si l\'option ci-dessous le permet :@_CS_EXEMPLE_COULE
 
 @puce@ {{Requêtes externes.}} D\'une part, le Couteau Suisse vérifie régulièrement l\'existence d\'une version plus récente de son code et informe sur sa page de configuration d\'une mise à jour éventuellement disponible. D\'autre part, ce plugin comporte certains outils qui peuvent nécessiter d\'importer des librairies distantes.
 
-Si les requêtes externes de ton serveur posent des problèmes ou par souci d\'une meilleure sécurité, coche les cases suivantes.[[%distant_off%]][[->%distant_outils_off%]]', # MODIF
+Si les requêtes externes de ton serveur posent des problèmes ou par souci d\'une meilleure sécurité, coche les cases suivantes.[[%distant_off%]][[->%distant_outils_off%]]',
 	'cs_comportement:nom' => 'Comportements du Couteau Suisse',
-	'cs_comportement_ko' => '{{Note :}} ce paramètre requiert un filtre de gravité réglé à plus de @gr2@ au lieu de @gr1@ actuellement.', # NEW
+	'cs_comportement_ko' => '{{Note :}} ce paramètre requiert un filtre de gravité réglé à plus de @gr2@ au lieu de @gr1@ actuellement.',
 	'cs_distant_off' => 'Les vérifications de versions distantes',
 	'cs_distant_outils_off' => 'Les outils du Couteau Suisse ayant des fichiers distants',
 	'cs_log_couteau_suisse' => 'Les logs détaillés du Couteau Suisse',
@@ -273,7 +274,7 @@ Cet outil peut être couplé avec « [.->sommaire] ».',
 	'detail_pipelines' => 'Pipelines :',
 	'detail_raccourcis' => 'Voici la liste des raccourcis typographiques reconnus par cet outil.',
 	'detail_spip_options' => '{{Note}} : En cas de dysfonctionnement de cet outil, place les options SPIP en amont grâce à l\'outil «@lien@».',
-	'detail_spip_options2' => 'Il est recommandé de placer les options SPIP en amont grâce à l\'outil «[.->cs_comportement]».', # MODIF
+	'detail_spip_options2' => 'Il est recommandé ici de placer les options SPIP en amont grâce à l\'outil «[.->cs_comportement]».',
 	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont grâce à l\'outil «@lien@».',
 	'detail_surcharge' => 'Outil surchargé :',
 	'detail_traitements' => 'Traitements :',
@@ -342,7 +343,7 @@ Attention : certains outils du Couteau Suisse nécessitent les fonctions de {jQu
 	'f_jQuery:nom' => 'Désactive jQuery',
 	'filets_sep:aide' => 'Filets de Séparation : <b>__i__</b> où <b>i</b> est un nombre de <b>0</b> à <b>@max@</b>.<br />Autres filets disponibles : @liste@',
 	'filets_sep:description' => 'Insère des filets de séparation, personnalisables par des feuilles de style, dans tous les textes de SPIP.
-_ La syntaxe est : "__code__", où "code" représente soit le numéro d’identification (de 0 à 7) du filet à insérer en relation directe avec les styles correspondants, soit le nom d\'une image placée dans le dossier plugins/couteau_suisse/img/filets.', # MODIF
+_ La syntaxe est : «__code__», où «code» représente soit le numéro d\'identification (de 0 à 7) du filet à insérer en relation directe avec les styles correspondants, soit le nom d\'une image placée dans le dossier <code>dossier_de_mon_squelette/img/filets/</code>, ou par défaut, dans le dossier <code>@_DIR_CS_ROOT@img/filets/</code>.',
 	'filets_sep:nom' => 'Filets de Séparation',
 	'filtrer_javascript:description' => 'Pour gérer l\'insertion de JavaScript dans les articles, trois modes sont disponibles :
 - <i>jamais</i> : le JavaScript est refusé partout
@@ -368,11 +369,11 @@ Les blocs multi s\'affichent alors toujours dans la langue demandée par le visi
 
 	// G
 	'glossaire:aide' => 'Un texte sans glossaire : <b>@_CS_SANS_GLOSSAIRE@</b>',
-	'glossaire:description' => '@puce@ Gestion d’un glossaire interne lié à un ou plusieurs groupes de mots-clés. Inscrivez ici le nom des groupes en  les séparant par les deux points « : ». En laissant vide la case qui  suit (ou en tapant &quot;Glossaire&quot;), c’est le groupe &quot;Glossaire&quot; qui sera utilisé.[[%glossaire_groupes%]]
+	'glossaire:description' => '@puce@ Gestion d\'un glossaire interne lié à un ou plusieurs groupes de mots-clés. Inscris ici le nom des groupes en les séparant par les deux points « : ». En laissant vide la case qui  suit (ou en tapant &quot;Glossaire&quot;), c\'est le groupe &quot;Glossaire&quot; qui sera utilisé.[[%glossaire_groupes%]]
 
 @puce@ Pour chaque mot, tu as la possibilité de choisir le nombre maximal de liens créés dans tes textes. Toute valeur nulle ou négative implique que tous les mots reconnus seront traités. [[%glossaire_limite% par mot-clé]]
 
-@puce@ Deux solutions te sont offertes pour générer la petite fenêtre automatique qui apparaît lors du survol de la souris. [[%glossaire_js%]][[->%glossaire_abbr%]]', # MODIF
+@puce@ Deux solutions te sont offertes pour générer la petite fenêtre automatique qui apparaît lors du survol de la souris. [[%glossaire_js%]][[->%glossaire_abbr%]]',
 	'glossaire:nom' => 'Glossaire interne',
 	'glossaire_abbr' => 'Ignorer les balises <code><abbr></code> et <code><acronym></code>',
 	'glossaire_css' => 'Solution CSS',
@@ -404,14 +405,15 @@ Pour définir ce logo, va sur la page «<:titre_configuration:>» en cliquant su
 	'insert_head:nom' => 'Balise #INSERT_HEAD',
 	'insertions:description' => 'ATTENTION : outil en cours de développement !! [[%insertions%]]',
 	'insertions:nom' => 'Corrections automatiques',
-	'introduction:description' => 'Cette balise à placer dans les squelettes sert en général à la une ou dans les rubriques afin de produire un résumé des articles, des brèves, etc..</p>
-<p>{{Attention}} : Avant d\'activer cette fonctionnalité, vérifie bien qu\'aucune fonction {balise_INTRODUCTION()} n\'existe déjà dans ton squelette ou tes plugins, la surcharge produirait alors une erreur de compilation.</p>
-@puce@ Tu peux préciser (en pourcentage par rapport à la valeur utilisée par défaut) la longueur du texte renvoyé par balise #INTRODUCTION. Une valeur nulle ou égale à 100 ne modifie pas l\'aspect de l\'introduction et utilise donc les valeurs par défaut suivantes : 500 caractères pour les articles, 300 pour les brèves et 600 pour les forums ou les rubriques.
-[[%lgr_introduction% %]]
-@puce@ Par défaut, les points de suite ajoutés au résultat de la balise #INTRODUCTION si le texte est trop long sont : <html>«&nbsp;(…)»</html>. Tu peux ici préciser votre propre chaîne de caractère indiquant au lecteur que le texte tronqué a bien une suite.
-[[%suite_introduction%]]
-@puce@ Si la balise #INTRODUCTION est utilisée pour résumer un article, alors le Couteau Suisse peut fabriquer un lien hypertexte sur les points de suite définis ci-dessus afin de mener le lecteur vers le texte original. Par exemple : «Lire la suite de l\'article…»
-[[%lien_introduction%]]', # MODIF
+	'introduction:description' => 'Cette balise à placer dans les squelettes sert en général à la une ou dans les rubriques afin de produire un résumé des articles, des brèves, etc..
+
+{{Attention}} : Avant d\'activer cette fonctionnalité, vérifie bien qu\'aucune fonction {balise_INTRODUCTION()} n\'existe déjà dans ton squelette ou tes plugins, la surcharge produirait alors une erreur de compilation.
+
+@puce@ Tu peux préciser (en pourcentage par rapport à la valeur utilisée par défaut) la longueur du texte renvoyé par balise #INTRODUCTION. Une valeur nulle ou égale à 100 ne modifie pas l\'aspect de l\'introduction et utilise donc les valeurs par défaut suivantes : 500 caractères pour les articles, 300 pour les brèves et 600 pour les forums ou les rubriques.[[%lgr_introduction% %]]
+
+@puce@ Par défaut, les points de suite ajoutés au résultat de la balise #INTRODUCTION si le texte est trop long sont : <html>« (…)»</html>. Tu peux ici préciser ta propre chaîne de caractère indiquant au lecteur que le texte tronqué a bien une suite.[[%suite_introduction%]]
+
+@puce@ Si la balise #INTRODUCTION est utilisée pour résumer un article, alors le Couteau Suisse peut fabriquer un lien hypertexte sur les points de suite définis ci-dessus afin de mener le lecteur vers le texte original. Par exemple : «Lire la suite de l\'article…»[[%lien_introduction%]]',
 	'introduction:nom' => 'Balise #INTRODUCTION',
 
 	// J
@@ -437,8 +439,8 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	// L
 	'label:admin_travaux' => 'Fermer le site public pour :',
 	'label:alinea' => 'Champ d\'application :',
-	'label:alinea2' => 'Sauf :', # NEW
-	'label:alinea3' => 'Désactiver la prise en compte des alinéas :', # NEW
+	'label:alinea2' => 'Sauf :',
+	'label:alinea3' => 'Désactiver la prise en compte des alinéas :',
 	'label:arret_optimisation' => 'Empêcher SPIP de vider la corbeille automatiquement :',
 	'label:auteur_forum_nom' => 'Le visiteur doit spécifier :',
 	'label:auto_sommaire' => 'Création systématique du sommaire :',
@@ -465,7 +467,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:duree_cache_mutu' => 'Durée du cache en mutualisation :',
 	'label:enveloppe_mails' => 'Petite enveloppe devant les mails :',
 	'label:expo_bofbof' => 'Mise en exposants pour : <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>',
-	'label:filtre_gravite' => 'Gravité maximale acceptée :', # NEW
+	'label:filtre_gravite' => 'Gravité maximale acceptée :',
 	'label:forum_lgrmaxi' => 'Valeur (en caractères) :',
 	'label:glossaire_groupes' => 'Groupe(s) utilisé(s) :',
 	'label:glossaire_js' => 'Technique utilisée :',
@@ -496,7 +498,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:message_travaux' => 'Ton message de maintenance :',
 	'label:moderation_admin' => 'Valider automatiquement les messages des : ',
 	'label:mot_masquer' => 'Mot-clé masquant les contenus :',
-	'label:nombre_de_logs' => 'Rotation des fichiers :', # NEW
+	'label:nombre_de_logs' => 'Rotation des fichiers :',
 	'label:ouvre_note' => 'Ouverture et fermeture des notes de bas de page',
 	'label:ouvre_ref' => 'Ouverture et fermeture des appels de notes de bas de page',
 	'label:paragrapher' => 'Toujours paragrapher :',
@@ -552,14 +554,14 @@ _ • {Par défaut} : remplacement automatique d\'origine (à partir de la versi
 [[%liens_orphelins%]]',
 	'liens_orphelins:description1' => '[[Si l\'URL rencontrée dépasse les %long_url% caractères, alors SPIP la réduit à %coupe_url% caractères]].',
 	'liens_orphelins:nom' => 'Belles URLs',
-	'log_brut' => 'Données écrites en format brut (non HTML)', # NEW
-	'log_fileline' => 'Informations supplémentaires de débogage', # NEW
+	'log_brut' => 'Données écrites en format brut (non HTML)',
+	'log_fileline' => 'Informations supplémentaires de débogage',
 
 	// M
 	'mailcrypt:description' => 'Masque tous les liens de courriels présents dans tes textes en les remplaçant par un lien JavaScript permettant quand même d\'activer la messagerie du lecteur. Cet outil antispam tente d\'empêcher les robots de collecter les adresses électroniques laissées en clair dans les forums ou dans les balises de tes squelettes.',
 	'mailcrypt:nom' => 'MailCrypt',
-	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de vos squelettes', # NEW
-	'mailcrypt_fonds' => 'Ne pas protéger les fonds suivants :<br /><q4>{Séparez-les par les deux points «~:~» et vérifiez bien que ces fonds restent totalement inaccessibles aux robots du Net.}</q4>', # NEW
+	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de tes squelettes',
+	'mailcrypt_fonds' => 'Ne pas protéger les fonds suivants :<br /><q4>{Sépare-les par les deux points «~:~» et vérifie bien que ces fonds restent totalement inaccessibles aux robots du Net.}</q4>',
 	'maj_auto:description' => 'Cet outil te permet de gérer facilement la mise à jour de tes différents plugins, récupérant notamment le numéro de révision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouvé sur <code>zone.spip.org</code>.
 
 La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> ou <code>extensions/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tente de procéder manuellement à la mise à jour du plugin.
@@ -568,7 +570,11 @@ Note : les paquets <code>.zip</code> n\'étant pas reconstruits instantanément,
 	'maj_auto:nom' => 'Mises à jour automatiques',
 	'masquer:description' => 'Cet outil permet de masquer sur le site public et sans modification particulière de tes squelettes, les contenus (rubriques ou articles) qui ont le mot-clé défini ci-dessous. Si une rubrique est masquée, toute sa branche l\'est aussi.[[%mot_masquer%]]
 
-Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère <code>{tout_voir}</code> aux boucles de ton squelette.', # MODIF
+Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère <code>{tout_voir}</code> aux boucles de ton squelette.
+
+Objets publiés mais masqués du public :
+-* Rubriques : @_RUB@.
+-* Articles : @_ART@.',
 	'masquer:nom' => 'Masquer du contenu',
 	'meme_rubrique:description' => 'Définis ici le nombre d\'objets listés dans le cadre nommé «<:info_meme_rubrique:>» et présent sur certaines pages de l\'espace privé.[[%meme_rubrique%]]',
 	'message_perso' => 'Un grand merci aux traducteurs qui passeraient par ici. Pat ;-)',
@@ -627,7 +633,7 @@ Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère
 Si les droits d\'écriture le permettent, le code PHP ci-dessous pourra prendre place dans le fichier {{/config/mes_options.php}} et ajoutera un lien de réinitialisation sur cette page du pack « {@pack@} ». Bien sûr il t\'est possible de changer son nom.
 
 Si tu réinitialises le plugin en cliquant sur un pack, le Couteau Suisse se reconfigurera automatiquement en fonction des paramètres prédéfinis dans ce pack.',
-	'pack_du' => '• du pack @pack@', # MODIF
+	'pack_du' => 'Du pack @pack@',
 	'pack_installe' => 'Mise en place d\'un pack de configuration',
 	'pack_installer' => 'Es-tu sûr de vouloir réinitialiser le Couteau Suisse et installer le pack « @pack@ » ?',
 	'pack_nb_plrs' => 'Il y a actuellement @nb@ « packs de configuration » disponibles.',
@@ -643,9 +649,9 @@ Si tu réinitialises le plugin en cliquant sur un pack, le Couteau Suisse se rec
 	'paragrapher2:description' => 'La fonction SPIP <code>paragrapher()</code> insère des balises &lt;p&gt; et &lt;/p&gt; dans tous les textes qui sont dépourvus de paragraphes. Afin de gérer plus finement tes styles et vos mises en page, tu as la possibilité d\'uniformiser l\'aspect des textes de ton site.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Paragrapher',
 	'pipelines' => 'Pipelines utilisés :',
-	'previsualisation:description' => 'Par défaut, SPIP permet de prévisualiser un article dans sa version publique et stylée, mais uniquement lorsque celui-ci a été « proposé à l’évaluation ». Hors cet outil permet aux auteurs de prévisualiser également les articles pendant leur rédaction. Chacun peut alors prévisualiser et modifier son texte à sa guise.
+	'previsualisation:description' => 'Par défaut, SPIP permet de prévisualiser un article dans sa version publique et stylée, mais uniquement lorsque celui-ci a été « proposé à l\'évaluation ». Hors cet outil permet aux auteurs de prévisualiser également les articles pendant leur rédaction. Chacun peut alors prévisualiser et modifier son texte à sa guise.
 
-@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que tes rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », tu dois l’autoriser (dans le menu {[Configuration&gt;Fonctions avancées->./?exec=config_fonctions]} de l’espace privé).', # MODIF
+@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que tes rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », tu dois l\'autoriser (dans le menu {[Configuration&gt;Fonctions avancées->./?exec=config_fonctions]} de l\'espace privé).',
 	'previsualisation:nom' => 'Prévisualisation des articles',
 	'puceSPIP' => 'Autoriser le raccourci «*»',
 	'puceSPIP_aide' => 'Une puce SPIP : <b>*</b>',
@@ -660,7 +666,7 @@ Afin de conserver l\'accès à la puce image originale de SPIP (le petit triangl
 	// R
 	'raccourcis' => 'Raccourcis typographiques actifs du Couteau Suisse :',
 	'raccourcis_barre' => 'Les raccourcis typographiques du Couteau Suisse',
-	'rafraichir' => 'Afin de terminer la configuration du plugin, merci d\'actualiser la page courante.', # NEW
+	'rafraichir' => 'Afin de terminer la configuration du plugin, clique ici pour recalculer la page courante.',
 	'reserve_admin' => 'Accès réservé aux administrateurs.',
 	'rss_actualiser' => 'Actualiser',
 	'rss_attente' => 'Attente RSS...',
@@ -678,9 +684,9 @@ Afin de conserver l\'accès à la puce image originale de SPIP (le petit triangl
 
 Dossier stockant les sessions : @_DIR_SESSIONS@
 
-Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.', # NEW
-	'sessions_anonymes:nom' => 'Sessions anonymes', # NEW
-	'set_options:description' => 'Sélectionne d\'office le type d’interface privée (simplifiée ou avancée) pour tous les rédacteurs déjà existant ou à venir et supprime le bouton correspondant du bandeau des petites icônes.[[%radio_set_options4%]]', # MODIF
+Ton site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.',
+	'sessions_anonymes:nom' => 'Sessions anonymes',
+	'set_options:description' => 'Sélectionne d\'office le type d\'interface privée (simplifiée ou avancée) pour tous les rédacteurs déjà existant ou à venir et supprime le bouton correspondant du bandeau des petites icônes.[[%radio_set_options4%]]',
 	'set_options:nom' => 'Type d\'interface privée',
 	'sf_amont' => 'En amont',
 	'sf_tous' => 'Tous',
@@ -696,7 +702,7 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]',
 Attention, cet outil a besoin pour fonctionner de pages au «DOCTYPE XHTML» (non HTML !) et de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si tu coches les cases suivantes. [[%scrollTo%]][[-->%LocalScroll%]]
 @_CS_PLUGIN_JQUERY192@',
 	'soft_scroller:nom' => 'Ancres douces',
-	'sommaire:description' => 'Construit un sommaire pour le texte de tes articles et de tes rubriques afin d’accéder rapidement aux gros titres (balises HTML &lt;@h3@>Un gros titre&lt;/@h3@>) ou aux intertitres SPIP (de syntaxe <code>{{{Un intertitre}}}</code>).
+	'sommaire:description' => 'Construit un sommaire pour le texte de tes articles et de tes rubriques afin d\'accéder rapidement aux gros titres (balises HTML &lt;@h3@>Un gros titre&lt;/@h3@>) ou aux intertitres SPIP (de syntaxe <code>{{{Un intertitre}}}</code>).
 
 Pour information, l\'outil « [.->class_spip] » permet de choisir la balise &lt;hN> utilisée pour les intertitres de SPIP.
 
@@ -707,15 +713,15 @@ Pour information, l\'outil « [.->class_spip] » permet de choisir la balise &
 @puce@ Les ancres du sommaire peuvent être calculées à partir du titre et non ressembler à : {outil_sommaire_NN}. Cette option donne également accès à la syntaxe <code>{{{Mon titre<mon_ancre>}}}</code> qui permet de choisir l\'ancre utilisée.[[%jolies_ancres%]]
 
 @puce@ Fixe ici le comportement du plugin concernant la création du sommaire: 
-_ • Systématique pour chaque article (une balise <code>@_CS_SANS_SOMMAIRE@</code> placée n’importe où à l’intérieur du texte de l’article créera une exception).
+_ • Systématique pour chaque article (une balise <code>@_CS_SANS_SOMMAIRE@</code> placée n\'importe où à l\'intérieur du texte de l\'article créera une exception).
 _ • Uniquement pour les articles contenant la balise <code>@_CS_AVEC_SOMMAIRE@</code>.
 
 [[%auto_sommaire%]]
 
-@puce@ Par défaut, le Couteau Suisse insère automatiquement le sommaire en tête d\'article. Mais tu as ce sommaire ailleurs dans ton squelette grâce à une balise #CS_SOMMAIRE.
+@puce@ Par défaut, le Couteau Suisse insère automatiquement le sommaire en tête d\'article. Mais tu as la possibilité de placer ce sommaire ailleurs dans ton squelette grâce à une balise #CS_SOMMAIRE.
 [[%balise_sommaire%]]
 
-Ce sommaire est compatible avec « [.->decoupe] » et « [.->titres_typo] ».', # MODIF
+Ce sommaire est compatible avec « [.->decoupe] » et « [.->titres_typo] ».',
 	'sommaire:nom' => 'Sommaire automatique',
 	'sommaire_ancres' => 'Ancres choisies : <b><html>{{{Mon Titre<mon_ancre>}}}</html></b>',
 	'sommaire_avec' => 'Un texte avec sommaire : <b>@_CS_AVEC_SOMMAIRE@</b>',
@@ -724,15 +730,15 @@ Ce sommaire est compatible avec « [.->decoupe] » et « [.->titres_typo] »
 	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots, tout comme les balises en clair &lt;a>&lt;/a>, sont interdits : incite tes rédacteurs à utiliser les raccourcis de liens au format SPIP.
 
 @puce@ Liste ici les séquences interdites en les séparant par des espaces.[[%spam_mots%]]
-<q1>• Pour une expression avec des espaces, place-la entre guillemets.
+<q1>• Pour une expression avec des espaces, place-la entre guillemets, ou utilisez le «+» pour remplacer l\'espace.
 _ • Pour spécifier un mot entier, mets-le entre parenthèses. Exemple~:~{(asses)}.
 _ • Pour une expression régulière, vérifie bien la syntaxe et place-la entre slashes puis entre guillemets.
 _ Exemple~:~{<html>"/@test\\.(com|fr)/"</html>}.
-_ • Pour une expression régulière devant agir sur des caractères HTML, placez le test entre «&#» et «;».
+_ • Pour une expression régulière devant agir sur des caractères HTML, place le test entre «&#» et «;».
 _ Exemple~:~{<html>"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/"</html>}.</q1>
 
 @puce@ Certaines adresses IP peuvent également être bloquées à la source. Sache toutefois que derrière ces adresses (souvent variables), il peut y avoir plusieurs utilisateurs, voire un réseau entier.[[%spam_ips%]]
-<q1>• Utilise le caractère «*» pour plusieurs chiffres, «?» pour un seul et les crochets pour des classes de chiffres.</q1>', # MODIF
+<q1>• Utilise le caractère «*» pour plusieurs chiffres, «?» pour un seul et les crochets pour des classes de chiffres.</q1>',
 	'spam:nom' => 'Lutte contre le SPAM',
 	'spam_ip' => 'Blocage IP de @ip@ :',
 	'spam_test_ko' => 'Ce message serait bloqué par le filtre anti-SPAM !',
@@ -756,11 +762,11 @@ _ • {Contrôle du cache} : option identique à la précédente, avec une écri
 	'spip_cache:nom' => 'SPIP et le cache…',
 	'spip_ecran:description' => 'Détermine la largeur d\'écran imposée à tous en partie privée. Un écran étroit présentera deux colonnes et un écran large en présentera trois. Le réglage par défaut laisse l\'utilisateur choisir, son choix étant stocké dans un cookie.[[%spip_ecran%]]',
 	'spip_ecran:nom' => 'Largeur d\'écran',
-	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
-[[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
-	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
-	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».', # NEW
-	'spip_log:nom' => 'SPIP et les logs', # NEW
+	'spip_log:description' => '@puce@ Gère ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
+[[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laisse vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]',
+	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]',
+	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».',
+	'spip_log:nom' => 'SPIP et les logs',
 	'stat_auteurs' => 'Les auteurs en stat',
 	'statuts_spip' => 'Uniquement les statuts SPIP suivants :',
 	'statuts_tous' => 'Tous les statuts',
@@ -774,8 +780,8 @@ _ • {Contrôle du cache} : option identique à la précédente, avec une écri
 	'test_i18n:description' => 'Toutes les chaînes de langue qui ne sont pas internationalisées (donc présentes dans les fichiers lang/*_XX.php) vont apparaitre en rouge.
 _ Utile pour n\'en oublier aucune !
 
-@puce@ Un test : ', # NEW
-	'test_i18n:nom' => 'Traductions manquantes', # NEW
+@puce@ Un test : ',
+	'test_i18n:nom' => 'Traductions manquantes',
 	'titre' => 'Le Couteau Suisse',
 	'titre_parent:description' => 'Au sein d\'une boucle, il est courant de vouloir afficher le titre du parent de l\'objet en cours. Traditionnellement, il suffirait d\'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT allégera l\'écriture de tes squelettes. Le résultat renvoyé est : le titre du groupe d\'un mot-clé ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, brève, etc.).
 
@@ -794,38 +800,38 @@ Polices disponibles : @_CS_FONTS@]][[%i_largeur% px]][[%i_hauteur% pt]][[%i_padd
 
 Cet outil est compatible avec : « [.->sommaire] ».',
 	'titres_typo:nom' => 'Intertitres en image',
-	'titres_typographies:description' => 'Par défaut, les raccourcis typographiques de SPIP <html>({, {{, etc.)</html> ne s\'appliquent pas aux titres d\'objets dans vos squelettes.
+	'titres_typographies:description' => 'Par défaut, les raccourcis typographiques de SPIP <html>({, {{, etc.)</html> ne s\'appliquent pas aux titres d\'objets dans tes squelettes.
 _ Cet outil active donc l\'application automatique des raccourcis typographiques de SPIP sur toutes les balises #TITRE et apparentées (#NOM pour un auteur, etc.).
 
-Exemple d\'utilisation : le titre d\'un livre cité dans le titre d\'un article, à mettre en italique.', # NEW
-	'titres_typographies:nom' => 'Titres typographiés', # NEW
+Exemple d\'utilisation : le titre d\'un livre cité dans le titre d\'un article, à mettre en italique.',
+	'titres_typographies:nom' => 'Titres typographiés',
 	'tous' => 'Tous',
 	'toutes_couleurs' => 'Les 36 couleurs des styles css :@_CS_EXEMPLE_COULEURS@',
-	'toutmulti:aide' => 'Blocs multilingues : <b><:trad:></b>', # MODIF
-	'toutmulti:description' => 'À l\'instar de ce tu peux déjà faire dans tes squelettes, cet outil te permet d\'utiliser librement les chaînes de langues (de SPIP ou de tes squelettes) dans tous les contenus de ton site (articles, titres, messages, etc.) à l\'aide du raccourci <code><:chaine:></code>.
+	'toutmulti:aide' => 'Blocs multilingues : <b><:ma_chaine:></b>',
+	'toutmulti:description' => 'À l\'instar de ce tu peux déjà faire dans tes squelettes, cet outil te permet d\'utiliser librement les chaînes de langues (de SPIP ou de vos squelettes) dans tous les contenus de ton site (articles, titres, messages, etc.) à l\'aide du raccourci <code><:</code><code>ma_chaine:></code>.
 
 Consulte [ici ->http://www.spip.net/fr_article2128.html] la documentation de SPIP à ce sujet.
 
-Cet outil accepte également les arguments introduits par SPIP 2.0. Par exemple, le raccourci <code><:ma_chaine{nom=Charles Martin, age=37}:></code> permet de passer deux paramètres à la chaîne suivante : <code>\'ma_chaine\'=>"Bonjour, je suis @nom@ et j\'ai @age@ ans"</code>.
+Cet outil accepte également les arguments introduits par SPIP 2.0. Par exemple, le raccourci <code><:</code><code>ma_chaine{nom=Charles Martin, age=37}:></code> permet de passer deux paramètres à la chaîne suivante : <code>\'ma_chaine\'=>"Bonjour, je suis @nom@ et j\'ai @age@ ans"</code>.
 
 La fonction SPIP utilisée en PHP est <code>_T(\'chaine\')</code> sans argument, et  <code>_T(\'chaine\', array(\'arg1\'=>\'un texte\', \'arg2\'=>\'un autre texte\'))</code> avec arguments.
 
- N\'oublie donc pas de vérifier que la clef <code>\'chaine\'</code> est bien définie dans les fichiers de langues.', # MODIF
+ N\'oublie donc pas de vérifier que la clef <code>\'chaine\'</code> est bien définie dans les fichiers de langues.',
 	'toutmulti:nom' => 'Blocs multilingues',
 	'trad_help' => '{{Le Couteau Suisse est bénévolement traduit en plusieurs langues et sa langue mère est le français.}}
 
-N\'hésitez pas à offrir votre contribution si vous décelez quelques soucis dans les textes du plugin. Toute l\'équipe vous en remercie d\'avance.
+N\'hésite pas à offrir ta contribution si tu décèles quelques soucis dans les textes du plugin. Toute l\'équipe t\'en remercie d\'avance.
 
-Pour vous inscrire à l\'espace de traduction : @url@
+Pour t\'inscrire à l\'espace de traduction : @url@
 
-Pour accéder directement aux traductions des modules du Couteau Suisse, cliquez ci-dessous sur la langue cible de votre choix. Une fois identifié, repérez ensuite le petit crayon qui apparait en survolant le texte traduit puis cliquez dessus.
+Pour accéder directement aux traductions des modules du Couteau Suisse, clique ci-dessous sur la langue cible de ton choix. Une fois identifié, repère ensuite le petit crayon qui apparait en survolant le texte traduit puis clique dessus.
 
-Vos modifications seront prises en compte quelques jours plus tard sous forme d\'une mise à jour disponible pour le Couteau Suisse. Si votre langue n\'est pas dans la liste, alors le site de traduction vous permettra facilement de la créer.
+Tes modifications seront prises en compte quelques jours plus tard sous forme d\'une mise à jour disponible pour le Couteau Suisse. Si ta langue n\'est pas dans la liste, alors le site de traduction te permettra facilement de la créer.
 
 {{Traductions actuellement disponibles}} :@trad@
 
-{{Merci aux traducteurs actuels}} : @contrib@.', # NEW
-	'trad_mod' => 'Module « @mod@ » : ', # NEW
+{{Merci aux traducteurs actuels}} : @contrib@.',
+	'trad_mod' => 'Module « @mod@ » : ',
 	'travaux_masquer_avert' => 'Masquer le cadre indiquant sur le site public qu\'une maintenance est en cours',
 	'travaux_nocache' => 'Désactiver également le cache de SPIP',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
@@ -901,7 +907,7 @@ _ Exemple : <code>article.php3?id_article=123</code>
 <q1>• S\'assurer que l\'URL produite soit totalement {{en minuscules}}.</q1>[[%urls_minuscules%]]
 <q1>• Provoquer l\'ajout systématique de {{l\'id de l\'objet}} à son URL (en suffixe, en préfixe, etc.).
 _ (exemples : <code>/Mon-titre-d-article,457</code> ou <code>/457-Mon-titre-d-article</code>)</q1>',
-	'type_urls:description2' => '{Note} : un changement dans ce paragraphe peut nécessiter de vider la table des URLs afin de permettre à SPIP de tenir compte des nouveaux paramètres.', # NEW
+	'type_urls:description2' => '{Note} : un changement dans ce paragraphe peut nécessiter de vider la table des URLs afin de permettre à SPIP de tenir compte des nouveaux paramètres.',
 	'type_urls:nom' => 'Format des URLs',
 	'typo_exposants:description' => '{{Textes français}} : améliore le rendu typographique des abréviations courantes, en mettant en exposant les éléments nécessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2ème</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abréviation correcte).
 
@@ -974,16 +980,18 @@ Ajoute simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> dans te
 	'votre_choix' => 'Ton choix :',
 
 	// W
-	'webmestres:description' => 'Un {{webmestre}} au sens SPIP est un {{administrateur}} ayant accès à l\'espace FTP. Par défaut et à partir de SPIP 2.0, il est l\'administrateur <code>id_auteur=1</code> du site. Les webmestres ici définis ont le privilège de ne plus être obligés de passer par FTP pour valider les opérations sensibles du site, comme la mise à jour de la base de données ou la restauration d’un dump.
+	'webmestres:description' => 'Un {{webmestre}} au sens SPIP est un {{administrateur}} ayant accès à l\'espace FTP. Par défaut et à partir de SPIP 2.0, il est l\'administrateur <code>id_auteur=1</code> du site. Les webmestres ici définis ont le privilège de ne plus être obligés de passer par FTP pour valider les opérations sensibles du site, comme la mise à jour de la base de données ou la restauration d\'un dump.
 
 Webmestre(s) actuel(s) : {@_CS_LISTE_WEBMESTRES@}.
 _ Administrateur(s) éligible(s) : {@_CS_LISTE_ADMINS@}.
 
-En tant que webmestre toi-même, tu as ici les droits de modifier cette liste d\'ids -- séparés par les deux points « : » s\'ils sont plusieurs. Exemple : «1:5:6».[[%webmestres%]]', # MODIF
+En tant que webmestre toi-même, tu as ici les droits de modifier cette liste d\'ids -- séparés par les deux points « : » s\'ils sont plusieurs. Exemple : «1:5:6».[[%webmestres%]]',
 	'webmestres:nom' => 'Liste des webmestres',
 
 	// X
-	'xml:description' => 'Active le validateur xml pour l\'espace public tel qu\'il est décrit dans la [documentation->http://www.spip.net/fr_article3541.html]. Un bouton intitulé « Analyse XML » est ajouté aux autres boutons d\'administration.', # MODIF
+	'xml:description' => 'Active le validateur XML pour l\'espace public tel qu\'il est décrit dans la [documentation de SPIP->http://www.spip.net/fr_article3541.html]. Cet outil n\'est visible que des administrateurs du site : un bouton intitulé « Analyse XML » est ajouté aux autres boutons d\'administration.
+
+@puce@ Utile notamment pour valider la syntaxe de tes pages finales, et résoudre les problèmes d\'accessibilité du Web aux déficients visuels.',
 	'xml:nom' => 'Validateur XML'
 );
 

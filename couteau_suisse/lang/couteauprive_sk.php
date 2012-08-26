@@ -139,7 +139,7 @@ Príklady: <code>#SET{x,1}#SET_PLUS{x,2}</code> alebo <code>#SET{x,avions}#SET_R
 	'certaines_couleurs' => 'Len tagy definované nižšie @_CS_ASTER@:',
 	'chatons:aide' => 'Smajlíky: @liste@',
 	'chatons:description' => 'Nahradiť <code>názov</code> obrázkami smajlíkov.
-_ Tento nástroj nahradí skratky obrázkami s rovnakým názvom, ktoré sa našli v priečinku <code>mon_squelette_toto/img/chatons/</code>, alebo podľa predvolených nastavení v priečinku <code>couteau_suisse/img/chatons/</code>.', # MODIF
+_ Tento nástroj nahradí skratky obrázkami s rovnakým názvom, ktoré sa našli v priečinku <code>mon_squelette_toto/img/chatons/</code>, alebo podľa predvolených nastavení v priečinku <code>@_DIR_CS_ROOT@img/chatons/</code>.', # MODIF
 	'chatons:nom' => 'Smajlíky',
 	'citations_bb:description' => 'Na dodržanie HTML v spipovskom obsahu vašej stránky (články, rubriky, atď.) tento nástroj nahradí označenie <quote> označením <q> tam, kde je prázdny riadok. ',
 	'citations_bb:nom' => 'Dobre označené citácie',
@@ -203,12 +203,14 @@ Rovnako na zmenu písma, ak je povolená táto možnosť:@_CS_EXEMPLE_COULEURS3@
 @_CS_ASTER@Formát týchto používateľských tagov by mal obsahovať existujúce farby alebo definovať dvojice "tag=farba", oddelené čiarkami. Príklady: "sivá, červená", "slabá=žltá, silná=červená", "dole=#99CC11, hore=brown" alebo ešte "sivá=#DDDDCC, červená=#EE3300". Pre prvý a posledný príklad sú povolené tagy: <code>[gris]</code> a <code>[rouge]</code> (<code>[fond gris]</code> a <code>[fond rouge],</code> ak sú písma povolené).',
 	'couleurs:nom' => 'Zafarbený text',
 	'couleurs_fonds' => ', <b>[fond coul]text[/coul]</b>, <b>[bg coul]text[/coul]</b>',
-	'cs_comportement:description' => '@puce@ {{Logs.}} Record a lot of information about the working of the Penknife in the {spip.log} files which can be found in this directory: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
+	'cs_comportement:description' => '@puce@ {{Logs.}} Record a lot of information about the working of the Penknife in the {spip.log} files which can be found in this directory: {<html>@_CS_DIR_LOG@</html>}.
+_ Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».[[%log_couteau_suisse%]]
 
-@puce@ {{SPIP options.}} SPIP places plugins in order. To be sure that the Penknife is at the head and is thus able to control certain SPIP options, check the following option. If the permissions on your server allow it, the file {@_CS_FILE_OPTIONS@} will be modified to include {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php}.
-[[%spip_options_on%]]
+@puce@ {{SPIP options.}} SPIP places plugins in order. To be sure that the Penknife is at the head and is thus able to control certain SPIP options, check the following option. If the permissions on your server allow it, the file {<html>@_CS_FILE_OPTIONS@</html>} will be modified to include {<html>@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php</html>}.
 
-@puce@ {{External requests.}} The Penknife checks regularly for new versions of the plugin and shows available updates on its configuration page. If the external requests involved do not work from your server, check this box to turn this off.[[%distant_off%]]', # MODIF
+[[%spip_options_on%]]@_CS_FILE_OPTIONS_ERR@
+
+@puce@ {{External requests.}} The Penknife checks regularly for new versions of the plugin and shows available updates on its configuration page. If the external requests involved do not work from your server, check this box to turn this off.[[%distant_off%]][[->%distant_outils_off%]]', # MODIF
 	'cs_comportement:nom' => 'Správanie sa modulu Vreckový nožík',
 	'cs_comportement_ko' => '{{Note :}} ce paramètre requiert un filtre de gravité réglé à plus de @gr2@ au lieu de @gr1@ actuellement.', # NEW
 	'cs_distant_off' => 'Checks of remote versions',
@@ -361,7 +363,7 @@ Takto sa multibloky vždy zobrazia v jazyku podľa požiadavky návštevníka.'
 
 @puce@ You can indicate the maximum number of links to create in a text for each word. A null or negative value will mean that all instances of the words will be treated. [[%glossaire_limite% par mot-clé]]
 
-@puce@ There is a choice of two options for generating the small window which appears on the mouseover. [[%glossaire_js%]]', # MODIF
+@puce@ There is a choice of two options for generating the small window which appears on the mouseover. [[%glossaire_js%]][[->%glossaire_abbr%]]', # MODIF
 	'glossaire:nom' => 'Interný slovník',
 	'glossaire_abbr' => 'Ignorovať tagy <code><abbr></code> a <code><acronym></code>',
 	'glossaire_css' => 'Riešenie CSS',
@@ -391,14 +393,16 @@ Ak chcete toto logo nastaviť, choďte na "Konfiguráciu stránky" kliknutím na
 	'insert_head:nom' => 'Tag #INSERT_HEAD',
 	'insertions:description' => 'N.B.: tool in development!! [[%insertions%]]',
 	'insertions:nom' => 'Automatické opravy',
-	'introduction:description' => 'This tag can be used in templates to generate short summaries of articles, new items, etc.</p>
-<p>{{Beware}} : If you have another plugin defining the fonction {balise_INTRODUCTION()} or you have defined it in your templates, you will get a compilation error.</p>
+	'introduction:description' => 'This tag can be used in templates to generate short summaries of articles, new items, etc.
+
+{{Beware}} : If you have another plugin defining the fonction {balise_INTRODUCTION()} or you have defined it in your templates, you will get a compilation error.
+
 @puce@ You can specify (as a percentage of the default value) the length of the text generated by the tag #INTRODUCTION. A null value, or a value equal to 100 will not modify anything and return the defaults: 500 characters for the articles, 300 for the news items and 600 for forums and sections.
-[[%lgr_introduction%&nbsp;%]]
-@puce@ By default, if the text is too long, #INTRODUCTION will end with 3 dots: <html>&laquo;&nbsp;(…)&raquo;</html>. You can change this to a customized string which shows that there is more text available.
-[[%suite_introduction%]]
-@puce@ If the #INTRODUCTION tag is used to give a summary of an article, the Penknife can generate a link to the article on the 3 dots or string marking that there is more text available. For example : &laquo;Read the rest of the article…&raquo;
-[[%lien_introduction%]]
+[[%lgr_introduction% %]]
+
+@puce@ By default, if the text is too long, #INTRODUCTION will end with 3 dots: <html>« (…)»</html>. You can change this to a customized string which shows that there is more text available.[[%suite_introduction%]]
+
+@puce@ If the #INTRODUCTION tag is used to give a summary of an article, the Penknife can generate a link to the article on the 3 dots or string marking that there is more text available. For example : «Read the rest of the article…»[[%lien_introduction%]]
 ', # MODIF
 	'introduction:nom' => 'Tag #INTRODUCTION',
 
@@ -637,8 +641,6 @@ Ak zásuvný modul obnovíte kliknutím na balík, modul Vreckový nožík sa s�
 	'pipelines' => 'Entry points used:',
 	'previsualisation:description' => 'Podľa predvolených nastavení SPIP umožňuje zobraziť ukážku článku, ako bude vyzerať po publikovaní a použití štýlov, ale iba v prípade, že článok bol "odoslaný na schválnenie". Okrem toho si autori môžu zobraziť aj ukážky článkov, ktoré sa upravujú. Každý si môže zobraziť túto ukážku a upravovať text tak, ako chce.
 
-
-
 @puce@ Pozor! Táto funkcia nezasahuje do práv na zobrazenie ukážky textu. Ak chcete, aby mali vaši redaktori naozaj právo na zobrazenie ukážok článkov, ktoré sa upravujú, musíte to povoliť (v menu {[Konfigurácia&gt;Pokročilé funkcie->./?exec=config_fonctions]} v súkromnej zóne).', # MODIF
 	'previsualisation:nom' => 'Zobrazujú sa články',
 	'puceSPIP' => 'Povoliť klávesové skratky "*"',
@@ -692,6 +694,10 @@ Pozor, na to aby tento nástroj fungoval, musí byť použitý na stránkach «D
 	'soft_scroller:nom' => 'Ľahké kotvy',
 	'sommaire:description' => 'Builds a summary of your articles in order to access the main headings quickly (HTML tags &lt;h3>A Subtitle&lt;/h3> or SPIP subtitle shortcuts in the form: <code>{{{My subtitle}}}</code>).
 
+Pour information, l\'outil « [.->class_spip] » permet de choisir la balise &lt;hN> utilisée pour les intertitres de SPIP.
+
+@puce@ Définissez ici la profondeur retenue sur les intertitres pour construire le sommaire (1 = &lt;@h3@>, 2 = &lt;@h3@> et &lt;@h4@>, etc.) :[[%prof_sommaire%]]
+
 @puce@ You can define the maximum number of characters of the subtitles used to make the summary:[[%lgr_sommaire% characters]]
 
 @puce@ You can also determine the way in which the plugin constructs the summary: 
@@ -703,7 +709,7 @@ _ • Only for articles containing the <code>@_CS_AVEC_SOMMAIRE@</code> tag.
 @puce@ By default, the Penknife inserts the summary at the top of the article. But you can place it elsewhere, if you wish, by using the #CS_SOMMAIRE tag, which you can activate here:
 [[%balise_sommaire%]]
 
-The summary can be used in conjunction with : {[.->decoupe]}.', # MODIF
+The summary can be used in conjunction with : « [.->decoupe] » and « [.->titres_typo] ».', # MODIF
 	'sommaire:nom' => 'Automatické zhrnutie',
 	'sommaire_ancres' => 'Vybrané kotvy: <b><html>{{{Môj nadpis&lt;moja_kotva>}}}</html></b>',
 	'sommaire_avec' => 'An article with summary: <b>@_CS_AVEC_SOMMAIRE@</b>',

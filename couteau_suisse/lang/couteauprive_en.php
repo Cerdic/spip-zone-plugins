@@ -148,8 +148,8 @@ _ • A search field starting from %select_max_auteurs% author(s).</q1>',
 	'categ:typo-racc' => '30. Typographical shortcuts',
 	'certaines_couleurs' => 'Only the tags defined below @_CS_ASTER@:',
 	'chatons:aide' => 'Smileys: @liste@',
-	'chatons:description' => 'Replace <code>:name</code> style tags with smiley images in the text.
-_ This tool will replace these shortcuts with the images of the same name found in the <code>mon_squelette_toto/img/chatons/</code> directory, or else, by default, those found in <code>couteau_suisse/img/chatons/</code>.', # MODIF
+	'chatons:description' => 'Replace {{<code>:nom</code>}} style tags with smiley images in the text.
+_ This tool will replace these shortcuts with the images of the same name found in the <code>mon_squelette_toto/img/chatons/</code> directory, or else, by default, those found in <code>@_DIR_CS_ROOT@img/chatons/</code>.', # MODIF
 	'chatons:nom' => 'Smileys',
 	'citations_bb:description' => 'In order to respect the HTML usage in the SPIP content of your site (articles, sections, etc.), this tool replaces the markup &lt;quote&gt; by the markup  &lt;q&gt; when there are no line returns. In fact, quotations must be surrounded by &lt;q&gt; tags and the quotations containing paragraphs must be surrounded by  &lt;blockquote&gt;.',
 	'citations_bb:nom' => 'Well delimited citations',
@@ -210,7 +210,8 @@ In the same way, to change the background colour if the following option allows:
 @_CS_ASTER@The format of these personalised tags have to be of existing colours or defined pairs "tag=colour", separated by commas. Examples: "grey, red", "smooth=yellow, strong=red", "low=#99CC11, high=brown" but also "grey=#DDDDCC, red=#EE3300". For the first and last examples, the allowed tags are: <code>[grey]</code> and <code>[red]</code> (<code>[fond grey]</code> and <code>[fond red]</code> if background colours are allowed).',
 	'couleurs:nom' => 'Coloured text',
 	'couleurs_fonds' => ', <b>[fond coul]text[/coul]</b>, <b>[bg coul]text[/coul]</b>',
-	'cs_comportement:description' => '@puce@ {{Logs.}} Record a lot of information about the functions executed by the Swiss Army Knife plugin in the {spip.log} files which can be found in this directory: {<html>@_CS_DIR_TMP@</html>}[[%log_couteau_suisse%]]
+	'cs_comportement:description' => '@puce@ {{Logs.}} Record a lot of information about the functions executed by the Swiss Army Knife plugin in the {spip.log} files which can be found in this directory: {<html>@_CS_DIR_LOG@</html>}.
+_ Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».[[%log_couteau_suisse%]]
 
 @puce@ {{SPIP options.}} SPIP sorts and applies the plugins in a particular order. To be sure that the Swiss Army Knife is at the top and is thereby able to have priority control over  certain SPIP options, tick the following checkbox option. If the permissions on your server allow it, the file {<html>@_CS_FILE_OPTIONS@</html>} will be modified to include {<html>@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php</html>}.
 
@@ -318,7 +319,7 @@ When making an official update, update the associated remote file (click above o
 	'effaces' => 'Deleted',
 	'en_travaux:description' => 'Makes it possible to display a customised message on the public site and also in the private editing area during maintenance work.',
 	'en_travaux:nom' => 'Site in maintenance mode',
-	'erreur:bt' => '<span style=\\"color:red;\\">Warning:</span> the typographical toolbar (version @version@) appears to be an old version.<br />The Swiss Army Knife is compatible only with version @mini@ or newer.',
+	'erreur:bt' => '<span style="color:red;">Warning:</span> the typographical toolbar (version @version@) appears to be an old version.<br />The Swiss Army Knife is compatible only with version @mini@ or newer.',
 	'erreur:description' => 'missing id in the tool\'s definition!',
 	'erreur:distant' => 'The distant server',
 	'erreur:jquery' => '{{N.B.}} : {jQuery} does not appear to be active for this page. Please consult the paragraph about the plugin\'s required libraries [in this article->http://www.spip-contrib.net/?article2166] or reload this page.',
@@ -384,11 +385,8 @@ This means that multi blocks will always displayed in the language requested by 
 	'help' => '{{This page is only accessible to main site administrators.}} It gives access to the configuration of some additional functions of the {{Swiss Army Knife}}.',
 	'help2' => 'Local version: @version@',
 	'help3' => '<p>Documentation links:@contribs@</p><p>Resets:
-
 _ • [Hidden tools|Return to the original appearance of this page->@hide@]
-
 _ • [Whole plugin|Reset to the original state of the plugin->@reset@]@install@
-
 </p>',
 	'horloge:description' => 'Tool currently under development. It offers a JavaScript clock. Tag: <code>#HORLOGE</code>. Model: <code><horloge></code>
 
@@ -632,7 +630,7 @@ Objets publiés mais masqués du public :
 If write access privileges permit, this PHP code may be placed in the /config/mes_options.php file. It will place a reset link on the page of the "{@pack@}" pack. Of course, you can change its name below.
 
 If you reset the plugin by clicking on a pack, the Swiss Army Knife plugin will automatically reconfigure itself according to the predefined values in that pack.',
-	'pack_du' => '• of the pack @pack@', # MODIF
+	'pack_du' => 'Of the pack @pack@', # MODIF
 	'pack_installe' => 'Installation of a configuration pack',
 	'pack_installer' => 'Are you sure you want to re-initialise the Swiss Army Knife and install the « @pack@ » pack?',
 	'pack_nb_plrs' => 'There are @nb@ "configuration packs" currently available.',
@@ -703,7 +701,7 @@ N.B. In order to work, this tool needs to be used in "DOCTYPE XHTML" pages (not 
 	'soft_scroller:nom' => 'Soft anchors',
 	'sommaire:description' => 'Builds a mini table-of-contents of your articles and sections in order to access the main headings quickly (HTML tags &lt;@h3@>A big title&lt;/@h3@>> or SPIP subtitle short-cuts in the form: <code>{{{My subtitle}}}</code>).
 
-For information purposes, the \\" [.->class_spip] \\" tool is used to select the &lt;hN> tag used for the SPIP sub-titles.
+For information purposes, the "[.->class_spip]" tool is used to select the &lt;hN> tag used for the SPIP sub-titles.
 
 @puce@ You can define the depth retained for the sub-headings used to construct the summary (1 = &lt;@h3@>, 2 = &lt;@h3@> and &lt;@h4@>, etc.) :[[%prof_sommaire%]]
 
@@ -714,12 +712,13 @@ For information purposes, the \\" [.->class_spip] \\" tool is used to select t
 @puce@ You can also determine the way in which the plugin constructs the summary: 
 _ • Systematically, for each article (a tag named <code>@_CS_SANS_SOMMAIRE@</code> placed anywhere within the text of the article will make an exception to the rule).
 _ • Only for articles containing the <code>@_CS_AVEC_SOMMAIRE@</code> tag.
+
 [[%auto_sommaire%]]
 
 @puce@ By default, the Swiss Army Knife automatically inserts the summary at the top of the article. But you can place it elsewhere, if you wish, by using the #CS_SOMMAIRE tag, which you can activate here:
 [[%balise_sommaire%]]
 
-The summary can be used in conjunction with: \\"{[.->decoupe]}\\" and \\" [.->titres_typo] \\".', # MODIF
+The summary can be used in conjunction with: "[.->decoupe]" and "[.->titres_typo]".', # MODIF
 	'sommaire:nom' => 'Automatic T.O.C.',
 	'sommaire_ancres' => 'Selected anchors: <b><html>{{{My Title&lt;my_anchor>}}}</html></b>',
 	'sommaire_avec' => 'An article with summary: <b>@_CS_AVEC_SOMMAIRE@</b>',
@@ -728,15 +727,15 @@ The summary can be used in conjunction with: \\"{[.->decoupe]}\\" and \\" [.->t
 	'spam:description' => 'Attempts to fight against the sending of abusive and automatic messages through forms on the public site. Some words and the &lt;a>&lt;/a> tags are prohibited. Please teach your content editors to use SPIP short-cuts for any links.
 
 @puce@ List here the sequences you wish to prohibit, separating them with spaces. [[%spam_mots%]]
-<q1>• Expressions containing spaces should be placed within quotation marks.
+<q1>• Expressions containing spaces should be placed within quotation marks, ou utilisez le "+" pour remplacer l\'espace.
 _ • To specify a whole word, place it in parentheses. For example: {(asses)}.
 _ • To use a regular expression, first check the syntax, then place it between slashes and quotation marks.
-_ Example:~{<html>\\"/@test.(com|en)/\\"</html>}.
-_ • To use a regular expression that works on HTML characters, place the text between \\"&#\\" and \\";\\".
-_ Example:~{<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
+_ Example:~{<html>"/@test.(com|en)/"</html>}.
+_ • To use a regular expression that works on HTML characters, place the text between "&#" and ";".
+_ Example:~{<html>"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/"</html>}.</q1>
 
 @puce@ Certain IP addresses can also be blocked at their source. But remember that behind these addresses (often variable in nature) there may be a multitude of individual users or even an entire network.[[%spam_ips%]]
-<q1>• Use the \\"*\\" character to match several unknown characters, \\"?\\" for any single character, and brackets for classes of characters.</q1>', # MODIF
+<q1>• Use the "*" character to match several unknown characters, "?" for any single character, and brackets for classes of characters.</q1>', # MODIF
 	'spam:nom' => 'Fight against SPAM',
 	'spam_ip' => 'IP blocking of @ip@:',
 	'spam_test_ko' => 'This message would be blocked by the anti-SPAM filter!',
@@ -941,7 +940,7 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'urls_purger_tout' => 'Reset the URLs stored in the database:',
 	'urls_rechercher' => 'Find this object in the database',
 	'urls_titre_objet' => 'Saved title:',
-	'urls_type_objet' => 'Order:', # MODIF
+	'urls_type_objet' => 'Object:', # MODIF
 	'urls_url_calculee' => 'Public URL "@type@":',
 	'urls_url_objet' => 'Saved "clean" URL:', # MODIF
 	'urls_valeur_vide' => '(An empty value triggers the recalculation of the URL)', # MODIF
