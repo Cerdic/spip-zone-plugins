@@ -29,10 +29,10 @@ function formulaires_ajoute_a2a_traiter($id_article_orig,$id_article_dest){
 	$lier  = _request('lier');
 	$lier2 = _request('lier2');	
 	if ($lier){
-		action_a2a_lier_article($id_article_dest,$id_article_orig,'',_request($type_liaison));	
+		action_a2a_lier_article($id_article_dest,$id_article_orig,'',_request('type_liaison'));	
 	}
 	if ($lier2){
-		action_a2a_lier_article($id_article_dest,$id_article_orig,'both',_request($type_liaison));		
+		action_a2a_lier_article($id_article_dest,$id_article_orig,'both',_request('type_liaison'));		
 	}
 }
 
