@@ -196,7 +196,7 @@ function maj_auto_action_rapide() {
 		$bouton = '&nbsp;';
 		if(!$stop) {
 			if($infos['maj_dispo'] && $id_paquet) // bouton pour SVP
-				$bouton = "<input type='radio' value='$id_paquet'$checked name='$arg_chargeur'/><br/><input type='checkbox' class='checkbox select_plugin' name='ids_paquet[]' value='$id_paquet'>";
+				$bouton = "<input type='radio' value='$id_paquet.$infos[id_depot]'$checked name='$arg_chargeur'/><br/><input type='checkbox' class='checkbox select_plugin' name='ids_paquet[]' value='$id_paquet.$infos[id_depot]'>";
 			elseif($auto) $bouton = strlen($infos['zip_trac'])
 				?"<input type='radio' value='$infos[zip_trac]'$checked name='$arg_chargeur'/>"
 				:'<center style="margin-top:0.6em;font-weight:bold;"><acronym title="'._T('couteau:maj_zip_ko').'">&#63;</acronym></center>';
@@ -327,6 +327,7 @@ function maj_auto_svp_query($dir, &$infos) {
 		if($y=sql_fetsel('id_paquet,p.id_depot,p.version,nom_archive,src_archive,url_archives,url_brouteur',
 			array('spip_paquets AS p', 'spip_depots AS d'), array('p.id_plugin='.$x['id_plugin'], 'p.id_depot>0'))) {
 		$infos['id_paquet'] = $x['id_paquet'];
+		$infos['id_depot'] = $y['id_depot'];
 		// info : si $x['version']<>$y['version'] alors SVP propose une mise a jour disponible
 		// construction du paquet zip
 		if(strlen($y['nom_archive']) && intval(maj_auto_rev_distante($f = $y['url_archives'].'/'.$y['nom_archive'], $timeout))) 
@@ -337,14 +338,22 @@ function maj_auto_svp_query($dir, &$infos) {
 
 // fonction manipulant les fonctions CVT de SVP (cf. svp/formulaires/admin_plugin.php)
 function maj_auto_svp_maj_plugin($ids_paquet=array()) {
-	// actualiser la liste des paquets locaux systematiquement
+/*	// actualiser la liste des paquets locaux systematiquement
 	include_spip('inc/svp_depoter_local');
-	// sans forcer tout le recalcul en base, mais en récupérant les erreurs XML
-	$valeurs['erreurs_xml'] = array();
-	svp_actualiser_paquets_locaux(false, $valeurs['erreurs_xml']);
+	// sans forcer tout le recalcul en base
+	svp_actualiser_paquets_locaux(false, $foo);*/
 
-	$actions = $messages = $retour = array();
-	foreach ($ids_paquet as $i)	$actions[$i] = 'up';
+	$actions = $depots = $messages = $retour = array();
+	foreach ($ids_paquet as $i)	{
+		list($p, $d) = explode('.', $i);
+		$actions[$p] = 'up';
+		$depots[$d] = 1;
+	}
+	// actualiser la liste des paquets distants
+	// ici une demande manuelle de mise a jour est demandee, autant etre sur
+	include_spip('inc/svp_depoter_distant');
+	foreach($depots as $k=>$v) svp_actualiser_depot($k);
+
 	// lancer les verifications
 	if(count($actions)) {
 		// faire appel au decideur pour determiner la liste exacte des commandes apres

@@ -293,7 +293,7 @@ function chargement_automatique($dir) {
 		//  passage par SVP ?
 		include_spip('outils/maj_auto_action_rapide');
 		maj_auto_svp_query($dir, $infos);
-		if($infos['id_paquet']) $zip = $infos['id_paquet'];
+		if($infos['id_paquet']) $zip = $infos['id_paquet'].'.'.$infos['id_depot'];
 	}
 	// si le plugin est installe par procedure automatique, on permet la mise a jour directe (SPIP >= 2.0)
 	$arg_chargeur = $GLOBALS['spip_version_base']>=15828?'url_zip_plugin2':'url_zip_plugin'; // eq. SPIP >= 2.1.2
