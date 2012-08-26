@@ -17,13 +17,11 @@
 				</div>
 			</li>
 		</ul>
-		<div><INCLURE{fond=formulaires/inclure/types_liaisons}{message_erreur} /></div>
 		<p class='boutons'><input type="submit" name="ok" value="<:a2a:rechercher:>" /></p>
 	</div>
 </form>
 
 	#SET{exclure,#ARRAY{0,#ID_ARTICLE_ORIG}}
-	
 	<BOUCLE_doublons(ARTICLES_LIES){id_article = #ID_ARTICLE_ORIG}{si #CONFIG{a2a/types_differents}|non}>
 	#SET{exclure,#GET{exclure}|push{#ID_ARTICLE_LIE}}
 	</BOUCLE_doublons>
