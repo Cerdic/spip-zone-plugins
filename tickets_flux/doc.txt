@@ -40,6 +40,7 @@ Fait
 
 A faire
 =======
+- faire une page pour les cas où Z n'est pas installé
 - les liens dans les tickets devraient pointer vers le ticket en question (en cours...)
 - remplacer les codes des tickets, soit par un picto, soit par leur nom vrai
 
