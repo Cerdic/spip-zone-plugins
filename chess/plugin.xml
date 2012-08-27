@@ -2,13 +2,13 @@
 	<nom>
 		<multi>
 		[en]Chess
-		[fr]Echecs
+		[fr]Chess (Echecs)
 		</multi>
 	</nom>
 	<slogan>
 		<multi>
-		[en]Allow to Show Chess Games with pgn Files
-		[fr]Pour voir des parties d'&#233;checs avec les fichiers pgn
+		[en]Allow to display chess games with PGN files
+		[fr]Pour afficher des parties d'&#233;checs au format PGN
 		</multi>
 	</slogan>
 	<icon>chess32.png</icon>
