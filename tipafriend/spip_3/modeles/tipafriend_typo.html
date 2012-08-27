@@ -1,1 +1,25 @@
-#TIPAFRIEND{env}
+[(#REM)
+	Modele pour inclusion dans les objets SPIP
+	
+	Arguments complets possibles :
+		squelette 	: ... (ou "type")
+		url 		: ...
+		mex 		: mail expediteur
+		nex 		: nom expediteur
+		mdes 		: mail destinataire
+		objet 		: type d'objet SPIP
+		id_objet 	: ID de l'objet
+		lang 		: langue
+
+	Exemple :
+		<typafriend_typo|objet=article|id_objet=13>
+]
+[(#TIPAFRIEND{
+	[(#ENV{squelette}|sinon{#ENV{type}|sinon{''}})],
+	[(#ENV{url}|sinon{''})],
+	[(#ENV{mex}|sinon{''})],
+	[(#ENV{nex}|sinon{''})],
+	[(#ENV{mdes}|sinon{''})],
+	[(#ENV{objet}|sinon{''})],
+	[(#ENV{id_objet}|sinon{''})],
+	[(#ENV{lang}|sinon{''})]})]
