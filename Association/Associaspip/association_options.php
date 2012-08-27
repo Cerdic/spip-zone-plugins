@@ -113,7 +113,7 @@ function association_calculer_nom_membre($civilite, $prenom, $nom, $html_tag='')
 {
 	$res = '';
 	if ($html_tag) {
-		$res = '<'.$html_tag.' class="'. (($civilite || $prenonm)?'n':'fn') .'">';
+		$res = '<'.$html_tag.' class="'. (($civilite || $prenom)?'n':'fn') .'">';
 	}
 	if ($GLOBALS['association_metas']['civilite']=='on' && $civilite) {
 		$res .= ($html_tag?'<span class="honorific-prefix">':'') .$civilite. ($html_tag?'</span>':'') .' ';
@@ -680,13 +680,23 @@ function instituer_statut_interne_ici($auteur=array()){
 // recupeer la liste des colonne=>libelle d'un objet etendu
 function recuperer_iextras($ObjetEtendu)
 {
-	$ChampsExtrasGeres = @unserialize(str_replace('O:10:"ChampExtra"', 'a', $GLOBALS['meta']['iextras'])); // "iextras (interface)" stocke la liste des champs geres dans un meta. Ce meta est un tableau d'objets (un par champ extra) manipules par "cextras (core)". Il n'est helas pas evident d'utiliser ces methodes car l'API n'est pas assez documente... Mais en transformant l'objet-PHP an tableau-PHP on a ce dont on a besoin...
-	if ( !is_array($ChampsExtrasGeres) )
-		return array(); // fin : Champs Extras 2 non installe ou pas d'objet etendu.
 	$champsExtrasVoulus = array();
-	foreach ($ChampsExtrasGeres as $ChampExtra) {
-		if ($ChampExtra['table']==$ObjetEtendu) // c'est un champ extra de la 'table' ou du '_type' d'objet qui nous interesse
-			$champsExtrasVoulus[$ChampExtra['champ']] = $ChampExtra['label'];
+	if (test_plugin_actif('IEXTRAS')) { // le plugin "Interfaces pour ChampsExtras2" est installe et active : on peut donc utiliser les methodes/fonctions natives...
+		include_spip('inc/iextras'); // charger les fonctions de l'interface/gestionnaire (ce fichier charge les methode du core/API)
+		$ChampsExtrasGeres = iextras_get_extras_par_table(); // C'est un tableau des differents "objets etendus" (i.e. tables principaux SPIP sans prefixe et au singulier -- par exemple la table 'spip_asso_membres' correspond a l'objet 'asso_membre') comme cle.
+		foreach ($ChampsExtrasGeres[$ObjetEtendu] as $$ChampExtraRang => $ChampExtraInfos ) { // Pour chaque objet, le tableau a une entree texte de cle "id_objet" et autant d'entrees tableau de cles numerotees automatiquement (a partir de 0) qu'il y a de champs extras definis. Chaque champ extra defini est un tableau avec les cle=>type suivants : "table"=>string, "champ"=>string, "label"=>string, "precisions"=>string, "obligatoire"=>string, "verifier"=>bool, "verifier_options"=>array, "rechercher"=>string, "enum"=>string, "type"=>string, "sql"=>string, "traitements"=>string, "saisie_externe"=>bool, "saisie_parametres"]=>array("explication"=>string, "attention"=>string, "class"=> string, "li_class"]=>string,)
+			if ( is_array($ChampExtraInfos)
+				$champsExtrasVoulus[$ChampExtraInfos['champ']] = _TT($ChampExtraInfos['label']); // _TT est defini dans cextras_balises.php
+		}
+	} else { // le plugin "Interfaces pour ChampsExtras2" n'est pas actif :-S Mais peut-etre a-t-il ete installe ?
+		$ChampsExtrasGeres = @unserialize(str_replace('O:10:"ChampExtra"', 'a', $GLOBALS['meta']['iextras'])); // "iextras (interface)" stocke la liste des champs geres dans un meta. Ce meta est un tableau d'objets "ChampExtra" (un par champ extra) manipules par "cextras (core)". On converti chaque objet en tableau
+		if ( !is_array($ChampsExtrasGeres) )
+			return array(); // fin : ChampsExtras2 non installe ou pas d'objet etendu.
+		$TT = function_exists('_T_ou_typo') ? '_T_ou_typo' : 'T' ; // Noter que les <multi>...</multi> et <:xx:> sont aussi traites par propre() et typo() :  http://contrib.spip.net/PointsEntreeIncTexte
+		foreach ($ChampsExtrasGeres as $ChampExtra) { // Chaque champ extra defini est un tableau avec les cle=>type suivants (les cles commencant par "_" initialisent des methodes de meme nom sans le prefixe) : "table"=>string, "champ"=>string, "label"=>string, "precisions"=>string, "obligatoire"=>string, "verifier"=>bool, "verifier_options"=>array, "rechercher"=>string, "enum"=>string, "type"=>string, "sql"=>string, "traitements"=>string, "_id"=>string, "_type"=>string, "_objet"=>string, "_table_sql"=>string, "saisie_externe"=>bool, "saisie_parametres"]=>array("explication"=>string, "attention"=>string, "class"=> string, "li_class"]=>string,)
+			if ($ChampExtra['table']==$ObjetEtendu) // c'est un champ extra de la 'table' ou du '_type' d'objet qui nous interesse
+				$champsExtrasVoulus[$ChampExtra['champ']] = $TT($ChampExtra['label']);
+		}
 	}
 	return $champsExtrasVoulus;
 }

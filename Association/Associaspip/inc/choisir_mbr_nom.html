@@ -44,7 +44,7 @@ maj:2012-02-15; version:0.1.0; licence:GPL; copyleft:gilcot; -->]
             <select name="#ENV{champ_id}" [ multiple="multiple" size="(#ENV{lignes_noms})" ] id="saisie_#ENV{champ_id}" [(#ENV{lecture_seule}|oui) readonly="readonly" disabled="disabled"]>
                 <option></option>
 <BOUCLE_choix2membre(ASSO_MEMBRES) {statut_interne?IN #ENV{statut_interne}}{categorie?IN #ENV{categories}} {par #ENV{tri_id,nom_famille,prenom}} >
-                <option value="#ID_AUTEUR"[ (#ENV{valeur_id}|=={#ID_AUTEUR}|oui)selected="selected"]>#NOM_FAMILLE [(#META{/association/prenom}|oui), #PRENOM [((#SEXE))] ]</option>
+                <option value="#ID_AUTEUR"[ (#ENV{valeur_id}|=={#ID_AUTEUR}|oui)selected="selected"]>#NOM_FAMILLE[, (#META{/association/prenom}|oui) #PRENOM [((#SEXE))] ]</option>
 </BOUCLE_choix2membre>
             </select>
 </B_choix2membre>
