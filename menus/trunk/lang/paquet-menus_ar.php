@@ -8,13 +8,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
-	'menus_description' => 'Lorsqu\'on ne se sert pas du plugin {{Menus}}, on est obligé de définir tous ses menus dans les squelettes,
-	ce qui fait que les administrateurs du site n\'ont pas directement la main dessus et que lorsqu\'ils veulent y changer quelque chose, ils sont obligés
-	d\'en faire la demande à la personne en charge des squelettes. De plus, lorsqu\'on veut des liens statiques (un lien vers un article précis,
-	ou vers une page précise, ou vers un site externe) il faut les écrire en dur dans le squelette du menu.
+	'menus_description' => 'عندما لا نستخدم ملحق {{القوائم}}، نضطر لتعريف كل قوائم الموقع في الصفحات النموذجية،
+	مما يؤدي الى ان مدراء الموقع لا يمكنهم التحكم مباشرة بهذه القوائم، وعندما يرغبون في تعديل اي شيء فيها، يضطرون الى 
+	الطلب من مطور الصفحات النموذجية إدخال التعديلات. إضافة الى ذلك، اذا اردنا وضع روابط ثابتة (مثلاً رابط الى مقال محدد او صفحة محددة او موقع آخر) يجب ادخال هذه الروابط كما هي في صفحة القوائم النموذجية.
 
-	Le but du plugin {{Menus}} est donc de permettre de facilement élaborer des menus au moyen d\'une interface conviviale, directement dans la partie privée.
-	{{Attention !}} Ce plugin ne s\'occupe pas de la manière dont seront affichés les menus. Il permet de les créer facilement et d\'en générer le code HTML.', # NEW
+	الهدف من ملحق {{القوائم}} هو السماح بإنشاء قوائم بسهولة من خلال واجهة تفاعلية في المجال الخاص.
+	{{تنبيه!}} لا يتحكم هذا الملحق بالطريقة التي ستعرض فيها هذه القوائم في الموقع العمومي. يكتفي بإنشاء القوائم بسهولة وإنتاج علامات html الخاصة بها. ',
 	'menus_nom' => 'القوائم',
 	'menus_slogan' => 'إنشاء قوائم شخصية',
 	'menus_titre' => 'القوائم'
