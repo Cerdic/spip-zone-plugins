@@ -395,7 +395,7 @@ function maj_auto_svp_maj_plugin($ids_paquet=array()) {
 					if($retour['suite'] && is_dir($retour['tmp'])) {
 						// deplacement de l'archive dezipee a son emplacement definitif
 						$dest = _DIR_PLUGINS . $requests[$p][2];
-						if(is_dir($old=$dest.'.old')) supprimer_repertoire($old);
+						if(is_dir($old = dirname($dest).'/.'.basename($dest).'.old')) supprimer_repertoire($old);
 						rename($dest, $old);
 						rename($retour['tmp'], $dest);
 						spip_unlink($retour['fichier']);
