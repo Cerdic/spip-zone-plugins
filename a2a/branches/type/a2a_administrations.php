@@ -1,12 +1,13 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_spip('inc/config');
 function a2a_upgrade($nom_meta_base_version,$version_cible){
 	
 	$maj = array();
 	
 	$maj['create'] = array(
 		array('creer_base'),
+		array('a2a_maj_050'),
+		array('a2a_maj_070'),
 	);
 	
 	$maj['0.2.0'] = array(array('maj_tables',array('spip_articles_lies')));
