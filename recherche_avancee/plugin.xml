@@ -1,25 +1,30 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Recherche avanc&eacute;e
+	Recherche avanc&#233;e
 	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	  JEM (jean-marc.viglino@ign.fr)
+	<slogan>Recherche avanc&#233;e sous SPIP</slogan>
+	<!-- Auteur du plugin -->
+	<auteur>	
+		Jean-Marc Viglino (ign.fr)
 	</auteur>
-	<version>
-	0.2
-	</version>
+	<auteur>
+		Jean-Philippe Guihard
+	</auteur>
+	<version>0.2</version>
 	<icon>recherche.png</icon>
 	<etat>stable</etat>
-	<description>Noisette de recherche avanc&eacute;e
+	<licence>GNU/GPL</licence>
+	<categorie>navigation</categorie>
+	<description>Noisette de recherche avanc&#233;e
 <br/>
 en limitant la recherche :
-- &agrave; une p&eacute;riode
-- &agrave; une rubrique
-- &agrave; un mot cl&eacute;
+- &#224; une p&#233;riode
+- &#224; une rubrique
+- &#224; un mot cl&#233;
 - choix du tri
 
 Affichage au format google-like  de 
-Nicolas Steinmetz (modifi&eacute;)
+Nicolas Steinmetz (modifi&#233;)
 http://www.spip-contrib.net/Google-Like
 
 Traduction : Abelass.

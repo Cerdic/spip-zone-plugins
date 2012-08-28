@@ -1,9 +1,17 @@
 <?php
 /*
+ *  Plugin SPIP recherche_avancee
+ *  
+ *  @author Jean-Marc Viglino (ign.fr)
+ *  @author Jean-Philippe Guihard
+ *  
+ *  Copyright (c) 2007-2012
+ *  Logiciel distribue sous licence GNU/GPL.
+ *  
  *   +----------------------------------+
  *    Filtres :    google_like
  *   +----------------------------------+
- *    Créé le 28 septembre 2004 : Nicolas Steinmetz,  pdepaepe
+ *    CrÃ©Ã© le 28 septembre 2004 : Nicolas Steinmetz,  pdepaepe
  *	  http://www.spip-contrib.net/Google-Like
  *   +-------------------------------------+
  *   Mis a jour le 04 octobre 2010 : Jean-Philippe Guihard
