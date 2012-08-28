@@ -134,17 +134,23 @@ function maj_auto_action_rapide() {
 	$tiers = array('necessite'=> $tiers[0], 'utilise'=> $tiers[1], 'procure'=> $tiers[2]);
 	$time = time();
 	$timeout = ini_get('max_execution_time');
-	$timeout = $timeout?min(30,floor($timeout/2)):10;
-	$style = 'style="padding:0.4em;"';
+	$timeout = $timeout?min(20,floor($timeout/2)):10;
+	$html1 = '<style type="text/css">
+	#maj_auto_div tr td:first-child {text-align: center;}
+	.padd {padding:0.4em;}
+	.caps {font-variant:small-caps;}
+	.redb {color:red; font-weight:bold;}
+	.interb {font-weight:bold;}
+</style>'	
 	// verification des mises a jour de SPIP >= 2.0
-	$html1 = info_maj_spip2();
+		. info_maj_spip2();
 	// verification de l'ecran de securite
 	if(defined('_ECRAN_SECURITE')) {
 		$maj = maj_auto_rev_distante(_MAJ_ECRAN_SECU,false,",(\d+\.\d+(\.\d+)?),",0,true);
 		if($maj{0}!="-" && _ECRAN_SECURITE!=$maj) {
 			include_spip('inc/description_outil');
-			$html1 .= "\n<fieldset><legend $style>"._T('couteauprive:help2', array('version'=>_T('couteauprive:ecran_securite:nom').' '._ECRAN_SECURITE)).'</legend>'
-				. description_outil_liens(_T("couteauprive:ecran_maj_ko2", array("n"=>"<span style=\"color:red; font-weight:bold;\">$maj</span>"))).'</fieldset>';
+			$html1 .= "\n<fieldset><legend class='padd'>"._T('couteauprive:help2', array('version'=>_T('couteauprive:ecran_securite:nom').' '._ECRAN_SECURITE)).'</legend>'
+				. description_outil_liens(_T("couteauprive:ecran_maj_ko2", array("n"=>"<span class='redb'>$maj</span>"))).'</fieldset>';
 		}
 	}
 	// verification des plugins
@@ -183,23 +189,24 @@ function maj_auto_action_rapide() {
 		$nom = preg_replace(",[\n\r]+,",' ',$infos['nom']). '&nbsp;(v' .$infos['version'] . ')' . ($maj_lib?"\n_ {{".$maj_lib.'}}':'');
 		$rev = $infos['rev_local']?_T('couteau:maj_rev', array('revision' => $infos['rev_local'])):'';
 		if(strlen($infos['commit'])) $rev .= (strlen($rev)?'<br/>':'') . cs_date_court($infos['commit']);
-		if($infos['svn']) $rev .= '<br/><span style="font-variant:small-caps;">svn</span>';
-		if($infos['id_paquet']>0) $rev .= '<span style="font-variant:small-caps;">&nbsp;svp</span>';
-			elseif($infos['id_paquet']<0) $rev .= '<span style="font-variant:small-caps;">&nbsp;old</span>';
+		if($infos['svn']) $rev .= '<br/><span class="caps">svn</span>';
+		if($infos['id_paquet']>0) $rev .= '<span class="caps">&nbsp;svp</span>';
+			elseif($infos['id_paquet']<0) $rev .= '<span class="caps">&nbsp;old</span>';
 		$id_paquet = abs($infos['id_paquet']);
 		if(!strlen($rev)) $rev = '&nbsp;';
 		$zip_log = (strlen($infos['zip_log']) && $infos['zip_log']!=$infos['zip_trac'])
 			?"<label><input type='radio' value='$infos[zip_log]'$checked name='$arg_chargeur'/>[->$infos[zip_log]]</label>":'';
 		$bouton = '&nbsp;';
-		if(!$stop) {
-			if(/*$infos['maj_dispo'] &&*/ $id_paquet) {
+		// bouton si on est dans les temps, et si une mise a jour est dispo sauf si un vieux plugin auto/ est detecte
+		if(!$stop && ($infos['maj_dispo'] || $infos['id_paquet']<0)) {
+			if($id_paquet) {
 				// format des donnees en sortie
 				$bouton = $id_paquet.':'.$infos['id_depot'].':'.$p.':'.$infos['zip_trac'];
 				// 1 radio (MAJ unique) et 1 checkbox (MAJ multiple) pour SVP
-				$bouton = "<input type='radio' value=\"$bouton\"$checked name='$arg_chargeur'/><br/><input type='checkbox' class='checkbox select_plugin' name='ids_paquet[]' value=\"$bouton\">";
+				$bouton = /*"<input type='radio' value=\"$bouton\"$checked name='$arg_chargeur'/><br/>*/"<input type='checkbox' class='checkbox select_plugin' name='ids_paquet[]' value=\"$bouton\">";
 			} elseif($auto) $bouton = strlen($infos['zip_trac'])
 				?"<input type='radio' value='$infos[zip_trac]'$checked name='$arg_chargeur'/>"
-				:'<center style="margin-top:0.6em;font-weight:bold;"><acronym title="'._T('couteau:maj_zip_ko').'">&#63;</acronym></center>';
+				:'<acronym class="interb" title="'._T('couteau:maj_zip_ko').'">&#63;</acronym>';
 		}
 		if(strlen($zip_log)) {
 			if (!$stop)
@@ -213,7 +220,7 @@ function maj_auto_action_rapide() {
 	}
 	
 	$sep = " class='cs_hidden'> (...)</span>}}|<|<|\n";
-	$html1 = "\n<div $style id='maj_auto_div'>$html1<fieldset><legend $style>"
+	$html1 = "\n<div class='padd' id='maj_auto_div'>$html1<fieldset><legend class='padd'>"
 		. _T('couteau:maj_liste').'</legend>'
 		. propre(
 			(count($html_actifs)? "\n|{{" . _T('couteau:plug_actifs') . "<span id='maj_1'" . $sep . join("\n",$html_actifs) . "\n" : '')
