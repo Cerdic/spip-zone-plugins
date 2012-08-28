@@ -156,10 +156,7 @@ function maj_auto_action_rapide() {
 	// tous, mais les actifs d'abord...
 	$plugins = array_unique(array_merge($plugins_actifs, $plugins_extensions, liste_plugin_files()));
 	$html_actifs = $html_inactifs = $html_extensions = array();
-	if(defined('_SPIP30000')) {
-		include_spip('exec/admin_plugin');
-		echo svp_presenter_actions_realisees();
-	}
+	echo maj_auto_svp_presenter_messages();
 	foreach ($plugins as $p) {
 		$actif = in_array($p, $plugins_actifs, true);
 		$extension = in_array($p, $plugins_extensions, true);
@@ -195,9 +192,12 @@ function maj_auto_action_rapide() {
 			?"<label><input type='radio' value='$infos[zip_log]'$checked name='$arg_chargeur'/>[->$infos[zip_log]]</label>":'';
 		$bouton = '&nbsp;';
 		if(!$stop) {
-			if(/*$infos['maj_dispo'] &&*/ $id_paquet) // bouton pour SVP
-				$bouton = "<input type='radio' value='$id_paquet.$infos[id_depot]'$checked name='$arg_chargeur'/><br/><input type='checkbox' class='checkbox select_plugin' name='ids_paquet[]' value='$id_paquet.$infos[id_depot]'>";
-			elseif($auto) $bouton = strlen($infos['zip_trac'])
+			if(/*$infos['maj_dispo'] &&*/ $id_paquet) {
+				// format des donnees en sortie
+				$bouton = $id_paquet.':'.$infos['id_depot'].':'.$p.':'.$infos['zip_trac'];
+				// 1 radio (MAJ unique) et 1 checkbox (MAJ multiple) pour SVP
+				$bouton = "<input type='radio' value=\"$bouton\"$checked name='$arg_chargeur'/><br/><input type='checkbox' class='checkbox select_plugin' name='ids_paquet[]' value=\"$bouton\">";
+			} elseif($auto) $bouton = strlen($infos['zip_trac'])
 				?"<input type='radio' value='$infos[zip_trac]'$checked name='$arg_chargeur'/>"
 				:'<center style="margin-top:0.6em;font-weight:bold;"><acronym title="'._T('couteau:maj_zip_ko').'">&#63;</acronym></center>';
 		}
@@ -233,6 +233,28 @@ function maj_auto_action_rapide() {
 		. ajax_action_auteur('action_rapide', 'maj_auto_forcer', 'admin_couteau_suisse', "arg=maj_auto|description_outil&cmd=descrip#cs_action_rapide", $html2);
 }
 
+function maj_auto_svp_presenter_messages() {
+	if(!defined('_SPIP30000')) return;
+	// presenter d'abord les messages de SVP
+	include_spip('exec/admin_plugin');
+	$res = svp_presenter_actions_realisees();
+	// puis ceux du CS s'il y en a
+	if(!@file_exists($f=_DIR_TMP.'cs_messages.txt')) return $res;
+	lire_fichier($f, $messages);
+	$messages = unserialize($messages);
+	include_spip('inc/filtres_boites');
+	foreach(array('ok'=>array('svp:actions_realises','success'), 
+			'fail'=>array('svp:actions_en_erreur','error'), 
+			'notice'=>array('info_avertissement','notice')) as $k=>$v) 
+		if($messages[$k]) {
+			$tmp = '<ul>';
+			foreach($messages[$k] as $i) $tmp .= "<li>$i</li>";
+			$res .= boite_ouvrir(_T($v[0]), $v[1]) . $tmp. '</ul>' . boite_fermer();
+		}
+	spip_unlink($f);
+	return $res;
+}
+			
 // renvoie le pattern present dans la page distante
 // si le pattern est NULL, renvoie un simple 'is_file_exists'
 function maj_auto_rev_distante($url, $timeout=false, $pattern=NULL, $lastmodified=0, $force=false) {
@@ -338,39 +360,60 @@ function maj_auto_svp_query($dir, &$infos) {
 
 // fonction manipulant les fonctions CVT de SVP (cf. svp/formulaires/admin_plugin.php)
 function maj_auto_svp_maj_plugin($ids_paquet=array()) {
-/*	// actualiser la liste des paquets locaux systematiquement
-	include_spip('inc/svp_depoter_local');
-	// sans forcer tout le recalcul en base
-	svp_actualiser_paquets_locaux(false, $foo);*/
-
-	$actions = $depots = $messages = $retour = array();
+	if(!count($ids_paquet)) return;
+	$actions = $depots = $messages = $retour = $requests = $cs_messages = array();
+	// donnees du formulaire recues sous la forme id_paquet:id_depot:plugin:archive
 	foreach ($ids_paquet as $i)	{
-		list($p, $d) = explode('.', $i);
-		$actions[$p] = 'up';
-		$depots[$d] = 1;
+		$p = explode(':', $i, 4);
+		$requests[$p[0]] = $p;
+		$actions[$p[0]] = 'up';
+		$depots[$p[1]] = 1;
 	}
 	// actualiser la liste des paquets distants
-	// ici une demande manuelle de mise a jour est demandee, autant etre sur
+	// ici une demande manuelle de mise a jour est demandee, autant etre sur...
 	include_spip('inc/svp_depoter_distant');
 	foreach($depots as $k=>$v) svp_actualiser_depot($k);
-
 	// lancer les verifications
-	if(count($actions)) {
+	if(count($actions0 = $actions)) {
 		// faire appel au decideur pour determiner la liste exacte des commandes apres
 		// verification des dependances
 		include_spip('inc/svp_decider');
 		svp_decider_verifier_actions_demandees($actions, $messages);
 	} else
-		$messages['decideur_erreurs'][] = _T('svp:message_erreur_aucun_plugin_selectionne');
+		$cs_messages['notice'][] = _T('svp:message_erreur_aucun_plugin_selectionne');
 	if(!count($messages['decideur_erreurs'])) {
-		// recuperer les actions puis les envoyer a l'actionneur
+		// recuperer les actions validees par le decideur
 		$actions = unserialize(_request('_todo'));
-		if(!count($actions))
-			$messages['decideur_actions'][] = _T('svp:message_erreur_aucun_plugin_selectionne');
+		if(count($rejets = array_diff(array_keys($actions0), array_keys($actions)))) {
+			// probablement une action de reparation ou de MAJ de release sans changement de version
+			// dans ce cas, on remplace simplement les anciens fichiers du plugin (methode SPIP2)
+			if(include_spip('lib/maj_auto/distant_action_charger_plugin') && include_spip('lib/maj_auto/distant_inc_charger_plugin'))
+				foreach($rejets as $p) if($requests[$p][3]) {
+					set_request('url_zip_plugin2', $requests[$p][3]);
+					set_request('cs_retour', 'oui');
+					$retour = action_charger_plugin_dist();
+					if($retour['suite'] && is_dir($retour['tmp'])) {
+						// deplacement de l'archive dezipee a son emplacement definitif
+						$dest = _DIR_PLUGINS . $requests[$p][2];
+						if(is_dir($old=$dest.'.old')) supprimer_repertoire($old);
+						rename($dest, $old);
+						rename($retour['tmp'], $dest);
+						spip_unlink($retour['fichier']);
+						$cs_messages['ok'][] = ("Le plugin « $retour[nom] » n'a pas changé de version, mais ses fichiers ont quand même été actualisés.");
+					} else 
+						$cs_messages['fail'][] = ('Le fichier « '.$requests[$p][3].' » est introuvable !');
+				} else
+					$cs_messages['fail'][] = ('Librairies introuvables !');
+		} else 
+			$cs_messages['fail'] = array_merge($messages['decideur_erreurs'], $cs_messages['fail']);
+		// sauvegarde des messages
+		if(count($cs_messages))
+			ecrire_fichier(_DIR_TMP . 'cs_messages.txt', serialize($cs_messages));
+		// envoyer les actions validees a l'actionneur
 		include_spip('inc/svp_actionner');
 		svp_actionner_traiter_actions_demandees($actions, $retour, $redirect);
 		$action = charger_fonction('actionner', 'action');
-		$action();
+		$action(); // et hop, action et redirection !
 	}
 	include_spip('inc/headers');
 	redirige_par_entete(_request('redirect'));

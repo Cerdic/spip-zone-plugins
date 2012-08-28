@@ -1469,6 +1469,10 @@ add_outil(array_merge(array(
 	'id' => 'maj_auto',
 	'categorie' => 'securite',
 	'contrib' => 3223,
+	'pipelinecode:fichier_distant' => defined('_SPIP30000')
+		?'// rajeunissement pour SPIP3 (2e appel du pipeline)
+if($flux["outil"]=="maj_auto" && isset($flux["texte"]) && strpos($flux["fichier_distant"],"action/charger_plugin.php")!==false)
+	$flux["texte"] = str_replace(array("\'icon\'","include_spip(\'inc/install\');"), array("\'logo\'", "if(_request(\'cs_retour\')) return array(\'nom\'=>\$retour, \'suite\'=>\$suite, \'fichier\'=>\$fichier, \'tmp\'=>\$status[\'tmpname\']);\n\tinclude_spip(\'inc/install\');"), $flux["texte"]);':'',
 ), $cs_temp));
 
 // reglage des differents selecteurs en partie privee

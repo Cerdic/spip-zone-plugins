@@ -290,13 +290,13 @@ function cs_nettoie(&$flux) {
 if(defined('_SPIP30000')) {
 // Utilise par maj_auto et le CS lui-meme pour mettre a jour les plugins (ou les paquets de SVP)
 function action_charger_plugin() {
-#	include_spip('inc/minipres'); die(minipres('Partie en développement.<br/>Mettre &agrave; jour votre plugin prochainement.'));
+#	include_spip('inc/minipres'); die(minipres('Partie en d&eacute;veloppement.<br/>Mettre &agrave; jour votre plugin prochainement.'));
 	if(is_array($ids_paquet = _request('ids_paquet'))) {
 		// il s'agit d'une liste de paquets, on donne la main a SVP (SPIP >= 3.0)
 		include_spip('outils/maj_auto_action_rapide');
 		maj_auto_svp_maj_plugin($ids_paquet);
 	}
-	elseif(is_numeric($id_paquet = _request('url_zip_plugin2'))) {
+	elseif(intval($id_paquet = _request('url_zip_plugin2'))) {
 		// il s'agit d'un paquet, on donne la main a SVP (SPIP >= 3.0)
 		include_spip('outils/maj_auto_action_rapide');
 		maj_auto_svp_maj_plugin(array($id_paquet));
