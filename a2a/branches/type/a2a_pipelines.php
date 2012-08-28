@@ -8,7 +8,7 @@ function a2a_affiche_milieu($flux){
 	if (($flux['args']['exec'] == "articles") || ($flux['args']['exec'] == "article")){
 	
 		$contexte['id_article_orig'] = $flux["args"]["id_article"];		
-
+        $contexte['formulaire']=_request('formulaire');
 		$texte = recuperer_fond('prive/contenu/a2a_article', $contexte, array('ajax'=>true));
 		
 		if (($p = strpos($flux['data'],'<!--affiche_milieu-->'))!==false)

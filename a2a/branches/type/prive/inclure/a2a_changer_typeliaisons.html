@@ -1,0 +1,11 @@
+[(#AUTORISER{modifier,article,#ID_ARTICLE_ORIG}|oui)
+    [(#ENV{formulaire}|=={oui}|oui)
+        <div class='ajax'>#FORMULAIRE_A2A_CHANGER_TYPELIAISON{#ID_ARTICLE_ORIG,#ID_ARTICLE,#TYPE_LIAISON}</div>
+        ]
+    [(#ENV{formulaire}|=={oui}|non)    
+        (<a href="[(#SELF|parametre_url{formulaire,oui})]" class='ajax'><:a2a:changer_type_liaison:></a>)
+    ]
+]
+    
+
+
