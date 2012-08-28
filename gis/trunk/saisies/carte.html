@@ -49,7 +49,7 @@ var geocoder;]
 	var champ_region = $('#champ_#ENV{champ_region,region}');
 	var champ_pays = $('#champ_#ENV{champ_pays,pays}');
 	
-	var marker = new L.Marker(new L.LatLng(#ENV{lat,0}, #ENV{lon,0}), {draggable: true});
+	var marker;
 	
 	var maj_inputs = function(map,data,action) {
 		[(#GET{geocoder}|oui)
@@ -98,6 +98,8 @@ var geocoder;]
 		form_map = new L.Map(map_container);
 		
 		form_map.attributionControl.setPrefix('');
+		
+		marker = new L.Marker(new L.LatLng(#ENV{lat,0}, #ENV{lon,0}), {draggable: true});
 		
 		//default layer
 		#SET{layer_defaut,#REM|gis_layer_defaut} #SET{layers,#EVAL{$GLOBALS['gis_layers']}}
