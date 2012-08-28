@@ -1,0 +1,13 @@
+<!-- version du 04 octobre 2010, 23h36, Jean-Philippe Guihard  -->
+<div class="formulaire_spip formulaire_recherche">
+<a name="formulaire_recherche" id="formulaire_recherche"></a>
+<form action="[(#ENV{action})]" method="get">
+	<div>
+	[(#ENV{action}|form_hidden)]
+		[<input type="hidden" name="lang" value="(#ENV{lang})" />]
+		<label for="recherche"><:info_rechercher:></label>
+		<input type="text" class="forml"  size="20" name="recherche" id="recherche"[ value="(#ENV{recherche})"] accesskey="4" />
+		<small class="recherche_avancee"><a  href="?page=recherche&amp;avancee=1&amp;lang=#ENV{lang}&amp;recherche=#RECHERCHE" title="Page de recherche avanc&eacute;e."><:rechercheavancee:recherche_avancee:></a></small>
+	</div>
+</form>
+</div>
