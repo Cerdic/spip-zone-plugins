@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!--	--------- Tri des articles ---------	-->
 <variable>
@@ -139,7 +139,7 @@
 </outil>
 
 
-<!--	--------- Bouton « Visiter » ---------	-->
+<!--	--------- Bouton "Visiter" ---------	-->
 <outil>
 	<id>icone_visiter</id>
 	<categorie>interface</categorie>

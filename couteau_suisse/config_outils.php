@@ -346,9 +346,8 @@ $cs_temp = defined('_SPIP30000')?'forum:':'';
 add_outil( array(
 	'id' => 'auteur_forum',
 	'categorie'	 => 'securite',
-	'jquery'	=> 'oui',
-	'code:jq_init' => 'cs_auteur_forum.apply(this);',
-	'code:js' => "var cs_verif_email = %%auteur_forum_email%%;\nvar cs_verif_nom = %%auteur_forum_nom%%;\nvar cs_verif_deux = %%auteur_forum_deux%%;",
+	'code:jq_init_public' => 'cs_auteur_forum.apply(this);',
+	'code:js_public' => "var cs_verif_email = %%auteur_forum_email%%;\nvar cs_verif_nom = %%auteur_forum_nom%%;\nvar cs_verif_deux = %%auteur_forum_deux%%;",
 	'pipelinecode:pre_description_outil' => 'if($id=="auteur_forum") $texte=str_replace(array("@_CS_FORUM_NOM@","@_CS_FORUM_EMAIL@"),
 	array(preg_replace(\',:$,\',"",_T("'.$cs_temp.'forum_votre_nom")),preg_replace(\',:$,\',"",_T("'.$cs_temp.'forum_votre_email"))),$texte);',
 ));
@@ -860,9 +859,8 @@ add_outil( array(
 	'id' => 'desactiver_flash',
 	'auteur' 	 => 'C&eacute;dric MORIN',
 	'categorie'	 => 'public',
-	'jquery'	=> 'oui',
 	// fonction InhibeFlash_init() codee dans desactiver_flash.js : executee lors du chargement de la page et a chaque hit ajax
-	'code:jq_init' => 'InhibeFlash_init.apply(this);',
+	'code:jq_init_public' => 'InhibeFlash_init.apply(this);',
 ));
 
 add_variables( array(
@@ -889,7 +887,6 @@ add_outil( array(
 	'id' => 'SPIP_liens',
 	'categorie' => 'public',
 	'contrib'	=> 2443,
-	'jquery'	=> 'oui',
 	'description' => '<:SPIP_liens::>'.(defined('_SPIP19300')?'<:SPIP_liens:1:>':''),
 	'code:options' => "%%radio_target_blank3%%\n%%url_glossaire_externe2%%",
 	'code:jq_init' => 'if(%%radio_target_blank3%%) { if(!cs_prive) jQuery("a.spip_out,a.spip_url,a.spip_glossaire",this).attr("target", "_blank"); }',
@@ -939,7 +936,7 @@ function action_visiteurs_connectes(){ echo cs_compter_visiteurs(); return true;
 		setTimeout("Timer_visiteurs_connectes()",120000);					
 }',
 	'code:jq' => ' if(jQuery("span.cs_nb_visiteurs").length) Timer_visiteurs_connectes(); ',
-	'jquery' => 'oui',*/
+*/
 ));
 
 //-----------------------------------------------------------------------------//
@@ -1243,7 +1240,6 @@ add_outil( array(
 	'categorie'	=> 'securite',
 	'auteur' 	=> "Alexis Roussel, Paolo, Pat",
 	'contrib'	=> 2443,
-	'jquery'	=> 'oui',
 	'code:options' => '%%balise_email%%%%fonds_demailcrypt2%%',
 	'description' => '<:mailcrypt::>[[%balise_email%]][[->%fonds_demailcrypt%]][[->%fonds_demailcrypt2%]]',
 	'pipelinecode:post_propre' => "if(strpos(\$flux, '@')!==false) \$flux=cs_echappe_balises('', 'mailcrypt', \$flux);",
@@ -1288,11 +1284,10 @@ add_variables( array(	// variable utilisee par 'pipelinecode:insert_head'
 add_outil( array(
 	'id' => 'soft_scroller',
 	'categorie'	=> 'public',
-	'jquery'	=> 'oui',
 	'pipelinecode:insert_head' => 'if(%%scrollTo%%) {$flux.=\'<script src="\'.find_in_path("outils/jquery.scrollto.js").\'" type="text/javascript"></script>\'."\n";}
 if(%%LocalScroll%%) {$flux.=\'<script src="\'.find_in_path("outils/jquery.localscroll.js").\'" type="text/javascript"></script>\'."\n";}',
-	'code:js' => 'function soft_scroller_init() { if(typeof jQuery.localScroll=="function") jQuery.localScroll({hash: true}); }',
-	'code:jq_init' => 'soft_scroller_init.apply(this);',
+	'code:js_public' => 'function soft_scroller_init() { if(typeof jQuery.localScroll=="function") jQuery.localScroll({hash: true}); }',
+	'code:jq_init_public' => 'soft_scroller_init.apply(this);',
 ));
 
 // http://www.malsup.com/jquery/corner/
@@ -1330,7 +1325,6 @@ add_variables( array(
 add_outil( array(
 	'id' => 'jcorner',
 	'categorie'	=> 'public',
-	'jquery'	=> 'oui',
 	'contrib'	=> 2987,
 	'code:options' => "%%jcorner_classes%%",
 	// fichier distant pour le plugin jQuery : http://github.com/malsup/corner/commits/
@@ -1342,7 +1336,7 @@ add_outil( array(
 	'pipelinecode:insert_head' => 'if(%%jcorner_plugin%%) {$flux.=\'<script src="\'.find_in_path("lib/jcorner/distant_jquery.corner.js").\'" type="text/javascript"></script>\'."\n";}',
 	'pipeline:insert_head' => 'jcorner_insert_head',
 	// jcorner_init() n'est disponible qu'en partie publique
-	'code:jq_init' => 'if(typeof jcorner_init=="function") jcorner_init.apply(this);',
+	'code:jq_init_public' => 'if(typeof jcorner_init=="function") jcorner_init.apply(this);',
 ));
 
 add_variables( array(
@@ -1383,7 +1377,7 @@ add_outil( array(
 	'categorie' => 'admin',
 	'version-min' => '1.9300',
 	'code:options' => '%%moderation_admin%%%%moderation_redac%%%%moderation_visit%%',
-	'code:jq_init' => 'if(window.location.search.match(/page=forum/)!=null) jQuery("legend:contains(\''
+	'code:jq_init_public' => 'if(window.location.search.match(/page=forum/)!=null) jQuery("legend:contains(\''
 		.addslashes(unicode2charset(html2unicode(_T((defined('_SPIP30000')?'forum:':'').'bouton_radio_modere_priori')))).'\')", this).next().html(\''
 		.addslashes(_T('couteauprive:moderation_message')).'\');',
 	'pipeline:pre_edition' => 'moderation_vip',

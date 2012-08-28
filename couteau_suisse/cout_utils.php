@@ -405,17 +405,17 @@ function cs_initialise_includes($count_metas_outils) {
 				// TODO : librairies distantes placees dans lib/
 /*				if(isset($outil['distant_'.$f]) && ($file=find_in_path("lib/$inc/distant_{$f}_".cs_basename($outil["distant_$f"])))) etc. */
 			}
-			// recherche d'un code inline eventuellement propose
-			if(isset($outil['code:spip_options'])) $infos_fichiers['code_spip_options'][] = $outil['code:spip_options'];
-			if(isset($outil['code:options'])) $infos_fichiers['code_options'][] = $outil['code:options'];
-			if(isset($outil['code:fonctions'])) $infos_fichiers['code_fonctions'][] = $outil['code:fonctions'];
-			if(isset($outil['code:css'])) $temp_css[] = cs_optimise_if(cs_parse_code_js($outil['code:css']));
-			if(isset($outil['code:js'])) $temp_js[] = cs_optimise_if(cs_parse_code_js($outil['code:js']));
-			if(isset($outil['code:jq_init'])) $temp_jq_init[] = cs_optimise_if(cs_parse_code_js($outil['code:jq_init']));
-			if(isset($outil['code:jq'])) $temp_jq[] = cs_optimise_if(cs_parse_code_js($outil['code:jq']));
-			// recherche d'un fichier monoutil_options.php ou monoutil_fonctions.php pour l'inserer dans le code
-			// TODO : librairies distantes placees dans lib/
-			foreach(array('options', 'fonctions') as $f) {
+			// recherche d'un code inline css/js/jq
+			foreach(array('css', 'js', 'jq_init', 'jq') as $k) {
+				if(isset($outil[$k2='code:'.$k.'_prive'])) ${'temp_'.$k}[] = cs_html_partie_privee($outil[$k2]);
+				if(isset($outil[$k2='code:'.$k.'_public'])) ${'temp_'.$k}[] = cs_html_partie_privee($outil[$k2], false);
+				if(isset($outil[$k2='code:'.$k])) ${'temp_'.$k}[] = cs_optimise_if(cs_parse_code_js($outil[$k2]));
+			}
+			foreach(array('options', 'fonctions', 'spip_options') as $f) {
+				// recherche d'un code inline
+				if(isset($outil['code:'.$f])) $infos_fichiers['code_'.$f][] = $outil['code:'.$f];
+				// recherche d'un fichier monoutil_options.php ou monoutil_fonctions.php pour l'inserer dans le code
+				// TODO : librairies distantes placees dans lib/
 				if($temp=cs_lire_fichier_php("outils/{$inc}_{$f}.php")) $infos_fichiers['code_'.$f][] = $temp;
 /*				if(isset($outil['distant_'.$f]) && find_in_path("lib/$inc/distant_{$f}_".cs_basename($outil["distant_$f"])))
 					if($temp=cs_lire_fichier_php("lib/$inc/distant_{$f}_$outil[distant_$f].php")) 
@@ -580,6 +580,13 @@ jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};\
 
 function cs_fermer_parentheses($expr) {
 	return $expr . str_repeat(')', substr_count($expr, '(') - substr_count($expr, ')'));
+}
+
+function cs_html_partie_privee($texte, $prive=true) {
+	return '<cs_html>[(#EVAL{test_espace_prive()}|'.($prive?'oui':'non').')'
+		. str_replace(array(']','[','@CHR93@'), array('@CHR93@','[(#CHR{91})]', '[(#CHR{93})]'),
+			cs_optimise_if(cs_parse_code_js($texte)))
+		. ']</cs_html>';
 }
 
 define('_CS_SPIP_OPTIONS_A', "// Partie reservee au Couteau Suisse. Ne pas modifier, merci");

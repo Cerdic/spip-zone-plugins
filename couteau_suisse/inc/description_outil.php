@@ -257,10 +257,10 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	if(strpos($res, '<fusion')!==false)
 		$res = str_replace(array('</li></ul></div></fieldset><fusionradio>','</div></fieldset><fusionradio>'), '', $res);
 	// remplacement de diverses constantes
-	$res = str_replace(array('@puce@','<spanred>','@_CS_CHOIX@','@_CS_ASTER@','@_DIR_CS_ROOT@'),
+	$res = str_replace(array('@puce@','<spanred>','@_CS_CHOIX@','@_CS_ASTER@','@_DIR_CS_ROOT@', '@_CS_PLUGIN_JQUERY192@'),
 		array(definir_puce(),'<span style="color:red">',couteauprive_T('votre_choix'), '<sup>(*)</sup>',
-			cs_root_canonicalize(_DIR_PLUGIN_COUTEAU_SUISSE)), $res);
-	if(!defined('_SPIP19300')) $res = str_replace('@_CS_PLUGIN_JQUERY192@', couteauprive_T('detail_jquery3'), $res);
+			cs_root_canonicalize(_DIR_PLUGIN_COUTEAU_SUISSE), defined('_SPIP19300')?'':couteauprive_T('detail_jquery3')
+		), $res);
 	// remplacement des constantes qui restent de forme @_CS_XXXX@
 	if(strpos($res,'@_CS')!==false) 
 		$res = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 

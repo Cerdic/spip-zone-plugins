@@ -25,7 +25,6 @@ var blocs_title_def = '<:couteau:bloc_deplier|concat{#EVAL{_BLOC_TITLE_SEP},#GET
 	// utilisation des cookies pour conserver l'etat des blocs numerotes si on quitte la page
 	'code:jq' => 'if(%%blocs_cookie%%) { if(jQuery("div.cs_blocs").length)
 		jQuery.getScript(cs_CookiePlugin, cs_blocs_cookie); }',
-	'jquery' => 'oui',
 	'pipeline:pre_typo' => 'blocs_pre_typo',
 	'pipeline:porte_plume_cs_pre_charger' => 'blocs_CS_pre_charger',
 	'pipeline:porte_plume_lien_classe_vers_icone' => 'blocs_PP_icones',

@@ -37,7 +37,6 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 		if(isset($outil['surcharge']) || (function_exists($outil_.'_installe') && $outil['surcharge']=1))
 			$outil['nom'] = $outil['nom'].' *';
 		if(isset($outil['perso'])) $outil['nom'] = '<i>'.$outil['nom'].'</i>';
-		if(isset($outil['code:jq'])) $outil['jquery']='oui';
 		$outil['actif'] = isset($metas_outils[$outil['id']])?@$metas_outils[$outil['id']]['actif']:0;
 		if(isset($outil['contrib']) && $outil['contrib'])
 			$metas_outils[$outil['id']]['contrib'] = $outil['contrib'];
@@ -150,14 +149,13 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 		$s .= "<div class='cs_action_rapide' id='cs_action_rapide'>$temp</div>";
 	$descrip = propre($descrip); 
 	$s .= cs_nettoie($descrip); // absolument une variable pour les passages par reference (PHP 5.4)
-	$serial = serialize(array_keys($outil));
 	$p = '';
 	if($b = cs_balises_traitees($outil_id, '*, #'))
 		$p .=  '<p>' . couteauprive_T('detail_balise_etoilee', array('bal' => $b.'*')) . '</p>';
 	if($actif && isset($outil['code:spip_options']) && strlen($outil['code:spip_options']) && ($outil_id<>'cs_comportement'))
 		$p .= '<p>' . couteauprive_T('detail_spip_options' 
 			. (defined('_CS_SPIP_OPTIONS_OK')?'_ok':''), array('lien'=>description_outil_liens_callback(array(1=>'cs_comportement')))) . '</p>';
-	if(isset($outil['jquery']) && $outil['jquery']=='oui')
+	if((isset($outil['jquery']) && $outil['jquery']=='oui') || strpos(':'.join(':',array_keys($outil)), ':code:jq')!==false)
 		$p .= '<p>' . couteauprive_T('detail_jquery2') . '</p>';
 	if(isset($outil['auteur']) && strlen($outil['auteur']))
 		$p .= '<p>' . _T('auteur') .' '. ($outil['auteur']) . '</p>';
@@ -245,15 +243,17 @@ function detail_outil($outil_id) {
 	$div = '<div class="cs_details_outil">';
 	if(cs_version_erreur($outil)) return $div . couteauprive_T('erreur:version') . '</div>';
 	$details = $a = array();
-	foreach(array('spip_options', 'options', 'fonctions', 'js', 'jq', 'css') as $in)
+	foreach(array('spip_options', 'options', 'fonctions', 'js', 'jq') as $in)
 		if(isset($outil['code:'.$in])) $a[] = couteauprive_T('code_'.$in);
+	$serkeys = ':'.join(':',array_keys($outil));
+	foreach(array('css', 'js', 'jq') as $in)
+		if(strpos($serkeys, ":code:$in")!==false) $a[] = couteauprive_T('code_'.$in);
 	if(count($a)) $details[] = couteauprive_T('detail_inline') . ' ' . join(', ', $a);
 	$a = array();
 	foreach(array('.php', '_options.php', '_fonctions.php', '.js', '.js.html', '.css', '.css.html') as $ext)
 		if(find_in_path('outils/'.($temp=$outil_id.$ext))) $a[] = $temp;
 	if(count($a)) $details[] = couteauprive_T('detail_fichiers') . ' ' . join(', ', $a);
 	if($b=cs_balises_traitees($outil_id)) $details[] = couteauprive_T('detail_traitements') . $b;
-	$serkeys = serialize(array_keys($outil));
 	if(preg_match_all(',(pipeline|pipelinecode):([a-z_]+),', $serkeys, $regs, PREG_PATTERN_ORDER))
 		$details[] = couteauprive_T('detail_pipelines') . ' ' . join(', ', array_unique($regs[2]));
 	if($outil['nb_disabled']) $details[] = couteauprive_T('detail_disabled') . ' ' . $outil['nb_disabled'];
