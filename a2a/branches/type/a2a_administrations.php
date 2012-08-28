@@ -1,6 +1,6 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
+include_spip('inc/config');
 function a2a_upgrade($nom_meta_base_version,$version_cible){
 	
 	$maj = array();
@@ -45,4 +45,3 @@ function a2a_vider_tables($nom_meta_base_version) {
 }
 
 ?>
-
