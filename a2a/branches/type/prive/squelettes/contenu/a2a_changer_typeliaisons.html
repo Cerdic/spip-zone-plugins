@@ -1,0 +1,7 @@
+[(#AUTORISER{modifier,article,#ID_ARTICLE_ORIG}|oui)
+<div class='ajax'>
+#SET{orig,#INFO_TITRE{article,#ID_ARTICLE_ORIG}}
+#SET{dest,#INFO_TITRE{article,#ID_ARTICLE}}
+<strong><:a2a:lie_a{orig=#GET{orig},dest=#GET{dest}}:></strong><br />
+#FORMULAIRE_A2A_CHANGER_TYPELIAISON{#ID_ARTICLE_ORIG,#ID_ARTICLE,#TYPE_LIAISON}
+</div>]

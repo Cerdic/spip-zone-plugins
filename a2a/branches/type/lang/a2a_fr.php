@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_un_article_lie' => '1 article lié',
 
 	// L
+	'lie_a'            =>'«&nbsp;@orig@&nbsp;» lié à «&nbsp;@dest@&nbsp;»',
 	'lien_lier_article' => 'Lier à un ou des articles',
 	'lier_cet_article' => 'Lier',
 	'lier_cet_article_deux_cotes' => 'Lier des deux cotés',
