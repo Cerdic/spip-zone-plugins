@@ -30,7 +30,7 @@
 			<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
 			<td class='rang'>#RANG</td>
 			<td class='type_liaison'>[(#AUTORISER{modifier,article,#ID_ARTICLE_ORIG}|oui)
-			     <INCLURE{fond=prive/inclure/a2a_changer_typeliaisons,id_article_orig,id_article,formulaire}{ajax}>]
+			     <INCLURE{fond=prive/inclure/a2a_changer_typeliaisons,id_article_lie,id_article,formulaire,type_liaison}{ajax}>]
 			     [(#AUTORISER{modifier,article,#ID_ARTICLE_ORIG}|non)
 			         [(#TYPE_LIAISON|a2a_traduire_type_liaisons)]
 		         ]

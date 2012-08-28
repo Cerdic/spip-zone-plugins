@@ -1,8 +1,7 @@
 <?php
 
 function formulaires_a2a_changer_typeliaison_charger_dist($id_article,$id_article_lie,$type_liaison){
-	
-	return array('type_liaison'=>$type_liaison);
+	return array('type_liaison'=>$type_liaison,'id_article'=>$id_article,'id_article_lie'=>$id_article_lie);
 	
 	
 }	
@@ -29,8 +28,7 @@ function formulaires_a2a_changer_typeliaison_traiter_dist($id_article,$id_articl
 	include_spip('base/abstract_sql');
 
 	sql_updateq('spip_articles_lies',array('type_liaison'=>$nv_type_liaison),"id_article=".$id_article." AND id_article_lie=".$id_article_lie);
-	
-	
+	return array('message_ok'=>$nv_type_liaison,'editable'=>false);
 	
 }	
 

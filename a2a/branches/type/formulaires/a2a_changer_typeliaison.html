@@ -22,6 +22,12 @@
 	
 </form>
 </div>
+
 </B_liaison>
-(<a href="[(#SELF|parametre_url{formulaire,oui})]" class='ajax nohistory'><:a2a:changer_type_liaison:></a>)
+
+
+ [(#ENV*{message_ok}|a2a_traduire_type_liaisons)]
+
+(<a href="[(#SELF|parametre_url{formulaire,oui}|parametre_url{type_liaison,#ENV*{message_ok}|sinon{' '}})]" class='ajax nohistory'><:a2a:changer_type_liaison:></a>)
+
 <//B_liaison>
