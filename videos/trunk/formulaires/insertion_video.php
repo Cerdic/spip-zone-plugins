@@ -66,7 +66,10 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 			$infosVideo = $Videopian->get($url);
 			$titre = $infosVideo->title;
 			$descriptif = $infosVideo->description;
-			$logoDocument = $infosVideo->thumbnails[0]->url;
+		  $nbVignette = abs(count($infosVideo->thumbnails)-1);  // prendre la plus grande vignette       
+      $logoDocument = $infosVideo->thumbnails[$nbVignette]->url;
+      $logoDocument_width = $infosVideo->thumbnails[$nbVignette]->width;
+      $logoDocument_height = $infosVideo->thumbnails[$nbVignette]->height;      
 		} else {
 			//echo 'Exception reçue : ',  $e->getMessage(), "\n";
 			spip_log("L'ajout automatique du titre et de la description a echoué","Plugin Vidéo(s)");
@@ -90,7 +93,6 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 	if(array_key_exists('taille',$desc['field'])) if($infosVideo) $champs['taille'] = $infosVideo->duration;
 	if(array_key_exists('credits',$desc['field'])) if($infosVideo) $champs['credits'] = $infosVideo->author;
 	if(array_key_exists('statut',$desc['field'])) $champs['statut'] = 'publie';
-	if(array_key_exists('media',$desc['field'])) $champs['media'] = 'video';
 
 	/* Cas de la présence d'une vignette à attacher */
 	if($logoDocument){
@@ -98,6 +100,8 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 		if($fichier = preg_replace("#IMG/#", '', copie_locale($logoDocument))){ // set_spip_doc ne fonctionne pas... Je ne sais pas pourquoi
 			$champsVignette['fichier'] = $fichier;
 			$champsVignette['mode'] = 'vignette';
+      // $champsVignette['media'] = 'image'; // champs à intégrer ds SPIP 3
+      // $champsVignette['statut'] = 'publie';
 			
 			// Recuperer les tailles
 			$champsVignette['taille'] = @intval(filesize($fichier));
@@ -105,7 +109,11 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 			$champsVignette['largeur'] = intval($size_image[0]);
 			$champsVignette['hauteur'] = intval($size_image[1]);
 			// $infos['type_image'] = decoder_type_image($size_image[2]);
-			
+      if ($champsVignette['largeur']==0) {              // en cas d'echec, recuperer les infos videopian
+           $champsVignette['largeur'] = $logoDocument_width;
+           $champsVignette['hauteur'] = $logoDocument_height;
+      }
+     
 			// Ajouter
 			$id_vignette = sql_insertq('spip_documents',$champsVignette);
 			if($id_vignette) $champs['id_vignette'] = $id_vignette;
