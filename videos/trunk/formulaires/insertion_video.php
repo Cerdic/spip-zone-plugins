@@ -93,15 +93,18 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 	if(array_key_exists('taille',$desc['field'])) if($infosVideo) $champs['taille'] = $infosVideo->duration;
 	if(array_key_exists('credits',$desc['field'])) if($infosVideo) $champs['credits'] = $infosVideo->author;
 	if(array_key_exists('statut',$desc['field'])) $champs['statut'] = 'publie';
+  if(array_key_exists('media',$desc['field'])) $champs['media'] = 'video'; 
 
 	/* Cas de la présence d'une vignette à attacher */
 	if($logoDocument){
 		include_spip('inc/distant');
 		if($fichier = preg_replace("#IMG/#", '', copie_locale($logoDocument))){ // set_spip_doc ne fonctionne pas... Je ne sais pas pourquoi
 			$champsVignette['fichier'] = $fichier;
-			$champsVignette['mode'] = 'vignette';
-      // $champsVignette['media'] = 'image'; // champs à intégrer ds SPIP 3
-      // $champsVignette['statut'] = 'publie';
+			$champsVignette['mode'] = 'vignette';       
+      // champs extra à intégrer ds SPIP 3
+      if(array_key_exists('statut',$desc['field'])) $champsVignette['statut'] = 'publie';
+      if(array_key_exists('media',$desc['field']))  $champsVignette['media'] = 'image';
+       
 			
 			// Recuperer les tailles
 			$champsVignette['taille'] = @intval(filesize($fichier));
