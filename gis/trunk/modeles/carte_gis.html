@@ -25,6 +25,7 @@
 	- autocenterandzoom|centrer_auto = oui		centrer et zoomer la carte automatiquement pour afficher tous les marqueurs
 	- kml = 12						kml à superposer à la carte (id_document ou url)
 	- gpx = 12						gpx à superposer à la carte (id_document ou url)
+	- centrer_fichier = non			permet de ne pas centrer la carte automatiquement sur les fichiers kml/gpx surperposés
 	- localize_visitor|localiser_visiteur = oui		centrer la carte sur la position du visiteur (API geolocation HTML5)
 	- point = non					si elle vaut "non" cette option n'affichera pas de points du tout (utile pour n'afficher qu'un kml par exemple)
 X	- ajaxload = non                si elle vaut "non" cette option désactive l'init de la carte sur l'event ajaxload 
@@ -156,7 +157,8 @@ var map[(#GET{id})];
 				var kml_#COMPTEUR_BOUCLE = new L.KML(['(#VALEUR|generer_url_entite{document}|url_absolue)'], {async: true}); ]
 				[(#VALEUR|intval|non)
 				var kml_#COMPTEUR_BOUCLE = new L.KML(['(#VALEUR|copie_locale)'], {async: true}); ]
-				kml_#COMPTEUR_BOUCLE.on("loaded", function(e) { map[(#GET{id})].fitBounds(e.target.getBounds()); });
+				[(#ENV{centrer_fichier}|!={non}|oui)
+				kml_#COMPTEUR_BOUCLE.on("loaded", function(e) { map[(#GET{id})].fitBounds(e.target.getBounds()); });]
 				map[(#GET{id})].addLayer(kml_#COMPTEUR_BOUCLE);
 			</BOUCLE_kml>
 		</BOUCLE_test_kml>
@@ -168,7 +170,8 @@ var map[(#GET{id})];
 				var gpx_#COMPTEUR_BOUCLE = new L.GPX(['(#VALEUR|generer_url_entite{document}|url_absolue)'], {async: true}); ]
 				[(#VALEUR|intval|non)
 				var gpx_#COMPTEUR_BOUCLE = new L.GPX(['(#VALEUR|copie_locale)'], {async: true}); ]
-				gpx_#COMPTEUR_BOUCLE.on("loaded", function(e) { map[(#GET{id})].fitBounds(e.target.getBounds()); });
+				[(#ENV{centrer_fichier}|!={non}|oui)
+				gpx_#COMPTEUR_BOUCLE.on("loaded", function(e) { map[(#GET{id})].fitBounds(e.target.getBounds()); });]
 				map[(#GET{id})].addLayer(gpx_#COMPTEUR_BOUCLE);
 			</BOUCLE_gpx>
 		</BOUCLE_test_gpx>
