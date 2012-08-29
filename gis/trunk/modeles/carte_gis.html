@@ -157,7 +157,7 @@ var map[(#GET{id})];
 				var kml_#COMPTEUR_BOUCLE = new L.KML(['(#VALEUR|generer_url_entite{document}|url_absolue)'], {async: true}); ]
 				[(#VALEUR|intval|non)
 				var kml_#COMPTEUR_BOUCLE = new L.KML(['(#VALEUR|copie_locale)'], {async: true}); ]
-				[(#ENV{centrer_fichier}|!={non}|oui)
+				[(#ENV{centrer_fichier}|!={non}|et{#TOTAL_BOUCLE|>{1}|non})
 				kml_#COMPTEUR_BOUCLE.on("loaded", function(e) { map[(#GET{id})].fitBounds(e.target.getBounds()); });]
 				map[(#GET{id})].addLayer(kml_#COMPTEUR_BOUCLE);
 			</BOUCLE_kml>
@@ -170,7 +170,7 @@ var map[(#GET{id})];
 				var gpx_#COMPTEUR_BOUCLE = new L.GPX(['(#VALEUR|generer_url_entite{document}|url_absolue)'], {async: true}); ]
 				[(#VALEUR|intval|non)
 				var gpx_#COMPTEUR_BOUCLE = new L.GPX(['(#VALEUR|copie_locale)'], {async: true}); ]
-				[(#ENV{centrer_fichier}|!={non}|oui)
+				[(#ENV{centrer_fichier}|!={non}|et{#TOTAL_BOUCLE|>{1}|non})
 				gpx_#COMPTEUR_BOUCLE.on("loaded", function(e) { map[(#GET{id})].fitBounds(e.target.getBounds()); });]
 				map[(#GET{id})].addLayer(gpx_#COMPTEUR_BOUCLE);
 			</BOUCLE_gpx>
@@ -182,7 +182,7 @@ var map[(#GET{id})];
 	}
 
 	$(function(){
-		jQuery.getScript('[(#PRODUIRE{fond=javascript/gis.js}|compacte)]',function(){
+			jQuery.getScript(['(#CONFIG{auto_compress_js}|=={oui}|?{[(#PRODUIRE{fond=javascript/gis.js}|compacte)],[(#PRODUIRE{fond=javascript/gis.js})]})'],function(){
 			init_map[(#GET{id})]();
 		});
 		//[(#ENV{ajaxload}|!={non}|oui)onAjaxLoad(init_map[(#GET{id})]);]
