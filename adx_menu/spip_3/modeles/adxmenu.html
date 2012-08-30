@@ -1,6 +1,6 @@
 <ul class="adxm adxmenu">
 <BOUCLE_adxm_secteurs(RUBRIQUES) 
-	{par id_rubrique, num titre, titre} 
+	{par num titre, titre} 
 	{id_rubrique IN (#ENV{adx_rub})}
 >
 	<li><a href="#URL_RUBRIQUE" title="[(#INTRODUCTION|supprimer_tags|sinon{#TITRE})]"[ class="(#EXPOSE)"]>[(#TITRE|couper{#ENV{couper},#ENV{couper_car}})]</a>
