@@ -20,7 +20,7 @@ function balise_ADXMENU_dyn($id_article=null,$id_rubrique=null,$_rub=false,$coup
 	$rub_demande = strlen(trim($_rub)) ? tipafriend_transform_string($_rub) : $conf['liste_rub'];
 	$rub_a_exclure = array();
 
-echo '<br />arg : '.var_export($rub_demande,1);
+//echo '<br />arg : '.var_export($rub_demande,1);
 	// cas de "secteurs!x:y" ou "tout!x:y"
 	if (strpos($rub_demande, '!')) {
 		$_ex = explode('!', $rub_demande);
@@ -34,8 +34,8 @@ echo '<br />arg : '.var_export($rub_demande,1);
 	if (!in_array($rub_demande, array('secteurs','tout'))) 
 		$rub_demande = explode(':', $rub_demande);
 
-echo '<br />rub_demande : '.var_export($rub_demande,1);
-echo '<br />rub_a_exclure : '.var_export($rub_a_exclure,1);
+//echo '<br />rub_demande : '.var_export($rub_demande,1);
+//echo '<br />rub_a_exclure : '.var_export($rub_a_exclure,1);
 
 	// Swith pour les ID rubriques
 	switch($rub_demande){
@@ -58,7 +58,7 @@ echo '<br />rub_a_exclure : '.var_export($rub_a_exclure,1);
 				unset($rub[array_search($_rubid, $rub)]);
 	}
 
-echo '<br />rubs : '.var_export($rub,1);
+//echo '<br />rubs : '.var_export($rub,1);
 
 	// Renvoi du calcul du squelette
 	$contexte = array( 
