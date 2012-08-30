@@ -26,10 +26,10 @@ function exec_edit_activite()
 		onglets_association('titre_onglet_activite');
 		// INTRO : Rappel Infos Evenement
 		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement");
-		$infos['evenement_date_du'] = association_datefr($evenement['date_debut'],'dtstart').' '.substr($data['date_debut'],10,6);
-		$infos['evenement_date_au'] = association_datefr($evenement['date_fin'],'dtend').' '.substr($data['date_debut'],10,6);
+		$infos['evenement_date_du'] = association_formater_date($evenement['date_debut'],'dtstart').' '.substr($data['date_debut'],10,6);
+		$infos['evenement_date_au'] = association_formater_date($evenement['date_fin'],'dtend').' '.substr($data['date_debut'],10,6);
 		$infos['evenement_lieu'] = $evenement['lieu'];
-		echo totauxinfos_intro($evenement['titre'], 'evenement', $id_evenement, $infos, 'agenda');
+		echo association_totauxinfos_intro($evenement['titre'], 'evenement', $id_evenement, $infos, 'agenda');
 		// datation et raccourcis
 		icones_association('');
 		debut_cadre_association(($id_activite?'activites.gif':'panier_in.gif'), 'activite_titre_mise_a_jour_inscriptions');

@@ -27,7 +27,7 @@ function formulaires_parametrer_etiquettes_verifier_dist(){
 	$erreurs = array();
 
 	foreach(array('nb_colonne', 'nb_ligne', 'largeur_page', 'hauteur_page', 'marge_haut_page', 'marge_bas_page', 'marge_gauche_page', 'marge_droite_page', 'marge_gauche_etiquette', 'marge_droite_etiquette', 'espace_etiquettesh', 'espace_etiquettesl') as $value) { // on verifie que les valeurs sont des nombres (idealement des entiers) positifs
-		if ($erreur = association_verifier_montant(_request($value)) )
+		if ($erreur = association_verifier_montant($value) )
 			$erreurs[$value] = $erreur;
 	}
 

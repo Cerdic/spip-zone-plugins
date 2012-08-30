@@ -29,7 +29,7 @@ function exec_membres_groupe()
 			$infos['ordre_affichage_groupe'] = $groupe['affichage'];
 		}
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe")) );
-		echo totauxinfos_intro(($id_groupe<100)?_T("asso:groupe_".$id_groupe):$groupe['nom'], 'groupe', $id_groupe, $infos );
+		echo association_totauxinfos_intro(($id_groupe<100)?_T("asso:groupe_".$id_groupe):$groupe['nom'], 'groupe', $id_groupe, $infos );
 		// datation et raccourcis
 		icones_association('', array(
 			'editer_groupe' => array('edit-24.gif', ($id_groupe<100)?'edit_groupe_autorisations':'edit_groupe', "id=$id_groupe"),

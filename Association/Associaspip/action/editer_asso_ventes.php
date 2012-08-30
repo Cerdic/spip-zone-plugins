@@ -17,7 +17,7 @@ function action_editer_asso_ventes()
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_vente = $securiser_action();
 	$erreur = '';
-	$date_vente = association_recupere_date(_request('date_vente'));
+	$date_vente = association_recuperer_date('date_vente');
 	$article = _request('article');
 	$code = _request('code');
 	$id_acheteur = intval(_request('id_acheteur'));
@@ -26,10 +26,10 @@ function action_editer_asso_ventes()
 		$data =  sql_fetsel('sexe, nom_famille, prenom', 'spip_asso_membres', "id_auteur=$id_acheteur");
 		$acheteur = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
 	}
-	$quantite = association_recupere_montant(_request('quantite'));
-	$date_envoi = association_recupere_date(_request('date_envoi'));
-	$frais_envoi = association_recupere_montant(_request('frais_envoi'));
-	$prix_unite =  association_recupere_montant(_request('prix_vente'));
+	$quantite = association_recuperer_montant('quantite');
+	$date_envoi = association_recuperer_date('date_envoi');
+	$frais_envoi = association_recuperer_montant('frais_envoi');
+	$prix_unite =  association_recuperer_montant('prix_vente');
 	if (test_plugin_actif('CATALOGUE') && intval($code)==$code) { // le plugin "Catalogue est actif" : certains champs peuvent ne pas etre saisis...
 		if ($code>0) { // c'est une variante
 			$variante = sql_fetsel('*', 'spip_cat_variantes', 'id_cat_variante='.$code);

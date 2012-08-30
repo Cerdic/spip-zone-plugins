@@ -35,19 +35,19 @@ function exec_dons()
 		}
 		onglets_association('titre_onglet_dons');
 		// INTRO : nom du module et annee affichee
-		echo totauxinfos_intro('','dons',$annee);
+		echo association_totauxinfos_intro('','dons',$annee);
 		// TOTAUX : nombre de dons selon leur nature
 		$liste_libelles = array('pair'=>'dons_financier', 'prospect'=>'dons_en_nature', 'impair'=>'autres');
 		$liste_effectifs['pair'] = sql_countsel('spip_asso_dons', "argent<>0 AND colis='' AND  DATE_FORMAT(date_don, '%Y')='$annee' ");
 		$liste_effectifs['prospect'] = sql_countsel('spip_asso_dons', "argent=0 AND colis<>'' AND  DATE_FORMAT(date_don, '%Y')='$annee' ");
 		$liste_effectifs['impair'] = sql_countsel('spip_asso_dons', "DATE_FORMAT(date_don, '%Y')='$annee' ")-$liste_effectifs['pair']-$liste_effectifs['prospect'];
-		echo totauxinfos_effectifs('dons', $liste_libelles, $liste_effectifs);
+		echo association_totauxinfos_effectifs('dons', $liste_libelles, $liste_effectifs);
 		// STATS sur les donnations de l'annee
-		echo totauxinfos_stats('donnations', 'dons', array('dons_financier'=>'argent','don_en_nature'=>'valeur',), "DATE_FORMAT(date_don, '%Y')='$annee' ");
+		echo association_totauxinfos_stats('donnations', 'dons', array('dons_financier'=>'argent','don_en_nature'=>'valeur',), "DATE_FORMAT(date_don, '%Y')='$annee' ");
 		// TOTAUX : montants des dons et remboursements financiers
 		$dons_financiers = sql_getfetsel('SUM(argent) AS somme_recettes', 'spip_asso_dons', "argent AND DATE_FORMAT(date_don, '%Y')=$annee" );
 		$remboursements = sql_getfetsel('SUM(argent) AS somme_reversees', 'spip_asso_dons', "argent AND contrepartie AND DATE_FORMAT(date_don, '%Y')=$annee" );
-		echo totauxinfos_montants($annee, $dons_financiers, $remboursements);
+		echo association_totauxinfos_montants($annee, $dons_financiers, $remboursements);
 		// datation et raccourcis
 		icones_association(array(), array(
 			'ajouter_un_don' => array('ajout-24.png', 'edit_don'),
@@ -80,18 +80,18 @@ function exec_dons()
 		while ($data = sql_fetch($query)) {
 			echo '<tr class="'. (($data['argent'] && !$data['colis'])?'pair':(($data['argent'] && !$data['colis'])?'prospect':'impair')) . (($id_don==$data['id_don'])?' surligne':'') .'" id="'.$data['id_don'].'">';
 			echo '<td class="integer">'.$data['id_don'].'</td>';
-			echo '<td class="date">'. association_datefr($data['date_don']) .'</td>';
+			echo '<td class="date">'. association_formater_date($data['date_don']) .'</td>';
 			echo '<td class="text">'. association_calculer_lien_nomid($data['bienfaiteur'],$data['id_adherent']) .'</td>';
-			echo '<td class="decimal">'. association_prixfr($data['argent']) .'</td>';
+			echo '<td class="decimal">'. association_formater_prix($data['argent']) .'</td>';
 			echo '<td class="text" colspan="'.($data['vu']?2:1).'">'
-				.($data['vu'] ? '' :'<i>'._T('asso:valeur').': '.association_prixfr($data['valeur']).'</i><br />')
+				.($data['vu'] ? '' :'<i>'._T('asso:valeur').': '.association_formater_prix($data['valeur']).'</i><br />')
 				.$data['colis'].'</td>';
 			echo ($data['vu']
 				? ('<td class="text">&nbsp;</td>')
 			    : ('<td class="text">'. propre($data['contrepartie']) .'</td>')
 				);
-			echo '<td  class="action">'. association_bouton('supprimer_le_don', 'suppr-12.gif', 'suppr_don', "id=$data[id_don]") .'</td>';
-			echo '<td class="action">' . association_bouton('mettre_a_jour_le_don', 'edit-12.gif', 'edit_don', "id=$data[id_don]") .'</td>';;
+			echo '<td  class="action">'. association_bouton_faire('supprimer_le_don', 'suppr-12.gif', 'suppr_don', "id=$data[id_don]") .'</td>';
+			echo '<td class="action">' . association_bouton_faire('mettre_a_jour_le_don', 'edit-12.gif', 'edit_don', "id=$data[id_don]") .'</td>';;
 			echo "</tr>\n";
 		}
 		echo "</tbody>\n</table>\n";

@@ -70,7 +70,7 @@ function association_editeur_destinations($destination, $unique='', $defaut='')
 		    . '</select></li>';
 		if ($unique==false) {
 		    $res .= '<li class="editer_montant_dest['.$idIndex.']"><input name="montant_dest['.$idIndex.']" value="'
-			. association_nbrefr(association_recupere_montant($destMontant))
+			. association_formater_nombre($destMontant)
 			. '" type="text" id="montant_dest['.$idIndex.']" /></li>'
 			. '<button class="destButton" type="button" onClick="addFormField(); return false;">+</button>';
 		    if ($idIndex>1) {
@@ -239,18 +239,14 @@ function association_verifier_montant_destinations($montant_attendu)
 	    } else {
 		$err = _T('asso:erreur_destination_dupliquee');
 	    }
-	    $total_destination += association_recupere_montant($toutesDestinationsMontants[$id]); /* les montants sont dans un autre tableau aux meme cles */
+	    $total_destination += association_recuperer_montant($toutesDestinationsMontants[$id], false); // les montants sont dans un autre tableau aux meme cles
 	}
-	/* on verifie que la somme des montants des destinations correspond au montant attendu */
-	if ($montant_attendu!=$total_destination) {
+	if ( _request($montant_attendu)!=$total_destination ) { // on verifie que la somme des montants des destinations correspond au montant attendu
 	    $err .= _T('asso:erreur_montant_destination');
 	}
-    } else { /* une seule destination, le montant peut ne pas avoir ete precise, dans ce cas pas de verif, c'est le montant attendu qui sera entre dans la base */
-	/* quand on a une seule destination, l'id dans les tableaux est forcement 1 par contruction de l'editeur */
-	if ($toutesDestinationsMontants[1]) {
-	    $montant = association_recupere_montant($toutesDestinationsMontants[1]);
-	    /* on verifie que le montant indique correspond au montant attendu */
-	    if ($montant_attendu!=$montant) {
+    } else { // une seule destination, le montant peut ne pas avoir ete precise, dans ce cas pas de verif, c'est le montant attendu qui sera entre dans la base
+	if ($toutesDestinationsMontants[1]) { // quand on a une seule destination, l'id dans les tableaux est forcement 1 par contruction de l'editeur
+	    if ( _request($montant_attendu)!=association_recuperer_montant($toutesDestinationsMontants[1], false) ) { // on verifie que le montant indique correspond au montant attendu
 		$err = _T('asso:erreur_montant_destination');
 	    }
 	}
@@ -276,7 +272,7 @@ function association_ajouter_destinations_comptables($id_compte, $recette, $depe
 //    spip_log("id_dest : \n".print_r($toutesDestinationsMontants, true), 'associaspip');
     if (count($toutesDestinations)>1) {
 	foreach ($toutesDestinations as $id => $id_destination)	{
-	    $montant = association_recupere_montant($toutesDestinationsMontants[$id]);	/* le tableau des montants a des cles indentique a celui des id */
+	    $montant = association_recuperer_montant($toutesDestinationsMontants[$id], false);	// le tableau des montants a des cles indentique a celui des id
 	    $id_dest_op = sql_insertq('spip_asso_destination_op', array(
 		'id_compte' => $id_compte,
 		'id_destination' => $id_destination,
@@ -487,14 +483,14 @@ function association_liste_totaux_comptes_classes($classes, $prefixe='', $direct
 		echo '<td class="text">'. $data['code'] .'</td>';
 		echo '<td class="text">'. $data['intitule'] .'</td>';
 		if ($direction) { // mode liste comptable
-		    echo '<td class="decimal">'. association_nbrefr($data['valeurs']) .'</td>';
+		    echo '<td class="decimal">'. association_formater_nombre($data['valeurs']) .'</td>';
 		    $total_valeurs += $data['valeurs'];
 		} else { // mode liste standard
-		    echo '<td class="decimal">'. association_nbrefr($data['recettes']) .'</td>';
+		    echo '<td class="decimal">'. association_formater_nombre($data['recettes']) .'</td>';
 		    $total_recettes += $data['recettes'];
-		    echo '<td class="decimal">'. association_nbrefr($data['depenses']) .'</td>';
+		    echo '<td class="decimal">'. association_formater_nombre($data['depenses']) .'</td>';
 		    $total_depenses += $data['depenses'];
-		    //echo '<td class="decimal">'. association_nbrefr($data['soldes']) .'</td>';
+		    //echo '<td class="decimal">'. association_formater_nombre($data['soldes']) .'</td>';
 		    $total_valeurs += $data['soldes'];
 		}
 		echo "</tr>\n";
@@ -505,11 +501,11 @@ function association_liste_totaux_comptes_classes($classes, $prefixe='', $direct
     echo '<th colspan="2">&nbsp;</th>';
     echo '<th class="text">'. _T("asso:$prefixe".'_total') .'</th>';
     if ($direction) { // mode liste comptable
-	echo '<th class="decimal">'. association_nbrefr($total_valeurs) . '</th>';
+	echo '<th class="decimal">'. association_formater_nombre($total_valeurs) . '</th>';
     } else { // mode liste standard
-	echo '<th class="decimal">'. association_nbrefr($total_recettes) . '</th>';
-	echo '<th class="decimal">'. association_nbrefr($total_depenses) . '</th>';
-	// echo '<th class="decimal">'. association_nbrefr($total_valeurs) . '</th>';
+	echo '<th class="decimal">'. association_formater_nombre($total_recettes) . '</th>';
+	echo '<th class="decimal">'. association_formater_nombre($total_depenses) . '</th>';
+	// echo '<th class="decimal">'. association_formater_nombre($total_valeurs) . '</th>';
     }
     echo "</tr>\n</tfoot>\n</table>\n";
     return $total_valeurs;
@@ -528,7 +524,7 @@ function association_liste_resultat_net($recettes, $depenses) {
     echo '<th colspan="2">&nbsp;</th>';
     $res = $recettes-$depenses;
     echo '<th class="text">'. (($res<0) ? _T('asso:cpte_resultat_perte') : _T('asso:cpte_resultat_benefice')) .'</th>';
-    echo '<th class="decimal">'. association_nbrefr(abs($res)) .'</th>';
+    echo '<th class="decimal">'. association_formater_nombre(abs($res)) .'</th>';
     echo "</tr></tfoot></table>";
 }
 
@@ -856,12 +852,12 @@ class ExportComptes_PDF extends FPDF {
 #	    	if ( floatval($data['valeurs']) || floatval($data['recettes']) || floatval($data['depenses']) ) { // non-zero...
 		    $this->Cell(20, 6, utf8_decode($data['code']), 0, 0, 'R', true);
 		    $this->Cell(($this->largeur_utile)-(2*$this->space_h+50), 6, utf8_decode($data['intitule']), 0, 0, 'L', true);
-		    $this->Cell(30, 6, association_nbrefr($data['valeurs']), 0, 0, 'R', true);
+		    $this->Cell(30, 6, association_formater_nombre($data['valeurs']), 0, 0, 'R', true);
 		    if ($direction) { // mode liste comptable
-			$this->Cell(30, 6, association_nbrefr($data['valeurs']), 0, 0, 'R', true);
+			$this->Cell(30, 6, association_formater_nombre($data['valeurs']), 0, 0, 'R', true);
 			$total_valeurs += $data['valeurs'];
 		    } else { // mode liste standard
-			$this->Cell(30, 6, association_nbrefr($data['depenses']>0?$data['depenses']:$data['recettes']), 0, 0, 'R', true);
+			$this->Cell(30, 6, association_formater_nombre($data['depenses']>0?$data['depenses']:$data['recettes']), 0, 0, 'R', true);
 			$total_recettes += $data['recettes'];
 			$total_depenses += $data['depenses'];
 			$total_valeurs += $data['soldes'];
@@ -875,14 +871,14 @@ class ExportComptes_PDF extends FPDF {
 	$this->SetFillColor(215); // Couleur de fond : 84.3%
 	if ($direction) { // mode liste comptable : charge, produit, actifs, passifs
 	    $this->Cell(($this->largeur_utile)-(2*$this->space_h+30), 6, html_entity_decode(_T("asso:$prefixe".'_total')), 1, 0, 'R', true);
-	    $this->Cell(30, 6, association_nbrefr($total_valeurs), 1, 0, 'R', true);
+	    $this->Cell(30, 6, association_formater_nombre($total_valeurs), 1, 0, 'R', true);
 	} else { // mode liste standard : contributions volontaires et autres
 	    $this->Cell(($this->largeur_utile)/2-(2*$this->space_h+30), 6, html_entity_decode(_T("asso:$prefixe".'_total_depenses')), 1, 0, 'R', true);
-	    $this->Cell(30, 6, association_nbrefr($total_depenses), 1, 0, 'R', true);
+	    $this->Cell(30, 6, association_formater_nombre($total_depenses), 1, 0, 'R', true);
 	    $xc += ( $this->largeur_utile)/2;
 	    $this->SetXY($xc, $yc); // positionne le curseur sur l'autre demi page
 	    $this->Cell(($this->largeur_utile)/2-(2*$this->space_h+30), 6, html_entity_decode(_T("asso:$prefixe".'_total_recettes')), 1, 0, 'R', true);
-	    $this->Cell(30, 6, association_nbrefr($total_recettes), 1, 0, 'R', true);
+	    $this->Cell(30, 6, association_formater_nombre($total_recettes), 1, 0, 'R', true);
 	}
 	$yc += 6;
 	$this->Ln($this->space_v); // Saut de ligne
@@ -912,7 +908,7 @@ class ExportComptes_PDF extends FPDF {
 	$leSolde = $lesRecettes-$lesDepenses;
 	$this->SetXY($xc, $yc);
 	$this->Cell(($this->largeur_utile)-(2*$this->space_h+30), 6, html_entity_decode(_T('asso:cpte_resultat_'.($leSolde<0?'perte':'benefice'))), 1, 0, 'R', true);
-	$this->Cell(30, 6, association_nbrefr($leSolde), 1, 0, 'R', true);
+	$this->Cell(30, 6, association_formater_nombre($leSolde), 1, 0, 'R', true);
 	$yc += 6;
 	$this->Ln($this->space_v); // Saut de ligne
 	$yc += $this->space_v;

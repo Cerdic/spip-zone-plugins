@@ -37,9 +37,9 @@ function formulaires_editer_asso_dons_charger_dist($id_don='') {
 		$contexte['id_adherent']='';
 	/* paufiner la presentation des valeurs  */
 	if ($contexte['argent'])
-		$contexte['argent'] = association_nbrefr($contexte['argent']);
+		$contexte['argent'] = association_formater_nombrer($contexte['argent']);
 	if ($contexte['valeur'])
-		$contexte['valeur'] = association_nbrefr($contexte['valeur']);
+		$contexte['valeur'] = association_formater_nombre($contexte['valeur']);
 	// on ajoute les metas de destinations
 	if ($GLOBALS['association_metas']['destinations']) {
 		include_spip('inc/association_comptabilite');
@@ -62,23 +62,24 @@ function formulaires_editer_asso_dons_charger_dist($id_don='') {
 function formulaires_editer_asso_dons_verifier_dist($id_don) {
 	$erreurs = array();
 	/* on verifie que argent et valeur ne soient pas negatifs */
-	if ($erreur = association_verifier_montant(_request('argent')) )
+	if ($erreur = association_verifier_montant('argent') )
 		$erreurs['argent'] = $erreur;
-	if ($erreur = association_verifier_montant(_request('valeur')) )
+	if ($erreur = association_verifier_montant('valeur') )
 		$erreurs['valeur'] = $erreur;
 	/* verifier si on a un numero d'adherent qu'il existe dans la base */
-	if ($erreur = association_verifier_membre(_request('id_adherent')) )
+	if ($erreur = association_verifier_membre('id_adherent') )
 		$erreurs['id_adherent'] = $erreur;
 	/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération */
 	if (($GLOBALS['association_metas']['destinations']) && !array_key_exists('argent', $erreurs)) {
 		include_spip('inc/association_comptabilite');
-		if ($err_dest = association_verifier_montant_destinations(_request('argent'))) {
+		if ($err_dest = association_verifier_montant_destinations('argent') ) {
 			$erreurs['destinations'] = $err_dest;
 		}
 	}
 	/* verifier la date */
-	if ($erreur = association_verifier_date(_request('date_don')) )
+	if ($erreur = association_verifier_date('date_don') )
 		$erreurs['date_don'] = $erreur;
+
 	if (count($erreurs)) {
 		$erreurs['message_erreur'] = _T('asso:erreur_titre');
 	}

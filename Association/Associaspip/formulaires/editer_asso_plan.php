@@ -53,10 +53,10 @@ function formulaires_editer_asso_plan_verifier_dist($id_plan='')
 		$erreurs['code'] = _T('asso:erreur_plan_code');
 	}
 	/* verifier le montant */
-	if ($erreur = association_verifier_montant(_request('solde_anterieur')) )
+	if ($erreur = association_verifier_montant('solde_anterieur') )
 		$erreurs['solde_anterieur'] = $erreur;
 	/* verifier la date */
-	if ($erreur = association_verifier_date(_request('date_anterieure')) )
+	if ($erreur = association_verifier_date('date_anterieure') )
 		$erreurs['date_anterieure'] = $erreur;
 	/* verifie la validite d'un changement */
 	if (!array_key_exists('code', $erreurs)) { /* si le code est valide */
@@ -112,7 +112,7 @@ function formulaires_editer_asso_plan_traiter_dist($id_plan='')
 		$res['message_erreur'] = ($err ? $err : _T('erreur_traite'));
 	} else {
 		$res['message_ok'] = '';
-		$res['redirect'] = generer_url_ecrire('plan_comptable'); /* on renvoit sur la page adherents mais on perd a l'occasion d'eventuel filtres inseres avant d'arriver au formulaire de cotisation... */
+		$res['redirect'] = generer_url_ecrire('plan_comptable'); // on renvoit sur la page adherents mais on perd a l'occasion d'eventuel filtres inseres avant d'arriver au formulaire de cotisation...
 	}
 	return $res;
 }

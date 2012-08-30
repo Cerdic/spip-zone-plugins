@@ -30,11 +30,11 @@ function exec_encaisse()
 // traitements
 		onglets_association('titre_onglet_comptes');
 		// INTRO : rappel de l'exercicee affichee
-		echo totauxinfos_intro('encaisse', '');
+		echo association_totauxinfos_intro('encaisse', '');
 		// STATS recettes et depenses par comptes financiers (indique rapidement les comptes financiers avec les mouvements les plus importants --en montant !)
 		$journaux = sql_allfetsel('journal, intitule', 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON journal=code', "date>=date_anterieure AND date<=NOW()", "intitule DESC"); // on se permet sql_allfetsel car il n'y en a pas des masses a priori...
 		foreach ($journaux as $financier) {
-			echo totauxinfos_stats($financier['intitule'], 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), 'journal='.sql_quote($financier['journal']) .' AND date>='. sql_quote($financier['date_anterieure']) .' AND date<=NOW()');
+			echo association_totauxinfos_stats($financier['intitule'], 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), 'journal='.sql_quote($financier['journal']) .' AND date>='. sql_quote($financier['date_anterieure']) .' AND date<=NOW()');
 		}
 		// datation et raccourcis
 		icones_association(array('comptes', "exercice=$id_exercice"), array(
@@ -70,19 +70,19 @@ function exec_encaisse()
 		foreach($lesEcritures as $compteFinancier) {
 			echo '<tr id="'.$compteFinancier['id_plan'].'">';
 			echo '<td class="text">'. $compteFinancier['code'] .' : '. $compteFinancier['intitule'] .'</td>';
-			echo '<td class="date">'. association_datefr($compteFinancier['date_anterieure'],'dtstart') .'</td>';
-			echo '<td class="decimal">'. association_prixfr($compteFinancier['solde_anterieur']) .'</td>';
-			echo '<td class="decimal">'. association_prixfr($compteFinancier['solde_anterieur']+$compteFinancier['solde_actuel']) .'</td>';
+			echo '<td class="date">'. association_formater_date($compteFinancier['date_anterieure'],'dtstart') .'</td>';
+			echo '<td class="decimal">'. association_formater_prix($compteFinancier['solde_anterieur']) .'</td>';
+			echo '<td class="decimal">'. association_formater_prix($compteFinancier['solde_anterieur']+$compteFinancier['solde_actuel']) .'</td>';
 			$total_initial += $compteFinancier['solde_anterieur'];
 			$total_actuel += $compteFinancier['solde_anterieur']+$compteFinancier['solde_actuel'];
 		} // fin corps
 		echo "</tr>\n</tbody><tfoot>\n<tr>";
 		echo '<th  colspan="2" class="text">'. _T('asso:encaisse_total_general') .'</th>';
-		echo '<th class="decimal">'. association_prixfr($total_initial) .'</th>';
-		echo '<th class="decimal">'. association_prixfr($total_actuel) .'</th>';
+		echo '<th class="decimal">'. association_formater_prix($total_initial) .'</th>';
+		echo '<th class="decimal">'. association_formater_prix($total_actuel) .'</th>';
 		$solde_virementsinternes = sql_getfetsel('SUM(recette)-SUM(depense)', 'spip_asso_comptes', 'imputation='.sql_quote($GLOBALS['association_metas']['pc_intravirements']), 'imputation');
 		if( $solde_virementsinternes!=0 ){ // desequilible du compte de virements internes (ceci ne devrait arriver que si l'operation n'est pas enregistree via ce plugin !) /!\ Attention a bien forcer la comparaison avec zero car '0.00' sera faux !
-			echo '<tr class="erreur"><td  colspan="3" class="message_erreur">'. _T('asso:erreur_equilibre_comptes58') .'</td><td class="decimal">'. association_prixfr($solde_virementsinternes) .'</td></tr>';
+			echo '<tr class="erreur"><td  colspan="3" class="message_erreur">'. _T('asso:erreur_equilibre_comptes58') .'</td><td class="decimal">'. association_formater_prix($solde_virementsinternes) .'</td></tr>';
 		}
 		echo "</tr>\n</tfoot>\n</table>\n";
 		fin_page_association();

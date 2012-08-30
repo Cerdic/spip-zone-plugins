@@ -25,10 +25,10 @@ function exec_synchronis_activites()
 		onglets_association('synchroniser_asso_membres');
 		// INTRO : Rappel Infos Evenement
 		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement") ;
-		$infos['evenement_date_du'] = association_datefr($evenement['date_debut'],'dtstart').' '.substr($data['date_debut'],10,6);
-		$infos['evenement_date_au'] = association_datefr($evenement['date_fin'],'dtend').' '.substr($data['date_debut'],10,6);
+		$infos['evenement_date_du'] = association_formater_date($evenement['date_debut'],'dtstart').' '.substr($data['date_debut'],10,6);
+		$infos['evenement_date_au'] = association_formater_date($evenement['date_fin'],'dtend').' '.substr($data['date_debut'],10,6);
 		$infos['evenement_lieu'] = $evenement['lieu'];
-		echo totauxinfos_intro($evenement['titre'], 'evenement', $id_evenement, $infos, 'agenda');
+		echo association_totauxinfos_intro($evenement['titre'], 'evenement', $id_evenement, $infos, 'agenda');
 		// TOTAUX : nombres d'inscrits par etat de paiement
 		$liste_libelles = $liste_effectifs = array();
 		$liste_libelles['oui'] = _T('agenda:label_reponse_jyparticipe');

@@ -35,10 +35,10 @@ function exec_adherents()
 			$liste_libelles[$classe_css] = _T('asso:adherent_liste_nombre_'.$statut);
 			$liste_effectifs[$classe_css] = sql_countsel('spip_asso_membres', "statut_interne='$statut'");
 		}
-		echo totauxinfos_effectifs('adherents', $liste_libelles, $liste_effectifs);
+		echo association_totauxinfos_effectifs('adherents', $liste_libelles, $liste_effectifs);
 		// TOTAUX : montants des cotisations durant l'annee en cours
 		$data = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=DATE_FORMAT(NOW(), '%Y') AND imputation=".sql_quote($GLOBALS['association_metas']['pc_cotisations']) );
-		echo totauxinfos_montants('cotisations', $data['somme_recettes'], $data['somme_depenses']);
+		echo association_totauxinfos_montants('cotisations', $data['somme_recettes'], $data['somme_depenses']);
 		// datation et raccourcis
 		if (autoriser('voir_groupes', 'association', 100)) { // l'id groupe passe en parametre est a 100 car ce sont les groupes definis par l'utilisateur et non ceux des autorisation qu'on liste dans cette page.
 			$res['gerer_les_groupes'] = array('annonce.gif', 'groupes');
@@ -69,7 +69,7 @@ function exec_adherents()
 			$champsExclus[] = 'prenom';
 		if ( !$GLOBALS['association_metas']['id_asso'] )
 			$champsExclus[] = 'id_asso';
-		echo bloc_listepdf('membre', array('where_adherents'=>$where_adherents, 'jointure_adherents'=>$jointure_adherents, 'statut_interne'=>$statut_interne), 'adherent_libelle_', $champsExclus, true);
+		echo association_boite_listepdf('membre', array('where_adherents'=>$where_adherents, 'jointure_adherents'=>$jointure_adherents, 'statut_interne'=>$statut_interne), 'adherent_libelle_', $champsExclus, true);
 		debut_cadre_association('annonce.gif', 'adherent_titre_liste_actifs');
 		// FILTRES
 		echo "<table width='100%' class='asso_tablo_filtres'>\n<tr>";
@@ -189,15 +189,15 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe,
 			if ($data['validite']==''){
 				$auteurs .= '&nbsp;';
 			} else {
-				$auteurs .= '<abbr class="dtend" title="'.$data['validite'].'">'. association_datefr($data['validite']) .'</td>';
+				$auteurs .= '<abbr class="dtend" title="'.$data['validite'].'">'. association_formater_date($data['validite']) .'</td>';
 			}
 			$auteurs .= '</td>';
 		}
 		$auteurs .= '<td class="action">'
 		. '<a href="'. generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur) .'">'.$icone.'</a></td>'
-		. '<td class="action">'. association_bouton('adherent_label_ajouter_cotisation', 'cotis-12.gif', 'ajout_cotisation','id='.$id_auteur) .'</td>'
-		. '<td class="action">'. association_bouton('adherent_label_modifier_membre', 'edit-12.gif', 'edit_adherent','id='.$id_auteur) .'</td>'
-		. '<td class="action">'. association_bouton('adherent_label_voir_membre', 'voir-12.png', 'adherent','id='.$id_auteur) .'</td>'
+		. '<td class="action">'. association_bouton_faire('adherent_label_ajouter_cotisation', 'cotis-12.gif', 'ajout_cotisation','id='.$id_auteur) .'</td>'
+		. '<td class="action">'. association_bouton_faire('adherent_label_modifier_membre', 'edit-12.gif', 'edit_adherent','id='.$id_auteur) .'</td>'
+		. '<td class="action">'. association_bouton_faire('adherent_label_voir_membre', 'voir-12.png', 'adherent','id='.$id_auteur) .'</td>'
 		. '<td class="action"><input name="id_auteurs[]" type="checkbox" value="'.$id_auteur.'" /></td>'
 		. "</tr>\n";
 	}

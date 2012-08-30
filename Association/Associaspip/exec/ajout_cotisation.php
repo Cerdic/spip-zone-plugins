@@ -28,9 +28,9 @@ function exec_ajout_cotisation()
 		// info : membre et categorie par defaut
 		$categorie = sql_fetsel('*', 'spip_asso_categories', 'id_categorie='. intval($row['categorie']));
 		$infos['adherent_libelle_categorie'] = $categorie['libelle'];
-		$infos['entete_montant'] = association_prixfr($categorie['cotisation']);
-		$infos['adherent_libelle_validite'] = association_datefr($row['validite']);
-		echo totauxinfos_intro(htmlspecialchars(association_calculer_nom_membre($row['sexe'], $row['prenom'], $row['nom_famille'])), 'membre', $id_auteur, $infos );
+		$infos['entete_montant'] = association_formater_prix($categorie['cotisation']);
+		$infos['adherent_libelle_validite'] = association_formater_date($row['validite']);
+		echo association_totauxinfos_intro(htmlspecialchars(association_calculer_nom_membre($row['sexe'], $row['prenom'], $row['nom_famille'])), 'membre', $id_auteur, $infos );
 		// datation et raccourcis
 		icones_association('', array(
 			'voir_adherent' => array('edit-24.gif', 'voir_adherent', "id=$id_auteur"), // item de langue...

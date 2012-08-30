@@ -30,7 +30,7 @@ function exec_edit_compte()
 		$id_compte = intval(_request('id'));
 		onglets_association('titre_onglet_comptes');
 		// INTRO : resume compte
-		echo totauxinfos_intro('', 'compte', $id_compte, $infos );
+		echo association_totauxinfos_intro('', 'compte', $id_compte, $infos );
 		// datation et raccourcis
 		icones_association('');
 		debut_cadre_association('compts.gif', 'modification_des_comptes');

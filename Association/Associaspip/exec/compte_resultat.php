@@ -30,9 +30,9 @@ function exec_compte_resultat()
 // traitements
 		onglets_association('titre_onglet_comptes');
 		// INTRO : rappel de l'exercicee affichee
-		$infos['exercice_entete_debut'] = association_datefr($exercice_data['debut'], 'dtstart');
-		$infos['exercice_entete_fin'] = association_datefr($exercice_data['fin'], 'dtend');
-		echo totauxinfos_intro($exercice_data['intitule'], 'exercice', $ids['exercice'], $infos);
+		$infos['exercice_entete_debut'] = association_formater_date($exercice_data['debut'], 'dtstart');
+		$infos['exercice_entete_fin'] = association_formater_date($exercice_data['fin'], 'dtend');
+		echo association_totauxinfos_intro($exercice_data['intitule'], 'exercice', $ids['exercice'], $infos);
 		// pas de sommes de synthes puisque tous les totaux sont dans la zone centrale ;-
 		// datation et raccourcis
 		icones_association(array('comptes', "exercice=$ids[exercice]"), array(

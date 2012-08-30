@@ -29,14 +29,14 @@ function exec_suppr_don()
 		} else {
 			onglets_association('titre_onglet_dons');
 			// info
-			$infos['argent'] = association_prixfr($don['argent']);
-			$infos['colis'] = ($don['valeur'] ? '('.association_prixfr($don['valeur']).')<br />' : '') .$don['colis'];
+			$infos['argent'] = association_formater_prix($don['argent']);
+			$infos['colis'] = ($don['valeur'] ? '('.association_formater_prix($don['valeur']).')<br />' : '') .$don['colis'];
 			$infos['contrepartie'] = $don['contrepartie'];
-			totauxinfos_intro(association_calculer_lien_nomid($don['bienfaiteur'],$don['id_adherent']), 'don', $id_don, $infos );
+			association_totauxinfos_intro(association_calculer_lien_nomid($don['bienfaiteur'],$don['id_adherent']), 'don', $id_don, $infos );
 			// datation et raccourcis
 			icones_association('');
 			debut_cadre_association('dons-24.gif', 'action_sur_les_dons');
-			echo bloc_confirmer_suppression('don', $id_don);
+			echo association_bloc_suppression('don', $id_don);
 			fin_page_association();
 		}
 	}

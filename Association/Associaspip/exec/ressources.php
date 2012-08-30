@@ -33,15 +33,15 @@ function exec_ressources()
 		$liste_effectifs['cv'] = sql_countsel('spip_asso_ressources', "statut IN ('reserve',0)");
 		$liste_libelles['sorti'] = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-poubelle.gif" alt="" /> '. _T('asso:ressources_libelle_statut_sorti') ;
 		$liste_effectifs['sorti'] = sql_countsel('spip_asso_ressources', "statut IN ('sorti','',NULL)");
-		echo totauxinfos_effectifs('ressources', $liste_libelles, $liste_effectifs);
+		echo association_totauxinfos_effectifs('ressources', $liste_libelles, $liste_effectifs);
 /* mdr : cela n'a de sens que si les ressources se pretent toutes sur la meme unite...
 		// STATS sur tous les prets
-		echo totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree',), "DATE_FORMAT(date_sortie, '%Y')=DATE_FORMAT(NOW(), '%Y')");
+		echo association_totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree',), "DATE_FORMAT(date_sortie, '%Y')=DATE_FORMAT(NOW(), '%Y')");
 rdm */
 		// TOTAUX : montants des locations sur l'annee en cours
 		$recettes = sql_getfetsel('SUM(duree*prix_unitaire) AS somme_recettes', 'spip_asso_prets', "DATE_FORMAT('date_sortie', '%Y')=DATE_FORMAT(NOW(), '%Y') ");
 		$depences = sql_getfetsel('SUM(prix_acquisition) AS somme_depences', 'spip_asso_ressources', "DATE_FORMAT('date_acquisition', '%Y')=DATE_FORMAT(NOW(), '%Y') ");
-		echo totauxinfos_montants('ressources', $recettes, $depenses);
+		echo association_totauxinfos_montants('ressources', $recettes, $depenses);
 		// datation et raccourcis
 		icones_association(array(), array(
 			'ressources_nav_ajouter' => array('ajout-24.png', 'edit_ressource'),
@@ -92,14 +92,14 @@ rdm */
 			}
 			echo "<tr class='$css'>";
 			echo '<td class="integer">'.$data['id_ressource'].'</td>';
-			echo '<td class="actions">'. association_bouton('','puce-'.$puce.'.gif', '', '', 'title="'.$data['statut'].'"') .'</td>';
+			echo '<td class="actions">'. association_bouton_faire('','puce-'.$puce.'.gif', '', '', 'title="'.$data['statut'].'"') .'</td>';
 			echo '<td class="text">'.$data['intitule'].'</td>';
 			echo '<td class="text">'.$data['code'].'</td>';
-			echo '<td class="decimal">'.association_prixfr($data['pu']).' / '.association_dureefr(1,$data['ud']).'</td>';
-			echo '<td class="decimal">'.association_prixfr($data['prix_caution']).'</td>';
-			echo '<td class="action">', association_bouton('ressources_nav_supprimer', 'suppr-12.gif', 'suppr_ressource', 'id='.$data['id_ressource']), '</td>';
-			echo '<td class="action">', association_bouton('ressources_nav_editer', 'edit-12.gif', 'edit_ressource', 'id='.$data['id_ressource']), '</td>';
-			echo '<td class="action">', association_bouton('prets_nav_gerer', 'voir-12.png', 'prets', 'id='.$data['id_ressource']), '</td>';
+			echo '<td class="decimal">'.association_formater_prix($data['pu']).' / '.association_formater_duree(1,$data['ud']).'</td>';
+			echo '<td class="decimal">'.association_formater_prix($data['prix_caution']).'</td>';
+			echo '<td class="action">', association_bouton_faire('ressources_nav_supprimer', 'suppr-12.gif', 'suppr_ressource', 'id='.$data['id_ressource']), '</td>';
+			echo '<td class="action">', association_bouton_faire('ressources_nav_editer', 'edit-12.gif', 'edit_ressource', 'id='.$data['id_ressource']), '</td>';
+			echo '<td class="action">', association_bouton_faire('prets_nav_gerer', 'voir-12.png', 'prets', 'id='.$data['id_ressource']), '</td>';
 			echo "</tr>\n";
 		}
 		echo "</tbody>\n</table>\n";

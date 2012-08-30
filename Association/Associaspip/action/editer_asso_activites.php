@@ -18,7 +18,7 @@ function action_editer_asso_activites_dist()
     $securiser_action = charger_fonction('securiser_action', 'inc');
     $id_activite = $securiser_action();
     $erreur = '';
-    $date_paiement = association_recupere_date(_request('date_paiement'));
+    $date_paiement = association_recuperer_date('date_paiement');
     $participant = _request('nom');
     $id_adherent = intval(_request('id_adherent'));
     if (!$participant AND $id_adherent) {
@@ -26,8 +26,8 @@ function action_editer_asso_activites_dist()
 	$participant = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
     }
     $evenement = intval(_request('id_evenement'));
-    $montant = association_recupere_montant(_request('montant'));
-    $inscrits = association_recupere_montant(_request('inscrits'));
+    $montant = association_recuperer_montant('montant');
+    $inscrits = association_recuperer_montant('inscrits');
     $modifs = array(
 	'id_evenement' => $evenement,
 	'nom' => _request('nom'),
@@ -35,7 +35,7 @@ function action_editer_asso_activites_dist()
 	'inscrits' => $inscrits,
 	'montant' => $montant,
 	'date_paiement' => $date_paiement,
-	'date_inscription' => association_recupere_date(_request('date_inscription')),
+	'date_inscription' => association_recuperer_date('date_inscription'),
 	'commentaire' => _request('commentaire'),
     );
     include_spip('base/association');

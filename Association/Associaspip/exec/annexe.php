@@ -36,9 +36,9 @@ function exec_annexe()
 		$exercice_data = sql_asso1ligne('exercice', $exercice);
 		onglets_association('titre_onglet_comptes');
 		// INTRO : rappel de l'exercicee affichee
-		$infos['exercice_entete_debut'] = association_datefr($exercice_data['debut'], 'dtstart');
-		$infos['exercice_entete_fin'] = association_datefr($exercice_data['fin'], 'dtend');
-		echo totauxinfos_intro($exercice_data['intitule'], 'exercice', $exercice, $infos);
+		$infos['exercice_entete_debut'] = association_formater_date($exercice_data['debut'], 'dtstart');
+		$infos['exercice_entete_fin'] = association_formater_date($exercice_data['fin'], 'dtend');
+		echo association_totauxinfos_intro($exercice_data['intitule'], 'exercice', $exercice, $infos);
 		// datation et raccourcis
 		icones_association(array('comptes', "exercice=$exercice"), array(
 			'encaisse_titre_general' => array('finances-24.png', 'encaisse', "exercice=$exercice"),

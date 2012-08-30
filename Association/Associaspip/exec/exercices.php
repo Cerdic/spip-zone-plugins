@@ -26,7 +26,7 @@ function exec_exercices()
 		// notice
 		echo '';
 		// quelques stats sur les categories
-		echo totauxinfos_stats('tous', 'exercices', array('semaines'=>"TIMESTAMPDIFF(week,debut,fin)", 'mois'=>"TIMESTAMPDIFF(month,debut,fin)") );
+		echo association_totauxinfos_stats('tous', 'exercices', array('semaines'=>"TIMESTAMPDIFF(week,debut,fin)", 'mois'=>"TIMESTAMPDIFF(month,debut,fin)") );
 		/* portability issue on "DATEDIFF(week,debut,fin)"
 		 * MS SQL Server : "DATEDIFF(day,debut,fin)" & "DATEDIFF(week,debut,fin)" & "DATEDIFF(month,debut,fin)"
 		 * MySQL : "DATEDIFF(debut,fin)" & "TIMESTAMPDIFF(week,debut,fin)" & "TIMESTAMPDIFF(month,debut,fin)"
@@ -55,8 +55,8 @@ function exec_exercices()
 			echo '<tr>';
 			echo '<td class="integer">'.$data['id_exercice'].'</td>';
 			echo '<td class="text">'.$data['intitule'].'</td>';
-			echo '<td class="date">'. association_datefr($data['debut'],'dtstart') .'</td>';
-			echo '<td class="date">'. association_datefr($data['fin'],'dtend') .'</td>';
+			echo '<td class="date">'. association_formater_date($data['debut'],'dtstart') .'</td>';
+			echo '<td class="date">'. association_formater_date($data['fin'],'dtend') .'</td>';
 			echo '<td class="text">'. propre($data['commentaire']) .'</td>';
 			echo association_bouton_supprimer('exercice', 'id='.$data['id_exercice'], 'td');
 			echo association_bouton_modifier('exercice', 'id='.$data['id_exercice'], 'td');

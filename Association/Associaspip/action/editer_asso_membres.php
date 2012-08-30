@@ -19,18 +19,18 @@ function action_editer_asso_membres()
 	$id_auteur = $securiser_action();
 	$modifs = array(
 		'commentaire' => _request('commentaire'),
-		'validite' => association_recupere_date(_request('validite')),
+		'validite' => association_recuperer_date('validite'),
 		'categorie' => _request('categorie'),
 		'statut_interne' => _request('statut_interne'),
 		'nom_famille' => _request('nom_famille'),
 #		'fonction' => _request('fonction'),
 	);
 	// pour ne pas ecraser les champs quand ils sont desactives
-	if ($GLOBALS['association_metas']['civilite']=='on')
+	if ($GLOBALS['association_metas']['civilite'])
 		$modifs['sexe'] = _request('sexe');
-	if ($GLOBALS['association_metas']['prenom']=='on')
+	if ($GLOBALS['association_metas']['prenom'])
 		$modifs['prenom'] = _request('prenom');
-	if ($GLOBALS['association_metas']['id_asso']=='on')
+	if ($GLOBALS['association_metas']['id_asso'])
 		$modifs['id_asso'] = _request('id_asso');
 	include_spip('base/association');
 	// on passe par modifier_contenu pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere

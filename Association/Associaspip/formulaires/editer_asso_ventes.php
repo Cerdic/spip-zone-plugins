@@ -38,11 +38,11 @@ function formulaires_editer_asso_ventes_charger_dist($id_vente='') {
 		$contexte['id_acheteur']='';
 	/* paufiner la presentation des valeurs  */
 	if ($contexte['prix_vente'])
-		$contexte['prix_vente'] = association_nbrefr($contexte['prix_vente']);
+		$contexte['prix_vente'] = association_formater_nombre($contexte['prix_vente']);
 	if ($contexte['frais_envoi'])
-		$contexte['frais_envoi'] = association_nbrefr($contexte['frais_envoi']);
+		$contexte['frais_envoi'] = association_formater_nombre($contexte['frais_envoi']);
 	if ($contexte['quantite'])
-		$contexte['quantite'] = association_nbrefr($contexte['quantite']);
+		$contexte['quantite'] = association_formater_nombre($contexte['quantite']);
 	// on ajoute les metas de classe_banques et destinations
 	$contexte['classe_banques'] = $GLOBALS['association_metas']['classe_banques'];
 	if ($GLOBALS['association_metas']['destinations']) {
@@ -66,27 +66,27 @@ function formulaires_editer_asso_ventes_charger_dist($id_vente='') {
 function formulaires_editer_asso_ventes_verifier_dist($id_vente) {
 	$erreurs = array();
 	/* on verifie que quantite, prix_vente et frais_envoi ne soient pas negatifs */
-	if ($erreur = association_verifier_montant(_request('prix_vente')) )
+	if ($erreur = association_verifier_montant('prix_vente') )
 		$erreurs['prix_vente'] = $erreur;
-	if ($erreur = association_verifier_montant(_request('frais_envoi')) )
+	if ($erreur = association_verifier_montant('frais_envoi') )
 		$erreurs['frais_envoi'] = $erreur;
-	if ($erreur = association_verifier_montant(_request('quantite')) )
+	if ($erreur = association_verifier_montant('quantite') )
 		$erreurs['quantite'] = $erreur;
 	/* verifier si on a un numero d'adherent qu'il existe dans la base */
-	if ($erreur = association_verifier_membre(_request('id_acheteur')) )
+	if ($erreur = association_verifier_membre('id_acheteur') )
 		$erreurs['id_acheteur'] = $erreur;
 	/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération */
 	if ($GLOBALS['association_metas']['destinations'] && !array_key_exists('prix_vente', $erreurs)) {
 		include_spip('inc/association_comptabilite');
-		if ($err_dest = association_verifier_montant_destinations(_request('prix_vente'))) {
+		if ($err_dest = association_verifier_montant_destinations('prix_vente') )
 			$erreurs['destinations'] = $err_dest;
-		}
 	}
 	/* verifier les dates */
-	if ($erreur = association_verifier_date(_request('date_vente')) )
+	if ($erreur = association_verifier_date('date_vente') )
 		$erreurs['date_vente'] = $erreur;
-	if ($erreur = association_verifier_date(_request('date_envoi')) )
+	if ($erreur = association_verifier_date('date_envoi') )
 		$erreurs['date_envoi'] = $erreur;
+
 	if (count($erreurs)) {
 		$erreurs['message_erreur'] = _T('asso:erreur_titre');
 	}

@@ -76,20 +76,20 @@ function formulaires_editer_asso_activites_verifier_dist($id_activite='')
 	/* on verifie la validite des dates */
 	if ($erreur = association_verifier_date(_request('date_inscription')) )
 		$erreurs['date_inscription'] = $erreur;
-	if ($erreur = association_verifier_date(_request('date_paiement'), true) )
+	if ($erreur = association_verifier_date('date_paiement', true) )
 		$erreurs['date_paiement'] = $erreur;
 	/* on verifie la validite des nombres */
-	if ($erreur = association_verifier_montant(_request('inscrits')) )
+	if ($erreur = association_verifier_montant('inscrits') )
 		$erreurs['inscrits'] = $erreur;
-	if ($erreur = association_verifier_montant(_request('montant')) )
+	if ($erreur = association_verifier_montant('montant') )
 		$erreurs['montant'] = $erreur;
 	/* verifier si on a un numero d'adherent qu'il existe dans la base */
-	if ($erreur = association_verifier_membre(_request('id_adherent')) )
+	if ($erreur = association_verifier_membre('id_adherent') )
 		$erreurs['id_adherent'] = $erreur;
 	/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération */
 	if (($GLOBALS['association_metas']['destinations']) && !array_key_exists('montant', $erreurs)) {
 		include_spip('inc/association_comptabilite');
-		if ($err_dest = association_verifier_montant_destinations(_request('argent'))) {
+		if ($err_dest = association_verifier_montant_destinations('argent') ) {
 			$erreurs['destinations'] = $err_dest;
 		}
 	}

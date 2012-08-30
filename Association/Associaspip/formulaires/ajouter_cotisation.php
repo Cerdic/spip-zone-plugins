@@ -50,22 +50,23 @@ function formulaires_ajouter_cotisation_verifier_dist($id_auteur, $nom_prenom, $
 	$erreurs = array();
 	if ($GLOBALS['association_metas']['comptes']) {
 		// verifier que le montant est bien positif ou nul
-		if ($erreur = association_verifier_montant(_request('montant')) )
+		if ($erreur = association_verifier_montant('montant') )
 			$erreurs['montant'] = $erreur;
 		// verifier validite de la date
-		if ($erreur = association_verifier_date(_request('date')) )
+		if ($erreur = association_verifier_date('date') )
 			$erreurs['date'] = $erreur;
 		// verifier si besoin que le montant des destinations correspond bien au montant de l'opération, sauf si on a deja une erreur de montant
 		if (($GLOBALS['association_metas']['destinations']) && !array_key_exists('montant', $erreurs)) {
 			include_spip('inc/association_comptabilite');
-			if ($err_dest = association_verifier_montant_destinations(_request('montant'))) {
+			if ($err_dest = association_verifier_montant_destinations('montant') ) {
 				$erreurs['destinations'] = $err_dest;
 			}
 		}
 	}
-	if ($erreur = association_verifier_date(_request('validite'))) {
+	if ($erreur = association_verifier_date('validite') ) {
 		$erreurs['validite'] = $erreur;
 	}
+
 	if (count($erreurs)) {
 		$erreurs['message_erreur'] = _T('asso:erreur_titre');
 	}

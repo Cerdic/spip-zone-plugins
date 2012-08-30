@@ -29,7 +29,7 @@ function exec_edit_groupe()
 			$infos['ordre_affichage_groupe'] = $groupe['affichage'];
 			$infos['commentaires'] = $groupe['commentaires'];
 			$infos['destination_entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe")) );
-			echo totauxinfos_intro($groupe['nom'], 'groupe', $id_groupe, $infos );
+			echo association_totauxinfos_intro($groupe['nom'], 'groupe', $id_groupe, $infos );
 		}
 		// datation et raccourcis
 		icones_association(array('groupes'));

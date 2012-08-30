@@ -42,13 +42,13 @@ function exec_activites()
 		$liste_libelles['impair'] = _T('asso:activites_sans_inscrits');
 		$liste_effectifs['impair'] = sql_countsel('spip_asso_activites AS a LEFT JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', "DATE_FORMAT(e.date_debut, '%Y')=$annee",'a.id_evenement', "SUM(a.inscrits)=0");
 		$liste_effectifs['impair'] = sql_countsel('spip_evenements', "DATE_FORMAT(date_debut, '%Y')=$annee")-$liste_effectifs['pair']; // le monde a l'envers... mais ca fonctionne
-		echo totauxinfos_effectifs('activites', $liste_libelles, $liste_effectifs);
+		echo association_totauxinfos_effectifs('activites', $liste_libelles, $liste_effectifs);
 /*
 		// STATS sur toutes les participations
-		echo totauxinfos_stats('participations_par_personne_par_activite', 'activites', array('activite_entete_inscrits'=>'inscrits','entete_montant'=>'montant',), "DATE_FORMAT(date, '%Y')=$annee");
+		echo association_totauxinfos_stats('participations_par_personne_par_activite', 'activites', array('activite_entete_inscrits'=>'inscrits','entete_montant'=>'montant',), "DATE_FORMAT(date, '%Y')=$annee");
 		// TOTAUX : montants des participations durant l'annee en cours
 		$data = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=$annee AND imputation=".sql_quote($GLOBALS['association_metas']['pc_activites']) );
-		echo totauxinfos_montants('activites', $data['somme_recettes'], $data['somme_depenses']);
+		echo association_totauxinfos_montants('activites', $data['somme_recettes'], $data['somme_depenses']);
 */
 		// datation et raccourci vers la gestion des evenements
 		if ( test_plugin_actif('SIMPLECAL') ) { // gestion des evenements avec Simple Calendrier
@@ -120,14 +120,14 @@ function exec_activites()
 			$inscrits = sql_fetsel('SUM(inscrits) AS total', 'spip_asso_activites', 'id_evenement='.$data['id_evenement']);
 			echo '<tr class="'. ($inscrits['total']?'pair':'impair') . (($id_evenement==$data['id_evenement'])?' surligne':'') .'" id="'.$data['id_evenement'].'">';
 			echo '<td class="integer">'.$data['id_evenement'].'</td>';
-			echo '<td class="date">'. association_datefr($data['date_debut'],'dtstart') .'</td>';
+			echo '<td class="date">'. association_formater_date($data['date_debut'],'dtstart') .'</td>';
 			echo '<td class="date">'. substr($data['date_debut'],10,6) .'</td>';
 			echo '<td class="text">'.$data['intitule'].'</td>';
 			echo '<td class="text">'.$data['lieu'].'</td>';
 			echo '<td class="integer">'.$inscrits['total'].'</td>';
-			echo '<td class="actions">'. association_bouton('activite_bouton_modifier_article', 'edit-12.gif', 'articles', 'id_article='.$data['id_article']) . '</td>';
-			echo '<td class="actions">'. association_bouton('activite_bouton_ajouter_inscription', 'creer-12.gif', 'edit_activite', 'id_evenement='.$data['id_evenement']) . '</td>';
-			echo '<td class="actions">'. association_bouton('activite_bouton_voir_liste_inscriptions', 'voir-12.png', 'inscrits_activite', 'id='.$data['id_evenement']) . '</td>';
+			echo '<td class="actions">'. association_bouton_faire('activite_bouton_modifier_article', 'edit-12.gif', 'articles', 'id_article='.$data['id_article']) . '</td>';
+			echo '<td class="actions">'. association_bouton_faire('activite_bouton_ajouter_inscription', 'creer-12.gif', 'edit_activite', 'id_evenement='.$data['id_evenement']) . '</td>';
+			echo '<td class="actions">'. association_bouton_faire('activite_bouton_voir_liste_inscriptions', 'voir-12.png', 'inscrits_activite', 'id='.$data['id_evenement']) . '</td>';
 			echo "</tr>\n";
 		}
 		echo "</tbody>\n</table>\n";

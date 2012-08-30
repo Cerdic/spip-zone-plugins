@@ -61,11 +61,11 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='')
 		$contexte['prix_caution'] ='';
 	/* paufiner la presentation des valeurs  */
 	if ($contexte['montant'])
-		$contexte['montant'] = association_nbrefr($contexte['montant']);
+		$contexte['montant'] = association_formater_nombre($contexte['montant']);
 	if ($contexte['prix_unitaire'])
-		$contexte['prix_unitaire'] = association_nbrefr($contexte['prix_unitaire']);
+		$contexte['prix_unitaire'] = association_formater_nombre($contexte['prix_unitaire']);
 	if ($contexte['duree'])
-		$contexte['duree'] = association_nbrefr($contexte['duree']);
+		$contexte['duree'] = association_formater_nombre($contexte['duree']);
 
 	/* on concatene au _hidden inseres dans $contexte par l'appel a formulaire_editer_objet les id_compte et id_ressource qui seront utilises dans l'action editer_asso_prets */
 	$contexte['_hidden'] .= "<input type='hidden' name='id_compte' value='$id_compte' />";
@@ -96,30 +96,30 @@ function formulaires_editer_asso_prets_verifier_dist($id_pret)
 	$erreurs = array();
 	/* on verifie que montant et duree ne soient pas negatifs */
 	set_request('montant', _request('prix_unitaire')*_request('duree') );
-	if ($erreur = association_verifier_montant(_request('montant')) )
+	if ($erreur = association_verifier_montant('montant') )
 		$erreurs['montant'] = $erreur;
-	if ($erreur = association_verifier_montant(_request('prix_unitaire')) )
+	if ($erreur = association_verifier_montant('prix_unitaire') )
 		$erreurs['prix_unitaire'] = $erreur;
-	if ($erreur = association_verifier_montant(_request('duree')) )
+	if ($erreur = association_verifier_montant('duree') )
 		$erreurs['duree'] = $erreur;
 	/* verifier si on a un numero d'adherent qu'il existe dans la base */
-	if ($erreur = association_verifier_membre(_request('id_emprunteur')) )
+	if ($erreur = association_verifier_membre('id_emprunteur') )
 		$erreurs['id_emprunteur'] = $erreur;
 	/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération */
 	if (($GLOBALS['association_metas']['destinations']) && !array_key_exists('montant', $erreurs)) {
 		include_spip('inc/association_comptabilite');
-		if ($err_dest = association_verifier_montant_destinations(_request('montant'))) {
+		if ($err_dest = association_verifier_montant_destinations('montant') ) {
 			$erreurs['destinations'] = $err_dest;
 		}
 	}
 	/* verifier les dates */
-	if ($erreur = association_verifier_date(_request('date_sortie')) )
+	if ($erreur = association_verifier_date('date_sortie') )
 		$erreurs['date_sortie'] = $erreur;
-	if ($erreur = association_verifier_date(_request('date_retour'), true) )
+	if ($erreur = association_verifier_date('date_retour', true) )
 		$erreurs['date_retour'] = $erreur;
-	if ($erreur = association_verifier_date(_request('date_caution1'), true) )
+	if ($erreur = association_verifier_date('date_caution1', true) )
 		$erreurs['date_caution1'] = $erreur;
-	if ($erreur = association_verifier_date(_request('date_caution0'), true) )
+	if ($erreur = association_verifier_date('date_caution0', true) )
 		$erreurs['date_caution0'] = $erreur;
 
 	if (count($erreurs)) {

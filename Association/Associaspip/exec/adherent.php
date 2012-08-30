@@ -44,7 +44,7 @@ function exec_adherent(){
 		if ($full) {
 			$infos['adherent_libelle_categorie'] = $categorie;
 		}
-		$infos['adherent_libelle_validite'] = association_datefr($data['validite']);
+		$infos['adherent_libelle_validite'] = association_formater_date($data['validite']);
 		if ($GLOBALS['association_metas']['id_asso']) {
 			$infos['adherent_libelle_reference_interne'] = ($data['id_asso']?_T('asso:adherent_libelle_reference_interne').'<br/>'.$data['id_asso']:_T('asso:pas_de_reference_interne_attribuee')) ;
 		}
@@ -54,7 +54,7 @@ function exec_adherent(){
 			$infos['emails'] = $emails[$id_auteur];
 		if ($telephones[$id_auteur])
 			$infos['numeros'] =  $telephones[$id_auteur];
-		echo '<div class="vcard">'. totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos, 'asso', 'asso_membre') .'</div>';
+		echo '<div class="vcard">'. association_totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos, 'asso', 'asso_membre') .'</div>';
 		// datation et raccourcis
 		if ($full)
 			$res['adherent_label_modifier_membre'] = array('edit-24.gif', 'edit_adherent', "id=$id_auteur");
@@ -128,12 +128,12 @@ function exec_adherent(){
 				$sql = sql_select('*', 'spip_evenements', "id_evenement=$id_evenement" );
 				while ($evenement = sql_fetch($sql)) {
 					$date = substr($evenement['date_debut'],0,10);
-					echo '<td class="date">'.association_datefr($date).'</td>';
+					echo '<td class="date">'.association_formater_date($date).'</td>';
 					echo '<td class="text">'.$evenement['titre'].'</td>';
 				}
 				echo '<td class="integer">'.$data['inscrits'].'</td>';
-				echo '<td class="decimal">'. association_prixfr($data['montant']) .'</td>';
-				echo '<td class="action">', association_bouton('adherent_bouton_maj_inscription', 'edit-12.gif', 'edit_activite', 'id='.$data['id_activite']), '</td>';
+				echo '<td class="decimal">'. association_formater_prix($data['montant']) .'</td>';
+				echo '<td class="action">', association_bouton_faire('adherent_bouton_maj_inscription', 'edit-12.gif', 'edit_activite', 'id='.$data['id_activite']), '</td>';
 				echo "</tr>\n";
 			}
 			echo "</tbody>\n</table>\n";
@@ -154,11 +154,11 @@ function exec_adherent(){
 			while ($data = sql_fetch($query)) {
 				echo '<tr>';
 				echo '<td class="integer">'.$data['id_vente'].'</td>';
-				echo '<td class="date">'.association_datefr($data['date_vente']).'</td>';
+				echo '<td class="date">'.association_formater_date($data['date_vente']).'</td>';
 				echo '<td class="text">'.$data['article'].'</td>';
 				echo '<td class="decimal">'.$data['quantite'].'</td>';
-				echo '<td class="date">'.association_datefr($data['date_envoi']).'</td>';
-				echo '<td class="action">'. association_bouton('adherent_bouton_maj_vente', 'edit-12.gif', 'edit_vente','id='.$data['id_vente']) .'</td>';
+				echo '<td class="date">'.association_formater_date($data['date_envoi']).'</td>';
+				echo '<td class="action">'. association_bouton_faire('adherent_bouton_maj_vente', 'edit-12.gif', 'edit_vente','id='.$data['id_vente']) .'</td>';
 				echo "</tr>\n";
 			}
 			echo "</tbody>\n</table>\n";
@@ -219,15 +219,15 @@ function exec_adherent(){
 				echo '<img src="' . _DIR_PLUGIN_ASSOCIATION_ICONES . 'puce-'.$puce. '.gif" /></td>';
 				echo '<td class="integer">'.$data['id_pret'].'</td>';
 				echo '<td class="text">'.$data['intitule'].'</td>';
-				echo '<td class="date">'.association_datefr($data['date_sortie'],'dtstart').'</td>';
+				echo '<td class="date">'.association_formater_date($data['date_sortie'],'dtstart').'</td>';
 				echo '<td class="date">';
 				if($data['date_retour']<=$data['date_sortie']){
 					echo '&nbsp;';
 				} else {
-					echo association_datefr($data['date_retour'], 'dtend');
+					echo association_formater_date($data['date_retour'], 'dtend');
 				}
 				echo '</td>';
-				echo '<td class="action">' . association_bouton('adherent_bouton_maj_operation', 'edit-12.gif', 'edit_pret', 'agir=modifie&id_pret='.$data['id_pret']) . '</td>';
+				echo '<td class="action">' . association_bouton_faire('adherent_bouton_maj_operation', 'edit-12.gif', 'edit_pret', 'agir=modifie&id_pret='.$data['id_pret']) . '</td>';
 				echo "</tr>\n";
 			}
 			echo "</tbody>\n</table>\n";
@@ -248,10 +248,10 @@ function voir_adherent_paiements($data, $lien, $type)
 		$data[$k] = "<tr id='$type$id'>"
 		. '<td class="integer">'.$id.'</td>'
 		. '<td class="text">'.$row['journal'].'</td>'
-		. '<td class="date">'. association_datefr($row['date']). '</td>'
+		. '<td class="date">'. association_formater_date($row['date']). '</td>'
 		. '<td class="text">'. propre($j) .'</td>'
-		. '<td class="decimal">'. association_prixfr($row['montant']) .'</td>'
-		. '<td class="action">'. association_bouton('adherent_label_voir_operation', 'voir-12.png', 'comptes','id_compte='.$id_compte) .'</td>' // pas plutot edit_compte ? (a propos, il faudrait carrement un voir_compte pour ne pas risquer de modifier ainsi une operation marquee "vu" et donc archivee/verouillee)
+		. '<td class="decimal">'. association_formater_prix($row['montant']) .'</td>'
+		. '<td class="action">'. association_bouton_faire('adherent_label_voir_operation', 'voir-12.png', 'comptes','id_compte='.$id_compte) .'</td>' // pas plutot edit_compte ? (a propos, il faudrait carrement un voir_compte pour ne pas risquer de modifier ainsi une operation marquee "vu" et donc archivee/verouillee)
 		. '</tr>';
 	}
 	return $data;

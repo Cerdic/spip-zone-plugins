@@ -28,7 +28,7 @@ function exec_action_adherents()
 		if ($action_adherents && $id_auteurs && is_array($id_auteurs)) {
 			onglets_association('titre_onglet_membres');
 			// info
-			echo totauxinfos_intro(_T('asso:confirmation'));
+			echo association_totauxinfos_intro(_T('asso:confirmation'));
 			// datation et raccourcis
 			icones_association(array('adherents'));
 			if ($action_adherents=='desactive') {

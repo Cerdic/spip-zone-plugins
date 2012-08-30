@@ -19,17 +19,17 @@ function action_editer_asso_ressources()
     $id_ressource=$securiser_action();
     $erreur = '';
     $code= _request('code');
-    $date_achat = association_recupere_date(_request('date_acquisition'));
-    $prix_achat = association_recupere_montant(_request('prix_acquisition'));
+    $date_achat = association_recuperer_date('date_acquisition');
+    $prix_achat = association_recuperer_montant('prix_acquisition');
     $quantite = floatval(_request('quantite'));
     $statut = $quantite ? (_request('suspendu')?"-$quantite":$quantite) : _request('statut');
     $champs = array(
 	'date_acquisition' => $date_achat,
 	'code' => $code,
 	'intitule' => _request('intitule'),
-	'prix_caution' => association_recupere_montant(_request('prix_caution')),
-	'pu' => association_recupere_montant(_request('pu')),
-	'ud' => _request('pu'),
+	'prix_caution' => association_recuperer_montant('prix_caution'),
+	'pu' => association_recuperer_montant('pu'),
+	'ud' => _request('ud'),
 	'statut' => $statut,
 	'commentaire' => _request('commentaire'),
     );

@@ -49,13 +49,13 @@ function formulaires_editer_asso_ressources_charger_dist($id_ressource='')
 
 	/* paufiner la presentation des valeurs  */
 	if ($contexte['pu'])
-		$contexte['pu'] = association_nbrefr($contexte['pu']);
+		$contexte['pu'] = association_formater_nombre($contexte['pu']);
 	if ($contexte['prix_acquisition'])
-		$contexte['prix_acquisition'] = association_nbrefr($contexte['prix_acquisition']);
+		$contexte['prix_acquisition'] = association_formater_nombre($contexte['prix_acquisition']);
 	if ($contexte['prix_caution'])
-		$contexte['prix_caution'] = association_nbrefr($contexte['prix_caution']);
+		$contexte['prix_caution'] = association_formater_nombre($contexte['prix_caution']);
 	if (is_numeric($contexte['statut']))
-		$contexte['statut'] = association_nbrefr($contexte['statut']);
+		$contexte['statut'] = association_formater_nombre($contexte['statut']);
 
 	// on ajoute les metas de destinations
 	if ($GLOBALS['association_metas']['destinations']) {
@@ -80,23 +80,23 @@ function formulaires_editer_asso_ressources_verifier_dist($id_ressource='')
 {
 	$erreurs = array();
 	/* on verifie que prix de location et d'achat ne soit pas negatifs */
-	if ($erreur = association_verifier_montant(_request('pu')) )
+	if ($erreur = association_verifier_montant('pu') )
 		$erreurs['pu'] = $erreur;
-	if ($erreur = association_verifier_montant(_request('prix_caution')) )
+	if ($erreur = association_verifier_montant('prix_caution') )
 		$erreurs['prix_caution'] = $erreur;
-	if ($erreur = association_verifier_montant(_request('prix_acquisition')) )
+	if ($erreur = association_verifier_montant('prix_acquisition') )
 		$erreurs['prix_acquisition'] = $erreur;
-	if ($erreur = association_verifier_montant(_request('quantite')) )
+	if ($erreur = association_verifier_montant('quantite') )
 		$erreurs['statut'] = $erreur;
 	/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération */
 	if (($GLOBALS['association_metas']['destinations']) && !array_key_exists('prix_acquisition', $erreurs)) {
 		include_spip('inc/association_comptabilite');
-		if ($err_dest = association_verifier_montant_destinations(_request('prix_acquisition'))) {
+		if ($err_dest = association_verifier_montant_destinations('prix_acquisition') ) {
 			$erreurs['destinations'] = $err_dest;
 		}
 	}
 	/* verifier la date */
-	if ($erreur = association_verifier_date(_request('date_acquisition')) )
+	if ($erreur = association_verifier_date('date_acquisition') )
 		$erreurs['date_acquisition'] = $erreur;
 
 	if (count($erreurs)) {

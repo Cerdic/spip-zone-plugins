@@ -25,7 +25,7 @@ function exec_categories()
 		// notice
 		echo '';
 		// quelques stats sur les categories
-		echo totauxinfos_stats('tous', 'categories', array('entete_duree'=>'duree', 'entete_montant'=>'cotisation') );
+		echo association_totauxinfos_stats('tous', 'categories', array('entete_duree'=>'duree', 'entete_montant'=>'cotisation') );
 		// datation et raccourcis
 		icones_association(array('association'), array(
 			'ajouter_une_categorie_de_cotisation' => array('calculatrice.gif', 'edit_categorie'),
@@ -47,8 +47,8 @@ function exec_categories()
 			echo '<td class="integer">'.$data['id_categorie'].'</td>';
 			echo '<td class="text">'.$data['valeur'].'</td>';
 			echo '<td class="text">'.$data['libelle'].'</td>';
-			echo '<td class="decimal">'. association_dureefr($data['duree'],'m') .'</td>';
-			echo '<td class="decimal">'. association_prixfr($data['cotisation']) .'</td>';
+			echo '<td class="decimal">'. association_formater_duree($data['duree'],'m') .'</td>';
+			echo '<td class="decimal">'. association_formater_prix($data['cotisation']) .'</td>';
 			echo '<td class="text">'. propre($data['commentaires']) .'</td>';
 			echo association_bouton_supprimer('categorie', $data['id_categorie'], 'td');
 			echo association_bouton_modifier('categorie', $data['id_categorie'], 'td');

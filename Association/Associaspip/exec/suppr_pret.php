@@ -58,11 +58,11 @@ function exec_suppr_pret()
 		}
 		$infos['statut'] =  '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-'.$puce.'.gif" title="'.$data['statut'].'" alt="" /> '. _T("asso:ressource_statut_$type");
 		$infos['nombre_prets'] = sql_countsel('spip_asso_prets', "id_ressource=$id_ressource");
-		echo totauxinfos_intro($data['intitule'], 'ressource', $id_ressource, $infos );
+		echo association_totauxinfos_intro($data['intitule'], 'ressource', $id_ressource, $infos );
 		// datation et raccourcis
 		icones_association('');
 		debut_cadre_association('pret-24.gif', 'prets_titre_suppression_prets');
-		echo bloc_confirmer_suppression('pret', "$id_pret-$id_ressource");
+		echo association_bloc_suppression('pret', "$id_pret-$id_ressource");
 		fin_page_association();
 	}
 }

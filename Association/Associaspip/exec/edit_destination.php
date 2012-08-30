@@ -25,7 +25,7 @@ function exec_edit_destination()
 		onglets_association('plan_comptable');
 		// INTRO :
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_destination_op',"id_destination=$id_destination")) );
-		echo totauxinfos_intro(sql_getfetsel('intitule','spip_asso_destination',"id_destination=$id_destination"), 'destination', $id_destination, $infos );
+		echo association_totauxinfos_intro(sql_getfetsel('intitule','spip_asso_destination',"id_destination=$id_destination"), 'destination', $id_destination, $infos );
 		// datation et raccourcis
 		icones_association('');
 		debut_cadre_association('euro-39.gif', 'destination_nav_ajouter');

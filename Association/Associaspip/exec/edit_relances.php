@@ -80,7 +80,7 @@ function relances_while($statut_interne, $id_groupe=0)
 		$res .= '<tr class="'.$GLOBALS['association_styles_des_statuts'][$data['statut_interne']].'" id="'.$data['id_auteur'].'">'
 		.'<td class="integer"><label for="mbr'.$data['id_auteur'].'">'.$data['id_auteur'].'</label></td>'
 		.'<td class="text"><label for="mbr'.$data['id_auteur'].'">'. association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']) .'</label></td>'
-		.'<td class="date"><label for="mbr'.$data['id_auteur'].'">'. association_datefr($data['validite']) .'</label></td>'
+		.'<td class="date"><label for="mbr'.$data['id_auteur'].'">'. association_formater_date($data['validite']) .'</label></td>'
 		.'<td class="action"><input name="id[]" type="checkbox" id="mbr'.$data['id_auteur'].'" value="'.$data['id_auteur'].'" checked="checked" /><input name="statut['.$data['id_auteur'].']" type="hidden" value="'.$data['statut_interne'].'" /></td>'
 		."</tr>\n";
 	}

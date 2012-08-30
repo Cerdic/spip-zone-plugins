@@ -100,8 +100,8 @@ function exec_plan_comptable()
 			}
 			echo '<td class="text">'.$data['code'].'</td>';
 			echo '<td class="text">'.$data['intitule'].'</td>';
-			echo '<td class="decimal">'. association_prixfr($data['solde_anterieur']) .'</td>';
-			echo '<td class="date">'. association_datefr($data['date_anterieure'], 'dtstart') .'</td>';
+			echo '<td class="decimal">'. association_formater_prix($data['solde_anterieur']) .'</td>';
+			echo '<td class="date">'. association_formater_date($data['date_anterieure'], 'dtstart') .'</td>';
 			echo association_bouton_supprimer('plan', $data['id_plan'], 'td');
 			echo association_bouton_modifier('plan', $data['id_plan'], 'td');
 			echo "</tr>\n";

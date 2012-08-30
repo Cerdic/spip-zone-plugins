@@ -23,7 +23,7 @@ function formulaires_editer_asso_categories_charger_dist($id_categorie='')
 
 	/* paufiner la presentation des montants  */
 	if ($contexte['cotisation'])
-		$contexte['cotisation'] = association_nbrefr($contexte['cotisation']);
+		$contexte['cotisation'] = association_formater_nombre($contexte['cotisation']);
 
 	/* renvoyer le contexte pour (p)re-remplir le formulaire  */
 	return $contexte;
@@ -34,9 +34,9 @@ function formulaires_editer_asso_categories_verifier_dist($id_categorie)
 	$erreurs = array();
 
 	/* on verifie que cotisation et duree ne sont pas negatifs */
-	if ($erreur = association_verifier_montant(_request('cotisation')) )
+	if ($erreur = association_verifier_montant('cotisation') )
 		$erreurs['cotisation'] = $erreur;
-	if ($erreur = association_verifier_montant(_request('duree')) )
+	if ($erreur = association_verifier_montant('duree') )
 		$erreurs['duree'] = $erreur;
 
 	if (count($erreurs)) {

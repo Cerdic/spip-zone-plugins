@@ -50,7 +50,7 @@ function exec_edit_adherent()
 				$infos['emails'] = $emails[$id_auteur];
 			if ($telephones[$id_auteur])
 				$infos['numeros'] =  $telephones[$id_auteur];
-			echo '<div class="vcard">'. totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos, 'coordonnees') .'</div>';
+			echo '<div class="vcard">'. association_totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos, 'coordonnees') .'</div>';
 			// datation et raccourcis
 			icones_association('');
 			debut_cadre_association('annonce.gif', 'adherent_titre_modifier_membre');

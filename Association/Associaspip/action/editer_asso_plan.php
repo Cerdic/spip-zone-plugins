@@ -21,12 +21,12 @@ function action_editer_asso_plan()
 	$reference = _request('reference');
 	include_spip('base/association');
 	$champs = array(
-		'date_anterieure' => association_recupere_date(_request('date_anterieure')),
+		'date_anterieure' => association_recuperer_date('date_anterieure'),
 		'active' => (_request('active')?true:false), // active est un booleen dans la base, et la request recupere l'etat de la checkbox
 		'code' => $code,
 		'intitule' => _request('intitule'),
 		'classe' => _request('classe'),
-		'solde_anterieur' => association_recupere_montant(_request('solde_anterieur')),
+		'solde_anterieur' => association_recuperer_montant('solde_anterieur'),
 		'commentaire' => _request('commentaire'),
 		'type_op' => _request('type_op'),
 	);

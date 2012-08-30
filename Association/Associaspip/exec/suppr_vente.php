@@ -24,11 +24,11 @@ function exec_suppr_vente()
 		$id_vente = intval(_request('id'));
 		onglets_association('titre_onglet_ventes');
 		// info
-		echo totauxinfos_intro(sql_getfetsel("CONCAT(article,' -- ',acheteur) AS intitule", 'spip_asso_ventes', "id_vente=$id_vente" ), 'vente', $id_vente, $infos );
+		echo association_totauxinfos_intro(sql_getfetsel("CONCAT(article,' -- ',acheteur) AS intitule", 'spip_asso_ventes', "id_vente=$id_vente" ), 'vente', $id_vente, $infos );
 		// datation et raccourcis
 		icones_association('');
 		debut_cadre_association('ventes.gif', 'action_sur_les_ventes_associatives');
-		echo bloc_confirmer_suppression('vente', $id_vente);
+		echo association_bloc_suppression('vente', $id_vente);
 		fin_page_association();
 	}
 }

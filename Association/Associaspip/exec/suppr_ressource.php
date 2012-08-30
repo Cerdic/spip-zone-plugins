@@ -26,7 +26,7 @@ function exec_suppr_ressource()
 		// INTRO : resume ressource
 		$data = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
 		$infos['ressources_libelle_code'] = $data['code'];
-		$infos['ressources_libelle_caution'] = association_prixfr($data['prix_caution']);
+		$infos['ressources_libelle_caution'] = association_formater_prix($data['prix_caution']);
 		if (is_numeric($data['statut'])) { // utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires)
 			if ($data['statut']>0) {
 				$puce = 'verte';
@@ -59,13 +59,13 @@ function exec_suppr_ressource()
 		}
 		$infos['statut'] =  '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-'.$puce.'.gif" title="'.$data['statut'].'" alt="" /> '. _T("asso:ressources_statut_$type");
 		$infos['ressource_pretee'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_prets', "id_ressource=$id_ressource"), ));
-		echo totauxinfos_intro($data['intitule'], 'ressource', $id_ressource, $infos ); // indice de popularite
+		echo association_totauxinfos_intro($data['intitule'], 'ressource', $id_ressource, $infos ); // indice de popularite
 		// STATS sur la duree et le montant des emprunts
-		echo totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree','entete_montant'=>'duree*prix_unitaire',), "id_ressource=$id_ressource");
+		echo association_totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree','entete_montant'=>'duree*prix_unitaire',), "id_ressource=$id_ressource");
 		// datation et raccourcis
 		icones_association('');
 		debut_cadre_association('pret-24.gif', 'ressources_titre_suppression_ressources');
-		echo bloc_confirmer_suppression('ressource', $id_ressource );
+		echo association_bloc_suppression('ressource', $id_ressource );
 		fin_page_association();
 	}
 }

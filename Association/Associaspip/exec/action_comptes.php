@@ -52,7 +52,7 @@ function action_comptes_ligne($where)
 	$query = sql_select('*', 'spip_asso_comptes', $where);
 	while($data = sql_fetch($query)) {
 		$res .= "<tr>"
-		. '<td><strong>'.association_datefr($data['date']).'</strong></td>'
+		. '<td><strong>'. association_formater_date($data['date']).'</strong></td>'
 		. '<td><strong>'.propre($data['justification']).'</strong></td>'
 		. "<td><input type=checkbox name='definitif[]' value='".$data['id_compte']."' checked='checked' /></td></tr>\n";
 	}

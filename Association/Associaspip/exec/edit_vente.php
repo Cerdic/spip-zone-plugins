@@ -24,7 +24,7 @@ function exec_edit_vente()
 		$id_vente = intval(_request('id'));
 		onglets_association('titre_onglet_ventes');
 		// info
-		echo totauxinfos_intro('', 'vente', $id_vente);
+		echo association_totauxinfos_intro('', 'vente', $id_vente);
 		// datation et raccourcis
 		icones_association('');
 		debut_cadre_association('ventes.gif', 'ressources_titre_mise_a_jour');

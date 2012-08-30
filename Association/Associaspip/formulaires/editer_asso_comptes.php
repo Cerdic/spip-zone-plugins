@@ -46,8 +46,8 @@ function formulaires_editer_asso_comptes_charger_dist($id_compte='new') {
 	$contexte['defaut_dest'] = ''; /* ces variables sont recuperees par la balise dynamique directement dans l'environnement */
     }
     /* meilleure presentation des montants */
-    $contexte['depense'] = association_nbrefr($contexte['depense']);
-    $contexte['recette'] = association_nbrefr($contexte['recette']);
+    $contexte['depense'] = association_formater_nombre($contexte['depense']);
+    $contexte['recette'] = association_formater_nombre($contexte['recette']);
     /* Recuperation du plan comptable sous forme de tableaux javascript correspondants aux classes utilisees.
      * Ces tableaux sont ensuite utilises pour initialiser le selecteur d'imputation (javascript)
      */
@@ -58,8 +58,8 @@ function formulaires_editer_asso_comptes_charger_dist($id_compte='new') {
 function formulaires_editer_asso_comptes_verifier_dist($id_compte) {
     $erreurs = array();
     /* on verifie que l'on a bien soit depense soit recette different de 0 et qu'aucun n'est negatif */
-    $recette = association_recupere_montant(_request('recette'));
-    $depense = association_recupere_montant(_request('depense'));
+    $recette = association_recuperer_montant('recette');
+    $depense = association_recuperer_montant('depense');
     if (($recette<0) || ($depense<0) || ($recette>0 && $depense>0) || ($recette==0 && $depense==0))	{
 	$erreurs['montant'] = _T('asso:erreur_recette_depense');
     }
@@ -74,12 +74,12 @@ function formulaires_editer_asso_comptes_verifier_dist($id_compte) {
     /* verifier si besoin que le montant des destinations correspond bien au montant de l'opération, sauf si on a deja une erreur de montant */
     if (($GLOBALS['association_metas']['destinations']) && !array_key_exists('montant', $erreurs)) {
 	include_spip('inc/association_comptabilite');
-	if ($err_dest = association_verifier_montant_destinations($recette+$depense)) {
+	if ($err_dest = association_verifier_montant_destinations($recette+$depense, false) ) {
 	    $erreurs['destinations'] = $err_dest;
 	}
     }
     /* verifier la validite de la date */
-    if ($erreur = association_verifier_date(_request('date')) )
+    if ($erreur = association_verifier_date('date') )
 	$erreurs['date'] = $erreur;
     if (count($erreurs)) {
 	$erreurs['message_erreur'] = _T('asso:erreur_titre');

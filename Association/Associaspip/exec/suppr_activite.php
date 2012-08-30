@@ -29,14 +29,14 @@ function exec_suppr_activite()
 			onglets_association('titre_onglet_activite');
 			// info
 			$infos['evenement'] = sql_getfetsel('titre', 'spip_evenements', 'id_evenement='.intval($activite['id_evenement']) );
-			$infos['date'] = association_datefr($activite['date_inscription']);
-			$infos['activite_entete_inscrits'] = association_prixfr($activite['inscrits']);
-			$infos['entete_montant'] = association_prixfr($activite['montant']);
-			totauxinfos_intro(association_calculer_lien_nomid($activite['nom'],$activite['id_adherent']), 'activite', $id_activite, $infos );
+			$infos['date'] = association_formater_date($activite['date_inscription']);
+			$infos['activite_entete_inscrits'] = association_formater_prix($activite['inscrits']);
+			$infos['entete_montant'] = association_formater_prix($activite['montant']);
+			association_totauxinfos_intro(association_calculer_lien_nomid($activite['nom'],$activite['id_adherent']), 'activite', $id_activite, $infos );
 			// datation et raccourcis
 			icones_association('');
 			debut_cadre_association('activites.gif', 'activite_titre_inscriptions_activites');
-			echo bloc_confirmer_suppression('activite', $id_activite);
+			echo association_bloc_suppression('activite', $id_activite);
 			fin_page_association();
 		}
 	}

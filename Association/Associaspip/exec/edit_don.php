@@ -25,7 +25,7 @@ function exec_edit_don()
 		$id_don = intval(_request('id'));
 		onglets_association('titre_onglet_dons');
 		// INTRO : resume don
-		echo totauxinfos_intro('', 'don', $id_don, $infos );
+		echo association_totauxinfos_intro('', 'don', $id_don, $infos );
 		// datation et raccourcis
 		icones_association('');
 		debut_cadre_association('dons-24.gif', 'dons_titre_mise_a_jour');

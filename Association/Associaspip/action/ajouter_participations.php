@@ -22,7 +22,7 @@ function action_ajouter_participations() {
 	$membres = _request('membres');
 	$non_membres = _request('non_membres');
 	$inscrits = intval(_request('inscrits'));
-	$montant = association_recupere_montant(_request('montant'));
+	$montant = association_recuperer_montant('montant');
 	$date_paiement = _request('date_paiement');
 	$journal = _request('journal');
 	$statut = _request('statut');

@@ -22,8 +22,8 @@ function action_editer_asso_categories_dist()
     $champs = array(
 	'libelle' => _request('libelle'),
 	'valeur' => _request('valeur'),
-	'duree' => association_recupere_montant(_request('duree')),
-	'cotisation' => association_recupere_montant(_request('cotisation')),
+	'duree' => association_recuperer_montant('duree'),
+	'cotisation' => association_recuperer_montant('cotisation'),
 	'commentaires' => _request('commentaire'),
     );
     include_spip('base/association');

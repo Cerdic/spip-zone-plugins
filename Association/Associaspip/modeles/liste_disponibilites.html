@@ -30,13 +30,13 @@
 		]
 			<td class="text">#INTITULE</td>
 		[(#ENV{acquisition}|=={oui}|oui)
-			<td class="date"> [(#DATE_ACQUISITION|appliquer_filtre{association_datefr})]</td>
+			<td class="date"> [(#DATE_ACQUISITION|appliquer_filtre{association_formater_date})]</td>
 		]
 		[(#ENV{remarques}|=={oui}|oui)
 			<td class="text">#COMMENTAIRE</td>
 		]
-			<td class="decimal">[(#PU|appliquer_filtre{association_prixfr})] [/ (#VAL{1}|appliquer_filtre{association_dureefr{#UD}})]</td>
-			<td class="decimal">[(#PRIX_CAUTION|appliquer_filtre{association_prixfr})]</td>
+			<td class="decimal">[(#PU|appliquer_filtre{association_formater_prix})] [/ (#VAL{1}|appliquer_filtre{association_formater_duree{#UD}})]</td>
+			<td class="decimal">[(#PRIX_CAUTION|appliquer_filtre{association_formater_prix})]</td>
 			<td>
 				[(#STATUT|=={ok}|ou{#STATUT|>{0}}|oui)[<img src="(#CHEMIN{plugins/auto/Associaspip/img_pack/puce-verte.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_ok:>]
 				[(#STATUT|=={reserve}|ou{#STATUT|=={0}}|oui)[<img src="(#CHEMIN{plugins/auto/Associaspip/img_pack/puce-rouge.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_reserve:>.]
@@ -47,7 +47,7 @@
 		<BOUCLE_dernier_retour(ASSO_PRETS){id_ressource}{!par date_retour}{0,1}>
 		[(#ENV{retour}|=={oui}|oui)
 			<td class="date">
-				[(#DATE_RETOUR|appliquer_filtre{association_datefr})]
+				[(#DATE_RETOUR|appliquer_filtre{association_formater_date})]
 			</td>
 		]
 		</BOUCLE_dernier_retour>

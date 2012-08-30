@@ -19,10 +19,10 @@ function action_editer_asso_comptes()
 	$id_compte = $securiser_action();
 	$erreur = '';
 	include_spip('inc/association_comptabilite');
-	$date = association_recupere_date(_request('date'));
+	$date = association_recuperer_date('date');
 	$imputation = _request('imputation');
-	$recette = association_recupere_montant(_request('recette'));
-	$depense = association_recupere_montant(_request('depense'));
+	$recette = association_recuperer_montant('recette');
+	$depense = association_recuperer_montant('depense');
 	$justification = _request('justification');
 	$journal = _request('journal');
 	$type_operation = _request('type_operation');

@@ -52,7 +52,7 @@ function exec_comptes()
 		$where .= " AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]'";
 		onglets_association('titre_onglet_comptes');
 		// INTRO : rappel de l'exercicee affichee
-		echo totauxinfos_intro($exercice_data['intitule'],'exercice',$id_exercice);
+		echo association_totauxinfos_intro($exercice_data['intitule'],'exercice',$id_exercice);
 		$journaux = sql_allfetsel('journal, intitule', 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON journal=code', "date>='$exercice_data[debut]' AND date<='$exercice_data[fin]'", "intitule DESC"); // on se permet sql_allfetsel car il s'agit d'une association (mois d'une demie dizaine de comptes) et non d'un etablissement financier (des milliers de comptes clients)
 		// TOTAUX : operations de l'exercice par compte financier (indique rapidement les comptes financiers les plus utilises ou les modes de paiement preferes...)
 		foreach (array('recette','depense') as $direction) {
@@ -64,7 +64,7 @@ function exec_comptes()
 				}
 			}
 			if (count($direction_libelles))
-				echo totauxinfos_effectifs(_T('asso:compte_entete_financier') .': '. _T('asso:'.$direction.'s'), $direction_libelles, $direction_effectifs); // ToDo: tri par ordre decroissant (sorte de "top")
+				echo association_totauxinfos_effectifs(_T('asso:compte_entete_financier') .': '. _T('asso:'.$direction.'s'), $direction_libelles, $direction_effectifs); // ToDo: tri par ordre decroissant (sorte de "top")
 		}
 		// TOTAUX : operations de l'exercice par type d'operation
 		$classes = array('pair'=>'produits', 'impair'=>'charges', 'cv'=>'contributions_volontaires', 'vi'=>'banques');
@@ -73,12 +73,12 @@ function exec_comptes()
 			$liste_effectifs[$classe_css] = sql_countsel('spip_asso_comptes', "LEFT(imputation,1)='".$GLOBALS['association_metas']["classe_$classe_cpt"]."' AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' ");
 			$liste_libelles[$classe_css] = 'compte_liste_nombre_'.$classe_css;
 		}
-		echo totauxinfos_effectifs('compte_entete_imputation', $liste_libelles, $liste_effectifs);
+		echo association_totauxinfos_effectifs('compte_entete_imputation', $liste_libelles, $liste_effectifs);
 		// STATS : montants de l'exercice pour l'imputation choisie (toutes si aucune)
-		echo totauxinfos_stats('mouvements', 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), $where, 2);
+		echo association_totauxinfos_stats('mouvements', 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), $where, 2);
 		// TOTAUX : montants de l'exercice pour l'imputation choisie (toutes si aucune)
 		$data = sql_fetsel( 'SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses, code, classe',  'spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code', "$where AND classe<>".sql_quote($GLOBALS['association_metas']['classe_banques']). " AND classe<>".sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']), 'code'); // une contribution benevole ne doit pas etre comptabilisee en charge/produit
-		echo totauxinfos_montants(($imputation=='%' ? _T('asso:tous') : $imputation), $data['somme_recettes'], $data['somme_depenses']);
+		echo association_totauxinfos_montants(($imputation=='%' ? _T('asso:tous') : $imputation), $data['somme_recettes'], $data['somme_depenses']);
 		// datation et raccourcis
 		icones_association(array(), array(
 			'encaisse_titre_general' => array('finances-24.png', 'encaisse', "exercice=$id_exercice"),
@@ -197,10 +197,10 @@ function comptes_while($where, $limit, $id_compte)
 		}
 		$comptes .= "<tr id='id_compte".$data['id_compte']."' class='$class'>"
 		. '<td class="integer">'.$data['id_compte'].'</td>'
-		. '<td class="date">'. association_datefr($data['date']) .'</td>'
+		. '<td class="date">'. association_formater_date($data['date']) .'</td>'
 		. '<td class="text">'. $data['imputation'].'</td>'
 		. '<td class="text">&nbsp;'. propre($data['justification']) .'</td>'
-		. '<td class="decimal">'. association_prixfr($data['recette']-$data['depense']) .'</td>'
+		. '<td class="decimal">'. association_formater_prix($data['recette']-$data['depense']) .'</td>'
 		. '<td class="text">&nbsp;'.$data['journal'].'</td>'
 		. ( $data['vu']
 			/* pas d'action sur les operations validees */
@@ -212,7 +212,7 @@ function comptes_while($where, $limit, $id_compte)
 					/* pas d'edition des virements internes (souci de coherence car il faut modifier deux operations concordament : ToDo...) */
 					? '<td class="action">&nbsp;</td>'
 					/* le reste est editable */
-					: '<td class="action">'. association_bouton('mettre_a_jour', 'edit-12.gif', 'edit_compte', 'id='.$data['id_compte'], $onload_option) . '</td>'
+					: '<td class="action">'. association_bouton_faire('mettre_a_jour', 'edit-12.gif', 'edit_compte', 'id='.$data['id_compte'], $onload_option) . '</td>'
 					)
 				/* operation supprimable */
 				. association_bouton_supprimer('comptes', 'id='.$data['id_compte'], 'td')

@@ -25,13 +25,13 @@ function action_editer_asso_prets_dist()
 	$data =  sql_fetsel('sexe, nom_famille, prenom', 'spip_asso_membres', "id_auteur=$id_emprunteur");
 	$emprunteur = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
     }
-    $date_sortie = association_recupere_date(_request('date_sortie'));
-    $date_retour = association_recupere_date(_request('date_retour'));
-    $date_caution1 = association_recupere_date(_request('date_caution1'));
-    $date_caution0 = association_recupere_date(_request('date_caution0'));
-    $duree = association_recupere_montant(_request('duree'));
-    $montant = association_recupere_montant(_request('montant'));
-    $caution = association_recupere_montant(_request('prix_caution'));
+    $date_sortie = association_recuperer_date('date_sortie');
+    $date_retour = association_recuperer_date('date_retour');
+    $date_caution1 = association_recuperer_date('date_caution1');
+    $date_caution0 = association_recuperer_date('date_caution0');
+    $duree = association_recuperer_montant('duree');
+    $montant = association_recuperer_montant('montant');
+    $caution = association_recuperer_montant('prix_caution');
     $fiso_sortie = $date_sortie.'T'._request('heure_sortie').':00'; // si on n'indique que l'heure, on s'assure que ce sera bien compris hh:00 et non 00:mm sinon c'est hh:mm:00 qui est transmis...
     $fiso_retour = $date_retour.'T'._request('heure_retour').':00'; // idem...
     $modifs = array(

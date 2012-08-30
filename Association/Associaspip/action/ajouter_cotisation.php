@@ -20,7 +20,7 @@ function action_ajouter_cotisation()
 	$erreur = '';
 	$date = _request('date');
 	$journal = _request('journal');
-	$montant =  association_recupere_montant(_request('montant'));
+	$montant =  association_recuperer_montant('montant');
 	$justification = _request('justification');
 	$validite = _request('validite');
 

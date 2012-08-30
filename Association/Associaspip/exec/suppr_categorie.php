@@ -25,14 +25,14 @@ function exec_suppr_categorie()
 		// INTRO : resume ressource
 		$categorie = sql_fetsel('*', 'spip_asso_categories', "id_categorie=$id_categorie" );
 		$infos['entete_code'] = $categorie['valeur'];
-		$infos['entete_duree'] = association_dureefr($categorie['duree'], 'M');
-		$infos['entete_montant'] = association_prixfr($categorie['cotisation']);
+		$infos['entete_duree'] = association_formater_duree($categorie['duree'], 'M');
+		$infos['entete_montant'] = association_formater_prix($categorie['cotisation']);
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_membres', "categorie=$id_categorie"), ));
-		echo totauxinfos_intro($categorie['libelle'], 'categorie', $id_categorie, $infos );
+		echo association_totauxinfos_intro($categorie['libelle'], 'categorie', $id_categorie, $infos );
 		// datation et raccourcis
 		icones_association(array('categories'));
 		debut_cadre_association('calculatrice.gif', 'categories_de_cotisations');
-		echo bloc_confirmer_suppression('categorie', $id_categorie);
+		echo association_bloc_suppression('categorie', $id_categorie);
 		fin_page_association();
 	}
 }

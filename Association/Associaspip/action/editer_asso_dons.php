@@ -18,15 +18,15 @@ function action_editer_asso_dons()
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_don = $securiser_action();
 	$erreur = '';
-	$date_don = association_recupere_date(_request('date_don'));
+	$date_don = association_recuperer_date('date_don');
 	$bienfaiteur = _request('bienfaiteur');
 	$id_adherent = intval(_request('id_adherent'));
 	if (!$bienfaiteur AND $id_adherent) {
 		$data =  sql_fetsel('sexe, nom_famille, prenom', 'spip_asso_membres', "id_auteur=$id_adherent");
 		$bienfaiteur = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
 	}
-	$argent = association_recupere_montant(_request('argent'));
-	$valeur = association_recupere_montant(_request('valeur'));
+	$argent = association_recuperer_montant('argent');
+	$valeur = association_recuperer_montant('valeur');
 	$modifs = array(
 		'date_don' => $date_don,
 		'bienfaiteur' => _request('bienfaiteur'),

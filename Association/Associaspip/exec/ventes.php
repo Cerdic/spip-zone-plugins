@@ -35,22 +35,22 @@ function exec_ventes()
 		}
 		onglets_association('titre_onglet_ventes');
 		// INTRO : nom du module et annee affichee
-		echo totauxinfos_intro('','ventes',$annee);
+		echo association_totauxinfos_intro('','ventes',$annee);
 		// TOTAUX : nombre de ventes selon etat de livraison
 		$liste_libelles = array('pair'=>'ventes_enregistrees', 'impair'=>'ventes_expediees', );
 		$liste_effectifs['pair'] = sql_countsel('spip_asso_ventes', "date_envoi<date_vente AND  DATE_FORMAT(date_vente, '%Y')=$annee ");
 		$liste_effectifs['impair'] = sql_countsel('spip_asso_ventes', "date_envoi>=date_vente AND  DATE_FORMAT(date_vente, '%Y')=$annee ");
-		echo totauxinfos_effectifs('ventes', $liste_libelles, $liste_effectifs);
+		echo association_totauxinfos_effectifs('ventes', $liste_libelles, $liste_effectifs);
 		// STATS sur les paniers/achats/commandes
-		echo totauxinfos_stats('paniers/commandes', 'ventes', array('entete_quantite'=>'quantite','entete_montant'=>'prix_vente*quantite',), "DATE_FORMAT(date_vente, '%Y')=$annee");
+		echo association_totauxinfos_stats('paniers/commandes', 'ventes', array('entete_quantite'=>'quantite','entete_montant'=>'prix_vente*quantite',), "DATE_FORMAT(date_vente, '%Y')=$annee");
 		// TOTAUX : montants des ventes et des frais de port
 /* Il est interessant d'interroger le livre comptable pour des cas complexes et si on sait recuperer les achats-depenses liees aux ventes(c'est faisable s'ils ne concerne qu'un ou deux comptes) ; mais ici, les montant etant dupliques dans la table des ventes autant faire simple...
 		$data1 = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT(date, '%Y')=$annee AND imputation=".sql_quote($GLOBALS['association_metas']['pc_ventes']) );
 		$data2 = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT(date, '%Y')=$annee AND imputation=".sql_quote($GLOBALS['association_metas']['pc_frais_envoi']) );
-		echo totauxinfos_montants($annee, $data1['somme_recettes']-$data1['somme_depenses']+$data2['somme_recettes']-$data2['somme_depenses']);
+		echo association_totauxinfos_montants($annee, $data1['somme_recettes']-$data1['somme_depenses']+$data2['somme_recettes']-$data2['somme_depenses']);
 */
 		$data = sql_fetsel('SUM(prix_vente*quantite) AS somme_ventes, SUM(frais_envoi) AS somme_frais', 'spip_asso_ventes', "DATE_FORMAT(date_vente, '%Y')=$annee" );
-		echo totauxinfos_montants($annee, $data['somme_ventes']+$data['somme_frais'], $data['somme_frais']); // les frais de port etant facturees a l'acheteur, ce sont bien des recettes... mais ces frais n'etant (normalement) pas refacturees (et devant meme etre transparents) ils n'entrent pas dans la marge (enfin, facon de dire car les couts d'acquisition ne sont pas pris en compte... le "solde" ici est le montant effectif des ventes.)
+		echo association_totauxinfos_montants($annee, $data['somme_ventes']+$data['somme_frais'], $data['somme_frais']); // les frais de port etant facturees a l'acheteur, ce sont bien des recettes... mais ces frais n'etant (normalement) pas refacturees (et devant meme etre transparents) ils n'entrent pas dans la marge (enfin, facon de dire car les couts d'acquisition ne sont pas pris en compte... le "solde" ici est le montant effectif des ventes.)
 		// datation et raccourcis
 		icones_association(array(), array(
 			'ajouter_une_vente' => array('ajout-24.png', 'edit_vente'),
@@ -77,7 +77,7 @@ function exec_ventes()
 		while ($data = sql_fetch($query)) {
 			echo '<tr class="'. ($data['date_envoi']<$data['date_vente']?'pair':'impair') . (($id_vente==$data['id_vente'])?' surligne':'') .'" id="'.$data['id_vente'].'">';
 			echo '<td class="integer">'.$data['id_vente'].'</td>';
-			echo '<td class="date">'. association_datefr($data['date_vente'],'dtstart') .'</td>';
+			echo '<td class="date">'. association_formater_date($data['date_vente'],'dtstart') .'</td>';
 			echo '<td class="text">'
 				. (test_plugin_actif('CATALOGUE') && (intval($data['article'])==$data['article'])
 					? association_calculer_lien_nomid('',$data['article'],'article')
@@ -87,9 +87,9 @@ function exec_ventes()
 			echo '<td class="text">'. association_calculer_lien_nomid($data['acheteur'],$data['id_acheteur']) .'</td>';
 			echo '<td class="decimal">'.$data['quantite'].'</td>';
 			echo '<td class="decimal">'
-			. association_prixfr($data['quantite']*$data['prix_vente']).'</td>';
+			. association_formater_prix($data['quantite']*$data['prix_vente']).'</td>';
 			echo association_bouton_supprimer('vente', 'id='.$data['id_vente'], 'td');
-			echo '<td class="action">'. association_bouton('mettre_a_jour_la_vente', 'edit-12.gif', 'edit_vente','id='.$data['id_vente']) . '</td>';
+			echo '<td class="action">'. association_bouton_faire('mettre_a_jour_la_vente', 'edit-12.gif', 'edit_vente','id='.$data['id_vente']) . '</td>';
 			echo "</tr>\n";
 		}
 		echo "</tbody>\n</table>\n";

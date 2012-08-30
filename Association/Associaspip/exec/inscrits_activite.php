@@ -25,22 +25,22 @@ function exec_inscrits_activite()
 		onglets_association('titre_onglet_activite');
 		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement") ;
 		// INTRO : Rappel Infos Evenement
-		$infos['evenement_date_du'] = association_datefr($evenement['date_debut'],'dtstart').' '.substr($data['date_debut'],10,6);
-		$infos['evenement_date_au'] = association_datefr($evenement['date_fin'],'dtend').' '.substr($data['date_debut'],10,6);
+		$infos['evenement_date_du'] = association_formater_date($evenement['date_debut'],'dtstart').' '.substr($data['date_debut'],10,6);
+		$infos['evenement_date_au'] = association_formater_date($evenement['date_fin'],'dtend').' '.substr($data['date_debut'],10,6);
 		$infos['evenement_lieu'] = $evenement['lieu'];
-		echo totauxinfos_intro($evenement['titre'], 'evenement', $id_evenement, $infos, 'agenda', 'evenement');
+		echo association_totauxinfos_intro($evenement['titre'], 'evenement', $id_evenement, $infos, 'agenda', 'evenement');
 		// STATS sur les participations (nombre de personnes inscrites et montant paye)
-		echo totauxinfos_stats('participations', 'activites', array('activite_entete_inscrits'=>'inscrits','entete_montant'=>'montant',), "id_evenement=$id_evenement");
+		echo association_totauxinfos_stats('participations', 'activites', array('activite_entete_inscrits'=>'inscrits','entete_montant'=>'montant',), "id_evenement=$id_evenement");
 		// TOTAUX : nombres d'inscrits par etat de paiement
 		$liste_libelles = $liste_effectifs = array();
 		$liste_libelles['valide'] = _T('asso:activite_entete_validees');
 		$liste_libelles['pair'] = _T('asso:activite_entete_impayees');
 		$liste_effectifs['valide'] = sql_getfetsel('COUNT(*)+SUM(inscrits) AS valide', 'spip_asso_activites', "id_evenement=$id_evenement AND date_paiement<date_inscription ");
 		$liste_effectifs['impair'] = sql_getfetsel('COUNT(*)+SUM(inscrits) AS impair', 'spip_asso_activites', "id_evenement=$id_evenement AND NOT date_paiement<date_inscription ");
-		echo totauxinfos_effectifs('activites', $liste_libelles, $liste_effectifs);
+		echo association_totauxinfos_effectifs('activites', $liste_libelles, $liste_effectifs);
 		// TOTAUX : montants des participations
 		$montant = sql_fetsel('SUM(montant) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " );
-		echo totauxinfos_montants('participations', $montant['encaisse'], NULL);
+		echo association_totauxinfos_montants('participations', $montant['encaisse'], NULL);
 		// datation et raccourcis
 		$res['activite_bouton_ajouter_inscription'] = array('panier_in.gif', 'edit_activite', "id_evenement=$id_evenement");
 		if (test_plugin_actif('FPDF')) { // PDF des inscrits
@@ -81,12 +81,12 @@ function exec_inscrits_activite()
 		while ($data = sql_fetch($query)) {
 			echo '<tr class="'.(($data['date_paiement']=='0000-00-00')?'pair':'valide').'">';
 			echo '<td class="integer">'.$data['id_activite'].'</td>';
-			echo '<td class="date">'.association_datefr($data['date']).'</td>';
+			echo '<td class="date">'. association_formater_date($data['date']). '</td>';
 			echo '<td class="text">'.  association_calculer_lien_nomid($data['nom'],$data['id_adherent']) .'</td>';
 			echo '<td class="integer">'.$data['inscrits'].'</td>';
-			echo '<td class="decimal">'. association_prixfr($data['montant']) .'</td>';
+			echo '<td class="decimal">'. association_formater_prix($data['montant']) .'</td>';
 			echo association_bouton_supprimer('activite', $data['id_activite'], 'td');
-			echo '<td class="action">', association_bouton('activite_bouton_maj_inscription', 'cotis-12.gif', 'edit_activite','id='.$data['id_activite']), '</td>';
+			echo '<td class="action">', association_bouton_faire('activite_bouton_maj_inscription', 'cotis-12.gif', 'edit_activite','id='.$data['id_activite']), '</td>';
 			if ($data['commentaire']) {
 				echo '</tr><tr class="'.(($data['date_paiement']<$data['date_inscription'])?'pair':'valide').'"><td colspan="7" class="text">&nbsp;'.$data['commentaire'].'</td>';
 			}
