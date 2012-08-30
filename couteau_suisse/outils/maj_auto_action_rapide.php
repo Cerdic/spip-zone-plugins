@@ -47,17 +47,17 @@ if(!function_exists('info_maj_spip')) {
 function maj_auto_js() {
 	return http_script("
 jQuery(document).ready(function() {
-	var ch = jQuery('#maj_auto_div .maj_checked');
+	var ch = jQuery('#maj_auto_div .maj_checked'); // radio checked
 	var re = jQuery('.cs_relancer a');
+	var cb = jQuery('#maj_auto_div .select_plugin'); // checkbox
 	if(ch.length) ch[0].checked = true;
-	else if(!re.length){
+	else if(!re.length && !cb.length){
 		jQuery('#maj_auto_div :submit').parent().remove();
 		jQuery('#maj_auto_div :radio').attr('disabled','disabled');
 	}
+	if(cb.length==1 && !ch.length) cb[0].checked = true;
 	if(!jQuery('#maj_auto_div :radio:checked').length && jQuery('#maj_auto_div :radio').length)
 		jQuery('#maj_auto_div :radio:first')[0].checked = true;
-	var ch = jQuery('#maj_auto_div :checkbox');
-	if(ch.length==1) ch.hide();
 	re.click(function() {
 		cs_href_click(jQuery('#maj_auto')[0], true);
 		return false;
@@ -71,7 +71,7 @@ jQuery(document).ready(function() {
 		// annulation du clic
 		return false;
 	}).each(maj_lire_cookie);
-	jQuery('.select_plugin').click( function() {
+	cb.click( function() {
 		var checks = jQuery('#maj_auto_div :checkbox:checked').length;
 		var radios = jQuery('#maj_auto_div :radio');
 		if(checks) radios.hide(); else radios.show();
