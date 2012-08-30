@@ -15,6 +15,7 @@
 	<etat>stable</etat>
 	<licence>GNU/GPL</licence>
 	<categorie>navigation</categorie>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<description>Noisette de recherche avanc&#233;e
 <br/>
 en limitant la recherche :
