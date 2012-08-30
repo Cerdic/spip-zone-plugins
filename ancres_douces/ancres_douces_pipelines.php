@@ -20,7 +20,9 @@ $flux .= '<script src="'.url_absolue(find_in_path("js/jquery.localscroll.js")).'
 
 // Code d'init
 $flux .= '<script type="text/javascript">/* <![CDATA[ */
-function ancre_douce_init() {if(typeof jQuery.localScroll=="function")'.$appel_ancres_douces.'.localScroll({hash:true});}
+function ancre_douce_init() {if(typeof jQuery.localScroll=="function")'.$appel_ancres_douces.'.localScroll({hash:true,onAfter:function( anchor, settings ){
+			jQuery(anchor).focus();
+		}});}
 if(window.jQuery)jQuery(document).ready(function() {
 	ancre_douce_init();
 	onAjaxLoad(ancre_douce_init);
@@ -30,4 +32,3 @@ if(window.jQuery)jQuery(document).ready(function() {
 return $flux;
 }
 ?>
-
