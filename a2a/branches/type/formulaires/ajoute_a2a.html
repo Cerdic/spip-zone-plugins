@@ -19,7 +19,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 	<div class='content'>
 				[<strong class="titre">(#INFO_TITRE{article,#ID_ARTICLE_DEST})</strong>]
-		
+		<a href="#URL_ARTICLE{#ID_ARTICLE_DEST}"><:a2a:voir:></a>
 		<INCLURE{fond=formulaires/inclure/types_liaisons}{message_erreur}{id_article_orig}{id_article_dest} />
 		<button name="lier" value="lier"  ><:a2a:lier_cet_article:></button>
 		<button name="lier_2" value="lier2"><:a2a:lier_cet_article_deux_cotes:></button>
