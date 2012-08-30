@@ -53,8 +53,8 @@ function formulaires_editer_publicite_verifier_dist($id_publicite='new', $retour
 				._T('pubban:valider_pour_forcer');
 	}
 
-	if(!$objet = _request('objet')) 
-		$erreurs['objet'] = _T('pubban:erreur_code');
+	if(!$objet = _request('texte')) 
+		$erreurs['texte'] = _T('pubban:erreur_code');
 
 	$empls = _request('banniere');
 	if(!is_array($empls) || !count($empls))
@@ -82,13 +82,46 @@ function formulaires_editer_publicite_verifier_dist($id_publicite='new', $retour
 	return $erreurs;
 }
 
+function publicite_objet_extraire_url($doctype, $docid, $align) {
+	static $cache = array() ;
+	if (! $row = $cache[$docid]) { // on limite les accès à la db
+		$cache[$docid] = $row = sql_fetsel("fichier,largeur,hauteur,extension", "spip_documents", "id_document=$docid");
+	}
+	switch ($row['extension']) {
+		case 'jpg':
+		case 'jpeg' :
+		case 'gif':
+		case 'png':
+			if (!preg_match(',^\w+://,',$row['fichier'])) // s'il y a déjà un protocole, il ne faut pas ajouter le chemin vers $dir_img
+				$row['fichier'] = url_absolue(_DIR_IMG.$row['fichier']) ;
+			break ;
+		default:
+			$f = charger_fonction('vignette','inc');
+			$v = $f($row['extension'], true);
+			if ($v[0]) {
+				$row['fichier'] = url_absolue($v[0]);
+			}
+			break ;
+	}
+	return $row['fichier'];
+}
+
 function formulaires_editer_publicite_traiter_dist($id_publicite='new', $retour=''){
 	if ($id_publicite=='0') $id_publicite='new';
 	include_spip('inc/banniere');
 	$empls = _request('banniere');
 
 	// verification de l'objet : son extension ?
-	$objet = _request('objet');
+	$objet = _request('texte');
+
+	/*-- modif si typo spip --*/
+	$search = "#(?:(?:&amp;|&)lt;|<)(img|doc|emb|video|audio|text)(\d+)(.*?)(?:(?:&amp;|&)gt;|>)#se" ;
+	if (preg_match($search, $objet, $matches) > 0 ) {
+		$replace = "publicite_objet_extraire_url('$1','$2','$3')" ;
+		$objet = preg_replace($search, $replace, $matches[0]) ;
+	}
+	/*-- modif fin si typo spip --*/
+
 	$ext = strtolower(pubban_extension($objet));
 	$images_extensions = array( 'png', 'gif', 'jpg', 'jpeg', 'bmp' ); // lowercase
 	$type = (in_array($ext, $images_extensions) ? 'img' : ( ($ext == 'swf') ? 'swf' : 'flash'));

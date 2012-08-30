@@ -54,7 +54,7 @@
 		    	<label style="padding:0;margin:0;width:auto;padding-right:1em;">
 					<input type='radio' name='type' id='type_flash' value='flash' [(#ENV{type}|=={flash}|?{" checked='checked'"})] />&nbsp;<:pubban:type_flash:>
 				</label><br />
-				<textarea name='objet' id='text_area' class='barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{3})]' cols='40'>[(#ENV**{objet})]</textarea>
+				<textarea name='texte' id='text_area' rows='[(#ENV**{config}|table_valeur{lignes}|plus{3})]' cols='40'>[(#ENV**{objet})]</textarea>
 				<p class='explication'><:pubban:comment_code_pub:></p>
 		    </li>
 	    </ul>
@@ -97,3 +97,12 @@
 	</div></form>
 </div>
 <INCLURE{fond=formulaires/dateur/inc-dateur} />
+<script type="text/javascript">
+$(document).ready(function(){
+   $( "#date_debut, #date_fin" ).bind('datePickerLoaded', function(){
+       var val = $(this).val();
+       $(this).datepicker( "option", "dateFormat", 'yy-mm-dd' ).datepicker( "setDate",  val );
+       return true;
+   });
+});
+</script>

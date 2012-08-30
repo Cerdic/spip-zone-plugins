@@ -28,7 +28,8 @@ function genie_pubban_cron($time){
 			sql_updateq('spip_publicites', array('statut' => '2actif'), "titre='".$nom."'", '');
 			$nb_modif++;
 		}
-		if($datefin AND $actif == '2actif' AND $datefin <= $gdate) {
+//		if($datefin AND $actif == '2actif' AND $datefin <= $gdate) {
+		if($datefin AND $actif == '2actif' AND $datefin < $gdate) {
 			sql_updateq('spip_publicites', array( 'statut' => '3obsolete', 'affichages_restant' => '0', 'clics_restant' => '0' ), "titre='".$nom."'", '');
 			$nb_modif++;
 		}

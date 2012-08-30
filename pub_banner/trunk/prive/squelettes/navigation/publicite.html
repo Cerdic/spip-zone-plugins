@@ -1,9 +1,10 @@
 <BOUCLE_nav(PUBLICITES){id_publicite}{statut==.*}{si #ENV{exec}|=={publicite}}>
 #BOITE_OUVRIR{'','info'}
 #PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','publicite','id',#ENV{id_publicite}}}}
-[(#SET{popup_url,#URL_PAGE{publicite_apercu,id_publicite=#ID_PUBLICITE}})]
-[(#GET{popup_url}|icone_horizontale{<:pubban:voir_un_apercu:>,stock_search.png,'','',onclick="return popup(600,600,'[(#GET{popup_url})]');" target="_blank"})]
+<:pubban:url_stats_publicite:>
 [(#SET{popup_url_stats,#URL_PAGE{publicites_statistiques,id_publicite=#ID_PUBLICITE}})]
 [(#GET{popup_url_stats}|icone_horizontale{<:pubban:voir_les_statistiques:>,stock-tool-button-color-balance.png,'','',onclick="return popup(700,700,'[(#GET{popup_url_stats})]');" target="_blank"})]
+[(#SET{popup_url,#URL_PAGE{publicite_apercu,id_publicite=#ID_PUBLICITE}})]
+[(#GET{popup_url}|icone_horizontale{<:pubban:voir_un_apercu:>,stock_search.png,'','',onclick="return popup(600,600,'[(#GET{popup_url})]');" target="_blank"})]
 #BOITE_FERMER
 </BOUCLE_nav>

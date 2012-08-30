@@ -13,7 +13,7 @@ function formulaires_pubban_statistiques_bannieres_charger_dist(){
 	include_spip('base/abstract_sql');
 	include_spip('inc/banniere');
 	$valeurs = array(
-		'action' => generer_url_ecrire('statistiques_bannieres'),
+		'action' => generer_url_ecrire('stats_pubban_bannieres'),
 		'date_today' => date("d/m/Y"),
 		'date_from_7' => date('d/m/y', time() - 604800),
 		'date_from_30' => date('d/m/y', time() - 2592000),

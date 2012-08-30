@@ -397,6 +397,8 @@ Les nombreuses études statistiques montrent que les bannières publicitaires pr
 	'url_pub' => 'URL de redirection (au clic)',
 	'url_traceur' => 'URL du traceur de développement SVN (spip-zone)',
 	'url_update' => 'URL de téléchargement',
+	'url_stats_banniere' => 'URL publique de statistiques de la bannière :',
+	'url_stats_publicite' => 'URL publique de statistiques de la publicité :',
 
 	// V
 	'valider_pour_forcer' => 'Validez à nouveau pour forcer l\'enregistrement de cette valeur ...',

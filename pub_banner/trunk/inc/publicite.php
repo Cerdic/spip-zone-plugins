@@ -65,32 +65,32 @@ function pubban_bannieres_de_la_pub($id_publicite, $id_banniere_verif=false){
 	return false;
 }
 
-function pubban_verifier_pub($datas){
+function pubban_verifier_pub($data){
 
-	if($datas['type'] == 'flash') {
+	if($data['type'] == 'flash') {
 		$to_add = '<object onClick=\'clic();\' ';
-		if( !substr_count($datas['objet'], $to_add) )
-			$datas['objet'] = str_replace('<object ', $to_add, $datas['objet']);
+		if( !substr_count($data['objet'], $to_add) )
+			$data['objet'] = str_replace('<object ', $to_add, $data['objet']);
 	}
 
 	$dates = false;
 	if(_request('droits_ill') == 'oui') {
-		$datas['illimite'] = 'oui';
+		$data['illimite'] = 'oui';
 		$dates = true;
 	}
 	else {
 		if(_request('droits_aff'))	{
-			if(is_numeric(_request('droits_aff'))) { $datas['affichages_restant'] = intval(_request('droits_aff')); }
+			if(is_numeric(_request('droits_aff'))) { $data['affichages_restant'] = intval(_request('droits_aff')); }
 		}
 		elseif(_request('droits_clic'))	{
-			if(is_numeric(_request('droits_clic'))) { $datas['clics_restant'] = intval(_request('droits_clic')); }
+			if(is_numeric(_request('droits_clic'))) { $data['clics_restant'] = intval(_request('droits_clic')); }
 		}
 		else $dates = true;
 	}
 	if($dates)	{
-		if(_request('droits_dates_fin')) $datas['date_fin'] = _request('droits_dates_fin'); 
-		if(_request('droits_dates_debut')) $datas['date_debut'] = _request('droits_dates_debut'); 
-		else $datas['date_debut'] = date('Y-m-d');
+		if(_request('droits_dates_fin')) $data['date_fin'] = _request('droits_dates_fin'); 
+		if(_request('droits_dates_debut')) $data['date_debut'] = _request('droits_dates_debut'); 
+		else $data['date_debut'] = date('Y-m-d');
 	}
 }
 
