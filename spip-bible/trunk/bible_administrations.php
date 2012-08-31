@@ -32,6 +32,7 @@ function bible_conf(){
 				ecrire_config('bible/traduction_fi','pr92');
 				ecrire_config('bible/traduction_ru','вж');
 				ecrire_config('bible/traduction_bg','bb');
+				ecrire_config('bible/alias_na','na27');
 				bible_initialise_pp();		
 }
 function bible_initialise_pp(){
