@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_email' => 'Courriel (non publié)',
 	'label_nom' => 'Nom',
 	'label_url' => 'Votre site web',
+	'lien_suivre_commentaires' => 'Suivre les commentaires&nbsp;:',
 
 	// M
 	'moderation_info' => 'Attention, votre message n\'apparaîtra qu\'après avoir été relu et approuvé.',

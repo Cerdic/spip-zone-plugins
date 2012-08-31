@@ -7,6 +7,6 @@
 		[<h2 class="h2">(#ENV{repondre_titre})</h2>]
 		(#FORMULAIRE_FORUM{#SELF})
 	</div>]
-	[(#PARAMETRES_FORUM|oui)oui<INCLURE{fond=comments-feed}{env}>]
+	[(#PARAMETRES_FORUM|oui)<INCLURE{fond=comments-feed,env} />]
 	]
 </div>

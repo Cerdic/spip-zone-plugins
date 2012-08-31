@@ -22,6 +22,14 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 	</image>
 ]
 </BOUCLE_article>
+</B_article>
+[(#ENV{objet}|et{#ENV{id_objet}}|oui)
+	<title>[(#INFO_TITRE{#ENV{objet},#ENV{id_objet}}|textebrut|entites_html|charset2unicode)] - <:comments:comments:></title>
+	<link>[(#INFO_URL{#ENV{objet},#ENV{id_objet}})]</link>
+	[<language>(#INFO_LANG{#ENV{objet},#ENV{id_objet}})</language>]
+	<generator>SPIP - www.spip.net</generator>
+]
+[(#ENV{objet}|et{#ENV{id_objet}}|non)
 	<title>[(#NOM_SITE_SPIP|texte_backend)] - <:comments:comments:></title>
 	<link>#URL_SITE_SPIP/</link>
 	[<description>(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)</description>]
@@ -35,10 +43,10 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 		[<height>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{height})</height>]
 		[<width>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{width})</width>]
 	</image>
-]
+]]
 <//B_article>
 
-<BOUCLE_comments(FORUMS) {statut IN publie} {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat} {!par date}{0,#ENV{nb,100}}>
+<BOUCLE_comments(FORUMS) {statut IN publie} {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?}{objet ?}{id_objet ?} {plat} {!par date}{0,#ENV{nb,100}}>
     <item>
         [<title>(#TITRE|texte_backend)</title>]
         [<link>(#URL_FORUM|url_absolue)</link>]
