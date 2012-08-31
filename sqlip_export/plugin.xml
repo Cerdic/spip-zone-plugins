@@ -1,0 +1,25 @@
+<plugin>
+	<nom>SQL export pour SPIP</nom>
+	<slogan>Des dump SQL pour diff&#233;rents moteurs de base de donn&#233;es</slogan>
+	<auteur>Suske</auteur>
+	<version>0.0.1</version>
+	<etat>experimental</etat>
+	<description>Ce plugin utilise un squelette et les it&#233;rateurs pour produire un fichier texte contenant les d&#233;finitions de tables et les contenus d'un site SPIP. A ce stade, il ne fonctionne que dans le sens sqlite -> MySQL. Pour produire la page, le webmestre doit appeler [->../spip.php?page=sqlite-mysql]</description>
+	<lien>http://www.spip.net</lien>
+	<prefix>sqlip_export</prefix>
+	<options></options>
+	<pipeline>
+		<nom></nom>
+		<action></action>
+		<inclure></inclure>
+	</pipeline>
+	<pipeline>
+		<nom></nom>
+		<action></action>
+		<inclure></inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<categorie></categorie>
+</plugin>
+
