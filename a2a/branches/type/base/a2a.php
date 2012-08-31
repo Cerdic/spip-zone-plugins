@@ -23,7 +23,7 @@ function a2a_declarer_tables_auxiliaires($tables_auxiliaires){
 	);
 	
 	$spip_articles_lies_key = array(
-		"PRIMARY KEY"		=> "id_article, id_article_lie"
+		"PRIMARY KEY"		=> "id_article, id_article_lie,type_liaison"
 	);
 
 	$spip_articles_lies_join = array(
