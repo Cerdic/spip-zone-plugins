@@ -245,7 +245,7 @@ function spipdf_recuperer_fond($flux) {
         }
 
         // du A4 par defaut
-        $format_page = 'A4';
+        $format_page = _SPIPDF_FORMAT;
         
         // traiter la balise page pour les librairies qui ne la comprennent pas
         if(!empty($possible_librairies[$librairie_pdf]['traite_balise_page'])) {
@@ -254,11 +254,33 @@ function spipdf_recuperer_fond($flux) {
 
             // dans balise_page, on ne récupère que quelques possibilité dont le format
             if(!empty($GLOBALS['valeurs_page'])) {
-                if(!empty($GLOBALS['valeurs_page']['format'])) {
+				if(!empty($GLOBALS['valeurs_page']['format']))
                     $format_page = $GLOBALS['valeurs_page']['format'];
-                }
+				if(!empty($GLOBALS['valeurs_page']['backtop']))
+					$backtop = $GLOBALS['valeurs_page']['backtop'];
+				else
+					$backtop = _SPIPDF_MARGIN_TOP;
+				if(!empty($GLOBALS['valeurs_page']['backbottom']))
+					$backbottom = $GLOBALS['valeurs_page']['backbottom'];
+				else
+					$backbottom = _SPIPDF_MARGIN_BOTTOM;
+				if(!empty($GLOBALS['valeurs_page']['backleft']))
+					$backleft = $GLOBALS['valeurs_page']['backleft'];
+				else
+					$backleft = _SPIPDF_MARGIN_LEFT;
+				if(!empty($GLOBALS['valeurs_page']['backright']))
+					$backright = $GLOBALS['valeurs_page']['backright'];
+				else
+					$backright = _SPIPDF_MARGIN_RIGHT;
+				if(!empty($GLOBALS['valeurs_page']['margin_header']))
+					$margin_header = $GLOBALS['valeurs_page']['margin_header'];
+				else
+					$margin_header = _SPIPDF_MARGIN_HEADER;
+				if(!empty($GLOBALS['valeurs_page']['margin_footer']))
+					$margin_footer = $GLOBALS['valeurs_page']['margin_footer'];
+				else
+					$margin_footer = _SPIPDF_MARGIN_FOOTER;
             }
-
         }
 
         if($librairie_pdf=='mpdf') { // la librairie mPDF
@@ -271,7 +293,7 @@ function spipdf_recuperer_fond($flux) {
             include_once(_MPDF_PATH.'mpdf.php');
 
             // la classe mPDF
-            $mpdf = new mPDF(SPIPDF_CHARSET, $format_page);
+           $mpdf = new mPDF(SPIPDF_CHARSET, $format_page, 0, "", $backleft, $backright, $backtop, $backbottom, $margin_header, $margin_footer);
             $mpdf->WriteHTML($html);
 
             $flux['data']['texte'] = $mpdf->Output('', 'S');// envoyer le code binaire du PDF dans le flux
