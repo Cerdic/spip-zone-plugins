@@ -15,7 +15,7 @@ function action_a2a_dist(){
 		minipres(_L('Action a2a_'.$action.' introuvable'));
 	}
 
-	$action_a2a($id_article_cible, $id_article_source, $type, $type_liaison);
+	$action_a2a($id_article_cible, $id_article_source,  $type_liaison,$type);
 	
 	include_spip('inc/header');
 	if ($redirect = _request('redirect'))
@@ -27,7 +27,7 @@ function action_a2a_dist(){
 
 
 
-function action_a2a_supprimer_lien_dist($id_article_cible, $id_article,$type=null,$type_liaison=''){
+function action_a2a_supprimer_lien_dist($id_article_cible, $id_article,$type_liaison='',$type=null){
 	include_spip('inc/utils');
 
 
@@ -65,12 +65,15 @@ function action_a2a_supprimer_lien_dist($id_article_cible, $id_article,$type=nul
 
 
 function action_a2a_modifier_rang_dist($id_article_cible, $id_article, $type_liaison,$type_modif){
+
 	if (!$type_modif){
 		list($type_modif,$type_liaison)=array($type_liaison,$type_modif);
 	}
+
 	if ($type_modif == "plus"){
 			//on recupere le rang de l'article à modifier
 			$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison=' . sql_quote($type_liaison));
+			
 			//on intervertit le rang de l'article suivant
 			sql_update('spip_articles_lies', array('rang' => $rang), 'id_article=' . sql_quote($id_article) . ' AND rang=' . sql_quote($rang + 1));
 			//on met à jour le rang de l'article à modifier
