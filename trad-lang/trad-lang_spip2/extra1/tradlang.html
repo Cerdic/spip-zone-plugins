@@ -2,8 +2,7 @@
     (#FORMULAIRE_TRADLANG_CHOISIR_MODULE{#ENV{id_tradlang_module},#ENV{lang_orig},#ENV{lang_cible},#ENV{lang_crea}})
 </div>]
 [(#AUTORISER{modifier,tradlang}|et{#SESSION{statut}}|non)
-        #LOGIN_PUBLIC
-]
+[(#LOGIN_PUBLIC)]]
 
 <BOUCLE_menu_navigation_haut(MENUS?){identifiant LIKE navigation_haut%}{par num titre, titre}>
 <div class="menu">
@@ -12,17 +11,17 @@
 </BOUCLE_menu_navigation_haut>
 
 <BOUCLE_tradlang(TRADLANGS){id_tradlang}>
-<INCLURE{fond=noisettes/infos/tradlang_infos_module,module=#MODULE,env}>
+<INCLURE{fond=noisettes/infos/tradlang_infos_module,module=#MODULE,env,ajax}>
 </BOUCLE_tradlang>
 </B_tradlang>
-<INCLURE{fond=noisettes/infos/tradlang_infos_module,env}>
+<INCLURE{fond=noisettes/infos/tradlang_infos_module,env,ajax}>
 <//B_tradlang>
 
 [(#REM) Menu de navigation par rubriques ]
-<INCLURE{fond=inclure/rubriques,id_rubrique} />
+<INCLURE{fond=inclure/rubriques,id_rubrique,ajax} />
 
 <BOUCLE_menu_navigation_bas(MENUS?){identifiant LIKE navigation_bas%}{par num titre, titre}>
 <div class="menu">
-#INCLURE{fond=inclure/menu, env, identifiant=#IDENTIFIANT}
+#INCLURE{fond=inclure/menu, env, identifiant=#IDENTIFIANT,ajax}
 </div>
 </BOUCLE_menu_navigation_bas>
