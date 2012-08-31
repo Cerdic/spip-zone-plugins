@@ -209,7 +209,7 @@ function bible($passage,$traduction='jerusalem',$mode_test=false){
 	else{
 	
 		include_spip('traduction/'.$traduction);
-		$tableau = recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin);
+		$tableau = recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang);
 	}
 	include_spip('inc/utils');
 	

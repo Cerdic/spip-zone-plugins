@@ -424,6 +424,11 @@ Editio Typica Altera ',
 		'gateway'	=> false,
 		'lang'		=>'grc',
 		'wissen'	=>'novum-testamentum-graece-na-27',
+		'nt'=> true),
+	'na28'		=> array(
+		'traduction'=> 'Nestl&eacute;-Aland (Ed.&nbsp;28)',
+		'gateway'	=> false,
+		'lang'		=>'grc',
 		'nt'=> true)
 		,
 	'jerusalem' => array(
