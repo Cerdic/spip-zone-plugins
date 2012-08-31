@@ -13,7 +13,7 @@
 
 		Pour afficher la couleur d'une rubrique dans un squelette, il suffit d'utiliser le code: <code>[#(#ID_RUBRIQUE|couleur_rubrique)]</code>.
 
-		Pour l'installer, pensez &#224; cr&#233;er un dossier <code>/lib</code> &#224; la racine de votre site afin de permettre l'installation automatique des librairies n&#233;cessaires.
+		Pour l'installer, pensez &#224; cr&#233;er un dossier <code>/lib</code> &#224; accessible en &#233;criture la racine de votre site afin de permettre l'installation automatique des librairies n&#233;cessaires.
 	</description>
 	<options>pb_couleur_rubrique_options.php</options>
 	<prefix>pb_couleur_rubrique</prefix>
