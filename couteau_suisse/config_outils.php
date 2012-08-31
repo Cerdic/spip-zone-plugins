@@ -1286,7 +1286,9 @@ add_outil( array(
 	'categorie'	=> 'public',
 	'pipelinecode:insert_head' => 'if(%%scrollTo%%) {$flux.=\'<script src="\'.find_in_path("outils/jquery.scrollto.js").\'" type="text/javascript"></script>\'."\n";}
 if(%%LocalScroll%%) {$flux.=\'<script src="\'.find_in_path("outils/jquery.localscroll.js").\'" type="text/javascript"></script>\'."\n";}',
-	'code:js_public' => 'function soft_scroller_init() { if(typeof jQuery.localScroll=="function") jQuery.localScroll({hash: true}); }',
+	'code:js_public' => 'function soft_scroller_init() { if(typeof jQuery.localScroll=="function")
+	jQuery.localScroll({hash: true, onAfter:function(anchor,settings){jQuery(anchor).focus();}});
+}',
 	'code:jq_init_public' => 'soft_scroller_init.apply(this);',
 ));
 

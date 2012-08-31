@@ -168,7 +168,7 @@ jQuery(document).ready(function() {
 */
 
 /*
-//	Pour un bloc dépliable du genre :
+//	Pour un bloc depliable du genre :
 //	<BOUCLE_art(ARTICLES)>
 //		#BLOC_TITRE
 //		#TITRE
