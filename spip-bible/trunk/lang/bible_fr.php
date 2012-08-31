@@ -17,6 +17,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg'               =>  'Spip-Bible',
 	'cfg_descriptif'    =>  'Page de configuration générale de Spip-Bible. Vous pouvez aussi configurer celle du [presse-papier->?exec=cfg&cfg=bible_pp].',
 	'livres_bibles'		=>	'Liste des livres disponibles dans la Bible version  «@trad@ »',
+	'cfg_affichage'		=> 	'Réglages d\'affichage',
+	'cfg_trad_defauts'	=>  'Réglages des traductions par défaut',
 	'cfg_ref'			=>	'Afficher la r&eacute;f&eacute;rence du passage cit&eacute;',
 	'cfg_retour'		=>	'Faire des retour à la ligne entre les versets',
 	'cfg_traduction_fr'	=>	'Traduction francaise par d&eacute;faut',
