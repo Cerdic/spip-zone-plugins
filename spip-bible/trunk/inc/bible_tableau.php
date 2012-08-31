@@ -741,6 +741,8 @@ $tableau_separateur = array(
 	switch ($i){
 		case 'police':
 			return $polices;
+		case 'polices':
+			return $polices;
 		case 'traduction':
 			return $tableau_traduction;
 		case 'separateur':
