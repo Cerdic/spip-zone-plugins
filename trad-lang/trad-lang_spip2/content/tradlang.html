@@ -48,9 +48,9 @@
 			<:tradlang:titre_commentaires_chaines:>
 		</h3>
 		[(#REM) Forum de la chaine de langue ]
-		<a href="#forum" name="forum" id="forum"></a>
-		[(#INCLURE{fond=inclure/forum,objet=tradlang,id_objet=#ID_TRADLANG}|trim|sinon{<p><:tradlang:info_aucun_commentaire_chaine:></p>})]
-		#FORMULAIRE_FORUM{#SELF,tradlang,#ID_TRADLANG}
+		[(#INCLURE{fond=inclure/forum,objet=tradlang,id_objet=#ID_TRADLANG,repondre_url=oui}|trim|sinon{<p><:tradlang:info_aucun_commentaire_chaine:></p>})]
+		[(#PLUGIN{comments}|non)
+		#FORMULAIRE_FORUM{#SELF,tradlang,#ID_TRADLANG}]
 	</div>
 </BOUCLE_auth_voir>
 </B_auth_voir>
