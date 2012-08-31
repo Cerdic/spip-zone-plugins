@@ -15,7 +15,7 @@ function action_a2a_dist(){
 		minipres(_L('Action a2a_'.$action.' introuvable'));
 	}
 
-	$action_a2a($id_article_cible, $id_article_source, $type, $type_liaison="");
+	$action_a2a($id_article_cible, $id_article_source, $type, $type_liaison);
 	
 	include_spip('inc/header');
 	if ($redirect = _request('redirect'))
@@ -27,7 +27,7 @@ function action_a2a_dist(){
 
 
 
-function action_a2a_supprimer_lien_dist($id_article_cible, $id_article,$type_liaison,$type=null){
+function action_a2a_supprimer_lien_dist($id_article_cible, $id_article,$type=null,$type_liaison=''){
 	include_spip('inc/utils');
 
 
