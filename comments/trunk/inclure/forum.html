@@ -5,7 +5,7 @@
 	[(#ENV{repondre_url}|oui)
 	[<div class="comment-form">
 		[<h2 class="h2">(#ENV{repondre_titre})</h2>]
-		(#FORMULAIRE_FORUM{#SELF})
+		(#FORMULAIRE_FORUM{#SELF,#ENV{objet},#ENV{id_objet}})
 	</div>]
 	[(#PARAMETRES_FORUM|oui)<INCLURE{fond=comments-feed,env} />]
 	]
