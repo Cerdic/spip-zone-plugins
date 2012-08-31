@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'deutero'=>'Livres Deut&eacute;rocanoniques',
 	'historique'=>'Historique',
 	'version_dispo'=>'Traductions de la Bible disponibles',
-	'neccessitesvn'=>'Cette page nécéssite une site sous SPIP 2.0 et le plugin Spip 2.0 Bonux',
 	'verset'		=>'Verset',
 	'chapitre'		=>'Chapitre',
 	'ok'			=>'OK',
