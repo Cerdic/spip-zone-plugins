@@ -1,0 +1,12 @@
+<paquet
+   prefix='sqlip_export'
+   categorie='maintenance'
+   version='0.0.2'
+   etat='experimental'
+   compatibilite="[3.0.4;3.0.*]"
+>
+    <nom>SQL export pour SPIP</nom>
+    <auteur lien="http://lapsuske.brubel.net" mail="suske@brubel.net">Suske</auteur>
+    <licence lien="http://www.gnu.org/licenses/gpl-3.0.fr.html">GPL</licence>
+</paquet>
+

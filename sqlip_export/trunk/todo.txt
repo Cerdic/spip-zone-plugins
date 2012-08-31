@@ -1,0 +1,28 @@
+WHY
+
+L'idée: que SPIP génère un fichier utilisable ensuite dans phpmyadmin/adminer: drop tables, définitions, données.
+J'ai fait ça par curiosité et parce que j'ai lu je ne sais où que les restaurations SPIP sqlite->MYSQL ne sont pas top. Ne nous méprenons pas: je suis sûr qu'elles fonctionnent mieux que ce truc malgré tout mais bon... Super exercice auto-formation sinon j'espère.
+
+
+LIMITES
+
+Les bases ne doivent pas être trop grosses... PHP limite la durée du script et la taille du pauet en upload (mysql aussi)
+
+
+TODO
+
+* sqlite-mysql
+- Implémenter les autres définitions de champs
+- Implémenter l'autoincrément (un champs à auto incrément n'est pas forcément une clé primaire Suske !)
+- zipper
+- ... tout quoi
+
+* autres versions :  mysql-sqlite, mysql-mysql
+
+* Interface
+- Prévoir découpage en sous fichiers car en upload après max_allowed_packet est souvent limité à 16Mb ou 32Mb si je lis bien (et puis php)
+- Une page dans le privé...
+- mettre tout ça dans le privé
+
+* rêvons un peu
+- des exports par tables avec aussi du csv toussa
