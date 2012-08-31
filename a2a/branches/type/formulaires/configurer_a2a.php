@@ -3,6 +3,7 @@
 // Transforme en tableau une liste de type de la forme :
 // type, texte
 // type2, texte2
+include_spip('inc/config');
 function a2a_types_liaisons2array($type){
 	$tableau 	= array();
 	$lignes 	= explode("\n",$type);
