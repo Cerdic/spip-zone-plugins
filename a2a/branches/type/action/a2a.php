@@ -30,7 +30,7 @@ function action_a2a_dist(){
 function action_a2a_supprimer_lien_dist($id_article_cible, $id_article,$type_liaison,$type=null){
 	include_spip('inc/utils');
 
-	$contexte = array();
+
 	
 	$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article) . 'AND id_article_lie=' . sql_quote($id_article_cible) . 'AND type_liaison=' . sql_quote($type_liaison));
 
@@ -40,20 +40,11 @@ function action_a2a_supprimer_lien_dist($id_article_cible, $id_article,$type_lia
 	while($r = sql_fetch($res)){
 		sql_update('spip_articles_lies', array('rang' => sql_quote(--$r["rang"])), 'id_article=' . sql_quote($r["id_article"]) . 'AND id_article_lie=' . sql_quote($r["id_article_lie"]));
 	}
-	if ($type_liaison){
-		sql_delete('spip_articles_lies',  array(
-			'id_article = ' . sql_quote($id_article), 
-			'id_article_lie = ' . sql_quote($id_article_cible),
-			'type_liaison=' . sql_quote($type_liaison)
-			));
-	}
-	else{
-				sql_delete('spip_articles_lies',  array(
-			'id_article = ' . sql_quote($id_article), 
-			'id_article_lie = ' . sql_quote($id_article_cible),
-			'type_liaison IS NULL' 
-			));
-	}
+	sql_delete('spip_articles_lies',  array(
+		'id_article = ' . sql_quote($id_article), 
+		'id_article_lie = ' . sql_quote($id_article_cible),
+		'type_liaison=' . sql_quote($type_liaison)
+		));
 	if($type == 'both'){
 		$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article_cible) . 'AND id_article_lie=' . sql_quote($id_article)  . ' AND type_liaison=' . sql_quote($type_liaison));
 
@@ -63,20 +54,11 @@ function action_a2a_supprimer_lien_dist($id_article_cible, $id_article,$type_lia
 		while($r = sql_fetch($res)){
 			sql_update('spip_articles_lies', array('rang' => sql_quote(--$r["rang"])), 'id_article=' . sql_quote($r["id_article"]) . 'AND id_article_lie=' . sql_quote($r["id_article_lie"]));
 		}
-		if ($type_liaison){
-			sql_delete('spip_articles_lies',  array(
-				'id_article = ' . sql_quote($id_article_cible), 
-				'id_article_lie = ' . sql_quote($id_article),
-				'type_liaison=' . sql_quote($type_liaison)
-				));
-		}
-		else{
-			sql_delete('spip_articles_lies',  array(
-				'id_article = ' . sql_quote($id_article_cible), 
-				'id_article_lie = ' . sql_quote($id_article),
-				'type_liaison IS NULL'
-				));
-		}
+		sql_delete('spip_articles_lies',  array(
+			'id_article = ' . sql_quote($id_article_cible), 
+			'id_article_lie = ' . sql_quote($id_article),
+			'type_liaison=' . sql_quote($type_liaison)
+			));
 	}
 	return true;
 }
@@ -89,40 +71,19 @@ function action_a2a_modifier_rang_dist($id_article_cible, $id_article, $type_lia
 	
 	if ($type_modif == "plus"){
 			//on recupere le rang de l'article à modifier
-			if ($type_liaison){
-				$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison=' . sql_quote($type_liaison));
-			}
-			else{
-				$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison IS NULL');
-			}
+			$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison=' . sql_quote($type_liaison));
 			//on intervertit le rang de l'article suivant
 			sql_update('spip_articles_lies', array('rang' => $rang), 'id_article=' . sql_quote($id_article) . ' AND rang=' . sql_quote($rang + 1));
 			//on met à jour le rang de l'article à modifier
-			if ($type_liaison){
-				sql_update('spip_articles_lies', array('rang' => ++$rang), 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison=' . sql_quote($type_liaison));
-			}
-			else{
-				sql_update('spip_articles_lies', array('rang' => ++$rang), 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison IS NULL');
-			}
+			sql_update('spip_articles_lies', array('rang' => ++$rang), 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison=' . sql_quote($type_liaison));
+		
 	}
 	if ($type_modif == "moins"){
-			//on recupere le rang de l'article à modifier
-			if ($type_liaison){
-				$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison=' . sql_quote($type_liaison));
-			}
-			else{
-				$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison IS NULL');
-				
-			}
+			$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison=' . sql_quote($type_liaison));
 			//on intervertit le rang de l'article précédent
 			sql_update('spip_articles_lies', array('rang' => $rang), 'id_article=' . sql_quote($id_article) . ' AND rang=' . sql_quote($rang - 1));
 			//on met à jour le rang de l'article à modifier
-			if ($type_liaison){
-				sql_update('spip_articles_lies', array('rang' => --$rang), 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison=' . sql_quote($type_liaison));
-			}
-			else{
-				sql_update('spip_articles_lies', array('rang' => --$rang), 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison IS NULL');
-			}
+			sql_update('spip_articles_lies', array('rang' => --$rang), 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison=' . sql_quote($type_liaison));
 	}
 	
 	return true;
