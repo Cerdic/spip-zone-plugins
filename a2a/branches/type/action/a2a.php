@@ -65,10 +65,9 @@ function action_a2a_supprimer_lien_dist($id_article_cible, $id_article,$type=nul
 
 
 function action_a2a_modifier_rang_dist($id_article_cible, $id_article, $type_liaison,$type_modif){
-	if ($type_modif==''){
+	if (!$type_modif){
 		list($type_modif,$type_liaison)=array($type_liaison,$type_modif);
 	}
-	
 	if ($type_modif == "plus"){
 			//on recupere le rang de l'article à modifier
 			$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison=' . sql_quote($type_liaison));
