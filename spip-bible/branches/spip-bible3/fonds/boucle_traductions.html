@@ -1,0 +1,29 @@
+#SET{tableau,#BIBLE_TRADUCTIONS}
+
+<BOUCLE_test20(POUR){tableau #GET{tableau} }>
+[(#ENV{lang_trad}=={tout}|?{
+	[<h2>(#INFO_BIBLE_TRADUCTION{#VALEUR,lang}|unique)</h2>] 
+
+	
+,
+	[(#ENV{lang_trad}|traduire_nom_langue|=={#INFO_BIBLE_TRADUCTION{#VALEUR,lang}}|?{' '})
+		[<h2>(#INFO_BIBLE_TRADUCTION{#VALEUR,lang}|unique)</h2>]
+		
+	]
+}
+)]
+[(#ENV{lang_trad}=={tout}|?{
+	
+
+	#MODELE{bible_info_traduction,traduction=#VALEUR,passage=#ENV{passage}}
+,
+	[(#ENV{lang_trad}|traduire_nom_langue|=={#INFO_BIBLE_TRADUCTION{#VALEUR,lang}}|?{' '})
+		
+		#MODELE{bible_info_traduction,traduction=#VALEUR,passage=#ENV{passage}}
+	]
+}
+)]
+</BOUCLE_test20>
+
+
+
