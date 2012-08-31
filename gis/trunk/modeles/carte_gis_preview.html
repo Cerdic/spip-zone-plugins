@@ -75,7 +75,10 @@
 						}));
 					}
 					if (feature.properties && feature.properties.title){
-						layer.bindPopup(feature.properties.title);
+						var popupContent = '<strong>' + feature.properties.title + '</strong>';
+						if (feature.properties.description)
+							popupContent = popupContent + feature.properties.description;
+						layer.bindPopup(popupContent);
 					}
 				}
 			}).addTo(map_preview);
