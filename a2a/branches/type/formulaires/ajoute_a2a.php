@@ -60,12 +60,20 @@ function a2a_lier_article($id_article_cible, $id_article_source, $type=null, $ty
 			//on recupere le rang le plus haut pour definir celui de l'article a lier
 			$rang = sql_getfetsel('MAX(rang)', 'spip_articles_lies', 'id_article='. sql_quote($id_article_source));
 			//on ajoute le lien vers l'article
+			if ($type_liaison)
 			sql_insertq('spip_articles_lies', array(
 				'id_article' => $id_article_source,
 				'id_article_lie' => $id_article_cible,
 				'rang' => ++$rang,
 				'type_liaison' => $type_liaison,
 				));
+			else
+				sql_insertq('spip_articles_lies', array(
+				'id_article' => $id_article_source,
+				'id_article_lie' => $id_article_cible,
+				'rang' => ++$rang
+				));
+				
 	}
 	if(($type == 'both') && !sql_countsel('spip_articles_lies', array(
 		'id_article=' . sql_quote($id_article_cible),
