@@ -24,7 +24,6 @@
 		<nom>affichage_final</nom>
 		<inclure>spipdf.php</inclure>
 	</pipeline>
-	<options>spipdf_options.php</options>
 	<categorie>edition</categorie>
     <!--<necessite id="lib:html2pdf" src="http://sourceforge.net/projects/phphtml2pdf/files/current release PHP5/html2pdf_v4.01_php5.zip/download?use_mirror=freefr" />
     <necessite id="lib:mpdf" src="http://mpdf1.com/repos/download.php?file=MPDF50" />-->
