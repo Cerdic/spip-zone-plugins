@@ -38,12 +38,6 @@ function formulaires_ajoute_a2a_traiter($id_article_orig,$id_article_dest){
 
 function a2a_lier_article($id_article_cible, $id_article_source, $type=null, $type_liaison=''){
 	include_spip('inc/config');
-	if (!$type_liaison){
-		$wheretype='type_liaison IS NULL';
-	}
-	else {
-		'type_liaison='.$type_liaison;
-	}
 	//on verifie que cet article n'est pas deja lie
 	if (
 		
@@ -60,7 +54,7 @@ function a2a_lier_article($id_article_cible, $id_article_source, $type=null, $ty
 		and 
 		sql_countsel('spip_articles_lies', array(
 		'id_article=' . sql_quote($id_article_source),
-		'id_article_lie=' . sql_quote($id_article_cible),$wheretype))
+		'id_article_lie=' . sql_quote($id_article_cible),'type_Liaison='.sql_quote($type_liaison)))
 		))
 		){
 			
