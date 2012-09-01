@@ -34,6 +34,7 @@ function formulaires_ajoute_a2a_traiter($id_article_orig,$id_article_dest){
 	if ($lier2){
 		a2a_lier_article($id_article_dest,$id_article_orig,'both',_request('type_liaison'));		
 	}
+	return array("message_ok"=>"ok");
 }
 
 function a2a_lier_article($id_article_cible, $id_article_source, $type=null, $type_liaison=''){
@@ -82,7 +83,7 @@ function a2a_lier_article($id_article_cible, $id_article_source, $type=null, $ty
 				'type_liaison' => $type_liaison,
 				));
 	}
-	return true;
+	
 }
 
 

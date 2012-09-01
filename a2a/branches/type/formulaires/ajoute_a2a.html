@@ -5,6 +5,7 @@
 })]
 
 <//B_deja_relie>
+
 [(#GET{deja_relie}|non)
 <div class="formulaire_spip formulaire_ajoute_a2a ajax">
 <br class='bugajaxie' />
@@ -12,7 +13,7 @@
 	<script type="text/javascript">
 	(function($){
 		$(function(){
-			$('.formulaire_ajoute_a2a button').click(function(){ajaxReload('bloc-a2a')});
+			$('.formulaire_ajoute_a2a button').click(function(){ajaxReload('bloc-a2a');false});
 		})
 	})(jQuery);
 	</script>
