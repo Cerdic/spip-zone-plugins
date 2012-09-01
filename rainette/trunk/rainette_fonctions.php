@@ -62,13 +62,17 @@ function rainette_icone_meteo($icone, $taille='petit', $service='weather', $chem
 	return $html_icone;
 }
 
-function rainette_resume_meteo($meteo){
+function rainette_resume_meteo($meteo) {
 	include_spip('inc/rainette_utils');
 
-	return meteo2resume($meteo);
+	if (is_numeric($meteo))
+		$resume = meteo2resume($meteo);
+	else
+		$resume = $meteo;
+	return $resume;
 }
 
-function rainette_afficher_direction($direction){
+function rainette_afficher_direction($direction) {
 	static $liste_direction = 'N:NNE:NE:ENE:E:ESE:SE:SSE:S:SSW:SW:WSW:W:WNW:NW:NNW:V';
 
 	include_spip('inc/rainette_utils');

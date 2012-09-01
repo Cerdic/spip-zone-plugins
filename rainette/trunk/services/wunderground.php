@@ -8,9 +8,16 @@ define('_RAINETTE_WUNDERGROUND_SUFFIXE_STANDARD', 'f:in:mi:mph');
 
 function wunderground_service2cache($lieu, $mode) {
 
+	include_spip('inc/config');
+	$condition = lire_config('rainette/wunderground/condition');
+	$langue = $GLOBALS['spip_lang'];
+
 	$dir = sous_repertoire(_DIR_CACHE, 'rainette');
 	$dir = sous_repertoire($dir, 'wunderground');
-	$fichier_cache = $dir . str_replace(array(',', '+', '.', '/'), '-', $lieu) . "_" . $mode . ".txt";
+	$fichier_cache = $dir . str_replace(array(',', '+', '.', '/'), '-', $lieu) 
+				   . "_" . $mode 
+				   . ($condition == 'wunderground' ? '-' . $langue : '')
+				   . ".txt";
 
 	return $fichier_cache;
 }
@@ -65,34 +72,34 @@ function wunderground_url2flux($url) {
 
 function wunderground_meteo2weather($meteo, $periode=0) {
 	static $wunderground2weather = array(
-							'chanceflurries'=> array('41','46'),
-							'chancerain'=> array('39','45'),
-							'chancesleet'=> array('39','45'),
-							'chancesleet'=> array('41','46'),
-							'chancesnow'=> array('41','46'),
-							'chancetstorms'=> array('38','47'),
-							'chancetstorms'=> array('38','47'),
-							'clear'=> array('32','31'),
-							'cloudy'=> array('26','26'),
-							'flurries'=> array('15','15'),
-							'fog'=> array('20','20'),
-							'hazy'=> array('21','21'),
-							'mostlycloudy'=> array('28','27'),
-							'mostlysunny'=> array('34','33'),
-							'partlycloudy'=> array('30','29'),
-							'partlysunny'=> array('28','27'),
-							'sleet'=> array('5','5'),
-							'rain'=> array('11','11'),
-							'sleet'=> array('5','5'),
-							'snow'=> array('16','16'),
-							'sunny'=> array('32','31'),
-							'tstorms'=> array('4','4'),
-							'thunderstorms'=> array('4','4'),
-							'thunderstorm'=> array('4','4'),
-							'unknown'=> array('4','4'),
-							'cloudy'=> array('26','26'),
-							'scatteredclouds'=> array('30','29'),
-							'overcast'=> array('26','26'));
+							'chanceflurries'=> array(41,46),
+							'chancerain'=> array(39,45),
+							'chancesleet'=> array(39,45),
+							'chancesleet'=> array(41,46),
+							'chancesnow'=> array(41,46),
+							'chancetstorms'=> array(38,47),
+							'chancetstorms'=> array(38,47),
+							'clear'=> array(32,31),
+							'cloudy'=> array(26,26),
+							'flurries'=> array(15,15),
+							'fog'=> array(20,20),
+							'hazy'=> array(21,21),
+							'mostlycloudy'=> array(28,27),
+							'mostlysunny'=> array(34,33),
+							'partlycloudy'=> array(30,29),
+							'partlysunny'=> array(28,27),
+							'sleet'=> array(5,5),
+							'rain'=> array(11,11),
+							'sleet'=> array(5,5),
+							'snow'=> array(16,16),
+							'sunny'=> array(32,31),
+							'tstorms'=> array(4,4),
+							'thunderstorms'=> array(4,4),
+							'thunderstorm'=> array(4,4),
+							'unknown'=> array(4,4),
+							'cloudy'=> array(26,26),
+							'scatteredclouds'=> array(30,29),
+							'overcast'=> array(26,26));
 
 	$icone = 'na';
 	if (array_key_exists($meteo,  $wunderground2weather))
@@ -229,17 +236,19 @@ function wunderground_xml2conditions($xml){
 		if ($condition == 'wunderground') {
 			// On affiche les conditions natives fournies par le service
 			$tableau['icone']['code'] = $tableau['code_meteo'];
-
 			$theme = lire_config('rainette/wunderground/theme', 'a');
-			$url = _RAINETTE_WUNDERGROUND_URL_BASE_ICONE . '/' . $theme . '/' . $tableau['code_meteo'] . '.gif';
+			$url = _RAINETTE_WUNDERGROUND_URL_BASE_ICONE . '/' . $theme 
+				 . '/' . ($tableau['periode'] == 1 ? 'nt_' : '') . $tableau['code_meteo'] . '.gif';
 			$tableau['icone']['url'] = copie_locale($url);
 			$tableau['resume'] = ucfirst($tableau['desc_meteo']);
 		}
 		else {
 			// On affiche les conditions traduites dans le systeme weather.com
+			// Pour le resume on stocke le code et non la traduction pour eviter de generer 
+			// un cache par langue comme pour le mode natif
 			$meteo = wunderground_meteo2weather($tableau['code_meteo'], $tableau['periode']);
 			$tableau['icone'] = $meteo;
-			$tableau['resume'] = meteo2resume($meteo);
+			$tableau['resume'] = $meteo;
 		}
 	}
 

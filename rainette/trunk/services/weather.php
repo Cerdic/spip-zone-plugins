@@ -144,7 +144,7 @@ function weather_xml2conditions($xml){
 			$tableau['periode'] = '';
 
 			$tableau['icone'] = $tableau['code_meteo'];
-			$tableau['resume'] = meteo2resume($tableau['code_meteo']);
+			$tableau['resume'] = $tableau['code_meteo'];
 		}
 	}
 
