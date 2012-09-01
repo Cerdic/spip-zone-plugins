@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'lien_lier_article' => 'Lier à un ou des articles',
 	'lier_cet_article' => 'Lier',
-	'lier_cet_article_deux_cotes' => 'Lier des deux cotés',
+	'lier_cet_article_deux_cotes' => 'Lier des deux côtés',
 	//
 	
 	'ob_pb'=>'Il n\'est pas possible de rendre obligatoire le type de liaison : en effet les articles ci-dessous possèdent des liaisons non typées. Typez les d\'abords, puis rendez-obligatoire le typage.',
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'supprimer_le_lien' => 'Délier',
-	'supprimer_le_lien_deux_cotes' => 'Délier des deux cotés',
+	'supprimer_le_lien_deux_cotes' => 'Délier des deux côtés',
 	'sup_pb'=>'Impossible de supprimer les types de liaisons suivantes : des liaisons les utilisent. Il vous faut donc modifier au préalable ces liaions.',
 
 	// T
