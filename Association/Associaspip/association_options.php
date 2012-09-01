@@ -1004,18 +1004,21 @@ function association_totauxinfos_intro($titre, $type='', $id=0, $DesLignes=array
 		$res .= '<dt>'. _T("$PrefixeLangue:$dt") .'</dt><dd>'. propre($dd) .'</dd>'; // propre() encadre dans P... Cette presentation est propre a Associaspip. Habituellement on a : $res .= "<div class='$dt'><strong>". _T("$PrefixeLangue:$dt") ."</strong> $dd</div>";
 	}
 	if ($ObjetEtendu) {
-/* Le code suivant fonctionne, mais :
--* il manque le formatage correct des donnees, surtout pour les listes (cas par exemple des : auteurs, mots cles, documents, enums definis dans l'interface).
--* seuls les champs extras crees manuellement (par l'interface donc) sont pris en compte, pas ceux rajoutes via pipeline par d'autres plugins.
-		$champsExtras = association_trouver_iextras($ObjetEtendu);
+		$champsExtras = association_trouver_iextras($ObjetEtendu, $id); // on recupere les champs extras crees manuellement (i.e. via l'interface d'edition du prive, pas ceux rajoutes par les plugins !)
 		if ( count($champsExtras) ) {
-			$donneesExtras = sql_fetsel(array_keys($champsExtras), "spip_${ObjetEtendu}s", 'id_'.($type?$type:$ObjetEtendu).'='.intval($id) ); // on recupere les donnees... (il faut que le nom de la table soit le pluriel en "-s" de l'objet et que l'identifiant soit l'objet prefixe de "id_" :-S)
-			foreach ($champsExtras as $col_name => $col_label) {
-				$res .= '<dt>'. _T($col_label) .'</dt><dd>'. propre($donneesExtras[$col_name]) .'</dd>'; // propre() encadre dans P... Cette presentation est propre a Associaspip. L'appel au pipeline "afficher_contenu_objet" remplace tout le "foreach" avec plutot : $res .= "<div class='$col_name'><strong>$col_label</strong> $donneesExtras[$col_name]</div>";
+			foreach ($champsExtras as $champExtra) {
+				$res .= '<dt>'. $champExtra[0] .'</dt>';
+				$res .= '<dd>'. $champExtra[1] .'</dd>';
+/*
+				if ( strstr($champExtra[1], '<div')===0 ) { // c'est dans un "DIV" superflu
+					$res .= substr_replace( substr_replace($chamExtra[1], '</dd>', strrpos($chamExtra[1],'</div>'), 6), 'dd', 1, 3);
+				} else {
+					$res .= '<dd>'. $champExtra[0] .'</dd>';
+				}
+*/
+				$res .= '<!--dd>'. $champExtra[2] .'</dd-->'; // comparaison de controle
 			}
 		}
-du coup, on readapte : */
-		$res .= '<dt>+</dt><dd>'. pipeline('afficher_contenu_objet', array('args'=>array('type'=>$ObjetEtendu, 'id_objet'=>$id, 'contexte'=>array()), 'data'=>'',) ) .'</dd>';
 	}
 	if ( count($DesLignes) OR $ObjetEtendu )
 		$res .= '</dl>';
@@ -1446,18 +1449,41 @@ function association_mySel($varaut, $variable, $option=NULL)
  *
  * @param string $ObjetEtendu
  *   Nom de l'objet dont on veut recuperer les champs etendus
+ * @param int $id
+ *   ID de l'objet dont il veut recuperer aussi les donnees
+ *   Par defaut : aucun (i.e. 0)
  * @return array $champsExtrasVoulus
- *   'nom_de_la_colonne'=>"Libelle du champ"
+ *   - si on ne veut pas de donnee :
+ *     'nom_de_la_colonne'=>"Libelle du champ"
+ *   - si on veut aussi les donnees :
+ *     'nom_de_la_colonne'=>array( "Libelle du champ", "Donnee formatee", "Donnee brute SQL")
  */
-function association_trouver_iextras($ObjetEtendu)
+function association_trouver_iextras($ObjetEtendu, $id=0)
 {
 	$champsExtrasVoulus = array();
 	if (test_plugin_actif('IEXTRAS')) { // le plugin "Interfaces pour ChampsExtras2" est installe et active : on peut donc utiliser les methodes/fonctions natives...
 		include_spip('inc/iextras'); // charger les fonctions de l'interface/gestionnaire (ce fichier charge les methode du core/API)
+		if ($id)
+			include_spip('cextras_pipelines'); // pour eviter le "Fatal error : Call to undefined function cextras_enum()" en recuperant un fond utilisant les enum...
 		$ChampsExtrasGeres = iextras_get_extras_par_table(); // C'est un tableau des differents "objets etendus" (i.e. tables principaux SPIP sans prefixe et au singulier -- par exemple la table 'spip_asso_membres' correspond a l'objet 'asso_membre') comme cle.
-		foreach ($ChampsExtrasGeres[$ObjetEtendu] as $$ChampExtraRang => $ChampExtraInfos ) { // Pour chaque objet, le tableau a une entree texte de cle "id_objet" et autant d'entrees tableau de cles numerotees automatiquement (a partir de 0) qu'il y a de champs extras definis. Chaque champ extra defini est un tableau avec les cle=>type suivants : "table"=>string, "champ"=>string, "label"=>string, "precisions"=>string, "obligatoire"=>string, "verifier"=>bool, "verifier_options"=>array, "rechercher"=>string, "enum"=>string, "type"=>string, "sql"=>string, "traitements"=>string, "saisie_externe"=>bool, "saisie_parametres"]=>array("explication"=>string, "attention"=>string, "class"=> string, "li_class"]=>string,)
-			if ( is_array($ChampExtraInfos)
-				$champsExtrasVoulus[$ChampExtraInfos['champ']] = _TT($ChampExtraInfos['label']); // _TT est defini dans cextras_balises.php
+		foreach ($ChampsExtrasGeres[$ObjetEtendu] as $ChampExtraRang => $ChampExtraInfos ) { // Pour chaque objet, le tableau a une entree texte de cle "id_objet" et autant d'entrees tableau de cles numerotees automatiquement (a partir de 0) qu'il y a de champs extras definis.
+			if ( is_array($ChampExtraInfos) ) { // Chaque champ extra defini est un tableau avec les cle=>type suivants : "table"=>string, "champ"=>string, "label"=>string, "precisions"=>string, "obligatoire"=>string, "verifier"=>bool, "verifier_options"=>array, "rechercher"=>string, "enum"=>string, "type"=>string, "sql"=>string, "traitements"=>string, "saisie_externe"=>bool, "saisie_parametres"]=>array("explication"=>string, "attention"=>string, "class"=> string, "li_class"]=>string,)
+				$label = _TT($ChampExtraInfos['label']); // _TT est defini dans cextras_balises.php
+				if ( $id ) {
+					$desc_table = charger_fonction('trouver_table', 'base');
+					$champs = $desc_table("spip_$ChampExtraInfos[table]s");
+					$datum_raw = sql_getfetsel($ChampExtraInfos['champ'], "spip_$ChampExtraInfos[table]s", $champs['key']['PRIMARY KEY'].'='.intval($id) ); // on recupere les donnees... (il faut que la table ait le nom de l'objet et le suffixe "s" :-S)
+					$datum_parsed = recuperer_fond('extra-vues/'.$ChampExtraInfos['type'], array (
+						'champ_extra' => $ChampExtraInfos['champ'],
+						'label_extra' => '', // normalement : _TT($ChampExtraInfos['label']), avec la chaine vide on aura juste "<strong></strong> " a virer...
+						'voleur_extra' => $ChampExtraInfos['traitement']?$ChampExtraInfos['traitement']($datum_raw):$datum_raw,
+						'enum_extra' => $ChampExtraInfos['enum'], // parametre indispensable pour les champs de type "option"/"radio"/"case" http://forum.spip.net/fr_245942.html#forum245980
+					)); // resultat du pipeline "affiche_contenu_objet" altere (prive du libelle du champ qui est envoye separement)
+					$champsExtrasVoulus[$ChampExtraInfos['champ']] = array( $label, str_ireplace('<strong></strong>', '', $datum_parsed), $datum_raw );
+				} else {
+					$champsExtrasVoulus[$ChampExtraInfos['champ']] = $label;
+				}
+			}
 		}
 	} else { // le plugin "Interfaces pour ChampsExtras2" n'est pas actif :-S Mais peut-etre a-t-il ete installe ?
 		$ChampsExtrasGeres = @unserialize(str_replace('O:10:"ChampExtra"', 'a', $GLOBALS['meta']['iextras'])); // "iextras (interface)" stocke la liste des champs geres dans un meta. Ce meta est un tableau d'objets "ChampExtra" (un par champ extra) manipules par "cextras (core)". On converti chaque objet en tableau
@@ -1466,7 +1492,84 @@ function association_trouver_iextras($ObjetEtendu)
 		$TT = function_exists('_T_ou_typo') ? '_T_ou_typo' : 'T' ; // Noter que les <multi>...</multi> et <:xx:> sont aussi traites par propre() et typo() :  http://contrib.spip.net/PointsEntreeIncTexte
 		foreach ($ChampsExtrasGeres as $ChampExtra) { // Chaque champ extra defini est un tableau avec les cle=>type suivants (les cles commencant par "_" initialisent des methodes de meme nom sans le prefixe) : "table"=>string, "champ"=>string, "label"=>string, "precisions"=>string, "obligatoire"=>string, "verifier"=>bool, "verifier_options"=>array, "rechercher"=>string, "enum"=>string, "type"=>string, "sql"=>string, "traitements"=>string, "_id"=>string, "_type"=>string, "_objet"=>string, "_table_sql"=>string, "saisie_externe"=>bool, "saisie_parametres"]=>array("explication"=>string, "attention"=>string, "class"=> string, "li_class"]=>string,)
 			if ($ChampExtra['table']==$ObjetEtendu) // c'est un champ extra de la 'table' ou du '_type' d'objet qui nous interesse
-				$champsExtrasVoulus[$ChampExtra['champ']] = $TT($ChampExtra['label']);
+				$label = $TT($ChampExtra['label']);
+				if ( $id ) {
+					$datum_raw = sql_getfetsel($ChampExtra['champ'], $ChampExtra[_table_sql], "id__$ChampExtra[_type]=".intval($id) ); // on recupere les donnees... (il faut que l'identifiant soit l'objet prefixe de "id_" :-S)
+					switch ( $ChampExtra['type'] ) { // Comme on n'est pas certain de pouvoir trouver "inc/iextra.php" et "inc/cextra.php" on a des chance que foire par moment. On va donc gerer les cas courants manuellement.
+						case 'case' : // "<select type='checkbox' .../>..."
+						case 'option' : // "<select ...>...</select>"
+						case 'radio' : // "<select type='radio' .../>..."
+							$valeurs = array();
+							$enum = explode("\r\n", $ChampExtra['enum']);
+							foreach ($enum as $pair) {
+								list($key,$value) = explode(',', $pair, 1);
+								$valeurs[$key] = $value;
+							}
+							$datum_parsed = $ChampExtra['traitement']?$ChampExtra['traitement']($valeurs[$datum_raw]):$valeurs[$datum_raw];
+							break;
+						case 'oui_non' :
+							$datum_parsed = _T("item:$datum_raw");
+							break;
+//						case 'asso_activite' :
+						case 'assoc_compte' :
+//						case 'asso_don' :
+						case 'asso_membre' :
+						case 'asso_ressource' :
+//						case 'asso_vente' :
+							$raccourci = substr($ChampExtra['type'], 4);
+							if ( $ChampExtra['traitement'] )
+								$datum_parsed = $ChampExtra['traitement']('[->'.$raccourci.$datum_raw.']');
+							else { // il faut une requete de plus
+								switch ($raccourci) {
+//									case 'activite' :
+									case 'compte' :
+										$valeur = 'justification';
+										break;
+//									case 'don' :
+									case 'membre' :
+										$valeur = 'nom_famille'; // il faudrait "concatener" : nom_famille, prenom, sexe ; le tout en fonction des metas... mais http://sql.1keydata.com/fr/sql-concatener.php
+										break;
+									case 'ressource' :
+										$valeur = 'intitule';
+										break;
+//									case 'vente' :
+								}
+								$datum_parsed = sql_getfetsel($valeur, "spip_$ChampExtra[type]s", 'id_'.($raccourci=='membre'?'auteur':$raccourci).'='.intval($datum_raw) );
+							}
+							break;
+						case 'article' :
+						case 'auteur' :
+						case 'breve' :
+						case 'document' :
+						case 'evenement' :
+						case 'rubrique' :
+						case 'site' :
+							if ( $ChampExtra['traitement'] )
+								$datum_parsed = $ChampExtra['traitement']('[->'.$ChampExtra['type'].$datum_raw.']');
+							else { // il faut une requete de plus
+								$datum_parsed = sql_getfetsel($ChampExtra['type']=='auteur'?'nom':'titre', "spip_$ChampExtra[type]s", "id_$ChampExtra[type]=".intval($datum_raw) );
+							}
+							break;
+						case 'auteurs' :
+							if ( $ChampExtra['traitement'] ) {
+								$valeurs = explode($datum_raw, ',');
+								foreach ($valeurs as $rang=>$valeur)
+									$valeurs[$rang] = '[->auteur'.$valeurs[$rang].']';
+								$datum_parsed = implode(';', $valeurs);
+							} else { // il faut une requete de plus
+								$valeurs = sql_fetchall('nom', "spip_auteurs", "id_auteur IN (".sql_quote($datum_raw).')' );
+								$datum_parsed = implode(';', $valeurs);
+							}
+							break;
+						case 'bloc' : // "<textarea...>...</textarea>"
+						case 'ligne' : // "<input type='text' .../>"
+						default :
+							$ChampExtra['traitement']?$ChampExtra['traitement']($datum_raw):$datum_raw;
+					}
+					$champsExtrasVoulus[$ChampExtra['champ']] = array( $label, $print, $datum );
+				} else {
+					$champsExtrasVoulus[$ChampExtra['champ']] = $label;
+				}
 		}
 	}
 	return $champsExtrasVoulus;
