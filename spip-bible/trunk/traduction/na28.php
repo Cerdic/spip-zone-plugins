@@ -38,7 +38,15 @@ function extraire_passage($url,$verset_debut,$verset_fin){
 	$code = $tab[2];
 	$tab = explode('</body>',$code);
 	$code = $tab[0];
-	$qp = spip_query_path($code,'body #main',array('omit_xml_declaration'=>true,'encoding'=>'UTF-8','use_parser'=>'xml'));
-	
+	$code = str_replace("</blockquote>",'',$code);
+	$code = str_replace("<blockquote>",'',$code);
+	$code = str_replace('<div class="lineBreak"></div>','',$code);
+	$qp = spip_query_path($code,'.markdown',array('ignore_parser_warnings'=>true,'omit_xml_declaration'=>true,'encoding'=>'UTF-8','use_parser'=>'xml'));
+    
+    echo ($qp->xml());
+    
+    //$children = $qp->children();
+
+    
 }
 ?>
