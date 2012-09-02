@@ -23,7 +23,14 @@ function generer_url_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,
 	return ($base."/$id/$debut/$fin");
 }
 function recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang){
-	
+	$param_cache = array($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang,'na28');
+	if (_NO_CACHE == 0){
+		include_spip('inc/bible_cache');
+		$cache = bible_lire_cache($param_cache);
+		if ($cache){
+			return $cache;	
+		}
+	}
 	$tab = array();// endroit où l'on stocke le passage
 	
 	if ($chapitre_debut == $chapitre_fin){ // cas le plus simple
@@ -48,6 +55,9 @@ function recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$v
 	    	}
 	    	$chap++;	
 	    }
+	}
+	if (_NO_CACHE == 0){
+		bible_ecrire_cache($param_cache,$tab);
 	}
 	return $tab;
 }
