@@ -43,10 +43,15 @@ function extraire_passage($url,$verset_debut,$verset_fin){
 	$code = str_replace('<div class="lineBreak"></div>','',$code);
 	$qp = spip_query_path($code,'.markdown',array('ignore_parser_warnings'=>true,'omit_xml_declaration'=>true,'encoding'=>'UTF-8','use_parser'=>'xml'));
     
-    echo ($qp->xml());
+    $tab_verset=array();
     
-    //$children = $qp->children();
-
+    $versets = $qp->children(); // chaque p
+    foreach ($versets as $verset){ // le contenu de chaque <p>
+        $id    = qp($verset,'.verse');
+        $texte = qp($verset,'.greek');
+        $tab_verset[$id->text()]=$texte->text();
+    }
+    return($tab_verset);
     
 }
 ?>
