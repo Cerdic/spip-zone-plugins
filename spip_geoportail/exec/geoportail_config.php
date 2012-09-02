@@ -96,9 +96,10 @@ function exec_geoportail_config()
 			. debut_cadre_trait_couleur("administration-24.gif", true, "", _T('geoportail:geoportail_api'))
 			. '<p>'._T('geoportail:geoportail_api_info').'</p>'
 			. fin_cadre_trait_couleur(true)
-			*/
+			
 			. ($geoportail_js ? "<br/>".$geoportail_js : "")
 			. "<br/><input type='checkbox' name='gpp3' id='gpp3' ".($GLOBALS['meta']['geoportail_gpp3'] ? "CHECKED":"")."><label for='gpp3'>"._T('geoportail:gpp3')."</label>"
+			*/
 			
 			."</p>"
 			.fin_cadre_relief(true)

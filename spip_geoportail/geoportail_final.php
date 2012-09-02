@@ -11,8 +11,8 @@ function geoportail_affichage_final($page)
 	$action = calculer_action_auteur('geoportail');
 	
 	// Version de l'API
-	$version = '1.3';
-	if ($GLOBALS['meta']['geoportail_gpp3']) $version = '2.0.0beta';
+	$version = '2.0.0';
+	// if ($GLOBALS['meta']['geoportail_gpp3']) $version = '2.0.0beta';
 
 	// Version debug de l'API
 	if ($GLOBALS['geoportail_debug']) $api = "http://depot.ign.fr/geoportail/api/js/$version/lib/geoportal/lib/Geoportal.js";
