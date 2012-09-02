@@ -24,9 +24,32 @@ function generer_url_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,
 }
 function recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang){
 	
-
-	$url = generer_url_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang);	
-	return extraire_passage($url,$verset_debut,$verset_fin);
+	$tab = array();// endroit où l'on stocke le passage
+	
+	if ($chapitre_debut == $chapitre_fin){ // cas le plus simple
+        $url = generer_url_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang);
+        $tab[$chapitre_debut] = extraire_passage($url,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin);
+	}
+	else {
+	    $chap = $chapitre_debut;
+	    
+	    while ($chap <= $chapitre_fin){ // On reconstruit chapitre par chapitre
+	    	if ($chap == $chapitre_debut){// pour le premier chapitre du lot	
+	    		$url = generer_url_passage($livre,$chapitre_debut,$verset_debut,$chapitre_debut,0,$lang);
+	    		$tab[$chap] = extraire_passage($url,$verset_debut,0); 
+	    	}
+	    	else if ($chap == $chapitre_fin){// pour le dernier chapitre du lot
+	    		$url = generer_url_passage($livre,$chapitre_fin,1,$chapitre_fin,$verset_fin,$lang);
+	    		$tab[$chap] = extraire_passage($url,1,$verset_fin); 
+	    	}
+	    	else {// pour les autres chapitre
+	    		$url = generer_url_passage($livre,$chap,0,$chap,0,$lang);
+	    		$tab[$chap] = extraire_passage($url,1,$chap,1000000);	
+	    	}
+	    	$chap++;	
+	    }
+	}
+	return $tab;
 }
 
 function extraire_passage($url,$verset_debut,$verset_fin){
