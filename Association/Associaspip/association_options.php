@@ -577,7 +577,7 @@ function association_formater_prix($montant, $devise_code='', $devise_symb='', $
 		else
 			$devise_symb = $devise_code;
 	}
-	$devise = ($html_abbr ? "<$htm_abbr class='currency' title='". htmlspecialchars($devise_code, ENT_QUOTES, $GLOBALS['meta']['charset']) .'\'>' : '') . htmlspecialchars($devise_symb, ENT_QUOTES, $GLOBALS['meta']['charset']) . ($html_abbr?"</$htm_abbr>" :'');
+	$devise = ($html_abbr ? "<$htm_abbr class='currency' title='". htmlspecialchars($devise_code, ENT_QUOTES, $GLOBALS['meta']['charset']) .'\'>' : '') . $devise_symb . ($html_abbr?"</$htm_abbr>" :'');
 	$res .= _T('asso:devise_montant', array('montant'=>$montant, 'devise'=>$devise) );
 	return $html_span ? "$res</$htm_span>" : $res;
 }
@@ -1139,22 +1139,22 @@ function association_totauxinfos_effectifs($legende='', $table_textes, $table_no
  * @attention
  *   Tous ces parametres sont facultatifs, mais un tableau est quand meme genere dans tous les cas !
  */
-function association_totauxinfos_montants($legende='',$somme_recettes=0,$somme_depenses=0)
+function association_totauxinfos_montants($legende='', $somme_recettes=0, $somme_depenses=0)
 {
 	$res = '<table width="100%" class="asso_infos">';
 	$res .= '<caption>'. _T('asso:totaux_montants', array('de_par'=>_T("local:$legende"))) .'</caption><tbody>';
-	if ($somme_recettes) {
+#	if ($somme_recettes) {
 		$res .= '<tr class="impair">'
 		. '<th class="entree">'. _T('asso:bilan_recettes') .'</th>'
 		. '<td class="decimal">' .association_formater_prix($somme_recettes). ' </td>'
 		. '</tr>';
-	}
-	if ($somme_depenses) {
+#	}
+#	if ($somme_depenses) {
 		$res .= '<tr class="pair">'
 		. '<th class="sortie">'. _T('asso:bilan_depenses') .'</th>'
 		. '<td class="decimal">'.association_formater_prix($somme_depenses) .'</td>'
 		. '</tr>';
-	}
+#	}
 	if ($somme_recettes && $somme_depenses) {
 		$solde = $somme_recettes-$somme_depenses;
 		$res .= '<tr class="'.($solde>0?'impair':'pair').'">'
@@ -1476,7 +1476,7 @@ function association_trouver_iextras($ObjetEtendu, $id=0)
 					$datum_parsed = recuperer_fond('extra-vues/'.$ChampExtraInfos['type'], array (
 						'champ_extra' => $ChampExtraInfos['champ'],
 						'label_extra' => '', // normalement : _TT($ChampExtraInfos['label']), avec la chaine vide on aura juste "<strong></strong> " a virer...
-						'voleur_extra' => $ChampExtraInfos['traitement']?$ChampExtraInfos['traitement']($datum_raw):$datum_raw,
+						'valeur_extra' => $ChampExtraInfos['traitement']?$ChampExtraInfos['traitement']($datum_raw):$datum_raw,
 						'enum_extra' => $ChampExtraInfos['enum'], // parametre indispensable pour les champs de type "option"/"radio"/"case" http://forum.spip.net/fr_245942.html#forum245980
 					)); // resultat du pipeline "affiche_contenu_objet" altere (prive du libelle du champ qui est envoye separement)
 					$champsExtrasVoulus[$ChampExtraInfos['champ']] = array( $label, str_ireplace('<strong></strong>', '', $datum_parsed), $datum_raw );
@@ -1489,7 +1489,7 @@ function association_trouver_iextras($ObjetEtendu, $id=0)
 		$ChampsExtrasGeres = @unserialize(str_replace('O:10:"ChampExtra"', 'a', $GLOBALS['meta']['iextras'])); // "iextras (interface)" stocke la liste des champs geres dans un meta. Ce meta est un tableau d'objets "ChampExtra" (un par champ extra) manipules par "cextras (core)". On converti chaque objet en tableau
 		if ( !is_array($ChampsExtrasGeres) )
 			return array(); // fin : ChampsExtras2 non installe ou pas d'objet etendu.
-		$TT = function_exists('_T_ou_typo') ? '_T_ou_typo' : 'T' ; // Noter que les <multi>...</multi> et <:xx:> sont aussi traites par propre() et typo() :  http://contrib.spip.net/PointsEntreeIncTexte
+		$TT = function_exists('_T_ou_typo') ? '_T_ou_typo' : '_T' ; // Noter que les <multi>...</multi> et <:xx:> sont aussi traites par propre() et typo() :  http://contrib.spip.net/PointsEntreeIncTexte
 		foreach ($ChampsExtrasGeres as $ChampExtra) { // Chaque champ extra defini est un tableau avec les cle=>type suivants (les cles commencant par "_" initialisent des methodes de meme nom sans le prefixe) : "table"=>string, "champ"=>string, "label"=>string, "precisions"=>string, "obligatoire"=>string, "verifier"=>bool, "verifier_options"=>array, "rechercher"=>string, "enum"=>string, "type"=>string, "sql"=>string, "traitements"=>string, "_id"=>string, "_type"=>string, "_objet"=>string, "_table_sql"=>string, "saisie_externe"=>bool, "saisie_parametres"]=>array("explication"=>string, "attention"=>string, "class"=> string, "li_class"]=>string,)
 			if ($ChampExtra['table']==$ObjetEtendu) // c'est un champ extra de la 'table' ou du '_type' d'objet qui nous interesse
 				$label = $TT($ChampExtra['label']);
@@ -1502,7 +1502,7 @@ function association_trouver_iextras($ObjetEtendu, $id=0)
 							$valeurs = array();
 							$enum = explode("\r\n", $ChampExtra['enum']);
 							foreach ($enum as $pair) {
-								list($key,$value) = explode(',', $pair, 1);
+								list($key, $value) = explode(',', $pair, 1);
 								$valeurs[$key] = $value;
 							}
 							$datum_parsed = $ChampExtra['traitement']?$ChampExtra['traitement']($valeurs[$datum_raw]):$valeurs[$datum_raw];
@@ -1511,21 +1511,29 @@ function association_trouver_iextras($ObjetEtendu, $id=0)
 							$datum_parsed = _T("item:$datum_raw");
 							break;
 //						case 'asso_activite' :
-						case 'assoc_compte' :
+						case 'asso_categorie' :
+						case 'asso_compte' :
 //						case 'asso_don' :
+						case 'asso_exercice' :
 						case 'asso_membre' :
 						case 'asso_ressource' :
 //						case 'asso_vente' :
-							$raccourci = substr($ChampExtra['type'], 4);
+							$raccourci = substr($ChampExtra['type'], 4); // on vire le prefixe "asso_"
 							if ( $ChampExtra['traitement'] )
 								$datum_parsed = $ChampExtra['traitement']('[->'.$raccourci.$datum_raw.']');
 							else { // il faut une requete de plus
-								switch ($raccourci) {
+								switch ($raccourci) { // $valeur prend ici le champ SQL contenant la valeur desiree.
 //									case 'activite' :
+									case 'categorie' :
+										$valeur = 'libelle';
+										break;
 									case 'compte' :
 										$valeur = 'justification';
 										break;
 //									case 'don' :
+									case 'exercice' :
+										$valeur = 'intitule';
+										break;
 									case 'membre' :
 										$valeur = 'nom_famille'; // il faudrait "concatener" : nom_famille, prenom, sexe ; le tout en fonction des metas... mais http://sql.1keydata.com/fr/sql-concatener.php
 										break;
@@ -1533,8 +1541,11 @@ function association_trouver_iextras($ObjetEtendu, $id=0)
 										$valeur = 'intitule';
 										break;
 //									case 'vente' :
+									default :
+										$valeur = 'titre'; // sauf coincidence heurese, on devrait avoir une erreur...
+										break;
 								}
-								$datum_parsed = sql_getfetsel($valeur, "spip_$ChampExtra[type]s", 'id_'.($raccourci=='membre'?'auteur':$raccourci).'='.intval($datum_raw) );
+								$datum_parsed = sql_getfetsel($valeur, "spip_$ChampExtra[type]s", 'id_'.($raccourci=='membre'?'auteur':$raccourci).'='.intval($datum_raw) ); // on recupere la donnee grace a la cle etrangere... (il faut que la table soit suffixee de "s" et que l'identifiant soit l'objet prefixe de "id_" :-S)
 							}
 							break;
 						case 'article' :

@@ -35,7 +35,7 @@ maj:2012-02-15; version:0.2.0; licence:GPL; copyleft:Jeannot Lapin, Marcel Bolla
 				</div>
 			</label>
 <B_mode_paiement>
-			<select name="journal" id="journal" class="formo">
+			<select name="journal" id="journal" class="select">
 	<BOUCLE_mode_paiement(ASSO_PLAN) {par code} {active=1}{classe=#META{/association/classe_banques}}{code!=#META{/association/pc_intravirements}}>
 				<option value="#CODE"[(#ENV{journal}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
 	</BOUCLE_mode_paiement>

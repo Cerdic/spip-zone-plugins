@@ -35,7 +35,7 @@ function formulaires_ajouter_cotisation_charger_dist($id_auteur, $nom_prenom, $i
 	// la justification
 	$contexte['justification'] = _T('asso:nouvelle_cotisation') ." [$nom_prenom"."->membre$id_auteur]";
 	// pour passer securiser action
-	$contexte['_action'] = array('editer_cotisations',$id_auteur);
+	$contexte['_action'] = array('ajouter_cotisation',$id_auteur);
 	// on passe aussi les destinations si besoin
 	if ($GLOBALS['association_metas']['destinations']) {
 		$contexte['id_dest'] = '';

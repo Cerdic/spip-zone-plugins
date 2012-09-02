@@ -7,7 +7,7 @@
 		[(#META{/association/civilite}|oui)
 			<li class="editer_sexe">
 				<label for="sexe"><:asso:adherent_libelle_sexe:></label>
-				<input type="text" name="sexe" value="[(#ENV{sexe})]" id="sexe"  class="formo" />
+				<input type="text" name="sexe" value="[(#ENV{sexe})]" id="sexe"  class="text" />
 			</li>
 		]
 			<li class="editer_nom_famille">
@@ -35,7 +35,7 @@
 			<li class="editer_validite">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{validite})</span>]
 				<label for="validite"><:asso:adherent_libelle_validite:></label>
-				<input type="[(#HTML5|?{date,text})]" name="validite" value="[(#ENV{validite}|affdate{Y-m-d})]" id="validite"  class="date" />
+				<input type="[(#HTML5|?{date,text})]" name="validite" value="[(#ENV{validite}|affdate{Y-m-d})]" id="validite" class="date" />
 			</li>
 			<li class="editer_statut_interne">
 				<label for="statut_interne"><:asso:adherent_libelle_statut:></label>
@@ -48,7 +48,7 @@
 				<input type="text" name="id_asso" value="[(#ENV{id_asso})]" id="id_asso"  class="text" />
 			</li>
 		]
-			<<INCLURE{fond=inc/saisir_commentaires, commentaire }>
+			<INCLURE{fond=inc/saisir_commentaires, commentaire }>
 		</ul>
 		[(#REM)<!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
 		<!--extra-->

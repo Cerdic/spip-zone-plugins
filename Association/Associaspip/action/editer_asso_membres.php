@@ -23,7 +23,6 @@ function action_editer_asso_membres()
 		'categorie' => _request('categorie'),
 		'statut_interne' => _request('statut_interne'),
 		'nom_famille' => _request('nom_famille'),
-#		'fonction' => _request('fonction'),
 	);
 	// pour ne pas ecraser les champs quand ils sont desactives
 	if ($GLOBALS['association_metas']['civilite'])

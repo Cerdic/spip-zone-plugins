@@ -34,9 +34,9 @@ function formulaires_editer_asso_exercices_verifier_dist($id_exercice)
 	$erreurs = array();
 
 	/* on verifie la validite des dates */
-	if ($erreur = association_verifier_date(_request('debut')) )
+	if ($erreur = association_verifier_date('debut') )
 		$erreurs['debut'] = $erreur;
-	if ($erreur = association_verifier_date(_request('fin')) )
+	if ($erreur = association_verifier_date('fin') )
 		$erreurs['fin'] = $erreur;
 
 	if (count($erreurs)) {

@@ -18,11 +18,11 @@ function action_ajouter_cotisation()
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_auteur = $securiser_action();
 	$erreur = '';
-	$date = _request('date');
+	$date = association_recuperer_date('date');
 	$journal = _request('journal');
 	$montant =  association_recuperer_montant('montant');
 	$justification = _request('justification');
-	$validite = _request('validite');
+	$validite = association_recuperer_date('validite');
 
 	include_spip('base/association');
 	include_spip('inc/association_comptabilite');

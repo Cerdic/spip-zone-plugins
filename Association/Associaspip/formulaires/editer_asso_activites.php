@@ -74,7 +74,7 @@ function formulaires_editer_asso_activites_verifier_dist($id_activite='')
 	$erreurs = array();
 
 	/* on verifie la validite des dates */
-	if ($erreur = association_verifier_date(_request('date_inscription')) )
+	if ($erreur = association_verifier_date('date_inscription') )
 		$erreurs['date_inscription'] = $erreur;
 	if ($erreur = association_verifier_date('date_paiement', true) )
 		$erreurs['date_paiement'] = $erreur;
