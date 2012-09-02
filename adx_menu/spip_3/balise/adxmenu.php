@@ -1,6 +1,8 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('base/abstract_sql');
+
 function balise_ADXMENU_dist($p) {
     return calculer_balise_dynamique($p, ADXMENU, array('id_article', 'id_rubrique'));
 }
