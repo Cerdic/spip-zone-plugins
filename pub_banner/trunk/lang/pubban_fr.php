@@ -57,7 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirm_undelete' => 'Attention : vous avez demandé la réhabilitation d un encart publicitaire ...\\n\\nCliquez sur OK pour confirmer.',
 	'confirm_vider_poubelle' => 'Êtes-vous sûr de vouloir vider la poubelle ?',
 	'content_trash' => 'Contenu de la poubelle',
-	'cube_banner' => 'Bannière "Cude"',
+	'cube_banner' => 'Bannière "Cube"',
 
 	// D
 	'date_add' => 'Création',
@@ -95,7 +95,7 @@ Ces bannières s\'intègrent dans vos squelettes en indiquant simplement la bali
 #PUBBAN{nom_de_la_banniere}
 
 // ou ID de la banniere
-#PUBBAN{id_empl}
+#PUBBAN{id_banniere}
 </cadre>
 Suivie du nom de la bannière que vous souhaitez afficher. La balise est remplacée par une frame de la taille de la bannière.',
 	'documentation_2' => 'Pour une raison pratique [[Spip Bonux est utilisé par Pub Banner pour sa fonctionnalité \'POUR\', qui permet de créer des boucles depuis des array PHP (ndlr) ...]], le plugin PUB BANNER nécessite d\'avoir installé au préalable le plugin {{Spip Bonux}} en version 1.3 au minimum.
