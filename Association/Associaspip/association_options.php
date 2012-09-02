@@ -905,7 +905,7 @@ function generer_url_don($id, $param='', $ancre='') {
 }
 
 function generer_url_asso_membre($id, $param='', $ancre='') {
-	return  generer_url_ecrire('voir_adherent', 'id='.intval($id));
+	return  generer_url_ecrire('adherent', 'id='.intval($id));
 }
 function generer_url_membre($id, $param='', $ancre='') {
 	return  array('asso_membre', $id);

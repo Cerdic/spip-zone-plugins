@@ -58,7 +58,7 @@ function exec_adherent(){
 		// datation et raccourcis
 		if ($full)
 			$res['adherent_label_modifier_membre'] = array('edit-24.gif', 'edit_adherent', "id=$id_auteur");
-		$res["adherent_label_modifier_$statut"] = array('membre_infos.png', 'auteur_infos', "id_auteur=$id_auteur"); // pas modifier mais voir page...
+		$res["adherent_label_modifier_$statut"] = array('membre_infos.png', 'auteur_infos', "id_auteur=$id_auteur");
 		icones_association('', $res);
 		debut_cadre_association('annonce.gif', 'membre', $nom_membre);
 		// Liste des groupes (on ignore les groupes d'id <100 qui sont dedies a la gestion des autorisations)

@@ -33,7 +33,7 @@ function exec_ajout_cotisation()
 		echo association_totauxinfos_intro(htmlspecialchars(association_calculer_nom_membre($row['sexe'], $row['prenom'], $row['nom_famille'])), 'membre', $id_auteur, $infos );
 		// datation et raccourcis
 		icones_association('', array(
-			'voir_adherent' => array('edit-24.gif', 'voir_adherent', "id=$id_auteur"), // item de langue...
+			'voir_adherent' => array('edit-24.gif', 'adherent', "id=$id_auteur"), // item de langue...
 		));
 		debut_cadre_association('annonce.gif', 'nouvelle_cotisation');
 		echo recuperer_fond('prive/editer/ajouter_cotisation', array (
