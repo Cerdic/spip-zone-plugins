@@ -18,13 +18,13 @@
 	</thead>
 	<tbody>
 	<BOUCLE_liste_dictionnaires(DICTIONNAIRES)
-		{actif?}
+		{statut?}
 		{recherche?}
 		{tri #ENV{par,#ENV{recherche}|?{points,titre}},#GET{defaut_tri}}
 		{pagination #ENV{pagination,10}}
 	>
 		<tr class="[(COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class="statut">[(#ACTIF|?{<:dictionnaire:champ_actif_oui:>, <:dictionnaire:champ_actif_non:>})]</td>
+			<td class="statut">[(#ID_DICTIONNAIRE|puce_changement_statut{#STATUT, '', dictionnaire, true})]</td>
 			<td class="titre principale"><a href="[(#ID_DICTIONNAIRE|generer_url_entite{dictionnaire})]"
 				title="<:info_numero_abbreviation|attribut_html:> #ID_DICTIONNAIRE">[(#RANG). ]#TITRE <BOUCLE_nb_definitions(DEFINITIONS){id_dictionnaire}{tout}/>[(#TOTAL_BOUCLE|oui)([(#TOTAL_BOUCLE|singulier_ou_pluriel{definition:info_1_definition, definition:info_nb_definitions})])]<//B_nb_definitions></a></td>
 			<td class="id">[(#AUTORISER{modifier,dictionnaire,#ID_DICTIONNAIRE}|?{

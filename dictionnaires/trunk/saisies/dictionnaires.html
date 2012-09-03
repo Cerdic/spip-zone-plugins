@@ -23,7 +23,7 @@
 <select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
 		<option value="">[(#ENV{option_intro})]</option>]
-	<BOUCLE_dictionnaires(DICTIONNAIRES){par num titre, titre}{actif ?}>
+	<BOUCLE_dictionnaires(DICTIONNAIRES){par num titre, titre}{statut ?}>
 		[(#ENV{multiple}|oui)
 		<option value="#ID_DICTIONNAIRE"[(#ID_DICTIONNAIRE|in_array{#ENV{valeur_forcee,#GET{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>#TITRE</option>]
 		[(#ENV{multiple}|non)

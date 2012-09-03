@@ -1,12 +1,38 @@
 <?php
 
+/**
+ * Gestion du formulaire de d'édition d'une définition
+ *
+ * @package SPIP\Dictionnaires\Formulaires
+**/
+
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/editer');
 
+
+/**
+ * Définition des champs de saisie du formulaire d'édition de définition
+ *
+ * @param int|string $id_definition
+ *     Identifiant de la définition. 'new' pour une nouvelle définition.
+ * @param int $id_dictionnaire
+ *     Identifiant du dictionnaire parent
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @return array
+ *     Liste de saisies et leurs options
+**/
 function formulaires_editer_definition_saisies_dist($id_definition='new', $id_dictionnaire=0, $retour=''){
 	$saisies = array(
+		array(
+			'saisie' => 'hidden',
+			'options' => array(
+				'nom' => 'id_definition',
+				'valeur' => $id_definition
+			)
+		),
 		array(
 			'saisie' => 'input',
 			'options' => array(
@@ -63,6 +89,20 @@ function formulaires_editer_definition_saisies_dist($id_definition='new', $id_di
 	return $saisies;
 }
 
+/**
+ * Chargement du formulaire d'édition de définition
+ *
+ * @see formulaires_editer_objet_charger()
+ * 
+ * @param int|string $id_definition
+ *     Identifiant de la définition. 'new' pour une nouvelle définition.
+ * @param int $id_dictionnaire
+ *     Identifiant du dictionnaire parent
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @return array
+ *     Environnement du formulaire
+**/
 function formulaires_editer_definition_charger_dist($id_definition='new',  $id_dictionnaire=0, $retour=''){
 	$contexte = formulaires_editer_objet_charger('definition', $id_definition, $id_dictionnaire, 0, $retour, '');
 	
@@ -74,17 +114,45 @@ function formulaires_editer_definition_charger_dist($id_definition='new',  $id_d
 	return $contexte;
 }
 
+/**
+ * Vérifications du formulaire d'édition de définition
+ *
+ * @see formulaires_editer_objet_verifier()
+ * 
+ * @param int|string $id_definition
+ *     Identifiant de la définition. 'new' pour une nouvelle définition.
+ * @param int $id_dictionnaire
+ *     Identifiant du dictionnaire parent
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @return array
+ *     Tableau des erreurs
+**/
 function formulaires_editer_definition_verifier_dist($id_definition='new',  $id_dictionnaire=0, $retour=''){
 	$erreurs = formulaires_editer_objet_verifier('definition', $id_definition);
 	return $erreurs;
 }
 
+/**
+ * Traitements du formulaire d'édition de définition
+ *
+ * @see formulaires_editer_objet_traiter()
+ * 
+ * @param int|string $id_definition
+ *     Identifiant de la définition. 'new' pour une nouvelle définition.
+ * @param int $id_dictionnaire
+ *     Identifiant du dictionnaire parent
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @return array
+ *     Retour des traitements
+**/
 function formulaires_editer_definition_traiter_dist($id_definition='new',  $id_dictionnaire=0, $retour=''){
-	if ($retour) refuser_traiter_formulaire_ajax();
+
 	if (is_null(_request('type'))){ set_request('type', ''); }
 	if (is_null(_request('casse'))){ set_request('casse', ''); }
+
 	$retours = formulaires_editer_objet_traiter('definition', $id_definition, $id_dictionnaire, 0, $retour, '');
-	
 	return $retours;
 }
 

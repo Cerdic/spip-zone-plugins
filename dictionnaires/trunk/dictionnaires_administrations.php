@@ -1,62 +1,59 @@
 <?php
 
+/**
+ * Fichier gérant l'installation et désinstallation du plugin
+ *
+ * @package SPIP\Dictionnaire\Installation
+**/
+
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('inc/meta');
+/**
+ * Installation/maj des tables dictionnaires et définitions...
+ *
+ * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @param string $version_cible
+ *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
+ * @return void
+ */
+function dictionnaires_upgrade($nom_meta_base_version, $version_cible) {
 
-// Installation et mise à jour
-function dictionnaires_upgrade($nom_meta_version_base, $version_cible){
+	include_spip('inc/config');
+	include_spip('base/create');
 
-	$version_actuelle = '0.0.0';
-	if (
-		(!isset($GLOBALS['meta'][$nom_meta_version_base]))
-		|| (($version_actuelle = $GLOBALS['meta'][$nom_meta_version_base]) != $version_cible)
-	){
-		
-		if (version_compare($version_actuelle,'0.0.0','=')){
-			// Création des tables
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
-			creer_base();
-			
-			// Valeurs de config par défaut
-			include_spip('inc/config');
-			ecrire_config('dictionnaires/remplacer_premier_defaut', 'on');
-			ecrire_config('dictionnaires/remplacer_premier_abbr', 'on');
-			
-			// Migration depuis F&T si présent
-			dictionnaires_migrer_acronymes();
-			
-			echo "Installation du plugin dictionnaires<br/>";
-			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
-		}
-		
-		if (version_compare($version_actuelle,$version_cible='0.2.0','<')){
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
-			
-			// On ajoute un champ pour choisir le type par défaut dans un dictionnaire
-			maj_tables('spip_dictionnaires');
-			
-			// On change la version
-			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
-		}
-		
-		if (version_compare($version_actuelle,$version_cible='0.3.0','<')){
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
-			
-			// On ajoute un champ pour forcer la prise en compte de la casse pour une définition
-			maj_tables('spip_definitions');
-			
-			// On change la version
-			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
-		}
-	}
+	$maj = array();
+	$maj['create'] = array(
+		array('maj_tables', array('spip_dictionnaires', 'spip_definitions', 'spip_definitions_liens')),
+		array('ecrire_config', 'dictionnaires/remplacer_premier_defaut', 'on'),
+		array('ecrire_config', 'dictionnaires/remplacer_premier_abbr', 'on'),
+		array('dictionnaires_migrer_acronymes'),
+	);
 
+	$maj['0.2.0'] = array(array('maj_tables', 'spip_dictionnaires'));
+	$maj['0.3.0'] = array(array('maj_tables', 'spip_definitions'));
+
+	// deplacer les statuts du dictionnaires de 'actif' a 'statut'
+	$maj['0.4.0'] = array(
+		array('maj_tables', 'spip_dictionnaires'),
+		array('sql_update', 'spip_dictionnaires', array('statut'=>'actif'), 'actif=1'),
+		array('sql_update', 'spip_dictionnaires', array('statut'=>'inactif'), 'actif=0'),
+		array('sql_alter', 'TABLE spip_dictionnaires DROP COLUMN actif'),
+	);
+	// pas de not null sans integer pour sqlite
+	$maj['0.4.1'] = array(
+		array('sql_alter', 'TABLE spip_definitions CHANGE COLUMN id_dictionnaire id_dictionnaire bigint(21) not null default 0')
+	);
+
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
+/**
+ * Migre les acronymes du plugins Forms & Tables (s'il est actif)
+ * dans ce plugin.
+**/
 function dictionnaires_migrer_acronymes(){
 	// Si F&T est actif là tout de suite et qu'il y a une table d'acronymes
 	if (
@@ -66,7 +63,6 @@ function dictionnaires_migrer_acronymes(){
 	){
 		include_spip('forms_fonctions');
 		$id_form = intval(reset($liste));
-		spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND statut='publie'");
 		$acronymes = sql_allfetsel('id_donnee, statut, date', 'spip_forms_donnees', 'id_form = '.$id_form);
 		if ($acronymes and is_array($acronymes)){
 			// On commence par créer un dictionnaire pour l'importation
@@ -75,7 +71,7 @@ function dictionnaires_migrer_acronymes(){
 				// On lui met des champs par défaut
 				dictionnaire_set($id_dictionnaire, array(
 					'titre' => _T('dictionnaire:importer_acronymes_titre'),
-					'actif' => 1,
+					'statut' => 'actif',
 					'descriptif' => _T('dictionnaire:importer_acronymes_descriptif'),
 					'type_defaut' => 'abbr',
 				));
@@ -110,18 +106,27 @@ function dictionnaires_migrer_acronymes(){
 	}
 }
 
-// Désinstallation
-function dictionnaires_vider_tables($nom_meta_version_base){
+/**
+ * Désinstallation/suppression des tables dictionnaires et definitions
+ *
+ * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @return void
+ */
+function dictionnaires_vider_tables($nom_meta_base_version){
 
 	include_spip('base/abstract_sql');
-	
+
 	// On efface les tables du plugin
 	sql_drop_table('spip_dictionnaires');
 	sql_drop_table('spip_definitions');
 	sql_drop_table('spip_definitions_liens');
-		
+
+	// Effacer les configurations
+	effacer_meta('dictionnaires');
+
 	// On efface la version entregistrée
-	effacer_meta($nom_meta_version_base);
+	effacer_meta($nom_meta_base_version);
 
 }
 

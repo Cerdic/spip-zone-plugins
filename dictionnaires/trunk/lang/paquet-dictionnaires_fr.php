@@ -15,5 +15,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // D
 	'dictionnaires_description' => 'Permet la création de dictionnaires regroupant des définitions. Les termes définis sont automatiquement détectés dans les textes du site et il est alors possible de les insérer dans le HTML du texte de manière accessible.',
 	'dictionnaires_slogan' => 'Créer des dictionnaires',
+	'dictionnaires_nom' => 'Dictionnaires',
 );
 ?>

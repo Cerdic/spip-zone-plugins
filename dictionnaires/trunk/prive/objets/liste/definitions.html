@@ -27,7 +27,7 @@
 		{pagination #ENV{pagination,10}}
 	>
 		<tr class="[(COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class="statut">[(#ID_DEFINITION|puce_changement_statut{#STATUT,#ID_DICTIONNAIRE,definition,true})]</td>
+			<td class="statut">[(#ID_DEFINITION|puce_changement_statut{#STATUT, #ID_DICTIONNAIRE, definition, true})]</td>
 			<td class="titre principale"><a href="[(#ID_DEFINITION|generer_url_entite{definition})]"
 				title="<:info_numero_abbreviation|attribut_html:> #ID_DEFINITION">[(#RANG). ]#TITRE</a></td>
 			<td dir="#LANG_DIR" class="#EDIT{texte} descriptif">[(#TEXTE|ptobr|couper{80})]</td>

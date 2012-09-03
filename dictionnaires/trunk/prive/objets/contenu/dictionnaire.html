@@ -1,4 +1,4 @@
-<BOUCLE_afficher_contenu(DICTIONNAIRES){id_dictionnaire=#ENV{id}}{actif?}>
+<BOUCLE_afficher_contenu(DICTIONNAIRES){id_dictionnaire=#ENV{id}}{statut ?}>
 <div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
 	<div class='label'><:dictionnaire:champ_titre_label:></div>
 	<div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>

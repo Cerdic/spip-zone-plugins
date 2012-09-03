@@ -1,15 +1,36 @@
 <?php
 
+/**
+ * Usage de pipelines
+ * 
+ * @package SPIP\Dictionnaires\Pipelines
+**/
+
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-function dictionnaires_declarer_url_objets($objets){
-	$objets[] = 'dictionnaire';
-	$objets[] = 'definition';
-	return $objets;
-}
-
+/**
+ * Crée des liaisons entre les objets et les définitions.
+ *
+ * Pour chaque objet édité, regarde si les contenus possèdent des définitions
+ * que l'on connaît et dans ce cas crée une liaison entre l'objet et la définition.
+ * 
+ * Cela permet de connaître, pour une définition donnée, la liste des
+ * objets sur lesquels est rattaché une définition. À l'inverse, cela
+ * permet, pour un objet de connaître les définitions qu'il possède.
+ *
+ * @todo
+ *     Tout cela est à faire !!!
+ * 
+ * @pipeline post_edition 
+ *
+ * @param array $flux   Données du pipeline
+ * @return array        Données du pipeline
+**/
 function dictionnaires_post_edition($flux){
+	// TOUT CELA EST A FAIRE
+	return $flux;
+
 	// Seulement si c'est une modif d'objet
 	if ($flux['args']['action'] == 'modifier' and $id_objet = $flux['args']['id_objet']){
 		$trouver_table = charger_fonction('trouver_table', 'base/');
@@ -37,6 +58,18 @@ function dictionnaires_post_edition($flux){
 	}
 }
 
+/**
+ * Ajoute pour les textes passés à propre les définitions sur les
+ * termes à définir.
+ *
+ * N'ajoute pas de définition si les termes à définir sont déjà
+ * dans des balises de définition ou de code, genre <abbr> ou <code>
+ * 
+ * @pipeline post_edition 
+ *
+ * @param string $texte  Texte 
+ * @return string        Texte
+**/
 function dictionnaires_post_propre($texte){
 	$GLOBALS['dictionnaires_id_texte'] = uniqid();
 	include_spip('inc/dictionnaires');
@@ -76,6 +109,19 @@ function dictionnaires_post_propre($texte){
 	return $texte;
 }
 
+
+/**
+ * Callback réceptionnant les captures de termes à définir
+ *
+ * Remplace la trouvaille par une description avec sa définition.
+ * Et on ne le fait qu'au moment de la première occurence, lorsque
+ * c'est configuré comme tel.
+ * 
+ * @pipeline post_edition 
+ *
+ * @param string $captures Terme trouvé
+ * @return string          HTML du terme et de sa définition
+**/
 function dictionnaires_replace_callback($captures){
 	include_spip('inc/config');
 	static $deja_remplaces = array();

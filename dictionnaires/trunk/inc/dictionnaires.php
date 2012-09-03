@@ -1,24 +1,35 @@
 <?php
 
+/**
+ * Fonctions et filtres du dictionnaires
+ *
+ * @package SPIP\Dictionnaires\Fonctions
+ */
+ 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-/*
- * Récupérer un tableau facilement utilisable de toutes les définitions en activité sur le site
+/**
+ * Liste les définitions en activité
+ * 
+ * Récupére un tableau facilement utilisable de toutes les définitions en activité sur le site
  * Une définition active est une définition publié ET dans un dico actif
  *
- * @return array Retourne un tableau des définitions
+ * @param bool $purger
+ *     true pour vider le cache statique des définitions connues.
+ * @return array
+ *     Tableau des définitions
  * 	array(
- 		array(
- 			'titre' => 'Truc',
- 			'texte' => 'Ma définition',
- 			'termes' => array('trucs', 'bidule'), // autres termes qui seront reconnus
- 			'type' => '' | 'abbr',
- 		),
- 		array(
- 			...
- 		)
- *	)
+ * 		array(
+ * 			'titre' => 'Truc',
+ * 			'texte' => 'Ma définition',
+ * 			'termes' => array('trucs', 'bidule'), // autres termes qui seront reconnus
+ * 			'type' => '' | 'abbr',
+ * 		),
+ * 		array(
+ * 			...
+ * 		)
+ * 	)
  */
 function dictionnaires_lister_definitions($purger=false){
 	// Le nom du fichier de cache
@@ -45,7 +56,7 @@ function dictionnaires_lister_definitions($purger=false){
 		$definitions_actives = array();
 		
 		// On récupère tous les dictionnaires actifs
-		$dicos_actifs = sql_allfetsel('id_dictionnaire', 'spip_dictionnaires', 'actif = 1');
+		$dicos_actifs = sql_allfetsel('id_dictionnaire', 'spip_dictionnaires', 'statut = '. sql_quote('actif'));
 		if ($dicos_actifs and is_array($dicos_actifs)){
 			$dicos_actifs = array_map('reset', $dicos_actifs);
 		
@@ -123,10 +134,13 @@ function dictionnaires_lister_definitions($purger=false){
 	return $definitions_actives;
 }
 
-/*
+/**
  * Lister les définitions par terme.
+ * 
  * Chaque clé du tableau est alors un terme reconnu, en minuscule.
  * Une même définition peut donc se trouver plusieurs fois dans la liste, avec différentes clés.
+ *
+ * @return array Tableau des définitions classé par terme
  */
 function dictionnaires_lister_definitions_par_terme(){
 	static $definitions_par_terme = array();
@@ -143,14 +157,23 @@ function dictionnaires_lister_definitions_par_terme(){
 	return $definitions_par_terme;
 }
 
-/*
+/**
  * Fonction de remplacement par défaut pour les termes trouvés dans les textes
+ *
+ * @param string $mot
+ *     Le mot trouvé
+ * @param string $definition
+ *     La définition correspondante
+ * @return string
+ *     Code HTML de remplacement de la définition
  */
-function dictionnaires_remplacer_defaut_dist($mot, $definition){
+function dictionnaires_remplacer_defaut_dist($mot, $definition) {
+	if (!isset($definition['url']) OR !$url = $definition['url']) {
+		$url = generer_url_entite($definition['id_definition'],'definition');
+	}
 	return $mot
-		.'<sup><a href="'
-		.($definition['url']?$definition['url']:generer_url_entite($definition['id_definition'],'definition'))
-		.'" title="'._T('definition:titre_definition').': '.couper(trim(attribut_html(supprimer_tags(typo($definition['texte'])))),80).'">'
+		.'<sup><a href="'.$url.'" title="'._T('definition:titre_definition').': '
+			. couper(trim(attribut_html(supprimer_tags(typo($definition['texte'])))),80).'">'
 		.'?'
 		.'</a></sup>';
 }
