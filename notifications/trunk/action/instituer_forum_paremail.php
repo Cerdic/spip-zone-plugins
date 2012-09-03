@@ -25,7 +25,11 @@ function action_instituer_forum_paremail_dist() {
 
 	$verif = _action_auteur("$action-$arg", '', $pass, 'alea_ephemere');
 
-	$erreur = _T('notifications:info_moderation_interdite');
+	$id_forum = explode("-",$arg);
+	$id_forum = array_shift($arg);
+	include_spip("inc/filtres");
+	$lien_moderation = lien_ou_expose(url_absolue(generer_url_ecrire_objet('forum',$id_forum)),_T('notifications:info_moderation_lien_titre'));
+	$erreur = _T('notifications:info_moderation_url_perimee')."<br />$lien_moderation";
 
 	if ($hash==_action_auteur("$action-$arg", '', $pass, 'alea_ephemere')
 	  OR $hash==_action_auteur("$action-$arg", '', $pass, 'alea_ephemere_ancien'))
@@ -47,9 +51,11 @@ function action_instituer_forum_paremail_dist() {
 		// on recherche le message en verifiant qu'il a bien le statut
 		if ($message = sql_fetsel("id_objet,objet,statut","spip_forum","id_forum=".intval($id_forum))){
 			if ($message['statut']!=$statut_init){
-				$erreur = _T("notifications:info_moderation_deja_faite",array('id_forum'=>$id_forum,'statut'=>$message['statut']));
+				$erreur = _T("notifications:info_moderation_deja_faite",array('id_forum'=>$id_forum,'statut'=>$message['statut']))
+					."<br />$lien_moderation";
 			}
 			else {
+				$erreur = _T('notifications:info_moderation_interdite');
 				// trouver le(s) auteur(s) et verifier leur autorisation
 				$res = sql_select("*","spip_auteurs","email=".sql_quote($email,'','text'));
 				while ($auteur = sql_fetch($res)){
@@ -67,6 +73,7 @@ function action_instituer_forum_paremail_dist() {
 		}
 		else {
 			spip_log("Message forum $id_forum introuvable","moderationparemail"._LOG_INFO_IMPORTANTE);
+			$erreur = "Message forum $id_forum introuvable"; // improbable ?
 		}
 	}
 
