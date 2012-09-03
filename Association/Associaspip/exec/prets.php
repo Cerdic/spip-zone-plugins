@@ -74,7 +74,7 @@ function exec_prets()
 		// datation et raccourcis
 		if ( (is_numeric($ressource['statut']) && $ressource['statut']>0) || $ressource['statut']=='ok' )
 			$res['prets_nav_ajouter'] = array('creer-12.gif', 'edit_pret', "id_ressource=$id_ressource&id_pret=");
-		icones_association(array('ressources'), $res);
+		raccourcis_association('ressources', $res);
 		debut_cadre_association('pret-24.gif', 'prets_titre_liste_reservations');
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_prets'>\n";
 		echo "<thead>\n<tr>";

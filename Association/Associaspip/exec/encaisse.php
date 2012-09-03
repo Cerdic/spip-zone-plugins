@@ -37,14 +37,14 @@ function exec_encaisse()
 			echo association_totauxinfos_stats($financier['intitule'], 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), 'journal='.sql_quote($financier['journal']) .' AND date>='. sql_quote($financier['date_anterieure']) .' AND date<=NOW()');
 		}
 		// datation et raccourcis
-		icones_association(array('comptes', "exercice=$id_exercice"), array(
-			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$id_exercice"),
-			'cpte_bilan_titre_general' => array('finances-24.png', 'compte_bilan', "exercice=$id_exercice"),
-#			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$id_exercice"),
+		raccourcis_association(array('comptes', "exercice=$id_exercice"), array(
+			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "exercice=$id_exercice") ),
+			'cpte_bilan_titre_general' => array('finances-24.png', array('compte_bilan', "exercice=$id_exercice") ),
+#			'annexe_titre_general' => array('finances-24.png', array('annexe', "exercice=$id_exercice") ),
 		));
 		debut_cadre_association('finances-24.png', 'encaisse');
 		$lesEcritures = array(); // initialiser le tableaux des ecritures a afficher
-		/* Recuperer les comptes financiers avec toutes les informations dont on aura besoin */
+		// Recuperer les comptes financiers avec toutes les informations dont on aura besoin
 		$encaisses = sql_select(
 			'a_p.id_plan, a_p.code, a_p.intitule, a_p.date_anterieure, a_p.solde_anterieur, SUM(a_c.recette) AS recettes, SUM(a_c.depense) AS depenses, SUM(a_c.recette-a_c.depense) AS solde_actuel ', // select
 			'spip_asso_comptes AS a_c INNER JOIN spip_asso_plan AS a_p ON a_c.journal=a_p.code', // from

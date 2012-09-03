@@ -63,7 +63,7 @@ function exec_suppr_ressource()
 		// STATS sur la duree et le montant des emprunts
 		echo association_totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree','entete_montant'=>'duree*prix_unitaire',), "id_ressource=$id_ressource");
 		// datation et raccourcis
-		icones_association('');
+		raccourcis_association('');
 		debut_cadre_association('pret-24.gif', 'ressources_titre_suppression_ressources');
 		echo association_bloc_suppression('ressource', $id_ressource );
 		fin_page_association();

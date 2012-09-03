@@ -26,7 +26,7 @@ function exec_edit_vente()
 		// info
 		echo association_totauxinfos_intro('', 'vente', $id_vente);
 		// datation et raccourcis
-		icones_association('');
+		raccourcis_association('');
 		debut_cadre_association('ventes.gif', 'ressources_titre_mise_a_jour');
 		echo recuperer_fond('prive/editer/editer_asso_ventes', array (
 			'id_vente' => $id_vente

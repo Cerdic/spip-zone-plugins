@@ -25,7 +25,7 @@ function exec_edit_relances()
 		// notice
 		echo _T('asso:aide_relances');
 		// datation et raccourcis
-		icones_association(array('adherents'));
+		raccourcis_association('adherents');
 		$statut_interne = _request('statut_interne');
 		if (!$statut_interne)
 			$statut_interne = 'echu';

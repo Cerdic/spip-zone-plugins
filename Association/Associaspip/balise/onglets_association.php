@@ -19,11 +19,11 @@ function balise_ONGLETS_ASSOCIATION_dist ($p) {
 }
 
 function balise_ONGLETS_ASSOCIATION_stat ($args) {
-	return $args; /* on se contente de faire suivre l'argument statique de la balise */
+	return $args; // on se contente de faire suivre l'argument statique de la balise
 }
 
-function balise_ONGLETS_ASSOCIATION_dyn ($titre='') {
-	return association_onglets($titre, FALSE);
+function balise_ONGLETS_ASSOCIATION_dyn ($titre='', $top_exec='') {
+	return association_navigation_onglets($titre, $top_exec, FALSE);
 }
 
 ?>

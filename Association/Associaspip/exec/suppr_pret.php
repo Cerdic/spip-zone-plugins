@@ -60,7 +60,7 @@ function exec_suppr_pret()
 		$infos['nombre_prets'] = sql_countsel('spip_asso_prets', "id_ressource=$id_ressource");
 		echo association_totauxinfos_intro($data['intitule'], 'ressource', $id_ressource, $infos );
 		// datation et raccourcis
-		icones_association('');
+		raccourcis_association('');
 		debut_cadre_association('pret-24.gif', 'prets_titre_suppression_prets');
 		echo association_bloc_suppression('pret', "$id_pret-$id_ressource");
 		fin_page_association();

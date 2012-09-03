@@ -25,7 +25,7 @@ function exec_plan_comptable()
 		// notice
 		echo propre(_T('asso:plan_info'));
 		// datation et raccourcis
-		icones_association(array('association'), array(
+		raccourcis_association('association', array(
 			'plan_nav_ajouter' => array('euro-39.gif', 'edit_plan'),
 		));
 		debut_cadre_association('euro-39.gif',  'plan_comptable');

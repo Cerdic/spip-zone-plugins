@@ -40,10 +40,10 @@ function exec_bilan()
 		$infos['exercice_entete_fin'] = association_formater_date($exercice_data['fin'], 'dtend');
 		echo association_totauxinfos_intro($exercice_data['intitule'], 'exercice', $exercice, $infos);
 		// datation et raccourcis
-		icones_association(array('comptes', "exercice=$exercice"), array(
-			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$exercice"),
-#			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$exercice"),
-			'encaisse' => array('finances-24.png', 'encaisse', "exercice=$exercice"),
+		raccourcis_association(array('comptes', "exercice=$exercice"), array(
+			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "exercice=$exercice") ),
+#			'annexe_titre_general' => array('finances-24.png', array('annexe', "exercice=$exercice") ),
+			'encaisse' => array('finances-24.png', array('encaisse', "exercice=$exercice") ),
 		));
 		// selecteur de destinations
 		if ($GLOBALS['association_metas']['destinations']) {// on affiche une liste de choix de destinations et on cree parallelement les intitule de toutes les destinations dans un tableau

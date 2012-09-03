@@ -25,7 +25,7 @@ function exec_destination()
 		// notice
 		echo propre(_T('asso:destination_info'));
 		// datation et raccourcis
-		icones_association(array('association'), array(
+		raccourcis_association('association', array(
 			'destination_nav_ajouter' => array('euro-39.gif', 'edit_destination'),
 		));
 		debut_cadre_association('euro-39.gif', 'destination_comptable');

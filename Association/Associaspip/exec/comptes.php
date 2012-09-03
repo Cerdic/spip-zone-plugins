@@ -50,7 +50,7 @@ function exec_comptes()
 		$where = 'imputation LIKE '. sql_quote($imputation);
 		$where .= (!is_numeric($vu) ? '' : " AND vu=$vu");
 		$where .= " AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]'";
-		onglets_association('titre_onglet_comptes');
+		onglets_association('titre_onglet_comptes', 'comptes');
 		// INTRO : rappel de l'exercicee affichee
 		echo association_totauxinfos_intro($exercice_data['intitule'],'exercice',$id_exercice);
 		$journaux = sql_allfetsel('journal, intitule', 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON journal=code', "date>='$exercice_data[debut]' AND date<='$exercice_data[fin]'", "intitule DESC"); // on se permet sql_allfetsel car il s'agit d'une association (mois d'une demie dizaine de comptes) et non d'un etablissement financier (des milliers de comptes clients)
@@ -80,11 +80,11 @@ function exec_comptes()
 		$data = sql_fetsel( 'SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses, code, classe',  'spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code', "$where AND classe<>".sql_quote($GLOBALS['association_metas']['classe_banques']). " AND classe<>".sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']), 'code'); // une contribution benevole ne doit pas etre comptabilisee en charge/produit
 		echo association_totauxinfos_montants(($imputation=='%' ? _T('asso:tous') : $imputation), $data['somme_recettes'], $data['somme_depenses']);
 		// datation et raccourcis
-		icones_association(array(), array(
-			'encaisse_titre_general' => array('finances-24.png', 'encaisse', "exercice=$id_exercice"),
-			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$id_exercice"),
-			'cpte_bilan_titre_general' => array('finances-24.png', 'compte_bilan', "exercice=$id_exercice"),
-#			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$id_exercice"),
+		raccourcis_association(array(), array(
+			'encaisse_titre_general' => array('finances-24.png', array('encaisse', "exercice=$id_exercice") ),
+			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "exercice=$id_exercice") ),
+			'cpte_bilan_titre_general' => array('finances-24.png', array('compte_bilan', "exercice=$id_exercice") ),
+#			'annexe_titre_general' => array('finances-24.png', array('annexe', "exercice=$id_exercice") ),
 			'ajouter_une_operation' => array('ajout-24.png', 'edit_compte'),
 		) );
 		debut_cadre_association('finances-24.png', 'informations_comptables');

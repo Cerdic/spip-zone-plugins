@@ -30,7 +30,7 @@ function exec_action_adherents()
 			// info
 			echo association_totauxinfos_intro(_T('asso:confirmation'));
 			// datation et raccourcis
-			icones_association(array('adherents'));
+			raccourcis_association('adherents');
 			if ($action_adherents=='desactive') {
 				$statut_courant = _request('statut_courant');
 				if($statut_courant==='sorti'){

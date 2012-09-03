@@ -26,7 +26,7 @@ function exec_edit_plan()
 		// Notice
 		echo propre(_T('asso:edit_plan'));
 		// datation et raccourcis
-		icones_association('');
+		raccourcis_association('');
 		debut_cadre_association('euro-39.gif', 'edition_plan_comptable');
 		echo recuperer_fond('prive/editer/editer_asso_plan', array (
 			'id_plan' => $id_plan

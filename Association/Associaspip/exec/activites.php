@@ -33,7 +33,7 @@ function exec_activites()
 			$annee = date('Y'); // par defaut c'est l'annee courante
 			$id_evenement = ''; // virer l'ID inexistant
 		}
-		onglets_association('titre_onglet_activite');
+		onglets_association('titre_onglet_activite', 'activites');
 		// TOTAUX : nombre d'activites de l'annee en cours repartis par mots-clefs
 		// TOTAUX : nombre d'activites de l'annee en cours repartis par iscriptions
 		$liste_libelles = $liste_effectifs = array();
@@ -52,11 +52,11 @@ function exec_activites()
 */
 		// datation et raccourci vers la gestion des evenements
 		if ( test_plugin_actif('SIMPLECAL') ) { // gestion des evenements avec Simple Calendrier
-			icones_association(array(), array(
+			raccourcis_association(array(), array(
 				'evenements' => array('simplecal-logo-16.png', 'evenement_tous'),
 			) );
 		} elseif ( test_plugin_actif('AGENDA') ) { // gestion des evenements avec Agenda 2
-			icones_association(array(), array(
+			raccourcis_association(array(), array(
 				'evenements' => array('agenda-evenements-16.png', 'agenda_evenements'),
 			) );
 		} else { // pas de bloc de raccourcis

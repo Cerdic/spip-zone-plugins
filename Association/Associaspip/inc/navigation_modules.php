@@ -1,119 +1,127 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010 Emmanuel Saint-James
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 
 include_spip('inc/presentation'); // utilise par "onglet1_association" (pour "onglet") puis aussi dans les pages appelantes
 include_spip('inc/autoriser'); // utilise par "onglet1_association" (pour le test "autoriser") puis aussi dans les pages appelantes
 
-// Afficher le titre de la/le page/module courante puis (en dessous) les onglets des differents modules actives dans la configuration
-function onglets_association($titre='', $INSERT_HEAD=TRUE)
+/**
+ * Afficher le titre de la/le page/module courante puis (en dessous) les onglets
+ * des differents modules actives dans la configuration
+ *
+ * @param string $titre
+ *   Chaine de langue du titre de la page
+ * @param string $top_exec
+ *   Nom du fichier "exec" de la page principale du module
+ * @param bool $INSERT_HEAD
+ *   Indique s'il s'agit d'une page exec classique en PHP (vrai, par defaut) ou
+ *   en HTML (faux, ) a compiler par SPIP (cas des balises) ou PHP gere par le developpeur
+ * @return void
+ */
+function association_navigation_onglets($titre='', $top_exec='', $INSERT_HEAD=TRUE)
 {
+	$modules = pipeline('modules_asso', array(
+		'association' => array('asso:menu2_titre_association', 'assoc_qui.png', array('voir_profil', 'association'), ), // accueil
+		'adherents' => array('asso:menu2_titre_gestion_membres', 'annonce.gif', array('voir_membres', 'association'), ), // gestion des membres
+		'dons' => array('asso:menu2_titre_gestion_dons', 'dons-24.gif', array('associer', 'dons'), ), // gestion des dons
+		'ventes' => array('asso:menu2_titre_ventes_asso', 'ventes.gif', array('associer', 'ventes'), ), // gestion des ventes
+		'activites' => array('asso:menu2_titre_gestion_activites', 'activites.gif', array('associer', 'activites'), ), // gestion des activites
+		'ressources' => array('asso:menu2_titre_gestion_prets', 'pret-24.gif', array('associer', 'ressources'), ), // gestion des ressources
+		'comptes' => array('asso:menu2_titre_livres_comptes', 'finances-24.png', array('associer', 'comptes'), ), // compta
+	)); // Liste (en fait tableau PHP) des modules geres par le plugin, sous la forme : 'exec' => array("chaine:langue", "chemin/icone", array("autorisation", ...), )
+// Recuperation de la liste des ongles
 	$res = '';
-
-	/* onglet de retour a la page d'accueil */
-	if (autoriser('voir_profil', 'association')) {
-		$res .= onglet1_association('association', 'association', 'Association', 'assoc_qui.png');
+	foreach ($modules as $exec=>$params) {
+		// autorisation d'acces au module
+		if ( is_array($params[2]) && count($params[2]) ) { // autorisation complete/fine
+			$acces = call_user_func_array('autoriser', $params[2]);
+		} elseif ( $params[2] ) { // autorisation general/globale
+			$acces = autoriser($params[2]);
+		} else // pas d'autorisation definie = autorise pour tous
+			$acces = true;
+		// etat d'activation du module en configuration
+		if ( in_array($exec, array('association', 'adherents')) )
+			$actif = true;
+		else
+			$actif = $GLOBALS['association_metas'][$exec];
+		// generation de l'onglet
+		if ( $actif && $acces )
+			$res .= onglet(_T($params[0]), generer_url_ecrire($exec), $top_exec, $exec, _DIR_PLUGIN_ASSOCIATION_ICONES.$params[1] ); // http://doc.spip.org/onglet
 	}
-
-	/* onglet de gestion des membres */
-	if (autoriser('voir_membres', 'association')) {
-		$res .= onglet1_association('gestion_membres', 'adherents', 'Membres', 'annonce.gif');
-	}
-
-	/* onglet de gestion des dons */
-	if ($GLOBALS['association_metas']['dons']) {
-		$res .= onglet1_association('gestion_dons', 'dons', 'Dons', 'dons-24.gif');
-	}
-
-	/* onglet de gestion des ventes */
-	if ($GLOBALS['association_metas']['ventes']) {
-		$res .= onglet1_association('ventes_asso', 'ventes', 'Ventes', 'ventes.gif');
-	}
-
-	/* onglet de gestion des activites */
-	if ($GLOBALS['association_metas']['activites']) {
-		$res .= onglet1_association('gestion_activites', 'activites', 'Activites', 'activites.gif');
-	}
-
-	/* onglet de gestion des prets */
-	if ($GLOBALS['association_metas']['prets']) {
-		$res .= onglet1_association('gestion_prets', 'ressources', 'Prets', 'pret-24.gif');
-	}
-
-	/* onglet de gestion comptable */
-	if ($GLOBALS['association_metas']['comptes']) {
-		$res .= onglet1_association('livres_comptes', 'comptes', 'Comptes', 'finances-24.png');
-	}
-
-	/* Affichage */
+// Affichage
 	if ($INSERT_HEAD) { // mettre ''|0|FALSE|NULL dans la balise (appel dans une page HTML-SPIPee donc et non PHP) pour eviter l'erreur de "Double occurrence de INSERT_HEAD"
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page();
 	}
 	echo '<div class="table_page">';
-	// Nom du module
-	echo '<h1 class="asso_titre">', $titre?_T("asso:$titre"):_T('asso:gestion_de_lassoc', array('nom'=>$GLOBALS['association_metas']['nom']) ), '</h1>'; //  <http://programmer.spip.org/Contenu-d-un-fichier-exec>
-	// Onglets actifs
+	echo '<h1 class="asso_titre">', $titre?_T($titre):_T('asso:gestion_de_lassoc', array('nom'=>$GLOBALS['association_metas']['nom']) ), '</h1>'; // Nom du module. cf:  <http://programmer.spip.org/Contenu-d-un-fichier-exec>
 	if ($res)
-		echo '<div class="bandeau_actions">', debut_onglet(), $res, fin_onglet(), '</div>';
+		echo '<div class="bandeau_actions barre_onglet clearfix">', debut_onglet(), $res, fin_onglet(), '</div>'; // Onglets actifs
 	echo '</div>';
 	if ($INSERT_HEAD) { // Tant qu'a faire, on s'embete pas a le retaper dans toutes les pages...
 		echo debut_gauche('',true);
 		echo debut_boite_info(true);
 	}
 }
-function association_onglets($titre='', $INSERT_HEAD=TRUE)
+
+/**
+ * @see association_navigation_onglets
+ */
+function onglets_association($titre='', $top_exec='', $INSERT_HEAD=TRUE)
 {
-	onglets_association($titre,$INSERT_HEAD);
+	association_navigation_onglets($titre?"asso:$titre":'', $top_exec, $INSERT_HEAD);
 }
 
-// dessin d'un onglet seul
-function onglet1_association($texte, $objet, $libelle, $image)
-{
-	return onglet(_T("asso:menu2_titre_$texte"), generer_url_ecrire($objet), '', $libelle, _DIR_PLUGIN_ASSOCIATION_ICONES . $image, 'rien.gif');
-}
-
-// cette fonction remplace et personnalise le couplet final <http://programmer.spip.org/Contenu-d-un-fichier-exec> : echo fin_gauche(), fin_page();
-function fin_page_association($FIN_CADRE_RELIEF=true)
-{
-	$copyright = fin_page();
-	// Pour eliminer le copyright a l'impression
-	$copyright = str_replace("<div class='table_page'>", "<div class='table_page contenu_nom_site'>", $copyright);
-	echo ($FIN_CADRE_RELIEF ? fin_cadre_relief() : '') . fin_gauche() . $copyright;
-}
-
-//cadre en relief debutant la colonne centrale/principale essentiellement
-function debut_cadre_association($icone,$titre,$T_argrs='',$DEBUT_DROITE=true)
-{
-	if ($DEBUT_DROITE)
-		echo debut_droite('',true);
-	debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.$icone, false, '', (is_array($T_args)?_T("asso:$titre",$T_args): _T("asso:$titre")." $T_args") );
-}
-
-// bloc de raccourci(s) constitue au moins du bouton retour
-// chaque raccourci precedant est defini sous la forme : 'titre' => array('icone', 'url_ecrire', 'parametre_url'),
-// echo association_date_du_jour(), fin_boite_info(true), association_retour($adresse_retour) <=> bloc_raccourcis_association($adresse_retour)
-function icones_association($adresse_retour='',  $raccourcis=array(), $FIN_BOITE_INFO=TRUE)
+/**
+ * Bloc de raccourci(s) constitue d'au moins du bouton retour
+ *
+ * @param string|array $adresse_retour
+ *   - Juste le nom du fichier "exec" du bouton retour
+ *     Ou une chaine vide pour generere automatiquement l'URL de la page precedente
+ *   - Un tableau comportant le nom du fichier "exec" et une chaine de parametres
+ *     passes a l'URL ;
+ *     Ou un tableau vide pour ne pas generer de bouton retour (quand on est dans
+ *     la page principale du module)
+ * @param array $raccourcis
+ *   Tableau des raccourcis definis chacun sous la forme :
+ *   'titre' => array('icone', array('url_ecrire', 'parametres_url'), array('permission' ...), ),
+ * @param string $PrefixeLangue
+ *   Prefixe ("asso" par defaut) applique aux cles du tableau des raccourcis
+ *   pour reconstituer la chaine des langue des raccourcis
+ * @param bool $FIN_BOITE_INFO
+ *   Indique s'il faut generer (vrai, par defaut) ou pas la fin du bloc infos
+ *   qui doit alors etre obligatoirement celui qui precede !
+ * @return void
+ */
+function association_navigation_raccourcis($adresse_retour='',  $raccourcis=array(), $PrefixeLangue='asso', $FIN_BOITE_INFO=TRUE)
 {
 	$res = ''; // initialisation
 	if ( is_array($raccourcis) AND count($raccourcis) ) {
-		foreach($raccourcis as $raccourci_titre => $raccourci_parametres) {
-			$res .= icone1_association($raccourci_titre,  generer_url_ecrire($raccourci_parametres[1],$raccourci_parametres[2]), $raccourci_parametres[0]);
+		foreach($raccourcis as $raccourci_titre => $params) {
+			// autorisation d'acces au module
+			if ( is_array($params[2]) && count($params[2]) ) { // autorisation a calculer
+				$acces = call_user_func_array('autoriser', $params[2]);
+			} elseif ( is_scalar($params[2]) ) { // autorisation deja calculee (chaine ou entier ou boolen, evalue en vrai/faux...)
+				$acces = autoriser($params[2]);
+			} else // pas d'autorisation definie = autorise pour tous
+				$acces = true;
+			// generation du raccourci
+			if ( $acces )
+				$res .= icone1_association("$PrefixeLangue:$raccourci_titre",  (is_array($params[1])?generer_url_ecrire($$params[1][0],$params[1][1]):generer_url_ecrire($params[1])), $params[0]);
 		}
 	}
 	if ( is_array($adresse_retour) ) { // tableau : url_exec, parametres_exec
 		if ( is_array($adresse_retour) AND count($adresse_retour) )
-			$res .= icone1_association('bouton_retour',  generer_url_ecrire($adresse_retour[0],$adresse_retour[1]), 'retour-24.png');
+			$res .= icone1_association('asso:bouton_retour',  generer_url_ecrire($adresse_retour[0],$adresse_retour[1]), 'retour-24.png');
 	} else { // chaine de caractere : uri_complet
-		$res .= icone1_association('bouton_retour',  ($adresse_retour=='')?str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']):$adresse_retour, 'retour-24.png');
+		$res .= icone1_association('asso:bouton_retour',  ($adresse_retour=='')?str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']):$adresse_retour, 'retour-24.png');
 	}
 	if ($FIN_BOITE_INFO) {
 		echo association_date_du_jour();
@@ -122,31 +130,81 @@ function icones_association($adresse_retour='',  $raccourcis=array(), $FIN_BOITE
 	echo bloc_des_raccourcis($res);
 }
 
-// dessin de bouton+texte+lien de raccourci seul
-function icone1_association($texte, $lien, $image, $sup='rien.gif')
+/**
+ * @see association_navigation_raccourcis
+ */
+function raccourcis_association($adresse_retour='',  $raccourcis=array(), $PrefixeLangue='asso', $FIN_BOITE_INFO=TRUE)
 {
-	return icone_horizontale(_T("asso:$texte"), $lien, _DIR_PLUGIN_ASSOCIATION_ICONES. $image, $sup, false);
+	association_navigation_raccourcis($adresse_retour,  $raccourcis, $PrefixeLangue, $FIN_BOITE_INFO);
 }
 
-// Bloc (tableau en ligne) d'affinage (filtrage) des resultats dans les pages principales... (ici il s'agit de la navigation au sein des donnees tabulaires --un grand listing-- d'un module...)
+/**
+ * Dessin d'un raccourci du bloc des raccourcis
+ *
+ * @param string $texte
+ *   Libelle du bouton
+ * @param string $lien
+ *   URL vers lequel revoie le bouton
+ * @param string $image
+ *   Icone du bouton (place devant le libelle)
+ * @return string
+ *   HTML du raccourci (icone+texte+lien)
+ */
+function icone1_association($texte, $lien, $image,)
+{
+	return icone_horizontale(_T($texte), $lien, _DIR_PLUGIN_ASSOCIATION_ICONES. $image, 'rien.gif', false); // http://doc.spip.org/@icone_horizontale
+}
+
+/**
+ * Finition propre des pages privee du plugin
+ *
+ * @param bool $FIN_CADRE_RELIEF
+ *   Indique s'il faut (vrai, par defaut) rajouter ou pas (faux) "fin_cadre_relief"
+ * @return void
+ * @note
+ *   Cette fonction remplace et personnalise le couplet final :
+ *   echo fin_gauche(), fin_page();
+ *   http://programmer.spip.org/Contenu-d-un-fichier-exec
+ */
+function fin_page_association($FIN_CADRE_RELIEF=true)
+{
+	$copyright = fin_page();
+	$copyright = str_replace("<div class='table_page'>", "<div class='table_page contenu_nom_site'>", $copyright); // Pour eliminer le copyright a l'impression
+	echo ($FIN_CADRE_RELIEF ? fin_cadre_relief() : '') . fin_gauche() . $copyright;
+}
+
+/**
+ * Cadre en relief debutant la colonne centrale/principale essentiellement
+ *
+ * @param string $icone
+ *   Icone associe a la page, souvent celui du module.
+ * @param string $titre
+ *   Chaine de langue, sans prefixe, du titre
+ * @param array $T_args
+ *   Arugments associes a la chaine de langue parametrable
+ * @param bool $DEBUT_DROITE
+ *   Indique s'il faut ajouter (vrai, par defaut) ou pas "debut_droite()" avant
+ * @return void
+ */
+function debut_cadre_association($icone, $titre, $T_args='', $DEBUT_DROITE=true)
+{
+	if ($DEBUT_DROITE)
+		echo debut_droite('',true);
+	debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.$icone, false, '', (is_array($T_args)?_T("asso:$titre",$T_args): _T("asso:$titre")." $T_args") );
+}
+
+/**
+ * Bloc (tableau en ligne) d'affinage (filtrage) des resultats dans les pages principales... (ici il s'agit de la navigation au sein des donnees tabulaires --un grand listing-- d'un module...)
+ *
+ * @see association_bloc_filtres
+ * @note
+ *   Ici il s'agit d'un vrai formulaire qui influe sur les donnees affichees
+ *   et non sur la fonctionnalite en cours (onglet), contrairement aux apparences
+ *   http://comments.gmane.org/gmane.comp.web.spip.devel/61824
+ */
 function filtres_association($liste_filtres, $exec='', $supplements='', $td=TRUE)
 {
-	echo '<form method="get" action="'. ($exec?generer_url_ecrire($exec):'') .'">';
-	if ($exec)
-		echo "\n<input type='hidden' name='exec' value='$exec' />";
-	echo "\n<". ($td?'table width="100%"':'ul') .' class="asso_tablo_filtres">'. ($td?'<tr>':'');
-	foreach($liste_filtres as $filtre_selection =>$params) {
-		echo ($td?'<td':'<li') ." class='filtre_$filtre_selection'>". call_user_func_array("association_selectionner_$filtre_selection", (is_array($params)?$params:array($params)) ) . ($td?'</td>':'</li>');
-	}
-	if ( is_array($supplements) ) {
-		foreach ($supplements as $nom => $supplement) {
-			echo ($td?'<td':'<li') ." class='filtre_$nom'>$supplement</". ($td?'td>':'li>');
-		}
-	} else {
-		echo $supplements;
-	}
-	echo ($td?'<td':'<li') . ' class="boutons"><noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript></td>' . ($td?'</td>':'</li>');
-	echo ($td?'</tr></table':'</ul>') .">\n</form>\n";
+	echo association_bloc_filtres($liste_filtres, $exec, $supplements, $td);
 }
 
 ?>

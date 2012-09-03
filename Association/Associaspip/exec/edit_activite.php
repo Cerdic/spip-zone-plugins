@@ -31,7 +31,7 @@ function exec_edit_activite()
 		$infos['evenement_lieu'] = $evenement['lieu'];
 		echo association_totauxinfos_intro($evenement['titre'], 'evenement', $id_evenement, $infos, 'agenda');
 		// datation et raccourcis
-		icones_association('');
+		raccourcis_association('');
 		debut_cadre_association(($id_activite?'activites.gif':'panier_in.gif'), 'activite_titre_mise_a_jour_inscriptions');
 		// formulaire
 		echo recuperer_fond('prive/editer/editer_asso_activites', array (

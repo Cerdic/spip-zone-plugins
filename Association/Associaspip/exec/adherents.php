@@ -25,7 +25,7 @@ function exec_adherents()
 		$critere = request_statut_interne(); // peut appeler set_request
 		$statut_interne = _request('statut_interne');
 		$lettre = _request('lettre');
-		onglets_association('titre_onglet_membres');
+		onglets_association('titre_onglet_membres', 'adherents');
 		// TOTAUX : effectifs par statuts
 		$membres = $GLOBALS['association_liste_des_statuts'];
 		array_shift($membres); // on sort les anciens membres
@@ -41,12 +41,11 @@ function exec_adherents()
 		$data = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=$annee AND imputation=".sql_quote($GLOBALS['association_metas']['pc_cotisations']) );
 		echo association_totauxinfos_montants('cotisations_'.$annee, $data['somme_recettes'], $data['somme_depenses']);
 		// datation et raccourcis
-		if (autoriser('voir_groupes', 'association', 100)) { // l'id groupe passe en parametre est a 100 car ce sont les groupes definis par l'utilisateur et non ceux des autorisation qu'on liste dans cette page.
-			$res['gerer_les_groupes'] = array('annonce.gif', 'groupes');
-		}
-		$res['menu2_titre_relances_cotisations'] = array('relance-24.png', 'edit_relances');
-		$res['synchronise_asso_membre_lien'] = array('reload-32.png', 'synchroniser_asso_membres');
-		icones_association(array(), $res);
+		raccourcis_association(array(), array(
+			'gerer_les_groupes' => array('annonce.gif', 'groupes' array('voir_groupes', 'association', 100) ), // l'id groupe passe en parametre est a 100 car ce sont les groupes definis par l'utilisateur et non ceux des autorisation qu'on liste dans cette page
+			'menu2_titre_relances_cotisations' => array('relance-24.png', 'edit_relances' ),
+			'synchronise_asso_membre_lien' => array('reload-32.png', 'synchroniser_asso_membres' ),
+		));
 		if ( test_plugin_actif('FPDF') && test_plugin_actif('COORDONNEES') ) { // etiquettes
 			echo debut_cadre_enfonce('',true);
 			echo recuperer_fond('prive/editer/imprimer_etiquettes');

@@ -30,7 +30,7 @@ function exec_suppr_categorie()
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_membres', "categorie=$id_categorie"), ));
 		echo association_totauxinfos_intro($categorie['libelle'], 'categorie', $id_categorie, $infos );
 		// datation et raccourcis
-		icones_association(array('categories'));
+		raccourcis_association('categories');
 		debut_cadre_association('calculatrice.gif', 'categories_de_cotisations');
 		echo association_bloc_suppression('categorie', $id_categorie);
 		fin_page_association();

@@ -34,7 +34,7 @@ function exec_suppr_activite()
 			$infos['entete_montant'] = association_formater_prix($activite['montant']);
 			association_totauxinfos_intro(association_calculer_lien_nomid($activite['nom'],$activite['id_adherent']), 'activite', $id_activite, $infos );
 			// datation et raccourcis
-			icones_association('');
+			raccourcis_association('');
 			debut_cadre_association('activites.gif', 'activite_titre_inscriptions_activites');
 			echo association_bloc_suppression('activite', $id_activite);
 			fin_page_association();

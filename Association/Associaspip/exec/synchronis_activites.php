@@ -38,7 +38,7 @@ function exec_synchronis_activites()
 		$liste_effectifs['non'] = sql_getfetsel('COUNT(*)', 'spip_evenements_participants', "id_evenement=$id_evenement AND reponse='non' ");
 		$liste_effectifs['nsp'] = sql_getfetsel('COUNT(*)', 'spip_evenements_participants', "id_evenement=$id_evenement AND reponse='?' ");
 		// datation et raccourcis
-		icones_association('');
+		raccourcis_association('');
 		debut_cadre_association('reload-32.png', 'options_synchronisation');
 		echo recuperer_fond('prive/editer/synchroniser_asso_activites', array (
 			'id_evenement' => $id_evenement,

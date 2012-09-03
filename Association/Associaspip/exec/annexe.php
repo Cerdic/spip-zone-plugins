@@ -40,10 +40,10 @@ function exec_annexe()
 		$infos['exercice_entete_fin'] = association_formater_date($exercice_data['fin'], 'dtend');
 		echo association_totauxinfos_intro($exercice_data['intitule'], 'exercice', $exercice, $infos);
 		// datation et raccourcis
-		icones_association(array('comptes', "exercice=$exercice"), array(
-			'encaisse_titre_general' => array('finances-24.png', 'encaisse', "exercice=$exercice"),
-			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$exercice"),
-			'cpte_bilan_titre_general' => array('finances-24.png', 'bilan', "exercice=$exercice"),
+		raccourcis_association(array('comptes', "exercice=$exercice"), array(
+			'encaisse_titre_general' => array('finances-24.png', array('encaisse', "exercice=$exercice") ),
+			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "exercice=$exercice") ),
+			'cpte_bilan_titre_general' => array('finances-24.png', array('bilan', "exercice=$exercice") ),
 		));
 		debut_cadre_association('finances-24.png', 'annexe_titre_general', $exercice_data['intitule']);
 		echo _T('asso:non_implemente');

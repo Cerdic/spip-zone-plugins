@@ -21,7 +21,7 @@ function exec_ressources()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		onglets_association('titre_onglet_prets');
+		onglets_association('titre_onglet_prets', 'ressources');
 		// INTRO : presentation du module
 		echo '<p>'._T('asso:ressources_info').'</p>';
 		// TOTAUX : nombre de ressources par statut
@@ -43,7 +43,7 @@ rdm */
 		$depences = sql_getfetsel('SUM(prix_acquisition) AS somme_depences', 'spip_asso_ressources', "DATE_FORMAT('date_acquisition', '%Y')=DATE_FORMAT(NOW(), '%Y') ");
 		echo association_totauxinfos_montants('ressources', $recettes, $depenses);
 		// datation et raccourcis
-		icones_association(array(), array(
+		raccourcis_association(array(), array(
 			'ressources_nav_ajouter' => array('ajout-24.png', 'edit_ressource'),
 		) );
 		debut_cadre_association('pret-24.gif', 'ressources_titre_liste_ressources');

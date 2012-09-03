@@ -52,7 +52,7 @@ function exec_edit_adherent()
 				$infos['numeros'] =  $telephones[$id_auteur];
 			echo '<div class="vcard">'. association_totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos, 'coordonnees') .'</div>';
 			// datation et raccourcis
-			icones_association('');
+			raccourcis_association('');
 			debut_cadre_association('annonce.gif', 'adherent_titre_modifier_membre');
 			echo recuperer_fond('prive/editer/editer_asso_membres', array (
 				'id_auteur' => $id_auteur,

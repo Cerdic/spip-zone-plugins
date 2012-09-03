@@ -37,7 +37,7 @@ function exec_exercices()
 		 * finaly I use ODBC "TIMESTAMPDIFF()" that should be known by latest major rdbms...
 		 * */
 		// datation et raccourcis
-		icones_association(array('association'), array(
+		raccourcis_association('association', array(
 			'ajouter_un_exercice' => array('calculatrice.gif', 'edit_exercice'),
 		) );
 		debut_cadre_association('calculatrice.gif', 'tous_les_exercices');

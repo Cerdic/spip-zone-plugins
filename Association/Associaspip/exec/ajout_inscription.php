@@ -34,7 +34,7 @@ function exec_ajout_inscription()
 		$infos['evenement_lieu'] = $evenement['lieu'];
 		echo association_totauxinfos_intro($evenement['titre'], 'evenement', $id_evenement, $infos, 'agenda');
 		// datation et raccourcis
-		icones_association('');
+		raccourcis_association('');
 		debut_cadre_association(($id_activite?'activites.gif':'panier_in.gif'), 'activite_titre_ajouter_inscriptions');
 		echo recuperer_fond('prive/editer/ajouter_inscription', array (
 			'id_activite' => $id_activite,

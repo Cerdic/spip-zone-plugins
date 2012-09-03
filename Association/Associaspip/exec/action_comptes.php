@@ -26,7 +26,7 @@ function exec_action_comptes()
 		// info
 		echo _T('asso:confirmation');
 		// datation et raccourcis
-		icones_association('');
+		raccourcis_association('');
 		debut_cadre_association('finances-32.jpg', 'operations_comptables');
 		if ($id_compte) { // SUPPRESSION PROVISOIRE OPERATION
 			echo '<p><strong>' . _T('asso:vous_vous_appretez_a_effacer_la_ligne_de_compte'). ' ' . $id_compte . '</strong></p>';

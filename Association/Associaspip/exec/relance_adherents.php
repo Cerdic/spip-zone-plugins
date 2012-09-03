@@ -27,7 +27,7 @@ function exec_relance_adherents()
 		// notice ?
 		echo _T('asso:aide_relances');
 		// datation et raccourcis
-		icones_association('');
+		raccourcis_association('');
 		debut_cadre_association('relance-24.png', 'relance_de_cotisations');
 		echo recuperer_fond('prive/editer/relancer_adherents');
 		fin_page_association();

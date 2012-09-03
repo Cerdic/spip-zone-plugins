@@ -30,7 +30,7 @@ function exec_suppr_exercice()
 		$infos['exercice_entete_fin'] = association_formater_date($exercice['fin'], 'dtend');
 		echo association_totauxinfos_intro(sql_getfetsel('intitule', 'spip_asso_exercices', "id_exercice=$id_exercice" ), 'exercice', $id_exercice, $infos);
 		// datation et raccourcis
-		icones_association(array('exercices'));
+		raccourcis_association('exercices');
 		debut_cadre_association('calculatrice.gif', 'exercice_budgetaire_titre');
 		echo association_bloc_suppression('exercice', $id_exercice);
 		fin_page_association();

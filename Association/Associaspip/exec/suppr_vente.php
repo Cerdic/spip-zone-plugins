@@ -26,7 +26,7 @@ function exec_suppr_vente()
 		// info
 		echo association_totauxinfos_intro(sql_getfetsel("CONCAT(article,' -- ',acheteur) AS intitule", 'spip_asso_ventes', "id_vente=$id_vente" ), 'vente', $id_vente, $infos );
 		// datation et raccourcis
-		icones_association('');
+		raccourcis_association('');
 		debut_cadre_association('ventes.gif', 'action_sur_les_ventes_associatives');
 		echo association_bloc_suppression('vente', $id_vente);
 		fin_page_association();

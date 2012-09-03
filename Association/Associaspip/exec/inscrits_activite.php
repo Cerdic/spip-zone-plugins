@@ -42,14 +42,14 @@ function exec_inscrits_activite()
 		$montant = sql_fetsel('SUM(montant) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " );
 		echo association_totauxinfos_montants('participations', $montant['encaisse'], NULL);
 		// datation et raccourcis
-		$res['activite_bouton_ajouter_inscription'] = array('panier_in.gif', 'edit_activite', "id_evenement=$id_evenement");
+		$res['activite_bouton_ajouter_inscription'] = array('panier_in.gif', array('edit_activite', "id_evenement=$id_evenement"));
 		if (test_plugin_actif('FPDF')) { // PDF des inscrits
-			$res['activite_bouton_imprimer_inscriptions'] = array('print-24.png', 'pdf_activite', "id=$id_evenement");
+			$res['activite_bouton_imprimer_inscriptions'] = array('print-24.png', array('pdf_activite', "id=$id_evenement"));
 		}
 		if (test_plugin_actif('AGENDA')) { // inscrits via le formulaire d'Agenda2
-			$res['activite_bouton_synchroniser_inscriptions'] = array('reload-32.png', 'synchronis_activites', "id=$id_evenement");
+			$res['activite_bouton_synchroniser_inscriptions'] = array('reload-32.png', array('synchronis_activites', "id=$id_evenement"));
 		}
-		icones_association(array('activites','annee='.substr($evenement['date_debut'],0,4)), $res);
+		raccourcis_association(array('activites','annee='.substr($evenement['date_debut'],0,4)), $res);
 		debut_cadre_association('activites.gif', 'activite_titre_inscriptions_activites');
 	// FILTRES
 		echo '<form method="get" action="'. generer_url_ecrire('inscrits_activite') .'">';

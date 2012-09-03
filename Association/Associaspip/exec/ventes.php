@@ -33,7 +33,7 @@ function exec_ventes()
 			$annee = date('Y'); // par defaut c'est l'annee courante
 			$id_vente = ''; // virer l'ID inexistant
 		}
-		onglets_association('titre_onglet_ventes');
+		onglets_association('titre_onglet_ventes', 'ventes');
 		// INTRO : nom du module et annee affichee
 		echo association_totauxinfos_intro('','ventes',$annee);
 		// TOTAUX : nombre de ventes selon etat de livraison
@@ -52,7 +52,7 @@ function exec_ventes()
 		$data = sql_fetsel('SUM(prix_vente*quantite) AS somme_ventes, SUM(frais_envoi) AS somme_frais', 'spip_asso_ventes', "DATE_FORMAT(date_vente, '%Y')=$annee" );
 		echo association_totauxinfos_montants($annee, $data['somme_ventes']+$data['somme_frais'], $data['somme_frais']); // les frais de port etant facturees a l'acheteur, ce sont bien des recettes... mais ces frais n'etant (normalement) pas refacturees (et devant meme etre transparents) ils n'entrent pas dans la marge (enfin, facon de dire car les couts d'acquisition ne sont pas pris en compte... le "solde" ici est le montant effectif des ventes.)
 		// datation et raccourcis
-		icones_association(array(), array(
+		raccourcis_association(array(), array(
 			'ajouter_une_vente' => array('ajout-24.png', 'edit_vente'),
 		) );
 		debut_cadre_association('ventes.gif', 'toutes_les_ventes');

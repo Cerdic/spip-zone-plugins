@@ -27,7 +27,7 @@ function exec_suppr_destination()
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_destination_op',"id_destination=$id_destination")) );
 		echo association_totauxinfos_intro(sql_getfetsel('intitule','spip_asso_destination',"id_destination=$id_destination"), 'destination', $id_destination, $infos );
 		// datation et raccourcis
-		icones_association('');
+		raccourcis_association('');
 		debut_cadre_association('euro-39.gif', 'suppression_de_destination');
 		echo association_bloc_suppression('destination', $id_destination);
 		fin_page_association();

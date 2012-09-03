@@ -21,25 +21,19 @@ function exec_association()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		onglets_association();
+		onglets_association('', 'association');
 		// presentation du plugin
 		echo propre(_T('asso:association_info_doc'));
 		// datation et raccourcis
-		if (autoriser('editer_profil', 'association')) {
-			$res['profil_de_lassociation'] = array('assoc_qui.png', 'configurer_association');
-			$res['editer_asso_metas_utilisateur_lien'] = array('assoc_qui.png', 'editer_asso_metas_utilisateur');
-		}
-		$res['categories_de_cotisations'] = array('cotisation.png', 'categories');
-		if (autoriser('gerer_autorisations', 'association')) {
-			$res['gerer_les_autorisations'] = array('annonce.gif', 'association_autorisations');
-		}
-		$res['plan_comptable'] = array('plan_compte.png', 'plan_comptable');
-		if ($GLOBALS['association_metas']['destinations']) {
-				$res['destination_comptable'] = array('plan_compte.png', 'destination');
-		}
-		$res['exercices_budgetaires_titre'] = array('plan_compte.png', 'exercices');
-
-		icones_association(array(), $res);
+		raccourcis_association(array(), array(
+			'profil_de_lassociation' => array('assoc_qui.png', 'configurer_association', array('editer_profil', 'association'), ),
+			'editer_asso_metas_utilisateur_lien' => array('assoc_qui.png', 'editer_asso_metas_utilisateur', array('editer_profil', 'association'), ),
+			'categories_de_cotisations' => array('cotisation.png', 'categories', array('editer_profil', 'association'), ),
+			'gerer_les_autorisations' => array('annonce.gif', 'association_autorisations', array('gerer_autorisations', 'association'), ),
+			'plan_comptable' => array('plan_compte.png', 'plan_comptable' ),
+			'destination_comptable' => array('plan_compte.png', 'destination', $GLOBALS['association_metas']['destinations'] ),
+			'exercices_budgetaires_titre' => array('plan_compte.png', 'exercices' ),
+		));
 
 		debut_cadre_association('assoc_qui.png', 'association_infos_contacts');
 		echo '<div class="vcard" id="vcard-asso">';

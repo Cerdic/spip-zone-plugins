@@ -35,10 +35,10 @@ function exec_compte_bilan()
 		echo association_totauxinfos_intro($exercice_data['intitule'], 'exercice', $ids['exercice'], $infos);
 		// pas de sommes de synthes puisque tous les totaux sont dans la zone centrale ;-
 		// datation et raccourcis
-		icones_association(array('comptes', "exercice=$ids[exercice]"), array(
-			'encaisse_titre_general' => array('finances-24.png', 'encaisse', "exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')),
-			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')),
-#			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')),
+		raccourcis_association(array('comptes', "exercice=$ids[exercice]"), array(
+			'encaisse_titre_general' => array('finances-24.png', array('encaisse', "exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')) ),
+			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')) ),
+#			'annexe_titre_general' => array('finances-24.png', array('annexe', "exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')) ),
 		));
 		if(autoriser('associer', 'export_comptes')){ // on peut exporter : pdf, csv, xml, ...
 			echo debut_cadre_enfonce('',true);

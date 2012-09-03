@@ -33,7 +33,7 @@ function exec_dons()
 			$annee = date('Y'); // par defaut c'est l'annee courante
 			$id_don = ''; // virer l'ID inexistant
 		}
-		onglets_association('titre_onglet_dons');
+		onglets_association('titre_onglet_dons', 'dons');
 		// INTRO : nom du module et annee affichee
 		echo association_totauxinfos_intro('','dons',$annee);
 		// TOTAUX : nombre de dons selon leur nature
@@ -49,7 +49,7 @@ function exec_dons()
 		$remboursements = sql_getfetsel('SUM(argent) AS somme_reversees', 'spip_asso_dons', "argent AND contrepartie AND DATE_FORMAT(date_don, '%Y')=$annee" );
 		echo association_totauxinfos_montants($annee, $dons_financiers, $remboursements);
 		// datation et raccourcis
-		icones_association(array(), array(
+		raccourcis_association('', array(
 			'ajouter_un_don' => array('ajout-24.png', 'edit_don'),
 		));
 		debut_cadre_association('dons-24.gif', 'tous_les_dons');

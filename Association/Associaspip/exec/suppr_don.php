@@ -34,7 +34,7 @@ function exec_suppr_don()
 			$infos['contrepartie'] = $don['contrepartie'];
 			association_totauxinfos_intro(association_calculer_lien_nomid($don['bienfaiteur'],$don['id_adherent']), 'don', $id_don, $infos );
 			// datation et raccourcis
-			icones_association('');
+			raccourcis_association('');
 			debut_cadre_association('dons-24.gif', 'action_sur_les_dons');
 			echo association_bloc_suppression('don', $id_don);
 			fin_page_association();

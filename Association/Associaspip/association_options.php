@@ -42,6 +42,13 @@ $GLOBALS['association_styles_des_statuts'] = array(
  */
 define('_DIR_PLUGIN_ASSOCIATION_ICONES', _DIR_PLUGIN_ASSOCIATION.'img_pack/');
 
+/**
+ * @global array $GLOBALS['spip_pipeline']['modules_asso']
+ * @name $association_modules
+ */
+if ( !isset($GLOBALS['spip_pipeline']['modules_asso']) )
+	$GLOBALS['spip_pipeline']['modules_asso'] = ''; // definir ce pipeline, sans ecraser sa valeur s'il existe
+
 
 /*****************************************
  * @defgroup association_bouton
@@ -1207,6 +1214,48 @@ function association_bloc_suppression($type, $id, $retour='')
 	$res .= '<p class="boutons"><input type="submit" value="'._T('asso:bouton_confirmer').'" /></p>';
 	echo redirige_action_post("supprimer_{$type}s", $id, ($retour?$retour:$type.'s'), '', $res);
 
+}
+
+/**
+ * Bloc (tableau en ligne) d'affinage (filtrage) des resultats dans les pages principales... (ici il s'agit de la navigation au sein des donnees tabulaires --un grand listing-- d'un module...)
+ *
+ * @param array $liste_filtres
+ *   Filtres natifs du plugin (identifiant prefixe de "association_selectionner_") :
+ *   'identifiant_du_filtre'=>array('liste','des','parametres')
+ * @param string $exec
+ *   Nom du fichier "exec" auquel le formulaire sera soumis
+ * @param string|array $supplements
+ *   Utilisation d'autres filtres ou code supplementaire a rajourer a la fin
+ *   - Chaine HTML a rajouter
+ *   - Tableau des 'identifiant_filtre'=>"code HTML du filtre" a rajouter
+ * @param bool $td
+ *   Indique s'il faut generer un tableau (vrai, par defaut) ou une liste (faux)
+ * @return string $res
+ *   Form-HTML des filtres
+ * @note
+ *   Ici il s'agit d'un vrai formulaire qui influe sur les donnees affichees
+ *   et non sur la fonctionnalite en cours (onglet), contrairement aux apparences
+ *   (le passage de parametre se faisant par l'URL, celle-ci change)
+ *   http://comments.gmane.org/gmane.comp.web.spip.devel/61824
+ */
+function association_bloc_filtres($liste_filtres, $exec='', $supplements='', $td=TRUE)
+{
+	$res = '<form method="get" action="'. ($exec?generer_url_ecrire($exec):'') .'">';
+	if ($exec)
+		$res .= "\n<input type='hidden' name='exec' value='$exec' />";
+	$res .= "\n<". ($td?'table width="100%"':'ul') .' class="asso_tablo_filtres">'. ($td?'<tr>':'');
+	foreach($liste_filtres as $filtre_selection =>$params) {
+		$res .= ($td?'<td':'<li') ." class='filtre_$filtre_selection'>". call_user_func_array("association_selectionner_$filtre_selection", (is_array($params)?$params:array($params)) ) . ($td?'</td>':'</li>');
+	}
+	if ( is_array($supplements) ) {
+		foreach ($supplements as $nom => $supplement) {
+			$res .= ($td?'<td':'<li') ." class='filtre_$nom'>$supplement</". ($td?'td>':'li>');
+		}
+	} else {
+		$res .= $supplements;
+	}
+	$res .= ($td?'<td':'<li') . ' class="boutons"><noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript></td>' . ($td?'</td>':'</li>');
+	return $res. ($td?'</tr></table':'</ul>') .">\n</form>\n";
 }
 
 /**
