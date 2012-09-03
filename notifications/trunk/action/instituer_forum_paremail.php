@@ -26,7 +26,7 @@ function action_instituer_forum_paremail_dist() {
 	$verif = _action_auteur("$action-$arg", '', $pass, 'alea_ephemere');
 
 	$id_forum = explode("-",$arg);
-	$id_forum = array_shift($arg);
+	$id_forum = array_shift($id_forum);
 	include_spip("inc/filtres");
 	$lien_moderation = lien_ou_expose(url_absolue(generer_url_entite($id_forum,'forum',"","forum$id_forum",false)),_T('notifications:info_moderation_lien_titre'));
 	$erreur = _T('notifications:info_moderation_url_perimee')."<br />$lien_moderation";
