@@ -11,7 +11,7 @@
 		Ce plugin permet de convertir un article au format PDF par le biais d'un simple squelette cod&#233; en HTML 4.01.	Il utilise la librairie [HTML2PDF->http://www.html2pdf.fr] ou la librairie [mPDF->http://mpdf.bpm1.com]. Il n&#233;cessite PHP 5.
 	</description>
 	<prefix>spipdf</prefix>
-	<necessite id="SPIP" version='[2.0.0;3.0.*]' />
+	<necessite id="SPIP" version='[2.0.0;3.0.99]' />
 	<pipeline>
 		<nom>pre_typo</nom>
 		<inclure>spipdf.php</inclure>
