@@ -18,6 +18,13 @@ function oresource_upgrade($nom_meta_base_version, $version_cible) {
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
+
+	//Forcer l'utilisation des mots clefs
+	if ($GLOBALS['meta']['articles_mots'] == 'non') ecrire_meta('articles_mots', 'oui');
+	// Création du groupe de mots clés : orr et le rattacher à la basse orr_ressources
+	if (sql_countsel('spip_groupes_mots', "titre = orr") == 0) {
+	$id_groupe = sql_insertq('spip_groupes_mots',array('titre'=>'orr', 'unseul'=>'nom','tables_liees'=>'orr_ressources'));
+	}
 }
 
 
