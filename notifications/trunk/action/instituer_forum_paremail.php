@@ -25,8 +25,15 @@ function action_instituer_forum_paremail_dist() {
 
 	$verif = _action_auteur("$action-$arg", '', $pass, 'alea_ephemere');
 
-	$id_forum = explode("-",$arg);
-	$id_forum = array_shift($id_forum);
+	$ae = explode("-",$arg);
+	$id_forum = array_shift($ae);
+	$statut = array_shift($ae);
+	$statut_init = array_shift($ae);
+	// l'email est ce qui reste
+	$email = implode("-",$ae);
+	$message = null;
+	$erreur_auteur = _T('notifications:info_moderation_interdite');
+
 	include_spip("inc/filtres");
 	$lien_moderation = lien_ou_expose(url_absolue(generer_url_entite($id_forum,'forum',"","forum$id_forum",false)),_T('notifications:info_moderation_lien_titre'));
 	$erreur = _T('notifications:info_moderation_url_perimee')."<br />$lien_moderation";
@@ -34,39 +41,51 @@ function action_instituer_forum_paremail_dist() {
 	if ($hash==_action_auteur("$action-$arg", '', $pass, 'alea_ephemere')
 	  OR $hash==_action_auteur("$action-$arg", '', $pass, 'alea_ephemere_ancien'))
 		$erreur = "";
-	else
-		spip_log("Signature incorrecte pour $arg","moderationparemail"._LOG_INFO_IMPORTANTE);
+	else {
+		// le hash est invalide, mais peut-etre est-on loge avec cet email ?
+		// auquel cas on peut utiliser les liens, meme perimes (confort)
+		if (isset($GLOBALS['visiteur_session'])
+		  AND $GLOBALS['visiteur_session']['id_auteur']
+			AND $GLOBALS['visiteur_session']['email']==$email){
+			$message = sql_fetsel("id_objet,objet,statut","spip_forum","id_forum=".intval($id_forum));
+			if (autoriser("modererforum",$message['objet'],$message['id_objet'])){
+				$erreur_auteur = "";
+				$erreur = "";
+			}
+		}
+		else
+			spip_log("Signature incorrecte pour $arg","moderationparemail"._LOG_INFO_IMPORTANTE);
+	}
 
 	// si hash est ok, verifier si l'email correspond a un auteur qui a le droit de faire cette action
 	if (!$erreur){
-		$arg = explode("-",$arg);
-		$id_forum = array_shift($arg);
-		$statut = array_shift($arg);
-		$statut_init = array_shift($arg);
-		// l'email est ce qui reste
-		$email = implode("-",$arg);
 		// reconstituer l'arg pour l'action standard
 		$arg = "$id_forum-$statut";
 
+		if (!$message)
+			$message = sql_fetsel("id_objet,objet,statut","spip_forum","id_forum=".intval($id_forum));
+
 		// on recherche le message en verifiant qu'il a bien le statut
-		if ($message = sql_fetsel("id_objet,objet,statut","spip_forum","id_forum=".intval($id_forum))){
+		if ($message){
 			if ($message['statut']!=$statut_init){
 				$erreur = _T("notifications:info_moderation_deja_faite",array('id_forum'=>$id_forum,'statut'=>$message['statut']))
 					."<br />$lien_moderation";
 			}
 			else {
-				$erreur = _T('notifications:info_moderation_interdite');
-				// trouver le(s) auteur(s) et verifier leur autorisation
-				$res = sql_select("*","spip_auteurs","email=".sql_quote($email,'','text'));
-				while ($auteur = sql_fetch($res)){
-					if (autoriser("modererforum",$message['objet'],$message['id_objet'],$auteur)){
-						$erreur = "";
-						// on ajoute l'exception car on est pas identifie avec cet id_auteur
-						autoriser_exception("modererforum",$message['objet'],$message['id_objet']);
-						break;
+				// trouver le(s) auteur(s) et verifier leur autorisation si besoin
+				if ($erreur_auteur){
+					$res = sql_select("*","spip_auteurs","email=".sql_quote($email,'','text'));
+					while ($auteur = sql_fetch($res)){
+						if (autoriser("modererforum",$message['objet'],$message['id_objet'],$auteur)){
+							$erreur_auteur = "";
+							// on ajoute l'exception car on est pas identifie avec cet id_auteur
+							autoriser_exception("modererforum",$message['objet'],$message['id_objet']);
+							break;
+						}
 					}
 				}
-				if ($erreur){
+				if ($erreur_auteur){
+					$erreur = $erreur_auteur;
 					spip_log("Aucun auteur pour $email autorise a moderer $id_forum","moderationparemail"._LOG_INFO_IMPORTANTE);
 				}
 			}
