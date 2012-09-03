@@ -28,7 +28,7 @@ function action_instituer_forum_paremail_dist() {
 	$id_forum = explode("-",$arg);
 	$id_forum = array_shift($arg);
 	include_spip("inc/filtres");
-	$lien_moderation = lien_ou_expose(url_absolue(generer_url_entite('forum',$id_forum,"","forum$id_forum",false)),_T('notifications:info_moderation_lien_titre'));
+	$lien_moderation = lien_ou_expose(url_absolue(generer_url_entite($id_forum,'forum',"","forum$id_forum",false)),_T('notifications:info_moderation_lien_titre'));
 	$erreur = _T('notifications:info_moderation_url_perimee')."<br />$lien_moderation";
 
 	if ($hash==_action_auteur("$action-$arg", '', $pass, 'alea_ephemere')
