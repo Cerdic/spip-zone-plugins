@@ -3,7 +3,7 @@
 	<slogan>Créer des dictionnaires</slogan>
 	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.3.3</version>
+	<version>0.3.4</version>
 	<version_base>0.3.0</version_base>
 	<etat>dev</etat>
 	<description>Permet la création de dictionnaires regroupant des définitions. Les termes définis sont automatiquement détectés dans les textes du site et il est alors possible de les insérer dans le HTML du texte de manière accessible.</description>
