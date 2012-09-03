@@ -120,28 +120,36 @@ function spipdf_first_clean($texte){
 function spipdf_remplaceSpan_wfloat($matches){
 	return str_replace('img', 'img style="padding:5px;" class="pdf_img_float_' . $matches[1] . '"', $matches[2]);
 }
+
 function spipdf_remplaceSpan($matches){
 	return str_replace('img', 'img style="padding:5px;" align="' . $matches[1] . '"', $matches[2]);
 }
+
 function spipdf_remplaceSpanCenter($matches){
 	return $matches[1];
 }
+
 //function spipdf_remplaceDt($matches) { return str_replace('img', 'img style="padding:5px;" style="float:'.$matches[1].'"', $matches[2]); }
 function spipdf_remplaceDt_wfloat($matches){
 	return str_replace('img', 'img style="padding:5px;" class="pdf_img_float_' . $matches[1] . '"', $matches[2]);
 }
+
 function spipdf_remplaceDt($matches){
 	return str_replace('img', 'img style="padding:5px;" align="' . $matches[1] . '"', $matches[2]);
 }
+
 function spipdf_remplaceIdParName($matches){
 	return str_replace('id=\'', 'name=\'', $matches[0]);
 }
+
 function spipdf_remplaceFloatPuce($matches){
 	return str_replace('style=\'', 'style=\'float:left;', $matches[0]);
 }
+
 function spipdf_remplaceDtCenter($matches){
 	return $matches[1];
 }
+
 function spipdf_remplaceCaption($matches){
 	$table = '<table style="border:none;"' . $matches[1] . '<tr><td style="text-align: center;border:none;">' . $matches[2] . '</td></tr>';
 	$table .= '<tr><td style="border:none;">';
@@ -153,7 +161,7 @@ function spipdf_remplaceCaption($matches){
 function spipdf_nettoyer_html($html, $params_pdf = array()){
 	// supprimer les spans autour des images et récupérer le placement
 	$patterns_float = '/<span class=\'spip_document_.*spip_documents.*float:(.*);.*>(.*)<\/span>/iUms';
-	$html = preg_replace_callback($patterns_float, !empty($params_pdf['float'])?'spipdf_remplaceSpan':'spipdf_remplaceSpan_wfloat', $html);
+	$html = preg_replace_callback($patterns_float, !empty($params_pdf['float']) ? 'spipdf_remplaceSpan' : 'spipdf_remplaceSpan_wfloat', $html);
 
 	// supprimer les spans autour des images
 	$patterns_float = '/<span class=\'spip_document_.*spip_documents.*>(.*)<\/span>/iUms';
@@ -161,7 +169,7 @@ function spipdf_nettoyer_html($html, $params_pdf = array()){
 
 	// supprimer les dl autour des images et récupérer le placement
 	$patterns_float = '/<dl class=\'spip_document_.*spip_documents.*float:(.*);.*<dt>(.*)<\/dt>.*<\/dl>/iUms';
-	$html = preg_replace_callback($patterns_float, !empty($params_pdf['float'])?'spipdf_remplaceDt':'spipdf_remplaceDt_wfloat', $html);
+	$html = preg_replace_callback($patterns_float, !empty($params_pdf['float']) ? 'spipdf_remplaceDt' : 'spipdf_remplaceDt_wfloat', $html);
 
 	// replacer id par name pour les notes
 	$patterns_note = '/<a.*href.*class=\'spip_note\'.*>/iUms';
@@ -228,155 +236,156 @@ function spipdf_pre_typo($texte){
 // traitement principal. avec ce pipeline, le PDF est mis en cache et recalculé "normalement"
 function spipdf_html2pdf($html){
 
-		// les librairies possibles
-		$possible_librairies = array(
-			'mpdf' => array( // gére le float d'image mais pas les captions de tableau
-				'float' => true,
-				'caption' => true,
-				'traite_balise_page' => true
-			),
-			'html2pdf' => array( // ne gére pas le float d'image et les captions
-				'float' => false,
-				'caption' => true
-			),
-			'dompdf' => array( // domPDF beta 0.6 EXPERIMENTAL
-				'float' => false,
-				'caption' => true,
-				'traite_balise_page' => true
-			),
-		);
+	// les librairies possibles
+	$possible_librairies = array(
+		'mpdf' => array( // gére le float d'image mais pas les captions de tableau
+			'float' => true,
+			'caption' => true,
+			'traite_balise_page' => true
+		),
+		'html2pdf' => array( // ne gére pas le float d'image et les captions
+			'float' => false,
+			'caption' => true
+		),
+		'dompdf' => array( // domPDF beta 0.6 EXPERIMENTAL
+			'float' => false,
+			'caption' => true,
+			'traite_balise_page' => true
+		),
+	);
 
-		// choix de la classe de génération via la balise <page lib>
-		if (preg_match('/\<page*.lib_pdf=["|\'](.*)["|\']/iUms', $html, $match_librairie)
-			&& !empty($match_librairie[1])
-			&& array_key_exists(strtolower($match_librairie[1]), $possible_librairies)
-		){
-			$librairie_pdf = strtolower($match_librairie[1]);
-		} else {
-			$librairie_pdf = 'mpdf';
+	// choix de la classe de génération via la balise <page lib>
+	if (preg_match('/\<page*.lib_pdf=["|\'](.*)["|\']/iUms', $html, $match_librairie)
+		&& !empty($match_librairie[1])
+		&& array_key_exists(strtolower($match_librairie[1]), $possible_librairies)
+	){
+		$librairie_pdf = strtolower($match_librairie[1]);
+	} else {
+		$librairie_pdf = 'mpdf';
+	}
+
+	// tester si la librairie est dans /lib à la racine du spip ou dans le répertoire du plugin
+	if (is_dir(_DIR_LIB . $librairie_pdf)){
+		$dir_librairie_pdf = _DIR_LIB . $librairie_pdf . '/';
+	} elseif (is_dir(dirname(__FILE__) . '/lib/' . $librairie_pdf)) {
+		$dir_librairie_pdf = dirname(__FILE__) . '/lib/' . $librairie_pdf . '/';
+	} else {
+		die('Impossible de trouver la librairie de génération de PDF ' . $librairie_pdf . '. vérifiez que vous l\'avez bien téléchargée et installée dans /lib');
+	}
+
+	// nettoyer le HTML et gérer les placements d'image en fonction de la librairie utilisée
+	$html = spipdf_nettoyer_html($html, $possible_librairies[$librairie_pdf]);
+
+	// Debug = voir le html sans génération de PDF
+	if (isset($_GET['debug_spipdf'])){
+		echo $html;
+		exit;
+	}
+
+	// du A4 par defaut
+	$format_page = _SPIPDF_FORMAT;
+
+	// traiter la balise page pour les librairies qui ne la comprennent pas
+	if (!empty($possible_librairies[$librairie_pdf]['traite_balise_page'])){
+
+		$html = traite_balise_page($html);
+
+		// dans balise_page, on ne récupère que quelques possibilité dont le format
+		if (!empty($GLOBALS['valeurs_page'])){
+			if (!empty($GLOBALS['valeurs_page']['format']))
+				$format_page = $GLOBALS['valeurs_page']['format'];
+			if (!empty($GLOBALS['valeurs_page']['backtop']))
+				$backtop = $GLOBALS['valeurs_page']['backtop'];
+			else
+				$backtop = _SPIPDF_MARGIN_TOP;
+			if (!empty($GLOBALS['valeurs_page']['backbottom']))
+				$backbottom = $GLOBALS['valeurs_page']['backbottom'];
+			else
+				$backbottom = _SPIPDF_MARGIN_BOTTOM;
+			if (!empty($GLOBALS['valeurs_page']['backleft']))
+				$backleft = $GLOBALS['valeurs_page']['backleft'];
+			else
+				$backleft = _SPIPDF_MARGIN_LEFT;
+			if (!empty($GLOBALS['valeurs_page']['backright']))
+				$backright = $GLOBALS['valeurs_page']['backright'];
+			else
+				$backright = _SPIPDF_MARGIN_RIGHT;
+			if (!empty($GLOBALS['valeurs_page']['margin_header']))
+				$margin_header = $GLOBALS['valeurs_page']['margin_header'];
+			else
+				$margin_header = _SPIPDF_MARGIN_HEADER;
+			if (!empty($GLOBALS['valeurs_page']['margin_footer']))
+				$margin_footer = $GLOBALS['valeurs_page']['margin_footer'];
+			else
+				$margin_footer = _SPIPDF_MARGIN_FOOTER;
 		}
+	}
 
-		// tester si la librairie est dans /lib à la racine du spip ou dans le répertoire du plugin
-		if (is_dir(_DIR_LIB . $librairie_pdf)){
-			$dir_librairie_pdf = _DIR_LIB . $librairie_pdf . '/';
-		} elseif (is_dir(dirname(__FILE__) . '/lib/' . $librairie_pdf)) {
-			$dir_librairie_pdf = dirname(__FILE__) . '/lib/' . $librairie_pdf . '/';
-		} else {
-			die('Impossible de trouver la librairie de génération de PDF ' . $librairie_pdf . '. vérifiez que vous l\'avez bien téléchargée et installée dans /lib');
-		}
+	if ($librairie_pdf=='mpdf'){ // la librairie mPDF
 
-		// nettoyer le HTML et gérer les placements d'image en fonction de la librairie utilisée
-		$html = spipdf_nettoyer_html($html, $possible_librairies[$librairie_pdf]);
+		// si il y a des options dans la balise page
+		// http://mpdf1.com/manual/index.php?tid=307
 
-		// Debug = voir le html sans génération de PDF
-		if (isset($_GET['debug_spipdf'])){
-			echo $html;
-			exit;
-		}
+		// le chemin relatif vers mPDF
+		define('_MPDF_PATH', $dir_librairie_pdf);
+		include_once(_MPDF_PATH . 'mpdf.php');
 
-		// du A4 par defaut
-		$format_page = _SPIPDF_FORMAT;
+		// la classe mPDF
+		$mpdf = new mPDF(SPIPDF_CHARSET, $format_page, 0, "", $backleft, $backright, $backtop, $backbottom, $margin_header, $margin_footer);
+		$mpdf->WriteHTML($html);
 
-		// traiter la balise page pour les librairies qui ne la comprennent pas
-		if (!empty($possible_librairies[$librairie_pdf]['traite_balise_page'])){
+		$html = $mpdf->Output('', 'S'); // envoyer le code binaire du PDF dans le flux
+		$echap_special_pdf_chars = true;
 
-			$html = traite_balise_page($html);
+	} elseif ($librairie_pdf=='dompdf') { // la librairie dompdf beta 0.6 // EXPERIMENTAL
 
-			// dans balise_page, on ne récupère que quelques possibilité dont le format
-			if (!empty($GLOBALS['valeurs_page'])){
-				if (!empty($GLOBALS['valeurs_page']['format']))
-					$format_page = $GLOBALS['valeurs_page']['format'];
-				if (!empty($GLOBALS['valeurs_page']['backtop']))
-					$backtop = $GLOBALS['valeurs_page']['backtop'];
-				else
-					$backtop = _SPIPDF_MARGIN_TOP;
-				if (!empty($GLOBALS['valeurs_page']['backbottom']))
-					$backbottom = $GLOBALS['valeurs_page']['backbottom'];
-				else
-					$backbottom = _SPIPDF_MARGIN_BOTTOM;
-				if (!empty($GLOBALS['valeurs_page']['backleft']))
-					$backleft = $GLOBALS['valeurs_page']['backleft'];
-				else
-					$backleft = _SPIPDF_MARGIN_LEFT;
-				if (!empty($GLOBALS['valeurs_page']['backright']))
-					$backright = $GLOBALS['valeurs_page']['backright'];
-				else
-					$backright = _SPIPDF_MARGIN_RIGHT;
-				if (!empty($GLOBALS['valeurs_page']['margin_header']))
-					$margin_header = $GLOBALS['valeurs_page']['margin_header'];
-				else
-					$margin_header = _SPIPDF_MARGIN_HEADER;
-				if (!empty($GLOBALS['valeurs_page']['margin_footer']))
-					$margin_footer = $GLOBALS['valeurs_page']['margin_footer'];
-				else
-					$margin_footer = _SPIPDF_MARGIN_FOOTER;
+		// le chemin relatif vers mPDF
+		require_once(_DIR_LIB . 'dompdf/dompdf_config.inc.php');
+
+		$dompdf = new DOMPDF();
+		$dompdf->load_html($html, SPIPDF_CHARSET);
+		$dompdf->set_paper($format_page);
+		$dompdf->render();
+
+		$html = $dompdf->output(); // envoyer le code binaire du PDF dans le flux
+		$echap_special_pdf_chars = true;
+
+	} else { // la librairie HTML2PDF par défaut
+
+		// appel de la classe HTML2pdf
+		require_once($dir_librairie_pdf . 'html2pdf.class.php');
+		try {
+			// les paramétres d'orientation et de format son écrasé par ceux défini dans la balise <page> du squelette
+			$html2pdf = new HTML2PDF('P', $format_page, $flux['args']['contexte']['lang'], SPIPDF_UNICODE, SPIPDF_CHARSET);
+
+			// mode debug de HTML2PDF
+			if (defined('SPIPDF_DEBUG_HTML2PDF')){
+				$html2pdf->setModeDebug();
 			}
-		}
-
-		if ($librairie_pdf=='mpdf'){ // la librairie mPDF
-
-			// si il y a des options dans la balise page
-			// http://mpdf1.com/manual/index.php?tid=307
-
-			// le chemin relatif vers mPDF
-			define('_MPDF_PATH', $dir_librairie_pdf);
-			include_once(_MPDF_PATH . 'mpdf.php');
-
-			// la classe mPDF
-			$mpdf = new mPDF(SPIPDF_CHARSET, $format_page, 0, "", $backleft, $backright, $backtop, $backbottom, $margin_header, $margin_footer);
-			$mpdf->WriteHTML($html);
-
-			$html = $mpdf->Output('', 'S'); // envoyer le code binaire du PDF dans le flux
-			$echap_special_pdf_chars = true;
-
-		} elseif ($librairie_pdf=='dompdf') { // la librairie dompdf beta 0.6 // EXPERIMENTAL
-
-			// le chemin relatif vers mPDF
-			require_once(_DIR_LIB . 'dompdf/dompdf_config.inc.php');
-
-			$dompdf = new DOMPDF();
-			$dompdf->load_html($html, SPIPDF_CHARSET);
-			$dompdf->set_paper($format_page);
-			$dompdf->render();
-
-			$html = $dompdf->output(); // envoyer le code binaire du PDF dans le flux
-			$echap_special_pdf_chars = true;
-
-		} else { // la librairie HTML2PDF par défaut
-
-			// appel de la classe HTML2pdf
-			require_once($dir_librairie_pdf . 'html2pdf.class.php');
-			try {
-				// les paramétres d'orientation et de format son écrasé par ceux défini dans la balise <page> du squelette
-				$html2pdf = new HTML2PDF('P', $format_page, $flux['args']['contexte']['lang'], SPIPDF_UNICODE, SPIPDF_CHARSET);
-
-				// mode debug de HTML2PDF
-				if (defined('SPIPDF_DEBUG_HTML2PDF')){
-					$html2pdf->setModeDebug();
-				}
-				// police différente selon unicode ou latin
-				if (SPIPDF_UNICODE){
-					$police_caractere = 'FreeSans';
-				} else {
-					$police_caractere = 'Arial';
-				}
-				$html2pdf->setDefaultFont($police_caractere);
-				$html2pdf->writeHTML($html);
-
-				$html = $html2pdf->Output('', true); // envoyer le code binaire du PDF dans le flux
-				$echap_special_pdf_chars = true;
-			} catch (HTML2PDF_exception $e) {
-				echo $e;
+			// police différente selon unicode ou latin
+			if (SPIPDF_UNICODE){
+				$police_caractere = 'FreeSans';
+			} else {
+				$police_caractere = 'Arial';
 			}
+			$html2pdf->setDefaultFont($police_caractere);
+			$html2pdf->writeHTML($html);
 
+			$html = $html2pdf->Output('', true); // envoyer le code binaire du PDF dans le flux
+			$echap_special_pdf_chars = true;
+		} catch (HTML2PDF_exception $e) {
+			echo $e;
 		}
 
-		// On échappe les suites de caractères <? pour éviter des erreurs d'évaluation PHP (seront remis en place avec affichage_final)
-		// l'erreur d'évaluation est liée à la directive short_open_tag=On dans la configuration de PHP
-		if (!empty($echap_special_pdf_chars)
-		  AND strpos($html,"<"."?")!==false){
-			$html = str_replace("<"."?", "<\2\2?", $html);
-		}
+	}
+
+	// On échappe les suites de caractères <? pour éviter des erreurs d'évaluation PHP (seront remis en place avec affichage_final)
+	// l'erreur d'évaluation est liée à la directive short_open_tag=On dans la configuration de PHP
+	if (!empty($echap_special_pdf_chars)
+		AND strpos($html, "<" . "?")!==false
+	){
+		$html = str_replace("<" . "?", "<\2\2?", $html);
+	}
 
 	return $html;
 
@@ -391,8 +400,9 @@ function spipdf_html2pdf($html){
  */
 function spipdf_affichage_final($texte){
 	if ($GLOBALS['html']==false
-		AND strpos($texte,"<\2\2?")!==false){
-		$texte = str_replace("<\2\2?", "<"."?", $texte);
+		AND strpos($texte, "<\2\2?")!==false
+	){
+		$texte = str_replace("<\2\2?", "<" . "?", $texte);
 	}
 	return $texte;
 }
