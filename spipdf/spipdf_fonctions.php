@@ -226,13 +226,7 @@ function spipdf_pre_typo($texte){
 }
 
 // traitement principal. avec ce pipeline, le PDF est mis en cache et recalculé "normalement"
-function spipdf_recuperer_fond($flux){
-
-	// Le squelette est-il appelé par spipdf.html
-	if ($flux['args']['contexte']['html2pdf']=='oui'){
-
-		// récupérer le contenu et le nettoyer pour la génération
-		$html = $flux['data']['texte'];
+function spipdf_html2pdf($html){
 
 		// les librairies possibles
 		$possible_librairies = array(
@@ -332,7 +326,7 @@ function spipdf_recuperer_fond($flux){
 			$mpdf = new mPDF(SPIPDF_CHARSET, $format_page, 0, "", $backleft, $backright, $backtop, $backbottom, $margin_header, $margin_footer);
 			$mpdf->WriteHTML($html);
 
-			$flux['data']['texte'] = $mpdf->Output('', 'S'); // envoyer le code binaire du PDF dans le flux
+			$html = $mpdf->Output('', 'S'); // envoyer le code binaire du PDF dans le flux
 			$echap_special_pdf_chars = true;
 
 		} elseif ($librairie_pdf=='dompdf') { // la librairie dompdf beta 0.6 // EXPERIMENTAL
@@ -345,7 +339,7 @@ function spipdf_recuperer_fond($flux){
 			$dompdf->set_paper($format_page);
 			$dompdf->render();
 
-			$flux['data']['texte'] = $dompdf->output(); // envoyer le code binaire du PDF dans le flux
+			$html = $dompdf->output(); // envoyer le code binaire du PDF dans le flux
 			$echap_special_pdf_chars = true;
 
 		} else { // la librairie HTML2PDF par défaut
@@ -369,7 +363,7 @@ function spipdf_recuperer_fond($flux){
 				$html2pdf->setDefaultFont($police_caractere);
 				$html2pdf->writeHTML($html);
 
-				$flux['data']['texte'] = $html2pdf->Output('', true); // envoyer le code binaire du PDF dans le flux
+				$html = $html2pdf->Output('', true); // envoyer le code binaire du PDF dans le flux
 				$echap_special_pdf_chars = true;
 			} catch (HTML2PDF_exception $e) {
 				echo $e;
@@ -380,13 +374,11 @@ function spipdf_recuperer_fond($flux){
 		// On échappe les suites de caractères <? pour éviter des erreurs d'évaluation PHP (seront remis en place avec affichage_final)
 		// l'erreur d'évaluation est liée à la directive short_open_tag=On dans la configuration de PHP
 		if (!empty($echap_special_pdf_chars)
-		  AND strpos($flux['data']['texte'],"<"."?")!==false){
-			$flux['data']['texte'] = str_replace("<"."?", "<\2\2?", $flux['data']['texte']);
+		  AND strpos($html,"<"."?")!==false){
+			$html = str_replace("<"."?", "<\2\2?", $html);
 		}
 
-	}
-
-	return $flux;
+	return $html;
 
 }
 
