@@ -13,7 +13,7 @@ function generer_urls_canoniques(){
 		$id_objet   = $GLOBALS['contexte']['id_article'];
 		$objet = 'article';
 	} elseif (isset($GLOBALS['contexte']['id_rubrique'])) {
-		$objet   = $GLOBALS['contexte']['id_rubrique'];
+		$id_objet   = $GLOBALS['contexte']['id_rubrique'];
 		$objet = 'rubrique';
 	}
 
