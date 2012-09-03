@@ -390,8 +390,9 @@ function spipdf_recuperer_fond($flux){
 
 		// On échappe les suites de caractères <? pour éviter des erreurs d'évaluation PHP (seront remis en place avec affichage_final)
 		// l'erreur d'évaluation est liée à la directive short_open_tag=On dans la configuration de PHP
-		if (!empty($echap_special_pdf_chars)){
-			$flux['data']['texte'] = preg_replace('/<\?/', '<§§§§§>', $flux['data']['texte']);
+		if (!empty($echap_special_pdf_chars)
+		  AND strpos($flux['data']['texte'],"<"."?")!==false){
+			$flux['data']['texte'] = str_replace("<"."?", "<\2\2?", $flux['data']['texte']);
 		}
 
 	}
@@ -400,9 +401,19 @@ function spipdf_recuperer_fond($flux){
 
 }
 
-// On rétablit les <? du code PDF
+/**
+ * On rétablit les <? du code PDF si necessaire
+ * on n'agit que sur les pages non html
+ *
+ * @param string $texte
+ * @return string
+ */
 function spipdf_affichage_final($texte){
-	return preg_replace('/<§§§§§>/', '<?', $texte);
+	if ($GLOBALS['html']==false
+		AND strpos($texte,"<\2\2?")!==false){
+		$texte = str_replace("<\2\2?", "<"."?", $texte);
+	}
+	return $texte;
 }
 
 ?>
