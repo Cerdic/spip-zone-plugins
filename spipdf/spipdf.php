@@ -116,81 +116,70 @@ function spipdf_first_clean($texte){
 }
 
 
-function spipdf_nettoyer_html($html, $params_pdf = array()){
+//function spipdf_remplaceSpan($matches) { return str_replace('img', 'img style="padding:5px;" style="float:'.$matches[1].'"', $matches[2]); }
+function spipdf_remplaceSpan_wfloat($matches){
+	return str_replace('img', 'img style="padding:5px;" class="pdf_img_float_' . $matches[1] . '"', $matches[2]);
+}
+function spipdf_remplaceSpan($matches){
+	return str_replace('img', 'img style="padding:5px;" align="' . $matches[1] . '"', $matches[2]);
+}
+function spipdf_remplaceSpanCenter($matches){
+	return $matches[1];
+}
+//function spipdf_remplaceDt($matches) { return str_replace('img', 'img style="padding:5px;" style="float:'.$matches[1].'"', $matches[2]); }
+function spipdf_remplaceDt_wfloat($matches){
+	return str_replace('img', 'img style="padding:5px;" class="pdf_img_float_' . $matches[1] . '"', $matches[2]);
+}
+function spipdf_remplaceDt($matches){
+	return str_replace('img', 'img style="padding:5px;" align="' . $matches[1] . '"', $matches[2]);
+}
+function spipdf_remplaceIdParName($matches){
+	return str_replace('id=\'', 'name=\'', $matches[0]);
+}
+function spipdf_remplaceFloatPuce($matches){
+	return str_replace('style=\'', 'style=\'float:left;', $matches[0]);
+}
+function spipdf_remplaceDtCenter($matches){
+	return $matches[1];
+}
+function spipdf_remplaceCaption($matches){
+	$table = '<table style="border:none;"' . $matches[1] . '<tr><td style="text-align: center;border:none;">' . $matches[2] . '</td></tr>';
+	$table .= '<tr><td style="border:none;">';
+	$table .= '<table' . $matches[1] . $matches[3] . '</table>';
+	$table .= '</td></tr></table>';
+	return $table;
+}
 
+function spipdf_nettoyer_html($html, $params_pdf = array()){
 	// supprimer les spans autour des images et récupérer le placement
 	$patterns_float = '/<span class=\'spip_document_.*spip_documents.*float:(.*);.*>(.*)<\/span>/iUms';
-	if (!empty($params_pdf['float'])){
-		//function remplaceSpan($matches) { return str_replace('img', 'img style="padding:5px;" style="float:'.$matches[1].'"', $matches[2]); }
-		function remplaceSpan($matches){
-			return str_replace('img', 'img style="padding:5px;" class="pdf_img_float_' . $matches[1] . '"', $matches[2]);
-		}
-	} else {
-		function remplaceSpan($matches){
-			return str_replace('img', 'img style="padding:5px;" align="' . $matches[1] . '"', $matches[2]);
-		}
-	}
-	$html = preg_replace_callback($patterns_float, 'remplaceSpan', $html);
+	$html = preg_replace_callback($patterns_float, !empty($params_pdf['float'])?'spipdf_remplaceSpan':'spipdf_remplaceSpan_wfloat', $html);
 
 	// supprimer les spans autour des images
 	$patterns_float = '/<span class=\'spip_document_.*spip_documents.*>(.*)<\/span>/iUms';
-	function remplaceSpanCenter($matches){
-		return $matches[1];
-	}
-
-	$html = preg_replace_callback($patterns_float, 'remplaceSpanCenter', $html);
+	$html = preg_replace_callback($patterns_float, 'spipdf_remplaceSpanCenter', $html);
 
 	// supprimer les dl autour des images et récupérer le placement
 	$patterns_float = '/<dl class=\'spip_document_.*spip_documents.*float:(.*);.*<dt>(.*)<\/dt>.*<\/dl>/iUms';
-	if (!empty($params_pdf['float'])){
-		//function remplaceDt($matches) { return str_replace('img', 'img style="padding:5px;" style="float:'.$matches[1].'"', $matches[2]); }
-		function remplaceDt($matches){
-			return str_replace('img', 'img style="padding:5px;" class="pdf_img_float_' . $matches[1] . '"', $matches[2]);
-		}
-	} else {
-		function remplaceDt($matches){
-			return str_replace('img', 'img style="padding:5px;" align="' . $matches[1] . '"', $matches[2]);
-		}
-	}
-	$html = preg_replace_callback($patterns_float, 'remplaceDt', $html);
+	$html = preg_replace_callback($patterns_float, !empty($params_pdf['float'])?'spipdf_remplaceDt':'spipdf_remplaceDt_wfloat', $html);
 
 	// replacer id par name pour les notes
 	$patterns_note = '/<a.*href.*class=\'spip_note\'.*>/iUms';
-	function remplaceIdParName($matches){
-		return str_replace('id=\'', 'name=\'', $matches[0]);
-	}
-
-	$html = preg_replace_callback($patterns_note, 'remplaceIdParName', $html);
+	$html = preg_replace_callback($patterns_note, 'spipdf_remplaceIdParName', $html);
 
 	// float sur les puces graphiques TODO
 	$patterns_puce = '/<a.*href.*class=\'puce\'.*>/iUms';
-	function remplaceFloatPuce($matches){
-		return str_replace('style=\'', 'style=\'float:left;', $matches[0]);
-	}
-
-	//$html = preg_replace_callback($patterns_puce, 'remplaceFloatPuce', $html);
+	//$html = preg_replace_callback($patterns_puce, 'spipdf_remplaceFloatPuce', $html);
 	//img src="local/cache-vignettes/L8xH11/puce-32883.gif" class="puce" alt="-" style="height: 11px; width: 8px;" height="11" width="8">
 
 	// supprimer les dl autour des images centrer
 	$patterns_float = '/<dl class=\'spip_document_.*spip_documents.*<dt>(.*)<\/dt>.*<\/dl>/iUms';
-	function remplaceDtCenter($matches){
-		return $matches[1];
-	}
-
-	$html = preg_replace_callback($patterns_float, 'remplaceDtCenter', $html);
+	$html = preg_replace_callback($patterns_float, 'spipdf_remplaceDtCenter', $html);
 
 	// remplacer les captions
 	if (!empty($params_pdf['caption'])){
 		$patterns_caption = '/<table(.*)<caption>(.*)<\/caption>(.*)<\/table>/iUms';
-		function remplaceCaption($matches){
-			$table = '<table style="border:none;"' . $matches[1] . '<tr><td style="text-align: center;border:none;">' . $matches[2] . '</td></tr>';
-			$table .= '<tr><td style="border:none;">';
-			$table .= '<table' . $matches[1] . $matches[3] . '</table>';
-			$table .= '</td></tr></table>';
-			return $table;
-		}
-
-		$html = preg_replace_callback($patterns_caption, 'remplaceCaption', $html);
+		$html = preg_replace_callback($patterns_caption, 'spipdf_remplaceCaption', $html);
 	}
 
 	// tableaux centré
