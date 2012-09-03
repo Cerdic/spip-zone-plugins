@@ -21,10 +21,11 @@ function dictionnaires_upgrade($nom_meta_version_base, $version_cible){
 			creer_base();
 			
 			// Valeurs de config par défaut
-			include_spip('inc/config');
-			ecrire_config('dictionnaires/remplacer_premier_defaut', 'on');
-			ecrire_config('dictionnaires/remplacer_premier_abbr', 'on');
-			
+			ecrire_meta('dictionnaires', serialize(array(
+				'remplacer_premier_defaut' => 'on',
+				'remplacer_premier_abbr' => 'on',
+			)));
+
 			// Migration depuis F&T si présent
 			dictionnaires_migrer_acronymes();
 			
