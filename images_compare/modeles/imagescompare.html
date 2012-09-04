@@ -1,0 +1,19 @@
+<BOUCLE_avant(DOCUMENTS){id_document=#ENV{avant}}>
+<div class="beforeafter" style="[width: (#LARGEUR)px;][ height: (#HAUTEUR)px]">
+<img src='#URL_DOCUMENT'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"] alt="[(#TITRE|texte_backend)]"[ title="(#TITRE|texte_backend)"] />
+<BOUCLE_apres(DOCUMENTS){id_document=#ENV{apres}}>
+<img src='#URL_DOCUMENT'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"] alt="[(#TITRE|texte_backend)]"[ title="(#TITRE|texte_backend)"] />
+</BOUCLE_apres>
+</div>
+<script type="text/javascript">
+<!--
+(function($){
+	$(function(){
+		$.getScript('#CHEMIN{javascript/jquery.qbeforeafter.js}', function(){
+			$('.beforeafter').qbeforeafter({defaultgap:50, leftgap:0, rightgap:0, caption: false, reveal: 0.5});
+		});
+	});
+})(jQuery);
+-->
+</script>
+</BOUCLE_avant>

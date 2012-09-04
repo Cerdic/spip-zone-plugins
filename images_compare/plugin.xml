@@ -1,0 +1,16 @@
+<plugin>
+	<nom>Images compare</nom>
+	<auteur>b_b, Kevin Liew</auteur>
+	<version>0.0.1</version>
+	<etat>stable</etat>
+	<prefix>imgcompare</prefix>
+	<slogan>Comparer des images</slogan>
+	<description>Un simple mod&#232;le qui permet de superposer deux images pour les comparer.</description>
+	<licence>GPL v3</licence>
+	<categorie>multimedia</categorie>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>imgcompare_pipelines.php</inclure>
+	</pipeline>
+ 	<necessite id='SPIP' version='[2.1;3.0.99]' />
+</plugin>
