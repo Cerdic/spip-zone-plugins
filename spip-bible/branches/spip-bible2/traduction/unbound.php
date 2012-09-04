@@ -1,7 +1,7 @@
 <?php
 
 function recuperer_passage_unbound($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$unbound,$lang){
-	$param_cache = array('livre'=>$livre,'chapitre_debut'=>$chapitre_debut,'verset_debut'=>$verset_debut,'chapitre_fin'=>$chapitre_fin,'verset_fin'=>$verset_fin,'unbound'=>$unbound);
+	$param_cache = array('livre'=>$livre,'chapitre_debut'=>$chapitre_debut,'verset_debut'=>$verset_debut,'chapitre_fin'=>$chapitre_fin,'verset_fin'=>$verset_fin,'unbound'=>$unbound,$url='unbound.biola');
 	//Vérifions qu'on a pas en cache
 	if (_NO_CACHE == 0){
 		include_spip('inc/bible_cache');
@@ -51,7 +51,7 @@ function recuperer_passage_unbound($livre,$chapitre_debut,$verset_debut,$chapitr
 	       $i != $chapitre_fin ? $vf = 99999 : $vf = $verset_fin; //test préalable pour savoir où on se trouve dans le texte
 	       $i != $chapitre_debut ? $vd = 1 : $vd = $verset_debut;
 	       
-	       $url = "http://www.unboundbible.org/index.cfm?method=searchResults.doSearch&parallel_1=".$unbound."&book=".$id_livre."&from_chap=".$i."&from_verse=".$vd."&to_chap=".$i."&to_verse=".$vf;
+	       $url = "http://unbound.biola.edu/index.cfm?method=searchResults.doSearch&parallel_1=".$unbound."&book=".$id_livre."&from_chap=".$i."&from_verse=".$vd."&to_chap=".$i."&to_verse=".$vf;
 	       $code = importer_charset(recuperer_page($url,'utf-8'));
 	       
 	       $code = selectionner_passage($code);
