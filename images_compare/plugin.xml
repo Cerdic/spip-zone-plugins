@@ -6,6 +6,7 @@
 	<prefix>imgcompare</prefix>
 	<slogan>Comparer des images</slogan>
 	<description>Un simple mod&#232;le qui permet de superposer deux images pour les comparer.</description>
+	<lien>http://contrib.spip.net/4229</lien>
 	<licence>GPL v3</licence>
 	<categorie>multimedia</categorie>
 	<pipeline>
