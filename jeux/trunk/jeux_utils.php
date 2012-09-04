@@ -153,7 +153,8 @@ function jeux_afficher_score($score, $total, $id_jeu=false, $resultat_long='', $
 }
 
 function jeux_commentaire_score($categ, $score, $total) {
-	if(!strlen(categ)) return '';
+	if (!strlen($categ)) return '';
+
 	$score = intval($score);
 	$total = intval($total);
 	$res = false;

@@ -228,7 +228,8 @@ function qcm_affiche_la_question(&$qcms, $indexJeux, $indexQCM, $gestionPoints) 
 
 			// bonne reponse
 			$bonneReponse = ($trou && jeux_in_liste($reponse, $qcms[$indexQCM]['propositions']))
-				|| ($qcms[$indexQCM]['bonnesreponses'][$reponse]==1);
+				|| (isset($qcms[$indexQCM]['bonnesreponses'][$reponse])
+					and $qcms[$indexQCM]['bonnesreponses'][$reponse]==1);
 
 			// si ce n'est pas un trou, donner les points de la reponse quoiqu'il arrive
 			if (!$trou || $bonneReponse) $qcms['score_du_qcm'] += $pointsR;

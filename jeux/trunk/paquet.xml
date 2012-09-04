@@ -12,8 +12,7 @@
 	<auteur>Patrice VANNEUFVILLE</auteur>
 	<auteur lien="http://www.maieul.net">Ma&#239;eul Rouquette</auteur>
 	<licence>GNU/LGPL - (c) 2006-2012</licence>
- 
-     
+
     <traduire module="jeu" reference="fr"/>
     <traduire module="jeux" reference="fr"/>
     <traduire module="jeux_gerer_resultats" reference="fr"/>
