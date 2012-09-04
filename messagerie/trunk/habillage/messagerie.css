@@ -1,3 +1,13 @@
+
+.formulaire_ecrire_message form span.dest {padding:3px;background:#F4FFBF;border:1px solid #89AF02;display:block;float:left;margin:0 4px 3px 0;}
+.formulaire_ecrire_message form span.dest.hover {background:#EEFF9F;}
+.formulaire_ecrire_message form span.dest img {cursor:pointer;padding:1px;}
+.formulaire_ecrire_message form li.champ_destinataire span.details {display:inline;padding:2px 0;}
+.formulaire_ecrire_message form li.champ_destinataire label.nocmx {float:left;width:100px;}
+.formulaire_ecrire_message form li.champ_destinataire div.faux_input {width:305px;padding:0;float:left;margin:0 0 0 0;/*background:#fff;border:1px solid #DDDDDD;padding:2px;*/}
+ced.formulaire_ecrire_message form li {clear:left;}
+.formulaire_ecrire_message form li input {width:307px;}
+
 /* autocompletion */
 /*.ac_input {	width: 200px; }*/
 .ac_results {	padding: 0px;	border: 1px solid WindowFrame;	background-color: Window;	overflow: hidden;text-align:left;z-index:1000;}
