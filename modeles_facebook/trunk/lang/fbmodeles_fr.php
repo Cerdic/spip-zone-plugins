@@ -12,14 +12,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_comment_colorscheme' => 'Sélectionnez ici le profil prédéterminé par les modules qui sera utilisé pour l\'affichage.',
 	'cfg_comment_font' => 'Sélectionnez ici la police de caractère qui sera utilisée pour l\'affichage des modules.',
 	'cfg_comment_identifiants' => '{{Utilisez les champs ci-dessous pour préciser les différents identifiants que vous souhaitez utiliser.}} Ils ne sont pas obligatoires, mais peuvent permettre notamment de suivre des statistiques précises proposées par Facebook.',
-	'cfg_comment_pageid' => 'Identifiant d\'une page ; cela nécessite d\'avoir créé la page.',
+	'cfg_comment_pageid' => 'Identifiant d\'une page facebook ; cela nécessite d\'avoir créé la page.',
 	'cfg_comment_reglages' => '{{Vous pouvez ici choisir certains réglages concernant les outils javascript de Facebook.}} Par défaut, les modèles utilisent le langage XFBML ({SDK javascript Facebook}) mais vous pouvez désactiver cette fonctionnalité, les outils seront alors chargés en frames.',
 	'cfg_comment_url_page' => 'Adresse URL complète de votre page ou profil Facebook ; elle sera utilisée par défaut par les modèles (URL du type "<code>http://www.facebook.com/...</code>").',
 	'cfg_comment_userid' => 'Identifiant(s) utilisateur(s) des administrateurs des plugins. Vous pouvez en indiquer plusieurs en les séparant par une virgule.',
 	'cfg_comment_xfbml' => 'Utilisation de la bibliothèque javascript du SDK Facebook et du langage associé. Si vous choisissez "non", les modules seront présentés en iframe.',
 	'cfg_descr' => 'Vous devez ici définir les différents identifiants fournis par le système Facebook.<br /><br />Plus d\'infos : [->http://www.facebook.com/insights/].
 
-Pour inclure les balises "Open Graph" en en-tête de vos pages publiques, vous devez insérer le modèle "insert_head_og" en lui passant l\'environnement : {{#MODELE{insert_head_og}{env}}}.
+Pour inclure les balises "Open Graph" en en-tête de vos pages publiques, vous devez insérer le modèle "insert_head_og" en lui passant l\'environnement : <code>#MODELE{insert_head_og}{env}</code>.
 <br /><br />Plus d\'infos : [->http://developers.facebook.com/docs/opengraph/].',
 	'cfg_descr_titre' => 'Modèles Facebook',
 	'cfg_identifiants' => 'Identifiants Facebook',
