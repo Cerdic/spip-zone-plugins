@@ -1,7 +1,8 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 function jeux_ajouter_resultat($id_jeu, $resultat, $total, $resultat_long=''){
-	$id_auteur = $GLOBALS["auteur_session"]['id_auteur'];
+	include_spip('inc/session');
+	$id_auteur = session_get('id_auteur');
 	if (!$id_auteur) return;
 	$requete = sql_fetsel('type_resultat', 'spip_jeux', "id_jeu=$id_jeu");
 	$type_resultat = $requete['type_resultat'];
