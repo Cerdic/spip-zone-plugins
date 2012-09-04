@@ -9,6 +9,7 @@ Date : Thu Jul 19 11:27:58 2012
 ------------------------------------------------------------------------------
 SOURCES :
 ========
+
 - basicone : <http://www.spip-contrib.net/basicone-icones-du-theme-prive>
 
 - Thèmes pour l’interface privée : <http://www.spip-contrib.net/Themes-pour-l-interface-privee>
@@ -18,20 +19,38 @@ DOC :
 
 Mes prefs v1 :
 
-- permet a l'utilisateur de l'espace privé de changer sn thème et interface
+- permet a l'utilisateur de l'espace privé de changer son thème et interface de l'espace privé
 
 - ajoute plusieurs thème d'icones au choix sans avoir a passer par la global : car elle est globale ;-) et donc force tous le monde a utiliser le même thème.
-Néanmoins dans `mes_preference_option.php` ont peut forcer la Global sur un jeux d'icone particulier ou un thème.
+Néanmoins dans `mes_preference_option.php` ont peut forcer la Global sur un jeux d'icone particulier ou un thème, par exemple si le webmaster veut imposer un jeux de base par défaut.
 
 - ajoute un type de layout / taille d'écran : elastic : la colonne d'affichage centrale du contenu est en % qui s'adapte a la fenètre du navigateur
     
 - pour personaliser les icones un gabarit est fournit au format .psd (importable par gimp si besoin) placé dans le répertoire images/sprite_spip_prive
 les tranche sont prédécoupée et nomées.
 
+- le logo du site est présent dans le pied de page 
+
 
 ------------------------------------------------------------------------------
 TRAVAUX :
 =========
+
+Tue Sep 04 11:04:25 2012
+
+- intégration du modèle [(#MODELE{minichat})] dans /prive/inclure/pied :
+    |-> ajoute un chat jappix pour les rédacteur de l'espace privé si le plugin jappix mini est instalé
+
+Wed Jul 25 10:10:01 2012
+
+-   correction sur les puces des menus déroulant qui ont des enfants .has_child
+
+Tue Jul 24 19:29:23 2012
+
+- ajout du fichier /prive/inclure/pied
+ |-> logo du site affiché dans le footer de l'administration
+ 
+- ajout d'une feuille commune a tous les thèmes inc/commons.css
 
 Thu Jul 19 11:29:57 2012
 
