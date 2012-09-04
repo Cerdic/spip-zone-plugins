@@ -16,7 +16,9 @@ include_spip('jeux_config');
 global $jeux_config;
 function jeux_config($param, $config=false) {
   global $jeux_config;
-  $p = trim($config===false?$jeux_config[$param]:$config[$param]);
+  $p = ($config===false?$jeux_config:$config);
+  $p = isset($p[$param]) ? trim($p[$param]) : "";
+
   if (in_array($p, array('true', 'vrai', 'oui', 'yes', 'on', '1', 'si', 'ja', strtolower(_T('item_oui'))))) return true;
   if (in_array($p, array('false', 'faux', 'non', 'no', 'off', '0', 'nein', strtolower(_T('item_non'))))) return false;
   if(strncmp($p,'"',1)===0) $p = str_replace('"', '', $p);

@@ -138,8 +138,19 @@ function table_jeux_caracteristiques() {
 	return propre($res);
 }
 
-function jeux_icone_horizontale($texte, $lien, $fond){
-	return icone_base($lien, $texte, $fond, "", "horizontale", "");
+/**
+ * Construit un lien horizontal 
+ *
+ * @example
+ *     <:jeux:chaine|jeux_icone_horizontale{#URL_ECRIRE{xx},#CHEMIN_IMAGE{jeu-16.png}}:>
+ * 
+ * @param string $texte Le texte du lien
+ * @param string $lien L'url du lien
+ * @param string $image Le chemin vers l'image (16px) à afficher
+ * @return string Code HTML du lien
+**/
+function jeux_icone_horizontale($texte, $lien, $image){
+	return icone_base($lien, $texte, $image, "", "horizontale", "");
 }
 
 

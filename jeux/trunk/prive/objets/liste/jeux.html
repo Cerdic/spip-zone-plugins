@@ -80,9 +80,12 @@
 <//B_articles>
 
 <div class="modules_jeux">
-[(#CHEMIN{images/jeu-16.png}|debut_cadre_enfonce{1, '', <:jeu:titre_modules_dispos|bouton_block_depliable{invisible, modules}:>})]
-[(#VAL{0}|debut_block_depliable{modules})]
+
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{jeu-16.png}|balise_img{'',cadre-icone}
+	|concat{<:jeu:titre_modules_dispos:>},'simple','titrem'})]
+
 [(#VAL|table_jeux_caracteristiques)]
-[(#VAL|fin_block)]
-[(#VAL{1}|fin_cadre_enfonce)]
+
+#BOITE_FERMER
+
 </div>

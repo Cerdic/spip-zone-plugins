@@ -78,11 +78,17 @@ function jeux_qcm_init() {
 
 // cette fonction remplit le tableau $qcms sur la question $indexQCM
 function qcm_analyse_le_qcm(&$qcms, $qcm, $indexQCM, $isQRM) {
+  // init
+  isset($qcms['qrm']) || $qcms['qrm'] = false;
+  isset($qcms[$indexQCM]['nbpropositions']) || $qcms[$indexQCM]['nbpropositions'] = 0;
+  
   $qcms[$indexQCM]['qrm'] = $isQRM;
   $qcms['qrm'] |= $isQRM;
   $lignes = preg_split('/[\r\n]+/', $qcm);
   foreach($lignes as $ligne) {
-	$li = trim($ligne); 
+	$li = trim($ligne);
+	if (!$li) continue;
+
     switch($li[0]){
       case 'Q' : 	  	// extraire la question
 		$qcms[$indexQCM]['question'] = trim(substr($li, 1));
@@ -91,7 +97,7 @@ function qcm_analyse_le_qcm(&$qcms, $qcm, $indexQCM, $isQRM) {
         break;
       case 'P' : 	  	// extraire une proposition
 	  	// Pour les precisions de la proposition...
-	 	list($reponse, $precision) = explode("|", $li, 2);
+	 	list($reponse, $precision) = array_pad(explode("|", $li, 2), 2, "");
 		// extraire le numero de la proposition et son contenu
 		preg_match(',^P(\d*)(.*)$,', $reponse, $regs);	
 		$indexProposition = intval($regs[1]);

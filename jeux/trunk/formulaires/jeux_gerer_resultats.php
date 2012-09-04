@@ -3,10 +3,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_jeux_gerer_resultats_saisies($param=array()){
-    if($param['id_auteur']){
+    if (isset($param['id_auteur']) and $param['id_auteur']){
         $label_faire = _T('jeux_gerer_resultats:pour_auteur');   
     }
-    elseif($param['id_jeu']){
+    elseif (isset($param['id_jeu']) and $param['id_jeu']){
         $label_faire = _T('jeux_gerer_resultats:pour_jeu');   
     }
     else{
