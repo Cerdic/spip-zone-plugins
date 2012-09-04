@@ -1,5 +1,31 @@
 <?php
+include_spip('inc/bible_tableau');
+function generer_url_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lire,$lang){
+	list($chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$petit) = lire_petit_livre($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang);
+	if (!$petit){
+		return "http://lire.la-bible.net/index.php?reference=$livre+$chapitre_debut&versions[]=$lire";	
+	}
+	else {
+		return "http://lire.la-bible.net/index.php?reference=$livre&versions[]=$lire";	
+	}
+}
 
+function lire_petit_livre($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang){
+	//petit livre ?
+	$petit_livre=bible_tableau('petit_livre',$lang);
+	if (in_array(strtolower($livre),$petit_livre)) {
+		
+		$verset_debut=$chapitre_debut;
+		
+		$verset_fin = $chapitre_fin;
+		$chapitre_debut = 1;
+		$chapitre_fin = 1;
+		$petit		= true;
+	
+	} 
+	return array($chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$petit);
+
+}
 function recuperer_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lire,$lang){
 	$param_cache = array('livre'=>$livre,'chapitre_debut'=>$chapitre_debut,'verset_debut'=>$verset_debut,'chapitre_fin'=>$chapitre_fin,'verset_fin'=>$verset_fin,'lire'=>$lire);
 	if ($livre=='Ct'){
@@ -16,24 +42,10 @@ function recuperer_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_f
 	$url_base="http://lire.la-bible.net/texte.php?versions[]=".$lire;
 	
 	
-	
-	
-	//petit livre ?
-	$petit_livre=bible_tableau('petit_livre',$lang);
-
-	if (in_array(strtolower($livre),$petit_livre)) {
-		
-		$verset_debut=$chapitre_debut;
-		
-		$verset_fin = $chapitre_fin;
-		$chapitre_debut = 1;
-		$chapitre_fin = 1;
-	
-	} 
-
+	list($chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$petit) = lire_petit_livre($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang);
 	
 	//determination de lu livre
-	include_spip('inc/bible_tableau');
+	
 	$tableau = bible_tableau('lire_la_bible');
 	$livre =  $tableau[$livre];
 	$tableau_resulat = array();
@@ -47,8 +59,6 @@ function recuperer_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_f
 	$i = $chapitre_debut;
 	while ($i<=$chapitre_fin){
 		$url = $url_base."&reference=".$livre."+".$i;
-		
-	
 		
 		$i == $chapitre_debut ? $debut = $verset_debut : $debut=1;
 		$i == $chapitre_fin ? $fin = $verset_fin : $fin = '';
