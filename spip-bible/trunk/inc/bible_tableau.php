@@ -420,13 +420,13 @@ Editio Typica Altera ',
 		'at'=> true
 				),
 	'na27'		=> array(
-		'traduction'=> 'Nestl&eacute;-Aland (Ed.&nbsp;27)',
+		'traduction'=> 'Nestl&eacute;-Aland (<sup>27</sup>&nsbp;éd.)',
 		'gateway'	=> false,
 		'lang'		=>'grc',
 		'wissen'	=>'novum-testamentum-graece-na-27',
 		'nt'=> true),
 	'na28'		=> array(
-		'traduction'=> 'Nestl&eacute;-Aland (Ed.&nbsp;28)',
+		'traduction'=> 'Nestl&eacute;-Aland (<sup>28</sup>&nsbp;éd.)',
 		'gateway'	=> false,
 		'lang'		=>'grc',
 		'nt'=> true)
