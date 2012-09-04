@@ -1,20 +1,11 @@
 <?php
-
-function recuperer_passage_unbound($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$unbound,$lang){
-	$param_cache = array('livre'=>$livre,'chapitre_debut'=>$chapitre_debut,'verset_debut'=>$verset_debut,'chapitre_fin'=>$chapitre_fin,'verset_fin'=>$verset_fin,'unbound'=>$unbound,$url='unbound.biola');
-	//Vérifions qu'on a pas en cache
-	if (_NO_CACHE == 0){
-		include_spip('inc/bible_cache');
-		$cache = bible_lire_cache($param_cache);
-		if ($cache){
-			return $cache;	
-		}
-	}
+function generer_url_passage_unbound($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$unbound,$lang){
+	list($id_livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin) = unbound_parametre_url($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang);
+	$url = "http://unbound.biola.edu/index.cfm?method=searchResults.doSearch&parallel_1=".$unbound."&book=".$id_livre."&from_chap=".$chapitre_debut."&from_verse=".$verset_debut."&to_chap=".$chapitre_fin."&to_verse=".$verset_fin;
+	return $url;
 	
-	if ($verset_debut=='' ){
-		$verset_debut=1;
-		$verset_fin = 9999;
-	}
+}
+function unbound_parametre_url($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang){
 	include_spip('inc/bible_tableau');
 	$livre_gateways = bible_tableau('gateway');
 	$gateway_to_bound = bible_tableau('unbound');
@@ -33,14 +24,29 @@ function recuperer_passage_unbound($livre,$chapitre_debut,$verset_debut,$chapitr
 		$chapitre_fin = 1;
 	
 	} 
+	return array($id_livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin);
+}	
+
+function recuperer_passage_unbound($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$unbound,$lang){
+	$param_cache = array('livre'=>$livre,'chapitre_debut'=>$chapitre_debut,'verset_debut'=>$verset_debut,'chapitre_fin'=>$chapitre_fin,'verset_fin'=>$verset_fin,'unbound'=>$unbound,$url='unbound.biola');
+	//Vérifions qu'on a pas en cache
+	if (_NO_CACHE == 0){
+		include_spip('inc/bible_cache');
+		$cache = bible_lire_cache($param_cache);
+		if ($cache){
+			return $cache;	
+		}
+	}
+	
+	if ($verset_debut=='' ){
+		$verset_debut=1;
+		$verset_fin = 9999;
+	}
     include_spip("inc/distant");
 	include_spip("inc/charsets");
 	
+	list($id_livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin) = unbound_parametre_url($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang);
 	$tableau = array();
-	
-	
-	
-	
 	
 	// on procède cahpitre par cahpitre, c'est plus long mais moins casse-c** au niveau de la sélèction du texte
 	
