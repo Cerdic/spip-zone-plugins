@@ -25,7 +25,6 @@
 
 	<necessite nom="saisies" compatibilite="[1.20.0;[" />
 
-	<menu nom="dictionnaires" titre="dictionnaire:titre_dictionnaires" parent="naviguer" icone="prive/themes/spip/images/dictionnaire-16.png" action="dictionnaires" />
-	<menu nom="dictionnaires_edition" titre="dictionnaire:titre_dictionnaires" parent="bando_edition" icone="images/dictionnaire-16.png" action="dictionnaires" />
+	<menu nom="dictionnaires" titre="dictionnaire:titre_dictionnaires" parent="bando_edition" icone="images/dictionnaire-16.png" action="dictionnaires" />
 	<menu nom="dictionnaires_configuration" titre="dictionnaire:titre_dictionnaires" parent="bando_configuration" icone="images/dictionnaire-16.png" action="configurer_dictionnaires" />
 </paquet>

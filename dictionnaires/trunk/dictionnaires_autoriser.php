@@ -15,24 +15,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function dictionnaires_autoriser(){}
 
-// Qui peut voir la liste des dictionnaires : tout le monde
-
-/**
- * Autorisation de voir le bouton de dictionnaires
- *
- * Tout le monde
- * 
- * @param  string $faire Action demandée
- * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
- * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_dictionnaires_bouton_dist($faire, $type, $id, $qui, $opt){
-	return autoriser('bouton', 'dictionnaires_edition', $id, $qui, $opt);
-}
-
 /**
  * Autorisation de voir le bouton de dictionnaires du menu d'édition
  *
@@ -45,7 +27,7 @@ function autoriser_dictionnaires_bouton_dist($faire, $type, $id, $qui, $opt){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_dictionnaires_edition_bouton_dist($faire, $type, $id, $qui, $opt){
+function autoriser_dictionnaires_bouton_dist($faire, $type, $id, $qui, $opt){
 	return true;
 }
 
