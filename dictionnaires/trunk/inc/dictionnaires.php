@@ -188,4 +188,5 @@ function dictionnaires_remplacer_defaut_dist($mot, $definition) {
 #	return '<abbr title="'.couper(trim(attribut_html(supprimer_tags(typo($definition['texte'])))),80).'">'.$mot.'</abbr>';
 #}
 
+
 ?>
