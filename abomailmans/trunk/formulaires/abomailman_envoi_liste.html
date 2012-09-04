@@ -34,7 +34,7 @@
 			<li class="editer_date choisir_date[ (#ENV**{erreurs}|table_valeur{date}|oui)erreur]" style="overflow:visible">
 				<label for="date"><:abomailmans:contenu_date:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date})</span>]
-				<input name="date" id="date" class="text date" value="[(#ENV{date}|affdate{'Y-m-d'})]"/>
+				<input name="date" id="date" class="text date" value="[(#ENV{date}|affdate{'d/m/Y'})]"/>
 				#INCLURE{fond=formulaires/dateur/inc-dateur}
 			</li>
 			<li class="choisir_rubrique[ (#ENV**{erreurs}|table_valeur{id_rubrique}|oui)erreur]">

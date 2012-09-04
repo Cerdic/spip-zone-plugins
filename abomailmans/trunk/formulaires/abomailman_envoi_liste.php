@@ -12,7 +12,7 @@ function formulaires_abomailman_envoi_liste_charger_dist(){
 	if (autoriser('modifier','abomailman')) {
 	  $valeurs['editable']=true;
 	} else return $valeurs['editable']=false;
-	
+
 	//$valeurs['id_abomailman'] = _request('id_abomailman');
 	$valeurs['sujet'] = _request('sujet');
 	$valeurs['template'] = _request('template');
@@ -33,10 +33,17 @@ function formulaires_abomailman_envoi_liste_verifier_dist(){
 	$valeurs['sujet'] = _request('sujet');
 	$valeurs['template'] = _request('template');
 	$valeurs['message'] = _request('message');
-	$valeurs['date'] = _request('date');
 	$valeurs['id_rubrique'] = _request('id_rubrique');
 	$valeurs['id_mot'] = _request('id_mot');
 
+	if ($date = recup_date(_request('date'))) {	//On met la date saisie au format MySql AAAA-MM-JJ			
+		$valeurs['date'] = date("Y-m-d",mktime($date[3],$date[4],$date[5],$date[1],$date[2],$date[0]));
+	} else { // Devrait pas arriver mais bon
+		$valeurs['date'] = date("Y-m-d");
+	}
+	// On reinjecte dans le bon format
+	set_request('date', $valeurs['date']);
+	
    if(!$valeurs['sujet']){ 
 		$erreurs['sujet'] = _T('abomailmans:sujet_obligatoire');  
    }
@@ -65,7 +72,7 @@ function abomailmain_inclure_previsu($datas){
 function formulaires_abomailman_envoi_liste_traiter_dist(){
    refuser_traiter_formulaire_ajax();
     	
-	$datas = array();
+	$query = array();
 	$nom_site = lire_meta("nom_site");
 	$email_webmaster = lire_meta("email_webmaster");
 	$charset = lire_meta('charset');
@@ -77,10 +84,15 @@ function formulaires_abomailman_envoi_liste_traiter_dist(){
 	$query['template'] = _request('template');
 	$query['sujet'] = _request('sujet');
 	$query['message'] = _request('message');
-	$query['date'] = _request('date');
 	$query['id_rubrique'] = _request('id_rubrique');
 	$query['id_mot'] = _request('id_mot');
-	
+
+	if ($date = recup_date(_request('date'))) {	//On met la date saisie au format MySql AAAA-MM-JJ			
+		$query['date'] = date("Y-m-d",mktime($date[3],$date[4],$date[5],$date[1],$date[2],$date[0]));
+	} else { // Devrait pas arriver mais bon
+		$query['date'] = date("Y-m-d");
+	}
+
 	$fond = recuperer_fond('abomailman_template',$query); 
 	$body = array(
 		'html'=>$fond,
