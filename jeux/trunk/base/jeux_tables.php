@@ -45,6 +45,8 @@ function jeux_declarer_tables_objets_sql($table){
   
     return $table;
 }
+
+
 function jeux_declarer_tables_principales($tables_principales){
     $jeux_resultats = array(
 	   'id_resultat' => 'bigint(21) NOT NULL',

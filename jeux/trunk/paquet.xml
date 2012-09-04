@@ -33,6 +33,9 @@
 	<pipeline nom="affichage_final" inclure="jeux_pipelines.php" />
 	<pipeline nom="affiche_gauche" inclure="jeux_pipelines.php" />
 
+	<!-- Déclarations de pipelines -->
+	<pipeline nom="jeux_caracteristiques" action="" />
+
     
 	<menu nom="jeux" titre="jeux:jeux" parent="menu_edition" icone="images/jeu-16.png" />
 	<menu nom="jeu_creer" titre="jeux:nouveau_jeu" parent="outils_rapides" icone="images/jeu-new-16.png" parametres="new=oui" action="jeu_edit" />

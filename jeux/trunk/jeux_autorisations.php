@@ -1,9 +1,18 @@
 <?php
 
+/**
+ * Gestion des autorisations 
+ *
+ * @packet SPIP\Jeux\Autorisations
+**/
+
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// declaration vide pour ce pipeline.
+/**
+ * Fonction d'appel du pipeline. N'a rien à faire.
+ * @pipeline autoriser
+**/
 function jeux_autoriser(){}
 
 
@@ -42,6 +51,19 @@ function autoriser_jeu_supprimer_dist($faire, $type, $id, $qui, $opt) {
 }
 
 // ---- Gestion des résultats ---
+
+
+function autoriser_gererresultats_dist($faire, $type, $id, $qui, $opt){
+	return in_array($qui['statut'], array('0minirezo'));
+}
+
+function autoriser_modifierstatut_dist($faire, $type, $id, $qui, $opt){
+	return in_array($qui['statut'], array('0minirezo'));
+}
+
+function autoriser_auteur_gererresultats_dist($faire, $type, $id, $qui, $opt){
+	return (in_array($qui['statut'], array('0minirezo')) or ($qui['id_auteur']==$id));
+}
 
 
 ?>
