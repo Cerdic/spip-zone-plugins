@@ -14,6 +14,9 @@ SOURCES :
 
 - Thèmes pour l’interface privée : <http://www.spip-contrib.net/Themes-pour-l-interface-privee>
 
+UTILISE :
+- jappixmini : http://contrib.spip.net/Jappix-Mini
+
 DOC :
 =====
 
@@ -29,7 +32,7 @@ Néanmoins dans `mes_preference_option.php` ont peut forcer la Global sur un jeu
 - pour personaliser les icones un gabarit est fournit au format .psd (importable par gimp si besoin) placé dans le répertoire images/sprite_spip_prive
 les tranche sont prédécoupée et nomées.
 
-- le logo du site est présent dans le pied de page 
+- le logo du site est présent dans le pied de page , ainsi qu'un chat pour les utilisateurs de l'espace privé si le pluginjappixmini est installé
 
 
 ------------------------------------------------------------------------------
@@ -38,7 +41,7 @@ TRAVAUX :
 
 Tue Sep 04 11:04:25 2012
 
-- intégration du modèle [(#MODELE{minichat})] dans /prive/inclure/pied :
+- [TEST] intégration du modèle [(#MODELE{minichat})] dans /prive/inclure/pied :
     |-> ajoute un chat jappix pour les rédacteur de l'espace privé si le plugin jappix mini est instalé
 
 Wed Jul 25 10:10:01 2012
