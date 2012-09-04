@@ -1,7 +1,7 @@
 <paquet
 	prefix="dictionnaires"
 	categorie="divers"
-	version="0.4.1"
+	version="0.4.2"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/dictionnaire-32.png"
@@ -26,5 +26,6 @@
 	<necessite nom="saisies" compatibilite="[1.20.0;[" />
 
 	<menu nom="dictionnaires" titre="dictionnaire:titre_dictionnaires" parent="bando_edition" icone="images/dictionnaire-16.png" action="dictionnaires" />
+	<menu nom="definition_creer" titre="definition:titre_definition" parent="outils_rapides" icone="images/definition-add-16.png" action="definition_edit" parametres="new=oui&amp;id_dictionnaire=@id_dictionnaire@" />
 	<menu nom="dictionnaires_configuration" titre="dictionnaire:titre_dictionnaires" parent="bando_configuration" icone="images/dictionnaire-16.png" action="configurer_dictionnaires" />
 </paquet>

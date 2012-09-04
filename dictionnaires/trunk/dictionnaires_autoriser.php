@@ -31,6 +31,21 @@ function autoriser_dictionnaires_bouton_dist($faire, $type, $id, $qui, $opt){
 	return true;
 }
 
+/**
+ * Autorisation de voir le bouton d'ajout rapide de définition
+ *
+ * Tous les rédacteurs, lorsqu'il y a un dictionnaire
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_definition_creer_bouton_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('creer', 'definition', $id, $qui, $opt);
+}
 
 /**
  * Autorisation de créer un dictionnaire 
@@ -47,6 +62,7 @@ function autoriser_dictionnaires_bouton_dist($faire, $type, $id, $qui, $opt){
 function autoriser_dictionnaire_creer_dist($faire, $type, $id, $qui, $opt){
 	return autoriser('configurer', $type, $id, $qui, $opt);
 }
+
 
 /**
  * Autorisation de modifier un dictionnaire
@@ -92,7 +108,7 @@ function autoriser_dictionnaire_supprimer_dist($faire, $type, $id, $qui, $opt){
 
 
 /**
- * Autorisation de créer une définition 
+ * Autorisation de créer une définition dans un dictionnaire 
  *
  * Les rédacteurs
  * 
@@ -106,6 +122,23 @@ function autoriser_dictionnaire_supprimer_dist($faire, $type, $id, $qui, $opt){
 function autoriser_dictionnaire_creerdefinitiondans_dist($faire, $type, $id, $qui, $opt){
 	return $qui['statut'] <= '1comite';
 }
+
+/**
+ * Autorisation de créer une définition 
+ *
+ * Les rédacteurs, et au moins un dictionnaire
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_definition_creer_dist($faire, $type, $id, $qui, $opt){
+	return $qui['statut'] <= '1comite' and sql_countsel('spip_dictionnaires');
+}
+
 
 /**
  * Autorisation de modifier une définition
