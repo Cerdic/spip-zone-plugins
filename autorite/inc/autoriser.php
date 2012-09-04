@@ -489,7 +489,6 @@ function autoriser_forum_modifier($faire, $type, $id, $qui, $opt) {
 	if (
 		$GLOBALS['autorite']['editer_forums'] >= 2
 		AND $qui['statut'] == '0minirezo'
-		AND !$qui['restreint']
 	)
 		return true;
 
