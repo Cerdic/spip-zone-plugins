@@ -1,13 +1,15 @@
 <plugin>
   <nom>Geographie</nom>
   <auteur>Cedric Morin [yterium.net->http://www.yterium.net]</auteur>
-  <version>0.2</version>
-  <version_base>0.2</version_base>
+  <version>0.3.0</version>
+  <version_base>0.2.0</version_base>
   <etat>test</etat>
-  <description>Bases geographiques Pays, et pour la France : Region, departement, communes geolocalis&eacute;es</description>
-	<lien></lien> <!-- URI de documentation -->
+  <description>Bases g&#233;ographiques Pays, et pour la France : R&#233;gion, d&#233;partement, communes g&#233;olocalis&#233;es</description>
+	<lien>http://contrib.spip.net/Geographie</lien>
+  <categorie>divers</categorie>
   <prefix>geographie</prefix>
   <install>base/geographie_install.php</install>
+  <icon>prive/themes/spip/images/geographie-32.png</icon>
   <fonctions>base/geographie.php</fonctions>
   <pipeline>
   	<nom>lister_tables_noexport</nom>
@@ -25,5 +27,5 @@
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/geographie.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0;]" />
+	<necessite id="SPIP" version="[2.1.0;]" />  
 </plugin>

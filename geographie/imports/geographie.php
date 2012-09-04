@@ -2,7 +2,9 @@
 function imports_geographie_dist(){
 	// importer les pays
 	include_spip('imports/pays');
-	include_spip('inc/charset');
+	include_spip('inc/charsets');
+  
+  
 	foreach($GLOBALS['liste_pays'] as $k=>$p)
 		sql_insertq('spip_geo_pays',array('id_pays'=>$k,'nom'=>unicode2charset(html2unicode($p))));
 
