@@ -1,5 +1,25 @@
 <?php
 
+function generer_url_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$wissen,$lang){
+	$ref = construire_ref_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang);
+	return "http://www.bibelwissenschaft.de/nc/online-bibeln/".$wissen."/lesen-im-bibeltext/bibelstelle/".$ref."/anzeige/single/#iv";
+}
+
+function construire_ref_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang){
+	
+	$ref = str_replace(' ','',strip_tags(afficher_references($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,'',',',$lang,'false')));
+	//petit livre ?
+	$petit_livre=bible_tableau('petit_livre','de');
+	
+	if (in_array(strtolower($livre),$petit_livre)) {
+		
+		$ref = str_replace($livre,$livre.'1,',$ref);
+	} 
+	else {
+		$ref = str_replace($livre,$livre,$ref);
+	}
+	return $ref;
+}
 
 function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$wissen,$lang){
 	include_spip('inc/bible_tableau');
@@ -9,7 +29,7 @@ function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre
 	$livre_or = $livre;
 	$livre		= $livre_al[$livre_lang];
 	
-	$ref = str_replace(' ','',strip_tags(afficher_references($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,'',',',$lang,'false')));
+	$ref = construire_ref_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang);
 	
 	$param_cache = array('ref'=>$ref,'wissen'=>$wissen,'version_wissen'=>1);
 	//Vérifions qu'on a pas en cache
@@ -23,17 +43,7 @@ function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre
 
 
 	
-	//petit livre ?
-	$petit_livre=bible_tableau('petit_livre','de');
 	
-	if (in_array(strtolower($livre),$petit_livre)) {
-		
-		$ref = str_replace($livre,$livre.'1,',$ref);
-	} 
-	else {
-		$ref = str_replace($livre,$livre,$ref);
-	}
-		
 
 	//recuperation du passage
 
