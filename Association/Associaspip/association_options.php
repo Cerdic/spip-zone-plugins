@@ -1323,6 +1323,75 @@ function association_bloc_listepdf($objet, $params=array(), $prefixeLibelle='', 
 	return $res;
 }
 
+/**
+ * Listing sous forme de tableau HTML
+ *
+ * @param array $entetes
+ *   Liste des chaines de langue des libelles d'entete
+ * @param ressource $reponse_sql
+ *   Resultat du "sql_select"
+ * @param array $formats
+ *   'nom_ou_alias_du_champ' => array('format', 'parametre1', ...)
+ *   Le nom du format est celui de la fonction de formatage du meme nom prefixee de association_formater_
+ * @param array $boutons
+ *   array('bouton', 'parametre1', ...)
+ *   Le nom du type de bouton est celui de la fonction d'action du meme nom prefixee de association_bouton_
+ * @return string $res
+ *   Table-HTML listant les donnees formatees
+ */
+function association_bloc_listehtml($entetes, $reponse_sql, $formats, $boutons=array() )
+{
+	$res =  '<table width="100%" class="asso_tablo" id="asso_tablo_'.$id_table.'">'; // ids:table
+	$res .= "\n<thead>\n<tr>";
+	foreach ($entetes as $entete) {
+		$res .= '<th>'. _T($entete) .'</th>';
+	}
+	if ( count($boutons) ) {
+		$res .= '<th colspan="'. count($boutons) .'" class="actions">'. _T('asso:entete_actions') .'</th>';
+	}
+	$res .= "</tr>\n</thead><tbody>";
+	while ($data = sql_fetch($query_ressource)) {
+		$res .= '<tr>';
+		foreach ($formats as $champ=>$params) {
+			$format = array_shift($params);
+			switch ($format) {
+				case 'date' :
+					$classe = 'date';
+					break;
+				case 'duree' :
+					$classe = 'date decimal';
+					break;
+				case 'entier' : // ajouter
+					$classe = 'number integer';
+					break;
+				case 'nombre' :
+					$classe = 'number decimal';
+					break;
+				case 'prix' :
+					$classe = 'number price';
+					break;
+				case 'spip' : // ajouter : propre()
+					$classe = 'text';
+					break;
+				default :
+					$classe = 'text';
+					break;
+			}
+			$res .= '<td class="'.$classe.'">'. call_user_func_array("association_formater_$format", array_unshift($params,$data[$champ]) ) .'</td>';
+		}
+		foreach ($boutons as $params) {
+			$type = array_shift($params)
+			foreach (&$params as &$param) {
+				$param = str_replace('$$', $data[$key], $param);
+			}
+			$res .= call_user_func_array("association_bouton_$type", $params );
+		}
+		$res .= "</tr>\n";
+	}
+	$res .= "</tbody>\n</table>\n";
+
+}
+
 /** @} */
 
 

@@ -50,7 +50,7 @@ function association_navigation_onglets($titre='', $top_exec='', $INSERT_HEAD=TR
 		if ( in_array($exec, array('association', 'adherents')) )
 			$actif = true;
 		else
-			$actif = $GLOBALS['association_metas'][$exec];
+			$actif = $GLOBALS['association_metas'][$exec=='ressources'?'prets':$exec];
 		// generation de l'onglet
 		if ( $actif && $acces )
 			$res .= onglet(_T($params[0]), generer_url_ecrire($exec), $top_exec, $exec, _DIR_PLUGIN_ASSOCIATION_ICONES.$params[1] ); // http://doc.spip.org/onglet
@@ -114,7 +114,7 @@ function association_navigation_raccourcis($adresse_retour='',  $raccourcis=arra
 				$acces = true;
 			// generation du raccourci
 			if ( $acces )
-				$res .= icone1_association("$PrefixeLangue:$raccourci_titre",  (is_array($params[1])?generer_url_ecrire($$params[1][0],$params[1][1]):generer_url_ecrire($params[1])), $params[0]);
+				$res .= icone1_association("$PrefixeLangue:$raccourci_titre",  (is_array($params[1])?generer_url_ecrire($params[1][0],$params[1][1]):generer_url_ecrire($params[1])), $params[0]);
 		}
 	}
 	if ( is_array($adresse_retour) ) { // tableau : url_exec, parametres_exec
@@ -150,7 +150,7 @@ function raccourcis_association($adresse_retour='',  $raccourcis=array(), $Prefi
  * @return string
  *   HTML du raccourci (icone+texte+lien)
  */
-function icone1_association($texte, $lien, $image,)
+function icone1_association($texte, $lien, $image)
 {
 	return icone_horizontale(_T($texte), $lien, _DIR_PLUGIN_ASSOCIATION_ICONES. $image, 'rien.gif', false); // http://doc.spip.org/@icone_horizontale
 }
