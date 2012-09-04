@@ -41,28 +41,22 @@ function exec_exercices()
 			'ajouter_un_exercice' => array('calculatrice.gif', 'edit_exercice'),
 		) );
 		debut_cadre_association('calculatrice.gif', 'tous_les_exercices');
-		echo "<table width='100%' class='asso_tablo' id='asso_tablo_exercices'>\n";
-		echo "<thead>\n<tr>";
-		echo '<th>'. _T('asso:entete_id') .'</th>';
-		echo '<th>'. _T('asso:entete_intitule') .'</th>';
-		echo '<th>'. _T('asso:exercice_entete_debut') .'</th>';
-		echo '<th>'. _T('asso:exercice_entete_fin') .'</th>';
-		echo '<th>'. _T('asso:entete_commentaire') .'</th>';
-		echo '<th colspan="2" class="actions">'. _T('asso:entete_actions') .'</th>';
-		echo "</tr>\n</thead><tbody>";
-		$query = sql_select('*', 'spip_asso_exercices', '', 'intitule DESC') ;
-		while ($data = sql_fetch($query)) {
-			echo '<tr>';
-			echo '<td class="integer">'.$data['id_exercice'].'</td>';
-			echo '<td class="text">'.$data['intitule'].'</td>';
-			echo '<td class="date">'. association_formater_date($data['debut'],'dtstart') .'</td>';
-			echo '<td class="date">'. association_formater_date($data['fin'],'dtend') .'</td>';
-			echo '<td class="text">'. propre($data['commentaire']) .'</td>';
-			echo association_bouton_supprimer('exercice', 'id='.$data['id_exercice'], 'td');
-			echo association_bouton_modifier('exercice', 'id='.$data['id_exercice'], 'td');
-			echo "</tr>\n";
-		}
-		echo "</tbody>\n</table>\n";
+		echo association_bloc_listehtml(
+			array('asso:entete_id', 'asso:entete_intitule', 'asso:exercice_entete_debut', 'asso:exercice_entete_fin', 'asso:entete_commentaire', ), // entetes
+			sql_select('*', 'spip_asso_exercices', '', 'intitule DESC'), // ressource requete
+			array(
+				'id_exercice' => array('entier'),
+				'intitule' => array('texte'),
+				'debut' => array('date', 'dtstart'),
+				'fin' => array('date', 'dtend'),
+				'commentaire' => array('texte', 'propre'),
+			), // formats des donnees
+			array(
+				array('supprimer', 'exercice', 'id=$$', 'td'),
+				array('modifier', 'exercice', 'id=$$', 'td'),
+			), // boutons d'action
+			array('key'=>'id_exercice') // extra
+		);
 		fin_page_association();
 	}
 }

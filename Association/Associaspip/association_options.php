@@ -589,6 +589,28 @@ function association_formater_prix($montant, $devise_code='', $devise_symb='', $
 	return $html_span ? "$res</$htm_span>" : $res;
 }
 
+/**
+ * Affichage d'un texte formate
+ *
+ * @param string $texte
+ *   Le texte brut initial
+ * @param string $filtre
+ *   Filtre SPIP a appliquer au texte
+ * @param array $params
+ *   Liste des parametres du filtre
+ * @return string $res
+ *   Texte formate
+ * @note
+ *   http://spipistrelle.clinamen.org/spip.php?article16
+ */
+function association_formater_texte($texte, $filtre='', $params=array() )
+{
+	if ( !is_array($params) )
+		$params = array($params);
+	$ok = array_unshift($params, $texte);
+	return $filtre?call_user_func_array($filtre, $params):$texte;
+}
+
 /** @} */
 
 
@@ -1336,12 +1358,17 @@ function association_bloc_listepdf($objet, $params=array(), $prefixeLibelle='', 
  * @param array $boutons
  *   array('bouton', 'parametre1', ...)
  *   Le nom du type de bouton est celui de la fonction d'action du meme nom prefixee de association_bouton_
+ * @param array $extra
+ *   Elements annexes optionnel :
+ *   - 'table' => 'nom_de_la_table_sql_sans_prefixe',
+ *   - 'key' => 'nom_de_la_colonne_cle_primaire',
+ *   - 'colors' => array('couleur1', ...)
  * @return string $res
  *   Table-HTML listant les donnees formatees
  */
-function association_bloc_listehtml($entetes, $reponse_sql, $formats, $boutons=array() )
+function association_bloc_listehtml($entetes, $reponse_sql, $formats, $boutons=array(), $extra=array() )
 {
-	$res =  '<table width="100%" class="asso_tablo" id="asso_tablo_'.$id_table.'">'; // ids:table
+	$res =  '<table width="100%" class="asso_tablo'. ($extra['table']?'" id="liste_'.$extra['table']:'').'">';
 	$res .= "\n<thead>\n<tr>";
 	foreach ($entetes as $entete) {
 		$res .= '<th>'. _T($entete) .'</th>';
@@ -1350,46 +1377,50 @@ function association_bloc_listehtml($entetes, $reponse_sql, $formats, $boutons=a
 		$res .= '<th colspan="'. count($boutons) .'" class="actions">'. _T('asso:entete_actions') .'</th>';
 	}
 	$res .= "</tr>\n</thead><tbody>";
-	while ($data = sql_fetch($query_ressource)) {
-		$res .= '<tr>';
+	if ( !$reponse_sql && $extra['table'] ) {
+		$reponse_sql = sql_select('*', 'spip_'.$extra['table'], $extra['where'], $extra['order']) ;
+	}
+	$nbr_lignes = 0;
+	while ($data = sql_fetch($reponse_sql)) {
+		$res .= '<tr'. ($extra['key']?' id="'.$data[$extra['key']].'"':'') .'>';
 		foreach ($formats as $champ=>$params) {
 			$format = array_shift($params);
 			switch ($format) {
 				case 'date' :
-					$classe = 'date';
+				case 'heure' :
+					$classes = 'date';
 					break;
 				case 'duree' :
-					$classe = 'date decimal';
-					break;
-				case 'entier' : // ajouter
-					$classe = 'number integer';
-					break;
 				case 'nombre' :
-					$classe = 'number decimal';
-					break;
 				case 'prix' :
-					$classe = 'number price';
+					$classes = 'decimal';
 					break;
-				case 'spip' : // ajouter : propre()
-					$classe = 'text';
+				case 'entier' :
+					$classes = 'integer';
+					$format = 'nombre'; $params = array(0);
 					break;
+				case 'texte' : // ajouter : propre()
 				default :
-					$classe = 'text';
+					$classes = 'text';
 					break;
 			}
-			$res .= '<td class="'.$classe.'">'. call_user_func_array("association_formater_$format", array_unshift($params,$data[$champ]) ) .'</td>';
+			if ( is_array($extra['colors']) && $nbr_couleurs=count($extra['colors']) ) {
+				$nbr_lignes++;
+				$classes .= ' '.$extra['colors'][$nbr_lignes%$nbr_couleurs];
+			}
+			$ok = array_unshift($params,$data[$champ]);
+			$res .= '<td class="'.$classes.'">'. call_user_func_array("association_formater_$format", $params) .'</td>';
 		}
 		foreach ($boutons as $params) {
-			$type = array_shift($params)
-			foreach (&$params as &$param) {
-				$param = str_replace('$$', $data[$key], $param);
+			$type = array_shift($params);
+			foreach ($params as &$param) {
+				$param = str_replace('$$', $data[$extra['key']], $param);
 			}
-			$res .= call_user_func_array("association_bouton_$type", $params );
+			$res .= call_user_func_array("association_bouton_$type", $params);
 		}
 		$res .= "</tr>\n";
 	}
-	$res .= "</tbody>\n</table>\n";
-
+	return $res."</tbody>\n</table>\n";
 }
 
 /** @} */
