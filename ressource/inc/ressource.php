@@ -100,7 +100,16 @@ function ressource_meta($res) {
 		AND $u = embed_url($src)) {
 			$meta['extract'] = $u;
 		}
-		
+
+		/* autre exemple de traitement avec oembed */
+		include_spip('oembed_fonctions');
+		if (function_exists('oembed')
+			AND $u = oembed($src)
+			AND $u != $src) 
+		{
+			$meta['extract'] = $u;
+		}
+
 		$meta = pipeline('ressource_meta',
 			array(
 				'args' => $res,
