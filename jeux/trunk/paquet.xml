@@ -1,13 +1,13 @@
 <paquet
 	prefix="jeux"
 	categorie="divers"
-	version="3.1.2"
+	version="3.1.3"
 	etat="test"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="prive/themes/spip/images/jeux-48.png"
 	schema="0.20"
 	documentation="http://www.spip-contrib.net/Des-jeux-dans-vos-articles"
->	
+>
 	<nom>Des jeux dans vos articles</nom>
 	<auteur>Patrice VANNEUFVILLE</auteur>
 	<auteur lien="http://www.maieul.net">Ma&#239;eul Rouquette</auteur>
@@ -40,7 +40,7 @@
 	<menu nom="jeux" titre="jeux:jeux" parent="menu_edition" icone="images/jeu-16.png" />
 	<menu nom="jeu_creer" titre="jeux:nouveau_jeu" parent="outils_rapides" icone="images/jeu-new-16.png" parametres="new=oui" action="jeu_edit" />
 	<menu nom="configurer_jeux" titre="jeux:configuration_jeux" parent="menu_configuration" icone="images/jeu-16.png" />
-	<menu nom="jeux_resultats" titre="jeux:resultats_jeux" parent="menu_activite" icone="images/jeu-laurier.png" />
+	<menu nom="jeux_resultats" titre="jeux:resultats_jeux" parent="menu_activite" icone="images/jeu-laurier-16.png" />
     
     <necessite nom="saisies" />
 </paquet>
