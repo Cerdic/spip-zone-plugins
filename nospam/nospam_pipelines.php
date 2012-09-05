@@ -154,7 +154,8 @@ function nospam_pre_edition($flux){
 				if ($infos['contenu_cache']) {
 					// s'il y a du contenu caché avec des styles => spam direct
 					$flux['data']['statut'] = 'spam';
-				}elseif ($infos['nombre_liens'] > 0) {
+				}
+				elseif ($infos['nombre_liens'] > 0) {
 					// si un lien a un titre de moins de 3 caracteres, c'est louche...
 					if ($infos['caracteres_texte_lien_min'] < 3) {
 						$flux['data']['statut'] = 'prop'; // en dur en attendant une idee plus generique
@@ -169,9 +170,18 @@ function nospam_pre_edition($flux){
 						if ($infos['nombre_liens'] >= $s){
 							$flux['data']['statut'] = $stat;
 							spip_log("\t".$flux['data']['auteur']."\t".$GLOBALS['ip']."\t"."requalifié en ".$stat." car nombre_liens >= ". $s,'nospam');
-						}	
+						}
+
+					if ($flux['data']['statut'] != 'spam'){
+						$champs = array_unique(array('texte',$champ));
+						if ($h = rechercher_presence_liens_spammes($infos['liens'],1,'spip_forum',$champs)){
+							$flux['data']['statut'] = 'spam';
+							spip_log("\t".$flux['data']['auteur']."\t".$GLOBALS['ip']."\t"."requalifié en spam car lien $h deja dans un spam",'nospam');
+						}
+					}
 				}
 			}
+
 
 			// verifier qu'un message identique n'a pas ete publie il y a peu
 			if ($flux['data']['statut'] != 'spam'){

@@ -44,25 +44,10 @@ function nospam_verifier_formulaire_forum_dist($flux){
 		  AND isset($infos['liens'])
 		  AND count($infos['liens'])){
 
-			$hosts = array();
-			foreach ($infos['liens'] as $lien){
-				$url = extraire_attribut($lien,"href");
-				if ($parse = parse_url($url)
-				  AND $parse['host'])
-					$hosts[] = $parse['host'];
-			}
 
-			$hosts = array_unique($hosts);
-			$hosts = array_filter($hosts);
-
-			// pour chaque host figurant dans un lien, regarder si on a pas deja eu des spams avec ce meme host
-			// auquel cas on refuse poliment le message
-			foreach($hosts as $h){
-				if (sql_countsel("spip_forum","statut=".sql_quote('spam')." AND texte LIKE ".sql_quote("%$h%"))>=_SPAM_URL_MAX_OCCURENCES){
-					spip_log("Refus message de forum qui contient un lien vers $h","nospam");
-					$flux['data']['texte'] = _T('nospam:erreur_url_deja_spammee');
-					break; // pas la peine de continuer avec les autres liens
-				}
+			if ($h = rechercher_presence_liens_spammes($infos['liens'],_SPAM_URL_MAX_OCCURENCES,'spip_forum',array('texte'))){
+				spip_log("Refus message de forum qui contient un lien vers $h","nospam");
+				$flux['data']['texte'] = _T('nospam:erreur_url_deja_spammee');
 			}
 		}
 

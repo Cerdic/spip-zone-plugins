@@ -172,4 +172,49 @@ function pas_lien_ancre($texte){
 		
 }
 
+/**
+ * Compare les domaines des liens fournis avec la presence dans la base
+ *
+ * @param array $liens
+ *   liste des liens html
+ * @param int $seuil
+ *   seuil de detection de presence : nombre d'enregistrement qui ont deja un lien avec le meme domaine
+ * @param string $table
+ *   table sql
+ * @param array $champs
+ *   champs a prendre en compte dans la detection
+ * @param null|string $condstatut
+ *   condition sur le statut='spam' pour ne regarder que les enregistrement en statut spam
+ * @return bool
+ */
+function rechercher_presence_liens_spammes($liens,$seuil,$table,$champs,$condstatut=null){
+	include_spip("inc/filtres");
+
+	if (is_null($condstatut))
+		$condstatut = "statut=".sql_quote('spam');
+	if ($condstatut)
+		$condstatut = "$condstatut AND ";
+
+	$hosts = array();
+	foreach ($liens as $lien){
+		$url = extraire_attribut($lien,"href");
+		if ($parse = parse_url($url)
+		  AND $parse['host'])
+			$hosts[] = $parse['host'];
+	}
+
+	$hosts = array_unique($hosts);
+	$hosts = array_filter($hosts);
+
+	// pour chaque host figurant dans un lien, regarder si on a pas deja eu des spams avec ce meme host
+	// auquel cas on refuse poliment le message
+	foreach($hosts as $h){
+		$like = " LIKE ".sql_quote("%$h%");
+		$where = $condstatut . "(".implode("$like OR ",$champs)."$like)";
+		if (sql_countsel($table,$where)>=$seuil){
+			return $h;
+		}
+	}
+	return false;
+}
 ?>
