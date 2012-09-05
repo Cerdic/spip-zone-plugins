@@ -102,7 +102,9 @@ function formulaires_formidable_charger($id_formulaire, $valeurs=array(), $id_fo
 		$contexte['editable'] = false;
 		$contexte['message_erreur'] = _T('formidable:erreur_inexistant');
 	}
-	
+	if (!isset($contexte['_hidden'])) {
+		$contexte['_hidden'] = '';
+	}
 	$contexte['_hidden'] .= "\n".'<input type="hidden" name="formidable_afficher_apres'/*.$formulaire['id_formulaire']*/.'" value="'.$formulaire['apres'].'"/>';// marche pas
 	
 	$contexte['formidable_afficher_apres']=$formulaire['apres'];

@@ -44,7 +44,9 @@ function traitements_charger_infos($type_traitement){
 	include_spip('inc/yaml');
 	$fichier = find_in_path("traiter/$type_traitement.yaml");
 	$traitement = yaml_decode_file($fichier);
-	if (is_array($traitement)){
+
+	if (is_array($traitement)) {
+		$traitement += array('titre' => '', 'description' => '', 'icone' => '');
 		$traitement['titre'] = $traitement['titre'] ? _T_ou_typo($traitement['titre']) : $type_traitement;
 		$traitement['description'] = $traitement['description'] ? _T_ou_typo($traitement['description']) : '';
 		$traitement['icone'] = $traitement['icone'] ? find_in_path($traitement['icone']) : '';
@@ -98,7 +100,8 @@ function formidable_generer_nom_cookie($id_formulaire){
 function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identification='cookie'){
 	global $auteur_session;
 	$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
-	$cookie = $_COOKIE[formidable_generer_nom_cookie($id_formulaire)];
+	$nom_cookie = formidable_generer_nom_cookie($id_formulaire);
+	$cookie = isset($_COOKIE[$nom_cookie]) ? $_COOKIE[$nom_cookie] : false;
 
 	// ni cookie ni id, on ne peut rien faire
 	if (!$cookie and !$id_auteur) {
@@ -148,7 +151,7 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
  */
 function formidable_analyser_saisie($saisie, $valeurs=array(), $reponses_total=0){
 	// Si le paramètre n'est pas bon ou que c'est un conteneur, on génère du vide
-	if (!is_array($saisie) or $saisie['saisies'])
+	if (!is_array($saisie) or (isset($saisie['saisies']) and $saisie['saisies']))
 		return '';
 	
 	$contexte = array('reponses_total'=>$reponses_total);
@@ -178,6 +181,31 @@ function formidable_analyser_saisie($saisie, $valeurs=array(), $reponses_total=0
 		'saisies-analyses/_base',
 		$contexte
 	);
+}
+
+
+/**
+ * Tente de déserialiser un texte 
+ *
+ * Si le paramètre est un tableau, retourne le tableau,
+ * Si c'est une chaîne, tente de la désérialiser, sinon
+ * retourne la chaîne.
+ *
+ * @filtre tenter_unserialize
+ * 
+ * @param string|array $texte
+ *     Le texte (possiblement sérializé) ou un tableau
+ * @return array|string
+ *     Tableau, texte désérializé ou texte
+**/
+function filtre_tenter_unserialize_dist($texte) {
+	if (is_array($texte)) {
+		return $texte;
+	}
+	if ($tmp = @unserialize($texte)) {
+		return $tmp;
+	}
+	return $texte;
 }
 
 ?>

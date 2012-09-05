@@ -2,9 +2,7 @@
 
 #SET{valeurs,#ARRAY}
 <BOUCLE_champs(FORMULAIRES_REPONSES_CHAMPS){id_formulaires_reponse}>
-#SET{test_array,#VALEUR|unserialize}
-#SET{valeur,#GET{test_array}|is_array|?{#GET{test_array},#VALEUR}}
-#SET_MERGE{valeurs,#ARRAY{#NOM,#GET{valeur}}}
+#SET_MERGE{valeurs,#ARRAY{#NOM,#VALEUR|tenter_unserialize}}
 </BOUCLE_champs>
 
 <BOUCLE_formulaire(FORMULAIRES){id_formulaire}>
