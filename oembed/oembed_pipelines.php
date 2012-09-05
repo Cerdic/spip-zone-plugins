@@ -197,6 +197,19 @@ function oembed_pre_propre($texte) {
 	return $texte;
 }
 
+/**
+ * Se brancher sur le plugin ressource pour appliquer oembed à ses urls
+ *
+ * @param array $flux
+ * @return array
+ */
+function oembed_ressource_meta($flux) {
+	$src = $flux['args']['src'];
+	if ($oembed = oembed($src) AND $oembed != $src)
+		$flux['data']['extract'] = $oembed;
+	return $flux;
+}
+
 include_spip('inc/config');
 if (!function_exists('lire_config')) { function lire_config($a=null,$b=null) { return $b; } }
 
