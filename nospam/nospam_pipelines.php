@@ -85,8 +85,8 @@ function nospam_formulaire_verifier($flux){
 
 		// pas la peine de filtrer les contenus postés par un admin
 		if ($GLOBALS['visiteur_session']['statut'] != '0minirezo'){
-			if ($verifier_form = charger_fonction("verifier_form_$form","nospam",true)){
-				$flux = $verifier_form($flux);
+			if ($verifier_formulaire = charger_fonction("verifier_formulaire_$form","nospam",true)){
+				$flux = $verifier_formulaire($flux);
 			}
 		}
 	}
