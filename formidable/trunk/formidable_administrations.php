@@ -27,8 +27,8 @@ function formidable_upgrade($nom_meta_base_version, $version_cible){
 	$maj['create'] = array(
 		array('maj_tables',array(
 			'spip_formulaires',
-			'spip_formulaires_reponses'
-			'spip_formulaires_reponses_champs'
+			'spip_formulaires_reponses',
+			'spip_formulaires_reponses_champs',
 			'spip_formulaires_liens')),
 	);
 	// Ajout du choix de ce qu'on affiche à la fin des traitements
