@@ -18,7 +18,10 @@ $(document).ready(function(){
 		$(this).find('td.stat').each(function(){
 			$val = $(this).html();
 			$taux = Math.round($val/$nbtotal*100);
-			$text = "<div class='blue progress-bar'><span><strong>" + $taux + "%</strong></span></div>";
+			$text = "\
+			<div class='[(#CONFIG{formidable/sondage/classe}) ]progress-bar'>\
+				<span><strong>" + $taux + "%</strong></span>\
+			</div>";
 			$(this).html($text).find('span').width($taux + '%');
 		});
 	});
