@@ -68,8 +68,12 @@ $GLOBALS["ngrams"]['zu'] = array("oku","la ","nga"," ng","a n"," ku","a k","thi"
 
 function createNGrams($string, $ng_number=300, $ng_max_chars=4) {
 
-	if (strlen($string) > 40) return array();
-
+	// Attention: $string n'est pas un mot, mais le texte complet
+	// On va le couper pour éviter les timeout, 
+	// mais il faut qu'il reste suffisamment long pour que la détection reste qualitative
+	// Au passage: on fait les calculs en multibyte.
+	$string = mb_substr($string, 0, 5000, "utf-8");
+	
 	// Attention: il faut traiter les chaines en utf-8 !!!
     //iterate over each word, each character, all possible n-grams
 	$word = " ". $string . " ";
@@ -186,6 +190,7 @@ function _detecter_langue($texte) {
 	$texte = str_replace("’", "'", $texte);
 	$texte = str_replace("\"", " ", $texte);
 	
+	// Si texte trop court, impossible de détecter la langue
 	if (mb_strlen($texte, "utf-8") < 6 ) return false; 
 
 	$possibles = detecter_plages_utf($texte);
