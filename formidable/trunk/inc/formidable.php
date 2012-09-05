@@ -169,7 +169,7 @@ function formidable_analyser_saisie($saisie, $valeurs=array(), $reponses_total=0
 	$contexte = array_merge($contexte, $options);
 	
 	// On récupère toutes les valeurs du champ
-	if ($valeurs[$contexte['nom']] and is_array($valeurs[$contexte['nom']])){
+	if (isset($valeurs[$contexte['nom']]) and $valeurs[$contexte['nom']] and is_array($valeurs[$contexte['nom']])){
 		$contexte['valeurs'] = $valeurs[$contexte['nom']];
 	}
 	else{

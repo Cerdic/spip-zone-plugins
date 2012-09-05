@@ -69,7 +69,7 @@ $GLOBALS['formulaires']['editer_formulaire'] = array(
 	array(
 		'saisie' => 'input',
 		'options' => array(
-			'nom' => 'url_redirect',			
+			'nom' => 'url_redirect',
 			'label' => '<:formidable:editer_redirige_url:>', 
 			'explication' => '<:formidable:editer_redirige_url_explication:>',
 			'obligatoire' => 'non'

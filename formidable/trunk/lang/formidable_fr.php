@@ -8,7 +8,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'analyse_avec_reponse' => 'Réponses non-vide',
 	'analyse_longueur_moyenne' => 'Longueur moyenne en nombre de mots',
-	'analyse_reponses_total' => '@nb@ personnes ont répondu à ce formulaire.',
+	'analyse_zero_reponse_total' => 'Aucune personne n\'a répondu à ce formulaire.',
+	'analyse_une_reponse_total' => 'Une personne a répondu à ce formulaire.',
+	'analyse_nb_reponses_total' => '@nb@ personnes ont répondu à ce formulaire.',
 	'analyse_sans_reponse' => 'Laissés blanc',
 
 	// B

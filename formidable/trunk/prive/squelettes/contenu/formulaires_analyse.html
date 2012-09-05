@@ -9,9 +9,10 @@
 	[(#BOITE_OUVRIR{'','simple'})]	
 	<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}>
 	</BOUCLE_reponses>
-	<strong><:formidable:analyse_reponses_total{nb=#_reponses:TOTAL_BOUCLE}:></strong>
+	<strong>[(#_reponses:TOTAL_BOUCLE
+		|singulier_ou_pluriel{formidable:analyse_une_reponse_total,formidable:analyse_nb_reponses_total})]</strong>
 	</B_reponses>
-	<strong><:formidable:analyse_reponses_total{nb=0}:></strong>
+	<strong><:formidable:analyse_zero_reponse_total:></strong>
 	<//B_reponses>
 	#BOITE_FERMER	
 #BOITE_FERMER
