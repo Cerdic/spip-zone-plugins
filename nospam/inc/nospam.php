@@ -131,6 +131,8 @@ function analyser_spams($texte) {
 	$texte_humain = echappe_html($texte);
 	// on repère dans ce qui reste la présence de style= ou class= qui peuvent
 	// servir à masquer du contenu
+	// mais en enlevant le base64 !
+	$texte_humain = str_replace('class="base64"','',$texte_humain);
 	$hidden = ",\s(?:style|class)=[^>]+>,UimsS";
 	if (preg_match($hidden,$texte_humain)) {
 		// suspicion de spam
