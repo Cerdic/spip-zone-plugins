@@ -7,7 +7,7 @@
 		&#169; 2012 - GNU/GPL
 	</licence>
 	<version>
-	0.1
+	0.2.0
 	</version>
 	<etat>
 	dev
@@ -24,6 +24,7 @@
 	</icon -->
 	<chemin dir='' />
 	<categorie>edition</categorie>
+	<pipeline><nom>ressource_meta</nom><action></action></pipeline> 
 	<necessite id="SPIP" version="[2.1.14;3.1.99]" />
 	<necessite id="tw" version="[0.8.3;1.0.0]" />
 	<!-- traduire gestionnaire="salvatore" module="crayons" reference="fr" / -->

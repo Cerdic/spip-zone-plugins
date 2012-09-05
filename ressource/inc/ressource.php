@@ -100,7 +100,14 @@ function ressource_meta($res) {
 		AND $u = embed_url($src)) {
 			$meta['extract'] = $u;
 		}
-
+		
+		$meta = pipeline('ressource_meta',
+			array(
+				'args' => $res,
+				'data' => $meta
+			)
+		);
+		
 		/* chargement distant */
 		if (!isset($meta['html'])) {
 			include_spip('inc/distant');
