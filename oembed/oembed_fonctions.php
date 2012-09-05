@@ -58,6 +58,7 @@ function json_encode_html($texte){
  * @return string
  */
 function oembed($url, $maxwidth=0, $maxheight=0){
+	include_spip('inc/oembed');
 	if (oembed_verifier_provider($url)) {
 		$fond = recuperer_fond(
 			'modeles/oembed',
