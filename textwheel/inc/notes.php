@@ -142,11 +142,16 @@ function traiter_raccourci_notes($letexte, $marqueur_notes)
 		if ($nom) $nom = "$ouvre_ref<a href='#nb$ancre' class='spip_note' rel='footnote'$title$att>$nom</a>$ferme_ref";
 
 		$pos = strpos($letexte, $note_source);
-		$letexte = rtrim(substr($letexte, 0, $pos), ' ')
+
+		// supprimer les ' ' ou 'nbsp;' avant un appel de note
+		$avant = preg_replace(',( |&nbsp;)+$,S', '', substr($letexte, 0, $pos));
+
+		$letexte = $avant
 		. code_echappement($nom)
 		. substr($letexte, $pos + strlen($note_source));
 
 	}
+
 	return array($letexte, $mes_notes);
 }
 
