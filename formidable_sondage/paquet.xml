@@ -1,0 +1,20 @@
+<paquet
+	prefix="fsondage"
+	categorie="communication"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/fsondage-64.png"
+	documentation=""
+>
+
+	<nom>Formidable Sondage</nom>
+
+	<auteur lien='http://magraine.net'>Marcillaud Matthieu</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="formulaire_fond" inclure="fsondage_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="fsondage_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="fsondage_pipelines.php" />
+</paquet>

@@ -1,0 +1,30 @@
+
+<div id="sondage">
+<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}> </BOUCLE_reponses>
+	<strong>[(#_reponses:TOTAL_BOUCLE
+		|singulier_ou_pluriel{fsondage:sondage_une_reponse_total,fsondage:sondage_nb_reponses_total})]</strong>
+	</B_reponses>
+	<strong><:fsondage:sondage_zero_reponse_total:></strong>
+<//B_reponses>
+
+<INCLURE{fond=modeles/formulaire_analyse,env} />
+</div>
+
+<script type='text/javascript'>
+(function($){
+$(document).ready(function(){
+	$('#sondage table').each(function(){
+		$nbtotal = $(this).data('nombre');
+		$(this).find('td.stat').each(function(){
+			$val = $(this).html();
+			$taux = Math.round($val/$nbtotal*100);
+			$text = "<div class='blue progress-bar'><span><strong>" + $taux + "%</strong></span></div>";
+			$(this).html($text).find('span').width($taux + '%');
+		});
+	});
+});
+})(jQuery);
+</script>
+<style type='text/css'>
+<INCLURE{fond=css/fsondage.css} />
+</style>
