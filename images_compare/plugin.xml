@@ -5,9 +5,10 @@
 	<etat>stable</etat>
 	<prefix>imgcompare</prefix>
 	<slogan>Comparer des images</slogan>
-	<description>Un simple mod&#232;le qui permet de superposer deux images pour les comparer.</description>
+	<description>Un simple mod&#232;le qui permet de superposer deux images pour les comparer. Logo basé sur une image originale de Samuel Q. Green CC-BY http://thenounproject.com/noun/picture/#icon-No3421</description>
 	<lien>http://contrib.spip.net/4229</lien>
 	<licence>GPL v3</licence>
+	<icon>imgcompare-128.png</icon>
 	<categorie>multimedia</categorie>
 	<pipeline>
 		<nom>insert_head</nom>
