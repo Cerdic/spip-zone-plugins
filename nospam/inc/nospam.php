@@ -78,8 +78,12 @@ function verifier_jeton($jeton, $form, $qui=NULL) {
  * (qu'ils soient ou non ecrits en raccourcis SPIP)
  * ainsi que tous les espaces en trop
  *
- * @param string $texte texte d'entree
- * @return int compte du texte nettoye
+ * @param string $texte
+ *   texte d'entree
+ * @param bool $propre
+ *   passer le texte dans propre ou non
+ * @return int
+ *   compte du texte nettoye
  */
 function compter_caracteres_utiles($texte, $propre=true) {
 	include_spip('inc/charsets');
@@ -142,6 +146,7 @@ function analyser_spams($texte) {
 	// nombre de liens
 	$liens = array_filter(extraire_balises($texte,'a'),'pas_lien_ancre');
 	$infos['nombre_liens'] = count($liens);
+	$infos['liens'] = $liens;
 
 	// taille du titre de lien minimum
 	if (count($liens)) {
