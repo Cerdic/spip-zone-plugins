@@ -232,6 +232,15 @@ function iextras_formulaire_verifier($flux) {
 						)
 					),
 					array(
+						'saisie' => 'oui_non',
+						'options' => array(
+							'nom' => "saisie_modifiee_${name}[options][versionner]",
+							'label' => _T('iextras:label_versionner'),
+							'explication' => _T('iextras:precisions_pour_versionner'),
+							'defaut' => ''
+						)
+					),
+					array(
 						'saisie' => 'selection',
 						'options' => array(
 							'nom' => "saisie_modifiee_${name}[options][nouveau_type_saisie]",

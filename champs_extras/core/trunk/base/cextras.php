@@ -31,6 +31,12 @@ function cextras_declarer_tables_objets_sql($tables){
 				if (!isset($tables[$table]['field'][$nom])) {
 					$tables[$table]['field'][$nom] = $saisie['options']['sql'];
 				}
+				// on l'ajoute dans la liste des champs editables
+				if (isset($tables[$table]['champs_editables'])
+				  and !in_array($nom, $tables[$table]['champs_editables'])){
+					$tables[$table]['champs_editables'][] = $nom;
+				}
+
 				// ajouter le champ dans les analyses de recherche si demande
 				// l'option rechercher peut valoir 'on', true, ou 5 (entier) pour l'indice de ponderation
 				// par defaut, la ponderation est de 2.
@@ -47,6 +53,14 @@ function cextras_declarer_tables_objets_sql($tables){
 						$ponderation = intval($ponderation);
 					}
 					$tables[$table]['rechercher_champs'][$nom] = $ponderation;
+				}
+				// option de versionnage ?
+				if (isset($saisie['options']['versionner']) and $saisie['options']['versionner']) {
+					// on l'ajoute dans la liste des champs versionnables
+					if (isset($tables[$table]['champs_versionnes'])
+					  and !in_array($nom, $tables[$table]['champs_versionnes'])) {
+						$tables[$table]['champs_versionnes'][] = $nom;
+					}
 				}
 			}
 		}
