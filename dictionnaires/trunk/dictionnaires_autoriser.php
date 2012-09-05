@@ -27,7 +27,7 @@ function dictionnaires_autoriser(){}
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_dictionnaires_bouton_dist($faire, $type, $id, $qui, $opt){
+function autoriser_dictionnaires_menu_dist($faire, $type, $id, $qui, $opt){
 	return true;
 }
 
@@ -43,7 +43,7 @@ function autoriser_dictionnaires_bouton_dist($faire, $type, $id, $qui, $opt){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_definition_creer_bouton_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_definition_creer_menu_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('creer', 'definition', $id, $qui, $opt);
 }
 
