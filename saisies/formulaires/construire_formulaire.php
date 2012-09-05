@@ -118,7 +118,9 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 	}
 	
 	// S'il y a l'option adéquat, on ajoute le champ pour modifier le nom
-	if ($options['modifier_nom'] and $chemin_nom = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][description]", true)){
+	if (isset($options['modifier_nom']) and $options['modifier_nom']
+	  and $chemin_nom = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][description]", true))
+	{
 		$chemin_nom[] = 'saisies';
 		$chemin_nom[] = '0';
 
@@ -193,7 +195,9 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 		// On cherche les erreurs de la configuration
 		$vraies_erreurs = saisies_verifier($formulaire_config);
 		// Si on autorise à modifier le nom ET qu'il doit être unique : on vérifie
-		if ($options['modifier_nom'] and $options['nom_unique']){
+		if (isset($options['modifier_nom']) and $options['modifier_nom']
+		  and isset($options['nom_unique']) and $options['nom_unique'])
+		{
 			$nom_modifie = $saisie_modifiee['options']['nom'];
 			if ($nom_modifie != $enregistrer_saisie and saisies_chercher($formulaire_actuel, $nom_modifie))
 				$vraies_erreurs["saisie_modifiee_${nom}[options][nom]"] = _T('saisies:erreur_option_nom_unique');

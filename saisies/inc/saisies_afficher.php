@@ -113,7 +113,7 @@ function saisies_generer_html($champ, $env=array()){
 		unset($env['inserer_debut']);
 		unset($env['inserer_fin']);
 		$saisies_disponibles = saisies_lister_disponibles();
-		if (is_array($saisies_disponibles[$contexte['type_saisie']]['options'])){
+		if (isset($saisies_disponibles[$contexte['type_saisie']]) and is_array($saisies_disponibles[$contexte['type_saisie']]['options'])) {
 			$options_a_supprimer = saisies_lister_champs($saisies_disponibles[$contexte['type_saisie']]['options']);
 			foreach ($options_a_supprimer as $option_a_supprimer){
 				unset($env[$option_a_supprimer]);
