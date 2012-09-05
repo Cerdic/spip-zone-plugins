@@ -32,13 +32,16 @@ function formulaires_formidable_charger($id_formulaire, $valeurs=array(), $id_fo
 		return;
 	
 	// On cherche si le formulaire existe
-	if ($formulaire = sql_fetsel('*', 'spip_formulaires', $where)){
+	if ($formulaire = sql_fetsel('*', 'spip_formulaires', $where)) {
+		// on ajoute un point d'entrée avec les infos de ce formulaire
+		// pour d'eventuels plugins qui en ont l'utilité
+		$contexte += array('_formidable' => $formulaire);
 		// Est-ce que la personne a le droit de répondre ?
 		if (autoriser('repondre', 'formulaire', $formulaire['id_formulaire'], null, array('formulaire'=>$formulaire))){
 			$saisies = unserialize($formulaire['saisies']);
 			$traitements = unserialize($formulaire['traitements']);
 			// On déclare les champs
-			$contexte = array_fill_keys(saisies_lister_champs($saisies), '');
+			$contexte += array_fill_keys(saisies_lister_champs($saisies), '');
 			$contexte['mechantrobot'] = '';
 			// On ajoute le formulaire complet
 			$contexte['_saisies'] = $saisies;
