@@ -144,7 +144,7 @@ function traiter_raccourci_notes($letexte, $marqueur_notes)
 		$pos = strpos($letexte, $note_source);
 
 		// supprimer les ' ' ou 'nbsp;' avant un appel de note
-		$avant = preg_replace(',( |&nbsp;)+$,S', '', substr($letexte, 0, $pos));
+		$avant = preg_replace(',( |&nbsp;|'.chr(194).chr(160).')+$,S', '', substr($letexte, 0, $pos));
 
 		$letexte = $avant
 		. code_echappement($nom)
