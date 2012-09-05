@@ -169,12 +169,11 @@ function un_ou_plusieurs($nb, $chaine_un, $options=array()) {
 		$params = array($options => $nb);
 	
 	// Traitement des autres cas incluant aussi l'absence de chaine duel pour une langue le supportant
-	if (!$texte)
-		if ($nb == 1)
-			$texte = _T($chaine_un, $params);
-		else
-			$texte = _T($chaine_un . '_pluriel', $params);
-	
+	if ($nb == 1)
+		$texte = _T($chaine_un, $params);
+	else
+		$texte = _T($chaine_un . '_pluriel', $params);
+
 	return $texte;
 }
 

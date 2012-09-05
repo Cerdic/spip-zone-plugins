@@ -202,11 +202,11 @@ function plugin2balise($D, $balise, $balises_spip='') {
 	if ($balise == 'paquet') {
 		// Balise paquet
 		// Extraction des attributs de la balise paquet
-		$categorie = $D['categorie'];
-		$etat = $D['etat'];
-		$lien = $D['documentation'];
-		$logo = $D['logo'];
-		$meta = $D['meta'];
+		$categorie = table_valeur($D, 'categorie');
+		$etat = table_valeur($D, 'etat');
+		$lien = table_valeur($D, 'documentation');
+		$logo = table_valeur($D, 'logo');
+		$meta = table_valeur($D, 'meta');
 		$prefix = $D['prefix'];
 		$version = $D['version'];
 		$version_base = $D['schema'];
@@ -418,7 +418,7 @@ function plugin2balise_pipeline($D) {
 	$res = '';
 	foreach($D as $i) {
 		$att = " nom=\"" . $i['nom'] . "\"" .
-				(!is_null($i['action']) ? (" action=\"" . $i['action'] . "\"") : '') .
+				(isset($i['action']) and !is_null($i['action']) ? (" action=\"" . $i['action'] . "\"") : '') .
 				(!empty($i['inclure']) ? (" inclure=\"" . $i['inclure'] . "\"") : '');
 		$res .= "\n\t<pipeline$att />";
 	}
@@ -449,7 +449,7 @@ function plugin2balise_necessite($D) {
 	if ($D['necessite']) {
 		foreach($D['necessite'] as $i) {
 			$nom = isset($i['id']) ? $i['id'] : $i['nom'];
-			$src = plugin2balise_lien($i['src'], 'lien', ' ');
+			$src = isset($i['src']) ? plugin2balise_lien($i['src'], 'lien', ' ') : '';
 			$version = empty($i['version']) ? '' : (" compatibilite=\"" . bornes2intervalle(intervalle2bornes($i['version'])) . "\"");
 			if (preg_match('/^lib:(.*)$/', $nom, $r))
 				$lib .= "\n\t<lib nom=\"" . $r[1] . "\"$src />";
@@ -602,7 +602,7 @@ function plugin2balise_migration($commandes, $plugin_xml) {
 	// -- Filtrage des commandes pour eliminer les commandes redondantes dues a la presence de balises spip
 	// -- On ajoute ces commandes a celles de la balise paquet et on tri par ordre alphabetique pour eviter que les 
 	//     cat soient apres les svn
-	if ($commandes['balise_spip']) {
+	if (isset($commandes['balise_spip']) and $commandes['balise_spip']) {
 		foreach ($commandes['balise_spip'] as $_compatible => $_commandes) {
 			foreach ($_commandes as $_commande) {
 				if (!in_array($_commande, $commandes['balise_paquet']))
@@ -610,7 +610,7 @@ function plugin2balise_migration($commandes, $plugin_xml) {
 			} 
 		}
 	}
-	if ($commandes['balise_paquet']) {
+	if (isset($commandes['balise_paquet']) and $commandes['balise_paquet']) {
 		asort($commandes['balise_paquet']);
 		// -- Ecriture des commandes filtrees et ordonnees
 		foreach ($commandes['balise_paquet'] as $_commande) {
