@@ -23,8 +23,10 @@ function noie_affichage_final(&$page) {
 	|| preg_match(',<body\b.*?>,i', $page, $regs);
 
 	// en mode test on vire "<!--[if lte IE 6]>"
-	if (isset($_GET['var_noie']))
-		$campagne = str_replace('<!--[if lte IE 6]>', '<!-- -->', $campagne);
+	if (isset($_GET['var_noie'])) {
+		$campagne = str_replace('<!--[if lte IE 6]>', '', $campagne);
+		$campagne = str_replace('<![endif]-->', '', $campagne);
+	}
 
 	if ($regs)
 		$page = substr_replace($page, $campagne, (strpos($page, $regs[0]) + strlen($regs[0])), 0);
