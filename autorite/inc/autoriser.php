@@ -493,11 +493,17 @@ function autoriser_forum_modifier($faire, $type, $id, $qui, $opt) {
 	)
 		return true;
 
+
+
 	// Les admins restreint pour les articles attachés à une rubrique dont ils sont admins
 	if ($GLOBALS['autorite']['editer_forums'] >= 2 AND $qui['statut'] == '0minirezo') {
 	      $id=intval($id); // ?
 	      if (intval($GLOBALS['spip_version_branche']) < 3 ){
-		      $id_rubrique = sql_getfetsel("id_rubrique", "spip_forum", "id_forum=$id");
+		  $id_rubrique = sql_getfetsel("id_rubrique", "spip_forum", "id_forum=$id");
+		  if (!$id_rubrique AND ($id_article = sql_getfetsel("id_article", "spip_forum", "id_forum=$id") ))
+		      $id_rubrique = sql_getfetsel("id_rubrique", "spip_articles", "id_article=$id_article");
+		  if (!$id_rubrique AND ($id_breve = sql_getfetsel("id_breve", "spip_forum", "id_forum=$id")))
+		      $id_rubrique = sql_getfetsel("id_rubrique", "spip_breves", "id_breve=$id_breve");
 	      } else {
 		      $objet = sql_getfetsel("objet", "spip_forum", "id_forum=$id");
 		      $id_objet = sql_getfetsel("id_objet", "spip_forum", "id_forum=$id AND objet='$objet'");
@@ -509,6 +515,8 @@ function autoriser_forum_modifier($faire, $type, $id, $qui, $opt) {
 	      }
 	      return ($id_rubrique AND in_array ($id_rubrique, $qui['restreint']));
 	}
+
+
 
 	// L'auteur du message (enregistre')
 	// 2 = avec une periode de grace d'une heure
