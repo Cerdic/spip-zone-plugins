@@ -11,13 +11,7 @@
 ][
 <p>
 <a href="(#ENV{url_site})">[(#NOM_SITE|sinon{#ENV{url_site}})]</a>
-</p>][
-
-<p><strong><:forum:info_liens_texte:>&nbsp;:</strong><br />
-(#LIENS)
-</p>
-<hr/>
-]
+</p>]
 
 <p>
 [
@@ -26,12 +20,20 @@
 <a href="(#ENV{url}|url_absolue)">[(#ENV{url}|url_absolue)]</a>]
 </p>
 
-<p>
-<:form_forum_message_auto:>
+<hr/>
+<h4><:notifications:titre_moderation:></h4>
+[
+<p><strong><:forum:info_liens_texte:>&nbsp;:</strong><br />
+(#LIENS)
 </p>
+]
 
 <ul>
 	[<li><a href="(#ENV{url_moderer_publie})"><:notifications:info_lien_publier_commentaire:></a></li>]
 	[<li><a href="(#ENV{url_moderer_off})"><:notifications:info_lien_supprimer_commentaire:></a></li>]
 	[<li><a href="(#ENV{url_moderer_spam})"><:notifications:info_lien_signaler_spam_commentaire:></a></li>]
 </ul>
+
+<p>
+<:form_forum_message_auto:>
+</p>

@@ -100,7 +100,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suivis_public_notif_desactiver' => 'TODO: case à cocher pour ne plus recevoir de notifications',
 	'suivis_public_vos_forums' => 'Vos forums',
 	'suivis_public_vos_forums_date' => 'Vos forums, par date',
-	'suivis_public_votre_page' => 'Ceci est votre page personnalisée de suivi du site'
+	'suivis_public_votre_page' => 'Ceci est votre page personnalisée de suivi du site',
+
+	// T
+	'titre_moderation' => 'Modération',
 );
 
 ?>
