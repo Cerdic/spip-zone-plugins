@@ -1,9 +1,27 @@
 <?php
-function bible_generer_doc($lang){
+include_spip('inc/bible_tableau');
+function bible_generer_doc(){
+     $langs = bible_tableau('langues');
+     $texte = '';
+     foreach ($langs as $lang){
+
+             $texte .= '<br /><br />{{{'.traduire_nom_langue($lang)."}}}[<-$lang]<br /><br />";     
+             $texte .= bible_generer_doc_lang($lang);
+    }
+    $alias = bible_tableau('alias');
+    $texte .= '<br><br>{{{Alias possible}}}<br><br>';
+    foreach($alias as $lalias=>$lesalias){
+         $lesalias = implode($lesalias['options'],'<br>-');
+         $texte.= '<br><br>{{'.$lalias.': }}<br>-'.$lesalias ;
+    }
+    
+    return $texte;
+        
+}
+function bible_generer_doc_lang($lang){
 	$tableau_traduction = bible_tableau('traduction');
 	$tableau_separateur = bible_tableau('separateur');
 	$tableau_livres = bible_tableau('livres');
-	
 	$texte = "{{Séparateur chapitre/verset}} : «".$tableau_separateur[$lang]."»";
 	$texte.="<br /><br />{{Abréviations des livres}}<br /><br/>";
 	
@@ -11,20 +29,16 @@ function bible_generer_doc($lang){
 		if ($lang == $lang_livre){
 			foreach ($tableau as $abrev=>$livre){
 				$texte.='|'.$abrev.'|'.$livre.'|<br/>';
-			
-			}
-		
-		
+			}	
 		}
 		
-	
 	}
 	$texte .= '<br/>';
 	
 	foreach ($tableau_traduction as $abrev=>$traduction){
 		if ($traduction['lang']==$lang){
 			$texte .= '<br/>';
-			$texte .= '{{'.$traduction['traduction'].'}}<br />-';
+			
 			
 			$gateway = $traduction['gateway'];
 			$wissen  = $traduction['wissen'];
@@ -36,7 +50,13 @@ function bible_generer_doc($lang){
 			$lire = $traduction['lire'];
 			
 			if ($gateway){
-				$url = "http://www.biblegateway.com/versions/index.php?action=getVersionInfo&vid=".$gateway[0];
+			    $texte .= '{{'.$traduction['traduction'].'}}<br />-';
+			}
+			else{
+			    $texte .= '{{'.$traduction['traduction'].'}}<br />-';
+			}
+			if ($gateway){
+				$url = "http://www.biblegateway.com/versions/index.php?action=getVersionInfo&vid=".$gateway;
 				
 			}
 			else if ($wissen){
@@ -54,7 +74,7 @@ function bible_generer_doc($lang){
 			
 			}
 			else {
-				$url= "mettre ici l'url";
+				$url= $traduction['$url'];
 			
 			}
 			

@@ -429,6 +429,7 @@ Editio Typica Altera ',
 		'traduction'=> 'Nestl&eacute;-Aland (<sup>28</sup>&nsbp;éd.)',
 		'gateway'	=> false,
 		'lang'		=>'grc',
+		'url'=>'http://www.nestle-aland.com',
 		'nt'=> true)
 		,
 	'jerusalem' => array(
