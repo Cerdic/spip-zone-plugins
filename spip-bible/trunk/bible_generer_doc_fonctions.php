@@ -4,7 +4,7 @@ function bible_generer_doc(){
      $langs = bible_tableau('langues');
      $original = bible_tableau('original');
      $texte  = bible_generer_doc_liens($langs,$original);
-     $texte .= '{{{"Textes Originaux"}}}[<-orig]
+     $texte .= '{{{"Textes Originaux"}}}[orig<-]
 <br><br>
 Les versions en langues originales ont une syntaxe particulière. En effet, il faut mettre l\'abréviation du passage dans la langue de l\'article[[On peut éventuellement passer un paramètre "lang" au modèle pour forcer le choix]]. ';
     foreach ($original as $lang=>$sens){   
@@ -14,7 +14,7 @@ Les versions en langues originales ont une syntaxe particulière. En effet, il f
      
      foreach ($langs as $lang){
         if (!$original[$lang]){
-             $texte .= '<br /><br />{{{'.traduire_nom_langue($lang)."}}}[<-$lang]<br /><br />";     
+             $texte .= '<br /><br />{{{'.traduire_nom_langue($lang)."}}}[$lang<-]<br /><br />";     
              $texte .= bible_generer_doc_lang($lang);
         }
     }
