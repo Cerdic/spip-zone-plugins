@@ -1,0 +1,12 @@
+#SET{claire,#ENV{couleur_claire,edf3fe}}
+#SET{foncee,#ENV{couleur_foncee,3874b0}}
+
+.formidable_analyse .progress-bar span {
+	background-color: ##GET{claire};
+	  background-image: -webkit-gradient(linear, left top, left bottom, from(##GET{claire}), to(##GET{foncee}));
+	  background-image: -webkit-linear-gradient(top, ##GET{claire}, ##GET{foncee});
+	  background-image: -moz-linear-gradient(top, ##GET{claire}, ##GET{foncee});
+	  background-image: -ms-linear-gradient(top, ##GET{claire}, ##GET{foncee});
+	  background-image: -o-linear-gradient(top, ##GET{claire}, ##GET{foncee});
+	  background-image: linear-gradient(top, ##GET{claire}, ##GET{foncee}); 
+}

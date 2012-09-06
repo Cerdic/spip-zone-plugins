@@ -76,6 +76,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_nom_noisette_formulaire' => 'Formulaire',
 
 	// R
+	'reponse_aucune' => 'Aucune réponse',
+	'reponse_une' => '1 réponse',
+	'reponses_nb' => '@nb@ réponses',
 	'reponse_intro' => '@auteur@ a répondu au formulaire @formulaire@',
 	'reponse_numero' => 'Réponse numéro :',
 	'reponse_statut' => 'Cette réponse est :',

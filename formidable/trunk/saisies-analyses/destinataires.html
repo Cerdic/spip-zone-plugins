@@ -9,6 +9,6 @@
 #SET{id_auteur, #CLE|replace{'auteur-', ''}}
 <tr class="tr_liste">
 	<td class="choix"><a href="#INFO_URL{auteur, #GET{id_auteur}}">#INFO_TITRE{auteur, #GET{id_auteur}}</a></td>
-	<td class="stat">#VALEUR</td>
+	<td class="stat"[ title="(#VALEUR|titre_nb_reponses|attribut_html)"]>#VALEUR</td>
 </tr>
 </BOUCLE_stats>

@@ -208,4 +208,19 @@ function filtre_tenter_unserialize_dist($texte) {
 	return $texte;
 }
 
+
+/**
+ * Retourne un texte du nombre de réponses 
+ *
+ * @param int $nb
+ *     Nombre de réponses
+ * @return string
+ *     Texte indiquant le nombre de réponses
+**/
+function titre_nb_reponses($nb) {
+	if (!$nb) return _T('formidable:reponse_aucune');
+	if ($nb == 1) return _T('formidable:reponse_une');
+	return _T('formidable:reponses_nb', array('nb' => $nb));
+}
+
 ?>

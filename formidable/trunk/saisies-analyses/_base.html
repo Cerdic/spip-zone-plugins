@@ -16,15 +16,15 @@
 		]
 		<tr class="tr_liste row_odd vide">
 			<td class="choix"><:formidable:analyse_sans_reponse:></td>
-			<td class="stat">[(#GET{vide}|count)]</td>
+			<td class="stat"[ title="(#GET{vide}|count|titre_nb_reponses|attribut_html)"]>[(#GET{vide}|count)]</td>
 		</tr>
 		<tr class="tr_liste row_even plein">
 			<td class="choix"><:formidable:analyse_avec_reponse:></td>
-			<td class="stat">[(#GET{plein}|count)]</td>
+			<td class="stat"[ title="(#GET{plein}|count|titre_nb_reponses|attribut_html)"]>[(#GET{plein}|count)]</td>
 		</tr>
 		<tr class="tr_liste row_odd moyenne">
 			<td class="choix"><:formidable:analyse_longueur_moyenne:></td>
-			<td class="stat">#GET{moyenne}</td>
+			<td class="stat ignore">#GET{moyenne}</td>
 		</tr>
 	]
 	</tbody>

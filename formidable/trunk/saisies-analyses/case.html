@@ -11,17 +11,17 @@
 
 <tr class="tr_liste">
 	<td class="choix"><:item_oui:></td>
-	<td class="stat">#GET{oui}</td>
+	<td class="stat"[ title="(#GET{oui}|titre_nb_reponses|attribut_html)"]>#GET{oui}</td>
 </tr>
 <tr class="tr_liste">
 	<td class="choix"><:item_non:></td>
-	<td class="stat">#GET{non}</td>
+	<td class="stat"[ title="(#GET{non}|titre_nb_reponses|attribut_html)"]>#GET{non}</td>
 </tr>
 
 #SET{diff, #ENV{reponses_total}|moins{#ENV{valeurs}|count}}
 [(#GET{diff}|>{0}|oui)
 <tr class="tr_liste">
 	<td class="choix"><:saisies:vue_sans_reponse:></td>
-	<td class="stat">#GET{diff}</td>
+	<td class="stat"[ title="(#GET{diff}|titre_nb_reponses|attribut_html)"]>#GET{diff}</td>
 </tr>
 ]

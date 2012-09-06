@@ -1,32 +1,73 @@
 <?php
 
+/**
+ * Déclaration des autorisations
+ * 
+ * @package SPIP\Formidable\Autorisations
+**/
+
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Juste pour l'appel du pipeline
+/**
+ * Fonction d'appel pour le pipeline
+ * @pipeline autoriser
+ */
 function formidable_autoriser(){}
 
-// Seuls les admins peuvent éditer les formulaires
-function autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $options){
+/**
+ * Autorisation d'éditer un formulaire formidable
+ *
+ * Seuls les admins peuvent éditer les formulaires
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $opt){
 	if (isset($qui['statut']) and $qui['statut'] <= '0minirezo' and !$qui['restreint']) return true;
 	else return false;
 }
 
-// Admins et rédacteurs peuvent voir les formulaires existants
-function autoriser_formulaires_bouton_dist($faire, $type, $id, $qui, $options){
+/**
+ * Autorisation de voir la liste des formulaires formidable
+ *
+ *  Admins et rédacteurs peuvent voir les formulaires existants
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_formulaires_menu_dist($faire, $type, $id, $qui, $opt){
 	if (isset($qui['statut']) and $qui['statut'] <= '1comite') return true;
 	else return false;
 }
-function autoriser_formulaires21_bouton_dist($faire, $type, $id, $qui, $options){
-	return autoriser('bouton', 'formulaires', $id, $qui, $options);
-}
 
-// On peut répondre à un formulaire si :
-// - c'est un formulaire classique
-// - on enregistre et que multiple = oui
-// - on enregistre et que multiple = non et que la personne n'a pas répondu encore
-// - on enregistre et que multiple = non et que modifiable = oui
-function autoriser_formulaire_repondre_dist($faire, $type, $id, $qui, $options){
+
+
+/**
+ * Autorisation de répondre à un formidable formidable
+ *
+ * On peut répondre à un formulaire si :
+ * - c'est un formulaire classique
+ * - on enregistre et que multiple = oui
+ * - on enregistre et que multiple = non et que la personne n'a pas répondu encore
+ * - on enregistre et que multiple = non et que modifiable = oui
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_formulaire_repondre_dist($faire, $type, $id, $qui, $opt){
 	// On regarde si il y a déjà le formulaire dans les options
 	if (isset($options['formulaire']))
 		$formulaire = $options['formulaire'];
@@ -61,20 +102,54 @@ function autoriser_formulaire_repondre_dist($faire, $type, $id, $qui, $options){
 	}
 }
 
-// On peut modérer une réponse si on est admin
-function autoriser_formulaires_reponse_instituer_dist($faire, $type, $id, $qui, $options){
+
+/**
+ * Autorisation d'instituer une réponse
+ *
+ * On peut modérer une réponse si on est admin
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_formulaires_reponse_instituer_dist($faire, $type, $id, $qui, $opt){
 	if (isset($qui['statut']) and $qui['statut'] <= '0minirezo' and !$qui['restreint']) return true;
 	else return false;
 }
 
-// Au moins rédacteur pour voir les résultats
-function autoriser_formulaires_reponse_voir_dist($faire, $type, $id, $qui, $options){
+/**
+ * Autorisation de voir les réponses d'un formulaire formidable
+ *
+ * Au moins rédacteur pour voir les résultats
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_formulaires_reponse_voir_dist($faire, $type, $id, $qui, $opt){
 	if (isset($qui['statut']) and $qui['statut'] <= '1comite') return true;
 	else return false;
 }
 
-// Il faut pouvoir éditer un formulaire pour pouvoir en supprimer des réponses
-function autoriser_formulaires_reponse_supprimer_dist($faire, $type, $id, $qui, $options){
+/**
+ * Autorisation de supprimer une réponse d'un formulaire formidable
+ *
+ * Il faut pouvoir éditer un formulaire pour pouvoir en supprimer des réponses
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_formulaires_reponse_supprimer_dist($faire, $type, $id, $qui, $opt){
 	// On récupère l'id du formulaire
 	if ($id_formulaire = intval(sql_getfetsel('id_formulaire', 'spip_formulaires_reponses', $id)))
 		return autoriser('editer', 'formulaire', $id_formulaire);

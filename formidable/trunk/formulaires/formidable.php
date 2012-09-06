@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Gestion de l'affichage et traitement d'un formulaire Formidable
+ *
+ * @package SPIP\Formidable\Formulaires
+**/
+
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -9,20 +15,24 @@ include_spip('base/abstract_sql');
 include_spip('inc/autoriser');
 
 /**
- * Formulaire CVT de Formidable.
+ * Chargement du formulaire CVT de Formidable.
+ * 
  * Genere le formulaire dont l'identifiant (numerique ou texte est indique)
  *
- * @param mixed $id_formulaire identifiant numerique ou textuel
- * @param array $valeurs valeurs par defauts passes au contexte du formulaire
- *        exemple : array('hidden_1' => 3) pour que champ identifie "@hidden_1@" soit prerempli
- * @param int $id_formulaires_reponse identifiant d'une reponse
- *        pour forcer la reedition de cette reponse specifique
+ * @param int|string $id_formulaire
+ *     Identifiant numerique ou textuel du formulaire formidable
+ * @param array $valeurs
+ *     Valeurs par défauts passées au contexte du formulaire
+ *     Exemple : array('hidden_1' => 3) pour que champ identifie "@hidden_1@" soit prerempli
+ * @param int|bool $id_formulaires_reponse
+ *     Identifiant d'une réponse pour forcer la reedition de cette reponse spécifique
  * 
- * @return array $contexte : le contexte envoye au squelette HTML du formulaire.
+ * @return array
+ *     Contexte envoyé au squelette HTML du formulaire.
 **/
 function formulaires_formidable_charger($id_formulaire, $valeurs=array(), $id_formulaires_reponse=false){
 	$contexte = array();
-	
+
 	// On peut donner soit un id soit un identifiant
 	if (intval($id_formulaire) > 0)
 		$where = 'id_formulaire = '.intval($id_formulaire);
@@ -116,6 +126,23 @@ function formulaires_formidable_charger($id_formulaire, $valeurs=array(), $id_fo
 }
 
 
+/**
+ * Vérification du formulaire CVT de Formidable.
+ * 
+ * Pour chaque champ posté, effectue les vérifications demandées par
+ * les saisies et retourne éventuellement les erreurs de saisie.
+ *
+ * @param int|string $id_formulaire
+ *     Identifiant numerique ou textuel du formulaire formidable
+ * @param array $valeurs
+ *     Valeurs par défauts passées au contexte du formulaire
+ *     Exemple : array('hidden_1' => 3) pour que champ identifie "@hidden_1@" soit prerempli
+ * @param int|bool $id_formulaires_reponse
+ *     Identifiant d'une réponse pour forcer la reedition de cette reponse spécifique
+ * 
+ * @return array
+ *     Tableau des erreurs
+**/
 function formulaires_formidable_verifier($id_formulaire, $valeurs=array(), $id_formulaires_reponse=false){
 	$erreurs = array();
 	
@@ -138,6 +165,29 @@ function formulaires_formidable_verifier($id_formulaire, $valeurs=array(), $id_f
 }
 
 
+/**
+ * Traitement du formulaire CVT de Formidable.
+ * 
+ * Exécute les traitements qui sont indiqués dans la configuration des
+ * traitements de ce formulaire formidable.
+ *
+ * Une fois fait, gère le retour après traitements des saisies en fonction
+ * de ce qui a été configuré dans le formulaire, par exemple :
+ * - faire réafficher le formulaire,
+ * - faire afficher les saisies
+ * - rediriger sur une autre page...
+ *
+ * @param int|string $id_formulaire
+ *     Identifiant numerique ou textuel du formulaire formidable
+ * @param array $valeurs
+ *     Valeurs par défauts passées au contexte du formulaire
+ *     Exemple : array('hidden_1' => 3) pour que champ identifie "@hidden_1@" soit prerempli
+ * @param int|bool $id_formulaires_reponse
+ *     Identifiant d'une réponse pour forcer la reedition de cette reponse spécifique
+ * 
+ * @return array
+ *     Tableau des erreurs
+**/
 function formulaires_formidable_traiter($id_formulaire, $valeurs=array(), $id_formulaires_reponse=false){
 	$retours = array();
 	
@@ -150,23 +200,24 @@ function formulaires_formidable_traiter($id_formulaire, $valeurs=array(), $id_fo
 	$retours['formidable_afficher_apres'] = $formulaire['apres'];
 	
 	// Si on a une redirection valide
-	if (($formulaire['apres']== "redirige") AND ($formulaire['url_redirect']!="")){
-		     refuser_traiter_formulaire_ajax();
-		     // traiter les raccourcis artX, brX
-         include_spip("inc/lien");
-		     $url_redirect = typer_raccourci($formulaire['url_redirect']);
-		     if (count($url_redirect)>2) 
-		        $url_redirect = $url_redirect[0].$url_redirect[2];
-          else  
-             $url_redirect = $formulaire['url_redirect'];      // URL classique
-		     
-         $retours['redirect'] = $url_redirect; 
-  }
-	
+	if (($formulaire['apres']== "redirige") AND ($formulaire['url_redirect']!="")) {
+		refuser_traiter_formulaire_ajax();
+		// traiter les raccourcis artX, brX
+		include_spip("inc/lien");
+		$url_redirect = typer_raccourci($formulaire['url_redirect']);
+		if (count($url_redirect)>2) {
+			$url_redirect = $url_redirect[0].$url_redirect[2];
+		} else {
+			$url_redirect = $formulaire['url_redirect'];      // URL classique
+		}
+
+		$retours['redirect'] = $url_redirect; 
+	}
+
 	// Si on a des traitements 
-	if (is_array($traitements) and !empty($traitements)){
+	if (is_array($traitements) and !empty($traitements)) {
 		foreach($traitements as $type_traitement=>$options){
-			if ($appliquer_traitement = charger_fonction($type_traitement, 'traiter/', true))
+			if ($appliquer_traitement = charger_fonction($type_traitement, 'traiter/', true)) {
 				$retours = $appliquer_traitement(
 					array(
 						'formulaire' => $formulaire,
@@ -174,29 +225,34 @@ function formulaires_formidable_traiter($id_formulaire, $valeurs=array(), $id_fo
 					),
 					$retours
 				);
+			}
 		}
-		
+
 		// Si on a personnalisé le message de retour, c'est lui qui est affiché uniquement
-		if ($formulaire['message_retour'])
+		if ($formulaire['message_retour']) {
 			$retours['message_ok'] = _T_ou_typo($formulaire['message_retour']);
+		}
 	}
 	else{
-		  $retours['message_ok'] = _T('formidable:retour_aucun_traitement');
+		$retours['message_ok'] = _T('formidable:retour_aucun_traitement');
 	}
-	
+
 	return $retours;
 }
 
 
-
 /**
  * Ajoute dans le contexte les elements
- * donnes par une reponse de formulaire indiquee 
+ * donnés par une reponse de formulaire indiquée 
  *
- * @param array $contexte Contexte pour le squelette HTML du formulaire
- * @param int $id_formulaires_reponse Identifiant de reponse
- * @param bool &$ok La reponse existe bien ?
- * @return array $contexte Contexte complete des nouvelles informations
+ * @param array $contexte
+ *     Contexte pour le squelette HTML du formulaire
+ * @param int $id_formulaires_reponse
+ *     Identifiant de réponse
+ * @param bool $ok
+ *     La reponse existe bien ?
+ * @return array $contexte
+ *     Contexte complète des nouvelles informations
  * 
 **/
 function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, &$ok) {
