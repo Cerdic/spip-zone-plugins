@@ -11,10 +11,10 @@ function objets_edition_directe(){
 	//Récupère les préférence de l'auteur, pour émodifier le choix par défaut 
 	$prefs=session_get('prefs');
 
-	// Apparament session_get  retourne suivantr le contenxte, un tableau serialisé, assuré qu'il ne soir pas sérialisé
+	// Apparament session_get  retourne suivant le contexte, un tableau serialisé, assurer qu'il ne soir pas sérialisé
 	if(!is_array($prefs))$prefs=unserialize($prefs);	
 	
-	// Sie rien n'est configuré, on se base sur les objets éditables a la séléction personelle de l'auteur
+	// Sie rien n'est configuré, on se base sur les objets éditables de la séléction personelle de l'auteur
 	if(count($objets)<1){
 		$objets=lister_objets($prefs);
 		}

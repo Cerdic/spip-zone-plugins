@@ -3,16 +3,21 @@
   Squelette
   (c) xxx
   Distribue sous licence GPL
-
+  
 ]
-#SET{objet,#VAL|objets_edition_directe}
 
-[(#OBJET|in_array{#GET{objet}}|non)
-	[
-	(#INCLURE{fond=prive/squelettes/inclure/portfolio-documents, env, ajax=documents})
+[(#REM) tester si on affiche ou non le formulaire document)]
+[(#ENV{exec}|oui)
+	#SET{objet,#VAL|objets_edition_directe}
+	
+	[(#OBJET|in_array{#GET{objet}}|oui) #SET{cacher,oui}]
 	]
-	[
-	(#INCLURE{fond=prive/squelettes/inclure/ajouter-documents, env, ajax})
+	
+[(#GET{cacher}|non)
+	[(#INCLURE{fond=prive/squelettes/inclure/portfolio-documents, env, ajax=documents})]
+	
+	[(#INCLURE{fond=prive/squelettes/inclure/ajouter-documents, env, ajax})]
 	]
-]
+	
+
 
