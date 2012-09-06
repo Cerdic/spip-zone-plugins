@@ -2,8 +2,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 //$GLOBALS['dossier_squelettes'] = 'squelettes/'. $_SERVER['HTTP_HOST'];
 
-
-
 $hostArray = explode('.',$_SERVER['HTTP_HOST']);
 
 if (count($hostArray)==1) return $return = $hostArray;
