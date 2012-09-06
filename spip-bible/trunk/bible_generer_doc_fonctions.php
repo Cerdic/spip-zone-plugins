@@ -2,14 +2,24 @@
 include_spip('inc/bible_tableau');
 function bible_generer_doc(){
      $langs = bible_tableau('langues');
-     $texte = '';
+     $original = bible_tableau('original');
+     $texte  = bible_generer_doc_liens($langs,$original);
+     $texte .= '{{{"Textes Originaux"}}}[<-orig]
+<br><br>
+Les versions en langues originales ont une syntaxe particulière. En effet, il faut mettre l\'abréviation du passage dans la langue de l\'article[[On peut éventuellement passer un paramètre "lang" au modèle pour forcer le choix]]. ';
+    foreach ($original as $lang=>$sens){   
+         $texte .= bible_generer_doc_lang($lang,true);
+    }
+     
+     
      foreach ($langs as $lang){
-
+        if (!$original[$lang]){
              $texte .= '<br /><br />{{{'.traduire_nom_langue($lang)."}}}[<-$lang]<br /><br />";     
              $texte .= bible_generer_doc_lang($lang);
+        }
     }
     $alias = bible_tableau('alias');
-    $texte .= '<br><br>{{{Alias possible}}}<br><br>';
+    $texte .= '<br><br>{{{Alias possible}}}[<-alias]<br><br>';
     foreach($alias as $lalias=>$lesalias){
          $lesalias = implode($lesalias['options'],'<br>-');
          $texte.= '<br><br>{{'.$lalias.': }}<br>-'.$lesalias ;
@@ -18,13 +28,25 @@ function bible_generer_doc(){
     return $texte;
         
 }
-function bible_generer_doc_lang($lang){
+function bible_generer_doc_liens($langs,$original){
+     $texte = "-[Versions originales->#orig]";
+     foreach ($langs as $lang){
+             if(!$original[$lang]){
+                 $texte.="<br>-[".traduire_nom_langue($lang)."->#$lang]";
+             }
+     } 
+     $texte .= "<br>-[Consulter aussi les alias->#alias]";
+     return $texte;
+}
+
+function bible_generer_doc_lang($lang,$original=false){
 	$tableau_traduction = bible_tableau('traduction');
 	$tableau_separateur = bible_tableau('separateur');
 	$tableau_livres = bible_tableau('livres');
-	$texte = "{{Séparateur chapitre/verset}} : «".$tableau_separateur[$lang]."»";
-	$texte.="<br /><br />{{Abréviations des livres}}<br /><br/>";
-	
+	if (!$original){
+	    $texte = "{{Séparateur chapitre/verset}} : «".$tableau_separateur[$lang]."»";
+	    $texte.="<br /><br />{{Abréviations des livres}}<br /><br/>";
+	}
 	foreach ($tableau_livres as $lang_livre=>$tableau){
 		if ($lang == $lang_livre){
 			foreach ($tableau as $abrev=>$livre){
