@@ -248,10 +248,11 @@ function bible_afficher_references_direct($ref,$traduction,$lang,$nommer_trad=tr
 	$separateur = $tableau_separateur[$lang_version];
 	return afficher_references($t[0],$t[1],$t[2],$t[3],$t[4],$traduction,$separateur,$lang,$nommer_trad);
 }
-function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nommer_trad='true',$propre='oui'){
+function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nommer_trad='true',$propre='oui',$url='oui'){
 	$tableau_traduction = bible_tableau('traduction');
 	$tableau_livres = bible_tableau('livres');
-	$trad = $tableau_traduction[strtolower($trad)]['traduction'];
+	$trad = strtolower($trad);
+	$traduction = $tableau_traduction[$trad]['traduction'];
 	
 	$livre_long = $tableau_livres[$lang][$livre] ;
 	
@@ -259,8 +260,19 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nom
 	$livre = str_replace('2','2 ',$livre);
 	$livre = str_replace('3','3 ',$livre);
 
-	$nommer_trad!='false' ? $bloc_fin = ' ({'.$trad.'})' : $bloc_fin = '';
 
+    if ($nommer_trad=='true'){
+        if ($url=='oui'){
+             $url = bible_url_passage($livre,$cd,$vd,$cf,$vf,$trad,$lang);
+	         $bloc_fin = " ({[$traduction->$url]})";  
+	    }
+	    else{
+	          $bloc_fin = " ({$traduction})" ;
+	    }
+    }
+	else {
+	    $bloc_fin='';
+	}
 	if ($cd==$cf and $vd=='' and $vf==''){
 		
 		return "[$livre|$livre_long] ".$cd.$bloc_fin;
@@ -287,10 +299,47 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nom
 	}
 	
 	$chaine.= $bloc_fin;
+    
 
 	if ($propre!='non'){$chaine = propre($chaine);}
+
 	return $chaine;
 
+}
+function bible_url_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$traduction,$lang){
+    $tableau_traduction = bible_tableau('traduction');
+    
+    $gateway = $tableau_traduction[$traduction]['gateway'];
+	$wissen  = $tableau_traduction[$traduction]['wissen'];
+	$unbound = $tableau_traduction[$traduction]['unbound'];	
+    $lire = $tableau_traduction[$traduction]['lire'];
+
+	if ($lire){
+		include_spip('traduction/lire');
+		$url = generer_url_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lire,$lang);
+	}
+	else if ($unbound){
+		include_spip('traduction/unbound');
+		$url = generer_url_passage_unbound($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$unbound,$lang);
+	}	
+	else if ($wissen){
+		$isaie == true ? $livre = str_replace('Es','Is',$livre) : $passage = $passage;
+		include_spip('traduction/wissen');
+		$url = generer_url_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$wissen,$lang);
+		
+		}
+	
+	else if ($gateway){
+		include_spip('traduction/gateway');
+		$url = generer_url_passage_gateway($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$gateway,$lang);	
+	}
+	else{
+		include_spip('traduction/'.$traduction);
+		$fonction= 'generer_url_passage_'.$traduction;
+		$url = $fonction($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang);
+	}
+
+    return $url;
 }
 function traduction_longue($i){
 	
