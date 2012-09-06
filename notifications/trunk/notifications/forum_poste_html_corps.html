@@ -29,9 +29,9 @@
 ]
 
 <ul style="list-style: none;">
-	[<li><a class="submit" href="(#ENV{url_moderer_publie})"><:notifications:info_lien_publier_commentaire:></a></li>]
-	[<li><a class="submit" href="(#ENV{url_moderer_off})"><:notifications:info_lien_supprimer_commentaire:></a></li>]
-	[<li><a class="submit" href="(#ENV{url_moderer_spam})"><:notifications:info_lien_signaler_spam_commentaire:></a></li>]
+	[<li style="margin: 0.5em 0;"><a class="submit" href="(#ENV{url_moderer_publie})"><:notifications:info_lien_publier_commentaire:></a></li>]
+	[<li style="margin: 0.5em 0;"><a class="submit" href="(#ENV{url_moderer_off})"><:notifications:info_lien_supprimer_commentaire:></a></li>]
+	[<li style="margin: 0.5em 0;"><a class="submit" href="(#ENV{url_moderer_spam})"><:notifications:info_lien_signaler_spam_commentaire:></a></li>]
 </ul>
 
 <br />
@@ -43,6 +43,7 @@
 border: 0; border-bottom: 1px solid rgba(0,0,0,0.25);-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;
 font-size: 100%; line-height: 1; font-weight: bold; text-shadow: 0 -1px 1px rgba(0,0,0,0.25); }
 .submit,.submit:visited,.submit * { color: #FFF; text-decoration: none; }
+a.submit { color: #FFF; text-decoration: none; }
 .submit:hover { background-color: #777; color: #FFF; text-decoration: none; }
 .submit:focus,.submit:active { -webkit-transform: translateY(1px); -moz-transform: translateY(1px); transform: translateY(1px);outline: none !important; }
 .submit:active { -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.7); -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.7); box-shadow: inset 0 1px 2px rgba(0,0,0,0.7);
