@@ -38,11 +38,11 @@ function action_dupliquer_formulaire_dist($arg=null) {
 				'id_formulaire = '.$id_formulaire
 			);
 			// Et on redirige vers la vue
-			$redirect = parametre_url(generer_url_ecrire('formulaires_voir'), 'id_formulaire', $id_formulaire, '&');
+			$redirect = parametre_url(generer_url_ecrire('formulaire'), 'id_formulaire', $id_formulaire, '&');
 		}
 		// Sinon on reste sur la page qui liste tout
 		else{
-			$redirect = generer_url_ecrire('formulaires_tous');
+			$redirect = generer_url_ecrire('formulaires');
 		}
 	}
 

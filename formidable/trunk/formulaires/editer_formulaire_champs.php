@@ -98,7 +98,7 @@ function formulaires_editer_formulaire_champs_traiter($id_formulaire){
 		$retours['redirect'] = parametre_url(
 			parametre_url(
 				parametre_url(
-					generer_url_ecrire('formulaires_editer')
+					generer_url_ecrire('formulaire_edit')
 					, 'id_formulaire', $id_formulaire
 				)
 				, 'configurer', 'traitements'

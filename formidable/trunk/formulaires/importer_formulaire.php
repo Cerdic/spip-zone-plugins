@@ -43,7 +43,7 @@ function formulaires_importer_formulaire_traiter(){
 		}
 		else{
 			$id_formulaire = intval($erreur_ou_id);
-			$retours['redirect'] = generer_url_ecrire('formulaires_voir', "id_formulaire=$id_formulaire");
+			$retours['redirect'] = generer_url_ecrire('formulaire', "id_formulaire=$id_formulaire");
 		}
 	}
 	

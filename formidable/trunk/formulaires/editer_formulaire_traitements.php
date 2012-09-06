@@ -101,7 +101,7 @@ function formulaires_editer_formulaire_traitements_traiter($id_formulaire){
 	
 	// On va sur la page de visualisation quand c'est fini
 	if ($ok){
-		$retours['redirect'] = parametre_url(generer_url_ecrire('formulaires_voir'), 'id_formulaire', $id_formulaire);
+		$retours['redirect'] = parametre_url(generer_url_ecrire('formulaire'), 'id_formulaire', $id_formulaire);
 	}
 	else{
 		$retours['editable'] = true;

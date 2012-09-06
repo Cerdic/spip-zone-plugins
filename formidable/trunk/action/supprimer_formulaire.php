@@ -51,7 +51,7 @@ function action_supprimer_formulaire_dist($arg=null) {
 	
 	if ($ok){
 		if (!$redirect = _request('redirect'))
-			$redirect = generer_url_ecrire('formulaires_tous');
+			$redirect = generer_url_ecrire('formulaires');
 		
 		include_spip('inc/headers');
 		redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)));

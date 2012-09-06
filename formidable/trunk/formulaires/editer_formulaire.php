@@ -61,11 +61,11 @@ function formulaires_editer_formulaire_traiter($id_formulaire, $nouveau){
 	if (!$retours['message_erreur'] and $retours['id_formulaire'] > 0){
 		// Si c'était un nouveau on reste sur l'édition
 		if (!intval($id_formulaire) and $nouveau == 'oui'){
-			$retours['redirect'] = parametre_url(generer_url_ecrire('formulaires_editer'), 'id_formulaire', $retours['id_formulaire'], '&');
+			$retours['redirect'] = parametre_url(generer_url_ecrire('formulaire_edit'), 'id_formulaire', $retours['id_formulaire'], '&');
 		}
 		// Sinon on redirige vers la page de visualisation
 		else{
-			$retours['redirect'] = parametre_url(generer_url_ecrire('formulaires_voir'), 'id_formulaire', $retours['id_formulaire'], '&');
+			$retours['redirect'] = parametre_url(generer_url_ecrire('formulaire'), 'id_formulaire', $retours['id_formulaire'], '&');
 		}
 	}
 	

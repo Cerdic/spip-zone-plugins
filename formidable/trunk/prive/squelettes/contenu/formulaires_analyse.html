@@ -1,7 +1,7 @@
 ﻿<BOUCLE_formulaire(FORMULAIRES){id_formulaire}>
 <BOUCLE_autoriser(CONDITION){si #AUTORISER{voir, formulaires_reponse}}>
 [(#BOITE_OUVRIR{'','simple'})]
-        [(#URL_ECRIRE{formulaires_voir}|parametre_url{id_formulaire,#ID_FORMULAIRE}|icone_verticale{<:retour:>,formulaire,formulaire-24,left})]
+        [(#URL_ECRIRE{formulaire}|parametre_url{id_formulaire,#ID_FORMULAIRE}|icone_verticale{<:retour:>,formulaire,formulaire-24,left})]
 
 	[<h4><:formidable:reponses_analyse:></h4>
 	<h1>(#TITRE|sinon{<:info_sans_titre:>})</h1>]

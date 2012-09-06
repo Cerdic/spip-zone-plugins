@@ -34,6 +34,48 @@ function formidable_declarer_tables_interfaces($interfaces) {
 	return $interfaces;
 }
 
+/**
+ * Déclarer les objets éditoriaux des formulaires
+ *
+ * @pipeline declarer_tables_objets_sql
+ * @param array $tables
+ *     Description des tables
+ * @return array
+ *     Description complétée des tables
+ */
+function formidable_declarer_tables_objets_sql($tables) {
+	$tables['spip_formulaires'] = array(
+		'type'=>'formulaire',
+		'titre' => "titre, '' AS lang",
+		'date' => '',
+		'principale' => 'oui',
+		
+		'field' => array(
+			"id_formulaire" => "bigint(21) NOT NULL",
+			"identifiant" => "varchar(200)",
+			"titre" => "text NOT NULL default ''",
+			"descriptif" => "text",
+			"message_retour" => "text NOT NULL default ''",
+			"saisies" => "text NOT NULL default ''",
+			"traitements" => "text NOT NULL default ''",
+			"public" => "enum('non', 'oui') DEFAULT 'non' NOT NULL",
+			"statut" => "varchar(10) NOT NULL default ''",
+			"maj" => "timestamp",
+			"apres" => "varchar(12) NOT NULL default ''",
+			"url_redirect" => "varchar(255)"
+		),
+		'key' => array(
+			"PRIMARY KEY" => "id_formulaire"
+		),
+		'join'=> array(
+			'id_formulaire' => 'id_formulaire'
+		),
+		'rechercher_champs' => array(
+		  'titre' => 5, 'descriptif' => 3
+		),
+	);
+	return $tables;
+}
 
 /**
  * Déclarer les tables principales de formidable
@@ -45,32 +87,6 @@ function formidable_declarer_tables_interfaces($interfaces) {
  *     Description complétée des tables
 **/
 function formidable_declarer_tables_principales($tables_principales){
-	// Table formulaires
-	$formulaires = array(
-		"id_formulaire" => "bigint(21) NOT NULL",
-		"identifiant" => "varchar(200)",
-		"titre" => "text NOT NULL default ''",
-		"descriptif" => "text",
-		"message_retour" => "text NOT NULL default ''",
-		"saisies" => "text NOT NULL default ''",
-		"traitements" => "text NOT NULL default ''",
-		"public" => "enum('non', 'oui') DEFAULT 'non' NOT NULL",
-		"statut" => "varchar(10) NOT NULL default ''",
-		"maj" => "timestamp",
-		"apres" => "varchar(12) NOT NULL default ''",
-		"url_redirect" => "varchar(255)"
-	);
-	$formulaires_cles = array(
-		"PRIMARY KEY" => "id_formulaire"
-	);
-	$tables_principales['spip_formulaires'] = array(
-		'field' => &$formulaires,
-		'key' => &$formulaires_cles,
-		'join'=> array(
-			'id_formulaire' => 'id_formulaire'
-		)
-	);
-
 
 	// Table formulaires_reponses 
 	$formulaires_reponses = array(
@@ -149,19 +165,5 @@ function formidable_declarer_tables_auxiliaires($tables_auxiliaires){
 }
 
 
-/**
- * Déclarer les champs inclus dans la recherche 
- *
- * @pipeline rechercher_liste_des_champs
- * @param array $tables
- *     Liste des tables, de leurs champs de recherche et pondération
- * @return array
- *     Liste ddes tables complétée
-**/
-function formidable_rechercher_liste_des_champs($tables) {
-	$tables['formulaire']['titre'] = 5;
-	$tables['formulaire']['descriptif'] = 3;
-	return $tables;
-}
 
 ?>

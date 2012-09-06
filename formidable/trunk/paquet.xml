@@ -18,10 +18,11 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<pipeline nom="autoriser" inclure="formidable_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/formidable_tables.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/formidable_tables.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/formidable_tables.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/formidable_tables.php" />
-	<pipeline nom="rechercher_liste_des_champs" inclure="base/formidable_tables.php" />
+
 	<pipeline nom="pre_boucle" inclure="formidable_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="formidable_pipelines.php" />
 
@@ -31,5 +32,5 @@
 	<necessite nom="yaml" compatibilite="[1.1;[" />
 	<necessite nom="facteur" compatibilite="[1.5.3;[" />
 
-	<menu nom="formulaires" titre="formidable:bouton_formulaires" parent="menu_edition" icone="images/formulaire-16.png" action="formulaires_tous" />
+	<menu nom="formulaires" titre="formidable:bouton_formulaires" parent="menu_edition" icone="images/formulaire-16.png" />
 </paquet>

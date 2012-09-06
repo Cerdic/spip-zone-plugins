@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyse_une_reponse_total' => 'Une personne a répondu à ce formulaire.',
 	'analyse_nb_reponses_total' => '@nb@ personnes ont répondu à ce formulaire.',
 	'analyse_sans_reponse' => 'Laissés blanc',
+	'aucun_traitement' => 'Aucun traitement',
 
 	// B
 	'bouton_formulaires' => 'Formulaires',
@@ -105,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'retour_aucun_traitement' => 'Votre réponse a bien été envoyée, mais aucun traitement n\'a été défini pour ce formulaire. Il ne fait donc rien. :)',
 
 	// T
+	'traitements_actives' => 'Traitements activés',
 	'traitements_aide_memoire' => 'Aide mémoire :',
 	'traitements_avertissement_creation' => 'Les modifications sur les champs du formulaire ont été enregistrées avec succès. Vous pouvez maintenant définir quels traitements seront effectués lors de l\'utilisation du formulaire.',
 	'traitements_avertissement_modification' => 'Les modifications sur les champs du formulaire ont été enregistrées avec succès. <strong>Certains traitements doivent peut-être être reconfigurés en conséquence.</strong>',
@@ -145,6 +147,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_option_multiple_explication' => 'Une même personne peut-elle répondre plusieurs fois au formulaire ?',
 	'traiter_enregistrement_option_multiple_label' => 'Réponses multiples',
 	'traiter_enregistrement_titre' => 'Enregistrer les résultats',
+	'titre_cadre_raccourcis' => 'Raccourcis',
 
 	// V
 	'voir_exporter' => 'Exporter le formulaire',
