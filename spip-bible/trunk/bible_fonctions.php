@@ -248,7 +248,7 @@ function bible_afficher_references_direct($ref,$traduction,$lang,$nommer_trad=tr
 	$separateur = $tableau_separateur[$lang_version];
 	return afficher_references($t[0],$t[1],$t[2],$t[3],$t[4],$traduction,$separateur,$lang,$nommer_trad);
 }
-function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nommer_trad='true'){
+function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nommer_trad='true',$propre='oui'){
 	$tableau_traduction = bible_tableau('traduction');
 	$tableau_livres = bible_tableau('livres');
 	$trad = $tableau_traduction[strtolower($trad)]['traduction'];
@@ -259,21 +259,21 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nom
 	$livre = str_replace('2','2 ',$livre);
 	$livre = str_replace('3','3 ',$livre);
 
-	$nommer_trad!='false' ? $bloc_fin = ' (<i>'.$trad.'</i>)' : $bloc_fin = '';
+	$nommer_trad!='false' ? $bloc_fin = ' ({'.$trad.'})' : $bloc_fin = '';
 
 	if ($cd==$cf and $vd=='' and $vf==''){
 		
-		return '<accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.$bloc_fin;
+		return "[$livre|$livre_long] ".$cd.$bloc_fin;
 	
 	}
 	
 	if ($vd=='' and $vf==''){
 		
-		return '<accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.'-'.$cf.$bloc_fin;
+		return "[$livre|$livre_long] ".$cd.'-'.$cf.$bloc_fin;
 	
 	}
 
-	$chaine = '<accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.$separateur." ".$vd;
+	$chaine = "[$livre|$livre_long] ".$cd.$separateur." ".$vd;
 	
 	if ($cd!=$cf){
 			
@@ -287,7 +287,8 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nom
 	}
 	
 	$chaine.= $bloc_fin;
-	
+
+	if ($propre!='non'){$chaine = propre($chaine);}
 	return $chaine;
 
 }
