@@ -1,4 +1,9 @@
 <?php
+
+function generer_url_passage_gateway($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$gateway,$lang){
+	return "http://www.biblegateway.com/passage/?search=$livre+$chapitre_debut:$verset-debut:$chapitre_fin:$verset_fin&version=$gateway";
+}
+
 function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut='',$chapitre_fin='',$verset_fin='',$gateway,$lang){
 	$param_cache=array('livre'=>$livre,'chapitre_debut'=>$chapitre_debut,'verset_debut'=>$verset_debut,'chapitre_fin'=>$chapitre_fin,'$verset_fin'=>$verset_fin,'gateway'=>$gateway);
 	//Vérifions qu'on a pas en cache
@@ -9,7 +14,6 @@ function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut=''
 			return $cache;	
 		}
 	}
-	$nom_trad = $gateway;
 	$verset_debut=='' ? $verset_debut = 1 : $verset_debut = $verset_debut;
 	//reperer le numero de livre
 	include_spip('inc/bible_tableau');
@@ -42,7 +46,7 @@ function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut=''
 	$i = $chapitre_debut;
 	while ($i<=$chapitre_fin){
 		// recuperer le fichier, par chapitre, plus simple (mais plus long, on reconnait)
-		$url = 'http://mobile.biblegateway.com/passage/?search='.$livre.'+'.$i.'&version='.$nom_trad;
+		$url = 'http://mobile.biblegateway.com/passage/?search='.$livre.'+'.$i.'&version='.$gateway;
 		$i == $chapitre_debut ? $verset_debut = $verset_debut : $verset_debut = 1;        
 		$i == $chapitre_fin ? $verset_fin = $verset_fin : $verset_fin = 9999999;
 		if ($verset_fin ==0){
