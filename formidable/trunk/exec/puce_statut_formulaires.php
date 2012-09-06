@@ -27,4 +27,5 @@ function exec_puce_statut_formulaires_args($id, $type)
 	$puce_statut = charger_fonction('puce_statut', 'inc');
 	ajax_retour($puce_statut($id,$statut,$id_formulaire,$type, true));
 }
+
 ?>
