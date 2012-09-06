@@ -1,7 +1,7 @@
 <?php
 
 function generer_url_passage_gateway($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$gateway,$lang){
-	return "http://www.biblegateway.com/passage/?search=$livre+$chapitre_debut:$verset-debut:$chapitre_fin:$verset_fin&version=$gateway";
+	return "http://www.biblegateway.com/passage/?search=$livre+$chapitre_debut:$verset_debut:$chapitre_fin:$verset_fin&version=$gateway";
 }
 
 function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut='',$chapitre_fin='',$verset_fin='',$gateway,$lang){
