@@ -19,7 +19,7 @@ Les versions en langues originales ont une syntaxe particulière. En effet, il f
         }
     }
     $alias = bible_tableau('alias');
-    $texte .= '<br><br>{{{Alias possible}}}[<-alias]<br><br>';
+    $texte .= '<br><br>{{{Alias possible}}}[alias<-]<br><br>';
     foreach($alias as $lalias=>$lesalias){
          $lesalias = implode($lesalias['options'],'<br>-');
          $texte.= '<br><br>{{'.$lalias.': }}<br>-'.$lesalias ;
