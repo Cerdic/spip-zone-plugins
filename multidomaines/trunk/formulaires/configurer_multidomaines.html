@@ -3,10 +3,10 @@
 <!-- nom=multidomaines -->
 
 <div class="formulaire_spip formulaire_cfg formulaire_#FORM">
-	
+
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
-		
+
 	<form method="post" action="#ENV{action}">
 		<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
@@ -19,7 +19,7 @@
 				<label for="squelette"><:multidomaines:label_squelette:></label>
 				<input type="text" name="squelette" class="text" id="squelette" value="#ENV{squelette}" />
 			</li>
-		<BOUCLE_multidomaines(RUBRIQUES){racine}{tous}>
+		<BOUCLE_multiracine(RUBRIQUES){racine}{tous}>
 			<li>
 				<fieldset><legend>#TITRE</legend>
 				<ul>
@@ -33,8 +33,28 @@
 					</li>
 				</ul>
 				</fieldset>
+					<B_multidomaines>
+					<ul>
+						<BOUCLE_multidomaines(RUBRIQUES){id_parent}{tous}>
+							<li>
+								<fieldset><legend>#TITRE</legend>
+								<ul>
+									<li class="editer_url">
+										<label for="editer_url"><:multidomaines:label_editer_url_rubrique:></label>
+										<input type="text" name="editer_url_#ID_RUBRIQUE" class="text" id="editer_url_#ID_RUBRIQUE" value="#ENV{editer_url_#ID_RUBRIQUE}" />
+									</li>
+									<li class="squelette">
+										<label for="squelette"><:multidomaines:label_squelette_rubrique:></label>
+										<input type="text" name="squelette_#ID_RUBRIQUE" class="text" id="squelette_#ID_RUBRIQUE" value="#ENV{squelette_#ID_RUBRIQUE}" />
+									</li>
+								</ul>
+								</fieldset>
+							</li>
+						</BOUCLE_multidomaines>
+					</ul>
+					</B_multidomaines>
 			</li>
-		</BOUCLE_multidomaines>
+		</BOUCLE_multiracine>
 		</ul>
 		<p class="boutons">
 			<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
