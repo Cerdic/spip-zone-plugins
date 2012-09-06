@@ -32,7 +32,7 @@ function bible_tableau($i,$lang=''){
 	
 	$tableau_traduction = array(
 	's17'		=>array(
-		'gateway'=>   array(44,'SVL'),
+		'gateway'=>   'SVL',
 		'traduction'=> 'Svenska 1917',
 		'domaine_public' => true,
 		'lang'=>'sv',
@@ -40,7 +40,7 @@ function bible_tableau($i,$lang=''){
 		'at'=> true	
 	),
 	'bb'		=>array(
-		'gateway'=>array (21,'BULG'),
+		'gateway'=>'BULG',
 		'traduction'=> 'Bulgarian Bible',
 		'lang'=>'bg',
 		'domaine_public' => true,
@@ -48,7 +48,7 @@ function bible_tableau($i,$lang=''){
 		'at'=> true	
 	),
 	'bb40'		=>array(
-		'gateway'=>array (82,'BG1940'),
+		'gateway'=>'BG1940',
 		'traduction'=> '1940 Bulgarian Bible',
 		'domaine_public' => true,                 //"It may be reproduced electronically only in its entirety, except in cases of direct quotation accompanied with complete bibliographical note."   => Je comprend qu'on peut donc le reproduire, pas le modifier. Le terme "domaine_public" n'est pas ici le bon, mais pour la technique ca passe.
 		'lang'=>'bg',
@@ -56,7 +56,7 @@ function bible_tableau($i,$lang=''){
 		'at'=> true	
 	),
 	'lb_sv'		=>array(
-		'gateway'=>array(7,'SV1917'),
+		'gateway'=>'SV1917',
 		'traduction'=> 'Svenska 1917',
 		'domaine_public' => true,
 		'lang'=>'sv',
@@ -64,7 +64,7 @@ function bible_tableau($i,$lang=''){
 		'at'=> true		
 	),
 	'dnb30'		=>array(
-		'gateway'=>array(5,'DNB1930'),
+		'gateway'=>'DNB1930',
 		'domaine_public' => true,
 		'traduction'=> 'Det Norsk Bibelselskap 1930',
 		'lang'=>'no',
@@ -72,7 +72,7 @@ function bible_tableau($i,$lang=''){
 		'at'=> true		
 	),
 	'lb_no'		=>array(
-		'gateway'=>array(35,'LB'),
+		'gateway'=>'LB',
 		'traduction'=> 'Levande Bibeln',
 		'domaine_public' => false,
 		'lang'=>'no',
@@ -81,7 +81,7 @@ function bible_tableau($i,$lang=''){
 		
 	),
 	'ol'		=>array(
-		'gateway'=>array(37,'OL'),
+		'gateway'=>'OL',
 		'domaine_public' => false,
 		'traduction'=> 'O Livro',
 		'lang'=>'pt',
@@ -90,7 +90,7 @@ function bible_tableau($i,$lang=''){
 		
 	),
 	'jfaa'		=>array(
-		'gateway'=>array(25,'AA'),
+		'gateway'=>'AA',
 		'domaine_public' => true,
 		'traduction'=> 'João Ferreira de Almeida Atualizada',
 		'lang'=>'pt',
@@ -99,7 +99,7 @@ function bible_tableau($i,$lang=''){
 		
 	),
 	'hb'		=>array(
-		'gateway'=>array(30,'HTB'),
+		'gateway'=>'HTB',
 		'domaine_public' => false,
 		'traduction'=> 'Het Boek',
 		'lang'=>'nl',
@@ -108,7 +108,7 @@ function bible_tableau($i,$lang=''){
 		
 	),
 	'dbpd'		=>array(
-		'gateway'=>array(11,'DN1933'),
+		'gateway'=>'DN1933',
 		'domaine_public' => true,
 		'traduction'=> 'Dette Er Biblen Pã¥ Dansk',
 		'lang'=>'da',
@@ -117,7 +117,7 @@ function bible_tableau($i,$lang=''){
 		
 	),
 	'hk'		=>array(
-		'gateway'=>array(17,'KAR'),
+		'gateway'=>'KAR',
 		'domaine_public' => true,
 		'traduction'=> 'Hungarian Kã¡Roli',
 		'lang'=>'hu',
@@ -126,7 +126,7 @@ function bible_tableau($i,$lang=''){
 		
 	),
 	'pev'		=>array(
-        'gateway'=>array(34,'LM'),
+        'gateway'=>'LM',
         'domaine_public' => false,
         'traduction'=> 'La Parola è Vita',
         'lang'=>'it',
@@ -136,7 +136,7 @@ function bible_tableau($i,$lang=''){
 				
 					),
 	'lnd'		=>array(
-        'gateway'=>array(55,'LND'),
+        'gateway'=>'LND',
         'domaine_public' => false, // "All this material may be freely copied and shared with your friends. If you wish to use this material for other purposes, please contact us to obtain the latest accurate copy."
         'traduction'=> 'La Nuova Diodati',
         'lang'=>'it',
@@ -144,7 +144,7 @@ function bible_tableau($i,$lang=''){
 		'at'=> true	
 					),
 	'cei'		=>array(
-        'gateway'=>array(3,'CEI'),
+        'gateway'=>'CEI',
         'domaine_public' => true,
         'traduction'=> 'Conferenza Episcopale Italiana',
         'lang'=>'it',
@@ -154,7 +154,7 @@ function bible_tableau($i,$lang=''){
 					),
 	
 	'rvantigua'		=>array(
-        'gateway'=>array(6,'RVA'),
+        'gateway'=>'RVA',
         'domaine_public' => true,
         'traduction'=> 'Reina-Valera Antigua',
         'lang'=>'es',
@@ -162,7 +162,7 @@ function bible_tableau($i,$lang=''){
 		'at'=> true	
 					),
 	'rv95'		=>array(
-			'gateway'=>array(61,'RVR1995'),
+			'gateway'=>'RVR1995',
 			'domaine_public' => false,
 			'traduction'=> 'Reina-Valera 1995',
 			'lang'=>'es',
@@ -171,7 +171,7 @@ function bible_tableau($i,$lang=''){
 					),
 
 	'rv60'		=>array(
-			'gateway'=>array(60,'RVR1960'),
+			'gateway'=>'RVR1960',
 			'traduction'=> 'Reina-Valera 1960',
 			'domaine_public' => false,
 			'lang'=>'es',
@@ -179,7 +179,7 @@ function bible_tableau($i,$lang=''){
 		'at'=> true	
 					),
 	'nvi'		=>array(
-			'gateway'=>array(42,'NVI'),
+			'gateway'=>'NVI',
         'domaine_public' => false,
 			'traduction'=> 'Nueva Versión Internacional',
 			'lang'=>'es',
@@ -187,7 +187,7 @@ function bible_tableau($i,$lang=''){
 		'at'=> true	
 					),
 	'americas'		=>array(
-			'gateway'=>array(59,'LBLA'),
+			'gateway'=>'LBLA',
         'domaine_public' => false,
 			'traduction'=> 'La Biblia De Las Américas',
 			'lang'=>'es',
@@ -195,7 +195,7 @@ function bible_tableau($i,$lang=''){
 		'at'=> true	
 					),
 	'bls'		=>array(
-			'gateway'=>array(57,'BLS'),
+			'gateway'=>'BLS',
         'domaine_public' => false,
 			'traduction'=> 'Biblia en lenguaje sencillo',
 			'lang'=>'es',
@@ -203,7 +203,7 @@ function bible_tableau($i,$lang=''){
 		
 					),
 	'cast'		=>array(
-			'gateway'=>array(41,'CST'),
+			'gateway'=>'CST',
         'domaine_public' => true,
 			'traduction'=> 'Castilian',
 			'lang'=>'es',
@@ -211,7 +211,7 @@ function bible_tableau($i,$lang=''){
 		
 					),
 	'dhh'		=>array(
-			'gateway'=>array(58,'DHH'),
+			'gateway'=>'DHH',
         'domaine_public' => false,
 			'traduction'=> 'Dios Habla Hoy',
 			'lang'=>'es',
@@ -477,7 +477,7 @@ Editio Typica Altera ',
 		),
 	'lsg' => array(
 		'traduction'=> 'Louis Segond 1910',
-		'gateway'	=> array(2,'LSG'),
+		'gateway'	=> 'LSG',
         'domaine_public' => true,
 		'lang'		=> 'fr',
 		'isaie'     => 'Es',
@@ -486,7 +486,7 @@ Editio Typica Altera ',
 	'bds' => array(
 		'traduction'=> 'Bible du Semeur',
         'domaine_public' => false,
-		'gateway'	=> array(32, 'BDS'),
+		'gateway'	=> 'BDS',
 		'lang'		=> 'fr',
 		'isaie'     => 'Es',
 		'nt'=> true,
@@ -494,21 +494,21 @@ Editio Typica Altera ',
 	'kj21' => array(
 		'traduction'=> 'The 21st Century King James',
         'domaine_public' => false,
-		'gateway'	=> array(48,'KJ21'),
+		'gateway'	=> 'KJ21',
 		'lang'		=> 'en',
 		'nt'=> true,
 		'at'=> true),
 	'darb_en' => array(
 		'traduction'=> 'Darby',
         'domaine_public' => true,
-		'gateway'	=> array(16,'DARBY'),
+		'gateway'	=> 'DARBY',
 		'lang'		=> 'en',
 		'nt'=> true,
 		'at'=> true),
 	'kj'		=> array(
 		'traduction'=>'King Jame',
         'domaine_public' => true,
-		'gateway'	=>array(9,'KJV'),
+		'gateway'	=>'KJV',
 		'lang'		=>'en',
 		'nt'=> true,
 		'at'=> true

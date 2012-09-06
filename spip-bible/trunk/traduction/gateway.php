@@ -9,8 +9,7 @@ function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut=''
 			return $cache;	
 		}
 	}
-	$id_trad = $gateway[0];
-	$nom_trad = $gateway[1];
+	$nom_trad = $gateway;
 	$verset_debut=='' ? $verset_debut = 1 : $verset_debut = $verset_debut;
 	//reperer le numero de livre
 	include_spip('inc/bible_tableau');
