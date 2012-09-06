@@ -131,6 +131,8 @@
 .formulaire_construire_formulaire li.editer,
 .formulaire_construire_formulaire li.explication,
 .formulaire_construire_formulaire li.fieldset {padding-top:30px; position:relative;}
+.formulaire_construire_formulaire li.explication { padding-left:140px; background:transparent; }
+.formulaire_construire_formulaire li.explication > p { margin-left:-130px; }
 .formulaire_construire_formulaire .formulaire_configurer li.fieldset {padding-top:0px;}
 .formulaire_construire_formulaire .formulaire_configurer fieldset fieldset>ul>li.editer:first-child {padding-top:0px;}
 
