@@ -611,6 +611,23 @@ function association_formater_texte($texte, $filtre='', $params=array() )
 	return $filtre?call_user_func_array($filtre, $params):$texte;
 }
 
+/**
+ * Affiche une puce de couleur
+ *
+ * @param string $statut
+ *   Valeur du "statut" a iconifier
+ * @param string $icone
+ *   Nom (couleur) de la puce parmis celles disponibles : orange, rouge, vert, poubelle
+ * @param bool $acote
+ *   Indique si la legende est placee a cote de l'icone (vrai, par defaut) ou dedans (faux)
+ * @return string
+ *   Dessin et texte
+ */
+function association_formater_puce($statut, $icone, $texte='', $acote=TRUE)
+{
+	return $acote ? association_bouton_faire('', 'puce-'.$icone.'.gif', '', '', '') ' '._T("asso:$statut") : association_bouton_faire($statut, 'puce-'.$icone.'.gif', '', '', '') ; // c'est comme un bouton... mais n'a pas d'action
+}
+
 /** @} */
 
 
@@ -1116,10 +1133,8 @@ function association_totauxinfos_stats($legende='', $sql_table_asso, $sql_champs
  *
  * @param string $legende
  *   Complement du titre du tableau
- * @param array $table_textes
- *   'classe_unique_css_de_la_ligne' => 'chaine_de_langue' (sans prefixe "asso")
- * @param array $table_nombres
- *   'classe_unique_css_de_la_ligne' => effectif/occurence
+ * @param array $lignes
+ *   'classe_unique_css_de_la_ligne' => array( 'chaine_de_langue', effectif_occurence)
  * @param int $decimales_significatives
  *   Nombre de decimales affichees
  * @return string $res
@@ -1129,18 +1144,18 @@ function association_totauxinfos_stats($legende='', $sql_table_asso, $sql_champs
  * @note
  *   Les classes CSS sont utilisees comme cle des tables parce-qu'il ne doit y en avoir qu'une par ligne.
  */
-function association_totauxinfos_effectifs($legende='', $table_textes, $table_nombres, $decimales_significatives=0)
+function association_totauxinfos_effectifs($legende='', $lignes, $decimales_significatives=0)
 {
-	if (!is_array($table_textes) || !is_array($table_nombres) )
+	if (!is_array($lignes) )
 		return FALSE;
 	$nombre = $nombre_total = 0;
 	$res = '<table width="100%" class="asso_infos">';
 	$res .= '<caption>'. _T('asso:totaux_nombres', array('de_par'=>_T("local:$legende"))) .'</caption><tbody>';
-	foreach ($table_textes as $classe_css=>$libelle) {
+	foreach ($tlgnes as $classe_css=>$params) {
 		$res .= '<tr class="'.$classe_css.'">';
-		$res .= '<td class"text">'._T('asso:'.$libelle).'</td>';
-		$res .= '<td class="' .($decimales_significatives?'decimal':'integer') .'">'. association_formater_nombre($table_nombres[$classe_css],$decimales_significatives) .'</td>';
-		$nombre_total += $table_nombres[$classe_css];
+		$res .= '<td class"text">'._T('asso:'.$params[0]).'</td>';
+		$res .= '<td class="' .($decimales_significatives?'decimal':'integer') .'">'. association_formater_nombre($params[1],$decimales_significatives) .'</td>';
+		$nombre_total += $params[1];
 		$res .= '</tr>';
 	}
 	$res .= '</tbody>';
@@ -1348,42 +1363,52 @@ function association_bloc_listepdf($objet, $params=array(), $prefixeLibelle='', 
 /**
  * Listing sous forme de tableau HTML
  *
- * @param array $entetes
- *   Liste des chaines de langue des libelles d'entete
- * @param ressource $reponse_sql
- *   Resultat du "sql_select"
- * @param array $formats
- *   'nom_ou_alias_du_champ' => array('format', 'parametre1', ...)
+ * @param array $requete_sql
+ *   Liste des parametres de "sql_select()"
+ *   http://doc.spip.org/@sql_select
+ *   http://programmer.spip.net/sql_select,569
+ * @param array $presentation
+ *   Tableau decrivant les donnees affichees :
+ *   'nom_ou_alias_du_champ' => array('chaine_de:langue_du_libelle_d_entete', 'nom_du_format', 'parametre1', ...)
  *   Le nom du format est celui de la fonction de formatage du meme nom prefixee de association_formater_
  * @param array $boutons
  *   array('bouton', 'parametre1', ...)
  *   Le nom du type de bouton est celui de la fonction d'action du meme nom prefixee de association_bouton_
+ * @param string $cle1
+ *   Nom (ou alias) de la colonne cle primaire,
  * @param array $extra
- *   Elements annexes optionnel :
- *   - 'table' => 'nom_de_la_table_sql_sans_prefixe',
- *   - 'key' => 'nom_de_la_colonne_cle_primaire',
- *   - 'colors' => array('couleur1', ...)
+ *   Liste de classes supplemetaires appliquees alternativement aux lignes ;
+ *   Ou tableau des valeur=>classe supplementaires appliquees aux lignes presentant la valeur
+ * @param string $cle2
+ *   Nom (ou alias) de la colonne dont les valeurs servent de cle de classe
+ * @param int $selection
+ *   ID de la cle primaire selectionnee
  * @return string $res
  *   Table-HTML listant les donnees formatees
  */
-function association_bloc_listehtml($entetes, $reponse_sql, $formats, $boutons=array(), $extra=array() )
+function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(), $cle1='', $extra=array(), $cle2='', $selection=0 )
 {
-	$res =  '<table width="100%" class="asso_tablo'. ($extra['table']?'" id="liste_'.$extra['table']:'').'">';
+	if ( !is_array($requete_sql) || count($requete_sql)<2 )
+		return '';
+	$table = ($requete_sql[1] ? $requete_sql[1] : ($requete_sql['table'] ? $requete_sql['table'] : ($requete_sql['from']?$requete_sql['from']:$requete_sql['tables']) ) ) ; // on recupere la partie "FROM" de la requete SQL...
+	$table = substr_replace(trim( is_array($table)?$table[0]:$table ), '', 0, 5); //  on supprime le prefixe "spip_" de la 1ere table (normalement la principale...)
+	$spc_pos = strpos($table, ' '); // requete avec alias (" AS ") ou jointure de plusieurs tables ( " JOIN ")
+	$table = substr($table, 0, $spc_pos?$spc_pos:strlen($table) ); // on recupere jusqu'au premier espace (donc le vrai nom de la 1ere table) sinon la fin.
+	$res =  '<table width="100%" class="asso_tablo" id="liste_'.$table.'">';
 	$res .= "\n<thead>\n<tr>";
-	foreach ($entetes as $entete) {
-		$res .= '<th>'. _T($entete) .'</th>';
+	foreach ($presentation as &$param) {
+		$entete = array_shift($param);
+		$res .= '<th>'. _T((strpos($entete,':') ? '' : 'asso:').$entete) .'</th>';
 	}
 	if ( count($boutons) ) {
 		$res .= '<th colspan="'. count($boutons) .'" class="actions">'. _T('asso:entete_actions') .'</th>';
 	}
 	$res .= "</tr>\n</thead><tbody>";
-	if ( !$reponse_sql && $extra['table'] ) {
-		$reponse_sql = sql_select('*', 'spip_'.$extra['table'], $extra['where'], $extra['order']) ;
-	}
 	$nbr_lignes = 0;
+	$reponse_sql = call_user_func_array('sql_select', $requete_sql);
 	while ($data = sql_fetch($reponse_sql)) {
-		$res .= '<tr'. ($extra['key']?' id="'.$data[$extra['key']].'"':'') .'>';
-		foreach ($formats as $champ=>$params) {
+		$res .= '<tr'. ($cle1?' id="'.$data[$cle1].'"':'') .'>';
+		foreach ($presentation as $champ=>$params) {
 			$format = array_shift($params);
 			switch ($format) {
 				case 'date' :
@@ -1404,17 +1429,25 @@ function association_bloc_listehtml($entetes, $reponse_sql, $formats, $boutons=a
 					$classes = 'text';
 					break;
 			}
-			if ( is_array($extra['colors']) && $nbr_couleurs=count($extra['colors']) ) {
-				$nbr_lignes++;
-				$classes .= ' '.$extra['colors'][$nbr_lignes%$nbr_couleurs];
+			if ( is_array($extra) && $nbr_couleurs=count($extra) ) { // on a bien un tableau de classes supplementaires
+				if ( $cle2 ) { // lignes colorees selon les valeurs d'un champ
+					$classes .= ' '.$extra[$data[$cle2]];
+				} else { // simple alternance de couleurs
+					$nbr_lignes++;
+					$classes .= ' '.$extra[$nbr_lignes%$nbr_couleurs];
+				}
+			} elseif ( $extra ) { // classe supplementaire appliquee inconditionnellement
+				$classes .= " $extra";
 			}
+			if ( $data[$cle1]==$selection )
+				$classes .= ' surligne';
 			$ok = array_unshift($params,$data[$champ]);
 			$res .= '<td class="'.$classes.'">'. call_user_func_array("association_formater_$format", $params) .'</td>';
 		}
 		foreach ($boutons as $params) {
 			$type = array_shift($params);
 			foreach ($params as &$param) {
-				$param = str_replace('$$', $data[$extra['key']], $param);
+				$param = str_replace('$$', $data[$cle1], $param);
 			}
 			$res .= call_user_func_array("association_bouton_$type", $params);
 		}

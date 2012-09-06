@@ -32,21 +32,20 @@ function exec_categories()
 		));
 		debut_cadre_association('calculatrice.gif','toutes_categories_de_cotisations');
 		echo association_bloc_listehtml(
-			array('asso:entete_id', 'asso:entete_code', 'asso:libelle_intitule', 'asso:entete_duree', 'asso:entete_montant', 'asso:entete_commentaire', ), // entetes
-			sql_select('*', 'spip_asso_categories', '', 'id_categorie'), // ressource requete
+			array('*', 'spip_asso_categories', '', 'id_categorie'), // requete
 			array(
-				'id_categorie' => array('entier'),
-				'valeur' => array('texte'),
-				'libelle' => array('texte'),
-				'duree' => array('duree', 'dtstart'),
-				'cotisation' => array('prix'),
-				'commentaire' => array('texte', 'propre'),
-			), // formats des donnees
+				'id_categorie' => array('asso:entete_id', 'entier'),
+				'valeur' => array('asso:entete_code', 'texte'),
+				'libelle' => array('asso:libelle_intitule', 'texte'),
+				'duree' => array('asso:entete_duree', 'duree', 'dtstart'),
+				'cotisation' => array('asso:entete_montant', 'prix'),
+				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),
+			), // entetes et formats des donnees
 			array(
-				array('categorie', 'exercice', 'id=$$', 'td'),
-				array('categorie', 'exercice', 'id=$$', 'td'),
+				array('supprimer', 'categorie', 'id=$$', 'td'),
+				array('modifier', 'categorie', 'id=$$', 'td'),
 			), // boutons d'action
-			array('key'=>'id_categorie') // extra
+			'id_categorie' // champ portant la cle des lignes et des boutons
 		);
 		fin_page_association();
 	}

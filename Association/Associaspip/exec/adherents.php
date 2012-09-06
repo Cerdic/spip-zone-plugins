@@ -29,13 +29,12 @@ function exec_adherents()
 		// TOTAUX : effectifs par statuts
 		$membres = $GLOBALS['association_liste_des_statuts'];
 		array_shift($membres); // on sort les anciens membres
-		$liste_libelles = $liste_effectifs = array();
+		$liste_decomptes = array();
 		foreach ($membres as $statut) {
 			$classe_css = $GLOBALS['association_styles_des_statuts'][$statut];
-			$liste_libelles[$classe_css] = _T('asso:adherent_liste_nombre_'.$statut);
-			$liste_effectifs[$classe_css] = sql_countsel('spip_asso_membres', "statut_interne='$statut'");
+			$liste_decomptes[$classe_css] = array( 'adherent_liste_nombre_'.$statut, sql_countsel('spip_asso_membres', "statut_interne='$statut'"), );
 		}
-		echo association_totauxinfos_effectifs('adherents', $liste_libelles, $liste_effectifs);
+		echo association_totauxinfos_effectifs('adherents', $liste_decomptes);
 		// TOTAUX : montants des cotisations durant l'annee en cours
 		$annee = date('Y'); // dans la requete SQL est : DATE_FORMAT(NOW(), '%Y') ou YEAR(NOW())
 		$data = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=$annee AND imputation=".sql_quote($GLOBALS['association_metas']['pc_cotisations']) );

@@ -37,11 +37,15 @@ function exec_dons()
 		// INTRO : nom du module et annee affichee
 		echo association_totauxinfos_intro('','dons',$annee);
 		// TOTAUX : nombre de dons selon leur nature
-		$liste_libelles = array('pair'=>'dons_financier', 'prospect'=>'dons_en_nature', 'impair'=>'autres');
-		$liste_effectifs['pair'] = sql_countsel('spip_asso_dons', "argent<>0 AND colis='' AND  DATE_FORMAT(date_don, '%Y')='$annee' ");
-		$liste_effectifs['prospect'] = sql_countsel('spip_asso_dons', "argent=0 AND colis<>'' AND  DATE_FORMAT(date_don, '%Y')='$annee' ");
-		$liste_effectifs['impair'] = sql_countsel('spip_asso_dons', "DATE_FORMAT(date_don, '%Y')='$annee' ")-$liste_effectifs['pair']-$liste_effectifs['prospect'];
-		echo association_totauxinfos_effectifs('dons', $liste_libelles, $liste_effectifs);
+		$liste_effectifs = array(
+			'argent' => sql_countsel('spip_asso_dons', "argent<>0 AND colis='' AND  DATE_FORMAT(date_don, '%Y')='$annee' "),
+			'colis' => sql_countsel('spip_asso_dons', "argent=0 AND colis<>'' AND  DATE_FORMAT(date_don, '%Y')='$annee' ")
+		);
+		echo association_totauxinfos_effectifs('dons', array(
+			'pair' => array( 'dons_financier', $liste_effectifs['argent'], ),
+			'prospect' => array('dons_en_nature', $liste_effectifs['colis'], ),
+			'impair' => array('autres', sql_countsel('spip_asso_dons', "DATE_FORMAT(date_don, '%Y')='$annee' ")-$liste_effectifs['argent']-$liste_effectifs['colis'] ),
+		));
 		// STATS sur les donnations de l'annee
 		echo association_totauxinfos_stats('donnations', 'dons', array('dons_financier'=>'argent','don_en_nature'=>'valeur',), "DATE_FORMAT(date_don, '%Y')='$annee' ");
 		// TOTAUX : montants des dons et remboursements financiers

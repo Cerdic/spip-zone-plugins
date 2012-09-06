@@ -25,7 +25,7 @@ function exec_exercices()
 		onglets_association('exercices_budgetaires_titre');
 		// notice
 		echo '';
-		// quelques stats sur les categories
+		// quelques stats sur les exrcices
 		echo association_totauxinfos_stats('tous', 'exercices', array('semaines'=>"TIMESTAMPDIFF(week,debut,fin)", 'mois'=>"TIMESTAMPDIFF(month,debut,fin)") );
 		/* portability issue on "DATEDIFF(week,debut,fin)"
 		 * MS SQL Server : "DATEDIFF(day,debut,fin)" & "DATEDIFF(week,debut,fin)" & "DATEDIFF(month,debut,fin)"
@@ -42,20 +42,19 @@ function exec_exercices()
 		) );
 		debut_cadre_association('calculatrice.gif', 'tous_les_exercices');
 		echo association_bloc_listehtml(
-			array('asso:entete_id', 'asso:entete_intitule', 'asso:exercice_entete_debut', 'asso:exercice_entete_fin', 'asso:entete_commentaire', ), // entetes
-			sql_select('*', 'spip_asso_exercices', '', 'intitule DESC'), // ressource requete
+			array('*', 'spip_asso_exercices', '', 'intitule DESC'), // requete
 			array(
-				'id_exercice' => array('entier'),
-				'intitule' => array('texte'),
-				'debut' => array('date', 'dtstart'),
-				'fin' => array('date', 'dtend'),
-				'commentaire' => array('texte', 'propre'),
-			), // formats des donnees
+				'id_exercice' => array('asso:entete_id', 'entier'),
+				'intitule' => array('asso:entete_intitule', 'texte'),
+				'debut' => array('asso:exercice_entete_debut', 'date', 'dtstart'),
+				'fin' => array('asso:exercice_entete_fin', 'date', 'dtend'),
+				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),
+			), // entetes et formats des donnees
 			array(
 				array('supprimer', 'exercice', 'id=$$', 'td'),
 				array('modifier', 'exercice', 'id=$$', 'td'),
 			), // boutons d'action
-			array('key'=>'id_exercice') // extra
+			'id_exercice' // champ portant la cle des lignes et des boutons
 		);
 		fin_page_association();
 	}

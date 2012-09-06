@@ -37,10 +37,10 @@ function exec_ventes()
 		// INTRO : nom du module et annee affichee
 		echo association_totauxinfos_intro('','ventes',$annee);
 		// TOTAUX : nombre de ventes selon etat de livraison
-		$liste_libelles = array('pair'=>'ventes_enregistrees', 'impair'=>'ventes_expediees', );
-		$liste_effectifs['pair'] = sql_countsel('spip_asso_ventes', "date_envoi<date_vente AND  DATE_FORMAT(date_vente, '%Y')=$annee ");
-		$liste_effectifs['impair'] = sql_countsel('spip_asso_ventes', "date_envoi>=date_vente AND  DATE_FORMAT(date_vente, '%Y')=$annee ");
-		echo association_totauxinfos_effectifs('ventes', $liste_libelles, $liste_effectifs);
+		echo association_totauxinfos_effectifs('ventes', array(
+			'pair' => array( 'ventes_enregistrees', sql_countsel('spip_asso_ventes', "date_envoi<date_vente AND  DATE_FORMAT(date_vente, '%Y')=$annee "), ),
+			'impair' => array( 'ventes_expediees', sql_countsel('spip_asso_ventes', "date_envoi>=date_vente AND  DATE_FORMAT(date_vente, '%Y')=$annee "), ),
+		));
 		// STATS sur les paniers/achats/commandes
 		echo association_totauxinfos_stats('paniers/commandes', 'ventes', array('entete_quantite'=>'quantite','entete_montant'=>'prix_vente*quantite',), "DATE_FORMAT(date_vente, '%Y')=$annee");
 		// TOTAUX : montants des ventes et des frais de port

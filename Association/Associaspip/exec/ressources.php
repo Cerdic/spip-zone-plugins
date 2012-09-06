@@ -25,15 +25,12 @@ function exec_ressources()
 		// INTRO : presentation du module
 		echo '<p>'._T('asso:ressources_info').'</p>';
 		// TOTAUX : nombre de ressources par statut
-		$liste_libelles['valide'] = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-verte.gif" alt="" /> '. _T('asso:ressources_libelle_statut_ok') ;
-		$liste_effectifs['valide'] = sql_countsel('spip_asso_ressources', "statut='ok' OR ROUND(statut,0)>0");
-		$liste_libelles['prospect'] = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-orange.gif" alt="" /> '. _T('asso:ressources_libelle_statut_suspendu') ;
-		$liste_effectifs['prospect'] = sql_countsel('spip_asso_ressources', "statut='suspendu' OR ROUND(statut,0)<0");
-		$liste_libelles['cv'] = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-rouge.gif" alt="" /> '. _T('asso:ressources_libelle_statut_reserve') ;
-		$liste_effectifs['cv'] = sql_countsel('spip_asso_ressources', "statut IN ('reserve',0)");
-		$liste_libelles['sorti'] = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-poubelle.gif" alt="" /> '. _T('asso:ressources_libelle_statut_sorti') ;
-		$liste_effectifs['sorti'] = sql_countsel('spip_asso_ressources', "statut IN ('sorti','',NULL)");
-		echo association_totauxinfos_effectifs('ressources', $liste_libelles, $liste_effectifs);
+		echo association_totauxinfos_effectifs('ressources', array(
+			'valide' => array( association_formater_puce('asso:ressources_libelle_statut_ok', 'verte'), sql_countsel('spip_asso_ressources', "statut='ok' OR ROUND(statut,0)>0"), ),
+			'prospect' => array( association_formater_puce('asso:ressources_libelle_statut_suspendu', 'orange'), sql_countsel('spip_asso_ressources', "statut='suspendu' OR ROUND(statut,0)<0"), ),
+			'cv' => array( association_formater_puce('asso:ressources_libelle_statut_reserve', 'rouge'), sql_countsel('spip_asso_ressources', "statut IN ('reserve',0)"), ),
+			'sorti' => array( association_formater_puce('asso:ressources_libelle_statut_sorti', 'poubelle'), sql_countsel('spip_asso_ressources', "statut IN ('sorti','',NULL)"), ),
+		));
 /* mdr : cela n'a de sens que si les ressources se pretent toutes sur la meme unite...
 		// STATS sur tous les prets
 		echo association_totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree',), "DATE_FORMAT(date_sortie, '%Y')=DATE_FORMAT(NOW(), '%Y')");
@@ -92,7 +89,7 @@ rdm */
 			}
 			echo "<tr class='$css'>";
 			echo '<td class="integer">'.$data['id_ressource'].'</td>';
-			echo '<td class="actions">'. association_bouton_faire('','puce-'.$puce.'.gif', '', '', 'title="'.$data['statut'].'"') .'</td>';
+			echo '<td class="actions">'. association_formater_puce($data['statut'], $puce, false) .'</td>';
 			echo '<td class="text">'.$data['intitule'].'</td>';
 			echo '<td class="text">'.$data['code'].'</td>';
 			echo '<td class="decimal">'.association_formater_prix($data['pu']).' / '.association_formater_duree(1,$data['ud']).'</td>';

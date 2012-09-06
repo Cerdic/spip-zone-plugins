@@ -59,21 +59,19 @@ function exec_comptes()
 			foreach ($journaux as $financier) {
 				$nombre_direction = sql_countsel('spip_asso_comptes', "journal='".$financier['journal']."' AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' AND $direction<>0 ");
 				if ($nombre_direction) { // on ne s'embarasse pas avec ceux a zero
-					$direction_libelles[$financier['journal']] = $financier['intitule'];
-					$direction_effectifs[$financier['journal']] = $nombre_direction;
+					$direction_decomptes[$financier['journal']] = array( $financier['intitule'], $nombre_direction, );
 				}
 			}
 			if (count($direction_libelles))
-				echo association_totauxinfos_effectifs(_T('asso:compte_entete_financier') .': '. _T('asso:'.$direction.'s'), $direction_libelles, $direction_effectifs); // ToDo: tri par ordre decroissant (sorte de "top")
+				echo association_totauxinfos_effectifs(_T('asso:compte_entete_financier') .': '. _T('asso:'.$direction.'s'), $direction_decomptes); // ToDo: tri par ordre decroissant (sorte de "top")
 		}
 		// TOTAUX : operations de l'exercice par type d'operation
 		$classes = array('pair'=>'produits', 'impair'=>'charges', 'cv'=>'contributions_volontaires', 'vi'=>'banques');
-		$liste_libelles = $liste_effectifs = array();
+		$liste_types = array();
 		foreach ($classes as $classe_css=>$classe_cpt) {
-			$liste_effectifs[$classe_css] = sql_countsel('spip_asso_comptes', "LEFT(imputation,1)='".$GLOBALS['association_metas']["classe_$classe_cpt"]."' AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' ");
-			$liste_libelles[$classe_css] = 'compte_liste_nombre_'.$classe_css;
+			$liste_types[$classe_css] = array( 'compte_liste_nombre_'.$classe_css, sql_countsel('spip_asso_comptes', "LEFT(imputation,1)='".$GLOBALS['association_metas']["classe_$classe_cpt"]."' AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' "), );
 		}
-		echo association_totauxinfos_effectifs('compte_entete_imputation', $liste_libelles, $liste_effectifs);
+		echo association_totauxinfos_effectifs('compte_entete_imputation', $liste_types);
 		// STATS : montants de l'exercice pour l'imputation choisie (toutes si aucune)
 		echo association_totauxinfos_stats('mouvements', 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), $where, 2);
 		// TOTAUX : montants de l'exercice pour l'imputation choisie (toutes si aucune)

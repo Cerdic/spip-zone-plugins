@@ -32,12 +32,10 @@ function exec_inscrits_activite()
 		// STATS sur les participations (nombre de personnes inscrites et montant paye)
 		echo association_totauxinfos_stats('participations', 'activites', array('activite_entete_inscrits'=>'inscrits','entete_montant'=>'montant',), "id_evenement=$id_evenement");
 		// TOTAUX : nombres d'inscrits par etat de paiement
-		$liste_libelles = $liste_effectifs = array();
-		$liste_libelles['valide'] = _T('asso:activite_entete_validees');
-		$liste_libelles['pair'] = _T('asso:activite_entete_impayees');
-		$liste_effectifs['valide'] = sql_getfetsel('COUNT(*)+SUM(inscrits) AS valide', 'spip_asso_activites', "id_evenement=$id_evenement AND date_paiement<date_inscription ");
-		$liste_effectifs['impair'] = sql_getfetsel('COUNT(*)+SUM(inscrits) AS impair', 'spip_asso_activites', "id_evenement=$id_evenement AND NOT date_paiement<date_inscription ");
-		echo association_totauxinfos_effectifs('activites', $liste_libelles, $liste_effectifs);
+		echo association_totauxinfos_effectifs('activites', array(
+			'valide' => array( 'asso:activite_entete_validees', sql_getfetsel('COUNT(*)+SUM(inscrits) AS valide', 'spip_asso_activites', "id_evenement=$id_evenement AND date_paiement<date_inscription "), ),
+			'pair' => array( 'asso:activite_entete_impayees', sql_getfetsel('COUNT(*)+SUM(inscrits) AS pair', 'spip_asso_activites', "id_evenement=$id_evenement AND NOT date_paiement<date_inscription "), ),
+		));
 		// TOTAUX : montants des participations
 		$montant = sql_fetsel('SUM(montant) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " );
 		echo association_totauxinfos_montants('participations', $montant['encaisse'], NULL);

@@ -60,12 +60,10 @@ function exec_prets()
 		$infos['statut'] =  '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-'.$puce.'.gif" title="'.$ressource['statut'].'" alt="" /> '. _T("asso:ressources_libelle_statut_$type");
 		echo association_totauxinfos_intro($ressource['intitule'], 'ressource', $id_ressource, $infos, 'asso', 'asso_ressource');
 		// TOTAUX : nombres d'emprunts de la ressource depuis le debut
-		$liste_libelles = $liste_effectifs = array();
-		$liste_libelles['pair'] = _T('asso:prets_restitues'); // restitues, termines, anciens, ...
-		$liste_libelles['impair'] = _T('asso:prets_encours'); // dus, en attente, en cours, nouveaux, ...
-		$liste_effectifs['pair'] = sql_countsel('spip_asso_prets', "id_ressource=$id_ressource AND date_retour>date_sortie");
-		$liste_effectifs['impair'] = sql_countsel('spip_asso_prets', "id_ressource=$id_ressource AND date_retour<=date_sortie");
-		echo association_totauxinfos_effectifs('prets', $liste_libelles, $liste_effectifs);
+		echo association_totauxinfos_effectifs('prets', array(
+			'pair' => array( 'prets_restitues', sql_countsel('spip_asso_prets', "id_ressource=$id_ressource AND date_retour>date_sortie"), ), // restitues, termines, anciens, ...
+			'impair' => array( 'prets_encours', sql_countsel('spip_asso_prets', "id_ressource=$id_ressource AND date_retour<=date_sortie"), ), // dus, en attente, en cours, nouveaux, ...
+		));
 		// STATS sur la duree et le montant des emprunts
 		echo association_totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree','entete_montant'=>'duree*prix_unitaire',), "id_ressource=$id_ressource");
 		// TOTAUX : montants generes par les umprunts de la ressources

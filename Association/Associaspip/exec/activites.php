@@ -36,20 +36,21 @@ function exec_activites()
 		onglets_association('titre_onglet_activite', 'activites');
 		// TOTAUX : nombre d'activites de l'annee en cours repartis par mots-clefs
 		// TOTAUX : nombre d'activites de l'annee en cours repartis par iscriptions
-		$liste_libelles = $liste_effectifs = array();
-		$liste_libelles['pair'] = _T('asso:activites_avec_inscrits');
-		$liste_effectifs['pair'] = sql_count( sql_select('*, SUM(a.inscrits)', 'spip_asso_activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement ', "DATE_FORMAT(e.date_debut, '%Y')=$annee",'a.id_evenement', '', '', "SUM(a.inscrits)>0") );
-		$liste_libelles['impair'] = _T('asso:activites_sans_inscrits');
+		$liste_effectifs = array();
+		$liste_effectifs['pair'] = sql_count(sql_select('*, SUM(a.inscrits)', 'spip_asso_activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement ', "DATE_FORMAT(e.date_debut, '%Y')=$annee",'a.id_evenement', '', '', "SUM(a.inscrits)>0"));
 		$liste_effectifs['impair'] = sql_countsel('spip_asso_activites AS a LEFT JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', "DATE_FORMAT(e.date_debut, '%Y')=$annee",'a.id_evenement', "SUM(a.inscrits)=0");
 		$liste_effectifs['impair'] = sql_countsel('spip_evenements', "DATE_FORMAT(date_debut, '%Y')=$annee")-$liste_effectifs['pair']; // le monde a l'envers... mais ca fonctionne
-		echo association_totauxinfos_effectifs('activites', $liste_libelles, $liste_effectifs);
+		echo association_totauxinfos_effectifs('activites', array(
+			'pair'=>array( 'asso:activites_avec_inscrits', $liste_effectifs['pair'], ),
+			'impair'=>array( 'asso:activites_sans_inscrits', $liste_effectifs['impair'], ),
+		));
 /*
 		// STATS sur toutes les participations
 		echo association_totauxinfos_stats('participations_par_personne_par_activite', 'activites', array('activite_entete_inscrits'=>'inscrits','entete_montant'=>'montant',), "DATE_FORMAT(date, '%Y')=$annee");
+*/
 		// TOTAUX : montants des participations durant l'annee en cours
 		$data = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=$annee AND imputation=".sql_quote($GLOBALS['association_metas']['pc_activites']) );
 		echo association_totauxinfos_montants('activites', $data['somme_recettes'], $data['somme_depenses']);
-*/
 		// datation et raccourci vers la gestion des evenements
 		if ( test_plugin_actif('SIMPLECAL') ) { // gestion des evenements avec Simple Calendrier
 			raccourcis_association(array(), array(
@@ -70,7 +71,7 @@ function exec_activites()
 		echo "\n<table width='100%' class='asso_tablo_filtres'><tr>";
 		echo '<td id="filtre_annee">'. association_selectionner_annee($annee, 'evenements', 'debut') .'</td>';
 #		echo '<td id="filtre_id">'. association_selectionner_id($id_evenement) .'</td>';
-		if (test_plugin_actif('AGENDA')) { /* le plugin "Agenda 2" peut associer des mots-cles aux evenements : les proposer comme critere de filtrage */
+		if (test_plugin_actif('AGENDA')) { // le plugin "Agenda 2" peut associer des mots-cles aux evenements : les proposer comme critere de filtrage
 			if ($id_mot) {
 				$mc_sel = ', M.id_mot AS motact';
 				$mc_join = ' LEFT JOIN spip_mots_evenements AS A ON  A.id_evenement=E.id_evenement LEFT JOIN spip_mots AS M ON A.id_mot=M.id_mot';
