@@ -10,7 +10,7 @@
 (function($){
 	$(function(){
 		$.getScript('#CHEMIN{javascript/jquery.qbeforeafter.js}', function(){
-			$('.beforeafter').qbeforeafter({defaultgap:50, leftgap:0, rightgap:0, caption: false, reveal: 0.5});
+			$('.beforeafter').qbeforeafter({defaultgap:50, leftgap:0, rightgap:0, caption: [(#ENV{legende}|?{true,false})], reveal: 0.5});
 		});
 	});
 })(jQuery);

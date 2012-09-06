@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Images compare</nom>
 	<auteur>b_b, Kevin Liew</auteur>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<etat>stable</etat>
 	<prefix>imgcompare</prefix>
 	<slogan>Comparer des images</slogan>
