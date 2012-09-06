@@ -12,6 +12,7 @@
  *
  * [TODO] Migrer en 3...
 **/
+/*
 function puce_statut_formulaires_reponse_dist($id, $statut, $id_rubrique, $type='formulaires_reponse', $ajax=false){
 	global $lang_objet;
 	
@@ -63,3 +64,4 @@ function puce_statut_formulaires_reponse_dist($id, $statut, $id_rubrique, $type=
 	. $inser_puce
 	. '</span>';
 }
+*/

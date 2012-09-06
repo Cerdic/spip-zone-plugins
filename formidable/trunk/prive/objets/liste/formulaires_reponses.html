@@ -15,7 +15,7 @@
 			<th class="date" scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
 			<th class="auteur" scope='col'>[(#TRI{id_auteur,<:formidable:reponses_auteur:>,ajax})]</th>
 			<th class="ip" scope='col'>[(#TRI{ip,<:formidable:reponses_ip:>,ajax})]</th>
-			<th class="titre" scope='col'></th>
+			<th class="action" scope='col'></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -31,7 +31,7 @@
 				<//B_auteur>
 			</td>
 			<td class="ip">#IP</td>
-			<td class="titre">
+			<td class="action">
 				<a href="[(#URL_ECRIRE{formulaires_reponse}|parametre_url{id_formulaires_reponse,#ID_FORMULAIRES_REPONSE})]" title="<:formidable:reponses_voir_detail:>">
 					<img src="#CHEMIN{images/formulaire-reponse-24.png}" alt="<:formidable:reponses_voir_detail:>" />
 				</a>

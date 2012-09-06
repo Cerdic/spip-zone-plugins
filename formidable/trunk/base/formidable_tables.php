@@ -74,6 +74,54 @@ function formidable_declarer_tables_objets_sql($tables) {
 		  'titre' => 5, 'descriptif' => 3
 		),
 	);
+
+	$tables['spip_formulaires_reponses'] = array(
+		'type'=>'formulaires_reponse',
+		'titre' => "'' AS titre, '' AS lang",
+		'date' => 'date',
+		'principale' => 'oui',
+
+		'field' => array(
+			"id_formulaires_reponse" => "bigint(21) NOT NULL",
+			"id_formulaire" => "bigint(21) NOT NULL default 0",
+			"date" => "datetime NOT NULL default '0000-00-00 00:00:00'",
+			"ip" => "varchar(255) NOT NULL default ''",
+			"id_auteur" => "bigint(21) NOT NULL default 0",
+			"cookie" => "varchar(255) NOT NULL default ''",
+			"statut" => "varchar(10) NOT NULL default ''",
+			"maj" => "timestamp"
+		),
+		'key' => array(
+			"PRIMARY KEY" => "id_formulaires_reponse",
+			"KEY id_formulaire" => "id_formulaire",
+			"KEY id_auteur" => "id_auteur",
+			"KEY cookie" => "cookie"
+		),
+		'join' => array(
+			'id_formulaires_reponse' => 'id_formulaires_reponse',
+			'id_formulaire' => 'id_formulaire',
+			'id_auteur' => 'id_auteur'
+		),
+		'statut'=> array(
+			array(
+				'champ' => 'statut',
+				'publie' => 'publie',
+				'previsu' => 'publie,prop',
+				'exception' => array('statut', 'tout'),
+			)
+		),
+		'texte_changer_statut' => 'formulaires_reponse:changer_statut',
+		'statut_titres' => array(
+			'prop'=>'info_article_propose',
+			'publie'=>'info_article_publie',
+			'poubelle'=>'info_article_supprime'
+		),
+		'statut_textes_instituer' => array(
+			'prop' => 'texte_statut_propose_evaluation',
+			'publie' => 'texte_statut_publie',
+			'refuse' => 'texte_statut_poubelle',
+		),
+	);
 	return $tables;
 }
 
@@ -87,34 +135,6 @@ function formidable_declarer_tables_objets_sql($tables) {
  *     Description complétée des tables
 **/
 function formidable_declarer_tables_principales($tables_principales){
-
-	// Table formulaires_reponses 
-	$formulaires_reponses = array(
-		"id_formulaires_reponse" => "bigint(21) NOT NULL",
-		"id_formulaire" => "bigint(21) NOT NULL default 0",
-		"date" => "datetime NOT NULL default '0000-00-00 00:00:00'",
-		"ip" => "varchar(255) NOT NULL default ''",
-		"id_auteur" => "bigint(21) NOT NULL default 0",
-		"cookie" => "varchar(255) NOT NULL default ''",
-		"statut" => "varchar(10) NOT NULL default ''",
-		"maj" => "timestamp"
-	);
-	$formulaires_reponses_cles = array(
-		"PRIMARY KEY" => "id_formulaires_reponse",
-		"KEY id_formulaire" => "id_formulaire",
-		"KEY id_auteur" => "id_auteur",
-		"KEY cookie" => "cookie"
-	);
-	$tables_principales['spip_formulaires_reponses'] = array(
-		'field' => &$formulaires_reponses,
-		'key' => &$formulaires_reponses_cles,
-		'join'=> array(
-			'id_formulaires_reponse' => 'id_formulaires_reponse',
-			'id_formulaire' => 'id_formulaire',
-			'id_auteur' => 'id_auteur'
-		)
-	);
-
 
 	// Table formulaires_reponses_champs 
 	$formulaires_reponses_champs = array(
