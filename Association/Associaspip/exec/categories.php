@@ -37,7 +37,7 @@ function exec_categories()
 				'id_categorie' => array('asso:entete_id', 'entier'),
 				'valeur' => array('asso:entete_code', 'texte'),
 				'libelle' => array('asso:libelle_intitule', 'texte'),
-				'duree' => array('asso:entete_duree', 'duree', 'dtstart'),
+				'duree' => array('asso:entete_duree', 'duree', 'M'),
 				'cotisation' => array('asso:entete_montant', 'prix'),
 				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),
 			), // entetes et formats des donnees

@@ -623,9 +623,9 @@ function association_formater_texte($texte, $filtre='', $params=array() )
  * @return string
  *   Dessin et texte
  */
-function association_formater_puce($statut, $icone, $texte='', $acote=TRUE)
+function association_formater_puce($statut, $icone,  $acote=TRUE)
 {
-	return $acote ? association_bouton_faire('', 'puce-'.$icone.'.gif', '', '', '') ' '._T("asso:$statut") : association_bouton_faire($statut, 'puce-'.$icone.'.gif', '', '', '') ; // c'est comme un bouton... mais n'a pas d'action
+	return $acote ? association_bouton_faire('', 'puce-'.$icone.'.gif', '', '', '').' '._T("asso:$statut") : association_bouton_faire($statut, 'puce-'.$icone.'.gif', '', '', '') ; // c'est comme un bouton... mais n'a pas d'action
 }
 
 /** @} */
@@ -1151,7 +1151,7 @@ function association_totauxinfos_effectifs($legende='', $lignes, $decimales_sign
 	$nombre = $nombre_total = 0;
 	$res = '<table width="100%" class="asso_infos">';
 	$res .= '<caption>'. _T('asso:totaux_nombres', array('de_par'=>_T("local:$legende"))) .'</caption><tbody>';
-	foreach ($tlgnes as $classe_css=>$params) {
+	foreach ($lignes as $classe_css=>$params) {
 		$res .= '<tr class="'.$classe_css.'">';
 		$res .= '<td class"text">'._T('asso:'.$params[0]).'</td>';
 		$res .= '<td class="' .($decimales_significatives?'decimal':'integer') .'">'. association_formater_nombre($params[1],$decimales_significatives) .'</td>';
@@ -1159,7 +1159,7 @@ function association_totauxinfos_effectifs($legende='', $lignes, $decimales_sign
 		$res .= '</tr>';
 	}
 	$res .= '</tbody>';
-	if (count($table_nombres)>1) {
+	if (count($lignes)>1) {
 		$res .= '<tfoot>';
 		$res .= '<tr><th class="text">'._T('asso:liste_nombre_total').'</th>';
 		$res .= '<th class="' .($decimales_significatives?'decimal':'integer') .'">'. association_formater_nombre($nombre_total,$decimales_significatives) .'</th></tr>';
