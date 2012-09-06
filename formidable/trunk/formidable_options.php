@@ -65,6 +65,7 @@ $GLOBALS['formulaires']['editer_formulaire'] = array(
 			'datas' => array(
 				'formulaire' => _T('formidable:editer_apres_choix_formulaire'),
 				'valeurs' => _T('formidable:editer_apres_choix_valeurs'),
+				'stats' => _T('formidable:editer_apres_choix_stats'),
 				'rien' => _T('formidable:editer_apres_choix_rien'),
 				'redirige' => _T('formidable:editer_apres_choix_redirige'),
 			),

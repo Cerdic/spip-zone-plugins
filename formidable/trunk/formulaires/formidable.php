@@ -108,7 +108,18 @@ function formulaires_formidable_charger($id_formulaire, $valeurs=array(), $id_fo
 		}
 		else{
 			$contexte['editable'] = false;
-			$contexte['message_erreur'] = _T('formidable:traiter_enregistrement_erreur_deja_repondu');
+			// le formulaire a déjà été répondu.
+			// peut être faut il afficher les statistiques des réponses
+			if ($formulaire['apres'] == 'stats') {
+				// Nous sommes face à un sondage auquel on a déjà répondu !
+				// On remplace complètement l'affichage du formulaire
+				// par un affichage du résultat de sondage !
+				$contexte['_remplacer_formulaire'] = recuperer_fond('modeles/formulaire_analyse', array(
+					'id_formulaire' => $formulaire['id_formulaire'],
+				));
+			} else {
+				$contexte['message_erreur'] = _T('formidable:traiter_enregistrement_erreur_deja_repondu');
+			}
 		}
 	}
 	else{
@@ -194,11 +205,11 @@ function formulaires_formidable_traiter($id_formulaire, $valeurs=array(), $id_fo
 	$id_formulaire = intval(_request('id_formulaire'));
 	$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id_formulaire);
 	$traitements = unserialize($formulaire['traitements']);
-		
+
 	// selon le choix, le formulaire se remet en route à la fin ou non
 	$retours['editable'] = ($formulaire['apres']=='formulaire');
 	$retours['formidable_afficher_apres'] = $formulaire['apres'];
-	
+
 	// Si on a une redirection valide
 	if (($formulaire['apres']== "redirige") AND ($formulaire['url_redirect']!="")) {
 		refuser_traiter_formulaire_ajax();

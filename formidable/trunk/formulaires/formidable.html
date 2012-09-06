@@ -1,3 +1,7 @@
+<BOUCLE_remplacer_le_formulaire(CONDITION){si #ENV{_remplacer_formulaire}}>
+	[(#REM) Afficher du HTML si prévu par un plugin ou pour les stats ]
+	[(#ENV**{_remplacer_formulaire})]
+</BOUCLE_remplacer_le_formulaire>
 <div class="formulaire_spip formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id,nouveau})]">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -34,3 +38,4 @@
 	]
 	<br />
 </div>
+<//B_remplacer_le_formulaire>

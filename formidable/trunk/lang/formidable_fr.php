@@ -16,6 +16,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_formulaires' => 'Formulaires',
 
+	// C
+	'cfg_analyse_classe_label' => 'Classe CSS de la barre de progression',
+	'cfg_analyse_classe_explication' => 'Vous pouvez indiquer des classes CSS qui seront ajoutées
+		sur le conteneur de chaque graphique, tel que <code>gray</code>,<code>blue</code>,
+		<code>orange</code>, <code>green</code> ou tout ce qui vous plairait !',
+	'cfg_titre_parametrages_analyse' => 'Paramétrages de l\'analyse des réponses',
+	'cfg_titre_page_configurer_formidable' => 'Configurer Formidable',
+
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
 	'echanger_formulaire_wcs_importer' => 'W.C.S. (.wcs)',
@@ -23,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_apres_choix_formulaire' => 'Le formulaire, à nouveau',
 	'editer_apres_choix_redirige' => 'Rediriger vers une nouvelle adresse',
 	'editer_apres_choix_rien' => 'Rien du tout',
+	'editer_apres_choix_stats' => 'Les statistiques des réponses',
 	'editer_apres_choix_valeurs' => 'Les valeurs saisies',
 	'editer_apres_explication' => 'Après validation, afficher à la place du formulaire :',
 	'editer_apres_label' => 'Afficher ensuite',
