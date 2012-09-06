@@ -258,6 +258,34 @@ function notifications_creer_auteur($email){
 	return $a;
 }
 
+/**
+ * Pretraiter le mail/sujet quand il est au format html
+ * pour la fonction notifications_envoyer_mails qui ne sait traiter que les mails html
+ *
+ * @param string $email
+ * @param $texte_ou_html
+ */
+function notifications_envoyer_mails_texte_ou_html($email, $texte_ou_html){
+	$texte_ou_html = trim($texte_ou_html);
+
+	// tester si le mail est deja en html
+	if (substr($texte_ou_html,0,1)=="<"
+	  AND substr($texte_ou_html,-1,1)==">"
+	  AND stripos($texte_ou_html,"</html>")!==false){
+
+		// dans ce cas on ruse un peu : extraire le sujet du title
+		$sujet = "";
+		if (preg_match(",<title>(.*)</title>,Uims",$texte_ou_html,$m))
+			$sujet = $m[1];
+
+		// et envoyer un content-type pour envoyer_mail
+		return notifications_envoyer_mails($email, $texte_ou_html, $sujet, "","Content-Type: text/html\n");
+	}
+	else
+		// texte brut, on passe
+		return notifications_envoyer_mails($email, $texte_ou_html);
+}
+
 /* TODO
 	// Envoyer un message de bienvenue/connexion au posteur du forum,
 	// dans le cas ou il ne s'est pas authentifie

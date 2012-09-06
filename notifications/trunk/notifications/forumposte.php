@@ -88,7 +88,7 @@ function notifications_forumposte_dist($quoi, $id_forum, $options) {
 		}
 
 		$texte = $email_notification_forum($t, $email, $contexte);
-		notifications_envoyer_mails($email, $texte);
+		notifications_envoyer_mails_texte_ou_html($email, $texte);
 	}
 
 	// Notifier les autres si le forum est valide

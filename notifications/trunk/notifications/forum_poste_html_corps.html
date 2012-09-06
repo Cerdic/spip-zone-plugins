@@ -1,0 +1,37 @@
+[
+(#STATUT|=={spam}|oui) <h3>SPAM</h3><br /><br />]
+
+[
+(#TEXTE*)
+]
+
+<hr/>
+<h2>#TITRE</h2>[<br />
+(#ENV{par_auteur})
+][
+<p>
+<a href="(#ENV{url_site})">#NOM_SITE|sinon{#ENV{url_site}}</a>
+</p>][
+
+<p><strong><:forum:info_liens_texte:>&nbsp;:</strong><br />
+(#LIENS)
+</p>
+<hr/>
+]
+
+<p>
+[
+(#STATUT|=={publie}|oui)<:forum:forum_ne_repondez_pas:>][
+(#STATUT|=={prop}|oui)<:notifications:message_a_valider:>][
+<a href="(#ENV{url}|url_absolue)">[(#ENV{url}|url_absolue)]</a>]
+</p>
+
+<p>
+<:form_forum_message_auto:>
+</p>
+
+<ul>
+	[<li><a href="(#ENV{url_moderer_publie})"><:notifications:info_lien_publier_commentaire:></a></li>]
+	[<li><a href="(#ENV{url_moderer_off})"><:notifications:info_lien_supprimer_commentaire:></a></li>]
+	[<li><a href="(#ENV{url_moderer_spam})"><:notifications:info_lien_signaler_spam_commentaire:></a></li>]
+</ul>
