@@ -119,7 +119,6 @@ function critere_stats($idb, &$boucles, $crit){
 /* $func : array(FUNC => balise) */
 function calcul_critere_fonctions($func, $idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
-	$_fusion = calculer_liste($crit->param[1], array(), $boucles, $boucle->id_parent);
 
 	$params = $crit->param;
 	$champ = reset($params);
