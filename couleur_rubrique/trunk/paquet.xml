@@ -1,11 +1,11 @@
 <paquet
 prefix="pb_couleur_rubrique"
 categorie="maintenance"
-version="2.1.1"
-etat="stable"
+version="2.1.2"
+etat="test"
 compatibilite="[3.0.0;3.*]"
 logo="img_pack/icon.png"
-documentation="http://www.spip-contrib.net/Couleur-de-Rubrique"
+documentation="http://www.spip-contrib.net/Couleur-de-Rubrique-pour-SPIP-3"
 	>	
 
 	<nom>Couleur de rubrique</nom>
