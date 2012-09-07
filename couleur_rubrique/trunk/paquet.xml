@@ -5,7 +5,7 @@ version="2.1.2"
 etat="test"
 compatibilite="[3.0.0;3.*]"
 logo="img_pack/icon.png"
-documentation="http://www.spip-contrib.net/Couleur-de-Rubrique-pour-SPIP-3"
+documentation="http://www.spip-contrib.net/Couleur-de-Rubrique"
 	>	
 
 	<nom>Couleur de rubrique</nom>
