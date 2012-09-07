@@ -1,8 +1,8 @@
 <paquet
 prefix="pb_couleur_rubrique"
 categorie="maintenance"
-version="2.1.2"
-etat="stable"
+version="2.2.0"
+etat="test"
 compatibilite="[3.0.0;3.*]"
 logo="img_pack/icon.png"
 documentation="http://www.spip-contrib.net/Couleur-de-Rubrique"
