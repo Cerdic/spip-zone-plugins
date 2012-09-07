@@ -65,6 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_sql' => 'Définition SQL',
 	'label_table' => 'Objet',
 	'label_traitements' => 'Traitements automatiques',
+	'label_versionner' => 'Versionner le contenu du champ',
 	'legend_declaration' => 'Déclaration',
 	'legend_options_saisies' => 'Options de la saisie',
 	'legend_options_techniques' => 'Technique',
@@ -74,7 +75,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_des_extras' => 'Liste des champs extras',
 	'liste_des_extras_possibles' => 'Liste des champs présents non gérés',
 	'liste_objets_applicables' => 'Liste des objets éditoriaux',
-	'label_versionner' => 'Versionner le contenu du champ',
 
 	// N
 	'nb_element' => '1 élément',

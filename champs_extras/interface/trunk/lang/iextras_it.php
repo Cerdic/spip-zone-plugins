@@ -67,6 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_sql' => 'Definizione SQL',
 	'label_table' => 'Oggetto',
 	'label_traitements' => 'Trattamenti automatici',
+	'label_versionner' => 'Versionner le contenu du champ', # NEW
 	'legend_declaration' => 'Dichiarazione',
 	'legend_options_saisies' => 'Opzioni di inserimento',
 	'legend_options_techniques' => 'Opzioni tecniche',
@@ -106,6 +107,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_pour_saisie' => 'Afficher une saisie de type :', # NEW
 	'precisions_pour_traitements' => 'Applica automaticamente un trattamento
 		per il segnaposto #NOME_DEL_CAMPO:',
+	'precisions_pour_versionner' => 'Le versionnage s\'appliquera uniquement si le plugin
+		«révisions» est actif et que l\'objet éditorial du champs extra est lui-même versionné', # NEW
 
 	// R
 	'radio_restrictions_auteur_admin' => 'Seulement les administrateurs', # NEW

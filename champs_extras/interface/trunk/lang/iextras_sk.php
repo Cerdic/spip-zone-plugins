@@ -67,6 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_sql' => 'Definícia SQL',
 	'label_table' => 'Objekt',
 	'label_traitements' => 'Automatizované spracovanie',
+	'label_versionner' => 'Versionner le contenu du champ', # NEW
 	'legend_declaration' => 'Deklarácia',
 	'legend_options_saisies' => 'Možnosti vstupu',
 	'legend_options_techniques' => 'Technické',
@@ -106,6 +107,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_pour_restrictions_secteurs' => 'Identifikátory sektorov, ktoré sa majú obmedziť (oddeľovač ":")',
 	'precisions_pour_saisie' => 'Zobraziť vstup typu:',
 	'precisions_pour_traitements' => 'Automaticky spracovať výsledok tagu #NOM_DU_CHAMP:',
+	'precisions_pour_versionner' => 'Le versionnage s\'appliquera uniquement si le plugin
+		«révisions» est actif et que l\'objet éditorial du champs extra est lui-même versionné', # NEW
 
 	// R
 	'radio_restrictions_auteur_admin' => 'Iba administrátori',
