@@ -1,12 +1,14 @@
 <?php
 
 /**
- * Options globales chargées à chaque hit
+ * Gestion des puces d'action rapide de formulaires
  *
  * @package SPIP\Formidable\Puce_statut
 **/
 
 /**
+ * Gestion des puces statuts des formulaires
+ * 
  * Retourne le contenu d'une puce avec changement de statut possible
  * si on en a l'autorisation, sinon simplement l'image de la puce
  *
