@@ -10,11 +10,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'analyse_avec_reponse' => 'Neprázdne odpovede',
 	'analyse_longueur_moyenne' => 'Priemerná dĺžka vyjadrená počtom slov',
-	'analyse_reponses_total' => '@nb@ ľudí vyplnilo tento formulár.',
+	'analyse_nb_reponses_total' => '@nb@ personnes ont répondu à ce formulaire.', # NEW
 	'analyse_sans_reponse' => 'Nevyplnené',
+	'analyse_une_reponse_total' => 'Une personne a répondu à ce formulaire.', # NEW
+	'analyse_zero_reponse_total' => 'Aucune personne n\'a répondu à ce formulaire.', # NEW
+	'aucun_traitement' => 'Aucun traitement', # NEW
 
 	// B
 	'bouton_formulaires' => 'Formuláre',
+
+	// C
+	'cfg_analyse_classe_explication' => 'Vous pouvez indiquer des classes CSS qui seront ajoutées
+		sur le conteneur de chaque graphique, tel que <code>gray</code>,<code>blue</code>,
+		<code>orange</code>, <code>green</code> ou tout ce qui vous plairait !', # NEW
+	'cfg_analyse_classe_label' => 'Classe CSS de la barre de progression', # NEW
+	'cfg_titre_page_configurer_formidable' => 'Configurer Formidable', # NEW
+	'cfg_titre_parametrages_analyse' => 'Paramétrages de l\'analyse des réponses', # NEW
 
 	// E
 	'echanger_formulaire_forms_importer' => 'formuláre Forms & Tables (.xml)',
@@ -23,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_apres_choix_formulaire' => 'Formulár, znova',
 	'editer_apres_choix_redirige' => 'Presmerovať na novú adresu',
 	'editer_apres_choix_rien' => 'Vôbec nič',
+	'editer_apres_choix_stats' => 'Les statistiques des réponses', # NEW
 	'editer_apres_choix_valeurs' => 'Zadané hodnoty',
 	'editer_apres_explication' => 'Po potvrdení namiesto formulára zobraziť:',
 	'editer_apres_label' => 'Zobraziť potom',
@@ -76,11 +88,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_nom_noisette_formulaire' => 'Formulár',
 
 	// R
+	'reponse_aucune' => 'Aucune réponse', # NEW
 	'reponse_intro' => '@auteur@ vyplnil(a) formulár @formulaire@',
 	'reponse_numero' => 'Odpoveď číslo:',
 	'reponse_statut' => 'Táto odpoveď je:',
 	'reponse_supprimer' => 'Odstrániť túto odpoveď',
 	'reponse_supprimer_confirmation' => 'Určite chcete vymazať túto odpoveď?',
+	'reponse_une' => '1 réponse', # NEW
 	'reponses_analyse' => 'Analýza odpovedí',
 	'reponses_anonyme' => 'Anonym',
 	'reponses_auteur' => 'Používateľ',
@@ -89,10 +103,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_liste' => 'Zoznam odpovedí',
 	'reponses_liste_prop' => 'Odpovede čakajúce na potvrdenie',
 	'reponses_liste_publie' => 'Všetky platné odpovede',
+	'reponses_nb' => '@nb@ réponses', # NEW
 	'reponses_voir_detail' => 'Zobraziť odpoveď',
 	'retour_aucun_traitement' => 'Vaša odpoveď bola odoslaná, ale k tomuto formuláru nebola definovaná žiadna funkcia. Nič neurobí. :-)',
 
 	// T
+	'titre_cadre_raccourcis' => 'Raccourcis', # NEW
+	'traitements_actives' => 'Traitements activés', # NEW
 	'traitements_aide_memoire' => 'Pomocná pamäť:',
 	'traitements_avertissement_creation' => 'Zmeny polí formulára boli úspešne uložené. Teraz môžete určiť, aké funkcie sa použijú pri spracúvaní formulára.',
 	'traitements_avertissement_modification' => 'Zmeny v poliach formulára boli úspešne uložené. <strong>Niektoré funkcie možno budú musieť byť kvôli ním prestavené.</strong>',

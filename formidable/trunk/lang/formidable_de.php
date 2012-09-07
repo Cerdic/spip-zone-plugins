@@ -10,11 +10,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'analyse_avec_reponse' => 'Ausgefüllte Antworten',
 	'analyse_longueur_moyenne' => 'Durchschnittliche Anzahl Worte',
-	'analyse_reponses_total' => '@nb@ Personen haben dieses Formular ausgefüllt.',
+	'analyse_nb_reponses_total' => '@nb@ personnes ont répondu à ce formulaire.', # NEW
 	'analyse_sans_reponse' => 'Leere Antworten',
+	'analyse_une_reponse_total' => 'Une personne a répondu à ce formulaire.', # NEW
+	'analyse_zero_reponse_total' => 'Aucune personne n\'a répondu à ce formulaire.', # NEW
+	'aucun_traitement' => 'Aucun traitement', # NEW
 
 	// B
 	'bouton_formulaires' => 'Formulare',
+
+	// C
+	'cfg_analyse_classe_explication' => 'Vous pouvez indiquer des classes CSS qui seront ajoutées
+		sur le conteneur de chaque graphique, tel que <code>gray</code>,<code>blue</code>,
+		<code>orange</code>, <code>green</code> ou tout ce qui vous plairait !', # NEW
+	'cfg_analyse_classe_label' => 'Classe CSS de la barre de progression', # NEW
+	'cfg_titre_page_configurer_formidable' => 'Configurer Formidable', # NEW
+	'cfg_titre_parametrages_analyse' => 'Paramétrages de l\'analyse des réponses', # NEW
 
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
@@ -23,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_apres_choix_formulaire' => 'Le formulaire, à nouveau', # NEW
 	'editer_apres_choix_redirige' => 'Rediriger vers une nouvelle adresse', # NEW
 	'editer_apres_choix_rien' => 'Rien du tout', # NEW
+	'editer_apres_choix_stats' => 'Les statistiques des réponses', # NEW
 	'editer_apres_choix_valeurs' => 'Les valeurs saisies', # NEW
 	'editer_apres_explication' => 'Après validation, afficher à la place du formulaire :', # NEW
 	'editer_apres_label' => 'Afficher ensuite', # NEW
@@ -76,11 +88,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_nom_noisette_formulaire' => 'Formulaire', # NEW
 
 	// R
+	'reponse_aucune' => 'Aucune réponse', # NEW
 	'reponse_intro' => '@auteur@ hat auf das Formular geantwortet @formulaire@',
 	'reponse_numero' => 'Antwort Nummer:',
 	'reponse_statut' => 'Diese Antwort ist:',
 	'reponse_supprimer' => 'Diese Antwort löschen',
 	'reponse_supprimer_confirmation' => 'Wollen sie diese Antwor wirklich löschen?',
+	'reponse_une' => '1 réponse', # NEW
 	'reponses_analyse' => 'Analyse der Antworten',
 	'reponses_anonyme' => 'Anonym',
 	'reponses_auteur' => 'Nutzer',
@@ -89,10 +103,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_liste' => 'Liste der Antworten',
 	'reponses_liste_prop' => 'Nicht freigegebene Antworten',
 	'reponses_liste_publie' => 'Alle freigegebenen Antworten',
+	'reponses_nb' => '@nb@ réponses', # NEW
 	'reponses_voir_detail' => 'Antwort anzeigen',
 	'retour_aucun_traitement' => 'Ihre Antwort wurde gesendet, jedoch wurde keine Verarbeitungsoption für das Formular festgelegt. Deshalb geschieht mit den Daten aus diesem Formular überhaupt nichts. :)',
 
 	// T
+	'titre_cadre_raccourcis' => 'Raccourcis', # NEW
+	'traitements_actives' => 'Traitements activés', # NEW
 	'traitements_aide_memoire' => 'Merkzettel:',
 	'traitements_avertissement_creation' => 'Die Änderungen der Felder des Formulars wurden erfolgreich gespeichert. Jetzt können sie festlege, welche Verarbeitungsschritte nach dem Senden des Formulars ausgef',
 	'traitements_avertissement_modification' => 'Die Änderungen der Felder des Formulars wurden erfolgreich gespeichert. <strong>Manche Verarbeitungsoptionen müssen entsprechend neu konfiguriert werden.</strong>',

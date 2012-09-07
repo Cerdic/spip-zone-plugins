@@ -10,11 +10,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'analyse_avec_reponse' => 'Risposte non vuote',
 	'analyse_longueur_moyenne' => 'Lunghezza media in numero di parole',
-	'analyse_reponses_total' => '@nb@ utenti hanno risposto a questo modulo.',
+	'analyse_nb_reponses_total' => '@nb@ personnes ont répondu à ce formulaire.', # NEW
 	'analyse_sans_reponse' => 'Risposte vuote',
+	'analyse_une_reponse_total' => 'Une personne a répondu à ce formulaire.', # NEW
+	'analyse_zero_reponse_total' => 'Aucune personne n\'a répondu à ce formulaire.', # NEW
+	'aucun_traitement' => 'Aucun traitement', # NEW
 
 	// B
 	'bouton_formulaires' => 'Moduli',
+
+	// C
+	'cfg_analyse_classe_explication' => 'Vous pouvez indiquer des classes CSS qui seront ajoutées
+		sur le conteneur de chaque graphique, tel que <code>gray</code>,<code>blue</code>,
+		<code>orange</code>, <code>green</code> ou tout ce qui vous plairait !', # NEW
+	'cfg_analyse_classe_label' => 'Classe CSS de la barre de progression', # NEW
+	'cfg_titre_page_configurer_formidable' => 'Configurer Formidable', # NEW
+	'cfg_titre_parametrages_analyse' => 'Paramétrages de l\'analyse des réponses', # NEW
 
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
@@ -23,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_apres_choix_formulaire' => 'Il modulo, nuovamente',
 	'editer_apres_choix_redirige' => 'Redirigi verso un nuovo indirizzo',
 	'editer_apres_choix_rien' => 'Assolutamente niente',
+	'editer_apres_choix_stats' => 'Les statistiques des réponses', # NEW
 	'editer_apres_choix_valeurs' => 'I valori immessi',
 	'editer_apres_explication' => 'Dopo la validazione, mostra al posto del modulo:',
 	'editer_apres_label' => 'Mostra di seguito',
@@ -76,11 +88,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_nom_noisette_formulaire' => 'Modulo',
 
 	// R
+	'reponse_aucune' => 'Aucune réponse', # NEW
 	'reponse_intro' => '@auteur@ ha risposto al modulo @formulaire@',
 	'reponse_numero' => 'Risposta numero:',
 	'reponse_statut' => 'Questa risposta è:',
 	'reponse_supprimer' => 'Elimina questa risposta',
 	'reponse_supprimer_confirmation' => 'Sei sicuro di voler eliminare questa risposta?',
+	'reponse_une' => '1 réponse', # NEW
 	'reponses_analyse' => 'Analisi delle risposte',
 	'reponses_anonyme' => 'Anonimo',
 	'reponses_auteur' => 'Utente',
@@ -89,10 +103,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_liste' => 'Elenco delle risposte',
 	'reponses_liste_prop' => 'Risposte in attesa di validazione',
 	'reponses_liste_publie' => 'Tutte le risposte valide',
+	'reponses_nb' => '@nb@ réponses', # NEW
 	'reponses_voir_detail' => 'Vedi la risposta',
 	'retour_aucun_traitement' => 'La risposta è stata correttamente inviata. Grazie :)',
 
 	// T
+	'titre_cadre_raccourcis' => 'Raccourcis', # NEW
+	'traitements_actives' => 'Traitements activés', # NEW
 	'traitements_aide_memoire' => 'Promemoria:',
 	'traitements_avertissement_creation' => 'Le modifiche ai campi del modulo sono state registrate con successo. Ora puoi definire quali trattamenti saranno effettuati all\'atto dell\'invio del modulo.',
 	'traitements_avertissement_modification' => 'La modifiche ai campi del modulo sono state registrate con successo. <strong>Alcuni trattamenti devono forse essere riconfigurati di conseguenza.</strong>',

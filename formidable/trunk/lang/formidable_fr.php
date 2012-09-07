@@ -8,22 +8,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'analyse_avec_reponse' => 'Réponses non-vide',
 	'analyse_longueur_moyenne' => 'Longueur moyenne en nombre de mots',
-	'analyse_zero_reponse_total' => 'Aucune personne n\'a répondu à ce formulaire.',
-	'analyse_une_reponse_total' => 'Une personne a répondu à ce formulaire.',
 	'analyse_nb_reponses_total' => '@nb@ personnes ont répondu à ce formulaire.',
 	'analyse_sans_reponse' => 'Laissés blanc',
+	'analyse_une_reponse_total' => 'Une personne a répondu à ce formulaire.',
+	'analyse_zero_reponse_total' => 'Aucune personne n\'a répondu à ce formulaire.',
 	'aucun_traitement' => 'Aucun traitement',
 
 	// B
 	'bouton_formulaires' => 'Formulaires',
 
 	// C
-	'cfg_analyse_classe_label' => 'Classe CSS de la barre de progression',
 	'cfg_analyse_classe_explication' => 'Vous pouvez indiquer des classes CSS qui seront ajoutées
 		sur le conteneur de chaque graphique, tel que <code>gray</code>,<code>blue</code>,
 		<code>orange</code>, <code>green</code> ou tout ce qui vous plairait !',
-	'cfg_titre_parametrages_analyse' => 'Paramétrages de l\'analyse des réponses',
+	'cfg_analyse_classe_label' => 'Classe CSS de la barre de progression',
 	'cfg_titre_page_configurer_formidable' => 'Configurer Formidable',
+	'cfg_titre_parametrages_analyse' => 'Paramétrages de l\'analyse des réponses',
 
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
@@ -87,13 +87,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'reponse_aucune' => 'Aucune réponse',
-	'reponse_une' => '1 réponse',
-	'reponses_nb' => '@nb@ réponses',
 	'reponse_intro' => '@auteur@ a répondu au formulaire @formulaire@',
 	'reponse_numero' => 'Réponse numéro :',
 	'reponse_statut' => 'Cette réponse est :',
 	'reponse_supprimer' => 'Supprimer cette réponse',
 	'reponse_supprimer_confirmation' => 'Êtes-vous sûr de vouloir supprimer cette réponse ?',
+	'reponse_une' => '1 réponse',
 	'reponses_analyse' => 'Analyse des réponses',
 	'reponses_anonyme' => 'Anonyme',
 	'reponses_auteur' => 'Utilisateur',
@@ -102,10 +101,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_liste' => 'Liste des réponses',
 	'reponses_liste_prop' => 'Réponses en attente de validation',
 	'reponses_liste_publie' => 'Toutes les réponses validées',
+	'reponses_nb' => '@nb@ réponses',
 	'reponses_voir_detail' => 'Voir la réponse',
 	'retour_aucun_traitement' => 'Votre réponse a bien été envoyée, mais aucun traitement n\'a été défini pour ce formulaire. Il ne fait donc rien. :)',
 
 	// T
+	'titre_cadre_raccourcis' => 'Raccourcis',
 	'traitements_actives' => 'Traitements activés',
 	'traitements_aide_memoire' => 'Aide mémoire :',
 	'traitements_avertissement_creation' => 'Les modifications sur les champs du formulaire ont été enregistrées avec succès. Vous pouvez maintenant définir quels traitements seront effectués lors de l\'utilisation du formulaire.',
@@ -147,7 +148,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_option_multiple_explication' => 'Une même personne peut-elle répondre plusieurs fois au formulaire ?',
 	'traiter_enregistrement_option_multiple_label' => 'Réponses multiples',
 	'traiter_enregistrement_titre' => 'Enregistrer les résultats',
-	'titre_cadre_raccourcis' => 'Raccourcis',
 
 	// V
 	'voir_exporter' => 'Exporter le formulaire',
