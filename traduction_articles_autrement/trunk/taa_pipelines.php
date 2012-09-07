@@ -15,18 +15,17 @@ function taa_header_prive($flux){
 		_request('id_rubrique')?_request('id_rubrique'):
 		(intval($id_article)?sql_getfetsel('id_rubrique','spip_articles','id_article='.$id_article):'')
 		);
+	$lang= _request('lang_dest');
+
+	if(!$lang AND intval($id_rubrique))$lang=sql_getfetsel('lang','spip_rubriques','id_rubrique='.$id_rubrique);
+	$flux['data']['lang_dest']=$lang;
 	
-	if(intval($id_rubrique)){
-		$lang= _request('lang_dest')?_request('lang_dest'):sql_getfetsel('lang','spip_rubriques','id_rubrique='.$id_rubrique);;
-		$flux['data']['lang_dest']=$lang;
-	
-		if($flux['data']['lang_dest']){		
+	if($flux['data']['lang_dest']){		
 			$flux['data']['_hidden'] .= '<input type="hidden" name="lang_dest" value="'.$lang.'"/>';
 			$flux['data']['_hidden'] .= '<input type="hidden" name="changer_lang" value="'.$lang.'"/>';
-			}
-	    }
+		}
 	}
-	    return $flux;
+	return $flux;
 }
 
 
