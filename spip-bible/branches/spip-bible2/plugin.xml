@@ -20,7 +20,7 @@ On peut passer des options au mod&#233;le. La valeur des options est "non" ou "o
 
 Ces options sont :
 -* numeros : Pour afficher les num&#233;ros de versets et de chapitre dans le corps de texte.
--* bible : Pour faire des retours chariots entre les versets
+-* retour : Pour faire des retours chariots entre les versets
 -* ref : Pour afficher les r&#233;f&#233;rences &#224; la suite du passage
 -* traduction : Pour choisir la traduction.
 

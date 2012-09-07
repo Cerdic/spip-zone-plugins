@@ -21,7 +21,7 @@ On peut passer des options au modéle. La valeur des options est "non" ou "oui",
 
 Ces options sont :
 -* numeros : Pour afficher les numéros de versets et de chapitre dans le corps de texte.
--* bible : Pour faire des retours chariots entre les versets
+-* retour : Pour faire des retours chariots entre les versets
 -* ref : Pour afficher les références à la suite du passage
 -* traduction : Pour choisir la traduction.
 
