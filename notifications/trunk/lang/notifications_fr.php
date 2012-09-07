@@ -103,7 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suivis_public_votre_page' => 'Ceci est votre page personnalisée de suivi du site',
 
 	// T
-	'titre_moderation' => 'Modération',
+	'titre_moderation' => 'Modération'
 );
 
 ?>

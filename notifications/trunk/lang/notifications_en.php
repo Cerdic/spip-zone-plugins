@@ -100,7 +100,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suivis_public_notif_desactiver' => 'TODO: Tickbox to stop notifications',
 	'suivis_public_vos_forums' => 'Your forums',
 	'suivis_public_vos_forums_date' => 'Your forums, by date',
-	'suivis_public_votre_page' => 'This is your personnal Notifications follow-up for the website'
+	'suivis_public_votre_page' => 'This is your personnal Notifications follow-up for the website',
+
+	// T
+	'titre_moderation' => 'Modération' # NEW
 );
 
 ?>

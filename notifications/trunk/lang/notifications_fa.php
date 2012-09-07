@@ -101,7 +101,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suivis_public_notif_desactiver' => 'TODO: جاي علامت زدن براي آنكه ديگر اطلاعيه دريافت نشود',
 	'suivis_public_vos_forums' => 'سخنگاه‌هاي شما ',
 	'suivis_public_vos_forums_date' => 'سخنگاه‌هاي شما، به ترتيب تاريخ',
-	'suivis_public_votre_page' => 'اين صفحه‌ي شخصي شما براي پيگيري سايت است'
+	'suivis_public_votre_page' => 'اين صفحه‌ي شخصي شما براي پيگيري سايت است',
+
+	// T
+	'titre_moderation' => 'Modération' # NEW
 );
 
 ?>

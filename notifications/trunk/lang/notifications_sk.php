@@ -100,7 +100,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suivis_public_notif_desactiver' => 'TREBA: zaškrtávacie políčko na zastavenie prijímania oznamov',
 	'suivis_public_vos_forums' => 'Vaše diskusné fóra',
 	'suivis_public_vos_forums_date' => 'Vaše diskusné fóra podľa dátumu',
-	'suivis_public_votre_page' => 'Toto je vaša vlastná stránka na sledovanie webu.'
+	'suivis_public_votre_page' => 'Toto je vaša vlastná stránka na sledovanie webu.',
+
+	// T
+	'titre_moderation' => 'Modération' # NEW
 );
 
 ?>
