@@ -40,8 +40,8 @@ function oresource_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "orr_ressource_nom AS titre, '' AS lang",
 		 #'date' => "",
-		'champs_editables'  => array('orr_ressource_nom'),
-		'champs_versionnes' => array(),
+		'champs_editables'  => array('orr_ressource_nom','orr_ressource_couleur'),
+		'champs_versionnes' => array('orr_ressource_couleur'),
 		'rechercher_champs' => array("orr_ressource_nom" => 8),
 		'tables_jointures'  => array(),
 		
