@@ -6,12 +6,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
+	'erreur_attributs_html_interdits' => 'Il n\'est pas permis d\'utiliser les attributs html <tt>class</tt> ou <tt>style</tt>',
 	'erreur_jeton' => 'Impossible de prendre en compte votre message. Merci de le soumettre à nouveau !',
 	'erreur_spam' => 'Impossible de prendre en compte votre message !',
 	'erreur_spam_doublon' => 'Un message identique existe déjà !',
 	'erreur_spam_ip' => 'Trop de commentaires nuit à la qualité !',
-
-	'erreur_attributs_html_interdits' => 'Il n\'est pas permis d\'utiliser les attributs html <tt>class</tt> ou <tt>style</tt>',
 	'erreur_url_deja_spammee' => 'Ce message contient des liens suspects qui ressemblent à du SPAM. Merci de les retirer.',
 
 	// F
