@@ -5,6 +5,7 @@ define('_RAINETTE_WUNDERGROUND_URL_BASE_ICONE', 'http://icons.wxug.com/i/c');
 define('_RAINETTE_WUNDERGROUND_JOURS_PREVISIONS', 3);
 define('_RAINETTE_WUNDERGROUND_SUFFIXE_METRIQUE', 'c:mb:km:kph');
 define('_RAINETTE_WUNDERGROUND_SUFFIXE_STANDARD', 'f:in:mi:mph');
+define('_RAINETTE_WUNDERGROUND_LANGUE_DEFAUT', 'FR');
 
 function wunderground_service2cache($lieu, $mode) {
 
@@ -46,12 +47,12 @@ function wunderground_service2url($lieu, $mode) {
 
 	// Identification de la langue du resume
 	// TODO : creer une fonction de transcodage prefixe spip vers prefixe wunderground
-	$langue = strtoupper($GLOBALS['spip_lang']);
+	$code_langue = wunderground_langue2code($GLOBALS['spip_lang']);
 
 	$url = _RAINETTE_WUNDERGROUND_URL_BASE_REQUETE
 		.  '/' . $cle
 		.  '/' . $demande
-		.  '/lang:' . $langue
+		.  '/lang:' . $code_langue
 		.  '/q'
 		.  '/' . $query . '.xml';
 
@@ -106,6 +107,214 @@ function wunderground_meteo2weather($meteo, $periode=0) {
 		$icone = strval($wunderground2weather[$meteo][$periode]);
 	return $icone;
 }
+
+function wunderground_langue2code($langue) {
+	static $langue2wunderground = array(
+		'aa' => array('', ''), 					// afar (éthiopien)
+		'ab' => array('', ''), 					// abkhaze
+		'af' => array('AF', ''), 				// afrikaans
+		'am' => array('', ''), 					// amharique
+		'an' => array('', ''), 					// aragonais
+		'ar' => array('AR', ''), 				// arabe
+		'as' => array('', ''), 					// assamais
+		'ast' => array('', ''), 				// asturien
+		'ay' => array('', ''), 					// aymara
+		'az' => array('AZ', ''), 				// azeri
+		'ba' => array('', ''),					// bashkir
+		'be' => array('BY', ''), 				// Bielorusse
+		'ber_tam' => array('', ''),				// berbère
+		'ber_tam_tfng' => array('', ''),		// berbère tifinagh
+		'bg' => array('BU', ''), 				// bulgare
+		'bh' => array('', ''),					// langues biharis
+		'bi' => array('', ''),					// bichlamar
+		'bm' => array('', ''),					// bambara
+		'bn' => array('', ''),					// bengali
+		'bo' => array('', ''),					// tibétain
+		'br' => array('', ''),					// breton
+		'bs' => array('', ''),					// bosniaque
+		'ca' => array('CA', ''),				// catalan
+		'co' => array('', ''),					// corse
+		'cpf' => array('', ''), 				// créole réunionais
+		'cpf_dom' => array('', ''), 			// créole ???
+		'cpf_hat' => array('HT', ''), 			// créole haïtien
+		'cs' => array('CZ', ''),				// tchèque
+		'cy' => array('CY', ''),				// gallois
+		'da' => array('DK', ''),				// danois
+		'de' => array('DL', ''),				// allemand
+		'dz' => array('', ''),					// dzongkha
+		'el' => array('GR', ''),				// grec moderne
+		'en' => array('EN', ''),				// anglais
+		'en_hx' => array('', 'EN'),				// anglais hacker
+		'en_sm' => array('', 'EN'),				// anglais smurf
+		'eo' => array('EO', ''),				// esperanto
+		'es' => array('SP', ''),				// espagnol
+		'es_co' => array('', 'SP'),				// espagnol colombien
+		'es_mx_pop' => array('', 'SP'),			// espagnol mexicain
+		'et' => array('ET', ''),				// estonien
+		'eu' => array('EU', ''),				// basque
+		'fa' => array('FA', ''),				// persan (farsi)
+		'ff' => array('', ''),					// peul
+		'fi' => array('FI', ''),				// finnois
+		'fj' => array('', ''),					// fidjien
+		'fo' => array('', ''),					// féroïen
+		'fon' => array('', ''),					// fon
+		'fr' => array('FR', ''),				// français
+		'fr_sc' => array('', 'FR'),				// français schtroumpf
+		'fr_lpc' => array('', 'FR'),			// français langue parlée
+		'fr_lsf' => array('', 'FR'),			// français langue des signes
+		'fr_spl' => array('', 'FR'),			// français simplifié
+		'fr_tu' => array('', 'FR'),				// français copain
+		'fy' => array('', ''),					// frison occidental
+		'ga' => array('IR', ''),				// irlandais
+		'gd' => array('', ''),					// gaélique écossais
+		'gl' => array('GZ', ''),				// galicien
+		'gn' => array('', ''),					// guarani
+		'grc' => array('', ''),					// grec ancien
+		'gu' => array('GU', ''),				// goudjrati
+		'ha' => array('', ''),					// haoussa
+		'hac' => array('', ''), 				// Kurdish-Horami
+		'hbo' => array('', ''),					// hebreu classique ou biblique
+		'he' => array('IL', ''),				// hébreu
+		'hi' => array('HI', ''),				// hindi
+		'hr' => array('CR', ''),				// croate
+		'hu' => array('HU', ''),	 			// hongrois
+		'hy' => array('HY', ''), 				// armenien
+		'ia' => array('', ''),					// interlingua (langue auxiliaire internationale)
+		'id' => array('ID', ''),				// indonésien
+		'ie' => array('', ''),					// interlingue
+		'ik' => array('', ''),					// inupiaq
+		'is' => array('IS', ''),				// islandais
+		'it' => array('IT', ''),				// italien
+		'it_fem' => array('', ''),				// italien féminin
+		'iu' => array('', ''),					// inuktitut
+		'ja' => array('JP', ''),				// japonais
+		'jv' => array('JW', ''),				// javanais
+		'ka' => array('KA', ''),				// géorgien
+		'kk' => array('', ''),					// kazakh
+		'kl' => array('', ''),					// groenlandais
+		'km' => array('KM', ''),				// khmer central
+		'kn' => array('', ''),					// Kannada
+		'ko' => array('KR', ''),				// coréen
+		'ks' => array('', ''),					// kashmiri
+		'ku' => array('KU', ''),				// kurde
+		'ky' => array('', ''),					// kirghiz
+		'la' => array('LA', ''),				// latin
+		'lb' => array('', ''),					// luxembourgeois
+		'ln' => array('', ''),					// lingala
+		'lo' => array('', ''), 					// lao
+		'lt' => array('LT', ''),				// lituanien
+		'lu' => array('luba-katanga', ''),
+		'lv' => array('LV', ''),				// letton
+		'man' => array('GM', ''),				// mandingue
+		'mfv' => array('manjak', ''), 			// ISO-639-3
+		'mg' => array('Malagasy', ''),
+		'mi' => array('MI', ''),				// maori
+		'mk' => array('MK', ''),				// macédonien
+		'ml' => array('Malayalam', ''),
+		'mn' => array('MN', ''),				// mongol
+		'mo' => array('Moldavian', ''),
+		'mos' => array('Mor&eacute;', ''),
+		'mr' => array('MR', ''),				// marathe
+		'ms' => array('Bahasa Malaysia', ''),
+		'mt' => array('MT', ''),				// maltais
+		'my' => array('MY', ''),				// birman
+		'na' => array('Nauru', ''),
+		'nap' => array('napulitano', ''),
+		'ne' => array('Nepali', ''),
+		'nqo' => array('Nko', ''), // www.manden.org
+		'nl' => array('NL', ''),				// néerlandais
+		'no' => array('NO', ''),				// norvégien
+		'nb' => array('', 'NO'),				// norvégien bokmål
+		'nn' => array('', 'NO'),				// norvégien nynorsk
+		'oc' => array('OC', ''),				// occitan
+		'oc_lnc' => array('', 'OC'),			// occitan languedocien
+		'oc_ni' => array('', 'OC'),				// occitan niçard
+		'oc_ni_la' => array('', 'OC'),			// occitan niçard
+		'oc_prv' => array('', 'OC'),			// occitan provençal
+		'oc_gsc' => array('', 'OC'),			// occitan gascon
+		'oc_lms' => array('', 'OC'),			// occitan limousin
+		'oc_auv' => array('', 'OC'),			// occitan auvergnat
+		'oc_va' => array('', 'OC'),				// occitan vivaro-alpin
+		'om' => array('', ''),					// galla
+		'or' => array('', ''),					// oriya
+		'pa' => array('PA', ''),				// pendjabi
+		'pbb' => array('', ''),					// Nasa Yuwe (páez) - iso 639-3
+		'pl' => array('PL', ''),				// polonais
+		'ps' => array('PS', ''),				// pachto
+		'pt' => array('BR', ''),				// portugais
+		'pt_br' => array('', 'BR'),				// portugais brésilien
+		'qu' => array('', ''),					// quechua
+		'rm' => array('Rhaeto-Romance', ''),
+		'rn' => array('Kirundi', ''),
+		'ro' => array('RO', ''),				// roumain
+		'roa' => array('chti', ''),
+		'ru' => array('RU', ''),				// russe
+		'rw' => array('Kinyarwanda', ''),
+		'sa' => array('&#2360;&#2306;&#2360;&#2381;&#2325;&#2371;&#2340;', ''),
+		'sc' => array('sardu', ''),
+		'scn' => array('sicilianu', ''),
+		'sd' => array('Sindhi', ''),
+		'sg' => array('Sangho', ''),
+		'sh' => array('', ''),					// serbo-croate
+		'sh_latn' => array('', ''),				// serbo-croate latin
+		'sh_cyrl' => array('', ''),				// serbo-croate cyrillique
+		'si' => array('Sinhalese', ''),
+		'sk' => array('SK', ''),				// slovaque
+		'sl' => array('SL', ''),				// slovène
+		'sm' => array('Samoan', ''),
+		'sn' => array('Shona', ''),
+		'so' => array('Somali', ''),
+		'sq' => array('AL', ''), 				// albanais
+		'sr' => array('SR', ''),				// serbe
+		'src' => array('', ''), 				// sarde logoudorien - iso 639-3
+		'sro' => array('', ''), 				// sarde campidanien - iso 639-3
+		'ss' => array('Siswati', ''),
+		'st' => array('Sesotho', ''),
+		'su' => array('Sundanese', ''),
+		'sv' => array('SW', ''),				// suédois
+		'sw' => array('SI', ''),				// swahili
+		'ta' => array('&#2980;&#2990;&#3007;&#2996;&#3021;', ''), // Tamil
+		'te' => array('Telugu', ''),
+		'tg' => array('Tajik', ''),
+		'th' => array('TH', ''),				// thaï
+		'ti' => array('Tigrinya', ''),
+		'tk' => array('TK', ''),				// turkmène
+		'tl' => array('TL', ''),				// tagalog
+		'tn' => array('Setswana', ''),
+		'to' => array('Tonga', ''),
+		'tr' => array('TR', ''),				// turc
+		'ts' => array('Tsonga', ''),
+		'tt' => array('TT', ''),				// tatar
+		'tw' => array('Twi', ''),
+		'ty' => array('reo m&#257;`ohi', ''), 	// tahitien
+		'ug' => array('Uighur', ''),
+		'uk' => array('UA', ''),				// ukrainien
+		'ur' => array('&#1649;&#1585;&#1583;&#1608;', ''),
+		'uz' => array('UZ', ''),				// ouszbek
+		'vi' => array('VU', ''),				// vietnamien
+		'vo' => array('Volapuk', ''),
+		'wa' => array('walon', ''),
+		'wo' => array('SN', ''),				// wolof
+		'xh' => array('Xhosa', ''),
+		'yi' => array('YI', ''),				// yiddish
+		'yo' => array('Yoruba', ''),
+		'za' => array('Zhuang', ''),
+		'zh' => array('CN', ''), 				// chinois (ecriture simplifiee)
+		'zh_tw' => array('TW', ''), 			// chinois taiwan (ecriture traditionnelle)
+		'zu' => array('Zulu', '')
+	);
+
+	$code = _RAINETTE_WUNDERGROUND_LANGUE_DEFAUT;
+	if (array_key_exists($langue,  $langue2wunderground)) {
+		if ($c0 = $langue2wunderground[$langue][0])
+			$code = strtoupper($c0);
+		else
+			$code = strtoupper($langue2wunderground[$langue][1]);
+	}
+
+	return $code;
+}
+
 
 /**
  * lire le xml fournit par le service meteo et en extraire les infos interessantes
