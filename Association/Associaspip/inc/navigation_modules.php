@@ -118,10 +118,10 @@ function association_navigation_raccourcis($adresse_retour='',  $raccourcis=arra
 		}
 	}
 	if ( is_array($adresse_retour) ) { // tableau : url_exec, parametres_exec
-		if ( is_array($adresse_retour) AND count($adresse_retour) )
+		if ( count($adresse_retour) )
 			$res .= icone1_association('asso:bouton_retour',  generer_url_ecrire($adresse_retour[0],$adresse_retour[1]), 'retour-24.png');
 	} else { // chaine de caractere : uri_complet
-		$res .= icone1_association('asso:bouton_retour',  ($adresse_retour=='')?str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']):$adresse_retour, 'retour-24.png');
+		$res .= icone1_association('asso:bouton_retour', generer_url_ecrire(($adresse_retour=='')?str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']):$adresse_retour), 'retour-24.png');
 	}
 	if ($FIN_BOITE_INFO) {
 		echo association_date_du_jour();

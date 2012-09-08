@@ -110,7 +110,7 @@ function association_bouton_faire($texte, $image, $script='', $exec_args='', $im
 function association_bouton_afficher($objet, $args='', $tag='td')
 {
 	$res = ($tag?"<$tag class='action'>":'');
-	$res .= association_bouton_faire('bouton_voir', 'voir-12.png', "voir_$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#x2380;"');
+	$res .= association_bouton_faire('bouton_voir', 'voir-12.png', "$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#x2380;"');
 	$res .= ($tag?"</$tag>":'');
 	return $res;
 }
