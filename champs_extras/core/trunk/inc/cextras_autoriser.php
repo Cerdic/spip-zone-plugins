@@ -1,22 +1,42 @@
 <?php
+
+/**
+ * Déclaration d'autorisations pour les champs extras
+ *
+ * @package SPIP\Cextras\Autorisations
+**/
+
+// sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// mes_fonctions peut aussi declarer des autorisations
 
-// fonction pour le pipeline autoriser
+/**
+ * Fonction d'appel pour le pipeline autoriser
+ * @pipeline autoriser
+ */
 function cextras_autoriser(){}
 
 
 /**
  * Retourne si une saisie peut s'afficher ou non 
  *
- * @param Array $saisie Saisie que l'on traite.
- * @param String $action Le type d'action : voir | modifier
- * @param String $table La table d'application : spip_articles
- * @param Int $id Identifiant de la table : 3
- * @param Array $qui L'auteur en cours
- * @param Array $opt Options de l'autorisation
- * @return Bool : la saisie peut elle s'afficher ?
+ * Teste les options de restrictions de la saisie si il y en a
+ * et calcule en fonction l'autorisation
+ * 
+ * @param array $saisie
+ *     Saisie que l'on traite.
+ * @param string $action
+ *     Le type d'action : voir | modifier
+ * @param string $table
+ *     La table d'application : spip_articles
+ * @param int $id
+ *     Identifiant de la table : 3
+ * @param array $qui
+ *     Description de l'auteur en cours
+ * @param Array $opt
+ *     Options de l'autorisation
+ * @return Bool
+ *     La saisie peut elle s'afficher ?
 **/
 function champs_extras_restrictions($saisie, $action, $table, $id, $qui, $opt) {
 	if (!$saisie) {
@@ -75,7 +95,7 @@ function champs_extras_restrictions($saisie, $action, $table, $id, $qui, $opt) {
 
 			if ($restriction and $restriction($opt['type'], $opt['id_objet'], $opt, $ids, $cible)) {
 				return true;
-			}	
+			}
 		}
 		// aucune des restrictions n'a ete validee
 		return false;
@@ -85,11 +105,25 @@ function champs_extras_restrictions($saisie, $action, $table, $id, $qui, $opt) {
 }
 
 /**
-  * Autorisation de voir un champ extra
-  * autoriser('voirextra','auteur', $id_auteur,'',array('champ'=>'prenom', 'saisie'=>$saisie, ...));
-  *
-  * -> autoriser_auteur_voirextra_prenom_dist() ...
-  */
+ * Autorisation de voir un champ extra
+ *
+ * Cherche une autorisation spécifique pour le champ si elle existe
+ * (autoriser_{objet}_voirextra_{colonne}_dist), sinon applique
+ * l'autorisation prévue par la description de la saisie
+ * 
+ * @example
+ *     autoriser('voirextra','auteur', $id_auteur,'',
+ *         array('champ'=>'prenom', 'saisie'=>$saisie, ...));
+ *
+ *      Appelle autoriser_auteur_voirextra_prenom_dist() si la fonction existe...
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_voirextra_dist($faire, $type, $id, $qui, $opt){
 	if (isset($opt['saisie'])) {
 		// tester des fonctions d'autorisations plus precises declarees
@@ -105,11 +139,25 @@ function autoriser_voirextra_dist($faire, $type, $id, $qui, $opt){
 }
 
 /**
-  * Autorisation de modifier un champ extra
-  * autoriser('modifierextra','auteur', $id_auteur,'',array('champ'=>'prenom', 'saisie'=>$saisie, ...));
-  * 
-  * -> autoriser_auteur_modifierextra_prenom_dist()
-  */
+ * Autorisation de modifier un champ extra
+ *
+ * Cherche une autorisation spécifique pour le champ si elle existe
+ * (autoriser_{objet}_modifierextra_{colonne}_dist), sinon applique
+ * l'autorisation prévue par la description de la saisie
+ * 
+ * @example
+ *     autoriser('modifierextra','auteur', $id_auteur,'',
+ *         array('champ'=>'prenom', 'saisie'=>$saisie, ...));
+ *     
+ *     Appelle autoriser_auteur_modifierextra_prenom_dist() si elle existe
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_modifierextra_dist($faire, $type, $id, $qui, $opt){
 	if (isset($opt['saisie'])) {
 		// tester des fonctions d'autorisations plus precises declarees
@@ -127,22 +175,27 @@ function autoriser_modifierextra_dist($faire, $type, $id, $qui, $opt){
 
 
 /**
- *
- * API pour aider les plus demunis
- * Permet d'indiquer que tels champs extras se limitent a telle ou telle rubrique
- * et cela en creant a la volee les fonctions d'autorisations adequates.
+ * Fonction d'aide pour créer des autorisations de champs spécifiques
  * 
- * Exemples :
- *   restreindre_extras('article', array('nom', 'prenom'), array(8, 12));
- *   restreindre_extras('site', 'url_doc', 18, true); // recursivement aux sous rubriques
+ * Permet d'indiquer que tels champs extras se limitent à telle ou telle rubrique
+ * et cela en créant à la volée les fonctions d'autorisations adéquates.
+ * 
+ * @example
+ *     restreindre_extras('article', array('nom', 'prenom'), array(8, 12));
+ *     restreindre_extras('site', 'url_doc', 18, true); // recursivement aux sous rubriques
  *
- * @param string $objet      objet possedant les extras
- * @param mixed  $noms       nom des extras a restreindre
- * @param mixed  $ids        identifiant (des rubriques par defaut) sur lesquelles s'appliquent les champs
- * @param string $cible      type de la fonction de test qui sera appelee, par defaut "rubrique". Peut aussi etre "secteur", "groupe" ou des fonctions definies
- * @param bool   $recursif   application recursive sur les sous rubriques ? ATTENTION, c'est gourmand en requetes SQL :)
- *
- * @return bool : true si on a fait quelque chose
+ * @param string $objet
+ *     Objet possédant les extras
+ * @param mixed $noms
+ *     Nom des extras a restreindre
+ * @param mixed $ids
+ *     Identifiant (des rubriques par defaut) sur lesquelles s'appliquent les champs
+ * @param string $cible
+ *     Type de la fonction de test qui sera appelee, par defaut "rubrique". Peut aussi etre "secteur", "groupe" ou des fonctions definies
+ * @param bool $recursif
+ *     Application recursive sur les sous rubriques ? ATTENTION, c'est gourmand en requetes SQL :)
+ * @return bool
+ *     true si on a fait quelque chose
  */
 function restreindre_extras($objet, $noms=array(), $ids=array(), $cible='rubrique', $recursif=false) {
 	if (!$objet or !$noms or !$ids) {
@@ -183,25 +236,33 @@ function restreindre_extras($objet, $noms=array(), $ids=array(), $cible='rubriqu
 
 
 /**
- *
- * Fonction d'autorisation interne a la fonction restreindre_extras()
- * Teste si un objet a le droit d'afficher des champs extras
+ * Fonction d'autorisation interne à la fonction restreindre_extras()
+ * 
+ * Teste si un objet à le droit d'afficher des champs extras
  * en fonction de la rubrique (ou autre defini dans la cible)
- * dans laquelle il se trouve et des rubriques autorisees
+ * dans laquelle il se trouve et des rubriques autorisées
  *
- * On cache pour eviter de plomber le serveur SQL, vu que la plupart du temps
- * un hit demandera systematiquement le meme objet/id_objet lorsqu'il affiche
+ * On met en cache pour éviter de plomber le serveur SQL, vu que la plupart du temps
+ * un hit demandera systématiquement le même objet/id_objet lorsqu'il affiche
  * un formulaire.
  *
- * @param string $objet      objet possedant les extras
- * @param int    $id_objet   nom des extras a restreindre
- * @param array  $opt        options des autorisations
- * @param mixed  $ids        identifiant(s) (en rapport avec la cible) sur lesquelles s'appliquent les champs
- * @param string $cible      type de la fonction de test qui sera appelee, par defaut "rubrique". Peut aussi etre "secteur", "groupe" ou des fonctions definies
- * @param bool   $recursif   application recursive sur les sous rubriques ? ATTENTION, c'est gourmand en requetes SQL :)
- *
- * @return bool : autorise ou non .
- */
+ * @param string $objet
+ *     Objet possédant les extras
+ * @param int $id_objet
+ *     Nom des extras a restreindre
+ * @param array $opt
+ *     Options des autorisations
+ * @param mixed $ids
+ *     Identifiant(s) (en rapport avec la cible) sur lesquelles s'appliquent les champs
+ * @param string $cible
+ *     Type de la fonction de test qui sera appelee, par defaut "rubrique".
+ *     Peut aussi etre "secteur", "groupe" ou des fonctions definies
+ * @param bool $recursif
+ *     Application recursive sur les sous rubriques ? ATTENTION, c'est
+ *     gourmand en requetes SQL :)
+ * @return bool
+ *     Autorisé ou non
+**/
 function _restreindre_extras_objet($objet, $id_objet, $opt, $ids, $cible='rubrique', $recursif=false) {
 	static $autorise = array();
 
@@ -224,22 +285,29 @@ function _restreindre_extras_objet($objet, $id_objet, $opt, $ids, $cible='rubriq
 
 
 /**
- *
- * Fonction d'autorisation interne a la fonction restreindre_extras()
- * Teste si un objet a le droit d'afficher des champs extras
- * en fonction de la rubrique (ou autre defini dans la cible)
- * dans laquelle il se trouve et des rubriques autorisees
- * Le dernier argument donne la colonne a chercher dans l'objet correspondant
- *
- * @param string $objet      objet possedant les extras
- * @param int    $id_objet   nom des extras a restreindre
- * @param array  $opt        options des autorisations
- * @param mixed  $ids        identifiant(s) (en rapport avec la cible) sur lesquelles s'appliquent les champs
- * @param bool   $_id_cible  nom de la colonne SQL cible (id_rubrique, id_secteur, id_groupe...)
- *
- * @return mixed : true : autorise, false : non autorise, 0 : incertain.
+ * Fonction d'autorisation interne à la fonction restreindre_extras()
  * 
- */
+ * Teste si un objet à le droit d'afficher des champs extras
+ * en fonction de la rubrique (ou autre defini dans la cible)
+ * dans laquelle il se trouve et des rubriques autorisées
+ * 
+ * Le dernier argument donne la colonne à chercher dans l'objet correspondant
+ *
+ * @param string $objet
+ *     Objet possédant les extras
+ * @param int $id_objet
+ *     Nom des extras a restreindre
+ * @param array $opt
+ *     Options des autorisations
+ * @param mixed $ids
+ *     Identifiant(s) (en rapport avec la cible) sur lesquelles s'appliquent les champs
+ * @param bool $_id_cible
+ *     Nom de la colonne SQL cible (id_rubrique, id_secteur, id_groupe...)
+ * @return bool|int
+ *     - true : autorisé,
+ *     - false : non autorisé,
+ *     - 0 : incertain.
+**/
 function _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, $_id_cible) {
 
     $id_cible = intval($opt['contexte'][$_id_cible]);
@@ -281,22 +349,47 @@ function _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, $_id
 
 
 
+/**
+ * Fonction d'autorisation interne à la fonction restreindre_extras()
+ * spécifique au test d'appartenance à une branche de rubrique
+ *
+ * @note ATTENTION, c'est gourmand en requetes SQL :)
+ * 
+ * @see inc_restreindre_extras_objet_sur_rubrique_dist()
+ * @param string $objet
+ *     Objet possédant les extras
+ * @param int $id_objet
+ *     Nom des extras a restreindre
+ * @param array $opt
+ *     Options des autorisations
+ * @param mixed $ids
+ *     Identifiant(s) des branches de rubrique sur lesquelles s'appliquent les champs
+ * @param bool $recursif
+ *     Non utilisé
+ * @return bool
+ *     Autorisé ou non
+ */
 function inc_restreindre_extras_objet_sur_branche_dist($objet, $id_objet, $opt, $ids, $recursif) {
 	return inc_restreindre_extras_objet_sur_rubrique_dist($objet, $id_objet, $opt, $ids, true);
 }
 
 /**
+ * Fonction d'autorisation interne à la fonction restreindre_extras()
+ * spécifique au test d'appartenance à une rubrique
  *
- * Fonction d'autorisation interne a la fonction restreindre_extras()
- * specifique au test d'appartenance a une rubrique
- *
- * @param string $objet      objet possedant les extras
- * @param int    $id_objet   nom des extras a restreindre
- * @param array  $opt        options des autorisations
- * @param mixed  $ids        identifiant(s) des rubriques sur lesquelles s'appliquent les champs
- * @param bool   $recursif   application recursive sur les sous rubriques ? ATTENTION, c'est gourmand en requetes SQL :)
- *
- * @return bool : autorise ou non .
+ * @param string $objet
+ *     Objet possédant les extras
+ * @param int $id_objet
+ *     Nom des extras a restreindre
+ * @param array $opt
+ *     Options des autorisations
+ * @param mixed $ids
+ *     Identifiant(s) des rubriques sur lesquelles s'appliquent les champs
+ * @param bool $recursif
+ *     Application récursive sur les sous rubriques ?
+ *     ATTENTION, c'est gourmand en requetes SQL :)
+ * @return bool
+ *     Autorisé ou non
  */
 function inc_restreindre_extras_objet_sur_rubrique_dist($objet, $id_objet, $opt, $ids, $recursif) {
 
@@ -332,19 +425,22 @@ function inc_restreindre_extras_objet_sur_rubrique_dist($objet, $id_objet, $opt,
 
 
 
-
 /**
+ * Fonction d'autorisation interne à la fonction restreindre_extras()
+ * spécifique au test d'appartenance à un secteur
  *
- * Fonction d'autorisation interne a la fonction restreindre_extras()
- * specifique au test d'appartenance a une rubrique
- *
- * @param string $objet      objet possedant les extras
- * @param int    $id_objet   nom des extras a restreindre
- * @param array  $opt        options des autorisations
- * @param mixed  $ids        identifiant(s) des rubriques sur lesquelles s'appliquent les champs
- * @param bool   $recursif   (non utilise)
- *
- * @return bool : autorise ou non .
+ * @param string $objet
+ *     Objet possédant les extras
+ * @param int $id_objet
+ *     Nom des extras a restreindre
+ * @param array $opt
+ *     Options des autorisations
+ * @param mixed $ids
+ *     Identifiant(s) des secteurs sur lesquelles s'appliquent les champs
+ * @param bool $recursif
+ *     Non utilisé
+ * @return bool
+ *     Autorisé ou non
  */
 function inc_restreindre_extras_objet_sur_secteur_dist($objet, $id_objet, $opt, $ids, $recursif=false) {
 	list($id_secteur, $ok) = _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, 'id_secteur');
@@ -353,22 +449,48 @@ function inc_restreindre_extras_objet_sur_secteur_dist($objet, $id_objet, $opt, 
 
 
 
+/**
+ * Fonction d'autorisation interne à la fonction restreindre_extras()
+ * spécifique au test d'appartenance à un groupe de mot
+ *
+ * Alias de groupemot
+ *
+ * @see inc_restreindre_extras_objet_sur_groupemot_dist()
+ * @param string $objet
+ *     Objet possédant les extras
+ * @param int $id_objet
+ *     Nom des extras a restreindre
+ * @param array $opt
+ *     Options des autorisations
+ * @param mixed $ids
+ *     Identifiant(s) des groupes de mots sur lesquelles s'appliquent les champs
+ * @param bool $recursif
+ *     True pour appliquer aux branches d'un groupe de mot
+ *     (avec plugin spécifique groupe de mots arborescents)
+ * @return bool
+ *     Autorisé ou non
+ */
 function inc_restreindre_extras_objet_sur_groupe_dist($objet, $id_objet, $opt, $ids, $recursif) {
 	return inc_restreindre_extras_objet_sur_groupemot_dist($objet, $id_objet, $opt, $ids, $recursif);
 }
 
 /**
+ * Fonction d'autorisation interne à la fonction restreindre_extras()
+ * spécifique au test d'appartenance à un groupe de mot
  *
- * Fonction d'autorisation interne a la fonction restreindre_extras()
- * specifique au test d'appartenance a une rubrique
- *
- * @param string $objet      objet possedant les extras
- * @param int    $id_objet   nom des extras a restreindre
- * @param array  $opt        options des autorisations
- * @param mixed  $ids        identifiant(s) des rubriques sur lesquelles s'appliquent les champs
- * @param bool   $recursif   application recursive sur les sous rubriques ? ATTENTION, c'est gourmand en requetes SQL :)
- *
- * @return bool : autorise ou non .
+ * @param string $objet
+ *     Objet possédant les extras
+ * @param int $id_objet
+ *     Nom des extras a restreindre
+ * @param array $opt
+ *     Options des autorisations
+ * @param mixed $ids
+ *     Identifiant(s) des groupes de mots sur lesquelles s'appliquent les champs
+ * @param bool $recursif
+ *     True pour appliquer aux branches d'un groupe de mot
+ *     (avec plugin spécifique groupe de mots arborescents)
+ * @return bool
+ *     Autorisé ou non
  */
 function inc_restreindre_extras_objet_sur_groupemot_dist($objet, $id_objet, $opt, $ids, $recursif) {
 	list($id_groupe, $ok) = _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, 'id_groupe');

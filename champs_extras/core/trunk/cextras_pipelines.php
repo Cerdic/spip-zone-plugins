@@ -1,30 +1,50 @@
 <?php
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
 
 /**
- * Retourne la liste des saisies extras concernant un objet donné
+ * Utilisations de pipelines
  *
- * @param string $table Nom d'une table SQL éditoriale
- * @return array Liste des saisies extras de l'objet
+ * @package SPIP\Cextras\Pipelines
+**/
+
+// sécurité
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+/**
+ * Retourne la liste des saisies de champs extras concernant un objet donné
+ *
+ * @pipeline_appel declarer_champs_extras
+ * @param string $table
+ *     Nom d'une table SQL éditoriale
+ * @return array
+ *     Liste des saisies de champs extras de l'objet
 **/
 function champs_extras_objet($table) {
 	static $saisies_tables = array();
 	if (!$saisies_tables) {
 		$saisies_tables = pipeline('declarer_champs_extras', array());
 	}
-	
+
 	return isset($saisies_tables[$table]) ? $saisies_tables[$table] : array();
 }
 
 /**
  * Filtrer par autorisation les saisies transmises 
  *
- * @param String $faire Type d'autorisation testee : 'voir', 'modifier'
- * @param String $quoi Objet d'application : 'article'
- * @param Array $saisies Liste des saisies à filtrer
- * @param Array $args Arguments pouvant être utiles à l'autorisation
- * @return Array Liste des saisies filtrées
+ * Chacune des saisies est parcourue et si le visiteur n'a pas l'autorisation
+ * de la voir, elle est enlevée de la liste.
+ * La fonction ne retourne donc que la liste des saisies que peut voir
+ * la personne.
+ * 
+ * @param string $faire
+ *     Type d'autorisation testée : 'voir', 'modifier'
+ * @param string $quoi
+ *     Type d'objet tel que 'article'
+ * @param array $saisies
+ *     Liste des saisies à filtrer
+ * @param array $args
+ *     Arguments pouvant être utiles à l'autorisation
+ * @return array
+ *     Liste des saisies filtrées
 **/
 function champs_extras_autorisation($faire, $quoi='', $saisies=array(), $args=array()) {
 	if (!$saisies) return array();
@@ -58,13 +78,16 @@ function champs_extras_autorisation($faire, $quoi='', $saisies=array(), $args=ar
 /**
  * Ajoute pour chaque saisie de type SQL un drapeau (input hidden)
  * permettant de retrouver les saisies editées.
+ * 
  * Particulièrement utile pour les checkbox qui ne renvoient
  * rien si on les décoche.
  *
- * @param Array $saisies liste de saisies
- * @return Array $saisies Saisies complétées des drapeaux d'édition
+ * @param array $saisies
+ *     Liste de saisies 
+ * @return array $saisies
+ *     Saisies complétées des drapeaux d'édition
 **/
-function champs_extras_ajouter_drapeau_edition($saisies, $inc = false) {
+function champs_extras_ajouter_drapeau_edition($saisies) {
 	$saisies_sql = saisies_lister_avec_sql($saisies);
 	foreach ($saisies_sql as $saisie) {
 		$nom = $saisie['options']['nom'];
@@ -82,7 +105,18 @@ function champs_extras_ajouter_drapeau_edition($saisies, $inc = false) {
 // ---------- pipelines -----------
 
 
-// ajouter les champs sur les formulaires CVT editer_xx
+/**
+ * Ajouter les champs extras sur les formulaires CVT editer_xx
+ *
+ * Liste les champs extras de l'objet, et s'il y en a les ajoute
+ * sur le formulaire d'édition en ayant filtré uniquement les saisies
+ * que peut voir le visiteur et en ayant ajouté des champs hidden
+ * servant à champs extras.
+ * 
+ * @pipeline editer_contenu_objet
+ * @param array $flux Données du pipeline
+ * @return array      Données du pipeline
+**/ 
 function cextras_editer_contenu_objet($flux){
 	
 	// recuperer les saisies de l'objet en cours
@@ -103,7 +137,16 @@ function cextras_editer_contenu_objet($flux){
 }
 
 
-// ajouter les champs extras soumis par les formulaire CVT editer_xx
+/**
+ * Ajouter les champs extras soumis par les formulaire CVT editer_xx
+ *
+ * Pour chaque champs extras envoyé par le formulaire d'édition,
+ * ajoute les valeurs dans l'enregistrement à effectuer.
+ * 
+ * @pipeline pre_edition
+ * @param array $flux Données du pipeline
+ * @return array      Données du pipeline
+**/ 
 function cextras_pre_edition($flux){
 	
 	include_spip('inc/cextras');
@@ -126,7 +169,17 @@ function cextras_pre_edition($flux){
 }
 
 
-// ajouter le champ extra sur la visualisation de l'objet
+/**
+ * Ajouter les champs extras sur la visualisation de l'objet
+ *
+ * S'il y a des champs extras sur l'objet, la fonction les ajoute
+ * à la vue de l'objet, en enlevant les saisies que la personne n'a
+ * pas l'autorisation de voir.
+ * 
+ * @pipeline afficher_contenu_objet
+ * @param array $flux Données du pipeline
+ * @return array      Données du pipeline
+**/ 
 function cextras_afficher_contenu_objet($flux){
 	// recuperer les saisies de l'objet en cours
 	$objet = $flux['args']['type'];
@@ -167,7 +220,17 @@ function cextras_afficher_contenu_objet($flux){
 	return $flux;
 }
 
-// verification de la validite des champs extras
+/**
+ * Vérification de la validité des champs extras
+ *
+ * Lorsqu'un formulaire 'editer_xx' se présente, la fonction effectue,
+ * pour chaque champs extra les vérifications prévues dans la
+ * définition de la saisie, et retourne les éventuelles erreurs rencontrées.
+ * 
+ * @pipeline formulaire_verifier
+ * @param array $flux Données du pipeline
+ * @return array      Données du pipeline
+**/ 
 function cextras_formulaire_verifier($flux){
 	$form = $flux['args']['form'];
 	

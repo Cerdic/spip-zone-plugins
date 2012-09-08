@@ -1,12 +1,33 @@
 <?php
+
+/**
+ * Déclaration colonnes SQL des champs extras
+ *
+ * @package SPIP\Cextras\Pipelines
+**/
+
+// sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-/* 
- * Déclarer les nouveaux champs et 
- * les nouvelles infos des objets éditoriaux
+/**
+ * Déclarer les nouveaux champs et les nouvelles infos des objets éditoriaux
+ *
+ * La fonction déclare tous les champs extras (saisies de type sql).
+ *
+ * Elle déclare aussi, en fonction des options choisies pour les champs
+ * - la recherche dans le champs, avec une certaine pondération,
+ * - le versionnage de champ
  * 
- * /!\ Ne pas utiliser table_objet() qui ferait une reentrance et des calculs faux.
+ * @note
+ *     Ne pas utiliser dans le code de cette fonction
+ *     table_objet() qui ferait une réentrance et des calculs faux.
+ * 
+ * @pipeline declarer_tables_objets_sql
+ * @param array $tables
+ *     Description des tables
+ * @return array
+ *     Description complétée des tables
  */
 function cextras_declarer_tables_objets_sql($tables){
 
@@ -74,8 +95,13 @@ function cextras_declarer_tables_objets_sql($tables){
  * Déclarer les nouvelles infos sur les champs extras ajoutés
  * en ce qui concerne les traitements automatiques sur les balises.
  *
+ * @pipeline declarer_tables_interfaces
+ * @param array $interfaces
+ *     Déclarations d'interface pour le compilateur
+ * @return array
+ *     Déclarations d'interface pour le compilateur
 **/
-function cextras_declarer_tables_interfaces($interface){
+function cextras_declarer_tables_interfaces($interfaces){
 
 	include_spip('inc/cextras');
 	include_spip('inc/saisies');
@@ -89,7 +115,7 @@ function cextras_declarer_tables_interfaces($interface){
 	// recuperer les champs crees par les plugins
 	$saisies_tables = pipeline('declarer_champs_extras', array());
 	if (!$saisies_tables) {
-		return $interface;
+		return $interfaces;
 	}
 
 	foreach ($saisies_tables as $table=>$saisies) {
@@ -100,20 +126,20 @@ function cextras_declarer_tables_interfaces($interface){
 			$traitement = $saisie['options']['traitements'];
 			$balise = strtoupper($saisie['options']['nom']);
 			// definir
-			if (!isset($interface['table_des_traitements'][$balise])) {
-				$interface['table_des_traitements'][$balise] = array();
+			if (!isset($interfaces['table_des_traitements'][$balise])) {
+				$interfaces['table_des_traitements'][$balise] = array();
 			}
 			// le traitement peut etre le nom d'un define
 			$traitement = defined($traitement) ? constant($traitement) : $traitement;
-	
+
 			// SPIP 3 permet de declarer par la table sql directement.
-			$interface['table_des_traitements'][$balise][$table] = $traitement;		
-			
+			$interfaces['table_des_traitements'][$balise][$table] = $traitement;
+
 		}
 	}
 
 	// ajouter les champs au tableau spip
-	return $interface;
+	return $interfaces;
 }
 
 
