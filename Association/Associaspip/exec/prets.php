@@ -27,7 +27,7 @@ function exec_prets()
 		$unite = $ressource['ud']?$ressource['ud']:'D';
 		$infos['ressources_libelle_code'] = $ressource['code'];
 		$infos['ressources_libelle_caution'] = association_formater_prix($ressource['prix_caution']);
-		if (is_numeric($ressource['statut'])) { /* utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires) */
+		if (is_numeric($ressource['statut'])) { // utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires)
 			if ($ressource['statut']>0) {
 				$puce = 'verte';
 				$type = 'ok';
@@ -39,7 +39,7 @@ function exec_prets()
 				$type = 'reserve';
 			}
 		} else {
-			switch($ressource['statut']){ /* utilisation des anciens 4+ statuts textuels (etat de reservation) */
+			switch($ressource['statut']){ // utilisation des anciens 4+ statuts textuels (etat de reservation)
 				case 'ok':
 					$puce = 'verte';
 					break;
@@ -57,7 +57,7 @@ function exec_prets()
 			}
 			$type = $ressource['statut'];
 		}
-		$infos['statut'] =  '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-'.$puce.'.gif" title="'.$ressource['statut'].'" alt="" /> '. _T("asso:ressources_libelle_statut_$type");
+		$infos['statut'] = association_formater_puce("ressources_libelle_statut_$type", $puce);
 		echo association_totauxinfos_intro($ressource['intitule'], 'ressource', $id_ressource, $infos, 'asso', 'asso_ressource');
 		// TOTAUX : nombres d'emprunts de la ressource depuis le debut
 		echo association_totauxinfos_effectifs('prets', array(
@@ -71,7 +71,7 @@ function exec_prets()
 		echo association_totauxinfos_montants('emprunts', $recettes, $ressource['prix_acquisition']); // /!\ les recettes sont calculees simplement (s'il y a un systeme de penalite pour retard, il faut s'adapter a la saisie pour que le module soit utile) ; les depenses ne prennent pas en compte les eventuels frais d'entretien ou de reparation de la ressource...
 		// datation et raccourcis
 		if ( (is_numeric($ressource['statut']) && $ressource['statut']>0) || $ressource['statut']=='ok' )
-			$res['prets_nav_ajouter'] = array('creer-12.gif', 'edit_pret', "id_ressource=$id_ressource&id_pret=");
+			$res['prets_nav_ajouter'] = array('creer-12.gif', array('edit_pret', "id_ressource=$id_ressource&id_pret="), );
 		raccourcis_association('ressources', $res);
 		debut_cadre_association('pret-24.gif', 'prets_titre_liste_reservations');
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_prets'>\n";

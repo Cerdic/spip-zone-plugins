@@ -42,8 +42,8 @@ function exec_categories()
 				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),
 			), // entetes et formats des donnees
 			array(
-				array('supprimer', 'categorie', 'id=$$', 'td'),
-				array('modifier', 'categorie', 'id=$$', 'td'),
+				array('supprimer', 'categorie', 'id=$$' ),
+				array('modifier', 'categorie', 'id=$$' ),
 			), // boutons d'action
 			'id_categorie' // champ portant la cle des lignes et des boutons
 		);

@@ -616,8 +616,9 @@ function association_formater_texte($texte, $filtre='', $params=array() )
  *
  * @param string $statut
  *   Valeur du "statut" a iconifier
- * @param string $icone
- *   Nom (couleur) de la puce parmis celles disponibles : orange, rouge, vert, poubelle
+ * @param string|array $icone
+ *   Nom (couleur) de la puce parmis celles disponibles : orange, rouge, vert, poubelle...
+ *   Tableau associant chaque statut a un nom de puce...
  * @param bool $acote
  *   Indique si la legende est placee a cote de l'icone (vrai, par defaut) ou dedans (faux)
  * @return string
@@ -625,6 +626,8 @@ function association_formater_texte($texte, $filtre='', $params=array() )
  */
 function association_formater_puce($statut, $icone,  $acote=TRUE)
 {
+	if ( is_array($icone) )
+		$icone = $icone[$statut];
 	return $acote ? association_bouton_faire('', 'puce-'.$icone.'.gif', '', '', '').' '._T("asso:$statut") : association_bouton_faire($statut, 'puce-'.$icone.'.gif', '', '', '') ; // c'est comme un bouton... mais n'a pas d'action
 }
 
@@ -1148,21 +1151,22 @@ function association_totauxinfos_effectifs($legende='', $lignes, $decimales_sign
 {
 	if (!is_array($lignes) )
 		return FALSE;
-	$nombre = $nombre_total = 0;
+	$nbr_actuel = $nbr_total = 0;
 	$res = '<table width="100%" class="asso_infos">';
 	$res .= '<caption>'. _T('asso:totaux_nombres', array('de_par'=>_T("local:$legende"))) .'</caption><tbody>';
 	foreach ($lignes as $classe_css=>$params) {
 		$res .= '<tr class="'.$classe_css.'">';
 		$res .= '<td class"text">'._T('asso:'.$params[0]).'</td>';
-		$res .= '<td class="' .($decimales_significatives?'decimal':'integer') .'">'. association_formater_nombre($params[1],$decimales_significatives) .'</td>';
-		$nombre_total += $params[1];
+		$nbr_actuel = is_array($params[1]) ? call_user_func_array('sql_countsel', $params[1]) : $params[1] ;
+		$res .= '<td class="' .($decimales_significatives?'decimal':'integer') .'">'. association_formater_nombre($nbr_actuel, $decimales_significatives) .'</td>';
+		$nbr_total += $nbr_actuel;
 		$res .= '</tr>';
 	}
 	$res .= '</tbody>';
 	if (count($lignes)>1) {
 		$res .= '<tfoot>';
 		$res .= '<tr><th class="text">'._T('asso:liste_nombre_total').'</th>';
-		$res .= '<th class="' .($decimales_significatives?'decimal':'integer') .'">'. association_formater_nombre($nombre_total,$decimales_significatives) .'</th></tr>';
+		$res .= '<th class="' .($decimales_significatives?'decimal':'integer') .'">'. association_formater_nombre($nbr_total, $decimales_significatives) .'</th></tr>';
 		$res .= '</tfoot>';
 	}
 	return $res.'</table>';
@@ -1187,20 +1191,22 @@ function association_totauxinfos_montants($legende='', $somme_recettes=0, $somme
 {
 	$res = '<table width="100%" class="asso_infos">';
 	$res .= '<caption>'. _T('asso:totaux_montants', array('de_par'=>_T("local:$legende"))) .'</caption><tbody>';
-#	if ($somme_recettes) {
+	$recettes = is_array($somme_recettes) ? call_user_func_array('sql_getfetsel', $somme_recettes) : $somme_recettes ;
+#	if ($recettes) {
 		$res .= '<tr class="impair">'
 		. '<th class="entree">'. _T('asso:bilan_recettes') .'</th>'
-		. '<td class="decimal">' .association_formater_prix($somme_recettes). ' </td>'
+		. '<td class="decimal">' .association_formater_prix($recettes). ' </td>'
 		. '</tr>';
 #	}
-#	if ($somme_depenses) {
+	$depenses = is_array($somme_depenses) ? call_user_func_array('sql_getfetsel', $somme_depenses) : $somme_depenses ;
+#	if ($depenses) {
 		$res .= '<tr class="pair">'
 		. '<th class="sortie">'. _T('asso:bilan_depenses') .'</th>'
-		. '<td class="decimal">'.association_formater_prix($somme_depenses) .'</td>'
+		. '<td class="decimal">'.association_formater_prix($depenses) .'</td>'
 		. '</tr>';
 #	}
-	if ($somme_recettes && $somme_depenses) {
-		$solde = $somme_recettes-$somme_depenses;
+	if ($recettes && $depenses) {
+		$solde = $recettes-$depenses;
 		$res .= '<tr class="'.($solde>0?'impair':'pair').'">'
 		. '<th class="solde">'. _T('asso:bilan_solde') .'</th>'
 		. '<td class="decimal">'.association_formater_prix($solde).'</td>'
@@ -1398,7 +1404,7 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
 	$res .= "\n<thead>\n<tr>";
 	foreach ($presentation as &$param) {
 		$entete = array_shift($param);
-		$res .= '<th>'. _T((strpos($entete,':') ? '' : 'asso:').$entete) .'</th>';
+		$res .= '<th>'. ($entete ? _T((strpos($entete,':') ? '' : 'asso:').$entete) : '&nbsp;' ) .'</th>';
 	}
 	if ( count($boutons) ) {
 		$res .= '<th colspan="'. count($boutons) .'" class="actions">'. _T('asso:entete_actions') .'</th>';
@@ -1407,49 +1413,53 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
 	$nbr_lignes = 0;
 	$reponse_sql = call_user_func_array('sql_select', $requete_sql);
 	while ($data = sql_fetch($reponse_sql)) {
-		$res .= '<tr'. ($cle1?' id="'.$data[$cle1].'"':'') .'>';
+		if ( is_array($extra) && $nbr_couleurs=count($extra) ) { // on a bien un tableau de classes supplementaires
+			if ( $cle2 ) { // lignes colorees selon les valeurs d'un champ
+				$tr_css = $extra[$data[$cle2]];
+			} else { // simple alternance de couleurs
+				$nbr_lignes++;
+				$tr_css = $extra[$nbr_lignes%$nbr_couleurs];
+			}
+		} elseif ( $extra ) { // classe supplementaire appliquee inconditionnellement
+				$tr_css = $extra;
+		}
+		$res .= '<tr'. ($cle1?' id="'.$data[$cle1].'"':'') . ($tr_css?' class="'.$tr_css.'"':'') .'>';
 		foreach ($presentation as $champ=>$params) {
 			$format = array_shift($params);
 			switch ($format) {
 				case 'date' :
 				case 'heure' :
-					$classes = 'date';
+					$td_css = 'date';
 					break;
 				case 'duree' :
 				case 'nombre' :
 				case 'prix' :
-					$classes = 'decimal';
+					$td_css = 'decimal';
 					break;
 				case 'entier' :
-					$classes = 'integer';
+					$td_css = 'integer';
 					$format = 'nombre'; $params = array(0);
+					break;
+				case 'puce' :
+				case 'logo' :
+					$td_css = 'image';
 					break;
 				case 'texte' : // ajouter : propre()
 				default :
-					$classes = 'text';
+					$td_css = 'text';
 					break;
-			}
-			if ( is_array($extra) && $nbr_couleurs=count($extra) ) { // on a bien un tableau de classes supplementaires
-				if ( $cle2 ) { // lignes colorees selon les valeurs d'un champ
-					$classes .= ' '.$extra[$data[$cle2]];
-				} else { // simple alternance de couleurs
-					$nbr_lignes++;
-					$classes .= ' '.$extra[$nbr_lignes%$nbr_couleurs];
-				}
-			} elseif ( $extra ) { // classe supplementaire appliquee inconditionnellement
-				$classes .= " $extra";
 			}
 			if ( $data[$cle1]==$selection )
 				$classes .= ' surligne';
 			$ok = array_unshift($params,$data[$champ]);
-			$res .= '<td class="'.$classes.'">'. call_user_func_array("association_formater_$format", $params) .'</td>';
+			$res .= '<td class="'.$td_css.'">'. call_user_func_array("association_formater_$format", $params) .'</td>';
 		}
 		foreach ($boutons as $params) {
 			$type = array_shift($params);
 			foreach ($params as &$param) {
 				$param = str_replace('$$', $data[$cle1], $param);
 			}
-			$res .= call_user_func_array("association_bouton_$type", $params);
+			$res .= '<td class="action">'. call_user_func_array("association_bouton_$type", $params) .'</td>';
 		}
 		$res .= "</tr>\n";
 	}

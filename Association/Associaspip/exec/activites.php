@@ -41,8 +41,8 @@ function exec_activites()
 		$liste_effectifs['impair'] = sql_countsel('spip_asso_activites AS a LEFT JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', "DATE_FORMAT(e.date_debut, '%Y')=$annee",'a.id_evenement', "SUM(a.inscrits)=0");
 		$liste_effectifs['impair'] = sql_countsel('spip_evenements', "DATE_FORMAT(date_debut, '%Y')=$annee")-$liste_effectifs['pair']; // le monde a l'envers... mais ca fonctionne
 		echo association_totauxinfos_effectifs('activites', array(
-			'pair'=>array( 'asso:activites_avec_inscrits', $liste_effectifs['pair'], ),
-			'impair'=>array( 'asso:activites_sans_inscrits', $liste_effectifs['impair'], ),
+			'pair'=>array( 'activites_avec_inscrits', $liste_effectifs['pair'], ),
+			'impair'=>array( 'activites_sans_inscrits', $liste_effectifs['impair'], ),
 		));
 /*
 		// STATS sur toutes les participations

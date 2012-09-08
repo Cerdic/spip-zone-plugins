@@ -51,8 +51,8 @@ function exec_exercices()
 				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),
 			), // entetes et formats des donnees
 			array(
-				array('supprimer', 'exercice', 'id=$$', 'td'),
-				array('modifier', 'exercice', 'id=$$', 'td'),
+				array('supprimer', 'exercice', 'id=$$' ),
+				array('modifier', 'exercice', 'id=$$' ),
 			), // boutons d'action
 			'id_exercice' // champ portant la cle des lignes et des boutons
 		);
