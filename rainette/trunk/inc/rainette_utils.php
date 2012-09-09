@@ -3,20 +3,6 @@
 define ('_RAINETTE_RELOAD_TIME_PREVISIONS',2*3600); // pas la peine de recharger des previsions de moins de 2h
 define ('_RAINETTE_RELOAD_TIME_CONDITIONS',1800); // pas la peine de recharger les conditions courantes de moins de 30mn
 
-function meteo2icone($meteo, $service='weather') {
-
-	// Traitement des cas ou les arguments sont vides
-	if (!$service) $service = 'weather';
-
-	// En fonction du service, on inclut le fichier des fonctions
-	// Le principe est que chaque service propose la même liste de fonctions d'interface dans un fichier unique
-	include_spip("services/${service}");
-
-	$iconifier = "${service}_meteo2icone";
-	$icone = $iconifier($meteo);
-
-	return $icone;
-}
 
 function meteo2resume($meteo){
 

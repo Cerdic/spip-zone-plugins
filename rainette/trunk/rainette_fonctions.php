@@ -41,10 +41,13 @@ function rainette_icone_meteo($icone, $taille='petit', $service='weather', $chem
 	$html_icone = '';
 
 	if (is_array($icone)) {
+		// Utilisation des icones natifs des services autres que weather.com
 		list ($l,$h) = @getimagesize($icone['url']);
 		$html_icone = '<img src="'.$icone['url'].'" alt="etat meteo" title="'.rainette_resume_meteo($icone['code']).'" width="'.$l.'" height="'.$h.'" />';
 	}
 	else {
+		// Utilisation des icones weather.com
+		$icone = weather_meteo2icone($icone);
 		if (!$chemin) $chemin = _RAINETTE_ICONES_PATH.$taille.'/';
 
 		// Le dossier personnalise ou le dossier passe en argument a bien l'icone requise
