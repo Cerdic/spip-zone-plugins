@@ -12,7 +12,7 @@ function action_editer_gis_dist($arg=null) {
 	
 	// si id_gis n'est pas un nombre, c'est une creation
 	if (!$id_gis = intval($arg)) {
-		if (!$id_gis = gis_inserer())
+		if (!autoriser('creer','gis') or !$id_gis = gis_inserer())
 			return array(false,_L('echec'));
 	}
 	$err = gis_modifier($id_gis);
@@ -25,33 +25,28 @@ function action_editer_gis_dist($arg=null) {
  * @return int/false $id_gis : l'identifiant numérique du point ou false en cas de non création
  */
 function gis_inserer() {
-	if(autoriser('creer','gis')){
-		$champs = array();
-		
-		// Envoyer aux plugins
-		$champs = pipeline('pre_insertion', array(
+	$champs = array();
+	
+	// Envoyer aux plugins
+	$champs = pipeline('pre_insertion', array(
+		'args' => array(
+			'table' => 'spip_gis',
+		),
+		'data' => $champs
+	));
+	
+	$id_gis = sql_insertq("spip_gis", $champs);
+	
+	pipeline('post_insertion',
+		array(
 			'args' => array(
 				'table' => 'spip_gis',
+				'id_objet' => $id_gis
 			),
 			'data' => $champs
-		));
-		
-		$id_gis = sql_insertq("spip_gis", $champs);
-		
-		pipeline('post_insertion',
-			array(
-				'args' => array(
-					'table' => 'spip_gis',
-					'id_objet' => $id_gis
-				),
-				'data' => $champs
-			)
-		);
-		return $id_gis;
-	}
-	else{
-		return false;
-	}
+		)
+	);
+	return $id_gis;
 }
 
 /**
