@@ -17,7 +17,7 @@ function wunderground_service2cache($lieu, $mode) {
 	$dir = sous_repertoire($dir, 'wunderground');
 	$fichier_cache = $dir . str_replace(array(',', '+', '.', '/'), '-', $lieu) 
 				   . "_" . $mode 
-				   . ($condition == 'wunderground' ? '-' . $langue : '')
+				   . ((($condition == 'wunderground') AND ($mode != 'infos')) ? '-' . $langue : '')
 				   . ".txt";
 
 	return $fichier_cache;
@@ -45,13 +45,18 @@ function wunderground_service2url($lieu, $mode) {
 		$query = $pays . '/' . $ville;
 	}
 
-	// Identification de la langue du resume
-	$code_langue = wunderground_langue2code($GLOBALS['spip_lang']);
+	// Identification de la langue du resume.
+	// Le choix de la langue n'a d'interet que si on utilise le resume natif du service. Si ce n'est pas le cas
+	// on ne la precise pas et on laisse l'API renvoyer la langue par defaut
+	$condition = lire_config('rainette/wunderground/condition', 'wunderground');
+	$code_langue = '';
+	if ($condition == 'wunderground')
+		$code_langue = wunderground_langue2code($GLOBALS['spip_lang']);
 
 	$url = _RAINETTE_WUNDERGROUND_URL_BASE_REQUETE
 		.  '/' . $cle
 		.  '/' . $demande
-		.  '/lang:' . $code_langue
+		.  ($code_langue ? '/lang:' . $code_langue : '')
 		.  '/q'
 		.  '/' . $query . '.xml';
 
@@ -442,7 +447,8 @@ function wunderground_xml2conditions($xml){
 		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
 		$condition = lire_config('rainette/wunderground/condition', 'wunderground');
 		if ($condition == 'wunderground') {
-			// On affiche les conditions natives fournies par le service
+			// On affiche les conditions natives fournies par le service.
+			// Celles-ci etant deja traduites dans la bonne langue on stocke le texte exact retourne par l'API
 			$tableau['icone']['code'] = $tableau['code_meteo'];
 			$theme = lire_config('rainette/wunderground/theme', 'a');
 			$url = _RAINETTE_WUNDERGROUND_URL_BASE_ICONE . '/' . $theme 
@@ -453,7 +459,7 @@ function wunderground_xml2conditions($xml){
 		else {
 			// On affiche les conditions traduites dans le systeme weather.com
 			// Pour le resume on stocke le code et non la traduction pour eviter de generer 
-			// un cache par langue comme pour le mode natif
+			// un cache par langue comme pour le mode natif. La traduction est faite via les fichiers de langue
 			$meteo = wunderground_meteo2weather($tableau['code_meteo'], $tableau['periode']);
 			$tableau['icone'] = $meteo;
 			$tableau['resume'] = $meteo;

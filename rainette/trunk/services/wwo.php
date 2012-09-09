@@ -225,10 +225,12 @@ function wwo_xml2conditions($xml){
 		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
 		$condition = lire_config('rainette/wwo/condition', 'wwo');
 		if ($condition == 'wwo') {
-			// On affiche les conditions natives fournies par le service
+			// On affiche les conditions natives fournies par le service.
+			// Pour le resume, wwo ne fournit pas de traduction : on stocke donc le code meteo afin
+			// de le traduire a partir des fichiers de langue SPIP.
 			$tableau['icone']['code'] = $tableau['code_meteo'];
 			$tableau['icone']['url'] = copie_locale($tableau['icon_meteo']);
-			$tableau['resume'] = ucfirst($tableau['desc_meteo']);
+			$tableau['resume'] = $tableau['code_meteo'];
 		}
 		else {
 			// On affiche les conditions traduites dans le systeme weather.com

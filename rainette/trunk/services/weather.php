@@ -141,8 +141,11 @@ function weather_xml2conditions($xml){
 			$tableau['icon_meteo'] = '';
 			$tableau['desc_meteo'] = $conditions['t'][0];
 
+			// TODO : determiner la periode jour ou nuit
 			$tableau['periode'] = '';
 
+			// La traduction du resume dans la bonne langue est toujours faite par les fichiers de langue SPIP
+			// car l'API ne permet pas de choisir la langue. On ne stocke donc que le code meteo
 			$tableau['icone'] = $tableau['code_meteo'];
 			$tableau['resume'] = $tableau['code_meteo'];
 		}
