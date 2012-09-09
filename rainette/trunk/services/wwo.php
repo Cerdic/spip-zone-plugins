@@ -109,7 +109,7 @@ function wwo_meteo2weather($meteo, $periode=0) {
  * @param array $xml
  * @return array
  */
-function wwo_xml2previsions($xml){
+function wwo_xml2previsions($xml, $lieu) {
 	include_spip('inc/xml');
 	$tableau = array();
 	$n = spip_xml_match_nodes(",^dayf,",$xml,$previsions);
@@ -162,7 +162,7 @@ function wwo_xml2previsions($xml){
 	return $tableau;
 }
 
-function wwo_xml2conditions($xml){
+function wwo_xml2conditions($xml, $lieu) {
 	$tableau = array();
 
 	// On stocke les informations disponibles dans un tableau standard

@@ -327,7 +327,7 @@ function wunderground_langue2code($langue) {
  * @param array $xml
  * @return array
  */
-function wunderground_xml2previsions($xml){
+function wunderground_xml2previsions($xml, $lieu) {
 	include_spip('inc/xml');
 	$tableau = array();
 	$n = spip_xml_match_nodes(",^dayf,",$xml,$previsions);
@@ -380,7 +380,7 @@ function wunderground_xml2previsions($xml){
 	return $tableau;
 }
 
-function wunderground_xml2conditions($xml){
+function wunderground_xml2conditions($xml, $lieu) {
 	$tableau = array();
 	include_spip('inc/rainette_utils');
 
@@ -467,7 +467,7 @@ function wunderground_xml2conditions($xml){
 	return $tableau;
 }
 
-function wunderground_xml2infos($xml){
+function wunderground_xml2infos($xml, $lieu) {
 	$tableau = array();
 
 	// On stocke les informations disponibles dans un tableau standard

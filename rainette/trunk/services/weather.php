@@ -53,7 +53,7 @@ function weather_meteo2icone($meteo) {
  * @param array $xml
  * @return array
  */
-function weather_xml2previsions($xml){
+function weather_xml2previsions($xml, $lieu) {
 	$tableau = array();
 	$n = spip_xml_match_nodes(",^dayf,",$xml,$previsions);
 	if ($n==1){
@@ -107,7 +107,7 @@ function weather_xml2previsions($xml){
 }
 
 
-function weather_xml2conditions($xml){
+function weather_xml2conditions($xml, $lieu) {
 	$tableau = array();
 	$n = spip_xml_match_nodes(",^cc,",$xml,$conditions);
 	if ($n==1){
