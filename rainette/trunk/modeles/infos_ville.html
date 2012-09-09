@@ -6,7 +6,10 @@
 <div class="rainette_infos">
 	<h2 class="ville">[(#ENV{ville})]</h2>
 	<div class="coordonnees">
-		<:rainette:longitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{longitude}|rainette_afficher_unite{angle})]<br/>
-		<:rainette:latitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{latitude}|rainette_afficher_unite{angle})]
+		<:rainette:longitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{longitude}|rainette_afficher_unite{angle})<br/>]
+		<:rainette:latitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{latitude}|rainette_afficher_unite{angle})<br/>]
+		[<br/><:rainette:population|ucfirst:>&nbsp;:&nbsp;(#ENV{population})]
+		[<br/><:rainette:region|ucfirst:>&nbsp;:&nbsp;(#ENV{region})]
+		[<br/><:rainette:zone_dvd:>&nbsp;:&nbsp;(#ENV{zone})]
 	</div>
 </div>

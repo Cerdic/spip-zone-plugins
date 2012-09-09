@@ -11,25 +11,12 @@
 
 [(#REM) Les informations d'une ville - weather ]
 #SET{code, #ENV{code,FRXX0076}}
-#SET{nom_ville, #RAINETTE_INFOS{#GET{code}, ville, weather}}
 <div class="cartouche">
-	<h1 class="h1"><:rainette:meteo_consultation{ville=#GET{nom_ville}}:></h1>
-	<p>Weather.com</p>
-	<p class="info-publi">
-		<small>
-			[<:rainette:longitude|ucfirst:>&nbsp;(#RAINETTE_INFOS{
-													#GET{code},
-													longitude,
-													weather}|rainette_afficher_unite{angle})]
-			[, <:rainette:latitude:>&nbsp;(#RAINETTE_INFOS{
-											#GET{code},
-											latitude,
-											weather}|rainette_afficher_unite{angle})]
-		</small>
-	</p>
-	[<p>Population : (#RAINETTE_INFOS{#GET{code}, population, weather})</p>]
-	[<p>R&eacute;gion : (#RAINETTE_INFOS{#GET{code}, region, weather})</p>]
-	[<p>Zone DVD : (#RAINETTE_INFOS{#GET{code}, zone, weather})</p>]
+	<h1 class="h1">Weather.com&reg;</h1>
+	[(#MODELE{rainette_infos,
+		code=#GET{code},
+		sous_modele=infos_ville,
+		service=weather})]
 </div>
 <br class="nettoyeur"/>
 
@@ -49,25 +36,12 @@
 
 [(#REM) Les informations d'une ville - wwo ]
 #SET{code, #ENV{ville,'Paris,France'}}
-#SET{nom_ville, #RAINETTE_INFOS{#GET{code}, ville, wwo}}
 <div class="cartouche">
-	<h1 class="h1"><:rainette:meteo_consultation{ville=#GET{nom_ville}}:></h1>
-	<p>World Weather Online</p>
-	<p class="info-publi">
-		<small>
-			[<:rainette:longitude|ucfirst:>&nbsp;(#RAINETTE_INFOS{
-													#GET{code},
-													longitude,
-													wwo}|rainette_afficher_unite{angle})]
-			[, <:rainette:latitude:>&nbsp;(#RAINETTE_INFOS{
-											#GET{code},
-											latitude,
-											wwo}|rainette_afficher_unite{angle})]
-		</small>
-	</p>
-	[<p>Population : (#RAINETTE_INFOS{#GET{code}, population, wwo})</p>]
-	[<p>R&eacute;gion : (#RAINETTE_INFOS{#GET{code}, region, wwo})</p>]
-	[<p>Zone DVD : (#RAINETTE_INFOS{#GET{code}, zone, wwo})</p>]
+	<h1 class="h1">World Weather Online</h1>
+	[(#MODELE{rainette_infos,
+		code=#GET{code},
+		sous_modele=infos_ville,
+		service=wwo})]
 </div>
 <br class="nettoyeur"/>
 
@@ -88,25 +62,12 @@
 
 [(#REM) Les informations d'une ville - wunderground ]
 #SET{code, #ENV{ville,'Paris,France'}}
-#SET{nom_ville, #RAINETTE_INFOS{#GET{code}, ville, wunderground}}
 <div class="cartouche">
-	<h1 class="h1"><:rainette:meteo_consultation{ville=#GET{nom_ville}}:></h1>
-	<p>Wunderground.com - #LANG</p>
-	<p class="info-publi">
-		<small>
-			[<:rainette:longitude|ucfirst:>&nbsp;(#RAINETTE_INFOS{
-													#GET{code},
-													longitude,
-													wunderground}|rainette_afficher_unite{angle})]
-			[, <:rainette:latitude:>&nbsp;(#RAINETTE_INFOS{
-											#GET{code},
-											latitude,
-											wunderground}|rainette_afficher_unite{angle})]
-		</small>
-	</p>
-	[<p>Population : (#RAINETTE_INFOS{#GET{code}, population, wunderground})</p>]
-	[<p>R&eacute;gion : (#RAINETTE_INFOS{#GET{code}, region, wunderground})</p>]
-	[<p>Zone DVD : (#RAINETTE_INFOS{#GET{code}, zone, wunderground})</p>]
+	<h1 class="h1">Weather Underground</h1>
+	[(#MODELE{rainette_infos,
+		code=#GET{code},
+		sous_modele=infos_ville,
+		service=wunderground})]
 </div>
 <br class="nettoyeur"/>
 

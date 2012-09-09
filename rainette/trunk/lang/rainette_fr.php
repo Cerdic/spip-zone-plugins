@@ -184,9 +184,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'point_rosee' => 'point de rosée',
+	'population' => 'population',
 	'pression' => 'pression',
 
 	// R
+	'region' => 'region',
 	'risque_precipitation' => 'risque de precip.',
 
 	// S
@@ -227,7 +229,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'valeur_indeterminee' => 'N/D',
 	'vent' => 'vent',
-	'visibilite' => 'visibilité'
+	'visibilite' => 'visibilité',
+
+	// Z
+	'zone_dvd' => 'Zone DVD',
 );
 
 ?>
