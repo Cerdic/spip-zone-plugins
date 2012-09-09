@@ -3,11 +3,11 @@
 	<label><:rainette:label_condition:></label>
 	[<span class='erreur'>(#ENV**{erreurs}|table_valeur{condition})</span>]
 	<div class="choix">
-		<input type="radio" name="condition" class="radio" id="#ENV{service}_condition_weather" value="weather"[(#ENV{condition, #ENV{service}}|=={weather}|oui)checked="checked"] />
-		<label for="#ENV{service}_condition_weather"><:rainette:label_condition_weather:></label>
-	</div>
-	<div class="choix">
 		<input type="radio" name="condition" class="radio" id="#ENV{service}_condition_native" value="#ENV{service}"[(#ENV{condition, #ENV{service}}|=={#ENV{service}}|oui)checked="checked"] />
 		<label for="#ENV{service}_condition_native"><:rainette:label_condition_native:></label>
+	</div>
+	<div class="choix">
+		<input type="radio" name="condition" class="radio" id="#ENV{service}_condition_weather" value="weather"[(#ENV{condition, #ENV{service}}|=={weather}|oui)checked="checked"] />
+		<label for="#ENV{service}_condition_weather"><:rainette:label_condition_weather:></label>
 	</div>
 </li>
