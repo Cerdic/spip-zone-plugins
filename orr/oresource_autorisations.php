@@ -18,12 +18,12 @@ function oresource_autoriser(){}
 // bouton de menu
 function autoriser_orrressources_menu_dist($faire, $type, $id, $qui, $opts){
 	return true;
-} 
+}
 
 
 // creer
 function autoriser_orrressource_creer_dist($faire, $type, $id, $qui, $opt) {
-	return autoriser('webmestre', '', '', $qui); 
+	return autoriser('webmestre', '', '', $qui);
 }
 
 // voir les fiches completes
@@ -50,7 +50,7 @@ function autoriser_orrressource_supprimer_dist($faire, $type, $id, $qui, $opt) {
 
 // creer
 function autoriser_orrreservation_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite')); 
+	return in_array($qui['statut'], array('0minirezo'));
 }
 
 // voir les fiches completes
@@ -60,7 +60,7 @@ function autoriser_orrreservation_voir_dist($faire, $type, $id, $qui, $opt) {
 
 // modifier
 function autoriser_orrreservation_modifier_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite'));
+	return in_array($qui['statut'], array('0minirezo'));
 }
 
 // supprimer
