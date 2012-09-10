@@ -49,6 +49,20 @@ define('_DIR_PLUGIN_ASSOCIATION_ICONES', _DIR_PLUGIN_ASSOCIATION.'img_pack/');
 if ( !isset($GLOBALS['spip_pipeline']['modules_asso']) )
 	$GLOBALS['spip_pipeline']['modules_asso'] = ''; // definir ce pipeline, sans ecraser sa valeur s'il existe
 
+/**
+ * @var const _MAX_ITEMS_ASSOCIASPIP
+ *   Nombre de lignes maximales dans les listes de membres, operations comptables, activites...
+ */
+if (!defined('_MAX_ITEMS_ASSOCIASPIP'))
+	define('_MAX_ITEMS_ASSOCIASPIP', 30);
+
+/**
+ * @var const _DATE_HEURE_ASSOCIASPIP
+ *   Indique s'il faut afficher l'heure en plus de la date
+ */
+if (!defined('_DATE_HEURE_ASSOCIASPIP'))
+	define('_DATE_HEURE_ASSOCIASPIP', FALSE);
+
 
 /*****************************************
  * @defgroup association_bouton
@@ -605,6 +619,7 @@ function association_formater_prix($montant, $devise_code='', $devise_symb='', $
  */
 function association_formater_texte($texte, $filtre='', $params=array() )
 {
+	include_spip('inc/texte'); // pour nettoyer_raccourci_typo
 	if ( !is_array($params) )
 		$params = array($params);
 	$ok = array_unshift($params, $texte);
@@ -651,10 +666,11 @@ function association_formater_puce($statut, $icone,  $acote=TRUE)
  * @return string $valeur
  *   Date au format ISO
  */
-function association_recuperer_date($valeur, $req=false)
+function association_recuperer_date($valeur, $req=TRUE)
 {
+	$valeur = ($req?_request($valeur):$valeur);
 	if ($valeur!='') {
-		$valeur = preg_replace('/\D/', '-', ($req?_request($valeur):$valeur), 2); // la limitation a 2 separateurs permet de ne transformer que la partie "date" s'il s'agit d'un "datetime" par exemple.
+		$valeur = preg_replace('/\D/', '-', $valeur, 2); // la limitation a 2 separateurs permet de ne transformer que la partie "date" s'il s'agit d'un "datetime" par exemple.
 	}
 	return $valeur;
 }
@@ -663,10 +679,11 @@ function association_recuperer_date($valeur, $req=false)
  * @return float $valeur
  *   Nombre decimal
  */
-function association_recuperer_montant($valeur, $req=false)
+function association_recuperer_montant($valeur, $req=TRUE)
 {
+	$valeur = ($req?_request($valeur):$valeur);
 	if ($valeur!='') {
-		$valeur = str_replace(' ', '', ($req?_request($valeur):$valeur) ); // suppprime les espaces separateurs de milliers
+		$valeur = str_replace(' ', '', $valeur); // suppprime les espaces separateurs de milliers
 		$valeur = str_replace(',', '.', $valeur); // convertit les , en .
 		$valeur = floatval($valeur);
 	} else
@@ -746,6 +763,15 @@ function association_verifier_membre($valeur, $rex=FALSE, $req=TRUE)
  * @defgroup association_selectionner
  * Selecteur HTML (liste deroulante) servant a filtrer le listing affiche en milieu de page
  *
+ * @return string $res
+ *   Code HTML du selecteur (ou du formulaire complet si $exec est indique)
+ *
+** @{ */
+
+/**
+ * @name association_selectionner_<liste>
+ * cas general de :
+ *
  * @param int $sel
  *   ID selectionne : conserve la valeur selectionnee
  * @param string $exec
@@ -756,10 +782,8 @@ function association_verifier_membre($valeur, $rex=FALSE, $req=TRUE)
  * @param string $plus
  *   Source HTML rajoute a la suite.
  *   (utile si on genere tout le formulaire avec des champs caches)
- * @return string $res
- *   Code HTML du selecteur (ou du formulaire complet si $exec est indique)
- *
-** @{ */
+ */
+//@{
 
 /**
  * Selecteur d'exercice comptable
@@ -860,6 +884,8 @@ function association_selectionner_id($sel='', $exec='', $plus='')
     return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>') : $res;
 }
 
+//@}
+
 /**
  * Selecteur d'annee parmi celles disponibles dans une table donnee
  *
@@ -932,6 +958,46 @@ function association_selectionner_destinations($sel='', $exec='', $plus='')
 	} else {
 		return FALSE;
 	}
+}
+
+/**
+ * Selecteur de sous-pagination
+ *
+ * @param int|array $pages
+ *   Nombre total de pages ou
+ *   Liste des elements a passer a "sql_countsel"
+ * @param string $params
+ *   Autres informations passees par l'URL
+ * @param int $debut
+ *   Numero du premier enregistrement (si $req est a faux)
+ *   Nom du champ contenant ce numero (si $req est a vrai)
+ * @param string $exec
+ *   Nom du fichier appelant
+ * @return string $res
+ *   HTML du bandeau de pagination
+ */
+function association_selectionner_souspage($pages, $exec='', $params='', $debut='debut', $req=TRUE)
+{
+	$res = '<td align="left">';
+	if ( is_array($pages) ) {
+		$nbr_pages = ceil(call_user_func_array('sql_countsel',$pages)/_MAX_ITEMS_ASSOCIASPIP); // ceil() ou intval()+1 ?
+	} else {
+		$nbr_pages = intval($pages);
+	}
+	if ( $nbr_pages>1 ) {
+		$debut = ($req?_request($debut):$debut);
+		$exec = ($exec?$exec:_request($exec));
+		for ($i=0; $i<$nbr_pages; $i++) {
+			$position = $i*_MAX_ITEMS_ASSOCIASPIP;
+			if ($position==$debut) { // page courante
+				$res .= ' <strong>'.$position.' </strong> ';
+			} else { // autre page
+				$res .= '<a href="'. generer_url_ecrire($exec, ($params?"$params&":'').'debut='.$position) .'">'.$position.'</a>  ';
+			}
+		}
+	}
+	$res .= '</td>';
+	return $res;
 }
 
 /** @} */
@@ -1369,7 +1435,8 @@ function association_bloc_listepdf($objet, $params=array(), $prefixeLibelle='', 
 /**
  * Listing sous forme de tableau HTML
  *
- * @param array $requete_sql
+ * @param ressource|array $requete_sql
+ *   Ressource de requete SQL
  *   Liste des parametres de "sql_select()"
  *   http://doc.spip.org/@sql_select
  *   http://programmer.spip.net/sql_select,569
@@ -1394,24 +1461,41 @@ function association_bloc_listepdf($objet, $params=array(), $prefixeLibelle='', 
  */
 function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(), $cle1='', $extra=array(), $cle2='', $selection=0 )
 {
-	if ( !is_array($requete_sql) || count($requete_sql)<2 )
+	if ( is_array($requete_sql) && count($requete_sql)>1 ) {
+		$table = ($requete_sql[1] ? $requete_sql[1] : ($requete_sql['table'] ? $requete_sql['table'] : ($requete_sql['from']?$requete_sql['from']:$requete_sql['tables']) ) ) ; // on recupere la partie "FROM" de la requete SQL...
+		$table = substr_replace(trim( is_array($table)?$table[0]:$table ), '', 0, 5); //  on supprime le prefixe "spip_" de la 1ere table (normalement la principale...)
+		$spc_pos = strpos($table, ' '); // requete avec alias (" AS ") ou jointure de plusieurs tables ( " JOIN ")
+		$table = substr($table, 0, $spc_pos?$spc_pos:strlen($table) ); // on recupere jusqu'au premier espace (donc le vrai nom de la 1ere table) sinon jusqu'a la fin.
+		$reponse_sql = call_user_func_array('sql_select', $requete_sql);
+	} elseif ( is_resource($requete_sql) ) {
+		$reponse_sql = $requete_sql;
+	} elseif ( is_string($requet_sql) ) {
+		$reponse_sql = call_user_func_array('sql_query', $requete_sql);
+		$table = substr_replace(substr($requete_sql, stripos(trim($requeste_sql), ' from ') ), '', 0, 5); // on recupere la partie "FROM" de la requete SQL... et on supprime le prefixe "spip_" de la premiere table (normalement la principale...)
+		$table = substr($table, 0, strlen($table)-strpos("$table ", ' ') ); // on recupere jusqu'au premier espace (donc le vrai nom de la 1ere table) sinon jusqu'a la fin.
+	} elseif ( !is_array($boutons) ) { // premier parametre non valide : impossible de poursuivre ; on sort sans erreur
 		return '';
-	$table = ($requete_sql[1] ? $requete_sql[1] : ($requete_sql['table'] ? $requete_sql['table'] : ($requete_sql['from']?$requete_sql['from']:$requete_sql['tables']) ) ) ; // on recupere la partie "FROM" de la requete SQL...
-	$table = substr_replace(trim( is_array($table)?$table[0]:$table ), '', 0, 5); //  on supprime le prefixe "spip_" de la 1ere table (normalement la principale...)
-	$spc_pos = strpos($table, ' '); // requete avec alias (" AS ") ou jointure de plusieurs tables ( " JOIN ")
-	$table = substr($table, 0, $spc_pos?$spc_pos:strlen($table) ); // on recupere jusqu'au premier espace (donc le vrai nom de la 1ere table) sinon la fin.
-	$res =  '<table width="100%" class="asso_tablo" id="liste_'.$table.'">';
+	}
+	if ( !is_array($presentation) ) { // second parametre non valide : impossible de poursuivre ; on sort sans erreur
+		return '';
+	} else { // ok, c'est un tableau...
+		foreach ($presentation as $param)
+			if ( !is_array($param) ) // ...de tableaux ?
+				return '';
+	}
+	$res =  '<table width="100%" class="asso_tablo'. ($table ? '" id="liste_'.$table : '') .'">';
 	$res .= "\n<thead>\n<tr>";
-	foreach ($presentation as &$param) {
+	foreach ($presentation as &$param) { // entetes
 		$entete = array_shift($param);
 		$res .= '<th>'. ($entete ? _T((strpos($entete,':') ? '' : 'asso:').$entete) : '&nbsp;' ) .'</th>';
 	}
-	if ( count($boutons) ) {
-		$res .= '<th colspan="'. count($boutons) .'" class="actions">'. _T('asso:entete_actions') .'</th>';
+	if ( count($boutons) ) { // colonne(s) de bouton(s) d'action
+		$res .= '<th colspan="'. count($boutons) .'" class="actions">'. _T('asso:entete_action'.(count($boutons)-1?'s':'')) .'</th>';
 	}
 	$res .= "</tr>\n</thead><tbody>";
+	if ( !is_array($boutons) )
+		return $res; // c'est une astuce pour generer la partie entete seulement
 	$nbr_lignes = 0;
-	$reponse_sql = call_user_func_array('sql_select', $requete_sql);
 	while ($data = sql_fetch($reponse_sql)) {
 		if ( is_array($extra) && $nbr_couleurs=count($extra) ) { // on a bien un tableau de classes supplementaires
 			if ( $cle2 ) { // lignes colorees selon les valeurs d'un champ
@@ -1512,6 +1596,20 @@ function sql_asso1ligne($table, $id, $pluriel=TRUE)
 	return sql_fetsel('*', "spip_asso_$table".($pluriel?'s':''), "id_$table=".intval($id));
 }
 
+/**
+ * Genere la borne (partie SQL LIMIT) d'enregistrements retournes
+ *
+ * @param string $valeur
+ *   Nom du champ utilise pour passer la page courante
+ * @return string
+ *   Chaine de la partie LIMIT-SQL pour sql_select et similaires
+ */
+function sql_asso1page($valeur='debut', $req=TRUE)
+{
+	$valeur = intval($req?_request($valeur):$valeur);
+	return "$valeur,"._MAX_ITEMS_ASSOCIASPIP;
+}
+
 /** @} */
 
 
@@ -1543,20 +1641,19 @@ function request_statut_interne()
 
 /**
  * Affichage du message indiquant la date
+ * (et l'heure si option activee)
  *
- * @param bool $heure
- *   Indique s'il faut afficher (vrai) ou pas (faux, par defaut) l'heure.
  * @return string $res
  */
-function association_date_du_jour($heure=false)
+function association_date_du_jour()
 {
 	$ladate = affdate_jourcourt(date('d/m/Y'));
-	$hr = ($heure?date('H'):'');
-	$mn = ($heure?date('i'):'');
-	$res = '<p class="'. ($heure?'datetime':'date');
-	$res .= '" title="'. date('Y-m-d') . ($heure?"T$hr:$mn":'');
-	$lheure = ($heure? _T('spip:date_fmt_heures_minutes', array('h'=>$hr,'m'=>$mn)) :'');
-	$res .= '">'.( $heure ? _T('asso:date_du_jour_heure', array('date'=>$ladate)) : _T('asso:date_du_jour',array('date'=>$ladate,'time'=>$lheure)) ).'</p>';
+	$hr = (_DATE_HEURE_ASSOCIASPIP?date('H'):'');
+	$mn = (_DATE_HEURE_ASSOCIASPIP?date('i'):'');
+	$res = '<p class="'. (_DATE_HEURE_ASSOCIASPIP?'datetime':'date');
+	$res .= '" title="'. date('Y-m-d') . (_DATE_HEURE_ASSOCIASPIP?"T$hr:$mn":'');
+	$lheure = (_DATE_HEURE_ASSOCIASPIP ? _T('spip:date_fmt_heures_minutes', array('h'=>$hr,'m'=>$mn)) :'');
+	$res .= '">'. (_DATE_HEURE_ASSOCIASPIP ? _T('asso:date_du_jour_heure', array('date'=>$ladate)) : _T('asso:date_du_jour',array('date'=>$ladate,'time'=>$lheure)) ).'</p>';
 	return $res;
 }
 

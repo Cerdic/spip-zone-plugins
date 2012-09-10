@@ -111,12 +111,7 @@ function exec_activites()
 		echo '<th>'. _T('asso:activite_entete_inscrits') .'</th>';
 		echo '<th colspan="3" class="actions">'. _T('asso:entete_action') .'</th>';
 		echo "</tr>\n</thead><tbody>";
-		$max_par_page = 30;
-		$debut = intval(_request('debut'));
-		if (!$debut) {
-			$debut = 0;
-		}
-		$query = sql_select('*, E.id_evenement, E.titre AS intitule'.$mc_sel, 'spip_evenements AS E'.$mc_join, "DATE_FORMAT(date_debut, '%Y')=$annee $mc_where", '', 'date_debut DESC', "$debut,$max_par_page");
+		$query = sql_select('*, E.id_evenement, E.titre AS intitule'.$mc_sel, 'spip_evenements AS E'.$mc_join, "DATE_FORMAT(date_debut, '%Y')=$annee $mc_where", '', 'date_debut DESC', sql_asso1page() );
 		while ($data = sql_fetch($query)) {
 			$inscrits = sql_fetsel('SUM(inscrits) AS total', 'spip_asso_activites', 'id_evenement='.$data['id_evenement']);
 			echo '<tr class="'. ($inscrits['total']?'pair':'impair') . (($id_evenement==$data['id_evenement'])?' surligne':'') .'" id="'.$data['id_evenement'].'">';
@@ -134,22 +129,9 @@ function exec_activites()
 		echo "</tbody>\n</table>\n";
 		echo "\n<table width='100%'>\n";
 		//SOUS-PAGINATION
-		echo "<table width='100%' class='asso_tablo_filtres'><tr>\n<td align='left'>";
-		$nombre_selection = sql_countsel('spip_evenements', "DATE_FORMAT(date_debut, '%Y')=$annee");
-		$pages = ceil($nombre_selection/$max_par_page);
-		if ($pages==1) {
-			echo '';
-		} else {
-			for ($i=0; $i<$pages; $i++) {
-				$position = $i*$max_par_page;
-				if ($position==$debut) {
-					echo ' <strong>'.$position.' </strong> ';
-				} else {
-					echo '<a href="'.generer_url_ecrire('activites','annee='.$annee.'&debut='.$position.'&imputation='.$imputation).'">'.$position.'</a>  ';
-				}
-			}
-		}
-		echo '</td></tr></table>';
+		echo "<table width='100%' class='asso_tablo_filtres'><tr>\n";
+		echo association_selectionner_souspage(array('spip_evenements', "DATE_FORMAT(date_debut, '%Y')=$annee"), 'activites', 'annee='.$annee );
+		echo '</tr></table>';
 		fin_page_association();
 	}
 }

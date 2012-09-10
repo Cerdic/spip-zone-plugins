@@ -17,11 +17,11 @@ function action_supprimer_ressources()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_ressource= $securiser_action();
-	if ( sql_countsel('spip_asso_prets', "id_ressource=$id_ressource") ) { /* s'il y a un historique, juste masquer a l'affichage. (en supprimant on ne perd pas l'historique mais les references pointent dans le neant...) */
+	if ( sql_countsel('spip_asso_prets', "id_ressource=$id_ressource") ) { // s'il y a un historique, juste masquer a l'affichage. (en supprimant on ne perd pas l'historique mais les references pointent dans le neant...)
 		sql_update('spip_asso_ressources', array(
 			'statut'=>NULL,
 		), "id_ressource=$id_ressource" );
-	} else {
+	} else { // on peut supprimer la reference
 		sql_delete('spip_asso_ressources', "id_ressource=$id_ressource" );
 	}
 }

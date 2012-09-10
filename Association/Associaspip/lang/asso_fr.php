@@ -43,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	# Entetes communes
 	'entete_action' => 'Action',
 	'entete_actions' => 'Actions',
+	'entete_article' => 'Article',
 	'entete_code' => 'R&eacute;f./Code',
 	'entete_commentaire' => 'Commentaire',
 	'entete_date' => 'Date',
@@ -619,8 +620,6 @@ Commentaire: @commentaire@
 	'ressources_titre_liste_ressources' => 'Liste des ressources',
 	'ressources_titre_mise_a_jour' => 'Mise &agrave; jour des ventes',
 	# En-tete
-	'ressources_entete_intitule' => 'Article',
-	'ressources_entete_code' => 'Code',
 	'ressources_entete_montant' => 'Location',
 	'ressources_entete_caution' => 'Caution',
 	'ressource_pretee' => 'Pr&ecirc;t&eacute;e',

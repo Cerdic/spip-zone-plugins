@@ -60,7 +60,7 @@ function exec_adherents()
 			$id_groupe = 0;
 		}
 		// on appelle ici la fonction qui calcule le code du formulaire/tableau de membres pour pouvoir recuperer la liste des membres affiches a transmettre pour la generation du pdf
-		list($where_adherents, $jointure_adherents, $code_liste_membres) = adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne, $id_groupe);
+		list($where_adherents, $jointure_adherents, $code_liste_membres) = adherents_liste($lettre, $critere, $statut_interne, $id_groupe);
 		$champsExclus = array();
 		if ( !$GLOBALS['association_metas']['civilite'] )
 			$champsExclus[] = 'sexe';
@@ -107,7 +107,7 @@ function exec_adherents()
 }
 
 /* adherent liste renvoie le code html et tout ce qu'il faut pour effectuer la requete avec les meme filtres (where et la possible jonction sur la table des groupes) */
-function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe, $max_par_page=30)
+function adherents_liste($lettre, $critere, $statut_interne, $id_groupe)
 {
 	if ($lettre)
 		$critere .= " AND UPPER( SUBSTRING( nom_famille, 1, 1 ) ) LIKE '$lettre' ";
@@ -118,7 +118,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe,
 	}
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	include_spip('inc/filtres_images_mini');
-	$query = sql_select('a.id_auteur AS id_auteur, b.email AS email, a.sexe, a.nom_famille, a.prenom, a.id_asso, b.statut AS statut, a.validite, a.statut_interne, a.categorie, b.bio AS bio','spip_asso_membres' .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur $jointure_groupe", $critere, '', 'nom_famille ', "$debut,$max_par_page" );
+	$query = sql_select('a.id_auteur AS id_auteur, b.email AS email, a.sexe, a.nom_famille, a.prenom, a.id_asso, b.statut AS statut, a.validite, a.statut_interne, a.categorie, b.bio AS bio','spip_asso_membres' .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur $jointure_groupe", $critere, '', 'nom_famille ', sql_asso1page() );
 	$auteurs = '';
 	while ($data = sql_fetch($query)) {
 		$id_auteur = $data['id_auteur'];
@@ -230,20 +230,8 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe,
 	. $auteurs
 	. "</tbody>\n</table>\n";
 	//SOUS-PAGINATION
-	$res .= "<table width='100%' class='asso_tablo_filtres'><tr>\n<td align='left'>";
-	$nombre_selection = sql_countsel('spip_asso_membres', $critere);
-	$pages = intval($nombre_selection/$max_par_page)+1;
-	if ($pages!=1)	{
-		for ($i=0; $i<$pages; $i++)	{
-			$position = $i*$max_par_page;
-			if ($position==$debut)	{
-				$res .= '<strong>'.$position.'</strong>';
-			} else {
-				$h = generer_url_ecrire('adherents', 'lettre='.$lettre.'&debut='.$position.'&statut_interne='.$statut_interne);
-				$res .= "<a href='$h'>$position</a>\n";
-			}
-		}
-	}
+	$res .= "<table width='100%' class='asso_tablo_filtres'><tr>\n";
+	$res .= association_selectionner_souspage(array('spip_asso_membres', $critere), 'adherents', 'lettre='.$lettre.'&statut_interne='.$statut_interne );
 	if (autoriser('editer_membres', 'association', 100)) {
 		$res .= "</td><td align='right' class='formulaire'><form>\n";
 		if ($auteurs) {

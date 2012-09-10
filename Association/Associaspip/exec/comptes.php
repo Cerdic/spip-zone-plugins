@@ -31,9 +31,6 @@ function exec_comptes()
 		$imputation = _request('imputation');
 		if (!$imputation)
 			$imputation= '%';
-		$max_par_page = intval(_request('max'));
-		if (!$max_par_page)
-			$max_par_page = 30;
 		$id_compte = intval(_request('id_compte', $_GET));
 		if (!$id_compte) {
 			$id_compte = intval(_request('id'));
@@ -44,7 +41,6 @@ function exec_comptes()
 			$date_operation = sql_getfetsel('date', 'spip_asso_comptes', 'id_compte='.$id_compte);
 			$id_exercice = sql_getfetsel('id_exercice','spip_asso_exercices', "fin>='$date_operation' AND debut<='$date_operation'", '', 'debut DESC');
 		}
-		$debut = intval(_request('debut'));
 		$exercice_data = sql_asso1ligne('exercice', $id_exercice);
 // traitements
 		$where = 'imputation LIKE '. sql_quote($imputation);
@@ -127,29 +123,16 @@ function exec_comptes()
 			while (($index_id_compte<0) && (list($k,$v) = each($all_id_compte))) {
 				if ($v['id_compte']==$id_compte) $index_id_compte = $k;
 			}
-			/* on recalcule le parametre de limite de la requete */
-			if ($index_id_compte>=0) {
-				$debut = intval($index_id_compte/$max_par_page)*$max_par_page;
+			if ($index_id_compte>=0) { // on recalcule le parametre de limite de la requete
+				set_request('debut', intval($index_id_compte/_MAX_ITEMS_ASSOCIASPIP)*_MAX_ITEMS_ASSOCIASPIP);
 			}
 		}
 		// TABLEAU
-		$table = comptes_while($where, "$debut,$max_par_page", $id_compte);
+		$table = comptes_while($where, sql_asso1page(), $id_compte);
 		if ($table) {
 			//SOUS-PAGINATION
-			$nombre_selection = sql_countsel('spip_asso_comptes', $where);
-			$pages = intval($nombre_selection/$max_par_page)+1;
-			$nav = '';
-			if ($pages!=1)
-				for ($i=0; $i<$pages; $i++) {
-					$position = $i*$max_par_page;
-					if ($position==$debut) {
-						$nav .= '<strong>'.$position.' </strong>';
-					} else {
-						$h = generer_url_ecrire('comptes',"exercice=$id_exercice"."&imputation=$imputation". (is_numeric($vu) ? "&vu=$vu" : '') ."&debut=$position");
-						$nav .= "<a href='$h'>$position</a>\n";
-				}
-			}
-			//
+			$nav = association_selectionner_souspage(array('spip_asso_comptes', $where), 'comptes', "exercice=$id_exercice"."&imputation=$imputation". (is_numeric($vu)?"&vu=$vu":'') );
+			// ENTETES
 			$table = "<table width='100%' class='asso_tablo' id='asso_tablo_comptes'>\n"
 			. "<thead>\n<tr>"
 			. '<th>'. _T('asso:entete_id') .'</th>'
@@ -158,7 +141,7 @@ function exec_comptes()
 			. '<th>'. _T('asso:compte_entete_justification') .'</th>'
 			. '<th>'. _T('asso:entete_montant') .'</th>'
 			. '<th>'. _T('asso:compte_entete_financier') .'</th>'
-			. '<th colspan="3" class="actions">'. _T('asso:entete_action') .'</th>'
+			. '<th colspan="3" class="actions">'. _T('asso:entete_actions') .'</th>'
 			. "</tr>\n</thead><tbody>"
 			. $table
 			. "</tbody>\n</table>\n"

@@ -86,7 +86,7 @@ rdm */
 			array(
 				'id_ressource' => array('asso:entete_id', 'entier'),
 				'statut' => array('', 'puce', $s_ico, false),
-				'intitule' => array('asso:ressources_entete_intitule', 'texte'),
+				'intitule' => array('asso:entete_article', 'texte'),
 				'code' => array('asso:entete_code', 'texte'),
 				'pu' => array('asso:ressources_entete_montant', 'prix'),
 //				'ud' => array('asso:entete_code', 'duree', 'M'), // '<td class="decimal">'.association_formater_prix($data['pu']).' / '.association_formater_duree(1,$data['ud']).'</td>'
