@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Fonctions utiles pour les squelettes de la fabrique
+ *
+ * @package SPIP\Fabrique\Fonctions
+**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
@@ -14,7 +19,7 @@ if (!function_exists("lister_tables_sql")) {
  * - autre:spip_truc 
  *
  * @return array
- * 		Liste des tables.
+ *     Liste des tables.
 **/
 function lister_tables_sql() {
 	static $tables = false;

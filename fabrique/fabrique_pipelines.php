@@ -1,8 +1,20 @@
 <?php
 
+/**
+ * Utilisation des pipelines
+ *
+ * @package SPIP\Fabrique\Pipelines
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
+/**
+ * Ajout de bulles de compagnon sur la page de création de plugins
+ * depuis la Fabrique
+ *
+ * @param array $flux  Données du pipeline
+ * @return array       Données du pipeline
+**/
 function fabrique_compagnon_messages($flux) {
 
 	$exec = $flux['args']['exec'];

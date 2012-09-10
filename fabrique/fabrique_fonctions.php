@@ -1,16 +1,24 @@
 <?php
 
+/**
+ * Fonctions utiles pour les squelettes de la fabrique
+ *
+ * @package SPIP\Fabrique\Fonctions
+**/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * Determiner le repertoire de travail
- * de la Fabrique. Dans
+ * Déterminer le répertoire de travail
+ * de la Fabrique.
+ *
+ * Dans :
  * - plugins/fabrique_auto si possible, sinon dans
  * - tmp/cache/fabrique
  *
  * @return string
- * 		Le chemin de destination depuis la racine de SPIP.
+ *     Le chemin de destination depuis la racine de SPIP.
 **/
 function fabrique_destination() {
 	static $destination = null;
@@ -27,9 +35,18 @@ function fabrique_destination() {
 
 
 /**
- * Crée l'arborescence manquante 
- * sous_repertoire_complet('a/b/c/d');
- * appelle sous_repertoire() autant de fois que necessaire.
+ * Crée l'arborescence manquante
+ *
+ * Crée tous les répertoires manquants dans une arborescence donnée.
+ * Les répertoires sont séparés par des '/'
+ * 
+ * @example 
+ *     sous_repertoire_complet('a/b/c/d');
+ *     appelle sous_repertoire() autant de fois que nécéssaire.
+ * 
+ * @param string $arbo
+ *     Arborescence, tel que 'prive/squelettes/contenu'
+ * @return void
 **/
 function sous_repertoire_complet($arbo) {
 	$a = explode('/', $arbo);
@@ -50,14 +67,15 @@ function sous_repertoire_complet($arbo) {
 
 
 /**
- * Concatene en utilisant implode un tableau, de maniere recursive 
+ * Concatène en utilisant implode, un tableau, de maniere récursive 
  *
  * @param array $tableau
- * 		Tableau a transformer
+ *     Tableau à transformer
  * @param string $glue
- * 		Chaine inseree entre les valeurs
- * @return string
- * 		Chaine concatenee
+ *     Chaine insérée entre les valeurs
+ * @return string|bool
+ *     - False si pas un tableau
+ *     - Chaine concaténée sinon
 **/
 function fabrique_implode_recursif($tableau, $glue='') {
 	if (!is_array($tableau)) {
@@ -75,8 +93,14 @@ function fabrique_implode_recursif($tableau, $glue='') {
 
 
 /**
- * Fait écrire <?php  
- * sans que ce php soit execute par SPIP !
+ * Écrit une ouverture de code PHP
+ * 
+ * Fait écrire '<?php' sans que ce php soit executé par SPIP !
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée du code à produire
 **/
 function balise_PHP_dist($p) {
 	$p->code = "'<?php echo \'<?php\n\'; ?>'";
@@ -85,10 +109,23 @@ function balise_PHP_dist($p) {
 }
 
 /**
- * Convertie une chaine pour en faire une chaine de langue
- * &#xxx => le bon caractère
- * ' => \' 
+ * Convertie une chaîne pour en faire une chaîne de langue
  *
+ * Permet d'insérer un texte comme valeur d'une clé de langue, lorsqu'on
+ * crée un fichier de langue avec la fabrique.
+ * 
+ * Transforme les caractères &# et échappe les apostrophes :
+ * - &#xxx => le bon caractère
+ * - ' => \' 
+ *
+ * @example
+ *     '#ENV{prefixe}_description' => '[(#ENV{paquet/description}|chaine_de_langue)]',
+ * 
+ * @link http://www.php.net/manual/fr/function.html-entity-decode.php#104617
+ * @param string $texte
+ *     Le texte à écrire dans la chaîne de langue
+ * @return string
+ *     Le texte transformé
 **/
 function chaine_de_langue($texte) {
 	$texte = html_entity_decode($texte, ENT_QUOTES, 'UTF-8');
@@ -99,11 +136,27 @@ function chaine_de_langue($texte) {
 }
 
 /**
- * Modifie le nom de la cle de langue pour
+ * Modifie le nom de la clé de langue pour
  * utiliser le vrai nom de l'objet
  *
- * titre_objets => titre_chats
- * icone_creer_objet => icone_creer_chat
+ * Remplace 'objets' par le nom de l'objet, et 'objet' par le type d'objet,
+ * mais ne touche pas à '\objets' ou '\objet'.
+ *
+ * @note
+ *     Cette fonction ne sert pas uniquement à définir des clés pour
+ *     les fichiers de chaînes de langue, et pourrait être renommée
+ * 
+ * @example
+ *     cle_de_langue('titre_objets') => titre_chats
+ *     cle_de_langue('icone_creer_objet') => icone_creer_chat
+ *     cle_de_langue('prive/\objets/infos/objet.html') => prive/objets/infos/chat.html
+ * @param string $cle
+ *     La clé à transformer
+ * @param array $desc_objet
+ *     Couples d'information sur l'objet en cours, avec les index
+ *     'objet' et 'type' définis
+ * @retrun string
+ *     La clé transformée
 **/
 function cle_de_langue($cle, $desc_objet) {
 	// on permet d'echapper \objets pour trouver 'objets' au bout du compte
@@ -117,8 +170,16 @@ function cle_de_langue($cle, $desc_objet) {
 }
 
 /**
- * Identique a |cle_de_langue sur toutes les valeurs d'un tableau 
+ * Identique à |cle_de_langue sur toutes les valeurs d'un tableau 
  *
+ * @see cle_de_langue()
+ * @param array $tableau
+ *     Tableau dont on veut transformer les valeurs
+ * @param array $desc_objet
+ *     Couples d'information sur l'objet en cours, avec les index
+ *     'objet' et 'type' définis
+ * @return array
+ *     Tableau avec les valeurs transformées
 **/
 function tab_cle_de_langue($tableau, $desc_objet) {
 	foreach($tableau as $c => $v) {
@@ -128,17 +189,17 @@ function tab_cle_de_langue($tableau, $desc_objet) {
 }
 
 /**
- * Cherche s'il existe une chaine de langue pour les cles de tableaux
+ * Cherche s'il existe une chaîne de langue pour les clés de tableaux
  * et ajoute alors la traduction dans la valeur de ce tableau
  *
  * @param array $tableau
- * 		Tableau cle => texte
+ *     Couples (clé => texte)
  * @param string $prefixe_cle
- * 		Prefixe ajoute aux cles pour chercher les trads
+ *     Préfixe ajouté aux clés pour chercher les trads
  * @param string $sep
- * 		Séparateur entre l'ancienne valeur et la concaténation de traduction
+ *     Séparateur entre l'ancienne valeur et la concaténation de traduction
  * @return array
- * 		Le tableau complété
+ *     Couples (clé => texte complété de la traduction si elle existe)
 **/
 function tab_cle_traduite_ajoute_dans_valeur($tableau, $prefixe_cle="", $sep = "&nbsp;: ") {
 	foreach($tableau as $c => $v) {
@@ -156,11 +217,11 @@ function tab_cle_traduite_ajoute_dans_valeur($tableau, $prefixe_cle="", $sep = "
  * Équivalent de wrap() sur les valeurs du tableau
  * 
  * @param array $tableau
- * 		Tableau cle => texte
+ *     Tableau cle => texte
  * @param string $balise
- * 		Balise qui encapsule
+ *     Balise qui encapsule
  * @return array $tableau
- * 		Tableau cle => <balise>texte</balise>
+ *     Tableau clé => <balise>texte</balise>
 **/
 function tab_wrap($tableau, $balise) {
 	foreach ($tableau as $c => $v) {
@@ -171,9 +232,14 @@ function tab_wrap($tableau, $balise) {
 
 
 /**
- * Fabrique un tableau de chaines de langues
- * avec des cles d'origines passees dans la fonctions
- * cle_de_langue, et trie. 
+ * Fabrique un tableau de chaînes de langues
+ * avec des clés d'origines passées dans la fonctions
+ * cle_de_langue, et trie.
+ *
+ * @param array $objet
+ *     Description de l'objet dans la fabrique
+ * @return array
+ *     Couples (clé de langue => Texte)
 **/
 function fabriquer_tableau_chaines($objet) {
 	$chaines = array();
@@ -203,17 +269,18 @@ function fabriquer_tableau_chaines($objet) {
 	return $chaines;
 }
 
-/*
+/**
  * Retourne la description des rôles pour un objet
  *
- * @param array $objet Descrption de l'objet
- * @return array Description des roles
- *     4 index :
+ * @param array $objet
+ *     Descrption de l'objet
+ * @return array
+ *     Description des rôles. 4 index :
  *     - roles_colonne : la colonne utilisée, toujours 'role'
- *     - roles_titre : couples clé du role, clé de langue du role
- *     - roles_objets : tableau objet => liste des clés de roles
- *     - roles_trads : couples clé de langue => Texte
- *     - roles_defaut : la clé du role par défaut
+ *     - roles_titre   : couples clé du role, clé de langue du role
+ *     - roles_objets  : tableau objet => liste des clés de roles
+ *     - roles_trads   : couples clé de langue => Texte
+ *     - roles_defaut  : la clé du role par défaut
  */
 function fabrique_description_roles($objet) {
 	$desc = array();
@@ -247,7 +314,17 @@ function fabrique_description_roles($objet) {
 
 /**
  * Indique si le champ est présent dans l'objet
- * (un champ au sens sql)
+ *
+ * Champ, au sens de colonne SQL
+ *
+ * @param array $objet
+ *     Descrption de l'objet
+ * @param string $champ
+ *     Nom du champ SQL à tester
+ * @return string
+ *     Même retour que le filtre |oui :
+ *     - Un espace si le champ SQL exsitera dans l'objet
+ *     - Chaîne vide sinon
 **/
 function champ_present($objet, $champ) {
 	if (is_array($objet['champs'])) {
@@ -291,7 +368,17 @@ function champ_present($objet, $champ) {
 
 /**
  * Indique si toutes les options sont présentes dans l'objet
- * (c'est a dire une cle de configuration, pas un nom de champ SQL)
+ * 
+ * Option au sens de clé de configuration, pas un nom de champ SQL
+ *
+ * @param array $objet
+ *     Descrption de l'objet
+ * @param array $champs
+ *     Liste de nom d'options à tester
+ * @return string
+ *     Même retour que le filtre |oui :
+ *     - Un espace si toutes les options sont présentes dans l'objet
+ *     - Chaîne vide sinon
 **/
 function options_presentes($objet, $champs) {
 	if (!$champs) return false;
@@ -307,7 +394,17 @@ function options_presentes($objet, $champs) {
 
 /**
  * Indique si une option est présente dans l'objet
- * (c'est a dire une cle de configuration, pas un nom de champ SQL)
+ * 
+ * Option au sens de clé de configuration, pas un nom de champ SQL
+ *
+ * @param array $objet
+ *     Descrption de l'objet
+ * @param array $champ
+ *     Nom de l'option à tester
+ * @return string
+ *     Même retour que le filtre |oui :
+ *     - Un espace si l'option est présente dans l'objet
+ *     - Chaîne vide sinon
 **/
 function option_presente($objet, $champ) {
 	// a la racine
@@ -340,7 +437,19 @@ function option_presente($objet, $champ) {
 }
 
 
-// indique si une option donnée est presente dans le champ
+/**
+ * Indique si une option donnée est presente dans la définition d'un champ
+ * de la fabrique
+ *
+ * @param array $champ
+ *     Description d'un champ SQL d'un objet créé avec la fabrique
+ * @param string $option
+ *     Option testée
+ * @return string
+ *     Même retour que le filtre |oui :
+ *     - Un espace si l'option est présente dans le champ de l'objet
+ *     - Chaîne vide sinon
+ */
 function champ_option_presente($champ, $option) {
 	if (isset($champ[$option]) and $champ[$option]) {
 		return " "; // true
@@ -357,12 +466,27 @@ function champ_option_presente($champ, $option) {
 }
 
 /**
- * Retourne les objets possedant un certain champ (au sens sql)
+ * Retourne les objets possédant un certain champ SQL
+ * 
  * Cela simplifie des boucles DATA
- * #OBJETS|objets_champ_present{id_rubrique}
  *
- * On peut ne retourner qu'une liste de type de valeur (objet, type, id_objet)
- * #OBJETS|objets_champ_present{id_rubrique, objet} // chats,souris
+ * @example
+ *     #OBJETS|objets_champ_present{id_rubrique}
+ * 
+ *     On peut ne retourner qu'une liste de type de valeur (objet, type, id_objet)
+ *     #OBJETS|objets_champ_present{id_rubrique, objet} // chats,souris
+ *
+ * @param array $objets
+ *     Liste des descriptions d'objets créés avec la fabrique
+ * @param string $champ
+ *     Type de champ sélectionné
+ * @param string $type
+ *     Information de retour désiré :
+ *     - vide pour toute la description de l'objet
+ *     - clé dans la description de l'objet pour obtenir uniquement ces descriptions
+ * @return array
+ *     - tableau de description des objets sélectionnés (si type non défini)
+ *     - tableau les valeurs du type demandé dans les objets sélectionnés (si type défini)
 **/
 function objets_champ_present($objets, $champ, $type='') {
 	return _tableau_option_presente('champ_present', $objets, $champ, $type);
@@ -370,15 +494,28 @@ function objets_champ_present($objets, $champ, $type='') {
 
 
 /**
- * Retourne les objets possedant une certaine option
- * (au sens des cles du formulaire de configuration de l'objet)
- * 
- * #OBJETS|objets_option_presente{vue_rubrique}
- * #OBJETS|objets_option_presente{auteurs_liens}
+ * Retourne les objets possédant une certaine option
  *
- * On peut ne retourner qu'une liste de type de valeur (objet, type, id_objet)
- * #OBJETS|objets_option_presente{auteurs_liens, objet} // chats,souris
- * 
+ * Option au sens des clés du formulaire de configuration de l'objet
+ *
+ * @example 
+ *     #OBJETS|objets_option_presente{vue_rubrique}
+ *     #OBJETS|objets_option_presente{auteurs_liens}
+ *
+ *     On peut ne retourner qu'une liste de type de valeur (objet, type, id_objet)
+ *     #OBJETS|objets_option_presente{auteurs_liens, objet} // chats,souris
+ *
+ * @param array $objets
+ *     Liste des descriptions d'objets créés avec la fabrique
+ * @param string $option
+ *     Type d'option sélectionnée
+ * @param string $type
+ *     Information de retour désiré :
+ *     - vide pour toute la description de l'objet
+ *     - clé dans la description de l'objet pour obtenir uniquement ces descriptions
+ * @return array
+ *     - tableau de description des objets sélectionnés (si type non défini)
+ *     - tableau les valeurs du type demandé dans les objets sélectionnés (si type défini)
 **/
 function objets_option_presente($objets, $option, $type='') {
 	return _tableau_option_presente('option_presente', $objets, $option, $type);
@@ -386,38 +523,97 @@ function objets_option_presente($objets, $option, $type='') {
 
 
 /**
- * Retourne les objets possedant plusieurs options
- * (au sens des cles du formulaire de configuration de l'objet)
+ * Retourne les objets possédant plusieurs options
  * 
- * #OBJETS|objets_options_presentes{#LISTE{table_liens,vue_liens}}
+ * Option au sens des clés du formulaire de configuration de l'objet
+ *
+ * @example
+ *     #OBJETS|objets_options_presentes{#LISTE{table_liens,vue_liens}}
  * 
- * On peut ne retourner qu'une liste de type de valeur (objet, type, id_objet)
- * #OBJETS|objets_options_presentes{#LISTE{table_liens,vue_liens}, objet} // chats,souris
+ *     On peut ne retourner qu'une liste de type de valeur (objet, type, id_objet)
+ *     #OBJETS|objets_options_presentes{#LISTE{table_liens,vue_liens}, objet} // chats,souris
  * 
+ * @param array $objets
+ *     Liste des descriptions d'objets créés avec la fabrique
+ * @param array $options
+ *     Liste de type d'option à sélectionner
+ * @param string $type
+ *     Information de retour désiré :
+ *     - vide pour toute la description de l'objet
+ *     - clé dans la description de l'objet pour obtenir uniquement ces descriptions
+ * @return array
+ *     - tableau de description des objets sélectionnés (si type non défini)
+ *     - tableau les valeurs du type demandé dans les objets sélectionnés (si type défini)
 **/
 function objets_options_presentes($objets, $options, $type='') {
 	return _tableau_options_presentes('option_presente', $objets, $options, $type);
 }
 
 /**
- * Retourne des champs en fonction des options trouvees
- * #CHAMPS|champs_option_presente{editable}
- * #CHAMPS|champs_option_presente{versionne}
+ * Retourne des champs en fonction d'une option trouvée
+ *
+ * @example
+ *     #CHAMPS|champs_option_presente{editable}
+ *     #CHAMPS|champs_option_presente{versionne}
+ *
+ * @param array $champs
+ *     Liste des descriptions de champs d'un objet créé avec la fabrique
+ * @param string $option
+ *     Type d'option sélectionnée
+ * @param string $type
+ *     Information de retour désiré :
+ *     - vide pour toute la description du champ
+ *     - clé dans la description du champ pour obtenir uniquement ces descriptions
+ * @return array
+ *     - tableau de description des champs sélectionnés (si type non défini)
+ *     - tableau les valeurs du type demandé dans les champs sélectionnés (si type défini)
 **/
 function champs_option_presente($champs, $option, $type='') {
 	return _tableau_option_presente('champ_option_presente', $champs, $option, $type);
 }
 
 /**
- * Retourne des champs en fonction des options trouvees
- * #CHAMPS|champs_options_presentes{#LISTE{obligatoire,saisie}}
+ * Retourne des champs en fonction des options trouvées
+ *
+ * @example
+ *     #CHAMPS|champs_options_presentes{#LISTE{obligatoire,saisie}}
+ *
+ * @param array $champs
+ *     Liste des descriptions de champs d'un objet créé avec la fabrique
+ * @param array $options
+ *     Liste de type d'options à sélectionner
+ * @param string $type
+ *     Information de retour désiré :
+ *     - vide pour toute la description du champ
+ *     - clé dans la description du champ pour obtenir uniquement ces descriptions
+ * @return array
+ *     - tableau de description des champs sélectionnés (si type non défini)
+ *     - tableau les valeurs du type demandé dans les champs sélectionnés (si type défini)
 **/
 function champs_options_presentes($champs, $options, $type='') {
 	return _tableau_options_presentes('champ_option_presente', $champs, $options, $type);
 }
 
 
-// fonction generique pour retourner une liste de choses dans un tableau
+/**
+ * Fonction générique pour retourner une liste de choses dans un tableau
+ *
+ * @param string $func
+ *     Nom de la fonction à appeler, tel que
+ *     - champ_option_presente
+ *     - option_presente
+ *     - ...
+ * @param array $tableau
+ *     Tableau de descriptions (descriptions d'objet ou descriptions de champ d'objet)
+ * @param string $option
+ *     Nom de l'option dont on teste la présence
+ * @param string $type
+ *     Information de retour désiré :
+ *     - vide pour toute la description
+ *     - clé dans la description pour obtenir uniquement ces descriptions
+ * @return array
+ *     Liste des descriptions correspondant à l'option demandée
+ */
 function _tableau_option_presente($func, $tableau, $option, $type='') {
 	$o = array();
 
@@ -442,7 +638,25 @@ function _tableau_option_presente($func, $tableau, $option, $type='') {
 	return $o;
 }
 
-// fonction generique pour retourner une liste de choses multiples dans un tableau
+/**
+ * Fonction générique pour retourner une liste de choses multiples dans un tableau
+ *
+ * @param string $func
+ *     Nom de la fonction à appeler, tel que
+ *     - champ_option_presente
+ *     - option_presente
+ *     - ...
+ * @param array $tableau
+ *     Tableau de descriptions (descriptions d'objet ou descriptions de champ d'objet)
+ * @param array $options
+ *     Nom des l'options dont on teste leur présence
+ * @param string $type
+ *     Information de retour désiré :
+ *     - vide pour toute la description
+ *     - clé dans la description pour obtenir uniquement ces descriptions
+ * @return array
+ *     Liste des descriptions correspondant aux options demandées
+ */
 function _tableau_options_presentes($func, $tableau, $options, $type='') {
 	if (!$options) return array();
 
@@ -475,16 +689,16 @@ function _tableau_options_presentes($func, $tableau, $options, $type='') {
 /**
  * Retourne une ecriture de criteres
  * {id_parent?}{id_documentation?}
- * avec tous les champs id_x declares dans l'interface
+ * avec tous les champs id_x declarés dans l'interface
  * dans la liste des champs.
  * 
  * Cela ne concerne pas les champs speciaux (id_rubrique, id_secteur, id_trad)
  * qui ne seront pas inclus. 
  *
  * @param array $objet
- * 		Description de l'objet
+ *     Description de l'objet dans la fabrique
  * @return string
- * 		L'écriture des criteres de boucle
+ *     L'écriture des critères de boucle
 **/
 function criteres_champs_id($objet) {
 	$ids = array();
@@ -505,11 +719,15 @@ function criteres_champs_id($objet) {
  * Retourne un tableau de toutes les tables SQL
  * pour tous les objets.
  *
- * Avec le second paramètre, on peut ne récupérer que :
- * - 'tout' => toutes les tables (par défaut)
- * - 'objets' => les tables d'objet (spip_xx, spip_yy)
- * - 'liens' => les tables de liens (spip_xx_liens, spip_yy_liens)
- *
+ * @param array $objets
+ *     Liste des descriptions d'objets créés avec la fabrique
+ * @param string $quoi
+ *     Choix du retour désiré :
+ *     - 'tout'   => toutes les tables (par défaut)
+ *     - 'objets' => les tables d'objet (spip_xx, spip_yy)
+ *     - 'liens'  => les tables de liens (spip_xx_liens, spip_yy_liens)
+ * @return array
+ *     Liste des tables
 **/
 function fabrique_lister_tables($objets, $quoi='tout') {
 	static $tables = array();
@@ -542,7 +760,16 @@ function fabrique_lister_tables($objets, $quoi='tout') {
 }
 
 
-// indique si un des objets a besoin du pipeline demande
+/**
+ * Indique si un des objets a besoin du pipeline demandé
+ *
+ * @param array $objets
+ *     Liste des descriptions d'objets créés avec la fabrique
+ * @param string $pipeline
+ *     Nom du pipeline
+ * @return array
+ *     Liste des objets (descriptions) utilisant le pipeline
+ */
 function fabrique_necessite_pipeline($objets, $pipeline) {
 
 	if (!$objets) return false;
@@ -593,18 +820,19 @@ function fabrique_necessite_pipeline($objets, $pipeline) {
 
 
 /**
- * Un peu equivalent a var_export
- * si $quote = true, on applique sql_quote sur tous les champs
+ * Crée le code PHP de création d'un tableau
+ * 
+ * Fonction un peu équivalente à var_export()
  * 
  * @param array $tableau
- * 		Le tableau dont on veut obtenir le code de creation array( ... )
+ *     Le tableau dont on veut obtenir le code de création array( ... )
  * @param bool $quote
- * 		Appliquer sql_quote() sur chaque valeur (dans le code retourne)
+ *     Appliquer sql_quote() sur chaque valeur (dans le code retourne)
  * @param string $defaut
- * 		Si $tableau est vide ou n'est pas une chaine, la fonction retourne cette valeur
+ *     Si $tableau est vide ou n'est pas une chaîne, la fonction retourne cette valeur
  * @return string
- * 		Le code de creation du tableau, avec eventuellement le code pour appliquer sql_quote.
- * 
+ *     - Le code de création du tableau, avec éventuellement le code pour appliquer sql_quote.
+ *     - $defaut si le tableau est vide
 **/
 function ecrire_tableau($tableau, $quote = false, $defaut = "array()") {
 	// pas de tableau ?
@@ -621,22 +849,53 @@ function ecrire_tableau($tableau, $quote = false, $defaut = "array()") {
 }
 
 /**
- * Identique a ecrire_tableau() mais ne retourne rien si le tableau est vide
- *
+ * Crée le code PHP de création d'un tableau sauf s'il est vide
+ * 
+ * Identique à ecrire_tableau() mais ne retourne rien si le tableau est vide
+ * @see ecrire_tableau()
+ * 
+ * @param array $tableau
+ *     Le tableau dont on veut obtenir le code de création array( ... )
+ * @param bool $quote
+ *     Appliquer sql_quote() sur chaque valeur (dans le code retourne)
+ * @return string
+ *     - Le code de création du tableau, avec éventuellement le code pour appliquer sql_quote.
+ *     - Chaîne vide si le tableau est vide
 **/
 function ecrire_tableau_sinon_rien($tableau, $quote = false) {
 	return ecrire_tableau($tableau, $quote, "");
 }
 
-// un peu equivalent a str_pad mais avec une valeur par defaut.
+/**
+ * Ajoute autant des espaces à la fin d'une chaîne jusqu'à la taille indiquée
+ * 
+ * Fonction un peu equivalente à str_pad() mais avec une valeur par défaut
+ * définie par la constante _FABRIQUE_ESPACER
+ *
+ * @param string $texte
+ *     Texte à compléter
+ * @param int $taille
+ *     Taille spécifique, utilisée à la place de la constante si renseignée
+ * @return
+ *     Texte complété des espaces de fin
+ */
 function espacer($texte, $taille = 0) {
 	if (!$taille) $taille = _FABRIQUE_ESPACER;
 	return str_pad($texte, $taille);
 }
 
 
-// tabule a gauche chaque ligne du nombre de tabulations indiquees
-// + on enleve les espaces sur les lignes vides
+/**
+ * Tabule à gauche chaque ligne du nombre de tabulations indiquées
+ * + on enleve les espaces sur les lignes vides
+ *
+ * @param string $texte
+ *     Un texte, qui peut avoir plusieurs lignes
+ * @param int $nb_tabulations
+ *     Nombre de tabulations à appliquer à gauche de chaque ligne
+ * @return string
+ *     Texte indenté du nombre de tabulations indiqué
+ */
 function fabrique_tabulations($texte, $nb_tabulations) {
 	$tab = "";
 	if ($nb_tabulations) {
@@ -658,13 +917,13 @@ function fabrique_tabulations($texte, $nb_tabulations) {
 
 
 /**
- * Passer en majuscule en utilisant mb de preference
+ * Passer en majuscule en utilisant mb de préférence
  * s'il est disponible. 
  *
  * @param string $str
- * 		La chaine a passer en majuscule
+ *     La chaine à passer en majuscule
  * @return string
- * 		La chaine en majuscule
+ *     La chaine en majuscule
 **/
 function fabrique_mb_strtoupper($str) {
 	if (function_exists('mb_strtoupper')) {
@@ -675,11 +934,11 @@ function fabrique_mb_strtoupper($str) {
 }
 
 /**
- * Passer en minuscule en utilisant mb de preference
+ * Passer en minuscule en utilisant mb de préférence
  * s'il est disponible. 
  *
  * @param string $str
- * 		La chaine a passer en minuscule
+ * 		La chaine à passer en minuscule
  * @return string
  * 		La chaine en minuscule
 **/
@@ -692,10 +951,28 @@ function fabrique_mb_strtolower($str) {
 }
 
 
-// Afficher une image a partir d'un fichier, selon une reduction donnee
-// (evite un |array_shift qui passe pas en PHP 5.4)
-// Attention à bien rafraichir l'image reduite lorsqu'on change de logo
-// #URL_IMAGE|image_reduire{128}|extraire_attribut{src}|explode{?}|array_shift|timestamp|balise_img
+/**
+ * Crée une balise HTML <img> à partir d'un fichier,
+ * réactualisée à chaque calcul, selon une réduction donnée.
+ * 
+ * Cela évite un |array_shift qui ne passe pas en PHP 5.4
+ * 
+ * Attention à bien rafraîchir l'image réduite lorsqu'on change de logo.
+ *
+ * @example
+ *     #URL_IMAGE|fabrique_miniature_image{128}
+ *
+ *     Applique l'équivalent de :
+ *     #URL_IMAGE|image_reduire{128}|extraire_attribut{src}
+ *         |explode{?}|array_shift|timestamp|balise_img
+ *
+ * @param string $fichier
+ *     Chemin du fichier
+ * @param int $taille
+ *     Taille de réduction de l'image
+ * @return string
+ *     Balise HTML IMG de l'image réduite et à jour
+ */
 function filtre_fabrique_miniature_image($fichier, $taille=256) {
 	$im = filtrer('image_reduire', $fichier, $taille);
 	$im = extraire_attribut($im, 'src');
