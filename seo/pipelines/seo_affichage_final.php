@@ -38,4 +38,3 @@ function seo_affichage_final($flux) {
     return $flux;
 }
 
-?>

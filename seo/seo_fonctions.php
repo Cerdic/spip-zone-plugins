@@ -252,4 +252,3 @@ function calculer_balise_SEO_GWT(){
     return $flux;
 }
 
-?>
