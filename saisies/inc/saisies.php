@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Gestion de l'affichage des saisies
+ *
+ * @return SPIP\Saisies\Saisies
+**/
+
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
@@ -108,12 +114,15 @@ function saisies_chercher($saisies, $id_ou_nom_ou_chemin, $retourner_chemin=fals
 	return null;
 }
 
-/*
+/**
  * Génère un nom unique pour un champ d'un formulaire donné
  *
- * @param array $formulaire Le formulaire à analyser 
- * @param string $type_saisie Le type de champ dont on veut un identifiant 
- * @return string Un nom unique par rapport aux autres champs du formulaire
+ * @param array $formulaire
+ *     Le formulaire à analyser 
+ * @param string $type_saisie
+ *     Le type de champ dont on veut un identifiant 
+ * @return string
+ *     Un nom unique par rapport aux autres champs du formulaire
  */
 function saisies_generer_nom($formulaire, $type_saisie){
 	$champs = saisies_lister_champs($formulaire);

@@ -1,23 +1,36 @@
 <?php
 
+/**
+ * Gestion de l'affichage des saisies
+ *
+ * @return SPIP\Saisies\Afficher
+**/
+
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-/*
+/**
  * Indique si une saisie peut être affichée.
+ * 
  * On s'appuie sur l'éventuelle clé "editable" du $champ.
  * Si editable vaut :
- *  absent : le champ est éditable
- *  1, le champ est éditable
- *  0, le champ n'est pas éditable
- * -1, le champ est éditable s'il y a du contenu dans le champ (l'environnement)
- *     ou dans un de ses enfants (fieldsets)
+ *    - absent : le champ est éditable
+ *    - 1, le champ est éditable
+ *    - 0, le champ n'est pas éditable
+ *    - -1, le champ est éditable s'il y a du contenu dans le champ (l'environnement)
+ *         ou dans un de ses enfants (fieldsets)
  *
- * @param $champ tableau de description de la saisie
- * @param $env environnement transmis à la saisie, certainement l'environnement du formulaire
- * @param $utiliser_editable false pour juste tester le cas -1
+ * @param array $champ
+ *     Tableau de description de la saisie
+ * @param array $env
+ *     Environnement transmis à la saisie, certainement l'environnement du formulaire
+ * @param bool $utiliser_editable
+ *     - false pour juste tester le cas -1
  * 
- * @return bool Retourne un booléen indiquant l'état éditable ou pas
+ * @return bool
+ *     Retourne un booléen indiquant l'état éditable ou pas :
+ *     - true si la saisie est éditable (peut être affichée)
+ *     - false sinon
  */
 function saisie_editable($champ, $env, $utiliser_editable=true) {
 	if ($utiliser_editable) {
@@ -57,18 +70,27 @@ function saisie_editable($champ, $env, $utiliser_editable=true) {
 	return false;
 }
 
-/*
+/**
  * Génère une saisie à partir d'un tableau la décrivant et de l'environnement
- * Le tableau doit être de la forme suivante :
- * array(
- *		'saisie' => 'input',
- *		'options' => array(
- *			'nom' => 'le_name',
- *			'label' => 'Un titre plus joli',
- *			'obligatoire' => 'oui',
- *			'explication' => 'Remplissez ce champ en utilisant votre clavier.'
- *		)
- * )
+ *
+ * @param array $champ
+ *     Description de la saisie.
+ *     Le tableau doit être de la forme suivante :
+ *     array(
+ *     		'saisie' => 'input',
+ *     		'options' => array(
+ *     			'nom' => 'le_name',
+ *     			'label' => 'Un titre plus joli',
+ *     			'obligatoire' => 'oui',
+ *     			'explication' => 'Remplissez ce champ en utilisant votre clavier.'
+ *     		)
+ *     )
+ * @param array $env
+ *     Environnement du formulaire
+ *     Permet de savoir les valeurs actuelles des contenus des saisies,
+ *     les erreurs eventuelles présentes...
+ * @return string
+ *     Code HTML des saisies de formulaire
  */
 function saisies_generer_html($champ, $env=array()){
 	// Si le parametre n'est pas bon, on genere du vide
@@ -156,14 +178,18 @@ function saisies_generer_html($champ, $env=array()){
 	);
 }
 
-/*
+/**
  * Génère une vue d'une saisie à partir d'un tableau la décrivant
  *
  * @see saisies_generer_html()
- * @param array $saisie Un tableau décrivant une saisie
- * @param array $env L'environnement, contenant normalement la réponse à la saisie
+ * @param array $saisie
+ *     Tableau de description d'une saisie
+ * @param array $env
+ *     L'environnement, contenant normalement la réponse à la saisie
  * @param array $env_obligatoire
- * @return string Retour le HTML des vues
+ *     ???
+ * @return string
+ *     Code HTML de la vue de la saisie
  */
 function saisies_generer_vue($saisie, $env=array(), $env_obligatoire=array()){
 	// Si le paramètre n'est pas bon, on génère du vide
@@ -192,7 +218,7 @@ function saisies_generer_vue($saisie, $env=array(), $env_obligatoire=array()){
 		// car les sous-saisies ne doivent pas être affectees
 		// par les modification sur l'environnement servant à generer la saisie mère
 		$contexte['_env'] = $env;
-				
+
 		// À partir du moment où on passe tout l'environnement, il faut enlever 
 		// certains éléments qui ne doivent absolument provenir que des options
 		$saisies_disponibles = saisies_lister_disponibles();
@@ -241,13 +267,16 @@ function saisies_generer_vue($saisie, $env=array(), $env_obligatoire=array()){
 	);
 }
 
-/*
+/**
  * Génère, à partir d'un tableau de saisie le code javascript ajouté à la fin de #GENERER_SAISIES
- * pour produire un affichage conditionnel des saisies avec une option afficher_si.
+ * pour produire un affichage conditionnel des saisies ayant une option afficher_si.
  *
- * @param array $saisies Un tableau de saisies
- * @param string $id_form Un identifiant unique pour le formulaire
+ * @param array $saisies
+ *     Tableau de descriptions des saisies
+ * @param string $id_form
+ *     Identifiant unique pour le formulaire
  * @return text
+ *     Code javascript
  */
 function saisies_generer_js_afficher_si($saisies,$id_form){
 	$i = 0;
@@ -322,17 +351,22 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 	return $i>0 ? $code : '';
 }
 
-/*
+/**
  * Lorsque l'on affiche les saisies (#VOIR_SAISIES), les saisies ayant une option afficher_si
  * et dont les conditions ne sont pas remplies doivent être retirées du tableau de saisies.
+ * 
  * Cette fonction sert aussi lors de la vérification des saisies avec saisies_verifier().
- * A ce moment la, les saisies non affichees sont retirees de _request (on passe leur valeur a NULL).
+ * À ce moment là, les saisies non affichées sont retirées de _request
+ * (on passe leur valeur à NULL).
  *
- * @param array $saisies Un tableau de saisies
- * @param array $env le tableau d'environnement transmis dans inclure/voi_saisies.html, NULL si on doit rechercher dans _request (pour saisies_verifier()).
- * @return array Un tableau de saisies
+ * @param array $saisies
+ *     Tableau de descriptions de saisies
+ * @param array|null $env
+ *     Tableau d'environnement transmis dans inclure/voi_saisies.html,
+ *     NULL si on doit rechercher dans _request (pour saisies_verifier()).
+ * @return array
+ *     Tableau de descriptions de saisies
  */
-
 function saisies_verifier_afficher_si($saisies, $env=NULL) {
 	// eviter une erreur par maladresse d'appel :)
 	if (!is_array($saisies)) {
