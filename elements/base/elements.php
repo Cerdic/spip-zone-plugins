@@ -39,7 +39,7 @@ function elements_declarer_tables_principales($tables_principales){
 
 	// Table formulaires_reponses_champs 
 	$elements_champs = array(
-		"id_element" => "bigint(21) NOT NULL DEFAULT 0",
+		"id_element" => "bigint(21) NOT NULL",
 		"id_objet"   => "bigint(21) DEFAULT 0 NOT NULL",
 		"objet"      => "varchar(25) DEFAULT '' NOT NULL",
 		"bloc"       => "varchar(25) DEFAULT '' NOT NULL",
