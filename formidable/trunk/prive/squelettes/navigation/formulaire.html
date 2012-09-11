@@ -4,19 +4,19 @@
 
 [(#AUTORISER{editer, formulaire, #ID_FORMULAIRE}|oui)
 
-[(#URL_ECRIRE{formulaire_editer}
+[(#URL_ECRIRE{formulaire_edit}
 	|parametre_url{id_formulaire, #ID_FORMULAIRE}
 	|parametre_url{configurer,formulaire}
 	|parametre_url{avertissement,''}
 	|icone_horizontale{<:formidable:editer_menu_formulaire:>,formulaire,formulaire-editer-24,center})]
 
-[(#URL_ECRIRE{formulaire_editer}
+[(#URL_ECRIRE{formulaire_edit}
 	|parametre_url{id_formulaire, #ID_FORMULAIRE}
 	|parametre_url{configurer,champs}
 	|parametre_url{avertissement,''}
 	|icone_horizontale{<:formidable:editer_menu_champs:>,formulaire,formulaire-config-champs-24,center})]
 
-[(#URL_ECRIRE{formulaire_editer}
+[(#URL_ECRIRE{formulaire_edit}
 	|parametre_url{id_formulaire, #ID_FORMULAIRE}
 	|parametre_url{configurer,traitements}
 	|parametre_url{avertissement,''}

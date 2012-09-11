@@ -25,8 +25,6 @@ function formidable_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['formulaires_reponses'] = 'formulaires_reponses';
 	$interfaces['table_des_tables']['formulaires_reponses_champs'] = 'formulaires_reponses_champs';
 
-	$interfaces['table_titre']['formulaires'] = 'titre';
-
 	$interfaces['tables_jointures']['spip_formulaires'][] = 'formulaires_liens';
 	$interfaces['tables_jointures']['spip_articles'][] = 'formulaires_liens';
 	$interfaces['tables_jointures']['spip_rubriques'][] = 'formulaires_liens';
