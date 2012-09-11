@@ -1,2 +1,6 @@
-[(#ENV**{texte}|couper{30})]
+#SET{t,#ENV**{texte}|trim}
+[(#GET{t}|strlen|>{30}|?{
+	[(#GET{t}|couper{30,''}|concat{'&nbsp;(...)'})],
+	#GET{t}
+})]
 

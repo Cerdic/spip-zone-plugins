@@ -156,6 +156,7 @@ function formulaires_choisir_elements_traiter($objet, $id_objet, $bloc='extra') 
 	$res['editable'] = true;
 
 	$elements = _request('elements');
+	$elements = array_values($elements); // recalculer les index (sait-on jamais)
 
 	// pas d'élément, on supprime la ligne SQL
 	if (!$elements) {
