@@ -1,10 +1,27 @@
 <?php
 
+
+/**
+ * Gestion des différentes actions du formulaire de construction de
+ * plugin de la fabrique
+ *
+ * @package SPIP\Fabrique\Formulaires
+ */
+ 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-// Effectue l'action demandee
-// et retourne le tableau de retour de traitement du formulaire
+/**
+ * Éffectue l'action demandée sur le formulaire de construction de plugin
+ *
+ * @param string $f_action
+ *     Nom de l'action dans le constructeur de plugin de la fabrique,
+ *     tel que 'ajouter_objet', 'supprimer_champ', ...
+ * @param array $data
+ *     Données de construction du plugin
+ * @return
+ *     Tableau de retour de traitement du formulaire
+**/
 function fabrique_action_modification_formulaire($f_action, $data) {
 	// name="f_action[type]" ou "f_action[type][id]"
 	$type_action = current(array_keys($f_action));
@@ -190,8 +207,11 @@ function fabrique_action_modification_formulaire($f_action, $data) {
 
 
 /**
- * Recupere les images uploades et les stocke dans la session 
+ * Récupère les images uploadés et les stocke dans la session 
  *
+ * @param array $data
+ *     Données de construction du plugin
+ * @return void
 **/
 function fabrique_recuperer_et_stocker_les_images($data) {
 
@@ -253,13 +273,15 @@ function fabrique_recuperer_et_stocker_les_images($data) {
 /**
  * Sauvegarder 10 exports de chaque plugins (en se basant sur le prefixe)
  * ce qui permet de restaurer de vieilles versions.
- * Attention, cela ne sauve que le fichier d'export / import pour la Fabrique.
+ *
+ * @note
+ *     Attention, cela ne sauve que le fichier d'export / import pour la Fabrique.
  *
  * @param string $fichier
- * 		Fichier source a sauver
+ *     Fichier source à sauver
  * @param string $destination
- * 		Répertoire de backup
- * @return null
+ *     Répertoire de backup
+ * @return void
 **/
 function fabrique_sauvegarde_tournante_export($fichier, $destination) {
 	$destination .= 'exports';
@@ -288,18 +310,19 @@ function fabrique_sauvegarde_tournante_export($fichier, $destination) {
 
 
 /**
- * Generer un diff entre la precedente generation
- * du plugin et cette nouvelle creation
+ * Générer un diff entre la précédente génération
+ * du plugin et cette nouvelle création
  *
- * Ce diff est affiche ensuite au retour du formulaire de creation
- * et egalement stocke dans le plugin cree, dans le fichier 'fabrique_diff.diff'
+ * Ce diff est affiché ensuite au retour du formulaire de création
+ * et également stocké dans le plugin crée, dans le fichier 'fabrique_diff.diff'
  *
  * @param string $ancien
- * 		Chemin du repertoire de l'ancienne creation de plugin
+ *    Chemin du répertoire de l'ancienne création de plugin
  * @param string $nouveau
- * 		Chemin du repertoire de la nouvelle creation
- * @return
- * 		null
+ *     Chemin du répertoire de la nouvelle création
+ * @param string $prefixe
+ *     Préfixe du plugin construit
+ * @return void
 **/
 function fabrique_generer_diff($ancien, $nouveau, $prefixe) {
 	if (is_dir($ancien)) {
@@ -323,17 +346,18 @@ function fabrique_generer_diff($ancien, $nouveau, $prefixe) {
 
 
 /**
- * Execute (uniquement si webmestre) des scripts saisis dans le formulaire
- * de creation de plugin.
+ * Exécute (uniquement si webmestre) des scripts saisis dans le formulaire
+ * de création de plugin.
  *  
- *
  * @param string $quoi
- * 		Nom du type de script
+ *     Nom du type de script
  * @param array $data
- * 		Toutes les infos du formulaire
+ *     Données de construction du plugin
  * @param array $contexte
- * 		Variables disponibles pour les scripts (nom => valeur)
- * @return null
+ *     Variables disponibles pour les scripts (nom => valeur)
+ * @return null|void
+ *     Null si le type de script n'est pas trouvé ou pas d'autorisation
+ *     Void sinon.
 **/
 function fabrique_executer_script($quoi, $data, $contexte = array()) {
 	if (!isset($data['paquet']['scripts'][$quoi])

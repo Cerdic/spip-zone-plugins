@@ -1,7 +1,21 @@
 <?php
+
+/**
+ * Gestion du formulaire permettant de préparer des gabarits de squelettes
+ * pour la fabrique
+ *
+ * @package SPIP\Fabrique\Formulaires
+ */
+ 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
+/**
+ * Chargement du formulaire d'aide à la création de gabarits de squelette pour la fabrique
+ *
+ * @return array
+ *     Environnement du formulaire
+ */
 function formulaires_fabriquer_squelettes_fabrique_charger_dist(){
 	return array(
 		'code_squelette' => '',
@@ -13,7 +27,12 @@ function formulaires_fabriquer_squelettes_fabrique_charger_dist(){
 	);
 }
 
-
+/**
+ * Traitement du formulaire d'aide à la création de gabarits de squelette pour la fabrique
+ *
+ * @return array
+ *     Retour des traitements
+ */
 function formulaires_fabriquer_squelettes_fabrique_traiter_dist(){
 
 	$echappements = _request('echappements');

@@ -1,7 +1,21 @@
 <?php
+
+/**
+ * Gestion du formulaire permettant de créer un fichier de peuplement
+ * d'une table SQL avec les données d'une table existante
+ *
+ * @package SPIP\Fabrique\Formulaires
+ */
+
+// sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
+/**
+ * Chargement du formulaire de fabrication de peuplement de table SQL
+ *
+ * @return array
+ *     Environnement du formulaire
+ */
 function formulaires_fabriquer_peuple_charger_dist() {
 	$contexte = array(
 		'table' => '',
@@ -11,7 +25,12 @@ function formulaires_fabriquer_peuple_charger_dist() {
 	return $contexte;
 }
 
-
+/**
+ * Traitement du formulaire de fabrication de peuplement de table SQL
+ *
+ * @return array
+ *     Retour des traitements
+ */
 function formulaires_fabriquer_peuple_traiter_dist(){
 
 	$table = _request('table');
