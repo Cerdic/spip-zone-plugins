@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.net/tradlang_module/tipafriend?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -8,51 +8,51 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_activer' => 'Activer', # NEW
-	'bouton_annuler' => 'Annuler', # NEW
-	'bouton_desactiver' => 'Désactiver', # NEW
-	'bouton_envoyer' => 'Envoyer', # NEW
-	'bouton_fermer' => 'Fermer', # NEW
-	'bouton_reessayer' => 'Recommencer', # NEW
-	'bouton_reset' => 'Réinitialiser', # NEW
-	'bouton_send_by_mail' => 'Send by email', # NEW
-	'bouton_send_by_mail_ttl' => 'Send this page by email', # NEW
+	'bouton_activer' => 'Activate',
+	'bouton_annuler' => 'Cancel',
+	'bouton_desactiver' => 'Deactivate',
+	'bouton_envoyer' => 'Send',
+	'bouton_fermer' => 'Close',
+	'bouton_reessayer' => 'Restart',
+	'bouton_reset' => 'Reset',
+	'bouton_send_by_mail' => 'Send via e-mail',
+	'bouton_send_by_mail_ttl' => 'Send this page via e-mail',
 
 	// C
-	'cfg_legend_balise' => 'Concernant la balise "#TIPAFRIEND"', # NEW
-	'cfg_legend_patron' => 'Concernant les patrons de mail', # NEW
-	'cfg_legend_squelette' => 'Concernant le formulaire d\'envoi', # NEW
-	'cfg_texte_descr' => 'Le plugin ajoute à SPIP un module permettant d\'envoyer une page (<i>son contenu, son adresse ainsi qu\'un message</i>) à un ou plusieurs destinataires par e-mail.', # NEW
-	'cfg_titre_descr' => 'Configuration du plugin <i>Tip A Friend</i>', # NEW
-	'cfgform_comment_close_button' => 'active par défaut, cette option vous permet de choisir de montrer ou non le bouton \'Fermer\' en bas de la fenêtre ; <strong>cette option est automatiquement désactivée si les en-têtes sont eux-mêmes désactivés ci-dessus</strong>.', # NEW
-	'cfgform_comment_contenu' => 'sélectionnez ici le type de contenu de l\'objet SPIP (<i>article, brève, auteur ...</i>) qui sera inclus dans le mail transmis.', # NEW
-	'cfgform_comment_header' => 'cette option vous permet de choisir si les informations de la balise &lt;head&gt; de la page doivent être présentes ou non (<i>il peut être utile de les désactiver si vous utilisez une fenêtre javascript type \'thickbox\', ou au contraire de forcer leur affichage dans le même contexte avec un contenu en frame</i>).', # NEW
-	'cfgform_comment_javascript' => 'vous pouvez désactiver la fonction d\'ouverture de la popup (<i>dans le cas de l\'utilisation de fenêtres javascript type \'thickbox\' ou \'fancybox\' par exemple</i>).', # NEW
-	'cfgform_comment_options' => 'vous devez indiquer des attributs complets, par exemple : "class=\'thickbox\'", ils seront automatiquement ajoutés au lien inclus dans vos squelettes ; <b>utilisez seulement des guillemets simples</b>.', # NEW
-	'cfgform_comment_options_url' => 'vous pouvez ici indiquer une liste d\'arguments, par exemple : "arg=valeur&arg2=nouvelle_valeur", ils seront automatiquement ajoutés à l\'URL générée par la balise.', # NEW
-	'cfgform_comment_patron' => 'patron par défaut du mail dans sa version classique (<i>texte brut</i>).', # NEW
-	'cfgform_comment_patron_html' => 'si vous utilisez cette option, le mail envoyé comportera tout de même le premier squelette en version texte brut ; laissez le champ vide pour annuler cette option.', # NEW
-	'cfgform_comment_reset' => 'vous pouvez ici définir l\'action du bouton "Annuler" du formulaire (<i>redéfinir cette action peut vous permettre de fermer la thickbox plutôt que la fenêtre par exemple</i>).', # NEW
-	'cfgform_comment_squelette' => 'si vous avez créé un squelette personnel pour la boîte de dialogue du plugin (<i>sur le modèle du fichier "tip_a_friend.html"</i>) indiquez-le ici ; votre squelette devra obligatoirement inclure le formulaire "<b>tipafriend_form</b>".', # NEW
-	'cfgform_comment_taf_css' => 'le plugin définit des styles CSS sur le modèle des styles de la distribution de SPIP ; ces styles sont inclus au formulaire par défaut mais vous pouvez ici choisir de ne pas les inclure.', # NEW
-	'cfgform_info_balise' => 'La balise renvoie le lien ouvrant la page du formulaire d\'envoi. Vous pouvez changer l\'image affichée en éditant directement le squelette "<strong>modeles/tipafriend.html</strong>" du plugin.', # NEW
-	'cfgform_info_patron_html' => '<strong>Si le plugin <a href="http://www.spip-contrib.net/?article3371"><strong>Facteur</strong></a> est installé et actif sur votre site</strong>, il est possible de construire une version HTML du mail envoyé.', # NEW
-	'cfgform_info_patrons' => 'Vos patrons personnels sont à placer dans le sous-répertoire "<strong>patrons/</strong>" de votre répertoire de squelettes.', # NEW
-	'cfgform_info_squelettes' => 'Vos squelettes personnels sont à placer directement dans votre répertoire de squelettes.', # NEW
-	'cfgform_option_contenu_introduction' => 'Le titre et l\'introduction', # NEW
-	'cfgform_option_contenu_rien' => 'Rien', # NEW
-	'cfgform_option_contenu_tout' => 'Tout l\'objet', # NEW
-	'cfgform_titre_close_button' => 'Inclure le bouton \'Fermer\'', # NEW
-	'cfgform_titre_contenu' => 'Contenu des objets SPIP inclus au mail', # NEW
-	'cfgform_titre_header' => 'Inclure les en-têtes HTML', # NEW
-	'cfgform_titre_javascript' => 'Fonction javascript standard (ouverture d\'une popup)', # NEW
-	'cfgform_titre_options' => 'Attribut(s) ajouté(s) au lien créé par la balise', # NEW
-	'cfgform_titre_options_url' => 'Argument(s) ajouté(s) à l\'URL du lien créé par la balise', # NEW
-	'cfgform_titre_patron' => 'Patron du mail envoyé', # NEW
-	'cfgform_titre_patron_html' => 'Patron du mail au format HTML', # NEW
-	'cfgform_titre_reset' => 'Action du bouton d\'annulation', # NEW
-	'cfgform_titre_squelette' => 'Squelette utilisé pour le formulaire tipafriend', # NEW
-	'cfgform_titre_taf_css' => 'Inclure les définitions CSS par défaut', # NEW
+	'cfg_legend_balise' => 'About the tag "#TIPAFRIEND"',
+	'cfg_legend_patron' => 'About mail patrons',
+	'cfg_legend_squelette' => 'About the submission form',
+	'cfg_texte_descr' => 'This SPIP plugin adds a module to send a page (<i>its content, address and a message</i>) to one or more recipients via email.',
+	'cfg_titre_descr' => 'Settings of the plugin <i>Tip A Friend</i>',
+	'cfgform_comment_close_button' => 'Active by default; this option allows you to choose whether to show the \'close\' button at the bottom of the window; <strong>this option is automatically disabled if the headers above are disabled themselves </strong>.',
+	'cfgform_comment_contenu' => 'Select the type of the SPIP content object (<i>article, news item, author, etc.</i>) to be included in the forwarded mail.',
+	'cfgform_comment_header' => 'This option allows you to choose whether the <head> tag informations must be present or not on the page (<i>it may be useful to disable if you use a javascript window like \'thickbox\', or otherwise to force them to be displayed in a frame in the same context</i>).',
+	'cfgform_comment_javascript' => 'You can disable the opening of the popup window (<i>in case of the use of javascript window type, for example, \'thickbox\' or \'fancybox\'</i>).',
+	'cfgform_comment_options' => 'You must provide complete attributes, for example: "class=\'thickbox\'", they will automatically be added to the link in your skeletons ; <b>use only single quotes</b>.',
+	'cfgform_comment_options_url' => 'Here you can specify a list of arguments, eg \'arg=value&arg2=new_value", they will be automatically added to the URL generated by the tag.',
+	'cfgform_comment_patron' => 'default email patron in its classical version (<i>plain text</i>).',
+	'cfgform_comment_patron_html' => 'If you use this option, the email sent will contain the first skeleton plain text version, leave the field blank to cancel this option.',
+	'cfgform_comment_reset' => 'Here you can set the action of the "Cancel" button of the form (<i>redefine its action can allow you to close the thickbox window rather than a popup window eg</i>).',
+	'cfgform_comment_squelette' => 'If you have created a personal skeleton for the dialog plugin window (<i>like the model file "tip_a_friend.html"</i>) enter it here ; your skeleton will necessarily include the form "<b>tipafriend_form</b>".',
+	'cfgform_comment_taf_css' => 'the plugin defines CSS styles on the model of the SPIP\'s distribution ; by default, these styles are included in the form but you can here choose not to include them.',
+	'cfgform_info_balise' => 'The tag returns the link to open the form page. You can change the image displayed by directly editing the skeleton "<strong>modeles/tipafriend.html</strong>" in the plugin.', # MODIF
+	'cfgform_info_patron_html' => 'If the plugin <a href="http://www.spip-contrib.net/?article3371"><strong>Facteur</strong></a> is installed and running on your site it is possible to construct an HTML version of the email sent.',
+	'cfgform_info_patrons' => 'Your personal patrons are to be placed in the subdirectory "<strong>patrons/</strong>" of your skeletons directory.',
+	'cfgform_info_squelettes' => 'Your personal skeletons are to be placed directly in your home skeletons directory.',
+	'cfgform_option_contenu_introduction' => 'The title and introduction',
+	'cfgform_option_contenu_rien' => 'Nothing',
+	'cfgform_option_contenu_tout' => 'The whole object',
+	'cfgform_titre_close_button' => 'Include the \'Close\' button',
+	'cfgform_titre_contenu' => 'Content of the SPIP objects included in the message',
+	'cfgform_titre_header' => 'Include HTML headers',
+	'cfgform_titre_javascript' => 'Standard javascript function (opening a popup)',
+	'cfgform_titre_options' => 'Attribute(s) added to the link created by the tag',
+	'cfgform_titre_options_url' => 'Argument(s) added to the URL of the link created by the tag',
+	'cfgform_titre_patron' => 'Sent mail patron',
+	'cfgform_titre_patron_html' => 'Sent mail HTML patron',
+	'cfgform_titre_reset' => 'Cancel button action',
+	'cfgform_titre_squelette' => 'Skeleton used for the tipafriend form',
+	'cfgform_titre_taf_css' => 'Include defaut CSS definitions',
 
 	// D
 	'doc_chapo' => 'Le plugin "Tip A Friend" propose un formulaire complet pour envoyer une page d\'un site SPIP ({n\'importe laquelle}) à une liste d\'adresses e-mail.', # NEW
@@ -106,21 +106,21 @@ Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubr
 @cfg_param@', # NEW
 
 	// E
-	'error_dest' => 'Vous n\'avez indiqué aucun destinataire', # NEW
-	'error_exp' => 'Vous n\'avez pas indiqué votre adresse mail', # NEW
-	'error_exp_nom' => 'Vous devez indiquer votre nom', # NEW
-	'error_not_mail' => 'Il semble que l\'adresse saisie ne soit pas un e-mail', # NEW
-	'error_one_is_not_mail' => 'Il semble qu\'une des adresses saisies au moins ne soit pas un e-mail', # NEW
+	'error_dest' => 'You have not specified recipient',
+	'error_exp' => 'You have not entered your e-mail address',
+	'error_exp_nom' => 'You must specify your name',
+	'error_not_mail' => 'It seems that the address you entered is not an e-mail',
+	'error_one_is_not_mail' => 'It seems that at least one of the addresses entered is not an e-mail',
 
 	// F
-	'form_dest_label' => 'Receivers e-mail addresses', # NEW
-	'form_exp_label' => 'Votre adresse e-mail', # NEW
-	'form_exp_nom_label' => 'Votre nom', # NEW
-	'form_exp_send_label' => '<em>Vous joindre en copie du mail (champ "Cc")</em>', # NEW
-	'form_intro' => 'Pour transmettre l\'adresse de cette page, indiquez les adresses e-mail de vos contacts, votre propre adresse e-mail ainsi que vote nom. Vous pouvez également si vous le souhaitez ajouter un commentaire qui sera inclus dans le corps du message.<br /><small>{{*}} {Aucune de ces informations ne sera conservée.}</small>', # NEW
-	'form_message_label' => 'Vous pouvez ajouter un texte', # NEW
-	'form_separe_virgule' => '<em>Vous pouvez indiquer plusieurs adresses, en les séparant par un point-virgule.</em>', # NEW
-	'form_title' => 'Envoyer une page par e-mail', # NEW
+	'form_dest_label' => 'Recepients e-mail addresses',
+	'form_exp_label' => 'Your e-mail address',
+	'form_exp_nom_label' => 'Your name',
+	'form_exp_send_label' => '<em>Send you a copy of the mail ("Cc" field)</em>',
+	'form_intro' => 'To transmit the address of this page, enter the e-mail addresses of your contacts and your own e-mail address and name. You can add a comment that will be included in the message body.<br /> <small>{{*}} {None of these informations will be kept.}</small>',
+	'form_message_label' => 'You can add a text',
+	'form_separe_virgule' => '<em>You can enter multiple addresses separated by a semicolon.</em>',
+	'form_title' => 'Send a page by e-mail',
 
 	// I
 	'info_doc' => 'Si vous rencontrez des problèmes pour afficher cette page, [cliquez-ici->@link@].', # NEW
@@ -132,29 +132,29 @@ Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubr
 -* [Mode "squelette SPIP"->@mode_spip@] ({compatible distribution})', # NEW
 
 	// L
-	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] distribué sous licence [GNU GPL v3->http://www.opensource.org/licenses/gpl-3.0.html].', # NEW
+	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] distributed under [GNU GPL v3->http://www.opensource.org/licenses/gpl-3.0.html] license.',
 
 	// M
-	'mail_body_01' => '@nom_exped@ (contact : @mail_exped@) vous invite à consulter le document ci-dessous, tiré du site @nom_site@, susceptible de vous intéresser.', # NEW
-	'mail_body_01_html' => '<strong>@nom_exped@</strong> (contact : <a href="mailto:@mail_exped@">@mail_exped@</a>) vous invite à consulter le document ci-dessous, tiré du site <strong>@nom_site@</strong>, susceptible de vous intéresser.', # NEW
-	'mail_body_02' => '@nom_exped@ vous joint ce message :', # NEW
-	'mail_body_02_html' => '@nom_exped@ vous joint ce message :', # NEW
-	'mail_body_03' => 'Titre du document : \'@titre_document@\'', # NEW
-	'mail_body_03_html' => 'Titre du document : \'@titre_document@\'', # NEW
-	'mail_body_04' => 'Adresse de cette page sur l\'Internet : @url_document@', # NEW
-	'mail_body_04_html' => 'Adresse de cette page sur l\'Internet : <a href="@url_document@">@url_document@</a>', # NEW
-	'mail_body_05' => 'Contenu de la page concernée (en version texte brut) : ', # NEW
-	'mail_body_05_html' => 'Contenu de la page concernée : ', # NEW
-	'mail_body_extrait' => '( extrait ) ', # NEW
-	'mail_titre_default' => 'Informations du site @nom_site@', # NEW
-	'message_envoye' => 'OK - Votre message a bien été envoyé.', # NEW
-	'message_pas_envoye' => '!! - Votre message n\'a pas pu être envoyé pour une raison inconnue ... Veuillez nous en excuser et <a href="@self@" title="Recharger la page">réessayer</a>.', # NEW
+	'mail_body_01' => '@nom_exped@ (contact : @mail_exped@) invites you to consult the document below, taken from the website @nom_site@, you may be interested in.',
+	'mail_body_01_html' => '<strong>@nom_exped@</strong> (contact : <a href="mailto:@mail_exped@">@mail_exped@</a>) invites you to consult the document below, taken from the website <strong>@nom_site@</strong>, you may be interested in.',
+	'mail_body_02' => '@nom_exped@ joins you this message :',
+	'mail_body_02_html' => '@nom_exped@ joins your this message :',
+	'mail_body_03' => 'Title of the document : \'@titre_document@\'',
+	'mail_body_03_html' => 'Title of the document : \'@titre_document@\'',
+	'mail_body_04' => 'Address of this page on the Internet : @url_document@',
+	'mail_body_04_html' => 'Address of this page on the Internet : <a href="@url_document@">@url_document@</a>',
+	'mail_body_05' => 'Content of the relevant page (in text version) : ',
+	'mail_body_05_html' => 'Content of the relevant page : ',
+	'mail_body_extrait' => '( extract ) ',
+	'mail_titre_default' => 'Informations from website @nom_site@',
+	'message_envoye' => 'OK - Your message has been sent.',
+	'message_pas_envoye' => '!! - Your message could not be sent for some unknown reason ... We apologize, you can <a href="@self@" title="Reload the page">try again</a>.',
 
 	// N
-	'new_window' => 'Nouvelle fenêtre', # NEW
+	'new_window' => 'New window',
 
 	// P
-	'page_test' => 'Page de test (locale)', # NEW
+	'page_test' => 'Test page (local)',
 	'page_test_balise' => 'Rendu de la balise TIPAFRIEND', # NEW
 	'page_test_cfg_pas_installe' => 'Le Plugin [CFG->http://www.spip-contrib.net/?rubrique575] ne semble pas installé ...', # NEW
 	'page_test_fin_simulation' => '-- Fin de l\'inclusion pour simulation', # NEW
@@ -166,7 +166,7 @@ Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubr
 	'page_test_title' => 'Test du plugin "Tip A Friend"', # NEW
 	'page_test_titre_inclusion_model' => '-- Inclusion du modèle \'@model@\' (<i>valeurs fictives</i>)', # NEW
 	'page_test_titre_inclusion_objet' => '-- Simulation de page de @objet@ n° @id_objet@ (<i>titre + introduction</i>)', # NEW
-	'popup_name' => 'Envoyer une information par e-mail', # NEW
+	'popup_name' => 'Send an information by e-mail',
 
 	// T
 	'taftest_arguments_balise_dyn' => 'Arguments reçus dans balise dynamique', # NEW
