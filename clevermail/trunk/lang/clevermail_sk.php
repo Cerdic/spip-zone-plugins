@@ -176,7 +176,7 @@ Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce l
 	'infolettres' => 'Informačné materiály',
 	'informations' => 'Informácie',
 	'inscription_deja_abonne_autre_mode' => 'Ak ste sa na odoberanie materiálu "@lst_name@" zaregistrovali iným spôsobom, nastala zmena.',
-	'inscription_deja_abonne_meme_mode' => 'Ak ste sa na odoberanie materiálu "@lst_name@" zaregistrovali rovnakým spôsobom.',
+	'inscription_deja_abonne_meme_mode' => 'Ak ste sa na odoberanie materiálu "@lst_name@" zaregistrovali rovnakým spôsobom.', # MODIF
 	'inscription_encours' => 'Vaša žiadosť o registráciu na odoberanie materiálu @nom_lettre@ sa kontroluje. Ďakujeme vám za trpezlivosť.',
 	'inscription_mok' => 'Vaša žiadosť o registráciu na odoberanie materiálu "@lst_name@" bola odoslaná moderátorovi. O jeho rozhodnutí vás budeme informovať.',
 	'inscription_nok' => 'Na odoberanie tohto informačného materiálu nie je povolená registrácia',
