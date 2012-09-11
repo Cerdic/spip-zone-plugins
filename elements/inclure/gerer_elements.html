@@ -1,9 +1,14 @@
 #SET{bloc,#ENV{bloc}}
 
-[(#BOITE_OUVRIR{[(#GET{bloc}|oui)<:elements:elements_selectionnes_pour{bloc=#GET{bloc}}:>],simple})]
+[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{elements-24.png}
+	|balise_img{'',cadre-icone}
+	|concat{#VAL{elements:elements_selectionnes_pour}|_T{#ARRAY{bloc,#GET{bloc}}}})],simple})]
 <div class='elements_choisis'>
 	<BOUCLE_elements(ELEMENTS){objet}{id_objet}{bloc=#GET{bloc}}>
-		<BOUCLE_type_elements(DATA){source table,(#ELEMENTS|elements_obtenir_desriptions)}{', '}>#NOM</BOUCLE_type_elements>
+		#SET{elements,#ELEMENTS}
+		<BOUCLE_type_elements(DATA)
+			{source table,(#ELEMENTS|elements_obtenir_desriptions)}{', '}>#NOM[ <em class='titre'>(#ELEMENT
+				|elements_inclure_element_titre{#GET{elements/#CLE}})</em>]</BOUCLE_type_elements>
 	</BOUCLE_elements>
 		<:elements:elements_selectionnes_aucun:>
 	<//B_elements>

@@ -95,14 +95,38 @@ function formulaires_choisir_elements_verifier($objet, $id_objet, $bloc='extra')
 	// supprimer un élément de la liste
 	if ($elem = _request('supprimer_element')) {
 		// element/3
-		$index = explode('/', $elem);
-		$index = end($index);
+		list(,$index) = explode('/', $elem);
 		unset($elements[$index]);
 		$elements = array_values($elements);
 		// on les fiche dans l'environnement...
 		set_request('elements', $elements);
 		// indiquer qu'on a pris en compte l'element
 		$erreurs['message_info'] = _T("elements:message_element_moins")
+			. '<br />' . _T("elements:message_element_enregistrer");
+	}
+
+	// déplace un élément d'un cran vers le bas ou vers le haut
+	if ($elem = _request('deplacer_element')) {
+		// element/3/-1
+		list(,$index,$pos) = explode('/', $elem);
+		$deplace = $elements[$index];
+		unset($elements[$index]);
+		$elements = array_values($elements);
+		// nouvel index
+		if ($pos[0] == '-') {
+			$index = $index - substr($pos,1);
+			if ($index < 0) $index = 0;
+		} else {
+			$index = $index + $pos;
+			if ($index > count($elements)) $index = count($elements);
+		}
+
+		array_splice($elements, $index, 0, array($deplace));
+
+		// on les fiche dans l'environnement...
+		set_request('elements', $elements);
+		// indiquer qu'on a pris en compte l'element
+		$erreurs['message_info'] = _T("elements:message_element_deplace")
 			. '<br />' . _T("elements:message_element_enregistrer");
 	}
 

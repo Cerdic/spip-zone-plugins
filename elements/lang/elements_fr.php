@@ -35,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modifier_les_elements' => 'Modifier',
 	'message_element_plus' => 'Un élément a été ajouté.',
 	'message_element_moins' => 'Un élément a été enlevé',
+	'message_element_deplace' => 'Un élément a été déplacé',
 	'message_element_enregistrer' => 'Pensez à enregistrer le formulaire
 		pour sauvegarder les changements.',
 

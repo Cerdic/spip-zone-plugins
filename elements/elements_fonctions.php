@@ -175,15 +175,45 @@ function elements_obtenir_desriptions($elements) {
  *
  * @param string $element
  *     Nom de l'élément
- * @param array $contexte
- *     Contexte transmis à l'inclusion
+ * @param array $args
+ *     Valeurs enregistrées dans la base pour l'élément.
+ *     L'index 'contexte' contient le contexte transmis à l'inclusion
  * @return string
  *     Code HTML de l'élément
 **/
-function elements_inclure_element($element, $contexte=array()) {
+function elements_inclure_element($element, $args=array()) {
 	if (!$element) {
 		return '';
 	}
-	$code = recuperer_fond("elements/$element", $contexte);
+	$code = recuperer_fond("elements/$element", $args['contexte']);
+	return $code;
+}
+
+
+/**
+ * Retourne le code HTML du titre d'un élément
+ *
+ * Le titre est défini par un squelette elements/{element}_titre.html
+ * lorsqu'il est présent. Sinon laissé vide.
+ * 
+ * @param string $element
+ *     Nom de l'élément
+ * @param array $args
+ *     Valeurs enregistrées dans la base pour l'élément.
+ *     L'index 'contexte' contient le contexte transmis à l'inclusion
+ * @return string
+ *     Code HTML du titre de l'élément, sinon rien.
+**/
+function elements_inclure_element_titre($element, $args=array()) {
+	if (!$element) {
+		return '';
+	}
+	$element_titre = $element . '_titre';
+
+	if (!trouver_fond($element_titre, 'elements')) {
+		return '';
+	}
+
+	$code = recuperer_fond("elements/$element_titre", $args['contexte']);
 	return $code;
 }

@@ -12,14 +12,16 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[<p class="notice">(#ENV*{erreurs/message_info})</p>]
 
-
 <script type='text/javascript'>
 (function($){
 $(document).ready(function(){
 	$('.formulaire_#FORM .description_element').each(function(){
 		$(this).find('.params').hide()
-		$(this).find('.entete').addClass('pointer').click(function(){
-			$(this).parent().find('.params').toggle();
+		$(this).find('.entete').addClass('pointer').click(function(e) {
+			/* tout mais pas les boutons monter et descendre ! */
+			if ($(e.target).is(':not(.submit)')) {
+				$(this).parent().find('.params').toggle();
+			}
 		});
 	});
 });
@@ -45,7 +47,19 @@ $(document).ready(function(){
 								[ title='(#DESCRIPTION|attribut_html)']
 								[ style='background-image:url((#CHEMIN_IMAGE{#ICON}|sinon{#CHEMIN_IMAGE{element-24.png}}))']>
 								#NOM
+								[: <em class='titre'>(#ELEMENT|elements_inclure_element_titre{#ENV{elements/#CLE}})</em>]
 							</span>
+
+							<div class='actions'>
+								<button type="submit" name="deplacer_element" value="element/#CLE/1"
+									class="submit deplacer_element monter">
+									[(#CHEMIN_IMAGE{element_bas-16.png}|balise_img{<:elements:monter_cet_element:>})]
+								</button>
+								<button type="submit" name="deplacer_element" value="element/#CLE/-1"
+									class="submit deplacer_element descendre">
+									[(#CHEMIN_IMAGE{element_haut-16.png}|balise_img{<:elements:descendre_cet_element:>})]
+								</button>
+							</div>
 						</div>
 						<div class='params'>
 
