@@ -185,7 +185,10 @@ function elements_inclure_element($element, $args=array()) {
 	if (!$element) {
 		return '';
 	}
-	$code = recuperer_fond("elements/$element", $args['contexte']);
+	
+	$contexte = $args['contexte'];
+	$contexte['_element'] = $args['element'];
+	$code = recuperer_fond("elements/$element", $contexte);
 	return $code;
 }
 
@@ -214,6 +217,8 @@ function elements_inclure_element_titre($element, $args=array()) {
 		return '';
 	}
 
-	$code = recuperer_fond("elements/$element_titre", $args['contexte']);
+	$contexte = $args['contexte'];
+	$contexte['_element'] = $args['element'];
+	$code = recuperer_fond("elements/$element_titre", $contexte);
 	return $code;
 }
