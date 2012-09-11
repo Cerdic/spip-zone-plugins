@@ -1,9 +1,9 @@
 <paquet
 	prefix="Zcore"
 	categorie="squelette"
-	version="2.0.0-dev"
-	etat="dev"
-	compatibilite="[3.0.0-dev;["
+	version="2.0.0"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="img/z-core-32.png"
 	documentation="http://www.yterium.net/108"
 >	
@@ -20,6 +20,7 @@
 
 	<pipeline nom="declarer_url_objets" inclure="zcore_pipelines.php" />
 	<pipeline nom="styliser" inclure="zcore_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="zcore_pipelines.php" />
 	<pipeline nom="insert_head" inclure="zcore_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="zcore_pipelines.php" />
 	<pipeline nom="pre_propre" inclure="zcore_pipelines.php" />

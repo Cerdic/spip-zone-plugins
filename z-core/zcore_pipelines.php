@@ -58,6 +58,53 @@ function zcore_styliser($flux){
 	return $flux;
 }
 
+function zcore_recuperer_fond($flux){
+	static $is_404 = false;
+	static $z_contenu;
+
+	if ($is_404){
+		if ($flux['args']['fond']==="structure"){
+		$is_404 = false; // pas de risque de reentrance
+		$code = "404 Not Found";
+		$contexte_inclus = array(
+			'erreur' => "",
+			'code' => $code,
+			'lang' => $GLOBALS['spip_lang']
+		);
+
+		$flux['data'] = evaluer_fond('404', $contexte_inclus);
+		$flux['data']['status'] = intval($code); // pas remonte vers la page mais un jour peut etre...
+		// du coup on envoie le status a la main
+		include_spip("inc/headers");
+		http_status(intval($code));
+		}
+	}
+	elseif (!test_espace_prive()){
+		if (!isset($z_contenu)) {
+			if (!function_exists("z_blocs"))
+				$styliser_par_z = charger_fonction('styliser_par_z','public');
+			$z_blocs = z_blocs(test_espace_prive());
+			$z_contenu = reset($z_blocs); // contenu par defaut
+			$z_nlength = strlen($z_contenu);
+		}
+		$fond = $flux['args']['fond'];
+		if ($z_contenu
+			// eliminer rapidement la plupart des fond
+			AND strncmp($fond,"$z_contenu/",$z_nlength+1)==0
+			// verifier plus en detail que c'est bien le bon fond
+			AND $dir = explode('/',$fond)
+			AND count($dir)==2 // pas un sous repertoire
+			AND $dir = reset($dir)
+			AND $dir == $z_contenu // c'est le bloc de contenu principal
+			AND !strlen(trim($flux['data']['texte']))
+			){
+
+			$is_404 = true;
+		}
+	}
+	return $flux;
+}
+
 
 
 
