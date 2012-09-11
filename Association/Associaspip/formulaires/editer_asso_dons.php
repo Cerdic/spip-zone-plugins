@@ -37,7 +37,7 @@ function formulaires_editer_asso_dons_charger_dist($id_don='') {
 		$contexte['id_adherent']='';
 	/* paufiner la presentation des valeurs  */
 	if ($contexte['argent'])
-		$contexte['argent'] = association_formater_nombrer($contexte['argent']);
+		$contexte['argent'] = association_formater_nombre($contexte['argent']);
 	if ($contexte['valeur'])
 		$contexte['valeur'] = association_formater_nombre($contexte['valeur']);
 	// on ajoute les metas de destinations

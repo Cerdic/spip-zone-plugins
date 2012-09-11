@@ -100,7 +100,7 @@ function exec_adherents()
 		echo association_selectionner_id($id, 'adherents') .'</td>';
 		echo '<td class="fitre_statut">'. association_selectionner_statut($statut_interne, 'adherents', '<input type="hidden" name="lettre" value="'.$lettre.'" />'.($id_groupe?'<input type="hidden" name="groupe" value="'.$id_groupe.'" />':'') ) . '</td>';
 		echo '</tr></table>';
-		//Affichage de la liste
+		// Affichage de la liste
 		echo $code_liste_membres;
 		fin_page_association();
 	}
@@ -158,15 +158,16 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe)
 			$auteurs .= '<td class="integer">'
 			. $id_auteur.'</td>';
 		}
-		if ($GLOBALS['association_metas']['aff_photo']=='on') {
+		if ($GLOBALS['association_metas']['aff_photo']) {
 			$auteurs .= '<td class="logo centre">'.$logo.'</td>';
 		}
-		if ($GLOBALS['association_metas']['aff_civilite']=='on' && $GLOBALS['association_metas']['civilite']=='on')
+		if ($GLOBALS['association_metas']['aff_civilite']=='on' && $GLOBALS['association_metas']['civilite'])
 			$auteurs .= '<td class="honorific-prefix">'.$data['sexe'].'</td>';
 		$auteurs .= '<td class="family-name">'
 		.$mail.'</td>';
-		if ($GLOBALS['association_metas']['aff_prenom']=='on' && $GLOBALS['association_metas']['prenom']=='on') 	$auteurs .= '<td class="given-name">'.$data['prenom'].'</td>';
-		if ($GLOBALS['association_metas']['aff_groupes']=='on') {
+		if ($GLOBALS['association_metas']['aff_prenom'] && $GLOBALS['association_metas']['prenom'])
+				$auteurs .= '<td class="given-name">'.$data['prenom'].'</td>';
+		if ($GLOBALS['association_metas']['aff_groupes']) {
 			$auteurs .= '<td class="organisation-unit">';
 			$query_groupes = sql_select('g.nom as nom_groupe, g.id_groupe as id_groupe', 'spip_asso_groupes g LEFT JOIN spip_asso_groupes_liaisons l ON g.id_groupe=l.id_groupe', 'l.id_auteur='.$id_auteur);
 			if ($row_groupes = sql_fetch($query_groupes)) {
@@ -177,13 +178,13 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe)
 			}
 			$auteurs .= '</td>';
 		}
-		if ($GLOBALS['association_metas']['aff_id_asso']=='on' && $GLOBALS['association_metas']['id_asso']=='on') {
+		if ($GLOBALS['association_metas']['aff_id_asso'] && $GLOBALS['association_metas']['id_asso']) {
 			$auteurs .= '<td class="text">'.$data['id_asso'].'</td>';
 		}
-		if ($GLOBALS['association_metas']['aff_categorie']=='on') {
+		if ($GLOBALS['association_metas']['aff_categorie']) {
 			$auteurs .= '<td class="text">'. affiche_categorie($data['categorie']) .'</td>';
 		}
-		if ($GLOBALS['association_metas']['aff_validite']=='on') {
+		if ($GLOBALS['association_metas']['aff_validite']) {
 			$auteurs .= '<td class="date">';
 			if ($data['validite']==''){
 				$auteurs .= '&nbsp;';
@@ -201,35 +202,37 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe)
 		. "</tr>\n";
 	}
 
-	$res = "<table width='100%' class='asso_tablo' id='asso_tablo_adherents'>\n"
+	$res = "<table width='100%' class='asso_tablo' id='asso_liste_adherents'>\n"
 	. "<thead>\n<tr>";
-	if ($GLOBALS['association_metas']['aff_id_auteur']=='on') {
+	if ($GLOBALS['association_metas']['aff_id_auteur']) {
 		$res .= '<th>'._T('asso:entete_id').'</th>';
 	}
-	if ($GLOBALS['association_metas']['aff_photo']=='on') {
+	if ($GLOBALS['association_metas']['aff_photo']) {
 		$res .= '<th>'._T('asso:adherent_libelle_photo').'</th>';
 	}
-	if ($GLOBALS['association_metas']['aff_civilite']=='on' && $GLOBALS['association_metas']['civilite']=='on') $res .= '<th>'._T('asso:adherent_libelle_sexe').'</th>';
+	if ($GLOBALS['association_metas']['aff_civilite'] && $GLOBALS['association_metas']['civilite'])
+		$res .= '<th>'._T('asso:adherent_libelle_sexe').'</th>';
 	$res .= '<th>'._T('asso:adherent_libelle_nom_famille').'</th>';
-	if ($GLOBALS['association_metas']['aff_prenom']=='on' && $GLOBALS['association_metas']['prenom']=='on') $res .= '<th>'._T('asso:adherent_libelle_prenom').'</th>';
-	if ($GLOBALS['association_metas']['aff_groupes']=='on') {
+	if ($GLOBALS['association_metas']['aff_prenom'] && $GLOBALS['association_metas']['prenom'])
+		$res .= '<th>'._T('asso:adherent_libelle_prenom').'</th>';
+	if ($GLOBALS['association_metas']['aff_groupes']) {
 		$res .= '<th>'._T('asso:adherent_libelle_groupes').'</th>';
 	}
-	if ($GLOBALS['association_metas']['aff_id_asso']=='on' && $GLOBALS['association_metas']['id_asso']=='on') {
+	if ($GLOBALS['association_metas']['aff_id_asso'] && $GLOBALS['association_metas']['id_asso']) {
 		$res .= '<th>'._T('asso:adherent_libelle_id_asso').'</th>';
 	}
-	if ($GLOBALS['association_metas']['aff_categorie']=='on') {
+	if ($GLOBALS['association_metas']['aff_categorie']) {
 		$res .= '<th>'._T('asso:adherent_libelle_categorie').'</th>';
 	}
-	if ($GLOBALS['association_metas']['aff_validite']=='on') {
+	if ($GLOBALS['association_metas']['aff_validite']) {
 		$res .= '<th>'._T('asso:adherent_libelle_validite').'</th>';
 	}
-	$res .= '<th colspan="4" class="actions" width="30">'._T('asso:entete_actions').'</th>'
+	$res .= '<th colspan="4" class="actions">'._T('asso:entete_actions').'</th>'
 	. '<th><input title="'._T('asso:selectionner_tout').'" type="checkbox" id="selectionnerTous" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName(\'id_auteurs[]\'); for (var i in checkboxList){checkboxList[i].checked=currentVal;}" /></th>'
 	. "</tr>\n</thead><tbody>"
 	. $auteurs
 	. "</tbody>\n</table>\n";
-	//SOUS-PAGINATION
+	// SOUS-PAGINATION
 	$res .= "<table width='100%' class='asso_tablo_filtres'><tr>\n";
 	$res .= association_selectionner_souspage(array('spip_asso_membres', $critere), 'adherents', 'lettre='.$lettre.'&statut_interne='.$statut_interne );
 	if (autoriser('editer_membres', 'association', 100)) {

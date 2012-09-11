@@ -96,9 +96,7 @@ function exec_comptes()
 			'code', 'code ASC');
 		while ($plan = sql_fetch($sql)) { // Remplir le select uniquement avec les comptes utilises
 			$filtre_imputation .= '<option value="'.$plan['code'].'"';
-			if ($imputation==$plan['code']) {
-				$filtre_imputation .= ' selected="selected"';
-			}
+			$filtre_imputation .= ($imputation==$plan['code']?' selected="selected"':'');
 			$filtre_imputation .= '>'.$plan['code'].' - '.$plan['intitule'].'</option>';
 		}
 		$filtre_imputation .= '</select>';
@@ -114,13 +112,11 @@ function exec_comptes()
 			'imputation' => $filtre_imputation,
 			'vu' => $filtre_vu,
 		));
-		/* (re)calculer la pagination en fonction de id_compte */
-		if ($id_compte) {
-			/* on recupere les id_comptes de la requete sans le critere de limite et on en tire l'index de l'id_compte recherche parmis tous ceux disponible */
-			$all_id_compte = sql_allfetsel('id_compte', 'spip_asso_comptes', $where, '',  'date DESC,id_compte DESC');
+		if ($id_compte) { // (re)calculer la pagination en fonction de id_compte
+			$all_id_compte = sql_allfetsel('id_compte', 'spip_asso_comptes', $where, '',  'date DESC,id_compte DESC'); // on recupere les id_comptes de la requete sans le critere de limite...
 			$index_id_compte = -1;
 			reset($all_id_compte);
-			while (($index_id_compte<0) && (list($k,$v) = each($all_id_compte))) {
+			while (($index_id_compte<0) && (list($k,$v) = each($all_id_compte))) { // ...et on en tire l'index de l'id_compte recherche parmis tous ceux disponible
 				if ($v['id_compte']==$id_compte) $index_id_compte = $k;
 			}
 			if ($index_id_compte>=0) { // on recalcule le parametre de limite de la requete
@@ -129,11 +125,11 @@ function exec_comptes()
 		}
 		// TABLEAU
 		$table = comptes_while($where, sql_asso1page(), $id_compte);
-		if ($table) {
-			//SOUS-PAGINATION
+		if ($table) { // affichage de la liste
+			// SOUS-PAGINATION
 			$nav = association_selectionner_souspage(array('spip_asso_comptes', $where), 'comptes', "exercice=$id_exercice"."&imputation=$imputation". (is_numeric($vu)?"&vu=$vu":'') );
 			// ENTETES
-			$table = "<table width='100%' class='asso_tablo' id='asso_tablo_comptes'>\n"
+			$table = "<table width='100%' class='asso_tablo' $onload_option id='asso_liste_comptes'>\n"
 			. "<thead>\n<tr>"
 			. '<th>'. _T('asso:entete_id') .'</th>'
 			. '<th>'. _T('asso:entete_date') .'</th>'
@@ -141,13 +137,14 @@ function exec_comptes()
 			. '<th>'. _T('asso:compte_entete_justification') .'</th>'
 			. '<th>'. _T('asso:entete_montant') .'</th>'
 			. '<th>'. _T('asso:compte_entete_financier') .'</th>'
-			. '<th colspan="3" class="actions">'. _T('asso:entete_actions') .'</th>'
+			. '<th colspan="2" class="actions">'. _T('asso:entete_actions') .'</th>'
+			. '<th><input title="'._T('asso:selectionner_tout').'" type="checkbox" id="selectionnerTous" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName(\'valide[]\'); for (var i in checkboxList){checkboxList[i].checked=currentVal;}" /></th>'
 			. "</tr>\n</thead><tbody>"
 			. $table
 			. "</tbody>\n</table>\n"
 			. "<table width='100%' class='asso_tablo_filtres'><tr>\n<td align='left'>" . $nav . '</td><td align="right" width="30"><input type="submit" value="'. _T('asso:bouton_valider') . '"  /></td></tr></table>';
 			echo generer_form_ecrire('action_comptes', $table);
-		} else {
+		} else { // absence d'operation pour l'exercice
 			echo '<table width="100%"><tbody><tr><td class="actions erreur">' .( $id_exercice ? _T('asso:exercice_sans_operation') : '<a href="'.generer_url_ecrire('exercices').'">'._T('asso:ajouter_un_exercice').'</a>' ). '</td></tr></tbody></table>';
 		}
 		fin_page_association();
@@ -170,38 +167,36 @@ function comptes_while($where, $limit, $id_compte)
 		if (substr($data['imputation'],0,1)==$GLOBALS['association_metas']['classe_contributions_volontaires']) { // contribution volontaire
 			$class = 'cv';
 		}
-		if($id_compte==$data['id_compte']) { // pour voir au chargement l'id_compte recherche
-			$onload_option .= 'onLoad="document.getElementById(\'id_compte'.$id_compte.'\').scrollIntoView(true);"';
+		if($id_compte==$data['id_compte']) { // operation recherchee
+			$onload_option .= 'onLoad="document.getElementById(\'compte'.$id_compte.'\').scrollIntoView(true);"'; // pour voir au chargement l'id_compte recherche
 			$class = 'surligne';
 		} else {
 			$onload_option = '';
 		}
-		$comptes .= "<tr id='id_compte".$data['id_compte']."' class='$class'>"
+		$comptes .= "<tr id='compte".$data['id_compte']."' class='$class'>"
 		. '<td class="integer">'.$data['id_compte'].'</td>'
 		. '<td class="date">'. association_formater_date($data['date']) .'</td>'
 		. '<td class="text">'. $data['imputation'].'</td>'
 		. '<td class="text">&nbsp;'. propre($data['justification']) .'</td>'
 		. '<td class="decimal">'. association_formater_prix($data['recette']-$data['depense']) .'</td>'
-		. '<td class="text">&nbsp;'.$data['journal'].'</td>'
-		. ( $data['vu']
-			/* pas d'action sur les operations validees */
-			? ('<td class="action" colspan="2"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-verte.gif" '.$onload_option.' /></td>'.'<td class="action"><input disabled="disabled" type="checkbox" /></td>')
-			: ( ($data['id_journal'] && $data['imputation']!=$GLOBALS['association_metas']['pc_cotisations'])
-				/* pas d'edition/suppression des operations gerees par un module externe (souci de coherence avec des donnees d'autres tables) */
-				? ('<td class="action" colspan="2"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-rouge.gif" '.$onload_option.' /></td>')
-				: ( (substr($data['imputation'],0,1)==$GLOBALS['association_metas']['classe_banques'])
-					/* pas d'edition des virements internes (souci de coherence car il faut modifier deux operations concordament : ToDo...) */
-					? '<td class="action">&nbsp;</td>'
-					/* le reste est editable */
-					: '<td class="action">'. association_bouton_faire('mettre_a_jour', 'edit-12.gif', 'edit_compte', 'id='.$data['id_compte'], $onload_option) . '</td>'
-					)
-				/* operation supprimable */
-				. association_bouton_supprimer('comptes', 'id='.$data['id_compte'], 'td')
-				)
-			/* operation non validee (donc validable et editable ...ici ou via le module dedie...) */
-			. '<td class="action"><input name="valide[]" type="checkbox" value="'.$data['id_compte']. '" /></td>'
-		)
-		. '</tr>';
+		. '<td class="text">&nbsp;'.$data['journal'].'</td>';
+		if ( $data['vu'] ) { // pas d'action sur les operations validees !
+			$comptes .= '<td class="action" colspan="2">'. association_formater_puce('', 'verte', '', $onload_option) .' </td>'; // edition+suppresion
+			$comptes .= '<td class="action"><input disabled="disabled" type="checkbox" /></td>'; // validation
+		} else {  // operation non validee (donc validable et effacable...
+			if ( $data['id_journal'] && $data['imputation']!=$GLOBALS['association_metas']['pc_cotisations'] ) { // pas d'edition/suppression des operations gerees par un autre module (exepte les cotisations) ...par souci de coherence avec les donnees dupliquees dans d'autres tables...
+				$comptes .= '<td class="action" colspan="2">'. association_formater_puce('', 'rouge', '', $onload_option) .'</td>'; // edition+suppression
+			} else { // operation geree par ce module (donc supprimable ici)
+				if (substr($data['imputation'],0,1)==$GLOBALS['association_metas']['classe_banques']) { // pas d'edition des virements internes (souci de coherence car il faut modifier deux operations concordament : ToDo...)
+					$comptes .= '<td class="action">&nbsp;</td>'; // edition
+				} else { // le reste est editable
+					$comptes .= '<td class="action">'. association_bouton_faire('mettre_a_jour', 'edit-12.gif', 'edit_compte', 'id='.$data['id_compte']) . '</td>'; // edition
+				}
+				$comptes .= association_bouton_supprimer('comptes', 'id='.$data['id_compte'], 'td'); // suppression
+			}
+			$comptes .= '<td class="action"><input name="valide[]" type="checkbox" value="'.$data['id_compte']. '" /></td>'; // validation
+		}
+		$comptes .= '</tr>';
 	}
 	return $comptes;
 }

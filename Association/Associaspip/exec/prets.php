@@ -81,7 +81,7 @@ function exec_prets()
 		echo '<th>'._T('asso:entete_nom').'</th>';
 		echo '<th>'._T('asso:prets_entete_duree').'</th>';
 		echo '<th>'._T('asso:prets_entete_date_retour').'</th>';
-		echo '<th colspan="2" class="actions">'._T('asso:entete_action').'</th>';
+		echo '<th colspan="2" class="actions">'._T('asso:entete_actions').'</th>';
 		echo "</tr>\n</thead><tbody>";
 		$query = sql_select('*', 'spip_asso_prets', "id_ressource=$id_ressource", '', 'date_sortie DESC' );
 		while ($data = sql_fetch($query)) {

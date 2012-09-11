@@ -264,6 +264,8 @@ function association_calculer_lien_nomid($nom, $id, $type='membre', $html_tag=''
  * @param string $css_class
  *   Classe(s) CSS (separees par un espace) a rajouter
  *   Normalement : dtstart|dtend
+ * @param string $format
+ *   Indique le formatage de date souhaite (cf filtre affdate_<format>)
  * @param string $html_tag
  *   Balise-HTML (paire ouvrante/fermante) encadrante
  *   Par defaut : "abbr"
@@ -272,14 +274,13 @@ function association_calculer_lien_nomid($nom, $id, $type='membre', $html_tag=''
  * @return string $res
  *   Date formatee
  */
-function association_formater_date($iso_date, $css_class='', $htm_tag='abbr')
+function association_formater_date($iso_date, $css_class='', $format='entier', $htm_tag='abbr')
 {
 	$res = '';
-	if ($html_tag)
+	if ( $html_tag )
 		$res = "<$html_tag ". ($css_class?"class='$css_class' ":'') ."title='$iso_date'>";
-	$res .= affdate_base($iso_date, 'entier'); // on fait appel a la fonction centrale des filtres SPIP... comme ca c'est traduit et formate dans les langues supportees ! si on prefere les mois en chiffres et non en lettre, y a qu'a changer les chaines de langue date_mois_XX
-	if ($html_tag)
-		$res .= ($html_tag?"</$htm_tag>":'');
+	$res .= affdate_base($iso_date, $format?$format:'entier'); // on fait appel a la fonction centrale des filtres SPIP... comme ca c'est traduit et formate dans les langues supportees ! si on prefere les mois en chiffres et non en lettre, y a qu'a changer les chaines de langue date_mois_XX
+	$res .= ($html_tag?"</$htm_tag>":'');
 	return $res;
 }
 
@@ -639,11 +640,38 @@ function association_formater_texte($texte, $filtre='', $params=array() )
  * @return string
  *   Dessin et texte
  */
-function association_formater_puce($statut, $icone,  $acote=TRUE)
+function association_formater_puce($statut, $icone,  $acote=TRUE, $img_attrs='')
 {
 	if ( is_array($icone) )
 		$icone = $icone[$statut];
-	return $acote ? association_bouton_faire('', 'puce-'.$icone.'.gif', '', '', '').' '._T("asso:$statut") : association_bouton_faire($statut, 'puce-'.$icone.'.gif', '', '', '') ; // c'est comme un bouton... mais n'a pas d'action
+	return $acote ? association_bouton_faire('', 'puce-'.$icone.'.gif', '', '', $img_attrs).' '._T("asso:$statut") : association_bouton_faire($statut, 'puce-'.$icone.'.gif', '', '', $img_attrs) ; // c'est comme un bouton... mais n'a pas d'action
+}
+
+/**
+ *  Affichage de l'horodatage localisee et micro-formatee
+ *
+ * @param string $iso_date
+ *   Date au format ISO-8601
+ *   http://fr.wikipedia.org/wiki/ISO_8601#Date_et_heure
+ * @param string $css_class
+ *   Classe(s) CSS (separees par un espace) a rajouter
+ *   Normalement : dtstart|dtend
+ * @param string $html_tag
+ *   Balise-HTML (paire ouvrante/fermante) encadrante
+ *   Par defaut : "abbr"
+ *   http://www.alsacreations.com/tuto/lire/1222-microformats-design-patterns.html#datetime-design-pattern
+ *   Desactiver (chaine vide) pour ne pas micro-formater
+ * @return string $res
+ *   Date formatee
+ */
+function association_formater_heure($iso_date, $css_class='', $htm_tag='abbr')
+{
+	$res = '';
+	if ( $html_tag )
+		$res = "<$html_tag ". ($css_class?"class='$css_class' ":'') ."title='$iso_date'>";
+	$res .= affdate_heure($iso_date); // on fait appel a la fonction centrale des filtres SPIP... comme ca c'est traduit et formate dans les langues supportees ! si on prefere les mois en chiffres et non en lettre, y a qu'a changer les chaines de langue date_mois_XX
+	$res .= ($html_tag?"</$htm_tag>":'');
+	return $res;
 }
 
 /** @} */
@@ -1113,6 +1141,8 @@ function association_totauxinfos_intro($titre, $type='', $id=0, $DesLignes=array
 		$res .= '<div style="text-align: center" class="verdana1 spip_x-small">'. _T('asso:titre_num', array('titre'=>_T("local:$type"), 'num'=>$id) ) .'</div>'; // presentation propre a Associaspip qui complete par un autre titre (voir ci-apres). Dans un SPIP traditionnel on aurait plutot : $res .= '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'. _T("$PrefixeLangue:$type") .'<br /><span class="spip_xx-large">'.$id.'</span></div>';
 	}
 	$res .= '<div style="text-align: center" class="verdana1 spip_medium">'.$titre.'</div>';
+	if ( !is_array($DesLignes) )
+		return $res;
 	if ( count($DesLignes) OR $ObjetEtendu )
 		$res .= '<dl class="verdana1 spip_xx-small">';
 	foreach ($DesLignes as $dt=>$dd) {
@@ -1495,6 +1525,12 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
 	$res .= "</tr>\n</thead><tbody>";
 	if ( !is_array($boutons) )
 		return $res; // c'est une astuce pour generer la partie entete seulement
+	if ( $cle1 ) {
+		if ( strpos($cle1, 'id_')===0 )
+			$objet = substr($cle1, 3);
+		else
+			$objet = $cle1;
+	}
 	$nbr_lignes = 0;
 	while ($data = sql_fetch($reponse_sql)) {
 		if ( is_array($extra) && $nbr_couleurs=count($extra) ) { // on a bien un tableau de classes supplementaires
@@ -1507,7 +1543,11 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
 		} elseif ( $extra ) { // classe supplementaire appliquee inconditionnellement
 				$tr_css = $extra;
 		}
-		$res .= '<tr'. ($cle1?' id="'.$data[$cle1].'"':'') . ($tr_css?' class="'.$tr_css.'"':'') .'>';
+		if ( $cle1 && $data[$cle1]==$selection ) {
+			$tr_css = 'surligne';
+			$onLoad_js = '<script type="text/javascript"> document.getElementById("'.$objet.$selection.'").scrollIntoView(true);  </script>' ; // ensuite, trouver une roussource externe (IMG, FRAME, SCRIPT, BODY) ou appliquer ceci : '" onLoad="document.getElementById(\''.$objet.$selection.'\').scrollIntoView(true);';
+		}
+		$res .= '<tr'. ($cle1?' id="'.$objet.$data[$cle1].'"':'') . ($tr_css?' class="'.$tr_css.'"':'') .'>';
 		foreach ($presentation as $champ=>$params) {
 			$format = array_shift($params);
 			switch ($format) {
@@ -1547,7 +1587,11 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
 		}
 		$res .= "</tr>\n";
 	}
-	return $res."</tbody>\n</table>\n";
+	$res .= "</tbody>\n</table>\n";
+	if ( $cle1 && $selection ) {
+		$res .= '<script type="text/javascript"> document.getElementById("'.$objet.$selection.'").scrollIntoView(true); </script>' ; // comme on ne peut placer un evenement "onLoad" que sur une roussource externe (IMG, FRAME, SCRIPT, BODY) ; il vaut mieux appliquer faire un SCRIPT inclus (tout juste apres ou dans HEAD si possible)
+	}
+	return $res;
 }
 
 /** @} */
@@ -1653,7 +1697,7 @@ function association_date_du_jour()
 	$res = '<p class="'. (_DATE_HEURE_ASSOCIASPIP?'datetime':'date');
 	$res .= '" title="'. date('Y-m-d') . (_DATE_HEURE_ASSOCIASPIP?"T$hr:$mn":'');
 	$lheure = (_DATE_HEURE_ASSOCIASPIP ? _T('spip:date_fmt_heures_minutes', array('h'=>$hr,'m'=>$mn)) :'');
-	$res .= '">'. (_DATE_HEURE_ASSOCIASPIP ? _T('asso:date_du_jour_heure', array('date'=>$ladate)) : _T('asso:date_du_jour',array('date'=>$ladate,'time'=>$lheure)) ).'</p>';
+	$res .= '">'. (_DATE_HEURE_ASSOCIASPIP ? _T('asso:date_du_jour_heure', array('date'=>$ladate,'time'=>$lheure)) : _T('asso:date_du_jour',array('date'=>$ladate)) ).'</p>';
 	return $res;
 }
 

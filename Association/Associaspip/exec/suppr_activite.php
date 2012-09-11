@@ -21,7 +21,7 @@ function exec_suppr_activite()
 		echo minipres();
 	} else {
 		$id_activite = intval(_request('id'));
-		$activite = sql_fetsel('*', 'spip_asso_dons', "id_don=$id_don");
+		$activite = sql_fetsel('*', 'spip_asso_activites', "id_activite=$id_activite");
 		if (!$activite) {
 			include_spip('inc/minipres');
 			echo minipres(_T('zxml_inconnu_id') . $id_don);
@@ -30,7 +30,7 @@ function exec_suppr_activite()
 			// info
 			$infos['evenement'] = sql_getfetsel('titre', 'spip_evenements', 'id_evenement='.intval($activite['id_evenement']) );
 			$infos['date'] = association_formater_date($activite['date_inscription']);
-			$infos['activite_entete_inscrits'] = association_formater_prix($activite['inscrits']);
+			$infos['activite_entete_inscrits'] = association_formater_nombre($activite['inscrits'], 0);
 			$infos['entete_montant'] = association_formater_prix($activite['montant']);
 			association_totauxinfos_intro(association_calculer_lien_nomid($activite['nom'],$activite['id_adherent']), 'activite', $id_activite, $infos );
 			// datation et raccourcis

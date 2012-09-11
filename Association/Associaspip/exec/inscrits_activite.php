@@ -25,8 +25,9 @@ function exec_inscrits_activite()
 		onglets_association('titre_onglet_activite');
 		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement") ;
 		// INTRO : Rappel Infos Evenement
-		$infos['evenement_date_du'] = association_formater_date($evenement['date_debut'],'dtstart').' '.substr($data['date_debut'],10,6);
-		$infos['evenement_date_au'] = association_formater_date($evenement['date_fin'],'dtend').' '.substr($data['date_debut'],10,6);
+		$format = 'association_formater_'. (($evenement['horaire']=='oui')?'heure':'date');
+		$infos['evenement_date_du'] = $format($evenement['date_debut'],'dtstart');
+		$infos['evenement_date_au'] = $format($evenement['date_fin'],'dtend');
 		$infos['evenement_lieu'] = $evenement['lieu'];
 		echo association_totauxinfos_intro($evenement['titre'], 'evenement', $id_evenement, $infos, 'agenda', 'evenement');
 		// STATS sur les participations (nombre de personnes inscrites et montant paye)
@@ -40,6 +41,7 @@ function exec_inscrits_activite()
 		$montant = sql_fetsel('SUM(montant) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " );
 		echo association_totauxinfos_montants('participations', $montant['encaisse'], NULL);
 		// datation et raccourcis
+		$res['activite_bouton_modifier_article'] = array('edit-12.gif', array('articles', 'id_article='.$evenement['id_article']));
 		$res['activite_bouton_ajouter_inscription'] = array('panier_in.gif', array('edit_activite', "id_evenement=$id_evenement"));
 		if (test_plugin_actif('FPDF')) { // PDF des inscrits
 			$res['activite_bouton_imprimer_inscriptions'] = array('print-24.png', array('pdf_activite', "id=$id_evenement"));
@@ -70,7 +72,7 @@ function exec_inscrits_activite()
 		echo '<th>'. _T('asso:entete_nom') .'</th>';
 		echo '<th>'. _T('asso:activite_entete_inscrits') .'</th>';
 		echo '<th>'. _T('asso:entete_montant') .'</th>';
-		echo '<th colspan="2" class="actions">'. _T('asso:entete_action') .'</th>';
+		echo '<th colspan="2" class="actions">'. _T('asso:entete_actions') .'</th>';
 		echo "</tr>\n</thead><tbody>";
 		if ($statut) { // restriction de la selection
 			$critereSupplementaire = ' AND '. ($statut>0?"date_paiement<date_inscription ":"date_paiement>=date_inscription ");

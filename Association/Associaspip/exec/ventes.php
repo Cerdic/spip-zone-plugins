@@ -71,7 +71,7 @@ function exec_ventes()
 		echo '<th>'. _T('asso:entete_nom') .'</th>';
 		echo '<th>'. _T('asso:entete_quantite') . '</th>';
 		echo '<th>'. _T('asso:entete_montant') .'</th>';
-		echo '<th colspan="2" class="actions">'._T('asso:entete_actions').'</th>';
+		echo '<th colspan="2" class="actions">'. _T('asso:entete_actions') .'</th>';
 		echo "</tr>\n</thead><tbody>";
 		$query = sql_select('*', 'spip_asso_ventes', "DATE_FORMAT(date_vente, '%Y')=$annee", '',  'id_vente DESC') ;
 		while ($data = sql_fetch($query)) {

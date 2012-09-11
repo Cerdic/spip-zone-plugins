@@ -70,13 +70,13 @@ function exec_activites()
 		echo "\n<input type='hidden' name='exec' value='activites' />";
 		echo "\n<table width='100%' class='asso_tablo_filtres'><tr>";
 		echo '<td id="filtre_annee">'. association_selectionner_annee($annee, 'evenements', 'debut') .'</td>';
-#		echo '<td id="filtre_id">'. association_selectionner_id($id_evenement) .'</td>';
+		echo '<td id="filtre_id">'. association_selectionner_id($id_evenement) .'</td>';
 		if (test_plugin_actif('AGENDA')) { // le plugin "Agenda 2" peut associer des mots-cles aux evenements : les proposer comme critere de filtrage
 			if ($id_mot) {
-				$mc_sel = ', M.id_mot AS motact';
-				$mc_join = ' LEFT JOIN spip_mots_evenements AS A ON  A.id_evenement=E.id_evenement LEFT JOIN spip_mots AS M ON A.id_mot=M.id_mot';
-				//$mc_where = "AND (M.id_mot=$id_mot OR M.titre like '$mot' OR M.titre IS NULL)";
-				$mc_where = "AND M.id_mot=$id_mot";
+				$mc_sel = ', m.id_mot AS motact';
+				$mc_join = ' LEFT JOIN spip_mots_evenements AS k ON  k.id_evenement=e.id_evenement LEFT JOIN spip_mots AS m ON k.id_mot=m.id_mot';
+				//$mc_where = " AND (m.id_mot=$id_mot OR m.titre LIKE '$mot' OR m.titre IS NULL) ";
+				$mc_where = "AND m.id_mot=$id_mot";
 			} else {
 				$mc_sel = $mc_join = $mc_where = '';
 			}
@@ -101,33 +101,25 @@ function exec_activites()
 		echo '<noscript><td><input type="submit" value="'._T('asso:bouton_filtrer').'" /></td></noscript>';
 		echo '</tr></table></form>';
 		//TABLEAU
-		echo "<table width='100%' class='asso_tablo' id='asso_tablo_activites'>\n";
-		echo "<thead>\n<tr>";
-		echo '<th>'. _T('asso:entete_id') .'</th>';
-		echo '<th>'. _T('asso:entete_date') .'</th>';
-		echo '<th>'. _T('asso:activite_entete_heure') .'</th>';
-		echo '<th>'. _T('asso:entete_intitule') .'</th>';
-		echo '<th>'. _T('asso:activite_entete_lieu') .'</th>';
-		echo '<th>'. _T('asso:activite_entete_inscrits') .'</th>';
-		echo '<th colspan="3" class="actions">'. _T('asso:entete_action') .'</th>';
-		echo "</tr>\n</thead><tbody>";
-		$query = sql_select('*, E.id_evenement, E.titre AS intitule'.$mc_sel, 'spip_evenements AS E'.$mc_join, "DATE_FORMAT(date_debut, '%Y')=$annee $mc_where", '', 'date_debut DESC', sql_asso1page() );
-		while ($data = sql_fetch($query)) {
-			$inscrits = sql_fetsel('SUM(inscrits) AS total', 'spip_asso_activites', 'id_evenement='.$data['id_evenement']);
-			echo '<tr class="'. ($inscrits['total']?'pair':'impair') . (($id_evenement==$data['id_evenement'])?' surligne':'') .'" id="'.$data['id_evenement'].'">';
-			echo '<td class="integer">'.$data['id_evenement'].'</td>';
-			echo '<td class="date">'. association_formater_date($data['date_debut'],'dtstart') .'</td>';
-			echo '<td class="date">'. substr($data['date_debut'],10,6) .'</td>';
-			echo '<td class="text">'.$data['intitule'].'</td>';
-			echo '<td class="text">'.$data['lieu'].'</td>';
-			echo '<td class="integer">'.$inscrits['total'].'</td>';
-			echo '<td class="actions">'. association_bouton_faire('activite_bouton_modifier_article', 'edit-12.gif', 'articles', 'id_article='.$data['id_article']) . '</td>';
-			echo '<td class="actions">'. association_bouton_faire('activite_bouton_ajouter_inscription', 'creer-12.gif', 'edit_activite', 'id_evenement='.$data['id_evenement']) . '</td>';
-			echo '<td class="actions">'. association_bouton_faire('activite_bouton_voir_liste_inscriptions', 'voir-12.png', 'inscrits_activite', 'id='.$data['id_evenement']) . '</td>';
-			echo "</tr>\n";
-		}
-		echo "</tbody>\n</table>\n";
-		echo "\n<table width='100%'>\n";
+		echo association_bloc_listehtml(
+//			array('*, e.id_evenement, e.titre AS intitule'.$mc_sel, 'spip_evenements AS e'.$mc_join, "DATE_FORMAT(date_debut, '%Y')=$annee $mc_where", '', 'date_debut DESC', sql_asso1page() ), // requete
+			array("e.id_evenement, e.date_debut, e.date_fin, e.titre  AS intitule, e.lieu,  COUNT(a.id_activite)+SUM(a.inscrits) as personnes, SUM(a.montant) as montants, CASE SUM(a.inscrits) WHEN 0 THEN 'sans' ELSE 'avec' END invites $mc_sel", "spip_evenements AS e LEFT JOIN spip_asso_activites AS a ON e.id_evenement=a.id_evenement $mc_join", "DATE_FORMAT(date_debut, '%Y')=$annee $mc_where", 'e.id_evenement', 'date_debut DESC, date_fin DESC', sql_asso1page() ), // requete
+			array(
+				'id_evenement' => array('asso:entete_id', 'entier'),
+				'date_debut' => array('agenda:evenement_date_du', 'date', 'dtstart'),
+				'date_fin' => array('agenda:evenement_date_au', 'date', 'dtend'),
+				'intitule' => array('asso:entete_intitule', 'texte'),
+				'lieu' => array('agenda:evenement_lieu', 'texte'),
+				'personnes' => array('asso:activite_entete_inscrits', 'entier'),
+				'montants' => array('asso:entete_montant', 'prix'),
+			), // entetes et formats des donnees
+			array(
+				array('faire', 'activite_bouton_ajouter_inscription', 'creer-12.gif', 'edit_activite', 'id_evenement=$$'),
+				array('faire', 'activite_bouton_voir_liste_inscriptions', 'voir-12.png', 'inscrits_activite', 'id=$$'),
+			), // boutons d'action
+			'id_evenement', // champ portant la cle des lignes et des boutons
+			array('sans'=>'pair', 'avec'=>'impair'), 'invites', $id_evenement
+		);
 		//SOUS-PAGINATION
 		echo "<table width='100%' class='asso_tablo_filtres'><tr>\n";
 		echo association_selectionner_souspage(array('spip_evenements', "DATE_FORMAT(date_debut, '%Y')=$annee"), 'activites', 'annee='.$annee );
