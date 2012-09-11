@@ -2,7 +2,7 @@
 	prefix="celements"
 	categorie="navigation"
 	version="1.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/elements_catalogue-64.png"
 	documentation=""
