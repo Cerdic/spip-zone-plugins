@@ -26,7 +26,6 @@
 	<necessite nom="yaml" compatibilite="[1.5.0;]" />
 
 	<menu nom="champs_extras" titre="iextras:champs_extras" parent="menu_configuration" icone="images/iextras-16.png" />
-	<onglet nom="champs_extras" titre="iextras:champs_extras" parent="configuration" icone="images/iextras-24.png" />
 
 </paquet>
 
