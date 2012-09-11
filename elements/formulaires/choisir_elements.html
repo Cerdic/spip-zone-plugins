@@ -1,0 +1,94 @@
+[(#REM)
+
+ Affiche le éléments choisis et leur configuration et permet
+ de les ordonner, de les supprimer ou d'ajouter de nouveaux éléments
+
+]
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:elements:choisir_et_configurer_les_elements:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="notice">(#ENV*{erreurs/message_info})</p>]
+
+
+<script type='text/javascript'>
+(function($){
+$(document).ready(function(){
+	$('.formulaire_#FORM .description_element').each(function(){
+		$(this).find('.params').hide()
+		$(this).find('.entete').addClass('pointer').click(function(){
+			$(this).parent().find('.params').toggle();
+		});
+	});
+});
+})(jQuery)
+</script>
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		[(#REM)
+			Boucle sur les éléments enregistrés 
+		]
+		<div class='selection_elements'>
+			<h4><:elements:elements_choisis:></h4>
+			<B_elements>
+				<strong>[(#TOTAL_BOUCLE|singulier_ou_pluriel{elements:element_un,elements:elements_nb})]</strong>
+				<ul>
+			<BOUCLE_elements(DATA){source table,(#ENV**{elements}|elements_obtenir_desriptions)}>
+				<li class='element'>
+					<div class='description_element'>
+						<div class='entete'>
+							<span class='nom'
+								[ title='(#DESCRIPTION|attribut_html)']
+								[ style='background-image:url((#CHEMIN_IMAGE{#ICON}|sinon{#CHEMIN_IMAGE{element-24.png}}))']>
+								#NOM
+							</span>
+						</div>
+						<div class='params'>
+
+							[<ul>(#GENERER_SAISIES{[(#VALEUR**
+								|elements_saisies_preparer{#CLE})]})</ul>]
+
+							<div class='nettoyeur'></div>
+
+							<button type="submit" name="supprimer_element" value="element/#CLE"
+								class="submit supprimer_element">
+								[(#CHEMIN_IMAGE{element-del-24.png}|balise_img)]
+								<span><:elements:enlever_cet_element:></span>
+							</button>
+						</div>
+					</div>
+
+				</li>
+			</BOUCLE_elements>
+				</ul>
+			</B_elements>
+		</div>
+
+		[(#REM)
+			Boucle sur les éléments enregistrés 
+		]
+		<B_liste>
+		<ul>
+		<li class="editer haut saisies_disponibles" id="attrapable">
+			<label><:elements:cfg_label_ajouter_element:></label>
+		<BOUCLE_liste(DATA){source table,(#VAL|lister_elements_autorises_par_nom)}>
+			<button type="submit" name="ajouter_element" value="#CLE"
+				class="submit ajouter_element"[ title="(#DESCRIPTION|attribut_html)"]
+				[style="background-image:url((#CHEMIN_IMAGE{#ICON}|sinon{#CHEMIN_IMAGE{formulaire-saisie-defaut.png}}))"]>
+				<span>#NOM</span>
+			</button>
+		</BOUCLE_liste>
+		</li>
+		</ul>
+		<B_liste>
+
+		<p class="boutons"><span class="image_loading">&nbsp;</span>
+			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</div>
+	</form>
+</div>

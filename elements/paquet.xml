@@ -1,0 +1,28 @@
+<paquet
+	prefix="elements"
+	categorie="navigation"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/elements-64.png"
+	documentation=""
+	schema="1.0.0" 
+>
+
+	<nom>Éléments</nom>
+
+	<auteur lien='http://magraine.net'>Marcillaud Matthieu</auteur>
+
+	<licence>GNU/GPL</licence>
+	<pipeline nom="autoriser" inclure="elements_autorisations.php" /> 
+	<pipeline nom="declarer_tables_principales" inclure="base/elements.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/elements.php" /> 
+	<pipeline nom="afficher_fiche_objet" inclure="elements_pipelines.php" /> 
+
+	<necessite nom="saisies" compatibilite="[1.26.6;["/>
+	<necessite nom="verifier" compatibilite="[0.1.16;[" />
+	<necessite nom="yaml" compatibilite="[1.1;[" />
+
+	<menu nom="configurer_elements" titre="elements:elements_titre" parent="menu_squelette"  icone="images/elements-16.png" />
+
+</paquet>

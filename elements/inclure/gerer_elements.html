@@ -1,0 +1,25 @@
+#SET{bloc,#ENV{bloc}}
+
+[(#BOITE_OUVRIR{[(#GET{bloc}|oui)<:elements:elements_selectionnes_pour{bloc=#GET{bloc}}:>],simple})]
+<div class='elements_choisis'>
+	<BOUCLE_elements(ELEMENTS){objet}{id_objet}{bloc=#GET{bloc}}>
+		<BOUCLE_type_elements(DATA){source table,(#ELEMENTS|elements_obtenir_desriptions)}{', '}>#NOM</BOUCLE_type_elements>
+	</BOUCLE_elements>
+		<:elements:elements_selectionnes_aucun:>
+	<//B_elements>
+
+	[(#ENV{choisir_elements}|non)
+	<a href="[(#SELF|parametre_url{choisir_elements,1})]" class='ajax modifier'><:elements:modifier_les_elements:></a>
+	][(#ENV{choisir_elements}|oui)
+	<a href="[(#SELF|parametre_url{choisir_elements,''})]" class='ajax modifier'><:elements:fermer_les_elements:></a>
+	]
+</div>
+
+[(#ENV{choisir_elements}|oui)
+<div class='elements_selection'>
+	<div class='ajax'>
+	[(#FORMULAIRE_CHOISIR_ELEMENTS{#ENV{objet},#ENV{id_objet},#GET{bloc}})]
+	</div>
+</div>
+]
+#BOITE_FERMER

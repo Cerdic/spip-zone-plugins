@@ -1,0 +1,14 @@
+nom: '<:elements:element_texte_titre:>'
+description: '<:elements:element_texte_description:>'
+icon: 'texte-24.png'
+parametres:
+  -
+    saisie: 'textarea'
+    options:
+      nom: 'texte'
+      label: '<:elements:label_texte:>'
+      obligatoire: 'oui'
+      inserer_barre: 'edition'
+      previsualisation: 'oui'
+      rows: 5
+      li_class: 'haut'
