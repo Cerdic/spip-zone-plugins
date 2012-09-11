@@ -1,0 +1,11 @@
+<select name="#ENV{nom}" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"]>
+	[(#ENV{cacher_option_intro}|non)
+		<option value="0">[(#ENV{option_intro})]</option>]
+
+	<BOUCLE_jeux(JEUX)>
+		<option value="#ID_JEU"[(#ID_JEU|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>
+			#TITRE_PRIVE
+		</option>
+	</BOUCLE_jeux>
+
+</select>

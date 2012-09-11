@@ -1,0 +1,12 @@
+nom: '<:elements:element_sondage:>'
+description: '<:elements:element_sondage_description:>'
+icon: 'sondage-24.png'
+necessite:
+  - 'formidable'
+parametres:
+  -
+    saisie: 'element_sondage'
+    options:
+      nom: 'id_formidable'
+      label: '<:elements:label_id_sondage:>'
+      obligatoire: 'oui'

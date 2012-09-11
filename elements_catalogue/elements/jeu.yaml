@@ -1,0 +1,12 @@
+nom: '<:elements:element_jeu:>'
+description: '<:elements:element_jeu_description:>'
+icon: 'jeu-24.png'
+necessite:
+  - 'jeux'
+parametres:
+  -
+    saisie: 'element_jeu'
+    options:
+      nom: 'id_jeu'
+      label: '<:elements:label_id_jeu:>'
+      obligatoire: 'oui'

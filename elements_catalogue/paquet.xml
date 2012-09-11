@@ -1,0 +1,19 @@
+<paquet
+	prefix="celements"
+	categorie="navigation"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/elements_catalogue-64.png"
+	documentation=""
+	schema="" 
+>
+
+	<nom>Éléments, le catalogue</nom>
+
+	<auteur lien='http://magraine.net'>Marcillaud Matthieu</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="elements" compatibilite="[1.0.0;["/>
+
+</paquet>
