@@ -7,6 +7,7 @@
 	[(#REM) Tester si open_ssl et simpleXML sont disponibles ]
 	[(#VAL{'openssl_open'}|function_exists|non)<p class="reponse_formulaire reponse_formulaire_erreur"><:zotspip:erreur_openssl:></p>]
 	[(#VAL{'simplexml_load_string'}|function_exists|non)<p class="reponse_formulaire reponse_formulaire_erreur"><:zotspip:erreur_simplexml:></p>]
+	[(#VAL{'DOMDocument'}|class_exists|non)<p class="reponse_formulaire reponse_formulaire_erreur"><:zotspip:erreur_dom:></p>]
 	
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
