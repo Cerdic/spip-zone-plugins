@@ -195,14 +195,14 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe)
 		}
 		$auteurs .= '<td class="action">'
 		. '<a href="'. generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur) .'">'.$icone.'</a></td>'
-		. '<td class="action">'. association_bouton_faire('adherent_label_ajouter_cotisation', 'cotis-12.gif', 'ajout_cotisation','id='.$id_auteur) .'</td>'
-		. '<td class="action">'. association_bouton_faire('adherent_label_modifier_membre', 'edit-12.gif', 'edit_adherent','id='.$id_auteur) .'</td>'
-		. '<td class="action">'. association_bouton_faire('adherent_label_voir_membre', 'voir-12.png', 'adherent','id='.$id_auteur) .'</td>'
-		. '<td class="action"><input name="id_auteurs[]" type="checkbox" value="'.$id_auteur.'" /></td>'
+		. association_bouton_act('adherent_label_ajouter_cotisation', 'cotis-12.gif', 'ajout_cotisation','id='.$id_auteur)
+		. association_bouton_edit('adherent','id='.$id_auteur)
+		. association_bouton_act('adherent_label_voir_membre', 'voir-12.png', 'adherent','id='.$id_auteur)
+		. association_bouton_coch('id_auteurs', $id_auteur)
 		. "</tr>\n";
 	}
 
-	$res = "<table width='100%' class='asso_tablo' id='asso_liste_adherents'>\n"
+	$res = "<table width='100%' class='asso_tablo' id='liste_adherents'>\n"
 	. "<thead>\n<tr>";
 	if ($GLOBALS['association_metas']['aff_id_auteur']) {
 		$res .= '<th>'._T('asso:entete_id').'</th>';

@@ -88,8 +88,8 @@ function exec_ventes()
 			echo '<td class="decimal">'.$data['quantite'].'</td>';
 			echo '<td class="decimal">'
 			. association_formater_prix($data['quantite']*$data['prix_vente']).'</td>';
-			echo association_bouton_supprimer('vente', 'id='.$data['id_vente'], 'td');
-			echo '<td class="action">'. association_bouton_faire('mettre_a_jour_la_vente', 'edit-12.gif', 'edit_vente','id='.$data['id_vente']) . '</td>';
+			echo association_bouton_suppr('vente', 'id='.$data['id_vente']);
+			echo '<td class="action">'. association_bouton_edit('vente','id='.$data['id_vente']);
 			echo "</tr>\n";
 		}
 		echo "</tbody>\n</table>\n";

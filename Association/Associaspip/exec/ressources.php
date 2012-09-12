@@ -93,8 +93,8 @@ rdm */
 				'prix_caution' => array('asso:ressources_entete_caution', 'prix'),
 			), // entetes et formats des donnees
 			array(
-				array('faire', 'ressources_nav_supprimer', 'suppr-12.gif', 'suppr_ressource', 'id=$$'),
-				array('faire', 'ressources_nav_editer', 'edit-12.gif', 'edit_ressource', 'id=$$'),
+				array('suppr', 'ressource', 'id=$$'),
+				array('edit', 'ressource', 'id=$$'),
 				array('faire', 'prets_nav_gerer', 'voir-12.png', 'prets', 'id=$$'),
 			), // boutons d'action
 			'id_ressource', // champ portant la cle des lignes et des boutons

@@ -117,7 +117,7 @@ function exec_adherent(){
 					'montant' => array('asso:entete_montant', 'prix'),
 				), // entetes et formats des donnees
 				$full ? array(
-					array('faire', 'adherent_bouton_maj_inscription', 'edit-12.gif', 'edit_activite', 'id=$$'),
+					array('edit', 'activite', 'id=$$'),
 				) : array(), // boutons d'action
 				'id_activite' // champ portant la cle des lignes et des boutons
 			);
@@ -135,7 +135,7 @@ function exec_adherent(){
 					'date_envoie' => array('asso:vente_entete_date_envoi', 'date'),
 				), // entetes et formats des donnees
 				$full ? array(
-					array('faire', 'adherent_bouton_maj_vente', 'edit-12.gif', 'edit_vente', 'id=$$'),
+					array('edit', 'vente', 'id=$$'),
 				) : array(), // boutons d'action
 				'id_vente' // champ portant la cle des lignes et des boutons
 			);
@@ -153,7 +153,7 @@ function exec_adherent(){
 //					'valeur' => array('asso:vente_entete_date_envoi', 'prix'),
 				), // entetes et formats des donnees
 				$full ? array(
-					array('faire', 'adherent_bouton_maj_don', 'edit-12.gif', 'edit_don', 'id=$$'),
+					array('edit', 'don', 'id=$$'),
 				) : array(), // boutons d'action
 				'id_don' // champ portant la cle des lignes et des boutons
 			);
@@ -182,7 +182,7 @@ function exec_adherent(){
 					'date_retour' => array('asso:prets_entete_date_retour', 'date', 'dtend'),
 				), // entetes et formats des donnees
 				$full ? array(
-					array('faire', 'adherent_bouton_maj_operation', 'edit-12.gif', 'edit_pret', 'id=$$'),
+					array('edit', 'pret', 'id=$$'),
 				) : array(), // boutons d'action
 				'id_pret' // champ portant la cle des lignes et des boutons
 			);

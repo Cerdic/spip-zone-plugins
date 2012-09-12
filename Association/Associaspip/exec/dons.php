@@ -94,8 +94,8 @@ function exec_dons()
 				? ('<td class="text">&nbsp;</td>')
 			    : ('<td class="text">'. propre($data['contrepartie']) .'</td>')
 				);
-			echo '<td  class="action">'. association_bouton_faire('supprimer_le_don', 'suppr-12.gif', 'suppr_don', "id=$data[id_don]") .'</td>';
-			echo '<td class="action">' . association_bouton_faire('mettre_a_jour_le_don', 'edit-12.gif', 'edit_don', "id=$data[id_don]") .'</td>';;
+			echo '<td  class="action">'. association_bouton_suppr('don', "id=$data[id_don]");
+			echo '<td class="action">' . association_bouton_edit('don', "id=$data[id_don]");
 			echo "</tr>\n";
 		}
 		echo "</tbody>\n</table>\n";

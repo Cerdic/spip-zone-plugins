@@ -85,8 +85,8 @@ function exec_inscrits_activite()
 			echo '<td class="text">'.  association_calculer_lien_nomid($data['nom'],$data['id_adherent']) .'</td>';
 			echo '<td class="integer">'.$data['inscrits'].'</td>';
 			echo '<td class="decimal">'. association_formater_prix($data['montant']) .'</td>';
-			echo association_bouton_supprimer('activite', $data['id_activite'], 'td');
-			echo '<td class="action">', association_bouton_faire('activite_bouton_maj_inscription', 'cotis-12.gif', 'edit_activite','id='.$data['id_activite']), '</td>';
+			echo association_bouton_suppr('activite', $data['id_activite']);
+			echo association_bouton_act('activite_bouton_maj_inscription', 'cotis-12.gif', 'edit_activite','id='.$data['id_activite']);
 			if ($data['commentaire']) {
 				echo '</tr><tr class="'.(($data['date_paiement']<$data['date_inscription'])?'pair':'valide').'"><td colspan="7" class="text">&nbsp;'.$data['commentaire'].'</td>';
 			}

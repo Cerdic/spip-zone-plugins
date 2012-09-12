@@ -43,8 +43,8 @@ function exec_destination()
 			echo '<td class="integer">'.$data['id_destination'].'</td>';
 			echo '<td class="text">'.$data['intitule'].'</td>';
 			echo '<td class="integer">'. _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_destination_op','id_destination='.$data['id_destination']))).'</td>';
-			echo association_bouton_supprimer('destination', $data['id_destination'], 'td');
-			echo association_bouton_modifier('destination', $data['id_destination'], 'td');
+			echo association_bouton_suppr('destination', $data['id_destination']);
+			echo association_bouton_edit('destination', $data['id_destination']);
 			echo "</tr>\n";
 		}
 		echo "</tbody>\n</table>\n";

@@ -50,28 +50,33 @@ if ( !isset($GLOBALS['spip_pipeline']['modules_asso']) )
 	$GLOBALS['spip_pipeline']['modules_asso'] = ''; // definir ce pipeline, sans ecraser sa valeur s'il existe
 
 /**
- * @var const _MAX_ITEMS_ASSOCIASPIP
+ * @var const _ASSOCIASPIP_LIMITE_SOUSPAGE
  *   Nombre de lignes maximales dans les listes de membres, operations comptables, activites...
  */
-if (!defined('_MAX_ITEMS_ASSOCIASPIP'))
-	define('_MAX_ITEMS_ASSOCIASPIP', 30);
+if (!defined('_ASSOCIASPIP_LIMITE_SOUSPAGE'))
+	define('_ASSOCIASPIP_LIMITE_SOUSPAGE', 30);
 
 /**
- * @var const _DATE_HEURE_ASSOCIASPIP
+ * @var const _ASSOCIASPIP_AUJOURDHUI_HORAIRE
  *   Indique s'il faut afficher l'heure en plus de la date
  */
-if (!defined('_DATE_HEURE_ASSOCIASPIP'))
-	define('_DATE_HEURE_ASSOCIASPIP', FALSE);
+if (!defined('_ASSOCIASPIP_AUJOURDHUI_HORAIRE'))
+	define('_ASSOCIASPIP_AUJOURDHUI_HORAIRE', FALSE);
 
 
 /*****************************************
  * @defgroup association_bouton
  * Affichage HTML : boutons d'action dans les listing
  *
+ * @param string $tag
+ *   balise-HTML encadrante (doit fonctionner par paire ouvrante et fermante) ;
+ *   "TD" par defaut car dans Associaspip un tel bouton est genere dans une cellule de tableau
+ * @return string $res
+ *   code HTML du bouton
 ** @{ */
 
 /**
- * boutons d'action (si page de script indiquee) generique
+ * boutons act[ion|er] (si page de script indiquee) generique
  *
  * @param string $texte
  *   libelle du bouton
@@ -83,14 +88,13 @@ if (!defined('_DATE_HEURE_ASSOCIASPIP'))
  *   autres parametres (outre le nom du script) passes a l'URL
  * @param string $img_attrs
  *   autres attributs passes a la balise affichant l'image
- * @return string $res
- *   code HTML du bouton
  *
  * @todo voir s'il est possible d'utiliser plutot la fonction bouton_action($libelle, $url, $class="", $confirm="", $title="") definie dans /ecrire/inc/filtres.php
  */
-function association_bouton_faire($texte, $image, $script='', $exec_args='', $img_attrs='')
+function association_bouton_act($texte, $image, $script='', $exec_args='', $img_attrs='', $tag='td')
 {
-	$res = ($script ? '<a href="'.generer_url_ecrire($script, $exec_args).'">' : '' );
+	$res = ($tag?"<$tag class='action'>":'');
+	$res .= ($script ? '<a href="'.generer_url_ecrire($script, $exec_args).'">' : '' );
 	$res .= '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.$image.'" alt="';
 	$res .= ($texte ? _T('asso:'.$texte).'" title="'._T('asso:'.$texte) : ' ' );
 	$res .= '" '.$img_attrs.' />';
@@ -99,7 +103,7 @@ function association_bouton_faire($texte, $image, $script='', $exec_args='', $im
 }
 
 /**
- * @name association_bouton_<agir>
+ * @name association_bouton_<quoi>
  * cas specifique de :
  *
  * @param string $objet
@@ -109,51 +113,74 @@ function association_bouton_faire($texte, $image, $script='', $exec_args='', $im
  * @param int|string $args
  *   identifiant de l'objet (le nom du parametre est alors "id")
  *   ou chaine des parametres passes a l'URL
- * @param string $tag
- *   balise-HTML encadrante (doit fonctionner par paire ouvrante et fermante) ;
- *   "TD" par defaut car dans Associaspip un tel bouton est genere dans une cellule de tableau
- * @return string $res
- *   code HTML du bouton
  */
 //@{
 
 /**
- * bouton de vue non modifiable ou apercu
- * <mot> = voir_
+ * bouton affich[age|er] v[ue|oir] visualis[ation|er]
  */
-function association_bouton_afficher($objet, $args='', $tag='td')
+function association_bouton_affich($objet, $args='', $tag='td')
 {
-	$res = ($tag?"<$tag class='action'>":'');
-	$res .= association_bouton_faire('bouton_voir', 'voir-12.png', "$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#x2380;"');
-	$res .= ($tag?"</$tag>":'');
+	$res = association_bouton_act('bouton_voir', 'voir-12.png', "$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#x2380;"', $tag);
 	return $res;
 }
 
 /**
- * bouton d'edition (modification)
- * <mot> = edit_
+ * bouton edit[ion|er] (modifi[cation|er])
  */
-function association_bouton_modifier($objet, $args='', $tag='td')
+function association_bouton_edit($objet, $args='', $tag='td')
 {
-	$res = ($tag?"<$tag class='action'>":'');
-	$res .= association_bouton_faire('bouton_modifier', 'edit-12.gif', "edit_$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#x2380;"');
-	$res .= ($tag?"</$tag>":'');
+	$res = association_bouton_act('bouton_modifier', 'edit-12.gif', "edit_$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#9088;"', $tag);
 	return $res;
 }
 
 /**
- * bouton d'effacement (suppression)
- * <mot> = suppr_
+ * bouton suppr[ession|imer] (efface[ment|r])
  */
-function association_bouton_supprimer($objet, $args='', $tag='td')
+function association_bouton_suppr($objet, $args='', $tag='td')
 {
-	$res = ($tag?"<$tag class='action'>":'');
-	$res .= association_bouton_faire('bouton_supprimer', 'suppr-12.gif', "suppr_$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#x2327;"'); // 8 pluriel contre 3 singulier
-	$res .= ($tag?"</$tag>":'');
+	$res = association_bouton_act('bouton_supprimer', 'suppr-12.gif', "suppr_$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#8999;" class="danger"', $tag);
+	return $res;
+}
+
+/**
+ * bouton paye[ment|r] (cotis[ation|er], contribu[tion financiere|er financierement])
+ */
+function association_bouton_paye($objet, $args='', $tag='td')
+{
+	$res = association_bouton_act('??', 'cotis-12.gif', "ajout_$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#164;"', $tag);
 	return $res;
 }
 
 //@}
+
+/**
+ * bouton coch[age de|er une] case
+ *
+ * Ce n'est pas un bouton a proprement parler mais il est dans la zone des
+ * boutons et sert a transmettre une liste de valeurs au parametre d'un bouton
+ * normalement situe au bas du tableau..
+ *
+ * @param string $champ
+ *   Nom du champ pour lequel le bouton est genere
+ *   (mettre une chaine vide pour generer un bouton desactive)
+ * @param string $valeur
+ *   Valeur a transmettre pour ce champ
+ * @param string $plus
+ *   Texte supplementaire rajoute
+ *   (utile pour placer d'autres boutons caches dans la cellule)
+ */
+function association_bouton_coch($champ, $valeur='', $plus='', $tag='td')
+{
+	$res = ($tag?"<$tag class='action'>":'');
+	$res .= $plus.'<input type="checkbox" ';
+	if ( $champ )
+		$res .= 'name="'.$champ.'[]" value="'.$valeur.'"';
+	else
+		$res .= 'disabled="disabled"';
+	$res .= ' />'. ($tag?"</$tag>":'');
+	return $res;
+}
 
 /** @} */
 
@@ -644,7 +671,7 @@ function association_formater_puce($statut, $icone,  $acote=TRUE, $img_attrs='')
 {
 	if ( is_array($icone) )
 		$icone = $icone[$statut];
-	return $acote ? association_bouton_faire('', 'puce-'.$icone.'.gif', '', '', $img_attrs).' '._T("asso:$statut") : association_bouton_faire($statut, 'puce-'.$icone.'.gif', '', '', $img_attrs) ; // c'est comme un bouton... mais n'a pas d'action
+	return $acote ? association_bouton_act('', 'puce-'.$icone.'.gif', '', '', $img_attrs, '').' '._T("asso:$statut") : association_bouton_act($statut, 'puce-'.$icone.'.gif', '', '', $img_attrs, '') ; // c'est comme un bouton... sans action/lien...
 }
 
 /**
@@ -1008,7 +1035,7 @@ function association_selectionner_souspage($pages, $exec='', $params='', $debut=
 {
 	$res = '<td align="left">';
 	if ( is_array($pages) ) {
-		$nbr_pages = ceil(call_user_func_array('sql_countsel',$pages)/_MAX_ITEMS_ASSOCIASPIP); // ceil() ou intval()+1 ?
+		$nbr_pages = ceil(call_user_func_array('sql_countsel',$pages)/_ASSOCIASPIP_LIMITE_SOUSPAGE); // ceil() ou intval()+1 ?
 	} else {
 		$nbr_pages = intval($pages);
 	}
@@ -1016,7 +1043,7 @@ function association_selectionner_souspage($pages, $exec='', $params='', $debut=
 		$debut = ($req?_request($debut):$debut);
 		$exec = ($exec?$exec:_request($exec));
 		for ($i=0; $i<$nbr_pages; $i++) {
-			$position = $i*_MAX_ITEMS_ASSOCIASPIP;
+			$position = $i*_ASSOCIASPIP_LIMITE_SOUSPAGE;
 			if ($position==$debut) { // page courante
 				$res .= ' <strong>'.$position.' </strong> ';
 			} else { // autre page
@@ -1583,7 +1610,7 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
 			foreach ($params as &$param) {
 				$param = str_replace('$$', $data[$cle1], $param);
 			}
-			$res .= '<td class="action">'. call_user_func_array("association_bouton_$type", $params) .'</td>';
+			$res .= call_user_func_array("association_bouton_$type", $params);
 		}
 		$res .= "</tr>\n";
 	}
@@ -1651,7 +1678,7 @@ function sql_asso1ligne($table, $id, $pluriel=TRUE)
 function sql_asso1page($valeur='debut', $req=TRUE)
 {
 	$valeur = intval($req?_request($valeur):$valeur);
-	return "$valeur,"._MAX_ITEMS_ASSOCIASPIP;
+	return "$valeur,"._ASSOCIASPIP_LIMITE_SOUSPAGE;
 }
 
 /** @} */
@@ -1692,12 +1719,12 @@ function request_statut_interne()
 function association_date_du_jour()
 {
 	$ladate = affdate_jourcourt(date('d/m/Y'));
-	$hr = (_DATE_HEURE_ASSOCIASPIP?date('H'):'');
-	$mn = (_DATE_HEURE_ASSOCIASPIP?date('i'):'');
-	$res = '<p class="'. (_DATE_HEURE_ASSOCIASPIP?'datetime':'date');
-	$res .= '" title="'. date('Y-m-d') . (_DATE_HEURE_ASSOCIASPIP?"T$hr:$mn":'');
-	$lheure = (_DATE_HEURE_ASSOCIASPIP ? _T('spip:date_fmt_heures_minutes', array('h'=>$hr,'m'=>$mn)) :'');
-	$res .= '">'. (_DATE_HEURE_ASSOCIASPIP ? _T('asso:date_du_jour_heure', array('date'=>$ladate,'time'=>$lheure)) : _T('asso:date_du_jour',array('date'=>$ladate)) ).'</p>';
+	$hr = (_ASSOCIASPIP_AUJOURDHUI_HORAIRE?date('H'):'');
+	$mn = (_ASSOCIASPIP_AUJOURDHUI_HORAIRE?date('i'):'');
+	$res = '<p class="'. (_ASSOCIASPIP_AUJOURDHUI_HORAIRE?'datetime':'date');
+	$res .= '" title="'. date('Y-m-d') . (_ASSOCIASPIP_AUJOURDHUI_HORAIRE?"T$hr:$mn":'');
+	$lheure = (_ASSOCIASPIP_AUJOURDHUI_HORAIRE ? _T('spip:date_fmt_heures_minutes', array('h'=>$hr,'m'=>$mn)) :'');
+	$res .= '">'. (_ASSOCIASPIP_AUJOURDHUI_HORAIRE ? _T('asso:date_du_jour_heure', array('date'=>$ladate,'time'=>$lheure)) : _T('asso:date_du_jour',array('date'=>$ladate)) ).'</p>';
 	return $res;
 }
 

@@ -120,7 +120,7 @@ function exec_comptes()
 				if ($v['id_compte']==$id_compte) $index_id_compte = $k;
 			}
 			if ($index_id_compte>=0) { // on recalcule le parametre de limite de la requete
-				set_request('debut', intval($index_id_compte/_MAX_ITEMS_ASSOCIASPIP)*_MAX_ITEMS_ASSOCIASPIP);
+				set_request('debut', intval($index_id_compte/_ASSOCIASPIP_LIMITE_SOUSPAGE)*_ASSOCIASPIP_LIMITE_SOUSPAGE);
 			}
 		}
 		// TABLEAU
@@ -182,7 +182,7 @@ function comptes_while($where, $limit, $id_compte)
 		. '<td class="text">&nbsp;'.$data['journal'].'</td>';
 		if ( $data['vu'] ) { // pas d'action sur les operations validees !
 			$comptes .= '<td class="action" colspan="2">'. association_formater_puce('', 'verte', '', $onload_option) .' </td>'; // edition+suppresion
-			$comptes .= '<td class="action"><input disabled="disabled" type="checkbox" /></td>'; // validation
+			$comptes .= association_bouton_coch(''); // validation
 		} else {  // operation non validee (donc validable et effacable...
 			if ( $data['id_journal'] && $data['imputation']!=$GLOBALS['association_metas']['pc_cotisations'] ) { // pas d'edition/suppression des operations gerees par un autre module (exepte les cotisations) ...par souci de coherence avec les donnees dupliquees dans d'autres tables...
 				$comptes .= '<td class="action" colspan="2">'. association_formater_puce('', 'rouge', '', $onload_option) .'</td>'; // edition+suppression
@@ -190,11 +190,11 @@ function comptes_while($where, $limit, $id_compte)
 				if (substr($data['imputation'],0,1)==$GLOBALS['association_metas']['classe_banques']) { // pas d'edition des virements internes (souci de coherence car il faut modifier deux operations concordament : ToDo...)
 					$comptes .= '<td class="action">&nbsp;</td>'; // edition
 				} else { // le reste est editable
-					$comptes .= '<td class="action">'. association_bouton_faire('mettre_a_jour', 'edit-12.gif', 'edit_compte', 'id='.$data['id_compte']) . '</td>'; // edition
+					$comptes .= '<td class="action">'. association_bouton_edit('compte', 'id='.$data['id_compte']); // edition
 				}
-				$comptes .= association_bouton_supprimer('comptes', 'id='.$data['id_compte'], 'td'); // suppression
+				$comptes .= association_bouton_suppr('comptes', 'id='.$data['id_compte']); // suppression
 			}
-			$comptes .= '<td class="action"><input name="valide[]" type="checkbox" value="'.$data['id_compte']. '" /></td>'; // validation
+			$comptes .= association_bouton_coch('valide', $data['id_compte']); // validation
 		}
 		$comptes .= '</tr>';
 	}
