@@ -8,10 +8,10 @@
 
             #ACTION_FORMULAIRE{#ENV{action}}
             <ul>
-                <li class="editer_nom_ressource obligatoire[ (#ENV**{erreurs}|table_valeur{message}|oui)erreur]">
-                <label for="champ_nom_ressource"><:nom_ressource:></label>
+                <li class="editer_nom_reservation obligatoire[ (#ENV**{erreurs}|table_valeur{message}|oui)erreur]">
+                <label for="champ_nom_reservation"><:nom_de_la_reservation:></label>
                 [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{message})</span>]
-                <input type="text" id="champ_nom_ressource" name="nom_reservation" value="[(#ENV{nom_reservation})]" />
+                <input type="text" id="champ_nom_reservation" name="nom_reservation" value="[(#ENV{nom_reservation})]" />
                 <span class="error-message"></span>
                 </li>
 
@@ -29,6 +29,8 @@
                 <span class="error-message"></span>
                 </li>
             </ul>
+            		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
             <p class="boutons"> <input type="submit" id="envoyer" class="submit" value="<:bouton_enregistrer:>" />
             </p>
     </div></form>
@@ -89,14 +91,14 @@
 
             // Les verifications :
             // Pour le champ nom, vérifie sa présence
-            if ($("#champ_nom_ressource").val() == ""){
-                $("#champ_nom_ressource").css("border-color","#FF0000");
-                $("#champ_nom_ressource").next(".error-message").css("color","#FF0000").html("X  Il faut remplir ce champ !!");
+            if ($("#champ_nom_reservation").val() == ""){
+                $("#champ_nom_reservation").css("border-color","#FF0000");
+                $("#champ_nom_reservation").next(".error-message").css("color","#FF0000").html("X  Il faut remplir ce champ !!");
                 valid = false;
             }
             else{
-                $("#champ_nom_ressource").css("border-color","#04F935");
-                $("#champ_nom_ressource").next(".error-message").html("");
+                $("#champ_nom_reservation").css("border-color","#04F935");
+                $("#champ_nom_reservation").next(".error-message").html("");
 //~ //~
             }
             // Pour le champ date_debut, vérifie sa présence

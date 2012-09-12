@@ -15,14 +15,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function oresource_affiche_milieu($flux) {
 	$texte = "";
-	$e = trouver_objet_exec($flux['args']['exec']);
+	$e     = trouver_objet_exec($flux['args']['exec']);
 
 	// auteurs sur les orr_reservations
 	if (!$e['edition'] AND in_array($e['type'], array('orr_reservation'))) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => 'auteurs',
-			'objet' => $e['type'],
-			'id_objet' => $flux['args'][$e['id_table_objet']]
+			'objet'        => $e['type'],
+			'id_objet'     => $flux['args'][$e['id_table_objet']]
 		));
 	}
 
@@ -31,8 +31,8 @@ function oresource_affiche_milieu($flux) {
 	if (!$e['edition'] AND in_array($e['type'], array('auteur', 'orr_ressource'))) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => 'orr_reservations',
-			'objet' => $e['type'],
-			'id_objet' => $flux['args'][$e['id_table_objet']]
+			'objet'        => $e['type'],
+			'id_objet'     => $flux['args'][$e['id_table_objet']]
 		));
 	}
 
@@ -55,7 +55,7 @@ function oresource_affiche_auteurs_interventions($flux) {
 
 		$flux['data'] .= recuperer_fond('prive/objets/liste/orr_reservations', array(
 			'id_auteur' => $id_auteur,
-			'titre' => _T('orr_reservation:info_orr_reservations_auteur')
+			'titre'     => _T('orr_reservation:info_orr_reservations_auteur')
 		), array('ajax' => true));
 
 	}
@@ -86,7 +86,7 @@ function oresource_jquery_plugins($scripts){
  * insertion du css
  **/
 function oresource_insert_head_css($flux){
-	$css = find_in_path('orr.css');
+	$css   = find_in_path('orr.css');
 	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='$css' />\n";
     return $flux;
 

@@ -84,7 +84,7 @@ function formulaires_reserv_traiter_dist($idressource,$date_deb,$date_f,$nom,$id
     $date_debut = date("Y-m-d H:i:s", mktime ($heured,$minuted,0, $moisd, $jourd, $anneed));
     $jourj = date("Y-m-d", mktime ($heured,$minuted,0, $moisd, $jourd, $anneed));
     $date_fin   = date("Y-m-d H:i:s", mktime ($heuref,$minutef,0, $moisf, $jourf, $anneef));
-
+    $retour=array();
     $retour['message_ok'] = "bravo";
     $retour['redirect'] = "spip.php?page=affichage_orr&jourj=$jourj";
 

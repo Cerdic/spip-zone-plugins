@@ -1,4 +1,6 @@
 <?php
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 /**
  * Determination le jour des 7 jours d'une semaine connaissant la date du jeudi
  * @param date au format Y-m-d
