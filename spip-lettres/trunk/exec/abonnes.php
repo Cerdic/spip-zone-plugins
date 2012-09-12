@@ -48,13 +48,14 @@
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('lettresprive:abonnes'), "naviguer", "abonnes_tous");
-
+echo '<div class="no_onglets">';
 		echo debut_gauche('', true);
-		echo '<div class="cadre cadre-info verdana1">';
-		echo '<div class="cadre_padding">';
+
+		echo boite_ouvrir('', 'info');
+
 		echo '<div class="infos">';
 		echo '<div class="numero">';
-		echo _T('lettresprive:abonne_numero').' :';
+		echo _T('lettres:info_numero_abonne');
 		echo '<p>'.$abonne->id_abonne.'</p>';
 		echo '</div>';
 
@@ -87,8 +88,7 @@
 		echo '</ul>';
 
 		echo '</div>';
-		echo '</div>';
-		echo '</div>';
+		echo boite_fermer();
 
 		echo bloc_des_raccourcis(
 				icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire("abonnes_tous"), 'abonne-24.png', 'rien.gif', false).
@@ -188,7 +188,7 @@
 				'ORDER BY' => 'maj DESC'));
 		
 		echo fin_gauche();
-
+echo '</div><!-- .no_onglets -->';
 		echo fin_page();
 
 	}

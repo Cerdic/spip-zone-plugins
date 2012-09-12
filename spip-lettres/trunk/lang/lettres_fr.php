@@ -77,6 +77,7 @@
 
 		'nombre_abonnes' => 'Nombre d\'abonnés',
 		'info_numero_theme' => 'Thème n°&nbsp:',
+		'info_numero_abonne' => 'Abonné n°&nbsp:',
 
 		'Z' => 'ZZzZZzzz'
 

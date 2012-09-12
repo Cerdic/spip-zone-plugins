@@ -100,17 +100,7 @@ function formulaires_editer_thematique_saisies($id_theme=0, $titre='', $id_rubri
 						'option_intro' => _T('lettresprive:selectionner_auteur'),
 						'afficher_si' => '@retours_type@ == "custom"'
 					)
-				),/*
-				array( // champ id_rubrique : selecteur_rubrique
-					'saisie' => 'selecteur_rubrique',
-					'options' => array(
-						'nom' => 'id_rubrique',
-						'obligatoire' => 'oui',
-						'defaut' => 'rubrique|'.$id_rubrique,
-						'explication' => _T('lettresprive:choix_rubrique'),
-						'afficher_rub_dans_langue_interface' => 'oui'
-					)
-				), */ // fin champ id_rubrique
+				),
 				array( // champ id_rubrique : selecteur_generique
 					'saisie' => 'selecteur',
 					'options' => array(
