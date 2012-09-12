@@ -30,9 +30,9 @@ function lettres_rechercher_liste_des_champs($tables) {
 
 
 function lettres_objet_compte_enfants($flux) {
-	if ($flux['args']['objet']=='rubrique'){
-		$flux['data']['lettres']+= sql_countsel('spip_lettres', 'id_rubrique='.$flux['args']['id_objet']);
-		$flux['data']['abonnes']+= sql_countsel('spip_abonnes_rubriques', 'id_rubrique='.$flux['args']['id_objet']);
+	if ($flux['args']['objet']=='rubrique') {
+		$flux['data']['lettres'] = sql_countsel('spip_lettres', 'id_rubrique='.$flux['args']['id_objet']);
+		$flux['data']['abonnes'] = sql_countsel('spip_abonnes_rubriques', 'id_rubrique='.$flux['args']['id_objet']);
 	}
 	return $flux;
 }
@@ -80,7 +80,7 @@ function lettres_affiche_enfants($flux) {
 	include_spip('inc/autoriser');
 	global $spip_lang_right;
 	if (autoriser('voir', 'lettres')) {
-		$id_rubrique = $flux['args']['id_rubrique'];
+		$id_rubrique = isset($flux['args']['id_rubrique']) ? $flux['args']['id_rubrique'] : 0;
 		$admin_abo_toutes_rubriques = lire_config('spip_lettres_admin_abo_toutes_rubriques');
 
 		// lettres

@@ -75,6 +75,9 @@
 		// Page d'abonnement
 		'description_page-lettres' => 'Accessible via spip.php?page=lettres, cette page fournit un formulaire d\'abonnement aux lettres d\'information',
 
+		'nombre_abonnes' => 'Nombre d\'abonnés',
+		'info_numero_theme' => 'Thème n°&nbsp:',
+
 		'Z' => 'ZZzZZzzz'
 
 	);

@@ -98,7 +98,12 @@
 		echo fin_cadre_trait_couleur(true);
 
 		if ($spip_lettres_envois_recurrents == 'oui') {
-			$cron = afficher_objets('cron', _T('lettresprive:taches_cron'), array('SELECT' => 'CT.*, RUB.titre AS titre_rub', 'FROM' => 'spip_rubriques_crontabs AS CT LEFT JOIN spip_rubriques AS RUB ON RUB.id_rubrique=CT.id_rubrique', 'ORDER BY' => 'CT.titre'));
+			$cron = afficher_objets('cron', _T('lettresprive:taches_cron'), array(
+				'SELECT' => 'CT.*, RUB.titre AS titre_rub',
+				'FROM' => 'spip_rubriques_crontabs AS CT
+					LEFT JOIN spip_rubriques AS RUB ON RUB.id_rubrique=CT.id_rubrique',
+				'WHERE' => '',
+				'ORDER BY' => 'CT.titre'));
 			if ($cron) {
 				echo $cron;
 				echo '<br />';

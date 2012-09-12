@@ -1,43 +1,40 @@
 <BOUCLE_theme(THEMES){id_theme}>
 <!--#hierarchie-->
-<ul id="chemin">
-    <li><a href="#URL_ECRIRE{accueil}"><:configuration|ucfirst:></a> &gt; </li>
-    <li><a href="#URL_ECRIRE{lettres_tous}"><:lettres:lettres_information:></a> &gt; </li>
-     <li><a href="#URL_ECRIRE{config_lettres_formulaire}"><:lettres:tout_le_site:></a> &gt; </li>
-     <li>#TITRE</li>
-</ul>
+<div id="chemin">
+	<a href="#URL_ECRIRE{lettres_tous}"><:lettres:lettres_information:></a> &gt;
+	<a href="#URL_ECRIRE{config_lettres_formulaire}"><:lettres:tout_le_site:></a> &gt;
+	<strong class='on'>#TITRE</strong>
+</div>
 <!--/#hierarchie-->
 
 <!--#navigation-->
  
-<div class='navigation'>
-	<div class='cadre cadre-info verdana1'>
-		<div class="cadre_padding">
-			<div class="infos">
-				<div class="numero">
-					<:lettresprive:theme|strtoupper:> N&deg;: <p>#ID_THEME</p>
-				</div>
-				<ul class="instituer">
-					<li><strong><:rubrique|ucfirst:> : </strong> 
-					    <BOUCLE_rubrique(RUBRIQUES){tout}{id_rubrique}>
-							<a href="[(#URL_ECRIRE{rubrique}|parametre_url{id_rubrique, #ID_RUBRIQUE})]">#TITRE</a>
-						</BOUCLE_rubrique>
-					</li>
-				</ul>
-				<ul class="instituer">
-					<li><strong><:lettres:abonnes|ucfirst:> : </strong> 
-					<BOUCLE_nb(spip_abonnes_rubriques){id_rubrique}{statut=valide}>
-					</BOUCLE_nb>
-						#TOTAL_BOUCLE
-					</B_nb>
-				</ul>
-				<center class="logo_navigation">
-				<br/>
-				<img src="#CHEMIN{prive/images/lettre-48.png}" width="48" height="48" alt="Modifier thematique" />
-				</center>
-			</div>
-		</div>
+<div class='navigation' class='lat'>
+
+#BOITE_OUVRIR{'','info'}
+<div class='infos'>
+<div class='numero'><:lettres:info_numero_theme:><p>#ID_THEME</p></div>
+
+	<ul class="instituer">
+		<li><strong><:rubrique:> : </strong> 
+			<BOUCLE_rubrique(RUBRIQUES){tout}{id_rubrique}>
+				<a href="[(#URL_ECRIRE{rubrique}|parametre_url{id_rubrique, #ID_RUBRIQUE})]">#TITRE</a>
+			</BOUCLE_rubrique>
+		</li>
+
+		<li><strong><:lettres:nombre_abonnes:> : </strong> 
+		<BOUCLE_nb(spip_abonnes_rubriques){id_rubrique}{statut=valide}>
+		</BOUCLE_nb>
+			#TOTAL_BOUCLE
+		</B_nb>
+	</ul>
+
+	<div class='center'>
+	<img src="#CHEMIN_IMAGE{lettre-48.png}" width="48" height="48" alt="Modifier thematique" />
 	</div>
+</div>
+#BOITE_FERMER
+
 </div>
 <!--/#navigation-->
  

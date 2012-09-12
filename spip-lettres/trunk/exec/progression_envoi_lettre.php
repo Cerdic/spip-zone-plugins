@@ -45,8 +45,10 @@ function exec_progression_envoi_lettre() {
 		if ($lettre->statut=='envoi_en_cours')
 			$lettre->enregistrer_statut('envoyee');
 	}
-	else
+	else {
+		include_spip('inc/queue');
 		echo queue_afficher_cron();
+	}
 
 }
 

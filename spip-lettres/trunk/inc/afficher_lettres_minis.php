@@ -28,6 +28,7 @@
 
 	function afficher_lettre_mini_boucle($row, $own) {
 		$vals = '';
+		$dir_lang = $GLOBALS['spip_lang_rtl'];
 
 		$lettre = new lettre($row['id_lettre']);
 

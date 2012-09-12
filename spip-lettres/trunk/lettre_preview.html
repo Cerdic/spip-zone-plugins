@@ -8,5 +8,6 @@
 ]
 [(#HTTP_HEADER{[Content-Type:(#ENV{format}|=={texte}|?{'text/plain','text/html'}); charset=#CHARSET]})]
 [(#AUTORISER{previsualiser,lettre,#ID_LETTRE}|oui)
-<INCLURE{fond=#ENV{format}|=={texte}|?{#CONFIG{spip_lettres_fond_lettre_texte},#CONFIG{spip_lettres_fond_lettre_html}}}{env}>
+<INCLURE{fond=#ENV{format}|=={texte}
+	|?{#CONFIG{spip_lettres_fond_lettre_texte},#CONFIG{spip_lettres_fond_lettre_html}}}{env}>
 ]
