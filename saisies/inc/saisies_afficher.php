@@ -305,7 +305,7 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 						$condition = $saisie['options']['afficher_si'];
 						// retrouver l'identifiant
 						$identifiant = '';
-						if ($saisie['identifiant']) {
+						if (isset($saisie['identifiant']) and $saisie['identifiant']) {
 							$identifiant = $saisie['identifiant'];
 						}
 						// On gère le cas @plugin:non_plugin@
