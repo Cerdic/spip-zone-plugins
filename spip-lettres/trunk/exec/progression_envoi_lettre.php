@@ -47,7 +47,7 @@ function exec_progression_envoi_lettre() {
 	}
 	else {
 		include_spip('inc/queue');
-		echo queue_afficher_cron();
+		echo queue_affichage_cron();
 	}
 
 }

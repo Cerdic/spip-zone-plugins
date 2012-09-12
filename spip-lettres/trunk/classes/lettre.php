@@ -210,9 +210,10 @@
 			}
 			return $redirection;
 		}
-		
+
 		function callback_clic_html($matches) {
 			$url = $matches[2];
+			$url = $this->preparer_urls($url);
 			if (strcmp($url, '%%URL_VALIDATION_DESABONNEMENTS%%')!=0 AND strncmp($url, 'mailto:',7)!=0 AND strncmp($url, '#',1)!=0 )	{
 				$verification = sql_select('id_clic', 'spip_clics', 'url='.sql_quote(html_entity_decode($url)).' AND id_lettre='.intval($this->id_lettre));
 				if (sql_count($verification) == 1) {
@@ -227,12 +228,14 @@
 					$url_clic = generer_url_action('clic', 'id_clic='.$id_clic, false, true);
 				return 'href="'.$url_clic.'"';
 			}
-			else {		
+			else {
 					return 'href="'.$url.'"';
 			}
 		}
+
 		function callback_clic_texte($matches) {
 			$url = $matches[0];
+			$url = $this->preparer_urls($url);
 			if (strcmp($url, '%%URL_VALIDATION_DESABONNEMENTS%%')!=0 AND strncmp($url, 'mailto:',7)!=0 AND strncmp($url, '#',1)!=0 )	{
 				$verification = sql_select('id_clic', 'spip_clics', 'url='.sql_quote(html_entity_decode($url)).' AND id_lettre='.intval($this->id_lettre));
 				if (sql_count($verification) == 1) {
@@ -262,14 +265,44 @@
 				if (copy($image, $copie))
 					$image = $copie;
 			}
+			$image = $this->preparer_urls($image);
 			return 'src="'.$image.'"';
 		}
 		
-		
+
+		/**
+		 * Enlever ../ des urls pour partir
+		 * de la racine du SPIP et non de ecrire
+		 *
+		 * Lorsque la globale lien_implicite_cible_public est activée
+		 * avec 'public' (cf plugin textwheel) tous les liens pointent
+		 * vers l'espace public, pour afficher des pages publiques.
+		 *
+		 * Cela dit, le lien étant créé depuis le privé possède '../'
+		 * que l'on ne souhaite pas conserver.
+		 * 
+		 * @param string $url
+		 *     URL à préparer
+		 * @param string
+		 *     URL prête
+		 */
+		function preparer_urls($url) {
+			$url = trim($url);
+			if (substr($url,0,3) == '../') {
+				$url = substr($url, 3);
+			}
+			return $url;
+		}
+
 		function enregistrer_squelettes($vidange = true) {
-			$this->message_html	= recuperer_fond($GLOBALS['meta']['spip_lettres_fond_lettre_html'], array('id_lettre' => $this->id_lettre, 'lang' => $this->lang));
+			// definir des liens publics uniquement
+			// voir plugin textwheel
+			$GLOBALS['lien_implicite_cible_public'] = true; 
+			$this->message_html  = recuperer_fond($GLOBALS['meta']['spip_lettres_fond_lettre_html'], array('id_lettre' => $this->id_lettre, 'lang' => $this->lang));
 			$this->message_texte = recuperer_fond($GLOBALS['meta']['spip_lettres_fond_lettre_texte'], array('id_lettre' => $this->id_lettre, 'lang' => $this->lang));
-			
+			// annuler la définition de liens pubics
+			unset($GLOBALS['lien_implicite_cible_public']);
+
 			if ($vidange) {
 				// petite vidange des envois de test
 				sql_delete('spip_clics', 'id_lettre='.intval($this->id_lettre));

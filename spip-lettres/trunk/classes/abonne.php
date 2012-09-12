@@ -19,6 +19,7 @@
 	include_spip('inc/rubriques');
 	include_spip('base/lettres');
 	include_spip('classes/lettre');
+	include_spip('inc/filtres_mini'); // url_absolue()
 
 	/**
 	 * abonne - classe pour la gestion des abonnes
@@ -299,7 +300,8 @@
 			$langue_lettre  = $lettre->lang;
 
 			$parametres = 'lang='.$lettre->lang.'&rubriques[]=-1&code='.$this->code.'&email='.$this->email;
-			$url_action_validation_desabonnements = url_absolue(generer_url_action('validation_desabonnements', $parametres, true));
+			$url_action_validation_desabonnements = url_absolue(
+				generer_url_action('validation_desabonnements', $parametres, true));
 			$message_html	= str_replace("%%URL_VALIDATION_DESABONNEMENTS%%", $url_action_validation_desabonnements, $message_html);
 			$message_texte	= str_replace("%%URL_VALIDATION_DESABONNEMENTS%%", $url_action_validation_desabonnements, $message_texte);
 
