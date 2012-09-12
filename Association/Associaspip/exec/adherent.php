@@ -75,7 +75,7 @@ function exec_adherent(){
 					'fonction' => array('asso:fonction', 'texte'),
 				), // entetes et formats des donnees
 				array(
-					array('faire', 'membres', 'voir-12.gif', 'membres_groupe', 'id=$$'),
+					array('act', 'membres', 'voir-12.gif', 'membres_groupe', 'id=$$'),
 				), // boutons d'action
 				'id_groupe' // champ portant la cle des lignes et des boutons
 			);
@@ -204,7 +204,7 @@ function voir_adherent_paiements($data, $lien)
 			'montant' => array('asso:entete_montant', 'prix'),
 		),
 		$lien ? array(
-			array('faire', 'adherent_label_voir_operation', 'voir-12.png', 'comptes', 'id_compte=$$'),
+			array('act', 'adherent_label_voir_operation', 'voir-12.png', 'comptes', 'id_compte=$$'),
 		) : array(), // boutons d'action : pas plutot edit_compte ? (a propos, il faudrait carrement un voir_compte pour ne pas risquer de modifier ainsi une operation marquee "vu" et donc archivee/verouillee)
 		'id_compte' // champ portant la cle des lignes et des boutons
 	);

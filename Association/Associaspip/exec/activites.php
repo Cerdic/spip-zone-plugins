@@ -114,8 +114,8 @@ function exec_activites()
 				'montants' => array('asso:entete_montant', 'prix'),
 			), // entetes et formats des donnees
 			array(
-				array('faire', 'activite_bouton_ajouter_inscription', 'creer-12.gif', 'edit_activite', 'id_evenement=$$'),
-				array('faire', 'activite_bouton_voir_liste_inscriptions', 'voir-12.png', 'inscrits_activite', 'id=$$'),
+				array('act', 'activite_bouton_ajouter_inscription', 'creer-12.gif', 'edit_activite', 'id_evenement=$$'),
+				array('act', 'activite_bouton_voir_liste_inscriptions', 'voir-12.png', 'inscrits_activite', 'id=$$'),
 			), // boutons d'action
 			'id_evenement', // champ portant la cle des lignes et des boutons
 			array('sans'=>'pair', 'avec'=>'impair'), 'invites', $id_evenement

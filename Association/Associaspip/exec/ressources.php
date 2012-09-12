@@ -95,7 +95,7 @@ rdm */
 			array(
 				array('suppr', 'ressource', 'id=$$'),
 				array('edit', 'ressource', 'id=$$'),
-				array('faire', 'prets_nav_gerer', 'voir-12.png', 'prets', 'id=$$'),
+				array('act', 'prets_nav_gerer', 'voir-12.png', 'prets', 'id=$$'),
 			), // boutons d'action
 			'id_ressource', // champ portant la cle des lignes et des boutons
 			$s_css, 'statut'
