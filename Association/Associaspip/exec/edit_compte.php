@@ -28,7 +28,7 @@ function exec_edit_compte()
 		echo minipres();
 	} else {
 		$id_compte = intval(_request('id'));
-		onglets_association('titre_onglet_comptes');
+		onglets_association('titre_onglet_comptes', 'comptes');
 		// INTRO : resume compte
 		echo association_totauxinfos_intro('', 'compte', $id_compte, $infos );
 		// datation et raccourcis

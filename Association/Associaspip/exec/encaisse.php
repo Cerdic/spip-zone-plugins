@@ -28,7 +28,7 @@ function exec_encaisse()
 			$id_exercice = sql_getfetsel('id_exercice','spip_asso_exercices','','');
 		}
 // traitements
-		onglets_association('titre_onglet_comptes');
+		onglets_association('titre_onglet_comptes', 'comptes');
 		// INTRO : rappel de l'exercicee affichee
 		echo association_totauxinfos_intro('encaisse', '');
 		// STATS recettes et depenses par comptes financiers (indique rapidement les comptes financiers avec les mouvements les plus importants --en montant !)

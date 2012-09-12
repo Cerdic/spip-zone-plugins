@@ -34,7 +34,7 @@ function exec_annexe()
 				$exercice = 0;
 		}
 		$exercice_data = sql_asso1ligne('exercice', $exercice);
-		onglets_association('titre_onglet_comptes');
+		onglets_association('titre_onglet_comptes', 'comptes');
 		// INTRO : rappel de l'exercicee affichee
 		$infos['exercice_entete_debut'] = association_formater_date($exercice_data['debut'], 'dtstart');
 		$infos['exercice_entete_fin'] = association_formater_date($exercice_data['fin'], 'dtend');

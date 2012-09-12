@@ -21,7 +21,7 @@ function exec_categories()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		onglets_association('categories_de_cotisations');
+		onglets_association('categories_de_cotisations', 'association');
 		// notice
 		echo '';
 		// quelques stats sur les categories

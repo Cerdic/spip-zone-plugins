@@ -23,7 +23,7 @@ function exec_suppr_exercice()
 		echo minipres();
 	} else {
 		$id_exercice = intval(_request('id'));
-		onglets_association('exercices_budgetaires_titre');
+		onglets_association('exercices_budgetaires_titre', 'association');
 		// info
 		$exercice = sql_fetsel('*', 'spip_asso_exercices', "id_exercice=$id_exercice" );
 		$infos['exercice_entete_debut'] = association_formater_date($exercice['debut'], 'dtstart');

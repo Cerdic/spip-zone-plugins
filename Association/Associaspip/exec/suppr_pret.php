@@ -23,7 +23,7 @@ function exec_suppr_pret()
 	} else {
 		$id_pret = intval(_request('id_pret'));
 		$id_ressource = intval(_request('id_ressource'));
-		onglets_association('titre_onglet_prets');
+		onglets_association('titre_onglet_prets', 'ressources');
 		$data = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
 		$infos['ressources_libelle_code'] = $data['code'];
 		if (is_numeric($data['statut'])) { // utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires)
@@ -56,7 +56,7 @@ function exec_suppr_pret()
 			}
 			$type = $data['statut'];
 		}
-		$infos['statut'] =  '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-'.$puce.'.gif" title="'.$data['statut'].'" alt="" /> '. _T("asso:ressource_statut_$type");
+		$infos['statut'] = association_formater_puce(_T("asso:ressource_statut_$type"), $puce, true);
 		$infos['nombre_prets'] = sql_countsel('spip_asso_prets', "id_ressource=$id_ressource");
 		echo association_totauxinfos_intro($data['intitule'], 'ressource', $id_ressource, $infos );
 		// datation et raccourcis

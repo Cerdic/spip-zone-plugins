@@ -21,7 +21,7 @@ function exec_plan_comptable()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		onglets_association('plan_comptable');
+		onglets_association('plan_comptable', 'association');
 		// notice
 		echo propre(_T('asso:plan_info'));
 		// datation et raccourcis

@@ -22,7 +22,7 @@ function exec_suppr_vente()
 		echo minipres();
 	} else {
 		$id_vente = intval(_request('id'));
-		onglets_association('titre_onglet_ventes');
+		onglets_association('titre_onglet_ventes', 'ventes');
 		// info
 		echo association_totauxinfos_intro(sql_getfetsel("CONCAT(article,' -- ',acheteur) AS intitule", 'spip_asso_ventes', "id_vente=$id_vente" ), 'vente', $id_vente, $infos );
 		// datation et raccourcis

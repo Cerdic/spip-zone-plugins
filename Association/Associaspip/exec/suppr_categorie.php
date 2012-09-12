@@ -21,7 +21,7 @@ function exec_suppr_categorie()
 		echo minipres();
 	} else {
 		$id_categorie=intval(_request('id'));
-		onglets_association('categories_de_cotisations');
+		onglets_association('categories_de_cotisations', 'association');
 		// INTRO : resume ressource
 		$categorie = sql_fetsel('*', 'spip_asso_categories', "id_categorie=$id_categorie" );
 		$infos['entete_code'] = $categorie['valeur'];

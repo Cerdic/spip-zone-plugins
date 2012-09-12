@@ -22,7 +22,7 @@ function exec_edit_ressource()
 			echo minipres();
 	} else {
 		$id_ressource = intval(_request('id'));
-		onglets_association('titre_onglet_prets');
+		onglets_association('titre_onglet_prets', 'ressources');
 		// INTRO : resume ressource
 		$infos['ressource_pretee'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_prets', "id_ressource=$id_ressource"), ));
 		echo association_totauxinfos_intro(sql_getfetsel('intitule', 'spip_asso_ressources', "id_ressource=$id_ressource" ), 'ressource', $id_ressource, $infos );

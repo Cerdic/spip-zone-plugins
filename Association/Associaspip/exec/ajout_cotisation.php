@@ -24,7 +24,7 @@ function exec_ajout_cotisation()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		onglets_association('titre_onglet_membres');
+		onglets_association('titre_onglet_membres', 'adherents');
 		// info : membre et categorie par defaut
 		$categorie = sql_fetsel('*', 'spip_asso_categories', 'id_categorie='. intval($row['categorie']));
 		$infos['adherent_libelle_categorie'] = $categorie['libelle'];

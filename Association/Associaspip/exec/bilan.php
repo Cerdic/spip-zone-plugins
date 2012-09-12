@@ -34,7 +34,7 @@ function exec_bilan()
 		if (!($ids_destination_bilan = _request('destination')))
 			$ids_destination_bilan = array(0);
 		include_spip('inc/association_comptabilite');
-		onglets_association('titre_onglet_comptes');
+		onglets_association('titre_onglet_comptes', 'comptes');
 		// INTRO : rappel de l'exercicee affichee
 		$infos['exercice_entete_debut'] = association_formater_date($exercice_data['debut'], 'dtstart');
 		$infos['exercice_entete_fin'] = association_formater_date($exercice_data['fin'], 'dtend');

@@ -22,7 +22,7 @@ function exec_exercices()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		onglets_association('exercices_budgetaires_titre');
+		onglets_association('exercices_budgetaires_titre', 'association');
 		// notice
 		echo '';
 		// quelques stats sur les exrcices

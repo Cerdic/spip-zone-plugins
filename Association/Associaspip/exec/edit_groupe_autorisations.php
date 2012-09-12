@@ -22,7 +22,7 @@ function exec_edit_groupe_autorisations()
 		echo minipres();
 	} else {
 		$id_groupe = intval(_request('id'));
-		onglets_association('gerer_les_autorisations');
+		onglets_association('gerer_les_autorisations', 'association');
 		// INFO
 		$groupe = sql_fetsel('commentaires', 'spip_asso_groupes', "id_groupe=$id_groupe" );
 		$infos['commentaires'] = $groupe['commentaires'];

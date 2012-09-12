@@ -22,7 +22,7 @@ function exec_suppr_groupe()
 		echo minipres();
 	} else {
 		$id_groupe = intval(_request('id'));
-		onglets_association('gestion_groupes');
+		onglets_association('gestion_groupes', 'adherents');
 		// INFO
 		$groupe = sql_fetsel('*', 'spip_asso_groupes', "id_groupe=$id_groupe" );
 		$infos['ordre_affichage_groupe'] = $groupe['affichage'];

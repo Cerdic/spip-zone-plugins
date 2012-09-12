@@ -23,7 +23,7 @@ function exec_relance_adherents()
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
-		onglets_association('titre_onglet_membres');
+		onglets_association('titre_onglet_membres', 'adherents');
 		// notice ?
 		echo _T('asso:aide_relances');
 		// datation et raccourcis

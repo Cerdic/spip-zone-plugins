@@ -22,7 +22,7 @@ function exec_synchronis_activites()
 			echo minipres();
 	} else {
 		$id_evenement = intval(_request('id'));
-		onglets_association('synchroniser_asso_membres');
+		onglets_association('synchroniser_asso_membres', 'activites');
 		// INTRO : Rappel Infos Evenement
 		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement") ;
 		$infos['evenement_date_du'] = association_formater_date($evenement['date_debut'],'dtstart').' '.substr($data['date_debut'],10,6);

@@ -21,7 +21,7 @@ function exec_groupes()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		onglets_association('gestion_groupes');
+		onglets_association('gestion_groupes', 'adherents');
 		// notice
 		echo _T('asso:aide_groupes');
 		// datation et raccourcis

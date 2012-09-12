@@ -26,7 +26,7 @@ function exec_suppr_activite()
 			include_spip('inc/minipres');
 			echo minipres(_T('zxml_inconnu_id') . $id_don);
 		} else {
-			onglets_association('titre_onglet_activite');
+			onglets_association('titre_onglet_activite', 'activites');
 			// info
 			$infos['evenement'] = sql_getfetsel('titre', 'spip_evenements', 'id_evenement='.intval($activite['id_evenement']) );
 			$infos['date'] = association_formater_date($activite['date_inscription']);

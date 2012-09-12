@@ -22,7 +22,7 @@ function exec_suppr_plan()
 		echo minipres();
 	} else {
 		$id_plan = intval(_request('id'));
-		onglets_association('plan_comptable');
+		onglets_association('plan_comptable', 'association');
 		// info
 		$plan = sql_fetsel('*', 'spip_asso_plan', "id_plan=$id_plan");
 		$infos['entete_code'] = $plan['code'];

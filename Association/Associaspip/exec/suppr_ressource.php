@@ -22,7 +22,7 @@ function exec_suppr_ressource()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		onglets_association('titre_onglet_prets');
+		onglets_association('titre_onglet_prets', 'ressources');
 		// INTRO : resume ressource
 		$data = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
 		$infos['ressources_libelle_code'] = $data['code'];

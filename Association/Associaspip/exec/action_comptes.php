@@ -22,7 +22,7 @@ function exec_action_comptes()
 		echo minipres();
 	} else {
 		$id_compte= intval(_request('id'));
-		onglets_association('titre_onglet_comptes');
+		onglets_association('titre_onglet_comptes', 'comptes');
 		// info
 		echo _T('asso:confirmation');
 		// datation et raccourcis

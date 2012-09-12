@@ -39,7 +39,7 @@ function exec_adherent(){
 			default :
 				$statut='visiteur'; break;
 		}
-		onglets_association('titre_onglet_membres');
+		onglets_association('titre_onglet_membres', 'adherents');
 		// INFOS
 		if ($full) {
 			$infos['adherent_libelle_categorie'] = $categorie;

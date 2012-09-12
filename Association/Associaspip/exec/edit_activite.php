@@ -23,7 +23,7 @@ function exec_edit_activite()
 	} else {
 		$id_activite = intval(_request('id'));
 		$id_evenement = $id_activite ? sql_getfetsel('id_evenement', 'spip_asso_activites', "id_activite=$id_activite") : intval(_request('id_evenement'));
-		onglets_association('titre_onglet_activite');
+		onglets_association('titre_onglet_activite', 'activites');
 		// INTRO : Rappel Infos Evenement
 		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement");
 		$format = 'association_formater_'. ($evenement['horaire']=='oui')?'heure':'date';

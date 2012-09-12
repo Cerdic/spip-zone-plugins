@@ -26,7 +26,7 @@ function exec_action_adherents()
 	} else {
 		$id_auteurs = _request('id_auteurs');
 		if ($action_adherents && $id_auteurs && is_array($id_auteurs)) {
-			onglets_association('titre_onglet_membres');
+			onglets_association('titre_onglet_membres', 'adherents');
 			// info
 			echo association_totauxinfos_intro(_T('asso:confirmation'));
 			// datation et raccourcis

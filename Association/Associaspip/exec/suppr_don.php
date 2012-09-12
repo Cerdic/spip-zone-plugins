@@ -27,7 +27,7 @@ function exec_suppr_don()
 			include_spip('inc/minipres');
 			echo minipres(_T('zxml_inconnu_id') . $id_don);
 		} else {
-			onglets_association('titre_onglet_dons');
+			onglets_association('titre_onglet_dons', 'dons');
 			// info
 			$infos['argent'] = association_formater_prix($don['argent']);
 			$infos['colis'] = ($don['valeur'] ? '('.association_formater_prix($don['valeur']).')<br />' : '') .$don['colis'];

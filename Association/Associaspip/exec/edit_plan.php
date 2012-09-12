@@ -22,7 +22,7 @@ function exec_edit_plan()
 		echo minipres();
 	} else {
 		$id_plan = intval(_request('id'));
-		onglets_association('plan_comptable');
+		onglets_association('plan_comptable', 'association');
 		// Notice
 		echo propre(_T('asso:edit_plan'));
 		// datation et raccourcis

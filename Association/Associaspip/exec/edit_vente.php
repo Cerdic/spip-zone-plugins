@@ -22,7 +22,7 @@ function exec_edit_vente()
 		echo minipres();
 	} else {
 		$id_vente = intval(_request('id'));
-		onglets_association('titre_onglet_ventes');
+		onglets_association('titre_onglet_ventes', 'ventes');
 		// info
 		echo association_totauxinfos_intro('', 'vente', $id_vente);
 		// datation et raccourcis

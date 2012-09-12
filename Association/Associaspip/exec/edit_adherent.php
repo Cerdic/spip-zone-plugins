@@ -27,8 +27,7 @@ function exec_edit_adherent()
 			include_spip('inc/minipres');
 			echo minipres(_T('zxml_inconnu_id') . $id_auteur);
 		} else {
-//			include_spip ('inc/navigation');
-			onglets_association('titre_onglet_membres');
+			onglets_association('titre_onglet_membres', 'adherents');
 			include_spip('inc/association_coordonnees');
 			$nom_membre = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
 			$adresses = association_formater_adresses(array($id_auteur));

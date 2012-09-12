@@ -22,7 +22,7 @@ function exec_membres_groupe()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		onglets_association(($id_groupe>=100)?'gestion_groupes':'gerer_les_autorisations');
+		onglets_association(($id_groupe>=100)?'gestion_groupes':'gerer_les_autorisations', ($id_groupe>=100?'adherents':'association') );
 		// INFO
 		$groupe = sql_fetsel('*', 'spip_asso_groupes', "id_groupe=$id_groupe" );
 		if ($id_groupe>=100) {

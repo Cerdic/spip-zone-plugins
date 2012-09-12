@@ -22,7 +22,7 @@ function exec_edit_pret()
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
-		onglets_association('titre_onglet_prets');
+		onglets_association('titre_onglet_prets', 'ressources');
 		if ($id_pret) { // modifier
 			$id_ressource = sql_getfetsel('id_ressource', 'spip_asso_prets', "id_pret=$id_pret");
 		} else { // ajouter

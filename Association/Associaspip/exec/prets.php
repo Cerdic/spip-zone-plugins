@@ -22,7 +22,7 @@ function exec_prets()
 		echo minipres();
 	} else {
 		$id_ressource = intval(_request('id'));
-		onglets_association('titre_onglet_prets');
+		onglets_association('titre_onglet_prets', 'ressources');
 		$ressource = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
 		$unite = $ressource['ud']?$ressource['ud']:'D';
 		$infos['ressources_libelle_code'] = $ressource['code'];

@@ -21,7 +21,7 @@ function exec_association_autorisations()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		onglets_association('gerer_les_autorisations');
+		onglets_association('gerer_les_autorisations', 'association');
 		// notice
 		echo _T('asso:aide_gerer_autorisations');
 		// datation et raccourcis

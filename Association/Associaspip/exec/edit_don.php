@@ -23,7 +23,7 @@ function exec_edit_don()
 			echo minipres();
 	} else {
 		$id_don = intval(_request('id'));
-		onglets_association('titre_onglet_dons');
+		onglets_association('titre_onglet_dons', 'dons');
 		// INTRO : resume don
 		echo association_totauxinfos_intro('', 'don', $id_don);
 		// datation et raccourcis
