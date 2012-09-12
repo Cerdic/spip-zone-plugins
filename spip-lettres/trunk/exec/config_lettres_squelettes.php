@@ -144,7 +144,8 @@
 		echo barre_onglets("lettres", "config_lettres_squelettes");
 
 		echo debut_gauche('', true);
-		echo bloc_des_raccourcis(icone_horizontale(_T('lettresprive:aller_au_formulaire_abonnement'), generer_url_public($GLOBALS['meta']['spip_lettres_fond_formulaire_lettres']), _DIR_PLUGIN_LETTRES."prive/images/formulaire.png", 'rien.gif', false));
+		echo bloc_des_raccourcis(icone_horizontale(_T('lettresprive:aller_au_formulaire_abonnement'),
+			generer_url_public($GLOBALS['meta']['spip_lettres_fond_formulaire_lettres']), "formulaire.png", 'rien.gif', false));
   		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'config_lettres_squelettes'),'data'=>''));
 
 		echo creer_colonne_droite('', true);

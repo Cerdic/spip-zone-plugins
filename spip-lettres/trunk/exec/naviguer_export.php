@@ -19,7 +19,7 @@
 
 
 	function exec_naviguer_export() {
-		$id_rubrique = $_REQUEST['id_rubrique'];
+		$id_rubrique = _request('id_rubrique');
 
 		if (!autoriser('exporterabonnes', 'lettres')) {
 			include_spip('inc/minipres');
@@ -54,10 +54,10 @@ TODO
 		echo '</ol>';
 		echo fin_boite_info(true);
 
-		$raccourcis = icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire('abonnes_tous'), _DIR_PLUGIN_LETTRES.'prive/images/abonne.png', 'rien.gif', false);
-		$raccourcis.= icone_horizontale(_T('lettresprive:exporter_tous_desabonnes'), generer_url_action('export_desabonnes', '', false, true), _DIR_PLUGIN_LETTRES.'prive/images/desabonne.png', 'rien.gif', false);
+		$raccourcis = icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire('abonnes_tous'), 'abonne.png', 'rien.gif', false);
+		$raccourcis.= icone_horizontale(_T('lettresprive:exporter_tous_desabonnes'), generer_url_action('export_desabonnes', '', false, true), 'desabonne.png', 'rien.gif', false);
 		if ($id_rubrique)
-			$raccourcis.= icone_horizontale(_T('lettresprive:retour_rubrique'), generer_url_ecrire('rubrique', 'id_rubrique='.$id_rubrique), _DIR_PLUGIN_LETTRES.'prive/images/rubrique-24.png', 'rien.gif', false);
+			$raccourcis.= icone_horizontale(_T('lettresprive:retour_rubrique'), generer_url_ecrire('rubrique', 'id_rubrique='.$id_rubrique), 'rubrique-24.png', 'rien.gif', false);
 		echo bloc_des_raccourcis($raccourcis);
   		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'naviguer_export'),'data'=>''));
 
@@ -67,7 +67,7 @@ TODO
    		echo debut_droite('', true);
 
 		echo '<form action="'.generer_url_action('export_abonnes', '', false, true).'" method="post">';
-		echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/export.png', true, "", _T('lettresprive:depuis_rubrique'));
+		echo debut_cadre_enfonce('export_abonnes.png', true, "", _T('lettresprive:depuis_rubrique'));
 		echo choisir_thematique($id_rubrique);
 		echo '<div align="right">';
 		echo '<input type="submit" name="telecharger" class="fondo" value="'._T('lettresprive:telecharger').'" />';

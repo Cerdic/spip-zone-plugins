@@ -18,7 +18,7 @@ function boucle_LETTRES_dist($id_boucle, &$boucles) {
 	$id_table = $boucle->id_table;
 	$mstatut = $id_table .'.statut';
 	if (!isset($boucle->modificateur['criteres']['statut'])) {
-		if (!$GLOBALS['var_preview']) {
+		if (!defined('_VAR_PREVIEW') OR !_VAR_PREVIEW) {
 			if (!isset($boucle->modificateur['tout']))
 				$boucle->modificateur['criteres']['statut'] = true;
 		}

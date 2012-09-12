@@ -9,7 +9,8 @@
  *  
  * Ce programme est un logiciel libre distribue sous licence GNU/GPLv3.
  * Pour plus de details voir http://www.gnu.org/licenses/gpl-3.0.html
- *  
+ *
+ * @package SPIP\Lettres\Pipelines
  **/
 
 global $table_des_abonnes;
@@ -31,7 +32,15 @@ $table_des_abonnes['auteur'] = array(
 									);
 
 
-
+/**
+ * Déclarer les interfaces des tables pour le compilateur
+ *
+ * @pipeline declarer_tables_interfaces
+ * @param array $interface
+ *     Déclarations d'interface pour le compilateur
+ * @return array
+ *     Déclarations d'interface pour le compilateur
+ */
 function lettres_declarer_tables_interfaces($interface) {
 	$interface['table_des_tables']['abonnes'] = 'abonnes';
 	$interface['table_des_tables']['abonnes_statistiques'] = 'abonnes_statistiques';
@@ -63,6 +72,54 @@ function lettres_declarer_tables_interfaces($interface) {
 	return $interface;
 }
 
+/**
+ * Déclarer les objets éditoriaux des lettres
+ *
+ * @pipeline declarer_tables_objets_sql
+ * @param array $tables
+ *     Description des tables
+ * @return array
+ *     Description complétée des tables
+ */
+function lettres_declarer_tables_objets_sql($tables) {
+
+	//-- Table lettres
+	$tables['spip_lettres'] = array(
+		'type' => 'lettre',
+
+		'titre' => "titre, lang",
+		'date' => 'date',
+		'principale' => 'oui',
+
+		'field' => array(
+			"id_lettre"				=> "BIGINT(21) NOT NULL",
+			"id_rubrique"			=> "BIGINT(21) NOT NULL",
+			"id_secteur"			=> "BIGINT(21) NOT NULL",
+			"titre"					=> "TEXT NOT NULL DEFAULT ''",
+			"descriptif"			=> "TEXT NOT NULL DEFAULT ''",
+			"chapo"					=> "MEDIUMTEXT NOT NULL DEFAULT ''",
+			"texte"					=> "longtext DEFAULT '' NOT NULL",
+			"ps"					=> "TEXT NOT NULL DEFAULT ''",
+			"date"					=> "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
+			"lang"					=> "VARCHAR(10) NOT NULL DEFAULT ''",
+			"langue_choisie"		=> "VARCHAR(3) DEFAULT 'non'",
+			"maj"					=> "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
+			"message_html"			=> "longtext DEFAULT '' NOT NULL",
+			"message_texte"			=> "longtext DEFAULT '' NOT NULL",
+			"date_debut_envoi"		=> "DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'",
+			"date_fin_envoi"		=> "DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'",
+			"statut"				=> "VARCHAR(15) NOT NULL DEFAULT 'brouillon'",
+			"extra"					=> "longtext NULL"
+		),
+		'key' => array(
+			"PRIMARY KEY"	=> "id_lettre",
+		),
+		'rechercher_champs' => array(
+			'titre' => 8,'descriptif' => 4, 'chapo' => 3, 'texte' => 2, 'ps' => 1
+		),
+	);
+	return $tables;
+}
 
 function lettres_declarer_tables_principales($tables_principales) {
 	$spip_abonnes = array(
@@ -97,29 +154,6 @@ function lettres_declarer_tables_principales($tables_principales) {
 						"PRIMARY KEY" 	=> "id_desabonne",
 						"KEY email"	=> "email"
 					);
-	$spip_lettres = array(
-						"id_lettre"				=> "BIGINT(21) NOT NULL",
-						"id_rubrique"			=> "BIGINT(21) NOT NULL",
-						"id_secteur"			=> "BIGINT(21) NOT NULL",
-						"titre"					=> "TEXT NOT NULL DEFAULT ''",
-						"descriptif"			=> "TEXT NOT NULL DEFAULT ''",
-						"chapo"					=> "MEDIUMTEXT NOT NULL DEFAULT ''",
-						"texte"					=> "longtext DEFAULT '' NOT NULL",
-						"ps"					=> "TEXT NOT NULL DEFAULT ''",
-						"date"					=> "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
-						"lang"					=> "VARCHAR(10) NOT NULL DEFAULT ''",
-						"langue_choisie"		=> "VARCHAR(3) DEFAULT 'non'",
-						"maj"					=> "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
-						"message_html"			=> "longtext DEFAULT '' NOT NULL",
-						"message_texte"			=> "longtext DEFAULT '' NOT NULL",
-						"date_debut_envoi"		=> "DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'",
-						"date_fin_envoi"		=> "DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'",
-						"statut"				=> "VARCHAR(15) NOT NULL DEFAULT 'brouillon'",
-						"extra"					=> "longtext NULL"
-					);
-	$spip_lettres_key = array(
-						"PRIMARY KEY"	=> "id_lettre"
-					);
 	$spip_rubriques_crontabs = array(
 						"id_rubrique"			=> "BIGINT (21) DEFAULT '0' NOT NULL",
 						"titre"					=> "TEXT NOT NULL"
@@ -131,7 +165,7 @@ function lettres_declarer_tables_principales($tables_principales) {
 						"id_theme"					=> "BIGINT(21) NOT NULL",
 						"id_rubrique"				=> "BIGINT(21) DEFAULT '0' NOT NULL",
 						"titre"						=> "TEXT NOT NULL",
-						"lang"						=> "VARCHAR(10) NOT NULL",
+						"lang"						=> "VARCHAR(10) NOT NULL DEFAULT ''",
 						"expediteur_type"			=> "ENUM('default','webmaster','author','custom') NOT NULL DEFAULT 'default'",
 						"expediteur_id"				=> "BIGINT(21) NOT NULL DEFAULT '0'",
 						"retours_type"				=> "ENUM('default','webmaster','author','custom') NOT NULL DEFAULT 'default'",
@@ -147,8 +181,6 @@ function lettres_declarer_tables_principales($tables_principales) {
 		array('field' => &$spip_clics, 'key' => &$spip_clics_key);
 	$tables_principales['spip_desabonnes'] =
 		array('field' => &$spip_desabonnes, 'key' => &$spip_desabonnes_key);
-	$tables_principales['spip_lettres'] =
-		array('field' => &$spip_lettres, 'key' => &$spip_lettres_key);
 	$tables_principales['spip_rubriques_crontabs'] =
 		array('field' => &$spip_rubriques_crontabs, 'key' => &$spip_rubriques_crontabs_key);
 	$tables_principales['spip_themes'] =

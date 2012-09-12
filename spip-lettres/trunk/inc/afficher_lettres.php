@@ -24,13 +24,14 @@
 		$tableau = array();
 		$args = array();
 		$presenter_liste = charger_fonction('presenter_liste', 'inc');
-		return $presenter_liste($requete, 'afficher_lettre_boucle', $tableau, $args, $force, $styles, $tmp_var, $titre, _DIR_PLUGIN_LETTRES.'prive/images/lettre-24.png');
+		return $presenter_liste($requete, 'afficher_lettre_boucle', $tableau, $args, false, $styles, $tmp_var, $titre, 'lettre-24.png');
 	}
 
 
 	function afficher_lettre_boucle($row, $own) {
-		global $spip_lang_right;
-		
+		$dir_lang = $GLOBALS['spip_lang_rtl'];
+		$spip_lang_right = $GLOBALS['spip_lang_right'];
+
 		$vals = '';
 
 		$lettre = new lettre($row['id_lettre']);
@@ -49,7 +50,7 @@
 
 		// Le titre (et la langue)
 		$s = "<div>";
-		$s.= "<a href='" . generer_url_ecrire("lettres","id_lettre=".$lettre->id_lettre) .
+		$s.= "<a href='" . generer_url_ecrire("lettres_voir","id_lettre=".$lettre->id_lettre) .
 			"'$dir_lang style=\"display:block;\">";
 		$chercher_logo = charger_fonction('chercher_logo', 'inc');
 		if ($logo = $chercher_logo($lettre->id_lettre, 'id_lettre', 'on')) {
@@ -60,7 +61,9 @@
 				$s.= "\n<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</span>";
 		}
 		$s.= typo($lettre->titre);
-		if (($GLOBALS['meta']['multi_rubriques'] == 'oui') OR ($GLOBALS['meta']['multi_articles'] == 'oui'))
+
+		$multis = explode(',', $GLOBALS['meta']['multi_objets']);
+		if ($multis and array_intersect($multis, array('spip_articles', 'spip_rubriques')))
 			if ($GLOBALS['visiteur_session']['lang'] != $lettre->lang)
 				$s.= " <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lettre->lang).")</font>";
 		$s.= "</a>";

@@ -156,9 +156,10 @@
 
 		function enregistrer_statut($statut, $impacte_queue_envois=true) {
 			$ancien_statut = $this->statut;
+			$redirection = '';
 			switch ($statut) {
 				case 'brouillon':
-					$redirection = generer_url_ecrire('lettres', 'id_lettre='.$this->id_lettre, true);
+					$redirection = generer_url_ecrire('lettres_voir', 'id_lettre='.$this->id_lettre, true);
 					break;
 				case 'envoi_en_cours':
 					if (in_array($ancien_statut,array('brouillon','envoyee'))){

@@ -18,7 +18,7 @@
 	include_spip('lettres_fonctions');
 
 
-	function exec_lettres() {
+	function exec_lettres_voir() {
 
 		if (!autoriser('voir', 'lettres')) {
 			include_spip('inc/minipres');
@@ -30,18 +30,19 @@
 		
 		pipeline('exec_init',array('args'=>array('exec'=>'lettres','id_lettre'=>$lettre->id_lettre),'data'=>''));
 
-		$url = generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre, true);
+		$url = generer_url_ecrire('lettres_voir', 'id_lettre='.$lettre->id_lettre, true);
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page($lettre->titre, "naviguer", "lettres_tous");
-
+echo '<div class="no_onglets">';
 		echo debut_grand_cadre(true);
 		echo afficher_hierarchie($lettre->id_rubrique);
 		echo fin_grand_cadre(true);
 
+		$delivrer = '';
 		if ($lettre->statut == 'envoi_en_cours') {
 			include_spip('inc/delivrer');
-			$delivrer = lettres_delivrer_surveille_ajax($lettre->id_lettre,generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre.'&message=envoi_termine', true));
+			$delivrer = lettres_delivrer_surveille_ajax($lettre->id_lettre,generer_url_ecrire('lettres_voir', 'id_lettre='.$lettre->id_lettre.'&message=envoi_termine', true));
 			// plus rien a faire : hop on la passe en envoyee
 			if (!$delivrer)
 				$lettre->enregistrer_statut('envoyee');
@@ -63,12 +64,15 @@
 		echo afficher_objets('lettres_mini', _T('info_meme_rubrique'), array('FROM' => 'spip_lettres', 'WHERE' => 'id_rubrique='.intval($lettre->id_rubrique).' AND id_lettre!='.intval($lettre->id_lettre).' AND statut!=\'poub\'', 'ORDER BY' => 'maj DESC'));
 
 		echo bloc_des_raccourcis(
-				icone_horizontale(_T('lettresprive:creer_nouvelle_lettre'), generer_url_ecrire("lettres_edit"), _DIR_PLUGIN_LETTRES."prive/images/lettre-24.png", 'creer.gif', false)
+				icone_horizontale(_T('lettresprive:creer_nouvelle_lettre'), generer_url_ecrire("lettres_edit"), "lettre-24.png", 'creer.gif', false)
 				. ((intval($lettre->id_lettre) AND $lettre->statut !== 'envoi_en_cours')?
-				  icone_horizontale(_T('lettresprive:copier'), generer_action_auteur("dupliquer_lettre", $lettre->id_lettre,self()), _DIR_PLUGIN_LETTRES."prive/images/lettre-dupliquer-24.png", 'creer.gif', false)
+				  icone_horizontale(_T('lettresprive:copier'),
+					generer_action_auteur("dupliquer_lettre", $lettre->id_lettre,self()), "lettre-dupliquer-24.png", 'creer.gif', false)
 				  :"")
-				. icone_horizontale(_T('lettresprive:aller_liste_lettres'), generer_url_ecrire("lettres_tous"), _DIR_PLUGIN_LETTRES.'prive/images/lettre-24.png', 'rien.gif', false)
-				. icone_horizontale(_T('lettresprive:ajouter_abonne'), generer_url_ecrire('abonnes_edit',"id_rubrique=".$lettre->id_rubrique), _DIR_PLUGIN_LETTRES.'prive/images/abonne-24.png', 'creer.gif', false)
+				. icone_horizontale(_T('lettresprive:aller_liste_lettres'),
+					generer_url_ecrire("lettres_tous"), 'lettre-24.png', 'rien.gif', false)
+				. icone_horizontale(_T('lettresprive:ajouter_abonne'),
+					generer_url_ecrire('abonnes_edit',"id_rubrique=".$lettre->id_rubrique), 'abonne-24.png', 'creer.gif', false)
 			);
 
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'lettres','id_lettre'=>$lettre->id_lettre),'data'=>''));
@@ -119,7 +123,7 @@
 			}
 			if (strlen($articles)) {
 				$articles =
-				  debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/articles.gif', true, "", _T('lettresprive:articles'))
+				  debut_cadre_enfonce('articles-24.png', true, "", _T('lettresprive:articles'))
 					. $articles
 					. fin_cadre_enfonce(true);
 			}
@@ -129,12 +133,14 @@
 		$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
 		$dater = charger_fonction('dater', 'inc');
 
+		$renvoi = '';
+
 		if ($lettre->statut == 'envoyee') {
 			$action = generer_action_auteur("renvoyer_lettre",$lettre->id_lettre,self());
 
 			$renvoi = '<form method="post" action="'.$action.'">';
 			$renvoi.= "<div>".form_hidden($action)."</div>";
-			$renvoi.= debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/renvoi.png', true, "", _T('lettresprive:renvoyer_lettre'));
+			$renvoi.= debut_cadre_enfonce('renvoi.png', true, "", _T('lettresprive:renvoyer_lettre'));
 			$renvoi.= '<p><label><input type="checkbox" name="tous" value="1" /> '._T('lettresprive:renvoyer_a_tous').'</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label>'._T('lettresprive:ou_abonne').' <input type="text" name="email_abonne" value="" /></label></p>';
 			$renvoi.= '<div align="right">';
 			$renvoi.= '<input type="submit" name="renvoyer_lettre" class="fondo" value="'._T('lettresprive:renvoyer').'" />';
@@ -145,7 +151,7 @@
 
 		$onglet_proprietes = $dater($lettre->id_lettre, true, $lettre->statut, 'lettre', 'lettres', $lettre->date);
 		$onglet_proprietes.= $renvoi;
-		$onglet_proprietes.= $editer_mots('lettre', $lettre->id_lettre, $cherche_mot, $select_groupe, $flag_editable, '', 'lettres');
+		$onglet_proprietes.= $editer_mots('lettre', $lettre->id_lettre, '', '', $flag_editable, '', 'lettres');
 		$onglet_proprietes.= $editer_auteurs('lettre', $lettre->id_lettre, ($lettre->statut == 'brouillon'), '', 'lettres');
 		$onglet_proprietes.= $articles;
 
@@ -175,7 +181,8 @@
 		if ($lettre->statut == 'brouillon') {
 			echo '<div class="bandeau_actions">';
 			echo '<div style="float: right;">';
-			echo icone_inline(_T('lettresprive:modifier_lettre'), generer_url_ecrire("lettres_edit", "id_lettre=".$lettre->id_lettre), _DIR_PLUGIN_LETTRES.'prive/images/lettre-24.png', "edit.gif", $GLOBALS['spip_lang_left']);
+			echo icone_inline(_T('lettresprive:modifier_lettre'),
+				generer_url_ecrire("lettres_edit", "id_lettre=".$lettre->id_lettre), 'lettre-24.png', "edit.gif", $GLOBALS['spip_lang_left']);
 			echo '</div>';
 			echo '</div>';
 		}
@@ -213,7 +220,7 @@
 		}
 
 		echo fin_gauche();
-
+ echo '</div><!-- .no_onglets -->';
 		echo fin_page();
 
 	}
@@ -315,7 +322,7 @@
 			$res.=icone_horizontale(_T('lettresprive:previsualiser_texte'), generer_url_public('lettre_preview', 'format=texte&id_lettre='.$lettre->id_lettre.'&var_mode=preview'), "racine-24.gif", '', false,' target="_blank"');
 		}
 		if (autoriser('tester','lettre',$lettre->id_lettre)) {
-			$res.=icone_horizontale(_T('lettresprive:tester'), generer_action_auteur('tester_lettre', $lettre->id_lettre, self()), _DIR_PLUGIN_LETTRES."prive/images/lettre-tester-24.png", '', false);
+			$res.=icone_horizontale(_T('lettresprive:tester'), generer_action_auteur('tester_lettre', $lettre->id_lettre, self()), "lettre-tester-24.png", '', false);
 		}
 
 		if ($lettre->statut == 'envoyee') {

@@ -22,7 +22,7 @@
 		$tableau = array();
 		$args = array();
 		$presenter_liste = charger_fonction('presenter_liste', 'inc');
-		return $presenter_liste($requete, 'afficher_clic_boucle', $tableau, $args, $force, $styles, $tmp_var, $titre, _DIR_PLUGIN_LETTRES.'prive/images/clic.png');
+		return $presenter_liste($requete, 'afficher_clic_boucle', $tableau, $args, false, $styles, $tmp_var, $titre, 'clic.png');
 	}
 
 
@@ -41,7 +41,7 @@
 			$vals[] = http_img_pack('puce-verte.gif', 'puce-verte', ' border="0" style="margin: 1px;"');
 		}
 
-		$url_coupee = str_split($url, 25);
+		$url_coupee = str_split($url, 16);
 
 		$vals[] = '<a href="'.$url.'" target="_blank">'.implode(' ', $url_coupee).'</a>';
 

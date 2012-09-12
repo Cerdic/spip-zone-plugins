@@ -19,13 +19,19 @@
 
 
 	function exec_naviguer_import() {
-		$id_rubrique = $_REQUEST['id_rubrique'];
+		$id_rubrique = _request('id_rubrique');
+
+		$tableau_emails_valides = array();
+		$tableau_emails_non_valides = array();
+		$tableau_desabonnes = array();
 
 		if (!autoriser('importerabonnes', 'lettres')) {
 			include_spip('inc/minipres');
 			echo minipres();
 			exit;
 		}
+
+		$erreur = false;
 
 		if (!empty($_POST['valider'])) {
 			if (!$_FILES['fichier_csv']['error']) {
@@ -34,9 +40,7 @@
 				$importer_csv = charger_fonction('importer_csv','inc');
 				$fichier = $_FILES['fichier_csv']['tmp_name'];
 				$tableau = $importer_csv($fichier,false,";");
-				$tableau_emails_valides = array();
-				$tableau_emails_non_valides = array();
-				$tableau_desabonnes = array();
+
 				foreach ($tableau as $ligne) {
 					$email	= $ligne[0];
 					$nom	= $ligne[1];
@@ -119,9 +123,9 @@ TODO
 		echo _T('lettresprive:aide_donnees_obligatoires');
 		echo fin_boite_info(true);
 
-		$raccourcis = icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire('abonnes_tous'), _DIR_PLUGIN_LETTRES.'prive/images/abonne.png', 'rien.gif', false);
+		$raccourcis = icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire('abonnes_tous'), 'abonne.png', 'rien.gif', false);
 		if ($id_rubrique)
-			$raccourcis.= icone_horizontale(_T('lettresprive:retour_rubrique'), generer_url_ecrire('rubrique', 'id_rubrique='.$id_rubrique), _DIR_PLUGIN_LETTRES.'prive/images/rubrique-24.png', 'rien.gif', false);
+			$raccourcis.= icone_horizontale(_T('lettresprive:retour_rubrique'), generer_url_ecrire('rubrique', 'id_rubrique='.$id_rubrique), 'rubrique-24.png', 'rien.gif', false);
 		echo bloc_des_raccourcis($raccourcis);
   		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'naviguer_import'),'data'=>''));
 
@@ -133,7 +137,7 @@ TODO
 		echo "<form method='post' action='".generer_url_ecrire('naviguer_import')."' enctype='multipart/form-data'>";
 
 		if (count($tableau_emails_valides) or count($tableau_emails_non_valides)) {
-			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/import.png', true, "", _T('lettresprive:resultat'));
+			echo debut_cadre_enfonce('import_abonnes.png', true, "", _T('lettresprive:resultat'));
 			if (count($tableau_emails_valides)) {
 				echo "<p><strong>"._T('lettresprive:nb_abonnes_importes')."</strong> ".count($tableau_emails_valides)."</p>";
 				echo debut_cadre_couleur('', true);
@@ -166,10 +170,10 @@ TODO
 			echo '</div>';
 			echo fin_cadre_enfonce(true);
 		} else {
-			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/import.png', true, "", _T('lettresprive:rubrique_destination'));
+			echo debut_cadre_enfonce('import_abonnes.png', true, "", _T('lettresprive:rubrique_destination'));
 			echo choisir_thematique($id_rubrique);
 			echo fin_cadre_enfonce(true);
-			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/preferences.png', true, "", _T('lettresprive:boite_format'));
+			echo debut_cadre_enfonce('preferences.png', true, "", _T('lettresprive:boite_format'));
 			echo _T('lettresprive:changer_format').'&nbsp;&nbsp;';
 			echo "<select name='format' CLASS='fondl'>";
 			echo '<option value="mixte">'._T('lettresprive:mixte').'</option>';
@@ -177,7 +181,7 @@ TODO
 			echo '<option value="texte">'._T('lettresprive:texte').'</option>';
 			echo "</select>";
 			echo fin_cadre_enfonce(true);
-			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/csv.png', true, "", _T('lettresprive:fichier_csv'));
+			echo debut_cadre_enfonce('csv.png', true, "", _T('lettresprive:fichier_csv'));
 			if ($erreur)
 				echo _T('lettresprive:erreur_upload').'<br />';
 			echo "<input type='file' name='fichier_csv' />";

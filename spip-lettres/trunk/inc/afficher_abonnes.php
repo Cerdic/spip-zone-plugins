@@ -27,16 +27,19 @@
 		else
 			$args = array();
 		$presenter_liste = charger_fonction('presenter_liste', 'inc');
-		return $presenter_liste($requete, 'afficher_abonne_boucle', $tableau, $args, $force, $styles, $tmp_var, $titre, _DIR_PLUGIN_LETTRES.'prive/images/abonne.png');
+		return $presenter_liste($requete, 'afficher_abonne_boucle', $tableau, $args, false, $styles, $tmp_var, $titre, 'abonne.png');
 	}
 
 
 	function afficher_abonne_boucle($row, $own) {
+		$dir_lang = $GLOBALS['spip_lang_rtl'];
+
 		$vals = '';
 
 		$id_abonne = $row['id_abonne'];
-		$id_lettre = $own['id_lettre'];
-		$id_rubrique = $own['id_rubrique'];
+		$id_lettre = isset($own['id_lettre']) ? $own['id_lettre'] : '' ;
+		$id_rubrique = isset($own['id_rubrique']) ? $own['id_rubrique'] : '' ;
+		
 		$abonne = new abonne($id_abonne);
 		$email	= $abonne->email;
 		$nom	= $abonne->nom;
@@ -54,7 +57,8 @@
 				break;
 		}
 
-		$s = "<a href='".generer_url_ecrire('abonnes', 'id_abonne='.$abonne->id_abonne)."'$dir_lang style=\"display:block;\">";
+		$s = "<a href='".generer_url_ecrire('abonnes', 'id_abonne='.$abonne->id_abonne)
+				. "'$dir_lang style=\"display:block;\">";
 		$s.= typo($abonne->email);
 		$s.= "</a>";
 		$vals[] = $s;

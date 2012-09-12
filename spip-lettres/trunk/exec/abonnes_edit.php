@@ -25,9 +25,11 @@
 			echo minipres();
 			exit;
 		}
-		
-		$id_abonne = $_GET['id_abonne'];
-		
+
+		$erreur = false;
+
+		$id_abonne = _request('id_abonne');
+
 		pipeline('exec_init', array('args' => array('exec' => 'abonnes_edit', 'id_abonne' => $id_abonne), 'data' => ''));
 
 		if (!empty($_POST['enregistrer'])) {

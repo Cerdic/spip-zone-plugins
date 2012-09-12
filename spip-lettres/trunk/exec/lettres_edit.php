@@ -32,7 +32,7 @@
 			exit;
 		}
 
-		pipeline('exec_init', array('args' => array('exec' => 'lettres_edit', 'id_lettre' => $_GET['id_lettre']), 'data' => ''));
+		pipeline('exec_init', array('args' => array('exec' => 'lettres_edit', 'id_lettre' => _request('id_lettre')), 'data' => ''));
 
 
 		if (!$new) {
@@ -57,12 +57,14 @@
 
 		echo debut_gauche("",true);
 
-		if ($lettre->existe){
-			echo afficher_documents_colonne($lettre->id_lettre, 'lettre');
+		if ($lettre->existe) {
+			echo recuperer_fond('prive/objets/editer/colonne_document',
+					array('objet'=>'lettre','id_objet'=>$lettre->id_lettre));
 		} else {
 			# ICI GROS HACK
 			# -------------
-			echo afficher_documents_colonne(0-$GLOBALS['visiteur_session']['id_auteur'], 'lettre');
+			echo recuperer_fond('prive/objets/editer/colonne_document',
+					array('objet'=>'lettre','id_objet'=>0-$GLOBALS['visiteur_session']['id_auteur']));
 		}
 
 		echo pipeline('affiche_gauche', array('args' => array('exec' => 'lettres_edit', 'id_lettre' => $lettre->id_lettre), 'data' => ''));
@@ -73,12 +75,12 @@
 
 		$oups = ($new
 			? generer_url_ecrire('rubrique',"id_rubrique=".$id_rubrique)
-			: generer_url_ecrire("lettres","id_lettre=".$id_lettre)
+			: generer_url_ecrire("lettres_voir","id_lettre=".$id_lettre)
 			);
 
 		$contexte = array(
 		'icone_retour'=>icone_inline(_T('icone_retour'), $oups, "lettre-24.png", "rien.gif",$GLOBALS['spip_lang_left']),
-		'redirect'=>generer_url_ecrire("lettres"),
+		'redirect'=>generer_url_ecrire("lettres_voir"),
 		'titre'=>$lettre->titre,
 		'new'=>$id_lettre,
 		'id_rubrique'=>$lettre->id_rubrique,

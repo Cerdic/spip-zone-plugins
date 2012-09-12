@@ -19,17 +19,19 @@
 		$tableau = array();
 		$args = array();
 		$presenter_liste = charger_fonction('presenter_liste', 'inc');
-		return $presenter_liste($requete, 'afficher_abonnement_boucle', $tableau, $args, $force, $styles, $tmp_var, $titre, _DIR_PLUGIN_LETTRES.'prive/images/rubrique-24.png');
+		return $presenter_liste($requete, 'afficher_abonnement_boucle', $tableau, $args, false, $styles, $tmp_var, $titre, 'rubrique-24.png');
 	}
 
 
 	function afficher_abonnement_boucle($row, $own) {
+		$dir_lang = $GLOBALS['spip_lang_rtl'];
+
 		$vals = '';
 
 		$id_rubrique = $row['id_rubrique'];
 		$total = $row['total'];
 
-		$vals[] = http_img_pack(_DIR_PLUGIN_LETTRES.'prive/images/rubrique-12.png', "rub", '');
+		$vals[] = http_img_pack('rubrique-12.png', "rub", '');
 
 		$s = "<a href='".generer_url_ecrire('rubrique', 'id_rubrique='.$id_rubrique)."'$dir_lang style=\"display:block;\">";
 		if ($id_rubrique == 0) {
@@ -46,10 +48,6 @@
 			$s = '&nbsp;';
 		}
 		$vals[] = $s;
-
-		if ($options == "avancees") {
-			$vals[] = "<b>"._T('info_numero_abbreviation').$id_rubrique."</b>";
-		}
 
 		return $vals;
 	}

@@ -40,6 +40,9 @@ function calculer_url_lettre($id_lettre, $texte, $ancre) {
 
 
 function generer_url_lettre($id_lettre, $format='', $preview=false) {
+	$var_mode='';
+	$chaine_format='';
+	
 	if ($preview)
 		$var_mode = '&var_mode=preview';
 	if (!empty($format))
@@ -63,6 +66,7 @@ function lettres_recuperer_toutes_les_rubriques_parentes($id_rubrique) {
 
 
 function lettres_recuperer_la_rubrique_parente($id_rubrique) {
+	$id_parent=0;
 	if ($id_rubrique)
 		$id_parent = sql_getfetsel('id_parent', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique));
 	return intval($id_parent);

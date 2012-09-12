@@ -14,6 +14,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('lettres_fonctions');
 include_spip('inc/delivrer');
+include_spip('inc/presentation');
 
 function exec_progression_envoi_lettre() {
 

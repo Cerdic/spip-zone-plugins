@@ -32,13 +32,16 @@
 		echo $commencer_page(_T('lettresprive:abonnes'), "naviguer", "abonnes");
 
 		echo debut_gauche('', true);
-		echo afficher_objets('nb_abonne', _T('lettresprive:evolution_nb_abonnes'), array('FROM' => 'spip_abonnes_statistiques', 'ORDER BY' => 'periode DESC'));
+		echo afficher_objets('nb_abonne', _T('lettresprive:evolution_nb_abonnes'), array(
+			'FROM' => 'spip_abonnes_statistiques',
+			'WHERE' => '',
+			'ORDER BY' => 'periode DESC'));
 		echo bloc_des_raccourcis(
 				icone_horizontale(_T('lettresprive:ajouter_abonne'), generer_url_ecrire('abonnes_edit'), 'abonne-24.png', 'creer.gif', false).
 				icone_horizontale(_T('lettresprive:aller_liste_lettres'), generer_url_ecrire("lettres_tous"), 'lettre-24.png', 'rien.gif', false).
-				icone_horizontale(_T('lettresprive:import_abonnes'), generer_url_ecrire("naviguer_import"), _DIR_PLUGIN_LETTRES.'prive/images/import.png', 'rien.gif', false).
-				icone_horizontale(_T('lettresprive:export_abonnes'), generer_url_ecrire("naviguer_export"), _DIR_PLUGIN_LETTRES.'prive/images/export.png', 'rien.gif', false).
-				icone_horizontale(_T('lettresprive:purge_abonnes'), generer_url_ecrire("naviguer_purge"), _DIR_PLUGIN_LETTRES.'prive/images/purge.png', 'rien.gif', false).
+				icone_horizontale(_T('lettresprive:import_abonnes'), generer_url_ecrire("naviguer_import"),'import_abonnes.png', 'rien.gif', false).
+				icone_horizontale(_T('lettresprive:export_abonnes'), generer_url_ecrire("naviguer_export"), 'export_abonnes.png', 'rien.gif', false).
+				icone_horizontale(_T('lettresprive:purge_abonnes'), generer_url_ecrire("naviguer_purge"), 'purge_abonnes.png', 'rien.gif', false).
 				icone_horizontale(_T('lettresprive:configurer_formulaire_abonnement'), generer_url_ecrire('config_lettres_formulaire'), 'lettres-config_formulaire-24.png', 'rien.gif', false)
 			);
   		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'abonnes_tous'),'data'=>''));
@@ -47,8 +50,16 @@
 		echo pipeline('affiche_droite',array('args'=>array('exec'=>'abonnes_tous'),'data'=>''));
 
    		echo debut_droite('', true);
-		echo afficher_objets('abonne', _T('lettresprive:abonnes'), array('FROM' => 'spip_abonnes', 'ORDER BY' => 'maj DESC'));
-		echo afficher_objets('abonnement', _T('lettresprive:thematiques'), array('SELECT' => 'id_rubrique, COUNT(id_abonne) AS total', 'FROM' => 'spip_abonnes_rubriques', 'WHERE' => 'statut="valide"', 'ORDER BY' => 'total DESC', 'GROUP BY' => 'id_rubrique'));
+		echo afficher_objets('abonne', _T('lettresprive:abonnes'), array(
+			'FROM' => 'spip_abonnes',
+			'WHERE' => '',
+			'ORDER BY' => 'maj DESC'));
+		echo afficher_objets('abonnement', _T('lettresprive:thematiques'), array(
+			'SELECT' => 'id_rubrique, COUNT(id_abonne) AS total',
+			'FROM' => 'spip_abonnes_rubriques',
+			'WHERE' => 'statut="valide"',
+			'ORDER BY' => 'total DESC',
+			'GROUP BY' => 'id_rubrique'));
 
 		echo pipeline('affiche_milieu', array('args'=>array('exec'=>'abonnes_tous'),'data'=>''));
 		
@@ -56,7 +67,7 @@
 
 		echo fin_page();
 
-	}		
+	}
 
 
 ?>

@@ -32,7 +32,10 @@
 		echo $commencer_page(_T('lettresprive:lettres_information'), "naviguer", "lettres_tous");
 
 		echo debut_gauche('', true);
-		echo afficher_objets('nb_envoi', _T('lettresprive:evolution_nb_envois'), array('FROM' => 'spip_lettres_statistiques', 'ORDER BY' => 'periode DESC'));
+		echo afficher_objets('nb_envoi', _T('lettresprive:evolution_nb_envois'), array(
+			'FROM' => 'spip_lettres_statistiques',
+			'WHERE' => '',
+			'ORDER BY' => 'periode DESC'));
 		echo bloc_des_raccourcis(
 				icone_horizontale(_T('lettresprive:creer_nouvelle_lettre'), generer_url_ecrire("lettres_edit"), "lettre-24.png", 'creer.gif', false).
 				icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire("abonnes_tous"), "abonne-24.png", 'rien.gif', false).
@@ -44,10 +47,24 @@
 		echo pipeline('affiche_droite',array('args'=>array('exec'=>'lettres_tous'),'data'=>''));
 
    		echo debut_droite('', true);
-		echo afficher_objets('lettre', _T('lettresprive:lettres_envoi_en_cours'), array('FROM' => 'spip_lettres', 'WHERE' => 'statut="envoi_en_cours"', 'ORDER BY' => 'maj DESC'));
-		echo afficher_objets('lettre', _T('lettresprive:lettres_brouillon'), array('FROM' => 'spip_lettres', 'WHERE' => 'statut="brouillon"', 'ORDER BY' => 'maj DESC'));
-		echo afficher_objets('lettre', _T('lettresprive:lettres_envoyees'), array('FROM' => 'spip_lettres', 'WHERE' => 'statut="envoyee"', 'ORDER BY' => 'maj DESC'));
-		echo afficher_objets('abonnement', _T('lettresprive:thematiques'), array('SELECT' => 'id_rubrique, COUNT(id_abonne) AS total', 'FROM' => 'spip_abonnes_rubriques', 'WHERE' => 'statut="valide"', 'ORDER BY' => 'total DESC', 'GROUP BY' => 'id_rubrique'));
+		echo afficher_objets('lettre', _T('lettresprive:lettres_envoi_en_cours'), array(
+			'FROM' => 'spip_lettres',
+			'WHERE' => 'statut="envoi_en_cours"',
+			'ORDER BY' => 'maj DESC'));
+		echo afficher_objets('lettre', _T('lettresprive:lettres_brouillon'), array(
+			'FROM' => 'spip_lettres',
+			'WHERE' => 'statut="brouillon"',
+			'ORDER BY' => 'maj DESC'));
+		echo afficher_objets('lettre', _T('lettresprive:lettres_envoyees'), array(
+			'FROM' => 'spip_lettres',
+			'WHERE' => 'statut="envoyee"',
+			'ORDER BY' => 'maj DESC'));
+		echo afficher_objets('abonnement', _T('lettresprive:thematiques'), array(
+			'SELECT' => 'id_rubrique, COUNT(id_abonne) AS total',
+			'FROM' => 'spip_abonnes_rubriques',
+			'WHERE' => 'statut="valide"',
+			'ORDER BY' => 'total DESC',
+			'GROUP BY' => 'id_rubrique'));
 
 		echo pipeline('affiche_milieu', array('args'=>array('exec'=>'lettres_tous'),'data'=>''));
 		

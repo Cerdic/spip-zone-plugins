@@ -19,7 +19,7 @@ function lettres_upgrade($nom_meta_base_version,$version_cible){
 	);
 	
 	$maj['0.1'] = array( 
-		array('spip_lettres_update_meta',$version_plugin,$nom_meta_base_versio,$current_version,$version_cible),	
+		array('spip_lettres_update_meta',$version_plugin,$nom_meta_base_versio,$current_version,$version_cible),
 		array('spip_lettres_creer_repertoire_documents'),
 	);
 	$maj['3.0'] = array( 
@@ -32,11 +32,11 @@ function lettres_upgrade($nom_meta_base_version,$version_cible){
 								'spip_themes',
 								'spip_lettres',
 								'spip_rubriques_crontabs')),
-		array('spip_lettres_update_meta',$version_plugin,$nom_meta_base_versio,$current_version,$version_cible),	
+		array('spip_lettres_update_meta',$version_plugin,$nom_meta_base_versio,$current_version,$version_cible),
 	);
 	$maj['3.1'] = array( 	
 		array('maj_tables',array('spip_lettres')),
-		array('spip_lettres_update_meta',$version_plugin,$nom_meta_base_versio,$current_version,$version_cible),	
+		array('spip_lettres_update_meta',$version_plugin,$nom_meta_base_versio,$current_version,$version_cible),
 	);
 	$maj['3.2'] = array(
 		array('spip_lettres_maj_index_elements_objet')
@@ -49,16 +49,16 @@ function lettres_upgrade($nom_meta_base_version,$version_cible){
 		array('spip_lettres_creer_repertoire_documents')
 	);
 	$maj['3.6'] = array(
-		array('spip_lettres_update_meta',$version_plugin,$nom_meta_base_versio,$current_version,$version_cible),		
+		array('spip_lettres_update_meta',$version_plugin,$nom_meta_base_versio,$current_version,$version_cible),
 	);
 	$maj['3.7'] = array(
-		array('maj_tables',array('spip_rubriques_crontabs')),		
+		array('maj_tables',array('spip_rubriques_crontabs')),
 	);
 	$maj['3.8'] = array(
 		array('maj_tables',array('spip_lettres')),
 		array('sql_alter',"TABLE spip_lettres DROP idx"),	
 		array('sql_drop_table',"spip_documents_lettres",true),
-		array('spip_lettres_update_meta',$version_plugin,$nom_meta_base_versio,$current_version,$version_cible),			
+		array('spip_lettres_update_meta',$version_plugin,$nom_meta_base_versio,$current_version,$version_cible),
 	);
 	$maj['4.0.0'] = array(
 		array('spip_lettres_update_fond'),
@@ -96,6 +96,7 @@ function lettres_upgrade($nom_meta_base_version,$version_cible){
 		array('maj_liens','auteur','lettre'),
 		array('sql_drop_table',"spip_auteurs_lettres"),
 	);
+
 	// Attention : cette maj ne gère pas le cas où d'autres tables que ABONNES ou AUTEURS 
 	// sont utilisées pour les abonnés
 	$maj['5.3'] = array(
@@ -104,7 +105,7 @@ function lettres_upgrade($nom_meta_base_version,$version_cible){
 		
 	$maj['5.4'] = array(
 		array ('sql_alter', "TABLE spip_abonnes CHANGE objet objet VARCHAR(255) NOT NULL DEFAULT 'abonne'"));
-			
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

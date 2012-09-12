@@ -39,7 +39,7 @@
 		};
 
 		// rubrique par défaut pour un nouvel abonné	
-		if ($_REQUEST['pardefaut']=='oui') {
+		if (_request('pardefaut') == 'oui') {
 			if (isset($_POST['supprimer'])) // pas d'abo par défaut
 				ecrire_meta('spip_lettres_abonnement_par_defaut', -1); 
 			else
@@ -82,7 +82,11 @@
 		
 		$themes = afficher_objets(
 			'theme', _T('lettresprive:themes_disponibles'), 
-			array('SELECT' => 'T.*, RUB.titre AS titre_rub', 'FROM' => 'spip_themes AS T LEFT JOIN spip_rubriques AS RUB ON RUB.id_rubrique=T.id_rubrique', 'ORDER BY' => 'T.titre'));
+			array(
+				'SELECT' => 'T.*, RUB.titre AS titre_rub',
+				'FROM' => 'spip_themes AS T LEFT JOIN spip_rubriques AS RUB ON RUB.id_rubrique=T.id_rubrique',
+				'WHERE' => '',
+				'ORDER BY' => 'T.titre'));
 		if ($themes) {
 			echo $themes;
 			echo '<br />';
@@ -97,7 +101,7 @@
 		
 	    echo '<p>';
 		// Ajout d'un message d'erreur (avec un style inline car ne n'est pas un CVT)
-		if (empty($_REQUEST['pardefaut']) and !empty($_POST['id_parent']) and empty($_POST['titre']))
+		if (!_request('pardefaut') and !empty($_POST['id_parent']) and empty($_POST['titre']))
 			echo '<span style="color:red;">'._T('info_obligatoire').'</span><br/>';
 		echo '<label for="titre">';
 		echo _T('lettresprive:titre').'</label>&nbsp;&nbsp;&nbsp;';

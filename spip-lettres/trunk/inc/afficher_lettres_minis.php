@@ -22,7 +22,7 @@
 		$tableau = array();
 		$args = array();
 		$presenter_liste = charger_fonction('presenter_liste', 'inc');
-		return $presenter_liste($requete, 'afficher_lettre_mini_boucle', $tableau, $args, $force, $styles, $tmp_var, $titre, _DIR_PLUGIN_LETTRES.'prive/images/lettre-24.png');
+		return $presenter_liste($requete, 'afficher_lettre_mini_boucle', $tableau, $args, false, $styles, $tmp_var, $titre, 'lettre-24.png');
 	}
 
 
@@ -43,7 +43,7 @@
 				break;
 		}
 
-		$s = "<a href='" . generer_url_ecrire("lettres","id_lettre=".$lettre->id_lettre) .
+		$s = "<a href='" . generer_url_ecrire("lettres_voir","id_lettre=".$lettre->id_lettre) .
 			"'$dir_lang style=\"display:block;\">";
 		$s.= typo($lettre->titre);
 		$s.= "</a>";
