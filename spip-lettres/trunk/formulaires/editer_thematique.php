@@ -16,12 +16,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function formulaires_editer_thematique_saisies($id_theme=0, $titre='', $id_rubrique=0, $expediteur_type='default', $expediteur_id=0, $retours_type='default', $retours_id=0){
 	
 	$types = array('default', 'webmaster', 'author', 'custom');
+	$id_rubrique = intval($id_rubrique);
 
 	if (!in_array($expediteur_type, $types))
 	{
 		if ($GLOBALS['meta']['spip_lettres_signe_par_auteurs'] == 'oui')
 			$expediteur_type = 'author';
-		else	
+		else
 			$expediteur_type = 'default';
 	}
 
@@ -33,7 +34,7 @@ function formulaires_editer_thematique_saisies($id_theme=0, $titre='', $id_rubri
 			'saisie' => 'hidden',
 			'options' => array(
 				'nom' => 'id_theme',
-				'defaut' => $id_theme
+				'defaut' => $id_theme,
 			)
 		),
 		array( // hors fieldset : champ titre  : ligne de texte
@@ -99,7 +100,7 @@ function formulaires_editer_thematique_saisies($id_theme=0, $titre='', $id_rubri
 						'option_intro' => _T('lettresprive:selectionner_auteur'),
 						'afficher_si' => '@retours_type@ == "custom"'
 					)
-				),
+				),/*
 				array( // champ id_rubrique : selecteur_rubrique
 					'saisie' => 'selecteur_rubrique',
 					'options' => array(
@@ -109,6 +110,20 @@ function formulaires_editer_thematique_saisies($id_theme=0, $titre='', $id_rubri
 						'explication' => _T('lettresprive:choix_rubrique'),
 						'afficher_rub_dans_langue_interface' => 'oui'
 					)
+				), */ // fin champ id_rubrique
+				array( // champ id_rubrique : selecteur_generique
+					'saisie' => 'selecteur',
+					'options' => array(
+						'nom' => 'rubrique',
+						'obligatoire' => 'oui',
+						'defaut' => 'rubrique|'.$id_rubrique,
+						'explication' => _T('lettresprive:choix_rubrique'),
+						'afficher_rub_dans_langue_interface' => 'oui',
+						'whitelist' => array('spip_rubriques'),
+						'objet' => 'rubrique',
+						'racine' => 'oui',
+						'multiple' => false
+					)
 				) // fin champ id_rubrique
 			) // fin 'saisies'
 		) // fin 'fieldset'
@@ -117,13 +132,16 @@ function formulaires_editer_thematique_saisies($id_theme=0, $titre='', $id_rubri
 	return $mes_saisies;
 }
 
-function formulaires_editer_thematique_traiter_dist(){
-	$res = array();
+
+function formulaires_editer_thematique_traiter_dist($id_theme=0, $titre='', $id_rubrique=0, $expediteur_type='default', $expediteur_id=0, $retours_type='default', $retours_id=0){
+
+	$res = array('editable' => true);
 	$aTypes = array('default','webmaster','author','custom');
 	
 	$id_theme = _request('id_theme');
-	$aRubrique = _request('id_rubrique');
-	$id_rubrique = str_replace('rubrique|', '', $aRubrique[0]);
+	$aRubrique = _request('rubrique');
+
+	$id_rubrique = $aRubrique ? str_replace('rubrique|', '', $aRubrique[0]) : 0;
 	$titre = _request('titre');
 	$expediteur_type = in_array( _request('expediteur_type'), $aTypes) ? _request('expediteur_type') : 'default';
 	$expediteur_id = 'custom'== $expediteur_type ? _request('expediteur_id') : 0;
