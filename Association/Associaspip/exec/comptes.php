@@ -85,9 +85,7 @@ function exec_comptes()
 		// FILTRES
 		$filtre_imputation = '<select name="imputation" onchange="form.submit()">';
 		$filtre_imputation .= '<option value="%" ';
-		if ($imputation=='%' || $imputation='') {
-			$filtre_imputation .= ' selected="selected"';
-		}
+		$filtre_imputation .= (($imputation=='%' || $imputation='')?' selected="selected"':'');
 		$filtre_imputation .= '>'. _T('asso:entete_tous') .'</option>';
 		$sql = sql_select(
 			'imputation , code, intitule, classe',
@@ -186,11 +184,11 @@ function comptes_while($where, $limit, $id_compte)
 		} else {  // operation non validee (donc validable et effacable...
 			if ( $data['id_journal'] && $data['imputation']!=$GLOBALS['association_metas']['pc_cotisations'] ) { // pas d'edition/suppression des operations gerees par un autre module (exepte les cotisations) ...par souci de coherence avec les donnees dupliquees dans d'autres tables...
 				$comptes .= '<td class="action" colspan="2">'. association_formater_puce('', 'rouge', '', $onload_option) .'</td>'; // edition+suppression
-			} else { // operation geree par ce module (donc supprimable ici)
+			} else { // operation geree par ce module
 				if (substr($data['imputation'],0,1)==$GLOBALS['association_metas']['classe_banques']) { // pas d'edition des virements internes (souci de coherence car il faut modifier deux operations concordament : ToDo...)
 					$comptes .= '<td class="action">&nbsp;</td>'; // edition
 				} else { // le reste est editable
-					$comptes .= '<td class="action">'. association_bouton_edit('compte', 'id='.$data['id_compte']); // edition
+					$comptes .= association_bouton_edit('compte', 'id='.$data['id_compte']); // edition
 				}
 				$comptes .= association_bouton_suppr('comptes', 'id='.$data['id_compte']); // suppression
 			}

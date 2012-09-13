@@ -100,7 +100,6 @@ rdm */
 			'id_ressource', // champ portant la cle des lignes et des boutons
 			$s_css, 'statut'
 		);
-		echo "</tbody>\n</table>\n";
 		fin_page_association();
 	}
 }

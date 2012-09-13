@@ -22,7 +22,7 @@ function exec_inscrits_activite()
 		echo minipres();
 	} else {
 		$id_evenement = intval(_request('id'));
-		onglets_association('titre_onglet_activite');
+		onglets_association('titre_onglet_activite', 'activites');
 		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement") ;
 		// INTRO : Rappel Infos Evenement
 		$format = 'association_formater_'. (($evenement['horaire']=='oui')?'heure':'date');

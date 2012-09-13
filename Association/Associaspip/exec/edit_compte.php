@@ -15,12 +15,6 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip ('inc/navigation_modules');
 
-function prefixPlugin_insert_head($flux){
-          $flux .= "<!-- un commentaire pour rien ! -->\n";
-          return $flux;
-}
-
-
 function exec_edit_compte()
 {
 	if (!autoriser('associer', 'comptes')) {

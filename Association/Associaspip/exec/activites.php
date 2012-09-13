@@ -66,11 +66,6 @@ function exec_activites()
 		}
 		debut_cadre_association('activites.gif','activite_titre_toutes_activites');
 		// FILTRES
-		echo '<form method="get" action="'. generer_url_ecrire('activites') .'">';
-		echo "\n<input type='hidden' name='exec' value='activites' />";
-		echo "\n<table width='100%' class='asso_tablo_filtres'><tr>";
-		echo '<td id="filtre_annee">'. association_selectionner_annee($annee, 'evenements', 'debut') .'</td>';
-		echo '<td id="filtre_id">'. association_selectionner_id($id_evenement) .'</td>';
 		if (test_plugin_actif('AGENDA')) { // le plugin "Agenda 2" peut associer des mots-cles aux evenements : les proposer comme critere de filtrage
 			if ($id_mot) {
 				$mc_sel = ', m.id_mot AS motact';
@@ -80,26 +75,31 @@ function exec_activites()
 			} else {
 				$mc_sel = $mc_join = $mc_where = '';
 			}
-			echo '<td id="filtre_mot">';
-			echo '<select name="mot" onchange="form.submit()">';
-			echo '<option value="">'._T('asso:entete_tous').'</option>';
+			$filtre_motscles = '<select name="mot" onchange="form.submit()">';
+			$filtre_motscles .= '<option value="">'._T('asso:entete_tous').'</option>';
 			$query_groupes = sql_select('id_groupe, titre', 'spip_groupes_mots', "tables_liees LIKE '%evenements%'");
 			while($data_groupes = sql_fetch($query_groupes)) {
-				echo '<optgroup label="'.$data_groupes['titre'].'">';
+				$filtre_motscles .= '<optgroup label="'.$data_groupes['titre'].'">';
 				$query_mots = sql_select('id_mot, titre', 'spip_mots', 'id_groupe='.$data_groupes['id_groupe']);
 				while($data_mots = sql_fetch($query_mots)) {
-					echo '<option value="'.$data_mots['id_mot'].'"';
+					$filtre_motscles .= '<option value="'.$data_mots['id_mot'].'"';
 					if ($id_mot==$data_mots['id_mot']) {
-						echo ' selected="selected"';
+						$filtre_motscles .= ' selected="selected"';
 					}
-					echo '> '.$data_mots['titre'].'</option>';
+					$filtre_motscles .= '> '.$data_mots['titre'].'</option>';
 				}
-				echo '</optgroup>';
+				$filtre_motscles .= '</optgroup>';
 			}
-			echo '</select></td>';
+			$filtre_motscles .= '</select></td>';
+		} else { // pas de mots cles...
+			$filtre_motscles = '';
 		}
-		echo '<noscript><td><input type="submit" value="'._T('asso:bouton_filtrer').'" /></td></noscript>';
-		echo '</tr></table></form>';
+		filtres_association(array(
+			'annee' => array($annee, 'evenements', 'debut'),
+#			'id' => $id_evenement,
+		), 'activites', array(
+			'mot' => $filtre_motscles,
+		));
 		//TABLEAU
 		echo association_bloc_listehtml(
 //			array('*, e.id_evenement, e.titre AS intitule'.$mc_sel, 'spip_evenements AS e'.$mc_join, "DATE_FORMAT(date_debut, '%Y')=$annee $mc_where", '', 'date_debut DESC', sql_asso1page() ), // requete

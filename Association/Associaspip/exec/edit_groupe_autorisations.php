@@ -26,7 +26,7 @@ function exec_edit_groupe_autorisations()
 		// INFO
 		$groupe = sql_fetsel('commentaires', 'spip_asso_groupes', "id_groupe=$id_groupe" );
 		$infos['commentaires'] = $groupe['commentaires'];
-		$infos['destination_entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe")) );
+		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe")) );
 		echo association_totauxinfos_intro(_T("asso:groupe_".$id_groupe), 'groupe', $id_groupe, $infos );
 		// datation et raccourcis
 		raccourcis_association('association_autorisations');

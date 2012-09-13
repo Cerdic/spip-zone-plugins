@@ -60,7 +60,7 @@ function exec_dons()
 		// FILTRES
 		filtres_association(array(
 			'annee' => array($annee, 'asso_dons', 'don'),
-			'id' => $id_don,
+#			'id' => $id_don,
 		), 'dons');
 		//TABLEAU
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_dons'>\n";
