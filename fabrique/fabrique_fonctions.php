@@ -456,7 +456,7 @@ function champ_option_presente($champ, $option) {
 	}
 
 	// editable, versionne, obligatoire
-	if (is_array($champ['caracteristiques'])) {
+	if (isset($champ['caracteristiques']) and is_array($champ['caracteristiques'])) {
 		if (in_array($option, $champ['caracteristiques'])) {
 			return " "; // true
 		}
