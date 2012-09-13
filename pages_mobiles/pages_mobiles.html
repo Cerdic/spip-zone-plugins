@@ -1,0 +1,16 @@
+[(#REM)
+
+
+	Inclu un sous squelette mobile passé en paramètre (squelette_mobile)
+	Et transmet le env à ce squelette
+
+	Cette inclusion est necessaire pour le plugin pages_mobiles
+	car on ne peut visiter page=sous-rep/objet (sauf quand on est admin)
+
+	Il y a une petite vérification du chemin passé en paramètre pour éviter
+	 qu'on essaie pas d'accéder n'importe où dans l'arborescence des squelettes
+	(on vérifie donc que le chemin correspond à la liste des répertoires autorisés)
+
+
+]
+<INCLURE{fond=#ENV{squelette_mobile}|pages_mobiles_verification_chemin|sinon{404}}{env} />
