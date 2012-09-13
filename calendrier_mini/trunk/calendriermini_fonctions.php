@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Balises et critères du calendrier mini
+ *
+ * @package SPIP\CalendrierMini\Fonctions
+**/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 if (!defined('VAR_DATE')) define('VAR_DATE', 'archives');

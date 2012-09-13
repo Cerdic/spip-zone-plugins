@@ -44,6 +44,7 @@ var minical = {
 
 	set_events: function(me,start,end,data){
 		var dates = [];
+
 		if (data.length){
 			var d,datebegin,dateend;
 			for(var j=0;j<data.length;j++){
@@ -51,12 +52,15 @@ var minical = {
 				d = d[0].split("-");
 				d = new Date(d[0],d[1]-1,d[2]);
 				dates.push(d);
+
 				if(data[j].end){
-					datebegin = d.getTime();
+					/* prendre la plus grande date de debut entre debut a afficher et l'interval donne */
+					datebegin = Math.max(start * 1000,d.getTime());
 					d = data[j].end.split(" ");
 					d = d[0].split("-");
 					d = new Date(d[0],d[1]-1,d[2]);
-					dateend = d.getTime();
+					/* prendre la plus petite date de fin entre fin a afficher et l'interval donne */
+					dateend = Math.min(end * 1000, d.getTime());
 					if (dateend>datebegin){
 						dates.push(d);
 						datebegin = datebegin+(3600*24*1000);
@@ -68,6 +72,7 @@ var minical = {
 					}
 				}
 			}
+
 			me.multiDatesPicker('addDates', dates);
 			// toujours retirer la classe active qui n'a pas de sens pour l'affichage
 			jQuery('.ui-state-active',me).removeClass('ui-state-active');
