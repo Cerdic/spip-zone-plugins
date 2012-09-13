@@ -4,6 +4,7 @@ table {
 }
 td.largeurcol{
 	vertical-align:top;
+    width:80px;
 }
 #premierjour {
 	border-top : 1px solid red ;
