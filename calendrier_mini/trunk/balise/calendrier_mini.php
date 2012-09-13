@@ -89,7 +89,7 @@ function balise_CALENDRIER_MINI_dyn($date, $id_rubrique = 0, $id_article = 0, $i
 			$args['id_mot'] = $id_mot;
 	}
 
-	if (_VAR_MODE=="recalcul")
+	if (defined('_VAR_MODE') and _VAR_MODE == "recalcul")
 		$url_json = parametre_url($url_json,'var_mode','recalcul');
 
 	$args['urljson'] = $url_json;
