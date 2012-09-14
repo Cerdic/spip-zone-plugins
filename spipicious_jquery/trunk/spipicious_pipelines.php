@@ -93,12 +93,14 @@ function spipicious_insert_head($flux){
 						delay: 200,
 						html: true,
 						select: function( event, ui ) {
+							console.log(this);
+							console.log(ui);
 							var terms = split_multiple( this.value );
 							// remove the current input
 							terms.pop();
 							// add the selected item
 							if (ui.item.result > 0) {
-								terms.push( ui.item.value );
+								terms.push( ui.item.label );
 							}else{
 								terms.push( ui.item.entry );
 							}
