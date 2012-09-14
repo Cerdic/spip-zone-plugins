@@ -5,7 +5,7 @@
 	   etat="test"
 	   compatibilite="[3.0.0-alpha2;3.0.*]"
 	   logo="img_pack/Translation-icon_32.png"
-	   documentation="http://www.spip-contrib.net/Traductions-de-rubriques-autrementt-3"
+	   documentation="http://contrib.spip.net/Traductions-de-rubriques-autrement-3"
 >	
 
 	<nom>Traductions de rubriques autrement</nom>
