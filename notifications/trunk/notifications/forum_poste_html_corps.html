@@ -20,6 +20,7 @@
 <a href="(#ENV{url}|url_absolue)">[(#ENV{url}|url_absolue)]</a>]
 </p>
 
+[(#ENV{url_moderer_publie}|ou{#ENV{url_moderer_off}}|ou{#ENV{url_moderer_spam}}|ou{#LIENS})
 <hr/>
 <h5><:notifications:titre_moderation:></h5>
 <div style="text-align:center;">
@@ -31,6 +32,7 @@
 <p><strong><:forum:info_liens_texte:>&nbsp;:</strong><br />
 (#LIENS)
 </p>
+]
 ]
 
 <br />
