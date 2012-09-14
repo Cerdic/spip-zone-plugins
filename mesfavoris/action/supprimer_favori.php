@@ -14,7 +14,7 @@ function action_supprimer_favori_dist(){
 
 	include_spip('inc/mesfavoris');
 	include_spip('inc/autoriser');
-	if(autoriser('modifier','mesfavoris',$id_favori))
+	if(autoriser('modifier','favori',$id_favori))
 		mesfavoris_supprimer(array('id_favori'=>$id_favori));
 }
 
