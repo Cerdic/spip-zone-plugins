@@ -383,12 +383,15 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 		}
 	}
 	// envoyer le mail maintenant
-	$corps = array(
-		'texte'=>$texte_final,
-		'repondre_a'=>$posteur['mail'],
-	);
+	if (!is_array($texte_final)) {
+		$texte_final = array(
+			'texte' => $texte_final
+		);
+	}
+	$texte_final['repondre_a'] = $posteur['mail'];
+
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
-	$envoyer_mail($mail, $posteur['sujet'], $corps , '', "X-Originating-IP: ".$GLOBALS['ip']);
+	$envoyer_mail($mail, $posteur['sujet'], $texte_final , '', "X-Originating-IP: ".$GLOBALS['ip']);
 
 	// Maintenant que tout a été envoyé ou enregistré, s'il y avait des PJ il faut supprimer les fichiers
 	if ($pj_enregistrees_nom != null) {
