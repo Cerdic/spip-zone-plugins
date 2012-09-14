@@ -25,8 +25,9 @@ function exec_prets()
 		onglets_association('titre_onglet_prets', 'ressources');
 		$ressource = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
 		$unite = $ressource['ud']?$ressource['ud']:'D';
-		$infos['ressources_libelle_code'] = $ressource['code'];
-		$infos['ressources_libelle_caution'] = association_formater_prix($ressource['prix_caution']);
+		$infos['ressources_libelle_code'] = association_formater_code($ressource['code'], 'x-spip_asso_ressources');
+		$infos['ressources_entete_montant'] = association_formater_prix($ressource['pu'], 'rent');
+		$infos['ressources_entete_caution'] = association_formater_prix($ressource['prix_caution'], 'guarantee');
 		if (is_numeric($ressource['statut'])) { // utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires)
 			if ($ressource['statut']>0) {
 				$puce = 'verte';
@@ -57,8 +58,8 @@ function exec_prets()
 			}
 			$type = $ressource['statut'];
 		}
-		$infos['statut'] = association_formater_puce("ressources_libelle_statut_$type", $puce);
-		echo association_totauxinfos_intro($ressource['intitule'], 'ressource', $id_ressource, $infos, 'asso', 'asso_ressource');
+		$infos['statut'] = '<span class="'.(is_numeric($data['statut'])?'quanttity':'availability').'">'. association_formater_puce($ressource['statut'], $puce, "ressources_libelle_statut_$type") .'</span>';
+		echo '<div class="hproduct">'. association_totauxinfos_intro('<span class="n">'.$ressource['intitule'].'</span>', 'ressource', $id_ressource, $infos, 'asso', 'asso_ressource') .'</div>';
 		// TOTAUX : nombres d'emprunts de la ressource depuis le debut
 		echo association_totauxinfos_effectifs('prets', array(
 			'pair' => array( 'prets_restitues', sql_countsel('spip_asso_prets', "id_ressource=$id_ressource AND date_retour>date_sortie"), ), // restitues, termines, anciens, ...
@@ -88,9 +89,8 @@ function exec_prets()
 			echo '<tr class="'.($data['date_retour']>$data['date_sortie']?'pair':'impair').'" id="'.$data['id_pret'].'">';
 			echo '<td class="integer">'.$data['id_pret'].'</td>';
 			echo '<td class="date">'. association_formater_date($data['date_sortie'], 'dtstart') .'</td>';
-			$id_emprunteur = intval($data['id_emprunteur']);
-			$auteur = sql_fetsel('*', 'spip_asso_membres', "id_auteur=$id_emprunteur");
-			echo '<td class="n">'.association_calculer_nom_membre($auteur['sexe'], $auteur['prenom'], $auteur['nom_famille'],'span');
+			$auteur = sql_fetsel('*', 'spip_asso_membres', "id_auteur=$data[id_emprunteur]");
+			echo '<td class="text">'.association_calculer_nom_membre($auteur['sexe'], $auteur['prenom'], $auteur['nom_famille'],'span');
 			echo '</td><td class="date">'.association_formater_duree($data['duree'],$unite) .'</td>';
 			echo '<td class="date">'. ($data['date_retour']<$data['date_sortie'] ? '&nbsp' : association_formater_date($data['date_retour'],'dtend') ) .'</td>';
 			echo association_bouton_suppr('pret', 'id_pret='.$data['id_pret'].'&id_ressource='.$id_ressource);

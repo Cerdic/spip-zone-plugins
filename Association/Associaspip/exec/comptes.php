@@ -179,11 +179,11 @@ function comptes_while($where, $limit, $id_compte)
 		. '<td class="decimal">'. association_formater_prix($data['recette']-$data['depense']) .'</td>'
 		. '<td class="text">&nbsp;'.$data['journal'].'</td>';
 		if ( $data['vu'] ) { // pas d'action sur les operations validees !
-			$comptes .= '<td class="action" colspan="2">'. association_formater_puce('', 'verte', '', $onload_option) .' </td>'; // edition+suppresion
+			$comptes .= '<td class="action" colspan="2">'. association_formater_puce($data['id_journal'], 'verte', '', $onload_option) .' </td>'; // edition+suppresion
 			$comptes .= association_bouton_coch(''); // validation
 		} else {  // operation non validee (donc validable et effacable...
 			if ( $data['id_journal'] && $data['imputation']!=$GLOBALS['association_metas']['pc_cotisations'] ) { // pas d'edition/suppression des operations gerees par un autre module (exepte les cotisations) ...par souci de coherence avec les donnees dupliquees dans d'autres tables...
-				$comptes .= '<td class="action" colspan="2">'. association_formater_puce('', 'rouge', '', $onload_option) .'</td>'; // edition+suppression
+				$comptes .= '<td class="action" colspan="2">'. association_formater_puce($data['id_journal'], 'rouge', '', $onload_option) .'</td>'; // edition+suppression
 			} else { // operation geree par ce module
 				if (substr($data['imputation'],0,1)==$GLOBALS['association_metas']['classe_banques']) { // pas d'edition des virements internes (souci de coherence car il faut modifier deux operations concordament : ToDo...)
 					$comptes .= '<td class="action">&nbsp;</td>'; // edition

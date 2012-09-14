@@ -35,17 +35,18 @@ function exec_categories()
 			array('*', 'spip_asso_categories', '', 'id_categorie'), // requete
 			array(
 				'id_categorie' => array('asso:entete_id', 'entier'),
-				'valeur' => array('asso:entete_code', 'texte'),
-				'libelle' => array('asso:libelle_intitule', 'texte'),
+				'valeur' => array('asso:entete_code', 'code', 'x-spip_asso_categories'),
+				'libelle' => array('asso:libelle_intitule', 'texte', '', '', 'n'),
 				'duree' => array('asso:entete_duree', 'duree', 'M'),
-				'cotisation' => array('asso:entete_montant', 'prix'),
+				'cotisation' => array('asso:entete_montant', 'prix', 'subscription'),
 				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),
 			), // entetes et formats des donnees
 			array(
 				array('suppr', 'categorie', 'id=$$' ),
 				array('edit', 'categorie', 'id=$$' ),
 			), // boutons d'action
-			'id_categorie' // champ portant la cle des lignes et des boutons
+			'id_categorie', // champ portant la cle des lignes et des boutons
+			array('hproduct')
 		);
 		fin_page_association();
 	}

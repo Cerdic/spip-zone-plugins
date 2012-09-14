@@ -25,9 +25,11 @@ function exec_suppr_ressource()
 		onglets_association('titre_onglet_prets', 'ressources');
 		// INTRO : resume ressource
 		$data = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
-		$infos['ressources_libelle_code'] = $data['code'];
-		$infos['ressources_libelle_caution'] = association_formater_prix($data['prix_caution']);
-		if (is_numeric($data['statut'])) { // utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires)
+		$infos['ressources_libelle_code'] = association_formater_code($data['code'], 'spip_asso_ressources');
+		$infos['ressources_entete_montant'] = association_formater_prix($data['pu'], 'rent');
+		$infos['ressources_libelle_unite'] = association_formater_duree(1, $data['ud']);
+		$infos['ressources_entete_caution'] = association_formater_prix($data['prix_caution'], 'guarantee');
+		if ( is_numeric($data['statut']) ) { // utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires)
 			if ($data['statut']>0) {
 				$puce = 'verte';
 				$type = 'ok';
@@ -57,9 +59,9 @@ function exec_suppr_ressource()
 			}
 			$type = $data['statut'];
 		}
-		$infos['statut'] =  '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-'.$puce.'.gif" title="'.$data['statut'].'" alt="" /> '. _T("asso:ressources_statut_$type");
-		$infos['ressource_pretee'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_prets', "id_ressource=$id_ressource"), ));
-		echo association_totauxinfos_intro($data['intitule'], 'ressource', $id_ressource, $infos ); // indice de popularite
+		$infos['statut'] = '<span class="'.(is_numeric($data['statut'])?'quanttity':'availability').'">'. association_formater_puce($data['statut'], $puce, "ressources_statut_$type") .'</span>';
+		$infos['ressource_pretee'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_prets', "id_ressource=$id_ressource"), )); // indice de popularite
+		echo '<div class="hproduct">'.  association_totauxinfos_intro('<span class="n">'.$data['intitule'].'</span>', 'ressource', $id_ressource, $infos ) .'</div>';
 		// STATS sur la duree et le montant des emprunts
 		echo association_totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree','entete_montant'=>'duree*prix_unitaire',), "id_ressource=$id_ressource");
 		// datation et raccourcis

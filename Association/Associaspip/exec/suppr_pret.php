@@ -24,41 +24,14 @@ function exec_suppr_pret()
 		$id_pret = intval(_request('id_pret'));
 		$id_ressource = intval(_request('id_ressource'));
 		onglets_association('titre_onglet_prets', 'ressources');
-		$data = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
-		$infos['ressources_libelle_code'] = $data['code'];
-		if (is_numeric($data['statut'])) { // utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires)
-			if ($data['statut']>0) {
-				$puce = 'verte';
-				$type = 'ok';
-			} elseif ($data['statut']<0) {
-				$puce = 'orange';
-				$type = 'suspendu';
-			} else {
-				$puce = 'rouge';
-				$type = 'reserve';
-			}
-		} else {
-			switch($data['statut']){ // utilisation des anciens 4+ statuts textuels (etat de reservation)
-				case 'ok':
-					$puce = 'verte';
-					break;
-				case 'reserve':
-					$puce = 'rouge';
-					break;
-				case 'suspendu':
-					$puce = 'orange';
-					break;
-				case 'sorti':
-				case '':
-				case NULL:
-					$puce = 'poubelle';
-					break;
-			}
-			$type = $data['statut'];
-		}
-		$infos['statut'] = association_formater_puce(_T("asso:ressource_statut_$type"), $puce, true);
-		$infos['nombre_prets'] = sql_countsel('spip_asso_prets', "id_ressource=$id_ressource");
-		echo association_totauxinfos_intro($data['intitule'], 'ressource', $id_ressource, $infos );
+		$pret = sql_fetsel('*', 'spip_asso_prets', "id_pret=$id_pret" ) ;
+		$ressource = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
+		$infos['entete_article'] = $ressource['intitule'];
+		$auteur = sql_fetsel('*', 'spip_asso_membres', "id_auteur=$pret[id_emprunteur]");
+		$infos['entete_nom'] = association_calculer_nom_membre($auteur['sexe'], $auteur['prenom'], $auteur['nom_famille'],'span');
+		$infos['prets_entete_date_sortie'] = association_formater_date($pret['date_sortie'],'dtstart');
+		$infos['prets_entete_date_retour'] = association_formater_date($pret['date_retour'],'dtend');
+		echo association_totauxinfos_intro('', 'pret', $id_pret, $infos );
 		// datation et raccourcis
 		raccourcis_association('');
 		debut_cadre_association('pret-24.gif', 'prets_titre_suppression_prets');

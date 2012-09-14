@@ -86,10 +86,10 @@ function exec_dons()
 			echo '<td class="integer">'.$data['id_don'].'</td>';
 			echo '<td class="date">'. association_formater_date($data['date_don']) .'</td>';
 			echo '<td class="text">'. association_calculer_lien_nomid($data['bienfaiteur'],$data['id_adherent']) .'</td>';
-			echo '<td class="decimal">'. association_formater_prix($data['argent']) .'</td>';
+			echo '<td class="decimal">'. association_formater_prix($data['argent'], 'donation cash') .'</td>';
 			echo '<td class="text" colspan="'.($data['vu']?2:1).'">'
-				.($data['vu'] ? '' :'<i>'._T('asso:valeur').': '.association_formater_prix($data['valeur']).'</i><br />')
-				.$data['colis'].'</td>';
+				.($data['vu'] ? '' :'<i>'._T('asso:valeur').': '.association_formater_prix($data['valeur'], 'donation estimated').'</i><p class="n">')
+				.$data['colis'].'</p></td>';
 			echo ($data['vu']
 				? ('<td class="text">&nbsp;</td>')
 			    : ('<td class="text">'. propre($data['contrepartie']) .'</td>')

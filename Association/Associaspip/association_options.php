@@ -200,32 +200,27 @@ function association_bouton_coch($champ, $valeur='', $plus='', $tag='td')
  *   Prenom(s)
  * @param string $nom
  *   Nom de famille
- * @param string $html_tag
+ * @param string $html_span
  *   Indique la balise-HTML (paire ouvrante/fermante) servant a grouper le
  *   resultat. Sa presence (rien par defaut) indique d'appliquer le micro-
  *   formatage du groupe.
  * @return string $res
  *   Chaine du nom complet du membre, micro-formate ou non.
  */
-function association_calculer_nom_membre($civilite, $prenom, $nom, $html_tag='')
+function association_calculer_nom_membre($civilite, $prenom, $nom, $html_span='')
 {
 	$res = '';
-	if ($html_tag) {
-		$res = '<'.$html_tag.' class="'. (($civilite || $prenom)?'n':'fn') .'">';
+	if ($html_span) {
+		$res = '<'.$html_span.' class="'. (($civilite || $prenom)?'n':'fn') .'">';
 	}
 	if ($GLOBALS['association_metas']['civilite'] && $civilite) {
-		$res .= ($html_tag?'<span class="honorific-prefix">':'') .$civilite. ($html_tag?'</span>':'') .' ';
+		$res .= ($html_span?'<span class="honorific-prefix">':'') .$civilite. ($html_span?'</span>':'') .' ';
 	}
 	if ($GLOBALS['association_metas']['prenom'] && $prenom) {
-		$res .= ($html_tag?'<span class="given-name">':'') .$prenom. ($html_tag?'</span>':'') .' ';
+		$res .= ($html_span?'<span class="given-name">':'') .$prenom. ($html_span?'</span>':'') .' ';
 	}
-	if ($nom) {
-		$res .= ($html_tag?'<span class="family-name">':'') .$nom. ($html_tag?'</span>':'') .' ';
-	}
-	if ($html_tag) {
-		$res .= '</'.$html_tag.'>';
-	}
-	return $res;
+	$res .= ($html_span?'<span class="family-name">':'') .$nom. ($html_span?'</span>':'') .' ';
+	return $res. ($html_span?"</$html_span>":'');
 }
 
 /**
@@ -244,27 +239,18 @@ function association_calculer_nom_membre($civilite, $prenom, $nom, $html_tag='')
  * @param string $type
  *   Raccourci utilise pour faire le lien
  *   Par defaut : "membre"
- * @param string $html_tag
+ * @param string $html_span
  *   Balise-HTML (paire ouvrante/fermante) encadrante
  * @return string $res
  *   Lien interne SPIP
  */
-function association_calculer_lien_nomid($nom, $id, $type='membre', $html_tag='')
+function association_calculer_lien_nomid($nom, $id, $type='membre', $html_span='')
 {
-	$res = '';
-	if ($html_tag) {
-		$res = '<'.$html_tag.' class="fn">';
-	}
-	if ($id) {
-		$res .= '[';
-	}
+	$res = ($html_span?"<$html_span class='fn'>":'');
+	$res .= ($id?'[':'');
 	$res .= $nom;
-	if ($id) {
-		$res .= "->$type$id]";
-	}
-	if ($html_tag) {
-		$res .= '</'.$html_tag.'>';
-	}
+	$res .= ($id?"->$type$id]":'');
+	$res .= ($html_span?"</$html_span>":'');
 	return propre($res);
 }
 
@@ -293,7 +279,7 @@ function association_calculer_lien_nomid($nom, $id, $type='membre', $html_tag=''
  *   Normalement : dtstart|dtend
  * @param string $format
  *   Indique le formatage de date souhaite (cf filtre affdate_<format>)
- * @param string $html_tag
+ * @param string $html_abbr
  *   Balise-HTML (paire ouvrante/fermante) encadrante
  *   Par defaut : "abbr"
  *   http://www.alsacreations.com/tuto/lire/1222-microformats-design-patterns.html#datetime-design-pattern
@@ -301,14 +287,13 @@ function association_calculer_lien_nomid($nom, $id, $type='membre', $html_tag=''
  * @return string $res
  *   Date formatee
  */
-function association_formater_date($iso_date, $css_class='', $format='entier', $htm_tag='abbr')
+function association_formater_date($iso_date, $css_class='', $format='entier', $html_abbr='abbr')
 {
 	$res = '';
-	if ( $html_tag )
-		$res = "<$html_tag ". ($css_class?"class='$css_class' ":'') ."title='$iso_date'>";
+	if ( $html_abbr )
+		$res = "<$html_abbr ". ($css_class?"class='$css_class' ":'') ."title='$iso_date'>";
 	$res .= affdate_base($iso_date, $format?$format:'entier'); // on fait appel a la fonction centrale des filtres SPIP... comme ca c'est traduit et formate dans les langues supportees ! si on prefere les mois en chiffres et non en lettre, y a qu'a changer les chaines de langue date_mois_XX
-	$res .= ($html_tag?"</$htm_tag>":'');
-	return $res;
+	return $res. ($html_abbr?"</$html_abbr>":'');
 }
 
 /**
@@ -374,7 +359,7 @@ function association_formater_nombre($nombre, $decimales=2, $l10n='')
  *   Noter qu'il est possible d'utiliser les equivalents francais : A|S|J
  *   Noter aussi qu'on peut avoir en prime T (horaire seule) ou I (date),
  *   et dans ce cas ce n'est un nombre entier qui est utilise mais une chaine du temps au format ISO
- * @param string $html_tag
+ * @param string $html_abbr
  *   Balise-HTML (paire ouvrante/fermante) encadrante
  *   Par defaut : "abbr" avec la classe "duration"
  *   http://www.alsacreations.com/tuto/lire/1222-microformats-design-patterns.html#abbr-design-pattern
@@ -384,10 +369,15 @@ function association_formater_nombre($nombre, $decimales=2, $l10n='')
  *
  * @note les cas de minutes/secondes doivent etre specifie comme des heures au format ISO...
  */
-function association_formater_duree($nombre, $unite='', $htm_tag='abbr')
+function association_formater_duree($nombre, $unite='', $html_abbr='abbr')
 {
 	$frmt_h = ''; // format human-readable
 	$frmt_m = 'P'; // format machine-parsable
+	if ( is_numeric($unite) ) { // inversion...
+		$pivot = $unite;
+		$unite = $nombre;
+		$nombre = $pivot;
+	}
 	switch(strtoupper($unite)) { // http://ufxtract.com/testsuite/documentation/iso-duration.htm
 		case 'Y' : // year
 		case 'A' : // annee
@@ -578,7 +568,7 @@ function association_formater_duree($nombre, $unite='', $htm_tag='abbr')
 	}
 	if (!$frmt_h)
 		$frmt_h = _T('asso:duree_temps', array('nombre'=>$valeur, 'unite'=>$unite) );
-	return $html_tag ? "<$htm_tag class='duration' title='". htmlspecialchars($frmt_m, ENT_QUOTES, $GLOBALS['meta']['charset']). "'>$frmt_h</$htm_tag>" : $frmt_h;
+	return $html_abbr ? "<$html_abbr class='duration' title='". htmlspecialchars($frmt_m, ENT_QUOTES, $GLOBALS['meta']['charset']). "'>$frmt_h</$html_abbr>" : $frmt_h;
 }
 
 /**
@@ -586,6 +576,8 @@ function association_formater_duree($nombre, $unite='', $htm_tag='abbr')
  *
  * @param float|int $montant
  *   Montant (valeur chiffree) correspondant au prix
+ * @param string $type
+ *   Nature du montant : non visible, est utilise comme classe semantique complementaire
  * @param string $devise_code
  *   Trigramme representant le code ISO-4217 de la devise
  *   http://fr.wikipedia.org/wiki/ISO_4217
@@ -600,7 +592,7 @@ function association_formater_duree($nombre, $unite='', $htm_tag='abbr')
  *   Desactiver (chaine vide) pour ne pas micro-formater
  * @param string $html_abbr
  *   Balise-HTML (paire ouvrante/fermante) encadrant chaque sous-partie
- *   Par defaut : "abbr" avec la classe "duration"
+ *   Par defaut : "abbr" avec les classes "amount" et "currency"
  * @return string $res
  *   Duree formatee
  *
@@ -608,12 +600,12 @@ function association_formater_duree($nombre, $unite='', $htm_tag='abbr')
  * sous Windows-- car on veut micro-formater avec une devise fixee par la
  * configuration (en fait les chaines de langue) du plugin
  */
-function association_formater_prix($montant, $devise_code='', $devise_symb='', $htm_span='span', $htm_abbr='abbr')
+function association_formater_prix($montant, $type='', $devise_code='', $devise_symb='', $html_abbr='abbr', $html_span='span')
 {
 	$res = '';
 	if ($html_span)
-		$res .= "<$htm_span class='money price'>"; // pour la reference est "price" <http://microformats.org/wiki/hproduct> (reconnu par les moteurs de recherche), mais "money" <http://microformats.org/wiki/currency-brainstorming> est d'usage courant aussi
-	$montant = ($html_abbr?"<$htm_abbr class='amount' title='$montant'>":'') . association_formater_nombre($montant) . ($html_abbr?"</$htm_abbr>":'');
+		$res .= "<$html_span class='money price $type'>"; // la reference est "price" <http://microformats.org/wiki/hproduct> (reconnu par les moteurs de recherche), mais "money" <http://microformats.org/wiki/currency-brainstorming> est d'usage courant aussi
+	$montant = ($html_abbr?"<$html_abbr class='amount' title='$montant'>":'') . association_formater_nombre($montant) . ($html_abbr?"</$html_abbr>":'');
 	if ( !$devise_code ) {
 		$devise_code = _T('asso:devise_code_iso');
 		if ( !$devise_code )
@@ -626,9 +618,9 @@ function association_formater_prix($montant, $devise_code='', $devise_symb='', $
 		else
 			$devise_symb = $devise_code;
 	}
-	$devise = ($html_abbr ? "<$htm_abbr class='currency' title='". htmlspecialchars($devise_code, ENT_QUOTES, $GLOBALS['meta']['charset']) .'\'>' : '') . $devise_symb . ($html_abbr?"</$htm_abbr>" :'');
+	$devise = ($html_abbr ? "<$html_abbr class='currency' title='". htmlspecialchars($devise_code, ENT_QUOTES, $GLOBALS['meta']['charset']) .'\'>' : '') . $devise_symb . ($html_abbr?"</$html_abbr>" :'');
 	$res .= _T('asso:devise_montant', array('montant'=>$montant, 'devise'=>$devise) );
-	return $html_span ? "$res</$htm_span>" : $res;
+	return $html_span ? "$res</$html_span>" : $res;
 }
 
 /**
@@ -640,18 +632,29 @@ function association_formater_prix($montant, $devise_code='', $devise_symb='', $
  *   Filtre SPIP a appliquer au texte
  * @param array $params
  *   Liste des parametres du filtre
+ * @param string $html_span
+ *   Balise-HTML (paire ouvrante/fermante) encadrante
+ * @param string $css_class
+ *   Classe(s) CSS (separees par un espace) a rajouter
+ *   N'est (ne sont) prise(nt) en compte que si un tag-HTML est specifie
  * @return string $res
  *   Texte formate
  * @note
  *   http://spipistrelle.clinamen.org/spip.php?article16
  */
-function association_formater_texte($texte, $filtre='', $params=array() )
+function association_formater_texte($texte, $filtre='', $params=array(), $css_class='', $html_span='' )
 {
+	$res = '';
+	if ( $css_class && !$html_span )
+		$html_span = 'span';
+	if ( $html_span )
+		$res = "<$html_span". ($css_class?" class='$css_class' ":'') .'>';
 	include_spip('inc/texte'); // pour nettoyer_raccourci_typo
 	if ( !is_array($params) )
 		$params = array($params);
 	$ok = array_unshift($params, $texte);
-	return $filtre?call_user_func_array($filtre, $params):$texte;
+	$res .= $filtre?call_user_func_array($filtre, $params):$texte;
+	return $res. ($html_span?"</$html_span>":'');
 }
 
 /**
@@ -663,7 +666,7 @@ function association_formater_texte($texte, $filtre='', $params=array() )
  *   Nom (couleur) de la puce parmis celles disponibles : orange, rouge, vert, poubelle...
  *   Tableau associant chaque statut a un nom de puce...
  * @param bool $acote
- *   Indique si la legende est placee a cote de l'icone (vrai, par defaut) ou dedans (faux)
+ *   Legende placee a cote de l'icone
  * @return string
  *   Dessin et texte
  */
@@ -671,7 +674,7 @@ function association_formater_puce($statut, $icone,  $acote=TRUE, $img_attrs='')
 {
 	if ( is_array($icone) )
 		$icone = $icone[$statut];
-	return $acote ? association_bouton_act('', 'puce-'.$icone.'.gif', '', '', $img_attrs, '').' '._T("asso:$statut") : association_bouton_act($statut, 'puce-'.$icone.'.gif', '', '', $img_attrs, '') ; // c'est comme un bouton... sans action/lien...
+	return association_bouton_act($statut, 'puce-'.$icone.'.gif', '', '', $img_attrs, '').' '._T("asso:$acote") ; // c'est comme un bouton... sans action/lien...
 }
 
 /**
@@ -683,7 +686,7 @@ function association_formater_puce($statut, $icone,  $acote=TRUE, $img_attrs='')
  * @param string $css_class
  *   Classe(s) CSS (separees par un espace) a rajouter
  *   Normalement : dtstart|dtend
- * @param string $html_tag
+ * @param string $html_abbr
  *   Balise-HTML (paire ouvrante/fermante) encadrante
  *   Par defaut : "abbr"
  *   http://www.alsacreations.com/tuto/lire/1222-microformats-design-patterns.html#datetime-design-pattern
@@ -691,14 +694,42 @@ function association_formater_puce($statut, $icone,  $acote=TRUE, $img_attrs='')
  * @return string $res
  *   Date formatee
  */
-function association_formater_heure($iso_date, $css_class='', $htm_tag='abbr')
+function association_formater_heure($iso_date, $css_class='', $html_abbr='abbr')
 {
 	$res = '';
-	if ( $html_tag )
-		$res = "<$html_tag ". ($css_class?"class='$css_class' ":'') ."title='$iso_date'>";
+	if ( $html_abbr )
+		$res = "<$html_abbr ". ($css_class?"class='$css_class' ":'') ."title='$iso_date'>";
 	$res .= affdate_heure($iso_date); // on fait appel a la fonction centrale des filtres SPIP... comme ca c'est traduit et formate dans les langues supportees ! si on prefere les mois en chiffres et non en lettre, y a qu'a changer les chaines de langue date_mois_XX
-	$res .= ($html_tag?"</$htm_tag>":'');
-	return $res;
+	return $res . ($html_abbr?"</$html_abbr>":'');
+}
+
+/**
+ * Affichage d'un caracteristique ou d'un code
+ *
+ * @param string $code
+ *   La valeur de la caracteristique
+ * @param string|array $type
+ *   Le type de caracteristique, non affiche (utilise comme classe CSS)
+ *   L'affichage a effectuer indice par le type de caracteristique
+ * @param bool $p_v
+ *   Indique s'il s'agit d'un numero de serie (faux) ou d'un autre genre de parametre (vrai)
+ * @param string $html_span
+ *   Balise-HTML (paire ouvrante/fermante) encadrante
+ *   Par defaut "span"
+ * @return string $res
+ *   Texte formate
+ * @note
+ *   http://microformats.org/wiki/hproduct-proposal#Schema
+ */
+function association_formater_code($code, $type='x-associaspip', $p_v=TRUE, $html_span='span' )
+{
+	$res = $html_span  ? ("<$html_span class='". ($p_v?'p-v':'identifier') ."'>") : '';
+	if ( is_string($type) ) { // label implied
+		$res .= "<span class='". ($p_v?'property':'type') ."$type title='$type'>$code</span>";
+	} else { // label explicit
+		$res .= "<abbr class='". ($p_v?'property':'type') ."' title='$type'>$type</abbr> <span class='value'>$code</span>";
+	}
+	return $res. ($html_span?"</$html_span>":'');
 }
 
 /** @} */

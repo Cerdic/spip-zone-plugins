@@ -29,7 +29,22 @@ function exec_groupes()
 			'ajouter_un_groupe' => array('annonce.gif', 'edit_groupe'),
 		));
 		debut_cadre_association('annonce.gif', 'tous_les_groupes');
-		echo recuperer_fond('prive/contenu/voir_groupes', array ());
+		// affichage du tableau
+		echo association_bloc_listehtml(
+			array('*', 'spip_asso_groupes', 'id_groupe>=100','',  'nom'), // requete
+			array(
+#				'id_groupe' => array('asso:entete_id', 'entier'),
+				'nom' => array('asso:entete_nom', 'texte'),
+				'commentaires' => array('asso:entete_commentaires', 'texte'),
+				'affichage' => array('asso:ordre_affichage_groupe', 'entier'),
+			), // entetes et formats des donnees
+			array(
+				array('suppr', 'groupe', 'id=$$'),
+				array('edit', 'groupe', 'id=$$'),
+				array('act', 'voir_groupe', 'voir-12.png', 'membres_groupe', 'id=$$'),
+			), // boutons d'action
+			'id_groupe' // champ portant la cle des lignes et des boutons
+		);
 		fin_page_association();
 	}
 }

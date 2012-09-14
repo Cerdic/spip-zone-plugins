@@ -103,13 +103,13 @@ function exec_activites()
 		//TABLEAU
 		echo association_bloc_listehtml(
 //			array('*, e.id_evenement, e.titre AS intitule'.$mc_sel, 'spip_evenements AS e'.$mc_join, "DATE_FORMAT(date_debut, '%Y')=$annee $mc_where", '', 'date_debut DESC', sql_asso1page() ), // requete
-			array("e.id_evenement, e.date_debut, e.date_fin, e.titre  AS intitule, e.lieu,  COUNT(a.id_activite)+SUM(a.inscrits) as personnes, SUM(a.montant) as montants, CASE SUM(a.inscrits) WHEN 0 THEN 'sans' ELSE 'avec' END invites $mc_sel", "spip_evenements AS e LEFT JOIN spip_asso_activites AS a ON e.id_evenement=a.id_evenement $mc_join", "DATE_FORMAT(date_debut, '%Y')=$annee $mc_where", 'e.id_evenement', 'date_debut DESC, date_fin DESC', sql_asso1page() ), // requete
+			array("e.id_evenement, e.date_debut, e.date_fin, e.titre  AS intitule, e.lieu,  COUNT(a.id_activite)+SUM(a.inscrits) as personnes, SUM(a.montant) as montants, CASE WHEN SUM(a.inscrits)=0 THEN 'sans' ELSE 'avec' END invites $mc_sel", "spip_evenements AS e LEFT JOIN spip_asso_activites AS a ON e.id_evenement=a.id_evenement $mc_join", "DATE_FORMAT(date_debut, '%Y')=$annee $mc_where", 'e.id_evenement', 'date_debut DESC, date_fin DESC', sql_asso1page() ), // requete
 			array(
 				'id_evenement' => array('asso:entete_id', 'entier'),
 				'date_debut' => array('agenda:evenement_date_du', 'date', 'dtstart'),
 				'date_fin' => array('agenda:evenement_date_au', 'date', 'dtend'),
-				'intitule' => array('asso:entete_intitule', 'texte'),
-				'lieu' => array('agenda:evenement_lieu', 'texte'),
+				'intitule' => array('asso:entete_intitule', 'texte', '', '', 'summary'),
+				'lieu' => array('agenda:evenement_lieu', 'texte', '', '', 'location'),
 				'personnes' => array('asso:activite_entete_inscrits', 'entier'),
 				'montants' => array('asso:entete_montant', 'prix'),
 			), // entetes et formats des donnees
@@ -118,7 +118,7 @@ function exec_activites()
 				array('act', 'activite_bouton_voir_liste_inscriptions', 'voir-12.png', 'inscrits_activite', 'id=$$'),
 			), // boutons d'action
 			'id_evenement', // champ portant la cle des lignes et des boutons
-			array('sans'=>'pair', 'avec'=>'impair'), 'invites', $id_evenement
+			array('sans'=>'pair vevent', 'avec vevent'=>'impair'), 'invites', $id_evenement
 		);
 		//SOUS-PAGINATION
 		echo "<table width='100%' class='asso_tablo_filtres'><tr>\n";

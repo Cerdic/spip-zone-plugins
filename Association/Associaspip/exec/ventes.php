@@ -75,21 +75,21 @@ function exec_ventes()
 		echo "</tr>\n</thead><tbody>";
 		$query = sql_select('*', 'spip_asso_ventes', "DATE_FORMAT(date_vente, '%Y')=$annee", '',  'id_vente DESC') ;
 		while ($data = sql_fetch($query)) {
-			echo '<tr class="'. ($data['date_envoi']<$data['date_vente']?'pair':'impair') . (($id_vente==$data['id_vente'])?' surligne':'') .'" id="'.$data['id_vente'].'">';
+			echo '<tr class="'. ($data['date_envoi']<$data['date_vente']?'pair':'impair') . (($id_vente==$data['id_vente'])?' surligne':'') .'" id="'.$data['id_vente'].' hproduct" rel="purchase">';
 			echo '<td class="integer">'.$data['id_vente'].'</td>';
 			echo '<td class="date">'. association_formater_date($data['date_vente'],'dtstart') .'</td>';
-			echo '<td class="text">'
-				. (test_plugin_actif('CATALOGUE') && (intval($data['article'])==$data['article'])
+			echo '<td class="text"><span class="n">'
+				. (test_plugin_actif('CATALOGUE') && (is_numeric($data['article']))
 					? association_calculer_lien_nomid('',$data['article'],'article')
 					: propre($data['article'])
-				) .'</td>';
-			echo '<td class="texte">'.$data['code'].'</td>';
+				) .'</span></td>';
+			echo '<td class="texte">'. association_formater_code($data['code'], 'x-spip_asso_ventes') .'</td>';
 			echo '<td class="text">'. association_calculer_lien_nomid($data['acheteur'],$data['id_acheteur']) .'</td>';
-			echo '<td class="decimal">'.$data['quantite'].'</td>';
+			echo '<td class="decimal quantity">'. association_formater_nombre($data['quantite']) .'</td>';
 			echo '<td class="decimal">'
-			. association_formater_prix($data['quantite']*$data['prix_vente']).'</td>';
+			. association_formater_prix($data['quantite']*$data['prix_vente'], 'purchase cost offer').'</td>';
 			echo association_bouton_suppr('vente', 'id='.$data['id_vente']);
-			echo '<td class="action">'. association_bouton_edit('vente','id='.$data['id_vente']);
+			echo association_bouton_edit('vente','id='.$data['id_vente']);
 			echo "</tr>\n";
 		}
 		echo "</tbody>\n</table>\n";

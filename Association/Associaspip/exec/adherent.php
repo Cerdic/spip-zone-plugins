@@ -58,7 +58,6 @@ function exec_adherent(){
 		// datation et raccourcis
 		if ($full)
 			$res['adherent_label_modifier_membre'] = array('edit-24.gif', 'edit_adherent', "id=$id_auteur");
-		include_spip('inc/texte'); // pour nettoyer_raccourci_typo
 		$res["adherent_label_modifier_$statut"] = array('membre_infos.png', 'auteur_infos', "id_auteur=$id_auteur");
 		raccourcis_association('', $res);
 		debut_cadre_association('annonce.gif', 'membre', $nom_membre);

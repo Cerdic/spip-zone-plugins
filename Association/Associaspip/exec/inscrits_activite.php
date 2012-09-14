@@ -28,8 +28,8 @@ function exec_inscrits_activite()
 		$format = 'association_formater_'. (($evenement['horaire']=='oui')?'heure':'date');
 		$infos['evenement_date_du'] = $format($evenement['date_debut'],'dtstart');
 		$infos['evenement_date_au'] = $format($evenement['date_fin'],'dtend');
-		$infos['evenement_lieu'] = $evenement['lieu'];
-		echo association_totauxinfos_intro($evenement['titre'], 'evenement', $id_evenement, $infos, 'agenda', 'evenement');
+		$infos['evenement_lieu'] = '<span class="location">'.$evenement['lieu'].'</span>';
+		echo '<div class="vevent">'. association_totauxinfos_intro('<span class="summary">'.$evenement['titre'].'</span>', 'evenement', $id_evenement, $infos, 'agenda', 'evenement') .'</div>';
 		// STATS sur les participations (nombre de personnes inscrites et montant paye)
 		echo association_totauxinfos_stats('participations', 'activites', array('activite_entete_inscrits'=>'inscrits','entete_montant'=>'montant',), "id_evenement=$id_evenement");
 		// TOTAUX : nombres d'inscrits par etat de paiement

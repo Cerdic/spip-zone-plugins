@@ -26,10 +26,10 @@ function exec_ressources()
 		echo '<p>'._T('asso:ressources_info').'</p>';
 		// TOTAUX : nombre de ressources par statut
 		echo association_totauxinfos_effectifs('ressources', array(
-			'valide' => array( association_formater_puce('ressources_libelle_statut_ok', 'verte'), sql_countsel('spip_asso_ressources', "statut='ok' OR ROUND(statut,0)>0"), ),
-			'prospect' => array( association_formater_puce('ressources_libelle_statut_suspendu', 'orange'), sql_countsel('spip_asso_ressources', "statut='suspendu' OR ROUND(statut,0)<0"), ),
-			'cv' => array( association_formater_puce('ressources_libelle_statut_reserve', 'rouge'), sql_countsel('spip_asso_ressources', "statut IN ('reserve',0)"), ),
-			'sorti' => array( association_formater_puce('ressources_libelle_statut_sorti', 'poubelle'), sql_countsel('spip_asso_ressources', "statut IN ('sorti','',NULL)"), ),
+			'valide' => array( association_formater_puce('', 'verte', 'ressources_libelle_statut_ok'), sql_countsel('spip_asso_ressources', "statut='ok' OR ROUND(statut,0)>0"), ),
+			'prospect' => array( association_formater_puce('', 'orange', 'ressources_libelle_statut_suspendu'), sql_countsel('spip_asso_ressources', "statut='suspendu' OR ROUND(statut,0)<0"), ),
+			'cv' => array( association_formater_puce('', 'rouge', 'ressources_libelle_statut_reserve'), sql_countsel('spip_asso_ressources', "statut IN ('reserve',0)"), ),
+			'sorti' => array( association_formater_puce('', 'poubelle', 'ressources_libelle_statut_sorti'), sql_countsel('spip_asso_ressources', "statut IN ('sorti','',NULL)"), ),
 		));
 /* mdr : cela n'a de sens que si les ressources se pretent toutes sur la meme unite...
 		// STATS sur tous les prets
@@ -51,32 +51,32 @@ rdm */
 			if (is_numeric($data['statut'])) { // utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires)
 				if ($data['statut']>0) { // ex: 'ok' (disponible ou libre)
 					$s_ico[$data['statut']] = 'verte';
-					$s_css[$data['statut']] = 'valide';
+					$s_css[$data['statut']] = 'valide hproduct';
 				} elseif ($data['statut']<0) { // ex: 'suspendu' (plus en pret)
 					$s_ico[$data['statut']] = 'orange';
-					$s_css[$data['statut']] = 'prospect';
+					$s_css[$data['statut']] = 'prospect hproduct';
 				} else { // ex: 'reserve' (temporairement indisponible)
 					$s_ico[$data['statut']] = 'rouge';
-					$s_css[$data['statut']] = 'cv';
+					$s_css[$data['statut']] = 'cv hproduct';
 				}
 			} else switch($data['statut']){ // utilisation des anciens 4+ statuts textuels (etat de reservation)
 				case 'ok':
 					$s_ico[$data['statut']] = 'verte';
-					$s_css[$data['statut']] = 'valide';
+					$s_css[$data['statut']] = 'valide hproduct';
 					break;
 				case 'reserve':
 					$s_ico[$data['statut']] = 'rouge';
-					$s_css[$data['statut']] = 'cv';
+					$s_css[$data['statut']] = 'cv hproduct';
 					break;
 				case 'suspendu':
 					$s_ico[$data['statut']] = 'orange';
-					$s_css[$data['statut']] = 'prospect';
+					$s_css[$data['statut']] = 'prospect hproduct';
 					break;
 				case 'sorti':
 				case '':
 				case NULL:
 					$s_ico[$data['statut']] = 'poubelle';
-					$s_css[$data['statut']] = 'sorti';
+					$s_css[$data['statut']] = 'sorti hproduct';
 					break;
 			}
 		}
@@ -85,12 +85,12 @@ rdm */
 			array('*', 'spip_asso_ressources', '','',  'id_ressource'), // requete
 			array(
 				'id_ressource' => array('asso:entete_id', 'entier'),
-				'statut' => array('', 'puce', $s_ico, false),
-				'intitule' => array('asso:entete_article', 'texte'),
-				'code' => array('asso:entete_code', 'texte'),
-				'pu' => array('asso:ressources_entete_montant', 'prix'),
-//				'ud' => array('asso:entete_code', 'duree', 'M'), // '<td class="decimal">'.association_formater_prix($data['pu']).' / '.association_formater_duree(1,$data['ud']).'</td>'
-				'prix_caution' => array('asso:ressources_entete_caution', 'prix'),
+				'statut' => array('', 'puce', $s_ico, ''), // quantity? availability?
+				'intitule' => array('asso:entete_article', 'texte', '', '', 'n'),
+				'code' => array('asso:entete_code', 'code', 'x-spip_asso_ressources'),
+				'pu' => array('asso:ressources_entete_montant', 'prix', 'rent'),
+				'ud' => array('asso:entete_duree', 'duree', 1),
+				'prix_caution' => array('asso:ressources_entete_caution', 'prix', 'guarantee'),
 			), // entetes et formats des donnees
 			array(
 				array('suppr', 'ressource', 'id=$$'),
