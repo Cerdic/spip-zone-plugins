@@ -209,7 +209,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 		$meta = table_valeur($D, 'meta');
 		$prefix = $D['prefix'];
 		$version = $D['version'];
-		$version_base = $D['schema'];
+		$version_base = table_valeur($D, 'schema');
 		$compatible =  bornes2intervalle(intervalle2bornes($D['compatibilite_paquet']));
 
 		$attributs =
@@ -227,8 +227,8 @@ function plugin2balise($D, $balise, $balises_spip='') {
 		$nom = plugin2balise_nom($D['nom']);
 		list($commentaire, $descriptions) = plugin2balise_commentaire($D['nom'], $D['description'], $D['slogan'], $D['prefix']);
 	
-		$auteur = plugin2balise_copy($D['auteur'][0], 'auteur');
-		$licence = plugin2balise_copy($D['licence'][0], 'licence');
+		$auteur = plugin2balise_copy(table_valeur($D, 'auteur/0'), 'auteur');
+		$licence = plugin2balise_copy(table_valeur($D, 'licence/0'), 'licence');
 		$traduire = is_array($D['traduire']) ? plugin2balise_traduire($D) :'';
 	}
 	else {
@@ -526,7 +526,8 @@ function plugin2balise_exec($D, $balise) {
 // options -> $prefix_options, 
 // install -> $prefix_administrations
 function plugin2balise_implicite($D, $balise, $nom) {
-	$files = is_array($D[$balise]) ? $D[$balise] : array($D[$balise]);
+	if (!isset($D[$balise])) $files = array();
+	else $files = is_array($D[$balise]) ? $D[$balise] : array($D[$balise]);
 	$contenu = join(' ', array_map('trim', $files));
 	$std = strtolower($D['prefix']) . "_$nom" . '.php';
 	
