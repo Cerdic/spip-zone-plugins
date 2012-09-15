@@ -10,6 +10,7 @@
 <nom>TimePicker</nom>
 <auteur>tofulm</auteur>
     <pipeline nom="insert_head_css" inclure="timepicker_pipelines.php" />
+    <pipeline nom="insert_head" inclure="timepicker_pipelines.php" />
     <pipeline nom="jquery_plugins" inclure="timepicker_pipelines.php" />
     <pipeline nom="jqueryui_plugins" inclure="timepicker_pipelines.php" />
 </paquet>

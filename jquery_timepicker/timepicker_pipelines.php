@@ -11,6 +11,26 @@ function timepicker_insert_head_css($flux){
 }
 
 /**
+ * insertion du js pour timepicker
+ **/
+function timepicker_insert_head($flux){
+    $flux .= <<<EOF
+    <script type="text/javascript">
+    $(document).ready(function(){
+        jQuery(".datetimepicker").datetimepicker({
+            addSliderAccess: true,
+            sliderAccessArgs: { touchonly: false }
+        });
+        jQuery(".timepicker").timepicker({
+            addSliderAccess: true,
+            sliderAccessArgs: { touchonly: false }
+        });
+    });
+    </script>
+EOF;
+    return $flux;
+}
+/**
  * insertion des scripts du timepickers ui
  **/
 function timepicker_jquery_plugins($scripts){
