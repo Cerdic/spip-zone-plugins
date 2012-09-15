@@ -24,20 +24,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 	function pages_mobiles_detecter_mobile() {
 
-	// Par défaut c'est web...
-	$pages_mobiles = "web";
+	// Par défaut c'est vide...
+	$pages_mobiles = '';
 
 
 	// Le parametre d'URL pages_mobiles est-il present ?
 	// On peut forcer l'affichage du site web classique et inversement retourner a la vue non classique
-	$pages_mobiles = isset($_GET['pages_mobiles']) ? $_GET['pages_mobiles'] : 'web';
+	$pages_mobiles = isset($_GET['pages_mobiles']) ? $_GET['pages_mobiles'] : '';
 
 
 	
 	// Sinon un cookie de squelette est-il present ?
-	if (!$pages_mobiles)
-		$pages_mobiles = isset($_COOKIE['pages_mobiles']) ? $_COOKIE['pages_mobiles'] : 'web';
-
+	if (!$pages_mobiles) {
+		$pages_mobiles = isset($_COOKIE['pages_mobiles']) ? $_COOKIE['pages_mobiles'] : '';
+	}
 	// détection du mobile
 	if (!$pages_mobiles) {
 
@@ -46,12 +46,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 		// Cas d'un desktop (pour eviter des tests inutiles)
 		if (strpos($user_agent,'firefox')!==false AND strpos($user_agent,'fennec')===false) {
 			// firefox (sauf version mobile)
-			return $pages_mobiles;
+			$pages_mobiles = 'web';
 		} elseif (strpos($user_agent,'msie')!==false AND strpos($user_agent,'windows ce')===false AND strpos($user_agent,'iemobile')===false) {
 			// internet explorer (sauf version mobile)
-			return $pages_mobiles;
+			$pages_mobiles = 'web';
 		}
-		
 		// Tableau des mobiles individualises (smartphones et tablettes)
 		// expression reguliere sur le user agent => nom du mobile
 		$mobiles = pages_mobiles_types_mobiles();
@@ -67,7 +66,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 		
 
 		// Les autres cas
-		if ($pages_mobiles !== 'web') {
+		if (!$pages_mobiles) {
 			$httpaccept = isset($_SERVER['HTTP_ACCEPT'])?strtolower($_SERVER['HTTP_ACCEPT']):'';
 			$user_agent_4car = substr($user_agent,0,4);
 			
@@ -95,13 +94,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 				spip_setcookie('pages_mobiles', $pages_mobiles);
 			}
 
-		} else {
-			$pages_mobiles = 'web';
 		}
 	}
 
-
-	return $pages_mobiles;
+// si ce n'était pas un mobile (ou n'avait pas le cookie ou l'URL), c'est web...
+	return ($pages_mobiles ? $pages_mobiles : 'web');
 
 }
 
@@ -163,47 +160,53 @@ $url_decodee = urls_decoder_url($GLOBALS['REQUEST_URI']);
 // urls_decoder_url() retourne le type de page et le contexte
 $contexte = $url_decodee[1];
 $type_page = $url_decodee[0];
+// soit le type de page est déterminé par l'objet demandé, soit par page
+$type_page = $type_page ? $type_page : $_GET[page];
 
-// Pas de type de page alors c'est le sommaire
-if (!$type_page) $type_page = "sommaire";
+// si on est pas déjà en train de rediriger vers les pages mobiles
+if ($type_page!="pages_mobiles") {
 
-// on identifie le type de navigation
-$type_mobile = pages_mobiles_detecter_mobile();
+	// Pas de type de page alors c'est le sommaire
+	if (!$type_page) $type_page = "sommaire";
 
-// Si ce n'est pas web
-if ($type_mobile !== 'web') {
+	// on identifie le type de navigation
+	$type_mobile = pages_mobiles_detecter_mobile();
 
-	// Par défaut on cherche le squelette mobile de l'objet
-	// dans un sous repertoire nommé comme type de mobile renvoyé par la detection
-	// ex. iphone/article.html
-	// 
-	// Voir la fonction pages_mobiles_detecter_mobile() pour les différents types.
-	// Idem pour le groupe de mobile (voir pages_mobiles_groupes_mobiles())
-	//
-	// S'il n'y a pas le squelette de l'objet dans le repertoire specifique de ce type ou du groupe,
-	// c'est le repertoire "mobile" qui est choisi
-	// ex. mobile/rubrique.html
+	// Si ce n'est pas web
+	if ($type_mobile !== 'web') {
 
-	$chemin_mobile = $type_mobile."/".$type_page;
+		// Par défaut on cherche le squelette mobile de l'objet
+		// dans un sous repertoire nommé comme type de mobile renvoyé par la detection
+		// ex. iphone/article.html
+		// 
+		// Voir la fonction pages_mobiles_detecter_mobile() pour les différents types.
+		// Idem pour le groupe de mobile (voir pages_mobiles_groupes_mobiles())
+		//
+		// S'il n'y a pas le squelette de l'objet dans le repertoire specifique de ce type ou du groupe,
+		// c'est le repertoire "mobile" qui est choisi
+		// ex. mobile/rubrique.html
 
-	// si on ne trouve pas la page pour le mobile on cherche pour le groupe de mobile
-	if (!find_in_path($chemin_mobile.".html"))
-			$chemin_mobile = pages_mobiles_groupes_mobiles($type_mobile)."/".$type_page;
-	
-	// si on ne trouve pas la page pour le groupe de mobile on cherche dans le répertoire générique
-	if (!find_in_path($chemin_mobile.".html")) $chemin_mobile = "mobile/".$type_page;
+		$chemin_mobile = $type_mobile."/".$type_page;
 
-	// si le squelette existe, on redirige vers une page pivot qui à son tour include la page mobile
-	// C'est necessaire car seul l'admin peut accéder à des pages placées dans un sous répertoire de
-	// l'arborescence.
-	if (find_in_path($chemin_mobile.".html")) {
-		foreach ($contexte as $key => $value) {
-			$liste_params .= "&".$key."=".$value;
+		// si on ne trouve pas la page pour le mobile on cherche pour le groupe de mobile
+		if (!find_in_path($chemin_mobile.".html"))
+				$chemin_mobile = pages_mobiles_groupes_mobiles($type_mobile)."/".$type_page;
+		
+		// si on ne trouve pas la page pour le groupe de mobile on cherche dans le répertoire générique
+		if (!find_in_path($chemin_mobile.".html")) $chemin_mobile = "mobile/".$type_page;
+
+		// si le squelette existe, on redirige vers une page pivot qui à son tour include la page mobile
+		// C'est necessaire car seul l'admin peut accéder à des pages placées dans un sous répertoire de
+		// l'arborescence.
+		if (find_in_path($chemin_mobile.".html")) {
+			foreach ($contexte as $key => $value) {
+				$liste_params .= "&".$key."=".$value;
+			}
+			include_spip('inc/headers');
+			redirige_par_entete("spip.php?page=pages_mobiles&squelette_mobile=$chemin_mobile".$liste_params);
 		}
-		include_spip('inc/headers');
-		redirige_par_entete("spip.php?page=pages_mobiles&squelette_mobile=$chemin_mobile".$liste_params);
-	}
 
+	}
 }
 // sinon, on ne change rien à l'affichage (affichage par défaut)
 

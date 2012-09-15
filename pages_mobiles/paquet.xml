@@ -1,15 +1,12 @@
 <paquet
 	prefix="pages_mobiles"
 	categorie="navigation"
-	version="1.0.0"
+	version="1.0.1"
 	etat="test"
 	compatibilite="[3.0.4;3.0.*]"
 	logo="prive/themes/spip/images/pages_mobiles-64.png"
 	documentation=""
 >
-	<!--
-		Paquet généré le 2012-09-13 20:53:57
-	-->
 
 	<nom>Pages pour mobiles</nom>
 
