@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
-	'noie_info' => 'na lepšie prehliadanie tejto stránky a celého internetu odporúčame vám, aby ste <strong>si aktualizovali<a href="http://www.microsoft.com/slovakia/windows/internet-explorer/">Internet Explorer</a></strong> alebo hocijaký iný prehliadač <a href="http://www.mozilla-europe.org/sk/firefox/">Firefox,</a> <a href="http://www.google.com/chrome">Chrome,</a> <a href="http://www.opera.com/">Opera</a> alebo <a href="http://www.apple.com/safari/">Safari.</a>', # MODIF
+	'noie_info' => 'Na lepšie prehliadanie tejto stránky a celého internetu vám odporúčame, aby ste <strong>si aktualizovali <a href="http://www.microsoft.com/slovakia/windows/internet-explorer/">Internet Explorer</a></strong> alebo vyskúšali  iný prehliadač, ako populárny <a href="http://www.mozilla-europe.org/fr/firefox/">Firefox,</a> <a href="http://www.google.fr/chrome">Chrome</a> alebo <a href="http://www.opera.com/">Operu.</a>',
 	'noie_titre' => 'Pozor, váš Internet Explorer nie je aktuálny!',
 
 	// T
