@@ -62,10 +62,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_moderation_confirmee_off' => 'Príspevok #@id_forum@ bol vymazaný',
 	'info_moderation_confirmee_publie' => 'Príspevok #@id_forum@ bol publikovaný',
 	'info_moderation_confirmee_spam' => 'Príspevok #@id_forum@ bol nahlásený ako SPAM',
-	'info_moderation_deja_faite' => 'Príspevok #@id_forum@ už bol skontrolovaný v "@statut@".<br />Ak ho chcete upraviť, prihláste sa do súkromnej zóny.', # MODIF
+	'info_moderation_deja_faite' => 'Príspevok #@id_forum@ už bol skontrolovaný v "@statut@".',
 	'info_moderation_interdite' => 'Na kontrolu tohto príspevku nemáte dostatočné práva',
-	'info_moderation_lien_titre' => 'Moderer ce message depuis l\'espace privé', # NEW
-	'info_moderation_url_perimee' => 'Ce lien de moderation n\'est plus valide.', # NEW
+	'info_moderation_lien_titre' => 'Skontrolovať tento príspevok zo súkromnej zóny',
+	'info_moderation_url_perimee' => 'Tento odkaz na kontrolu nie je platný.',
 	'inscription' => 'Prihlásenie redaktorov',
 	'inscription_admins' => 'Administrátori',
 	'inscription_explication' => 'Ktorí autori dostanú oznamy pri zaregistrovaní nových redaktorov?',
@@ -103,7 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suivis_public_votre_page' => 'Toto je vaša vlastná stránka na sledovanie webu.',
 
 	// T
-	'titre_moderation' => 'Modération' # NEW
+	'titre_moderation' => 'Kontrola'
 );
 
 ?>
