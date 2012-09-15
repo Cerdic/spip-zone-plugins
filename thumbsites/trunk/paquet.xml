@@ -1,21 +1,25 @@
 <paquet
 	prefix="thumbsites"
 	categorie="multimedia"
-	version="0.7.0"
-	etat="stable"
-	compatibilite="[2.0.0;3.0.*]"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/thumbsites-32.png"
 	documentation="http://www.spip-contrib.net/?article2584"
 >	
 
-	<nom>Thumbsites</nom> <!-- Une vignette pour les objets sites -->
+	<nom>Thumbsites</nom>
+	<!-- Une vignette pour les objets sites -->
+
 	<auteur>Camille Lafitte</auteur>
-	<auteur>Eric Lupinacci</auteur>
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
+
 	<copyright>2008-2012</copyright>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
 	<traduire module="thumbsites" reference="fr" gestionnaire="salvatore" />
 	
-	<pipeline nom="affiche_gauche" inclure="thumbsites_pipelines.php" />
+	<pipeline nom="afficher_config_objet" inclure="thumbsites_pipelines.php" />
 
-	<menu nom="configurer_thumbsites" titre="thumbsites:configuration_thumbsites" parent="menu_configuration" icone="images/thumbsites-16.png" />
+	<menu nom="configurer_thumbsites" titre="thumbsites:configuration_thumbsites" parent="bando_squelette" icone="images/thumbsites-16.png" />
 </paquet>
