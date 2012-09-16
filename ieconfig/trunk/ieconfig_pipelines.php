@@ -2,6 +2,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function ieconfig_ieconfig($table){
+	return $table;
+}
+
+
 // On déclare ici la config du core
 function ieconfig_ieconfig_metas($table){
 	// Articles

@@ -1,7 +1,7 @@
 <paquet
 	prefix="ieconfig"
 	categorie="maintenance"
-	version="1.1.1"
+	version="1.1.2"
 	etat="test"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="prive/themes/spip/images/ieconfig-32.png"
@@ -19,7 +19,8 @@
 
 	<pipeline nom="autoriser" inclure="ieconfig_autoriser.php" />
 	<pipeline nom="mes_fichiers_a_sauver" inclure="ieconfig_mes_fichiers_a_sauver.php" />
-	<pipeline nom="ieconfig_metas" inclure="ieconfig_ieconfig_metas.php" />
+	<pipeline nom="ieconfig_metas" inclure="ieconfig_pipelines.php" />
+	<pipeline nom="ieconfig" inclure="ieconfig_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[1.22.0;[" />
 	<necessite nom="verifier" />
