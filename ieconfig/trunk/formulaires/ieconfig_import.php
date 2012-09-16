@@ -30,7 +30,6 @@ function ieconfig_saisies_import() {
 							'nom' => 'ieconfig_import_local',
 							'label' => '<:ieconfig:label_ieconfig_import_local:>',
 							'explication' => '<:ieconfig:explication_ieconfig_import_local:>',
-							'cacher_option_intro' => 'oui',
 							'datas' => ieconfig_config_locales()
 						)
 					)
@@ -186,7 +185,7 @@ function ieconfig_config_locales() {
 		include_spip('inc/yaml');
 		$liste_config = array();
 		$match = ".+[.]yaml$";
-		foreach (array_merge(find_all_in_path(_DIR_RACINE.'ieconfig/', $match),find_all_in_path(_DIR_TMP.'ieconfig/', $match)) as $fichier => $chemin) {
+		foreach (array_merge(find_all_in_path('ieconfig/', $match),find_all_in_path(_DIR_TMP.'ieconfig/', $match)) as $fichier => $chemin) {
 			$config = yaml_decode_file($chemin);
 			// On regarde s'il y a un necessite
 			$ok = true;
