@@ -1,7 +1,7 @@
 <div class="formulaire_spip formulaire_ieconfig_import">
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-<form action="#ENV{action}" method="post"><div>
+<form action="#ENV{action}" method="post" enctype="multipart/form-data"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
 		#GENERER_SAISIES{#ENV{_saisies}}
