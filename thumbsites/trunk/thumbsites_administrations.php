@@ -17,12 +17,10 @@ function thumbsites_upgrade($nom_meta_base_version,$version_cible){
 	$maj['create'] = array(
 		array(
 			'serveur' => 'thumbshots',
-			'girafa_identifiant' => '',
-			'girafa_signature' => '',
 			'websnapr_clef' => '',
 			'websnapr_taille' => 'T',
 			'robothumb_taille' => '100x75',
-			'miwim_taille' => '80X60',
+			'miwim_taille' => '120x90',
 			'apercite_taille' => '120X90',
 			'duree_cache' => '30'
 		)
