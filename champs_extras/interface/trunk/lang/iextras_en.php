@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_sql' => 'SQL definition',
 	'label_table' => 'Object',
 	'label_traitements' => 'Automatic processes',
-	'label_versionner' => 'Versionner le contenu du champ', # NEW
+	'label_versionner' => 'Versioning of the content of that field',
 	'legend_declaration' => 'Declaration',
 	'legend_options_saisies' => 'Data entry options',
 	'legend_options_techniques' => 'Technical options',
@@ -108,8 +108,7 @@ The default coefficient applied to the extras fields is 2. To give you an idea, 
 	'precisions_pour_saisie' => 'Disply a form entry of type:',
 	'precisions_pour_traitements' => 'Automatically apply a process
 		for the resulting #FIELD_NAME field:',
-	'precisions_pour_versionner' => 'Le versionnage s\'appliquera uniquement si le plugin
-		«révisions» est actif et que l\'objet éditorial du champs extra est lui-même versionné', # NEW
+	'precisions_pour_versionner' => 'The versioning would be apply only if the plugin "revisions" is active and that the editorial object of the extra fields itself is versioned.',
 
 	// R
 	'radio_restrictions_auteur_admin' => 'Only the administrators',
