@@ -22,7 +22,7 @@ function thumbsites_upgrade($nom_meta_base_version,$version_cible){
 			'websnapr_clef' => '',
 			'websnapr_taille' => 'T',
 			'robothumb_taille' => '100x75',
-			'miwin_taille' => '80X60',
+			'miwim_taille' => '80X60',
 			'apercite_taille' => '120X90',
 			'duree_cache' => '30'
 		)
