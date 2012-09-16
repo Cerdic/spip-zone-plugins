@@ -44,16 +44,16 @@ function ieconfig_saisies_import() {
 		if ($config['description']!= '')
 			$texte_explication .= '<br /><b>'._T('ieconfig:texte_description').'</b> '._T_ou_typo($config['description']);
 		// On identifie les entrées ne correspondant pas à un plugin
+		// Ou bien non déclarées dans ieconfig_metas
 		// Convention : les clés du tableau de config correspondent aux préfixes des plugins
 		$entrees = $config;
 		unset($entrees['nom']);
 		unset($entrees['description']);
 		unset($entrees['necessite']);
-		unset($entrees['spip_contenu']);
-		unset($entrees['spip_interactivite']);
 		$entrees = array_map('strtolower',array_keys($entrees));
 		$plugins = array_map('strtolower',array_keys(unserialize($GLOBALS['meta']['plugin'])));
-		$plugins_manquants = array_diff($entrees,$plugins);
+		$entrees_prises_en_charge = array_merge(array_keys(pipeline('ieconfig_metas',array())),$plugins);
+		$plugins_manquants = array_diff($entrees,$entrees_prises_en_charge);
 		if (count($plugins_manquants)>0)
 			$texte_explication .= '<p class="reponse_formulaire reponse_formulaire_erreur">'._T('ieconfig:texte_plugins_manquants',array('plugins' => implode(', ',$plugins_manquants))).'</p>';
 		
