@@ -14,15 +14,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_comment_colorscheme' => 'Tu vyberte predvolený profil podľa modulov, ktoré sa použijú na zobrazenie.',
 	'cfg_comment_font' => 'Tu si môžete vybrať písmo, ktoré sa použije na zobrazenie modulov.',
 	'cfg_comment_identifiants' => '{{Na zadanie rôznych ID, ktoré chcete používať, použite polia, ktoré sa nachádzajú nižšie.}} Nie sú povinné, ale môžu pomôcť napríklad na sledovanie presných štatistík, ktoré ponúka Facebook.',
-	'cfg_comment_pageid' => 'Identifikátor stránky; stránku treba vytvoriť.', # MODIF
+	'cfg_comment_pageid' => 'Identifikátor facebookovskej stránky; stránku treba vytvoriť.',
 	'cfg_comment_reglages' => '{{Tu si môžete upraviť niektoré nastavenia pre javaskriptové nástroje Facebooku.}} Podľa predvolených nastavení šablóny využívajú jazyk XFBML ({SDK javascript Facebook,}) ale túto funkciu môžete deaktivovať, nástroje sa potom budú spúšťať v rámoch.',
 	'cfg_comment_url_page' => 'Celá internetová adresa vašej stránky alebo vášho profilu na Facebooku; budú ju využívať šablóny v predvolených nastaveniach (URL typu "<code>http://www.facebook.com/...</code>").',
 	'cfg_comment_userid' => 'Prihlacovací (-ie) údaj(e) administrátorov zásuvných modulov. Môžete ich zadať viac, a oddeliť ich čiarkami.',
 	'cfg_comment_xfbml' => 'Využitie javaskriptovej knižnice SDK Facebook a priradeného jazyka. Ak si zvolíte možnosť "nie", moduly budú zobrazené v režime "in-iframe" (v ráme).',
 	'cfg_descr' => 'Tu musíte definovať rôzne identifikátory, ktoré vám poskytla sociálna sieť Facebook.<br /><br />Viac informácií: [->http://www.facebook.com/insights/].
 
-Na vkladanie značiek (resp. tagov) "Open Graph" do hlavičky svojich publikovaných stránok musíte vložiť šablónu "insert_head_og" vložením prostredia: {{#MODELE{insert_head_og}{env}}}.
-<br /><br />Viac informácií: [http://developers.facebook.com/docs/opengraph/.->http://developers.facebook.com/docs/opengraph/]', # MODIF
+Na vkladanie značiek (resp. tagov) "Open Graph" do hlavičky svojich publikovaných stránok musíte vložiť šablónu "insert_head_og" vložením prostredia: {{<code>#MODELE{insert_head_og}{env}</code>.
+<br /><br />Viac informácií: [http://developers.facebook.com/docs/opengraph/.->http://developers.facebook.com/docs/opengraph/].',
 	'cfg_descr_titre' => 'Šablóny Facebooku',
 	'cfg_identifiants' => 'Prihlásenie na Facebook',
 	'cfg_label_appid' => 'Prihlásenie pre aplikáciu "App ID"',
