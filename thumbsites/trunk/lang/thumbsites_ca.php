@@ -19,11 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_descriptif' => 'Aquesta pàgina us permet configurar el plugin Thumbsites, i, en particular, escollir el servidor de vinyetes. Per saber-ne més, consulteu la <a href="http://www.spip-contrib.net/?article2584">documentació a contrib</a>',
 	'cfg_inf_apercite_parametres' => 'Veuillez saisir vos données personnelles:', # NEW
 	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> propose un service gratuit qui ne nécessite pas d\'identification.', # NEW
-	'cfg_inf_girafa_description' => 'Les vinyetes generades seran com a molt de 160 x 120 píxels (aquest valor es pot modificar al lloc de Girafa)',
-	'cfg_inf_girafa_parametres' => 'Introduïu les vostres dades personals:',
-	'cfg_inf_girafa_presentation' => 'Per utilitzar aquest servei haureu d\'estar registrats al lloc <a href="http://www.girafa.com">Girafa</a>. Si voleu fer menys de 2000 captures per dia, hi ha una versió gratuïta.',
-	'cfg_inf_miwin_parametres' => 'Introduïu les vostres dades personals:',
-	'cfg_inf_miwin_presentation' => 'Per utilitzar aquest servei, heu de posar un enllaç cap al lloc <a href="http://thumbs.miwim.fr">Miwin</a>. La presència d\'aquest enllaç es verifica periòdicament mitjançant un script.',
+	'cfg_inf_choix_serveur' => 'Choisissez le serveur qui fournira les vignettes de vos sites référencés et compléter éventuellement son paramétrage.', # NEW
+	'cfg_inf_miwim_presentation' => 'Pour utiliser ce service vous devez mettre un lien vers le site <a href="http://thumbs.miwim.fr">Miwim</a>. La présence de ce lien est vérifié périodiquement par un script.', # NEW
 	'cfg_inf_rotothumb_parametres' => 'Introduïu les vostres dades personals:',
 	'cfg_inf_rotothumb_presentation' => 'Per utilitzar aquest servei heu de registrar-vos però haureu de posar un enllaç cap al lloc <a href="http://www.robothumb.com">Robothumb</a>. La presència d\'aquest vincle és verificada periòdicament per la seva cura. ',
 	'cfg_inf_thumbshots_de_description' => 'Les vinyetes generades seran de 120 x 90 píxels.',
@@ -34,20 +31,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_inf_websnapr_presentation' => 'Per utilitzar aquest servei heu d\'estar registrat al lloc <a href="http://www.websnapr.com">Websnapr</a>. La versió gratuïta permet processar unes 250.000 captures del lloc per mes, a un ritme de 80 captures per hora.',
 	'cfg_itm_serveur_apercite' => 'Apercite.fr', # NEW
 	'cfg_itm_serveur_girafa' => 'Girafa',
-	'cfg_itm_serveur_miwin' => 'Miwin',
+	'cfg_itm_serveur_miwim' => 'Miwim', # NEW
 	'cfg_itm_serveur_robothumb' => 'Robothumb',
 	'cfg_itm_serveur_thumbshots' => 'Thumbshots.com',
 	'cfg_itm_serveur_thumbshots_de' => 'Thumbshots.de',
 	'cfg_itm_serveur_websnapr' => 'Websnapr',
 	'cfg_itm_taille_vignette' => '@taille@ píxels',
-	'cfg_lbl_choix_serveur' => 'Escolliu el servidor de vinyetes',
 	'cfg_lbl_cle' => 'La vostra clau',
 	'cfg_lbl_duree_cache' => 'Durée du cache (en jours)', # NEW
 	'cfg_lbl_identifiant' => 'El vostre identificador ',
+	'cfg_lbl_serveur' => 'Serveur', # NEW
 	'cfg_lbl_signature' => 'La vostra signatura',
 	'cfg_lbl_taille_vignette' => 'Mida de les vinyetes ',
 	'cfg_lgd_cache' => 'Cache', # NEW
-	'cfg_lgd_choix_serveur' => 'Servidor',
+	'cfg_lgd_choix_serveur' => 'Servidor', # MODIF
 	'cfg_titre_thumbsites' => 'Configurer Thumbsites', # NEW
 	'configuration_thumbsites' => 'Thumbsites', # NEW
 

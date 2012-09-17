@@ -19,11 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_descriptif' => 'Esta página permite configurar o plugin Thumbsites e, em particular, escolher o servidor de ícones. Para saber mais, consulte a <a href="http://www.spip-contrib.net/?article2584">documentação sobre contrib</a>',
 	'cfg_inf_apercite_parametres' => 'Veuillez saisir vos données personnelles:', # NEW
 	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> propose un service gratuit qui ne nécessite pas d\'identification.', # NEW
-	'cfg_inf_girafa_description' => 'Os ícone gerados terão no máximo 160 x 120 pixels (este valor pode ser alterado no site do Girafa)',
-	'cfg_inf_girafa_parametres' => 'Por favor, informe os seus dados pessoais:',
-	'cfg_inf_girafa_presentation' => 'Para usar este serviço, voc6e deve se inscrever no site <a href="http://www.girafa.com">Girafa</a>. Existe uma versão gratuita se você for usar menos de 2000 capturas por dia.',
-	'cfg_inf_miwin_parametres' => 'Por favor, informe os seus dados pessoais:',
-	'cfg_inf_miwin_presentation' => 'Para usar este serviço, voc6e deve incluir um link para o site <a href="http://thumbs.miwim.fr">Miwin</a>. A presença deste link é verificada periodicamente por um script.',
+	'cfg_inf_choix_serveur' => 'Choisissez le serveur qui fournira les vignettes de vos sites référencés et compléter éventuellement son paramétrage.', # NEW
+	'cfg_inf_miwim_presentation' => 'Pour utiliser ce service vous devez mettre un lien vers le site <a href="http://thumbs.miwim.fr">Miwim</a>. La présence de ce lien est vérifié périodiquement par un script.', # NEW
 	'cfg_inf_rotothumb_parametres' => 'Por favor, informe os seus dados pessoais:',
 	'cfg_inf_rotothumb_presentation' => 'Para usar este serviço, você não precisa se registrar mas deverá incluir um link para o site <a href="http://www.robothumb.com">Robothumb</a>. A presença deste link é verificada periodicamente por eles.',
 	'cfg_inf_thumbshots_de_description' => 'Os ícones gerados terão 120 x 90 pixels.',
@@ -34,20 +31,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_inf_websnapr_presentation' => 'Para usar este serviço você deve se registrar no site <a href="http://www.websnapr.com">Websnapr</a>. A versão gratuita permite tratar 250.000 capturas de sites por mês, num ritmo de 80 capturas por hora.',
 	'cfg_itm_serveur_apercite' => 'Apercite.fr', # NEW
 	'cfg_itm_serveur_girafa' => 'Girafa',
-	'cfg_itm_serveur_miwin' => 'Miwin',
+	'cfg_itm_serveur_miwim' => 'Miwim', # NEW
 	'cfg_itm_serveur_robothumb' => 'Robothumb',
 	'cfg_itm_serveur_thumbshots' => 'Thumbshots.com',
 	'cfg_itm_serveur_thumbshots_de' => 'Thumbshots.de',
 	'cfg_itm_serveur_websnapr' => 'Websnapr',
 	'cfg_itm_taille_vignette' => '@taille@ pixels',
-	'cfg_lbl_choix_serveur' => 'Escolha o servidor de ícones',
 	'cfg_lbl_cle' => 'Sua chave',
 	'cfg_lbl_duree_cache' => 'Durée du cache (en jours)', # NEW
 	'cfg_lbl_identifiant' => 'Sua identificação',
+	'cfg_lbl_serveur' => 'Serveur', # NEW
 	'cfg_lbl_signature' => 'Sua assinatura',
 	'cfg_lbl_taille_vignette' => 'Tamanho dos ícones',
 	'cfg_lgd_cache' => 'Cache', # NEW
-	'cfg_lgd_choix_serveur' => 'Servidor',
+	'cfg_lgd_choix_serveur' => 'Servidor', # MODIF
 	'cfg_titre_thumbsites' => 'Configurer Thumbsites', # NEW
 	'configuration_thumbsites' => 'Thumbsites', # NEW
 
