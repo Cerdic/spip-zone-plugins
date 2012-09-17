@@ -28,7 +28,7 @@ function exec_comptes()
 		$imputation = _request('imputation');
 		if (!$imputation)
 			$imputation= '%';
-		$id_compte = association_passeparam_id('compte')
+		$id_compte = association_passeparam_id('compte');
 		if (!$id_compte) {
 				$id_compte = '';
 		} else { // quand on a un id compte, on doit selectionner automatiquement l'exercice dans lequel il se trouve

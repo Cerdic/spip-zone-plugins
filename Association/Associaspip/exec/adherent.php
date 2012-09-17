@@ -46,7 +46,7 @@ function exec_adherent(){
 		}
 		$infos['adherent_libelle_validite'] = association_formater_date($data['validite']);
 		if ($GLOBALS['association_metas']['id_asso']) {
-			$infos['adherent_libelle_reference_interne'] = ($data['id_asso']?_T('asso:adherent_libelle_reference_interne').'<br/>'.$data['id_asso']:_T('asso:pas_de_reference_interne_attribuee')) ;
+			$infos['adherent_libelle_reference_interne'] = ($data['id_asso']?$data['id_asso']:_T('asso:pas_de_reference_interne_attribuee')) ;
 		}
 		if ($adresses[$id_auteur])
 			$infos['coordonnees:adresses'] = $adresses[$id_auteur];

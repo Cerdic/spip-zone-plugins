@@ -30,24 +30,20 @@ function exec_destination()
 		));
 		debut_cadre_association('euro-39.gif', 'destination_comptable');
 		//Affichage de la table
-		echo "<table width='100%' class='asso_tablo' id='asso_tablo_destinations'>\n";
-		echo "<thead>\n<tr>";
-		echo '<th>'. _T('asso:entete_id') .'</th>';
-		echo '<th>'. _T('asso:entete_intitule') .'</th>';
-		echo '<th>'. _T('asso:entete_utilise') .'</th>';
-		echo '<th colspan="2" class="actions">'. _T('asso:entete_actions') .'</th>';
-		echo "</tr>\n</thead><tbody>";
-		$query = sql_select('*', 'spip_asso_destination', '', '', 'intitule');
-		while ($data = sql_fetch($query)) {
-			echo '<tr>';
-			echo '<td class="integer">'.$data['id_destination'].'</td>';
-			echo '<td class="text">'.$data['intitule'].'</td>';
-			echo '<td class="integer">'. _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_destination_op','id_destination='.$data['id_destination']))).'</td>';
-			echo association_bouton_suppr('destination', $data['id_destination']);
-			echo association_bouton_edit('destination', $data['id_destination']);
-			echo "</tr>\n";
-		}
-		echo "</tbody>\n</table>\n";
+		echo association_bloc_listehtml(
+			array('d.*, COUNT(o.id_destination) AS nombre_fois', 'spip_asso_destination AS d INNER JOIN spip_asso_destination_op AS o ON d.id_destination=o.id_destination', '', 'd.id_destination', 'intitule'), // requete
+			array(
+				'id_destination' => array('asso:entete_id', 'entier'),
+				'intitule' => array('asso:entete_intitule', 'texte'),
+				'nombre_fois' => array('asso:entete_utilise', 'entier'), // _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_destination_op','id_destination='.$data['id_destination'])))
+				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),
+			), // entetes et formats des donnees
+			array(
+				array('suppr', 'destination', 'id=$$' ),
+				array('edit', 'destination', 'id=$$' ),
+			), // boutons d'action
+			'id_destination' // champ portant la cle des lignes et des boutons
+		);
 		fin_page_association();
 	}
 }
