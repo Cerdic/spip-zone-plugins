@@ -1,9 +1,9 @@
 <paquet
 	prefix="fil_ariane"
 	categorie="divers"
-	version="0.0.0"
+	version="0.1.0"
 	etat="dev"
-	compatibilite="[2.1.0;]"
+	compatibilite="[2.1.0;3.0.*]"
 	logo="imgs/logo-fil_ariane.png"
 	schema="1.5"
 	documentation="http://www.spip-contrib.net/Plugin-Fil-d-Ariane"
@@ -15,5 +15,7 @@
 
 	<licence>GNU/GPL</licence>
 	<traduire gestionnaire="salvatore" module="fil_ariane" reference="fr" />
+
+    <pipeline nom="insert_head" inclure="fil_ariane_pipelines.php" />
 
 </paquet>

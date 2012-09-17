@@ -10,13 +10,18 @@
 	<lien>http://www.spip-contrib.net/Plugin-Fil-d-Ariane</lien> <!-- URI de documentation -->
 	<icon>imgs/logo-fil_ariane.png</icon>
 
-	<version>0.0.0</version>
+	<version>0.1.0</version>
 	<etat>dev</etat>
 
 	<prefix>fil_ariane</prefix>
 
 	<fonctions>fil_ariane_fonctions.php</fonctions>
 
+    <pipeline>
+   		<nom>insert_head</nom>
+   		<inclure>fil_ariane_pipelines.php</inclure>
+   	</pipeline>
+
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 </plugin>
