@@ -19,7 +19,7 @@
 				[(#REM)<!-- On ne fait pas de jointure mais des sous-requetes parce-que ca ne fonctionne pas bien quand une table est absente (plugin jamais installe) :-/ -->]
 						<optgroup label="<BOUCLE_produit_intitule(ARTICLES){id_article}{statut IN prop,prepa,publie}>#TITRE</BOUCLE_produit_intitule>">
 				<BOUCLE_produit_variantes(CAT_VARIANTES?){id_article}{par num titre}>
-							<option value="#ID_CAT_VARIANTE"[ (#ENV{code}|=={#ID_CAT_VARIANTE}|oui)selected="selected"]>#TITRE</option>
+							<option value="#ID_CAT_VARIANTE"[ (#ENV{code}|=={#ID_CAT_VARIANTE}|oui)selected="selected"]>[(#TITRE|typo)]</option>
 				</BOUCLE_produit_variantes>
 						</optgroup>
 			</B_produit_intitule>

@@ -29,10 +29,13 @@ function exec_suppr_don()
 		} else {
 			onglets_association('titre_onglet_dons', 'dons');
 			// info
+			$infos['entete_date'] = association_formater_date($don['date_don'], '');
+			$infos['entete_nom'] = association_formater_idnom($don['id_adherent'], $don['bienfaiteur'], 'membre');
 			$infos['argent'] = association_formater_prix($don['argent'], 'donation cash');
-			$infos['colis'] = ($don['valeur'] ? '('.association_formater_prix($don['valeur'], 'donation estimated').')<p class="n">' : '') .$don['colis'] .($don['valeur']?'</p>':'');
+			$infos['colis'] = ($don['valeur'] ? '('.association_formater_prix($don['valeur'], 'donation estimated').')<div class="n">' : '') .$don['colis'] .($don['valeur']?'</div>':'');
 			$infos['contrepartie'] = $don['contrepartie'];
-			echo '<div class="hproduct">'. association_totauxinfos_intro(association_calculer_lien_nomid($don['bienfaiteur'],$don['id_adherent']), 'don', $id_don, $infos ) .'</div>';
+			$infos['entete_commentaire'] = $don['commentaire'];
+			echo '<div class="hproduct">'. association_totauxinfos_intro('', 'don', $id_don, $infos ) .'</div>';
 			// datation et raccourcis
 			raccourcis_association('');
 			debut_cadre_association('dons-24.gif', 'action_sur_les_dons');

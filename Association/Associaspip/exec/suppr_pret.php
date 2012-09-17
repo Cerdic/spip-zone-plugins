@@ -21,21 +21,20 @@ function exec_suppr_pret()
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
-		$id_pret = intval(_request('id_pret'));
-		$id_ressource = intval(_request('id_ressource'));
+		$id_pret = association_passeparam_id('pret');
 		onglets_association('titre_onglet_prets', 'ressources');
 		$pret = sql_fetsel('*', 'spip_asso_prets', "id_pret=$id_pret" ) ;
-		$ressource = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
+		$ressource = sql_fetsel('*', 'spip_asso_ressources', 'id_ressource='.$pret['id_ressource'] ) ;
 		$infos['entete_article'] = $ressource['intitule'];
-		$auteur = sql_fetsel('*', 'spip_asso_membres', "id_auteur=$pret[id_emprunteur]");
-		$infos['entete_nom'] = association_calculer_nom_membre($auteur['sexe'], $auteur['prenom'], $auteur['nom_famille'],'span');
+		$infos['entete_nom'] = association_formater_idnom($pret['id_emprunteur'], array(), 'membre');
 		$infos['prets_entete_date_sortie'] = association_formater_date($pret['date_sortie'],'dtstart');
 		$infos['prets_entete_date_retour'] = association_formater_date($pret['date_retour'],'dtend');
+		$infos['entete_montant'] = association_formater_prix($pret['prix_unitaire']*$pret['duree'], 'fees');
 		echo association_totauxinfos_intro('', 'pret', $id_pret, $infos );
 		// datation et raccourcis
 		raccourcis_association('');
 		debut_cadre_association('pret-24.gif', 'prets_titre_suppression_prets');
-		echo association_bloc_suppression('pret', "$id_pret-$id_ressource");
+		echo association_bloc_suppression('pret', "$id_pret-$pret[id_ressource]");
 		fin_page_association();
 	}
 }

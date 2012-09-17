@@ -130,7 +130,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'totaux_moyens' => 'Statistiques @de_par@',
 	'vous_aller_effacer' => 'Vous vous appretez &agrave; effacer : @quoi@',
 	'date_du_jour' => 'Nous sommes le @date@',
-	'date_du_jour_heure' => 'Nous sommes le @date@ et il est @time@',
 	'confirmation' => 'Confirmation',
 
 # Configuration du plugin
@@ -555,8 +554,8 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique",
 	'activite_entete_inscrits' => 'Nbre',
 	'activite_entete_impayees' => 'Sans paiement',
 	'activite_entete_validees' => 'Avec paiement',
-	'activites_avec_inscrits' => 'Inscriptions avec invit&eacute;(s)',
-	'activites_sans_inscrits' => 'Inscriptions sans invit&eacute;(e)',
+	'activites_avec_inscrits' => 'Avec inscript(e)s',
+	'activites_sans_inscrits' => 'Sans Inscript(e)s',
 	# Bouton
 	'activite_bouton_modifier_article' => "Modifier l'article",
 	'activite_bouton_ajouter_inscription' => 'Ajouter une inscription',
@@ -606,9 +605,9 @@ Commentaire: @commentaire@
 
 # VENTES
 	#Entetes
-	'vente_entete_date_envoi' => "Date d'envoi",
+	'ventes_entete_date_envoi' => "Date d'envoi",
+	'ventes_entete_date_vente' => "Date d'achat",
 	'dons_titre_mise_a_jour' => 'Mise &agrave; jour des dons',
-	'adherent_bouton_maj_vente' => 'Editer la vente',
 
 # RESSOURCES
 	#Messages
@@ -883,6 +882,10 @@ Commentaire: @commentaire@
 	'ajouter_une_categorie_de_cotisation' => 'Ajouter une cat&eacute;gorie de cotisation',
 
 # Dons
+	# Dons : entetes
+	'dons_en_argent' => 'Dons financiers',
+	'dons_en_nature' => 'Dons mat&eacute;riels',
+	# Dons : libelles
 	# Dons : messages
 	'dons_aide_contrepartie' => "Les dons avec contrepartie ne donnent pas lieu &agrave; de r&eacute;duction fiscale...",
 

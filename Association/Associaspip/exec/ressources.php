@@ -21,6 +21,7 @@ function exec_ressources()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
+		$id_ressource = association_passeparam_id('ressource');
 		onglets_association('titre_onglet_prets', 'ressources');
 		// INTRO : presentation du module
 		echo '<p>'._T('asso:ressources_info').'</p>';
@@ -80,13 +81,17 @@ rdm */
 					break;
 			}
 		}
+		// Filtres
+		/// annees d'acquisition ?
+		/// statut de disponibilite ?
 		// affichage du tableau
 		echo association_bloc_listehtml(
 			array('*', 'spip_asso_ressources', '','',  'id_ressource'), // requete
 			array(
 				'id_ressource' => array('asso:entete_id', 'entier'),
 				'statut' => array('', 'puce', $s_ico, ''), // quantity? availability?
-				'intitule' => array('asso:entete_article', 'texte', '', '', 'n'),
+				'date_acquisition' => array('asso:entete_date', 'date', 'dtstart', 'mois_annee'),
+				'intitule' => array('asso:entete_article', 'texte', '', 'n'),
 				'code' => array('asso:entete_code', 'code', 'x-spip_asso_ressources'),
 				'pu' => array('asso:ressources_entete_montant', 'prix', 'rent'),
 				'ud' => array('asso:entete_duree', 'duree', 1),
@@ -98,7 +103,7 @@ rdm */
 				array('act', 'prets_nav_gerer', 'voir-12.png', 'prets', 'id=$$'),
 			), // boutons d'action
 			'id_ressource', // champ portant la cle des lignes et des boutons
-			$s_css, 'statut'
+			$s_css, 'statut', $id_ressource
 		);
 		fin_page_association();
 	}

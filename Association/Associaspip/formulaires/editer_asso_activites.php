@@ -47,7 +47,7 @@ function formulaires_editer_asso_activites_charger_dist($id_activite='')
 		$contexte['id_adherent']='';
 	/* paufiner la presentation des valeurs  */
 	if ($contexte['inscrits'])
-		$contexte['inscrits'] = association_nbrefr($contexte['inscrits']);
+		$contexte['inscrits'] = association_formater_nombre($contexte['inscrits']);
 
 	// on ajoute les metas de destinations
 	if ($GLOBALS['association_metas']['destinations']) {

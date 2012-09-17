@@ -20,19 +20,27 @@ function exec_suppr_activite()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_activite = intval(_request('id'));
+		$id_activite = association_passeparam_id('activite');
 		$activite = sql_fetsel('*', 'spip_asso_activites', "id_activite=$id_activite");
-		if (!$activite) {
+		if ( !$activite ) {
 			include_spip('inc/minipres');
-			echo minipres(_T('zxml_inconnu_id') . $id_don);
+			echo minipres(_T('zxml_inconnu_id') . $id_activite);
 		} else {
 			onglets_association('titre_onglet_activite', 'activites');
-			// info
-			$infos['evenement'] = sql_getfetsel('titre', 'spip_evenements', 'id_evenement='.intval($activite['id_evenement']) );
-			$infos['date'] = association_formater_date($activite['date_inscription']);
+			// INTRO : Rappel Infos Evenement & Participant
+			$evenement = sql_fetsel('*', 'spip_evenements', 'id_evenement='.$activite['id_evenement']);
+			$infos['evenement'] = $evenement['titre'];
+			$format = 'association_formater_'. (($evenement['horaire']=='oui')?'heure':'date');
+			$infos['agenda:evenement_date_du'] = $format($evenement['date_debut'],'dtstart');
+			$infos['agenda:evenement_date_au'] = $format($evenement['date_fin'],'dtend');
+			$infos['agenda:evenement_lieu'] = $evenement['lieu'];
+			$infos[''] = typo('----'); // separateur
+			$infos['nom'] = association_formater_idnom($activite['id_adherent'], $activite['nom'], '');
+//			$infos['date'] = association_formater_date($activite['date_inscription']);
+			$infos['date'] = association_formater_date($activite['date_paiement']);
 			$infos['activite_entete_inscrits'] = association_formater_nombre($activite['inscrits'], 0);
-			$infos['entete_montant'] = association_formater_prix($activite['montant']);
-			association_totauxinfos_intro(association_calculer_lien_nomid($activite['nom'],$activite['id_adherent']), 'activite', $id_activite, $infos );
+			$infos['entete_montant'] = association_formater_prix($activite['montant'], 'fees');
+			association_totauxinfos_intro('', 'activite', $id_activite, $infos );
 			// datation et raccourcis
 			raccourcis_association('');
 			debut_cadre_association('activites.gif', 'activite_titre_inscriptions_activites');

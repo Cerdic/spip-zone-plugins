@@ -49,12 +49,12 @@ function exec_adherent(){
 			$infos['adherent_libelle_reference_interne'] = ($data['id_asso']?_T('asso:adherent_libelle_reference_interne').'<br/>'.$data['id_asso']:_T('asso:pas_de_reference_interne_attribuee')) ;
 		}
 		if ($adresses[$id_auteur])
-			$infos['adresses'] = $adresses[$id_auteur];
+			$infos['coordonnees:adresses'] = $adresses[$id_auteur];
 		if ($emails[$id_auteur])
-			$infos['emails'] = $emails[$id_auteur];
+			$infos['coordonnees:emails'] = $emails[$id_auteur];
 		if ($telephones[$id_auteur])
-			$infos['numeros'] =  $telephones[$id_auteur];
-		echo '<div class="vcard">'. association_totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos, 'asso', 'asso_membre') .'</div>';
+			$infos['coordonnees:numeros'] =  $telephones[$id_auteur];
+		echo '<div class="vcard">'. association_totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos, 'asso_membre') .'</div>';
 		// datation et raccourcis
 		if ($full)
 			$res['adherent_label_modifier_membre'] = array('edit-24.gif', 'edit_adherent', "id=$id_auteur");
@@ -112,7 +112,7 @@ function exec_adherent(){
 					'id_activite' => array('asso:entete_id', 'entier'),
 					'date_debut' => array('asso:entete_date', 'date'),
 					'titre' => array('asso:adherent_entete_activite', 'texte', $full?'propre':'nettoyer_raccourcis_typo', ),
-					'inscrits' => array('asso:adherent_entete_inscrits', 'entier'),
+					'inscrits' => array('asso:entete_quantite', 'entier'),
 					'montant' => array('asso:entete_montant', 'prix'),
 				), // entetes et formats des donnees
 				$full ? array(
@@ -128,10 +128,10 @@ function exec_adherent(){
 				array('*', 'spip_asso_ventes', "id_acheteur=$id_auteur", '', 'date_vente DESC', '0,10'), // requete
 				array(
 					'id_vente' => array('asso:entete_id', 'entier'),
-					'date_vente' => array('asso:entete_date', 'date'),
+					'date_vente' => array('asso:ventes_entete_date_vente', 'date'),
 					'article' => array('asso:entete_article', 'texte', $full?'propre':'nettoyer_raccourcis_typo', ),
 					'quantite' => array('asso:entete_quantite', 'nombre'),
-					'date_envoie' => array('asso:vente_entete_date_envoi', 'date'),
+					'date_envoie' => array('asso:ventes_entete_date_envoi', 'date'),
 				), // entetes et formats des donnees
 				$full ? array(
 					array('edit', 'vente', 'id=$$'),

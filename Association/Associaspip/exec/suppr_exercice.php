@@ -28,7 +28,7 @@ function exec_suppr_exercice()
 		$exercice = sql_fetsel('*', 'spip_asso_exercices', "id_exercice=$id_exercice" );
 		$infos['exercice_entete_debut'] = association_formater_date($exercice['debut'], 'dtstart');
 		$infos['exercice_entete_fin'] = association_formater_date($exercice['fin'], 'dtend');
-		echo association_totauxinfos_intro(sql_getfetsel('intitule', 'spip_asso_exercices', "id_exercice=$id_exercice" ), 'exercice', $id_exercice, $infos);
+		echo association_totauxinfos_intro($exercice['intitule'], 'exercice', $id_exercice, $infos);
 		// datation et raccourcis
 		raccourcis_association('exercices');
 		debut_cadre_association('calculatrice.gif', 'exercice_budgetaire_titre');

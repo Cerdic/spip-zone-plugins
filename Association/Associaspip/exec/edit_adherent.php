@@ -44,12 +44,12 @@ function exec_edit_adherent()
 			}
 			// INFOs
 			if ($adresses[$id_auteur])
-				$infos['adresses'] = $adresses[$id_auteur];
+				$infos['coordonnees:adresses'] = $adresses[$id_auteur];
 			if ($emails[$id_auteur])
-				$infos['emails'] = $emails[$id_auteur];
+				$infos['coordonnees:emails'] = $emails[$id_auteur];
 			if ($telephones[$id_auteur])
-				$infos['numeros'] =  $telephones[$id_auteur];
-			echo '<div class="vcard">'. association_totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos, 'coordonnees') .'</div>';
+				$infos['coordonnees:numeros'] =  $telephones[$id_auteur];
+			echo '<div class="vcard">'. association_totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos ) .'</div>';
 			// datation et raccourcis
 			raccourcis_association('');
 			debut_cadre_association('annonce.gif', 'adherent_titre_modifier_membre');

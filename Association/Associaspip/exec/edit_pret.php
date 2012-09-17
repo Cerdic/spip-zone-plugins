@@ -17,8 +17,8 @@ include_spip ('inc/navigation_modules');
 
 function exec_edit_pret()
 {
-	$id_pret = intval(_request('id_pret'));
-	if (!autoriser('associer', 'activites', $id_pret)) {
+	$id_pret = association_passeparam_id('pret');
+	if (!autoriser('associer', 'activites')) {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {

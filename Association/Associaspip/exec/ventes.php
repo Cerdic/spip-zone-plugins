@@ -22,16 +22,12 @@ function exec_ventes()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_vente = intval(_request('id'));
+		$id_vente = association_passeparam_id('vente');
 		if ($id_vente) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
 			$annee = sql_getfetsel("DATE_FORMAT(date_vente, '%Y')",'spip_asso_ventes', "id_vente=$id_vente"); // on recupere l'annee correspondante
-		} else {
-			$annee = intval(_request('annee')); // on recupere l'annee requetee
-			$id_vente = ''; // ne pas afficher ce disgracieux '0'
-		}
-		if (!$annee) {
-			$annee = date('Y'); // par defaut c'est l'annee courante
-			$id_vente = ''; // virer l'ID inexistant
+		} else { // on peut prendre en compte les filtres ; on recupere les parametres de :
+			$annee = association_passeparam_annee();
+			$etat = _request('etat'); // etat d'avancement de la commande
 		}
 		onglets_association('titre_onglet_ventes', 'ventes');
 		// INTRO : nom du module et annee affichee
@@ -59,40 +55,29 @@ function exec_ventes()
 		// FILTRES
 		filtres_association(array(
 			'annee' => array($annee, 'asso_ventes', 'vente'),
-			'id' => $id_vente,
+#			'id' => $id_vente,
 		), 'ventes');
 		//TABLEAU
-		echo "<table width='100%' class='asso_tablo' id='asso_tablo_ventes'>\n";
-		echo "<thead>\n<tr>";
-		echo '<th>'. _T('asso:entete_id') .'</th>';
-		echo '<th>'. _T('asso:entete_date') .'</th>';
-		echo '<th>'. _T('asso:entete_intitule') .'</th>';
-		echo '<th>'. _T('asso:entete_code') .'</th>';
-		echo '<th>'. _T('asso:entete_nom') .'</th>';
-		echo '<th>'. _T('asso:entete_quantite') . '</th>';
-		echo '<th>'. _T('asso:entete_montant') .'</th>';
-		echo '<th colspan="2" class="actions">'. _T('asso:entete_actions') .'</th>';
-		echo "</tr>\n</thead><tbody>";
-		$query = sql_select('*', 'spip_asso_ventes', "DATE_FORMAT(date_vente, '%Y')=$annee", '',  'id_vente DESC') ;
-		while ($data = sql_fetch($query)) {
-			echo '<tr class="'. ($data['date_envoi']<$data['date_vente']?'pair':'impair') . (($id_vente==$data['id_vente'])?' surligne':'') .'" id="'.$data['id_vente'].' hproduct" rel="purchase">';
-			echo '<td class="integer">'.$data['id_vente'].'</td>';
-			echo '<td class="date">'. association_formater_date($data['date_vente'],'dtstart') .'</td>';
-			echo '<td class="text"><span class="n">'
-				. (test_plugin_actif('CATALOGUE') && (is_numeric($data['article']))
-					? association_calculer_lien_nomid('',$data['article'],'article')
-					: propre($data['article'])
-				) .'</span></td>';
-			echo '<td class="texte">'. association_formater_code($data['code'], 'x-spip_asso_ventes') .'</td>';
-			echo '<td class="text">'. association_calculer_lien_nomid($data['acheteur'],$data['id_acheteur']) .'</td>';
-			echo '<td class="decimal quantity">'. association_formater_nombre($data['quantite']) .'</td>';
-			echo '<td class="decimal">'
-			. association_formater_prix($data['quantite']*$data['prix_vente'], 'purchase cost offer').'</td>';
-			echo association_bouton_suppr('vente', 'id='.$data['id_vente']);
-			echo association_bouton_edit('vente','id='.$data['id_vente']);
-			echo "</tr>\n";
-		}
-		echo "</tbody>\n</table>\n";
+		echo association_bloc_listehtml(
+			array('*, CASE WHEN date_envoi<date_vente THEN 0 ELSE 1 END AS statut_vente', 'spip_asso_ventes', "DATE_FORMAT(date_vente, '%Y')=$annee", '',  'id_vente DESC'), // requete
+			array(
+				'id_vente' => array('asso:entete_id', 'entier'),
+				'date_vente' => array('asso:ventes_entete_date_vente', 'date', 'dtstart'),
+				'date_envoie' => array('asso:ventes_entete_date_envoi', 'date', 'dtend'),
+				'article' => array('asso:entete_intitule', 'texte', 'propre', 'n'),
+				'code' => array('asso:entete_code', 'code', 'x-spip_asso_ventes'),
+				'id_acheteur' => array('asso:entete_nom', 'idnom', array('spip_asso_ventes', 'acheteur', 'id_acheteur'), 'membre'),
+				'quantite' => array('asso:entete_quantite', 'nombre', 2, 'quantity'),
+				'prix_vente' => array('asso:entete_montant', 'prix', 'purchase cost offer'),
+//				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),
+			), // entetes et formats des donnees
+			array(
+				array('suppr', 'vente', 'id=$$'),
+				array('edit', 'vente', 'id=$$'),
+			), // boutons d'action
+			'id_vente', // champ portant la cle des lignes et des boutons
+			array('pair hproduct', 'impair hproduct'), 'statut_vente', $id_vente // rel="purchase"
+		);
 		fin_page_association();
 	}
 }

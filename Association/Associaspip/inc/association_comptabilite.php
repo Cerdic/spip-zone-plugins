@@ -365,14 +365,8 @@ function association_creer_compte_virement_interne() {
 /* on recupere les parametres de requete a passer aux fonctions */
 function association_passe_parametres_comptables($classes=array()) {
     $params = array(); // initialisation de la liste
-    $params['exercice'] = intval(_request('exercice'));
-    if( !$params['exercice'] ) { // pas de "id_exercice" en parametre
-	$params['exercice'] = intval(sql_getfetsel('id_exercice', 'spip_asso_exercices', '', '', 'fin DESC')); // on recupere l'id_exercice dont la "date de fin" est "la plus grande", c'est a dire l'id de l'exercice le plus recent
-    }
-    $params['annee'] = intval(_request('annee'));
-    if( !$params['annee'] ) { // pas d'annee en parametre
-	$params['annee'] = date('Y'); // on prende l'annee actuelle
-    }
+    $params['exercice'] = association_passeparam_exercice();
+    $params['annee'] = association_passeparam_annee();
     $params['destination'] = intval(_request('destination'));
 #    if( !$params['destination'] ) { // pas de destination
 #    }

@@ -61,7 +61,7 @@ function association_navigation_onglets($titre='', $top_exec='', $INSERT_HEAD=TR
 		echo $commencer_page();
 	}
 	echo '<div class="table_page">';
-	echo '<h1 class="asso_titre">', $titre?_T($titre):_T('asso:gestion_de_lassoc', array('nom'=>$GLOBALS['association_metas']['nom']) ), '</h1>'; // Nom du module. cf:  <http://programmer.spip.org/Contenu-d-un-fichier-exec>
+	echo '<h1 class="asso_titre">', $titre?association_langue($titre):_T('asso:gestion_de_lassoc', array('nom'=>$GLOBALS['association_metas']['nom']) ), '</h1>'; // Nom du module. cf:  <http://programmer.spip.org/Contenu-d-un-fichier-exec>
 	if ($res)
 		echo '<div class="bandeau_actions barre_onglet clearfix">', debut_onglet(), $res, fin_onglet(), '</div>'; // Onglets actifs
 	echo '</div>';
@@ -76,7 +76,7 @@ function association_navigation_onglets($titre='', $top_exec='', $INSERT_HEAD=TR
  */
 function onglets_association($titre='', $top_exec='', $INSERT_HEAD=TRUE)
 {
-	association_navigation_onglets($titre?"asso:$titre":'', $top_exec, $INSERT_HEAD);
+	association_navigation_onglets($titre, $top_exec, $INSERT_HEAD);
 }
 
 /**
@@ -100,7 +100,7 @@ function onglets_association($titre='', $top_exec='', $INSERT_HEAD=TRUE)
  *   qui doit alors etre obligatoirement celui qui precede !
  * @return void
  */
-function association_navigation_raccourcis($adresse_retour='',  $raccourcis=array(), $PrefixeLangue='asso', $FIN_BOITE_INFO=TRUE)
+function association_navigation_raccourcis($adresse_retour='',  $raccourcis=array(), $FIN_BOITE_INFO=TRUE)
 {
 	$res = ''; // initialisation
 	if ( is_array($raccourcis) AND count($raccourcis) ) {
@@ -114,7 +114,7 @@ function association_navigation_raccourcis($adresse_retour='',  $raccourcis=arra
 				$acces = true;
 			// generation du raccourci
 			if ( $acces )
-				$res .= icone1_association("$PrefixeLangue:$raccourci_titre",  (is_array($params[1])?generer_url_ecrire($params[1][0],$params[1][1]):generer_url_ecrire($params[1])), $params[0]);
+				$res .= icone1_association($raccourci_titre,  (is_array($params[1])?generer_url_ecrire($params[1][0],$params[1][1]):generer_url_ecrire($params[1])), $params[0]);
 		}
 	}
 	if ( is_array($adresse_retour) ) { // tableau : url_exec, parametres_exec
@@ -152,7 +152,7 @@ function raccourcis_association($adresse_retour='',  $raccourcis=array(), $Prefi
  */
 function icone1_association($texte, $lien, $image)
 {
-	return icone_horizontale(_T($texte), $lien, _DIR_PLUGIN_ASSOCIATION_ICONES. $image, 'rien.gif', false); // http://doc.spip.org/@icone_horizontale
+	return icone_horizontale(association_langue($texte), $lien, _DIR_PLUGIN_ASSOCIATION_ICONES. $image, 'rien.gif', false); // http://doc.spip.org/@icone_horizontale
 }
 
 /**
@@ -190,7 +190,9 @@ function debut_cadre_association($icone, $titre, $T_args='', $DEBUT_DROITE=true)
 {
 	if ($DEBUT_DROITE)
 		echo debut_droite('',true);
-	debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.$icone, false, '', (is_array($T_args)?_T("asso:$titre",$T_args): _T("asso:$titre")." $T_args") );
+	if ( is_array($T_args) )
+		array_unshift($T_args, $titre);
+	debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.$icone, false, '', (is_array($T_args)?association_langue($T_args): association_langue($titre)." $T_args") );
 }
 
 /**
@@ -204,7 +206,7 @@ function debut_cadre_association($icone, $titre, $T_args='', $DEBUT_DROITE=true)
  */
 function filtres_association($liste_filtres, $exec='', $supplements='', $td=TRUE)
 {
-	echo association_bloc_filtres($liste_filtres, $exec, $supplements, $td);
+	echo association_bloc_filtres(&$liste_filtres, &$exec, &$supplements, &$td);
 }
 
 ?>

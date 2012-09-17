@@ -34,15 +34,15 @@ function action_editer_asso_ventes()
 		if ($code>0) { // c'est une variante
 			$variante = sql_fetsel('*', 'spip_cat_variantes', 'id_cat_variante='.$code);
 			if (!$article)
-				$article = $variante['id_article'];
-			if ($prix_unite==0)
+				$article = '[->art'.$variante['id_article'].'] : '.$variante['titre'];
+			if (!$prix_unite)
 				$prix_unite = $variante['prix']*(1+$variante['tva']);
 		} else { // c'est une option
 			$option = sql_fetsel('*', 'spip_cat_options', 'id_cat_option='.abs($code));
 			if (!$article)
-				$article = $option['id_article'];
-			if ($prix_unite==0)
-				$prix_unite = $option['prix']*(1+$option['tva']);
+				$article = '[->art'.$option['id_article'].'] &amp; '.$option['titre'];
+#			if (!$prix_unite) // normalement le prix de l'option s'ajoute au prix de base...
+				$prix_unite += $option['prix']*(1+$option['tva']);
 		}
 	}
 	$modifs = array(

@@ -96,7 +96,7 @@ function association_bouton_act($texte, $image, $script='', $exec_args='', $img_
 	$res = ($tag?"<$tag class='action'>":'');
 	$res .= ($script ? '<a href="'.generer_url_ecrire($script, $exec_args).'">' : '' );
 	$res .= '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.$image.'" alt="';
-	$res .= ($texte ? _T('asso:'.$texte).'" title="'._T('asso:'.$texte) : ' ' );
+	$res .= ($texte ?association_langue($texte).'" title="'. association_langue($texte) : ' ' );
 	$res .= '" '.$img_attrs.' />';
 	$res .= ($script?'</a>':'');
 	return $res;
@@ -287,11 +287,15 @@ function association_calculer_lien_nomid($nom, $id, $type='membre', $html_span='
  * @return string $res
  *   Date formatee
  */
-function association_formater_date($iso_date, $css_class='', $format='entier', $html_abbr='abbr')
+function association_formater_date($iso_date, $css_class='', $format='entier', $html_abbr='auto')
 {
+	if ( !$iso_date || substr_count($iso_date, '0000-00-00') ) // date indeterminee
+		return '';
 	$res = '';
+	if ( $html_abbr=='auto' )
+		$html_abbr = ($GLOBAL['meta']['html5']?'time':'abbr');
 	if ( $html_abbr )
-		$res = "<$html_abbr ". ($css_class?"class='$css_class' ":'') ."title='$iso_date'>";
+		$res = "<$html_abbr ". ($css_class?"class='$css_class' ":'') . ($html_abbr=='time'?'datetime':'title'). "='$iso_date'>";
 	$res .= affdate_base($iso_date, $format?$format:'entier'); // on fait appel a la fonction centrale des filtres SPIP... comme ca c'est traduit et formate dans les langues supportees ! si on prefere les mois en chiffres et non en lettre, y a qu'a changer les chaines de langue date_mois_XX
 	return $res. ($html_abbr?"</$html_abbr>":'');
 }
@@ -304,48 +308,25 @@ function association_formater_date($iso_date, $css_class='', $format='entier', $
  * @param int $decimales
  *   Nombre de decimales affichees.
  *   Par defaut : 2
- * @param string $l10n
- *   Code ISO-639 de la langue voulue
- *   Par defaut : on tente de detecter la langue du navigateur sinon celle du site
+ * @param string $css_class
+ *   Classe(s) CSS (separees par un espace) a rajouter
+ * @param string $html_abbr
+ *   Balise-HTML (paire ouvrante/fermante) encadrante
  * @return string $res
  *   Nombre formatee
  *
  * @note Perfectible... Avis aux contributeurs motives...
  */
-function association_formater_nombre($nombre, $decimales=2, $l10n='')
+function association_formater_nombre($nombre, $decimales=2, $css_class='', $html_abbr='')
 {
-	// recuperer le code des parametres regionnaux a utiliser
-	// dans un premier temps, on essaye d'utiliser la langue puisque SPIP gere
-	// bien cela et offre la possibilite d'en faire plus avec
-	//  http://programmer.spip.org/Forcer-la-langue-selon-le-visiteur
-	// Comme ce n'est pas suffisant (le code de localisation est de la forme
-	// langue-pays ou langue_PAYS en utilisant les codes ISO), et recuperer le
-	// pays n'est pas simple sans faire appel a l'IP-geolocalisation
-	// http://stackoverflow.com/questions/2156231/how-do-you-detect-a-website-visitors-country-specifically-us-or-not
-	// Ni SPIP ni PHP n'offrant de moyen "simple" d'arriver a nos fin bah...
-	if (!$l10n) { // pas de localae specifiee
-		$l10n = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-		if (!$l10n) { // pas specifie par le navigateur non plus ?
-			$l10n = array('french', 'fr_FR', 'fr_FR@euro', 'fr_FR.iso88591', 'fr_FR.iso885915@euro', 'fr_FR.utf8', 'fr_FR.utf8@euro'); // alors on s'impose...
-		} else { // si specifie, on va transformer en tableau http://www.thefutureoftheweb.com/blog/use-accept-language-header
-			preg_match_all('/([a-z]{1,8}(-[a-z]{1,8})?)\s*(;\s*q\s*=\s*(1|0\.[0-9]+))?/i', $l10n, $lang_parse);
-			if (count($lang_parse[1])) { // creer la liste locale=>preference
-				$langues = array_combine($lang_parse[1], $lang_parse[4]);
-				foreach ($langues as $langue => $taux) { // pour les taux de preferences non specifies, mettre a 100%
-					if ($taux==='')
-						$langues[$langue] = 1;
-				}
-				arsort($langues, SORT_NUMERIC); // ordonne par taux de preferences
-				$l10n = array_keys($langues); // on recupere la liste des langues triees
-			}
-
-		}
-	}
-	// formater selon la langue choisie/recuperee
-	// http://stackoverflow.com/a/437642
-	setlocale(LC_NUMERIC, $l10n);
+	if ( $html_abbr )
+		$res = "<$html_abbr ". ($css_class?"class='$css_class' ":'') ."title='$iso_date'>";
+	else
+		$res = '';
+	setlocale(LC_NUMERIC, utiliser_langue_visiteur() );
 	$locale = localeconv();
-    return number_format(floatval($nombre), $decimales, $locale['decimal_point'], $locale['thousands_sep']);
+    $res .= number_format(floatval($nombre), $decimales, $locale['decimal_point'], $locale['thousands_sep']);
+	return $res. ($html_abbr?"</$html_abbr>":'');
 }
 
 /**
@@ -629,9 +610,9 @@ function association_formater_prix($montant, $type='', $devise_code='', $devise_
  * @param string $texte
  *   Le texte brut initial
  * @param string $filtre
- *   Filtre SPIP a appliquer au texte
- * @param array $params
- *   Liste des parametres du filtre
+ *   Filtre SPIP a appliquer au texte.
+ *   Pour les filtres avec parametre, il faut utiliser une liste debutant par le
+ *   nom du filtre suivi des parametres.
  * @param string $html_span
  *   Balise-HTML (paire ouvrante/fermante) encadrante
  * @param string $css_class
@@ -642,7 +623,7 @@ function association_formater_prix($montant, $type='', $devise_code='', $devise_
  * @note
  *   http://spipistrelle.clinamen.org/spip.php?article16
  */
-function association_formater_texte($texte, $filtre='', $params=array(), $css_class='', $html_span='' )
+function association_formater_texte($texte, $filtre='', $css_class='', $html_span='' )
 {
 	$res = '';
 	if ( $css_class && !$html_span )
@@ -650,8 +631,12 @@ function association_formater_texte($texte, $filtre='', $params=array(), $css_cl
 	if ( $html_span )
 		$res = "<$html_span". ($css_class?" class='$css_class' ":'') .'>';
 	include_spip('inc/texte'); // pour nettoyer_raccourci_typo
-	if ( !is_array($params) )
-		$params = array($params);
+	if ( is_array($filtre) ) {
+		$params = $filtre;
+		$filtre = array_shift($params);
+	} else {
+		$params = array();
+	}
 	$ok = array_unshift($params, $texte);
 	$res .= $filtre?call_user_func_array($filtre, $params):$texte;
 	return $res. ($html_span?"</$html_span>":'');
@@ -674,7 +659,7 @@ function association_formater_puce($statut, $icone,  $acote=TRUE, $img_attrs='')
 {
 	if ( is_array($icone) )
 		$icone = $icone[$statut];
-	return association_bouton_act($statut, 'puce-'.$icone.'.gif', '', '', $img_attrs, '').' '._T("asso:$acote") ; // c'est comme un bouton... sans action/lien...
+	return association_bouton_act($statut, 'puce-'.$icone.'.gif', '', '', $img_attrs, '').' '. association_langue($acote) ; // c'est comme un bouton... sans action/lien...
 }
 
 /**
@@ -694,11 +679,13 @@ function association_formater_puce($statut, $icone,  $acote=TRUE, $img_attrs='')
  * @return string $res
  *   Date formatee
  */
-function association_formater_heure($iso_date, $css_class='', $html_abbr='abbr')
+function association_formater_heure($iso_date, $css_class='', $html_abbr='auto')
 {
 	$res = '';
+	if ( $html_abbr=='auto' )
+		$html_abbr = ($GLOBAL['meta']['html5']?'time':'abbr');
 	if ( $html_abbr )
-		$res = "<$html_abbr ". ($css_class?"class='$css_class' ":'') ."title='$iso_date'>";
+		$res = "<$html_abbr ". ($css_class?"class='$css_class' ":'') . ($html_abbr=='time'?'datetime':'title'). "='$iso_date'>";
 	$res .= affdate_heure($iso_date); // on fait appel a la fonction centrale des filtres SPIP... comme ca c'est traduit et formate dans les langues supportees ! si on prefere les mois en chiffres et non en lettre, y a qu'a changer les chaines de langue date_mois_XX
 	return $res . ($html_abbr?"</$html_abbr>":'');
 }
@@ -732,6 +719,51 @@ function association_formater_code($code, $type='x-associaspip', $p_v=TRUE, $htm
 	return $res. ($html_span?"</$html_span>":'');
 }
 
+/**
+ * Afficher le nom ou le lien sur un objet a partir de son id
+ *
+ * @param int $id
+ *   Valeur de l'identifiant pour faire le lien ou recuperer le nom
+ * @param string|array $nom
+ *   Le pseudonyme a afficher (directement donnee) ; ou
+ *   La liste de : la table dans laquelle la recuperer, le champ le contenant
+ *   (par defaut "titre") et la cle primaire a utiliser pour la requete (par
+ *   defaut "id_auteur"). Le cas particulier de la liste vide permet de generer
+ *   le nom complet du membre ayant l'ID fourni.
+ * @param string $lien
+ *   Nom de l'objet pour lequel on genere le lien sous forme de raccourci SPIP
+ * @param string $html_span
+ *   Balise HTML encadrante (paire ouvrante/fermante) a utiliser pour encadrer
+ *   l'ensemble. Par defaut : "span". Il faut mettre un chaine vide pour ne pas
+ *   microformater...
+ * @return string $res
+ *   Code HTML correspondant
+ */
+function association_formater_idnom($id, $nom='', $lien='', $html_span='span') {
+	$res = '';
+	if ( is_array($nom) ) { // requeter le nom... (rajoute de la charge sur la base de donnees)
+		$table = ($nom[0] ? $nom[0] : ($nom['table'] ? $nom['table'] : ($nom['from'] ? $nom['from'] : ($nom['tables']?$nom['tables']:'spip_asso_membres') ) ) ) ; // on recupere le nom de la table a interroger
+		if ( $table=='spip_asso_membres' || $table=='asso_membres' ) { // cas special d'un membre
+			$membre = sql_fetsel('*', 'spip_asso_membres', "id_auteur=$id");
+			$res = association_calculer_nom_membre($membre['sexe'], $membre['prenom'], $membre['nom_famille'], $html_span);
+		} else { // cas general
+			$champ = ($nom[1] ? $nom[1] : ($nom['field'] ? $nom['field'] : ($nom['select'] ? $nom['select'] : (($table=='spip_auteurs' || $table=='auteurs')?'nom':'titre') ) ) ) ; // on recupere le nom du champ contenant le nom recherche
+			$clef = ($nom[2] ? $nom[2] : ($nom['pk'] ? $nom['pk'] : ($nom['id'] ? $nom['id'] : 'id_auteur' ) ) ) ; // on recupere le nom du champ contenant le nom recherche
+			$nom = sql_getfetsel($champ, $table, "$clef=".sql_quote($id) );
+			if ( $nom )
+				$res = ($html_span?"<$html_span class='n'>":'') . $nom . ($html_span?"</$html_span>":'');
+			elseif ( $lien=='membre')
+				association_formater_idnom($id, array(), $lien, $html_span);
+		}
+	} elseif ( $nom ) { // utiliser nom...
+		$res = ($html_span?"<$html_span class='n'>":'') .$nom. ($html_span?"</$html_span>":'');
+	}
+	if ( $lien ) {
+		$res = propre('['.$res."->$lien$id]");
+	}
+	return $res;
+}
+
 /** @} */
 
 
@@ -755,7 +787,7 @@ function association_formater_code($code, $type='x-associaspip', $p_v=TRUE, $htm
 function association_recuperer_date($valeur, $req=TRUE)
 {
 	$valeur = ($req?_request($valeur):$valeur);
-	if ($valeur!='') {
+	if ( $valeur ) {
 		$valeur = preg_replace('/\D/', '-', $valeur, 2); // la limitation a 2 separateurs permet de ne transformer que la partie "date" s'il s'agit d'un "datetime" par exemple.
 	}
 	return $valeur;
@@ -768,13 +800,14 @@ function association_recuperer_date($valeur, $req=TRUE)
 function association_recuperer_montant($valeur, $req=TRUE)
 {
 	$valeur = ($req?_request($valeur):$valeur);
-	if ($valeur!='') {
-		$valeur = str_replace(' ', '', $valeur); // suppprime les espaces separateurs de milliers
-		$valeur = str_replace(',', '.', $valeur); // convertit les , en .
+	if ( $valeur ) {
+		setlocale(LC_NUMERIC, utiliser_langue_visiteur() );
+		$locale = localeconv(); // recuperer les parametres regionnaux
+		$valeur = str_replace($locale['thousands_sep'], '', $valeur); // suppprime les separateurs de milliers
+		$valeur = str_replace($locale['decimal_point'], '.', $valeur); // remplacer le separateur decimal par le point
 		$valeur = floatval($valeur);
-	} else
-		$valeur = 0.0;
-	return $valeur;
+	}
+	return floatval($valeur);
 }
 
 /** @} */
@@ -891,6 +924,7 @@ function association_selectionner_exercice($sel='', $exec='', $plus='')
 		$res .= '>'.$val['intitule'].'</option>';
     }
     $res .= '</select>'.$plus;
+    sql_free($sql);
     return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>') : $res;
 }
 
@@ -915,6 +949,7 @@ function association_selectionner_destination($sel='', $exec='', $plus='')
 		$res .= '>'.$val['intitule'].'</option>';
     }
     $res .= '</select>'.$plus;
+    sql_free($sql);
     if ($GLOBALS['association_metas']['destinations']){
 		return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>') : $res;
 	} else {
@@ -930,7 +965,7 @@ function association_selectionner_groupe($sel='', $exec='', $plus='')
     $qGroupes = sql_select('nom, id_groupe', 'spip_asso_groupes', 'id_groupe>=100', '', 'nom');  // on ne prend en consideration que les groupe d'id >= 100, les autres sont reserves a la gestion des autorisations
     if ( $qGroupes && sql_count($qGroupes) ) { // ne proposer que s'il y a des groupes definis
 		$res = '<select name="groupe" onchange="form.submit()">';
-		$res .= '<option value="">'._T('asso:tous_les_groupes').'</option>';
+		$res .= '<option value="">'. _T('asso:tous_les_groupes') .'</option>';
 		while ($groupe = sql_fetch($qGroupes)) {
 			$res .= '<option value="'.$groupe['id_groupe'].'"';
 			if ( $sel==$groupe['id_groupe'] )
@@ -938,10 +973,11 @@ function association_selectionner_groupe($sel='', $exec='', $plus='')
 			$res .= '>'.$groupe['nom'].'</option>';
 		}
 		$res .= '</select>'.$plus;
-		return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>') : $res;
+		return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>') : $res;
 	} else {
 		return '';
 	}
+	//sql_free($qGroupes);
 }
 
 /**
@@ -950,15 +986,15 @@ function association_selectionner_groupe($sel='', $exec='', $plus='')
 function association_selectionner_statut($sel='', $exec='', $plus='')
 {
     $res = '<select name="statut_interne" onchange="form.submit()">';
-    $res .= '<option value="%"'. (($sel=='defaut' || $sel=='%')?' selected="selected"':'') .'>'._T('asso:entete_tous').'</option>';
+    $res .= '<option value="%"'. (($sel=='defaut' || $sel=='%')?' selected="selected"':'') .'>'. _T('asso:entete_tous') .'</option>';
     foreach ($GLOBALS['association_liste_des_statuts'] as $statut) {
 		$res .= '<option value="'.$statut.'"';
 		if ( $sel==$statut )
 			$res .= ' selected="selected"';
-		$res .= '> '._T('asso:adherent_entete_statut_'.$statut).'</option>';
+		$res .= '> '. _T('asso:adherent_entete_statut_'.$statut) .'</option>';
 	}
 	$res .= '</select>'.$plus;
-    return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>') : $res;
+    return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>') : $res;
 }
 
 /**
@@ -967,7 +1003,7 @@ function association_selectionner_statut($sel='', $exec='', $plus='')
 function association_selectionner_id($sel='', $exec='', $plus='')
 {
     $res = '<input type="text" name="id" onfocus=\'this.value=""\' size="5"  value="'. ($sel?$sel:_T('asso:entete_id')) .'" />'.$plus;
-    return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>') : $res;
+    return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>') : $res;
 }
 
 //@}
@@ -992,6 +1028,9 @@ function association_selectionner_annee($annee='', $dtable, $dchamp, $exec='', $
 		$res = '';
     }
     $pager = '';
+    if ( !$annee ) { // annee non precisee (ou valant 0)
+		$annee = date('Y'); // on prend l'annee courante
+	}
     $res .= '<select name ="annee" onchange="form.submit()">';
     $an_max = sql_getfetsel("MAX(DATE_FORMAT(date_$dchamp, '%Y')) AS an_max", "spip_$dtable", '');
     $an_min = sql_getfetsel("MIN(DATE_FORMAT(date_$dchamp, '%Y')) AS an_min", "spip_$dtable", '');
@@ -1011,8 +1050,9 @@ function association_selectionner_annee($annee='', $dtable, $dchamp, $exec='', $
 		$res .= '>'.$val['annee'].'</option>';
     }
     $res .= '</select>'.$plus;
+    sql_free($sql);
     if ($exec) {
-		$res .= '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>';
+		$res .= '<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>';
 		$res .= '</div></form>';
     }
     return $res;
@@ -1040,10 +1080,11 @@ function association_selectionner_destinations($sel='', $exec='', $plus='')
     }
     $res .= '</select>'.$plus;
     if ($GLOBALS['association_metas']['destinations']){
-		return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>') : $res;
+		return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>') : $res;
 	} else {
 		return FALSE;
 	}
+	//sql_free($sql);
 }
 
 /**
@@ -1179,10 +1220,7 @@ function instituer_statut_interne_ici($auteur=array()){
  *   ID de l'objet, affiche au dessus du titre
  * @param array $DesLignes
  *   Tableau des lignes supplementaires a rajouter dans le bloc, sous la forme :
- *   chaine_de_langue_du_titre (sans prefixe) => texte contenu/explication associe.
- * @param string $PrefixeLangue
- *   Prefixe de langue associe aux chaines de langue des titres de lignes.
- *   Par defaut : asso
+ *   'chaine_de_langue_du_titre' => "texte contenu/explication associe."
  * @param string $ObjetEtendu
  *   Nom de l'objet etendu dont on desire afficher les lignes des champs rajoutes par "Interface Champs Extras 2".
  *   Par defaut : rien
@@ -1192,11 +1230,11 @@ function instituer_statut_interne_ici($auteur=array()){
  *   Ce n'est pas redondant d'avoir a la fois $type et $ObjetEtendu qui peuvent
  *   avoir des valeurs differentes comme on peut le voir dans exec/adherent.php et exec/inscrits_activite.php !
  */
-function association_totauxinfos_intro($titre, $type='', $id=0, $DesLignes=array(), $PrefixeLangue='asso', $ObjetEtendu='')
+function association_totauxinfos_intro($titre, $type='', $id=0, $DesLignes=array(), $ObjetEtendu='')
 {
 	$res = '';
 	if ($type) {
-		$res .= '<div style="text-align: center" class="verdana1 spip_x-small">'. _T('asso:titre_num', array('titre'=>_T("local:$type"), 'num'=>$id) ) .'</div>'; // presentation propre a Associaspip qui complete par un autre titre (voir ci-apres). Dans un SPIP traditionnel on aurait plutot : $res .= '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'. _T("$PrefixeLangue:$type") .'<br /><span class="spip_xx-large">'.$id.'</span></div>';
+		$res .= '<div style="text-align: center" class="verdana1 spip_x-small">'. _T('asso:titre_num', array('titre'=>_T("local:$type"), 'num'=>$id) ) .'</div>'; // presentation propre a Associaspip qui complete par un autre titre (voir ci-apres). Dans un SPIP traditionnel on aurait plutot : $res .= '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'. association_langue($type) .'<br /><span class="spip_xx-large">'.$id.'</span></div>';
 	}
 	$res .= '<div style="text-align: center" class="verdana1 spip_medium">'.$titre.'</div>';
 	if ( !is_array($DesLignes) )
@@ -1204,7 +1242,7 @@ function association_totauxinfos_intro($titre, $type='', $id=0, $DesLignes=array
 	if ( count($DesLignes) OR $ObjetEtendu )
 		$res .= '<dl class="verdana1 spip_xx-small">';
 	foreach ($DesLignes as $dt=>$dd) {
-		$res .= '<dt>'. _T("$PrefixeLangue:$dt") .'</dt><dd>'. propre($dd) .'</dd>'; // propre() encadre dans P... Cette presentation est propre a Associaspip. Habituellement on a : $res .= "<div class='$dt'><strong>". _T("$PrefixeLangue:$dt") ."</strong> $dd</div>";
+		$res .= '<dt>'. association_langue($dt) .'</dt><dd>'. propre($dd) .'</dd>'; // propre() paragraphe (rajoute <p>)... mais ce comportement peut etre change en mettant "paragrapher" a false dans mes_options.php : http://www.spip.net/fr_article889.html Cette presentation-ci est propre a Associaspip ; Habituellement on a : $res .= "<div class='$dt'><strong>". association_langue($dt) ."</strong> $dd</div>";
 	}
 	if ($ObjetEtendu) {
 		$champsExtras = association_trouver_iextras($ObjetEtendu, $id); // on recupere les champs extras crees manuellement (i.e. via l'interface d'edition du prive, pas ceux rajoutes par les plugins !)
@@ -1271,7 +1309,7 @@ function association_totauxinfos_stats($legende='', $sql_table_asso, $sql_champs
 	foreach ($sql_champs as $libelle=>$champs) {
 		$stats = sql_fetsel("AVG($champs) AS valMoy, STDDEV($champs) AS ekrTyp, MIN($champs) AS valMin, MAX($champs) AS valMax ", "spip_asso_$sql_table_asso", $sql_criteres);
 		$res .= '<tr class="'. ($compteur%2?'row_odd':'row_even') .'">';
-		$res .= '<td class"text">'. _T('asso:'.(is_numeric($libelle)?$champs:$libelle)) .'</td>';
+		$res .= '<td class"text">'. association_langue((is_numeric($libelle)?$champs:$libelle)) .'</td>';
 		$res .= '<td class="'.($decimales_significatives?'decimal':'integer').'">'. association_formater_nombre($stats['valMoy'],$decimales_significatives) .'</td>';
 		$res .= '<td class="'.($decimales_significatives?'decimal':'integer').'">'. association_formater_nombre($stats['ekrTyp'],$decimales_significatives) .'</td>';
 		if ($avec_extrema) {
@@ -1310,7 +1348,7 @@ function association_totauxinfos_effectifs($legende='', $lignes, $decimales_sign
 	$res .= '<caption>'. _T('asso:totaux_nombres', array('de_par'=>_T("local:$legende"))) .'</caption><tbody>';
 	foreach ($lignes as $classe_css=>$params) {
 		$res .= '<tr class="'.$classe_css.'">';
-		$res .= '<td class"text">'._T('asso:'.$params[0]).'</td>';
+		$res .= '<td class"text">'. association_langue($params[0]) .'</td>';
 		$nbr_actuel = is_array($params[1]) ? call_user_func_array('sql_countsel', $params[1]) : $params[1] ;
 		$res .= '<td class="' .($decimales_significatives?'decimal':'integer') .'">'. association_formater_nombre($nbr_actuel, $decimales_significatives) .'</td>';
 		$nbr_total += $nbr_actuel;
@@ -1385,10 +1423,10 @@ function association_totauxinfos_montants($legende='', $somme_recettes=0, $somme
  * @note
  *   Une certaine similitude avec http://programmer.spip.org/boite_infos :)
   */
-function association_bloc_infosgauche($TitreObjet, $NumObjet, $DesLignes=array(), $PrefixeLangue='asso', $ObjetEtendu='')
+function association_bloc_infosgauche($TitreObjet, $NumObjet, $DesLignes=array(), $ObjetEtendu='')
 {
 	$res = debut_boite_info(true);
-	$res .= association_totauxinfos_intro($TitreObjet, $TitreObjet, $NumObjet, $DesLignes, $PrefixeLangu, $ObjetEtendu);
+	$res .= association_totauxinfos_intro($TitreObjet, $TitreObjet, $NumObjet, $DesLignes, $ObjetEtendu);
 	$res .= association_date_du_jour();
 	$res .= fin_boite_info(true);
 	return $res;
@@ -1407,8 +1445,8 @@ function association_bloc_infosgauche($TitreObjet, $NumObjet, $DesLignes=array()
  */
 function association_bloc_suppression($type, $id, $retour='')
 {
-	$res = '<p><strong>'. _T('asso:vous_aller_effacer', array('quoi'=>'<i>'._T('asso:objet_num',array('objet'=>$type,'num'=>$id)).'</i>') ) .'</strong></p>';
-	$res .= '<p class="boutons"><input type="submit" value="'._T('asso:bouton_confirmer').'" /></p>';
+	$res = '<p><strong>'. _T('asso:vous_aller_effacer', array('quoi'=>'<i>'. _T('asso:objet_num', array('objet'=>$type,'num'=>$id)) .'</i>') ) .'</strong></p>';
+	$res .= '<p class="boutons"><input type="submit" value="'. _T('asso:bouton_confirmer') .'" /></p>';
 	echo redirige_action_post("supprimer_{$type}s", $id, ($retour?$retour:$type.'s'), '', $res);
 
 }
@@ -1492,7 +1530,7 @@ function association_bloc_listepdf($objet, $params=array(), $prefixeLibelle='', 
 		foreach ($champsPresents['field'] as $k => $v) { // donner le menu des choix
 			if ( !in_array($k, $champsExclus) ) { // affichable/selectionnable (champ ayant un libelle declare et connu)
 				$lang_clef = $prefixeLibelle.$k;
-				$lang_texte = _T('asso:'.$lang_clef);
+				$lang_texte = association_langue($lang_clef);
 				if ( $lang_clef!=str_replace(' ', '_', $lang_texte) ) { // champ natif du plugin
 					$frm .= "<div class='choix'><input type='checkbox' name='champs[$k]' id='liste_${objet}s_$k' /><label for='liste_${objet}s_$k'>$lang_texte</label></div>";
 				} elseif( array_key_exists($k,$champsExtras) ) { // champs rajoute via cextra
@@ -1575,10 +1613,10 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
 	$res .= "\n<thead>\n<tr>";
 	foreach ($presentation as &$param) { // entetes
 		$entete = array_shift($param);
-		$res .= '<th>'. ($entete ? _T((strpos($entete,':') ? '' : 'asso:').$entete) : '&nbsp;' ) .'</th>';
+		$res .= '<th>'. ($entete ? association_langue($entete) : '&nbsp;' ) .'</th>';
 	}
 	if ( count($boutons) ) { // colonne(s) de bouton(s) d'action
-		$res .= '<th colspan="'. count($boutons) .'" class="actions">'. _T('asso:entete_action'.(count($boutons)-1?'s':'')) .'</th>';
+		$res .= '<th colspan="'. count($boutons) .'" class="actions">'. _T('asso:entete_action' .(count($boutons)-1?'s':'')) .'</th>';
 	}
 	$res .= "</tr>\n</thead><tbody>";
 	if ( !is_array($boutons) )
@@ -1626,7 +1664,8 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
 				case 'logo' :
 					$td_css = 'image';
 					break;
-				case 'texte' : // ajouter : propre()
+				case 'code' :
+				case 'texte' :
 				default :
 					$td_css = 'text';
 					break;
@@ -1646,6 +1685,7 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
 		$res .= "</tr>\n";
 	}
 	$res .= "</tbody>\n</table>\n";
+	sql_free($reponse_sql);
 	if ( $cle1 && $selection ) {
 		$res .= '<script type="text/javascript"> document.getElementById("'.$objet.$selection.'").scrollIntoView(true); </script>' ; // comme on ne peut placer un evenement "onLoad" que sur une roussource externe (IMG, FRAME, SCRIPT, BODY) ; il vaut mieux appliquer faire un SCRIPT inclus (tout juste apres ou dans HEAD si possible)
 	}
@@ -1712,7 +1752,117 @@ function sql_asso1page($valeur='debut', $req=TRUE)
 	return "$valeur,"._ASSOCIASPIP_LIMITE_SOUSPAGE;
 }
 
+/**
+ * Operation ensembliste sur deux requetes
+ *
+ * @param string $operateur
+ *   Operation ensembliste a realiser : UNION (reunion, par defaut), INTERSECT
+ *   (intersection), MINUS (difference) ou EXCEPT ; sans duplication ou avec (ALL)
+ * @param array $q...
+ *   Elements d'une requete telle que passee a "sql_select"
+ * @return ressource
+ *
+ * @note
+ *   D'une part le support des differents operateurs varie d'un SGBDR a l'autre.
+ *   D'autre part il est souvent possible d'obtenir le meme resultat sans leur
+ *   usage mais au prix de requetes bien moins simples.
+ *   http://www.gplivna.eu/papers/sql_set_operators.htm
+ *   http://www.dba-ora.fr/article-sql-union-intersect-minus-101360158.html
+ *   http://cerig.efpg.inpg.fr/tutoriel/bases-de-donnees/chap21.htm
+ *   Le besoin de cette fontion vient de la necessite de reunir plusieurs etats
+ *   en une requte pour "association_bloc_listehtml()" et de ne rien trouver dans
+ *   l'API SQL de SPIP. Entre temps, la solution a ete de recourir a des CASE WHEN...THEN... END
+ *   qui semble aussi (ou plus) performant qu'une reUNION d'une meme table sur
+ *   elle-meme et tout aussi portable... La discussion reste ouverte...
+ *   http://www.sqlservercentral.com/Forums/Topic686395-8-1.aspx
+ *   http://www.sswug.org/articles/viewarticle.aspx?id=19349
+ *   http://db2portal.blogspot.fr/2009/11/replacing-union-with-case.html
+ *   http://www.componentace.com/help/absdb_manual/increasesqlperformance.htm
+ *   http://dba.stackexchange.com/questions/21904/refactoring-series-of-unions-in-single-table-sql-sybase
+ *   http://stackoverflow.com/questions/2563811/sqlite-is-the-case-statement-expensive
+ *   http://www.pcreview.co.uk/forums/case-access-sql-t1169064.html
+ */
+function sql_asso1set($operateur='UNION', $q1=array(), $q2=array() )
+{
+	$nbr_requetes = func_num_args()-1;
+	if ( $nbr_requetes<2 ) // il en faut au moins 2 !
+		return FALSE;
+	if ( !$operateur ) // non precise ?
+		$operateur = 'UNION';
+	$requete_finale = func_get_arg(1);
+	for ( $i=2; $i<$nbr_requetes; $i++ ) {
+		$requete_finale .= "\n $operateur \n". call_user_func_array('sql_get_select', func_get_arg($i) );
+	}
+	return sql_querry($requete_finale);
+}
+
 /** @} */
+
+
+
+
+/*****************************************
+ * @defgroup association_passeparam
+ * Les champs passes aux "exec" par l'URL etant normalises pour les filtres,
+ * ils partagent le meme code de passage de valeur et les memes noms de parametres
+ * (ce qui n'est pas le cas avec association_recuperer_ !)
+ *
+ * @return string $res
+ *   Valeur du request...
+ *
+** @{ */
+
+
+/**
+ * &id=
+ *
+ * @return int $id
+ */
+function association_passeparam_id($type)
+{
+	if ($type) // recuperer en priorite : id_compte, id_don, id_evenement, id_ressource, id_vente, etc.
+		$id = intval(_request("id_$type", $_GET));
+	else
+		$id = 0;
+	if (!$id) // pas d'id_... alors c'est le nom generrique qui est utilise
+		$id = intval(_request('id'));
+	return $id;
+}
+
+/**
+ * &annee=
+ *
+ * @return int $an
+ */
+function association_passeparam_annee($type)
+{
+#	if ($type) // recuperer en priorite :
+#		$an = intval(_request("annee_$type", $_GET));
+#	else
+#		$an = 0;
+#	if (!$an) // pas d'annee_... alors c'est le nom generrique qui est utilise
+		$an = intval(_request('annee'));
+	if (!$an) // annee non precisee
+		$an = date('Y'); // on prend l'annee courante
+	return $an;
+}
+
+/**
+ * &exercice=
+ *
+ * @return int $exo
+ */
+function association_passeparam_exercice()
+{
+	$exo = intval(_request('exercie'));
+	if (!$exo) // exercice non precise
+		$exo = sql_getfetsel('id_exercice','spip_asso_exercices','','','debut DESC'); // on recupere le dernier exercice en date
+	return $exo;
+}
+
+/** @} */
+
+
 
 
 /*****************************************
@@ -1745,18 +1895,20 @@ function request_statut_interne()
  * Affichage du message indiquant la date
  * (et l'heure si option activee)
  *
+ * @param bool $phraser
+ *   Indique si l'horodatage est insere dans la chaine de langue prevue a cet
+ *   effet (vrai, par defaut) ou s'il est renvoye seul (faux)
  * @return string $res
  */
-function association_date_du_jour()
+function association_date_du_jour($phraser=TRUE)
 {
-	$ladate = affdate_jourcourt(date('d/m/Y'));
-	$hr = (_ASSOCIASPIP_AUJOURDHUI_HORAIRE?date('H'):'');
-	$mn = (_ASSOCIASPIP_AUJOURDHUI_HORAIRE?date('i'):'');
-	$res = '<p class="'. (_ASSOCIASPIP_AUJOURDHUI_HORAIRE?'datetime':'date');
-	$res .= '" title="'. date('Y-m-d') . (_ASSOCIASPIP_AUJOURDHUI_HORAIRE?"T$hr:$mn":'');
-	$lheure = (_ASSOCIASPIP_AUJOURDHUI_HORAIRE ? _T('spip:date_fmt_heures_minutes', array('h'=>$hr,'m'=>$mn)) :'');
-	$res .= '">'. (_ASSOCIASPIP_AUJOURDHUI_HORAIRE ? _T('asso:date_du_jour_heure', array('date'=>$ladate,'time'=>$lheure)) : _T('asso:date_du_jour',array('date'=>$ladate)) ).'</p>';
-	return $res;
+	$frmt_m = date('Y-m-d'. (_ASSOCIASPIP_AUJOURDHUI_HORAIRE?'\TH:i:s':'') ); // format machine-parsable : idealement "\TH:i:s.uP" mais il faut PHP "up"date (plus precisement 5.1.0 pour "e" et 5.1.3 pour "P" et 5.2.0 pour "u")
+	$format = 'affdate_'. (_ASSOCIASPIP_AUJOURDHUI_HORAIRE?'heure':'base');
+	$frmt_h = $format($frmt_m, 'entier');  // format human-readable
+	if ( $phraser )
+		return '<p class="clear date">'. _T('asso:date_du_jour', array('date'=> ($GLOBAL['meta']['html5']?'<time datetime="':'<abbr title="'). $frmt_m.'">'.$frmt_h. ($GLOBAL['meta']['html5']?'</time>':'</abbr>') ) ) .'</p>';
+	else
+		return $frmt_h;
 }
 
 /**
@@ -1901,27 +2053,22 @@ function association_trouver_iextras($ObjetEtendu, $id=0)
 						case 'oui_non' :
 							$datum_parsed = _T("item:$datum_raw");
 							break;
-//						case 'asso_activite' :
 						case 'asso_categorie' :
 						case 'asso_compte' :
-//						case 'asso_don' :
 						case 'asso_exercice' :
 						case 'asso_membre' :
 						case 'asso_ressource' :
-//						case 'asso_vente' :
 							$raccourci = substr($ChampExtra['type'], 4); // on vire le prefixe "asso_"
 							if ( $ChampExtra['traitement'] )
 								$datum_parsed = $ChampExtra['traitement']('[->'.$raccourci.$datum_raw.']');
 							else { // il faut une requete de plus
 								switch ($raccourci) { // $valeur prend ici le champ SQL contenant la valeur desiree.
-//									case 'activite' :
 									case 'categorie' :
 										$valeur = 'libelle';
 										break;
 									case 'compte' :
 										$valeur = 'justification';
 										break;
-//									case 'don' :
 									case 'exercice' :
 										$valeur = 'intitule';
 										break;
@@ -1931,13 +2078,21 @@ function association_trouver_iextras($ObjetEtendu, $id=0)
 									case 'ressource' :
 										$valeur = 'intitule';
 										break;
-//									case 'vente' :
 									default :
 										$valeur = 'titre'; // sauf coincidence heurese, on devrait avoir une erreur...
 										break;
 								}
-								$datum_parsed = sql_getfetsel($valeur, "spip_$ChampExtra[type]s", 'id_'.($raccourci=='membre'?'auteur':$raccourci).'='.intval($datum_raw) ); // on recupere la donnee grace a la cle etrangere... (il faut que la table soit suffixee de "s" et que l'identifiant soit l'objet prefixe de "id_" :-S)
+								$datum_parsed = association_formater_idnom($datum_raw, array("spip_$ChampExtra[type]s", $valeur, 'id_'.$raccourci) , ''); // on recupere la donnee grace a la cle etrangere... (il faut que la table soit suffixee de "s" et que l'identifiant soit l'objet prefixe de "id_" :-S)
 							}
+							break;
+						case 'asso_activite' :
+						case 'asso_don' :
+						case 'asso_vente' :
+							$raccourci = substr($ChampExtra['type'], 4); // on vire le prefixe "asso_"
+							if ( $ChampExtra['traitement'] )
+								$datum_parsed = $ChampExtra['traitement']('[->'.$raccourci.$datum_raw.']');
+							else
+								$datum_parsed = _T('asso:objet_num', array('objet'=>$raccourci, 'num'=>$datum_raw) );
 							break;
 						case 'article' :
 						case 'auteur' :
@@ -1975,6 +2130,27 @@ function association_trouver_iextras($ObjetEtendu, $id=0)
 		}
 	}
 	return $champsExtrasVoulus;
+}
+
+/**
+ * Encapsulation de _T()
+ *
+ * @param string $chaine
+ *   Chaine de langue avec eventuellement le prefixe "asso" omis
+ * @return string
+ *   Libelle localise
+ */
+function association_langue($chaine)
+{
+	if ( is_string($chaine) ) {
+		$head = $chaine;
+		$tail = array();
+	} elseif ( is_array($chaine) ) {
+		$head = array_shift($chaine);
+		$tail = $chaine;
+	} else
+		return '';
+	return _T((strpos($head,':') ? '' : 'asso:').$head, $tail );
 }
 
 /** @} */

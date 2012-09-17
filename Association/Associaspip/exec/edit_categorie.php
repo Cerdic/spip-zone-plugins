@@ -25,7 +25,7 @@ function exec_edit_categorie()
 		onglets_association('categories_de_cotisations', 'association');
 		// INTRO : resume ressource
 		$infos['entete_utilisee'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_membres', "categorie=$id_categorie"), ));
-		echo association_totauxinfos_intro(sql_getfetsel('libelle', 'spip_asso_categories', "id_categorie=$id_categorie" ), 'categorie', $id_categorie, $infos );
+		echo association_totauxinfos_intro('', 'categorie', $id_categorie, $infos );
 		// datation et raccourcis
 		raccourcis_association('');
 		debut_cadre_association('calculatrice.gif', 'categories_de_cotisations');

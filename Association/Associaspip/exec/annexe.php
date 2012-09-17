@@ -25,20 +25,16 @@ function exec_annexe()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$plan = sql_countsel('spip_asso_plan');
-		$exercice = intval(_request('exercice'));
-		if(!$exercice){
-			/* on recupere l'id_exercice dont la date "fin" est "la plus grande" */
-			$exercice = sql_getfetsel('id_exercice','spip_asso_exercices', '', '', 'fin DESC');
-			if(!$exercice)
-				$exercice = 0;
-		}
-		$exercice_data = sql_asso1ligne('exercice', $exercice);
+// initialisations
+		include_spip('inc/association_comptabilite');
+		$ids = association_passe_parametres_comptables();
+		$exercice_data = sql_asso1ligne('exercice', $ids['exercice']);
+// traitements
 		onglets_association('titre_onglet_comptes', 'comptes');
 		// INTRO : rappel de l'exercicee affichee
 		$infos['exercice_entete_debut'] = association_formater_date($exercice_data['debut'], 'dtstart');
 		$infos['exercice_entete_fin'] = association_formater_date($exercice_data['fin'], 'dtend');
-		echo association_totauxinfos_intro($exercice_data['intitule'], 'exercice', $exercice, $infos);
+		echo association_totauxinfos_intro($exercice_data['intitule'], 'exercice', $ids['exercice'], $infos);
 		// datation et raccourcis
 		raccourcis_association(array('comptes', "exercice=$exercice"), array(
 			'encaisse_titre_general' => array('finances-24.png', array('encaisse', "exercice=$exercice") ),
@@ -46,6 +42,11 @@ function exec_annexe()
 			'cpte_bilan_titre_general' => array('finances-24.png', array('bilan', "exercice=$exercice") ),
 		));
 		debut_cadre_association('finances-24.png', 'annexe_titre_general', $exercice_data['intitule']);
+		// Filtres
+		filtres_association(array(
+			'exercice'=>$ids['exercice'],
+			'destination'=>$ids['destination'],
+		), 'annexe');
 		echo _T('asso:non_implemente');
 		// http://www.aquadesign.be/actu/article-3678.php
 		// http://www.documentissime.fr/dossiers-droit-pratique/dossier-274-les-documents-comptables-obligatoires/les-comptes-annuels/l-annexe.html

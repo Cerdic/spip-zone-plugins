@@ -25,20 +25,20 @@ function exec_synchronis_activites()
 		onglets_association('synchroniser_asso_membres', 'activites');
 		// INTRO : Rappel Infos Evenement
 		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement") ;
-		$infos['evenement_date_du'] = association_formater_date($evenement['date_debut'],'dtstart').' '.substr($data['date_debut'],10,6);
-		$infos['evenement_date_au'] = association_formater_date($evenement['date_fin'],'dtend').' '.substr($data['date_debut'],10,6);
-		$infos['evenement_lieu'] = $evenement['lieu'];
-		echo association_totauxinfos_intro($evenement['titre'], 'evenement', $id_evenement, $infos, 'agenda');
-		// TOTAUX : nombres d'inscrits par etat de paiement
-		$liste_libelles = $liste_effectifs = array();
-		$liste_libelles['oui'] = _T('agenda:label_reponse_jyparticipe');
-		$liste_libelles['nsp'] = _T('agenda:label_reponse_jyparticipe_peutetre');
-		$liste_libelles['non'] = _T('agenda:label_reponse_jyparticipe_pas');
-		$liste_effectifs['oui'] = sql_getfetsel('COUNT(*)', 'spip_evenements_participants', "id_evenement=$id_evenement AND reponse='oui' ");
-		$liste_effectifs['non'] = sql_getfetsel('COUNT(*)', 'spip_evenements_participants', "id_evenement=$id_evenement AND reponse='non' ");
-		$liste_effectifs['nsp'] = sql_getfetsel('COUNT(*)', 'spip_evenements_participants', "id_evenement=$id_evenement AND reponse='?' ");
+		$format = 'association_formater_'. (($evenement['horaire']=='oui')?'heure':'date');
+		$infos['agenda:evenement_date_du'] = $format($evenement['date_debut'],'dtstart');
+		$infos['agenda:evenement_date_au'] = $format($evenement['date_fin'],'dtend');
+		$infos['agenda:evenement_lieu'] = '<span class="location">'.$evenement['lieu'].'</span>';
+		echo '<div class="vevent">'. association_totauxinfos_intro('<span class="summary">'.$evenement['titre'].'</span>', 'evenement', $id_evenement, $infos, 'evenement') .'</div>';
+		// TOTAUX : nombres d'inscrits par reponse
+		echo association_totauxinfos_effectifs('inscriptions', array(
+			'oui'=>array( 'agenda:label_reponse_jyparticipe', array('spip_evenements_participants', "id_evenement=$id_evenement AND reponse='oui' "), ),
+			'nsp'=>array( 'agenda:label_reponse_jyparticipe_peutetre', array('spip_evenements_participants', "id_evenement=$id_evenement AND reponse='?' "), ),
+			'non'=>array( 'agenda:label_reponse_jyparticipe_pas', array('spip_evenements_participants', "id_evenement=$id_evenement AND reponse='non' "), ),
+			'etc'=>array( 'autres', array('spip_evenements_participants', "id_evenement=$id_evenement AND reponse NOT IN ('non', 'oui', '?') "), ),
+		));
 		// datation et raccourcis
-		raccourcis_association('');
+		raccourcis_association(array('inscrits_activite', "id=$id_evenement"));
 		debut_cadre_association('reload-32.png', 'options_synchronisation');
 		echo recuperer_fond('prive/editer/synchroniser_asso_activites', array (
 			'id_evenement' => $id_evenement,
