@@ -1,28 +1,38 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-if (!defined("_ECRIRE_INC_VERSION")) return;
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/zotspip/trunk/lang/
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// A
 	'afficher_masquer_details' => 'Afficher/masquer les détails',
 	'ajouter_createur' => 'Ajouter un autre auteur',
 	'ajouter_tag' => 'Ajouter un autre mot-clé',
 	'annee_non_precisee' => 'Année non précisée',
 	'aucune_reference' => 'Aucune référence ne correspond.',
+
+	// B
 	'bibliographie_zotero' => 'une bibliographie Zotero',
 	'bouton_forcer_maj_complete' => 'Forcer une mise à jour complète',
 	'bouton_synchroniser' => 'Synchroniser',
+
+	// C
 	'configurer_zotspip' => 'Configurer ZotSpip',
 	'confimer_remplacement' => 'Remplacer <strong>@source@</strong> par <strong>@dest@</strong> ? Attention, cette opération est irréversible !',
 	'confirmer' => 'Confirmer',
 	'connexion_ok' => 'La connexion avec Zotero est opérationnelle.',
 	'createurs' => 'Auteur(s)',
+
+	// D
 	'deselectionner_tout' => 'Déselectionner tout',
 	'droits_insuffisants' => 'Vous n\'avez pas les droits requis pour procéder à cette modification.',
+
+	// E
 	'erreur_connexion' => 'ZotSpip n\'a pas été capable de se connecter à Zotero. Veuillez vérifier vos paramètres de connexion. Si vous utilisez un proxy, veuillez vérifier qu\'il est correctement configuré dans Spip (Configuration > Fonctions avancées). À savoir, ZopSpip ne fonctionne pas toujours si un proxy est requis.',
+	'erreur_dom' => 'Pour fonctionner, ZotSpip nécessite l\'extension PHP DOM. Veuillez activer/installer cette extension.',
 	'erreur_openssl' => 'Pour fonctionner, ZotSpip nécessite l\'extension PHP openSSL. Veuillez activer/installer cette extension.',
 	'erreur_simplexml' => 'Pour fonctionner, ZotSpip nécessite l\'extension PHP SimpleXML. Veuillez activer/installer cette extension.',
-	'erreur_dom' => 'Pour fonctionner, ZotSpip nécessite l\'extension PHP DOM. Veuillez activer/installer cette extension.',
 	'explication_api_key' => 'S\'obtient sur la <a href="https://www.zotero.org/settings/keys">page Zotero de gestion des clés personnelles</a>. Pensez à accorder des droits d\'accès suffisants à cette clé.',
 	'explication_autoriser_modif_zotero' => 'Activer les options de modification de la librairie Zotero (par exemple, la fusion d\'auteurs) ? Si oui, qui a les droits suffisants pour valider ces modifications ? ATTENTION : vous devez également vérifier que vote <em>Clé API</em> a les droits en écriture.',
 	'explication_corriger_date' => 'Zotero transmets les dates de publication telles qu\'elles ont été saisies. Dès lors, le processeur CSL n\'est pas toujours en capacité de décomposer correctement ces dernières en raison de la grande variété de formats différents. Si tel est le cas, la date de publication ne sera pas affichée une fois les références mises en forme. ZotSpip peut corriger en amont les dates de publications. Attention : seule l\'année sera alors transmise au processeur CSL, sauf si la date est de la forme aaaa-mm-jj ou aaaa-mm. Cette option n\'a par contre aucune répercussion sur la librairie Zotero elle-même.',
@@ -34,10 +44,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exporter' => 'Exporter',
 	'exporter_reference' => 'Exporter la référence :',
 	'exporter_selection' => 'Exporter la sélection au format',
+
+	// F
 	'filtrer' => 'Filtrer',
+
+	// I
 	'identifier_via_doi' => 'Identifier la ressource à partir de son DOI',
 	'identifier_via_isbn' => 'Identifier la ressource à partir de son ISBN',
-	'items_zotero' => 'Références Zotero',
 	'item_admin' => 'administrateurs non restreints',
 	'item_admin_restreint' => 'tous les administrateurs (y compris restreints)',
 	'item_aeres' => 'selon la classification AERES',
@@ -60,6 +73,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_type_librairie_user' => 'utilisateur',
 	'item_volume' => 'par numéro de volume',
 	'item_webmestre' => 'seulement les webmestres',
+	'items_zotero' => 'Références Zotero',
+
+	// L
 	'label_annee' => 'Année',
 	'label_api_key' => 'Clé API',
 	'label_auteur' => 'Auteur',
@@ -73,8 +89,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_details' => 'Détails',
 	'label_editeur' => 'Maison d\'édition',
 	'label_export' => 'Afficher les options d\'exportation ?',
-	'label_identifiants_zotero' => 'Identifiants Zotero',
 	'label_id_librairie' => 'Identifiant de la librairie',
+	'label_identifiants_zotero' => 'Identifiants Zotero',
 	'label_liens' => 'Afficher les liens ?',
 	'label_max' => 'Nombre maximum de références affichées',
 	'label_options' => 'Options',
@@ -99,33 +115,54 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_createurs' => 'Liste des contributeurs',
 	'liste_references' => 'Liste des références Zotero',
 	'liste_tags' => 'Liste des mots-clés',
+
+	// M
 	'maj_zotspip' => 'Mettre à jour ZotSpip',
 	'message_erreur_style_csl' => 'Le style CSL @style@.csl n\'a pas été trouvé sur le serveur (fichier inexistant ou plugin désactivé).',
 	'modifier_en_ligne' => 'Modifier en ligne sur zotero.org',
+
+	// N
 	'nom_prenom' => 'Nom, Prénom',
+
+	// O
 	'outil_explication_inserer_ref' => 'Identifiant Zotero de la référence. Dans le cas d\'une citation, un nombre de page ou un numéro de section peut être précisé après l\'identifiant, séparé par @. Plusieurs références peuvent être indiquées, séparées par une virgule. Exemple : 4JA2I4UC@page 16-17,FSCANX5W',
 	'outil_inserer_ref' => 'Insérer une réference bibliographie [ref=XXX]',
+
+	// P
 	'plusieurs_references' => '@nb@ références',
 	'probleme_survenu_lors_du_remplacement' => 'Un problème est survenu lors du remplacement (code HTTP @code@).',
+
+	// R
 	'reference_num' => 'Référence n°',
 	'remplacer_par' => 'Remplacer par',
 	'resume' => 'Résumé :',
 	'retour_liste_createurs' => 'Retour à la liste des contributeurs',
 	'retour_liste_tags' => 'Retour à la liste des mots-clés',
 	'retour_liste_zitems' => 'Retour à la liste des références',
+
+	// S
 	'sans_auteur' => 'Sans auteur',
 	'selectionner_tout' => 'Sélectionner tout',
 	'source' => 'source',
 	'supprimer_createur' => 'Supprimer cet auteur',
 	'supprimer_tag' => 'Supprimer ce mot-clé',
-	'synchronisation_effectuee' => 'Synchronisation effectuée',
 	'sync_complete_demandee' => 'Une synchronisation complète de la base a été demandée.',
 	'sync_en_cours' => 'La synchronisation est en cours mais n\'est toujours pas terminée. Veuillez cliquer à nouveau sur <em>Synchroniser</em>.',
+	'synchronisation_effectuee' => 'Synchronisation effectuée',
+
+	// T
 	'tags' => 'Mots-clés :',
 	'titre_page_biblio' => 'Références bibliographiques',
+
+	// U
 	'une_reference' => '1 référence',
+
+	// V
 	'voir_publis_auteur' => 'Voir toutes les publications de @auteur@.',
 	'voir_sur_zotero' => 'Consulter cette référence sur zotero.org',
-	'zotspip' => 'ZotSpip',
+
+	// Z
+	'zotspip' => 'ZotSpip'
 );
+
 ?>
