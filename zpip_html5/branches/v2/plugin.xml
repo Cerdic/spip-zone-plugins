@@ -4,8 +4,8 @@
 	<auteur>Loiseau2nuit, davux, Matthieu Marcillaud, C&#233;dric Morin, Romy T&ecirc;tue, Collectif SPIP</auteur>
 	<icon>img/z5.png</icon>
 	<licence>GNU/GPL</licence>
-	<version>2.0-dev</version>
-	<etat>dev</etat>
+	<version>2.0.0</version>
+	<etat>test</etat>
 	<description>
 		<multi>
 			[fr]Squelettes HTML5 par défaut pour SPIP 3 + Z-core : modulaires et exemplaires.
@@ -17,5 +17,5 @@
 	<options>z5_options.php</options>
 	<categorie>squelette</categorie>
 	<necessite id="SPIP" version="[3.0-dev;]" />
-	<necessite id="Zcore" version="[2.0.0-dev;]" />
+	<necessite id="Zcore" version="[2.0.0;]" />
 </plugin>
