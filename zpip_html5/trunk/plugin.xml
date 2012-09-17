@@ -15,6 +15,7 @@
 	<lien>http://www.spip-contrib.net/Zpip-dist-en-HTML5</lien>
 	<prefix>Z5</prefix>
 	<options>z5_options.php</options>
+	<pipeline nom="insert_head_css" inclure="z5_pipelines.php" />
 	<categorie>squelette</categorie>
 	<necessite id="SPIP" version="[3.0-dev;]" />
 	<necessite id="Zcore" version="[2.0.0-dev;]" />
