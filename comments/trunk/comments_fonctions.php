@@ -22,6 +22,30 @@ function comments_insert_head_css($flux){
 	return $flux;
 }
 
+/***
+ * (c)James 2006, Licence GNU/GPL
+ * |me compare un id_auteur, par exemple,
+ * d'une boucle FORUMS avec les auteurs d'un objet
+ * et renvoie la valeur booleenne true (vrai) si on trouve
+ *  une correspondance
+ * utilisation:
+ * <div id="forum#ID_FORUM"[(#ID_OBJET|me{#OBJET,#ID_AUTEUR})class="me"]>
+ *
+ * @param int $id_objet
+ * @param string $objet
+ * @param int $id_auteur
+ * @param string $sioui
+ * @param string $sinon
+ * @return bool
+ */
+function filtre_me_dist($id_objet, $objet, $id_auteur, $sioui = ' ', $sinon = '') {
+	static $auteurs = array();
+	if(!isset($auteurs[$objet][$id_objet])) {
+		$r = sql_allfetsel("id_auteur","spip_auteurs_liens","objet=".sql_quote($objet)." AND id_objet=".intval($id_objet));
+		$auteurs[$objet][$id_objet] = array_map('reset',$r);
+	}
+	return (in_array($id_auteur, $auteurs)?$sioui:$sinon);
+}
 
 /**
  * Generer les boutons d'admin des forum selon les droits du visiteur
