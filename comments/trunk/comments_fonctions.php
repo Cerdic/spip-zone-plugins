@@ -25,7 +25,7 @@ function comments_insert_head_css($flux){
 
 /**
  * Generer les boutons d'admin des forum selon les droits du visiteur
- * en SPIP 2.1 uniquement
+ * en SPIP >= 2.1 uniquement
  * 
  * @param object $p
  * @return object
@@ -50,6 +50,28 @@ function balise_BOUTONS_ADMIN_FORUM_dist($p) {
 
 	$p->interdire_scripts = false;
 	return $p;
+}
+
+/**
+ * Verifier la saisie dans le formulaire forum :
+ * login obligatoire
+ * email optionnellement obligatoire
+ *
+ * @param array $flux
+ * @return array
+ */
+function comments_formulaire_verifier($flux){
+
+	if ($flux['args']['form']=='forum'){
+		// on doit indiquer un login au moins
+		if (!isset($GLOBALS['visiteur_session']['statut'])){
+			if (!_request('session_nom')){
+				$flux['data']['session_nom'] = _T('info_obligatoire');
+				unset($flux['data']['previsu']);
+			}
+		}
+	}
+	return $flux;
 }
 
 /**
@@ -110,10 +132,7 @@ jQuery(function(){jQuery('.comments-posts').ajaxReload({callback:move_comment$id
 			$flux['data']['message_ok'] = _T('comments:reponse_comment_modere');
 		}
 		
-		$res = $flux['data'];
-	#var_dump($flux);
 	}
-	#die('paf');
 	return $flux;
 
 }

@@ -13,23 +13,25 @@
 ]
 [(#SESSION{statut}|non)
 	<ul>
-		<li class='editer saisie_session_nom'>
-			<label for="session_nom"><:comments:label_nom:></label>
-			<input type="text" class="text" name="session_nom" id="session_nom" value="[(#SESSION**{nom}|sinon{#SESSION**{session_nom}}|entites_html)]" size="40" />
+		<li class='editer saisie_session_nom[ (#ENV**{erreurs}|table_valeur{session_nom}|oui)erreur]'>
+			<label for="session_nom"><:comments:label_nom:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{session_nom})</span>
+			]<input type="text" class="text" name="session_nom" id="session_nom" value="[(#SESSION**{nom}|sinon{#SESSION**{session_nom}}|entites_html)]" size="40" />
 			[(#CONFIG{accepter_inscriptions}|=={oui}|oui)
 			<span class="details">&#91;<a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" rel="nofollow"><:lien_connecter:></a>&#93;</span>
 			]
 		</li>
-		<li class='editer saisie_session_email'>
-			<label for="session_email"><:comments:label_email:></label>
-			<input type="text" class="text" name="session_email" id="session_email" value="[(#SESSION**{email}|sinon{#SESSION**{session_email}}|entites_html)]" size="40" />
+		<li class='editer saisie_session_email[ (#ENV**{erreurs}|table_valeur{session_email}|oui)erreur]'>
+			<label for="session_email"><:comments:label_email:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{session_email})</span>
+			]<input type="text" class="text" name="session_email" id="session_email" value="[(#SESSION**{email}|sinon{#SESSION**{session_email}}|entites_html)]" size="40" />
 		</li>
 [(#CONFIG{forums_urlref}|!={non}|?{
-        <li class='editer saisie_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]'>
-            <label for="url_site"><:comments:label_url:></label>
-            [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>]
-            <input type="text" class="text" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" value="[(#ENV{url_site})]" />
-        </li>
+		<li class='editer saisie_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]'>
+				<label for="url_site"><:comments:label_url:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>
+				]<input type="text" class="text" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" value="[(#ENV{url_site})]" />
+		</li>
 })]
 	</ul>
 	[(#PLUGIN{gravatar}|oui)<p class="explication gravatar_info_forum"><:gravatar:gravatar_info_forum:></p>]

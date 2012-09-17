@@ -1,7 +1,7 @@
 <paquet
 	prefix="comments"
 	categorie="communication"
-	version="3.0.15"
+	version="3.1.0"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/comment-32.png"
@@ -27,6 +27,7 @@
     
 	<pipeline nom="autoriser" inclure="comments_fonctions.php" />
 	<pipeline nom="insert_head_css" inclure="comments_fonctions.php" />
+	<pipeline nom="formulaire_verifier" inclure="comments_fonctions.php" />
 	<pipeline nom="formulaire_traiter" inclure="comments_fonctions.php" />
 
 	<menu nom="comments" titre="comments:titre_comments" parent="menu_squelette" icone="images/comment-16.png" action="configurer_comments" />
