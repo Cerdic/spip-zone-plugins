@@ -8,6 +8,10 @@
  * Notamment la rubrique Recuperer-objet-et-id_objet
  */
 
+// Si cette constante est vraie la hierarchie commence par "accueil"
+if (!defined('_FIL_ARIANE_ACCUEIL')) define('_FIL_ARIANE_ACCUEIL',true);
+#defined('_FIL_ARIANE_ACCUEIL') || define('_FIL_ARIANE_ACCUEIL',true);
+
 /***
  * Balise #FIL_ARIANE
  * Récupère l'objet depuis le contexte
@@ -96,7 +100,7 @@ function fil_ariane_objet_dist($objet,$id_objet) {
     $titre  = generer_info_entite($id_objet, $objet, 'titre');
 
     $fil = array();
-    $fil[_T(accueil)] = $GLOBALS['meta']['adresse_site'];
+    if (_FIL_ARIANE_ACCUEIL) $fil[_T('public:accueil_site')] = $GLOBALS['meta']['adresse_site'];
     $fil[$titre] =  $url;
     return $fil;
 }
@@ -105,5 +109,3 @@ function fil_ariane_article_dist($id_article) {
     return array;
 }
 */
-
-?>
