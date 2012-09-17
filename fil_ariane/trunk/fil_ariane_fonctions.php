@@ -43,15 +43,24 @@ function balise_FIL_ARIANE_dist($p){
     return $p;
 }
 
-/***
+/**
  * @param $objet
  * @param $id_objet
  * Calcule la hierarchie d'un objet et la retourne sous forme d'un tableau
  */
 function calcule_hierarchie_objet($objet, $id_objet) {
-    return '';
+
+    if($f = charger_fonction ($objet , 'fil_ariane', true)){
+        $fil = $f($id_objet);
+        return construire_FIL_ARIANE($fil);
+    }
+
+    $fil_ariane_objet = charger_fonction ('objet' , 'fil_ariane');
+    $fil = $fil_ariane_objet($objet, $id_objet);
+    return construire_FIL_ARIANE($fil);
+
 }
-/***
+/**
  * Construit le fil d'Ariane
  */
 function construire_FIL_ARIANE($fil){
@@ -64,7 +73,6 @@ function construire_FIL_ARIANE($fil){
 
     $nb= count($fil);
     $passe=0;
-    $fil_ariane.=" nb elets : $nb | ";
 
     foreach($fil as $titre => $lien) {
         if($passe>0) $fil_ariane.=" &gt; ";
@@ -72,11 +80,30 @@ function construire_FIL_ARIANE($fil){
         $passe++;
     }
 
-
-    // dernier : en gras, sans lien et sans '>'
-
     $fil_ariane.= '</div>';
     return $fil_ariane;
 }
+
+/**
+ * Calcule un tableau de valeurs représentant une hiérarchie de fil d'Ariane.
+ * @param int $id_objet
+ * @return array
+ *    couples titre => url
+ */
+function fil_ariane_objet_dist($objet,$id_objet) {
+
+    $url    = generer_url_entite($id_objet,$objet);
+    $titre  = generer_info_entite($id_objet, $objet, 'titre');
+
+    $fil = array();
+    $fil[_T(accueil)] = $GLOBALS['meta']['adresse_site'];
+    $fil[$titre] =  $url;
+    return $fil;
+}
+/*
+function fil_ariane_article_dist($id_article) {
+    return array;
+}
+*/
 
 ?>
