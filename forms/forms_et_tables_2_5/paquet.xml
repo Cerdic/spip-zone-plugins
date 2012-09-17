@@ -1,0 +1,34 @@
+<paquet 
+	version="0.5.0"
+	prefix="forms"
+	categorie="outil"
+	etat="test"
+	compatibilite="[v3 ;["
+	logo="img_pack/form-24.png">
+	<nom>Formulaires et Tables</nom>
+	<auteur>Sylvain BLANC, Loic LE MAO</auteur>
+	
+	<menu 
+		nom="forms_sondages" 
+		titre="forms:formulaires_sondages" 
+		parent="menu_edition" 
+		action="forms_tous" 
+		icone="img_pack/form-24.png" />
+		
+	<menu 
+		nom="forms_tables" 
+		titre="forms:tables" 
+		parent="menu_edition" 
+		action="tables_tous" 
+		icone="img_pack/table-24.png" />
+	
+	<pipeline nom="definir_session"></pipeline>
+	<pipeline nom="pre_propre" action="forms_avant_propre" inclure="forms_filtres.php" />
+	<pipeline nom="post_propre" action="forms_apres_propre" inclure="forms_filtres.php" />
+	<pipeline nom="insert_head" inclure="forms_filtres.php" />
+	<pipeline nom="post_edition" inclure="forms_filtres.php" />
+	<pipeline nom="affiche_droite" action="affiche_droite" inclure="forms_pipeline.php" />
+	<pipeline nom="header_prive" inclure="forms_pipeline.php" />
+	<pipeline nom="affiche_milieu" inclure="forms_pipeline.php" />
+	<chemin path='' />
+</paquet>
