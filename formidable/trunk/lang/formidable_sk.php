@@ -14,15 +14,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyse_sans_reponse' => 'Nevyplnené',
 	'analyse_une_reponse_total' => 'Na tento formulár odpovedal jeden človek.',
 	'analyse_zero_reponse_total' => 'Na tento formulár neodpovedal žiaden človek.',
-	'aucun_traitement' => 'Aucun traitement', # NEW
+	'aucun_traitement' => 'Žiadne spracovanie',
 
 	// B
 	'bouton_formulaires' => 'Formuláre',
 
 	// C
-	'cfg_analyse_classe_explication' => 'Vous pouvez indiquer des classes CSS qui seront ajoutées
-		sur le conteneur de chaque graphique, tel que <code>gray</code>,<code>blue</code>,
-		<code>orange</code>, <code>green</code> ou tout ce qui vous plairait !', # NEW
+	'cfg_analyse_classe_explication' => 'Môžete zadať triedy CSS, ktoré budú pridané 
+		na každý graf ako <code>sivý,</code> <code>modrý,</code>
+		<code>oranžový,</code> <code>zelený</code> alebo akýkoľvek iný stĺpec!',
 	'cfg_analyse_classe_label' => 'Trieda CSS stĺpca dokončenia úkonu',
 	'cfg_titre_page_configurer_formidable' => 'Nastaviť Formidable',
 	'cfg_titre_parametrages_analyse' => 'Nastavenia analýzy odpovedí',
@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_cadre_raccourcis' => 'Skratky',
-	'traitements_actives' => 'Traitements activés', # NEW
+	'traitements_actives' => 'Aktívne spracovanie',
 	'traitements_aide_memoire' => 'Pomocná pamäť:',
 	'traitements_avertissement_creation' => 'Zmeny polí formulára boli úspešne uložené. Teraz môžete určiť, aké funkcie sa použijú pri spracúvaní formulára.',
 	'traitements_avertissement_modification' => 'Zmeny v poliach formulára boli úspešne uložené. <strong>Niektoré funkcie možno budú musieť byť kvôli ním prestavené.</strong>',
