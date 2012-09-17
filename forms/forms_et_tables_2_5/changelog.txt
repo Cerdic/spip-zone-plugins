@@ -1,0 +1,103 @@
+
+2012-08-30
+Migration du plugin de spip2 en spip3
+- Création d'un paquet.xml
+- Renommage des fichiers existant entrant en conflit avec la norme de nommage spip3 (forms_fonctions.php, forms_options.php)
+- Correction de scripts utilisant des fonctions de lib spip2 non existant dans la spip3
+- Remplacement des pipelines : articles_edit -> article_edit
+
+Modifications dans les fichiers
+action/forms_exporte_reponse_article.php
+- Bug sur les accents sur la ligne : $titre_article =utf8_encode(html_entity_decode(_T("forms:reponse", array('id_reponse' => $id_donnee)))); corrigé via : utf8_encode(html_entity_decode())
+balise/forms.php
+- ajout de isset()
+exec/form_edit.php
+- remplacement de la fonction spip afficher_objet() par un affichage simplifié mais faisant le taf.
+exec/forms_reponses.php
+- Modification requette SQL : suppression de la limite l'affichage aux éléments qui ont moins de 6 mois. Ils sont maintenant tous affiché
+- Remplacement de la fonction spip icone_inline() par un squelette spip (bouton_url)
+exec/forms_telecharger.php
+- Remplacement de la fonction spip icone() par un squelette spip (bouton_cree)
+exec/forms_tous.php
+- Remplacement de la fonction spip icone() par un squelette spip (bouton_cree)
+fonds/bouton_cree.html (creation)
+- squelette remplacant une fonction spip2
+fonds/bouton_url.html (creation)
+- squelette remplacant une fonction spip2
+fonds/donnees_tous.html
+- suppression d'un BR
+img_pack/
+- ajout de quelques images provenant de spip2
+inc/forms.php
+- remplacement de la fonction icone_horizontale() par un squelette spip (bouton_url)
+- suppression de "_q"
+inc/forms_edit.php
+- ajout de isset()
+inc/forms_tables_affichage.php
+- Remplacement de la fonction spip icone() par un squelette spip (bouton_url)
+- Remplacement de la fonction spip icone_horizontale() par un squelette spip (bouton_url)
+- Ajout de la fonction bouton_radio() (copie de la fonction existante dans spip2)
+javascript/forms_edit.js
+- adaptation à spip3 (passage de table à ul/li)
+modeles/donnee_champ_2.html
+- changement de #VALEUR en #LAVALEUR (#VALEUR étant nativement créé par SPIP3)
+public/forms_balises.php
+- transformation de la balise #VALEUR à #LAVALEUR #VALEUR étant nativement créé par SPIP3)
+...
+
+
+
+
+
+
+
+
+
+2011-12-22
+- suppression du champ structure de la table spip_forms et gestion directe des tables spip_forms_champs et spip_forms_champs_choix pour l'implementation de la structure du formulaire
+- champ sondage de spip_forms (qui valait 'non','public',ou 'prot') devient type ('', 'sondage-public','sondage-prot' ...)
+- ajout du champ 'moderation' a spip_forms
+- renomage des tables spip_reponses en spip_forms_donnees et spip_reponses_champs en spip_forms_donnees_champs ; id_reponse devient id_donnee
+
+- ajout de la table spip_forms_donnees_articles permettant de lier toute donnee a un article
+
+- ajout des champs sur la table spip_forms_champs
+	'specifiant' => oui/non permet de definir un champ d'une table comme signifiant pour un tri ou un filtre dans l'affichage public
+	'public' => oui/non permet de definir qu'un champ sera visible ou non dans l'affichage de la table dans l'espac epublic
+	'aide' => aide contextuelle lors de la saisie du formulaire
+	'html_wrap' => wrapper du champ lors de son affichage dans l'espace public (utilisable manuellement ou surtout avec les 'formettes'
+
+- le champ statut de FORMS_DONNEES est renomme en 'confirmation' (attente/valide), il sert a confirmer un sondage pour eviter le spam par exemple
+- un champ statut de FORMS_DONNEES est ajoute, qui prend les valeurs propose/publie, pour gerer la moderation des reponses
+
+- la boucle FORMS_DONNEES ne retourne par defaut que les donnees confirmee (confirmation=valide) et publiee (statut=publie) sauf si le critere {tout} est utilise
+- la boucle FORMS_CHAMPS_DONNEES ne retourne par defaut que les donnees des champs public, sauf si le critere {tout} est utilise
+
+- la chaine de langue 'sondage' disparait et est remplacee par 'type_form'
+- ajout des chaines de langue publication_donnees,moderation_donnees, champ_specifiant, champ_public, aide_contextuelle,html_wrapper
+- les chaines de langue sondage_pub et sondage_prot disparaissent et sont remplacees par sondage_oui, donnees_pub et donnees_prot
+
+- ajout de types de champs personalises par etc/forms_types_champs.xml
+- export xml des formulaires
+- import xml d'un formulaire en tant que nouveau formulaire
+- ajout de la chaine de langue importer_form
+- modif de la chaine de langue boite_info
+
+- ajaxisation de toute la saisie des formulaires
+- ajout des chaines de langue format_liste_ou_radio, format_liste, format_radio, date_invalide
+- presentation des choix liste/radio configurable
+- ajout des chaines de langue afficher,editer,exporter,vider,supprimer, toutes_tables,icone_creer_table
+- Cédric Despres (07/02/2007): différenciation des modeles de mails envoyés à l'admin et en mail de confirmation 
+
+
+Quelques remarques concernant l'adaptation pour Spip 2 :
+-* champ de type monetaire : L'unite saisie en administration est exploitee uniquement dans le tableau des reponses. Il serait interessant de voir si on ne peut pas laisser un choix a la saisie (soit au moment de la construction du formulaire soit au moment de la saisie par l'utilisateur). Il serait ensuite interessant d'exploiter cette donnee ailleurs (export, suivi des reponses).
+_ To do : faire ces modifications pour utiliser la donnee monetaire.
+
+-* Nous avons reactive le tableau des resultats (nous ne le voyons pas en SPIP 1.9+) : par contre, dans ce tableau les tris sur "id" et "date" marchent. Ca ne marche pas sur les autres champs.
+_ To do : generaliser le tri sur les autres champs
+
+-* Probleme confirmation d'une reponse a un sondage (a voir). La fonction de confirmation d'une reponse dans un sondage est pour l'instant by passee, la reponse est automatiquement valide sans passage par confirmation = attente. Cette fonction doit servir a traiter des  multiple via des robots ou quelque chose comme ça.
+_ To do : faire marcher cette fonction de confirmation de la reponse, sur SPIP2, et enlever le by pass decrit ci-dessus.
+
+<a href="http://zone.spip.org/trac/spip-zone/wiki/SpipForms" target="_new">documentation</a> 
