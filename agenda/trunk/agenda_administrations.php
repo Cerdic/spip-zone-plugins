@@ -7,6 +7,8 @@
  * Auteurs : cf paquet.xml
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Installation/maj des tables evenements et participants...
  *

@@ -7,6 +7,8 @@
  * Auteurs : cf paquet.xml
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 
 /**
  * Interfaces du compilateur

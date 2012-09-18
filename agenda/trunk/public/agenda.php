@@ -7,6 +7,8 @@
  * Auteurs : cf paquet.xml
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * fonction sous jacente pour les 3 criteres
  * fusion_par_jour, fusion_par_mois, fusion_par_annee
