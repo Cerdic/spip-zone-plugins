@@ -110,54 +110,47 @@ function fil_ariane_objet_dist($objet,$id_objet) {
 }
 
 function fil_ariane_organisation_dist($id_organisation) {
-
-    $fil = array();
-
-    // trouver le nom et le parent de l'organisation en cours
-   $organisation = sql_fetsel('nom,id_parent', 'spip_organisations', 'id_organisation = '.sql_quote($id_organisation));
-
-    // url de l'organisation
-    $url = generer_url_entite($id_organisation,'organisation');
-
-    // parent de l'organisation
-    $id_parent  = $organisation['id_parent'];
-
-    // tant qu'il y a des parents, je place nom => url dans le tableau
-    while ($id_parent) {
-        // on trouve le parent, son nom, son url
-        $parent = sql_fetsel('nom,id_parent', 'spip_organisations', 'id_organisation = '.sql_quote($id_parent));
-        $url_parent = generer_url_entite($id_parent,'organisation');
-
-        $fil[$parent['nom']] = $url_parent;
-        $id_parent = $parent['id_parent'];
-    }
-
-    // on inverse le tableau
-    $fil = array_reverse($fil,true);
-
-    $fil[$organisation['nom']] = $url;
-
-    return $fil;
+    return fil_ariane_hierarchie_objet('organisation', $id_organisation, 'nom', 'id_parent');
 }
 
 function fil_ariane_rubrique_dist($id_rubrique) {
+    return fil_ariane_hierarchie_objet('rubrique', $id_rubrique, 'titre', 'id_parent');
+}
 
+function fil_ariane_article_dist($id_article) {
+    $item = sql_fetsel('id_rubrique, titre','spip_articles',"id_article = ".sql_quote($id_article));
+
+    # $fil = fil_ariane_hierarchie_objet('rubrique' , $item['id_rubrique'], 'titre', 'id_parent');
+    $fil_ariane_rubrique = charger_fonction ('rubrique' , 'fil_ariane');
+    $fil = $fil_ariane_rubrique($item['id_rubrique']);
+
+    $fil[typo(supprimer_numero($item['titre']))] = generer_url_entite($id_article,'article');
+    return $fil;
+}
+
+function fil_ariane_hierarchie_objet($objet, $id_objet, $col_titre, $col_parent){
     $fil = array();
 
-    // trouver le titre et l'id du parent de la rubrique en cours; on calcule son url;
-    $rubrique = sql_fetsel('titre, id_parent', 'spip_rubriques', 'id_rubrique = '.sql_quote($id_rubrique));
+    // trouver le nom du champ contenant la clé primaire de l'objet
+    $col_id = id_table_objet($objet);
 
-    $titre = typo(supprimer_numero($rubrique['titre']));
-    $id_parent = $rubrique['id_parent'];
-    $url = generer_url_entite($id_rubrique,'rubrique');
+    // trouver le nom de la table contenant l'objet
+    $table = table_objet_sql($objet);
+
+    // trouver le titre et l'id du parent de l'objet en cours; on calcule son url;
+    $item = sql_fetsel("$col_titre AS titre , $col_parent AS id_parent", $table, "$col_id = ".sql_quote($id_objet));
+
+    $titre = typo(supprimer_numero($item['titre']));
+    $id_parent = $item['id_parent'];
+    $url = generer_url_entite($id_objet,$objet);
 
     // tant qu'il y a des parents, je place nom => url dans le tableau
     while ($id_parent) {
         // on trouve le parent, son titre; on calcule son url
-        $parent = sql_fetsel('titre, id_parent', 'spip_rubriques', 'id_rubrique = '.sql_quote($id_parent));
+        $parent = sql_fetsel("$col_titre AS titre , $col_parent AS id_parent", $table, "$col_id = ".sql_quote($id_parent));
 
         $nom_parent = typo(supprimer_numero($parent['titre']));
-        $url_parent = generer_url_entite($id_parent,'rubrique');
+        $url_parent = generer_url_entite($id_parent,$objet);
 
         $fil[$nom_parent] = $url_parent;
         $id_parent = $parent['id_parent'];
@@ -169,4 +162,5 @@ function fil_ariane_rubrique_dist($id_rubrique) {
     $fil[$titre] = $url;
 
     return $fil;
+
 }
