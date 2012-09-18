@@ -139,3 +139,34 @@ function fil_ariane_organisation_dist($id_organisation) {
 
     return $fil;
 }
+
+function fil_ariane_rubrique_dist($id_rubrique) {
+
+    $fil = array();
+
+    // trouver le titre et l'id du parent de la rubrique en cours; on calcule son url;
+    $rubrique = sql_fetsel('titre, id_parent', 'spip_rubriques', 'id_rubrique = '.sql_quote($id_rubrique));
+
+    $titre = typo(supprimer_numero($rubrique['titre']));
+    $id_parent = $rubrique['id_parent'];
+    $url = generer_url_entite($id_rubrique,'rubrique');
+
+    // tant qu'il y a des parents, je place nom => url dans le tableau
+    while ($id_parent) {
+        // on trouve le parent, son titre; on calcule son url
+        $parent = sql_fetsel('titre, id_parent', 'spip_rubriques', 'id_rubrique = '.sql_quote($id_parent));
+
+        $nom_parent = typo(supprimer_numero($parent['titre']));
+        $url_parent = generer_url_entite($id_parent,'rubrique');
+
+        $fil[$nom_parent] = $url_parent;
+        $id_parent = $parent['id_parent'];
+    }
+
+    // on inverse le tableau
+    $fil = array_reverse($fil,true);
+
+    $fil[$titre] = $url;
+
+    return $fil;
+}
