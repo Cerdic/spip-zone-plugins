@@ -6,7 +6,7 @@
 	compatibilite="[2.1.0;3.0.*]"
 	logo="img/fil_ariane-128.png"
 	schema="1.5"
-	documentation="http://www.spip-contrib.net/Plugin-Fil-d-Ariane"
+	documentation="http://contrib.spip.net/Plugin-Fil-d-Ariane"
 >
 
 	<nom>Fil d'Ariane</nom>
