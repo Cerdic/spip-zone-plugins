@@ -86,7 +86,7 @@ function formulaires_reserv_traiter_dist($idressource,$date_deb,$date_f,$nom,$id
     $date_fin   = date("Y-m-d H:i:s", mktime ($heuref,$minutef,0, $moisf, $jourf, $anneef));
     $retour=array();
     $retour['message_ok'] = "bravo";
-    $retour['redirect'] = "spip.php?page=affichage_orr&jourj=$jourj";
+    $retour['redirect'] = "spip.php?page=orr&jourj=$jourj";
 
     // utilisation API editer_objet pour l'insertion en BDD'
     $objet = "orr_reservation";

@@ -28,9 +28,11 @@
 
 	jQuery(document).ready(function(){
 		[(#ENV{jourj}|?{
-			jourj = "[(#ENV{jourj})]",
+			jourj = "[(#ENV{jourj})]"
+			console.log(jourj),
 			dateselectionne = new Date()
 			jourj = dateselectionne.toString('yyyy-MM-dd')})];
+			console.log(jourj);
 		tabAjax();
 
 
