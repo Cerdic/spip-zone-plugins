@@ -137,6 +137,6 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 		);
 	}
 	
-	$message_ok = _T('videos:confirmation_ajout', array('type'=>$type,'titre'=>$titre));
+	$message_ok = _T('videos:confirmation_ajout', array('type'=>$type,'titre'=>$titre,'id_document'=>$document));    // faut il laisser le type ? c'est un peu cryptique pour le redacteur
 	return array("message_ok" => $message_ok);
 }
