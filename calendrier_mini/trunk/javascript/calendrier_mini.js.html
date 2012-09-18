@@ -34,12 +34,12 @@ var minical = {
 			'<:date_jour_1_initiale|texte_script:>','<:date_jour_2_initiale|texte_script:>','<:date_jour_3_initiale|texte_script:>','<:date_jour_4_initiale|texte_script:>',
 			'<:date_jour_5_initiale|texte_script:>','<:date_jour_6_initiale|texte_script:>','<:date_jour_7_initiale|texte_script:>'],
 		dateFormat: 'yy-mm-dd',
-		firstDay: 1,
+		firstDay: #CONFIG{calendriermini/jour1,1},
 		isRTL: [(#ENV{lang}|lang_dir|=={rtl}|?{true,false})],
-		changeMonth: true,
-		changeYear: true,
-		showOtherMonths: true,
-		selectOtherMonths: true
+		changeMonth: [(#CONFIG{calendriermini/changement_rapide,1}|?{true,false})],
+		changeYear: [(#CONFIG{calendriermini/changement_rapide,1}|?{true,false})],
+		showOtherMonths: [(#CONFIG{calendriermini/affichage_hors_mois,1}|?{true,false})],
+		selectOtherMonths: [(#CONFIG{calendriermini/affichage_hors_mois,1}|?{true,false})]
 	},
 
 	set_events: function(me,start,end,data){
@@ -120,6 +120,9 @@ var minical = {
 	init : function(selecteur){
 		//if (!minical.scripts_loaded.widget || !minical.scripts_loaded.datepicker || !minical.scripts_loaded.multidatepicker)
 		//	return;
+		[(#CONFIG{calendriermini/format_jour,initiale}|=={abbr}|oui)
+		minical.options.dayNamesMin = minical.options.dayNamesShort;
+		]
 		jQuery(function(){
 			jQuery(selecteur).not('.loaded')
 				.addClass('loaded')
