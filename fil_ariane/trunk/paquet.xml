@@ -4,7 +4,7 @@
 	version="0.1.1"
 	etat="dev"
 	compatibilite="[2.1.0;3.0.*]"
-	logo="imgs/logo-fil_ariane.png"
+	logo="img/fil_ariane-128.png"
 	schema="1.5"
 	documentation="http://www.spip-contrib.net/Plugin-Fil-d-Ariane"
 >
