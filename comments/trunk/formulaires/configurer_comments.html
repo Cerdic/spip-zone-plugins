@@ -10,30 +10,30 @@
 <form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<fieldset>
-		<legend>Liste ou thread ?</legend>
+		<legend><:comments:cfg_forum_format_fil:></legend>
 		<ul>
 			<li class="editer comments_fil[ (#ENV**{erreurs}|table_valeur{comments_fil}|oui)erreur]">
-				<label for="comments_fil">Pr&eacute;sentation du&nbsp;fil de discussion</label>[
+				<label for="comments_fil"><:comments:cfg_label_presentation_fil:></label>[
 				<span class='erreur'>(#ENV**{erreurs}|table_valeur{comments_fil})</span>
 				]<select name="comments_fil" id="comments_fil">
-						<option value="list"[(#ENV{comments_fil,list}|=={list}|oui) selected="selected"]>Liste de commentaires (&agrave; plat)</option>
-						<option value="thread"[(#ENV{comments_fil,list}|=={thread}|oui) selected="selected"]>Enfilade de commentaires (en thread)</option>
-						<option value="thread1"[(#ENV{comments_fil,list}|replace{'-',''}|=={thread1}|oui) selected="selected"]>Enfilade de commentaires (en thread) &agrave; un niveau</option>
+						<option value="list"[(#ENV{comments_fil,list}|=={list}|oui) selected="selected"]><:comments:cfg_label_presentation_fil_liste:></option>
+						<option value="thread"[(#ENV{comments_fil,list}|=={thread}|oui) selected="selected"]><:comments:cfg_label_presentation_fil_thread:></option>
+						<option value="thread1"[(#ENV{comments_fil,list}|replace{'-',''}|=={thread1}|oui) selected="selected"]><:comments:cfg_label_presentation_fil_thread1:></option>
 				</select>
 			</li>
 		</ul>
 	</fieldset>
 	<fieldset>
-		<legend>Permalien</legend>
+		<legend><:comments:cfg_forum_permalien:></legend>
 		<ul>
 			<li class="editer comments_permalink[ (#ENV**{erreurs}|table_valeur{comments_permalink}|oui)erreur]">
-				<label for="permalink">Apparence du lien permanent vers le commentaire</label>[
+				<label for="permalink"><:comments:cfg_label_apparence_permalien:></label>[
 				<span class='erreur'>(#ENV**{erreurs}|table_valeur{comments_fil})</span>
 				]<select name="permalink" id="permalink" style="width: 12em;">
-					<option value="aucun"[(#ENV{permalink,diese}|=={aucun}|oui) selected="selected"]>Aucun</option>
-					<option value="diese"[(#ENV{permalink,diese}|=={diese}|oui) selected="selected"]>Di&egrave;se (#)</option>
-					<option value="compteur"[(#ENV{permalink,diese}|=={compteur}|oui) selected="selected"]>Compteur (1.)</option>
-					<option value="picto"[(#ENV{permalink,diese}|=={picto}|oui) selected="selected"]>Picto</option>
+					<option value="aucun"[(#ENV{permalink,diese}|=={aucun}|oui) selected="selected"]><:comments:cfg_label_apparence_permalien_aucun:></option>
+					<option value="diese"[(#ENV{permalink,diese}|=={diese}|oui) selected="selected"]><:comments:cfg_label_apparence_permalien_diese:></option>
+					<option value="compteur"[(#ENV{permalink,diese}|=={compteur}|oui) selected="selected"]><:comments:cfg_label_apparence_permalien_compteur:></option>
+					<option value="picto"[(#ENV{permalink,diese}|=={picto}|oui) selected="selected"]><:comments:cfg_label_apparence_permalien_picto:></option>
 				</select>
 			</li>
 		</ul>
@@ -53,6 +53,22 @@
 			</li>
 		</ul>
 	</fieldset>
+    <fieldset>
+   		<legend><:comments:cfg_forum_champs_obligatoires:></legend>
+        <p class="explication"><:comments:cfg_explication_nom_obligatoire:></p>
+        <ul>
+            #SET{name,email_obli}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+            <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+                <span class='erreur_message'>(#GET{erreurs})</span>
+                ]
+                #SET{val,1}
+                <div class="choix">
+                    <input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+                    <label for="#GET{name}_#GET{val}"><:comments:cfg_label_email_obligatoire:></label>
+                </div>
+            </li>
+   		</ul>
+   	</fieldset>
 	<fieldset class="todo none">
 		<legend>Style</legend>
 		<ul>

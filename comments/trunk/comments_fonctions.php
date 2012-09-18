@@ -93,6 +93,12 @@ function comments_formulaire_verifier($flux){
 				$flux['data']['session_nom'] = _T('info_obligatoire');
 				unset($flux['data']['previsu']);
 			}
+			include_spip("inc/config");
+			if (lire_config("comments/email_obli",'')
+				AND !_request('session_email')){
+				$flux['data']['session_email'] = _T('info_obligatoire');
+				unset($flux['data']['previsu']);
+			}
 		}
 	}
 	return $flux;
