@@ -94,7 +94,7 @@ function balise_CALENDRIER_MINI_dyn($date, $id_rubrique = 0, $id_article = 0, $i
 		$url_json = parametre_url($url_json,'var_mode','recalcul');
 
 	$args['urljson'] = $url_json;
-var_dump($args);
+
 	/* tenir compte de la langue, c'est pas de la tarte */
 	return array('formulaires/calendrier_mini', 3600, $args);
 }
