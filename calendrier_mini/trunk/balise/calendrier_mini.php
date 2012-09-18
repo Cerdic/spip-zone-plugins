@@ -52,11 +52,12 @@ function balise_CALENDRIER_MINI_dyn($date, $id_rubrique = 0, $id_article = 0, $i
 	$url = null;
 	$url_json = null;
 
-	if($self_or_date_or_nothing){
+	if(!is_null($self_or_date_or_nothing)){
 		// est-ce une date ou une url ?
 		if (!function_exists('recup_date'))
 			include_spip('inc/filtres');
-		if (preg_match(",^[\d\s:-]+$,",$self_or_date_or_nothing)
+		if (!strlen($self_or_date_or_nothing) OR
+			(preg_match(",^[\d\s:-]+$,",$self_or_date_or_nothing))
 		  AND list($annee, $mois, $jour, $heures, $minutes, $secondes) = recup_date($self_or_date_or_nothing)
 		  AND $annee){
 			// si c'est une date on est dans l'ancienne syntaxe
@@ -93,7 +94,7 @@ function balise_CALENDRIER_MINI_dyn($date, $id_rubrique = 0, $id_article = 0, $i
 		$url_json = parametre_url($url_json,'var_mode','recalcul');
 
 	$args['urljson'] = $url_json;
-
+var_dump($args);
 	/* tenir compte de la langue, c'est pas de la tarte */
 	return array('formulaires/calendrier_mini', 3600, $args);
 }
