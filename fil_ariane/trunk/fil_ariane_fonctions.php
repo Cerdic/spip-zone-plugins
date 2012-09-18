@@ -118,15 +118,38 @@ function fil_ariane_rubrique_dist($id_rubrique) {
 }
 
 function fil_ariane_article_dist($id_article) {
+    // récupere l'id de la rubrique parent, le titre de l'article
     $item = sql_fetsel('id_rubrique, titre','spip_articles',"id_article = ".sql_quote($id_article));
 
-    # $fil = fil_ariane_hierarchie_objet('rubrique' , $item['id_rubrique'], 'titre', 'id_parent');
+    // récuère la hierarchie de la rubrique parent
     $fil_ariane_rubrique = charger_fonction ('rubrique' , 'fil_ariane');
     $fil = $fil_ariane_rubrique($item['id_rubrique']);
 
+    // ajoute le titre et l'url de l'article
     $fil[typo(supprimer_numero($item['titre']))] = generer_url_entite($id_article,'article');
+
     return $fil;
 }
+
+function fil_ariane_mot_dist($id_mot) {
+    // récupère l'id du groupe, le titre du mot
+    $item = sql_fetsel('id_groupe, titre','spip_mots', "id_mot = ".sql_quote($id_mot));
+
+    // récupère la hierarchie du parent (si le plugin groupes de mots arborescents)
+    # $fil = fil_ariane_hierarchie_objet('groupe' , $item['id_groupe'], 'titre', 'id_parent');
+
+    // récupère le nom du groupe
+    $groupe = sql_getfetsel('titre', 'spip_groupes_mots', "id_groupe = ".sql_quote($item['id_groupe']));
+
+    // ajoute le titre et l'url du groupe
+    $fil[typo(supprimer_numero($groupe))] = generer_url_entite($item['id_groupe'],'groupe');
+
+   // ajoute le titre et l'url du mot
+    $fil[typo(supprimer_numero($item['titre']))] = generer_url_entite($id_mot,'mot');
+
+    return $fil;
+}
+
 
 function fil_ariane_hierarchie_objet($objet, $id_objet, $col_titre, $col_parent){
     $fil = array();
