@@ -44,7 +44,7 @@ function filtre_me_dist($id_objet, $objet, $id_auteur, $sioui = ' ', $sinon = ''
 		$r = sql_allfetsel("id_auteur","spip_auteurs_liens","objet=".sql_quote($objet)." AND id_objet=".intval($id_objet));
 		$auteurs[$objet][$id_objet] = array_map('reset',$r);
 	}
-	return (in_array($id_auteur, $auteurs)?$sioui:$sinon);
+	return (in_array($id_auteur, $auteurs[$objet][$id_objet])?$sioui:$sinon);
 }
 
 /**
