@@ -8,7 +8,7 @@
  * Notamment la rubrique Recuperer-objet-et-id_objet
  */
 
-// Si cette constante est vraie la hierarchie commence par "accueil"
+// Si cette constante est vraie le fil d'Ariane commence par "accueil"
 if (!defined('_FIL_ARIANE_ACCUEIL')) define('_FIL_ARIANE_ACCUEIL',true);
 #defined('_FIL_ARIANE_ACCUEIL') || define('_FIL_ARIANE_ACCUEIL',true);
 
@@ -19,13 +19,13 @@ if (!defined('_FIL_ARIANE_ACCUEIL')) define('_FIL_ARIANE_ACCUEIL',true);
  */
 function balise_FIL_ARIANE_dist($p){
 
-    // on attend un tableau avec le fil d'ariane
-    // le 1er paramètre passé avec la balise "fil_ariane"
+    // il est possible qu'il y ait un tableau des valeurs souhaitées pour  le fil d'Ariane
+    // il s'agit dans ce cas du 1er paramètre passé avec la balise "fil_ariane"
     $fil = interprete_argument_balise(1,$p);
 
     if (!$fil) {
-        // On appele la fonction qui construit le fil en prenant en compte seulement l'objet
-        // L'id de l'objet
+        // On appele la fonction qui construit le fil d'Ariane
+        // en prenant en compte seulement l'id de l'objet
         $_id_objet = $p->boucles[$p->id_boucle]->primary;
 
         // Code php mis en cache, et qui sera exécuté et qui est sensé ramener la valeur du champ
@@ -54,12 +54,14 @@ function balise_FIL_ARIANE_dist($p){
  */
 function calcule_hierarchie_objet($objet, $id_objet) {
 
+    $objet = objet_type($objet); // pour obtenir le type d'objet au singulier
+
     if($f = charger_fonction ($objet , 'fil_ariane', true)){
         $fil = $f($id_objet);
         return construire_FIL_ARIANE($fil);
     }
 
-    $fil_ariane_objet = charger_fonction ('objet' , 'fil_ariane');
+    $fil_ariane_objet = charger_fonction ($objet , 'fil_ariane');
     $fil = $fil_ariane_objet($objet, $id_objet);
     return construire_FIL_ARIANE($fil);
 
@@ -74,6 +76,9 @@ function construire_FIL_ARIANE($fil){
     if (!is_array($fil)) {
         return '';
     }
+
+    // si on doit tracer le 1er item, on l'ajoute au début du tableau
+    if (_FIL_ARIANE_ACCUEIL) $fil = array(_T('public:accueil_site') => $GLOBALS['meta']['adresse_site']) + $fil;
 
     $nb= count($fil);
     $passe=0;
@@ -100,12 +105,37 @@ function fil_ariane_objet_dist($objet,$id_objet) {
     $titre  = generer_info_entite($id_objet, $objet, 'titre');
 
     $fil = array();
-    if (_FIL_ARIANE_ACCUEIL) $fil[_T('public:accueil_site')] = $GLOBALS['meta']['adresse_site'];
     $fil[$titre] =  $url;
     return $fil;
 }
-/*
-function fil_ariane_article_dist($id_article) {
-    return array;
+
+function fil_ariane_organisation_dist($id_organisation) {
+
+    $fil = array();
+
+    // trouver le nom et le parent de l'organisation en cours
+   $organisation = sql_fetsel('nom,id_parent', 'spip_organisations', 'id_organisation = '.sql_quote($id_organisation));
+
+    // url de l'organisation
+    $url = generer_url_entite($id_organisation,'organisation');
+
+    // parent de l'organisation
+    $id_parent  = $organisation['id_parent'];
+
+    // tant qu'il y a des parents, je place nom => url dans le tableau
+    while ($id_parent) {
+        // on trouve le parent, son nom, son url
+        $parent = sql_fetsel('nom,id_parent', 'spip_organisations', 'id_organisation = '.sql_quote($id_parent));
+        $url_parent = generer_url_entite($id_parent,'organisation');
+
+        $fil[$parent['nom']] = $url_parent;
+        $id_parent = $parent['id_parent'];
+    }
+
+    // on inverse le tableau
+    $fil = array_reverse($fil,true);
+
+    $fil[$organisation['nom']] = $url;
+
+    return $fil;
 }
-*/
