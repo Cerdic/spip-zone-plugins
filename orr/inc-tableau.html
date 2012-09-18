@@ -16,6 +16,15 @@
 #SET{samedijour,#GET{jourj}|joursemaine{samedi,jour}}
 #SET{dimanchejour,#GET{jourj}|joursemaine{dimanche,jour}}
 
+#SET{nomjour1,#GET{jourj}|joursemaine{lundi,nom}}
+#SET{nomjour2,#GET{jourj}|joursemaine{mardi,nom}}
+#SET{nomjour3,#GET{jourj}|joursemaine{mercredi,nom}}
+#SET{nomjour4,#GET{jourj}|joursemaine{jeudi,nom}}
+#SET{nomjour5,#GET{jourj}|joursemaine{vendredi,nom}}
+#SET{nomjour6,#GET{jourj}|joursemaine{samedi,nom}}
+#SET{nomjour7,#GET{jourj}|joursemaine{dimanche,nom}}
+
+
 
 
 #SET{motcle1,#ENV{motcle}}
@@ -37,13 +46,13 @@
 
 		<thead>
 			<th>Ressources</th>
-			<th class="largeurcol">Lundi_#GET{lundijour}</th>
-			<th class="largeurcol">Mardi_#GET{mardijour}</th>
-			<th class="largeurcol">Mercredi_#GET{mercredijour}</th>
-			<th class="largeurcol" id="jeudith">Jeudi_#GET{jeudijour}</th>
-			<th class="largeurcol">Vendredi_#GET{vendredijour}</th>
-			<th class="largeurcol">Samedi_#GET{samedijour}</th>
-			<th class="largeurcol">Dimanche_#GET{dimanchejour}</th>
+			<th class="largeurcol">#GET{nomjour1}_#GET{lundijour}</th>
+			<th class="largeurcol">#GET{nomjour2}_#GET{mardijour}</th>
+			<th class="largeurcol">#GET{nomjour3}_#GET{mercredijour}</th>
+			<th class="largeurcol" id="jeudith">#GET{nomjour4}_#GET{jeudijour}</th>
+			<th class="largeurcol">#GET{nomjour5}_#GET{vendredijour}</th>
+			<th class="largeurcol">#GET{nomjour6}_#GET{samedijour}</th>
+			<th class="largeurcol">#GET{nomjour7}_#GET{dimanchejour}</th>
 		</thead>
 		<tbody>
     <BOUCLE_ressource(spip_orr_ressources){id_mot IN #GET{motcle2}}>

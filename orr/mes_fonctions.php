@@ -69,6 +69,70 @@ function joursemaine($date, $jourvoulu, $format){
 				break;
 		}
 	}
+/**
+ * cas 3 si le format est "nom"
+ **/
+	if ($format == "nom"){
+		switch ($jourvoulu) {
+			case "lundi":
+				$date=date("N",mktime(0,0,0,$mois,$jour-3,$annee));
+				$date=traduction_jour($date);
+				break;
+			case "mardi":
+				$date=date("N",mktime(0,0,0,$mois,$jour-2,$annee));
+				$date=traduction_jour($date);
+				break;
+			case "mercredi" :
+				$date=date("N",mktime(0,0,0,$mois,$jour-1,$annee));
+				$date=traduction_jour($date);
+				break;
+			case "jeudi":
+				$date=date("N",mktime(0,0,0,$mois,$jour,$annee));
+				$date=traduction_jour($date);
+				break;
+			case "vendredi":
+				$date=date("N",mktime(0,0,0,$mois,$jour+1,$annee));
+				$date=traduction_jour($date);
+				break;
+			case "samedi":
+				$date=date("N",mktime(0,0,0,$mois,$jour+2,$annee));
+				$date=traduction_jour($date);
+				break;
+			default:
+				$date=date("N",mktime(0,0,0,$mois,$jour+3,$annee));
+				$date=traduction_jour($date);
+				break;
+		}
+	}
 	return $date;
 };
+/**
+ * fonction de traduction entre numéro du jour et nom du jour
+ * */
+ function traduction_jour($numero){
+	 switch ($numero){
+		case "1":
+			 $nom = "Lundi";
+			 break;
+		case "2":
+			$nom = "Mardi";
+			break;
+		case "3":
+			$nom = "Mercredi";
+			break;
+		case "4":
+			$nom = "Jeudi";
+			break;
+		case "5":
+			$nom = "Vendredi";
+			break;
+		case "6":
+			$nom = "Samedi";
+			break;
+		default:
+			$nom = "Dimanche";
+			break;
+	 }
+return $nom;
+}
 ?>
