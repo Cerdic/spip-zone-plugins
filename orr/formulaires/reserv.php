@@ -61,7 +61,7 @@ function formulaires_reserv_verifier_dist($idressource,$date_deb,$date_f,$nom,$i
     $date_fin   = date("Y-m-d H:i:s", mktime ($heuref,$minutef,0, $moisf, $jourf, $anneef));
     $resultat=compare_date($date_debut,$date_fin,$idressource,$idresa);
 	if ($resultat == "1"){
-		//~ $erreurs['date_debut'] = 'Vos dates de réservations ne sont pas libres !';
+		$erreurs['date_debut'] = 'Vos dates de réservations ne sont pas libres !';
 		$erreurs['date_fin'] = 'Vos dates de réservations ne sont pas libres !';
 	}
     return $erreurs;
