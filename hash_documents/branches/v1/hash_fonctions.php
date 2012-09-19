@@ -37,10 +37,12 @@ function hasher_adresser_document($doc, $rev=false) {
  */
 function hasher_deplacer_document($id_document, $corriger=false, $rev=false) {
 
-// 1. recuperer les donnees du document
+	// 1. recuperer les donnees du document
 	// et verifier qu'on peut le hasher
-	if (!$id_document = intval($id_document))
+	if (!$id_document = intval($id_document)){
+		spip_log("Erreur hasher_deplacer_document intval $id_document", 'hash');
 		return false;
+	}
 	if (!$s = spip_query('SELECT fichier FROM spip_documents WHERE id_document='.$id_document)
 	OR !$t = spip_fetch_array($s)) {
 		spip_log("Erreur hasher_deplacer_document select doc=$id_document ".var_export($s, true), 'hash');
@@ -54,7 +56,7 @@ function hasher_deplacer_document($id_document, $corriger=false, $rev=false) {
 	$dir_ref = preg_match(',^IMG/,', $src)
 		? _DIR_RACINE : _DIR_IMG;
 
-	// On fabrique le nom  du fichier dest
+	// On fabrique le nom du fichier dest
 	if (!$dest = hasher_adresser_document($src, $rev)) {
 		spip_log("Erreur hasher_adresser_document($src) rev : $rev", 'hash');
 		return false;
@@ -62,7 +64,7 @@ function hasher_deplacer_document($id_document, $corriger=false, $rev=false) {
 
 	// si le src n'existe pas, ciao, enfin presque
 	if (!file_exists($dir_ref.$src)) {
-		spip_log("Erreur hasher_deplacer_document fichier $dir_ref $src n'existe pas", 'hash');
+		spip_log("Erreur hasher_deplacer_document id_document $id_document fichier $dir_ref $src n'existe pas", 'hash');
 
 		// si le src n'existe pas, on verifie qu'il n'a pas deja ete déplace (ie le dest existe),
 		// et si oui, on modifie juste le chemin en base... 
@@ -70,7 +72,7 @@ function hasher_deplacer_document($id_document, $corriger=false, $rev=false) {
 			if(file_exists(_DIR_IMG.$dest)){
 				// on note la destination finale
 				if (!spip_query('UPDATE spip_documents SET fichier="'.$img.$dest.'" WHERE id_document='.$id_document)) {
-					spip_log("erreur update correction $img $dest doc $id_document", 'hash');
+					spip_log("erreur hasher_deplacer_document update correction $img $dest doc $id_document", 'hash');
 					return false;
 				} else {
 					spip_log("hasher_deplacer_document fichier "._DIR_IMG."$dest existe deja, Table corrigee", 'hash');
@@ -101,18 +103,18 @@ function hasher_deplacer_document($id_document, $corriger=false, $rev=false) {
 	// on note les fichiers en cours de deplacement avec un - devant ; si
 	// ca casse on saura reparer
 	if (!spip_query('UPDATE spip_documents SET fichier=CONCAT("-", fichier) WHERE id_document='.$id_document)) {
-		spip_log("erreur update 1", 'hash');
+		spip_log("erreur hasher_deplacer_document update 1", 'hash');
 		return false;
 	}
 	// on deplace
 	if (!rename($dir_ref.$src, _DIR_IMG.$dest)) {
-		spip_log("erreur rename", 'hash');
+		spip_log("erreur hasher_deplacer_document rename", 'hash');
 		spip_query('UPDATE spip_documents SET fichier="'.$src.'" WHERE id_document='.$id_document);
 		return false;
 	}
 	// on note la destination finale
 	if (!spip_query('UPDATE spip_documents SET fichier="'.$img.$dest.'" WHERE id_document='.$id_document)) {
-		spip_log("erreur update 2", 'hash');
+		spip_log("erreur hasher_deplacer_document update 2", 'hash');
 		return false;
 	}
 
@@ -130,15 +132,21 @@ function hasher_deplacer_document($id_document, $corriger=false, $rev=false) {
  * @return bool
  */
 function hasher_deplacer_n_documents($n, $corriger=false, $rev=false) {
+	$docs = array();
+	static $dejafait = false;
+
+	// Une seule fois par hit (cas de l'insertion de plusieurs docs venant d'un zip)
+	if ($dejafait) return $docs ;
+	$dejafait = true;
+
 	if (!$n = intval($n)
 	OR !$s = spip_query($q = "SELECT id_document FROM spip_documents WHERE fichier REGEXP '^(IMG/)?[^/]+/"
 	. ($rev ? "./././" : "")
 	."[^/]+$' AND distant='non' ORDER BY date DESC LIMIT $n")) {
-		spip_log("erreur requete $q", 'hash');
+		spip_log("erreur hasher_deplacer_n_documents requete $q", 'hash');
 		return false;
 	}
 
-	$docs = array();
 	while ($t = spip_fetch_array($s)) {
 		$id_document = $t['id_document'];
 		if (hasher_deplacer_document($id_document, $corriger, $rev))
@@ -152,6 +160,7 @@ function hasher_deplacer_n_documents($n, $corriger=false, $rev=false) {
  * @return array
  */
 function hasher_compter_documents() {
+
 	$s = spip_query($q = "SELECT COUNT(*) FROM spip_documents WHERE fichier REGEXP '^(IMG/)?[^/]+/"
 	."[^/]+$' AND distant='non'");
 	$non = array_pop(spip_fetch_array($s));
