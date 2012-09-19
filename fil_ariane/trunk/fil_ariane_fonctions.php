@@ -61,7 +61,7 @@ function calcule_hierarchie_objet($objet, $id_objet) {
         return construire_FIL_ARIANE($fil);
     }
 
-    $fil_ariane_objet = charger_fonction ($objet , 'fil_ariane');
+    $fil_ariane_objet = charger_fonction ('objet' , 'fil_ariane');
     $fil = $fil_ariane_objet($objet, $id_objet);
     return construire_FIL_ARIANE($fil);
 
@@ -101,7 +101,7 @@ function construire_FIL_ARIANE($fil){
  */
 function fil_ariane_objet_dist($objet,$id_objet) {
 
-    $url    = generer_url_entite($id_objet,$objet);
+    $url    = generer_url_entite($id_objet, $objet);
     $titre  = generer_info_entite($id_objet, $objet, 'titre');
 
     $fil = array();

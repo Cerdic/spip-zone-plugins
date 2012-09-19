@@ -1,6 +1,7 @@
 <plugin>
 	<nom><multi>[fr]Fil d'Ariane[en]Breadcrum</multi></nom>
 	<auteur>Cyril MArion</auteur>
+    <auteur>Matthieu Marcillaud</auteur>
 	<licence>GPL v3</licence>
     <description>
         <multi>
@@ -9,7 +10,7 @@
    	</description>
 	<lien>http://contrib.spip.net/Plugin-Fil-d-Ariane</lien> <!-- URI de documentation -->
 	<icon>img/fil_ariane-128.png</icon>
-	<version>0.1.4</version>
+	<version>0.1.5</version>
 	<etat>dev</etat>
 
 	<prefix>fil_ariane</prefix>
