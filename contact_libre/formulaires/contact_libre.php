@@ -6,7 +6,7 @@ function formulaires_contact_libre_charger_dist($adresse, $url='', $sujet=''){
 	$valeurs = array(
 		'sujet_message'=>$sujet,
 		'texte_message'=>'',
-		'email_message'=>$GLOBALS['visiteur_session']['email']
+		'email_message'=>isset($GLOBALS['visiteur_session']['email']) ? $GLOBALS['visiteur_session']['email'] : ''
 	);
 	
 	// id du formulaire (pour en avoir plusieurs sur une meme page)
@@ -70,8 +70,8 @@ function formulaires_contact_libre_verifier_dist($adresse, $url='', $sujet=''){
 function formulaires_contact_libre_traiter_dist($adresse, $url='', $sujet=''){
 	
 	$adres = _request('email_message');
-	$sujet=_request('sujet_message');
-	$texte=_request('texte_message');
+	$sujet = _request('sujet_message');
+	$texte = _request('texte_message');
 	
 	$texte .= "\n\n-- "._T('envoi_via_le_site')." ".supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']))." (".$GLOBALS['meta']['adresse_site']."/) --\n";
 	if($url)
