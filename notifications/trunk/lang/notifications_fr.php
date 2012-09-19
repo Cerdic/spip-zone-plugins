@@ -89,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'signature_petition' => 'Signatures de pétition',
 	'signature_petition_moderateur' => 'Indiquez ci-dessous l\'adresse email du modérateur des pétitions (ou plusieurs, séparés par des virgules).',
+	'suivi_texte_acces_page' => 'Modifier mes abonnements aux discussions',
 	'suivis_perso' => 'Suivi personnalisé',
 	'suivis_perso_activer_option' => 'Si vous activez cette option, chaque visiteur qui se connecte sur cet URL de suivi sera enregistré dans la table <code>spip_auteurs</code>, avec le statut <code>6visiteur</code>. Il pourra alors voir l\'ensemble des messages qu\'il a signés sur le forum, régler ses options de notification, etc.',
 	'suivis_perso_non' => 'Pas de suivi',

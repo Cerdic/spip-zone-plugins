@@ -1,5 +1,5 @@
 <div class="ajax formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
-	<h3 class="titrem"><:abonnernotifications:titre_abonnements:></h3>
+	<h3 class="titrem"><:abonnernotifications:titre_abonnements:><span class='image_loading'>&nbsp;</span></h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
 
@@ -35,7 +35,7 @@
 		</fieldset>
 		[(#REM) ajouter les saisies supplémentaires : extra et autre, à cet endroit ]
 	  <!--extra-->
-	  <p class='boutons'><span class='image_loading'>&nbsp;</span>
+	  <p class='boutons'>
 		<input type='submit' class='submit' name='modifabo' value='<:abonnernotifications:bouton_modifier_abonnements|attribut_html:>' /></p>
 
 		<fieldset>
@@ -52,8 +52,8 @@
 		</fieldset>
 		[(#REM) ajouter les saisies supplémentaires : extra et autre, à cet endroit ]
 	  <!--extra-->
-	  <p class='boutons'><span class='image_loading'>&nbsp;</span>
-		<input type='submit' class='submit' name='modifabo' value='<:abonnernotifications:bouton_changer_email|attribut_html:>' /></p>
+	  <p class='boutons'>
+		<input type='submit' class='submit' name='modifemail' value='<:abonnernotifications:bouton_changer_email|attribut_html:>' /></p>
 
 	</div></form>
 

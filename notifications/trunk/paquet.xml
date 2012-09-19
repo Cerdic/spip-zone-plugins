@@ -1,7 +1,7 @@
 <paquet
 	prefix="notifications"
 	categorie="communication"
-	version="2.1.5"
+	version="2.2.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="notifications-32.png"
@@ -20,7 +20,6 @@
 	<pipeline nom="taches_generales_cron" inclure="notifications_pipelines.php" />
 	<pipeline nom="post_edition" inclure="notifications_pipelines.php"/>
 	<pipeline nom="notifications_destinataires" inclure="notifications_pipelines.php"/>
-	<pipeline nom="notifications_envoyer_mails" inclure="notifications_pipelines.php"/>
 
 	<pipeline nom="notifications" inclure="notifications_pipelines.php" action="go" />
 

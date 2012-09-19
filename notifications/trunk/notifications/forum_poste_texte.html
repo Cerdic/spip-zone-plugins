@@ -46,4 +46,10 @@
 
 * \[<:notifications:info_lien_signaler_spam_commentaire:> -> (#ENV{url_moderer_spam}) \]]
 
+
+[(#CONFIG{notifications/suivi}|oui)
+[<:notifications:suivi_texte_acces_page:> : (#ENV{notification_email}|notifications_url_suivi)
+]
+]
+
 #FILTRE{supprimer_tags|filtrer_entites|trim}

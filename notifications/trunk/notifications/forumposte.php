@@ -80,7 +80,7 @@ function notifications_forumposte_dist($quoi, $id_forum, $options) {
 	$email_notification_forum = charger_fonction('email_notification_forum','inc');
 	foreach ($destinataires as $email) {
 		// ajouter les liens de moderation par statut
-		$contexte = array();
+		$contexte = array('notification_email'=>$email);
 		foreach($moderations as $k=>$arg){
 			$arg = "$arg-$email";
 			$hash = _action_auteur("$action-$arg", '', $pass, 'alea_ephemere');

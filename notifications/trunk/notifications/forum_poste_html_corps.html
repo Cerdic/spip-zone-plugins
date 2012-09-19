@@ -38,6 +38,11 @@
 <br />
 <br />
 <p><small><:form_forum_message_auto:></small></p>
+
+[(#CONFIG{notifications/suivi}|oui)
+[<a href="(#ENV{notification_email}|notifications_url_suivi)"><:notifications:suivi_texte_acces_page:></a>]
+]
+
 <style type="text/css">
 .submit { position:relative;display:inline-block;width:auto;min-width:14em;text-align:center;padding:5px 1em 6px;margin:0.5em 1em;overflow:visible;cursor:pointer;background:#DDD;
 -webkit-box-shadow:0 1px 3px rgba(0,0,0,0.5);-moz-box-shadow:0 1px 3px rgba(0,0,0,0.5);box-shadow:0 1px 3px rgba(0,0,0,0.5);

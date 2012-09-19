@@ -127,12 +127,19 @@ function notifications_notifications_destinataires($flux){
 			OR $t = sql_fetsel("*", "spip_forum", "id_forum=" . intval($id_forum))
 		){
 
-			// Tous les participants a ce *thread*
-			// TODO: proposer une case a cocher ou un lien dans le message
-			// pour se retirer d'un troll (hack: replacer @ par % dans l'email)
-			$s = sql_select("DISTINCT(email_auteur)", "spip_forum", "id_thread=" . intval($t['id_thread']) . " AND email_auteur != ''");
-			while ($r = sql_fetch($s))
-				$flux['data'][] = $r['email_auteur'];
+			// Tous les participants a ce *thread*, abonnes
+			// on prend les emails parmi notification_email (prioritaire si rempli) email_auteur ou email de l'auteur qd id_auteur connu
+			$s = sql_select("F.email_auteur, F.notification_email, A.email",
+				"spip_forum AS F LEFT JOIN spip_auteurs AS A ON F.id_auteur=A.id_auteur",
+				"notification=1 AND id_thread=" . intval($t['id_thread']) . " AND (email_auteur != '' OR notification_email != '' OR A.email IS NOT NULL )");
+			while ($r = sql_fetch($s)){
+				if ($r['notification_email'])
+					$flux['data'][] = $r['notification_email'];
+				elseif($r['email_auteur'])
+					$flux['data'][] = $r['email_auteur'];
+				elseif($r['email'])
+					$flux['data'][] = $r['email'];
+			}
 
 			/*
 			// 3. Tous les auteurs des messages qui precedent (desactive egalement)
@@ -183,6 +190,7 @@ function notifications_notifications_destinataires($flux){
  * @param array $flux
  * @return array
  */
+/*
 function notifications_notifications_envoyer_mails($flux){
 	if ($GLOBALS['notifications']['suivi']){
 
@@ -198,7 +206,15 @@ function notifications_notifications_envoyer_mails($flux){
 
 	return $flux;
 }
+*/
 
+function notifications_url_suivi($email){
+	if (!$email) return "";
+	include_spip("inc/securiser_action");
+	$key = calculer_cle_action("abonner_notifications $email");
+	$url = url_absolue(generer_url_public('notifications', "email=$email&key=$key"));
+	return $url;
+}
 
 /**
  * Regarder si l'auteur est dans la base de donnees, sinon l'ajouter
