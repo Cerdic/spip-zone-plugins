@@ -21,7 +21,7 @@ function formulaires_videresa_traiter_dist($idresa,$date_debut){
 		$retour['message_erreur'] = "L'effacement de la réservation n° $idresa à échoué ";
 	}
 	$retour['message_ok'] = "Bravo, vous avez supprimé définitivement la réservation n° $idresa !";
-	$retour['redirect'] = "spip.php?page=affichage_orr&jourj=$date";
+	$retour['redirect'] = "spip.php?page=orr&jourj=$date";
 	return $retour;
 }
 
