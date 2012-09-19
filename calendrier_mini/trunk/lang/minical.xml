@@ -1,18 +1,3 @@
 <traduction module="minical" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/calendrier_mini/trunk/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.net/tradlang_module/minical?lang_cible=ar">
-		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
-	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/minical?lang_cible=en">
-		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
-	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/minical?lang_cible=fa">
-		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
-	</langue>
 	<langue code="fr" />
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/minical?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
-	</langue>
-	<langue code="sl" url="http://trad.spip.net/tradlang_module/minical?lang_cible=sl">
-		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
-	</langue>
 </traduction>
