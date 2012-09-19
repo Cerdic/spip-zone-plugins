@@ -76,11 +76,11 @@ function agenda_upgrade($nom_meta_base_version,$version_cible){
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
-function agenda_vider_tables() {
+function agenda_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_evenements");
 	#sql_drop_table("spip_mots_evenements"); // au cas ou ?
 	sql_alter("TABLE spip_rubriques DROP COLUMN agenda");
-	effacer_meta('agenda_base_version');
+	effacer_meta($nom_meta_base_version);
 }
 
 function upgrade_evenements_articles_012(){
