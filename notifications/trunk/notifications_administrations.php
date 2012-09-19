@@ -18,11 +18,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function notifications_declarer_tables_objets_sql($tables){
 
 	// champ notification :
-	// par defaut vide
-	// 'non' -> pas de notification sur ce thread pour cet auteur (pour ce message au moins)
+	// 0/1 (non abonne/abonne) defaut 1
+	$tables['spip_forum']['field']['notification'] = "tinyint NOT NULL default 1";
+
+	// champ notification_email :
 	// vide -> notification par le champ id_auteur ou email_auteur
 	// email -> notification sur cet email (permet de maj l'email de notif sans modifier l'email de signature)
-	$tables['spip_forum']['field']['notification'] = "text DEFAULT '' NOT NULL";
+	$tables['spip_forum']['field']['notification_email'] = "text DEFAULT '' NOT NULL";
 
 	return $tables;
 }
@@ -41,7 +43,8 @@ function notifications_upgrade($nom_meta_base_version,$version_cible){
 		array('maj_tables',array('spip_forum')),
 	);
 
-	$maj['0.1.2'] = array(
+	$maj['0.1.3'] = array(
+		array('sql_alter',"TABLE spip_forum CHANGE notification notification_email text DEFAULT '' NOT NULL"),
 		array('maj_tables',array('spip_forum')),
 	);
 
