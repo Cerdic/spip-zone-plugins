@@ -130,7 +130,7 @@ function cextras_editer_contenu_objet($flux){
 		$saisies = champs_extras_ajouter_drapeau_edition($saisies);
 		// ajouter au formulaire
 		$ajout = recuperer_fond('inclure/generer_saisies', array_merge($flux['args']['contexte'], array('saisies'=>$saisies)));
-		$flux['data'] = preg_replace('%(<!--extra-->)%is', '<ul>'.$ajout.'</ul>'."\n".'$1', $flux['data']);
+		$flux['data'] = preg_replace('%(<!--extra-->)%is', '<ul class="champs_extras">'.$ajout.'</ul>'."\n".'$1', $flux['data']);
 	}
 
 	return $flux;
