@@ -44,7 +44,8 @@
     pauseOnInteraction: (#ENV{pauseOnInteraction}),][
     popupLinks: (#ENV{popupLinks}),][
     preload: '(#ENV{preload})',][
-    queue: (#ENV{queue}),][
+    queue: (#ENV{queue}),]
+	responsive: [(#ENV{responsive, false})],[
     show: (#ENV{show}),][
     showInfo: (#ENV{showInfo}),][
     showCounter: (#ENV{showCounter}),][
@@ -56,8 +57,8 @@
     thumbQuality: '(#ENV{thumbQuality})',][
     thumbnails: '(#ENV{thumbnails})',][
     transition: '(#ENV{transition})',][
-    transitionSpeed: (#ENV{transitionSpeed}),]
-    width: [(#ENV{width, "750"})],
+    transitionSpeed: (#ENV{transitionSpeed}),][(#ENV{responsive, false}|!={true}|oui)[
+    width: (#ENV{width, "750"}),]]
     height: [(#ENV{height, "500"})]
   	});
 	});
