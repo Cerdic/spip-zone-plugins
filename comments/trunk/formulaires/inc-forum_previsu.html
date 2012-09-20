@@ -10,10 +10,12 @@
         </div>
     </div>
 	[<div class="reponse_formulaire">(#ENV*{erreur})</div>]
-	[<p class="boutons"><input type="submit" class="submit" onclick="confirmer_previsu_forum=true;" name="confirmer_previsu_forum" value="(#ENV*{bouton}|?{<:comments:submit2:>,''})" /></p>]
+	[<p class="boutons"><input type="submit" class="submit" onclick="jQuery(window).unbind();" name="confirmer_previsu_forum" value="(#ENV*{bouton}|?{<:comments:submit2:>,''})" /></p>]
 </fieldset>
 <br class="nettoyeur" />
 <script type="text/javascript">/*<![CDATA[*/
-var confirmer_previsu_forum = false;
-if (window.jQuery){ jQuery(function(){ jQuery(window).unload(function() { if (!confirmer_previsu_forum) alert('<:forum:forum_attention_message_non_poste|texte_script:>');confirmer_previsu_forum=true;});});}
+if (window.jQuery){ jQuery(function(){
+	jQuery(window).unload(function() { alert('<:forum:forum_attention_message_non_poste|texte_script:>');jQuery(window).unbind();});
+	jQuery(window).on('beforeunload', function(){		jQuery(window).unbind();return '<:forum:forum_attention_message_non_poste|texte_script:>';	});
+});}
 /*]]>*/</script>
