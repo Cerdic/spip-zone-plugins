@@ -1,0 +1,2 @@
+ul.mosaique {display: block; list-style-type: none; list-style: none; margin: 10px auto 20px; padding: 0;}
+ul.mosaique li img {margin: 5px; padding: 0; float: left; clear: none; border: 1px solid #BBB;}

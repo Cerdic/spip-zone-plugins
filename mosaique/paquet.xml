@@ -1,0 +1,27 @@
+<paquet
+	prefix="mosaique"
+	categorie="multimedia"
+	version="0.3.3"
+	etat="test"
+	compatibilite="[3.0.0-rc;3.0.*]"
+	logo="images/mosaique-64.png"
+	documentation="http://www.spip-contrib.net"
+	schema="0.0.1"
+>
+
+	<nom>Mosa&iuml;que</nom>
+
+	<auteur>Thom</auteur>
+	<licence>GNU/GPL</licence>
+
+	<traduire module="saisies" reference="fr" gestionnaire="salvatore" />
+
+	<necessite nom="cextras" compatibilite="[3.0.5;[" />
+	<necessite nom="saisies" compatibilite="[1.25.3;[" />
+ 
+    <pipeline nom="declarer_champs_extras" inclure="base/mosaique.php" />
+    <pipeline nom="header_prive" inclure="mosaique_pipelines.php" />
+    <pipeline nom="insert_head" inclure="mosaique_pipelines.php" />
+    <pipeline nom="jqueryui_plugins" inclure="mosaique_pipelines.php" />
+    <pipeline nom="affiche_gauche" inclure="mosaique_pipelines.php" />
+</paquet>

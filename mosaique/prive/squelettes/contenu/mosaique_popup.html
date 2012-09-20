@@ -1,0 +1,63 @@
+<div id="mosaique_popup">
+	<p><:mosaique:mosaique_popup_txt:></p>
+	<ul id="sortable">
+			<BOUCLE_mosaique(DOCUMENTS) {id_article} {statut IN prop,prepa,publie,refuse,poubelle} {mode=document} {extension IN png,jpg,gif} {id_document IN #MOSAIQUE|explode{','}} {doublons}>
+				[<li class="mosaique_document" id="#ID_DOCUMENT">(#FICHIER|image_passe_partout{112,112}|image_recadre{112,112})<span>doc#ID_DOCUMENT</span></li>]
+			</BOUCLE_mosaique>
+			<BOUCLE_mosaique2(DOCUMENTS) {id_article} {statut IN prop,prepa,publie,refuse,poubelle} {mode=document} {extension IN png,jpg,gif} {doublons}>
+				[<li class="mosaique_document" id="#ID_DOCUMENT">(#FICHIER|image_passe_partout{112,112}|image_recadre{112,112})<span>doc#ID_DOCUMENT</span></li>]
+			</BOUCLE_mosaique2>
+			<div style="clear: both;" class="nosort"> </div>
+	</ul>
+	<div id="mosaique_commandes">
+		<button class="submit" id="mosaique_annuler_tri"><:mosaique:mosaique_annuler:></button>
+		<button class="submit" id="enregistrer_mosaique"><:mosaique:mosaique_enregistrer:></button>
+	</div>
+</div>
+<script>
+$(document).ready(function() {
+
+	// Remettre dans le dernier ordre injecte dans le champ hidden (qui ne correspond pas necessairement a celui de la BDD)
+	if($("#champ_liste_mosaique").val()){
+		var dernier_ordre = $("#champ_liste_mosaique").val().split(",");
+		$.each(dernier_ordre, function(index, value) {
+			$("#sortable #" + value).addClass("traite").appendTo("#sortable");
+		});
+		$("#sortable li.mosaique_document").not(".traite").appendTo("#sortable");
+		$("#sortable li.mosaique_document.traite").removeClass("traite");
+		$("#sortable .nosort").appendTo("#sortable");
+		for(i=0; i<$("#sortable li.mosaique_document").length; i++){
+			if (ordre_actuel){
+				ordre_actuel = ordre_actuel + "," + $("li.mosaique_document").not(".nosort").eq(i).attr("id");
+			} 
+			else {
+				var ordre_actuel = $("#sortable li.mosaique_document").not(".nosort").eq(i).attr("id");
+			}
+		}
+	}
+
+	// Sortable
+	$("#sortable").sortable({
+	   revert: 100, cancel: '.nosort'
+	});
+	$("#sortable").disableSelection();
+	
+	// Enregistrement dans le champ hidden (mais pas encore BDD)
+	$("#enregistrer_mosaique").click(function() {
+		var ordre = $("#sortable").sortable('toArray').toString();
+		ordre = ordre.replace(/,,/g, ",");
+		ordre = ordre.replace(/^,/g, "");
+		ordre = ordre.replace(/,$/g, "");
+		if (ordre != $("#champ_liste_mosaique").val(ordre)){
+			$("#notice_mosaique").show();
+		}
+		$("#champ_liste_mosaique").val(ordre);
+		$.fn.colorbox.close();
+	});
+
+	$("#mosaique_annuler_tri").click(function() {
+		$.fn.colorbox.close();
+	});
+	
+});
+</script>

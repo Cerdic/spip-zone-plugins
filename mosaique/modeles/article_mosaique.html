@@ -1,0 +1,18 @@
+<BOUCLE_article(ARTICLES) {id_article}>
+	<ul class="mosaique">
+		<BOUCLE_mosaique(DOCUMENTS) {id_article} {id_document IN #MODELE{ordre_mosaique,id_article}|explode{','}}>
+		[
+		<li><a href="(#URL_DOCUMENT)" type="#MIME_TYPE" onclick="location.href='[(#URL_ARTICLE
+		  |url_absolue
+			|parametre_url{id_document,#ID_DOCUMENT}
+			|ancre_url{mosaique}
+			)]';return false;" rel="mosaique"[ title="(#TITRE|attribut_html|couper{80})"]>[(#FICHIER
+			|image_passe_partout{90,90}
+			|image_recadre{90,90}
+			|inserer_attribut{class,spip_logos}
+			|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]</a></li>
+		]
+		</BOUCLE_mosaique>
+		<div style="clear: both;"> </div>
+	</ul>
+</BOUCLE_article>

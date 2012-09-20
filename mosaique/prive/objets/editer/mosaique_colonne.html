@@ -1,0 +1,43 @@
+<div id="boite_mosaique">
+	#BOITE_OUVRIR{#CHEMIN_IMAGE{mosaique-images-24.png}|balise_img{'',cadre-icone}|concat{"Mosa&iuml;que"},'simple','titrem'}
+		[(#ENV{id_objet}|=={-1}|non)
+		<span id="mosaique_loading" class="image_loading"><img src="#CHEMIN_IMAGE{searching.gif}" /></span>
+			<div id="mosaique_oui" style="display:none;">
+				<div class="notice" id="notice_mosaique" style="display: none;"><:mosaique:mosaique_notice:></div>
+				[<a href="(#URL_ECRIRE{mosaique_popup,id_article=#ENV{id_objet}})" class="popin" style="font-weight:bold;"><:mosaique:mosaique_trier_docs:></a>]
+			</div>
+			<div id="mosaique_non" style="display:none;">
+				<p><:mosaique:mosaique_aucun_doc:></p>
+			</div>
+
+		]
+		[(#ENV{id_objet}|=={-1}|oui)
+			<p><:mosaique:mosaique_new_article:></p>
+		]
+	#BOITE_FERMER
+</div>
+<script>
+$(document).ready(function() {
+
+	//Un timer pour surveiller le nombre de documents joints : méthode pas optimale mais bon...
+	jQuery.fn.timer = function() {
+		var newndocs = $("#documents_joints").find(".item.document .type:contains('JPEG')").length + $("#documents_joints").find(".item.document .type:contains('PNG')").length + $("#documents_joints").find(".item.document .type:contains('GIF')").length; 
+		if (ndocs != newndocs){
+			var ndocs = newndocs; 
+			if(ndocs > 1){
+				$("#mosaique_oui").show();
+				$("#mosaique_non").hide();
+				$("#mosaique_loading").hide();
+			} else {
+				$("#mosaique_non").show();
+				$("#mosaique_oui").hide();
+				$("#mosaique_loading").hide();
+			}
+		}
+	} // timer function end
+
+	window.setInterval(function() {
+		$("#documents_joints").timer();
+	}, 1000);
+});
+</script>

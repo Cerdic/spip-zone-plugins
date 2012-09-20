@@ -1,0 +1,16 @@
+.formulaire_spip li.editer_mosaique {padding-left: 10px; padding-top: 10px;}
+.formulaire_spip li.editer_mosaique label {display: block; float: left; width: auto; margin: 0px; font-weight: bold; color: #000;}
+#boite_mosaique .titrem {font-size: 1em; color: #4A4A4A;}
+#notice_mosaique {display: none;}
+
+#mosaique_popup {position: relative;}
+#mosaique_popup p {margin: 0 20px;}
+#mosaique_popup #sortable { list-style-type: none; padding: 0; margin: 20px; }
+#mosaique_popup #sortable li { cursor: move; cursor: grab; cursor: -moz-grab;  margin: 6px 6px 3px 0; padding: 0; float: left; clear: none; width: 112px; height: 112px; font-size: 4em; text-align: center; border: 1px solid #bbb; position: relative; background: #FFF;}
+#mosaique_popup #sortable li span { color: #fff; background: #333; position : absolute; bottom : 2px; right: 2px; font-family: Verdana, "DejaVu Sans", "Bitstream Vera Sans", Geneva, sans-serif; font-size: 12px; padding: 6px 6px; font-weight: normal; display:none;}
+#mosaique_popup #sortable li:hover span, #sortable li:active span, #sortable li:focus span {display: block;}
+#mosaique_popup #sortable li:active {box-shadow: 0px 6px 12px #555; -moz-box-shadow: 0px 6px 12px #555; -webkit-box-shadow: 0px 6px 12px #555;margin: 3px 6px 6px 0;}
+#mosaique_popup #sortable li:focus, #sortable li:hover {border-color:#333; }
+#mosaique_popup #sortable #mosaique_recharger {display:none;}
+
+#mosaique_popup #mosaique_commandes {display: block; clear: both; text-align: right; border-top: 1px #999 solid; margin-top: 10px; padding: 10px 10px 0 10px; margin: 20px 20px 0 20px; position: relative;}
