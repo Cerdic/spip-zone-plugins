@@ -89,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'signature_petition' => 'Podpisy pod petíciu',
 	'signature_petition_moderateur' => 'Zadajte e-mailovú adresu moderátora petícií (alebo viac, oddelených čiarkami).',
+	'suivi_texte_acces_page' => 'Modifier mes abonnements aux discussions', # NEW
 	'suivis_perso' => 'Prispôsobené sledovanie',
 	'suivis_perso_activer_option' => 'Ak aktivujete túto možnosť, každý návštevník, ktorý sa prihlási na túto sledovaciu adresu, bude zapísaný do tabuľky <code>spip_auteurs</code> so stavom <code>6visiteur.</code> Potom si bude môcť prezrieť všetky príspevky, pod ktoré sa podpísal na diskusnom fóre, upraviť si nastavenia oznamov, atď.',
 	'suivis_perso_non' => 'Bez sledovania',

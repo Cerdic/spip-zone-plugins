@@ -89,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'signature_petition' => 'امضا كنندگان طومار ',
 	'signature_petition_moderateur' => ' نشاني ايميل گرداننده (يا گردانندگان، با ويرگول جدا شود) طومارها را در زير قيد كنيد.',
+	'suivi_texte_acces_page' => 'Modifier mes abonnements aux discussions', # NEW
 	'suivis_perso' => 'پيگيري اطلاهيه‌هاي خصوصي',
 	'suivis_perso_activer_option' => 'اگر اين گزينه را فعال كنيد، هر بازديد‌كننده‌اي كه به اين يو.آر.ال وصل شود، در جدول نويسندگان اسپيپ <code>spip_auteurs</code>با وضعيت <code>6visiteur</code>فلان ثبت مي‌شود. بعد او مي‌تواند تمام پيام‌هايي را كه روي وب سايت پست كرده ببيند، گزينه‌هاي اطلاعيه‌ي خودش را پيكربندي كند و از اين قبيل. . . 
 ',

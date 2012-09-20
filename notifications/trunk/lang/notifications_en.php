@@ -89,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'signature_petition' => 'Petition signatures',
 	'signature_petition_moderateur' => 'Please write here moderator\'s email address for petitions, coma separated.',
+	'suivi_texte_acces_page' => 'Modifier mes abonnements aux discussions', # NEW
 	'suivis_perso' => 'Personnal notifications follow-up',
 	'suivis_perso_activer_option' => 'If you activate this option, each visitor clicking this follow-up URL will be registered in the <code>spip_auteurs</code> DB table, with status <code>6visiteur</code>. He\'ll be then able to view all the messages he posted on the website, configure his own notification options, ...',
 	'suivis_perso_non' => 'No follow-up',
