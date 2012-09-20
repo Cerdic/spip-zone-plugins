@@ -14,7 +14,7 @@
   [<div class="#EDIT{chapo} chapo">(#CHAPO|coupe{#VAR{#EVAL{'acsEncart'.'#NIC'.'NbLettres'},300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</div>#SET{done,oui}]
   [(#GET{done}|!={oui}|?{' '})
     [<div class="#EDIT{texte} texte">(#TEXTE|coupe{#VAR{#EVAL{'acsEncart'.'#NIC'.'NbLettres'},300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</div>
-  ]][<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]<div class="nav nsize">[(#VAR{#EVAL{'acsEncart'.'#NIC'.'Dates'}}|!={non}|?{" "})[(#DATE_REDAC|?{[(#DATE_REDAC|nom_jour) ][(#DATE_REDAC|affdate)], [(#DATE|nom_jour) ][(#DATE|affdate)]})]][ <:par_auteur:> (#LESAUTEURS)]</div>
+  ]][<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]<div class="nav nsize">[(#VAR{#EVAL{'acsEncart'.'#NIC'.'Date'}}|!={non}|?{" "})[(#DATE_REDAC|?{[(#DATE_REDAC|nom_jour) ][(#DATE_REDAC|affdate)], [(#DATE|nom_jour) ][(#DATE|affdate)]})]][ <:par_auteur:> (#LESAUTEURS)]</div>
 </div>
 [(#VAR{acsFondSpacer}|?{' '})<div class="spacer"></div>]
 </BOUCLE_encart>
