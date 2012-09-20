@@ -17,9 +17,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function notifications_declarer_tables_objets_sql($tables){
 
-	// champ notification :
+	// champ notification (editable via le form de forum) :
 	// 0/1 (non abonne/abonne) defaut 1
 	$tables['spip_forum']['field']['notification'] = "tinyint NOT NULL default 1";
+	$tables['spip_forum']['champs_editables'][] = 'notification';
 
 	// champ notification_email :
 	// vide -> notification par le champ id_auteur ou email_auteur
