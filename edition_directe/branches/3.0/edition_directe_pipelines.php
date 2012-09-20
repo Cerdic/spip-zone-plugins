@@ -38,9 +38,9 @@ function edition_directe_recuperer_fond($flux){
 	$exec=_request('exec');
 	if($contexte['exec']=='site')$id='id_syndic';
 	$contexte['id_objet']=$contexte[$id];
-	
+
 	// Seulement dans l'espace priv&eacute;
-	if($exec){
+	if($exec AND autoriser('modifier',$objet,$contexte['id_objet'])){
 		// On cherche les objets actifs pour l'édition directe
 		$objets=objets_edition_directe();
 		
