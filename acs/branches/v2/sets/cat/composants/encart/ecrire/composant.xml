@@ -87,4 +87,11 @@
     <nom>NbLettres</nom>
     <type>text</type>
   </variable>
+  <variable>
+    <nom>Date</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
 </composant>
