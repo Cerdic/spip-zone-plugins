@@ -98,7 +98,7 @@ function formulaires_formidable_charger($id_formulaire, $valeurs=array(), $id_fo
 					and $reponses = formidable_verifier_reponse_formulaire($formulaire['id_formulaire'], $options['identification'])
 				){
 					$id_formulaires_reponse = array_pop($reponses);
-					$contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok = true);
+					$contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok);
 
 					// On ajoute un hidden pour dire que c'est une modif
 					$contexte['_hidden'] .= "\n".'<input type="hidden" name="deja_enregistre_'.$formulaire['id_formulaire'].'" value="'.$id_formulaires_reponse.'"/>';
