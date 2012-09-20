@@ -10,7 +10,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('public/agenda');
-include_spip('inc/agenda_filtres');
+include_spip('inc/agenda_filtres'); // deprecies mais encore supportes pour le moment
 
 /**
  * Ajout d'un offset a une date
@@ -110,6 +110,24 @@ function agenda_date_passee($date_test,$date_ref=null){
 	return (strtotime($date_test)<$date_ref)?' ':'';
 }
 
+/**
+ * Afficher la periode de l'agenda :
+ * Le nom du mois si nb_mois = 1
+ * L'annee si nb_mois=12 et debut du mois = janvier
+ * sinon : mois annee - mois annee (xxx 12 - yyy 13)
+ *
+ * @param string $date
+ * @param int $nb_mois
+ * @return string
+ */
+function affdate_periode($date,$nb_mois){
+	if ($nb_mois==1)
+		return affdate_mois_annee($date);
+	if ($nb_mois==12 AND mois($date)==1)
+		return annee($date);
+
+	return affdate_mois_annee($date)." - ".affdate_mois_annee(agenda_moisdecal($date, $nb_mois-1));
+}
 
 /**
  * Raccourcis [->evenement12] et [->evt12]

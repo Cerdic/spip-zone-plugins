@@ -5,16 +5,58 @@
   Distribue sous licence GPL
 
 ]
+<h1>[(#CONFIG{agenda/titre, <:agenda:agenda:>}|entites_html)]</h1>
+[<div class="description">(#CONFIG{agenda/descriptif}|propre)</div>]
 
+#SET{periode,#CONFIG{agenda/periode,12}}
+#SET{date_debut,#ENV{date_debut,#ENV{date}}}
+#SET{date_prev,#ENV{date_debut,#ENV{date}}|agenda_moisdecal{#GET{periode}|mult{-1},'Y-m-d H:i:00'}}
+#SET{date_fin,#ENV{date_debut,#ENV{date}}|agenda_moisdecal{#GET{periode},'Y-m-d H:i:00'}}
+
+[(#REM) Ne pas afficher l'annee de depart, elle est dans le h2)]
+[(#GET{date_debut}|annee|unique{annee}|non)]
+
+<h2>[(#GET{date_debut}|affdate_periode{#GET{periode}})]</h2>
 <B_ev>
-	[<h1>(#TOTAL_BOUCLE|singulier_ou_pluriel{agenda:info_un_evenement,agenda:info_nombre_evenements})</h1>]
 	<ul class="liste-items evenements">
-	<BOUCLE_ev(EVENEMENTS){!evenement_passe #ENV{date_debut,#ENV{date}}}{!evenement_a_venir #ENV{date_debut,#ENV{date}}|agenda_moisdecal{1,'Y-m-d H:i:00'}}{par date_debut}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>
-		<li class="item">
+	<BOUCLE_ev(EVENEMENTS){!evenement_passe #GET{date_debut}}{!evenement_a_venir #GET{date_fin}}{par date_debut}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>
+		[<li class="item month">(#GET{periode}|>{1}?{[(#DATE_DEBUT|nom_mois|unique{mois})[ (#DATE_DEBUT|annee|unique{annee})]]})</li>]
+		<li class="item evenement">
 			#MODELE{evenement_vevent}
 		</li>
 	</BOUCLE_ev>
 	</ul>
 </B_ev>
-<h1><:agenda:info_aucun_evenement:></h1>
+	<p><:agenda:info_aucun_evenement:></p>
 <//B_ev>
+
+<p class="pagination">
+	#SET{sep,' | '}
+	#SET{hasprev,''}
+	<BOUCLE_prev(EVENEMENTS){!evenement_a_venir #GET{date_debut}}{0,1}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>#SET{hasprev,1}</BOUCLE_prev>
+	[<span
+		class="prev[(#GET{hasprev}|non)disabled]">(#SELF
+		|parametre_url{date_debut,#GET{date_prev}|affdate{Y-m-d}}
+		|lien_ou_expose{#ENV{label_precedent,#GET{date_prev}|affdate_periode{#GET{periode}}},[(#GET{hasprev}|non)],'lien_pagination','',nofollow}
+		|inserer_attribut{rel,prev}
+		)[<span
+		class='sep'>(#GET*{sep})</span>]</span>]
+	#SET{hasnext,''}
+	<BOUCLE_next(EVENEMENTS){!evenement_passe #GET{date_fin}}{0,1}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>#SET{hasnext,1}</BOUCLE_next>
+	[<span
+		class="next[(#GET{hasnext}|non)disabled]">(#SELF
+		|parametre_url{date_debut,#GET{date_fin}|affdate{Y-m-d}}
+		|lien_ou_expose{#ENV{label_suivant,#GET{date_fin}|affdate_periode{#GET{periode}}},[(#GET{hasnext}|non)],'lien_pagination','',nofollow}
+		|inserer_attribut{rel,next}
+		)</span>]
+</p>
+
+</div>
+<style type="text/css">
+.liste-items .evenement {padding-left: 6.5em;}
+.evenement .dateban {float: left;margin-left: -6.5em;width: 6em;}
+.evenement .dateban .day {display: block;text-align: center;font-size: 2em;}
+.evenement .dateban .month {display: block;text-align: center;text-transform: uppercase;font-size: 0.71em;}
+.evenement .dateban .year {display: block;text-align: center;font-size: 0.71em;}
+.liste-items .item.month {padding: 0.75em;background: #e4e4e4; text-transform: uppercase;}
+</style>

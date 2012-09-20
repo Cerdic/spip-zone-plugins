@@ -1,10 +1,13 @@
 <BOUCLE_vevent(EVENEMENTS){id_evenement=#ENV{id,#ENV{id_evenement}}}{tout}>
+<div class="dateban"><b class="day">[(#DATE_DEBUT|jour)]</b> <b class="month">[(#DATE_DEBUT|nom_mois)]</b> <b class="year">[(#DATE_DEBUT|annee)]</b></div>
 <div class="vevent id_#ID_EVENEMENT">
-<h3 class="summary #EDIT{titre}">#TITRE</h3>
+<h3 class="summary #EDIT{titre}"><a href="[(#URL_EVENEMENT)]">#TITRE</a></h3>
 [(#INSCRIPTION|?{' ',''})<p class="inscrits">#NB_INSCRITS[/(#PLACES) ]<:agenda:inscrits:></p>]
 [<p class="date">(#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE,'hcal'})</p>]
-[<div class="description  #EDIT{descriptif}">(#DESCRIPTIF)</div>]
+#SET{intro,''}<BOUCLE_art(ARTICLES){id_article}>#SET{intro,#INTRODUCTION}</BOUCLE_art>
+[<div class="description  #EDIT{descriptif}">(#DESCRIPTIF|sinon{#GET{intro}})</div>]
 [<p class="lieu"><span class="location #EDIT{lieu}">(#LIEU)</span>[<br /><span class="adresse #EDIT{adresse}">(#ADRESSE|PtoBR)</span>]</p>]
 <B_mots><p class='category'><BOUCLE_mots(MOTS){id_evenement}{par num titre,titre}{', '}>#TITRE</BOUCLE_mots></p></B_mots>
+<p class="lire-la-suite"><a href="#URL_EVENEMENT">Lire le détail de &laquo; #TITRE &raquo;</a></p>
 </div>
 </BOUCLE_vevent>
