@@ -13,8 +13,6 @@
 	<auteur lien='http://www.erational.org'>erational</auteur>
 	<licence>GNU/GPL</licence>
 
- 
-	<pipeline nom="declarer_tables_interfaces" inclure="base/formulaireupload.php" />
   <pipeline nom="insert_head_css"  action="insert_head_css" inclure="formulaireupload_pipelines.php" />
 	<pipeline nom="insert_head"  action="insert_head" inclure="formulaireupload_pipelines.php" />
 
