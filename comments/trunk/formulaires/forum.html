@@ -80,17 +80,15 @@
 				accept="(#ENV{formats_documents_forum}|join{','})"] />
 				</div>
 
-				<script type='text/javascript'>
-				jQuery('#ajouter_document_up')
-				.next()
-					.hide()
-				.prev()
-				.find(':checkbox')
-				.bind('change', function(){
-					jQuery('#ajouter_document_up').hide().next().show();
-				})
-				;
-				</script>
+				<script type='text/javascript'>/*<!\[CDATA\[*/
+				if (window.jQuery) jQuery(function(){
+					jQuery('#ajouter_document_up')
+					.next().hide()
+					.prev().find(':checkbox').bind('change', function(){
+						jQuery('#ajouter_document_up').hide().next().show();
+					});
+				});
+				/*\]\]>*/</script>
 				</li>
 			</ul>
 		</fieldset>
