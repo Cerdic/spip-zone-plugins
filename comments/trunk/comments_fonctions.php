@@ -77,6 +77,20 @@ function balise_BOUTONS_ADMIN_FORUM_dist($p) {
 }
 
 /**
+ * Charger la saisie du formulaire forum : declarer le champ 'notification' en plus
+ * (seulement utilise si plugin notifications dispo)
+ *
+ * @param array $flux
+ * @return array
+ */
+function comments_formulaire_charger($flux){
+	if ($flux['args']['form']=='forum'){
+		$flux['data']['notification']=1;
+	}
+	return $flux;
+}
+
+/**
  * Verifier la saisie dans le formulaire forum :
  * login obligatoire
  * email optionnellement obligatoire
@@ -138,6 +152,7 @@ function comments_formulaire_traiter($flux){
 				set_request('ajouter_groupe');
 				set_request('ajouter_mot');
 				set_request('id_forum');
+				set_request('notification');
 			}
 		}
 

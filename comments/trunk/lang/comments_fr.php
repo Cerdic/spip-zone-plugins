@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_nom' => 'Nom',
 	'label_url' => 'Votre site web',
 	'lien_suivre_commentaires' => 'Suivre les commentaires&nbsp;:',
+	'label_notification' => 'Prévenez moi de tous les nouveaux commentaires par email.',
 
 	// M
 	'moderation_info' => 'Attention, votre message n\'apparaîtra qu\'après avoir été relu et approuvé.',
