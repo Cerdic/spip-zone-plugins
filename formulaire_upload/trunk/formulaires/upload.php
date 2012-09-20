@@ -54,53 +54,39 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
     $res['message_ok'] = _T("formupload:msg_doc_deleted",array("compteur"=>$compteur));
   }
 
-	// Ajouter un document   
-	if (($files = ($_FILES ? $_FILES : $HTTP_POST_FILES)) && (is_uploaded_file($files['fichier']['tmp_name']))) {
-		 
-    include_spip('action/ajouter_documents');
-		$ajouter_un_document = charger_fonction('ajouter_un_document','action');
+	// Ajouter un document (cf plugins-dist/medias)
+  include_spip('inc/joindre_document');
+	$files = joindre_trouver_fichier_envoye();
+   
+  if (is_array($files)) {
     
-    $extention_autorisee = explode("|",lire_config("formulaireupload/files_accepted"));
-    $nb_doc_autorise = intval(lire_config("formulaireupload/files_number"));
+    $ajouter_documents = charger_fonction('ajouter_documents', 'action');
+    $nouveaux_doc = $ajouter_documents($id_document,$files,$objet,$id_objet,'document');
     
-    $compteur = 0;  
-    $res['message_ok'] = ""; 
+    $compteur = count($nouveaux_doc);
     
-    // FIXE A VERIFIER ne prend que le dernier fichier ...
+    /* A verifier:
+       - securite : verifier les extentions (si forcing)
+       - ajouter un quota image pour client ?
+       
 
-    foreach ($files as $file) {           
-           // verification cote serveur 
-            // DEBUG $res['message_ok'] .= " -*- ";
-           // ... si le fichier est autorisee (securite)
-           if (count($extention_autorisee)>0) {
-                   //  FIXME : il faudrait tester l'extension est bien conforme a la configuration (pour eviter les hacks)
-                   //          analyser le mime type du _FILE et trouver la correspond ds spip document
-           }
-           
-          
-           // limite aux nombres de fichiers liés à l'objet ?            
-           if ($nb_doc_autorise==0) {  
-                // pas de limite            
-                 $id = $ajouter_un_document("new", $file, $type, $id_objet, 'document');
-                 $compteur++;
-           }  else {
-                // oui, on cherche les objets déjà liés
+    $quota_client = intval(lire_config("formulaireupload/files_number"));
+    
+
+                // quota
                 $nb_objet = 0;
                 if ($res_nb_objet = sql_select('id_document', 'spip_documents_liens', array("objet = '$type'",'id_objet='.intval($id_objet))))
                            $nb_objet = sql_count($res_nb_objet);
-                if ($nb_objet<=$nb_doc_autorise)  {
-                     $id = $ajouter_un_document("new", $file, $type, $id_objet, 'document');
-                    $compteur++;
-                }  else {
+                if ($nb_objet<=$quota_client )  
+                  
                     $res['message_ok'] =  _T("formupload:msg_doc_added_max",array("max"=>$nb_doc_autorise))."<br />";
-                }
-                      
-           }
+               
+            ... a finir ...
            
     } 
-   
+       */
 		$invalider = true;
-		$res['message_ok'] .= _T("formupload:msg_doc_added",array("compteur"=>$compteur));
+		$res['message_ok'] = _T("formupload:msg_doc_added",array("compteur"=>$compteur));
 	}
 
 	if ($invalider) {

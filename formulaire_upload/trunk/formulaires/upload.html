@@ -4,7 +4,6 @@
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 [(#ENV{editable})
 <form action="#ENV{action}#formulaire_upload" method="post" enctype="multipart/form-data">
-	[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<fieldset>
 		<legend><:formupload:yourfiles:></legend>
@@ -13,11 +12,11 @@
 			<li class='saisie_fichier[ (#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]'>
 			<div>
 				<label for="fichier_#ENV{objet}_#ENV{id_objet}"><:formupload:choosefiles:></label>
-				<input type="file" id="fichier_#ENV{objet}_#ENV{id_objet}" name="fichier" [ accept="(#CONFIG{formulaireupload/files_accepted})"][ maxlength="(#CONFIG{formulaireupload/files_number})"] />
-			</div>
+				<input type="file" id="fichier_#ENV{objet}_#ENV{id_objet}" name="fichier\[\]" [ accept="(#CONFIG{formulaireupload/files_accepted})"][ maxlength="(#CONFIG{formulaireupload/files_number})"] />
+		  </div>
 			</li>
 		</ul>
-		<p class="spip_bouton"><input type="submit" value="<:bouton_enregistrer:>" /></p>
+		<p class='boutons'><input class='submit' type="submit" name="joindre_upload" value="<:bouton_enregistrer:>"/></p>
 	</fieldset>
 <script type="text/javascript">
 (function($){
