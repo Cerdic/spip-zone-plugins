@@ -31,12 +31,12 @@ function exec_destination()
 		debut_cadre_association('euro-39.gif', 'destination_comptable');
 		//Affichage de la table
 		echo association_bloc_listehtml(
-			array('d.*, COUNT(o.id_destination) AS nombre_fois', 'spip_asso_destination AS d INNER JOIN spip_asso_destination_op AS o ON d.id_destination=o.id_destination', '', 'd.id_destination', 'intitule'), // requete
+			array("d.*, CONCAT('<:asso:nombre_fois{nombre=', COUNT(o.id_destination),'}:>') AS nombre_fois", 'spip_asso_destination AS d INNER JOIN spip_asso_destination_op AS o ON d.id_destination=o.id_destination', '', 'd.id_destination', 'intitule'), // requete
 			array(
 				'id_destination' => array('asso:entete_id', 'entier'),
 				'intitule' => array('asso:entete_intitule', 'texte'),
-				'nombre_fois' => array('asso:entete_utilise', 'entier'), // _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_destination_op','id_destination='.$data['id_destination'])))
-				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),
+//				'nombre_fois' => array('asso:entete_utilise', 'texte', 'propre', 'integer'),
+				'commentaire' => array('asso:entete_commentaire', 'texte', 'typo'),
 			), // entetes et formats des donnees
 			array(
 				array('suppr', 'destination', 'id=$$' ),

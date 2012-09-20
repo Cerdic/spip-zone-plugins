@@ -20,7 +20,7 @@ function exec_pdf_activite()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_evenement = intval(_request('id'));
+		$id_evenement = association_passeparam_id('evenement');
 		$pdf = new PDF();
 		$pdf->titre = utf8_decode(_T('asso:activite_titre_inscriptions_activites'));
 		$pdf->Open();

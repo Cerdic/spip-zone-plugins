@@ -23,7 +23,7 @@
 	<tbody>
 <BOUCLE_groupes(ASSO_GROUPES_LIAISONS asso_membres){id_groupe=#ENV{id_groupe}}{par nom_famille}{pagination}>
 		<tr class="agent vcard [(#COMPTEUR_BOUCLE|alterner{'pair','impair'})]">
-			<td class="fn"><a title="<:asso:adherent_label_voir_membre:>" href="#URL_ECRIRE{adherent, id=#ID_AUTEUR}">[(#SEXE|association_calculer_nom_membre{#PRENOM, #NOM_FAMILLE}) ]</a></td>
+			<td class="fn"><a title="<:asso:adherent_label_voir_membre:>" href="#URL_ECRIRE{adherent, id=#ID_AUTEUR}">[(#SEXE|association_formater_nom{#PRENOM, #NOM_FAMILLE}) ]</a></td>
 			<td><a class="include" href="#vcard-group#ENV{id_groupe}"></a> [<span class="role">(#FONCTION)</span>]</td>
 		[(#GET{coordonnees_actif}|oui)
 			<td>[(#GET{telephones}|table_valeur{#ID_AUTEUR})]</td>

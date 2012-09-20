@@ -21,7 +21,7 @@ function exec_edit_groupe_autorisations()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_groupe = intval(_request('id'));
+		$id_groupe = association_passeparam_id('groupe');
 		onglets_association('gerer_les_autorisations', 'association');
 		// INFO
 		$groupe = sql_fetsel('commentaires', 'spip_asso_groupes', "id_groupe=$id_groupe" );

@@ -21,8 +21,8 @@ function exec_edit_activite()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_activite = intval(_request('id'));
-		$id_evenement = $id_activite ? sql_getfetsel('id_evenement', 'spip_asso_activites', "id_activite=$id_activite") : intval(_request('id_evenement'));
+		$id_activite = association_passeparam_id('activite');
+		$id_evenement = $id_activite ? sql_getfetsel('id_evenement', 'spip_asso_activites', "id_activite=$id_activite") : association_recuperer_entier('id_evenement');
 		onglets_association('titre_onglet_activite', 'activites');
 		// INTRO : Rappel Infos Evenement
 		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement");

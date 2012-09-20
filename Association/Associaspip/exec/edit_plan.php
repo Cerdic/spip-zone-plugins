@@ -21,13 +21,13 @@ function exec_edit_plan()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_plan = intval(_request('id'));
+		$id_plan = association_passeparam_id('plan');
 		onglets_association('plan_comptable', 'association');
 		// Notice
 		echo propre(_T('asso:edit_plan'));
 		// datation et raccourcis
 		raccourcis_association('');
-		debut_cadre_association('euro-39.gif', 'edition_plan_comptable');
+		debut_cadre_association('plan_compte.png', 'edition_plan_comptable');
 		echo recuperer_fond('prive/editer/editer_asso_plan', array (
 			'id_plan' => $id_plan
 		));

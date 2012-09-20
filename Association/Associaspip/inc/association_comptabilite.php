@@ -367,7 +367,7 @@ function association_passe_parametres_comptables($classes=array()) {
     $params = array(); // initialisation de la liste
     $params['exercice'] = association_passeparam_exercice();
     $params['annee'] = association_passeparam_annee();
-    $params['destination'] = intval(_request('destination'));
+    $params['destination'] = association_recuperer_entier('destination');
 #    if( !$params['destination'] ) { // pas de destination
 #    }
     $params['type'] = _request('type');

@@ -22,63 +22,44 @@ function exec_bilan()
 		echo minipres();
 	} else {
 		$plan = sql_countsel('spip_asso_plan');
-		$exercice = intval(_request('exercice'));
-		if(!$exercice){
-			/* on recupere l'id_exercice dont la date "fin" est "la plus grande" */
-			$exercice = sql_getfetsel('id_exercice','spip_asso_exercices','','','fin DESC');
-			if(!$exercice)
-				$exercice=0;
-		}
-		$exercice_data = sql_asso1ligne('exercice', $exercice);
-		// recupere l'id_destination de la ou des destinations dans POST ou cree une entree a 0 dans le tableau
-		if (!($ids_destination_bilan = _request('destination')))
-			$ids_destination_bilan = array(0);
+		$id_exercice = association_passeparam_exercice();
+		$exercice = sql_asso1ligne('exercice', $id_exercice);
+		if ( !($ids_destinations = _request('destinations')) ) // recuperer l'id_destination de la ou des destinations
+			$ids_destinations = array(0); // ...ou creer une entree a 0 dans le tableau
 		include_spip('inc/association_comptabilite');
 		onglets_association('titre_onglet_comptes', 'comptes');
 		// INTRO : rappel de l'exercicee affichee
-		$infos['exercice_entete_debut'] = association_formater_date($exercice_data['debut'], 'dtstart');
-		$infos['exercice_entete_fin'] = association_formater_date($exercice_data['fin'], 'dtend');
-		echo association_totauxinfos_intro($exercice_data['intitule'], 'exercice', $exercice, $infos);
+		$infos['exercice_entete_debut'] = association_formater_date($exercice['debut'], 'dtstart');
+		$infos['exercice_entete_fin'] = association_formater_date($exercice['fin'], 'dtend');
+		echo association_totauxinfos_intro($exercice['intitule'], 'exercice', $id_exercice, $infos);
 		// datation et raccourcis
-		raccourcis_association(array('comptes', "exercice=$exercice"), array(
-			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "exercice=$exercice") ),
-#			'annexe_titre_general' => array('finances-24.png', array('annexe', "exercice=$exercice") ),
-			'encaisse' => array('finances-24.png', array('encaisse', "exercice=$exercice") ),
+		raccourcis_association(array('comptes', "exercice=$id_exercice"), array(
+			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "exercice=$id_exercice") ),
+#			'annexe_titre_general' => array('finances-24.png', array('annexe', "exercice=$id_exercice") ),
+			'encaisse' => array('finances-24.png', array('encaisse', "exercice=$id_exercice") ),
 		));
-		// selecteur de destinations
-		if ($GLOBALS['association_metas']['destinations']) {// on affiche une liste de choix de destinations et on cree parallelement les intitule de toutes les destinations dans un tableau
-			$select_destination = '';
-			$intitule_destinations = array();
-			$query = sql_select('id_destination, intitule', 'spip_asso_destination', '', '', 'intitule');
-			while ($data = sql_fetch($query)) {
-				$select_destination .= '<div class="choix"><input type="checkbox" name ="destination[]" value="'.$data['id_destination'].'" id="destination_'.$data['id_destination'].'"';
-				if (!(array_search($data['id_destination'], $ids_destination_bilan)===FALSE))
-					$select_destination .= ' checked="checked"';
-				$select_destination .= ' /><label for="destination_'.$data['id_destination'].'">'.$data['intitule'].'</label></div>';
-				$intitule_destinations[$data['id_destination']] = $data['intitule'];
-			}
+		// on cree les intitule de toutes les destinations dans un tableau
+		$intitule_destinations = array();
+		$destinations = sql_allfetsel('id_destination, intitule', 'spip_asso_destination', '', '', 'intitule'); // on recupere tout dans un tableau : il ne devrait pas y en avoir des masses...
+		foreach ($destinations as $d) { // on veut plutot un tableau des intitules de toutes les destinations, donc une association id_destination=>intitule
+			$intitule_destinations[$d['id_destination']] = $d['intitule'];
+		}
+		if ($GLOBALS['association_metas']['destinations']) { // on affiche une liste de choix de destinations
 			echo debut_cadre_enfonce('',true);
 			echo '<h3>'. _T('plugins_vue_liste') .'</h3>';
-			echo '<div class="formulaire_spip formulaire_asso_compteresultats">';
-			echo '<form method="post" action="'.generer_url_ecrire('bilan', "exercice=$exercice").'"><ul><li>';
-			echo '<div class="choix"><input type="checkbox" name ="destination[]" value="0" id="destination_0"';
-			if (!(array_search(0, $ids_destination_bilan)===FALSE))
-				echo ' selected="selected"';
-			echo ' /><label for="destination_0">'._T('asso:toutes_destinations').'</label></div>'.$select_destination;
-			echo '</li></ul>';
-			echo '<p class="boutons"><input type="submit" value="'. _T('asso:compte_resultat') .'" /></p>';
-			echo '</form></div>';
+			echo association_selectionner_destinations($ids_destinations, "bilan&exercice=$id_exercice", '<p class="boutons"><input type="submit" value="'. _T('asso:compte_resultat') .'" /></p>', FALSE); // selecteur de destinations
 			echo fin_cadre_enfonce(true);
 		}
 		debut_cadre_association('finances-24.png', 'resultat_courant');
 		// Filtres
 		filtres_association(array(
-			'exercice'=>$exercice,
+			'exercice'=>$id_exercice,
+			'destinations'=>array($ids_destinations, "bilan&exercice=$id_exercice", '', TRUE),
 		), 'bilan');
 		if ($plan) {
 			$join = ' RIGHT JOIN spip_asso_plan ON imputation=code';
 			$sel = ', code, intitule, classe';
-			$where = " date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' ";
+			$where = " date>='$exercice[debut]' AND date<='$exercice[fin]' ";
 			$having =  "classe NOT IN ('". sql_quote($GLOBALS['association_metas']['classe_banques']). "','" .sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']) . "','" .sql_quote($GLOBALS['association_metas']['classe_charges']) . "','" .sql_quote($GLOBALS['association_metas']['classe_produits']) . "')";
 			$order = 'code';
 		} else {
@@ -88,10 +69,10 @@ function exec_bilan()
 			sql_quote($GLOBALS['association_metas']['classe_charges']),
 			sql_quote($GLOBALS['association_metas']['classe_produits']),
 		);
-		foreach ($ids_destination_bilan as $id_destination) { // on boucle sur le tableau des destinations en refaisant le fetch a chaque iteration
+		foreach ($ids_destinations as $id_destination) { // on boucle sur le tableau des destinations en refaisant le fetch a chaque iteration
 			// TABLEAU EXPLOITATION
 			echo debut_cadre_relief('', true, '', ($id_destination ? $intitule_destinations[$id_destination] : ($GLOBALS['association_metas']['destinations']?_T('asso:toutes_destination'):'') ) );
-			$solde = association_liste_totaux_comptes_classes($classes, 'cpte_resultat', 0, $exercice, $id_destination);
+			$solde = association_liste_totaux_comptes_classes($classes, 'cpte_resultat', 0, $id_exercice, $id_destination);
 			if(autoriser('associer', 'export_comptes') && !$id_destination){ // on peut exporter : pdf, csv, xml, ...
 				echo "<br /><table width='100%' class='asso_tablo' cellspacing='6' id='asso_tablo_exports'>\n";
 				echo '<tbody><tr>';

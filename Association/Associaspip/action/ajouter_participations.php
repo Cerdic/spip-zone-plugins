@@ -18,17 +18,17 @@ function action_ajouter_participations() {
 	$id_evenement = $securiser_action();
 
 	$nom = _request('nom');
-	$id_membre = intval(_request('id_membre'));
+	$id_membre = association_recuperer_entier('id_membre');
 	$membres = _request('membres');
 	$non_membres = _request('non_membres');
-	$inscrits = intval(_request('inscrits'));
+	$inscrits = association_recuperer_entier('inscrits');
 	$montant = association_recuperer_montant('montant');
 	$date_paiement = _request('date_paiement');
 	$journal = _request('journal');
 	$statut = _request('statut');
 	$commentaire = _request('commentaire');
 #	$action = _request('action');
-	$id_activite = intval(_request('id_activite'));
+	$id_activite = association_recuperer_entier('id_activite');
 	sql_updateq('spip_asso_activites', array(
 		'nom' => $nom,
 		'id_adherent' => $id_membre,

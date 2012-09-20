@@ -20,7 +20,7 @@ function exec_suppr_categorie()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_categorie=intval(_request('id'));
+		$id_categorie = association_passeparam_id('categorie');
 		onglets_association('categories_de_cotisations', 'association');
 		// INTRO : resume ressource
 		$categorie = sql_fetsel('*', 'spip_asso_categories', "id_categorie=$id_categorie" );
@@ -31,7 +31,7 @@ function exec_suppr_categorie()
 		echo '<div class="hproduct">'. association_totauxinfos_intro('<span class="n">'.$categorie['libelle'].'</span>', 'categorie', $id_categorie, $infos ) .'</div>';
 		// datation et raccourcis
 		raccourcis_association('categories');
-		debut_cadre_association('calculatrice.gif', 'categories_de_cotisations');
+		debut_cadre_association('cotisation.png', 'categories_de_cotisations');
 		echo association_bloc_suppression('categorie', $id_categorie);
 		fin_page_association();
 	}

@@ -26,16 +26,16 @@ function exec_plan_comptable()
 		echo propre(_T('asso:plan_info'));
 		// datation et raccourcis
 		raccourcis_association('association', array(
-			'plan_nav_ajouter' => array('euro-39.gif', 'edit_plan'),
+			'plan_nav_ajouter' => array('plan_compte.png', 'edit_plan'),
 		));
-		debut_cadre_association('euro-39.gif',  'plan_comptable');
+		debut_cadre_association('plan_compte.png',  'plan_comptable');
 		$classe = _request('classe');
 		if (!$classe)
 			$classe = '%';
 		$active = _request('active');
 		if ($active=='')
-			$active = true; /* si on n'a pas de filtre active dans l'environnement, on affiche par defaut les comptes actifs */
-		echo '<table width="100%">';
+			$active = true; // si on n'a pas de filtre active dans l'environnement, on affiche par defaut les comptes actifs
+		echo '<table class="asso_filtre" width="100%">';
 		echo '<tr>';
 		echo '<td>';
 		$query = sql_select('DISTINCT classe, active', 'spip_asso_plan', 'active='. sql_quote($active),'', 'classe');
@@ -56,7 +56,7 @@ function exec_plan_comptable()
 		//Filtre active
 		echo '<form method="post" action="'.generer_url_ecrire('plan_comptable').'"><div>';
 		echo '<input type="hidden" name="classe" value="'.$classe.'" />';
-		echo '<select name ="active" class="fondl" onchange="form.submit()">';
+		echo '<select name ="active" onchange="form.submit()">';
 		echo '<option value="1" ';
 		if ($active) {
 			echo ' selected="selected"';
@@ -72,7 +72,7 @@ function exec_plan_comptable()
 		echo '</td>';
 		echo '</tr></table>';
 		//Affichage de la table
-		echo "<table width='100%' class='asso_tablo' id='asso_tablo_plan'>\n";
+		echo "<table width='100%' class='asso_tablo' id='liste_asso_plan'>\n";
 		echo "<thead>\n<tr>";
 		echo '<th>'. _T('asso:classe') .'</th>';
 		echo '<th>'. _T('asso:entete_code') .'</th>';

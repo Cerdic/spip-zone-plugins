@@ -21,7 +21,7 @@ function exec_edit_ressource()
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
-		$id_ressource = intval(_request('id'));
+		$id_ressource = association_passeparam_id('ressource');
 		onglets_association('titre_onglet_prets', 'ressources');
 		// INTRO : resume ressource
 		$infos['ressource_pretee'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_prets', "id_ressource=$id_ressource"), ));

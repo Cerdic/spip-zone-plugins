@@ -21,7 +21,7 @@ function exec_synchronis_activites()
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
-		$id_evenement = intval(_request('id'));
+		$id_evenement = association_passeparam_id('evenement');
 		onglets_association('synchroniser_asso_membres', 'activites');
 		// INTRO : Rappel Infos Evenement
 		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement") ;

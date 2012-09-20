@@ -21,7 +21,7 @@ function exec_inscrits_activite()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_evenement = intval(_request('id'));
+		$id_evenement = association_passeparam_id('evenement');
 		onglets_association('titre_onglet_activite', 'activites');
 		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement");
 		$annee = substr($evenement['date_debut'],0,4);

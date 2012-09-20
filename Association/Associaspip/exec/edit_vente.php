@@ -21,7 +21,7 @@ function exec_edit_vente()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_vente = intval(_request('id'));
+		$id_vente = association_passeparam_id('vente');
 		onglets_association('titre_onglet_ventes', 'ventes');
 		// info
 		echo association_totauxinfos_intro('', 'vente', $id_vente);

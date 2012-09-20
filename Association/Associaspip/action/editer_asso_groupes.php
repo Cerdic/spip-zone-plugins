@@ -21,7 +21,7 @@ function action_editer_asso_groupes_dist()
     $champs = array(
 	'nom' => _request('nom'),
 	'commentaires' => _request('commentaire'),
-	'affichage' => intval(_request('affichage')),
+	'affichage' => association_recuperer_entier('affichage'),
     );
     include_spip('base/association');
     if ($id_groupe) { // modification

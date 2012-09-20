@@ -21,7 +21,7 @@ function exec_edit_compte()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_compte = intval(_request('id'));
+		$id_compte = association_passeparam_id('compte');
 		onglets_association('titre_onglet_comptes', 'comptes');
 		// INTRO : resume compte
 		echo association_totauxinfos_intro('', 'compte', $id_compte, $infos );

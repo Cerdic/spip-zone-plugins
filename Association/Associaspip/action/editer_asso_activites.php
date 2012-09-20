@@ -20,12 +20,11 @@ function action_editer_asso_activites_dist()
     $erreur = '';
     $date_paiement = association_recuperer_date('date_paiement');
     $participant = _request('nom');
-    $id_adherent = intval(_request('id_adherent'));
+    $id_adherent = association_recuperer_entier('id_adherent');
     if (!$participant AND $id_adherent) {
-	$data =  sql_fetsel('sexe, nom_famille, prenom', 'spip_asso_membres', "id_auteur=$id_adherent");
-	$participant = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
+	$participant = association_formater_idnom($id_adherent, array('spip_asso_membres'), '');
     }
-    $evenement = intval(_request('id_evenement'));
+    $evenement = association_recuperer_entier('id_evenement');
     $montant = association_recuperer_montant('montant');
     $inscrits = association_recuperer_montant('inscrits');
     $modifs = array(
@@ -39,7 +38,7 @@ function action_editer_asso_activites_dist()
 	'commentaire' => _request('commentaire'),
     );
     include_spip('base/association');
-    $id_compte = intval(_request('id_compte'));
+    $id_compte = association_recuperer_entier('id_compte');
     $journal = _request('journal');
     include_spip('inc/association_comptabilite');
     include_spip('inc/modifier'); // on passe par modifier_contenu pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere

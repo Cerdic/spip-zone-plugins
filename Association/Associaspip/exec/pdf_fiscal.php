@@ -29,9 +29,9 @@ include_spip('inc/association_comptabilite');
 
 function exec_pdf_fiscal()
 {
-    $annee = intval(_request('annee'));
-    $id_auteur = intval(_request('id'));
-    $id_don = intval(_request('id_don'));
+    $annee = association_passeparam_annee();
+    $id_auteur = association_passeparam_id('auteur');
+    $id_don = association_recuperer_entier('id_don');
     $full = autoriser('associer', 'adherents');
     if (!$full AND ($id_auteur!=$GLOBALS['visiteur_session']['id_auteur'])) {
         include_spip('inc/minipres');

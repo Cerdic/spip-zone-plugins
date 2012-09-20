@@ -18,7 +18,7 @@ function action_synchroniser_asso_activites() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$securiser_action();
 
-	$evt = intval(_request('id_evenement'));
+	$evt = association_recuperer_entier('id_evenement');
 	$act = array(); // liste des id_activite rajoutes
 	$imp = _request('imp');
 	$anciennes_reponses = sql_in_select('id_auteur', 'id_adherent', 'spip_asso_activites', "id_evenement=$evt");

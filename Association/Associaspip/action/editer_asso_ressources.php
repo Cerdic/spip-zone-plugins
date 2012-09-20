@@ -34,7 +34,7 @@ function action_editer_asso_ressources()
 	'commentaire' => _request('commentaire'),
     );
     include_spip('base/association');
-    $id_compte = intval(_request('id_compte'));
+    $id_compte = association_recuperer_entier('id_compte');
     $journal = _request('journal');
     include_spip('inc/association_comptabilite');
     include_spip('inc/modifier'); // on passe par modifier_contenu pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere

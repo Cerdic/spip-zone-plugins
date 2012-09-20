@@ -16,7 +16,7 @@ include_spip('inc/association_comptabilite');
 
 function formulaires_editer_asso_categories_charger_dist($id_categorie='')
 {
-	$id_categorie = intval(_request('id')); // ??
+	$id_categorie = association_passeparam_id('categorie');
 	/* charger dans $contexte tous les champs de la table spip_asso_categories associes a l'id_categorie passe en param */
 	$contexte = formulaires_editer_objet_charger('asso_categories', $id_categorie, '', '',  generer_url_ecrire('categories'), '');
 //	$contexte = !$id_categorie? '' : sql_fetsel("*", "spip_asso_categories", "id_categorie=$id_categorie");

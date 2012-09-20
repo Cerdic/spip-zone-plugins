@@ -17,7 +17,7 @@ include_spip ('inc/navigation_modules');
 
 function exec_suppr_ressource()
 {
-	$id_ressource = intval(_request('id'));
+	$id_ressource = association_passeparam_id('ressource');
 	if (!autoriser('associer', 'ressources') OR !$id_ressource) {
 		include_spip('inc/minipres');
 		echo minipres();

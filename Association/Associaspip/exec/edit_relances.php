@@ -29,7 +29,7 @@ function exec_edit_relances()
 		$statut_interne = _request('statut_interne');
 		if (!$statut_interne)
 			$statut_interne = 'echu';
-		$id_groupe = intval(_request('groupe'));
+		$id_groupe = association_recuperer_entier('groupe');
 		debut_cadre_association('relance-24.png', 'tous_les_membres_a_relancer');
 		// Filtres
 		filtres_association(array(
@@ -79,7 +79,7 @@ function relances_while($statut_interne, $id_groupe=0)
 	while ($data = sql_fetch($query)) {
 		$res .= '<tr class="'.$GLOBALS['association_styles_des_statuts'][$data['statut_interne']].'" id="membre'.$data['id_auteur'].'">'
 		.'<td class="integer"><label for="id'.$data['id_auteur'].'">'.$data['id_auteur'].'</label></td>'
-		.'<td class="text"><label for="id'.$data['id_auteur'].'">'. association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']) .'</label></td>'
+		.'<td class="text"><label for="id'.$data['id_auteur'].'">'. association_formater_nom($data['sexe'], $data['prenom'], $data['nom_famille']) .'</label></td>'
 		.'<td class="date"><label for="mbr'.$data['id_auteur'].'">'. association_formater_date($data['validite']) .'</label></td>'
 		.'<td class="action">'. association_bouton_coch('id', $data['id_auteur'], '<input name="statut['.$data['id_auteur'].']" type="hidden" value="'.$data['statut_interne'].'" />')
 		."</tr>\n";

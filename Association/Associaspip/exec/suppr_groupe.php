@@ -17,11 +17,11 @@ include_spip ('inc/navigation_modules');
 
 function exec_suppr_groupe()
 {
-	if (!autoriser('editer_groupes', 'association', $id_groupe)) {
+	if (!autoriser('editer_groupes', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_groupe = intval(_request('id'));
+		$id_groupe = association_passeparam_id('groupe');
 		onglets_association('gestion_groupes', 'adherents');
 		// INFO
 		$groupe = sql_fetsel('*', 'spip_asso_groupes', "id_groupe=$id_groupe" );

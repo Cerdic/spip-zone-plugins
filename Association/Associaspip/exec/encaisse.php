@@ -23,7 +23,7 @@ function exec_encaisse()
 	} else {
 // initialisations
 		$plan = sql_countsel('spip_asso_plan');
-		$id_exercice = intval(_request('exercice'));
+		$id_exercice = association_passeparam_exercice();
 		if(!$id_exercice){ // on recupere l'id_exercice dont la date "fin" est "la plus grande"
 			$id_exercice = sql_getfetsel('id_exercice','spip_asso_exercices','','');
 		}

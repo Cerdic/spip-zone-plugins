@@ -95,7 +95,7 @@ function modifier_adherents($tab, $action, $statut='')
 	$in = sql_in('id_auteur', $tab);
 	$query = sql_select('sexe, id_auteur, prenom, nom_famille','spip_asso_membres', $in, '', 'nom_famille');
 	while($data = sql_fetch($query)) {
-		$res .= '<tr><td>' . $data['id_auteur'] .association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille'], 'b').'</td>'. association_bouton_coch('id_auteurs', $data['id_auteur']) .'</tr>';
+		$res .= '<tr><td>' . $data['id_auteur'] .association_formater_nom($data['sexe'], $data['prenom'], $data['nom_famille'], 'b').'</td>'. association_bouton_coch('id_auteurs', $data['id_auteur']) .'</tr>';
 	}
 	$res .='<tr>';
 	$res .='<td colspan="2" class="boutons">';

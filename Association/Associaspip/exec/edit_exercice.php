@@ -23,7 +23,7 @@ function exec_edit_exercice()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_exercice = intval(_request('id'));
+		$id_exercice = association_passeparam_id('exercice');
 		onglets_association('exercices_budgetaires_titre', 'association');
 		// INTRO : resume ressource
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_comptes', ""), )); // bof, le nombre d'operations est deja indique sur la page de comptes pour l'exercice selectionne

@@ -51,10 +51,10 @@ function exec_adherents()
 			echo fin_cadre_enfonce(true);
 		}
 		//Filtres ID et groupe : si le filtre id est actif, on ignore le filtre groupe
-		$id = intval(_request('id'));
+		$id = association_passeparam_id('auteur');
 		if (!$id) {
 			$id = _T('asso:adherent_libelle_id_auteur');
-			$id_groupe = intval(_request('groupe'));
+			$id_groupe = association_recuperer_entier('groupe'));
 		} else {
 			$critere = "a.id_auteur=$id";
 			$id_groupe = 0;
@@ -71,35 +71,12 @@ function exec_adherents()
 		echo association_bloc_listepdf('membre', array('where_adherents'=>$where_adherents, 'jointure_adherents'=>$jointure_adherents, 'statut_interne'=>$statut_interne), 'adherent_libelle_', $champsExclus, true);
 		debut_cadre_association('annonce.gif', 'adherent_titre_liste_actifs');
 		// FILTRES
-		echo "<table width='100%' class='asso_tablo_filtres'>\n<tr>";
-		// Pagination alphabetique
-		echo '<td class="filtre_lettre">';
-		if (!$lettre) {
-			$lettre = '%';
-		}
-		$query = sql_select('UPPER( LEFT( nom_famille, 1 ) )  AS init', 'spip_asso_membres', '',  'init', 'nom_famille, id_auteur');
-		while ($data = sql_fetch($query)) {
-			$i = $data['init'];
-			if($i==$lettre) {
-				echo ' <strong>'.$i.'</strong>';
-			} else {
-				$h = generer_url_ecrire('adherents', "statut_interne=$statut_interne&lettre=$i".($id_groupe?"&groupe=$id_groupe":''));
-				echo " <a href='$h'>$i</a>\n";
-			}
-		}
-		if ($lettre=='%') {
-			echo ' <strong>'._T('asso:entete_tous').'</strong>';
-		} else {
-			$h = generer_url_ecrire('adherents', "statut_interne=$statut_interne".($id_groupe?"&groupe=$id_groupe":''));
-			echo "<a href='$h'>"._T('asso:entete_tous').'</a>';
-		}
-#		if ($GLOBALS['association_metas']['aff_groupes']) { // ne proposer que si on affiche les groupes ?? (on peut vouloir filtrer par groupe sans pour autant les afficher donc desactive)
-			echo '</td><td class="filtre_groupe">'. association_selectionner_groupe($id_groupe, 'adherents', '<input type="hidden" name="lettre" value="'.$lettre.'" /><input type="hidden" name="statut_interne" value="'.$statut_interne.'" />') ; // filtre groupes
-#		}
-		echo '<td class="filtre_id">';
-		echo association_selectionner_id($id, 'adherents') .'</td>';
-		echo '<td class="fitre_statut">'. association_selectionner_statut($statut_interne, 'adherents', '<input type="hidden" name="lettre" value="'.$lettre.'" />'.($id_groupe?'<input type="hidden" name="groupe" value="'.$id_groupe.'" />':'') ) . '</td>';
-		echo '</tr></table>';
+		filtres_association(array(
+			'lettre' => array($id_exercice, 'asso_membres', 'nom_famille', ),
+			'id' => $id,
+			'groupe' => $id_groupe, // ne pas proposer que si on affiche les groupes : on peut vouloir filtrer par groupe sans pour autant les afficher
+			'statut'=> $statut_interne,
+		), 'adherent' );
 		// Affichage de la liste
 		echo $code_liste_membres;
 		fin_page_association();

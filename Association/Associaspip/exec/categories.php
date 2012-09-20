@@ -28,9 +28,9 @@ function exec_categories()
 		echo association_totauxinfos_stats('tous', 'categories', array('entete_duree'=>'duree', 'entete_montant'=>'cotisation') );
 		// datation et raccourcis
 		raccourcis_association('association', array(
-			'ajouter_une_categorie_de_cotisation' => array('calculatrice.gif', 'edit_categorie'),
+			'ajouter_une_categorie_de_cotisation' => array('cotisation.png', 'edit_categorie'),
 		));
-		debut_cadre_association('calculatrice.gif','toutes_categories_de_cotisations');
+		debut_cadre_association('cotisation.png','toutes_categories_de_cotisations');
 		echo association_bloc_listehtml(
 			array('*', 'spip_asso_categories', '', 'id_categorie'), // requete
 			array(

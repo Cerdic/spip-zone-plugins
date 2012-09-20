@@ -26,7 +26,7 @@ function exec_edit_pret()
 		if ($id_pret) { // modifier
 			$id_ressource = sql_getfetsel('id_ressource', 'spip_asso_prets', "id_pret=$id_pret");
 		} else { // ajouter
-			$id_ressource = intval(_request('id_ressource'));
+			$id_ressource = association_passeparam_id('ressource');
 		}
 		// INTRO : resume ressource
 		$infos['ressource_pretee'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_prets', "id_ressource=$id_ressource"), ));

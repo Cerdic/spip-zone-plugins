@@ -26,7 +26,7 @@ function exec_activites()
 			$annee = sql_getfetsel("DATE_FORMAT(date_debut, '%Y')",'spip_evenements', "id_evenement=$id_evenement"); // on recupere l'annee correspondante
 		} else { // on peut prendre en compte les filtres ; on recupere les parametres de :
 			$annee = association_passeparam_annee();
-			$id_mot = intval(_request('mot')); // id du mot cle
+			$id_mot = association_recuperer_entier('mot'); // id du mot cle
 		}
 		onglets_association('titre_onglet_activite', 'activites');
 		// TOTAUX : nombre d'activites de l'annee en cours selon iscriptions

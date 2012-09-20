@@ -82,9 +82,7 @@ function association_gestion_autorisations_upgrade()
 // Retourne 0 si ok, le dernier numero de MAJ ok sinon
 function association_upgrade($meta, $courante, $table='meta')
 {
-	// Compatibilite: le nom de la meta donnant le numero de version
-	// n'etait pas std puis est parti dans une autre table puis encore une autre
-	if (!isset($GLOBALS['association_metas']['base_version'])) {
+	if (!isset($GLOBALS['association_metas']['base_version'])) { // Compatibilite : le nom de la meta donnant le numero de version n'etait pas std puis est parti dans une autre table puis encore une autre
 		lire_metas('asso_metas');
 		if (isset($GLOBALS['asso_metas']['base_version'])) {
 			$n = $GLOBALS['asso_metas']['base_version'];
@@ -101,20 +99,19 @@ function association_upgrade($meta, $courante, $table='meta')
 		include_spip('base/create');
 		alterer_base($GLOBALS['tables_principales'],
 			     $GLOBALS['tables_auxiliaires']);
-		sql_alter("TABLE spip_asso_groupes AUTO_INCREMENT = 100"); /* l'index de depart de l'autoincrement de la table doit etre a 100 car les premiers groupes sont reserves aux autorisations */
+		sql_alter("TABLE spip_asso_groupes AUTO_INCREMENT = 100"); //!\ l'index de depart de l'autoincrement de la table doit etre a 100 car les premiers groupes sont reserves aux autorisations
 		association_gestion_autorisations_upgrade();
 		ecrire_meta($meta, $courante, NULL, $table);
 		return 0; // Reussite (supposee !)
-	} else {
-	// compatibilite avec les numeros de version non entiers
+	} else { // compatibilite avec les numeros de version non entiers
 		$installee = ($n>1) ? $n : ($n*100);
 		$GLOBALS['association_maj_erreur'] = 0;
 		if ($courante>$installee) {
 			include_spip('base/upgrade');
 			$n = maj_while($installee, $courante, $GLOBALS['association_maj'], $meta, $table);
 			$n = $n ? $n[0] : $GLOBALS['association_maj_erreur'];
-			// signaler que les dernieres MAJ sont a refaire
-			if ($n) ecrire_meta($meta, $n-1, '', $table);
+			if ($n) // signaler que les dernieres MAJ sont a refaire
+				ecrire_meta($meta, $n-1, '', $table);
 		}
 		return $GLOBALS['association_maj_erreur'];
 	}
@@ -228,15 +225,17 @@ $GLOBALS['association_maj'][42024] = array(
 	array('sql_alter', "TABLE spip_asso_comptes DROP valide"),
 );
 
-/* cette mise a jour comporte une erreur: sql_alter("TABLE spip_asso_plan ADD destination ENUM('credit','debit') NOT NULL default 'credit'"); le champ doit etre nomme direction et non destination */
+// cette mise a jour comporte une erreur :
+// sql_alter("TABLE spip_asso_plan ADD destination ENUM('credit','debit') NOT NULL default 'credit'");
+// le champ doit etre nomme direction et non destination
 $GLOBALS['association_maj'][43909] = array(
 	array('sql_alter', "TABLE spip_asso_plan ADD destination ENUM('credit','debit') NOT NULL default 'credit'"),
 	array('sql_create', 'spip_asso_destination', $GLOBALS['tables_principales']['spip_asso_destination']['field'], $GLOBALS['tables_principales']['spip_asso_destination']['key']),
 	array('sql_create', 'spip_asso_destination_op', $GLOBALS['tables_principales']['spip_asso_destination_op']['field'], $GLOBALS['tables_principales']['spip_asso_destination_op']['key']),
 );
-unset($GLOBALS['association_maj'][43909]); /* pour empecher l'execution de code fautif tout en gardant trace */
+unset($GLOBALS['association_maj'][43909]); // pour empecher l'execution de code fautif tout en gardant trace
 
-/* repare l'erreur commise sur la maj 43909 */
+// repare l'erreur commise sur la maj 43909
 $GLOBALS['association_maj'][46392] = array(
 	/* on elimine le champ mal nomme */
 	array('sql_alter', "TABLE spip_asso_plan DROP destination"),
@@ -389,25 +388,19 @@ function association_maj_48001()
 				while ($data = sql_fetch($coordonnees_membres)) {
 					$liens['id_objet'] = $data['id_auteur'];
 					unset($data['id_auteur']);
-
-					/* si on a un numero de telephone */
-					if ($telephone['numero'] = $data['telephone']) {
+					if ($telephone['numero'] = $data['telephone']) { // si on a un numero de telephone
 						if ($id_numero =  insert_numero($liens)) {
 							sql_updateq($spip_table_numero, $telephone, "$id_table_numero=$id_numero");
 						}
 					}
 					unset($data['telephone']);
-
-					/* si on a un numero de mobile */
-					if ($mobile['numero'] = $data['mobile']) {
+					if ($mobile['numero'] = $data['mobile']) { // si on a un numero de moblie
 						if ($id_numero = insert_numero($liens)) {
 							sql_updateq($spip_table_numero, $mobile, "$id_table_numero=$id_numero");
 						}
 					}
 					unset($data['mobile']);
-
-					/* si on a une adresse, meme partielle */
-					if ($data['voie'] OR $data['code_postal'] OR $data['ville']) {
+					if ($data['voie'] OR $data['code_postal'] OR $data['ville']) { // si on a une adresse, meme partielle
 						if ($id_adresse = insert_adresse($liens)) {
 							sql_updateq($spip_table_adresse, $data, "$id_table_adresse=$id_adresse");
 						}
@@ -421,15 +414,14 @@ function association_maj_48001()
 	}
 
 	/* on effectue si besoin la mise a jour */
-	if ($effectuer_maj) {
-		/* on supprime les champs de la table spip_asso_membres, ils ont deja ete sauvegarde dans les tables de Coordonnees si besoin */
+	if ($effectuer_maj) { // on supprime les champs de la table spip_asso_membres, ils ont deja ete sauvegarde dans les tables de Coordonnees si besoin
 		sql_alter("TABLE spip_asso_membres DROP telephone");
 		sql_alter("TABLE spip_asso_membres DROP mobile");
 		sql_alter("TABLE spip_asso_membres DROP adresse");
 		sql_alter("TABLE spip_asso_membres DROP code_postal");
 		sql_alter("TABLE spip_asso_membres DROP ville");
 		sql_alter("TABLE spip_asso_membres DROP email");
-	} else { /* la mise a jour n'est pas effectuee : on le signale dans les maj_erreur pour y revenir au prochain chargement de la page de gestion des plugins */
+	} else { // la mise a jour n'est pas effectuee : on le signale dans les maj_erreur pour y revenir au prochain chargement de la page de gestion des plugins
 		if (!$GLOBALS['association_maj_erreur'])
 			$GLOBALS['association_maj_erreur'] = 48001;
 	}
@@ -450,10 +442,10 @@ $GLOBALS['association_maj'][48225] = array(
 	array ('sql_alter', "TABLE spip_asso_activites CHANGE maj maj TIMESTAMP"),
 );
 
-/* cette mise a jour introduit un controle sur l'activation des modules de gestions des dons, */
-/* ventes, prets, activites subordonnes a l'activation de la gestion comptable.               */
-/* la fonction de mise a jour desactive donc d'eventuels modules actives si la gestion        */
-/* comptable n'est pas activee                                                               */
+// cette mise a jour introduit un controle sur l'activation des modules de gestions des dons,
+// ventes, prets, activites subordonnes a l'activation de la gestion comptable.
+// la fonction de mise a jour desactive donc d'eventuels modules actifs si la gestion
+// comptable n'est pas activee
 function association_maj_48466()
 {
 	include_spip('inc/association_comptabilite');
@@ -486,7 +478,8 @@ $GLOBALS['association_maj'][51602] = array(
 	array('sql_alter', "TABLE spip_asso_membres ADD date_adhesion DATE "),
 );
 
-/* Ces champs de configuration n'etant plus geres par defaut, les passer en personalises pour ceux qui les utilisent */
+// Ces champs de configuration n'etant plus geres par defaut,
+// les passer en personalises pour ceux qui les utilisent */
 $GLOBALS['association_maj'][52476] = array(
 	array('sql_update', 'spip_association_metas', array('nom' => "'meta_utilisateur_n_siret'" ), "nom='siret' AND valeur<>''" ),
 	array('sql_delete', 'spip_association_metas', "nom='siret' AND valeur=''" ),
@@ -494,7 +487,7 @@ $GLOBALS['association_maj'][52476] = array(
 	array('sql_delete', 'spip_association_metas', "nom='tva' AND valeur=''" ),
 );
 
-/* mise a jour introduisant les groupes */
+// mise a jour introduisant les groupes
 function association_maj_53901()
 {
 	sql_create('spip_asso_groupes',
@@ -535,7 +528,7 @@ $GLOBALS['association_maj'][55177] = array(
 	$GLOBALS['tables_principales']['spip_asso_exercices']['key']),
 );
 
-/* Changer les champs FLOAT (ou parfois TEXT...) en DECIMAL */
+// Changer les champs FLOAT (ou parfois TEXT...) en DECIMAL
 // correction de r57429 (etourderie: 2 decimales et non 4), et rajout de deux champs confirmes (spip_asso_dons)
 $GLOBALS['association_maj'][57896] = array(
 	array ('sql_alter', "TABLE spip_asso_categories CHANGE cotisation cotisation DECIMAL(19,2) NOT NULL"),
@@ -574,8 +567,8 @@ $GLOBALS['association_maj'][58824] = array(
 // Revue de la gestion des ressources et prets (fin)
 $GLOBALS['association_maj'][58825] = array(
 // on reprend ici les requetes erronnees de maj-57780 ("bienfaiteur" y est malencontreusement+logiquement nomme "donateur")
-	/* En liant le nom du bienfaiteur avec l'ID membre avant d'enregistrer, il faut penser a defaire cela a chaque edition pour eviter de se retrouver avec [un nom->membreXX] qui devient [[un nom->mebreXX]->membreXX] au moment de reediter. Il semble plus simple de ne pas transformer la saisie a stocker mais seulement l'affichage avec la nouvelle fonction association_calculer_lien_nomid($nom,$id) Du coup il faut quand meme retablir les champs pour ne pas reproduire a l'affichage le souci qu'on avait a l'edition... */
-	array('sql_update', 'spip_asso_dons', array('bienfaiteur' => "SUBSTR(bienfaiteur,2, INSTR(bienfaiteur,'->membre')-1)"), "bienfaiteur LIKE '[%->membre%]'"), // SUBSTR est compris par la plupart meme s'il y a d'autres appelations comme SUBSTRING (SQL Server et mySQL). INSTR (pour lequel Oracle accepte deux parametres optionnels de plsu que mySQL) ou POSITION ou PARTINDEX ou CHARINDEX ou LOCATE ... pfff. peut-etre vaut-il mieux le faire en PHP pour etre certain d'etre independant de l'implementation SQL ?!? ou tenter l'approche par REPLACE("dans quelle chaine","sous-chaine a trouver","sous-chaine de remplacement") qui est commun a beaucoup de SGBD_SQL (mais pas dans la norme de 92 non plus si j'ai bonne memoire) ? faut voir...
+	/* En liant le nom du bienfaiteur avec l'ID membre avant d'enregistrer, il faut penser a defaire cela a chaque edition pour eviter de se retrouver avec [un nom->membreXX] qui devient [[un nom->mebreXX]->membreXX] au moment de reediter. Il semble plus simple de ne pas transformer la saisie a stocker mais seulement l'affichage avec la nouvelle fonction association_formater_idnom($id,$nom) Du coup il faut quand meme retablir les champs pour ne pas reproduire a l'affichage le souci qu'on avait a l'edition... */
+	array('sql_update', 'spip_asso_dons', array('bienfaiteur' => "SUBSTR(bienfaiteur,2, INSTR(bienfaiteur,'->membre')-1)"), "bienfaiteur LIKE '[%->membre%]'"), // SUBSTR est compris par la plupart meme s'il y a d'autres appelations comme SUBSTRING (SQL Server et mySQL). INSTR (pour lequel Oracle accepte deux parametres optionnels de plus que mySQL) ou POSITION ou PARTINDEX ou CHARINDEX ou LOCATE ... pfff. peut-etre vaut-il mieux le faire en PHP pour etre certain d'etre independant de l'implementation SQL ?!? ou tenter l'approche par REPLACE("dans quelle chaine","sous-chaine a trouver","sous-chaine de remplacement") qui est commun a beaucoup de SGBD_SQL (mais pas dans la norme de 92 non plus si j'ai bonne memoire) ? faut voir...
 // on reprend ici les requetes erronnees de maj-58798
 	array ('sql_alter', "TABLE spip_asso_ressources ADD ud CHAR(1) NOT NULL DEFAULT 'D' "), // unite des durees de location
 // on reprend ici les requetes erronnees de maj-58824

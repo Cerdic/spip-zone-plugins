@@ -21,7 +21,7 @@ function exec_prets()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_pret = intval(_request('id_pret'));
+		$id_pret = association_recuperer_entier('id_pret');
 		if ($id_pret) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
 			$id_ressource = sql_getfetsel('id_ressource','spip_asso_prets', "id_pret=$id_pret"); // on recupere la ressource correspondante
 		} else { // on peut prendre en compte les filtres ; on recupere les parametres de :

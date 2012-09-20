@@ -13,18 +13,21 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_editer_membres_groupe() {
-		
+
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_groupe = $securiser_action();
-	
+
 	$fonctions = _request('fonctions');
 	$fonctions = (isset($fonctions)) ? $fonctions:array();
-	
+
 	$insert_data = array();
+	if ( _request('modifier') ) // mettre a jour les fonctions
 	foreach ($fonctions as $id_auteur => $fonction) {
 		sql_updateq('spip_asso_groupes_liaisons', array('fonction' => $fonction), 'id_groupe='.$id_groupe.' AND id_auteur='.$id_auteur);
 	}
-	
+	elseif ( _request('exclure') ) //
+		sql_drop();
+
 	return;
 }
 ?>

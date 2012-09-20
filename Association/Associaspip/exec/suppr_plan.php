@@ -21,7 +21,7 @@ function exec_suppr_plan()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_plan = intval(_request('id'));
+		$id_plan = association_passeparam_id('plan');
 		onglets_association('plan_comptable', 'association');
 		// info
 		$plan = sql_fetsel('*', 'spip_asso_plan', "id_plan=$id_plan");
@@ -32,7 +32,7 @@ function exec_suppr_plan()
 		echo association_totauxinfos_intro($plan['intitule'], 'plan', $id_plan, $infos );
 		// datation et raccourcis
 		raccourcis_association('');
-		debut_cadre_association('euro-39.gif', 'suppression_de_compte');
+		debut_cadre_association('plan_compte.png', 'suppression_de_compte');
 		echo association_bloc_suppression('plan', $id_plan,'plan');
 		fin_page_association();
 	}

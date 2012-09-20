@@ -17,7 +17,7 @@ include_spip ('inc/navigation_modules');
 
 function exec_edit_groupe()
 {
-	$id_groupe = intval(_request('id'));
+	$id_groupe = association_passeparam_id('groupe');
 	if (!autoriser('editer_groupes', 'association', $id_groupe)) {
 		include_spip('inc/minipres');
 		echo minipres();

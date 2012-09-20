@@ -25,7 +25,7 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='')
 		$contexte['heure_sortie'] = $contexte['heure_retour'] = date('H:i');
 		$contexte['commentaire_sortie'] = $contexte['commentaire_retour'] = '';
 		$id_compte = $journal = '';
-		$contexte['id_ressource'] = intval(_request('id_ressource'));
+		$contexte['id_ressource'] = association_passeparam_id('ressource');
 		$ressource = sql_fetsel('pu, ud, prix_caution', 'spip_asso_ressources', "id_ressource=$contexte[id_ressource]");
 		$contexte['ud'] = $ressource['ud'];
 		$montant = $contexte['prix_unitaire'] = $ressource['pu'];
@@ -130,7 +130,7 @@ function formulaires_editer_asso_prets_verifier_dist($id_pret)
 
 function formulaires_editer_asso_prets_traiter_dist($id_pret)
 {
-	$id_ressource = intval(_request('id_ressource'));
+	$id_ressource = association_recuperer_entier('id_ressource');
 	return formulaires_editer_objet_traiter('asso_prets', $id_pret, '', '',  generer_url_ecrire('prets',"id=$id_ressource"), '');
 }
 

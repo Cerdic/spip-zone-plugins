@@ -21,7 +21,7 @@ function exec_edit_adherent()
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
-		$id_auteur = intval(_request('id'));
+		$id_auteur = association_passeparam_id('auteur');
 		$data = sql_fetsel('*','spip_asso_membres', "id_auteur=$id_auteur");
 		if (!$data) {
 			include_spip('inc/minipres');
@@ -29,7 +29,7 @@ function exec_edit_adherent()
 		} else {
 			onglets_association('titre_onglet_membres', 'adherents');
 			include_spip('inc/association_coordonnees');
-			$nom_membre = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
+			$nom_membre = association_formater_nom($data['sexe'], $data['prenom'], $data['nom_famille']);
 			$adresses = association_formater_adresses(array($id_auteur));
 			$emails = association_formater_emails(array($id_auteur));
 			$telephones = association_formater_telephones(array($id_auteur));

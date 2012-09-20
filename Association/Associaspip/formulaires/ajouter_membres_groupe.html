@@ -11,7 +11,7 @@
 	    <li class="liste_auteurs">
 		<div class="choix">
 		    <input type="checkbox" name="id_auteurs[]" value="#ID_AUTEUR"/>
-		    <label>[(#SEXE|association_calculer_nom_membre{#PRENOM, #NOM_FAMILLE}) ]</label>
+		    <label>[(#SEXE|association_formater_nom{#PRENOM, #NOM_FAMILLE}) ]</label>
 		</div>
 	    </li>
 </BOUCLE_membres>

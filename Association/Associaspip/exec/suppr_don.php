@@ -21,7 +21,7 @@ function exec_suppr_don()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_don = intval(_request('id'));
+		$id_don = association_passeparam_id('don');
 		$don = sql_fetsel('*', 'spip_asso_dons', "id_don=$id_don");
 		if (!$don) {
 			include_spip('inc/minipres');

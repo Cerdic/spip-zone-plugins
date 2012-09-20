@@ -186,8 +186,13 @@ function association_bouton_coch($champ, $valeur='', $plus='', $tag='td')
 
 
 /*****************************************
- * @defgroup association_calculer
- * Affichage HTML dans les listing d'une chaine calculee selon la configuration
+ * @defgroup association_formater
+ * Affichage HTML d'une chaine localisee et micro-formatee.
+ * La chaine initiale est (essentiellement) issue de la base de donnees apres
+ * passage par un @ref association_recuperer si necessaire.
+ *
+ * @note association_formater_<quoi> s'appelait association_<quoi>fr ;
+ * "fr" initialement pour FRanciser puis est devenu synonyme de FoRmat
  *
 ** @{ */
 
@@ -204,10 +209,17 @@ function association_bouton_coch($champ, $valeur='', $plus='', $tag='td')
  *   Indique la balise-HTML (paire ouvrante/fermante) servant a grouper le
  *   resultat. Sa presence (rien par defaut) indique d'appliquer le micro-
  *   formatage du groupe.
+ * @param string $ps
+ *   Chaine a rajouter entre le nom et le prenom (souvent ", " pour bien les
+ *   distinguer/separer). Dans ce cas (au moins un caractere, meme espace) le
+ *   formatage est a la francaise/chinoise (cas aussi dans de nombreux pays
+ *   francophones) : le prenom est place apres le nom ! Dans le cas contraire,
+ *   il ("prae nomen" en latin, et "first name" en anglais) il "pre"cede le nom
+ *   (de famille/geniteur/origine...)
  * @return string $res
  *   Chaine du nom complet du membre, micro-formate ou non.
  */
-function association_calculer_nom_membre($civilite, $prenom, $nom, $html_span='')
+function association_formater_nom($civilite, $prenom, $nom, $html_span='', $ps='')
 {
 	$res = '';
 	if ($html_span) {
@@ -217,56 +229,12 @@ function association_calculer_nom_membre($civilite, $prenom, $nom, $html_span=''
 		$res .= ($html_span?'<span class="honorific-prefix">':'') .$civilite. ($html_span?'</span>':'') .' ';
 	}
 	if ($GLOBALS['association_metas']['prenom'] && $prenom) {
-		$res .= ($html_span?'<span class="given-name">':'') .$prenom. ($html_span?'</span>':'') .' ';
+		$nom1 = ($html_span?'<span class="given-name">':'') .$prenom. ($html_span?'</span>':'');
 	}
-	$res .= ($html_span?'<span class="family-name">':'') .$nom. ($html_span?'</span>':'') .' ';
+	$nom2 = ($html_span?'<span class="family-name">':'') .$nom. ($html_span?'</span>':'');
+	$res .= ($ps?"$nom2$ps$nom1":"$nom1 $nom2");
 	return $res. ($html_span?"</$html_span>":'');
 }
-
-/**
- * Affichage du nom avec le lien vers la page correspondante
- *
- * En fait c'est pour les modules dons/ventes/activites/prets ou l'acteur (donateur/acheteur/inscrit/emprunteur)
- * peut etre un membre/auteur (son id_acteur est alors renseigne) mais pas
- * forcement son nom (qui peut etre different)
- * ou peut etre une personne exterieure a l'association (on a juste le nom alors
- * obligatoire)
- *
- * @param string $nom
- *   Nom complet affiche
- * @param int $id
- *   ID de l'objet lie
- * @param string $type
- *   Raccourci utilise pour faire le lien
- *   Par defaut : "membre"
- * @param string $html_span
- *   Balise-HTML (paire ouvrante/fermante) encadrante
- * @return string $res
- *   Lien interne SPIP
- */
-function association_calculer_lien_nomid($nom, $id, $type='membre', $html_span='')
-{
-	$res = ($html_span?"<$html_span class='fn'>":'');
-	$res .= ($id?'[':'');
-	$res .= $nom;
-	$res .= ($id?"->$type$id]":'');
-	$res .= ($html_span?"</$html_span>":'');
-	return propre($res);
-}
-
-/** @} */
-
-
-/*****************************************
- * @defgroup association_formater
- * Affichage HTML d'une chaine localisee et micro-formatee.
- * La chaine initiale est (essentiellement) issue de la base de donnees apres
- * passage par un @ref association_recuperer si necessaire.
- *
- * @note association_formater_<quoi> s'appelait association_<quoi>fr ;
- * "fr" initialement pour FRanciser puis est devenu synonyme de FoRmat
- *
-** @{ */
 
 /**
  *  Affichage de date localisee et micro-formatee
@@ -738,6 +706,13 @@ function association_formater_code($code, $type='x-associaspip', $p_v=TRUE, $htm
  *   microformater...
  * @return string $res
  *   Code HTML correspondant
+ *
+ * @note : etait association_calculer_lien_nomid
+ * En fait c'est pour les modules dons/ventes/activites/prets ou l'acteur (donateur/acheteur/inscrit/emprunteur)
+ * peut etre un membre/auteur (son id_acteur est alors renseigne) mais pas
+ * forcement son nom (qui peut etre different)
+ * ou peut etre une personne exterieure a l'association (on a juste le nom alors
+ * obligatoire)
  */
 function association_formater_idnom($id, $nom='', $lien='', $html_span='span') {
 	$res = '';
@@ -745,7 +720,7 @@ function association_formater_idnom($id, $nom='', $lien='', $html_span='span') {
 		$table = ($nom[0] ? $nom[0] : ($nom['table'] ? $nom['table'] : ($nom['from'] ? $nom['from'] : ($nom['tables']?$nom['tables']:'spip_asso_membres') ) ) ) ; // on recupere le nom de la table a interroger
 		if ( $table=='spip_asso_membres' || $table=='asso_membres' ) { // cas special d'un membre
 			$membre = sql_fetsel('*', 'spip_asso_membres', "id_auteur=$id");
-			$res = association_calculer_nom_membre($membre['sexe'], $membre['prenom'], $membre['nom_famille'], $html_span);
+			$res = association_formater_nom($membre['sexe'], $membre['prenom'], $membre['nom_famille'], $html_span);
 		} else { // cas general
 			$champ = ($nom[1] ? $nom[1] : ($nom['field'] ? $nom['field'] : ($nom['select'] ? $nom['select'] : (($table=='spip_auteurs' || $table=='auteurs')?'nom':'titre') ) ) ) ; // on recupere le nom du champ contenant le nom recherche
 			$clef = ($nom[2] ? $nom[2] : ($nom['pk'] ? $nom['pk'] : ($nom['id'] ? $nom['id'] : 'id_auteur' ) ) ) ; // on recupere le nom du champ contenant le nom recherche
@@ -796,6 +771,8 @@ function association_recuperer_date($valeur, $req=TRUE)
 /**
  * @return float $valeur
  *   Nombre decimal
+ * @note
+ *   Bien qu'il s'agisse en fait de s'assurer que la valeur est un flottant, la fonction s'appelle _montant car elle est utilisee surtout pour les montants.
  */
 function association_recuperer_montant($valeur, $req=TRUE)
 {
@@ -808,6 +785,18 @@ function association_recuperer_montant($valeur, $req=TRUE)
 		$valeur = floatval($valeur);
 	}
 	return floatval($valeur);
+}
+
+/**
+ * @return int $valeur
+ *   Nombre entier
+ * @note
+ *   Bien qu'il s'agisse en fait de s'assurer que la valeur est un entier, la fonction s'appelle _id car elle est utilisee surtout pour les identifiants de table.
+ */
+function association_recuperer_entier($valeur, $req=TRUE)
+{
+	$valeur = ($req?_request($valeur):$valeur);
+	return intval($valeur);
 }
 
 /** @} */
@@ -882,6 +871,14 @@ function association_verifier_membre($valeur, $rex=FALSE, $req=TRUE)
  * @defgroup association_selectionner
  * Selecteur HTML (liste deroulante) servant a filtrer le listing affiche en milieu de page
  *
+ * @param string $exec
+ *   Nom du fichier de l'espace prive auquel le formulaire sera soumis.
+ *   Si present, le formulaire complet (balise-HTML "FORM") est genere.
+ *   Si absent (par defaut), seul le selecteur (et le code supplementaire fourni
+ *   par $plus) est(sont) renvoye(s).
+ * @param string $plus
+ *   Source HTML rajoute a la suite.
+ *   (utile si on genere tout le formulaire avec des champs caches)
  * @return string $res
  *   Code HTML du selecteur (ou du formulaire complet si $exec est indique)
  *
@@ -893,14 +890,6 @@ function association_verifier_membre($valeur, $rex=FALSE, $req=TRUE)
  *
  * @param int $sel
  *   ID selectionne : conserve la valeur selectionnee
- * @param string $exec
- *   Nom du fichier de l'espace prive auquel le formulaire sera soumis.
- *   Si present, le formulaire complet (balise-HTML "FORM") est genere.
- *   Si absent (par defaut), seul le selecteur (et le code supplementaire fourni
- *   par $plus) est(sont) renvoye(s).
- * @param string $plus
- *   Source HTML rajoute a la suite.
- *   (utile si on genere tout le formulaire avec des champs caches)
  */
 //@{
 
@@ -911,20 +900,16 @@ function association_selectionner_exercice($sel='', $exec='', $plus='')
 {
     $res = '<select name ="exercice" onchange="form.submit()">';
 #    $res .= '<option value="0" ';
-#    if (!$exercice) {
-#		$res .= ' selected="selected"';
-#    }
+#	$res .= (!$el?' selected="selected"':'');
 #    $res .= '>'. _L("choisir l'exercice ?") .'</option>';
     $sql = sql_select('id_exercice, intitule', 'spip_asso_exercices','', 'intitule DESC');
     while ($val = sql_fetch($sql)) {
 		$res .= '<option value="'.$val['id_exercice'].'" ';
-		if ( $sel==$val['id_exercice'] ) {
-			$res .= ' selected="selected"';
-		}
+		$res .= ($sel==$val['id_exercice']?' selected="selected"':'');
 		$res .= '>'.$val['intitule'].'</option>';
     }
-    $res .= '</select>'.$plus;
     sql_free($sql);
+    $res .= '</select>'.$plus;
     return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>') : $res;
 }
 
@@ -933,28 +918,22 @@ function association_selectionner_exercice($sel='', $exec='', $plus='')
  */
 function association_selectionner_destination($sel='', $exec='', $plus='')
 {
-    $res = '<select name ="destination" onchange="form.submit()">';
+    if ( !$GLOBALS['association_metas']['destinations'])
+ 		return ''; // on n'affiche le selecteur que si l'utilisation des destinations est activee en configuration
+   $res = '<select name ="destination" onchange="form.submit()">';
     $res .= '<option value="0" ';
-    if ( !$sel) {
-		$res .= ' selected="selected"';
-    }
+	$res .= (!$sel?' selected="selected"':'');
     $res .= '>'. _T('asso:toutes_destinations') .'</option>';
     $intitule_destinations = array();
     $sql = sql_select('id_destination, intitule', 'spip_asso_destination','', 'intitule DESC');
     while ($val = sql_fetch($sql)) {
 		$res .= '<option value="'.$val['id_destination'].'" ';
-		if ( $sel==$val['id_destination'] ) {
-			$res .= ' selected="selected"';
-		}
+		$res .= ($sel==$val['id_destination']?' selected="selected"':'');
 		$res .= '>'.$val['intitule'].'</option>';
     }
-    $res .= '</select>'.$plus;
     sql_free($sql);
-    if ($GLOBALS['association_metas']['destinations']){
-		return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>') : $res;
-	} else {
-		return '';
-	}
+    $res .= '</select>'.$plus;
+	return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>') : $res;
 }
 
 /**
@@ -962,22 +941,21 @@ function association_selectionner_destination($sel='', $exec='', $plus='')
  */
 function association_selectionner_groupe($sel='', $exec='', $plus='')
 {
-    $qGroupes = sql_select('nom, id_groupe', 'spip_asso_groupes', 'id_groupe>=100', '', 'nom');  // on ne prend en consideration que les groupe d'id >= 100, les autres sont reserves a la gestion des autorisations
-    if ( $qGroupes && sql_count($qGroupes) ) { // ne proposer que s'il y a des groupes definis
-		$res = '<select name="groupe" onchange="form.submit()">';
-		$res .= '<option value="">'. _T('asso:tous_les_groupes') .'</option>';
-		while ($groupe = sql_fetch($qGroupes)) {
-			$res .= '<option value="'.$groupe['id_groupe'].'"';
-			if ( $sel==$groupe['id_groupe'] )
-				$res .= ' selected="selected"';
-			$res .= '>'.$groupe['nom'].'</option>';
-		}
-		$res .= '</select>'.$plus;
-		return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>') : $res;
-	} else {
-		return '';
+    $sql = sql_select('id_groupe, nom', 'spip_asso_groupes', 'id_groupe>=100', '', 'nom');  // on ne prend en consideration que les groupe d'id >= 100, les autres sont reserves a la gestion des autorisations
+    if ( !$sql || !sql_count($sql) )
+		return '';  // ne proposer que s'il y a des groupes definis
+	$res = '<select name="groupe" onchange="form.submit()">';
+	$res .= '<option value=""';
+	$res .= (!$sel?' selected="selected"':'');
+    $res .= '>'. _T('asso:tous_les_groupes') .'</option>';
+	while ($val = sql_fetch($sql)) {
+		$res .= '<option value="'.$val['id_groupe'].'"';
+		$res .= ($sel==$val['id_groupe']?' selected="selected"':'');
+		$res .= '>'.$val['nom'].'</option>';
 	}
-	//sql_free($qGroupes);
+	sql_free($sql);
+	$res .= '</select>'.$plus;
+	return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>') : $res;
 }
 
 /**
@@ -986,11 +964,12 @@ function association_selectionner_groupe($sel='', $exec='', $plus='')
 function association_selectionner_statut($sel='', $exec='', $plus='')
 {
     $res = '<select name="statut_interne" onchange="form.submit()">';
-    $res .= '<option value="%"'. (($sel=='defaut' || $sel=='%')?' selected="selected"':'') .'>'. _T('asso:entete_tous') .'</option>';
+    $res .= '<option value="%"';
+    $res .= (($sel=='defaut' || $sel=='%')?' selected="selected"':'');
+    $res .= '>'. _T('asso:entete_tous') .'</option>';
     foreach ($GLOBALS['association_liste_des_statuts'] as $statut) {
 		$res .= '<option value="'.$statut.'"';
-		if ( $sel==$statut )
-			$res .= ' selected="selected"';
+		$res .= ($sel==$statut?' selected="selected"':'');
 		$res .= '> '. _T('asso:adherent_entete_statut_'.$statut) .'</option>';
 	}
 	$res .= '</select>'.$plus;
@@ -1009,17 +988,26 @@ function association_selectionner_id($sel='', $exec='', $plus='')
 //@}
 
 /**
+ * @name association_selectionner_<liste>
+ * cas general de :
+ *
+ * @param string $table
+ *   Nom (sans prefixe "spip_") de la table concernee
+ * @param bool $lst
+ *   Type : liste de selection (vrai) ou liens (faux)
+ */
+//@{
+
+/**
  * Selecteur d'annee parmi celles disponibles dans une table donnee
  *
  * @param string $annee
  *   Annee selectionnee. (annee courante par defaut)
- * @param string $dtable
- *   Nom (sans prefixe) de la table concernee
- * @param string $dchamp
+ * @param string $champ
  *   Nom (sans prefixe "date_") du champ contenant les annees recherchees
  *
  */
-function association_selectionner_annee($annee='', $dtable, $dchamp, $exec='', $plus='')
+function association_selectionner_annee($annee='', $table, $champ, $exec='', $plus='', $lst=TRUE)
 {
     if ($exec) {
 		$res = '<form method="post" action="'. generer_url_ecrire($exec) .'"><div>';
@@ -1032,13 +1020,13 @@ function association_selectionner_annee($annee='', $dtable, $dchamp, $exec='', $
 		$annee = date('Y'); // on prend l'annee courante
 	}
     $res .= '<select name ="annee" onchange="form.submit()">';
-    $an_max = sql_getfetsel("MAX(DATE_FORMAT(date_$dchamp, '%Y')) AS an_max", "spip_$dtable", '');
-    $an_min = sql_getfetsel("MIN(DATE_FORMAT(date_$dchamp, '%Y')) AS an_min", "spip_$dtable", '');
+    $an_max = sql_getfetsel("MAX(DATE_FORMAT(date_$champ, '%Y')) AS an_max", "spip_$table", '');
+    $an_min = sql_getfetsel("MIN(DATE_FORMAT(date_$champ, '%Y')) AS an_min", "spip_$table", '');
     if ( $annee>$an_max || $annee<$an_min ) { // a l'initialisation, l'annee courante est mise si rien n'est indique... or si l'annee n'est pas disponible dans la liste deroulante on est mal positionne et le changement de valeur n'est pas top
 		$res .= '<option value="'.$annee.'" selected="selected">'.$annee.'</option>';
 
 	}
-    $sql = sql_select("DATE_FORMAT(date_$dchamp, '%Y') AS annee", "spip_$dtable",'', 'annee DESC', 'annee');
+    $sql = sql_select("DATE_FORMAT(date_$champ, '%Y') AS annee", "spip_$table",'', 'annee DESC', 'annee');
     while ($val = sql_fetch($sql)) {
 		$res .= '<option value="'.$val['annee'].'"';
 		if ($annee==$val['annee']) {
@@ -1055,36 +1043,102 @@ function association_selectionner_annee($annee='', $dtable, $dchamp, $exec='', $
 		$res .= '<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>';
 		$res .= '</div></form>';
     }
-    return $res;
+    return ($lst?$res:$pager.$plus);
 }
 
 /**
- * Selecteur de destinations comptables
+ * Selecteur d'initiale parmi celles disponibles dans une table donnee
+ *
+ * @param string $lettre
+ *   Initiale selectionnee. (aucune par defaut)
+ * @param string $champ
+ *   Nom du champ contenant les initiales recherchees
+ *
  */
-function association_selectionner_destinations($sel='', $exec='', $plus='')
+function association_selectionner_lettre($lettre='', $table, $champ, $exec='', $plus='', $lst=FALSE)
 {
-    $res = '<select name ="destination[]" multiple="multiple" onchange="form.submit()">';
-    $res .= '<option value="0" ';
-    if ( !(array_search(0, $sel)===FALSE) ) {
-		$res .= ' selected="selected"';
+    if ($exec) {
+		$res = '<form method="post" action="'. generer_url_ecrire($exec) .'"><div>';
+		$res .= '<input type="hidden" name="exec" value="'.$exec.'" />';
+    } else {
+		$res = '';
     }
-    $res .= '>'. _T('asso:toutes_destinations') .'</option><option disabled="disabled">--------</option>';
+    $pager = '';
+    if ( !$lettre ) // letre non precisee (ou valant '')
+		$lettre = '%'; // on les prendra tous
+    $res .= '<select name ="letre" onchange="form.submit()">';
+	$res .= '<option value="%"';
+	$res .= ((!$lettre||$lettre=='%')?' selected="selected"':'');
+	$res .='>'. _T('asso:entete_tous') .'</option>';
+    $sql = sql_selectsql_select("UPPER( LEFT( $champ, 1 ) ) AS init", "spip_$table", '',  'init ASC', "$champ");
+    while ($val = sql_fetch($sql)) {
+		$res .= '<option value="'.$val[$champ].'"';
+		if ($lettre==$val[$champ]) {
+			$res .= ' selected="selected"';
+			$pager .= "\n<strong>$val[$lettre]</strong>";
+		} else {
+			$pager .= ' <a href="'. generer_url_ecrire($exec, '&lettre='.$val[$lettre]) .'">'.$val[$champ].'</a>';
+		}
+		$res .= '>'.$val[$champ].'</option>';
+    }
+    sql_free($sql);
+    $res .= '</select>'.$plus;
+    if ($exec) {
+		$res .= '<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>';
+		$res .= '</div></form>';
+    }
+    if ($lettre=='%') {
+		$pager .= ' <strong>'. _T('asso:entete_tous') .'</strong>';
+	} else {
+		$pager .= ' <a href="'. generer_url_ecrire($exec, '&lettre=%') .'">'. _T('asso:entete_tous') .'</a>';
+	}
+    return ($lst?$res:$pager.$plus);
+}
+
+//@}
+
+/**
+ * Selecteur de destinations comptables
+ *
+ * @param array $sel
+ *   Liste des ID de destination selectionnes
+ * @param bool $lst
+ *   Indique s'il faut afficher le resultat sous forme d'une liste de selections
+ *   multiples (vrai) ou sous forme de cases a cocher (faux)
+ */
+function association_selectionner_destinations($sel='', $exec='', $plus='', $lst=FALSE)
+{
+    if (!$GLOBALS['association_metas']['destinations'])
+		return FALSE;
+    $res1 = '<select name ="destinations[]" multiple="multiple" onchange="form.submit()">';
+    $res2 = '';
+    $res1 .= '<option value="0" ';
+    $res2 .= '<div class="choix"><input type="checkbox" name ="destinations[]" value="0" id="destination_0"';
+    if ( !(array_search(0, $sel)===FALSE) ) {
+		$res1 .= ' selected="selected"';
+		$res2 .= ' checked="checked"';
+    }
+    $res1 .= '>'. _T('asso:toutes_destinations') .'</option><option disabled="disabled"><hr /></option>';
+    $res2 .= ' /><label for="destination_0">'._T('asso:toutes_destinations').'</label></div>';
+    $res2 .= '<div class="choix"><hr /></div>';
     $intitule_destinations = array();
     $sql = sql_select('id_destination, intitule', 'spip_asso_destination','', 'intitule DESC');
     while ($val = sql_fetch($sql)) {
-		$res .= '<option value="'.$val['id_destination'].'" ';
+		$res1 .= '<option value="'.$val['id_destination'].'"';
+		$res2 .= '<div class="choix"><input type="checkbox" name ="destinations[]" value="'.$val['id_destination'].'" id="destination_'.$val['id_destination'].'"';
 		if ( !(array_search($val['id_destination'], $sel)===FALSE) ) {
-			$res .= ' selected="selected"';
+			$res1 .= ' selected="selected"';
+			$res2 .= ' checked="checked"';
 		}
+		$res1 .= '>'.$val['intitule'].'</option>';
+		$res2 .= ' /><label for="destination_'.$val['id_destination'].'">'.$val['intitule'].'</label></div>';
 		$intitule_destinations[$val['id_destination']] = $val['intitule'];
     }
-    $res .= '</select>'.$plus;
-    if ($GLOBALS['association_metas']['destinations']){
-		return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>') : $res;
-	} else {
-		return FALSE;
-	}
-	//sql_free($sql);
+	sql_free($sql);
+    $res1 .= '</select>'.$plus;
+    $res2 .= ''.$plus;
+    $res = ($lst?$res1:$res2);
+	return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>') : $res;
 }
 
 /**
@@ -1132,44 +1186,74 @@ function association_selectionner_souspage($pages, $exec='', $params='', $debut=
 
 /*****************************************
  * @defgroup generer_url
- * Raccourcis
+ * Raccourcis SPIP de lien rajoutes par ce plugin
  *
  * Les tables ayant deux prefixes ("spip_asso_"),
  * le raccourci "x" implique de declarer le raccourci "asso_x"
  *
 ** @{ */
 
+/*c
+ * [->asso_donN] = /?exec=edit_don&id=N
+ */
 function generer_url_asso_don($id, $param='', $ancre='') {
 	return  generer_url_ecrire('edit_don', 'id='.intval($id));
 }
+/*c
+ * [->donN] = [->asso_dontN]
+ */
 function generer_url_don($id, $param='', $ancre='') {
 	return  array('asso_don', $id);
 }
 
+/*c
+ * [->asso_membreN] = /?exec=adherent&id=N
+ */
 function generer_url_asso_membre($id, $param='', $ancre='') {
 	return  generer_url_ecrire('adherent', 'id='.intval($id));
 }
+/*c
+ * [->membreN] = [->asso_membreN]
+ */
 function generer_url_membre($id, $param='', $ancre='') {
 	return  array('asso_membre', $id);
 }
 
+/*c
+ * [->asso_venteN] = /?exec=edit_vente&id=N
+ */
 function generer_url_asso_vente($id, $param='', $ancre='') {
 	return  generer_url_ecrire('edit_vente', 'id='.intval($id));
 }
+/*c
+ * [->venteN] = [->asso_venteN]
+ */
 function generer_url_vente($id, $param='', $ancre='') {
 	return  array('asso_vente', $id);
 }
 
+/*c
+ * [->asso_ressourceN] = /?exec=prets&id=N
+ */
 function generer_url_asso_ressource($id, $param='', $ancre='') {
-	return  generer_url_ecrire('edit_ressource', 'id='.intval($id));
+	return  generer_url_ecrire('prets', 'id='.intval($id));
 }
+/*c
+ * [->ressourceN] = [->asso_ressouceN]
+ */
 function generer_url_ressource($id, $param='', $ancre='') {
 	return  array('asso_ressource', $id);
 }
 
+/*c
+ * [->asso_activiteN] = /?exec=inscrits_activite&id=N
+ */
 function generer_url_asso_activite($id, $param='', $ancre='') {
-	return  generer_url_ecrire('voir_activite', 'id='.intval($id));
+	return  generer_url_ecrire('inscrits_activite', 'id='.intval($id));
 }
+/*c
+ * [->activiteN] = [->asso_activiteN]
+ */
 function generer_url_activite($id, $param='', $ancre='') {
 	return  array('asso_activite', $id);
 }
@@ -1444,6 +1528,14 @@ function association_bloc_infosgauche($TitreObjet, $NumObjet, $DesLignes=array()
  *   Par defaut, quand rien n'est indique, c'est l'objet suffixe de "s" qui est utilise
  */
 function association_bloc_suppression($type, $id, $retour='')
+{
+	$res = '<p><strong>'. _T('asso:vous_aller_effacer', array('quoi'=>'<i>'. _T('asso:objet_num', array('objet'=>$type,'num'=>$id)) .'</i>') ) .'</strong></p>';
+	$res .= '<p class="boutons"><input type="submit" value="'. _T('asso:bouton_confirmer') .'" /></p>';
+	echo redirige_action_post("supprimer_{$type}s", $id, ($retour?$retour:$type.'s'), '', $res);
+
+}
+
+function association_bloc_filtrage($type, $id, $retour='')
 {
 	$res = '<p><strong>'. _T('asso:vous_aller_effacer', array('quoi'=>'<i>'. _T('asso:objet_num', array('objet'=>$type,'num'=>$id)) .'</i>') ) .'</strong></p>';
 	$res .= '<p class="boutons"><input type="submit" value="'. _T('asso:bouton_confirmer') .'" /></p>';
@@ -1854,7 +1946,7 @@ function association_passeparam_annee($type)
  */
 function association_passeparam_exercice()
 {
-	$exo = intval(_request('exercie'));
+	$exo = intval(_request('exercice'));
 	if (!$exo) // exercice non precise
 		$exo = sql_getfetsel('id_exercice','spip_asso_exercices','','','debut DESC'); // on recupere le dernier exercice en date
 	return $exo;
@@ -2152,6 +2244,8 @@ function association_langue($chaine)
 		return '';
 	return _T((strpos($head,':') ? '' : 'asso:').$head, $tail );
 }
+
+function association_filtrer(){}
 
 /** @} */
 

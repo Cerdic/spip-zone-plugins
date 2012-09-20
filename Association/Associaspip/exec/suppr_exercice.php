@@ -22,7 +22,7 @@ function exec_suppr_exercice()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_exercice = intval(_request('id'));
+		$id_exercice = association_passeparam_id('exercice');
 		onglets_association('exercices_budgetaires_titre', 'association');
 		// info
 		$exercice = sql_fetsel('*', 'spip_asso_exercices', "id_exercice=$id_exercice" );

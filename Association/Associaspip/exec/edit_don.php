@@ -22,7 +22,7 @@ function exec_edit_don()
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
-		$id_don = intval(_request('id'));
+		$id_don = association_passeparam_id('don');
 		onglets_association('titre_onglet_dons', 'dons');
 		// INTRO : resume don
 		echo association_totauxinfos_intro('', 'don', $id_don);
