@@ -24,6 +24,14 @@
 			<input type="text" name="files_number" class="text" id="files_number" size="60"
 				value="#ENV*{files_number,''}" />
 		</li>
+    
+    <li class="editer_formupload_files_quota[ (#ENV**{erreurs}|table_valeur{files_quota}|oui)erreur]">
+			<label for="files_quota"><:formupload:cfg_lbl_files_quota:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{files_quota})</span>]
+			<p class="explication"><:formupload:cfg_inf_files_quota:></p>
+			<input type="text" name="files_quota" class="text" id="files_quota" size="60"
+				value="#ENV*{files_quota,''}" />
+		</li>
 	
 		<li class="editer_insert_code">
 			<label><:formupload:cfg_lbl_insert_code:></label>

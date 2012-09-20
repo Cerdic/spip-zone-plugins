@@ -60,33 +60,37 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
    
   if (is_array($files)) {
     
-    $ajouter_documents = charger_fonction('ajouter_documents', 'action');
-    $nouveaux_doc = $ajouter_documents($id_document,$files,$objet,$id_objet,'document');
-    
-    $compteur = count($nouveaux_doc);
-    
-    /* A verifier:
-       - securite : verifier les extentions (si forcing)
-       - ajouter un quota image pour client ?
-       
-
-    $quota_client = intval(lire_config("formulaireupload/files_number"));
-    
-
-                // quota
-                $nb_objet = 0;
-                if ($res_nb_objet = sql_select('id_document', 'spip_documents_liens', array("objet = '$type'",'id_objet='.intval($id_objet))))
+    $res['message_ok'] = "";
+    $compteur = 0; 
+  
+    // gestion des quotas ?
+    $quota = intval(lire_config("formulaireupload/files_quota"));
+    $quota_left = 100;
+    if ($quota>0) {
+          if ($res_nb_objet = sql_select('id_document', 'spip_documents_liens', array("objet = '$type'",'id_objet='.intval($id_objet))))
                            $nb_objet = sql_count($res_nb_objet);
-                if ($nb_objet<=$quota_client )  
-                  
-                    $res['message_ok'] =  _T("formupload:msg_doc_added_max",array("max"=>$nb_doc_autorise))."<br />";
-               
-            ... a finir ...
-           
-    } 
-       */
+          $quota_left = $quota - $nb_objet;  
+          if ($quota_left<1 OR $quota_left<count($files)) 
+               $res['message_ok'] =  _T("formupload:msg_doc_added_max",array("max"=>$quota))."<br />";
+          
+          // on reduit les fichiers proposés par le quota restant       
+          array_splice($files, $quota_left); 
+    }
+    
+  
+    // upload des fichiers
+    if ($quota_left>0) {
+          $ajouter_documents = charger_fonction('ajouter_documents', 'action');
+          $nouveaux_doc = $ajouter_documents($id_document,$files,$objet,$id_objet,'document');
+          
+          $compteur = count($nouveaux_doc);
+    }
+    /* A verifier:
+       - securite : verifier les extenxions (si forcing)
+
+    */
 		$invalider = true;
-		$res['message_ok'] = _T("formupload:msg_doc_added",array("compteur"=>$compteur));
+		$res['message_ok'] .= _T("formupload:msg_doc_added",array("compteur"=>$compteur));
 	}
 
 	if ($invalider) {
