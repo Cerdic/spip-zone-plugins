@@ -42,8 +42,18 @@ var minical = {
 		selectOtherMonths: [(#CONFIG{calendriermini/affichage_hors_mois,1}|?{true,false})]
 	},
 
+	add_tooltip: function($this,date,tooltip){
+		if (!$this.tooltip)
+			$this.tooltip = {};
+		var d = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+		if (!$this.tooltip[d])
+			$this.tooltip[d] = [];
+		$this.tooltip[d].push(tooltip);
+	},
+
 	set_events: function(me,start,end,data){
 		var dates = [];
+		var $this = me.get(0);
 
 		if (data.length){
 			var d,datebegin,dateend;
@@ -52,6 +62,7 @@ var minical = {
 				d = d[0].split("-");
 				d = new Date(d[0],d[1]-1,d[2]);
 				dates.push(d);
+				minical.add_tooltip($this,d,data[j].title);
 
 				if(data[j].end){
 					/* prendre la plus grande date de debut entre debut a afficher et l'interval donne */
@@ -63,10 +74,12 @@ var minical = {
 					dateend = Math.min(end * 1000, d.getTime());
 					if (dateend>datebegin){
 						dates.push(d);
+						minical.add_tooltip($this,d,data[j].title);
 						datebegin = datebegin+(3600*24*1000);
 						while(datebegin < dateend){
 							d = new Date(datebegin);
 							dates.push(d);
+							minical.add_tooltip($this,d,data[j].title);
 							datebegin = datebegin+(3600*24*1000);
 						}
 					}
@@ -77,6 +90,15 @@ var minical = {
 			// toujours retirer la classe active qui n'a pas de sens pour l'affichage
 			jQuery('.ui-state-active',me).removeClass('ui-state-active');
 		}
+	},
+
+	before_show_day: function(date) {
+		var d = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+		var c = [true, ''];
+		if (this.tooltip && this.tooltip[d]){
+			c[2] = this.tooltip[d].join("\n");
+		}
+		return c;
 	},
 
 	change_month_year: function(year, month, inst){
@@ -132,7 +154,7 @@ var minical = {
 						prevText: '<:minical:mois_precedent|texte_script:>',
 						nextText: '<:minical:mois_suivant|texte_script:>',
 						create: minical.create,
-						beforeShow: minical.before_show,
+						beforeShowDay: minical.before_show_day,
 						onChangeMonthYear: minical.change_month_year,
 						onSelect: minical.on_select
 					})
