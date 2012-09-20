@@ -8,7 +8,7 @@
 ]<B_docs>
 	#ANCRE_PAGINATION
 <BOUCLE_docs(DOCUMENTS documents_liens){id_auteur?}{id_article?}{id_breve?}{id_rubrique?}{!par id_document}{tout}{pagination 3}>
-<div class="bord_formup">
+<div class="bord_formup" id="documents_portfolio">  
 	<div class="spip_doc_descriptif spip_doc_logo float#LANG_RIGHT">
 		[(#SET{logo,[(#LOGO_DOCUMENT|#URL_DOCUMENT
 			|image_passe_partout{78,78}

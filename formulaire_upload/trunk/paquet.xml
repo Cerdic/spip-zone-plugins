@@ -8,8 +8,8 @@
 	documentation="http://www.spip-contrib.net/Formulaire-upload,952"
 >
 	<nom>Formulaire Upload</nom>
-	<auteur>Fil</auteur>
-	<auteur>b_b</auteur>
+	<auteur lien="http://zzz.rezo.net">Fil</auteur>
+	<auteur lien='http://www.eliaz.fr'>b_b</auteur>
 	<auteur lien='http://www.erational.org'>erational</auteur>
 	<licence>GNU/GPL</licence>
 
