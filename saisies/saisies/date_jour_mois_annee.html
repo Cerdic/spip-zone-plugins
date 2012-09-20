@@ -48,7 +48,7 @@ function activer_dateur_#GET{id}() {
 }
 
 function changer_la_date(me) {
-	li = $(me).parent().parent();
+	li = jQuery(me).parent().parent();
 	jour = li.find('.date_jour').attr('value').trim();
 	mois = li.find('.date_mois').attr('value').trim();
 	annee = li.find('.date_annee').attr('value').trim();
