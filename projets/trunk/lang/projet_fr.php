@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_id_projets_cadre' => 'Vous pouvez préciser le cadre du projet en le sélectionnant dans cette liste',
 	'explication_id_projets_categorie' => 'Vous pouvez péciser la catégorie du projet (en général le type de prestation réalisée dans le cadre de ce projet)',
 	'explication_methode' => 'Quelques mots sur la méthode recommandée pour réaliser le projet',
-	'explication_nb_heures_reel' => 'Nombre d\'heures réellement passées sur le projet',
+	'explication_nb_heures_reelles' => 'Nombre d\'heures réellement passées sur le projet',
 	'explication_objectif' => 'Les objectifs du projet, en quelques mots...',
 	'explication_url_site' => 'Vous pouvez indiquer une url permettant de voir le projet en ligne',
 
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_id_projets_categorie' => 'Catégorie du projet',
 	'label_methode' => 'Méthode',
 	'label_nb_heures_estimees' => 'Nb heures estimees',
-	'label_nb_heures_reel' => 'Nombre d\'heures réel',
+	'label_nb_heures_reelles' => 'Nombre d\'heures réel',
 	'label_nom' => 'Nom du projet',
 	'label_objectif' => 'Objectif',
 	'label_url_site' => 'Voir en ligne',
@@ -57,11 +57,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_ajouter_projet' => 'Ajouter un projet',
 	'texte_changer_statut_projet' => 'Ce projet est :',
 	'texte_creer_associer_projet' => 'Créer et associer un projet',
-	'titre_langue_projet' => 'Langue de ce projet',
+    'texte_statut_gestation'    => "En gestation",
+    'texte_statut_redaction'    => "Proposition en cours",
+    'texte_statut_propose'      => "Proposé",
+    'texte_statut_accepte'      => "Accepté",
+    'texte_statut_fabrication'  => "En fabrication",
+    'texte_statut_livre_test'   => "Livré, en tests",
+    'texte_statut_livre_prod'   => "Livré, en production",
+    'texte_statut_termine_prod' => "En production",
+    'texte_statut_cloture'      => "Cloturé",
+    'texte_statut_arrete'       => "Arrêté",
+    'texte_statut_abandonne'    => "Abandonné",
+    'texte_statut_poubelle'     => "Poubelle",
+    'titre_langue_projet' => 'Langue de ce projet',
 	'titre_logo_projet' => 'Logo de ce projet',
 	'titre_projet' => 'Projet',
 	'titre_projets' => 'Projets',
 	'titre_projets_rubrique' => 'Projets de la rubrique',
+
 );
 
 ?>

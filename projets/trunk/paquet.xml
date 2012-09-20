@@ -52,6 +52,6 @@
 	<pipeline nom="optimiser_base_disparus" inclure="projets_pipelines.php" />
 
 	<menu nom="projets" titre="projet:titre_projets" parent="menu_edition" icone="images/projet-16.png" action="projets" />
-	<menu nom="projets_cadres" titre="projets_cadre:titre_projets_cadres" parent="menu_edition" icone="images/projets_cadre-16.png" action="projets_cadres" />
-	<menu nom="projets_categories" titre="projets_categorie:titre_projets_categories" parent="menu_edition" icone="images/projets_categorie-16.png" action="projets_categories" />
+	<!--menu nom="projets_cadres" titre="projets_cadre:titre_projets_cadres" parent="menu_edition" icone="images/projets_cadre-16.png" action="projets_cadres" /-->
+	<!--menu nom="projets_categories" titre="projets_categorie:titre_projets_categories" parent="menu_edition" icone="images/projets_categorie-16.png" action="projets_categories" /-->
 </paquet>
