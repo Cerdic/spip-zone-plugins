@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_projets_cadres_selectionnes>
+	<ul>
+	<BOUCLE_projets_cadres_selectionnes(PROJETS_CADRES){id_projets_cadre IN #GET*{valeur}}
+		{par num titre, titre}{tout}>
+		<li class="choix">#TITRE (#ID_PROJETS_CADRE)</li>
+	</BOUCLE_projets_cadres_selectionnes>
+	</ul>
+	</B_projets_cadres_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_projets_cadres_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_projets_cadre_selectionne(PROJETS_CADRES){id_projets_cadre=#ENV{valeur}}
+		{par num titre, titre}{tout}>
+	  	<p>#TITRE (#ID_PROJETS_CADRE)</p>
+	</BOUCLE_projets_cadre_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_projets_cadre_selectionne>
+<//B_test_multiple>

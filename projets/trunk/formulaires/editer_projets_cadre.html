@@ -1,0 +1,26 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_projets_cadre,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_projets_cadre' value='#ENV{id_projets_cadre}' />
+		<ul>
+
+			[(#SAISIE{input, titre,
+				label=<:projets_cadre:label_titre:>,
+				explication=<:projets_cadre:explication_titre:> })]
+
+			[(#SAISIE{textarea, descriptif,
+				label=<:projets_cadre:label_descriptif:>,
+				explication=<:projets_cadre:explication_descriptif:> ,
+				li_class=haut, class=inserer_barre_edition, rows=4})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

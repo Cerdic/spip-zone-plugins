@@ -1,0 +1,28 @@
+<BOUCLE_projet(PROJETS){id_projet=#ENV{id}}{statut?}>
+<div class='infos'>
+[(#SET{texte_objet,<:projet:titre_projet:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_PROJET</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{projets,#ID_PROJET})]
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(PROJETS){id_projet}>
+	[(#VAL{redirect}
+		|generer_url_action{type=projets&id=#ID_PROJET}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,projets,#ID_PROJET,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=projets&id=#ID_PROJET}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+
+</div>
+</BOUCLE_projet>
