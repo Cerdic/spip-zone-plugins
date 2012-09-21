@@ -32,8 +32,18 @@
 			<input type="text" name="files_quota" class="text" id="files_quota" size="60"
 				value="#ENV*{files_quota,''}" />
 		</li>
+    
+    <li class="editer_formupload_manage_title">
+			<label><:formupload:cfg_lbl_manage_title:></label>
+			<p class="explications"><:formupload:cfg_manage_title:></p>
+			<div class="choix">
+				<input type="checkbox" name="manage_title" class="checkbox" value="non" id="manage_title_oui"[ (#ENV{manage_title}|=={non}|?{'checked="checked"'})] />
+				<label for="manage_title_oui"><:oui:></label>
+			</div>
+		</li>
+    
 	
-		<li class="editer_insert_code">
+		<li class="editer_formupload_insert_code">
 			<label><:formupload:cfg_lbl_insert_code:></label>
 			<p class="explications"><:formupload:cfg_inf_insert_code:></p>
 			<div class="choix">
