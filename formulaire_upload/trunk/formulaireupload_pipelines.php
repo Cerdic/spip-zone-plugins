@@ -10,7 +10,7 @@ function formulaireupload_insert_head($flux){
 
 
 function formulaireupload_insert_head_css($flux){
-	$flux .=  '<script src="'.find_in_path('css/formulaireupload.css').'" type="text/javascript"></script>';	
+	$flux .=  '<link rel="stylesheet" href="'.find_in_path('css/formulaireupload.css').'" type="text/css" media="all" />';	
 	return $flux;
 }
 

@@ -2,6 +2,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+//
+// Charger
+// 
 function formulaires_upload_charger_dist($objet, $id_objet, $fond_documents){
 	// definition des valeurs de base du formulaire
 	$valeurs = array(
@@ -24,31 +27,51 @@ function formulaires_upload_charger_dist($objet, $id_objet, $fond_documents){
 	return $valeurs;
 }
 
+//
+// Verifier
+// 
 function formulaires_upload_verifier_dist($objet, $id_objet, $fond_documents){
 	$erreurs = array();
 
 	return $erreurs;
 }
 
+//
+// Traiter
+// 
 function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
 	$res = array('editable'=>' ', 'message_ok'=>'');
 	
 	$invalider = false;
 	$type = objet_type($objet);
 	$res['message_ok'] = _T("formupload:msg_nothing_to_do");
-
-	// supprimer des documents ?
   $compteur=0;
+  
+  // titrer des documents ?
+  if (is_array(_request('ref'))) {
+    foreach (_request('ref') as $ref) {
+      $ref = intval($ref);
+      if ($titre = _request("titrer_$ref")) {
+        if (forumaireupload_verifier_doc_liaison($ref,$id_objet,$type))
+  		      	sql_updateq('spip_documents', array('titre' => $titre) ,'id_document='.$ref);         
+      }
+  	} 
+    $res['message_ok'] = _T("formupload:msg_doc_titre_upd");  
+  }
+  
+  // supprimer des documents ?   
 	if (is_array(_request('supprimer'))) {
   	foreach (_request('supprimer') as $supprimer) {
   		if ($supprimer = intval($supprimer)) {
   			include_spip('inc/autoriser');
-  			sql_delete('spip_documents_liens', 'id_document='.$supprimer);
-  			$supprimer_document = charger_fonction('supprimer_document','action');
-  			$supprimer_document($supprimer);
-  			$invalider = true;
-        $compteur++; 			
-  			spip_log("supprimer document ($type)".$supprimer, 'upload');
+        if (forumaireupload_verifier_doc_liaison($ref,$id_objet,$type)) {
+            sql_delete('spip_documents_liens', 'id_document='.$supprimer);
+      			$supprimer_document = charger_fonction('supprimer_document','action');
+      			$supprimer_document($supprimer);
+      			$invalider = true;
+            $compteur++; 			
+      			spip_log("supprimer document ($type)".$supprimer, 'upload');
+        }    			
   		}      
   	}
     $res['message_ok'] = _T("formupload:msg_doc_deleted",array("compteur"=>$compteur));
@@ -100,6 +123,18 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
 	}
 
 	return $res;
+}
+
+
+//
+//  fonction de securite
+//  verifier la liaison entre objet et le document
+//  pour eviter toucher d'autres documents que ceux traiter ds le doc
+function forumaireupload_verifier_doc_liaison($id_document, $id_objet, $type) {
+  if (sql_countsel('spip_documents_liens', "id_document=".intval($id_document)." AND id_objet=".intval($id_objet)." AND objet='$type'"))
+		return true;  
+    
+  return false;  
 }
 
 ?>

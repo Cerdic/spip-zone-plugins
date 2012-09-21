@@ -17,7 +17,7 @@
 	'choosefiles' => 'Choisir les fichiers &agrave; ajouter&nbsp;:',
   'erreur_copie_impossible' => 'Erreur: copie impossible',
 	'nodocs' => 'Pas encore de document sur la zone de t&eacute;l&eacute;chargement',
-	'insert_code' => 'Code &agrave; ins&eacute;rer dans la zone de texte&nbsp;:',
+	'insert_code' => 'Code d\'inclusion&nbsp;:',
 	'doc_delete' => 'Supprimer ce document',
 	'doc_left' => 'Document flottant &agrave; gauche',
 	'doc_center' => 'Document centr&eacute;',
@@ -31,6 +31,7 @@
 	'msg_fichier_doublon' => 'Vous avez déjà sélectionné ce fichier.',
 	'msg_format_non_autorise' => 'Format de fichier non autorisé.',
 	'msg_nothing_to_do' => 'Rien &agrave; faire',
+  'msg_doc_titre_upd' => 'Les titres ont été mis à jour',
 	'remove' => 'supprimer',
 	'yourfiles' => 'Vos fichiers',
 	'Z' => 'ZZzZZzzz'
