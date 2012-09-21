@@ -44,7 +44,7 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
 	
 	$invalider = false;
 	$type = objet_type($objet);
-	$res['message_ok'] = _T("formupload:msg_nothing_to_do");
+	$res['message_ok'] = "";
   $compteur=0;
   
   // titrer des documents ?
@@ -55,8 +55,7 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
         if (forumaireupload_verifier_doc_liaison($ref,$id_objet,$type))
   		      	sql_updateq('spip_documents', array('titre' => $titre) ,'id_document='.$ref);         
       }
-  	} 
-    $res['message_ok'] = _T("formupload:msg_doc_titre_upd");  
+  	}     
   }
   
   // supprimer des documents ?   
@@ -74,16 +73,14 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
         }    			
   		}      
   	}
-    $res['message_ok'] = _T("formupload:msg_doc_deleted",array("compteur"=>$compteur));
+    $res['message_ok'] .= _T("formupload:msg_doc_deleted",array("compteur"=>$compteur))."<br />";
   }
 
 	// Ajouter un document (cf plugins-dist/medias)
   include_spip('inc/joindre_document');
 	$files = joindre_trouver_fichier_envoye();
    
-  if (is_array($files)) {
-    
-    $res['message_ok'] = "";
+  if (is_array($files)) {     
     $compteur = 0; 
   
     // gestion des quotas ?
@@ -94,7 +91,7 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
                            $nb_objet = sql_count($res_nb_objet);
           $quota_left = $quota - $nb_objet;  
           if ($quota_left<1 OR $quota_left<count($files)) 
-               $res['message_ok'] =  _T("formupload:msg_doc_added_max",array("max"=>$quota))."<br />";
+               $res['message_ok'] .=  _T("formupload:msg_doc_added_max",array("max"=>$quota))."<br />";
           
           // on reduit les fichiers proposés par le quota restant       
           array_splice($files, $quota_left); 
@@ -113,7 +110,8 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
 
     */
 		$invalider = true;
-		$res['message_ok'] .= _T("formupload:msg_doc_added",array("compteur"=>$compteur));
+		if ($compteur>0)
+        $res['message_ok'] .= _T("formupload:msg_doc_added",array("compteur"=>$compteur));
 	}
 
 	if ($invalider) {
