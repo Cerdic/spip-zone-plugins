@@ -1,10 +1,10 @@
 <plugin>
 	<nom>Image cliquable</nom>
 	<slogan>Ajouter des images cliquables dans vos textes</slogan>
-	<auteur>Arnault PACHOT, [OpenStudio->http://www.openstudio.fr] et RealET, [Pyrat.net->http://www.pyrat.net/]</auteur>
+	<auteur>Arnault PACHOT, [OpenStudio->http://www.openstudio.fr] et RealET, [Pyrat.net->http://www.pyrat.net/] et Bruno CAILLLARD pour le Hilight des zones, [Editions du MEGA-Bricoleur->http://www.mega-bricoleur.com/]</auteur>
 	<licence>GPL</licence>
-	<version>2.0.1</version>
-	<etat>stable</etat>
+	<version>2.1.0</version>
+	<etat>test</etat>
 	<description>
 	Ce plugin permet d'ajouter des images cliquables dans le texte de vos articles, rubriques, br&#232;ves...
 	</description>
@@ -14,4 +14,9 @@
 	<necessite id="SPIP" version="[2.1.14;2.1.99]" />
 	<necessite id="Iterateurs" version="[0.6.1;]" />
 	<categorie>multimedia</categorie>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>image_cliquable_pipelines.php</inclure>
+	</pipeline>
+
 </plugin>

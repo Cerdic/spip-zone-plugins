@@ -25,6 +25,9 @@
 	qu'on ajoute #TYPE_DOCUMENT - #TAILLE
 	sauf si #ENV{lien} est passe	
 
+	Le paramètre nolist permet de supprimer la liste des liens en dessous l'image. Ex :  <img12|cliquable|nolist|...>
+
+	Le paramètre maphilight provoque la colorisation des zones au survol de la souris. Attention, dans ce mode le focus des zones au clavier (tab) n'est plus accessible.
 ]
 [(#SET{
 	image,
@@ -37,13 +40,14 @@
 
 ][(#GET{image})
 <span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[ width:(#LARGEUR)px;]']>
-[<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"][ lang="(#ENV{langue})"][ title="(#ENV{alt}|texte_backend|sinon{#TITRE|texte_backend|sinon{#ENV{lien}|texte_backend}})"]>]<img src='#URL_DOCUMENT'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"][(#ENV{lien1}|oui) usemap="#[AP(#URL_DOCUMENT|md5)]"][ lang="(#ENV{langue})"] alt="[(#ENV{alt}|texte_backend|sinon{#TITRE|texte_backend|sinon{#ENV{lien}|texte_backend}})]"[(#DESCRIPTIF|?{' ',''})longdesc="[(#URL_PAGE{longdesc,id=#ID_DOCUMENT}|parametre_url{'lang',#ENV{langue,#LANG}})]"] />
+[<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"][ lang="(#ENV{langue})"][ title="(#ENV{alt}|texte_backend|sinon{#TITRE|texte_backend|sinon{#ENV{lien}|texte_backend}})"]>]<img [(#ENV{maphilight}|?{' ',''})class='maphilight'] src='#URL_DOCUMENT'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"][(#ENV{lien1}|oui) usemap="#[AP(#URL_DOCUMENT|md5)]"][ lang="(#ENV{langue})"] alt="[(#ENV{alt}|texte_backend|sinon{#TITRE|texte_backend|sinon{#ENV{lien}|texte_backend}})]"[(#DESCRIPTIF|?{' ',''})longdesc="[(#URL_PAGE{longdesc,id=#ID_DOCUMENT}|parametre_url{'lang',#ENV{langue,#LANG}})]"] />
 
 <INCLURE{fond=modeles/inc/areamap,url_document,env}>
 
 [(#ENV{lien}|?{</a>})]</span>
-
-<INCLURE{fond=modeles/inc/listemap,titre,env}>
+	[(#ENV{nolist}|?{'',' '})
+		<INCLURE{fond=modeles/inc/listemap,titre,env}>
+	]
 ][
 
 	(#REM) sinon logo document + lien + alt + title etc
