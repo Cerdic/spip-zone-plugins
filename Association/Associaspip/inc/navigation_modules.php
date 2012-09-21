@@ -92,9 +92,6 @@ function onglets_association($titre='', $top_exec='', $INSERT_HEAD=TRUE)
  * @param array $raccourcis
  *   Tableau des raccourcis definis chacun sous la forme :
  *   'titre' => array('icone', array('url_ecrire', 'parametres_url'), array('permission' ...), ),
- * @param string $PrefixeLangue
- *   Prefixe ("asso" par defaut) applique aux cles du tableau des raccourcis
- *   pour reconstituer la chaine des langue des raccourcis
  * @param bool $FIN_BOITE_INFO
  *   Indique s'il faut generer (vrai, par defaut) ou pas la fin du bloc infos
  *   qui doit alors etre obligatoirement celui qui precede !
@@ -108,7 +105,7 @@ function association_navigation_raccourcis($adresse_retour='',  $raccourcis=arra
 			// autorisation d'acces au module
 			if ( is_array($params[2]) && count($params[2]) ) { // autorisation a calculer
 				$acces = call_user_func_array('autoriser', $params[2]);
-			} elseif ( is_scalar($params[2]) ) { // autorisation deja calculee (chaine ou entier ou boolen, evalue en vrai/faux...)
+			} elseif ( is_scalar($params[2]) ) { // autorisation deja calculee (chaine ou entier ou booleen, evalue en vrai/faux...)
 				$acces = autoriser($params[2]);
 			} else // pas d'autorisation definie = autorise pour tous
 				$acces = true;

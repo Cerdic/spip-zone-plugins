@@ -54,7 +54,7 @@ function exec_adherents()
 		$id = association_passeparam_id('auteur');
 		if (!$id) {
 			$id = _T('asso:adherent_libelle_id_auteur');
-			$id_groupe = association_recuperer_entier('groupe'));
+			$id_groupe = association_recuperer_entier('groupe');
 		} else {
 			$critere = "a.id_auteur=$id";
 			$id_groupe = 0;
@@ -72,11 +72,11 @@ function exec_adherents()
 		debut_cadre_association('annonce.gif', 'adherent_titre_liste_actifs');
 		// FILTRES
 		filtres_association(array(
-			'lettre' => array($id_exercice, 'asso_membres', 'nom_famille', ),
+			'lettre' => array($lettre, 'asso_membres', 'nom_famille', 'adherents', ),
 			'id' => $id,
 			'groupe' => $id_groupe, // ne pas proposer que si on affiche les groupes : on peut vouloir filtrer par groupe sans pour autant les afficher
 			'statut'=> $statut_interne,
-		), 'adherent' );
+		), 'adherents' );
 		// Affichage de la liste
 		echo $code_liste_membres;
 		fin_page_association();

@@ -1064,22 +1064,20 @@ function association_selectionner_lettre($lettre='', $table, $champ, $exec='', $
 		$res = '';
     }
     $pager = '';
-    if ( !$lettre ) // letre non precisee (ou valant '')
-		$lettre = '%'; // on les prendra tous
-    $res .= '<select name ="letre" onchange="form.submit()">';
-	$res .= '<option value="%"';
+    $res .= '<select name ="lettre" onchange="form.submit()">';
+	$res .= '<option value=""';
 	$res .= ((!$lettre||$lettre=='%')?' selected="selected"':'');
 	$res .='>'. _T('asso:entete_tous') .'</option>';
-    $sql = sql_selectsql_select("UPPER( LEFT( $champ, 1 ) ) AS init", "spip_$table", '',  'init ASC', "$champ");
+    $sql = sql_select("UPPER( LEFT( $champ, 1 ) ) AS init", "spip_$table", '',  'init ASC', "$champ");
     while ($val = sql_fetch($sql)) {
-		$res .= '<option value="'.$val[$champ].'"';
-		if ($lettre==$val[$champ]) {
+		$res .= '<option value="'.$val['init'].'"';
+		if ($lettre==$val['init']) {
 			$res .= ' selected="selected"';
-			$pager .= "\n<strong>$val[$lettre]</strong>";
+			$pager .= "\n<strong>$lettre</strong>";
 		} else {
-			$pager .= ' <a href="'. generer_url_ecrire($exec, '&lettre='.$val[$lettre]) .'">'.$val[$champ].'</a>';
+			$pager .= ' <a href="'. generer_url_ecrire($exec, 'lettre='.$val['init']) .'">'.$val['init'].'</a>';
 		}
-		$res .= '>'.$val[$champ].'</option>';
+		$res .= '>'.$val['init'].'</option>';
     }
     sql_free($sql);
     $res .= '</select>'.$plus;
@@ -1087,12 +1085,12 @@ function association_selectionner_lettre($lettre='', $table, $champ, $exec='', $
 		$res .= '<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>';
 		$res .= '</div></form>';
     }
-    if ($lettre=='%') {
+    if ( !$lettre || $lettre=='%' ) {
 		$pager .= ' <strong>'. _T('asso:entete_tous') .'</strong>';
 	} else {
-		$pager .= ' <a href="'. generer_url_ecrire($exec, '&lettre=%') .'">'. _T('asso:entete_tous') .'</a>';
+		$pager .= ' <a href="'. generer_url_ecrire($exec) .'">'. _T('asso:entete_tous') .'</a>';
 	}
-    return ($lst?$res:$pager.$plus);
+    return ($lst?$res:($pager.$plus));
 }
 
 //@}
