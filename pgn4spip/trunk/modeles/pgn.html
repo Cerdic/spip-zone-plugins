@@ -1,0 +1,59 @@
+[(#REM)
+/**********************************************************************************
+ * @Subject pgn.html skeleton template to manage .pgn file attached to the SPIP article
+ * @package pgn4spip: Embed pgn4web Chessboard plugin for SPIP 2.x or 3.x
+ * @version 2.61.0
+ * @copyright copyright (c) 2012 Matt Chesstale 
+ * @license GNU General Public License version 3
+ * @language SPIP loop embedding PHP
+ *
+ * @history
+ * 2.61.0: Initial version for SPIP 2.1
+ * @reference:  Using models:			http://www.spip.net/en_article3512.html
+ * 				Utiliser les modèles :	http://www.spip.net/fr_article3454.html
+ * @Usage
+ * If <doc1> is the document of number 1 associated to the downloaded .pgn file,
+ * use in the article the syntax: <pgn1|option="prm1=value1 prm2=value2 ...">
+ *
+ * @Example In a SPIP article:
+ * Example 1: <pgn1>
+ * Example 2: <pgn1|option="movesDisplay=puzzle">
+ * Example 3: <pgn1|option="md=p">
+ *            with md = movesDisplay and p = puzzle
+ * @Caution the options eo = extendedoptions and pd = pgnData are not allowed
+ * @Return	HTML code of the iframe to run board.html with the indicated .pgn document
+ **********************************************************************************/
+]
+<BOUCLE_pgn(DOCUMENTS){id_document=#ENV{id}}{extension==pgn}{tout}>
+<?php
+define('PLUGIN_Name', "pgn4spip");
+define('PATH_Fonctions', PLUGIN_Name . '/' . PLUGIN_Name . '_fonctions.php');
+if (!function_exists('pgn4spip_prepropre')) require _DIR_PLUGINS . PATH_Fonctions;
+
+define('QUOTE_HTML', '&quot;'); // '"' in HTML
+define('LenQuote', 6);
+
+$UrlRoot = '[(#URL_SITE_SPIP)]'; // Absolute URL of the SPIP web site root
+$UrlPgn = '[(#URL_DOCUMENT)]'; // Unique document having the id given as parameter of template from the SPIP loop
+while ((strlen($UrlPgn) > 1) && ($UrlPgn[0] == '.')) 
+		$UrlPgn = substr($UrlPgn, 1); // Remove relative dot
+		
+if ($UrlPgn[0] != '/') $UrlPgn = '/' . $UrlPgn;
+$option = '[(#ENV{option})]'; // Get the options after "|" in the template <pgn1|option=...>
+$lenOpt = strlen($option);
+if ($lenOpt > LenQuote * 2)
+{
+	if (substr($option, 0, LenQuote) == QUOTE_HTML)
+		$option = substr($option, LenQuote); // Remove first double quote coded in HTML
+	$lenOpt = $lenOpt - LenQuote;
+	if (($lenOpt > LenQuote) && (substr($option, $lenOpt- LenQuote, LenQuote) == QUOTE_HTML))
+	{
+		$lenOpt = $lenOpt - LenQuote;
+		$option = substr($option, 0, $lenOpt); // Remove last double quote
+	}
+}
+if ($lenOpt > 0) $option .= ' '; // Separator with the two last options
+$option .= 'eo=true pd=' . $UrlRoot . $UrlPgn; // eo = extendedoptions; pd = pgnData
+echo pgn4spip_prepropre('[pgn ' . $option . '][/pgn]');
+?>
+</BOUCLE_pgn>

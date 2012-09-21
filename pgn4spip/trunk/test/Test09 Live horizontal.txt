@@ -1,0 +1,100 @@
+Tilburg live is a simulation of 2 games played in accelerated time.
+
+Requirements in Windows Vista or more:
+live.pgn simulator in the unix shell bash freely supplied by Cygwin.
+
+If necessary, stop temporarily the firewall before downloading the setup.
+Download and run [Cygwin Setup.exe->http://cygwin.com/index.html] in two steps:
+- download Cygwin packages (bash is included by default) from one of .edu site in your hard disk for example in d:\Tools\Cygwin\
+- restart setup.exe and install in c:\cygwin
+
+Edit Test\MacroRunSimu.bat in order to adapt the paths of your Web server and SPIP plugin:
+<cadre>
+@echo off
+REM Define doskey macros to start/stop the web server or the simulator of live broadcast
+title Xampp Apache server
+REM Adapt the path of the Web server
+set PATH_WEB_SERVER=D:\Tools\Internet\Php\Xampp\Xampp177
+REM Adapt if necessary the path of the SPIP plugin in particular if there is not htdocs
+set PATH_SPIP_WINDOWS=%PATH_WEB_SERVER%\htdocs\spip\plugins\pgn4spip
+REM Adapt if necessary the path of cygwin binaries. By default it is installed in:
+set PATH_CYGWIN=c:\cygwin\bin
+</cadre>
+
+In a Windows command prompt (from All Programs > Accessories), run MacroRunSimu.bat
+<cadre>
+Web server: st(a)rt st(o)p (s)imu (h)elp (e)xit
+</cadre>
+This creates the doskey macro (<b>s)</b>imulation.
+
+Before
+
+[pgn movesDisplay=live squareSize=30 extendedOptions=true
+pgnData=http://localhost/spip/plugins/pgn4spip/pgn4web/live/live.pgn refreshMinutes=0.25]
+[/pgn]
+
+After
+- If a8 is blinking, start the simulation (see below) and reload the page by F5 key.
+
+- If the full live.pgn already exists, you can accelerate the moves clicking several times h6 square.
+
+In the Windows Command Prompt, enter the doskey macro command "s". Validate by ENTER.
+<cadre>
+D:\Tools\Internet\Php\Xampp\Xampp177> s
+Generating PGN file live.pgn simulating live game broadcast
+ step 0 of 34
+ step 1 of 34
+ step 2 of 34
+ step 3 of 34
+ step 4 of 34
+ step 5 of 34
+ step 6 of 34
+ step 7 of 34
+ step 8 of 34
+ step 9 of 34
+ step 10 of 34
+ step 11 of 34
+ step 12 of 34
+ step 13 of 34
+ step 14 of 34
+ step 15 of 34
+ step 16 of 34
+ step 17 of 34
+ step 18 of 34
+ step 19 of 34
+ step 20 of 34
+ step 21 of 34
+ step 22 of 34
+ step 23 of 34
+ step 24 of 34
+ step 25 of 34
+ step 26 of 34
+ step 27 of 34
+ step 28 of 34
+ step 29 of 34
+ step 30 of 34
+ step 31 of 34
+ step 32 of 34
+ step 33 of 34
+ step 34 of 34
+done with games... waiting for a while before deleting live.pgn
+</cadre>
+
+When "live broacast ended, click H6 for the next event" appears under the chessboard,
+select with the mouse the Command Prompt to give it the focus.
+
+Press Ctrl+C to stop the bash script as rewritten in the title of the Command Prompt window.
+
+This close the Command Prompt window.
+You can restart the simulation by the doskey macro "s"
+because live.pgn will be deleted and created again.
+----
+An alternative to produce in real-time live.pgn is [Arena->http://www.playwitharena.com/] 3.0:
+- Menu "Options" > "Appearance..." > PGN > [x] {{Save}} current game {{after every move}} for example in another location:
+<cadre>
+D:\Tools\Internet\Php\Xampp\Xampp177\htdocs\spip\IMG\pgn\live.pgn
+</cadre>
+- Menu "Engine" > "Tournament" > Settings: organize a duel between two chess engines.
+
+However the chess engines require almost 100% of CPU during all the game. This is not the case of Cygwin bash.
+

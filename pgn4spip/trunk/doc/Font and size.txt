@@ -1,0 +1,19 @@
+Parameters for the [pgn] tag about the size of chessboard and pieces:
+
+[pgn squareSize=46 pieceSize=40 pieceFont=merida]
+{game in PGN format}
+[/pgn]
+
+See the help during the configuration of the plugin.
+
+Doc\pgn4spip parameters.txt
+
+Doc\pgn4web parameters.txt
+http://localhost/spip/plugins/pgn4spip/pgn4web/board.html?help=true
+
+The configuration can be optionally tested on-line in
+http://pgn4web.casaschi.net/board-generator.html
+
+or off-line
+http://localhost/spip/plugins/pgn4spip/pgn4web/board-generator.html
+
