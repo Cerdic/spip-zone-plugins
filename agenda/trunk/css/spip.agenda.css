@@ -1,0 +1,12 @@
+
+.page_agenda .evenement,.page_evenement .evenement  {padding-left: 7.5em;background-image: url(img/agenda-filet.png);background-repeat: repeat-y;background-position: 6.5em top;}
+.evenement .dateban {float: left;margin-left: -7.5em;width: 6.5em;}
+.evenement .dateban .day {display: block;text-align: center;font-size: 2em;}
+.evenement .dateban .month {display: block;text-align: center;text-transform: uppercase;font-size: 0.71em;}
+.evenement .dateban .year {display: block;text-align: center;font-size: 0.71em;}
+.page_agenda .item.month {padding: 0.75em;background: #e4e4e4; text-transform: uppercase;}
+
+.evenement.one {padding: 0.75em;background: #eee;margin-bottom: 1.5em;}
+.evenement.one .lire-la-suite {display: none;}
+
+.page_jour .liste-items.evenements .item .dateban {display: none;}
