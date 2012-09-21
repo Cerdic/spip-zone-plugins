@@ -1,0 +1,10 @@
+Biggest chessboard in vertical mode in browser width=1024 
+(1057 for Maxthon 3 that has an additional toolbar on the left). Same running context than Test09.
+
+Before
+
+[pgn movesDisplay=live layout=vertical squareSize=64 extendedOptions=true
+pgnData=http://localhost/spip/plugins/pgn4spip/pgn4web/live/live.pgn refreshMinutes=0.25]
+[/pgn]
+
+After

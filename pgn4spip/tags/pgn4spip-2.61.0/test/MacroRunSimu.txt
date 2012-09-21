@@ -1,0 +1,38 @@
+@echo off
+REM Rename MacroRunSimu.txt to the batch file: MacroRunSimu.bat
+REM Define doskey macros to start/stop the web server or the simulator of live broadcast
+title Xampp Apache server
+REM Adapt the path of the Web server
+set PATH_WEB_SERVER=D:\Tools\Internet\Php\Xampp\Xampp177
+REM Adapt if necessary the path of the SPIP plugin in particular if there is not htdocs
+set PATH_SPIP_WINDOWS=%PATH_WEB_SERVER%\htdocs\spip\plugins\pgn4spip
+REM Adapt if necessary the path of cygwin binaries. By default it is installed in:
+set PATH_CYGWIN=c:\cygwin\bin
+
+REM Convert Windows path with backslahes into Unix path with slahes
+FOR /F "usebackq" %%p IN (`%PATH_CYGWIN%\cygpath -u %PATH_SPIP_WINDOWS%`) DO set PATH_SPIP_UNIX=%%p
+set TITLE_SIMULATOR="Live game broadcast simulator (press Ctrl+C to stop it)"
+REM Define the doskey macro "s" to run the (s)imulator of live broadcast
+doskey s=start %TITLE_SIMULATOR% %PATH_CYGWIN%\bash.exe --login -i %PATH_SPIP_UNIX%/liveDelSimu.sh %PATH_SPIP_UNIX%
+set TITLE_SIMULATOR=
+set PATH_SPIP_WINDOWS=
+set PATH_SPIP_UNIX=
+set PATH_CYGWIN=
+
+REM Define the doskey macro "o" to st(o)p the Web server
+doskey o=%PATH_WEB_SERVER%\xampp_stop.exe
+
+REM Define the doskey macro "h" like (H)elp to list the doskey macros
+doskey h=doskey /macros
+
+REM Define the doskey macro "e" to (e)xit from Command Prompt
+doskey e=exit
+
+REM Define the doskey macro "a" to st(a)rt the Web server
+doskey a=%PATH_WEB_SERVER%\xampp_start.exe
+set PATH_WEB_SERVER=
+
+rem set /p answer=(g)o start the Apache server? (y/n):
+rem if %answer% == y xampp_start.exe
+rem if %answer% == Y xampp_start.exe
+echo Web server: st(a)rt st(o)p (s)imu (h)elp (e)xit 
