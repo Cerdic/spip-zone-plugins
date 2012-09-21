@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Gestion des puces d'action rapide
  *
- * @package SPIP\Dictionnaire\Puce_statut
+ * @package SPIP\Projets\Puce_statut
 **/
 
 include_spip('inc/presentation');
