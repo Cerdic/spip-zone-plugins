@@ -18,7 +18,7 @@ function formulaires_upload_charger_dist($objet, $id_objet, $fond_documents){
 		$valeurs['editable'] = false;
 
 	include_spip('inc/autoriser');
-	if (!autoriser('joindredocument', $objet, $id_objet))
+	if (!autoriser('joindredocumentupload', $objet, $id_objet))
 		$valeurs['editable'] = false;
 
 	return $valeurs;
