@@ -274,7 +274,7 @@ function formulaires_configurer_bloc_traiter($bloc,$page){
 		$composition = $noisette['composition'];
 		$rang_actuel = intval($noisette['rang']);
 		
-		// On teste si ya une noisette suivante
+		// On teste si y a une noisette suivante
 		$dernier_rang = intval(sql_getfetsel(
 			'rang',
 			'spip_noisettes',

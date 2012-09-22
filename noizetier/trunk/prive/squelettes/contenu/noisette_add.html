@@ -1,0 +1,29 @@
+[(#AUTORISER{configurer,noizetier}|sinon_interdire_acces)]
+#SET{retour,#URL_ECRIRE{page,page=#ENV{page}#bloc-#ENV{bloc}}}
+#SET{retour,#ENV{retour}|sinon{#GET{retour}}}
+#SET{redirect,#URL_ECRIRE{noisette_edit,id_noisette=@id_noisette@}}
+#SET{redirect,#ENV{redirect}|sinon{#GET{redirect}}}
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#GET{retour}|icone_verticale{<:noizetier:retour:>,page-noisettes-24,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	<:noizetier:formulaire_modifier_noisette:>
+	<h1>
+		<:noizetier:formulaire_ajouter_noisette:>
+		[(#CHEMIN_IMAGE{'noisette-add-24.png'}|balise_img{page,cadre-icone})]
+	</h1>
+</div>
+
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").attr("href","'#GET{redirect}'").followLink();'}
+]
+<div class="ajax">
+	#FORMULAIRE_AJOUTER_NOISETTE{#ENV{page},#ENV{bloc},#GET{redirect}}
+</div>
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/
+		jQuery('html,body').animate({scrollTop: jQuery("#chemin").offset().top}, 'slow');
+		jQuery('#chemin').find('>div').ajaxReload({'args':{'exec':'noisette_add','page':'#ENV{page}','bloc':'#ENV{bloc}'}});
+		jQuery('#navigation').find('>div').ajaxReload({'args':{'exec':'noisette_add','page':'#ENV{page}','bloc':'#ENV{bloc}'}});
+	/*\]\]>*/</script>
+]
+</div>

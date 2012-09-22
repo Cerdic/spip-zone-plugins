@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0-beta;3.0.99]"
 	logo="prive/themes/spip/images/noizetier-32.png"
 	schema="0.4"
-	documentation="http://www.spip-contrib.net/noiZetier"
+	documentation="http://contrib.spip.net/?article4246"
 >	
 
 	<nom>noiZetier</nom>
@@ -42,5 +42,5 @@
 	<utilise nom="ieconfig" />
 	<utilise nom="Z" compatibilite="[1.7.0;1.9.99]" />
 
-	<menu nom="bando_noizetier" titre="noizetier:editer_noizetier_titre" parent="menu_squelette" icone="images/noizetier-16.png" action="noizetier" />
+	<menu nom="bando_noizetier" titre="noizetier:editer_noizetier_titre" parent="menu_squelette" icone="images/noizetier-16.png" action="pages" />
 </paquet>

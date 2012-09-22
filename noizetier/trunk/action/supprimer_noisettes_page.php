@@ -1,16 +1,15 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_supprimer_noisettes_page_dist(){
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
-	$page = $arg;
+function action_supprimer_noisettes_page_dist($page=NULL){
+	if (is_null($page)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$page = $securiser_action();
+	}
 	
-	include_spip('noizetier_fonctions');
-	supprimer_noisettes_page_noizetier($page);
-	
-	// Redirection
-	include_spip('inc_headers');
-	redirige_par_entete("./?exec=configurer_page&page=$page");
+	if ($page) {
+		include_spip('noizetier_fonctions');
+		noizetier_supprimer_noisettes_page($page);
+	}
 }
 ?>

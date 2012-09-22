@@ -1,0 +1,22 @@
+<div class="formulaire_spip formulaire_ajouter formulaire_ajouter_noisette formulaire_ajouter_noisette-#ENV{page}-#ENV{bloc}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='page' value='#ENV{page}' />
+		<input type='hidden' name='bloc' value='#ENV{bloc}' />
+		<h3 class="titrem"><:noizetier:noisettes_disponibles:></h3>
+		<INCLURE{fond=formulaires/inc-liste_noisettes_disponibles,page,form=oui}>
+		
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'>
+			<input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form>
+	]
+</div>

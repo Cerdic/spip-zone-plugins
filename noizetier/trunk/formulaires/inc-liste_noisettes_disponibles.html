@@ -1,0 +1,43 @@
+#SET{type,#ENV{page}|noizetier_page_type}
+#SET{composition,#ENV{page}|noizetier_page_composition}
+
+<B_type_noisettes>
+[(#SET{nom_type,[(#NOIZETIER_LISTE_PAGES|table_valeur{#GET{type}}|table_valeur{nom})]})]
+<h4><:noizetier:noisettes_page{type=#GET{nom_type}}:></h4>
+<ul class="liste-items liste-noisettes liste-noisettes-disponibles">
+<BOUCLE_type_noisettes(DATA){source tableau, #NOIZETIER_LISTE_NOISETTES{#GET{type}}}{par cle}>
+	<li class="item noisette" [ style="background-image: url((#VALEUR|table_valeur{icon}|sinon{noisette-24.png}|noizetier_chemin_icone));"]>
+		[(#ENV{form}|oui)<input type='radio' name='noisette' value='#CLE' />]
+		[(#VALEUR|table_valeur{nom})]
+		[(#ENV{ordre}|oui)<input type='hidden' name='ordre\[\]' value='ajouter-#CLE' />]
+	</li>
+</BOUCLE_type_noisettes>
+</ul>
+</B_type_noisettes>
+
+<B_composition_noisettes>
+[(#SET{nom_type,[(#NOIZETIER_LISTE_PAGES|table_valeur{#ENV{page}}|table_valeur{nom})]})]
+<h4><:noizetier:noisettes_composition{composition=#GET{nom_type}}:></h4>
+<ul class="liste-items liste-noisettes liste-noisettes-disponibles">
+<BOUCLE_composition_noisettes(DATA){source tableau, #NOIZETIER_LISTE_NOISETTES{#ENV{page}}}{par cle}{si #GET{composition}}>
+	<li class="item noisette" [ style="background-image: url((#VALEUR|table_valeur{icon}|sinon{noisette-24.png}|noizetier_chemin_icone));"]>
+		[(#ENV{form}|oui)<input type='radio' name='noisette' value='#CLE' />]
+		[(#VALEUR|table_valeur{nom})]
+		[(#ENV{ordre}|oui)<input type='hidden' name='ordre\[\]' value='ajouter-#CLE' />]
+	</li>
+</BOUCLE_composition_noisettes>
+</ul>
+</B_composition_noisettes>
+
+<B_noisettes_communes>
+<h4><:noizetier:noisettes_toutes_pages:></h4>
+<ul class="liste-items liste-noisettes liste-noisettes-disponibles">
+<BOUCLE_noisettes_communes(DATA){source tableau, #NOIZETIER_LISTE_NOISETTES{''}}{par cle}>
+	<li class="item noisette" [ style="background-image: url((#VALEUR|table_valeur{icon}|sinon{noisette-24.png}|noizetier_chemin_icone));"]>
+		[(#ENV{form}|oui)<input type='radio' name='noisette' value='#CLE' />]
+		[(#VALEUR|table_valeur{nom})]
+		[(#ENV{ordre}|oui)<input type='hidden' name='ordre\[\]' value='ajouter-#CLE' />]
+	</li>
+</BOUCLE_noisettes_communes>
+</ul>
+</B_noisettes_communes>

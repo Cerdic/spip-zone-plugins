@@ -1,25 +1,17 @@
 <?php 
 
-// Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_supprimer_composition_noizetier_dist(){
-	
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
-	
-	
-	if ($arg!=''){
-		include_spip('noizetier_fonctions');
-		$type = noizetier_page_type($arg);
-		$compo = noizetier_page_composition($arg);
-		$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
-		unset($noizetier_compositions[$type][$compo]);
-		if (count($noizetier_compositions[$type])==0)
-			unset($noizetier_compositions[$type]);
-		ecrire_meta('noizetier_compositions',serialize($noizetier_compositions));
+function action_supprimer_composition_noizetier_dist($page=NULL){
+	if (is_null($page)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$page = $securiser_action();
 	}
 	
+	if ($page) {
+		include_spip('noizetier_fonctions');
+		noizetier_supprimer_composition($page);
+	}
 }
 
 ?>

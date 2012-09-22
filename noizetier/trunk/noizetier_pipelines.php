@@ -52,6 +52,7 @@ function noizetier_compositions_lister_disponibles($flux){
 	$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
 	if (!is_array($noizetier_compositions))
 		$noizetier_compositions = array();
+	unset($noizetier_compositions['page']);
 	$type = $flux['args']['type'];
 	$informer = $flux['args']['informer'];
 	
@@ -61,7 +62,13 @@ function noizetier_compositions_lister_disponibles($flux){
 			if($informer) {
 				$noizetier_compositions[$t][$c]['nom'] = typo($info_compo['nom']);
 				$noizetier_compositions[$t][$c]['description'] = propre($info_compo['description']);
-				$noizetier_compositions[$t][$c]['icon'] = $info_compo['icon']!='' ? find_in_path($info_compo['icon']) : '';
+				if ($info_compo['icon']!='')
+					$icone = $info_compo['icon'];
+				else {
+					$info_page = noizetier_lister_pages($t);
+					$icone = (isset($info_page['icon']) && $info_page['icon']!='') ? $info_page['icon'] : 'composition-24.png';
+				}
+				$noizetier_compositions[$t][$c]['icon'] = noizetier_chemin_icone($icone);
 			}
 			else
 				$noizetier_compositions[$t][$c] = 1;
@@ -70,14 +77,14 @@ function noizetier_compositions_lister_disponibles($flux){
 	if ($type=='' AND count($noizetier_compositions)>0) {
 		if (!is_array($flux['data']))
 			$flux['data'] = array();
-		$flux['data'] = array_merge($flux['data'],$noizetier_compositions);
+		$flux['data'] = array_merge_recursive ($flux['data'],$noizetier_compositions);
 	}
 	elseif (count($noizetier_compositions[$type])>0) {
 		if (!is_array($flux['data'][$type]))
 			$flux['data'][$type] = array();
 		if (!is_array($noizetier_compositions[$type]))
 			$noizetier_compositions[$type] = array();
-		$flux['data'][$type] = array_merge($flux['data'][$type],$noizetier_compositions[$type]);
+		$flux['data'][$type] = array_merge_recursive ($flux['data'][$type],$noizetier_compositions[$type]);
 	}
 	return $flux;
 }
@@ -117,6 +124,8 @@ function noizetier_jqueryui_forcer($plugins){
 	$plugins[] = "jquery.ui.widget";
 	$plugins[] = "jquery.ui.mouse";
 	$plugins[] = "jquery.ui.sortable";
+	$plugins[] = "jquery.ui.droppable";
+	$plugins[] = "jquery.ui.draggable";
 	return $plugins;
 }
 

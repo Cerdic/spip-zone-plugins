@@ -12,7 +12,8 @@ define('_CACHE_INCLUSIONS_NOISETTES', 'noisettes_inclusions.php');
  * Lister les noisettes disponibles dans les dossiers noisettes/
  *
  * @staticvar array $liste_noisettes
- * @param text $type
+ * @param text $type renvoyer seulement un type de noisettes
+ * @param text $noisette renvoyer spécifiquement une noisette données
  * @return array
  */
 function noizetier_lister_noisettes($type='tout'){
@@ -41,6 +42,16 @@ function noizetier_lister_noisettes($type='tout'){
 }
 
 
+/**
+ * Renvoie les info d'une seule noisette
+ *
+ * @param text $noisette renvoyer spécifiquement une noisette données
+ * @return array
+ */
+function noizetier_info_noisette($noisette) {
+	$noisettes = noizetier_obtenir_infos_noisettes();
+	return $noisettes[$noisette];
+}
 
 /**
  * Obtenir les infos de toutes les noisettes disponibles dans les dossiers noisettes/
@@ -154,23 +165,6 @@ function noizetier_charger_infos_noisette_yaml($noisette, $info=""){
 			return isset($infos_noisette[$info]) ? $infos_noisette[$info] : "";
 }
 
-/**
- * Charger les informations des parametres d'une noisette
- *
- * @param string $noisette
- * @staticvar array $params_noisettes
- * @return array
- */
-function noizetier_charger_parametres_noisette($noisette){
-	static $params_noisettes = null;
-
-	if (is_null($params_noisettes[$noisette])){
-		$noisettes = noizetier_lister_noisettes();
-		$infos = $noisettes[$noisette];
-		$params_noisettes[$noisette] = extrait_parametres_noisette($infos['parametres']);
-	}
-	return $params_noisettes[$noisette];
-}
 
 /**
  * Charger les informations des contexte pour une noisette
@@ -191,45 +185,15 @@ function noizetier_charger_contexte_noisette($noisette){
 
 
 /**
- * Transforme un tableau au format du plugin saisies en un tableau de parametres dont les cles sont les noms des param�tres
- * S'il y a de fieldset, les parametres sont extraits de son entree saisies
- *
- * @param string $parametres
- * @return array
- */
-function extrait_parametres_noisette($parametres){
-	$res = array();
-	if (is_array($parametres) && count($parametres)>0) {
-		foreach($parametres as $parametre) {
-			if ($parametre['saisie']!='fieldset') {
-				$nom = $parametre['options']['nom'];
-				$res[$nom] = $parametre['options'];
-				$res[$nom]['saisie'] = $parametre['saisie'];
-				if(isset($parametre['verifier']))
-					$res[$nom]['verifier']=$parametre['verifier'];
-				if(isset($res[$nom]['label']))
-					$res[$nom]['label'] = _T_ou_typo($res[$nom]['label']);
-				if(isset($res[$nom]['datas']))
-					foreach($res[$nom]['datas'] as $cle => $valeur)
-						$res[$nom]['datas'][$cle] = _T_ou_typo($res[$nom]['datas'][$cle]);
-			}
-			else {
-				$res = array_merge($res,extrait_parametres_noisette($parametre['saisies']));
-			}
-		}
-	}
-	return $res;
-}
-
-/**
  * Lister les pages pouvant recevoir des noisettes
  * Par defaut, cette liste est basee sur le contenu du repertoire contenu/
  * Le tableau de resultats peut-etre modifie via le pipeline noizetier_lister_pages.
  *
+ * @param string $page_specifique (renvoyer les données d'une page spécifique)
  * @staticvar array $liste_pages
  * @return array
  */
-function noizetier_lister_pages(){
+function noizetier_lister_pages($page_specifique=''){
 	static $liste_pages = null;
 
 	if (is_null($liste_pages)){
@@ -275,7 +239,8 @@ function noizetier_lister_pages(){
 					foreach($compos_type as $compo => $infos_compo) {
 						$infos_compo['nom'] = typo($infos_compo['nom']);
 						$infos_compo['description'] = propre($infos_compo['description']);
-						$infos_compo['icon'] = $infos_compo['icon']!='' ? $infos_compo['icon'] : '';
+						if ($infos_compo['icon']=='')
+							$infos_compo['icon'] = (isset($liste_pages[$type]) && isset($liste_pages[$type]['icon']) && $liste_pages[$type]['icon']!='') ? $liste_pages[$type]['icon'] : 'composition-24.png';
 						if (isset($liste_pages[$type]))
 							$infos_compo['blocs'] = $liste_pages[$type]['blocs'];
 						else
@@ -286,7 +251,10 @@ function noizetier_lister_pages(){
 			$liste_pages = array_merge($liste_pages,$liste_compos);
 		}
 	}
-	return $liste_pages;
+	if ($page_specifique)
+		return $liste_pages[$page_specifique];
+	else
+		return $liste_pages;
 }
 
 /**
@@ -358,7 +326,7 @@ function noizetier_charger_infos_page($dossier,$page, $info=""){
 }
 
 /**
- * Charger les informations d'une page, contenues dans un xml de config s'il existe
+ * 
  * La liste des blocs par defaut d'une page peut etre modifiee via le pipeline noizetier_blocs_defaut.
  *
  * @staticvar array $blocs_defaut
@@ -396,19 +364,239 @@ function noizetier_blocs_defaut(){
  * @param text $page
  * 
  */
-function supprimer_noisettes_page_noizetier($page) {
+function noizetier_supprimer_noisettes_page($page) {
 	$type_compo = explode ('-',$page,2);
 	$type = $type_compo[0];
 	if(isset($type_compo[1]))
 		$composition = $type_compo[1];
 	else
-		$composition = $type_compo[0];
-	
-	sql_delete('spip_noisettes','type='.sql_quote($type).'and composition='.sql_quote($composition));
+		$composition = '';
+	if (autoriser('configurer','noizetier')) {
+		sql_delete('spip_noisettes','type='.sql_quote($type).' AND composition='.sql_quote($composition));
+		// On invalide le cache
+		include_spip('inc/invalideur');
+		suivre_invalideur("id='page/$page'");
+	}
+}
 
-	// On invalide le cache
-	include_spip('inc/invalideur');
-	suivre_invalideur($page);
+/**
+ * Supprime de spip_noisettes une noisette particuliere
+ *
+ * @param text $id_noisette
+ * 
+ */
+function noizetier_supprimer_noisette($id_noisette) {
+	if (autoriser('configurer','noizetier') and intval($id_noisette)) {
+		sql_delete('spip_noisettes','id_noisette='.intval($id_noisette));
+		// On invalide le cache
+		include_spip('inc/invalideur');
+		suivre_invalideur("id='noisette/$id_noisette'");
+	}
+}
+
+/**
+ * Ajoute une noisette à un bloc d'une page
+ * Renvoie l'id_noisette de la noisette ajoutée
+ *
+ * @param text $noisette
+ * @param text $page
+ * @param text $bloc
+ * @return integer
+ * 
+ */
+function noizetier_ajouter_noisette($noisette, $page, $bloc) {
+	if (autoriser('configurer','noizetier') && $noisette) {
+		$info_noisette = noizetier_info_noisette($noisette);
+		include_spip('inc/saisies');
+		$parametres = saisies_lister_valeurs_defaut($info_noisette['parametres']);
+		$rang = intval(sql_getfetsel(
+			'rang',
+			'spip_noisettes',
+			'type='.sql_quote(noizetier_page_type($page)).' AND composition='.sql_quote(noizetier_page_composition($page)).' AND bloc='.sql_quote($bloc),
+			'',
+			'rang DESC',
+			'0,1'
+			)) + 1;
+		$id_noisette = sql_insertq('spip_noisettes', array(
+			'type' => noizetier_page_type($page),
+			'composition' => noizetier_page_composition($page),
+			'bloc' => $bloc,
+			'noisette' => $noisette,
+			'rang' => $rang,
+			'parametres' => serialize($parametres)
+			));
+		
+		if ($id_noisette) {
+			// On invalide le cache
+			include_spip('inc/invalideur');
+			suivre_invalideur("id='noisette/$id_noisette'");
+			return $id_noisette;
+		}
+	}
+	else
+		return 0;
+}
+
+/**
+ * Tri les noisettes d'une page
+ *
+ * @param text $page
+ * @param array $ordre
+ * @return boolean
+ * 
+ */
+function noizetier_trier_noisette($page, $ordre) {
+	// Vérifications
+	if (!autoriser('configurer','noizetier'))
+		return false;
+	if (!is_array($ordre))
+		return false;
+	if (substr($ordre[0],0,4)!='bloc')
+		return $false;
+
+	$modifs = array();
+	foreach($ordre as $entree) {
+		$entree = explode ('-',$entree,2);
+		if ($entree[0] == 'bloc') {
+			$bloc = $entree[1];
+			$rang = 1;
+		}
+		if ($entree[0] == 'noisette') {
+			$modifs[$entree[1]] = array(
+				'bloc' => $bloc,
+				'rang' => $rang
+			);
+			$rang += 1;
+		}
+		if ($entree[0] == 'ajouter') {
+			$id_noisette = noizetier_ajouter_noisette($entree[1], $page, $bloc);
+			$modifs[$id_noisette] = array(
+				'bloc' => $bloc,
+				'rang' => $rang
+			);
+			$rang += 1;
+		}
+	}
+	
+	foreach ($modifs as $id_noisette => $valeurs)
+		sql_updateq('spip_noisettes', $valeurs, 'id_noisette=' . intval($id_noisette));
+	
+	return true;
+}
+
+/**
+ * Déplace une noisette au sein d'un bloc
+ *
+ * @param text $id_noisette
+ * @param text $sens
+ * 
+ */
+function noizetier_deplacer_noisette($id_noisette, $sens) {
+	$id_noisette = intval($id_noisette);
+	if ($sens!='bas') $sens = 'haut';
+	if (autoriser('configurer','noizetier') and intval($id_noisette)) {
+		// On récupère des infos sur le placement actuel
+		$noisette = sql_fetsel(
+			'bloc, type, composition, rang',
+			'spip_noisettes',
+			'id_noisette = '.$id_noisette
+		);
+		$bloc = $noisette['bloc'];
+		$type = $noisette['type'];
+		$composition = $noisette['composition'];
+		$rang_actuel = intval($noisette['rang']);
+		
+		// On teste si y a une noisette suivante
+		$dernier_rang = intval(sql_getfetsel(
+			'rang',
+			'spip_noisettes',
+			'bloc = '.sql_quote($bloc).' and type='.sql_quote($type).'and composition='.sql_quote($composition),
+			'',
+			'rang desc',
+			'0,1'
+		));
+		
+		// Tant qu'on ne veut pas faire de tour complet
+		if (!($sens == 'bas' and $rang_actuel == $dernier_rang) and !($sens == 'haut' and $rang_actuel == 1)){
+			// Alors on ne fait qu'échanger deux noisettes
+			$rang_echange = ($sens == 'bas') ? ($rang_actuel + 1) : ($rang_actuel - 1);
+			$ok = sql_updateq(
+				'spip_noisettes',
+				array(
+					'rang' => $rang_actuel
+				),
+				'bloc = '.sql_quote($bloc).' and type='.sql_quote($type).'and composition='.sql_quote($composition).' and rang = '.$rang_echange
+			);
+			if ($ok)
+				$ok = sql_updateq(
+					'spip_noisettes',
+					array(
+						'rang' => $rang_echange
+					),
+					'id_noisette = '.$id_noisette
+				);
+		}
+		// Sinon on fait un tour complet en déplaçant tout
+		else{
+			if ($sens == 'bas'){
+				// Tout le monde descend d'un rang
+				$ok = sql_update(
+					'spip_noisettes',
+					array(
+						'rang' => 'rang + 1'
+					),
+					'bloc = '.sql_quote($bloc).' and type='.sql_quote($type).'and composition='.sql_quote($composition)
+				);
+				// La noisette passe tout en haut
+				if ($ok)
+					$ok = sql_updateq(
+						'spip_noisettes',
+						array(
+							'rang' => 1
+						),
+						'id_noisette = '.$id_noisette
+					);
+			}
+			else{
+				// Tout le monde monte d'un rang
+				$ok = sql_update(
+					'spip_noisettes',
+					array(
+						'rang' => 'rang - 1'
+					),
+					'bloc = '.sql_quote($bloc).' and type='.sql_quote($type).'and composition='.sql_quote($composition)
+				);
+				// La noisette passe tout en bas
+				if ($ok)
+					$ok = sql_updateq(
+						'spip_noisettes',
+						array(
+							'rang' => $dernier_rang
+						),
+						'id_noisette = '.$id_noisette
+					);
+			}
+		}
+		// On invalide le cache
+		include_spip('inc/invalideur');
+		suivre_invalideur("id='noisette/$id_noisette'");
+	}
+}
+
+/**
+ * Supprime une composition du noizetier
+ *
+ * @param text $page
+ * @return text
+ */
+function noizetier_supprimer_composition($page) {
+	$type_page = noizetier_page_type($page);
+	$composition = noizetier_page_composition($page);
+	$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
+	unset($noizetier_compositions[$type_page][$composition]);
+	if (count($noizetier_compositions[$type_page])==0)
+		unset($noizetier_compositions[$type_page]);
+	ecrire_meta('noizetier_compositions',serialize($noizetier_compositions));
 }
 
 /**
@@ -462,7 +650,7 @@ function noizetier_lister_blocs_avec_noisettes(){
 }
 
 /**
- * Liste d'icones obtenues en fouillant les repertoires img/ images/ image/ et /img-pack.
+ * Liste d'icones en 24px obtenues en fouillant le theme
  *
  * @staticvar array $liste_icones
  * @return array
@@ -471,17 +659,28 @@ function noizetier_lister_icones(){
 	static $liste_icones = null;
 	
 	if (is_null($liste_icones)){
-		$match = ".+[.](jpg|jpeg|png|gif)$";
-		$liste_icones = array(
-			'img' => find_all_in_path('img/', $match),
-			'img-pack' => find_all_in_path('img-pack/', $match),
-			'image' => find_all_in_path('image/', $match),
-			'images' => find_all_in_path('images/', $match)
-		);
+		$match = ".+-24[.](jpg|jpeg|png|gif)$";
+		$liste_icones = find_all_in_path('prive/themes/spip/images/', $match);
 	}
-	
 	return $liste_icones;
 }
+
+/**
+ * Teste si une page fait partie des compositions du noizetier
+ *
+ * @param text $page
+ * @return text
+ */
+function noizetier_test_compo_noizetier($page) {
+	$compos = unserialize($GLOBALS['meta']['noizetier_compositions']);
+	$type = noizetier_page_type($page);
+	$composition = noizetier_page_composition($page);
+	
+	return (is_array($compos[$type][$composition])) ? 'on' : '';
+
+}
+
+
 
 
 /**
@@ -720,4 +919,17 @@ function noizetier_importer_configuration($type_import, $import_compos, $config)
 	return $ok;
 }
 
+/**
+ * Retourne le chemin complet d'une icone, vérifie d'abord chemin_image, sinon passe par find_in_path
+ *
+ * @param text $icone
+ * @return text
+ */
+function noizetier_chemin_icone($icone){
+	if ($i = chemin_image($icone))
+		return $i;
+	else {
+		return find_in_path($icone);
+	}
+}
 ?>
