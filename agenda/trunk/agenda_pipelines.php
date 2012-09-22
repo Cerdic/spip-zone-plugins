@@ -181,4 +181,16 @@ function agenda_post_edition($flux){
 	}
 	return $flux;
 }
+
+/**
+ * Les evenements peuvent heriter des compositions des articles
+ * @param array $heritages
+ * @return array
+ */
+function agenda_compositions_declarer_heritage($heritages) {
+	$heritages['evenement'] = 'article';
+	return $heritages;
+}
+
+
 ?>
