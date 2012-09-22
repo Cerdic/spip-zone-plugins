@@ -27,7 +27,6 @@
 	<pipeline nom="compositions_lister_disponibles" action="" />
 	<pipeline nom="compositions_declarer_heritage" action="" />
 	<pipeline nom="ieconfig_metas" inclure="compositions_ieconfig.php" />
-
 	<pipeline nom="compositions_declarer_heritage"  inclure="compositions_pipeline.php" />
 
 	<utilise nom="Z" compatibilite="[1.7.10;[" />
