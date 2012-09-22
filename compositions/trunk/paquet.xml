@@ -1,7 +1,7 @@
 <paquet
 	prefix="compositions"
 	categorie="outil"
-	version="3.1.2"
+	version="3.2"
 	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="prive/themes/spip/images/composition-32.png"
@@ -26,6 +26,7 @@
 	<pipeline nom="styliser" inclure="compositions_pipeline.php" />
 	<pipeline nom="compositions_lister_disponibles" action="" />
 	<pipeline nom="compositions_declarer_heritage" action="" />
+	<pipeline nom="ieconfig_metas" inclure="compositions_ieconfig.php" />
 
 	<pipeline nom="compositions_declarer_heritage"  inclure="compositions_pipeline.php" />
 
