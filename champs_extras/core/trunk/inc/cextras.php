@@ -193,7 +193,9 @@ function champs_extras_modifier($table, $saisies_nouvelles, $saisies_anciennes) 
  * Complète un tableau de mise à jour de plugin afin d'installer les champs extras.
  *
  * @example
+ *     ```
  *     cextras_api_upgrade(motus_declarer_champs_extras(), $maj['create']);
+ *     ```
  *
  * @param array $declaration_champs_extras
  *     Liste de champs extras à installer, c'est à dire la liste de saisies
@@ -225,7 +227,9 @@ function cextras_api_upgrade($declaration_champs_extras, &$maj_item) {
  * Supprime les champs extras declarés
  *
  * @example
+ *     ```
  *     cextras_api_vider_tables(motus_declarer_champs_extras());
+ *     ```
  * 
  * @param array $declaration_champs_extras
  *     Liste de champs extras à désinstaller, c'est à dire la liste de saisies

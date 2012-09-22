@@ -112,10 +112,11 @@ function champs_extras_restrictions($saisie, $action, $table, $id, $qui, $opt) {
  * l'autorisation prévue par la description de la saisie
  * 
  * @example
+ *     ```
  *     autoriser('voirextra','auteur', $id_auteur,'',
  *         array('champ'=>'prenom', 'saisie'=>$saisie, ...));
- *
- *      Appelle autoriser_auteur_voirextra_prenom_dist() si la fonction existe...
+ *     ```
+ *     Appelle ``autoriser_auteur_voirextra_prenom_dist()`` si la fonction existe...
  * 
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -146,10 +147,11 @@ function autoriser_voirextra_dist($faire, $type, $id, $qui, $opt){
  * l'autorisation prévue par la description de la saisie
  * 
  * @example
+ *     ```
  *     autoriser('modifierextra','auteur', $id_auteur,'',
  *         array('champ'=>'prenom', 'saisie'=>$saisie, ...));
- *     
- *     Appelle autoriser_auteur_modifierextra_prenom_dist() si elle existe
+ *     ```
+ *     Appelle ``autoriser_auteur_modifierextra_prenom_dist()`` si elle existe
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -181,8 +183,10 @@ function autoriser_modifierextra_dist($faire, $type, $id, $qui, $opt){
  * et cela en créant à la volée les fonctions d'autorisations adéquates.
  * 
  * @example
+ *     ```
  *     restreindre_extras('article', array('nom', 'prenom'), array(8, 12));
  *     restreindre_extras('site', 'url_doc', 18, true); // recursivement aux sous rubriques
+ *     ```
  *
  * @param string $objet
  *     Objet possédant les extras
@@ -310,9 +314,12 @@ function _restreindre_extras_objet($objet, $id_objet, $opt, $ids, $cible='rubriq
 **/
 function _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, $_id_cible) {
 
-    $id_cible = intval($opt['contexte'][$_id_cible]);
+	$id_cible = 0;
+	if (isset($opt['contexte'][$_id_cible])) {
+		$id_cible = intval($opt['contexte'][$_id_cible]);
+	}
   
-    if (!$id_cible) {
+	if (!$id_cible) {
 		// on tente de le trouver dans la table de l'objet
 		$table = table_objet_sql($objet);
 		$id_table = id_table_objet($table);

@@ -14,10 +14,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * permettant ainsi d'exploiter ses données.
  *
  * @example
+ *     ```
  *     <BOUCLE_x(TABLE)>
- *      - #CHAMP_EXTRA{nom_du_champ}
- *      - #CHAMP_EXTRA{nom_du_champ,label}
+ *     - #CHAMP_EXTRA{nom_du_champ}
+ *     - #CHAMP_EXTRA{nom_du_champ,label}
  *     </BOUCLE_x>
+ *     ```
  *
  * @balise CHAMP_EXTRA
  * @note
@@ -98,9 +100,11 @@ function calculer_balise_CHAMP_EXTRA($objet, $colonne, $demande='') {
  * Retourne les choix possibles d'un champ extra donné
  *
  * @example
+ *     ```
  *     #LISTER_CHOIX{champ}
  *     #LISTER_CHOIX{champ, " > "}
  *     #LISTER_CHOIX**{champ} // retourne un tableau cle/valeur
+ *     ```
  *
  * @balise LISTER_CHOIX
  * @param Champ $p
@@ -176,14 +180,16 @@ function calculer_balise_LISTER_CHOIX($objet, $colonne) {
  * Il faut donc transcrire clé -> valeur
  *
  * @example
+ *     ```
  *     #LISTER_VALEURS{champ}
  *     #LISTER_VALEURS{champ, " > "} 
  *     #LISTER_VALEURS**{champ} // retourne un tableau cle/valeur
+ *     ```
  * 
  * @note 
  *     Pour des raisons d'efficacité des requetes SQL
- *     le parametre "champ" ne peut être calculé
- *     #LISTER_VALEURS{#GET{champ}} ne peut pas fonctionner.
+ *     le paramètre "champ" ne peut être calculé
+ *     ``#LISTER_VALEURS{#GET{champ}}`` ne peut pas fonctionner.
  * 
  *     Si cette restriction est trop limitative, on verra par la suite
  *     pour l'instant, on laisse comme ca...
