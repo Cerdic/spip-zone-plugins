@@ -122,19 +122,22 @@ function compositions_affiche_milieu($flux){
 }
 
 /**
- * utilisation du pipeline compositions_declarer_heritage:
- * exemple pour faire heriter l'objet machin des compostions definies dans son parent truc:
- *		$flux['machin'] = 'truc';
- * ce qui permet ensuite de faire dans le fichier truc-ma_compo.xml
- * <branche type="machin" composition="une_compo" />
+ * Le pipeline compositions_declarer_heritage permet de declarer les heritages
+ * sous la forme :
+ *		$heritages['objet'] = 'parent';
+ * ce qui permet ensuite de faire dans le fichier parent-ma_compo.xml
+ * <branche type="objet" composition="une_compo" />
  * 
- * ajouter l'heritage pour les mots-cles (mieux ici que dans le plugin mots?)
- *
+ * A partir de compositions 3.3.0 cette declaration est obligatoire.
+ * Les objets "standards" de SPIP sont declares ici. (a deplacer dans leurs plugins respectifs ?)
  */
-function compositions_compositions_declarer_heritage($arr){
-	$arr['mot'] = 'groupe_mots';
-	
-	return $arr;
+function compositions_compositions_declarer_heritage($heritages){
+	$heritages['mot'] = 'groupe_mots';
+	$heritages['rubrique'] = 'rubrique';
+	$heritages['article'] = 'rubrique';
+	$heritages['breve'] = 'rubrique';
+	$heritages['site'] = 'rubrique';
+	return $heritages;
 }
 
 

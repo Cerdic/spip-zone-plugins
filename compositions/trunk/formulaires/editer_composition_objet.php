@@ -33,18 +33,10 @@ function formulaires_editer_composition_objet_charger($type,$id){
 	
 	if ($type=='rubrique')
 		$valeurs['composition_branche_lock'] = sql_getfetsel('composition_branche_lock',$table_objet_sql,"$id_table_objet=".intval($id));
-
-	$trouver_table = charger_fonction('trouver_table', 'base');
-	$desc = $trouver_table($table_objet_sql);
-	if (isset($desc['field']['id_rubrique'])) {
-		$_id_rubrique = ($type == 'rubrique') ? 'id_parent' : 'id_rubrique';
-		$id_rubrique = sql_getfetsel($_id_rubrique,$table_objet_sql,"$id_table_objet=".intval($id),'','','','',$serveur);
-		$valeurs['composition_heritee'] = compositions_heriter($type, $id_rubrique);
-		$valeurs['verrou_branche'] = compositions_verrou_branche($id_rubrique);
-	} else {
-		$valeurs['composition_heritee'] = '';
-		$valeurs['verrou_branche'] = false;
-	}
+	
+	$valeurs['composition_heritee'] = compositions_heriter($type, $id);
+	$valeurs['verrou_branche'] = compositions_verrou_branche($type, $id);
+	$valeurs['verrou_branche'] = false;
 	$valeurs['composition_verrouillee'] = compositions_verrouiller($type, $id);
 
 	$valeurs['compositions'] = compositions_lister_disponibles($type);

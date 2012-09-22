@@ -223,55 +223,49 @@ function compositions_types(){
 
 /**
  * Renvoie les parametres necessaires pour utiliser l'heritage de composition de façon generique
- * pour les objets n'utilisant pas les rubriques comme source d'heritage
- * recupere les donnes du pipeline compositions_declarer_heritage
+ * recupere les donnes du pipeline compositions_declarer_heritage.
+ * Si $type n'est pas precise, on renvoie simplement le tableau des objets pouvant heriter.
  * 
  * @param string $type
+ * @staticvar array $heritages
  * @return array
  */
-function compositions_recuperer_heritage($type){
-	// recuperer les heritages declares via le pipeline compositions_declarer_heritage
-	$Theritages = array();
-	$Theritages = pipeline('compositions_declarer_heritage', $Theritages);
+function compositions_recuperer_heritage($type=NULL){
+	static $heritages = NULL;
+	if (is_null($heritages)) // recuperer les heritages declares via le pipeline compositions_declarer_heritage
+		$heritages = pipeline('compositions_declarer_heritage', array());
+	
+	if (is_null($type))
+		return $heritages;
 
-	if (array_key_exists($type, $Theritages)) {
-		$type_parent = $Theritages[$type];
-		// KISS: heritage a un seul niveau (pas de recursivite comme avec les rubriques)
-		$ancetres = false;
-		$nom_id_ancetre = null;
-		$arr_sql = array('composition');
+	if (array_key_exists($type, $heritages)) {
+		$type_parent = $heritages[$type];
+		$table_parent =  table_objet_sql($type_parent);
+		$nom_id_parent = ($type==$type_parent) ? 'id_parent' : id_table_objet($type_parent); // Recursivite pour les rubriques, nom de l'identifiant du parent dans la table enfant
+		$nom_id_table_parent = id_table_objet($type_parent); // Nom de l'identifiant du parent dans la table parent
+		
+		// verifier que table et champs existent...
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		if (!$type_parent
+			OR !$desc = $trouver_table($table_parent,$serveur)
+			OR !isset($desc['field']['composition'])
+			OR !isset($desc['field'][$nom_id_parent]))
+			return '';
+
+		return array(
+			'type_parent' => $type_parent,
+			'table_parent' => $table_parent,
+			'nom_id_parent' => $nom_id_parent,
+			'nom_id_table_parent' => $nom_id_table_parent
+		);
 	}
-	else {
-		$type_parent = 'rubrique';
-		$nom_id_ancetre = 'id_parent';
-		$ancetres = true;
-		$arr_sql = array($nom_id_ancetre,'composition');
-	}
-	$table_parents =  table_objet_sql($type_parent);
-	$nom_id_parent = id_table_objet($type_parent);
-
-	// verifier que table et champs existent...
-	$trouver_table = charger_fonction('trouver_table', 'base');
-	if (!$type_parent OR $type_parent == ''
-		OR !$desc = $trouver_table($table_parents,$serveur)
-		OR !isset($desc['field']['composition'])
-		OR !isset($desc['field'][$nom_id_parent]))
-		return '';
-
-	return array(
-		'type_parent' 		=> $type_parent,
-		'table_parents'		=> $table_parents,
-		'nom_id_parent'		=> $nom_id_parent,
-		'ancetres'			=> $ancetres,
-		'nom_id_ancetre'	=> $nom_id_ancetre,
-		'arr_sql'			=> $arr_sql
-	);
+	return array();
 }
 
 /**
  * Renvoie la composition qui s'applique a un objet
  * en tenant compte, le cas echeant, de la composition heritee
- * si etoile=true on renvoi dire le champ sql
+ * si etoile=true on renvoi directment le champ sql
  *
  * @param string $type
  * @param integer $id
@@ -281,7 +275,8 @@ function compositions_recuperer_heritage($type){
  */
 function compositions_determiner($type, $id, $serveur='', $etoile = false){
 	static $composition = array();
-
+	$id = intval($id);
+	
 	if (isset($composition[$etoile][$serveur][$type][$id]))
 		return $composition[$etoile][$serveur][$type][$id];
 
@@ -297,61 +292,68 @@ function compositions_determiner($type, $id, $serveur='', $etoile = false){
 	if (isset($desc['field']['composition']) AND $id){
 		$select = "composition";
 
-	$Tparam_heritage = compositions_recuperer_heritage($type);
-	if (isset($desc['field'][$Tparam_heritage['nom_id_parent']]))
-		$select .= "," . (($type == 'rubrique') ? 'id_parent' : $Tparam_heritage['nom_id_parent'].' as id_parent');
+	$heritage = compositions_recuperer_heritage($type);
+	if (isset($desc['field'][$heritage['nom_id_parent']]))
+		$select .= ', '.$heritage['nom_id_parent'].' as id_parent';
 
-		$row = sql_fetsel($select, $table_sql, "$_id_table=".intval($id), '', '', '', '', $serveur);
-		if ($row['composition'] != '')
-			$retour = $row['composition'];
-		elseif (!$etoile
-		  AND isset($row['id_parent'])
-		  AND $row['id_parent'])
-			$retour = compositions_heriter($type, $row['id_parent'], $serveur);
+	$row = sql_fetsel($select, $table_sql, "$_id_table=".intval($id), '', '', '', '', $serveur);
+	if ($row['composition'] != '')
+		$retour = $row['composition'];
+	elseif (!$etoile
+	  AND isset($row['id_parent'])
+	  AND $row['id_parent'])
+		$retour = compositions_heriter($type, $id, $row['id_parent'], $serveur);
 	}
 	return $composition[$etoile][$serveur][$type][$id] = (($retour == '-') ? '' : $retour);
 }
 
 /**
- * Renvoie la composition heritee par un objet selon sa rubrique
- * ou son groupe de mot-cles
+ * Renvoie la composition heritee par un objet selon son identifiant.
+ * Optionnellement, on peut lui transmettre directement l'id du parent s'il a ate calcule.
  *
  * @param string $type
- * @param integer $id_rubrique
+ * @param integer $id
+ * @param integer $id_parent
  * @param string $serveur
  * @return string
  */
-function compositions_heriter($type, $id_rubrique, $serveur=''){
+function compositions_heriter($type, $id, $id_parent=NULL, $serveur=''){
 	if ($type=='syndic') $type='site'; //grml
-	if (intval($id_rubrique) < 1) return '';
+	if (intval($id) < 1) return '';
 	static $infos = null;
-	$id_parent = $id_rubrique;
-	$compo_rubrique = '';
-
-	$Theritage = compositions_recuperer_heritage($type);
-	$type_parent = $Theritage['type_parent'];		//'rubrique';
-	$table_parents = $Theritage['table_parents'];	//'spip_rubriques';
-	$nom_id_parent = $Theritage['nom_id_parent'];	//'id_rubrique';
-	$ancetres = $Theritage['ancetres'];				//true;
-	$nom_id_ancetre = $Theritage['nom_id_ancetre'];	//'id_parent';
-	$arr_sql = $Theritage['arr_sql'];				// array($nom_id_ancetre,'composition');
-
+	$compo_parent = '';
+	
+	$heritage = compositions_recuperer_heritage($type);
+	$type_parent = $heritage['type_parent'];
+	$table_parent = $heritage['table_parent'];
+	$nom_id_parent = $heritage['nom_id_parent'];
+	$nom_id_table_parent = $heritage['nom_id_table_parent'];
+	
+	if (is_null($id_parent))
+		$id_parent = sql_getfetsel($nom_id_parent, table_objet_sql($type), id_table_objet($type).'='.intval($id));
+	
+	$heritages = compositions_recuperer_heritage();
+	
 	do {
-		$row = sql_fetsel($arr_sql, $table_parents, $nom_id_parent.'='.intval($id_parent),'','','','',$serveur);
+		$select = 'composition';
+		if ($heritages[$type_parent]==$type_parent) // S'il y a recursivite sur le parent
+			$select .= ', id_parent';
+		$row = sql_fetsel($select, $table_parent, $nom_id_table_parent.'='.intval($id_parent),'','','','',$serveur);
 		if (strlen($row['composition']) AND $row['composition']!='-')
-			$compo_rubrique = $row['composition'];
-		elseif (strlen($row['composition'])==0 AND $ancetres) // il faut aussi verifier que la rub parente n'herite pas elle-meme d'une composition
-			$compo_rubrique = compositions_determiner($type_parent, $id_parent, $serveur='');
+			$compo_parent = $row['composition'];
+		elseif (strlen($row['composition'])==0 AND isset($heritages[$type_parent])) // Si le parent peut heriter, il faut verifier s'il y a heritage
+			$compo_parent = compositions_determiner($type_parent, $id_parent, $serveur='');
 		
-		if (strlen($compo_rubrique) AND is_null($infos))
-			$infos = compositions_lister_disponibles($type_parent);
+		if (strlen($compo_parent) AND is_null($infos))
+			$infos = compositions_lister_disponibles('');
+			
 	}
-	while ($id_parent = $row[$nom_id_ancetre] // Attention : nom_id_ancetre peut differer de nom_id_parent, pour les articles par exemple
+	while ($id_parent = $row['id_parent']
 		AND
-		(!strlen($compo_rubrique) OR !isset($infos[$type_parent][$compo_rubrique]['branche'][$type])));
+		(!strlen($compo_parent) OR !isset($infos[$type_parent][$compo_parent]['branche'][$type])));
 
-	if (strlen($compo_rubrique) AND isset($infos[$type_parent][$compo_rubrique]['branche'][$type]))
-		return $infos[$type_parent][$compo_rubrique]['branche'][$type];
+	if (strlen($compo_parent) AND isset($infos[$type_parent][$compo_parent]['branche'][$type]))
+		return $infos[$type_parent][$compo_parent]['branche'][$type];
 
 	return '';
 }
