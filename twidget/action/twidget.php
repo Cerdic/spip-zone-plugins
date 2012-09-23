@@ -16,36 +16,76 @@ function action_twidget_dist(){
 	$url = "http://{$sd}twitter.com/".$url;
 
 	header("Content-type: text/javascript; charset=utf-8");
-	echo twidget_get_cached_url($url);
+	$res = twidget_get_cached_url($url);
+	// header Expires pour eviter overflow par le meme client
+	header("Pragma: public");
+	header("Cache-Control: maxage="._EXPIRES);
+	header('Expires: ' . gmdate('D, d M Y H:i:s', time()+_EXPIRES) . ' GMT');
+	echo $res;
+
 	exit;
 }
 
-function twidget_get_cached_url($url,$force=true) {
+function twidget_get_cached_url($url,$force=false) {
 	@define('_TWIDGET_CACHE',60);
+	$expires = _TWIDGET_CACHE;
+
+	// enlever le param anti cache
+	$url = preg_replace(",&\d+=cachebust,","",$url);
+	if (_request('debug')){
+		$force = true;
+	}
 
 	$hash = md5($url);
 	$dir = sous_repertoire(_DIR_CACHE,"twidget");
 
-	if (lire_fichier($f = "$dir/p$hash.txt", $c)
+	$f = "$dir"."p$hash.txt";
+	if (!$force
+	  AND lire_fichier($f, $c)
 	  AND $c = unserialize($c)
-		AND time()-$c['time']<_TWIDGET_CACHE)
+	  AND isset($c['content'])
+	  // AND $contenu = trim($c['content'])
+	  AND time()-$c['time']<_TWIDGET_CACHE){
+		if (!defined('_EXPIRES')) define('_EXPIRES',$expires);
 		return $c['content'];
-
-	// si job_queue, programmer la maj et renvoyer le contenu existant
-	if (isset($c['content']) AND !$force AND function_exists('job_queue_add')) {
-	 job_queue_add ('twidget_get_cached_url', 'Twitter Widget proxy', array($url,true), 'action/widget',true);
-	 return $c['content'];
 	}
 
+	spip_log("cache $f invalide (force $force)","twitget");
+	// si job_queue, programmer la maj et renvoyer le contenu existant
+	if (!$force
+	  // AND isset($c['content'])
+	  // AND $contenu = trim($c['content'])
+	  AND function_exists('job_queue_add')) {
+		job_queue_add ('twidget_get_cached_url', 'Twitter Widget proxy', array($url,true), 'action/twidget',true);
+		if (!defined('_EXPIRES')) define('_EXPIRES',$expires);
+		return $c['content'];
+	}
+
+
+	spip_log("requete api twitter $url","twitget");
 	// mettre a jour le cache
 
 	// recuperer le json
+	if (!defined('_INC_DISTANT_USER_AGENT'))
+		define('_INC_DISTANT_USER_AGENT',  $_SERVER['HTTP_USER_AGENT']);
+
 	include_spip('inc/distant');
 	$contenu = recuperer_page($url);
 
+	if (_request('debug')){
+		var_dump($url);
+		var_dump($contenu);
+		if (!$contenu)
+			var_dump(recuperer_page($url, false, true));
+	}
+
+	$contenu = trim($contenu);
+
 	// ne pas cacher une requete qui echoue (twitter fail)
-	if ($contenu){
-		// intercepter, cacher et relocaliser les avatars
+	if ($contenu
+	  OR !isset($c['content'])
+	  OR !strlen(trim($c['content']))){
+   	// intercepter, cacher et relocaliser les avatars
 		preg_match_all(',"profile_image_url":"([^"]*)",Uims',$contenu,$regs,PREG_SET_ORDER);
 		foreach($regs as $reg){
 			$new = twidget_get_cached_avatar($reg[1]);
@@ -55,6 +95,15 @@ function twidget_get_cached_url($url,$force=true) {
 		ecrire_fichier($f, serialize(array('time'=>time(),'content'=>$contenu)));
 	}
 
+	// par defaut expire sur une minute pour limiter le rate
+	// si contenu vide envoyer un expire 15min car on est sans doute
+	// en limitation d'API
+	if (!$contenu) {
+		$expires = 15*60;
+	}
+
+	// header Expires pour eviter overflow par le meme client
+	if (!defined('_EXPIRES')) define('_EXPIRES',$expires);
 	return $contenu;
 
 }
