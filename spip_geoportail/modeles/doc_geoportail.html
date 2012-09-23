@@ -3,6 +3,7 @@
 	
 	- id_geoportail : numero de la carte sur laquelle on affiche
 	- align : center pour se centrer sur le document
+	- titre	: titre de la couche
 	
 	Style d'affichage : attention les KML peuvent surcharger cette couleur dans leur style
 	- couleur de la trace
@@ -14,8 +15,8 @@
 ]
 <BOUCLE_gpx(DOCUMENTS){id_document}>
 <script type="text/javascript">
-	$.geoportail.addDoc (#ENV{id_geoportail,0}, "[(#EXTENSION|sinon{[(#FICHIER|substr{-3})]})]", #ID_DOCUMENT, 
-		"[(#TITRE|sinon{doc #ID_DOCUMENT})]", 
+	jQuery.geoportail.addDoc (#ENV{id_geoportail,0}, "[(#EXTENSION|sinon{[(#FICHIER|substr{-3})]})]", #ID_DOCUMENT, 
+		"[(#ENV{titre}|sinon{[(#TITRE|sinon{doc #ID_DOCUMENT})]})]", 
 		"#URL_DOCUMENT", 
 		[(#ENV{align}|=={center}|?{false,true})], 
 		{ color:'#ENV{couleur}', style:'#ENV{style}', width:'#ENV{largeur}' });
