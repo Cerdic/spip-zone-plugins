@@ -19,9 +19,9 @@
 			<div style="text-align:#LANG_RIGHT;">\[<strong><a href="[(#SELF|parametre_url{editer_noisette,''})#noizetier-noisette-#ID_NOISETTE]"><:bouton_annuler:></a></strong>\]</div>
 		]
 		
-		[(#ENV{editer_noisette}|=={#ID_NOISETTE}|non)
+		[(#ENV{ajouter_noisette}|ou{#ENV{editer_noisette}}|non)
 			[<div class="noisette noisette_#NOISETTE[ (#CHAMP_SQL{css})]">(#NOIZETIER_AFFICHER_NOISETTE)</div>]
-			<div style="text-align:#LANG_RIGHT;">
+			<div class="noizetier-action" style="text-align:#LANG_RIGHT;">
 				\[<strong><a href="[(#SELF|parametre_url{editer_noisette,#ID_NOISETTE})#noizetier-noisette-#ID_NOISETTE]"><:noizetier:formulaire_modifier_noisette:></a></strong>\]
 				[(#BOUTON_ACTION{[(#VAL{noizetier:formulaire_supprimer_noisette}|_T)],#URL_ACTION_AUTEUR{supprimer_noisette,#ID_NOISETTE,#SELF#noizetier-noisette-#ID_NOISETTE}})]
 			</div>
@@ -30,8 +30,8 @@
 	</div>
 	</BOUCLE_noisettes>
 	
-	[(#ENV{ajouter_noisette}|=={#ENV{bloc}}|non)
-		<div style="text-align:#LANG_RIGHT;">
+	[(#ENV{ajouter_noisette}|ou{#ENV{editer_noisette}}|non)
+		<div class="noizetier-action" style="text-align:#LANG_RIGHT;">
 			\[<strong><a href="[(#SELF|parametre_url{ajouter_noisette,#ENV{bloc}})#noizetier-ajouter-noisette]"><:noizetier:formulaire_ajouter_noisette:></a></strong>\]
 		</div>
 	]
@@ -39,12 +39,12 @@
 		<div id="noizetier-ajouter-noisette">
 			[(#FORMULAIRE_AJOUTER_NOISETTE{#ENV{type}[-(#ENV{composition})],#ENV{bloc},[(#SELF|parametre_url{ajouter_noisette,''})&editer_noisette=@id_noisette@#noizetier-noisette-@id_noisette@]})]
 			<div style="text-align:#LANG_RIGHT;">\[<strong><a href="[(#SELF|parametre_url{ajouter_noisette,''})#noizetier-bloc-#ENV{bloc}]"><:bouton_annuler:></a></strong>\]</div>
-			<style type="text/css">ul.liste-noisettes li.noisette {padding-#LANG_LEFT: 30px; background-repeat: no-repeat; background-position: #LANG_LEFT 9px;}
+			<style type="text/css">ul.liste-noisettes li.noisette {padding-#LANG_LEFT: 30px; background-repeat: no-repeat; background-position: #LANG_LEFT 9px;}</style>
 		</div>
 	]
-	
-	<div class="ajax">#FORMULAIRE_NOIZETIER_VALIDER_TRI{#SELF}</div>
+	[(#ENV{ajouter_noisette}|ou{#ENV{editer_noisette}}|non)<div class="ajax">#FORMULAIRE_NOIZETIER_VALIDER_TRI{#SELF}</div>]
 </div>
+[(#ENV{ajouter_noisette}|ou{#ENV{editer_noisette}}|non)
 <script type="text/javascript">/*<!\[CDATA\[*/
 	jQuery('div#noizetier-bloc-#ENV{bloc}').sortable({
 		items: 'div.noizetier-noisette',
@@ -54,6 +54,7 @@
 		cursor: 'move',
 		update: function(event, ui) {
 			jQuery('.noizetier-valider-tri').show(500);
+			jQuery('.noizetier-action').hide(500);
 		}
 	});
-/*\]\]>*/</script>
+/*\]\]>*/</script>]
