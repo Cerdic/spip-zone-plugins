@@ -5,7 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	//A
+	// A
 	'apercu' => 'Aperçu',
 
 	// B
@@ -33,9 +33,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_noizetier_explication' => 'Sélectionnez la page dont vous souhaitez configurer les noisettes.',
 	'editer_noizetier_titre' => 'Gérer les noisettes',
 	'editer_nouvelle_page' => 'Créer une nouvelle page / composition',
+	'erreur_aucune_noisette_selectionnee' => 'Vous devez sélectionner une noisette !',
 	'erreur_doit_choisir_noisette' => 'Vous devez choisir une noisette.',
 	'erreur_mise_a_jour' => 'Une erreur s\'est produite pendant la mise à jour de la base de donnée.',
-	'erreur_aucune_noisette_selectionnee' => 'Vous devez sélectionner une noisette !',
 	'explication_glisser_deposer' => 'Vous pouvez ajouter une noisette ou les réordonner par simple glisser/déposer.',
 	'explication_heritages_composition' => 'Vous pouvez définir ici les compositions qui seront héritées par les objets de la branche.',
 	'explication_noizetier_css' => 'Vous pouvez ajouter à la noisette d\'éventuelles classes CSS supplémentaires.',
@@ -70,9 +70,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_nom_explication' => 'Vous pouvez utilisez la balise  &lt;multi&gt;.',
 	'formulaire_nouvelle_composition' => 'Nouvelle composition',
 	'formulaire_obligatoire' => 'Champs obligatoire',
-	'formulaire_supprimer_page' => 'Supprimer cette page',
 	'formulaire_supprimer_noisette' => 'Supprimer cette noisette',
 	'formulaire_supprimer_noisettes_page' => 'Supprimer les noisettes de cette page',
+	'formulaire_supprimer_page' => 'Supprimer cette page',
 	'formulaire_type' => 'Type de page',
 	'formulaire_type_explication' => 'Indiquez sur quel objet porte cette composition ou si vous souhaitez créer une page autonome.',
 	'formulaire_type_import' => 'Type d\'importation',
@@ -107,8 +107,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'ne_pas_definir_d_heritage' => 'Ne pas définir d\'héritage',
-	'noisettes_composition' => 'Noisettes spécifiques à la composition <i>@composition@</i> :',
 	'noisette_numero' => 'noisette numéro :',
+	'noisettes_composition' => 'Noisettes spécifiques à la composition <i>@composition@</i> :',
 	'noisettes_disponibles' => 'Noisettes disponibles',
 	'noisettes_page' => 'Noisettes spécifiques à la page <i>@type@</i> :',
 	'noisettes_toutes_pages' => 'Noisettes communes à toutes les pages :',
@@ -128,11 +128,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page' => 'Page',
 	'page_autonome' => 'Page autonome',
 	'probleme_droits' => 'Vous n\'avez pas les droits nécessaires pour effectuer cette modification.',
-	
+
 	// R
 	'retour' => 'Retour',
 
-	//S
+	// S
 	'suggestions' => 'Suggestions',
 
 	// W
