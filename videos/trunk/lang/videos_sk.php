@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_description_doc' => 'Dokumentácia',
-	'cfg_description_titre' => 'Nastavenia zásuvného modulu Videoá',
+	'cfg_description_titre' => 'Nastavenia zásuvného modulu Videá',
 	'cfg_explication_hauteur' => 'Zvoľte si predvolenú výšku pre svoje videá. Túto možnosť môžete prepísať vo volaní šablóny.',
 	'cfg_explication_largeur' => 'Zvoľte si predvolenú šírku pre svoje videá. Túto možnosť môžete prepísať vo volaní šablóny.',
 	'cfg_explication_liste_definition' => 'Zabaliť video do tagov dl/dt/dd ako SPIP pre riadenie pripojených súborov.',
@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_configurations_html5' => 'Nastavenia HTML5/alternatívne',
 	'cfg_titre_configurations_vimeo' => 'Nastavenia pre Viméo',
 	'cfg_titre_configurations_youtube' => 'Nastavenia pre Youtube',
-	'confirmation_ajout' => 'Video "@type@:@titre@" bolo pridané.', # MODIF
+	'confirmation_ajout' => 'Video "@type@:@titre@" bolo pridané. &lt;video@id_document@&gt;',
 
 	// E
 	'erreur_adresse_invalide' => 'Táto adresa nie je platná. Ak skúsite nahrať súbor s videom (MP4 alebo iný), ďakujeme vám za využívanie pridávania de klasického súboru do SPIPu.',
