@@ -24,12 +24,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'editer_composition' => 'Modifier cette composition',
 	'editer_composition_heritages' => 'Définir les héritages',
-	'editer_compositions' => 'Gérer les compositions du noiZetier',
 	'editer_configurer_page' => 'Configurer les noisettes de cette page',
 	'editer_exporter_configuration' => 'Exporter la configuration',
 	'editer_importer_configuration' => 'Importer une config.',
-	'editer_noizetier_compositions_explication' => 'Vous pouvez créer ici des compositions qui ne différeront que par les noisettes qui leurs seront ajoutés.',
-	'editer_noizetier_compositions_titre' => 'Compositions du noiZetier',
 	'editer_noizetier_explication' => 'Sélectionnez la page dont vous souhaitez configurer les noisettes.',
 	'editer_noizetier_titre' => 'Gérer les noisettes',
 	'editer_nouvelle_page' => 'Créer une nouvelle page / composition',
@@ -103,6 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'masquer' => 'Masquer',
+	'mode_noisettes' => 'Éditer les noisettes',
 	'modif_en_cours' => 'Modifications en cours',
 
 	// N
@@ -128,6 +126,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page' => 'Page',
 	'page_autonome' => 'Page autonome',
 	'probleme_droits' => 'Vous n\'avez pas les droits nécessaires pour effectuer cette modification.',
+
+	// Q
+	'quitter_mode_noisettes' => 'Quitter l\'édition des noisettes',
 
 	// R
 	'retour' => 'Retour',

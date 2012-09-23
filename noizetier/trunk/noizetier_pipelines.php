@@ -33,7 +33,12 @@ function noizetier_recuperer_fond($flux){
 			if (in_array($fond,noizetier_lister_blocs_avec_noisettes())) {
 				$contexte = $flux['data']['contexte'];
 				$contexte['bloc'] = substr($fond,0,strpos($fond,'/'));
-				$complements = recuperer_fond('noizetier-generer-bloc',$contexte,array('raw'=>true));
+				if ($flux['args']['contexte']['voir']=='noisettes' && !function_exists('autoriser'))
+					include_spip('inc/autoriser');	 // si on utilise le formulaire dans le public
+				if ($flux['args']['contexte']['voir']=='noisettes' && autoriser('configurer','noizetier'))
+					$complements = recuperer_fond('noizetier-generer-bloc-voir-noisettes',$contexte,array('raw'=>true));
+				else
+					$complements = recuperer_fond('noizetier-generer-bloc',$contexte,array('raw'=>true));
 				$flux['data']['texte'] .= $complements['texte'];
 			}
 		}
@@ -134,5 +139,14 @@ function noizetier_noizetier_lister_pages($flux){return $flux;}
 function noizetier_noizetier_blocs_defaut($flux){return $flux;}
 function noizetier_noizetier_config_export($flux){return $flux;}
 function noizetier_noizetier_config_import($flux){return $flux;}
+
+// les boutons d'administration : ajouter le mode voir=noisettes
+function noizetier_formulaire_admin($flux) {
+	if (autoriser('configurer','noizetier')) {
+		$btn = recuperer_fond('prive/bouton/voir_noisettes');
+		$flux['data'] = preg_replace('%(<!--extra-->)%is', $btn.'$1', $flux['data']);
+	}
+	return $flux;
+}
 
 ?>

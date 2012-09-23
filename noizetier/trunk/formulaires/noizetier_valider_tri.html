@@ -1,0 +1,29 @@
+[<div class="formulaire_spip"><p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p></div>]
+[<div class="formulaire_spip"><p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p></div>]
+
+<div class="noizetier-valider-tri formulaire_spip" style="display:none;">
+<form method='post' action='#ENV{action}'>
+	
+	[(#REM) declarer les hidden qui declencheront le service du formulaire 
+	parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+	
+	<div style="float:#LANG_RIGHT;">[(#CHEMIN_IMAGE{warning-32}|balise_img)]</div>
+	<h1 class="h1"><:noizetier:modif_en_cours:></h3>
+	<:noizetier:notice_enregistrer_rang:>
+	
+	[(#SET{id_unique,#EVAL{'rand();'}})]
+	<div id="tri-#GET{id_unique}"></div>
+	
+	<p class='boutons'>
+		<input type='submit' name="cancel" class="submit link" value='<:bouton_annuler:>' />
+		<input type='submit' name="save" class="submit" id="submit-#GET{id_unique}" value='<:bouton_enregistrer:>' />
+	</p>
+</form>
+</div>
+<script type="text/javascript">/*<!\[CDATA\[*/
+	jQuery('.noizetier-valider-tri').hide(500);
+	jQuery('#submit-#GET{id_unique}').click(function() {
+		jQuery('input.noizetier-tri').appendTo('div#tri-#GET{id_unique}');
+	});
+/*\]\]>*/</script>

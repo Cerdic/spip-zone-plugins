@@ -439,6 +439,7 @@ function noizetier_ajouter_noisette($noisette, $page, $bloc) {
 
 /**
  * Tri les noisettes d'une page
+ * Attention : parfois la page est transmise dans $ordre (et peu éventuellement changer en cours, cas de la page-dist de Zpip-vide)
  *
  * @param text $page
  * @param array $ordre
@@ -454,6 +455,10 @@ function noizetier_trier_noisette($page, $ordre) {
 	if (substr($ordre[0],0,4)!='bloc')
 		return $false;
 
+	if ($page) {
+		$type = noizetier_page_type($page);
+		$composition = noizetier_page_composition($page);
+	}
 	$modifs = array();
 	foreach($ordre as $entree) {
 		$entree = explode ('-',$entree,2);
@@ -461,9 +466,16 @@ function noizetier_trier_noisette($page, $ordre) {
 			$bloc = $entree[1];
 			$rang = 1;
 		}
+		if ($entree[0] == 'page') {
+			$page = $entree[1];
+			$type = noizetier_page_type($page);
+			$composition = noizetier_page_composition($page);
+		}
 		if ($entree[0] == 'noisette') {
 			$modifs[$entree[1]] = array(
 				'bloc' => $bloc,
+				'type' => $type,
+				'composition' => $composition,
 				'rang' => $rang
 			);
 			$rang += 1;
@@ -472,6 +484,8 @@ function noizetier_trier_noisette($page, $ordre) {
 			$id_noisette = noizetier_ajouter_noisette($entree[1], $page, $bloc);
 			$modifs[$id_noisette] = array(
 				'bloc' => $bloc,
+				'type' => $type,
+				'composition' => $composition,
 				'rang' => $rang
 			);
 			$rang += 1;
@@ -677,7 +691,6 @@ function noizetier_test_compo_noizetier($page) {
 	$composition = noizetier_page_composition($page);
 	
 	return (is_array($compos[$type][$composition])) ? 'on' : '';
-
 }
 
 
