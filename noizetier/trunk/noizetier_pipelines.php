@@ -30,16 +30,28 @@ function noizetier_recuperer_fond($flux){
 		
 		// Tester l'installation du noizetier pour éviter un message d'erreur à l'installation
 		if (isset($GLOBALS['meta']['noizetier_base_version'])) {
+			if ($flux['args']['contexte']['voir']=='noisettes' && !function_exists('autoriser'))
+				include_spip('inc/autoriser');	 // si on utilise le formulaire dans le public
 			if (in_array($fond,noizetier_lister_blocs_avec_noisettes())) {
 				$contexte = $flux['data']['contexte'];
 				$contexte['bloc'] = substr($fond,0,strpos($fond,'/'));
-				if ($flux['args']['contexte']['voir']=='noisettes' && !function_exists('autoriser'))
-					include_spip('inc/autoriser');	 // si on utilise le formulaire dans le public
 				if ($flux['args']['contexte']['voir']=='noisettes' && autoriser('configurer','noizetier'))
 					$complements = recuperer_fond('noizetier-generer-bloc-voir-noisettes',$contexte,array('raw'=>true));
 				else
 					$complements = recuperer_fond('noizetier-generer-bloc',$contexte,array('raw'=>true));
 				$flux['data']['texte'] .= $complements['texte'];
+			}
+			elseif ($flux['args']['contexte']['voir']=='noisettes' && autoriser('configurer','noizetier')) { // Il faut ajouter les blocs vides en mode voir=noisettes
+				$contexte = $flux['data']['contexte'];
+				$bloc = substr($fond,0,strpos($fond,'/'));
+				$contexte['bloc'] = $bloc;
+				$page = isset($contexte['type']) ? $contexte['type'] : '';
+				$page .= (isset($contexte['composition']) && $contexte['composition']) ? '-'.$contexte['composition'] : '';
+				$info_page = noizetier_lister_pages($page);
+				if (isset($info_page['blocs'][$bloc])) {
+					$complements = recuperer_fond('noizetier-generer-bloc-voir-noisettes',$contexte,array('raw'=>true));
+					$flux['data']['texte'] .= $complements['texte'];
+				}
 			}
 		}
 	}
