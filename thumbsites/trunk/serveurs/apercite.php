@@ -1,8 +1,8 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
-    /*! \file thumbshots.php 
+    /*! \file thumbshots.php
      *  \brief Fichier de fonctions personnalisées au serveur thumbshots
-     *         
+     *
      *  Défini la surcharge de thumb
      *  Le nom du fichier doit être obligatoirement celui déclaré dans le fond pour le paramétre thumbsites/serveur
      */
@@ -16,8 +16,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
      * \return url de l'image générée par le serveur
      */
     function url_thumbsite_serveur($url_site) {
-		  $taille = lire_config('thumbsites/apercite_taille');
-        //retourne l'url de la vignette
-        return "http://www.apercite.fr/api/apercite/".$taille."/oui/oui/".$url_site;
+		include_spip('inc/config');
+		$taille = lire_config('thumbsites/apercite_taille', '120x90');
+
+		//retourne l'url de la vignette
+		return "http://www.apercite.fr/api/apercite/${taille}/oui/oui/${url_site}";
     }        
 ?>

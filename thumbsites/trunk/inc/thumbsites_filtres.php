@@ -1,21 +1,21 @@
 <?php
 
-/*! \brief filtre à utiliser dans les squelettes
+/*! \brief filtre ï¿½ utiliser dans les squelettes
  *
- *  Définition de la fonction de filtre
- *  Vérifie que le plugin est activé et qu'il n'existe pas ailleurs deja ce filtre
- *  Rappel : dans le cadre d'une utilisation SPIP, il n'y a pas de paramètre à donner. $url correspond à la balise appelant le filtre
+ *  Dï¿½finition de la fonction de filtre
+ *  Vï¿½rifie que le plugin est activï¿½ et qu'il n'existe pas ailleurs deja ce filtre
+ *  Rappel : dans le cadre d'une utilisation SPIP, il n'y a pas de paramï¿½tre ï¿½ donner. $url correspond ï¿½ la balise appelant le filtre
  *  
- * \param $url_site url du site à consulter
- * \return url de l'image générée par le serveur
+ * \param $url_site url du site ï¿½ consulter
+ * \return url de l'image gï¿½nï¿½rï¿½e par le serveur
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 if (!function_exists('url_thumbsite')) {
 	function url_thumbsite($url_site) {
 		$url_serveur = '';
-		//determine le serveur d'aperçu a utiliser, defaut thumbshots.com
-		include_spip("inc/filtres");
-		$serveur = sinon(lire_config('thumbsites/serveur'), "thumbshots");
+		//determine le serveur de vignettes a utiliser, defaut thumbshots.com
+		include_spip("inc/config");
+		$serveur = lire_config('thumbsites/serveur', 'thumbshots');
 		//Charge le fichier de conf specifique au serveur
 		include_spip('serveurs/'.$serveur);
 		//execute la surcharge
@@ -83,7 +83,7 @@ function thumbshot($url_site, $refresh=false) {
 	
 	include_spip("inc/filtres");
 	include_spip('inc/config');
-	$duree = intval(sinon(lire_config('thumbsites/duree_cache'),30)) ;
+	$duree = intval(lire_config('thumbsites/duree_cache', 30)) ;
 
 	if ((!file_exists($thumb_cache)	OR ((time()-3600*24*$duree > filemtime($thumb_cache)) AND $nb > 0))) {
 

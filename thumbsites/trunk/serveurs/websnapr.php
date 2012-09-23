@@ -17,10 +17,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
      */
     function url_thumbsite_serveur($url_site) {
         //obtient les paramétres de connexion
+		include_spip('inc/config');
         $clef = lire_config('thumbsites/websnapr_clef');
-        $taille = lire_config('thumbsites/websnapr_taille');
+        $taille = lire_config('thumbsites/websnapr_taille', 'T');
    
         //retourne l'url de la vignette
-        return "http://images.websnapr.com/?size=".$taille."&key=".$clef."&url=".$url_site;
+        return "http://images.websnapr.com/?size=${taille}&key=${clef}&url=${url_site}";
     }        
 ?>

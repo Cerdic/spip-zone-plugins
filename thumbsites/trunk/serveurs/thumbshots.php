@@ -17,6 +17,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
      */
     function url_thumbsite_serveur($url_site) {
         //retourne l'url de la vignette
-        return "http://open.thumbshots.org/image.pxf?url=".$url_site."&ext=jpg";
+        return "http://open.thumbshots.org/image.pxf?url=${url_site}&ext=jpg";
     }        
 ?>

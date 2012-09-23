@@ -16,8 +16,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
      * \return url de l'image générée par le serveur
      */
     function url_thumbsite_serveur($url_site) {
-        $taille = lire_config('thumbsites/robothumb_taille');
+		include_spip('inc/config');
+        $taille = lire_config('thumbsites/robothumb_taille', '120x90');
+
         //retourne l'url de la vignette
-        return "http://www.robothumb.com/src/?url=".$url_site."&size=".$taille;
+        return "http://www.robothumb.com/src/?url=${url_site}&size=${taille}";
     }        
 ?>

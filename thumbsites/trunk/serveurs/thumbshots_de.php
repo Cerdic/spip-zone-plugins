@@ -17,6 +17,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
      */
     function url_thumbsite_serveur($url_site) {
         //retourne l'url de la vignette
-        return "http://www.thumbshots.de/cgi-bin/show.cgi?url=".$url_site;
+        return "http://www.thumbshots.de/cgi-bin/show.cgi?url=${url_site}";
     }        
 ?>
