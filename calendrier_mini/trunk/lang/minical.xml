@@ -1,3 +1,6 @@
 <traduction module="minical" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/calendrier_mini/trunk/lang/" reference="fr">
 	<langue code="fr" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/minical?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+	</langue>
 </traduction>
