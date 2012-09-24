@@ -21,6 +21,14 @@ function action_twidget_dist(){
 	header("Pragma: public");
 	header("Cache-Control: maxage="._EXPIRES);
 	header('Expires: ' . gmdate('D, d M Y H:i:s', time()+_EXPIRES) . ' GMT');
+
+	// toujours renvoyer un JSON acceptable, pour declencher la callback notamment :
+	if (!strlen(trim($res))){
+		$res = "[]";
+		if ($c=_request('callback'))
+			$res = "$c($res)";
+		$res.=";";
+	}
 	echo $res;
 
 	exit;
