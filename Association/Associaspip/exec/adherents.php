@@ -211,7 +211,7 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe)
 	. "</tbody>\n</table>\n";
 	// SOUS-PAGINATION
 	$res .= "<table width='100%' class='asso_tablo_filtres'><tr>\n";
-	$res .= association_selectionner_souspage(array('spip_asso_membres', $critere), 'adherents', 'lettre='.$lettre.'&statut_interne='.$statut_interne );
+	$res .= association_selectionner_souspage(array('spip_asso_membres', $critere), 'adherents', 'lettre='.$lettre.'&statut_interne='.$statut_interne, false);
 	if (autoriser('editer_membres', 'association', 100)) {
 		$res .= "</td><td align='right' class='formulaire'><form>\n";
 		if ($auteurs) {

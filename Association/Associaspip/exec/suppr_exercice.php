@@ -1,20 +1,15 @@
 <?php
-
-/* * *************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & Fran�ois de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
-  \************************************************************************** */
-
+/***************************************************************************\
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010 Emmanuel Saint-James & Marcel Bolla
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+\***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
-
-include_spip('inc/navigation_modules');
 
 function exec_suppr_exercice()
 {
@@ -22,10 +17,10 @@ function exec_suppr_exercice()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_exercice = association_passeparam_id('exercice');
+		include_spip ('inc/navigation_modules');
+		list($id_exercice, $exercice) = association_passeparam_id('exercice', 'asso_exercices');
 		onglets_association('exercices_budgetaires_titre', 'association');
 		// info
-		$exercice = sql_fetsel('*', 'spip_asso_exercices', "id_exercice=$id_exercice" );
 		$infos['exercice_entete_debut'] = association_formater_date($exercice['debut'], 'dtstart');
 		$infos['exercice_entete_fin'] = association_formater_date($exercice['fin'], 'dtend');
 		echo association_totauxinfos_intro($exercice['intitule'], 'exercice', $id_exercice, $infos);

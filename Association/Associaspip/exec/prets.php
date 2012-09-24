@@ -1,19 +1,15 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & Fran�ois de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010 Emmanuel Saint-James
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
-
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
-
-include_spip ('inc/navigation_modules');
 
 function exec_prets()
 {
@@ -21,16 +17,18 @@ function exec_prets()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
+		include_spip ('inc/navigation_modules');
 		$id_pret = association_recuperer_entier('id_pret');
+		list($annee, $critere_periode) = association_passeparam_annee('sortie', 'asso_prets', $id_pret);
 		if ($id_pret) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
-			$id_ressource = sql_getfetsel('id_ressource','spip_asso_prets', "id_pret=$id_pret"); // on recupere la ressource correspondante
+			$id_ressource = sql_getfetsel('id_ressource', 'spip_asso_prets', "id_pret=$id_pret");
+			$ressource = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource");
+			$etat = '';
 		} else { // on peut prendre en compte les filtres ; on recupere les parametres de :
-			$id_ressource = association_passeparam_id('ressource');
-			$annee = association_passeparam_annee();
+			list($id_ressource, $ressource) = association_passeparam_id('ressource', 'asso_ressources');
 			$etat = _request('etat'); // etat de restitution du pret
 		}
 		onglets_association('titre_onglet_prets', 'ressources');
-		$ressource = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
 		$unite = $ressource['ud']?$ressource['ud']:'D';
 		$infos['entete_code'] = association_formater_code($ressource['code'], 'x-spip_asso_ressources');
 		$infos['ressources_entete_montant'] = association_formater_prix($ressource['pu'], 'rent');
@@ -65,12 +63,13 @@ function exec_prets()
 			}
 			$type = $ressource['statut'];
 		}
-		$infos['statut'] = '<span class="'.(is_numeric($data['statut'])?'quanttity':'availability').'">'. association_formater_puce($ressource['statut'], $puce, "ressources_libelle_statut_$type") .'</span>';
+		$infos['statut'] = '<span class="'.(is_numeric($ressource['statut'])?'quanttity':'availability').'">'. association_formater_puce($ressource['statut'], $puce, "ressources_libelle_statut_$type") .'</span>';
 		echo '<div class="hproduct">'. association_totauxinfos_intro('<span class="n">'.$ressource['intitule'].'</span>', 'ressource', $id_ressource, $infos, 'asso_ressource') .'</div>';
 		// TOTAUX : nombres d'emprunts de la ressource depuis le debut
+		$q_where = "id_ressource=$id_ressource AND $critere_periode ";
 		echo association_totauxinfos_effectifs('prets', array(
-			'pair' => array( 'prets_restitues', sql_countsel('spip_asso_prets', "id_ressource=$id_ressource AND date_retour<NOW() AND date_retour<>'0000-00-00T00:00:00' "), ), // restitues, termines, anciens, ...
-			'impair' => array( 'prets_encours', sql_countsel('spip_asso_prets', "id_ressource=$id_ressource AND (date_retour>NOW() OR date_retour='0000-00-00T00:00:00' ) "), ), // dus, en attente, en cours, nouveaux, ...
+			'pair' => array( 'prets_restitues', sql_countsel('spip_asso_prets', "$q_where AND date_retour<NOW() AND date_retour<>'0000-00-00T00:00:00' "), ), // restitues, termines, anciens, ...
+			'impair' => array( 'prets_encours', sql_countsel('spip_asso_prets', "$q_where AND (date_retour>NOW() OR date_retour='0000-00-00T00:00:00' ) "), ), // dus, en attente, en cours, nouveaux, ...
 		));
 		// STATS sur la duree et le montant des emprunts
 		echo association_totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree','entete_montant'=>'duree*prix_unitaire',), "id_ressource=$id_ressource");
@@ -82,14 +81,35 @@ function exec_prets()
 			$res['prets_nav_ajouter'] = array('creer-12.gif', array('edit_pret', "id_ressource=$id_ressource&id_pret="), );
 		raccourcis_association('ressources', $res);
 		debut_cadre_association('pret-24.gif', 'prets_titre_liste_reservations');
-		// Filtres
-		/// annees ? (il peut y en avoir beaucoup de prets)
-		/// etats : sortis | restitues
-		/// caution : restitues ou pas
-		/// locations : facturees ou gracieuses
+		// FILTRES
+		$filtre_statut = '<select name="etat" onchange="form.submit()">';
+		$filtre_statut .= '<option value="">' ._T('asso:entete_tous') .'</option>';
+		$filtre_statut .= '<option value="sortie"';
+		$filtre_statut .= ($etat=='sortie'?' selected="selected"':'');
+		$filtre_statut .= '>'. _T('asso:prets_encours') .'</option>';
+		$filtre_statut .= '<option value="retour"';
+		$filtre_statut .= ($etat=='retour'?' selected="selected"':'');
+		$filtre_statut .= '>'. _T('asso:prets_restitues') .'</option>';
+		$filtre_statut .= '</select>';
+		filtres_association(array(
+			'annee' => array($annee, 'asso_prets', 'sortie'),
+		), 'prets', array(
+			'etat' => $filtre_statut,
+			'' => "<input type='hidden' name='id' value='$id_ressource' />", // "prets&id=$id_ressource" a la place de 'prets' ne fonctionne pas...
+		));
 		// TABLEAU
+		switch ($etat) {
+			case 'retour' :
+				$q_where .= " AND date_retour<NOW() AND date_retour<>'0000-00-00T00:00:00'";
+				break;
+			case 'sortie' :
+				$q_where .= " AND (date_retour>NOW() OR date_retour='0000-00-00T00:00:00')";
+				break;
+			default :
+				break;
+		}
 		echo association_bloc_listehtml(
-			array("*, CASE WHEN date_retour='0000-00-00T00:00:00' THEN 1 WHEN date_retour>NOW() THEN 1 ELSE 0 END AS statut_sortie ", 'spip_asso_prets', "id_ressource=$id_ressource", '', 'date_sortie DESC'), // requete
+			array("*, CASE WHEN date_retour='0000-00-00T00:00:00' THEN 1 WHEN date_retour>NOW() THEN 1 ELSE 0 END AS statut_sortie ", 'spip_asso_prets', $q_where, '', 'date_sortie DESC'), // requete
 			array(
 				'id_pret' => array('asso:entete_id', 'entier'),
 				'date_sortie' => array('asso:prets_entete_date_sortie', 'date', 'dtstart'),
@@ -104,6 +124,7 @@ function exec_prets()
 			'id_pret', // champ portant la cle des lignes et des boutons
 			array('pair', 'impair'), 'statut_sortie', $id_pret
 		);
+		echo association_selectionner_souspage(array('spip_asso_prets', $q_where), 'prets', "id=$id_ressource&annee=$annee".($etat?"&etat='$etat'":'') );
 		fin_page_association();
 	}
 }

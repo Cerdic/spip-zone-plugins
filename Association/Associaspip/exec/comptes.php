@@ -119,7 +119,7 @@ function exec_comptes()
 		$table = comptes_while($where, sql_asso1page(), $id_compte);
 		if ($table) { // affichage de la liste
 			// SOUS-PAGINATION
-			$nav = association_selectionner_souspage(array('spip_asso_comptes', $where), 'comptes', "exercice=$id_exercice"."&imputation=$imputation". (is_numeric($vu)?"&vu=$vu":'') );
+			$nav = association_selectionner_souspage(array('spip_asso_comptes', $where), 'comptes', "exercice=$id_exercice"."&imputation=$imputation". (is_numeric($vu)?"&vu=$vu":''), false);
 			// ENTETES
 			$table = "<table width='100%' class='asso_tablo' $onload_option id='asso_liste_comptes'>\n"
 			. "<thead>\n<tr>"

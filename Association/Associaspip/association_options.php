@@ -1016,16 +1016,13 @@ function association_selectionner_annee($annee='', $table, $champ, $exec='', $pl
 		$res = '';
     }
     $pager = '';
-    if ( !$annee ) { // annee non precisee (ou valant 0)
+    if ( !$annee ) // annee non precisee (ou valant 0)
 		$annee = date('Y'); // on prend l'annee courante
-	}
     $res .= '<select name ="annee" onchange="form.submit()">';
     $an_max = sql_getfetsel("MAX(DATE_FORMAT(date_$champ, '%Y')) AS an_max", "spip_$table", '');
     $an_min = sql_getfetsel("MIN(DATE_FORMAT(date_$champ, '%Y')) AS an_min", "spip_$table", '');
-    if ( $annee>$an_max || $annee<$an_min ) { // a l'initialisation, l'annee courante est mise si rien n'est indique... or si l'annee n'est pas disponible dans la liste deroulante on est mal positionne et le changement de valeur n'est pas top
+    if ( $annee>$an_max || $annee<$an_min ) // si l'annee (courante) n'est pas disponible dans la liste deroulante on est mal positionne et le changement de valeur n'est pas top
 		$res .= '<option value="'.$annee.'" selected="selected">'.$annee.'</option>';
-
-	}
     $sql = sql_select("DATE_FORMAT(date_$champ, '%Y') AS annee", "spip_$table",'', 'annee DESC', 'annee');
     while ($val = sql_fetch($sql)) {
 		$res .= '<option value="'.$val['annee'].'"';
@@ -1145,19 +1142,21 @@ function association_selectionner_destinations($sel='', $exec='', $plus='', $lst
  * @param int|array $pages
  *   Nombre total de pages ou
  *   Liste des elements a passer a "sql_countsel"
+ * @param string $exec
+ *   Nom du fichier appelant
  * @param string $params
  *   Autres informations passees par l'URL
  * @param int $debut
  *   Numero du premier enregistrement (si $req est a faux)
  *   Nom du champ contenant ce numero (si $req est a vrai)
- * @param string $exec
- *   Nom du fichier appelant
+ * @param bool $req
+ * @param bool $tbl
  * @return string $res
  *   HTML du bandeau de pagination
  */
-function association_selectionner_souspage($pages, $exec='', $params='', $debut='debut', $req=TRUE)
+function association_selectionner_souspage($pages, $exec='', $params='', $tbl=TRUE, $debut='debut', $req=TRUE)
 {
-	$res = '<td align="left">';
+	$res = ($tbl?"<table width='100%' class='asso_tablo_filtres'><tr>\n":'') .'<td align="left">';
 	if ( is_array($pages) ) {
 		$nbr_pages = ceil(call_user_func_array('sql_countsel',$pages)/_ASSOCIASPIP_LIMITE_SOUSPAGE); // ceil() ou intval()+1 ?
 	} else {
@@ -1176,7 +1175,7 @@ function association_selectionner_souspage($pages, $exec='', $params='', $debut=
 		}
 	}
 	$res .= '</td>';
-	return $res;
+	return $res. ($tbl?"\n</tr></table>":'');
 }
 
 /** @} */
@@ -1897,8 +1896,16 @@ function sql_asso1set($operateur='UNION', $q1=array(), $q2=array() )
  * ils partagent le meme code de passage de valeur et les memes noms de parametres
  * (ce qui n'est pas le cas avec association_recuperer_ !)
  *
- * @return string $res
+ * @param string $type
+ *   Type d'objet|page pour lequel on passe le parametre en question.
+ * @param string $table
+ *   Nom de la table (sans prefixe "spip") contenant la collection d'objets.
+ *   Sa presence indique de retourner des parametres supplementaires et/ou de
+ *   faire des controles supplementaires. Ce parametre est surtout utlise dans les pages d'edition/suppression
+ * @return string|array $res
  *   Valeur du request...
+ *   Ou une liste comportant la valeur du parametre au debut et d'autres valeurs
+ *   utiles induites.
  *
 ** @{ */
 
@@ -1907,16 +1914,26 @@ function sql_asso1set($operateur='UNION', $q1=array(), $q2=array() )
  * &id=
  *
  * @return int $id
+ * @return array($id, $row)
  */
-function association_passeparam_id($type)
+function association_passeparam_id($type='', $table='')
 {
 	if ($type) // recuperer en priorite : id_compte, id_don, id_evenement, id_ressource, id_vente, etc.
 		$id = intval(_request("id_$type", $_GET));
 	else
 		$id = 0;
-	if (!$id) // pas d'id_... alors c'est le nom generrique qui est utilise
+	if (!$id) // pas d'id_... alors c'est le nom generique qui est utilise
 		$id = intval(_request('id'));
-	return $id;
+	if ( $type && $table ) {
+		$row = sql_fetsel('*', "spip_$table", "id_$type=$id");
+		if (!$row) { // eviter un affichage erronne dans la page et des requetes supplementaire (au moins celle de DROP dans le cas d'une page suppr_...)
+			include_spip('inc/minipres');
+			echo minipres(_T('zxml_inconnu_id') .": $id"); // ceci se produit habituellement pour un ID inexistant ; ce qui ne devrait arriver que si le parametre est passe manuellement et non via une page legitime
+			exit;
+		} else
+			return array($id, $row);
+	} else
+		return $id;
 }
 
 /**
@@ -1924,17 +1941,29 @@ function association_passeparam_id($type)
  *
  * @return int $an
  */
-function association_passeparam_annee($type)
+function association_passeparam_annee($type='', $table='', $id=0)
 {
-#	if ($type) // recuperer en priorite :
-#		$an = intval(_request("annee_$type", $_GET));
-#	else
-#		$an = 0;
-#	if (!$an) // pas d'annee_... alors c'est le nom generrique qui est utilise
+	if ($type) // recuperer en priorite :
+		$an = intval(_request("annee_$type", $_GET));
+	else
+		$an = 0;
+	if (!$an) // pas d'annee_... alors c'est le nom generique qui est utilise
 		$an = intval(_request('annee'));
 	if (!$an) // annee non precisee
 		$an = date('Y'); // on prend l'annee courante
-	return $an;
+	if ($type && $table) {
+		if ($id) { // on veut un enregistrement precis : on ne va pas tenir compte de la l'annee passee en requete...
+			$pk = substr($table, (strpos($table, 'asso_')===0?5:0) ); // virer le prefixe "asso_"
+			$pk = substr($pk, 0, strlen($pk)-($pk[strlen($pk)-1]=='s'?1:0) ); // virer le suffixe "s"
+			$an = sql_getfetsel("DATE_FORMAT(date_$type, '%Y')", "spip_$table", "id_$pk=$id"); // ...on recupere l'annee correspondante a l'enregistrement recherche
+		} else { // on peut faire mieux que prendre l'annee courante ou une annee farfelue passee en parametre
+			$an = min(sql_getfetsel("MAX(DATE_FORMAT(date_$type, '%Y')) AS an_max", "spip_$table", ''), $an);
+			$an = max(sql_getfetsel("MIN(DATE_FORMAT(date_$type, '%Y')) AS an_min", "spip_$table", ''), $an);
+		}
+		$sql_where = "DATE_FORMAT(date_$type, '%Y')=$an";
+		return array($an, $sql_where);
+	} else
+		return $an;
 }
 
 /**

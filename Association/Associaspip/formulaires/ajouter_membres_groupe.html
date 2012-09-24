@@ -1,4 +1,4 @@
-<B_membres>
+<B_membres_non>
 <div class="formulaire_spip formulaire_#FORM">
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -7,16 +7,16 @@
 	<h3 class="legend"><:asso:ajouter_membres_au_groupe:></h3>
 	<p class="pagination">#PAGINATION</p>
 	<ul>
-<BOUCLE_membres(ASSO_MEMBRES asso_groupes_liaisons){id_groupe=#ENV{id_groupe}}{par nom_famille}{pagination 40 #ENV{id_groupe}}>
+<BOUCLE_membres_non(ASSO_MEMBRES asso_groupes_liaisons){id_groupe!= #ENV{id_groupe}}{par nom_famille}{pagination 40 #ENV{id_groupe}}>
 	    <li class="liste_auteurs">
 		<div class="choix">
 		    <input type="checkbox" name="id_auteurs[]" value="#ID_AUTEUR"/>
 		    <label>[(#SEXE|association_formater_nom{#PRENOM, #NOM_FAMILLE}) ]</label>
 		</div>
 	    </li>
-</BOUCLE_membres>
+</BOUCLE_membres_non>
 	</ul>
 	<INCLURE{fond=inc/bouton_validation, pass_ok=0 }>
     </form>
 </div>
-</B_membres>
+</B_membres_non>

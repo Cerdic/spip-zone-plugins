@@ -1,20 +1,15 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010 Emmanuel Saint-James
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
-
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
-
-include_spip ('inc/navigation_modules');
-include_spip('inc/association_comptabilite');
 
 function exec_dons()
 {
@@ -22,11 +17,12 @@ function exec_dons()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
+		include_spip ('inc/navigation_modules');
 		$id_don = association_passeparam_id('don');
+		list($annee, $critere_periode) = association_passeparam_annee('don', 'asso_dons', $id_don);
 		if ($id_don) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
-			$annee = sql_getfetsel("DATE_FORMAT(date_don, '%Y')",'spip_asso_dons', "id_don=$id_don"); // on recupere l'annee correspondante
+			$type = '';
 		} else { // on peut prendre en compte les filtres ; on recupere les parametres :
-			$annee = association_passeparam_annee();
  			$type = _request('type'); // type de don
 		}
 		onglets_association('titre_onglet_dons', 'dons');
@@ -34,19 +30,19 @@ function exec_dons()
 		echo association_totauxinfos_intro('','dons',$annee);
 		// TOTAUX : nombre de dons selon leur nature
 		$liste_effectifs = array(
-			'argent' => sql_countsel('spip_asso_dons', "argent<>0 AND colis='' AND  DATE_FORMAT(date_don, '%Y')='$annee' "),
-			'colis' => sql_countsel('spip_asso_dons', "argent=0 AND colis<>'' AND  DATE_FORMAT(date_don, '%Y')='$annee' ")
+			'argent' => sql_countsel('spip_asso_dons', "argent<>0 AND colis='' AND  $critere_periode"),
+			'colis' => sql_countsel('spip_asso_dons', "argent=0 AND colis<>'' AND  $critere_periode")
 		);
 		echo association_totauxinfos_effectifs('dons', array(
 			'pair' => array( 'dons_en_argent', $liste_effectifs['argent'], ),
 			'prospect' => array('dons_en_nature', $liste_effectifs['colis'], ),
-			'impair' => array('dons_mixtes', sql_countsel('spip_asso_dons', "DATE_FORMAT(date_don, '%Y')='$annee' ")-$liste_effectifs['argent']-$liste_effectifs['colis'] ),
+			'impair' => array('dons_mixtes', sql_countsel('spip_asso_dons', $critere_periode)-$liste_effectifs['argent']-$liste_effectifs['colis'] ),
 		));
 		// STATS sur les donnations de l'annee
-		echo association_totauxinfos_stats('donnations', 'dons', array('dons_en_argent'=>'argent','dons_en_nature'=>'valeur',), "DATE_FORMAT(date_don, '%Y')='$annee' ");
+		echo association_totauxinfos_stats('donnations', 'dons', array('dons_en_argent'=>'argent','dons_en_nature'=>'valeur',), $critere_periode);
 		// TOTAUX : montants des dons et remboursements financiers
-		$dons_financiers = sql_getfetsel('SUM(argent) AS somme_recettes', 'spip_asso_dons', "argent AND DATE_FORMAT(date_don, '%Y')=$annee" );
-		$remboursements = sql_getfetsel('SUM(argent) AS somme_reversees', 'spip_asso_dons', "argent AND contrepartie AND DATE_FORMAT(date_don, '%Y')=$annee" );
+		$dons_financiers = sql_getfetsel('SUM(argent) AS somme_recettes', 'spip_asso_dons', "argent AND $critere_periode" );
+		$remboursements = sql_getfetsel('SUM(argent) AS somme_reversees', 'spip_asso_dons', "argent AND contrepartie AND $critere_periode" );
 		echo association_totauxinfos_montants($annee, $dons_financiers, $remboursements);
 		// datation et raccourcis
 		raccourcis_association(array(), array(
@@ -69,7 +65,7 @@ function exec_dons()
 		$critere_type = $type?"$type AND ":'';
 		// TABLEAU
 		echo association_bloc_listehtml(
-			array("*, CASE WHEN argent<>0 AND colis='' THEN 'argent' WHEN argent=0 AND colis<>''  THEN 'colis' ELSE 'mixte' END AS type_don ", 'spip_asso_dons', "$critere_type DATE_FORMAT(date_don, '%Y')=$annee", '', 'date_don DESC'), // requete
+			array("*, CASE WHEN argent<>0 AND colis='' THEN 'argent' WHEN argent=0 AND colis<>''  THEN 'colis' ELSE 'mixte' END AS type_don ", 'spip_asso_dons', "$critere_type $critere_periode", '', 'date_don DESC'), // requete
 			array(
 				'id_don' => array('asso:entete_id', 'entier'),
 				'date_don' => array('asso:entete_date', 'date', ''),
@@ -87,6 +83,7 @@ function exec_dons()
 			'id_don', // champ portant la cle des lignes et des boutons
 			array('argent'=>'pair', 'colis'=>'prospect', 'mixte'=>'impair'), 'type_don', $id_don
 		);
+		echo association_selectionner_souspage(array('spip_asso_dons', "$critere_type $critere_periode"), 'dons', "annee=$annee".($type?"&type='$type'":'') );
 		fin_page_association();
 	}
 }
