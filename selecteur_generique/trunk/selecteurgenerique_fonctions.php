@@ -5,6 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Vérifier la présence des scripts nécessaires au sélecteur générique dans une page
  * @param string $flux Le contenu de la page
+ * @return string Retourne une liste de <script> et de <link> à insérer dans le <head> de la page
  */
 function selecteurgenerique_verifier_js($flux){
 	$contenu = "";

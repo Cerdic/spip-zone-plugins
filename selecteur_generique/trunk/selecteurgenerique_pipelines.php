@@ -222,7 +222,7 @@ function selecteurgenerique_inserer_javascript($flux) {
 		return $flux;
 
 	$js = '';
-	$js_final = '';
+	$js_final = "\n".'<script type="text/javascript">var selecteurgenerique_test_espace_prive = '.(test_espace_prive() ? 'true':'false').';</script>';
 
 	if (_request('exec') == 'articles'
 	OR _request('exec') == 'acces_restreint_edit') {
@@ -245,9 +245,7 @@ function selecteurgenerique_inserer_javascript($flux) {
 		 */
 		if(strpos($flux,'selecteur_generique_functions')===FALSE){
 			$functions = find_in_path('javascript/selecteur_generique_functions.js');
-			$js_final .= "
-<script type='text/javascript' src='$functions'></script>
-";
+			$js_final .= "\n<script type='text/javascript' src='$functions'></script>\n";
 		};
 		$js_final .= '<script type="text/javascript"><!--'
 		. "\n"

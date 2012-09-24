@@ -21,10 +21,94 @@ var selecteur_format = function(data){
 	return parsed;
 }
 
-function split_multiple(val){
-	return val.split( /;\s*/ );
+/*
+ * Découper une chaine en tableau suivant un séparateur
+ *
+ * @param string val Chaîne de caractère à découper
+ * @param string sep Chaîne considérée comme le séparateur de la liste (par défaut ";" pour garder la compatibilité)
+ * return array Retourne une liste de chaînes, sans espaces autour
+ */
+function split_multiple(val, sep){
+	if (!sep){ var sep = ';' }
+	sep = '\\s*' + sep + '\\s*';
+	//console.log(sep);
+	return val.split(new RegExp(sep));
 }
 
-function extractLast( term ) {
-	return split_multiple( term ).pop();
+/*
+ * Renvoie le dernier terme d'une liste caractérisée par un séparateur
+ *
+ * @param string list Chaîne de caractères constituée d'une liste de termes séparés par un séparateur quelconque
+ * @param string sep Chaîne considérée comme le séparateur de la liste
+ * @return string Retourne le dernier terme de la liste
+ */
+function extractLast(list, sep) {
+	return split_multiple(list, sep).pop();
 }
+
+/*
+ * Chercher et appliquer l'autocomplétion sur les champs déclarés comme tel
+ */
+(function($){
+	// Comportement par défaut lors de la sélection dans l'autocomplétion
+	var selecteurgenerique_select_callback_dist = function(event, ui){
+		// Si le champ est déclaré comme "multiple" on ne remplace que la fin
+		if ($(this).attr('multiple')){
+			// On récupère la liste des termes séparés par une VIRGULE (cas le plus courant)
+			var terms = split_multiple(this.value, ',');
+			// On supprime le terme qui était en train d'être tapé
+			terms.pop();
+			// On ajoute à la fin ce qui a été sélectionné
+			terms.push(ui.item.value);
+			// On ajoute une entrée vide pour avoir le séparateur lors de la jointure
+			terms.push("");
+			// On joint tout les termes
+			this.value = terms.join(", ");
+		}
+		// Sinon on remplace tout
+		else{
+			this.value = ui.item.value;
+		}
+		
+		return false;
+	};
+	
+	var selecteurgenerique_chercher_selecteurs = function(){
+		// chercher tous les inputs déclarés explicitement comme sélecteurs
+		var inputs = $('input[data-selecteur][autocomplete!=off]');
+		var api = 'selecteur.api/';
+		if (selecteurgenerique_test_espace_prive){ api = '../' + api; }
+	
+		inputs.each(function(){
+			// L'input en question
+			var me = $(this);
+			// Quel sélecteur appeler
+			var quoi = me.data('selecteur');
+			var select_callback = me.data('select-callback');
+			if (!select_callback){ select_callback = selecteurgenerique_select_callback_dist; }
+			
+			me
+				// appliquer l'autocomplete dessus
+				.autocomplete({
+					source: function(request, response) {
+						if (me.attr('multiple')){ var term = extractLast(request.term, ','); }
+						else { var term = request.term; }
+						//console.log('"'+term+'"');
+						$.getJSON(api+quoi, {q:term}, response);
+					},
+					delay: 300,
+					html: true,
+					select: select_callback,
+					focus: function(event, ui){
+						// prevent value inserted on focus
+						return false;
+					}
+				});
+		});
+	};
+	
+	$(function(){
+		selecteurgenerique_chercher_selecteurs();
+		onAjaxLoad(selecteurgenerique_chercher_selecteurs);
+	});
+})(jQuery);
