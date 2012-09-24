@@ -42,14 +42,14 @@ var minical = {
 		selectOtherMonths: [(#CONFIG{calendriermini/affichage_hors_mois,1}|?{true,false})]
 	},
 
-	add_tooltip: function($this,date,tooltip){
+	add_tooltip: function($this,date,id,tooltip){
 		if (!$this.tooltip)
 			$this.tooltip = {};
 		var d = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
 		if (!$this.tooltip[d])
-			$this.tooltip[d] = [];
+			$this.tooltip[d] = {};
 		tooltip = tooltip.replace(/"/g,'&quot;'); // echapper les " pour ne pas casser le html (secu, supprimer le html en amont !)
-		$this.tooltip[d].push(tooltip);
+		$this.tooltip[d][id] = tooltip;
 	},
 
 	set_events: function(me,start,end,data){
@@ -63,7 +63,7 @@ var minical = {
 				d = d[0].split("-");
 				d = new Date(d[0],d[1]-1,d[2]);
 				dates.push(d);
-				minical.add_tooltip($this,d,data[j].title);
+				minical.add_tooltip($this,d,data[j].id,data[j].title);
 
 				if(data[j].end){
 					/* prendre la plus grande date de debut entre debut a afficher et l'interval donne */
@@ -75,12 +75,12 @@ var minical = {
 					dateend = Math.min(end * 1000, d.getTime());
 					if (dateend>datebegin){
 						dates.push(d);
-						minical.add_tooltip($this,d,data[j].title);
+						minical.add_tooltip($this,d,data[j].id,data[j].title);
 						datebegin = datebegin+(3600*24*1000);
 						while(datebegin < dateend){
 							d = new Date(datebegin);
 							dates.push(d);
-							minical.add_tooltip($this,d,data[j].title);
+							minical.add_tooltip($this,d,data[j].id,data[j].title);
 							datebegin = datebegin+(3600*24*1000);
 						}
 					}
@@ -97,7 +97,12 @@ var minical = {
 		var d = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
 		var c = [true, ''];
 		if (this.tooltip && this.tooltip[d]){
-			c[2] = this.tooltip[d].join("\n");
+			var glue = '';
+			c[2] = '';
+			for (var i in this.tooltip[d]) {
+				c[2] += glue + this.tooltip[d][i];
+				glue = "\n";
+      }
 		}
 		return c;
 	},
