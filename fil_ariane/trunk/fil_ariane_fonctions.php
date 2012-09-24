@@ -9,7 +9,7 @@
  */
 
 // Si cette constante est vraie le fil d'Ariane commence par "accueil"
-if (!defined('_FIL_ARIANE_ACCUEIL')) define('_FIL_ARIANE_ACCUEIL',false);
+if (!defined('_FIL_ARIANE_ACCUEIL')) define('_FIL_ARIANE_ACCUEIL',true);
 #defined('_FIL_ARIANE_ACCUEIL') || define('_FIL_ARIANE_ACCUEIL',true);
 
 // Si cette constante est vraie le fil d'Ariane se termine par un lien
