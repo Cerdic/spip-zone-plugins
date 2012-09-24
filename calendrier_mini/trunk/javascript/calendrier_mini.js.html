@@ -48,6 +48,7 @@ var minical = {
 		var d = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
 		if (!$this.tooltip[d])
 			$this.tooltip[d] = [];
+		tooltip = tooltip.replace(/"/g,'&quot;'); // echapper les " pour ne pas casser le html (secu, supprimer le html en amont !)
 		$this.tooltip[d].push(tooltip);
 	},
 
