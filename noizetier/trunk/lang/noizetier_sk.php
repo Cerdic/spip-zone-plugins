@@ -26,12 +26,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'editer_composition' => 'Upraviť toto rozloženie',
 	'editer_composition_heritages' => 'Definovať dedičnosť',
-	'editer_compositions' => 'Riadiť rozmiestnenia modulu noiZetier',
 	'editer_configurer_page' => 'Nastaviť oriešky tejto stránky',
 	'editer_exporter_configuration' => 'Exportovať konfiguráciu',
 	'editer_importer_configuration' => 'Nahrať konfig.',
-	'editer_noizetier_compositions_explication' => 'Tu môžete vytvoriť rozmiestnenia, ktoré sa budú odlišovať len v tom, do ktorých orieškov budú pridané.',
-	'editer_noizetier_compositions_titre' => 'Rozloženia modulu noiZetier',
 	'editer_noizetier_explication' => 'Nastavte oriešky, aby ste ich mohli pridať na stránky svojho webu.', # MODIF
 	'editer_noizetier_titre' => 'Riadiť oriešky',
 	'editer_nouvelle_page' => 'Créer une nouvelle page / composition', # NEW
@@ -105,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'masquer' => 'Masquer', # NEW
+	'mode_noisettes' => 'Éditer les noisettes', # NEW
 	'modif_en_cours' => 'Modifications en cours', # NEW
 
 	// N
@@ -130,6 +128,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page' => 'Stránka',
 	'page_autonome' => 'Page autonome', # NEW
 	'probleme_droits' => 'Vous n\'avez pas les droits nécessaires pour effectuer cette modification.', # NEW
+
+	// Q
+	'quitter_mode_noisettes' => 'Quitter l\'édition des noisettes', # NEW
 
 	// R
 	'retour' => 'Retour', # NEW

@@ -26,12 +26,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'editer_composition' => 'Diese Komposition ändern',
 	'editer_composition_heritages' => 'Vererbungen einstellen',
-	'editer_compositions' => 'Kompositionen des Nussbaums verwalten',
 	'editer_configurer_page' => 'Code-Nüsse für diese Seite konfigurieren',
 	'editer_exporter_configuration' => 'Konfiguration exportieren',
 	'editer_importer_configuration' => 'Konfiguration importieren',
-	'editer_noizetier_compositions_explication' => 'Sie können hier Kompositionen anlegen, die sich nur durch die Code-Nüsse unterscheiden, die sie in sie einfügen.',
-	'editer_noizetier_compositions_titre' => 'Kompositionen des Nussbaums',
 	'editer_noizetier_explication' => 'Konfigurieren sie hier die Code-Nüsse für die Seiten ihrer Website.', # MODIF
 	'editer_noizetier_titre' => 'Nussbaum', # MODIF
 	'editer_nouvelle_page' => 'Créer une nouvelle page / composition', # NEW
@@ -105,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'masquer' => 'Masquer', # NEW
+	'mode_noisettes' => 'Éditer les noisettes', # NEW
 	'modif_en_cours' => 'Modifications en cours', # NEW
 
 	// N
@@ -130,6 +128,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page' => 'Seite',
 	'page_autonome' => 'Page autonome', # NEW
 	'probleme_droits' => 'Vous n\'avez pas les droits nécessaires pour effectuer cette modification.', # NEW
+
+	// Q
+	'quitter_mode_noisettes' => 'Quitter l\'édition des noisettes', # NEW
 
 	// R
 	'retour' => 'Retour', # NEW

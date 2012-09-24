@@ -27,13 +27,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'editer_composition' => 'اصلاح اين تركيب ',
 	'editer_composition_heritages' => 'تعريف ميراث‌ها',
-	'editer_compositions' => 'مديريت تركيب‌هاي مديرفندق‌ها (noiZetier)',
 	'editer_configurer_page' => 'پيكربندي فندق‌هاي اين صفحه',
 	'editer_exporter_configuration' => 'صادرسازي پيكربندي ',
 	'editer_importer_configuration' => 'واردسازي يك پيكربندي.',
-	'editer_noizetier_compositions_explication' => 'اينجا مي‌توانيد تركيب‌هايي را ايجاد كنيد كه فقط در فندق‌هاي اضافه شده فرق داشته باشند.
-',
-	'editer_noizetier_compositions_titre' => 'تركيب‌هاي فندقي (noiZetier)',
 	'editer_noizetier_explication' => 'پيكربندي فندق‌ها براي افزودن به صفحه‌هاي سايت شما.', # MODIF
 	'editer_noizetier_titre' => 'مديريت فندق‌ها',
 	'editer_nouvelle_page' => 'Créer une nouvelle page / composition', # NEW
@@ -110,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'masquer' => 'Masquer', # NEW
+	'mode_noisettes' => 'Éditer les noisettes', # NEW
 	'modif_en_cours' => 'Modifications en cours', # NEW
 
 	// N
@@ -135,6 +132,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page' => 'صفحه',
 	'page_autonome' => 'Page autonome', # NEW
 	'probleme_droits' => 'Vous n\'avez pas les droits nécessaires pour effectuer cette modification.', # NEW
+
+	// Q
+	'quitter_mode_noisettes' => 'Quitter l\'édition des noisettes', # NEW
 
 	// R
 	'retour' => 'Retour', # NEW

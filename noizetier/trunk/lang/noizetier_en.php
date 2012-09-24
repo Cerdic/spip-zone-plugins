@@ -8,10 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'apercu' => 'Aperçu', # NEW
+	'apercu' => 'Preview',
 
 	// B
-	'bloc_sans_noisette' => 'Ce bloc ne contient pas de noisette.', # NEW
+	'bloc_sans_noisette' => 'This block doesn\'t contain nuts.',
 
 	// C
 	'choisir_noisette' => 'Choose the nut you want to add:',
@@ -26,19 +26,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'editer_composition' => 'Edit this composition',
 	'editer_composition_heritages' => 'Define heritages',
-	'editer_compositions' => 'Manage the compositions of the Nuts Manager',
 	'editer_configurer_page' => 'Configure the nuts of this page',
 	'editer_exporter_configuration' => 'Export the configuration',
 	'editer_importer_configuration' => 'Import a configuration.',
-	'editer_noizetier_compositions_explication' => 'You can create here some compositions that only differ by the added nuts.',
-	'editer_noizetier_compositions_titre' => 'Compositions of the Nuts Manager',
-	'editer_noizetier_explication' => 'Configure here the nuts to add to your pages.', # MODIF
+	'editer_noizetier_explication' => 'Select the page where you want to configure the nuts.',
 	'editer_noizetier_titre' => 'Manage the nuts',
-	'editer_nouvelle_page' => 'Créer une nouvelle page / composition', # NEW
-	'erreur_aucune_noisette_selectionnee' => 'Vous devez sélectionner une noisette !', # NEW
+	'editer_nouvelle_page' => 'Create a new page / composition',
+	'erreur_aucune_noisette_selectionnee' => 'You must select a nut!',
 	'erreur_doit_choisir_noisette' => 'You have to choose a nut.',
 	'erreur_mise_a_jour' => 'An error occurred while updating the database.',
-	'explication_glisser_deposer' => 'Vous pouvez ajouter une noisette ou les réordonner par simple glisser/déposer.', # NEW
+	'explication_glisser_deposer' => 'You can add a nut or order them by drag and drop.',
 	'explication_heritages_composition' => 'Here you can set the compositions that will be inherited by the objects of the branch.',
 	'explication_noizetier_css' => 'You can add some additional CSS classes to the nut.',
 	'explication_raccourcis_typo' => 'You can use the SPIP typographical shortcuts.',
@@ -46,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'formulaire_ajouter_noisette' => 'Add a nut',
 	'formulaire_composition' => 'Identifier of composition',
-	'formulaire_composition_explication' => 'Specify a unique keyword (lowercase, no spaces, no dashes (-) and without accents) to identify the composition. <br />For example: <i>mycompo</i>.', # MODIF
+	'formulaire_composition_explication' => 'Specify a unique keyword (lowercase, no spaces, no dashes (-) and without accents) to identify the composition. <br />For example: <i>mycompo</i>.',
 	'formulaire_composition_mise_a_jour' => 'Composition updated',
 	'formulaire_configurer_bloc' => 'Configure the block:',
 	'formulaire_configurer_page' => 'Configure the page:',
@@ -56,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_description_explication' => 'You can use SPIP usual shortcuts, especially the &lt;multi&gt; tag.',
 	'formulaire_erreur_format_identifiant' => 'The identifier can only contain lowercase letters without accents, numbers and the "_" (underscore) character.',
 	'formulaire_icon' => 'Icon',
-	'formulaire_icon_explication' => 'You can enter the relative path to an icon (eg <i>images/list-item-contenus.png</i>). To see a list of images installed in the most common directories, you can visit this <a href="../spip.php?page=icones_preview">page</a>.', # MODIF
+	'formulaire_icon_explication' => 'You can enter the relative path to an icon (for example : <i>images/list-item-contenus.png</i>).',
 	'formulaire_identifiant_deja_pris' => 'This identifier already exists!',
 	'formulaire_import_compos' => 'Import the compositions of the Nuts Manager',
 	'formulaire_import_fusion' => 'Merge with the current configuration',
@@ -65,9 +62,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_liste_pages_config' => 'This configuration file defines
 nuts on the following pages:',
 	'formulaire_modifier_composition' => 'Edit this composition:',
-	'formulaire_modifier_composition_heritages' => 'Edit the heritages of this composition:', # MODIF
+	'formulaire_modifier_composition_heritages' => 'Edit the heritages',
 	'formulaire_modifier_noisette' => 'Edit this nut',
-	'formulaire_modifier_page' => 'Modifier cette page', # NEW
+	'formulaire_modifier_page' => 'Edit this page',
 	'formulaire_noisette_sans_parametre' => 'This nut has no parameters.',
 	'formulaire_nom' => 'Title',
 	'formulaire_nom_explication' => 'You can use the &lt;multi&gt; tag.',
@@ -75,14 +72,14 @@ nuts on the following pages:',
 	'formulaire_obligatoire' => 'Required field',
 	'formulaire_supprimer_noisette' => 'Delete this nuts',
 	'formulaire_supprimer_noisettes_page' => 'Delete the nuts of this page',
-	'formulaire_supprimer_page' => 'Supprimer cette page', # NEW
-	'formulaire_type' => 'Composition type', # MODIF
-	'formulaire_type_explication' => 'Indicate on which object/page does this composition apply.', # MODIF
+	'formulaire_supprimer_page' => 'Delete this page',
+	'formulaire_type' => 'Page type',
+	'formulaire_type_explication' => 'Indicate on which object does this composition apply or if you wish to create a specific page.',
 	'formulaire_type_import' => 'Import type',
 	'formulaire_type_import_explication' => 'You can merge the configuration file with your actual configuration (the nuts of each page will be added to your already defined nuts) or you can replace your configuration by this one.',
 
 	// I
-	'icone_introuvable' => 'Icône introuvable !', # NEW
+	'icone_introuvable' => 'Icon not found!',
 	'ieconfig_ne_pas_importer' => 'Do not import',
 	'ieconfig_noizetier_export_explication' => 'Will export the configuration of the nuts and compositions of the Nuts Manager.',
 	'ieconfig_noizetier_export_option' => 'Included in the export?',
@@ -102,17 +99,18 @@ nuts on the following pages:',
 	'label_titre_noisette' => 'Title of the nut:',
 	'label_titre_noisette_perso' => 'Custom title:',
 	'liste_icones' => 'Icons list',
-	'liste_pages' => 'Liste des pages', # NEW
+	'liste_pages' => 'List of the pages',
 
 	// M
-	'masquer' => 'Masquer', # NEW
-	'modif_en_cours' => 'Modifications en cours', # NEW
+	'masquer' => 'Hide',
+	'mode_noisettes' => 'Éditer les noisettes', # NEW
+	'modif_en_cours' => 'Ongoing changes',
 
 	// N
 	'ne_pas_definir_d_heritage' => 'Do not define heritage',
-	'noisette_numero' => 'noisette numéro :', # NEW
+	'noisette_numero' => 'nut number :',
 	'noisettes_composition' => 'Specific nuts to the composition <i>@composition@</i>:',
-	'noisettes_disponibles' => 'Noisettes disponibles', # NEW
+	'noisettes_disponibles' => 'Nuts available',
 	'noisettes_page' => 'Specific nuts to the page <i>@type@</i>:',
 	'noisettes_toutes_pages' => 'Common nuts to all pages:',
 	'noizetier' => 'Nuts Manager',
@@ -124,19 +122,22 @@ nuts on the following pages:',
 	'notice_enregistrer_rang' => 'Clic on Save to store the nuts order.',
 
 	// O
-	'operation_annulee' => 'Opération annulée.', # NEW
+	'operation_annulee' => 'Operation canceled.',
 	'oui' => 'Yes',
 
 	// P
 	'page' => 'Page',
-	'page_autonome' => 'Page autonome', # NEW
-	'probleme_droits' => 'Vous n\'avez pas les droits nécessaires pour effectuer cette modification.', # NEW
+	'page_autonome' => 'Specific page',
+	'probleme_droits' => 'You don\'t have the permission to make this change.',
+
+	// Q
+	'quitter_mode_noisettes' => 'Quitter l\'édition des noisettes', # NEW
 
 	// R
-	'retour' => 'Retour', # NEW
+	'retour' => 'Back',
 
 	// S
-	'suggestions' => 'Suggestions', # NEW
+	'suggestions' => 'Suggestions',
 
 	// W
 	'warning_noisette_plus_disponible' => 'WARNING: this nut is no longer available.',
