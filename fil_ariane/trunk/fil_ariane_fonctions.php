@@ -9,8 +9,11 @@
  */
 
 // Si cette constante est vraie le fil d'Ariane commence par "accueil"
-if (!defined('_FIL_ARIANE_ACCUEIL')) define('_FIL_ARIANE_ACCUEIL',true);
+if (!defined('_FIL_ARIANE_ACCUEIL')) define('_FIL_ARIANE_ACCUEIL',false);
 #defined('_FIL_ARIANE_ACCUEIL') || define('_FIL_ARIANE_ACCUEIL',true);
+
+// Si cette constante est vraie le fil d'Ariane se termine par un lien
+if (!defined('_FIL_ARIANE_LIEN')) define('_FIL_ARIANE_LIEN',false);
 
 /***
  * Balise #FIL_ARIANE
@@ -77,15 +80,32 @@ function construire_FIL_ARIANE($fil){
         return '';
     }
 
-    // si on doit tracer le 1er item, on l'ajoute au début du tableau
-    if (_FIL_ARIANE_ACCUEIL) $fil = array(_T('public:accueil_site') => $GLOBALS['meta']['adresse_site']) + $fil;
+    // si on doit tracer le 1er élément, on l'ajoute au début du tableau
+    if (_FIL_ARIANE_ACCUEIL)
+        $fil = array(_T('public:accueil_site') => $GLOBALS['meta']['adresse_site']) + $fil;
+
 
     $nb= count($fil);
     $passe=0;
 
     foreach($fil as $titre => $lien) {
-        if($passe>0) $fil_ariane.=" &gt; ";
-        $fil_ariane.= "<a". (($passe == $nb-1)?' class="on"':'') ." href='$lien'>$titre</a>";
+
+        // si on a déja tracé un élément, mais qu'on est pas encore arrivé au dernier
+        if($passe>0)
+            $fil_ariane.=" &gt; ";
+
+        // tant qu'on est pas encore arrivé au dernier élément
+        if($passe<$nb-1)
+            $fil_ariane.= "<a href='$lien'>$titre</a>";
+
+        // si on arrive au dernier
+        elseif ($passe >= $nb-1) {
+            if (_FIL_ARIANE_LIEN)
+                $fil_ariane.= "<a class='on' href='$lien'>$titre</a>";
+            else
+                $fil_ariane.= "<span class='on'>$titre</span>";
+        }
+
         $passe++;
     }
 
