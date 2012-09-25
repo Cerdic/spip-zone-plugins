@@ -87,7 +87,7 @@ function extractLast(list, sep) {
 			// Quel sélecteur appeler
 			var quoi = me.data('selecteur');
 			var select_callback = me.data('select-callback');
-			if (!select_callback){ select_callback = selecteurgenerique_select_callback_dist; }
+			if (typeof(select_callback) != 'function' && typeof(select_callback) != 'string'){ select_callback = selecteurgenerique_select_callback_dist; }
 			
 			me
 				// appliquer l'autocomplete dessus
@@ -100,7 +100,7 @@ function extractLast(list, sep) {
 					},
 					delay: 300,
 					html: true,
-					select: select_callback,
+					select: eval(select_callback),
 					focus: function(event, ui){
 						// prevent value inserted on focus
 						return false;
