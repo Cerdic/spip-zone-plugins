@@ -75,7 +75,8 @@ function formulaires_migrer_agenda_verifier_dist(){
 
 
 function formulaires_migrer_agenda_traiter_dist(){
-	$where_articles = migrer_agenda_where_articles(_request('id_parent'),_request('toute_la_branche'));
+	$id_rubrique = _request('id_parent');
+	$where_articles = migrer_agenda_where_articles($id_rubrique,_request('toute_la_branche'));
 	$groupes = _request('groupes_mots');
 	if (!$groupes)
 		$groupes = array();
@@ -85,7 +86,11 @@ function formulaires_migrer_agenda_traiter_dist(){
 	$champ_date_debut = _request('champ_date_debut');
 	$champ_date_fin = _request('champ_date_fin');
 
+	// poser le flag agenda sur la rubrique !
+	sql_updateq("spip_rubriques",array('agenda'=>1),'id_rubrique='.intval($id_rubrique));
+	// et migrer les articles
 	$nb = migrer_articles($where_articles,$champ_date_debut,$champ_date_fin,$horaire,$where_mots);
+
 	$message = _T('migreragenda:info_migration_articles_reussi')." ";
 	$message .= sinon(singulier_ou_pluriel($nb,'info_1_article','info_nb_articles'),_T('info_aucun_article'));
 
