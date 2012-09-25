@@ -5,13 +5,13 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="prive/themes/spip/images/ieconfig-32.png"
-	documentation="http://www.spip-contrib.net/spip.php?article3703"
+	documentation="http://contrib.spip.net/spip.php?article3703"
 >
 
 	<nom>Import-Export</nom>
 	<!-- Importer, exporter des configurations de plugins -->
 
-	<auteur lien="http://www.spip-contrib.net/Joseph">Joseph</auteur>
+	<auteur lien="http://contrib.spip.net/Joseph">Joseph</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
