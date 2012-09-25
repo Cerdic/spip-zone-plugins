@@ -42,7 +42,7 @@ function formulaires_editer_album_charger_dist($id_album='new', $retour='', $ass
  * Verifier les champs postes et signaler d'eventuelles erreurs
  */
 function formulaires_editer_album_verifier_dist($id_album='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	return formulaires_editer_objet_verifier('album',$id_album);
+	return formulaires_editer_objet_verifier('album',$id_album,intval($id_album)?array('titre'):array());
 }
 
 /**
@@ -50,6 +50,11 @@ function formulaires_editer_album_verifier_dist($id_album='new', $retour='', $as
  */
 function formulaires_editer_album_traiter_dist($id_album='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$res = formulaires_editer_objet_traiter('album',$id_album,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+
+	// peupler le titre a posteriori si vide lors de la creation (creation rapide d'un album)
+	if (!intval($id_album='new') AND !_request('titre') AND $res['id_album']){
+		objet_modifier("album",$res['id_album'],array('titre' => _T('album:info_nouvel_album')." "._T('info_numero_abbreviation').$res['id_album']));
+	}
 
 	// Un lien a prendre en compte ?
 	if ($associer_objet AND $id_album = $res['id_album']) {

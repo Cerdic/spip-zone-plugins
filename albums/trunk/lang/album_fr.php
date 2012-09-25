@@ -70,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_dans_objet'			=> "dans des",
 	'info_association'			=> "Associé à",
 	'info_auteur'				=> "Vous êtes l'auteur",
+	'info_nouvel_album' => 'Nouvel album',
 	'info_recherche_album_zero'		=> "Aucun résultat pour « @cherche_album@ »",
 	'info_resultat_recherche_aucun'		=> 'Aucun résultat',
 	'info_resultat_recherche_un'		=> '1 résultat',
