@@ -68,8 +68,6 @@ function filtre_definitions_dist($texte) {
  * Remplace la trouvaille par une description avec sa définition.
  * Et on ne le fait qu'au moment de la première occurence, lorsque
  * c'est configuré comme tel.
- * 
- * @pipeline post_edition 
  *
  * @param string $captures Terme trouvé
  * @return string          HTML du terme et de sa définition
