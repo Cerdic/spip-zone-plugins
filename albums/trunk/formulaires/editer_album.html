@@ -15,16 +15,17 @@
 		<input type='hidden' name='id_album' value='#ENV{id_album}' />
 		[<input type='hidden' name='statut' value='(#ENV{statut})' />]
 		<ul>
-
-			[(#SAISIE{input, titre, 
-				label=<:album:label_titre:>, 
-				obligatoire=oui,
-				defaut=#ENV{titre_defaut}})]
+			#SET{name,titre}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:info_titre:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" placeholder="<:album:info_nouvel_album|attribut_html:>" />
+			</li>
 
 			[(#REM) Descriptif ]
 			[(#CONFIG{albums/afficher_champ_descriptif}|oui)
 				[(#SAISIE{textarea, descriptif, 
-				label=<:album:label_descriptif:>, 
+				label=<:texte_descriptif_rapide:>,
 				rows=4,
 				inserer_barre=''})]
 			]
