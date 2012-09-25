@@ -10,6 +10,42 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
+ * #URL_EVENEMENT envoie sur la page de l'evenement
+ * ou sur la page de l'article avec un &id_evenement=xxx
+ * selon la configuration de l'agenda
+ *
+ * @param object $p
+ * @return object
+ */
+function balise_URL_EVENEMENT_dist($p) {
+
+	include_spip("inc/config");
+	include_spip("balise/url_");
+
+	if (lire_config("agenda/url_evenement",'evenement')!=='article'){
+		$code = generer_generer_url('evenement', $p);
+	}
+	else {
+		$_ide = interprete_argument_balise(1,$p);
+		if (!$_ide)
+			$_ide = champ_sql('id_evenement', $p);
+		$_ida = "generer_info_entite($_ide,'evenement','id_article')";
+
+		$code = generer_generer_url_arg('article', $p, $_ida);
+		$code = "parametre_url($code,'id_evenement',$_ide,'&')";
+	}
+
+	$code = champ_sql('url_evenement', $p, $code);
+	$p->code = $code;
+	if (!$p->etoile)
+		$p->code = "vider_url($code)";
+	$p->interdire_scripts = false;
+
+	return $p;
+}
+
+
+/**
  * fonction sous jacente pour les 3 criteres
  * fusion_par_jour, fusion_par_mois, fusion_par_annee
  * 

@@ -10,6 +10,24 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
+ * Inserer la CSS de l'agenda si config cochee
+ * forcee par define('_AGENDA_INSERT_HEAD_CSS',false|true) par le squelette si besoin
+ *
+ * @param $flux
+ * @return mixed
+ */
+function agenda_insert_head_css($flux){
+	if (!defined('_AGENDA_INSERT_HEAD_CSS') OR !_AGENDA_INSERT_HEAD_CSS){
+		include_spip("inc/config");
+		$cfg = (defined('_AGENDA_INSERT_HEAD_CSS')?_AGENDA_INSERT_HEAD_CSS:lire_config("agenda/insert_head_css"));
+		if ($cfg){
+			$flux['data'] .= '<link rel="stylesheet" href="'.find_in_path("css/spip.agenda.css").'" />';
+		}
+	}
+	return $flux;
+}
+
+/**
  * Inserer les infos d'agenda sur les articles et rubriques
  *
  * @param array $flux

@@ -5,7 +5,7 @@
   Distribue sous licence GPL
 
 ]
-<h1>[(#CONFIG{agenda/titre, <:agenda:agenda:>}|entites_html)]</h1>
+<h1>[(#CONFIG{agenda/titre}|sinon{<:agenda:titre_sur_l_agenda:>}|entites_html)]</h1>
 [<div class="description">(#CONFIG{agenda/descriptif}|propre)</div>]
 
 #SET{periode,#CONFIG{agenda/periode,12}}
@@ -50,5 +50,3 @@
 		|inserer_attribut{rel,next}
 		)</span>]
 </p>
-
-</div>
