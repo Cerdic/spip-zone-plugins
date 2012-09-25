@@ -1,7 +1,7 @@
 <paquet
 	prefix="etiquettes"
 	categorie="navigation"
-	version="2.0.4"
+	version="2.1.0"
 	etat="test"
 	compatibilite="[3.0.0-beta;3.0.*]"
 	logo="images/etiquettes.png"
@@ -17,4 +17,7 @@
 
 	<pipeline nom="insert_head" inclure="etiquettes_pipelines.php" />
 	<pipeline nom="autoriser" inclure="inc/etiquettes_autoriser.php" />
+	
+	<utilise nom="selecteurgenerique" version="[0.8.0;]" />
+	<utilise nom="nuage" />
 </paquet>

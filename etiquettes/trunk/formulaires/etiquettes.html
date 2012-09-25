@@ -1,10 +1,10 @@
 [(#REM) S'il y a proposition du login, il y a donc erreur d'autorisation et on affiche erreur et login]
-[(#ENV*{proposer_login}|?{' '})
+[(#ENV*{proposer_login}|oui)
 <div class="formulaire_spip formulaire_etiquettes"  id="form_etiquettes_#ENV{identifiant}">
 	[<p class="reponse_formulaire reponse_formulaire_erreur">
 		(#ENV*{message_erreur})
 		[(#REM) Si la personne est déjà connectée mais avec un compte non-autorisé, on propose la déconnexion]
-		[(#SESSION{id_auteur}|?{' ',''})
+		[(#SESSION{id_auteur}|oui)
 			<br /><a href="#URL_LOGOUT"><:etiquettes:se_deconnecter:></a>
 		]
 	</p>]
@@ -13,10 +13,10 @@
 ]
 
 [(#REM) S'il n'y a pas d'erreur d'autorisation on affiche le formulaire ]
-[(#ENV*{erreur_autorisation}|?{'',' '})
+[(#ENV*{erreur_autorisation}|non)
 
 [(#REM) Si on ne veut pas que le champ ]
-[(#ENV*{uniquement_champ}|?{'', ' '})
+[(#ENV*{uniquement_champ}|non)
 <div class="formulaire_spip formulaire_etiquettes"  id="form_etiquettes_#ENV{identifiant}">
 	
 	[<p class="reponse_formulaire reponse_formulaire_erreur">
@@ -38,11 +38,12 @@
 					id="#ENV{name}"
 					name="#ENV{name}"
 					value="#ENV*{#ENV{name}}"
+					[(#ENV{aide_autocompletion}|?{data-selecteur="[(#VAL{etiquettes}|parametre_url{groupe,#ENV{groupe}})]" multiple="multiple"})]
 					[(#ENV{aide_liste}|?{style="display:none;"})]
 				/>
 				[<div class="explication">(#ENV{explication}|htmlspecialchars_decode)</div>]
 [(#REM) Si on ne veut pas que le champ ]
-[(#ENV*{uniquement_champ}|?{'', ' '})
+[(#ENV*{uniquement_champ}|non)
 			</li>
 			</ul>
 ]
@@ -63,35 +64,21 @@
 			// -->
 			</script>
 			
-			[(#ENV{aide_autocompletion}|?{' '})
-				<script  type="text/javascript">
-				<!--
-				var appliquer_selecteur_#ENV{identifiant} = function(){
-					appliquer_selecteur_cherche_mot(
-						'##ENV{name}',
-						'[(#URL_PAGE{etiquettes_selecteur}|parametre_url{groupe,#ENV{groupe},"&"})]'
-					);
-				}
-				jQuery(document).ready(appliquer_selecteur_#ENV{identifiant});
-				// -->
-				</script>
-			]
-			
-			[(#ENV{aide_nuage}|?{' '})
+			[(#ENV{aide_nuage}|oui)
 				<INCLURE{fond=fonds/#ENV{squelette_nuage}}{type=#ENV{groupe}}{type_objet}{id_objet}{identifiant}{name}>
 			]
 			
-			[(#ENV{aide_liste}|?{' '})
+			[(#ENV{aide_liste}|oui)
 				<INCLURE{fond=fonds/etiquettes_aide_liste}{type=#ENV{groupe}}{type_objet}{id_objet}{identifiant}{name}>
 			]
 			
-			[(#ENV{aide_select}|?{' '})
+			[(#ENV{aide_select}|oui)
 				<INCLURE{fond=fonds/etiquettes_aide_liste}{type=#ENV{groupe}}{type_objet}{id_objet}{identifiant}{name}>
 			]
 
 
 [(#REM) Si on ne veut pas que le champ ]
-[(#ENV*{uniquement_champ}|?{'', ' '})			
+[(#ENV*{uniquement_champ}|non)			
 			<p class="boutons">
 				<input type="submit" class="submit"
 					name="valider_etiquettes_#ENV{identifiant}"

@@ -56,12 +56,12 @@ function formulaires_etiquettes_charger_dist($groupe, $id_groupe, $name, $aide_n
 			// On récupère les titres des mots mais seulement ceux du bon groupe
 			$mots = sql_allfetsel('titre','spip_mots',array(sql_in('id_mot',$mots), 'id_groupe = '.$id_groupe));
 			foreach ($mots as $mot){
-				// S'il y a des espaces ou virgules on entoure de guillemets
-				if (strcspn($mot['titre'], ' ,"')!=strlen($mot['titre']))
-					$etiquettes .= ' "' . entites_html($mot['titre']) . '"';
+				// S'il y a des virgules on entoure de guillemets
+				if (strcspn($mot['titre'], ',"')!=strlen($mot['titre']))
+					$etiquettes .= ' "' . entites_html($mot['titre']) . '"' . ', ';
 				// Sinon on renvoie tel quel
 				else
-					$etiquettes .= " " . entites_html($mot['titre']);
+					$etiquettes .= ' ' . entites_html($mot['titre']) . ', ';
 				// Enfin en vire les éventuels espaces en trop
 				$etiquettes = trim($etiquettes);
 
@@ -79,15 +79,6 @@ function formulaires_etiquettes_charger_dist($groupe, $id_groupe, $name, $aide_n
 
 		return $valeurs;
 	}
-
-}
-
-function formulaires_etiquettes_verifier_dist($groupe, $id_groupe, $name, $aide_nuage, $aide_ajax, $aide_liste, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login, $uniquement_champ, $explication, $squelette_nuage, $label)
-{
-
-	$erreurs = array();
-
-	return $erreurs;
 
 }
 

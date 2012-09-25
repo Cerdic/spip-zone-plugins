@@ -474,13 +474,13 @@ class ListeTags {
 		$liste_tags = strtr($liste_tags, "\t", " ");
 		
 		// doubler les caracteres qui peuvent faire office de separateur
-		$liste_tags = ' '.preg_replace('/[[:space:],]/', '\\0\\0', $liste_tags).' ';
+		$liste_tags = ','.str_replace(',', ',,', $liste_tags).',';
 		
 		// trouver les tags et les separer par \t
-		$liste_tags = preg_replace('/[[:space:],]+("?)(.*?)\\1[[:space:],]/', "\t\\2", $liste_tags);
+		$liste_tags = preg_replace('/\s*,\s*("?)(.*?)\\1\s*,\s*/', "\t\\2", $liste_tags);
 		
 		// remettre les caracteres doubles en simple
-		$liste_tags = preg_replace('/([[:space:],])\\1/', '\\1', $liste_tags);
+		$liste_tags = str_replace(',,', ',', $liste_tags);
 		
 		// exploser selon les tab
 		$tags = explode("\t", substr($liste_tags,1));
