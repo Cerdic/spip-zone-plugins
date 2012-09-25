@@ -77,7 +77,9 @@ function extractLast(list, sep) {
 		// chercher tous les inputs déclarés explicitement comme sélecteurs
 		var inputs = $('input[data-selecteur][autocomplete!=off]');
 		var api = 'selecteur.api/';
-		if (selecteurgenerique_test_espace_prive){ api = '../' + api; }
+		if (typeof(selecteurgenerique_test_espace_prive) != 'undefined'){
+			api = '../' + api;
+		}
 	
 		inputs.each(function(){
 			// L'input en question
