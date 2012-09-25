@@ -18,6 +18,6 @@
 	<pipeline nom="insert_head" inclure="etiquettes_pipelines.php" />
 	<pipeline nom="autoriser" inclure="inc/etiquettes_autoriser.php" />
 	
-	<utilise nom="selecteurgenerique" version="[0.8.0;]" />
+	<utilise nom="selecteurgenerique" />
 	<utilise nom="nuage" />
 </paquet>
