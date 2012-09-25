@@ -65,6 +65,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_evenement' => 'Modifier l\'événement',
 	'indiquez_votre_choix' => 'Indiquez votre choix',
 	'info_1_place' => '1 place',
+	'info_1_mois' => '1 mois',
+	'info_nb_mois' => '@nb@ mois',
 	'info_aucun_evenement' => 'Aucun événement',
 	'info_evenement' => 'Événement',
 	'info_evenement_poubelle' => 'Événement supprimé',
@@ -87,7 +89,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscrits' => 'Inscriptions',
 
 	// L
+	'label_annee' => 'Année',
 	'label_inscription' => 'Inscription en ligne',
+	'label_periode_saison' => 'Saison',
 	'label_places' => 'Limiter le nombre de places',
 	'label_reponse_jyparticipe' => 'J\'y serai',
 	'label_reponse_jyparticipe_pas' => 'Je n\'y vais pas',
@@ -136,6 +140,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_cadre_ajouter_evenement' => 'Ajouter un événement',
 	'titre_cadre_modifier_evenement' => 'Modifier un événement',
 	'titre_sur_l_agenda' => 'Sur l\'agenda',
+	'titre_sur_l_agenda_aussi' => 'Et aussi...',
 	'toutes_rubriques' => 'Toutes',
 
 	// U

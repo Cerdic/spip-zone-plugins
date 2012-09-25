@@ -1,0 +1,55 @@
+[(#REM)
+/**
+ * Plugin Agenda 4 pour Spip 3.0
+ * Licence GPL 3
+ *
+ * 2006-2011
+ * Auteurs : cf paquet.xml
+ */
+]
+#SET{affichage_duree,#ENV{affichage_duree,#CONFIG{agenda/affichage_duree,12}}}
+#SET{affichage_debut,#CONFIG{agenda/affichage_debut,#ENV{affichage_debut,date_jour}}}
+#SET{date_debut,#ENV{date_debut,#ENV{date}}|agenda_date_debut_liste{#GET{affichage_debut}}}
+#SET{date_prev,#ENV{date_debut,#ENV{date}}|agenda_moisdecal{#GET{affichage_duree}|mult{-1},'Y-m-d H:i:00'}}
+#SET{date_fin,#ENV{date_debut,#ENV{date}}|agenda_moisdecal{#GET{affichage_duree},'Y-m-d H:i:00'}}
+
+[(#REM) Ne pas afficher l'annee de depart, elle est dans le h2)]
+[(#GET{date_debut}|annee|unique{annee}|non)]
+<div id="agenda-liste">
+<h2>[(#GET{date_debut}|affdate_periode{#GET{affichage_duree},#GET{affichage_debut}})]</h2>
+<B_ev>
+	<ul class="liste-items evenements">
+	<BOUCLE_ev(EVENEMENTS){!evenement_passe #GET{date_debut}}{!evenement_a_venir #GET{date_fin}}{par date_debut}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>
+		[<li class="item month[(#DATE_DEBUT|agenda_date_passee)fini]">(#GET{affichage_duree}|>{1}?{[(#DATE_DEBUT|nom_mois|unique{mois})[ (#DATE_DEBUT|annee|unique{annee})]]})</li>]
+		<li class="item evenement[(#DATE_FIN|agenda_date_passee)fini]">
+			#MODELE{evenement_vevent}
+		</li>
+	</BOUCLE_ev>
+	</ul>
+</B_ev>
+	<p><:agenda:info_aucun_evenement:></p>
+<//B_ev>
+
+<p class="pagination">
+	#SET{sep,' | '}
+	#SET{hasprev,''}
+	<BOUCLE_prev(EVENEMENTS){!evenement_a_venir #GET{date_debut}}{0,1}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>#SET{hasprev,1}</BOUCLE_prev>
+	[<span
+		class="prev[(#GET{hasprev}|non)disabled]">(#SELF
+		|parametre_url{date_debut,#GET{date_prev}|affdate{Y-m-d}}
+		|ancre_url{agenda-liste}
+		|lien_ou_expose{[&larr; (#ENV{label_precedent,#GET{date_prev}|affdate_periode{#GET{affichage_duree}}})],[(#GET{hasprev}|non)],'lien_pagination','',nofollow}
+		|inserer_attribut{rel,prev}
+		)[<span
+		class='sep'>(#GET*{sep})</span>]</span>]
+	#SET{hasnext,''}
+	<BOUCLE_next(EVENEMENTS){!evenement_passe #GET{date_fin}}{0,1}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>#SET{hasnext,1}</BOUCLE_next>
+	[<span
+		class="next[(#GET{hasnext}|non)disabled]">(#SELF
+		|parametre_url{date_debut,#GET{date_fin}|affdate{Y-m-d}}
+		|ancre_url{agenda-liste}
+		|lien_ou_expose{[(#ENV{label_suivant,#GET{date_fin}|affdate_periode{#GET{affichage_duree}}}) &rarr;],[(#GET{hasnext}|non)],'lien_pagination','',nofollow}
+		|inserer_attribut{rel,next}
+		)</span>]
+</p>
+</div>

@@ -1,16 +1,25 @@
 [(#REM)
-
-  Squelette pour affichage de la liste des evenements d'une journee
-  (c) 2012 xxx
-  Distribue sous licence GPL
-
+/**
+ * Plugin Agenda 4 pour Spip 3.0
+ * Licence GPL 3
+ *
+ * 2006-2011
+ * Auteurs : cf paquet.xml
+ */
 ]
 #SET{date_debut,#ENV{date_debut,#ENV{date}}|affdate{Y-m-d 00:00:00}}
 #SET{date_fin,#ENV{date_debut,#ENV{date}}|affdate{Y-m-d 23:59:59}}
 
-<h1><:agenda:titre_sur_l_agenda:>&nbsp;: [(#GET{date_debut}|affdate)]</h1>
+<div class="content-principal">
+
+	<div class="cartouche">
+		<h1 class="h1"><:agenda:titre_sur_l_agenda:></h1>
+	</div>
+
+</div>
+
 <B_ev>
-	[<h2>(#TOTAL_BOUCLE|singulier_ou_pluriel{agenda:info_un_evenement,agenda:info_nombre_evenements})</h2>]
+	[<h2>[(#GET{date_debut}|affdate)]&nbsp;: (#TOTAL_BOUCLE|singulier_ou_pluriel{agenda:info_un_evenement,agenda:info_nombre_evenements})</h2>]
 	<ul class="liste-items evenements">
 	<BOUCLE_ev(EVENEMENTS){!evenement_passe #GET{date_debut}}{!evenement_a_venir #GET{date_fin}}{par date_debut}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>
 		[(#TOTAL_BOUCLE|>{0}|sinon_interdire_acces{#URL_EVENEMENT})]

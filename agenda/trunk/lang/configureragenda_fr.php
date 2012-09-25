@@ -13,6 +13,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_url_evenement' => 'Affichage d\'un événement',
 	'label_url_evenement_article' => 'sur la page de l\'article associé',
 	'label_url_evenement_evenement' => 'sur une page dédiée pour chaque événement',
+	'label_affichage_duree' => 'Lister les événements sur',
+	'label_affichage_debut' => 'Début de la liste',
+	'label_affichage_debut_date_jour' => 'Date du jour',
+	'label_affichage_debut_date_veille' => 'Date de la veille',
+	'label_affichage_debut_debut_semaine' => 'Début de la semaine',
+	'label_affichage_debut_debut_semaine_prec' => 'Début de la semaine précédente',
+	'label_affichage_debut_debut_mois' => 'Début du mois',
+	'label_affichage_debut_debut_mois_prec' => 'Début du mois précédent',
+	'label_affichage_debut_debut_mois_1' => 'Début d\'année',
+	'label_affichage_debut_mois_passe' => '@mois@ précédent',
+
+	'legend_presentation_agenda' => 'Présentation de l\'agenda',
 );
 
 ?>

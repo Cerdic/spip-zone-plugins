@@ -111,22 +111,79 @@ function agenda_date_passee($date_test,$date_ref=null){
 }
 
 /**
+ * Determiner la date de debut de l'affichage de la liste des evenements
+ * en fonction du mode demande et de la date courante
+ * @param string $date
+ * @param string $affichage_debut
+ * @return string
+ */
+function agenda_date_debut_liste($date,$affichage_debut='date_jour'){
+	switch($affichage_debut){
+		case 'date_jour' :
+			break;
+		case 'date_veille' :
+			$date = agenda_jourdecal($date, -1);
+			break;
+		case 'debut_semaine' :
+			$t = strtotime($date);
+			$date = agenda_jourdecal($date, -(date('N', $t)-1));
+			break;
+		case 'debut_semaine_prec' :
+			$t = strtotime($date);
+			$date = agenda_jourdecal($date, -(date('N', $t)-1+7));
+			break;
+		case 'debut_mois' :
+			$t = strtotime($date);
+			$date = agenda_jourdecal($date, -(date('j', $t)-1));
+			break;
+		case 'debut_mois_prec' :
+			$t = strtotime($date);
+			$date = agenda_jourdecal($date, -(date('j', $t)-1)); // debut de mois
+			$date = agenda_moisdecal($date, -1); // precedent
+			break;
+		case 'debut_mois_1' :
+		case 'debut_mois_2' :
+		case 'debut_mois_3' :
+		case 'debut_mois_4' :
+		case 'debut_mois_5' :
+		case 'debut_mois_6' :
+		case 'debut_mois_7' :
+		case 'debut_mois_8' :
+		case 'debut_mois_9' :
+		case 'debut_mois_10' :
+		case 'debut_mois_11' :
+		case 'debut_mois_12' :
+			$t = strtotime($date);
+			$mdebut = intval(substr($affichage_debut,strlen('debut_mois_')));
+			$mcourant = date('n', $t);
+			$offset = ($mcourant-$mdebut+12)%12;
+			$date = agenda_jourdecal($date, -(date('j', $t)-1)); // debut de mois
+			$date = agenda_moisdecal($date, -$offset);
+			break;
+	}
+	return $date;
+}
+/**
  * Afficher la periode de l'agenda :
  * Le nom du mois si nb_mois = 1
  * L'annee si nb_mois=12 et debut du mois = janvier
  * sinon : mois annee - mois annee (xxx 12 - yyy 13)
+ * si le debut de la periode est fixe (debut d'un mois donnee), on precede de
+ * "Annee" ou "Saison" la periode
  *
  * @param string $date
  * @param int $nb_mois
+ * @param string $affichage_debut
  * @return string
  */
-function affdate_periode($date,$nb_mois){
+function affdate_periode($date,$nb_mois,$affichage_debut='date_jour'){
+	$fixe = in_array($affichage_debut,array('debut_mois_1','debut_mois_2','debut_mois_3','debut_mois_4','debut_mois_5','debut_mois_6','debut_mois_7','debut_mois_8','debut_mois_9','debut_mois_10','debut_mois_11','debut_mois_12'));
 	if ($nb_mois==1)
 		return affdate_mois_annee($date);
 	if ($nb_mois==12 AND mois($date)==1)
-		return annee($date);
+		return ($fixe?_T('agenda:label_annee').' ':'').annee($date);
 
-	return affdate_mois_annee($date)." - ".affdate_mois_annee(agenda_moisdecal($date, $nb_mois-1));
+	return ($fixe?_T('agenda:label_periode_saison').' ':'').affdate_mois_annee($date)." - ".affdate_mois_annee(agenda_moisdecal($date, $nb_mois-1));
 }
 
 /**
