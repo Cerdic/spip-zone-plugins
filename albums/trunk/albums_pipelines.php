@@ -11,8 +11,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 function albums_afficher_complement_objet($flux) {
 	$texte = "";
-	$e = trouver_objet_exec($flux['args']['exec']);
-	$type = $flux['args']['type'];
+
+	$e = trouver_objet_exec($flux['args']['type']);
+	$type = $e['type'];
 
 	if (!$e['edition'] AND in_array(table_objet_sql($type),lire_config('albums/objets'))) {
 		$texte .= '<div id="albums" class="albums">';
