@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_nouveau_definition' => 'Nouvelle définition',
 'info_numero_definition' => 'Définition numéro :',
 'titre_definition' => 'Définition',
+'titre_definition_creer' => 'Créer une nouvelle définition',
 'titre_definitions' => 'Définitions',
 'titre_logo_definition' => 'Logo de cette définition',
 );
