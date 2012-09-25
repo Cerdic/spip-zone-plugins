@@ -19,6 +19,11 @@ function albums_upgrade($nom_meta_base_version, $version_cible){
 	# Premiere installation  creation des tables
 	$maj['create'] = array(
 		array('maj_tables', array('spip_albums', 'spip_albums_liens')),
+		array('ecrire_config','albums/afficher_champ_descriptif', 'on'),
+		array('ecrire_config','albums/objets', array('spip_articles')),
+		array('ecrire_config','albums/afficher_champ_descriptif', 'on'),
+		array('ecrire_config','albums/vue_icones', array('titre')),
+		array('ecrire_config','albums/vue_liste', array('icone', 'mimetype', 'poids', 'dimensions')),
 	);
 
 	# Version 2.0.2 : meta + suppression colonne categorie
@@ -26,11 +31,11 @@ function albums_upgrade($nom_meta_base_version, $version_cible){
 		# On supprime la colonne 'categorie'
 		array('sql_alter','TABLE spip_albums DROP COLUMN categorie'),
 		# Configuration : valeurs par defaut
-		array(ecrire_config('albums/afficher_champ_descriptif', 'on'),
-			ecrire_config('albums/objets', array('spip_articles')),
-			ecrire_config('albums/afficher_champ_descriptif', 'on'),
-			ecrire_config('albums/vue_icones', array('titre')),
-			ecrire_config('albums/vue_liste', array('icone', 'mimetype', 'poids', 'dimensions'))),
+		array('ecrire_config','albums/afficher_champ_descriptif', 'on'),
+		array('ecrire_config','albums/objets', array('spip_articles')),
+		array('ecrire_config','albums/afficher_champ_descriptif', 'on'),
+		array('ecrire_config','albums/vue_icones', array('titre')),
+		array('ecrire_config','albums/vue_liste', array('icone', 'mimetype', 'poids', 'dimensions')),
 	);
 
 	# Version 2.0.4 : on utilise le statut prepa au lieu de refuse
