@@ -279,12 +279,13 @@ function cs_spip_file_options($code) {
 @define('_CS_HTMLA', '<span class="csfoo htmla"></span>');
 @define('_CS_HTMLB', '<span class="csfoo htmlb"></span>');
 @define('_CS_HTMLX', '<span class="csfoo \w+"></span>');
+// avec paragraphage intempestif :
+@define('_CS_HTMLX2', '<p>(?:<br[^>]*>\s*)?<span class="csfoo \w+"></span></p>|<span class="csfoo \w+"></span>');
 
 // nettoyage des separateurs
 function cs_nettoie(&$flux) {
 	if(strpos($flux, '"csfoo ')===false) return $flux;
-	return preg_replace(','._CS_HTMLX.',', '', $flux);
-//	return preg_replace(',<pp>\s*</p>,', '', preg_replace(','._CS_HTMLX.',', '', $flux));
+	return preg_replace(','.(strpos($flux, '<p><br')===false?_CS_HTMLX:_CS_HTMLX2).',', '', $flux);
 }
 
 if(defined('_SPIP30000')) {
