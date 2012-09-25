@@ -1,6 +1,10 @@
 Plugin Simple Calendrier pour SPIP 2.1
 ------------------------------------------
 
+1.2.8 le 25/09/2012
+--------------------
+- R.A.S. Changement des liens vers 'www.spip-contrib.net' en 'contrib.spip.net'
+
 1.2.7 le 14/08/2012
 --------------------
 - Correction : les évènements en statut 'poubelle' étaient comptabilisés au niveau des filtres de la page ?exec=evenement_tous
