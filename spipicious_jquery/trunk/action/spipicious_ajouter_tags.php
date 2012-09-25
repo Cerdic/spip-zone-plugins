@@ -29,7 +29,7 @@ function action_spipicious_ajouter_tags_dist(){
 	$id_table_objet = id_table_objet($type);
 
 	$tags = _request('spipicious_tags');
-	$tableau_tags = explode(";",$tags);
+	$tableau_tags = explode(",",$tags);
 
 	$ajouter_tags = spipicious_ajouter_tags($tableau_tags,$id_auteur,$id_objet,$type,$id_table_objet,$id_groupe);
 	return $ajouter_tags;
@@ -51,7 +51,6 @@ function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$typ
 	$position = 0;
 	$statut = 'publie';
 	
-	spip_log($tableau_tags,'spipicious');
 	if (is_array($tableau_tags)) {
 		$table = table_objet_sql($type);
 		$infos_objets = sql_fetsel('*',$table,"$id_table_objet=$id_objet");

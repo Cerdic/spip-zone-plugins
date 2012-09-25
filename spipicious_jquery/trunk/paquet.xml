@@ -1,7 +1,7 @@
 <paquet
 	prefix="spipicious"
 	categorie="communication"
-	version="1.0.2"
+	version="1.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/spipicious-128.png"
@@ -29,7 +29,7 @@
 	<pipeline nom="pre_boucle" inclure="spipicious_pipelines.php" />
 	<pipeline nom="post_edition" inclure="spipicious_pipelines.php" />
 
-	<necessite nom="selecteurgenerique" compatibilite="[0.7;[" />
+	<necessite nom="selecteurgenerique" compatibilite="[0.8.0;[" />
 	<necessite nom="saisies" compatibilite="[1.1;[" />
 	<necessite nom="nuage" compatibilite="[3.2.1;[" />
 </paquet>
