@@ -14,7 +14,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_config_creer_preview' => 'Attention : la génération de miniatures des images est actuellement inactive, veuillez  l\'activer dans les <a href=".?exec=config_fonctions">fonctions avancées</a> de la configuration du site !',
 	'erreur_config_image_process' => 'Attention : La méthode de fabrication des vignettes n\'a pas été choisie, veuillez  en sélectionner une dans les <a href=".?exec=config_fonctions">fonctions avancées</a> de la configuration du site !',
 	'explication_afficher_aide'=>'Afficher la boite d\'aide dans la colonne de gauche des pages d\'édition des articles',
-	'explication_fancy'=>'Au clic, afficher l\'image originale dans une fancybox jQuery. Nécessite le plugin <a href="http://www.spip-contrib.net/FancyBox,3020" target="_blank">FancyBox</a>',
 	'explication_fx'=>'Consultez les exemples en ligne : <a href="http://malsup.com/jquery/cycle/browser.html" target="_blank">jQuery Cycle Plugin</a>',
 	'explication_img_background' => 'Saisir la couleur de fond au format hexadecimal (#FF0000 par exemple) ou via la palette si le plugin Palette est installé. Pour un fond transparent, saisir "transparent" (auquel cas, les images finales seront au format png).',
 	'explication_imgparams'=>'Les images sont redimensionnées et recadrées automatiquement afin de préserver la mise en page lors de l\'insertion du diaporama au sein du texte. Ce traitement se réalise sur les images suivant :
@@ -34,7 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_div_background' => 'Couleur de bordure',
 	'label_div_class' => 'Nom de classe css',
 	'label_div_margin' => 'Marge externe',
-	'label_fancy' => 'FancyBox',
 	'label_fx' => 'Effet',
 	'label_img_background' => 'Couleur de fond',
 	'label_img_bordure' => 'Largeur de la bordure',
@@ -53,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_cssparams' => 'Paramètres styles SjCycle',
 	'legend_imgparams' => 'Traitements images SjCycle',
 	'legend_jsparams' => 'Paramètres javascript jQuery Cycle',
-	'legend_tooltipfancy' => 'Paramètres tooltip, fancybox et mediabox',	
+	'legend_tooltip_box' => 'Paramètres tooltip et mediabox',	
 	
 	// N
 	'noisette_alea_description' => 'Affiche un diaporama aléatoire jcycle des images du site',

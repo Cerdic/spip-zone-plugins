@@ -14,7 +14,7 @@ function sjcycle_upgrade($nom_meta_version_base, $version_cible){
 			array('ecrire_config','sjcycle', array(
 				'tooltip' => '',
 				'tooltip_carac' => '',
-				'fancy' => '',
+				'mediabox' => '',
 				'fx' => 'fade',
 				'sync' => 'on',
 				'speed' => '2000',

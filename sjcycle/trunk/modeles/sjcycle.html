@@ -56,11 +56,6 @@
 					left: 5
 			});
 		]
-		[(#CONFIG{sjcycle/fancy}|=={on}|oui)
-			$("a.#GET{cssbox}").fancybox({
-				'hideOnContentClick': false
-			});
-		]
 		[(#CONFIG{sjcycle/mediabox}|=={on}|oui)
 			$("a.#GET{cssbox}").mediabox(box_settings);
 		]
@@ -121,7 +116,7 @@
          [(#GET{id_article_a_lier}|oui)
             <a href="#URL_ARTICLE{#GET{id_article_a_lier}}" title="#GET{titre_article_a_lier}">
             #SET{fermer_a,oui}]
-         [(#GET{fermer_a}|=={oui}|non|et{#CONFIG{sjcycle/fancy}|=={on}|ou{#CONFIG{sjcycle/mediabox}|=={on}}|oui})
+         [(#GET{fermer_a}|=={oui}|non|et{#CONFIG{sjcycle/mediabox}|=={on}|oui})
             <a href="[(#URL_DOCUMENT)]" type="#MIME_TYPE"
                                          class="#GET{cssbox}"
                                          rel="#GET{cssbox}"

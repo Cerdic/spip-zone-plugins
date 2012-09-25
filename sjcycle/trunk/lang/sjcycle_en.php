@@ -14,7 +14,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_config_creer_preview' => 'Caution: the generation of miniatures of the images is currently inactive, please activate it in the <a href=".?exec=config_fonctions">advanced functions</a> of the site configuration !',
 	'erreur_config_image_process' => 'Caution: Method of thumbnails creation was not selected, please select of them one din the <a href=".?exec=config_fonctions">advanced functions</a> of the site configuration !',
 	'explication_afficher_aide'=>'Display the help box in the left column on the edition pages of articles',
-	'explication_fancy'=>'On clic, display the original image in a jQuery fancybox. Need the <a href="http://www.spip-contrib.net/FancyBox,3020" target="_blank">FancyBox plugin</a>',
 	'explication_fx'=>'Consultez les exemples en ligne : <a href="http://malsup.com/jquery/cycle/browser.html" target="_blank">jQuery Cycle Plugin</a>',
 	'explication_img_background' => 'Type the background color in hexa format or with the palette if the Palette Plugin is available. To force transparent background, type "transparent" (in which case, the final images will be with in png format)',
 	'explication_imgparams'=>'Images are automatically resized and cropped in order to preserve the page layout during the insertion of the slideshow within the text. This treatment is carried out on the images according to:
@@ -34,7 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_div_background' => 'Border color',
 	'label_div_class' => 'Class name css',
 	'label_div_margin' => 'External margin',
-	'label_fancy' => 'FancyBox',
 	'label_fx' => 'Effect',
 	'label_img_background' => 'Background color',	
 	'label_img_bordure' => 'Border width',
@@ -53,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_cssparams' => 'SjCycle styles parameters',
 	'legend_imgparams' => 'Images treatments SjCycle',
 	'legend_jsparams' => 'jQuery Cycle javascript parameters',
-	'legend_tooltipfancy' => 'Tooltip & fancybox Parameters',
+	'legend_tooltip_box' => 'Tooltip & mediabox Parameters',
 
 	// N
 	'noisette_alea_description' => 'Display a random slideshow',

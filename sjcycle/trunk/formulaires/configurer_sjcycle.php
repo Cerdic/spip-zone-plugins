@@ -217,8 +217,8 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 		array(
 			'saisie' => 'fieldset',
 			'options' => array(
-				'nom' => 'ftooltipfancy',
-				'label' => _T('sjcycle:legend_tooltipfancy')
+				'nom' => 'ftooltipbox',
+				'label' => _T('sjcycle:legend_tooltip_box')
 			),
 			'saisies' => array(
 				array(
@@ -237,15 +237,6 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 						'label' => _T('sjcycle:label_tooltip_carac'),
 						'explication' => _T('sjcycle:explication_tooltip_carac'),
 						'defaut' => $config['tooltip_carac']
-					)
-				),
-				array(
-					'saisie' => 'oui_non',
-					'options' => array(
-						'nom' => 'fancy',
-						'label' => _T('sjcycle:label_fancy'),
-						'explication' => _T('sjcycle:explication_fancy'),
-						'defaut' => $config['fancy']
 					)
 				),
 				array(
