@@ -340,8 +340,8 @@ function spip2spip_get_id_mot($titre) {
 //
 // recupère id du secteur
 function spip2spip_get_id_secteur($id_rubrique) { 
-   if ($row = sql_fetsel("id_parent","spip_rubriques","id_rubrique=$id_rubrique")) 
-               return $row['id_parent']; 
+   if ($row = sql_fetsel("id_secteur","spip_rubriques","id_rubrique=$id_rubrique")) 
+               return $row['id_secteur']; 
    return 0;  
 }
 
