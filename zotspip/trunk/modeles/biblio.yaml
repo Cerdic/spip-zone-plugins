@@ -116,6 +116,7 @@ parametres:
             type: '<:zotspip:item_type:>'
             volume: '<:zotspip:item_volume:>'
             numero: '<:zotspip:item_numero:>'
+            date_ajout: '<:zotspip:item_date_ajout:>'
       -
         saisie: 'csl'
         options:

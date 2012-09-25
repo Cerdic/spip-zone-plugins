@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_aucun' => 'aucun',
 	'item_auteur' => 'par auteur',
 	'item_complet' => 'tous les champs',
+	'item_date_ajout' => 'par date d\'ajout dans la base',
 	'item_liste' => 'liste',
 	'item_liste_simple' => 'liste simple',
 	'item_numero' => 'par numéro',

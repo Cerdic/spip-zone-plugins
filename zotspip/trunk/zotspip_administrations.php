@@ -7,7 +7,6 @@ include_spip('inc/meta');
 
 // Installation et mise à jour
 function zotspip_upgrade($nom_meta_version_base, $version_cible){
-
 	$version_actuelle = '0.0';
 	if (
 		(!isset($GLOBALS['meta'][$nom_meta_version_base]))
@@ -20,6 +19,16 @@ function zotspip_upgrade($nom_meta_version_base, $version_cible){
 			include_spip('base/abstract_sql');
 			creer_base();
 			zotspip_installer_schema_zotero();
+		}
+		
+		if (version_compare($version_actuelle,'0.2','<')) {
+			// Ajout du champ 'date_ajout'
+			include_spip('base/create');
+			include_spip('base/abstract_sql');
+			maj_tables('spip_zitems');
+			ecrire_meta($nom_meta_version_base, $version_actuelle='0.2', 'non');
+			include_spip('inc/zotspip');
+			zotspip_maj_items(true,5); // On lance une mise à jour complète de la base
 		}
 		
 		ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');

@@ -101,7 +101,8 @@ function zotspip_maj_items($forcer=false, $n=50) {
 				'fichier' => '',
 				'json' => '',
 				'csljson' => '',
-				'updated' => $updated
+				'updated' => $updated,
+				'date_ajout' => spip_xml_aplatit($entree['published'])
 			);
 			
 			// On récupère le parent et/ou le lien du fichier

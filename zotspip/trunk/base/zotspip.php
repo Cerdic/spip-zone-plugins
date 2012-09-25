@@ -50,7 +50,8 @@ function zotspip_declarer_tables_principales($tables_principales){
 		"fichier" => "text DEFAULT '' NOT NULL",
 		"json" => "mediumtext DEFAULT '' NOT NULL",
 		"csljson" => "mediumtext DEFAULT '' NOT NULL",
-		"updated" => "varchar(50) DEFAULT '' NOT NULL"
+		"updated" => "varchar(50) DEFAULT '' NOT NULL",
+		"date_ajout"=> "varchar(50) DEFAULT '' NOT NULL"
 	);
 	
 	$zitems_cles = array(
