@@ -13,7 +13,7 @@
 	#INCLURE{fond=inclure/zitem,id_zitem,csl,souligne=#GET{souligne}}
 	</BOUCLE_biblio_type>
 </BOUCLE_test_tri>
-	<BOUCLE_biblio(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{json LIKE %#ENV{recherche}%}{zotsip_depuis}{0,#ENV{max,100000}}{tri #ENV{par,auteurs},#GET{defaut_tri}}>
+	<BOUCLE_biblio(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{json LIKE %#ENV{recherche}%}{zotsip_depuis}{0,#ENV{max,100000}}{tri #ENV{tri,auteurs},#GET{defaut_tri}}>
 	#INCLURE{fond=inclure/zitem,id_zitem,csl,souligne=#GET{souligne}}
 	</BOUCLE_biblio>
 <//B_test_tri>
