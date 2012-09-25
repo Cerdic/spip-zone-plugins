@@ -2,9 +2,9 @@
     <nom>
         <multi>[fr]Simple Calendrier[en]Simple calendar</multi>    
     </nom>
-    <auteur>[Julien Lanfrey->http://www.spip-contrib.net/ju3873]</auteur>
+    <auteur>[Julien Lanfrey->http://contrib.spip.net/ju3873]</auteur>
     <licence>GPL &#169; 2010-2011</licence>
-    <version>1.2.7</version>
+    <version>1.2.8</version>
     <version_base>1.4</version_base>
     <etat>stable</etat>
     
@@ -21,7 +21,7 @@ _   (Th&#232;mes pour le mini-calendrier bas&#233;s sur [jquery-ui themeroller->
     </multi>
     </description>
     
-    <lien>http://www.spip-contrib.net/Simple-Calendrier-v1</lien>
+    <lien>http://contrib.spip.net/Simple-Calendrier-v1</lien>
     <icon>img_pack/simplecal-logo-32.png</icon>
     
     <prefix>simplecal</prefix>

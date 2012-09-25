@@ -1,16 +1,16 @@
 <paquet
 	prefix="simplecal"
 	categorie="date"
-	version="2.0.0"
+	version="2.0.1"
 	etat="dev"
 	compatibilite="[3.0.0-dev;["
 	logo="prive/themes/spip/images/evenement-32.png"
 	schema="2.1.0"
-	documentation="http://www.spip-contrib.net/Simple-Calendrier-v1"
+	documentation="http://contrib.spip.net/Simple-Calendrier-v1"
 > 
 
 	<nom>Simple Calendrier</nom>
-	<auteur>[Julien Lanfrey->http://www.spip-contrib.net/ju3873]</auteur>
+	<auteur>[Julien Lanfrey->http://contrib.spip.net/ju3873]</auteur>
 	<licence>GPL</licence>
 	<credit lien="http://jqueryui.com/themeroller/">Themes CSS (datepicker)</credit>
 	
