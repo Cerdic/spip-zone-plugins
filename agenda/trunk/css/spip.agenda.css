@@ -1,5 +1,5 @@
 
-.evenement.one {padding: 0.75em;background: #eee;margin-bottom: 1.5em;}
+.evenement.one {padding: 0.75em;padding-left: 7.5em;background: #eee;margin-bottom: 1.5em;}
 .evenement.one .lire-la-suite {display: none;}
 
 .page_agenda .liste-items .evenement,.page_evenement .liste-items .evenement  {padding-left: 7.5em;background-image: url(img/agenda-filet.png);background-repeat: repeat-y;background-position: 6.5em top;}
