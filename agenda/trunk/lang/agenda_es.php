@@ -66,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_evenement' => 'Crear un nuevo evento',
 	'icone_modifier_evenement' => 'Modifier l\'événement', # NEW
 	'indiquez_votre_choix' => 'Indiquez votre choix', # NEW
+	'info_1_mois' => '1 mois', # NEW
 	'info_1_place' => '1 place', # NEW
 	'info_aucun_evenement' => 'Ningún evento',
 	'info_evenement' => 'Événement', # NEW
@@ -76,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_inscription' => 'Inscription en ligne :', # NEW
 	'info_lieu' => 'Lieu :', # NEW
 	'info_nb_inscrits' => '@nb@ inscrits', # NEW
+	'info_nb_mois' => '@nb@ mois', # NEW
 	'info_nb_places' => '@nb@ places', # NEW
 	'info_nombre_evenements' => '@nb@ eventos',
 	'info_nouvel_evenement' => 'Nouvel événement', # NEW
@@ -89,7 +91,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscrits' => 'Inscriptions', # NEW
 
 	// L
+	'label_annee' => 'Année', # NEW
 	'label_inscription' => 'Inscripción en línea ',
+	'label_periode_saison' => 'Saison', # NEW
 	'label_places' => 'Limitar el número de lugares',
 	'label_reponse_jyparticipe' => 'Asistiré',
 	'label_reponse_jyparticipe_pas' => 'No asistiré',
@@ -132,12 +136,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'telecharger_oui' => 'Seulement les réponses positives', # NEW
 	'telecharger_toutes' => 'Toutes les réponses', # NEW
 	'telecharger_toutes_tous_evenements' => 'Toutes les réponses aux inscriptions', # NEW
-	'texte_agenda' => 'AGENDA',
+	'texte_agenda' => 'AGENDA', # MODIF
 	'texte_evenement_statut' => 'Cet événement est :', # NEW
 	'texte_logo_objet' => 'LOGO DE L\'EVENEMENT', # NEW
 	'titre_cadre_ajouter_evenement' => 'Añadir un evento',
 	'titre_cadre_modifier_evenement' => 'Modificar un evento',
 	'titre_sur_l_agenda' => 'En la agenda',
+	'titre_sur_l_agenda_aussi' => 'Et aussi...', # NEW
 	'toutes_rubriques' => 'Todas',
 
 	// U

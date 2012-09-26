@@ -66,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_evenement' => 'Vytvoriť novú udalosť',
 	'icone_modifier_evenement' => 'Upraviť udalosť',
 	'indiquez_votre_choix' => 'Uveďte svoju voľbu',
+	'info_1_mois' => '1 mois', # NEW
 	'info_1_place' => '1 miesto',
 	'info_aucun_evenement' => 'Žiadna udalosť',
 	'info_evenement' => 'Udalosť',
@@ -76,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_inscription' => 'Registrácia online:',
 	'info_lieu' => 'Miesto:',
 	'info_nb_inscrits' => '@nb@ prihlásení',
+	'info_nb_mois' => '@nb@ mois', # NEW
 	'info_nb_places' => '@nb@ miest',
 	'info_nombre_evenements' => '@nb@ udalostí',
 	'info_nouvel_evenement' => 'Nová udalosť',
@@ -89,7 +91,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscrits' => 'Registrácie',
 
 	// L
+	'label_annee' => 'Année', # NEW
 	'label_inscription' => 'Registrácia online',
+	'label_periode_saison' => 'Saison', # NEW
 	'label_places' => 'Obmedziť počet miest',
 	'label_reponse_jyparticipe' => 'Budem tam',
 	'label_reponse_jyparticipe_pas' => 'Neprídem',
@@ -132,12 +136,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'telecharger_oui' => 'Iba pozitívne reakcie',
 	'telecharger_toutes' => 'Všetky reakcie',
 	'telecharger_toutes_tous_evenements' => 'Všetky reakcie cez prihlásenie',
-	'texte_agenda' => 'KALENDÁR UDALOSTÍ',
+	'texte_agenda' => 'KALENDÁR UDALOSTÍ', # MODIF
 	'texte_evenement_statut' => 'Táto udalosť je:',
-	'texte_logo_objet' => 'LOGO UDALOSTI',
+	'texte_logo_objet' => 'LOGO UDALOSTI', # MODIF
 	'titre_cadre_ajouter_evenement' => 'Pridať udalosť',
 	'titre_cadre_modifier_evenement' => 'Upraviť udalosť',
 	'titre_sur_l_agenda' => 'V Kalendári udalostí ',
+	'titre_sur_l_agenda_aussi' => 'Et aussi...', # NEW
 	'toutes_rubriques' => 'Všetky',
 
 	// U

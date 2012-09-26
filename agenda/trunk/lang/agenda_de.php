@@ -66,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_evenement' => 'Neue Veranstaltung anlegen',
 	'icone_modifier_evenement' => 'Event Bearbeiten',
 	'indiquez_votre_choix' => 'Indiquez votre choix', # NEW
+	'info_1_mois' => '1 mois', # NEW
 	'info_1_place' => '1 Platz',
 	'info_aucun_evenement' => 'Kein Event',
 	'info_evenement' => 'Event',
@@ -76,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_inscription' => 'Inscription en ligne :', # NEW
 	'info_lieu' => 'Ort:',
 	'info_nb_inscrits' => '@nb@ inscrits', # NEW
+	'info_nb_mois' => '@nb@ mois', # NEW
 	'info_nb_places' => '@nb@ Plätze',
 	'info_nombre_evenements' => '@nb@ Events',
 	'info_nouvel_evenement' => 'Neues Event',
@@ -89,7 +91,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscrits' => 'Anmeldungen',
 
 	// L
+	'label_annee' => 'Année', # NEW
 	'label_inscription' => 'Online-Anmeldungen',
+	'label_periode_saison' => 'Saison', # NEW
 	'label_places' => 'Maximale Anzahl Plätze',
 	'label_reponse_jyparticipe' => 'Ich komme',
 	'label_reponse_jyparticipe_pas' => 'Ich komme nicht',
@@ -132,12 +136,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'telecharger_oui' => 'Seulement les réponses positives', # NEW
 	'telecharger_toutes' => 'Toutes les réponses', # NEW
 	'telecharger_toutes_tous_evenements' => 'Toutes les réponses aux inscriptions', # NEW
-	'texte_agenda' => 'KALENDER',
+	'texte_agenda' => 'KALENDER', # MODIF
 	'texte_evenement_statut' => 'Dieses Event ist',
-	'texte_logo_objet' => 'EVENT-LOGO',
+	'texte_logo_objet' => 'EVENT-LOGO', # MODIF
 	'titre_cadre_ajouter_evenement' => 'Event hinzufügen',
 	'titre_cadre_modifier_evenement' => 'Event umändern',
 	'titre_sur_l_agenda' => 'Im Kalender',
+	'titre_sur_l_agenda_aussi' => 'Et aussi...', # NEW
 	'toutes_rubriques' => 'Alle',
 
 	// U
