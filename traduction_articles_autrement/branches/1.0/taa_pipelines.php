@@ -34,7 +34,7 @@ function taa_pre_insertion($flux){
     if ($flux['args']['table']=='spip_articles'){
 		if($lang=_request('lang_dest')){
 			$flux['data']['lang'] =  $lang;
-			$flux['data']['langue_choisie'] =  $lang;		 	
+			$flux['data']['langue_choisie'] =  'oui';		 	
 			}
 		elseif(test_plugin_actif('tradrub')){
 			$lang=sql_getfetsel('lang','spip_rubriques','id_rubrique='.sql_quote(_request('id_rubrique')));

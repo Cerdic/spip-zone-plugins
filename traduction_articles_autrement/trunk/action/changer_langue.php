@@ -15,7 +15,7 @@ function action_changer_langue_dist() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		sql_updateq('spip_articles',array('lang'=>$lang),'id_article='.$id_objet);
+		sql_updateq('spip_articles',array('lang'=>$lang,'langue_choisie'=>'oui'),'id_article='.$id_objet);
 	}
 	
 }
