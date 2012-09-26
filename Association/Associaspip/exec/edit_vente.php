@@ -1,19 +1,15 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010 Emmanuel Saint-James
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
-
-include_spip ('inc/navigation_modules');
-include_spip ('inc/association_comptabilite');
 
 function exec_edit_vente()
 {
@@ -21,8 +17,10 @@ function exec_edit_vente()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_vente = association_passeparam_id('vente');
+		include_spip ('inc/navigation_modules');
+//		include_spip ('inc/association_comptabilite');
 		onglets_association('titre_onglet_ventes', 'ventes');
+		$id_vente = association_passeparam_id('vente');
 		// info
 		echo association_totauxinfos_intro('', 'vente', $id_vente);
 		// datation et raccourcis

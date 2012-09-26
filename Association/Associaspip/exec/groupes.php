@@ -11,14 +11,13 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip ('inc/navigation_modules');
-
 function exec_groupes()
 {
 	if (!autoriser('voir_groupes', 'association', 100)) { // l'id groupe passe en parametre est a 100 car ce sont les groupes definis par l'utilisateur et non ceux des autorisation qu'on liste dans cette page.
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
+		include_spip ('inc/navigation_modules');
 		onglets_association('gestion_groupes', 'adherents');
 		// notice
 		echo _T('asso:aide_groupes');
@@ -33,7 +32,7 @@ function exec_groupes()
 			array(
 #				'id_groupe' => array('asso:entete_id', 'entier'),
 				'nom' => array('asso:entete_nom', 'texte'),
-				'commentaires' => array('asso:entete_commentaires', 'texte'),
+				'commentaires' => array('asso:entete_commentaire', 'texte'),
 				'affichage' => array('asso:ordre_affichage_groupe', 'entier'),
 			), // entetes et formats des donnees
 			array(

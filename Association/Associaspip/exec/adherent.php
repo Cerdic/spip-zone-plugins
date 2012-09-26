@@ -12,10 +12,8 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('inc/navigation_modules');
-include_spip('inc/association_comptabilite');
-
 function exec_adherent(){
+	include_spip('inc/navigation_modules');
 	$id_auteur = association_passeparam_id('auteur');
 	$full = autoriser('associer', 'adherents');
 	if (!autoriser('voir_membres', 'association', $id_auteur)) {
@@ -23,6 +21,7 @@ function exec_adherent(){
 		echo minipres();
 	} else {
 		$data = sql_fetsel('m.sexe, m.nom_famille, m.prenom, m.validite, m.id_asso, c.libelle','spip_asso_membres as m LEFT JOIN spip_asso_categories as c ON m.categorie=c.id_categorie', "m.id_auteur=$id_auteur");
+		include_spip('inc/association_comptabilite');
 		include_spip('inc/association_coordonnees');
 		$nom_membre = association_formater_nom($data['sexe'], $data['prenom'], $data['nom_famille']);
 		$validite = $data['validite'];
