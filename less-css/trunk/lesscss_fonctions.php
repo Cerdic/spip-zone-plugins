@@ -1,4 +1,11 @@
 <?php
+/*
+ * Plugin LessCSS
+ * Distribue sous licence MIT
+ *
+ */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Compiler des styles inline LESS en CSS
@@ -10,7 +17,7 @@
  *          utilise en cas de message d'erreur, et pour le repertoire de reference des @import
  * @return string
  */
-function less_compile($style, $contexte = array()){
+function lesscss_compile($style, $contexte = array()){
 	require_once 'lessphp/lessc.inc.php';
 
 	$import_dir = null;
@@ -118,7 +125,7 @@ function less_css($source){
 			$contenu = "/* Source $source : vide */\n";
 		}
 		else {
-			$contenu = less_compile($contenu, array('file'=>$source));
+			$contenu = lesscss_compile($contenu, array('file'=>$source));
 		}
 		// si erreur de compilation on renvoit un commentaire, et il y a deja eu un log
 		if (!$contenu){
@@ -134,7 +141,7 @@ function less_css($source){
 		else
 			return $done[$source] = $source;
 	}
-	$source = less_compile($source);
+	$source = lesscss_compile($source);
 	if (!$source)
 		return "/* Erreur compilation LESS : cf less.log */";
 	else
@@ -153,7 +160,7 @@ function less_css($source){
 function lesscss_insert_head($flux){
 	$flux .= '<'
 		.'?php header("X-Spip-Filtre: '
-		.'cssify_head'
+		.'lesscss_cssify_head'
 		.'"); ?'.'>';
 	return $flux;
 }
@@ -166,7 +173,7 @@ function lesscss_insert_head($flux){
  * @param string $head
  * @return void
  */
-function cssify_head($head){
+function lesscss_cssify_head($head){
 	$url_base = url_de_base();
 	$balises = extraire_balises($head,'link');
 	$files = array();
@@ -194,4 +201,86 @@ function cssify_head($head){
 	
 	return $head;
 }
+
+/*
+ * Prise en charge de la balise #CSS{style.css}
+ * Regles :
+ * - cherche un .css ou un .css.html ou un .less comme feuille de style
+ * - si un seul des 3 trouve dans le chemin il est renvoye (et compile au passage si .less)
+ * - si un .css.html et un .css trouves dans le chemin, c'est le .css.html qui est pris (surcharge d'un statique avec une css calculee)
+ * - si un .less et un (.css ou .css.html) on compare la priorite du chemin des deux trouves :
+ *   le plus prioritaire des 2 est choisi
+ *   si priorite equivalente on choisi le (.css ou .css.html) qui est le moins couteux a produire
+ *   permet d'avoir dans le meme dossier le .less et sa version compilee .css : cette derniere est utilisee
+ *
+ * #CSS{style.css} renvoie dans tous les cas un fichier .css qui est soit :
+ * - un .less compile en .css
+ * - un .css statique
+ * - un .css.html calcule en .css
+ */
+function balise_CSS($p) {
+	$_css = interprete_argument_balise(1,$p);
+	$p->code = "timestamp(direction_css(lesscss_select_css($_css)))";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+/**
+ * Selectionner de preference la feuille .less (en la compilant)
+ * et sinon garder la .css classiquement
+ *
+ * @param string $css_file
+ * @return string
+ */
+function lesscss_select_css($css_file){
+	if (function_exists('less_css')
+	  AND substr($css_file,-4)==".css"){
+		$less_file = substr($css_file,0,-4).".less";
+		$less_or_css = lesscss_find_less_or_css_in_path($less_file, $css_file);
+		if (substr($less_or_css,-5)==".less")
+			return less_css($less_or_css);
+		else
+			return $less_or_css;
+	}
+	return find_in_path($css_file);
+}
+
+/**
+ * Faire un find_in_path en cherchant un fichier .less ou .css
+ * et en prenant le plus prioritaire des deux
+ * ce qui permet de surcharger un .css avec un .less ou le contraire
+ * Si ils sont dans le meme repertoire, c'est le .css qui est prioritaire,
+ * par soucis de rapidite
+ *
+ * @param string $less_file
+ * @param string $css_file
+ * @return string
+ */
+function lesscss_find_less_or_css_in_path($less_file, $css_file){
+	$l = find_in_path($less_file);
+	$c = $f = trouver_fond($css_file);
+	if (!$c)
+		$c = find_in_path($css_file);
+
+	if (!$l)
+		return ($f?produire_fond_statique($css_file,array('format'=>'css')):$c);
+	elseif(!$c)
+		return $l;
+
+	// on a un less et un css en concurence
+	// prioriser en fonction de leur position dans le path
+	$path = creer_chemin();
+	foreach($path as $dir) {
+		// css prioritaire
+		if (strncmp($c,$dir . $css_file,strlen($dir . $css_file))==0)
+			return ($f?produire_fond_statique($css_file,array('format'=>'css')):$c);;
+		if ($l == $dir . $less_file)
+			return $l;
+	}
+	// on ne doit jamais arriver la !
+	spip_log('Resolution chemin less/css impossible',_LOG_CRITIQUE);
+	debug_print_backtrace();
+	die('Erreur fatale, je suis perdu');
+}
+
 ?>
