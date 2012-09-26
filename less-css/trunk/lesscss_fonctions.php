@@ -2,11 +2,20 @@
 
 /**
  * Compiler des styles inline LESS en CSS
+ *
  * @param string $style
+ *   contenu du .less
+ * @param array $contexte
+ *   file : chemin du fichier compile
+ *          utilise en cas de message d'erreur, et pour le repertoire de reference des @import
  * @return string
  */
-function less_compile($style, $import_dir="", $contexte = array()){
+function less_compile($style, $contexte = array()){
 	require_once 'lessphp/lessc.inc.php';
+
+	$import_dir = null;
+	if (isset($contexte['file']))
+		$import_dir = dirname($contexte['file']);
 
 	// le compilateur lessc compile le contenu
 	$less = new lessc();
@@ -17,13 +26,37 @@ function less_compile($style, $import_dir="", $contexte = array()){
 	try {
 		// avant compilation par less, remplacer les @import_spip par un @import+find_in_path
 		if (preg_match_all(",@import_spip\s+['\"]([^'\"]+)['\"],",$style,$matches,PREG_SET_ORDER)){
-			// faker le chemin depuis le $import_dir
-			$i = $import_dir."dummy";$base = "";
-			while ($i AND ($i = dirname($i))!=".") {$base.="../";};
-			foreach($matches as $m){
-				if ($f=find_in_path($m[1])){
-					$style = str_replace($m[0],"@import '$base$f'",$style);
+			if ($import_dir){
+				// faker le chemin depuis le $import_dir
+				$i = $import_dir."dummy";$base = "";
+				while ($i AND ($i = dirname($i))!=".") {$base.="../";};
+				$ide= explode('/',$import_dir);
+				foreach($matches as $m){
+					if ($f=find_in_path($m[1])){
+						// calculer un chemin relatif propre avec le moins de ../ possible
+						$fe = explode("/",$f);
+						$be = explode("/",$base);
+						$l = min(count($ide),count($fe));
+						for($i=0;$i<$l;$i++){
+							if (reset($fe)==$ide[$i]){
+								array_shift($fe);
+								array_shift($be);
+							}
+							else
+								break;
+						}
+						$be = implode("/",$be);
+						$fe = implode("/",$fe);
+						$style = str_replace($m[0],"@import '$be$fe'",$style);
+					}
 				}
+			}
+			else {
+				spip_log('lessc @import_spip sans contexte de chemin','less'._LOG_ERREUR);
+				erreur_squelette(
+					"LESS : @import_spip sans contexte de chemin"
+					. (isset($contexte['file'])?" fichier ".$contexte['file']:"")
+				);
 			}
 		}
 		$out = $less->parse($style);
@@ -81,7 +114,7 @@ function less_css($source){
 			return $source;
 
 		# compiler le LESS
-		$contenu = less_compile($contenu, dirname($source), array('file'=>$source));
+		$contenu = less_compile($contenu, array('file'=>$source));
 		// si erreur de compilation on renvoit la source, et il y a deja eu un log
 		if (!$contenu){
 			$contenu = "/* Compilation $source : vide */\n";
