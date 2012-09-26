@@ -12,6 +12,14 @@ function liens_orphelins_pipeline($texte){
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'liens_orphelins', $texte);
 }
 
+function liens_orphelins_recuperer_fond($flux) {
+	// verification des balises #EMAIL devenue cliquables mais utilisees comme ceci : <a href='mailto:(#EMAIL)'>
+	// (cas rare en principe)
+	if((strpos($texte = &$flux['data']['texte'], 'mailto:<a')!==false)) 
+		$texte = preg_replace(',mailto:<a[^>]+>(.*)</a>,Ums', 'mailto:$1', $texte);
+	return $flux;
+}
+
 function interro_liens_callback($matches) {
  return cs_code_echappement(echappe_interro_amp($matches[0]), 'LIENS');
 }

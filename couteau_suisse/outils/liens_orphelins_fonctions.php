@@ -6,6 +6,11 @@
 
 include_spip('outils/inc_cs_liens');
 
+// Traitement de la balise #EMAIL
+function liens_orphelins_email($email){
+	return test_espace_prive()?$email:expanser_liens(liens_orphelins($email));
+}
+
 function liens_orphelins($texte){
 	// deja, on s'en va si pas de point...
 	if ($GLOBALS["liens_orphelins"]<0 || strpos($texte, '.')===false) return $texte;
