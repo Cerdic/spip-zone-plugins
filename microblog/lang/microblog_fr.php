@@ -43,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_envoye'=> 'Message&nbsp;:',
 
 	// P
-	'presentation_spipo' => 'le site de la communaut&#233; SPIP',
 	'presentation_laconica' => 'le site public du logiciel laconi.ca',
 
 	// N
