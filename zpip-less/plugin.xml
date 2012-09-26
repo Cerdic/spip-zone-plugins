@@ -15,9 +15,8 @@ ou comme outil de construction rapide d'un thème CSS, pour générer les feuill
 Les feuilles de styles less sont les versions paramétrées des feuilles de styles CSS de Zpip-dist, elles-même tirées directement du framework BaseCSS
 	</description>
 	<prefix>Zless</prefix>
-	<fonctions>zless_fonctions.php</fonctions>
 	<categorie>outil</categorie>
-	<necessite id="Zcore" version="[2.0.0-dev;]" />
-	<necessite id="lesscss" version="[0.3.0;]" />
+	<necessite id="Zcore" version="[2.0.0;]" />
+	<necessite id="lesscss" version="[0.6.0;]" />
 	<utilise id="Zpip" version="[;]" />
 </plugin>
