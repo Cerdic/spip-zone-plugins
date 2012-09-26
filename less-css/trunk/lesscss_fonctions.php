@@ -113,9 +113,14 @@ function less_css($source){
 		if (!lire_fichier($source, $contenu))
 			return $source;
 
-		# compiler le LESS
-		$contenu = less_compile($contenu, array('file'=>$source));
-		// si erreur de compilation on renvoit la source, et il y a deja eu un log
+		# compiler le LESS si besoin (ne pas generer une erreur si source vide
+		if (!$contenu){
+			$contenu = "/* Source $source : vide */\n";
+		}
+		else {
+			$contenu = less_compile($contenu, array('file'=>$source));
+		}
+		// si erreur de compilation on renvoit un commentaire, et il y a deja eu un log
 		if (!$contenu){
 			$contenu = "/* Compilation $source : vide */\n";
 		}
