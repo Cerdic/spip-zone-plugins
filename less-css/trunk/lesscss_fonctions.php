@@ -83,8 +83,10 @@ function less_css($source){
 		# compiler le LESS
 		$contenu = less_compile($contenu, dirname($source), array('file'=>$source));
 		// si erreur de compilation on renvoit la source, et il y a deja eu un log
-		if (!$contenu)
-			return $done[$source] = $source;
+		if (!$contenu){
+			$contenu = "/* Compilation $source : vide */\n";
+		}
+
 		# passer la css en url absolue (on ne peut pas le faire avant, car c'est du LESS, pas des CSS)
 		$contenu = urls_absolues_css($contenu, $source);
 
