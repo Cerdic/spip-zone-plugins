@@ -76,7 +76,11 @@ function simplecal_upgrade($nom_meta_base_version,$version_cible){
 		array('sql_alter',"TABLE spip_evenements ADD id_trad bigint(21) NOT NULL DEFAULT '0' AFTER langue_choisie"),
 		array('sql_alter',"TABLE spip_evenements ADD INDEX id_trad (id_trad)"),
 	);
-		
+	
+	$maj['2.1.1'] = array(
+		array('simplecal_check_2_1_1'),
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -97,6 +101,18 @@ function simplecal_meta_2_0_0(){
 	// sinon, on n'a pas le lien "[Changer]" sur le menu de langue
 }
 
+function simplecal_check_2_1_1(){
+	// Pour ceux qui ont fait la 1ere installation sous SPIP3, les champs lien_titre et lien_url
+	// n'etaient pas declares (oubli dans base/simplecal.php)...
+	$res = spip_query("SHOW FULL COLUMNS FROM spip_evenements LIKE 'lien_titre'");
+	if (!$row = sql_fetch($res)){
+		sql_alter("TABLE spip_evenements ADD lien_titre VARCHAR(255) NOT NULL AFTER texte");
+	}
+	$res = spip_query("SHOW FULL COLUMNS FROM spip_evenements LIKE 'lien_url'");
+	if (!$row = sql_fetch($res)){
+		sql_alter("TABLE spip_evenements ADD lien_url VARCHAR(255) NOT NULL AFTER lien_titre");
+	}
+}
 
 /**
  * Desinstallation/suppression des tables
