@@ -20,52 +20,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function lesscss_compile($style, $contexte = array()){
 	require_once 'lessphp/lessc.inc.php';
 
-	$import_dir = null;
-	if (isset($contexte['file']))
-		$import_dir = dirname($contexte['file']);
-
 	// le compilateur lessc compile le contenu
 	$less = new lessc();
-	if ($import_dir){
-		$import_dir = rtrim($import_dir,"/")."/";
-		$less->importDir = $import_dir;
-	}
+	// lui transmettre le path qu'il utilise pour les @import
+	$less->importDir = _chemin();
+
 	try {
-		// avant compilation par less, remplacer les @import_spip par un @import+find_in_path
-		if (preg_match_all(",@import_spip\s+['\"]([^'\"]+)['\"],",$style,$matches,PREG_SET_ORDER)){
-			if ($import_dir){
-				// faker le chemin depuis le $import_dir
-				$i = $import_dir."dummy";$base = "";
-				while ($i AND ($i = dirname($i))!=".") {$base.="../";};
-				$ide= explode('/',$import_dir);
-				foreach($matches as $m){
-					if ($f=find_in_path($m[1])){
-						// calculer un chemin relatif propre avec le moins de ../ possible
-						$fe = explode("/",$f);
-						$be = explode("/",$base);
-						$l = min(count($ide),count($fe));
-						for($i=0;$i<$l;$i++){
-							if (reset($fe)==$ide[$i]){
-								array_shift($fe);
-								array_shift($be);
-							}
-							else
-								break;
-						}
-						$be = implode("/",$be);
-						$fe = implode("/",$fe);
-						$style = str_replace($m[0],"@import '$be$fe'",$style);
-					}
-				}
-			}
-			else {
-				spip_log('lessc @import_spip sans contexte de chemin','less'._LOG_ERREUR);
-				erreur_squelette(
-					"LESS : @import_spip sans contexte de chemin"
-					. (isset($contexte['file'])?" fichier ".$contexte['file']:"")
-				);
-			}
-		}
 		$out = $less->parse($style);
 		return $out;
 	}
