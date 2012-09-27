@@ -19,6 +19,7 @@ function action_relancer_adherents()
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$count = $securiser_action();
 	$sujet = _request('sujet');
+	$relance = association_recuperer_entier('relance');
 	$message = html_entity_decode(_request('message'), ENT_QUOTES, 'UTF-8');
 	$statut_tab = (isset($_POST['statut'])) ? $_POST['statut']:array(); // contient un tableau id_auteur => statut_interne
 	$exp = $GLOBALS['association_metas']['nom'].'<'.$GLOBALS['association_metas']['email'].'>';
@@ -33,7 +34,7 @@ function action_relancer_adherents()
 	$emails_envoyes_echec = 0;
 	$nb_membres_avec_email = 0;
 	$membres_sans_email = array();
-
+	// envoyer les messages
 	foreach ($emails_auteurs as $id_auteur => $emails) {
 		if (count($emails)) { // decompte des membres avec email
 			$nb_membres_avec_email++;
@@ -46,7 +47,7 @@ function action_relancer_adherents()
 				spip_log("non envoi du mail a $email",'associaspip');
 			} else {
 				$emails_envoyes_ok++;
-				if ($statut_tab[$id_auteur]=='echu') {
+				if ($relance && $statut_tab[$id_auteur]=='echu') { // dans le cas d'une relance on met a jour le statut interne (qui passe d'echu a relance) ; et dans le cas d'en simple publipostage (ou pour les membres non echus) le statut n'est pas modifie
 					sql_updateq('spip_asso_membres',
 						array('statut_interne' => 'relance'),
 						"id_auteur=$id_auteur");

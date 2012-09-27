@@ -22,7 +22,7 @@ function action_editer_asso_ressources()
     $date_achat = association_recuperer_date('date_acquisition');
     $prix_achat = association_recuperer_montant('prix_acquisition');
     $quantite = floatval(_request('quantite'));
-    $statut = $quantite ? (_request('suspendu')?"-$quantite":$quantite) : _request('statut');
+    $statut = $quantite ? (_request('suspendu')?"-$quantite":$quantite) :association_passeparam_statut();
     $champs = array(
 	'date_acquisition' => $date_achat,
 	'code' => $code,

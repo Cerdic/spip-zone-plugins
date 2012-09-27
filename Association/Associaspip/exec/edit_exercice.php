@@ -3,7 +3,7 @@
  *  Associaspip, extension de SPIP pour gestion d'associations
  *
  * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
- * @copyright Copyright (c) 2010-2011 Emmanuel Saint-James
+ * @copyright Copyright (c) 2010--2011 Emmanuel Saint-James
  * @copyright Copyright (c) 201108 Marcel Bolla
  *
  *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 function exec_edit_exercice()
 {
-	if (!autoriser('associer', 'comptes')) {
+	if (!autoriser('configurer_compta', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

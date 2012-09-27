@@ -3,8 +3,9 @@
 function formulaires_imprimer_etiquettes_charger_dist()
 {
 	include_spip('base/abstract_sql');
+	include_spip('association_options');
 	$valeurs = array(
-		'statut_interne'=>_request('statut_interne'),
+		'statut_interne'=>association_passeparam_statut('interne'),
 		'filtre_email'=>true
 	);
 
@@ -59,6 +60,7 @@ function formulaires_imprimer_etiquettes_traiter_dist()
 	include_spip('base/abstract_sql');
 	include_spip('inc/acces');
 	include_spip('pdf/extends');
+	include_spip('association_options');
 	$pas_horizontal = (($GLOBALS['association_metas']['etiquette_largeur_page']-$GLOBALS['association_metas']['etiquette_marge_gauche_page']-$GLOBALS['association_metas']['etiquette_marge_droite_page']-($GLOBALS['association_metas']['etiquette_nb_colonne']-1)*$GLOBALS['association_metas']['etiquette_espace_etiquettesl'])/$GLOBALS['association_metas']['etiquette_nb_colonne'])+$GLOBALS['association_metas']['etiquette_espace_etiquettesl'];
 	$pas_vertical = ($GLOBALS['association_metas']['etiquette_hauteur_page']-$GLOBALS['association_metas']['etiquette_marge_haut_page']-$GLOBALS['association_metas']['etiquette_marge_bas_page']-($GLOBALS['association_metas']['etiquette_nb_ligne']-1)*$GLOBALS['association_metas']['etiquette_espace_etiquettesh'])/$GLOBALS['association_metas']['etiquette_nb_ligne']+$GLOBALS['association_metas']['etiquette_espace_etiquettesh'];
 	$tab_etiquette = array();
@@ -78,13 +80,8 @@ function formulaires_imprimer_etiquettes_traiter_dist()
 
 	$table = array('m'=>'spip_asso_membres', 'al'=>'spip_adresses_liens','a'=>'spip_adresses');
 	$where = "al.objet='auteur' AND al.id_objet=m.id_auteur AND al.id_adresse=a.id_adresse AND ( (code_postal<>'' AND ville<>'') OR (boite_postale<>'') )";
-	$statut_interne = _request('statut_interne');
-	if ($statut_interne=='') {
-		$statut_interne = 'tous';
-	}
-	if ($statut_interne!='tous'){
-		$where .= ' AND statut_interne = '.sql_quote($statut_interne);
-	}
+	list($statut_interne, $critere) = association_passeparam_statut('interne', 'defaut');
+	$where .= $critere;
 	$filtre_categorie = _request('filtre_categorie');
 	if ($filtre_categorie){
 		$where .= ' AND categore = '.sql_quote($filtre_categorie);
@@ -98,22 +95,16 @@ function formulaires_imprimer_etiquettes_traiter_dist()
 	$indice = 0;
 	include_spip('filtres','inc'); // http://doc.spip.org/@extraire_multi
 	while($val = sql_fetch($res)) {
-		if ($GLOBALS['association_metas']['etiquette_avec_civilite']) {
-			$vnom = trim($val['sexe'].' '.$val['nom_famille'].' '.$val['prenom']);
-		} else {
-			$vnom = $val['prenom'].' '.$val['nom_famille'];
-		}
-		// cf. : http://fr.wikipedia.org/wiki/Adresse_postale#Exemples
-		$etiquette = array(
+		$etiquette = array( // cf. : http://fr.wikipedia.org/wiki/Adresse_postale#Exemples
 			'ligne1'=>$val['id_auteur'],
-			'ligne2'=>$vnom,
+			'ligne2'=>association_formater_nom( ($GLOBALS['association_metas']['etiquette_avec_civilite']?$val['sexe']:''), $val['prenom'], $val['nom_famille'], ''),
 			'ligne4'=>$val['voie'],
 			'ligne3'=>$val['complement'],
 			'ligne5'=>trim($val['boite_postale']),
 			'ligne6'=>trim($val['code_postal']).' '.$val['ville'],
 			'ligne7'=>($val['pays']==$GLOBALS['association_metas']['pays'] ? '' : extraire_multi(sql_getfetsel('nom','spip_pays', (is_numeric($val['pays'])?'id_pays':'code').'='.sql_quote($val['pays']) ,'','')) ), // pas terrible de devoir faire une requete separee pour une adresse, mais ceci ne devrait pas se produire souvent (en general)
 		);
-		if((fmod($indice,$GLOBALS['association_metas']['etiquette_nb_colonne']*$GLOBALS['association_metas']['etiquette_nb_ligne'])==0)and ($indice>0)) {
+		if ( (fmod($indice,$GLOBALS['association_metas']['etiquette_nb_colonne']*$GLOBALS['association_metas']['etiquette_nb_ligne'])==0)and ($indice>0) ) {
 			$pdf->AddPage();
 			$num_page++;
 		}

@@ -25,9 +25,9 @@ function formulaires_relancer_adherents_charger_dist() {
 	$message = _request('message');
 	$contexte['_sujet'] = $sujet;
 	$contexte['_message'] = $message;
-	$id_tab = _request('id');
+	$id_tab = association_passeparam_id();
 	$id_tab = (isset($id_tab)) ? $id_tab:array();
-	$statut_tab = _request('statut');
+	$statut_tab = association_passeparam_statut();
 	$statut_tab = (isset($statut_tab)) ? $statut_tab:array();
 	$contexte['_nb_messages'] = count ($id_tab);
 	// on met en hidden toutes les infos pour les envoyer a l'action de traitement. Il n'y qu'un seul input dans ce formulaire : le bouton "ok" demande confirmation

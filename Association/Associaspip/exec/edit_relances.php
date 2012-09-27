@@ -2,8 +2,8 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations
  *
- * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
- * @copyright Copyright (c) 2010 Emmanuel Saint-James
+ * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
  *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 function exec_edit_relances()
 {
-	if (!autoriser('editer_membres', 'association')) {
+	if (!autoriser('relancer_membres', 'association')) {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
@@ -23,16 +23,24 @@ function exec_edit_relances()
 		echo _T('asso:aide_relances');
 		// datation et raccourcis
 		raccourcis_association('adherents');
-		$statut_interne = _request('statut_interne');
-		if (!$statut_interne)
-			$statut_interne = 'echu';
+		list($statut_interne, $critere) = association_passeparam_statut('interne', 'echu');
 		$id_groupe = association_recuperer_entier('groupe');
+		$num_relance = association_recuperer_entier('relance');
 		debut_cadre_association('relance-24.png', 'tous_les_membres_a_relancer');
 		// Filtres
+		$filtre_relance = '<select name="relance" onchange="form.submit()">';
+		$filtre_relance .= '<option value="" ';
+		$filtre_relance .= (($num_relance==0 || $num_relance='')?' selected="selected"':'');
+		$filtre_relance .= '>'. _T('asso:autre') .'</option>';
+		$filtre_relance .= '<option value="1" ';
+		$filtre_relance .= (($num_relance==1)?' selected="selected"':'');
+		$filtre_relance .= '>'. _T('asso:relance') .'</option>';
 		filtres_association(array(
 			'groupe'=>$id_groupe,
 			'statut'=>$statut_interne,
-		), 'edit_relances');
+		), 'edit_relances', array(
+			'relance'=>$filtre_relance,
+		));
 		// MAILING
 		$res = '<div class="formulaire_spip formulaire_editer_relances"><form>'
 			// message (objet/titre et corps)
@@ -55,7 +63,7 @@ function exec_edit_relances()
 			. '<th>' . _T('asso:adherent_libelle_validite') .'</th>' // comme il s'agit initialement de faire des relances, cette information est rajoutee
 			. '<th>' . _T('asso:envoi') .'</th>'
 			. "</tr>\n</thead><tbody>"
-			.  relances_while($statut_interne, $groupe)
+			.  relances_liste($critere, $groupe)
 			. "</tbody>\n</table>\n";
 		$res .= '<p class="boutons"><input type="submit" value="'. ( isset($action) ? _T('asso:bouton_'.$action) : _T('asso:bouton_envoyer') ) .'" /></p>';
 		echo generer_form_ecrire('relance_adherents', $res, '', '');
@@ -63,15 +71,27 @@ function exec_edit_relances()
 	}
 }
 
-function relances_while($statut_interne, $id_groupe=0)
+/**
+ * Liste des membres
+ *
+ * @param string $critere
+ *   SQL de restriction selon statut
+ * @param int $id_groupe
+ *   Filtre groupe
+ * @return string
+ *   code HTML du tableau affichant la liste des membres en fonction des filtres
+ *   actifs avec cases a cocher de selection
+ */
+function relances_liste($critere, $id_groupe=0)
 {
+	if ($id_groupe) {
+		$critere .= " AND id_groupe=$id_groupe ";
+		$jointure_groupe = ' LEFT JOIN spip_asso_groupes_liaisons a_g_l ON a_m.id_auteur=a_g_l.id_auteur ';
+	} else {
+		$jointure_groupe = '';
+	}
 	$query = sql_select(
-		'id_auteur, sexe, nom_famille, prenom, statut_interne, validite', // select
-		'spip_asso_membres AS a_m'. ($id_groupe?' LEFT JOIN spip_asso_groupes_liaisons a_g_l ON a_m.id_auteur=a_g_l.id_auteur ':''), // from
-		" statut_interne LIKE '$statut_interne' AND statut_interne <> 'sorti'". ($id_groupe?' AND id_groupe='.intval($id_groupe):''), //where
-		'', // limit
-		'nom_famille, prenom, validite' // order by
-	);
+		'id_auteur, sexe, nom_famille, prenom, statut_interne, validite', "spip_asso_membres AS a_m $jointure_groupe", $critere, '', 'nom_famille, prenom, validite' );
 	$res = '';
 	while ($data = sql_fetch($query)) {
 		$res .= '<tr class="'.$GLOBALS['association_styles_des_statuts'][$data['statut_interne']].'" id="membre'.$data['id_auteur'].'">'

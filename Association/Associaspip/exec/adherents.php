@@ -1,19 +1,15 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & Fran�ois de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
-
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
-
-include_spip('inc/navigation_modules');
 
 function exec_adherents()
 {
@@ -21,9 +17,8 @@ function exec_adherents()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		// recuperation des variables
-		$critere = request_statut_interne(); // peut appeler set_request
-		$statut_interne = _request('statut_interne');
+		include_spip('inc/navigation_modules');
+		list($statut_interne, $critere) = association_passeparam_statut('interne', 'defaut');
 		$lettre = _request('lettre');
 		onglets_association('titre_onglet_membres', 'adherents');
 		// TOTAUX : effectifs par statuts
@@ -42,10 +37,10 @@ function exec_adherents()
 		// datation et raccourcis
 		raccourcis_association(array(), array(
 			'gerer_les_groupes' => array('annonce.gif', 'groupes', array('voir_groupes', 'association', 100) ), // l'id groupe passe en parametre est a 100 car ce sont les groupes definis par l'utilisateur et non ceux des autorisation qu'on liste dans cette page
-			'menu2_titre_relances_cotisations' => array('relance-24.png', 'edit_relances' ),
-			'synchronise_asso_membre_lien' => array('reload-32.png', 'synchroniser_asso_membres' ),
+			'menu2_titre_relances_cotisations' => array('relance-24.png', 'edit_relances', array('relancer_membres', 'association') ),
+			'synchronise_asso_membre_lien' => array('reload-32.png', 'synchroniser_asso_membres', array('synchroniser_membres', 'association') ),
 		));
-		if ( test_plugin_actif('FPDF') && test_plugin_actif('COORDONNEES') ) { // etiquettes
+		if ( test_plugin_actif('FPDF') && test_plugin_actif('COORDONNEES') && autoriser('relancer_membres', 'association') ) { // etiquettes
 			echo debut_cadre_enfonce('',true);
 			echo recuperer_fond('prive/editer/imprimer_etiquettes');
 			echo fin_cadre_enfonce(true);
@@ -83,19 +78,37 @@ function exec_adherents()
 	}
 }
 
-/* adherent liste renvoie le code html et tout ce qu'il faut pour effectuer la requete avec les meme filtres (where et la possible jonction sur la table des groupes) */
+/**
+ * liste des adherents
+ *
+ * @param string $lettre
+ *   Filtre lettre
+ * @param string $critere
+ *   SQL de restriction selon statut
+ * @param string $statut_interne
+ *   Filtre statut interne
+ * @param int $id_groupe
+ *   Filtre groupe
+ * @return array
+ *   Liste du :
+ *   - critere de requete SQL en fonction des filtres actifs,
+ *   - possible jonction SQL sur la table des groupes,
+ *   - code HTML du tableau affichant la liste des membres en fonction des
+ *     filtres actifs et de la configuration (champs affiches ou pas)
+ */
 function adherents_liste($lettre, $critere, $statut_interne, $id_groupe)
 {
 	if ($lettre)
-		$critere .= " AND UPPER( SUBSTRING( nom_famille, 1, 1 ) ) LIKE '$lettre' ";
-	$jointure_groupe = '';
+		$critere .= " AND UPPER(nom_famille) LIKE UPPER('$lettre%') "; // le 1er UPPER (plutot que LOWER puisque les lettres sont mises et passees en majuscule) sur le champ est requis car LIKE est sensible a la casse... le 2nd UPPER est pour contrer les requetes entrees manuellement... (remarque, avec MySQL 5 et SQL Server, on aurait pu avoir simplement "nom_famille LIKE '$lettre%' COLLATE UTF_GENERAL_CI" ou mieux ailleurs : "nom_famille ILIKE '$lettre%'" mais c'est pas forcement portable)
 	if ($id_groupe) {
 		$critere .= " AND c.id_groupe=$id_groupe ";
 		$jointure_groupe = ' LEFT JOIN spip_asso_groupes_liaisons c ON a.id_auteur=c.id_auteur ';
+	} else {
+		$jointure_groupe = '';
 	}
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	include_spip('inc/filtres_images_mini');
-	$query = sql_select('a.id_auteur AS id_auteur, b.email AS email, a.sexe, a.nom_famille, a.prenom, a.id_asso, b.statut AS statut, a.validite, a.statut_interne, a.categorie, b.bio AS bio','spip_asso_membres' .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur $jointure_groupe", $critere, '', 'nom_famille ', sql_asso1page() );
+	$query = sql_select('a.id_auteur AS id_auteur, b.email AS email, a.sexe, a.nom_famille, a.prenom, a.id_asso, b.statut AS statut, a.validite, a.statut_interne, a.categorie, b.bio AS bio','spip_asso_membres' .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur $jointure_groupe", $critere, '', 'nom_famille, prenom, validite', sql_asso1page() );
 	$auteurs = '';
 	while ($data = sql_fetch($query)) {
 		$id_auteur = $data['id_auteur'];
@@ -171,14 +184,15 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe)
 			$auteurs .= '</td>';
 		}
 		$auteurs .= '<td class="action">'
-		. '<a href="'. generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur) .'">'.$icone.'</a></td>'
-		. association_bouton_act('adherent_label_ajouter_cotisation', 'cotis-12.gif', 'ajout_cotisation','id='.$id_auteur)
-		. association_bouton_edit('adherent','id='.$id_auteur)
-		. association_bouton_act('adherent_label_voir_membre', 'voir-12.png', 'adherent','id='.$id_auteur)
+		. '<a href="'. generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur) .'">'.$icone.'</a></td>';
+		if (autoriser('editer_membres', 'association')) {
+			$auteurs .= association_bouton_act('adherent_label_ajouter_cotisation', 'cotis-12.gif', 'ajout_cotisation','id='.$id_auteur)
+			. association_bouton_edit('adherent','id='.$id_auteur);
+		}
+		$auteurs .= association_bouton_act('adherent_label_voir_membre', 'voir-12.png', 'adherent','id='.$id_auteur)
 		. association_bouton_coch('id_auteurs', $id_auteur)
 		. "</tr>\n";
 	}
-
 	$res = "<table width='100%' class='asso_tablo' id='liste_adherents'>\n"
 	. "<thead>\n<tr>";
 	if ($GLOBALS['association_metas']['aff_id_auteur']) {
@@ -204,7 +218,7 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe)
 	if ($GLOBALS['association_metas']['aff_validite']) {
 		$res .= '<th>'._T('asso:adherent_libelle_validite').'</th>';
 	}
-	$res .= '<th colspan="4" class="actions">'._T('asso:entete_actions').'</th>'
+	$res .= '<th colspan="'. (autoriser('editer_membres', 'association')?4:2) .'" class="actions">'._T('asso:entete_actions').'</th>'
 	. '<th><input title="'._T('asso:selectionner_tout').'" type="checkbox" id="selectionnerTous" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName(\'id_auteurs[]\'); for (var i in checkboxList){checkboxList[i].checked=currentVal;}" /></th>'
 	. "</tr>\n</thead><tbody>"
 	. $auteurs
@@ -215,9 +229,11 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe)
 	if (autoriser('editer_membres', 'association', 100)) {
 		$res .= "</td><td align='right' class='formulaire'><form>\n";
 		if ($auteurs) {
-			$res .=  '<select name="action_adherents"><option value="" selected="">'._T('asso:choisir_action').'</option><option value="desactive">'
-			.($statut_interne=='sorti' ? _T('asso:reactiver_adherent') : _T('asso:desactiver_adherent'))
-			.'</option><option value="delete">'._T('asso:supprimer_adherent').'</option>';
+			if (autoriser('editer_membres', 'association')) {
+				$res .=  '<select name="action_adherents"><option value="" selected="">'._T('asso:choisir_action').'</option><option value="desactive">'
+				.($statut_interne=='sorti' ? _T('asso:reactiver_adherent') : _T('asso:desactiver_adherent'))
+				.'</option><option value="delete">'._T('asso:supprimer_adherent').'</option>';
+			}
 			if (autoriser('editer_groupes', 'association', 100)) {
 				$res .=sql_countsel('spip_asso_groupes', '') ? '<option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_un_groupe').'</option>' : '';
 			}
@@ -227,10 +243,17 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe)
 		.  '</form></td>';
 	}
 	$res .= '</tr></table>';
-
 	return 	array($critere, $jointure_groupe, generer_form_ecrire('action_adherents', $res));
 }
 
+/**
+ * Affiche le code d'une categorie a partir de son ID
+ *
+ * @param int $c
+ *   spip_asso_categories.id_categorie
+ * @return string
+ *   spip_asso_categories.valeur
+ */
 function affiche_categorie($c)
 {
   return is_numeric($c)

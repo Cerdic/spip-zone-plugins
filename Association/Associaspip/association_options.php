@@ -1054,6 +1054,7 @@ function association_selectionner_annee($annee='', $table, $champ, $exec='', $pl
  */
 function association_selectionner_lettre($lettre='', $table, $champ, $exec='', $plus='', $lst=FALSE)
 {
+    $lettre = strtoupper($lettre);
     if ($exec) {
 		$res = '<form method="post" action="'. generer_url_ecrire($exec) .'"><div>';
 		$res .= '<input type="hidden" name="exec" value="'.$exec.'" />';
@@ -1065,7 +1066,7 @@ function association_selectionner_lettre($lettre='', $table, $champ, $exec='', $
 	$res .= '<option value=""';
 	$res .= ((!$lettre||$lettre=='%')?' selected="selected"':'');
 	$res .='>'. _T('asso:entete_tous') .'</option>';
-    $sql = sql_select("UPPER( LEFT( $champ, 1 ) ) AS init", "spip_$table", '',  'init ASC', "$champ");
+    $sql = sql_select("UPPER( LEFT( $champ, 1 ) ) AS init", "spip_$table", '',  'init ASC', "$champ"); // LEFT(field, n) ==  SUBSTRING(field, 1, n)
     while ($val = sql_fetch($sql)) {
 		$res .= '<option value="'.$val['init'].'"';
 		if ($lettre==$val['init']) {
@@ -1940,6 +1941,7 @@ function association_passeparam_id($type='', $table='')
  * &annee=
  *
  * @return int $an
+ * @return array($an, $sql_where)
  */
 function association_passeparam_annee($type='', $table='', $id=0)
 {
@@ -1979,6 +1981,42 @@ function association_passeparam_exercice()
 	return $exo;
 }
 
+/**
+ * &statut=
+ *
+ * @return string $statut
+ * @return array($statut, $sql_where)
+ * Pour l'instant, appele uniquement dans exec/adherents.php vers la ligne 25
+ */
+function association_passeparam_statut($type='', $defaut='')
+{
+	if ($type) // recuperer en priorite :
+		$statut = trim(_request("statut_$type", $_GET));
+	else
+		$statut = '';
+	if (!$statut) // pas de statut_... alors c'est le nom generique qui est utilise
+		$statut = trim(_request('statut'));
+	if (!$statut) // statut non precise non precisee
+		$statut = $defaut; // on prend celui par defaut (tous)
+	if ($defaut && $type) {
+		switch ($type) {
+			case 'interne' :
+				if (in_array($statut, $GLOBALS['association_liste_des_statuts'] ))
+					$sql_where = 'statut_interne='. sql_quote($statut_interne);
+				elseif ($statut=='tous')
+					$sql_where = "statut_interne LIKE '%'";
+				else {
+					set_request('statut_interne', $defaut);
+					$a = $GLOBALS['association_liste_des_statuts'];
+					$sql_where = sql_in('statut_interne', array_shift($a) );
+				}
+				break;
+		}
+		return array($statut, $sql_where);
+	} else
+		return $statut;
+}
+
 /** @} */
 
 
@@ -1989,26 +2027,6 @@ function association_passeparam_exercice()
  * Inclassables
  *
 ** @{ */
-
-/**
- * Cree le critere SQL Where portant sur le champ "statut_interne"
- *
- * Pour l'instant, appele uniquement dans exec/adherents.php vers la ligne 25
- */
-function request_statut_interne()
-{
-	$statut_interne = _request('statut_interne');
-	if (in_array($statut_interne, $GLOBALS['association_liste_des_statuts'] ))
-		return 'statut_interne='. sql_quote($statut_interne);
-	elseif ($statut_interne=='tous')
-		return "statut_interne LIKE '%'";
-	else {
-		set_request('statut_interne', 'defaut');
-		$a = $GLOBALS['association_liste_des_statuts'];
-		array_shift($a);
-		return sql_in('statut_interne', $a);
-	}
-}
 
 /**
  * Affichage du message indiquant la date

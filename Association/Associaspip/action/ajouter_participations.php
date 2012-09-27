@@ -23,9 +23,9 @@ function action_ajouter_participations() {
 	$non_membres = _request('non_membres');
 	$inscrits = association_recuperer_entier('inscrits');
 	$montant = association_recuperer_montant('montant');
-	$date_paiement = _request('date_paiement');
+	$date_paiement = association_recuperer_date('date_paiement');
 	$journal = _request('journal');
-	$statut = _request('statut');
+	$statut = association_passeparam_statut();
 	$commentaire = _request('commentaire');
 #	$action = _request('action');
 	$id_activite = association_recuperer_entier('id_activite');

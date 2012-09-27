@@ -1,19 +1,15 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & Fran�ois de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
-
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
-
-include_spip ('inc/navigation_modules');
 
 function exec_association()
 {
@@ -21,6 +17,7 @@ function exec_association()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
+		include_spip ('inc/navigation_modules');
 		onglets_association('', 'association');
 		// presentation du plugin
 		echo propre(_T('asso:association_info_doc'));
@@ -30,11 +27,10 @@ function exec_association()
 			'editer_asso_metas_utilisateur_lien' => array('assoc_qui.png', 'editer_asso_metas_utilisateur', array('editer_profil', 'association'), ),
 			'categories_de_cotisations' => array('cotisation.png', 'categories', array('editer_profil', 'association'), ),
 			'gerer_les_autorisations' => array('annonce.gif', 'association_autorisations', array('gerer_autorisations', 'association'), ),
-			'plan_comptable' => array('plan_compte.png', 'plan_comptable', array('associer', 'comptes') ),
-			'destination_comptable' => array('euro-39.gif', 'destination', array('associer', 'comptes') && $GLOBALS['association_metas']['destinations'] ),
-			'exercices_budgetaires_titre' => array('calculatrice.gif', 'exercices', array('associer', 'comptes') ),
+			'plan_comptable' => array('plan_compte.png', 'plan_comptable', array('configurer_compta', 'association') ),
+			'destination_comptable' => array('euro-39.gif', 'destination', array('configurer_compta', 'association') && $GLOBALS['association_metas']['destinations'] ),
+			'exercices_budgetaires_titre' => array('calculatrice.gif', 'exercices', array('configurer_compta', 'association') ),
 		));
-
 		debut_cadre_association('assoc_qui.png', 'association_infos_contacts');
 		echo '<div class="vcard" id="vcard-asso">';
 		// Profil de l'association
