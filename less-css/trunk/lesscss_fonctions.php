@@ -56,6 +56,8 @@ function lesscss_compile($style, $contexte = array()){
  * @return string
  */
 function less_css($source){
+	static $chemin = null;
+
 	// Si on n'importe pas, est-ce un fichier ?
 	if (!preg_match(',[\s{}],', $source)
 	  AND preg_match(',\.(less|css)$,i', $source, $r)
@@ -65,10 +67,15 @@ function less_css($source){
 		// si on a echoue une fois, on echouera pareil
 		if (isset($done[$source])) return $done[$source];
 
+		if (is_null($chemin)){
+			$chemin = _chemin();
+			$chemin = md5(serialize($chemin));
+		}
 		$f = basename($source,$r[0]);
 		$f = sous_repertoire (_DIR_VAR, 'cache-less')
-		. preg_replace(",(.*?)(_rtl|_ltr)?$,","\\1-cssify-"
-		. substr(md5("$source-lesscss"), 0,4) . "\\2", $f, 1)
+		. preg_replace(",(.*?)(_rtl|_ltr)?$,",
+				"\\1-cssify-" . substr(md5("$source-lesscss-$chemin"), 0,7) . "\\2",
+				$f, 1)
 		. '.css';
 
 		# si la feuille compilee est plus recente que la feuille source
