@@ -42,14 +42,23 @@ var minical = {
 		selectOtherMonths: [(#CONFIG{calendriermini/affichage_hors_mois,1}|?{true,false})]
 	},
 
-	add_tooltip: function($this,date,id,tooltip){
+	add_tooltip_and_class: function($this,date,id,tooltip,className){
 		if (!$this.tooltip)
 			$this.tooltip = {};
+		if (!$this.className)
+			$this.className = {};
+
 		var d = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
 		if (!$this.tooltip[d])
 			$this.tooltip[d] = {};
 		tooltip = tooltip.replace(/"/g,'&quot;'); // echapper les " pour ne pas casser le html (secu, supprimer le html en amont !)
 		$this.tooltip[d][id] = tooltip;
+
+		if (className && typeof className != "undefined"){
+			if (!$this.className[d])
+				$this.className[d] = {};
+			$this.className[d][id] = className;
+		}
 	},
 
 	set_events: function(me,start,end,data){
@@ -63,7 +72,7 @@ var minical = {
 				d = d[0].split("-");
 				d = new Date(d[0],d[1]-1,d[2]);
 				dates.push(d);
-				minical.add_tooltip($this,d,data[j].id,data[j].title);
+				minical.add_tooltip_and_class($this,d,data[j].id,data[j].title,data[j].className);
 
 				if(data[j].end){
 					/* prendre la plus grande date de debut entre debut a afficher et l'interval donne */
@@ -75,12 +84,12 @@ var minical = {
 					dateend = Math.min(end * 1000, d.getTime());
 					if (dateend>datebegin){
 						dates.push(d);
-						minical.add_tooltip($this,d,data[j].id,data[j].title);
+						minical.add_tooltip_and_class($this,d,data[j].id,data[j].title,data[j].className);
 						datebegin = datebegin+(3600*24*1000);
 						while(datebegin < dateend){
 							d = new Date(datebegin);
 							dates.push(d);
-							minical.add_tooltip($this,d,data[j].id,data[j].title);
+							minical.add_tooltip_and_class($this,d,data[j].id,data[j].title,data[j].className);
 							datebegin = datebegin+(3600*24*1000);
 						}
 					}
@@ -96,6 +105,11 @@ var minical = {
 	before_show_day: function(date) {
 		var d = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
 		var c = [true, ''];
+		if (this.className && this.className[d]){
+			for (var i in this.className[d])
+				c[1] += ' ' + this.className[d][i];
+		}
+
 		if (this.tooltip && this.tooltip[d]){
 			var glue = '';
 			c[2] = '';
