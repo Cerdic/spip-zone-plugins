@@ -139,6 +139,7 @@
 							custom = this.multiDatesPicker.originalBeforeShowDay.call(this, date);
 						
 						var highlight_class = gotThisDate ? 'ui-state-highlight' : custom[1];
+						var highlight_class = (gotThisDate ? 'ui-state-highlight' : '') + ((custom[1] && gotThisDate) ? ' ' : '') + custom[1];
 						var selectable_date = !(isDisabledCalendar || isDisabledDate || (areAllSelected && !highlight_class));
 						custom[0] = selectable_date && custom[0];
 						custom[1] = highlight_class;
