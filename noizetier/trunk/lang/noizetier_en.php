@@ -103,7 +103,7 @@ nuts on the following pages:',
 
 	// M
 	'masquer' => 'Hide',
-	'mode_noisettes' => 'Éditer les noisettes', # NEW
+	'mode_noisettes' => 'Edit the nuts',
 	'modif_en_cours' => 'Ongoing changes',
 
 	// N
@@ -131,7 +131,7 @@ nuts on the following pages:',
 	'probleme_droits' => 'You don\'t have the permission to make this change.',
 
 	// Q
-	'quitter_mode_noisettes' => 'Quitter l\'édition des noisettes', # NEW
+	'quitter_mode_noisettes' => 'Quit editing nuts',
 
 	// R
 	'retour' => 'Back',
