@@ -19,6 +19,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'date_forum' => 'Le @date@ à @heure@', # MODIF
 
+	// I
+	'info_1_commentaire' => '1 commentaire', # NEW
+	'info_nb_commentaires' => '@nb@ commentaires', # NEW
+
 	// L
 	'lire_la_suite' => 'Läs mer',
 	'lire_la_suite_de' => ' om ',
