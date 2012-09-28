@@ -64,7 +64,8 @@ function 	zengarden_liste_themes($tous){
 	// ce skel
 	$search = "";
 	if (defined('_DIR_PLUGIN_ZPIP')) $search="zpip";
-	if (defined('_DIR_PLUGIN_Z')) $search="z";
+	elseif (defined('_DIR_PLUGIN_Z')) $search="z";
+	elseif (defined('_ZENGARDEN_FILTRE_THEMES')) $search=_ZENGARDEN_FILTRE_THEMES;
 	if ($search){
 		foreach ($themes as $k => $theme){
 			$keep = false;
