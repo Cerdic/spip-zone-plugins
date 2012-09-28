@@ -130,7 +130,14 @@ function albums_post_edition($flux){
 * Css sur les pages publiques
 */
 function albums_insert_head_css($flux) {
-	$flux .= '<link rel="stylesheet" href="'.find_in_path('css/albums.css').'" type="text/css" media="all" />';
+	if (!defined('_ALBUMS_INSERT_HEAD_CSS') OR !_ALBUMS_INSERT_HEAD_CSS){
+		include_spip("inc/config");
+		$cfg = (defined('_ALBUMS_INSERT_HEAD_CSS')?_ALBUMS_INSERT_HEAD_CSS:lire_config("albums/insert_head_css",1));
+		if ($cfg){
+			$flux .= '<link rel="stylesheet" href="'.find_in_path('css/albums.css').'" type="text/css" />';
+		}
+	}
+
 	return $flux;
 }
 
