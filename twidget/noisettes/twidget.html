@@ -1,19 +1,17 @@
-
 #SET{width,#ENV{width,250}}
 #SET{shell_background,#ENV{shell_background,#413C3C}}
 #SET{shell_color,#ENV{shell_color,#ffffff}}
-
 #SET{demande,#ENV{demande,twprofile}}
 #SET{user,#ENV{user,GusLeLapin}
+#SET{avatar,#ENV{avatar,false}}
 #SET{search,#ENV{search,SPIP}}
 #SET{title,#ENV{title,'Suivez twitter'}}
 #SET{subject,#ENV{subject,SPIP}}
 
-
 [(#GET{demande}|=={twprofile}|oui)
-#INCLURE{fond=inclure/twidget_profile,user=#GET{user},width='#GET{width}',shell_background='#GET{shell_background}',shell_color='#GET{shell_color}'}
+#INCLURE{fond=inclure/twidget_profile,user=#GET{user},avatar=#GET{avatar},width=#GET{width},shell_background=#GET{shell_background},shell_color=#GET{shell_color}}
 ]
 
 [(#GET{demande}|=={twsearch}|oui)
-#INCLURE{fond=inclure/twidget_search,search=#GET{search},title='#GET{title}',subject='#GET{subject}',shell_background='#GET{shell_background}',shell_color='#GET{shell_color}'}
+#INCLURE{fond=inclure/twidget_search,search=#GET{search},title=#GET{title},subject=#GET{subject},shell_background=#GET{shell_background},shell_color=#GET{shell_color}}
 ]

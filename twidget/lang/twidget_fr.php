@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_demande_twidget_profile'=>'Compte avec un nom d\'utilisateur',
 	'noisette_demande_twidget_search'=>'Compte avec un mot recherché',
 	'noisette_label_user_twidget_profile'=>'Un nom d\'utilisateur',
+	'label_avatar_true_false'=>'Pour afficher les avatars entrer true ou false',
 	'noisette_label_search_twidget_search'=>'La recherche comme #SPIP',
 	'noisette_label_title_twidget_search'=>'Le titre de votre recherche',
 	'noisette_label_subject_twidget_search'=>'Le sujet de votre recherche comme SPIP',

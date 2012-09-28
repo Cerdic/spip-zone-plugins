@@ -16,13 +16,13 @@ parametres:
     options:
       nom: 'shell_background'
       label: '<:twidget:noisette_label_shell_background_twidget:>'
-      defaut: #413C3C
+      defaut: "#413C3C"
   -
     saisie: 'input'
     options:
       nom: 'shell_color'
       label: '<:twidget:noisette_label_shell_color_twidget:>'
-      defaut: #ffffff
+      defaut: "#ffffff"
   -
     saisie: 'selection'
     options:
@@ -38,6 +38,13 @@ parametres:
     options:
       nom: 'user'
       label: '<:twidget:noisette_label_user_twidget_profile:>'
+      afficher_si: '@demande@ == "twprofile"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'avatar'
+      label: '<:twidget:label_avatar_true_false:>'
+      defaut: 'false'
       afficher_si: '@demande@ == "twprofile"'
   -
     saisie: 'input'
