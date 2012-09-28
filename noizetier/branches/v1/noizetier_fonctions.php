@@ -112,7 +112,7 @@ function noizetier_obtenir_infos_noisettes() {
  *
  * @return array
  */
-function noizetier_obtenir_infos_noisettes_direct(){
+function noizetier_obtenir_infos_noisettes_direct_dist(){
 
 	$liste_noisettes = array();
 		
