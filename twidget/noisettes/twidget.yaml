@@ -24,6 +24,24 @@ parametres:
       label: '<:twidget:noisette_label_shell_color_twidget:>'
       defaut: "#ffffff"
   -
+    saisie: 'input'
+    options:
+      nom: 'tweets_background'
+      label: '<:twidget:noisette_label_tweets_background_twidget:>'
+      defaut: "#ffffff"
+  -
+    saisie: 'input'
+    options:
+      nom: 'tweets_color'
+      label: '<:twidget:noisette_label_tweets_color_twidget:>'
+      defaut: "#444444"
+  -
+    saisie: 'input'
+    options:
+      nom: 'tweets_links'
+      label: '<:twidget:noisette_label_tweets_links_twidget:>'
+      defaut: "#1986b5"     
+  -
     saisie: 'selection'
     options:
       nom: 'demande'
