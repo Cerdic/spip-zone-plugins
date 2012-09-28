@@ -25,7 +25,7 @@ function zengarden_charge_themes($dir = _DIR_THEMES, $tous = false, $force = fal
 			if (isset($t[$d])){
 				if ($t[$d]['categorie']=='theme'
 				  AND ($tous OR $t[$d]['etat']=='stable')){
-					$t[$d]['tri'] = strtolower($dir);
+					$t[$d]['tri'] = strtolower(basename($d));
 					$themes[substr($dir.$d,strlen(_DIR_RACINE))] = $t[$d];
 				}
 			}
