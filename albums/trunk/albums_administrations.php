@@ -45,8 +45,11 @@ function albums_upgrade($nom_meta_base_version, $version_cible){
 	);
 
 	# Dans tous les cas on verifie que l'ajout de documents aux albums est active
-	if (!in_array('spip_albums', explode(',',$GLOBALS['meta']['documents_objets'])))
-		ecrire_meta('documents_objets',$GLOBALS['meta']['documents_objets'] . 'spip_albums,');
+	if (!in_array('spip_albums', $e = explode(',',$GLOBALS['meta']['documents_objets']))){
+		$e = array_filter($e);
+		$e[] = 'spip_albums';
+		ecrire_meta('documents_objets',implode(',',$e));
+	}
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
