@@ -45,8 +45,8 @@ var minical = {
 	add_tooltip_and_class: function($this,date,id,tooltip,className){
 		if (!$this.tooltip)
 			$this.tooltip = {};
-		if (!$this.className)
-			$this.className = {};
+		if (!$this.cn)
+			$this.cn = {};
 
 		var d = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
 		if (!$this.tooltip[d])
@@ -55,9 +55,9 @@ var minical = {
 		$this.tooltip[d][id] = tooltip;
 
 		if (className && typeof className != "undefined"){
-			if (!$this.className[d])
-				$this.className[d] = {};
-			$this.className[d][id] = className;
+			if (!$this.cn[d])
+				$this.cn[d] = {};
+			$this.cn[d][id] = className;
 		}
 	},
 
@@ -105,9 +105,9 @@ var minical = {
 	before_show_day: function(date) {
 		var d = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
 		var c = [true, ''];
-		if (this.className && this.className[d]){
-			for (var i in this.className[d])
-				c[1] += ' ' + this.className[d][i];
+		if (this.cn && this.cn[d]){
+			for (var i in this.cn[d])
+				c[1] += ' ' + this.cn[d][i];
 		}
 
 		if (this.tooltip && this.tooltip[d]){
