@@ -15,7 +15,7 @@ function menus_type_refuser_sous_menu($nom){
 	return $infos['refuser_sous_menu'];
 }
 
-function menus_exposer($id_objet, $objet, $env, $on='on', $off=''){
+function menus_exposer($id_objet, $objet, $env, $on='on active', $off=''){
 	if (is_string($env))
 		$env = unserialize($env);
 	$primary = id_table_objet($objet);

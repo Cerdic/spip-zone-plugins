@@ -19,6 +19,6 @@
 	<div class="infos"><:menus:info_page_speciale{page=#ENV{nom}}:>[ ((#ENV{suivant_connexion}|?{[(#VAL{menus:entree_suivant_connexion_}|concat{#ENV{suivant_connexion}}|_T)]}))]</div>
 ]
 [(#ENV{appel_menu}|et{#GET{afficher_entree}})
-	<li class="menu-entree item[ (#ENV{css})][(#ENV{env}|table_valeur{type}|=={page}|et{#ENV{env}|table_valeur{composition}|=={#ENV{nom}}}) on]"> 
+	<li class="menu-entree item[ (#ENV{css})][(#ENV{env}|table_valeur{type}|=={page}|et{#ENV{env}|table_valeur{composition}|=={#ENV{nom}}}) on active]">
 		<a href="#URL_PAGE{#ENV{nom}, #ENV{parametres}}" title="[(#GET{titre}|attribut_html)]">#GET{titre}</a>
 ]
