@@ -11,10 +11,13 @@
 #SET{title,#ENV{title,'Suivez twitter'}}
 #SET{subject,#ENV{subject,SPIP}}
 
+
 [(#GET{demande}|=={twprofile}|oui)
-#INCLURE{fond=inclure/twidget_profile,user=#GET{user},avatar=#GET{avatar},width=#GET{width},shell_background=#GET{shell_background},shell_color=#GET{shell_color},tweets_background=#GET{tweets_background},tweets_links=#GET{tweets_links},tweets_links=#GET{tweets_links}}
+#INCLURE{fond=inclure/twidget_profile,user=#GET{user},avatar=#GET{avatar},width=#GET{width},shell_background=#GET{shell_background},shell_color=#GET{shell_color},tweets_background=#GET{tweets_background},tweets_color=#GET{tweets_color},tweets_links=#GET{tweets_links}
+}
 ]
 
 [(#GET{demande}|=={twsearch}|oui)
-#INCLURE{fond=inclure/twidget_search,search=#GET{search},title=#GET{title},subject=#GET{subject},shell_background=#GET{shell_background},shell_color=#GET{shell_color},tweets_background=#GET{tweets_background},tweets_links=#GET{tweets_links},tweets_links=#GET{tweets_links}}
+#INCLURE{fond=inclure/twidget_search,search=#GET{search},title=#GET{title},subject=#GET{subject},shell_background=#GET{shell_background},shell_color=#GET{shell_color},tweets_background=#GET{tweets_background},tweets_color=#GET{tweets_color},tweets_links=#GET{tweets_links}
+}
 ]
