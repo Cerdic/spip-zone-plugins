@@ -53,7 +53,7 @@ function exec_pdf_fiscal()
 			$critere .= ' AND ';
 		$montants += sql_getfetsel('SUM(D.argent) AS montant',
             'spip_asso_dons AS D LEFT JOIN spip_asso_comptes AS C ON C.id_journal=D.id_don',
-            "$critere C.vu AND DATE_FORMAT(D.date_don, '%Y') = $annee AND id_adherent=$id_auteur AND contrepartie=''");
+            "$critere C.vu AND DATE_FORMAT(D.date_don, '%Y') = $annee AND id_auteur=$id_auteur AND contrepartie=''");
            //$mail = sql_getfetsel('email', 'spip_auteurs',"id_auteur=$id_auteur");
 		if (!$montants) {
             echo "Pas de versement(s) &quot;valid&eacute;(s)&quot; en $annee pour l'adh&eacute;rent <a href='". generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur)."'> {$mbr_qui['prenom']} {$mbr_qui['nom_famille']}</a>.";

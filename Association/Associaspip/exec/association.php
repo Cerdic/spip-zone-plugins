@@ -72,10 +72,10 @@ function exec_association()
 		$queryGroupesAffiches = sql_select('id_groupe, nom', 'spip_asso_groupes', 'affichage>0', '', 'affichage');
 		while ($row = sql_fetch($queryGroupesAffiches)) {
 			echo '<div class="vcard" id="vcard-group'.$row['id_groupe'].'"><a class="include" href="#vcard-asso"></a>',
-			'<span class="fn org"><abbr class="organization-name" title="'.$GLOBALS['association_metas']['nom'].'"></abbr>'; //!\ l'inclusion de fragments (class=include cf. http://microformats.org/wiki/include-pattern) est la bonne methode, mais n'est pas encore prise en compte partout, donc on duplique quand meme le nom
-			echo debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif', true, '', '<a class="org organization-unit" title="'._T('asso:editer_groupe').'" href="'.generer_url_ecrire('edit_groupe', 'id='.$row['id_groupe']).'">'.$row['nom'].'</a>');
+			'<span class="org"><abbr class="organization-name" title="'.$GLOBALS['association_metas']['nom'].'"></abbr>'; //!\ l'inclusion de fragments (class=include cf. http://microformats.org/wiki/include-pattern) est la bonne methode, mais n'est pas encore prise en compte partout, donc on duplique quand meme le nom
+			echo debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif', true, '', '<a class="organization-unit"'. (autoriser('editer_groupe', 'association') ? (' title="'._T('asso:editer_groupe').'" href="'.generer_url_ecrire('edit_groupe', 'id='.$row['id_groupe']) ):'').'">'.$row['nom'].'</a>');
 //			echo '<a class="org organization-unit" title="'._T('asso:editer_groupe').'" href="'.generer_url_ecrire('edit_groupe', 'id='.$row['id_groupe']).'">'.gros_titre($row['nom'], _DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif', false).'</a>';
-			echo recuperer_fond('prive/contenu/voir_membres_groupe', array('id_groupe' => $row['id_groupe']));
+			echo recuperer_fond('modeles/asso_membres', array('id_groupe' => $row['id_groupe']));
 			echo fin_cadre_relief(true);
 			echo '</span></div>';
 		}

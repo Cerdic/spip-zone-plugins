@@ -28,7 +28,7 @@ function exec_pdf_activite()
 		// On définit les colonnes (champs,largeur,intitulé,alignement)
 		$pdf->AddCol('id_activite',10,_T('asso:entete_id'),'R');
 		$pdf->AddCol('nom',50,utf8_decode(_T('asso:entete_nom')),'L');
-		$pdf->AddCol('id_adherent',20,'N°','R');
+		$pdf->AddCol('id_auteur',20,'N°','R');
 		$pdf->AddCol('inscrits',10,_T('asso:activite_entete_inscrits'),'R');
 		$pdf->AddCol('montant',20,utf8_decode(_T('asso:entete_montant')),'R');
 		$pdf->Table("SELECT * FROM spip_asso_activites WHERE id_evenement=$id_evenement ORDER BY nom, date_inscription");

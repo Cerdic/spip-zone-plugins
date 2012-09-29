@@ -32,7 +32,7 @@ function exec_groupes()
 			array(
 #				'id_groupe' => array('asso:entete_id', 'entier'),
 				'nom' => array('asso:entete_nom', 'texte'),
-				'commentaires' => array('asso:entete_commentaire', 'texte'),
+				'commentaire' => array('asso:entete_commentaire', 'texte'),
 				'affichage' => array('asso:ordre_affichage_groupe', 'entier'),
 			), // entetes et formats des donnees
 			array(

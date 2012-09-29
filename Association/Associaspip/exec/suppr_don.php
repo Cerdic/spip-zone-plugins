@@ -22,7 +22,7 @@ function exec_suppr_don()
 		onglets_association('titre_onglet_dons', 'dons');
 		// info
 		$infos['entete_date'] = association_formater_date($don['date_don'], '');
-		$infos['entete_nom'] = association_formater_idnom($don['id_adherent'], $don['bienfaiteur'], 'membre');
+		$infos['entete_nom'] = association_formater_idnom($don['id_auteur'], $don['bienfaiteur'], 'membre');
 		$infos['argent'] = association_formater_prix($don['argent'], 'donation cash');
 		$infos['colis'] = ($don['valeur'] ? '('.association_formater_prix($don['valeur'], 'donation estimated').')<div class="n">' : '') .$don['colis'] .($don['valeur']?'</div>':'');
 		$infos['contrepartie'] = $don['contrepartie'];

@@ -911,7 +911,6 @@ Commentaire: @commentaire@
 'code' => 'Code',
 'code_de_l_article' => 'Code de l\'article',
 'colis' => 'Colis',
-'commentaires' => 'Commentaires',
 'compte_active' => 'Compte activ&eacute;',
 'compte' => 'Compte',
 'contre_valeur_en_e__' => 'Contre-valeur (en &euro;)',

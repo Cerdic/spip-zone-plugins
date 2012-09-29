@@ -55,8 +55,8 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='')
 	if ($contexte['date_caution0']=='0000-00-00')
 		$contexte['date_caution0'] = '';
 	/* si le champ est vide ou egal a zero, on ne prerempli rien */
-	if (!$contexte['id_emprunteur'])
-		$contexte['id_emprunteur']='';
+	if (!$contexte['id_auteur'])
+		$contexte['id_auteur']='';
 	if ( floatval($contexte['prix_caution'])==0 )
 		$contexte['prix_caution'] ='';
 	/* paufiner la presentation des valeurs  */
@@ -103,8 +103,8 @@ function formulaires_editer_asso_prets_verifier_dist($id_pret)
 	if ($erreur = association_verifier_montant('duree') )
 		$erreurs['duree'] = $erreur;
 	/* verifier si on a un numero d'adherent qu'il existe dans la base */
-	if ($erreur = association_verifier_membre('id_emprunteur') )
-		$erreurs['id_emprunteur'] = $erreur;
+	if ($erreur = association_verifier_membre('id_auteur') )
+		$erreurs['id_auteur'] = $erreur;
 	/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération */
 	if (($GLOBALS['association_metas']['destinations']) && !array_key_exists('montant', $erreurs)) {
 		include_spip('inc/association_comptabilite');

@@ -1,4 +1,11 @@
-#SET{coordonnees_actif, #VAL{COORDONNEES}|test_plugin_actif}
+[(#REM)<!-- Membres d'un Groupe
+plugin = associaspip ; tables = spip_asso_membres, spip_asso_groupes, spip_asso_groupes_liaisons
+plugins necessaires = aucun
+parametres =
+- id_groupe (entier) : id_groupe dont on veut afficher les membres
+
+maj:2012-09-27; version:0.1.1; licence:GPL; -->]
+
 #SET{listeIdAuteurs, #ARRAY}
 <BOUCLE_listeID(ASSO_GROUPES_LIAISONS){id_groupe=#ENV{id_groupe}}>
 	#SET{listeIdAuteurs, #GET{listeIdAuteurs}|push{#ID_AUTEUR}}
@@ -7,32 +14,38 @@
 #SET{emails,#GET{listeIdAuteurs}|appliquer_filtre{association_formater_emails}}
 #SET{telephones,#ARRAY}
 #SET{telephones,#GET{listeIdAuteurs}|appliquer_filtre{association_formater_telephones}}
-<B_groupes>
+<B_membres2groupe>
 <p class="pagination">#PAGINATION</p>
 <table width="100%" class="asso_tablo">
 	<thead>
 		<tr>
+			<th></th>
 			<th><:asso:entete_nom:></th>
 			<th><:asso:fonction:></th>
-		[(#GET{coordonnees_actif}|oui)
+	[(#AUTORISER{voir_profil,association}|oui)
+		[(#PLUGIN{coordonnees}|oui)
 			<th><:coordonnees:label_numero:></th>
 		]
 			<th><:asso:email:></th>
+	]
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_groupes(ASSO_GROUPES_LIAISONS asso_membres){id_groupe=#ENV{id_groupe}}{par nom_famille}{pagination}>
+<BOUCLE_membres2groupe(ASSO_GROUPES_LIAISONS asso_membres){id_groupe=#ENV{id_groupe}}{par nom_famille}{pagination}>
 		<tr class="agent vcard [(#COMPTEUR_BOUCLE|alterner{'pair','impair'})]">
-			<td class="fn"><a title="<:asso:adherent_label_voir_membre:>" href="#URL_ECRIRE{adherent, id=#ID_AUTEUR}">[(#SEXE|association_formater_nom{#PRENOM, #NOM_FAMILLE}) ]</a></td>
+			<td class="url">[(#LOGO_AUTEUR{#URL_AUTEUR,left}|image_reduire{60})]</td>
+			<td>[(#SEXE|association_formater_nom{#PRENOM, #NOM_FAMILLE, 'span'})]</td>
 			<td><a class="include" href="#vcard-group#ENV{id_groupe}"></a> [<span class="role">(#FONCTION)</span>]</td>
-		[(#GET{coordonnees_actif}|oui)
+	[(#AUTORISER{voir_profil,association}|oui)
+		[(#PLUGIN{coordonnees}|oui)
 			<td>[(#GET{telephones}|table_valeur{#ID_AUTEUR})]</td>
 		]
 			<td>[(#GET{emails}|table_valeur{#ID_AUTEUR})]</td>
+	]
 		</tr>
-</BOUCLE_groupes>
+</BOUCLE_membres2groupe>
 	</tbody>
 </table>
-</B_groupes>
+</B_membres2groupe>
 <div><:asso:aucun_membre_dans_ce_groupe:></div>
-<//B_groupes>
+<//B_membres2groupe>

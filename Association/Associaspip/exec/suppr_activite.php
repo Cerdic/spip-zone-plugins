@@ -28,7 +28,7 @@ function exec_suppr_activite()
 		$infos['agenda:evenement_date_au'] = $format($evenement['date_fin'],'dtend');
 		$infos['agenda:evenement_lieu'] = $evenement['lieu'];
 		$infos[''] = typo('----'); // separateur
-		$infos['nom'] = association_formater_idnom($activite['id_adherent'], $activite['nom'], '');
+		$infos['nom'] = association_formater_idnom($activite['id_auteur'], $activite['nom'], '');
 //		$infos['date'] = association_formater_date($activite['date_inscription']);
 		$infos['date'] = association_formater_date($activite['date_paiement']);
 		$infos['activite_entete_inscrits'] = association_formater_nombre($activite['inscrits'], 0);

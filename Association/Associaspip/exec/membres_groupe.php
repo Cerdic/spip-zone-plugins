@@ -24,7 +24,7 @@ function exec_membres_groupe()
 		if ($id_groupe>=100) {
 			$infos['ordre_affichage_groupe'] = $groupe['affichage'];
 		}
-		$infos['entete_commentaire'] = $groupe['commentaires'];
+		$infos['entete_commentaire'] = $groupe['commentaire'];
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe")) );
 		echo association_totauxinfos_intro(($id_groupe<100)?_T("asso:groupe_".$id_groupe):$groupe['nom'], 'groupe', $id_groupe, $infos );
 		// datation et raccourcis
@@ -32,7 +32,7 @@ function exec_membres_groupe()
 			'editer_groupe' => array('edit-24.gif', array(($id_groupe<100?'edit_groupe_autorisations':'edit_groupe'), "id=$id_groupe" ) ),
 		) );
 		debut_cadre_association('annonce.gif', 'groupe_membres');
-		echo recuperer_fond('prive/contenu/voir_membres_groupe', array(
+		echo recuperer_fond('modeles/asso_membres', array(
 			'id_groupe' => $id_groupe
 		));
 		fin_page_association();

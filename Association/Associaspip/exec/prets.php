@@ -113,7 +113,7 @@ function exec_prets()
 			array(
 				'id_pret' => array('asso:entete_id', 'entier'),
 				'date_sortie' => array('asso:prets_entete_date_sortie', 'date', 'dtstart'),
-				'id_emprunteur' => array('asso:entete_nom', 'idnom', array(), 'membre'),
+				'id_auteur' => array('asso:entete_nom', 'idnom', array(), 'membre'),
 				'duree' => array('asso:entete_duree', 'duree', $unite),
 				'date_retour' => array('asso:prets_entete_date_retour', 'date', 'dtend'),
 			), // entetes et formats des donnees

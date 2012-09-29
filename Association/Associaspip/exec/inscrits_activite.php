@@ -74,7 +74,7 @@ function exec_inscrits_activite()
 				'id_activite' => array('asso:entete_id', 'entier'),
 //				'date_inscription' => array('asso:entete_date', 'date', ''),
 				'date_paiement' => array('asso:entete_date', 'date', ''),
-				'id_adherent' => array('asso:entete_nom', 'idnom', array('spip_asso_activites', 'nom', 'id_adherent'), 'membre'),
+				'id_auteur' => array('asso:entete_nom', 'idnom', array('spip_asso_activites', 'nom', 'id_auteur'), 'membre'),
 				'inscrits' => array('asso:entete_quantite', 'entier'),
 				'montant' => array('asso:entete_montant', 'prix', 'fees'),
 				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),

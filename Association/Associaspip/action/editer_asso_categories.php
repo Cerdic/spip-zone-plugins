@@ -24,7 +24,7 @@ function action_editer_asso_categories_dist()
 	'valeur' => _request('valeur'),
 	'duree' => association_recuperer_montant('duree'),
 	'cotisation' => association_recuperer_montant('cotisation'),
-	'commentaires' => _request('commentaire'),
+	'commentaire' => _request('commentaire'),
     );
     include_spip('base/association');
     if ($id_categorie) { // modification

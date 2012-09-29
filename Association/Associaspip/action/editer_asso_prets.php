@@ -19,10 +19,10 @@ function action_editer_asso_prets_dist()
     $id_pret = $securiser_action();
     $erreur = '';
     $id_ressource = association_recuperer_entier('id_ressource');
-    $id_emprunteur = association_recuperer_entier('id_emprunteur');
+    $id_auteur = association_recuperer_entier('id_auteur');
     $emprunteur = _request('emprunteur');
     if (!$emprunteur) {
-	$emprunteur = association_formater_idnom($id_emprunteur, array('spip_asso_membres'), '');
+	$emprunteur = association_formater_idnom($id_auteur, array('spip_asso_membres'), '');
     }
     $date_sortie = association_recuperer_date('date_sortie');
     $date_retour = association_recuperer_date('date_retour');
@@ -43,7 +43,7 @@ function action_editer_asso_prets_dist()
 	'date_caution1' => $date_caution1,
 	'date_caution0' => $date_caution0,
 	'id_ressource' => $id_ressource,
-	'id_emprunteur' => $id_emprunteur,
+	'id_auteur' => $id_auteur,
 	'prix_unitaire' => $montant,
 	'prix_caution' => $caution,
 	'commentaire_sortie' => _request('commentaire_sortie'),
@@ -52,7 +52,7 @@ function action_editer_asso_prets_dist()
     include_spip('base/association');
     $id_compte = association_recuperer_entier('id_compte');
     $journal = _request('journal');
-    $ref_pret = "->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur"."->membre$id_emprunteur]":$emprunteur);
+    $ref_pret = "->pret$id_pret] - ". ($id_auteur?"[$emprunteur"."->membre$id_auteur]":$emprunteur);
     include_spip('inc/association_comptabilite');
     if ($id_pret) { // modification
 	// on modifie l'operation comptable associee a la location meme

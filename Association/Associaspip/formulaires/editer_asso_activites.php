@@ -42,9 +42,9 @@ function formulaires_editer_asso_activites_charger_dist($id_activite='')
 	/* si date_paiement est indeterminee, c'est que le champ est vide : on ne preremplit rien  */
 	if ($contexte['date_paiement']=='0000-00-00')
 		$contexte['date_paiement'] = '';
-	/* si id_adherent est egal a 0, c'est que le champ est vide : on ne prerempli rien */
-	if (!$contexte['id_adherent'])
-		$contexte['id_adherent']='';
+	/* si id_auteur est egal a 0, c'est que le champ est vide : on ne prerempli rien */
+	if (!$contexte['id_auteur'])
+		$contexte['id_auteur']='';
 	/* paufiner la presentation des valeurs  */
 	if ($contexte['inscrits'])
 		$contexte['inscrits'] = association_formater_nombre($contexte['inscrits']);
@@ -84,8 +84,8 @@ function formulaires_editer_asso_activites_verifier_dist($id_activite='')
 	if ($erreur = association_verifier_montant('montant') )
 		$erreurs['montant'] = $erreur;
 	/* verifier si on a un numero d'adherent qu'il existe dans la base */
-	if ($erreur = association_verifier_membre('id_adherent') )
-		$erreurs['id_adherent'] = $erreur;
+	if ($erreur = association_verifier_membre('id_auteurt') )
+		$erreurs['id_auteur'] = $erreur;
 	/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération */
 	if (($GLOBALS['association_metas']['destinations']) && !array_key_exists('montant', $erreurs)) {
 		include_spip('inc/association_comptabilite');

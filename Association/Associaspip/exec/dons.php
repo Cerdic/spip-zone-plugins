@@ -69,7 +69,7 @@ function exec_dons()
 			array(
 				'id_don' => array('asso:entete_id', 'entier'),
 				'date_don' => array('asso:entete_date', 'date', ''),
-				'id_adherent' => array('asso:entete_nom', 'idnom', array('spip_asso_dons', 'bienfaiteur', 'id_adherent'), 'membre'),
+				'id_auteur' => array('asso:entete_nom', 'idnom', array('spip_asso_dons', 'bienfaiteur', 'id_auteur'), 'membre'),
 				'argent' => array('asso:argent', 'prix', 'donation cash'),
 				'colis' => array('asso:colis', 'texte', 'propre'), // voir s'il est possible de mettre la valeur au survol
 //				'valeur' => array('asso:valeur', 'prix', 'donation estimated'),

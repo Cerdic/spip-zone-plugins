@@ -1,21 +1,21 @@
 <?php
+/***************************************************************************\
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+\***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/autoriser');
-/***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & Francois de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
-\***************************************************************************/
+
 function formulaires_editer_asso_groupes_charger_dist($id_groupe='') {
-	/* cet appel va charger dans $contexte tous les champs de la table spip_asso_dons associes a l'id_don passe en param */
-	$contexte = formulaires_editer_objet_charger('asso_groupes', $id_groupe, '', '',  generer_url_ecrire('groupes'), '');	
+	$contexte = formulaires_editer_objet_charger('asso_groupes', $id_groupe, '', '',  generer_url_ecrire('groupes'), ''); // cet appel va charger dans $contexte tous les champs de la table spip_asso_groupes associes a l'id_groupe passe en param
 	if ($id_groupe>0 && $id_groupe<100) {
 		$contexte['_autorisation'] = true;
 	}
@@ -25,4 +25,5 @@ function formulaires_editer_asso_groupes_charger_dist($id_groupe='') {
 function formulaires_editer_asso_groupes_traiter($id_groupe='') {
 	return formulaires_editer_objet_traiter('asso_groupes', $id_groupe, '', '',  ($id_groupe>0 && $id_groupe<100)?generer_url_ecrire('association_autorisations'):generer_url_ecrire('groupes'), '');
 }
+
 ?>

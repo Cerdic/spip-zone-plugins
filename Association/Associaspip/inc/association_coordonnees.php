@@ -1,58 +1,70 @@
 <?php
-/***************************************************************************
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & Francois de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+/***************************************************************************\
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
-
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-/* Cette fonction prend en argument un tableau d'id_auteurs et renvoie un tableau
-id_auteur => array(numeros) */
-function association_recuperer_telephones($id_auteurs)
+/**
+ * Recupere les numeros (des auteurs) dans la base de donnees (et non via requete !)
+ *
+ * @param array $id_objets
+ *   Liste des ID dont on veut recuperer les numeros
+ * @param bool $plus
+ *   Indique si on recupere aussi (vrai) le type du numero et le titre ou pas (faux)
+ * @param string $objet
+ *   Indique le type d'objet dont les id sont passes
+ *   (ceci est prevu pour etendre facilement l'usage de la fonction si necessaire,
+ *   vaut "auteur" par defaut)
+ * @return array $telephones_objets
+ *   id_$objet=>array(numeros)
+ *   Les numeros sont des chaines ($plus=false) ou des listes ($plus=true) array(numero, type, titre)
+ */
+function association_recuperer_telephones($id_objets, $plus=true, $objet='auteur')
 {
-	/* prepare la structure du tableau renvoye */
-	$telephones_auteurs = array();
-	foreach ($id_auteurs as $id_auteur) {
-		$telephones_auteurs[$id_auteur] = array();
+	$telephones_objets = array(); 	// initialisation du tableau renvoye
+	if ( !is_array($id_obets) )
+		$id_objets = array($id_objets);
+	foreach ($id_objets as $id_objet) { // prepare la structure du tableau renvoye
+		$telephones_objets[$id_objet] = array();
 	}
-
 	if (test_plugin_actif('COORDONNEES')) {
-		$id_auteurs_list = sql_in('nl.id_objet', $id_auteurs);
-		$query = sql_select('nl.id_objet as id_auteur, n.numero as numero','spip_numeros as n INNER JOIN spip_numeros_liens AS nl ON nl.id_numero=n.id_numero', $id_auteurs_list.' AND nl.objet=\'auteur\'');
-		while ($data = sql_fetch($query))
-			$telephones_auteurs[$data['id_auteur']][] = $data['numero'];
-	}
-	return $telephones_auteurs;
-}
-
-/* prend en argument un tableau d'id_auteurs et retourne un tableau id_auteur => code html listant tous les numeros de l'auteur */
-function association_formater_telephones($id_auteurs, $htm_div='div')
-{
-	/* on recupere tous les numeros dans un tableau de tableau */
-	$telephones_auteurs = association_recuperer_telephones($id_auteurs);
-	$telephones_strings = array();
-	/* on le transforme en tableau de strings html */
-	foreach ($telephones_auteurs as $id_auteur => $telephones) {
-		$telephones_strings[$id_auteur] = '';
-		if (count($telephones)) {
-			foreach ($telephones as $telephone) {
-				$telephones_strings[$id_auteur] .=  "<$htm_div class='tel'>". recuperer_fond("modeles/coordonnees_telephone", array ('telephone' => $telephone)). "</$htm_div>\n";
-			}
+		$liste_objets = sql_in('nl.id_objet', $id_objet);
+		$query = sql_select('nl.id_objet, nl.type, n.*','spip_numeros AS n INNER JOIN spip_numeros_liens AS nl ON nl.id_numero=n.id_numero', "$liste_objets AND nl.objet='$objet' ");
+		while ($data = sql_fetch($query)) {
+			$numero = ($data['pays']?("+$data[pays]".($data['region']?"($data[region])":'')."$data[numero]"):$data['numero']);
+			if ($plus)
+				$telephones_objets[$data['id_objet']][] = array($numero, $data['type'], $data['titre']);
+			else
+				$telephones_objets[$data['id_auteur']][] = $numero;
 		}
 	}
-	return $telephones_strings;
+	return $telephones_objets;
 }
 
-/* Cette fonction prend en argument un tableau d'id_auteurs et renvoie un tableau
-id_auteur => array(adresses). Les adresses sont constituees d'une chaine, les caracteres de retour a la ligne et espace peuvent etre passe en parametre */
-function association_recuperer_adresses($id_auteurs, $grouping='span', $newline='<br/>', $espace='&nbsp;')
+/**
+ * Recupere les adresses dans la base de donnees
+ *
+ * @param array $id_auteurs
+ *   Liste des id_auteur dont on veut recuperer les numeros
+ * @param bool $type_num
+ *   Indique si on recupere aussi (vrai) le type du numero et le titre ou pas (faux)
+ * @param string $type_obj
+ *   Indique le type d'objet dont les id sont passes
+ *   (ceci est prevu pour etendre facilement l'usage de la fonction si necessaire,
+ *   vaut "auteur" par defaut)
+ * @return array
+ *   id_auteur=>array(adresses)
+ *   Les adresses sont constituees d'une chaine, les caracteres de retour a la
+ *   ligne et espace peuvent etre passe en parametre
+ */
+function association_recuperer_adresses($id_auteurs, $grouping='span', $newline='<br/>', $espace='&nbsp;', $type_obj='auteur')
 {
 	/* prepare la structure du tableau renvoye */
 	$adresses_auteurs = array();
@@ -61,13 +73,14 @@ function association_recuperer_adresses($id_auteurs, $grouping='span', $newline=
 	}
 	if (test_plugin_actif('COORDONNEES')) {
 		$id_auteurs_list = sql_in('al.id_objet', $id_auteurs);
-		$query = sql_select('al.id_objet as id_auteur, a.titre as titre, a.voie as voie, a.complement as complement, a.boite_postale as boite_postale, a.code_postal as code_postal, a.ville as ville, a.pays as pays', 'spip_adresses as a INNER JOIN spip_adresses_liens AS al ON al.id_adresse=a.id_adresse',$id_auteurs_list.' AND al.objet=\'auteur\'');
+		$query = sql_select('al.id_objet, a.*', 'spip_adresses AS a INNER JOIN spip_adresses_liens AS al ON al.id_adresse=a.id_adresse', "$id_auteurs_list AND al.objet='$type_obj'");
 		while ($data = sql_fetch($query)) {
-			$adresses_auteurs[$data['id_auteur']][] =  recuperer_fond("modeles/coordonnees_adresse", array ('voie' => $data['voie'],
+			$adresses_auteurs[$data['id_objet']][] =  recuperer_fond("modeles/coordonnees_adresse", array ('voie' => $data['voie'],
 				'complement' => $data['complement'],
 				'boite_postale' => $data['boite_postale'],
 				'code_postal' => $data['code_postal'],
 				'ville' => $data['ville'],
+				'region' => $data['region'],
 				'pays' => $data['pays'],
 				'htm4span' => $grouping, 'htm4nl' => $newline, 'htm4spc' => $space,
 			));
@@ -81,8 +94,7 @@ function association_formater_adresses($id_auteur, $htm_div='div', $htm_span='sp
 {
 	$adresses_auteurs = association_recuperer_adresses($id_auteur,$htm_span,$htm4newline,$htm4space);
 	$adresses_string = array();
-	/* on le transforme en tableau de strings html */
-	foreach ($adresses_auteurs as $id_auteur => $adresses) {
+	foreach ($adresses_auteurs as $id_auteur => $adresses) { // on le transforme en tableau de strings html
 		$adresses_strings[$id_auteur] = '';
 		if (count($adresses)) {
 			$adresses_strings[$id_auteur] = "<$htm_div class='adr'>". implode("</$htm_div>\n<$htm_div class='adr'>",$adresses) ."</$htm_div>\n";

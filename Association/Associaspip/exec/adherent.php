@@ -1,12 +1,11 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -106,7 +105,7 @@ function exec_adherent(){
 		if ($GLOBALS['association_metas']['activites']){ // HISTORIQUE ACTIVITES
 			echo debut_cadre_relief('', true, '', _T('asso:adherent_titre_historique_activites') );
 			echo association_bloc_listehtml(
-				array('*', 'spip_asso_activites As a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', "id_adherent=$id_auteur", '', 'date_debut DESC, date_fin DESC', '0,10'), // requete
+				array('*', 'spip_asso_activites As a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', "id_auteur=$id_auteur", '', 'date_debut DESC, date_fin DESC', '0,10'), // requete
 				array(
 					'id_activite' => array('asso:entete_id', 'entier'),
 					'date_debut' => array('asso:entete_date', 'date'),
@@ -142,7 +141,7 @@ function exec_adherent(){
 		if ($GLOBALS['association_metas']['dons']){ // HISTORIQUE DONS
 			echo debut_cadre_relief('', true, '', _T('asso:adherent_titre_historique_dons') );
 			echo association_bloc_listehtml(
-				array('*', 'spip_asso_dons', "id_adherent=$id_auteur", '', 'date_don DESC', '0,10'), // requete
+				array('*', 'spip_asso_dons', "id_auteur=$id_auteur", '', 'date_don DESC', '0,10'), // requete
 				array(
 					'id_don' => array('asso:entete_id', 'entier'),
 					'date_don' => array('asso:entete_date', 'date'),
@@ -161,7 +160,7 @@ function exec_adherent(){
 			if ($critere)
 				$critere .= ' AND ';
 			echo voir_adherent_paiements(
-				array('D.id_don AS id, D.argent AS montant, D.date_don AS date, justification, journal, id_compte', 'spip_asso_dons AS D LEFT JOIN spip_asso_comptes AS C ON C.id_journal=D.id_don', "$critere id_adherent=$id_auteur",'D.date_don DESC', '0,10'),
+				array('D.id_don AS id, D.argent AS montant, D.date_don AS date, justification, journal, id_compte', 'spip_asso_dons AS D LEFT JOIN spip_asso_comptes AS C ON C.id_journal=D.id_don', "$critere id_auteur=$id_auteur",'D.date_don DESC', '0,10'),
 				$full,
 				'don'
 			);
@@ -171,7 +170,7 @@ function exec_adherent(){
 		if ($GLOBALS['association_metas']['prets']){ // HISTORIQUE PRETS
 			echo debut_cadre_relief('', true, '', _T('asso:adherent_titre_historique_prets') );
 			echo association_bloc_listehtml(
-				array('*', 'spip_asso_prets AS P LEFT JOIN spip_asso_ressources AS R ON P.id_ressource=R.id_ressource', "id_emprunteur=$id_auteur", '', 'id_pret DESC', '0,10'), // requete
+				array('*', 'spip_asso_prets AS P LEFT JOIN spip_asso_ressources AS R ON P.id_ressource=R.id_ressource', "id_auteur=$id_auteur", '', 'id_pret DESC', '0,10'), // requete
 				array(
 					'id_pret' => array('asso:entete_id', 'entier'),
 					'date_sortie' => array('asso:prets_entete_date_sortie', 'date', 'dtstart'),

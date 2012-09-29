@@ -22,7 +22,7 @@ function exec_suppr_pret()
 		onglets_association('titre_onglet_prets', 'ressources');
 		$ressource = sql_fetsel('*', 'spip_asso_ressources', 'id_ressource='.$pret['id_ressource'] ) ;
 		$infos['entete_article'] = $ressource['intitule'];
-		$infos['entete_nom'] = association_formater_idnom($pret['id_emprunteur'], array(), 'membre');
+		$infos['entete_nom'] = association_formater_idnom($pret['id_auteur'], array(), 'membre');
 		$infos['prets_entete_date_sortie'] = association_formater_date($pret['date_sortie'],'dtstart');
 		$infos['prets_entete_date_retour'] = association_formater_date($pret['date_retour'],'dtend');
 		$infos['entete_montant'] = association_formater_prix($pret['prix_unitaire']*$pret['duree'], 'fees');

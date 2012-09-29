@@ -20,16 +20,16 @@ function action_editer_asso_dons()
 	$erreur = '';
 	$date_don = association_recuperer_date('date_don');
 	$bienfaiteur = _request('bienfaiteur');
-	$id_adherent = association_recuperer_entier('id_adherent');
+	$id_auteur = association_recuperer_entier('id_aauteur');
 	if (!$bienfaiteur) {
-		$bienfaiteur = association_formater_idnom($id_adherent, array('spip_asso_membres'), '');
+		$bienfaiteur = association_formater_idnom($id_auteur, array('spip_asso_membres'), '');
 	}
 	$argent = association_recuperer_montant('argent');
 	$valeur = association_recuperer_montant('valeur');
 	$modifs = array(
 		'date_don' => $date_don,
 		'bienfaiteur' => _request('bienfaiteur'),
-		'id_adherent' => $id_adherent,
+		'id_auteur' => $id_auteur,
 		'argent' => $argent,
 		'colis' => _request('colis'),
 		'valeur' => $valeur,
@@ -39,7 +39,7 @@ function action_editer_asso_dons()
     include_spip('base/association');
 	$id_compte = association_recuperer_entier('id_compte');
 	$journal = _request('journal');
-	$ref_don = "->don$id_don] &mdash; ". ($id_adherent?"[$bienfaiteur"."->membre$id_adherent]":$bienfaiteur);
+	$ref_don = "->don$id_don] &mdash; ". ($id_auteur?"[$bienfaiteur"."->membre$id_auteur]":$bienfaiteur);
 	include_spip('inc/association_comptabilite');
 	if ($id_don) { // c'est une modification
 		// on modifie les operations comptables associees au don

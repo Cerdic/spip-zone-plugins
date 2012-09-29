@@ -42,7 +42,7 @@
 					<label for="duree"><:asso:prets_libelle_duree:></label>
 					<input name="duree" type="[(#HTML5|?{number,text})]" [value="(#ENV{duree})"] id="duree" class="number integer" />
 				</li>
-				<INCLURE{fond=inc/choisir_mbr_nom, champ_id=id_emprunteur, valeur_id=#ENV{id_emprunteur} }>
+				<INCLURE{fond=inc/choisir_mbr_nom, champ_id=id_auteur, valeur_id=#ENV{id_auteur} }>
 				<li class="editer_commentaire_sortie">
 					<label for="commentaire_sortie"><:asso:libelle_commentaire:></label>
 					<textarea name="commentaire_sortie" id="commentaire_sortie" rows="3">[(#ENV{commentaire_sortie})]</textarea>

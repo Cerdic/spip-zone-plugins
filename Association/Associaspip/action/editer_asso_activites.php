@@ -20,9 +20,9 @@ function action_editer_asso_activites_dist()
     $erreur = '';
     $date_paiement = association_recuperer_date('date_paiement');
     $participant = _request('nom');
-    $id_adherent = association_recuperer_entier('id_adherent');
-    if (!$participant AND $id_adherent) {
-	$participant = association_formater_idnom($id_adherent, array('spip_asso_membres'), '');
+    $id_auteur = association_recuperer_entier('id_auteur');
+    if (!$participant AND $id_auteur) {
+	$participant = association_formater_idnom($id_auteur, array('spip_asso_membres'), '');
     }
     $evenement = association_recuperer_entier('id_evenement');
     $montant = association_recuperer_montant('montant');
@@ -30,7 +30,7 @@ function action_editer_asso_activites_dist()
     $modifs = array(
 	'id_evenement' => $evenement,
 	'nom' => _request('nom'),
-	'id_adherent' => $id_adherent,
+	'id_auteur' => $id_auteur,
 	'inscrits' => $inscrits,
 	'montant' => $montant,
 	'date_paiement' => $date_paiement,
@@ -44,7 +44,7 @@ function action_editer_asso_activites_dist()
     include_spip('inc/modifier'); // on passe par modifier_contenu pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere
     if ($id_activite) { // c'est une modification
 	// on modifie les operations comptables associees a la participation
-	$erreur = association_modifier_operation_comptable($date_paiement, $montant, 0, '['. _T('asso:titre_num', array('titre'=>_T('evenement'),'num'=>$evenement) ) ."->activite$evenement] &mdash; ". ($id_adherent?"[$participant"."->membre$id_adherent]":$participant)." +$inscrits", $GLOBALS['association_metas']['pc_activites'], $journal, $id_activite, $id_compte);
+	$erreur = association_modifier_operation_comptable($date_paiement, $montant, 0, '['. _T('asso:titre_num', array('titre'=>_T('evenement'),'num'=>$evenement) ) ."->activite$evenement] &mdash; ". ($id_auteur?"[$participant"."->membre$id_auteur]":$participant)." +$inscrits", $GLOBALS['association_metas']['pc_activites'], $journal, $id_activite, $id_compte);
 	// on modifie les informations relatives a la participation
 	modifier_contenu(
 	    'asso_activites', // table a modifier
@@ -58,7 +58,7 @@ function action_editer_asso_activites_dist()
 	if (!$id_activite) { // la suite serait aleatoire sans cette cle...
 	    $erreur = _T('asso:erreur_sgbdr');
 	} else { // on ajoute l'operation comptable associee a la participation
-	    association_ajouter_operation_comptable($date_paiement, $montant, 0, '['. _T('asso:titre_num', array('titre'=>_T('evenement'),'num'=>$evenement) ) ."->activite$evenement] &mdash; ". ($id_adherent?"[$participant"."->membre$id_adherent]":$participant), $GLOBALS['association_metas']['pc_activites'], $journal, $id_activite);
+	    association_ajouter_operation_comptable($date_paiement, $montant, 0, '['. _T('asso:titre_num', array('titre'=>_T('evenement'),'num'=>$evenement) ) ."->activite$evenement] &mdash; ". ($id_auteur?"[$participant"."->membre$id_auteur]":$participant), $GLOBALS['association_metas']['pc_activites'], $journal, $id_activite);
 	    modifier_contenu('asso_activites', $id_activite, '', array());
 	}
     }

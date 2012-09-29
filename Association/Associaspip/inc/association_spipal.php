@@ -22,7 +22,7 @@ function inc_association_spipal($env)
   	$custom = @unserialize($env['custom']);
 	$id = abs(intval($custom['id_auteur']));
 	$montant = intval($env['payment_fee']?$env['payment_fee']:$env['mc_fee']);
-	$where = "id_adherent=$id AND argent=$montant";
+	$where = "id_auteur=$id AND argent=$montant";
 
 	// Prendre le premier don a valider de cette personne et de ce montant
 	// (il peut y en ait plusieurs en cas de multiples clics)

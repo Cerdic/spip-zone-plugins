@@ -31,7 +31,7 @@ function action_ajouter_participations() {
 	$id_activite = association_recuperer_entier('id_activite');
 	sql_updateq('spip_asso_activites', array(
 		'nom' => $nom,
-		'id_adherent' => $id_membre,
+		'id_auteur' => $id_membre,
 		'membres' => $membres,
 		'non_membres' => $non_membres,
 		'inscrits' => $inscrits,

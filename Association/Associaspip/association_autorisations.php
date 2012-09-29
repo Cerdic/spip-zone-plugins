@@ -15,11 +15,17 @@ function association_autoriser(){
  * Teste si un auteur est dans un groupe ou une liste de groupes
  *
  * @param int $id_auteur
+ *   ID de l'auteur dont on verifie l'appartenance
  * @param int|array $id_groups
+ *   Liste des ID des groupes d'appartenance a verifier
  * @return bool
+ *   Vrai si l'auteur est dans le(s) groupe(s), faux sinon
  */
 function is_in_groups($id_auteur, $id_groupes)
 {
+	if (is_array($id_auteur)) {
+		$id_auteur = $id_auteur['id_auteur'];
+	}
 	$where = "id_auteur=$id_auteur AND ";
 	if (is_array($id_groupes)) {
 		$where .= sql_in("id_groupe", $id_groupes);

@@ -739,6 +739,63 @@ function association_formater_idnom($id, $nom='', $lien='', $html_span='span') {
 	return $res;
 }
 
+/**
+ * Affichage micro-formate de liste de numeros de telephones
+ *
+ * @param array $telephones_ascii
+ *   Liste des numeros de telephones a formater
+ * @param bool $recuperer
+ *   indique que c'est juste la liste des id_auteur qui est passe (vrai, par defaut)
+ *   et qu'il faut donc que la fonction recupere les numeros associes ;
+ *   sinon (faux donc) n'a plus qu'a formater la liste de numeros
+ * @param string $html_span
+ *   Balise-HTML (paire ouvrante/fermante) encadrant l'ensemble
+ *   Par defaut : "span" avec la classe "tel" (ne rien mettre pour desactiver)
+ * @param string $href_pre
+ *   Protocole a utiliser pour faire un lien cliquable sur le numero
+ *   Par defaut : "tel:" comme preconise par la RFC 3966
+ *   Ne rien mettre pour desactiver la creation de lien.
+ * @param string $href_post
+ *   Complement du precedant dans le cas de certains protocoles
+ *   Par exemple, avec $href_pre='sip:' on a $href_post='@ip.ou.hote.passerelle;user=phone'
+ *  @return array $telephones_html
+ *   Liste des numeros formates en HTML.
+ *   Cette fonction s'occupe surtout du balisage (micro-formate) ;
+ *   la localisation "visuelle" du numero est confie au modele coordonnees_telephone
+ * @note
+ *   http://microformats.org/wiki/value-class-pattern
+ */
+function association_formater_telephones($telephones_ascii, $recupere=true, $html_span='span', $href_pre='tel:', $href_post='')
+{
+	if ($recupere) //ancien comportement : ce sont les id_auteur qui sont transmis
+		$telephones_ascii = association_recuperer_telephones($telephones_ascii, true); // on recupere tous les numeros dans un tableau de tableaux
+	$telephones_html = array();
+	foreach ($telephones_ascii as $id_auteur => $telephones) { // on le transforme en tableau de strings html
+		$telephones_html[$id_auteur] = '';
+		if (count($telephones)) {
+			foreach ($telephones as $telephone) {
+				if ( is_array($telephone) ) {
+					$tel_nom = $telephone[2];
+					$tel_typ = $telephone[1];
+					$tel_num = $telephone[0];
+				} else {
+					$tel_nom = $tel_typ = '';
+					$tel_num = $telephone;
+				}
+				if ($html_span) {
+					$telephones_html[$id_auteur] .=  "<$html_span class='tel'>". ($tel_typ?("<abbr class='type' title='$tel_typ'>"._T($tel_typ).'</abbr>: '):'');
+					$telephones_html[$id_auteur] .=  ($href_pre?("<a title='". _T('asso:telephoner_au') ." $tel_num' href='$href_pre"):"<abbr title='"). preg_replace('/[^\d+]/', '', $tel_num) . ($href_pre?$href_post:'') ."' class='value'>";
+				}
+				$telephones_html[$id_auteur] .=  recuperer_fond("modeles/coordonnees_telephone", array (
+					'telephone' => $tel_num,
+					'titre' => $tel_nom,
+				)) .($html_span?('</'.($href_pre?'a':'abbr')."></$htm_span>\n"):'');
+			}
+		}
+	}
+	return $telephones_html;
+}
+
 /** @} */
 
 
@@ -960,13 +1017,20 @@ function association_selectionner_groupe($sel='', $exec='', $plus='')
 
 /**
  * Selecteur de statut de membres
+ *
+ * @note
+ *   Idem instituer_statut_interne_ici
+ *   Idem instituer_adherent_ici
  */
 function association_selectionner_statut($sel='', $exec='', $plus='')
 {
     $res = '<select name="statut_interne" onchange="form.submit()">';
-    $res .= '<option value="%"';
-    $res .= (($sel=='defaut' || $sel=='%')?' selected="selected"':'');
-    $res .= '>'. _T('asso:entete_tous') .'</option>';
+#    $res .= '<option value="tous"';
+#    $res .= (($sel=='tous' || $sel=='%')?' selected="selected"':'');
+#    $res .= '>'. _T('asso:entete_tous') .'</option>';
+    $res .= '<option value=""';
+    $res .= (($sel=='defaut' || $sel=='')?' selected="selected"':'');
+    $res .= '>'. _T('asso:actifs') .'</option>';
     foreach ($GLOBALS['association_liste_des_statuts'] as $statut) {
 		$res .= '<option value="'.$statut.'"';
 		$res .= ($sel==$statut?' selected="selected"':'');
@@ -1101,6 +1165,9 @@ function association_selectionner_lettre($lettre='', $table, $champ, $exec='', $
  * @param bool $lst
  *   Indique s'il faut afficher le resultat sous forme d'une liste de selections
  *   multiples (vrai) ou sous forme de cases a cocher (faux)
+ * @note
+ *   Il s'agit d'un selecteur maintenu par compatibilite (usage uniquement dans
+ *   exec/bilan.php actuellement) et ne devrait plus etre utilise a l'avenir
  */
 function association_selectionner_destinations($sel='', $exec='', $plus='', $lst=FALSE)
 {
@@ -1254,27 +1321,6 @@ function generer_url_asso_activite($id, $param='', $ancre='') {
  */
 function generer_url_activite($id, $param='', $ancre='') {
 	return  array('asso_activite', $id);
-}
-
-/** @} */
-
-
-/*****************************************
- * @defgroup instituer_
- *
- * @param array $auteur
- * @return string
- *
-** @{ */
-
-function instituer_adherent_ici($auteur=array()){
-	$instituer_adherent = charger_fonction('instituer_adherent', 'inc');
-	return $instituer_adherent($auteur);
-}
-
-function instituer_statut_interne_ici($auteur=array()){
-	$instituer_statut_interne = charger_fonction('instituer_statut_interne', 'inc');
-	return $instituer_statut_interne($auteur);
 }
 
 /** @} */
@@ -1526,14 +1572,6 @@ function association_bloc_infosgauche($TitreObjet, $NumObjet, $DesLignes=array()
  *   Par defaut, quand rien n'est indique, c'est l'objet suffixe de "s" qui est utilise
  */
 function association_bloc_suppression($type, $id, $retour='')
-{
-	$res = '<p><strong>'. _T('asso:vous_aller_effacer', array('quoi'=>'<i>'. _T('asso:objet_num', array('objet'=>$type,'num'=>$id)) .'</i>') ) .'</strong></p>';
-	$res .= '<p class="boutons"><input type="submit" value="'. _T('asso:bouton_confirmer') .'" /></p>';
-	echo redirige_action_post("supprimer_{$type}s", $id, ($retour?$retour:$type.'s'), '', $res);
-
-}
-
-function association_bloc_filtrage($type, $id, $retour='')
 {
 	$res = '<p><strong>'. _T('asso:vous_aller_effacer', array('quoi'=>'<i>'. _T('asso:objet_num', array('objet'=>$type,'num'=>$id)) .'</i>') ) .'</strong></p>';
 	$res .= '<p class="boutons"><input type="submit" value="'. _T('asso:bouton_confirmer') .'" /></p>';
@@ -2002,13 +2040,14 @@ function association_passeparam_statut($type='', $defaut='')
 		switch ($type) {
 			case 'interne' :
 				if (in_array($statut, $GLOBALS['association_liste_des_statuts'] ))
-					$sql_where = 'statut_interne='. sql_quote($statut_interne);
+					$sql_where = 'statut_interne='. sql_quote($statut);
 				elseif ($statut=='tous')
 					$sql_where = "statut_interne LIKE '%'";
 				else {
 					set_request('statut_interne', $defaut);
-					$a = $GLOBALS['association_liste_des_statuts'];
-					$sql_where = sql_in('statut_interne', array_shift($a) );
+					$statuts = $GLOBALS['association_liste_des_statuts'];
+					$exclure = array_shift($statuts);
+					$sql_where = sql_in('statut_interne', $statuts);
 				}
 				break;
 		}
@@ -2084,44 +2123,6 @@ function affichage_div($type_operation, $list_operation)
 		$res = ($type_operation===$GLOBALS['association_metas']['classe_'.$list_operation])?'':'cachediv';
 	}
 	return $res;
-}
-
-/**
- * ??
- *
- * @param string $texte
- * @param string $avant
- * @param string $apres
- * @return string
- */
-function encadre($texte,$avant='[',$apres=']')
-{
-    return ($texte=='')?'':$avant.$texte.$apres;
-}
-
-/**
- * Pour construire des menu avec SELECTED
- *
- * @param string $varaut
- *   La valeur de l'option
- * @param string $variable
- *   La variable (passee par valeur) contenant la selection courante
- * @param mixed $option
- *   Quand cette variable est definie, indique de renvoyer un code partiel.
- *   Par defaut c'est le code complet de l' Option HTML qui est retourne
- * @return string
- *   Option de select HTML
- *
- * @note
- *   Utilise dans inc/instituer_statut_interne.php et inc/instituer_adherent.php
- */
-function association_mySel($varaut, $variable, $option=NULL)
-{
-	if ( function_exists('mySel') ) //@ http://doc.spip.org/@mySel
-		return mySel($varaut, $variable, $option);
-	// la fonction mySel n'existe plus en SPIP 3 donc on la recree
-	$res = ' value="'.$varaut.'"'. (($variable==$varaut) ? ' selected="selected"' : '');
-	return  (!isset($option) ? $res : "<option$res>$option</option>\n");
 }
 
 /**

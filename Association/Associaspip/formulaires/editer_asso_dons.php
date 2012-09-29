@@ -32,9 +32,9 @@ function formulaires_editer_asso_dons_charger_dist($id_don='') {
 	$contexte['journal'] = $journal;
 	/* on concatene au _hidden inserer dans $contexte par l'appel a formulaire_editer_objet l'id_compte qui serat utilise dans l'action editer_asso_dons */
 	$contexte['_hidden'] .= "<input type='hidden' name='id_compte' value='$id_compte' />";
-	/* si id_adherent est egal a 0, c'est que le champ est vide, on ne prerempli rien */
-	if (!$contexte['id_adherent'])
-		$contexte['id_adherent']='';
+	/* si id_auteur est egal a 0, c'est que le champ est vide, on ne prerempli rien */
+	if (!$contexte['id_auteur'])
+		$contexte['id_auteur']='';
 	/* paufiner la presentation des valeurs  */
 	if ($contexte['argent'])
 		$contexte['argent'] = association_formater_nombre($contexte['argent']);
@@ -67,8 +67,8 @@ function formulaires_editer_asso_dons_verifier_dist($id_don) {
 	if ($erreur = association_verifier_montant('valeur') )
 		$erreurs['valeur'] = $erreur;
 	/* verifier si on a un numero d'adherent qu'il existe dans la base */
-	if ($erreur = association_verifier_membre('id_adherent') )
-		$erreurs['id_adherent'] = $erreur;
+	if ($erreur = association_verifier_membre('id_auteur') )
+		$erreurs['id_auteur'] = $erreur;
 	/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération */
 	if (($GLOBALS['association_metas']['destinations']) && !array_key_exists('argent', $erreurs)) {
 		include_spip('inc/association_comptabilite');

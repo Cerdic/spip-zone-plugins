@@ -479,7 +479,7 @@ $GLOBALS['association_maj'][51602] = array(
 );
 
 // Ces champs de configuration n'etant plus geres par defaut,
-// les passer en personalises pour ceux qui les utilisent */
+// les passer en personalises pour ceux qui les utilisent
 $GLOBALS['association_maj'][52476] = array(
 	array('sql_update', 'spip_association_metas', array('nom' => "'meta_utilisateur_n_siret'" ), "nom='siret' AND valeur<>''" ),
 	array('sql_delete', 'spip_association_metas', "nom='siret' AND valeur=''" ),
@@ -623,6 +623,37 @@ $GLOBALS['association_maj'][62712] = array(
 	array('sql_alter', "TABLE spip_asso_prets ADD date_caution1 DATE NOT NULL DEFAULT '0000-00-00' "),
 	array('sql_alter', "TABLE spip_asso_prets ADD date_caution0 DATE NOT NULL DEFAULT '0000-00-00' "),
 	array('sql_alter', "TABLE spip_asso_prets ADD date_reservation DATETIME DEFAULT NULL "),
+);
+
+// ajout de nouvelles autorisations
+$GLOBALS['association_maj'][66289] = array(
+	array('sql_insertq_multi', 'spip_asso_groupes', array( array('id_groupe'=>10), array('id_groupe'=>32), array('id_groupe'=>33), ),
+);
+
+// normalisation de la base
+$GLOBALS['association_maj'][66345] = array(
+// renommer le champ "commentaires" en "commentaire" pour homogeniser les traitements et l'affichage
+	array('sql_alter', "TABLE spip_asso_categories ADD commentaire TEXT NOT NULL"),
+	array('sql_update', 'spip_asso_categories', array('commentaires'=>'commentaire') ),
+	array('sql_alter', "TABLE spip_asso_categories DROP commentaires"),
+	array('sql_alter', "TABLE spip_asso_groupes ADD commentaire TEXT NOT NULL"),
+	array('sql_update', 'spip_asso_groupes', array('commentaires'=>'commentaire') ),
+	array('sql_alter', "TABLE spip_asso_groupes DROP commentaires"),
+	array('sql_alter', "TABLE spip_asso_dons ADD id_auteur TEXT NOT NULL"),
+// renommer le champ "commentaires" en "commentaire" pour homogeniser les traitements et l'affichage
+	array('sql_alter', "TABLE spip_asso_categories ADD commentaire TEXT NOT NULL"),
+	array('sql_update', 'spip_asso_categories', array('commentaires'=>'commentaire') ),
+	array('sql_alter', "TABLE spip_asso_categories DROP commentaires"),
+// homogeniser le nommage de cle secondaire sur les membres/auteurs pour ne plus s'arracher les cheveux
+	array('sql_alter', "TABLE spip_asso_dons ADD id_auteur BIGINT UNSIGNED NOT NULL"),
+	array('sql_update', 'spip_asso_dons', array('id_adherent'=>'id_auteur') ),
+	array('sql_alter', "TABLE spip_asso_dons DROP id_adherent"),
+	array('sql_alter', "TABLE spip_asso_activites ADD id_auteur BIGINT UNSIGNED NOT NULL"),
+	array('sql_update', 'spip_asso_activites', array('id_adherent'=>'id_auteur') ),
+	array('sql_alter', "TABLE spip_asso_activites DROP id_adherent"),
+	array('sql_alter', "TABLE spip_asso_prets ADD id_auteur BIGINT UNSIGNED NOT NULL"),
+	array('sql_update', 'spip_asso_prets', array('id_emmprunteur'=>'id_auteur') ),
+	array('sql_alter', "TABLE spip_asso_dons DROP id_emprunteur"),
 );
 
 ?>

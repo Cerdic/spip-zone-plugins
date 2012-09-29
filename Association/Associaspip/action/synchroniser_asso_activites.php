@@ -21,12 +21,12 @@ function action_synchroniser_asso_activites() {
 	$evt = association_recuperer_entier('id_evenement');
 	$act = array(); // liste des id_activite rajoutes
 	$imp = _request('imp');
-	$anciennes_reponses = sql_in_select('id_auteur', 'id_adherent', 'spip_asso_activites', "id_evenement=$evt");
+	$anciennes_reponses = sql_in_select('id_auteur', 'id_auteur', 'spip_asso_activites', "id_evenement=$evt");
 	$nouvelles_reponses = sql_select('id_auteur, date', 'spip_evenements_participants', "id_evenement=$evt AND " . sql_in('reponse', (is_array($imp)?$imp:array($imp)) ) . " AND NOT $anciennes_reponses" );
 	while ($nouvelle_reponse = sql_fetch($nouvelles_reponses)) { // inserer un a un
 		$act[] = sql_insertq('spip_asso_activites', array(
 			'id_evenement' => $evt,
-			'id_adherent' => $nouvelle_reponse['id_auteur'],
+			'id_auteur' => $nouvelle_reponse['id_auteur'],
 			'date_inscription' => $nouvelle_reponse['date'],
 		));
 	}
