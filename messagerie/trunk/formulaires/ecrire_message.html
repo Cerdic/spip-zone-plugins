@@ -38,7 +38,7 @@ parametre : url d'action ]
 <label for='#GET{name}'>[(#ENV{form}|concat{':label_',#GET{name}}|_T)]
 [(#GET{obli}|?{' '})<em><:formulaires:info_obligatoire:></em>]
 </label>[<span
- class='erreur_message'>(#GET{erreur})</span>]<textarea name='#GET{name}' id='#GET{name}' cols='60' rows='8' class=''>#ENV*{#GET{name}}</textarea>
+ class='erreur_message'>(#GET{erreur})</span>]<textarea name='#GET{name}' id='#GET{name}' cols='60' rows='8' class='inserer_barre_edition inserer_previsualisation'>#ENV*{#GET{name}}</textarea>
 </li>
 
 [(#REM) Piege a robots spammeurs ]
