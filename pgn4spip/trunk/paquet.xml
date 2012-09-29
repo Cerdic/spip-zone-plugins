@@ -5,6 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.*.*]"
 	logo="pgn4spip.png"
+	documentation="http://contrib.spip.net/pgn4spip"
 >	
 	<nom>pgn4spip</nom>
 	<!-- pgn4spip_slogan and pgn4spip_description in plugins\pgn4spip\lang\paquet-pgn4spip_en.php -->

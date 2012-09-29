@@ -15,6 +15,7 @@
 		Bas&#233; sur [pgn4web->http://pgn4web.casaschi.net] 2.61 de Paolo Casaschi.
 		</multi>
 	</description>
+	<lien>http://contrib.spip.net/pgn4spip</lien>
 	<etat>stable</etat>
     <pipeline>
         <nom>pre_propre</nom>
