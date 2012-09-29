@@ -17,12 +17,8 @@
 	</BOUCLE_rubriques_selectionnees>
 	</ul>
 	</B_rubriques_selectionnees>
-   [(#ENV*{sans_reponse}|propre)]
-	<//B_rubriques_selectionnees>
 </BOUCLE_test_multiple>
 	<BOUCLE_rubrique_selectionnee(RUBRIQUES){tout}{id_rubrique IN #ENV*{valeur}|picker_selected{rubrique}}>
 	  	<p>#TITRE (<:rubrique:> #ID_RUBRIQUE) - #STATUT</p>
 	</BOUCLE_rubrique_selectionnee>
-   [(#ENV*{sans_reponse}|propre)]
-	<//B_rubrique_selectionnee>
 <//B_test_multiple>

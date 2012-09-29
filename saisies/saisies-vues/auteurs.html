@@ -8,13 +8,9 @@
 	</BOUCLE_auteurs_selectionnes>
 	</ul>
 	</B_auteurs_selectionnes>
-   	[(#ENV*{sans_reponse}|propre)]
-	<//B_auteurs_selectionnes>
 </BOUCLE_test_multiple>
 	<BOUCLE_auteur_selectionne(AUTEURS){id_auteur=#ENV{valeur}}
 		{statut ?}{statut != 5poubelle}{tout}>
 	  	<p>#NOM (#ID_AUTEUR)</p>
 	</BOUCLE_auteur_selectionne>
-   	[(#ENV*{sans_reponse}|propre)]
-	<//B_auteur_selectionne>
 <//B_test_multiple>

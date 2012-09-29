@@ -1,7 +1,7 @@
 <paquet
 	prefix="saisies"
 	categorie="outil"
-	version="1.26.7"
+	version="1.26.8"
 	etat="test"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="images/logo_saisie_48.png"
@@ -11,6 +11,7 @@
 	<auteur>Matthieu Marcillaud</auteur>
 	<auteur>RastaPopoulos</auteur>
 	<auteur>Joseph</auteur>
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 	<licence>GNU/GPL</licence>
 	
 	<traduire module="saisies" reference="fr" gestionnaire="salvatore" />

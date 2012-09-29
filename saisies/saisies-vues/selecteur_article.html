@@ -16,12 +16,8 @@
 	</BOUCLE_articles_selectionnes>
 	</ul>
 	</B_articles_selectionnes>
-   	[(#ENV*{sans_reponse}|propre)]
-	<//B_articles_selectionnes>
 </BOUCLE_test_multiple>
 	<BOUCLE_article_selectionne(ARTICLES){id_article IN #ENV*{valeur}|picker_selected{article}}>
 	  	<p>#TITRE (<:article:> #ID_ARTICLE) - #STATUT</p>
 	</BOUCLE_article_selectionne>
-   	[(#ENV*{sans_reponse}|propre)]
-	<//B_article_selectionne>
 <//B_test_multiple>

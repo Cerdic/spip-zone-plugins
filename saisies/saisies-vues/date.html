@@ -3,4 +3,4 @@
 [(#GET{valeur}|match{#GET{date_mysql}}|oui)
 	#SET{valeur,#ENV{valeur}|affdate{'d/m/Y'}
 ]
-[<p class="date">(#GET{valeur,#ENV*{sans_reponse}})</p>]
+[<p class="date">(#GET{valeur})</p>]

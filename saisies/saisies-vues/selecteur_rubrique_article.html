@@ -15,7 +15,6 @@
 	<ul>
 	<BOUCLE_rubriques_selectionnees(RUBRIQUES){tout}{id_rubrique IN #ENV*{valeur}|picker_selected{rubrique}}>
 		<li class="choix">#TITRE (<:rubrique:> #ID_RUBRIQUE) - #STATUT</li>
-      #SET{reponse,"oui"}
 	</BOUCLE_rubriques_selectionnees>
 	</ul>
 	</B_rubriques_selectionnees>
@@ -24,26 +23,16 @@
 	<ul>
 	<BOUCLE_articles_selectionnes(ARTICLES){id_article IN #ENV*{valeur}|picker_selected{article}}>
 		<li class="choix">#TITRE (<:article:> #ID_ARTICLE) - #STATUT</li>
-      #SET{reponse,"oui"}
 	</BOUCLE_articles_selectionnes>
 	</ul>
 	</B_articles_selectionnes>
    
-   [(#GET{reponse}|non)
-   	[(#ENV*{sans_reponse}|propre)]
-	]
-
 </BOUCLE_test_multiple>
 	<BOUCLE_rubrique_selectionnee(RUBRIQUES){tout}{id_rubrique IN #ENV*{valeur}|picker_selected{rubrique}}>
 		<p>#TITRE (<:rubrique:> #ID_RUBRIQUE) - #STATUT</p>
-      #SET{reponse,"oui"}
 	</BOUCLE_rubrique_selectionnee>
    
    <BOUCLE_article_selectionne(ARTICLES){id_article IN #ENV*{valeur}|picker_selected{article}}>
 	  	<p>#TITRE (<:article:> #ID_ARTICLE) - #STATUT</p>
 	</BOUCLE_article_selectionne>
-
-   [(#GET{reponse}|non)
-   	[(#ENV*{sans_reponse}|propre)]
-	]
 <//B_test_multiple>
