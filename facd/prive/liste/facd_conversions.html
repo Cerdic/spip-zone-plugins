@@ -52,7 +52,7 @@
 				#SET{duree,#INFOS|table_valeur{fin_conversion}|moins{#INFOS|table_valeur{debut_conversion}}}
 				[(#VAL{H:i:s}|gmdate{#GET{duree}})]
 			]</td>]
-			<td class='maj'>#MAJ</td>
+			<td class='maj'>[(#MAJ|affdate)] [(#MAJ|affdate{H:i:s})]</td>
 			[(#ENV{statut}|!={oui}|oui)
 			<td class='statut'>[(#STATUT|=={erreur}|oui)
 				#SET{erreur,oui}
@@ -71,7 +71,7 @@
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 [(#GET{erreur}|=={oui}|et{#AUTORISER{configurer,facd}}|oui)
-<div class="actions act">
+<div class="actions act boutons">
 	[(#BOUTON_ACTION{<:facd:info_relancer_erreurs:>,[(#URL_ACTION_AUTEUR{facd_relancer_conversion,'tout',[(#SELF|parametre_url{log,''}|parametre_url{relance,''})]})],ajax})]
 </div>]
 [(#REM)
@@ -86,7 +86,7 @@
 </div>
 <script type="text/javascript">
 	var refresh = function(){
-		if($('.conversions tbody tr').not('.erreur').size() > 0){
+		if($('.conversions tbody tr.non').size() > 0){
 			$('#facd_recharge_file').click();
 		}
 	}

@@ -42,10 +42,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'thead_fonction' => 'Fonction utilisée',
 	'thead_id' => 'ID',
 	'thead_id_auteur' => 'Auteur',
-	'thead_id_document' => 'Document original',
+	'thead_id_document' => 'Original',
 	'thead_nombre' => 'Nombre',
 	'thead_statut' => 'Statut',
-	'titre_page_file' => 'File d\'attente du module de conversion des medias',
+	'titre_page_file' => 'File d\'attente du module de conversion de medias',
 	'titre_page_file_convertis_jour' => 'Conversions par date',
 	'titre_page_file_menu' => 'File d\'attente de conversion',
 
