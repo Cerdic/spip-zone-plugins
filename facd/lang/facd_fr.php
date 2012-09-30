@@ -27,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tous_docs_facd' => 'Documents de la file d\'attente',
 
 	// L
+	'label_relancer_conversion' => 'Relancer la conversion',
 	'lien_convertir_document' => 'Convertir ce document',
 	'lien_recharger' => 'Recharger',
 	'liste_attente_aucun' => 'Aucun document dans la file d\'attente.',
