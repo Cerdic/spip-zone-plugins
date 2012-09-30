@@ -9,4 +9,4 @@
 	Dans ce modèle par défaut le PAYS n'est pas affiché s'il correspond a celui configuré.
 -->]
 
-[[<(#HTM4SPAN) class="street-address">](#VOIE)[</(#HTM4SPAN)>]][#HTM4NL [<(#HTM4SPAN) class="extended-address">](#COMPLEMENT)[</(#HTM4SPAN)>]][#HTM4NL [<(#HTM4SPAN) class="post-office-box">](#BOITE_POSTALE)[</(#HTM4SPAN)>]][#HTM4NL [<(#HTM4SPAN) class="postal-code">](#CODE_POSTAL)[</(#HTM4SPAN)>]]&nbsp;[#HTM4SPC [<(#HTM4SPAN) class="locality">](#VILLE)[</(#HTM4SPAN)>]][#HTM4NL[<(#HTM4SPAN) class="region">](#DEPARTEMENT)[</(#HTM4SPAN)>]]<BOUCLE_p(PAYS?){code=#PAYS}{code!=#META{/association/pays}}>[#HTM4NL[<(#HTM4SPAN) class="country-name">](#NOM)[</(#HTM4SPAN)>]]</BOUCLE_p>
+[(#VOIE)][#_NL (#COMPLEMENT)][#_NL (#BOITE_POSTALE)][#_NL (#CODE_POSTAL)][#_SPC (#VILLE)][#_NL (#REGION)]<BOUCLE_p(PAYS?){code=#PAYS}{code!=#META{/association/pays}}>[#_NL [<(#_SPAN) class="country-name">](#NOM)[</(#_SPAN)>]]</BOUCLE_p>

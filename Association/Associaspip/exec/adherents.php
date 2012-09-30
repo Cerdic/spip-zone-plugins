@@ -117,7 +117,7 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe)
 		if ($logo) {
 			$logo = image_reduire($logo[0], 60);
 		}else{
-			$logo = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'membre-60.gif"  width="10"/>' ;
+			$logo = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'membre-60.gif"  width="60" />' ;
 		}
 		if (empty($data['email'])) {
 			$mail = $data['nom_famille'];
@@ -149,7 +149,7 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe)
 			. $id_auteur.'</td>';
 		}
 		if ($GLOBALS['association_metas']['aff_photo']) {
-			$auteurs .= '<td class="logo centre">'.$logo.'</td>';
+			$auteurs .= '<td class="photo logo centre">'.$logo.'</td>';
 		}
 		if ($GLOBALS['association_metas']['aff_civilite']=='on' && $GLOBALS['association_metas']['civilite'])
 			$auteurs .= '<td class="honorific-prefix">'.$data['sexe'].'</td>';

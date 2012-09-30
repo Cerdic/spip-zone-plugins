@@ -1,18 +1,15 @@
 <?php
-/***************************************************************************
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & Francois de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+/***************************************************************************\
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
-
-include_spip('pdf/extends');
 
 function exec_pdf_membres()
 {
@@ -20,6 +17,7 @@ function exec_pdf_membres()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
+		include_spip('pdf/extends');
 		// on recupere ce qu'il faut pour faire la requete SQL pour generer la liste d'id_auteurs dont on a besoin pour recuperer les adresses et telephones
 		$where = htmlspecialchars_decode(_request('where_adherents'));
 		$jointure = _request('jointure_adherents');
@@ -61,14 +59,13 @@ function exec_pdf_membres()
 			}
 		}
 		// ainsi que les colonnes pour les champs hors table spip_asso_membres
-		include_spip('inc/association_coordonnees');
 		if ($sent['email']=='on') {
 			$pdf->AddCol('email',45 , utf8_decode(html_entity_decode(_T('asso:adherent_libelle_email'))), 'C');
-			$emails =  association_recuperer_emails($liste_id_auteurs);
+			$emails =  association_formater_emails($liste_id_auteurs, 'auteur', '');
 		}
 		if ($sent['adresse']=='on') {
 			$pdf->AddCol('adresse',45 , utf8_decode(html_entity_decode(_T('coordonnees:label_adresse'))), 'L');
-			$adresses =  association_recuperer_adresses($liste_id_auteurs, '', "\n"," ");
+			$adresses =  association_formater_adresses($liste_id_auteurs, 'auteur', '', "\n"," ");
 		}
 		if ($sent['telephone']=='on') {
 			$pdf->AddCol('telephone',30 , utf8_decode(html_entity_decode(_T('coordonnees:label_numero'))), 'C');

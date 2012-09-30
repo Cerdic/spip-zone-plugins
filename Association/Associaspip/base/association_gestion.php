@@ -1,12 +1,11 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & Fran�ois de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -627,7 +626,7 @@ $GLOBALS['association_maj'][62712] = array(
 
 // ajout de nouvelles autorisations
 $GLOBALS['association_maj'][66289] = array(
-	array('sql_insertq_multi', 'spip_asso_groupes', array( array('id_groupe'=>10), array('id_groupe'=>32), array('id_groupe'=>33), ),
+	array('sql_insertq_multi', 'spip_asso_groupes', array( array('id_groupe'=>10), array('id_groupe'=>32), array('id_groupe'=>33), ), ),
 );
 
 // normalisation de la base
@@ -652,7 +651,7 @@ $GLOBALS['association_maj'][66345] = array(
 	array('sql_update', 'spip_asso_activites', array('id_adherent'=>'id_auteur') ),
 	array('sql_alter', "TABLE spip_asso_activites DROP id_adherent"),
 	array('sql_alter', "TABLE spip_asso_prets ADD id_auteur BIGINT UNSIGNED NOT NULL"),
-	array('sql_update', 'spip_asso_prets', array('id_emmprunteur'=>'id_auteur') ),
+	array('sql_update', 'spip_asso_prets', array('id_emprunteur'=>'id_auteur') ),
 	array('sql_alter', "TABLE spip_asso_dons DROP id_emprunteur"),
 );
 

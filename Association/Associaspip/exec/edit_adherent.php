@@ -20,11 +20,11 @@ function exec_edit_adherent()
 		include_spip ('inc/navigation_modules');
 		list($id_auteur, $data) = association_passeparam_id('auteur', 'asso_membres');
 		onglets_association('titre_onglet_membres', 'adherents');
-		include_spip('inc/association_coordonnees'); // deja inclus normalement...
 		$nom_membre = association_formater_nom($data['sexe'], $data['prenom'], $data['nom_famille']);
 		$adresses = association_formater_adresses(array($id_auteur));
 		$emails = association_formater_emails(array($id_auteur));
 		$telephones = association_formater_telephones(array($id_auteur));
+		$sites = association_formater_urls(array($id_auteur));
 		$statut = sql_getfetsel('statut', 'spip_auteurs', 'id_auteur='.$id_auteur);
 		switch($statut)	{
 			case '0minirezo':
@@ -44,6 +44,8 @@ function exec_edit_adherent()
 			$infos['coordonnees:emails'] = $emails[$id_auteur];
 		if ($telephones[$id_auteur])
 			$infos['coordonnees:numeros'] =  $telephones[$id_auteur];
+		if ($sites[$id_auteur])
+			$infos['coordonnees:pages'] =  $sites[$id_auteur];
 		echo '<div class="vcard">'. association_totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos ) .'</div>';
 		// datation et raccourcis
 		raccourcis_association('');

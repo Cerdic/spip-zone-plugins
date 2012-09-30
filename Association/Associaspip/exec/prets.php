@@ -2,8 +2,8 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations
  *
- * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
- * @copyright Copyright (c) 2010 Emmanuel Saint-James
+ * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
  *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
@@ -23,10 +23,10 @@ function exec_prets()
 		if ($id_pret) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
 			$id_ressource = sql_getfetsel('id_ressource', 'spip_asso_prets', "id_pret=$id_pret");
 			$ressource = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource");
-			$etat = '';
+			$statut = '';
 		} else { // on peut prendre en compte les filtres ; on recupere les parametres de :
 			list($id_ressource, $ressource) = association_passeparam_id('ressource', 'asso_ressources');
-			$etat = _request('etat'); // etat de restitution du pret
+			$statut = association_passeparam_statut(); // etat de restitution du pret
 		}
 		onglets_association('titre_onglet_prets', 'ressources');
 		$unite = $ressource['ud']?$ressource['ud']:'D';
@@ -82,23 +82,23 @@ function exec_prets()
 		raccourcis_association('ressources', $res);
 		debut_cadre_association('pret-24.gif', 'prets_titre_liste_reservations');
 		// FILTRES
-		$filtre_statut = '<select name="etat" onchange="form.submit()">';
+		$filtre_statut = '<select name="statut" onchange="form.submit()">';
 		$filtre_statut .= '<option value="">' ._T('asso:entete_tous') .'</option>';
 		$filtre_statut .= '<option value="sortie"';
-		$filtre_statut .= ($etat=='sortie'?' selected="selected"':'');
+		$filtre_statut .= (intval($statut)<0||$statut=='sortie'?' selected="selected"':'');
 		$filtre_statut .= '>'. _T('asso:prets_encours') .'</option>';
 		$filtre_statut .= '<option value="retour"';
-		$filtre_statut .= ($etat=='retour'?' selected="selected"':'');
+		$filtre_statut .= (intval($statut)>0||$statut=='retour'?' selected="selected"':'');
 		$filtre_statut .= '>'. _T('asso:prets_restitues') .'</option>';
 		$filtre_statut .= '</select>';
 		filtres_association(array(
 			'annee' => array($annee, 'asso_prets', 'sortie'),
 		), 'prets', array(
-			'etat' => $filtre_statut,
 			'' => "<input type='hidden' name='id' value='$id_ressource' />", // "prets&id=$id_ressource" a la place de 'prets' ne fonctionne pas...
+			'statut' => $filtre_statut,
 		));
 		// TABLEAU
-		switch ($etat) {
+		switch ($statut) {
 			case 'retour' :
 				$q_where .= " AND date_retour<NOW() AND date_retour<>'0000-00-00T00:00:00'";
 				break;

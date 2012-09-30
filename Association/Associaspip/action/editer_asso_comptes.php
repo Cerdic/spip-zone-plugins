@@ -1,14 +1,13 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & Fran�ois de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
+ * @copyright Copyright (c) 201108 Marcel Bolla
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
-
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
@@ -26,34 +25,25 @@ function action_editer_asso_comptes()
 	$justification = _request('justification');
 	$journal = _request('journal');
 	$type_operation = _request('type_operation');
-	/* dans le cas ou c'est un virement on va generer 2 ecritures
-	 * Supposons un virement de 400 du compte 5171 (Caisse d'epargne) vers le compte 531 (caisse)
-	 * depense = 400   imputation = 531  journal = 5171
-	 * 1ere ecriture :
-	 * depense = 400   imputation = 581  journal = 5171
-	 * 2eme ecriture :
-	 * recette = 400   imputation = 581  journal = 531
-	 * Dans Bilan et Compte de résultat, le compte 581 doit avoir un solde = 0 !!!!
-	 */
-	if ($type_operation==$GLOBALS['association_metas']['classe_banques']) {
+	if ($type_operation==$GLOBALS['association_metas']['classe_banques']) { // dans le cas ou c'est un virement on va generer 2 ecritures ! Dans Bilan et Compte de résultat, le compte 581 doit avoir un solde = 0 !!!
 		if(!$justification)
 			$justification = _T('asso:virement_interne');
 		// si le compte 58xx n'existe pas on le cree dans le plan comptable
 		$compte_virement = association_creer_compte_virement_interne();
-		// c'est forcément un ajout car pour l'instant l'edition d'un virement est "desactive"
-		// la modification d'un virement interne n'est pas encore implementee et donc pour modifier un virement on le supprime et on le recree .... C'est pas beau mais ça fonctionne !!!
-		// TODO : decommenter les lignes si edition/modification d'un virement possible !
 #		if (!$id_compte) { // pas d'id_compte, c'est un ajout
-			// 1ere ecriture :
+			// Supposons un virement de 400 du compte 5171 (Caisse d'epargne) vers le compte 531 (caisse)
+			// 1ere ecriture : depense = 400   imputation = 581  journal = 5171
 			$old_imputation = $imputation;
 			$id_compte = association_ajouter_operation_comptable($date, $recette, $depense, $justification, $compte_virement, $journal, 0);
 			if (!$id_compte)
 				$erreur = _T('asso:erreur_sgbdr');
-			// 2eme ecriture
+			// Supposons un virement de 400 du compte 5171 (Caisse d'epargne) vers le compte 531 (caisse)
+			// 2eme ecriture : recette = 400   imputation = 581  journal = 531
 			$id_compte = association_ajouter_operation_comptable($date, $depense, $recette, $justification, $compte_virement, $old_imputation, 0);
 			if (!$id_compte)
 				$erreur = _T('asso:erreur_sgbdr');
 #		} else { // c'est une modif
+		// pour l'instant l'edition d'un virement est "desactive" : la modification d'un virement interne n'est pas encore implementee et donc pour modifier un virement on le supprime et on le recree... (pas beau mais fonctionne)
 #			$erreur = association_modifier_compte_virement_interne($id_compte);
 #		}
 	} else {

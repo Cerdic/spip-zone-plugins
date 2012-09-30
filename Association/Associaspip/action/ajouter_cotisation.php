@@ -1,14 +1,12 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
-
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
@@ -24,7 +22,6 @@ function action_ajouter_cotisation()
 	$justification = _request('justification');
 	$validite = association_recuperer_date('validite');
 
-	include_spip('base/association');
 	include_spip('inc/association_comptabilite');
 	if ($GLOBALS['association_metas']['comptes'] && $GLOBALS['association_metas']['pc_cotisations']) // on verifie que la gestion comptable est activee et que le pc_cotisation n'est pas vide pour inserer l'operation
 		association_ajouter_operation_comptable($date, $montant, 0, $justification, $GLOBALS['association_metas']['pc_cotisations'], $journal, $id_auteur);

@@ -1,19 +1,15 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
-
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
-
-include_spip ('inc/navigation_modules');
 
 function exec_inscrits_activite()
 {
@@ -21,10 +17,11 @@ function exec_inscrits_activite()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
+		include_spip ('inc/navigation_modules');
 		$id_evenement = association_passeparam_id('evenement');
 		onglets_association('titre_onglet_activite', 'activites');
 		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement");
-		$annee = substr($evenement['date_debut'],0,4);
+		$statut = association_passeparam_statut();
 		// INTRO : Rappel Infos Evenement
 		$format = 'association_formater_'. (($evenement['horaire']=='oui')?'heure':'date');
 		$infos['agenda:evenement_date_du'] = $format($evenement['date_debut'],'dtstart');
@@ -54,8 +51,8 @@ function exec_inscrits_activite()
 		// FILTRES
 		$filtre_statut = '<select name="statut" onchange="form.submit()">';
 		$filtre_statut .= '<option value="">' ._T('asso:entete_tous') .'</option>';
-		$filtre_statut .= '<option value="1"'. ($statut>0?' selected="selected"':'') .'>'. _T('asso:activite_entete_validees') .'</option>';
-		$filtre_statut .= '<option value="-1"'. ($statut<0?' selected="selected"':'') .'>'. _T('asso:activite_entete_impayees') .'</option>';
+		$filtre_statut .= '<option value="1"'. (intval($statut)>0?' selected="selected"':'') .'>'. _T('asso:activite_entete_validees') .'</option>';
+		$filtre_statut .= '<option value="-1"'. (intval($statut)<0?' selected="selected"':'') .'>'. _T('asso:activite_entete_impayees') .'</option>';
 		$filtre_statut .= '</select>';
 		filtres_association(array(
 //			'annee' => array($annee, 'asso_activites', 'inscription'),
@@ -72,8 +69,8 @@ function exec_inscrits_activite()
 			array("*, CASE date_paiement WHEN '0000-00-00' THEN 0 ELSE 1 END AS statut_paiement ", 'spip_asso_activites', "id_evenement=$id_evenement $critereSupplementaire ", '', 'id_activite DESC'), // requete
 			array(
 				'id_activite' => array('asso:entete_id', 'entier'),
-//				'date_inscription' => array('asso:entete_date', 'date', ''),
-				'date_paiement' => array('asso:entete_date', 'date', ''),
+				'date_inscription' => array('asso:entete_date', 'date', ''),
+//				'date_paiement' => array('asso:entete_date', 'date', ''),
 				'id_auteur' => array('asso:entete_nom', 'idnom', array('spip_asso_activites', 'nom', 'id_auteur'), 'membre'),
 				'inscrits' => array('asso:entete_quantite', 'entier'),
 				'montant' => array('asso:entete_montant', 'prix', 'fees'),

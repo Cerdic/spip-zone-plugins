@@ -21,12 +21,12 @@ function exec_adherent(){
 	} else {
 		$data = sql_fetsel('m.sexe, m.nom_famille, m.prenom, m.validite, m.id_asso, c.libelle','spip_asso_membres as m LEFT JOIN spip_asso_categories as c ON m.categorie=c.id_categorie', "m.id_auteur=$id_auteur");
 		include_spip('inc/association_comptabilite');
-		include_spip('inc/association_coordonnees');
 		$nom_membre = association_formater_nom($data['sexe'], $data['prenom'], $data['nom_famille']);
 		$validite = $data['validite'];
 		$adresses = association_formater_adresses(array($id_auteur));
 		$emails = association_formater_emails(array($id_auteur));
 		$telephones = association_formater_telephones(array($id_auteur));
+		$sites = association_formater_urls(array($id_auteur));
 		$categorie = $data['libelle']?$data['libelle']:_T('asso:pas_de_categorie_attribuee');
 		$statut = sql_getfetsel('statut', 'spip_auteurs', 'id_auteur='.$id_auteur);
 		switch($statut)	{
@@ -52,6 +52,8 @@ function exec_adherent(){
 			$infos['coordonnees:emails'] = $emails[$id_auteur];
 		if ($telephones[$id_auteur])
 			$infos['coordonnees:numeros'] =  $telephones[$id_auteur];
+		if ($sites[$id_auteur])
+			$infos['coordonnees:pages'] =  $sites[$id_auteur];
 		echo '<div class="vcard">'. association_totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos, 'asso_membre') .'</div>';
 		// datation et raccourcis
 		raccourcis_association('', array(
@@ -61,7 +63,7 @@ function exec_adherent(){
 		debut_cadre_association('annonce.gif', 'membre', $nom_membre);
 		if ($full)
 			echo propre($data['commentaire']);
-		$query_groupes = sql_select('g.id_groupe as id_groupe, g.nom as nom', 'spip_asso_groupes g LEFT JOIN spip_asso_groupes_liaisons l ON g.id_groupe=l.id_groupe', 'g.id_groupe>=100 AND l.id_auteur='.$id_auteur, '', 'g.nom'); // Liste des groupes (on ignore les groupes d'id <100 qui sont dedies a la gestion des autorisations)
+		$query_groupes = sql_select('g.*, fonction', 'spip_asso_groupes g LEFT JOIN spip_asso_groupes_liaisons l ON g.id_groupe=l.id_groupe', 'g.id_groupe>=100 AND l.id_auteur='.$id_auteur, '', 'g.nom'); // Liste des groupes (on ignore les groupes d'id <100 qui sont dedies a la gestion des autorisations)
 		if (sql_count($query_groupes)) {
 			echo debut_cadre_relief('', true, '', _T('asso:groupes_membre') );
 			echo association_bloc_listehtml(
@@ -72,7 +74,7 @@ function exec_adherent(){
 					'fonction' => array('asso:fonction', 'texte'),
 				), // entetes et formats des donnees
 				array(
-					array('act', 'membres', 'voir-12.gif', 'membres_groupe', 'id=$$'),
+					array('act', 'voir_membres_groupe', 'voir-12.gif', 'membres_groupe', 'id=$$'),
 				), // boutons d'action
 				'id_groupe' // champ portant la cle des lignes et des boutons
 			);

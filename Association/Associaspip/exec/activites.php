@@ -2,8 +2,8 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations
  *
- * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
- * @copyright Copyright (c) 2010 Emmanuel Saint-James
+ * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
  *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
@@ -96,7 +96,7 @@ function exec_activites()
 			//$q_where .= " AND (m.id_mot=$id_mot OR m.titre LIKE '$mot' OR m.titre IS NULL) ";
 			$q_where .= " AND m.id_mot=$id_mot";
 		} else {
-			$mc_sel '';
+			$mc_sel = '';
 		}
 		if ($inscription) {
 			$q_having = 'inscriptions'. ($inscription=='avec'?'>':'=') .'0';

@@ -1,14 +1,12 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
-
 
 if (!defined('_ECRIRE_INC_VERSION'))
     return;
@@ -62,8 +60,8 @@ function action_editer_asso_prets_dist()
 	    $association_imputation = charger_fonction('association_imputation', 'inc');
 	    $critere = $association_imputation('pc_cautions');
 	    $critere .= ($critere?' AND ':'') ."id_journal=$id_pret";
-	    $err2 = association_modifier_operation_comptable(($date_caution1, $caution, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:caution'),'num'=>$id_pret) ) .$ref_pret, $GLOBALS['association_metas']['pc_cautions'], _request('mode_caution1'), $id_pret, sql_getfetsel('id_compte', 'spip_asso_comptes', "$critere AND recette>0") ); // depot
-	    $err3 = association_modifier_operation_comptable(($date_caution0, 0, $caution, '['. _T('asso:titre_num', array('titre'=>_T('local:caution'),'num'=>$id_pret) ) .$ref_pret, $GLOBALS['association_metas']['pc_cautions'], _request('mode_caution0'), $id_pret, sql_getfetsel('id_compte', 'spip_asso_comptes', "$critere AND depense>0") ); // restitution
+	    $err2 = association_modifier_operation_comptable($date_caution1, $caution, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:caution'),'num'=>$id_pret) ) .$ref_pret, $GLOBALS['association_metas']['pc_cautions'], _request('mode_caution1'), $id_pret, sql_getfetsel('id_compte', 'spip_asso_comptes', "$critere AND recette>0") ); // depot
+	    $err3 = association_modifier_operation_comptable($date_caution0, 0, $caution, '['. _T('asso:titre_num', array('titre'=>_T('local:caution'),'num'=>$id_pret) ) .$ref_pret, $GLOBALS['association_metas']['pc_cautions'], _request('mode_caution0'), $id_pret, sql_getfetsel('id_compte', 'spip_asso_comptes', "$critere AND depense>0") ); // restitution
 	    $erreur = ($err2?$err2:$err3);
 	}
 	if (!$erreur) {

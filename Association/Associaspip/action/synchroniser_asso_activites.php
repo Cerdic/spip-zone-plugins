@@ -1,14 +1,12 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
-
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
@@ -20,9 +18,9 @@ function action_synchroniser_asso_activites() {
 
 	$evt = association_recuperer_entier('id_evenement');
 	$act = array(); // liste des id_activite rajoutes
-	$imp = _request('imp');
+	$imp = association_recuperer_liste('imp', true); // liste des reponses a importer
 	$anciennes_reponses = sql_in_select('id_auteur', 'id_auteur', 'spip_asso_activites', "id_evenement=$evt");
-	$nouvelles_reponses = sql_select('id_auteur, date', 'spip_evenements_participants', "id_evenement=$evt AND " . sql_in('reponse', (is_array($imp)?$imp:array($imp)) ) . " AND NOT $anciennes_reponses" );
+	$nouvelles_reponses = sql_select('id_auteur, date', 'spip_evenements_participants', "id_evenement=$evt AND " . sql_in('reponse', $imp) . " AND NOT $anciennes_reponses" );
 	while ($nouvelle_reponse = sql_fetch($nouvelles_reponses)) { // inserer un a un
 		$act[] = sql_insertq('spip_asso_activites', array(
 			'id_evenement' => $evt,

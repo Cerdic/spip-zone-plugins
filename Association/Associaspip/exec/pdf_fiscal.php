@@ -1,12 +1,11 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & Fran�ois de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -20,26 +19,23 @@ if (!defined('_ECRIRE_INC_VERSION'))
 define('RECU_FISCAL', find_in_path('recu_fiscal.pdf'));
 if (!defined('SIGNATURE_PRES'))
     define('SIGNATURE_PRES', find_in_path('signature_pres.png'));
-include_spip('pdf/fpdi_pdf_parser');
-include_spip('fpdf');
-include_spip('pdf/fpdf_tpl');
-include_spip('pdf/fpdi');
-include_spip('pdf/chiffreEnLettre');
-include_spip('inc/association_comptabilite');
 
 function exec_pdf_fiscal()
 {
-    $annee = association_passeparam_annee();
-    $id_auteur = association_passeparam_id('auteur');
-    $id_don = association_recuperer_entier('id_don');
-    $full = autoriser('associer', 'adherents');
-    if (!$full AND ($id_auteur!=$GLOBALS['visiteur_session']['id_auteur'])) {
+    include_spip('inc/navigation_modules');
+    list($id_auteur, $mbr_qui) = association_passeparam_id('auteur', 'asso_membres');
+    if ( !autoriser('associer', 'adherents') OR ($id_auteur!=$GLOBALS['visiteur_session']['id_auteur'])) {
         include_spip('inc/minipres');
 		echo minipres();
-    } elseif (!$mbr_qui = sql_fetsel('*','spip_asso_membres', "id_auteur=$id_auteur")) {
-		include_spip('inc/minipres');
-		echo minipres(_T('public:aucun_auteur'));
     } else {
+        include_spip('pdf/fpdi_pdf_parser');
+        include_spip('fpdf');
+        include_spip('pdf/fpdf_tpl');
+        include_spip('pdf/fpdi');
+        include_spip('pdf/chiffreEnLettre');
+        include_spip('inc/association_comptabilite');
+        $annee = association_passeparam_annee();
+        $id_don = association_recuperer_entier('id_don');
 		$association_imputation = charger_fonction('association_imputation', 'inc');
 		$critere = $association_imputation('pc_cotisations');
 		if ($critere)
@@ -73,9 +69,9 @@ function exec_pdf_fiscal()
                 $rue = $mbr_ou['voie'].' -- '.$mbr_ou['complement'];
             else
                 $rue = $mbr_ou['voie'];
-            if (isset($_GET['var_profile']))
+            if (isset($_GET['var_profile'])) // debogage
                 erreur_squelette();
-            else
+            else // remplir le PDF
                 build_pdf("$annee-$id_auteur", $montants, $annee, $mbr_qui['nom_famille'], $mbr_qui['prenom'], $rue, $cp, $mbr_ou['ville'] );
 		}
     }

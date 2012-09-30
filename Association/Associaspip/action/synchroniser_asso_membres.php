@@ -1,14 +1,12 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
-
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
@@ -30,7 +28,6 @@ function action_synchroniser_asso_membres() {
 			$liste_statuts[] = '0minirezo';
 		$where = sql_in('statut', $liste_statuts) ." OR (statut='nouveau' AND ". sql_in('bio', $liste_statuts) .')'; // cas des redacteurs jamais connectes : leur statut est dans le champ bio
 	}
-
 	if (!_request('forcer')) { // on recupere les id de tous les membres deja presents pour ne pas les traiter
 		$id_membres = sql_select('id_auteur', 'spip_asso_membres');
 		if ($id_membres) {
@@ -40,6 +37,7 @@ function action_synchroniser_asso_membres() {
 			}
 			$where = '('.$where.') AND '. sql_in('id_auteur', $liste_membres, 'NOT');
 		}
+		sql_free($id_membres);
 	}
 
 	$auteurs = sql_select('id_auteur', 'spip_auteurs', $where);
@@ -51,6 +49,7 @@ function action_synchroniser_asso_membres() {
 			update_spip_asso_membre($auteur['id_auteur']);
 		}
 	}
+	sql_free($auteurs);
 
 	return $nb_modifs; // on retourne le nombre de membres inseres dans la table
 }

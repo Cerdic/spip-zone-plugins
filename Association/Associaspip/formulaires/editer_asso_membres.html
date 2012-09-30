@@ -64,7 +64,7 @@
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{'pair','impair'})]">
 				<td class="fn n"><a title="<:asso:adherent_label_voir_membre:>" href="#URL_ECRIRE{edit_groupe, id=#ID_GROUPE}">#NOM</a></td>
 				<td><input type="text" value="[(#FONCTION)]" name="fonctions[#ID_GROUPE]"></td>
-				<td class="boutons"><a title="<:asso:exclure_du_groupe:>" href="#URL_ACTION_AUTEUR{exclure_du_groupe, #VAL{#ID_GROUPE}-#ENV{id_auteur}, #SELF}"><img src="#CHEMIN{img_pack/suppr-12.gif}"></a><td>
+				<td class="boutons"><a title="<:asso:exclure_du_groupe:>" href="#URL_ACTION_AUTEUR{exclure_membres_groupe, #VAL{#ID_GROUPE}-#ENV{id_auteur}, #SELF}"><img src="#CHEMIN{img_pack/suppr-12.gif}"></a><td>
 			</tr>
 	</BOUCLE_groupes_membre>
 		</table>

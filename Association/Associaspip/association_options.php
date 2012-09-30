@@ -728,7 +728,8 @@ function association_formater_idnom($id, $nom='', $lien='', $html_span='span') {
 			if ( $nom )
 				$res = ($html_span?"<$html_span class='n'>":'') . $nom . ($html_span?"</$html_span>":'');
 			elseif ( $lien=='membre')
-				association_formater_idnom($id, array(), $lien, $html_span);
+				//association_formater_idnom($id, array(), $lien, $html_span);
+				$res = "membre$id";
 		}
 	} elseif ( $nom ) { // utiliser nom...
 		$res = ($html_span?"<$html_span class='n'>":'') .$nom. ($html_span?"</$html_span>":'');
@@ -742,15 +743,18 @@ function association_formater_idnom($id, $nom='', $lien='', $html_span='span') {
 /**
  * Affichage micro-formate de liste de numeros de telephones
  *
- * @param array $telephones_ascii
- *   Liste des numeros de telephones a formater
- * @param bool $recuperer
- *   indique que c'est juste la liste des id_auteur qui est passe (vrai, par defaut)
- *   et qu'il faut donc que la fonction recupere les numeros associes ;
- *   sinon (faux donc) n'a plus qu'a formater la liste de numeros
+ * @param array $id_objets
+ *   Liste des (listes de) numeros de telephones a formater, ou
+ *   liste des ID dont on doit formater les numeros (voir parametre suivant)
+ * @param string $objet
+ *   Indique le type d'objet dont les ID sont passes afin de recuperer les
+ *   numeros associes a ces objets. Quand rien n'est indique c'est que c'est la
+ *   liste de liste des numeros qui est directement fournie.
+ *   (ceci est prevu pour etendre facilement l'usage de la fonction si necessaire,
+ *   vaut "auteur" par defaut)
  * @param string $html_span
  *   Balise-HTML (paire ouvrante/fermante) encadrant l'ensemble
- *   Par defaut : "span" avec la classe "tel" (ne rien mettre pour desactiver)
+ *   Par defaut : "div" avec la classe "tel" (ne rien mettre pour desactiver)
  * @param string $href_pre
  *   Protocole a utiliser pour faire un lien cliquable sur le numero
  *   Par defaut : "tel:" comme preconise par la RFC 3966
@@ -758,42 +762,366 @@ function association_formater_idnom($id, $nom='', $lien='', $html_span='span') {
  * @param string $href_post
  *   Complement du precedant dans le cas de certains protocoles
  *   Par exemple, avec $href_pre='sip:' on a $href_post='@ip.ou.hote.passerelle;user=phone'
- *  @return array $telephones_html
+ *  @return array $telephones_string
  *   Liste des numeros formates en HTML.
  *   Cette fonction s'occupe surtout du balisage (micro-formate) ;
  *   la localisation "visuelle" du numero est confie au modele coordonnees_telephone
  * @note
- *   http://microformats.org/wiki/value-class-pattern
+ *   http://microformats.org/wiki/hcard-fr#adr_tel_email_types
+ *   http://microformats.org/wiki/hcard-fr#valeurs_sous-propri.C3.A9t.C3.A9_type
+ *   http://microformats.org/wiki/hcard-fr#Lisible_par_Humain_vs._Machine
+ *   http://microformats.org/wiki/vcard-suggestions#TEL_Type_Definition
  */
-function association_formater_telephones($telephones_ascii, $recupere=true, $html_span='span', $href_pre='tel:', $href_post='')
+function association_formater_telephones($id_objets, $objet='auteur', $html_span='div', $href_pre='tel:', $href_post='')
 {
-	if ($recupere) //ancien comportement : ce sont les id_auteur qui sont transmis
-		$telephones_ascii = association_recuperer_telephones($telephones_ascii, true); // on recupere tous les numeros dans un tableau de tableaux
-	$telephones_html = array();
-	foreach ($telephones_ascii as $id_auteur => $telephones) { // on le transforme en tableau de strings html
-		$telephones_html[$id_auteur] = '';
-		if (count($telephones)) {
-			foreach ($telephones as $telephone) {
-				if ( is_array($telephone) ) {
-					$tel_nom = $telephone[2];
-					$tel_typ = $telephone[1];
-					$tel_num = $telephone[0];
-				} else {
-					$tel_nom = $tel_typ = '';
-					$tel_num = $telephone;
-				}
-				if ($html_span) {
-					$telephones_html[$id_auteur] .=  "<$html_span class='tel'>". ($tel_typ?("<abbr class='type' title='$tel_typ'>"._T($tel_typ).'</abbr>: '):'');
-					$telephones_html[$id_auteur] .=  ($href_pre?("<a title='". _T('asso:telephoner_au') ." $tel_num' href='$href_pre"):"<abbr title='"). preg_replace('/[^\d+]/', '', $tel_num) . ($href_pre?$href_post:'') ."' class='value'>";
-				}
-				$telephones_html[$id_auteur] .=  recuperer_fond("modeles/coordonnees_telephone", array (
-					'telephone' => $tel_num,
-					'titre' => $tel_nom,
-				)) .($html_span?('</'.($href_pre?'a':'abbr')."></$htm_span>\n"):'');
+	$id_objets = association_recuperer_liste($id_objets, false);
+	if ($objet) { // ancien comportement : ce sont les id_auteur qui sont transmis
+		$telephones_array = array(); // initialisation du tableau des donnees
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		if ( $trouver_table('spip_numeros') && $trouver_table('spip_numeros_liens') ) { // "coordonnees" ou similaire est installe (active ou pas)
+			foreach ($id_objets as $id_objet) { // prepare la structure du tableau renvoye
+				$telephones_array[$id_objet] = array();
 			}
+			$query = sql_select('l.id_objet, l.type, n.*','spip_numeros AS n INNER JOIN spip_numeros_liens AS l ON l.id_numero=n.id_numero', sql_in('l.id_objet', $id_objets)." AND l.objet='$objet' ");
+			while ($data = sql_fetch($query)) { // on recupere tous les numeros dans un tableau de tableaux
+				$telephones_array[$data['id_objet']][] = $data;
+			}
+			sql_free($query);
+		}
+	} else { // on a deja la liste des numeros !
+		$telephones_array = $id_objets;
+	}
+	$telephones_string = array();  // initialisation du tableau renvoye
+	foreach ($telephones_array as $id_objet => $telephones) { // on cree la liste de chaines de numeros
+		$telephones_string[$id_objet] = ''; // initialisation de la chaine renvoyee
+		foreach ($telephones as $telephone) { // formater chaque numero
+			if ( !is_array($telephone) ) {
+				$telephone['numero'] = $telephone;
+			}
+			if ($html_span) { // formatage HTML avec microformat
+				$telephones_string[$id_objet] .=  "<$html_span id='$telephone[id_telephone]' class='tel'>";
+				if ($telephone['type']) {
+					$types = explode(',', $telephone['type']);
+					foreach ($types as $type)
+						$telephones_string[$id_objet] .= "<abbr class='type' title='$type'>". _T("coordonnees:$type") .'</abbr> '; // version textuelle
+//						$telephones_string[$id_objet] .= "<img class='type' alt='$type' src='". find_in_path("images/type_$type-16.png") ."' /> "; // version imagee
+				}
+				$tel_num = ($telephone['pays']?"+$telephone[pays]$telephone[region]$telephone[numero]":$telephone['numero']);
+				$telephones_string[$id_objet] .=  ($href_pre?("<a title='". _T('asso:composer_le') ." $tel_num' href='$href_pre"):"<abbr title='"). preg_replace('/[^\d+]/', '', $tel_num) . ($href_pre?$href_post:'') ."' class='value'>";
+				unset($telephone['type']); // ne devrait plus etre traite par le modele
+				unset($telephone['id_objet']); // ne devrait plus etre traite par le modele
+				unset($telephone['id_numero']); // ne devrait pas etre utilise par le modele
+			}
+			$telephones_string[$id_objet] .=  recuperer_fond("modeles/coordonnees_telephone", $telephone) .($html_span?('</'.($href_pre?'a':'abbr')."></$htm_span>\n"):'');
 		}
 	}
-	return $telephones_html;
+	return $telephones_string;
+}
+
+/**
+ * Affichage micro-formate de liste d'adresses postales
+ *
+ * @param array $id_objets
+ *   Liste des (listes de) numeros d'adresses a formater, ou
+ *   liste des ID dont on doit formater les numeros (voir parametre suivant)
+ * @param string $objet
+ *   Indique le type d'objet dont les ID sont passes afin de recuperer les
+ *   numeros associes a ces objets. Quand rien n'est indique c'est que c'est la
+ *   liste de liste des numeros qui est directement fournie.
+ *   (ceci est prevu pour etendre facilement l'usage de la fonction si necessaire,
+ *   vaut "auteur" par defaut)
+ * @param string $html_span
+ *   Balise-HTML (paire ouvrante/fermante) encadrant l'ensemble
+ *   Par defaut : "div" avec la classe "adr" (ne rien mettre pour desactiver)
+ * @param string $newline
+ *   Separateur de ligne utilise par le modele de presentation localisee (cf. note)
+ *   Par defaut : "<br />" puisque le formatage est en HTML.
+ * @param string $space
+ *   Espaceur de blocs utilise par le modele de presentation localisee (cf. note)
+ *   Par defaut : "&nbsp;" puisque le formatage est en HTML
+ *  @return array $adresses_string
+ *   Liste des adresses formates en HTML.
+ *   Cette fonction s'occupe surtout du balisage (micro-formate) ;
+ *   la disposition des elements d'adresse est confie. au modele coordonnees_adresse
+ * @note
+ *   http://microformats.org/wiki/hcard-fr#adr_tel_email_types
+ *   http://microformats.org/wiki/hcard-fr#valeurs_sous-propri.C3.A9t.C3.A9_type
+ *   http://microformats.org/wiki/hcard-fr#Lisible_par_Humain_vs._Machine
+ *   http://microformats.org/wiki/vcard-suggestions#TEL_Type_Definition
+ *   http://microformats.org/wiki/adr
+ *   http://microformats.org/wiki/adr-cheatsheet
+ */
+function association_formater_adresses($id_objets, $objet='auteur', $html_span='div', $newline='<br />', $espace='&nbsp;')
+{
+	$id_objets = association_recuperer_liste($id_objets, false);
+	if ($objet) { // ancien comportement : ce sont les id_auteur qui sont transmis
+		$adresses_array = array(); // initialisation du tableau des donnees
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		if ( $trouver_table('spip_adresses') && $trouver_table('spip_adresses_liens') ) { // "coordonnees" ou similaire est installe (active ou pas)
+			foreach ($id_objets as $id_objet) { // prepare la structure du tableau renvoye
+				$adresses_array[$id_objet] = array();
+			}
+			$query = sql_select('l.id_objet, l.type, a.*','spip_adresses AS a INNER JOIN spip_adresses_liens AS l ON l.id_adresse=a.id_adresse', sql_in('l.id_objet', $id_objets)." AND l.objet='$objet' ");
+			while ($data = sql_fetch($query)) { // on recupere tous les numeros dans un tableau de tableaux
+				$adresses_array[$data['id_objet']][] = $data;
+			}
+			sql_free($query);
+		}
+	} else { // on a deja la liste des adresses !
+		$adresses_array = $id_objets;
+	}
+	$adresses_string = array();  // initialisation du tableau renvoye
+	foreach ($adresses_array as $id_objet => $adresses) {  // on cree la liste de chaines d'adresses
+		$adresses_string[$id_objet] = ''; // initialisation de la chaine renvoyee
+		foreach ($adresses as $adresse) { // chaque adresse est forcement un tableau bien qu'on le verifie pas
+			if ($html_span) { // formatage HTML avec microformat
+				$adresses_string[$id_objet] .=  "<$html_span id='$adresse[id_adresse]' class='adr'>";
+				if ($adresse['type']) {
+					$types = explode(',', $adresse['type']);
+					foreach ($types as $type)
+						$adresses_string[$id_objet] .= "<abbr class='type' title='$type'>". _T("coordonnees:$type") .'</abbr> '; // version textuelle
+//						$adresses_string[$id_objet] .= "<img class='type' alt='$type' src='". find_in_path("images/type_$type-16.png") ."' /> "; // version imagee
+				}
+				if ($adresse['voie'])
+					$adresse['voie'] = "<span class='street-address'>$adresse[voie]</span>";
+				if ($adresse['ville'])
+					$adresse['ville'] = "<span class='locality'>$adresse[ville]</span>";
+				if ($adresse['complement'])
+					$adresse['complement'] = "<span class='extended-address'>$adresse[complement]</span>";
+				if ($adresse['region'])
+					$adresse['region'] = "<span class='region'>$adresse[region]</span>";
+				if ($adresse['code_postal'])
+					$adresse['code_postal'] = "<span class='postal-code'>$adresse[code_postal]</span>";
+				if ($adresse['boite_postale'])
+					$adresse['boite_postale'] = "<span class='post-office-box'>$adresse[boite_postale]</span>";
+				unset($adresse['type']); // ne devrait plus etre traite par le modele
+				unset($adresse['id_objet']); // ne devrait plus etre traite par le modele
+				unset($adresse['id_adresse']); // ne devrait pas etre utilise par le modele
+			}
+			$adresse['_nl'] = $newline; // parametre supplementaire pour le modele
+			$adresse['_spc'] = $space; // parametre supplementaire pour le modele
+			$adresses_string[$id_objet] .=  recuperer_fond('modeles/coordonnees_adresse', $adresse) .($html_span?"</$htm_span>\n":'');
+		}
+	}
+	return $adresses_string;
+}
+
+/**
+ * Affichage micro-formate de liste d'adresses de courriel
+ *
+ * @param array $id_objets
+ *   Liste des (listes de) emails/mels a formater, ou
+ *   liste des ID dont on doit formater les mails (voir parametre suivant)
+ * @param string $objet
+ *   Indique le type d'objet dont les ID sont passes afin de recuperer les
+ *   numeros associes a ces objets. Quand rien n'est indique c'est que c'est la
+ *   liste de liste des numeros qui est directement fournie.
+ *   (ceci est prevu pour etendre facilement l'usage de la fonction si necessaire,
+ *   vaut "auteur" par defaut)
+ * @param string $html_span
+ *   Balise-HTML (paire ouvrante/fermante) encadrant l'ensemble avec lien cliquable
+ *   Par defaut : "div" avec la classe "email" (ne rien mettre pour desactiver)
+ *  @return array $emails_string
+ *   Liste des courriels formates en HTML.
+ * @note
+ *   http://microformats.org/wiki/hcard-fr#adr_tel_email_types
+ *   http://microformats.org/wiki/hcard-fr#valeurs_sous-propri.C3.A9t.C3.A9_type
+ *   http://microformats.org/wiki/hcard-fr#Lisible_par_Humain_vs._Machine
+ *   http://microformats.org/wiki/vcard-suggestions#EMAL_Type_Definition
+ *   http://en.wikipedia.org/wiki/Email#URI_scheme_mailto:
+ *   http://www.remote.org/jochen/mail/info/address.html
+ *   http://en.wikipedia.org/wiki/X.400#Addressing
+ */
+function association_formater_emails($id_objets, $objet='auteur', $html_span='div', $sep=' ')
+{
+	$id_objets = association_recuperer_liste($id_objets, false);
+	if ($objet) { // ancien comportement : ce sont les id_objet qui sont transmis
+		$emails_array = array(); // initialisation du tableau des donnees
+		foreach ($id_objets as $id_objet) { // prepare la structure du tableau renvoye
+			$emails_array[$id_objet] = array();
+		}
+		if ( $objet=='auteur' ) { // on commence par recuperer les emails de la table spip_auteurs
+			$query = sql_select("id_auteur, email, CONCAT('0-', id_auteur) AS id_email, email AS titre, '' AS type", 'spip_auteurs', sql_in('id_auteur', $id_objets)." AND email <> ''");
+			while ($auteur_info = sql_fetch($query))
+				$emails_array[$auteur_info['id_auteur']][] = $auteur_info;
+			sql_free($query);
+		}
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		if ( $trouver_table('spip_emails') && $trouver_table('spip_emails_liens') ) { // "coordonnees" ou similaire est installe (active ou pas)
+			$query = sql_select('l.id_objet, l.type, e.*','spip_emails AS e INNER JOIN spip_emails_liens AS l ON l.id_email=e.id_email', sql_in('l.id_objet', $id_objets)." AND l.objet='$objet' ");
+			while ($data = sql_fetch($query)) { // on recupere tous les numeros dans un tableau de tableaux
+				$emails_array[$data['id_objet']][] = $data;
+			}
+			sql_free($query);
+		}
+	} else { // on a deja la liste des emails !
+		$emails_array = $id_objets;
+	}
+	$emails_string = array();  // initialisation du tableau renvoye
+	foreach ($emails_array as $id_objet => $courriels) {  // on cree la liste de chaines de courriels
+		$emails_string[$id_objet] = ' '; // initialisation de la chaine renvoyee
+		foreach ($courriels as $courriel) { // formater chaque mel
+			$href = false;
+			if ( !is_array($courriel) ) {
+				$courriel['email'] = $courriel;
+			}
+			if ($html_span) { // balisage HTML avec microformat
+				$emails_string[$id_objet] .= "<$html_span id='$courriel[id_email]' class='email'>";
+				if ($courriel['type']) {
+					$types = explode(',', $courriel['type']);
+					foreach ($types as $type)
+						$emails_string[$id_objet] .= "<abbr class='type' title='$type'>". _T("coordonnees:$type") .'</abbr> '; // version textuelle
+//						$emails_string[$id_objet] .= "<img class='type' alt='$type' src='". find_in_path("images/type_$type-16.png") ."' /> "; // version imagee
+				}
+				if ( !$courriel['type'] || stripos($courriel['type'], 'internet')!==FALSE )
+					$href = true;
+				$emails_string[$id_objet] .= ($href?("<a title='". _T('asso:ecrire_a') ." $courriel[email]' href='mailto:$courriel[email]'"):'<span') ." class='value'>";
+				unset($courriel['type']); // ne devrait plus etre traite par le modele
+				unset($courriel['id_objet']); // ne devrait plus etre traite par le modele
+				unset($courriel['id_email']); // ne devrait pas etre utilise par le modele
+				$courriel['email'] = ( $courriel['titre'] ? $courriel['titre'] : str_replace('@', ' @ ', ucwords($courriel['email'])) ); // on affiche le titre si present sinon la valeur
+			}
+			$emails_string[$id_objet] .= $courriel['email']. ($html_span?('</'.($href?'a':'span')."></$htm_span>\n"):'');
+		}
+		$emails_string[$id_objet] = $emails_string[$id_objet].$sep;
+	}
+	return $emails_string;
+}
+
+/**
+ * Affichage micro-formate de liste d'adresses electroniques
+ *
+ * @param array $id_objets
+ *   Liste des (listes de) URLs a formater, ou
+ *   liste des ID dont on doit formater les URLs (voir parametre suivant)
+ * @param string $objet
+ *   Indique le type d'objet dont les ID sont passes afin de recuperer les
+ *   numeros associes a ces objets. Quand rien n'est indique c'est que c'est la
+ *   liste de liste des numeros qui est directement fournie.
+ *   (ceci est prevu pour etendre facilement l'usage de la fonction si necessaire,
+ *   vaut "auteur" par defaut)
+ * @param bool $a
+ *   Active (si oui) la creation d'un lien cliquable avec la classe "url" ou renvoit juste (si faux) l'adresse brute
+ * @param string $sep
+ *   Separateur entre les adresse.
+ *   Par defaut l'espace.
+ *  @return array $urls_string
+ *   Liste des liens formates en HTML.
+ * @note
+ *   http://microformats.org/wiki/vcard-suggestions#URL_Type_Definition
+ * @note
+ *   http://en.wikipedia.org/wiki/Instant_messaging#Interoperability
+ *   http://en.wikipedia.org/wiki/Comparison_of_instant_messaging_protocols
+ *   http://microformats.org/wiki/hcard-examples#AOL_Instant_Messenger_.28AIM.29
+ *   http://tools.ietf.org/html/rfc4770
+ *   http://rfc-ref.org/RFC-TEXTS/4770/kw-uri.html
+ *   http://en.wikipedia.org/wiki/VCard#vCard_extensions
+ *   http://en.wikipedia.org/wiki/Social_web
+ *   http://fr.wikipedia.org/wiki/R%C3%A9seau_social#R.C3.A9seaux_sociaux_sur_Internet
+ *   http://fr.wikipedia.org/wiki/R%C3%A9seautage_social#R.C3.A9seaux_ayant_plus_de_30_millions_d.27inscriptions
+ */
+function association_formater_urls($id_objets, $objet='auteur', $a=TRUE, $sep=' ')
+{
+	$id_objets = association_recuperer_liste($id_objets, false);
+	if ($objet) { // ancien comportement : ce sont les id_objet qui sont transmis
+		$urls_array = array(); // initialisation du tableau des donnees
+		foreach ($id_objets as $id_objet) { // prepare la structure du tableau renvoye
+			$urls_array[$id_objet] = array();
+		}
+		if ( in_array($objet, array('auteur', 'breve', 'forum', 'site')) ) { // on commence par recuperer les #NOM_SITE et #URL_SITE des tables natives de SPIP
+			$query = sql_select("id_$objet, nom_site AS titre, url_site AS url, CONCAT('0-',id_$objet) AS id_url, 'site' AS type", "spip_{$objet}s", sql_in("id_$objet", $id_objets)." AND url_site <> ''");
+			while ($site = sql_fetch($query))
+				$urls_array[$site["id_$objet"]][] = $site;
+			sql_free($query);
+		}
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		if ( $trouver_table('spip_urls') && $trouver_table('spip_urls_liens') ) { // "coordonnees" ou similaire est installe (active ou pas)
+			$query = sql_select('l.id_objet, l.type, e.*','spip_urls AS e INNER JOIN spip_urls_liens AS l ON l.id_url=e.id_url', sql_in('l.id_objet', $id_objets)." AND l.objet='$objet' ");
+			while ($data = sql_fetch($query)) { // on recupere tous les numeros dans un tableau de tableaux
+				$urls_array[$data['id_objet']][] = $data;
+			}
+			sql_free($query);
+		}
+	} else { // on a deja la liste des emails !
+		$urls_array = $id_objets;
+	}
+	$urls_string = array();  // initialisation du tableau renvoye
+	foreach ($urls_array as $id_objet => $urls) { // on le transforme en liste de chaines formatees
+		$urls_string[$id_objet] = ''; // initialisation de la chaine renvoyee
+		foreach ($urls as $lien) { // il y a la(s) URL(s)
+			if ( !is_array($lien) ) {
+				$lien['url'] = $lien;
+			}
+			if ( $lien['type'] && !$lien['url'] ) // on a juste le "screen-name" pour une messagerie instantannee connue ou le "profil id" pour un reseau social connu
+				switch ( strtolower($lien['type']) ) { // deduire l'adresse a appliquer dans les cas les plus connus
+					case 'aim' :
+					case 'aol' : // OSCAR ou TOC2
+					case 'toc2' :
+						$lien['url'] = "aim:goim?screenname=$lien[titre]";
+						break;
+					case 'yim' :
+					case 'ymsgr' :
+					case 'ymsp' :
+						$lien['url'] = "ymsgr:sendIM?$lien[titre]";
+						break;
+					case 'msn' :
+					case 'msnim' :
+					case 'msnp' :
+						$lien['url'] = "msnim:chat?contact=$lien[titre]";
+						break;
+					case 'xmpp' :
+					case 'googletalk' :
+					case 'gtalk' :
+					case 'jabber' :
+					case 'jingle' : // extension P2P/VoIP implementee par Google
+					case 'gwfp' : // extension (Google) Wave Federation Protocol utilise par Apache Wave
+					case 'impp' : // precurseur/base de XMPP
+						$lien['url'] = "xmpp:$lien[titre]";
+						break;
+					case 'skype' :
+						$lien['url'] = "skype:$lien[titre]?call";
+						break;
+					case 'icq' : // OSCAR
+						$lien['url'] = "http://www.icq.com/people/cmd.php?uin=$lien[titre]&action=message' type='application/x-icq";
+						break;
+					case 'gg' :
+					case 'gadu' :
+					case 'gadu-gadu' :
+						$lien['url'] = "gg:$lien[titre]";
+						break;
+					case 'sip' :
+					case 'simple' :
+					case 'prim' :
+						$lien['url'] = "sip:$lien[titre]";
+						break;
+					case 'irc' :
+						$lien['url'] = "irc://$lien[titre]"; // on suppose que c'est "reseau/cannal" qui sont donne... cf. http://en.wikipedia.org/wiki/Internet_Relay_Chat#Networks
+						break;
+					case 'zephyr' : // base sur Kerberos, projet Athena
+						$lien['url'] = "$lien[titre]@ATHENA.MIT.EDU";
+						break;
+					default :
+						$lien['url'] = "$lien[type]:$lien[titre]"; // probablement le protocole (file, ftp, http, webdav, ...)
+						break;
+				}
+			if ($a) { // balisage HTML avec microformat
+				$urls_string[$id_objet] .= "<a class='url' href='$lien[url]' id='$lien[id_url]'>";
+				if ($lien['type']) {
+					$types = explode(',', $lien['type']);
+					foreach ($types as $type)
+						$urls_string[$id_objet] .= '<span>'. _T("coordonnees:$type") .'</span>: '; // version textuelle
+//						$urls_string[$id_objet] .= '<img alt="" src="'. find_in_path("images/type_$type-16.png") .'" /> '; // version imagee
+				}
+				unset($lien['type']); // ne devrait plus etre traite par le modele
+				unset($lien['id_objet']); // ne devrait plus etre traite par le modele
+				unset($lien['id_url']); // ne devrait pas etre utilise par le modele
+				$urls_string[$id_objet] .=  ($lien['titre']?$lien['titre']:$lien['url']); // on affiche le titre si present sinon la valeur
+			} else
+				$urls_string[$id_objet] .= $lien['url'];
+			$urls_string .= ($a?'</a>':'') .$sep;
+		}
+	}
+	return $urls_string;
 }
 
 /** @} */
@@ -854,6 +1182,26 @@ function association_recuperer_entier($valeur, $req=TRUE)
 {
 	$valeur = ($req?_request($valeur):$valeur);
 	return intval($valeur);
+}
+
+/**
+ * @param string  $sep
+ *   Separateur a utiliser pour concatener les elements du tableau
+ * @return array|string $valeur
+ *   Liste de valeurs
+ * @note
+ *   ...
+ */
+function association_recuperer_liste($valeur, $req=FALSE, $sep='')
+{
+	$valeur = ($req?_request($valeur):$valeur);
+	if ( !is_array($valeur) )
+		if ( is_scalar($valeur) ) // chaine ou nombre
+			$valeur = array($valeur);
+		else // objet ou ressource ou autre
+			$valeur = array();
+	return ($sep ? implode($sep, $valeur) : $valeur);
+//	return ($sep ? sql_in($sep, $valeur) : $valeur);
 }
 
 /** @} */
@@ -1608,7 +1956,7 @@ function association_bloc_filtres($liste_filtres, $exec='', $supplements='', $td
 		$res .= "\n<input type='hidden' name='exec' value='$exec' />";
 	$res .= "\n<". ($td?'table width="100%"':'ul') .' class="asso_tablo_filtres">'. ($td?'<tr>':'');
 	foreach($liste_filtres as $filtre_selection =>$params) {
-		$res .= ($td?'<td':'<li') ." class='filtre_$filtre_selection'>". call_user_func_array("association_selectionner_$filtre_selection", (is_array($params)?$params:array($params)) ) . ($td?'</td>':'</li>');
+		$res .= ($td?'<td':'<li') ." class='filtre_$filtre_selection'>". call_user_func_array("association_selectionner_$filtre_selection", association_recuperer_liste($params, false) ) . ($td?'</td>':'</li>');
 	}
 	if ( is_array($supplements) ) {
 		foreach ($supplements as $nom => $supplement) {
@@ -2291,8 +2639,6 @@ function association_langue($chaine)
 	return _T((strpos($head,':') ? '' : 'asso:').$head, $tail );
 }
 
-function association_filtrer(){}
-
 /** @} */
 
 
@@ -2303,10 +2649,6 @@ include_spip('balise/meta');
 $inc_meta = charger_fonction('meta', 'inc'); // inc_version l'a deja chargee
 $inc_meta('association_metas');
 
-// pouvoir utiliser les fonctions de coordonnees comme filtre
-if (test_plugin_actif('COORDONNEES')) {
-	include_spip('inc/association_coordonnees');
-}
 
 
 ?>

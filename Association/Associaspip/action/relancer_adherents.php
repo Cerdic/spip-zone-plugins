@@ -1,33 +1,28 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
-
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-// envoi du mail aux destinataires sélectionnés et chgt du statut de relance
-function action_relancer_adherents()
-{
+function action_relancer_adherents() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$count = $securiser_action();
 	$sujet = _request('sujet');
 	$relance = association_recuperer_entier('relance');
 	$message = html_entity_decode(_request('message'), ENT_QUOTES, 'UTF-8');
-	$statut_tab = (isset($_POST['statut'])) ? $_POST['statut']:array(); // contient un tableau id_auteur => statut_interne
+	$statut_tab = association_recuperer_liste('statut', true); // contient un tableau id_auteur => statut_interne
 	$exp = $GLOBALS['association_metas']['nom'].'<'.$GLOBALS['association_metas']['email'].'>';
 	include_spip ('inc/envoyer_mail'); //= $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 
 	// on recupere les adresses emails de tous les auteurs selectionnes
-	include_spip('inc/association_coordonnees');
-	$emails_auteurs = association_recuperer_emails(array_keys($statut_tab)); // cette fonction renvoie un tableau auteur_id => array(emails)
+	$emails_auteurs = association_formater_emails(array_keys($statut_tab), 'auteur', ''); // cette fonction renvoie un tableau auteur_id => array(emails)
 
 	// initialise les valeurs retournees
 	$emails_envoyes_ok = 0;
@@ -41,7 +36,7 @@ function action_relancer_adherents()
 		} else { // identification des membres sans email
 			$membres_sans_email[] = $id_auteur;
 		}
-		foreach ($emails as $email) { // envoi des mails
+		foreach ($emails as $email) { // envoi des mails a toutes les adresses connues...
 			if (!inc_envoyer_mail_dist($email, $sujet, $message, $exp)) {
 				$emails_envoyes_echec++;
 				spip_log("non envoi du mail a $email",'associaspip');

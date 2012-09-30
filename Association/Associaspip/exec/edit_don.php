@@ -2,8 +2,8 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations
  *
- * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
- * @copyright Copyright (c) 2010 Emmanuel Saint-James
+ * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
  *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
@@ -18,7 +18,6 @@ function exec_edit_don()
 			echo minipres();
 	} else {
 		include_spip ('inc/navigation_modules');
-//		include_spip ('inc/association_comptabilite');
 		$id_don = association_passeparam_id('don');
 		onglets_association('titre_onglet_dons', 'dons');
 		// INTRO : resume don
