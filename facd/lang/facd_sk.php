@@ -44,10 +44,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'thead_fonction' => 'Použitá funkcia',
 	'thead_id' => 'P. č.',
 	'thead_id_auteur' => 'Autor',
-	'thead_id_document' => 'Pôvodný dokument',
+	'thead_id_document' => 'Pôvodný dokument', # MODIF
 	'thead_nombre' => 'Počet',
 	'thead_statut' => 'Stav',
-	'titre_page_file' => 'Rad modulu na konverziu médií',
+	'titre_page_file' => 'Rad modulu na konverziu médií', # MODIF
 	'titre_page_file_convertis_jour' => 'Konverzie podľa dátumu',
 	'titre_page_file_menu' => 'Rad na konverziu',
 
