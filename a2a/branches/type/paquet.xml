@@ -1,9 +1,9 @@
 <paquet
 	prefix="a2a"
 	categorie="navigation"
-	version="1.3.6"
-	etat="test"
-	compatibilite="[3.0.0-dev;3.0.*]"
+	version="2.0.0-beta"
+	etat="experimental"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/a2a-64.png"
 	schema="0.9.0"
 	documentation="http://www.spip-contrib.net/a2a"
