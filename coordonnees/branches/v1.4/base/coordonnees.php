@@ -37,7 +37,7 @@ function coordonnees_declarer_tables_principales($tables_principales){
 		"code_postal" => "VARCHAR(40) DEFAULT '' NOT NULL",
 		"ville" => "TINYTEXT DEFAULT '' NOT NULL",
 		"region" => "VARCHAR(40) DEFAULT '' NOT NULL"
-		"pays" => "VARCHAR(2) DEFAULT '' NOT NULL",
+		"pays" => "VARCHAR(3) DEFAULT '' NOT NULL", // peut etre sur 2 caracteres (codes : ISO alpha ou numerique, ONU, etc.) ou sur 3 caracterse (codes : ISO alpha, CIO, etc.)
 		"maj" => "TIMESTAMP"
 		);
 	$adresses_key = array(
