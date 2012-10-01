@@ -7,13 +7,15 @@
 <//B_deja_relie>
 
 [(#GET{deja_relie}|non)
-<div class="formulaire_spip formulaire_ajoute_a2a ajax">
+<div class="formulaire_spip formulaire_ajoute_a2a">
 <br class='bugajaxie' />
 <form method='post' action='#ENV{action}#formulaire_ajoute_a2a' enctype='multipart/form-data'>
 	<script type="text/javascript">
 	(function($){
 		$(function(){
-			$('.formulaire_ajoute_a2a button').click(function(){ajaxReload('bloca2a');false});
+			$('.formulaire_ajoute_a2a').submit(function(e){e.preventDefault();
+			                                                $(this).ajaxSubmit({success: function(){
+			                                                    ajaxReload('bloca2a')}});});
 		})
 	})(jQuery);
 	</script>
