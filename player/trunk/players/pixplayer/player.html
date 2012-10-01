@@ -11,4 +11,3 @@ jQuery.getScript("[(#CHEMIN{players/pixplayer/audio-player.js})]",function(){
 	AudioPlayer.setup("[(#CHEMIN{players/pixplayer/player.swf})]", {width: #ENV{my_width,290}});
 	jQuery(function(){jQuery('dd.pixplayer').find('p').each(function(){AudioPlayer.embed($(this).attr('id'), {soundFile: $('a',this).attr('href'),titles: $('a',this).attr('title')});});});
 });}/*]]>*/</script></dd>
-</BOUCLE_doc>
