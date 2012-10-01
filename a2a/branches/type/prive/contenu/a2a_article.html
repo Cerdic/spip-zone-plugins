@@ -3,7 +3,7 @@
 [(#REM) afficher les evenements de cet article]
 #BOITE_OUVRIR
 	<div id="pave_a2a">
-	<INCLURE{fond=prive/objets/liste/articles_lies,nb=10,sinon=<:a2a:pas_articles_lies:>,id_article = #ID_ARTICLE_ORIG,env}{ajax=bloc-a2a}>
+	<INCLURE{fond=prive/objets/liste/articles_lies,nb=10,sinon=<:a2a:pas_articles_lies:>,id_article = #ID_ARTICLE_ORIG,env}{ajax=bloca2a}>
 	[(#ENV{articles_lies_visibles}|=={oui}|non)<div class="toggle_box_link">
 		&#91;<a href="[(#SELF|parametre_url{articles_lies_visibles,oui}|ancre_url{pave_a2a_bloc})]" class="ajax"><:a2a:lien_lier_article:></a>&#93;
 	</div>]
