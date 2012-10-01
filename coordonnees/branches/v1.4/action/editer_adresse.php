@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Plugin Coordonnées 
- * Licence GPL (c) 2010 Matthieu Marcillaud 
+ * Plugin Coordonnées
+ * Licence GPL (c) 2010 Matthieu Marcillaud
 **/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -30,7 +30,7 @@ function insert_adresse($c = '') {
 	$champs = array(
 		'voie' => _T('coordonnees:item_nouvelle_adresse')
 	);
-	
+
 	// Envoyer aux plugins
 	$champs = pipeline('pre_insertion', array(
 		'args' => array(
@@ -38,10 +38,10 @@ function insert_adresse($c = '') {
 		),
 		'data' => $champs
 	));
-	
+
 	$id_adresse = sql_insertq("spip_adresses", $champs);
 
-	if (!$c) 
+	if (!$c)
 		$c = array('objet' => _request('objet'),
 			'id_objet' => _request('id_objet'),
 			'type' => _request('type'));
@@ -52,7 +52,7 @@ function insert_adresse($c = '') {
 		$c['id_adresse'] = $id_adresse;
 		sql_insertq("spip_adresses_liens", $c);
 	}
-	
+
 	return $id_adresse;
 }
 
@@ -65,7 +65,7 @@ function revisions_adresses($id_adresse, $c=false) {
 		$c = array();
 		foreach (array(
 				'voie', 'complement', 'boite_postale',
-				'code_postal', 'ville', 'pays', 'titre') as $champ
+				'code_postal', 'ville', 'region', 'pays', 'titre') as $champ
 		) {
 			if (($a = _request($champ)) !== null) {
 				$c[$champ] = $a;
