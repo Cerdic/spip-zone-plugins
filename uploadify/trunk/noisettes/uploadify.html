@@ -1,0 +1,77 @@
+#CACHE{0}
+
+[<script type="text/javascript" src="(#CHEMIN{theme/uploadify/jquery.uploadify.v2.1.4.min.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{theme/uploadify/swfobject.js})"></script>]
+
+<B_lesDocs>
+<p class="commentaire">
+	<strong>Fichiers actuellement liés :</strong><br />
+	<BOUCLE_lesDocs(DOCUMENTS){id_rubrique=#GET{article_inscription}}{tout}{'<br />'}>
+		- [<a href="#URL_DOCUMENT" target='_blank'>(#FICHIER|basename)[ ((#ID_DOCUMENT))] </a>] - <a class='ajax suppr' href="#URL_ACTION_AUTEUR{supprimer_document,#ID_DOCUMENT,#SELF}">[supprimer]</a>
+	</BOUCLE_lesDocs>
+</p>
+</B_lesDocs>
+
+<div id="custom-demo" class="demo" style='position:relative;width:372px'>
+		<div class="demo-box">
+			<div id="custom-queue"></div>
+			<input id="custom_file_upload" type="file" name="Filedata" />
+			<a href="[(#SELF|parametre_url{id_article,#ENV{id_article}}|parametre_url{var,[(#REM|uniqid)]})]" title="Rafraichir la liste" id="leRefresh" class='ajax rafraichir'>Rafraîchir la liste</a>
+		</div>
+</div><!-- #custom-demo -->
+
+<script type="text/javascript">
+jQuery(function() {
+	jQuery('#leRefresh').hide();
+	jQuery('#custom_file_upload').uploadify({
+		'uploader'       : '#CHEMIN{theme/uploadify/uploadify.swf}',
+		// 'script'         : '#CHEMIN{formulaires/inscription.php}',
+		'script'         : '[(#URL_PAGE{uploadify})]',
+		'scriptData'     : {'id_objet':'#ENV{id_objet}','objet':'#ENV{objet}'},
+		'scriptAccess'    : 'sameDomain', // Set to "always" to allow script access across domains
+		'cancelImg'      : '#CHEMIN{theme/uploadify/cancel.png}',
+		'folder'         : '/',
+		'buttonText'     : 'Choisir le fichier',
+		'multi'          : true,
+		'auto'           : true,
+		// 'fileExt'        : '*.jpg;*.gif;*.png;*.ppt;*.pptx;*.doc;*.docx;*.xls;*.xlsx;*.pdf;*.bmp;*.tif;*.tiff;',
+		'fileExt'        : '*.*',
+		// 'fileDesc'       : 'Image Files (.JPG, .GIF, .PNG)',
+		'queueID'        : 'custom-queue',
+		'queueSizeLimit' : 10,
+		'simUploadLimit' : 10,
+		'sizeLimit'      : 100000000,
+		'removeCompleted': false,
+		'onUploadComplete' : function(file) {
+		            alert('The file ' + file.name + ' finished processing.');
+		},
+		'onAllComplete'  : function(event,data) {
+			jQuery('#leRefresh').click();
+			var comp = document.getElementById('leRefresh');
+			try { //in firefox
+			    comp.click();
+			    return;
+			} catch(ex) {}
+			try { // in chrome
+			    if(document.createEvent) {
+			        var e = document.createEvent('MouseEvents');
+			        e.initEvent( 'click', true, true );
+			        comp.dispatchEvent(e);
+			        return;
+			    }
+			} catch(ex) {}
+			try { // in IE
+			    if(document.createEventObject) {
+			         var evObj = document.createEventObject();
+			         comp.fireEvent("onclick", evObj);
+			         return;
+			    }
+			} catch(ex) {}
+		}
+		
+		// 'onSelectOnce'   : function(event,data) {
+		// 	jQuery('#status-message').text(data.filesSelected + ' files have been added to the queue.');
+		// },
+		});
+});
+</script>
