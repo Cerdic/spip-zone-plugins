@@ -87,7 +87,33 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer_numero' => 'Supprimer ce numéro',
 
 	// T
-	'titre_coordonnees' => 'Coordonnées'
+	// types (RFC2426) http://microformats.org/wiki/hcard-fr#adr_tel_email_types
+	// traductions  http://www.alsacreations.com/tuto/lire/1223-microformats-composes.html#hcard
+	'titre_coordonnees' => 'Coordonnées',
+	'type_adr_work' =>  'Professionnelle',
+	'type_adr_home' => 'Personnelle',
+	'type_adr_pref' => 'Principale',
+	'type_adr_postal' => 'Postale (en poste restante)',
+	'type_adr_dom' => 'R&eacute;sidentielle',
+	'type_adr_intl' => '&Eacute;trang&egrave;re',
+	'type_adr_parcel' => 'Parcelle',
+	'type_tel_voice' => 'Vocal',
+	'type_tel_home' => 'Résidence',
+	'type_tel_msg' => 'à messagerie',
+	'type_tel_work' => 'Professionnel',
+	'type_tel_pref' => 'Favori',
+	'type_tel_fax' => 'Télécopie',
+	'type_tel_cell' => 'Portable', // a cote de "cell" on trouve "mobile" qui est une terminologie tres courante en Amerique du nord
+	'type_tel_video' => 'Visioconférence',
+	'type_tel_pager' => 'Bipeur',
+	'type_tel_bbs' => 'Service de messagerie',
+	'type_tel_modem' => 'MoDem informatique',
+	'type_tel_car' => 'Voiture',
+	'type_tel_isdn' => 'RNIS ...ou DSL', // Réseau numérique à intégration de services
+	'type_tel_pcs' => 'Service de communication personnel', // "Réseau privé" en gros
+	'type_mel_internet' => 'Internet',
+	'type_mel_x400' => 'X.400',
+	'type_mel_pref' => 'Préféré',
 );
 
 ?>
