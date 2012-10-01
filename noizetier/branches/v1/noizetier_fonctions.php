@@ -97,50 +97,13 @@ function noizetier_obtenir_infos_noisettes() {
 		// s'il en mode recalcul, on recalcule toutes les descriptions des noisettes trouvees.
 		// ou si le cache est desactive
 		if (!$noisettes or (_request('var_mode') == 'recalcul') or (defined('_NO_CACHE') and _NO_CACHE!=0)) {
-			$noizetier_obtenir_infos_noisettes_direct=charger_fonction('noizetier_obtenir_infos_noisettes_direct','plugins');
+			$noizetier_obtenir_infos_noisettes_direct=charger_fonction('noizetier_obtenir_infos_noisettes_direct','inc');
 			$noisettes = $noizetier_obtenir_infos_noisettes_direct();
 			ecrire_fichier_securise(_DIR_CACHE . _CACHE_DESCRIPTIONS_NOISETTES, serialize($noisettes));
 		}
 	}
 	
 	return $noisettes;
-}
-
-
-/**
- * Obtenir les infos de toutes les noisettes disponibles dans les dossiers noisettes/
- * C'est un GROS calcul lorsqu'il est a faire.
- *
- * @return array
- */
-function noizetier_obtenir_infos_noisettes_direct_dist(){
-
-	$liste_noisettes = array();
-		
-	$match = "[^-]*[.]html$";
-	$liste = find_all_in_path('noisettes/', $match);
-		
-	if (count($liste)){
-		foreach($liste as $squelette=>$chemin) {
-			$noisette = preg_replace(',[.]html$,i', '', $squelette);
-			$dossier = str_replace($squelette, '', $chemin);
-			// On ne garde que les squelettes ayant un fichier YAML de config
-			if (file_exists("$dossier$noisette.yaml")
-				AND ($infos_noisette = noizetier_charger_infos_noisette_yaml($dossier.$noisette))
-			){
-				$liste_noisettes[$noisette] = $infos_noisette;
-			}
-		}
-	}
-	
-	// supprimer de la liste les noisettes necissant un plugin qui n'est pas actif
-	foreach ($liste_noisettes as $noisette => $infos_noisette)
-		if (isset($infos_noisette['necessite']))
-			foreach ($infos_noisette['necessite'] as $plugin)
-				if (!defined('_DIR_PLUGIN_'.strtoupper($plugin)))
-					unset($liste_noisettes[$noisette]);
-	
-	return $liste_noisettes;
 }
 
 
