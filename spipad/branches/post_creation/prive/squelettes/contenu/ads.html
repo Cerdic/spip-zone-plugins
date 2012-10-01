@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/ads, par=titre, env, ajax, sinon=<:ad:info_aucun_ad:>}>
+
+[(#AUTORISER{creer,ad})
+	[(#URL_ECRIRE{ad_edit,new=oui}|icone_verticale{<:ad:icone_creer_ad:>,ad,new,right})]
+]

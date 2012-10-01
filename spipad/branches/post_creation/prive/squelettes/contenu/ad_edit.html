@@ -1,0 +1,31 @@
+[(#ID_OBJET|oui)
+	[(#AUTORISER{modifier,ad,#ID_AD}|sinon_interdire_acces)]
+][(#ID_OBJET|non)
+	#SET{id_rubrique,#ENV{id_rubrique,#ENV{id_parent}}|trouver_rubrique_creer_objet{ads}}
+	[(#GET{id_rubrique}|non|ou{[(#AUTORISER{creeraddans,rubrique,#GET{id_rubrique}})]}|sinon_interdire_acces)]
+]
+ 
+#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_OBJET}|?{#ENV{lier_trad,#ID_OBJET}|generer_url_entite{ad},#GET{id_rubrique}|?{#GET{id_rubrique}|generer_url_entite{rubrique},#URL_ECRIRE{rubriques}}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_AD|oui)
+	[(#GET{redirect}|icone_verticale{Retour,ad,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_AD|?{<:ad:icone_modifier_ad:>,<:ad:icone_creer_ad:>})]
+		<h1>(#ENV{titre,#INFO_TITRE{ad,#ID_AD}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_AD|generer_url_entite{ad}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_AD{#ENV{id_ad,oui}, #GET{id_rubrique}, #GET{redirect}, #ENV{associer_objet}, #ENV{lier_trad}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

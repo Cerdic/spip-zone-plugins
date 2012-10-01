@@ -1,0 +1,28 @@
+<BOUCLE_ad(ADS){id_ad=#ENV{id}}{statut?}>
+<div class='infos'>
+[(#SET{texte_objet,<:ad:titre_ad:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_AD</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{ads,#ID_AD})]
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(ADS){id_ad}>
+	[(#VAL{redirect}
+		|generer_url_action{type=ads&id=#ID_AD}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,ads,#ID_AD,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=ads&id=#ID_AD}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+
+</div>
+</BOUCLE_ad>
