@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,ad,#ID_AD}|sinon_interdire_acces)]
+<BOUCLE_ad(ADS){id_ad}{statut==.*}{si #ENV{exec}|=={ad}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,ad,#ID_AD})
+		[(#ID_AD|afficher_qui_edite{ad}|non)
+			[(#URL_ECRIRE{ad_edit,id_ad=#ID_AD}|icone_verticale{<:ad:icone_modifier_ad:>,ad,edit,right ajax preload})]
+		]
+		[(#ID_AD|afficher_qui_edite{ad}|oui)
+			[(#URL_ECRIRE{ad_edit,id_ad=#ID_AD}|icone_verticale{#ID_AD|afficher_qui_edite{ad},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{ad-24.png}|balise_img{ad,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{ad,#ID_AD}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/ad,id=#ID_AD,id_ad=#ID_AD,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,ad,#ID_AD})
+	[(#ID_AD|afficher_qui_edite{ad}|non)
+		[(#URL_ECRIRE{ad_edit,id_ad=#ID_AD}|icone_verticale{<:ad:icone_modifier_ad:>,ad,edit,right ajax preload})]
+	]
+	[(#ID_AD|afficher_qui_edite{ad}|oui)
+		[(#URL_ECRIRE{ad_edit,id_ad=#ID_AD}|icone_verticale{#ID_AD|afficher_qui_edite{ad},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,ad,id,#ID_AD},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_ad>
+[(#ENV**{exec}|=={ad_edit}|?{#INCLURE{fond=prive/squelettes/contenu/ad_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_ad>

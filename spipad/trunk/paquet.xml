@@ -1,0 +1,56 @@
+<paquet
+	prefix="spipad"
+	categorie="divers"
+	version="1.0.1"
+	etat="dev"
+	compatibilite="[3.0.3;3.0.*]"
+	logo="prive/themes/spip/images/spipad-64.png"
+	documentation=""
+	schema="1.0.0" 
+>
+	<!--
+		Paquet généré le 2012-10-01 20:53:00
+		(Vous pouvez bien entendu supprimer ces commentaires) 
+	-->
+
+	<nom>Annonces</nom>
+
+	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs --> 
+	<auteur lien='http://montpel-ibre.fr'>apéro spip</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<!--
+		Exemple de commandes
+		* dependances
+		<necessite nom="saisies" compatibilite="[1.21.0;]" />
+		<utilise nom="saisies" compatibilite="[1.21.0;]" />
+		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
+		* pipelines
+		<pipeline nom="autoriser" inclure="spipad_autorisations.php" />
+		<pipeline nom="insert_head" inclure="spipad_pipelines.php" />
+		* declarer un pipeline 
+		<pipeline nom="mon_pipeline" action="" />
+		* parents de menus de SPIP :
+				menu_accueil (à éviter), menu_edition, menu_publication,
+				menu_activite, menu_squelette, menu_administration, menu_configuration 
+		<menu nom="spipad" titre="spipad:spipad_titre" parent="menu_edition"  icone="images/spipad-16.png" />
+		* parents d'onglets... configuration, plugins, statistiques, ... 
+		<onglet nom="spipad" titre="spipad:spipad_titre" parent="configuration" icone="images/spipad-24.png" />
+	-->
+
+	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
+
+	<pipeline nom="autoriser" inclure="spipad_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/spipad.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/spipad.php" /> 
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/spipad.php" /> 
+	<pipeline nom="affiche_enfants" inclure="spipad_pipelines.php" /> 
+	<pipeline nom="affiche_milieu" inclure="spipad_pipelines.php" /> 
+	<pipeline nom="affiche_auteurs_interventions" inclure="spipad_pipelines.php" /> 
+	<pipeline nom="optimiser_base_disparus" inclure="spipad_pipelines.php" /> 
+
+	<menu nom="ads" titre="ad:titre_ads" parent="menu_edition" icone="images/ad-16.png" action="ads" /> 
+	<menu nom="ad_creer" titre="ad:icone_creer_ad" parent="outils_rapides" icone="images/ad-new-16.png" action="ad_edit" parametres="new=oui" /> 
+</paquet>
