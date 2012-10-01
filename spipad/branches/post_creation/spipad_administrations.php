@@ -29,11 +29,11 @@ function spipad_upgrade($nom_meta_base_version, $version_cible) {
 	#	array('ecrire_config', array('spipad', array('exemple' => "Texte de l'exemple")))
 	#);
 	#
-	# $maj['1.1.0']  = array(array('sql_alert','TABLE spip_xx RENAME TO spip_yy'));
-	# $maj['1.2.0']  = array(array('sql_alert','TABLE spip_xx DROP COLUMN id_auteur'));
+	# $maj['1.1.0']  = array(array('sql_alter','TABLE spip_xx RENAME TO spip_yy'));
+	# $maj['1.2.0']  = array(array('sql_alter','TABLE spip_xx DROP COLUMN id_auteur'));
 	# $maj['1.3.0']  = array(
-	#	array('sql_alert','TABLE spip_xx CHANGE numero numero int(11) default 0 NOT NULL'),
-	#	array('sql_alert','TABLE spip_xx CHANGE texte petit_texte mediumtext NOT NULL default \'\''),
+	#	array('sql_alter','TABLE spip_xx CHANGE numero numero int(11) default 0 NOT NULL'),
+	#	array('sql_alter','TABLE spip_xx CHANGE texte petit_texte mediumtext NOT NULL default \'\''),
 	# );
 	# ...
 

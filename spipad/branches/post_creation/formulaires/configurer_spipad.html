@@ -9,11 +9,20 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-		<ul>
-			[(#SAISIE{input, exemple,
-				label=<:spipad:cfg_exemple:>,
-				explication=<:spipad:cfg_exemple_explication:>})]
-		</ul>
+
+<fieldset><legend> <b>Paramètrage type d'annonce</b> </legend>
+<label>Choisir : </label>
+
+<select name="grpmot_type">
+	<option value=""> Choisir le groupe de mots de référence </option>
+<BOUCLE_secteurs(GROUPES_MOTS) {par titre}>
+	<option value="#ID_GROUPE" [(#ENV{grpmot_type}|=={#ID_GROUPE}|?{selected="selected"})]>#TITRE </option>
+</BOUCLE_secteurs>
+
+</select>
+</fieldset>
+
+
 
 		<input type="hidden" name="_meta_casier" value="spipad" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>

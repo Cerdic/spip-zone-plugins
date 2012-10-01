@@ -26,6 +26,10 @@
 			[(#SAISIE{input, PRIX,
 				label=<:ad:label_PRIX:>})]
 
+			[(#SAISIE{mot, type_annonce, obligatoire=oui,
+				label=<:ad:label_type_annonce:>,
+				id_groupe= #CONFIG{spipad/grpmot_type}})]
+
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->

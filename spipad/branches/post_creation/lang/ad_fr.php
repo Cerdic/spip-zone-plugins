@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_PRIX' => 'PRIX',
 	'label_texte' => 'Texte',
 	'label_titre' => 'Titre',
+	'label_type_annonce' => 'Type annonce',
 
 	// R
 	'retirer_lien_ad' => 'Retirer cette annonce',

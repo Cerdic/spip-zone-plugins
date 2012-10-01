@@ -29,7 +29,7 @@ function formulaires_editer_ad_charger_dist($id_ad='new', $id_rubrique=0, $retou
  * Verifier les champs postes et signaler d'eventuelles erreurs
  */
 function formulaires_editer_ad_verifier_dist($id_ad='new', $id_rubrique=0, $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	return formulaires_editer_objet_verifier('ad',$id_ad, array('titre'));
+	return formulaires_editer_objet_verifier('ad',$id_ad, array('titre', 'type_annonce'));
 }
 
 /**

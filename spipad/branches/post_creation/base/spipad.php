@@ -34,6 +34,7 @@ function spipad_declarer_tables_objets_sql($tables) {
 			"titre"              => "varchar(255) NOT NULL DEFAULT ''",
 			"texte"              => "text NOT NULL DEFAULT ''",
 			"PRIX"               => "varchar(255)",
+			"type_annonce"       => "int(11) NOT NULL DEFAULT 0",
 			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", 
 			"statut"             => "varchar(20)  DEFAULT '0' NOT NULL", 
 			"lang"               => "VARCHAR(10) NOT NULL DEFAULT ''",
@@ -51,8 +52,8 @@ function spipad_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "titre AS titre, lang AS lang",
 		'date' => "date",
-		'champs_editables'  => array('titre', 'texte', 'PRIX'),
-		'champs_versionnes' => array('titre', 'texte', 'PRIX'),
+		'champs_editables'  => array('titre', 'texte', 'PRIX', 'type_annonce'),
+		'champs_versionnes' => array('titre', 'texte', 'PRIX', 'type_annonce'),
 		'rechercher_champs' => array("titre" => 5, "texte" => 5),
 		'tables_jointures'  => array('spip_ads_liens'),
 		'statut_textes_instituer' => array(
@@ -72,6 +73,7 @@ function spipad_declarer_tables_objets_sql($tables) {
 			)
 		),
 		'texte_changer_statut' => 'ad:texte_changer_statut_ad', 
+		
 
 	);
 
