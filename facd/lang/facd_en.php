@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tous_docs_facd' => 'Documents in the queue',
 
 	// L
+	'label_relancer_conversion' => 'Relancer la conversion', # NEW
 	'lien_convertir_document' => 'Convert this document',
 	'lien_recharger' => 'Reload',
 	'liste_attente_aucun' => 'No document in the queue.',
@@ -44,10 +45,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'thead_fonction' => 'Used function',
 	'thead_id' => 'ID',
 	'thead_id_auteur' => 'Author',
-	'thead_id_document' => 'Original document', # MODIF
+	'thead_id_document' => 'Original',
 	'thead_nombre' => 'Number',
 	'thead_statut' => 'Status',
-	'titre_page_file' => 'Queue of the document conversion plugin', # MODIF
+	'titre_page_file' => 'Queue of the document conversion plugin',
 	'titre_page_file_convertis_jour' => 'Conversions by date',
 	'titre_page_file_menu' => 'Conversion queue',
 

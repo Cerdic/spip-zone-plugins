@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tous_docs_facd' => 'Dokumenty v rade',
 
 	// L
+	'label_relancer_conversion' => 'Relancer la conversion', # NEW
 	'lien_convertir_document' => 'Konvertovať tento dokument',
 	'lien_recharger' => 'Obnoviť',
 	'liste_attente_aucun' => 'Žiaden dokument v rade.',
