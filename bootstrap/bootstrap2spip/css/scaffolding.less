@@ -1,0 +1,32 @@
+@import "bootstrap/css/scaffolding.less";
+
+/* Logos, documents et images */
+.spip_logos {}
+
+.spip_documents img,.spip_logos {.img-polaroid}
+
+.spip_documents { margin-bottom: @baseLineHeight; padding: 0; background: none; }
+.spip_documents,
+.spip_documents_center,
+.spip_doc_titre,
+.spip_doc_descriptif { margin-right: auto; margin-left: auto; text-align: center; }
+.spip_documents_center { clear: both; display: block; width: 100%; .box-sizing(border-box);}
+.spip_documents_left { float: left; margin: @paddingLarge;margin-top: 0;margin-left: 0; }
+.spip_documents_right { float: right; margin: @paddingLarge;margin-top: 0;margin-right: 0;}
+.spip_doc_titre {}
+.spip_doc_descriptif { clear: both; }
+
+.cartouche .spip_logos, .hero-unit .spip_logos {float: right;margin: @paddingLarge;margin-top: 0;margin-right: 0;}
+
+
+/* Liens de SPIP */
+a.spip_note { font-weight: bold; } /* liens vers notes de bas de page */
+a.spip_in {} /* liens internes */
+a.spip_mail {}
+a.spip_out {} /* liens sortants */
+a.spip_url {} /* liens url sortants */
+a.spip_glossaire {} /* liens vers encyclopedie */
+@media print {
+	a.spip_out:after,
+	a.spip_url:after { content: " (" attr(href) ")"; }
+}

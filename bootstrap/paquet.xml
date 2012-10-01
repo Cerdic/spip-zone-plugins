@@ -1,22 +1,25 @@
 <paquet
 	prefix="bootstrap"
-	categorie="divers"
+	categorie="outil"
 	version="1.0.0"
 	etat="dev"
 	compatibilite="[3.0.2;3.0.*]"
-	logo="img/bootstrap.png"
-	documentation=""
+	logo="img/bootstrap-32.png"
+	documentation="http://twitter.github.com/bootstrap/"
 >
 
-	<nom>Twitter Boostrap</nom>
+	<nom>Bootstrap</nom>
 
 	<auteur lien='http://www.studiomaiis.net'>Pierre Basson</auteur>
+	<auteur lien='http://www.nursit.com'>Cedric Morin</auteur>
 
 	<licence>GNU/GPL</licence>
 
-	<chemin path="squelettes" type="public" />
-	<chemin path="" />
+	<necessite nom="SPIP" compatibilite="[3.0.0;]" />
+	<necessite nom="lesscss" compatibilite="[0.7.0;]" />
 
-	<necessite nom="lesscss" compatibilite="[0.5.0;[" />
+	<chemin path="bootstrap" type="public" />
+	<chemin path="bootstrap2spip" type="public" />
+	<chemin path="" />
 
 </paquet>

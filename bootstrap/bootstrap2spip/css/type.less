@@ -1,0 +1,37 @@
+@import "bootstrap/css/type.less";
+
+.hero-unit h1 {word-wrap: break-word;}
+
+.chapo {.lead}
+.spip_surligne { background-color: @infoBackground; color: @infoText;}
+#descriptif_site_spip {.lead}
+
+/* Listes SPIP */
+ul.spip,
+ol.spip {}
+ul.spip {}
+li ul.spip {}
+ol.spip {}
+
+dl.spip dt,
+dl.spip dd {}
+dl.spip dt {}
+dl.spip dd {}
+
+/* Citations, code et poesie */
+blockquote.spip {}
+.spip_poesie {}
+.spip_poesie div {}
+.spip_code,
+.spip_cadre {width: 100%;.box-sizing(border-box);}
+.spip_cadre {}
+
+/* Enluminures typo V3 / Cf.: http://www.spip-contrib.net/3118 */
+sc { font-variant: small-caps; }
+.caractencadre-spip {}
+.caractencadre2-spip {}
+.texteencadre-spip {}
+
+/* Notes */
+.notes > div {padding-left: @gridColumnWidth+@gridGutterWidth; position: relative; }
+.notes .spip_note_ref { display:block;position:absolute;left:0;width: @gridColumnWidth;}

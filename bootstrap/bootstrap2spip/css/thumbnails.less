@@ -1,0 +1,72 @@
+@import "bootstrap/css/thumbnails.less";
+
+/* mapper avec le plugin album */
+.album .thumbnails li {width: 29%;float: left;}
+.album .thumbnails li:nth-child(3n-2) {clear: left;}
+.span5,
+.span6 {
+  .album .thumbnails li {width: 27%;}
+}
+.span3,
+.span4{
+  .album .thumbnails li {width: 41%;clear: none;}
+  .album .thumbnails li:nth-child(2n-1) {clear: left;}
+}
+.span1,
+.span2{
+  .album .thumbnails li {width: auto;float:none;clear: none;}
+}
+
+.thumbnails li img {max-width: 93%;}
+.thumbnails figure {margin:0;}
+.album .thumbnail {text-align: center; min-height: 150+2*9+@baseLineHeight;}
+// Add a hover state for linked versions only
+.album .thumbnail:hover {
+  border-color: @linkColor;
+  .box-shadow(0 1px 4px rgba(0,105,214,.25));
+}
+
+
+
+
+@media (min-width: 1200px) {
+  .span7,
+  .span8,
+  .span9,
+  .span10,
+  .span11,
+  .span12 {
+    .album .thumbnails li {width: 20%;clear: none;}
+    .album .thumbnails li:nth-child(4n-3) {clear: left;}
+  }
+  .span3{
+    .album .thumbnails li {width: 40%;}
+  }
+
+}
+@media (min-width: 768px) and (max-width: 979px) {
+  .span7 {
+    .album .thumbnails li {width: 28%;}
+  }
+  .span5{
+    .album .thumbnails {  margin-left: -@gridGutterWidth;}
+    .album .thumbnails li {width: 43%;float: left;clear: none;margin-left: @gridGutterWidth;}
+    .album .thumbnails li:nth-child(2n-1) {clear: left;}
+  }
+  .span3{
+    .album .thumbnails li {width: auto;float:none;clear: none;}
+  }
+}
+@media (max-width: 767px) {
+  .album .thumbnails {  margin-left: -@gridGutterWidth;}
+  .album .thumbnails li {width: 45%;float: left;clear: none;margin-left: @gridGutterWidth;}
+  .album .thumbnails li:nth-child(3n-2) {clear: none;}
+  .album .thumbnails li:nth-child(2n-1) {clear: left;}
+}
+@media (max-width: 450px) {
+  .album .thumbnails li {width: 40%;}
+}
+@media (max-width: 380px) {
+  .album .thumbnails {  margin-left:0}
+  .album .thumbnails li {float: none;margin-left: 0;width: auto;}
+}
