@@ -1,7 +1,7 @@
 <paquet
 	prefix="duplicator"
 	categorie="edition"
-	version="0.2.0"
+	version="1.0.1"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/apsulis.png"
