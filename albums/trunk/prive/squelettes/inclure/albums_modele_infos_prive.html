@@ -4,22 +4,30 @@
 	inclus dans /modeles/albums.html
 	inclus dans /modeles/albums_liste.html
 ]
+<BOUCLE_album(ALBUMS){id_album}{statut==.*}>
 
-<div class='album notice_prive clearfix'>
+[(#REM) Notice affichée dans l'espace privé ]
+<BOUCLE_vide(DOCUMENTS){id_album}{tout}> </BOUCLE_vide> #SET{notice,vide} <//B_vide>
+[(#STATUT|!={publie}|oui) #SET{notice,#GET{notice}|toggle_parametre{statut}} ]
+[(#GET{notice}|oui)
 
-[(#ENV{notice}|match{statut}|oui)
-	<strong><:album:info_statut_modele:></strong>
-	[(#AUTORISER{modifier,album,#ID_ALBUM}|oui)
-		[(#BOUTON_ACTION{
-			Publier&nbsp;
-			[(#CHEMIN_IMAGE{puce-publier-8.png}|balise_img{#STATUT})],
-			#URL_ACTION_AUTEUR{edition_albums,publier/publie/#ID_ALBUM,#SELF},'ajax'}
-		)]
+	<div class='album notice_prive clearfix'>
+
+	[(#GET{notice}|match{statut}|oui)
+		<strong><:album:info_statut_modele:></strong>
+		[(#AUTORISER{modifier,album,#ID_ALBUM}|oui)
+			[(#BOUTON_ACTION{
+				Publier&nbsp;
+				[(#CHEMIN_IMAGE{puce-publier-8.png}|balise_img{#STATUT})],
+				#URL_ACTION_AUTEUR{edition_albums,publier/publie/#ID_ALBUM,#SELF},'ajax'}
+			)]
+		]
 	]
-]
 
-[(#ENV{notice}|match{vide}|oui)
-	<strong><:album:info_album_vide:></strong>
-]
+	[(#GET{notice}|match{vide}|oui)
+		<strong><:album:info_album_vide:></strong>
+	]
 
-</div>
+	</div>
+]
+</BOUCLE_album>

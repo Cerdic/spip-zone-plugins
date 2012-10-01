@@ -14,7 +14,7 @@
 
 <table class='spip liste boite objets-lies'>
 <tbody>
-<BOUCLE_objets_associes(ALBUMS albums_liens){id_album}{par objet}>
+<BOUCLE_objets_associes(ALBUMS albums_liens){id_album}{par objet}{statut==.*}>
 #SET{info,#OBJET&nbsp;n°#ID_OBJET} 
 #SET{titre,#INFO_TITRE{#OBJET,#ID_OBJET}}
 #SET{alt,#GET{info}&nbsp;:&nbsp;#GET{titre}}
