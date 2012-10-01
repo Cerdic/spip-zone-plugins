@@ -97,7 +97,7 @@ function noizetier_obtenir_infos_noisettes() {
 		// s'il en mode recalcul, on recalcule toutes les descriptions des noisettes trouvees.
 		// ou si le cache est desactive
 		if (!$noisettes or (_request('var_mode') == 'recalcul') or (defined('_NO_CACHE') and _NO_CACHE!=0)) {
-			$noizetier_obtenir_infos_noisettes_direct=charger_fonction('noizetier_obtenir_infos_noisettes_direct');
+			$noizetier_obtenir_infos_noisettes_direct=charger_fonction('noizetier_obtenir_infos_noisettes_direct','plugins');
 			$noisettes = $noizetier_obtenir_infos_noisettes_direct();
 			ecrire_fichier_securise(_DIR_CACHE . _CACHE_DESCRIPTIONS_NOISETTES, serialize($noisettes));
 		}
