@@ -20,8 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_forum' => '@date@ at @heure@',
 
 	// I
-	'info_1_commentaire' => '1 commentaire', # NEW
-	'info_nb_commentaires' => '@nb@ commentaires', # NEW
+	'info_1_commentaire' => '1 comment',
+	'info_nb_commentaires' => '@nb@ comments',
 
 	// L
 	'lire_la_suite' => 'Read more',
