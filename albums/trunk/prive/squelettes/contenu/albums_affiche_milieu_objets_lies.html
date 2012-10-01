@@ -4,7 +4,7 @@
 	Appelé par la pipeline 'affiche_milieu'
 ]
 
-<BOUCLE_test_afficher(ALBUMS liens objets){id_album}{0,1}> [(#OBJET|oui) #SET{afficher,oui} ] </BOUCLE_test_afficher>
+<BOUCLE_test_afficher(ALBUMS liens objets){id_album}{statut==.*}{0,1}> [(#OBJET|oui) #SET{afficher,oui} ] </BOUCLE_test_afficher>
 
 [(#GET{afficher}|oui)
 <div class='albums'>
