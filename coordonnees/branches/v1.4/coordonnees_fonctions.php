@@ -8,7 +8,7 @@ function logo_type_($id, $val, $taille=16) {
 	global $formats_logos;
 	$type = strtolower($val);
 	foreach ($formats_logos as $format) { // @file ecrire/inc/chercher_logo.php
-		$fichier = 'images/type_'. $id . '_' . $type . ($taille?"-$taille":'') '.' . $format;
+		$fichier = 'images/type_'. $id . '_' . $type . ($taille?"-$taille":'') . '.' . $format;
 		if ( find_in_path($fichier) )
 			$im = $fichier . ($taille?('" width="'.$taille.'" height="'.$taille):'');
 	}

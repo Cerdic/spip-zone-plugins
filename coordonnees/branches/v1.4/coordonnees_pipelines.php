@@ -2,24 +2,30 @@
 
 /**
  * Plugin Coordonnees
- * Licence GPL (c) 2010 Matthieu Marcillaud 
+ * Licence GPL (c) 2010 Matthieu Marcillaud
 **/
 
 /**
- * Informations sur les objets où peut s'appliquer les coordonnees 
+ * Informations sur les objets où peut s'appliquer les coordonnees
  *
  * @param String $quoi info que l'on veut recuperer (sinon tout le tableau)
  * @return Array Liste d'objet et quelques définitions (titre, exec)
 **/
 function liste_objets_coordonnees($quoi = '') {
 	$liste = array(
-		'auteur'       => array('titre'=>_T('coordonnees:auteurs'),      'exec'=>'auteur_infos'),
-		'article'      => array('titre'=>_T('coordonnees:articles'),     'exec'=>'articles'),
-		'rubrique'     => array('titre'=>_T('coordonnees:rubriques'),    'exec'=>'naviguer'),
-		'contact'      => array('titre'=>_T('coordonnees:contacts'),     'exec'=>'contact'),
-		'organisation' => array('titre'=>_T('coordonnees:organisations'),'exec'=>'organisation'),
+		'auteur'       => array('titre'=>_T('ecrire:info_auteurs'),      'exec'=>'auteur_infos'),
+		'article'      => array('titre'=>_T('ecrire:info_articles_2'),     'exec'=>'articles'),
+		'rubrique'     => array('titre'=>_T('ecrire:info_rubriques'),    'exec'=>'naviguer'),
+		'breve'     => array('titre'=>_T('ecrire:info_breves_03'),    'exec'=>'breves_edit'),
+		'site'     => array('titre'=>_T('ecrire:info_sites'),    'exec'=>'sites'),
 	);
-	
+#	if ( test_plugin_actif('AGENDA') ) // Agenda 2
+#		$liste['evenement'] = array('titre'=>_T('agenda:evenements'),    'exec'=>'evenements_edit'); // ca marche, mais comme les evenements sont obligatoirement lies a un article et qu'ils ont des repetitions, il vaut mieux lier le contact directement a l'article
+	if ( test_plugin_actif('CONTACT') ) { // Contacts & Organisations
+		$liste['contact'] = array('titre'=>_T('contacts:bouton_contacts'),     'exec'=>'contact');
+		$liste['contact'] = array('titre'=>_T('contacts:bouton_organisations'),'exec'=>'organisation');
+	}
+
 	if (!$quoi) {
 		return $liste;
 	}
@@ -28,7 +34,7 @@ function liste_objets_coordonnees($quoi = '') {
 	foreach ($liste as $c=>$v) {
 		$listeq[$c] = $v[$quoi];
 	}
-	return $listeq;	
+	return $listeq;
 }
 
 
@@ -49,22 +55,22 @@ function coordonnees_affiche_milieu($flux) {
 		if ($objet_exec['edition']) {
 			return $flux;
 		}
-		
+
 		// recuperation de l'id
 		$_id = $objet_exec['id_table_objet'];
 		// type d'objet
 		$type = $objet_exec['type'];
-		
+
 	}
 
 	$liste = liste_objets_coordonnees('exec');
 	$ok = false;
-	
+
 	// SPIP 3
 	if (isset($type) and isset($liste[$type])) {
 		// c'est bon
 		$ok = true;
-		
+
 	// SPIP 2.x
 	} else {
 		$liste = array_flip($liste);
@@ -91,7 +97,7 @@ function coordonnees_affiche_milieu($flux) {
 					'objet' => $type,
 					'id_objet' => $id
 				);
-				$flux['data'] .= recuperer_fond('prive/boite/coordonnees', $contexte, array('ajax'=>true));		
+				$flux['data'] .= recuperer_fond('prive/boite/coordonnees', $contexte, array('ajax'=>true));
 			}
 		}
 	}
@@ -103,7 +109,7 @@ function coordonnees_affiche_milieu($flux) {
 
 /**
  * Ajout de l'objet 'adresse'
- * à la liste des objets pouvant recevoir des champs extras 
+ * à la liste des objets pouvant recevoir des champs extras
 **/
 function coordonnees_objets_extensibles($objets){
 		return array_merge($objets, array(
