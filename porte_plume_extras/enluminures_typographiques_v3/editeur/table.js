@@ -216,10 +216,8 @@
 		function insere(){
 
 			var texte ="<textarea cols='10' rows='2'";	
-			texte+=" onfocus='this.cols=25; this.rows=3;'";
-			//on remet aux dimensions et on sauve le contenu
-			texte+=" onchange='lc[" + this.l + "][" + this.c + "].content=this.value;'";			
-			texte+=" onblur='this.cols=10; this.rows=2;'>";
+			// on sauve le contenu
+			texte+=" onchange='lc[" + this.l + "][" + this.c + "].content=this.value;'>";			
 			texte+=this.content;			
 			texte+="</textarea> \n";	
 			return texte;
