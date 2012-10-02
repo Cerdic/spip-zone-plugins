@@ -8,12 +8,18 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'appliquer_type_liaison' => 'Typ prepojenia:',
-	'appliquer_type_liaison_explication' => 'Uveďte, aký typ odkazu vytvoríte. Optimálne bude, ak použijete kód alebo krátke slovo.',
 	'articles_lies' => 'PREPOJENÉ ČLÁNKY',
+
+	// C
+	'cfg_a2a' => 'Relations entre articles', # NEW
+	'changer_type_liaison' => 'Changer', # NEW
+	'configurer_a2a' => 'Configurer les relations entre articles', # NEW
 
 	// E
 	'explication_navigateur' => 'Ak sa chcete orientovať v stromovej štruktúre stránky, aby ste mohli vybrať, články, na ktoré chcete vytvoriť odkaz, kliknite na tlačidlo [Pridať].',
+	'explication_type_obligatoire' => 'Vous pouvez imposer de typer les liaisons', # NEW
+	'explication_types_differents' => 'Cochez cette case pour permettre de lier plusieurs fois les deux mêmes articles, en changeant le type à chaque fois', # NEW
+	'explication_types_liaisons' => 'Vous pouvez définir des types de relations : indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par défaut. La description peut être une chaîne de langue.', # NEW
 
 	// I
 	'info_nombre_articles_lies' => '@nb@ prepojených článkov',
@@ -22,7 +28,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'lien_lier_article' => 'Čítať jeden článok alebo viac článkov',
 	'lier_cet_article' => 'Vytvoriť odkaz',
-	'lier_cet_article_deux_cotes' => 'Vytvoriť dva odkazy',
+	'lier_cet_article_deux_cotes' => 'Vytvoriť dva odkazy', # MODIF
+
+	// O
+	'ob_pb' => 'Il n\'est pas possible de rendre obligatoire le type de liaison : en effet les articles ci-dessous possèdent des liaisons non typées. Typez les d\'abords, puis rendez-obligatoire le typage.', # NEW
 
 	// P
 	'pas_articles_lies' => 'Žiadne prepojené články',
@@ -40,12 +49,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rechercher_un_article_a_lier' => 'Nájsť článok:',
 
 	// S
+	'sup_pb' => 'Impossible de supprimer les types de liaisons suivantes : des liaisons les utilisent. Il vous faut donc modifier au préalable ces liaions.', # NEW
 	'supprimer_le_lien' => 'Zrušiť odkazy',
-	'supprimer_le_lien_deux_cotes' => 'Zrušiť oba odkazy',
+	'supprimer_le_lien_deux_cotes' => 'Zrušiť oba odkazy', # MODIF
 
 	// T
+	'td_pb' => 'Vous demandez l\'interdiction de lier plusieurs fois deux mêmes articles. Or certains articles possèdent plusieurs liaisons avec d\'autres articles. Corrigez cela avant.', # NEW
 	'type' => 'Typ',
+	'type_inexistant' => 'Type de liaison inexistant', # NEW
 	'type_liaison' => 'Typ prepojenia',
+	'type_obligatoire' => 'Typage obligatoire', # NEW
+	'types_differents' => 'Liaisons multiples', # NEW
+	'types_liaisons' => 'Types de liaison', # NEW
+	'types_liaisons_non_modifiables' => 'Les types de liaisons suivants ne sont pas modifiables via la configuration', # NEW
+
+	// U
+	'utilise_par_articles' => ', utilisé par les liaisons des articles :', # NEW
 
 	// V
 	'voir' => 'Zobraziť'
