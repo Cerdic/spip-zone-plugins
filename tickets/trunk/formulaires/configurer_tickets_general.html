@@ -62,12 +62,12 @@
 				<fieldset>
 				<h3 class="legend"><:tickets:cfg_lgd_champs_options_autres:></h3>
 				<ul>
-				[(#PLUGIN{ZPIP}|oui)
+				[(#PLUGIN{ZPIP}|ou{#PLUGIN{Z}}|oui)
 					[(#SAISIE{oui_non, desactiver_public,
 						label=<:tickets:cfg_lbl_desactiver_public:>,
 						defaut=''})]
 					]
-				[(#PLUGIN{ZPIP}|non)
+				[(#PLUGIN{ZPIP}|ou{#PLUGIN{Z}}|non)
 					<li>
 						<label><:tickets:cfg_lbl_desactiver_public:></label>
 						<p class="explication"><:tickets:message_zpip_inactif:></p>
@@ -77,12 +77,12 @@
 					explication=<:tickets:cfg_explication_cacher_moteurs:>,
 					label=<:tickets:cfg_lbl_cacher_moteurs:>,
 					defaut=on})]
-				[(#PLUGIN{ZPIP}|oui)
+				[(#PLUGIN{ZPIP}|ou{#PLUGIN{Z}}|oui)
 					[(#SAISIE{case, notification_publique,
 						label=<:tickets:cfg_lbl_notification_publique:>,
 						label_case=<:tickets:cfg_lbl_case_notification_publique:>})]
 				]
-				[(#PLUGIN{ZPIP}|non)
+				[(#PLUGIN{ZPIP}|ou{#PLUGIN{Z}}|non)
 					<li>
 						<label><:tickets:cfg_lbl_notification_publique:></label>
 						<p class="explication"><:tickets:message_zpip_inactif:></p>
