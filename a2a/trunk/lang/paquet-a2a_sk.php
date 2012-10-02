@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'a2a_description' => 'Tento zásuvný modul vám umožní vytvoriť odkazy na články v chronologickom poradí bez toho, aby ste museli použiť kľúčové slová SPIPu. Môžete ho využívať na vytváranie odkazov typu "Pozri aj".',
+	'a2a_description' => 'Tento zásuvný modul vám umožní vytvoriť odkazy na články v chronologickom poradí bez toho, aby ste museli použiť kľúčové slová SPIPu. Môžete ho využívať na vytváranie odkazov typu "Pozri aj".', # MODIF
 	'a2a_slogan' => 'Na prepájanie článkov'
 );
 
