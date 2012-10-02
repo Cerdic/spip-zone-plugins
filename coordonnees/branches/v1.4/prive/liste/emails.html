@@ -4,10 +4,14 @@
 <table class='spip liste'>
 <caption><strong class="caption"><:coordonnees:emails:></strong></caption>
 	<tbody>
-	<BOUCLE_mails(EMAILS){emails_liens.objet}{emails_liens.id_objet}{emails_liens.type}{par email}{pagination #ENV{nb,10}}>
+	<BOUCLE_mails(EMAILS emails_liens){emails_liens.objet}{emails_liens.id_objet}{par email}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='titre'>[(#TITRE)]</td>
-			<td class='email'>#EMAIL</td>
+			<td class='email'>
+				[[(##TYPE|match{x400}|non)<a href="mailto:#EMAIL">](
+				#EMAIL
+				)[(##TYPE|match{x400}|non)</a>]]
+			</td>
 			<td class='action'>
 			[(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}}|oui)
 				[(#BOUTON_ACTION{[(#CHEMIN{images/editer-16.png}
