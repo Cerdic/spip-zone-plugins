@@ -1,0 +1,83 @@
+.nav{
+margin:0; 
+padding:0;
+list-style-type:none;
+list-style-position:outside;
+position:relative;
+line-height:1.5em; 		/*Si vous modifier la  hauteur du menu pensez a modifier la position du sous-menu .nav ul{top: */
+}
+
+
+/**********Pour ne pas exposer l'element en cours supprimer les lignes suivantes*************/
+
+.babbin{font-style:italic} /*Element expose*/
+.babbout{font-style:normal} /*Element non expose*/
+
+/*****************************************/
+
+.nav ul{
+margin:0;
+padding:0;
+list-style-type:none;
+list-style-position:outside;
+position:relative;
+line-height:1.5em; 
+}
+
+.nav a{
+display:block;
+padding:0px 5px;
+border:1px solid #333;
+color:#fff;
+text-decoration:none;
+background-color:#333;
+z-index:9;
+}
+
+.nav a:hover{  
+background-color:#fff;  /*styles des liens actifs*/
+color:#333;
+}
+
+.nav li{
+float:left;
+position:relative;
+}
+
+.nav ul {
+position:absolute;
+display:none;
+width:19em; 			/*Largeur du sous menu; pensez a modifier le .nav li ul a {width: } et .nav li ul ul {left: } */
+top:1.5em; 				/*Position du sous menu par rapport au menu*/
+z-index:10;				/*Si le menu se cache sous un autre element de la page, augmenter cette valeur*/
+border-left: 0px solid #fff;
+border-top: 0px solid #fff;
+line-height:1.85em; 	/*hauteur des lignes du sous menu*/
+}
+
+.nav li ul a{
+position:relative;
+width:19em; /*doit etre egale au .nav ul {width: }*/
+height:auto;
+float:left;
+background-color: #333; /*Couleur de fond des sous menus*/
+color:#fff; 			/*couleur de police des sous menus*/
+}
+
+.nav ul ul{
+top:auto;
+line-height:1.85em; 	/*hauteur des lignes du sous sous menu*/
+z-index:10;				/*Si le menu se cache sous un autre element de la page, augmenter cette valeur*/
+}	
+
+.nav li ul ul {
+left:19em; /*positionne le sous sous menu par rapport au sous menu; doit etre egale au .nav ul {width:   */
+margin:0px 0 0 10px;
+}
+
+.nav li:hover ul ul, .nav li:hover ul ul ul, .nav li:hover ul ul ul ul{
+display:none;
+}
+.nav li:hover ul, .nav li li:hover ul, .nav li li li:hover ul, .nav li li li li:hover ul{
+display:block;
+}
