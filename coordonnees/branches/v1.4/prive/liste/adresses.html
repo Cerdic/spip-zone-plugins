@@ -7,8 +7,8 @@
 	<BOUCLE_adresses(ADRESSES adresses_liens){adresses_liens.objet}{adresses_liens.id_objet}{par pays,ville}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='titre'>
-				[<div class='titre'>(#TITRE)</div>]
-				[<small class='type'>(#VAL{coordonnees:type_adr_#TYPE}|_T)</small>]
+				[(#TYPE|logo_type_adresse):]
+				#TITRE
 			</td>
 			<td class='adresse'>
 				[<div class='voie'>(#VOIE)</div>]

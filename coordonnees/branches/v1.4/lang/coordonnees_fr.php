@@ -6,8 +6,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'adresse_perso' => 'Domicile',
-	'adresse_pro' => 'Professionnel',
 	'adresses' => 'Adresses',
 	'ajouter_adresse' => 'Ajouter une adresse',
 	'ajouter_email' => 'Ajouter un email',
@@ -28,12 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_numero' => 'Éditer un numéro',
 	'emails' => 'Courriels',
 	'explication_objets_actifs' => 'Sur quels objets éditoriaux proposer les coordonnées ?',
-	'explication_type_adresse' => 'Le type peut être \'perso\' ou \'pro\'.',
 	'explication_type_email' => 'Le type peut être \'perso\' ou \'pro\'.',
-	'explication_type_numero' => 'Le type peut être \'perso\' ou \'pro\' ou \'fax\'.',
-
-	// F
-	'fax' => 'Fax.',
 
 	// I
 	'info_adresse_utilisee_par' => 'Adresse utilisée par :',
@@ -64,7 +57,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_voie' => 'N<sup>o</sup>, Type &amp; nom de voie',
 
 	// M
-	'mobile' => 'Mobile',
 	'modifier_adresse' => 'Modifier cette adresse',
 	'modifier_email' => 'Modifier ce courriel',
 	'modifier_numero' => 'Modifier ce numéro',

@@ -125,11 +125,15 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 
 	if (version_compare($current_version, "1.7", "<")) {
 		$ok = true;
-		// transformer les "pro" en "work" et les "perso" en "home" pour pouvoir faire fonctionner les selecteurs pendant l'edition
+		// transformer les "pro"* en "work" pour pouvoir faire fonctionner les selecteurs pendant l'edition
 		$ok &= sql_updateq("spip_adresses_liens", array('type'=>'work'), "LOWER(type) LIKE 'pro%'");
-		$ok &= sql_updateq("spip_adresses_liens", array('type'=>'home'), "LOWER(type) LIKE 'perso%'");
 		$ok &= sql_updateq("spip_numeros_liens", array('type'=>'work'), "LOWER(type) LIKE 'pro%'");
+		// transformer les "perso"* en "home" pour pouvoir faire fonctionner les selecteurs pendant l'edition
+		$ok &= sql_updateq("spip_adresses_liens", array('type'=>'home'), "LOWER(type) LIKE 'perso%'");
 		$ok &= sql_updateq("spip_numeros_liens", array('type'=>'home'), "LOWER(type) LIKE 'perso%'");
+		// transformer les "mobi"* en "cell" pour pouvoir faire fonctionner les selecteurs pendant l'edition
+		$ok &= sql_updateq("spip_numeros_liens", array('type'=>'cell'), "LOWER(type) LIKE 'cel%'");
+		$ok &= sql_updateq("spip_numeros_liens", array('type'=>'cell'), "LOWER(type) LIKE 'mob%'");
 		ecrire_meta($nom_meta_base_version, $current_version="1.7");
 	}
 

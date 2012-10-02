@@ -8,8 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'adresse_perso' => 'Domicile', # NEW
-	'adresse_pro' => 'Do práce',
 	'adresses' => 'Adresy',
 	'ajouter_adresse' => 'Pridať adresu',
 	'ajouter_email' => 'Pridať e-mail',
@@ -29,12 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_numero' => '&Eacute;diter un num&eacute;ro', # NEW
 	'emails' => 'Courriels', # NEW
 	'explication_objets_actifs' => 'Sur quels objets éditoriaux proposer les coordonnées ?', # NEW
-	'explication_type_adresse' => 'Le type peut être \'perso\' ou \'pro\'.', # NEW
 	'explication_type_email' => 'Le type peut être \'perso\' ou \'pro\'.', # NEW
-	'explication_type_numero' => 'Le type peut être \'perso\' ou \'pro\' ou \'fax\'.', # NEW
-
-	// F
-	'fax' => 'Fax.', # NEW
 
 	// I
 	'info_adresse_utilisee_par' => 'Adresse utilis&eacute;e par :', # NEW
@@ -63,7 +56,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_voie' => 'Adresse', # NEW
 
 	// M
-	'mobile' => 'Mobile', # NEW
 	'modifier_adresse' => 'Modifier cette adresse', # NEW
 	'modifier_email' => 'Modifier ce courriel', # NEW
 	'modifier_numero' => 'Modifier ce num&eacute;ro', # NEW
