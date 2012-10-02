@@ -8,9 +8,9 @@
 	documentation="http://www.spip-contrib.net/Saisies"
 >
 	<nom>Saisies</nom>
-	<auteur>Matthieu Marcillaud</auteur>
-	<auteur>RastaPopoulos</auteur>
-	<auteur>Joseph</auteur>
+	<auteur lien="http://contrib.spip.net/Matthieu-Marcillaud">Matthieu Marcillaud</auteur>
+	<auteur lien="http://contrib.spip.net/RastaPopoulos">RastaPopoulos</auteur>
+	<auteur lien="http://contrib.spip.net/Joseph">Joseph</auteur>
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 	<licence>GNU/GPL</licence>
 	
