@@ -108,13 +108,14 @@ function coordonnees_affiche_milieu($flux) {
 
 
 /**
- * Ajout de l'objet 'adresse'
+ * Ajout des objets 'adresse' et 'numero'
  * à la liste des objets pouvant recevoir des champs extras
 **/
 function coordonnees_objets_extensibles($objets){
-		return array_merge($objets, array(
-			'adresse' => _T('coordonnees:adresses'),
-		));
+	return array_merge($objets, array(
+		'adresse' => _T('coordonnees:adresses'),
+		'numero' => _T('coordonnees:numeros'),
+	));
 }
 
 ?>

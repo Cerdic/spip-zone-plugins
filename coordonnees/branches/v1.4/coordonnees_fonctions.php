@@ -9,8 +9,8 @@ function logo_type_($id, $val, $taille=16) {
 	$type = strtolower($val);
 	foreach ($formats_logos as $format) { // @file ecrire/inc/chercher_logo.php
 		$fichier = 'images/type_'. $id . '_' . $type . ($taille?"-$taille":'') . '.' . $format;
-		if ( find_in_path($fichier) )
-			$im = $fichier . ($taille?('" width="'.$taille.'" height="'.$taille):'');
+		if ( $chemin = find_in_path($fichier) )
+			$im = $chemin . ($taille?('" width="'.$taille.'" height="'.$taille):'');
 	}
 	if ($type && $im)
 		return '<img class="type" src="' . $im . '" alt="' . $type . '" title="' . _T('coordonnees:type_'. $id . '_'.$type) . '" />';

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Plugin Coordonnées 
- * Licence GPL (c) 2010 Matthieu Marcillaud 
+ * Plugin Coordonnées
+ * Licence GPL (c) 2010 Matthieu Marcillaud
 **/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -12,7 +12,7 @@ function action_editer_email_dist($arg=null) {
 		$arg = $securiser_action();
 	}
 
-	// pas d'adresse ? on en cree une nouvelle, mais seulement si 'oui' en argument.
+	// pas d'email ? on en cree un nouveau, mais seulement si 'oui' en argument.
 	if (!$id_email = intval($arg)) {
 		if (!in_array($arg, array('oui', 'new'))) {
 			include_spip('inc/headers');
@@ -30,7 +30,7 @@ function insert_email() {
 	$champs = array(
 		'email' => _T('coordonnees:item_nouvel_email')
 	);
-	
+
 	// Envoyer aux plugins
 	$champs = pipeline('pre_insertion', array(
 		'args' => array(
@@ -38,7 +38,7 @@ function insert_email() {
 		),
 		'data' => $champs
 	));
-	
+
 	$id_email = sql_insertq("spip_emails", $champs);
 
 	// ajouter la liaison si presente
@@ -53,12 +53,12 @@ function insert_email() {
 			'type' => $type
 		));
 	}
-	
+
 	return $id_email;
 }
 
 
-// Enregistrer certaines modifications d'une adresse
+// Enregistrer certaines modifications d'un email
 function revisions_emails($id_email, $c=false) {
 
 	// recuperer les champs dans POST s'ils ne sont pas transmis

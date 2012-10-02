@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Plugin Coordonnées 
- * Licence GPL (c) 2010 Matthieu Marcillaud 
+ * Plugin Coordonnées
+ * Licence GPL (c) 2010 Matthieu Marcillaud
 **/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -12,7 +12,7 @@ function action_editer_numero_dist($arg=null) {
 		$arg = $securiser_action();
 	}
 
-	// pas d'adresse ? on en cree une nouvelle, mais seulement si 'oui' en argument.
+	// pas de numero ? on en cree un nouveau, mais seulement si 'oui' en argument.
 	if (!$id_numero = intval($arg)) {
 		if (!in_array($arg, array('oui', 'new'))) {
 			include_spip('inc/headers');
@@ -30,7 +30,7 @@ function insert_numero($c = '') {
 	$champs = array(
 		'numero' => _T('coordonnees:nouveau_numero')
 	);
-	
+
 	// Envoyer aux plugins
 	$champs = pipeline('pre_insertion', array(
 		'args' => array(
@@ -38,10 +38,10 @@ function insert_numero($c = '') {
 		),
 		'data' => $champs
 	));
-	
+
 	$id_numero = sql_insertq("spip_numeros", $champs);
 
-	if (!$c) 
+	if (!$c)
 		$c = array('objet' => _request('objet'),
 			'id_objet' => _request('id_objet'),
 			'type' => _request('type'));
@@ -52,12 +52,12 @@ function insert_numero($c = '') {
 		$c['id_numero'] = $id_numero;
 		sql_insertq("spip_numeros_liens", $c);
 	}
-	
+
 	return $id_numero;
 }
 
 
-// Enregistrer certaines modifications d'une adresse
+// Enregistrer certaines modifications d'un numero
 function revisions_numeros($id_numero, $c=false) {
 
 	// recuperer les champs dans POST s'ils ne sont pas transmis
