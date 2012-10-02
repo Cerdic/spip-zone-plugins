@@ -8,11 +8,11 @@ function logo_type_($id, $val, $taille=16) {
 	global $formats_logos;
 	$type = strtolower($val);
 	foreach ($formats_logos as $format) { // @file ecrire/inc/chercher_logo.php
-		$fichier = 'images/type_'. $id . '_' . $type . ($taille?"-$taille":'') . '.' . $format;
+		$fichier = 'images/type_'. $id . ($type ? ('_' . $type) : '') . ($taille?"-$taille":'') . '.' . $format;
 		if ( $chemin = find_in_path($fichier) )
 			$im = $chemin . ($taille?('" width="'.$taille.'" height="'.$taille):'');
 	}
-	if ($type && $im)
+	if ($im)
 		return '<img class="type" src="' . $im . '" alt="' . $type . '" title="' . _T('coordonnees:type_'. $id . '_'.$type) . '" />';
 	elseif ($type)
 		return '<abbr class="type" title="' . $type . '">' . _T('coordonnees:type_'. $id . '_'.$type) . '</abbr>';
