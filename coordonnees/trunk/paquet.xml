@@ -1,7 +1,7 @@
 <paquet
 	prefix="coordonnees"
 	categorie="auteur"
-	version="2.0.1"
+	version="2.0.2"
 	etat="test"
 	compatibilite="[3.0.0-dev;["
 	logo="images/addressbook-128.png"
@@ -10,16 +10,16 @@
 >
 
 	<nom>Coordonn&eacute;es</nom>
-	
+
 	<auteur>Matthieu Marcillaud</auteur>
 	<auteur lien="http://www.cym.fr">Cyril MARION</auteur>
-	
+
 	<licence>GNU/GPL</licence>
 	<traduire gestionnaire="salvatore" module="coordonnees" reference="fr" />
-	
 
 
-	
+
+
 	<pipeline nom="declarer_tables_principales" inclure="base/coordonnees.php" />
 
 	<!-- Declaration des tables -->
@@ -40,5 +40,5 @@
 
 	<necessite nom="saisies" compatibilite="[1.14.0;]" />
 	<necessite nom="pays" compatibilite="[1.0.5;]" />
-	
+
 </paquet>
