@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function taa_header_prive($flux){
 
     $flux .= '<link rel="stylesheet" href="'.find_in_path('css/taa_styles.css').'" type="text/css" media="all" />';
@@ -27,7 +30,6 @@ function taa_header_prive($flux){
 	}
 	return $flux;
 }
-
 
 /*Prise en compte de la langue de traduction dans le traitement du formulaire edition_article*/ 
 function taa_pre_insertion($flux){

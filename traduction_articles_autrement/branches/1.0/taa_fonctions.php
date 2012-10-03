@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function rubrique_traduction($lang,$id_rubrique){
 
 	$id_trad_parent=sql_getfetsel('id_trad','spip_rubriques','id_rubrique=' . sql_quote($id_rubrique));

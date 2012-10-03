@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function inc_barre_langues_dist($id_article){
 	include_spip('inc/config');
 	include_spip('inc/actions');
