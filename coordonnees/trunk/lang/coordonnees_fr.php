@@ -51,13 +51,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_numero' => 'Numéro',
 	'label_objets_actifs' => 'Objets',
 	'label_pays' => 'Pays',
+	'label_region' => 'Région',
 	'label_telephone' => 'Téléphone',
 	'label_titre' => 'Titre',
 	'label_type_adresse' => 'Type d\'adresse',
 	'label_type_email' => 'Type de courriel',
 	'label_type_numero' => 'Type de numéro',
 	'label_ville' => 'Ville',
-	'label_voie' => 'Adresse',
+	'label_voie' => 'N<sup>o</sup> &amp; voie',
 
 	// M
 	'mobile' => 'Mobile',
