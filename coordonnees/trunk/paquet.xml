@@ -1,7 +1,7 @@
 <paquet
 	prefix="coordonnees"
 	categorie="auteur"
-	version="2.0.3"
+	version="2.0.4"
 	etat="test"
 	compatibilite="[3.0.0-dev;["
 	logo="images/addressbook-128.png"
@@ -39,6 +39,6 @@
 
 
 	<necessite nom="saisies" compatibilite="[1.14.0;]" />
-	<necessite nom="pays" compatibilite="[1.0.5;]" />
+	<utilise nom="pays" compatibilite="[1.0.5;]" />
 
 </paquet>

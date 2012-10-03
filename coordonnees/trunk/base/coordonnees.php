@@ -5,17 +5,17 @@
  */
 
 function coordonnees_declarer_tables_interfaces($interface){
-	
+
 	$interface['table_des_tables']['adresses'] = 'adresses';
 	$interface['table_des_tables']['numeros'] = 'numeros';
 	$interface['table_des_tables']['emails'] = 'emails';
-	
+
 	$interface['tables_jointures']['spip_auteurs'][] = 'adresses_liens';
 	$interface['tables_jointures']['spip_adresses'][] = 'adresses_liens';
-	
+
 	$interface['tables_jointures']['spip_auteurs'][] = 'numeros_liens';
 	$interface['tables_jointures']['spip_numeros'][] = 'numeros_liens';
-	
+
 	$interface['tables_jointures']['spip_auteurs'][] = 'emails_liens';
 	$interface['tables_jointures']['spip_emails'][] = 'emails_liens';
 
@@ -33,10 +33,10 @@ function coordonnees_declarer_tables_principales($tables_principales){
 		"titre" => "VARCHAR(255) DEFAULT '' NOT NULL", // perso, pro, vacance...
 		"voie" => "tinytext DEFAULT '' NOT NULL", // p. ex. 21 rue de cotte
 		"complement" => "tinytext DEFAULT '' NOT NULL", // p. ex. 3? ?tage
-		"boite_postale" => "VARCHAR(10) DEFAULT '' NOT NULL", 
+		"boite_postale" => "VARCHAR(10) DEFAULT '' NOT NULL",
 		"code_postal" => "VARCHAR(10) DEFAULT '' NOT NULL",
 		"ville" => "tinytext DEFAULT '' NOT NULL",
-		"pays" => "varchar(2) not null default ''",
+		"pays" => "varchar(3) not null default ''",
 		"maj" => "TIMESTAMP"
 		);
 	$adresses_key = array(
@@ -100,7 +100,7 @@ function coordonnees_declarer_tables_auxiliaires($tables_auxiliaires){
 	//-- Table numeros_liens ------------------------------------------
 	$numeros_liens = array(
 		"id_numero" => "bigint(21) NOT NULL DEFAULT 0",
-		"id_objet" => "bigint(21) NOT NULL DEFAULT 0", 
+		"id_objet" => "bigint(21) NOT NULL DEFAULT 0",
 		"objet" => "varchar(25) NOT NULL", // peut etre un contact ou un compte
 		'type' => 'varchar(25) not null default ""'
 	);
@@ -115,7 +115,7 @@ function coordonnees_declarer_tables_auxiliaires($tables_auxiliaires){
 	//-- Table emails_liens ------------------------------------------
 	$emails_liens = array(
 		"id_email" => "bigint(21) NOT NULL DEFAULT 0",
-		"id_objet" => "bigint(21) NOT NULL DEFAULT 0", 
+		"id_objet" => "bigint(21) NOT NULL DEFAULT 0",
 		"objet" => "varchar(25) NOT NULL", // peut etre un contact ou un compte
 		'type' => 'varchar(25) not null default ""'
 		);
@@ -126,7 +126,7 @@ function coordonnees_declarer_tables_auxiliaires($tables_auxiliaires){
 	$tables_auxiliaires['spip_emails_liens'] =
 		array('field' => &$emails_liens, 'key' => &$emails_liens_key);
 
-	
+
 	return $tables_auxiliaires;
 }
 
