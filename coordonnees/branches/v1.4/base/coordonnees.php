@@ -58,7 +58,7 @@ function coordonnees_declarer_tables_principales($tables_principales){
 		);
 	$numeros_key = array(
 		"PRIMARY KEY" => "id_numero",
-		"KEY numero"	=> "numero" // on ne met pas unique pour le cas ou 2 contacts partagent le meme mail generique
+		"KEY numero"	=> "numero" // on ne met pas unique pour le cas ou 2 contacts partagent le meme numero
 		);
 	$tables_principales['spip_numeros'] =
 		array('field' => &$numeros, 'key' => &$numeros_key);

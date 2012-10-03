@@ -8,9 +8,13 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='titre'>
 				[(#TYPE|logo_type_numero):]
-				#TITRE
+				[(#TITRE)]
 			</td>
-			<td class='numero'>#NUMERO</td>
+			<td class='numero'>
+				[(#NUMERO)]
+				[(#REM) Un coup pour les champs extras ]
+				[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,numero,id_objet,#ID_NUMERO,contexte,[(#ENV**|unserialize)]})],data,''})]})]
+			</td>
 			<td class='action'>
 			[(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}}|oui)
 				[(#BOUTON_ACTION{[(#CHEMIN{images/editer-16.png}

@@ -6,9 +6,12 @@
 	<tbody>
 	<BOUCLE_mails(EMAILS emails_liens){emails_liens.objet}{emails_liens.id_objet}{par email}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='titre'>[(#TITRE)]</td>
+			<td class='titre'>
+				[(#TYPE|logo_type_email):]
+				[(#TITRE)]
+			</td>
 			<td class='email'>
-				[[(##TYPE|match{x400}|non)<a href="mailto:#EMAIL">](
+				[[(#TYPE|match{x400}|non)<a href="mailto:#EMAIL">](
 				#EMAIL
 				)[(##TYPE|match{x400}|non)</a>]]
 			</td>

@@ -116,13 +116,22 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		ecrire_meta($nom_meta_base_version, $current_version="1.5");
 	}
 
+	// prise en compte des regions/territoires/departements dans les adresses
 	if (version_compare($current_version, "1.6", "<")) {
 		$ok = true;
+
 		// ajout du champs region a la table adresses
 		$ok &= sql_alter("TABLE spip_adresses ADD region VARCHAR(40) DEFAULT '' NOUT NULL");
-		ecrire_meta($nom_meta_base_version, $current_version="1.6");
+
+		if ($ok){
+			spip_log('Tables coordonnées correctement passsées en version 1.6','coordonnees');
+			ecrire_meta($nom_meta_base_version, $current_version="1.6");
+		}
+		else return false;
 	}
 
+	// migration de certaines valeurs pour pouvoir faire fonctionner les selecteurs pendant l'edition
+	//!\ comme on n'est pas certain de tous les migrer il y a donc rupture de compatibilite ? :-S
 	if (version_compare($current_version, "1.7", "<")) {
 		$ok = true;
 		// transformer les "pro"* en "work" pour pouvoir faire fonctionner les selecteurs pendant l'edition
@@ -130,11 +139,17 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		$ok &= sql_updateq("spip_numeros_liens", array('type'=>'work'), "LOWER(type) LIKE 'pro%'");
 		// transformer les "perso"* en "home" pour pouvoir faire fonctionner les selecteurs pendant l'edition
 		$ok &= sql_updateq("spip_adresses_liens", array('type'=>'home'), "LOWER(type) LIKE 'perso%'");
+		$ok &= sql_updateq("spip_adresses_liens", array('type'=>'home'), "LOWER(type) LIKE 'dom%'");
 		$ok &= sql_updateq("spip_numeros_liens", array('type'=>'home'), "LOWER(type) LIKE 'perso%'");
 		// transformer les "mobi"* en "cell" pour pouvoir faire fonctionner les selecteurs pendant l'edition
 		$ok &= sql_updateq("spip_numeros_liens", array('type'=>'cell'), "LOWER(type) LIKE 'cel%'");
 		$ok &= sql_updateq("spip_numeros_liens", array('type'=>'cell'), "LOWER(type) LIKE 'mob%'");
-		ecrire_meta($nom_meta_base_version, $current_version="1.7");
+
+		if ($ok){
+			spip_log('Tables coordonnées correctement passsées en version 1.7','coordonnees');
+			ecrire_meta($nom_meta_base_version, $current_version="1.7");
+		}
+		else return false;
 	}
 
 }

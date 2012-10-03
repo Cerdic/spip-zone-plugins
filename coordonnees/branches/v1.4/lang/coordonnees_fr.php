@@ -23,7 +23,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_numero' => 'Éditer un numéro',
 	'emails' => 'Courriels',
 	'explication_objets_actifs' => 'Sur quels objets éditoriaux proposer les coordonnées ?',
-	'explication_type_email' => 'Le type peut être \'perso\' ou \'pro\'.',
 
 	// I
 	'info_adresse_utilisee_par' => 'Adresse utilisée par :',
@@ -100,6 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_tel_video' => 'Visioconférence',
 	'type_tel_voice' => 'Vocal',
 	'type_tel_work' => 'Professionnel',
+
 );
 
 ?>
