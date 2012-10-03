@@ -57,6 +57,18 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_alter', array("TABLE spip_adresses ADD region VARCHAR(40) DEFAULT '' NOUT NULL")
 	), );
 
+	// migration de certaines valeurs pour pouvoir faire fonctionner les selecteurs pendant l'edition
+	//!\ comme on n'est pas certain de tous les migrer il y a donc rupture de compatibilite ? :-S
+	$maj['1.7'] = array(
+		array('sql_updateq' array("spip_adresses_liens", array('type'=>'work'), "LOWER(type) LIKE 'pro%'") ),
+		array('sql_updateq' array("spip_numeros_liens", array('type'=>'work'), "LOWER(type) LIKE 'pro%'") ),
+		array('sql_updateq' array("spip_adresses_liens", array('type'=>'home'), "LOWER(type) LIKE 'perso%'") ),
+		array('sql_updateq' array("spip_adresses_liens", array('type'=>'home'), "LOWER(type) LIKE 'dom%'") ),
+		array('sql_updateq' array("spip_numeros_liens", array('type'=>'home'), "LOWER(type) LIKE 'perso%'") ),
+		array('sql_updateq' array("spip_numeros_liens", array('type'=>'cell'), "LOWER(type) LIKE 'cel%'") ),
+		array('sql_updateq' array("spip_numeros_liens", array('type'=>'cell'), "LOWER(type) LIKE 'mob%'") ),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

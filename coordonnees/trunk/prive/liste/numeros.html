@@ -21,7 +21,9 @@
 					|balise_img{<:coordonnees:modifier_numero:>})],
 					[(#URL_ECRIRE{numero_edit}
 						|parametre_url{id_numero,#ID_NUMERO}
-						|parametre_url{retour,[(#ENV{retour,#SELF})]})],ajax})]
+						|parametre_url{retour,[(#ENV{retour,#SELF})]}
+						|parametre_url{type,#TYPE}
+					)],ajax})]
 
 				[(#BOUTON_ACTION{
 					[(#CHEMIN{images/supprimer-16.png}|balise_img{<:coordonnees:supprimer_numero:>})],
