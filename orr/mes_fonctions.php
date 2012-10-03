@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param $format : jour (01 à 31) ou date au format Y-m-d H:i:s
  * @return si "jour" les 7 jours des dates (01 à 31) si "date" les 8 dates au format Y-m-d H:i:s
  **/
-function joursemaine($date, $jourvoulu, $format){
+function orr_joursemaine($date, $jourvoulu, $format){
 	list($annee,$mois,$jour)=explode('-',$date);
 /**
  * cas 1 si le format est "jour"
@@ -76,31 +76,31 @@ function joursemaine($date, $jourvoulu, $format){
 		switch ($jourvoulu) {
 			case "lundi":
 				$date=date("N",mktime(0,0,0,$mois,$jour-3,$annee));
-				$date=traduction_jour($date);
+				$date=orr_traduction_jour($date);
 				break;
 			case "mardi":
 				$date=date("N",mktime(0,0,0,$mois,$jour-2,$annee));
-				$date=traduction_jour($date);
+				$date=orr_traduction_jour($date);
 				break;
 			case "mercredi" :
 				$date=date("N",mktime(0,0,0,$mois,$jour-1,$annee));
-				$date=traduction_jour($date);
+				$date=orr_traduction_jour($date);
 				break;
 			case "jeudi":
 				$date=date("N",mktime(0,0,0,$mois,$jour,$annee));
-				$date=traduction_jour($date);
+				$date=orr_traduction_jour($date);
 				break;
 			case "vendredi":
 				$date=date("N",mktime(0,0,0,$mois,$jour+1,$annee));
-				$date=traduction_jour($date);
+				$date=orr_traduction_jour($date);
 				break;
 			case "samedi":
 				$date=date("N",mktime(0,0,0,$mois,$jour+2,$annee));
-				$date=traduction_jour($date);
+				$date=orr_traduction_jour($date);
 				break;
 			default:
 				$date=date("N",mktime(0,0,0,$mois,$jour+3,$annee));
-				$date=traduction_jour($date);
+				$date=orr_traduction_jour($date);
 				break;
 		}
 	}
@@ -109,7 +109,7 @@ function joursemaine($date, $jourvoulu, $format){
 /**
  * fonction de traduction entre numéro du jour et nom du jour
  * */
- function traduction_jour($numero){
+ function orr_traduction_jour($numero){
 	 switch ($numero){
 		case "1":
 			 $nom = "Lundi";
