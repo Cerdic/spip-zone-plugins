@@ -8,7 +8,7 @@ function taa_header_prive($flux){
  
 /*Ajoute la langue de traduction dans le chargement du formulaire edition_article*/ 
  function taa_formulaire_charger($flux){
-    $form = $flux['args']['form'];
+   $form = $flux['args']['form'];
    if ($form=='editer_article'){	
 	$id_article=$flux['data']['id_article'];
 	$id_rubrique=(
@@ -20,7 +20,7 @@ function taa_header_prive($flux){
 	if(!$lang AND intval($id_rubrique))$lang=sql_getfetsel('lang','spip_rubriques','id_rubrique='.$id_rubrique);
 	$flux['data']['lang_dest']=$lang;
 	
-	if($flux['data']['lang_dest']){		
+	if(_request('lang_dest')){		
 			$flux['data']['_hidden'] .= '<input type="hidden" name="lang_dest" value="'.$lang.'"/>';
 			$flux['data']['_hidden'] .= '<input type="hidden" name="changer_lang" value="'.$lang.'"/>';
 		}
@@ -31,16 +31,16 @@ function taa_header_prive($flux){
 
 /*Prise en compte de la langue de traduction dans le traitement du formulaire edition_article*/ 
 function taa_pre_insertion($flux){
-    if ($flux['args']['table']=='spip_articles'){
+   if ($flux['args']['table']=='spip_articles'){
 		if($lang=_request('lang_dest')){
 			$flux['data']['lang'] =  $lang;
 			$flux['data']['langue_choisie'] =  'oui';		 	
 			}
 		elseif(test_plugin_actif('tradrub')){
-			$lang=sql_getfetsel('lang','spip_rubriques','id_rubrique='.sql_quote(_request('id_rubrique')));
+			$lang=sql_getfetsel('lang','spip_rubriques','id_rubrique='._request('id_rubrique'));
 			$flux['data']['lang'] =  $lang;
-			$flux['data']['langue_choisie'] =  $lang;	
-			}
+			$flux['data']['langue_choisie'] = 'non';	
+			}		
     	}
 return $flux;
 }
