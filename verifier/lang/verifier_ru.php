@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_code_postal' => 'Неправильный индекс ',
+	'erreur_code_postal' => 'Неправильный индекс',
 	'erreur_comparaison_egal' => 'Значение должно соответствовать полю "@nom_champ@"',
 	'erreur_comparaison_egal_type' => 'Значение должно соответствовать и быть такого же типа как поле "@nom_champ@"',
 	'erreur_comparaison_grand' => 'Значение должно быть больше чем поле "@nom_champ@"',
