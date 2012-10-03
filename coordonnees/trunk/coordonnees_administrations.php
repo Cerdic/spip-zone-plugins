@@ -5,8 +5,8 @@
  */
 
 function coordonnees_upgrade($nom_meta_base_version, $version_cible){
-	
-	
+
+
 	$maj = array();
 	$maj['create'] = array(
 		array('maj_tables', array('spip_adresses')),
@@ -25,14 +25,14 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 			array('sql_alter', array('TABLE spip_adresses CHANGE type_adresse titre varchar(255) not null default ""')),
 			array('sql_alter', array('TABLE spip_numeros CHANGE type_numero titre varchar(255) not null default ""')),
 			array('sql_alter', array('TABLE spip_emails CHANGE type_email titre varchar(255) not null default ""')));
-	
+
 	// On passe les pays en code ISO, beaucoup plus génériques que les ids SQL
 	$maj['1.3'] = array(
 			array('sql_alter', array('TABLE spip_adresses ADD pays_code varchar(2) not null default ""')),
 			array('coordonnees_upgrade_1_3'),
 			array('sql_alter', array('TABLE spip_adresses DROP pays')),
 			array('sql_alter', array('TABLE spip_adresses CHANGE pays_code pays varchar(2) not null default ""')),
-				
+
 			);
 
 	// On avait supprimer les types, mais ils reviennent en force mais dans les LIENS
@@ -46,12 +46,17 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 			array('sql_alter', array('TABLE spip_emails_liens ADD type varchar(25) not null default ""')),
 			array('sql_alter', array('TABLE spip_emails_liens DROP PRIMARY KEY')),
 			array('sql_alter', array('TABLE spip_emails_liens ADD PRIMARY KEY (id_email, id_objet, objet, type)')),
-				
+
 			);
 	// mettre les auteurs par defaut comme objet «coordonnable»
 	$maj['1.5'] = array(
 			array('ecrire_meta',array('coordonnees', serialize(array('objets'=>array('auteur'))))));
-	
+
+	// ajout du champs region a la table adresses
+	$maj['1.6'] = array(
+		array('sql_alter', array("TABLE spip_adresses ADD region VARCHAR(40) DEFAULT '' NOUT NULL")
+	), );
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -74,7 +79,7 @@ function coordonnees_upgrade_1_3()
 
 
 function coordonnees_vider_tables($nom_meta_base_version) {
-	
+
 	sql_drop_table("spip_adresses");
 	sql_drop_table("spip_adresses_liens");
 	sql_drop_table("spip_numeros");
