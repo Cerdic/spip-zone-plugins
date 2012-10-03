@@ -1,23 +1,35 @@
 <?php
 /**
- * Plugin Coordonnees 
- * Licence GPL (c) 2010 Matthieu Marcillaud 
+ * Plugin Coordonnees
+ * Licence GPL (c) 2010 Matthieu Marcillaud
 **/
 
-function logo_type_adresse($type_adresse) {
-	static $types = array(
-		'pro' 		=> array('images/type_pro-16.png', 		'coordonnees:adresse_pro'),
-		'perso' 	=> array('images/type_domicile-16.png', 	'coordonnees:adresse_perso'),
-		'fax' 		=> array('images/type_fax-16.png', 		'coordonnees:fax'),
-		#'mobile' 	=> array('images/type_mobile-128.png', 		'coordonnees:mobile'),
-	);
-	$type = substr(strtolower($type_adresse),0,5);
-	if (isset($types[$type])) {
-		$im = $types[$type];
-		return '<img src="' . find_in_path($im[0]) . '" alt="' . _T($im[1]) . '" title="' . _T($im[1]) . '" />';
+function logo_type_($id, $val, $taille=16) {
+	global $formats_logos;
+	$type = strtolower($val);
+	foreach ($formats_logos as $format) { // @file ecrire/inc/chercher_logo.php
+		$fichier = 'images/type_'. $id . ($type ? ('_' . $type) : '') . ($taille?"-$taille":'') . '.' . $format;
+		if ( $chemin = find_in_path($fichier) )
+			$im = $chemin . ($taille?('" width="'.$taille.'" height="'.$taille):'');
 	}
-	
-	return '';
+	if ($im)
+		return '<img class="type" src="' . $im . '" alt="' . $type . '" title="' . _T('coordonnees:type_'. $id . '_'.$type) . '" />';
+	elseif ($type)
+		return '<abbr class="type" title="' . $type . '">' . _T('coordonnees:type_'. $id . '_'.$type) . '</abbr>';
+	else
+		return '';
+}
+
+function logo_type_adresse($type_adresse, $taille=16) {
+	return logo_type_('adr', $type_adresse, $taille);
+}
+
+function logo_type_numero($type_numero, $taille=16) {
+	return logo_type_('tel', $type_numero, $taille);
+}
+
+function logo_type_email($type_email, $taille=16) {
+	return logo_type_('mel', $type_email, $taille);
 }
 
 ?>

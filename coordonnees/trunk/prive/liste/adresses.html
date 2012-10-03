@@ -4,9 +4,12 @@
 <table class='spip liste'>
 <caption><strong class="caption"><:coordonnees:adresses:></strong></caption>
 	<tbody>
-	<BOUCLE_adresses(ADRESSES){adresses_liens.objet}{adresses_liens.id_objet}{par pays,ville}{pagination #ENV{nb,10}}>
+	<BOUCLE_adresses(ADRESSES adresses_liens){adresses_liens.objet}{adresses_liens.id_objet}{par pays,ville}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='titre'>[(#TITRE)]</td>
+			<td class='titre'>
+				[(#TYPE|logo_type_adresse):]
+				[(#TITRE)]
+			</td>
 			<td class='adresse'>
 				[<div class='voie'>(#VOIE)</div>]
 				[<div class='complement'>(#COMPLEMENT)</div>]
