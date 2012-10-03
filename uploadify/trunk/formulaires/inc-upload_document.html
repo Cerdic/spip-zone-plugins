@@ -16,9 +16,6 @@
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier_upload})</span>
 			]<input class='file multi' type="file" name="fichier_upload[]" value='#ENV{fichier_upload}' id="fichier_upload#GET{domid}" size='11' />
 			<!--editer_fichier_upload-->
-			<hr />
-			<label>T&eacute;l&eacute;verser en lot ou téléverser de gros fichiers</label>
-			<INCLURE{fond=noisettes/uploadify,env,ajax} />
 		</li>
 	</ul>
 	<div class='sourceup'>
@@ -31,6 +28,10 @@
 		| <a href='#' onclick="change_methode('#GET{domid}','distant');return false;"><:medias:bouton_download_sur_le_web:></a>
 	</div>
 	<p class='boutons'><input class='submit' type="submit" name="joindre_upload" value="<:bouton_upload:>"/></p>
+	<div class='block_uploadify'>	
+		<label><:uploadify:televerser:></label>
+		<INCLURE{fond=noisettes/uploadify,env,ajax} />
+	</div>
 </div>[
 
 
