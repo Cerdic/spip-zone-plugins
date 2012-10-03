@@ -113,6 +113,24 @@ function nospam_pre_edition($flux)
         AND $flux['args']['action'] == 'instituer'
     ) {
 
+        // Si on veut passer en mode "parano", il suffit de placer dans le mes_options.php un
+        // $GLOBALS['no_spam_nbliens_texte_min'] = 1;
+        // Et chaque commentaire de forum qui contient 1 lien sera mis dans le statut proposé
+        // Couplé avec notification et facteur cela devrait dissuader un peu les spams de SEO
+
+        if (!isset($GLOBALS['no_spam_nbliens_texte_min'])) $GLOBALS['no_spam_nbliens_texte_min'] = 4;
+        if (!isset($GLOBALS['no_spam_nbliens_texte_min_status'])) $GLOBALS['no_spam_nbliens_texte_min_status'] = "prop";
+        if (!isset($GLOBALS['no_spam_nbliens_texte_max'])) $GLOBALS['no_spam_nbliens_texte_max'] = 20;
+        if (!isset($GLOBALS['no_spam_nbliens_texte_max_status'])) $GLOBALS['no_spam_nbliens_texte_max_status'] = "spam";
+
+        if (!isset($GLOBALS['no_spam_nbliens_autrechamp_min'])) $GLOBALS['no_spam_nbliens_autrechamp_min'] = 1;
+        if (!isset($GLOBALS['no_spam_nbliens_autrechamp_min_status'])) $GLOBALS['no_spam_nbliens_autrechamp_min_status'] = "prop";
+        if (!isset($GLOBALS['no_spam_nbliens_autrechamp_max'])) $GLOBALS['no_spam_nbliens_autrechamp_max'] = 3;
+        if (!isset($GLOBALS['no_spam_nbliens_autrechamp_max_status'])) $GLOBALS['no_spam_nbliens_autrechamp_max_status'] = "spam";
+
+        if (!isset($GLOBALS['no_spam_nbliens_urlsite_max'])) $GLOBALS['no_spam_nbliens_urlsite_max'] = 2;
+        if (!isset($GLOBALS['no_spam_nbliens_urlsite_max_status'])) $GLOBALS['no_spam_nbliens_urlsite_max_status'] = "spam";
+
         // ne pas publier automatiquement certains messages suspects ...
         // sauf si le posteur a de toute facon le pouvoir de moderer et de se publier
         include_spip('inc/autoriser');
@@ -145,17 +163,19 @@ function nospam_pre_edition($flux)
             $seuils = array(
                 // seuils par defaut
                 0 => array(
-                    0 => array(1 => 'prop', 3 => 'spam'), // seuils par defaut
-                    'url_site' => array(2 => 'spam'), // 2 liens dans le champ url, c'est vraiment louche
-                    'texte' => array(4 => 'prop', 20 => 'spam') // pour le champ texte
-                ),
-                // seuils severises pour les spammeurs connus
-                'spammeur' => array(
-                    0 => array(1 => 'spam'),
-                    'url_site' => array(2 => 'spam'), // 2 liens dans le champ url, c'est vraiment louche
-                    'texte' => array(1 => 'prop', 5 => 'spam')
-                )
-            );
+                    0 => array($GLOBALS['no_spam_nbliens_autrechamp_min'] => $GLOBALS['no_spam_nbliens_autrechamp_min_status'], $GLOBALS['no_spam_nbliens_autrechamp_max'] => $GLOBALS['no_spam_nbliens_autrechamp_max_status']), // seuils par defaut
+                        'url_site' => array($GLOBALS['no_spam_nbliens_urlsite_max'] => $GLOBALS['no_spam_nbliens_urlsite_max_status']), // 2 liens dans le champ url, c'est vraiment louche
+                        'texte' => array($GLOBALS['no_spam_nbliens_texte_min'] => $GLOBALS['no_spam_nbliens_texte_min_status'], $GLOBALS['no_spam_nbliens_texte_max'] => $GLOBALS['no_spam_nbliens_texte_max_status']) // pour le champ texte
+                    ),
+                    // seuils severises pour les spammeurs connus
+                    'spammeur' => array(
+                        0 => array(1 => 'spam'),
+                        'url_site' => array(2 => 'spam'), // 2 liens dans le champ url, c'est vraiment louche
+                        'texte' => array(1 => 'prop', 5 => 'spam')
+                    )
+                );
+
+
 
             $seuils = $spammeur_connu ? $seuils['spammeur'] : $seuils[0];
             include_spip("inc/nospam"); // pour analyser_spams()
