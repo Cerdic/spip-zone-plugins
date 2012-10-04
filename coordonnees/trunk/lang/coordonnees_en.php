@@ -14,8 +14,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_adresse' => 'Add an address',
 	'ajouter_email' => 'Add an email',
 	'ajouter_telephone' => 'Add a phone number', # MODIF
-	'articles' => '@nb@ articles',
-	'auteurs' => 'Authors',
 
 	// C
 	'configuration_coordonnees' => 'Configuration of Address book',
@@ -29,12 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_numero' => 'Edit a phone number', # MODIF
 	'emails' => 'Emails',
 	'explication_objets_actifs' => 'On which editorial objects should be provided contact information?',
-	'explication_type_adresse' => 'Type can be private or work',
-	'explication_type_email' => 'Type can be private or profesionnal',
-	'explication_type_numero' => 'Type can be private, work or fax',
-
-	// F
-	'fax' => 'Fax.',
+	'explication_type_email' => 'Le type peut être \'perso\' ou \'pro\'.', # NEW
 
 	// I
 	'info_adresse_utilisee_par' => 'This address used by :', # MODIF
@@ -55,17 +48,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_numero' => 'Phone number', # MODIF
 	'label_objets_actifs' => 'Objects',
 	'label_pays' => 'Country',
-	'label_region' => 'Departement',
+	'label_region' => 'Région', # NEW
 	'label_telephone' => 'Phone',
 	'label_titre' => 'Title',
 	'label_type_adresse' => 'Address type',
 	'label_type_email' => 'Type of email',
 	'label_type_numero' => 'Type of phone number', # MODIF
 	'label_ville' => 'City',
-	'label_voie' => 'Address',
+	'label_voie' => 'Address', # MODIF
 
 	// M
-	'mobile' => 'Mobile',
 	'modifier_adresse' => 'Edit this address',
 	'modifier_email' => 'Edit this email',
 	'modifier_numero' => 'Edit this phone number', # MODIF
@@ -76,16 +68,40 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouvelle_adresse' => 'New address',
 	'numeros' => 'Phone numbers', # MODIF
 
-	// R
-	'rubriques' => 'Sections',
-
 	// S
 	'supprimer_adresse' => 'Delette this address',
 	'supprimer_email' => 'Delete this email',
 	'supprimer_numero' => 'Delete this phone number', # MODIF
 
 	// T
-	'titre_coordonnees' => 'Address book' # MODIF
+	'titre_coordonnees' => 'Address book', # MODIF
+	'type_adr_' => '', # NEW
+	'type_adr_dom' => 'Résidentielle', # NEW
+	'type_adr_home' => 'Personnelle', # NEW
+	'type_adr_intl' => 'Étrangère', # NEW
+	'type_adr_parcel' => 'Parcelle', # NEW
+	'type_adr_postal' => 'Postale (en poste restante)', # NEW
+	'type_adr_pref' => 'Principale', # NEW
+	'type_adr_work' => 'Professionnelle', # NEW
+	'type_mel_' => '', # NEW
+	'type_mel_internet' => 'Internet', # NEW
+	'type_mel_pref' => 'Préféré', # NEW
+	'type_mel_x400' => 'X.400', # NEW
+	'type_tel_' => '', # NEW
+	'type_tel_bbs' => 'Service de messagerie', # NEW
+	'type_tel_car' => 'Voiture', # NEW
+	'type_tel_cell' => 'Portable', # NEW
+	'type_tel_fax' => 'Télécopie', # NEW
+	'type_tel_home' => 'Résidence', # NEW
+	'type_tel_isdn' => 'RNIS ...ou DSL', # NEW
+	'type_tel_modem' => 'MoDem informatique', # NEW
+	'type_tel_msg' => 'à messagerie', # NEW
+	'type_tel_pager' => 'Bipeur', # NEW
+	'type_tel_pcs' => 'Service de communication personnel', # NEW
+	'type_tel_pref' => 'Favori', # NEW
+	'type_tel_video' => 'Visioconférence', # NEW
+	'type_tel_voice' => 'Vocal', # NEW
+	'type_tel_work' => 'Professionnel' # NEW
 );
 
 ?>

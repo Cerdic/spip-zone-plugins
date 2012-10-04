@@ -14,8 +14,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_adresse' => 'افزودن نشاني',
 	'ajouter_email' => 'افزودن ايميل',
 	'ajouter_telephone' => 'افزودن شماره‌ي تلفن',
-	'articles' => 'مقاله‌ها',
-	'auteurs' => 'نويسندگان',
 
 	// C
 	'configuration_coordonnees' => 'پيكربندي coordonnées)',
@@ -29,12 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_numero' => 'ويرايش شماره تلفن',
 	'emails' => 'ايميل‌ها',
 	'explication_objets_actifs' => 'كوتوردينه روي كدام موضوع‌هاي ويرايشي پيشنهاد مي‌شود؟ (؟)',
-	'explication_type_adresse' => 'نوع مي‌تواند «شخصي» يا «كاري» باشد.',
 	'explication_type_email' => 'نوع مي‌تواند «شخصي» يا «حرفه‌اي» باشد.',
-	'explication_type_numero' => 'نوع مي‌تواند «شخصي» يا «حرفه‌اي» يا «فاكس» باشد.',
-
-	// F
-	'fax' => 'فاكس.',
 
 	// I
 	'info_adresse_utilisee_par' => 'نشاني مورد استفاده‌ي: ',
@@ -55,16 +48,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_numero' => 'شماره تلفن',
 	'label_objets_actifs' => 'موضوع‌ها',
 	'label_pays' => 'كشورها',
+	'label_region' => 'Région', # NEW
 	'label_telephone' => 'Téléphone', # NEW
 	'label_titre' => 'تيتر',
 	'label_type_adresse' => 'نوع نشاني',
 	'label_type_email' => 'نوع ايميل ',
 	'label_type_numero' => 'نوع شماره تلفن',
 	'label_ville' => 'شهر',
-	'label_voie' => 'نشاني',
+	'label_voie' => 'نشاني', # MODIF
 
 	// M
-	'mobile' => 'موبايل',
 	'modifier_adresse' => 'ويرايش اين نشاني',
 	'modifier_email' => 'ويرايش اين ايميل',
 	'modifier_numero' => 'ويرايش اين شماره‌ي تلفن',
@@ -75,16 +68,40 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouvelle_adresse' => 'نشاني جديد',
 	'numeros' => 'شماره تلفن‌ها',
 
-	// R
-	'rubriques' => 'بخش‌ها',
-
 	// S
 	'supprimer_adresse' => 'حذف اين نشاني',
 	'supprimer_email' => 'حذف اين ايميل',
 	'supprimer_numero' => 'حذف اين شماره تلفن',
 
 	// T
-	'titre_coordonnees' => 'دفتر تلفن'
+	'titre_coordonnees' => 'دفتر تلفن',
+	'type_adr_' => '', # NEW
+	'type_adr_dom' => 'Résidentielle', # NEW
+	'type_adr_home' => 'Personnelle', # NEW
+	'type_adr_intl' => 'Étrangère', # NEW
+	'type_adr_parcel' => 'Parcelle', # NEW
+	'type_adr_postal' => 'Postale (en poste restante)', # NEW
+	'type_adr_pref' => 'Principale', # NEW
+	'type_adr_work' => 'Professionnelle', # NEW
+	'type_mel_' => '', # NEW
+	'type_mel_internet' => 'Internet', # NEW
+	'type_mel_pref' => 'Préféré', # NEW
+	'type_mel_x400' => 'X.400', # NEW
+	'type_tel_' => '', # NEW
+	'type_tel_bbs' => 'Service de messagerie', # NEW
+	'type_tel_car' => 'Voiture', # NEW
+	'type_tel_cell' => 'Portable', # NEW
+	'type_tel_fax' => 'Télécopie', # NEW
+	'type_tel_home' => 'Résidence', # NEW
+	'type_tel_isdn' => 'RNIS ...ou DSL', # NEW
+	'type_tel_modem' => 'MoDem informatique', # NEW
+	'type_tel_msg' => 'à messagerie', # NEW
+	'type_tel_pager' => 'Bipeur', # NEW
+	'type_tel_pcs' => 'Service de communication personnel', # NEW
+	'type_tel_pref' => 'Favori', # NEW
+	'type_tel_video' => 'Visioconférence', # NEW
+	'type_tel_voice' => 'Vocal', # NEW
+	'type_tel_work' => 'Professionnel' # NEW
 );
 
 ?>
