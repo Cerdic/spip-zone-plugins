@@ -53,7 +53,9 @@
 		});
 	}
 	$(function(){
-		init_notes_#ID_DOCUMENT();
+		var mq = window.matchMedia("(max-width: [(#GET{largeur})]px)");
+		if (!mq.matches)
+			init_notes_#ID_DOCUMENT();
 	});
 })(jQuery);
 /*]]>*/
