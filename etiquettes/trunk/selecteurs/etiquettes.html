@@ -18,11 +18,11 @@
 
 [(#REM) Chercher les mots correspondant a la requete ]
 <BOUCLE_s(MOTS){titre LIKE (#GET{cherche})%}{type=#ENV{groupe}}{0,20}{par titre}{doublons}>
-#SET{resultats, #GET{resultats}|array_merge{#LISTE{#TITRE*|textebrut|entites_html}}}
+#SET{resultats, #GET{resultats}|array_merge{#LISTE{#TITRE*|textebrut}}}
 </BOUCLE_s>
 	
 	<BOUCLE_s1(MOTS){titre LIKE %(#GET{cherche})%}{type=#ENV{groupe}}{0,20}{par titre}{doublons}>
-	#SET{resultats, #GET{resultats}|array_merge{#LISTE{#TITRE*|textebrut|entites_html}}}
+	#SET{resultats, #GET{resultats}|array_merge{#LISTE{#TITRE*|textebrut}}}
 	</BOUCLE_s1>
 	
 <//B_s>
