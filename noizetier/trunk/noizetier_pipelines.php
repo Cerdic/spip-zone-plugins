@@ -4,9 +4,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function noizetier_header_prive($flux){
-	$js = find_in_path('javascript/noizetier.js');
-	$flux .= "\n<script type='text/javascript' src='$js'></script>\n";
-	$css = generer_url_public('noizetier.css');
+	$css = direction_css(find_in_path('css/noizetier.css'));
 	$flux .= "\n<link rel='stylesheet' href='$css' type='text/css' />\n";
 	return $flux;
 }
@@ -158,6 +156,25 @@ function noizetier_formulaire_admin($flux) {
 		$btn = recuperer_fond('prive/bouton/voir_noisettes');
 		$flux['data'] = preg_replace('%(<!--extra-->)%is', $btn.'$1', $flux['data']);
 	}
+	return $flux;
+}
+
+// Lorsque l'on affiche la page admin_plugin, on supprime le cache des noisettes.
+// C'est un peu grossier mais pas trouvé de pipeline pour agir à la mise à jour d'un plugin.
+// Au moins, le cache est supprimé à chaque changement, mise à jour des plugins.
+
+function noizetier_affiche_milieu($flux) {
+	$exec = $flux["args"]["exec"];
+	
+	if ($exec == "admin_plugin") {
+		include_spip('inc/flock');
+		include_spip('noizetier_fonctions');
+		supprimer_fichier(_DIR_CACHE . _CACHE_AJAX_NOISETTES);
+		supprimer_fichier(_DIR_CACHE . _CACHE_CONTEXTE_NOISETTES);
+		supprimer_fichier(_DIR_CACHE . _CACHE_INCLUSIONS_NOISETTES);
+		supprimer_fichier(_DIR_CACHE . _CACHE_DESCRIPTIONS_NOISETTES);
+	}
+
 	return $flux;
 }
 

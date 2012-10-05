@@ -1,12 +1,8 @@
-#CACHE{3600*24,cache-client}
-#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
-#HTTP_HEADER{Vary: Accept-Encoding}
-
 .formulaire_editer_noisette li.fieldset {margin-left:10px; margin-right:10px; border-left: solid 1px #CCC; border-right: solid 1px #CCC; border-bottom: solid 1px #CCC;}
-ul.liste-noisettes li.noisette {padding-#LANG_LEFT: 30px; background-repeat: no-repeat; background-position: #LANG_LEFT 9px;}
-ul.noizetier-liste-pages li.page {padding-#LANG_LEFT: 30px; background-repeat: no-repeat; background-position: #LANG_LEFT 9px;}
+ul.liste-noisettes li.noisette {padding-left: 30px; background-repeat: no-repeat; background-position: left 9px;}
+ul.noizetier-liste-pages li.page {padding-left: 30px; background-repeat: no-repeat; background-position: left 9px;}
 ul.bloc li.noisette {min-height:36px;}
-ul.liste-noisettes .icone {width:36px; height:36px; padding:0; margin-#LANG_LEFT: 10px;}
+ul.liste-noisettes .icone {width:36px; height:36px; padding:0; margin-left: 10px;}
 ul.liste-noisettes .icone a {width:36px; height:36px; padding:0;}
 ul.liste-noisettes .icone b {display:none;}
 ul.liste-noisettes .noisette-up-24, ul.liste-noisettes .noisette-down-24, ul.liste-noisettes .noisette-del-24 {display:none;}

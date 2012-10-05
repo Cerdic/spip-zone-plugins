@@ -34,6 +34,7 @@
 	<pipeline nom="noizetier_config_export" inclure="noizetier_pipelines.php" />
 	<pipeline nom="noizetier_config_import" inclure="noizetier_pipelines.php" />
 	<pipeline nom="formulaire_admin" inclure="noizetier_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="noizetier_pipelines.php" />
 
 	<necessite nom="YAML" compatibilite="[1.4.1;[" />
 	<necessite nom="saisies" compatibilite="[1.20.0;[" />

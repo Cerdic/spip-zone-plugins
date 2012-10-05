@@ -1,0 +1,37 @@
+[(#REM)
+
+Saisies qui liste les pages du site SPIP (appelables par spip.php?page=xxx)
+
+  Parametres :
+  - class : classe(s) css ajoutes au select
+  - multiple : si quelquechose est passe, le select est multiple, sinon, c'est un select simple
+    Dans le cas multiple, defaut et valeur doivent etre un array, sinon un int
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+    (seulement si non multiple)
+  - cacher_option_intro : pas de premier option vide  (defaut:"")
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+
+]
+<select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"]>
+	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
+		<option value="0">[(#ENV{option_intro})]</option>]
+	<B_pages>
+	<optgroup label="#TITRE">
+		<BOUCLE_pages(POUR){tableau #NOIZETIER_LISTE_PAGES}{par cle}>
+		[(#CLE|noizetier_page_composition|non)
+			[(#ENV{multiple}|oui)
+			<option value="#CLE"[(#CLE|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>[(#VALEUR|table_valeur{nom})] ([(#CLE)])</option>]
+			[(#ENV{multiple}|non)
+			<option value="#CLE"[(#CLE|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>[(#VALEUR|table_valeur{nom})] ([(#CLE)])</option>]
+		][(#CLE|noizetier_page_type|=={page}|oui)
+			#SET{page,#CLE|noizetier_page_composition}
+			[(#ENV{multiple}|oui)
+			<option value="#GET{page}"[(#GET{page}|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>[(#VALEUR|table_valeur{nom})] ([(#GET{page})])</option>]
+			[(#ENV{multiple}|non)
+			<option value="#GET{page}"[(#GET{page}|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>[(#VALEUR|table_valeur{nom})] ([(#GET{page})])</option>]
+		]
+		</BOUCLE_pages>
+	</optgroup>
+	</B_pages>
+</select>
