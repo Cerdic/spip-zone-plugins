@@ -48,7 +48,7 @@
 			listtarget: $('#nb_notes_#ID_DOCUMENT'),
 			[addButton: "(#ENV{bouton_ajouter})",
 			]id_document: "#ID_DOCUMENT",
-			echelle: "[(#FICHIER|image_reduire{#GET{largeur},#GET{hauteur}}|extraire_attribut{width}|div{#LARGEUR})]",
+			echelle: "[(#ENV{fichier,#FICHIER}|image_reduire{#GET{largeur},#GET{hauteur}}|extraire_attribut{width}|div{#ENV{fichier}|largeur|sinon{#LARGEUR}})]",
 			useAjax: true
 		});
 	}
