@@ -91,6 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_tel_bbs' => 'Service de messagerie', # NEW
 	'type_tel_car' => 'Voiture', # NEW
 	'type_tel_cell' => 'Portable', # NEW
+	'type_tel_dsl' => 'box DSL', # NEW
 	'type_tel_fax' => 'Télécopie', # NEW
 	'type_tel_home' => 'Résidence', # NEW
 	'type_tel_isdn' => 'RNIS ...ou DSL', # NEW
