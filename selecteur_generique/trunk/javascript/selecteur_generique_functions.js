@@ -58,8 +58,10 @@ function extractLast(list, sep) {
 			var terms = split_multiple(this.value, ',');
 			// On supprime le terme qui était en train d'être tapé
 			terms.pop();
-			// On ajoute à la fin ce qui a été sélectionné
-			terms.push(ui.item.value);
+			// On ajoute à la fin ce qui a été sélectionné, éventuellement entouré de guillemets
+			var guillemets = false;
+			if (ui.item.value.indexOf(',') != -1){ guillemets = true; }
+			terms.push((guillemets ? '"' : '') + ui.item.value + (guillemets ? '"' : ''));
 			// On ajoute une entrée vide pour avoir le séparateur lors de la jointure
 			terms.push("");
 			// On joint tout les termes
