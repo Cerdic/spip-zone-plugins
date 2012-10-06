@@ -26,7 +26,7 @@
 		<h1>[(#ENV{id_numero}|intval|?{<:coordonnees:editer_numero:>,<:coordonnees:nouveau_numero:>})]</h1>
 	</div>
 		<div class='ajax'>
-		#FORMULAIRE_EDITER_NUMERO{#ENV{id_numero,new},#ENV{objet},#ENV{id_objet},#ENV{retour},#ENV{type}}
+		#FORMULAIRE_EDITER_NUMERO{#ENV{id_numero,new},#ENV{objet},#ENV{id_objet},#ENV{retour}}
 		</div>
 	</div>
 ]

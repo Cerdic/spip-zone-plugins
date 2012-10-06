@@ -5,7 +5,7 @@
 		<li><span class="bloc"><em> &gt; </em>[(#ENV{id_numero}|intval|?{<:coordonnees:editer_numero:>,<:coordonnees:nouveau_numero:>})]</span></li>
 	</ul>
 	<!--/#hierarchie-->
-	 
+
 	<!--#navigation-->
 	[(#REM) Ce pipeline charge prive/infos/$type ]
 	[(#VAL{inc/presentation}|include_spip|non)]
@@ -26,7 +26,7 @@
 		<h1>[(#ENV{id_numero}|intval|?{<:coordonnees:editer_numero:>,<:coordonnees:nouveau_numero:>})]</h1>
 	</div>
 		<div class='ajax'>
-		#FORMULAIRE_EDITER_NUMERO{#ENV{id_numero,new},#ENV{objet},#ENV{id_objet},#ENV{retour}}
+		#FORMULAIRE_EDITER_NUMERO{#ENV{id_numero,new},#ENV{objet},#ENV{id_objet}}
 		</div>
 	</div>
 ]

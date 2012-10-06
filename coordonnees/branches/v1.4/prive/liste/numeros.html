@@ -25,7 +25,7 @@
 					)],ajax})]
 				[(#BOUTON_ACTION{
 					[(#CHEMIN{images/supprimer-16.png}|balise_img{<:coordonnees:supprimer_numero:>})],
-					[(#URL_ACTION_AUTEUR{supprimer_numero,[lien/(#ID_NUMERO)/#ENV{objet}/#ENV{id_objet}],[(#ENV{retour,#SELF})]})],
+					[(#URL_ACTION_AUTEUR{supprimer_numero,[lien/(#ID_NUMERO)/#ENV{objet}/#ENV{id_objet}/#ENV{type}],[(#ENV{retour,#SELF})]})],
 					ajax,
 					<:coordonnees:confirmer_suppression_numero:>})]
 			]

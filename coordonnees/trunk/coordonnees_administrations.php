@@ -54,8 +54,8 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 
 	// ajout du champs region a la table adresses
 	$maj['1.6'] = array(
-		array('sql_alter', array("TABLE spip_adresses ADD region VARCHAR(40) DEFAULT '' NOUT NULL")
-	), );
+		array('maj_tables', array('spip_adresses')),
+	);
 
 	// migration de certaines valeurs pour pouvoir faire fonctionner les selecteurs pendant l'edition
 	//!\ comme on n'est pas certain de tous les migrer il y a donc rupture de compatibilite ? :-S

@@ -26,7 +26,7 @@
 		<h1>[(#ENV{id_email}|intval|?{<:coordonnees:editer_email:>,<:coordonnees:nouvel_email:>})]</h1>
 	</div>
 		<div class='ajax'>
-		#FORMULAIRE_EDITER_EMAIL{#ENV{id_email,new},#ENV{objet},#ENV{id_objet},#ENV{retour},#ENV{type}}
+		#FORMULAIRE_EDITER_EMAIL{#ENV{id_email,new},#ENV{objet},#ENV{id_objet},#ENV{retour}}
 		</div>
 	</div>
 ]

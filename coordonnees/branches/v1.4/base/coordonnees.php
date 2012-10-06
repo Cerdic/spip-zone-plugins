@@ -91,10 +91,10 @@ function coordonnees_declarer_tables_auxiliaires($tables_auxiliaires){
 		"id_adresse" => "BIGINT NOT NULL",
 		"id_objet" => "BIGINT NOT NULL",
 		"objet" => "VARCHAR(25) NOT NULL", // peut etre un compte ou un contact
-		'type' => 'VARCHAR(25) not null default ""'
+		'type' => "VARCHAR(25) NOT NULL DEFAULT ''"
 	);
 	$adresses_liens_key = array(
-		"PRIMARY KEY" => "id_adresse, id_objet, objet",
+		"PRIMARY KEY" => "id_adresse, id_objet, objet, type", // on rajoute le type car on en rajoute un par liaison et qu'il peut y en avoir plusieurs
 		"KEY id_adresse" => "id_adresse"
 	);
 	$tables_auxiliaires['spip_adresses_liens'] =
@@ -106,10 +106,10 @@ function coordonnees_declarer_tables_auxiliaires($tables_auxiliaires){
 		"id_numero" => "BIGINT NOT NULL DEFAULT 0",
 		"id_objet" => "BIGINT NOT NULL DEFAULT 0",
 		"objet" => "VARCHAR(25) NOT NULL", // peut etre un contact ou un compte
-		'type' => 'VARCHAR(25) not null default ""'
+		'type' => "VARCHAR(25) NOT NULL DEFAULT ''"
 	);
 	$numeros_liens_key = array(
-		"PRIMARY KEY" => "id_numero, id_objet, objet",
+		"PRIMARY KEY" => "id_numero, id_objet, objet, type", // on rajoute le type car on en rajoute un par liaison et qu'il peut y en avoir plusieurs
 		"KEY id_numero" => "id_numero"
 		);
 	$tables_auxiliaires['spip_numeros_liens'] =
@@ -121,10 +121,10 @@ function coordonnees_declarer_tables_auxiliaires($tables_auxiliaires){
 		"id_email" => "BIGINT NOT NULL DEFAULT 0",
 		"id_objet" => "BIGINT NOT NULL DEFAULT 0",
 		"objet" => "VARCHAR(25) NOT NULL", // peut etre un contact ou un compte
-		'type' => 'VARCHAR(25) not null default ""'
+		'type' => "VARCHAR(25) NOT NULL DEFAULT ''"
 		);
 	$emails_liens_key = array(
-		"PRIMARY KEY" => "id_email, id_objet, objet",
+		"PRIMARY KEY" => "id_email, id_objet, objet, type", // on rajoute le type car on en rajoute un par liaison et qu'il peut y en avoir plusieurs
 		"KEY id_email" => "id_email"
 		);
 	$tables_auxiliaires['spip_emails_liens'] =

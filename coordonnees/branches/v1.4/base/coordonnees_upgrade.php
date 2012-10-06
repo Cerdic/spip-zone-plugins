@@ -120,8 +120,8 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 	if (version_compare($current_version, "1.6", "<")) {
 		$ok = true;
 
-		// ajout du champs region a la table adresses
-		$ok &= sql_alter("TABLE spip_adresses ADD region VARCHAR(40) DEFAULT '' NOUT NULL");
+		include_spip('base/upgrade');
+		maj_tables('spip_adresses'); //=		$ok &= sql_alter("TABLE spip_adresses ADD region VARCHAR(40) DEFAULT '' NOUT NULL");
 
 		if ($ok){
 			spip_log('Tables coordonnées correctement passsées en version 1.6','coordonnees');
@@ -145,11 +145,11 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		$ok &= sql_updateq("spip_numeros_liens", array('type'=>'cell'), "LOWER(type) LIKE 'cel%'");
 		$ok &= sql_updateq("spip_numeros_liens", array('type'=>'cell'), "LOWER(type) LIKE 'mob%'");
 
-		if ($ok){
+//		if ($ok){ // il n'est pas dit que toutes ces "update"s passent :-/
 			spip_log('Tables coordonnées correctement passsées en version 1.7','coordonnees');
 			ecrire_meta($nom_meta_base_version, $current_version="1.7");
-		}
-		else return false;
+//		}
+//		else return false;
 	}
 
 }

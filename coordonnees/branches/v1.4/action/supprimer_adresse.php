@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Coordonnées 
- * Licence GPL (c) 2010 Matthieu Marcillaud 
+ * Plugin Coordonnées
+ * Licence GPL (c) 2010 Matthieu Marcillaud
 **/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -21,15 +21,15 @@ function action_supprimer_adresse_dist($arg=null) {
 	// cas de suppression d'un lien donne
 	// (et de l'adresse avec s'il n'existe plus de liaison ensuite)
 	elseif ($arg[0] == 'lien' and intval($arg[1]) and intval($arg[3])) {
-		action_supprimer_adresse_post($arg[1], $arg[2], $arg[3]);
-	}	
+		action_supprimer_adresse_post($arg[1], $arg[2], $arg[3], $arg[4]);
+	}
 
 	else {
 		spip_log("action_supprimer_adresse_dist $arg pas compris");
 	}
 }
 
-function action_supprimer_adresse_post($id_adresse, $objet='', $id_objet='') {
+function action_supprimer_adresse_post($id_adresse, $objet='', $id_objet='', $type='') {
 
 	// on passe objet et id_objet en plus de id_adresse...
 	// c'est que l'on souhaite faire attention aux liaisons
@@ -43,10 +43,11 @@ function action_supprimer_adresse_post($id_adresse, $objet='', $id_objet='') {
 			"id_adresse=" . sql_quote($id_adresse),
 			"objet=" . sql_quote($objet),
 			"id_objet=" . sql_quote($id_objet),
+			"type=" . sql_quote($type),
 		));
 		$il_en_reste = sql_countsel('spip_adresses_liens', "id_adresse=" . sql_quote($id_adresse));
 	}
-	
+
 	if (!$il_en_reste) {
 		sql_delete("spip_adresses", "id_adresse=" . sql_quote($id_adresse));
 	}
