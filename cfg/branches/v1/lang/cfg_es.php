@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_effacer' => 'Borrar',
 	'bouton_mettre_a_jour' => 'Actualizar',
-	'bouton_reset' => 'Reset', # NEW
+	'bouton_reset' => 'Reset',
 
 	// C
 	'cfg' => 'CFG',
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ok' => 'SÍ',
 
 	// P
-	'pas_de_champs_dans' => 'No se encuentra ningún campo en @nom@', # MODIF
+	'pas_de_champs_dans' => 'No se encuentra ningún campo en @nom@',
 	'pas_de_changement' => 'Sin cambios en <b>@nom@</b>',
 
 	// R
@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reset' => 'Borrar',
 
 	// S
-	'supprimer' => 'Suprimir' # MODIF
+	'supprimer' => 'Reiniciar a los valores por omisión'
 );
 
 ?>
