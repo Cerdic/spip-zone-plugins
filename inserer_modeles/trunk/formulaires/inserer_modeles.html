@@ -1,10 +1,9 @@
 <div class="ajax formulaire_spip formulaire_configurer formulaire_inserer_modeles">
+	<img src="[(#CHEMIN_IMAGE{modele-add-24.png}|url_absolue)]" class="cadre-icone" />
 [(#ENV{formulaire_modele}|non)<h3 class="titrem">
-	<img src="#CHEMIN_IMAGE{modele-add-24.png}" class="cadre-icone" />
 	<:inserer_modeles:titre_inserer_modeles:>
 </h3>]
 [(#ENV{formulaire_modele}|oui)<h3 class="titrem">
-	[(#CHEMIN{#ENV{logo}}|image_reduire{24}|inserer_attribut{class, 'cadre-icone'})]
 	<:inserer_modeles:titre_inserer{modele=#ENV{_nom}}:>
 </h3>]
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]

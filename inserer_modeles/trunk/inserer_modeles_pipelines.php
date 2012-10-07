@@ -47,7 +47,7 @@ function inserer_modeles_porte_plume_barre_pre_charger($barres) {
 			"key"         => "M",
 			"className"   => 'outil_inserer_modeles',
 			"beforeInsert" => "function() {jQuery.modalboxload('".generer_url_public(
-				'inclure/inserer_modeles',
+				'inserer_modeles',
 				"modalbox=oui&id_article='+$(\"[name='id_article']\").val()+'&id_rubrique='+$(\"[name='id_rubrique']\").val()+'&id_breve='+$(\"[name='id_breve']\").val()"
 			).",{minHeight: '90%'});}",
 			"display"     => true,
