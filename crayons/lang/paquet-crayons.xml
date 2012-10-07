@@ -2,6 +2,9 @@
 	<langue code="ar" />
 	<langue code="de" />
 	<langue code="en" />
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-crayons?lang_cible=es">
+		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
+	</langue>
 	<langue code="fr" />
 	<langue code="it" />
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/paquet-crayons?lang_cible=nl">
