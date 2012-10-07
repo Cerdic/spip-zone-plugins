@@ -36,7 +36,7 @@ function formulaires_inserer_modeles_charger_dist($formulaire_modele,$modalbox,$
 	
 	if ($modalbox!='') {
 		$contexte['modalbox'] = 'oui';
-		$_modalbox_retour = url_absolue(generer_url_ecrire('inserer_modeles','',true));
+		$_modalbox_retour = url_absolue(generer_url_public('inserer_modeles','',true));
 		if (substr($formulaire_modele,-5)=='.yaml')
 				$formulaire_modele = substr($formulaire_modele,0,-5);
 		$_modalbox_retour = parametre_url($_modalbox_retour,'formulaire_modele',$formulaire_modele,'&');
