@@ -30,6 +30,11 @@ parametres:
         icone: '<:media:item_icone:>'
         vignette: '<:media:item_vignette:>'
         embed: '<:media:item_embed:>'
+        titre: '<:media:item_titre:>'
+        descriptif: '<:media:item_descriptif:>'
+        credits: '<:media:item_credits:>'
+        type: '<:media:item_type:>'
+        poids: '<:media:item_poids:>'
   -
     saisie: 'selection'
     options:
@@ -40,6 +45,7 @@ parametres:
         left: '<:inserer_modeles:item_left:>'
         center: '<:inserer_modeles:item_center:>'
         right: '<:inserer_modeles:item_right:>'
+      afficher_si: '@variante@ == "icone" || @variante@ == "vignette" || @variante@ == "embed"'
   -
     saisie: 'selection'
     options:
@@ -50,6 +56,7 @@ parametres:
         legende: '<:media:item_legende_simple:>'
         complete: '<:media:item_legende_complete:>'
         personnalisee: '<:media:item_personnaliser:>'
+      afficher_si: '@variante@ == "icone" || @variante@ == "vignette" || @variante@ == "embed"'
   -
     saisie: 'fieldset'
     options:
@@ -107,6 +114,7 @@ parametres:
       option_identique: '<:media:item_lien_document:>'
       option_personnalise: '<:media:item_personnaliser:>'
       explication_personnalise: '<:media:explication_lien:>'
+      afficher_si: '@variante@ == "icone" || @variante@ == "vignette" || @variante@ == "embed"'
   -
     saisie: 'input'
     options: 
@@ -126,6 +134,7 @@ parametres:
         moyen: '<:media:item_taille_moyen:>'
         grand: '<:media:item_taille_grand:>'
         personnalisee: '<:media:item_personnaliser:>'
+      afficher_si: '@variante@ == "icone" || @variante@ == "vignette" || @variante@ == "embed"'
   -
     saisie: 'fieldset'
     options:
@@ -159,3 +168,4 @@ parametres:
       nom: 'alt'
       label: '<:media:label_alt:>'
       explication: '<:media:explication_alt:>'
+      afficher_si: '@variante@ == "icone" || @variante@ == "vignette" || @variante@ == "embed"'

@@ -5,6 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
+	'attention_variante_non_precisee' => 'ATTENTION :  veuillez vérifier la syntaxe d\'appel du modèle média. La variante (icone, vignette, embed, etc.) devrait être indiquée en seconde position.',
 	'credits' => 'Crédits :',
 	'erreur_saisies' => 'Votre saisie contient des erreurs !',
 	'erreur_taille' => 'Vous devez saisir un nombre entier positif.',
@@ -16,6 +17,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_configurer_media_titre' => 'Modèles &lt;media&gt; : configurer les tailles par défaut',
 	'info_inclusion_icone' => 'Inclusion de l\'ic&ocirc;ne&nbsp;:',
 	'item_afficher' => 'afficher',
+	'item_credits' => 'les crédits',
+	'item_descriptif' => 'le descriptif',
 	'item_embed' => 'incruster le document',
 	'item_icone' => 'afficher l\'icône',
 	'item_legende_complete' => 'légende complète',
@@ -25,10 +28,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_ne_pas_redimensionner' => 'ne pas redimensionner',
 	'item_pas_de_lien' => 'pas de lien',
 	'item_personnaliser' => 'personnaliser',
+	'item_poids' => 'le poids en octets',
 	'item_taille_grand' => 'grand',
 	'item_taille_icone' => 'icône',
 	'item_taille_moyen' => 'moyen',
 	'item_taille_petit' => 'petit',
+	'item_titre' => 'le titre',
+	'item_type' => 'le type de document',
 	'item_vignette' => 'afficher la vignette',
 	'label_alt' => 'Texte alternatif :',
 	'label_configurer_media_largeur_legende' => 'Largeur des légendes :',
