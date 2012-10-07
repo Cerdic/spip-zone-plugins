@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'activation_barre_impossible' => 'Otro plugin impide el uso de la barra de herramientas en el espacio público.',
+	'activation_barre_impossible' => 'Otro plugin impide el uso del porta-plumas en el espacio público.',
 	'annuler' => 'Cancelar',
 
 	// B
@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   del tamaño indicado en píxeles. Ejemplo: 100. (0 = nunca)',
 
 	// I
-	'info_experimental' => 'Expérimental', # NEW
+	'info_experimental' => 'Experimental',
 
 	// L
 	'label_activer_barre_typo' => '¿Activar la barra tipográfica en los lápices?',
@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_abandon' => 'Cuando se abandona',
 	'label_msg_no_change' => 'Si no hay cambios',
 	'label_reduire_logo' => 'Reducir el tamaño de los logotipos',
-	'label_upload_document' => 'Autoriser l\'ajout de documents par glisser/déposer sur le crayon article.texte', # NEW
+	'label_upload_document' => 'Autorizar que se agreguen documentos por arrastrar/depositar ("drag & drop") sobre el lápiz artículo.texto (article.texte)',
 	'label_yellow_fade' => 'Fundido',
 	'legend_controleur_hyperlien' => 'Enlace hipertexto',
 	'legend_controleur_logo' => 'Elegir un logotipo:',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_controleur_qui' => '¿Quién?',
 	'legend_controleur_vignette' => 'Escoger una viñeta:',
 	'legend_controleur_vignette_remplacer' => 'Reemplazar esta viñeta',
-	'legend_documents' => 'Upload de documents', # NEW
+	'legend_documents' => 'Subir documentos',
 	'legend_editer_prive' => 'Edición en el espacio privado (experimental)',
 	'legend_introduction_article' => 'Texto introductivo del artículo',
 
