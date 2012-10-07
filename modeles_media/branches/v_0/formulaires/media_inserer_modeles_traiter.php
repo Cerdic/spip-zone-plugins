@@ -16,11 +16,7 @@ function formulaires_media_inserer_modeles_traiter_dist($champs){
 			// Cas de la légende
 			if($champ == 'legende' && _request($champ)=='personnalisee')
 				$code .= '';
-			elseif($champ == 'legende2' && _request($champ)=='personnalisee')
-				$code .= '';
-			elseif ($champ == 'legende2' && _request($champ))
-				$code .= "|legende="._request($champ);
-			elseif (_request('legende')!='personnalisee' && _request('legende2')!='personnalisee' && in_array($champ,array('titre','descriptif','credits','type','poids')))
+			elseif (_request('legende')!='personnalisee' && in_array($champ,array('titre','descriptif','credits','type','poids')))
 				$code .= '';
 			// Cas de la taille
 			elseif($champ == 'taille' && _request($champ)=='personnalisee')

@@ -1,4 +1,4 @@
-[(#REM) Si on fait <media12|descriptif>, descriptif est passé à la variable d'environnement class et la variable descriptif est vide. ]
+[(#REM) Si on fait <media12|legende>, legende est passé à la variable d'environnement class et la variable legende est vide. ]
 #SET{legende,#ENV{class}|=={legende}|?{legende,#ENV{legende}}}
 #SET{lien,#ENV{class}|=={lien}|?{lien,#ENV{lien}}}
 #SET{titre,#ENV{class}|=={titre}|?{titre,#ENV{titre}}}
@@ -17,7 +17,7 @@
 #SET{class,#ENV{class}|=={type}|?{'',#GET{class}}}
 #SET{class,#ENV{class}|=={poids}|?{'',#GET{class}}}
 
-[(#REM) Au cas où la variante a été appelée mais pas positionnée en première place. Par exemple : <media12|titre|icone>. Si aucune variante n'est indiquée, on utilise vignette.]
+[(#REM) Au cas où la variante a été appelée mais pas positionnée en première place. Par exemple : <media12|titre|icone>. Sinon, on appelle vignette.]
 #SET{variante,vignette}
 #SET{variante,#ENV{icone}|=={icone}|?{icone,#GET{variante}}}
 #SET{variante,#ENV{emb}|=={emb}|?{icone,#GET{variante}}}
@@ -28,10 +28,4 @@
 #SET{variante,#ENV{text}|=={text}|?{text,#GET{variante}}}
 #SET{variante,#ENV{application}|=={application}|?{application,#GET{variante}}}
 
-[(#VAL|test_espace_prive|oui)
-	<p style="color:red;"><strong><:media:attention_variante_non_precisee:></strong></p>
-]
-
-[(#GET{variante}|oui)
-	[(#INCLURE{fond=modeles/media_#GET{variante},legende=#GET{legende},lien=#GET{lien},titre=#GET{titre},descriptif=#GET{descriptif},credits=#GET{credits},type=#GET{type},poids=#GET{poids},class=#GET{class},env})]
-]
+[(#INCLURE{fond=modeles/media_#GET{variante},legende=#GET{legende},lien=#GET{lien},titre=#GET{titre},descriptif=#GET{descriptif},credits=#GET{credits},type=#GET{type},poids=#GET{poids},class=#GET{class},env})]
