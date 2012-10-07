@@ -11,8 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'articles_lies' => 'LINKED ARTICLES',
 
 	// C
-	'cfg_a2a' => 'Relations entre articles', # NEW
-	'changer_type_liaison' => 'Changer', # NEW
+	'cfg_a2a' => 'Relations between articles',
+	'changer_type_liaison' => 'Change',
 	'configurer_a2a' => 'Configurer les relations entre articles', # NEW
 
 	// E
@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'lien_lier_article' => 'Link to one or more articles',
 	'lier_cet_article' => 'Link',
-	'lier_cet_article_deux_cotes' => 'Link both sides', # MODIF
+	'lier_cet_article_deux_cotes' => 'Link both sides',
 
 	// O
 	'ob_pb' => 'Il n\'est pas possible de rendre obligatoire le type de liaison : en effet les articles ci-dessous possèdent des liaisons non typées. Typez les d\'abords, puis rendez-obligatoire le typage.', # NEW
@@ -51,16 +51,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'sup_pb' => 'Impossible de supprimer les types de liaisons suivantes : des liaisons les utilisent. Il vous faut donc modifier au préalable ces liaions.', # NEW
 	'supprimer_le_lien' => 'Unlink',
-	'supprimer_le_lien_deux_cotes' => 'Unlink both sides', # MODIF
+	'supprimer_le_lien_deux_cotes' => 'Unlink both sides',
 
 	// T
 	'td_pb' => 'Vous demandez l\'interdiction de lier plusieurs fois deux mêmes articles. Or certains articles possèdent plusieurs liaisons avec d\'autres articles. Corrigez cela avant.', # NEW
 	'type' => 'Type',
 	'type_inexistant' => 'Type de liaison inexistant', # NEW
 	'type_liaison' => 'Type of link',
-	'type_obligatoire' => 'Typage obligatoire', # NEW
-	'types_differents' => 'Liaisons multiples', # NEW
-	'types_liaisons' => 'Types de liaison', # NEW
+	'type_obligatoire' => 'Typing mandatory',
+	'types_differents' => 'Multiple links',
+	'types_liaisons' => 'Types of link',
 	'types_liaisons_non_modifiables' => 'Les types de liaisons suivants ne sont pas modifiables via la configuration', # NEW
 
 	// U
