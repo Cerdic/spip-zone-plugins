@@ -28,7 +28,9 @@
 #SET{variante,#ENV{application}|=={application}|?{application,#GET{variante}}}
 
 [(#VAL|test_espace_prive|oui)
-	<p style="color:red;"><strong><:media:attention_variante_non_precisee:></strong></p>
+	#BOITE_OUVRIR{'','error'}
+	<strong><:media:attention_variante_non_precisee:></strong>
+	#BOITE_FERMER
 ]
 
 [(#GET{variante}|oui)
