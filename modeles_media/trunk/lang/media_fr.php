@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_descriptif' => 'le descriptif',
 	'item_embed' => 'incruster le document',
 	'item_icone' => 'afficher l\'icône',
+	'item_legende' => 'juste la légende du document',
 	'item_legende_complete' => 'légende complète',
 	'item_legende_simple' => 'légende simple (titre + descriptif)',
 	'item_lien_document' => 'lien sur le document',

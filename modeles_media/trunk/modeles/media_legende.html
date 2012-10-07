@@ -1,0 +1,4 @@
+[(#REM) Si rien n'est transmis, il faut passer legende=legende]
+#SET{legende,#ENV{legende}}
+[(#ENV{legende}|ou{#ENV{titre}}|ou{#ENV{descriptfif}}|ou{#ENV{credits}}|ou{#ENV{type}}|ou{#ENV{poids}}|non) #SET{legende,'legende'}]
+#INCLURE{fond=modeles/inc-media_legende,env,legende=#GET{legende}}
