@@ -1,6 +1,8 @@
 <traduction module="paquet-article_accueil" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/article_accueil/trunk/lang/" reference="fr">
 	<langue code="en" />
-	<langue code="es" />
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-article_accueil?lang_cible=es">
+		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
+	</langue>
 	<langue code="fr" />
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/paquet-article_accueil?lang_cible=ru">
 		<traducteur nom="nazar" lien="http://trad.spip.net/auteur/nazar" />
