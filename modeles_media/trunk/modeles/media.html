@@ -17,7 +17,8 @@
 #SET{class,#ENV{class}|=={type}|?{'',#GET{class}}}
 #SET{class,#ENV{class}|=={poids}|?{'',#GET{class}}}
 
-[(#REM) Au cas où la variante a été appelée mais pas positionnée en première place. Par exemple : <media12|titre|icone>. Si aucune variante n'est indiquée, on n'affiche rien.]
+[(#REM) Au cas où la variante a été appelée mais pas positionnée en première place. Par exemple : <media12|titre|icone>. Si aucune variante n'est indiquée, on utilise vignette.]
+#SET{variante,vignette}
 #SET{variante,#ENV{icone}|=={icone}|?{icone,#GET{variante}}}
 #SET{variante,#ENV{emb}|=={emb}|?{icone,#GET{variante}}}
 #SET{variante,#ENV{logo}|=={logo}|?{icone,#GET{variante}}}
