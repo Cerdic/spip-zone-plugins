@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tous_docs_facd' => 'Documents in the queue',
 
 	// L
-	'label_relancer_conversion' => 'Relancer la conversion', # NEW
+	'label_relancer_conversion' => 'Restart conversion',
 	'lien_convertir_document' => 'Convert this document',
 	'lien_recharger' => 'Reload',
 	'liste_attente_aucun' => 'No document in the queue.',
