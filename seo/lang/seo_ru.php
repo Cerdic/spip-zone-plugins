@@ -28,13 +28,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'google_webmaster_tools_id' => 'Проверка Meta code ',
 
 	// I
-	'insert_head' => 'Вставка #INSERT_HEAD',
+	'insert_head' => 'Подключать автоматически в #INSERT_HEAD',
 	'insert_head_activate' => 'Включить',
 	'insert_head_descriptif' => 'Автоматическая вставка мета-тегов в &lt;header&gt;',
 
 	// M
 	'meta_author' => 'Автор :',
-	'meta_copyright' => 'Авторское право:', # MODIF
+	'meta_copyright' => 'Copyright:',
 	'meta_description' => 'Описание:',
 	'meta_keywords' => 'Ключевые слова :',
 	'meta_page_description_sommaire_value' => 'Значение Description страницы + значение Meta главной',
@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meta_title' => 'Title :',
 
 	// S
-	'seo' => 'Поисковая оптимизация' # MODIF
+	'seo' => 'Поисковая оптимизация'
 );
 
 ?>
