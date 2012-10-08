@@ -1,10 +1,12 @@
 <plugin>
-	<nom>Todo list</nom>
+	<nom>Todo</nom>
 	<auteur>RastaPopoulos</auteur>
 	<licence>GPL v3</licence>
-	<version>0.1</version>
-	<etat>dev</etat>
+	<version>1.0.0</version>
+	<etat>test</etat>
+	<slogan>Lister rapidement des choses à faire</slogan>
 	<description>Ajoute de nouveaux raccourcis typographiques permettant de décrire de manière simple des listes de choses à faire dans un contenu SPIP.</description>
+	<categorie>edition</categorie>
 	
 	<prefix>todo</prefix>
 	
@@ -19,11 +21,7 @@
 		<inclure>todo_pipelines.php</inclure>
 	</pipeline>
 	
-	<bouton id='configurer_todo' parent="bando_configuration">
-		<titre>todo:configurer_bando</titre>
-		<icone></icone>
-	</bouton>
-
-	<necessite id="SPIP" version="[2.1.8;]" />
+	<necessite id="SPIP" version="[2.1.8;3.0.99]" />
 	<necessite id="tw" version="[0.3.1;]" />
+	<necessite id="spip_bonux" version="[2.3.0;]" />
 </plugin>

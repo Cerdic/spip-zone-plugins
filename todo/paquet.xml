@@ -1,0 +1,20 @@
+<paquet
+	prefix="todo"
+	categorie="edition"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[2.1.8;3.0.*]"
+	logo="images/todo-48.png"
+>	
+
+	<nom>Todo</nom>
+	<!-- Lister rapidement des choses à faire -->
+
+	<auteur>RastaPopoulos</auteur>
+	<credit>Gentleface.com pour l'icône</credit>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="insert_head_css" inclure="todo_pipelines.php" />
+	<pipeline nom="header_prive" inclure="todo_pipelines.php" />
+</paquet>
