@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'seo_description' => 'Этот плагин предоставляет возможность вставлять в шапку вашего сайта мета теги, канонический вид URL, Google webmaster tools, Meta Code, и Google Analytics javascript code. Каждой статье и каждому разделу вы можете придавать уникальные мета теги.',
 	'seo_nom' => 'SEO',
-	'seo_slogan' => 'Поисковая оптимизация' # MODIF
+	'seo_slogan' => 'Поисковая оптимизация (SEO)'
 );
 
 ?>
