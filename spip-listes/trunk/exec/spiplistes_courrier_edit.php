@@ -250,7 +250,6 @@ function exec_spiplistes_courrier_edit(){
 		. '<div id="choisir_intro" class="option">'.$eol
 		. '<label class="verdana2" style="display:block;" for="message_intro">'
 		. _T('spiplistes:introduction_du_courrier_').':</label>'.$eol
-		. afficher_barre('document.formulaire_courrier_edit.message_intro')
 		. '<textarea id="message_intro" name="message_intro" '.$GLOBALS['browser_caret'].' rows="5" cols="40" wrap="soft" style="width:100%">'.$eol
 		. '</textarea>'
 		. '</div>'.$eol
@@ -355,7 +354,6 @@ function exec_spiplistes_courrier_edit(){
 	// bloc du courrier (titre, texte), toujours visible
 	$page_result .= ''
 		. '<label for="texte_courrier" style="display:bloc">'._T('spiplistes:texte_courrier').'</label>'
-		. afficher_barre('document.formulaire_courrier_edit.message')
 		. '<textarea id="texte_courrier" name="message" '.$GLOBALS['browser_caret'].' class="porte_plume_partout barre_inserer formo" rows="20" cols="40" wrap=soft>'.$eol
 		. $texte
 		. '</textarea>'.$eol

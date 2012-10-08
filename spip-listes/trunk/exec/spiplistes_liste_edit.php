@@ -187,7 +187,6 @@ function exec_spiplistes_liste_edit(){
 		. "<strong>"._T('spiplistes:texte_dinsctription_')."</strong>"
 		. "<br />"._T('spiplistes:txt_abonnement')
 		// boite edition texte
-		. afficher_barre('document.formulaire.texte')
 		. "<textarea id='text_area' name='texte' ".$GLOBALS['browser_caret']
 			." class='formo' rows='".(($spip_ecran == "large") ? 28 : 20)."' cols='40'>\n"
 		. $texte
