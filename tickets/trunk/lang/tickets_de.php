@@ -200,10 +200,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tickets_en_cours_auteur' => 'Les tickets de @nom@ en cours de traitement', # NEW
 	'tickets_general' => 'Général', # NEW
 	'tickets_sticked' => 'Tickets épinglés', # NEW
-	'tickets_sur_inscription' => '
-		Nur angemeldete Benutzer können
-		Tickets anlegen.
-	', # MODIF
+	'tickets_sur_inscription' => 'Nur angemeldete Benutzer können Tickets oder Kommentare anlegen.
+	',
 	'tickets_sur_inscription_droits' => 'Les droits dont vous disposez sont insuffisants.', # NEW
 	'tickets_traites' => 'Alle bearbeiteten Tickets',
 	'tickets_tries' => 'Tickets correspondant à vos critères', # NEW
