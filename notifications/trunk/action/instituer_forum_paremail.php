@@ -81,7 +81,10 @@ function action_instituer_forum_paremail_dist() {
 					}
 				}
 				if ($erreur_auteur){
-					$erreur = $erreur_auteur;
+					$erreur = $erreur_auteur 
+					  . "<br /><small>"
+					  . _L("(aucun auteur avec l'email $email n'a de droit suffisant)")
+					  . "</small>";
 					spip_log("Aucun auteur pour $email autorise a moderer $id_forum","moderationparemail"._LOG_INFO_IMPORTANTE);
 				}
 			}
