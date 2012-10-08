@@ -68,7 +68,7 @@ function formulaires_inc_pubban_charger_dist($env=null,$id_banniere=null){
 
 	// Affichage ...
 	$valeurs = array(
-		'test' => $a,
+//		'test' => $a,
 		'url' => substr_count($url, 'http://') ? $url : generer_url_public($url),
 		'blank' => $blank,
 		'nomframe' => $banniere['titre_id'],

@@ -10,7 +10,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function balise_PUBBAN_dist($p) {
-	return calculer_balise_dynamique($p, PUBBAN, array());
+	return calculer_balise_dynamique($p, 'PUBBAN', array());
 }
 
 function balise_PUBBAN_dyn($banner_id, $tout='non') {
