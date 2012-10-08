@@ -8,7 +8,9 @@
 	<langue code="ca" />
 	<langue code="cs" />
 	<langue code="da" />
-	<langue code="de" />
+	<langue code="de" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=de">
+		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
+	</langue>
 	<langue code="el" />
 	<langue code="en" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=en">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
