@@ -1,3 +1,5 @@
+﻿2012-10-08
+- correction d'un bug qui empêche l'insertion coté public sans être identifié.
 
 2012-08-30
 Migration du plugin de spip2 en spip3

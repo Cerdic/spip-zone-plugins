@@ -18,7 +18,7 @@
 	// elseif ($GLOBALS['spip_version_code']>2)	
 		include_spip("inc/xml");
   /* fin adaptation SPIP2 */
-
+  
 	function _Forms_install(){
 		// if ($GLOBALS['spip_version_code']<1.9204){
 			// include_spip('base/forms_upgrade');
@@ -611,9 +611,7 @@
 
 	function Forms_enregistrer_reponse_formulaire($id_form, &$id_donnee, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='', $c=NULL, $rang=NULL) {
 		$r = '';
-		if (!include_spip('inc/autoriser'))
-			include_spip('inc/autoriser_compat');
-	
+		
 		//adaptation SPIP2
 		/*$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 		if (!$row = spip_fetch_array($result)) {

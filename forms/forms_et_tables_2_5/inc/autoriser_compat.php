@@ -9,9 +9,7 @@
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
 
 define ('_DEBUG_AUTORISER', false);
 
@@ -20,10 +18,12 @@ define ('_DEBUG_AUTORISER', false);
 if (!function_exists('autoriser')) {
 // http://doc.spip.org/@autoriser
 	function autoriser() {
+		
 		$args = func_get_args(); 
 		return call_user_func_array('autoriser_dist', $args);
 	}
 }
+
 function auth_rubrique_compat($id_auteur, $statut)
 {
 	if ($statut != '0minirezo') return $statut;
@@ -64,8 +64,8 @@ function auth_rubrique_compat($id_auteur, $statut)
 //
 // http://doc.spip.org/@autoriser_dist
 function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
+	
 	static $restreint = array();
-
 	// Qui ? auteur_session ?
 	if (!is_array($qui)) {
 		if (is_int($qui)) {
