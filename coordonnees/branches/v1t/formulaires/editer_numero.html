@@ -1,0 +1,28 @@
+
+<div class='formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id_numero,nouveau}'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable}|oui)
+		<form method='post' action='[(#ENV{action})]'><div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<input type='hidden' name='id_numero' value='#ENV{id_numero}' />
+			<input type='hidden' name='objet' value='#ENV{objet}' />
+			<input type='hidden' name='id_objet' value='#ENV{id_objet}' />
+			<ul>
+				[(#SAISIE{input, titre,	label=<:coordonnees:label_titre:>})]
+			[(#ENV{id_objet}|oui)
+				[(#SAISIE{selection, type, label=<:coordonnees:label_type_numero:>, defaut=#ENV{type}, datas=#ARRAY{voice,<:coordonnees:type_tel_voice:>, work,<:coordonnees:type_tel_work:>, home,<:coordonnees:type_tel_home:>, msg,<:coordonnees:type_tel_msg:>, pref,<:coordonnees:type_tel_pref:>, fax,<:coordonnees:type_tel_fax:>, cell,<:coordonnees:type_tel_cell:>, dsl,<:coordonnees:type_tel_dsl:>, video,<:coordonnees:type_tel_video:>, pager,<:coordonnees:type_tel_pager:>, bbs,<:coordonnees:type_tel_bbs:>, modem,<:coordonnees:type_tel_modem:>, car,<:coordonnees:type_tel_car:>, isdn,<:coordonnees:type_tel_isdn:>, pcs,<:coordonnees:type_tel_pcs:> } })]
+			]
+				[(#SAISIE{input, numero, label=<:coordonnees:label_numero:>})]
+			</ul>
+			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+			<!--extra-->
+			<p class='boutons'>
+				<input type='submit' name='enregistrer' value='<:bouton_enregistrer:>' />
+			</p>
+
+		</div></form>
+	]
+</div>
