@@ -136,7 +136,7 @@ function openid_afficher_contenu_objet($flux){
 		AND $id_auteur = $flux['args']['id_objet']
 		AND $openid = sql_getfetsel('openid','spip_auteurs','id_auteur='.intval($id_auteur))
 	){
-		$flux['data'] .= propre("<div><img src='".find_in_path('images/openid-16.png')
+		$flux['data'] .= propre("<div class='champ contenu_openid'><img src='".find_in_path('images/openid-16.png')
 			."' alt='"._T('openid:openid')."' width='16' height='16' />"
 			. " [->$openid]</div>");
 
