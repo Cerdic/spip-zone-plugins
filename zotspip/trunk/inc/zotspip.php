@@ -285,7 +285,7 @@ function zotspip_maj_collections($forcer=false) {
 			$insertion = array(
 				'id_zcollection' => $id_zcollection,
 				'id_parent' => '0', // 0 si pas de parent
-				'zcollection' => spip_xml_aplatit($entree['title']),
+				'zcollection' => importer_charset(html_entity_decode(spip_xml_aplatit($entree['title']), ENT_QUOTES, "UTF-8"),'utf-8'),
 				'updated' => $updated
 			);
 			

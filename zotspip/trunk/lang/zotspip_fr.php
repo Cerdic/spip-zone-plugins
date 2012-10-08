@@ -159,7 +159,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'une_reference' => '1 référence',
 
 	// V
-	'voir_publis_auteur' => 'Voir toutes les publications de @auteur@.',
+	'voir_publis_auteur' => 'Voir les publications de @auteur@.',
 	'voir_sur_zotero' => 'Consulter cette référence sur zotero.org',
 
 	// Z
