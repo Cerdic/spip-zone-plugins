@@ -3,7 +3,7 @@
     # Si on nomme une regle, elle devient surchargeable
 
 todos:
-  match: "/\n[+][+][+]+\n(.*?)\n[+][+][+]+(\n|$)/s"
+  match: "/\n[+][+][+]\n(.*?)\n[+][+][+](\n|$)/s"
   is_callback: Y
   replace: tw_todo
   priority: -40
