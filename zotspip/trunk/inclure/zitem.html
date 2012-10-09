@@ -1,5 +1,5 @@
 <BOUCLE_zitem(ZITEMS){id_zitem}>
-<[(#ENV{liste}|?{li,div})] class="zotspip_item"[(#ENV{icones}|oui)style="list-style-image : url([(#TYPE|zotspip_icone_type{#MIMETYPE,#FICHIER}|extraire_attribut{src})]);"]>
+<[(#ENV{liste}|?{li,div})] class="zotspip_item"[(#ENV{icones}|oui)style="list-style-type:none; padding-left:20px; background:url([(#TYPE|zotspip_icone_type{#MIMETYPE,#FICHIER}|extraire_attribut{src})]) no-repeat 0 0px;"]>
 	[(#ENV{form_export}|oui)<input type="checkbox" name="id#EVAL**{chr(91)}#EVAL**{chr(93)}" value="#ID_ZITEM" class="zotspip_select_ref" />]
 	[(#ENV{liens}|oui)<div class="liens">
 			[<a href="http://dx.doi.org/(#DOI|trim|urlencode)" title="<:zotspip:identifier_via_doi:>"><img src="#CHEMIN{images/zotero/go.png}" alt=""></a><br />]
