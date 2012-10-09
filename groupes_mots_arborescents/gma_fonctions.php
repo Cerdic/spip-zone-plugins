@@ -145,8 +145,8 @@ function calcul_branche_groupe_in($id) {
  * Sélectionne dans une boucle les éléments appartenant à une branche d'un groupe de mot
  * 
  * Calcule une branche d'un groupe de mots et conditionne la boucle avec.
- * Cherche l'identifiant du groupe dans les boucles parentes ou par jointure
- * et calcule la liste des identifiants de groupes de toute la branche
+ * Cherche l'identifiant du groupe en premier paramètre du critère {branche_groupe XX}
+ * sinon dans les boucles parentes ou par jointure.
  *
  * @internal
  * 		Copie quasi identique de critere_branche_dist()
@@ -155,7 +155,7 @@ function calcul_branche_groupe_in($id) {
  * 		Identifiant de la boucle
  * @param array $boucles
  * 		AST du squelette
- * @param array $crit
+ * @param Critere $crit
  * 		Paramètres du critère dans cette boucle
  * @return
  * 		AST complété de la condition where au niveau de la boucle,
@@ -165,8 +165,15 @@ function critere_branche_groupe_dist($idb, &$boucles, $crit){
 
 	$not = $crit->not;
 	$boucle = &$boucles[$idb];
-	$arg = calculer_argument_precedent($idb, 'id_groupe', $boucles);
-
+	// prendre en priorite un identifiant en parametre {branche_groupe XX}
+	if (isset($crit->param[0])) {
+		$arg = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	}
+	// sinon on le prend chez une boucle parente
+	else {
+		$arg = kwote(calculer_argument_precedent($idb, 'id_groupe', $boucles));
+	}
+	
 	//Trouver une jointure
 	$champ = "id_groupe";
 	$desc = $boucle->show;
