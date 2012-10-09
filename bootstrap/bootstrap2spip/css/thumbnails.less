@@ -60,11 +60,13 @@
 @media (max-width: 767px) {
   .album .thumbnails {  margin-left: -@gridGutterWidth;}
   .album .thumbnails li {width: 45%;float: left;clear: none;margin-left: @gridGutterWidth;}
+  .span5,.span6{.album .thumbnails li {width: 45%;}}
   .album .thumbnails li:nth-child(3n-2) {clear: none;}
   .album .thumbnails li:nth-child(2n-1) {clear: left;}
 }
 @media (max-width: 450px) {
   .album .thumbnails li {width: 40%;}
+  .span5,.span6{.album .thumbnails li {width: 40%;}}
 }
 @media (max-width: 380px) {
   .album .thumbnails {  margin-left:0}
