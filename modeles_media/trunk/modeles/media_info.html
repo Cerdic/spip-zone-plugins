@@ -1,0 +1,83 @@
+<BOUCLE_doc(DOCUMENTS) {id_document=#ENV{id}} {tout}>
+#SET{titre,#ENV{titre}|=={titre}|?{#TITRE,#ENV{titre}|typo}}
+#SET{descriptif,#ENV{descriptif}|=={descriptif}|?{#DESCRIPTIF,#ENV{descriptif}|propre}}
+#SET{credits,#ENV{credits}|=={credits}|?{#CREDITS,#ENV{credits}|propre}}
+[(#REM) On ne remplit que taille ou hauteur ou largeur, et on vérifie que ce type de document a une taille et une largeur. ]
+#SET{taille,#ENV{taille}|ou{#ENV{hauteur}|et{#ENV{largeur}}}|?{taille,''}}
+#SET{hauteur,#ENV{taille}|?{'',#ENV{hauteur}}}
+#SET{largeur,#ENV{taille}|?{'',#ENV{largeur}}}
+#SET{taille,#GET{taille}|et{#HAUTEUR|ou{#LARGEUR}}|?{#LARGEUR&#xD7;#HAUTEUR,''}}
+#SET{hauteur,#GET{hauteur}|?{#HAUTEUR,''}}
+#SET{largeur,#GET{largeur}|?{#LARGEUR,''}}
+
+[(#REM) Compter le nombre d'infos demandees. Si une seule info demandee, elle est renvoyee brute. ]
+#SET{nb_infos,0}
+#SET{nb_infos,#ENV{titre}|?{#GET{nb_infos}|plus{1},#GET{nb_infos}}}
+#SET{nb_infos,#ENV{descriptif}|?{#GET{nb_infos}|plus{1},#GET{nb_infos}}}
+#SET{nb_infos,#ENV{credits}|?{#GET{nb_infos}|plus{1},#GET{nb_infos}}}
+#SET{nb_infos,#ENV{type}|?{#GET{nb_infos}|plus{1},#GET{nb_infos}}}
+#SET{nb_infos,#ENV{poids}|?{#GET{nb_infos}|plus{1},#GET{nb_infos}}}
+#SET{nb_infos,#ENV{mime_type}|?{#GET{nb_infos}|plus{1},#GET{nb_infos}}}
+#SET{nb_infos,#GET{taille}|?{#GET{nb_infos}|plus{1},#GET{nb_infos}}}
+#SET{nb_infos,#GET{hauteur}|?{#GET{nb_infos}|plus{1},#GET{nb_infos}}}
+#SET{nb_infos,#GET{largeur}|?{#GET{nb_infos}|plus{1},#GET{nb_infos}}}
+#SET{nb_infos,#ENV{extension}|?{#GET{nb_infos}|plus{1},#GET{nb_infos}}}
+#SET{nb_infos,#ENV{date_publi}|?{#GET{nb_infos}|plus{1},#GET{nb_infos}}}
+#SET{nb_infos,#ENV{date_maj}|?{#GET{nb_infos}|plus{1},#GET{nb_infos}}}
+
+[(#GET{nb_infos}|=={1}|oui)
+	#SET{info,''}
+	#SET{info,#ENV{titre}|?{#GET{titre},#GET{info}}}
+	#SET{info,#ENV{credits}|?{#GET{credits},#GET{info}}}
+	#SET{info,#ENV{type}|?{#TYPE_DOCUMENT,#GET{info}}}
+	[(#SET{info,[(#ENV{poids}|?{[(#TAILLE|taille_en_octets)],#GET{info}})]})]
+	#SET{info,#ENV{mime_type}|?{#MIME_TYPE,#GET{info}}}
+	#SET{info,#GET{taille}|?{#GET{taille},#GET{info}}}
+	#SET{info,#GET{hauteur}|?{#GET{hauteur},#GET{info}}}
+	#SET{info,#GET{largeur}|?{#GET{largeur},#GET{info}}}
+	#SET{info,#ENV{extension}|?{#EXTENSION,#GET{info}}}
+	[(#SET{info,[(#ENV{date_publi}|?{[(#DATE|affdate)],#GET{info}})]})]
+	[(#SET{info,[(#ENV{date_maj}|?{[(#MAJ|affdate)],#GET{info}})]})]
+	[(#GET{info}|oui)<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_info[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+		#MEDIA_LIEN{#GET{info}}
+	</span>]
+	[(#ENV{descriptif}|oui)<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_info[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+		#MEDIA_LIEN{#GET{descriptif}}
+	</div>]
+]
+[(#GET{nb_infos}|>{1}|oui)
+	#SET{infos,''}
+	#SET{infos,#ENV{date_publi}|?{#GET{infos}|concat{#DATE|affdate},#GET{infos}}}
+	#SET{infos,#ENV{date_publi}|et{#ENV{credits}}|?{#GET{infos}|concat{', '},#GET{infos}}}
+	#SET{infos,#ENV{date_publi}|et{#ENV{credits}|non}|?{#GET{infos}|concat{'. '},#GET{infos}}}
+	[(#SET{infos,[(#ENV{credits}|?{[(#GET{infos}|concat{[(#VAL{public:par_auteur}|_T)],' ',#GET{credits},'. '})],#GET{infos}})]})]
+	#SET{infos,#ENV{type}|?{#GET{infos}|concat{#TYPE_DOCUMENT},#GET{infos}}}
+	#SET{infos,#ENV{type}|et{#ENV{poids}}|?{#GET{infos}|concat{' - '},#GET{infos}}}
+	#SET{infos,#ENV{type}|et{#ENV{poids}|non}|?{#GET{infos}|concat{'. '},#GET{infos}}}
+	[(#SET{infos,[(#ENV{poids}|?{[(#GET{infos}|concat{[(#TAILLE|taille_en_octets)],'. '})],#GET{infos}})]})]
+	#SET{infos,#GET{taille}|?{#GET{infos}|concat{#GET{taille},'&nbsp;px. '},#GET{infos}}}
+	[(#SET{infos,[(#GET{hauteur}|?{[(#GET{infos}|concat{[(#VAL{media:hauteur}|_T)],' ',#GET{hauteur},'&nbsp;px. '})],#GET{infos}})]})]
+	[(#SET{infos,[(#GET{largeur}|?{[(#GET{infos}|concat{[(#VAL{media:largeur}|_T)],' ',#GET{largeur},'&nbsp;px. '})],#GET{infos}})]})]
+	[(#SET{infos,[(#ENV{mime_type}|?{[(#GET{infos}|concat{[(#VAL{media:mime_type}|_T)],' ',#MIME_TYPE,'. '})],#GET{infos}})]})]
+	[(#SET{infos,[(#ENV{extension}|?{[(#GET{infos}|concat{[(#VAL{media:extension}|_T)],' ',#EXTENSION,'. '})],#GET{infos}})]})]
+	[(#SET{infos,[(#ENV{date_maj}|?{[(#GET{infos}|concat{[(#VAL{media:maj}|_T)],' ',[(#MAJ|affdate)],'. '})],#GET{infos}})]})]
+	[(#SET{infos,[(#ENV{descriptif}|?{[(#GET{infos}|concat{[(#GET{descriptif}|textebrut)]})],#GET{infos}})]})]
+	#SET{infos,#GET{infos}|trim}
+	
+	[(#ENV{titre}|oui)
+	<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_info[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+		[(#MEDIA_LIEN{#GET{titre}})] [((#GET{infos}))]
+	</span>
+	][(#ENV{titre}|non)
+	<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_info[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+		[(#MEDIA_LIEN{#GET{infos}})]
+	</span>
+	]
+]
+[(#REM) Cas particulier : un lien est demandé sans autre paramètre. On affiche le lien sur le titre]
+[(#GET{nb_infos}|non)
+	<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_info[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+		[(#MEDIA_LIEN{#TITRE})]
+	</span>
+]
+</BOUCLE_doc>
