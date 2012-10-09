@@ -6,26 +6,29 @@
 	si on est en ajax, on peut recevoir un id_xx
 	pour afficher les formulaires correspondants
 ]
-[(#ENV{id_adresse}|ou{#ENV{id_numero}}|ou{#ENV{id_email}}|ou{#ENV{new}}|oui)
+[(#ENV{id_adresse}|ou{#ENV{id_numero}}|ou{#ENV{id_email}}|ou{#ENV{id_syndic}}|ou{#ENV{new}}|oui)
 	[(#SET{plie,1})]
 	[(#SET{form,1})]
 ]
 [(#SET{retour,[(#ENV{retour,#SELF}
 		|parametre_url{id_adresse,''}
 		|parametre_url{id_email,''}
-		|parametre_url{id_numero,''})]})]
+		|parametre_url{id_numero,''}
+		|parametre_url{id_syndic,''}
+	)]})]
 
 [(#VAL{e}|debut_cadre{#GET{icone},'',[(#VAL{<:coordonnees:titre_coordonnees:>}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})]})]
 
 	[(#INCLURE{fond=prive/liste/adresses, objet, id_objet, retour=#GET{retour}})]
 	[(#INCLURE{fond=prive/liste/numeros, objet, id_objet, retour=#GET{retour}})]
 	[(#INCLURE{fond=prive/liste/emails, objet, id_objet, retour=#GET{retour}})]
+	[(#INCLURE{fond=prive/liste/sites, objet, id_objet, retour=#GET{retour}})]
 
 [(#GET{plie}|debut_block_depliable{#GET{identifiant}})]
 
 
 	[(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}})
-	
+
 		[(#GET{form}|oui)
 			[(#ENV{new}|=={adresse}|ou{#ENV{id_adresse}}|oui)
 				<h3>[(#ENV{id_adresse}|intval|?{<:coordonnees:editer_adresse:>,<:coordonnees:nouvelle_adresse:>})]</h3>
@@ -38,6 +41,10 @@
 			[(#ENV{new}|=={email}|ou{#ENV{id_email}}|oui)
 				<h3>[(#ENV{id_email}|intval|?{<:coordonnees:editer_email:>,<:coordonnees:nouvel_email:>})]</h3>
 				<div class='ajax'>[(#FORMULAIRE_EDITER_EMAIL{#ENV{id_email,new},#ENV{objet},#ENV{id_objet},#GET{retour}#emails_#ENV{objet}_#ENV{id_objet}})]</div>
+			]
+			[(#ENV{new}|=={site}|ou{#ENV{id_syndic}}|oui)
+				<h3>[(#ENV{id_syndic}|intval|?{<:ecrire:icone_modifier_site:>,<:ecrire:icone_referencer_nouveau_site:>})]</h3>
+				<div class='ajax'>[(#FORMULAIRE_EDITER_SITE{#ENV{id_syndic,new},#ENV{id_rubrique},#ENV{retour},0,'sites_edit_config',#ARRAY{},'',#ENV{objet},#ENV{id_objet}})]</div>[(#REM)<!-- ok dans le principe, mais ce formulaire ne fait pas la liaison... -->]
 			]
 		]
 
@@ -68,6 +75,14 @@
 				|parametre_url{objet,#ENV{objet}}
 				|parametre_url{id_objet,#ENV{id_objet}}
 				|parametre_url{new,email}
+				|parametre_url{retour,[(#GET{retour,#SELF})]})],ajax})]
+		[(#BOUTON_ACTION{[(#CHEMIN{images/site-24.gif}
+			|balise_img{<:ecrire:icone_referencer_nouveau_site:>}
+			|concat{' ',<:ecrire:icone_referencer_nouveau_site:>})],
+			[(#URL_ECRIRE{site_edit}
+				|parametre_url{objet,#ENV{objet}}
+				|parametre_url{id_objet,#ENV{id_objet}}
+				|parametre_url{new,site}
 				|parametre_url{retour,[(#GET{retour,#SELF})]})],ajax})]
 		</div>
 	]

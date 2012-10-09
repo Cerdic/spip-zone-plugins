@@ -19,6 +19,12 @@ function coordonnees_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_auteurs'][] = 'emails_liens';
 	$interface['tables_jointures']['spip_emails'][] = 'emails_liens';
 
+	$interface['tables_jointures']['spip_auteurs'][] = 'syndic_liens';
+	$interface['tables_jointures']['spip_articles'][] = 'syndic_liens';
+	$interface['tables_jointures']['spip_breves'][] = 'syndic_liens';
+	$interface['tables_jointures']['spip_rubriques'][] = 'syndic_liens';
+	$interface['tables_jointures']['spip_syndic'][] = 'syndic_liens';
+
 	$interface['table_des_traitements']['VILLE'][] = _TRAITEMENT_TYPO;
 
 	return $interface;
@@ -129,6 +135,26 @@ function coordonnees_declarer_tables_auxiliaires($tables_auxiliaires){
 		);
 	$tables_auxiliaires['spip_emails_liens'] =
 		array('field' => &$emails_liens, 'key' => &$emails_liens_key);
+
+
+	//-- Table syndic_liens ------------------------------------------
+	// nota: "syndic" (sans S final) est le nom hitorique de la table
+	// mais la boucle est SYNDICATIONS ou SITES (synonyme) pour les
+	// "sites" references (la table "urls" est reservee aux URLs propres)
+	// et c'est la table "syndic_articles" qui lie aux articles syndiques
+	// et c'est la table "syndic_liens" qui lie aux objets declares dans SPIP
+	$syndic_liens = array(
+		"id_syndic" => "BIGINT NOT NULL DEFAULT 0",
+		"id_objet" => "BIGINT NOT NULL DEFAULT 0",
+		"objet" => "VARCHAR(25) NOT NULL", // peut etre un contact ou un compte
+		'type' => "VARCHAR(25) NOT NULL DEFAULT ''" // euh..?
+		);
+	$syndic_liens_key = array(
+		"PRIMARY KEY" => "id_syndic, id_objet, objet",
+		"KEY id_syndic" => "id_syndic"
+		);
+	$tables_auxiliaires['spip_syndic_liens'] =
+		array('field' => &$syndic_liens, 'key' => &$syndic_liens_key);
 
 
 	return $tables_auxiliaires;

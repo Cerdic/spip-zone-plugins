@@ -152,6 +152,19 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 //		else return false;
 	}
 
+	// Les pages web deviennent des coordonnees
+	if (version_compare($current_version, "1.8", "<")) {
+		$ok = true;
+
+		include_spip('base/create');
+		creer_base(); //=		$ok &= sql_create("spip_syndic_liens", array('id_syndic'=>"BIGINT NOT NULL DEFAULT 0", 'id_objet'=>"BIGINT NOT NULL DEFAULT 0", 'objet'=>"VARCHAR(25) NOT NULL", 'type'=>"VARCHAR(25) NOT NULL DEFAULT ''", ), array('PRIMARY KEY'=>"id_syndic, id_objet, objet, type", 'KEY id_syndic'=>"id_syndic", false, false ) );
+
+		if ($ok){ // "create" ne renvoit rien :-/
+			ecrire_meta($nom_meta_base_version, $current_version="1.8");
+		}
+		else return false;
+	}
+
 }
 
 function coordonnees_vider_tables($nom_meta_base_version) {
@@ -162,6 +175,7 @@ function coordonnees_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_numeros_liens");
 	sql_drop_table("spip_emails");
 	sql_drop_table("spip_emails_liens");
+	sql_drop_table("spip_syndic_liens"); // peut etru utilise par d'autres plugins non ?
 
 	effacer_meta('coordonnees');
 	effacer_meta($nom_meta_base_version);
