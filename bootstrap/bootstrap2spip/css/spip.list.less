@@ -4,50 +4,46 @@
 
 @import "css/variables.less";
 
-/* Habillage general des menus de navigation */
-//.menu { clear: both; margin-bottom: /*@margin-bottom*/1.5em/*/@*/; text-align: left; }
-//.menu > h1,
-//.menu > h2,
-//.menu > h3,
-//.menu > h4,
-//.menu > h5,
-//.menu > h6 {margin-bottom: 0;}
-//
-//.menu-items { margin: 0; padding: 0; list-style: none; border-bottom: 1px solid #ddd; }
-//.menu-items .item { margin: 0; padding: /*@quart-margin-bottom*/0.375em/*/@*/;}
-//.menu-items .menu-items { margin-left: 1em; border: 0; }
-//.menu-items .menu-items .item { padding: 0; border: 0; }
-//
-//
-/* habillage barre de nav horizontale */
-//.hornav {background:#eee;border-left: 1px solid #eee;border-right: 1px solid #eee;}
-//.hornav .menu {margin: 0;}
-//.hornav .menu-items {float:left;width: 100%;border: 0;}
-//.hornav .menu-items .item {float:left;padding: 0;}
-//.hornav .item a {color:#333;font-weight:bold;text-decoration: none;display:block;padding:/*@demi-margin-bottom*/0.75em/*/@*/;}
-//.hornav .item a:hover {background:#ddd;color:#222;}
-//.hornav .on {color:#000;background: #fff;}
-//.hornav .on a {color:#000;}
-//
-//
 /* Listes d'items */
-.liste {margin-bottom: @baseLineHeight / 2};
+/*
+.liste[.long][.short]
+  .liste-items[.long][.short]
+    .item
+*/
 
+.liste {margin-bottom: @baseLineHeight};
+.liste.short {margin-bottom: @baseLineHeight / 2};
+.liste.long {margin-bottom: @baseLineHeight*2;}
 
 .liste-items {margin-left: 0; list-style: none; border-bottom:0;border-top: 1px solid @hrBorder;}
 //.liste .liste-items {margin-bottom: 0;}
 .liste-items .item {padding:@paddingLarge;padding-left:0;padding-right:0;clear:both; overflow:hidden;border-bottom: 1px solid @hrBorder;}
-.secondary .liste-items .item {padding:@paddingSmall;padding-left:0;padding-right:0;}
-.resume .liste-items .item {padding: 0;}
-//.liste-items .item .h3 { margin: /*@demi-margin-bottom*/0.75em/*/@*/ 0;}
-//.liste-items .item .h3 a:hover { text-decoration:none;}
-//
-//.liste-items .item:hover {background-color: @grayLighter;}
-.liste.articles .spip_logos { float: right; clear: right; margin: @paddingLarge; margin-top: 0;margin-right: 0; }
-.liste.resume {clear: both;margin-bottom: @baseLineHeight*2;}
-//.liste .articles .item .introduction { margin-top: 0.30em; line-height: 1.40em; padding: 0.5em 0 1.5em 1em;}
-//
-//
-/* plan du site */
-//ul.plan {margin-bottom: /*@margin-bottom*/1.5em/*/@*/;}
-//ul.plan li {margin-left: /*@text-indent*/50px/*/@*/;list-style-type: disc;}
+.liste-items .item .hentry {margin-bottom: 0;}
+
+.liste-items {
+  .info-publi,.meta-publi {display: none;}
+}
+.long .liste-items,.liste-items.long {
+  .item {position: relative;}
+  .info-publi {display: block;}
+  .entry-content {margin-bottom: @baseLineHeight+@baseFontSize;}
+  .meta-publi {display:block;min-height: @baseLineHeight;padding:@paddingLarge;padding-left: 2em;margin-bottom: 0;position: absolute;bottom:0;left:0;}
+  .lire-la-suite {display:block; position: absolute;z-index: 10;bottom:0;left:0;text-align: right;padding:@paddingLarge;padding-left:0;line-height: @baseLineHeight;font-size: @baseFontSize;}
+}
+
+.short .liste-items,.liste-items.short {
+  .item {padding:@paddingSmall;padding-left:0;padding-right:0;}
+  .entry-title {font-size: inherit;line-height: inherit;}
+  .info-publi,.spip_logos,.entry-content,.meta-publi,lire-la-suite {display: none;}
+}
+
+
+.secondary .liste-items {
+  .item {padding:@paddingSmall;padding-left:0;padding-right:0;}
+  .spip_logos {max-width: 2.5*@baseLineHeight;}
+  .entry-content {max-height: 5*@baseLineHeight;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;}
+}
+.secondary .liste-items.long {
+  .entry-content {max-height: 10*@baseLineHeight;}
+}
+
