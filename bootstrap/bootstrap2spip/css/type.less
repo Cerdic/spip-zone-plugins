@@ -46,5 +46,11 @@ sc { font-variant: small-caps; }
 .texteencadre-spip {}
 
 /* Notes */
+.notes {small; border-top: 2px solid lighten(@grayLight, 20%);padding-top: @baseLineHeight;margin-top: @baseLineHeight;max-width: 4*(@gridColumnWidth+@gridGutterWidth);}
+.notes > div p {font-size: inherit;line-height: inherit;font-weight: 200;}
 .notes > div {padding-left: @gridColumnWidth+@gridGutterWidth; position: relative; }
 .notes .spip_note_ref { display:block;position:absolute;left:0;width: @gridColumnWidth;}
+.secondary {
+  .notes > div {padding-left: 2*@gridGutterWidth;}
+  .notes .spip_note_ref { width: 2*@gridGutterWidth;}
+}
