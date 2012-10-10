@@ -1,7 +1,7 @@
 <paquet
 	prefix="basicone"
 	categorie="theme"
-	version="0.0.91"
+	version="0.1.0"
 	etat="stable"
 	compatibilite="[3.0.0-beta;3.0.*]"
 	logo="images/basicone.png"
