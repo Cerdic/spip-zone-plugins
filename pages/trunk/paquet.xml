@@ -13,6 +13,7 @@
 	<!-- Gestion des pages sans rubrique -->
 
 	<auteur>RastaPopoulos</auteur>
+	<auteur url="http://www.ldd.fr">Les Développements Durables</auteur>
 	<licence>GPL</licence>
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/pages_tables.php" />
