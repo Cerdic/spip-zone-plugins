@@ -62,7 +62,7 @@ On liste les langues utilisees dans le site
 		Si la langue est celle en cours, afficher celle-ci en gras, sans lien
 		]
 		[(#VALEUR|=={#ENV{lang}}|oui)
-			[<strong class="langue_#VALEUR" lang="#VALEUR" title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]">(#GET{nom_langue}|ucfirst)</strong>]
+			[<strong class="langue_#VALEUR" title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]">(#GET{nom_langue}|ucfirst)</strong>]
 		]
         [(#CONFIG{menu_lang_liens/formatliste,bloc}|=={'liste'}|oui)</li>]
 	</BOUCLE_ListeLangues>
