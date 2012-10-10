@@ -1,20 +1,49 @@
 @import "bootstrap/css/thumbnails.less";
 
-/* mapper avec le plugin album */
-.album .thumbnails li {width: 29%;float: left;}
-.album .thumbnails li:nth-child(3n-2) {clear: left;}
-.span5,
-.span6 {
-  .album .thumbnails li {width: 27%;}
+// The Grid
+#thumbgrid {
+
+  .one () {
+    .thumbnails {margin-left: 0;}
+    .thumbnails li {width: auto;float:none;clear: none;margin-left: 0;}
+    .thumbnails li:nth-child(2n-1) {width: auto;float:none;clear: none;margin-left: 0;}
+    .thumbnails li:nth-child(2n) {width: auto;float:none;clear: none;margin-left: 0;}
+  }
+
+  .two (@width) {
+    .thumbnails {margin-left: 0;}
+    .thumbnails li {width: @width;float: left;}
+    .thumbnails li:nth-child(2n-1) {clear: both;float: left;margin-right: 0;margin-left: 0;}
+    .thumbnails li:nth-child(2n) {clear: none;float: right;margin-left: 0;}
+  }
+
+  .three(@width){
+    .thumbnails {margin-left: 0;}
+    .thumbnails li {width: @width;float: left;}
+    .thumbnails li:nth-child(3n-2) {clear: both;float: left;margin-right: 0;margin-left: 0;}
+    .thumbnails li:nth-child(3n-1) {clear: none;float: left;margin-left: (100% - 3*@width)/2 - 0.1%;margin-right: 0;}
+    .thumbnails li:nth-child(3n) {clear: none;float: right;margin-left: 0;}
+  }
+
+  .four(@width){
+    .thumbnails li {width: @width;float: left;}
+    .thumbnails li:nth-child(4n-3) {clear: both;float: left;margin-right: 0;margin-left: 0;}
+    .thumbnails li:nth-child(4n-2) {clear: none;float: left;margin-left: (100% - 4*@width)/3 - 0.1%;margin-right: 0;}
+    .thumbnails li:nth-child(4n-1) {clear: none;float: left;margin-left: (100% - 4*@width)/3 - 0.1%;margin-right: 0;}
+    .thumbnails li:nth-child(4n) {clear: none;float: right;margin-left: 0;}
+  }
+
 }
+
+/* mapper avec le plugin album */
+.album {#thumbgrid > .three(31%)}
 .span3,
 .span4{
-  .album .thumbnails li {width: 41%;clear: none;}
-  .album .thumbnails li:nth-child(2n-1) {clear: left;}
+  .album {#thumbgrid > .two(48%)}
 }
 .span1,
 .span2{
-  .album .thumbnails li {width: auto;float:none;clear: none;}
+  .album {#thumbgrid > .one()}
 }
 
 .thumbnails li img {max-width: 93%;}
@@ -29,8 +58,6 @@
 }
 
 
-
-
 @media (min-width: 1200px) {
   .span7,
   .span8,
@@ -38,39 +65,29 @@
   .span10,
   .span11,
   .span12 {
-    .album .thumbnails li {width: 20%;clear: none;}
-    .album .thumbnails li:nth-child(4n-3) {clear: left;}
+    .album {#thumbgrid > .four(22%)}
   }
   .span3{
-    .album .thumbnails li {width: 40%;}
+    .album {#thumbgrid > .two(48%)}
   }
-
 }
 @media (min-width: 768px) and (max-width: 979px) {
   .span7 {
-    .album .thumbnails li {width: 28%;}
+    .album {#thumbgrid > .three(30%)}
   }
   .span5{
-    .album .thumbnails {  margin-left: -@gridGutterWidth;}
-    .album .thumbnails li {width: 43%;float: left;clear: none;margin-left: @gridGutterWidth;}
-    .album .thumbnails li:nth-child(2n-1) {clear: left;}
+    .album {#thumbgrid > .two(48%)}
   }
   .span3{
-    .album .thumbnails li {width: auto;float:none;clear: none;}
+    .album {#thumbgrid > .one()}
   }
 }
 @media (max-width: 767px) {
-  .album .thumbnails {  margin-left: -@gridGutterWidth;}
-  .album .thumbnails li {width: 45%;float: left;clear: none;margin-left: @gridGutterWidth;}
-  .span5,.span6{.album .thumbnails li {width: 45%;}}
-  .album .thumbnails li:nth-child(3n-2) {clear: none;}
-  .album .thumbnails li:nth-child(2n-1) {clear: left;}
+  .album {#thumbgrid > .two(48%)}
 }
 @media (max-width: 450px) {
-  .album .thumbnails li {width: 40%;}
-  .span5,.span6{.album .thumbnails li {width: 40%;}}
+  .album {#thumbgrid > .two(48%)}
 }
 @media (max-width: 380px) {
-  .album .thumbnails {  margin-left:0}
-  .album .thumbnails li {float: none;margin-left: 0;width: auto;}
+  .album {#thumbgrid > .one()}
 }
