@@ -62,7 +62,7 @@
 		<nom>grappes_objets_lies</nom>
 		<inclure>grappes_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.0;1.1.99]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="SelecteurGenerique" version="[0.2;]" />
 	<necessite id="spip_bonux" version="[2.2.21;]" />
 	<bouton id='grappes2' parent="naviguer">
