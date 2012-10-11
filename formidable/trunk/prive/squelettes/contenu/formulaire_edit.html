@@ -1,5 +1,10 @@
 <BOUCLE_autoriser(CONDITION){si #AUTORISER{editer, formulaire}}>
 [(#BOITE_OUVRIR{'','info'})]
+<script type="text/javascript">
+jQuery('.bd').hover(function(){
+jQuery('*').removeAttr('required');
+});
+</script>
 		<BOUCLE_formulaire(FORMULAIRES){id_formulaire=#VAL{id_formulaire}|_request}>
 			[(#URL_ECRIRE{formulaire}|parametre_url{id_formulaire,#ID_FORMULAIRE}|icone_verticale{<:retour:>,formulaire,formulaire-24,left})]
 
