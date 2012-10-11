@@ -11,13 +11,15 @@
     .item
 */
 
+@listBorderColor : (4*(@bodyBackground/5)+@gray/5);
+
 .liste {margin-bottom: @baseLineHeight};
 .liste.short {margin-bottom: @baseLineHeight / 2};
 .liste.long {margin-bottom: @baseLineHeight*2;}
 
-.liste-items {margin-left: 0; list-style: none; border-bottom:0;border-top: 1px solid @hrBorder;}
+.liste-items {margin-left: 0; list-style: none; border-bottom:0;border-top: 1px solid @listBorderColor;}
 //.liste .liste-items {margin-bottom: 0;}
-.liste-items .item {padding:@paddingLarge;padding-left:0;padding-right:0;clear:both; overflow:hidden;border-bottom: 1px solid @hrBorder;}
+.liste-items .item {padding:@paddingLarge;padding-left:0;padding-right:0;clear:both; overflow:hidden;border-bottom: 1px solid @listBorderColor;}
 .liste-items .item .hentry {margin-bottom: 0;}
 .liste-items .item .entry-title:first-child {margin-top: 0;}
 .liste-items .item-header {.liste-items .item;
