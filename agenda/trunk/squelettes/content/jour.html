@@ -13,21 +13,22 @@
 <div class="content-principal">
 
 	<div class="cartouche">
-		<h1 class="h1"><:agenda:titre_sur_l_agenda:></h1>
+		<h1 class="h1"><:agenda:titre_sur_l_agenda:>
+		<small>[(#GET{date_debut}|affdate)]</small>
+		</h1>
 	</div>
 
 </div>
 
 <B_ev>
-	[<h2>[(#GET{date_debut}|affdate)]&nbsp;: (#TOTAL_BOUCLE|singulier_ou_pluriel{agenda:info_un_evenement,agenda:info_nombre_evenements})</h2>]
-	<ul class="liste-items evenements">
-	<BOUCLE_ev(EVENEMENTS){!evenement_passe #GET{date_debut}}{!evenement_a_venir #GET{date_fin}}{par date_debut}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>
-		[(#TOTAL_BOUCLE|>{0}|sinon_interdire_acces{#URL_EVENEMENT})]
-		<li class="item">
-			#MODELE{evenement_vevent}
-		</li>
-	</BOUCLE_ev>
-	</ul>
+	<div class="liste long evenements">
+		<ul class="liste-items evenements">
+		<BOUCLE_ev(EVENEMENTS){!evenement_passe #GET{date_debut}}{!evenement_a_venir #GET{date_fin}}{par date_debut}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>
+			[(#TOTAL_BOUCLE|>{1}|sinon_interdire_acces{#URL_EVENEMENT})]
+			<li class="item">#INCLURE{fond=inclure/resume/evenement,id_evenement}</li>
+		</BOUCLE_ev>
+		</ul>
+	</div>
 </B_ev>
 <p><:agenda:info_aucun_evenement:></p>
 <//B_ev>
