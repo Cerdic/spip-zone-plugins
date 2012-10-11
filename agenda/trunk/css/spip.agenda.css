@@ -10,7 +10,7 @@
 .long .liste-items .evenement .banner .year {display: block;text-align: center;font-size: 0.85em;}
 
 /*.long .liste-items.evenements .item.month, .long .liste-items.evenements .item.month {padding: 0.75em;background: #e4e4e4; text-transform: uppercase;}*/
-.liste-items.evenements .item.fini  .entry-title {font-size: inherit;line-height: inherit;}
+.liste-items.evenements .item.fini  .entry-title a {color:#ccc;}
 .liste-items.evenements .item.fini  .entry-content {margin-bottom: 0;max-height: 4.5em;overflow: hidden;}
 .liste-items.evenements .item.fini  .meta-publi {display: none;}
 .liste-items.evenements .item.fini  .lire-la-suite {display: none;}
