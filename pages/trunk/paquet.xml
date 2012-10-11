@@ -13,7 +13,7 @@
 	<!-- Gestion des pages sans rubrique -->
 
 	<auteur>RastaPopoulos</auteur>
-	<auteur url="http://www.ldd.fr">Les Développements Durables</auteur>
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 	<licence>GPL</licence>
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/pages_tables.php" />
@@ -24,9 +24,8 @@
 	<pipeline nom="editer_contenu_objet" inclure="pages_pipelines.php" />
 	<pipeline nom="pre_edition" action="pre_edition_ajouter_page" inclure="pages_pipelines.php" />
 
-
 	<utilise nom="polyhier" />
-	<menu nom="pages_tous" titre="pages:pages_uniques" parent="menu_edition" icone="images/page-16.png" />
 
+	<menu nom="pages_tous" titre="pages:pages_uniques" parent="menu_edition" icone="images/page-16.png" />
 	<menu nom="page_creer" titre="pages:creer_page" parent="outils_rapides" icone="images/page-new-16.png" action="article_edit" parametres="new=oui&amp;modele=page&amp;id_rubrique=-1" />
 </paquet>
