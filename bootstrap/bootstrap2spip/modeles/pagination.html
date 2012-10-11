@@ -12,7 +12,7 @@
 	(#SET{item, #ENV{page_courante}|moins{2}|mult{#ENV{pas}} })
 
 	][<li
-	class="prev[(#ENV{page_courante}|<={1}|oui)disabled]">(#ENV{url}
+	class="prev previous[(#ENV{page_courante}|<={1}|oui)disabled]">(#ENV{url}
 	|parametre_url{#ENV{debut},#GET{item}}
 	|ancre_url{#ENV{ancre}}
 	|lien_ou_expose{'<i class="icon-backward"></i>',#ENV{page_courante}|<={1},'lien_pagination',<:zpip:pagination_prev:>,nofollow}|replace{<strong,<span}|replace{</strong,</span}
