@@ -164,7 +164,7 @@ $type_page = $url_decodee[0];
 $type_page = $type_page ? $type_page : $_GET[page];
 
 // si on est pas déjà en train de rediriger vers les pages mobiles
-if ($type_page!="pages_mobiles") {
+if ($type_page!="pages_mobiles" AND !test_espace_prive()) {
 
 	// Pas de type de page alors c'est le sommaire
 	if (!$type_page) $type_page = "sommaire";
