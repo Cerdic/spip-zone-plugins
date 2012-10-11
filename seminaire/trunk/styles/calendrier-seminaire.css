@@ -5,7 +5,7 @@
 .menu-titre{
 	text-align:center;
 }
-
+#calendar .menu-titre{display:none;}
 .fc-button-content{
 	height:1.5em;
 	line-height:1.5em;
@@ -89,3 +89,11 @@ border: 0;
 width: 100%;
 margin-bottom: -28px;
 }
+.espace {
+	height: 1.5em;
+	line-height:0.5em;
+	font-size:2px;
+}
+
+
+
