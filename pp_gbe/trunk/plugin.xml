@@ -1,15 +1,15 @@
 <plugin>
 	<nom> Caract&egrave;res Gbe pour Porte Plume </nom>
-	<auteur> [gilcot->http://http://www.spip-contrib.net/gilcot] </auteur>
+	<auteur> [gilcot->http://http://www.spip-contrib.net/gilcot] -- [ajavio.org->http://ajavio.org/Postambule.html] </auteur>
 	<licence> GPL v3 </licence>
-	<version> 0.5.2 </version>
-	<etat> test </etat>
+	<version> 1.0.0 </version>
+	<etat> dev </etat>
 	<description>
 Ajout de boutons au porte plume afin de pouvoir ins&#233;rer facilement les caract&egrave;res propres &agrave; la famille des langues [?Gbe] (et plus de langues europ&eacute;ennes) avec n'importe quel clavier.
 
 <small>Lors de l'adaptation au Porte Plume, on a choisi de ne plus s'appuyer sur la langue du document puisque si le plugin est install&eacute; sur un site c'est qu'il y a un besoin effectif de ces caract&egrave;res et qu'il y a de fortes chances que le site soit multilingue.</small>
 	</description>
-	<lien>http://www.ajavio.org/</lien>
+	<lien>http://contribs.spip.net/4255</lien>
 	<prefix>pp_gbe</prefix>
 	<icon>img_pack/pp_gbe.png</icon>
 	<pipeline>

@@ -1,0 +1,24 @@
+<plugin>
+	<nom> Caract&egrave;res Gbe pour Porte Plume </nom>
+	<auteur> [gilcot->http://http://www.spip-contrib.net/gilcot] -- [ajavio.org->http://ajavio.org/Postambule.html]</auteur>
+	<licence> GPL v3 </licence>
+	<version> 1.0.0 </version>
+	<etat> test </etat>
+	<description>
+Ajout de boutons au porte plume afin de pouvoir ins&#233;rer facilement les caract&egrave;res propres &agrave; la famille des [?langues Gbe] (et plus de langues europ&eacute;ennes) avec n'importe quel clavier.
+	</description>
+	<lien>http://contribs.spip.net/4255</lien>
+	<prefix>pp_gbe</prefix>
+	<icon>img_pack/pp_gbe.png</icon>
+	<pipeline>
+		<nom>porte_plume_barre_pre_charger</nom>
+		<inclure>pp_gbe.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_lien_classe_vers_icone</nom>
+		<inclure>pp_gbe.php</inclure>
+	</pipeline>
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.0.3;2,1.99]" />
+	<necessite id="porte_plume" version="[1.2.2;]" />
+</plugin>
