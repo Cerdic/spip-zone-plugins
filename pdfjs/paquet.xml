@@ -12,4 +12,5 @@
 	<credit lien="http://www.erational.org">erational (mise en plugin)</credit>  
 	<licence lien="https://github.com/mozilla/pdf.js/blob/master/LICENSE">license</licence>
 	<copyright>2011 Mozilla Foundation</copyright>
+	<utilise nom="gviewer" />
 </paquet>
