@@ -1,10 +1,23 @@
 <?php
 
-if (!test_espace_prive()){
 function filtre_lien_ou_expose_dist($url,$libelle=NULL,$on=false,$class="",$title="",$rel="", $evt=''){
 	if ($on) {
-		$bal = 'a';
-		$att = 'href="#" class="on active'.($class?' '.attribut_html($class):'').'"';
+		$bal = 'strong';
+		$class = "";
+		$att = "";
+		// si $on passe la balise et optionnelement une ou ++classe
+		// a.active span.selected.active etc....
+		if (is_string($on) AND (strncmp($on,'a',1)==0 OR strncmp($on,'span',4)==0 OR strncmp($on,'strong',6)==0)){
+			$on = explode(".",$on);
+			// on verifie que c'est exactement une des 3 balises a, span ou strong
+			if (in_array(reset($on),array('a','span','strong'))){
+				$bal = array_shift($on);
+				$class = implode(" ",$on);
+				if ($bal=="a")
+					$att = 'href="#" ';
+			}
+		}
+		$att .= 'class="on active'.($class?' '.attribut_html($class):'').'"';
 	} else {
 		$bal = 'a';
 		$att = "href='$url'"
@@ -16,5 +29,4 @@ function filtre_lien_ou_expose_dist($url,$libelle=NULL,$on=false,$class="",$titl
 	if ($libelle === NULL)
 		$libelle = $url;
 	return "<$bal $att>$libelle</$bal>";
-}
 }
