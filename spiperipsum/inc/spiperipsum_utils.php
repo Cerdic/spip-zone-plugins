@@ -95,7 +95,7 @@ function charger_lectures($langue, $jour){
 		$tableau['evangile']['texte'] = $textes[2];
 		$tableau['evangile'] = preg_replace(',</?font\b.*>,UimsS', '', $tableau['evangile']);
 		$tableau['evangile'] = preg_replace(',</?br\b.*>,UimsS', '<br />', $tableau['evangile']);
-		$tableau['evangile'] = str_replace('©', '&copy;', $tableau['evangile']);
+		$tableau['evangile'] = str_replace('¬©', '&copy;', $tableau['evangile']);
 		// Traitement de la premiere lecture
 		$url = "http://www.levangileauquotidien.org/ind-gospel-d.php?language=".$code_langue."&typeRead=FR".$url_date;
 		$textes = extraire_balises(recuperer_page($url), 'font');
@@ -104,7 +104,7 @@ function charger_lectures($langue, $jour){
 		$tableau['premiere']['texte'] = $textes[2];
 		$tableau['premiere'] = preg_replace(',</?font\b.*>,UimsS', '', $tableau['premiere']);
 		$tableau['premiere'] = preg_replace(',</?br\b.*>,UimsS', '<br />', $tableau['premiere']);
-		$tableau['premiere'] = str_replace('©', '&copy;', $tableau['premiere']);
+		$tableau['premiere'] = str_replace('¬©', '&copy;', $tableau['premiere']);
 		// Traitement de la seconde lecture - uniquement le dimanche
 		if (date2jour_semaine($date) == 0) {
 			$url = "http://www.levangileauquotidien.org/ind-gospel-d.php?language=".$code_langue."&typeRead=SR".$url_date;
@@ -114,12 +114,12 @@ function charger_lectures($langue, $jour){
 			$tableau['seconde']['texte'] = $textes[2];
 			$tableau['seconde'] = preg_replace(',</?font\b.*>,UimsS', '', $tableau['seconde']);
 			$tableau['seconde'] = preg_replace(',</?br\b.*>,UimsS', '<br />', $tableau['seconde']);
-			$tableau['seconde'] = str_replace('©', '&copy;', $tableau['seconde']);
+			$tableau['seconde'] = str_replace('¬©', '&copy;', $tableau['seconde']);
 		}
 		// Traitement du psaume
 		$url = "http://www.levangileauquotidien.org/ind-gospel-d.php?language=".$code_langue."&typeRead=PS".$url_date;
 		$page = recuperer_page($url);
-		// -- on traite façon particuliere les numéros de verset du psaume
+		// -- on traite fa√ßon particuliere les num√©ros de verset du psaume
 		preg_match('/,[0-9\.\-]*\./', $page, $fin_verset);
 		$textes = extraire_balises($page, 'font');
 		$tableau['psaume']['titre'] = $textes[0];
@@ -127,7 +127,7 @@ function charger_lectures($langue, $jour){
 		$tableau['psaume']['texte'] = $textes[2];
 		$tableau['psaume'] = preg_replace(',</?font\b.*>,UimsS', '', $tableau['psaume']);
 		$tableau['psaume'] = preg_replace(',</?br\b.*>,UimsS', '<br />', $tableau['psaume']);
-		$tableau['psaume'] = str_replace('©', '&copy;', $tableau['psaume']);
+		$tableau['psaume'] = str_replace('¬©', '&copy;', $tableau['psaume']);
 		// Traitement du commentaire
 		// -- titre du commentaire
 		$url = "http://feed.evangelizo.org/reader.php?lang=".$code_langue."&type=comment_t&date=".date("Ymd", strtotime($date));
@@ -150,7 +150,7 @@ function charger_lectures($langue, $jour){
 		$tableau['commentaire']['texte'] = preg_replace('#(</?br\b.*>)#UimsS', '<br />', $tableau['commentaire']['texte']);
  		$tableau['commentaire']['texte'] = preg_replace('#(&nbsp;){2,}#UimsS', '', $tableau['commentaire']['texte']);
 		$tableau['commentaire']['texte'] = preg_replace(',<p\b.*>.*</p\b.*>,UimsS', '', $tableau['commentaire']['texte']);
-		$tableau['commentaire']['texte'] = preg_replace(',ú,UimsS', '&oelig;', $tableau['commentaire']['texte']);
+		$tableau['commentaire']['texte'] = preg_replace(',√∫,UimsS', '&oelig;', $tableau['commentaire']['texte']);
 		$tableau['commentaire']['texte'] = trim($tableau['commentaire']['texte']);
 
 		// Traitement du saint du jour
@@ -159,7 +159,7 @@ function charger_lectures($langue, $jour){
 		$page = recuperer_page($url);
 		$balise = extraire_balises($page, 'a');
 		$titre = preg_replace(',</?a\b.*>,UimsS', '', $balise[0]);
-		$tableau['saint']['titre'] = preg_replace(',Ü,UimsS', '&dagger;', $titre);
+		$tableau['saint']['titre'] = preg_replace(',√ú,UimsS', '&dagger;', $titre);
 		// -- Traitement des textes
 		$attribut = extraire_attribut($balise, 'onclick');
 		preg_match(';window.open\(\'(.[^\s,\']+);i', $attribut[0], $url_texte);
