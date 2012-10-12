@@ -2,9 +2,9 @@
 function spip_suggest_complete($q) {
 	define('_MYSQL_DIR', '/var/lib/mysql/');
 	// lire la base de donnees
-	$s = lire_config('spip_suggest/db_name');
+	$s = lire_config('db_name');
 	// lire les cles fulltext
-	$k = lire_config('spip_suggest/db_keys');
+	$k = lire_config('db_keys');
 
 	$tout = array();
 	// on parse les donnes pour stocker tout dans un tableau
@@ -24,7 +24,7 @@ function spip_suggest_complete($q) {
 	$res = array();
 	foreach (array_map('strtolower',$lines) as $line)
 		$res[trim($line)]++;
-	if (lire_config('spip_suggest/suggest_classement', 'nom') == 'popularite') {
+	if (lire_config('suggest_classement', 'nom') == 'popularite') {
 		arsort($res);
 	}
 	foreach ($res as $key=>$value) {
@@ -55,8 +55,8 @@ function spip_suggest_insert_head($flux) {
 				return row[0] + " (" + row[1] + " r&eacute;sultats)";
 			} 
 		 }
-		$("'.lire_config("spip_suggest/suggest_selecteur", "#recherche").'").autocomplete("'.generer_url_public("suggest").'", {
-			width: '.lire_config("spip_suggest/suggest_width", 205).',
+		$("'.lire_config("suggest_selecteur", "#recherche").'").autocomplete("'.generer_url_public("suggest").'", {
+			width: '.lire_config("suggest_width", 205).',
 			matchContains: true, 
 			selectFirst: false,
 			formatItem: formatItem
