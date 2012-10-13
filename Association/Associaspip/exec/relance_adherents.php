@@ -8,10 +8,10 @@
  *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION"))
+	return;
 
-function exec_relance_adherents()
-{
+function exec_relance_adherents() {
 	if (!autoriser('editer_membres', 'association')) {
 			include_spip('inc/minipres');
 			echo minipres();

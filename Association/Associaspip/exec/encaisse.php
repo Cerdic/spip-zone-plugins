@@ -1,32 +1,26 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & Fran�ois de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010 Emmanuel Saint-James
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
-
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 include_spip ('inc/navigation_modules');
 
-function exec_encaisse()
-{
-	if (!autoriser('associer', 'comptes')) {
+function exec_encaisse() {
+	if (!autoriser('voir_compta', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
 // initialisations
 		$plan = sql_countsel('spip_asso_plan');
 		$id_exercice = association_passeparam_exercice();
-		if(!$id_exercice){ // on recupere l'id_exercice dont la date "fin" est "la plus grande"
-			$id_exercice = sql_getfetsel('id_exercice','spip_asso_exercices','','');
-		}
 // traitements
 		onglets_association('titre_onglet_comptes', 'comptes');
 		// INTRO : rappel de l'exercicee affichee
@@ -59,7 +53,7 @@ function exec_encaisse()
 			$lesEcritures[$val['code']] = $val; // on recupere les informations de la requete
 #			$lesEcritures[$val['code']]['solde_actuel'] = $val['recettes']-$val['depenses']; // on ajoute la donnee du solde des flux sur la periode
 		}
-		/* Afficher les releves de situation des encaisses /!\ Tous les comptes financiers ne sont normalement pas concernes : idealement il aurait fallu configurer un groupe "caisse" (51xx) et un groupe "banque" (53xx) mais d'une part nous ignorons si d'autres systemes comptables n'utilisent pas plus de groupes et d'autre part (meme une association francaise) peut bien ne pas avoir les deux types de comptes... */
+		// Afficher les releves de situation des encaisses /!\ Tous les comptes financiers ne sont normalement pas concernes : idealement il aurait fallu configurer un groupe "caisse" (51xx) et un groupe "banque" (53xx) mais d'une part nous ignorons si d'autres systemes comptables n'utilisent pas plus de groupes et d'autre part (meme une association francaise) peut bien ne pas avoir les deux types de comptes...
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_encaisse'>\n";
 		echo "<thead>\n<tr>";
 		echo '<th colspan="2">&nbsp;</th>';
@@ -81,7 +75,7 @@ function exec_encaisse()
 		echo '<th class="decimal">'. association_formater_prix($total_initial) .'</th>';
 		echo '<th class="decimal">'. association_formater_prix($total_actuel) .'</th>';
 		$solde_virementsinternes = sql_getfetsel('SUM(recette)-SUM(depense)', 'spip_asso_comptes', 'imputation='.sql_quote($GLOBALS['association_metas']['pc_intravirements']), 'imputation');
-		if( $solde_virementsinternes!=0 ){ // desequilible du compte de virements internes (ceci ne devrait arriver que si l'operation n'est pas enregistree via ce plugin !) /!\ Attention a bien forcer la comparaison avec zero car '0.00' sera faux !
+		if( $solde_virementsinternes!=0 ) { // desequilible du compte de virements internes (ceci ne devrait arriver que si l'operation n'est pas enregistree via ce plugin !) /!\ Attention a bien forcer la comparaison avec zero car '0.00' sera faux !
 			echo '<tr class="erreur"><td  colspan="3" class="message_erreur">'. _T('asso:erreur_equilibre_comptes58') .'</td><td class="decimal">'. association_formater_prix($solde_virementsinternes) .'</td></tr>';
 		}
 		echo "</tr>\n</tfoot>\n</table>\n";

@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_groupes()
-{
+function exec_groupes() {
 	if (!autoriser('voir_groupes', 'association', 100)) { // l'id groupe passe en parametre est a 100 car ce sont les groupes definis par l'utilisateur et non ceux des autorisation qu'on liste dans cette page.
 		include_spip('inc/minipres');
 		echo minipres();

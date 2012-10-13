@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
     return;
 
-function action_editer_asso_ressources()
-{
+function action_editer_asso_ressources() {
     $securiser_action = charger_fonction('securiser_action', 'inc');
     $id_ressource=$securiser_action();
     $erreur = '';

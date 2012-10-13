@@ -17,7 +17,7 @@ function action_relancer_adherents() {
 	$sujet = _request('sujet');
 	$relance = association_recuperer_entier('relance');
 	$message = html_entity_decode(_request('message'), ENT_QUOTES, 'UTF-8');
-	$statut_tab = association_recuperer_liste('statut', true); // contient un tableau id_auteur => statut_interne
+	$statut_tab = association_recuperer_liste('statut', TRUE); // contient un tableau id_auteur => statut_interne
 	$exp = $GLOBALS['association_metas']['nom'].'<'.$GLOBALS['association_metas']['email'].'>';
 	include_spip ('inc/envoyer_mail'); //= $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 

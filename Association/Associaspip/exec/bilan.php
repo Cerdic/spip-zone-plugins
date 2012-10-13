@@ -11,9 +11,9 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_bilan()
-{
-	if (!autoriser('associer', 'comptes')) {
+// Version HTML de la synthese des Comptes de Bilan
+function exec_bilan() {
+	if (!autoriser('voir_compta', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -42,10 +42,10 @@ function exec_bilan()
 			$intitule_destinations[$d['id_destination']] = $d['intitule'];
 		}
 		if ($GLOBALS['association_metas']['destinations']) { // on affiche une liste de choix de destinations
-			echo debut_cadre_enfonce('',true);
+			echo debut_cadre_enfonce('',TRUE);
 			echo '<h3>'. _T('plugins_vue_liste') .'</h3>';
 			echo association_selectionner_destinations($ids_destinations, "bilan&exercice=$id_exercice", '<p class="boutons"><input type="submit" value="'. _T('asso:compte_resultat') .'" /></p>', FALSE); // selecteur de destinations
-			echo fin_cadre_enfonce(true);
+			echo fin_cadre_enfonce(TRUE);
 		}
 		debut_cadre_association('finances-24.png', 'resultat_courant');
 		// Filtres
@@ -68,9 +68,9 @@ function exec_bilan()
 		);
 		foreach ($ids_destinations as $id_destination) { // on boucle sur le tableau des destinations en refaisant le fetch a chaque iteration
 			// TABLEAU EXPLOITATION
-			echo debut_cadre_relief('', true, '', ($id_destination ? $intitule_destinations[$id_destination] : ($GLOBALS['association_metas']['destinations']?_T('asso:toutes_destination'):'') ) );
+			echo debut_cadre_relief('', TRUE, '', ($id_destination ? $intitule_destinations[$id_destination] : ($GLOBALS['association_metas']['destinations']?_T('asso:toutes_destination'):'') ) );
 			$solde = association_liste_totaux_comptes_classes($classes, 'cpte_resultat', 0, $id_exercice, $id_destination);
-			if(autoriser('associer', 'export_comptes') && !$id_destination){ // on peut exporter : pdf, csv, xml, ...
+			if(autoriser('associer', 'export_comptes') && !$id_destination) { // on peut exporter : pdf, csv, xml, ...
 				echo "<br /><table width='100%' class='asso_tablo' cellspacing='6' id='asso_tablo_exports'>\n";
 				echo '<tbody><tr>';
 				echo '<td><b>'. _T('asso:cpte_resultat_mode_exportation') .'</b></td>';
@@ -82,7 +82,7 @@ function exec_bilan()
 				}
 				echo '</tr></tbody></table>';
 			}
-			echo fin_cadre_relief(true);
+			echo fin_cadre_relief(TRUE);
 		}
 //		bilan_encaisse();
 		fin_page_association();
@@ -98,8 +98,7 @@ function exec_bilan()
  *		que les comptes 86 et 87 s'equilibrent. Faire apparaitre dans le "bilan" uniquement le cas ou il
  *		y a desequilibre !
  */
-function bilan_encaisse()
-{
+function bilan_encaisse() {
 	$lesEcritures = array();
 	$lesEcritures['_58xx']['solde'] = $lesEcritures['_86xx']['solde'] = $lesEcritures['_87xx']['solde'] = 0;
 	$query = sql_select('*', 'spip_asso_plan', '(classe='.sql_quote($GLOBALS['association_metas']['classe_banques']).' OR classe='.sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']).') AND active=1', '',  'code' );
@@ -126,7 +125,7 @@ function bilan_encaisse()
 			}
 		}
 	}
-	echo debut_cadre_relief('', true, '', _T('asso:encaisse') );
+	echo debut_cadre_relief('', TRUE, '', _T('asso:encaisse') );
 	echo "<table width='100%' class='asso_tablo' id='asso_tablo_bilan_encaisse'>\n";
 	echo "<thead>\n<tr>";
 	echo '<th colspan="2">&nbsp;</th>';
@@ -153,14 +152,14 @@ function bilan_encaisse()
 	echo '<th  colspan="2" class="text">'. _T('asso:encaisse') .'</th>';
 	echo '<th class="decimal">'. association_formater_prix($total_initial) .'</th>';
 	echo '<th class="decimal">'. association_formater_prix($total_actuel) .'</th>';
-	if( $compteFinancier['_58xx']['solde']!=0 ){
+	if( $compteFinancier['_58xx']['solde']!=0 ) {
 		echo '<td  colspan="4" class="erreur">'. _T('asso:erreur_equilibre_comptes58') .'</td>';
 	}
-	if( $compteFinancier['_86xx']['solde']!=$compteFinancier['_87xx']['solde'] ){
+	if( $compteFinancier['_86xx']['solde']!=$compteFinancier['_87xx']['solde'] ) {
 		echo '<td  colspan="4" class="erreur">'. _T('asso:erreur_equilibre_comptes8687') .'</td>';
 	}
 	echo "</tr>\n</tfoot>\n</table>\n";
-	echo fin_cadre_relief(true);
+	echo fin_cadre_relief(TRUE);
 }
 
 ?>

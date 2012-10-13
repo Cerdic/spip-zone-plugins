@@ -15,7 +15,7 @@ function action_valider_comptes() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$securiser_action();
-	$where = sql_in('id_compte', association_recuperer_liste('definitif', true) );
+	$where = sql_in('id_compte', association_recuperer_liste('definitif', TRUE) );
 	sql_updateq('spip_asso_comptes', array('vu' => 1), $where);
 }
 

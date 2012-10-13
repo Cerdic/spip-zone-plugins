@@ -68,10 +68,9 @@
 		<titre>Associaspip</titre>
 	</bouton>
 
-
 	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[2.1.8;2.1.99]" />
-	<utilise id="fpdf" version="[0.0.1;]" />
-	<utilise id="coordonnees" version="[1.4.5;]" />
-	<utilise id="cextras" version="[0.8;]" />
+	<utilise id="fpdf" version="[0.0.1;0.1.99]" />
+	<utilise id="coordonnees" version="[1.4.5;1.5.99]" />
+	<utilise id="cextras" version="[0.8;1.99]" />
 </plugin>

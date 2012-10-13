@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_ressources()
-{
+function exec_ressources() {
 	if (!autoriser('associer', 'ressources')) {
 		include_spip('inc/minipres');
 		echo minipres();
@@ -24,10 +23,10 @@ function exec_ressources()
 		echo '<p>'._T('asso:ressources_info').'</p>';
 		// TOTAUX : nombre de ressources par statut
 		echo association_totauxinfos_effectifs('ressources', array(
-			'valide' => array( association_formater_puce('', 'verte', 'ressources_libelle_statut_ok'), sql_countsel('spip_asso_ressources', "statut='ok' OR ROUND(statut,0)>0"), ),
-			'prospect' => array( association_formater_puce('', 'orange', 'ressources_libelle_statut_suspendu'), sql_countsel('spip_asso_ressources', "statut='suspendu' OR ROUND(statut,0)<0"), ),
-			'cv' => array( association_formater_puce('', 'rouge', 'ressources_libelle_statut_reserve'), sql_countsel('spip_asso_ressources', "statut IN ('reserve',0)"), ),
-			'sorti' => array( association_formater_puce('', 'poubelle', 'ressources_libelle_statut_sorti'), sql_countsel('spip_asso_ressources', "statut IN ('sorti','',NULL)"), ),
+			'valide' => array('', sql_countsel('spip_asso_ressources', "statut='ok' OR ROUND(statut,0)>0"), association_formater_puce('', 'verte', 'ressources_libelle_statut_ok'), ),
+			'prospect' => array('', sql_countsel('spip_asso_ressources', "statut='suspendu' OR ROUND(statut,0)<0"), association_formater_puce('', 'orange', 'ressources_libelle_statut_suspendu'), ),
+			'cv' => array('', sql_countsel('spip_asso_ressources', "statut IN ('reserve',0)"), association_formater_puce('', 'rouge', 'ressources_libelle_statut_reserve'), ),
+			'sorti' => array('', sql_countsel('spip_asso_ressources', "statut IN ('sorti','',NULL)"), association_formater_puce('', 'poubelle', 'ressources_libelle_statut_sorti'), ),
 		));
 /* mdr : cela n'a de sens que si les ressources se pretent toutes sur la meme unite...
 		// STATS sur tous les prets
@@ -57,7 +56,7 @@ rdm */
 					$s_ico[$data['statut']] = 'rouge';
 					$s_css[$data['statut']] = 'cv hproduct';
 				}
-			} else switch($data['statut']){ // utilisation des anciens 4+ statuts textuels (etat de reservation)
+			} else switch($data['statut']) { // utilisation des anciens 4+ statuts textuels (etat de reservation)
 				case 'ok':
 					$s_ico[$data['statut']] = 'verte';
 					$s_css[$data['statut']] = 'valide hproduct';

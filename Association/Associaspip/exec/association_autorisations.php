@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_association_autorisations()
-{
+function exec_association_autorisations() {
 	if (!autoriser('gerer_autorisations', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();

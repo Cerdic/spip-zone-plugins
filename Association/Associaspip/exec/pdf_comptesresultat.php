@@ -4,6 +4,7 @@
  *
  * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
+ * @copyright Copyright (c) 201108 Marcel Bolla
  *
  *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
@@ -11,10 +12,9 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-// Export du Compte de Resultat au format PDF
-function exec_pdf_comptesresultat()
-{
-	if (!autoriser('associer', 'export_comptes')) {
+// Version PDF de la synthese des Comptes de Resultat
+function exec_pdf_comptesresultat() {
+	if (!autoriser('voir_compta', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

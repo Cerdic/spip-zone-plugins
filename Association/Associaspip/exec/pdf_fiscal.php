@@ -20,8 +20,7 @@ define('RECU_FISCAL', find_in_path('recu_fiscal.pdf'));
 if (!defined('SIGNATURE_PRES'))
     define('SIGNATURE_PRES', find_in_path('signature_pres.png'));
 
-function exec_pdf_fiscal()
-{
+function exec_pdf_fiscal() {
     include_spip('inc/navigation_modules');
     list($id_auteur, $mbr_qui) = association_passeparam_id('auteur', 'asso_membres');
     if ( !autoriser('associer', 'adherents') OR ($id_auteur!=$GLOBALS['visiteur_session']['id_auteur'])) {
@@ -77,8 +76,7 @@ function exec_pdf_fiscal()
     }
 }
 
-function build_pdf($code, $montant, $isodate, $nom, $prenoms, $adresse, $cp, $commune, $forme=0, $nature=0, $mode=0)
-{
+function build_pdf($code, $montant, $isodate, $nom, $prenoms, $adresse, $cp, $commune, $forme=0, $nature=0, $mode=0) {
     $pdf =& new FPDI();
     $pdf->setSourceFile(RECU_FISCAL);
     $pdf->SetFont('Arial');

@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 // http://fr.wikipedia.org/wiki/Comma-separated_values
 // (forme commune de base : champs separes par une virgule et point decimal !)
 function exec_export_soldescomptes_csv() {
-	if (!autoriser('associer', 'export_comptes')) {
+	if (!autoriser('voir_compta', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

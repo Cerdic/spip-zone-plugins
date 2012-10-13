@@ -15,7 +15,7 @@ function action_desactiver_adherents() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$securiser_action();
 	$statut_courant = association_passeparam_statut('courant');
-	$where = sql_in('id_auteur', association_recuperer_liste('id_auteurs', true) );
+	$where = sql_in('id_auteur', association_recuperer_liste('id_auteurs', TRUE) );
 	if($statut_courant==='sorti') {
 		sql_updateq('spip_asso_membres', array("statut_interne" => 'prospect'), $where);
 	} else {

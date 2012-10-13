@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
     return;
 
-function action_editer_asso_categories_dist()
-{
+function action_editer_asso_categories_dist() {
 
     $securiser_action = charger_fonction('securiser_action', 'inc');
     $id_categorie = $securiser_action();

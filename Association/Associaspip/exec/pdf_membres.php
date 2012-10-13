@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_pdf_membres()
-{
+function exec_pdf_membres() {
 	if (!autoriser('voir_membres', 'association', 0)) { // on s'assure qu'il n'y ai pas d'id associe a la demande d'autorisation sur voir_membres car on les consulte tous
 		include_spip('inc/minipres');
 		echo minipres();
@@ -49,9 +48,9 @@ function exec_pdf_membres()
 #				$type = strpos($v, 'text');
 				$type_txt = preg_match('#(char|text|var)#',$v);
 				$type_num = preg_match('#(dec|int|date|float)#',$v);
-#				$p = ($type===false) ? 'R' : (($type==0) ? 'L' : 'C');
+#				$p = ($type===FALSE) ? 'R' : (($type==0) ? 'L' : 'C');
 				$p = $type_txt?'L':($type_num?'R':'C');
-#				$n = ($type===false) ? 20 : (($type==0) ? 45 : 25);
+#				$n = ($type===FALSE) ? 20 : (($type==0) ? 45 : 25);
 				$n = $type_txt?45:($type_num?20:25);
 				$lang_clef = 'adherent_libelle_'. $k;
 				$lang_trad = _T("asso:$lang_clef");
@@ -82,13 +81,13 @@ function exec_pdf_membres()
 			if ($sent['adresse']=='on')
 				$adresses_tels[$id_auteur]['adresse'] = preg_replace('/\&nbsp\;/', " ", preg_replace('/(\s*\<br\s*\/>\s*)+/i', "\n", implode("\n\n", $adresses[$id_auteur]))); // recupere toutes les adresses dans un seul string separees par \n\n et remplace les <br/> par des \n et &nbsp; par des " " car la chaine est en HTML
 			if ($sent['telephone']=='on') {
-				$first_tel = true;
+				$first_tel = TRUE;
 				$telephones_string = '';
 				foreach ($telephones[$id_auteur] as $telephone) {
 					if (!$first_tel) {
 						$telephones_string .= "\n";
 					} else
-						$first_tel = false;
+						$first_tel = FALSE;
 					$telephones_string .=  recuperer_fond("modeles/coordonnees_telephone", array ('telephone' => $telephone));
 				}
 				$adresses_tels[$id_auteur]['telephone'] = $telephones_string;

@@ -1,14 +1,12 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & Francois de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010 Emmanuel Saint-James
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
-
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
@@ -17,9 +15,7 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/autoriser');
 
-function formulaires_ajouter_cotisation_charger_dist($id_auteur, $nom_prenom, $id_categorie, $validite)
-{
-	// la validite et le montant de la cotisation
+function formulaires_ajouter_cotisation_charger_dist($id_auteur, $nom_prenom, $id_categorie, $validite) {
 	if ($id_categorie) { // si le membre a une categorie
 		$categorie = sql_fetsel('duree, cotisation', 'spip_asso_categories', "id_categorie=". intval($id_categorie));
 		list($annee, $mois, $jour) = explode('-', $validite);
@@ -28,44 +24,30 @@ function formulaires_ajouter_cotisation_charger_dist($id_auteur, $nom_prenom, $i
 		$mois += $categorie['duree'];
 		$contexte['validite'] = date('Y-m-d', mktime(0, 0, 0, $mois, $jour, $annee));
 		$contexte['montant'] = $categorie['cotisation'];
-	} else {
+	} else { // le membre n'a pas de categorie
 		$contexte['validite'] = date('Y-m-d');
 		$contexte['montant'] = 0;
-	}
-	// la justification
-	$contexte['justification'] = _T('asso:nouvelle_cotisation') ." [$nom_prenom"."->membre$id_auteur]";
-	// pour passer securiser action
-	$contexte['_action'] = array('ajouter_cotisation',$id_auteur);
-	// on passe aussi les destinations si besoin
-	if ($GLOBALS['association_metas']['destinations']) {
-		$contexte['id_dest'] = '';
-		$contexte['montant_dest'] = '';
-		$contexte['unique_dest'] = '';
-		$contexte['defaut_dest'] = $GLOBALS['association_metas']['dc_cotisations']; // ces variables sont recuperees par la balise dynamique directement dans l'environnement
-	}
+	} // validite et montant de cotisation
+	$contexte['justification'] = _T('asso:nouvelle_cotisation') ." [$nom_prenom"."->membre$id_auteur]"; // la justification
+	$contexte['_action'] = array('ajouter_cotisation',$id_auteur); // pour passer securiser action
+	association_chargeparam_destination('cotisations', $contexte); // les destinations
+
 	return $contexte;
 }
 
 function formulaires_ajouter_cotisation_verifier_dist($id_auteur, $nom_prenom, $categorie, $validite) {
 	$erreurs = array();
-	if ($GLOBALS['association_metas']['comptes']) {
-		// verifier que le montant est bien positif ou nul
+
+	if ($GLOBALS['association_metas']['comptes'] && $GLOBALS['association_metas']['pc_cotisations']) {
 		if ($erreur = association_verifier_montant('montant') )
 			$erreurs['montant'] = $erreur;
-		// verifier validite de la date
 		if ($erreur = association_verifier_date('date') )
 			$erreurs['date'] = $erreur;
-		// verifier si besoin que le montant des destinations correspond bien au montant de l'opération, sauf si on a deja une erreur de montant
-		if (($GLOBALS['association_metas']['destinations']) && !array_key_exists('montant', $erreurs)) {
-			include_spip('inc/association_comptabilite');
-			if ($err_dest = association_verifier_montant_destinations('montant') ) {
-				$erreurs['destinations'] = $err_dest;
-			}
-		}
+		if ($erreur = association_verifier_destinations('montant') )
+			$erreurs['destinations'] = $erreur;
 	}
-	if ($erreur = association_verifier_date('validite') ) {
+	if ($erreur = association_verifier_date('validite') )
 		$erreurs['validite'] = $erreur;
-	}
 
 	if (count($erreurs)) {
 		$erreurs['message_erreur'] = _T('asso:erreur_titre');

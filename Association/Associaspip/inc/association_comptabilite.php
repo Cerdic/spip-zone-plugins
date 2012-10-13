@@ -1,21 +1,19 @@
 <?php
-/***************************************************************************
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & Francois de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+/***************************************************************************\
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010 Emmanuel Saint-James
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
-    return;
+	return;
 
 // recupere dans la table de comptes et celle des destinations la liste des destinations associees a une operation
 // le parametre correspond a l'id_compte de l'operation dans spip_asso_compte (et spip_asso_destination)
-function association_liste_destinations_associees($id_compte)
-{
+function association_liste_destinations_associees($id_compte) {
     if (!$id_compte)
 	return '';
     if ($destination_query = sql_select('spip_asso_destination_op.id_destination, spip_asso_destination_op.recette, spip_asso_destination_op.depense, spip_asso_destination.intitule', 'spip_asso_destination_op RIGHT JOIN spip_asso_destination ON spip_asso_destination.id_destination=spip_asso_destination_op.id_destination', "id_compte=$id_compte", '', 'spip_asso_destination.intitule')) {
@@ -33,8 +31,7 @@ function association_liste_destinations_associees($id_compte)
 }
 
 // retourne une liste d'option HTML de l'ensemble des destinations de la base, ordonee par intitule
-function association_toutes_destination_option_list()
-{
+function association_toutes_destination_option_list() {
     $liste_destination = '';
     $sql = sql_select('id_destination,intitule', 'spip_asso_destination', '', '', 'intitule');
     while ($destination_info = sql_fetch($sql)) {
@@ -48,8 +45,7 @@ function association_toutes_destination_option_list()
 // le second parametre (optionnel) permet de specifier si on veut associer une destination unique, par default on peut ventiler sur
 // plusieurs destinations
 // le troisieme parametre permet de regler une destination par defaut[contient l'id de la destination] - quand $destination est vide
-function association_editeur_destinations($destination, $unique='', $defaut='')
-{
+function association_editeur_destinations($destination, $unique='', $defaut='') {
     // recupere la liste de toutes les destination dans un code HTML <option value="destination_id">destination</option>
     $liste_destination = association_toutes_destination_option_list();
     $res = '';
@@ -59,7 +55,7 @@ function association_editeur_destinations($destination, $unique='', $defaut='')
 	    . _T('asso:destination') .'</label>'
 	    . '<div id="divTxtDestination" class="formulaire_edition_destinations">';
 	$idIndex = 1;
-//	spip_log("liste de destinations : \n".print_r($destination,true)."\n---------",'associaspip');
+//	spip_log("liste de destinations : \n".print_r($destination,TRUE)."\n---------",'associaspip');
 	if ($destination!='') { /* si on a une liste de destinations (on edite une operation) */
 	    foreach ($destination as $destId => $destMontant) {
 		$liste_destination_selected = preg_replace('/(value="'.$destId.'")/', '$1 selected="selected"', $liste_destination);
@@ -68,13 +64,13 @@ function association_editeur_destinations($destination, $unique='', $defaut='')
 		    . '<select name="id_dest['.$idIndex.']" id="id_dest['.$idIndex.']" >'
 		    . $liste_destination_selected
 		    . '</select></li>';
-		if ($unique==false) {
+		if ($unique==FALSE) {
 		    $res .= '<li class="editer_montant_dest['.$idIndex.']"><input name="montant_dest['.$idIndex.']" value="'
 			. association_formater_nombre($destMontant)
 			. '" type="text" id="montant_dest['.$idIndex.']" /></li>'
-			. '<button class="destButton" type="button" onClick="addFormField(); return false;">+</button>';
+			. '<button class="destButton" type="button" onClick="addFormField(); return FALSE;">+</button>';
 		    if ($idIndex>1) {
-			$res .= '<button class="destButton" type="button" onClick="removeFormField(\'#row'.$idIndex.'\'); return false;">-</button>';
+			$res .= '<button class="destButton" type="button" onClick="removeFormField(\'#row'.$idIndex.'\'); return FALSE;">-</button>';
 		    }
 		}
 		$res .= '<ul></div>';
@@ -89,11 +85,11 @@ function association_editeur_destinations($destination, $unique='', $defaut='')
 	    if (!$unique) {
 		$res .= '<li class="editer_montant_dest[1]"><input name="montant_dest[1]" value="'
 		    .'" type="text" id="montant_dest[1]"/></li>'
-		    . '</ul><button class="destButton" type="button" onClick="addFormField(); return false;">+</button>';
+		    . '</ul><button class="destButton" type="button" onClick="addFormField(); return FALSE;">+</button>';
 	    }
 	    $res .= '</div>';
 	}
-	if ($unique==false)
+	if ($unique==FALSE)
 	    $res .= '<input type="hidden" id="idNextDestination" value="'.($idIndex+1).'">';
 	$res .= '</div>';
     }
@@ -101,8 +97,7 @@ function association_editeur_destinations($destination, $unique='', $defaut='')
 }
 
 /* Ajouter une operation dans spip_asso_comptes ainsi que si necessaire dans spip_asso_destination_op */
-function association_ajouter_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal)
-{
+function association_ajouter_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal) {
     include_spip('base/association');
     /* on passe par modifier_contenu pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere */
     include_spip('inc/modifier');
@@ -127,8 +122,7 @@ function association_ajouter_operation_comptable($date, $recette, $depense, $jus
 }
 
 /* modifier une operation dans spip_asso_comptes ainsi que si necessaire dans spip_asso_destination_op */
-function association_modifier_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal, $id_compte)
-{
+function association_modifier_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal, $id_compte) {
     $err = '';
     include_spip('base/association');
     if ( sql_countsel('spip_asso_comptes', "id_compte=$id_compte AND vu ") ) { // il ne faut pas modifier une operation verouillee !!!
@@ -146,7 +140,7 @@ function association_modifier_operation_comptable($date, $recette, $depense, $ju
 	'journal' => $journal,
 	'justification' => $justification,
     );
-    if ($id_journal) { // si id_journal est null, ne pas le modifier afin de ne pas endommager l'entree dans la base en editant directement depuis le livre de comptes
+    if ($id_journal) { // si id_journal est nul, ne pas le modifier afin de ne pas endommager l'entree dans la base en editant directement depuis le livre de comptes
 	$modifs['id_journal'] = $id_journal;
     }
     // on passe par modifier_contenu (et non sql_updateq) pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere
@@ -161,8 +155,7 @@ function association_modifier_operation_comptable($date, $recette, $depense, $ju
 }
 
 /* Supprimer une operation dans spip_asso_comptes ainsi que si necessaire dans spip_asso_destination_op ; cas 1 : usage direct de id_compte */
-function association_supprimer_operation_comptable1($id_compte, $securite=FALSE)
-{
+function association_supprimer_operation_comptable1($id_compte, $securite=FALSE) {
     include_spip('base/association');
     /* recuperer les informations sur l'operation pour le fichier de log */
     list($date, $recette, $depense, $imputation, $journal, $id_journal, $verrou) = sql_fetsel('date, recette, depense, imputation, journal, id_journal, vu', 'spip_asso_comptes', "id_compte=$id_compte");
@@ -191,8 +184,7 @@ function association_supprimer_operation_comptable1($id_compte, $securite=FALSE)
 }
 
 /* Supprimer une operation dans spip_asso_comptes ainsi que si necessaire dans spip_asso_destination_op ; cas 2 : usage par les modules du couple imputation&id_journal */
-function association_supprimer_operation_comptable2($id_journal,$imputation)
-{
+function association_supprimer_operation_comptable2($id_journal,$imputation) {
     /* old-way: avant, on pouvait ne pas avoir d'imputation... du coup on prend le premier id_journal correspondant a n'importe quelle imputation!!! (avec cette methode il n'est pas surprenant de perdre des enregistrements...) */
 #    $association_imputation = charger_fonction('association_imputation', 'inc');
 #    $critere = (($critere_imputation = $association_imputation($pc_imputation))?' AND ':'') ."id_journal='$id_journal'";
@@ -204,8 +196,7 @@ function association_supprimer_operation_comptable2($id_journal,$imputation)
 }
 
 /* Supprimer en masse des operations dans spip_asso_comptes ainsi que si necessaire dans spip_asso_destination_op */
-function association_supprimer_operations_comptables($critere)
-{
+function association_supprimer_operations_comptables($critere) {
     include_spip('base/association');
     /* on recupere les id_comptes a supprimer */
     $where = sql_in_select('id_compte', 'id_compte', 'spip_asso_comptes', $critere);
@@ -220,43 +211,8 @@ function association_supprimer_operations_comptables($critere)
     sql_delete('spip_asso_comptes', $where); // $where ou $critere
 }
 
-/* fonction de verification des montants de destinations entres */
-/* le parametre d'entree est le montant total attendu, les montants des destinations sont recuperes */
-/* directement dans $_POST */
-function association_verifier_montant_destinations($montant_attendu)
-{
-    $err = '';
-    $toutesDestinations = _request('id_dest');
-    $toutesDestinationsMontants = _request('montant_dest');
-    /* on verifie que le montant des destinations correspond au montant global et qu'il n'y a pas deux fois la meme destination (uniquement si on a plusieurs destinations) */
-    $total_destination = 0;
-    $id_inserted = array();
-    if (count($toutesDestinations)>1) {
-	foreach ($toutesDestinations as $id => $id_destination) {
-	    /* on verifie qu'on n'a pas deja insere une destination avec cette id */
-	    if (!array_key_exists($id_destination,$id_inserted)) {
-		$id_inserted[$id_destination] = 0;
-	    } else {
-		$err = _T('asso:erreur_destination_dupliquee');
-	    }
-	    $total_destination += association_recuperer_montant($toutesDestinationsMontants[$id], false); // les montants sont dans un autre tableau aux meme cles
-	}
-	if ( _request($montant_attendu)!=$total_destination ) { // on verifie que la somme des montants des destinations correspond au montant attendu
-	    $err .= _T('asso:erreur_montant_destination');
-	}
-    } else { // une seule destination, le montant peut ne pas avoir ete precise, dans ce cas pas de verif, c'est le montant attendu qui sera entre dans la base
-	if ($toutesDestinationsMontants[1]) { // quand on a une seule destination, l'id dans les tableaux est forcement 1 par contruction de l'editeur
-	    if ( _request($montant_attendu)!=association_recuperer_montant($toutesDestinationsMontants[1], false) ) { // on verifie que le montant indique correspond au montant attendu
-		$err = _T('asso:erreur_montant_destination');
-	    }
-	}
-    }
-    return $err;
-}
-
 /* fonction permettant d'ajouter/modifier les destinations comptables (presente dans $_POST) a une operation comptable */
-function association_ajouter_destinations_comptables($id_compte, $recette, $depense)
-{
+function association_ajouter_destinations_comptables($id_compte, $recette, $depense) {
     include_spip('base/association');
     /* on efface de la table destination_op toutes les entrees correspondant a cette operation  si on en trouve*/
     sql_delete('spip_asso_destination_op', "id_compte=$id_compte");
@@ -268,11 +224,11 @@ function association_ajouter_destinations_comptables($id_compte, $recette, $depe
     }
     $toutesDestinations = _request('id_dest');
     $toutesDestinationsMontants = _request('montant_dest');
-//    spip_log("id_dest : \n".print_r($toutesDestinations, true), 'associaspip');
-//    spip_log("id_dest : \n".print_r($toutesDestinationsMontants, true), 'associaspip');
+//    spip_log("id_dest : \n".print_r($toutesDestinations, TRUE), 'associaspip');
+//    spip_log("id_dest : \n".print_r($toutesDestinationsMontants, TRUE), 'associaspip');
     if (count($toutesDestinations)>1) {
 	foreach ($toutesDestinations as $id => $id_destination)	{
-	    $montant = association_recuperer_montant($toutesDestinationsMontants[$id], false);	// le tableau des montants a des cles indentique a celui des id
+	    $montant = association_recuperer_montant($toutesDestinationsMontants[$id], FALSE);	// le tableau des montants a des cles indentique a celui des id
 	    $id_dest_op = sql_insertq('spip_asso_destination_op', array(
 		'id_compte' => $id_compte,
 		'id_destination' => $id_destination,
@@ -290,8 +246,7 @@ function association_ajouter_destinations_comptables($id_compte, $recette, $depe
     }
 }
 
-function inc_association_imputation_dist($nom, $table='')
-{
+function inc_association_imputation_dist($nom, $table='') {
     $champ = ($table ? ($table . '.') : '') . 'imputation';
     return $champ . '=' . sql_quote($GLOBALS['association_metas'][$nom]);
 }
@@ -299,35 +254,31 @@ function inc_association_imputation_dist($nom, $table='')
 /* valide le plan comptable: on doit avoir au moins deux classes de comptes differentes */
 /* le code du compte doit etre unique */
 /* le code du compte doit commencer par un chiffre egal a sa classe */
-function association_valider_plan_comptable()
-{
+function association_valider_plan_comptable() {
     $classes = array();
     $codes = array();
-    /* recupere le code et la classe de tous les comptes du plan comptable */
-    $query = sql_select('code, classe', 'spip_asso_plan');
+    $query = sql_select('code, classe', 'spip_asso_plan'); // recupere le code et la classe de tous les comptes du plan comptabl
     while ($data = sql_fetch($query)) {
 	$classe = $data['classe'];
 	$code = $data['code'];
-	$classes[$classe] = 0; /* on comptes les classes differentes */
+	$classes[$classe] = 0; // on comptes les classes differentes
 	if(array_key_exists($code, $codes)) {
-	    return false; /* on a deux fois le meme code */
+	    return FALSE; // on a deux fois le meme code
 	} else {
 	    $codes[$code] = 0;
 	}
-	/* on verifie que le code est bien de la forme chiffre-chiffre-caracteres alphanumeriques et que le premier digit correspond a la classe */
-	if ((!preg_match("/^[0-9]{2}\w*$/", $code)) || ($code[0]!=$classe))
-	    return false;
+	if ((!preg_match("/^[0-9]{2}\w*$/", $code)) || ($code[0]!=$classe)) // on verifie que le code est bien de la forme chiffre-chiffre-caracteres alphanumeriques et que le premier digit correspond a la classe
+	    return FALSE;
     }
     if (count($classes)<2)
-	return false; /* on doit avoir au moins deux classes differentes */
-    return true;
+	return FALSE; /* on doit avoir au moins deux classes differentes */
+    return TRUE;
 }
 
 /* retourne un tableau $code => $intitule trie sur $code et de classe $val */
 function association_liste_plan_comptable($val,$actives='') {
     $res = array();
-    /* recupere le code et l'intitule de tous les comptes de classe $val */
-    $query = sql_select('code, intitule', 'spip_asso_plan', "classe='$val'".($actives?" AND active=$actives":''), '', 'code');
+    $query = sql_select('code, intitule', 'spip_asso_plan', "classe='$val'".($actives?" AND active=$actives":''), '', 'code'); // recupere le code et l'intitule de tous les comptes de classe $val
     while ($data = sql_fetch($query)) {
 	$code = $data['code'];
 	$intitule = $data['intitule'];
@@ -341,12 +292,11 @@ function association_creer_compte_virement_interne() {
     if ($GLOBALS['association_metas']['pc_intravirements']) // un code de virement interne est deja defini !
 	return $GLOBALS['association_metas']['pc_intravirements'];
     $res = association_liste_plan_comptable($GLOBALS['association_metas']['classe_banques']); // on recupere tous les comptes de la classe "financier" (classe 5)
-    foreach($res as $code => $libelle) {
-	/* existe-t-il le compte 58x ? (nota : c'est la compta francaise...) */
+    foreach($res as $code => $libelle) { // existe-t-il le compte 58x ? (nota : c'est la compta francaise...)
 	if (substr($code,1,1)=='8') // il existe un code qui commence par 58...
 	    return $code;
     }
-    /* j'ai rien trouve, je cree le compte 581 */
+    // j'ai rien trouve, je cree le compte 581
     $code = $GLOBALS['association_metas']['classe_banques'].'81';
     $id_plan = sql_insertq('spip_asso_plan', array(
 	'code' => $code,
@@ -572,7 +522,7 @@ class ExportComptes_TXT {
 
     // export texte de type tableau (lignes*colonnes) simple : CSV,CTX,HTML*SPIP,INI*,TSV,etc.
     // de par la simplicite recherchee il n'y a pas de types ou autres : CSV et CTX dans une certaine mesure pouvant distinguer "nombres", "chaines alphanumeriques" et "chaine binaires encodees"
-    function exportLignesUniques($champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='', $entete=true, $multi=false) {
+    function exportLignesUniques($champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='', $entete=TRUE, $multi=FALSE) {
 	if ($entete) {
 	    $this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_code')))) .$champFin.$champsSeparateur;
 	    $this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_intitule')))) .$champFin.$champsSeparateur;
@@ -611,7 +561,7 @@ class ExportComptes_TXT {
 
     // export texte de type s-expression / properties-list / balisage (conteneurs*conteneurs*donnees) simple : JSON, XML (utilisable avec ASN.1), YAML, etc.
     // de par la simplicite recherchee il n'y a pas de types ou d'attributs : BSON, Bencode, JSON, pList, XML, etc.
-    function exportLignesMultiples($balises, $echappements=array(), $champDebut='', $champFin='', $indent="\t", $entetesPerso='', $multi=false) {
+    function exportLignesMultiples($balises, $echappements=array(), $champDebut='', $champFin='', $indent="\t", $entetesPerso='', $multi=FALSE) {
 	$this->out .= "$balises[compteresultat1]\n";
 	if (!$entetesPerso) {
 	    $this->out .= "$indent$balises[entete1]\n";
@@ -770,7 +720,7 @@ class ExportComptes_PDF extends FPDF {
 	// Titre centre
 	$xc += $this->space_h+($logo?$this->icone_h:0);
 	$this->SetXY($xc, $yc);
-	$this->Cell($logo?($this->largeur_pour_titre):($this->largeur_pour_titre+$this->icone_h-$this->space_h), 12, html_entity_decode(_T("asso:$titre")), 0, 0, 'C', true);
+	$this->Cell($logo?($this->largeur_pour_titre):($this->largeur_pour_titre+$this->icone_h-$this->space_h), 12, html_entity_decode(_T("asso:$titre")), 0, 0, 'C', TRUE);
 	$yc += 12;
 	$this->Ln($this->space_v); // Saut de ligne
 	$yc += $this->space_v;
@@ -779,7 +729,7 @@ class ExportComptes_PDF extends FPDF {
 	$this->SetFillColor(235); // Couleur de remplissage : gris-92.2%
 	// Sous titre Nom de l'association
 	$this->SetXY($xc, $yc);
-	$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('asso:cpte_export_association', array('nom'=>$GLOBALS['association_metas']['nom']) )), 0, 0, 'C', true);
+	$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('asso:cpte_export_association', array('nom'=>$GLOBALS['association_metas']['nom']) )), 0, 0, 'C', TRUE);
 	$yc += 6;
 	$this->Ln($this->space_v/2); // Saut de ligne
 	$yc += $this->space_v/2;
@@ -788,7 +738,7 @@ class ExportComptes_PDF extends FPDF {
 	$this->SetFillColor(235); // Couleur de fond : gris-92.2%
 	//Sous titre Intitule de l'exercice
 	$this->SetXY($xc, $yc);
-	$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('asso:cpte_export_exercice', array('titre'=>sql_getfetsel('intitule','spip_asso_exercices', 'id_exercice='.$this->exercice) ) )), 0, 0, 'C', true);
+	$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('asso:cpte_export_exercice', array('titre'=>sql_getfetsel('intitule','spip_asso_exercices', 'id_exercice='.$this->exercice) ) )), 0, 0, 'C', TRUE);
 	$yc += 6;
 	$this->Ln($this->space_v); // Saut de ligne
 	$yc += $this->space_v;
@@ -835,8 +785,8 @@ class ExportComptes_PDF extends FPDF {
 		$new_chapitre = substr($data['code'], 0, 2);
 		if ($chapitre!=$new_chapitre) { // debut de categorie
 		    $this->SetFillColor(225); // Couleur de fond de la ligne : gris-92.2%
-		    $this->Cell(20, 6, utf8_decode($new_chapitre), 0, 0, 'L', true);
-		    $this->Cell(($this->largeur_utile)-(2*$this->space_h+20), 6, utf8_decode(($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))), 0, 0, 'L', true);
+		    $this->Cell(20, 6, utf8_decode($new_chapitre), 0, 0, 'L', TRUE);
+		    $this->Cell(($this->largeur_utile)-(2*$this->space_h+20), 6, utf8_decode(($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))), 0, 0, 'L', TRUE);
 		    $chapitre = $new_chapitre;
 		    $this->Ln(); // Saut de ligne
 		    $yc += 6;
@@ -844,14 +794,14 @@ class ExportComptes_PDF extends FPDF {
 		$this->SetFillColor(245); // Couleur de fond du total : gris-96.1%
 		$this->SetXY($xc, $yc); // positionne le curseur
 #	    	if ( floatval($data['valeurs']) || floatval($data['recettes']) || floatval($data['depenses']) ) { // non-zero...
-		    $this->Cell(20, 6, utf8_decode($data['code']), 0, 0, 'R', true);
-		    $this->Cell(($this->largeur_utile)-(2*$this->space_h+50), 6, utf8_decode($data['intitule']), 0, 0, 'L', true);
-		    $this->Cell(30, 6, association_formater_nombre($data['valeurs']), 0, 0, 'R', true);
+		    $this->Cell(20, 6, utf8_decode($data['code']), 0, 0, 'R', TRUE);
+		    $this->Cell(($this->largeur_utile)-(2*$this->space_h+50), 6, utf8_decode($data['intitule']), 0, 0, 'L', TRUE);
+		    $this->Cell(30, 6, association_formater_nombre($data['valeurs']), 0, 0, 'R', TRUE);
 		    if ($direction) { // mode liste comptable
-			$this->Cell(30, 6, association_formater_nombre($data['valeurs']), 0, 0, 'R', true);
+			$this->Cell(30, 6, association_formater_nombre($data['valeurs']), 0, 0, 'R', TRUE);
 			$total_valeurs += $data['valeurs'];
 		    } else { // mode liste standard
-			$this->Cell(30, 6, association_formater_nombre($data['depenses']>0?$data['depenses']:$data['recettes']), 0, 0, 'R', true);
+			$this->Cell(30, 6, association_formater_nombre($data['depenses']>0?$data['depenses']:$data['recettes']), 0, 0, 'R', TRUE);
 			$total_recettes += $data['recettes'];
 			$total_depenses += $data['depenses'];
 			$total_valeurs += $data['soldes'];
@@ -864,15 +814,15 @@ class ExportComptes_PDF extends FPDF {
 	$this->SetXY($xc, $yc); // positionne le curseur
 	$this->SetFillColor(215); // Couleur de fond : 84.3%
 	if ($direction) { // mode liste comptable : charge, produit, actifs, passifs
-	    $this->Cell(($this->largeur_utile)-(2*$this->space_h+30), 6, html_entity_decode(_T("asso:$prefixe".'_total')), 1, 0, 'R', true);
-	    $this->Cell(30, 6, association_formater_nombre($total_valeurs), 1, 0, 'R', true);
+	    $this->Cell(($this->largeur_utile)-(2*$this->space_h+30), 6, html_entity_decode(_T("asso:$prefixe".'_total')), 1, 0, 'R', TRUE);
+	    $this->Cell(30, 6, association_formater_nombre($total_valeurs), 1, 0, 'R', TRUE);
 	} else { // mode liste standard : contributions volontaires et autres
-	    $this->Cell(($this->largeur_utile)/2-(2*$this->space_h+30), 6, html_entity_decode(_T("asso:$prefixe".'_total_depenses')), 1, 0, 'R', true);
-	    $this->Cell(30, 6, association_formater_nombre($total_depenses), 1, 0, 'R', true);
+	    $this->Cell(($this->largeur_utile)/2-(2*$this->space_h+30), 6, html_entity_decode(_T("asso:$prefixe".'_total_depenses')), 1, 0, 'R', TRUE);
+	    $this->Cell(30, 6, association_formater_nombre($total_depenses), 1, 0, 'R', TRUE);
 	    $xc += ( $this->largeur_utile)/2;
 	    $this->SetXY($xc, $yc); // positionne le curseur sur l'autre demi page
-	    $this->Cell(($this->largeur_utile)/2-(2*$this->space_h+30), 6, html_entity_decode(_T("asso:$prefixe".'_total_recettes')), 1, 0, 'R', true);
-	    $this->Cell(30, 6, association_formater_nombre($total_recettes), 1, 0, 'R', true);
+	    $this->Cell(($this->largeur_utile)/2-(2*$this->space_h+30), 6, html_entity_decode(_T("asso:$prefixe".'_total_recettes')), 1, 0, 'R', TRUE);
+	    $this->Cell(30, 6, association_formater_nombre($total_recettes), 1, 0, 'R', TRUE);
 	}
 	$yc += 6;
 	$this->Ln($this->space_v); // Saut de ligne
@@ -901,8 +851,8 @@ class ExportComptes_PDF extends FPDF {
 	$this->SetFillColor(215); // Couleur de fond : gris-84.3%
 	$leSolde = $lesRecettes-$lesDepenses;
 	$this->SetXY($xc, $yc);
-	$this->Cell(($this->largeur_utile)-(2*$this->space_h+30), 6, html_entity_decode(_T('asso:cpte_resultat_'.($leSolde<0?'perte':'benefice'))), 1, 0, 'R', true);
-	$this->Cell(30, 6, association_formater_nombre($leSolde), 1, 0, 'R', true);
+	$this->Cell(($this->largeur_utile)-(2*$this->space_h+30), 6, html_entity_decode(_T('asso:cpte_resultat_'.($leSolde<0?'perte':'benefice'))), 1, 0, 'R', TRUE);
+	$this->Cell(30, 6, association_formater_nombre($leSolde), 1, 0, 'R', TRUE);
 	$yc += 6;
 	$this->Ln($this->space_v); // Saut de ligne
 	$yc += $this->space_v;

@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_edit_ressource()
-{
+function exec_edit_ressource() {
 	if (!autoriser('associer', 'ressources')) {
 			include_spip('inc/minipres');
 			echo minipres();

@@ -8,7 +8,6 @@
  *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
-
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
@@ -91,12 +90,14 @@ if (!defined('_ASSOCIASPIP_AUJOURDHUI_HORAIRE'))
  *
  * @todo voir s'il est possible d'utiliser plutot la fonction bouton_action($libelle, $url, $class="", $confirm="", $title="") definie dans /ecrire/inc/filtres.php
  */
-function association_bouton_act($texte, $image, $script='', $exec_args='', $img_attrs='', $tag='td')
-{
+function association_bouton_act($texte, $image, $script='', $exec_args='', $img_attrs='', $tag='td') {
 	$res = ($tag?"<$tag class='action'>":'');
 	$res .= ($script ? '<a href="'.generer_url_ecrire($script, $exec_args).'">' : '' );
-	$res .= '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.$image.'" alt="';
-	$res .= ($texte ?association_langue($texte).'" title="'. association_langue($texte) : ' ' );
+	$chemin = _DIR_PLUGIN_ASSOCIATION_ICONES.$image; // icone Associaspip
+	if ( !file_exists($chemin) )
+		$chemin = find_in_path($image); // icone alternative
+	$res .= '<img src="'. urlencode($chemin) .'" alt="';
+	$res .= htmlspecialchars($texte ?association_langue($texte).'" title="'. association_langue($texte) : ' ' );
 	$res .= '" '.$img_attrs.' />';
 	$res .= ($script?'</a>':'');
 	return $res;
@@ -119,8 +120,7 @@ function association_bouton_act($texte, $image, $script='', $exec_args='', $img_
 /**
  * bouton affich[age|er] v[ue|oir] visualis[ation|er]
  */
-function association_bouton_affich($objet, $args='', $tag='td')
-{
+function association_bouton_affich($objet, $args='', $tag='td') {
 	$res = association_bouton_act('bouton_voir', 'voir-12.png', "$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#x2380;"', $tag);
 	return $res;
 }
@@ -128,8 +128,7 @@ function association_bouton_affich($objet, $args='', $tag='td')
 /**
  * bouton edit[ion|er] (modifi[cation|er])
  */
-function association_bouton_edit($objet, $args='', $tag='td')
-{
+function association_bouton_edit($objet, $args='', $tag='td') {
 	$res = association_bouton_act('bouton_modifier', 'edit-12.gif', "edit_$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#9088;"', $tag);
 	return $res;
 }
@@ -137,8 +136,7 @@ function association_bouton_edit($objet, $args='', $tag='td')
 /**
  * bouton suppr[ession|imer] (efface[ment|r])
  */
-function association_bouton_suppr($objet, $args='', $tag='td')
-{
+function association_bouton_suppr($objet, $args='', $tag='td') {
 	$res = association_bouton_act('bouton_supprimer', 'suppr-12.gif', "suppr_$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#8999;" class="danger"', $tag);
 	return $res;
 }
@@ -146,8 +144,7 @@ function association_bouton_suppr($objet, $args='', $tag='td')
 /**
  * bouton paye[ment|r] (cotis[ation|er], contribu[tion financiere|er financierement])
  */
-function association_bouton_paye($objet, $args='', $tag='td')
-{
+function association_bouton_paye($objet, $args='', $tag='td') {
 	$res = association_bouton_act('??', 'cotis-12.gif', "ajout_$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#164;"', $tag);
 	return $res;
 }
@@ -170,8 +167,7 @@ function association_bouton_paye($objet, $args='', $tag='td')
  *   Texte supplementaire rajoute
  *   (utile pour placer d'autres boutons caches dans la cellule)
  */
-function association_bouton_coch($champ, $valeur='', $plus='', $tag='td')
-{
+function association_bouton_coch($champ, $valeur='', $plus='', $tag='td') {
 	$res = ($tag?"<$tag class='action'>":'');
 	$res .= $plus.'<input type="checkbox" ';
 	if ( $champ )
@@ -219,8 +215,7 @@ function association_bouton_coch($champ, $valeur='', $plus='', $tag='td')
  * @return string $res
  *   Chaine du nom complet du membre, micro-formate ou non.
  */
-function association_formater_nom($civilite, $prenom, $nom, $html_span='', $ps='')
-{
+function association_formater_nom($civilite, $prenom, $nom, $html_span='', $ps='') {
 	$res = '';
 	if ($html_span) {
 		$res = '<'.$html_span.' class="'. (($civilite || $prenom)?'n':'fn') .'">';
@@ -255,8 +250,7 @@ function association_formater_nom($civilite, $prenom, $nom, $html_span='', $ps='
  * @return string $res
  *   Date formatee
  */
-function association_formater_date($iso_date, $css_class='', $format='entier', $html_abbr='auto')
-{
+function association_formater_date($iso_date, $css_class='', $format='entier', $html_abbr='auto') {
 	if ( !$iso_date || substr_count($iso_date, '0000-00-00') ) // date indeterminee
 		return '';
 	$res = '';
@@ -285,8 +279,7 @@ function association_formater_date($iso_date, $css_class='', $format='entier', $
  *
  * @note Perfectible... Avis aux contributeurs motives...
  */
-function association_formater_nombre($nombre, $decimales=2, $css_class='', $html_abbr='')
-{
+function association_formater_nombre($nombre, $decimales=2, $css_class='', $html_abbr='') {
 	if ( $html_abbr )
 		$res = "<$html_abbr ". ($css_class?"class='$css_class' ":'') ."title='$iso_date'>";
 	else
@@ -318,8 +311,7 @@ function association_formater_nombre($nombre, $decimales=2, $css_class='', $html
  *
  * @note les cas de minutes/secondes doivent etre specifie comme des heures au format ISO...
  */
-function association_formater_duree($nombre, $unite='', $html_abbr='abbr')
-{
+function association_formater_duree($nombre, $unite='', $html_abbr='abbr') {
 	$frmt_h = ''; // format human-readable
 	$frmt_m = 'P'; // format machine-parsable
 	if ( is_numeric($unite) ) { // inversion...
@@ -549,8 +541,7 @@ function association_formater_duree($nombre, $unite='', $html_abbr='abbr')
  * sous Windows-- car on veut micro-formater avec une devise fixee par la
  * configuration (en fait les chaines de langue) du plugin
  */
-function association_formater_prix($montant, $type='', $devise_code='', $devise_symb='', $html_abbr='abbr', $html_span='span')
-{
+function association_formater_prix($montant, $type='', $devise_code='', $devise_symb='', $html_abbr='abbr', $html_span='span') {
 	$res = '';
 	if ($html_span)
 		$res .= "<$html_span class='money price $type'>"; // la reference est "price" <http://microformats.org/wiki/hproduct> (reconnu par les moteurs de recherche), mais "money" <http://microformats.org/wiki/currency-brainstorming> est d'usage courant aussi
@@ -591,8 +582,7 @@ function association_formater_prix($montant, $type='', $devise_code='', $devise_
  * @note
  *   http://spipistrelle.clinamen.org/spip.php?article16
  */
-function association_formater_texte($texte, $filtre='', $css_class='', $html_span='' )
-{
+function association_formater_texte($texte, $filtre='', $css_class='', $html_span='' ) {
 	$res = '';
 	if ( $css_class && !$html_span )
 		$html_span = 'span';
@@ -611,20 +601,19 @@ function association_formater_texte($texte, $filtre='', $css_class='', $html_spa
 }
 
 /**
- * Affiche une puce de couleur
+ * Affiche une puce de couleur carree nommee puce-*.gif
  *
  * @param string $statut
  *   Valeur du "statut" a iconifier
  * @param string|array $icone
  *   Nom (couleur) de la puce parmis celles disponibles : orange, rouge, vert, poubelle...
  *   Tableau associant chaque statut a un nom de puce...
- * @param bool $acote
+ * @param string $acote
  *   Legende placee a cote de l'icone
  * @return string
  *   Dessin et texte
  */
-function association_formater_puce($statut, $icone,  $acote=TRUE, $img_attrs='')
-{
+function association_formater_puce($statut, $icone,  $acote='', $img_attrs='') {
 	if ( is_array($icone) )
 		$icone = $icone[$statut];
 	return association_bouton_act($statut, 'puce-'.$icone.'.gif', '', '', $img_attrs, '').' '. association_langue($acote) ; // c'est comme un bouton... sans action/lien...
@@ -647,8 +636,7 @@ function association_formater_puce($statut, $icone,  $acote=TRUE, $img_attrs='')
  * @return string $res
  *   Date formatee
  */
-function association_formater_heure($iso_date, $css_class='', $html_abbr='auto')
-{
+function association_formater_heure($iso_date, $css_class='', $html_abbr='auto') {
 	$res = '';
 	if ( $html_abbr=='auto' )
 		$html_abbr = ($GLOBAL['meta']['html5']?'time':'abbr');
@@ -676,8 +664,7 @@ function association_formater_heure($iso_date, $css_class='', $html_abbr='auto')
  * @note
  *   http://microformats.org/wiki/hproduct-proposal#Schema
  */
-function association_formater_code($code, $type='x-associaspip', $p_v=TRUE, $html_span='span' )
-{
+function association_formater_code($code, $type='x-associaspip', $p_v=TRUE, $html_span='span' ) {
 	$res = $html_span  ? ("<$html_span class='". ($p_v?'p-v':'identifier') ."'>") : '';
 	if ( is_string($type) ) { // label implied
 		$res .= "<span class='". ($p_v?'property':'type') ."$type title='$type'>$code</span>";
@@ -741,6 +728,41 @@ function association_formater_idnom($id, $nom='', $lien='', $html_span='span') {
 }
 
 /**
+ * Affiche une icone nommee type_*_*.???
+ *
+ * @param string $classe
+ *   Nom du type d'icone. (correspond au CLASS microformat)
+ * @param string|array $valeur
+ *   Nom du sous-type d'icove. (correspond au TITLE microformat)
+ * @param string $sep
+ *   Separateur place entre les icones
+ * @return string
+ *   Dessin et texte
+ */
+function association_formater_typecoord($classe, $valeur, $sep=' ') {
+	include_spip('coordonnees_fonctions'); // pour utiliser les filtres du plugin "Coordonnees"
+	if ( function_exists('logo_type_') ) // bonne version du plugin "Coordonnees" activee
+		return logo_type_($classe, $valeur, $sep).$sep;
+	global $formats_logos;
+	$types = explode(',', $valeur);
+	$res = '';
+	foreach ($types as $type) {
+		$type = strtolower($type);
+		$lang =  _T('coordonnees:type'. ($classe?"_$classe":'') . ($valeur?"_$valeur":'') );
+		foreach ($formats_logos as $format) { // @file ecrire/inc/chercher_logo.php
+			$fichier = "images/type_$classe". ($type?"_ $type":'') .".$format";
+			if ( $chemin = find_in_path($fichier) )
+			$img = urlencode($chemin);
+		}
+		if ($img)
+			$res .= "<img class='type' src='$img' alt='$type' title='". $lang ."' />$sep"; // $res .= association_bouton_act($type, $img, '', '', '', '') ; // c'est comme un bouton... sans action/lien...
+		elseif ($type)
+			$res .= "<abbr class='type' title='$type'>". $lang ."</abbr>$sep";
+	}
+	return $res;
+}
+
+/**
  * Affichage micro-formate de liste de numeros de telephones
  *
  * @param array $id_objets
@@ -772,13 +794,12 @@ function association_formater_idnom($id, $nom='', $lien='', $html_span='span') {
  *   http://microformats.org/wiki/hcard-fr#Lisible_par_Humain_vs._Machine
  *   http://microformats.org/wiki/vcard-suggestions#TEL_Type_Definition
  */
-function association_formater_telephones($id_objets, $objet='auteur', $html_span='div', $href_pre='tel:', $href_post='')
-{
-	$id_objets = association_recuperer_liste($id_objets, false);
+function association_formater_telephones($id_objets, $objet='auteur', $html_span='div', $href_pre='tel:', $href_post='') {
+	$id_objets = association_recuperer_liste($id_objets, FALSE);
 	if ($objet) { // ancien comportement : ce sont les id_auteur qui sont transmis
 		$telephones_array = array(); // initialisation du tableau des donnees
 		$trouver_table = charger_fonction('trouver_table', 'base');
-		if ( $trouver_table('spip_numeros') && $trouver_table('spip_numeros_liens') ) { // "coordonnees" ou similaire est installe (active ou pas)
+		if ( $trouver_table('spip_numeros') && $trouver_table('spip_numeros_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
 			foreach ($id_objets as $id_objet) { // prepare la structure du tableau renvoye
 				$telephones_array[$id_objet] = array();
 			}
@@ -799,13 +820,7 @@ function association_formater_telephones($id_objets, $objet='auteur', $html_span
 				$telephone['numero'] = $telephone;
 			}
 			if ($html_span) { // formatage HTML avec microformat
-				$telephones_string[$id_objet] .=  "<$html_span id='$telephone[id_telephone]' class='tel'>";
-				if ($telephone['type']) {
-					$types = explode(',', $telephone['type']);
-					foreach ($types as $type)
-						$telephones_string[$id_objet] .= "<abbr class='type' title='$type'>". _T("coordonnees:$type") .'</abbr> '; // version textuelle
-//						$telephones_string[$id_objet] .= "<img class='type' alt='$type' src='". find_in_path("images/type_$type-16.png") ."' /> "; // version imagee
-				}
+				$telephones_string[$id_objet] =  "<$html_span id='$telephone[id_telephone]' class='tel'>". association_formater_typecoord('tel', $telephone['type']);
 				$tel_num = ($telephone['pays']?"+$telephone[pays]$telephone[region]$telephone[numero]":$telephone['numero']);
 				$telephones_string[$id_objet] .=  ($href_pre?("<a title='". _T('asso:composer_le') ." $tel_num' href='$href_pre"):"<abbr title='"). preg_replace('/[^\d+]/', '', $tel_num) . ($href_pre?$href_post:'') ."' class='value'>";
 				unset($telephone['type']); // ne devrait plus etre traite par le modele
@@ -851,17 +866,25 @@ function association_formater_telephones($id_objets, $objet='auteur', $html_span
  *   http://microformats.org/wiki/adr
  *   http://microformats.org/wiki/adr-cheatsheet
  */
-function association_formater_adresses($id_objets, $objet='auteur', $html_span='div', $newline='<br />', $espace='&nbsp;')
-{
-	$id_objets = association_recuperer_liste($id_objets, false);
+function association_formater_adresses($id_objets, $objet='auteur', $html_span='div', $newline='<br />', $espace='&nbsp;') {
+	$id_objets = association_recuperer_liste($id_objets, FALSE);
 	if ($objet) { // ancien comportement : ce sont les id_auteur qui sont transmis
 		$adresses_array = array(); // initialisation du tableau des donnees
 		$trouver_table = charger_fonction('trouver_table', 'base');
-		if ( $trouver_table('spip_adresses') && $trouver_table('spip_adresses_liens') ) { // "coordonnees" ou similaire est installe (active ou pas)
+		if ( $trouver_table('spip_adresses') && $trouver_table('spip_adresses_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
 			foreach ($id_objets as $id_objet) { // prepare la structure du tableau renvoye
 				$adresses_array[$id_objet] = array();
 			}
-			$query = sql_select('l.id_objet, l.type, a.*','spip_adresses AS a INNER JOIN spip_adresses_liens AS l ON l.id_adresse=a.id_adresse', sql_in('l.id_objet', $id_objets)." AND l.objet='$objet' ");
+			$query = sql_select("l.id_objet, l.type, a.*, a.pays AS code_pays, '' AS nom_pays ",'spip_adresses AS a INNER JOIN spip_adresses_liens AS l ON l.id_adresse=a.id_adresse', sql_in('l.id_objet', $id_objets)." AND l.objet='$objet' ");
+			while ($data = sql_fetch($query)) { // on recupere tous les numeros dans un tableau de tableaux
+				$adresses_array[$data['id_objet']][] = $data;
+			}
+			sql_free($query);
+		} elseif ( $trouver_table('spip_gis') && $trouver_table('spip_gis_liens') ) { // le plugin "GIS" est installe (active ou pas)
+			foreach ($id_objets as $id_objet) { // prepare la structure du tableau renvoye
+				$adresses_array[$id_objet] = array();
+			}
+			$query = sql_select("l.id_objet, l.type, a.*, a.pays AS nom_pays, adresse AS voie ",'spip_adresses AS a INNER JOIN spip_adresses_liens AS l ON l.id_gis=a.id_gis', sql_in('l.id_objet', $id_objets)." AND l.objet='$objet' ");
 			while ($data = sql_fetch($query)) { // on recupere tous les numeros dans un tableau de tableaux
 				$adresses_array[$data['id_objet']][] = $data;
 			}
@@ -875,13 +898,7 @@ function association_formater_adresses($id_objets, $objet='auteur', $html_span='
 		$adresses_string[$id_objet] = ''; // initialisation de la chaine renvoyee
 		foreach ($adresses as $adresse) { // chaque adresse est forcement un tableau bien qu'on le verifie pas
 			if ($html_span) { // formatage HTML avec microformat
-				$adresses_string[$id_objet] .=  "<$html_span id='$adresse[id_adresse]' class='adr'>";
-				if ($adresse['type']) {
-					$types = explode(',', $adresse['type']);
-					foreach ($types as $type)
-						$adresses_string[$id_objet] .= "<abbr class='type' title='$type'>". _T("coordonnees:$type") .'</abbr> '; // version textuelle
-//						$adresses_string[$id_objet] .= "<img class='type' alt='$type' src='". find_in_path("images/type_$type-16.png") ."' /> "; // version imagee
-				}
+				$adresses_string[$id_objet] =  "<$html_span id='$adresse[id_adresse]' class='adr'>". association_formater_typecoord('adr', $adresse['type']);
 				if ($adresse['voie'])
 					$adresse['voie'] = "<span class='street-address'>$adresse[voie]</span>";
 				if ($adresse['ville'])
@@ -894,6 +911,17 @@ function association_formater_adresses($id_objets, $objet='auteur', $html_span='
 					$adresse['code_postal'] = "<span class='postal-code'>$adresse[code_postal]</span>";
 				if ($adresse['boite_postale'])
 					$adresse['boite_postale'] = "<span class='post-office-box'>$adresse[boite_postale]</span>";
+				if ( !$adresse['nom_pays'] && $adresse['code_pays']!=$GLOBALS['association_metas']['pays'] )
+					if ($adresse['code_pays']) {
+						if ( is_numeric($adresse['code_pays']) && $trouver_table('spip_geo_pays' ) ) // tenter de recuperer le nom avec le plugin "Geographie"
+							$adresse['nom_pays'] = sql_getfetsel('nom', 'spip_geo_pays', "id_pays=$adresse[code_pays]");
+						elseif ( $trouver_table('spip_geo_pays') ) // tenter de recuperer le nom avec le plugin "Pays"
+							$adresse['nom_pays'] = sql_getfetsel('nom', 'spip_pays', 'code='.sql_quote($adresse['code_pays']) );
+						else // un code langue ?
+							$adresse['nom_pays'] = _T($adresse['code_pays']);
+					}
+				if ($adresse['nom_pays'])
+					$adresse['pays'] = "<span class='country-name'>$adresse[nom_pays]</span>";
 				unset($adresse['type']); // ne devrait plus etre traite par le modele
 				unset($adresse['id_objet']); // ne devrait plus etre traite par le modele
 				unset($adresse['id_adresse']); // ne devrait pas etre utilise par le modele
@@ -932,22 +960,21 @@ function association_formater_adresses($id_objets, $objet='auteur', $html_span='
  *   http://www.remote.org/jochen/mail/info/address.html
  *   http://en.wikipedia.org/wiki/X.400#Addressing
  */
-function association_formater_emails($id_objets, $objet='auteur', $html_span='div', $sep=' ')
-{
-	$id_objets = association_recuperer_liste($id_objets, false);
+function association_formater_emails($id_objets, $objet='auteur', $html_span='div', $sep=' ') {
+	$id_objets = association_recuperer_liste($id_objets, FALSE);
 	if ($objet) { // ancien comportement : ce sont les id_objet qui sont transmis
 		$emails_array = array(); // initialisation du tableau des donnees
 		foreach ($id_objets as $id_objet) { // prepare la structure du tableau renvoye
 			$emails_array[$id_objet] = array();
 		}
 		if ( $objet=='auteur' ) { // on commence par recuperer les emails de la table spip_auteurs
-			$query = sql_select("id_auteur, email, CONCAT('0-', id_auteur) AS id_email, email AS titre, '' AS type", 'spip_auteurs', sql_in('id_auteur', $id_objets)." AND email <> ''");
+			$query = sql_select("id_auteur, email, CONCAT('0-', id_auteur) AS id_email, '' AS titre, '' AS type", 'spip_auteurs', sql_in('id_auteur', $id_objets)." AND email <> ''"); // on peut prendre comme titre le champ "nom" qui peut etre different du nom de membre affiche (c'est un pseudo) mais ce n'est pas forcement pertinent ; on peut reprendre le champ "email" aussi mais cela empeche le reformatage automatique et on a une longue colonne disgracieuse...
 			while ($auteur_info = sql_fetch($query))
 				$emails_array[$auteur_info['id_auteur']][] = $auteur_info;
 			sql_free($query);
 		}
 		$trouver_table = charger_fonction('trouver_table', 'base');
-		if ( $trouver_table('spip_emails') && $trouver_table('spip_emails_liens') ) { // "coordonnees" ou similaire est installe (active ou pas)
+		if ( $trouver_table('spip_emails') && $trouver_table('spip_emails_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
 			$query = sql_select('l.id_objet, l.type, e.*','spip_emails AS e INNER JOIN spip_emails_liens AS l ON l.id_email=e.id_email', sql_in('l.id_objet', $id_objets)." AND l.objet='$objet' ");
 			while ($data = sql_fetch($query)) { // on recupere tous les numeros dans un tableau de tableaux
 				$emails_array[$data['id_objet']][] = $data;
@@ -961,25 +988,19 @@ function association_formater_emails($id_objets, $objet='auteur', $html_span='di
 	foreach ($emails_array as $id_objet => $courriels) {  // on cree la liste de chaines de courriels
 		$emails_string[$id_objet] = ' '; // initialisation de la chaine renvoyee
 		foreach ($courriels as $courriel) { // formater chaque mel
-			$href = false;
+			$href = FALSE;
 			if ( !is_array($courriel) ) {
 				$courriel['email'] = $courriel;
 			}
 			if ($html_span) { // balisage HTML avec microformat
-				$emails_string[$id_objet] .= "<$html_span id='$courriel[id_email]' class='email'>";
-				if ($courriel['type']) {
-					$types = explode(',', $courriel['type']);
-					foreach ($types as $type)
-						$emails_string[$id_objet] .= "<abbr class='type' title='$type'>". _T("coordonnees:$type") .'</abbr> '; // version textuelle
-//						$emails_string[$id_objet] .= "<img class='type' alt='$type' src='". find_in_path("images/type_$type-16.png") ."' /> "; // version imagee
-				}
+				$emails_string[$id_objet] = "<$html_span id='$courriel[id_email]' class='email'>". association_formater_typecoord('mel', $courriel['type']);
 				if ( !$courriel['type'] || stripos($courriel['type'], 'internet')!==FALSE )
-					$href = true;
+					$href = TRUE;
 				$emails_string[$id_objet] .= ($href?("<a title='". _T('asso:ecrire_a') ." $courriel[email]' href='mailto:$courriel[email]'"):'<span') ." class='value'>";
 				unset($courriel['type']); // ne devrait plus etre traite par le modele
 				unset($courriel['id_objet']); // ne devrait plus etre traite par le modele
 				unset($courriel['id_email']); // ne devrait pas etre utilise par le modele
-				$courriel['email'] = ( $courriel['titre'] ? $courriel['titre'] : str_replace('@', ' @ ', ucwords($courriel['email'])) ); // on affiche le titre si present sinon la valeur
+				$courriel['email'] = ( $courriel['titre'] ? $courriel['titre'] : ucwords(str_replace('@', ' ['._T('perso:at').'] ', $courriel['email'])) ); // on affiche le titre si present sinon la valeur
 			}
 			$emails_string[$id_objet] .= $courriel['email']. ($html_span?('</'.($href?'a':'span')."></$htm_span>\n"):'');
 		}
@@ -1019,30 +1040,51 @@ function association_formater_emails($id_objets, $objet='auteur', $html_span='di
  *   http://en.wikipedia.org/wiki/Social_web
  *   http://fr.wikipedia.org/wiki/R%C3%A9seau_social#R.C3.A9seaux_sociaux_sur_Internet
  *   http://fr.wikipedia.org/wiki/R%C3%A9seautage_social#R.C3.A9seaux_ayant_plus_de_30_millions_d.27inscriptions
+ *   http://fr.wikipedia.org/wiki/Uniform_Resource_Identifier
+ *   http://fr.wikipedia.org/wiki/Hyperlien
  */
-function association_formater_urls($id_objets, $objet='auteur', $a=TRUE, $sep=' ')
-{
-	$id_objets = association_recuperer_liste($id_objets, false);
+function association_formater_urls($id_objets, $objet='auteur', $a=TRUE, $sep=' ') {
+	$id_objets = association_recuperer_liste($id_objets, FALSE);
 	if ($objet) { // ancien comportement : ce sont les id_objet qui sont transmis
 		$urls_array = array(); // initialisation du tableau des donnees
 		foreach ($id_objets as $id_objet) { // prepare la structure du tableau renvoye
 			$urls_array[$id_objet] = array();
 		}
-		if ( in_array($objet, array('auteur', 'breve', 'forum', 'site')) ) { // on commence par recuperer les #NOM_SITE et #URL_SITE des tables natives de SPIP
-			$query = sql_select("id_$objet, nom_site AS titre, url_site AS url, CONCAT('0-',id_$objet) AS id_url, 'site' AS type", "spip_{$objet}s", sql_in("id_$objet", $id_objets)." AND url_site <> ''");
+		if ( in_array($objet, array('auteur', 'breve', 'forum', 'syndic', 'signature')) ) { // on commence par recuperer les #NOM_SITE et #URL_SITE des tables natives de SPIP (pour les breves c'est plutot #LIEN_TITRE et #LIEN_URL ! pfff...)
+			$query = sql_select("id_$objet, ". ($objet=='breve'?'lien_titre':'nom_site') .' AS titre, '.  ($objet=='breve'?'lien_url':'url_site') ." AS url, CONCAT('0-',id_$objet) AS id_url, 'site' AS type",
+			"spip_{$objet}s",
+			sql_in("id_$objet", $id_objets) .' AND '. ($objet=='breve'?'lien_url':'url_site'). "<>''");
 			while ($site = sql_fetch($query))
 				$urls_array[$site["id_$objet"]][] = $site;
 			sql_free($query);
 		}
 		$trouver_table = charger_fonction('trouver_table', 'base');
-		if ( $trouver_table('spip_urls') && $trouver_table('spip_urls_liens') ) { // "coordonnees" ou similaire est installe (active ou pas)
-			$query = sql_select('l.id_objet, l.type, e.*','spip_urls AS e INNER JOIN spip_urls_liens AS l ON l.id_url=e.id_url', sql_in('l.id_objet', $id_objets)." AND l.objet='$objet' ");
-			while ($data = sql_fetch($query)) { // on recupere tous les numeros dans un tableau de tableaux
+		if ( $trouver_table('spip_syndic') && $trouver_table('spip_syndic_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
+			$query = sql_select('l.id_syndic AS id_url, l.id_objet, l.type, s.url_site AS url, s.nom_site AS titre, s.id_syndic AS id_url','spip_syndic AS s INNER JOIN spip_syndic_liens AS l ON l.id_syndic=s.id_syndic', sql_in('l.id_objet', $id_objets)." AND l.objet='$objet' ");
+			while ($data = sql_fetch($query)) { // on recupere tous les sites lies dans un tableau de tableaux
 				$urls_array[$data['id_objet']][] = $data;
 			}
 			sql_free($query);
 		}
-	} else { // on a deja la liste des emails !
+/*
+		if ( $trouver_table('spip_sites') && $trouver_table('spip_sites_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
+			$query = sql_select('l.id_site AS id_url, l.id_objet, l.type, s.*','spip_sites AS s INNER JOIN spip_sites_liens AS l ON l.id_site=s.id_site', sql_in('l.id_objet', $id_objets)." AND l.objet='$objet' ");
+			while ($data = sql_fetch($query)) { // on recupere tous les sites lies dans un tableau de tableaux
+				$urls_array[$data['id_objet']][] = $data;
+			}
+			sql_free($query);
+		}
+		if ( $trouver_table('spip_ims') && $trouver_table('spip_ims_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
+			$query = sql_select("l.id_objet, l.type, m.id_im AS id_url, m.identifiant AS titre,  CONCAT(CONCAT(t.url_debut,m.titre),t.url_fin) AS url ",
+			'spip_ims AS m INNER JOIN spip_ims_liens AS l ON l.id_im=m.id_im INNER JOIN spip_ims_types AS t ON l.type=t.type',
+			sql_in('l.id_objet', $id_objets)." AND l.objet='$objet' ");
+			while ($data = sql_fetch($query)) { // on recupere tous les sites lies dans un tableau de tableaux
+				$urls_array[$data['id_objet']][] = $data;
+			}
+			sql_free($query);
+		}
+*/
+	} else { // on a deja la liste des URLs !
 		$urls_array = $id_objets;
 	}
 	$urls_string = array();  // initialisation du tableau renvoye
@@ -1052,70 +1094,15 @@ function association_formater_urls($id_objets, $objet='auteur', $a=TRUE, $sep=' 
 			if ( !is_array($lien) ) {
 				$lien['url'] = $lien;
 			}
-			if ( $lien['type'] && !$lien['url'] ) // on a juste le "screen-name" pour une messagerie instantannee connue ou le "profil id" pour un reseau social connu
-				switch ( strtolower($lien['type']) ) { // deduire l'adresse a appliquer dans les cas les plus connus
-					case 'aim' :
-					case 'aol' : // OSCAR ou TOC2
-					case 'toc2' :
-						$lien['url'] = "aim:goim?screenname=$lien[titre]";
-						break;
-					case 'yim' :
-					case 'ymsgr' :
-					case 'ymsp' :
-						$lien['url'] = "ymsgr:sendIM?$lien[titre]";
-						break;
-					case 'msn' :
-					case 'msnim' :
-					case 'msnp' :
-						$lien['url'] = "msnim:chat?contact=$lien[titre]";
-						break;
-					case 'xmpp' :
-					case 'googletalk' :
-					case 'gtalk' :
-					case 'jabber' :
-					case 'jingle' : // extension P2P/VoIP implementee par Google
-					case 'gwfp' : // extension (Google) Wave Federation Protocol utilise par Apache Wave
-					case 'impp' : // precurseur/base de XMPP
-						$lien['url'] = "xmpp:$lien[titre]";
-						break;
-					case 'skype' :
-						$lien['url'] = "skype:$lien[titre]?call";
-						break;
-					case 'icq' : // OSCAR
-						$lien['url'] = "http://www.icq.com/people/cmd.php?uin=$lien[titre]&action=message' type='application/x-icq";
-						break;
-					case 'gg' :
-					case 'gadu' :
-					case 'gadu-gadu' :
-						$lien['url'] = "gg:$lien[titre]";
-						break;
-					case 'sip' :
-					case 'simple' :
-					case 'prim' :
-						$lien['url'] = "sip:$lien[titre]";
-						break;
-					case 'irc' :
-						$lien['url'] = "irc://$lien[titre]"; // on suppose que c'est "reseau/cannal" qui sont donne... cf. http://en.wikipedia.org/wiki/Internet_Relay_Chat#Networks
-						break;
-					case 'zephyr' : // base sur Kerberos, projet Athena
-						$lien['url'] = "$lien[titre]@ATHENA.MIT.EDU";
-						break;
-					default :
-						$lien['url'] = "$lien[type]:$lien[titre]"; // probablement le protocole (file, ftp, http, webdav, ...)
-						break;
-				}
+			if ( $lien['type'] && $lien['titre'] && !$lien['url'] ) { // pas d'URL ??? on va tenter d'utiliser l'identifiant de messagerie
+				$lien['url'] = $lien['type'].':'. htmlspecialchars($lien['titre']) ; // on presume que le "type" est le protocole et que le "titre" est le reste...
+			}
 			if ($a) { // balisage HTML avec microformat
-				$urls_string[$id_objet] .= "<a class='url' href='$lien[url]' id='$lien[id_url]'>";
-				if ($lien['type']) {
-					$types = explode(',', $lien['type']);
-					foreach ($types as $type)
-						$urls_string[$id_objet] .= '<span>'. _T("coordonnees:$type") .'</span>: '; // version textuelle
-//						$urls_string[$id_objet] .= '<img alt="" src="'. find_in_path("images/type_$type-16.png") .'" /> '; // version imagee
-				}
+				$urls_string[$id_objet] = "<a class='url' href='$lien[url]' id='$lien[id_url]'>". association_formater_typecoord('url', $lien['type']);
 				unset($lien['type']); // ne devrait plus etre traite par le modele
 				unset($lien['id_objet']); // ne devrait plus etre traite par le modele
 				unset($lien['id_url']); // ne devrait pas etre utilise par le modele
-				$urls_string[$id_objet] .=  ($lien['titre']?$lien['titre']:$lien['url']); // on affiche le titre si present sinon la valeur
+				$urls_string[$id_objet] = $urls_string[$id_objet]. ($lien['titre']?$lien['titre']:$lien['url']); // on affiche le titre si present sinon la valeur
 			} else
 				$urls_string[$id_objet] .= $lien['url'];
 			$urls_string .= ($a?'</a>':'') .$sep;
@@ -1144,8 +1131,7 @@ function association_formater_urls($id_objets, $objet='auteur', $a=TRUE, $sep=' 
  * @return string $valeur
  *   Date au format ISO
  */
-function association_recuperer_date($valeur, $req=TRUE)
-{
+function association_recuperer_date($valeur, $req=TRUE) {
 	$valeur = ($req?_request($valeur):$valeur);
 	if ( $valeur ) {
 		$valeur = preg_replace('/\D/', '-', $valeur, 2); // la limitation a 2 separateurs permet de ne transformer que la partie "date" s'il s'agit d'un "datetime" par exemple.
@@ -1159,8 +1145,7 @@ function association_recuperer_date($valeur, $req=TRUE)
  * @note
  *   Bien qu'il s'agisse en fait de s'assurer que la valeur est un flottant, la fonction s'appelle _montant car elle est utilisee surtout pour les montants.
  */
-function association_recuperer_montant($valeur, $req=TRUE)
-{
+function association_recuperer_montant($valeur, $req=TRUE) {
 	$valeur = ($req?_request($valeur):$valeur);
 	if ( $valeur ) {
 		setlocale(LC_NUMERIC, utiliser_langue_visiteur() );
@@ -1178,8 +1163,7 @@ function association_recuperer_montant($valeur, $req=TRUE)
  * @note
  *   Bien qu'il s'agisse en fait de s'assurer que la valeur est un entier, la fonction s'appelle _id car elle est utilisee surtout pour les identifiants de table.
  */
-function association_recuperer_entier($valeur, $req=TRUE)
-{
+function association_recuperer_entier($valeur, $req=TRUE) {
 	$valeur = ($req?_request($valeur):$valeur);
 	return intval($valeur);
 }
@@ -1192,8 +1176,7 @@ function association_recuperer_entier($valeur, $req=TRUE)
  * @note
  *   ...
  */
-function association_recuperer_liste($valeur, $req=FALSE, $sep='')
-{
+function association_recuperer_liste($valeur, $req=FALSE, $sep='') {
 	$valeur = ($req?_request($valeur):$valeur);
 	if ( !is_array($valeur) )
 		if ( is_scalar($valeur) ) // chaine ou nombre
@@ -1228,8 +1211,7 @@ function association_recuperer_liste($valeur, $req=FALSE, $sep='')
 /**
  * S'assurer que la valeur saisie est une chaine de date valide
  */
-function association_verifier_date($valeur, $rex=FALSE, $req=TRUE)
-{
+function association_verifier_date($valeur, $rex=FALSE, $req=TRUE) {
 	$date = $req ? _request($valeur) : $valeur;
 	if ( $rex && ($date=='0000-00-00' || !$date) )
 		return '';
@@ -1245,8 +1227,7 @@ function association_verifier_date($valeur, $rex=FALSE, $req=TRUE)
 /**
  * S'assurer que la valeur saisie est un flottant positif
  */
-function association_verifier_montant($valeur, $req=TRUE)
-{
+function association_verifier_montant($valeur, $req=TRUE) {
 	if (association_recuperer_montant($valeur,$req)<0)
 		return _T('asso:erreur_montant');
 	else
@@ -1258,8 +1239,7 @@ function association_verifier_montant($valeur, $req=TRUE)
  * de la table spip_asso_membres (par defaut) ou spip_auteurs (si on elargi a tous
  * --ceci permet d'editer des membres effaces tant qu'ils sont references par SPIP)
  */
-function association_verifier_membre($valeur, $rex=FALSE, $req=TRUE)
-{
+function association_verifier_membre($valeur, $rex=FALSE, $req=TRUE) {
 	$id_auteur = intval($req?_request($valeur):$valeur);
 	if ($id_auteur) {
 		if ( sql_countsel('spip_'.($rex?'auteurs':'asso_membres'), "id_auteur=$id_auteur")==0 ) {
@@ -1267,6 +1247,44 @@ function association_verifier_membre($valeur, $rex=FALSE, $req=TRUE)
 		}
 	} else
 		return '';
+}
+
+/**
+ * S'assurer que la somme des ventilations par destinations comptables correspond
+ * au montant de l'operation.
+ * le parametre d'entree est le montant total attendu, les montants des destinations
+ * sont recuperes directement dans $_POST
+ */
+function association_verifier_destinations($valeur, $req=TRUE) {
+	if ( ($GLOBALS['association_metas']['destinations']) && !array_key_exists($valeur, $erreurs) ) { // verifier si besoin que le montant des destinations correspond bien au montant de l'operation
+		$montant_attendu = floatval($req?_request($valeur):$valeur);
+		$err = '';
+		$toutesDestinationsIds = _request('id_dest');
+		$toutesDestinationsMontants = _request('montant_dest');
+		$total_destination = 0;
+		$id_inserted = array();
+		if (count($toutesDestinationsIds)>1) { // on a plusieurs destinations
+			foreach ($toutesDestinationsIds as $id => $id_destination) { // on verifie qu'il n'y a pas plusieurs fois la meme destination, tout en recalculant le total
+				if (!array_key_exists($id_destination,$id_inserted)) {
+					$id_inserted[$id_destination] = 0;
+				} else {
+					$err = _T('asso:erreur_destination_dupliquee');
+				}
+				$total_destination += association_recuperer_montant($toutesDestinationsMontants[$id], FALSE); // les montants sont dans un autre tableau aux meme cles
+			}
+			if ( $montant_attendu!=$total_destination ) { // on verifie que la somme des montants des destinations correspond au montant attendu
+				$err .= _T('asso:erreur_montant_destination');
+			}
+		} else { // une seule destination, le montant peut ne pas avoir ete precise, dans ce cas pas de verif, c'est le montant attendu qui sera entre dans la base
+			if ($toutesDestinationsMontants[1]) { // quand on a une seule destination, l'id dans les tableaux est forcement 1 par contruction de l'editeur
+				if ( $montant_attendu!=association_recuperer_montant($toutesDestinationsMontants[1], FALSE) ) { // on verifie que le montant indique correspond au montant attendu
+					$err = _T('asso:erreur_montant_destination');
+				}
+			}
+		}
+		return $err;
+	} else
+		return FALSE;
 }
 
 /** @} */
@@ -1301,8 +1319,7 @@ function association_verifier_membre($valeur, $rex=FALSE, $req=TRUE)
 /**
  * Selecteur d'exercice comptable
  */
-function association_selectionner_exercice($sel='', $exec='', $plus='')
-{
+function association_selectionner_exercice($sel='', $exec='', $plus='') {
     $res = '<select name ="exercice" onchange="form.submit()">';
 #    $res .= '<option value="0" ';
 #	$res .= (!$el?' selected="selected"':'');
@@ -1321,8 +1338,7 @@ function association_selectionner_exercice($sel='', $exec='', $plus='')
 /**
  * Selecteur de destination comptable
  */
-function association_selectionner_destination($sel='', $exec='', $plus='')
-{
+function association_selectionner_destination($sel='', $exec='', $plus='') {
     if ( !$GLOBALS['association_metas']['destinations'])
  		return ''; // on n'affiche le selecteur que si l'utilisation des destinations est activee en configuration
    $res = '<select name ="destination" onchange="form.submit()">';
@@ -1344,8 +1360,7 @@ function association_selectionner_destination($sel='', $exec='', $plus='')
 /**
  * Selecteur de grouoe de membres
  */
-function association_selectionner_groupe($sel='', $exec='', $plus='')
-{
+function association_selectionner_groupe($sel='', $exec='', $plus='') {
     $sql = sql_select('id_groupe, nom', 'spip_asso_groupes', 'id_groupe>=100', '', 'nom');  // on ne prend en consideration que les groupe d'id >= 100, les autres sont reserves a la gestion des autorisations
     if ( !$sql || !sql_count($sql) )
 		return '';  // ne proposer que s'il y a des groupes definis
@@ -1370,8 +1385,7 @@ function association_selectionner_groupe($sel='', $exec='', $plus='')
  *   Idem instituer_statut_interne_ici
  *   Idem instituer_adherent_ici
  */
-function association_selectionner_statut($sel='', $exec='', $plus='')
-{
+function association_selectionner_statut($sel='', $exec='', $plus='') {
     $res = '<select name="statut_interne" onchange="form.submit()">';
 #    $res .= '<option value="tous"';
 #    $res .= (($sel=='tous' || $sel=='%')?' selected="selected"':'');
@@ -1391,8 +1405,7 @@ function association_selectionner_statut($sel='', $exec='', $plus='')
 /**
  * Zone de saisie de numero de membre
  */
-function association_selectionner_id($sel='', $exec='', $plus='')
-{
+function association_selectionner_id($sel='', $exec='', $plus='') {
     $res = '<input type="text" name="id" onfocus=\'this.value=""\' size="5"  value="'. ($sel?$sel:_T('asso:entete_id')) .'" />'.$plus;
     return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>') : $res;
 }
@@ -1419,8 +1432,7 @@ function association_selectionner_id($sel='', $exec='', $plus='')
  *   Nom (sans prefixe "date_") du champ contenant les annees recherchees
  *
  */
-function association_selectionner_annee($annee='', $table, $champ, $exec='', $plus='', $lst=TRUE)
-{
+function association_selectionner_annee($annee='', $table, $champ, $exec='', $plus='', $lst=TRUE) {
     if ($exec) {
 		$res = '<form method="post" action="'. generer_url_ecrire($exec) .'"><div>';
 		$res .= '<input type="hidden" name="exec" value="'.$exec.'" />';
@@ -1464,8 +1476,7 @@ function association_selectionner_annee($annee='', $table, $champ, $exec='', $pl
  *   Nom du champ contenant les initiales recherchees
  *
  */
-function association_selectionner_lettre($lettre='', $table, $champ, $exec='', $plus='', $lst=FALSE)
-{
+function association_selectionner_lettre($lettre='', $table, $champ, $exec='', $plus='', $lst=FALSE) {
     $lettre = strtoupper($lettre);
     if ($exec) {
 		$res = '<form method="post" action="'. generer_url_ecrire($exec) .'"><div>';
@@ -1517,8 +1528,7 @@ function association_selectionner_lettre($lettre='', $table, $champ, $exec='', $
  *   Il s'agit d'un selecteur maintenu par compatibilite (usage uniquement dans
  *   exec/bilan.php actuellement) et ne devrait plus etre utilise a l'avenir
  */
-function association_selectionner_destinations($sel='', $exec='', $plus='', $lst=FALSE)
-{
+function association_selectionner_destinations($sel='', $exec='', $plus='', $lst=FALSE) {
     if (!$GLOBALS['association_metas']['destinations'])
 		return FALSE;
     $res1 = '<select name ="destinations[]" multiple="multiple" onchange="form.submit()">';
@@ -1570,8 +1580,7 @@ function association_selectionner_destinations($sel='', $exec='', $plus='', $lst
  * @return string $res
  *   HTML du bandeau de pagination
  */
-function association_selectionner_souspage($pages, $exec='', $params='', $tbl=TRUE, $debut='debut', $req=TRUE)
-{
+function association_selectionner_souspage($pages, $exec='', $params='', $tbl=TRUE, $debut='debut', $req=TRUE) {
 	$res = ($tbl?"<table width='100%' class='asso_tablo_filtres'><tr>\n":'') .'<td align="left">';
 	if ( is_array($pages) ) {
 		$nbr_pages = ceil(call_user_func_array('sql_countsel',$pages)/_ASSOCIASPIP_LIMITE_SOUSPAGE); // ceil() ou intval()+1 ?
@@ -1706,8 +1715,7 @@ function generer_url_activite($id, $param='', $ancre='') {
  *   Ce n'est pas redondant d'avoir a la fois $type et $ObjetEtendu qui peuvent
  *   avoir des valeurs differentes comme on peut le voir dans exec/adherent.php et exec/inscrits_activite.php !
  */
-function association_totauxinfos_intro($titre, $type='', $id=0, $DesLignes=array(), $ObjetEtendu='')
-{
+function association_totauxinfos_intro($titre, $type='', $id=0, $DesLignes=array(), $ObjetEtendu='') {
 	$res = '';
 	if ($type) {
 		$res .= '<div style="text-align: center" class="verdana1 spip_x-small">'. _T('asso:titre_num', array('titre'=>_T("local:$type"), 'num'=>$id) ) .'</div>'; // presentation propre a Associaspip qui complete par un autre titre (voir ci-apres). Dans un SPIP traditionnel on aurait plutot : $res .= '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'. association_langue($type) .'<br /><span class="spip_xx-large">'.$id.'</span></div>';
@@ -1718,7 +1726,7 @@ function association_totauxinfos_intro($titre, $type='', $id=0, $DesLignes=array
 	if ( count($DesLignes) OR $ObjetEtendu )
 		$res .= '<dl class="verdana1 spip_xx-small">';
 	foreach ($DesLignes as $dt=>$dd) {
-		$res .= '<dt>'. association_langue($dt) .'</dt><dd>'. propre($dd) .'</dd>'; // propre() paragraphe (rajoute <p>)... mais ce comportement peut etre change en mettant "paragrapher" a false dans mes_options.php : http://www.spip.net/fr_article889.html Cette presentation-ci est propre a Associaspip ; Habituellement on a : $res .= "<div class='$dt'><strong>". association_langue($dt) ."</strong> $dd</div>";
+		$res .= '<dt>'. association_langue($dt) .'</dt><dd>'. propre($dd) .'</dd>'; // propre() paragraphe (rajoute <p>)... mais ce comportement peut etre change en mettant "paragrapher" a FALSE dans mes_options.php : http://www.spip.net/fr_article889.html Cette presentation-ci est propre a Associaspip ; Habituellement on a : $res .= "<div class='$dt'><strong>". association_langue($dt) ."</strong> $dd</div>";
 	}
 	if ($ObjetEtendu) {
 		$champsExtras = association_trouver_iextras($ObjetEtendu, $id); // on recupere les champs extras crees manuellement (i.e. via l'interface d'edition du prive, pas ceux rajoutes par les plugins !)
@@ -1766,8 +1774,7 @@ function association_totauxinfos_intro($titre, $type='', $id=0, $DesLignes=array
  *   - l'ecart-type <http://fr.wikipedia.org/wiki/Dispersion_statistique#.C3.89cart_type>
  *   - ainsi que les extrema si on le desire
  */
-function association_totauxinfos_stats($legende='', $sql_table_asso, $sql_champs, $sql_criteres='1=1',$decimales_significatives=1, $avec_extrema=false)
-{
+function association_totauxinfos_stats($legende='', $sql_table_asso, $sql_champs, $sql_criteres='1=1',$decimales_significatives=1, $avec_extrema=FALSE) {
 	if (!is_array($sql_champs) || !$sql_table_asso)
 		return FALSE;
 	$res = '<table width="100%" class="asso_infos">';
@@ -1805,7 +1812,7 @@ function association_totauxinfos_stats($legende='', $sql_table_asso, $sql_champs
  * @param string $legende
  *   Complement du titre du tableau
  * @param array $lignes
- *   'classe_unique_css_de_la_ligne' => array( 'chaine_de_langue', effectif_occurence)
+ *   'classe_unique_css_de_la_ligne' => array( 'chaine_de_langue', effectif_occurence, "texte libre place avant la chaine de langue", "texte libre place apres la chaine de langue")
  * @param int $decimales_significatives
  *   Nombre de decimales affichees
  * @return string $res
@@ -1815,8 +1822,7 @@ function association_totauxinfos_stats($legende='', $sql_table_asso, $sql_champs
  * @note
  *   Les classes CSS sont utilisees comme cle des tables parce-qu'il ne doit y en avoir qu'une par ligne.
  */
-function association_totauxinfos_effectifs($legende='', $lignes, $decimales_significatives=0)
-{
+function association_totauxinfos_effectifs($legende='', $lignes, $decimales_significatives=0) {
 	if (!is_array($lignes) )
 		return FALSE;
 	$nbr_actuel = $nbr_total = 0;
@@ -1824,14 +1830,14 @@ function association_totauxinfos_effectifs($legende='', $lignes, $decimales_sign
 	$res .= '<caption>'. _T('asso:totaux_nombres', array('de_par'=>_T("local:$legende"))) .'</caption><tbody>';
 	foreach ($lignes as $classe_css=>$params) {
 		$res .= '<tr class="'.$classe_css.'">';
-		$res .= '<td class"text">'. association_langue($params[0]) .'</td>';
+		$res .= '<td class="text">'. $params[2]. association_langue($params[0]) .$params[3].'</td>';
 		$nbr_actuel = is_array($params[1]) ? call_user_func_array('sql_countsel', $params[1]) : $params[1] ;
 		$res .= '<td class="' .($decimales_significatives?'decimal':'integer') .'">'. association_formater_nombre($nbr_actuel, $decimales_significatives) .'</td>';
 		$nbr_total += $nbr_actuel;
 		$res .= '</tr>';
 	}
 	$res .= '</tbody>';
-	if (count($lignes)>1) {
+	if ( count($lignes)>1 ) {
 		$res .= '<tfoot>';
 		$res .= '<tr><th class="text">'._T('asso:liste_nombre_total').'</th>';
 		$res .= '<th class="' .($decimales_significatives?'decimal':'integer') .'">'. association_formater_nombre($nbr_total, $decimales_significatives) .'</th></tr>';
@@ -1855,8 +1861,7 @@ function association_totauxinfos_effectifs($legende='', $lignes, $decimales_sign
  * @attention
  *   Tous ces parametres sont facultatifs, mais un tableau est quand meme genere dans tous les cas !
  */
-function association_totauxinfos_montants($legende='', $somme_recettes=0, $somme_depenses=0)
-{
+function association_totauxinfos_montants($legende='', $somme_recettes=0, $somme_depenses=0) {
 	$res = '<table width="100%" class="asso_infos">';
 	$res .= '<caption>'. _T('asso:totaux_montants', array('de_par'=>_T("local:$legende"))) .'</caption><tbody>';
 	$recettes = is_array($somme_recettes) ? call_user_func_array('sql_getfetsel', $somme_recettes) : $somme_recettes ;
@@ -1899,12 +1904,11 @@ function association_totauxinfos_montants($legende='', $somme_recettes=0, $somme
  * @note
  *   Une certaine similitude avec http://programmer.spip.org/boite_infos :)
   */
-function association_bloc_infosgauche($TitreObjet, $NumObjet, $DesLignes=array(), $ObjetEtendu='')
-{
-	$res = debut_boite_info(true);
+function association_bloc_infosgauche($TitreObjet, $NumObjet, $DesLignes=array(), $ObjetEtendu='') {
+	$res = debut_boite_info(TRUE);
 	$res .= association_totauxinfos_intro($TitreObjet, $TitreObjet, $NumObjet, $DesLignes, $ObjetEtendu);
 	$res .= association_date_du_jour();
-	$res .= fin_boite_info(true);
+	$res .= fin_boite_info(TRUE);
 	return $res;
 }
 
@@ -1919,8 +1923,7 @@ function association_bloc_infosgauche($TitreObjet, $NumObjet, $DesLignes=array()
  *   Nom du fichier d'action vers lequel le formulaire sera redirige, sans le prefixe "supprimer_".
  *   Par defaut, quand rien n'est indique, c'est l'objet suffixe de "s" qui est utilise
  */
-function association_bloc_suppression($type, $id, $retour='')
-{
+function association_bloc_suppression($type, $id, $retour='') {
 	$res = '<p><strong>'. _T('asso:vous_aller_effacer', array('quoi'=>'<i>'. _T('asso:objet_num', array('objet'=>$type,'num'=>$id)) .'</i>') ) .'</strong></p>';
 	$res .= '<p class="boutons"><input type="submit" value="'. _T('asso:bouton_confirmer') .'" /></p>';
 	echo redirige_action_post("supprimer_{$type}s", $id, ($retour?$retour:$type.'s'), '', $res);
@@ -1949,14 +1952,13 @@ function association_bloc_suppression($type, $id, $retour='')
  *   (le passage de parametre se faisant par l'URL, celle-ci change)
  *   http://comments.gmane.org/gmane.comp.web.spip.devel/61824
  */
-function association_bloc_filtres($liste_filtres, $exec='', $supplements='', $td=TRUE)
-{
+function association_bloc_filtres($liste_filtres, $exec='', $supplements='', $td=TRUE) {
 	$res = '<form method="get" action="'. ($exec?generer_url_ecrire($exec):'') .'">';
 	if ($exec)
 		$res .= "\n<input type='hidden' name='exec' value='$exec' />";
 	$res .= "\n<". ($td?'table width="100%"':'ul') .' class="asso_tablo_filtres">'. ($td?'<tr>':'');
 	foreach($liste_filtres as $filtre_selection =>$params) {
-		$res .= ($td?'<td':'<li') ." class='filtre_$filtre_selection'>". call_user_func_array("association_selectionner_$filtre_selection", association_recuperer_liste($params, false) ) . ($td?'</td>':'</li>');
+		$res .= ($td?'<td':'<li') ." class='filtre_$filtre_selection'>". call_user_func_array("association_selectionner_$filtre_selection", association_recuperer_liste($params, FALSE) ) . ($td?'</td>':'</li>');
 	}
 	if ( is_array($supplements) ) {
 		foreach ($supplements as $nom => $supplement) {
@@ -1992,11 +1994,10 @@ function association_bloc_filtres($liste_filtres, $exec='', $supplements='', $td
  *   Form HTML complet dans un cadre. Ce formulaire sera traite par l'exec de
  *   l'objet prefixe de "pdf_"
  */
-function association_bloc_listepdf($objet, $params=array(), $prefixeLibelle='', $champsExclus=array(), $coords=true)
-{
+function association_bloc_listepdf($objet, $params=array(), $prefixeLibelle='', $champsExclus=array(), $coords=true) {
 	$res = '';
 	if (test_plugin_actif('FPDF')) { // liste
-		$res .= debut_cadre_enfonce('',true);
+		$res .= debut_cadre_enfonce('', TRUE);
 		$res .= '<h3>'. _T('plugins_vue_liste') .'</h3>';
 		$res .= '<div class="formulaire_spip formulaire_asso_liste_'.$objet.'s">';
 		$champsExtras = association_trouver_iextras("asso_$objet");
@@ -2028,7 +2029,7 @@ function association_bloc_listepdf($objet, $params=array(), $prefixeLibelle='', 
 		$frm .= '<p class="boutons"><input type="submit" value="'. _T('asso:bouton_imprimer') .'" /></p>';
 		$res .= generer_form_ecrire("pdf_${objet}s", $frm, '', '');
 		$res .= '</div>';
-		$res .= fin_cadre_enfonce(true);
+		$res .= fin_cadre_enfonce(TRUE);
 	}
 
 	return $res;
@@ -2061,8 +2062,7 @@ function association_bloc_listepdf($objet, $params=array(), $prefixeLibelle='', 
  * @return string $res
  *   Table-HTML listant les donnees formatees
  */
-function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(), $cle1='', $extra=array(), $cle2='', $selection=0 )
-{
+function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(), $cle1='', $extra=array(), $cle2='', $selection=0 ) {
 	if ( is_array($requete_sql) && count($requete_sql)>1 ) {
 		$table = ($requete_sql[1] ? $requete_sql[1] : ($requete_sql['table'] ? $requete_sql['table'] : ($requete_sql['from']?$requete_sql['from']:$requete_sql['tables']) ) ) ; // on recupere la partie "FROM" de la requete SQL...
 		$table = substr_replace(trim( is_array($table)?$table[0]:$table ), '', 0, 5); //  on supprime le prefixe "spip_" de la 1ere table (normalement la principale...)
@@ -2198,8 +2198,7 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
  * - exercice_date_debut($exercice) <=> sql_asso1champ('exercice', $exercice, 'debut')
  * - exercice_date_fin($exercice) <=> sql_asso1champ('exercice', $exercice, 'fin')
  */
-function sql_asso1champ($table, $id, $champ, $pluriel=TRUE)
-{
+function sql_asso1champ($table, $id, $champ, $pluriel=TRUE) {
 	return sql_getfetsel($champ, "spip_asso_$table".($pluriel?'s':''), "id_$table=".intval($id));
 }
 
@@ -2209,8 +2208,7 @@ function sql_asso1champ($table, $id, $champ, $pluriel=TRUE)
  * @return array
  *   Tableau des champs sous forme : 'nom_du_champ'=>"contenu du champ"
  */
-function sql_asso1ligne($table, $id, $pluriel=TRUE)
-{
+function sql_asso1ligne($table, $id, $pluriel=TRUE) {
 	return sql_fetsel('*', "spip_asso_$table".($pluriel?'s':''), "id_$table=".intval($id));
 }
 
@@ -2222,8 +2220,7 @@ function sql_asso1ligne($table, $id, $pluriel=TRUE)
  * @return string
  *   Chaine de la partie LIMIT-SQL pour sql_select et similaires
  */
-function sql_asso1page($valeur='debut', $req=TRUE)
-{
+function sql_asso1page($valeur='debut', $req=TRUE) {
 	$valeur = intval($req?_request($valeur):$valeur);
 	return "$valeur,"._ASSOCIASPIP_LIMITE_SOUSPAGE;
 }
@@ -2258,8 +2255,7 @@ function sql_asso1page($valeur='debut', $req=TRUE)
  *   http://stackoverflow.com/questions/2563811/sqlite-is-the-case-statement-expensive
  *   http://www.pcreview.co.uk/forums/case-access-sql-t1169064.html
  */
-function sql_asso1set($operateur='UNION', $q1=array(), $q2=array() )
-{
+function sql_asso1set($operateur='UNION', $q1=array(), $q2=array() ) {
 	$nbr_requetes = func_num_args()-1;
 	if ( $nbr_requetes<2 ) // il en faut au moins 2 !
 		return FALSE;
@@ -2303,8 +2299,7 @@ function sql_asso1set($operateur='UNION', $q1=array(), $q2=array() )
  * @return int $id
  * @return array($id, $row)
  */
-function association_passeparam_id($type='', $table='')
-{
+function association_passeparam_id($type='', $table='') {
 	if ($type) // recuperer en priorite : id_compte, id_don, id_evenement, id_ressource, id_vente, etc.
 		$id = intval(_request("id_$type", $_GET));
 	else
@@ -2329,8 +2324,7 @@ function association_passeparam_id($type='', $table='')
  * @return int $an
  * @return array($an, $sql_where)
  */
-function association_passeparam_annee($type='', $table='', $id=0)
-{
+function association_passeparam_annee($type='', $table='', $id=0) {
 	if ($type) // recuperer en priorite :
 		$an = intval(_request("annee_$type", $_GET));
 	else
@@ -2348,6 +2342,8 @@ function association_passeparam_annee($type='', $table='', $id=0)
 			$an = min(sql_getfetsel("MAX(DATE_FORMAT(date_$type, '%Y')) AS an_max", "spip_$table", ''), $an);
 			$an = max(sql_getfetsel("MIN(DATE_FORMAT(date_$type, '%Y')) AS an_min", "spip_$table", ''), $an);
 		}
+		if (!$an) // ID inexistant (donc annee non trouvee) ou table vide (du coup annee vide)
+			$an = date('Y'); // on prend l'annee courante retomber sur nos pattes et surtout ne pas fausser la requete
 		$sql_where = "DATE_FORMAT(date_$type, '%Y')=$an";
 		return array($an, $sql_where);
 	} else
@@ -2359,8 +2355,7 @@ function association_passeparam_annee($type='', $table='', $id=0)
  *
  * @return int $exo
  */
-function association_passeparam_exercice()
-{
+function association_passeparam_exercice() {
 	$exo = intval(_request('exercice'));
 	if (!$exo) // exercice non precise
 		$exo = sql_getfetsel('id_exercice','spip_asso_exercices','','','debut DESC'); // on recupere le dernier exercice en date
@@ -2374,8 +2369,7 @@ function association_passeparam_exercice()
  * @return array($statut, $sql_where)
  * Pour l'instant, appele uniquement dans exec/adherents.php vers la ligne 25
  */
-function association_passeparam_statut($type='', $defaut='')
-{
+function association_passeparam_statut($type='', $defaut='') {
 	if ($type) // recuperer en priorite :
 		$statut = trim(_request("statut_$type", $_GET));
 	else
@@ -2410,6 +2404,55 @@ function association_passeparam_statut($type='', $defaut='')
 
 
 /*****************************************
+ * @defgroup association_chargeparam
+ * Charger des parametres comptables dans le contexte d'un formulaire
+ *
+ * @param string $type
+ * @param int $id
+ * @param array &$contexte
+ * @return array $contexte
+ *   Valeur(s) a charger.
+ *
+** @{ */
+
+function association_chargeparam_operation($type, $id, &$contexte) {
+	if ( $id ) { // si c'est une modification, on charge ses id_compte et journal depuis la table asso_comptes
+		list($id_compte, $journal) = sql_fetsel('id_compte, journal', 'spip_asso_comptes', 'imputation='. sql_quote($GLOBALS['association_metas']["pc_$type"]) .' AND id_journal='. sql_quote($id) ); // on recupere id_compte et journal dans la table des asso_compteS
+	} else {  // si c'est une nouvelle operation, on charge id_compte et journal vides
+		$id_compte = $journal = '';
+	}
+	$contexte['journal'] = $journal; // ajoute le  journal qui ne se trouve pas dans la table chargee par editer_objet_charger mais dans asso_comptes plutot
+	$contexte['_hidden'] .= "<input type='hidden' name='id_compte' value='$id_compte' />"; // on concatene aux _hidden de $contexte , id_compte qui sera utilise dans l'action
+	$contexte['classe_banques'] = $GLOBALS['association_metas']['classe_banques'];
+	return $contexte;
+}
+
+function association_chargeparam_destination($type, &$contexte) {
+	if ($GLOBALS['association_metas']['destinations']) { // on ajoute les metas de destinations
+		$contexte['classe_banques'] = $GLOBALS['association_metas']['classe_banques'];
+		$contexte['destinations_on'] = TRUE;
+		include_spip('inc/association_comptabilite');
+		// on recupere les destinations associes a id_compte
+		$dest_id_montant = association_liste_destinations_associees($id_compte);
+		if (is_array($dest_id_montant)) {
+			$contexte['id_dest'] = array_keys($dest_id_montant);
+			$contexte['montant_dest'] = array_values($dest_id_montant);
+		} else {
+			$contexte['id_dest'] = '';
+			$contexte['montant_dest'] = '';
+		}
+		$contexte['unique_dest'] = '';
+		$contexte['defaut_dest'] = ($type ? $GLOBALS['association_metas']["dc_$type"] : ''); // ces variables sont recuperees par la balise dynamique directement dans l'environnement
+	}
+	return $contexte;
+}
+
+/** @} */
+
+
+
+
+/*****************************************
  * @defgroup divers
  * Inclassables
  *
@@ -2424,8 +2467,7 @@ function association_passeparam_statut($type='', $defaut='')
  *   effet (vrai, par defaut) ou s'il est renvoye seul (faux)
  * @return string $res
  */
-function association_date_du_jour($phraser=TRUE)
-{
+function association_date_du_jour($phraser=TRUE) {
 	$frmt_m = date('Y-m-d'. (_ASSOCIASPIP_AUJOURDHUI_HORAIRE?'\TH:i:s':'') ); // format machine-parsable : idealement "\TH:i:s.uP" mais il faut PHP "up"date (plus precisement 5.1.0 pour "e" et 5.1.3 pour "P" et 5.2.0 pour "u")
 	$format = 'affdate_'. (_ASSOCIASPIP_AUJOURDHUI_HORAIRE?'heure':'base');
 	$frmt_h = $format($frmt_m, 'entier');  // format human-readable
@@ -2440,8 +2482,7 @@ function association_date_du_jour($phraser=TRUE)
  * @param string $flux
  * @return string $c
  */
-function association_header_prive($flux)
-{
+function association_header_prive($flux) {
 	$c = direction_css(find_in_path('association.css'));
 	return "$flux\n<link rel='stylesheet' type='text/css' href='$c' />";
 }
@@ -2455,8 +2496,7 @@ function association_header_prive($flux)
  * @param string $list_operation
  * @return string $res
  */
-function affichage_div($type_operation, $list_operation)
-{
+function affichage_div($type_operation, $list_operation) {
 	if(strpos($list_operation, '-')) {
 		$operations = explode('-', $list_operation);
 		$res = 'cachediv';
@@ -2487,8 +2527,7 @@ function affichage_div($type_operation, $list_operation)
  *   - si on veut aussi les donnees :
  *     'nom_de_la_colonne'=>array( "Libelle du champ", "Donnee formatee", "Donnee brute SQL")
  */
-function association_trouver_iextras($ObjetEtendu, $id=0)
-{
+function association_trouver_iextras($ObjetEtendu, $id=0) {
 	$champsExtrasVoulus = array();
 	if (test_plugin_actif('IEXTRAS')) { // le plugin "Interfaces pour ChampsExtras2" est installe et active : on peut donc utiliser les methodes/fonctions natives...
 		include_spip('inc/iextras'); // charger les fonctions de l'interface/gestionnaire (ce fichier charge les methode du core/API)
@@ -2626,8 +2665,7 @@ function association_trouver_iextras($ObjetEtendu, $id=0)
  * @return string
  *   Libelle localise
  */
-function association_langue($chaine)
-{
+function association_langue($chaine) {
 	if ( is_string($chaine) ) {
 		$head = $chaine;
 		$tail = array();

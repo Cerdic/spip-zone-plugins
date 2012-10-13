@@ -20,7 +20,7 @@
 define('FPDI_VERSION', '1.4');
 
 // Check for TCPDF and remap TCPDF to FPDF
-#if (class_exists('TCPDF', false)) {
+#if (class_exists('TCPDF', FALSE)) {
 #    require_once('fpdi2tcpdf_bridge.php');
 #}
 
@@ -153,7 +153,7 @@ class FPDI extends FPDF_TPL {
         if (!isset($pageboxes[$boxName]) && $boxName=='/CropBox')
             $boxName = '/MediaBox';
         if (!isset($pageboxes[$boxName]))
-            return false;
+            return FALSE;
         $this->lastUsedPageBox = $boxName;
         $box = $pageboxes[$boxName];
         $this->tpl++;
@@ -192,8 +192,8 @@ class FPDI extends FPDF_TPL {
         return $this->lastUsedPageBox;
     }
 
-    function useTemplate($tplidx, $_x = null, $_y = null, $_w = 0, $_h = 0, $adjustPageSize = false) {
-        if ($adjustPageSize==true && is_null($_x) && is_null($_y)) {
+    function useTemplate($tplidx, $_x = NULL, $_y = NULL, $_w = 0, $_h = 0, $adjustPageSize = FALSE) {
+        if ($adjustPageSize==TRUE && is_NULL($_x) && is_NULL($_y)) {
             $size = $this->getTemplateSize($tplidx, $_w, $_h);
             $format = array($size['w'], $size['h']);
             if (is_subclass_of($this, 'TCPDF')) {
@@ -224,7 +224,7 @@ class FPDI extends FPDF_TPL {
             foreach($this->parsers AS $filename => $p) {
                 $this->current_parser =& $this->parsers[$filename];
                 if (isset($this->_obj_stack[$filename]) && is_array($this->_obj_stack[$filename])) {
-                    while(($n = key($this->_obj_stack[$filename]))!==null) {
+                    while(($n = key($this->_obj_stack[$filename]))!==NULL) {
                         $nObj = $this->current_parser->pdf_resolve_object($this->current_parser->c, $this->_obj_stack[$filename][$n][1]);
 
                         $this->_newobj($this->_obj_stack[$filename][$n][0]);
@@ -236,7 +236,7 @@ class FPDI extends FPDF_TPL {
                         }
 
                         $this->_out('endobj');
-                        $this->_obj_stack[$filename][$n] = null; // free memory
+                        $this->_obj_stack[$filename][$n] = NULL; // free memory
                         unset($this->_obj_stack[$filename][$n]);
                         reset($this->_obj_stack[$filename]);
                     }
@@ -347,7 +347,7 @@ class FPDI extends FPDF_TPL {
     /**
      * Rewritten to handle existing own defined objects
      */
-    function _newobj($obj_id = false, $onlynewobj = false) {
+    function _newobj($obj_id = FALSE, $onlynewobj = FALSE) {
         if (!$obj_id) {
             $obj_id = ++$this->n;
         }
@@ -409,7 +409,7 @@ class FPDI extends FPDF_TPL {
     			// Fill the object stack if needed
     			$cpfn =& $this->current_parser->filename;
     			if (!isset($this->_don_obj_stack[$cpfn][$value[1]])) {
-    			    $this->_newobj(false, true);
+    			    $this->_newobj(FALSE, TRUE);
     			    $this->_obj_stack[$cpfn][$value[1]] = array($this->n, $value);
                     $this->_don_obj_stack[$cpfn][$value[1]] = array($this->n, $value); // Value is maybee obsolete!!!
                 }
@@ -433,11 +433,11 @@ class FPDI extends FPDF_TPL {
                 $this->_straightOut('<' . $value[1] . '>');
                 break;
             case PDF_TYPE_BOOLEAN:
-    		    $this->_straightOut($value[1] ? 'true ' : 'false ');
+    		    $this->_straightOut($value[1] ? 'TRUE ' : 'FALSE ');
     		    break;
     		case PDF_TYPE_NULL:
-                // The null object.
-    			$this->_straightOut('null ');
+                // The NULL object.
+    			$this->_straightOut('NULL ');
     			break;
     	}
     }
@@ -460,7 +460,7 @@ class FPDI extends FPDF_TPL {
 					$footer = substr($this->getPageBuffer($this->page), -$this->footerlen[$this->page]);
 					$this->setPageBuffer($this->page, $page . ' ' . $s . "\n" . $footer);
 				} else {
-					$this->setPageBuffer($this->page, $s, true);
+					$this->setPageBuffer($this->page, $s, TRUE);
 				}
 			} else {
 				$this->setBuffer($s);
@@ -482,13 +482,13 @@ class FPDI extends FPDF_TPL {
      */
     function _closeParsers() {
         if ($this->state > 2 && count($this->parsers)>0) {
-          	foreach ($this->parsers as $k => $_){
+          	foreach ($this->parsers as $k => $_) {
             	$this->parsers[$k]->closeFile();
-            	$this->parsers[$k] = null;
+            	$this->parsers[$k] = NULL;
             	unset($this->parsers[$k]);
             }
-            return true;
+            return TRUE;
         }
-        return false;
+        return FALSE;
     }
 }

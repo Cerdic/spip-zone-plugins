@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function action_editer_asso_dons()
-{
+function action_editer_asso_dons() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_don = $securiser_action();
 	$erreur = '';

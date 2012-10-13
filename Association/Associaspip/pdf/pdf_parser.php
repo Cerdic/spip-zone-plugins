@@ -91,7 +91,7 @@ if (!class_exists('pdf_parser', false)) {
 	     *
 	     * @var boolean
 	     */
-	    var $readPlain = true;
+	    var $readPlain = TRUE;
 
         /**
          * Constructor
@@ -262,7 +262,7 @@ if (!class_exists('pdf_parser', false)) {
                 $lines = explode($m[0][1], $data);
             }
 
-            $data = $differentLineEndings = $m = null;
+            $data = $differentLineEndings = $m = NULL;
             unset($data, $differentLineEndings, $m);
 
             $linesCount = count($lines);
@@ -286,7 +286,7 @@ if (!class_exists('pdf_parser', false)) {
                                 $result['xref'][$start] = array();
 
                             if (!array_key_exists($gen = (int) $pieces[1], $result['xref'][$start])) {
-                    	        $result['xref'][$start][$gen] = $pieces[2]=='n' ? (int) $pieces[0] : null;
+                    	        $result['xref'][$start][$gen] = $pieces[2]=='n' ? (int) $pieces[0] : NULL;
                     	    }
                             $start++;
                             break;
@@ -296,7 +296,7 @@ if (!class_exists('pdf_parser', false)) {
                 }
             }
 
-            $lines = $pieces = $line = $start = $end = $gen = null;
+            $lines = $pieces = $line = $start = $end = $gen = NULL;
             unset($lines, $pieces, $line, $start, $end, $gen);
 
             fseek($this->f, $o_pos+$trailerPos+7);
@@ -304,7 +304,7 @@ if (!class_exists('pdf_parser', false)) {
             $c = new pdf_context($this->f);
     	    $trailer = $this->pdf_read_value($c);
 
-    	    $c = null;
+    	    $c = NULL;
     	    unset($c);
 
     	    if (!isset($result['trailer'])) {
@@ -315,10 +315,10 @@ if (!class_exists('pdf_parser', false)) {
     	        $this->pdf_read_xref($result, $trailer[1]['/Prev'][1]);
     	    }
 
-    	    $trailer = null;
+    	    $trailer = NULL;
     	    unset($trailer);
 
-            return true;
+            return TRUE;
         }
 
         /**
@@ -328,8 +328,8 @@ if (!class_exists('pdf_parser', false)) {
          * @param string $token a Token
          * @return mixed
          */
-        function pdf_read_value(&$c, $token = null) {
-        	if (is_null($token)) {
+        function pdf_read_value(&$c, $token = NULL) {
+        	if (is_NULL($token)) {
         	    $token = $this->pdf_read_token($c);
         	}
             if ($token===false) {
@@ -480,9 +480,9 @@ if (!class_exists('pdf_parser', false)) {
             				return array (PDF_TYPE_NUMERIC, (int)$token);
         				else
         					return array (PDF_TYPE_REAL, (float)$token);
-        			} else if ($token=='true' || $token=='false') {
-                        return array (PDF_TYPE_BOOLEAN, $token=='true');
-        			} else if ($token=='null') {
+        			} elseif ($token=='TRUE' || $token=='false') {
+                        return array (PDF_TYPE_BOOLEAN, $token=='TRUE');
+        			} elseif ($token=='NULL') {
         			   return array (PDF_TYPE_NULL);
         			} else {
                         // Just a token. Return it.
@@ -496,9 +496,9 @@ if (!class_exists('pdf_parser', false)) {
          *
          * @param object $c pdf_context
          * @param array $obj_spec The object-data
-         * @param boolean $encapsulate Must set to true, cause the parsing and fpdi use this method only without this para
+         * @param boolean $encapsulate Must set to TRUE, cause the parsing and fpdi use this method only without this para
          */
-        function pdf_resolve_object(&$c, $obj_spec, $encapsulate = true) {
+        function pdf_resolve_object(&$c, $obj_spec, $encapsulate = TRUE) {
             // Exit if we get invalid data
         	if (!is_array($obj_spec)) {
                 $ret = false;

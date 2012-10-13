@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_prets()
-{
+function exec_prets() {
 	if (!autoriser('associer', 'activites')) {
 		include_spip('inc/minipres');
 		echo minipres();
@@ -45,7 +44,7 @@ function exec_prets()
 				$type = 'reserve';
 			}
 		} else {
-			switch($ressource['statut']){ // utilisation des anciens 4+ statuts textuels (etat de reservation)
+			switch($ressource['statut']) { // utilisation des anciens 4+ statuts textuels (etat de reservation)
 				case 'ok':
 					$puce = 'verte';
 					break;

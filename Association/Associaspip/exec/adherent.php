@@ -11,7 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_adherent(){
+function exec_adherent() {
 	include_spip('inc/navigation_modules');
 	$id_auteur = association_passeparam_id('auteur');
 	$full = autoriser('associer', 'adherents');
@@ -65,7 +65,7 @@ function exec_adherent(){
 			echo propre($data['commentaire']);
 		$query_groupes = sql_select('g.*, fonction', 'spip_asso_groupes g LEFT JOIN spip_asso_groupes_liaisons l ON g.id_groupe=l.id_groupe', 'g.id_groupe>=100 AND l.id_auteur='.$id_auteur, '', 'g.nom'); // Liste des groupes (on ignore les groupes d'id <100 qui sont dedies a la gestion des autorisations)
 		if (sql_count($query_groupes)) {
-			echo debut_cadre_relief('', true, '', _T('asso:groupes_membre') );
+			echo debut_cadre_relief('', TRUE, '', _T('asso:groupes_membre') );
 			echo association_bloc_listehtml(
 				$query_groupes, // requete
 				array(
@@ -78,18 +78,18 @@ function exec_adherent(){
 				), // boutons d'action
 				'id_groupe' // champ portant la cle des lignes et des boutons
 			);
-			echo fin_cadre_relief(true);
+			echo fin_cadre_relief(TRUE);
 		}
 		if (test_plugin_actif('fpdf') AND $GLOBALS['association_metas']['recufiscal']) { // JUSTIFICATIFS : afficher le lien vers les justificatifs seulemeunt si active en configuration et si FPDF est actif
-			echo debut_cadre_relief('', true, '', _T('asso:liens_vers_les_justificatifs') );
+			echo debut_cadre_relief('', TRUE, '', _T('asso:liens_vers_les_justificatifs') );
 			$data = array_map('array_shift', sql_allfetsel("DATE_FORMAT(date, '%Y')  AS annee", 'spip_asso_comptes', "id_journal=$id_auteur", 'annee', 'annee ASC') );
 			foreach($data as $k => $annee) {
 				echo '<a href="'. generer_url_ecrire('pdf_fiscal', "id=$id_auteur&annee=$annee") .'">'.$annee.'</a> ';
 			}
-			echo fin_cadre_relief(true);
+			echo fin_cadre_relief(TRUE);
 		}
-		if ($GLOBALS['association_metas']['pc_cotisations']){ // HISTORIQUE COTISATIONS
-			echo debut_cadre_relief('', true, '', _T('asso:adherent_titre_historique_cotisations') );
+		if ($GLOBALS['association_metas']['pc_cotisations']) { // HISTORIQUE COTISATIONS
+			echo debut_cadre_relief('', TRUE, '', _T('asso:adherent_titre_historique_cotisations') );
 			if ($full) { // si on a l'autorisation admin, on ajoute un bouton pour ajouter une cotisation
 				echo '<p><a href="' .generer_url_ecrire('ajout_cotisation', "id=$id_auteur").'">' . _T('asso:adherent_label_ajouter_cotisation') .'</a></p>';
 			}
@@ -102,10 +102,10 @@ function exec_adherent(){
 				$full,
 				'cotisation'
 			);
-			echo fin_cadre_relief(true);
+			echo fin_cadre_relief(TRUE);
 		}
-		if ($GLOBALS['association_metas']['activites']){ // HISTORIQUE ACTIVITES
-			echo debut_cadre_relief('', true, '', _T('asso:adherent_titre_historique_activites') );
+		if ($GLOBALS['association_metas']['activites']) { // HISTORIQUE ACTIVITES
+			echo debut_cadre_relief('', TRUE, '', _T('asso:adherent_titre_historique_activites') );
 			echo association_bloc_listehtml(
 				array('*', 'spip_asso_activites As a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', "id_auteur=$id_auteur", '', 'date_debut DESC, date_fin DESC', '0,10'), // requete
 				array(
@@ -120,10 +120,10 @@ function exec_adherent(){
 				) : array(), // boutons d'action
 				'id_activite' // champ portant la cle des lignes et des boutons
 			);
-			echo fin_cadre_relief(true);
+			echo fin_cadre_relief(TRUE);
 		}
-		if ($GLOBALS['association_metas']['ventes']){ // HISTORIQUE VENTES
-			echo debut_cadre_relief('', true, '', _T('asso:adherent_titre_historique_ventes') );
+		if ($GLOBALS['association_metas']['ventes']) { // HISTORIQUE VENTES
+			echo debut_cadre_relief('', TRUE, '', _T('asso:adherent_titre_historique_ventes') );
 			echo association_bloc_listehtml(
 				array('*', 'spip_asso_ventes', "id_acheteur=$id_auteur", '', 'date_vente DESC', '0,10'), // requete
 				array(
@@ -138,10 +138,10 @@ function exec_adherent(){
 				) : array(), // boutons d'action
 				'id_vente' // champ portant la cle des lignes et des boutons
 			);
-			echo fin_cadre_relief(true);
+			echo fin_cadre_relief(TRUE);
 		}
-		if ($GLOBALS['association_metas']['dons']){ // HISTORIQUE DONS
-			echo debut_cadre_relief('', true, '', _T('asso:adherent_titre_historique_dons') );
+		if ($GLOBALS['association_metas']['dons']) { // HISTORIQUE DONS
+			echo debut_cadre_relief('', TRUE, '', _T('asso:adherent_titre_historique_dons') );
 			echo association_bloc_listehtml(
 				array('*', 'spip_asso_dons', "id_auteur=$id_auteur", '', 'date_don DESC', '0,10'), // requete
 				array(
@@ -167,10 +167,10 @@ function exec_adherent(){
 				'don'
 			);
 */
-			echo fin_cadre_relief(true);
+			echo fin_cadre_relief(TRUE);
 		}
-		if ($GLOBALS['association_metas']['prets']){ // HISTORIQUE PRETS
-			echo debut_cadre_relief('', true, '', _T('asso:adherent_titre_historique_prets') );
+		if ($GLOBALS['association_metas']['prets']) { // HISTORIQUE PRETS
+			echo debut_cadre_relief('', TRUE, '', _T('asso:adherent_titre_historique_prets') );
 			echo association_bloc_listehtml(
 				array('*', 'spip_asso_prets AS P LEFT JOIN spip_asso_ressources AS R ON P.id_ressource=R.id_ressource', "id_auteur=$id_auteur", '', 'id_pret DESC', '0,10'), // requete
 				array(
@@ -185,14 +185,13 @@ function exec_adherent(){
 				) : array(), // boutons d'action
 				'id_pret' // champ portant la cle des lignes et des boutons
 			);
-			echo fin_cadre_relief(true);
+			echo fin_cadre_relief(TRUE);
 		}
 		fin_page_association();
 	}
 }
 
-function voir_adherent_paiements($data, $lien)
-{
+function voir_adherent_paiements($data, $lien) {
 	return association_bloc_listehtml(
 		$data, // requete
 		array(

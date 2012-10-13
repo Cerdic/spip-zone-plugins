@@ -1,12 +1,11 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & Francois de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010 Emmanuel Saint-James
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -16,19 +15,17 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/autoriser');
 
-function formulaires_synchroniser_asso_activites_charger_dist($id_evenement='')
-{
-	// rien a charger, c'est un formulaire basique
-//	$contexte = formulaires_editer_objet_charger('evenements', $id_evenement, '', '',  generer_url_ecrire('inscrits_activite','id='.$id_evenement), '');
+function formulaires_synchroniser_asso_activites_charger_dist($id_evenement='') {
+	$contexte['id_evenement'] = $id_evenement; // passer le parametre par formulaire
 	$contexte['_hidden'] .= "<input type='hidden' name='id_evenement' value='$id_evenement' />"; // passer le parametre par formulaire
 	$contexte['_action'] = array('synchroniser_asso_activites',''); // pour passer securiser action
 
 	return $contexte;
 }
 
-function formulaires_synchroniser_asso_activites_verifier_dist($id_evenement='')
-{
+function formulaires_synchroniser_asso_activites_verifier_dist($id_evenement='') {
 	$erreurs = array();
+
 	// pas de verification non plus
 
 	return $erreurs;

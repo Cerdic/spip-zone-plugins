@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_ajout_inscription()
-{
+function exec_ajout_inscription() {
 	if (!autoriser('associer', 'activites')) {
 		include_spip('inc/minipres');
 		echo minipres();

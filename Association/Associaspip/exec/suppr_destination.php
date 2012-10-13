@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_suppr_destination()
-{
+function exec_suppr_destination() {
 	if (!autoriser('configurer_compta', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();

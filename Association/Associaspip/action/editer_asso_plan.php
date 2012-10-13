@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
     return;
 
-function action_editer_asso_plan()
-{
+function action_editer_asso_plan() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_plan = $securiser_action();
 	$code = _request('code');
@@ -20,7 +19,7 @@ function action_editer_asso_plan()
 	include_spip('base/association');
 	$champs = array(
 		'date_anterieure' => association_recuperer_date('date_anterieure'),
-		'active' => (_request('active')?true:false), // active est un booleen dans la base, et la request recupere l'etat de la checkbox
+		'active' => (_request('active')?TRUE:FALSE), // active est un booleen dans la base, et la request recupere l'etat de la checkbox
 		'code' => $code,
 		'intitule' => _request('intitule'),
 		'classe' => _request('classe'),

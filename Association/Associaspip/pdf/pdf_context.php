@@ -17,7 +17,7 @@
 //  limitations under the License.
 //
 
-if (!class_exists('pdf_context', false)) {
+if (!class_exists('pdf_context', FALSE)) {
 
     class pdf_context {
 
@@ -71,22 +71,22 @@ if (!class_exists('pdf_context', false)) {
     		if ($this->offset>=$this->length-1) {
     			return $this->increase_length();
     		} else {
-    			return true;
+    			return TRUE;
     		}
     	}
 
     	// Forcefully read more data into the buffer
     	function increase_length($l = 100) {
     		if ($this->_mode==0 && feof($this->file)) {
-    			return false;
+    			return FALSE;
     		} else if ($this->_mode==0) {
     		    $totalLength = $this->length +$l;
     		    do {
                     $this->buffer .= fread($this->file, $totalLength-$this->length);
                 } while ((($this->length = strlen($this->buffer))!=$totalLength) && !feof($this->file));
-    			return true;
+    			return TRUE;
     		} else {
-    	        return false;
+    	        return FALSE;
     		}
     	}
     }

@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 // Export du Compte de Resultat au format YAML
 // http://fr.wikipedia.org/wiki/Yaml
 function exec_export_compteresultats_yaml() {
-	if (!autoriser('associer', 'export_comptes')) {
+	if (!autoriser('voir_compta', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_suppr_exercice()
-{
+function exec_suppr_exercice() {
 	if (!autoriser('associer', 'exercices')) {
 		include_spip('inc/minipres');
 		echo minipres();

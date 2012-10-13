@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_association()
-{
+function exec_association() {
 	if (!autoriser('voir_profil', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
@@ -32,14 +31,14 @@ function exec_association()
 			'exercices_budgetaires_titre' => array('calculatrice.gif', 'exercices', array('configurer_compta', 'association') ),
 		));
 		debut_cadre_association('assoc_qui.png', 'association_infos_contacts');
-		echo '<div class="vcard" id="vcard-asso">';
+		echo '<div class="vcard">';
 		// Profil de l'association
-		echo debut_cadre_enfonce('',true);
+		echo debut_cadre_enfonce('', TRUE);
 		if (!$GLOBALS['association_metas']['nom'] && autoriser('editer_profil', 'association')) { // c'est surement une nouvelle installation (vu que le nom est obligatoire)
-			echo '<a href="'.generer_url_ecrire('configurer_association').'">'. gros_titre(_T('asso:profil_de_lassociation'),'',false).'</a>';
+			echo '<a href="'.generer_url_ecrire('configurer_association').'">'. gros_titre(_T('asso:profil_de_lassociation'), '', FALSE).'</a>';
 		}
 		echo '<h3 class="fn org"><strong class="organization-name">'.$GLOBALS['association_metas']['nom']."</strong></h3>\n";
-		echo '<p class="adr">';
+		echo '<p class="adr" id="vcard-asso-adr">';
 		echo '<span class="street-address">'.$GLOBALS['association_metas']['rue']."</span><br />\n";
 		echo '<span class="postal-code">'.$GLOBALS['association_metas']['cp'].'</span>&nbsp;';
 		echo '<span class="locality">'.$GLOBALS['association_metas']['ville']."</span><br />\n";
@@ -60,27 +59,25 @@ function exec_association()
 			echo '<li>'.$GLOBALS['association_metas']['declaration']."</li>\n";
 		if ($GLOBALS['association_metas']['prefet'])
 			echo '<li>'.$GLOBALS['association_metas']['prefet']."</li>\n";
-		// afficher les metas definies par l'utilisateur si il y en a
 		$query = sql_select('nom,valeur', 'spip_association_metas', "nom LIKE 'meta_utilisateur_%'");
-		while ($row = sql_fetch($query)) {
+		while ($row = sql_fetch($query)) { // afficher les metas definies par l'utilisateur si il y en a
 			echo '<li>'. ucfirst(_T(str_replace('meta_utilisateur_', '', $row['nom']))).'&nbsp;:&nbsp;'.$row['valeur']."</li>\n";
 		}
 		echo "</ul>";
-		echo fin_cadre_enfonce(true);
+		echo fin_cadre_enfonce(TRUE);
 		echo "</div>\n";
-		// affiche tous les groupes devant l'etre
 		$queryGroupesAffiches = sql_select('id_groupe, nom', 'spip_asso_groupes', 'affichage>0', '', 'affichage');
-		while ($row = sql_fetch($queryGroupesAffiches)) {
-			echo '<div class="vcard" id="vcard-group'.$row['id_groupe'].'"><a class="include" href="#vcard-asso"></a>',
-			'<span class="org"><abbr class="organization-name" title="'.$GLOBALS['association_metas']['nom'].'"></abbr>'; //!\ l'inclusion de fragments (class=include cf. http://microformats.org/wiki/include-pattern) est la bonne methode, mais n'est pas encore prise en compte partout, donc on duplique quand meme le nom
-			echo debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif', true, '', '<a class="organization-unit"'. (autoriser('editer_groupe', 'association') ? (' title="'._T('asso:editer_groupe').'" href="'.generer_url_ecrire('edit_groupe', 'id='.$row['id_groupe']) ):'').'">'.$row['nom'].'</a>');
-//			echo '<a class="org organization-unit" title="'._T('asso:editer_groupe').'" href="'.generer_url_ecrire('edit_groupe', 'id='.$row['id_groupe']).'">'.gros_titre($row['nom'], _DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif', false).'</a>';
+		while ($row = sql_fetch($queryGroupesAffiches)) { // affiche tous les groupes devant l'etre
+			echo '<div class="vcard"><a class="include" href="#vcard-asso-adr"></a><div class="org" id="vcard-group'.$row['id_groupe'].'"><abbr class="organization-name" title="'.$GLOBALS['association_metas']['nom'].'"></abbr>'; //!\ inclusion de fragments :  http://microformats.org/wiki/include-pattern
+			echo debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif', TRUE, '', '<a class="organization-unit"'. (autoriser('editer_groupe', 'association') ? (' title="'._T('asso:editer_groupe').'" href="'.generer_url_ecrire('edit_groupe', 'id='.$row['id_groupe']) ):'').'">'.$row['nom'].'</a>');
+//			echo '<a class="org organization-unit" title="'._T('asso:editer_groupe').'" href="'.generer_url_ecrire('edit_groupe', 'id='.$row['id_groupe']).'">'.gros_titre($row['nom'], _DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif', FALSE).'</a>';
+			echo '</div></div>';
 			echo recuperer_fond('modeles/asso_membres', array('id_groupe' => $row['id_groupe']));
-			echo fin_cadre_relief(true);
-			echo '</span></div>';
+			echo fin_cadre_relief(TRUE);
 		}
 		fin_page_association();
-		//Petite routine pour mettre a jour les statuts de cotisation "echu"
+		// Petite routine pour mettre a jour les statuts de cotisation "echu".
+		// Possible http://programmer.spip.net/Declarer-une-tache http://contrib.spip.net/Ajouter-une-tache-CRON-dans-un-plugin-SPIP ?
 		sql_updateq('spip_asso_membres',
 			array('statut_interne' => 'echu'),
 			"statut_interne='ok' AND validite<CURRENT_DATE() ");

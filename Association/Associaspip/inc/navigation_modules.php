@@ -25,8 +25,7 @@ include_spip('inc/autoriser'); // utilise par "onglet1_association" (pour le tes
  *   en HTML (faux, ) a compiler par SPIP (cas des balises) ou PHP gere par le developpeur
  * @return void
  */
-function association_navigation_onglets($titre='', $top_exec='', $INSERT_HEAD=TRUE)
-{
+function association_navigation_onglets($titre='', $top_exec='', $INSERT_HEAD=TRUE) {
 	$modules = pipeline('modules_asso', array(
 		'association' => array('asso:menu2_titre_association', 'assoc_qui.png', array('voir_profil', 'association'), ), // accueil
 		'adherents' => array('asso:menu2_titre_gestion_membres', 'annonce.gif', array('voir_membres', 'association'), ), // gestion des membres
@@ -45,15 +44,19 @@ function association_navigation_onglets($titre='', $top_exec='', $INSERT_HEAD=TR
 		} elseif ( $params[2] ) { // autorisation general/globale
 			$acces = autoriser($params[2]);
 		} else // pas d'autorisation definie = autorise pour tous
-			$acces = true;
+			$acces = TRUE;
 		// etat d'activation du module en configuration
 		if ( in_array($exec, array('association', 'adherents')) )
-			$actif = true;
+			$actif = TRUE;
 		else
 			$actif = $GLOBALS['association_metas'][$exec=='ressources'?'prets':$exec];
 		// generation de l'onglet
-		if ( $actif && $acces )
-			$res .= onglet(_T($params[0]), generer_url_ecrire($exec), $top_exec, $exec, _DIR_PLUGIN_ASSOCIATION_ICONES.$params[1] ); // http://doc.spip.org/onglet
+		if ( $actif && $acces ) {
+			$chemin = _DIR_PLUGIN_ASSOCIATION_ICONES.$params[1]; // icone Associaspip
+			if ( !file_exists($chemin) )
+				$chemin = find_in_path($params[1]); // icone alternative
+			$res .= onglet(_T($params[0]), generer_url_ecrire($exec), $top_exec, $exec, $chemin); // http://doc.spip.org/onglet
+		}
 	}
 // Affichage
 	if ($INSERT_HEAD) { // mettre ''|0|FALSE|NULL dans la balise (appel dans une page HTML-SPIPee donc et non PHP) pour eviter l'erreur de "Double occurrence de INSERT_HEAD"
@@ -66,16 +69,15 @@ function association_navigation_onglets($titre='', $top_exec='', $INSERT_HEAD=TR
 		echo '<div class="bandeau_actions barre_onglet clearfix">', debut_onglet(), $res, fin_onglet(), '</div>'; // Onglets actifs
 	echo '</div>';
 	if ($INSERT_HEAD) { // Tant qu'a faire, on s'embete pas a le retaper dans toutes les pages...
-		echo debut_gauche('',true);
-		echo debut_boite_info(true);
+		echo debut_gauche('',TRUE);
+		echo debut_boite_info(TRUE);
 	}
 }
 
 /**
  * @see association_navigation_onglets
  */
-function onglets_association($titre='', $top_exec='', $INSERT_HEAD=TRUE)
-{
+function onglets_association($titre='', $top_exec='', $INSERT_HEAD=TRUE) {
 	association_navigation_onglets($titre, $top_exec, $INSERT_HEAD);
 }
 
@@ -97,8 +99,7 @@ function onglets_association($titre='', $top_exec='', $INSERT_HEAD=TRUE)
  *   qui doit alors etre obligatoirement celui qui precede !
  * @return void
  */
-function association_navigation_raccourcis($adresse_retour='',  $raccourcis=array(), $FIN_BOITE_INFO=TRUE)
-{
+function association_navigation_raccourcis($adresse_retour='',  $raccourcis=array(), $FIN_BOITE_INFO=TRUE) {
 	$res = ''; // initialisation
 	if ( is_array($raccourcis) AND count($raccourcis) ) {
 		foreach($raccourcis as $raccourci_titre => $params) {
@@ -108,7 +109,7 @@ function association_navigation_raccourcis($adresse_retour='',  $raccourcis=arra
 			} elseif ( is_scalar($params[2]) ) { // autorisation deja calculee (chaine ou entier ou booleen, evalue en vrai/faux...)
 				$acces = autoriser($params[2]);
 			} else // pas d'autorisation definie = autorise pour tous
-				$acces = true;
+				$acces = TRUE;
 			// generation du raccourci
 			if ( $acces )
 				$res .= icone1_association($raccourci_titre,  (is_array($params[1])?generer_url_ecrire($params[1][0],$params[1][1]):generer_url_ecrire($params[1])), $params[0]);
@@ -122,7 +123,7 @@ function association_navigation_raccourcis($adresse_retour='',  $raccourcis=arra
 	}
 	if ($FIN_BOITE_INFO) {
 		echo association_date_du_jour();
-		echo fin_boite_info(true);
+		echo fin_boite_info(TRUE);
 	}
 	echo bloc_des_raccourcis($res);
 }
@@ -130,8 +131,7 @@ function association_navigation_raccourcis($adresse_retour='',  $raccourcis=arra
 /**
  * @see association_navigation_raccourcis
  */
-function raccourcis_association($adresse_retour='',  $raccourcis=array(), $PrefixeLangue='asso', $FIN_BOITE_INFO=TRUE)
-{
+function raccourcis_association($adresse_retour='',  $raccourcis=array(), $PrefixeLangue='asso', $FIN_BOITE_INFO=TRUE) {
 	association_navigation_raccourcis($adresse_retour,  $raccourcis, $PrefixeLangue, $FIN_BOITE_INFO);
 }
 
@@ -147,9 +147,11 @@ function raccourcis_association($adresse_retour='',  $raccourcis=array(), $Prefi
  * @return string
  *   HTML du raccourci (icone+texte+lien)
  */
-function icone1_association($texte, $lien, $image)
-{
-	return icone_horizontale(association_langue($texte), $lien, _DIR_PLUGIN_ASSOCIATION_ICONES. $image, 'rien.gif', false); // http://doc.spip.org/@icone_horizontale
+function icone1_association($texte, $lien, $image) {
+	$chemin = _DIR_PLUGIN_ASSOCIATION_ICONES.$image; // icone Associaspip
+	if ( !file_exists($chemin) )
+		$chemin = find_in_path($image); // icone alternative
+	return icone_horizontale(association_langue($texte), $lien, $chemin, 'rien.gif', FALSE); // http://doc.spip.org/@icone_horizontale
 }
 
 /**
@@ -163,8 +165,7 @@ function icone1_association($texte, $lien, $image)
  *   echo fin_gauche(), fin_page();
  *   http://programmer.spip.org/Contenu-d-un-fichier-exec
  */
-function fin_page_association($FIN_CADRE_RELIEF=true)
-{
+function fin_page_association($FIN_CADRE_RELIEF=TRUE) {
 	$copyright = fin_page();
 	$copyright = str_replace("<div class='table_page'>", "<div class='table_page contenu_nom_site'>", $copyright); // Pour eliminer le copyright a l'impression
 	echo ($FIN_CADRE_RELIEF ? fin_cadre_relief() : '') . fin_gauche() . $copyright;
@@ -183,13 +184,15 @@ function fin_page_association($FIN_CADRE_RELIEF=true)
  *   Indique s'il faut ajouter (vrai, par defaut) ou pas "debut_droite()" avant
  * @return void
  */
-function debut_cadre_association($icone, $titre, $T_args='', $DEBUT_DROITE=true)
-{
+function debut_cadre_association($icone, $titre, $T_args='', $DEBUT_DROITE=TRUE) {
 	if ($DEBUT_DROITE)
-		echo debut_droite('',true);
+		echo debut_droite('',TRUE);
 	if ( is_array($T_args) )
 		array_unshift($T_args, $titre);
-	debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.$icone, false, '', (is_array($T_args)?association_langue($T_args): association_langue($titre)." $T_args") );
+	$chemin = _DIR_PLUGIN_ASSOCIATION_ICONES.$icone; // icone Associaspip
+	if ( !file_exists($chemin) )
+		$chemin = find_in_path($icone); // icone alternative
+	debut_cadre_relief($chemin, FALSE, '', (is_array($T_args)?association_langue($T_args): association_langue($titre)." $T_args") );
 }
 
 /**
@@ -201,8 +204,7 @@ function debut_cadre_association($icone, $titre, $T_args='', $DEBUT_DROITE=true)
  *   et non sur la fonctionnalite en cours (onglet), contrairement aux apparences
  *   http://comments.gmane.org/gmane.comp.web.spip.devel/61824
  */
-function filtres_association($liste_filtres, $exec='', $supplements='', $td=TRUE)
-{
+function filtres_association($liste_filtres, $exec='', $supplements='', $td=TRUE) {
 	echo association_bloc_filtres(&$liste_filtres, &$exec, &$supplements, &$td);
 }
 

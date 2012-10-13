@@ -16,7 +16,7 @@ function action_editer_membre_groupes() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_auteur = $securiser_action();
 
-	$fonctions = association_recuperer_liste('fonctions', true);
+	$fonctions = association_recuperer_liste('fonctions', TRUE);
 
 	$insert_data = array();
 	foreach ($fonctions as $id_groupe => $fonction) {

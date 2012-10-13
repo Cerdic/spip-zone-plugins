@@ -1,14 +1,12 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & Francois de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010 Emmanuel Saint-James
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
-
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
@@ -17,27 +15,24 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/autoriser');
 
-/* ce formulaire n'est charge que depuis la page action_relances qui est appele par le submit au formulaire d'edit relance */
-/* on recupere donc directement avec _request les champs du formulaire d'edit relance */
 function formulaires_relancer_adherents_charger_dist() {
-	// on recupere dans le post du formulaire precedent les indications a charger
+	// ce formulaire n'est charge que depuis la page action_relances qui est appele par le submit au formulaire d'edit relance
+	// on recupere donc directement avec _request les champs du formulaire d'edit relance
 	$sujet = _request('sujet');
 	$message = _request('message');
 	$contexte['_sujet'] = $sujet;
 	$contexte['_message'] = $message;
-	$id_tab = association_passeparam_id();
-	$id_tab = (isset($id_tab)) ? $id_tab:array();
-	$statut_tab = association_passeparam_statut();
-	$statut_tab = (isset($statut_tab)) ? $statut_tab:array();
+	$id_tab = association_recuperer_liste('id');
+	$statut_tab = association_recuperer_liste('statut');
 	$contexte['_nb_messages'] = count ($id_tab);
 	// on met en hidden toutes les infos pour les envoyer a l'action de traitement. Il n'y qu'un seul input dans ce formulaire : le bouton "ok" demande confirmation
 	$contexte['_hidden'] = '<input name="sujet" type="hidden" value="'.$sujet.'" />';
-	$contexte['_hidden'] .= '<input name="message" type="hidden" value="'.htmlentities($message, ENT_QUOTES, 'UTF-8').'" />';
+	$contexte['_hidden'] .= '<input name="message" type="hidden" value="'. htmlentities($message, ENT_QUOTES, 'UTF-8') .'" />';
 	foreach ($id_tab as $id_auteur) { // tableau statut[] contenant uniquement les cases cochees au formulaire precedent id_auteur => statut_auteur
 		$contexte['_hidden'] .= '<input name="statut['.$id_auteur.']" type="hidden" value="'.$statut_tab[$id_auteur].'" />';
 	}
-
 	$contexte['_action'] = array('relance_adherents',$id_auteur); // pour passer securiser action
+
 	return $contexte;
 }
 
@@ -63,7 +58,7 @@ function formulaires_relancer_adherents_traiter_dist() {
 		$message .= '.';
 	}
 	if (count($sans_emails)) { // on a des adherents sans email
-		$message .= '<br />'._T('asso:aucune_adresse_trouvee_pour_les_membres').implode(", ",$sans_emails).".";
+		$message .= '<br />'. _T('asso:aucune_adresse_trouvee_pour_les_membres') . implode(", ", $sans_emails) .".";
 	}
 	$res['message_ok'] = $message;
 

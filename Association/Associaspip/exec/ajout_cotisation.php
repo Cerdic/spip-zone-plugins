@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_ajout_cotisation()
-{
+function exec_ajout_cotisation() {
 	include_spip('inc/navigation_modules');
 	list($id_auteur, $row) = association_passeparam_id('auteur', 'asso_membres');
 	if (!autoriser('associer', 'adherents', $id_auteur)) {

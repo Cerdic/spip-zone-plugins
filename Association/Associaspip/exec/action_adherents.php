@@ -13,15 +13,14 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip ('inc/navigation_modules');
 
-function exec_action_adherents()
-{
+function exec_action_adherents() {
 	$action_adherents = _request('action_adherents');
 	if (!autoriser('editer_membres', 'association') ||
 		(($action_adherents=='grouper' || $action_adherents=='degrouper' ) && !autoriser('editer_groupes', 'association', 100)) ) { // pour agir sur les adherents il faut avoir le droit d'edition sur les adherents ainsi que le droit de gestion des groupes si c'est ca qu'on modifie.
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
-		$id_auteurs = association_recuperer_liste('id_auteurs', true);
+		$id_auteurs = association_recuperer_liste('id_auteurs', TRUE);
 		if ($action_adherents && count($id_auteurs)) {
 			onglets_association('titre_onglet_membres', 'adherents');
 			// info
@@ -30,7 +29,7 @@ function exec_action_adherents()
 			raccourcis_association('adherents');
 			if ($action_adherents=='desactive') {
 				$statut_courant = _request('statut_courant');
-				if($statut_courant==='sorti'){
+				if($statut_courant==='sorti') {
 					debut_cadre_association('annonce.gif', 'activation_des_adherents');
 					echo '<p>'. _T('asso:adherent_message_detail_activation').'</p>';
 					echo '<p>'. _T('asso:adherent_message_confirmer_activation').' : </p>';
@@ -65,8 +64,7 @@ function exec_action_adherents()
 	}
 }
 
-function modification_adherents($tab, $action, $statut='')
-{
+function modification_adherents($tab, $action, $statut='') {
 	$res ='';
 	if ($action=='grouper' || $action=='degrouper') { // on ajoute une table des groupes si il y en a
 		$res .='<p class="titrem">'._T('asso:groupes_membre').'</p>';

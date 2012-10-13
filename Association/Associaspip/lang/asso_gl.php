@@ -1,20 +1,21 @@
 <?php
-/***************************************************************************
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & Francois de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+/***************************************************************************\
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010 Emmanuel Saint-James
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 
-// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
-// Traducción ao galego por Berio: berio@alg-a.org 
-
+/**
+ * This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+ *
+ * Traducción ao galego por Berio: berio@alg-a.org
+ */
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 # Titres globaux
@@ -38,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_envoyer' => 'Enviar',
 	'bouton_soumettre' => 'Someter',
 	'bouton_supprimer' => 'Suprimir',
-	
+
 	'categories_de_cotisations' => 'Categor&iacute;as de cuotas',
 	'configuration' => 'Configuraci&oacute;n',
 	'effacer_les_tables' => 'Borrar as t&aacute;boas',
@@ -46,9 +47,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'gestion_des_banques' => 'Xesti&oacute;n dos bancos',
 	'gestion_de_lassoc' => 'Xesti&oacute;n da Asociaci&oacute;n',
 	'ID' => 'ID',
-	'info_doc' => '<p>Este plugin permite xerar unha pequena Asociaci&oacute;n en li&ntilde;a.</p> 
-	<p>Desta forma, &eacute; posible consultar, engadir e modificar aos membros activos, 
-	 enviar correos electr&oacute;nicas en masa para as reactivaci&oacute;ns das cuotas, 
+	'info_doc' => '<p>Este plugin permite xerar unha pequena Asociaci&oacute;n en li&ntilde;a.</p>
+	<p>Desta forma, &eacute; posible consultar, engadir e modificar aos membros activos,
+	 enviar correos electr&oacute;nicas en masa para as reactivaci&oacute;ns das cuotas,
 	 administrar subvenci&oacute;ns e ventas asociativas, e ter un libro de contabilidade</p>',
 	'message_relance' => '
 Bos dias,
@@ -62,7 +63,7 @@ A oficina da Asociaci&oacute;n
 Gracias por non responder directamente a esta mensaxe autom&aacute;tica.
 	',
 	'profil_de_lassociation' => 'Perfil da Asociaci&oacute;n',
-	
+
 # Adherents
  # Titres
 	'adherent_titre_action_membres_actifs' => 'Acci&oacute;n sobre os membros activos',
@@ -187,7 +188,7 @@ Gracias por non responder directamente a esta mensaxe autom&aacute;tica.
  # Sous-titres
 	'activite_mise_a_jour_inscription' => 'Po&ntilde;er ao d&iacute;a unha inscripci&oacute;n',
 	'activite_ajouter_inscription' => 'Engadir unha inscripci&oacute;n',
-	
+
 # Libelle
 	'activite_libelle_inscription' => 'Inscripci&oacute;n n&deg;',
 	'activite_libelle_date' => 'Data',
@@ -279,22 +280,22 @@ Na espera de atoparnos, enviamoslles os nosos mellores sa&uacute;dos.
 
 O equipo @nomasso@
 	',
-	
+
 	'activite_message_webmaster'=>'
 De: @nom@
 Actividade: @activite@
 N&uacute;mero: @inscrits@
 Comentario: @commentaire@
-	',	
+	',
 	'date_du_jour' => 'Estamos a '.date('d/m/Y'),
 	'date_du_jour_heure' => 'Estamos a '.date('d/m/Y').' e son as '.date('H:i'),
-	
+
 	#Votre association
 	'votre_asso' => 'A s&uacute;a asociaci&oacute;n',
 	'president' => 'Presidente',
 	'votre_equipe' => 'O seu equipo',
 	'donnees_perso' => 'Datos personais',
 	'donnees_internes' => 'Datos internos'
-	
+
 );
 ?>

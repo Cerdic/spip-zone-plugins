@@ -15,7 +15,7 @@ function action_ajouter_membre_groupes() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_auteur = $securiser_action();
-	$id_groupes = association_recuperer_liste('id_groupes', true);
+	$id_groupes = association_recuperer_liste('id_groupes', TRUE);
 
 	$insert_data = array();
 	foreach ($id_groupes as $id_groupe) {

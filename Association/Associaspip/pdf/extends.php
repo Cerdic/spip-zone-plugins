@@ -17,20 +17,19 @@ define('FPDF_FONTPATH', 'font/');
 include_spip('fpdf');
 include_spip('inc/charsets');
 
-class PDF extends FPDF
-{
+class PDF extends FPDF {
 
 	var $ajoute_titre;
 	var $titre;
 
-	var $ProcessingTable = false;
+	var $ProcessingTable = FALSE;
 	var $aCols = array();
 	var $TableX;
 	var $HeaderColor;
 	var $RowColors;
 	var $ColorIndex;
 
-	function PDF($avec_titre=true, $format='', $unite='', $orientation='') {
+	function PDF($avec_titre=TRUE, $format='', $unite='', $orientation='') {
 		$this->ajoute_titre = $avec_titre;
 		$this->FPDF(
 			($orientation?$orientation:($GLOBALS['association_metas']['fpdf_orientation']?$GLOBALS['association_metas']['fpdf_orientation']:'P')),
@@ -61,7 +60,7 @@ class PDF extends FPDF
 	// adapte de http://bavotasan.com/2011/convert-hex-color-to-rgb-using-php/
 	// plus complet que http://logiciels.meteo-mc.fr/php-convertir-couleur.php
 	// car prend en compte la forme courte : http://en.wikipedia.org/wiki/Web_colors#Web-safe_colors
-	function hex2rgb($hex, $tostring=false) {
+	function hex2rgb($hex, $tostring=FALSE) {
 		$hex = str_replace("#", "", $hex);
 		if(strlen($hex) == 3) {
 			$r = hexdec(substr($hex,0,1).substr($hex,0,1));
@@ -80,7 +79,7 @@ class PDF extends FPDF
     // Haut de pages : redefinition de FPDF qui est directement appele par FPDF::AddPage()
     //@ http://www.id.uzh.ch/cl/zinfo/fpdf/doc/header.htm
     //!\ Adapter la marge haute (et la hauteur utile) des pages en consequence
-	function Header(){
+	function Header() {
 		if($this->ajoute_titre) { //Titre
 			$this->AdaptFont(10); // Police 10pt
 			$this->Cell(0,6,utf8_decode($GLOBALS['association_metas']['nom']),0,1,'L'); // Nom de l'association a gauche
@@ -95,7 +94,7 @@ class PDF extends FPDF
     // Pied de pages : redefinition de FPDF::Footer() qui est automatiquement appele par FPDF::AddPage() et FPDF::Close() !
     //@ http://www.id.uzh.ch/cl/zinfo/fpdf/doc/footer.htm
     //!\ Adapter la marge basse (et la hauteur utile) des pages en consequence
-	function Footer(){
+	function Footer() {
 		$this->SetY(-15); // Positionnement a 1,5 cm du bas
 		$this->AdaptFont(8); // Police 8pt
 		$this->Cell(0,10,'Page '.$this->PageNo(),0,0,'R'); // Numero de page a droite
@@ -114,7 +113,7 @@ class PDF extends FPDF
 	}
 
 	// Ligne standard du tableau
-	function Row($data){
+	function Row($data) {
 		$this->SetX($this->TableX);
 		$ci = $this->ColorIndex;
 		$fill = !empty($this->RowColors[$ci]);
@@ -127,7 +126,7 @@ class PDF extends FPDF
 	}
 
 	// Permet d'utiliser des multicells et non cells pour avoir du texte sur plusieurs lignes dans les cases
-	function RowMultiCell($data){
+	function RowMultiCell($data) {
 		// on commence par calculer le nombre de lignes de chaque cellule et le max
 		$max_nb_lignes = 1;
 		$nb_lignes = array();
@@ -224,7 +223,7 @@ class PDF extends FPDF
 		$this->AdaptFont(8); // Police 8pt
 		// Imprime les lignes
 		$this->ColorIndex = 0;
-		$this->ProcessingTable = true;
+		$this->ProcessingTable = TRUE;
 		// partie du code modifiee pour etendre la fonction Query
 		while($row = sql_fetch($res)) {
 			if (is_array($data[$row[$champ_jointure]]))
@@ -232,13 +231,13 @@ class PDF extends FPDF
 			$this->RowMulticell($row);
 		}
 		// fin de partie du code modifie pour etendre la fonction Query
-		$this->ProcessingTable = false;
+		$this->ProcessingTable = FALSE;
 		$this->cMargin = $cMargin;
 		$this->aCols = array();
 	}
 
 	// idem que Query sauf qu'on lui passe le texte de la requete SQL et non la ressource du resultat de la requete
-	function Table($query, $data=array(), $champ_jointure='', $prop=array() ){
+	function Table($query, $data=array(), $champ_jointure='', $prop=array() ) {
 		$this->Query(spip_query($query), $data, $champ_jointure, $prop); // execute la requete
 	}
 

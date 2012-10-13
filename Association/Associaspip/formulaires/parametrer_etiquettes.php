@@ -1,6 +1,6 @@
 <?php
 
-function formulaires_parametrer_etiquettes_charger_dist(){
+function formulaires_parametrer_etiquettes_charger_dist() {
 
 	include_spip('base/abstract_sql');
 	$valeurs = array();
@@ -23,7 +23,7 @@ function formulaires_parametrer_etiquettes_charger_dist(){
 	return $valeurs;
 }
 
-function formulaires_parametrer_etiquettes_verifier_dist(){
+function formulaires_parametrer_etiquettes_verifier_dist() {
 	$erreurs = array();
 
 	foreach(array('nb_colonne', 'nb_ligne', 'largeur_page', 'hauteur_page', 'marge_haut_page', 'marge_bas_page', 'marge_gauche_page', 'marge_droite_page', 'marge_gauche_etiquette', 'marge_droite_etiquette', 'espace_etiquettesh', 'espace_etiquettesl') as $value) { // on verifie que les valeurs sont des nombres (idealement des entiers) positifs
@@ -37,26 +37,26 @@ function formulaires_parametrer_etiquettes_verifier_dist(){
    return $erreurs;
 }
 
-function formulaires_parametrer_etiquettes_traiter_dist(){
+function formulaires_parametrer_etiquettes_traiter_dist() {
 	include_spip('base/abstract_sql');
 	include_spip('inc/acces');
 	$table_meta = 'association_metas';
-	ecrire_meta('etiquette_avec_civite', _request('avec_civilite'), null, $table_meta);
-	ecrire_meta('etiquette_nb_colonne', _request('nb_colonne'), null, $table_meta);
-	ecrire_meta('etiquette_nb_ligne', _request('nb_ligne'), null, $table_meta);
-	ecrire_meta('etiquette_largeur_page', _request('largeur_page'), null, $table_meta);
-	ecrire_meta('etiquette_hauteur_page', _request('hauteur_page'), null, $table_meta);
-	ecrire_meta('etiquette_marge_haut_etiquette', _request('marge_haut_etiquette'), null, $table_meta);
-	ecrire_meta('etiquette_marge_haut_page', _request('marge_haut_page'), null, $table_meta);
-	ecrire_meta('etiquette_marge_bas_page', _request('marge_bas_page'), null, $table_meta);
-	ecrire_meta('etiquette_marge_gauche_page', _request('marge_gauche_page'), null, $table_meta);
-	ecrire_meta('etiquette_marge_droite_page', _request('marge_droite_page'), null, $table_meta);
-	ecrire_meta('etiquette_marge_gauche_etiquette', _request('marge_gauche_etiquette'), null, $table_meta);
-	ecrire_meta('etiquette_marge_droite_etiquette', _request('marge_droite_etiquette'), null, $table_meta);
-	ecrire_meta('etiquette_espace_etiquettesh', _request('espace_etiquettesh'), null, $table_meta);
-	ecrire_meta('etiquette_espace_etiquettesl', _request('espace_etiquettesl'), null, $table_meta);
+	ecrire_meta('etiquette_avec_civite', _request('avec_civilite'), NULL, $table_meta);
+	ecrire_meta('etiquette_nb_colonne', _request('nb_colonne'), NULL, $table_meta);
+	ecrire_meta('etiquette_nb_ligne', _request('nb_ligne'), NULL, $table_meta);
+	ecrire_meta('etiquette_largeur_page', _request('largeur_page'), NULL, $table_meta);
+	ecrire_meta('etiquette_hauteur_page', _request('hauteur_page'), NULL, $table_meta);
+	ecrire_meta('etiquette_marge_haut_etiquette', _request('marge_haut_etiquette'), NULL, $table_meta);
+	ecrire_meta('etiquette_marge_haut_page', _request('marge_haut_page'), NULL, $table_meta);
+	ecrire_meta('etiquette_marge_bas_page', _request('marge_bas_page'), NULL, $table_meta);
+	ecrire_meta('etiquette_marge_gauche_page', _request('marge_gauche_page'), NULL, $table_meta);
+	ecrire_meta('etiquette_marge_droite_page', _request('marge_droite_page'), NULL, $table_meta);
+	ecrire_meta('etiquette_marge_gauche_etiquette', _request('marge_gauche_etiquette'), NULL, $table_meta);
+	ecrire_meta('etiquette_marge_droite_etiquette', _request('marge_droite_etiquette'), NULL, $table_meta);
+	ecrire_meta('etiquette_espace_etiquettesh', _request('espace_etiquettesh'), NULL, $table_meta);
+	ecrire_meta('etiquette_espace_etiquettesl', _request('espace_etiquettesl'), NULL, $table_meta);
 
-	return array('editable' => false, 'message_ok'=> _T('asso:config_enregistree') );
+	return array('editable' => FALSE, 'message_ok'=> _T('asso:config_enregistree') );
 }
 
 ?>

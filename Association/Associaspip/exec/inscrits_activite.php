@@ -11,14 +11,14 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_inscrits_activite()
-{
+function exec_inscrits_activite() {
 	if (!autoriser('associer', 'activites')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
 		include_spip ('inc/navigation_modules');
 		$id_evenement = association_passeparam_id('evenement');
+		list($annee, $critere) = association_passeparam_annee('debut', 'evenements', $id_evenement);
 		onglets_association('titre_onglet_activite', 'activites');
 		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement");
 		$statut = association_passeparam_statut();
@@ -40,10 +40,10 @@ function exec_inscrits_activite()
 		// datation et raccourcis
 		$res['activite_bouton_modifier_article'] = array('edit-12.gif', array('articles', 'id_article='.$evenement['id_article']));
 		$res['activite_bouton_ajouter_inscription'] = array('panier_in.gif', array('edit_activite', "id_evenement=$id_evenement"));
-		if (test_plugin_actif('FPDF')) { // PDF des inscrits
+		if ( test_plugin_actif('FPDF') && sql_countsel('spip_asso_activites', "id_evenement=$id_evenement", 'id_auteur') ) { // PDF des inscrits
 			$res['activite_bouton_imprimer_inscriptions'] = array('print-24.png', array('pdf_activite', "id=$id_evenement"));
 		}
-		if (test_plugin_actif('AGENDA')) { // inscrits via le formulaire d'Agenda2
+		if ( test_plugin_actif('AGENDA') && sql_countsel('spip_evenements_participants', "id_evenement=$id_evenement", 'id_auteur') ) { // inscrits via le formulaire d'Agenda2
 			$res['activite_bouton_synchroniser_inscriptions'] = array('reload-32.png', array('synchronis_activites', "id=$id_evenement"));
 		}
 		raccourcis_association(array('activites',"annee=$annee"), $res);

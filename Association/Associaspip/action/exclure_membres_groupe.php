@@ -21,7 +21,7 @@ function action_exclure_membres_groupe_dist() {
 		list($id_groupe, $id_auteur) = explode('-', $arg);
 		sql_delete('spip_asso_groupes_liaisons', "id_groupe=".intval($id_groupe)." AND id_auteur=".intval($id_auteur));
 	} else { // exclusion en lot de plusieurs membres
-		$id_auteurs = association_recuperer_liste('id_auteurs', true);
+		$id_auteurs = association_recuperer_liste('id_auteurs', TRUE);
 		$id_groupes = _request('id_groupes');
 		if (is_array($id_groupes)) { // mode d'appel 3 : depuis la page des adherents et la suppression multiple. Les differents id_groupes sont alors dans un tableau id_groupes
 			foreach($id_groupes as $id_groupe) {

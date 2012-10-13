@@ -11,9 +11,8 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_comptes()
-{
-	if (!autoriser('associer', 'comptes')) {
+function exec_comptes() {
+	if (!autoriser('voir_compta', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -117,7 +116,7 @@ function exec_comptes()
 		$table = comptes_while($where, sql_asso1page(), $id_compte);
 		if ($table) { // affichage de la liste
 			// SOUS-PAGINATION
-			$nav = association_selectionner_souspage(array('spip_asso_comptes', $where), 'comptes', "exercice=$id_exercice"."&imputation=$imputation". (is_numeric($vu)?"&vu=$vu":''), false);
+			$nav = association_selectionner_souspage(array('spip_asso_comptes', $where), 'comptes', "exercice=$id_exercice"."&imputation=$imputation". (is_numeric($vu)?"&vu=$vu":''), FALSE);
 			// ENTETES
 			$table = "<table width='100%' class='asso_tablo' $onload_option id='asso_liste_comptes'>\n"
 			. "<thead>\n<tr>"
@@ -128,7 +127,7 @@ function exec_comptes()
 			. '<th>'. _T('asso:entete_montant') .'</th>'
 			. '<th>'. _T('asso:compte_entete_financier') .'</th>'
 			. '<th colspan="2" class="actions">'. _T('asso:entete_actions') .'</th>'
-			. '<th><input title="'._T('asso:selectionner_tout').'" type="checkbox" id="selectionnerTous" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName(\'valide[]\'); for (var i in checkboxList){checkboxList[i].checked=currentVal;}" /></th>'
+			. '<th><input title="'._T('asso:selectionner_tout').'" type="checkbox" id="selectionnerTous" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName(\'valide[]\'); for (var i in checkboxList) {checkboxList[i].checked=currentVal;}" /></th>'
 			. "</tr>\n</thead><tbody>"
 			. $table
 			. "</tbody>\n</table>\n"
@@ -141,8 +140,7 @@ function exec_comptes()
 	}
 }
 
-function comptes_while($where, $limit, $id_compte)
-{
+function comptes_while($where, $limit, $id_compte) {
 	$query = sql_select('*', 'spip_asso_comptes', $where,'',  'date DESC,id_compte DESC', $limit);
 	$comptes = '';
 	while ($data = sql_fetch($query)) {
@@ -158,7 +156,7 @@ function comptes_while($where, $limit, $id_compte)
 			$class = 'cv';
 		}
 		if($id_compte==$data['id_compte']) { // operation recherchee
-			$onload_option .= 'onLoad="document.getElementById(\'compte'.$id_compte.'\').scrollIntoView(true);"'; // pour voir au chargement l'id_compte recherche
+			$onload_option .= 'onLoad="document.getElementById(\'compte'.$id_compte.'\').scrollIntoView(TRUE);"'; // pour voir au chargement l'id_compte recherche
 			$class = 'surligne';
 		} else {
 			$onload_option = '';

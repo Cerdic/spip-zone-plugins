@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 // Export du Compte de Resultat au format LaTeX
 // http://fr.wikipedia.org/wiki/LaTeX
 function exec_export_soldescomptes_tex() {
-	if (!autoriser('associer', 'export_comptes')) {
+	if (!autoriser('voir_compta', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

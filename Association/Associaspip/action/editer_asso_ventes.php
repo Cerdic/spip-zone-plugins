@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function action_editer_asso_ventes()
-{
+function action_editer_asso_ventes() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_vente = $securiser_action();
 	$erreur = '';

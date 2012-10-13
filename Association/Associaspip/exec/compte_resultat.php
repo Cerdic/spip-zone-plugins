@@ -11,9 +11,9 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_compte_resultat()
-{
-	if (!autoriser('associer', 'comptes')) {
+// Version HTML de la synthese des Comptes de Resultat
+function exec_compte_resultat() {
+	if (!autoriser('voir_compta', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -35,8 +35,8 @@ function exec_compte_resultat()
 			'cpte_bilan_titre_general' => array('finances-24.png', array('compte_bilan', "exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')) ),
 #			'annexe_titre_general' => array('finances-24.png', array('annexe', "exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')) ),
 		));
-		if(autoriser('associer', 'export_comptes')){ // on peut exporter : pdf, csv, xml, ...
-			echo debut_cadre_enfonce('',true);
+		if(autoriser('associer', 'export_comptes')) { // on peut exporter : pdf, csv, xml, ...
+			echo debut_cadre_enfonce('', TRUE);
 			echo '<h3>'. _T('asso:cpte_resultat_mode_exportation') .'</h3>';
 			if (test_plugin_actif('FPDF')) { // impression en PDF : _T('asso:bouton_impression')
 				echo icone1_association('PDF', generer_url_ecrire('pdf_comptesresultat', "exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')), 'print-24.png');
@@ -44,7 +44,7 @@ function exec_compte_resultat()
 			foreach(array('csv','ctx','dbk','json','tex','tsv','xml','yaml') as $type) { // autres exports (donnees brutes) possibles
 				echo icone1_association(strtoupper($type), generer_url_ecrire("export_soldescomptes_$type", "type=resultat&exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')), 'export-24.png'); //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
 			}
-			echo fin_cadre_enfonce(true);
+			echo fin_cadre_enfonce(TRUE);
 		}
 		debut_cadre_association('finances-24.png', 'cpte_resultat_titre_general', $exercice_data['intitule']);
 		// Filtres

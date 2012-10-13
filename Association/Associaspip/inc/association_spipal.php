@@ -1,24 +1,24 @@
 <?php
 /***************************************************************************\
- *  Association-SPIPAL,  validation de paiement pour  plugins SPIP         *
- *                                                                         *
- *  Copyright (c) 2011 Emmanuel Saint-James                                *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010 Emmanuel Saint-James
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-// Fonction prenant en charge la validation d'une notification de paiement Paypal
-// Voir les specifications dans
-// http://www.spip-contrib.net/Plugin-SPIPAL
-
-// Actuellement on considère que tout paiement est un don.
-
-function inc_association_spipal($env)
-{
+/**
+ * Fonction prenant en charge la validation d'une notification de paiement Paypal
+ *
+ * @note
+ *   Voir les specifications dans http://www.spip-contrib.net/Plugin-SPIPAL
+ *   Actuellement on considère que tout paiement est un don.
+ */
+function inc_association_spipal($env) {
   	$custom = @unserialize($env['custom']);
 	$id = abs(intval($custom['id_auteur']));
 	$montant = intval($env['payment_fee']?$env['payment_fee']:$env['mc_fee']);

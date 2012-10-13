@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_edit_groupe()
-{
+function exec_edit_groupe() {
 	if (!autoriser('editer_groupes', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();

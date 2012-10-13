@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_edit_pret()
-{
+function exec_edit_pret() {
 	$id_pret = association_passeparam_id('pret');
 	if (!autoriser('associer', 'activites')) {
 			include_spip('inc/minipres');

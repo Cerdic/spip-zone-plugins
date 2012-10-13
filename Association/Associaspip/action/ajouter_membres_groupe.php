@@ -15,8 +15,8 @@ function action_ajouter_membres_groupe() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_groupe = $securiser_action();
-	$id_auteurs = association_recuperer_liste('id_auteurs', true);
-	$id_groupes = _request('id_groupes', true);
+	$id_auteurs = association_recuperer_liste('id_auteurs', TRUE);
+	$id_groupes = _request('id_groupes', TRUE);
 
 	// cette action peut etre appelee selon deux modes
 	if (is_array($id_groupes)) { // mode d'appel 2 : depuis la page action_adherents et on a potentiellement plusieurs id_groupe a recuperer dans un tableau
@@ -41,7 +41,7 @@ function insertion_membres($id_groupe, $id_auteurs) {
 
 	$insert_data = array();
 	foreach ($id_auteurs as $id_auteur) {
-		if (!in_array($id_auteur, $membres)){
+		if (!in_array($id_auteur, $membres)) {
 			$insert_data[] = array('id_groupe' => $id_groupe, 'id_auteur' => $id_auteur);
 		}
 	}

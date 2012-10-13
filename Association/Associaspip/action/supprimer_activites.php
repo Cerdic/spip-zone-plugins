@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function action_supprimer_activites()
-{
+function action_supprimer_activites() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_activite = $securiser_action();
 	include_spip ('inc/association_comptabilite');

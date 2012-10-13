@@ -11,9 +11,9 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_annexe()
-{
-	if (!autoriser('associer', 'comptes')) {
+// Version HTML de la synthese des Comptes d'Annexes ?
+function exec_annexe() {
+	if (!autoriser('voir_compta', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

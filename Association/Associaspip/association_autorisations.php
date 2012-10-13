@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
  * @note
  *   http://programmer.spip.net/autoriser
  */
-function association_autoriser(){
+function association_autoriser() {
 }
 
 /**
@@ -21,8 +21,7 @@ function association_autoriser(){
  * @return bool
  *   Vrai si l'auteur est dans le(s) groupe(s), faux sinon
  */
-function is_in_groups($id_auteur, $id_groupes)
-{
+function is_in_groups($id_auteur, $id_groupes) {
 	if (is_array($id_auteur)) {
 		$id_auteur = $id_auteur['id_auteur'];
 	}
@@ -33,7 +32,7 @@ function is_in_groups($id_auteur, $id_groupes)
 		$where .= "id_groupe=$id_groupes";
 	}
 	if (sql_countsel("spip_asso_groupes_liaisons", $where) != 0) {
-		return true;
+		return TRUE;
 	} else {
 		return false;
 	}
@@ -128,7 +127,7 @@ function autoriser_associer_adherents_dist($faire, $type, $id, $qui, $opt) {
  */
 function autoriser_association_gerer_autorisations_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut']=='0minirezo' && $qui['webmestre']=='oui') {
-		return true; // on retourne ok pour tous les webmestres
+		return TRUE; // on retourne ok pour tous les webmestres
 	}
 	return is_in_groups($qui['id_auteur'], 1); // c'est le groupe 1 qui liste les gens qui peuvent toucher aux autorisations
 }
@@ -143,7 +142,7 @@ function autoriser_association_editer_groupes_dist($faire, $type, $id, $qui, $op
 		return autoriser_association_gerer_autorisations_dist($faire, $type, $id, $qui, $opt); // si l'id est-il inferieur a 100 (groupe d'autorisations) et different de 0 (creation d'un groupe) : on retourne le resultat de la fonction d'autorisation de gestion des autorisations
 	}
 	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
-		return true; // on retourne ok pour tous les admins non restreints
+		return TRUE; // on retourne ok pour tous les admins non restreints
 	}
 	return is_in_groups($qui['id_auteur'], array(1,2)); // c'est le groupe 2 qui a le pouvoir de modifier les groupes (mais pas les autorisations), le groupe 1 peut modifier tout ce qui touche aux groupes (ceux d'autorisations inclus)
 }
@@ -158,31 +157,57 @@ function autoriser_association_voir_groupes_dist($faire, $type, $id, $qui, $opt)
 		return autoriser_association_gerer_autorisations_dist($faire, $type, $id, $qui, $opt); // si l'id est-il inferieur a 100 (groupe d'autorisations) et different de 0 (creation d'un groupe) : on retourne le resultat de la fonction d'autorisation de gestion des autorisations
 	}
 	if ($qui['statut']=='0minirezo' || $qui['statut']=='1comite') {
-		return true; // on retourne ok pour tous les redacteurs
+		return TRUE; // on retourne ok pour tous les redacteurs
 	}
-	return is_in_groups($qui['id_auteur'], array(3)); // c'est le groupe 3 qui a le pouvoir de voir les groupes(mais pas ceux des autorisations)
+	return is_in_groups($qui['id_auteur'], 3); // c'est le groupe 3 qui a le pouvoir de voir les groupes (mais pas ceux des autorisations)
 }
 
 /**
  * Configurer la compatabilite. (expert comptable)
  * defaut : webmestre
- * groupe : 10
+ * groupe : 10.
  */
 function autoriser_association_configurer_compta_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut']=='0minirezo' && $qui['webmestre']=='oui') {
-		return true; // on retourne ok pour tous les webmestres
+		return TRUE; // on retourne ok pour tous les webmestres
 	}
-	return is_in_groups($qui['id_auteur'], array(10)); // c'est le groupe 10 qui a le pouvoir de configurer la comptabilite
+	return is_in_groups($qui['id_auteur'], 10); // c'est le groupe 10 qui a le pouvoir de configurer la comptabilite
+}
+
+/**
+ * Modifier/Exporter les operations comptables. (comptable/tresorier)
+ * defaut : webmestre
+ * groupe : 10,11.
+ */
+function autoriser_association_editer_compta_dist($faire, $type, $id, $qui, $opt) {
+	if ($qui['statut']=='0minirezo' && $qui['webmestre']=='oui') {
+		return TRUE; // on retourne ok pour tous les webmestres
+	}
+	return is_in_groups($qui['id_auteur'], array(11,10)); // c'est le groupe 11 qui a le droit d'edition, mais le groupe 10 a tout pouvoir sur la comptabilite
+}
+
+/**
+ * Consulter la compatabilite. (auditeur comptable et autres membres du CA)
+ * Cette consultation (lecture seule) est celle du "Grand Journal/Livre des operations"
+ * ainsi que la consultation et l'export des etats/syntheses comptables !
+ * defaut : webmestre
+ * groupe : 10,11,12.
+ */
+function autoriser_association_voir_compta_dist($faire, $type, $id, $qui, $opt) {
+	if ($qui['statut']=='0minirezo' && $qui['webmestre']=='oui') {
+		return TRUE; // on retourne ok pour tous les webmestres
+	}
+	return is_in_groups($qui['id_auteur'], array(12,11,10)); // c'est le groupe 11 qui a le droit de lire les journaux et rapports comptables, mais les groupes 10 et 11 aussi naturellement
 }
 
 /**
  * Modifier le profil de l'association.
  * defaut : webmestre
- * groupe : 20
+ * groupe : 10,20.
  */
 function autoriser_association_editer_profil_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut']=='0minirezo' && $qui['webmestre']=='oui') {
-		return true; // on retourne ok pour tous les webmestres
+		return TRUE; // on retourne ok pour tous les webmestres
 	}
 	return is_in_groups($qui['id_auteur'], array(20,10)); // c'est le groupe 20 qui a le pouvoir d'editer le profil de l'association. le groupe 10 peut avoir besoin d'acceder a certains options de configuration aussi.
 }
@@ -194,21 +219,21 @@ function autoriser_association_editer_profil_dist($faire, $type, $id, $qui, $opt
  */
 function autoriser_association_voir_profil_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut']=='0minirezo' || $qui['statut']=='1comite') {
-		return true; // on retourne ok pour tous les redacteurs
+		return TRUE; // on retourne ok pour tous les redacteurs
 	}
 	return is_in_groups($qui['id_auteur'], array(21,20)); // c'est le groupe 21 qui a le pouvoir de voir les informations de l'association, le 20 celui de les editer aussi
 }
 
 /**
- * Editer les informations des membres.
+ * Editer/exporter les informations des membres.
  * defaut : admin non restreint.
- * groupe : 30
+ * groupe : 30.
  */
 function autoriser_association_editer_membres($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
-		return true; // retourne ok pour les admins complets
+		return TRUE; // retourne ok pour les admins complets
 	}
-	return is_in_groups($qui['id_auteur'], array(30)); // c'est le groupe 30 qui a le pouvoir de modifier les infos de tout le monde
+	return is_in_groups($qui['id_auteur'], 30); // c'est le groupe 30 qui a le pouvoir de modifier les infos de tout le monde
 }
 
 /**
@@ -219,28 +244,36 @@ function autoriser_association_editer_membres($faire, $type, $id, $qui, $opt) {
  */
 function autoriser_association_voir_membres($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
-		return true; // ok pour les admins non restreints
+		return TRUE; // ok pour les admins non restreints
 	}
 	if ($id == intval($GLOBALS['visiteur_session']['id_auteur'])) {
-		return true; // ok si l'auteur connecté correspond à la page du membre a visiter
+		return TRUE; // ok si l'auteur connecté correspond à la page du membre a visiter
 	}
 	return is_in_groups($qui['id_auteur'], array(31,30)); // c'est le groupe 31 qui a le pouvoir de voir les infos de tout le monde, le 30 celui de les editer
 }
 
 /**
- * Voir la page des membres et leurs pages personnelle.
+ * Synchroniser les membres avec les auteurs SPIP.
  * defaut : admin non restreint.
- *   Pour les pages de membres, le membre en question y a forcement accès
  * groupe : 31,32.
  */
 function autoriser_association_synchroniser_membres($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
-		return true; // ok pour les admins non restreints
+		return TRUE; // ok pour les admins non restreints
 	}
-	if ($id == intval($GLOBALS['visiteur_session']['id_auteur'])) {
-		return true; // ok si l'auteur connecté correspond à la page du membre a visiter
+	return is_in_groups($qui['id_auteur'], array(32,30)); // c'est le groupe 31 qui a le pouvoir de voir les infos de tout le monde, le 32 celui de les synchroniser
+}
+
+/**
+ * Synchroniser les membres avec les auteurs SPIP.
+ * defaut : admin non restreint.
+ * groupe : 11,33.
+ */
+function autoriser_association_relancer_membres($faire, $type, $id, $qui, $opt) {
+	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
+		return TRUE; // ok pour les admins non restreints
 	}
-	return is_in_groups($qui['id_auteur'], array(31,30)); // c'est le groupe 31 qui a le pouvoir de voir les infos de tout le monde, le 32 celui de les synchroniser
+	return is_in_groups($qui['id_auteur'], array(33,11)); // c'est le groupe 33 qui a le pouvoir de relancer les membres (est-ce que cela fait parti des messages envoyes par le secretaire ?), le 11 celui de reclamer les cotisations... (mais dans certaines associations il ne s'occupe pas de cet aspect administratif qui est laisse a la charge du secretaire avec qui il collabore sur ce point)
 }
 
 ?>

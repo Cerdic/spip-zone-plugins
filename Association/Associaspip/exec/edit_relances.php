@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_edit_relances()
-{
+function exec_edit_relances() {
 	if (!autoriser('relancer_membres', 'association')) {
 			include_spip('inc/minipres');
 			echo minipres();
@@ -82,8 +81,7 @@ function exec_edit_relances()
  *   code HTML du tableau affichant la liste des membres en fonction des filtres
  *   actifs avec cases a cocher de selection
  */
-function relances_liste($critere, $id_groupe=0)
-{
+function relances_liste($critere, $id_groupe=0) {
 	if ($id_groupe) {
 		$critere .= " AND id_groupe=$id_groupe ";
 		$jointure_groupe = ' LEFT JOIN spip_asso_groupes_liaisons a_g_l ON a_m.id_auteur=a_g_l.id_auteur ';
@@ -98,7 +96,7 @@ function relances_liste($critere, $id_groupe=0)
 		.'<td class="integer"><label for="id'.$data['id_auteur'].'">'.$data['id_auteur'].'</label></td>'
 		.'<td class="text"><label for="id'.$data['id_auteur'].'">'. association_formater_nom($data['sexe'], $data['prenom'], $data['nom_famille']) .'</label></td>'
 		.'<td class="date"><label for="mbr'.$data['id_auteur'].'">'. association_formater_date($data['validite']) .'</label></td>'
-		.'<td class="action">'. association_bouton_coch('id', $data['id_auteur'], '<input name="statut['.$data['id_auteur'].']" type="hidden" value="'.$data['statut_interne'].'" />')
+		. association_bouton_coch('id', $data['id_auteur'], '<input name="statut['.$data['id_auteur'].']" type="hidden" value="'.$data['statut_interne'].'" />')
 		."</tr>\n";
 	}
 	return $res;

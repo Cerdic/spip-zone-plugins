@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_synchronis_activites()
-{
+function exec_synchronis_activites() {
 	if (!autoriser('associer', 'activites')) {
 			include_spip('inc/minipres');
 			echo minipres();
@@ -27,13 +26,26 @@ function exec_synchronis_activites()
 		$infos['agenda:evenement_date_au'] = $format($evenement['date_fin'],'dtend');
 		$infos['agenda:evenement_lieu'] = '<span class="location">'.$evenement['lieu'].'</span>';
 		echo '<div class="vevent">'. association_totauxinfos_intro('<span class="summary">'.$evenement['titre'].'</span>', 'evenement', $id_evenement, $infos, 'evenement') .'</div>';
+		$reponses = sql_allfetsel('reponse, COUNT(*) AS nombre', 'spip_evenements_participants', "id_evenement=$id_evenement", 'reponse', 'reponse DESC');
+		foreach ($reponses as $num=>$rep ) { // re-normaliser le tableau des reponses
+			switch ( $rep['reponse'] ) { // mettre la l'identifiant de la reponse en cle et rajouter au debut du tableau la chaine de langue
+				case 'oui' :
+					$reponses['oui'] = array('agenda:label_reponse_jyparticipe', $rep['nombre'], );
+					break;
+				case 'non' :
+					$reponses['non'] = array('agenda:label_reponse_jyparticipe_pas', $rep['nombre'], );
+					break;
+				case '?' :
+					$reponses['nsp'] = array('agenda:label_reponse_jyparticipe_peutetre', $rep['nombre'], );
+					break;
+				default : // autres (rajouts en dehors du plugin Agenda 2)
+					$reponses['reponse_'.$rep['reponse']] = array('reponse_'.$rep['reponse'], $rep['nombre'], );
+					break;
+			}
+			unset($reponses[$num]); // supprimer l'ancienne entree (le tableau final aura le meme nombre d'elements)
+		}
 		// TOTAUX : nombres d'inscrits par reponse
-		echo association_totauxinfos_effectifs('inscriptions', array(
-			'oui'=>array( 'agenda:label_reponse_jyparticipe', array('spip_evenements_participants', "id_evenement=$id_evenement AND reponse='oui' "), ),
-			'nsp'=>array( 'agenda:label_reponse_jyparticipe_peutetre', array('spip_evenements_participants', "id_evenement=$id_evenement AND reponse='?' "), ),
-			'non'=>array( 'agenda:label_reponse_jyparticipe_pas', array('spip_evenements_participants', "id_evenement=$id_evenement AND reponse='non' "), ),
-			'etc'=>array( 'autres', array('spip_evenements_participants', "id_evenement=$id_evenement AND reponse NOT IN ('non', 'oui', '?') "), ),
-		));
+		echo association_totauxinfos_effectifs('inscriptions',  $reponses);
 		// datation et raccourcis
 		raccourcis_association(array('inscrits_activite', "id=$id_evenement"));
 		debut_cadre_association('reload-32.png', 'options_synchronisation');

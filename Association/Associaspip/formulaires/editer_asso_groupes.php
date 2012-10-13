@@ -17,7 +17,7 @@ include_spip('inc/autoriser');
 function formulaires_editer_asso_groupes_charger_dist($id_groupe='') {
 	$contexte = formulaires_editer_objet_charger('asso_groupes', $id_groupe, '', '',  generer_url_ecrire('groupes'), ''); // cet appel va charger dans $contexte tous les champs de la table spip_asso_groupes associes a l'id_groupe passe en param
 	if ($id_groupe>0 && $id_groupe<100) {
-		$contexte['_autorisation'] = true;
+		$contexte['_autorisation'] = TRUE;
 	}
 	return $contexte;
 }

@@ -1,27 +1,29 @@
 <?php
+/***************************************************************************\
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010 Emmanuel Saint-James
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+\***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
+
 include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/autoriser');
-/***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & Francois de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
-\***************************************************************************/
+
 function formulaires_editer_membres_groupe_charger_dist($id_groupe='') {
 	$contexte['id_groupe'] = $id_groupe;
-	/* pour passer securiser action */
-	$contexte['_action'] = array('editer_membres_groupe', $id_groupe);
+	$contexte['_action'] = array('editer_membres_groupe', $id_groupe); // pour passer securiser action
+
 	return $contexte;
 }
 
 function formulaires_editer_membres_groupe_traiter($id_groupe='') {
-	/* partie de code grandement inspiree du code de formulaires_editer_objet_traiter dans ecrire/inc/editer.php */
+	// partie de code grandement inspiree du code de formulaires_editer_objet_traiter dans ecrire/inc/editer.php
 	$res=array();
 	// eviter la redirection forcee par l'action...
 	set_request('redirect');

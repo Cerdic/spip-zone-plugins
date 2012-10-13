@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_activites()
-{
+function exec_activites() {
 	if (!autoriser('associer', 'activites')) {
 		include_spip('inc/minipres');
 		echo minipres();
@@ -53,7 +52,7 @@ function exec_activites()
 			) );
 		} else { // pas de bloc de raccourcis
 			echo association_date_du_jour();
-			echo fin_boite_info(true);
+			echo fin_boite_info(TRUE);
 		}
 		debut_cadre_association('activites.gif','activite_titre_toutes_activites');
 		// FILTRES

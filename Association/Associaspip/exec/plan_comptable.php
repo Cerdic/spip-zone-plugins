@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_plan_comptable()
-{
+function exec_plan_comptable() {
 	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
@@ -31,7 +30,7 @@ function exec_plan_comptable()
 			$classe = '%';
 		$active = _request('active');
 		if ($active=='')
-			$active = true; // si on n'a pas de filtre active dans l'environnement, on affiche par defaut les comptes actifs
+			$active = TRUE; // si on n'a pas de filtre active dans l'environnement, on affiche par defaut les comptes actifs
 		echo '<table class="asso_filtre" width="100%">';
 		echo '<tr>';
 		echo '<td>';

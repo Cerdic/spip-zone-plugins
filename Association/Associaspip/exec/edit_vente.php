@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_edit_vente()
-{
+function exec_edit_vente() {
 	if (!autoriser('associer', 'ventes')) {
 		include_spip('inc/minipres');
 		echo minipres();

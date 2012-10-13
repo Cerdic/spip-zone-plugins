@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_edit_categorie()
-{
+function exec_edit_categorie() {
 	if (!autoriser('editer_profil', 'association')) {
 			include_spip('inc/minipres');
 			echo minipres();

@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_suppr_don()
-{
+function exec_suppr_don() {
 	if (!autoriser('associer', 'dons')) {
 		include_spip('inc/minipres');
 		echo minipres();

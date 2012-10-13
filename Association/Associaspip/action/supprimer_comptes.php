@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function action_supprimer_comptes()
-{
+function action_supprimer_comptes() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_compte = $securiser_action();
 	include_spip ('inc/association_comptabilite');

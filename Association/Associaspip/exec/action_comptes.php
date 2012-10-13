@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_action_comptes()
-{
+function exec_action_comptes() {
 	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
@@ -43,8 +42,7 @@ function exec_action_comptes()
 	}
 }
 
-function action_comptes_ligne($where)
-{
+function action_comptes_ligne($where) {
 	$res = '';
 	$query = sql_select('*', 'spip_asso_comptes', $where);
 	while($data = sql_fetch($query)) {

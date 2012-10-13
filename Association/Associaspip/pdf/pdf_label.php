@@ -88,7 +88,7 @@ class PDF_Label extends FPDF {
 		$this->_Set_Format($Tformat);
 		$this->Set_Font_Name('Arial');
 		$this->SetMargins(0,0);
-		$this->SetAutoPageBreak(false);
+		$this->SetAutoPageBreak(FALSE);
 
 		$this->_Metric_Doc = $unit;
 		// Permet de commencer l'impression � l'�tiquette d�sir�e dans le cas o� la page a d�j� servi

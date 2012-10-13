@@ -1,23 +1,19 @@
 <?php
+/***************************************************************************\
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010 Emmanuel Saint-James
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+\***************************************************************************/
 
-/* * *************************************************************************
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & Francois de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)      *
- *  Ecrit par Marcel BOLLA en 09/2011									   *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
-  \************************************************************************** */
-
-if (!defined("_ECRIRE_INC_VERSION"))
+if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 /**
  * Cette balise affiche un selecteur du code d'imputation fonction de la classe
  */
-
 function balise_SELECTEUR_IMPUTATION_dist($p) {
 	// on recupere dans l'environement le type d'operation
 	return calculer_balise_dynamique($p, 'SELECTEUR_IMPUTATION', array('id_compte', 'type_operation', 'imputation'));

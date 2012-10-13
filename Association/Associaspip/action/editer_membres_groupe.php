@@ -15,7 +15,7 @@ function action_editer_membres_groupe() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_groupe = $securiser_action();
-	$fonctions = association_recuperer_liste('fonctions', true);
+	$fonctions = association_recuperer_liste('fonctions', TRUE);
 	if ( _request('modifier') ) // mettre a jour les fonctions des membres
 		foreach ($fonctions as $id_auteur => $fonction) {
 			sql_updateq('spip_asso_groupes_liaisons', array('fonction' => $fonction), "id_groupe=$id_groupe AND id_auteur=$id_auteur");

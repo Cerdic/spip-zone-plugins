@@ -1,12 +1,9 @@
 [(#REM)<!-- Modele permettant l'affichage de l'adresse postale passe en parametre
-	Les parametres d'entree sont les champs fournis par le plugin Coordonnees:
-	- VOIE
-	- COMPLEMENT
-	- BOITE POSTALE
-	- CODE POSTAL
-	- VILLE
-	- PAYS (qui contient en fait le code ISO du pays et non son nom)
-	Dans ce modèle par défaut le PAYS n'est pas affiché s'il correspond a celui configuré.
--->]
 
-[(#VOIE)][#_NL (#COMPLEMENT)][#_NL (#BOITE_POSTALE)][#_NL (#CODE_POSTAL)][#_SPC (#VILLE)][#_NL (#REGION)]<BOUCLE_p(PAYS?){code=#PAYS}{code!=#META{/association/pays}}>[#_NL [<(#_SPAN) class="country-name">](#NOM)[</(#_SPAN)>]]</BOUCLE_p>
+Les parametres d'entree sont les champs fournis par le plugin Coordonnees :
+VOIE COMPLEMENT BOITE POSTALE CODE POSTAL VILLE NOM_PAYS
+A cela s'ajoute _NL pour les sauts de ligne et _HT pour les tabulations horizontales
+
+maj:2012-10-02; version:0.4.0; licence:GPL; -->]
+
+[(#VOIE)][#_NL (#COMPLEMENT)][#_NL (#BOITE_POSTALE)][#_NL (#CODE_POSTAL)][#_HT (#VILLE)][#_NL (#REGION)][#_NL (#NOM_PAYS)]

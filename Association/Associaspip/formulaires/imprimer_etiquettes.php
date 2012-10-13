@@ -1,12 +1,22 @@
 <?php
+/***************************************************************************\
+ *  Associaspip, extension de SPIP pour gestion d'associations
+ *
+ * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010 Emmanuel Saint-James
+ *
+ *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+\***************************************************************************/
 
-function formulaires_imprimer_etiquettes_charger_dist()
-{
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
+
+function formulaires_imprimer_etiquettes_charger_dist() {
 	include_spip('base/abstract_sql');
 	include_spip('association_options');
 	$valeurs = array(
 		'statut_interne'=>association_passeparam_statut('interne'),
-		'filtre_email'=>true
+		'filtre_email'=>TRUE,
 	);
 
 	// on peut faire beaucoup mieux mais comment ?
@@ -37,14 +47,13 @@ function formulaires_imprimer_etiquettes_charger_dist()
 	if(!$GLOBALS['association_metas']['etiquette_espace_etiquettesl'])
 		$tab_meta_eti['etiquette_espace_etiquettesl'] = 5;
 	foreach($tab_meta_eti as $key=>$value) {
-		ecrire_meta($key, $value, null, 'association_metas');
+		ecrire_meta($key, $value, NULL, 'association_metas');
 	}
 
 	return $valeurs;
 }
 
-function formulaires_imprimer_etiquettes_verifier_dist()
-{
+function formulaires_imprimer_etiquettes_verifier_dist() {
 	$erreurs = array();
 
 	// Verifier si il a au moins une selection
@@ -52,11 +61,11 @@ function formulaires_imprimer_etiquettes_verifier_dist()
 		$erreurs['etiquette'] = _T('asso:etiquette_aucun_choix');
 		$erreurs['message_erreur'] = _T('asso:erreur_titre');
     }
+
     return $erreurs;
 }
 
-function formulaires_imprimer_etiquettes_traiter_dist()
-{
+function formulaires_imprimer_etiquettes_traiter_dist() {
 	include_spip('base/abstract_sql');
 	include_spip('inc/acces');
 	include_spip('pdf/extends');
@@ -68,7 +77,7 @@ function formulaires_imprimer_etiquettes_traiter_dist()
 	$indice_ligne = 0;
 	$num_page = 1;
 
-	$pdf = new PDF(false, array($GLOBALS['association_metas']['etiquette_largeur_page'],$GLOBALS['association_metas']['etiquette_hauteur_page']), 'mm', 'P');
+	$pdf = new PDF(FALSE, array($GLOBALS['association_metas']['etiquette_largeur_page'],$GLOBALS['association_metas']['etiquette_hauteur_page']), 'mm', 'P');
 	$pdf->titre = _T('asso:adherent_titre_liste_actifs');
 	$pdf->Open();
 	$pdf->AddPage();
@@ -83,7 +92,7 @@ function formulaires_imprimer_etiquettes_traiter_dist()
 	list($statut_interne, $critere) = association_passeparam_statut('interne', 'defaut');
 	$where .= $critere;
 	$filtre_categorie = _request('filtre_categorie');
-	if ($filtre_categorie){
+	if ($filtre_categorie) {
 		$where .= ' AND categore = '.sql_quote($filtre_categorie);
 	}
 	$filtre_email = _request('filtre_email');
@@ -151,7 +160,7 @@ function formulaires_imprimer_etiquettes_traiter_dist()
 		$message .= _T('asso:etiquette_fichier_telecharger', array('fichier'=>$nom_fic) );
 	}
 
-	return array('editable' => false, 'message_ok'=> $message );
+	return array('editable' => FALSE, 'message_ok'=> $message );
 }
 
 ?>

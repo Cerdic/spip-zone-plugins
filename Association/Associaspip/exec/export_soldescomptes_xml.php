@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 // http://fr.wikipedia.org/wiki/Extensible_Markup_Language
 // jeu de balisage propre a Associaspip ; pas de DTD ni de Schema
 function exec_export_soldescomptes_xml() {
-	if (!autoriser('associer', 'export_comptes')) {
+	if (!autoriser('voir_compta', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

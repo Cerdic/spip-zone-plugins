@@ -11,8 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_adherents()
-{
+function exec_adherents() {
 	if (!autoriser('voir_membres', 'association', 0)) {  // on s'assure qu'il n'y ai pas d'id associe a la demande d'autorisation sur voir_membres car on les consulte tous
 		include_spip('inc/minipres');
 		echo minipres();
@@ -41,9 +40,9 @@ function exec_adherents()
 			'synchronise_asso_membre_lien' => array('reload-32.png', 'synchroniser_asso_membres', array('synchroniser_membres', 'association') ),
 		));
 		if ( test_plugin_actif('FPDF') && test_plugin_actif('COORDONNEES') && autoriser('relancer_membres', 'association') ) { // etiquettes
-			echo debut_cadre_enfonce('',true);
+			echo debut_cadre_enfonce('',TRUE);
 			echo recuperer_fond('prive/editer/imprimer_etiquettes');
-			echo fin_cadre_enfonce(true);
+			echo fin_cadre_enfonce(TRUE);
 		}
 		//Filtres ID et groupe : si le filtre id est actif, on ignore le filtre groupe
 		$id = association_passeparam_id('auteur');
@@ -63,7 +62,7 @@ function exec_adherents()
 			$champsExclus[] = 'prenom';
 		if ( !$GLOBALS['association_metas']['id_asso'] )
 			$champsExclus[] = 'id_asso';
-		echo association_bloc_listepdf('membre', array('where_adherents'=>$where_adherents, 'jointure_adherents'=>$jointure_adherents, 'statut_interne'=>$statut_interne), 'adherent_libelle_', $champsExclus, true);
+		echo association_bloc_listepdf('membre', array('where_adherents'=>$where_adherents, 'jointure_adherents'=>$jointure_adherents, 'statut_interne'=>$statut_interne), 'adherent_libelle_', $champsExclus, TRUE);
 		debut_cadre_association('annonce.gif', 'adherent_titre_liste_actifs');
 		// FILTRES
 		filtres_association(array(
@@ -96,8 +95,7 @@ function exec_adherents()
  *   - code HTML du tableau affichant la liste des membres en fonction des
  *     filtres actifs et de la configuration (champs affiches ou pas)
  */
-function adherents_liste($lettre, $critere, $statut_interne, $id_groupe)
-{
+function adherents_liste($lettre, $critere, $statut_interne, $id_groupe) {
 	if ($lettre)
 		$critere .= " AND UPPER(nom_famille) LIKE UPPER('$lettre%') "; // le 1er UPPER (plutot que LOWER puisque les lettres sont mises et passees en majuscule) sur le champ est requis car LIKE est sensible a la casse... le 2nd UPPER est pour contrer les requetes entrees manuellement... (remarque, avec MySQL 5 et SQL Server, on aurait pu avoir simplement "nom_famille LIKE '$lettre%' COLLATE UTF_GENERAL_CI" ou mieux ailleurs : "nom_famille ILIKE '$lettre%'" mais c'est pas forcement portable)
 	if ($id_groupe) {
@@ -176,7 +174,7 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe)
 		}
 		if ($GLOBALS['association_metas']['aff_validite']) {
 			$auteurs .= '<td class="date">';
-			if ($data['validite']==''){
+			if (!$data['validite']) {
 				$auteurs .= '&nbsp;';
 			} else {
 				$auteurs .= '<abbr class="dtend" title="'.$data['validite'].'">'. association_formater_date($data['validite']) .'</td>';
@@ -219,13 +217,13 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe)
 		$res .= '<th>'._T('asso:adherent_libelle_validite').'</th>';
 	}
 	$res .= '<th colspan="'. (autoriser('editer_membres', 'association')?4:2) .'" class="actions">'._T('asso:entete_actions').'</th>'
-	. '<th><input title="'._T('asso:selectionner_tout').'" type="checkbox" id="selectionnerTous" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName(\'id_auteurs[]\'); for (var i in checkboxList){checkboxList[i].checked=currentVal;}" /></th>'
+	. '<th><input title="'._T('asso:selectionner_tout').'" type="checkbox" id="selectionnerTous" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName(\'id_auteurs[]\'); for (var i in checkboxList) {checkboxList[i].checked=currentVal;}" /></th>'
 	. "</tr>\n</thead><tbody>"
 	. $auteurs
 	. "</tbody>\n</table>\n";
 	// SOUS-PAGINATION
 	$res .= "<table width='100%' class='asso_tablo_filtres'><tr>\n";
-	$res .= association_selectionner_souspage(array('spip_asso_membres', $critere), 'adherents', 'lettre='.$lettre.'&statut_interne='.$statut_interne, false);
+	$res .= association_selectionner_souspage(array('spip_asso_membres', $critere), 'adherents', 'lettre='.$lettre.'&statut_interne='.$statut_interne, FALSE);
 	if (autoriser('editer_membres', 'association', 100)) {
 		$res .= "</td><td align='right' class='formulaire'><form>\n";
 		if ($auteurs) {
@@ -254,8 +252,7 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe)
  * @return string
  *   spip_asso_categories.valeur
  */
-function affiche_categorie($c)
-{
+function affiche_categorie($c) {
   return is_numeric($c)
     ? sql_getfetsel('valeur', 'spip_asso_categories', "id_categorie=$c")
     : $c;

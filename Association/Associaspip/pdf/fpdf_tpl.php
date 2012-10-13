@@ -34,7 +34,7 @@ class FPDF_TPL extends FPDF {
      * "In Template"-Flag
      * @var boolean
      */
-    var $_intpl = false;
+    var $_intpl = FALSE;
 
     /**
      * Nameprefix of Templates used in Resources-Dictonary
@@ -73,7 +73,7 @@ class FPDF_TPL extends FPDF {
      * @param int $h The height given in user-unit
      * @return int The ID of new created Template
      */
-    function beginTemplate($x = null, $y = null, $w = null, $h = null) {
+    function beginTemplate($x = NULL, $y = NULL, $w = NULL, $h = NULL) {
     	if (is_subclass_of($this, 'TCPDF')) {
     		$this->Error('This method is only usable with FPDF. Use TCPDF methods startTemplate() instead.');
     		return;
@@ -82,13 +82,13 @@ class FPDF_TPL extends FPDF {
         if ($this->page<=0)
             $this->error("You have to add a page to fpdf first!");
 
-        if ($x==null)
+        if ($x==NULL)
             $x = 0;
-        if ($y==null)
+        if ($y==NULL)
             $y = 0;
-        if ($w==null)
+        if ($w==NULL)
             $w = $this->w;
-        if ($h==null)
+        if ($h==NULL)
             $h = $this->h;
 
         // Save settings
@@ -111,13 +111,13 @@ class FPDF_TPL extends FPDF {
             'h' => $h
         );
 
-        $this->SetAutoPageBreak(false);
+        $this->SetAutoPageBreak(FALSE);
 
         // Define own high and width to calculate possitions correct
         $this->h = $h;
         $this->w = $w;
 
-        $this->_intpl = true;
+        $this->_intpl = TRUE;
         $this->SetXY($x + $this->lMargin, $y+$this->tMargin);
         $this->SetRightMargin($this->w - $w+$this->rMargin);
 
@@ -129,7 +129,7 @@ class FPDF_TPL extends FPDF {
      *
      * This method ends a template and reset initiated variables on beginTemplate.
      *
-     * @return mixed If a template is opened, the ID is returned. If not a false is returned.
+     * @return mixed If a template is opened, the ID is returned. If not a FALSE is returned.
      */
     function endTemplate() {
     	if (is_subclass_of($this, 'TCPDF')) {
@@ -138,7 +138,7 @@ class FPDF_TPL extends FPDF {
         }
 
         if ($this->_intpl) {
-            $this->_intpl = false;
+            $this->_intpl = FALSE;
             $tpl =& $this->tpls[$this->tpl];
             $this->SetXY($tpl['o_x'], $tpl['o_y']);
             $this->tMargin = $tpl['o_tMargin'];
@@ -150,7 +150,7 @@ class FPDF_TPL extends FPDF {
 
             return $this->tpl;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
@@ -171,7 +171,7 @@ class FPDF_TPL extends FPDF {
      * @param int $_h The new height of the template
      * @retrun array The height and width of the template
      */
-    function useTemplate($tplidx, $_x = null, $_y = null, $_w = 0, $_h = 0) {
+    function useTemplate($tplidx, $_x = NULL, $_y = NULL, $_w = 0, $_h = 0) {
         if ($this->page<=0)
         	$this->error('You have to add a page first!');
 
@@ -186,9 +186,9 @@ class FPDF_TPL extends FPDF {
         $w = $tpl['w'];
         $h = $tpl['h'];
 
-        if ($_x==null)
+        if ($_x==NULL)
             $_x = 0;
-        if ($_y==null)
+        if ($_y==NULL)
             $_y = 0;
 
         $_x += $tpl['x'];
@@ -237,7 +237,7 @@ class FPDF_TPL extends FPDF {
      */
     function getTemplateSize($tplidx, $_w = 0, $_h = 0) {
         if (!$this->tpls[$tplidx])
-            return false;
+            return FALSE;
         $tpl =& $this->tpls[$tplidx];
         $w = $tpl['w'];
         $h = $tpl['h'];
@@ -281,7 +281,7 @@ class FPDF_TPL extends FPDF {
     /**
      * See FPDF/TCPDF-Documentation ;-)
      */
-    function Image($file, $x = null, $y = null, $w = 0, $h = 0, $type = '', $link = '') {
+    function Image($file, $x = NULL, $y = NULL, $w = 0, $h = 0, $type = '', $link = '') {
         if (is_subclass_of($this, 'TCPDF')) {
         	$args = func_get_args();
 			return call_user_func_array(array($this, 'TCPDF::Image'), $args);

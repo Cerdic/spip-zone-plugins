@@ -11,9 +11,8 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_edit_compte()
-{
-	if (!autoriser('associer', 'comptes')) {
+function exec_edit_compte() {
+	if (!autoriser('editer_compta', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

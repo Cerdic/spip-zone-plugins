@@ -21,7 +21,7 @@ function formulaires_ajouter_membres_groupe_charger_dist($id_groupe='') {
 }
 
 function formulaires_ajouter_membres_groupe_traiter($id_groupe='') {
-	/* partie de code grandement inspiree du code de formulaires_editer_objet_traiter dans ecrire/inc/editer.php */
+	// partie de code grandement inspiree du code de formulaires_editer_objet_traiter dans ecrire/inc/editer.php
 	$res = array();
 	// eviter la redirection forcee par l'action...
 	set_request('redirect');
@@ -35,7 +35,6 @@ function formulaires_ajouter_membres_groupe_traiter($id_groupe='') {
 		$res['redirect'] = generer_url_ecrire('edit_groupe', 'id='.$id_groupe);
 	}
 	return $res;
-
 }
 
 ?>

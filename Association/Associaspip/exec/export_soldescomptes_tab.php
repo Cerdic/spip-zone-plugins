@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 // Export du Compte de Resultat au format .tab
 function exec_export_soldescomptes_tab() {
-	if (!autoriser('associer', 'export_comptes')) {
+	if (!autoriser('voir_compta', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

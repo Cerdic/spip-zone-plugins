@@ -16,7 +16,7 @@ include_spip('exec/compte_resultat'); // c'est pour la definition de classe Expo
 // Export du Compte de Resultat au format XML : balisage DocBooK
 // http://fr.wikipedia.org/wiki/DocBook
 function exec_export_soldescomptes_dbk() {
-	if (!autoriser('associer', 'export_comptes')) {
+	if (!autoriser('voir_compta', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

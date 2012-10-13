@@ -139,7 +139,7 @@ class fpdi_pdf_parser extends pdf_parser {
             return $res;
     	} else {
     		if (!isset ($obj[1][1]['/Parent'])) {
-    			return false;
+    			return FALSE;
     		} else {
                 $res = $this->_getPageResources($obj[1][1]['/Parent']);
                 if ($res[0]==PDF_TYPE_OBJECT)
@@ -227,7 +227,7 @@ class fpdi_pdf_parser extends pdf_parser {
                         $this->error(sprintf('To handle %s filter, please compile php with zlib support.',$_filter[1]));
                     }
 
-                    if ($stream===false) {
+                    if ($stream===FALSE) {
                     	$this->error('Error while decompressing stream.');
                     }
                     break;
@@ -282,7 +282,7 @@ class fpdi_pdf_parser extends pdf_parser {
                          'ury' => max($b[1][1], $b[3][1])/$k,
                          );
         } else if (!isset ($page[1][1]['/Parent'])) {
-            return false;
+            return FALSE;
         } else {
             return $this->getPageBox($this->pdf_resolve_object($this->c, $page[1][1]['/Parent']), $box_index, $k);
         }
@@ -334,7 +334,7 @@ class fpdi_pdf_parser extends pdf_parser {
             return $res;
     	} else {
     		if (!isset ($obj[1][1]['/Parent'])) {
-    			return false;
+    			return FALSE;
     		} else {
                 $res = $this->_getPageRotation($obj[1][1]['/Parent']);
                 if ($res[0]==PDF_TYPE_OBJECT)
