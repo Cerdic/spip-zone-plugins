@@ -96,7 +96,7 @@ function association_bouton_act($texte, $image, $script='', $exec_args='', $img_
 	$chemin = _DIR_PLUGIN_ASSOCIATION_ICONES.$image; // icone Associaspip
 	if ( !file_exists($chemin) )
 		$chemin = find_in_path($image); // icone alternative
-	$res .= '<img src="'. urlencode($chemin) .'" alt="';
+	$res .= '<img src="'.$chemin.'" alt="';
 	$res .= htmlspecialchars($texte ?association_langue($texte).'" title="'. association_langue($texte) : ' ' );
 	$res .= '" '.$img_attrs.' />';
 	$res .= ($script?'</a>':'');
@@ -752,7 +752,7 @@ function association_formater_typecoord($classe, $valeur, $sep=' ') {
 		foreach ($formats_logos as $format) { // @file ecrire/inc/chercher_logo.php
 			$fichier = "images/type_$classe". ($type?"_ $type":'') .".$format";
 			if ( $chemin = find_in_path($fichier) )
-			$img = urlencode($chemin);
+			$img = $chemin;
 		}
 		if ($img)
 			$res .= "<img class='type' src='$img' alt='$type' title='". $lang ."' />$sep"; // $res .= association_bouton_act($type, $img, '', '', '', '') ; // c'est comme un bouton... sans action/lien...
