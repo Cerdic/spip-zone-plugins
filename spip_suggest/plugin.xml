@@ -18,5 +18,6 @@
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id="Fulltext" version="[0.3;]" />
+	<utilise nom="jqueryui" />
 	<categorie>navigation</categorie>
 </plugin>

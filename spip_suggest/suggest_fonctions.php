@@ -47,11 +47,20 @@ function spip_suggest_insert_head($flux) {
 	$flux .= '
 <script type="text/javascript">
 	$(document).ready(function(){
-		var options, a;
-		jQuery(function(){
-			options = { serviceUrl:"'.generer_url_public("suggest").'"};
-			a = $("'.lire_config("suggest_selecteur", "#recherche").'").autocomplete(options);
-		});
+		function formatItem(row) {
+			if (row[1] == 1) {
+				return row[0] + " (" + row[1] + " r&eacute;sultat)";
+			}
+			else if (row[1] > 1) {
+				return row[0] + " (" + row[1] + " r&eacute;sultats)";
+			} 
+		 }
+		$("'.lire_config("suggest_selecteur", "#recherche").'").autocomplete("'.generer_url_public("suggest").'", {
+			width: '.lire_config("suggest_width", 205).',
+			matchContains: true, 
+			selectFirst: false,
+			formatItem: formatItem
+		}); 
 	});
 </script>';
 	return $flux;

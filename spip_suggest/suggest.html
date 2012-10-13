@@ -3,7 +3,7 @@
 #HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-[(#REM)On passe la variable query envoyee par le javascript du formulaire au php]
+[(#REM)On passe la variable q envoyee par le javascript du formulaire au php]
 
-[(#ENV{query}|oui)
-[(#ENV*{query}|spip_suggest_complete)]]
+[(#ENV{q}|oui)
+[(#ENV*{q}|spip_suggest_complete)]]
