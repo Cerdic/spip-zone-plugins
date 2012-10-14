@@ -10,12 +10,19 @@
 				<input type="[(#HTML5|?{date,text})]" name="date_don" [value="(#ENV{date_don}|affdate{Y-m-d})"] id="date_don" class="date"  />
 			</li>
 			<INCLURE{fond=inc/saisir_membre, nom, id_auteur, champs_legende=Bienfaiteur }>
+		<fieldset>
+			<legend><:asso:dons_en_argent:></legend>
+			<ul>
 			<li class="editer_argent">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{argent})</span>]
 				<label for="argent"><:asso:don_financier_en_e__:></label>
 				<input type="[(#HTML5|?{number,text})]" name="argent" [value="(#ENV{argent})"] id="argent"  class="number float price" />
 			</li>
 			<INCLURE{fond=inc/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, env}>
+		</fieldset>
+		<fieldset>
+			<legend><:asso:dons_en_nature:></legend>
+			<ul>
 			<li class="editer_colis">
 				<label for="colis"><:asso:colis:></label>
 				<input type="text" name="colis" [value="(#ENV{colis})"] id="colis"  class="text" />
@@ -25,6 +32,7 @@
 				<label for="valeur"><:asso:contre_valeur_en_e__:></label>
 				<input type="[(#HTML5|?{number,text})]" name="valeur" [value="(#ENV{valeur})"] id="valeur"  class="number fleat price" />
 			</li>
+		</fieldset>
 			<li class="editer_contrepartie">
 				<label for="contrepartie"><:asso:geste_association:></label>
 				<input type="text" name="contrepartie" [value="(#ENV{contrepartie})"] id="contrepartie"  class="text" />

@@ -673,7 +673,7 @@ class ExportComptes_PDF extends FPDF {
 	$this->SetTitle('Module Comptabilite');
 	$this->SetSubject('Etats comptables');
 	// typo par defaut
-	$this->SetFont($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial', '', 12);
+	$this->SetFont(($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial'), '', 12);
 	// engager la page
 	// http://fpdf.org/en/doc/addpage.htm
 	$this->AddPage($GLOBALS['association_metas']['fpdf_orientation'], $GLOBALS['association_metas']['fpdf_format']?$GLOBALS['association_metas']['fpdf_format']:array($GLOBALS['association_metas']['fpdf_widht'], $GLOBALS['association_metas']['fpdf_height']) );
@@ -686,7 +686,7 @@ class ExportComptes_PDF extends FPDF {
 	// Positionnement a 2 fois la marge du bas
 	$this->SetY(-2*$GLOBALS['association_metas']['fpdf_margint']);
 	// typo
-	$this->SetFont($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial', 'I', 8); // police: italique 8px
+	$this->SetFont(($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial'), 'I', 8); // police: italique 8px
 	$this->SetTextColor(128); // Couleur du texte : gris-50.2% (fond blanc)
 	// Date et Numéro de page
 	$this->Cell(0, 10, html_entity_decode(_T('asso:cpte_export_pied_notice') .' -- '. affdate(date('Y-m-d')) .' -- '. _T('asso:cpte_export_page', array('numero'=>$this->PageNo()) )), 0, 0, 'C');
@@ -714,7 +714,7 @@ class ExportComptes_PDF extends FPDF {
 	    $this->Image(extraire_attribut(image_reduire($logo, $this->icone_h, $this->icone_v), 'src'), $xc, $yc, $this->icone_h);
 	}
 	// typo
-	$this->SetFont($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial', 'B', 22); // police : gras 22px
+	$this->SetFont(($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial'), 'B', 22); // police : gras 22px
 	$this->SetFillColor(235); // Couleur du cadre, du fond du cadre : gris-92,2%
 	$this->SetTextColor(0); // Couleur du texte : noir
 	// Titre centre
@@ -725,7 +725,7 @@ class ExportComptes_PDF extends FPDF {
 	$this->Ln($this->space_v); // Saut de ligne
 	$yc += $this->space_v;
 	// typo
-	$this->SetFont($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial', '', 12); // police : normal 12px
+	$this->SetFont(($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial'), '', 12); // police : normal 12px
 	$this->SetFillColor(235); // Couleur de remplissage : gris-92.2%
 	// Sous titre Nom de l'association
 	$this->SetXY($xc, $yc);
@@ -734,7 +734,7 @@ class ExportComptes_PDF extends FPDF {
 	$this->Ln($this->space_v/2); // Saut de ligne
 	$yc += $this->space_v/2;
 	// typo
-	$this->SetFont($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial', '', 12); // police : normal 12px
+	$this->SetFont(($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial'), '', 12); // police : normal 12px
 	$this->SetFillColor(235); // Couleur de fond : gris-92.2%
 	//Sous titre Intitule de l'exercice
 	$this->SetXY($xc, $yc);
@@ -763,7 +763,7 @@ class ExportComptes_PDF extends FPDF {
 	$y_orig = $this->yy+$this->space_v;
 	$yc = $y_orig+$this->space_v;
 	// typo
-	$this->SetFont($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial', 'B', 14); // police: gras 14px
+	$this->SetFont(($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial'), 'B', 14); // police: gras 14px
 	$this->SetFillColor(235); // Couleursdu fond du cadre de titre : gris-92.2%
 	$this->SetTextColor(0); // Couleurs du texte du cadre de titre
 	// Titre centre
@@ -779,7 +779,7 @@ class ExportComptes_PDF extends FPDF {
 	$i = 0;
 	foreach ( $liste_classes as $rang => $classe ) { // calcul+affichage par classe
 	    $query = association_calcul_soldes_comptes_classe($classe, $this->exercice, $this->destination, $direction );
-	    $this->SetFont($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial', '', 12); // police : normal 12px
+	    $this->SetFont(($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial'), '', 12); // police : normal 12px
 	    while ($data = sql_fetch($query)) {
 		$this->SetXY($xc, $yc); // positionne le curseur
 		$new_chapitre = substr($data['code'], 0, 2);
@@ -839,7 +839,7 @@ class ExportComptes_PDF extends FPDF {
 	$y_orig = $this->yy+$this->space_v;
 	$yc = $y_orig+$this->space_v;
 	// typo
-	$this->SetFont($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial', 'B', 14); // police : gras 14px
+	$this->SetFont(($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial'), 'B', 14); // police : gras 14px
 	$this->SetFillColor(235); // Couleur du fond : gris-92.2%
 	$this->SetTextColor(0); // Couleur du texte : noir
 	// Titre centre

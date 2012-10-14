@@ -45,7 +45,7 @@ class PDF extends FPDF {
 		$this->SetTitle(utf8_decode($GLOBALS['association_metas']['nom']));
 		$this->SetSubject(utf8_decode(html_entity_decode($this->titre)));
 		// typo par defaut
-		$this->SetFont($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial', '', 12);
+		$this->SetFont(($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial'), '', 12);
 	}
 
 	// modifier les caracteristique de la police en cours d'usage
@@ -53,7 +53,7 @@ class PDF extends FPDF {
 		if (!$attr AND !$name)
 			$this->SetFontSize($size);
 		else
-			$this->SetFont($name?$name:($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial'), $attr, $size);
+			$this->SetFont(($name?$name:($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial')), $attr, $size);
 	}
 
 	// conversion des couleurs sous forme hexadecimal-compate (web) en tableau decimales

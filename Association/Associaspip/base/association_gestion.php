@@ -656,6 +656,9 @@ $GLOBALS['association_maj'][66804] = array(
 	array('sql_alter', "TABLE spip_asso_membres ADD id_categorie INT UNSIGNED NOT NULL"),
 	array('sql_update', 'spip_asso_membres', array('id_categorie'=>'categorie') ),
 #	array('sql_alter', "TABLE spip_asso_membres DROP categorie"),
+	array('sql_alter', "TABLE spip_asso_ventes ADD id_auteur BIGINT UNSIGNED NOT NULL"),
+	array('sql_update', 'spip_asso_ventes', array('id_auteur'=>'id_acheteur') ),
+	array('sql_alter', "TABLE spip_asso_ventes DROP id_acheteur"),
 // homogeniser l'appelation du champ de nom alternatif pour simplifier le code
 	array('sql_alter', "TABLE spip_asso_dons ADD nom TINYTEXT NOT NULL"),
 	array('sql_update', 'spip_asso_dons', array('nom'=>'bienfaiteur') ),

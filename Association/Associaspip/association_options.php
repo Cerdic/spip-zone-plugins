@@ -2358,7 +2358,7 @@ function association_passeparam_annee($type='', $table='', $id=0) {
 function association_passeparam_exercice() {
 	$exo = intval(_request('exercice'));
 	if (!$exo) // exercice non precise
-		$exo = sql_getfetsel('id_exercice','spip_asso_exercices','','','debut DESC'); // on recupere le dernier exercice en date
+		$exo = sql_getfetsel('id_exercice','spip_asso_exercices','','','date_debut DESC'); // on recupere le dernier exercice en date
 	return $exo;
 }
 
@@ -2427,7 +2427,7 @@ function association_chargeparam_operation($type, $id, &$contexte) {
 	return $contexte;
 }
 
-function association_chargeparam_destination($type, &$contexte) {
+function association_chargeparam_destinations($type, &$contexte) {
 	if ($GLOBALS['association_metas']['destinations']) { // on ajoute les metas de destinations
 		$contexte['classe_banques'] = $GLOBALS['association_metas']['classe_banques'];
 		$contexte['destinations_on'] = TRUE;
