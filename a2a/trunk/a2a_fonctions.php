@@ -23,6 +23,14 @@ function balise_ARTICLES_LIES($p) {
 	return $p;
 }
 
+function types_liaisons_existent($array){
+    // return ' ' si des liaisons existent, sinon retourne ''
+    if (empty($array) or $array==array(''=>'')){
+        return '';    
+    }   
+    return ' ';
+}
+    
 function lister_types_liaisons(){
 	// fournit tout les types de liaisons ita est : define + cfg.
 	include_spip('inc/config');

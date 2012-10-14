@@ -12,7 +12,7 @@
 		<tr class='first_row'>
 			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
 			<th class='rang' scope='col'>[(#TRI{rang,<:a2a:rang:>,ajax})]</th>
-			[(#TYPES_LIAISONS|count|>{1}|oui)<th class='type_liaison' scope='col'><:a2a:type_liaison:></th>]
+			[(#TYPES_LIAISONS|types_liaisons_existent|oui)<th class='type_liaison' scope='col'><:a2a:type_liaison:></th>]
 			<th class='titre principale' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
 			<BOUCLE_autorise_th(CONDITION){si #AUTORISER{modifier,article,#ID_ARTICLE_ORIG}|oui}> 
 			<th></th>
@@ -29,8 +29,8 @@
 			<BOUCLE_les_articles_lies(ARTICLES){id_article = #ID_ARTICLE_LIE}{!lang_select}{statut==.*}>
 			<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
 			<td class='rang'>#CHAMP_SQL{RANG}</td>
-			
-			[(#TYPES_LIAISONS|count|>{1}|oui)<td class='type_liaison'>[(#AUTORISER{modifier,article,#ID_ARTICLE_ORIG}|oui)
+			[(#TYPES_LIAISONS|types_liaisons_existent|oui)
+			<td class='type_liaison'>[(#AUTORISER{modifier,article,#ID_ARTICLE_ORIG}|oui)
 			     <INCLURE{fond=prive/inclure/a2a_changer_typeliaisons,id_article_lie,id_article,formulaire,type_liaison}{ajax}>]
 			     [(#AUTORISER{modifier,article,#ID_ARTICLE_ORIG}|non)
 			         [(#TYPE_LIAISON|a2a_traduire_type_liaisons)]
