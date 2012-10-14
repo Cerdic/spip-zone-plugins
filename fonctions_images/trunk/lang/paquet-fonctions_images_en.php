@@ -16,6 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fonctions_images_description' => 'Provides image processing filters, mainly
 extracted from the website [Paris-Beyrouth->http://www.paris-beyrouth.org/].
 
+[Demo page->?exec=demo_fonctions_images]
+
 {{Proposed filters :}}
 -* couleur_chroma
 -* couleur_saturer

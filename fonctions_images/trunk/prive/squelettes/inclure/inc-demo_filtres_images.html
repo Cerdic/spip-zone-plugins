@@ -1,0 +1,235 @@
+#SET{couleur1, #c5e41d}
+#SET{couleur2, ##GET{couleur1}|couleur_inverser}
+
+
+<!-- filtre image_saturer -->
+#BOITE_OUVRIR{'image_saturer','simple fonctions_images'}
+<p>
+	Modifie la saturation d'une image<br />
+</p>
+<p>
+	<strong>syntaxe : </strong><code>|image_saturer{1.2}</code><br />
+	<strong>argument : </strong>valeur = nombre entre 0 et 2. 1 = saturation d'origine
+</p>
+<div class="apercu images">
+	<BOUCLE_imgsaturer(DATA){liste 0.0, 0.5, 1, 1.5, 2}>
+	[(#VALEUR|=={1}|oui)
+	<div class="image on">[<p>(#VALEUR) = originale</p>][(#CHEMIN{prive/images/ecureuil.jpg}|image_reduire{150})]</div>
+	]
+	[(#VALEUR|=={1}|non)
+	<div class="image">[<p>(#VALEUR)</p>][(#CHEMIN{prive/images/ecureuil.jpg}|image_saturer{#VALEUR}|image_reduire{150})]</div>
+	]
+	</BOUCLE_imgsaturer>
+	<div class="nettoyeur"></div>
+</div>
+#BOITE_FERMER
+
+
+<!-- filtre image_niveaux_gris_auto -->
+#BOITE_OUVRIR{'image_niveaux_gris_auto','simple fonctions_images'}
+<p>
+	Corrige automatiquement les niveaux 
+	<a href="http://www.paris-beyrouth.org/Corriger-les-niveaux-des-images">(Paris-Beyrouth : Corriger les niveaux des images</a>)
+</p>
+<p>
+	<strong>syntaxe : </strong><code>|image_niveaux_gris_auto</code><br />
+</p>
+<div class="apercu images">
+	<div class="image on"><p>originale</p>[(#CHEMIN{prive/images/ecureuil.jpg}|image_courbe{rvb, 1=75})]</div>
+	<div class="image"><p>niveaux_gris_auto</p>[(#CHEMIN{prive/images/ecureuil.jpg}|image_courbe{rvb, 1=75}|image_niveaux_gris_auto)]</div>
+	<div class="nettoyeur"></div>
+</div>
+#BOITE_FERMER
+
+
+[(#REM) ça bug !
+<!-- filtre image_podpod -->
+#BOITE_OUVRIR{'image_podpod','simple fonctions_images'}
+<p>
+	Rempli par une couleur la plage de niveau de gris compris entre 2 paramètres.
+	(<a href="http://www.paris-beyrouth.org/Creer-automatiquement-une">Paris-Beyrouth : Créer automatiquement une publicité podPod</a>)
+</p>
+<p>
+	<strong>syntaxe : </strong><code>|image_podpod{x,y,z}</code><br />
+	<strong>argument 1: </strong>couleur à appliquer<br />
+	<strong>argument 2: </strong>nombre entre 0 et 255 = borne basse de la plage de couleur<br />
+	<strong>argument 3: </strong>nombre entre 0 et 255 = borne haute de la plage de couleur<br />
+</p>
+<div class="apercu images">
+	<div class="image on"><p>originale</p>[(#CHEMIN{prive/images/ecureuil.jpg}|balise_img)]</div>
+	<div class="image"><p>dd5500,100,255</p>[(#CHEMIN{prive/images/ecureuil.jpg}|balise_img|image_podpod{dd5500,100,255})]</div>
+	<div class="image"><p>c5e41d,150,205</p>[(#CHEMIN{prive/images/ecureuil.jpg}|balise_img|image_podpod{c5e41d,150,205})]</div>
+	<div class="nettoyeur"></div>
+</div>
+#BOITE_FERMER
+]
+
+
+<!-- filtre couleur_courbe -->
+#BOITE_OUVRIR{'image_courbe','simple fonctions_images'}
+<p>
+	Modifie les courbes d'une image, en manipulant 1 ou 2 points de la courbe 
+	<a href="http://www.paris-beyrouth.org/tutoriaux-spip/article/modifier-les-courbes-d-une-image">(Paris-Beyrouth : Modifier les courbes d'une image)</a><br />
+</p>
+[<p>(#CHEMIN{prive/images/courbes.png}|balise_img)</p>]
+<p>
+	<strong>syntaxe : </strong><code>|image_courbe{rvb, 80=30, 170=220}</code><br />
+	<strong>argument 1 :</strong> rvb / r / v / b = couleur(s) affectée(s)<br />
+	<strong>argument 2 :</strong> x=y (nombres de 0 à 255)<br />
+	<strong>argument 3 (optionnel) :</strong> x=y (nombres de 0 à 255)
+</p>
+<div class="apercu images">
+	<div class="image on"><p>originale</p>[(#CHEMIN{prive/images/ecureuil.jpg}|image_reduire{200})]</div>
+	<BOUCLE_imgcourbe(DATA){source table, #LISTE{#ARRAY{param1,rvb, param2,80=30, param3,170=220}, #ARRAY{param1,rvb, param2,80=100, param3,170=150}, #ARRAY{param1,r, param2,130=40, param3,190=160}}}>
+	<div class="image"><p>#VALEUR{param1}, #VALEUR{param2}, #VALEUR{param3}</p>[(#CHEMIN{prive/images/ecureuil.jpg}|image_reduire{200}|image_courbe{#VALEUR{param1},#VALEUR{param2},#VALEUR{param3}})]</div>
+	</BOUCLE_imgcourbe>
+	<div class="nettoyeur"></div>
+</div>
+#BOITE_FERMER
+
+
+<!-- filtre image_float -->
+#BOITE_OUVRIR{'image_float','simple fonctions_images'}
+<p>
+	Faire un texte qui épouse une image 
+	<a href="http://www.paris-beyrouth.org/Un-habillage-irregulier-2">(Paris-Beyrouth :  Un habillage irrégulier</a>)<br />
+</p>
+<p>
+	<strong>syntaxe : </strong><code>|image_float{left, 10, ffffff}</code><br />
+	<strong>argument 1 :</strong> left/center/right = position de l'image<br />
+	<strong>argument 2 :</strong> nombre = marge autour del'image<br />
+	<strong>argument 3 (optionnel) :</strong> couleur = fond de l'image
+</p>
+<div class="texte">
+[(#CHEMIN{prive/images/ecureuil_decoupe.png}|image_float{left, 5})]
+<p>
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus utnunc eget ante ornare nonummy. Ut arcu. Duis tincidunt tincidunt quam. In elementum blandit odio. Nullam ultrices. Nulla sem augue, mollis id, vulputate eget, ullamcorper ultrices, purus. Aenean porttitor odio at mauris. Mauris quis enim vitae purus dictum ultricies.
+</p>
+<p>
+Proin pharetra lectus auctor lacus. Quisque at sem ac lectus ornare vehicula. Nunc pulvinar, leo ut tristique auctor, felis diam gravida neque, consectetuer cursus sem
+nisl ut enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec justo. Aliquam erat volutpat. Sed vel enim nec tellus suscipit imperdiet. Maecenas sagittis, dolor id tincidunt suscipit, orci tortor fermentum mi, id varius dolor nisi quis lectus. Quisque ante sem, molestie a, euismod sed, tempus sit amet, mauris. Integer vel ante eget urna sagittis consectetuer. Quisque ullamcorper convallis velit.
+</p>
+</div>
+#BOITE_FERMER
+
+
+<!-- filtre image_contour_alpha -->
+#BOITE_OUVRIR{'image_contour_alpha','simple fonctions_images'}
+<p>
+	Trace le contour d'une image transparente 
+</p>
+<p>
+	<strong>syntaxe : </strong><code>|image_contour_alpha{000000, 1}</code><br />
+	<strong>argument 1 :</strong> couleur du contour<br />
+	<strong>argument 2 :</strong> épaisseur du contour<br />
+</p>
+<div class="apercu images">
+	<div class="image on alpha"><p>originale</p>[(#CHEMIN{prive/images/ecureuil_decoupe.png}|balise_img)]</div>
+	<div class="image alpha"><p>000000, 2</p>[(#CHEMIN{prive/images/ecureuil_decoupe.png}|image_contour_alpha{000000, 2})]</div>
+	<div class="image alpha"><p>9dba00, 2</p>[(#CHEMIN{prive/images/ecureuil_decoupe.png}|image_contour_alpha{9dba00, 2})]</div>
+	<div class="nettoyeur"></div>
+</div>
+#BOITE_FERMER
+
+
+<!-- filtre image_sincity -->
+#BOITE_OUVRIR{'image_sincity','simple fonctions_images'}
+<p>
+	Effet automatique : saturation contrastée + accentuation du rouge 
+	<a href="http://www.paris-beyrouth.org/Welcome-to-Spip-City">(Paris-Beyrouth : Welcome to Spip-City</a>)
+</p>
+<p>
+	<strong>syntaxe : </strong><code>|image_sincity</code>
+</p>
+<div class="apercu images">
+	<div class="image on"><p>originale</p>[(#CHEMIN{prive/images/ecureuil.jpg}|image_courbe{rvb, 80=40})]</div>
+	<div class="image"><p>sincity</p>[(#CHEMIN{prive/images/ecureuil.jpg}|image_courbe{rvb, 80=40}|image_sincity)]</div>
+	<div class="nettoyeur"></div>
+</div>
+#BOITE_FERMER
+
+
+<!-- filtre image_estampage_alpha -->
+#BOITE_OUVRIR{'image_estampage_alpha','simple fonctions_images'}
+<p>
+	Réalise des estampages 
+	<a href="http://www.paris-beyrouth.org/Des-titres-en-relief">(Paris-Beyrouth : Des titres en relief</a>)
+</p>
+<p>
+	<strong>syntaxe : </strong><code>|image_estampage_alpha</code><br />
+	<strong>argument 1 :</strong> épaisseur / nombre > 0<br />
+	<strong>argument 2 :</strong> netteté / nombre > 0<br />
+</p>
+<div class="apercu images">
+	<div class="image alpha on"><p>originale</p>[(#CHEMIN{prive/images/ecureuil_decoupe.png}|balise_img)]</div>
+	<BOUCLE_imgestampage(DATA){source table, #LISTE{#ARRAY{param1,1, param2,1}, #ARRAY{param1,4, param2,1}, #ARRAY{param1,1, param2,4}}}>
+	<div class="image"><p>#VALEUR{param1}, #VALEUR{param2}</p>[(#CHEMIN{prive/images/ecureuil_decoupe.png}|image_estampage_alpha{#VALEUR{param1},#VALEUR{param2}})]</div>
+	</BOUCLE_imgestampage>
+	<div class="nettoyeur"></div>
+</div>
+#BOITE_FERMER
+
+
+<!-- filtre image_dispersion -->
+#BOITE_OUVRIR{'image_dispersion','simple fonctions_images'}
+<p>
+	Réalise des dispersions, des floutages
+	<a href="http://www.paris-beyrouth.org/Un-filtre-de-dispersion-graphique">(Paris-Beyrouth : Un filtre de dispersion graphique</a>)
+</p>
+<p>
+	<strong>syntaxe : </strong><code>|image_dispersion{image2, 8, 8}</code><br />
+	<strong>argument 1 :</strong> url de l'image servant de filtre<br />
+	<strong>argument 2 :</strong> déplacement en x / nombre > 0<br />
+	<strong>argument 3 :</strong> déplacement en y / nombre > 0<br />
+</p>
+<div class="apercu images">
+	<div class="image alpha on"><p>image 1</p>[(#CHEMIN{prive/images/ecureuil.jpg}|balise_img)]</div>
+	<div class="image alpha on"><p>image 2</p>[(#CHEMIN{prive/images/disp-noir.png}|balise_img)]</div>
+	<div class="image"><p>8, 8</p>[(#CHEMIN{prive/images/ecureuil.jpg}|image_dispersion{#CHEMIN{prive/images/disp-noir.png},8,8})]</div>
+	<div class="nettoyeur"></div>
+</div>
+<div class="apercu images">
+	<div class="image alpha on"><p>image 1</p>[(#CHEMIN{prive/images/ecureuil.jpg}|balise_img)]</div>
+	<div class="image alpha on"><p>image 2</p>[(#CHEMIN{prive/images/disp-twirl.png}|balise_img)]</div>
+	<div class="image"><p>8, 8</p>[(#CHEMIN{prive/images/ecureuil.jpg}|image_dispersion{#CHEMIN{prive/images/disp-twirl.png},8,8})]</div>
+	<div class="nettoyeur"></div>
+</div>
+#BOITE_FERMER
+
+
+<!-- filtre image_merge -->
+#BOITE_OUVRIR{'image_merge','simple fonctions_images'}
+<p>
+	Superpose une image sur une autre
+</p>
+<p>
+	<strong>syntaxe : </strong><code>|image_merge{image2, right, top}</code><br />
+	<strong>argument 1 :</strong> url de l'image à superposer<br />
+	<strong>argument 2 :</strong> left/center/right placement horizontal<br />
+	<strong>argument 3 :</strong> top/middle/bottom placement vertical<br />
+</p>
+<div class="apercu images">
+	<div class="image on"><p>image 1</p>[(#CHEMIN{prive/images/quadrillage.png}|balise_img)]</div>
+	<div class="image alpha on"><p>image 2</p>[(#CHEMIN{prive/images/cercle.png}|balise_img)]</div>
+	<div class="image"><p>center, middle</p>[(#CHEMIN{prive/images/quadrillage.png}|image_merge{#CHEMIN{prive/images/cercle.png},center,middle})]</div>
+	<div class="image"><p>left, bottom</p>[(#CHEMIN{prive/images/quadrillage.png}|image_merge{#CHEMIN{prive/images/cercle.png},left,bottom})]</div>
+	<div class="nettoyeur"></div>
+</div>
+#BOITE_FERMER
+
+
+<!-- filtre image_negatif -->
+#BOITE_OUVRIR{'image_negatif','simple fonctions_images'}
+<p>
+	Passe une image en négatif<br />
+</p>
+<p>
+	<strong>syntaxe : </strong><code>|image_negatif</code><br />
+	Note : le filtre |image_courbe{rvb, 0=255, 255=0} produira le même résultat
+</p>
+<div class="apercu images">
+	<div class="image on"><p>originale</p>[(#CHEMIN{prive/images/ecureuil.jpg}|balise_img)]</div>
+	<div class="image"><p>image_negatif</p>[(#CHEMIN{prive/images/ecureuil.jpg}|image_negatif)]</div>
+	<div class="nettoyeur"></div>
+</div>
+#BOITE_FERMER
