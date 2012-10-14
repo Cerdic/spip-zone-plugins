@@ -20,22 +20,11 @@
 				<input type="text" name="prenom" value="[(#ENV{prenom})]" id="prenom"  class="text" />
 			</li>
 		]
-			<li class="editer_categorie">
-				<label for="categorie"><:asso:adherent_libelle_categorie:></label>
-			<B_categorie>
-				<select name="categorie" id="categorie">
-			<BOUCLE_categorie(ASSO_CATEGORIES){par libelle}>
-					<option value="#ID_CATEGORIE" [(#ENV{categorie}|=={#ID_CATEGORIE}|?{selected="selected"})]>#LIBELLE</option>
-			</BOUCLE_categorie>
-				</select>
-			</B_categorie>
-				<span class="erreur_message"><:asso:erreur_pas_de_categorie:></span>
-			<//B_categorie>
-			</li>
+		<INCLURE{fond=inc/saisir_categorie, categorie }>
 			<li class="editer_validite">
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{validite})</span>]
-				<label for="validite"><:asso:adherent_libelle_validite:></label>
-				<input type="[(#HTML5|?{date,text})]" name="validite" value="[(#ENV{validite}|affdate{Y-m-d})]" id="validite" class="date" />
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_validite})</span>]
+				<label for="saisie_date_validite"><:asso:adherent_libelle_validite:></label>
+				<input type="[(#HTML5|?{date,text})]" name="date_validite" value="[(#ENV{date_validite}|affdate{Y-m-d})]" id="saisie_date_validite" class="date" />
 			</li>
 			<li class="editer_statut_interne">
 				<label for="statut_interne"><:asso:adherent_libelle_statut:></label>

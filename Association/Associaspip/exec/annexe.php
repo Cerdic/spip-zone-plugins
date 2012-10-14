@@ -25,8 +25,8 @@ function exec_annexe() {
 // traitements
 		onglets_association('titre_onglet_comptes', 'comptes');
 		// INTRO : rappel de l'exercicee affichee
-		$infos['exercice_entete_debut'] = association_formater_date($exercice_data['debut'], 'dtstart');
-		$infos['exercice_entete_fin'] = association_formater_date($exercice_data['fin'], 'dtend');
+		$infos['exercice_entete_debut'] = association_formater_date($exercice_data['date_debut'], 'dtstart');
+		$infos['exercice_entete_fin'] = association_formater_date($exercice_data['date_fin'], 'dtend');
 		echo association_totauxinfos_intro($exercice_data['intitule'], 'exercice', $ids['exercice'], $infos);
 		// datation et raccourcis
 		raccourcis_association(array('comptes', "exercice=$exercice"), array(

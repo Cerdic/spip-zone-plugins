@@ -72,7 +72,9 @@ function exec_association() {
 			echo debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif', TRUE, '', '<a class="organization-unit"'. (autoriser('editer_groupe', 'association') ? (' title="'._T('asso:editer_groupe').'" href="'.generer_url_ecrire('edit_groupe', 'id='.$row['id_groupe']) ):'').'">'.$row['nom'].'</a>');
 //			echo '<a class="org organization-unit" title="'._T('asso:editer_groupe').'" href="'.generer_url_ecrire('edit_groupe', 'id='.$row['id_groupe']).'">'.gros_titre($row['nom'], _DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif', FALSE).'</a>';
 			echo '</div></div>';
-			echo recuperer_fond('modeles/asso_membres', array('id_groupe' => $row['id_groupe']));
+			echo recuperer_fond('modeles/asso_membres', array(
+				'id_groupe' => $row['id_groupe']
+			));
 			echo fin_cadre_relief(TRUE);
 		}
 		fin_page_association();
@@ -80,7 +82,7 @@ function exec_association() {
 		// Possible http://programmer.spip.net/Declarer-une-tache http://contrib.spip.net/Ajouter-une-tache-CRON-dans-un-plugin-SPIP ?
 		sql_updateq('spip_asso_membres',
 			array('statut_interne' => 'echu'),
-			"statut_interne='ok' AND validite<CURRENT_DATE() ");
+			"statut_interne='ok' AND date_validite<CURRENT_DATE() ");
 	}
 }
 

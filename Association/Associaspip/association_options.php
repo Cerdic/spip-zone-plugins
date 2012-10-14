@@ -1324,7 +1324,7 @@ function association_selectionner_exercice($sel='', $exec='', $plus='') {
 #    $res .= '<option value="0" ';
 #	$res .= (!$el?' selected="selected"':'');
 #    $res .= '>'. _L("choisir l'exercice ?") .'</option>';
-    $sql = sql_select('id_exercice, intitule', 'spip_asso_exercices','', 'intitule DESC');
+    $sql = sql_select('id_exercice, intitule', 'spip_asso_exercices', '', 'intitule DESC');
     while ($val = sql_fetch($sql)) {
 		$res .= '<option value="'.$val['id_exercice'].'" ';
 		$res .= ($sel==$val['id_exercice']?' selected="selected"':'');

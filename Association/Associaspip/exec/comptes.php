@@ -30,21 +30,21 @@ function exec_comptes() {
 				$id_compte = '';
 		} else { // quand on a un id compte, on doit selectionner automatiquement l'exercice dans lequel il se trouve
 			$date_operation = sql_getfetsel('date', 'spip_asso_comptes', 'id_compte='.$id_compte);
-			$id_exercice = sql_getfetsel('id_exercice','spip_asso_exercices', "fin>='$date_operation' AND debut<='$date_operation'", '', 'debut DESC');
+			$id_exercice = sql_getfetsel('id_exercice','spip_asso_exercices', "date_fin>='$date_operation' AND date_debut<='$date_operation'", '', 'date_debut DESC');
 		}
 		$exercice_data = sql_asso1ligne('exercice', $id_exercice);
 // traitements
 		$where = 'imputation LIKE '. sql_quote($imputation);
 		$where .= (!is_numeric($vu) ? '' : " AND vu=$vu");
-		$where .= " AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]'";
+		$where .= " AND date>='$exercice_data[date_debut]' AND date<='$exercice_data[date_fin]'";
 		onglets_association('titre_onglet_comptes', 'comptes');
 		// INTRO : rappel de l'exercicee affichee
 		echo association_totauxinfos_intro($exercice_data['intitule'],'exercice',$id_exercice);
-		$journaux = sql_allfetsel('journal, intitule', 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON journal=code', "date>='$exercice_data[debut]' AND date<='$exercice_data[fin]'", "intitule DESC"); // on se permet sql_allfetsel car il s'agit d'une association (mois d'une demie dizaine de comptes) et non d'un etablissement financier (des milliers de comptes clients)
+		$journaux = sql_allfetsel('journal, intitule', 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON journal=code', "date>='$exercice_data[date_debut]' AND date<='$exercice_data[date_fin]'", "intitule DESC"); // on se permet sql_allfetsel car il s'agit d'une association (mois d'une demie dizaine de comptes) et non d'un etablissement financier (des milliers de comptes clients)
 		// TOTAUX : operations de l'exercice par compte financier (indique rapidement les comptes financiers les plus utilises ou les modes de paiement preferes...)
 		foreach (array('recette','depense') as $direction) {
 			foreach ($journaux as $financier) {
-				$nombre_direction = sql_countsel('spip_asso_comptes', "journal='".$financier['journal']."' AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' AND $direction<>0 ");
+				$nombre_direction = sql_countsel('spip_asso_comptes', "journal='".$financier['journal']."' AND date>='$exercice_data[date_debut]' AND date<='$exercice_data[date_fin]' AND $direction<>0 ");
 				if ($nombre_direction) { // on ne s'embarasse pas avec ceux a zero
 					$direction_decomptes[$financier['journal']] = array( $financier['intitule'], $nombre_direction, );
 				}
@@ -56,7 +56,7 @@ function exec_comptes() {
 		$classes = array('pair'=>'produits', 'impair'=>'charges', 'cv'=>'contributions_volontaires', 'vi'=>'banques');
 		$liste_types = array();
 		foreach ($classes as $classe_css=>$classe_cpt) {
-			$liste_types[$classe_css] = array( 'compte_liste_nombre_'.$classe_css, sql_countsel('spip_asso_comptes', "LEFT(imputation,1)='".$GLOBALS['association_metas']["classe_$classe_cpt"]."' AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' "), );
+			$liste_types[$classe_css] = array( 'compte_liste_nombre_'.$classe_css, sql_countsel('spip_asso_comptes', "LEFT(imputation,1)='".$GLOBALS['association_metas']["classe_$classe_cpt"]."' AND date>='$exercice_data[date_debut]' AND date<='$exercice_data[date_fin]' "), );
 		}
 		echo association_totauxinfos_effectifs('compte_entete_imputation', $liste_types);
 		// STATS : montants de l'exercice pour l'imputation choisie (toutes si aucune)
@@ -81,7 +81,7 @@ function exec_comptes() {
 		$sql = sql_select(
 			'imputation , code, intitule, classe',
 			'spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code',
-			"classe<>". sql_quote($GLOBALS['association_metas']['classe_banques']) ." AND active AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' ", // pour l'exercice en cours... ; n'afficher ni les comptes de la classe financiere --ce ne sont pas des imputations-- ni les inactifs
+			"classe<>". sql_quote($GLOBALS['association_metas']['classe_banques']) ." AND active AND date>='$exercice_data[date_debut]' AND date<='$exercice_data[date_fin]' ", // pour l'exercice en cours... ; n'afficher ni les comptes de la classe financiere --ce ne sont pas des imputations-- ni les inactifs
 			'code', 'code ASC');
 		while ($plan = sql_fetch($sql)) { // Remplir le select uniquement avec les comptes utilises
 			$filtre_imputation .= '<option value="'.$plan['code'].'"';

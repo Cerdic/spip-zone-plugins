@@ -20,7 +20,7 @@ function action_editer_asso_categories_dist() {
 	'libelle' => _request('libelle'),
 	'valeur' => _request('valeur'),
 	'duree' => association_recuperer_montant('duree'),
-	'cotisation' => association_recuperer_montant('cotisation'),
+	'prix_cotisation' => association_recuperer_montant('prix_cotisation'),
 	'commentaire' => _request('commentaire'),
     );
     if ($id_categorie) { // modification

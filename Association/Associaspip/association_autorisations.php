@@ -56,7 +56,7 @@ function is_in_groups($id_auteur, $id_groupes) {
  * 1x Comptabilite ***********************
  * 10 => expert-comptable : toutes les autorisations sur la compta.
  * 11 => comptable/tresorier : peut enregistrer des ecritures mais pas modifier le plan comptable
- * 12 => auditeur : acces en lecture seule a la comptabilité
+ * 12 => auditeur : acces en lecture seule a la comptabilite
  * 2x Association ************************
  * 20 => editer le profil et les options de l'association. defaut : webmestres
  * 21 => voir info association. defaut : redacteurs
@@ -66,10 +66,18 @@ function is_in_groups($id_auteur, $id_groupes) {
  * 32 => synchroniser les membres. defaut : admin non restreint
  * 33 => relancer les membres. defaut : admin non restreint
  * 4x Dons *******************************
+ * 40 => gerer les dons. defaut : admin non restreint
+ * 41 => voir les dons. defaut : admin non restreint
  * 5x Ventes *****************************
- * 6x Prets ******************************
- * 7x Ressources *************************
- * 8x Activites **************************
+ * 50 => gerer les dons. defaut : admin non restreint
+ * 51 => voir les dons. defaut : admin non restreint
+ * 6x Ressources *************************
+ * 60 => editer les ressources. defaut : admin non restreint
+ * 61 => voir les ressources. defaut : redacteur
+ * 62 => editer les prets. defaut : admin non restreint
+ * 63 => voir l'historique des prets. defaut : admin non restreint
+ * 7x Activites **************************
+ * 8x ************************************
  * 9x ************************************
  *
  * @param string $faire
@@ -265,7 +273,7 @@ function autoriser_association_synchroniser_membres($faire, $type, $id, $qui, $o
 }
 
 /**
- * Synchroniser les membres avec les auteurs SPIP.
+ * Publiposter des messages (de rappels) aux membres.
  * defaut : admin non restreint.
  * groupe : 11,33.
  */
@@ -274,6 +282,54 @@ function autoriser_association_relancer_membres($faire, $type, $id, $qui, $opt) 
 		return TRUE; // ok pour les admins non restreints
 	}
 	return is_in_groups($qui['id_auteur'], array(33,11)); // c'est le groupe 33 qui a le pouvoir de relancer les membres (est-ce que cela fait parti des messages envoyes par le secretaire ?), le 11 celui de reclamer les cotisations... (mais dans certaines associations il ne s'occupe pas de cet aspect administratif qui est laisse a la charge du secretaire avec qui il collabore sur ce point)
+}
+
+/**
+ * Editer (ajout/suppression/modification/exporter) les dons.
+ * defaut : admin non restreint.
+ * groupe : 10,11,40.
+ */
+function autoriser_association_gerer_dons($faire, $type, $id, $qui, $opt) {
+	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
+		return TRUE; // ok pour les admins non restreints
+	}
+	return is_in_groups($qui['id_auteur'], array(40,11,10)); // c'est le groupe 40 qui a le pouvoir de gerer les dons, mais les groupes 10 et 11 aussi ont ce droit afin de ne pas etre bloque dans leur travail
+}
+
+/**
+ * Afficher les donations.
+ * defaut : admin non restreint.
+ * groupe : 10,11,40,41.
+ */
+function autoriser_association_voir_dons($faire, $type, $id, $qui, $opt) {
+	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
+		return TRUE; // ok pour les admins non restreints
+	}
+	return is_in_groups($qui['id_auteur'], array(41,40,11,10)); // le groupe 41 peut voir toutes les donations (liste sensible de donateurs et de montants auxquels tous les membres n'ont pas acces) ; les groupes ayant un acces total au module aussi.
+}
+
+/**
+ * Editer (ajout/suppression/modification) les ventes.
+ * defaut : admin non restreint.
+ * groupe : 10,11,50.
+ */
+function autoriser_association_gerer_ventes($faire, $type, $id, $qui, $opt) {
+	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
+		return TRUE; // ok pour les admins non restreints
+	}
+	return is_in_groups($qui['id_auteur'], array(50,11,10)); // c'est le groupe 50 qui a le pouvoir de gerer les dons, mais les groupes 10 et 11 aussi ont ce droit afin de ne pas etre bloque dans leur travail
+}
+
+/**
+ * Afficher les donations.
+ * defaut : admin non restreint.
+ * groupe : 10,11,50,51.
+ */
+function autoriser_association_voir_ventes($faire, $type, $id, $qui, $opt) {
+	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
+		return TRUE; // ok pour les admins non restreints
+	}
+	return is_in_groups($qui['id_auteur'], array(51,50,11,10)); // le groupe 41 peut voir toutes les donations (liste sensible de donateurs et de montants auxquels tous les membres n'ont pas acces) ; les groupes ayant un acces total au module aussi.
 }
 
 ?>

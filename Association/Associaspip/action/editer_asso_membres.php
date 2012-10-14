@@ -16,8 +16,8 @@ function action_editer_asso_membres() {
 	$id_auteur = $securiser_action();
 	$modifs = array(
 		'commentaire' => _request('commentaire'),
-		'validite' => association_recuperer_date('validite'),
-		'categorie' => _request('categorie'),
+		'date_validite' => association_recuperer_date('date_validite'),
+		'id_categorie' => association_recuperer_entier('categorie'),
 		'statut_interne' =>association_passeparam_statut('interne'),
 		'nom_famille' => _request('nom_famille'),
 	);

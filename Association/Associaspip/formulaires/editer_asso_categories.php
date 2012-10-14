@@ -20,8 +20,8 @@ function formulaires_editer_asso_categories_charger_dist($id_categorie='') {
 	$contexte = formulaires_editer_objet_charger('asso_categories', $id_categorie, '', '',  generer_url_ecrire('categories'), '');
 
 	// paufiner la presentation des montants
-	if ($contexte['cotisation'])
-		$contexte['cotisation'] = association_formater_nombre($contexte['cotisation']);
+	if ($contexte['prix_cotisation'])
+		$contexte['prix_cotisation'] = association_formater_nombre($contexte['prix_cotisation']);
 
 	return $contexte;
 }
@@ -29,8 +29,8 @@ function formulaires_editer_asso_categories_charger_dist($id_categorie='') {
 function formulaires_editer_asso_categories_verifier_dist($id_categorie) {
 	$erreurs = array();
 
-	if ($erreur = association_verifier_montant('cotisation') )
-		$erreurs['cotisation'] = $erreur;
+	if ($erreur = association_verifier_montant('prix_cotisation') )
+		$erreurs['prix_cotisation'] = $erreur;
 	if ($erreur = association_verifier_montant('duree') )
 		$erreurs['duree'] = $erreur;
 

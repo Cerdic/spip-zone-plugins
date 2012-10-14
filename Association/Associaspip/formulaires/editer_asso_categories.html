@@ -20,9 +20,9 @@
 				<input name="duree" type="[(#HTML5|?{number,text})]" [value="(#ENV{duree})"] id="duree" class="number integer" />
 			</li>
 			<li class="editer_cotisation">
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{cotisation})</span>]
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{prix_cotisation})</span>]
 				<label for="cotisation"><:asso:libelle_montant:></label>
-				<input name="cotisation" type="[(#HTML5|?{number,text})]" [value="(#ENV{cotisation})"] id="cotisation" class="number float price" />
+				<input name="prix_cotisation" type="[(#HTML5|?{number,text})]" [value="(#ENV{prix_cotisation})"] id="cotisation" class="number float price" />
 			</li>
 			<INCLURE{fond=inc/saisir_commentaires, commentaire }>
 		</ul>

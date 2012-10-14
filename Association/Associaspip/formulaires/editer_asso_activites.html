@@ -11,11 +11,11 @@
 					<label for="date_inscription"><:asso:libelle_date:></label>
 					<input name="date_inscription" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_inscription})"] id="date_inscription" class="date" readonly="readonly" />
 				</li>
-				<INCLURE{fond=inc/choisir_mbr_nom, champ_id=id_auteur, valeur_id=#ENV{id_auteur}, champ_nom=nom, valeur_nom=#ENV{nom} }>
-				<li class="editer_inscrits">
-					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{inscrits})</span>]
-					<label for="nombre_inscrits"><:asso:activite_libelle_nombre_inscrit:></label>
-					<input name="inscrits" type="[(#HTML5|?{number,text})]" [value="(#ENV{inscrits})"] id="nombre_inscrits" class="number integer" [(#ENV{date_paiement}|oui) readonly="readonly"]/>
+				<INCLURE{fond=inc/saisir_membre, nom, id_auteur }>
+				<li class="editer_quantite">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{quantite})</span>]
+					<label for="nombre_places"><:asso:activite_libelle_quantite:></label>
+					<input name="quantite" type="[(#HTML5|?{number,text})]" [value="(#ENV{inscrits})"] id="nombre_places" class="number integer" [(#ENV{date_paiement}|oui) readonly="readonly"]/>
 				</li>
 				<INCLURE{fond=inc/saisir_commentaires, commentaire }>
 			</ul>
@@ -35,7 +35,7 @@
 					<label for="date_paiement"><:asso:libelle_date:></label>
 					<input name="date_paiement" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_paiement})"] id="date_paiement" class="date" />
 				</li>
-				<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, env}>
+				<INCLURE{fond=inc/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, env}>
 			</ul>
 		</fieldset>
 		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_activite} }>

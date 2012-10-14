@@ -19,10 +19,10 @@ function exec_adherent() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$data = sql_fetsel('m.sexe, m.nom_famille, m.prenom, m.validite, m.id_asso, c.libelle','spip_asso_membres as m LEFT JOIN spip_asso_categories as c ON m.categorie=c.id_categorie', "m.id_auteur=$id_auteur");
+		$data = sql_fetsel('m.sexe, m.nom_famille, m.prenom, m.date_validite, m.id_asso, c.libelle','spip_asso_membres as m LEFT JOIN spip_asso_categories as c ON m.id_categorie=c.id_categorie', "m.id_auteur=$id_auteur");
 		include_spip('inc/association_comptabilite');
 		$nom_membre = association_formater_nom($data['sexe'], $data['prenom'], $data['nom_famille']);
-		$validite = $data['validite'];
+		$validite = $data['date_validite'];
 		$adresses = association_formater_adresses(array($id_auteur));
 		$emails = association_formater_emails(array($id_auteur));
 		$telephones = association_formater_telephones(array($id_auteur));
@@ -42,7 +42,7 @@ function exec_adherent() {
 		if ($full) {
 			$infos['adherent_libelle_categorie'] = $categorie;
 		}
-		$infos['adherent_libelle_validite'] = association_formater_date($data['validite']);
+		$infos['adherent_libelle_validite'] = association_formater_date($data['date_validite']);
 		if ($GLOBALS['association_metas']['id_asso']) {
 			$infos['adherent_libelle_reference_interne'] = ($data['id_asso']?$data['id_asso']:_T('asso:pas_de_reference_interne_attribuee')) ;
 		}
@@ -112,8 +112,8 @@ function exec_adherent() {
 					'id_activite' => array('asso:entete_id', 'entier'),
 					'date_debut' => array('asso:entete_date', 'date'),
 					'titre' => array('asso:adherent_entete_activite', 'texte', $full?'propre':'nettoyer_raccourcis_typo', ),
-					'inscrits' => array('asso:entete_quantite', 'entier'),
-					'montant' => array('asso:entete_montant', 'prix'),
+					'quantite' => array('asso:entete_quantite', 'entier'),
+					'prix_activite' => array('asso:entete_montant', 'prix'),
 				), // entetes et formats des donnees
 				$full ? array(
 					array('edit', 'activite', 'id=$$'),
@@ -125,7 +125,7 @@ function exec_adherent() {
 		if ($GLOBALS['association_metas']['ventes']) { // HISTORIQUE VENTES
 			echo debut_cadre_relief('', TRUE, '', _T('asso:adherent_titre_historique_ventes') );
 			echo association_bloc_listehtml(
-				array('*', 'spip_asso_ventes', "id_acheteur=$id_auteur", '', 'date_vente DESC', '0,10'), // requete
+				array('*', 'spip_asso_ventes', "id_auteur=$id_auteur", '', 'date_vente DESC', '0,10'), // requete
 				array(
 					'id_vente' => array('asso:entete_id', 'entier'),
 					'date_vente' => array('asso:ventes_entete_date_vente', 'date'),
@@ -203,7 +203,7 @@ function voir_adherent_paiements($data, $lien) {
 		),
 		$lien ? array(
 			array('act', 'adherent_label_voir_operation', 'voir-12.png', 'comptes', 'id_compte=$$'),
-		) : array(), // boutons d'action : pas plutot edit_compte ? (a propos, il faudrait carrement un voir_compte pour ne pas risquer de modifier ainsi une operation marquee "vu" et donc archivee/verouillee)
+		) : array(), // boutons d'action : voir l'operation dans le journal comptable
 		'id_compte' // champ portant la cle des lignes et des boutons
 	);
 }

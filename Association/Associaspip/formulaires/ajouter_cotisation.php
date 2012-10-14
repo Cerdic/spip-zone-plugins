@@ -17,13 +17,13 @@ include_spip('inc/autoriser');
 
 function formulaires_ajouter_cotisation_charger_dist($id_auteur, $nom_prenom, $id_categorie, $validite) {
 	if ($id_categorie) { // si le membre a une categorie
-		$categorie = sql_fetsel('duree, cotisation', 'spip_asso_categories', "id_categorie=". intval($id_categorie));
+		$categorie = sql_fetsel('duree, prix_cotisation', 'spip_asso_categories', "id_categorie=". intval($id_categorie));
 		list($annee, $mois, $jour) = explode('-', $validite);
 		if ($jour==0 OR $mois==0 OR $annee==0)
 			list($annee, $mois, $jour) = explode('-',date('Y-m-d'));
 		$mois += $categorie['duree'];
 		$contexte['validite'] = date('Y-m-d', mktime(0, 0, 0, $mois, $jour, $annee));
-		$contexte['montant'] = $categorie['cotisation'];
+		$contexte['montant'] = $categorie['prix_cotisation'];
 	} else { // le membre n'a pas de categorie
 		$contexte['validite'] = date('Y-m-d');
 		$contexte['montant'] = 0;
@@ -60,7 +60,7 @@ function formulaires_ajouter_cotisation_traiter_dist($id_auteur, $nom_prenom, $c
 	$res = array();
 	// eviter la redirection forcee par l'action...
 	set_request('redirect');
-	$action_cotisation = charger_fonction('ajouter_cotisation','action');
+	$action_cotisation = charger_fonction('ajouter_cotisation', 'action');
 	list($id_auteur,$err) = $action_cotisation($id_auteur);
 	if ($err OR !$id_auteur) {
 		$res['message_erreur'] = ($err?$err:_T('erreur_traite'));

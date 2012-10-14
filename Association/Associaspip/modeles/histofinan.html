@@ -75,7 +75,7 @@ maj:2011-10-03; version:0.4.1; licence:GPL; copyleft:gilcot; -->]
 
 [(#REM)<!-- FICHE HISTORIQUE VENTES -->]
 #SET{liste_achats,#ARRAY}
-<BOUCLE_achats(ASSO_VENTES){id_acheteur=#ENV{id}}>
+<BOUCLE_achats(ASSO_VENTES){id_auteur=#ENV{id}}>
 	#SET{liste_achats, #GET{liste_achats}|push{#ID_VENTE}}
 </BOUCLE_achats>
 [(#META{/association/ventes}|=={on}|et{#GET{droit_acces}|=={oui }}|oui)
@@ -83,7 +83,7 @@ maj:2011-10-03; version:0.4.1; licence:GPL; copyleft:gilcot; -->]
 	[(#BOUTON_ACTION{
 		<:asso:ajouter_une_vente:>,
 		[(#URL_ECRIRE{edit_vente}
-			|parametre_url{id_acheteur,#ENV{id}}
+			|parametre_url{id_auteur,#ENV{id}}
 			|parametre_url{retour,[(#ENV{retour,#SELF})]}
 			)],
 		ajax

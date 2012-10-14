@@ -347,8 +347,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'les_groupes_dacces' => "Groupes de droits d'acc&egrave;s",
 	'aide_gerer_autorisations' => 'Pour donner des autorisations, ajouter simplement la personne au groupe ad&eacute;quat. Voir la <a href="http://www.spip-contrib.net/Associaspip#restriction_access">documentation online</a> pour plus de d&eacute;tails.',
 	# nom des groupes d'autorisations (par ordre croissant d'id_groupe)
-	'groupe_1' => '&Eacute;diter les droits acc&egrave;s',
-	'groupe_2' => '&Eacute;diter les groupes',
+	'groupe_1' => 'G&eacute;rer les droits acc&egrave;s',
+	'groupe_2' => 'G&eacute;rer les groupes',
 	'groupe_3' => 'Voir les groupes',
 	'groupe_10' => 'Configurer la comptabilit&eacute;',
 	'groupe_11' => '&Eacute;diter les op&eacute;rations comptables',
@@ -359,6 +359,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'groupe_31' => 'Voir le profil des membres',
 	'groupe_32' => 'Synchroniser les membres',
 	'groupe_33' => 'Relancer les membres',
+	'groupe_40' => 'G&eacute;rer les donations',
+	'groupe_41' => 'Voir les donations',
+	'groupe_50' => 'G&eacute;rer les ventes',
+	'groupe_51' => 'Voir les ventes',
 # Association (accueil)
 	'association_infos_contacts' => "Profil de l'association", // information sur l'association (objet, declaration, etc.), ses coordonnees (adresse, numero et email principaux) et les contacts (nom, fonction, numero, email)
 	'categories_de_cotisations' => 'Cat&eacute;gories de cotisations',

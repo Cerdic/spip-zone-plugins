@@ -21,16 +21,15 @@ function exec_exercices() {
 		// notice
 		echo '';
 		// quelques stats sur les exrcices
-		echo association_totauxinfos_stats('tous', 'exercices', array('semaines'=>"TIMESTAMPDIFF(week,debut,fin)", 'mois'=>"TIMESTAMPDIFF(month,debut,fin)") );
-		/* portability issue on "DATEDIFF(week,debut,fin)"
-		 * MS SQL Server : "DATEDIFF(day,debut,fin)" & "DATEDIFF(week,debut,fin)" & "DATEDIFF(month,debut,fin)"
-		 * MySQL : "DATEDIFF(debut,fin)" & "TIMESTAMPDIFF(week,debut,fin)" & "TIMESTAMPDIFF(month,debut,fin)"
-		 * Oracle : "fin-debut" & & "MONTHS_BETWEEN(debut,fin)"
-		 *
-		 * converting to epoch <http://www.epochconverter.com/> doesn't help either
-		 * ...or maybe something like "CAST(fin AS TIMESTAMP)-CAST(debut AS TIMETAMP)" ?
-		 * finaly I use ODBC "TIMESTAMPDIFF()" that should be known by latest major rdbms...
-		 * */
+		echo association_totauxinfos_stats('tous', 'exercices', array('semaines'=>"TIMESTAMPDIFF(week,date_debut,date_fin)", 'mois'=>"TIMESTAMPDIFF(month,debut,fin)") );
+		//!\ portability issue on DATEDIFF vs TIMESTAMPDIFF
+		// MS SQL Server : "DATEDIFF(day,debut,fin)" & "DATEDIFF(week,debut,fin)" & "DATEDIFF(month,debut,fin)"
+		// MySQL : "DATEDIFF(debut,fin)" & "TIMESTAMPDIFF(week,debut,fin)" & "TIMESTAMPDIFF(month,debut,fin)"
+		// Oracle : "fin-debut" & & "MONTHS_BETWEEN(debut,fin)"
+		// converting to epoch <http://www.epochconverter.com/> doesn't help either
+		// ...or maybe something like "CAST(fin AS TIMESTAMP)-CAST(debut AS TIMETAMP)" ?
+		// finaly I use ODBC "TIMESTAMPDIFF()" that should be known by latest major rdbms...
+		///
 		// datation et raccourcis
 		raccourcis_association('association', array(
 			'ajouter_un_exercice' => array('calculatrice.gif', 'edit_exercice'),
@@ -41,8 +40,8 @@ function exec_exercices() {
 			array(
 				'id_exercice' => array('asso:entete_id', 'entier'),
 				'intitule' => array('asso:entete_intitule', 'texte'),
-				'debut' => array('asso:exercice_entete_debut', 'date', 'dtstart'),
-				'fin' => array('asso:exercice_entete_fin', 'date', 'dtend'),
+				'date_debut' => array('asso:exercice_entete_debut', 'date', 'dtstart'),
+				'date_fin' => array('asso:exercice_entete_fin', 'date', 'dtend'),
 				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),
 			), // entetes et formats des donnees
 			array(

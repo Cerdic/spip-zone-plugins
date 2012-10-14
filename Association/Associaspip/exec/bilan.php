@@ -26,8 +26,8 @@ function exec_bilan() {
 		include_spip('inc/association_comptabilite');
 		onglets_association('titre_onglet_comptes', 'comptes');
 		// INTRO : rappel de l'exercicee affichee
-		$infos['exercice_entete_debut'] = association_formater_date($exercice['debut'], 'dtstart');
-		$infos['exercice_entete_fin'] = association_formater_date($exercice['fin'], 'dtend');
+		$infos['exercice_entete_debut'] = association_formater_date($exercice['date_debut'], 'dtstart');
+		$infos['exercice_entete_fin'] = association_formater_date($exercice['date_fin'], 'dtend');
 		echo association_totauxinfos_intro($exercice['intitule'], 'exercice', $id_exercice, $infos);
 		// datation et raccourcis
 		raccourcis_association(array('comptes', "exercice=$id_exercice"), array(
@@ -56,7 +56,7 @@ function exec_bilan() {
 		if ($plan) {
 			$join = ' RIGHT JOIN spip_asso_plan ON imputation=code';
 			$sel = ', code, intitule, classe';
-			$where = " date>='$exercice[debut]' AND date<='$exercice[fin]' ";
+			$where = " date>='$exercice[date_debut]' AND date<='$exercice[date_fin]' ";
 			$having =  "classe NOT IN ('". sql_quote($GLOBALS['association_metas']['classe_banques']). "','" .sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']) . "','" .sql_quote($GLOBALS['association_metas']['classe_charges']) . "','" .sql_quote($GLOBALS['association_metas']['classe_produits']) . "')";
 			$order = 'code';
 		} else {

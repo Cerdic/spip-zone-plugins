@@ -17,11 +17,9 @@ function action_ajouter_participations() {
 	$id_evenement = $securiser_action();
 
 	$nom = _request('nom');
-	$id_membre = association_recuperer_entier('id_membre');
-	$membres = _request('membres');
-	$non_membres = _request('non_membres');
-	$inscrits = association_recuperer_entier('inscrits');
-	$montant = association_recuperer_montant('montant');
+	$id_auteur = association_recuperer_entier('id_auteur');
+	$quantite = association_recuperer_montant('quantite');
+	$montant = association_recuperer_montant('prix_activite');
 	$date_paiement = association_recuperer_date('date_paiement');
 	$journal = _request('journal');
 	$statut = association_passeparam_statut();
@@ -30,11 +28,9 @@ function action_ajouter_participations() {
 	$id_activite = association_recuperer_entier('id_activite');
 	sql_updateq('spip_asso_activites', array(
 		'nom' => $nom,
-		'id_auteur' => $id_membre,
-		'membres' => $membres,
-		'non_membres' => $non_membres,
-		'inscrits' => $inscrits,
-		'montant' => $montant,
+		'id_auteur' => $id_auteur,
+		'quantite' => $quantite,
+		'prix_activite' => $montant,
 		'date_paiement' => $date_paiement,
 		'statut' => $statut,
 		'commentaire' => $commentaire,

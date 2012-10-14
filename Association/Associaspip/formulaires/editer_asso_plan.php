@@ -91,8 +91,8 @@ function formulaires_editer_asso_plan_traiter_dist($id_plan='') {
 	$res = array();
 	// eviter la redirection forcee par l'action...
 	set_request('redirect');
-	$action_cotisation = charger_fonction('editer_asso_plan', 'action');
-	list($id_plan, $err) = $action_cotisation($id_plan);
+	$action_plancomptable = charger_fonction('editer_asso_plan', 'action');
+	list($id_plan, $err) = $action_plancomptable($id_plan);
 	if ($err OR !$id_plan) {
 		$res['message_erreur'] = ($err ? $err : _T('erreur_traite'));
 	} else {

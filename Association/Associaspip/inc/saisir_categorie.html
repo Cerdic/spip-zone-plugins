@@ -1,0 +1,27 @@
+[(#REM)<!-- champ de selection de categorie de cotisation...
+
+plugin = associaspip ; tables = spip_asso_categories.
+plugins necessaires = aucun
+
+parametres =
+- categorie (entier) : ID de la categorie selectionnee
+- tous_aucun (texte) : texte correspondant a l'absence d'ID
+- lecture_seule (booleen) : indique si la selection est non-editables ou au contraire.
+
+maj:2012-10-15; version:0.1.0; licence:GPL; copyleft:gilcot; -->]
+
+#CACHE{0}
+        <li class="editer_categorie">
+            [<span class="erreur_message">(#ENV**{erreurs}|table_valeur{categorie})</span>]
+            <label for="categorie"><:asso:adherent_libelle_categorie:></label>
+<B_categorie>
+            <select name="categorie" [(#ENV{lecture_seule}|oui) readonly="readonly" ]id="categorie">
+                <option>[(#ENV{tous_aucun})]</option>
+<BOUCLE_categorie(ASSO_CATEGORIES){par libelle} >
+                <option value="#ID_CATEGORIE" [(#ENV{categorie}|=={#ID_CATEGORIE}|?{selected="selected"})]>#LIBELLE</option>
+</BOUCLE_categorie>
+            </select>
+</B_categorie>
+            <span class="erreur_message"><:asso:erreur_pas_de_categorie:></span>
+<//B_categorie>
+        </li>

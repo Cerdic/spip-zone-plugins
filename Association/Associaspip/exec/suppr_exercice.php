@@ -20,8 +20,8 @@ function exec_suppr_exercice() {
 		list($id_exercice, $exercice) = association_passeparam_id('exercice', 'asso_exercices');
 		onglets_association('exercices_budgetaires_titre', 'association');
 		// info
-		$infos['exercice_entete_debut'] = association_formater_date($exercice['debut'], 'dtstart');
-		$infos['exercice_entete_fin'] = association_formater_date($exercice['fin'], 'dtend');
+		$infos['exercice_entete_debut'] = association_formater_date($exercice['date_debut'], 'dtstart');
+		$infos['exercice_entete_fin'] = association_formater_date($exercice['date_fin'], 'dtend');
 		echo association_totauxinfos_intro($exercice['intitule'], 'exercice', $id_exercice, $infos);
 		// datation et raccourcis
 		raccourcis_association('exercices');

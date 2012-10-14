@@ -7,15 +7,15 @@
 			<li class="editer_date_don">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_don})</span>]
 				<label for="date_don"><:asso:date_aaaa_mm_jj:></label>
-				<input type="[(#HTML5|?{number,text})]" name="date_don" [value="(#ENV{date_don}|affdate{Y-m-d})"] id="date_don"  class="date" />
+				<input type="[(#HTML5|?{date,text})]" name="date_don" [value="(#ENV{date_don}|affdate{Y-m-d})"] id="date_don" class="date"  />
 			</li>
-			<INCLURE{fond=inc/choisir_mbr_nom, champ_nom=bienfaiteur, valeur_nom=#ENV{bienfaiteur}, champ_id=id_auteur, valeur_id=#ENV{id_auteur}, champs_legende=bienfaiteur }>
+			<INCLURE{fond=inc/saisir_membre, nom, id_auteur, champs_legende=Bienfaiteur }>
 			<li class="editer_argent">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{argent})</span>]
 				<label for="argent"><:asso:don_financier_en_e__:></label>
 				<input type="[(#HTML5|?{number,text})]" name="argent" [value="(#ENV{argent})"] id="argent"  class="number float price" />
 			</li>
-			<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, env}>
+			<INCLURE{fond=inc/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, env}>
 			<li class="editer_colis">
 				<label for="colis"><:asso:colis:></label>
 				<input type="text" name="colis" [value="(#ENV{colis})"] id="colis"  class="text" />

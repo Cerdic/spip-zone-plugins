@@ -17,10 +17,10 @@ function association_declarer_tables_principales($tables_principales) {
 	//-- Table CATEGORIES COTISATION ------------------------------------------
 	$spip_asso_categories = array(
 		'id_categorie' => "INT UNSIGNED NOT NULL",
-		'valeur' => "TINYTEXT NOT NULL",
+		'valeur' => "TINYTEXT NOT NULL", // non utilise...
 		'libelle' => "TEXT NOT NULL",
 		'duree' => "INT UNSIGNED NOT NULL",
-		'cotisation' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
+		'prix_cotisation' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
 		'commentaire' => "TEXT NOT NULL",
 		'maj' => "TIMESTAMP NOT NULL"
 	);
@@ -36,7 +36,7 @@ function association_declarer_tables_principales($tables_principales) {
 	$spip_asso_dons = array(
 		'id_don' => "BIGINT UNSIGNED NOT NULL",
 		'date_don' => "DATE NOT NULL DEFAULT '0000-00-00'",
-		'bienfaiteur' => "TEXT NOT NULL",
+		'nom' => "TINYTEXT NOT NULL",
 		'id_auteur' => "BIGINT UNSIGNED NOT NULL",
 		'argent' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
 		'colis' => "TINYTEXT NOT NULL",
@@ -58,13 +58,13 @@ function association_declarer_tables_principales($tables_principales) {
 		'id_vente' => "BIGINT UNSIGNED NOT NULL",
 		'article' => "TINYTEXT NOT NULL",
 		'code' => "TINYTEXT NOT NULL",
-		'acheteur' => "TINYTEXT NOT NULL",
-		'id_acheteur' => "BIGINT UNSIGNED NOT NULL",
-		'quantite' => "FLOAT NOT NULL", // ??
+		'nom' => "TINYTEXT NOT NULL",
+		'id_auteur' => "BIGINT UNSIGNED NOT NULL",
+		'quantite' => "FLOAT UNSIGNED NOT NULL DEFAULT 0",
 		'date_vente' => "DATE NOT NULL DEFAULT '0000-00-00'",
 		'date_envoi' => "DATE DEFAULT '0000-00-00'",
-		'prix_vente' => "DECIMAL(19,2) NOT NULL default '0'",
-		'frais_envoi' => "DECIMAL(19,2) NOT NULL default '0'",
+		'prix_vente' => "DECIMAL(19,2) NOT NULL DEFAULT '0'", // transformer en prix_unitaire ou prix_total...
+		'frais_envoi' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
 		'commentaire' => "TEXT",
 		'maj' => "TIMESTAMP NOT NULL"
 	);
@@ -79,14 +79,14 @@ function association_declarer_tables_principales($tables_principales) {
 	//-- Table COMPTES ------------------------------------------
 	$spip_asso_comptes = array(
 		'id_compte' => "BIGINT UNSIGNED NOT NULL",
-		'date' => "DATE default NULL",
-		'recette' => "DECIMAL(19,2) NOT NULL default '0'",
-		'depense' => "DECIMAL(19,2) NOT NULL default '0'",
+		'date' => "DATE DEFAULT NULL",
+		'recette' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
+		'depense' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
 		'justification' => "TEXT",
 		'imputation' => "TINYTEXT",
 		'journal' => "TINYTEXT",
-		'id_journal' => "BIGINT UNSIGNED NOT NULL default '0'",
-		'vu' => "BOOLEAN default 0",
+		'id_journal' => "BIGINT UNSIGNED NOT NULL DEFAULT '0'",
+		'vu' => "BOOLEAN DEFAULT 0",
 		'maj' => "TIMESTAMP NOT NULL"
 	);
 	$spip_asso_comptes_key = array(
@@ -103,11 +103,11 @@ function association_declarer_tables_principales($tables_principales) {
 		'code' => "TINYTEXT NOT NULL",
 		'intitule' => "TINYTEXT NOT NULL",
 		'classe' =>"TEXT NOT NULL",
-		'type_op' => "ENUM('credit','debit', 'multi') NOT NULL default 'multi'",
-		'solde_anterieur' => "DECIMAL(19,2) NOT NULL default '0'",
+		'type_op' => "ENUM('credit','debit', 'multi') NOT NULL DEFAULT 'multi'",
+		'solde_anterieur' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
 		'date_anterieure' => "DATE NOT NULL DEFAULT '0000-00-00'",
 		'commentaire' => "TEXT NOT NULL",
-		'active' => "BOOLEAN default 1",
+		'active' => "BOOLEAN DEFAULT 1",
 		'maj' => "TIMESTAMP NOT NULL"
 	);
 	$spip_asso_plan_key = array(
@@ -136,8 +136,8 @@ function association_declarer_tables_principales($tables_principales) {
 		'id_dest_op' => "INT UNSIGNED NOT NULL",
 		'id_compte' => "BIGINT UNSIGNED NOT NULL",
 		'id_destination' => "INT UNSIGNED NOT NULL",
-		'recette' => "DECIMAL(19,2) NOT NULL default '0'",
-		'depense' => "DECIMAL(19,2) NOT NULL default '0'",
+		'recette' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
+		'depense' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
 	);
 	$spip_asso_destination_op_key = array(
 		'PRIMARY KEY' => 'id_dest_op' // pourrait etre id_compte+id_destination qui en tout cas devrait etre unique
@@ -179,9 +179,10 @@ function association_declarer_tables_principales($tables_principales) {
 		'date_caution1' => "DATE NOT NULL DEFAULT '0000-00-00' ", // depot (encaissement/engagement) de la caution
 		'date_caution0' => "DATE NOT NULL DEFAULT '0000-00-00' ", // retrait (decaissement/restitution) de la caution
 		'duree' => "FLOAT UNSIGNED NOT NULL DEFAULT '0'", // quantite finale facturee
-		'prix_unitaire' => "DECIMAL(19,2) NOT NULL DEFAULT 0", // prix de base facturee
+		'prix_unitaire' => "DECIMAL(19,2) NOT NULL DEFAULT 0", // prix de base unitaire facture
 		'prix_caution' => "DECIMAL(19,2) NOT NULL DEFAULT 0", // montant de la garantie deposee
 		'id_auteur' => "BIGINT UNSIGNED NOT NULL",
+		'nom' => "TINYTEXT NOT NULL",
 		'commentaire_sortie' => "TEXT NOT NULL",
 		'commentaire_retour' => "TEXT NOT NULL",
 		'maj' => "TIMESTAMP NOT NULL"
@@ -198,12 +199,12 @@ function association_declarer_tables_principales($tables_principales) {
 	$spip_asso_activites = array(
 		'id_activite' => "BIGINT UNSIGNED NOT NULL",
 		'id_evenement' => "BIGINT UNSIGNED NOT NULL",
-		'nom' => "TEXT NOT NULL",
+		'nom' => "TINYTEXT NOT NULL",
 		'id_auteur' => "BIGINT UNSIGNED NOT NULL",
-		'inscrits' => "INT NOT NULL DEFAULT '0'", // Ce pourrait etre un FLOAT si c'est utilise comme "quantite" appliquee a un montant unique (equivaut alors au "nombre de tarifs"...) ici il s'agit a priori du nombre d'invites (ce champ aurait du s'appeler ainsi d'ailleurs), l'adherent(e) exclu(e) (donc peut valeur 0 tandis que "id_auteur" ou "nom" aura toujours une valeur)
+		'quantite' => "FLOAT UNSIGNED NOT NULL DEFAULT 0", // C'est la quantite appliquee a un montant unique (equivaut alors au "nombre de tarifs"...) ou le nombre d'invites du participant
 		'date_inscription' => "DATE NOT NULL DEFAULT '0000-00-00'",
 		'commentaire' => "TEXT NOT NULL",
-		'montant' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
+		'prix_activite' => "DECIMAL(19,2) NOT NULL DEFAULT 0", // prix_unite ou prix_total
 		'date_paiement' => "DATE NOT NULL DEFAULT '0000-00-00'",
 		'maj' => "TIMESTAMP NOT NULL"
 	);
@@ -235,9 +236,6 @@ function association_declarer_tables_principales($tables_principales) {
 		'id_groupe' => "BIGINT UNSIGNED NOT NULL",
 		'id_auteur' => "BIGINT UNSIGNED NOT NULL",
 		'fonction' => "VARCHAR(128) NOT NULL",
-#		'date_debut' => "DATE NOT NULL DEFAULT '0000-00-00'",
-#		'date_fin' => "DATE NOT NULL DEFAULT '0000-00-00'",
-#		'commentaire' => "TEXT",
 		'maj' => "TIMESTAMP NOT NULL"
 	);
 	$spip_asso_groupes_liaisons_key = array(
@@ -255,11 +253,10 @@ function association_declarer_tables_principales($tables_principales) {
 		'nom_famille' => "TEXT NOT NULL",
 		'prenom' => "TEXT NOT NULL",
 		'sexe' => "TINYTEXT NOT NULL",
-		'categorie' => "INT", // ce champ contient la cle spip_asso_categories.id_categorie
+		'id_categorie' => "INT UNSIGNED NOT NULL",
 		'statut_interne' => "TINYTEXT NOT NULL",
 		'commentaire' => "TEXT NOT NULL",
-		'validite' => "DATE NOT NULL DEFAULT '0000-00-00'",
-#		'date_adhesion' => "DATE NOT NULL", // r51602
+		'date_validite' => "DATE NOT NULL DEFAULT '0000-00-00'",
 	);
 	$spip_asso_membres_key= array(
 		'PRIMARY KEY' => 'id_auteur'
@@ -274,8 +271,8 @@ function association_declarer_tables_principales($tables_principales) {
 		'id_exercice' => "INT UNSIGNED NOT NULL",
 		'intitule' => "TINYTEXT NOT NULL",
 		'commentaire' => "TEXT NOT NULL",
-		'debut' => "DATE NOT NULL default '0000-00-00'",
-		'fin' => "DATE NOT NULL default '0000-00-00'"
+		'date_debut' => "DATE NOT NULL DEFAULT '0000-00-00'",
+		'date_fin' => "DATE NOT NULL DEFAULT '0000-00-00'"
 	);
 	$spip_asso_exercices_key = array(
 		'PRIMARY KEY' => 'id_exercice'

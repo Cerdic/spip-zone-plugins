@@ -367,7 +367,7 @@ function association_calcul_soldes_comptes_classe($classe, $exercice=0, $destina
     }
     if ( $exercice ) { // exercice budgetaire personnalise
 	$exercice_data = sql_asso1ligne('exercice', $exercice);
-	$c_where = "a_c.date>='$exercice_data[debut]' AND a_c.date<='$exercice_data[fin]' ";
+	$c_where = "a_c.date>='$exercice_data[date_debut]' AND a_c.date<='$exercice_data[date_fin]' ";
     } elseif ( $annee ) { // exercice budgetaire par annee civile
 	$c_where = "DATE_FORMAT(a_c.date, '%Y')=$annee ";
 #    } elseif ( $classe==$GLOBALS['association_metas']['classe_banques'] ) { // encaisse

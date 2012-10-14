@@ -16,7 +16,7 @@ function action_editer_asso_dons() {
 	$id_don = $securiser_action();
 	$erreur = '';
 	$date_don = association_recuperer_date('date_don');
-	$bienfaiteur = _request('bienfaiteur');
+	$bienfaiteur = _request('nom');
 	$id_auteur = association_recuperer_entier('id_aauteur');
 	if (!$bienfaiteur) {
 		$bienfaiteur = association_formater_idnom($id_auteur, array('spip_asso_membres'), '');
@@ -25,7 +25,7 @@ function action_editer_asso_dons() {
 	$valeur = association_recuperer_montant('valeur');
 	$modifs = array(
 		'date_don' => $date_don,
-		'bienfaiteur' => _request('bienfaiteur'),
+		'nom' => _request('nom'),
 		'id_auteur' => $id_auteur,
 		'argent' => $argent,
 		'colis' => _request('colis'),

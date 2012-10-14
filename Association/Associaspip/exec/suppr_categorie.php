@@ -22,7 +22,7 @@ function exec_suppr_categorie() {
 		// INTRO : resume ressource
 		$infos['entete_code'] = association_formater_code($categorie['valeur'], 'x-spip_asso_categories');
 		$infos['entete_duree'] = association_formater_duree($categorie['duree'], 'M');
-		$infos['entete_montant'] = association_formater_prix($categorie['cotisation'], 'subscription');
+		$infos['entete_montant'] = association_formater_prix($categorie['prix_cotisation'], 'subscription');
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_membres', "categorie=$id_categorie"), ));
 		echo '<div class="hproduct">'. association_totauxinfos_intro('<span class="n">'.$categorie['libelle'].'</span>', 'categorie', $id_categorie, $infos ) .'</div>';
 		// datation et raccourcis

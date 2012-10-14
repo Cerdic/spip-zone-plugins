@@ -24,8 +24,8 @@ function formulaires_editer_asso_ventes_charger_dist($id_vente='') {
 	association_chargeparam_destinations('ventes', &$contexte);
 
 	// paufiner la presentation des valeurs
-	if (!$contexte['id_acheteur'])
-		$contexte['id_acheteur']='';
+	if (!$contexte['id_auteur'])
+		$contexte['id_auteur'] = '';
 	if ($contexte['prix_vente'])
 		$contexte['prix_vente'] = association_formater_nombre($contexte['prix_vente']);
 	if ($contexte['frais_envoi'])
@@ -45,8 +45,8 @@ function formulaires_editer_asso_ventes_verifier_dist($id_vente) {
 		$erreurs['frais_envoi'] = $erreur;
 	if ($erreur = association_verifier_montant('quantite') )
 		$erreurs['quantite'] = $erreur;
-	if ($erreur = association_verifier_membre('id_acheteur') )
-		$erreurs['id_acheteur'] = $erreur;
+	if ($erreur = association_verifier_membre('id_auteur') )
+		$erreurs['id_auteur'] = $erreur;
 	if ($erreur = association_verifier_destinations('prix_vente') )
 		$erreurs['destinations'] = $erreur;
 	if ($erreur = association_verifier_date('date_vente') )

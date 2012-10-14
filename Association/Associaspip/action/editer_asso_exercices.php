@@ -19,8 +19,8 @@ function action_editer_asso_exercices_dist() {
     $champs = array(
 	'intitule' => _request('intitule'),
 	'commentaire' => _request('commentaire'),
-	'debut' => association_recuperer_date('debut'),
-	'fin' => association_recuperer_date('fin'),
+	'date_debut' => association_recuperer_date('date_debut'),
+	'date_fin' => association_recuperer_date('date_fin'),
     );
     include_spip('base/association');
     if ($id_exercice) { // modification

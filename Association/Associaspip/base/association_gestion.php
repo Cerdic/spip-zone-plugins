@@ -549,7 +549,7 @@ $GLOBALS['association_maj'][58824] = array(
 // Revue de la gestion des ressources et prets (fin)
 $GLOBALS['association_maj'][58825] = array(
 // on reprend ici les requetes erronnees de maj-57780 ("bienfaiteur" y est malencontreusement+logiquement nomme "donateur")
-	/* En liant le nom du bienfaiteur avec l'ID membre avant d'enregistrer, il faut penser a defaire cela a chaque edition pour eviter de se retrouver avec [un nom->membreXX] qui devient [[un nom->mebreXX]->membreXX] au moment de reediter. Il semble plus simple de ne pas transformer la saisie a stocker mais seulement l'affichage avec la nouvelle fonction association_formater_idnom($id,$nom) Du coup il faut quand meme retablir les champs pour ne pas reproduire a l'affichage le souci qu'on avait a l'edition... */
+	// En liant le nom du bienfaiteur avec l'ID membre avant d'enregistrer, il faut penser a defaire cela a chaque edition pour eviter de se retrouver avec [un nom->membreXX] qui devient [[un nom->mebreXX]->membreXX] au moment de reediter. Il semble plus simple de ne pas transformer la saisie a stocker mais seulement l'affichage avec la nouvelle fonction association_formater_idnom($id,$nom) Du coup il faut quand meme retablir les champs pour ne pas reproduire a l'affichage le souci qu'on avait a l'edition...
 	array('sql_update', 'spip_asso_dons', array('bienfaiteur' => "SUBSTR(bienfaiteur,2, INSTR(bienfaiteur,'->membre')-1)"), "bienfaiteur LIKE '[%->membre%]'"), // SUBSTR est compris par la plupart meme s'il y a d'autres appelations comme SUBSTRING (SQL Server et mySQL). INSTR (pour lequel Oracle accepte deux parametres optionnels de plus que mySQL) ou POSITION ou PARTINDEX ou CHARINDEX ou LOCATE ... pfff. peut-etre vaut-il mieux le faire en PHP pour etre certain d'etre independant de l'implementation SQL ?!? ou tenter l'approche par REPLACE("dans quelle chaine","sous-chaine a trouver","sous-chaine de remplacement") qui est commun a beaucoup de SGBD_SQL (mais pas dans la norme de 92 non plus si j'ai bonne memoire) ? faut voir...
 // on reprend ici les requetes erronnees de maj-58798
 	array ('sql_alter', "TABLE spip_asso_ressources ADD ud CHAR(1) NOT NULL DEFAULT 'D' "), // unite des durees de location
@@ -606,7 +606,7 @@ $GLOBALS['association_maj'][66289] = array(
 );
 
 // normalisation de la base
-$GLOBALS['association_maj'][66345] = array(
+$GLOBALS['association_maj'][66346] = array(
 // renommer le champ "commentaires" en "commentaire" pour homogeniser les traitements et l'affichage
 	array('sql_alter', "TABLE spip_asso_categories ADD commentaire TEXT NOT NULL"),
 	array('sql_update', 'spip_asso_categories', array('commentaire'=>'commentaires') ),
@@ -622,8 +622,47 @@ $GLOBALS['association_maj'][66345] = array(
 	array('sql_update', 'spip_asso_activites', array('id_auteur'=>'id_adherent') ),
 	array('sql_alter', "TABLE spip_asso_activites DROP id_adherent"),
 	array('sql_alter', "TABLE spip_asso_prets ADD id_auteur BIGINT UNSIGNED NOT NULL"),
-	array('sql_update', 'spip_asso_prets', array('id_emprunteur'=>'id_auteur') ),
+	array('sql_update', 'spip_asso_prets', array('id_auteur'=>'id_emprunteur') ),
 	array('sql_alter', "TABLE spip_asso_dons DROP id_emprunteur"),
+);
+
+// ajout de nouvelles autorisations
+$GLOBALS['association_maj'][66769] = array(
+	array('sql_insertq_multi', 'spip_asso_groupes', array( array('id_groupe'=>11), array('id_groupe'=>12), array('id_groupe'=>40), array('id_groupe'=>41), array('id_groupe'=>50), array('id_groupe'=>51), ), ),
+);
+
+// normalisation de la base
+$GLOBALS['association_maj'][66804] = array(
+// bien distinguer par des prefixes : date, prix, etc.
+	array('sql_alter', "TABLE spip_asso_categories ADD prix_cotisation DECIMAL(19,2) NOT NULL DEFAULT '0'"),
+	array('sql_update', 'spip_asso_categories', array('prix_cotisation'=>'cotisation') ),
+	array('sql_alter', "TABLE spip_asso_categories DROP cotisation"),
+	array('sql_alter', "TABLE spip_asso_membres ADD date_validite DATE NOT NULL DEFAULT '0000-00-00'"),
+	array('sql_update', 'spip_asso_membres', array('date_validite'=>'validite') ),
+	array('sql_alter', "TABLE spip_asso_membres DROP validite"),
+	array('sql_alter', "TABLE spip_asso_activites ADD quantite FLOAT UNSIGNED NOT NULL DEFAULT 0"),
+	array('sql_update', 'spip_asso_activites', array('quatite'=>'inscrits') ),
+	array('sql_alter', "TABLE spip_asso_membres DROP inscrits"),
+	array('sql_alter', "TABLE spip_asso_activites ADD prix_activite DECIMAL(19,2) NOT NULL DEFAULT 0"),
+	array('sql_update', 'spip_asso_activites', array('prix_activite'=>'montant') ),
+	array('sql_alter', "TABLE spip_asso_membres DROP montant"),
+	array('sql_alter', "TABLE spip_asso_exercices ADD date_debut DATE NOT NULL DEFAULT '0000-00-00'"),
+	array('sql_update', 'spip_asso_exercices', array('date_debut'=>'debut') ),
+	array('sql_alter', "TABLE spip_asso_exercices DROP debut"),
+	array('sql_alter', "TABLE spip_asso_exercices ADD date_fin DATE NOT NULL DEFAULT '0000-00-00'"),
+	array('sql_update', 'spip_asso_exercices', array('date_fin'=>'fin') ),
+	array('sql_alter', "TABLE spip_asso_exercices DROP fin"),
+// homogeniser le nommage de cle secondaire sur les categories de cotisation pour etre moins ambigu
+	array('sql_alter', "TABLE spip_asso_membres ADD id_categorie INT UNSIGNED NOT NULL"),
+	array('sql_update', 'spip_asso_membres', array('id_categorie'=>'categorie') ),
+#	array('sql_alter', "TABLE spip_asso_membres DROP categorie"),
+// homogeniser l'appelation du champ de nom alternatif pour simplifier le code
+	array('sql_alter', "TABLE spip_asso_dons ADD nom TINYTEXT NOT NULL"),
+	array('sql_update', 'spip_asso_dons', array('nom'=>'bienfaiteur') ),
+	array('sql_alter', "TABLE spip_asso_dons DROP bienfaiteur"),
+	array('sql_alter', "TABLE spip_asso_ventes ADD nom TINYTEXT NOT NULL"),
+	array('sql_update', 'spip_asso_ventes', array('nom'=>'acheteur') ),
+	array('sql_alter', "TABLE spip_asso_ventes DROP acheteur"),
 );
 
 ?>

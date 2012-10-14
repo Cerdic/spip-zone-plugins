@@ -21,7 +21,7 @@ function exec_categories() {
 		// notice
 		echo '';
 		// quelques stats sur les categories
-		echo association_totauxinfos_stats('tous', 'categories', array('entete_duree'=>'duree', 'entete_montant'=>'cotisation') );
+		echo association_totauxinfos_stats('tous', 'categories', array('entete_duree'=>'duree', 'entete_montant'=>'prix_cotisation') );
 		// datation et raccourcis
 		raccourcis_association('association', array(
 			'ajouter_une_categorie_de_cotisation' => array('cotisation.png', 'edit_categorie'),
@@ -34,7 +34,7 @@ function exec_categories() {
 				'valeur' => array('asso:entete_code', 'code', 'x-spip_asso_categories'),
 				'libelle' => array('asso:libelle_intitule', 'texte', '', 'n'),
 				'duree' => array('asso:entete_duree', 'duree', 'M'),
-				'cotisation' => array('asso:entete_montant', 'prix', 'subscription'),
+				'prix_cotisation' => array('asso:entete_montant', 'prix', 'subscription'),
 				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),
 			), // entetes et formats des donnees
 			array(

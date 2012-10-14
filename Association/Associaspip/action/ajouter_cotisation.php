@@ -27,8 +27,8 @@ function action_ajouter_cotisation() {
 	sql_updateq(
 		'spip_asso_membres',
 		array(
-			"validite" => $validite,
-			"statut_interne" => strtotime($validite)>strtotime("-1 day")?'ok':'echu', // on verifie que la date entree soit aujourd'hui ou dans le futur pour attribuer le statut ok
+			'date_validite' => $validite,
+			'statut_interne' => strtotime($validite)>strtotime('-1 day')?'ok':'echu', // on verifie que la date entree soit aujourd'hui ou dans le futur pour attribuer le statut ok
 		),
 		"id_auteur=$id_auteur"
 	);

@@ -23,10 +23,10 @@ function formulaires_editer_asso_exercices_charger_dist($id_exercice='') {
 function formulaires_editer_asso_exercices_verifier_dist($id_exercice) {
 	$erreurs = array();
 
-	if ($erreur = association_verifier_date('debut') )
-		$erreurs['debut'] = $erreur;
-	if ($erreur = association_verifier_date('fin') )
-		$erreurs['fin'] = $erreur;
+	if ($erreur = association_verifier_date('date_debut') )
+		$erreurs['date_debut'] = $erreur;
+	if ($erreur = association_verifier_date('date_fin') )
+		$erreurs['date_fin'] = $erreur;
 
 	if (count($erreurs)) {
 		$erreurs['message_erreur'] = _T('asso:erreur_titre');

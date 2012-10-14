@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_vente() {
-	if (!autoriser('associer', 'ventes')) {
+	if (!autoriser('gerer_ventes', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -24,7 +24,7 @@ function exec_suppr_vente() {
 		$infos['ventes_entete_date_envoi'] = association_formater_date($vente['date_envoi'],'dtend');
 		$infos['entete_intitule'] = '<span class="n">'. (test_plugin_actif('CATALOGUE') && (is_numeric($vente['article'])) ? ( association_formater_idnom($vente['article'], array('spip_articles', 'titre', 'id_article'), 'article') . association_formater_idnom($vente['code'], array('spip_cat_variantes', 'titre', 'id_cat_variante'), '') ) : $vente['article'] ) .'</span>';
 //		$infos['entete_code'] = association_formater_code($vente['code'], 'x-spip_asso_ventes');
-		$infos['entete_nom'] = association_formater_idnom($vente['id_acheteur'], $vente['acheteur'], 'membre');
+		$infos['entete_nom'] = association_formater_idnom($vente['id_auteur'], $vente['nom'], 'membre');
 		$infos['entete_quantite'] = association_formater_nombre($vente['quantite'], 2, 'quantity');
 		$infos['entete_montant'] = association_formater_prix($vente['prix_vente'], 'purchase cost offer');
 		$infos['entete_commentaire'] = $vente['commentaire'];

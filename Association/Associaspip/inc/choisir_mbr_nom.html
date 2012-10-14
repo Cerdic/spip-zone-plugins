@@ -17,7 +17,7 @@ parametres =
 - champs_legende (texte) : titre a utiliser si on veut grouper tous les champs
 - lecture_seule (booleen) : indique si les champs sont non-editables ou au contraire.
 
-maj:2012-02-15; version:0.1.0; licence:GPL; copyleft:gilcot; -->]
+maj:2012-10-14; version:0.1.0; licence:GPL; copyleft:gilcot; -->]
 
 #CACHE{0}
 [
@@ -43,7 +43,7 @@ maj:2012-02-15; version:0.1.0; licence:GPL; copyleft:gilcot; -->]
             <label for="saisie_#ENV{champ_id}">[(#ENV{lignes_noms}|?{<:asso:libelle_membres:>,<:asso:libelle_membre:>})]</label>
             <select name="#ENV{champ_id}" [ multiple="multiple" size="(#ENV{lignes_noms})" ] id="saisie_#ENV{champ_id}" [(#ENV{lecture_seule}|oui) readonly="readonly" disabled="disabled"]>
                 <option></option>
-<BOUCLE_choix2membre(ASSO_MEMBRES) {statut_interne?IN #ENV{statut_interne}}{categorie?IN #ENV{categories}} {par #ENV{tri_id,nom_famille,prenom}} >
+<BOUCLE_choix2membre(ASSO_MEMBRES) {statut_interne?IN #ENV{statut_interne}}{id_categorie?IN #ENV{categorie}} {par #ENV{tri_id,nom_famille,prenom}} >
                 <option value="#ID_AUTEUR"[ (#ENV{valeur_id}|=={#ID_AUTEUR}|oui)selected="selected"]>#NOM_FAMILLE[, (#META{/association/prenom}|oui) #PRENOM [((#SEXE))] ]</option>
 </BOUCLE_choix2membre>
             </select>

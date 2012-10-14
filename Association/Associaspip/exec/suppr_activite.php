@@ -30,8 +30,8 @@ function exec_suppr_activite() {
 		$infos['nom'] = association_formater_idnom($activite['id_auteur'], $activite['nom'], '');
 //		$infos['date'] = association_formater_date($activite['date_inscription']);
 		$infos['date'] = association_formater_date($activite['date_paiement']);
-		$infos['activite_entete_inscrits'] = association_formater_nombre($activite['inscrits'], 0);
-		$infos['entete_montant'] = association_formater_prix($activite['montant'], 'fees');
+		$infos['activite_entete_inscrits'] = association_formater_nombre($activite['quantite'], 1);
+		$infos['entete_montant'] = association_formater_prix($activite['prix_activite'], 'fees');
 		association_totauxinfos_intro('', 'activite', $id_activite, $infos );
 		// datation et raccourcis
 		raccourcis_association('');

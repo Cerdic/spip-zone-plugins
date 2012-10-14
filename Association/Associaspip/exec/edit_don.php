@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_edit_don() {
-	if (!autoriser('associer', 'dons')) {
+	if (!autoriser('gerer_dons', 'association')) {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {

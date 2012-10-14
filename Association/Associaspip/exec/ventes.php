@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_ventes() {
-	if (!autoriser('associer', 'ventes')) {
+	if (!autoriser('voir_ventes', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -83,7 +83,7 @@ function exec_ventes() {
 				'date_envoie' => array('asso:ventes_entete_date_envoi', 'date', 'dtend'),
 				'article' => array('asso:entete_intitule', 'texte', 'propre', 'n'),
 				'code' => array('asso:entete_code', 'code', 'x-spip_asso_ventes'),
-				'id_acheteur' => array('asso:entete_nom', 'idnom', array('spip_asso_ventes', 'acheteur', 'id_acheteur'), 'membre'),
+				'id_auteur' => array('asso:entete_nom', 'idnom', array('spip_asso_ventes', 'nom', 'id_auteur'), 'membre'),
 				'quantite' => array('asso:entete_quantite', 'nombre', 2, 'quantity'),
 				'prix_vente' => array('asso:entete_montant', 'prix', 'purchase cost offer'),
 //				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),

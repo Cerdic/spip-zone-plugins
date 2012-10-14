@@ -25,8 +25,8 @@ function exec_compte_bilan() {
 // traitements
 		onglets_association('titre_onglet_comptes', 'comptes');
 		// INTRO : rappel de l'exercicee affichee
-		$infos['exercice_entete_debut'] = association_formater_date($exercice_data['debut'], 'dtstart');
-		$infos['exercice_entete_fin'] = association_formater_date($exercice_data['fin'], 'dtend');
+		$infos['exercice_entete_debut'] = association_formater_date($exercice_data['date_debut'], 'dtstart');
+		$infos['exercice_entete_fin'] = association_formater_date($exercice_data['date_fin'], 'dtend');
 		echo association_totauxinfos_intro($exercice_data['intitule'], 'exercice', $ids['exercice'], $infos);
 		// pas de sommes de synthes puisque tous les totaux sont dans la zone centrale ;-
 		// datation et raccourcis

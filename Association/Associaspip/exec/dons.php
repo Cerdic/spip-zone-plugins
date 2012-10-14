@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_dons() {
-	if (!autoriser('associer', 'dons')) {
+	if (!autoriser('voir_dons', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -68,7 +68,7 @@ function exec_dons() {
 			array(
 				'id_don' => array('asso:entete_id', 'entier'),
 				'date_don' => array('asso:entete_date', 'date', ''),
-				'id_auteur' => array('asso:entete_nom', 'idnom', array('spip_asso_dons', 'bienfaiteur', 'id_auteur'), 'membre'),
+				'id_auteur' => array('asso:entete_nom', 'idnom', array('spip_asso_dons', 'nom', 'id_auteur'), 'membre'),
 				'argent' => array('asso:argent', 'prix', 'donation cash'),
 				'colis' => array('asso:colis', 'texte', 'propre'), // voir s'il est possible de mettre la valeur au survol
 //				'valeur' => array('asso:valeur', 'prix', 'donation estimated'),

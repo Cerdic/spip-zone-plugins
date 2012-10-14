@@ -36,8 +36,8 @@ function exec_activites() {
 			'impair'=>array( 'activites_avec_inscrits', $liste_effectifs['impair'], ),
 		));
 		// STATS sur toutes les participations
-//		echo association_totauxinfos_stats('participations_par_personne_par_activite', 'activites', array('activite_entete_inscrits'=>'inscrits','entete_montant'=>'montant',), "DATE_FORMAT(date_inscription, '%Y')=$annee"); // v1
-		echo association_totauxinfos_stats('participations_par_personne_par_activite', 'activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', array('entete_quantite'=>'inscrits','entete_montant'=>'montant',), $critere_periode); // v2
+//		echo association_totauxinfos_stats('participations_par_personne_par_activite', 'activites', array('activite_entete_inscrits'=>'quantite','entete_montant'=>'prix_activite',), "DATE_FORMAT(date_inscription, '%Y')=$annee"); // v1
+		echo association_totauxinfos_stats('participations_par_personne_par_activite', 'activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', array('entete_quantite'=>'quantite','entete_montant'=>'prix_activite',), $critere_periode); // v2
 		// TOTAUX : montants des participations durant l'annee en cours
 		$data = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=$annee AND imputation=".sql_quote($GLOBALS['association_metas']['pc_activites']) ); // 1. on peut interroger les recettes directement dans la table des activites 2. les paiement en avance (reservations qui tombent dans l'anne d'avant) ou en retard (paiement a credit qui tombent dans l'annee d'apres) peuvent fausser la donne
 		echo association_totauxinfos_montants('activites', $data['somme_recettes'], $data['somme_depenses']);
@@ -104,7 +104,7 @@ function exec_activites() {
 			$q_having = '';
 		}
 		echo association_bloc_listehtml(
-			array("e.id_evenement, e.date_debut, e.date_fin, e.titre  AS intitule, e.lieu,  COUNT(a.id_activite) AS inscriptions, SUM(a.inscrits) AS quantites, SUM(a.montant) AS montants, CASE COUNT(a.id_activite) WHEN 0 THEN 0 ELSE 1 END AS participations $mc_sel", $q_from, $q_where, 'e.id_evenement', 'date_debut DESC, date_fin DESC', sql_asso1page(), $q_having), // requete
+			array("e.id_evenement, e.date_debut, e.date_fin, e.titre  AS intitule, e.lieu,  COUNT(a.id_activite) AS inscriptions, SUM(a.quantite) AS quantites, SUM(a.montant) AS montants, CASE COUNT(a.id_activite) WHEN 0 THEN 0 ELSE 1 END AS participations $mc_sel", $q_from, $q_where, 'e.id_evenement', 'date_debut DESC, date_fin DESC', sql_asso1page(), $q_having), // requete
 			array(
 				'id_evenement' => array('asso:entete_id', 'entier'),
 				'date_debut' => array('agenda:evenement_date_du', 'date', 'dtstart'),

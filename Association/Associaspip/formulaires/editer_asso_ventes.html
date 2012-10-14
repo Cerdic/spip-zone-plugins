@@ -3,7 +3,7 @@
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
     <form name="formulaire_#FORM" method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
-		<INCLURE{fond=inc/choisir_mbr_nom, champ_nom=acheteur, valeur_nom=#ENV{acheteur}, champ_id=id_acheteur, valeur_id=#ENV{id_acheteur}, champs_legende=Acheteur }>
+		<INCLURE{fond=inc/saisir_membre, nom, id_auteur, champs_legende=Acheteur }>
 		<fieldset>
 			<legend>Facturation</legend>
 			<ul>
@@ -67,7 +67,7 @@
 				<INCLURE{fond=inc/saisir_commentaires, commentaire }>
 			</ul>
 		</fieldset>
-		<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, champs_legende=Paiement, env}>
+		<INCLURE{fond=inc/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, champs_legende=Paiement, env}>
 		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_vente} }>
 	</form>
 </div>

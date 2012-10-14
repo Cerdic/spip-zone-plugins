@@ -25,11 +25,13 @@ function exec_edit_relances() {
 		list($statut_interne, $critere) = association_passeparam_statut('interne', 'echu');
 		$id_groupe = association_recuperer_entier('groupe');
 		$num_relance = association_recuperer_entier('relance');
+		if ( $num_relance=='' && $statut_interne=='echu' )
+			$num_relance = 1;
 		debut_cadre_association('relance-24.png', 'tous_les_membres_a_relancer');
 		// Filtres
 		$filtre_relance = '<select name="relance" onchange="form.submit()">';
 		$filtre_relance .= '<option value="" ';
-		$filtre_relance .= (($num_relance==0 || $num_relance='')?' selected="selected"':'');
+		$filtre_relance .= (!$num_relance?' selected="selected"':'');
 		$filtre_relance .= '>'. _T('asso:autre') .'</option>';
 		$filtre_relance .= '<option value="1" ';
 		$filtre_relance .= (($num_relance==1)?' selected="selected"':'');
@@ -89,13 +91,13 @@ function relances_liste($critere, $id_groupe=0) {
 		$jointure_groupe = '';
 	}
 	$query = sql_select(
-		'id_auteur, sexe, nom_famille, prenom, statut_interne, validite', "spip_asso_membres AS a_m $jointure_groupe", $critere, '', 'nom_famille, prenom, validite' );
+		'id_auteur, sexe, nom_famille, prenom, statut_interne, date_validite', "spip_asso_membres AS a_m $jointure_groupe", $critere, '', 'nom_famille, prenom, validite' );
 	$res = '';
 	while ($data = sql_fetch($query)) {
 		$res .= '<tr class="'.$GLOBALS['association_styles_des_statuts'][$data['statut_interne']].'" id="membre'.$data['id_auteur'].'">'
 		.'<td class="integer"><label for="id'.$data['id_auteur'].'">'.$data['id_auteur'].'</label></td>'
 		.'<td class="text"><label for="id'.$data['id_auteur'].'">'. association_formater_nom($data['sexe'], $data['prenom'], $data['nom_famille']) .'</label></td>'
-		.'<td class="date"><label for="mbr'.$data['id_auteur'].'">'. association_formater_date($data['validite']) .'</label></td>'
+		.'<td class="date"><label for="mbr'.$data['id_auteur'].'">'. association_formater_date($data['date_validite']) .'</label></td>'
 		. association_bouton_coch('id', $data['id_auteur'], '<input name="statut['.$data['id_auteur'].']" type="hidden" value="'.$data['statut_interne'].'" />')
 		."</tr>\n";
 	}

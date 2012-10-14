@@ -32,8 +32,8 @@ function formulaires_editer_asso_activites_charger_dist($id_activite='') {
 		$contexte['date_paiement'] = '';
 	if (!$contexte['id_auteur'])
 		$contexte['id_auteur']='';
-	if ($contexte['inscrits'])
-		$contexte['inscrits'] = association_formater_nombre($contexte['inscrits']);
+	if ($contexte['quantite'])
+		$contexte['quantite'] = association_formater_nombre($contexte['quantite']);
 
 	return $contexte;
 }
@@ -45,13 +45,13 @@ function formulaires_editer_asso_activites_verifier_dist($id_activite='') {
 		$erreurs['date_inscription'] = $erreur;
 	if ($erreur = association_verifier_date('date_paiement', TRUE) )
 		$erreurs['date_paiement'] = $erreur;
-	if ($erreur = association_verifier_montant('inscrits') )
-		$erreurs['inscrits'] = $erreur;
-	if ($erreur = association_verifier_montant('montant') )
-		$erreurs['montant'] = $erreur;
+	if ($erreur = association_verifier_montant('quantite') )
+		$erreurs['quantite'] = $erreur;
+	if ($erreur = association_verifier_montant('prix_activite') )
+		$erreurs['prix_activite'] = $erreur;
 	if ($erreur = association_verifier_membre('id_auteurt') )
 		$erreurs['id_auteur'] = $erreur;
-	if ($erreur = association_verifier_destinations('montant') )
+	if ($erreur = association_verifier_destinations('prix_activite') )
 		$erreurs['destinations'] = $erreur;
 
 	if (count($erreurs)) {

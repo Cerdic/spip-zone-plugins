@@ -18,10 +18,10 @@ function action_editer_asso_ventes() {
 	$date_vente = association_recuperer_date('date_vente');
 	$article = _request('article');
 	$code = _request('code');
-	$id_acheteur = association_recuperer_entier('id_acheteur');
-	$acheteur = _request('acheteur');
+	$id_auteur = association_recuperer_entier('id_auteur');
+	$acheteur = _request('nom');
 	if (!$acheteur) {
-		$acheteur = association_formater_idnom($id_acheteur, array('spip_asso_membres'), '');
+		$acheteur = association_formater_idnom($id_auteur, array('spip_asso_membres'), '');
 	}
 	$quantite = association_recuperer_montant('quantite');
 	$date_envoi = association_recuperer_date('date_envoi');
@@ -46,8 +46,8 @@ function action_editer_asso_ventes() {
 		'date_vente' => $date_vente,
 		'article' => $article,
 		'code' => $code,
-		'acheteur' => _request('acheteur'),
-		'id_acheteur' => $id_acheteur,
+		'nom' => _request('nom'),
+		'id_auteur' => $id_auteur,
 		'quantite' => $quantite,
 		'date_envoi' => $date_envoi,
 		'frais_envoi' => $frais_envoi,
@@ -58,7 +58,7 @@ function action_editer_asso_ventes() {
 	$id_compte = association_recuperer_entier('id_compte');
 	$journal = _request('journal');
 	$num_vente = "$id_vente : '$code'&nbsp;&times;&nbsp;$quantite";
-	$ref_vente = "->vente$id_vente] &mdash; ". ($id_acheteur?"[$acheteur"."->membre$id_acheteur]":$acheteur) ;
+	$ref_vente = "->vente$id_vente] &mdash; ". ($id_auteur?"[$acheteur"."->membre$id_auteur]":$acheteur) ;
 	include_spip('inc/association_comptabilite');
 	if ($id_vente) { // modification
 		// on modifie les operations comptables associees a la vente

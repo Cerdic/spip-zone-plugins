@@ -22,14 +22,14 @@ function action_editer_asso_activites_dist() {
 	$participant = association_formater_idnom($id_auteur, array('spip_asso_membres'), '');
     }
     $evenement = association_recuperer_entier('id_evenement');
-    $montant = association_recuperer_montant('montant');
-    $inscrits = association_recuperer_montant('inscrits');
+    $montant = association_recuperer_montant('prix_activite');
+    $quantite = association_recuperer_montant('quantite');
     $modifs = array(
 	'id_evenement' => $evenement,
 	'nom' => _request('nom'),
 	'id_auteur' => $id_auteur,
-	'inscrits' => $inscrits,
-	'montant' => $montant,
+	'quantite' => $quantite,
+	'prix_activite' => $montant,
 	'date_paiement' => $date_paiement,
 	'date_inscription' => association_recuperer_date('date_inscription'),
 	'commentaire' => _request('commentaire'),
@@ -41,7 +41,7 @@ function action_editer_asso_activites_dist() {
     include_spip('inc/modifier'); // on passe par modifier_contenu pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere
     if ($id_activite) { // c'est une modification
 	// on modifie les operations comptables associees a la participation
-	$erreur = association_modifier_operation_comptable($date_paiement, $montant, 0, '['. _T('asso:titre_num', array('titre'=>_T('evenement'),'num'=>$evenement) ) ."->activite$evenement] &mdash; ". ($id_auteur?"[$participant"."->membre$id_auteur]":$participant)." +$inscrits", $GLOBALS['association_metas']['pc_activites'], $journal, $id_activite, $id_compte);
+	$erreur = association_modifier_operation_comptable($date_paiement, $montant, 0, '['. _T('asso:titre_num', array('titre'=>_T('evenement'),'num'=>$evenement) ) ."->activite$evenement] &mdash; ". ($id_auteur?"[$participant"."->membre$id_auteur]":$participant)." +$quantite", $GLOBALS['association_metas']['pc_activites'], $journal, $id_activite, $id_compte);
 	// on modifie les informations relatives a la participation
 	modifier_contenu(
 	    'asso_activites', // table a modifier

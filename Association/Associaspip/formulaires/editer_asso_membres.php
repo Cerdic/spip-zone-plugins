@@ -17,9 +17,9 @@ include_spip('inc/autoriser');
 
 function formulaires_editer_asso_membres_charger_dist($id_auteur) {
 	$contexte = formulaires_editer_objet_charger('asso_membres', $id_auteur, '', '',  generer_url_ecrire('adherents'), '');
-	list($annee, $mois, $jour) = explode('-',$contexte['validite']);
+	list($annee, $mois, $jour) = explode('-',$contexte['date_validite']);
 	if ($jour==0 OR $mois==0 OR $annee==0) // on verifie que la date de validite n'est pas nulle et si oui on la met a hier
-		$contexte['validite'] = date('Y-m-d', mktime(0, 0, 0, date('m')  , date('d')-1, date('Y')));
+		$contexte['date_validite'] = date('Y-m-d', mktime(0, 0, 0, date('m')  , date('d')-1, date('Y')));
 
 	return $contexte;
 }
@@ -27,11 +27,11 @@ function formulaires_editer_asso_membres_charger_dist($id_auteur) {
 function formulaires_editer_asso_membres_verifier_dist($id_auteur) {
 	$erreurs = array();
 
-	if ($erreur = association_verifier_date('validite'))
-		$erreurs['validite'] = $erreur;
+	if ($erreur = association_verifier_date('date_validite'))
+		$erreurs['date_validite'] = $erreur;
 
 	if (count($erreurs)) {
-	$erreurs['message_erreur'] = _T('asso:erreur_titre');
+		$erreurs['message_erreur'] = _T('asso:erreur_titre');
 	}
 	return $erreurs;
 }
