@@ -5,10 +5,13 @@
 		- dans la langue du contexte courant
 		- et suivant le mode d'appel article ou page
  -->]
-[(#ENV{mode}|=={#EVAL{_SPIPERIPSUM_MODE_ARTICLE}}|oui)
-	[<h3 class="spip">(#ENV{titre}|trim)&nbsp;-&nbsp;[(#ENV{verset}|trim)]</h3>]
-]
-[(#ENV{mode}|=={#EVAL{_SPIPERIPSUM_MODE_PAGE}}|oui)
-	[<h2 class="h2">(#ENV{titre}|trim)&nbsp;-&nbsp;[(#ENV{verset}|trim)]</h2>]
-]
-[<p>(#ENV*{texte})</p>]
+<div class="lecture[ (#ENV{lecture, evangile})]">
+	[(#ENV{mode}|=={#EVAL{_SPIPERIPSUM_MODE_ARTICLE}}|oui)
+		[<h3 class="spip titre">(#ENV{titre})[&nbsp;-&nbsp;<span class="verset">(#ENV{verset})</span>]</h3>]
+	]
+	[(#ENV{mode}|=={#EVAL{_SPIPERIPSUM_MODE_PAGE}}|oui)
+		[<h2 class="h2 titre">(#ENV{titre})[&nbsp;-&nbsp;<span class="verset">(#ENV{verset})</span>]</h2>]
+	]
+	[<p class="texte">(#ENV*{texte})</p>]
+	[<p class="reference">(#ENV*{reference})</p>]
+</div>

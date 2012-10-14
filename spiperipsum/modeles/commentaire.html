@@ -5,11 +5,13 @@
 		- dans la langue du contexte courant
 		- et suivant le mode d'appel article ou page
  -->]
-[(#ENV{mode}|=={#EVAL{_SPIPERIPSUM_MODE_ARTICLE}}|oui)
-	[<h3 class="spip">(#ENV{titre}|trim)</h3>]
-]
-[(#ENV{mode}|=={#EVAL{_SPIPERIPSUM_MODE_PAGE}}|oui)
-	[<h2 class="h2">(#ENV{titre}|trim)</h2>]
-]
-[<p>(#ENV{auteur})<br />#ENV{source}</p>]
-[<p>(#ENV*{texte})</p>]
+<div class="lecture commentaire">
+	[(#ENV{mode}|=={#EVAL{_SPIPERIPSUM_MODE_ARTICLE}}|oui)
+		[<h3 class="spip titre">(#ENV{titre})</h3>]
+	]
+	[(#ENV{mode}|=={#EVAL{_SPIPERIPSUM_MODE_PAGE}}|oui)
+		[<h2 class="h2 titre">(#ENV{titre})</h2>]
+	]
+	[<p class="auteur">(#ENV{auteur})[<br /><span classe="source">(#ENV{source})</span>]</p>]
+	[<p class="texte">(#ENV*{texte})</p>]
+</div>

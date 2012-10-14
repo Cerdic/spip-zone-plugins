@@ -13,7 +13,7 @@ function spiperipsum_afficher($langue, $jour, $lecture, $mode){
 	$contexte = array();
 	if ($tableau[$lecture])
 		$contexte = $tableau[$lecture];
-	$contexte = array_merge($contexte, array('mode' => $mode));
+	$contexte = array_merge($contexte, array('lecture' => $lecture, 'mode' => $mode));
 	
 	if ($lecture == _SPIPERIPSUM_LECTURE_SAINT)
 		$texte = recuperer_fond("modeles/saint", $contexte);
