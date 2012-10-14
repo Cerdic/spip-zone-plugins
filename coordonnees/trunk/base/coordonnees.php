@@ -53,7 +53,7 @@ function coordonnees_declarer_tables_principales($tables_principales){
 	$numeros = array(
 		"id_numero" => "BIGINT NOT NULL auto_increment",
 		"titre" => "VARCHAR(255) DEFAULT '' NOT NULL", // peut etre domicile, bureau, portable
-		"numero" => "TINYTEXT DEFAULT '' NOT NULL",
+		"numero" => "VARCHAR(255) DEFAULT '' NOT NULL",
 		"maj" => "TIMESTAMP"
 		);
 	$numeros_key = array(
@@ -67,7 +67,7 @@ function coordonnees_declarer_tables_principales($tables_principales){
 	$emails = array(
 		"id_email" => "BIGINT NOT NULL auto_increment",
 		"titre" => "VARCHAR(255) DEFAULT '' NOT NULL", // peut etre perso, boulot, etc.
-		"email" => "VARCHAR(40) DEFAULT '' NOT NULL",
+		"email" => "VARCHAR(255) DEFAULT '' NOT NULL",
 		"maj" => "TIMESTAMP"
 		);
 	$emails_key = array(
