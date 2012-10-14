@@ -227,16 +227,21 @@ function couleur_melanger($arg1, $arg2, $arg3=50) {
 		$couleur1 = $arg1[0];
 		$couleur2 = $arg1[1];
 		$pourcentage = $arg2;
+		if (!isset($pourcentage)) $pourcentage=50;
 	}; 
 
+	/* => Desactive !
 	/* compatibilité : les pourcentages compris entre 0 et 1 fonctionnent
 	   comme pour les filtres de couleurs de Spip.
-	   ainsi couleur_melanger{0.25} = couleur_melanger{25} */
+	   Ainsi couleur_melanger{0.25} = couleur_melanger{25} */
+	/*
 	if ($pourcentage>=0 AND $pourcentage<=1) {
 		$coef = 1;
 	} else {
 		$coef = 100;
 	};
+	*/
+	$coef = 100;
 
 	// verifications
 	if (!$couleur2 OR $pourcentage<=0 OR !is_numeric($pourcentage)) return(preg_replace(",^#,","",$couleur1));
