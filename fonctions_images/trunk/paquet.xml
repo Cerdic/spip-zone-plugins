@@ -1,10 +1,10 @@
 <paquet
 	prefix="fonctions_images"
 	categorie="multimedia"
-	version="0.6.1"
+	version="0.6.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
-	logo="img_pack/fonctions_images_48.png"
+	logo="prive/themes/spip/images/fonctions_images_48.png"
 >	
 
 	<nom>Fonctions d'images</nom>
