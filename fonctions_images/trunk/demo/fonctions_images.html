@@ -1,0 +1,50 @@
+#CACHE{0}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<title>Page de démonstration du plugin fonctions d'images</title>
+#INSERT_HEAD
+#INSERT_HEAD_CSS
+<link rel="stylesheet" href="[(#CHEMIN{demo/bootstrap.min.css})]" type="text/css" />
+<link rel="stylesheet" href="[(#CHEMIN{demo/style_demo_fonctions_images.css})]" type="text/css" />
+</head>
+<body>
+
+<div class="container-fluid">
+<div class="row-fluid">
+
+<!-- menu à gauche -->
+<div class="span3">
+<div class="well sidebar-nav affix">
+<ul class="nav nav-list">
+<li class="nav-header">Les filtres de couleur</li>
+<BOUCLE_menu_couleurs(DATA){liste couleur_chroma,couleur_saturer,couleur_teinter,couleur_inverserluminosite,couleur_foncerluminosite,couleur_eclaircirluminosite,couleur_melanger}>
+<li><a href="[(#ENV{filtres}|=={couleurs}|ou{#ENV{filtres}|=={''}}|?{##VALEUR,#SELF|parametre_url{filtres,couleurs}|ancre_url{#VALEUR}})]" class="ajax">#VALEUR</a></li>
+</BOUCLE_menu_couleurs>
+<li class="nav-header">Les filtres de traitement d'image</li>
+<BOUCLE_menu_images(DATA){liste image_saturer,image_niveaux_gris_auto,image_courbe,image_float,image_contour_alpha,image_sincity,image_estampage_alpha,image_merge,image_negatif}>
+<li><a href="[(#ENV{filtres}|=={images}|ou{#ENV{filtres}|=={''}}|?{##VALEUR,#SELF|parametre_url{filtres,images}|ancre_url{#VALEUR}})]" class="ajax">#VALEUR</a></li>
+</BOUCLE_menu_images>
+</ul>
+</div>
+</div>
+
+<!-- contenu -->
+<div class="span9">
+<h1>Plugin fonctions d'images</h1>
+<p class="lead">
+Démonstration des filtres proposés par le plugin fonctions d'images.
+La plupart de ces filtres sont expliqués en détail sur le site <a href=\'http://www.paris-beyrouth.org\'>Paris-Beyrouth</a>.
+</p>
+[(#ENV{filtres}|=={couleurs}|ou{#ENV{filtres}|=={''}}|oui)
+	[(#INCLURE{fond=demo/inc-filtres_couleurs, env, ajax})]
+]
+[(#ENV{filtres}|=={images}|oui)
+	[(#INCLURE{fond=demo/inc-filtres_images, env, ajax})]
+]
+</div><!-- fin span-12 -->
+
+</div><!-- fin row-fluid -->
+</div><!-- fin container -->
+</body>
+</html>
