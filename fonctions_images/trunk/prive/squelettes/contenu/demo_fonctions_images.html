@@ -1,8 +1,8 @@
 #CACHE{0}
 <div class='onglets_simple clearfix'>
 	<ul>
-		[<li class="first">(#SELF|parametre_url{filtres,couleurs}|lien_ou_expose{"Les filtres de couleur", #ENV{filtres}|=={couleurs}|ou{#ENV{filtres}|=={''}}, ajax})</li>]
-		[<li>(#SELF|parametre_url{filtres,images}|lien_ou_expose{"Les filtres de traitements d'image", #ENV{filtres}|=={images}, ajax})</li>]
+		[<li class="first">(#SELF|parametre_url{filtres,couleurs}|lien_ou_expose{<:fonctions_images:onglet_filtres_couleurs:>, #ENV{filtres}|=={couleurs}|ou{#ENV{filtres}|=={''}}, ajax})</li>]
+		[<li>(#SELF|parametre_url{filtres,images}|lien_ou_expose{<:fonctions_images:onglet_filtres_images:>, #ENV{filtres}|=={images}, ajax})</li>]
 	</ul>
 </div>
 
