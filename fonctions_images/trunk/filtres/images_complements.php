@@ -1107,33 +1107,34 @@ function image_monochrome($img,$largeur=20,$seuil=13){
 * 
 * @param unknown_type $img
 * @param unknown_type $masque
+* @param string $h alignement horizontal
 * @param string $v alignement vertical
-* @return  string $v alignement horizontal
+* @return 
 */
-function image_merge($im, $masque, $v='left', $h='top'){
-	$image = _image_valeurs_trans($im, "merge-$masque-$v-$h");
-	
+function image_merge($im, $masque, $h='left', $v='top'){
+	$image = _image_valeurs_trans($im, "merge-$masque-$h-$v");
+
 	if (!$image) return("");
-	
+
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
-	
+
 	$im = $image["fichier"];
 	$dest = $image["fichier_dest"];
 	$creer = $image["creer"];
-	
+
 	if ($creer){
 		// init
 		$enfoncement = 2/3;
     $masque = find_in_path($masque);
-		
+
 		// on definit l'image de masque
 		$im_masque = @imagecreatefrompng($masque);
 		//imagealphablending($im_masque, false);
 		//imagesavealpha($im_masque, true);
 		$x_masque = 0;
 		$y_masque = 0;
-		
+
 		// on definit les images sources et destination
 		// l'image de destination est plus grande de la moitie du masque
 		$im = $image["fonction_imagecreatefrom"]($im);
@@ -1146,25 +1147,33 @@ function image_merge($im, $masque, $v='left', $h='top'){
 		// on remplit l'image avec la couleur transparente
 		imagefilledrectangle($im_, 0, 0, $x_i + $x_masque, $y_i + $y_masque, imagecolorallocatealpha($im_, 255, 255, 255, 127));
 
-		// estimation du decalage en fonction de $h et $v
-		if ($v == 'left'){
-			$dest_x = $x_masque;
-			$dest_x_masque = 0;
+		// estimation du decalage en fonction de $h et $hori
+		if ($h == 'center'){
+			$dest_x = 0;
+			$dest_x_masque = (imagesx($im_) - imagesx($im_masque))/2;
 		}
-		else{
+		elseif ($h == 'right'){
 			$dest_x = 0;
 			$dest_x_masque = imagesx($im_) - imagesx($im_masque);
 		}
-		
-		if ($h == 'top'){
-			$dest_y = $y_masque;
-			$dest_y_masque = 0;
+		else { // left par defaut
+			$dest_x = $x_masque;
+			$dest_x_masque = 0;
 		}
-		else{
+
+		if ($v == 'middle'){
+			$dest_y = 0;
+			$dest_y_masque = ($dest_y_masque = imagesy($im_) - imagesy($im_masque))/2;
+		}
+		elseif ($v == 'bottom'){
 			$dest_y = 0;
 			$dest_y_masque = imagesy($im_) - imagesy($im_masque);
 		}
-		
+		else { // top par defaut
+			$dest_y = $y_masque;
+			$dest_y_masque = 0;
+		}
+
 		// on copie l'image source
 		imagecopymerge($im_, $im, 0, 0, 0, 0, $x_i, $y_i, 100);
 		
