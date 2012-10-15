@@ -1,4 +1,3 @@
-#CACHE{0}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -23,7 +22,7 @@
 </BOUCLE_menu_couleurs>
 <li class="nav-header">Les filtres de traitement d'image</li>
 <BOUCLE_menu_images(DATA){liste image_saturer,image_niveaux_gris_auto,image_courbe,image_float,image_contour_alpha,image_sincity,image_estampage_alpha,image_merge,image_negatif}>
-<li><a href="[(#ENV{filtres}|=={images}|ou{#ENV{filtres}|=={''}}|?{##VALEUR,#SELF|parametre_url{filtres,images}|ancre_url{#VALEUR}})]" class="ajax">#VALEUR</a></li>
+<li><a href="[(#ENV{filtres}|=={images}|?{##VALEUR,#SELF|parametre_url{filtres,images}|ancre_url{#VALEUR}})]" class="ajax">#VALEUR</a></li>
 </BOUCLE_menu_images>
 </ul>
 </div>
@@ -34,7 +33,7 @@
 <h1>Plugin fonctions d'images</h1>
 <p class="lead">
 Démonstration des filtres proposés par le plugin fonctions d'images.
-La plupart de ces filtres sont expliqués en détail sur le site <a href=\'http://www.paris-beyrouth.org\'>Paris-Beyrouth</a>.
+La plupart de ces filtres sont expliqués en détail sur le site <a href=http://www.paris-beyrouth.org/-SPIP->Paris-Beyrouth</a>.
 </p>
 [(#ENV{filtres}|=={couleurs}|ou{#ENV{filtres}|=={''}}|oui)
 	[(#INCLURE{fond=demo/inc-filtres_couleurs, env, ajax})]
@@ -42,7 +41,7 @@ La plupart de ces filtres sont expliqués en détail sur le site <a href=\'http:
 [(#ENV{filtres}|=={images}|oui)
 	[(#INCLURE{fond=demo/inc-filtres_images, env, ajax})]
 ]
-</div><!-- fin span-12 -->
+</div><!-- fin span-9 -->
 
 </div><!-- fin row-fluid -->
 </div><!-- fin container -->
