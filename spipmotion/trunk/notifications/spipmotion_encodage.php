@@ -19,6 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param unknown_type $options
  */
 function notifications_spipmotion_encodage_dist($quoi, $id, $options){
+	return;
 	spip_log('notif encodage','spipmotion');
 	include_spip('inc/config');
 	$en_cours = sql_countsel('spip_facd_conversions','id_document = '.intval($options['source']['id_document']).' AND statut IN ("non","en_cours","erreur")');

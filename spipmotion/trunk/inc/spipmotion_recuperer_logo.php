@@ -45,6 +45,9 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 	}
 	include_spip('inc/documents');
 	include_spip('inc/filtres_images_mini');
+	include_spip('action/editer_document');
+	$ajouter_documents = charger_fonction('ajouter_documents', 'action');
+	
 	$retour = 0;
 	
 	if(intval($id_document)){
@@ -84,25 +87,32 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 		$query = md5($string_temp);
 		$dossier_temp = _DIR_VAR;
 		$fichier_temp = "$dossier_temp$query.jpg";
-		while(!$vignette && ($seconde < $document['duree'])){
+		while(!$vignette && ($seconde <= intval($document['duree']))){
 			$cmd_vignette = $spipmotion_sh.' --e '.$chemin.' --size '.$document['largeur'].'x'.$document['hauteur'].' --s '.$fichier_temp.' --ss '.$seconde;
 			$lancement_vignette = exec($cmd_vignette,$retour_vignette,$retour_int);
+			/**
+			 * Le retour du script n'est pas bon, il est certainement non exécutable
+			 */
 			if($retour_int >= 126){
 				$erreur = _T('spipmotion:erreur_script_spipmotion_non_executable');
 				spip_log("SPIPMOTION Erreur : $erreur",'spipmotion'._LOG_CRITIQUE);
 				return false;
 			}
-			
 			if($retour_int == 0){
 				$vignette = true;
+				/**
+				 * Le fichier temporaire n'existe pas, il y a un pb quelque part
+				 */
 				if(!file_exists($fichier_temp) OR (filesize($fichier_temp) == 0)){
 					spip_log("SPIPMOTION Erreur : le fichier $fichier_temp n'existe pas",'spipmotion'._LOG_CRITIQUE);
 					return false;
 				}else{
 					$img_finale = $fichier_temp;
 					$mode = 'vignette';
-					$ajouter_documents = charger_fonction('ajouter_documents', 'action');
-					include_spip('action/editer_document');
+					/**
+					 * On teste si on a le plugin de fonctions supplémentaires d'images
+					 * pour le filtre image_monochrome
+					 */
 					if(defined('_DIR_PLUGIN_FONCTIONS_IMAGES')){
 						include_spip('fonctions_images_fonctions');
 						/**
@@ -123,53 +133,68 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 								$x = $ajouter_documents($vignette_existante,
 												array(array('tmp_name'=>$img_finale,'name'=> $img_finale)),
 								    			'', 0, 'vignette');
-								$x = reset($x);
-								if(intval($x)){
+								$id_vignette = reset($x);
+								if(intval($id_vignette)){
 									$vignette = true;
-									$id_vignette = $x;
-									if(!$only_return && ($document['id_vignette'] != $x))
-										document_modifier($id_document, array('id_vignette'=>$x));
+									if(!$only_return && ($document['id_vignette'] != $id_vignette))
+										document_modifier($id_document, array('id_vignette'=>$id_vignette));
 								}
-							    return $x;
+							    return $id_vignette;
 							}
 							return false;
-						}else if(!filtrer('image_monochrome',$fichier_temp)){
-								spip_unlink($img_finale);
-								$frame = $frame+50;
-								$retour++;
-							}else if(file_exists($img_finale)){
-								$x = $ajouter_documents($vignette_existante,
+						}
+						/**
+						 * Ici on teste si la vignette récupérée est monochrome,
+						 * si elle l'est :
+						 * - On supprime l'image temporaire
+						 * - On augmente le nombre de seconde de 3, on essaiera donc 
+						 * de récupérer une vignette 3 secondes plus tard
+						 * - On remet $vignette à false
+						 * - On incrémente le nombre de $retour
+						 */
+						else if(!filtrer('image_monochrome',$fichier_temp)){
+							spip_unlink($img_finale);
+							$seconde = $seconde+3;
+							$vignette = false;
+							$retour++;
+						}
+						else if(file_exists($img_finale)){
+							$x = $ajouter_documents($vignette_existante,
 													array(array('tmp_name'=>$img_finale,'name'=> $img_finale)),
 									    			'', 0, 'vignette');
-								$x = reset($x);
-								if(intval($x)){
-									$vignette = true;
-									$id_vignette = $x;
-									if(!$only_return && ($document['id_vignette'] != $x))
-										document_modifier($id_document, array('id_vignette'=>$x));
-								}
-								spip_unlink($img_finale);
-							}else{
-								return false;
+							$x = reset($x);
+							if(intval($x)){
+								$vignette = true;
+								$id_vignette = $x;
+								if(!$only_return && ($document['id_vignette'] != $x))
+									document_modifier($id_document, array('id_vignette'=>$x));
 							}
+							spip_unlink($img_finale);
 						}else{
-							if(file_exists($img_finale)){
-								$x = $ajouter_documents($vignette_existante,
-													array(array('tmp_name'=>$img_finale,'name'=> $img_finale)),
-									    			'', 0, 'vignette');
-								$x = reset($x);
-								if(intval($x)){
-									$vignette = true;
-									$id_vignette = $x;
-									if(!$only_return && ($document['id_vignette'] != $x))
-										document_modifier($id_document, array('id_vignette'=>$x));
-								}
-								spip_unlink($img_finale);
+							return false;
+						}
+					}
+					/**
+					 * On n'a pas le plugin de fonctions d'images supplémentaires
+					 * On insère comme vignette ce qu'on a
+					 */
+					else{
+						if(file_exists($img_finale)){
+							$x = $ajouter_documents($vignette_existante,
+												array(array('tmp_name'=>$img_finale,'name'=> $img_finale)),
+								    			'', 0, 'vignette');
+							$x = reset($x);
+							if(intval($x)){
+								$vignette = true;
+								$id_vignette = $x;
+								if(!$only_return && ($document['id_vignette'] != $x))
+									document_modifier($id_document, array('id_vignette'=>$x));
 							}
+							spip_unlink($img_finale);
 						}
 					}
 				}
-			else{
+			}else{
 				return false;	
 			}
 		}
