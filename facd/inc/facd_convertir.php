@@ -28,6 +28,7 @@ function inc_facd_convertir_dist($id_document,$id_facd,$format=false){
 	 * - changer les messages sur le site (ce media est en cours de conversion par exemple)
 	 * - indiquer si nécessaire le statut
 	 */
+	$infos = array();
 	$infos['debut_conversion'] = time(); 
 	sql_updateq("spip_facd_conversions",array('statut'=>'en_cours','infos'=>serialize($info)),"id_facd_conversion=".intval($id_facd));
 
@@ -75,7 +76,7 @@ function inc_facd_convertir_dist($id_document,$id_facd,$format=false){
 			 * Modification de la file d'attente : 
 			 * on marque le document comme étant en erreur
 			 */
-			$info['erreur'] = $res['erreur'];
+			$infos['erreur'] = $res['erreur'];
 			sql_updateq("spip_facd_conversions",array('statut'=>'erreur','infos'=>serialize($infos)),"id_facd_conversion=".intval($id_facd));
 			$reussite = false;
 		}

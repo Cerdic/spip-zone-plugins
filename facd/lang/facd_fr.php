@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_conversion_non' => 'En attente',
 	'info_statut_conversion_oui' => 'Converti',
 	'info_tous_docs_facd' => 'Documents de la file d\'attente',
+	'info_voir_log_erreur' => 'Voir le log d\'erreur',
 
 	// L
 	'label_relancer_conversion' => 'Relancer la conversion',
@@ -46,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'thead_id_document' => 'Original',
 	'thead_nombre' => 'Nombre',
 	'thead_statut' => 'Statut',
+	'titre_log_conversion' => 'Contenu du log de conversion #@id@',
 	'titre_page_file' => 'File d\'attente du module de conversion de medias',
 	'titre_page_file_convertis_jour' => 'Conversions par date',
 	'titre_page_file_menu' => 'File d\'attente de conversion',

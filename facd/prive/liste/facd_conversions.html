@@ -20,6 +20,10 @@
 	extension,1
 }})
 ]
+<BOUCLE_log(FACD_CONVERSIONS){si #ENV{afficher_log}|=={oui}|oui}{id_facd_conversion = #ENV{log}}>
+<h3><:facd:titre_log_conversion{id=#ID_FACD_CONVERSION}:></h3>
+<pre style="white-space: pre-wrap;">[(#INFOS|unserialize|table_valeur{log})]</pre>
+</BOUCLE_log>
 <B_conversions>
 #ANCRE_PAGINATION
 <div class="liste-elements conversions">
@@ -59,7 +63,7 @@
 				[(#AUTORISER{relancerconversion,facd,#ID_FACD_CONVERSION}|oui)
 					[(#BOUTON_ACTION{[(#VAL{facd:info_statut_conversion_#STATUT}|_T)],[(#URL_ACTION_AUTEUR{facd_relancer_conversion,#ID_FACD_CONVERSION,[(#SELF|parametre_url{log,''}|parametre_url{relance,''})]})],ajax,'',<:facd:label_relancer_conversion|attribut_html:>})]]
 				[(#AUTORISER{relancerconversion,facd,#ID_FACD_CONVERSION}|non)[(#VAL{facd:info_statut_conversion_#STATUT}|_T)]]
-				[(#INFOS|table_valeur{log}|strlen|>{1}|oui)<a href="[(#SELF|parametre_url{log,#ID_FACD_CONVERSION})]" class="ajax"><:facd:info_voir_log_erreur:></a>]
+				[(#INFOS|unserialize|table_valeur{log}|strlen|>{1}|oui)<a href="[(#SELF|parametre_url{log,#ID_FACD_CONVERSION})]" class="ajax"><:facd:info_voir_log_erreur:></a>]
 			]
 			[(#STATUT|=={erreur}|non)
 				[(#VAL{facd:info_statut_conversion_#STATUT}|_T)]
@@ -70,20 +74,18 @@
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#ENV{statut}|=={oui}|non)
+<div class="act">
 [(#GET{erreur}|=={oui}|et{#AUTORISER{configurer,facd}}|oui)
-<div class="actions act boutons">
 	[(#BOUTON_ACTION{<:facd:info_relancer_erreurs:>,[(#URL_ACTION_AUTEUR{facd_relancer_conversion,'tout',[(#SELF|parametre_url{log,''}|parametre_url{relance,''})]})],ajax})]
-</div>]
+]
 [(#REM)
 
 	Si le statut n'est pas oui et que l'on a des erreurs, on affiche un bouton de rechargement
 	clické toutes les 30 sec en js
 	
 ]
-[(#ENV{statut}|=={oui}|non)
-<div class="actions act">
 <a href="[(#SELF|parametre_url{relance,''}|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]})]" id="facd_recharge_file" class="ajax"><:facd:lien_recharger:></a>
-</div>
 <script type="text/javascript">
 	var refresh = function(){
 		if($('.conversions tbody tr.non').size() > 0){
@@ -94,7 +96,7 @@
 		clearTimeout(file);
 	file = setTimeout(refresh,30000);
 </script>
-]
+</div>]
 </div>
 </B_conversions>[
 <div class="liste-elements conversions"><strong class="caption">(#ENV*{sinon,''})</strong></div>
