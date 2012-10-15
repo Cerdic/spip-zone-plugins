@@ -1,5 +1,4 @@
-[(#SET{id_groupe,#ENV{id_groupe,#CONFIG{spipicious/groupe_mot,1}}})]
-[(#SET{mots,#ARRAY})]
+[(#SET{id_groupe,#ENV{id_groupe,#CONFIG{spipicious/groupe_mot,1}}})][(#SET{mots,#ARRAY})]
 <BOUCLE_motsElement(SPIPICIOUS mots){id_auteur?}{mots.id_groupe=#GET{id_groupe}}{fusion spipicious.id_mot}{par #ENV{tri,titre}}>
 	[(#SET{mots,[(#GET{mots}|push{#ID_MOT})]})]
 	[(#ID_MOT|nuage{#TITRE,[(#ENV{url}|?{[(#ENV{url}|parametre_url{id_mot,#ID_MOT})],#URL_MOT})]})]
