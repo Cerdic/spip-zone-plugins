@@ -35,7 +35,7 @@
 					<label for="date_paiement"><:asso:libelle_date:></label>
 					<input name="date_paiement" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_paiement})"] id="date_paiement" class="date" />
 				</li>
-				<INCLURE{fond=inc/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, env}>
+				<INCLURE{fond=inc/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, defaut_dest, env}>
 			</ul>
 		</fieldset>
 		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_activite} }>

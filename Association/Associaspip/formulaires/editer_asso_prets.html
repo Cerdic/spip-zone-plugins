@@ -62,7 +62,7 @@
 					<label for="montant"><:asso:libelle_montant:></label>
 					<input name="montant" type="[(#HTML5|?{number,text})]" [value="(#ENV{montant})"] id="montant" class="number float price" />
 				</li>
-				<INCLURE{fond=inc/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, env}>
+				<INCLURE{fond=inc/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, defaut_dest, env}>
 			[(#ENV{id_pret}|oui)
 				<li class="editer_commentaire_retour">
 					<label for="commentaire_retour"><:asso:libelle_commentaire:></label>

@@ -18,7 +18,7 @@
 				<label for="argent"><:asso:don_financier_en_e__:></label>
 				<input type="[(#HTML5|?{number,text})]" name="argent" [value="(#ENV{argent})"] id="argent"  class="number float price" />
 			</li>
-			<INCLURE{fond=inc/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, env}>
+			<INCLURE{fond=inc/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, defaut_dest, env}>
 		</fieldset>
 		<fieldset>
 			<legend><:asso:dons_en_nature:></legend>

@@ -36,7 +36,7 @@ function exec_adherents() {
 		// datation et raccourcis
 		raccourcis_association(array(), array(
 			'gerer_les_groupes' => array('annonce.gif', 'groupes', array('voir_groupes', 'association', 100) ), // l'id groupe passe en parametre est a 100 car ce sont les groupes definis par l'utilisateur et non ceux des autorisation qu'on liste dans cette page
-			'menu2_titre_relances_cotisations' => array('relance-24.png', 'edit_relances'.($id_groupe?"&groupe=$id_groupe":'')..($statut_interne?"&statut_interne=$statut_interne":''), array('relancer_membres', 'association') ),
+			'menu2_titre_relances_cotisations' => array('relance-24.png', 'edit_relances'.($id_groupe?"&groupe=$id_groupe":'').($statut_interne?"&statut_interne=$statut_interne":''), array('relancer_membres', 'association') ),
 			'synchronise_asso_membre_lien' => array('reload-32.png', 'synchroniser_asso_membres', array('synchroniser_membres', 'association') ),
 		));
 		if ( test_plugin_actif('FPDF') && test_plugin_actif('COORDONNEES') && autoriser('relancer_membres', 'association') ) { // etiquettes
@@ -100,7 +100,7 @@ function exec_adherents() {
  */
 function adherents_liste($lettre, $critere, $statut_interne, $id_groupe) {
 	if ($lettre)
-		$critere .= " AND UPPER(nom_famille) LIKE UPPER('$lettre%') "; // le 1er UPPER (plutot que LOWER puisque les lettres sont mises et passees en majuscule) sur le champ est requis car LIKE est sensible a la casse... le 2nd UPPER est pour contrer les requetes entrees manuellement... (remarque, avec MySQL 5 et SQL Server, on aurait pu avoir simplement "nom_famille LIKE '$lettre%' COLLATE UTF_GENERAL_CI" ou mieux ailleurs : "nom_famille ILIKE '$lettre%'" mais c'est pas forcement portable)
+		$critere .= " AND UPPER(m.nom_famille) LIKE UPPER('$lettre%') "; // le 1er UPPER (plutot que LOWER puisque les lettres sont mises et passees en majuscule) sur le champ est requis car LIKE est sensible a la casse... le 2nd UPPER est pour contrer les requetes entrees manuellement... (remarque, avec MySQL 5 et SQL Server, on aurait pu avoir simplement "nom_famille LIKE '$lettre%' COLLATE UTF_GENERAL_CI" ou mieux ailleurs : "nom_famille ILIKE '$lettre%'" mais c'est pas forcement portable)
 	if ($id_groupe) {
 		$critere .= " AND g.id_groupe=$id_groupe ";
 		$jointure_groupe = ' LEFT JOIN spip_asso_groupes_liaisons AS g ON m.id_auteur=g.id_auteur ';
@@ -109,7 +109,7 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe) {
 	}
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	include_spip('inc/filtres_images_mini');
-	$query = sql_select('m.id_auteur AS id_auteur, a.email AS email, m.sexe, m.nom_famille, m.prenom, m.id_asso, a.statut AS statut, m.date_validite, m.statut_interne, m.id_categorie, a.bio AS bio',"spip_asso_membres AS m LEFT JOIN spip_auteurs AS a ON m.id_auteur=a.id_auteur $jointure_groupe", $critere, '', 'nom_famille, prenom, validite', sql_asso1page() );
+	$query = sql_select('m.id_auteur AS id_auteur, a.email AS email, m.sexe, m.nom_famille, m.prenom, m.id_asso, a.statut AS statut, m.date_validite, m.statut_interne, m.id_categorie, a.bio AS bio',"spip_asso_membres AS m LEFT JOIN spip_auteurs AS a ON m.id_auteur=a.id_auteur $jointure_groupe", $critere, '', 'm.nom_famille, m.prenom, m.date_validite', sql_asso1page() );
 	$auteurs = '';
 	while ($data = sql_fetch($query)) {
 		$id_auteur = $data['id_auteur'];

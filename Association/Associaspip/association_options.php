@@ -2271,8 +2271,6 @@ function sql_asso1set($operateur='UNION', $q1=array(), $q2=array() ) {
 /** @} */
 
 
-
-
 /*****************************************
  * @defgroup association_passeparam
  * Les champs passes aux "exec" par l'URL etant normalises pour les filtres,
@@ -2401,8 +2399,6 @@ function association_passeparam_statut($type='', $defaut='') {
 /** @} */
 
 
-
-
 /*****************************************
  * @defgroup association_chargeparam
  * Charger des parametres comptables dans le contexte d'un formulaire
@@ -2423,17 +2419,14 @@ function association_chargeparam_operation($type, $id, &$contexte) {
 	}
 	$contexte['journal'] = $journal; // ajoute le  journal qui ne se trouve pas dans la table chargee par editer_objet_charger mais dans asso_comptes plutot
 	$contexte['_hidden'] .= "<input type='hidden' name='id_compte' value='$id_compte' />"; // on concatene aux _hidden de $contexte , id_compte qui sera utilise dans l'action
-	$contexte['classe_banques'] = $GLOBALS['association_metas']['classe_banques'];
+	$contexte['id_compte'] = $id_compte; // sera utilise par association_chargeparam_destinations()
 	return $contexte;
 }
 
 function association_chargeparam_destinations($type, &$contexte) {
-	if ($GLOBALS['association_metas']['destinations']) { // on ajoute les metas de destinations
-		$contexte['classe_banques'] = $GLOBALS['association_metas']['classe_banques'];
-		$contexte['destinations_on'] = TRUE;
+	if ($GLOBALS['association_metas']['destinations']) { // on ajoute au contexte : id_dest, montant_dest, defaut_dest ; ces variables sont recuperees par la balise dynamique directement dans l'environnement
 		include_spip('inc/association_comptabilite');
-		// on recupere les destinations associes a id_compte
-		$dest_id_montant = association_liste_destinations_associees($id_compte);
+		$dest_id_montant = association_liste_destinations_associees($contexte['id_compte']); // on recupere les destinations associes a id_compte
 		if (is_array($dest_id_montant)) {
 			$contexte['id_dest'] = array_keys($dest_id_montant);
 			$contexte['montant_dest'] = array_values($dest_id_montant);
@@ -2441,15 +2434,12 @@ function association_chargeparam_destinations($type, &$contexte) {
 			$contexte['id_dest'] = '';
 			$contexte['montant_dest'] = '';
 		}
-		$contexte['unique_dest'] = '';
-		$contexte['defaut_dest'] = ($type ? $GLOBALS['association_metas']["dc_$type"] : ''); // ces variables sont recuperees par la balise dynamique directement dans l'environnement
+		$contexte['defaut_dest'] = ($type ? $GLOBALS['association_metas']["dc_$type"] : '');
 	}
 	return $contexte;
 }
 
 /** @} */
-
-
 
 
 /*****************************************

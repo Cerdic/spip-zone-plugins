@@ -4,8 +4,8 @@
     <form name="formulaire_#FORM" method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<ul>
+[(#REM)<!-- Informations sur l'association -->]
 			<li class="fieldset">
-				<!-- Informations sur l'association -->
 				<fieldset>
 					<h3 class="legend"><:asso:config_info_asso:></h3>
 					<ul>
@@ -70,70 +70,8 @@
 					</ul>
 				</fieldset>
 			</li>
-[(#REM)<!-- DEB-conf :: petit morceau lie au CERFA_11580*3
-Cette fonctionnalite n'est possible que si le plugin "FPDF" est active... -->]
-		[(#PLUGIN{fpdf}|oui)
+[(#REM)<!-- Options de gestion des membres -->]
 			<li class="fieldset">
-				<!-- Options de recus fiscaux globaux -->
-				<fieldset>
-					<h3 class="legend"><:asso:config_info_recufiscal:></h3>
-					<ul>
-						<li class="editer_recufiscal">
-							<label for="recufiscal"><:asso:config_libelle_recufiscal:></label>
-							<select name="recufiscal" id="recufiscal">
-								<option value="0"[(#ENV{recufiscal}|=={0}|oui) selected="selected"]><:asso:config_libelle_recufisc0:></option>
-								<option value="1"[(#ENV{recufiscal}|=={1}|oui) selected="selected"]><:asso:config_libelle_recufisc1:></option>
-								<option value="2"[(#ENV{recufiscal}|=={2}|oui) selected="selected"]><:asso:config_libelle_recufisc2:></option>
-								<option value="3"[(#ENV{recufiscal}|=={3}|oui) selected="selected"]><:asso:config_libelle_recufisc3:></option>
-								<option value="4"[(#ENV{recufiscal}|=={4}|oui) selected="selected"]><:asso:config_libelle_recufisc4:></option>
-								<option value="5"[(#ENV{recufiscal}|=={5}|oui) selected="selected"]><:asso:config_libelle_recufisc5:></option>
-								<option value="6"[(#ENV{recufiscal}|=={6}|oui) selected="selected"]><:asso:config_libelle_recufisc6:></option>
-								<option value="7"[(#ENV{recufiscal}|=={7}|oui) selected="selected"]><:asso:config_libelle_recufisc7:></option>
-								<option value="8"[(#ENV{recufiscal}|=={8}|oui) selected="selected"]><:asso:config_libelle_recufisc8:></option>
-								<option value="9"[(#ENV{recufiscal}|=={9}|oui) selected="selected"]><:asso:config_libelle_recufisc9:></option>
-								<option value="10"[(#ENV{recufiscal}|=={10}|oui) selected="selected"]><:asso:config_libelle_recufisc10:></option>
-								<option value="11"[(#ENV{recufiscal}|=={11}|oui) selected="selected"]><:asso:config_libelle_recufisc11:></option>
-								<option value="12"[(#ENV{recufiscal}|=={12}|oui) selected="selected"]><:asso:config_libelle_recufisc12:></option>
-								<option value="13"[(#ENV{recufiscal}|=={13}|oui) selected="selected"]><:asso:config_libelle_recufisc13:></option>
-								<option value="14"[(#ENV{recufiscal}|=={14}|oui) selected="selected"]><:asso:config_libelle_recufisc14:></option>
-								<option value="15"[(#ENV{recufiscal}|=={15}|oui) selected="selected"]><:asso:config_libelle_recufisc15:></option>
-								<option value="16"[(#ENV{recufiscal}|=={16}|oui) selected="selected"]><:asso:config_libelle_recufisc16:></option>
-								<option value="17"[(#ENV{recufiscal}|=={17}|oui) selected="selected"]><:asso:config_libelle_recufisc17:></option>
-								<option value="18"[(#ENV{recufiscal}|=={18}|oui) selected="selected"]><:asso:config_libelle_recufisc18:></option>
-								<option value="19"[(#ENV{recufiscal}|=={19}|oui) selected="selected"]><:asso:config_libelle_recufisc19:></option>
-								<option value="20"[(#ENV{recufiscal}|=={20}|oui) selected="selected"]><:asso:config_libelle_recufisc20:></option>
-							</select>
-							<em class="explication"><:asso:config_aide_recufiscal:></em>
-						</li>
-						<li class="editer_infofiscal">
-							<label for="infofiscal"><:asso:config_libelle_infofiscal:></label>
-							<input type="text" name="infofiscal" [value="(#ENV{infofiscal})"] id="infofiscal" class="date" />
-							<em class="explication"><:asso:config_aide_infofiscal:></em>
-						</li>
-						<li class="editer_tauxfiscal">
-							<label for="tauxfiscal"><:asso:config_libelle_tauxfiscal:></label>
-							<input type="[(#HTML5|?{number,text})]" name="tauxfiscal" value="[(#ENV{tauxfiscal,100})]" id="tauxfiscal" class="number float rate" />
-						</li>
-						<li class="editer_codefiscal">
-							<label><:asso:config_libelle_codefiscal:></label>
-							<div class="choix">
-								<input type="checkbox" name="cgi200" [(#ENV{cgi200}|oui) checked="checked"] id="cgi200" />
-								<label for="cgi200"><:asso:config_libelle_cgi200:></label>
-								<br />
-								<input type="checkbox" name="cgi238" [(#ENV{cgi238}|oui) checked="checked"] id="cgi238" />
-								<label for="cgi238"><:asso:config_libelle_cgi238:></label>
-								<br />
-								<input type="checkbox" name="cgi885" [(#ENV{cgi885}|oui) checked="checked"] id="cgi885" />
-								<label for="cgi885"><:asso:config_libelle_cgi885:></label>
-							</div>
-						</li>
-					</ul>
-				</fieldset>
-			</li>
-		]
-[(#REM)<!-- FIN-conf :: petit morceau lie au CERFA_11580*3 -->]
-			<li class="fieldset">
-				<!-- Options de gestion des membres -->
 				<fieldset>
 					<h3 class="legend"><:asso:config_info_membres:></h3>
 					<ul>
@@ -228,16 +166,13 @@ Cette fonctionnalite n'est possible que si le plugin "FPDF" est active... -->]
 					</ul>
 				</fieldset>
 			</li>
-[(#REM)<!-- DEB-conf :: petit morceau lie aux listes a telecharger pour impression
-Cette fonctionnalite n'est possible que si le plugin "FPDF" est active... -->]
-		[(#PLUGIN{fpdf}|oui)
+[(#REM)<!-- DEB-conf :: PDF des listes a telecharger pour impression et CERFA -->][(#PLUGIN{fpdf}|oui)
 			<li class="fieldset">
-				<!-- Options des pages PDF -->
 				<fieldset>
 					<h3 class="legend"><:asso:config_libelle_fpdf:></h3>
-					<em class="explication"><:asso:config_aide_fpdf:></em>
 					<fieldset>
 						<legend><:asso:config_fpdf_page:></legend>
+						<em class="explication"><:asso:config_aide_fpdf:></em>
 						<ul>
 							<li class="editer_fpdf_orientation">
 								<label for="fpdf_orientation"><:asso:config_fpdf_orientation:></label>
@@ -287,7 +222,8 @@ Cette fonctionnalite n'est possible que si le plugin "FPDF" est active... -->]
 						</ul>
 					</fieldset>
 					<fieldset>
-						<legend><:asso:fpdf_table:></legend>
+						<legend><:asso:config_fpdf_table:></legend>
+						<em class="explication"><:asso:config_aide_fpdf:></em>
 						<ul>
 							<li>
 								<label for="fpdf_tablealign"><:asso:config_fpdf_tablealign:></label>
@@ -303,24 +239,76 @@ Cette fonctionnalite n'est possible que si le plugin "FPDF" est active... -->]
 							</li>
 							<li>
 								<label for="fpdf_rowhead"><:asso:config_fpdf_rowhead:></label>
-								<input type="text" class="palette" name="fpdf_rowhead" id="fpdf_rowhead" value="[(#ENV{fpdf_rowhead,FF9664})]" />
+								<input type="text" class="color palette" name="fpdf_rowhead" id="fpdf_rowhead" value="[(#ENV{fpdf_rowhead,FF9664})]" />
 							</li>
 							<li>
 								<label for="fpdf_roweven"><:asso:config_fpdf_roweven:></label>
-								<input type="text" class="palette" name="fpdf_roweven" id="fpdf_roweven" value="[(#ENV{fpdf_roweven,E0EBFF})]" />
+								<input type="text" class="color palette" name="fpdf_roweven" id="fpdf_roweven" value="[(#ENV{fpdf_roweven,E0EBFF})]" />
 							</li>
 							<li>
 								<label for="fpdf_rowodd"><:asso:config_fpdf_rowodd:></label>
-								<input type="text" class="palette" name="fpdf_rowodd" id="fpdf_rowodd" value="[(#ENV{fpdf_rowodd,FFFFFF})]" />
+								<input type="text" class="color palette" name="fpdf_rowodd" id="fpdf_rowodd" value="[(#ENV{fpdf_rowodd,FFFFFF})]" />
+							</li>
+						</ul>
+					</fieldset>
+					<fieldset>
+						<legend><:asso:config_info_recufiscal:></legend>
+						<ul>
+							<li class="editer_recufiscal">
+								<label for="recufiscal"><:asso:config_libelle_recufiscal:></label>
+								<select name="recufiscal" id="recufiscal">
+									<option value="0"[(#ENV{recufiscal}|=={0}|oui) selected="selected"]><:asso:config_libelle_recufisc0:></option>
+									<option value="1"[(#ENV{recufiscal}|=={1}|oui) selected="selected"]><:asso:config_libelle_recufisc1:></option>
+									<option value="2"[(#ENV{recufiscal}|=={2}|oui) selected="selected"]><:asso:config_libelle_recufisc2:></option>
+									<option value="3"[(#ENV{recufiscal}|=={3}|oui) selected="selected"]><:asso:config_libelle_recufisc3:></option>
+									<option value="4"[(#ENV{recufiscal}|=={4}|oui) selected="selected"]><:asso:config_libelle_recufisc4:></option>
+									<option value="5"[(#ENV{recufiscal}|=={5}|oui) selected="selected"]><:asso:config_libelle_recufisc5:></option>
+									<option value="6"[(#ENV{recufiscal}|=={6}|oui) selected="selected"]><:asso:config_libelle_recufisc6:></option>
+									<option value="7"[(#ENV{recufiscal}|=={7}|oui) selected="selected"]><:asso:config_libelle_recufisc7:></option>
+									<option value="8"[(#ENV{recufiscal}|=={8}|oui) selected="selected"]><:asso:config_libelle_recufisc8:></option>
+									<option value="9"[(#ENV{recufiscal}|=={9}|oui) selected="selected"]><:asso:config_libelle_recufisc9:></option>
+									<option value="10"[(#ENV{recufiscal}|=={10}|oui) selected="selected"]><:asso:config_libelle_recufisc10:></option>
+									<option value="11"[(#ENV{recufiscal}|=={11}|oui) selected="selected"]><:asso:config_libelle_recufisc11:></option>
+									<option value="12"[(#ENV{recufiscal}|=={12}|oui) selected="selected"]><:asso:config_libelle_recufisc12:></option>
+									<option value="13"[(#ENV{recufiscal}|=={13}|oui) selected="selected"]><:asso:config_libelle_recufisc13:></option>
+									<option value="14"[(#ENV{recufiscal}|=={14}|oui) selected="selected"]><:asso:config_libelle_recufisc14:></option>
+									<option value="15"[(#ENV{recufiscal}|=={15}|oui) selected="selected"]><:asso:config_libelle_recufisc15:></option>
+									<option value="16"[(#ENV{recufiscal}|=={16}|oui) selected="selected"]><:asso:config_libelle_recufisc16:></option>
+									<option value="17"[(#ENV{recufiscal}|=={17}|oui) selected="selected"]><:asso:config_libelle_recufisc17:></option>
+									<option value="18"[(#ENV{recufiscal}|=={18}|oui) selected="selected"]><:asso:config_libelle_recufisc18:></option>
+									<option value="19"[(#ENV{recufiscal}|=={19}|oui) selected="selected"]><:asso:config_libelle_recufisc19:></option>
+									<option value="20"[(#ENV{recufiscal}|=={20}|oui) selected="selected"]><:asso:config_libelle_recufisc20:></option>
+								</select>
+								<em class="explication"><:asso:config_aide_recufiscal:></em>
+							</li>
+							<li class="editer_infofiscal">
+								<label for="infofiscal"><:asso:config_libelle_infofiscal:></label>
+								<input type="text" name="infofiscal" [value="(#ENV{infofiscal})"] id="infofiscal" class="date" />
+								<em class="explication"><:asso:config_aide_infofiscal:></em>
+							</li>
+							<li class="editer_tauxfiscal">
+								<label for="tauxfiscal"><:asso:config_libelle_tauxfiscal:></label>
+								<input type="[(#HTML5|?{number,text})]" name="tauxfiscal" value="[(#ENV{tauxfiscal,100})]" id="tauxfiscal" class="number float rate" />
+							</li>
+							<li class="editer_codefiscal">
+								<label><:asso:config_libelle_codefiscal:></label>
+								<div class="choix">
+									<input type="checkbox" name="cgi200" [(#ENV{cgi200}|oui) checked="checked"] id="cgi200" />
+									<label for="cgi200"><:asso:config_libelle_cgi200:></label>
+									<br />
+									<input type="checkbox" name="cgi238" [(#ENV{cgi238}|oui) checked="checked"] id="cgi238" />
+									<label for="cgi238"><:asso:config_libelle_cgi238:></label>
+									<br />
+									<input type="checkbox" name="cgi885" [(#ENV{cgi885}|oui) checked="checked"] id="cgi885" />
+									<label for="cgi885"><:asso:config_libelle_cgi885:></label>
+								</div>
 							</li>
 						</ul>
 					</fieldset>
 				</fieldset>
 			</li>
-		]
-[(#REM)<!-- FIN-conf :: petit morceau lie aux listes a telecharger pour impression -->]
-[(#REM)<!-- DEB-conf :: gros morceau lie a la compta
-Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" est active... -->]
+][(#REM)<!-- FIN-conf :: PDF -->]
+[(#REM)<!-- DEB-conf :: Compta -->]
 		<B_plan_comptable>
 			<li class="fieldset">
 				<!-- Options du plugin: gestion comptable -->
@@ -328,22 +316,48 @@ Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" es
 					<h3 class="legend"><:asso:config_libelle_comptes:></h3>
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{comptes})</span>]
 					<ul>
-						<li>
-							<div class="choix">
-								<input type="checkbox" name="plan_comptable_prerenseigne" [(#ENV{plan_comptable_prerenseigne}|oui) checked="checked"] id="plan_comptable_prerenseigne" />
-								<label for="plan_comptable_prerenseigne"><:asso:config_plan_comptable_prerenseigne:></label>
-							</div>
-						</li>
 						<li class="editer_comptes">
 							<div class="choix">
 								<input name= "comptes" [(#ENV{comptes}|oui) checked="checked"] id="comptes" type="checkbox"/>
 								<label for="comptes"><:asso:config_libelle_activer_comptes:></label>
 							</div>
 						</li>
+					</ul>
+					<fieldset>
+						<legend><:asso:destinations:></legend>
+					<ul>
 						<li class="editer_destinations">
 							<div class="choix">
 								<input type="checkbox" name="destinations" [(#ENV{destinations}|oui) checked="checked"] id="destinations" />
 								<label for="destinations"><:asso:config_libelle_destinations:></label>
+							</div>
+						</li>
+						<li class="editer_destination1">
+							<div class="choix">
+								<input type="checkbox" name="unique_dest" [(#ENV{unique_dest}|oui) checked="checked"] id="destination1" />
+								<label for="destination1"><:asso:config_libelle_destination1:></label>
+							</div>
+						</li>
+					</ul>
+					</fieldset>
+					<fieldset>
+						<legend><:asso:exercices:></legend>
+					<ul>
+						<li class="editer_exercices">
+							<div class="choix">
+								<input type="checkbox" name="exercices" [(#ENV{exercices}|oui) checked="checked"] id="exercices" />
+								<label for="exercices"><:asso:config_libelle_exercices:></label>
+							</div>
+						</li>
+					</ul>
+					</fieldset>
+					<fieldset>
+						<legend><:asso:plan_comptable:></legend>
+					<ul>
+						<li>
+							<div class="choix">
+								<input type="checkbox" name="plan_comptable_prerenseigne" [(#ENV{plan_comptable_prerenseigne}|oui) checked="checked"] id="plan_comptable_prerenseigne" />
+								<label for="plan_comptable_prerenseigne"><:asso:config_plan_comptable_prerenseigne:></label>
 							</div>
 						</li>
 						<li class="editer_classe_banques">
@@ -412,6 +426,7 @@ Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" es
 							</select>
 						</li>
 					</ul>
+					</fieldset>
 				</fieldset>
 			</li>
 		[(#REM)<!-- S'il y a des comptes actifs, on peut configurer la compta et les les modules lies a la compta (mais il faut activer la compta pour activer ces modules) ... -->]
