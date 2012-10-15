@@ -190,14 +190,14 @@
 	Mélange deux couleurs.
 </p>
 <dl class="dl-horizontal">
-	<dt>syntaxes</dt>
+	<dt>syntaxe</dt>
 	<dd><code>|couleur_melanger{couleurB, 50}</code></dd>
-	<dd><code>#VAL{"#LISTE{couleurA, couleurB}|couleur_melanger{50}"}</code></dd>
+	<!--<dd><code>#VAL{"#LISTE{couleurA, couleurB}|couleur_melanger{50}"}</code></dd>-->
 	<dt>argument</dt>
 	<dd><code>nombre entre 0 et 100</code> <small>(défaut=50)</small></dd>
 	<dt>exemples</dt>
 	<dd><code class="exemple">#VAL{"#VAL{ff4900}|couleur_melanger{c5e41d, 50}"}</code></dd>
-	<dd><code class="exemple">#VAL{"#LISTE{ff4900, c5e41d}|couleur_melanger{50}"}</code></dd>
+	<!--<dd><code class="exemple">#VAL{"#LISTE{ff4900, c5e41d}|couleur_melanger{50}"}</code></dd>-->
 </dl>
 <BOUCLE_melanger(DATA){source table, #ARRAY{#GET{couleur1},#GET{couleur2}, #GET{couleur2},#dddddd, #ff4900, #GET{couleur1}}}>
 <div class="apercu nuances">
