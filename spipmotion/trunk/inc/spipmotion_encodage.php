@@ -595,7 +595,7 @@ function encodage($source,$options){
 	else{
 		$infos_encodage['fin_encodage'] = time();
 		$infos_encodage['log'] = spip_file_get_contents($fichier_log);
-		$ret['info'] = $infos_encodage;
+		$ret['infos'] = $infos_encodage;
 		$ret['erreur'] = 'Encodage en erreur';
 		$ret['success'] = false;
 	}
