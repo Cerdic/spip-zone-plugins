@@ -3,7 +3,9 @@
 [(#ENV{titre}|oui)
 	#SET{titre, #ENV*{titre}|typo}
 ]
-
+[(#ENV{titre_connecter}|oui)
+	#SET{titre_connecter, #ENV*{titre_connecter}|typo}
+]
 [(#ENV{appel_formulaire}|oui)
 	<div class="titre">#GET{titre}</div>
 	<div class="infos"> </div>
