@@ -1,0 +1,58 @@
+/*
+Ceci est le fichier CSS du
+Layout Gala N° 39
+de
+http://blog.html.it/layoutgala/
+*/
+/*
+html,body{margin:0;padding:0}
+body{font: 76% arial,sans-serif;text-align:center}
+p{margin:0 10px 10px}
+a{display:block;color: #006;padding:10px}
+div#header{position:relative}
+div#header h1{height:80px;line-height:80px;margin:0;
+padding-left:10px;background: #EEE;color: #79B30B}
+div#header a{position:absolute;right:0;top:23px}
+div#container{text-align:left}
+div#content p{line-height:1.4}
+div#navigation{background:#B9CAFF}
+div#extra{background:#FF8539}
+div#footer{background: #333;color: #FFF}
+div#footer p{margin:0;padding:5px 10px}
+div#footer a{display:inline;padding:0;color: #C6D5FD}
+
+div#container{width:700px;margin:0 auto}
+div#navigation{float:left;width:350px}
+div#extra{float:right;width:350px}
+div#footer{clear:both;width:100%}
+*/
+
+// The Layout
+#layoutgala39 {
+
+  .core(@WcolContent, @WcolAside, @WcolExtra, @gridColumnWidth, @gridGutterWidth) {
+
+    div#container{margin:0 auto}
+    div#wrapper {float: none;}
+    div#content{
+      margin-left: 0;
+      margin-right: 0;
+      float: none;
+      width: 100%;
+    }
+    div#aside{
+      clear: both;
+      margin: 0;
+      float: left;
+      width: @WcolAside;
+    }
+    div#extra{
+      clear: none;
+      margin: 0;
+      float: right;
+      width: @WcolExtra;
+    }
+
+    div#footer{clear:left;width:100%}
+  }
+}
