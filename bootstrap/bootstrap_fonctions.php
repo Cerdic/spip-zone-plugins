@@ -17,7 +17,7 @@ function filtre_lien_ou_expose_dist($url,$libelle=NULL,$on=false,$class="",$titl
 					$att = 'href="#" ';
 			}
 		}
-		$att .= 'class="on active'.($class?' '.attribut_html($class):'').'"';
+		$att .= 'class="'.($class?attribut_html($class).' ':'').'on active"';
 	} else {
 		$bal = 'a';
 		$att = "href='$url'"
