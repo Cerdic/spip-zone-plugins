@@ -9,5 +9,5 @@
 	<prefix>pdfjs</prefix>
 	<categorie>multimedia</categorie>
 	<necessite id="SPIP" version="[2.0.0;]" />
-	<utilise nom="gviewer" />
+	<utilise id="gviewer" />
 </plugin>
