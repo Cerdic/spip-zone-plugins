@@ -1,7 +1,7 @@
 <paquet
 	prefix="spipmotion"
 	categorie="multimedia"
-	version="1.1.5"
+	version="1.1.6"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/spipmotion.png"
@@ -30,11 +30,11 @@
 	<pipeline nom="recuperer_fond" inclure="spipmotion_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[1.25.7;[" />
-	<utilise nom="getid3" compatibilite="[1.1.3;[" />
 	<necessite nom="medias" compatibilite="[2.7.30;[" />
 	<necessite nom="jqueryui" compatibilite="[1.8.20;[" />
 	<necessite nom="facd" compatibilite="[0.1.0;[" />
 
+	<utilise nom="getid3" compatibilite="[1.1.3;[" />
 	<utilise nom="podcast" />
 	<utilise nom="licence" />
 	<utilise nom="fonctions_images" />

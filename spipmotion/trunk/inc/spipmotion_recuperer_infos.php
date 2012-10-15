@@ -65,9 +65,10 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 		}
 		if($flvtoolplus['flvtoolplus']){
 			$fichier_tmp = $fichier.'_tmp';
+			$soft = 'flvtoolplus';
 			$metadatas_flv = "flvtool++ $fichier $fichier_tmp";
-			
 		}else if($flvtool2['flvtool2']){
+			$soft = 'flvtool2';
 			$metadatas_flv = "flvtool2 -xUP $fichier";
 		}
 		if($metadatas_flv){
@@ -75,14 +76,11 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 		}
 	}
 	if(in_array($extension,array('mov','mp4','m4v')) && !$GLOBALS['meta']['spipmotion_qt-faststart_casse']){
-		exec("qt-faststart $fichier $fichier._temp",$retour,$retour_int);
+		exec("qt-faststart $fichier $fichier._tmp",$retour,$retour_int);
 	}
 	
 	if(file_exists($fichier.'._tmp')){
 		rename($fichier.'._tmp',$fichier);
-	}
-	if(file_exists($fichier.'._temp')){
-		rename($fichier.'._temp',$fichier);
 	}
 	
 	/**
@@ -122,7 +120,21 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 		}
 	}
 	$infos['taille'] = @intval(filesize($fichier));
-
+	
+	/**
+	 * La récupération de duree est importante
+	 * pour les vignettes
+	 * Si le logiciel de récupération de métadonnées ne sait pas la récupérer, on utilise celle du document original
+	 */
+	if(!$infos['duree'] && ($document['mode'] == 'conversion')){
+		spip_log('récupération de la durée','spipmotion');
+		$doc_orig = sql_getfetsel('lien.id_objet',
+							'spip_documents as document LEFT JOIN spip_documents_liens as lien ON document.id_document=lien.id_document',
+							'lien.objet="document" AND lien.id_document='.intval($id_document));
+		$duree = sql_getfetsel('duree','spip_documents','id_document='.intval($doc_orig));
+		if($duree > 0)
+			$infos['duree'] = $duree;
+	}
 	// Filesize tout seul est limité à 2Go
 	// cf http://php.net/manual/fr/function.filesize.php#refsect1-function.filesize-returnvalues
 	if($infos['taille'] == '2147483647'){
@@ -131,13 +143,14 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 	
 	if($logo){
 		$recuperer_logo = charger_fonction("spipmotion_recuperer_logo","inc");
-		$id_vignette = $recuperer_logo($id_document,2,$fichier,$infos,true);
+		$id_vignette = $recuperer_logo($id_document,1,$fichier,$infos,true);
 		spip_log('l id vignette est '.$id_vignette);
 		if(intval($id_vignette))
 			$infos['id_vignette'] = $id_vignette;
 	}else{
 		spip_log('on ne récup pas de logo');
 	}
+
 	/**
 	 * Si on a $only_return à true, on souhaite juste retourner les metas, sinon on les enregistre en base
 	 * Utile pour metadatas/video par exemple

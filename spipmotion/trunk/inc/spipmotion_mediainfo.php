@@ -188,7 +188,6 @@ function inc_spipmotion_mediainfo_dist($chemin){
 	}
 
 	$metas['Retrieved infos in database'] = $infos;
-	spip_log($infos,'spipmotion');
 	$infos['metadatas'] = serialize($metas);
 	return $infos;
 }
