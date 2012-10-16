@@ -13,7 +13,7 @@ include_spip('inc/meta');
  * @param unknown_type $nom_meta_base_version
  * @param unknown_type $version_cible
  */
-function Grappes_upgrade($nom_meta_base_version,$version_cible){
+function grappes_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
@@ -43,7 +43,7 @@ function Grappes_upgrade($nom_meta_base_version,$version_cible){
  *
  * @param unknown_type $nom_meta_base_version
  */
-function Grappes_vider_tables($nom_meta_base_version) {
+function grappes_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_grappes");
 	sql_drop_table("spip_grappes_liens");
 	effacer_meta($nom_meta_base_version);

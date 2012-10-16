@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'icone_creation_grappe' => 'Create a new bunch',
-'icone_modif_grappe' => 'Modify this bunch',
+'icone_modifier_grappe' => 'Modify this bunch',
 'icone_supprimer_grappe' => 'Delete this bunch',
 'icone_voir_toutes_grappes' => 'View all bunches',
 'info_acces_0minirezo' => 'Administrators',

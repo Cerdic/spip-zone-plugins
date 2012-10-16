@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'icone_creation_grappe' => 'Neue Traube anlegen',
-'icone_modif_grappe' => 'Traube bearbeiten',
+'icone_modifier_grappe' => 'Traube bearbeiten',
 'icone_supprimer_grappe' => 'Traube l&ouml;schen',
 'icone_voir_toutes_grappes' => 'Alle Trauben zeigen',
 'info_acces_0minirezo' => 'Administratoren',

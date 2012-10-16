@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'icone_creation_grappe' => 'Crear un nuevo racimo',
-'icone_modif_grappe' => 'Modificar este racimo',
+'icone_modifier_grappe' => 'Modificar este racimo',
 'icone_supprimer_grappe' => 'Suprimir este racimo',
 'icone_voir_toutes_grappes' => 'Ver todos los racimos',
 'info_acces_0minirezo' => 'Administradores/as',

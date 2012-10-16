@@ -1,7 +1,6 @@
-<div class="lier_objets ajax" id="#ENV{identifiant}">
+<div class="formulaire_spip formulaire_editer formulaire_editer_liens formulaire_lier_objets ajax" id="#ENV{identifiant}">
 	[(#REM) Les liens actifs ]
-	[(#INCLURE{fond=prive/listes/inc-lister-#OBJET}
-		{env}{ajax}{action=delier}{editable})]
+	[(#INCLURE{fond=prive/objets/liste/grappes-[(#OBJET)]_lies,env,ajax,editable})]
 
 	[(#REM) Recherche pour ajouter de nouvelles liaisons ]
 	[(#ENV{editable})
@@ -23,5 +22,4 @@
 		</ul>
 	</form>
 	</div>]
-
 </div>
