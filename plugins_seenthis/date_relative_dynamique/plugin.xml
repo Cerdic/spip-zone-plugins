@@ -1,12 +1,16 @@
 <plugin>
 	<nom>Dates relatives dynamiques</nom>
 	<auteur>ARNO* / [Seenthis.net->http://seenthis.net]</auteur>
-	<version>1</version>
+	<version>1.2</version>
 	<etat>stable</etat>
 	<licence>GPL</licence>	
 	<description>Ce plugin affiche dynamiquement les dates relatives. Les affichages concernés doivent adopter la syntaxe:
 	<cadre>
 	<div class="calcul_date" title="[(#DATE|date_u)]">[(#DATE|affdate_court)]</div>
+	</cadre>
+	mais également la notation HTML5:
+	<cadre>
+	<time class="calcul_date" datetime="[(#DATE|date_iso)]">[(#DATE|affdate_court)]</time>
 	</cadre>
 	</description>
 	<prefix>calcul_date</prefix>

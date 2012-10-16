@@ -39,8 +39,12 @@ function afficher_dates() {
 	setTimeout("afficher_dates()", 1000);
 	
 	$(".calcul_date").each(function() {
-		var date = Math.floor($(this).attr("title")) - date_diff;
-		
+		if ($(this).attr("title")) var date = Math.floor($(this).attr("title")) - date_diff;
+		else if ($(this).attr("datetime")) {
+			var date = new Date($(this).attr("datetime")); 
+			date = Math.floor(date.getTime()/1000) - date_diff;
+		}
+
 		// L'age de l'article depend du serveur
 		// l'age affichee depend du client
 		age = date_now - date;
