@@ -75,13 +75,13 @@
 	<dt>syntaxe</dt>
 	<dd><code>|couleur_teinter{30}</code></dd>
 	<dt>argument</dt>
-	<dd><code>nombre entre -363 et 363</code> <small>(défaut = 30)</small></dd>
+	<dd><code>nombre entre -360 et 360</code> <small>(défaut = 30)</small></dd>
 	<dt>exemple</dt>
 	<dd><code class="exemple">#VAL{"#VAL{c5e41d}|couleur_teinte{30}"}</code></dd>
 </dl>
 <BOUCLE_teinter(DATA){liste #GET{couleur1},#GET{couleur2}}>
 <div class="apercu nuances">
-	<BOUCLE_teinterbis(DATA){liste -363,-150,-120,-90,-60,-30,0,30,60,90,120,150,363}>
+	<BOUCLE_teinterbis(DATA){liste -360,-150,-120,-90,-60,-30,0,30,60,90,120,150,360}>
 	#SET{couleur, ##_teinter:VALEUR|couleur_teinter{#VALEUR}}
 	[(#VALEUR|=={0}|oui)
 	<div class="nuance on" style="background-color:[(#_teinter:VALEUR)]; color:[#(#_teinter:VALEUR|couleur_extreme|couleur_inverser)];"><p><strong>#_teinter:VALEUR</strong></p></div>
