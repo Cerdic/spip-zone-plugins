@@ -189,7 +189,8 @@ function image_saturer($im, $sat=1){
 					$s = $hsv["s"];
 					$v = $hsv["v"];
 
-					$s = $s * $sat;									$s = min($s,1);
+					$s = $s * $sat;
+					$s = min($s,1);
 
 					$rgb = image_hsv2rgb($h,$s,$v);
 					$r = $rgb["r"];
@@ -198,7 +199,8 @@ function image_saturer($im, $sat=1){
 
 				}
 				$color = ImageColorAllocateAlpha( $im_, $r, $g, $b , $a );
-				imagesetpixel ($im_, $x, $y, $color);				}
+				imagesetpixel ($im_, $x, $y, $color);
+			}
 		}
 		_image_gd_output($im_,$image);
 		imagedestroy($im_);
@@ -246,6 +248,9 @@ function image_niveaux_gris_auto($im, $limite=1000) {
 				$g = round($a*$g);
 				$b = round($a*$b);
 
+				if (!isset($val_gris[$gris])) {
+					$val_gris[$gris]=0;
+				}
 				$val_gris[$gris] ++;
 			}
 		}
@@ -468,7 +473,7 @@ function image_float ($img, $align, $margin=10) {
 	$dest = $image["fichier_dest"];
 	$creer = $image["creer"];
 
-	$ret .= "<div style='position: relative; float: $align; width: 0px; height: 0px;'><img src='$im' class='format_png' alt='' style='position: absolute; $align: 0px;' /></div>";
+	$ret = "<div style='position: relative; float: $align; width: 0px; height: 0px;'><img src='$im' class='format_png' alt='' style='position: absolute; $align: 0px;' /></div>";
 
 	if ($creer) {
 		$nouveau = _image_valeurs_trans(image_reduire($im, 0, $precision),"");
