@@ -27,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_conversion_non' => 'Čaká',
 	'info_statut_conversion_oui' => 'Konvertovaný',
 	'info_tous_docs_facd' => 'Dokumenty v rade',
+	'info_voir_log_erreur' => 'Voir le log d\'erreur', # NEW
 
 	// L
 	'label_relancer_conversion' => 'Relancer la conversion', # NEW
@@ -48,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'thead_id_document' => 'Pôvodný dokument', # MODIF
 	'thead_nombre' => 'Počet',
 	'thead_statut' => 'Stav',
+	'titre_log_conversion' => 'Contenu du log de conversion #@id@', # NEW
 	'titre_page_file' => 'Rad modulu na konverziu médií', # MODIF
 	'titre_page_file_convertis_jour' => 'Konverzie podľa dátumu',
 	'titre_page_file_menu' => 'Rad na konverziu',
