@@ -141,6 +141,7 @@ function zotspip_maj_items($forcer=false, $n=50) {
 				'caseName' => 'titre',
 				'codePages' => 'pages',
 				'company' => 'editeur',
+				'contentType' => 'mimetype',
 				'date' => 'date',
 				'dateDecided' => 'date',
 				'dateEnacted' => 'date',
