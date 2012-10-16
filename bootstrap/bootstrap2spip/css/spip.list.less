@@ -25,7 +25,6 @@ Un item est compose de :
 @listBorderColor : (4*(@bodyBackground/5)+@gray/5);
 
 .liste {margin-bottom: @baseLineHeight};
-.liste.short {margin-bottom: @baseLineHeight / 2};
 .liste.long {margin-bottom: @baseLineHeight*2;}
 
 .liste-items {margin-left: 0; list-style: none; border-bottom:0;border-top: 1px solid @listBorderColor;}
@@ -49,13 +48,14 @@ Un item est compose de :
 
 .liste-items {
   .info-publi,.meta-publi {display: none;}
+  .meta-publi .tags {ul,li {display: inline;}}
 }
 .long .liste-items,.liste-items.long {
-  .item {position: relative;}
+  .entry {position: relative;padding-bottom: @baseLineHeight;}
   .info-publi {display: block;}
-  .entry-content {margin-bottom: @baseLineHeight+@baseFontSize;}
-  .meta-publi {display:block;min-height: @baseLineHeight;padding:@paddingLarge;padding-left: 2em;margin-bottom: 0;position: absolute;bottom:0;left:0;}
-  .lire-la-suite {display:block; position: absolute;z-index: 10;bottom:0;left:0;text-align: right;padding:@paddingLarge;padding-left:0;line-height: @baseLineHeight;font-size: @baseFontSize;}
+  .entry-content {}
+  .meta-publi {display:block;min-height: @baseLineHeight;padding:@paddingLarge;padding-left: 2em;padding-bottom: 0;margin-bottom: -@baseLineHeight;}
+  .lire-la-suite {display:block; position: absolute;z-index: 10;bottom:0;left:0;text-align: right;padding:@paddingLarge;padding-left:0;padding-bottom: 0;line-height: @baseLineHeight;font-size: @baseFontSize;}
 }
 
 .short .liste-items,.liste-items.short {
@@ -63,6 +63,7 @@ Un item est compose de :
   .entry-title {font-size: inherit;line-height: inherit;display: inline;}
   .info-publi,.spip_logos,.entry-content,.meta-publi,lire-la-suite {display: none;}
   .entry > :not(.entry-title) {display: none;}
+  .entry, .entry-title {display: inline;}
 }
 
 
