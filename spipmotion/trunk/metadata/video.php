@@ -18,7 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $file : le chemin du fichier à analyser
  * @return array $metas : le tableau comprenant les différentes metas à mettre en base
  */
-function metadata_video_dist($file,$extension){
+function metadata_video_dist($file){
 	$metas = array();
 	$spipmotion_recuperer_infos = charger_fonction('spipmotion_recuperer_infos','inc');
 	$metas = $spipmotion_recuperer_infos(false,$file,true,true);
