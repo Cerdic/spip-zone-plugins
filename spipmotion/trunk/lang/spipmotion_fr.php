@@ -189,6 +189,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_encodage_unique_erreur' => 'Le document @id_document@ n\'a pas été correctement encodé en @extension@.',
 	'message_encodage_unique_oui' => 'Le document @id_document@ a été correctement encodé en @extension@.',
 	'message_erreur_spipmotion_sh_vignettes' => 'Le script de génération de vignettes automatique n\'est pas accesssible. Cette fonctionnalité est donc désactivée.',
+	'message_sans_piste_audio' => 'Ce document n\'a pas de piste audio',
 	'message_texte_binaire_manquant' => 'Un logiciel nécessaire n\'est pas disponible sur votre serveur :',
 	'message_texte_binaires_informer' => 'Veuillez en informer votre administrateur.',
 	'message_texte_binaires_informer_exec' => 'Votre configuration de PHP ne permet pas d\'exécuter d\'applications.',

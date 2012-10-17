@@ -85,7 +85,7 @@
 						<:spipmotion:info_audiobitrate:>
 					</td>
 					<td >
-					<strong>(#AUDIOBITRATE|div{1000}|floor) kb/s</strong>
+					<strong>(#HASAUDIO|=={oui}|?{[(#AUDIOBITRATE|div{1000}|floor) kb/s],<:spipmotion:message_sans_piste_audio:>})</strong>
 					</td>
 				</tr>]
 
