@@ -56,7 +56,9 @@ function grappes_declarer_tables_objets_sql($tables){
 		'texte_objet' => 'grappes:titre_grappe',
 		'texte_objets' => 'grappes:titre_grappes',
 		'texte_logo_objet' => 'grappes:titre_logo_grappe',
+		'texte_creer' => 'grappes:icone_creation_grappe',
 		'texte_modifier' => 'grappes:icone_modifier_grappe',
+		'info_aucun_objet' => 'grappes:info_aucune_grappe'
 	);
 	return $tables;
 }
