@@ -7,62 +7,24 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Licence GPL (c) 2008 Matthieu Marcillaud
  */
 
-function grappes_inserer_js_recherche_objet(){
-		$contenu =
-<<<EOS
-		function rechercher_objet(id_selecteur, page_selection) {
-			// chercher l'input de saisie
-			var me = jQuery(id_selecteur+' input[name=nom_objet]');
-			me.autocomplete(
-					{
-						source: function( request, response ) {
-							$.ajax({
-								url: page_selection,
-								data:{
-									q:extractLast( request.term )
-								},
-								success: function(data) {
-									datas = selecteur_format(data);
-									response( $.map( datas, function( item ) {
-										return item;
-									}));
-								}
-							});
-						},
-						delay: 200,
-						select:function( event, ui ) {
-							if (ui.item.result > 0) {
-								jQuery(id_selecteur + ' #pid_objet').val(ui.item.result);
-								jQuery(id_selecteur + ' input[type="submit"]').focus();
-								jQuery(me)
-									.end();
-							}else{
-								return ui.item.entry;
-							}
-							return false;
-						}
-					}
-				);
-			}
-EOS;
-	return $contenu;
-}
-
+/**
+ * Insertion dans les pipelines insert_head et header_prive
+ * Insérer les js du séleceteur générique s'ils ne sont pas déjà là
+ *
+ * @param string $flux
+ */
 function grappes_inserer_javascript($flux){
 	include_spip('selecteurgenerique_fonctions');
 	$flux .= selecteurgenerique_verifier_js($flux);
-
-	$js = grappes_inserer_js_recherche_objet();
-	$js = "<script type='text/javascript'><!--\n$js\n// --></script>\n";
-
-	return $flux.$js;
+	return $flux;
 }
 
 /**
- * Ajoute aux pages qui peuvent etres lies a une grappe
- * un formulaire pour lister les grappes lies
- * et en ajouter de nouvelles
-**/
+ * Insertion dans le pipeline afficher_contenu_objet
+ * Ajouter le bloc des grappes aux pages qui peuvent êtres liées à une grappe
+ * 
+ * @param array $flux La liste des champs pour les diogenes
+ */
 function grappes_afficher_contenu_objet($flux){
 	if ($objet = $flux['args']['type']
 		//and in_array(table_objet_sql($objet), pipeline('grappes_objets_lie', array()))

@@ -15,11 +15,29 @@
 			<li class="nom_objet [ (#ENV**{erreurs}|table_valeur{nom_objet}|oui)erreur]">
 				<label for="nom_objet"><:grappes:bouton_chercher:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_objet})</span>]
-				<input type='text' class='text' name='nom_objet' id='nom_objet' value="#ENV{nom_objet}" onclick="jQuery(this).val('');jQuery('[#(#ENV{selecteur})] #pid_objet').val('');" />
-				<input type="hidden" name="pid_objet" id="pid_objet" value="" />
+				<input type='text' class='text' name='nom_objet' value="#ENV{nom_objet}" data-selecteur="[(#VAL{grappes_#OBJET}|parametre_url{#SOURCE,#ID_SOURCE,&})]" data-select-callback="lier_objets_#ENV{identifiant}" />
+				<input type="hidden" class="pid_objet" name="pid_objet" value="" />
 				<input type='submit' class='submit' value='<:grappes:bouton_ajouter:>' />
 			</li>
 		</ul>
 	</form>
 	</div>]
+	<script type="text/javascript">
+	<!--
+		var lier_objets_#ENV{identifiant} = function(event,ui){
+			console.log(ui);
+			if (typeof(ui) != 'undefined' && (typeof(ui.item.value) == 'string')) {
+				$('[#(#ENV{identifiant}) ].pid_objet').val(ui.item.id);
+				this.value = ui.item.value;
+				$('[#(#ENV{identifiant}) ]input[type="submit"]').focus();
+				event.preventDefault();
+			}
+			else if (typeof(ui) != 'undefined'){
+				$('[#(#ENV{identifiant}) ].pid_objet').val('');
+				this.value = ui.item.value;
+			}
+			return false;
+		}
+	-->
+	</script>
 </div>

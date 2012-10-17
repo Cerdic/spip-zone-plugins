@@ -8,8 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('action/editer_liens');
 
-function action_lier_objets_dist()
-{
+function action_lier_objets_dist(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
@@ -36,7 +35,11 @@ function action_lier_objets_dist()
 
 
 function lier_objets($source,$id_source,$cible,$id_cible){
-	objet_associer(array($source=>$id_source),array($cible=>$id_cible));
+	// si la source n'est pas une grappe un inverse le sens de la liaison pour matcher l'autorisation grappe_associer
+	if ($source != 'grappe')
+		objet_associer(array($cible=>$id_cible),array($source=>$id_source));
+	else
+		objet_associer(array($source=>$id_source),array($cible=>$id_cible));
 }
 
 function delier_objets($source,$id_source,$cible,$id_cible){

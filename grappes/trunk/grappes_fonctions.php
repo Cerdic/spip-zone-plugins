@@ -21,7 +21,7 @@ function autoriser_grappe_associer_dist($faire, $type, $id, $qui, $opt){
 		$acces = is_array($options['acces'])?$options['acces']:array('0minirezo');
 	}
 	// tester le statut de l'auteur
-	if (!in_array($qui['statut'],$acces) OR ($res['id_admin'] == $qui['id_auteur']))
+	if (!in_array($qui['statut'],$acces) OR ($res['id_admin'] != $qui['id_auteur']))
 		return false;
 
 	// tester si l'on a le droit d'ajouter cet objet
