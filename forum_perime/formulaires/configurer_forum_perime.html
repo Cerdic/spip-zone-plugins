@@ -1,0 +1,27 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+  
+  <h3 class='titrem'>[(#CHEMIN_IMAGE{forum_perime-24.png}|balise_img{'',cadre-icone})]<:forum_perime:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+    <ul>
+    
+    #SET{erreurs,#ENV**{erreurs}|table_valeur{duree}}
+    <li class="editer editer_duree[ (#GET{erreurs}|oui)erreur]">
+      	<label><:forum_perime:label_duree:></label>
+      	[<span class='erreur_message'>(#GET{erreurs})</span>]
+      	<p class='explication'><:forum_perime:duree:></p>
+      	<input type="text" name="duree" class="text" size="3" id='duree' value="[(#ENV{duree}|intval)]" />
+    </li>
+    
+    </ul>
+
+		<input type="hidden" name="_meta_casier" value="forum_perime" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
