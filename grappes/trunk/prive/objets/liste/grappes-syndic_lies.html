@@ -1,7 +1,7 @@
 #SET{selection,#ENV{objet}|objet_type|lister_objets_lies{grappe,#ID_GRAPPE,grappe}}
 <B_liste>
 #ANCRE_PAGINATION
-<div class="liste-objets liste-objets-lies sites">
+<div class="liste-objets liste-objets-lies syndic">
 <table class='spip liste'>
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_site,info_nb_sites}})</strong></caption>]
 	<tbody>
@@ -19,5 +19,5 @@
 [<p class="pagination">(#PAGINATION{prive})</p>]
 </div>
 </B_liste>
-<div class="liste-objets liste-objets-lies auteurs caption-wrap"><strong class="caption"><:info_aucun_site:></strong></div>
+<div class="liste-objets liste-objets-lies syndic caption-wrap"><strong class="caption"><:info_aucun_site:></strong></div>
 <//B_liste>
