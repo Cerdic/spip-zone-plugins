@@ -53,6 +53,12 @@ function zotspip_vider_tables($nom_meta_version_base){
 	// On efface la configuration et l'état de la synchronisation
 	effacer_meta('zotspip');
 	effacer_meta('zotspip_maj_items');
+	
+	// On efface les fichiers distants
+	include_spip('inc/invalideur');
+	purger_repertoire(_DIR_VAR."cache-zotspip/");
+	include_spip('inc/flock');
+	spip_unlink(_DIR_VAR."cache-zotspip/");
 }
 
 // Installer le schéma de données Zotero (schéma mis à jour le 19 mars 2012)

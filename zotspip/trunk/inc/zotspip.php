@@ -201,6 +201,14 @@ function zotspip_maj_items($forcer=false, $n=50) {
 				if (isset($data[$zot]))
 					$insertion[$spip] = $data[$zot];
 			
+			// Vider le cache des documents distants
+			if ($insertion['type'] == 'attachment') {
+				include_spip('inc/invalideur');
+				purger_repertoire(_DIR_VAR."cache-zotspip/$id_zitem/");
+				include_spip('inc/flock');
+				spip_unlink(_DIR_VAR."cache-zotspip/$id_zitem/");
+			}
+			
 			// Gestion des creators
 			$creators = array();
 			if (is_array($data['creators'])) {

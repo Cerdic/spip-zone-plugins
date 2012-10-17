@@ -242,10 +242,19 @@ function zotspip_content_disposition ($format) {
 }
 
 // Récupère un fichier distant
-function zotspip_recuperer_fichier($fichier) {
-	include_spip('inc/distant');
-	include_spip('inc/config');
-	return spip_file_get_contents(copie_locale($fichier.'?key='.lire_config('zotspip/api_key')));
+function zotspip_recuperer_fichier($fichier, $titre, $id_zitem) {
+	$url_distante = $fichier.'?key='.lire_config('zotspip/api_key');
+	$titre = translitteration($titre);
+	$url_locale = _DIR_VAR."cache-zotspip/$id_zitem/$titre";
+	if (!@file_exists($url_locale)) {
+		include_spip('inc/distant');
+		include_spip('inc/flock');
+		sous_repertoire(_DIR_VAR."cache-zotspip");
+		sous_repertoire(_DIR_VAR."cache-zotspip/$id_zitem");
+		ecrire_fichier($url_locale,recuperer_page($url_distante,false,false,_COPIE_LOCALE_MAX_SIZE));
+	}
+	include_spip('inc/headers');
+	redirige_par_entete($url_locale);
 }
 
 // Récupérer les références les plus récentes

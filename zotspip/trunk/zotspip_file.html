@@ -1,1 +1,1 @@
-<BOUCLE_zitem(ZITEMS){id_zitem}{type==attachment}>[#HTTP_HEADER{Content-Type: #MIMETYPE}(#FICHIER**|zotspip_recuperer_fichier)]</BOUCLE_zitem>
+<BOUCLE_zitem(ZITEMS){id_zitem}{type==attachment}>[(#FICHIER|zotspip_recuperer_fichier{#TITRE,#ID_ZITEM})]</BOUCLE_zitem>
