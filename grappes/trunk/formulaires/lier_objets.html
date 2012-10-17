@@ -25,7 +25,6 @@
 	<script type="text/javascript">
 	<!--
 		var lier_objets_#ENV{identifiant} = function(event,ui){
-			console.log(ui);
 			if (typeof(ui) != 'undefined' && (typeof(ui.item.value) == 'string')) {
 				$('[#(#ENV{identifiant}) ].pid_objet').val(ui.item.id);
 				this.value = ui.item.value;
