@@ -132,10 +132,4 @@ function critere_contenu_auteur_select_dist($idb, &$boucles, $crit) {
 	$boucle->where[] = '$s';
 }
 
-// Un filtre pour afficher le bonhomme_statut
-function icone_statut_auteur($statut) {
-	include_spip('inc/presentation');
-	$text = bonhomme_statut(array('statut'=>$statut));
-	return replace($text,'\n','');
-}
 ?>

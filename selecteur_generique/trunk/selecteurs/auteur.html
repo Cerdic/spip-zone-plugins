@@ -9,12 +9,12 @@
 
 [(#REM) Chercher les auteurs correspondant a la requete ]
 <BOUCLE_s(AUTEURS){tout}{contenu_auteur_select strict}{0,20}{par nom}{doublons}>
-[(#STATUT|icone_statut_auteur) ]#NOM[ - (#BIO|textebrut|couper{20})][ ((#EMAIL))]|#NOM|#ID_AUTEUR
+[(#STATUT|puce_statut{auteur}) ]#NOM[ - (#BIO|textebrut|couper{20})][ ((#EMAIL))]|#NOM|#ID_AUTEUR
 </BOUCLE_s>
 
 	[(#REM) Si aucun, on recherche dans l'ensemble du texte ]
 	<BOUCLE_s1(AUTEURS){tout}{contenu_auteur_select}{0,20}{par nom}{doublons}>
-	[(#STATUT|icone_statut_auteur) ]#NOM[ - (#BIO|textebrut|couper{20})][ ((#EMAIL))]|#NOM|#ID_AUTEUR
+	[(#STATUT|puce_statut{auteur}) ]#NOM[ - (#BIO|textebrut|couper{20})][ ((#EMAIL))]|#NOM|#ID_AUTEUR
 	</BOUCLE_s1>
 
 	[(#REM) Vraiment on n'a rien trouve ]
