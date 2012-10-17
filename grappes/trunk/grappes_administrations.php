@@ -14,28 +14,17 @@ include_spip('inc/meta');
  * @param unknown_type $version_cible
  */
 function grappes_upgrade($nom_meta_base_version,$version_cible){
-	$current_version = 0.0;
-	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
-			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-		include_spip('base/grappes');
-		include_spip('base/create');
-		if (version_compare($current_version,'0.0','<=')){
-			include_spip('base/abstract_sql');
-			creer_base();
-			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
-		}
-		if (version_compare($current_version,'0.2','<')){
-			include_spip('base/abstract_sql');
-			maj_tables('spip_grappes');
-			ecrire_meta($nom_meta_base_version,$current_version='0.2','non');
-		}
-		if (version_compare($current_version,'0.2.1','<')){
-			include_spip('base/abstract_sql');
-			maj_tables('spip_grappes_liens');
-			maj_tables('spip_grappes');
-			ecrire_meta($nom_meta_base_version,$current_version='0.2.1','non');
-		}
-	}
+
+	include_spip('base/create');
+
+	$maj = array();
+	$maj['create'] = array(array('maj_tables', array('spip_grappes', 'spip_grappes_liens')));
+	$maj['0.2.0']  = array(array('maj_tables', 'spip_grappes'));
+	$maj['0.2.1']  = array(array('maj_tables', array('spip_grappes', 'spip_grappes_liens')));
+	$maj['0.2.2']  = array(array('sql_alter', 'TABLE spip_grappes_liens CHANGE COLUMN rang rang bigint(21) NOT NULL DEFAULT 0'));
+
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 /**

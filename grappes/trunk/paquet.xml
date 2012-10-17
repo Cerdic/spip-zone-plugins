@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="prive/themes/spip/images/grappe-32.png"
-	schema="0.2.1"
+	schema="0.2.2"
 	documentation="http://contrib.spip.net/Plugin-Grappes"
 >	
 
