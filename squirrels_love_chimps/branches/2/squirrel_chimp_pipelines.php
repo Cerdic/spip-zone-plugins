@@ -38,7 +38,7 @@ function squirrel_chimp_affiche_droite($flux){
 		if ($contenu) {
 			include_spip('inc/layer');	
 			include_spip('inc/presentation');				
-			$flux['data'] .= cadre_depliable(find_in_path('images/logo_slc_24.png'),_T('spip:titre_cadre_raccourcis'),false,$contenu,$ids=’’,'r squirrel_chimp');
+			$flux['data'] .= cadre_depliable(find_in_path('images/logo_slc_24.png'),_T('spip:titre_cadre_raccourcis'),false,$contenu,$ids='','r squirrel_chimp');
 			}
 	
 	}
