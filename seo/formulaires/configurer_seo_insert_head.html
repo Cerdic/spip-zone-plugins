@@ -15,6 +15,11 @@
 						<label for="insert_head_activate"><:seo:insert_head_activate:></label>
 						<input type="checkbox" value="yes" name="activate" id="insert_head_activate"[(#ENV{activate}|=={yes}|oui)checked="checked"] />
 					</li>
+					<li class="editer_forcer_squelette">
+						<p class="explication"><:seo:forcer_squelette_descriptif:></p>
+						<label for="forcer_squelette"><:seo:forcer_squelette_label:></label>
+						<input type="checkbox" value="yes" name="forcer_squelette" id="forcer_squelette"[(#ENV{forcer_squelette}|=={yes}|oui)checked="checked"] />
+					</li>
 				</ul>
 			</li>
 		</ul>

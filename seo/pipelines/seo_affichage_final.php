@@ -13,7 +13,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function seo_affichage_final($flux) {
 
-    if (!defined('_SEO_FORCER_SQUELETTE'))
+    $forcer_squelette = lire_config('seo/forcer_squelette');
+    if ($forcer_squelette != 'yes' )
         return $flux;
 
     $meta_tags = calculer_meta_tags();

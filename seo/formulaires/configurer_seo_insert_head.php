@@ -8,6 +8,7 @@ function formulaires_configurer_seo_insert_head_charger_dist(){
 
 	$config = unserialize($GLOBALS['meta']['seo']);
 	$valeurs = $config['insert_head'];
+	$valeurs['forcer_squelette'] = $config['forcer_squelette'];
 
 	$valeurs['editable'] = true;
 	
@@ -24,6 +25,7 @@ function formulaires_configurer_seo_insert_head_traiter_dist(){
 		$config['insert_head'] = array();
 	}
 	$config['insert_head']['activate'] = _request('activate','no');
+	$config['forcer_squelette'] = _request('forcer_squelette','no');
 	$config = serialize($config);
 	ecrire_meta('seo',$config);
 	include_spip('inc/invalideur');
