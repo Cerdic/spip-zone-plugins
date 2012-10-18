@@ -1,0 +1,27 @@
+<paquet
+	prefix="melusine_couleurs_article"
+	categorie="multimedia"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.4;3.0.*]"
+	logo="prive/themes/spip/images/melusine_couleurs_article-64.png"
+	documentation=""
+>
+	<!--
+		Paquet généré le 2012-10-11 17:06:00
+	-->
+
+	<nom>Articles en couleur pour Mélusine</nom>
+
+	<auteur lien='http://datice.ac-creteil.fr/'>Jean-Marc Labat</auteur>
+
+	<licence>GNU/GPL3</licence>
+	
+	<pipeline nom="affiche_milieu" inclure="melusine_couleurs_article_pipelines.php" />
+	
+	
+	<necessite nom="melusine" compatibilite="[1.0.0;]" />	
+	<necessite nom="palette" compatibilite="[3.0.1;]" />
+
+
+</paquet>
