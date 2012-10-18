@@ -1,0 +1,9 @@
+#CACHE{3600*24*67}
+[(#CONFIG{melusine_images/image4}|?{#SET{image4, #CHEMIN{#CONFIG{melusine_images/image4}}},#SET{image4,#CHEMIN{images/image4.png}}} )]
+
+<a class="boutongauche" href="#URL_PAGE{plan}"> 
+	<!-- le logo du bouton  -->
+	<img alt=""  style="float:left" src="#GET{image4}" />
+	<!-- l'intitulé du bouton -->
+	<span class="logo-titre">Le plan</span>
+</a>   

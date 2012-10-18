@@ -1,0 +1,37 @@
+#CACHE{3600*24*62} 
+
+<BOUCLE_sommaire(CONDITION){si #SELF|=={'./'}}>
+</BOUCLE_sommaire>
+#SET{date_article, #CONFIG{melusine_blocs/date_article} }
+
+<!-- ************ Exclusion des articles portant le mot clé exclu, ainsi que les articles du forum et du blog **********************  -->
+<BOUCLE_exclus4(RUBRIQUES) {titre_mot="exclu"} {doublons}>
+<BOUCLE_exclus40(ARTICLES) {id_rubrique} {doublons}>
+</BOUCLE_exclus40>
+</BOUCLE_exclus4>
+<BOUCLE_exclus14(RUBRIQUES)  {titre_mot="forum"} >
+<BOUCLE_exclus10(ARTICLES) {id_rubrique} {doublons}>
+</BOUCLE_exclus10>
+</BOUCLE_exclus14>
+<BOUCLE_exclus16(RUBRIQUES)  {titre_mot="blog"} >
+<BOUCLE_exclus12(ARTICLES) {id_secteur}   {doublons}>
+</BOUCLE_exclus12>
+</BOUCLE_exclus16>
+<BOUCLE_exclus50(ARTICLES) {doublons}{titre_mot="focus"}>
+</BOUCLE_exclus50>
+<div class="dern-articles2">
+	<div class="content" >
+		<span class="title"> Les derniers articles :</span> 
+ 		<div class="trait">&nbsp;</div>
+		<ul class="liste_der_plus">
+			<BOUCLE_article(ARTICLES) {doublons}  {par date} {inverse} {0,5}>
+             			<li class="titre">[<a class="titre" href="#URL_ARTICLE" title="<:lire_suite_article:>">(#TITRE|supprimer_numero)</a> ]</li>
+          			<BOUCLE_test(CONDITION){si #GET{date_article}|=={oui}}>
+					<li class="date"> [(#DATE|nom_jour)] [(#DATE|affdate)]</li>
+				</BOUCLE_test>
+				</BOUCLE_article>
+		</ul>
+	</div>
+</div>
+
+<//B_sommaire>

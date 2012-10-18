@@ -1,0 +1,278 @@
+/*
+
+Squelette Sarka-SPIP
+Copyright (C) 2005 Sylvain Bellégo - sylvain.bellego@no-log.org
+
+Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes
+de la Licence Publique Générale GNU publiée par la Free Software Foundation (version 2
+ou bien toute autre version ultérieure choisie par vous).
+
+Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE, ni
+explicite ni implicite, y compris les garanties de commercialisation ou d'adaptation
+dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU pour plus de détails.
+
+Vous devez avoir reçu une copie de la Licence Publique Générale GNU en même temps que ce programme
+; si ce n'est pas le cas, écrivez à la Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+Boston, MA 02111-1307, États-Unis.
+
+*/
+
+body {
+	font-size: 11px;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	background: #FFFFFF;
+	padding: 20px;
+	margin: 0px;
+}
+
+
+/*---affichage de code (pour afficher en mode texte du code html)---*/
+
+tt {
+	display: block;
+	border-width: 1px 1px 1px 8px;
+	border-style: solid;
+	border-color: #669999;
+	padding: 1em;
+	margin: 1em 0em 1em 0.5em;
+	font-size: 100%;
+	background: #E0F0F0;
+	width: 90%;
+}
+
+
+/* ~~~~~~~~~~~~ article (affichage presque semblable à "derniers articles" ~~~~~~~~~~~~ */
+
+.article a {
+	color: #000000;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.article a:after {
+	display: inline;
+	content: " <" attr(href) ">";
+}
+
+.article a.spip_note:after {
+	display: none;
+}
+
+.article .image .spip_logos {
+	display: block;
+	float: right;
+	margin: 10px;
+}
+
+.article .surtitre {
+	color: #777777;
+	font-size: 150%;
+	font-weight: bold;
+	margin: 0px;
+}
+
+.article .titre {
+	color: #990000;
+	font-size: 200%;
+	font-weight: bold;
+	margin: 0px;
+}
+
+.article .soustitre {
+	color: #777777;
+	font-size: 150%;
+	font-weight: bold;
+	margin: 0px;
+}
+
+.article .detail {
+	color: #6262A4;
+	font-size: 100%;
+	font-weight: bold;
+	margin: 10px 0px 10px 0px;
+	padding: 0px;
+}
+
+.article .texte {
+	margin: 10px 0px 10px 0px;
+}
+
+.article .web {
+	border: 10px 0px 10px 10px;
+	color: #990000;
+}
+
+.article .chapo {
+	color: #6262A4;
+	margin: 10px 200px 10px 0px;
+	font-weight: bold;
+	border: 1px solid #6262A4;
+	padding: 5px;
+}
+
+.article .chapo .spip {
+	margin: 0px;
+	padding: 5px 0px 5px 0px;
+}
+
+.article .post-scriptum {
+	color: #000000;
+	margin: 10px 0px 10px 0px;
+	padding-top: 10px;
+	font-size: 100%;
+	border-top: 2px solid #6262A4;
+}
+
+.article .post-scriptum .annonce {
+	font-weight: bold;
+	color:#6262A4;
+	padding: 0px;
+	margin: 0px 0px 10px 0px;
+}
+
+.article .notes {
+	color: #000000;
+	margin: 10px 0px 10px 0px;
+	padding: 0px 10px 0px 10px;
+	border-top: 2px solid #6262A4;
+	font-size: 90%;
+}
+
+.article .en-tete {
+	color: #FFFFFF;
+	font-size: 130%;
+	font-weight: bold;
+	margin: 0px 10px 10px 10px;
+}
+
+.article h3 {
+	color: #6262A4;
+	font-weight: bold;
+	font-size: 160%;
+	margin: 1.5em 0em 0.5em 0em;
+}
+
+.article blockquote {
+	border: 1px solid #808080;
+	background: #EEEEEE;
+	padding: 0px 10px 0px 10px;
+}
+
+.article table {
+	font-size: 90%;
+	border-color: #FFFFFF;
+}
+
+.article tr.row_first {
+	background: #808080;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 100%;
+}
+
+.article tr.row_odd {
+	background: #DDDDDD;
+	color: #000000;
+}
+
+.article tr.row_even {
+	background: #DDDDDD;
+	color: #000000;
+}
+
+.article td {
+	border: 1px solid #FFFFFF;
+	padding: 1px 5px 1px 5px;
+}
+
+/* mise en forme des documents insérés dans le texte de l'article */
+
+.article .spip_documents {
+	display: block;
+	padding: 10px;
+	font-size: 95%;
+	border: 1px solid #6262A4;
+	margin: 10px 10px 10px 10px;
+	padding: 5px;
+	background: #F0F0FA;
+	width: 200px !important;
+	text-align: center;
+}
+
+.article .spip_documents_center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.article .spip_doc_titre {
+	text-align: left;
+	padding: 5px 0px 0px 0px;
+	text-align: center;
+}
+
+.article .spip_doc_descriptif {
+	font-size: 90%;
+	color: #808080;
+	text-align: left;
+	padding: 5px 0px 5px 0px;
+	text-align: center;
+}
+
+/* mise en forme de l'affichage des signataires de la pétition */
+
+.signatures {
+	border: 2px solid #6262A4;
+	padding: 10px;
+	margin: 10px 0px 10px 0px;
+	font-size: 100%;
+}
+
+.signatures .en-tete{
+	color: #6262A4;
+	font-size: 150%;
+	margin: 0px 0px 5px 0px;
+}
+
+.signatures td {
+	border: 1px solid #6262A4;
+	margin: 0px;
+	padding: 2px 5px 2px 5px;
+	empty-cells: hide;
+	font-size: 12px;
+}
+
+.signatures thead {
+	background: #6262A4;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+
+.signatures a {
+	color: #990000;
+	text-decoration: none;
+}
+
+.signatures a:hover {
+	color: #990000;
+	text-decoration: underline;
+}
+
+/* images/puces générées par un tiret seul en début de ligne */
+/* Ces images/puces ne sont pas incluses dans une balise <ul> et le code obetnu est <li class="spip"> */
+li.spip { list-style-image:URL(../images/puces/puce-n0.gif);
+		list-style-position: inside;
+}
+/* images/puces générées par un tiret suivant d'un ou plusieurs asterisques (ex: -* blabla...) */
+/* Ces images/puces sont incluses dans une balise <ul class="spip"> et le code de chaque item est <li class="spip"> */
+ul.spip  { 	margin-left: 1em;
+			padding-left: 1em;
+}
+ul.spip li.spip { 	list-style-image:URL(../images/puces/puce-n1.gif);
+				list-style-position: inside;
+}
+ul.spip ul.spip  { margin-left: 1em;
+				padding-left: 1em;
+}
+ul.spip ul.spip li.spip { list-style-image:URL(../images/puces/puce-n2.gif);
+					  list-style-position: inside;
+}

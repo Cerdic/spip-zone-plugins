@@ -1,0 +1,62 @@
+<script type='text/javascript' src=#CHEMIN{scripts/melusine_prive.js}></script>
+
+#SET{positions,#CONFIG{melusine_boutons}}
+
+	<form action='#ENV{action}' method='post'>
+
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+	<h3>Boutons #MELUSINEAIDE{209} </h3> 	
+			<BOUCLE_test(POUR){tableau #GET{positions}}>
+				
+
+				
+<div class="formulaire_spip formulaire_editer formulaire_editer_boutons ">
+
+<h2 class="gestion_bouton" >#CONFIG{melusine_boutons/#CLE/intit}<input type='submit' class="bas submitb"  name='position' value="d#CLE" /><input type='submit' class="submitb haut" name='position' value=m#CLE /><input type='submit' class="submitb sup" name='position' value=s#CLE /></h2>
+					<div class="vue_bouton"><input  class="voir">	</div>			
+					<ul style="display:none">
+						<li>
+							<label for="Intitulé">Intitulé</label>
+							<input type='text' name='intit#CLE' value="#CONFIG{melusine_boutons/#CLE/intit}" />
+						</li>
+						<li>
+							<label for="URL">URL</label>
+							<input type='text' name='add#CLE' value="#CONFIG{melusine_boutons/#CLE/add}" />
+						</li>
+						<li>
+							<label for="Nouvelle fenêtre">Nouvelle fenêtre</label>
+							<input type="checkbox" name="blanck#CLE"  value="blanck" [(#CONFIG{melusine_boutons/#CLE/blanck}=={"blanck"}|?{"checked", })]  /></li>
+						<li>
+							<label for="Emplacement ">Emplacement</label>
+							<SELECT NAME="emplacement#CLE"  style="width:100px">
+								<OPTION VALUE="colonne_g" [(#CONFIG{melusine_boutons/#CLE/emplacement}=={"colonne_g"}|?{"selected", })]>Colonne gauche
+								<OPTION VALUE="colonne_d" [(#CONFIG{melusine_boutons/#CLE/emplacement}=={"colonne_d"}|?{"selected", })]>Colonne droite
+								<OPTION VALUE="onglet" [(#CONFIG{melusine_boutons/#CLE/emplacement}=={"onglet"}|?{"selected", })]>Onglet
+								<OPTION VALUE="bandeau" [(#CONFIG{melusine_boutons/#CLE/emplacement}=={"bandeau"}|?{"selected", })]>Bandeau
+								<OPTION VALUE="accueil" [(#CONFIG{melusine_boutons/#CLE/emplacement}=={"accueil"}|?{"selected", })]>Accueil				
+							</SELECT> 
+						</li>
+						<li>
+							<label for="Image">Image</label>
+							<input type="file" name="boutonimage#CLE"  value="" size="30" /><br/>
+						
+							[(#CONFIG{melusine_boutons/#CLE/boutonimage}|?{[(#CHEMIN{#CONFIG{melusine_boutons/#CLE/boutonimage}}|image_reduire{150})],[(#CONFIG{melusine_boutons/#CLE/boutonimage}||image_reduire{150})]} )]</li>
+						</li>	
+						<li>
+							<label for="Alt">Description de l'image : balise ALT</label>
+							<input type='text' name='alt#CLE' value="#CONFIG{melusine_boutons/#CLE/alt}" />
+						</li>						
+						<li >Enregistrer<input type='submit' name='ok' value='ok#CLE' class="ok_bouton submitb" /></li>
+					</ul>
+</div>
+				
+			</BOUCLE_test>
+<div class="init">
+		<ul>
+			 <li>Nouveau bouton<input type='submit' class="ok_bouton" name='position' value="aNouveau" /></li> 
+			<!--<li>Initialiser <input type='submit' class="ajout"  name='position' value="i" /></li>-->
+		</ul>
+</div>
+	</form>
+	

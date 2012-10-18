@@ -1,0 +1,176 @@
+#CACHE{0}
+[(#ENV{editable}|oui)
+<script type='text/javascript' src=#CHEMIN{scripts/melusine_prive.js}></script>
+<h3>Couleurs#MELUSINEAIDE{204} </h3> 
+<div class="formulaire_spip formulaire_cfg formulaire_config_couleurs_melusine">
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+<form method="post" action="#SELF">
+	<div> #ACTION_FORMULAIRE{#SELF} 
+ <input type="hidden" name="_meta_casier" value="melusine_couleurs" />
+<a href='#'  class='couleur1'> Général </a> | <a href='#'  class='couleur2' > Menu et autres liens </a> | <a href='#'  class='couleur3'> Articles </a> | <a href='#'  class='couleur5'> Autres blocs </a> | <a href='#'  class='couleur6'> Boutons </a>
+		
+
+<div id="couleur1">
+<fieldset>
+			<ul>
+				<li>
+					<label for="couleur du bandeau">couleur du bandeau :</label>
+					<input type="text" name="bandeau" class="palette" value="[(#ENV{bandeau}|?{[(#ENV{bandeau})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur du texte du bandeau">couleur du texte du bandeau :</label>
+					<input type="text" name="bandtex" class="palette" value="[(#ENV{bandtex}|?{[(#ENV{bandtex})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur du texte du bandeau chemin :">couleur du texte du bandeau chemin :</label>
+					<input type="text" name="chemtex" class="palette" value="[(#ENV{chemtex}|?{[(#ENV{chemtex})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur du fond :">couleur du fond :</label>
+					<input type="text" name="pfond" class="palette" value="[(#ENV{pfond}|?{[(#ENV{pfond})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur du bandeau chemin">couleur du bandeau chemin :</label>
+					<input type="text" name="chemin" class="palette" value="[(#ENV{chemin}|?{[(#ENV{chemin})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur du bord du bandeau chemin">couleur du bord du bandeau chemin :</label>
+					<input type="text" name="bordchemin" class="palette" value="[(#ENV{bordchemin}|?{[(#ENV{bordchemin})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur du texte5">couleur du texte :</label>
+					<input type="text" name="textg" class="palette" value="[(#ENV{textg}|?{[(#ENV{textg})],' '})]" />
+				</li>
+			</ul>
+		</fieldset>
+</div>
+
+<div id="couleur2" style="display:none">
+		<fieldset>
+			<ul>
+				<li>
+					<label for="couleur des liens du menu :">couleur des liens du menu : </label>
+					<input type="text" name="lienmen" class="palette" value="[(#ENV{lienmen}|?{[(#ENV{lienmen})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur des liens survol&eacute;s du menu :">couleur des liens survol&eacute;s du menu :</label>
+					<input type="text" name="liensur" class="palette" value="[(#ENV{liensur}|?{[(#ENV{liensur})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur de fond du menu :">couleur de fond du menu :</label>
+					<input type="text" name="bgmenu" class="palette" value="[(#ENV{bgmenu}|?{[(#ENV{bgmenu})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur de fond du menu survolé :">couleur de fond du menu survolé:</label>
+					<input type="text" name="bgmenusur" class="palette" value="[(#ENV{bgmenusur}|?{[(#ENV{bgmenusur})],' '})]" />
+				</li>
+				
+				<li>
+					<label for="couleur des autres liens :">couleur des autres liens :</label>
+					<input type="text" name="lien" class="palette" value="[(#ENV{lien}|?{[(#ENV{lien})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur des autres liens survolés:">couleur des autres liens survolés:</label>
+					<input type="text" name="liensur0" class="palette" value="[(#ENV{liensur0}|?{[(#ENV{liensur0})],' '})]" />
+				</li>
+				
+				
+			</ul>
+		</fieldset>
+</div>
+
+<div id="couleur3" style="display:none">
+		<fieldset>
+			<ul>
+				<li>
+					<label for="couleur du fond des articles :">couleur du fond des articles :</label>
+					<input type="text" name="fondtexte" class="palette" value="[(#ENV{fondtexte}|?{[(#ENV{fondtexte})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur du bord des articles :">couleur du bord des articles :</label>
+					<input type="text" name="bord" class="palette" value="[(#ENV{bord}|?{[(#ENV{bord})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur du texte des articles :">couleur du texte des articles :</label>
+					<input type="text" name="texte" class="palette" value="[(#ENV{texte}|?{[(#ENV{texte})],' '})]" />
+				</li>
+			</ul>
+		</fieldset>
+</div>
+
+
+<div id="couleur5" style="display:none">
+		<fieldset>
+			<ul>
+				<li>
+					<label for="couleur des bandeaux des blocs :">couleur des bandeaux des blocs : </label>
+					<input type="text" name="bandeauagenda" class="palette" value="[(#ENV{bandeauagenda}|?{[(#ENV{bandeauagenda})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur du texte des bandeaux des blocs :">couleur du texte des bandeaux des blocs :</label>
+					<input type="text" name="textebandeau" class="palette" value="[(#ENV{textebandeau}|?{[(#ENV{textebandeau})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur du texte des blocs :">couleur du texte des blocs :</label>
+					<input type="text" name="texteagenda" class="palette" value="[(#ENV{texteagenda}|?{[(#ENV{texteagenda})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur du fond des blocs :">couleur du fond des blocs :</label>
+					<input type="text" name="fondagenda" class="palette" value="[(#ENV{fondagenda}|?{[(#ENV{fondagenda})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur du bord des blocs :">couleur du bord des blocs :</label>
+					<input type="text" name="bordagenda" class="palette" value="[(#ENV{bordagenda}|?{[(#ENV{bordagenda})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur des liens dans les blocs :">couleur des liens dans les blocs :</label>
+					<input type="text" name="lienagenda" class="palette" value="[(#ENV{lienagenda}|?{[(#ENV{lienagenda})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur des liens survolés dans les blocs :">couleur des liens survolés dans les blocs :</label>
+					<input type="text" name="lienagendasurvol" class="palette" value="[(#ENV{lienagendasurvol}|?{[(#ENV{lienagendasurvol})],' '})]" />
+				</li>
+				
+			</ul>
+		</fieldset>
+</div>
+<div id="couleur6" style="display:none">
+		<fieldset>
+			<ul>
+				<li>
+					<label for="couleur du fond des boutons :">couleur du fond des boutons :</label>
+					<input type="text" name="fondbouton" class="palette" value="[(#ENV{fondbouton}|?{[(#ENV{fondbouton})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur du fond des boutons au survol:">couleur du fond des boutons au survol:</label>
+					<input type="text" name="fondboutonhover" class="palette" value="[(#ENV{fondboutonhover}|?{[(#ENV{fondboutonhover})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur du bord des boutons :">couleur du bord des boutons :</label>
+					<input type="text" name="bordbouton" class="palette" value="[(#ENV{bordbouton}|?{[(#ENV{bordbouton})],' '})]" />
+				</li>
+				<li>
+					<label for="couleur du texte des boutons :">couleur du texte des boutons :</label>
+					<input type="text" name="textebouton" class="palette" value="[(#ENV{textebouton}|?{[(#ENV{textebouton})],' '})]" />
+				</li>
+			</ul>
+		</fieldset>
+</div>
+
+
+
+		
+		[<span class='erreur'>(#ENV**{erreurs}|table_valeur{description})</span>]
+		
+		<input type="submit" name="_cfg_ok" value="<:cfg:OK:>" />
+		
+		</div>
+</form>
+</div>
+
+]
+
+[(#ENV{editable}|non)
+Vous devez être connecté en administrateur pour pouvoir utiliser ce formulaire.
+]

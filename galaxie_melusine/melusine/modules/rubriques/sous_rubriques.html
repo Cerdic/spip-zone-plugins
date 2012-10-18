@@ -1,0 +1,54 @@
+
+<!-- *********Liens vers les rubriques filles   ****  -->
+				<div class="rurub">
+					<!-- ****   Exclusion des rubriques dont le mot clé est exclu  *********************  -->
+					<BOUCLE_exclus(RUBRIQUES) {id_parent} {titre_mot="exclu"} {doublons}>
+					</BOUCLE_exclus>
+					<div class="filles">
+
+						<BOUCLE_rubriques_filles(RUBRIQUES){id_rubrique}{par num titre}{doublons}>
+
+								
+								<!-- *** Insertion des blocs (en 2 parties) correspondant aux rubriques filles =  -->
+								<div class="bloc_rub">
+									<div class="ensemrub">
+										<h2>
+										<!-- ************ Partie de gauche **********************  -->
+										<span class="pargauche" >	
+											<!-- **** Insertion du logo des rubriques **************  -->
+											<img alt="" class="format_png" src="#GET{image3}" />
+
+										</span>
+
+																		
+											<!-- ************ Insertion du titre **********************  --> 
+											<B_mot>
+												<BOUCLE_mot(MOTS){id_rubrique}{titre=lien_direct}>
+													<BOUCLE_lien(SITES){id_rubrique}>
+														<a href="#URL_SITE"> 
+													</BOUCLE_lien>
+												</BOUCLE_mot>	
+											</B_mot>			
+												<a href="[(#URL_RUBRIQUE|url_absolue)]" title="[(#DESCRIPTIF|textebrut|entites_html)]">
+											<//B_mot>
+											[(#TITRE|supprimer_numero)]</a>
+    
+										</h2>
+									#MODELE{logo_rubrique}
+									#DESCRIPTIF
+									<div style="clear:both;height:1px;">&nbsp;</div>
+									<!--  fin de la classe ensemrub ****************************** -->
+									</div>
+
+									<!--  liste des ss rubriques et articles ****** -->
+									<INCLURE{fond=inclusions/liste-rubriques, id_rubrique}>
+
+								<!--  fin de la classe bloc_rub ****************************** -->
+								</div>
+						</BOUCLE_rubriques_filles>
+						
+ 					<!-- * fin de la classe filles ***************************** -->
+					</div>
+
+				<!-- **fin de la classe rurub  ****************************** -->
+				</div>

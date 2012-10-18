@@ -1,0 +1,15 @@
+<div id="flashcontent">This will be shown to users with no Flash or Javascript.</div>	
+	<script type="text/javascript">
+		var so = new SWFObject("#CHEMIN{images/tagcloud.swf}", "tagcloud", "200", "150", "7", "#ffffff");
+		// uncomment next line to enable transparency
+		so.addParam("wmode", "transparent");
+		so.addVariable("tcolor", "0x333333");
+		so.addVariable("tcolor2", "0x009900");
+		so.addVariable("hicolor", "0x000000");
+		so.addVariable("tspeed", "100");
+		so.addVariable("distr", "true");
+		so.addVariable("xmlpath", "IMG/nuage.txt");
+		so.write("flashcontent");
+	</script>
+
+

@@ -1,0 +1,17 @@
+#CACHE{3600*24*30}
+
+	<BOUCLE_petitegalerie(ARTICLES)  {titre_mot==^diapo } {par date}  {0,5}>
+		<BOUCLE_mot(MOTS){id_article}>
+			#SET{mot,#TITRE}
+		</BOUCLE_mot>
+    		<div  class="album" >
+        		<div class="en-tete"> 
+				<a href='#URL_PAGE{#GET{mot},id_article=#ID_ARTICLE}'>#TITRE </a>
+			</div>   
+        		<div class="contenu" >
+				<iframe class='galerie' src='#URL_PAGE{diapo33,id_article=#ID_ARTICLE}' style='height:100px; width:150px; border:10px; '></iframe>
+			</div> 
+		<!-- Fin de la classe album -->         
+		</div> 
+
+	</BOUCLE_petitegalerie>

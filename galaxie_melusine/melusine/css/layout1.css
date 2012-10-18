@@ -1,0 +1,8 @@
+html,body{margin:0;padding:0}
+div#header{position:relative}
+div#footer a{display:inline;padding:0}
+div#wrapper{float:left;width:100%}
+div#content{margin: 0 215px}
+div#navigation{float:left;width:210px;margin-left:-100%;}
+div#extra{float:left;width:210px;margin-left:-210px; }
+div#footer{clear:left;width:100%}

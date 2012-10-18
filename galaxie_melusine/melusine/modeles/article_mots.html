@@ -1,0 +1,16 @@
+[(#REM)
+	Liste des mots-cles d'un article
+	<template><article1|mots></template>
+][(#REM)
+	Modele <article1|mots> : liste des mots-cles d'un article
+	#MODELE{article_mots}
+
+	Pour la notation rel="tag" voir
+	<http://microformats.org/wiki/rel-tag-fr>
+]<B_mots>
+<div class="menu"[ style='float:(#ENV{align}|match{left|right})']>
+				 <BOUCLE_mots(MOTS) {id_article} {par titre}>
+		<a href="#URL_MOT" rel="tag"> <img src=#CHEMIN{'images/tag.png'}>#TITRE </a> 
+		</BOUCLE_mots>
+	</div>
+</B_mots>

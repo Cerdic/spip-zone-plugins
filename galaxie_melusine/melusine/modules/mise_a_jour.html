@@ -1,0 +1,13 @@
+#CACHE{3600*24}
+<B_maj>
+    <div id="maj" class="maj">
+    <strong><:maj:></strong>&nbsp;:<br/>
+    <BOUCLE_maj(ARTICLES){age>=0}{par date}{inverse}{0,1}>
+    [(#DATE|nom_jour)] [(#DATE|affdate)]
+    </BOUCLE_maj>
+</B_maj>
+    <div id="maj" class="maj">
+        <strong><:maj:></strong>&nbsp;:<br/>
+        <:date_aujourdhui:>
+<//B_maj>  
+</div>

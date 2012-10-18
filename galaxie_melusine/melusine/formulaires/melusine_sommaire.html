@@ -1,0 +1,88 @@
+#SET{skel, #CONFIG{melusine_squelettes/skel}|sinon{#ARRAY}}
+#SET{droite,#CONFIG{melusine_squelettes/d}|sinon{#ARRAY}}
+#SET{gauche,#CONFIG{melusine_squelettes/g}|sinon{#ARRAY}}
+#SET{sommaired,#CONFIG{melusine_sommaire/y}|sinon{#ARRAY}}
+#SET{sommaireg,#CONFIG{melusine_sommaire/x}|sinon{#ARRAY}}
+
+[(#SET{colonne,[(#GET{sommaireg}|array_merge{#GET{sommaired},#GET{droite},#GET{gauche}})]})]
+[(#SET{noisettes_en_reserve,[(#GET{skel}|array_diff{#GET{colonne}})]})]
+
+<form action='#ENV{action}' method='post'>
+
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+
+	<h3>Colonne centrale de la page d'accueil#MELUSINEAIDE{202} </h3> 
+	<fieldset>
+		<ul>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{choixsom})</span>]					
+			<li>											
+			<label for="colonnes  :">colonnes</label>				
+			<input type="radio" name="choixsom"  value="1" [(#CONFIG{melusine_sommaire/choixsom}=={1})oui) checked="checked" ]/>1 colonnes
+			<input type="radio" name="choixsom"  value="2" [(#CONFIG{melusine_sommaire/choixsom}=={2})oui) checked="checked" ] />2 colonnes 
+			</li>
+			
+			<input type='submit' name='ok' value='ok' />
+				
+		</ul>
+	</fieldset>
+
+
+
+
+		<div class="actif_gauche">
+			<h2> Colonne gauche</h2>
+			<ul>
+				<BOUCLE_test0(POUR){tableau #GET{sommaireg}}{valeur!=aucun}>
+					<li>
+						<span class="boutons"><input type='submit' title="Vers le bas" class="bas"  name='position' value="dx#CLE" /><input type='submit' title="Vers le haut" class="haut" name='position' value="mx#CLE" /><input type='submit' title="Supprimer" class="sup" name='position' value="sx#CLE" /></span>
+						[(#VALEUR|replace{"_"," "})]
+					</li>
+				</BOUCLE_test0>
+			</ul>
+		</div>
+
+
+<div class="reserve">
+<h3> Squelettes disponibles</h3>
+<ul>
+<BOUCLE_test2(POUR){tableau #GET{noisettes_en_reserve}}>
+		<li>
+
+			<input type='submit' title="Ajouter à gauche" class="ajoutg" name='position' value="ax#VALEUR" />
+			[(#VALEUR|replace{"_"," "})]
+			[(#CONFIG{melusine_sommaire/choixsom}|=={2}|oui)<input type='submit' title="Ajouter à droite" class="ajout" name='position' value="ay#VALEUR" />]
+
+		</li>
+</BOUCLE_test2>
+
+</ul>
+
+</div>
+
+
+<BOUCLE_droite(CONDITION){si (#CONFIG{melusine_sommaire/choixsom}|=={2}|oui)}>
+<div class="actif_droite">
+<h2> Colonne droite</h2>
+<ul>
+	<BOUCLE_test(POUR){tableau #GET{sommaired}}{valeur!=aucun}>
+		<li>
+			[(#VALEUR|replace{"_"," "})]
+			<span class="boutons"><input type='submit' title="Vers le bas" class="bas"  name='position' value="dy#CLE" /><input type='submit' title="Vers le haut" class="haut" name='position' value="my#CLE" /><input type='submit' title="Supprimer" class="sup" name='position' value="sy#CLE" /></span>
+		</li>
+	</BOUCLE_test>
+</ul>
+</div>
+</BOUCLE_droite>
+
+<//B_droite>
+<div class="init">
+
+	<ul>
+		<!-- <li>Initialiser droite<input type='submit' class="ajout"  name='position' value="id" /></li>
+		<li>Initialiser gauche<input type='submit' class="ajout"  name='position' value="ig" /></li> -->
+		<li>Actualiser la liste des squelettes disponibles<input type='submit' class="ok_bouton"  name='position' value="skels" /></li>
+	</ul>
+</div>
+<div style="clear:both"></div>				
+</form>

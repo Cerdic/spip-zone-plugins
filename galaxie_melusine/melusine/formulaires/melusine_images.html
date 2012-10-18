@@ -1,0 +1,96 @@
+#CACHE{0}
+<h3>Logos#MELUSINEAIDE{205} </h3> 
+	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+	
+	<form action='#ENV{action}' method='post'>
+
+		<div>#ACTION_FORMULAIRE{#ENV{action}}
+		
+  <div class="formulaire_spip formulaire_editer formulaire_editer_images">
+
+			<fieldset>
+				<ul>
+					
+					<li>
+						<label for="Puce article">Puce article :</label>
+						<input type="file" name="image2file" value="" size="30" />
+						<input type="hidden" name="image2" value="image2" size="30" />
+						[(#CONFIG{melusine_images/image2}|?{[(#CHEMIN{#CONFIG{melusine_images/image2}}|image_reduire{350})],[(#CHEMIN{images/image2.png}||image_reduire{350})]})]
+						
+						
+					</li>
+					<li>
+						<label for="Puce rubrique">Puce rubrique :</label>
+						<input type="file" name="image3file" value="" size="30" />
+						<input type="hidden" name="image3" value="image3" size="30" />
+						[(#CONFIG{melusine_images/image3}|?{[(#CHEMIN{#CONFIG{melusine_images/image3}}|image_reduire{350})],[(#CHEMIN{images/image3.png}||image_reduire{350})]})]
+						
+					</li>
+					<li>
+						<label for="Logo plan">Logo plan :</label>
+						<input type="file" name="image4file" value="" size="30" />	
+						<input type="hidden" name="image4" value="image4" size="30" />[(#CONFIG{melusine_images/image4}|?{[(#CHEMIN{#CONFIG{melusine_images/image4}}|image_reduire{350})],[(#CHEMIN{images/image4.png}||image_reduire{350})]})]
+						
+					</li>
+					<li>
+						<label for="Logo forum">Logo forum :</label>
+						<input type="file" name="image5file" value="" size="30" />
+						<input type="hidden" name="image5" value="image5" size="30" />
+						[(#CONFIG{melusine_images/image5}|?{[(#CHEMIN{#CONFIG{melusine_images/image5}}|image_reduire{350})],[(#CHEMIN{images/image5.png}||image_reduire{350})]})]
+						
+					</li>
+
+					<li>
+						<label for="Logo blog">Logo blog :</label>
+						<input type="file" name="image6file" value="" size="30" />
+						<input type="hidden" name="image6" value="image6" size="30" />
+						[(#CONFIG{melusine_images/image6}|?{[(#CHEMIN{#CONFIG{melusine_images/image6}}|image_reduire{350})],[(#CHEMIN{images/image6.png}||image_reduire{350})]})]
+						
+					</li>
+					
+					<li>
+						<label for="Image accueil">Logo s'identifier :</label>
+						<input type="file" name="image8file" value="" size="30" />
+						<input type="hidden" name="image8" value="image8" size="30" />
+						[(#CONFIG{melusine_images/image8}|?{[(#CHEMIN{#CONFIG{melusine_images/image8}}|image_reduire{350})],[(#CHEMIN{images/image8.png}||image_reduire{350})]})]
+						
+					</li>
+					<li>
+						<label for="Image accueil">Logo rechercher :</label>
+						<input type="file" name="image9file" value="" size="30" />
+						<input type="hidden" name="image9" value="image9" size="30" />
+						[(#CONFIG{melusine_images/image9}|?{[(#CHEMIN{#CONFIG{melusine_images/image9}}|image_reduire{350})],[(#CHEMIN{images/image9.gif}||image_reduire{350})]})]
+						
+					</li>
+					<li>
+						<label for="Icône réseau">Icône réseau haut :</label>
+						<input type="file" name="image10file" value="" size="30" />
+						<input type="hidden" name="image10" value="image10" size="30" />
+						[(#CONFIG{melusine_images/image10}|?{[(#CHEMIN{#CONFIG{melusine_images/image10}}|image_reduire{350})],[(#CHEMIN{images/image10.gif}||image_reduire{350})]} )]
+						
+					</li>
+					<li>
+						<label for="Icône réseau">Icône réseau bas :</label>
+						<input type="file" name="image11file" value="" size="30" />
+						<input type="hidden" name="image11" value="image11" size="30" />
+						[(#CONFIG{melusine_images/image11}|?{[(#CHEMIN{#CONFIG{melusine_images/image11}}|image_reduire{350})],[(#CHEMIN{images/image11.gif}||image_reduire{350})]} )]
+						
+					</li>
+					
+					
+				</ul>
+				
+				
+		</fieldset>
+				
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{description})</span>]
+				
+				<input type="submit"  value="OK" /> 
+				<input type="reset" value="<:cfg:Reset:>" />
+				
+				</div>
+				
+			</form>
+		</div>
+		

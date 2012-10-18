@@ -1,0 +1,51 @@
+				<!-- Les introductions des articles de la rubrique, classées par numéro s'ils sont numérotés, ou par date inverse sinon. -->
+				<div class="derniers-articles" style=" width='100%' ; height='100%'">					
+					<BOUCLE_exclus2(ARTICLES) {id_rubrique}{titre_mot="exclu"} {doublons}>
+					</BOUCLE_exclus2>
+					<BOUCLE_exclus3(ARTICLES) {id_rubrique}{titre_mot=edito_rub} {doublons}>
+					</BOUCLE_exclus3>
+					<!-- Boucle affichant toutes les intros des articles de la rubrique -->
+					<BOUCLE_article(ARTICLES) {id_rubrique}{par num titre}{par date}{inverse}{doublons}>
+						#SET{fondtexte2,#CONFIG{melusine_persoarticle/#ID_ARTICLE/fondtexte2}}
+						#SET{bord2,#CONFIG{melusine_persoarticle/#ID_ARTICLE/bord2}}
+						#SET{texte2,#CONFIG{melusine_persoarticle/#ID_ARTICLE/texte2}}
+						<br/>
+      						
+
+						<!-- ************ le contenu principal **********************  -->
+						<div class="content" style="background-color: #GET{fondtexte2} ; border-color: #GET{bord2}; color:#GET{texte2}; "	>  
+							<!-- ************ Insertion éventuelle de la date et de l'auteur **********************  -->					
+							#SET{details, #GET{date_article}|concat{#GET{auteurs}}}
+							<div class="logtypeedi" style="[(#GET{fondtexte2}|?{background-color:#GET{fondtexte2} ,''})]; [(#GET{bord2}|?{ border-color:#GET{bord2},''})]; ">
+								<INCLURE{fond=inclusions/details}{id_article}>
+ 								<H2 class="#EDIT{titre} titre" align="center" style="[(#GET{fondtexte2}|?{background-color:#GET{fondtexte2} ,''})] ; [(#GET{texte2}|?{color:#GET{texte2},''})];" >[(#TITRE|supprimer_numero)]  </H2>
+						
+								<BOUCLE_test(CONDITION){si #GET{auteurs}|=={oui}}>  
+									<span class="auteur">Par :  
+                    								<BOUCLE_auteurs-article(AUTEURS) {id_article} {", "}>
+                        								<a href="#URL_AUTEUR">#NOM</a>
+                    								</BOUCLE_auteurs-article>
+									</span> 
+								</BOUCLE_test>
+								<//B_test>						
+							</div>
+
+							<!-- ************ Insertion éventuelle de l'image de l'article **********************  -->
+             						[<div class="image">(#LOGO_ARTICLE||image_reduire{100})</div>]
+
+							<!-- ************ Insertion du descriptif ou à défaut de l'introduction***  -->  
+							[(#INTRODUCTION)]
+ 
+ 							<!-- <div style="clear:both">&nbsp;</div> -->
+
+ 							<!-- ***************** lien vers l'article entier ******************  -->   
+							<a class="suite" href="#URL_ARTICLE"><:lire_suite_article:></a>
+							<div style="clear:both">&nbsp;</div>
+
+						<!-- ********************  fin de la classe content ******************** -->
+						</div>					
+					
+					</BOUCLE_article>
+
+				<!-- ************************ fin de la classe derniers-articles ***************** -->
+				</div>

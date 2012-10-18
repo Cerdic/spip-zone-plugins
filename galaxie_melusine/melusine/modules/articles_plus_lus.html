@@ -1,0 +1,43 @@
+#CACHE{3600*24*66}
+ 
+<!-- ************ Exclusion des articles portant le mot clé exclu, ainsi que les articles du forum et du blog **********************  -->
+<BOUCLE_exclus4(RUBRIQUES) {titre_mot="exclu"} {doublons}>
+<BOUCLE_exclus40(ARTICLES) {id_rubrique} {doublons}>
+</BOUCLE_exclus40>
+</BOUCLE_exclus4>
+<BOUCLE_exclus14(RUBRIQUES)  {titre_mot="forum"} >
+<BOUCLE_exclus10(ARTICLES) {id_rubrique} {doublons}>
+</BOUCLE_exclus10>
+</BOUCLE_exclus14>
+<BOUCLE_exclus16(RUBRIQUES)  {titre_mot="blog"} >
+<BOUCLE_exclus12(ARTICLES) {id_secteur}   {doublons}>
+</BOUCLE_exclus12>
+</BOUCLE_exclus16>
+
+
+<div class="articlespluslus">
+ 
+
+<!-- ************ le contenu principal **********************  -->
+<div class="content" >
+
+<span class="title">  Les articles les plus lus : </span>
+
+<div class="trait">&nbsp;</div>
+
+<!-- Insertion des titres de 5 articles les plus populaires -->  
+<ul class="liste_der_plus">
+<BOUCLE_hitparade(ARTICLES){par popularite} {inverse}{doublons} {0,5}>
+                <li class="titre"> [<a class="titre" href="#URL_ARTICLE" title="<:lire_suite_article:>">(#TITRE|supprimer_numero)</a> <br/>]</li>
+                 
+</BOUCLE_hitparade>
+</ul>
+
+</div>
+
+<!-- ************ Fin de classe articles_lus  **********************  --> 
+  </div>
+
+ 
+
+

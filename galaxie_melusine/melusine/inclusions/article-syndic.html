@@ -1,0 +1,17 @@
+#CACHE{7200}
+<!-- **************** Insertion dans un article de la syndication de contenu lorsqu'il  a le mot clé "syndic"       *************************  -->
+
+	<div id="actu-syndique">
+	<BOUCLE_sites(SITES) {id_rubrique}{par date}{inverse} {unique}>	
+			<h4><a href="#URL_SITE">Derniers articles publiés dans le #NOM_SITE : </a></h4>
+			[<div >(#DESCRIPTIF)</div>]
+			<ul>
+			<B_syndic>
+				<BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic}{par date}{inverse}{0,5}>
+					<li>[<a href="#URL_ARTICLE">(#TITRE*|supprimer_numero)</a>]</li>
+					<p class="texte">#DESCRIPTIF</p>
+				</BOUCLE_syndic>
+			</B_syndic>
+			</ul>
+	</BOUCLE_sites>
+	</div>

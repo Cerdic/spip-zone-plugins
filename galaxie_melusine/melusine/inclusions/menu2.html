@@ -1,0 +1,61 @@
+#CACHE{3600*24}
+
+<!-- Exclusion des rubriques et articles ayant le mot clé "exclu" -->
+<BOUCLE_exclus(RUBRIQUES) {titre_mot=exclu} {doublons}{lang}>
+</BOUCLE_exclus>
+<BOUCLE_exclus1(ARTICLES) {titre_mot=exclu} {doublons}{lang}>
+</BOUCLE_exclus1>
+<BOUCLE_exclus2(RUBRIQUES) {titre_mot=forum} {doublons}{lang}>
+</BOUCLE_exclus2>
+<BOUCLE_exclus3(ARTICLES) {titre_mot=forum} {doublons}{lang}>
+</BOUCLE_exclus3>
+<BOUCLE_exclus4(RUBRIQUES) {titre_mot=blog} {doublons}{lang}>
+</BOUCLE_exclus4>
+<BOUCLE_exclus5(ARTICLES) {titre_mot=blog} {doublons}{lang}>
+</BOUCLE_exclus5>
+
+<B_smenuspipr>
+	<div id="treeview" class="nav1">
+
+		<ul class="menulist">
+<BOUCLE_smenuspipr(RUBRIQUES){racine}{par num titre}{doublons}>
+
+					
+
+
+			<li<BOUCLE_smenr(RUBRIQUES){id_parent}{0,1}> class="smenu"</BOUCLE_smenr>>
+			<B_mot>
+			<BOUCLE_mot(MOTS){id_rubrique}{titre=lien_direct}>
+				<BOUCLE_lien(SITES){id_rubrique}>
+				<a href="#URL_SITE"> 
+				</BOUCLE_lien>
+				</BOUCLE_mot>	
+				</B_mot>			
+				<a href="#URL_RUBRIQUE">
+				<//B_mot>
+				[(#TITRE|supprimer_numero)]</a>
+				<B_smenuspip>
+					<ul>
+				<BOUCLE_smenuspip(RUBRIQUES){id_parent}{par num titre}{doublons}>
+					<li<BOUCLE_smen(RUBRIQUES){id_parent}{0,1}> class="smenu"</BOUCLE_smen>>
+					<B_mot2>
+			<BOUCLE_mot2(MOTS){id_rubrique}{titre=lien_direct}>
+			<BOUCLE_lien2(SITES){id_rubrique}>
+				<a href="#URL_SITE"> 
+				</BOUCLE_lien2>
+				</BOUCLE_mot2>	
+				</B_mot2>			
+				<a href="#URL_RUBRIQUE">
+				<//B_mot2>
+						[(#TITRE|supprimer_numero)]</a>
+						<BOUCLE_ssmenu(boucle_smenuspip)></BOUCLE_ssmenu>
+					</li>
+				</BOUCLE_smenuspip>
+					</ul>
+			</B_smenuspip>
+			</li>
+</BOUCLE_smenuspipr>
+		</ul> 
+<!-- Fin de la classe  nav1 -->
+</div> 
+</B_smenuspipr>

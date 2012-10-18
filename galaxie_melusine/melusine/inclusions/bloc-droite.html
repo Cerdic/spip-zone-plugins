@@ -1,0 +1,25 @@
+#CACHE{3600*24*55}
+
+#SET{bloc_droite, (#CONFIG{melusine_squelettes/d}|serialize)}
+
+
+	<div  class="droite">
+		<BOUCLE_test(POUR){tableau #GET{bloc_droite}}>
+			 <BOUCLE_cond(CONDITION){si #VALEUR|=={aucun}}>
+   
+      			</BOUCLE_cond>
+				<div class="module">
+   				<INCLURE{fond=modules/#VALEUR}{id_rubrique}{id_article}>
+				</div>
+      			<//B_cond>
+
+		</BOUCLE_test>
+		
+	<!-- Fin de la classe droite -->    
+	</div> 
+
+
+
+
+
+

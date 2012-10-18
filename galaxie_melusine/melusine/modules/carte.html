@@ -1,0 +1,67 @@
+#CACHE{3600*24*63}
+
+#SET{auteurs, #CONFIG{melusine_blocs/auteurs} }
+#SET{date_article, #CONFIG{melusine_blocs/date_article} }
+
+
+
+<!-- ********************************* Edito ********************************  -->
+<div id="edito" class="edito">   
+
+<!-- *****************************************************************************************  -->
+<!-- **** Insertion éventuelle d'un ou de plusieurs editos, c'est-à-dire d'articles portant le mot clé "edito".
+Ces articles apparaîtront en entier dans le sommaire, c'est-à-dire la page d'accueil du site.                         *** --> 
+<!-- *****************************************************************************************  -->
+
+		<BOUCLE_edito1(RUBRIQUES) {titre_mot=reseau} >
+			#SET{fondtexte2,#CONFIG{melusine_persoarticle/#ID_ARTICLE/fondtexte2}}
+			#SET{bord2,#CONFIG{melusine_persoarticle/#ID_ARTICLE/bord2}}
+			#SET{texte2,#CONFIG{melusine_persoarticle/#ID_ARTICLE/texte2}}
+		</BOUCLE_edito1>
+		<BOUCLE_page1 (RUBRIQUES){titre_mot=reseau}>
+			<BOUCLE_titre1 (SITES){id_rubrique}{par num nom_site}{0,1}>
+  				#SET{page1,#ID_SYNDIC}
+			</BOUCLE_titre1>
+		</BOUCLE_page1> 	
+			
+
+				    		
+				
+				<!-- ************ le contenu principal **********************  -->
+				<div class="content" style="background-color:#GET{fondtexte2} ;border-color:#GET{bord2};color:#GET{texte2}" >
+			
+<div class="texte" style="width:100%;text-align:center; " >
+	<iframe name="frame" scrolling=no frameborder=0 height=370px width=100% src="spip.php?page=map&amp;id_syndic=#GET{page1}"></iframe> 
+	<div class="menu_frame">
+		<BOUCLE_rub0 (RUBRIQUES){titre_mot=reseau}>
+			<BOUCLE_lycee0 (DOCUMENTS){id_rubrique}>
+				<a href="spip.php?page=map0&amp;titre=academie&doc=#TITRE" target="frame">#TITRE</a>
+			</BOUCLE_lycee0>
+		</BOUCLE_rub0>
+		<BOUCLE_rub (RUBRIQUES){titre_mot=reseau}>
+			<BOUCLE_lycee (SITES){id_rubrique}>
+  				<a href=spip.php?page=map&amp;id_syndic=#ID_SYNDIC target="frame">#NOM_SITE</a>
+			</BOUCLE_lycee>
+		</BOUCLE_rub>    
+	</div>
+<!-- ************ fin de la classe texte **********************  -->   
+</div>
+
+				<!-- ************ fin de la classe content **********************  -->  
+				</div>
+
+				
+			
+
+        		
+<!-- ************ fin de la classe edito  **********************  --> 
+</div>
+
+
+
+
+
+
+
+
+

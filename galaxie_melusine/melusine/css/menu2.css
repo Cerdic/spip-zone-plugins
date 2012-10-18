@@ -1,0 +1,86 @@
+	/* *-*-*-*- *-*-*-*- *-*-*            Règles du Menu    Beespip       *-*-*-*- *-*-*-*- *-*-*-*-
+ 	 *                                _____________________                                 */
+#menu{
+font-weight:bold;
+font-size:110%;
+}
+
+
+.on{
+	font-size:13px;
+	font-weight:bold;
+}
+
+.button{
+font-family: Arial, Helvetica, sans-serif;
+font-size: 80%;  
+text-decoration: none;
+z-index:10;
+cursor: pointer;
+padding:5px 0px ;	
+}
+
+
+.buttonlabel{
+	height: 14px;
+	cursor: pointer;
+	border-width: 1px ;
+	visibility: visible;
+}
+
+.buttonlabel img{
+	margin: 0 0 -4px 0 !important;
+	border: 0 !important;
+	padding: 0 !important;
+}
+
+.level1label {
+	font-weight: 700;
+	cursor: default;
+ 	margin-bottom: 0;
+ 	margin-top:  .05em;
+	border-left: 1px solid #BBBBBB ;
+	padding: 0 3px 1px 8px;
+}
+
+.labelOver {
+	color: #00C;
+}
+
+.menuNode, .menuItem{
+	border-bottom:  solid #BBBBBB;
+	border-left: 0 solid #BBBBBB;
+}
+
+.menuNode a, .menuItem a{
+	line-height: 16px;
+	padding:  3px 1px 8px;
+	text-decoration: none;
+	width: auto;
+}
+
+.menuNode a:hover, .menuItem a:hover, .button a:hover, .cartouchemenu a:hover{
+ 	color:#003366;
+ }
+
+.menu {
+	padding-left: 13px;
+	padding-bottom:  .6em;
+	padding-top: 1px;
+ 	margin-bottom: -3px;
+ 	margin-left: 0;
+}
+
+.menu .menu, .menu .menu .menu{ 
+	border-left: 0 solid #BBBBBB;
+	border-bottom: 0 solid #BBBBBB;
+	padding-left: 23px;
+}
+
+.menu .menu .menu{ 
+ 	height:1%;
+}
+
+
+	/* *-*-*-*- *-*-*-*- *-*-*-*         End Menu tree rules        *-*-*-*- *-*-*-*- *-*-*-*-
+ 	 *                                   ___________________                                */

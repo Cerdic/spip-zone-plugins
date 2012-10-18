@@ -1,0 +1,14 @@
+#CACHE{3600*24*66}
+
+#SET{bande_chemin,(#CONFIG{melusine_chemin/effectifs}|serialize)}
+
+	
+		<BOUCLE_test(POUR){tableau #GET{bande_chemin}}>
+			 <BOUCLE_cond(CONDITION){si #VALEUR|=={aucun}}>
+   
+      			</BOUCLE_cond>
+   				<INCLURE{fond=modules/chemin/#VALEUR}{id_article}{id_rubrique}>
+      			<//B_cond>
+
+		</BOUCLE_test>
+		

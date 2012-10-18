@@ -1,0 +1,274 @@
+body{font:90% arial,sans-serif;_font:80% arial,sans-serif}
+h1{font-size:160%}
+h2{font-size:125%}
+h3{font-size:105%}
+/*-- Bandeau -- */.bandeau{height:93px;text-align:right;z-index:1;position:relative}
+a.bandeau3{position:absolute;font-size:0.7cm;font-weight:700;z-index:3;text-decoration:none;right:20px;top:25px}
+.nouvim{position:absolute;top:0;right:0;height:100%;z-index:1;overflow:visible}
+.nouvimage{height:100%}
+.degrad{position:absolute;top:0;height:100%;z-index:2;width:1px}
+.degrad1{width:1px;height:100px;float:left}
+#logoacad{clear:both;float:left;margin-top:40px;margin-left:110px;border:0}
+#logoacad .logo-bandeau img{position:absolute;z-index:4;float:left;border:0;top:55px}
+.banintit{float:left;font-size:20px;font-weight:700;padding:10px 0}
+.imagegauchelog{position:absolute;top:0;left:0;z-index:3;border:0 solid}
+.transparence{position:absolute;top:115px;left:16px;z-index:2;height:30px;border:1px solid}
+/*  --bande-chemin -- */.bande-chemin{z-index:1;border-bottom:2px solid;height:15px;position:relative}
+.ecritbande{position:relative;z-index:4;height:25px;margin-left:190px}
+/* style des onglets  */#top ul{position:absolute;right:10px;margin-top:-34px;_margin-top:-33px;list-style:none;z-index:20}
+#top li{float:right;font-variant:small-caps}
+#top ul li a{float:left;padding-left:10px;padding-right:10px;margin-left:10px;-moz-border-radius-topleft:10px;-moz-border-radius-topright:10px;border:1px solid;border-bottom:0;text-align:center;height:31px;font-size:18px;text-decoration:none}
+.img_onglet{vertical-align:25%}
+/* --colonne de gauche-- */.gauche{z-index:5;border:0;margin-top:10px;margin-right:5px;margin-left:5px}
+/* mise a jour  */.maj{font-size:11px;border:1px solid gray;text-align:center;margin-bottom:10px;padding:3px 0}
+/*-- colonne de droite-- */.droite{margin:0 5px}
+/*  --pied de page -- */.footer{clear:both;text-align:center;margin:10px auto;padding:20px}
+/*--sommaire en deux parties-- */.sommairemulticol{width:100%}
+.sommaire_gauche{position:relative;margin-right:15px;float:left;width:40%}
+.sommaire_droite{float:left;width:56%}
+.logtypeedi{margin-bottom:1.5em}
+.logtypeedi H2{font-size:100%;text-align:left;margin:0 0 0.5em}
+.editodetail{float:left;width:4em;border-right:solid 1px;margin-right:0.5em;padding-right:0.5em}
+.editodetail .j{float:left;font-size:22px}
+.editodetail .m{font-size:11px;position:absolute}
+.editodetail .a{position:absolute;margin-top:10px;font-size:10px}
+/*  --contenu-- */.rubrique{width:100%;_width:95%}
+/*---comportement des liens de style bouton--- */.logo-titre{padding-top:2px;font-size:140%;font-weight:700}
+.boutongauche{display:block;text-decoration:none;border:1px solid;text-align:center;font-size:12px;margin-bottom:5px;height:25px;padding:0}
+a.bouton_droite{display:block;text-decoration:none;border:1px solid;text-align:center;min-height:25px;margin-bottom:5px;margin-top:5px}
+a.logtitre{font-size:16px;margin-left:0}
+/*  -- edito-- */.edito{margin-left:0;clear:both}
+.edito .titre{font-family:verdana,arial,sans-serif;font-size:17px;font-weight:700}
+.edito .image .spip_logos{display:block;float:left;border:0;margin:10px}
+.edito .surtitre{font-size:120%;font-weight:700;margin:5px 10px;padding:0}
+.edito .soustitre{font-size:130%;font-weight:700;margin:5px 10px;padding:0}
+.edito .detail{font-size:90%;font-weight:700;text-align:right;padding-right:10px}
+.edito .texte{margin-right:10px;padding:0}
+.edito .chapo{font-weight:700;margin:10px;padding:0}
+.edito .post-scriptum{font-size:100%;border-top:2px solid #000;margin:10px;padding:0}
+.edito .post-scriptum .annonce{font-weight:700;margin:10px 0;padding:0}
+.edito .notes{border-top:2px solid #000;font-size:90%;margin:10px;padding:0}
+/*  ---focus--- */.focus-articles{clear:both;position:relative;margin-top:0;margin-left:5px;padding:1px}
+/*  --derniers articles --- */.articles_lus{position:relative;margin-right:15px;float:left;width:40%;padding:1px}
+.dern-articles{position:relative;margin-left:15px;float:right;width:40%;padding:1px}
+.dern-articles2 .date{font-size:75%}
+.derniers-articles{font-family:Arial,Verdana,Helvetica,sans-serif;font-size:100%;float:left}
+.derniers-articles .en-tete{color:#FFF;margin:0 100px 100px}
+.derniers-articles .surtitre{font-weight:700;padding-top:5px;margin:0 10px}
+.derniers-articles .soustitre{padding-top:5px;margin:0 10px}
+.derniers-articles a.suite{text-align:right;display:block;margin-top:0}
+/*  -- style article -- */.imprimcontact{height:35px}
+.articledetail{display:block;_position:relative;float:right;border-left:1px solid;border-bottom:1px solid;left:0;padding-top:5px;padding-bottom:5px;padding-left:10px;margin-top:-25px;margin-left:10px;width:45%;_margin-right:45px}
+.article .surtitre{font-size:120%;font-weight:700;font-style:italic;margin:0}
+.article .titre{font-size:16px;font-weight:700}
+.article .soustitre{font-size:130%;font-weight:700;height:15px;padding-top:5px;font-style:italic;margin:0}
+.article .chapo{font-weight:700;margin:10px 10px 0}
+.article .post-scriptum{color:#000;padding-top:10px;font-size:100%;border-top:2px solid #6262A4;margin:10px 0}
+.article .post-scriptum .annonce{font-weight:700;margin:0 0 10px;padding:0}
+.article .notes{border-top:2px solid;font-size:90%;margin:10px 0;padding:0 10px}
+.article .en-tete{font-size:130%;font-weight:700;margin:10px 0}
+.article a.imprimer{display:block;background-image:url(../images/puces/printer.gif);background-repeat:no-repeat;width:22px;height:22px;float:right;margin-right:10px}
+#contacter{display:block;background-image:url(../images/puces/contact.gif);background-repeat:no-repeat;width:22px;height:22px;float:right;margin-right:40px}
+/*  --- docs joints-- */.doc_joint{display:block;width:150px;float:left;margin:6px}
+.doc_joint_titre{font-size:80%}
+.doc{display:table;}
+#docjoints{width:100%;_width:95%}
+/*  --  squelettes contact et auteur-- */.centrecontact{border:0;padding-left:23%;padding-right:18%;font-family:Arial,Verdana,Helvetica,sans-serif;font-size:11px;padding-top:50px}
+.articleauteur{border:1px solid;margin-bottom:10px}
+.auteur .intitu{height:35px;font-family:verdana,arial,sans-serif;font-size:16px;width:100%;text-align:center;font-weight:700;border:1px solid;padding-top:10px;margin-bottom:10px}
+.auteur .intitu1{font-family:verdana,arial,sans-serif;font-size:16px;text-align:left;font-weight:700;border:1px solid;margin-bottom:10px;padding:10px}
+.auteur p.spip_bouton{background:transparent;float:right;border:0}
+.auteur label{display:block;padding-left:5px}
+.auteur legend{font-size:14px}
+.auteur fieldset{border:1px solid;margin-bottom:10px;padding:10px}
+.auteur{text-align:left !important}
+.auteur .image .spip_logos{display:block;float:right;border:0;margin:10px}
+.auteur .nom{color:#6262A4;font-size:150%;font-weight:700;margin:0 0 20px;padding:0}
+.auteur .tchak{color:#000;font-size:130%;font-weight:700;margin:30px 0 10px;padding:0}
+.auteur .spip_encadrer{border:1px solid #6262A4;color:#6262A4;font-size:100%;margin:5px 0 10px;padding:5px}
+.auteur input{margin-left:15px}
+.auteur textarea{margin-left:15px;width:80%;height:250px}
+.detailF{float:right;border-left:1px solid;border-bottom:1px solid}
+.rubriquedetail{display:block;_position:relative;float:right;border-left:1px solid;border-bottom:1px solid;left:0;padding-top:5px;padding-bottom:5px;padding-left:10px;margin-top:0;margin-left:10px;width:45%;_padding-left:10px;_padding-right:0;_padding-top:2px;_padding-bottom:10px;_margin-right:45px}
+.focusdetail{display:block;position:relative;right:5px;bottom:15px;_bottom:0;_margin-bottom:15px;font-size:85%}
+/*  -- style relatif au blog -- */.blogs{border:1px solid}
+.blogs .intitule{height:35px;font-family:verdana,arial,sans-serif;font-size:200%;text-align:center;font-weight:700;color:#696969;width:100%;border-bottom:1px solid #000;padding:10px 0 2px}
+.blogs .secteur{width:100%;border-bottom:1px solid;border-top:1px solid #000;text-align:center;font-size:150%;padding:2px 0 5px}
+.blog{width:100%;margin:auto}
+.blog .billet .titre-billet img{float:left;padding-right:10px}
+.blog .intitulebas{height:35px;font-family:verdana,arial,sans-serif;font-size:16px;text-align:center;font-weight:700;width:100%;border-top:1px solid;padding:10px 0 2px}
+.blog .billet{margin-bottom:30px;border:solid 1px;padding:10px}
+.blogdetail{height:45px;padding:10px 10px 0}
+.billetart .image1{margin-bottom:5%}
+.detailbillet{font-size:9pt;float:right;border-bottom:1px solid;border-left:1px solid}
+.forum-message{border:1px solid;margin-bottom:5px;padding:5px}
+.forum{font-size:100%;margin:0 0 0 30px;padding:0}
+.commentaire{margin-top:10px}
+a.repondre{padding-right:20px}
+.forum fieldset{border:1px solid;margin:5px 0 0;padding:10px}
+.forum legend{font-weight:700;border:1px solid;margin:0 0 5px;padding:1px 5px}
+.forum .visualisation{border:1px solid;margin:10px 0 0}
+.forum .visualisation .titre{border-bottom:1px solid;font-size:120%;font-weight:700;text-align:left;margin:0;padding:2px 10px}
+.forum .visualisation .detail{border-bottom:1px solid;border-left:1px solid;font-size:90%;text-align:center;width:200px;float:right;padding:1px}
+/*  --galeries--- */.galerie{background-color:#FFF;width:100%;border:1px solid #000;margin:auto}
+.galerie .intitule{height:35px;font-family:verdana,arial,sans-serif;font-size:200%;text-align:center;font-weight:700;color:#696969;width:100%;border-bottom:0 solid #000;padding:10px 0 2px}
+.galerie .secteur{width:100%;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#000;border-top-width:1px;border-top-style:solid;border-top-color:#000;text-align:center;margin-bottom:10px;font-size:17px;padding:2px 0 5px}
+.plan .secteur{width:100%;border-bottom:1px solid;border-top:1px solid;text-align:center;margin-bottom:10px;padding:2px 0 5px}
+.plan a.rubriq{display:block;font-size:13px;font-weight:700;margin:10px 0 0 15px}
+.secteur a.rubriq{font-size:13px;font-weight:700;text-align:center;width:100%;margin:0}
+.plan ul li a.article{margin-top:0;font-family:Arial, Helvetica, sans-serif;font-size:12px;margin-left:15px;padding-left:20px}
+.plan .secteur ul{list-style-type:none;border:0;margin:0;padding:0 0 0 20px}
+.plan ul{list-style-type:square;border:0;margin:0;padding:0 0 0 20px}
+.plan ul li ul{list-style-type:circle;border:0;margin:0;padding:0 0 0 20px}
+.plan li{font-size:80%;border:0;margin:0;padding:0}
+/* --plan et syndication---  */.plan a.article-syndic{display:block;font-size:12px;font-weight:700;margin:0;padding:0 0 0 10px}
+.plan a.article-syndic:hover{background-image:url(../images/puces/puce.gif);background-position:left top;background-repeat:no-repeat}
+.plan .a-propos{display:block;border:0;font-size:11px;padding:3px 30px 5px 40px}
+/*  -- recherche--- */.recherche{font-size:15px}
+.recherche .intitule{height:35px;display:block;font-family:verdana,arial,sans-serif;font-size:16px;_margin-top:20px;text-align:center;font-weight:700;padding:0 0 0 45px}
+.recherche .elements-trouves{font-size:150%;font-weight:700;text-decoration:underline;margin:0 0 15px;padding:0}
+.recherche .mot-cle{font-size:130%;font-weight:700;text-decoration:underline;margin:0 0 20px;padding:0}
+.recherche .derniers-articles .chemin{font-weight:700;text-align:center;font-size:130%;margin:0}
+.derniers-articles .detail{font-size:85%;font-weight:700;text-align:center;border-left:1px solid;border-bottom:1px solid;width:200px;float:right;margin:0 0 10px;padding:1px 5px}
+.derniers-articles .introduction{margin:0;padding:10px}
+.derniers-articles .annonce{display:block;width:100%;border:1px solid;padding-left:10px;margin:15px auto}
+#formulaire_recherche input.submit{height:25px;width:20px;font-size:0;background-repeat:no-repeat;background-color:transparent;cursor:pointer}
+.recherche form{margin-bottom:5px;border:1px solid;background:#fff}
+input#recherche.text{border:0;width:85%;height:24px}
+/* -- mentions legales-- */.menleg{background:transparent;font-size:11px;text-align:center;border:1px solid;margin-bottom:20px}
+.menleg .en-tete{display:block;font-weight:700;font-size:150%;text-align:center;border-bottom:1px solid;width:100%}
+.menleg .contenu{_margin:0;padding-bottom:3px;font-size:100%;width:100%;margin:0}
+.menleg .mentitre{font-size:100%;width:100%;padding:0}
+/* -- mini-agenda -- */.agenda{background:transparent;font-size:11px;text-align:center;border:1px solid;margin:10px auto}
+.agenda .en-tete{display:block;font-weight:700;font-size:150%;border-bottom:1px solid;text-align:center;width:100%}
+.agenda .contenu{font-size:100%;width:100%}
+.agenda .contenu .mois{font-size:100%;text-align:center;padding:0}
+.agenda .contenu .mois a{font-weight:700;text-decoration:none;font-size:100%}
+.tableau{font-family:Verdana, Arial, Helvetica, sans-serif;font-size:9px;text-align:center;font-style:normal}
+.calendar_this_day{background:red;font-weight:700}
+.calendar_not_this_month{background:#ECECEC;color:#AAA}
+.calendar_head_mini{text-align:center;font-size:9px;font-family:Verdana, Arial, Helvatica, sans-serif;font-style:normal;border-bottom:1px solid}
+.clefs{font-size:12px;font-weight:700;border-bottom:1px solid;border-top:1px solid}
+/*  --albums photos-- */.album{background:transparent;font-size:11px;width:150px;_width:152px;_float:right;_margin-right:5%;_margin-top:10px;border:1px solid;margin:10px auto}
+.album .en-tete{display:block;font-weight:700;font-size:150%;text-align:center;border-bottom:1px solid;width:150px;_width:152px}
+.album .contenu{_width:152px}
+/* ---aux sites syndiques---- */.web .en-tete{font-weight:700;font-size:150%;text-align:center;border-bottom:1px solid}
+.web .en-tete-site img{float:left;margin-right:3px}
+.web .en-tete-site{font-size:140%;font-weight:700;margin-top:10px}
+#web a.nom-site{font-size:140%}
+#web{font-size:100%;border:1px solid}
+.web{border:1px solid;border-bottom:0;text-align:center}
+.web a.en-tete,.breves a.en-tete{background-position:left center;background-repeat:no-repeat;padding-left:20px;height:20px;display:block;font-weight:700}
+.web a.article-synd{display:block;text-decoration:none;background-image:url(../images/puces/puce.gif);background-position:left top;background-repeat:no-repeat;font-weight:700;font-size:130%;margin:0 5px;padding:0 0 5px 10px}
+.site a.article-synd{display:block;font-size:120%;text-align:left}
+.centre .web a.article-synd:hover{color:gray;text-decoration:none;background-image:url(../images/puces/puce.gif);background-position:left top;background-repeat:no-repeat}
+.web .sitesyndic{font-size:100%;margin:10px;padding:0}
+.web .sitesyndic a.nom-site{display:block;font-size:130%;font-weight:700;text-align:center;margin-bottom:10px;padding:1px}
+.web .site{font-size:100%;width:100%;margin:0;padding:0}
+.web .site .descriptif{text-align:left;margin:0 5px 0 10px}
+.web .site a.nom-site{display:block;font-size:130%;font-weight:700;text-align:center;margin:0 0 10px;padding:1px}
+/* -- style relatif aux breves-- */.breves .en-tete{border-bottom:1px solid;display:block;font-weight:700;font-size:150%;text-align:center;width:100%}
+.breves{font-size:100%;margin-bottom:10px;border:1px solid;text-align:center}
+.breves .contenu{padding-bottom:5px;font-size:100%;width:100%}
+.breves .contenu .nom-breve{display:block;font-size:140%;font-weight:700;text-align:center}
+.breves .contenu .date{font-size:90%;margin-left:40%;text-align:center;padding:1px}
+.breves .contenu .texte{padding-left:5px;font-size:125%;line-height:110%;margin:0}
+.breves .img{text-align:center}
+.breves p{text-align:left}
+/*  -- les bords des contenus --- */.bordertop,.borderbottom{display:block;font-size:1px;z-index:10}
+.content2{display:block;border-left:0 solid;height:40px;border-style:solid;border-width:0 1px;padding:2px 10px}
+.content{_height:10px;margin-bottom:10px;-webkit-border-bottom-left-radius:10px;-webkit-border-top-right-radius:10px;-moz-border-radius-topright:1em;-moz-border-radius-bottomleft:1em;border-top-right-radius:1em;border-bottom-left-radius:1em;border-style:solid;border-width:1px;padding:10px}
+/* --Le contenu, les bords et l'encadre--  */.ensemrub{display:block;margin-top:5px;margin-bottom:15px;margin-left:10px}
+.ensembarticle{margin-left:30px}
+.ensemble_foc{position:relative;margin-top:15px;_margin-top:20px}
+.ensemble{position:relative;margin-top:15px;_margin-top:30px}
+.ensemrub .pardroit .content2 a{font-size:17px;font-weight:700}
+.bloc_rub{display:block;float:left;width:40%;margin-left:10px;margin-bottom:0}
+.bloc_rub3{display:block;float:left;width:90%;margin-left:10px;margin-bottom:0}
+.bloc_rub h4{font-size:110%;margin-bottom:5px}
+/*  --images et logos-- */.article .image{display:block;float:left;margin:5px}
+.focus-articles .image{display:block;float:left;border:0;position:relative;margin:0}
+.derniers-articles .image{display:block;float:left;border:0;_position:relative;margin:10px}
+.imsommaire{_width:100%;margin-bottom:10px}
+.image .spip_logos{border:0 solid;display:block;float:left;position:relative;margin:10px}
+.article .spip_logos{float:right;margin-left:10px}
+/*  --- formulaires-- */fieldset .forml{display:inline;width:67%;background:#FFF;font-size:12px;text-decoration:none;border:1px solid;text-align:left;margin:0;padding:4px 0 0 10px}
+.saisie-texte,.forml{display:inline;width:67%;font-size:10px;text-decoration:none;border:0 solid;text-align:center;margin:0;padding:4px 0 0}
+fieldset{margin:0;padding:0}
+/*  -- formulaire de petition-- */.petition{border:1px solid red;background:#EEE;margin:20px 30px;padding:10px}
+.petition fieldset{border:1px solid #6262A4;margin:5px 0 0;padding:10px}
+.petition legend{color:#6262A4;font-weight:700;border:1px solid #6262A4;margin:0 0 5px;padding:1px 5px}
+/* signataires de la petition  */.signatures{border:2px solid #6262A4;background:#EEE;font-size:100%;margin:10px 30px;padding:10px}
+.signatures td{border:1px solid #6262A4;empty-cells:hide;font-size:12px;margin:0;padding:2px 5px}
+.signatures thead{background:#6262A4;font-weight:700;color:#FFF}
+.signatures a{color:#41C74A;text-decoration:none}
+.signatures a:hover{color:#41C74A;text-decoration:underline}
+.plan a.rubrique{font-size:150%;font-weight:700}
+.rubrique .som2{width:50%;float:left;margin-right:15px}
+.rubrique .rurub .filles2{float:left;width:50%}
+.menu_lyc{position:absolute;top:10px;right:5px;z-index:10}
+.menu_lyc a{display:block;float:right;background-repeat:no-repeat;font-size:15px;text-decoration:underline;color:#fff;margin-top:40px}
+a.haut{z-index:20;height:70px}
+a.bas{z-index:20;margin-top:56px;height:50px;background-position:10px -16px}
+#sidentifierform li{list-style-type:none;margin-left:-30px}
+.content li{margin-left:20px}
+/* Comment form----  */input.preview,input.submit{width:auto;outline:none;background:#2e6da3;color:#eee;border:none;cursor:pointer;padding:2px 3px}
+input.preview:focus,input.submit:focus,input.preview:hover,input.submit:hover{color:#fff}
+#comment-form h3{padding-left:45px;padding-top:5px;font:bold 1.4em Helvetica,FreeSans,Arial,"Liberation Sans","Nimbus Sans L",sans-serif}
+#comment-form h3.add-comment{padding-bottom:10px}
+#comment-form fieldset,.formulaire_ecrire_auteur fieldset{display:block;background:#f8f5ee;padding:10px}
+#comment-form fieldset label,.formulaire_ecrire_auteur label{font-weight:700;cursor:pointer}
+#comment-form fieldset p{line-height:1.2;margin:0 0 1em}
+#comment-form fieldset p.remember *{vertical-align:middle}
+#comment-form fieldset p.field label{display:inline-block;width:12em}
+.formulaire_ecrire_auteur .saisie_texte,.formulaire_ecrire_auteur .saisie_titre,#session_nom,#session_email,.session_email,#c_site,#titre,#texte,#c_message{border:1px solid #bfbfbf;background:#fff;color:#444;padding:2px 1px}
+.formulaire_ecrire_auteur .saisie_titre,#session_nom,#session_email,.session_email,#c_site,#titre{background-repeat:no-repeat;padding-left:20px;font-size:inherit;font-family:inherit}
+#session_nom{background-image:url(http://dev.netoyens.info/spip2/img/c-icons.png);background-position:3px 4px}
+#session_email,.session_email{background-image:url(http://dev.netoyens.info/spip2/img/c-icons.png);background-position:3px -15px}
+#c_site{background-image:url(http://dev.netoyens.info/spip2/img/c-icons.png);background-position:3px -37px}
+.formulaire_ecrire_auteur .saisie_titre,.saisie_titre #titre,.sujet_message_auteur{background-image:url(http://dev.netoyens.info/spip2/img/c-icons.png);background-position:3px -57px}
+.saisie_texte #texte,.formulaire_ecrire_auteur .saisie_texte{width:98%;font-size:inherit;font-family:inherit;line-height:1.5}
+.saisie_titre,#session_nom:hover,#session_email:hover,.session_email:hover,#c_site:hover,.saisie_texte #texte:hover,.saisie_titre #titre:focus{color:#000}
+fieldset .formulaire_login li{display:block;margin-left:-30px}
+/*---liste-sites-- */ul.liens{padding-left:30px;padding-bottom:10px;margin-top:0;padding-top:0;text-align:left;margin-left:0}
+ul.liens li{list-style:none;width:110px;margin-left:-20px;background-image:url("../images/fleche_droite.png");background-repeat:no-repeat;padding-left:15px;padding-bottom:5px;display:block}
+#droite3{width:180px}
+#droite3 ul.liens{margin-left:0;padding-left:15px;text-align:left;padding-bottom:5px;display:block}
+ul.liens li ul li{background-image:url("../images/fleche_droite.png");background-repeat:no-repeat;text-align:left;margin-left:-35px;padding-left:15px;padding-bottom:5px;display:block;z-index:25;width:100px}
+.spip_forms.form_3{border:0 solid;width:90%;display:block;float:left;background-color:#ccc}
+a,.content a{text-decoration:none;font-size:100%}
+a:hover,.footer a,.auteur a,.forum .visualisation a{text-decoration:none}
+.footer a:hover,.content a:hover,.edito a:hover,.derniers-articles a:hover,.article .texte a:hover,.auteur a:hover,.forum .visualisation a:hover,.agenda .contenu .mois a:hover,.web a.article-synd:hover{text-decoration:underline}
+.rubrique .spip_documents,.article .spip_documents{display:block;font-size:95%;text-align:center;margin:10px 5px;padding:5px}
+.rubrique .spip_documents_center,.article .spip_documents_center{margin-left:auto;margin-right:auto}
+.rubrique .spip_doc_titre,.article .spip_doc_titre{text-align:center;padding:5px 0 0}
+.rubrique .spip_doc_descriptif,.article .spip_doc_descriptif{font-size:90%;text-align:center;padding:5px 0}
+.focus-articles a.titre,.dern-articles2 .titre,.plan .date-syndic,.plan .a-propos .site-pere,.plan .a-propos .auteur-pere,input.submit{font-weight:700}
+a.suite,.auteur .image1,.blogdetail img,.cartouche img{float:right}
+.doc_joint img.spip_logos,.pargauche,.logo{float:left}
+.detail,#comment-form li,.formulaire_ecrire_auteur li{display:block}
+.blogs ul,.blog .billet .titre-billet{font-size:150%}
+.blogs .charte,.blog .texte,.forum1 .charte,.forum .visualisation .texte{padding:10px}
+.blog .intitule,.plan .intitule{height:35px;font-family:verdana,arial,sans-serif;font-size:16px;text-align:center;font-weight:700;width:100%;padding:10px 0 2px}
+.contenu .rubrique .blog .titre,.blog .texte table,.forum1 .charte table,.spip_logos,img.logo{border:0}
+.blog .intitulehaut,.forum1 .intitule{height:35px;font-family:verdana,arial,sans-serif;font-size:16px;text-align:center;font-weight:700;width:100%;border-bottom:1px solid;padding:10px 0 2px}
+.blog .secteur,.forum1 .secteur{width:100%;border-bottom:1px solid;border-top:1px solid;text-align:center;font-size:150%;padding:2px 0 5px}
+.blog ul,.forum1 ul{padding-left:10%;font-size:150%}
+.billetart,.forumpublic{width:100%;_width:98%;padding-top:3%}
+.forum1,.plan{width:100%;border:1px solid;margin:auto}
+.annonce-forum,#formulaire_recherche label{display:none}
+.forum .en-tete,.petition .en-tete,.signatures .en-tete{font-size:150%;margin:0 0 5px}
+.forum textarea,.petition textarea{width:80%}
+.titresclefs,.titresclefs ul{text-align:left;padding-left:10px;_margin-left:0}
+.bloc_rub h2,.bloc_rub h3,.module{margin-bottom:5px}
+#sidentifierform input#var_login,#sidentifierform input#password,fieldset .formulaire_login input{width:100px}
+#gauche fieldset,.spip_forms.form_3 fieldset{border:0 solid}
+.evts{float:left;}
+.imgs{float:left;}
+.wheel{_margin-left:-97px;}
+.colorpicker_close {background-color:#3874b0;font-size: 14px;font-weight:bold;float:right;margin:0px;border:#fff 0px solid}
+/* nuage */.nuage_stat .tag a:hover{text-decoration:underline;}
+.nuage_stat{display:block;}
+#content .web{border:none;text-align:left}
+#content .web a.nom-site{text-align:left}
+.menu{margin-bottom:10px;}

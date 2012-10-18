@@ -1,0 +1,44 @@
+#SET{skel, #CONFIG{melusine_articles/skel}|sinon{#ARRAY}}
+#SET{article,#CONFIG{melusine_articles/effectifs}|sinon{#ARRAY}}
+<form action='#ENV{action}' method='post'>
+
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+
+	<h3>Structure des articles #MELUSINEAIDE{203} </h3> 
+	
+
+
+
+
+<div class="actif_gauche">
+	<h2> Rubrique</h2>
+	<ul>
+		<BOUCLE_test0(POUR){tableau #GET{article}}{valeur!=aucun}>
+		<li>
+			<span class="boutons"><input type='submit' title="Vers le bas" class="bas"  name='position' value="d#CLE" /><input type='submit' title="Vers le haut" class="haut" name='position' value="m#CLE" /><input type='submit' title="Supprimer" class="sup" name='position' value="s#CLE" /></span>
+			[(#VALEUR|replace{"_"," "})]
+		</BOUCLE_test0>
+	</ul>
+</div>
+
+
+<div class="reserve">
+	<h3>Squelettes disponibles</h3>
+	<ul>
+		<BOUCLE_test2(POUR){tableau #GET{skel}}>	
+			<li>
+				<input type='submit' title="Ajouter" class="ajoutg" name='position' value="a#VALEUR" />
+				[(#VALEUR|replace{"_"," "})]
+			</li>
+		</BOUCLE_test2>
+	</ul>
+</div>
+<div style="clear:both">
+<div class="init">
+	<ul>		
+		<li>Actualiser la liste des squelettes disponibles<input type='submit' class="ok_bouton"  name='position' value="skels" /></li>
+	</ul>
+</div>
+</div>		
+</form>

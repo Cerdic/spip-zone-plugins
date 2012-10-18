@@ -1,0 +1,26 @@
+
+#SET{tags,(#CONFIG{melusine_nuage/mot}|serialize)}
+#SET{tags2,(#CONFIG{melusine_nuage/article}|serialize)}
+
+<div class="nuage_stat">
+	<BOUCLE_test(POUR){tableau #GET{tags}}>
+		#SET{id,#CLE}	
+		<BOUCLE_test00(POUR){tableau #VALEUR}>
+			[(#VALEUR|mult{2}|=={0}|oui|?{#SET{titre,#VALEUR},#SET{taille,#VALEUR}})]
+			
+		</BOUCLE_test00>
+
+   		<span class="tag"  ><a href="spip.php?mot#GET{id}" style="font-size:#GET{taille}px;color:#CONFIG{melusine_nuage/couleur}">#GET{titre}</a></span>  
+    	
+	</BOUCLE_test>
+	<BOUCLE_test2(POUR){tableau #GET{tags2}}>	
+		#SET{id,#CLE}	
+		<BOUCLE_test000(POUR){tableau #VALEUR}>
+			[(#VALEUR|mult{2}|=={0}|oui|?{#SET{titre,#VALEUR},#SET{taille,#VALEUR}})]
+		</BOUCLE_test000>
+   		<span class="tag"><a href="spip.php?article#GET{id}" style="font-size:#GET{taille}px;color:#CONFIG{melusine_nuage/couleur}">#GET{titre}</a></span>      	
+	</BOUCLE_test2>
+		
+</div>
+<div style="clear:both"></div>
+

@@ -1,0 +1,13 @@
+#SET{footer,(#CONFIG{melusine_footer/effectifs}|serialize)}
+[(#AUTORISER{modifier,'','',#ID_AUTEUR})#INCLURE{fond=inclusions/config_skel}]
+	
+		<BOUCLE_test(POUR){tableau #GET{footer}}>
+			 <BOUCLE_cond(CONDITION){si #VALEUR|=={aucun}}>
+   
+      			</BOUCLE_cond>
+   				<INCLURE{fond=modules/footer/#VALEUR}{id_article}{id_rubrique}>
+      			<//B_cond>
+
+		</BOUCLE_test>
+
+

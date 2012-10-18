@@ -1,0 +1,185 @@
+<BOUCLE_article_principal(ARTICLES){doublons} {id_article}>
+
+#SET{auteurs, #CONFIG{melusine_blocs/auteurs}}
+#SET{date_article, #CONFIG{melusine_blocs/date_article}}
+#SET{fondtexte2,#CONFIG{melusine_persoarticle/#ID_ARTICLE/fondtexte2}}
+#SET{bord2,#CONFIG{melusine_persoarticle/#ID_ARTICLE/bord2}}
+#SET{texte2,#CONFIG{melusine_persoarticle/#ID_ARTICLE/texte2}}
+
+<div class="article" style=" width='100%' height='100%' "> 
+      
+				<div class="imprimcontact">
+					<BOUCLE_auteurs(AUTEURS){id_article} >
+						
+						[(#PLUGIN{mediabox1}|oui) <a id="contacter" href="#URL_PAGE{contact2,id_auteur=#ID_AUTEUR}&amp;keepThis=true&amp;TB_iframe=true&amp;height=450&amp;width=500" title="Contacter l'auteur : #NOM" class="mediabox" ></a>]
+						[(#PLUGIN{mediabox1}|non) <a id="contacter" href="#URL_PAGE{contact,id_auteur=#ID_AUTEUR}" title="Contacter l'auteur : #NOM"  ></a>]
+
+					</BOUCLE_auteurs>
+            				<a class="imprimer" href="#URL_PAGE{imprimer,id_article=#ID_ARTICLE}" title="<:imprimer_article:>" target="blank"></a>
+      				</div>
+       
+       				
+
+
+
+ 
+
+
+				<!-- ************ le contenu principal **********************  -->
+
+				<div class="content" style="background-color:#GET{fondtexte2};border-color:#GET{bord2};color:#GET{texte2}" >
+
+					#SET{bloc_droite, (#CONFIG{melusine_squelettes/d}|serialize)}
+					#SET{flag,1}
+            				<BOUCLE_test1(POUR){tableau #GET{bloc_droite}}>
+
+						<BOUCLE_cond(CONDITION){si #VALEUR|=={logo}}>
+							#SET{flag,0}
+      						</BOUCLE_cond>
+						
+      						<//B_cond>
+					</BOUCLE_test1>
+					[(#GET{flag}|=={1}|?{[(#LOGO_ARTICLE||image_reduire{150,150})],''})]
+
+				<!-- ************ Insertion �ventuelle de la date et de l'auteur **********************  -->					
+					#SET{details, #GET{date_article}|concat{#GET{auteurs}}}
+					<div class="logtypeedi" style="background-color:#GET{fondtexte2} ;border-color:#GET{bord2}; ">
+						<INCLURE{fond=inclusions/details}{id_article}>
+ 						<H2 class="#EDIT{titre} titre" align="center" style="color:#GET{texte2}">[(#TITRE|supprimer_numero)] </H2>
+						
+						<BOUCLE_test(CONDITION){si #GET{auteurs}|=={oui}}>   
+							<span class="auteur">Par : 
+                    					<BOUCLE_auteurs-article(AUTEURS) {id_article} {", "}>
+                        					<a href="#URL_AUTEUR">#NOM</a>
+                    					</BOUCLE_auteurs-article>
+							</span> 
+						</BOUCLE_test>
+						<//B_test>
+						
+						
+					</div> 
+					<!-- ************ Insertion éventuelle du sous-titre **********************  -->	
+    					[<div  class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</div>]
+
+           
+					<!-- ************ Insertion éventuelle du lien hypertexte **********************  -->      
+            				[<div class=" chapo"><:sur_web:> <a href=#URL_SITE>(#NOM_SITE)</a></div>]
+			
+					<!-- **************** Insertion éventuelle du chapeau *************************  -->		
+            				[<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
+
+					<!-- ************************ Insertion du texte *****************************  -->
+             				<div class="#EDIT{texte} texte" style=" width='100%'" >
+						#TEXTE
+
+
+						<!-- **************** Insertion éventuelle du post-sciptum *************************  -->
+						[<div class="post-scriptum" style="background-color:#GET{fondtexte2} ;border-color:#GET{bord2};color:#GET{texte2}">
+							<div class="annonce" style="background-color:#GET{fondtexte2} ;border-color:#GET{bord2};color:#GET{texte2}"><:ps:> :
+							</div>
+						(#PS)
+						</div>]
+
+						<!-- **************** Insertion éventuelle des notes       *************************  -->
+						[<div class="notes">(#NOTES)</div>]             				  
+    
+						<div style="clear:both">&nbsp;</div>
+						#MODELE{article_mots}
+					<!-- ************ fin de la classe texte **********************  -->        
+					
+					</div>		
+
+       
+<!-- Liens vers les documents joints, à l'exclusion des images -->
+       
+	<B_documents_art>
+            <div class="doc">
+              <div class="joints" >
+      Document(s) joint(s) :
+                </div>
+                <!-- Liens vers les documents joints, à l'exclusion des images -->
+				
+                <BOUCLE_documents_art(DOCUMENTS){id_article}{extension !== jpg|png|gif}{mode=document}{doublons}>
+		<div class="doc_joint"> 
+			<a href="#URL_DOCUMENT" >
+				#LOGO_DOCUMENT 
+				<span class="doc_joint_titre">  #TITRE </span>
+			</a>
+		</div>
+                </BOUCLE_documents_art>
+            </div>
+	</B_documents_art>
+                                
+<!--            Liens vers les images jointes -->
+
+        <B_images_art>
+            <div class="images">
+			    <div class="joints">
+                   Image(s) jointe(s)  :
+                    </div>
+                <BOUCLE_images_art(DOCUMENTS){id_article}{extension == jpg|png|gif}{mode=document}{doublons}>
+                    <div class="doc_joint"> 
+                        <a href=#URL_DOCUMENT class="mediabox"  title=#TITRE> #LOGO_DOCUMENT </a>
+			 			[<br/>    (#TITRE)]
+						[<br/>(#DESCRIPTIF)]
+                    </div>
+              <div class="clear"><span></span></div>
+                </BOUCLE_images_art>
+
+        <!-- fin de la classe images  -->
+         </div>
+
+        </B_images_art>
+
+<!-- ************ fin de la classe content **********************  -->  
+				</div>
+<!-- *******************************   Formulaire pour signer la pétition  **********************************************-->
+   			[<div class="petition">
+        			<div id="signer_petition" class="en-tete"><:signer_petition:></div>
+        			(#FORMULAIRE_SIGNATURE)
+    			</div>]
+
+<!-- *********************************  Signatures pétition  ********************************************************** -->
+    			<B_signatures>
+        			<BOUCLE_signatures_decompte(SIGNATURES) {id_article}>
+				</BOUCLE_signatures_decompte>
+        				[<div class="signatures">
+            				<div id="signatures_petitions" class="en-tete"><:signatures_petition:>: (#TOTAL_BOUCLE)</div>
+    
+            				<table>
+                				<thead>
+                    					<tr>
+                        					<td><:date:></td>
+                        					<td><:nom:></td>
+                        					<td><:sites_web:></td>
+                        					<td><:message:></td>
+                   				 	</tr>
+                				</thead>
+                				<tbody>]
+        			<//B_signatures_decompte>
+                		<BOUCLE_signatures(SIGNATURES) {id_article} {par date} {inverse} {0,30}>
+                    					<tr>
+                        					<td class="signature-date">[(#DATE|affdate_court)]</td>
+                        					<td class="signature-nom">#NOM</td>
+                        					<td class="signature-url"><a href="#URL_SITE">[(#NOM_SITE)]</a></td>
+                        					[<td class="signature-message">(#MESSAGE)</td>]
+                    					</tr>
+                		</BOUCLE_signatures>
+                				</tbody>
+            				</table>
+       			 	</div>
+    			</B_signatures>
+    <div style="clear:both">&nbsp;</div>
+
+			<!-- ************************Forums******************** -->
+			[(#REM) Forum de l'article ]
+			#FORMULAIRE_FORUM
+			<INCLURE{fond=inclusions/inc-forum}{id_article} />
+
+  
+
+
+		<!-- ************ fin de la classe article **********************  --> 
+		</div>
+
+</BOUCLE_article_principal>

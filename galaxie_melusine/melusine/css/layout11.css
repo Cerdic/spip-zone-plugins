@@ -1,0 +1,13 @@
+html,body{margin:0;padding:0}
+body{text-align:center}
+div#header{position:relative}
+div#container{text-align:left}
+div#footer a{display:inline;padding:0}
+div#container{width:1024px;margin:0 auto}
+div#wrapper{float:left;width:100%}
+div#content{margin: 0 215px}
+div#navigation{float:left;width:210px;margin-left:-1024px}
+div#extra{float:left;width:210px;margin-left:-210px}
+div#footer{clear:left;width:100%}
+.sommaire_droite{width:56%;}
+

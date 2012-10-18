@@ -1,0 +1,178 @@
+[(#AUTORISER{ecrire})
+
+<div id="root" style="left:0px; top:0px;z-index:100">
+	<div id="handle" ><span class="txt"> Configuration du squelette</span> <a href="#" class="replier_tt">-</a><a href="#" class="deplier">+</a></div>
+	<div class="config_content_all" style="display:none;">
+[		<div class="title">
+			<span class="txt">Fichiers à déplacer</span> <a href="#" class="replier">-</a>		
+		</div>
+		<div class="config_content" style="display:none;">
+			<div class="ajax">
+				<div id="melusine_deplacer_fichiers">
+					(#VAL{"melusine_perso_a_deplacer"}|melusine_message_noisettes_a_deplacer)
+				</div>
+			</div>
+			<div style="clear:both"></div>
+		</div>]
+			
+		<div class="title">
+			<span class="txt">Structure</span> <a href="#" class="replier">-</a>		
+		</div>
+		<div class="config_content" style="display:none;">
+			<div class="ajax">
+			#FORMULAIRE_MELUSINE_POSITION
+			</div>
+			<div style="clear:both"></div>
+		</div>
+
+		<div class="title">
+			<span class="txt">Page d'accueil</span> <a href="#" class="replier">-</a>		
+		</div>
+		<div class="config_content" style="display:none;">
+			<div class="ajax">
+			#FORMULAIRE_MELUSINE_SOMMAIRE
+			</div>
+			<div style="clear:both"></div>
+		</div>
+
+		<div class="title">
+			<span class="txt">Articles</span> <a href="#" class="replier">-</a>		
+		</div>
+		<div class="config_content" style="display:none;">
+			<div class="ajax">
+			#FORMULAIRE_MELUSINE_ARTICLES
+			</div>
+			<div style="clear:both"></div>
+		</div>
+
+		<div class="title">
+			<span class="txt">Rubriques</span> <a href="#" class="replier">-</a>		
+		</div>
+		<div class="config_content" style="display:none;">
+			<div class="ajax">
+			#FORMULAIRE_MELUSINE_RUBRIQUES
+			</div>
+			<div style="clear:both"></div>
+		</div>
+
+		<div class="title">
+			<span class="txt">Chemin</span> <a href="#" class="replier">-</a>		
+		</div>
+		<div class="config_content" style="display:none;">
+			<div class="ajax">
+			#FORMULAIRE_MELUSINE_CHEMIN
+			</div>
+			<div style="clear:both"></div>
+		</div>
+
+		<div class="title">
+			<span class="txt">Pied de page</span> <a href="#" class="replier">-</a>		
+		</div>
+		<div class="config_content" style="display:none;">
+			<div class="ajax">
+			#FORMULAIRE_MELUSINE_FOOTER
+			</div>
+			<div style="clear:both"></div>
+		</div>
+	
+		<div class="title">
+			<span class="txt">Couleur</span>	<a href="#" class="replier">-</a>		
+		</div>
+		<div class="config_content" style="display:none;">
+			<div class="ajax">
+			#FORMULAIRE_CONFIGURER_COULEURS_MELUSINE
+			</div>
+			<div style="clear:both"></div>
+		</div>
+
+		<div class="title">
+			<span class="txt">Images</span>	<a href="#" class="replier">-</a>		
+		</div>
+		<div class="config_content" style="display:none;">
+			<div class="ajax">
+			#FORMULAIRE_MELUSINE_IMAGES
+			</div>
+			<div style="clear:both"></div>
+		</div>
+
+		<div class="title">
+			<span class="txt">Différents blocs</span>	<a href="#" class="replier">-</a>		
+		</div>
+		<div class="config_content" style="display:none;">
+			<div class="ajax">
+			#FORMULAIRE_CONFIGURER_BLOCS_MELUSINE
+			</div>
+			<div style="clear:both"></div>
+		</div>
+
+		<div class="title">
+			<span class="txt">Mentions légales</span><a href="#" class="replier">-</a>		
+		</div>
+		<div class="config_content" style="display:none;">
+			<div class="ajax">
+			#FORMULAIRE_CONFIGURER_MENTIONS_MELUSINE
+			</div>
+			<div style="clear:both"></div>
+		</div>
+
+		<div class="title">
+			<span class="txt">Bandeau</span>	<a href="#" class="replier">-</a>		
+		</div>		
+		<div class="config_content" style="display:none;">
+			<div class="ajax">
+			#FORMULAIRE_CONFIGURER_BANDEAU_MELUSINE
+			</div>
+			<div style="clear:both"></div>
+		</div>
+
+		<div class="title">
+			<span class="txt">Boutons</span>	 <a href="#" class="replier">-</a>	
+		</div>
+		<div class="config_content" style="display:none;">
+			<div class="ajax">
+			#FORMULAIRE_MELUSINE_BOUTONS
+			</div>
+			<div style="clear:both"></div>
+		</div>
+
+		<div class="title">
+			<span class="txt">Nuage de mots</span>	<a href="#" class="replier">-</a>		
+		</div>		
+		<div class="config_content" style="display:none;" >
+			<div class="ajax">
+			#FORMULAIRE_MELUSINE_NUAGE
+			</div>
+			<div style="clear:both"></div>
+		</div>
+[		<div class="title">
+			<span class="txt">Mobile</span>	<a href="#" class="replier">-</a>		
+		</div>		
+		<div class="config_content" style="display:none;" >
+			<div class="ajax">
+			(#FORMULAIRE_MELUSINE_MOBIL)
+			</div>
+			<div style="clear:both"></div>
+		</div>	]
+        <div class="title">
+			<span class="txt">Recherche avancee</span>	<a href="#" class="replier">-</a>		
+		</div>	
+        <div class="config_content" style="display:none;" >
+			<div class="ajax">
+			#FORMULAIRE_MELUSINE_RECHAVANCEE
+			</div>
+			<div style="clear:both"></div>
+		</div>	
+	</div>
+
+</div>]
+
+
+
+
+<script type="text/javascript">
+	var theHandle = document.getElementById("handle");
+	var theRoot   = document.getElementById("root");
+	Drag.init(theHandle, theRoot);
+	$(".title").children('.replier').hide();
+	$(".replier_tt").hide();
+</script>

@@ -1,0 +1,72 @@
+#CACHE{3600*24*37}
+[(#CONFIG{melusine_images/image2}|?{#SET{image2, #CHEMIN{#CONFIG{melusine_images/image2}}},#SET{image2,#CHEMIN{images/image2.png}}} )]
+[(#CONFIG{melusine_images/image3}|?{#SET{image3, #CHEMIN{#CONFIG{melusine_images/image3}}},#SET{image3,#CHEMIN{images/image3.png}}} )]
+<BOUCLE_r(RUBRIQUES){id_rubrique}>
+<BOUCLE_art (ARTICLES){id_rubrique}{par num titre}{par date}{inverse}>
+	<div class="ensembarticle">
+		<H3>
+			<a href=#URL_ARTICLE >
+				<span class="pargauche" >
+				<!-- ************ Insertion du logo des rubriques **********************  -->
+				<img alt="" class="format_png" src="#GET{image2}" />
+				</span>
+				[(#TITRE|supprimer_numero)]
+			</a>
+		</H3>
+		[<div class="image"><a href="[(#LOGO_ARTICLE||extraire_attribut{src})]?keepThis=true&amp;TB_iframe=true&amp;height=500&amp;width=500"  class="mediabox">(#LOGO_ARTICLE||image_reduire{100})</a></div>]
+
+		#INTRODUCTION
+		<div style="clear:both; "></div>
+	</div>
+</BOUCLE_art>
+
+
+<BOUCLE_ssrub (RUBRIQUES){id_parent}{par num titre}>
+	<div class="ensembarticle">
+	<H3>
+		<a href=#URL_RUBRIQUE >
+			<span class="pargauche" >
+				<!-- ************ Insertion du logo des rubriques **********************  -->
+				<img alt="" class="format_png" src="#GET{image2}"  />
+			</span>
+			[(#TITRE|supprimer_numero)]
+		</a>
+	</H3>
+	#MODELE{logo_rubrique}
+	[(#DESCRIPTIF)]
+	<div style="clear:both;"></div>
+	<BOUCLE_ss_art (ARTICLES){id_rubrique}{par num titre}{par date}{inverse}>
+		<div class="ensembarticle">
+			<H4>
+				<a href=#URL_ARTICLE >
+					<span class="pargauche" >
+						<!-- ************ Insertion du logo des rubriques **********************  -->
+						<img alt="" class="format_png" src="#GET{image2}" />
+					</span>
+					[(#TITRE|supprimer_numero)]</a>
+			</H4>
+			[<div class="image"><a href="[(#LOGO_ARTICLE||extraire_attribut{src})]?keepThis=true&amp;TB_iframe=true&amp;height=500&amp;width=500"  class="mediabox">(#LOGO_ARTICLE||image_reduire{100})</a></div>]
+
+			#INTRODUCTION
+			<div style="clear:both;"></div>
+		</div>
+	</BOUCLE_ss_art>
+	
+	<BOUCLE_ss_ssrub (RUBRIQUES){id_parent}>
+		<div class="ensembarticle">
+		<H4>
+			<a href=#URL_RUBRIQUE >		
+				<span class="pargauche" >
+					<!-- ************ Insertion du logo des rubriques **********************  -->
+					<img  alt="" class="format_png" src="#GET{image2}" /></span>
+					[(#TITRE|supprimer_numero)]
+			</a>
+		</H4>
+		#MODELE{logo_rubrique}
+		[(#DESCRIPTIF)]
+		<div style="clear:both;"></div>
+		</div>
+	</BOUCLE_ss_ssrub>
+	</div>
+</BOUCLE_ssrub>
+</BOUCLE_r>

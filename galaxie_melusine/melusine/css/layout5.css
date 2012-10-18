@@ -1,0 +1,9 @@
+div#header{position:relative}
+div#container{text-align:left}
+div#footer p{margin:0;padding:5px 10px}
+div#footer a{display:inline;padding:0;}
+div#content{float:left;}
+div#container{width:1000px;margin:0 auto;}
+div#navigation{float:left;width:500px}
+div#extra{float:right;width:500px}
+div#footer{clear:both;width:100%}

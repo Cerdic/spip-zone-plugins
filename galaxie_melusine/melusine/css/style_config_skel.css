@@ -1,0 +1,149 @@
+#root {
+position:absolute;		
+width:500px;
+background-color:#F4F4F4;
+border:1px solid #333;
+	opacity:0.7; 
+	filter:alpha(opacity=70);
+}
+#handle, #root .title {
+margin:2px;
+padding:2px;
+color:white;
+background-color:#39619B;
+font-weight: bold;
+cursor: pointer;
+height:20px;
+}
+
+#handle span.txt,#root .title span.txt{
+display:block;
+width:90%;
+float:left
+}
+
+ a.replier,a.replier_tt, a.deplier{
+display:block;
+width:13px;
+height:13px;
+text-align:center;
+border-bottom:1px solid #000;
+border-right:1px solid #000;
+border-top:1px solid #fff;
+border-left:1px solid #fff;
+background:#cccccc;
+margin-right:5px;
+color:#000;
+float:left;
+}
+
+.actif_gauche input, .actif_droite input, .reserve input,.init input,
+.formulaire_editer_boutons input.submitb,input.voir,input.cache{
+border:0px;
+color:transparent;
+background-repeat:no-repeat;
+width:15px;
+height:19px;
+cursor:pointer;
+font-size:0px;
+_line-height:1000px;
+}
+
+input.bas{background:url(../images/bas.jpg) no-repeat;width:15px;height: 100%}
+input.haut{background:url(../images/haut.jpg) no-repeat;width:15px;height: 100%}
+input.sup{background:url(../images/croix.gif) no-repeat ;width:15px;height:14px;height: 100%}
+input.ajout{background:url(../images/droite.jpg) no-repeat 0,center;width:20px;height:100%;position: absolute;right: 0px;top: 0px;}
+input.ajoutg{background:url(../images/gauche.jpg) no-repeat 0,center;width:20px;height:100%;position: absolute;left: 0px;top: 0px;}
+
+.reserve>ul>li,.actif_gauche>ul>li,.actif_droite>ul>li {
+  margin-left: 0px;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  padding-top: 0.3em;
+  border-bottom: 1px solid #DCDCDC;
+  position: relative;
+  min-height: 2em;
+}
+.reserve>ul>li {
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+}.actif_gauche>ul>li {
+  padding-left: 50px;
+  text-align: left;
+}
+.actif_droite>ul>li {
+  padding-right: 50px;
+  text-align: right;
+}
+.actif_gauche span.boutons,.actif_droite span.boutons {
+  position: absolute;
+  height: 100%;
+  top: 5px;
+}
+.actif_gauche span.boutons {
+  position: absolute;
+  left: 0px;
+  height: 100%;
+}
+.actif_droite span.boutons {
+  position: absolute;
+  right: 0px;
+  height: 100%;
+}
+
+.actif_gauche,.actif_droite,.reserve{
+float:left;
+width:32%;
+}
+
+.actif_gauche h2,.actif_droite h2,.reserve h2,
+.actif_gauche h3,.actif_droite h3,.reserve h3{
+text-align:center;
+}
+
+.actif_gauche ul, .actif_droite ul, .reserve ul{
+display:block;margin:10px 0 5px 5px;;padding:0}
+.reserve ul{text-align:center;}
+
+.actif_gauche li,.actif_droite li,.reserve li,.actif_gauche ul{
+list-style-type:none;
+}
+
+.actif_gauche li,.actif_droite li,.actif_gauche ul{
+_margin-bottom:-5px;
+}
+
+.reserve {
+	padding: 5px;
+	border-left:1px solid;
+	border-right: 1px solid;
+	
+}
+
+.init ul li{list-style-type:none;}
+.init{width:100%;font-size:14px;float:left;}
+
+.formulaire_editer_boutons input.ok_bouton,.ok_bouton,.init input.ok_bouton{
+background-image:url(../images/ok.gif);
+width:22px;
+height:20px;
+border:1px solid #000;
+margin:10px;;padding-top:10px;}
+
+.gestion_bouton{display:inline;}
+.vue_bouton{display:inline;}
+input.cache{background-image:url("../images/oeil_ferme.gif");display:inline;background-repeat:no-repeat;width:25px;height:25px}
+input.voir{background-image:url("../images/oeil_ouvert.gif");display:inline;background-repeat:no-repeat;width:25px;height:25px}
+
+
+#root a{color:#000;} 
+
+
+
+
+
+
+
+
+

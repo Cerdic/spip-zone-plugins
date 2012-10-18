@@ -1,0 +1,54 @@
+#CACHE{0}
+[(#ENV{editable}|oui)
+<div class="formulaire_spip formulaire_cfg formulaire_config_couleurs">
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+
+<form method="post" action="#SELF">
+	<div> #ACTION_FORMULAIRE{#SELF} 
+  <input type="hidden" name="_meta_casier" value="melusine_bandeau" />
+
+
+<h3>Le bandeau #MELUSINEAIDE{208}</h3>
+		<fieldset>
+			<ul>
+				<li>
+					<label for="Position du nom du site par rapport au bord droit :">Position du nom du site par rapport au bord droit :</label>
+					<input type="text" name="posban" value="[(#ENV{posban}|?{[(#ENV{posban})],''})]" /> px
+				</li>
+				<li>
+					<label for="Logo remplisssant tout le bandeau">Logo remplisssant tout le bandeau :</label>
+					
+					<input type="radio" name="remplissant"  value="oui" [(#ENV{remplissant}|?{[(#ENV{remplissant}=={"oui"}|?{"checked", })],'' })] />Oui
+					<input type="radio" name="remplissant"  value="non"  [(#ENV{remplissant}|?{[(#ENV{remplissant}=={"non"}|?{"checked", })],'' })] />Non
+				</li>
+				<li>
+					<label for="Dégradé du bandeau :">Dégradé du bandeau :</label>
+
+
+				<input type="radio" name="tbandeau"  value="oui"  [(#ENV{tbandeau}|?{[(#ENV{tbandeau}=={"oui"}|?{"checked", })],'' })] />Oui
+				<input type="radio" name="tbandeau"  value="non" [(#ENV{tbandeau}|?{[(#ENV{tbandeau}=={"non"}|?{"checked", })],'' })] />Non
+			 
+				</li>
+			
+			</ul>
+		</fieldset>
+	
+
+
+
+
+		
+		[<span class='erreur'>(#ENV**{erreurs}|table_valeur{description})</span>]
+		
+		<input type="submit" name="_cfg_ok" value="<:cfg:OK:>" />
+		
+</div>
+</form>
+</div>
+
+]
+
+[(#ENV{editable}|non)
+Vous devez être connecté en administrateur pour pouvoir utiliser ce formulaire.
+]
