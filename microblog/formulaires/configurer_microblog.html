@@ -26,22 +26,27 @@
 					<ul class="compte">
 						<li class="editer_service">
 							<label for="service"><:microblog:service:></label>
+<!--
+	ce systeme de test ne fonctionne plus !
 							<p class="explication"><:microblog:compte_tests:> :
 							<br />supertweet | spipotest spipotest2
 							</p>
+-->
 							<select name="service" id="service">
 								<option value="">(<:microblog:choisir:>)</option>
 								<option value="" disabled="disabled">- laconica -</option>
 								<option value="spipo"[
 									(#ENV{service}|=={spipo}|?{selected="selected"})]>SPIP.org (spipo)</option>
 								<option value="identica"[
-									(#ENV{service}|=={identica}|?{selected="selected"})]>Identi.ca (identica)</option>
+									(#ENV{service}|=={identica}|?{selected="selected"})]>Status.net (identica)</option>
 								<option value="" disabled="disabled">&nbsp;</option>
 								<option value="" disabled="disabled">- twitter -</option>
 								<option value="twitter"[
 									(#ENV{service}|=={twitter}|?{selected="selected"})]>Twitter.com</option>
+<!--
 								<option value="supertweet"[
 									(#ENV{service}|=={supertweet}|?{selected="selected"})]>Supertweet.net</option>
+-->
 							</select>
 						</li>
 						<li class="editer_user">

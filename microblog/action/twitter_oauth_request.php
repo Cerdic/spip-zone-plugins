@@ -79,6 +79,7 @@ function action_twitter_oauth_request_dist() {
 			 */
 			default:
 				spip_log('Erreur connexion twitter','microblog');
+				spip_log($connection, 'microblog');
 				$redirect = parametre_url($redirect,'erreur_code',$code);
 				$redirect = parametre_url($redirect,'erreur','erreur_conf_app');
 				redirige_formulaire($redirect);
