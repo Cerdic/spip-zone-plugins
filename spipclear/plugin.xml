@@ -3,7 +3,7 @@
 	<slogan>Un site &#224; la dotclear en Spip</slogan>
 	<auteur>James, Ben, Eric Lupinacci et b_b</auteur>
 	<licence>&#169; 2009 - GNU/GPL</licence>
-	<version>0.2.1</version>
+	<version>0.2.2</version>
 	<etat>stable</etat>
 	<prefix>SpipClear</prefix>
 	<icon>images/spipclear-128.png</icon>

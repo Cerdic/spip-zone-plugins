@@ -1,0 +1,442 @@
+/* -----------------------------------------------------------------
+	1. STRUCTURE
+	a inscrire ici ou en important une css de structure placee dans
+	le meme repertoire et appelee grace a l'instruction ci-dessous
+------------------------------------------------------------------ */
+/* @import url(nom_du_fichier.css); */
+
+
+
+/* ------------------------------------------------------------
+	2. BALISES HTML PAR DEFAUT
+------------------------------------------------------------- */
+
+body { 
+	color: #555555;
+	font-family: "Helvetica Neue", Helvetica, Geneva, Arial, clean, sans-serif;
+	font-size: 13px;
+	line-height: 1.231;
+}
+*::-moz-selection {
+    background-color: #AFCF48;
+    color: #FFF;
+}
+
+h1,
+h2 { 
+	font-size: 1.9em;
+	font-family: Georgia, Verdana, Arial;
+	font-weight: normal;
+	font-style: normal;
+}
+h3, h4, h5, h6 { 
+	font-family: Georgia, Verdana, Arial;
+	font-weight: normal;
+	font-style: normal;
+}
+
+fieldset { border: 0; }
+input, textarea { 
+	border: 1px solid #C5D984;
+	color: #AAA;
+	background: #FFF;
+}
+input[type="submit"] {
+	background: #C5D984;
+	border: 1px solid #C5D984;
+	color: #FFF;
+}
+input:hover, textarea:hover { border: 1px solid #AFCF48; }
+input[type=submit]:hover {
+	background: #AFCF48;
+	border: 1px solid #AFCF48;
+}
+
+a { 
+	color: #AFCF48;
+	text-decoration: none;
+}
+a:hover, a:focus { color: #E69B32; }
+a[hreflang]:after { }
+a img { border: none; }
+
+small {font-size:0.95em;}
+ 
+ 
+/* ------------------------------------------------------------
+	3. PAGE
+------------------------------------------------------------- */
+ 
+#page { 
+	width: 940px;
+	margin: 30px auto;
+
+}
+
+
+ 
+/* ------------------------------------------------------------
+	4. HAUT DE PAGE
+------------------------------------------------------------- */
+
+#top { 
+	top: 0;
+	left: 10px;
+	float: left;
+	width: 300px;
+	padding: 50px 0 20px 0;
+	background: #FFF;
+	text-align: right;
+}
+#top h1 { 
+	padding: 0;
+	margin: 0;
+}
+#top #blogdesc {
+	color: #AAA;
+	font-size: 90%;
+	font-style: italic;
+	margin: 0.1em 0 1em;
+	padding: 0;
+}
+#prelude { display: none; }
+
+#navigation {
+	position : absolute;
+	top : 30px;
+	right : 30px;
+	color: #FFF;
+}
+#navigation ul {
+	margin : 0 auto;
+}
+#navigation ul li {
+	display : block;
+	float : left;
+	width: 65px;
+	margin : 0 10px;
+	padding: 5px 7px;
+	font-size : 100%;
+	text-align: center;
+	text-transform: lowercase;
+	line-height: 2em;
+}
+#navigation ul li.one { background: #C5D984; }
+#navigation ul li.two { background: #AFCF48; }
+#navigation ul li.three { background: #E69B32; }
+#navigation ul li.four { background: #F75823; }
+#navigation ul li.five { background: #FF0335; }
+#navigation ul li a { 
+	color: #FFF; 
+	display : block;
+	width: 65px;
+}
+#navigation ul li a:hover { text-decoration: underline; }
+
+
+
+/* ------------------------------------------------------------
+	5. WRAPPER MAIN CONTENT
+------------------------------------------------------------- */
+
+#main { 
+	float: right;
+	width: 580px;
+	min-height: 500px;
+	margin-top: 30px;
+}
+#content h3 { margin-top: 50px; }
+#content a { color: #BBB; }
+#content a:hover { color: #969896; }
+
+#navlinks, .pagination {
+	padding-top: 20px;
+	text-align: center;
+}
+#content .pagination a {
+	padding: 2px 5px; 
+	color: #FFF;
+	background: #AFCF48;
+}
+#content .pagination a:hover { background: #E69B32; }
+#content #navlinks a { 
+	padding: 2px 5px; 
+	color: #FFF;
+	background: #F75823;
+}
+#content #navlinks a:hover {
+	color: #FFF;
+	background: #FF0335;
+}
+
+
+
+/* ------------------------------------------------------------
+	6. BILLETS
+------------------------------------------------------------- */
+
+.day-date { 
+	margin: 5em 0 0 0;
+	padding:0;
+	color: #AAA;
+	text-align: right;
+	border-bottom: 1px solid #EEE;
+	font-size: 90%;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+.dc-post .post-title { padding-top: 20px;}
+
+.post-info { 
+	margin-top: -15px;
+	padding: 0 0 0 15px;
+	color: #969896;
+	background: url(img/person.gif) no-repeat left top;
+	font-size: 0.8em;
+}
+.post-tags { 
+	margin-top: -5px;
+	padding: 0 0 0 15px;
+	color: #969896;
+	background: url(img/tag.gif) no-repeat left top;
+	font-size: 0.8em;
+	text-transform: uppercase;
+}
+.post-tags li {
+	padding: 0 4px 0 0;
+	display: inline;
+	list-style-type: none;
+}
+
+.post-excerpt { padding: 10px 0; }
+.post-content { padding: 10px 0; }
+#content .post-content h3 { margin-top: 10px; }
+
+#content .read-it a { 
+	padding: 2px 5px; 
+	color: #FFF;
+	background: #E69B32;
+}
+#content .read-it a:hover { background: #F75823; }
+
+.post-info-co { font-size: 0.8em; }
+#content .post-info-co a {
+	padding: 2px 5px; 
+	color: #FFF;
+	background: #F75823;
+}
+#content .post-info-co a:hover { background: #FF0335; }
+
+
+/* ------------------------------------------------------------
+	7. COMMENTAIRES, PINGS
+------------------------------------------------------------- */
+
+#comments dt .one,
+#comments dt .two,
+#comments dt .three,
+#comments dt .four {
+	display: inline-block;
+	height: 18px; 
+	padding: 2px 5px; 
+	color: #FFF;
+}
+#content #comments dt span a { color: #FFF; }
+#content #comments dt span a:hover { text-decoration: underline; }
+#comments dt .one { background: #C5D984; }
+#comments dt .two { background: #AFCF48; }
+#comments dt .three { background: #E69B32; }
+#comments dt .four { background: #FF0335; }
+#comments dd { 
+	margin: 0 0 30px 0;
+	padding: 0;
+	border-bottom: 1px solid #EEE;
+}
+#comments .me { color: #AFCF48; }
+
+.field label { 
+	width: 30%;
+	float: left;
+	text-align: right;
+	padding-right: 20px;
+}
+
+/* ------------------------------------------------------------
+	8. SIDEBAR
+------------------------------------------------------------- */
+
+#sidebar { 
+	float: left;
+	width: 300px;
+	margin-top: 90px;
+	font-size: 0.8em;
+	text-align: right;
+}
+
+#sidebar h2 ,
+#sidebar h3 { 
+	font-size: 1.3em;
+	font-weight: normal;
+	clear: both;
+}
+#sidebar li { list-style-type: none; }
+
+/* boites du menu des widgets livres avec Dotclear */
+#search { 
+	padding: 0;
+	margin: 0;
+}
+#search form,
+#search p,
+#search fieldset  { 
+	padding: 0;
+	margin: 0;
+}
+
+#calendar {
+	width:250px;
+	float:right;
+}
+
+
+/* ------------------------------------------------------------
+	9. FOOTER
+------------------------------------------------------------- */
+
+#footer { 
+	padding-left: 365px;
+	padding-top: 10px;
+	color: #969896;
+}	
+#footer a { color: #BBB; }
+#footer a:hover {
+	color: #969896;
+	border-bottom: 1px solid #969896; 
+}
+#footer p { }
+#footer-nav a {
+	float: right;
+}
+
+
+
+/* ------------------------------------------------------------
+	10. CLASSES COMMUNES
+------------------------------------------------------------- */
+
+/* tags dans le sidebar et dans la page les regroupant
+(exemple ici pour un nuage) */
+.dc-tags #content ul li, .dc-tags #content ul li a, 
+.tags ul li, .tags ul li a {
+	display : inline;
+	width : auto;
+	padding-left : 0;
+	padding-right : 4px;
+	background : transparent;
+	line-height : 1.5em;
+}
+.tags ul li a:hover {
+	background-image :none;
+}
+.dc-tags .tag0, .tags .tag0 { font-size: 85%; }
+.dc-tags .tag10, .tags .tag10 { font-size: 90%; }
+.dc-tags .tag20, .tags .tag20 { font-size: 95%; }
+.dc-tags .tag30, .tags .tag30 { font-size: 100%; }
+.dc-tags .tag40, .tags .tag40 { font-size: 105%; }
+.dc-tags .tag50, .tags .tag50 { font-size: 110%; }
+.dc-tags .tag60, .tags .tag60 { font-size: 115%; }
+.dc-tags .tag70, .tags .tag70 { font-size: 120%; }
+.dc-tags .tag80, .tags .tag80 { font-size: 125%; }
+.dc-tags .tag90, .tags .tag90 { font-size: 130%; }
+.dc-tags .tag100, .tags .tag100 { font-size: 135%; }
+
+/* messages d'erreur */
+.error {
+	border : 1px solid #C44;
+	background : #DF0;
+	padding : 0.5em;
+}
+.error ul { padding-left : 20px; }
+.error li { list-style : square; }
+	
+/* exemples de ceux que j'ajoute souvent */
+.left { float: left; margin-right : 1em; }
+.right { float: right; margin-left : 1em; }
+.center { margin-left : auto; margin-right : auto; }
+.left-text { text-align : left; }
+.right-text { text-align : right; }
+.center-text { text-align : center; }
+
+.little-text { font-size : .8em;}
+.little-upper-text { font-size : .8em; text-transform : uppercase; }
+
+
+
+/* ------------------------------------------------------------
+	11. PAGES SPECIFIQUES
+	j'indique le marqueur du body, a completer pour cibler 
+	plus precisement (cf l'exemple ci-dessus pour les tags)
+------------------------------------------------------------- */
+
+.dc-category #subcategories { 
+	margin: 0;
+	padding: 10px 0;
+	font-size: 1.1em;
+	border-top: 1px solid #EEE;
+}
+.dc-category #subcategories ul, .dc-category #subcategories h3 {
+	margin: 0;
+	padding: 0 0 0 0;
+}
+.dc-category #subcategories li {
+	list-style-type: none;
+}
+
+.dc-archive .annee { 
+	float: left;
+	padding: 0 30px;
+}
+.dc-archive .annee li { list-style-type: none; }
+.dc-archive .annee ul {
+	margin: 0;
+	padding: 0;
+}
+
+
+
+/* ---------------------------------------------------
+  12. ET POUR FINIR NE PAS OUBLIER LES CLEARERS
+	ici ceux le plus souvent necessaires
+--------------------------------------------------- */
+.post, .post-content, .footnotes, .attachments, 
+.post-info-co, #comments, #footer {
+    clear:both;
+}
+
+
+*::-moz-selection { background-color: %color1%; }
+input, textarea { border: 1px solid %color0%; }
+input[type="submit"] { background: %color0%; border: 1px solid %color0%; }
+input:hover, textarea:hover { border: 1px solid %color1%; }
+input[type=submit]:hover { background: %color1%; border: 1px solid %color1%; }
+a { color: %color1%; }
+a:hover, a:focus { color: %color2%; }
+#navigation ul li.one { background: %color0%; }
+#navigation ul li.two { background: %color1%; }
+#navigation ul li.three { background: %color2%; }
+#navigation ul li.four { background: %color3%; }
+#navigation ul li.five { background: %color4%; }
+#content a:hover { color: #969896; }
+#content .pagination a { background: %color1%; }
+#content .pagination a:hover { background: %color2%; color: #fff; }
+#content #navlinks a { background: %color3%; }
+#content #navlinks a:hover { background: %color4%; color: #fff; }
+#content .read-it a { background: %color2%; }
+#content .read-it a:hover { background: %color3%; color: #fff; }
+#content .post-info-co a {background: %color3%; }
+#content .post-info-co a:hover { background: %color4%; color: #fff; }
+#comments dt .one { background: %color0%; }
+#comments dt .two { background: #AFCF48; }
+#comments dt .three { background: %color2%; }
+#comments dt .four { background: %color4%; }
+#comments .me { color: %color2%; }

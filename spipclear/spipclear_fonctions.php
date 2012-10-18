@@ -12,8 +12,16 @@
 	function me($id_article, $id_auteur = 0) {
 		static $deja = false;
 		static $auteurs = array();
+
+	/* en spip 3 auteur_articles est remplacé - adapter la requete */
+		$table="spip_auteurs_articles";
+		$where="id_article";
+		if ($GLOBALS['meta']['version_installee'] >= '19268') {
+			$table="spip_auteurs_liens";
+			$where="objet='article' AND id_objet";
+		}
 		if(!$deja) {
-			$r = spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article");
+			$r = spip_query("SELECT id_auteur FROM ".$table." WHERE ".$where."=$id_article");
 			while($row = spip_fetch_array($r))
 				$auteurs[] = intval($row['id_auteur']);
 			$deja = true;

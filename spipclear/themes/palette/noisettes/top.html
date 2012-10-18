@@ -1,0 +1,7 @@
+<BOUCLE_titre(RUBRIQUES){id_secteur}{id_parent=0}>
+[<h1>(#LOGO_RUBRIQUE|#URL_RUBRIQUE|inserer_attribut{alt,#TITRE}|inserer_attribut{title,#TITRE}|image_reduire{300}|sinon{<a href="#URL_RUBRIQUE">#TITRE</a>})</h1>]
+<p>#DESCRIPTIF_SITE_SPIP</p>
+</BOUCLE_titre>
+
+[(#REM) TODOSUSKE inserer ici {{tpl:paletteTabs}} articles précédents et suivant]
+

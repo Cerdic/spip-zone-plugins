@@ -1,4 +1,13 @@
-<BOUCLE_article(ARTICLES){id_article}>
+<BOUCLE_article(ARTICLES){id_article}{unique}>
+<p id="navlinks"><BOUCLE_prev(ARTICLES){id_secteur?}{age_relatif>0}{!par date}{0,1}>
+<a class="prev" title="[(#TITRE|attribut_html)]" href="#URL_ARTICLE">[<< (#TITRE|couper{38})]</a>
+</BOUCLE_prev>
+<B_next>
+<span>-</span>
+<BOUCLE_next(ARTICLES){id_secteur?}{age_relatif<0}{0,1}>
+<a class="next" title="[(#TITRE|attribut_html)]" href="#URL_ARTICLE">[(#TITRE|couper{38}) >>]</a>
+</BOUCLE_next></p>
+
 <div class="post">
 	[<p class="surtitre #EDIT{soustitre}">(#SURTITRE)</p>]
 	<h2 class="post-title #EDIT{titre}">#TITRE</h2>

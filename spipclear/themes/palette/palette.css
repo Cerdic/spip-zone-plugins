@@ -1,0 +1,26 @@
+*::-moz-selection { background-color: %color1%; }
+input, textarea { border: 1px solid %color0%; }
+input[type="submit"] { background: %color0%; border: 1px solid %color0%; }
+input:hover, textarea:hover { border: 1px solid %color1%; }
+input[type=submit]:hover { background: %color1%; border: 1px solid %color1%; }
+a { color: %color1%; }
+a:hover, a:focus { color: %color2%; }
+#navigation ul li.one { background: %color0%; }
+#navigation ul li.two { background: %color1%; }
+#navigation ul li.three { background: %color2%; }
+#navigation ul li.four { background: %color3%; }
+#navigation ul li.five { background: %color4%; }
+#content a:hover { color: #969896; }
+#content .pagination a { background: %color1%; }
+#content .pagination a:hover { background: %color2%; color: #fff; }
+#content #navlinks a { background: %color3%; }
+#content #navlinks a:hover { background: %color4%; color: #fff; }
+#content .read-it a { background: %color2%; }
+#content .read-it a:hover { background: %color3%; color: #fff; }
+#content .post-info-co a {background: %color3%; }
+#content .post-info-co a:hover { background: %color4%; color: #fff; }
+#comments dt .one { background: %color0%; }
+#comments dt .two { background: %color1%; }
+#comments dt .three { background: %color2%; }
+#comments dt .four { background: %color4%; }
+#comments .me { color: %color2%; }

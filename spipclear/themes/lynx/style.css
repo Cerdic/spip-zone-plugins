@@ -1,0 +1,247 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * This file is part of DotClear.
+ * Copyright (c) 2004 Maurice Svay and contributors. All rights
+ * reserved.
+ *
+ * DotClear is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * DotClear is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with DotClear; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ * ***** END LICENSE BLOCK *****
+ *
+ * Contributor(s):
+ *  amalgame
+ */
+
+/* Ce fichier dfinit le style visuel pour les diffrents lments du blog.
+ * Dans l'ordre, vous trouverez les rgles qui dfinissent l'apparence pour:
+ * - les lments HTML en gnral
+ * - la page
+ * - l'entte
+ * - le prlude
+ * - le contenu
+ * - la barre de navigation
+ * - le pied de page
+ *
+ */
+
+
+ 
+/* Les lments HTML en gnral
+-------------------------------------------------------- */
+body  {
+	background: #000;
+	color: #CC9966;
+	font-size: 0.8em;
+	font-family: "Courier New", Courier, mono;
+
+}
+h1, #footer, #top p  {text-align : right;}
+h1, h2, h3, h4, h5, h6  {font-size : 1em;
+
+}
+
+
+pre, code  {
+	font-size: 1em;
+	width: 100%;
+	overflow: hidden;
+}
+
+
+fieldset  {
+	border: none;
+}
+
+label {
+
+}
+
+.field label {
+	display: block;
+}
+
+input,textarea {
+	background-color: #000000;
+	border: none;
+	color: #00CC66;
+
+}
+
+#q  {
+	border-bottom : 1px solid #00CC66;
+	
+}
+
+input[type=submit]:hover, input[type=submit]:active, input[type=submit]:focus {
+	color: #00FF00;
+	background-color: #CC0000;
+}
+
+textarea  {
+	width : 100%;
+}
+a {
+	color: #00CC66;
+	background-color:#000000;
+	text-decoration:none;
+}
+
+a:visited {
+
+}
+
+a:hover, a:active, a:focus  {
+	color: #00FF00;
+	background-color: #CC0000;
+	text-decoration:none;
+}
+img, #post img  {width : 0px;height : 0px; border:none;}
+
+/* La page
+-------------------------------------------------------- */
+#page {
+
+}
+ 
+/* L'entte
+-------------------------------------------------------- */
+#top {
+
+}
+
+#top h1 {
+
+}
+
+#top h1 a {
+
+}
+
+/* Le prlude
+-------------------------------------------------------- */ 
+#prelude {
+
+}
+
+#prelude a {
+
+}
+
+#prelude a:hover {
+
+}
+
+/* Le contenu
+-------------------------------------------------------- */
+.day-date {
+
+}
+
+.post-title {
+
+}
+
+.post-title a {
+
+}
+
+.post-info {
+
+}
+
+.post-info a {
+
+}
+
+.post-content {
+	text-align: justify;
+	margin-left:2em;
+}
+
+.post-content blockquote {
+
+}
+.post-content img  {width:1px;height:1px;}
+.post-info-co {
+
+}
+
+#trackbacks blockquote, #comments blockquote {
+
+}
+
+/* La barre de navigation
+-------------------------------------------------------- */
+#sidebar div {
+
+}
+
+#sidebar div ul {
+
+}
+
+
+#sidebar h2, #sidebar h3 {
+
+}
+
+#sidebar h3 {
+
+}
+
+#sidebar div#search {
+
+}
+
+#search fieldset, #search p {
+
+}
+
+#sidebar div#calendar {
+
+}
+
+#sidebar div#calendar table {font-size:1em;
+
+}
+
+#sidebar div#calendar table caption {
+
+}
+
+#sidebar div#calendar table th {
+
+}
+
+#sidebar div#calendar table td {
+
+}
+
+#sidebar div#calendar table td a {
+
+}
+
+#sidebar div#calendar table td a:hover {
+
+}
+
+/* Le pied de page
+-------------------------------------------------------- */
+#footer {
+
+}
+
+#footer a {
+
+}

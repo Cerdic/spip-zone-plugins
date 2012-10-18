@@ -8,9 +8,8 @@
 	<body>
 		<div id="page">
 			<div id="top">
-				<BOUCLE_titre(RUBRIQUES){id_secteur}{id_parent=0}>
-				[<h1>(#LOGO_RUBRIQUE|#URL_RUBRIQUE|inserer_attribut{alt,#TITRE}|inserer_attribut{title,#TITRE}|sinon{<a href="#URL_RUBRIQUE">#TITRE</a>})</h1>]
-				</BOUCLE_titre>
+			[(#CHEMIN{themes/#CONFIG{spipclear/nom_theme}/noisettes/top.html}|?{#SET{path_top,themes/#CONFIG{spipclear/nom_theme}/noisettes/top},#SET{path_top,noisettes/top}})]
+				[(#INCLURE{fond=[(#GET{path_top})]}{env})]
 				[(#FORMULAIRE_ADMIN)]
 				[(#SPIP_CRON)]
 			</div>
@@ -20,6 +19,11 @@
 				<a href="#sidebar"><:spipclear:go_sidebar:></a> |
 				<a href="#search"><:spipclear:go_search:></a>
 			</p>
+
+			[<div id="navigation">
+			(#CHEMIN{themes/#CONFIG{spipclear/nom_theme}/noisettes/navigation.html}|oui)#SET{path_navigation,themes/#CONFIG{spipclear/nom_theme}/noisettes/navigation}
+				[(#INCLURE{fond=[(#GET{path_navigation})]}{env})]
+			</div>]
 
 			<div id="wrapper">
 				<div id="main">
@@ -34,7 +38,9 @@
 						[(#RECHERCHE|oui)
 							<INCLURE{fond=noisettes/search}{env}{ajax}>]
 						[(#ENV{id_article}|oui)
-							<INCLURE{fond=noisettes/post}{id_article}{env}>]
+							[(#CHEMIN{themes/#CONFIG{spipclear/nom_theme}/noisettes/post.html}|?{#SET{path_post,themes/#CONFIG{spipclear/nom_theme}/noisettes/post},#SET{path_post,noisettes/post}})]
+							[(#INCLURE{fond=[(#GET{path_post})]}{env})]
+						]
 						[(#ENV{id_mot}|oui)
 							<INCLURE{fond=noisettes/list-tag}{id_mot}{env}{ajax}>]
 					</div>

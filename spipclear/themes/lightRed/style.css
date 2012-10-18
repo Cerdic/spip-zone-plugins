@@ -1,0 +1,451 @@
+/*
+# -- BEGIN LICENSE BLOCK ----------------------------------
+# This file is part of lightRed, a theme for Dotclear.
+#
+# Copyright (c) 2009 annso
+# contact@as-i-am.fr
+#
+# Licensed under the GPL version 2.0 license.
+# A copy of this license is available in LICENSE file or at
+# http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+# -- END LICENSE BLOCK ------------------------------------ */
+
+
+
+/* Les éléments HTML en général
+-------------------------------------------------------- */
+
+body {
+	background: url(img/bg.gif) repeat;
+	font-size: 0.8em;
+	font-family: Verdana, Helvetica, Sans-Serif;
+	color: #424240;
+	margin: 0;
+	padding: 0;
+	line-height:140%;
+}
+
+a {
+	color: #f03f3f;
+	text-decoration: none;
+}
+
+a:hover{color:#424240;}
+
+a img{
+	border: none;
+	padding: 0;
+	}
+
+ul { list-style-type: square;}
+
+h2{
+	font-family: "Century gothic",  Arial;
+	text-transform: uppercase;
+	letter-spacing: -1px;
+	font-size: 2em;
+	line-height:140%;
+}
+
+h3{
+	font-family: "Century gothic",  Arial;
+	text-transform: uppercase;
+	letter-spacing: -1px;
+	font-size: 1.8em;
+	color: #f03f3f;
+}
+
+.clear{ clear: both;}
+
+code {
+	color: #003466;
+	font: normal 115% "Courier New", Courier, monospace;
+	white-space: nowrap;
+	padding: 0 2px;
+}
+pre code {
+	display: block;
+	clear: both;
+	background: url(img/code-bg.gif);
+	padding: 10px;
+	color: #333;
+	border: solid 1px #ccc;
+	overflow: auto;
+	line-height: 140%;
+	margin: 5px 0 15px;
+	white-space: pre;
+	width: 470px;
+}
+
+
+
+
+/*  Le header
+-------------------------------------------------------- */
+
+#top{
+	height: 189px;
+	width: 650px;
+	margin-left: 30px;
+	margin-bottom: -20px;
+	background: #fff url(img/top.jpg) no-repeat;
+}
+#top h1 a{
+	display: block;
+	width: 200px;
+	margin-left: 180px;
+	padding-top: 60px;
+}
+#top p{
+	margin-left: 180px;
+}
+
+#prelude {
+	display: none;
+}
+
+/*  Le contenu
+-------------------------------------------------------- */
+#wrapper, #content{
+	padding: 0px;
+	margin: 0px;
+}
+
+#main{
+	margin-left: 30px;
+	padding-left: 50px;
+	width: 600px;
+	background: #fff;
+	padding-bottom: 20px;
+}
+
+#footer{
+	padding: 10px 0;
+	margin-left: 30px;
+	padding-left: 50px;
+	padding-right: 60px;
+	width: 540px;
+	background: #fff;
+	padding-bottom: 20px;
+}
+
+
+/* Les articles
+-------------------------------------------------------- */
+
+#navlinks{
+	padding: 0 70px 50px 0;
+	font-size: 0.80em;
+	}
+#navlinks .prev{float: left;}
+#navlinks .next{float: right;}
+
+
+.day-date{
+	margin-left: 370px;
+	background: url(img/date.jpg) no-repeat left;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 0.8em;
+	height: 26px;
+	padding-top: 15px;
+	padding-left: 5px;
+	display: block;
+	font-family: "Century Gothic",  Arial;
+}
+
+.post-title a{
+	color: #424240;
+}
+
+
+.post-info, .post-info a, .post-tags{
+	color: #e9e9e9;
+	display: none;
+}
+
+.post{
+	width: 521px;
+	clear: both;
+	margin-bottom: 20px;
+}
+
+.read-next a{
+	font-family: "Century Gothic",  Arial;
+	background: url(img/next.jpg) no-repeat;
+	display: block;
+	height: 23px;
+	width: 88px;
+	padding: 2px 0 0 10px;
+	color: #fff;
+	float: left;
+}
+.post-info-co a{
+	background: url(img/commentaires.jpg) no-repeat;
+	color: #424240;
+	padding: 2px 0 0 7px;
+	font-family: "Century Gothic",  Arial;
+	float: right;
+	display: block;
+	height: 23px;
+	width: 112px;
+	font-size: 0.9em;
+}
+
+.post-title a:hover,
+.read-next a:hover,
+.post-info-co a:hover{
+	color: #F13F3F;
+}
+
+
+
+/*  Les commentaires
+-------------------------------------------------------- */
+
+dt{
+	font-size: 0.80em;
+	background-color: #e9e9e9;
+	padding: 1ex 1em 1ex ;
+	margin: 0 80px 0 0;
+	font-weight: bold ;
+}
+
+dd{
+	font-size: 0.80em;
+	margin: 0 80px 20px 0;
+	background-color: #e9e9e9;
+	border-bottom: 1px solid #a3a3a3;
+	padding: 1ex 1em 1ex ;
+}
+
+dd.odd,
+dt.odd{background-color: #f5f5f5;}
+
+dt.me{
+	color: #F03F3F;
+}
+
+
+/*  Le formulaire
+-------------------------------------------------------- */
+
+fieldset{
+	border: none;
+}
+
+label{
+	float: left;
+	width: 40%;
+	text-align: right;
+	margin: 0;
+	padding: 0 .5em 0 0;
+	line-height: 1.8;
+	font-size: 0.80em;
+}
+
+input, textarea{
+	border: 1px solid #e9e9e9;
+	font-size: 1em;
+}
+textarea{
+	font-size: 1.2em;
+}
+textarea#c_content{
+	margin: 10px 30px 0 0;
+}
+
+input:hover, textarea:hover{
+	border: 1px solid #f03f3f;
+}
+input.submit, input.preview{
+	text-transform: uppercase;
+	font-family: "Century Gothic",  Arial;
+}
+input.submit:hover, input.preview:hover{
+	background: #f03f3f;
+	color: #fff;
+}
+.form-help{
+	width: 80%;
+	font-style: italic;
+	text-align: right;
+}
+
+/* Pagination
+-------------------------------------------------------- */
+.pagination{
+	display: block;
+	margin: 40px 80px 0 0;
+	text-align: right;
+}
+
+
+/*  Le sidebar
+-------------------------------------------------------- */
+
+#blogextra {
+	position: absolute;
+	left: 700px;
+	top: 20px;
+}
+
+#blogextra a img{ border: none; }
+
+#blogextra ul{
+	margin: 0px;
+	padding:0px;
+	list-style-type: none;
+	margin-bottom: 30px;
+}
+
+#blogextra h2{
+	margin:0;
+	padding:0;
+	text-transform: uppercase;
+	font-size: 1.4em;
+	font-weight: normal;
+	font-family: "Century Gothic",  Arial;
+}
+
+
+
+
+
+/*  Les RSS
+-------------------------------------------------------- */
+
+.syndicate { padding-left: 10px;}
+.syndicate li a {
+	color: #424240;
+	font-size: 0.80em;
+	padding: 0 0 0 19px;
+	background: url(img/rss.png) no-repeat 0 50%;
+	list-style-type: none;
+}
+.syndicate li a:hover{color: #f03f3f; }
+
+
+
+/*  Les derniers commentaires
+-------------------------------------------------------- */
+
+.lastcomments{
+	margin-top: 60px;
+	padding-left: 10px;
+	}
+.lastcomments a {
+	font-size: 0.8em;
+	color: #424240;
+	}
+.lastcomments a:hover {color: #f03f3f;}
+.lastcomments a span.author {font-weight: bold;}
+.lastcomments a span.title {color: #f03f3f;}
+#blogextra .lastcomments li{
+	background: none;
+	width: 160px;
+	padding-bottom: 15px;
+}
+
+
+
+/*  Les dernieres images
+-------------------------------------------------------- */
+.images {
+	width: 260px;
+}
+
+.images .img-box {
+	display: block;
+	width: 100px;
+	height: 90px;
+	margin: 5px;
+	float: left;
+	text-align: left;
+}
+
+/*  La bottom
+-------------------------------------------------------- */
+
+#blognav{
+	padding: 10px 0;
+	margin-left: 30px;
+	padding-left: 50px;
+	width: 600px;
+	background: #424240;
+	color: #fff;
+	font-size: 0.8em;
+}
+#blognav a:hover{color:#EAEAEA;}
+#blognav ul{ padding-left: 10px;}
+
+#blognav h2{
+	margin-bottom: 0;
+	text-transform: uppercase;
+	font-weight: normal;
+	font-family: "Century Gothic",  Arial;
+}
+
+
+
+/*  Les  tags
+-------------------------------------------------------- */
+
+
+.dc-tags .tags a { color: #424240}
+
+
+.tags {font-size: 1.3em;}
+.tags ul{margin-right: 60px;}
+.tags li{
+	display: inline;
+	padding: 3px;
+	}
+.tags a{color: #fff;}
+
+.tags li a.tag10{font-size: 0.7em;}
+.tags li a.tag20{font-size: 0.8em;}
+.tags li a.tag30{font-size: 0.9em;}
+.tags li a.tag40{font-size: 1.0em;}
+.tags li a.tag50{font-size: 1.1em;}
+.tags li a.tag60{font-size: 1.2em;}
+.tags li a.tag70{font-size: 1.3em;}
+.tags li a.tag80{font-size: 1.4em; color: #f03f3f; }
+.tags li a.tag90{font-size: 1.5em; color: #f03f3f; }
+.tags li a.tag100{font-size: 1.6em; color: #f03f3f; }
+
+.tags li a:hover.tag10,
+.tags li a:hover.tag20,
+.tags li a:hover.tag30{
+	color: #f03f3f;
+}
+.tags li a:hover.tag40,
+.tags li a:hover.tag50{
+	color: #fff;
+}
+
+
+
+/*  La recherche
+-------------------------------------------------------- */
+#search h2{margin-right: 60px;}
+
+#search input{
+	font-size: 1.8em;
+	font-weight: normal;
+	font-family: "Century Gothic",  Arial;
+	padding-left: 10px;
+	}
+
+#search #q{
+	height: 26px;
+	margin-bottom: 3px;
+	background: #EBEBE9;
+}
+#search #q:hover{
+	background: #fff;
+	border-color: #EBEBE9;
+}
+#search .submit{
+	height: 30px;
+}
