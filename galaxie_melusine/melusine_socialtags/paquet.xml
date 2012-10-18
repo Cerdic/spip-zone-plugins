@@ -1,0 +1,23 @@
+<paquet
+	prefix="melusine_socialtags"
+	categorie="squelette"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.4;3.0.*]"
+	logo="prive/themes/spip/images/melusine_socialtags-64.png"
+	documentation=""
+>
+	<!--
+		Paquet généré le 2012-10-17 14:34:13
+	-->
+
+	<nom>Social Tags pour Mélusine</nom>
+
+	<auteur lien='http://datice.ac-creteil.fr/'>Jean-Marc Labat</auteur>
+
+	<licence>GNU/GPL3</licence>
+	<necessite nom="melusine" compatibilite="[1.0.0;]" />
+	<necessite nom="socialtags" compatibilite="[1.0.2;]" />
+
+
+</paquet>
