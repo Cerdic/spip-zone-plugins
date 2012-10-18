@@ -32,6 +32,7 @@ function formulaires_editer_page_charger_dist($page, $new, $retour=''){
 			$contexte['editable'] = false;
 			$contexte['message_erreur'] = _T('spip:erreur');
 		}
+		$valeurs['page'] = $page;
 		$valeurs['type_page'] = $type_page;
 		$valeurs['composition'] = $composition;
 		$valeurs['nom'] = $noizetier_compositions[$type_page][$composition]['nom'];
