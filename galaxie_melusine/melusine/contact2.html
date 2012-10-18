@@ -1,0 +1,32 @@
+#CACHE{3600*24*77}
+<!--Squelette Mélusine  - JM Labat - http://datice.ac-creteil.fr -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<BOUCLE_contact(AUTEURS){tout} {id_auteur}>
+
+<html lang="#LANG">
+
+<!-- ********************** Initialisation : style interne, métas et liens **************** -->
+<INCLURE{fond=inclusions/header}{id_auteur}>
+
+<body  dir="#LANG_DIR" style="background-image:none;width:500px;margin:5px auto;">
+
+
+
+	
+<div class="auteur">
+		[(#FORMULAIRE_ECRIRE_AUTEUR{id_auteur})]
+	</div>
+
+
+
+
+
+</body>
+</html>
+
+</BOUCLE_contact>
+
+<!--  ********************        Page de redirection, en cas d'erreur  ****************          -->
+<INCLURE{fond=404}>
+<//B_contact>

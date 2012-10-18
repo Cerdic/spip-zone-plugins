@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>external - Interactive DHTML art-demos</title>
+<meta name="Author" content="Gerard Ferrandez at http://www.dhteumeuleu.com">
+<meta http-equiv="imagetoolbar" content="no">
+<style type="text/css">
+  html {
+    overflow: hidden;
+  }
+  body {
+    margin: 0px;
+    padding: 0px;
+    background: #000;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+  }
+  #center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+  }
+  #screen {
+    position:absolute;
+    left: -250px;
+    top: -150px;
+    width: 500px;
+    height: 300px;
+    background: #333;
+    overflow: hidden;
+    border: #333 solid 1px;
+    color: #666;
+    font-family: arial;
+  }
+</style>
+
+<script type="text/javascript">
+// /////////////////////////////////////////////////////////
+// ================== alpha-zoom ===================
+// Script by Gerard Ferrandez - October 2000
+// http://www.dhteumeuleu.com
+// strict mode - July 2006
+// /////////////////////////////////////////////////////////
+
+
+///////////////////////////////////
+var ZOOM = 100; // zoom factor
+var H = true;  // horizontal zoom
+var V = true;  // vertical zoom
+///////////////////////////////////
+var IP = 0;
+var IM = 1;
+var nxp;
+var nyp;
+var B0;
+var B1;
+var imgsrc;
+
+function zOOm(){
+  if (IP++ < ZOOM) {
+    if (H) {
+      B0.style.left   = (parseInt(B0.style.left)  - 1) + "px";
+      B0.style.width  = (parseInt(B0.style.width) + 2) + "px";
+      B1.style.left   = (parseInt(B1.style.left)  - 1) + "px";
+      B1.style.width  = (parseInt(B1.style.width) + 2) + "px";
+    }
+    if (V) {
+      B0.style.top    = (parseInt(B0.style.top)    - 1) + "px";
+      B0.style.height = (parseInt(B0.style.height) + 2) + "px";
+      B1.style.top    = (parseInt(B1.style.top)    - 1) + "px";
+      B1.style.height = (parseInt(B1.style.height) + 2) + "px";
+    }
+    if (B1.filters) B1.filters.item(0).opacity = Math.round(IP / ZOOM * 100); else B1.style.opacity = IP / ZOOM;
+  } else {
+    IP = 0;
+    if (B1.filters) B1.filters.item(0).opacity = 0; else B1.style.opacity = 0;
+    if (H) {
+      B1.style.left   = "0px";
+      B1.style.width  = nxp + "px";
+      B0.style.left   = -ZOOM + "px";
+      B0.style.width  = (nxp + (2 * ZOOM)) + "px";
+    }
+    if (V) {
+      B1.style.top    = "0px";
+      B1.style.height = nyp + "px";
+      B0.style.top    = -ZOOM + "px";
+      B0.style.height = (nyp + (2 * ZOOM)) + "px";
+    }
+    B0.src              = B1.src;
+    B1.src              = imgsrc[++IM % imgsrc.length].src;
+  }
+}
+
+onload = function() {
+  imgsrc                  = document.getElementById("images").getElementsByTagName("img");
+  nxp                     = document.getElementById("screen").offsetWidth;
+  nyp                     = document.getElementById("screen").offsetHeight;
+  B0                      = document.createElement("img");
+  B0.src                  = imgsrc[0].src;
+  B0.style.position       = "absolute";
+  B0.style.left           = (H ? -ZOOM : 0) + "px";
+  B0.style.top            = (V ? -ZOOM : 0) + "px";
+  B0.style.width          = (H ? nxp + (2 * ZOOM) : nxp) + "px";
+  B0.style.height         = (V ? nyp + (2 * ZOOM) : nxp) + "px";
+  document.getElementById("screen").appendChild(B0);
+  B1                      = document.createElement("img");
+  B1.src                  = imgsrc[1].src;
+  B1.style.position       = "absolute";
+  B1.style.left           = "0px";
+  B1.style.top            = "0px";
+  B1.style.height         = nyp + "px";
+  B1.style.width          = nxp + "px";
+  B1.style.filter         = "alpha(opacity=0)";
+  B1.style.opacity        = 0;
+  document.getElementById("screen").appendChild(B1);
+  setInterval("zOOm();", 32);
+}
+
+</script>
+</head>
+
+<body>
+
+<div id="center">
+  <div id="screen"><br> Loading...
+  </div>
+</div>
+
+<div id="images" style="display: none">
+
+  <BOUCLE_vignette(DOCUMENTS) {id_article}>
+  <img src="#URL_DOCUMENT">
+  </BOUCLE_vignette>
+
+</div>
+
+</body>
+</html>
+

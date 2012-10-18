@@ -1,0 +1,40 @@
+#CACHE{3600*24*60}
+<!--Squelette Mélusine  - JM Labat - http://datice.ac-creteil.fr -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+
+<INCLURE{fond=inclusions/header}>
+
+<body  dir="#LANG_DIR"  >
+<div id="container">
+  	<div id="header">		
+		<INCLURE{fond=inclusions/bandeau}>		
+		<INCLURE{fond=inclusions/bande-chemin}>
+	</div>
+  	<div id="wrapper">
+    		<div id="content"> 
+			#SET{choixsom, #CONFIG{melusine_sommaire/choixsom} }
+			<BOUCLE_test(CONDITION){si #GET{choixsom}|=={1}}>
+				<INCLURE{fond=sommaire1}>
+			</BOUCLE_test>
+				<INCLURE{fond=sommaire2}>
+			<//B_test>
+		<!-- content -->		
+  		</div>
+  	</div>
+
+	<div id="navigation">		
+		<INCLURE{fond=inclusions/bloc-gauche}>
+	</div>
+  	<div id="extra">
+		<INCLURE{fond=inclusions/bloc-droite}{self=#SELF}>
+	</div>
+
+	<div id="footer">
+		<INCLURE{fond=inclusions/footer}>
+	</div>
+<!-- fin de la classe container -->
+</div>
+
+</body>
+</html>

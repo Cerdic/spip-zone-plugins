@@ -1,0 +1,32 @@
+<paquet
+	prefix="melusine"
+	categorie="squelette"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.4;3.0.*]"
+	logo="prive/themes/spip/images/melusine-64.png"
+	documentation="http://datice.ac-creteil.fr/spip"
+	schema="1.0.0" 
+>
+	<!--
+		Paquet généré le 2012-09-27 16:59:32
+		(Vous pouvez bien entendu supprimer ces commentaires) 
+	-->
+
+	<nom>Mélusine</nom>
+
+	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs --> 
+	<auteur lien='http://datice.ac-creteil.fr/'>Jean-Marc Labat</auteur>
+
+	<licence>GNU/GPL3</licence>
+
+	-->
+	
+	<pipeline nom="header_prive" inclure="css_prive.php" action="cssprive" />
+	
+	<pipeline nom="affiche_milieu" inclure="melusine_pipelines.php" />
+	
+	<necessite nom="palette" compatibilite="[3.0.1;]" />
+
+
+</paquet>

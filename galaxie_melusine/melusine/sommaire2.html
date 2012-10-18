@@ -1,0 +1,31 @@
+#CACHE{3600*24*58}
+#SET{sommairegauche, (#CONFIG{melusine_sommaire/x}|serialize)}
+#SET{sommairedroite, (#CONFIG{melusine_sommaire/y}|serialize)}
+
+<div class="sommairemulticol">
+	<div class="sommaire_gauche">
+		<BOUCLE_test(POUR){tableau #GET{sommairegauche}}>
+			 <BOUCLE_cond(CONDITION){si #VALEUR|=={aucun}}>
+   
+      			</BOUCLE_cond>
+				<div class="module">
+   					<INCLURE{fond=modules/#VALEUR}>
+				</div>
+      			<//B_cond>
+		</BOUCLE_test>
+	</div>
+
+	<div class="sommaire_droite">
+		<BOUCLE_test2(POUR){tableau #GET{sommairedroite}}>
+			<BOUCLE_cond2(CONDITION){si #VALEUR|=={aucun}}>
+   
+      			</BOUCLE_cond2>
+				<div class="module">
+   					<INCLURE{fond=modules/#VALEUR}>
+				</div>
+      			<//B_cond2>
+		</BOUCLE_test2>
+	</div>
+<!-- fin de la classe sommairemulticol -->
+</div>
+

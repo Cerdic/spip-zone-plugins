@@ -1,0 +1,156 @@
+#CACHE{3600*24*80}
+<!--Squelette M�lusine  - JM Labat - http://datice.ac-creteil.fr -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">[(#CHEMIN{melusine_images/image6}|?{#SET{image6, #CHEMIN{melusine_images/image6}},#SET{image6,"IMG/config/config_images/image6.png"}} )]
+#SET{auteurs, #CONFIG{melusine_blocs/auteurs} }
+#SET{date_article, #CONFIG{melusine_blocs/date_article} }
+
+
+<BOUCLE_billet_principal(ARTICLES){doublons} {id_article}>
+
+<html lang="#LANG">
+
+<!-- ********************** Initialisation : style interne, métas et liens **************** -->
+<INCLURE{fond=inclusions/header}{id_rubrique}>
+
+<body  dir="#LANG_DIR"  >
+
+<div id="container">
+  	<div id="header">
+		<INCLURE{fond=inclusions/bandeau}>
+		<INCLURE{fond=inclusions/bande-chemin}{id_rubrique}>
+	</div>
+  	<div id="wrapper">
+    		<div id="content">
+
+
+
+
+<div class="contenu">
+
+
+<div class="billetart" [style="[min-height: (#LOGO_RUBRIQUE||image_reduire{110}||hauteur_majoree)]px; _height: (#LOGO_RUBRIQUE||image_reduire{110}||hauteur)px;"]>
+
+
+<!-- ************************************************************************************-->
+<!-- ************************   Insertion du tableau de présentation du blog *********************  -->
+<!-- ************************************************************************************-->
+<div class="blog">
+
+<div class="billet">
+<!-- *********************      Insertion du titre  du billet***************************** -->
+<!-- ************************************************************************************-->
+ <BOUCLE_titreblog(ARTICLES){id_article} >
+<div class="titre-billet"><img class="format_png" style="float:left" src=#GET{image6}>[(#TITRE|supprimer_numero)]</div> 
+ </BOUCLE_titreblog>
+
+<!-- ************* Insertion du texte du blog (qui correspond en fait à un article d'une rubrique associée au mot clé "blog") ********** -->  
+<!-- *****************************************************************************************************************-->
+<BOUCLE_billet(ARTICLES){id_article}>
+
+<div class="texte">
+
+<!-- ************* Insertion des noms des auteurs et de la date de publication ********** --> 
+<!-- ************************************************************************************-->
+<div class="blogdetail">
+
+#SET{details, #GET{date_article}|concat{#GET{auteurs}}}
+					
+					<BOUCLE_test_details(CONDITION){si #GET{details}|=={nonnon}}>   
+					
+					</BOUCLE_test_details>
+
+							<BOUCLE_test_date(CONDITION){si #GET{date_article}|=={oui}}>   
+                  						[(#DATE|nom_jour)] [(#DATE|affdate)]<br/>
+							</BOUCLE_test_date>
+							<//B_test_date>
+
+							<BOUCLE_test(CONDITION){si #GET{auteurs}|=={oui}}>   
+                    						<BOUCLE_auteurs-article(AUTEURS) {id_article} {", "}>
+                        						<a href="#URL_AUTEUR">#NOM</a>
+                    						</BOUCLE_auteurs-article>
+							</BOUCLE_test>
+							<//B_test>
+						
+					<//B_test_details>
+          
+<!-- fin de la classe blogdetail  -->
+</div>
+<!-- *********** le texte ************************************-->
+[ (#TEXTE|typo_couleur|image_reduire{400,0})]
+
+<!-- fin de la classe texte  -->
+</div>
+
+</BOUCLE_billet>
+
+<!-- ***************           Voir les commentaires   ************************** -->
+<!-- *******************************************************************-->
+<B_forums>      
+         <br/>
+         <div class="titre-billet">R�ponse(s) au billet :</div>
+    <BOUCLE_forums(FORUMS){id_article}{par date}>
+                <div class="secteur">
+                    <div class="titre">
+                        #TITRE
+                    </div>                
+                </div>
+                <div class="detailbillet">
+                        [(#DATE|nom_jour)] [(#DATE|affdate)] [<:par_auteur:> (#NOM)]<br>
+						[(#EMAIL)]
+                </div>
+                <div class="texte">
+                        #TEXTE
+                        <br><br>
+                        [<a href="[(#URL_SITE)]">(#NOM_SITE)</a>]
+                </div>
+    </BOUCLE_forums>
+</B_forums>
+
+
+<!-- ***************          Bouton pour proposer un message  ************************** -->
+<!-- ***************************************************************************-->
+[<a class="repondre" href="spip.php?page=forum-blog&(#PARAMETRES_FORUM{#URL_PAGE{forum-blog,id_article=#ID_ARTICLE}})">Participer</a>]
+     
+
+<!--  ********************               fin de la classe billet ****************          -->
+</div>
+
+<!--  ********************               fin de la classe blog ****************          -->
+</div>  
+ 		
+
+<!--  ********************               fin de la classe billetart ****************          -->
+</div> 
+<!--  ********************               fin de la classe contenu ****************          -->
+</div>
+
+<!-- fin de la classe content --> 
+	</div>
+  	<!-- fin de la classe wrapper -->
+	</div>
+	<div id="navigation">
+		<INCLURE{fond=inclusions/bloc-gauche}{id_rubrique}>
+	</div>
+
+
+	<div id="extra">
+ 		<INCLURE{fond=inclusions/bloc-droite}{id_secteur}{id_rubrique}{id_article}>
+	</div>
+
+
+
+
+	<div id="footer">
+		<INCLURE{fond=inclusions/footer}>
+	</div>
+
+<!-- fin de la classe container -->
+</div>
+
+</body>
+</html>
+
+</BOUCLE_billet_principal>
+<!--  ********************        Page de redirection, en cas d'erreur  ****************          -->
+<INCLURE{fond=404}>
+<//B_billet_principal>

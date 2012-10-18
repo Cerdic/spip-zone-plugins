@@ -1,0 +1,65 @@
+#CACHE{3600*24*82}
+<!--Squelette Mélusine  - JM Labat - http://datice.ac-creteil.fr -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html lang="#LANG">
+#SET{article,(#CONFIG{melusine_articles/effectifs}|serialize)}
+
+<INCLURE{fond=inclusions/header}{id_rubrique}{id_article}> 
+<BOUCLE_article_principal(ARTICLES){doublons} {id_article}>
+<body id="article_#ID_ARTICLE" class="dc-post" dir="#LANG_DIR"  >
+<div id="container">
+  	<div id="header">
+		<INCLURE{fond=inclusions/bandeau}>
+		<INCLURE{fond=inclusions/bande-chemin}{id_rubrique}>
+	</div>
+  	<div id="wrapper">
+    		<div id="content">
+
+<BOUCLE_test(POUR){tableau #GET{article}}>
+			 <BOUCLE_cond(CONDITION){si #VALEUR|=={aucun}}>
+   
+      			</BOUCLE_cond>
+				<div class="module">
+   				<INCLURE{fond=modules/articles/#VALEUR}{id_article}>
+				</div>
+      			<//B_cond>
+
+	</BOUCLE_test>
+
+
+			
+    
+
+
+	
+
+
+	<!-- fin de la classe content --> 
+	</div>
+  	<!-- fin de la classe wrapper -->
+	</div>
+	<div id="navigation">
+		<INCLURE{fond=inclusions/bloc-gauche}{id_rubrique}>
+	</div>
+
+
+	<div id="extra">
+ 		<INCLURE{fond=inclusions/bloc-droite}{id_secteur}{id_rubrique}{id_article}>
+	</div>
+
+
+
+
+	<div id="footer">
+		<INCLURE{fond=inclusions/footer}>
+	</div>
+
+<!-- fin de la classe container -->
+</div>
+</body>
+</html>
+</BOUCLE_article_principal>
+
+
+<!--  ********************        Page de redirection, en cas d'erreur  ****************          -->
+<INCLURE{fond=404}>
+<//B_article_principal>

@@ -1,0 +1,78 @@
+#CACHE{3600*24*70}
+<!--Squelette Mélusine  - JM Labat - http://datice.ac-creteil.fr -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html lang="#LANG">
+<INCLURE{fond=inclusions/header}>
+<BOUCLE_principale(SITES){id_syndic}>
+<body  dir="#LANG_DIR" ">
+
+<div id="container">
+  	<div id="header">
+		<INCLURE{fond=inclusions/bandeau}>
+		<INCLURE{fond=inclusions/bande-chemin}{id_rubrique}>
+	</div>
+  	<div id="wrapper">
+    		<div id="content">
+
+
+
+  <div class="cartouche">
+            <a href="#URL_SITE">[(#LOGO_SITE|image_reduire{150,100})]</a>
+            <h1 class="#EDIT{nom_site}">#NOM_SITE</h1>
+        </div>
+
+        [<div class="#EDIT{descriptif} chapo">(#DESCRIPTIF)</div>]
+        [<p class="#EDIT{url_site} hyperlien"><a href="#URL_SITE" class="spip_out">(#URL_SITE|couper{80})</a></p>]
+
+        [(#REM) Articles issus de la syndication ]
+        <B_articles>
+        <div class="menu articles">
+            #ANCRE_PAGINATION
+            <h2><:articles:></h2>
+            <ul>
+                <BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {pagination 5}>
+                <li>
+                    <h3><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></h3>
+                    [<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
+                    <small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)][ &mdash; <em>(#TAGS|afficher_tags)</em>]</small>
+                    [<div class="introduction">(#DESCRIPTIF|image_reduire{300})</div>]
+                </li>
+                </BOUCLE_articles>
+            </ul>
+            [<p class="pagination">(#PAGINATION)</p>]
+        </div>
+        </B_articles>
+
+        [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+
+
+
+
+	<!-- fin de la classe content --> 
+	</div>
+  	<!-- fin de la classe wrapper -->
+	</div>
+	<div id="navigation">
+		<INCLURE{fond=inclusions/bloc-gauche}{id_rubrique}>
+	</div>
+
+
+	<div id="extra">
+ 		<INCLURE{fond=inclusions/bloc-droite}{id_secteur}{id_rubrique}{id_article}>
+	</div>
+
+
+
+
+	<div id="footer">
+		<INCLURE{fond=inclusions/footer}>
+	</div>
+
+<!-- fin de la classe container -->
+</div>
+</body>
+</html>
+</BOUCLE_principale>
+

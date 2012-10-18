@@ -1,0 +1,62 @@
+#CACHE{3600*24*70}
+<!--Squelette Mélusine  - JM Labat - http://datice.ac-creteil.fr -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html lang="#LANG">
+<INCLURE{fond=inclusions/header}>
+
+<BOUCLE_principale(BREVES){id_breve}>
+<body  dir="#LANG_DIR" >
+
+<div id="container">
+  	<div id="header">
+		<INCLURE{fond=inclusions/bandeau}>
+		<INCLURE{fond=inclusions/bande-chemin}{id_rubrique}>
+	</div>
+  	<div id="wrapper">
+    		<div id="content">
+
+        <div class="cartouche">
+            [(#LOGO_BREVE|image_reduire{200,200})]
+            <h1 class="#EDIT{titre}">#TITRE</h1>
+            <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr></small></p>
+        </div>
+        
+        [<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+        [<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+        [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+        
+        [(#REM) Forum de la breve
+        NB : pour desactiver les forums de breve, supprimez simplement les lignes ci-dessous ]
+        <a href="#forum" name="forum" id="forum"></a>
+        <INCLURE{fond=inc-forum}{id_breve}>
+        [<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_breve:></a></p>]
+
+	
+	<!-- fin de la classe content --> 
+	</div>
+  	<!-- fin de la classe wrapper -->
+	</div>
+	<div id="navigation">
+		<INCLURE{fond=inclusions/bloc-gauche}{id_rubrique}>
+	</div>
+
+
+	<div id="extra">
+ 		<INCLURE{fond=inclusions/bloc-droite}{id_secteur}{id_rubrique}{id_article}>
+	</div>
+
+
+
+
+	<div id="footer">
+		<INCLURE{fond=inclusions/footer}>
+	</div>
+
+<!-- fin de la classe container -->
+</div>
+</body>
+</html>
+</BOUCLE_principale>
+

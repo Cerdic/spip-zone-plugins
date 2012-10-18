@@ -1,0 +1,107 @@
+#CACHE{3600*24*72}
+<!--Squelette Mélusine  - JM Labat - http://datice.ac-creteil.fr -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="#LANG">
+<INCLURE{fond=inclusions/header}>
+<body  dir="#LANG_DIR" >
+<div id="container">
+  	<div id="header">
+		<INCLURE{fond=inclusions/bandeau}>
+		<INCLURE{fond=inclusions/bande-chemin}{id_rubrique}>
+	</div>
+  	<div id="wrapper">
+    		<div id="content">
+
+<BOUCLE_exclus(RUBRIQUES) {titre_mot=exclu} {doublons}{lang} />
+<BOUCLE_exclus2(ARTICLES) {titre_mot=exclu} {doublons}{lang} />
+<BOUCLE_exclus3(RUBRIQUES) {titre_mot=blog} {doublons}{lang} />
+<BOUCLE_exclus4(RUBRIQUES) {titre_mot=forum} {doublons}{lang} />
+<div id="contenu">
+        
+          
+        <div class="cartouche">
+            <h1><:plan_site:></h1>
+        </div>
+        
+        <BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}{doublons}>
+        
+        <h2><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></h2>
+        
+        [(#REM) Articles et sous-rubriques ]
+        <B_articles_racine>
+        <h3><:articles:></h3>
+        <ul>
+            <BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre}>
+            <li><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></li>
+            </BOUCLE_articles_racine>
+        </ul>
+        </B_articles_racine>
+        
+        <B_rubriques>
+        <ul>
+            <BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
+            <li>
+                <strong><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></strong>
+                
+                <B_articles>
+                <ul>
+                    <BOUCLE_articles(ARTICLES) {id_rubrique} {par titre}>
+                    <li><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></li>
+                    </BOUCLE_articles>
+                </ul>
+                </B_articles>
+                
+                <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+            </li>
+            </BOUCLE_rubriques>
+        </ul>
+        </B_rubriques>
+        
+        [(#REM) Breves ]
+        <B_breves>
+        <h3><:breves:></h3>
+        <ul>
+            <BOUCLE_breves(BREVES) {id_rubrique} {par date}{inverse}>
+            <li><a href="#URL_BREVE">#TITRE</a></li>
+            </BOUCLE_breves>
+        </ul>
+        </B_breves>
+        
+        [(#REM) Sur le Web ]
+        <B_sites>
+        <h3><:sites_web:></h3>
+        <ul>
+            <BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
+			<li><a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a></li>
+			</BOUCLE_sites>
+        </ul>
+        </B_sites>
+        
+        </BOUCLE_secteurs>
+
+	</div><!--#contenu-->
+
+<!-- fin de la classe content --> 
+	</div>
+  	<!-- fin de la classe wrapper -->
+	</div>
+	<div id="navigation">
+		<INCLURE{fond=inclusions/bloc-gauche}{id_rubrique}>
+	</div>
+
+
+	<div id="extra">
+ 		<INCLURE{fond=inclusions/bloc-droite}{id_secteur}{id_rubrique}{id_article}>
+	</div>
+
+
+
+
+	<div id="footer">
+		<INCLURE{fond=inclusions/footer}>
+	</div>
+
+<!-- fin de la classe container -->
+</div>
+</body>
+</html>

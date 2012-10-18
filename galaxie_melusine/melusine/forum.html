@@ -1,0 +1,80 @@
+#CACHE{3600*24*76}
+<!--Squelette M�lusine  - JM Labat - http://datice.ac-creteil.fr -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<BOUCLE_article_principal(ARTICLES) {id_article}>
+
+<html lang="#LANG">
+
+<!-- ********************** Initialisation : style interne, métas et liens **************** -->
+<INCLURE{fond=inclusions/header}{id_article}>
+
+<body  dir="#LANG_DIR">
+
+<div id="container">
+  	<div id="inclusions/header">
+		<INCLURE{fond=inclusions/bandeau}>
+		<INCLURE{fond=inclusions/bande-chemin}{id_rubrique}>
+	</div>
+  	<div id="wrapper">
+    		<div id="content">
+<!-- ********************       Affichage auquel ce message répond ****************  -->
+
+<div id="forum" class="forum">
+
+<BOUCLE_forum_parent(FORUMS) {id_forum}>
+
+<div class="visualisation">
+         <div class="titre">#TITRE</div>
+         <div class="detail">
+              [(#DATE|nom_jour)] [(#DATE|affdate)]<br>
+              [<:par_auteur:> (#NOM)]
+         </div>
+         <div class="texte">
+              [(#TEXTE)]
+              [<br><br><a href="[(#URL_SITE)]">(#NOM_SITE)</a>]
+
+	<BOUCLE_doc(DOCUMENTS){id_forum}>
+				[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+					[(#MODELE{emb}|image_reduire{300})]
+				,
+					[(#LOGO_DOCUMENT**)]
+				})]
+	</BOUCLE_doc>
+         </div>
+
+</div>
+</BOUCLE_forum_parent>
+
+     #FORMULAIRE_FORUM
+<!-- fin de la classe forum -->
+</div>
+<!-- fin de la classe content --> 
+	</div>
+  	<!-- fin de la classe wrapper -->
+	</div>
+	<div id="navigation">
+		<INCLURE{fond=inclusions/bloc-gauche}{id_rubrique}>
+	</div>
+
+
+	<div id="extra">
+ 		<INCLURE{fond=inclusions/bloc-droite}{id_secteur}{id_rubrique}{id_article}>
+	</div>
+
+
+
+
+	<div id="footer">
+		<INCLURE{fond=inclusions/footer}>
+	</div>
+
+<!-- fin de la classe container -->
+</div>
+
+</body>
+</html>
+
+</BOUCLE_article_principal>
+<:aucun_article:>
+<//B_article_principal>
