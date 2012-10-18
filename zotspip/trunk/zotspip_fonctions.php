@@ -242,20 +242,54 @@ function zotspip_content_disposition ($format) {
 }
 
 // Récupère un fichier distant
-function zotspip_recuperer_fichier($fichier, $titre, $id_zitem) {
+function zotspip_recuperer_fichier($fichier, $titre, $id_zitem, $mimetype, $json) {
+	$snapshot = (substr($fichier,-4) == 'view'); // Il s'agit d'un snapshot
+	if ($snapshot) { 
+		$url_snapshot = substr($fichier,0,-5).'?key='.lire_config('zotspip/api_key');
+		$json = json_decode($json, true);
+		$filename = $json['filename'];
+	}
 	$url_distante = $fichier.'?key='.lire_config('zotspip/api_key');
 	$titre = translitteration($titre);
+	// Recuperer la bonne extension de fichier en fonction du type mime
+	include_spip('base/abstract_sql');
+	$ext = sql_getfetsel('extension','spip_types_documents','mime_type='.sql_quote($mimetype));
+	// On nettoie et on ajoute l'extension
+	if ($ext) {
+		if (substr($titre,-1*(strlen($ext)+1))=='.'.$ext) $titre = substr($titre,0,-1*(strlen($ext)+1));
+		$titre = preg_replace(',[[:punct:][:space:]]+,u', ' ', $titre);
+		$titre = preg_replace(',\.([^.]+)$,', '', $titre);
+		$titre .= '.'.$ext;
+	}
 	$url_locale = _DIR_VAR."cache-zotspip/$id_zitem/$titre";
+	
 	if (!@file_exists($url_locale)) {
 		include_spip('inc/distant');
 		include_spip('inc/flock');
 		sous_repertoire(_DIR_VAR."cache-zotspip");
 		sous_repertoire(_DIR_VAR."cache-zotspip/$id_zitem");
 		ecrire_fichier($url_locale,recuperer_page($url_distante,false,false,_COPIE_LOCALE_MAX_SIZE));
+		if ($snapshot) {
+			// Dans ce cas, il faut télécharger le zip, le dezipper et renommer les fichiers en appliquant base64_decode().
+			sous_repertoire(_DIR_CACHE."tmp-zotspip");
+			ecrire_fichier(_DIR_CACHE."tmp-zotspip/$id_zitem.zip",recuperer_page($url_snapshot,false,false,_COPIE_LOCALE_MAX_SIZE));
+			include_spip('inc/pclzip');
+			$zip = new PclZip(_DIR_CACHE."tmp-zotspip/$id_zitem.zip");
+			$zip->extract(PCLZIP_OPT_PATH,_DIR_VAR."cache-zotspip/$id_zitem",PCLZIP_CB_PRE_EXTRACT, 'zotspip_decode_64_nom');
+			supprimer_fichier(_DIR_CACHE."tmp-zotspip/$id_zitem.zip");
+		}
 	}
 	include_spip('inc/headers');
 	redirige_par_entete($url_locale);
 }
+
+// Utiliser pour renommer correctement les fichiers du snapshot
+function zotspip_decode_64_nom($p_event, &$p_header){
+	$info = pathinfo($p_header['filename']);
+	$p_header['filename'] = $info['dirname'].'/'.base64_decode(substr($info['basename'],0,-5));
+	return 1;
+}
+
 
 // Récupérer les références les plus récentes
 // La variable d'environnement depuis peut être de la forme depuis=2008, depuis=2ans ou depuis=1an
