@@ -1,0 +1,29 @@
+#CACHE{3600*24*82}
+<!--Squelette Mélusine  - JM Labat - http://datice.ac-creteil.fr -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html lang="#LANG">
+<head>
+#SET{article,(#CONFIG{melusine_articles/effectifs}|serialize)}
+<title>#NOM_SITE_SPIP </title>
+[<link rel="stylesheet" href="(#URL_PAGE{style_perso}|direction_css)" type="text/css" media="projection, screen, tv" />]
+<link rel="stylesheet" media="screen" href="#CHEMIN{'css/mobil.css'}" title="style 1" type="text/css" />
+[<link rel="stylesheet" media="screen" href="(#CHEMIN{'css/perso-mobil.css'})" title="style 1" type="text/css" />]
+
+</head>
+<BOUCLE_article_principal(ARTICLES){doublons} {id_article}>
+<body   id="article_#ID_ARTICLE" dir="#LANG_DIR"  >
+<INCLURE{fond=inclusions/bandeau-mobil}>
+<div class="recherche"> #FORMULAIRE_RECHERCHE{#URL_PAGE{recherche}}  </div>
+<BOUCLE_test(POUR){tableau #GET{article}}>
+			 <BOUCLE_cond(CONDITION){si #VALEUR|=={aucun}}>
+   
+      			</BOUCLE_cond>
+				<div class="module">
+   				<INCLURE{fond=modules/articles/#VALEUR}{id_article}>
+				</div>
+      			<//B_cond>
+
+</BOUCLE_test>
+
+
+</body>
+</BOUCLE_article_principal>

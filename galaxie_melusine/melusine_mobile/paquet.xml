@@ -1,0 +1,24 @@
+<paquet
+	prefix="melusine_mobile"
+	categorie="squelette"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.4;3.0.*]"
+	logo="prive/themes/spip/images/melusine_mobile-64.png"
+	documentation=""
+>
+	<!--
+		Paquet généré le 2012-10-11 16:17:51
+	-->
+
+	<nom>Mélusine mobile</nom>
+
+	<auteur lien='http://datice.ac-creteil.fr/'>Jean-Marc Labat</auteur>
+
+	<licence>GNU/GPL3</licence>
+	
+	<necessite nom="melusine" compatibilite="[1.0.0;]" />	
+	<necessite nom="pages_mobiles" compatibilite="[1.0.1;]" />
+
+
+</paquet>

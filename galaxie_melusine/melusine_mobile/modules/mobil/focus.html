@@ -1,0 +1,35 @@
+#CACHE{3600*24*32}
+#SET{auteurs, #CONFIG{melusine_blocs/auteurs} }
+#SET{date_article, #CONFIG{melusine_blocs/date_article} }
+	
+		<BOUCLE_articlef(ARTICLES) {titre_mot="focus"}{doublons}{par num titre}{par date}{inverse}>
+			#SET{fondtexte2,#CONFIG{melusine_persoarticle/#ID_ARTICLE/fondtexte2}}
+			#SET{bord2,#CONFIG{melusine_persoarticle/#ID_ARTICLE/bord2}}
+			#SET{texte2,#CONFIG{melusine_persoarticle/#ID_ARTICLE/texte2}}
+
+
+				
+				        		
+				<div class="content" style="[(#GET{fondtexte2}|?{background-color:#GET{fondtexte2} ,''})];[(#GET{bord2}|?{ border-color:#GET{bord2},''})];[(#GET{texte2}|?{ color:#GET{texte2},''})] " >
+					[<div class="logo-article-mobil"><a href="#URL_ARTICLE">(#LOGO_ARTICLE||image_reduire{100})</a></div>]	
+					<!-- ************ Insertion éventuelle de la date et de l'auteur **********************  -->					
+					#SET{details, #GET{date_article}|concat{#GET{auteurs}}}
+					<div class="logtypeedi" style="[(#GET{fondtexte2}|?{background-color:#GET{fondtexte2} ,''})];[(#GET{bord2}|?{ border-color:#GET{bord2},''})]; ">
+						
+ 						<h2 class="#EDIT{titre} titre" align="center" style="[(#GET{texte2}|?{color:#GET{texte2},''})]">[<a href="#URL_ARTICLE">(#TITRE|supprimer_numero)</a>]  </h2>
+						
+						
+						
+					</div> 
+							
+         				[(#DESCRIPTIF|?{[<div class="descriptif #EDIT{descriptif}">(#DESCRIPTIF)</div>],[<div class="descriptif #EDIT{texte}">(#TEXTE|couper{300})</div>]})]
+ 					<INCLURE{fond=inclusions/details-mobil}{id_article}>
+									
+         				<div style="clear:both"></div>  
+					  
+					
+
+        			
+				<!-- fin de la classe content  -->
+				</div> 
+</BOUCLE_articlef>

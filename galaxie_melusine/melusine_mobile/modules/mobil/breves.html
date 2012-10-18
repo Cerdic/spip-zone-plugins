@@ -1,0 +1,40 @@
+#CACHE{3600*24*64}
+
+<BOUCLE_test(CONDITION){si #ID_RUBRIQUE|>{1} }>
+
+<B_breves>
+    <div id="breves" class="breves">
+        <div class="en-tete" ><:breves:></div>
+       <BOUCLE_breves(BREVES){id_rubrique}{par date}{inverse}>
+            <div class="contenu">
+                  <div class="nom-breve" >#TITRE</div>
+                <div class="date">[(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)]</div>
+                <div class="texte"><a href="[(#LOGO_BREVE||extraire_attribut{src})]?keepThis=true&amp;TB_iframe=true&amp;height=500&amp;width=500"  class="mediabox">[(#LOGO_BREVE||image_reduire{120,0})]</a></div>
+                <div class="texte">[(#TEXTE|image_reduire{120,0})]</div>
+                [<div class="notes">(#NOTES)</div>]
+                [<div class="notes"><:sur_web:>&nbsp;:&nbsp;<a href="#URL_SITE">(#NOM_SITE)</a></div>]
+            </div>
+        </BOUCLE_breves>
+    </div>
+</B_breves>
+
+</BOUCLE_test>
+
+<B_breves2>
+    <div id="breves" class="breves">
+        <div class="en-tete" ><:breves:></div>
+       <BOUCLE_breves2(BREVES){titre_mot=flux_sommaire}{par date}{inverse}>
+            <div class="contenu">
+                  <div class="nom-breve" >#TITRE</div>
+                <div class="date">[(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)]</div>
+                <div class="texte"><a href="IMG/#LOGO_BREVE**?keepThis=true&amp;TB_iframe=true&amp;height=500&amp;width=500"  class="mediabox">[(#LOGO_BREVE||image_reduire{120,0})]</a></div>
+                <div class="texte">[(#TEXTE|image_reduire{120,0})]</div>
+                [<div class="notes">(#NOTES)</div>]
+                [<div class="notes"><:sur_web:>&nbsp;:&nbsp;<a href="#URL_SITE">(#NOM_SITE)</a></div>]
+            </div>
+        </BOUCLE_breves2>
+    </div>
+</B_breves2>
+
+<//B_test>
+

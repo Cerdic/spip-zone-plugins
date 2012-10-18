@@ -1,0 +1,79 @@
+body{margin:0px;}
+h2{font-size:16px;}
+.module{margin:5px;}
+/*-- Bandeau -- */
+.bandeau{height:55px;text-align:right;z-index:1;position:relative}
+.imagegauchelog a.bandeau3 {font-size:18px;z-index:3;text-decoration:none;line-height:50px;}
+.nouvim{position:absolute;top:0;right:0;height:100%;z-index:1;overflow:visible}
+.nouvimage{height:100%}
+.degrad{position:absolute;top:0;height:100%;z-index:2;width:1px}
+.degrad1{width:1px;height:100px;float:left}
+#logoacad{clear:both;float:left;margin-top:40px;margin-left:110px;border:0}
+#logoacad .logo-bandeau img{position:absolute;z-index:4;float:left;border:0;top:55px}
+.banintit{float:left;font-size:20px;font-weight:700;padding:10px 0}
+.imagegauchelog {position:absolute;top:0;left:0;z-index:3;border:0 solid;}
+.transparence{position:absolute;top:115px;left:16px;z-index:2;height:30px;border:1px solid}
+.imagegauchelog img{float:left;max-height:55px;border:0px;}
+/*-- liste-articles -- */
+.logo-article-mobil{float:left;margin-right:10px}
+.logo-article-mobil img {border:0px;}
+h2.titre{font-size:14px;margin-bottom:0px;text-align:left;}
+.descriptif{font-size:12px;}
+.editodetail,.auteur{font-size:12px;display:inline;}
+/*  -- recherche--- */
+#formulaire_recherche{margin-top:10px;}
+#formulaire_recherche input.submit{height:25px;width:20px;font-size:0;background-repeat:no-repeat;background-color:transparent;cursor:pointer}
+.recherche form{margin-bottom:5px;border:1px solid;background:#fff}
+input#recherche.text{border:0;width:85%;height:24px}
+#formulaire_recherche label{display:none }
+#formulaire_recherche input.submit{
+float:right;border:0px;}
+.recherche {width:80%;margin:0 auto}
+/*navigation 1 */
+.nav1 {   
+font-size: 12px;
+margin:10px 0px 10px 0px;
+width: 100%;
+_width:91%; 
+}
+
+#nav1 ul.menulist li ul{display:none;}
+
+#nav1 ul.menulist li:hover>ul{display:block;}
+
+
+ul.menulist, ul.menulist ul{
+border:1px solid;
+border-bottom: 0px;
+list-style:none;
+margin:0px;
+padding:0px;
+width:100%;
+}
+
+ul.menulist ul{
+position:absolute;
+top:-1px;
+left:100%;
+display:block;
+overflow:visible;
+}
+
+ul.menulist li{
+position:relative;
+margin:0px;
+padding:0px;
+border-bottom: 1px solid;
+}
+
+ul.menulist a{
+display:block;
+_width: 110%; 
+text-decoration:none;
+padding: 5px;
+}
+
+#nav1 li {_float:left;_width: 100%; padding: 0px; margin: 0px;}
+/*mots clés*/
+a img{border:0px;}
+
