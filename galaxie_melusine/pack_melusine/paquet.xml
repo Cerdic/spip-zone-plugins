@@ -1,0 +1,25 @@
+<paquet
+	prefix="pack_melusine"
+	categorie="squelette"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.4;3.0.*]"
+	logo="prive/themes/spip/images/pack_melusine-64.png"
+	documentation=""
+>
+	<!--
+		Paquet généré le 2012-10-11 18:03:48
+	-->
+
+	<nom>Pack Mélusine</nom>
+
+	<auteur lien='http://datice.ac-creteil.fr/'>Jean-Marc Labat</auteur>
+
+	<licence>GNU/GPL3</licence>
+	<necessite nom="melusine" compatibilite="[1.0.0;]" />
+	<necessite nom="melusine_couleurs_article" compatibilite="[1.0.0;]" />
+	<necessite nom="melusine_mobile" compatibilite="[1.0.0;]" />
+	<necessite nom="melusine_socialtags" compatibilite="[1.0.0;]" />
+
+
+</paquet>
