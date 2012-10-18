@@ -34,7 +34,7 @@ function forms_inserer_crayons($out){
 function icone_etendue($texte, $lien, $fond, $fonction="", $align="", $afficher='oui', $expose=false){
 	global $spip_display;
 
-	if ($fonction == "supprimer.gif") {
+	if ($fonction == "supprimer-24.png") {
 		$style = '-danger';
 	} else {
 		$style = '';
@@ -136,7 +136,7 @@ function afficher_tables_tous_corps($type_form, $link=NULL, $fond='fonds/tables_
 			'titre'=>_T('forms:icone_creer_table'),
 			'url'=>$link,
 			'icon_base'=>'table-24.png',
-			'icon_action'=>'creer.gif'
+			'icon_action'=>'add-24.png'
 		);
 		$out .=  recuperer_fond("fonds/bouton_url",$contexteBT);
 		
@@ -258,7 +258,7 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 				'titre'=>_T("forms:icone_ajouter_donnees"),
 				'url'=>$url_edit,
 				'icon_base'=>'donnees-24.png',
-				'icon_action'=>'creer.gif'
+				'icon_action'=>'add-24.png'
 			);
 		$out .=  recuperer_fond("fonds/bouton_url",$contexteBT);
 		$out .=  "</div>";
@@ -323,9 +323,9 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 	  $recherche_aff = _T('info_rechercher');
 	  $onfocus = "this.value='';";
 	}
-	$out .= "<div style='float:$spip_lang_left'><form method='get' style='margin: 20px 0px;' action='" . self() . "' class='verdana2' ><div>";
+	$out .= "<div style='float:$spip_lang_left'><form method='get' style='margin: 20px 0px;' action='" . self() . "' class='verdana2 verifformok' ><div>";
 	$out .= form_hidden(self());
-	$out .= '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r" onfocus="'.$onfocus . '" style="width:10em;" />';
+	$out .= '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche forms_recherche" accesskey="r" onfocus="'.$onfocus . '" style="width:10em;" />';
 	if ($recherche)
 		$out .= "<br /><a href='".parametre_url(self(),'recherche','')."'>"._T('info_tout_afficher')."</a>";
 	$out .= "</div></form></div>";

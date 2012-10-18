@@ -236,7 +236,7 @@ function exec_forms_reponses(){
 				'titre'=>_T("forms:supprimer_reponse"),
 				'url'=>$link,
 				'icon_base'=>'donnees-24.png',
-				'icon_action'=>'supprimer.gif'
+				'icon_action'=>'supprimer-24.png'
 		);
 		echo recuperer_fond("fonds/bouton_url",$contexteBT);
 		

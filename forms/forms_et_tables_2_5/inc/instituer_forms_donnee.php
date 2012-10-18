@@ -35,7 +35,7 @@ function inc_instituer_forms_donnee_dist($id_form, $id_donnee, $statut, $rang=NU
 	"</b>" .
 	"\n<select name='statut_nouv' size='1' class='fondl'\n" .
 	"onchange=\"this.nextSibling.nextSibling.src='" .
-	_DIR_IMG_PACK .
+	_DIR_PLUGIN_FORMS."img_pack/".
 	"' + puce_statut(options[selectedIndex].value);" .
 	" setvisibility('valider_statut', 'visible');\">\n";
 

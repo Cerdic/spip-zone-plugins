@@ -53,7 +53,7 @@
 [(#REM|?{'','modifier'}|autoriser{'donnee',#ID_DONNEE}|?{' '})
 #SET{lien_edit,#ENV{lien_edit,#URL_ECRIRE{donnees_edit,id_form=#ID_FORM}}|parametre_url{id_donnee,#ID_DONNEE}|parametre_url{retour,#SELF} }
 ]
-	<tr class='tr_liste' onmouseover='$(this).activeCrayons();'>
+	<tr class='tr_liste' <?php /*onmouseover='$(this).activeCrayons();'*/?>>
 		<td>[(#ID_DONNEE|forms_puce_statut_donnee{#STATUT,#ID_FORM})]</td>
 		<td>[<a href='(#GET{lien_edit})'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/loupe.png' alt='' width='16' height='16' style='vertical-align:middle' /></a><a href='#GET{lien_edit}'>]#ID_DONNEE[(#GET{lien_edit}|?{' '})</a>]</td>
 		[(#ENV{affiche_rang,1}|?{' '})<td>#RANG</td>]
@@ -66,7 +66,7 @@
 		[(#GET{documents})<td>]
 		<BOUCLE_docs(DOCUMENTS){id_donnee}{0,1}>
 		[(#GET{documents}|?{'',' '})<td>]
-		<a href='#GET{lien_edit}'>#SET{src,#EVAL{_DIR_IMG_PACK}|concat{attachment.gif}}<img src='#GET{src}' largeur='' hauteur='' alt='<:titre_documents_joints:>' /></a>
+		<a href='#GET{lien_edit}'>#SET{src,#EVAL{_DIR_PLUGIN_FORMS}img_pack|concat{attachment.gif}}<img src='#GET{src}' largeur='' hauteur='' alt='<:titre_documents_joints:>' /></a>
 		[(#GET{documents}|?{'',' '})</td>]
 		</BOUCLE_docs>
 		[(#GET{documents})</td>]
@@ -77,7 +77,7 @@
 </tbody>
 </table>
 </div>
-	<script type="text/javascript"><!--
+	<?php /*<script type="text/javascript"><!--
 	var crayons_init_dynamique = true;
 	jQuery.fn.activeCrayons = function(){
 		if (typeof cQuery != 'undefined'){
@@ -86,7 +86,7 @@
 		return this.unbind('mouseover');
 	}
 	// -->
-	</script>	
+	</script>*/?>
 </B_donnees>
 <div class='verdana2' style='text-align:center;'>
 #ENV*{aucune_reponse}

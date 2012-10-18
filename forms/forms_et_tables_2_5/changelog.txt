@@ -1,4 +1,8 @@
-﻿2012-10-08
+﻿2012-10-09
+- intégration dans le plugin des images anciennement récupérer dans le backoffice de spip
+- Correction d'une erreur javascript "cQuery(this).initcrayons is not a function" dans la liste des données
+
+2012-10-08
 - correction d'un bug qui empêche l'insertion coté public sans être identifié.
 
 2012-08-30

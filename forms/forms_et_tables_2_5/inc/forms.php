@@ -414,7 +414,7 @@
 				'titre'=>_T('forms:icone_creer_formulaire'),
 				'url'=>$link,
 				'icon_base'=>'form-24.png',
-				'icon_action'=>'creer.gif'
+				'icon_action'=>'add-24.png'
 			);
 			$out .=  recuperer_fond("fonds/bouton_url",$contexteBT);
 		}

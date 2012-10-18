@@ -69,7 +69,7 @@ function exec_forms_tous(){
 			'url_destination'=>'forms_edit',
 			'url_parametres'=>'new=oui&retour=./?exec=forms_tous',
 			'icon_base'=>'form-24.png',
-			'icon_action'=>'creer.gif'
+			'icon_action'=>'add-24.png'
 		);
 		echo recuperer_fond("fonds/bouton_cree",$contexteBT);
 		echo "</div>";

@@ -378,14 +378,14 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		if ($aff_min) {
 			$link = generer_action_auteur('forms_champs_deplace',"$id_form-$champ-monter",urlencode($redirect));
 			$link = parametre_url($link,"time",time()); // pour avoir une url differente de l'actuelle
-			$out .= "<a href='$link#champs' class='ajaxAction' rel='$redirect'><img src='"._DIR_IMG_PACK."monter-16.png' style='border:0' alt='"._T("forms:champ_monter")."' /></a>";
+			$out .= "<a href='$link#champs' class='ajaxAction' rel='$redirect'><img src='"._DIR_PLUGIN_FORMS."img_pack/"."monter-16.png' style='border:0' alt='"._T("forms:champ_monter")."' /></a>";
 			if ($aff_max)
 				$out .= " | ";
 		}
 		if ($aff_max) {
 			$link = generer_action_auteur('forms_champs_deplace',"$id_form-$champ-descendre",urlencode($redirect));
 			$link = parametre_url($link,"time",time()); // pour avoir une url differente de l'actuelle
-			$out .= "<a href='$link#champs' class='ajaxAction' rel='$redirect'><img src='"._DIR_IMG_PACK."descendre-16.png' style='border:0' alt='"._T("forms:champ_descendre")."' /></a>";
+			$out .= "<a href='$link#champs' class='ajaxAction' rel='$redirect'><img src='"._DIR_PLUGIN_FORMS."img_pack/"."descendre-16.png' style='border:0' alt='"._T("forms:champ_descendre")."' /></a>";
 		}
 		$out .= "</span>";
 		// Supprimer un champ
@@ -393,7 +393,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$link = parametre_url($action_link,'supp_champ', $champ);
 		$out .= "<a href='$link#champs' class='ajaxAction confirmer' rel='$redirect' "
 		. "onclick=\"return confirmAction('$message')\">"
-		. "<img src='"._DIR_IMG_PACK."supprimer.gif' style='border:0' alt='"._T("forms:supprimer_champ")."' /></a>";
+		. "<img src='"._DIR_PLUGIN_FORMS."img_pack/"."supprimer-24.png' style='border:0' alt='"._T("forms:supprimer_champ")."' /></a>";
 		$out .= "</div>\n";
 
 		// Modifier un champ

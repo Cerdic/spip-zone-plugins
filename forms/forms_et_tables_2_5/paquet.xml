@@ -6,7 +6,9 @@
 	compatibilite="[v3 ;["
 	logo="img_pack/form-24.png">
 	<nom>Formulaires et Tables</nom>
-	<auteur>Sylvain BLANC, Loic LE MAO</auteur>
+	<auteur>Sylvain BLANC</auteur>
+	<auteur>Loic LE MAO</auteur>
+	<auteur>Jusqu'à SPIP 2.1 : Antoine Pitrou, Cedric Morin, Renato Formato, Jerome Escoffier</auteur>
 	
 	<menu 
 		nom="forms_sondages" 
