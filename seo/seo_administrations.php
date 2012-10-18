@@ -48,6 +48,11 @@ function seo_upgrade($nom_meta_version_base, $version_cible){
 			sql_alter('TABLE spip_seo ADD PRIMARY KEY ( `id_objet` , `objet` , `meta_name` )');
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}
+		if (version_compare($version_actuelle,'1.1.1','<')){
+		    if (defined('_SEO_FORCER_SQUELETTE'))
+		        ecrire_config('seo/forcer_squelette','yes');
+			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
+		}
 	}
 }
 
