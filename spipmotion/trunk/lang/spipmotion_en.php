@@ -191,6 +191,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_encodage_unique_erreur' => 'The document #@id_document@ was not properly encoded to @extension@.',
 	'message_encodage_unique_oui' => 'The document #@id_document@ has been properly encoded to @extension@.',
 	'message_erreur_spipmotion_sh_vignettes' => 'The script for automatic generation of thumbnails is not accessible. This feature is disabled.',
+	'message_sans_piste_audio' => 'Ce document n\'a pas de piste audio', # NEW
 	'message_texte_binaire_manquant' => 'A necessary software is not available on your server:',
 	'message_texte_binaires_informer' => 'Please inform your system administrator.',
 	'message_texte_binaires_informer_exec' => 'Your PHP configuration does not allow to run applications.',
