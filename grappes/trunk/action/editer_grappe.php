@@ -35,7 +35,9 @@ function action_editer_grappe_dist($arg=null) {
  */
 function grappe_inserer() {
 
-	$champs = array('date' => date('Y-m-d H:i:s'));
+	$champs = array();
+	$champs['date'] = date('Y-m-d H:i:s');
+	$champs['id_admin'] = $GLOBALS['visiteur_session']['id_auteur'];
 	
 	// Envoyer aux plugins
 	$champs = pipeline('pre_insertion',
@@ -75,19 +77,20 @@ function grappe_modifier($id_grappe, $set=false) {
 	include_spip('inc/modifier');
 	
 	$c = $opt = array();
-	foreach (array(
-		'titre', 'descriptif', 'liaisons','type'
-	) as $champ)
-		$c[$champ] = _request($champ);
-
-	foreach (array(
-		'acces'
-	) as $champ)
-		$opt[$champ] = _request($champ);
-
+	
+	$c = collecter_requests(
+		// white list
+		objet_info('grappe','champs_editables'),
+		// black list
+		array('date'),
+		// donnees eventuellement fournies
+		$set
+	);
+	
+	$opt['acces'] = $c['acces'];
+	unset($c['acces'],$set['acces']);
 	$c['options'] = serialize($opt);
-	$c['id_admin'] = $GLOBALS['visiteur_session']['id_auteur'];
-
+	
 	if (is_array($c['liaisons']))
 		$c['liaisons'] = implode(',',$c['liaisons']);
 
@@ -99,7 +102,7 @@ function grappe_modifier($id_grappe, $set=false) {
 		return $err;
 
 	// Modification de la date ?
-	$c = collecter_requests(array('date'),array(),$set);
+	$c = collecter_requests(array('date'),array(''),$set);
 	include_spip('action/editer_objet');
 	$err = objet_instituer('grappe',$id_grappe, $c);
 
@@ -127,7 +130,7 @@ function grappe_instituer($id_grappe, $c, $calcul_rub=true){
 	);
 
 	if (!count($c)) return;
-
+	
 	// Envoyer les modifs.
 
 	sql_updateq('spip_grappes', $c, "id_grappe=$id_grappe");

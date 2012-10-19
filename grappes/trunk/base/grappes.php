@@ -50,7 +50,8 @@ function grappes_declarer_tables_objets_sql($tables){
 		'url_voir' => 'grappe',
 		'url_edit' => 'grappe_edit',
 		'editable' => 'oui',
-		'champs_versionnes' => array('titre', 'descriptif'),
+		'champs_editables' => array('titre','descriptif','liaisons','acces','type'),
+		'champs_versionnes' => array('titre','descriptif'),
 		'rechercher_champs' => array(
 			'titre' => 8,
 			'descriptif' => 5
