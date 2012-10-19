@@ -19,6 +19,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'canonical_url' => 'Canonical URL',
 	'canonical_url_activate' => 'Activate Canonical URL',
 
+	// F
+	'forcer_squelette_descriptif' => 'Les metas SEO sont prioritaires aux meta générées par les squelettes', # NEW
+	'forcer_squelette_label' => 'Charger les metas pour tous squelettes', # NEW
+
 	// G
 	'google_analytics' => 'Google Analytics',
 	'google_analytics_activate' => 'Activate Analytics',
