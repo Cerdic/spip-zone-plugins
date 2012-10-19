@@ -32,18 +32,20 @@ function grappes_declarer_tables_objets_sql($tables){
 		'field' => array(
 			"id_grappe" => "bigint(21) NOT NULL",
 			"id_admin" => "bigint(21) NOT NULL DEFAULT '0'",
-			"titre" 	=> "varchar(255) NOT NULL DEFAULT ''",
+			"titre" => "varchar(255) NOT NULL DEFAULT ''",
 			"descriptif" => "text NOT NULL DEFAULT ''",
-			"options" 	=> "text NOT NULL DEFAULT ''",
-			"liaisons" 	=> "text NOT NULL DEFAULT ''",
+			"options" => "text NOT NULL DEFAULT ''",
+			"liaisons" => "text NOT NULL DEFAULT ''",
 			"type" => "varchar(255) NOT NULL DEFAULT ''",
 			"visibilite" => "varchar(10) NOT NULL DEFAULT 'public'",
-			"maj" 		=> "TIMESTAMP"
+			"date" => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", 
+			"maj" => "TIMESTAMP"
 		),
 		'key' => array(
 			"PRIMARY KEY" => "id_grappe",
 		),
 		'titre' => "titre, '' AS lang",
+		'date' => "date",
 		'page' => 'grappe',
 		'url_voir' => 'grappe',
 		'url_edit' => 'grappe_edit',
