@@ -35,7 +35,7 @@ function action_facd_traiter_conversion_dist(){
 		 * Vérification de l'exisence du document
 		 */
 		$id_document = sql_getfetsel('id_document','spip_documents','id_document='.intval($doc_attente['id_document']));
-		if($id_document > 0){
+		if(intval($id_document) > 0){
 			spip_log("on convertit le doc $id_document","facd");
 			$convertir = charger_fonction('facd_convertir','inc');
 			$retour = $convertir($id_document,$doc_attente['id_facd_conversion'],$doc_attente['extension']);

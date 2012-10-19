@@ -1,22 +1,9 @@
-#SET{dates, #ARRAY}
-#SET{nombre_date,#ARRAY}
-<BOUCLE_facd_total(FACD_CONVERSIONS){par id_facd_conversion}{inverse}{statut = oui}>
-	[(#SET{date_new,[(#MAJ|affdate{Y-m-d})]})]
-	#SET{
-		nombre_date,
-		#GET{nombre_date}|array_merge{
-			#ARRAY{
-				#GET{date_new},
-				#GET{nombre_date}|table_valeur{#GET{date_new},0}|plus{1}
-			}
-		}
-	}
-	#SET{dates,#GET{dates}|push{#GET{date_new}}}
-</BOUCLE_facd_total>
-#SET{dates,#GET{dates}|array_unique}
+[(#REM)
 
+	Lister les conversions de documents par date
+	
+]
 <B_facd_jours>
-#SET{total,#GRAND_TOTAL}
 #ANCRE_PAGINATION
 <div class="liste-elements conversions">
 <table class="spip list facd" id="graph_conversions_dates_table">
@@ -28,16 +15,19 @@
 		</tr>
 	</thead>
 	<tbody class="ajax">
-	<BOUCLE_facd_jours(POUR){tableau #GET{dates}}{pagination #ENV{nb,10}}{par valeur}{inverse}>
+	<BOUCLE_facd_jours(FACD_CONVERSIONS){!par maj}{fusion DATE_FORMAT(maj, '%Y%m%d')}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="date">
-				<abbr title="#VALEUR">
-					[(#VALEUR|affdate)]
+				<abbr title="[(#MAJ|affdate{Y-m-d})]">
+					[(#MAJ|affdate{Y-m-d}|affdate)]
 				</abbr>
 			</td>
+			<BOUCLE_nb_jours(FACD_CONVERSIONS){maj == ^(#MAJ|affdate{Y-m-d})}>
+			</BOUCLE_nb_jours>
 			[<td class="nombre">
-				<abbr title="[(#GET{nombre_date}|table_valeur{#VALEUR})]">(#GET{nombre_date}|table_valeur{#VALEUR})</abbr>
+				<abbr title="#GRAND_TOTAL">(#GRAND_TOTAL)</abbr>
 			</td>]
+			</B_nb_jours>
 		</tr>
 	</BOUCLE_facd_jours>
 	</tbody>

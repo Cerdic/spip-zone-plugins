@@ -1,8 +1,8 @@
 <paquet
 	prefix="facd"
 	categorie="outil"
-	version="0.1.3"
-	etat="dev"
+	version="0.2.0"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	schema="0.0.1"
 	logo="prive/themes/spip/images/facd-32.png"

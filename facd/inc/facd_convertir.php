@@ -28,18 +28,16 @@ function inc_facd_convertir_dist($id_document,$id_facd,$format=false){
 	 * - changer les messages sur le site (ce media est en cours de conversion par exemple)
 	 * - indiquer si nécessaire le statut
 	 */
-	$infos = array();
-	$infos['debut_conversion'] = time(); 
+	$infos = array('debut_conversion' => time());
 	sql_updateq("spip_facd_conversions",array('statut'=>'en_cours','infos'=>serialize($info)),"id_facd_conversion=".intval($id_facd));
 
 	$attente = sql_fetsel("*","spip_facd_conversions","id_facd_conversion=".intval($id_facd));
 	$sortie = $attente['extension'];
 	
-	$options['format'] = $attente['extension'];
-	$options['id_facd_conversion'] = $id_facd;
+	$options = array('format' => $attente['extension'],'id_facd_conversion'=>$id_facd);
 	// chercher la fonction de conversion pour le format démandé
 	if(is_array(@unserialize($attente['options']))){
-		$options_table = @unserialize($attente['options']);
+		$options_table = unserialize($attente['options']);
 		$options = array_merge($options,$options_table);
 	}else if(strlen($attente['options'])){
 		$options['options'] = $attente['options'];
@@ -61,9 +59,8 @@ function inc_facd_convertir_dist($id_document,$id_facd,$format=false){
 	
 	$infos['fin_conversion'] = time();
 	if(is_array($res)){
-		if(is_array($res['infos'])){
+		if(is_array($res['infos']))
 			$infos = array_merge($infos,$res['infos']);
-		}
 		if($res['success']){
 			/**
 			 * Modification de la file d'attente : 

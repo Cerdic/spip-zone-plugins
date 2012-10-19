@@ -66,6 +66,8 @@ function facd_declarer_tables_principales($tables_principales){
  */
 function facd_declarer_tables_interfaces($interfaces){
 	$interfaces['table_des_tables']['facd_conversions'] = 'facd_conversions';
+	$interfaces['table_date']['facd_conversions']='maj';
+	$interfaces['exceptions_des_tables']['facd_conversions']['date']='maj';
 	return $interfaces;
 }
 
