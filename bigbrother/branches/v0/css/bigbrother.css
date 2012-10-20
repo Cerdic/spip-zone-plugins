@@ -1,0 +1,58 @@
+
+table.bigbrother{
+	margin:1em 0;
+	width:100%;
+	border-spacing:0;
+}
+
+table.bigbrother th, table.bigbrother td{
+	margin:0;
+	padding:2px;
+}
+
+table.bigbrother .temps{
+	text-align:right;
+}
+
+div.pagination_bigbrother{
+	border-top:none;
+	text-align:center;
+}
+
+#bigbrother_tooltip{
+	position: absolute;
+	display: none;
+	color:#fff;
+	padding: 5px;
+	background-color: #000;
+	opacity: 0.80;
+	font-size:11px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	max-width:250px;
+}
+
+.bigbrother_graphs{
+	width:100%;
+	height:300px;
+}
+
+.bigbrother_graphs .legend > table{
+	padding-right:10px;
+	border:1px solid #ededed;	
+}
+
+.bigbrother_graphs .legend > .show_hide{
+	position:absolute;
+	top:13px;
+	right:13px;
+	z-index:20;
+	padding:5px;
+}
+
+.bigbrother_graphs .legend > .show_hide.show{
+	border:1px solid #ededed;
+	background:#fff;
+	opacity:.85;	
+}

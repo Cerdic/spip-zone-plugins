@@ -1,0 +1,43 @@
+#CACHE{0}
+
+#SET{temps, #ARRAY}
+#SET{articles,#ARRAY}
+<BOUCLE_comptage(VISITES_ARTICLES_AUTEURS){id_auteur}{par date_debut}>
+[(#DATE_FIN|!={0000-00-00 00:00:00}|oui)
+	#SET{
+		temps,
+		#GET{temps}|array_merge{
+			#ARRAY{
+				art#ID_ARTICLE,
+				#GET{temps}|table_valeur{art#ID_ARTICLE,0}|plus{#DATE_DEBUT|bigbrother_duree{#DATE_FIN,secondes}}
+			}
+		}
+	}
+	#SET{articles,#GET{articles}|push{#ID_ARTICLE}}
+]
+</BOUCLE_comptage>
+#SET{articles,#GET{articles}|array_unique}
+
+
+<B_visites_articles>
+#ANCRE_PAGINATION
+<table class="bigbrother">
+	<thead>
+		<tr class="row_first">
+			<th>Id</th>
+			<th><:articles:></th>
+			<th class="temps"><:bigbrother:temps_passe:></th>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_visites_articles(ARTICLES){id_article IN #GET{articles}}{par titre}{pagination #ENV{pagination,0}}>
+	<tr class="tr_liste">
+		<td>N°#ID_ARTICLE</td>
+		<td><a[ (#ENV{mode}|=={prive}|?{title="<:bigbrother:detail:>" href="[(#URL_ECRIRE{bigbrother_visites_articles_auteurs}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_auteur,#ID_AUTEUR})]", href="#URL_ARTICLE"})]>#TITRE</a></td>
+		[<td class="temps">(#GET{temps}|table_valeur{art#ID_ARTICLE}|bigbrother_duree{0,horaire})</td>]
+	</tr>
+</BOUCLE_visites_articles>
+	</tbody>
+</table>
+[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
+</B_visites_articles>

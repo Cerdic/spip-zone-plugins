@@ -1,0 +1,24 @@
+#CACHE{0}
+
+<B_visites_articles>
+#ANCRE_PAGINATION
+<table class="bigbrother">
+	<thead>
+		<tr class="row_first">
+			<th><:bigbrother:date_debut:></th>
+			<th><:bigbrother:date_fin:></th>
+			<th class="temps"><:bigbrother:temps_passe:></th>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_visites_articles(VISITES_ARTICLES_AUTEURS){id_auteur}{id_article}{date_fin!=0000-00-00 00:00:00}{par date_debut}{pagination #ENV{pagination,10}}>
+	<tr class="tr_liste">
+		<td>[(#DATE_DEBUT|affdate)], [(#DATE_DEBUT|affdate{H:i:s})]</td>
+		<td>[(#DATE_FIN|affdate)], [(#DATE_FIN|affdate{H:i:s})]</td>
+		<td class="temps">[(#DATE_DEBUT|bigbrother_duree{#DATE_FIN,horaire})]</td>
+	</tr>
+</BOUCLE_visites_articles>
+	</tbody>
+</table>
+[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
+</B_visites_articles>
