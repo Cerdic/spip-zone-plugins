@@ -55,6 +55,13 @@ function spipicious_upgrade($nom_meta_base_version,$version_cible){
 		array('maj_tables',array('spip_spipicious')),
 		array('spipicious_update_statuts_mots',array()),
 	);
+
+	
+	$maj['0.6.3'] = array(
+		array('sql_alter',"TABLE spip_spipicious ADD INDEX id_mot (id_mot)"),
+		array('sql_alter',"TABLE spip_spipicious ADD INDEX id_objet (id_objet)"),
+		array('sql_alter',"TABLE spip_spipicious ADD INDEX objet (objet)")
+	);
 	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
