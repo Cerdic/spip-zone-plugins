@@ -44,5 +44,5 @@
 	<utilise nom="ieconfig" />
 	<utilise nom="Z" compatibilite="[1.7.0;1.9.99]" />
 
-	<menu nom="bando_noizetier" titre="noizetier:editer_noizetier_titre" parent="menu_squelette" icone="images/noizetier-16.png" action="pages" />
+	<menu nom="noizetier" titre="noizetier:editer_noizetier_titre" parent="menu_squelette" icone="images/noizetier-16.png" action="pages" />
 </paquet>
