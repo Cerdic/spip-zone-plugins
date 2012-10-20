@@ -31,7 +31,7 @@ function metadata_video_dist($file){
 	if(!$metas['duree'] && preg_match('/-encoded/',$file)){
 		$fichier = basename($file);
 		$fichier = str_replace('-encoded','',substr($fichier,0, strrpos($fichier, ".")));
-		$duree_originale = sql_getfetsel('duree','spip_documents','fichier LIKE "%'.$fichier.'.%"');
+		$duree_originale = sql_getfetsel('duree','spip_documents','mode != "conversion" AND fichier LIKE "%'.$fichier.'.%"');
 		spip_log($duree_originale,'spipmotion');
 		if($duree_originale > 0){
 			$metas['duree'] = $duree_originale;

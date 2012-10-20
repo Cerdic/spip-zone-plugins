@@ -33,13 +33,14 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 		spip_log('SPIPMOTION est cassé','spipmotion');
 		return false;
 	}
-
+	
+	$fichier_tmp = false;
+	
 	if(!isset($fichier)){
 		spip_log("SPIPMOTION : recuperation des infos du document $id_document","spipmotion");
 		include_spip('inc/documents');
 		$document = sql_fetsel("*", "spip_documents","id_document=".intval($id_document));
-		$chemin = $document['fichier'];
-		$fichier = get_spip_doc($chemin);
+		$fichier = get_spip_doc($document['fichier']);
 		$extension = $document['extension'];
 	}else{
 		spip_log("SPIPMOTION : recuperation des infos du document $fichier","spipmotion");
@@ -60,7 +61,7 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 		if(isset($GLOBALS['spipmotion_metas']['spipmotion_flvtoolplus'])){
 			$flvtoolplus = unserialize($GLOBALS['spipmotion_metas']['spipmotion_flvtoolplus']);
 		}
-		if(isset($GLOBALS['spipmotion_metas']['spipmotion_flvtool2'])){
+		else if(isset($GLOBALS['spipmotion_metas']['spipmotion_flvtool2'])){
 			$flvtool2 = unserialize($GLOBALS['spipmotion_metas']['spipmotion_flvtool2']);
 		}
 		if($flvtoolplus['flvtoolplus']){
@@ -76,11 +77,12 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 		}
 	}
 	if(in_array($extension,array('mov','mp4','m4v')) && !$GLOBALS['meta']['spipmotion_qt-faststart_casse']){
-		exec("qt-faststart $fichier $fichier._tmp",$retour,$retour_int);
+		$fichier_tmp = $fichier.'_tmp';
+		exec("qt-faststart $fichier $fichier_tmp",$retour,$retour_int);
 	}
 	
-	if(file_exists($fichier.'._tmp')){
-		rename($fichier.'._tmp',$fichier);
+	if($fichier_tmp && file_exists($fichier_tmp)){
+		rename($fichier_tmp,$fichier);
 	}
 	
 	/**
@@ -135,8 +137,10 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 		if($duree > 0)
 			$infos['duree'] = $duree;
 	}
-	// Filesize tout seul est limité à 2Go
-	// cf http://php.net/manual/fr/function.filesize.php#refsect1-function.filesize-returnvalues
+	/**
+	 * Filesize tout seul est limité à 2Go
+	 * cf http://php.net/manual/fr/function.filesize.php#refsect1-function.filesize-returnvalues
+	 */
 	if($infos['taille'] == '2147483647'){
 		$infos['taille'] = sprintf("%u", filesize($fichier));
 	}
@@ -144,11 +148,8 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 	if($logo){
 		$recuperer_logo = charger_fonction("spipmotion_recuperer_logo","inc");
 		$id_vignette = $recuperer_logo($id_document,1,$fichier,$infos,true);
-		spip_log('l id vignette est '.$id_vignette);
 		if(intval($id_vignette))
 			$infos['id_vignette'] = $id_vignette;
-	}else{
-		spip_log('on ne récup pas de logo');
 	}
 
 	/**

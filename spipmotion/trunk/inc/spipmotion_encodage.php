@@ -280,6 +280,9 @@ function encodage($source,$options){
 				$audiochannels_ffmpeg = "--ac $audiochannels";
 			}
 		}
+		$ss_audio = '';
+	}else{
+		$ss_audio = '-an';
 	}
 
 	if($GLOBALS['spipmotion_metas']['spipmotion_safe_mode'] == 'oui'){
@@ -486,7 +489,7 @@ function encodage($source,$options){
 					$metadatas_supp = '';
 					$metas_orig = @unserialize($source['metas']);
 					
-					$infos_sup_normal_2 = '--params_supp \'-passlogfile '.$pass_log_file.' '.$infos_sup_normal.' '.$rotation.' '.$metadatas.'\'';
+					$infos_sup_normal_2 = '--params_supp \'-passlogfile '.$pass_log_file.' '.$ss_audio.' '.$infos_sup_normal.' '.$rotation.' '.$metadatas.'\'';
 					$encodage = $spipmotion_sh." --force true --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2  --fpre $fichier_texte --s $fichier_temp $chemin_ffmpeg --log $fichier_log";
 					spip_log($encodage,'spipmotion');
 					$lancement_encodage = exec($encodage,$retour,$retour_int);
@@ -497,10 +500,11 @@ function encodage($source,$options){
 				}
 			}else{
 				spip_log('on encode en 1 passe','spipmotion');
+				$infos_sup_normal = "$ss_audio ";
 				if ($ffmpeg_version < '0.7'){
-					$infos_sup_normal = $preset_quality ? "-vpre $preset_quality $infos_sup_normal":'';
+					$infos_sup_normal .= $preset_quality ? "-vpre $preset_quality $infos_sup_normal":'';
 				}else{
-					$infos_sup_normal = $preset_quality ? "-preset $preset_quality $infos_sup_normal":'';
+					$infos_sup_normal .= $preset_quality ? "-preset $preset_quality $infos_sup_normal":'';
 				}
 				if($source['rotation'] == '90'){
 					$rotation = "-vf transpose=1";
