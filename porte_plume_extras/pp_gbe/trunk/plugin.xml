@@ -21,6 +21,6 @@ Ajout de boutons au porte plume afin de pouvoir ins&#233;rer facilement les cara
 		<inclure>pp_gbe.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0.3;2,1.99]" />
+	<necessite id="SPIP" version="[2.0.3;3.0.99]" />
 	<necessite id="porte_plume" version="[1.2.2;]" />
 </plugin>
