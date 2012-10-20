@@ -25,8 +25,7 @@ function exec_comptes() {
 		if (!$imputation)
 			$imputation= '%';
 		$id_compte = association_passeparam_id('compte');
-		list($id_periode, $critere_periode) = association_passeparam_annee('operation', 'asso_comptes', $id_compte);
-		$exercice_data = sql_asso1ligne('exercice', $id_periode);
+		list($id_periode, $critere_periode) = association_passeparam_periode('operation', 'asso_comptes', $id_compte);
 // traitements
 		$where = 'imputation LIKE '. sql_quote($imputation);
 		$where .= (!is_numeric($vu) ? '' : " AND vu=$vu");
@@ -50,7 +49,7 @@ function exec_comptes() {
 		foreach ($classes as $classe_css=>$classe_cpt) {
 			$liste_types[$classe_css] = array( 'compte_liste_nombre_'.$classe_css, sql_countsel('spip_asso_comptes', "LEFT(imputation,1)=".sql_quote($GLOBALS['association_metas']["classe_$classe_cpt"])." AND $critere_periode "), );
 		}
-		echo association_totauxinfos_effectifs('bouton_radio_type_operation_titre', $liste_types);
+		echo association_totauxinfos_effectifs(_T('asso:bouton_radio_type_operation_titre'), $liste_types);
 		// STATS : montants de l'exercice pour l'imputation choisie (toutes si aucune)
 		echo association_totauxinfos_stats('mouvements', 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), $where, 2);
 		// TOTAUX : montants de l'exercice pour l'imputation choisie (toutes si aucune)
@@ -94,7 +93,7 @@ function exec_comptes() {
 			'vu' => $filtre_vu,
 		));
 		if ($id_compte) { // (re)calculer la pagination en fonction de id_compte
-			$all_id_compte = sql_allfetsel('id_compte', 'spip_asso_comptes', $where, '',  'date DESC,id_compte DESC'); // on recupere les id_comptes de la requete sans le critere de limite...
+			$all_id_compte = sql_allfetsel('id_compte', 'spip_asso_comptes', $where, '',  'date_operation DESC,id_compte DESC'); // on recupere les id_comptes de la requete sans le critere de limite...
 			$index_id_compte = -1;
 			reset($all_id_compte);
 			while (($index_id_compte<0) && (list($k,$v) = each($all_id_compte))) { // ...et on en tire l'index de l'id_compte recherche parmis tous ceux disponible
@@ -133,7 +132,7 @@ function exec_comptes() {
 }
 
 function comptes_while($where, $limit, $id_compte) {
-	$query = sql_select('*', 'spip_asso_comptes', $where,'',  'date DESC,id_compte DESC', $limit);
+	$query = sql_select('*', 'spip_asso_comptes', $where,'',  'date_operation DESC,id_compte DESC', $limit);
 	$comptes = '';
 	while ($data = sql_fetch($query)) {
 		if ($data['depense']>0) { // depense

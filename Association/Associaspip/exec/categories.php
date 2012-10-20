@@ -26,7 +26,7 @@ function exec_categories() {
 		raccourcis_association('association', array(
 			'ajouter_une_categorie_de_cotisation' => array('cotisation.png', 'edit_categorie'),
 		));
-		debut_cadre_association('cotisation.png','toutes_categories_de_cotisations');
+		debut_cadre_association('cotisation.png', 'toutes_categories_de_cotisations');
 		echo association_bloc_listehtml(
 			array('*', 'spip_asso_categories', '', 'id_categorie'), // requete
 			array(

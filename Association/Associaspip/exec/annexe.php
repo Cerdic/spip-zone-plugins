@@ -33,7 +33,7 @@ function exec_annexe() {
 			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "$ids[type_periode]=$ids[id_periode]") ),
 			'cpte_bilan_titre_general' => array('finances-24.png', array('bilan', "$ids[type_periode]=$ids[id_periode]") ),
 		));
-		debut_cadre_association('finances-24.png', 'annexe_titre_general', $ids['titre_periode']);
+		debut_cadre_association('finances-24.png', 'annexe_titre_general');
 		// Filtres
 		filtres_association(array(
 			'periode' => array($ids['id_periode'], 'asso_comptes', 'operation'),

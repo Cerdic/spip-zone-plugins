@@ -49,7 +49,7 @@ function exec_activites() {
 			echo association_date_du_jour();
 			echo fin_boite_info(TRUE);
 		}
-		debut_cadre_association('activites.gif','activite_titre_toutes_activites');
+		debut_cadre_association('activites.gif', 'activite_titre_toutes_activites');
 		// FILTRES
 		$filtre_motscles = '<select name="mot" onchange="form.submit()">';
 		$filtre_motscles .= '<option value="">' ._T('asso:entete_tous') .'</option>';

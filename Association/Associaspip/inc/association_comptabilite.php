@@ -425,14 +425,14 @@ function association_passeparam_compta($classes=array()) {
 //    list($params['id_periode'], $params['sql_periode']) = association_passeparam_periode('operation', 'comptes', $id_compte);
     $params['id_periode'] = association_passeparam_periode();
     if ($GLOBALS['association_metas']['exercices']) {
-#    	$params['exercice'] = association_passeparam_exercice();
+#    	$params['id_periode'] = association_passeparam_exercice();
 	$params['type_periode'] = 'exercice';
-	$exercice = sql_fetsel('date_debut, date_fin, intitule', 'spip_asso_exercices', "id_exercice=$paramas[id_periode]");
+	$exercice = sql_fetsel('date_debut, date_fin, intitule', 'spip_asso_exercices', "id_exercice=$params[id_periode]");
 	$params['debut_periode'] = $exercice['date_debut'];
 	$params['fin_periode'] = $exercice['date_fin'];
 	$params['titre_periode'] = $exercice['intitule'];
     } else {
-#    	$params['annee'] = association_passeparam_annee();
+#    	$params['id_periode'] = association_passeparam_annee();
 	$params['type_periode'] = 'annee';
 	$params['debut_periode'] = "$params[id_periode]-01-01";
 	$params['fin_periode'] = "$params[id_periode]-12-31";
@@ -873,12 +873,10 @@ class ExportComptes_PDF extends FPDF {
     // variables de parametres de mise en page
     var $icone_h = 20;
     var $icone_v = 20;
-    var $space_v = 2;
-    var $space_h = 2;
 
     // variables de mise en page calculees
-    var $largeur_utile = 0; // largeur sans les marges droites et gauches
-    var $largeur_pour_titre = 0; // largeur utile sans icone
+    var $largeur_utile = 190; // largeur sans les marges droites et gauches
+    var $cell_padding = 2; // espacement entre les bords des cellules et leur contenu
 
     // position du curseur
     var $xx = 0; // abscisse 1ere boite
@@ -899,17 +897,17 @@ class ExportComptes_PDF extends FPDF {
      */
     function init($ids='') {
 	if ( !$ids ) // tableau de parametres non transmis
-	    $ids = association_passe_parametres_comptables(); // recuperer dans l'environnemet (parametres d'URL)
+	    $ids = association_passeparam_compta(); // recuperer dans l'environnemet (parametres d'URL)
 	// passer les parametres transmis aux variables de la classe
 	$this->periode = $ids['id_periode'];
 	$this->destination = $ids['destination'];
 	$this->titre = $ids['titre_periode'];
 	// calculer les dimensions de mise en page
-	$this->largeur_utile = $GLOBALS['association_metas']['fpdf_widht']-2*$GLOBALS['association_metas']['fpdf_marginl'];
-	$this->largeur_pour_titre = $this->largeur_utile-$this->icone_h-3*$this->space_h;
+	$this->largeur_utile = ($GLOBALS['association_metas']['fpdf_widht']?$GLOBALS['association_metas']['fpdf_widht']:210)-2*($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:10);
+	$this->cell_padding = ($GLOBALS['association_metas']['fpdf_marginc']?$GLOBALS['association_metas']['fpdf_marginc']:2);
 	// initialiser les variables de mise en page
-	$this->xx = $GLOBALS['association_metas']['fpdf_marginl'];
-	$this->yy = $GLOBALS['association_metas']['fpdf_margint'];
+	$this->xx = ($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:10); // marge gauche
+	$this->yy = ($GLOBALS['association_metas']['fpdf_margint']?$GLOBALS['association_metas']['fpdf_margint']:10); // marge haute
 	// meta pour le fichier PDF
 	$this->SetAuthor('Marcel BOLLA');
 	$this->SetCreator('Associaspip & Fpdf');
@@ -919,7 +917,7 @@ class ExportComptes_PDF extends FPDF {
 	$this->SetFont(($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial'), '', 12);
 	// engager la page
 	// http://fpdf.org/en/doc/addpage.htm
-	$this->AddPage($GLOBALS['association_metas']['fpdf_orientation'], $GLOBALS['association_metas']['fpdf_format']?$GLOBALS['association_metas']['fpdf_format']:array($GLOBALS['association_metas']['fpdf_widht'], $GLOBALS['association_metas']['fpdf_height']) );
+	$this->AddPage($GLOBALS['association_metas']['fpdf_orientation'], $GLOBALS['association_metas']['fpdf_format']?$GLOBALS['association_metas']['fpdf_format']: array(($GLOBALS['association_metas']['fpdf_widht']?$GLOBALS['association_metas']['fpdf_widht']:210), ($GLOBALS['association_metas']['fpdf_height']?$GLOBALS['association_metas']['fpdf_height']:297) ) );
     }
 
     /**
@@ -932,7 +930,7 @@ class ExportComptes_PDF extends FPDF {
      */
     function Footer() {
 	// Positionnement a 2 fois la marge du bas
-	$this->SetY(-2*$GLOBALS['association_metas']['fpdf_margint']);
+	$this->SetY(-2*($GLOBALS['association_metas']['fpdf_margint']?$GLOBALS['association_metas']['fpdf_margint']:10));
 	// typo
 	$this->SetFont(($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial'), 'I', 8); // police: italique 8px
 	$this->SetTextColor(128); // Couleur du texte : gris-50.2% (fond blanc)
@@ -963,8 +961,8 @@ class ExportComptes_PDF extends FPDF {
      */
     function association_cartouche_pdf($titre='') {
 	// Les coordonnees courantes
-	$xc = $this->xx+$this->space_h;
-	$yc = $this->yy+$this->space_v;
+	$xc = $this->xx+$this->cell_padding;
+	$yc = $this->yy+$this->cell_padding;
 	$this->SetDrawColor(128); // La couleur du trace : gris 50.2% (sur fond blanc)
 	// Le logo du site
 #	$chercher_logo = charger_fonction('chercher_logo', 'inc');
@@ -978,32 +976,33 @@ class ExportComptes_PDF extends FPDF {
 	$this->SetFont(($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial'), 'B', 22); // police : gras 22px
 	$this->SetFillColor(235); // Couleur du cadre, du fond du cadre : gris-92,2%
 	$this->SetTextColor(0); // Couleur du texte : noir
+	$largeur_pour_titre = $this->largeur_utile-$this->icone_h-3*$this->cell_padding;
 	// Titre centre
-	$xc += $this->space_h+($logo?$this->icone_h:0);
+	$xc += $this->cell_padding+($logo?$this->icone_h:0);
 	$this->SetXY($xc, $yc);
-	$this->Cell($logo?($this->largeur_pour_titre):($this->largeur_pour_titre+$this->icone_h-$this->space_h), 12, html_entity_decode(_T("asso:$titre")), 0, 0, 'C', TRUE);
+	$this->Cell($logo?($largeur_pour_titre):($largeur_pour_titre+$this->icone_h-$this->cell_padding), 12, html_entity_decode(_T("asso:$titre")), 0, 0, 'C', TRUE);
 	$yc += 12;
-	$this->Ln($this->space_v); // Saut de ligne
-	$yc += $this->space_v;
+	$this->Ln($this->cell_padding); // Saut de ligne
+	$yc += $this->cell_padding;
 	// typo
 	$this->SetFont(($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial'), '', 12); // police : normal 12px
 	$this->SetFillColor(235); // Couleur de remplissage : gris-92.2%
 	// Sous titre Nom de l'association
 	$this->SetXY($xc, $yc);
-	$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('asso:cpte_export_association', array('nom'=>$GLOBALS['association_metas']['nom']) )), 0, 0, 'C', TRUE);
+	$this->Cell($logo?$largeur_pour_titre:$largeur_pour_titre+$this->icone_h-$this->cell_padding, 6, utf8_decode(_T('asso:cpte_export_association', array('nom'=>$GLOBALS['association_metas']['nom']) )), 0, 0, 'C', TRUE);
 	$yc += 6;
-	$this->Ln($this->space_v/2); // Saut de ligne
-	$yc += $this->space_v/2;
+	$this->Ln($this->cell_padding/2); // Demi saut de ligne
+	$yc += $this->cell_padding/2;
 	// typo
 	$this->SetFont(($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial'), '', 12); // police : normal 12px
 	$this->SetFillColor(235); // Couleur de fond : gris-92.2%
 	//Sous titre Intitule de l'exercice
 	$this->SetXY($xc, $yc);
-	$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('asso:cpte_export_exercice', array('titre'=>$this->titre) )), 0, 0, 'C', TRUE);
+	$this->Cell($logo?$largeur_pour_titre:$largeur_pour_titre+$this->icone_h-$this->cell_padding, 6, utf8_decode(_T('asso:cpte_export_exercice', array('titre'=>$this->titre) )), 0, 0, 'C', TRUE);
 	$yc += 6;
-	$this->Ln($this->space_v); // Saut de ligne
-	$yc += $this->space_v;
-	$this->Rect($this->xx, $this->yy, $this->largeur_utile, $yc-$GLOBALS['association_metas']['fpdf_margint']); // Rectangle tout autour de l'entete
+	$this->Ln($this->cell_padding); // Saut de ligne
+	$yc += $this->cell_padding;
+	$this->Rect($this->xx, $this->yy, $this->largeur_utile, $yc-($GLOBALS['association_metas']['fpdf_margint']?$GLOBALS['association_metas']['fpdf_margint']:10)); // Rectangle tout autour de l'entete
 	$this->yy = $yc; // on sauve la position du curseur dans la page
     }
 
@@ -1020,9 +1019,9 @@ class ExportComptes_PDF extends FPDF {
 	    $liste_classes = $classes;
 	}
 	// Les coordonnees courantes
-	$xc = $this->xx+$this->space_h;
-	$y_orig = $this->yy+$this->space_v;
-	$yc = $y_orig+$this->space_v;
+	$xc = $this->xx+$this->cell_padding;
+	$y_orig = $this->yy+$this->cell_padding;
+	$yc = $y_orig+$this->cell_padding;
 	// typo
 	$this->SetFont(($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial'), 'B', 14); // police: gras 14px
 	$this->SetFillColor(235); // Couleursdu fond du cadre de titre : gris-92.2%
@@ -1032,8 +1031,8 @@ class ExportComptes_PDF extends FPDF {
 	$this->SetXY($xc, $yc);
 	$this->Cell($this->largeur_utile, 10, html_entity_decode(_T("asso:$titre")), 0, 0, 'C');
 	$yc += 10;
-	$this->Ln($this->space_v); // Saut de ligne
-	$yc += $this->space_v;
+	$this->Ln($this->cell_padding); // Saut de ligne
+	$yc += $this->cell_padding;
 	// initialisation du calcul+affichage des comptes
 	$total_valeurs = $total_recettes = $total_depenses = 0;
 	$chapitre = '';
@@ -1047,7 +1046,7 @@ class ExportComptes_PDF extends FPDF {
 		if ($chapitre!=$new_chapitre) { // debut de categorie
 		    $this->SetFillColor(225); // Couleur de fond de la ligne : gris-92.2%
 		    $this->Cell(20, 6, utf8_decode($new_chapitre), 0, 0, 'L', TRUE);
-		    $this->Cell(($this->largeur_utile)-(2*$this->space_h+20), 6, utf8_decode(($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))), 0, 0, 'L', TRUE);
+		    $this->Cell(($this->largeur_utile)-(2*$this->cell_padding+20), 6, utf8_decode(($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))), 0, 0, 'L', TRUE);
 		    $chapitre = $new_chapitre;
 		    $this->Ln(); // Saut de ligne
 		    $yc += 6;
@@ -1056,7 +1055,7 @@ class ExportComptes_PDF extends FPDF {
 		$this->SetXY($xc, $yc); // positionne le curseur
 #	    	if ( floatval($data['valeurs']) || floatval($data['recettes']) || floatval($data['depenses']) ) { // non-zero...
 		    $this->Cell(20, 6, utf8_decode($data['code']), 0, 0, 'R', TRUE);
-		    $this->Cell(($this->largeur_utile)-(2*$this->space_h+50), 6, utf8_decode($data['intitule']), 0, 0, 'L', TRUE);
+		    $this->Cell(($this->largeur_utile)-(2*$this->cell_padding+50), 6, utf8_decode($data['intitule']), 0, 0, 'L', TRUE);
 		    $this->Cell(30, 6, association_formater_nombre($data['valeurs']), 0, 0, 'R', TRUE);
 		    if ($direction) { // mode liste comptable
 			$this->Cell(30, 6, association_formater_nombre($data['valeurs']), 0, 0, 'R', TRUE);
@@ -1075,19 +1074,19 @@ class ExportComptes_PDF extends FPDF {
 	$this->SetXY($xc, $yc); // positionne le curseur
 	$this->SetFillColor(215); // Couleur de fond : 84.3%
 	if ($direction) { // mode liste comptable : charge, produit, actifs, passifs
-	    $this->Cell(($this->largeur_utile)-(2*$this->space_h+30), 6, html_entity_decode(_T("asso:$prefixe".'_total')), 1, 0, 'R', TRUE);
+	    $this->Cell(($this->largeur_utile)-(2*$this->cell_padding+30), 6, html_entity_decode(_T("asso:$prefixe".'_total')), 1, 0, 'R', TRUE);
 	    $this->Cell(30, 6, association_formater_nombre($total_valeurs), 1, 0, 'R', TRUE);
 	} else { // mode liste standard : contributions volontaires et autres
-	    $this->Cell(($this->largeur_utile)/2-(2*$this->space_h+30), 6, html_entity_decode(_T("asso:$prefixe".'_total_depenses')), 1, 0, 'R', TRUE);
+	    $this->Cell(($this->largeur_utile)/2-(2*$this->cell_padding+30), 6, html_entity_decode(_T("asso:$prefixe".'_total_depenses')), 1, 0, 'R', TRUE);
 	    $this->Cell(30, 6, association_formater_nombre($total_depenses), 1, 0, 'R', TRUE);
 	    $xc += ( $this->largeur_utile)/2;
 	    $this->SetXY($xc, $yc); // positionne le curseur sur l'autre demi page
-	    $this->Cell(($this->largeur_utile)/2-(2*$this->space_h+30), 6, html_entity_decode(_T("asso:$prefixe".'_total_recettes')), 1, 0, 'R', TRUE);
+	    $this->Cell(($this->largeur_utile)/2-(2*$this->cell_padding+30), 6, html_entity_decode(_T("asso:$prefixe".'_total_recettes')), 1, 0, 'R', TRUE);
 	    $this->Cell(30, 6, association_formater_nombre($total_recettes), 1, 0, 'R', TRUE);
 	}
 	$yc += 6;
-	$this->Ln($this->space_v); // Saut de ligne
-	$yc += $this->space_v;
+	$this->Ln($this->cell_padding); // Saut de ligne
+	$yc += $this->cell_padding;
 	$this->Rect($this->xx, $y_orig, $this->largeur_utile, $yc-$y_orig); // Rectangle tout autour
 	$this->yy = $yc; // on sauve la position du curseur dans la page
 	return $total_valeurs;
@@ -1096,9 +1095,9 @@ class ExportComptes_PDF extends FPDF {
     // on affiche le resultat comptable net : benefice ou deficit
     function association_liste_resultat_net($lesRecettes, $lesDepenses) {
 	// Les coordonnees courantes
-	$xc = $this->xx+$this->space_h;
-	$y_orig = $this->yy+$this->space_v;
-	$yc = $y_orig+$this->space_v;
+	$xc = $this->xx+$this->cell_padding;
+	$y_orig = $this->yy+$this->cell_padding;
+	$yc = $y_orig+$this->cell_padding;
 	// typo
 	$this->SetFont(($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial'), 'B', 14); // police : gras 14px
 	$this->SetFillColor(235); // Couleur du fond : gris-92.2%
@@ -1107,16 +1106,16 @@ class ExportComptes_PDF extends FPDF {
 	$this->SetXY($xc, $yc);
 	$this->Cell($this->largeur_utile, 10, html_entity_decode(_T('asso:cpte_resultat_titre_resultat')), 0, 0, 'C');
 	$yc += 10;
-	$this->Ln($this->space_v); // Saut de ligne
-	$yc += $this->space_v;
+	$this->Ln($this->cell_padding); // Saut de ligne
+	$yc += $this->cell_padding;
 	$this->SetFillColor(215); // Couleur de fond : gris-84.3%
 	$leSolde = $lesRecettes-$lesDepenses;
 	$this->SetXY($xc, $yc);
-	$this->Cell(($this->largeur_utile)-(2*$this->space_h+30), 6, html_entity_decode(_T('asso:cpte_resultat_'.($leSolde<0?'perte':'benefice'))), 1, 0, 'R', TRUE);
+	$this->Cell(($this->largeur_utile)-(2*$this->cell_padding+30), 6, html_entity_decode(_T('asso:cpte_resultat_'.($leSolde<0?'perte':'benefice'))), 1, 0, 'R', TRUE);
 	$this->Cell(30, 6, association_formater_nombre($leSolde), 1, 0, 'R', TRUE);
 	$yc += 6;
-	$this->Ln($this->space_v); // Saut de ligne
-	$yc += $this->space_v;
+	$this->Ln($this->cell_padding); // Saut de ligne
+	$yc += $this->cell_padding;
 	$this->Rect($this->xx, $y_orig, $this->largeur_utile, $yc-$y_orig); // Rectangle tout autour
 	$this->yy = $yc; // on sauve la position du curseur dans la page
     }

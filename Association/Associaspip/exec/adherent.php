@@ -60,7 +60,7 @@ function exec_adherent() {
 			'adherent_label_modifier_membre' => array('edit-24.gif', array('edit_adherent', "id=$id_auteur"), $full),
 			"adherent_label_modifier_$statut" => array('membre_infos.png', array('auteur_infos', "id_auteur=$id_auteur"), ),
 		));
-		debut_cadre_association('annonce.gif', 'membre', $nom_membre);
+		debut_cadre_association('annonce.gif', 'membre');
 		if ( autoriser('voir_groupes', 'association') )
 			echo propre($data['commentaire']);
 		$query_groupes = sql_select('g.*, fonction', 'spip_asso_groupes g LEFT JOIN spip_asso_groupes_liaisons l ON g.id_groupe=l.id_groupe', 'g.id_groupe>=100 AND l.id_auteur='.$id_auteur, '', 'g.nom'); // Liste des groupes (on ignore les groupes d'id <100 qui sont dedies a la gestion des autorisations)

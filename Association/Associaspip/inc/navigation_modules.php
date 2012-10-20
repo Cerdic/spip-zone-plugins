@@ -177,14 +177,12 @@ function fin_page_association($FIN_CADRE_RELIEF=TRUE) {
  * @param string $icone
  *   Icone associe a la page, souvent celui du module.
  * @param string $titre
- *   Chaine de langue, sans prefixe, du titre
- * @param array $T_args
- *   Arugments associes a la chaine de langue parametrable
+ *   Chaine de langue du titre
  * @param bool $DEBUT_DROITE
  *   Indique s'il faut ajouter (vrai, par defaut) ou pas "debut_droite()" avant
  * @return void
  */
-function debut_cadre_association($icone, $titre, $T_args='', $DEBUT_DROITE=TRUE) {
+function debut_cadre_association($icone, $titre, $DEBUT_DROITE=TRUE) {
 	if ($DEBUT_DROITE)
 		echo debut_droite('',TRUE);
 	if ( is_array($T_args) )
@@ -192,7 +190,7 @@ function debut_cadre_association($icone, $titre, $T_args='', $DEBUT_DROITE=TRUE)
 	$chemin = _DIR_PLUGIN_ASSOCIATION_ICONES.$icone; // icone Associaspip
 	if ( !file_exists($chemin) )
 		$chemin = find_in_path($icone); // icone alternative
-	debut_cadre_relief($chemin, FALSE, '', (is_array($T_args)?association_langue($T_args): association_langue($titre)." $T_args") );
+	debut_cadre_relief($chemin, FALSE, '', association_langue($titre) );
 }
 
 /**

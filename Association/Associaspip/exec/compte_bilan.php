@@ -28,7 +28,7 @@ function exec_compte_bilan() {
 		// pas de sommes de synthes puisque tous les totaux sont dans la zone centrale ;-
 		// datation et raccourcis
 		raccourcis_association(array('comptes', "$ids[type_periode]=$ids[id_periode]"), array(
-			'encaisse_titre_general' => array('finances-24.png', array('encaisse', "$ids[type_periode]=$ids[id_periode]".($ids['destination']?"&destination=$ids[destination]":'')) ),
+			'encaisse_titre_general' => array('finances-24.png', array('encaisse', "$ids[type_periode]=$ids[id_periode]") ),
 			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "$ids[type_periode]=$ids[id_periode]".($ids['destination']?"&destination=$ids[destination]":'')) ),
 #			'annexe_titre_general' => array('finances-24.png', array('annexe', "$ids[type_periode]=$ids[id_periode]".($ids['destination']?"&destination=$ids[destination]":'')) ),
 		));
@@ -43,7 +43,7 @@ function exec_compte_bilan() {
 			}
 			echo fin_cadre_enfonce(TRUE);
 		}
-		debut_cadre_association('finances-24.png', 'cpte_bilan_titre_general', $ids['titre_periode']);
+		debut_cadre_association('finances-24.png', 'cpte_bilan_titre_general');
 		// Filtres
 		filtres_association(array(
 			'periode' => array($ids['id_periode'], 'asso_comptes', 'operation'),
