@@ -1,0 +1,31 @@
+[(#REM) 
+
+  ### /!\ boucle POUR (spip Bonux) ###
+	
+  Parametres :
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+  - cacher_option_intro : pas de premier option vide  (defaut:"")
+  - class : classe(s) css ajoutes au select
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+  - size : taille du select
+]
+
+[(#REM) Attention, la valeur ou la valeur forcée peut être une chaine vide. On doit donc tester avec is_null. ]
+#SET{valeur,#ENV{valeur_forcee}|is_null|?{#ENV{valeur}|is_null|?{#ENV{defaut},#ENV{valeur}},#ENV{valeur_forcee}}}
+
+[(#REM) Attention, le nom de la collection peut contenir &. Il faut faire le changement pour que le test fonctionne. ]
+#SET{valeur,#GET{valeur}|replace{&amp;,&}}
+
+<select name="#ENV{nom}" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ size="(#ENV{size})"]>
+[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
+#SET{arbo,#ARRAY{0,&nbsp;}}
+<BOUCLE_selection(ZCOLLECTIONS){par zcollection}{id_parent==0}>
+	<option value="#ZCOLLECTION"[(#ZCOLLECTION|=={#GET{valeur}}|oui)selected="selected"]>#ZCOLLECTION</option>
+	<BOUCLE_sous(ZCOLLECTIONS){par zcollection}{id_parent}>
+	<option value="#ZCOLLECTION"[(#ZCOLLECTION|=={#GET{valeur}}|oui)selected="selected"]>[(#GET{arbo}|table_valeur{#ID_PARENT})]&#x27a5; #ZCOLLECTION</option>
+	[(#SET{arbo,[(#GET{arbo}|array_merge{[(#ARRAY{#ID_ZCOLLECTION,[(#GET{arbo}|table_valeur{#ID_PARENT}|concat{&nbsp;&nbsp;&nbsp;&nbsp;})]})]})]})]
+	<BOUCLE_sous_sous(BOUCLE_sous) />
+	</BOUCLE_sous>
+</BOUCLE_selection>
+</select>

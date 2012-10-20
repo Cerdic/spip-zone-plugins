@@ -1,0 +1,20 @@
+[(#CONFIG{zotspip/page_biblio}|oui)
+[(#SET{tri, #ARRAY{annee,<:zotspip:item_annee:>,type,<:zotspip:item_type:>,annee_type,<:zotspip:item_annee_type:>,type_annee,<:zotspip:item_type_annee:>,premier_auteur,<:zotspip:item_premier_auteur:>}})]
+[(#PLUGIN{aeres}|oui)[(#SET{tri,#GET{tri}|array_merge{#ARRAY{aeres,<:zotspip:item_aeres:>}}})]]
+<div class="formulaire_spip">
+<form action="spip.php" method="get"><div>
+	<input type="hidden" name="page" value="biblio" />
+	<ul>
+		[(#SAISIE{selection,tri,label=<:zotspip:label_tri:>,cacher_option_intro=on,defaut=annee,datas=#GET{tri}})]
+		[(#SAISIE{csl,csl,label=<:zotspip:label_csl:>,cacher_option_intro=on,defaut=#CONFIG{zotspip/csl_defaut}})]
+		[(#SAISIE{zotspip_creator,auteur,label=<:zotspip:label_auteur:>})]
+		[(#SAISIE{zotspip_annee,annee,label=<:zotspip:label_annee:>})]
+		[(#SAISIE{input,recherche,label=<:zotspip:label_recherche_libre:>})]
+		[(#SAISIE{zotspip_type,type_ref,label=<:zotspip:label_type_ref:>})]
+		[(#SAISIE{zotspip_tag,tag,label=<:zotspip:label_tag:>})]
+		[(#SAISIE{zotspip_zcollection,zcollection,label=<:zotspip:label_collection:>})]
+		[(#SAISIE{selection,details,label=<:zotspip:label_details:>,option_intro=<:zotspip:item_resume_tags:>,datas=[(#ARRAY{complet,<:zotspip:item_complet:>})]})]
+	</ul>
+	<p class="boutons"><input type="submit" class="submit" value="<:zotspip:filtrer:>" /></p>
+</div></form>
+</div>]

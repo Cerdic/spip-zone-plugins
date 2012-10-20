@@ -1,0 +1,24 @@
+#CACHE{0}
+
+<h1 class="grostitre">#ENV{tag}</h1>
+
+<div class="liste"><ul class="liste-items">
+<BOUCLE_biblio(ZITEMS){id_parent==0}{tag}{!par annee}{par auteurs}>
+<li class="item">
+	[<h4>(#ANNEE|=={0}|?{<:zotspip:annee_non_precisee:>,#ANNEE}|unique)</h4>]
+	<p><ul>#INCLURE{fond=inclure/zitem,id_zitem,liste=oui,icones=oui,details=complet,export=oui,liens=oui,souligne=#ENV{auteur},lien_voir=oui,afficher_id=oui}</ul></p>
+</li>
+</BOUCLE_biblio>
+</ul></div>
+
+
+<!--#navigation-->
+<div class="cadre-info">
+	<a href="#URL_ECRIRE{ztafs}"><:zotspip:retour_liste_tags:></a><br />
+	<a href="#URL_ECRIRE{zitems}"><:zotspip:retour_liste_zitems:></a>
+</div>
+<!--/#navigation-->
+
+<!--#extra-->
+<div class="ajax">#FORMULAIRE_FUSIONNER_ZTAGS{#ENV{tag}}</div>
+<!--/#extra-->
