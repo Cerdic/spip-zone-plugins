@@ -7,9 +7,6 @@ include_spip('inc/meta');
 
 // Installation et mise à jour
 function noizetier_upgrade($nom_meta_base_version,$version_cible){
-
-	$version_actuelle = '0.0';
-
 	$maj = array();
 	
 	$maj['create'] = array(
