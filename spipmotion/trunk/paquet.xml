@@ -1,7 +1,7 @@
 <paquet
 	prefix="spipmotion"
 	categorie="multimedia"
-	version="1.1.7"
+	version="1.1.8"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/spipmotion.png"
@@ -39,5 +39,6 @@
 	<utilise nom="licence" />
 	<utilise nom="fonctions_images" />
 
+	<menu nom="spipmotion_erreurs" titre="spipmotion:titre_page_erreurs" parent="menu_administration" icone="images/spipmotion-16.png" action="spipmotion_erreurs" />
 	<menu nom="ffmpeg_infos" titre="spipmotion:titre_page_ffmpeg_infos" parent="menu_configuration" icone="images/spipmotion-16.png" action="ffmpeg_infos" />
 </paquet>

@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_reencoder_tout_format' => 'Réencoder tous les fichiers au format @format@',
 	'bouton_reencoder_tout_message' => 'Êtes vous sûr de vouloir relancer l\'encodage de tous les fichiers. Cette opération peut être très longue.',
 	'bouton_reencoder_tout_message_format' => 'Êtes vous sûr de vouloir relancer l\'encodage de tous les fichiers au format @format@. Cette opération peut être très longue.',
+	'bouton_supprimer_encodages_doubles' => 'Supprimer tous les fichiers résultats de double encodage',
 
 	// C
 	'caption_avfilter_geres' => 'Filtres vidéos (avfilters) gérés',
@@ -43,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_valeur_int' => 'Cette valeur doit être un chiffre entier.',
 	'erreur_valeur_int_superieur' => 'Cette valeur doit être supérieure à @val@.',
 	'erreur_verifier_droits' => 'Le script d\'encodage "script_bash/spipmotion.sh" n\'est pas executable.',
+	'explication_double_encodage_supprimer_secu' => 'Vous pouvez le supprimer en toute sécurité, l\'encodage original est disponible.',
 	'explication_encodeur' => 'Si vous choisissez l\'encodeur ffmpeg2theora pour vos fichiers Ogg vidéos, les choix de codecs vidéo et audios deviennent inutiles.',
 	'explication_framerate' => 'Laissez ce champs vide pour garder le même nombre de frames par seconde que l\'original',
 	'explication_presets_qualite' => 'Ce réglage permet de déterminer avec quel preset de qualité le codec libx264 va être utilisé. Ce réglage est déterminant pour la qualité du résultat final mais aussi sur la lenteur de l\'encodage.',
@@ -244,6 +246,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'thead_template_encodage' => 'Template',
 	'thead_template_encodage_utilise' => 'Template d\'encodage utilisé',
 	'titre_fichier_log' => 'Contenu du fichier de log de l\'id #@id@ dans la file d\'attente',
+	'titre_fichiers_double_encodage' => 'Ces fichiers semblent être le résultat de fichiers encodés plusieurs fois',
+	'titre_fichiers_doubles_spip' => 'Ces fichiers semblent être le résultat de fichiers insérés plusieurs fois en base',
+	'titre_page_erreurs' => 'Erreurs potentielles de SPIPmotion',
 	'titre_page_ffmpeg_infos' => 'Informations sur FFMpeg',
 	'titre_page_file' => 'File d\'attente d\'encodage',
 	'titre_page_file_attente' => 'Documents en attente d\'encodage',

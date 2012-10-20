@@ -1,0 +1,148 @@
+<div class="galerie[ media-(#ENV{media,''})]">
+<B_encoded_plusieurs_fois>
+[(#BOITE_OUVRIR{<:spipmotion:titre_fichiers_double_encodage:>})]
+[<p class="pagination">(#PAGINATION{prive})</p>]
+<table>
+	<thead>
+		<th></th>
+		<th class="id"><:medias:id:></th>
+		<th></th>
+		<th><:medias:logo:></th>
+		<th><:medias:infos:></th>
+		<th><:medias:descriptif:></th>
+		<th></th>
+	</thead>
+<BOUCLE_encoded_plusieurs_fois(DOCUMENTS){mode=conversion}{recherche encoded\-([0-9]?)\.(ogv|mp4)}{pagination 10}{tout}>
+<tr class="[(#ENV{media}|non)[ media-(#MEDIA)]]" id="#ENV{iddoc,media}#ID_DOCUMENT">
+		<td class='infos'>
+		[(#DISTANT|=={oui}|non)#SET{missing,#FICHIER|file_exists|non}]
+		[(#ENV{media}|non|et{#MEDIA|!={file}})[(#CHEMIN_IMAGE{media-#MEDIA|concat{-32.png}}|balise_img|inserer_attribut{alt,#VAL{medias:media_#MEDIA}|_T}|inserer_attribut{title,#VAL{medias:media_#MEDIA}|_T})]]
+		[(#GET{missing}|oui)<img src='#CHEMIN_IMAGE{document-manquant-24.png}' width='24' height='24' alt='<:medias:fichier_manquant:>' />]
+		[(#DISTANT|=={oui}|oui)<img src='#CHEMIN_IMAGE{document-distant-24.png}' width='24' height='24' alt='<:medias:fichier_distant:>' />]
+		</td>
+		<td class="id">
+			<strong>#ID_DOCUMENT</strong>
+		</td>
+		<td class='statut'>
+		[(#ID_DOCUMENT|medias_puce_statut_document{#STATUT})]
+		</td>
+		<td class="logo">
+		#SET{fichier,#DISTANT|=={oui}|?{#FICHIER,#FICHIER|basename}}
+		[(#MEDIA|=={image}|oui)[
+			<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{apercu,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>
+		]]
+		[(#MEDIA|=={image}|non)[<div class="#EDIT{vignette} resize-250">
+			<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{auto,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>
+		</div>]]
+		<div class="fichier">#GET{fichier}</div>
+		</td>
+		<td class="exif">
+			[<strong class="extension">(#EXTENSION)</strong>]
+			[<div class="dimensions">(#LARGEUR|?{[(#LARGEUR)[ x (#HAUTEUR) pixels]],''})</div>]
+			[<div class="taille">(#TAILLE|taille_en_octets)</div>]
+			[<div class="date">(#DATE|affdate{d/m/Y})</div>]
+			[(#PIPELINE{afficher_metas_document,#ARRAY{args,#ARRAY{'quoi','galerie','id_document',#ID_DOCUMENT},data,''}})]
+			<B_liens_presents>
+			[(#TOTAL_BOUCLE|>{1}|oui)
+			<a href='#' onclick="jQuery(this).next().show();$(this).hide();return false;">[(#TOTAL_BOUCLE|singulier_ou_pluriel{medias:une_utilisation,medias:des_utilisations})]</a><div style='display: none;'>
+			]
+			<BOUCLE_liens_presents(documents_liens){id_document}{'<br />'}>
+			[(#ID_OBJET|lien_objet{#OBJET})]
+			</BOUCLE_liens_presents>
+			[(#TOTAL_BOUCLE|>{1}|oui)</div>]
+			</B_liens_presents>
+		</td>
+		<td class="descriptif">
+			[<strong class="titre #EDIT{titre}">(#TITRE|sinon{#VAL{<i>}|concat{<:info_sans_titre:>,'</i>'}})</strong>]
+			[<div class="descriptif #EDIT{descriptif}">(#DESCRIPTIF)</div>]
+			[<p class="credits #EDIT{credits}">(#CREDITS)</p>]
+		</td>
+		<td>
+			<BOUCLE_orig(DOCUMENTS spip_documents_liens){objet=document}{id_document=#ID_DOCUMENT}{tout}>
+			<BOUCLE_doc_orig(DOCUMENTS){id_document=#ID_OBJET}{tout}>
+			#SET{fichier,#_encoded_plusieurs_fois:FICHIER|replace{encoded-(2|3|4|5|6|7|8|9|10),encoded}|set_spip_doc}
+			<BOUCLE_conversion_sans_nb(DOCUMENTS){id_objet=#ID_DOCUMENT}{objet=document}{fichier = #GET{fichier}}{tout}>
+			<:spipmotion:explication_double_encodage_supprimer_secu:>
+			</BOUCLE_conversion_sans_nb>
+			</BOUCLE_doc_orig>
+			</BOUCLE_orig>
+		[<span class='supprimer'>(#AUTORISER{supprimer,document,#ID_DOCUMENT})[(#BOUTON_ACTION{<:medias:bouton_supprimer:>,#URL_ACTION_AUTEUR{supprimer_document,#ID_DOCUMENT,#SELF},ajax,'','',[(function(){jQuery("##ENV{iddoc,media}(#ID_DOCUMENT)").animateRemove();return true;})()]})]</span>]
+		</td>
+	</tr>
+</BOUCLE_encoded_plusieurs_fois>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+[(#AUTORISER{webmestre}|oui)
+#BOITE_PIED
+[(#BOUTON_ACTION{<:spipmotion:bouton_supprimer_encodages_doubles:>,[(#URL_ACTION_AUTEUR{spipmotion_supprimer_encodages_doubles,'',#SELF})]})]
+#BOITE_FERMER]
+</B_encoded_plusieurs_fois>
+
+<B_presents_plusieurs_fois>
+[(#BOITE_OUVRIR{<:spipmotion:titre_fichiers_doubles_spip:>})]
+[<p class="pagination">(#PAGINATION{prive})</p>]
+<table>
+	<thead>
+		<th></th>
+		<th class="id"><:medias:id:></th>
+		<th></th>
+		<th><:medias:logo:></th>
+		<th><:medias:infos:></th>
+		<th><:medias:descriptif:></th>
+		<th></th>
+	</thead>
+<BOUCLE_presents_plusieurs_fois(DOCUMENTS){mode != conversion}{recherche -([0-9]?)\.(flv|mp4)}{pagination 10}{tout}>
+<tr class="[(#ENV{media}|non)[ media-(#MEDIA)]]" id="#ENV{iddoc,media}#ID_DOCUMENT">
+		<td class='infos'>
+		[(#DISTANT|=={oui}|non)#SET{missing,#FICHIER|file_exists|non}]
+		[(#ENV{media}|non|et{#MEDIA|!={file}})[(#CHEMIN_IMAGE{media-#MEDIA|concat{-32.png}}|balise_img|inserer_attribut{alt,#VAL{medias:media_#MEDIA}|_T}|inserer_attribut{title,#VAL{medias:media_#MEDIA}|_T})]]
+		[(#GET{missing}|oui)<img src='#CHEMIN_IMAGE{document-manquant-24.png}' width='24' height='24' alt='<:medias:fichier_manquant:>' />]
+		[(#DISTANT|=={oui}|oui)<img src='#CHEMIN_IMAGE{document-distant-24.png}' width='24' height='24' alt='<:medias:fichier_distant:>' />]
+		</td>
+		<td class="id">
+			<strong>#ID_DOCUMENT</strong>
+		</td>
+		<td class='statut'>
+		[(#ID_DOCUMENT|medias_puce_statut_document{#STATUT})]
+		</td>
+		<td class="logo">
+		#SET{fichier,#DISTANT|=={oui}|?{#FICHIER,#FICHIER|basename}}
+		[(#MEDIA|=={image}|oui)[
+			<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{apercu,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>
+		]]
+		[(#MEDIA|=={image}|non)[<div class="#EDIT{vignette} resize-250">
+			<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{auto,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>
+		</div>]]
+		<div class="fichier">#GET{fichier}</div>
+		</td>
+		<td class="exif">
+			[<strong class="extension">(#EXTENSION)</strong>]
+			[<div class="dimensions">(#LARGEUR|?{[(#LARGEUR)[ x (#HAUTEUR) pixels]],''})</div>]
+			[<div class="taille">(#TAILLE|taille_en_octets)</div>]
+			[<div class="date">(#DATE|affdate{d/m/Y})</div>]
+			[(#PIPELINE{afficher_metas_document,#ARRAY{args,#ARRAY{'quoi','galerie','id_document',#ID_DOCUMENT},data,''}})]
+			<B_liens>
+			[(#TOTAL_BOUCLE|>{1}|oui)
+			<a href='#' onclick="jQuery(this).next().show();$(this).hide();return false;">[(#TOTAL_BOUCLE|singulier_ou_pluriel{medias:une_utilisation,medias:des_utilisations})]</a><div style='display: none;'>
+			]
+			<BOUCLE_liens(documents_liens){id_document}{'<br />'}>
+			[(#ID_OBJET|lien_objet{#OBJET})]
+			</BOUCLE_liens>
+			[(#TOTAL_BOUCLE|>{1}|oui)</div>]
+			</B_liens>
+		</td>
+		<td class="descriptif">
+			[<strong class="titre #EDIT{titre}">(#TITRE|sinon{#VAL{<i>}|concat{<:info_sans_titre:>,'</i>'}})</strong>]
+			[<div class="descriptif #EDIT{descriptif}">(#DESCRIPTIF)</div>]
+			[<p class="credits #EDIT{credits}">(#CREDITS)</p>]
+		</td>
+		<td>
+		[<span class='supprimer'>(#AUTORISER{supprimer,document,#ID_DOCUMENT})[(#BOUTON_ACTION{<:medias:bouton_supprimer:>,#URL_ACTION_AUTEUR{supprimer_document,#ID_DOCUMENT,#SELF},ajax,'','',[(function(){jQuery("##ENV{iddoc,media}(#ID_DOCUMENT)").animateRemove();return true;})()]})]</span>]
+		</td>
+	</tr>
+</BOUCLE_presents_plusieurs_fois>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+#BOITE_FERMER
+</B_presents_plusieurs_fois>
+</div>
