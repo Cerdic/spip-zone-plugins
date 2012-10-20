@@ -30,7 +30,7 @@
 	</prefix>
 	<options>bigbrother_options.php</options>
 	<fonctions>bigbrother_fonctions.php</fonctions>
-	<install>base/bigbrother_installation.php</install>
+	<install>bigbrother_administrations.php</install>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/bigbrother_tables.php</inclure>
@@ -73,12 +73,12 @@
 	</pipeline>
 
 	<bouton id='journal_stats' parent="statistiques_visites">
-		<icone>images/bigbrother-24.png</icone>
+		<icone>prive/themes/spip/images/bigbrother-24.png</icone>
 		<titre>bigbrother:naviguer_journal_stats</titre>
 		<url>journal_stats</url>
 	</bouton>
 	<bouton id="journal_stats_21" parent="bando_reactions">
-		<icone>images/bigbrother-24.png</icone>
+		<icone>prive/themes/spip/images/bigbrother-24.png</icone>
 		<titre>bigbrother:naviguer_journal_stats</titre>
 		<url>journal_stats</url>
 	</bouton>
