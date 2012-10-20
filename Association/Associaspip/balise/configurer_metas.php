@@ -4,7 +4,7 @@
  *
  * @copyright Copyright (c) 20001--2010 Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -37,6 +37,9 @@ function balise_CONFIGURER_METAS_dyn($form) {
 	if (!is_array($contexte))
 		return $contexte;
 	return array('formulaires/' . $form, 3600, $contexte);
+}
+
+?>contexte);
 }
 
 ?>
