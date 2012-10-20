@@ -14,6 +14,9 @@
 [(#REM) Attention, la valeur ou la valeur forcée peut être une chaine vide. On doit donc tester avec is_null. ]
 #SET{valeur,#ENV{valeur_forcee}|is_null|?{#ENV{valeur}|is_null|?{#ENV{defaut},#ENV{valeur}},#ENV{valeur_forcee}}}
 
+[(#REM) Attention, le nom de la collection peut contenir &. Il faut faire le changement pour que le test fonctionne. ]
+#SET{valeur,#GET{valeur}|replace{&amp;,&}}
+
 <select name="#ENV{nom}" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ size="(#ENV{size})"]>
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 #SET{arbo,#ARRAY{0,&nbsp;}}
