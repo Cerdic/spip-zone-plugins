@@ -22,7 +22,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 	$infos = array();
 	if(file_exists($chemin)){
 		ob_start();
-		passthru("mediainfo -f --Output=XML $chemin");
+		passthru(escapeshellcmd("mediainfo -f --Output=XML $chemin"));
 		$metadatas=ob_get_contents();
 		ob_end_clean();
 		include_spip('inc/xml');
