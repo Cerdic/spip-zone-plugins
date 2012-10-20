@@ -19,11 +19,11 @@ function zotspip_jqueryui_forcer($scripts){
 
 function zotspip_autoriser(){}
 
-function autoriser_zitems_bouton_dist($faire, $type, $id, $qui, $opt) {
-	return true;
+function autoriser_zotspip_menu_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('webmestre');
 }
 
-function autoriser_bando_zitems_bouton_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_zitems_menu_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
 
@@ -71,5 +71,6 @@ function zotspip_porte_plume_lien_classe_vers_icone($flux) {
 	$icones['outil_inserer_ref'] = 'inserer_ref.png';
 	return array_merge($flux, $icones);
 }
+
 
 ?>

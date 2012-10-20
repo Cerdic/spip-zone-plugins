@@ -14,9 +14,10 @@ function zotspip_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_zitems'][]= 'ztags';
 	$interface['tables_jointures']['spip_zitems'][]= 'zcreators';
 	$interface['tables_jointures']['spip_zitems'][]= 'zitems_zcollections';
-	$interface['tables_jointures']['spip_zitems'][]= 'zcollections';
+	$interface['tables_jointures']['spip_zcollections'][]= 'zitems_zcollections';
 	$interface['tables_jointures']['spip_ztags'][]= 'zitems';
 	$interface['tables_jointures']['spip_zcreators'][]= 'zitems';
+
 	
 	return $interface;
 }

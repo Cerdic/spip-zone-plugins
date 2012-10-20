@@ -1,8 +1,8 @@
 <div class="zotspip_export_select">
 ---
 <div class="zotspip_select_all" style="display:none;">
-	<a href="javascript:void(0);"  onClick="$('input.zotspip_select_ref').attr('checked','checked');zotspip_test_if_ref_select();"><:zotspip:selectionner_tout:></a> | 
-	<a href="javascript:void(0);"  onClick="$('input.zotspip_select_ref').attr('checked','');zotspip_test_if_ref_select();"><:zotspip:deselectionner_tout:></a>
+	<a href="javascript:void(0);"  onClick="jQuery('input.zotspip_select_ref').attr('checked','checked');zotspip_test_if_ref_select();"><:zotspip:selectionner_tout:></a> | 
+	<a href="javascript:void(0);"  onClick="jQuery('input.zotspip_select_ref').removeAttr('checked');zotspip_test_if_ref_select();"><:zotspip:deselectionner_tout:></a>
 </div>
 <:zotspip:exporter_selection:>
 <select name="format">
@@ -18,16 +18,16 @@
 <input type="submit" class="submit zotspip_export_button" value="<:zotspip:exporter:>" />
 </div>
 <script type="text/javascript">// <![CDATA[
-	$(document).ready(function(){
-		$('.zotspip_select_all').show();
+	jQuery(document).ready(function(){
+		jQuery('.zotspip_select_all').show();
 		zotspip_test_if_ref_select = function () {
-			if ($('input.zotspip_select_ref:checked').length>0) 
-				$('.zotspip_export_button').attr('disabled', '');
+			if (jQuery('input.zotspip_select_ref:checked').length>0) 
+				jQuery('.zotspip_export_button').removeAttr('disabled');
 			else
-				$('.zotspip_export_button').attr('disabled', 'disabled');
+				jQuery('.zotspip_export_button').attr('disabled', 'disabled');
 		};
 		zotspip_test_if_ref_select();
-		$('input.zotspip_select_ref').change(function() {
+		jQuery('input.zotspip_select_ref').change(function() {
 			zotspip_test_if_ref_select();
 		});
 	});

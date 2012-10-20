@@ -7,7 +7,7 @@
 [(#GET{export}|oui)
 	<form method="get" action="spip.php" target="_blank">
 	<input type="hidden" name="page" value="zotspip_unapi">]
-<BOUCLE_biblio(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{zotsip_depuis}{par_type_zotero}{!par annee}{par auteurs}{json LIKE %#ENV{recherche}%}{pagination #ENV{max,50}}>
+<BOUCLE_biblio(ZITEMS spip_zitems_zcollections spip_zcollections){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{spip_zcollections.zcollection?}{zotsip_depuis}{par_type_zotero}{!par annee}{par auteurs}{json LIKE %#ENV{recherche}%}{pagination #ENV{max,50}}>
 #SET{ouvert,' '}
 [[(#COMPTEUR_BOUCLE|>{1}|oui)</ul>]<h4 class="h4">(#TYPE|zotspip_traduire_type|unique{type_#GET{alea}})</h4>#SET{ouvert,''}]
 [[(#GET{ouvert})</ul>]<h5 class="h5">(#ANNEE|=={0}|?{<:zotspip:annee_non_precisee:>,#ANNEE}|unique{annee_#GET{alea}_#TYPE})</h5><ul class="spip">]

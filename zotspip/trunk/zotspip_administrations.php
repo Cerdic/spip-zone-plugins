@@ -59,6 +59,9 @@ function zotspip_vider_tables($nom_meta_version_base){
 	purger_repertoire(_DIR_VAR."cache-zotspip/");
 	include_spip('inc/flock');
 	spip_unlink(_DIR_VAR."cache-zotspip/");
+	
+	// On efface le schema Zotero
+	supprimer_fichier(_DIR_TMP . 'schema_zotero.php');
 }
 
 // Installer le schéma de données Zotero (schéma mis à jour le 19 mars 2012)

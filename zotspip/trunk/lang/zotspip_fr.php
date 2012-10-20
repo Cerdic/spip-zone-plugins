@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confimer_remplacement' => 'Remplacer <strong>@source@</strong> par <strong>@dest@</strong> ? Attention, cette opération est irréversible !',
 	'confirmer' => 'Confirmer',
 	'connexion_ok' => 'La connexion avec Zotero est opérationnelle.',
+	'contributeurs' => 'Contributeurs',
 	'createurs' => 'Auteur(s)',
 
 	// D
@@ -68,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_recente' => 'publications récentes',
 	'item_redacteur' => 'administrateurs + rédacteurs',
 	'item_resume_tags' => 'résumé + mots-clés',
-	'item_type' => 'par type de référence',
+	'item_type' => 'par type',
 	'item_type_annee' => 'par type puis par année',
 	'item_type_librairie_group' => 'groupe',
 	'item_type_librairie_user' => 'utilisateur',
@@ -137,9 +138,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reference_num' => 'Référence n°',
 	'remplacer_par' => 'Remplacer par',
 	'resume' => 'Résumé :',
-	'retour_liste_createurs' => 'Retour à la liste des contributeurs',
-	'retour_liste_tags' => 'Retour à la liste des mots-clés',
-	'retour_liste_zitems' => 'Retour à la liste des références',
 
 	// S
 	'sans_auteur' => 'Sans auteur',

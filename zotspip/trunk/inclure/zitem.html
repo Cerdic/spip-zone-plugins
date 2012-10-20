@@ -11,7 +11,7 @@
 	[(#TYPE|=={note}|oui)
 		<div class="note">#RESUME</div>]
 	[(#TYPE|=={attachment}|oui)
-		[(#FICHIER|oui)[<a href="#URL_PAGE{zotspip_file,id_zitem=#ID_ZITEM}">(#TITRE)</a>] [(#POIDS|>{0}|oui)[(#POIDS|taille_en_octets)]] [(<a href="(#URL)"><:zotspip:source:></a>)]]
+		[(#FICHIER|oui)[<a href="#URL_PAGE{zotspip_file,zitem=#ID_ZITEM}">(#TITRE)</a>] [(#POIDS|>{0}|oui)[(#POIDS|taille_en_octets)]] [(<a href="(#URL)"><:zotspip:source:></a>)]]
 		[(#FICHIER|non)[<a href="#URL">(#TITRE)</a>]]]
 	<abbr class="unapi-id" title="#ID_ZITEM"></abbr>
 	[(#ENV{details}|ou{#ENV{export}}|oui)

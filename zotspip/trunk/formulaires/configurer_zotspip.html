@@ -56,8 +56,8 @@
 			<li class="editer_page_biblio[ (#ENV**{erreurs}|table_valeur{page_biblio}|oui)erreur]">
 				<label for='page_biblio'><:zotspip:label_page_biblio:></label>
 				<select name="page_biblio" id="page_biblio">
-					<option value=""[(#ENV{page_biblio}|=={''}|oui)selected="selected"]><:non:></option>
-					<option value="on"[(#ENV{page_biblio}|=={on}|oui)selected="selected"]><:oui:></option>
+					<option value=""[(#ENV{page_biblio}|=={''}|oui)selected="selected"]><:item_non:></option>
+					<option value="on"[(#ENV{page_biblio}|=={on}|oui)selected="selected"]><:item_oui:></option>
 				</select>
 			</li>
 			<li class="editer_titre_page_biblio[ (#ENV**{erreurs}|table_valeur{titre_page_biblio}|oui)erreur]">
