@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Insertion dans le pipeline affiche_droite (SPIP)
+ * Insertion dans le pipeline boite_infos (SPIP)
  * 
  * Affiche un lien vers la page de statistiques de l'auteur sur sa page auteur
  * Affiche un lien vers la page de statistiques de l'article sur la page article
@@ -11,34 +11,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param array $flux Le contexte du pipeline
  * @return array $flux Le contexte modifié
  */
-function bigbrother_affiche_droite($flux){
-	if (($flux['args']['exec'] == 'auteur_infos') && ($flux['args']['id_auteur'] > 0)){
-		$boite = debut_boite_info(true)
-			. icone_horizontale(
-				_T('bigbrother:voir_statistiques_auteur'),
-				generer_url_ecrire('bigbrother_visites_articles_auteurs','id_auteur='.$flux['args']['id_auteur']),
-				find_in_path('bigbrother-24.png', 'images/', false),
-				'',
-				false
-			)
-			. fin_boite_info(true);
-		$flux['data'] .= $boite;
+function bigbrother_boite_infos($flux){
+	if (($flux['args']['type'] =='auteur') AND ($id_auteur = $flux['args']['id']) AND ($id_auteur > 0)){
+			$icone_horizontale = chercher_filtre('icone_horizontale');
+			$flux['data'] .= $icone_horizontale(generer_url_ecrire("bigbrother_visites_articles_auteurs","id_auteur=$id_auteur"),_T('bigbrother:voir_statistiques_auteur', array('')),"bigbrother-24.png");
 	}
-	elseif ($flux['args']['exec'] == 'articles'){
-		$boite = debut_boite_info(true)
-			. icone_horizontale(
-				_T('bigbrother:voir_statistiques_article'),
-				generer_url_ecrire('bigbrother_visites_articles_auteurs','id_article='.$flux['args']['id_article']),
-				find_in_path('bigbrother-24.png', 'images/', false),
-				'',
-				false
-			)
-			. fin_boite_info(true);
-		$flux['data'] .= $boite;
+	if (($flux['args']['type'] =='article') AND ($id_article = $flux['args']['id']) AND ($id_article > 0)){
+			$icone_horizontale = chercher_filtre('icone_horizontale');
+			$flux['data'] .= $icone_horizontale(generer_url_ecrire("bigbrother_visites_articles_auteurs","id_article=$id_article"),_T('bigbrother:voir_statistiques_article', array('')),"bigbrother-24.png");
 	}
-	return $flux;
+  return $flux;
 }
-
 
 function bigbrother_insert_head($flux){
 	$flux .= '
