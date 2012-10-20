@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -58,17 +58,17 @@ function exec_pdf_membres() {
 			}
 		}
 		// ainsi que les colonnes pour les champs hors table spip_asso_membres
-		if ($sent['email']=='on') {
+		if ($sent['email']) {
 			$pdf->AddCol('email',45 , utf8_decode(html_entity_decode(_T('asso:adherent_libelle_email'))), 'C');
-			$emails =  association_formater_emails($liste_id_auteurs, 'auteur', '');
+			$emails =  association_formater_emails($liste_id_auteurs, 'auteur', '', "\n");
 		}
-		if ($sent['adresse']=='on') {
+		if ($sent['adresse']) {
 			$pdf->AddCol('adresse',45 , utf8_decode(html_entity_decode(_T('coordonnees:label_adresse'))), 'L');
 			$adresses =  association_formater_adresses($liste_id_auteurs, 'auteur', '', "\n"," ");
 		}
-		if ($sent['telephone']=='on') {
+		if ($sent['telephone']) {
 			$pdf->AddCol('telephone',30 , utf8_decode(html_entity_decode(_T('coordonnees:label_numero'))), 'C');
-			$telephones = association_recuperer_telephones($liste_id_auteurs);
+			$telephones = association_formater_telephones($liste_id_auteurs, 'auteur', '', '', '', "\n");
 		}
 		$order = 'id_auteur';
 		if ($sent['nom_famille']=='on')
@@ -76,21 +76,12 @@ function exec_pdf_membres() {
 		$adresses_tels = array();
 		foreach($liste_id_auteurs as $id_auteur) {
 			$adresses_tels[$id_auteur] = array();
-			if ($sent['email']=='on')
-				$adresses_tels[$id_auteur]['email'] = implode("\n", $emails[$id_auteur]);
-			if ($sent['adresse']=='on')
-				$adresses_tels[$id_auteur]['adresse'] = preg_replace('/\&nbsp\;/', " ", preg_replace('/(\s*\<br\s*\/>\s*)+/i', "\n", implode("\n\n", $adresses[$id_auteur]))); // recupere toutes les adresses dans un seul string separees par \n\n et remplace les <br/> par des \n et &nbsp; par des " " car la chaine est en HTML
-			if ($sent['telephone']=='on') {
-				$first_tel = TRUE;
-				$telephones_string = '';
-				foreach ($telephones[$id_auteur] as $telephone) {
-					if (!$first_tel) {
-						$telephones_string .= "\n";
-					} else
-						$first_tel = FALSE;
-					$telephones_string .=  recuperer_fond("modeles/coordonnees_telephone", array ('telephone' => $telephone));
-				}
-				$adresses_tels[$id_auteur]['telephone'] = $telephones_string;
+			if ($sent['email'])
+				$adresses_tels[$id_auteur]['email'] = $emails[$id_auteur];
+			if ($sent['adresse'])
+				$adresses_tels[$id_auteur]['adresse'] = preg_replace('/\&nbsp\;/', " ", preg_replace('/(\s*\<br\s*\/>\s*)+/i', "\n", $adresses[$id_auteur])); // recupere toutes les adresses dans un seul string separees par \n\n et remplace les <br/> par des \n et &nbsp; par des " " car la chaine est en HTML
+			if ($sent['telephone']) {
+				$adresses_tels[$id_auteur]['telephone'] = preg_replace('/\&nbsp\;/', " ", preg_replace('/(\s*\<br\s*\/>\s*)+/i', "\n", $telephones[$id_auteur]));
 			}
 		}
 

@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010 Emmanuel Saint-James
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -119,9 +119,30 @@ function association_bouton_act($texte, $image, $script='', $exec_args='', $img_
 
 /**
  * bouton affich[age|er] v[ue|oir] visualis[ation|er]
+ * bouton list[ing|er] (car tres souvent on va mettre l'element en evidence au sein d'une liste)
  */
-function association_bouton_affich($objet, $args='', $tag='td') {
-	$res = association_bouton_act('bouton_voir', 'voir-12.png', "$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#x2380;"', $tag);
+function association_bouton_list($objet, $args='', $tag='td') {
+	switch ($objet) { // infobulles au cas par cas
+		case 'adherent' :
+			$titre = 'adherent_label_voir_membre';
+			break;
+		case 'comptes' :
+			$titre = 'adherent_label_voir_operation';
+			break;
+		case 'inscrits_activite' :
+			$titre = 'activite_bouton_voir_liste_inscriptions';
+			break;
+		case 'membres_groupe' :
+			$titre = 'voir_membres_groupe';
+			break;
+		case 'prets' :
+			$titre = 'prets_nav_gerer';
+			break;
+		default :
+			$titre = 'bouton_voir';
+			break;
+	}
+	$res = association_bouton_act($titre, 'voir-12.png', "$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#x2380;"', $tag);
 	return $res;
 }
 
@@ -142,10 +163,21 @@ function association_bouton_suppr($objet, $args='', $tag='td') {
 }
 
 /**
- * bouton paye[ment|r] (cotis[ation|er], contribu[tion financiere|er financierement])
+ * bouton paye[ment|r] cotis[ation|er], contribu[tion financiere|er financierement]
  */
 function association_bouton_paye($objet, $args='', $tag='td') {
-	$res = association_bouton_act('??', 'cotis-12.gif', "ajout_$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#164;"', $tag);
+	switch ($objet) { // infobulles au cas par cas
+		case 'ajout_cotisation' :
+			$titre = 'adherent_label_ajouter_cotisation';
+			break;
+		case 'edit_activite' :
+			$titre = 'activite_bouton_maj_inscription';
+			break;
+		default :
+			$titre = ' '; // ??
+			break;
+	}
+	$res = association_bouton_act($titre, 'cotis-12.gif', "$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#164;"', $tag); // "ajout_$objet" jusqu'a ce que ajout_participation fusionne avec edit_activite
 	return $res;
 }
 
@@ -784,7 +816,8 @@ function association_formater_typecoord($classe, $valeur, $sep=' ') {
  * @param string $href_post
  *   Complement du precedant dans le cas de certains protocoles
  *   Par exemple, avec $href_pre='sip:' on a $href_post='@ip.ou.hote.passerelle;user=phone'
- *  @return array $telephones_string
+ * @param string $sep
+ * @return array $telephones_string
  *   Liste des numeros formates en HTML.
  *   Cette fonction s'occupe surtout du balisage (micro-formate) ;
  *   la localisation "visuelle" du numero est confie au modele coordonnees_telephone
@@ -794,7 +827,7 @@ function association_formater_typecoord($classe, $valeur, $sep=' ') {
  *   http://microformats.org/wiki/hcard-fr#Lisible_par_Humain_vs._Machine
  *   http://microformats.org/wiki/vcard-suggestions#TEL_Type_Definition
  */
-function association_formater_telephones($id_objets, $objet='auteur', $html_span='div', $href_pre='tel:', $href_post='') {
+function association_formater_telephones($id_objets, $objet='auteur', $html_span='div', $href_pre='tel:', $href_post='', $sep=' ') {
 	$id_objets = association_recuperer_liste($id_objets, FALSE);
 	if ($objet) { // ancien comportement : ce sont les id_auteur qui sont transmis
 		$telephones_array = array(); // initialisation du tableau des donnees
@@ -827,7 +860,8 @@ function association_formater_telephones($id_objets, $objet='auteur', $html_span
 				unset($telephone['id_objet']); // ne devrait plus etre traite par le modele
 				unset($telephone['id_numero']); // ne devrait pas etre utilise par le modele
 			}
-			$telephones_string[$id_objet] .=  recuperer_fond("modeles/coordonnees_telephone", $telephone) .($html_span?('</'.($href_pre?'a':'abbr')."></$htm_span>\n"):'');
+			$telephone['_spc'] = $space; // parametre supplementaire pour le modele
+			$telephones_string[$id_objet] .=  recuperer_fond("modeles/coordonnees_telephone", $telephone) .($html_span?('</'.($href_pre?'a':'abbr')."></$htm_span>\n"):'') .$sep;
 		}
 	}
 	return $telephones_string;
@@ -854,7 +888,7 @@ function association_formater_telephones($id_objets, $objet='auteur', $html_span
  * @param string $space
  *   Espaceur de blocs utilise par le modele de presentation localisee (cf. note)
  *   Par defaut : "&nbsp;" puisque le formatage est en HTML
- *  @return array $adresses_string
+ * @return array $adresses_string
  *   Liste des adresses formates en HTML.
  *   Cette fonction s'occupe surtout du balisage (micro-formate) ;
  *   la disposition des elements d'adresse est confie. au modele coordonnees_adresse
@@ -949,7 +983,7 @@ function association_formater_adresses($id_objets, $objet='auteur', $html_span='
  * @param string $html_span
  *   Balise-HTML (paire ouvrante/fermante) encadrant l'ensemble avec lien cliquable
  *   Par defaut : "div" avec la classe "email" (ne rien mettre pour desactiver)
- *  @return array $emails_string
+ * @return array $emails_string
  *   Liste des courriels formates en HTML.
  * @note
  *   http://microformats.org/wiki/hcard-fr#adr_tel_email_types
@@ -1026,7 +1060,7 @@ function association_formater_emails($id_objets, $objet='auteur', $html_span='di
  * @param string $sep
  *   Separateur entre les adresse.
  *   Par defaut l'espace.
- *  @return array $urls_string
+ * @return array $urls_string
  *   Liste des liens formates en HTML.
  * @note
  *   http://microformats.org/wiki/vcard-suggestions#URL_Type_Definition
@@ -1512,6 +1546,22 @@ function association_selectionner_lettre($lettre='', $table, $champ, $exec='', $
 		$pager .= ' <a href="'. generer_url_ecrire($exec) .'">'. _T('asso:entete_tous') .'</a>';
 	}
     return ($lst?$res:($pager.$plus));
+}
+
+/**
+ * Selecteur d'exercice ou d'annee parmi celles disponibles dans une table donnee
+ *
+ * @param int $periode
+ *   Annee ou exercice selectionnee.
+ *   (dernier exercice ou annee courante par defaut)
+ * @param string $champ
+ *   Nom (sans prefixe "date_") du champ contenant les annees recherchees
+ *
+ * @see association_selectionner_annee
+ * @see association_selectionner_exercice
+ */
+function association_selectionner_periode($periode, $table, $champ) {
+	return $GLOBALS['association_metas']['exercices'] ? association_selectionner_exercice($periode) : association_selectionner_annee($periode, $table, $champ) ;
 }
 
 //@}
@@ -2179,9 +2229,6 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
  *   Le nom de l'objet : correspond a la table sans prefixe "spip_asso" et sans le "s" final
  * @param int $id
  *   ID de la ligne a recuperer
- * @param bool $pluriel
- *   Indique qu'il s'agit d'une table avec (vrai, par defaut) ou sans (faux) un
- *   suffixe "s". Mis a FALSE, permet de traiter le cas des tables _plan|destination|destination_op !
  *
 ** @{ */
 
@@ -2198,8 +2245,8 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
  * - exercice_date_debut($exercice) <=> sql_asso1champ('exercice', $exercice, 'debut')
  * - exercice_date_fin($exercice) <=> sql_asso1champ('exercice', $exercice, 'fin')
  */
-function sql_asso1champ($table, $id, $champ, $pluriel=TRUE) {
-	return sql_getfetsel($champ, "spip_asso_$table".($pluriel?'s':''), "id_$table=".intval($id));
+function sql_asso1champ($table, $id, $champ) {
+	return sql_getfetsel($champ, table_objet_sql("asso_$table"), id_table_objet("asso_$table").'='.intval($id) );
 }
 
 /**
@@ -2208,8 +2255,8 @@ function sql_asso1champ($table, $id, $champ, $pluriel=TRUE) {
  * @return array
  *   Tableau des champs sous forme : 'nom_du_champ'=>"contenu du champ"
  */
-function sql_asso1ligne($table, $id, $pluriel=TRUE) {
-	return sql_fetsel('*', "spip_asso_$table".($pluriel?'s':''), "id_$table=".intval($id));
+function sql_asso1ligne($table, $id) {
+	return sql_fetsel('*', table_objet_sql("asso_$table"), id_table_objet("asso_$table").'='.intval($id) );
 }
 
 /**
@@ -2279,7 +2326,7 @@ function sql_asso1set($operateur='UNION', $q1=array(), $q2=array() ) {
  *
  * @param string $type
  *   Type d'objet|page pour lequel on passe le parametre en question.
- * @param string $table
+ * @param string $objet
  *   Nom de la table (sans prefixe "spip") contenant la collection d'objets.
  *   Sa presence indique de retourner des parametres supplementaires et/ou de
  *   faire des controles supplementaires. Ce parametre est surtout utlise dans les pages d'edition/suppression
@@ -2297,19 +2344,19 @@ function sql_asso1set($operateur='UNION', $q1=array(), $q2=array() ) {
  * @return int $id
  * @return array($id, $row)
  */
-function association_passeparam_id($type='', $table='') {
+function association_passeparam_id($type='', $objet='') {
 	if ($type) // recuperer en priorite : id_compte, id_don, id_evenement, id_ressource, id_vente, etc.
 		$id = intval(_request("id_$type", $_GET));
 	else
 		$id = 0;
 	if (!$id) // pas d'id_... alors c'est le nom generique qui est utilise
 		$id = intval(_request('id'));
-	if ( $type && $table ) {
-		$row = sql_fetsel('*', "spip_$table", "id_$type=$id");
+	if ( $type && $objet ) {
+		$row = sql_fetsel('*', table_objet_sql($objet), id_table_objet($objet).'='.sql_quote($id) );
 		if (!$row) { // eviter un affichage erronne dans la page et des requetes supplementaire (au moins celle de DROP dans le cas d'une page suppr_...)
 			include_spip('inc/minipres');
-			echo minipres(_T('zxml_inconnu_id') .": $id"); // ceci se produit habituellement pour un ID inexistant ; ce qui ne devrait arriver que si le parametre est passe manuellement et non via une page legitime
-			exit;
+			echo minipres(_T('zxml_inconnu_id', array('id'=>$id) )); // ceci se produit habituellement pour un ID inexistant ; ce qui ne devrait arriver que si le parametre est passe manuellement et non via une page legitime
+			exit; // on arret tout ici (le reste de la page sera fausse ou bancale sinon)
 		} else
 			return array($id, $row);
 	} else
@@ -2322,7 +2369,7 @@ function association_passeparam_id($type='', $table='') {
  * @return int $an
  * @return array($an, $sql_where)
  */
-function association_passeparam_annee($type='', $table='', $id=0) {
+function association_passeparam_annee($type='', $objet='', $id=0) {
 	if ($type) // recuperer en priorite :
 		$an = intval(_request("annee_$type", $_GET));
 	else
@@ -2331,19 +2378,17 @@ function association_passeparam_annee($type='', $table='', $id=0) {
 		$an = intval(_request('annee'));
 	if (!$an) // annee non precisee
 		$an = date('Y'); // on prend l'annee courante
-	if ($type && $table) {
+	if ($type && $objet) {
+//		$desc_table = charger_fonction('trouver_table', 'base');
 		if ($id) { // on veut un enregistrement precis : on ne va pas tenir compte de la l'annee passee en requete...
-			$pk = substr($table, (strpos($table, 'asso_')===0?5:0) ); // virer le prefixe "asso_"
-			$pk = substr($pk, 0, strlen($pk)-($pk[strlen($pk)-1]=='s'?1:0) ); // virer le suffixe "s"
-			$an = sql_getfetsel("DATE_FORMAT(date_$type, '%Y')", "spip_$table", "id_$pk=$id"); // ...on recupere l'annee correspondante a l'enregistrement recherche
+			$an = sql_getfetsel("DATE_FORMAT(date_$type, '%Y')", table_objet_sql($objet), id_table_objet($objet).'='.sql_quote($id) ); // ...on recupere l'annee correspondante a l'enregistrement recherche
 		} else { // on peut faire mieux que prendre l'annee courante ou une annee farfelue passee en parametre
-			$an = min(sql_getfetsel("MAX(DATE_FORMAT(date_$type, '%Y')) AS an_max", "spip_$table", ''), $an);
-			$an = max(sql_getfetsel("MIN(DATE_FORMAT(date_$type, '%Y')) AS an_min", "spip_$table", ''), $an);
+			$an = min(sql_getfetsel("MAX(DATE_FORMAT(date_$type, '%Y')) AS an_max", table_objet_sql($objet), ''), $an);
+			$an = max(sql_getfetsel("MIN(DATE_FORMAT(date_$type, '%Y')) AS an_min", table_objet_sql($objet), ''), $an);
 		}
 		if (!$an) // ID inexistant (donc annee non trouvee) ou table vide (du coup annee vide)
 			$an = date('Y'); // on prend l'annee courante retomber sur nos pattes et surtout ne pas fausser la requete
-		$sql_where = "DATE_FORMAT(date_$type, '%Y')=$an";
-		return array($an, $sql_where);
+		return array($an, "DATE_FORMAT(date_$type, '%Y')=$an");
 	} else
 		return $an;
 }
@@ -2352,12 +2397,23 @@ function association_passeparam_annee($type='', $table='', $id=0) {
  * &exercice=
  *
  * @return int $exo
+ * @return array($exo, $sql_where)
  */
-function association_passeparam_exercice() {
+function association_passeparam_exercice($type='', $objet='', $id=0) {
 	$exo = intval(_request('exercice'));
 	if (!$exo) // exercice non precise
 		$exo = sql_getfetsel('id_exercice','spip_asso_exercices','','','date_debut DESC'); // on recupere le dernier exercice en date
-	return $exo;
+	if ($type && $objet) {
+		if ($id) { // on veut un enregistrement precis : on ne va pas tenir compte de l'exercice passe en requete...
+			$dt = sql_getfetsel("date_$type", table_objet_sql($objet), id_table_objet($objet).'='.sql_quote($id) ); // ...on recupere la date correspondante a l'enregistrement recherche
+			$exercice = sql_fetsel('*','spip_asso_exercices', "date_debut<='$dt' AND date_fin>='$dt'", '','date_debut DESC'); // on recupere le dernier exercice correspondant
+		}
+		if (!$exercice) { // pas d'ID ou table vide ou mauvais ID
+			$exercice = sql_fetsel('*','spip_asso_exercices', "id_exercice=$exo"); // on recupere l'exercice indique
+		}
+		return array($exercice['id_exercice'], "date_$type>='$exercicee[date_debut]' AND date_$type<='$exercice[date_fin]'");
+	} else
+		return $exo;
 }
 
 /**
@@ -2394,6 +2450,17 @@ function association_passeparam_statut($type='', $defaut='') {
 		return array($statut, $sql_where);
 	} else
 		return $statut;
+}
+
+/**
+ * &exercice= | &annee=
+ *
+ * @see association_passeparam_annee
+ * @see association_passeparam_exercice
+ */
+function association_passeparam_periode($type='', $objet='', $id=0) {
+	$PeriodeCompatable = 'association_passeparam_'.($GLOBALS['association_metas']['exercices']?'exercice':'annee');
+	return $PeriodeCompatable($type, $objet, $id);
 }
 
 /** @} */
@@ -2521,6 +2588,7 @@ function association_trouver_iextras($ObjetEtendu, $id=0) {
 	$champsExtrasVoulus = array();
 	if (test_plugin_actif('IEXTRAS')) { // le plugin "Interfaces pour ChampsExtras2" est installe et active : on peut donc utiliser les methodes/fonctions natives...
 		include_spip('inc/iextras'); // charger les fonctions de l'interface/gestionnaire (ce fichier charge les methode du core/API)
+		include_spip('inc/cextras_gerer'); // semble necessaire aussi
 		if ($id)
 			include_spip('cextras_pipelines'); // pour eviter le "Fatal error : Call to undefined function cextras_enum()" en recuperant un fond utilisant les enum...
 		$ChampsExtrasGeres = iextras_get_extras_par_table(); // C'est un tableau des differents "objets etendus" (i.e. tables principaux SPIP sans prefixe et au singulier -- par exemple la table 'spip_asso_membres' correspond a l'objet 'asso_membre') comme cle.
@@ -2530,7 +2598,7 @@ function association_trouver_iextras($ObjetEtendu, $id=0) {
 				if ( $id ) {
 					$desc_table = charger_fonction('trouver_table', 'base');
 					$champs = $desc_table("spip_$ChampExtraInfos[table]s");
-					$datum_raw = sql_getfetsel($ChampExtraInfos['champ'], "spip_$ChampExtraInfos[table]s", $champs['key']['PRIMARY KEY'].'='.intval($id) ); // on recupere les donnees... (il faut que la table ait le nom de l'objet et le suffixe "s" :-S)
+					$datum_raw = sql_getfetsel($ChampExtraInfos['champ'], table_objet_sql($ChampExtraInfos['table']), $champs['key']['PRIMARY KEY'].'='.sql_quote($id) ); // on recupere les donnees...
 					$datum_parsed = recuperer_fond('extra-vues/'.$ChampExtraInfos['type'], array (
 						'champ_extra' => $ChampExtraInfos['champ'],
 						'label_extra' => '', // normalement : _TT($ChampExtraInfos['label']), avec la chaine vide on aura juste "<strong></strong> " a virer...
@@ -2552,7 +2620,7 @@ function association_trouver_iextras($ObjetEtendu, $id=0) {
 			if ($ChampExtra['table']==$ObjetEtendu) // c'est un champ extra de la 'table' ou du '_type' d'objet qui nous interesse
 				$label = $TT($ChampExtra['label']);
 				if ( $id ) {
-					$datum_raw = sql_getfetsel($ChampExtra['champ'], $ChampExtra[_table_sql], "id__$ChampExtra[_type]=".intval($id) ); // on recupere les donnees... (il faut que l'identifiant soit l'objet prefixe de "id_" :-S)
+					$datum_raw = sql_getfetsel($ChampExtra['champ'], $ChampExtra['_table_sql'], id_table_objet($ChampExtra['_type']).'='.intval($id) ); // on recupere les donnees...
 					switch ( $ChampExtra['type'] ) { // Comme on n'est pas certain de pouvoir trouver "inc/iextra.php" et "inc/cextra.php" on a des chance que foire par moment. On va donc gerer les cas courants manuellement.
 						case 'case' : // "<select type='checkbox' .../>..."
 						case 'option' : // "<select ...>...</select>"
@@ -2597,7 +2665,7 @@ function association_trouver_iextras($ObjetEtendu, $id=0) {
 										$valeur = 'titre'; // sauf coincidence heurese, on devrait avoir une erreur...
 										break;
 								}
-								$datum_parsed = association_formater_idnom($datum_raw, array("spip_$ChampExtra[type]s", $valeur, 'id_'.$raccourci) , ''); // on recupere la donnee grace a la cle etrangere... (il faut que la table soit suffixee de "s" et que l'identifiant soit l'objet prefixe de "id_" :-S)
+								$datum_parsed = association_formater_idnom($datum_raw, array(table_objet_sql($ChampExtra[type]), $valeur, 'id_'.$raccourci) , ''); // on recupere la donnee grace a la cle etrangere... (il faut que la table soit suffixee de "s" et que l'identifiant soit l'objet prefixe de "id_" :-S)
 							}
 							break;
 						case 'asso_activite' :

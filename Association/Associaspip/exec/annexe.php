@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2010--2011 Emmanuel Saint-James
  * @copyright Copyright (c) 201108 Marcel Bolla
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
@@ -20,25 +20,24 @@ function exec_annexe() {
 		include_spip('inc/navigation_modules');
 		include_spip('inc/association_comptabilite');
 // initialisations
-		$ids = association_passe_parametres_comptables();
-		$exercice_data = sql_asso1ligne('exercice', $ids['exercice']);
+		$ids = association_passeparam_compta();
 // traitements
 		onglets_association('titre_onglet_comptes', 'comptes');
 		// INTRO : rappel de l'exercicee affichee
-		$infos['exercice_entete_debut'] = association_formater_date($exercice_data['date_debut'], 'dtstart');
-		$infos['exercice_entete_fin'] = association_formater_date($exercice_data['date_fin'], 'dtend');
-		echo association_totauxinfos_intro($exercice_data['intitule'], 'exercice', $ids['exercice'], $infos);
+		$infos['exercice_entete_debut'] = association_formater_date($ids['debut_periode'], 'dtstart');
+		$infos['exercice_entete_fin'] = association_formater_date($ids['fin_periode'], 'dtend');
+		echo association_totauxinfos_intro($ids['titre_periode'], 'exercice', $ids['id_periode'], $infos);
 		// datation et raccourcis
-		raccourcis_association(array('comptes', "exercice=$exercice"), array(
-			'encaisse_titre_general' => array('finances-24.png', array('encaisse', "exercice=$exercice") ),
-			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "exercice=$exercice") ),
-			'cpte_bilan_titre_general' => array('finances-24.png', array('bilan', "exercice=$exercice") ),
+		raccourcis_association(array('comptes', "$ids[type_periode]=$ids[id_periode]"), array(
+			'encaisse_titre_general' => array('finances-24.png', array('encaisse', "$ids[type_periode]=$ids[id_periode]") ),
+			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "$ids[type_periode]=$ids[id_periode]") ),
+			'cpte_bilan_titre_general' => array('finances-24.png', array('bilan', "$ids[type_periode]=$ids[id_periode]") ),
 		));
-		debut_cadre_association('finances-24.png', 'annexe_titre_general', $exercice_data['intitule']);
+		debut_cadre_association('finances-24.png', 'annexe_titre_general', $ids['titre_periode']);
 		// Filtres
 		filtres_association(array(
-			'exercice'=>$ids['exercice'],
-			'destination'=>$ids['destination'],
+			'periode' => array($ids['id_periode'], 'asso_comptes', 'operation'),
+			'destination' => $ids['destination'],
 		), 'annexe');
 		echo _T('asso:non_implemente');
 		// http://www.aquadesign.be/actu/article-3678.php

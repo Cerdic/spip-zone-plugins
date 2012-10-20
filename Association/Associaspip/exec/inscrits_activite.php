@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -18,7 +18,7 @@ function exec_inscrits_activite() {
 	} else {
 		include_spip ('inc/navigation_modules');
 		$id_evenement = association_passeparam_id('evenement');
-		list($annee, $critere) = association_passeparam_annee('debut', 'evenements', $id_evenement);
+		list($id_periode, $critere_periode) = association_passeparam_periode('debut', 'evenements', $id_evenement);
 		onglets_association('titre_onglet_activite', 'activites');
 		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement");
 		$statut = association_passeparam_statut();
@@ -46,7 +46,7 @@ function exec_inscrits_activite() {
 		if ( test_plugin_actif('AGENDA') && sql_countsel('spip_evenements_participants', "id_evenement=$id_evenement", 'id_auteur') ) { // inscrits via le formulaire d'Agenda2
 			$res['activite_bouton_synchroniser_inscriptions'] = array('reload-32.png', array('synchronis_activites', "id=$id_evenement"));
 		}
-		raccourcis_association(array('activites',"annee=$annee"), $res);
+		raccourcis_association(array('activites',($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode"), $res);
 		debut_cadre_association('activites.gif', 'activite_titre_inscriptions_activites');
 		// FILTRES
 		$filtre_statut = '<select name="statut" onchange="form.submit()">';
@@ -55,7 +55,7 @@ function exec_inscrits_activite() {
 		$filtre_statut .= '<option value="-1"'. (intval($statut)<0?' selected="selected"':'') .'>'. _T('asso:activite_entete_impayees') .'</option>';
 		$filtre_statut .= '</select>';
 		filtres_association(array(
-//			'annee' => array($annee, 'asso_activites', 'inscription'),
+//			'periode' => array($id_periode, 'asso_activites', 'inscription'),
 #			'id' => $id_activite,
 		), 'inscrits_activite', array(
 			'statut' => $filtre_statut,
@@ -78,7 +78,7 @@ function exec_inscrits_activite() {
 			), // entetes et formats des donnees
 			array(
 				array('suppr', 'activite', 'id=$$'),
-				array('act', 'activite_bouton_maj_inscription', 'cotis-12.gif', 'edit_activite', 'id=$$'),
+				array('paye', 'edit_activite', 'id=$$'),
 			), // boutons d'action
 			'id_activite', // champ portant la cle des lignes et des boutons
 			array('pair', 'valide'), 'statut_paiement'

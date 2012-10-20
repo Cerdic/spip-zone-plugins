@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -18,15 +18,13 @@ function exec_dons() {
 	} else {
 		include_spip ('inc/navigation_modules');
 		$id_don = association_passeparam_id('don');
-		list($annee, $critere_periode) = association_passeparam_annee('don', 'asso_dons', $id_don);
+		list($id_periode, $critere_periode) = association_passeparam_annee('don', 'asso_dons', $id_don);
 		if ($id_don) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
 			$type = '';
 		} else { // on peut prendre en compte les filtres ; on recupere les parametres :
  			$type = _request('type'); // type de don
 		}
 		onglets_association('titre_onglet_dons', 'dons');
-		// INTRO : nom du module et annee affichee
-		echo association_totauxinfos_intro('','dons',$annee);
 		// TOTAUX : nombre de dons selon leur nature
 		$liste_effectifs = array(
 			'argent' => sql_countsel('spip_asso_dons', "argent<>0 AND colis='' AND  $critere_periode"),
@@ -42,10 +40,10 @@ function exec_dons() {
 		// TOTAUX : montants des dons et remboursements financiers
 		$dons_financiers = sql_getfetsel('SUM(argent) AS somme_recettes', 'spip_asso_dons', "argent AND $critere_periode" );
 		$remboursements = sql_getfetsel('SUM(argent) AS somme_reversees', 'spip_asso_dons', "argent AND contrepartie AND $critere_periode" );
-		echo association_totauxinfos_montants($annee, $dons_financiers, $remboursements);
+		echo association_totauxinfos_montants($id_periode, $dons_financiers, $remboursements);
 		// datation et raccourcis
 		raccourcis_association(array(), array(
-			'ajouter_un_don' => array('ajout-24.png', 'edit_don'),
+			'ajouter_un_don' => array('ajout-24.png', 'edit_don', array('gerer_dons', 'association') ),
 		));
 		debut_cadre_association('dons-24.gif', 'tous_les_dons');
 		// FILTRES
@@ -56,7 +54,7 @@ function exec_dons() {
 //		$filtre_typedon .= '<option value="argent AND colis"'. (($type=='argent AND colis' OR $type=='colis AND argent')?' selected="selected"':'') .'>'. _T('asso:dons_mixtes') .'</option>';
 		$filtre_typedon .= '</select>';
 		filtres_association(array(
-			'annee' => array($annee, 'asso_dons', 'don'),
+			'periode' => array($id_periode, 'asso_dons', 'don'),
 #			'id' => $id_don,
 		), 'dons', array(
 			'type' => $filtre_typedon,
@@ -75,14 +73,14 @@ function exec_dons() {
 //				'contrepartiet' => array('asso:argent', 'texte', 'propre'),
 //				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),
 			), // entetes et formats des donnees
-			array(
+			autoriser('gerer_dons', 'association') ? array(
 				array('suppr', 'don', 'id=$$'),
 				array('edit', 'don', 'id=$$'),
-			), // boutons d'action
+			) : array(), // boutons d'action
 			'id_don', // champ portant la cle des lignes et des boutons
 			array('argent'=>'pair', 'colis'=>'prospect', 'mixte'=>'impair'), 'type_don', $id_don
 		);
-		echo association_selectionner_souspage(array('spip_asso_dons', "$critere_type $critere_periode"), 'dons', "annee=$annee".($type?"&type='$type'":'') );
+		echo association_selectionner_souspage(array('spip_asso_dons', "$critere_type $critere_periode"), 'dons', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($type?"&type='$type'":'') );
 		fin_page_association();
 	}
 }

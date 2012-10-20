@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -20,7 +20,6 @@ function exec_edit_groupe_autorisations() {
 		list($id_groupe, $groupe) = association_passeparam_id('groupe', 'asso_groupes');
 		onglets_association('gerer_les_autorisations', 'association');
 		// INFO
-		$infos['entete_commentaire'] = $groupe['commentaire'];
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe")) );
 		echo association_totauxinfos_intro(_T("asso:groupe_".$id_groupe), 'groupe', $id_groupe, $infos );
 		// datation et raccourcis

@@ -5,14 +5,14 @@
  * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_activite() {
-	if (!autoriser('associer', 'activites')) {
+	if (!autoriser('gerer_activites', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -30,7 +30,7 @@ function exec_suppr_activite() {
 		$infos['nom'] = association_formater_idnom($activite['id_auteur'], $activite['nom'], '');
 //		$infos['date'] = association_formater_date($activite['date_inscription']);
 		$infos['date'] = association_formater_date($activite['date_paiement']);
-		$infos['activite_entete_inscrits'] = association_formater_nombre($activite['quantite'], 1);
+		$infos['entete_quantite'] = association_formater_nombre($activite['quantite'], 1);
 		$infos['entete_montant'] = association_formater_prix($activite['prix_activite'], 'fees');
 		association_totauxinfos_intro('', 'activite', $id_activite, $infos );
 		// datation et raccourcis

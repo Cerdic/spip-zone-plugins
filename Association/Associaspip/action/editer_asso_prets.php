@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -57,8 +57,7 @@ function action_editer_asso_prets_dist() {
 	// on modifie l'opertation comptable associee a la caution
 	if ( !$erreur && $caution && $GLOBALS['association_metas']['pc_cautions'] ) { // les cautions sont encaissees
 	    $association_imputation = charger_fonction('association_imputation', 'inc');
-	    $critere = $association_imputation('pc_cautions');
-	    $critere .= ($critere?' AND ':'') ."id_journal=$id_pret";
+	    $critere = $association_imputation('pc_cautions', $id_pret);
 	    $err2 = association_modifier_operation_comptable($date_caution1, $caution, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:caution'),'num'=>$id_pret) ) .$ref_pret, $GLOBALS['association_metas']['pc_cautions'], _request('mode_caution1'), $id_pret, sql_getfetsel('id_compte', 'spip_asso_comptes', "$critere AND recette>0") ); // depot
 	    $err3 = association_modifier_operation_comptable($date_caution0, 0, $caution, '['. _T('asso:titre_num', array('titre'=>_T('local:caution'),'num'=>$id_pret) ) .$ref_pret, $GLOBALS['association_metas']['pc_cautions'], _request('mode_caution0'), $id_pret, sql_getfetsel('id_compte', 'spip_asso_comptes', "$critere AND depense>0") ); // restitution
 	    $erreur = ($err2?$err2:$err3);

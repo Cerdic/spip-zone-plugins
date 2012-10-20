@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2010--2011 Emmanuel Saint-James
  * @copyright Copyright (c) 201108 Marcel Bolla
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))

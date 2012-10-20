@@ -5,20 +5,20 @@
  * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_prets() {
-	if (!autoriser('associer', 'activites')) {
+	if (!autoriser('voir_prets', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
 		include_spip ('inc/navigation_modules');
 		$id_pret = association_recuperer_entier('id_pret');
-		list($annee, $critere_periode) = association_passeparam_annee('sortie', 'asso_prets', $id_pret);
+		list($id_periode, $critere_periode) = association_passeparam_periode('sortie', 'asso_prets', $id_pret);
 		if ($id_pret) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
 			$id_ressource = sql_getfetsel('id_ressource', 'spip_asso_prets', "id_pret=$id_pret");
 			$ressource = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource");
@@ -64,20 +64,19 @@ function exec_prets() {
 		}
 		$infos['statut'] = '<span class="'.(is_numeric($ressource['statut'])?'quanttity':'availability').'">'. association_formater_puce($ressource['statut'], $puce, "ressources_libelle_statut_$type") .'</span>';
 		echo '<div class="hproduct">'. association_totauxinfos_intro('<span class="n">'.$ressource['intitule'].'</span>', 'ressource', $id_ressource, $infos, 'asso_ressource') .'</div>';
-		// TOTAUX : nombres d'emprunts de la ressource depuis le debut
+		// TOTAUX : nombres d'emprunts de la ressource pour la periode
 		$q_where = "id_ressource=$id_ressource AND $critere_periode ";
 		echo association_totauxinfos_effectifs('prets', array(
 			'pair' => array( 'prets_restitues', sql_countsel('spip_asso_prets', "$q_where AND date_retour<NOW() AND date_retour<>'0000-00-00T00:00:00' "), ), // restitues, termines, anciens, ...
 			'impair' => array( 'prets_encours', sql_countsel('spip_asso_prets', "$q_where AND (date_retour>NOW() OR date_retour='0000-00-00T00:00:00' ) "), ), // dus, en attente, en cours, nouveaux, ...
 		));
-		// STATS sur la duree et le montant des emprunts
-		echo association_totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree','entete_montant'=>'duree*prix_unitaire',), "id_ressource=$id_ressource");
-		// TOTAUX : montants generes par les umprunts de la ressources
-		$recettes = sql_getfetsel('SUM(duree*prix_unitaire) AS totale', 'spip_asso_prets', "id_ressource=$id_ressource");
-		echo association_totauxinfos_montants('emprunts', $recettes, $ressource['prix_acquisition']); // /!\ les recettes sont calculees simplement (s'il y a un systeme de penalite pour retard, il faut s'adapter a la saisie pour que le module soit utile) ; les depenses ne prennent pas en compte les eventuels frais d'entretien ou de reparation de la ressource...
+		// STATS sur la duree et le montant des emprunts pendant la periode
+		echo association_totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree','entete_montant'=>'duree*prix_unitaire',), $q_where);
+		// TOTAUX : montants generes par les umprunts de la ressources depuis le debut
+		echo association_totauxinfos_montants('emprunts', sql_getfetsel('SUM(duree*prix_unitaire) AS totale', 'spip_asso_prets', "id_ressource=$id_ressource"), $ressource['prix_acquisition']); // /!\ les recettes sont calculees simplement (s'il y a un systeme de penalite pour retard, il faut s'adapter a la saisie pour que le module soit utile) ; les depenses ne prennent pas en compte les eventuels frais d'entretien ou de reparation de la ressource...
 		// datation et raccourcis
 		if ( (is_numeric($ressource['statut']) && $ressource['statut']>0) || $ressource['statut']=='ok' )
-			$res['prets_nav_ajouter'] = array('creer-12.gif', array('edit_pret', "id_ressource=$id_ressource&id_pret="), );
+			$res['prets_nav_ajouter'] = array('creer-12.gif', array('edit_pret', "id_ressource=$id_ressource&id_pret="), array('gerer_prets', 'association') );
 		raccourcis_association('ressources', $res);
 		debut_cadre_association('pret-24.gif', 'prets_titre_liste_reservations');
 		// FILTRES
@@ -91,7 +90,7 @@ function exec_prets() {
 		$filtre_statut .= '>'. _T('asso:prets_restitues') .'</option>';
 		$filtre_statut .= '</select>';
 		filtres_association(array(
-			'annee' => array($annee, 'asso_prets', 'sortie'),
+			'periode' => array($id_periode, 'asso_prets', 'sortie'),
 		), 'prets', array(
 			'' => "<input type='hidden' name='id' value='$id_ressource' />", // "prets&id=$id_ressource" a la place de 'prets' ne fonctionne pas...
 			'statut' => $filtre_statut,
@@ -116,14 +115,14 @@ function exec_prets() {
 				'duree' => array('asso:entete_duree', 'duree', $unite),
 				'date_retour' => array('asso:prets_entete_date_retour', 'date', 'dtend'),
 			), // entetes et formats des donnees
-			array(
+			autoriser('gerer_prets', 'association') ? array(
 				array('suppr', 'pret', 'id=$$'),
 				array('edit', 'pret', 'id=$$'),
-			), // boutons d'action
+			) : array(), // boutons d'action
 			'id_pret', // champ portant la cle des lignes et des boutons
 			array('pair', 'impair'), 'statut_sortie', $id_pret
 		);
-		echo association_selectionner_souspage(array('spip_asso_prets', $q_where), 'prets', "id=$id_ressource&annee=$annee".($etat?"&etat='$etat'":'') );
+		echo association_selectionner_souspage(array('spip_asso_prets', $q_where), 'prets', "id=$id_ressource&".($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($etat?"&etat='$etat'":'') );
 		fin_page_association();
 	}
 }

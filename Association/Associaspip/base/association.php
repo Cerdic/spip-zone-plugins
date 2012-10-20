@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -79,7 +79,7 @@ function association_declarer_tables_principales($tables_principales) {
 	//-- Table COMPTES ------------------------------------------
 	$spip_asso_comptes = array(
 		'id_compte' => "BIGINT UNSIGNED NOT NULL",
-		'date' => "DATE DEFAULT NULL",
+		'date_operation' => "DATE NOT NULL DEFAULT '0000-00-00'",
 		'recette' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
 		'depense' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
 		'justification' => "TEXT",

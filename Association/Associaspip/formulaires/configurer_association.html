@@ -239,15 +239,15 @@
 							</li>
 							<li>
 								<label for="fpdf_rowhead"><:asso:config_fpdf_rowhead:></label>
-								<input type="text" class="color palette" name="fpdf_rowhead" id="fpdf_rowhead" value="[(#ENV{fpdf_rowhead,FF9664})]" />
+								<input type="[(#HTML5|?{color,text})]" class="color palette" name="fpdf_rowhead" id="fpdf_rowhead" value="[(#ENV{fpdf_rowhead,FF9664})]" />
 							</li>
 							<li>
 								<label for="fpdf_roweven"><:asso:config_fpdf_roweven:></label>
-								<input type="text" class="color palette" name="fpdf_roweven" id="fpdf_roweven" value="[(#ENV{fpdf_roweven,E0EBFF})]" />
+								<input type="[(#HTML5|?{color,text})]" class="color palette" name="fpdf_roweven" id="fpdf_roweven" value="[(#ENV{fpdf_roweven,E0EBFF})]" />
 							</li>
 							<li>
 								<label for="fpdf_rowodd"><:asso:config_fpdf_rowodd:></label>
-								<input type="text" class="color palette" name="fpdf_rowodd" id="fpdf_rowodd" value="[(#ENV{fpdf_rowodd,FFFFFF})]" />
+								<input type="[(#HTML5|?{color,text})]" class="color palette" name="fpdf_rowodd" id="fpdf_rowodd" value="[(#ENV{fpdf_rowodd,FFFFFF})]" />
 							</li>
 						</ul>
 					</fieldset>

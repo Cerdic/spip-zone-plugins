@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 function exec_adherent() {
 	include_spip('inc/navigation_modules');
 	$id_auteur = association_passeparam_id('auteur');
-	$full = autoriser('associer', 'adherents');
+	$full = autoriser('editer_membres', 'association');
 	if (!autoriser('voir_membres', 'association', $id_auteur)) {
 		include_spip('inc/minipres');
 		echo minipres();
@@ -61,7 +61,7 @@ function exec_adherent() {
 			"adherent_label_modifier_$statut" => array('membre_infos.png', array('auteur_infos', "id_auteur=$id_auteur"), ),
 		));
 		debut_cadre_association('annonce.gif', 'membre', $nom_membre);
-		if ($full)
+		if ( autoriser('voir_groupes', 'association') )
 			echo propre($data['commentaire']);
 		$query_groupes = sql_select('g.*, fonction', 'spip_asso_groupes g LEFT JOIN spip_asso_groupes_liaisons l ON g.id_groupe=l.id_groupe', 'g.id_groupe>=100 AND l.id_auteur='.$id_auteur, '', 'g.nom'); // Liste des groupes (on ignore les groupes d'id <100 qui sont dedies a la gestion des autorisations)
 		if (sql_count($query_groupes)) {
@@ -74,7 +74,7 @@ function exec_adherent() {
 					'fonction' => array('asso:fonction', 'texte'),
 				), // entetes et formats des donnees
 				array(
-					array('act', 'voir_membres_groupe', 'voir-12.gif', 'membres_groupe', 'id=$$'),
+					array('list', 'membres_groupe', 'id=$$')
 				), // boutons d'action
 				'id_groupe' // champ portant la cle des lignes et des boutons
 			);
@@ -91,14 +91,11 @@ function exec_adherent() {
 		if ($GLOBALS['association_metas']['pc_cotisations']) { // HISTORIQUE COTISATIONS
 			echo debut_cadre_relief('', TRUE, '', _T('asso:adherent_titre_historique_cotisations') );
 			if ($full) { // si on a l'autorisation admin, on ajoute un bouton pour ajouter une cotisation
-				echo '<p><a href="' .generer_url_ecrire('ajout_cotisation', "id=$id_auteur").'">' . _T('asso:adherent_label_ajouter_cotisation') .'</a></p>';
+				echo '<p> <a href="' .generer_url_ecrire('ajout_cotisation', "id=$id_auteur").'">' . _T('asso:adherent_label_ajouter_cotisation') .'</a> '. association_bouton_paye('ajout_cotisation','id='.$id_auteur, '') .' </p>';
 			}
 			$association_imputation = charger_fonction('association_imputation', 'inc');
-			$critere = $association_imputation('pc_cotisations');
-			if ($critere)
-				$critere .= ' AND ';
 			echo voir_adherent_paiements(
-				array('id_compte, recette AS montant, date, justification, journal', 'spip_asso_comptes', "$critere id_journal=$id_auteur", '', 'date DESC, id_compte DESC', '0,10' ),
+				array('id_compte, recette AS montant, date, justification, journal', 'spip_asso_comptes', $association_imputation('pc_cotisations', $id_auteur), '', 'date DESC, id_compte DESC', '0,10' ),
 				$full,
 				'cotisation'
 			);
@@ -115,7 +112,7 @@ function exec_adherent() {
 					'quantite' => array('asso:entete_quantite', 'entier'),
 					'prix_activite' => array('asso:entete_montant', 'prix'),
 				), // entetes et formats des donnees
-				$full ? array(
+				autoriser('editer_activites', 'association') ? array(
 					array('edit', 'activite', 'id=$$'),
 				) : array(), // boutons d'action
 				'id_activite' // champ portant la cle des lignes et des boutons
@@ -133,8 +130,8 @@ function exec_adherent() {
 					'quantite' => array('asso:entete_quantite', 'nombre'),
 					'date_envoie' => array('asso:ventes_entete_date_envoi', 'date'),
 				), // entetes et formats des donnees
-				$full ? array(
-					array('edit', 'vente', 'id=$$'),
+				autoriser('voir_ventes', 'association') ? array(
+					array('list', 'ventes', 'id=$$')
 				) : array(), // boutons d'action
 				'id_vente' // champ portant la cle des lignes et des boutons
 			);
@@ -149,20 +146,17 @@ function exec_adherent() {
 					'date_don' => array('asso:entete_date', 'date'),
 					'argent' => array('asso:entete_montant', 'prix'),
 					'colis' => array('asso:colis', 'texte', $full?'propre':'nettoyer_raccourcis_typo', ),
-//					'valeur' => array('asso:vente_entete_date_envoi', 'prix'),
 				), // entetes et formats des donnees
-				$full ? array(
-					array('edit', 'don', 'id=$$'),
+				autoriser('voir_dons', 'association') ? array(
+					array('list', 'dons', 'id=$$')
 				) : array(), // boutons d'action
 				'id_don' // champ portant la cle des lignes et des boutons
 			);
 /*
 			$association_imputation = charger_fonction('association_imputation', 'inc');
 			$critere = $association_imputation('pc_dons');
-			if ($critere)
-				$critere .= ' AND ';
 			echo voir_adherent_paiements(
-				array('D.id_don AS id, D.argent AS montant, D.date_don AS date, justification, journal, id_compte', 'spip_asso_dons AS D LEFT JOIN spip_asso_comptes AS C ON C.id_journal=D.id_don', "$critere id_auteur=$id_auteur",'D.date_don DESC', '0,10'),
+				array('D.id_don AS id, D.argent AS montant, D.date_don AS date, justification, journal, id_compte', 'spip_asso_dons AS D LEFT JOIN spip_asso_comptes AS C ON C.id_journal=D.id_don', "$critere AND id_auteur=$id_auteur",'D.date_don DESC', '0,10'),
 				$full,
 				'don'
 			);
@@ -177,11 +171,11 @@ function exec_adherent() {
 					'id_pret' => array('asso:entete_id', 'entier'),
 					'date_sortie' => array('asso:prets_entete_date_sortie', 'date', 'dtstart'),
 					'intitule' => array('asso:entete_article', 'texte', $full?'propre':'nettoyer_raccourcis_typo', ),
-//					'duree' => array('asso:entete_duree', 'duree'),
+#					'duree' => array('asso:entete_duree', 'duree'),
 					'date_retour' => array('asso:prets_entete_date_retour', 'date', 'dtend'),
 				), // entetes et formats des donnees
-				$full ? array(
-					array('edit', 'pret', 'id=$$'),
+				autoriser('voir_prets', 'association') ? array(
+					array('list', 'prets', 'id=$$')
 				) : array(), // boutons d'action
 				'id_pret' // champ portant la cle des lignes et des boutons
 			);
@@ -201,8 +195,8 @@ function voir_adherent_paiements($data, $lien) {
 			'justification' => array('asso:adherent_entete_justification', 'texte', $lien?'propre':'nettoyer_raccourcis_typo', ),
 			'montant' => array('asso:entete_montant', 'prix'),
 		),
-		$lien ? array(
-			array('act', 'adherent_label_voir_operation', 'voir-12.png', 'comptes', 'id_compte=$$'),
+		autoriser('voir_compta', 'association') ? array(
+			array('list', 'comptes', 'id_compte=$$')
 		) : array(), // boutons d'action : voir l'operation dans le journal comptable
 		'id_compte' // champ portant la cle des lignes et des boutons
 	);

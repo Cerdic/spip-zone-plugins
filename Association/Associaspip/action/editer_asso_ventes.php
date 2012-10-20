@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -67,9 +67,7 @@ function action_editer_asso_ventes() {
 		} else { // sinon on en modifie deux
 			$err1 = association_modifier_operation_comptable($date_vente, $quantite*$prix_unite, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:vente'),'num'=>$num_vente) ) .$ref_vente, $GLOBALS['association_metas']['pc_ventes'], $journal, $id_vente, $id_compte);
 			$association_imputation = charger_fonction('association_imputation', 'inc');
-			$critere = $association_imputation('pc_frais_envoi');
-			$critere .= ($critere?' AND ':'') ."id_journal=$id_vente";
-			$err2 = association_modifier_operation_comptable($date_envoi, $frais_envoi, 0, '['. _T('asso:titre_num', array('titre'=>_T('asso:config_libelle_frais_envoi'),'num'=>$num_vente) ) .$ref_vente, $GLOBALS['association_metas']['pc_frais_envoi'], $journal, $id_vente, sql_getfetsel('id_compte', 'spip_asso_comptes', $critere));
+			$err2 = association_modifier_operation_comptable($date_envoi, $frais_envoi, 0, '['. _T('asso:titre_num', array('titre'=>_T('asso:config_libelle_frais_envoi'),'num'=>$num_vente) ) .$ref_vente, $GLOBALS['association_metas']['pc_frais_envoi'], $journal, $id_vente, sql_getfetsel('id_compte', 'spip_asso_comptes', $association_imputation('pc_frais_envoi', $id_vente)) );
 			$erreur = ($err1?$err1:$err2);
 		}
 		if (!$erreur) // on modifie les informations relatives a la vente

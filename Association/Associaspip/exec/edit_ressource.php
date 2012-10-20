@@ -5,14 +5,14 @@
  * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_edit_ressource() {
-	if (!autoriser('associer', 'ressources')) {
+	if (!autoriser('gerer_ressources', 'association')) {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {

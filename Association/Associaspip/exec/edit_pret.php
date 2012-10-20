@@ -5,19 +5,19 @@
  * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_edit_pret() {
-	$id_pret = association_passeparam_id('pret');
-	if (!autoriser('associer', 'activites')) {
+	if (!autoriser('gerer_prets', 'association')) {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
 		include_spip ('inc/navigation_modules');
+		$id_pret = association_passeparam_id('pret');
 		onglets_association('titre_onglet_prets', 'ressources');
 		if ($id_pret) { // modifier
 			$id_ressource = sql_getfetsel('id_ressource', 'spip_asso_prets', "id_pret=$id_pret");

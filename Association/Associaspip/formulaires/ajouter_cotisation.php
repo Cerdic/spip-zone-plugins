@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010 Emmanuel Saint-James
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -30,7 +30,7 @@ function formulaires_ajouter_cotisation_charger_dist($id_auteur, $nom_prenom, $i
 	} // validite et montant de cotisation
 	$contexte['justification'] = _T('asso:nouvelle_cotisation') ." [$nom_prenom"."->membre$id_auteur]"; // la justification
 	$contexte['_action'] = array('ajouter_cotisation',$id_auteur); // pour passer securiser action
-	association_chargeparam_destination('cotisations', $contexte); // les destinations
+	association_chargeparam_destinations('cotisations', $contexte); // les destinations
 
 	return $contexte;
 }

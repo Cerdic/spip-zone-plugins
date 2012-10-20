@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010 Emmanuel Saint-James
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 
@@ -205,7 +205,7 @@ function debut_cadre_association($icone, $titre, $T_args='', $DEBUT_DROITE=TRUE)
  *   http://comments.gmane.org/gmane.comp.web.spip.devel/61824
  */
 function filtres_association($liste_filtres, $exec='', $supplements='', $td=TRUE) {
-	echo association_bloc_filtres(&$liste_filtres, &$exec, &$supplements, &$td);
+	echo association_bloc_filtres($liste_filtres, $exec, $supplements, $td);
 }
 
 ?>

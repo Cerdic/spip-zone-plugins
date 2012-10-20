@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -185,10 +185,10 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe) {
 		$auteurs .= '<td class="action">'
 		. '<a href="'. generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur) .'">'.$icone.'</a></td>';
 		if (autoriser('editer_membres', 'association')) {
-			$auteurs .= association_bouton_act('adherent_label_ajouter_cotisation', 'cotis-12.gif', 'ajout_cotisation','id='.$id_auteur)
+			$auteurs .= association_bouton_paye('ajout_cotisation','id='.$id_auteur)
 			. association_bouton_edit('adherent','id='.$id_auteur);
 		}
-		$auteurs .= association_bouton_act('adherent_label_voir_membre', 'voir-12.png', 'adherent','id='.$id_auteur)
+		$auteurs .= association_bouton_list('adherent','id='.$id_auteur)
 		. association_bouton_coch('id_auteurs', $id_auteur)
 		. "</tr>\n";
 	}

@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -36,19 +36,13 @@ function exec_pdf_fiscal() {
         $annee = association_passeparam_annee();
         $id_don = association_recuperer_entier('id_don');
 		$association_imputation = charger_fonction('association_imputation', 'inc');
-		$critere = $association_imputation('pc_cotisations');
-		if ($critere)
-			$critere .= ' AND ';
 		if (!preg_match('/^\d{4}$/', $annee))
 			$annee = date('Y')-1;
-		$montants = sql_getfetsel('SUM(recette) AS montant', 'spip_asso_comptes', "$critere id_journal=$id_auteur AND vu AND DATE_FORMAT(date, '%Y') = $annee");
+		$montants = sql_getfetsel('SUM(recette) AS montant', 'spip_asso_comptes', $association_imputation('pc_cotisations', $id_auteur) ." AND vu AND DATE_FORMAT(date, '%Y')=$annee");
 		$montants = $montants*($GLOBALS['association_metas']['tauxfiscal']/100);
-		$critere = $association_imputation('pc_dons', 'C');
-		if ($critere)
-			$critere .= ' AND ';
 		$montants += sql_getfetsel('SUM(D.argent) AS montant',
             'spip_asso_dons AS D LEFT JOIN spip_asso_comptes AS C ON C.id_journal=D.id_don',
-            "$critere C.vu AND DATE_FORMAT(D.date_don, '%Y') = $annee AND id_auteur=$id_auteur AND contrepartie=''");
+            $association_imputation('pc_dons', '', 'C') ." AND C.vu AND DATE_FORMAT(D.date_don, '%Y')=$annee AND id_auteur=$id_auteur AND contrepartie=''");
            //$mail = sql_getfetsel('email', 'spip_auteurs',"id_auteur=$id_auteur");
 		if (!$montants) {
             echo "Pas de versement(s) &quot;valid&eacute;(s)&quot; en $annee pour l'adh&eacute;rent <a href='". generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur)."'> {$mbr_qui['prenom']} {$mbr_qui['nom_famille']}</a>.";

@@ -5,20 +5,20 @@
  * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_activites() {
-	if (!autoriser('associer', 'activites')) {
+	if (!autoriser('voir_profil', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
 		include_spip ('inc/navigation_modules');
 		$id_evenement = association_passeparam_id('evenement');
-		list($annee, $critere_periode) = association_passeparam_annee('debut', 'evenements', $id_evenement);
+		list($id_periode, $critere_periode) = association_passeparam_periode('debut', 'evenement', $id_evenement);
 		if ($id_evenement) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
 			$id_mot = $incription = '';
 		} else { // on peut prendre en compte les filtres ; on recupere les parametres de :
@@ -26,21 +26,16 @@ function exec_activites() {
 			$inscription = _request('inscription');
 		}
 		onglets_association('titre_onglet_activite', 'activites');
-		// TOTAUX : nombre d'activites de l'annee en cours selon iscriptions
-		$id_evenements = sql_in_select('id_evenement', 'id_evenement', 'spip_evenements', $critere_periode);
-		$liste_effectifs = array();
-		$liste_effectifs['impair'] = sql_countsel('spip_asso_activites', $id_evenements, 'id_evenement');
-		$liste_effectifs['pair'] = sql_countsel('spip_evenements', $critere_periode)-$liste_effectifs['impair'];
+		// TOTAUX : nombre d'activites de la periode en cours selon iscriptions
+		$avec_inscrits = sql_countsel('spip_asso_activites', sql_in_select('id_evenement', 'id_evenement', 'spip_evenements', $critere_periode), 'id_evenement');
 		echo association_totauxinfos_effectifs('activites', array(
-			'pair'=>array( 'activites_sans_inscrits', $liste_effectifs['pair'], ),
-			'impair'=>array( 'activites_avec_inscrits', $liste_effectifs['impair'], ),
+			'pair'=>array( 'activites_sans_inscrits', (sql_countsel('spip_evenements', $critere_periode)-$avec_inscrits), ),
+			'impair'=>array( 'activites_avec_inscrits', $avec_inscrits, ),
 		));
-		// STATS sur toutes les participations
-//		echo association_totauxinfos_stats('participations_par_personne_par_activite', 'activites', array('activite_entete_inscrits'=>'quantite','entete_montant'=>'prix_activite',), "DATE_FORMAT(date_inscription, '%Y')=$annee"); // v1
-		echo association_totauxinfos_stats('participations_par_personne_par_activite', 'activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', array('entete_quantite'=>'quantite','entete_montant'=>'prix_activite',), $critere_periode); // v2
-		// TOTAUX : montants des participations durant l'annee en cours
-		$data = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=$annee AND imputation=".sql_quote($GLOBALS['association_metas']['pc_activites']) ); // 1. on peut interroger les recettes directement dans la table des activites 2. les paiement en avance (reservations qui tombent dans l'anne d'avant) ou en retard (paiement a credit qui tombent dans l'annee d'apres) peuvent fausser la donne
-		echo association_totauxinfos_montants('activites', $data['somme_recettes'], $data['somme_depenses']);
+		// STATS : places et participations pour la periode en cours
+		echo association_totauxinfos_stats('participations_par_personne_par_activite', 'activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', array('entete_quantite'=>'quantite','entete_montant'=>'prix_activite',), $critere_periode);
+		// TOTAUX : montants des participations pour la periode
+		echo association_totauxinfos_montants('activites', sql_getfetsel('SUM(prix_activite) AS somme_recettes', 'spip_asso_activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', $critere_periode), 0);
 		// datation et raccourci vers la gestion des evenements
 		if ( test_plugin_actif('SIMPLECAL') ) { // gestion des evenements avec Simple Calendrier
 			raccourcis_association(array(), array(
@@ -80,7 +75,7 @@ function exec_activites() {
 		$filtre_incrits .= '>'. _T('asso:activites_sans_inscrits') .'</option>';
 		$filtre_incrits .= '</select>';
 		filtres_association(array(
-			'annee' => array($annee, 'evenements', 'debut'),
+			'periode' => array($id_periode, 'evenements', 'debut'),
 #			'id' => $id_evenement,
 		), 'activites', array(
 			'mot' => $filtre_motscles,
@@ -99,7 +94,6 @@ function exec_activites() {
 		}
 		if ($inscription) {
 			$q_having = 'inscriptions'. ($inscription=='avec'?'>':'=') .'0';
-//			$ia_having = 'COUNT(a.id_activite)'. ($inscription=='avec'?'>':'=') .'0';
 		} else {
 			$q_having = '';
 		}
@@ -111,19 +105,19 @@ function exec_activites() {
 				'date_fin' => array('agenda:evenement_date_au', 'date', 'dtend'),
 				'intitule' => array('asso:entete_intitule', 'texte', '', '', 'summary'),
 				'lieu' => array('agenda:evenement_lieu', 'texte', '', '', 'location'),
-				'inscriptions' => array('asso:activite_entete_inscrits', 'entier'),
+				'inscriptions' => array('asso:entete_nombre', 'entier'),
 				'quantites' => array('asso:entete_quantite', 'entier'),
 				'montants' => array('asso:entete_montant', 'prix', 'fee'),
 			), // entetes et formats des donnees
-			array(
+			autoriser('voir_activites', 'association') ? array(
 				array('act', 'activite_bouton_ajouter_inscription', 'creer-12.gif', 'edit_activite', 'id_evenement=$$'),
-				array('act', 'activite_bouton_voir_liste_inscriptions', 'voir-12.png', 'inscrits_activite', 'id=$$'),
-			), // boutons d'action
+				array('list', 'inscrits_activite', 'id=$$'),
+			) : array(), // boutons d'action
 			'id_evenement', // champ portant la cle des lignes et des boutons
 			array('pair vevent', 'impair vevent'), 'participations', $id_evenement
 		);
 		//SOUS-PAGINATION
-		echo association_selectionner_souspage(array($q_from, $q_where, 'e.id_evenement', $q_having), "activites&annee=$annee".($mot?"&mot=$mot":'').($inscription?"&inscription='$inscription'":'') );
+		echo association_selectionner_souspage(array($q_from, $q_where, 'e.id_evenement', $q_having), 'activites&'.($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($mot?"&mot=$mot":'').($inscription?"&inscription='$inscription'":'') );
 		fin_page_association();
 	}
 }

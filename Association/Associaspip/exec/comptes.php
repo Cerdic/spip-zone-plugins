@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2010--2011 Emmanuel Saint-James
  * @copyright Copyright (c) 201108 Marcel Bolla
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
@@ -18,7 +18,6 @@ function exec_comptes() {
 	} else {
 		include_spip ('inc/navigation_modules');
 // initialisations
-		$id_exercice = association_passeparam_exercice();
 		$vu = _request('vu');
 		if (!is_numeric($vu))
 			$vu = '';
@@ -26,25 +25,18 @@ function exec_comptes() {
 		if (!$imputation)
 			$imputation= '%';
 		$id_compte = association_passeparam_id('compte');
-		if (!$id_compte) {
-				$id_compte = '';
-		} else { // quand on a un id compte, on doit selectionner automatiquement l'exercice dans lequel il se trouve
-			$date_operation = sql_getfetsel('date', 'spip_asso_comptes', 'id_compte='.$id_compte);
-			$id_exercice = sql_getfetsel('id_exercice','spip_asso_exercices', "date_fin>='$date_operation' AND date_debut<='$date_operation'", '', 'date_debut DESC');
-		}
-		$exercice_data = sql_asso1ligne('exercice', $id_exercice);
+		list($id_periode, $critere_periode) = association_passeparam_annee('operation', 'asso_comptes', $id_compte);
+		$exercice_data = sql_asso1ligne('exercice', $id_periode);
 // traitements
 		$where = 'imputation LIKE '. sql_quote($imputation);
 		$where .= (!is_numeric($vu) ? '' : " AND vu=$vu");
-		$where .= " AND date>='$exercice_data[date_debut]' AND date<='$exercice_data[date_fin]'";
+		$where .= " AND $critere_periode";
 		onglets_association('titre_onglet_comptes', 'comptes');
-		// INTRO : rappel de l'exercicee affichee
-		echo association_totauxinfos_intro($exercice_data['intitule'],'exercice',$id_exercice);
-		$journaux = sql_allfetsel('journal, intitule', 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON journal=code', "date>='$exercice_data[date_debut]' AND date<='$exercice_data[date_fin]'", "intitule DESC"); // on se permet sql_allfetsel car il s'agit d'une association (mois d'une demie dizaine de comptes) et non d'un etablissement financier (des milliers de comptes clients)
+		$journaux = sql_allfetsel('journal, intitule', 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON journal=code', $critere_periode, "intitule DESC"); // on se permet sql_allfetsel car il s'agit d'une association (mois d'une demie dizaine de comptes) et non d'un etablissement financier (des milliers de comptes clients)
 		// TOTAUX : operations de l'exercice par compte financier (indique rapidement les comptes financiers les plus utilises ou les modes de paiement preferes...)
 		foreach (array('recette','depense') as $direction) {
 			foreach ($journaux as $financier) {
-				$nombre_direction = sql_countsel('spip_asso_comptes', "journal='".$financier['journal']."' AND date>='$exercice_data[date_debut]' AND date<='$exercice_data[date_fin]' AND $direction<>0 ");
+				$nombre_direction = sql_countsel('spip_asso_comptes', "journal=".sql_quote($financier['journal'])." $critere_periode AND $direction<>0 ");
 				if ($nombre_direction) { // on ne s'embarasse pas avec ceux a zero
 					$direction_decomptes[$financier['journal']] = array( $financier['intitule'], $nombre_direction, );
 				}
@@ -56,9 +48,9 @@ function exec_comptes() {
 		$classes = array('pair'=>'produits', 'impair'=>'charges', 'cv'=>'contributions_volontaires', 'vi'=>'banques');
 		$liste_types = array();
 		foreach ($classes as $classe_css=>$classe_cpt) {
-			$liste_types[$classe_css] = array( 'compte_liste_nombre_'.$classe_css, sql_countsel('spip_asso_comptes', "LEFT(imputation,1)='".$GLOBALS['association_metas']["classe_$classe_cpt"]."' AND date>='$exercice_data[date_debut]' AND date<='$exercice_data[date_fin]' "), );
+			$liste_types[$classe_css] = array( 'compte_liste_nombre_'.$classe_css, sql_countsel('spip_asso_comptes', "LEFT(imputation,1)=".sql_quote($GLOBALS['association_metas']["classe_$classe_cpt"])." AND $critere_periode "), );
 		}
-		echo association_totauxinfos_effectifs('compte_entete_imputation', $liste_types);
+		echo association_totauxinfos_effectifs('bouton_radio_type_operation_titre', $liste_types);
 		// STATS : montants de l'exercice pour l'imputation choisie (toutes si aucune)
 		echo association_totauxinfos_stats('mouvements', 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), $where, 2);
 		// TOTAUX : montants de l'exercice pour l'imputation choisie (toutes si aucune)
@@ -66,10 +58,10 @@ function exec_comptes() {
 		echo association_totauxinfos_montants(($imputation=='%' ? _T('asso:tous') : $imputation), $data['somme_recettes'], $data['somme_depenses']);
 		// datation et raccourcis
 		raccourcis_association(array(), array(
-			'encaisse_titre_general' => array('finances-24.png', array('encaisse', "exercice=$id_exercice") ),
-			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "exercice=$id_exercice") ),
-			'cpte_bilan_titre_general' => array('finances-24.png', array('compte_bilan', "exercice=$id_exercice") ),
-#			'annexe_titre_general' => array('finances-24.png', array('annexe', "exercice=$id_exercice") ),
+			'encaisse_titre_general' => array('finances-24.png', array('encaisse', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode") ),
+			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode") ),
+			'cpte_bilan_titre_general' => array('finances-24.png', array('compte_bilan', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode") ),
+#			'annexe_titre_general' => array('finances-24.png', array('annexe', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode") ),
 			'ajouter_une_operation' => array('ajout-24.png', 'edit_compte'),
 		) );
 		debut_cadre_association('finances-24.png', 'informations_comptables');
@@ -81,7 +73,7 @@ function exec_comptes() {
 		$sql = sql_select(
 			'imputation , code, intitule, classe',
 			'spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code',
-			"classe<>". sql_quote($GLOBALS['association_metas']['classe_banques']) ." AND active AND date>='$exercice_data[date_debut]' AND date<='$exercice_data[date_fin]' ", // pour l'exercice en cours... ; n'afficher ni les comptes de la classe financiere --ce ne sont pas des imputations-- ni les inactifs
+			"classe<>". sql_quote($GLOBALS['association_metas']['classe_banques']) ." AND active AND $critere_periode ", // pour l'exercice en cours... ; n'afficher ni les comptes de la classe financiere --ce ne sont pas des imputations-- ni les inactifs
 			'code', 'code ASC');
 		while ($plan = sql_fetch($sql)) { // Remplir le select uniquement avec les comptes utilises
 			$filtre_imputation .= '<option value="'.$plan['code'].'"';
@@ -95,7 +87,7 @@ function exec_comptes() {
 		$filtre_vu .= '<option value="1" '. ($vu=='1'?' selected="selected"':'') .'>'. _T('asso:cpte_op_vu_oui') .'</option>';
 		$filtre_vu .= '</select>';
 		filtres_association(array(
-			'exercice' => $id_exercice,
+			'periode' => array($id_periode, 'asso_comptes', 'operation'),
 #			'id' => $id_compte,
 		), 'comptes', array(
 			'imputation' => $filtre_imputation,
@@ -116,7 +108,7 @@ function exec_comptes() {
 		$table = comptes_while($where, sql_asso1page(), $id_compte);
 		if ($table) { // affichage de la liste
 			// SOUS-PAGINATION
-			$nav = association_selectionner_souspage(array('spip_asso_comptes', $where), 'comptes', "exercice=$id_exercice"."&imputation=$imputation". (is_numeric($vu)?"&vu=$vu":''), FALSE);
+			$nav = association_selectionner_souspage(array('spip_asso_comptes', $where), 'comptes', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($imputation?"&imputation=$imputation":''). (is_numeric($vu)?"&vu=$vu":''), FALSE);
 			// ENTETES
 			$table = "<table width='100%' class='asso_tablo' $onload_option id='asso_liste_comptes'>\n"
 			. "<thead>\n<tr>"
@@ -134,7 +126,7 @@ function exec_comptes() {
 			. "<table width='100%' class='asso_tablo_filtres'><tr>\n<td align='left'>" . $nav . '</td><td align="right" width="30"><input type="submit" value="'. _T('asso:bouton_valider') . '"  /></td></tr></table>';
 			echo generer_form_ecrire('action_comptes', $table);
 		} else { // absence d'operation pour l'exercice
-			echo '<table width="100%"><tbody><tr><td class="actions erreur">' .( $id_exercice ? _T('asso:exercice_sans_operation') : '<a href="'.generer_url_ecrire('exercices').'">'._T('asso:ajouter_un_exercice').'</a>' ). '</td></tr></tbody></table>';
+			echo '<table width="100%"><tbody><tr><td class="actions erreur">' .( $id_periode ? _T('asso:exercice_sans_operation') : '<a href="'.generer_url_ecrire('exercices').'">'._T('asso:ajouter_un_exercice').'</a>' ). '</td></tr></tbody></table>';
 		}
 		fin_page_association();
 	}

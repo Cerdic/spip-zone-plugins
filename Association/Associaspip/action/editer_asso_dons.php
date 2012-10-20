@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -46,9 +46,7 @@ function action_editer_asso_dons() {
 			$err1 = association_modifier_operation_comptable($date_don, $argent, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:don'),'num'=>$id_don) ) .$ref_don, $GLOBALS['association_metas']['pc_dons'], $journal, $id_don, $id_compte);
 			// modification du don en nature
 			$association_imputation = charger_fonction('association_imputation', 'inc');
-			$critere = $association_imputation('pc_colis');
-			$critere .= ($critere?' AND ':'') ."id_journal=$id_don";
-			$err2 = association_modifier_operation_comptable($date_don, $valeur, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:colis'),'num'=>$id_don) ) .$ref_don, $GLOBALS['association_metas']['pc_colis'], '', $id_don, sql_getfetsel('id_compte', 'spip_asso_comptes', $critere) );
+			$err2 = association_modifier_operation_comptable($date_don, $valeur, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:colis'),'num'=>$id_don) ) .$ref_don, $GLOBALS['association_metas']['pc_colis'], '', $id_don, sql_getfetsel('id_compte', 'spip_asso_comptes', $association_imputation('pc_colis', $id_don)) );
 			$erreur = ($err1?:$err1:$err2);
 		}
 		if (!$erreur) // on modifie les informations relatives au don

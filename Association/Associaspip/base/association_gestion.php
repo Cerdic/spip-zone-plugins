@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -666,6 +666,13 @@ $GLOBALS['association_maj'][66804] = array(
 	array('sql_alter', "TABLE spip_asso_ventes ADD nom TINYTEXT NOT NULL"),
 	array('sql_update', 'spip_asso_ventes', array('nom'=>'acheteur') ),
 	array('sql_alter', "TABLE spip_asso_ventes DROP acheteur"),
+);
+
+// normalisation de la base (suite)
+$GLOBALS['association_maj'][66942] = array(
+	array('sql_alter', "TABLE spip_asso_comptes ADD date_operation DATE NOT NULL DEFAULT '0000-00-00'"),
+	array('sql_update', 'spip_asso_comptes', array('date_operation'=>'date') ),
+	array('sql_alter', "TABLE spip_asso_comptes DROP date"),
 );
 
 ?>

@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010 Emmanuel Saint-James
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -56,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entete_id' => "ID",
 	'entete_montant' => "Montant",
 	'entete_nom' => "Nom",
+	'entete_nombre' => "Nbre",
 	'entete_num' => "N<sup>o</sup>",
 	'entete_quantite' => "Q<sup>t&eacute;</sup>",
 	'entete_stats_max' => "Maximum",
@@ -775,8 +776,8 @@ Commentaire: @commentaire@
 	'compte_liste_nombre_impair' => "Charges : ",
 	'compte_liste_nombre_cv' => "Contrib. volontaires : ",
 	'compte_liste_nombre_vi' => "Virements internes : ",
-	'cpte_op_vu_non' => "non val.",
-	'cpte_op_vu_oui' => "val.",
+	'cpte_op_vu_non' => "&#9634;", // &#9634;  &#9633; &#9643; &#9723; &#9725;  &#11787;  &#11038;
+	'cpte_op_vu_oui' => "&#10003;", // &#10003;  &#9632; &#9642; &#9724; &#9726;  &#11035; &#11037
 	'cpte_op_vu_tous' => "op. :",
 	# Syntheses
 	'cpte_resultat_titre_general' => "Compte de R&eacute;sultat",

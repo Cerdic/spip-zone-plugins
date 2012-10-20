@@ -245,18 +245,15 @@ function association_supprimer_operation_comptable1($id_operation, $securite=FAL
  *
  * @param int $id_journal
  *   ID de l'enregistrement associe dans le module  (chaque imputation etant gere par un seul module)
- * @param string $imputation
- *   Compte d'imputation (reference du plan comptable)
- *   Correspond (normalement) au module dont id_journal est la cle etrangere
+ * @param string $pc_journal
+ *   Nom de la meta associe au module (renverra le code comptable gere uniquement par ce module)
  * @return int $id_operation
  *   ID de l'enregistrement supprime ou annule
  *   (vaut donc 0 si aucun enregistrement touche)
  */
-function association_supprimer_operation_comptable2($id_journal, $imputation) {
-#    $association_imputation = charger_fonction('association_imputation', 'inc');
-#    $critere = (($critere_imputation = $association_imputation($imputation))?' AND ':'') ."id_journal='$id_journal'"; // old-way: avant, on pouvait ne pas avoir d'imputation... du coup on prend le premier id_journal correspondant a n'importe quelle imputation!!! (avec cette methode il n'est pas surprenant de perdre des enregistrements...)
-    $critere = "imputation='$imputation' AND id_journal='$id_journal'"; // new-way: maintenant on exige l'imputation ; et s'il n'y en a pas on prend le premier id_journal sans imputation ! c'est deja beaucoup moins problematique...
-    if ( $id_operation = sql_getfetsel('id_compte', 'spip_asso_comptes', $critere) )
+function association_supprimer_operation_comptable2($id_journal, $pc_journal) {
+    $association_imputation = charger_fonction('association_imputation', 'inc');
+    if ( $id_operation = sql_getfetsel('id_compte', 'spip_asso_comptes', $association_imputation($pc_journal, $id_journal)) )
 	association_supprimer_operation_comptable1($id_operation);
     return $id_operation; // indique quelle operation a ete supprimee (0 si aucune --donc erreur dans les parametres ?)
 }
@@ -318,15 +315,21 @@ function association_ajouter_destinations_comptables($id_compte, $recette, $depe
     }
 }
 
-/** Retrouve l'imputation associee a un module
+/**
+ * Prepare le critere sur une imputation comptable
  *
  * @param string $nom
+ *   Nom de la meta contenant le code d'imputation
+ * @param int $id
+ *   ID de l'enregistrement associe
  * @param string $table
+ *   Nom ou alias de la table a interroger
  * @return string $champ
+ *   sous-requete SQL de selection/restriction a une imputation comptable
  */
-function inc_association_imputation_dist($nom, $table='') {
+function inc_association_imputation_dist($nom, $id='', $table='') {
     $champ = ($table ? ($table . '.') : '') . 'imputation';
-    return $champ . '=' . sql_quote($GLOBALS['association_metas'][$nom]);
+    return "$champ=". sql_quote($GLOBALS['association_metas'][$nom]) .($id?(" AND id_journal=".sql_quote($id)):'') ;
 }
 
 /**
@@ -417,17 +420,29 @@ function association_creer_compte_virement_interne() {
 }
 
 /* on recupere les parametres de requete a passer aux fonctions */
-function association_passe_parametres_comptables($classes=array()) {
+function association_passeparam_compta($classes=array()) {
     $params = array(); // initialisation de la liste
-    $params['exercice'] = association_passeparam_exercice();
-    $params['annee'] = association_passeparam_annee();
+//    list($params['id_periode'], $params['sql_periode']) = association_passeparam_periode('operation', 'comptes', $id_compte);
+    $params['id_periode'] = association_passeparam_periode();
+    if ($GLOBALS['association_metas']['exercices']) {
+#    	$params['exercice'] = association_passeparam_exercice();
+	$params['type_periode'] = 'exercice';
+	$exercice = sql_fetsel('date_debut, date_fin, intitule', 'spip_asso_exercices', "id_exercice=$paramas[id_periode]");
+	$params['debut_periode'] = $exercice['date_debut'];
+	$params['fin_periode'] = $exercice['date_fin'];
+	$params['titre_periode'] = $exercice['intitule'];
+    } else {
+#    	$params['annee'] = association_passeparam_annee();
+	$params['type_periode'] = 'annee';
+	$params['debut_periode'] = "$params[id_periode]-01-01";
+	$params['fin_periode'] = "$params[id_periode]-12-31";
+	$params['titre_periode'] = $params['id_periode'];
+    }
     $params['destination'] = association_recuperer_entier('destination');
-#    if( !$params['destination'] ) { // pas de destination
-#    }
     $params['type'] = _request('type');
     if ( !$classes ) { // pas en parametre, on prend dans la requete
-//	$params['classes'] = array_flip( explode(',', _request('classes')) );
-	$keys = explode(',', _request('classes'));
+//	$params['classes'] = array_flip( explode(',', association_recuperer_liste('classes')) );
+	$keys = explode(',', association_recuperer_liste('classes'));
 	if ( count($keys) ) {
 	    $vals = array_fill(0, count($keys) ,0);
 	    $params['classes'] = array_combine($keys, $vals);
@@ -443,12 +458,27 @@ function association_passe_parametres_comptables($classes=array()) {
     return $params;
 }
 
-/* on recupere les soldes des differents comptes de la classe specifiee pour l'exercice specifie
- * d'apres http://www.lacompta.ch/MITIC/theorie.php?ID=26 c'est le solde qui est recherche, et il corresponde bien a :
+/**
+ * On recupere les soldes des differents comptes de la classe specifiee pour la periode specifiee
+ *
+ * @param int $classe
+ *   Classe dont on veut recuperer les soldes des differents comptes
+ * @param int $periode
+ *   ID exercice ou annee (selon configuration)
+ * @param int $destination
+ *   ID destination
+ * @param float $direction
+ *   Le signe de ce parametre indique le type de compte (et donc le sens de calcul du solde)
+ *   positif : comptes de credit (solde=recettes-depenses)
+ *   negatif : comptes de debit (solde=depenses-recettes)
+ * @return ressource $query
+ *   Resultat de la requete donnant les soldes de chaque compte de la classe indiquee
+ * @note
+ *   d'apres http://www.lacompta.ch/MITIC/theorie.php?ID=26 c'est le solde qui est recherche, et il corresponde bien a :
  *  recettes-depenses=recettes pour les classes 6
  *  depenses-recettes=depenses pour les classes 7
- * */
-function association_calcul_soldes_comptes_classe($classe, $exercice=0, $destination=0, $direction='-1') {
+ */
+function association_calcul_soldes_comptes_classe($classe, $periode=0, $destination=0, $direction='-1') {
     $c_group = (($classe==$GLOBALS['association_metas']['classe_banques'])?'journal':'imputation');
     $valeurs = (($direction)
 	?
@@ -469,15 +499,17 @@ function association_calcul_soldes_comptes_classe($classe, $exercice=0, $destina
 	$p_join = $p_select = $p_where = $p_having = '';
 	$p_order = $c_group; // imputation ou journal
     }
-    if ( $exercice ) { // exercice budgetaire personnalise
-	$exercice_data = sql_asso1ligne('exercice', $exercice);
-	$c_where = "a_c.date>='$exercice_data[date_debut]' AND a_c.date<='$exercice_data[date_fin]' ";
-    } elseif ( $annee ) { // exercice budgetaire par annee civile
-	$c_where = "DATE_FORMAT(a_c.date, '%Y')=$annee ";
+    if ( $periode ) { // restriction sur une periode donnee
+	if ($GLOBALS['association_metas']['exercices']) { // exercice budgetaire personnalise
+	    $exercice = sql_fetsel('date_debut, date_fin', 'spip_asso_exercices', "id_exercice=".intval($periode));
+	    $c_where = "a_c.date_operation>='$exercice[date_debut]' AND a_c.date_operation<='$exercice[date_fin]' ";
+	} else { // exercice budgetaire par annee civile
+	    $c_where = "DATE_FORMAT(a_c.date, '%Y')=".intval($periode);
+	}
 #    } elseif ( $classe==$GLOBALS['association_metas']['classe_banques'] ) { // encaisse
 #	$c_where = 'LEFT(a_c.imputation,1)<>'. sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']) .' AND a_c.date>=a_p.date_anterieure AND a_c.date<=NOW() ';
     } else { // tout depuis le debut ?!?
-	$c_where = 'a_c.date<=NOW()'; // il faut mettre un test valide car la chaine peut etre precedee de "AND "...  limiter alors a aujourd'hui ?
+	$c_where = 'a_c.date_operation<=NOW()'; // il faut mettre un test valide car la chaine peut etre precedee de "AND "...  limiter alors a aujourd'hui ?
     }
     $query = sql_select(
 	"$c_group, $valeurs ". ($destination ? ', a_d.id_destination' : '') .$p_select, // select
@@ -491,8 +523,25 @@ function association_calcul_soldes_comptes_classe($classe, $exercice=0, $destina
     return $query;
 }
 
-/* on affiche les totaux (recettes et depenses) d'un exercice des differents comptes de la classe specifiee */
-function association_liste_totaux_comptes_classes($classes, $prefixe='', $direction='-1', $exercice=0, $destination=0) {
+/**
+ * On affiche les totaux (recettes et depenses) des differents comptes de la classe specifiee pour une periode donnee
+ *
+ * @param array $classes
+ *   Liste des classes dont on veut afficher les soldes des differents comptes
+ * @param string $prefixe
+ *   Prefixe a applique aux termes qualifiant la direction pour former le titre du tableau
+ * @param float $direction
+ *   Le signe de ce parametre indique le type de compte (et donc le sens de calcul du solde)
+ *   positif : comptes de credit (solde=recettes-depenses)
+ *   negatif : comptes de debit (solde=depenses-recettes)
+ * @param int $periode
+ *   ID exercice ou annee (selon configuration)
+ * @param int $destination
+ *   ID destination
+ * @return void
+ *   HTML-Table listant les differents soldes ordonnes par classes puis par numeros de compte
+ */
+function association_liste_totaux_comptes_classes($classes, $prefixe='', $direction='-1', $periode=0, $destination=0) {
     if( !is_array($classes) ) { // a priori une chaine ou un entier d'une unique classe
 	$liste_classes = array( $classes ) ; // transformer en tableau (puisqu'on va operer sur des tableaux);
     } else { // c'est un tableau de plusieurs classes
@@ -516,7 +565,7 @@ function association_liste_totaux_comptes_classes($classes, $prefixe='', $direct
     $chapitre = '';
     $i = 0;
     foreach ( $liste_classes as $rang => $classe ) {
-	$query = association_calcul_soldes_comptes_classe($classe, $exercice, $destination, $direction );
+	$query = association_calcul_soldes_comptes_classe($classe, $periode, $destination, $direction );
 	while ($data = sql_fetch($query)) {
 	    echo '<tr>';
 	    $new_chapitre = substr($data['code'], 0, 2);
@@ -559,7 +608,15 @@ function association_liste_totaux_comptes_classes($classes, $prefixe='', $direct
     return $total_valeurs;
 }
 
-/* on affiche la difference entre les recettes et les depenses (passees en parametre) pour les classes d'un exercice */
+/**
+ * On affiche la difference entre les recettes et les depenses (passees en parametre) pour les classes d'un exercice
+ * @param float $recettes
+ *   Total des recettes
+ * @param float $depenses
+ *   Total des depenses
+ * @return void
+ *   Table-HTML presentant le solde comptable (deficit ou benefice)
+ */
 function association_liste_resultat_net($recettes, $depenses) {
     echo "<table width='100%' class='asso_tablo' id='asso_tablo_bilan_solde'>\n";
     echo "<thead>\n<tr>";
@@ -579,30 +636,39 @@ function association_liste_resultat_net($recettes, $depenses) {
 // Brique commune aux classes d'exportation des etats comptables
 class ExportComptes_TXT {
 
-    var $exercice;
-    var $destination;
-    var $annee;
-    var $type;
-    var $classes;
-    var $out;
+    var $periode; // id_exercice || annee
+    var $destination; // id_destination
+    var $type; // type d'export : bilan|resultat
+    var $classes; // liste des classes a exporter
+    var $titre; // intitule de l'exercice
+    var $out; // contenu du fichier
 
-    // constructeur (fonction d'initialisatio de la classe)
+    /**
+     * Constructeur (fonction d'initialisatio de la classe)
+     *
+     * @param array|string $var
+     *   Tableau des parametres (les cles sont : id_periode, id_destination, titre_periode, classes, titre)
+     *   Ce tableau peut etre serialise et c'est la chaine de caracteres resultante qui est passee
+     *   Enfin, quand il n'y a rien, on recupere les differents elements dans l'environnement
+     * @return $this->
+     *   Les proprietes de la classe sont initialisees
+     */
     function __construct($var='') {
-	if ( !$var )
-	    $tableau = association_passe_parametres_comptables();
-	elseif ( is_string($var) )
+	if ( !$var ) // non transmis
+	    $tableau = association_passeparam_compta(); // recuperer dans l'environnement (parametres d'URL)
+	elseif ( is_string($var) ) // transmis comme lien serialise
 	    $tableau = unserialize(rawurldecode($var));
-	elseif ( is_array($var) )
+	elseif ( is_array($var) ) // transmis comme tableau PHP
 	    $tableau = $var;
 	else
 	    $tableau = array($var=>0);
-	$this->exercice = intval($tableau['exercice']);
+	$this->periode = intval($tableau['id_periode']);
 	$this->destination = intval($tableau['destination']);
-	$this->annee = intval($tableau['annee']);
 	$this->type = $tableau['type'];
-	if ( count($tableau['classes']) ) {
+	$this->titre = ($tableau['titre_periode']);
+	if ( count($tableau['classes']) ) { // on a la liste des classes qui est fournie
 	    $this->classes = $tableau['classes'];
-	} else {
+	} else { // on sait retrouver la liste des tables en se basant sur le type d'exportation
 	    switch ($tableau['type']) {
 		case 'bilan' :
 		    $query = sql_select(
@@ -624,8 +690,32 @@ class ExportComptes_TXT {
 	$this->out = '';
     }
 
-    // export texte de type tableau (lignes*colonnes) simple : CSV,CTX,HTML*SPIP,INI*,TSV,etc.
-    // de par la simplicite recherchee il n'y a pas de types ou autres : CSV et CTX dans une certaine mesure pouvant distinguer "nombres", "chaines alphanumeriques" et "chaine binaires encodees"
+    /**
+     * Export texte de type tableau (lignes*colonnes) simple : CSV,CTX,HTML*SPIP,INI*,TSV,etc.
+     *
+     * de par la simplicite recherchee il n'y a pas de types ou autres : CSV et CTX dans une certaine mesure pouvant distinguer "nombres", "chaines alphanumeriques" et "chaine binaires encodees"
+     *
+     * @param string $champsSeparateur
+     *   Caractere separant deux champs/colonnes.
+     *   (par exemple : la virgule)
+     * @param string $lignesSeparateur
+     *   Caractere separant deux lignes/enregistrements.
+     *   (par exemple : le saut de ligne)
+     * @param array $echappements
+     *   Tableaux des remplacemens simples a effectuer : "des ceci"=>"par cela"
+     *   Il faut, en effet, souvent proteger la presence de caracteres speciaux
+     *   qui sont utilises comme parametres ici.
+     * @param string $champDebut
+     *   Caracter place au debut de chaque champ/colonne
+     * @param string $champFin
+     *   Caracter place a la fin de chaque champ/enregistrement
+     * @param bool $entete
+     *   Indique si en plus des donnees il faut rajouter (vrai --par defaut) ou pas (faux) une ligne de titre au debut
+     * @param bool $multi
+     *   Indique si on recupere directement le solde (faux --par defaut) ou si on recupere separement les totaux des recettes et des depenses
+     * @return string $this->out
+     *   Contenu de l'export
+     */
     function exportLignesUniques($champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='', $entete=TRUE, $multi=FALSE) {
 	if ($entete) {
 	    $this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_code')))) .$champFin.$champsSeparateur;
@@ -638,8 +728,7 @@ class ExportComptes_TXT {
 	    }
 	}
 	foreach ($this->classes as $laClasse=>$laDirection) {
-	    $this->LignesSimplesCorps($nomClasse, $champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='');
-	    $query = association_calcul_soldes_comptes_classe($laClasse, $this->exercice, $this->destination, $multi?0:$laDirection);
+	    $query = association_calcul_soldes_comptes_classe($laClasse, $this->periode, $this->destination, $multi?0:$laDirection);
 	    $chapitre = '';
 	    $i = 0;
 	    while ($data = sql_fetch($query)) {
@@ -663,21 +752,55 @@ class ExportComptes_TXT {
 	}
     }
 
-    // export texte de type s-expression / properties-list / balisage (conteneurs*conteneurs*donnees) simple : JSON, XML (utilisable avec ASN.1), YAML, etc.
-    // de par la simplicite recherchee il n'y a pas de types ou d'attributs : BSON, Bencode, JSON, pList, XML, etc.
+    /**
+     * Export texte de type s-expression / properties-list / balisage (conteneurs*conteneurs*donnees) simple : JSON, XML (utilisable avec ASN.1), YAML, etc.
+     *
+     * de par la simplicite recherchee il n'y a pas de types ou d'attributs : BSON, Bencode, JSON, pList, XML, etc.
+     *
+     * @param array $balises
+     *   Tableau des balises d'ouverture (...1) et de fermeture (...0) a appliquer.
+     *   Elles sont indexees par des cles (...N) convenues ainsi :
+     * - titre : pour l'intitule de la synthese exportee
+     * - nom : pour le nom de l'association
+     * - exercice : pour l'intitule de l'exercice
+     * - categorie : pour ?
+     * - chapitre : pour ?
+     * - libelle : pour ?
+     * - code : pour la reference comptable d'un compte
+     * - intitule : pour l'intitule renseigne pour un compte
+     * - credit : pour la somme des recettes d'un compte
+     * - debit : pour la somme des depenses d'un compte
+     * - montant : pour le sode d'un compte
+     * @param array $echappements
+     *   Tableaux des remplacemens simples a effectuer : "des ceci"=>"par cela"
+     *   Il faut, en effet, souvent proteger la presence de caracteres speciaux
+     *   qui sont utilises comme parametres ici.
+     * @param string $champDebut
+     *   Caracter place au debut de chaque champ/colonne
+     * @param string $champFin
+     *   Caracter place a la fin de chaque champ/enregistrement
+     * @param string $ident
+     *   Caractere d'indentation des blocs
+     * @param bool $entetePerso
+     *   Indique si en plus des donnees il faut rajouter (vrai --par defaut) ou pas (faux) une ligne de titre au debut
+     * @param bool $multi
+     *   Indique si on recupere directement le solde (faux --par defaut) ou si on recupere separement les totaux des recettes et des depenses
+     * @return string $this->out
+     *   Contenu de l'export
+     */
     function exportLignesMultiples($balises, $echappements=array(), $champDebut='', $champFin='', $indent="\t", $entetesPerso='', $multi=FALSE) {
 	$this->out .= "$balises[compteresultat1]\n";
 	if (!$entetesPerso) {
 	    $this->out .= "$indent$balises[entete1]\n";
 	    $this->out .= "$indent$indent$balises[titre1] $champDebut". utf8_decode(html_entity_decode(_T('asso:cpte_resultat_titre_general'))) ."$champFin $balises[titre0]\n";
 	    $this->out .= "$indent$indent$balises[nom1] $champDebut". $GLOBALS['association_metas']['nom'] ."$champFin $balises[nom0]\n";
-	    $this->out .= "$indent$indent$balises[exercice1] $champDebut". sql_asso1champ('exercice', $this->exercice, 'intitule') ."$champFin $balises[exercice0]\n";
+	    $this->out .= "$indent$indent$balises[exercice1] $champDebut". $this->titre ."$champFin $balises[exercice0]\n";
 	    $this->out .= "$indent$balises[entete0]\n";
 	}
 	foreach ($this->classes as $laClasse=>$laDirection) {
 	    $baliseClasse = $nomClasse.'1';
 	    $this->out .= "$indent$balises[$baliseClasse]\n";
-	    $query = association_calcul_soldes_comptes_classe($laClasse, $this->exercice, $this->destination, $laDirection);
+	    $query = association_calcul_soldes_comptes_classe($laClasse, $this->periode, $this->destination, $laDirection);
 	    $chapitre = '';
 	    $i = 0;
 	    while ($data = sql_fetch($query)) {
@@ -716,9 +839,18 @@ class ExportComptes_TXT {
 	$this->out .= "$balises[compteresultat0]\n";
     }
 
-    // fichier texte final a afficher/telecharger
+    /**
+     * Fichier texte final a afficher/telecharger
+     *
+     * @param string $ext
+     *   Extension a donner au fichier
+     * @param string $subtype
+     *   Sous-type a inclure dans le nom du fichier
+     *   Par defaut, c'est le type d'export (bilon ou resultat).
+     * @return
+     */
     function leFichier($ext, $subtype='') {
-	$fichier = _DIR_RACINE.'/'._NOM_TEMPORAIRES_ACCESSIBLES.'compte_'. ($subtype?$subtype:$this->type) .'_'.$this->exercice.'_'.$this->destination.".$ext"; // on essaye de creer le fichier dans le cache local/ http://www.spip.net/fr_article4637.html
+	$fichier = _DIR_RACINE.'/'._NOM_TEMPORAIRES_ACCESSIBLES.'compte_'. ($subtype?$subtype:$this->type) .'_'.$this->periode.'_'.$this->destination.".$ext"; // on essaye de creer le fichier dans le cache local/ http://www.spip.net/fr_article4637.html
 	$f = fopen($fichier, 'w');
 	fputs($f, $this->out);
 		fclose($f);
@@ -753,18 +885,25 @@ class ExportComptes_PDF extends FPDF {
     var $yy = 0; // ordonnee 1ere boite
 
     // variables de fonctionnement passees en parametre
-    var $annee;
-    var $exercice;
-    var $destination;
+    var $periode; // id_exercice ou annee
+    var $destination; // id_destination
+    var $titre; // intitule de l'exercice
 
-    // Initialisations
+    /**
+     * Initialisations
+     * @param array $ids
+     *   Tableau des parametres (les cles sont : id_periode, id_destination, titre_periode, classes, titre)
+     *   Quand il n'y a rien, on recupere les differents elements dans l'environnement
+     * @return $this->
+     *   Les proprietes de la classe sont initialisees
+     */
     function init($ids='') {
-	if ( !$ids )
-	    $ids = association_passe_parametres_comptables();
+	if ( !$ids ) // tableau de parametres non transmis
+	    $ids = association_passe_parametres_comptables(); // recuperer dans l'environnemet (parametres d'URL)
 	// passer les parametres transmis aux variables de la classe
-	$this->annee = $ids['annee'];
-	$this->exercice = $ids['exercice'];
+	$this->periode = $ids['id_periode'];
 	$this->destination = $ids['destination'];
+	$this->titre = $ids['titre_periode'];
 	// calculer les dimensions de mise en page
 	$this->largeur_utile = $GLOBALS['association_metas']['fpdf_widht']-2*$GLOBALS['association_metas']['fpdf_marginl'];
 	$this->largeur_pour_titre = $this->largeur_utile-$this->icone_h-3*$this->space_h;
@@ -783,27 +922,45 @@ class ExportComptes_PDF extends FPDF {
 	$this->AddPage($GLOBALS['association_metas']['fpdf_orientation'], $GLOBALS['association_metas']['fpdf_format']?$GLOBALS['association_metas']['fpdf_format']:array($GLOBALS['association_metas']['fpdf_widht'], $GLOBALS['association_metas']['fpdf_height']) );
     }
 
-    // Pied de pages : redefinition de FPDF::Footer() qui est automatiquement appele par FPDF::AddPage() et FPDF::Close() !
-    //@ http://www.id.uzh.ch/cl/zinfo/fpdf/doc/footer.htm
-    //!\ Adapter la marge basse (et la hauteur utile) des pages en consequence
+    /**
+     * Pied de pages :
+     * redefinition de FPDF::Footer() qui est automatiquement appele par FPDF::AddPage() et FPDF::Close() !
+     *
+     * @note
+     *   http://www.id.uzh.ch/cl/zinfo/fpdf/doc/footer.htm
+     *   Adapter la marge basse (et la hauteur utile) des pages en consequence
+     */
     function Footer() {
 	// Positionnement a 2 fois la marge du bas
 	$this->SetY(-2*$GLOBALS['association_metas']['fpdf_margint']);
 	// typo
-	$this->SetFont(($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial'), 'I', 8); // police: italique 8px
+	$this->SetFont(($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial'), 'I', 8); // police: italique 8px
 	$this->SetTextColor(128); // Couleur du texte : gris-50.2% (fond blanc)
 	// Date et Numéro de page
 	$this->Cell(0, 10, html_entity_decode(_T('asso:cpte_export_pied_notice') .' -- '. affdate(date('Y-m-d')) .' -- '. _T('asso:cpte_export_page', array('numero'=>$this->PageNo()) )), 0, 0, 'C');
     }
 
-    // Haut de pages : redefinition de FPDF qui est directement appele par FPDF::AddPage()
-    //@ http://www.id.uzh.ch/cl/zinfo/fpdf/doc/header.htm
-    //!\ Adapter la marge haute (et la hauteur utile) des pages en consequence
+    /**
+     * Haut de pages :
+     * redefinition de FPDF qui est directement appele par FPDF::AddPage()
+     * @note
+     *   http://www.id.uzh.ch/cl/zinfo/fpdf/doc/header.htm
+     *   Adapter la marge haute (et la hauteur utile) des pages en consequence
+    */
     function Header() {
 	// nop
     }
 
-    // cartouche au debut de la 1ere page (contrairement au Header ceci fait partir du contenu/flux et n'est pas repete sur toutes les pages, et peut accepter des parametres)
+    /**
+     * Cartouche au debut de la 1ere page
+     *
+     * @param string $titre
+     *   Nom de l'export : place au dessous le nom de l'association et au dessus de l'intitule de l'exercice
+     * @return void
+     *   Le contenu du PDF
+     * @note
+     *   Contrairement au Header ceci fait partir du contenu/flux et n'est pas repete sur toutes les pages, et peut accepter des parametres
+     */
     function association_cartouche_pdf($titre='') {
 	// Les coordonnees courantes
 	$xc = $this->xx+$this->space_h;
@@ -818,7 +975,7 @@ class ExportComptes_PDF extends FPDF {
 	    $this->Image(extraire_attribut(image_reduire($logo, $this->icone_h, $this->icone_v), 'src'), $xc, $yc, $this->icone_h);
 	}
 	// typo
-	$this->SetFont(($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial'), 'B', 22); // police : gras 22px
+	$this->SetFont(($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial'), 'B', 22); // police : gras 22px
 	$this->SetFillColor(235); // Couleur du cadre, du fond du cadre : gris-92,2%
 	$this->SetTextColor(0); // Couleur du texte : noir
 	// Titre centre
@@ -829,7 +986,7 @@ class ExportComptes_PDF extends FPDF {
 	$this->Ln($this->space_v); // Saut de ligne
 	$yc += $this->space_v;
 	// typo
-	$this->SetFont(($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial'), '', 12); // police : normal 12px
+	$this->SetFont(($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial'), '', 12); // police : normal 12px
 	$this->SetFillColor(235); // Couleur de remplissage : gris-92.2%
 	// Sous titre Nom de l'association
 	$this->SetXY($xc, $yc);
@@ -838,11 +995,11 @@ class ExportComptes_PDF extends FPDF {
 	$this->Ln($this->space_v/2); // Saut de ligne
 	$yc += $this->space_v/2;
 	// typo
-	$this->SetFont(($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial'), '', 12); // police : normal 12px
+	$this->SetFont(($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial'), '', 12); // police : normal 12px
 	$this->SetFillColor(235); // Couleur de fond : gris-92.2%
 	//Sous titre Intitule de l'exercice
 	$this->SetXY($xc, $yc);
-	$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('asso:cpte_export_exercice', array('titre'=>sql_getfetsel('intitule','spip_asso_exercices', 'id_exercice='.$this->exercice) ) )), 0, 0, 'C', TRUE);
+	$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('asso:cpte_export_exercice', array('titre'=>$this->titre) )), 0, 0, 'C', TRUE);
 	$yc += 6;
 	$this->Ln($this->space_v); // Saut de ligne
 	$yc += $this->space_v;
@@ -852,11 +1009,11 @@ class ExportComptes_PDF extends FPDF {
 
     // Fichier final envoye
     function File($titre='etat_comptes') {
-	$this->Output($titre.'_'.($this->exercice?$this->exercice:$this->annee).'_'.$this->destination.'.pdf', 'I');
+	$this->Output($titre.'_'.$this->periode.'_'.$this->destination.'.pdf', 'I');
     }
 
     // on affiche les totaux (recettes et depenses) d'un exercice des differents comptes de la classe specifiee
-    function association_liste_totaux_comptes_classes($classes, $prefixe='', $direction='-1', $exercice=0, $destination=0) {
+    function association_liste_totaux_comptes_classes($classes, $prefixe='', $direction='-1', $periode=0, $destination=0) {
 	if( !is_array($classes) ) { // a priori une chaine ou un entier d'une unique classe
 	    $liste_classes = array( $classes ) ; // transformer en tableau (puisqu'on va operer sur des tableaux);
 	} else { // c'est un tableau de plusieurs classes
@@ -867,7 +1024,7 @@ class ExportComptes_PDF extends FPDF {
 	$y_orig = $this->yy+$this->space_v;
 	$yc = $y_orig+$this->space_v;
 	// typo
-	$this->SetFont(($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial'), 'B', 14); // police: gras 14px
+	$this->SetFont(($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial'), 'B', 14); // police: gras 14px
 	$this->SetFillColor(235); // Couleursdu fond du cadre de titre : gris-92.2%
 	$this->SetTextColor(0); // Couleurs du texte du cadre de titre
 	// Titre centre
@@ -882,8 +1039,8 @@ class ExportComptes_PDF extends FPDF {
 	$chapitre = '';
 	$i = 0;
 	foreach ( $liste_classes as $rang => $classe ) { // calcul+affichage par classe
-	    $query = association_calcul_soldes_comptes_classe($classe, $this->exercice, $this->destination, $direction );
-	    $this->SetFont(($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial'), '', 12); // police : normal 12px
+	    $query = association_calcul_soldes_comptes_classe($classe, $this->periode, $this->destination, $direction );
+	    $this->SetFont(($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial'), '', 12); // police : normal 12px
 	    while ($data = sql_fetch($query)) {
 		$this->SetXY($xc, $yc); // positionne le curseur
 		$new_chapitre = substr($data['code'], 0, 2);
@@ -943,7 +1100,7 @@ class ExportComptes_PDF extends FPDF {
 	$y_orig = $this->yy+$this->space_v;
 	$yc = $y_orig+$this->space_v;
 	// typo
-	$this->SetFont(($GLOBALS['association_metas']['fpdf_marginl']?$GLOBALS['association_metas']['fpdf_marginl']:'Arial'), 'B', 14); // police : gras 14px
+	$this->SetFont(($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial'), 'B', 14); // police : gras 14px
 	$this->SetFillColor(235); // Couleur du fond : gris-92.2%
 	$this->SetTextColor(0); // Couleur du texte : noir
 	// Titre centre

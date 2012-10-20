@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
  * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin
  *
- *  @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -18,15 +18,13 @@ function exec_ventes() {
 	} else {
 		include_spip ('inc/navigation_modules');
 		$id_vente = association_passeparam_id('vente');
-		list($annee, $critere_periode) = association_passeparam_annee('vente', 'asso_ventes', $id_vente);
+		list($id_periode, $critere_periode) = association_passeparam_annee('vente', 'asso_ventes', $id_vente);
 		if ($id_vente) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
 			$etat = '';
 		} else { // on peut prendre en compte les filtres ; on recupere les parametres de :
 			$etat = _request('etat'); // etat d'avancement de la commande
 		}
 		onglets_association('titre_onglet_ventes', 'ventes');
-		// INTRO : nom du module et annee affichee
-		echo association_totauxinfos_intro('','ventes',$annee);
 		// TOTAUX : nombre de ventes selon etat de livraison
 		echo association_totauxinfos_effectifs('ventes', array(
 			'pair' => array( 'ventes_enregistrees', sql_countsel('spip_asso_ventes', "date_envoi<date_vente AND  $critere_periode"), ),
@@ -35,16 +33,11 @@ function exec_ventes() {
 		// STATS sur les paniers/achats/commandes
 		echo association_totauxinfos_stats('paniers/commandes', 'ventes', array('entete_quantite'=>'quantite','entete_montant'=>'prix_vente*quantite',), $critere_periode);
 		// TOTAUX : montants des ventes et des frais de port
-/* Il est interessant d'interroger le livre comptable pour des cas complexes et si on sait recuperer les achats-depenses liees aux ventes(c'est faisable s'ils ne concerne qu'un ou deux comptes) ; mais ici, les montant etant dupliques dans la table des ventes autant faire simple...
-		$data1 = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT(date, '%Y')=$annee AND imputation=".sql_quote($GLOBALS['association_metas']['pc_ventes']) );
-		$data2 = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT(date, '%Y')=$annee AND imputation=".sql_quote($GLOBALS['association_metas']['pc_frais_envoi']) );
-		echo association_totauxinfos_montants($annee, $data1['somme_recettes']-$data1['somme_depenses']+$data2['somme_recettes']-$data2['somme_depenses']);
-*/
 		$data = sql_fetsel('SUM(prix_vente*quantite) AS somme_ventes, SUM(frais_envoi) AS somme_frais', 'spip_asso_ventes', $critere_periode);
-		echo association_totauxinfos_montants($annee, $data['somme_ventes']+$data['somme_frais'], $data['somme_frais']); // les frais de port etant facturees a l'acheteur, ce sont bien des recettes... mais ces frais n'etant (normalement) pas refacturees (et devant meme etre transparents) ils n'entrent pas dans la marge (enfin, facon de dire car les couts d'acquisition ne sont pas pris en compte... le "solde" ici est le montant effectif des ventes.)
+		echo association_totauxinfos_montants($id_periode, $data['somme_ventes']+$data['somme_frais'], $data['somme_frais']); // les frais de port etant facturees a l'acheteur, ce sont bien des recettes... mais ces frais n'etant (normalement) pas refacturees (et devant meme etre transparents) ils n'entrent pas dans la marge (enfin, facon de dire car les couts d'acquisition ne sont pas pris en compte... le "solde" ici est le montant effectif des ventes.)
 		// datation et raccourcis
 		raccourcis_association(array(), array(
-			'ajouter_une_vente' => array('ajout-24.png', 'edit_vente'),
+			'ajouter_une_vente' => array('ajout-24.png', 'edit_vente', array('gerer_ventes', 'association') ),
 		) );
 		debut_cadre_association('ventes.gif', 'toutes_les_ventes');
 		// FILTRES
@@ -58,7 +51,7 @@ function exec_ventes() {
 		$filtre_statut .= '>'. _T('asso:ventes_expediees') .'</option>';
 		$filtre_statut .= '</select>';
 		filtres_association(array(
-			'annee' => array($annee, 'asso_ventes', 'vente'),
+			'periode' => array($id_periode, 'asso_ventes', 'vente'),
 #			'id' => $id_vente,
 		), 'ventes', array(
 			'etat' => $filtre_statut,
@@ -88,14 +81,14 @@ function exec_ventes() {
 				'prix_vente' => array('asso:entete_montant', 'prix', 'purchase cost offer'),
 //				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),
 			), // entetes et formats des donnees
-			array(
+			autoriser('gerer_ventes', 'association') ? array(
 				array('suppr', 'vente', 'id=$$'),
 				array('edit', 'vente', 'id=$$'),
-			), // boutons d'action
+			) : array(), // boutons d'action
 			'id_vente', // champ portant la cle des lignes et des boutons
 			array('pair hproduct', 'impair hproduct'), 'statut_vente', $id_vente // rel="purchase"
 		);
-		echo association_selectionner_souspage(array('spip_asso_ventes', $q_where), 'ventes', "annee=$annee".($etat?"&etat='$etat'":'') );
+		echo association_selectionner_souspage(array('spip_asso_ventes', $q_where), 'ventes', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($etat?"&etat='$etat'":'') );
 		fin_page_association();
 	}
 }
