@@ -73,17 +73,16 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 			$metadatas_flv = "flvtool2 -xUP $fichier";
 		}
 		if($metadatas_flv){
-			exec($metadatas_flv,$retour,$retour_int);
+			exec(escapeshellcmd($metadatas_flv),$retour,$retour_int);
 		}
 	}
 	if(in_array($extension,array('mov','mp4','m4v')) && !$GLOBALS['meta']['spipmotion_qt-faststart_casse']){
 		$fichier_tmp = $fichier.'_tmp';
-		exec("qt-faststart $fichier $fichier_tmp",$retour,$retour_int);
+		exec(escapeshellcmd("qt-faststart $fichier $fichier_tmp"),$retour,$retour_int);
 	}
 	
-	if($fichier_tmp && file_exists($fichier_tmp)){
+	if($fichier_tmp && file_exists($fichier_tmp))
 		rename($fichier_tmp,$fichier);
-	}
 	
 	/**
 	 * Récupération des métadonnées par mediainfo
@@ -92,7 +91,6 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 		$mediainfo = charger_fonction('spipmotion_mediainfo','inc');
 		$infos = $mediainfo($fichier);
 	}
-	
 	if(strlen($document['titre']) > 0){
 		unset($infos['titre']);
 	}
@@ -129,7 +127,6 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 	 * Si le logiciel de récupération de métadonnées ne sait pas la récupérer, on utilise celle du document original
 	 */
 	if(!$infos['duree'] && ($document['mode'] == 'conversion')){
-		spip_log('récupération de la durée','spipmotion');
 		$doc_orig = sql_getfetsel('lien.id_objet',
 							'spip_documents as document LEFT JOIN spip_documents_liens as lien ON document.id_document=lien.id_document',
 							'lien.objet="document" AND lien.id_document='.intval($id_document));
