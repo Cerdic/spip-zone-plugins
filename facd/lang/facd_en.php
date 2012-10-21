@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_conversion_non' => 'Awaiting',
 	'info_statut_conversion_oui' => 'Converted',
 	'info_tous_docs_facd' => 'Documents in the queue',
-	'info_voir_log_erreur' => 'Voir le log d\'erreur', # NEW
+	'info_voir_log_erreur' => 'Display the error log',
 
 	// L
 	'label_relancer_conversion' => 'Restart conversion',
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'thead_id_document' => 'Original',
 	'thead_nombre' => 'Number',
 	'thead_statut' => 'Status',
-	'titre_log_conversion' => 'Contenu du log de conversion #@id@', # NEW
+	'titre_log_conversion' => 'Content of the conversion log @id@',
 	'titre_page_file' => 'Queue of the document conversion plugin',
 	'titre_page_file_convertis_jour' => 'Conversions by date',
 	'titre_page_file_menu' => 'Conversion queue',
