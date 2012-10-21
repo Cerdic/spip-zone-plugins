@@ -1,5 +1,7 @@
 <?php
 
+    include_spip('inc/texte');
+
 /**
  * Renvoyer la balise <link> pour URL CANONIQUES
  * @return string $flux
