@@ -1,11 +1,21 @@
 <?php
+
+
 // Convertir le code de langue SPIP en code langue du serveur
-function langue2code($langue){
+function langue2code($langue) {
 	switch(strtolower($langue))
 	{
-		case 'fr':
+		case 'br':
 		case 'co':
+		case 'cpf':
+		case 'cpf_hat':
+		case 'fr':
+		case 'fr_sc':
+		case 'fr_lpc':
+		case 'fr_lsf':
+		case 'fr_spl':
 		case 'fr_tu':
+		case 'lb':
 		case 'oc':
 		case 'oc_lnc':
 		case 'oc_ni':
@@ -15,49 +25,112 @@ function langue2code($langue){
 		case 'oc_lms':
 		case 'oc_auv':
 		case 'oc_va':
+		case 'rm':
 		case 'roa':
+		case 'wa':
 		case 'ty':
 			$code = 'FR'; break;
 		case 'en':
 		case 'en_hx':
+		case 'en_sm':
 		case 'ga':
 		case 'gd':
 			$code = 'AM'; break;
 		case 'de':
+		case 'fy':
 			$code = 'DE'; break;
-		case 'es':
 		case 'an':
 		case 'ast':
 		case 'ca':
+		case 'cpf_dom':
+		case 'es':
+		case 'es_mx_pop':
 		case 'es_co':
 		case 'eu':
 		case 'gl':
-		case 'la':
 			$code = 'SP'; break;
 		case 'pt':
 		case 'pt_br':
 			$code = 'PT'; break;
+		case 'el':
+		case 'grc':
+			$code = 'GR'; break;
 		case 'it':
 		case 'it_fem':
 		case 'nap':
-		case 'ro':
+		case 'la':
 		case 'sc':
 		case 'scn':
 		case 'src':
 		case 'sro':
 			$code = 'IT'; break;
+		case 'ar':
+		case 'ber_tam':
+		case 'ber_tam_tfng':
+			$code = 'AR'; break;
+		case 'mg':
+			$code = 'MG'; break;
 		case 'nl':
 			$code = 'NL'; break;
-		case 'trf':  $code = 'TRF'; break;
-		case 'maa':  $code = 'MAA'; break;
-		default: 
+		case 'pl':
+			$code = 'PL'; break;
+		case 'hy':
+			$code = 'ARM'; break;
+		default:
 			$code = _SPIPERIPSUM_LANGUE_DEFAUT; break;
 	}
 	return $code;
 }
 
+function code2charset($code_langue) {
+	switch(strtoupper($code_langue))
+	{
+		case 'FR':
+		case 'PT':
+		case 'IT':
+		case 'NL':
+		case 'AM':
+		case 'DE':
+		case 'SP':
+		case 'TRF':
+		case 'TRA':
+			$charset = 'iso-8859-1'; break;
+		case 'PL':
+			$charset = 'iso-8859-2'; break;
+		case 'GR':
+			$charset = 'iso-8859-7'; break;
+		case 'AR':
+		case 'MAA':
+		case 'BYA':
+			$charset = 'windows-1256'; break;
+		case 'ARM':
+			$charset = 'utf-8'; break;
+		default:
+			$charset = 'iso-8859-1'; break;
+	}
+	return $charset;
+}
+
+function lecture2code($lecture) {
+	switch($lecture)
+	{
+		case _SPIPERIPSUM_LECTURE_EVANGILE:
+			$code = 'GSP'; break;
+		case _SPIPERIPSUM_LECTURE_PREMIERE:
+			$code = 'FR'; break;
+		case _SPIPERIPSUM_LECTURE_SECONDE:
+			$code = 'SR'; break;
+		case _SPIPERIPSUM_LECTURE_PSAUME:
+			$code = 'PS'; break;
+		default:
+			$code = 'GSP'; break;
+	}
+	return $code;
+}
+
+
 // Convertir la date Y-m-d en url avec l'annee, le mois et le jour
-function date2url_date($date){
+function date2url_date($date) {
 	$url = '';
 	$infos = getdate(strtotime($date));
 	$url = '&year=' . $infos['year'] . '&month=' . $infos['mon'] .'&day=' . $infos['mday'];
@@ -65,19 +138,129 @@ function date2url_date($date){
 }
 
 // Determine le jour de la semaine a partir de la date fournie (0=dimanche)
-function date2jour_semaine($date){
+function date2jour_semaine($date) {
 	$infos = getdate(strtotime($date));
 	return $infos['wday'];
 }
 
+
+// Determine le jour de la semaine a partir de la date fournie (0=dimanche)
+function page2page_propre($page, $charset, $no_tag=false) {
+	static $nettoyage_commun = array(
+				'regexp' => array('#(<|&lt;)/?br\b.*(>|&gt;)#UimsS', '#(&nbsp;){2,}#UimsS'),
+				'replace' => array('<br />', '')
+	);
+	static $nettoyage_charset = array(
+				'iso-8859-1' => array(
+						'regexp' => array('#Å#UimsS'),
+						'replace' => array('&oelig;')),
+	);
+
+	$regexp = $nettoyage_commun['regexp'];
+	$replace = $nettoyage_commun['replace'];
+	if (isset($nettoyage_charset[$charset])) {
+		$regexp = array_merge($regexp, $nettoyage_charset[$charset]['regexp']);
+		$replace = array_merge($replace, $nettoyage_charset[$charset]['replace']);
+	}
+
+	if ($no_tag) {
+		$regexp = array_merge($regexp, array('#<p\b.*>.*</p>#UimsS', '#(<br />)+$#UimS', '#</?font\b.*>#UimsS'));
+		$replace = array_merge($replace, array('', '', ''));
+	}
+
+	$page = preg_replace($regexp, $replace, $page);
+
+	return trim($page);
+}
+
+function flux2element($url, $charset, $no_tag=false) {
+	$element = '';
+
+	$page = recuperer_page($url);
+	if (strpos($page, 'Error : ') === false) {
+		$page = page2page_propre(importer_charset($page, $charset), $charset, $no_tag);
+		$element = $page;
+	}
+
+	return $element;
+}
+
+function flux2texte($url, $charset, $lettrine=false) {
+	$texte = array('texte' => '', 'copyright' => '', 'credit' => '');
+
+	$page = recuperer_page($url);
+	if (strpos($page, 'Error : ') === false) {
+		$page = page2page_propre(importer_charset($page, $charset), $charset, false);
+		$segments = explode('<br />', $page);
+
+		$index = count($segments) - 1;
+		$texte['credit'] = trim(extraire_balise($segments[$index], 'a'));
+		unset($segments[$index]);
+
+		$index = $index - 1;
+		$texte['copyright'] = trim($segments[$index]);
+		unset($segments[$index]);
+
+		$index = $index - 1;
+		if (preg_match('#<script\b.*>.*</script\b.*>#UimsS', $segments[$index], $t)) {
+			unset($segments[$index]);
+			$index = $index - 1;
+		}
+		while (!$segments[$index] AND $index>0) {
+			unset($segments[$index]);
+			$index = $index - 1;
+		}
+		$page = trim(implode('<br />', $segments));
+		if ($lettrine) {
+			$lettre = mb_substr($page, 0, 1, $GLOBALS['meta']['charset']);
+			$texte['texte'] = '<span class="lettrine">' . $lettre . '</span>' . mb_substr($page, 1);
+		}
+		else
+			$texte['texte'] = $page;
+
+	}
+	return $texte;
+}
+
+
+function flux2lecture($lecture, $url_base, $charset, $lettrine=false) {
+	$tableau = array();
+
+	// -- Titre court de l'evangile : on extrait la reference du verset uniquement
+	//    Ce titre court est de la forme "Lc 11,25-23"
+	$no_tag = false;
+	$url = $url_base . '&type=reading_st&content=' . lecture2code($lecture);
+	$tableau['verset'] = flux2element($url, $charset, $no_tag);
+
+	// -- Titre long de l'evangile : on extrait le titre uniquement sans le verset
+	//    Ce titre long est de la forme "bla bla 11,25-23."
+	$url = $url_base . '&type=reading_lt&content=' . lecture2code($lecture);
+	$tableau['titre'] = flux2element($url, $charset, $no_tag);
+
+	// -- Texte de la lecture
+	//    On decoupe le texte en 3 parties : le texte proprement dit, sa reference de traduction et un credit
+	$url = $url_base . '&type=reading&content=' . lecture2code($lecture);
+	$texte = flux2texte($url, $charset, $lettrine);
+	$tableau = array_merge($tableau, $texte);
+
+	return $tableau;
+}
+
+
 // Charger le fichier des lectures et du saint du jour j
 // - si le fichier existe on retourne directement son nom complet
 // - sinon on le cree dans le cache du plugin
-function charger_lectures($langue, $jour){
+function charger_lectures($langue, $jour) {
+
+	include_spip('inc/charsets');
 
 	$date = ($jour == _SPIPERIPSUM_JOUR_DEFAUT) ? date('Y-m-d') : $jour;
+//	$date = '2012-10-20';
 	$code_langue = langue2code($langue);
-	
+//	$code_langue = 'MG';
+	$charset = code2charset($code_langue);
+	$lettrine = ($code_langue == 'AR' OR $code_langue == 'ARM') ? false : true;
+
 	$dir = sous_repertoire(_DIR_CACHE,"spiperipsum");
 	$dir = sous_repertoire($dir,substr(md5($code_langue),0,1));
 	$f = $dir . $code_langue . "_" . $date . ".txt";
@@ -87,71 +270,34 @@ function charger_lectures($langue, $jour){
 		$url_date = ($jour == _SPIPERIPSUM_JOUR_DEFAUT) ? '' : date2url_date($date);
 		// Date du jour
 		$tableau['date'] = $date;
+		// Url de base de tous les flux
+		$url_base = 'http://feed.evangelizo.org/reader.php?lang=' . $code_langue . '&date=' . date('Ymd', strtotime($date));
+
 		// Traitement de l'evangile
-		$url = "http://www.levangileauquotidien.org/ind-gospel-d.php?language=".$code_langue.$url_date;
-		$textes = extraire_balises(recuperer_page($url), 'font');
-		$tableau['evangile']['titre'] = $textes[0];
-		$tableau['evangile']['verset'] = $textes[1];
-		$tableau['evangile']['texte'] = $textes[2];
-		$tableau['evangile'] = preg_replace(',</?font\b.*>,UimsS', '', $tableau['evangile']);
-		$tableau['evangile'] = preg_replace(',</?br\b.*>,UimsS', '<br />', $tableau['evangile']);
-		$tableau['evangile'] = str_replace('©', '&copy;', $tableau['evangile']);
+		$tableau['evangile'] = flux2lecture(_SPIPERIPSUM_LECTURE_EVANGILE, $url_base, $charset, $lettrine);
+
 		// Traitement de la premiere lecture
-		$url = "http://www.levangileauquotidien.org/ind-gospel-d.php?language=".$code_langue."&typeRead=FR".$url_date;
-		$textes = extraire_balises(recuperer_page($url), 'font');
-		$tableau['premiere']['titre'] = $textes[0];
-		$tableau['premiere']['verset'] = $textes[1];
-		$tableau['premiere']['texte'] = $textes[2];
-		$tableau['premiere'] = preg_replace(',</?font\b.*>,UimsS', '', $tableau['premiere']);
-		$tableau['premiere'] = preg_replace(',</?br\b.*>,UimsS', '<br />', $tableau['premiere']);
-		$tableau['premiere'] = str_replace('©', '&copy;', $tableau['premiere']);
+		$tableau['premiere'] = flux2lecture(_SPIPERIPSUM_LECTURE_PREMIERE, $url_base, $charset, $lettrine);
+
 		// Traitement de la seconde lecture - uniquement le dimanche
 		if (date2jour_semaine($date) == 0) {
-			$url = "http://www.levangileauquotidien.org/ind-gospel-d.php?language=".$code_langue."&typeRead=SR".$url_date;
-			$textes = extraire_balises(recuperer_page($url), 'font');
-			$tableau['seconde']['titre'] = $textes[0];
-			$tableau['seconde']['verset'] = $textes[1];
-			$tableau['seconde']['texte'] = $textes[2];
-			$tableau['seconde'] = preg_replace(',</?font\b.*>,UimsS', '', $tableau['seconde']);
-			$tableau['seconde'] = preg_replace(',</?br\b.*>,UimsS', '<br />', $tableau['seconde']);
-			$tableau['seconde'] = str_replace('©', '&copy;', $tableau['seconde']);
+			$tableau['seconde'] = flux2lecture(_SPIPERIPSUM_LECTURE_SECONDE, $url_base, $charset, $lettrine);
 		}
+
 		// Traitement du psaume
-		$url = "http://www.levangileauquotidien.org/ind-gospel-d.php?language=".$code_langue."&typeRead=PS".$url_date;
-		$page = recuperer_page($url);
-		// -- on traite façon particuliere les numéros de verset du psaume
-		preg_match('/,[0-9\.\-]*\./', $page, $fin_verset);
-		$textes = extraire_balises($page, 'font');
-		$tableau['psaume']['titre'] = $textes[0];
-		$tableau['psaume']['verset'] = $textes[1] . $fin_verset[0];
-		$tableau['psaume']['texte'] = $textes[2];
-		$tableau['psaume'] = preg_replace(',</?font\b.*>,UimsS', '', $tableau['psaume']);
-		$tableau['psaume'] = preg_replace(',</?br\b.*>,UimsS', '<br />', $tableau['psaume']);
-		$tableau['psaume'] = str_replace('©', '&copy;', $tableau['psaume']);
+		$tableau['psaume'] = flux2lecture(_SPIPERIPSUM_LECTURE_PSAUME, $url_base, $charset, $lettrine);
+
 		// Traitement du commentaire
+		$no_tag = true;
 		// -- titre du commentaire
-		$url = "http://feed.evangelizo.org/reader.php?lang=".$code_langue."&type=comment_t&date=".date("Ymd", strtotime($date));
-		$page = recuperer_page($url);
-		$tableau['commentaire']['titre'] = $page;
+		$tableau['commentaire']['titre'] = flux2element($url_base.'&type=comment_t', $charset, $no_tag);
 		// -- auteur du commentaire
-		$url = "http://feed.evangelizo.org/reader.php?lang=".$code_langue."&type=comment_a&date=".date("Ymd", strtotime($date));
-		$page = recuperer_page($url);
-		$tableau['commentaire']['auteur'] = $page;
+		$tableau['commentaire']['auteur'] = flux2element($url_base.'&type=comment_a', $charset, $no_tag);
 		// -- source du commentaire
-		$url = "http://feed.evangelizo.org/reader.php?lang=".$code_langue."&type=comment_s&date=".date("Ymd", strtotime($date));
-		$page = recuperer_page($url);
-		$tableau['commentaire']['source'] = $page;
-		$tableau['commentaire'] = preg_replace(',</?br\b.*>,UimsS', '', $tableau['commentaire']);
-		$tableau['commentaire'] = preg_replace(',<p\b.*>.*</p\b.*>,UimsS', '', $tableau['commentaire']);
-		// -- texte du commentaire
-		$url = "http://feed.evangelizo.org/reader.php?lang=".$code_langue."&type=comment&date=".date("Ymd", strtotime($date));
-		$page = recuperer_page($url);
-		$tableau['commentaire']['texte'] = $page;
-		$tableau['commentaire']['texte'] = preg_replace('#(</?br\b.*>)#UimsS', '<br />', $tableau['commentaire']['texte']);
- 		$tableau['commentaire']['texte'] = preg_replace('#(&nbsp;){2,}#UimsS', '', $tableau['commentaire']['texte']);
-		$tableau['commentaire']['texte'] = preg_replace(',<p\b.*>.*</p\b.*>,UimsS', '', $tableau['commentaire']['texte']);
-		$tableau['commentaire']['texte'] = preg_replace(',ú,UimsS', '&oelig;', $tableau['commentaire']['texte']);
-		$tableau['commentaire']['texte'] = trim($tableau['commentaire']['texte']);
+		$tableau['commentaire']['source'] = flux2element($url_base.'&type=comment_s', $charset, $no_tag);
+		// -- texte du commentaire : on n'insere jamais de lettrine
+		$texte = flux2texte($url_base.'&type=comment', $charset, false);
+		$tableau['commentaire'] = array_merge($tableau['commentaire'], $texte);
 
 		// Traitement du saint du jour
 		// -- Traitement du nom seul et de l'url permettant de recuperer les textes
@@ -175,6 +321,7 @@ function charger_lectures($langue, $jour){
 		$tableau['saint']['texte'] = trim(str_replace('&nbsp;', '', $tableau['saint']['texte']));
 		$tableau['saint']['url'] = $url_texte[1];
 
+//		var_dump($tableau);
  		ecrire_fichier($f, serialize($tableau));
 	}
 	return $f;
