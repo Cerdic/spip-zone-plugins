@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_reencoder_tout_format' => 'Encode again all files in @format@',
 	'bouton_reencoder_tout_message' => 'Are you sure you want to encode again all files. This can be very long.',
 	'bouton_reencoder_tout_message_format' => 'Are you sure you want to encode again all files in @format@. This can be very long.',
+	'bouton_supprimer_encodages_doubles' => 'Supprimer tous les fichiers résultats de double encodage', # NEW
 
 	// C
 	'caption_avfilter_geres' => 'Video filters (avfilters) managed',
@@ -45,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_valeur_int' => 'This value must be an integer.',
 	'erreur_valeur_int_superieur' => 'This value must be greater than @val@.',
 	'erreur_verifier_droits' => 'The encoding script "script_bash/spipmotion.sh" is not executable.',
+	'explication_double_encodage_supprimer_secu' => 'Vous pouvez le supprimer en toute sécurité, l\'encodage original est disponible.', # NEW
 	'explication_encodeur' => 'If you choose the ffmpeg2theora encoder to your Ogg video, the choice of audio and video codecs become useless.',
 	'explication_framerate' => 'Leave this field blank to keep the same framerate than the original',
 	'explication_presets_qualite' => 'This setting allows you to determine what quality preset libx264 codec will use. This setting is critical to the quality of the final result but also on the slow encoding.',
@@ -246,6 +248,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'thead_template_encodage' => 'Template',
 	'thead_template_encodage_utilise' => 'Encoding template used',
 	'titre_fichier_log' => 'Content of the log file for the ID #@id@ in the queue',
+	'titre_fichiers_double_encodage' => 'Ces fichiers semblent être le résultat de fichiers encodés plusieurs fois', # NEW
+	'titre_fichiers_doubles_spip' => 'Ces fichiers semblent être le résultat de fichiers insérés plusieurs fois en base', # NEW
+	'titre_page_erreurs' => 'Erreurs potentielles de SPIPmotion', # NEW
 	'titre_page_ffmpeg_infos' => 'FFMpeg informations',
 	'titre_page_file' => 'Encoding queue',
 	'titre_page_file_attente' => 'Documents waiting for encoding',
