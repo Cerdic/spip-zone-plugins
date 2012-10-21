@@ -1,0 +1,30 @@
+[(#REM)
+  Squelette #FORMULAIRE_JOOMLA2SPIP
+]
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action},#FORM}
+                               <p class="explication"><:cfgeps_aide:></p>
+
+ 						<div class="choix">#PUCE
+							[<label for="joomla">(#INFO_TITRE{'groupes_mots',#ENV{joomla,6}}|sinon{<:cfgeps_interv_prests:>})</label>]
+							<input type='text' class='text' name='joomla' id='joomla' value="#ENV{joomla,6}" />
+                            <p class="explication"><:cfgeps_aide_forms:></p>
+						</div>
+
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+      [(#REM)						<div class="choix"><input type="checkbox" name="supprimer_numero" id="supprimer_numero" value="1"[(#ENV{supprimer_numero}|=={'1'}|oui)checked="checked"] /><label for="supprimer_numero"><:eps_:></label></div>
+						<div class="choix"><input type="checkbox" name="toujours_paragrapher" id="toujours_paragrapher" value="1"[(#ENV{toujours_paragrapher}|=={'1'}|oui)checked="checked"] /><label for="toujours_paragrapher"><:ck:label_toujours_paragrapher:></label></div>]
+
+      
+	  <p class='boutons'><input type='reset' class='submit' value='<:cfg_eps_bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

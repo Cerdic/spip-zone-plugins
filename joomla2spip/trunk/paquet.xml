@@ -1,0 +1,19 @@
+<paquet
+	prefix="joomla2spip"
+	categorie="maintenance"
+	version="0.2.3"
+	etat="experimental"
+	compatibilite="[2.0.0;3.0.99]"
+	logo="img_pack/icon.png"
+	documentation="http://contrib.spip.net/article4266">
+
+	<nom>Joomla2SPIP</nom>
+	<!-- Conversion de site Joomla vers SPIP -->
+	<auteur>[BoOz->booz@rezo.net]</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+</paquet>
+
+
+	<!-- <slogan>Migrer de Joomla vers SPIP</slogan>
+	<description>Ce plugin permet de lire et afficher une bdd joomla avec SPIP. Il g&#232;re la conversion Joomla -> SPIP via un squelette</description> -->
+	<!-- <fonctions>joomla2spip_fonctions.php</fonctions>  -->
