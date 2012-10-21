@@ -1,7 +1,7 @@
 <paquet
 	prefix="courtcircuit"
 	categorie="outil"
-	version="2.3.3"
+	version="2.3.4"
 	etat="stable"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="icon/courtcircuit-128.png"
@@ -20,5 +20,5 @@
 	<utilise nom="Z" />
 	<utilise nom="compositions" />
 
-	<menu nom="courtcircuit21" titre="courtcircuit:courtcircuit" parent="menu_squelette" icone="courtcircuit-16.png" action="configurer_courtcircuit" />
+	<menu nom="courtcircuit21" titre="courtcircuit:courtcircuit" parent="menu_squelette" icone="images/courtcircuit-16.png" action="configurer_courtcircuit" />
 </paquet>
