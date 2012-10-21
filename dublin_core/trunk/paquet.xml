@@ -1,7 +1,7 @@
 <paquet
 	prefix="dublin_core"
 	categorie="statistique"
-	version="2.0.0"
+	version="2.0.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="prive/themes/spip/images/dublin_core-48.png"
