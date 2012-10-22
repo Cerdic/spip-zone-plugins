@@ -15,6 +15,8 @@
 
 	<licence>GNU/GPL</licence>
 
+	<pipeline nom="affichage_final" inclure="boostrap_fonctions.php" />
+
 	<necessite nom="SPIP" compatibilite="[3.0.0;]" />
 	<necessite nom="lesscss" compatibilite="[0.7.0;]" />
 
