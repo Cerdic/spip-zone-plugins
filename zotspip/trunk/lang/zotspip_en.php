@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_zotspip' => 'Configure ZotSpip',
 	'confimer_remplacement' => 'Replace <strong>@source@</strong> by <strong>@dest@</strong>? Be carefull, this operation can\'t be undone!',
 	'confirmer' => 'Confirm',
-	'connexion_ok' => 'La connexion avec Zotero est opérationnelle.', # NEW
+	'connexion_ok' => 'The connexion width Zotero is working.',
 	'contributeurs' => 'Creators',
 	'createurs' => 'Author(s)',
 
