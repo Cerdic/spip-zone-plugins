@@ -1,0 +1,24 @@
+
+
+<div class="formulaire_spip formulaire_config formulaire_#FORM">
+	<div class="hd titrem"><h3><:feuillederoute:quelle_feuille:></h3><div class="nettoyeur"></div><!--/hd--></div>
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+				<li class="configurer_feuille_choisie">
+					<label for="feuille_choisie"><:feuillederoute:choisir_une_feuille:></label>
+					<input type="text" id="feuille_choisie" name='feuille_choisie' value='[(#CONFIG{feuillederoute/feuille_choisie})]' />
+				</li>
+			</ul>
+			<div class="boutons">
+				<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+			</div>
+		</div>
+	</form>
+</div>

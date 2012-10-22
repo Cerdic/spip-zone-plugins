@@ -1,0 +1,19 @@
+<?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/manuel_site/lang/
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// C
+	'choisir_une_feuille' => 'Renseignez le numéro de la feuille dédiée et validez.',
+	'configurer_feuillederoute' => 'Configuration de la feuille de route.',
+	// Q
+	'quelle_feuille' => 'Quel feuille utiliser pour rédiger le texte de la feuille de route ?',
+	
+	// T
+	'titre_menu' => 'Feuille de Route'
+
+);
+
+?>
