@@ -1,0 +1,16 @@
+[(#ENV{id_auteur}|>{0}|et{#ENV{id_article}|>{0}}|oui)
+	#BOITE_OUVRIR{'','info'}
+	[(#URL_ECRIRE{bigbrother_visites_articles_auteurs,id_auteur=#ENV{id_auteur}}|icone_horizontale{<:bigbrother:voir_statistiques_auteur:>,auteur})]
+	[(#URL_ECRIRE{bigbrother_visites_articles_auteurs,id_article=#ENV{id_article}}|icone_horizontale{<:bigbrother:voir_statistiques_article:>,article})]
+	#BOITE_FERMER
+]
+[(#ENV{id_auteur}|>{0}|et{#ENV{id_article}|non}|oui)
+	#BOITE_OUVRIR{'','info'}
+	[(#URL_ECRIRE{auteur,id_auteur=#ENV{id_auteur}}|icone_horizontale{<:lien_voir_auteur:>,auteur})]
+	#BOITE_FERMER
+]
+[(#ENV{id_article}|>{0}|et{#ENV{id_auteur}|non}|oui)
+	#BOITE_OUVRIR{'','info'}
+	[(#URL_ECRIRE{article,id_article=#ENV{id_article}}|icone_horizontale{<:icone_modifier_article:>,article})]
+	#BOITE_FERMER
+]

@@ -1,0 +1,21 @@
+[(#ENV{id_auteur}|>{0}|oui)
+#SET{nom,#INFO_NOM{auteur,#ENV{id_auteur}}}
+][(#ENV{id_article}|>{0}|oui)
+#SET{nom,#INFO_TITRE{article,#ENV{id_article}}}
+]
+[(#ENV{id_auteur}|>{0}|et{#ENV{id_article}|>{0}}|oui)
+	#SET{titre_boite,<bigbrother:visites_article_auteur{nom=#GET{nom},titre=#GET{titre}}:>}
+	#BOITE_OUVRIR{#CHEMIN_IMAGE{auteur-24.png}|balise_img{'',cadre-icone}|concat{#GET{titre_boite}},'simple','titrem'}
+	[(#INCLURE{fond=prive/squelettes/inclure/bigbrother_statistiques_article_auteur,id_auteur,id_article,mode=prive})]
+	#BOITE_FERMER
+]
+[(#ENV{id_auteur}|>{0}|et{#ENV{id_article}|non}|oui)
+	#BOITE_OUVRIR{#CHEMIN_IMAGE{auteur-24.png}|balise_img{'',cadre-icone}|concat{#GET{nom}},'simple','titrem'}
+	[(#INCLURE{fond=prive/squelettes/inclure/bigbrother_statistiques_auteur,id_auteur,mode=prive})]
+	#BOITE_FERMER
+]
+[(#ENV{id_article}|>{0}|et{#ENV{id_auteur}|non}|oui)
+	#BOITE_OUVRIR{#CHEMIN_IMAGE{article-24.png}|balise_img{'',cadre-icone}|concat{#GET{titre}},'simple','titrem'}
+	[(#INCLURE{fond=prive/squelettes/inclure/bigbrother_statistiques_article,id_article,mode=prive})]
+	#BOITE_FERMER
+]
