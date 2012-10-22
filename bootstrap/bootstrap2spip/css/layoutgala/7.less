@@ -35,9 +35,9 @@ div#footer{clear:left;width:100%}
     #content{
       float: inherit;
       margin:0;
+      width: (@gridColumnWidth * @NcolContent) + (@gridGutterWidth * (@NcolContent -1));
       margin-left:(@gridColumnWidth * @NcolAside) + (@gridGutterWidth * (@NcolAside));
       margin-right:(@gridColumnWidth * @NcolExtra) + (@gridGutterWidth * (@NcolExtra));
-      width: (@gridColumnWidth * @NcolContent) + (@gridGutterWidth * (@NcolContent -1));
     }
     #aside{
       clear: none;

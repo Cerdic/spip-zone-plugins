@@ -1,6 +1,6 @@
 /* 
 Ceci est le fichier CSS du  
-Layout Gala No 34
+Layout Gala No12
 de  
 http://blog.html.it/layoutgala/ 
 */
@@ -17,39 +17,40 @@ div#navigation{background:#B9CAFF}
 div#extra{background:#FF8539}
 div#footer{background: #333;color: #FFF}
 div#footer p{margin:0;padding:5px 10px}
-
 div#container{width:700px;margin:0 auto}
-div#content{float:right;width:500px}
-div#navigation{float:left;width:200px}
-div#extra{float:left;clear:left;width:200px}
-div#footer{clear:both;width:100%}
+div#wrapper{float:left;width:100%}
+div#content{margin-left: 300px}
+div#navigation{float:left;width:150px;margin-left:-550px}
+div#extra{float:left;width:150px;margin-left:-700px}
+div#footer{clear:left;width:100%}
 */
 
 // The Layout
-#layoutgala34 {
+#layoutgala12 {
 
   .core(@NcolContent, @NcolAside, @NcolExtra, @gridColumnWidth, @gridGutterWidth) {
 
     #container{margin:0 auto}
-    #wrapper{float:none;width:100%;margin-left: 0;}
+    #wrapper{float:left;width:100%;margin-left: 0;}
     #content{
-      float:right;
-      width:(@gridColumnWidth * @NcolContent) + (@gridGutterWidth * (@NcolContent - 1));
-      margin-left:0;
-      margin-right:0;
+      float: inherit;
+      margin:0;
+      width: (@gridColumnWidth * @NcolContent) + (@gridGutterWidth * (@NcolContent -1));
+      margin-left:(@gridColumnWidth * (@NcolExtra + @NcolAside)) + (@gridGutterWidth * (@NcolExtra + @NcolAside));
     }
     #aside{
+      clear: none;
       float: left;
       width: (@gridColumnWidth * @NcolAside) + (@gridGutterWidth * (@NcolAside - 1));
-      margin-left:0;
+      margin-left: -((@gridColumnWidth * (@NcolAside+@NcolContent)) + (@gridGutterWidth * (@NcolAside+@NcolContent - 1)));
     }
     #extra{
+      clear: none;
       float: left;
-      clear: left;
       width: (@gridColumnWidth * @NcolExtra) + (@gridGutterWidth * (@NcolExtra - 1));
-      margin-left:0;
+      margin-left: -((@gridColumnWidth * (@NcolAside+@NcolExtra+@NcolContent)) + (@gridGutterWidth * (@NcolAside+@NcolExtra+@NcolContent - 1)));
     }
 
-    #footer{clear:both;width:100%}
+    #footer{clear:left;width:100%}
   }
 }
