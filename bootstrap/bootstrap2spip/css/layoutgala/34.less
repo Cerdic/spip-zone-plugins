@@ -30,26 +30,26 @@ div#footer{clear:both;width:100%}
 
   .core(@NcolContent, @NcolAside, @NcolExtra, @gridColumnWidth, @gridGutterWidth) {
 
-    div#container{margin:0 auto}
-    div#wrapper{float:none;width:100%;margin-left: 0;}
-    div#content{
+    #container{margin:0 auto}
+    #wrapper{float:none;width:100%;margin-left: 0;}
+    #content{
       float:right;
       margin-left:0;
       margin-right:0;
       width:(@gridColumnWidth * @NcolContent) + (@gridGutterWidth * (@NcolContent - 1));
     }
-    div#aside{
+    #aside{
       float: left;
       margin-left:0;
       width: (@gridColumnWidth * @NcolAside) + (@gridGutterWidth * (@NcolAside - 1));
     }
-    div#extra{
+    #extra{
       float: left;
       clear: left;
       margin-left:0;
       width: (@gridColumnWidth * @NcolExtra) + (@gridGutterWidth * (@NcolExtra - 1));
     }
 
-    div#footer{clear:left;width:100%}
+    #footer{clear:left;width:100%}
   }
 }

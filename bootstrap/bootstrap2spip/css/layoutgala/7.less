@@ -30,28 +30,28 @@ div#footer{clear:left;width:100%}
 
   .core(@NcolContent, @NcolAside, @NcolExtra, @gridColumnWidth, @gridGutterWidth) {
 
-    div#container{margin:0 auto}
-    div#wrapper{float:left;width:100%;margin-left: 0;}
-    div#content{
+    #container{margin:0 auto}
+    #wrapper{float:left;width:100%;margin-left: 0;}
+    #content{
       float: inherit;
       margin:0;
       margin-left:(@gridColumnWidth * @NcolAside) + (@gridGutterWidth * (@NcolAside));
       margin-right:(@gridColumnWidth * @NcolExtra) + (@gridGutterWidth * (@NcolExtra));
       width: (@gridColumnWidth * @NcolContent) + (@gridGutterWidth * (@NcolContent -1));
     }
-    div#aside{
+    #aside{
       clear: none;
       float: left;
       width: (@gridColumnWidth * @NcolAside) + (@gridGutterWidth * (@NcolAside - 1));
       margin-left: -((@gridColumnWidth * (@NcolAside+@NcolExtra+@NcolContent)) + (@gridGutterWidth * (@NcolAside+@NcolExtra+@NcolContent - 1)));
     }
-    div#extra{
+    #extra{
       clear: none;
       float: left;
       width: (@gridColumnWidth * @NcolExtra) + (@gridGutterWidth * (@NcolExtra - 1));
       margin-left: -((@gridColumnWidth * @NcolExtra) + (@gridGutterWidth * (@NcolExtra - 1)));
     }
 
-    div#footer{clear:left;width:100%}
+    #footer{clear:left;width:100%}
   }
 }
