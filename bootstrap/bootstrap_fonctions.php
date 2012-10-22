@@ -44,4 +44,3 @@ function bootstrap_affichage_final($flux){
 	}
 	return $flux;
 }
-?>
