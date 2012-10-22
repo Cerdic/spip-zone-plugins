@@ -17,12 +17,19 @@ function balise_MEDIA_LEGENDE_dist($p) {
 	$sql_credits = champ_sql('credits', $p);
 	$sql_type = champ_sql('type_document', $p);
 	$sql_poids = champ_sql('taille', $p);
-	$p->code = "calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_titre,$sql_descriptif,$sql_credits,$sql_type,$sql_poids,\$Pile[0]['legende'],\$Pile[0]['titre'],\$Pile[0]['descriptif'],\$Pile[0]['credits'],\$Pile[0]['type'],\$Pile[0]['poids'])";
+	$p->code = "calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_titre,$sql_descriptif,$sql_credits,$sql_type,$sql_poids,\$Pile[0]['args'])";
 	return $p;
 }
 
-function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_titre,$sql_descriptif,$sql_credits,$sql_type,$sql_poids,$env_legende,$env_titre,$env_descriptif,$env_credits,$env_type,$env_poids){
+function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_titre,$sql_descriptif,$sql_credits,$sql_type,$sql_poids,$args){
 	$ret = '';
+	$env_legende = $args['legende'];
+	$env_titre = $args['titre'];
+	$env_descriptif =$args['descriptif'];
+	$env_credits = $args['credits'];
+	$env_type = $args['type'];
+	$env_poids = $args['poids'];
+	
 	// Doit-on afficher une légende ?
 	if ($env_legende || $env_titre || $env_descriptif || $env_credits || $env_poids || $env_type) {
 		$media_largeur_max_legende = isset($GLOBALS['meta']['media_largeur_max_legende']) ? $GLOBALS['meta']['media_largeur_max_legende'] : 120;
@@ -114,7 +121,7 @@ function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_t
 // Balise placée dans une boucle DOCUMENTS et appelée dans un modèle <media>
 function balise_MEDIA_AFFICHER_LEGENDE_dist($p) {
 	$conteneur = interprete_argument_balise(1,$p);
-	$p->code = "\$Pile[0]['legende'] || \$Pile[0]['titre'] || \$Pile[0]['descriptif'] || \$Pile[0]['credits'] || \$Pile[0]['type'] || \$Pile[0]['poids'] ? ' ' : ''";
+	$p->code = "\$Pile[0]['args']['legende'] || \$Pile[0]['args']['titre'] || \$Pile[0]['args']['descriptif'] || \$Pile[0]['args']['credits'] || \$Pile[0]['args']['type'] || \$Pile[0]['args']['poids'] ? ' ' : ''";
 	return $p;
 }
 
@@ -128,11 +135,17 @@ function balise_MEDIA_IMAGE_RETAILLEE_dist($p) {
 	$sql_titre = champ_sql('titre', $p);
 	$sql_type = champ_sql('type_document', $p);
 	$sql_poids = champ_sql('taille', $p);
-	$p->code = "calculer_balise_MEDIA_IMAGE_RETAILLEE($image,\$Pile[0]['taille'],\$Pile[0]['hauteur'],\$Pile[0]['largeur'],\$Pile[0]['alt'],\$Pile[0]['titre'],$sql_titre,$sql_type,$sql_poids)";
+	$p->code = "calculer_balise_MEDIA_IMAGE_RETAILLEE($image,\$Pile[0]['args'],$sql_titre,$sql_type,$sql_poids)";
 	return $p;
 }
 
-function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$taille,$hauteur,$largeur,$alt,$titre,$sql_titre,$sql_type,$sql_poids){
+function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type,$sql_poids){
+	$taille = $args['taille'];
+	$hauteur = $args['hauteur'];
+	$largeur = $args['largeur'];
+	$alt = $args['alt'];
+	$titre = $args['titre'];
+
 	$src = extraire_attribut($image, 'src');
 	if (!$src)
 		$src = $image;
@@ -186,11 +199,15 @@ function balise_MEDIA_LIEN_dist($p) {
 	$forcer_lien = interprete_argument_balise(2,$p);
 	$forcer_lien = is_null($forcer_lien) ? "''" : $forcer_lien;
 	$id_document = champ_sql('id_document', $p);
-	$p->code = "calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,\$Pile[0]['lien'],\$Pile[0]['titre_lien'],\$Pile[0]['titre'])";
+	$p->code = "calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,\$Pile[0]['args'])";
 	return $p;
 }
 
-function calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$lien,$titre_lien,$titre) {
+function calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$args) {
+	$lien = $args['lien'];
+	$titre_lien = $args['titre_lien'];
+	$titre = $args['titre'];
+	
 	// A-t-on demandé un lien
 	if (!$lien && !$forcer_lien)
 		return $objet;
@@ -222,11 +239,15 @@ function balise_MEDIA_TAILLE_dist($p) {
 	$dim = interprete_argument_balise(1,$p);
 	$sql_largeur = champ_sql('largeur', $p);
 	$sql_hauteur = champ_sql('hauteur', $p);
-	$p->code = "calculer_balise_MEDIA_TAILLE($dim,\$Pile[0]['taille'],\$Pile[0]['hauteur'],\$Pile[0]['largeur'],$sql_largeur,$sql_hauteur)";
+	$p->code = "calculer_balise_MEDIA_TAILLE($dim,\$Pile[0]['args'],$sql_largeur,$sql_hauteur)";
 	return $p;
 }
 
-function calculer_balise_MEDIA_TAILLE($dim,$taille,$hauteur,$largeur,$sql_largeur,$sql_hauteur){
+function calculer_balise_MEDIA_TAILLE($dim,$args,$sql_largeur,$sql_hauteur){
+	$taille = $args['taille'];
+	$hauteur = $args['hauteur'];
+	$largeur = $args['largeur'];
+	
 	$hauteur_defaut = array(
 		'icone' => 52,
 		'petit' => 90,
