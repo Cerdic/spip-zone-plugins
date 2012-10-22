@@ -16,6 +16,8 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
+	<pipeline nom="bigbrother_journaliser" action="" />
+	
 	<pipeline nom="declarer_tables_principales" inclure="base/bigbrother_tables.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/bigbrother_tables.php" />
 	<pipeline nom="boite_infos" inclure="bigbrother_pipelines.php" />

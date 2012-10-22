@@ -7,11 +7,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-/**
- * Déclaration des pipelines du plugin
- */
-$GLOBALS['spip_pipeline']['bigbrother_journaliser']="";
-
 include_spip('inc/bigbrother');
 
 if(!defined('_DIR_LIB_FLOT')){
