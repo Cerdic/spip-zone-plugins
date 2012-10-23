@@ -239,6 +239,10 @@ function mutu_etape_creer_base($e, $options){
 
 								case 'mysql':
 								default:
+								// creer user
+								$req[] = "CREATE user '" . _INSTALL_USER_DB. "'@'" . _INSTALL_HOST_DB_LOCALNAME . "' IDENTIFIED BY '" . _INSTALL_PASS_DB . "'";
+								$err[] = "CREATE user '" . _INSTALL_USER_DB. "'@'" . _INSTALL_HOST_DB_LOCALNAME . "' IDENTIFIED BY 'xxx'";
+								// affecter à sa base
 									$req[] = "GRANT " . _PRIVILEGES_MYSQL_USER_BASE . " ON "
 										. _INSTALL_NAME_DB.".* TO '"
 										. _INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME

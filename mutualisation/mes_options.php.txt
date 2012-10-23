@@ -44,7 +44,7 @@
 	}
 
 	define ('_INSTALL_SITE_PREF', prefixe_mutualisation($site));
-	define ('_INSTALL_NAME_DB', 'mu_'. _INSTALL_SITE_PREF);
+	define ('_INSTALL_NAME_DB', 'mu_'. _INSTALL_SITE_PREF); // 'mu_' ou autre chose mais PAS PLUS DE 3 CARACTERES !!!
 
 	define ('_INSTALL_SERVER_DB', 'mysql'); 
 	define ('_INSTALL_HOST_DB', 'localhost'); 
@@ -158,7 +158,7 @@
 	 *  
 	 * 3) constantes a definir :
 	 *  define ('_INSTALL_SERVER_DB', 'sqlite3'); //  sqlite2 ou sqlite3
-	 *  define ('_INSTALL_NAME_DB', 'mu_'.prefixe_mutualisation($site));
+	 *  define ('_INSTALL_NAME_DB', 'mu_'.prefixe_mutualisation($site));  // 'mu_' ou autre chose mais PAS PLUS DE 3 CARACTERES !!!
 	 * 
 	 * 	les constantes _INSTALL_(HOST|PASS|USER)_DB sont inutiles.
 	 */
