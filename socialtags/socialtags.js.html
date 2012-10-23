@@ -41,8 +41,9 @@
 				.replace(/%d/g, esc(description))
 				.replace(/%u_site/g, esc(this.u_site))
 			)
-			.attr('title', this.n)
-			.wrap('<li><\/li>')
+			.attr('title', this.n)[
+			(#CONFIG{socialtags/wopen, 'non'}|=={oui}?{".attr('onclick','window.open(this.href);return false;')"})
+			].wrap('<li><\/li>')
 			.parent().appendTo(ul);
 		}});
 

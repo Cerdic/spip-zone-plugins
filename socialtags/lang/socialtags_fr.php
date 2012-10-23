@@ -30,6 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_socialtags' => 'Social tags',
 	'cfg_tout_cocher' => 'Tout cocher',
 	'cfg_tout_decocher' => 'Tout décocher',
+	'cfg_wopen' => 'Mode pop-up',
+	'cfg_wopen_exp' => 'Ouvrir le lien vers le service dans une nouvelle fenêtre',
 
 	// D
 	'description_noisette_badge_facebook' => 'Affiche le badge Facebook défini dans la page de configuration',

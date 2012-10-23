@@ -70,6 +70,14 @@
 							</dl>
 						</div>
 					</li>
+					<li class="editer editer_wopen">
+						<label for="wopen"><:socialtags:cfg_wopen:></label>
+						<p class="explication"><:socialtags:cfg_wopen_exp:></p>
+						<div class="choix">
+							<input type="radio" name="wopen" id="wopen_oui" value="oui"[ (#ENV{wopen, 'non'}|=={oui}|oui) checked="checked"]><label for="wopen_oui"><:item_oui:></label>&nbsp;&nbsp;
+							<input type="radio" name="wopen" id="wopen_non" value="non"[ (#ENV{wopen, 'non'}|=={oui}|non) checked="checked"]><label for="wopen_non"><:item_non:></label>
+						</div>
+					</li>
 				</ul>
 			</fieldset>
 		</li>
