@@ -10,36 +10,36 @@
     .thumbnails li:nth-child(2n) {width: auto;float:none;clear: none;margin-left: 0;}
   }
 
-  .two (@width) {
+  .two (@width, @gridGutterWidth) {
     .thumbnails {margin-left: 0;}
-    .thumbnails li {width: @width;float: left;}
+    .thumbnails li {width: @width;/*width:calc(50% - (@gridGutterWidth/2));width:-moz-calc(50% - (@gridGutterWidth/2));*/float: left;}
     .thumbnails li:nth-child(2n-1) {clear: both;float: left;margin-right: 0;margin-left: 0;}
     .thumbnails li:nth-child(2n) {clear: none;float: right;margin-left: 0;}
   }
 
-  .three(@width){
+  .three(@width, @gridGutterWidth){
     .thumbnails {margin-left: 0;}
-    .thumbnails li {width: @width;float: left;}
+    .thumbnails li {width: @width;/*width:calc(33%-(2*@gridGutterWidth/3));width:-moz-calc(33%-(2*@gridGutterWidth/3));*/float: left;}
     .thumbnails li:nth-child(3n-2) {clear: both;float: left;margin-right: 0;margin-left: 0;}
-    .thumbnails li:nth-child(3n-1) {clear: none;float: left;margin-left: (100% - 3*@width)/2 - 0.1%;margin-right: 0;}
+    .thumbnails li:nth-child(3n-1) {clear: none;float: left;margin-left: (100% - 3*@width)/2 - 0.1%;/*margin-left:calc(@gridGutterWidth);margin-left:-moz-calc(@gridGutterWidth);*/margin-right: 0;}
     .thumbnails li:nth-child(3n) {clear: none;float: right;margin-left: 0;}
   }
 
-  .four(@width){
-    .thumbnails li {width: @width;float: left;}
+  .four(@width, @gridGutterWidth){
+    .thumbnails li {width: @width;/*width:calc(25% - (3*@gridGutterWidth/4));width:-moz-calc(25% - (3*@gridGutterWidth/4));*/float: left;}
     .thumbnails li:nth-child(4n-3) {clear: both;float: left;margin-right: 0;margin-left: 0;}
-    .thumbnails li:nth-child(4n-2) {clear: none;float: left;margin-left: (100% - 4*@width)/3 - 0.1%;margin-right: 0;}
-    .thumbnails li:nth-child(4n-1) {clear: none;float: left;margin-left: (100% - 4*@width)/3 - 0.1%;margin-right: 0;}
+    .thumbnails li:nth-child(4n-2) {clear: none;float: left;margin-left: (100% - 4*@width)/3 - 0.1%;/*margin-left:calc(@gridGutterWidth);margin-left:-moz-calc(@gridGutterWidth);*/margin-right: 0;}
+    .thumbnails li:nth-child(4n-1) {clear: none;float: left;margin-left: (100% - 4*@width)/3 - 0.1%;/*margin-left:calc(@gridGutterWidth);margin-left:-moz-calc(@gridGutterWidth);*/margin-right: 0;}
     .thumbnails li:nth-child(4n) {clear: none;float: right;margin-left: 0;}
   }
 
 }
 
 /* mapper avec le plugin album */
-.album {#thumbgrid > .three(31%)}
+.album {#thumbgrid > .three(31%,@gridGutterWidth)}
 .span3,
 .span4{
-  .album {#thumbgrid > .two(48%)}
+  .album {#thumbgrid > .two(48%,@gridGutterWidth)}
 }
 .span1,
 .span2{
@@ -65,28 +65,28 @@
   .span10,
   .span11,
   .span12 {
-    .album {#thumbgrid > .four(22%)}
+    .album {#thumbgrid > .four(22%,@gridGutterWidth1200)}
   }
   .span3{
-    .album {#thumbgrid > .two(48%)}
+    .album {#thumbgrid > .two(48%,@gridGutterWidth1200)}
   }
 }
 @media (min-width: 768px) and (max-width: 979px) {
   .span7 {
-    .album {#thumbgrid > .three(30%)}
+    .album {#thumbgrid > .three(30%,@gridGutterWidth768)}
   }
   .span5{
-    .album {#thumbgrid > .two(48%)}
+    .album {#thumbgrid > .two(48%,@gridGutterWidth768)}
   }
   .span3{
     .album {#thumbgrid > .one()}
   }
 }
 @media (max-width: 767px) {
-  .album {#thumbgrid > .two(48%)}
+  .album {#thumbgrid > .two(48%,@gridGutterWidth768)}
 }
 @media (max-width: 450px) {
-  .album {#thumbgrid > .two(48%)}
+  .album {#thumbgrid > .two(48%,@gridGutterWidth768)}
 }
 @media (max-width: 380px) {
   .album {#thumbgrid > .one()}
