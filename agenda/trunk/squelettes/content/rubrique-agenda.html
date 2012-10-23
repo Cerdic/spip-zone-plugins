@@ -8,16 +8,17 @@
  */
 ]
 <BOUCLE_rub(RUBRIQUES){id_rubrique}>
-<div class="content-principal">
+<section>
 
-	<div class="cartouche">
-		[(#LOGO_RUBRIQUE|image_reduire{200,200})]
-		<h1 class="h1 #EDIT{titre}">#TITRE</h1>
+	<header class="cartouche">
+		<h1 class="#EDIT{titre}">[(#LOGO_RUBRIQUE|image_reduire)]#TITRE</h1>
+	</header>
+
+	<div class="main">
+		[<div class="#EDIT{texte} chapo">(#TEXTE)</div>]
+
+		<INCLURE{fond=inclure/agenda-liste,id_rubrique,env,ajax} />
 	</div>
 
-	[<div class="#EDIT{texte} chapo">(#TEXTE)</div>]
-
-</div>
-<INCLURE{fond=inclure/agenda-liste,id_rubrique,env,ajax} />
-
+</section>
 </BOUCLE_rub>
