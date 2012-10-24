@@ -18,3 +18,7 @@
 	portage SPIP 3
 	configurations
 	liaisions via #FORMULAIRE_EDITER_LIENS et #FORMULAIRE_EDITER_LIENS_SIMPLES
+
+2.2.0
+	La colonne 'type_liaison' est limitée à 25 caractères pour avoir
+	une primary key valide en SQLite et MySQL

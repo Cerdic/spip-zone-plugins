@@ -117,10 +117,10 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 	// Rajout d'un type_liaison dans les liens
 	$maj['1.4.2'] = array(
 		array('maj_tables', array('spip_contacts_liens', 'spip_organisations_liens')),
-        array('sql_alter', 'TABLE `spip_organisations_liens` DROP PRIMARY KEY'),
-        array('sql_alter', 'TABLE `spip_organisations_liens` ADD PRIMARY KEY ( `id_organisation` , `id_objet` , `objet`, `type_liaison`(25)) '),
-        array('sql_alter', 'TABLE `spip_contacts_liens` DROP PRIMARY KEY'),
-        array('sql_alter', 'TABLE `spip_contacts_liens` ADD PRIMARY KEY ( `id_contact` , `id_objet` , `objet`, `type_liaison`(25)) '),
+		array('sql_alter', 'TABLE `spip_organisations_liens` DROP PRIMARY KEY'),
+		array('sql_alter', 'TABLE `spip_organisations_liens` ADD PRIMARY KEY ( `id_organisation` , `id_objet` , `objet`, `type_liaison`(25)) '),
+		array('sql_alter', 'TABLE `spip_contacts_liens` DROP PRIMARY KEY'),
+		array('sql_alter', 'TABLE `spip_contacts_liens` ADD PRIMARY KEY ( `id_contact` , `id_objet` , `objet`, `type_liaison`(25)) '),
 	);
 	
 	/*
@@ -136,7 +136,18 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 	$maj['1.7.1'] = array(
 		array('contacts_migrer_liens_auteurs'),
 	);
-	
+
+	// type_liaison en VARCHAR pour que sqlite ET mysql soient contents
+	$maj['1.7.2'] = array(
+		array('sql_alter', 'TABLE spip_organisations_liens DROP PRIMARY KEY'),
+		array('sql_alter', "TABLE spip_organisations_liens CHANGE type_liaison type_liaison VARCHAR(25) NOT NULL DEFAULT ''"),
+		array('sql_alter', 'TABLE spip_organisations_liens ADD PRIMARY KEY ( id_organisation, id_objet, objet, type_liaison)'),
+
+		array('sql_alter', 'TABLE spip_contacts_liens DROP PRIMARY KEY'),
+		array('sql_alter', "TABLE spip_contacts_liens CHANGE type_liaison type_liaison VARCHAR(25) NOT NULL DEFAULT ''"),
+		array('sql_alter', 'TABLE spip_contacts_liens ADD PRIMARY KEY ( id_contact, id_objet, objet, type_liaison)'),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

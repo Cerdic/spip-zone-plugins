@@ -159,47 +159,47 @@ function contacts_declarer_tables_objets_sql($tables){
 
 function contacts_declarer_tables_auxiliaires($tables_auxiliaires){
 
-    //-- Table organisations_contacts -------------------------------------
-    $organisations_contacts = array(
-        "id_organisation" => "BIGINT(21) NOT NULL",
-        "id_contact"      => "BIGINT(21) NOT NULL",
-        "type_liaison"    => "tinytext NOT NULL DEFAULT ''",
-    );
-    $organisations_contacts_key = array(
-        "PRIMARY KEY"	       => "id_organisation, id_contact",
+	//-- Table organisations_contacts -------------------------------------
+	$organisations_contacts = array(
+		"id_organisation" => "BIGINT(21) NOT NULL",
+		"id_contact"      => "BIGINT(21) NOT NULL",
+		"type_liaison"    => "tinytext NOT NULL DEFAULT ''",
+	);
+	$organisations_contacts_key = array(
+		"PRIMARY KEY"          => "id_organisation, id_contact",
 		"KEY id_organisation"  => "id_organisation",
 		"KEY id_contact"       => "id_contact"
-    );
+	);
 	$tables_auxiliaires['spip_organisations_contacts'] =
 		array('field' => &$organisations_contacts, 'key' => &$organisations_contacts_key);
 
 
-    //-- Table organisations_liens -------------------------------------
-    $organisations_liens = array(
-        "id_organisation" => "BIGINT(21) NOT NULL",
-        "id_objet"   	=> "BIGINT(21) NOT NULL",
-        "objet"      	=> "VARCHAR(25) NOT NULL",
-        "type_liaison"    => "tinytext NOT NULL DEFAULT ''",
-    );
-    $organisations_liens_key = array(
-        "PRIMARY KEY"    => "id_organisation, id_objet, objet, type_liaison",
+	//-- Table organisations_liens -------------------------------------
+	$organisations_liens = array(
+		"id_organisation" => "BIGINT(21) NOT NULL",
+		"id_objet"        => "BIGINT(21) NOT NULL",
+		"objet"           => "VARCHAR(25) NOT NULL",
+		"type_liaison"    => "VARCHAR(25) NOT NULL DEFAULT ''",
+	);
+	$organisations_liens_key = array(
+		"PRIMARY KEY"         => "id_organisation, id_objet, objet, type_liaison",
 		"KEY id_organisation" => "id_organisation"
-    );
+	);
 	$tables_auxiliaires['spip_organisations_liens'] =
 		array('field' => &$organisations_liens, 'key' => &$organisations_liens_key);
 
 
-    //-- Table contacts_liens -------------------------------------
-    $contacts_liens = array(
-        "id_contact" => "BIGINT(21) NOT NULL",
-        "id_objet"   => "BIGINT(21) NOT NULL",
-        "objet"      => "VARCHAR(25) NOT NULL",
-        "type_liaison"    => "tinytext NOT NULL DEFAULT ''",
-    );
-    $contacts_liens_key = array(
-        "PRIMARY KEY"    => "id_contact, id_objet, objet, type_liaison",
+	//-- Table contacts_liens -------------------------------------
+	$contacts_liens = array(
+		"id_contact"   => "BIGINT(21) NOT NULL",
+		"id_objet"     => "BIGINT(21) NOT NULL",
+		"objet"        => "VARCHAR(25) NOT NULL",
+		"type_liaison" => "VARCHAR(25) NOT NULL DEFAULT ''",
+	);
+	$contacts_liens_key = array(
+		"PRIMARY KEY"    => "id_contact, id_objet, objet, type_liaison",
 		"KEY id_contact" => "id_contact"
-    );
+	);
 	$tables_auxiliaires['spip_contacts_liens'] =
 		array('field' => &$contacts_liens, 'key' => &$contacts_liens_key);
 	
