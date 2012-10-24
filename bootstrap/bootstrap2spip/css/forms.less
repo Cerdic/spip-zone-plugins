@@ -2,9 +2,13 @@
 
 /* Structure generale des formulaires
 ----------------------------------------------- */
-.formulaire_spip { clear: both; margin-bottom: @baseLineHeight; padding: @baseLineHeight; background-color: @wellBackground;}
+.formulaire_spip { clear: both; margin-bottom: @baseLineHeight; padding: @baseLineHeight; background-color: @wellBackground;position: relative;}
 .formulaire_spip .boutons {.form-actions;margin: 0 -@baseLineHeight; padding: @baseLineHeight;text-align: right;}
 input.submit {.btn}
+
+/* loading ajax */
+.ariaformprop {position: relative;}
+.formulaire_spip .image_loading,.ariaformprop .image_loading {position: absolute;top: 0;right: 0;}
 
 /* Explications */
 .formulaire_spip .explication {.help-block }
