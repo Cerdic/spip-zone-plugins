@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confimer_remplacement' => 'Remplacer <strong>@source@</strong> par <strong>@dest@</strong> ? Attention, cette opération est irréversible !', # NEW
 	'confirmer' => 'Confirmar',
 	'connexion_ok' => 'La connexion avec Zotero est opérationnelle.', # NEW
-	'contributeurs' => 'Contributeurs', # NEW
+	'contributeurs' => 'Contribuidores',
 	'createurs' => 'Autor(es)',
 
 	// D
@@ -34,14 +34,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_connexion' => 'ZotSpip n\'a pas été capable de se connecter à Zotero. Veuillez vérifier vos paramètres de connexion. Si vous utilisez un proxy, veuillez vérifier qu\'il est correctement configuré dans Spip (Configuration > Fonctions avancées). À savoir, ZopSpip ne fonctionne pas toujours si un proxy est requis.', # NEW
 	'erreur_dom' => 'Para  funcionar ZotSpip necesita la extensión PHP DOM. Habilitan/instalan esta extensión.',
-	'erreur_openssl' => 'Pour fonctionner, ZotSpip nécessite l\'extension PHP openSSL. Veuillez activer/installer cette extension.', # NEW
-	'erreur_simplexml' => 'Pour fonctionner, ZotSpip nécessite l\'extension PHP SimpleXML. Veuillez activer/installer cette extension.', # NEW
+	'erreur_openssl' => 'Para funccionar, ZotSpip necesita  la extensión PHP openSSL. habilitan/instalan esta extensión.',
+	'erreur_simplexml' => 'Para funcionar, ZotSpip necesita  la extensión PHP SimpleXML. Habilitan/instalan esta  extensión.',
 	'explication_api_key' => 'S\'obtient sur la <a href="https://www.zotero.org/settings/keys">page Zotero de gestion des clés personnelles</a>. Pensez à accorder des droits d\'accès suffisants à cette clé.', # NEW
 	'explication_autoriser_modif_zotero' => 'Activer les options de modification de la librairie Zotero (par exemple, la fusion d\'auteurs) ? Si oui, qui a les droits suffisants pour valider ces modifications ? ATTENTION : vous devez également vérifier que vote <em>Clé API</em> a les droits en écriture.', # NEW
 	'explication_corriger_date' => 'Zotero transmets les dates de publication telles qu\'elles ont été saisies. Dès lors, le processeur CSL n\'est pas toujours en capacité de décomposer correctement ces dernières en raison de la grande variété de formats différents. Si tel est le cas, la date de publication ne sera pas affichée une fois les références mises en forme. ZotSpip peut corriger en amont les dates de publications. Attention : seule l\'année sera alors transmise au processeur CSL, sauf si la date est de la forme aaaa-mm-jj ou aaaa-mm. Cette option n\'a par contre aucune répercussion sur la librairie Zotero elle-même.', # NEW
 	'explication_depuis' => 'Sea un año (por ejemplo: <em>2009</em>), sea una duración en año seguida de la palabra <em>años</em> (por ejemplo: <em>3años</em>).',
 	'explication_id_librairie' => 'Pour une librairie personnelle, le <em>userID</em> est indiqué sur la <a href="https://www.zotero.org/settings/keys">page Zotero de gestion des clés personnelles</a>. Pour un groupe, le <em>groupID</em> se trouve dans l\'URL de configuration du groupe qui est de la forme <em>https://www.zotero.org/groups/&lt;groupID&gt;/settings</em>.', # NEW
-	'explication_maj_zotspip' => 'ZotSpip se synchronise à intervalles réguliers (environ toutes les 4 heures) avec le serveur Zotero. Seules les dernières modifications (depuis la dernière synchronisation) sont prises en compte. Au besoin, vous pouvez forcer une mise à jour complète de la base de données, toutes les références étant alors téléchargées à nouveau (si votre librairie est importante, cette synchronisation se fera en plusieurs étapes, seulement 50 références pouvant être mises à jour à la fois).', # NEW
+	'explication_maj_zotspip' => 'ZotSpip se sincroniza con regularidad (aproximadamente cada cuatro horas) con el servidor Zotero. Solamente las últimas modificaciones (desde la as última sincronización) se tendrán en cuenta. En caso necesario, pueden forzar una actualización completa de la base de datos, entonces todas las referencias vuelven a descargarse (si su librería es grande, esta sincronización se realizara en múltiples pasos, solamente  se puede sincronizar simultáneamente 50 referencias).',
 	'explication_ordre_types' => 'Vous pouvez personnaliser l\'ordre utilisé pour les tris par type de référence (changez l\'ordre par glisser/déposer).', # NEW
 	'explication_username' => 'Pour une librairie personnelle, le nom d\'utilisateur est indiqué sur la <a href="https://www.zotero.org/settings/account">page de configuration du compte</a>. Pour un groupe partagé, le nom du groupe se situe à la fin de l\'URL de la page d\'accueil du groupe qui est de la forme <em>https://www.zotero.org/groups/&lt;nom_du_groupe&gt;</em> (dans certain cas, le nom du groupe correspondant à son identifiant numérique).', # NEW
 	'exporter' => 'Exportar',
@@ -139,8 +139,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'probleme_survenu_lors_du_remplacement' => 'Un problème est survenu lors du remplacement (code HTTP @code@).', # NEW
 
 	// R
-	'reference_num' => 'Référence n°', # NEW
-	'remplacer_par' => 'Remplacer par', # NEW
+	'reference_num' => 'Referencia n°',
+	'remplacer_par' => 'Reemplazar por',
 	'resume' => 'Resumen:',
 
 	// S
