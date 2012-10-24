@@ -5,9 +5,8 @@
 #SET{pages,#GET{premiere}|range{#GET{derniere}}}
 #SET{sep,#ENV{separateur,'-'}}
 <B_pages>
-	<ul>
-	<li
-  class='disabled'><span><:zpip:pagination_pages:></span></li>[
+	<span class="pagination-label"><span class="label"><:zpip:pagination_pages:></span></span>
+	<ul>[
 
 	(#SET{item, #ENV{page_courante}|moins{2}|mult{#ENV{pas}} })
 
