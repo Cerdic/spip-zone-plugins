@@ -19,7 +19,7 @@ function formulaires_editer_organisation_traiter_dist($id_organisation='new', $i
 	$res = formulaires_editer_objet_traiter('organisation',$id_organisation,$id_parent,0,$redirect);
 	// eviter le changement de id_organisation si on veut rediriger sur le parent
 	// au moment d'une creation d'une organisation fille.
-	if ($redirect) {
+	if (_request('id_parent')) {
 		$res['redirect'] = $redirect;
 	}
 	

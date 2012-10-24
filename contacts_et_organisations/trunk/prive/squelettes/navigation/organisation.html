@@ -14,7 +14,7 @@
 			<br class='nettoyeur' />
 
 			[(#INCLURE{fond=prive/objets/liste/recherche_auteurs_organisation,
-				id_organisation,recherche=#EVAL{_request(recherche)},env,ajax})]
+				id_organisation,recherche=#EVAL{_request('recherche')},env,ajax})]
 
 
 			[(#AUTORISER{modifier, organisation, #ENV{id_organisation}}|?{

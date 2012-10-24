@@ -14,7 +14,7 @@
 			<br class='nettoyeur' />
 
 			[(#INCLURE{fond=prive/objets/liste/recherche_auteurs_contact,
-				id_contact,recherche=#EVAL{_request(recherche)},env,ajax})]
+				id_contact,recherche=#EVAL{_request('recherche')},env,ajax})]
 
 
 			[(#AUTORISER{modifier, contact, #ENV{id_contact}}|?{
