@@ -12,17 +12,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'en_travaux' => 'Wartung',
-	'erreur_droit' => 'Nur Webmaster k&oum;nen das Plugin Wartung benutzen!',
+	'erreur_droit' => 'Das Plugin Wartung steht nur Webmastern zur Verfügung!',
 
 	// I
-	'info_disallow_robot' => 'Votre site est protégé contre les robots et moteur de recherche pendant la maintenance.', # NEW
-	'info_maintenance_en_cours' => 'Le site est en maintenance ! Seuls les webmestres du site peuvent voir le site public et accèder à l\'espace privé.', # NEW
-	'info_message' => 'Diese Seite ermöglicht einen Wartungshinweis anstelle der Website anzuzeigen.',
+	'info_disallow_robot' => 'Im Wartungsmodus ist Ihre Website für Spider und Suchmaschinen gesperrt.',
+	'info_maintenance_en_cours' => 'Die Website befindet sich im Wartungsmodus! Öffentliche Seiten und Redaktionssystem sind ausschließlich für Webmaster zugänglich.',
+	'info_message' => 'Sie können den Wartungsmodus einschalten und eine Meldung festlegen, die während der Wartung anstelle der Website angezeigt wird.',
 	'info_travaux_texte' => 'Diese Website wird gerade gewartet.
 _ Bitte schauen sie später wieder vorbei.',
 
 	// L
-	'label_disallow_robots' => 'Protéger le site contre les robots et moteur de recherche', # NEW
+	'label_disallow_robots' => 'Website für Spider/Bots und Suchmaschinen sperren',
 
 	// M
 	'message_temporaire' => 'Der Text ihrer Wartungsmeldung:',
@@ -31,7 +31,7 @@ _ Bitte schauen sie später wieder vorbei.',
 	'parametrage_page_travaux' => 'Einstellungen der Wartungsseite',
 
 	// T
-	'texte_lien_publier' => 'Rendre le site public' # NEW
+	'texte_lien_publier' => 'Website freischalten'
 );
 
 ?>
