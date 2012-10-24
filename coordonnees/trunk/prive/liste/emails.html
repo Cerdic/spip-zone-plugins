@@ -1,6 +1,6 @@
 <B_mails>
 #ANCRE_PAGINATION
-<div id='emails_#ENV{objet}_#ENV{id_objet}' class="liste-elements emails">
+<div id='emails_#ENV{objet}_#ENV{id_objet}' class="liste-objets emails">
 <table class='spip liste'>
 <caption><strong class="caption"><:coordonnees:emails:></strong></caption>
 	<tbody>
@@ -11,9 +11,9 @@
 				[(#TITRE)]
 			</td>
 			<td class='email'>
-				[[(#TYPE|match{x400}|non)<a href="mailto:#EMAIL">](
-				#EMAIL
-				)[(#TYPE|match{x400}|non)</a>]]
+				[[(#TYPE|match{x400}|non)<a href="mailto:#EMAIL">]
+				(#EMAIL)
+				[(#TYPE|match{x400}|non)</a>]]
 			</td>
 			<td class='action'>
 			[(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}}|oui)
