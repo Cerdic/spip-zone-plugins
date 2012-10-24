@@ -185,7 +185,7 @@ var map[(#GET{id})];
 	}
 
 	$(function(){
-			jQuery.getScript(['(#CONFIG{auto_compress_js}|=={oui}|?{[(#PRODUIRE{fond=javascript/gis.js}|compacte)],[(#PRODUIRE{fond=javascript/gis.js})]})'],function(){
+		jQuery.getScript(['(#CONFIG{auto_compress_js}|=={oui}|?{[(#PRODUIRE{fond=javascript/gis.js}|compacte)],[(#PRODUIRE{fond=javascript/gis.js})]})'],function(){
 			init_map[(#GET{id})]();
 		});
 		//[(#ENV{ajaxload}|!={non}|oui)onAjaxLoad(init_map[(#GET{id})]);]
