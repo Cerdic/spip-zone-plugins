@@ -17,4 +17,11 @@
 			[(#ENV{forcer}|non)<input type='submit' class='submit' value='<:zotspip:bouton_forcer_maj_complete:>' name="sync_complete" />]
 		</p>
 	</div></form>
+[(#ENV{sync}|oui)
+<script type="text/javascript">// <![(#EVAL**{chr(91)})]CDATA[(#EVAL**{chr(91)})]
+	jQuery('.formulaire_#FORM').ajaxComplete (function(){
+		jQuery('.formulaire_#FORM form').delay(3000).submit();
+	});
+ //#EVAL**{chr(93)}#EVAL**{chr(93)}></script>
+]
 </div>

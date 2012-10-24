@@ -303,6 +303,12 @@ function zotspip_calcul_depuis($depuis,$table) {
 	if (is_numeric($depuis)) $annee = intval($depuis);
 	elseif (substr($depuis,-2)=='an' && is_numeric(substr($depuis,0,-2))) $annee = 1 + intval(date('Y')) - intval(substr($depuis,0,-2)); // L'année en cours compte pour un
 	elseif (substr($depuis,-3)=='ans' && is_numeric(substr($depuis,0,-3))) $annee = 1 + intval(date('Y')) - intval(substr($depuis,0,-3));
+	elseif (substr($depuis,-1)=='a' && is_numeric(substr($depuis,0,-1))) $annee = 1 + intval(date('Y')) - intval(substr($depuis,0,-1));
+	elseif (substr($depuis,-5)=='years' && is_numeric(substr($depuis,0,-5))) $annee = 1 + intval(date('Y')) - intval(substr($depuis,0,-5)); // Prise en charge de l'anglais
+	elseif (substr($depuis,-4)=='year' && is_numeric(substr($depuis,0,-4))) $annee = 1 + intval(date('Y')) - intval(substr($depuis,0,-4));
+	elseif (substr($depuis,-1)=='y' && is_numeric(substr($depuis,0,-1))) $annee = 1 + intval(date('Y')) - intval(substr($depuis,0,-1));
+	elseif (substr($depuis,-4)=='años' && is_numeric(substr($depuis,0,-4))) $annee = 1 + intval(date('Y')) - intval(substr($depuis,0,-4)); // Prise en charge et de l'espagnol
+	elseif (substr($depuis,-3)=='año' && is_numeric(substr($depuis,0,-3))) $annee = 1 + intval(date('Y')) - intval(substr($depuis,0,-3));
 	if ($annee) return array('>=',"$table.annee",$annee);
 	else return array();
 }

@@ -58,7 +58,7 @@ function zotspip_porte_plume_barre_pre_charger($barres) {
 		"name"           => _T('zotspip:outil_inserer_ref'),
 		"className"      => 'outil_inserer_ref',
 		"selectionType"  => '',
-		"closeWith"      => "[ref=[!["._T('zotspip:outil_explication_inserer_ref')."]!]]",
+		"closeWith"      => "[ref=[!["._T('zotspip:outil_explication_inserer_ref').' '._T('zotspip:outil_explication_inserer_ref_exemple')."]!]]",
 		"display"        => true
 	 ));
 	

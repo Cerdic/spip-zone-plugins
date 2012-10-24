@@ -126,7 +126,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_prenom' => 'Nom, Prénom',
 
 	// O
-	'outil_explication_inserer_ref' => 'Identifiant Zotero de la référence. Dans le cas d\'une citation, un nombre de page ou un numéro de section peut être précisé après l\'identifiant, séparé par @. Plusieurs références peuvent être indiquées, séparées par une virgule. Exemple : 4JA2I4UC@page 16-17,FSCANX5W',
+	'outil_explication_inserer_ref' => 'Identifiant Zotero de la référence. Dans le cas d\'une citation, un nombre de page ou un numéro de section peut être précisé après l\'identifiant, séparé par @. Plusieurs références peuvent être indiquées, séparées par une virgule.',
+	'outil_explication_inserer_ref_exemple' => 'Exemple : 4JA2I4UC@page 16-17,FSCANX5W',
 	'outil_inserer_ref' => 'Insérer une réference bibliographie [ref=XXX]',
 
 	// P
