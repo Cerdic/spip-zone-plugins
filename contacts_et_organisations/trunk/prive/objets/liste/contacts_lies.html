@@ -27,11 +27,14 @@ a mis a jour la valeur avec la page reelle]
 			}
 		})]</B_lettre>
 		[<tr><td colspan="4"><p class='pagination'>(#GET{p})</p></td></tr>]
-	
+
+[(#REM) Afficher ou non la liaison ]
+[(#SET{afftype,[(#ENV{objet}|=={organisation}|ou{#ENV{_objet_lien}|=={contact}})]})]
+
 		<tr class='first_row'>
 			<th class="picto" scope='col'></th>
 			<th class="nom" scope='col'>[(#TRI{multi nom,<:contacts:label_nom:>,ajax})]</th>
-			<th class="type" scope='col'><:contacts:label_type_liaison:></th>
+			[(#GET{afftype}|oui)<th class="type" scope='col'><:contacts:label_type_liaison:></th>]
 			<th class='action' scope='col'></th>
 		</tr>
 	</thead>
@@ -44,14 +47,23 @@ a mis a jour la valeur avec la page reelle]
 			<td class='nom'><a href="[(#ID_CONTACT|generer_url_entite{contact})]">[(#PRENOM) ]#NOM</a></td>
 
 			[(#REM) sur boucle pour le crayon, en fonction de la table de liaison ]
-			<BOUCLE_liaison_sur_organisation(organisations_contacts){si (#ENV{objet}|=={organisation})}
+			<BOUCLE_liaison_sur_organisation(organisations_contacts)
+				{si (#ENV{objet}|=={organisation})}
 				{id_contact}{id_organisation=#ENV{id_objet}}>
 				<td class='type #EDIT{type_liaison}'>[(#TYPE_LIAISON|sinon{-})]</td>
 			</BOUCLE_liaison_sur_organisation>
 				<BOUCLE_liaison_autre(contacts_liens)
+					{si #ENV{_objet_lien}|=={contact}}
 					{id_objet=#ENV{id_objet}}{objet=#ENV{objet}}{id_contact}>
 					<td class='type #EDIT{type_liaison}'>[(#TYPE_LIAISON|sinon{-})]</td>
 				</BOUCLE_liaison_autre>
+					[(#REM)
+						Ici, on liste les organisations mais elles sont liées 
+						sur autre chose que sur spip_contacts_liens
+						On ne peut savoir si la table a un type de liaison...
+						<td class='type'></td>
+					]
+				<//B_liaison_autre>
 			<//B_liaison_sur_organisation>
 
 			<td class='action'>
