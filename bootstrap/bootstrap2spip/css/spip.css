@@ -6,6 +6,10 @@
 
 -------------------------------------------------------------- */
 
+/* ajax */
+/* loading ajax */
+.ariaformprop,.ajaxbloc {position: relative;}
+.ariaformprop .image_loading,.ajaxbloc .image_loading  {position: absolute;top: 0;right: 0;}
 
 
 /* Modeles par defaut */
