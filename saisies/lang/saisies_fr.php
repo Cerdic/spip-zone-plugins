@@ -161,6 +161,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_textarea_titre' => 'Bloc de texte',
 
 	// T
+	'tout_selectionner' => 'Tout sélectionner',
 	'tous_visiteurs' => 'Tous les visiteurs (même non enregistrés)',
 
 	// V
