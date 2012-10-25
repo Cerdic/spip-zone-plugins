@@ -160,8 +160,6 @@ var geocoder;]
 		}
 		var geojson = new L.geoJson('', {
 			onEachFeature: function (feature, layer) {
-				console.log(feature);
-				console.log(layer);
 				if (feature.geometry.type == 'Polygon' || feature.geometry.type == 'LineString') {
 					if (feature.geometry.type == 'Polygon') // virer le dernier point du polygon pour faciliter l'edition
 						layer.spliceLatLngs(-1,1);
