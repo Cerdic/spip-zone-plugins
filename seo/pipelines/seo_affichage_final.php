@@ -11,6 +11,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/config');
+include_spip('seo_fonctions');
+
 function seo_affichage_final($flux) {
 
     $forcer_squelette = lire_config('seo/forcer_squelette');
