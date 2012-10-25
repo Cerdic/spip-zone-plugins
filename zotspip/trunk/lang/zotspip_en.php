@@ -32,18 +32,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'droits_insuffisants' => 'You don\'t have the permission to do this modification.',
 
 	// E
-	'erreur_connexion' => 'ZotSpip n\'a pas été capable de se connecter à Zotero. Veuillez vérifier vos paramètres de connexion. Si vous utilisez un proxy, veuillez vérifier qu\'il est correctement configuré dans Spip (Configuration > Fonctions avancées). À savoir, ZopSpip ne fonctionne pas toujours si un proxy est requis.', # NEW
+	'erreur_connexion' => 'ZotSpip cannot connect to Zotero. Please check your settings. If you are using a proxy, please check if the proxy is correctly defined in Spip (Configuration > Advanced functions). Please not that ZotSpip don\'t always work properly with a proxy.',
 	'erreur_dom' => 'ZotSpip needs DOM extension. Please activate/install this PHP extension.',
 	'erreur_openssl' => 'ZotSpip needs openSSL extension. Please activate/install this PHP extension.',
 	'erreur_simplexml' => 'ZotSpip needs SimpleXML extension. Please activate/install this PHP extension.',
-	'explication_api_key' => 'S\'obtient sur la <a href="https://www.zotero.org/settings/keys">page Zotero de gestion des clés personnelles</a>. Pensez à accorder des droits d\'accès suffisants à cette clé.', # NEW
-	'explication_autoriser_modif_zotero' => 'Activer les options de modification de la librairie Zotero (par exemple, la fusion d\'auteurs) ? Si oui, qui a les droits suffisants pour valider ces modifications ? ATTENTION : vous devez également vérifier que vote <em>Clé API</em> a les droits en écriture.', # NEW
-	'explication_corriger_date' => 'Zotero transmets les dates de publication telles qu\'elles ont été saisies. Dès lors, le processeur CSL n\'est pas toujours en capacité de décomposer correctement ces dernières en raison de la grande variété de formats différents. Si tel est le cas, la date de publication ne sera pas affichée une fois les références mises en forme. ZotSpip peut corriger en amont les dates de publications. Attention : seule l\'année sera alors transmise au processeur CSL, sauf si la date est de la forme aaaa-mm-jj ou aaaa-mm. Cette option n\'a par contre aucune répercussion sur la librairie Zotero elle-même.', # NEW
-	'explication_depuis' => 'Soit une année (par exemple : <em>2009</em>), soit une durée en année suivie du mot <em>ans</em> (par exemple : <em>3ans</em>).', # NEW
-	'explication_id_librairie' => 'Pour une librairie personnelle, le <em>userID</em> est indiqué sur la <a href="https://www.zotero.org/settings/keys">page Zotero de gestion des clés personnelles</a>. Pour un groupe, le <em>groupID</em> se trouve dans l\'URL de configuration du groupe qui est de la forme <em>https://www.zotero.org/groups/&lt;groupID&gt;/settings</em>.', # NEW
-	'explication_maj_zotspip' => 'ZotSpip se synchronise à intervalles réguliers (environ toutes les 4 heures) avec le serveur Zotero. Seules les dernières modifications (depuis la dernière synchronisation) sont prises en compte. Au besoin, vous pouvez forcer une mise à jour complète de la base de données, toutes les références étant alors téléchargées à nouveau (si votre librairie est importante, cette synchronisation se fera en plusieurs étapes, seulement 50 références pouvant être mises à jour à la fois).', # NEW
-	'explication_ordre_types' => 'Vous pouvez personnaliser l\'ordre utilisé pour les tris par type de référence (changez l\'ordre par glisser/déposer).', # NEW
-	'explication_username' => 'Pour une librairie personnelle, le nom d\'utilisateur est indiqué sur la <a href="https://www.zotero.org/settings/account">page de configuration du compte</a>. Pour un groupe partagé, le nom du groupe se situe à la fin de l\'URL de la page d\'accueil du groupe qui est de la forme <em>https://www.zotero.org/groups/&lt;nom_du_groupe&gt;</em> (dans certain cas, le nom du groupe correspondant à son identifiant numérique).', # NEW
+	'explication_api_key' => 'You can create a private Key on the <a href="https://www.zotero.org/settings/keys">Feeds/API page</a> in your Zotero settings. Don\'t forget to provide enough rights to this key.',
+	'explication_autoriser_modif_zotero' => 'Activate modification options (as the fusion of two authors)? If yes, who has the right to modify the Zotero library? WARNING: you should also check that your <em>API key</em> has write permissions.',
+	'explication_corriger_date' => 'Zotero provides publication dates in the same way they have been captured. Due to the great variety of date format, the CSL processor is not always able to interpret the date correctly. In this situation, the publication date will not be displayed in the reference. ZotSpip could correct the publication dates before sending the reference to the CSL processor. Be careful: only the publication year will be identified, except if the date is using the format yyyy-mm-dd or yyyy-mm. This option does not modify the original Zotero library.',
+	'explication_depuis' => 'It could be a year (example: <em>2009</em>), or a period in years followed by the English word <em>years</em> (example: <em>3years</em>) or the French word <em>ans</em> (example: <em>3ans</em>).', # MODIF
+	'explication_id_librairie' => 'For a personal library, the <em>userID</em> is displayed on the <a href="https://www.zotero.org/settings/keys">Feed/API page</a> in your Zotero settings. For a group library, the <em>groupID</em> is displayed in the URL of the group configuration: <em>https://www.zotero.org/groups/&lt;groupID&gt;/settings</em>.',
+	'explication_maj_zotspip' => 'ZotSpip is synced every 4 hours with the Zotero server. Only the last changes are taking into account. You can force a full sync of all references. If your library is big, this sync will be performed in several steps, only 50 references being synchronized in a row.',
+	'explication_ordre_types' => 'You can personalise the order of document types when sorting references by type (drag and drop).',
+	'explication_username' => 'For a personal library, the <em>user name</em> is displayed on the <a href="https://www.zotero.org/settings/account">Account page</a> in your Zotero settings. For a group library, the <em>group name</em> is displayed in the URL of the home page of the grou library: <em>https://www.zotero.org/groups/&lt;group_name&gt;</em> (sometimes the group name is equal to the group ID).',
 	'exporter' => 'Export',
 	'exporter_reference' => 'Export the reference:',
 	'exporter_selection' => 'Export the selection using the format',
@@ -54,8 +54,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'identifier_via_doi' => 'Identify the resource from DOI',
 	'identifier_via_isbn' => 'Identify the resource from ISBN',
-	'item_admin' => 'administrateurs non restreints', # NEW
-	'item_admin_restreint' => 'tous les administrateurs (y compris restreints)', # NEW
+	'item_admin' => 'administrators (not restricted)',
+	'item_admin_restreint' => 'all administrators (including restricted administrators)',
 	'item_aeres' => 'by AERES classification',
 	'item_annee' => 'by year',
 	'item_annee_type' => 'by year and by type',
@@ -69,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_personne' => 'nobody',
 	'item_premier_auteur' => 'by first author',
 	'item_recente' => 'recent publications',
-	'item_redacteur' => 'administrateurs + rédacteurs', # NEW
+	'item_redacteur' => 'administrators + editors',
 	'item_resume_tags' => 'abstract + tags',
 	'item_type' => 'by reference type',
 	'item_type_annee' => 'by type and by year',
@@ -115,14 +115,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_username' => 'User/Group name',
 	'label_variante' => 'Variant',
 	'label_zcollection' => 'Zotero Collection',
-	'lien_ressource' => 'Lien vers la ressource', # NEW
-	'liste_createurs' => 'Liste des contributeurs', # NEW
-	'liste_references' => 'Liste des références Zotero', # NEW
-	'liste_tags' => 'Liste des mots-clés', # NEW
+	'lien_ressource' => 'Link to the ressource',
+	'liste_createurs' => 'Contributors list',
+	'liste_references' => 'Zotero references list',
+	'liste_tags' => 'Liste des mots-clés', # Tags list
 
 	// M
 	'maj_zotspip' => 'Update ZotSpip',
-	'message_erreur_style_csl' => 'Le style CSL @style@.csl n\'a pas été trouvé sur le serveur (fichier inexistant ou plugin désactivé).', # NEW
+	'message_erreur_style_csl' => 'The CSL style @style@.csl was not found on your server (file not existing any more or deactivated plugin).',
 	'modifier_en_ligne' => 'Modify online on zotero.org',
 
 	// N
@@ -130,11 +130,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'outil_explication_inserer_ref' => 'Identifiant Zotero de la référence. Dans le cas d\'une citation, un nombre de page ou un numéro de section peut être précisé après l\'identifiant, séparé par @. Plusieurs références peuvent être indiquées, séparées par une virgule. Exemple : 4JA2I4UC@page 16-17,FSCANX5W', # NEW
+	'outil_explication_inserer_ref_exemple' => 'Exemple : 4JA2I4UC@page 16-17,FSCANX5W', # NEW
 	'outil_inserer_ref' => 'Insert a bibliographic reference [ref=XXX]',
 
 	// P
 	'plusieurs_references' => '@nb@ references',
-	'probleme_survenu_lors_du_remplacement' => 'Un problème est survenu lors du remplacement (code HTTP @code@).', # NEW
+	'probleme_survenu_lors_du_remplacement' => 'A problem occurred (HTTP code @code@).',
 
 	// R
 	'reference_num' => 'Reference n°',
@@ -147,8 +148,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'source' => 'source',
 	'supprimer_createur' => 'Delete this author',
 	'supprimer_tag' => 'Delete this tag',
-	'sync_complete_demandee' => 'Une synchronisation complète de la base a été demandée.', # NEW
-	'sync_en_cours' => 'La synchronisation est en cours mais n\'est toujours pas terminée. Veuillez cliquer à nouveau sur <em>Synchroniser</em>.', # NEW
+	'sync_complete_demandee' => 'A full sync has been asked.',
+	'sync_en_cours' => 'Sync is still ongoing. Please click again the <em>Sync</em> button.',
 	'synchronisation_effectuee' => 'Sync performed',
 
 	// T

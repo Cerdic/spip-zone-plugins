@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer_zotspip' => 'Configurar ZotSpip',
-	'confimer_remplacement' => 'Remplacer <strong>@source@</strong> par <strong>@dest@</strong> ? Attention, cette opération est irréversible !', # NEW
+	'confimer_remplacement' => 'Reemplazar <strong>@source@</strong> por <strong>@dest@</strong> ? ¡Cuidado!, esta acción no se puede deshacer. !',
 	'confirmer' => 'Confirmar',
 	'connexion_ok' => 'La connexion avec Zotero est opérationnelle.', # NEW
 	'contributeurs' => 'Contribuidores',
@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_api_key' => 'S\'obtient sur la <a href="https://www.zotero.org/settings/keys">page Zotero de gestion des clés personnelles</a>. Pensez à accorder des droits d\'accès suffisants à cette clé.', # NEW
 	'explication_autoriser_modif_zotero' => 'Activer les options de modification de la librairie Zotero (par exemple, la fusion d\'auteurs) ? Si oui, qui a les droits suffisants pour valider ces modifications ? ATTENTION : vous devez également vérifier que vote <em>Clé API</em> a les droits en écriture.', # NEW
 	'explication_corriger_date' => 'Zotero transmets les dates de publication telles qu\'elles ont été saisies. Dès lors, le processeur CSL n\'est pas toujours en capacité de décomposer correctement ces dernières en raison de la grande variété de formats différents. Si tel est le cas, la date de publication ne sera pas affichée une fois les références mises en forme. ZotSpip peut corriger en amont les dates de publications. Attention : seule l\'année sera alors transmise au processeur CSL, sauf si la date est de la forme aaaa-mm-jj ou aaaa-mm. Cette option n\'a par contre aucune répercussion sur la librairie Zotero elle-même.', # NEW
-	'explication_depuis' => 'Sea un año (por ejemplo: <em>2009</em>), sea una duración en año seguida de la palabra <em>años</em> (por ejemplo: <em>3años</em>).',
+	'explication_depuis' => 'Sea un año (por ejemplo: <em>2009</em>), sea una duración en año seguida de la palabra <em>años</em> (por ejemplo: <em>3años</em>).', # MODIF
 	'explication_id_librairie' => 'Pour une librairie personnelle, le <em>userID</em> est indiqué sur la <a href="https://www.zotero.org/settings/keys">page Zotero de gestion des clés personnelles</a>. Pour un groupe, le <em>groupID</em> se trouve dans l\'URL de configuration du groupe qui est de la forme <em>https://www.zotero.org/groups/&lt;groupID&gt;/settings</em>.', # NEW
 	'explication_maj_zotspip' => 'ZotSpip se sincroniza con regularidad (aproximadamente cada cuatro horas) con el servidor Zotero. Solamente las últimas modificaciones (desde la as última sincronización) se tendrán en cuenta. En caso necesario, pueden forzar una actualización completa de la base de datos, entonces todas las referencias vuelven a descargarse (si su librería es grande, esta sincronización se realizara en múltiples pasos, solamente  se puede sincronizar simultáneamente 50 referencias).',
 	'explication_ordre_types' => 'Vous pouvez personnaliser l\'ordre utilisé pour les tris par type de référence (changez l\'ordre par glisser/déposer).', # NEW
@@ -52,8 +52,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'filtrer' => 'Filtrar',
 
 	// I
-	'identifier_via_doi' => 'Identifier la ressource à partir de son DOI', # NEW
-	'identifier_via_isbn' => 'Identifier la ressource à partir de son ISBN', # NEW
+	'identifier_via_doi' => 'Identificar el recurso a  partir de su DOI',
+	'identifier_via_isbn' => 'Identificar el recurso a  partir de su ISBN',
 	'item_admin' => 'administradores no limitados',
 	'item_admin_restreint' => 'tous les administrateurs (y compris restreints)', # NEW
 	'item_aeres' => 'según la clasificación AERES',
@@ -64,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_complet' => 'todos los campos',
 	'item_date_ajout' => 'par date d\'ajout dans la base', # NEW
 	'item_liste' => 'lista',
-	'item_liste_simple' => 'liste simple', # NEW
+	'item_liste_simple' => 'lista sencilla',
 	'item_numero' => 'por número',
 	'item_personne' => 'nadie',
 	'item_premier_auteur' => 'por primer autor',
@@ -132,7 +132,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'outil_explication_inserer_ref' => 'Identifiant Zotero de la référence. Dans le cas d\'une citation, un nombre de page ou un numéro de section peut être précisé après l\'identifiant, séparé par @. Plusieurs références peuvent être indiquées, séparées par une virgule. Exemple : 4JA2I4UC@page 16-17,FSCANX5W', # NEW
-	'outil_inserer_ref' => 'Insertar una referencia bibliográfica. [ref=XXX]',
+	'outil_explication_inserer_ref_exemple' => 'Exemple : 4JA2I4UC@page 16-17,FSCANX5W', # NEW
+	'outil_inserer_ref' => 'Insertar una referencia bibliográfica [ref=XXX]',
 
 	// P
 	'plusieurs_references' => '@nb@ referencias',
@@ -150,7 +151,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer_createur' => 'Borrar este autor',
 	'supprimer_tag' => 'Borrar esta palabra clave',
 	'sync_complete_demandee' => 'Une synchronisation complète de la base a été demandée.', # NEW
-	'sync_en_cours' => 'La sincronización está siendo procesado pero no siempre esta terminada. haz clic en el lienzo <em>Synchroniser</em> de nuevo.',
+	'sync_en_cours' => 'La sincronización está siendo procesado pero no siempre esta terminada. haz clic en el lienzo <em>Sincronizar</em> de nuevo.',
 	'synchronisation_effectuee' => 'Sincronización realizada',
 
 	// T
