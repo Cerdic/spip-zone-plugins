@@ -11,6 +11,7 @@
 	- sw_lon = lon - 10°            longitude du sud-ouest de la bounding box
 	- ne_lat = lat + 10°            latitude du nord-est de la bounding box
 	- ne_lon = lon + 10°            longitude du nord-est de la bounding box
+	- boutons = #ARRAY{marker,non}	permet de spécifier les boutons à ne pas afficher dans la barre d'édition
 
 ]
 
@@ -189,8 +190,13 @@ var geocoder;]
 		geojson.addData(data);
 		</BOUCLE_gis>
 		[(#REM) afficher les outils de dessin uniquement lors de la création d'objet ]
-		
-		drawControl = new L.Control.Draw();
+		var drawOptions = {
+			drawMarker: [(#ENV{boutons}|table_valeur{marker}|=={non}|?{false,true})],
+			drawPolyline: [(#ENV{boutons}|table_valeur{polyline}|=={non}|?{false,true})],
+			drawPolygon: [(#ENV{boutons}|table_valeur{polygon}|=={non}|?{false,true})],
+			drawRectangle: [(#ENV{boutons}|table_valeur{rectangle}|=={non}|?{false,true})]
+		};
+		var drawControl = new L.Control.Draw(drawOptions);
 		form_map.addControl(drawControl);
 		
 		form_map.on('drawend', function(e) {
