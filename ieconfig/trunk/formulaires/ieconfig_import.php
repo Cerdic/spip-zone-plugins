@@ -67,6 +67,39 @@ function ieconfig_saisies_import() {
 			)
 		);
 		
+		// Gestion des plugins utilisant le pipeline ieconfig_metas
+		$ieconfig_metas = array();
+		foreach(pipeline('ieconfig_metas',array()) as $prefixe => $data){
+			if(isset($config[$prefixe])) {
+				if (isset($data['icone'])) {
+					$icone = chemin_image($data['icone']);
+					if (!$icone) $icone = find_in_path($data['icone']);
+					if ($icone) $icone = '<img src="'.$icone.'" alt="" style="margin-left:-50px; margin-right:34px;" />';
+				} else $icone= '';
+				$ieconfig_metas[$prefixe] = $icone . (isset($data['titre']) ? $data['titre'] : $prefixe);
+			}
+		}
+		if (count($ieconfig_metas)>0)
+			$saisies[] = array(
+				'saisie' => 'fieldset',
+				'options' => array(
+					'nom' => 'metas_fieldset',
+					'label' => _T('ieconfig:label_importer_metas'),
+					'icone' => 'config-export-16.png'
+				),
+				'saisies' => array(
+					array(
+						'saisie' => 'checkbox',
+						'options' => array(
+							'nom' => 'export_metas',
+							'label' => _T('ieconfig:label_importer'),
+							'tout_selectionner' => 'oui',
+							'datas' => $ieconfig_metas
+						)
+					)
+				)
+			);
+		
 		// On passe via le pipeline ieconfig
 		$saisies = pipeline('ieconfig',array(
 			'args' => array(
@@ -75,29 +108,6 @@ function ieconfig_saisies_import() {
 			),
 			'data' => $saisies
 		));
-		
-		// Gestion des plugins utilisant le pipeline ieconfig_metas
-		foreach(pipeline('ieconfig_metas',array()) as $prefixe => $data){
-			if(isset($config[$prefixe]))
-				$saisies[] = array(
-					'saisie' => 'fieldset',
-					'options' => array(
-						'nom' => $prefixe,
-						'label' => isset($data['titre']) ? $data['titre'] : $prefixe,
-						'icone' => isset($data['icone']) ? $data['icone'] : ''
-					),
-					'saisies' => array(
-						array(
-							'saisie' => 'oui_non',
-							'options' => array(
-								'nom' => 'import_'.$prefixe,
-								'label' => _T('ieconfig:label_importer'),
-								'defaut' => ''
-							)
-						)
-					)
-				);
-		}
 	}
 	return $saisies;
 }
@@ -155,8 +165,11 @@ function formulaires_ieconfig_import_traiter_dist() {
 		));
 		
 		// Gestion des plugins utilisant le pipeline ieconfig_metas
+		$import_metas = _request('import_metas');
+		if (!is_array($import_metas)) $import_metas = array();
+		
 		foreach(pipeline('ieconfig_metas',array()) as $prefixe => $data){
-			if(_request('import_'.$prefixe)=='on' && isset($config[$prefixe])) {
+			if(in_array($prefixe,$import_metas) && isset($config[$prefixe])) {
 				if(isset($data['metas_brutes']))
 					foreach(explode(',',$data['metas_brutes']) as $meta)
 						if (isset($config[$prefixe][$meta]))

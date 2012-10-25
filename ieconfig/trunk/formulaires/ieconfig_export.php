@@ -76,6 +76,7 @@ $saisies = array (
 					'options' => array(
 						'nom' => 'export_metas',
 						'label' => _T('ieconfig:label_configurations_a_exporter'),
+						'tout_selectionner' => 'oui',
 						'datas' => $ieconfig_metas
 					)
 				)

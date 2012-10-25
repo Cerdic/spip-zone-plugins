@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_ieconfig_import_fichier' => 'Fichier à importer :',
 	'label_ieconfig_import_local' => 'Configurations disponibles localement :',
 	'label_importer' => 'Importer ?',
+	'label_importer_metas' => 'Éléments à importer',
 
 	// M
 	'message_erreur_export' => 'Une erreur s\'est produite lors de l\'enregistrement du fichier <i>@filename@</i> dans le répertoire <i>tmp/ieconfig/</i>.',
