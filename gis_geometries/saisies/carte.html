@@ -11,6 +11,7 @@
 	- sw_lon = lon - 10°            longitude du sud-ouest de la bounding box
 	- ne_lat = lat + 10°            latitude du nord-est de la bounding box
 	- ne_lon = lon + 10°            longitude du nord-est de la bounding box
+	- nodraw = oui					permet de désactiver la barre d'édition pour revenir au comportement par défaut
 	- boutons = #ARRAY{marker,non}	permet de spécifier les boutons à ne pas afficher dans la barre d'édition
 
 ]
@@ -190,6 +191,7 @@ var geocoder;]
 		geojson.addData(data);
 		</BOUCLE_gis>
 		[(#REM) afficher les outils de dessin uniquement lors de la création d'objet ]
+		[(#ENV{nodraw}|non)
 		var drawOptions = {
 			drawMarker: [(#ENV{boutons}|table_valeur{marker}|=={non}|?{false,true})],
 			drawPolyline: [(#ENV{boutons}|table_valeur{polyline}|=={non}|?{false,true})],
@@ -228,7 +230,18 @@ var geocoder;]
 					$('#champ_#ENV{champ_lon,lon}').val(center.lng);
 				});
 			}
+		});]
+		[(#ENV{nodraw}|oui)
+		// mettre a jour les coordonnees quand on clique la carte
+		form_map.on('click', function(e) {
+			maj_inputs(form_map,e.latlng,'click');
+			$('#champ_#ENV{champ_type,type}').val('Point');
+			$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(marker));
 		});
+		marker.on("dragend", function(e){
+			maj_inputs(form_map,e.target._latlng,'click');
+			$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(marker));
+		});]
 		<//B_gis>
 		
 		// mettre à jour le zoom quand on le modifie
