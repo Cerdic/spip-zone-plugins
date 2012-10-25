@@ -163,7 +163,9 @@ function microblog_affiche_milieu($flux){
 				)
 			)
 		AND
-			($cfg['evt_publierarticles'] OR $cfg['evt_proposerarticles'])){
+			($cfg['evt_publierarticles'] OR $cfg['evt_proposerarticles'])
+		AND $cfg['invite']
+		){
 		$deplie = false;
 		$ids = 'formulaire_editer_microblog-article-' . $id_article;
 		include_spip("inc/presentation"); // bouton_block_depliable et al non dispo en SPIP 3 sinon
