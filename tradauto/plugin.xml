@@ -2,7 +2,7 @@
 	<nom>Tradauto</nom>
 	<slogan>Partez à la conquête du Monde avec le Traducteur automatique</slogan>
 	<auteur>Bruno de Goyrans</auteur>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<version_base>0.1</version_base>
 
 	<icon>images/tradauto-64.png</icon>
