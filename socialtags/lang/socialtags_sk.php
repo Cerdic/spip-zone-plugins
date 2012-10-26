@@ -32,8 +32,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_socialtags' => 'Social tags',
 	'cfg_tout_cocher' => 'Označiť všetko',
 	'cfg_tout_decocher' => 'Odznačiť všetko',
-	'cfg_wopen' => 'Mode pop-up', # NEW
-	'cfg_wopen_exp' => 'Ouvrir le lien vers le service dans une nouvelle fenêtre', # NEW
+	'cfg_wopen' => 'Režim Vyskakovacie okno',
+	'cfg_wopen_exp' => 'Odkaz na službu otvoriť v novom okne',
 
 	// D
 	'description_noisette_badge_facebook' => 'Zobrazí odznak Facebooku definovaný na stránke s nastaveniami',
