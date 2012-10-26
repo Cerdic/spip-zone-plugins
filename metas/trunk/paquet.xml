@@ -30,9 +30,9 @@
 -->
 
     
-    <!-- reste le menu mais je vois pas bien où on va le mettre , à faire plus tard
+
     <onglet id="metas" parent="configuration">		<icone>images/metas-24.png</icone>		<titre>metas:configuration_metas</titre>	</onglet>
-    -->
+
 
     
 </paquet>
