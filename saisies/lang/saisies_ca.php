@@ -164,6 +164,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tous_visiteurs' => 'Tots els visitants (fins i tot els no registrats)',
+	'tout_selectionner' => 'Tout sélectionner', # NEW
 
 	// V
 	'vue_sans_reponse' => '<i>Sense resposta</i>', # MODIF

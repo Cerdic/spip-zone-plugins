@@ -164,6 +164,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tous_visiteurs' => 'All visitors (even if not registered)',
+	'tout_selectionner' => 'Tout sélectionner', # NEW
 
 	// V
 	'vue_sans_reponse' => '<i>(no data entered)</i>',
