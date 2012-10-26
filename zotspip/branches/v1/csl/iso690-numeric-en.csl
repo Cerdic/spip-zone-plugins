@@ -18,9 +18,9 @@
     </author>
     <category citation-format="numeric"/>
     <category field="generic-base"/>
-    <updated>2012-02-07T01:46:04+00:00</updated>
     <summary>Style based on ISO 690:2010(E), V1</summary>
-    <rights>This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License: http://creativecommons.org/licenses/by-sa/3.0/</rights>
+    <updated>2012-09-28T02:06:38+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale>
     <terms>
@@ -221,9 +221,9 @@
   </macro>
   <macro name="issue">
     <group delimiter=", ">
-      <text variable="volume" prefix="Vol. "/>
-      <text variable="issue" prefix="no. "/>
-      <text variable="page" prefix="pp. "/>
+      <text variable="volume" prefix="Vol.&#160;"/>
+      <text variable="issue" prefix="no.&#160;"/>
+      <text variable="page" prefix="pp.&#160;"/>
     </group>
   </macro>
   <macro name="publisher">
@@ -253,9 +253,9 @@
         <group prefix=" [" suffix="]">
           <text term="accessed" text-case="capitalize-first"/>
           <date variable="accessed">
-            <date-part name="day" prefix=" "/>
-            <date-part name="month" prefix=" "/>
-            <date-part name="year" prefix=" "/>
+            <date-part name="day" prefix="&#160;"/>
+            <date-part name="month" prefix="&#160;"/>
+            <date-part name="year" prefix="&#160;"/>
           </date>
         </group>
       </if>
@@ -270,21 +270,21 @@
   <macro name="page">
     <choose>
       <if type="book thesis manuscript" match="any">
-        <text variable="number-of-pages" suffix=" p"/>
+        <text variable="number-of-pages" suffix="&#160;p"/>
       </if>
       <else-if type="chapter paper-conference article-newspaper" match="any">
-        <text variable="page" prefix="pp. "/>
+        <text variable="page" prefix="pp.&#160;"/>
       </else-if>
       <else-if type="report patent" match="any">
-        <text variable="page" suffix=" p"/>
+        <text variable="page" suffix="&#160;p"/>
       </else-if>
     </choose>
   </macro>
   <macro name="isbn">
-    <text variable="ISBN" prefix="ISBN "/>
+    <text variable="ISBN" prefix="ISBN&#160;"/>
   </macro>
   <macro name="doi">
-    <text variable="DOI" prefix="DOI "/>
+    <text variable="DOI" prefix="DOI&#160;"/>
   </macro>
   <macro name="url">
     <choose>
@@ -301,7 +301,7 @@
     <text variable="archive"/>
     <choose>
       <if variable="archive_location">
-        <text value=": "/>
+        <text value=":&#160;"/>
       </if>
     </choose>
   </macro>

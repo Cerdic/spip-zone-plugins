@@ -4,6 +4,8 @@
     <title>IEEE</title>
     <id>http://www.zotero.org/styles/ieee</id>
     <link href="http://www.zotero.org/styles/ieee" rel="self"/>
+    <link href="http://www.ieee.org/portal/cms_docs_iportals/iportals/publications/authors/transjnl/stylemanual.pdf" rel="documentation"/>
+    <link href="http://www.ieee.org/documents/auinfo07.pdf" rel="documentation"/>
     <author>
       <name>Michael Berkowitz</name>
       <email>mberkowi@gmu.edu</email>
@@ -23,23 +25,21 @@
     <contributor>
       <name>Sebastian Karcher</name>
     </contributor>
+    <category citation-format="numeric"/>
     <category field="engineering"/>
     <category field="generic-base"/>
-    <category citation-format="numeric"/>
-    <updated>2012-02-07T01:46:04+00:00</updated>
-    <rights>This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License: http://creativecommons.org/licenses/by-sa/3.0/</rights>
-    <link href="http://www.ieee.org/portal/cms_docs_iportals/iportals/publications/authors/transjnl/stylemanual.pdf" rel="documentation"/>
-    <link href="http://www.ieee.org/documents/auinfo07.pdf" rel="documentation"/>
+    <updated>2012-10-19T02:38:43+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <!-- Macros -->
   <macro name="edition">
     <choose>
-      <if type="bill book graphic legal_case motion_picture report song chapter paper-conference" match="any">
+      <if type="bill book chapter graphic legal_case legislation motion_picture paper-conference report song" match="any">
         <choose>
           <if is-numeric="edition">
             <group delimiter=" ">
               <number variable="edition" form="ordinal"/>
-              <text term="edition" form="short" suffix="." strip-periods="true"/>
+              <text term="edition" form="short"/>
             </group>
           </if>
           <else>
@@ -57,7 +57,7 @@
           <date-part name="year" form="long"/>
         </date>
       </if>
-      <else-if type="bill book graphic legal_case motion_picture  song thesis chapter paper-conference" match="any">
+      <else-if type=" bill book chapter graphic legal_case legislation motion_picture paper-conference song thesis" match="any">
         <date variable="issued">
           <date-part name="year" form="long"/>
         </date>
@@ -74,7 +74,7 @@
   <macro name="author">
     <names variable="author">
       <name initialize-with=". " delimiter=", " and="text"/>
-      <label form="short" prefix=", " text-case="capitalize-first" suffix="." strip-periods="true"/>
+      <label form="short" prefix=", " text-case="capitalize-first"/>
       <substitute>
         <names variable="editor"/>
         <names variable="translator"/>
@@ -84,29 +84,29 @@
   <macro name="editor">
     <names variable="editor">
       <name initialize-with=". " delimiter=", " and="text"/>
-      <label form="short" prefix=", " text-case="capitalize-first" suffix="." strip-periods="true"/>
+      <label form="short" prefix=", " text-case="capitalize-first"/>
     </names>
   </macro>
   <macro name="locators">
     <group delimiter=", ">
       <text macro="edition"/>
       <group delimiter=" ">
-        <text term="volume" form="short" suffix="." strip-periods="true"/>
+        <text term="volume" form="short"/>
         <number variable="volume" form="numeric"/>
       </group>
       <group delimiter=" ">
         <number variable="number-of-volumes" form="numeric"/>
-        <text term="volume" form="short" suffix="." plural="true" strip-periods="true"/>
+        <text term="volume" form="short" plural="true"/>
       </group>
       <group delimiter=" ">
-        <text term="issue" form="short" suffix="." strip-periods="true"/>
+        <text term="issue" form="short"/>
         <number variable="issue" form="numeric"/>
       </group>
     </group>
   </macro>
   <macro name="title">
     <choose>
-      <if type="bill book graphic legal_case motion_picture song" match="any">
+      <if type="bill book graphic legal_case legislation motion_picture song" match="any">
         <text variable="title" font-style="italic"/>
       </if>
       <else>
@@ -116,7 +116,7 @@
   </macro>
   <macro name="publisher">
     <choose>
-      <if type="bill book graphic legal_case motion_picture  song chapter paper-conference" match="any">
+      <if type=" bill book chapter graphic legal_case legislation motion_picture paper-conference song" match="any">
         <text variable="publisher-place" suffix=": "/>
         <text variable="publisher"/>
       </if>
@@ -173,7 +173,7 @@
   </macro>
   <macro name="page">
     <group>
-      <label variable="page" form="short" suffix=". " strip-periods="true"/>
+      <label variable="page" form="short" suffix=" "/>
       <text variable="page"/>
     </group>
   </macro>
@@ -182,8 +182,8 @@
     <sort>
       <key variable="citation-number"/>
     </sort>
-    <layout prefix="[" suffix="]" delimiter="], [">
-      <text variable="citation-number"/>
+    <layout delimiter=", ">
+      <text variable="citation-number" prefix="[" suffix="]"/>
     </layout>
   </citation>
   <!-- Bibliography -->
@@ -247,7 +247,7 @@
           <text macro="issued"/>
         </else-if>
         <!-- Generic/Fallback Formats -->
-        <else-if type="bill book graphic legal_case motion_picture report song" match="any">
+        <else-if type="bill book graphic legal_case legislation motion_picture report song" match="any">
           <group delimiter=", " suffix=". ">
             <text macro="title"/>
             <text macro="locators"/>

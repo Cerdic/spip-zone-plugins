@@ -4,6 +4,7 @@
     <title>Science</title>
     <id>http://www.zotero.org/styles/science</id>
     <link href="http://www.zotero.org/styles/science" rel="self"/>
+    <link href="http://www.sciencemag.org/about/authors/prep/res/refs.dtl" rel="documentation"/>
     <author>
       <name>Julian Onions</name>
       <email>julian.onions@gmail.com</email>
@@ -18,10 +19,9 @@
     <category field="science"/>
     <issn>0036-8075</issn>
     <issn>1095-9203</issn>
-    <updated>2012-02-07T01:46:04+00:00</updated>
     <summary>The Science journal style.</summary>
-    <link href="http://www.sciencemag.org/about/authors/prep/res/refs.dtl" rel="documentation"/>
-    <rights>This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License: http://creativecommons.org/licenses/by-sa/3.0/</rights>
+    <updated>2012-09-28T02:06:38+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <macro name="editor">
     <names variable="editor" prefix="" suffix="" delimiter=", ">
@@ -58,7 +58,7 @@
   </macro>
   <macro name="title">
     <choose>
-      <if type="bill book graphic legal_case motion_picture report song" match="any">
+      <if type="bill book graphic legal_case legislation motion_picture report song" match="any">
         <text variable="title" font-style="italic"/>
       </if>
       <else>
@@ -115,7 +115,7 @@
           <text macro="publisher"/>
           <text macro="issued" prefix=" (" suffix=")"/>
         </if>
-        <else-if type="bill book graphic legal_case motion_picture report song" match="any">
+        <else-if type="bill book graphic legal_case legislation motion_picture report song" match="any">
           <group>
             <text macro="title" prefix=" "/>
             <text macro="editor" prefix=" "/>

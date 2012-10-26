@@ -13,9 +13,9 @@
       <email>julien.sicot@gmail.com</email>
     </contributor>
     <category citation-format="numeric"/>
-    <updated>2012-02-07T01:46:04+00:00</updated>
     <summary>Style Zotero respectant les normes bibliographiques françaises : NF Z44-005  et NF ISO 690-2</summary>
-    <rights>This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License: http://creativecommons.org/licenses/by-sa/3.0/</rights>
+    <updated>2012-09-28T02:06:38+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <macro name="author">
     <names variable="author" suffix=". ">
@@ -61,7 +61,7 @@
         <text variable="publisher-place" suffix=" : " prefix=" "/>
       </if>
       <else>
-        <text value="[s.l.] : "/>
+        <text value="[s.l.]&#160;: "/>
       </else>
     </choose>
     <choose>
@@ -153,7 +153,7 @@
           </choose>
         </if>
         <else>
-          <text variable="title" prefix="« " suffix=" »."/>
+          <text variable="title" quotes="true" suffix="."/>
         </else>
       </choose>
     </group>
@@ -185,7 +185,7 @@
   <macro name="locators">
     <text variable="volume" prefix=" Vol. " suffix=","/>
     <text variable="issue" prefix=" n°" suffix=","/>
-    <text variable="page" prefix=" p. " suffix="."/>
+    <text variable="page" prefix=" p.&#160;" suffix="."/>
   </macro>
   <citation disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true">
     <layout prefix=" (" suffix=")" delimiter="">
@@ -208,7 +208,7 @@
           <text macro="publisher" prefix=" "/>
           <text variable="number-of-pages" suffix=" p."/>
         </if>
-        <else-if type="bill book graphic legal_case motion_picture report song" match="any">
+        <else-if type="bill book graphic legal_case legislation motion_picture report song" match="any">
           <text macro="edition"/>
           <text macro="publisher" prefix=""/>
           <text variable="number-of-pages" suffix=" p."/>
@@ -249,8 +249,8 @@
       <text macro="access"/>
       <text macro="accessed-date" prefix=" "/>
       <choose>
-        <if type="bill book graphic legal_case motion_picture report song chapter paper-conference" match="any">
-          <text variable="ISBN" prefix="ISBN : " suffix="."/>
+        <if type="bill book chapter graphic legal_case legislation motion_picture paper-conference report song" match="any">
+          <text variable="ISBN" prefix="ISBN&#160;: " suffix="."/>
         </if>
       </choose>
     </layout>
