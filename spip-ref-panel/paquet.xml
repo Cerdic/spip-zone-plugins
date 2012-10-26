@@ -1,0 +1,25 @@
+<paquet
+	prefix="srp"
+	categorie="outil"
+	version="0.1"
+	etat="experimental"
+	compatibilite="[3.0-dev;["
+	logo="images/srp-24.png"
+	schema="1.0"
+  documentation="http://nutzme5.loiseau2nuit.net/"
+>
+
+	<nom>Metas</nom>
+
+	<auteur lien="http://nutzme5.loiseau2nuit.net/">Loiseau2nuit</auteur>
+
+  <!-- <utilise nom="Z" /> -->
+	<!-- necessite metas -->
+	<!-- necessite liens_contenus -->
+	<!-- utilise PIWIK ou GAnalytics -->
+  
+  <onglet id="srp" parent="configuration">		<icone>images/srp-24.png</icone>		<titre>srp:configuration_srp</titre>	</onglet>
+  
+
+    
+</paquet>

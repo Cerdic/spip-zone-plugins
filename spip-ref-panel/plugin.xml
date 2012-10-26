@@ -1,0 +1,24 @@
+<plugin>
+	<nom>Spip Ref Panel</nom>
+	<slogan><multi>[fr]Bo&icirc;te &agrave; outils du R&eacute;f&eacute;renceur pour SPIP[en]SEO toolkit for SPIP</multi></slogan>
+	<auteur>Loiseau2nuit</auteur>
+	<icon>img/srp-128.png</icon>
+	<licence>GNU/GPL</licence>
+	<version>0.1-dev</version>
+	<etat>experimental</etat>
+	<description>
+		<multi>
+			[fr]Ce (meta) plugin g&eacute;n&egrave;re les dépendances &agrave; plusieurs plugins utiles pour le r&eacute;f&eacute;rencement de sites web et offre un squelette ( <code>spip.php?page=ref-panel</code> ) permettant la modifications de masse sur les informations les plus courament manipul&eacute;es par les r&eacute;f&eacute;renceurs (Titles, metas, urls, Hx, ...)
+			[en]This (meta) plugin brings you dependancies for usefull SEO plugins and offers a panel ( <code>spip.php?page=ref-panel</code> ) allowing usual SEO data bulk edition (such as titles, metas, urls, Hx, ...)
+		</multi>
+	</description>
+	<lien>http://nutzme5.loiseau2nuit.net/</lien>
+	<prefix>srp</prefix>
+	<!-- options>srp_options.php</options -->
+	<categorie>outils</categorie>
+	<necessite id="SPIP" version="[3.0.99;]" />
+	<!-- necessite metas -->
+	<!-- SPIP 2 : necessite urledit -->
+	<!-- necessite liens_contenus -->
+	<!-- utilise PIWIK ou GAnalytics -->
+</plugin>
