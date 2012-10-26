@@ -1,44 +1,35 @@
-<!-- titre=Tradauto-->
+<!-- titre=<:tradauto:tradauto:>-->
 <!-- icone=images/tradauto-24.png-->
-<!-- descriptif=Configurez quelques parametres-->
+<!-- descriptif=<:tradauto:configurer_parametre:>-->
 #CACHE{0}
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
 <fieldset>
-	<legend>Configuration Microsoft Translator - Windows Azure Marketplace</legend>
+	<legend><:tradauto:configuration:> Microsoft Translator - Windows Azure Marketplace</legend>
 	<p>
-		1 - <a target="_blank" href="http://go.microsoft.com/?linkid=9782667">S'inscrire à l'API Microsoft Translator sur Azure Marketplace. Choisir un forfait de volume mensuel de traduction (GRATUIT pour 2Mc/mois)</a><br>
-		2 - Se connecter ou créer un identifiant Windows Live ID.<br>
-		3 - <a target="_blank" href="https://datamarket.azure.com/developer/applications">Créer votre application et récupérer vos identifiants</a><br>
+		1 - <a target="_blank" href="http://go.microsoft.com/?linkid=9782667"><:tradauto:incrire_api_microsoft:></a><br>
+		2 - <:tradauto:connecter_creer_id:>.<br>
+		3 - <a target="_blank" href="https://datamarket.azure.com/developer/applications"><:tradauto:creer_application:></a><br>
 
 	</p>
 
-  <label for="clientID_1">ID de l'application Market place  :</label>
+  <label for="clientID_1"><:tradauto:id_application_mp:>  :</label>
   <input type="text" name="clientID" value="#ENV{clientID}" id="clientID_1" />
   <br/>
 
-  <label for="clientSecret_1">Secret du client de l'application :</label>
+  <label for="clientSecret_1"><:tradauto:secret_application_mp:> :</label>
   <input type="text" name="clientSecret" value="#ENV{clientSecret}" id="clientSecret_1" />
   <br/>
 
 </fieldset>
 
 <fieldset>
-	<legend>Exclusions</legend>
+	<legend><:tradauto:exclusions:></legend>
 
-	<ul>
-		<li>Listez ci-dessous les chaines à exclure de la traduction.</li>
-		<li>Chaque occurence de chaine sera laissée telle que durant la traduction.</li>
-		<li>Chaque chaine est à séparer par un retour à la ligne.</li>
-		<li>Vous pouvez mettre des expressions régulières. Exemple :<br/>
-  	<strong>&lt;test&gt;.*?&lt;/test&gt;</strong> laisse tel que <strong>&lt;test&gt;ceci est un test&lt;/test&gt;</strong><br/>
-		Voir les expressions régulières javascript pour plus d'infos.</li>
-		<li>En fonction des langues sélectionnées, le traducteur peut insérer des espaces indésirables. C'est notamment le cas pour les modèles. Faites des tests et excluez les modèles modifiés injustement.</li>
-		<li>Avec une expr. rég. intelligente, vous pouvez exclure tout ou partie d'un modèle. Par exemple pour exclure la balise du modèle mais laisser certains paramètres à la traduction.</li>
-	</ul>
+	<p><:tradauto:exclusions_explication:></p>
 
-	<label for="mt_exclus">Liste des exclusions :</label>
-	<textarea name="mt_exclus" id="mt_exclus" rows="10" cols="50">[(#CONFIG{tradauto/mt_exclus})]</textarea>
+	<label for="mt_exclus"><:tradauto:exclusions_liste:> :</label>
+	<textarea name="mt_exclus" id="mt_exclus" rows="10" cols="60">[(#CONFIG{tradauto/mt_exclus})]</textarea>
   <br/>
 
 

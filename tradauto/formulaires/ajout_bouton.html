@@ -26,7 +26,7 @@ function init_tradauto()
 	for (var i = 0 ; i < t_input.length ; i ++)
 		if (t_input[i].type == "text")
 		{
-			if (t_input[i].value.length > 10000) alert ("ATTENTION : la longueur ("+t_input[i].value.length+" ar.) du champs input "+t_input[i].id+" dépasse le maximum de 10000 caractères.\nLa traduction sera effective pour les 10000 premiers caractères.\nVous devrez complèter la traduction pour les car. au délà.\nIl est également possible que cela provoque une erreur 414 (requête trop longue).");
+			if (t_input[i].value.length > 10000) alert (_T(tradauto:caractere_max_input{nb_caractere_max_input="+t_input[i].value.length+", input_id="+t_input[i].id+"}));
 			t_atraduire_txt.push(prepare_texte(t_input[i].value));
 			t_atraduire_id.push([t_input[i].id]);
 		}
@@ -35,7 +35,7 @@ function init_tradauto()
 	var t_textarea = document.getElementsByTagName('textarea');
 	for (var i = 0 ; i < t_textarea.length ; i ++)
 	{
-		if (t_textarea[i].value.length > 10000) alert ("ATTENTION : la longueur ("+t_textarea[i].value.length+" car.) du champs textarea "+t_textarea[i].id+" dépasse le maximum de 10000 caractères.\nLa traduction sera effective pour les 10000 premiers caractères.\nVous devrez complèter la traduction pour les car. au délà.\nIl est également possible que cela provoque une erreur 414 (requête trop longue).");
+		if (t_textarea[i].value.length > 10000) alert (_T(tradauto:caractere_max_textarea{nb_caractere_max_textarea="+t_textarea[i].value.length+", textarea_id="+t_textarea[i].id+"}));
 		t_atraduire_txt.push(prepare_texte(t_textarea[i].value));
 		t_atraduire_id.push([t_textarea[i].id]);
 	}
@@ -67,12 +67,12 @@ function traduire()
 
 		document.body.appendChild(s);
 		document.getElementsByTagName('body')[0].style.cursor = 'wait'; // Sablier
-		tradauto_msg("Traduction en cours. Patientez...");
+		tradauto_msg(_T('tradauto:traduction_en_cours'));
 	}
 	else
 	{
 		document.getElementsByTagName('body')[0].style.cursor = 'default'; // curseur par défaut
-		tradauto_msg("Traduction effectuée");
+		tradauto_msg(_T('tradauto:traduction_effectuer'));
 
 		// On a tout traduit, on met à jour la page
 		for (var i = 0 ; i < t_traduit_txt.length ; i ++)
@@ -81,7 +81,7 @@ function traduire()
 //alert(document.getElementById(t_traduit_id[i]).value);
 		}
 
-		alert("Traduction effectuée avec succès.\nVous pouvez maintenant corriger la traduction et/ou enregistrer.")
+		alert(_T('tradauto:traduction_effectuer_succes'))
 	}
 }
 
