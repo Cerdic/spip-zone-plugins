@@ -80,3 +80,17 @@ Un item est compose de :
   .entry-content {max-height: 10*@baseLineHeight;}
 }
 
+/* liste de documents */
+.documents .liste-items,.liste-items.documents {
+  .item {padding:@paddingSmall;padding-right:0;padding-left: 3*@baseLineHeight;}
+  .entry {padding-bottom: 0}
+  .entry-title {font-size: inherit;line-height: inherit;margin-bottom: 0}
+  .spip_logos {float: left;max-width: 1.5*@baseLineHeight;margin:@paddingSmall;margin-left: -3*@baseLineHeight;margin-top: 0;}
+  .info-publi {display: block}
+  .lire-la-suite {display: none}
+}
+.short.documents .liste-items,.short .liste-items.documents,
+.short .liste-items.documents,.liste-items.short.documents {
+  .item {padding-left: 0}
+  .spip_logos {display: none;}
+}
