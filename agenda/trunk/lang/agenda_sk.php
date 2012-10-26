@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_precedente' => 'predchádzajúci rok',
 	'annee_suivante' => 'ďalší rok',
 	'aucun_evenement' => 'žiadna udalosť',
-	'aucun_inscrit' => 'Žiadne prihlásenia',
+	'aucun_inscrit' => 'Žiadne prihlásenie',
 	'aucune_rubrique_mode_agenda' => 'Podľa predvolených nastavení vám všetky rubriky umožňujú umožňujú využívať udalosti. Ak kalendár udalostí aktivujete pre jednu rubriku alebo viacero rubrík, riadenie udalostí bude obmedzené na vetvy týchto rubrík.',
 
 	// B
@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_evenement' => 'Vytvoriť novú udalosť',
 	'icone_modifier_evenement' => 'Upraviť udalosť',
 	'indiquez_votre_choix' => 'Uveďte svoju voľbu',
-	'info_1_mois' => '1 mois', # NEW
+	'info_1_mois' => '1 mesiac',
 	'info_1_place' => '1 miesto',
 	'info_aucun_evenement' => 'Žiadna udalosť',
 	'info_evenement' => 'Udalosť',
@@ -77,7 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_inscription' => 'Registrácia online:',
 	'info_lieu' => 'Miesto:',
 	'info_nb_inscrits' => '@nb@ prihlásení',
-	'info_nb_mois' => '@nb@ mois', # NEW
+	'info_nb_mois' => '@nb@ mesiac',
 	'info_nb_places' => '@nb@ miest',
 	'info_nombre_evenements' => '@nb@ udalostí',
 	'info_nouvel_evenement' => 'Nová udalosť',
@@ -91,9 +91,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscrits' => 'Registrácie',
 
 	// L
-	'label_annee' => 'Année', # NEW
+	'label_annee' => 'Rok',
 	'label_inscription' => 'Registrácia online',
-	'label_periode_saison' => 'Saison', # NEW
+	'label_periode_saison' => 'Ročné obdobie',
 	'label_places' => 'Obmedziť počet miest',
 	'label_reponse_jyparticipe' => 'Budem tam',
 	'label_reponse_jyparticipe_pas' => 'Neprídem',
@@ -136,13 +136,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'telecharger_oui' => 'Iba pozitívne reakcie',
 	'telecharger_toutes' => 'Všetky reakcie',
 	'telecharger_toutes_tous_evenements' => 'Všetky reakcie cez prihlásenie',
-	'texte_agenda' => 'KALENDÁR UDALOSTÍ', # MODIF
+	'texte_agenda' => 'Kalendár udalostí',
 	'texte_evenement_statut' => 'Táto udalosť je:',
-	'texte_logo_objet' => 'LOGO UDALOSTI', # MODIF
+	'texte_logo_objet' => 'Logo udalosti',
 	'titre_cadre_ajouter_evenement' => 'Pridať udalosť',
 	'titre_cadre_modifier_evenement' => 'Upraviť udalosť',
 	'titre_sur_l_agenda' => 'V Kalendári udalostí ',
-	'titre_sur_l_agenda_aussi' => 'Et aussi...', # NEW
+	'titre_sur_l_agenda_aussi' => 'A tiež...',
 	'toutes_rubriques' => 'Všetky',
 
 	// U
