@@ -16,7 +16,7 @@
 	<prefix>srp</prefix>
 	<!-- options>srp_options.php</options -->
 	<categorie>outils</categorie>
-	<necessite id="SPIP" version="[3.0.99;]" />
+	<necessite id="SPIP" version="[3.0-dev;[" />
 	<!-- necessite metas -->
 	<!-- SPIP 2 : necessite urledit -->
 	<!-- necessite liens_contenus -->
