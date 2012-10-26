@@ -138,8 +138,10 @@ var map[(#GET{id})];
 									iconAnchor: new L.Point( feature.properties.icon_anchor\[0\], feature.properties.icon_anchor\[1\] ),
 								}));
 							}
-							if (feature.properties && feature.properties.title){
-								var popupContent = '<strong>' + feature.properties.title + '</strong>';
+							if (feature.properties && (feature.properties.title || feature.properties.description)){
+								var popupContent = '';
+								if (feature.properties.title)
+									popupContent = '<strong>' + feature.properties.title + '</strong>';
 								if (feature.properties.description)
 									popupContent = popupContent + feature.properties.description;
 								layer.bindPopup(popupContent);
