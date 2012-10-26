@@ -17,14 +17,14 @@
 			<input type="hidden" name="notation_id_donnees" id="id_donnees[(#ENV*{_form_id})]" value="[(#ENV*{_id_objet})]" />
 			<input type="hidden" name="content" id="content[(#ENV*{_form_id})]" value="" />
 			<input type="submit" class="access" value="Voter"/>
-			[<span class="note">(#GET{total}) [(#GET{total}|>{1}|?{<:notation:votes:>,<:notation:vote:>})]</span>]
+			[<span class="[(#PLUGIN{bootstrap}|?{badge,note})]">(#GET{total}) [(#GET{total}|>{1}|?{<:notation:votes:>,<:notation:vote:>})]</span>]
 		</div>
 	</form>
 ]
 
 [(#ENV**{editable}|non)
 	[(#NOTATION_ETOILE{[(#GET{note_ponderee})],[(#ENV*{_objet})][(#ENV*{_id_objet})]})]
-	[<span class="note">(#GET{total}) [(#GET{total}|>{1}|?{<:notation:votes:>,<:notation:vote:>})]</span>]
+	[<span class="[(#PLUGIN{bootstrap}|?{badge,note})]">(#GET{total}) [(#GET{total}|>{1}|?{<:notation:votes:>,<:notation:vote:>})]</span>]
 ]
 
 </div>
