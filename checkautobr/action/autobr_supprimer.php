@@ -27,5 +27,5 @@ function action_autobr_supprimer_dist() {
 	}
 
 	include_spip('inc/headers');
-	redirige_par_entete(generer_url_prive('checkautobr'));
+	redirige_par_entete(generer_url_ecrire('checkautobr'));
 }
