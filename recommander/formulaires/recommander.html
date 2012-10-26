@@ -7,7 +7,7 @@
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
 		<li class="editer editer_recommander_from[ (#ENV**{erreurs}|table_valeur{recommander_from}|oui)erreur]">
-			<label for='recommander_from'><:form_pet_votre_email:></label>[
+			<label for='recommander_from'><:entree_adresse_email:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{recommander_from})</span>
 			]<input type='text' class='text forml' id='recommander_from' name='recommander_from' value='#ENV*{recommander_from}' />
 		</li>
