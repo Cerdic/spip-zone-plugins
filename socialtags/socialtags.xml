@@ -20,6 +20,7 @@
 <link>javascript:socialtags_addfavorite('%u','%t');</link>
 <author>bookmark</author>
 <description>(ne fonctionne et ne s'affiche que sur Internet Explorer)</description>
+<category>1</category>
 </item>
 
 <!-- B -->
@@ -84,6 +85,7 @@
 <author>delicious</author>
 <link>http://delicious.com/save?url=%u&amp;title=%t&amp;notes=%d</link>
 <description>Agrégateur à la mode. Bookmarks.</description>
+<category>1</category>
 </item>
 
 <item>
@@ -112,6 +114,7 @@
 <title>Facebook</title>
 <author>facebook</author>
 <link>http://www.facebook.com/sharer/sharer.php?u=%u&amp;t=%t</link>
+<category>1</category>
 </item>
 
 <item>
@@ -154,6 +157,7 @@
 <title>Google +1</title>
 <author>googleplus</author>
 <link>https://plusone.google.com/_/+1/confirm?url=%u&amp</link>
+<category>1</category>
 </item>
 
 <item>
@@ -226,6 +230,7 @@
 <title>LinkedIn</title>
 <author>linkedin</author>
 <link>http://www.linkedin.com/shareArticle?mini=true&amp;url=%u&amp;title=%t&amp;source=%u_site&amp;summary=%d</link>
+<category>1</category>
 </item>
 
 <item>
@@ -316,6 +321,7 @@
 <title>Imprimer la page</title>
 <author>printer</author>
 <link>javascript:window.print()</link>
+<category>1</category>
 </item>
 
 <!-- R -->
@@ -398,6 +404,7 @@
 <author>tumblr</author>
 <link>http://www.tumblr.com/share?v=3&amp;u=%u&amp;t=%t&s=</link>
 <description>Digg-like</description>
+<category>1</category>
 </item>
 
 <item>
@@ -412,6 +419,7 @@
 <author>twitter</author>
 <link>http://twitter.com/share?text=%t&amp;url=%u</link>
 <description>Microblogging</description>
+<category>1</category>
 </item>
 
 <!-- V -->
@@ -419,6 +427,7 @@
 <title>Viadeo</title>
 <author>viadeo</author>
 <link>http://www.viadeo.com/shareit/share/?url=%u&amp;title=%t</link>
+<category>1</category>
 </item>
 
 <item>
