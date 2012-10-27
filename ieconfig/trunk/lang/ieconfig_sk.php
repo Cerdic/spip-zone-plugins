@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_ieconfig_import_fichier' => 'Súbor na nahratie:',
 	'label_ieconfig_import_local' => 'Lokálne dostupné nastavenia:',
 	'label_importer' => 'Importovať?',
-	'label_importer_metas' => 'Éléments à importer', # NEW
+	'label_importer_metas' => 'Prvky na nahratie',
 
 	// M
 	'message_erreur_export' => 'Pri ukladaní súboru <i>@filename@</i> do priečinka <i>tmp/ieconfig/</i> nastala chyba.',
