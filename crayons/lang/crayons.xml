@@ -3,7 +3,9 @@
 		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
 	</langue>
 	<langue code="ca" />
-	<langue code="de" />
+	<langue code="de" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=de">
+		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
+	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=en">
 		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />

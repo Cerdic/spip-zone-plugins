@@ -24,13 +24,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => 'Alles bearbeiten',
 	'effets' => 'Effekte',
 	'explication_exec_autorise' => 'Zur Bearbeitung zugelassene Seiten
-  (?exec=...) : (exec-Skripte mit Komma trennen).', # MODIF
-	'explication_introduction_article' => 'L\'introduction d\'un article affiche le descriptif de l\'article, sinon affiche ses 600 premiers caractères (chapeau puis texte).', # NEW
-	'explication_reduire_logo' => 'Logo verkleinern wenn es
- gr&ouml;&szlig;er als x Pixel ist.Beispiel: 100. (0 = niemals)', # MODIF
+  (?exec=...) : (exec-Skripte mit Komma trennen).',
+	'explication_introduction_article' => 'Die Einleitung eines Artikels zeigt das Feld "Beschreibung" an. Sollte es leer sein, werden die ersten  600 Zeichen des Artikels aus den Feldern "Kopf" und "Text" angezeigt.',
+	'explication_reduire_logo' => 'Logo verkleinern wenn es größer als x Pixel ist.
+Beispiel: 100. (0 = niemals)',
 
 	// I
-	'info_experimental' => 'Expérimental', # NEW
+	'info_experimental' => 'Expérimentell',
 
 	// L
 	'label_activer_barre_typo' => 'Funktionsleisten f&uuml;r die Stifte aktivieren?',
@@ -45,17 +45,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_abandon' => 'bei Abbruch',
 	'label_msg_no_change' => 'wenn keine &Auml;nderung',
 	'label_reduire_logo' => 'Logos verkleinern',
-	'label_upload_document' => 'Autoriser l\'ajout de documents par glisser/déposer sur le crayon article.texte', # NEW
+	'label_upload_document' => 'Hinzufügen von Dokumenten durch Ziehen/Ablegen auf den Stift article.texte erlauben.',
 	'label_yellow_fade' => 'Ausblenden',
-	'legend_controleur_hyperlien' => 'Hyperlien', # NEW
+	'legend_controleur_hyperlien' => 'Hyperlink',
 	'legend_controleur_logo' => 'Logoe wählen:',
-	'legend_controleur_logo_remplacer' => 'Remplacer ce logo', # NEW
-	'legend_controleur_qui' => 'Qui ?', # NEW
+	'legend_controleur_logo_remplacer' => 'Dieses Logo ersetzen',
+	'legend_controleur_qui' => 'Wer?',
 	'legend_controleur_vignette' => 'Thumbnail wählen:',
-	'legend_controleur_vignette_remplacer' => 'Remplacer cette vignette', # NEW
-	'legend_documents' => 'Upload de documents', # NEW
+	'legend_controleur_vignette_remplacer' => 'Dieses Miniaturbild ersetzen',
+	'legend_documents' => 'Dokumente hochladen',
 	'legend_editer_prive' => 'Stifte im Redaktionssystem (experimentell)',
-	'legend_introduction_article' => 'Texte introductif de l\'article', # NEW
+	'legend_introduction_article' => 'Einleitender Text des Artikels',
 
 	// M
 	'message_image_obligatoire' => 'Es muß ein Bild gewählt werden.',
