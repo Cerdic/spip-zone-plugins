@@ -20,6 +20,8 @@ function mes_fichiers_a_sauver() {
 	OR (!defined('_DIR_SITE') && @is_readable($f = _FILE_OPTIONS))){
 		$liste[] = $f;
 	}
+	//le fichier sqlite depuis config/bases
+	
 	// le fichier .htaccess a la racine qui peut contenir des persos
 	if (@is_readable($htaccess))
 		$liste[] = $htaccess;
