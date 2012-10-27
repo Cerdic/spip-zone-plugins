@@ -27,10 +27,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_conversion_non' => 'Čaká',
 	'info_statut_conversion_oui' => 'Konvertovaný',
 	'info_tous_docs_facd' => 'Dokumenty v rade',
-	'info_voir_log_erreur' => 'Voir le log d\'erreur', # NEW
+	'info_voir_log_erreur' => 'Zobraziť protokol s chybami',
 
 	// L
-	'label_relancer_conversion' => 'Relancer la conversion', # NEW
+	'label_relancer_conversion' => 'Spustiť konverziu',
 	'lien_convertir_document' => 'Konvertovať tento dokument',
 	'lien_recharger' => 'Obnoviť',
 	'liste_attente_aucun' => 'Žiaden dokument v rade.',
@@ -46,11 +46,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'thead_fonction' => 'Použitá funkcia',
 	'thead_id' => 'P. č.',
 	'thead_id_auteur' => 'Autor',
-	'thead_id_document' => 'Pôvodný dokument', # MODIF
+	'thead_id_document' => 'Originál',
 	'thead_nombre' => 'Počet',
 	'thead_statut' => 'Stav',
-	'titre_log_conversion' => 'Contenu du log de conversion #@id@', # NEW
-	'titre_page_file' => 'Rad modulu na konverziu médií', # MODIF
+	'titre_log_conversion' => 'Obsah protokolu konverzie #@id@',
+	'titre_page_file' => 'Rad modulu na konverziu médií',
 	'titre_page_file_convertis_jour' => 'Konverzie podľa dátumu',
 	'titre_page_file_menu' => 'Rad na konverziu',
 
