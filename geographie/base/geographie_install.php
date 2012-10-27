@@ -25,6 +25,16 @@
 				}
 				else return;
 			}
+			else if ($current_version<0.3){
+				if (include_spip('base/arrondissements')){
+					creer_base();
+					echo "Création des arrondissements : <br/>", _DIR_PLUGIN_GEOGRAPHIE.'base/arrondissements.txt<br/>';
+					$importer_arrondissements = charger_fonction('arrondissements','imports');
+					$importer_arrondissements();
+					ecrire_meta($nom_meta_base_version,$current_version=0.3,'non');
+				}
+				else return;
+			}
 			ecrire_metas();
 		}
 	}
@@ -33,6 +43,7 @@
 		sql_drop_table("spip_geo_pays");
 		sql_drop_table("spip_geo_regions");
 		sql_drop_table("spip_geo_departements");
+		sql_drop_table("spip_geo_arrondissements");
 		sql_drop_table("spip_geo_communes");
 		effacer_meta($nom_meta_base_version);
 		ecrire_metas();
