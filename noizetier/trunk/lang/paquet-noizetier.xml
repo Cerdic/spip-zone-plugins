@@ -1,5 +1,7 @@
 <traduction module="paquet-noizetier" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/noizetier/trunk/lang/" reference="fr">
-	<langue code="de" />
+	<langue code="de" url="http://trad.spip.net/tradlang_module/paquet-noizetier?lang_cible=de">
+		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
+	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/paquet-noizetier?lang_cible=fa">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>

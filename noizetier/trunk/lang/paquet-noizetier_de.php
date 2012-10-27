@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
-	'noizetier_description' => 'Le noiZetier fournit une interface dans l’espace privé permettant de choisir, pour chaque page, des noisettes à ajouter aux blocs contenu, navigation et extra de chaque page. Les noisettes viennent ainsi compléter les contenus par défaut prévus par le squelette.', # NEW
+	'noizetier_description' => 'Mit dem Nussbaum können für jede Seite Code-Nüsse in die Blöcke "contenu", "navigation" und "extra" eingefügt werden. Die Code-Nüsse ergänzen so Standardinhalte der Seitenskelette.',
 	'noizetier_nom' => 'Nussbaum',
-	'noizetier_slogan' => 'Verwaltung der Code-Nïsse, als Ergänzung der Z-Squelette oder als eigenständiges Modu.'
+	'noizetier_slogan' => 'Verwaltung der Code-Nüsse, als Ergänzung der Z-Squelette oder als eigenständiges Modul.'
 );
 
 ?>
