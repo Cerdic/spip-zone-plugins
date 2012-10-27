@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_verifications_label' => 'Art der Überprüfung',
 
 	// E
-	'erreur_generique' => 'Il y a des erreurs dans les champs ci-dessous, veuillez vérifier vos saisies', # NEW
+	'erreur_generique' => 'Fehler im folgenden Feld. Bitte überprüfen Sie Ihre Eingabe.',
 	'erreur_option_nom_unique' => 'Dieser Name wird bereits für ein anderes Feld verwendet; er kann in diesem Formular nur einmal verwendet werden.',
 
 	// I
@@ -75,8 +75,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_disable_avec_post_label' => 'Senden trotz Deaktivierung',
 	'option_disable_explication' => 'Das Feld erhält keinen Fokus.',
 	'option_disable_label' => 'Feld deaktivieren',
-	'option_erreur_obligatoire_explication' => 'Vous pouvez personnaliser le message d\'erreur affiché pour indiquer l\'obligation (sinon laisser vide).', # NEW
-	'option_erreur_obligatoire_label' => 'Message d\'obligation', # NEW
+	'option_erreur_obligatoire_explication' => 'Sie können eine eigene Fehlermeldung bei nicht ausgefüllten Pflichtfeldern eingeben oder darauf verzichten.',
+	'option_erreur_obligatoire_label' => 'Hinweis Pflichtfeld',
 	'option_explication_explication' => 'Falls erforderlich kurze Beschreibung des Feldobjekts',
 	'option_explication_label' => 'Erläuterung',
 	'option_groupe_affichage' => 'Anzeige',
@@ -100,7 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_label' => 'Feldname',
 	'option_obligatoire_label' => 'Pflichtfeld',
 	'option_option_intro_label' => 'Bezeichnung der ersten leeren Auswahl',
-	'option_option_statut_label' => 'Afficher les statuts', # NEW
+	'option_option_statut_label' => 'Status anzeigen',
 	'option_pliable_label' => 'Klappbar',
 	'option_pliable_label_case' => 'Die Feldgruppe kann zugeklappt werden',
 	'option_plie_label' => 'Bereits zugeklappt',
@@ -122,8 +122,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_text' => 'Normal',
 
 	// S
-	'saisie_auteurs_explication' => 'Permet de sélectionner un ou plusieurs auteurs', # NEW
-	'saisie_auteurs_titre' => 'Auteurs', # NEW
+	'saisie_auteurs_explication' => 'Ermöglicht einen oder mehrere Autoren auszuwählen',
+	'saisie_auteurs_titre' => 'Autoren',
 	'saisie_case_explication' => 'Ermöglicht Dinge zu aktivieren und deaktivieren',
 	'saisie_case_titre' => 'Nur eine Option',
 	'saisie_checkbox_explication' => 'Erlaubt mehrer Optionen auszuwählen',
@@ -164,7 +164,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tous_visiteurs' => 'Alle Besucher (auch nicht eingeschriebene)',
-	'tout_selectionner' => 'Tout sélectionner', # NEW
+	'tout_selectionner' => 'Alles auswählen',
 
 	// V
 	'vue_sans_reponse' => '<i>Ohne Antwort</i>',
