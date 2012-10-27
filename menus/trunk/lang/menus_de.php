@@ -23,9 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_page_speciale' => 'Fügt einen URL zu einer Skelettseite im Format  <code>spip.php?page=nom&param1=xx&param2=yyy...</code> hinzu. Diese Skelette werden von Plugins bereitgestellt',
 	'description_menu_page_speciale_zajax' => 'Fügt einen Link zu einem Block auf einer Seite hinzu, die über einen URL mit der Syntax <code>spip.php?page=nom¶m1=xx¶m2=yyy...</code> erreichbar ist. Dazu sind ein Skelett des Typs Z und das Plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a> Voraussetzung.',
 	'description_menu_rubriques_articles' => 'Zeigt einen Liste der Rubriken und auf Wunsch der Unterrubriken und Artikel als Hierarchie an. In der Grundeinstellung werden alle Rubriken von der obersten Ebene an dargestellt. Sie werden nach Titeln (zuerst numerisch und dann alphabetisch) sortiert. Artikel werden immer hinter den Rubriken angezeigt.',
-	'description_menu_rubriques_completes' => 'Affiche une liste de rubriques et, si on veut, les sous-rubriques sur plusieurs niveaux. Par défaut, affiche toutes les rubriques depuis la racine, triées par titre (numériquement puis alphabétiquement).', # NEW
+	'description_menu_rubriques_completes' => 'Zeigt eine Liste der Rubriken und, wenn gewünscht, der Unterrubriken auf mehreren Ebenen an. Die Standardeinstellung zeigt alle Rubriken sortiert nach Titel an (mit Ordnungszahl nummerierte zuerst).',
 	'description_menu_secteurlangue' => 'Dieser Eintrag bezieht sich aud die Sites, welche pro Sprache ein Hauptrubrik verwenden. Er zeigt ein Menü mit allen Rubriken des Sektors, die mit der Sprache übereinstimmen, wenn erfordelich auf über mehrere Niveaus. In der Grundeinstelung werden alle Rubriken ab der obersten Ebene nach Titel (numerisch und anschließend alphanumerisch) sortiert angezeigt.',
-	'description_menu_texte_libre' => 'Freitext', # MODIF
+	'description_menu_texte_libre' => 'Ein beliebiger Text oder ein Sprachcode von SPIP im Format <:...:>',
 
 	// E
 	'editer_menus_editer' => 'Menü bearbeiten',
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_mot' => 'Nummer des Schlagworts',
 	'entree_id_objet' => 'Nummer',
 	'entree_id_rubrique' => 'Nummer der übergeordeneten Rubrik',
-	'entree_id_rubrique_ou_courante' => 'Numéro de la rubrique parente ou "courante" si la rubrique parente est la rubrique courante du contexte', # NEW
+	'entree_id_rubrique_ou_courante' => 'Nummer der "Elternrubrik" oder der "aktuellen" Rubrik, wenn die Elternrubrik die aktuelle Rubrik des Kontext ist.',
 	'entree_id_rubriques_exclues' => 'Nummern der auszuschließenden Rubriken, getrennt durch Semikolons.',
 	'entree_id_secteur_exclus' => 'Nummern der auszuschließenden Sektoren, getrennt mit Kommata',
 	'entree_infini' => 'Unendlich',
@@ -61,9 +61,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_parametres' => 'Parameterliste',
 	'entree_rubriques_max_affichees' => 'Wenn definiert, dann wird die Zahl der gelisteten Rubriken auf xx begrenzt und von einem Eintrag "... alle Rubriken" abgeschlossen. Obergrenze eintragen oder leer lassen, wenn alle angezeigt werden sollen.',
 	'entree_sousrub_cond' => 'Nur Unterrubriken der aktuellen Rubrik anzeigen ("oui" eintragen, falls nicht gewünscht leer lassen)',
-	'entree_suivant_connexion' => 'Restreindre cette entrée suivant la connexion (mettre "connecte" pour afficher seulement si le visiteur est connecté, "deconnecte" pour le cas contraire, ou laisser vide pour toujours afficher)', # NEW
-	'entree_suivant_connexion_connecte' => 'seulement si connecté', # NEW
-	'entree_suivant_connexion_deconnecte' => 'seulement si déconnecté', # NEW
+	'entree_suivant_connexion' => 'Verhalten des Eintrags in Abhängigkeit vom Verbindungsstatus: "Verbinden" wird nur angezeigt, wenn der Besucher nicht eingelogt ist, anderenfalls wird "Log-Out" angezeit. Freilassen, um den Eintrag immer anzuzeigen.',
+	'entree_suivant_connexion_connecte' => 'nur wenn verbunden',
+	'entree_suivant_connexion_deconnecte' => 'nur wenn nicht verbunden',
 	'entree_sur_n_articles' => '@n@ Artikel angezeigt',
 	'entree_sur_n_mots' => '@n@ Worte angezeigt',
 	'entree_sur_n_niveaux' => 'Auf @n@ Niveau(s)',
@@ -91,7 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_mise_a_jour' => 'Beim Aktualisieren der Datenbank ist ein Fehler aufgetreten.',
 	'erreur_parametres' => 'Fehler in den Seitenparametern',
 	'erreur_type_menu' => 'Sie müssen einen Menütyp wählen',
-	'erreur_type_menu_inexistant' => 'Ce type de menu n\'est pas/plus disponible', # NEW
+	'erreur_type_menu_inexistant' => 'Dieser Menütyp ist nicht verfügbar.',
 
 	// F
 	'formulaire_ajouter_entree' => 'Eintrag hinzufügen',
@@ -133,7 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_numero_menu' => 'MENÜ NUMMER:',
 	'info_page_speciale' => 'Link zu Seite « @page@ »',
 	'info_page_speciale_zajax' => 'Modale Box der Seite « @page@ » für den Block « @bloc@ »',
-	'info_rubrique_courante' => 'Rubrique courante', # NEW
+	'info_rubrique_courante' => 'Aktuelle Rubrik',
 	'info_rubriques_exclues' => ' / außer Rubrik(en) @id_rubriques@',
 	'info_rubriques_max_affichees' => 'Auf @max@ Rubriken begrenzen',
 	'info_secteur_exclus' => ' / außer Sektor(en) @id_secteur@',
@@ -161,7 +161,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_objet' => 'Artikel, Rubrik oder anderes SPIP-Objekt',
 	'nom_menu_page_speciale' => 'Link zu einer HTML-Vorlage',
 	'nom_menu_page_speciale_zajax' => 'Block einer ZPIP-Seite',
-	'nom_menu_rubriques_completes' => 'Liste ou arborescence de rubriques et d\'articles (avec beaucoup d\'options)', # NEW
+	'nom_menu_rubriques_completes' => 'Listen- oder Baumansicht von Rubriken und Artikeln mit zahlreichen Optionen',
 	'nom_menu_rubriques_evenements' => 'Ereignisse der Rubriken',
 	'nom_menu_secteurlangue' => 'Hauptrubriken nach Sprache',
 	'nom_menu_texte_libre' => 'Freitext',
