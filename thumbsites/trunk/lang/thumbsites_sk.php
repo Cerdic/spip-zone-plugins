@@ -31,11 +31,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_duree_cache' => 'Trvanie cache (v dňoch)',
 	'cfg_lbl_serveur' => 'Server',
 	'cfg_lbl_taille_vignette' => 'Veľkosť miniatúr',
-	'cfg_lbl_usage' => 'Conditions d\'utilisation', # NEW
+	'cfg_lbl_usage' => 'Podmienky používania',
 	'cfg_lgd_cache' => 'Cache',
 	'cfg_lgd_choix_serveur' => 'Služba',
-	'cfg_titre_form' => 'Configurer Thumbsites', # NEW
-	'cfg_titre_page' => 'Thumbsites', # NEW
+	'cfg_titre_form' => 'Nastaviť Thumbsites',
+	'cfg_titre_page' => 'Thumbsites',
 
 	// T
 	'titre_thumbshot_site' => 'MINIATÚRA STRÁNKY'
