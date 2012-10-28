@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'a2a_description' => 'This plugin allows you to link items in a timely manner without having to use keywords of SPIP. It can be used to set up links such as "See also".
 
-This new version allows the typing of relations between items. This typing feature is experimental, so please still use the stable version for your production websites.', # MODIF
+This new version allows the typing of relations between items. This typing is not active by default to keep the original function of the plugin (see the documentation).',
 	'a2a_slogan' => 'Link articles together'
 );
 
