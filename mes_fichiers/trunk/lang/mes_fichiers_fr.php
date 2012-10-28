@@ -8,7 +8,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // B
 	'bouton_configurer' => 'Mes fichiers',
 	'bouton_mes_fichiers' => 'Sauvegarder mes fichiers',
-	'bouton_effacer' => 'Effacer',
 	'bouton_sauver' => 'Sauvegarder',
 	'bouton_telecharger' => 'Télécharger',
 	'bouton_tout_cocher' => 'Tout cocher',
@@ -23,7 +22,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 	'erreur_aucun_fichier_sauver' => 'Il n\'y a aucun fichier à sauvegarder',
-	'erreur_droits_insuffisants' => 'Vous ne disposez pas de droits suffisants pour réaliser une sauvegarde.',
 	'erreur_repertoire_trop_grand' => 'Ce répertoire dépasse la limite de @taille_max@ MB et ne peut &ecirc;tre sauvegardé.',
 	'explication_cfg_notif_mail' => 'Saisir les adresses en les séparant par des virgules ",". Ces adresses s\'ajoutent à celle du webmestre du site.',
 	'explication_cfg_prefixe' => 'Saisir le préfixe accolé à chaque archive',
@@ -36,7 +34,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_sauver_2' => 'Le fichier d\'archive est créé dans <em>tmp/mes_fichiers/</em> et se nomme <em>@prefixe@_aaaammjj_hhmmss.zip</em>.',
 	'info_sauver_3' => 'La sauvegarde automatique est activée (fréquence en jours : @frequence@).',
 	'info_liste_a_sauver' => 'Liste des fichiers et dossiers pouvant &ecirc;tre sauvegardés :',
-	'info_telecharger' => 'Cette option permet de télécharger un des fichiers d\'archives disponibles parmi la liste affichée ci-dessous :',
 
 // L
 	'label_cfg_duree_sauvegarde' => 'Conservation des archives',
@@ -55,20 +52,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_notif_cleaner_intro' => 'L\'action de suppression automatique des sauvegardes de fichiers obsolètes (dont la date est postérieure à @duree@ jours) a été effectuée avec succès. Les fichiers suivants ont été supprimés : ',
 	'message_rien_a_sauver' => 'Aucun fichier ni dossier à sauvegarder.',
 	'message_rien_a_telecharger' => 'Aucune sauvegarde disponible au téléchargement.',
-	'message_rien_a_restaurer' => 'Aucune sauvegarde disponible à la restauration.',
 	'message_sauvegarde_ok' => 'Le fichier d\'archives a bien été créé.',
 	'message_sauvegarde_nok' => 'Erreur lors de la sauvegarde. Le fichier d\'archives n\'a pas été créé.',
 	'message_notif_sauver_intro' => 'Une nouvelle sauvegarde de vos fichiers est disponible pour votre site. Elle a été réalisée par @auteur@.',
 	'message_sauver_sujet' => 'Sauvegarde des fichiers',
-	'message_telechargement_ok' => 'Le fichier d\'archives a bien été téléchargé.',
 	'message_telechargement_nok' => 'Erreur lors du téléchargement.',
 	'message_zip_propriete_nok' => 'Aucune propriété n\'est disponible sur cette archive.',
 	'message_zip_sans_contenu' => 'Aucune information n\'est disponible sur le contenu de cette archive.',
 	'message_zip_auteur_indetermine' => 'Non déterminé',
-	'message_zip_auteur_cron' => 'Tache automatique',
 
 // R
-	'resume_table_telecharger' => 'Liste des archives disponibles au téléchargement',
 	'resume_zip_auteur' => 'Créé par',
 	'resume_zip_statut' => 'Statut',
 	'resume_zip_compteur' => 'Fichiers / dossiers archivés',
