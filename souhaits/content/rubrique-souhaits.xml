@@ -1,0 +1,6 @@
+<composition>
+	<nom>Liste de souhaits</nom>
+	<description>Utiliser cette rubrique pour afficher les souhaits des utilisateurs.</description>
+	<icon>images/objet-liste-contenus.png</icon>
+	<branche type="rubrique" composition="souhaits" />
+</composition>

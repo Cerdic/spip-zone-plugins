@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/souhaits, par=titre, env, ajax, sinon=<:souhait:info_aucun_souhait:>}>
+
+[(#AUTORISER{creer,souhait})
+	[(#URL_ECRIRE{souhait_edit,new=oui}|icone_verticale{<:souhait:icone_creer_souhait:>,souhait,new,right})]
+]

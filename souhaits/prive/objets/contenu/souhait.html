@@ -1,0 +1,23 @@
+<BOUCLE_souhait(SOUHAITS){id_souhait}{statut?}>
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:souhait:label_titre:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:souhait:label_descriptif:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</span>
+</div>]
+
+[<div class="champ contenu_prix[ (#PRIX*|strlen|?{'',vide})]">
+	<label><:souhait:label_prix:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{prix} prix'>(#PRIX) €</span>
+</div>]
+
+[<div class="champ contenu_site[ (#URL_SITE*|strlen|?{'',vide})]">
+	<label><:entree_liens_sites:> : </label>
+	<a href="(#URL_SITE)"><span dir='#LANG_DIR' class='#EDIT{url_site} url_site'>[(#NOM_SITE|?{<:souhait:voir_en_ligne{nom_site=#NOM_SITE}:>,#URL_SITE})]</span></a>
+</div>]
+
+</BOUCLE_souhait>

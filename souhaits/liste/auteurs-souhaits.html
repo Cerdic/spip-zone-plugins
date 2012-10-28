@@ -1,0 +1,12 @@
+<B_auteurs>
+	#ANCRE_PAGINATION
+	[<h2 class="h2">(#ENV{titre})</h2>]
+	<ul class="liste-items">
+		<BOUCLE_auteurs(AUTEURS){compteur souhaits}{pagination #ENV{nb,20}}>
+		<li class="item[ (#ENV{auteur}=={#LOGIN}|?{on active})]">
+			<a href="[(#SELF|parametre_url{auteur,#LOGIN})]">#NOM</a>
+		</li>
+		</BOUCLE_auteurs>
+	</ul>
+	[<div class="pagination">(#PAGINATION)</div>]
+</B_auteurs>

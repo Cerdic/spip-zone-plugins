@@ -1,0 +1,40 @@
+<BOUCLE_content(RUBRIQUES){id_rubrique}>
+<section>
+
+	<header class="cartouche">
+		[(#LOGO_RUBRIQUE|image_reduire{200,200})]
+		<h1 class="#EDIT{titre}">#TITRE</h1>
+		[<p class="info-publi"><span class="published"><:dernier_ajout:> : (#DATE|affdate_jourcourt).</span></p>]
+	</header>
+
+	<div class="main">
+		[<div class="#EDIT{texte} chapo">(#TEXTE)</div>]
+		
+		[(#REM) On affiche les souhaits de cette rubrique s'il y en a ]
+		<BOUCLE_souhaits_ici(SOUHAITS){id_rubrique}{0,1}>
+		<div class="liste souhaits">
+			<INCLURE{fond=liste/souhaits-resume,env,ajax} />
+		</div>
+		</BOUCLE_souhaits_ici>
+		
+		[(#REM) On liste les sous-rubriques sur un seul niveau et on affiche les souhaits s'il y en a ]
+		<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
+			<BOUCLE_souhaits_classes(SOUHAITS){id_rubrique}{0,1}>
+			<div class="liste souhaits">
+				<INCLURE{fond=liste/souhaits-resume,env,ajax,id_rubrique,titre=#_sous_rubriques:TITRE} />
+			</div>
+			</BOUCLE_souhaits_classes>
+		</BOUCLE_sous_rubriques>
+	</div>
+
+	<footer>
+		[<div class="notes"><hr />(#NOTES)</div>]
+	</footer>
+
+	<aside>
+		[(#REM) Gestion du portfolio et des documents ]
+		[(#INCLURE{fond=inclure/documents,id_rubrique})]
+	</aside>
+
+</section>
+</BOUCLE_content>
