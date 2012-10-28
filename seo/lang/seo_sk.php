@@ -20,8 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'canonical_url_activate' => 'Aktivovať kanonickú podobu adries',
 
 	// F
-	'forcer_squelette_descriptif' => 'Les metas SEO sont prioritaires aux meta générées par les squelettes', # NEW
-	'forcer_squelette_label' => 'Charger les metas pour tous squelettes', # NEW
+	'forcer_squelette_descriptif' => 'Hlavičky meta zo SEO majú prednosť pred hlavičkami meta, ktoré vygenerujú šablóny',
+	'forcer_squelette_label' => 'Nahrať hlavičky meta pre všetky šablóny',
 
 	// G
 	'google_analytics' => 'Google Analytics',
