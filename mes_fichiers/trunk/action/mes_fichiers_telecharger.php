@@ -3,16 +3,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_mes_fichiers_telecharger() {
 
-	// Securisation: aucun argument attendu
+	// Securisation de l'argument nom de l'archive
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
+
+	// Si l'archive n'est pas accessible on renvoie une erreur
 	if (!@is_readable($arg)) {
-		spip_log("*** MES_FICHIERS (action_telecharger_mes_fichiers) ERREUR: $arg pas accessible en lecture");
+		spip_log("L'archive $arg n'est pas accessible pour le téléchargement", 'mes_fichiers' . _LOG_ERREUR);
 		redirige_par_entete(generer_url_ecrire('mes_fichiers', 'etat=nok_tele', true));
 	}
 
 	// Autorisation
-	if(!autoriser('sauvegarder','mes_fichiers')) {
+	if(!autoriser('sauvegarder')) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;

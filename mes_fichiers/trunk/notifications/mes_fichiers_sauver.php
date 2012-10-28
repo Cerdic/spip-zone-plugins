@@ -2,18 +2,20 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function notifications_mes_fichiers_sauver_dist($quoi, $id, $options){
-	$cfg = lire_config('mes_fichiers');
-	if (($cfg['notif_active'] == 'oui') && !$options['err']) {
+	include_spip('inc/config');
+	$notif_active = (lire_config('mes_fichiers/notif_active', 'non') == 'oui');
+
+	if ($notif_active AND !$options['err']) {
 
 		// pour typo()
 		include_spip('inc/texte');
 		
-		$tous = explode(',',$cfg['notif_mail']);
+		$mails = lire_config('mes_fichiers/notif_mail');
+		$tous = explode(',', $mails);
 		$tous[] = $GLOBALS['meta']['email_webmaster'];
 		$destinataires = pipeline('notifications_destinataires',
 			array(
-				'args'=>array('quoi'=>$quoi,'id'=>$id,'options'=>$options)
-			,
+				'args'=>array('quoi'=>$quoi,'id'=>$id,'options'=>$options),
 				'data'=>$tous)
 		);
 
@@ -28,7 +30,7 @@ function notifications_mes_fichiers_sauver_dist($quoi, $id, $options){
 			$auteur = $options['auteur'];
 		}
 		$sujet_mail = "[".typo($GLOBALS['meta']['nom_site'])."] "._T('mes_fichiers:message_sauver_sujet');
-		$msg_mail = _T('mes_fichiers:message_notif_sauver_intro',array('auteur' => $auteur));
+		$msg_mail = _T('mes_fichiers:message_notif_sauver_intro', array('auteur' => $auteur));
 		notifications_envoyer_mails($destinataires, $msg_mail,$sujet_mail);
     }
 }

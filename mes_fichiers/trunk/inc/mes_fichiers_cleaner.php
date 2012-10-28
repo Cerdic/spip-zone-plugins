@@ -12,7 +12,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function inc_mes_fichiers_cleaner_dist($options=array()){
 	$temps = time();
 
-	$jours_obso = intval(lire_config('mes_fichiers/duree_sauvegarde',0));
+	include_spip('inc/config');
+	$jours_obso = intval(lire_config('mes_fichiers/duree_sauvegarde', 15));
+
 	if($jours_obso > 0){
 		$prefixe = lire_config('mes_fichiers/prefixe','mf2').'_';
 	    $sauvegardes = preg_files(_DIR_MES_FICHIERS,"$prefixe.+[.](zip)$");

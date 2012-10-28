@@ -3,28 +3,20 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Génération d'une sauvegarde par le cron
+ * Génération d'une sauvegarde par le cron et nettoyage des fichiers obsoletes dans la foulee
  *
  * @param timestamp $last
  */
 function genie_mes_fichiers_dist($last) {
-	$sauver = charger_fonction('mes_fichiers_sauver','inc');
-	$erreur = $sauver(null,array('auteur' => 'cron'));
+	// On lance la sauvegarde reguliere avec comme auteur le CRON
+	$sauver = charger_fonction('mes_fichiers_sauver', 'inc');
+	$sauver(null, array('auteur' => 'cron'));
+
+	// On supprime les fichiers obsoletes en fonction de la duree de conservation
+	$supprimer_obsoletes = charger_fonction('mes_fichiers_cleaner','inc');
+	$supprimer_obsoletes(array('auteur' => 'cron'));
 
 	return 1;
-}
-
-/**
- * On s'insère dans le cron de SPIP
- * Par défaut une fois par jour (peut être modifié dans la conf)
- *
- * @param array $taches_generales
- */
-function mes_fichiers_taches_generales_cron($taches_generales){
-	$jour = lire_config('mes_fichiers/frequence') ? lire_config('mes_fichiers/frequence') : 1;
-	$taches_generales['mes_fichiers'] = $jour*24*3600;
-	
-	return $taches_generales;
 }
 
 ?>

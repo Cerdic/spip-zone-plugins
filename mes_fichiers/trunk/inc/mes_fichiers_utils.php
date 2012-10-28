@@ -10,24 +10,40 @@ function mes_fichiers_a_sauver() {
 	}
 
 	$htaccess = defined('_ACCESS_FILE_NAME') ? $dir_racine._ACCESS_FILE_NAME : $dir_racine.'.htaccess';
-	$IMG = defined('_DIR_IMG') ? _DIR_IMG: $dir_racine.'IMG/';
-	$tmp_dump = defined('_DIR_DUMP') ? _DIR_DUMP: $dir_racine.'tmp/dump/';
+	$IMG = defined('_DIR_IMG') ? _DIR_IMG : $dir_racine.'IMG/';
+	$tmp_dump = defined('_DIR_DUMP') ? _DIR_DUMP : $dir_racine.'tmp/dump/';
+	$tmp_db = defined('_DIR_DB') ? _DIR_DB : $dir_racine.'config/bases/';
 
 	$liste = array();
+
+
+	//le fichier sqlite depuis config/bases si le site utilise sqlite
+	$db = preg_files($tmp_db);
+	$fichier_db = '';
+	$mtime = 0;
+	foreach ($db as $_fichier_db) {
+		if (($_mtime = filemtime($_fichier_db)) > $mtime) {
+			$fichier_db = $_fichier_db;
+			$mtime = $_mtime;
+		}
+	}
+	if ($fichier_db)
+		$liste[] = $fichier_db;
 
 	// le fichier d'options si il existe
 	if (@is_readable($f = $dir_racine . _NOM_PERMANENTS_INACCESSIBLES . _NOM_CONFIG . '.php')
 	OR (!defined('_DIR_SITE') && @is_readable($f = _FILE_OPTIONS))){
 		$liste[] = $f;
 	}
-	//le fichier sqlite depuis config/bases
-	
+
 	// le fichier .htaccess a la racine qui peut contenir des persos
 	if (@is_readable($htaccess))
 		$liste[] = $htaccess;
+
 	// le fameux repertoire des documents et images
 	if (@is_dir($IMG))
 		$liste[] = $IMG;
+
 	// le(s) dossier(s) des squelettes nommes
 	if (strlen($GLOBALS['dossier_squelettes']))
 		foreach (explode(':', $GLOBALS['dossier_squelettes']) as $_dir) {
@@ -38,6 +54,7 @@ function mes_fichiers_a_sauver() {
 	else
 		if (@is_dir($dir_racine.'squelettes/'))
 			$liste[] = $dir_racine.'squelettes/';
+
 	// le dernier fichier de dump de la base
 	$dump = preg_files($tmp_dump);
 	$fichier_dump = '';
@@ -50,6 +67,7 @@ function mes_fichiers_a_sauver() {
 	}
 	if ($fichier_dump)
 		$liste[] = $fichier_dump;
+
 	// On ajoute via un pipeline des fichiers specifiques a d'autres plugins
 	$liste_en_plus = array();
 	$liste_en_plus = pipeline('mes_fichiers_a_sauver', $liste_en_plus);
@@ -78,7 +96,7 @@ function mes_fichiers_resumer_zip($zip) {
 	$resume = NULL;
 	if ($proprietes == 0) {
 		$resume .= _T('mes_fichiers:message_zip_propriete_nok');
-		spip_log('*** MES_FICHIERS (mes_fichiers_resumer_zip) ERREUR '.$fichier_zip->errorInfo(true));
+		spip_log("Impossible d'ouvrir les propriétés de l'archive (" . $fichier_zip->errorInfo(true) . ")", 'mes_fichiers' . _LOG_ERREUR);
 	}
 	else {
 		$comment = unserialize($proprietes['comment']);
@@ -87,7 +105,7 @@ function mes_fichiers_resumer_zip($zip) {
 
 		// On gere la compatibilite avec la structure des commentaires des versions < 0.2
 		$auteur = _T('mes_fichiers:message_zip_auteur_indetermine');
-		if ((!id_auteur) && (!$liste))
+		if ((!$id_auteur) AND (!$liste))
 			$liste = $comment;
 		else
 			if (intval($id_auteur)) {
@@ -99,7 +117,7 @@ function mes_fichiers_resumer_zip($zip) {
 		$resume .= _T('mes_fichiers:resume_zip_auteur').' : '.$auteur.'<br />';
 		$resume .= _T('mes_fichiers:resume_zip_compteur').' : '.$proprietes['nb'].'<br />';
 		$resume .= _T('mes_fichiers:resume_zip_contenu').' : '.'<br />';
-		$resume .= '<ul>';
+		$resume .= '<ul class="spip">';
 		if ($liste)
 			foreach ($liste as $_fichier) {
 				$resume .= '<li>' . $_fichier . '</li>';
@@ -117,7 +135,7 @@ function mes_fichiers_voir_zip($zip) {
 	$fichier_zip = new PclZip($zip);
 
 	if (($list = $fichier_zip->listContent()) == 0) {
-		spip_log('*** MES_FICHIERS (mes_fichiers_voir_zip) ERREUR '.$fichier_zip->errorInfo(true));
+		spip_log("Lecture de l'archive $zip impossible (" . $fichier_zip->errorInfo(true) . ")", 'mes_fichiers' . _LOG_ERREUR);
 	}
 
 	for ($i=0; $i<sizeof($list); $i++) {

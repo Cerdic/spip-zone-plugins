@@ -2,11 +2,9 @@
 
 // Ceci est un fichier langue de SPIP -- This is a SPIP language file
 
-///  Fichier produit par PlugOnet
+// Fichier produit par PlugOnet
 // Module: paquet-mes_fichiers
 // Langue: fr
-// Date: 27-10-2012 00:08:18
-// Items: 3
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
@@ -18,6 +16,6 @@ Le fichier d\'archives est créé dans <code>tmp/mes_fichiers/</code> et se nomm
 
 Il est aussi possible de lancer une sauvegarde journalière automatique de tous les fichiers de personnalisation.',
 	'mes_fichiers_nom' => 'Mes fichiers',
-	'mes_fichiers_slogan' => 'Archiver ses fichiers dump, IMG, squelettes...',
+	'mes_fichiers_slogan' => 'Archiver ses fichiers et dossiers de personnalisation',
 );
 ?>

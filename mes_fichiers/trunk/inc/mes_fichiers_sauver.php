@@ -7,24 +7,27 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  * @param array/null $liste
  */
-function inc_mes_fichiers_sauver_dist($liste=null,$options=array()){
+function inc_mes_fichiers_sauver_dist($liste=null, $options=array()) {
 
 	include_spip('inc/mes_fichiers_utils');
+	include_spip('inc/config');
+	$erreur_texte = '';
 
 	/**
 	 * Si $liste == null c'est que l'on veut tout sauvegarder de possible
 	 * il peut être un array vide dans le cas d'un problème de config
 	 */
-	if(is_null($liste)){
+	if (is_null($liste)) {
 		$liste = mes_fichiers_a_sauver();
 	}
 
-	if(count($liste)>0){
+	if (count($liste)>0) {
 		include_spip('inc/pclzip');
 
-		if(defined('_DIR_SITE')){
+		if (defined('_DIR_SITE')) {
 			$remove_path = _DIR_SITE;
-		}else{
+		}
+		else {
 			$remove_path = _DIR_RACINE;
 		}
 
@@ -33,11 +36,12 @@ function inc_mes_fichiers_sauver_dist($liste=null,$options=array()){
 		 * On nomme les fichiers et répertoires pour les commentaires sans
 		 * _DIR_RACINE ni _DIR_MUTU
 		 */
-		$taille_max = intval(lire_config('mes_fichiers/taille_max_rep','500'))*1000*1000;
-		foreach($liste as $key => $item){
-			if(is_dir($item) && (mes_fichiers_dirsize($item) > $taille_max)){
+		$taille_max = intval(lire_config('mes_fichiers/taille_max_rep', '75'))*1000*1000;
+		foreach ($liste as $key => $item) {
+			if(is_dir($item) AND (mes_fichiers_dirsize($item) > $taille_max)) {
 				unset($liste[$key]);
-			}else{
+			}
+			else {
 				$liste_finale[] = mes_fichiers_joli_repertoire($item);
 			}
 		}
@@ -62,9 +66,9 @@ function inc_mes_fichiers_sauver_dist($liste=null,$options=array()){
 
 		if($erreur == 0){
 			$erreur_texte = $mes_fichiers->errorInfo(true);
-			echo $erreur_texte;
 		}
-	}else{
+	}
+	else {
 		$erreur_texte = _T('mes_fichiers:erreur_aucun_fichier_sauver');
 	}
 

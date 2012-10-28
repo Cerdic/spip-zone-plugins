@@ -6,7 +6,7 @@ function action_mes_fichiers_sauver() {
 	// Securisation: aucun argument attendu
 
 	// Autorisation
-	if(!autoriser('sauvegarder','mes_fichiers')) {
+	if(!autoriser('sauvegarder')) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;
@@ -17,10 +17,10 @@ function action_mes_fichiers_sauver() {
 		$liste = array();
 
 	$sauver = charger_fonction('mes_fichiers_sauver','inc');
-
 	$erreur = $sauver($liste);
 
 	if (_request('redirect')) {
+		// TODO : verifier si ce cas est encore utilise
 		if($erreur){
 			$redirect = parametre_url(urldecode(_request('redirect')),
 			'etat', 'nok_sauve', '&');
