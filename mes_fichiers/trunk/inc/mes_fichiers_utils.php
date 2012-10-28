@@ -80,6 +80,15 @@ function mes_fichiers_a_sauver() {
 function mes_fichiers_a_telecharger() {
 	$prefixe = lire_config('mes_fichiers/prefixe','mf2');
 	$liste = preg_files(_DIR_MES_FICHIERS . $prefixe.'_*.zip', 20);
+
+	// On filtre les fichiers vides ou corrompues qui sont des résultats d'erreur lors de l'archivage
+	foreach ($liste as $_cle => $_archive) {
+		if (!is_file($_archive)
+		OR !is_readable($_archive)
+		OR (filesize($_archive) == 0))
+			unset($liste[$_cle]);
+	}
+
 	return array_reverse($liste);
 }
 
