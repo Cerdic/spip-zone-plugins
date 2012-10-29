@@ -26,7 +26,7 @@ function init_tradauto()
 	for (var i = 0 ; i < t_input.length ; i ++)
 		if (t_input[i].type == "text")
 		{
-			if (t_input[i].value.length > 10000) alert (_T(tradauto:caractere_max_input{nb_caractere_max_input="+t_input[i].value.length+", input_id="+t_input[i].id+"}));
+			if (t_input[i].value.length > 10000) alert (_T('tradauto:caractere_max_input', array('nb_caractere_max_input'=>"+t_input[i].value.length+", 'input_id'=>"+t_input[i].id+"));
 			t_atraduire_txt.push(prepare_texte(t_input[i].value));
 			t_atraduire_id.push([t_input[i].id]);
 		}
@@ -35,7 +35,7 @@ function init_tradauto()
 	var t_textarea = document.getElementsByTagName('textarea');
 	for (var i = 0 ; i < t_textarea.length ; i ++)
 	{
-		if (t_textarea[i].value.length > 10000) alert (_T(tradauto:caractere_max_textarea{nb_caractere_max_textarea="+t_textarea[i].value.length+", textarea_id="+t_textarea[i].id+"}));
+		if (t_textarea[i].value.length > 10000) alert (_T('tradauto:caractere_max_textarea', array('nb_caractere_max_textarea'=>"+t_textarea[i].value.length+", 'textarea_id'=>"+t_textarea[i].id+"));
 		t_atraduire_txt.push(prepare_texte(t_textarea[i].value));
 		t_atraduire_id.push([t_textarea[i].id]);
 	}
