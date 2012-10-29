@@ -2,41 +2,4 @@
 <!-- icone=images/tradauto-24.png-->
 <!-- descriptif=<:tradauto:configurer_parametre:>-->
 #CACHE{0}
-<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
-
-<fieldset>
-	<legend><:tradauto:configuration:> Microsoft Translator - Windows Azure Marketplace</legend>
-	<p>
-		1 - <a target="_blank" href="http://go.microsoft.com/?linkid=9782667"><:tradauto:incrire_api_microsoft:></a><br>
-		2 - <:tradauto:connecter_creer_id:>.<br>
-		3 - <a target="_blank" href="https://datamarket.azure.com/developer/applications"><:tradauto:creer_application:></a><br>
-
-	</p>
-
-  <label for="clientID_1"><:tradauto:id_application_mp:>  :</label>
-  <input type="text" name="clientID" value="#ENV{clientID}" id="clientID_1" />
-  <br/>
-
-  <label for="clientSecret_1"><:tradauto:secret_application_mp:> :</label>
-  <input type="text" name="clientSecret" value="#ENV{clientSecret}" id="clientSecret_1" />
-  <br/>
-
-</fieldset>
-
-<fieldset>
-	<legend><:tradauto:exclusions:></legend>
-
-	<p><:tradauto:exclusions_explication:></p>
-
-	<label for="mt_exclus"><:tradauto:exclusions_liste:> :</label>
-	<textarea name="mt_exclus" id="mt_exclus" rows="10" cols="60">[(#CONFIG{tradauto/mt_exclus})]</textarea>
-  <br/>
-
-
-</fieldset>
-
-[(#REM) ------------------------ BOUTON OK ------------------------ ]
-<div>
-	<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
-</div>
-</form>
+#FORMULAIRE_CONFIGURER_TRADAUTO

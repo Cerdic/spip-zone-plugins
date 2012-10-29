@@ -1,0 +1,44 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	<h3 class='titrem'><img src="#CHEMIN_IMAGE{tradauto-24.png}" class="cadre-icone" />
+	<:tradauto:configuration:> Microsoft Translator - Windows Azure Marketplace
+	</h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<ul>
+		<li>1 - <a target="_blank" href="http://go.microsoft.com/?linkid=9782667"><:tradauto:incrire_api_microsoft:></a></li>
+		<li>2 - <:tradauto:connecter_creer_id:>.</:tradauto:connecter_creer_id:li>
+		<li>3 - <a target="_blank" href="https://datamarket.azure.com/developer/applications"><:tradauto:creer_application:></a></li>
+	</ul>
+
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<ul>
+				<li class="editer editer_clientID_1">
+					<label for="clientID_1"><:tradauto:id_application_mp:> :</label>
+					<input type="text" name="prefixe" class="text" id="clientID_1" value="[(#ENV{clienID})]" />
+				</li>
+				<li class="editer editer_clientSecret_1">
+					<label for="clientSecret_1"><:tradauto:secret_application_mp:></label>
+					<input type="text" name="clientSecret" class="text" id="clientSecret_1" value="[(#ENV{clientSecret})]" />
+				</li>
+			</ul>
+		</fieldset>
+
+		<fieldset>
+			<legend><:tradauto:exclusions:></legend>
+			<ul>
+				<li class="editer editer_mt_exclus">
+					<p class="explication"><:tradauto:exclusions_explication:></p>
+					<label for="mt_exclus"><<:tradauto:exclusions_liste:> :</label>
+					<textarea name="mt_exclus" id="mt_exclus" cols="60" rows="10">[(#CONFIG{tradauto/mt_exclus})]</textarea>
+				</li>
+			</ul>
+		</fieldset>
+
+		<p class='boutons'>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form>
+</div>

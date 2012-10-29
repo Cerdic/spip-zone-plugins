@@ -27,12 +27,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	//I
 	'id_application_mp' => 'ID de l\'application Market place',
-	'incrire_api_microsoft' => 'S\'inscrire à l\'API Microsoft Translator sur Azure Marketplace. Choisir un forfait de volume mensuel de traduction (GRATUIT pour 2Mc/mois)',
+	'incrire_api_microsoft' => 'S\'inscrire à l\'API Microsoft Translator sur Azure Marketplace. Choisir un forfait de volume mensuel de traduction (GRATUIT pour 2 millions de caratères par mois)',
 
 	//S
 	'secret_application_mp' => 'Secret du client de l\'application',
 
 	//T
+	'titre_page_configurer' => 'Configurer Tradauto',
 	'tradauto' => 'Tradauto',
 	'traduction_effectuer' => 'Traduction effectuée',
 	'traduction_en_cours' => 'Traduction en cours. Patientez...',
