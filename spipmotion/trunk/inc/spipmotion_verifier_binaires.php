@@ -17,14 +17,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 
  * -* l'état du safe_mode;
  * -* ffmpeg;
- * -* ffmpeg2theora;
- * -* flvtool2;
+ * -* ffmpeg2theora (facultatif);
  * -* flvtool++;
+ * -* flvtool2 (facultatif);
  * -* qt-faststart;
  * -* le script spipmotion.sh;
  * -* le script spipmotion_vignette.sh;
- * -* la class ffmpeg-php;
  * -* mediainfo;
+ * -* la class ffmpeg-php (facultatif);
  *
  * Si le safe_mode est activé, on l'inscrit dans les metas ainsi que son exec_dir
  * afin de retrouver le script spipmotion.sh qui doit s'y trouver
@@ -90,7 +90,7 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 		 * Tester flvtool++
 		 */
 		exec('flvtool++',$retour_flvtoolplus,$retour_flvtoolplus_int);
-		if($retour_flvtoolplus_int != 0){
+		if($retour_flvtoolplus_int != 0 && $retour_flvtoolplus_int != 255){
 			ecrire_config('spipmotion_flvtoolplus_casse', 'oui');
 			$erreurs[] = 'flvtool++';
 		}else{
@@ -183,7 +183,7 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 	 * On ne met spipmotion cassé que si on n'a pas ffmpeg ou spipmotion.sh ou ffmpeg2theora
 	 * Les autres restent facultatifs
 	 */
-	if(in_array('ffmpeg',$erreurs) OR in_array('spipmotion.sh',$erreurs) OR in_array('ffmpeg2theora',$erreurs)){
+	if(in_array('ffmpeg',$erreurs) OR in_array('spipmotion.sh',$erreurs)){
 		ecrire_config('spipmotion_casse', 'oui');
 	}else{
 		effacer_config('spipmotion_casse');
