@@ -118,9 +118,13 @@ $(document).ready(function() {
 				var dateStr = data.getResponseHeader('Date');
 				var dateServer =  Date.parse(new Date(Date.parse(dateStr)).toUTCString());
 				date_now = Math.floor(dateServer/1000);
-				$(".calcul_date").css({"visibility": "visible"});
-				afficher_dates();
+			} else { // systematique en crossdomain (pas de lecture du header "Date")
+				date_now = new Date();
+				date_now = Math.floor(date_now.getTime()/1000);
+			
 			}
+			$(".calcul_date").css({"visibility": "visible"});
+			afficher_dates();
 		}
 	});	
 
