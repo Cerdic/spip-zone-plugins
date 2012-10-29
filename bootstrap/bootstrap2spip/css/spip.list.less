@@ -50,7 +50,7 @@ Un item est compose de :
   .info-publi,.meta-publi {display: none;}
   .meta-publi .tags {ul,li {display: inline;}}
 }
-.long .liste-items,.liste-items.long {
+.long {
   .entry {position: relative;padding-bottom: @baseLineHeight;}
   .info-publi {display: block;}
   .entry-content {}
@@ -58,8 +58,10 @@ Un item est compose de :
   .lire-la-suite {display:block; position: absolute;z-index: 10;bottom:0;left:0;text-align: right;padding:@paddingLarge;padding-left:0;padding-bottom: 0;line-height: @baseLineHeight;font-size: @baseFontSize;}
 }
 
-.short .liste-items,.liste-items.short {
-  .item {padding:@paddingSmall;padding-left:0;padding-right:0;}
+.short .item, .item.short {
+  padding:@paddingSmall;padding-left:0;padding-right:0;
+}
+.short {
   .entry-title {font-size: inherit;line-height: inherit;display: inline;}
   .info-publi,.spip_logos,.entry-content,.meta-publi,lire-la-suite {display: none;}
   .entry > :not(.entry-title) {display: none;}
@@ -72,25 +74,26 @@ Un item est compose de :
   .spip_logos {max-width: 2.5*@baseLineHeight;}
   .entry-content {max-height: 5*@baseLineHeight;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;}
 }
-.secondary .short .liste-items,.secondary .liste-items.short {
+.secondary .short {
   .entry-title {font-weight: normal;}
 }
 
-.secondary .liste-items.long {
+.secondary .long {
   .entry-content {max-height: 10*@baseLineHeight;}
 }
 
 /* liste de documents */
-.documents .liste-items,.liste-items.documents {
-  .item {padding:@paddingSmall;padding-right:0;padding-left: 3*@baseLineHeight;}
-  .entry {padding-bottom: 0}
+.documents {
+  .item {padding-right:0;padding-left: 3*@baseLineHeight;}
+}
+.entry.document {
+  padding-bottom: 0;
   .entry-title {font-size: inherit;line-height: inherit;margin-bottom: 0}
   .spip_logos {float: left;max-width: 1.5*@baseLineHeight;margin:@paddingSmall;margin-left: -3*@baseLineHeight;margin-top: 0;}
   .info-publi {display: block; margin-bottom: 0;}
   .lire-la-suite {display: none}
 }
-.short.documents .liste-items,.short .liste-items.documents,
-.short .liste-items.documents,.liste-items.short.documents {
-  .item {padding-left: 0}
-  .spip_logos {display: none;}
+.documents.short .item,.documents .item.short {
+  padding-left: 0;
 }
+.short .document .spip_logos {display: none;}
