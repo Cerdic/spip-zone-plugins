@@ -17,6 +17,7 @@ function action_spipmotion_supprimer_encodages_doubles_dist() {
 	if (!autoriser('webmestre')){
 		return false;
 	}
+	include_spip('action/dissocier_document');
 	$documents = sql_select('*','spip_documents','mode="conversion" AND fichier LIKE "%-encoded\-%"');
 	while($document = sql_fetch($documents)){
 		$fichier_original = preg_replace('/\-encoded\-[0-9]?/','-encoded',$document['fichier']);
