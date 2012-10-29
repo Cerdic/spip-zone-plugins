@@ -1,7 +1,0 @@
-
-.charger_feuillederoute { display:none;position:fixed; right:0; top:0; padding:2em 0 0; width:350px; height:100%; background:url('images/fond_feuillederoute.png'); overflow-y:auto; text-align:left; z-index:4999; }
-/* z-index:4999; car crayons place ses outils a 5000 donc 4999 est le plus grand possible */
-.charger_feuillederoute .cartouche,.charger_feuillederoute .texte,.charger_feuillederoute .chapo,.charger_feuillederoute .ps { padding:1em; }
-
-/* masquer les bouton d'admin automatique du bloc ajax, a defaut de ne pas les generer... */
-.charger_feuillederoute #spip-admin { display:none; }
