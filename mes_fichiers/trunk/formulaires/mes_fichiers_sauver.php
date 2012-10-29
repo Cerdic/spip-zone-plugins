@@ -2,8 +2,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/mes_fichiers_utils');
+
 function formulaires_mes_fichiers_sauver_charger_dist(){
-	include_spip('inc/mes_fichiers_utils');
 
 	$valeurs = array();
 	$valeurs['_fichiers'] = mes_fichiers_a_sauver();

@@ -39,6 +39,21 @@
 					<label for="frequence"><:mes_fichiers:label_cfg_frequence:></label>
 					<input type="text" name="frequence" class="text" id="frequence" value="[(#ENV{frequence, 1})]" />
 				</li>
+			</ul>
+			<ul>
+				<li class="editer editer_nettoyage_journalier">
+				<label><:mes_fichiers:label_cfg_nettoyage_journalier:></label>
+					<div class="choix">
+						 <input type="radio" name="nettoyage_journalier" id="nettoyage_journalier_true" value="oui"[(#ENV{nettoyage_journalier, oui}|=={oui}|oui)checked="checked"] />
+						 <label for="nettoyage_journalier_true"><:item_oui:></label>
+					</div>
+					<div class="choix">
+						 <input type="radio" name="nettoyage_journalier" id="nettoyage_journalier_false" value="non"[(#ENV{nettoyage_journalier, oui}|=={oui}|non)checked="checked"] />
+						 <label for="nettoyage_journalier_false"><:item_non:></label>
+					</div>
+				</li>
+			</ul>
+			<ul id="lave_plus">
 				<li class="editer editer_duree_sauvegarde">
 					<p class="explication"><:mes_fichiers:explication_cfg_duree_sauvegarde:></p>
 					<label for="duree_sauvegarde"><:mes_fichiers:label_cfg_duree_sauvegarde:></label>
@@ -82,6 +97,7 @@
 	jQuery(document).ready(function() {
 		[(#ENV{notif_active, non}|!={oui}|oui) jQuery("#notif_plus").hide();]
 		[(#ENV{sauvegarde_reguliere, non}|!={oui}|oui) jQuery("#sauve_plus").hide();]
+		[(#ENV{nettoyage_journalier, oui}|!={oui}|oui) jQuery("#lave_plus").hide();]
 
 		jQuery("input[name='notif_active']").change(function() {
 			if (jQuery("input[name='notif_active']:checked").val() == 'oui') {
@@ -98,6 +114,15 @@
 			}
 			else {
 				jQuery("#sauve_plus").hide();
+			}
+			jQuery(this).blur();
+		});
+		jQuery("input[name='nettoyage_journalier']").change(function() {
+			if (jQuery("input[name='nettoyage_journalier']:checked").val() == 'oui') {
+				jQuery("#lave_plus").show();
+			}
+			else {
+				jQuery("#lave_plus").hide();
 			}
 			jQuery(this).blur();
 		});

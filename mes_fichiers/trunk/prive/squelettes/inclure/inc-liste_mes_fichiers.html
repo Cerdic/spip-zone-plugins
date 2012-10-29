@@ -5,6 +5,7 @@
 #BOITE_FERMER]
 
 <B_telechager>
+#ANCRE_PAGINATION
 <div class="liste-objets mes_fichiers">
 	<table id="mes_fichiers_telecharger" class="spip liste">
 		<thead>
@@ -18,11 +19,11 @@
 			</tr>
 		</thead>
 		<tbody>
-<BOUCLE_telechager(DATA){source table, #GET{fichiers}}>
+<BOUCLE_telechager(DATA){source table, #GET{fichiers}}{pagination 10}>
 			<tr id="zip_#COMPTEUR_BOUCLE"[ class="(#COMPTEUR_BOUCLE|alterner{row_even, row_odd})"]>
 				<td class="fichier principale">[<label[ for="zip_(#CLE|plus{1})"]>(#VALEUR|basename)</label>]</td>
 				<td class="taille">[(#VALEUR|filesize|taille_en_octets)]</td>
-				<td class="date">[(#VALEUR|filemtime|filemtime_2_date|affdate_heure{Y-m-d H:i:s})]</td>
+				<td class="date">[(#VAL{'Y-m-d H:i:s'}|date{#VALEUR|filemtime}|affdate_heure)]</td>
 				<td>[(#BOUTON_ACTION{<:mes_fichiers:bouton_telecharger:>, #URL_ACTION_AUTEUR{mes_fichiers_telecharger, #VALEUR}})]</td>
 				<td><a class="voir_zip" href="#info_zip_#COMPTEUR_BOUCLE" rel="info_zip_#COMPTEUR_BOUCLE" title="<:mes_fichiers:bulle_bouton_voir:>"><:mes_fichiers:bouton_voir:></a></td>
 			</tr>
@@ -32,6 +33,7 @@
 </BOUCLE_telechager>
 		</tbody>
 	</table>
+	[<p class='pagination'>(#PAGINATION{#ENV{pagination,prive}})</p>]
 </div>
 </B_telechager>
 

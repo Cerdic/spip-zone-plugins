@@ -42,13 +42,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_cfg_notif_mail' => 'Adresses email à notifier',
 	'label_cfg_prefixe' => 'Préfixe',
 	'label_cfg_sauvegarde_reguliere' => 'Activer la sauvegarde régulière',
+	'label_cfg_nettoyage_journalier' => 'Activer le nettoyage journalier des archives',
 	'label_cfg_taille_max_rep' => 'Taille maximale des dossiers',
 	'legende_cfg_notification' => 'Notifications',
-	'legende_cfg_sauvegarde_reguliere' => 'Sauvegarde automatique',
+	'legende_cfg_sauvegarde_reguliere' => 'Traitements automatiques',
 
 	// M
 	'message_cleaner_sujet' => 'Suppression des sauvegardes de fichiers',
-	'message_notif_cleaner_intro' => 'L\'action de suppression automatique des sauvegardes de fichiers obsolètes (dont la date est postérieure à @duree@ jours) a été effectuée avec succès. Les fichiers suivants ont été supprimés : ',
+	'message_notif_cleaner_intro' => 'L\'action de suppression automatique des sauvegardes de fichiers obsolètes (dont la date est antérieure à @duree@ jours) a été effectuée avec succès. Les fichiers suivants ont été supprimés : ',
 	'message_notif_sauver_intro' => 'Une nouvelle sauvegarde de vos fichiers est disponible pour votre site. Elle a été réalisée par @auteur@.',
 	'message_rien_a_sauver' => 'Aucun fichier ni dossier à sauvegarder.',
 	'message_rien_a_telecharger' => 'Aucune sauvegarde disponible au téléchargement.',
@@ -67,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resume_zip_statut' => 'Statut',
 
 	// T
-	'titre_boite_configurer' => 'Archivage des fichiers',
+	'titre_boite_configurer' => 'Paramètres d\'archivage',
 	'titre_boite_sauver' => 'Créer une archive',
 	'titre_boite_telecharger' => 'Liste des archives disponibles au téléchargement',
 	'titre_page_configurer' => 'Configuration du plugin Mes fichiers',
