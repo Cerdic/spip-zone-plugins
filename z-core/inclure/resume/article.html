@@ -1,0 +1,30 @@
+[(#REM)
+
+  Squelette Presentation resumee d'un article dans une liste
+  Distribue sous licence GPL
+
+]
+<BOUCLE_articles(ARTICLES) {id_article} {statut?}>
+<article class="entry article hentry">
+	<strong class="h3-like entry-title"><a href="#URL_ARTICLE" rel="bookmark">[(#ENV{logo_rubrique,' '}|?{#LOGO_ARTICLE_RUBRIQUE,#LOGO_ARTICLE}|image_reduire{150,100})]#TITRE<span
+		class="lire-la-suite hide"><i class="icon-chevron-right" title="<:zpip:lire_la_suite|attribut_html:><:zpip:lire_la_suite_de|attribut_html:>&laquo;[(#TITRE|attribut_html)]&raquo;"></i></span></a></strong>
+	<p class="info-publi">[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> (#DATE|affdate_jourcourt)</time>][<span class="auteurs"><span class="sep">, </span><i class="icon-user"></i> <:par_auteur:> (#LESAUTEURS)</span>]</p>
+	[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION{#ENV{coupe,300}})</div>]
+	<p class="meta-publi">
+	<BOUCLE_nb_commentaires(FORUMS) {id_article}{plat} />[(#TOTAL_BOUCLE|oui)
+		<span class="comments">
+		<span class="sep">|</span>
+		<a[ href="(#URL_ARTICLE|ancre_url{forum})"] class="nb_commentaires" [title="(#TOTAL_BOUCLE|singulier_ou_pluriel{zpip:info_1_commentaire,zpip:info_nb_commentaires}|attribut_html)"]>[<i class="icon-comment"></i> (#TOTAL_BOUCLE)]</a>
+		</span>
+		]
+	<//B_nb_commentaires>
+	<BOUCLE_combien(SIGNATURES) {id_article}{plat} />[(#TOTAL_BOUCLE|oui)
+		<span class="signatures">
+		<span class="sep">|</span>
+		<a[ href="(#URL_ARTICLE|ancre_url{petition})"] class="nb_signatures" [title="(#TOTAL_BOUCLE|singulier_ou_pluriel{zpip:info_1_signature,zpip:info_nb_signatures}|attribut_html)"]>[<i class="icon-ok-circle"></i> (#TOTAL_BOUCLE)]</a>
+		</span>
+		]
+	<//B_combien>
+	</p>
+</article>
+</BOUCLE_articles>

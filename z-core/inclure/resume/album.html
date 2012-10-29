@@ -1,0 +1,20 @@
+<BOUCLE_album(ARTICLES){id_article}>
+	<div class="thumbnail">
+		#SET{img,''}
+		<BOUCLE_fi(DOCUMENTS){id_article}{media=image}{0,1}>#SET{img,#FICHIER}</BOUCLE_fi>
+		<a href="#URL_ARTICLE">
+		[(#LOGO_ARTICLE|sinon{#GET{img}}
+		|image_passe_partout{150,150}
+		|image_recadre{150,150,center,transparent}
+		|image_aplatir{jpg,#ffffff}
+		|sinon{#CHEMIN{css/img/placeholder.png}|balise_img|inserer_attribut{width,150}|inserer_attribut{height,150}}
+		|inserer_attribut{class,spip_logos}
+		|inserer_attribut{alt,[(#TITRE|attribut_html|couper{60})]}
+		)]
+		<strong class="caption">#TITRE</strong>
+		</a>
+		<div class="caption">
+			[(#INTRODUCTION{150})]
+		</div>
+	</div>
+</BOUCLE_album>
