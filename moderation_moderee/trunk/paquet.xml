@@ -19,4 +19,5 @@
 
 	<menu nom="configurer_moderation" titre="moderation:titre" parent="menu_configuration" icone="images/moderation.png" />
 	<necessite nom="forum" />
+	<necessite nom="saisies" />
 </paquet>
