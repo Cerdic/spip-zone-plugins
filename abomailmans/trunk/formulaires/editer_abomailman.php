@@ -75,8 +75,8 @@ function formulaires_editer_abomailman_traiter_dist($id_abomailman='new',$retour
     // Récupération des données
 	$datas['titre'] = _request('titre');
 	$datas['descriptif'] = _request('descriptif');
-	if(_request('abotype') && in_array(_request('abotype'), array('news','ml'))){
-		$datas['abo_type'] = _request('abotype');
+	if(_request('abo_type') && in_array(_request('abo_type'), array('news','ml'))){
+		$datas['abo_type'] = _request('abo_type');
  	}
 	$datas['email'] = _request('email');
 	$datas['email_subscribe'] = _request('email_subscribe');
