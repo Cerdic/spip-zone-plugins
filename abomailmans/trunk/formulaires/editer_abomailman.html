@@ -19,11 +19,11 @@
 			<li class='editer editer_abo_type[ (#ENV**{erreurs}|table_valeur{abo_type}|oui)erreur]'>
 				<label for="desactive_active"><:abomailmans:label_type_abo:></label>
 				<div class="choix">
-					<input type="radio" value="news" id="abo_type_news" name="abo_type"[(#ENV{abo_type}|=={news}|oui)checked="checked"] />
+					<input type="radio" value="news" id="abo_type_news" name="abo_type"[(#ENV{abo_type, news}|=={news}|oui)checked="checked"] />
 					<label for="abo_type_news"><:abomailmans:label_type_news:></label>
 				</div>
 				<div class="choix">
-					<input type="radio" value="ml" id="desactive_desactive" name="abo_type"[(#ENV{abo_type}|=={ml}|oui)checked="checked"] />
+					<input type="radio" value="ml" id="abo_type_ml" name="abo_type"[(#ENV{abo_type, news}|=={ml}|oui)checked="checked"] />
 					<label for="abo_type_ml"><:abomailmans:label_type_ml:></label>
 				</div>
 			</li>
@@ -109,19 +109,19 @@
                   <li class="editer editer_desactive obligatoire">
                      <label for="desactive_active"><:abomailmans:activation:></label>
                      <div class="choix">
-                        <input type="radio" value="0" id="desactive_active" name="desactive"[(#ENV{desactive}|=={0}|oui) checked="checked"] />
+                        <input type="radio" value="0" id="desactive_active" name="desactive"[(#ENV{desactive, 0}|=={0}|oui) checked="checked"] />
                         <label for="desactive_active"><:abomailmans:active:></label>
                      </div>
                      <div class="choix">
-                        <input type="radio" value="1" id="desactive_desactive" name="desactive"[(#ENV{desactive}|=={1}|oui) checked="checked"] />
-                        <label for="desactive_desactive"><:abomailmans:desactive:></label>
+                        <input type="radio" value="1" id="desactive_inactive" name="desactive"[(#ENV{desactive, 0}|=={1}|oui) checked="checked"] />
+                        <label for="desactive_inactive"><:abomailmans:desactive:></label>
                      </div>
                   </li>
                   [(#ENV{id_abomailman}|intval|oui)
                   <li class="editer editer_desactive_supprime">
                      <label for="desactive_supprime"><:abomailmans:supprimer:></label>
                      <div class="choix">
-                        <input type="checkbox" value="2" id="desactive_supprime" name="desactive"[(#ENV{desactive}|=={2}|oui) checked="checked"] />
+                        <input type="checkbox" value="2" id="desactive_supprime" name="desactive"[(#ENV{desactive, 0}|=={2}|oui) checked="checked"] />
                         <label for="desactive_supprime"><:abomailmans:suppression_definitive:></label>
                      </div>
                   </li>]
