@@ -13,6 +13,7 @@
 	<!-- Amélioration de la modération -->
 
 	<auteur>Yohann</auteur>
+	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
 
 	<pipeline nom="pre_edition" inclure="fonctions_mod.php" />
 
