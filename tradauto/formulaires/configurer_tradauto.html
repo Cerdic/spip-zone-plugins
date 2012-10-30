@@ -17,7 +17,7 @@
 			<ul>
 				<li class="editer editer_clientID_1">
 					<label for="clientID_1"><:tradauto:id_application_mp:> :</label>
-					<input type="text" name="clientID" class="text" id="clientID_1" value="[(#ENV{clienID})]" />
+					<input type="text" name="clientID" class="text" id="clientID_1" value="[(#ENV{clientID})]" />
 				</li>
 				<li class="editer editer_clientSecret_1">
 					<label for="clientSecret_1"><:tradauto:secret_application_mp:></label>
@@ -31,7 +31,7 @@
 			<ul>
 				<li class="editer editer_mt_exclus">
 					<p class="explication"><:tradauto:exclusions_explication:></p>
-					<label for="mt_exclus"><<:tradauto:exclusions_liste:> :</label>
+					<label for="mt_exclus"><:tradauto:exclusions_liste:> :</label>
 					<textarea name="mt_exclus" id="mt_exclus" cols="60" rows="10">[(#CONFIG{tradauto/mt_exclus})]</textarea>
 				</li>
 			</ul>
