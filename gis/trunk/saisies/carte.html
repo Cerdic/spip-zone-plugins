@@ -97,6 +97,12 @@ var geocoder;]
 		var map_container = 'map_[(#ENV{nom})]';
 		form_map = new L.Map(map_container);
 		
+		// appeler l'éventuelle fonction de callback
+		if (callback && typeof(callback) === "function") {
+			form_map.on('load',function(e){
+				callback(e.target);
+			});
+		}
 		form_map.attributionControl.setPrefix('');
 		
 		marker = new L.Marker(new L.LatLng(#ENV{lat,0}, #ENV{lon,0}), {draggable: true});
@@ -114,6 +120,8 @@ var geocoder;]
 		layers_control.addBaseLayer([new (#VALEUR|table_valeur{layer})],"[(#VALEUR|table_valeur{nom})]");]
 		</BOUCLE_layers>
 		form_map.addControl(layers_control);
+		// ajouter l'objet du controle de layers à la carte pour permettre d'y accéder depuis le callback
+		form_map.layersControl = layers_control;
 		// classe noajax sur le layer_control pour éviter l'ajout de hidden par SPIP
 		$(layers_control._form).addClass('noajax');
 		</B_layers>
@@ -217,9 +225,12 @@ var geocoder;]
 
 	$(function(){
 		jQuery.getScript('[(#PRODUIRE{fond=javascript/gis.js}|compacte)]',function(){
-			init_map();
+			if (callback_form_map && typeof(callback_form_map) === "function") {
+				init_map(callback_form_map);
+			} else {
+				init_map();
+			}
 		});
-		//[(#ENV{ajaxload}|!={non}|oui)onAjaxLoad(init_map);]
 	});
 	
 })(jQuery);

@@ -28,7 +28,6 @@
 	- centrer_fichier = non			permet de ne pas centrer la carte automatiquement sur les fichiers kml/gpx surperposés
 	- localize_visitor|localiser_visiteur = oui		centrer la carte sur la position du visiteur (API geolocation HTML5)
 	- point = non					si elle vaut "non" cette option n'affichera pas de points du tout (utile pour n'afficher qu'un kml par exemple)
-X	- ajaxload = non                si elle vaut "non" cette option désactive l'init de la carte sur l'event ajaxload 
 	- media = non									permet de passer le critère 'media' (pour les documents)
 
 ]
@@ -58,13 +57,20 @@ var map[(#GET{id})];
 
 (function($){
 	
-	var init_map[(#GET{id})] = function() {
+	var init_map[(#GET{id})] = function(callback) {
 		var map_container = 'map[(#GET{id})]';
 		
 		map[(#GET{id})] = new L.Map(map_container,{
 			scrollWheelZoom: [(#ENV{zoom_molette,#ENV{zoom_wheel}}|=={non}|?{false,true})],
 			zoomControl: [(#ENV{no_control,#ENV{aucun_controle}}|!={oui}|?{true,false})]	
 		});
+		
+		// appeler l'éventuelle fonction de callback
+		if (callback && typeof(callback) === "function") {
+			map[(#GET{id})].on('load',function(e){
+				callback(e.target);
+			});
+		}
 		
 		[(#GET{utiliser_bb}|non)
 		map[(#GET{id})].setView(new L.LatLng([(#GET{lat})], [(#GET{lon})]), [(#ENV{zoom,#CONFIG{gis/zoom,0}})]);]
@@ -90,6 +96,8 @@ var map[(#GET{id})];
 		layers_control.addBaseLayer([new (#VALEUR|table_valeur{layer})],"[(#VALEUR|table_valeur{nom})]");]
 		</BOUCLE_layers>
 		map[(#GET{id})].addControl(layers_control);
+		// ajouter l'objet du controle de layers à la carte pour permettre d'y accéder depuis le callback
+		map[(#GET{id})].layersControl = layers_control;
 		// classe noajax sur le layer_control pour éviter l'ajout de hidden par SPIP
 		$(layers_control._form).addClass('noajax');
 		</B_layers>
@@ -189,9 +197,12 @@ var map[(#GET{id})];
 
 	$(function(){
 		jQuery.getScript(['(#CONFIG{auto_compress_js}|=={oui}|?{[(#PRODUIRE{fond=javascript/gis.js}|compacte)],[(#PRODUIRE{fond=javascript/gis.js})]})'],function(){
-			init_map[(#GET{id})]();
+			if (callback_map[(#GET{id})] && typeof(callback_map[(#GET{id})]) === "function") {
+				init_map[(#GET{id})](callback_map[(#GET{id})]);
+			} else {
+				init_map[(#GET{id})]();
+			}
 		});
-		//[(#ENV{ajaxload}|!={non}|oui)onAjaxLoad(init_map[(#GET{id})]);]
 	});
 
 })(jQuery);
