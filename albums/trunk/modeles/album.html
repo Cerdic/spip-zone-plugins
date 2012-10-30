@@ -11,11 +11,11 @@
 <BOUCLE_album(ALBUMS){id_album}{statut == #GET{statut}}>
 <div class="albums album vue_icones clearfix p #ENV{align}">
 
-	[<h2>(#_album:TITRE)</h2>]
+	[<h2>#ENV{titre,#TITRE}</h2>]
 
 	<B_documents_joints>
 	<ul class="thumbnails">
-		<BOUCLE_documents_joints(DOCUMENTS){id_album}{tout}>
+		<BOUCLE_documents_joints(DOCUMENTS){id_album}{media?}{tout}>
 		<li>
 		<figure class="thumbnail">
 		<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="album"[ class="(#EXPOSER)"][ title="(#TITRE|attribut_html|couper{80})"]>
