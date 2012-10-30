@@ -17,7 +17,7 @@
 
 	<pipeline nom="pre_edition" inclure="moderation_pipelines.php" />
 
-	<menu nom="configurer_moderation" titre="moderation:titre" parent="menu_configuration" icone="images/moderation.png" />
+	<menu nom="configurer_moderation" titre="moderation:titre" parent="menu_configuration" icone="images/moderation-16.png" />
 	<necessite nom="forum" />
 	<necessite nom="saisies" />
 </paquet>
