@@ -4,15 +4,16 @@
 
 	Parametres optionnels:
 
-	- lat = 48.3                    latitude du centre de la carte
-	- lon = -4.7                    longitude du centre de la carte
-	- zoom = 5                      zoom de la carte
-	- sw_lat = lat - 10°            latitude du sud-ouest de la bounding box
-	- sw_lon = lon - 10°            longitude du sud-ouest de la bounding box
-	- ne_lat = lat + 10°            latitude du nord-est de la bounding box
-	- ne_lon = lon + 10°            longitude du nord-est de la bounding box
-	- nodraw = oui					permet de désactiver la barre d'édition pour revenir au comportement par défaut
-	- boutons = #ARRAY{marker,non}	permet de spécifier les boutons à ne pas afficher dans la barre d'édition
+	- lat = 48.3                    	latitude du centre de la carte
+	- lon = -4.7                    	longitude du centre de la carte
+	- zoom = 5                      	zoom de la carte
+	- sw_lat = lat - 10°            	latitude du sud-ouest de la bounding box
+	- sw_lon = lon - 10°            	longitude du sud-ouest de la bounding box
+	- ne_lat = lat + 10°            	latitude du nord-est de la bounding box
+	- ne_lon = lon + 10°            	longitude du nord-est de la bounding box
+	- nodraw = oui						permet de désactiver la barre d'édition pour revenir au comportement par défaut
+	- boutons = #ARRAY{marker,non}		permet de spécifier les boutons à ne pas afficher dans la barre d'édition
+	- path_styles=#ARRAY{color,#fff}	options de style des éléments de la couche GeoJSON (voir http://leafletjs.com/reference.html#path-options)
 
 ]
 
@@ -169,8 +170,9 @@ var geocoder;]
 					}
 				}]
 		}
-		var geojson = new L.geoJson('', {
-			onEachFeature: function (feature, layer) {
+		var geojson = new L.geoJson('', {[
+			style: (#ENV*{path_styles}|json_encode),
+			]onEachFeature: function (feature, layer) {
 				if (feature.geometry.type == 'Polygon' || feature.geometry.type == 'LineString') {
 					if (feature.geometry.type == 'Polygon') // virer le dernier point du polygon pour faciliter l'edition
 						layer.spliceLatLngs(-1,1);
