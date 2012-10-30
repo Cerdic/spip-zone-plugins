@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer_zotspip' => 'Configurar ZotSpip',
-	'confimer_remplacement' => 'Reemplazar <strong>@source@</strong> por <strong>@dest@</strong>? ¡Cuidado!, esta acción no se puede deshacer!',
+	'confimer_remplacement' => 'Reemplazar <strong>@source@</strong> por <strong>@dest@</strong>? ¡Cuidado!, esta acción no se puede deshacer',
 	'confirmer' => 'Confirmar',
 	'connexion_ok' => 'La conexión con Zotero es operativa.',
 	'contributeurs' => 'Contribuidores',
@@ -29,19 +29,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'deselectionner_tout' => 'Deseleccionar todo',
-	'droits_insuffisants' => 'No tienen los derechos exigidos para  realizar esta 
-modificación.',
+	'droits_insuffisants' => 'No tienen los derechos exigidos para  realizar esta modificación.',
 
 	// E
 	'erreur_connexion' => 'ZotSpip no fue capaz de conectarse a Zotero. Por favor, Por favor, compruebe su configuración de conexión. Si utiliza un proxy, asegúrese de que está correctamente configurado en Spip (Configuración > Opciones avanzadas). A saber, ZopSpip no siempre funciona si se requiere un proxy.
 ',
 	'erreur_dom' => 'Para  funcionar ZotSpip necesita la extensión PHP DOM. Habilitan/instalan esta extensión.',
-	'erreur_openssl' => 'Para funccionar, ZotSpip necesita  la extensión PHP openSSL. habilitan/instalan esta extensión.',
+	'erreur_openssl' => 'Para funccionar, ZotSpip necesita  la extensión PHP openSSL. Habilitan/instalan esta extensión.',
 	'erreur_simplexml' => 'Para funcionar, ZotSpip necesita  la extensión PHP SimpleXML. Habilitan/instalan esta  extensión.',
 	'explication_api_key' => 'Se obtiene en la <a href="https://www.zotero.org/settings/keys">página Zotero de gestión de las claves personales</a>. Piense en conceder derechos de acceso de accesos  suficientes a esta clave.',
-	'explication_autoriser_modif_zotero' => '¿Habilitar las opciones de modificación de la librería Zotero (por ejemplo, la unión des autores)? Si oui, quien tiene los derechos suficientes para verificar estas modificaciones? Cuidado!: deben también  comprobar que su <em>Clé API</em> tiene los derechos para escribir.',
-	'explication_corriger_date' => 'Zotero transmite las fechas de publicación tales como han sido introducidas. Desde entonces, el procesador CSL no está siempre en capacidad de descomponerlas correctamente debido a la gran variedad de formatos diferentes. En este caso, la fecha de publicación  no aparecerá una vez las referencias  formateadas. ZotSpip puede corregir más arriba las fechas de publicación. Cuidado! sólo el año se transmitirá entonces al procesador CSL, salvo si la fecha esta de forma aaaa-mm-jj o aaaa-mm. Este opción no tiene en cambio ninguna repercusión sobre la librería Zotero si mismo.',
-	'explication_depuis' => 'Sea un año (por ejemplo: <em>2009</em>), sea una duración en año seguida de la palabra <em>ans</em> (por ejemplo: <em>3ans</em>).',
+	'explication_autoriser_modif_zotero' => '¿Habilitar las opciones de modificación de la librería Zotero (por ejemplo, la unión de autores)? Si es así, ¿quien tiene los derechos suficientes para verificar estas modificaciones? ¡CUIDADO! deben también  comprobar que su <em>Clé API</em> tiene los derechos para escribir.',
+	'explication_corriger_date' => 'Zotero transmite las fechas de publicación tales como han sido introducidas. Desde entonces, el procesador CSL no está siempre en capacidad de descomponerlas correctamente debido a la gran variedad de formatos diferentes. En este caso, la fecha de publicación  no aparecerá una vez las referencias  formateadas. ZotSpip puede corregir más arriba las fechas de publicación. ¡Cuidado! sólo el año se transmitirá entonces al procesador CSL, salvo si la fecha esta de forma aaaa-mm-jj o aaaa-mm. En cambio, este opción no tiene ninguna repercusión sobre la librería Zotero si mismo.',
+	'explication_depuis' => 'Sea un año (por ejemplo: <em>2009</em>), sea una duración en año seguida de la palabra francesa<em>ans</em> (por ejemplo: <em>3ans</em>) o de la palabra inglés<em>years</em> (por ejemplo: <em>3years</em>).',
 	'explication_id_librairie' => 'Para una librería personal, la identificación <em>userID</em> se indica en la <a href="https://www.zotero.org/settings/keys"> la pagina Zotero de  gestión de las  claves personales</a>. Para un grupo, la identificación  <em>groupID</em> se encuentra en el URL de configuración del grupo que aparece como  <em>https://www.zotero.org/groups/&lt;groupID&gt;/settings</em>.',
 	'explication_maj_zotspip' => 'ZotSpip se sincroniza con regularidad (aproximadamente cada cuatro horas) con el servidor Zotero. Solamente las últimas modificaciones (desde la as última sincronización) se tendrán en cuenta. En caso necesario, pueden forzar una actualización completa de la base de datos, entonces todas las referencias vuelven a descargarse (si su librería es grande, esta sincronización se realizara en múltiples pasos, solamente  se puede sincronizar simultáneamente 50 referencias).',
 	'explication_ordre_types' => 'Se puede personalizar el orden utilizado para las clasificaciones por tipo de referencia (cambie el orden por deslizarse/depositar).
@@ -97,7 +96,7 @@ modificación.',
 	'label_depuis' => 'Desde',
 	'label_details' => 'Detalles',
 	'label_editeur' => 'Casa editorial',
-	'label_export' => '¿ Mostrar las opciones de exportación?',
+	'label_export' => '¿Mostrar las opciones de exportación?',
 	'label_id_librairie' => 'Identificador de la librería',
 	'label_identifiants_zotero' => 'Identificadores Zotero',
 	'label_liens' => '¿ Mostrar los vínculos?',
@@ -105,7 +104,7 @@ modificación.',
 	'label_options' => 'Opciones',
 	'label_options_affichage' => 'Opciones de vizualización',
 	'label_ordre_types' => 'Ordenar por tipo de referencia',
-	'label_page_biblio' => 'Activer la page ‘biblio’ pour Zpip ?', # NEW
+	'label_page_biblio' => '¿Activar la pagina ‘biblio’ para Zpip?',
 	'label_publication' => 'Publicación',
 	'label_recherche_libre' => 'Búsqueda libre',
 	'label_selection_references' => 'Selección de referencias ',
@@ -121,7 +120,7 @@ modificación.',
 	'label_username' => 'Nombre del usuario o del grupo',
 	'label_variante' => 'Variante',
 	'label_zcollection' => 'Colección Zotero',
-	'lien_ressource' => 'Lien vers la ressource', # NEW
+	'lien_ressource' => 'Vinculo hacia este recurso ',
 	'liste_createurs' => 'Lista des contribuidores',
 	'liste_references' => 'Lista des referencias Zotero',
 	'liste_tags' => 'Lista de palabras clave',
@@ -154,10 +153,7 @@ modificación.',
 	'source' => 'fuente',
 	'supprimer_createur' => 'Borrar este autor',
 	'supprimer_tag' => 'Borrar esta palabra clave',
-	'sync_complete_demandee' => '
-	 
-Une synchronisation complète de la base a été demandée. 	  	
-Se ha solicitado una sincronización completa de la base.',
+	'sync_complete_demandee' => 'Se ha solicitado una sincronización completa de la base.',
 	'sync_en_cours' => 'La sincronización está siendo procesado pero no siempre esta terminada. Haz clic en el lienzo <em>Sincronizar</em> de nuevo.',
 	'synchronisation_effectuee' => 'Sincronización realizada',
 
