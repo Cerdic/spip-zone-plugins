@@ -6,6 +6,7 @@
 	compatibilite="[3.0.0;3.0.99]"
 	logo="img_pack/icone.png"
 	documentation="http://www.spip-contrib.net/Moderation-Moderee"
+	schema="1.0.0"
 >	
 
 	<nom>Mod&#233;ration Mod&#233;r&#233;e</nom>
