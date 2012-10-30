@@ -1,7 +1,7 @@
 <paquet
 	prefix="tradauto"
 	categorie="edition"
-	version="0.0.2"
+	version="0.0.3"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/tradauto-64.png"
