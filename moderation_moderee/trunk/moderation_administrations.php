@@ -10,9 +10,9 @@ function moderation_upgrade($nom_meta_version_base, $version_cible){
     maj_plugin($nom_meta_version_base, $version_cible, $maj);
 }
 function moderation_create(){
-    ecrire_config('moderation/visit', 'oui');
-    ecrire_config('moderation/redac', 'oui');
-    ecrire_config('moderation/admin', 'oui');
+    ecrire_config('moderation/visit', 'on');
+    ecrire_config('moderation/redac', 'on');
+    ecrire_config('moderation/admin', 'on');
     return true;
 }
 function moderation_vider_tables($nom_meta_version_base){
