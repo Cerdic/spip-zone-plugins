@@ -50,10 +50,9 @@ function autoriser_album_administrer_dist($faire, $type, $id, $qui, $opts) {
  * Autorisation a ajouter (creer ou associer) un album a un objet
  * Il faut avoir le droit de modifier l'objet
  */
-function autoriser_album_ajouter_dist($faire, $type, $associer_objet, $qui, $opts) {
-	list($objet, $id_objet) = explode('|',$associer_objet);
-	if (!intval($id_objet) OR !$objet) return false;
-	return autoriser('modifier', $objet, $id_objet, $qui);
+function autoriser_ajouteralbum_dist($faire, $type, $id, $qui, $opts) {
+	if (!intval($id) OR !$type) return false;
+	return autoriser('modifier', $type, $id, $qui);
 }
 
 /**
@@ -68,10 +67,9 @@ function autoriser_album_creer_dist($faire, $type, $id, $qui, $opts) {
  * Autorisation a associer/dissocier un album a un objet
  * Il faut etre admin ou pouvoir modifier l'objet
  */
-function autoriser_album_associer_dist($faire, $type, $associer_objet, $qui, $opts) {
-	list($objet, $id_objet) = explode('|',$associer_objet); 
-	if (!intval($id_objet) OR !$objet) return false;
-	return autoriser('modifier', $objet, $id_objet, $qui);
+function autoriser_associeralbum_dist($faire, $type, $id, $qui, $opts) {
+	if (!intval($id) OR !$type) return false;
+	return autoriser('modifier', $type, $id, $qui);
 }
 
 /**

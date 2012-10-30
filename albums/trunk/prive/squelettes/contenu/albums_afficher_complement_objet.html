@@ -17,8 +17,10 @@
 [(#REM) définition des albums à ne pas afficher dans la liste 'associer' ]
 #SET{exclus,#VAL{albums}|lister_objets_lies{#ENV{objet},#ENV{id_objet},''}}
 
+#SET{objet,#ENV{associer_objet}|explode{'|'}|reset}
+#SET{id_objet,#ENV{associer_objet}|explode{'|'}|end}
 [(#REM) définition du formulaire d'ajout à afficher par défaut en fonction des autorisations ]
-[(#AUTORISER{creer,album}|oui) #SET{autorise_creer,oui} ] [(#AUTORISER{associer, album, #ENV{associer_objet}}|oui) #SET{autorise_associer,oui} ]
+[(#AUTORISER{creer,album}|oui) #SET{autorise_creer,oui} ] [(#AUTORISER{associeralbum, #GET{objet}, #GET{id_objet}}|oui) #SET{autorise_associer,oui} ]
 [(#GET{autorise_creer}|oui|et{#GET{autorise_associer}|oui}|oui) #SET{ajouter,creer} ]
 [(#GET{autorise_creer}|non|et{#GET{autorise_associer}|oui}|oui) #SET{ajouter,associer} ]
 [(#GET{autorise_creer}|oui|et{#GET{autorise_associer}|non}|oui) #SET{ajouter,creer} ]
@@ -45,7 +47,7 @@
 
 
 <!-- ICONE AJOUTER -->
-[(#AUTORISER{ajouter,album,#ENV{associer_objet}}|et{#ENV{albums}|is_null}|oui)
+[(#AUTORISER{ajouteralbum, #GET{objet}, #GET{id_objet}}|et{#ENV{albums}|is_null}|oui)
 	[(#SET{label,<:album:icone_ajouter_album:>})]
 	[(#GET{self}|parametre_url{albums,#GET{ajouter}}|icone_verticale{#GET{label},album,new,'ajax preload right'}inserer_attribut{title,#GET{label}})]
 ]
@@ -88,7 +90,7 @@
 
 
 <!-- AJOUTER : FORMULAIRE ASSOCIATION -->
-[(#AUTORISER{associer, album, #ENV{associer_objet}}|et{#ENV{albums}|=={associer}}|et{#GET{afficher_associer}}|oui)
+[(#AUTORISER{associeralbum, #GET{objet}, #GET{id_objet}}|et{#ENV{albums}|=={associer}}|et{#GET{afficher_associer}}|oui)
 	<div id='associer' class='associer' class='ajax'>
 	[(#INCLURE{fond=prive/squelettes/inclure/albums_navigation_listes,
 		liste=associer,

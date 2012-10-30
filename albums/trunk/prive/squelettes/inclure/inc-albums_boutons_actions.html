@@ -12,6 +12,8 @@
 	Inclus dans /prive/squelettes/inclure/inc-objets_lies.html
 ]
 
+#SET{objet,#ENV{associer_objet}|explode{'|'}|reset}
+#SET{id_objet,#ENV{associer_objet}|explode{'|'}|end}
 
 
 [(#REM)
@@ -32,10 +34,10 @@
 	parametres necessaires : id_album, associer_objet
 ]
 [(#ENV{bouton}|=={associer}|oui)
-	[(#AUTORISER{associer, album, #ENV{associer_objet}}|oui)
+	[(#AUTORISER{associeralbum, #GET{objet}, #GET{id_objet}}|oui)
 		[(#BOUTON_ACTION{
 			[(#CHEMIN_IMAGE{ajouter-16.png}|balise_img{<:album:icone_associer_album:>})],
-			[(#URL_ACTION_AUTEUR{edition_albums,lier/#ID_ALBUM/[(#ENV{associer_objet})], #ENV{retour,#SELF}})],
+			[(#URL_ACTION_AUTEUR{associer_album,lier-#ID_ALBUM-[(#ENV{associer_objet})], #ENV{retour,#SELF}})],
 			'button link ajax'}
 		)]
 	]
@@ -48,16 +50,16 @@
 ]
 [(#ENV{bouton}=={dissocier}|oui)
 
-	[(#SET{titre, #AUTORISER{associer, album, #ENV{associer_objet}}|?{
+	[(#SET{titre, #AUTORISER{associeralbum, #GET{objet}, #GET{id_objet}}|?{
 		#VU|=={oui}|?{#VAL{<:avis_operation_impossible:>}|concat{' : '}|concat{<:album:titre_album:>&nbsp;}|concat{<:medias:document_vu:>},''},
 		<:avis_operation_impossible:>}
 	})] [(#SET{titre,#GET{titre}|strtolower})]
 
-	[(#AUTORISER{associer, album, #ENV{associer_objet}}|oui)
+	[(#AUTORISER{associeralbum, #GET{objet}, #GET{id_objet}}|oui)
 		[(#VU|=={non}|?{
 		[<span title='<:album:bouton_dissocier:>'>(#BOUTON_ACTION{
 			[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'album:icone_supprimer_album'})],
-			[(#URL_ACTION_AUTEUR{edition_albums,delier/#ID_ALBUM/[(#ENV{associer_objet})], #ENV{retour,#SELF}})],'button link ajax'}
+			[(#URL_ACTION_AUTEUR{associer_album,delier-#ID_ALBUM-[(#ENV{associer_objet})], #ENV{retour,#SELF}})],'button link ajax'}
 		)</span>],
 		[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{#GET{titre},'supprimer off'}
 			|inserer_attribut{title,#GET{titre}}
@@ -82,7 +84,7 @@
 
 		[<span title='<:album:bouton_supprimer:>'>(#BOUTON_ACTION{
 			[(#CHEMIN_IMAGE{poubelle-16.png}|balise_img{<:album:icone_supprimer_album:>})],
-			[(#URL_ACTION_AUTEUR{edition_albums,eradiquer/#ID_ALBUM, #ENV{retour,#SELF}|parametre_url{message,#GET{message}}})],
+			[(#URL_ACTION_AUTEUR{instituer_album,poubelle-#ID_ALBUM, #ENV{retour,#SELF}|parametre_url{message,#GET{message}}})],
 			'button link ajax',
 			#GET{texte_message}})</span>]
 
