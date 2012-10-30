@@ -197,7 +197,7 @@ var map[(#GET{id})];
 
 	$(function(){
 		jQuery.getScript(['(#CONFIG{auto_compress_js}|=={oui}|?{[(#PRODUIRE{fond=javascript/gis.js}|compacte)],[(#PRODUIRE{fond=javascript/gis.js})]})'],function(){
-			if (callback_map[(#GET{id})] && typeof(callback_map[(#GET{id})]) === "function") {
+			if (typeof(callback_map[(#GET{id})]) === "function") {
 				init_map[(#GET{id})](callback_map[(#GET{id})]);
 			} else {
 				init_map[(#GET{id})]();
