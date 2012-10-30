@@ -112,10 +112,16 @@ function contenu_boite_resume($id_form, $row, &$apercu){
 		array('FROM' => 'spip_articles AS articles, spip_forms_articles AS lien',
 		'WHERE' => "lien.id_article=articles.id_article AND id_form="._q($id_form)." AND statut!='poubelle'",
 		'ORDER BY' => "titre"));*/
-	$liste = afficher_objets('article',_T("$prefixei18n:articles_utilisant"),
-		array('FROM' => 'spip_articles AS articles, spip_forms_articles AS lien',
-		'WHERE' => "lien.id_article=articles.id_article AND id_form="._q($id_form)." AND statut!='poubelle'",
-		'ORDER BY' => "titre"));
+	if (_DIR_PLUGIN_AFFICHER_OBJETS) {
+		$liste = afficher_objets('forms',_T("$prefixei18n:articles_utilisant"),
+			array('id_form' => _q($id_form),
+			'ORDER BY' => "titre"));
+	} else {
+		$liste = afficher_objets('article',_T("$prefixei18n:articles_utilisant"),
+			array('FROM' => 'spip_articles AS articles, spip_forms_articles AS lien',
+			'WHERE' => "lien.id_article=articles.id_article AND id_form="._q($id_form)." AND statut!='poubelle'",
+			'ORDER BY' => "titre"));
+	}
 	if ($GLOBALS['spip_version_code']<1.92) {
 		$liste = ob_get_contents();
 		ob_end_clean();
