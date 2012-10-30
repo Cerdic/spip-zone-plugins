@@ -11,7 +11,7 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 function formulaires_editer_grappe_charger_dist($id_grappe='new',$retour='', $config_fonc='grappes_edit_config', $row=array(), $hidden=''){
-	$valeurs = formulaires_editer_objet_charger('grappe',$id_grappe,0,'',$retour,$config_fonc,$row,$hidden);
+	$valeurs = formulaires_editer_objet_charger('grappe',$id_grappe,'','',$retour,$config_fonc,$row,$hidden);
 
 	$valeurs['liaisons'] = explode(',',$valeurs['liaisons']);
 	$valeurs['options'] = @unserialize($valeurs['options']);
@@ -38,28 +38,14 @@ function grappes_edit_config($row)
 	return $config;
 }
 
-function formulaires_editer_grappe_verifier_dist($id_grappes='new',$retour='', $config_fonc='grappes_edit_config', $row=array(), $hidden=''){
-
-	$erreurs = formulaires_editer_objet_verifier('grappes',0,array('titre'));
-	return $erreurs;
+function formulaires_editer_grappe_verifier_dist($id_grappe='new',$retour='', $config_fonc='grappes_edit_config', $row=array(), $hidden=''){
+	// le id 0 est voulu, on ne souhaite pas controler le contenu des champs qui postent un array !
+	return formulaires_editer_objet_verifier('grappe',0,array('titre'));
 }
 
 // http://doc.spip.org/@inc_editer_groupe_mot_dist
-function formulaires_editer_grappe_traiter_dist($id_grappes='new',$retour='', $config_fonc='grappes_edit_config', $row=array(), $hidden=''){
-	$message = '';
-	set_request('redirect','');
-	$action_editer = charger_fonction("editer_grappe",'action');
-	list($id_grappe,$err) = $action_editer();
-	if ($err){
-		$message .= $err;
-	}
-	else {
-		if ($retour) {
-			include_spip('inc/headers');
-			$message .= redirige_formulaire(parametre_url($retour,'id_grappe',$id_grappe));
-		}
-	}
-	return $message;
+function formulaires_editer_grappe_traiter_dist($id_grappe='new',$retour='', $config_fonc='grappes_edit_config', $row=array(), $hidden=''){
+	return formulaires_editer_objet_traiter('grappe',$id_grappe,'','',$retour,$config_fonc,$row,$hidden);
 }
 
 

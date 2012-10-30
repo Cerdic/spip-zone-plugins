@@ -2,7 +2,7 @@
 	prefix="grappes"
 	categorie="divers"
 	version="1.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="prive/themes/spip/images/grappe-32.png"
 	schema="0.2.4"
