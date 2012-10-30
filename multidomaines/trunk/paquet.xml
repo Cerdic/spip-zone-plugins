@@ -4,7 +4,7 @@
 	version="2.1.2"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="images/multidomaines-72.png"
+	logo="prive/themes/spip/images/multidomaines-72.png"
 	documentation="http://www.spip-contrib.net/article4182"
 	schema="0.0.2" 
 >
@@ -13,7 +13,7 @@
 	<auteur mail="mailto:bennetteson@free.fr">Nathanaël Louison</auteur>
 	<auteur lien="http://www.pierre-kuhn.org">Pierre KUHN</auteur>
 
-	<menu nom="configurer_multidomaines" titre="multidomaines:titre_multidomaines" parent="menu_configuration" icone="images/multidomaines-16.png" />
+	<menu nom="configurer_multidomaines" titre="multidomaines:titre_multidomaines" parent="menu_configuration" icone="images/multidomaines-24.png" />
 
 	<pipeline nom="calculer_URL_SECTEUR" inclure="multidomaines_fonctions.php" />
 	<pipeline nom="" inclure="multidomaines_options.php" />
