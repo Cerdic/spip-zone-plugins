@@ -38,11 +38,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_cfg_duree_sauvegarde' => 'Conservation des archives',
 	'label_cfg_frequence' => 'Fréquence d\'archivage',
+	'label_cfg_nettoyage_journalier' => 'Activer le nettoyage journalier des archives',
 	'label_cfg_notif_active' => 'Activer les notifications',
 	'label_cfg_notif_mail' => 'Adresses email à notifier',
 	'label_cfg_prefixe' => 'Préfixe',
 	'label_cfg_sauvegarde_reguliere' => 'Activer la sauvegarde régulière',
-	'label_cfg_nettoyage_journalier' => 'Activer le nettoyage journalier des archives',
 	'label_cfg_taille_max_rep' => 'Taille maximale des dossiers',
 	'legende_cfg_notification' => 'Notifications',
 	'legende_cfg_sauvegarde_reguliere' => 'Traitements automatiques',
