@@ -5,6 +5,9 @@ ul.bloc li.noisette {min-height:36px;}
 ul.liste-noisettes .icone {width:36px; height:36px; padding:0; margin-left: 10px;}
 ul.liste-noisettes .icone a {width:36px; height:36px; padding:0;}
 ul.liste-noisettes .icone b {display:none;}
+.icones_texte ul.liste-noisettes .icone b {display: block;}
+.icones_texte ul.liste-noisettes .icone {width:60px;}
+.icones_texte ul.liste-noisettes .icone a {width:60px;}
 ul.liste-noisettes .noisette-up-24, ul.liste-noisettes .noisette-down-24, ul.liste-noisettes .noisette-del-24 {display:none;}
 ul.liste-noisettes li:hover .icone {display:block;} 
 .valider_rang input.link{background:none;border:0;cursor:pointer;padding:0 0 1px;color:#444}
