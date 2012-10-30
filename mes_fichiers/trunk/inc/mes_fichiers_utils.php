@@ -3,16 +3,22 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Renvoie la liste des fichiers et repertoires a sauver
 function mes_fichiers_a_sauver() {
-	if(defined('_DIR_SITE')){
-		$dir_racine = _DIR_SITE;
-	}else{
-		$dir_racine = _DIR_RACINE;
+	// Dans le cas de la mutu, les fichiers de personnalisation sont places
+	// - soit dans le site d'une sous-domaine, il faut donc aller les chercher a la racine de ce sous-domaine donc
+	//   en utilisant _DIR_SITE
+	// - soit dans le le site principal soit _DIR_RACINE
+	if (defined('_DIR_SITE')) {
+		// C'est une mutu
+		$dir_site = _DIR_SITE;
+	}
+	else {
+		$dir_site = _DIR_RACINE;
 	}
 
-	$htaccess = defined('_ACCESS_FILE_NAME') ? $dir_racine._ACCESS_FILE_NAME : $dir_racine.'.htaccess';
-	$IMG = defined('_DIR_IMG') ? _DIR_IMG : $dir_racine.'IMG/';
-	$tmp_dump = defined('_DIR_DUMP') ? _DIR_DUMP : $dir_racine.'tmp/dump/';
-	$tmp_db = defined('_DIR_DB') ? _DIR_DB : $dir_racine.'config/bases/';
+	$htaccess = defined('_ACCESS_FILE_NAME') ? _DIR_RACINE._ACCESS_FILE_NAME : _DIR_RACINE.'.htaccess';
+	$IMG = defined('_DIR_IMG') ? _DIR_IMG : $dir_site.'IMG/';
+	$tmp_dump = defined('_DIR_DUMP') ? _DIR_DUMP : $dir_site.'tmp/dump/';
+	$tmp_db = defined('_DIR_DB') ? _DIR_DB : $dir_site.'config/bases/';
 
 	$liste = array();
 
@@ -31,7 +37,7 @@ function mes_fichiers_a_sauver() {
 		$liste[] = $fichier_db;
 
 	// le fichier d'options si il existe
-	if (@is_readable($f = $dir_racine . _NOM_PERMANENTS_INACCESSIBLES . _NOM_CONFIG . '.php')
+	if (@is_readable($f = $dir_site . _NOM_PERMANENTS_INACCESSIBLES . _NOM_CONFIG . '.php')
 	OR (!defined('_DIR_SITE') && @is_readable($f = _FILE_OPTIONS))){
 		$liste[] = $f;
 	}
@@ -47,13 +53,13 @@ function mes_fichiers_a_sauver() {
 	// le(s) dossier(s) des squelettes nommes
 	if (strlen($GLOBALS['dossier_squelettes']))
 		foreach (explode(':', $GLOBALS['dossier_squelettes']) as $_dir) {
-			$dir = ($_dir[0] == '/' ? '' : $dir_racine) . $_dir . '/';
+			$dir = ($_dir[0] == '/' ? '' : $dir_site) . $_dir . '/';
 			if (@is_dir($dir))
 				$liste[] = $dir;
 		}
 	else
-		if (@is_dir($dir_racine.'squelettes/'))
-			$liste[] = $dir_racine.'squelettes/';
+		if (@is_dir($dir_site.'squelettes/'))
+			$liste[] = $dir_site.'squelettes/';
 
 	// le dernier fichier de dump de la base
 	$dump = preg_files($tmp_dump);
