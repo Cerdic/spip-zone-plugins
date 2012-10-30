@@ -1,0 +1,20 @@
+<paquet
+	prefix="moderation"
+	categorie="communication"
+	version="2.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.99]"
+	logo="img_pack/icone.png"
+	documentation="http://www.spip-contrib.net/Moderation-Moderee"
+>	
+
+	<nom>Mod&#233;ration Mod&#233;r&#233;e</nom>
+	<!-- Amélioration de la modération -->
+
+	<auteur>Yohann</auteur>
+
+	<pipeline nom="pre_edition" inclure="fonctions_mod.php" />
+
+	<menu nom="moderation" titre="Modération modérée" parent="forum" icone="img_pack/icone.png" />
+	<necessite nom="forum" />
+</paquet>
