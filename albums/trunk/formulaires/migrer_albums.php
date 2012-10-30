@@ -81,41 +81,75 @@ function formulaires_migrer_albums_traiter_dist(){
 
 
 function albums_migrer_articles($where_articles, $where_mots, $refuser){
-/*
-	include_spip("action/editer_evenement");
+	include_spip("action/editer_objet");
+	include_spip("action/editer_liens");
 
 	$where_mots = implode(" AND ",$where_mots);
 
 	$nb = 0;
 	$res = sql_select("*","spip_articles",$where_articles);
 	while ($row = sql_fetch($res)){
+		// y a-t-il deja un album associe ?
+		$liens = objet_trouver_liens(array('album'=>'*'),array('article'=>$row['id_article']));
+		if (!count($liens)
+		  AND $id_album = objet_inserer('album')){
 
-		$id_evenement = evenement_inserer($row['id_article']);
-		// mettre les champs
-		$set = array(
-			'date_debut' => $row[$champ_date_debut],
-			'date_fin' => $row[$champ_date_fin],
-			'titre' => $row['titre'],
-			'horaire' => ($horaire?'oui':'non')
-		);
-		evenement_modifier($id_evenement,$set);
+			// associer tout de suite
+			objet_associer(array('album'=>$id_album),array('article'=>$row['id_article']));
 
-		// associer les mots : en sql pour ne pas exploser si plein de mots en base
-		$mots = sql_allfetsel('M.id_mot','spip_mots AS M JOIN spip_mots_liens AS L ON (M.id_mot=L.id_mot AND L.objet='.sql_quote('article').')',"id_objet=".intval($row['id_article'])." AND (".$where_mots.")");
-		if (count($mots)){
-			$insert = array();
-			foreach ($mots as $mot){
-				$insert[] = array('id_mot'=>$mot['id_mot'],'objet'=>'evenement','id_objet'=>$id_evenement);
+			// titrer et decrire
+			$descriptif = array();
+			if (strlen($row['chapo']))
+				$descriptif[] = $row['chapo'];
+			if (strlen($row['texte']))
+				$descriptif[] = $row['texte'];
+			if (strlen($row['ps']))
+				$descriptif[] = $row['ps'];
+			$descriptif = implode("\n\n",$descriptif);
+
+			$set = array(
+				'titre' => $row['titre'],
+				'descriptif' => $descriptif,
+			);
+
+			objet_modifier("album",$id_album,$set);
+
+			// ajouter les documents : en sql pour ne pas exploser si plein de docs en base
+			$docs = sql_allfetsel('D.id_document','spip_documents AS D JOIN spip_documents_liens AS L ON (D.id_document=L.id_document AND L.objet='.sql_quote('article').')',"id_objet=".intval($row['id_article']));
+
+			if (count($docs)){
+				$insert = array();
+				foreach ($docs as $doc){
+					$insert[] = array('id_document'=>$doc['id_document'],'objet'=>'album','id_objet'=>$id_album);
+				}
+				sql_insertq_multi("spip_documents_liens",$insert);
 			}
-			sql_insertq_multi("spip_mots_liens",$insert);
+
+			// associer les mots : en sql pour ne pas exploser si plein de mots en base
+			$mots = sql_allfetsel('M.id_mot','spip_mots AS M JOIN spip_mots_liens AS L ON (M.id_mot=L.id_mot AND L.objet='.sql_quote('article').')',"id_objet=".intval($row['id_article'])." AND (".$where_mots.")");
+			if (count($mots)){
+				$insert = array();
+				foreach ($mots as $mot){
+					$insert[] = array('id_mot'=>$mot['id_mot'],'objet'=>'album','id_objet'=>$id_album);
+				}
+				sql_insertq_multi("spip_mots_liens",$insert);
+			}
+
+			// publier l'album
+			objet_modifier('album',$id_album,array('statut'=>'publie'));
+
+			$nb++;
 		}
 
+		// refuser l'article si option demandee
+		// meme si c'est un article migre un coup avant
+		if (count($liens) OR $id_album){
+			if ($refuser){
+				objet_modifier('article',$row['id_article'],array('statut'=>'refuse'));
+			}
+		}
 
-		// publier l'evenement
-		evenement_modifier($id_evenement,array('statut'=>'publie'));
-
-		$nb++;
-	}*/
+	}
 
 	return $nb;
 }
