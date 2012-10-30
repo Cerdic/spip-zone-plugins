@@ -98,7 +98,6 @@ function formulaires_editer_abomailman_traiter_dist($id_abomailman='new',$retour
 			$message['message_ok'] = _T('abomailmans:liste_updatee',array("id"=>$id_abomailman,"titre"=> $datas['titre']));
 		}
 	}else{
-		$id_abomailman = sql_insertq("spip_abomailmans",$datas);
 		$message['message_ok'] = _T('abomailmans:liste_creee',array("id"=>$id_abomailman,"titre"=> $datas['titre']));
 		$message['editable'] = false;
 	}
