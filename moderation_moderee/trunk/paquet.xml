@@ -16,6 +16,6 @@
 
 	<pipeline nom="pre_edition" inclure="fonctions_mod.php" />
 
-	<menu nom="moderation" titre="Modération modérée" parent="menu_configuration" icone="images/moderation.png" />
+	<menu nom="config_moderation" titre="moderation:titre" parent="menu_configuration" icone="images/moderation.png" />
 	<necessite nom="forum" />
 </paquet>
