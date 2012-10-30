@@ -7,7 +7,7 @@
 #ACTION_FORMULAIRE{#ENV{action}}
 
 <ul>
-	    <BOUCLE_choix(DATA){source table, #LISTE{visit,redac,admin}}>
+	    <BOUCLE_choix(DATA){source table, #LISTE{'0minirezo','1comite','6forum'}}>
           <li>
           [(#SET{label,moderation:[(#VALEUR)]_config})]
           [(#SAISIE{oui_non,#VALEUR,label=#GET{label}|_T})]

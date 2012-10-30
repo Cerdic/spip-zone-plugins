@@ -10,9 +10,10 @@ function moderation_upgrade($nom_meta_version_base, $version_cible){
     maj_plugin($nom_meta_version_base, $version_cible, $maj);
 }
 function moderation_create(){
-    ecrire_config('moderation/visit', 'on');
-    ecrire_config('moderation/redac', 'on');
-    ecrire_config('moderation/admin', 'on');
+    $statuts=array('0minirezo','1comite','6forum');
+    foreach ($statuts as $stat){
+        ecrire_config('moderation/'.$stat, 'on');
+    }
     return true;
 }
 function moderation_vider_tables($nom_meta_version_base){
