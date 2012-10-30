@@ -83,9 +83,7 @@
 
 			[(#REM) Statut ]
 			[(#GET{colonne_statut}|oui)
-			<td class='statut'>
-				[(#INCLURE{fond=prive/squelettes/inclure/inc-albums_puce_statut, objet=album, id_objet=#ID_ALBUM, statut=#STATUT}{env})]
-			</td>
+			<td class='statut'>[(#STATUT|puce_statut{album,#ID_ALBUM})]</td>
 			]
 
 			[(#REM) Logo ]
@@ -124,7 +122,7 @@
 				[<strong>(#TITRE)</strong>]
 				</li>
 				<li>
-					[(#INCLURE{fond=prive/squelettes/inclure/inc-albums_puce_statut, objet=album, id_objet=#ID_ALBUM, statut=#STATUT}{env})]
+					[(#STATUT|puce_statut{album,#ID_ALBUM})]
 					[&nbsp;N°(#ID_ALBUM)]
 				</li>
 				<li>
