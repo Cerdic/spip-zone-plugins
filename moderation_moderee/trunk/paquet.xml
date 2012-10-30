@@ -15,7 +15,7 @@
 	<auteur>Yohann</auteur>
 	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
 
-	<pipeline nom="pre_edition" inclure="fonctions_mod.php" />
+	<pipeline nom="pre_edition" inclure="moderation_pipelines.php" />
 
 	<menu nom="configurer_moderation" titre="moderation:titre" parent="menu_configuration" icone="images/moderation.png" />
 	<necessite nom="forum" />
