@@ -4,7 +4,7 @@
 	version="2.0.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.99]"
-	logo="img_pack/icone.png"
+	logo="prive/themes/spip/images/moderation.png"
 	documentation="http://www.spip-contrib.net/Moderation-Moderee"
 	schema="1.0.0"
 >	
@@ -16,6 +16,6 @@
 
 	<pipeline nom="pre_edition" inclure="fonctions_mod.php" />
 
-	<menu nom="moderation" titre="Modération modérée" parent="forum" icone="img_pack/icone.png" />
+	<menu nom="moderation" titre="Modération modérée" parent="menu_configuration" icone="images/moderation.png" />
 	<necessite nom="forum" />
 </paquet>
