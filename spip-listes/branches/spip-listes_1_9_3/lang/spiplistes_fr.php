@@ -435,7 +435,6 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
    @objet@. L&#8217;annulation est impossible ici.'
 , 'des_formats' => 'des formats'
 , 'des_listes' => 'des listes'
-, 'des_courriers' => 'des courriers'
 , 'des_abonnements' => 'des abonnements'
 , 'confirmer_supprimer_formats' => 'Supprimer les formats de r&#233;ception des abonn&#233;s.'
 , 'nettoyer_table_formats' => 'Nettoyer la table des formats.'
@@ -486,7 +485,6 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'boite_agenda_titre_' => 'Planning des diffusions '
 , 'boite_agenda_legende' => 'Sur @nb_jours@ jours'
 , 'boite_agenda_voir_jours' => 'Voir sur les @nb_jours@ jours coulants'
-, 'fichier_introuvable' => 'Fichier @fichier@ introuvable'
 
 // inc/spiplistes_api.php
 // inc/spiplistes_api_abstract_sql.php
@@ -734,7 +732,6 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'envoi_abandonne' => 'Envoi abandonn&#233;'
 , 'liste_prive' => 'Liste priv&#233;e'
 , 'liste_publique' => 'Liste publique'
-, 'listes_publiques' => 'Listes publiques'
 , 'message_redac' => 'En cours de r&#233;daction et pr&ecirc;t &#224; l&#8217;envoi'
 , 'prets_a_envoi' => 'Pr&ecirc;ts &#224; l&#8217;envoi'
 , 'publies' => 'Publi&#233;s'
@@ -958,7 +955,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'envoyer' => 'envoyer le mail'
 , 'envoyer_a' => 'Envoi vers '
 , 'listes_poubelle' => 'Vos listes de diffusion &#224; la poubelle'
-, 'liste_numero_' => 'Liste num&#233;ro :'
+, 'liste_numero_:' => 'Liste num&#233;ro :'
 , 'mail_tache_courante' => 'Mails envoy&#233;s pour la t&acirc;che courante : '
 , 'messages_auto_envoye' => 'Courriers automatiques envoy&#233;s'
 , 'nb_abonnes' => 'Dans les listes : '
