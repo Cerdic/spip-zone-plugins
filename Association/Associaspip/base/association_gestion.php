@@ -332,6 +332,7 @@ function association_maj_48001() {
 		$telephone = sql_countsel('spip_asso_membres', "telephone <> '' OR mobile <> ''");
 
 		if (! ($adresse OR $telephone)) { // si on n'a pas de donnees a sauvegarder, on fait la mise a jour sans poser de question
+		  spip_log("pas d'adresse ni de telephone, adoption tacite de Coordonnees");
 			$effectuer_maj = TRUE;
 		} else { // on a des donnees, demander a l'utilisateur ce qu'il veut en faire
 			echo '<form method="post" action="">';
@@ -476,11 +477,23 @@ $GLOBALS['association_maj'][52476] = array(
 // mise a jour introduisant les groupes
 function association_maj_53901() {
 	sql_create('spip_asso_groupes',
-		$GLOBALS['tables_principales']['spip_asso_groupes']['field'],
+		   array(
+			 "id_groupe"  => "bigint(20) NOT NULL auto_increment",
+			 "nom"        => "varchar(128) NOT NULL",
+			 "commentaires"  => "text",
+			 "affichage"  => "tinyint NOT NULL default 0",
+			 "maj"        => "timestamp NOT NULL"     ),
 		$GLOBALS['tables_principales']['spip_asso_groupes']['key']);
 	sql_alter("TABLE spip_asso_groupes AUTO_INCREMENT = 100");
 	sql_create('spip_asso_groupes_liaisons',
-		$GLOBALS['tables_principales']['spip_asso_groupes_liaisons']['field'],
+		   array(
+			 "id_groupe" => "bigint(20) NOT NULL",
+			 "id_auteur" => "bigint(20) NOT NULL",
+			 "fonction" => "varchar(128) NOT NULL",
+			 "date_debut" => "date NOT NULL default '0000-00-00'",
+			 "date_fin" => "date NOT NULL default '0000-00-00'",
+			 "commentaires"  => "text",
+			 "maj"           => "timestamp NOT NULL"),
 		$GLOBALS['tables_principales']['spip_asso_groupes_liaisons']['key']);
 
 	/* si on a des membres avec une fonction defini, on recupere tout et on les mets dans un groupe appele bureau */
@@ -506,7 +519,13 @@ $GLOBALS['association_maj'][53901] = array(
 // sur une 'annee civile', une 'annee scolaire', ou sur des periodes donnees
 $GLOBALS['association_maj'][55177] = array(
 	array('sql_create','spip_asso_exercices',
-	$GLOBALS['tables_principales']['spip_asso_exercices']['field'],
+	      array(
+		'id_exercice' => "INT UNSIGNED NOT NULL",
+		'intitule' => "TINYTEXT NOT NULL",
+		'commentaire' => "TEXT NOT NULL",
+		'debut' => "DATE NOT NULL DEFAULT '0000-00-00'",
+		'fin' => "DATE NOT NULL DEFAULT '0000-00-00'"
+		    ),
 	$GLOBALS['tables_principales']['spip_asso_exercices']['key']),
 );
 
@@ -611,9 +630,12 @@ $GLOBALS['association_maj'][66346] = array(
 	array('sql_alter', "TABLE spip_asso_categories ADD commentaire TEXT NOT NULL"),
 	array('sql_update', 'spip_asso_categories', array('commentaire'=>'commentaires') ),
 	array('sql_alter', "TABLE spip_asso_categories DROP commentaires"),
+
+
 	array('sql_alter', "TABLE spip_asso_groupes ADD commentaire TEXT NOT NULL"),
 	array('sql_update', 'spip_asso_groupes', array('commentaire'=>'commentaires') ),
 	array('sql_alter', "TABLE spip_asso_groupes DROP commentaires"),
+
 // homogeniser le nommage de cle secondaire sur les membres/auteurs pour ne plus s'arracher les cheveux
 	array('sql_alter', "TABLE spip_asso_dons ADD id_auteur BIGINT UNSIGNED NOT NULL"),
 	array('sql_update', 'spip_asso_dons', array('id_auteur'=>'id_adherent') ),
@@ -621,9 +643,10 @@ $GLOBALS['association_maj'][66346] = array(
 	array('sql_alter', "TABLE spip_asso_activites ADD id_auteur BIGINT UNSIGNED NOT NULL"),
 	array('sql_update', 'spip_asso_activites', array('id_auteur'=>'id_adherent') ),
 	array('sql_alter', "TABLE spip_asso_activites DROP id_adherent"),
+
 	array('sql_alter', "TABLE spip_asso_prets ADD id_auteur BIGINT UNSIGNED NOT NULL"),
 	array('sql_update', 'spip_asso_prets', array('id_auteur'=>'id_emprunteur') ),
-	array('sql_alter', "TABLE spip_asso_dons DROP id_emprunteur"),
+	array('sql_alter', "TABLE spip_asso_prets DROP id_emprunteur"),
 );
 
 // ajout de nouvelles autorisations
@@ -641,11 +664,11 @@ $GLOBALS['association_maj'][66804] = array(
 	array('sql_update', 'spip_asso_membres', array('date_validite'=>'validite') ),
 	array('sql_alter', "TABLE spip_asso_membres DROP validite"),
 	array('sql_alter', "TABLE spip_asso_activites ADD quantite FLOAT UNSIGNED NOT NULL DEFAULT 0"),
-	array('sql_update', 'spip_asso_activites', array('quatite'=>'inscrits') ),
-	array('sql_alter', "TABLE spip_asso_membres DROP inscrits"),
+	array('sql_update', 'spip_asso_activites', array('quantite'=>'inscrits') ),
+	array('sql_alter', "TABLE spip_asso_activites DROP inscrits"),
 	array('sql_alter', "TABLE spip_asso_activites ADD prix_activite DECIMAL(19,2) NOT NULL DEFAULT 0"),
 	array('sql_update', 'spip_asso_activites', array('prix_activite'=>'montant') ),
-	array('sql_alter', "TABLE spip_asso_membres DROP montant"),
+	array('sql_alter', "TABLE spip_asso_activites DROP montant"),
 	array('sql_alter', "TABLE spip_asso_exercices ADD date_debut DATE NOT NULL DEFAULT '0000-00-00'"),
 	array('sql_update', 'spip_asso_exercices', array('date_debut'=>'debut') ),
 	array('sql_alter', "TABLE spip_asso_exercices DROP debut"),
