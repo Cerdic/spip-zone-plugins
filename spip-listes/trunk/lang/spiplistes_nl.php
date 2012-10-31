@@ -573,6 +573,7 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'texte_brut' => "Bruto tekst"
 , 'vous_etes_abonne_aux_listes_' => "Vous &ecirc;tes abonn&eacute; aux listes de diffusion :"
 , 'vous_etes_abonne_a_la_liste_' => "Vous &ecirc;tes abonn&eacute; &agrave; la liste de diffusion :"
+, 'courrier_lire_site'=>'Lees online'
 
 // tableau items *_options
 , 'liste_de_destination' => "Liste de destination"

@@ -496,6 +496,7 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 , 'texte_brut' => "Plain Text"
 , 'vous_etes_abonne_aux_listes_' => "You are subscribed to mailing lists:"
 , 'vous_etes_abonne_a_la_liste_' => "You are subscribed to the mailing list:"
+, 'courrier_lire_site'=>'Read Online'
 
 // tableau items *_options
 , 'liste_de_destination' => "Destination list"

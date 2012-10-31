@@ -675,6 +675,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'ce_mail_envoye_a_' => 'Ce message est adress&#233; &#224; '
 , 'si_mail_par_erreur' => 'Si ce mail vous a &#233;t&#233; d&#233;livr&#233; par erreur,
 		merci de pr&#233;venir votre correspondant et de supprimer ce message.'
+, 'courrier_lire_site'=>'Lire sur le site'
 
 // spiplistes_mes_fonctions.php
 , 'date_depuis' => 'depuis @delai@'

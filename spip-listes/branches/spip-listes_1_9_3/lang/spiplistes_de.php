@@ -117,6 +117,7 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 'lot_suivant' => 'N&auml;chten Stapel abschicken',
 'lieu' => 'Ort',
 'lettre_d_information' => 'Newsletter',
+'courrier_lire_site'=>'Online lesen',
 
 //M
 'mail_format' => 'Sie haben den Newsletter der Website @nom_site_spip@ im folgenden Format abonniert',
@@ -147,7 +148,7 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 'messages_voir_dernier' => 'Letzte Nachricht lesen',
 'moderateurs' => 'Moderator(en)',
 'modifier' => '&auml;ndern',
-'mis_a_jour' => 'Updated', // FIXME
+'mis_a_jour' => 'Aktualisieren', 
 
 //N
 'nom' => 'Benutzername',
