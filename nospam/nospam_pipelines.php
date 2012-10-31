@@ -118,6 +118,23 @@ function nospam_pre_edition($flux) {
 			$email = strlen($flux['data']['email_auteur']) ? " OR email_auteur=" . sql_quote($flux['data']['email_auteur']) : "";
 			$spammeur_connu = (!isset($GLOBALS['visiteur_session']['statut']) AND (sql_countsel('spip_forum', '(ip=' . sql_quote($GLOBALS['ip']) . "$email) AND statut='spam'") > 0));
 
+		  // activer aussi le flag spammeur connu en cas de flood, meme si aucune detection spam jusqu'ici
+		  // on sera plus severe sur les liens dans ce cas
+		  // cas du spammeur qui envoie que des messages a 3 liens a haute frequence (passe a travers tous les filtres)
+		  // au bout du 10e message on va moderer tout message avec un lien
+		  if (!$spammeur_connu){
+			  if ($nb=sql_countsel('spip_forum','(ip='.sql_quote($GLOBALS['ip']).$email.') AND '.sql_date_proche('date_heure','-30','minute'))>10){
+			  spip_log("[Flood] $nb message pour (ip=".$GLOBALS['ip']."$email) dans les 30 dernieres minutes",'nospam');
+			  $spammeur_connu = true;
+			  }
+		  }
+		  if (!$spammeur_connu){
+			  if ($nb=sql_countsel('spip_forum','(ip='.sql_quote($GLOBALS['ip']).$email.') AND '.sql_date_proche('date_heure','-10','minute'))>5){
+			  spip_log("[Flood] $nb message pour (ip=".$GLOBALS['ip']."$email) dans les 10 dernieres minutes",'nospam');
+			  $spammeur_connu = true;
+			  }
+		  }
+
 			// si c'est un spammeur connu,
 			// verifier que cette ip n'en est pas a son N-ieme spam en peu de temps
 			// a partir d'un moment on refuse carrement le spam massif
@@ -125,10 +142,10 @@ function nospam_pre_edition($flux) {
 				// plus de 10 spams dans les dernieres 2h, faut se calmer ...
 				// ou plus de 30 spams dans la dernieres 1h, faut se calmer ...
 				if (
-					($nb = sql_countsel('spip_forum', 'statut=\'spam\' AND (ip=' . sql_quote($GLOBALS['ip']) . $email . ') AND maj>DATE_SUB(NOW(),INTERVAL 120 minute)')) > 10
+					($nb = sql_countsel('spip_forum', 'statut=\'spam\' AND (ip=' . sql_quote($GLOBALS['ip']) . $email . ') AND ' . sql_date_proche('date_heure','-120','minute'))) > 10
 					OR
-					($nb = sql_countsel('spip_forum', 'statut=\'spam\' AND (ip=' . sql_quote($GLOBALS['ip']) . $email . ') AND maj>DATE_SUB(NOW(),INTERVAL 60 minute)')) > 30
-				) {
+					($nb = sql_countsel('spip_forum', 'statut=\'spam\' AND (ip=' . sql_quote($GLOBALS['ip']) . $email .') AND ' . sql_date_proche('date_heure','-60','minute'))) > 30
+					){
 					$flux['data']['statut'] = ''; // on n'en veut pas !
 					spip_log("[Refuse] $nb spam pour (ip=" . $GLOBALS['ip'] . "$email) dans les 2 dernieres heures", 'nospam');
 					return $flux;
@@ -196,7 +213,7 @@ function nospam_pre_edition($flux) {
 			// verifier que cette ip n'en est pas a son N-ieme post en peu de temps
 			// plus de 5 messages en 5 minutes c'est suspect ...
 			if ($flux['data']['statut'] != 'spam') {
-				if (($nb = sql_countsel('spip_forum', 'ip=' . sql_quote($GLOBALS['ip']) . ' AND maj>DATE_SUB(NOW(),INTERVAL 5 minute)')) > 5)
+				if (($nb = sql_countsel('spip_forum', 'ip=' . sql_quote($GLOBALS['ip']) . ' AND ' . sql_date_proche('date_heure','-5','minute'))) > 5)
 					$flux['data']['statut'] = 'spam';
 				#spip_log("$nb post pour l'ip ".$GLOBALS['ip']." dans les 5 dernieres minutes",'nospam');
 			}
