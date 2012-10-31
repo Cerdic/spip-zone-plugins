@@ -12,7 +12,7 @@ function tradauto_ajout_bouton($flux)
  	$clientID = lire_config('tradauto/clientID');
 	if (empty($clientID))
 	{
-		echo "ERREUR Tradauto : Le plugin n'est pas encore configuré.";
+		echo _T('tradauto:erreur_pas_configure');
 		return $flux;
 	}
 

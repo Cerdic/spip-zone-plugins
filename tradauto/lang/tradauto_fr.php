@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_application' => 'Créer votre application et récupérer vos identifiants',
 
 	//E
+	'erreur_pas_configure' => 'ERREUR Tradauto : Le plugin n\'est pas encore configuré.',
 	'exclusions' => 'Exclusions',
 	'exclusions_explication' => '
 		Listez ci-dessous les chaines à exclure de la traduction.<br />
