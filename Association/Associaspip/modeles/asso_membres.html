@@ -37,7 +37,7 @@ maj:2012-09-27; version:0.1.1; licence:GPL; -->]
 		<tr class="agent vcard [(#COMPTEUR_BOUCLE|alterner{'pair','impair'})]">
 			<td class="url photo">[(#LOGO_AUTEUR{#URL_AUTEUR,left}|image_reduire{60})]</td>
 			<td>[(#SEXE|association_formater_nom{#PRENOM, #NOM_FAMILLE, 'span'})]</td>
-			<td><object class="include" data="#vcard-group#ENV{id_groupe}"></object> [<span class="role">(#FONCTION)</span>]</td>
+			<td><a class="include" data="#vcard-group#ENV{id_groupe}"></a> [<span class="role">(#FONCTION)</span>]</td>
 	[(#AUTORISER{voir_profil,association}|oui)
 		[(#PLUGIN{coordonnees}|oui)
 			<td>[(#GET{telephones}|table_valeur{#ID_AUTEUR})]</td>
