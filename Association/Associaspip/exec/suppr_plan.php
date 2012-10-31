@@ -28,7 +28,7 @@ function exec_suppr_plan() {
 		// datation et raccourcis
 		raccourcis_association('');
 		debut_cadre_association('plan_compte.png', 'suppression_de_compte');
-		echo association_bloc_suppression('plan', $id_plan,'plan');
+		echo association_bloc_suppression('plan', $id_plan,'plan_comptable');
 		fin_page_association();
 	}
 }
