@@ -150,7 +150,7 @@ function association_bouton_list($objet, $args='', $tag='td') {
  * bouton edit[ion|er] (modifi[cation|er])
  */
 function association_bouton_edit($objet, $args='', $tag='td') {
-	$res = association_bouton_act('bouton_modifier', 'edit-12.gif', "edit_$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#9088;"', $tag);
+	$res = association_bouton_act('bouton_modifier', 'edit-12.gif', "edit_$objet", is_numeric($args)?"id_$objet=$args":$args, 'width="12" height="12" alt="&#9088;"', $tag);
 	return $res;
 }
 
@@ -158,7 +158,7 @@ function association_bouton_edit($objet, $args='', $tag='td') {
  * bouton suppr[ession|imer] (efface[ment|r])
  */
 function association_bouton_suppr($objet, $args='', $tag='td') {
-	$res = association_bouton_act('bouton_supprimer', 'suppr-12.gif', "suppr_$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#8999;" class="danger"', $tag);
+	$res = association_bouton_act('bouton_supprimer', 'suppr-12.gif', "suppr_$objet", is_numeric($args)?"id_$objet=$args":$args, 'width="12" height="12" alt="&#8999;" class="danger"', $tag);
 	return $res;
 }
 
@@ -2351,12 +2351,24 @@ function association_passeparam_id($type='', $objet='') {
 		$id = 0;
 	if (!$id) // pas d'id_... alors c'est le nom generique qui est utilise
 		$id = intval(_request('id'));
-	if ( $type && $objet ) {
-		$row = sql_fetsel('*', table_objet_sql($objet), id_table_objet($objet).'='.sql_quote($id) );
-		if (!$row) { // eviter un affichage erronne dans la page et des requetes supplementaire (au moins celle de DROP dans le cas d'une page suppr_...)
+
+	if ( $type AND $objet ) {
+		include_spip('base/association');
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		$table = "spip_$objet";
+		$desc = $trouver_table($table, $serveur);
+		$id_objet = $desc['key']["PRIMARY KEY"];
+		$row = sql_fetsel('*', $table, "$id_objet=$id");
+		if (!$row) {
+// eviter un affichage erronne dans la page et des requetes supplementaire
+// (au moins celle de DROP dans le cas d'une page suppr_...)
 			include_spip('inc/minipres');
-			echo minipres(_T('zxml_inconnu_id', array('id'=>$id) )); // ceci se produit habituellement pour un ID inexistant ; ce qui ne devrait arriver que si le parametre est passe manuellement et non via une page legitime
-			exit; // on arret tout ici (le reste de la page sera fausse ou bancale sinon)
+			echo minipres(_T('zxml_inconnu_id', array('id'=>$id) ));
+// ceci se produit habituellement pour un ID inexistant 
+// ce qui ne devrait arriver que si le parametre est passe manuellement
+// et non via une page legitime
+// on arrete tout ici (le reste de la page sera fausse ou bancale sinon)
+			exit;
 		} else
 			return array($id, $row);
 	} else
