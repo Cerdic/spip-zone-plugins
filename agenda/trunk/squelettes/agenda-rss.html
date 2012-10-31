@@ -21,33 +21,8 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 	</image>
 ]
 	
-	<BOUCLE_evenement(EVENEMENTS) {branche ?}{id_article ?} {statut=publie}{par date_fin}{age<7} {0,60}>
-	<item>
-		[<title>(#TITRE|texte_backend)</title>]
-		<link>[(#URL_ARTICLE|parametre_url{id_evenement,#ID_EVENEMENT}|url_absolue)]</link>
-		[<guid isPermaLink="true">(#URL_ARTICLE|parametre_url{id_evenement,#ID_EVENEMENT}|url_absolue)</guid>]
-		<date>#DATE_DEBUT</date>
-		[<dc:date>(#DATE_DEBUT|date_iso)</dc:date>]
-		<dc:format>text/html</dc:format>
-		[<dc:language>(#LANG)</dc:language>]
-		
-		[(#REM) Le bloc qui suit diffuse l'evenement a la mode RSS ]
-		<description>
-			[(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE}|texte_backend)][ - (#LIEU|PtoBR|texte_backend)]
-			[(#DESCRIPTIF|texte_backend)]
-		</description>
-		
-		[(#REM) Le bloc qui suit diffuse aussi le texte integral de l'evenement,
-		ce qui permet une syndication plus riche (mais plus "lourde").
-		Fonction desactivable depuis les reglages du site.]
-		[(#CONFIG{syndication_integrale}|=={oui}|?{' ',''})<content:encoded>
-		[(#LOGO_ARTICLE|right||texte_backend)]
-		&lt;div class='rss_texte'&gt;
-			[(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE}|texte_backend)][ - (#LIEU|PtoBR|texte_backend)]
-			[(#DESCRIPTIF|texte_backend)]
-		&lt;/div&gt;
-		</content:encoded>]
-	</item>
+	<BOUCLE_evenement(EVENEMENTS) {branche ?}{id_article ?}{!evenement_passe}{par date_debut} {0,60}>
+		<INCLURE{fond=inc-rss-item-evenement,id_evenement} />
 	</BOUCLE_evenement>
 
 </channel>
