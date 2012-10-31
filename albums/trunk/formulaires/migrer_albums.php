@@ -136,7 +136,7 @@ function albums_migrer_articles($where_articles, $where_mots, $refuser){
 			}
 
 			// publier l'album
-			objet_modifier('album',$id_album,array('statut'=>'publie'));
+			objet_modifier('album',$id_album,array('date'=>$row['date'],'statut'=>'publie'));
 
 			$nb++;
 		}
