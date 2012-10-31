@@ -52,8 +52,10 @@ function mes_fichiers_a_sauver() {
 
 	// le(s) dossier(s) des squelettes nommes
 	if (strlen($GLOBALS['dossier_squelettes']))
+		// Dans le cas d'une mutu, la globale est toujours mise à jour sous la forme sites/domaine/squelettes
+		// Cela revient donc au même que pour une install non mutualisée, il faut donc utiliser _DIR_RACINE
 		foreach (explode(':', $GLOBALS['dossier_squelettes']) as $_dir) {
-			$dir = ($_dir[0] == '/' ? '' : $dir_site) . $_dir . '/';
+			$dir = ($_dir[0] == '/' ? '' : _DIR_RACINE) . $_dir . '/';
 			if (@is_dir($dir))
 				$liste[] = $dir;
 		}
