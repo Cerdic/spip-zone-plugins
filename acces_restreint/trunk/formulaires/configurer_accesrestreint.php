@@ -23,5 +23,9 @@ function formulaires_configurer_accesrestreint_traiter_dist(){
 	foreach($champs as $c)
 		ecrire_meta($c,_request($c)=='oui'?'oui':'non');
 
+	// generer/supprimer les fichiers htaccess qui vont bien
+	include_spip("inc/acces");
+	gerer_htaccess();
+
 	return array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
 }
