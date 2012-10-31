@@ -20,7 +20,7 @@
 		<figure class="thumbnail">
 		<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="album"[ class="(#EXPOSER)"][ title="(#TITRE|attribut_html|couper{80})"]>
 		[(#LOGO_DOCUMENT
-			|image_reduire{0,100}
+			|image_reduire{#ENV{largeur,0},#ENV{hauteur,100}}
 			|inserer_attribut{class,spip_logos}
 			|inserer_attribut{alt,[(#TITRE|attribut_html|couper{60})]})]
 		[(#CONFIG{albums/vue_icones}|find{titre}|oui) 

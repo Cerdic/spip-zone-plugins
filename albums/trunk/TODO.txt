@@ -3,9 +3,6 @@ A faire avant passage à l'état "en test"
 et publication d'un article sur spip-contrib
 ============================================
 
-- critère "orphelin"
-  partiellement fait, rajouter la prise en compte de !orphelin
-
 - critère "contenu"
   pouvoir sélectionner les albums en fonction des médias qu'ils contiennent
   {contenu = video}
