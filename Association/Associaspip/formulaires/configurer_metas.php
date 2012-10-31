@@ -54,11 +54,19 @@ function formulaires_configurer_metas_traiter_dist($form) {
 define('_EXTRAIRE_SAISIES',
 	'#<(select|textarea|input)[^>]*\sname=["\'](\w+)(\[\w*\])?["\'](?: class=["\']([^\'"]*)["\'])?( multiple=)?[^>]*?>#ims');
 
+define('_EXTRAIRE_INCLURE','#INCLU[DR]E{fond=([^,} ]+)[^}]*}#s');
+
 // determiner la liste des noms des saisies d'un formulaire
 // (a refaire avec SAX)
 function formulaires_configurer_metas_recense($form, $opt='') {
 	if (!$opt) $opt = PREG_SET_ORDER;
 	$f = file_get_contents($form);
+	if (preg_match_all(_EXTRAIRE_INCLURE, $f, $r, PREG_SET_ORDER)) {
+		foreach($r as $m) {
+			if ($i = find_in_path($m[1] . '.html')) 
+			  $f = str_replace($m[0], file_get_contents($i), $f);
+		}
+	}
 	if ($f AND preg_match_all(_EXTRAIRE_SAISIES, $f, $r, $opt))
 		return $r;
 	else
