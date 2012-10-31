@@ -7,28 +7,30 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 	]
-
-	<h4>
+	<h4[
+		style="background-image: url((#ENV{_compositions}|table_valeur{#ENV{composition}}|table_valeur{icon}|image_reduire{24,24}|extraire_attribut{src}))"][
+		title="(#ENV{_compositions}|table_valeur{#ENV{composition}}|table_valeur{description}|attribut_html)"]>
 		<:compositions:composition_utilisee:>
 			<span class="composition_actuelle">[(#ENV{composition}|oui)[(#ENV{_compositions}|table_valeur{#ENV{composition}}|table_valeur{nom}|supprimer_numero|sinon{#ENV{composition}})]
 			][(#ENV{composition}|non)
 				[(#ENV{composition_heritee}|oui)
 					[(#ENV{composition_heritee}|=={'-'}|oui)<:compositions:composition_defaut:>]
 					[(#ENV{composition_heritee}|!={'-'}|oui)[(#ENV{_compositions}|table_valeur{''}|table_valeur{nom}|supprimer_numero|sinon{#ENV{composition_heritee}})]]
-					(<:compositions:composition_heritee:>)
+					<span class="precision">(<:compositions:composition_heritee:>)</span>
 				]
 				[(#ENV{composition_heritee}|non)<:compositions:composition_defaut:>]
 			][(#ENV{composition_verrouillee}|oui) <img src="#CHEMIN_IMAGE{cadenas-16.png}" alt="" />]
-		<span>
+			</span>
 	</h4>
 	[(#ENV{editable})
 	<span class="toggle_box_link" style="display:none;">&#91;<a href="#"
 			onclick="var f=jQuery(this).parents('form').eq(0);f.find('p').show('fast');f.find('ul').show('fast');f.find('.toggle_box_link').hide('fast');return false;"
 			><:bouton_changer:></a>&#93;</span>
 	]
-
-	[(#ENV{composition_verrouillee}|oui)<p><:compositions:composition_verrouillee:></p>]
-	<B_heritages><p><:compositions:heritages:> <BOUCLE_heritages(POUR){tableau #ENV{_compositions}|table_valeur{#ENV{composition}}|table_valeur{branche}}{', '}>#CLE (#VALEUR)</BOUCLE_heritages>.</p></B_heritages>
+	<div class="detail">
+		[(#ENV{composition_verrouillee}|oui)<p><:compositions:composition_verrouillee:></p>]
+		<B_heritages><p><:compositions:heritages:> <BOUCLE_heritages(POUR){tableau #ENV{_compositions}|table_valeur{#ENV{composition}}|table_valeur{branche}}{', '}>#CLE (#VALEUR)</BOUCLE_heritages>.</p></B_heritages>
+	</div>
 
 	[(#ENV{editable})
 	<ul>
@@ -42,29 +44,27 @@
 		
 		#SET{lock,''}
 		[(#AUTORISER{webmestre}|et{#ENV{verrou_branche}|non}|et{#CONFIG{compositions/tout_verrouiller}|non}|oui)
-		#SET{name,composition_lock}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
-		<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur] long_label">
-			[<span class='erreur_message'>(#GET{erreurs})</span>]
-			<label><:compositions:label_composition_explication:></label>
-			[(#ENV{_compositions}|is_array|oui)
-			<div class="choix">
-				<input type="checkbox" class="checkbox" name="#GET{name}" value="1" id="#GET{name}"[ (#ENV{#GET{name}}|oui)checked="checked"] />
-				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
-			</div>
-			]
-			[(#ENV{_compositions}|is_array|non)<input type="hidden" name="composition_lock" id="composition_lock" value="#ENV{composition_lock}" />]
-		</li>
-		[(#ENV{objet}|=={rubrique}|oui)
-		#SET{name,composition_branche_lock}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
-		<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur] long_label">
-			[<span class='erreur_message'>(#GET{erreurs})</span>]
-			<div class="choix">
-				<input type="checkbox" class="checkbox" name="#GET{name}" value="1" id="#GET{name}"[ (#ENV{#GET{name}}|oui)checked="checked"] />
-				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
-			</div>
-		</li>
-		]
-		#SET{lock,'oui'}
+			#SET{name,composition_lock}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<label><:compositions:label_composition_explication:></label>
+				[(#ENV{_compositions}|is_array|oui)
+				<div class="choix">
+					<input type="checkbox" class="checkbox" name="#GET{name}" value="1" id="#GET{name}"[ (#ENV{#GET{name}}|oui)checked="checked"] />
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+				</div>
+				]
+				[(#ENV{_compositions}|is_array|non)<input type="hidden" name="composition_lock" id="composition_lock" value="#ENV{composition_lock}" />]
+				[(#ENV{objet}|=={rubrique}|oui)
+				#SET{name,composition_branche_lock}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<div class="choix">
+						<input type="checkbox" class="checkbox" name="#GET{name}" value="1" id="#GET{name}"[ (#ENV{#GET{name}}|oui)checked="checked"] />
+						<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+					</div>
+				]
+			</li>
+			#SET{lock,'oui'}
 		]
 		[(#ENV{verrou_branche}|oui)
 		<li>
