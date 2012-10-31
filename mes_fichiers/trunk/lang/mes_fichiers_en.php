@@ -40,18 +40,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_cfg_duree_sauvegarde' => 'Backup preservation period',
 	'label_cfg_frequence' => 'Backup frequency',
-	'label_cfg_nettoyage_journalier' => 'Activer le nettoyage journalier des archives', # NEW
+	'label_cfg_nettoyage_journalier' => 'Enable daily deletion of obsolete backups',
 	'label_cfg_notif_active' => 'Enable notifications',
 	'label_cfg_notif_mail' => 'Email addresses to notify',
 	'label_cfg_prefixe' => 'Préfix',
 	'label_cfg_sauvegarde_reguliere' => 'Enable automatic backups',
 	'label_cfg_taille_max_rep' => 'Maximum folder\'s size',
 	'legende_cfg_notification' => 'Notifications',
-	'legende_cfg_sauvegarde_reguliere' => 'Automatic backup', # MODIF
+	'legende_cfg_sauvegarde_reguliere' => 'Automatic actions',
 
 	// M
 	'message_cleaner_sujet' => 'Deleting backups',
-	'message_notif_cleaner_intro' => 'Automatic deletion of obsolete backup files (creation date former than @duree@ days) performed successfully. The following files have been deleted : ', # MODIF
+	'message_notif_cleaner_intro' => 'Automatic deletion of obsolete backup files (creation date former than @duree@ days) performed successfully. The following files have been deleted : ',
 	'message_notif_sauver_intro' => 'New backup is available. It was created by @auteur@.',
 	'message_rien_a_sauver' => 'Neither file nor folder to backup.',
 	'message_rien_a_telecharger' => 'No backup available to download.',
@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resume_zip_statut' => 'Status',
 
 	// T
-	'titre_boite_configurer' => 'Files backup', # MODIF
+	'titre_boite_configurer' => 'Backup parameters',
 	'titre_boite_sauver' => 'Create a backup',
 	'titre_boite_telecharger' => 'List of backups available to download',
 	'titre_page_configurer' => 'Configuration of My files plugin',
