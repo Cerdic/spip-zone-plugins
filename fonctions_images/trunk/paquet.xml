@@ -1,9 +1,9 @@
 <paquet
 	prefix="fonctions_images"
 	categorie="multimedia"
-	version="0.6.7"
+	version="0.6.8"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/fonctions_images_48.png"
 	documentation="http://contrib.spip.net/Plugin-fonctions-d-images"
 >	

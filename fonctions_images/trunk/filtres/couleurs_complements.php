@@ -125,7 +125,7 @@ function couleur_inverserluminosite($coul,$pourcentage=20, $intensifier=false) {
 	$g= $couleurs["green"];
 	$b= $couleurs["blue"];
 
-	$hsl = image_rgb2hsl($r,$g,$b);
+	$hsl = _couleur_rgb2hsl($r,$g,$b);
 	$h = $hsl["h"];
 	$s = $hsl["s"];
 	$l = $hsl["l"];
@@ -144,7 +144,7 @@ function couleur_inverserluminosite($coul,$pourcentage=20, $intensifier=false) {
 		}
 	}
 
-	$rgb = image_hsl2rgb($h,$s,$l);
+	$rgb = _couleur_hsl2rgb($h,$s,$l);
 	$r = $rgb["r"];
 	$g = $rgb["g"];
 	$b = $rgb["b"];
@@ -160,14 +160,14 @@ function couleur_foncerluminosite($coul,$pourcentage=20) {
 	$g= $couleurs["green"];
 	$b= $couleurs["blue"];
 
-	$hsl = image_rgb2hsl($r,$g,$b);
+	$hsl = _couleur_rgb2hsl($r,$g,$b);
 	$h = $hsl["h"];
 	$s = $hsl["s"];
 	$l = $hsl["l"];
 
 	$l = $l*(1-$pourcentage/100);
 
-	$rgb = image_hsl2rgb($h,$s,$l);
+	$rgb = _couleur_hsl2rgb($h,$s,$l);
 	$r = $rgb["r"];
 	$g = $rgb["g"];
 	$b = $rgb["b"];
@@ -183,14 +183,14 @@ function couleur_eclaircirluminosite($coul,$pourcentage=20) {
 	$g= $couleurs["green"];
 	$b= $couleurs["blue"];
 
-	$hsl = image_rgb2hsl($r,$g,$b);
+	$hsl = _couleur_rgb2hsl($r,$g,$b);
 	$h = $hsl["h"];
 	$s = $hsl["s"];
 	$l = $hsl["l"];
 
 	$l = $l + (1-$l)*(1-(100-$pourcentage)/100);
 
-	$rgb = image_hsl2rgb($h,$s,$l);
+	$rgb = _couleur_hsl2rgb($h,$s,$l);
 	$r = $rgb["r"];
 	$g = $rgb["g"];
 	$b = $rgb["b"];
