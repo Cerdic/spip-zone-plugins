@@ -1,32 +1,29 @@
------------------
-TRUCS MANQUANTS :
------------------
+============================================
+A faire avant passage à l'état "en test"
+et publication d'un article sur spip-contrib
+============================================
 
-1: CRITERES
- * critère 'orphelin' :	fonctionne, mais !orphelin ne marche pas.
- * critère 'contenu' :	pouvoir sélectionner des albums en fonction des types de média contenus.
- 			ex : 
- 			{contenu = video} -> albums avec des vidéos
- 			{contenu IN #ARRAY{audio,video}} -> albums avec audio OU video
- 			{contenu} -> albums non vides
- 			{!contenu} -> albums vides
+- critère "orphelin"
+  partiellement fait, rajouter la prise en compte de !orphelin
 
-2: BALISES
- * balise #CONTENU ? 
-   Sans argument, elle pourrait renvoyer un tableau 'index => type de document'
-   0 => file
-   1 => audio
-   Et avec un argument #CONTENU{detail}, un tableau 'type de document => nombre de documents '
-   file => 6
-   video => 2
+- critère "contenu"
+  pouvoir sélectionner les albums en fonction des médias qu'ils contiennent
+  {contenu = video}
+  {contenu IN audio,video}
+  {contenu} -> albums non vides (ou alors {contenu != ''})
+  {!contenu} -> albums vides
 
-3 : MODELES
- * Option pour la taille des images
+- autorisations : verifier si tout est ok.
+  * un admin doit pouvoir tout faire
+  * un redacteur doit pouvoir :
+    - voir tous les albums (meme s'il n'est pas l'auteur d'un article/rubrique/objet)
+    - s'il est l'auteur d'un objet, creer/associer/modifier un album
 
- -----
- BUGS :
- -----
- * Quand on ajoute des documents à un album, le nombre affiché est bien mis à jour.
- Ce n'est pas le cas quand on en retire.
- 
- * Idem dans le cas d'un album inséré dans le texte : si on change son statut au moyen du raccourci dans le modèle, la liste des albums n'est pas mise à jour.
+- espace privé : simplifier/standardiser
+    - options de configuration : supprimer celles inutiles/expérimentales (la liste des éléments à afficher dans les modèles).
+    - feuilles de style : supprimer toutes les retouches visuelles, c'est le rôle des thèmes.
+    - squelettes : utiliser de préférences des éléments "standards" -> supprimer les éléments superflus (icone "vous êtes l'auteur" etc.)
+                   éventuellement, simplifier la liste des albums dans la fiche d'un objet.
+
+- Bugs non bloquants :
+    - Quand on retire des documents à un album, le nombre affiché n'est pas mis à jour.
