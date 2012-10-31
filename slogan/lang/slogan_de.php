@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_slogan_site' => 'Slogan Ihrer Website',
 
 	// T
-	'titre_identite_site' => 'Identität der Website'
+	'titre_identite_site' => 'Name der Website'
 );
 
 ?>

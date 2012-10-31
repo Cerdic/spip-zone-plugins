@@ -1,6 +1,8 @@
 <traduction module="slogan" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/slogan/lang/" reference="fr">
 	<langue code="ar" />
-	<langue code="de" />
+	<langue code="de" url="http://trad.spip.net/tradlang_module/slogan?lang_cible=de">
+		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
+	</langue>
 	<langue code="en" />
 	<langue code="es" />
 	<langue code="fr" />
