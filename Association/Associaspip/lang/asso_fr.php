@@ -261,15 +261,30 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_info_plugin' => "Options du plugin",
 	'config_info_membres' => "Options de gestion des membres",
 	# Configuration : Infos, Aides et Messages
-	'config_aide_pc_cotisations' => "Classe des comptes de produits : FR=756",
-	'config_aide_pc_dons' => "Classe des comptes de produits : FR=754/771 (courants/exceptionnels)",
-	'config_aide_pc_colis' => "Classe des comptes de contributions volontaires : FR=875",
-	'config_aide_pc_ventes' => "Classe des comptes de produits : FR=701/707/706 (produits fabriqu&eacute;s &agrave; partir de mati&egrave;res premi&egrave;res --601-- / produits achet&eacute;s --607-- / services --et parainages...)",
-	'config_aide_pc_frais2port' => "Classe des comptes de produits : FR=7085 (si enregistr&eacute;s s&eacute;par&eacute;ment --frais accessoires-- car peuvent &ecirc;tre int&eacute;gr&eacute;...) ",
-	'config_aide_pc_activites' => "Classe des comptes de produits : FR=708",
-	'config_aide_pc_ressources' => "Classe des comptes d'immobilisations/charges : FR=210/600? (montant &gt;/&lt; 500&nbsp;&euro;&nbsp;; avec/sans amortissement)",
-	'config_aide_pc_prets' => "Classe des comptes de produits : FR=708",
-	'config_aide_pc_cautions' => "Classe des immobilisations : FR=1651",
+	'config_aide_pc_cotisations' => "Classe des comptes de produits :
+ <a href='@url@&amp;code=756' title='D&eacute;clarer la classe 756'>FR=756</a>",
+	'config_aide_pc_dons' => "Classe des comptes de produits :
+ <a href='@url@&amp;code=754' title='D&eacute;clarer la classe 754'>FR=754/771 (courants/exceptionnels)</a>",
+	'config_aide_pc_colis' => "Classe des comptes de contributions volontaires :
+ <a href='@url@&amp;code=875' title='D&eacute;clarer la classe 875'>FR=875</a>",
+	'config_aide_pc_ventes' => "Classe des comptes de produits :
+ <a href='@url@&amp;code=701' title='D&eacute;clarer la classe 701'>FR=701/707/706</a>
+ (produits fabriqu&eacute;s &agrave; partir de mati&egrave;res premi&egrave;res
+ --601-- / produits achet&eacute;s
+ --607-- / services --et parainages...)",
+	'config_aide_pc_frais2port' => "Classe des comptes de produits :
+ <a href='@url@&amp;code=705' title='D&eacute;clarer la classe 705'>FR=705</a>
+ (si enregistr&eacute;s s&eacute;par&eacute;ment --frais accessoires-- car peuvent &ecirc;tre int&eacute;gr&eacute;...) ",
+	'config_aide_pc_activites' => "Classe des comptes de produits :
+ <a href='@url@&amp;code=708' title='D&eacute;clarer la classe 708'>FR=708</a>",
+	'config_aide_pc_ressources' => "Classe des comptes d'immobilisations/charges :
+ <a href='@url@&amp;code=210' title='D&eacute;clarer la classe 210'>FR=210/600?</a>
+  (montant &gt;/&lt; 500&nbsp;&euro;&nbsp;; avec/sans amortissement)",
+	'config_aide_pc_prets' => "Classe des comptes de produits :
+<a href='@url@&amp;code=708' title='D&eacute;clarer la classe 708'>FR=708</a>",
+	'config_aide_pc_cautions' => "Classe des immobilisations :
+<a href='@url@&amp;code=1651' title='D&eacute;clarer la classe 1651'>FR=1651</a>
+",
 	'config_erreur_pas_de_destination_definie' => "Pas de destination comptable d&eacute;finie",
 	'config_aide_infofiscal' => "Dates au format jj/mm/aaaa s&eacute;par&eacute;es par un espace.",
 	'config_aide_recufiscal' => "sigles :
@@ -834,7 +849,7 @@ Commentaire: @commentaire@
 	'erreur_gestion_comptable_inactive' => "Afin de pouvoir g&eacute;rer les cotisations, dons et ventes, la gestion comptable doit &ecirc;tre activ&eacute;e",
 	'erreur_plan_classe' => "La classe d'un compte doit &ecirc;tre un entier entre 0 et 9",
 	'erreur_plan_code' => "Le code d'un compte est compos&eacute; de caract&egrave;res alphanum&eacute;riques uniquement et doit commencer par 2 chiffres. Le premier chiffre doit &ecirc;tre &eacute;gal &agrave; la classe du compte",
-	'erreur_plan_code_duplique' => "Ce code est d&eacute;j&agrave; utilis&eacute; pour une autre r&eacute;f&eacute;rence comptable(peut-&ecirc;tre d&eacute;sactiv&eacute;e)",
+	'erreur_plan_code_duplique' => "Ce code est d&eacute;j&agrave; utilis&eacute; pour une autre r&eacute;f&eacute;rence comptable (peut-&ecirc;tre d&eacute;sactiv&eacute;e)",
 	'erreur_plan_code_modifie_utilise_classe_financiere' => "Cette r&eacute;f&eacute;rence comptable est utilis&eacute;e par un module de gestion (ventes/dons/prets/activit&eacute;s) activ&eacute; ou pour la gestion des cotisations. Vous ne pouvez donc pas modifier le code/la classe pour lui attribuer la classe des comptes financiers.",
 	'erreur_plan_changement_classe_impossible' => "Vous ne pouvez pas modifier la classe de ce compte pour la changer vers ou depuis la classe d&eacute;finie comme &eacute;tant celle des comptes financiers car des op&eacute;rations sur ce compte existent dans le livre de comptes.",
 	'erreur_format_date' => "La date doit &ecirc;tre au format AAAA-MM-JJ ; ce qui n'est pas le cas de&nbsp;: @date@",
