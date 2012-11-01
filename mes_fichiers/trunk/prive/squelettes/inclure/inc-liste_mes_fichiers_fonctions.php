@@ -8,7 +8,9 @@ function mes_fichiers_a_telecharger() {
 
 	$prefixe = lire_config('mes_fichiers/prefixe','mf2');
 	$laver_auto = (lire_config('mes_fichiers/nettoyage_journalier', 'oui') == 'oui');
-	$pattern = "${prefixe}_.*\.zip$";
+
+	$pattern = "${prefixe}.*\.zip$";
+
 	if ($laver_auto)
 		$liste = preg_files(_DIR_MES_FICHIERS, $pattern);
 	else

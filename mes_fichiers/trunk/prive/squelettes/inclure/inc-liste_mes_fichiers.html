@@ -24,7 +24,7 @@
 				<td class="fichier principale">[<label[ for="zip_(#CLE|plus{1})"]>(#VALEUR|basename)</label>]</td>
 				<td class="taille">[(#VALEUR|filesize|taille_en_octets)]</td>
 				<td class="date">[(#VAL{'Y-m-d H:i:s'}|date{#VALEUR|filemtime}|affdate_heure)]</td>
-				<td>[(#BOUTON_ACTION{<:mes_fichiers:bouton_telecharger:>, #URL_ACTION_AUTEUR{mes_fichiers_telecharger, #VALEUR}})]</td>
+				<td>[(#BOUTON_ACTION{<:bouton_telecharger:>, #URL_ACTION_AUTEUR{mes_fichiers_telecharger, #VALEUR}})]</td>
 				<td><a class="voir_zip" href="#info_zip_#COMPTEUR_BOUCLE" rel="info_zip_#COMPTEUR_BOUCLE" title="<:mes_fichiers:bulle_bouton_voir:>"><:mes_fichiers:bouton_voir:></a></td>
 			</tr>
 			<tr>

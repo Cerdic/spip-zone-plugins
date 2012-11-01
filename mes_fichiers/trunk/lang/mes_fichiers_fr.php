@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_configurer' => 'Mes fichiers',
 	'bouton_mes_fichiers' => 'Sauvegarder mes fichiers',
 	'bouton_sauver' => 'Sauvegarder',
-	'bouton_telecharger' => 'Télécharger',
 	'bouton_tout_cocher' => 'Tout cocher',
 	'bouton_tout_decocher' => 'Tout décocher',
 	'bouton_voir' => 'Voir',
@@ -31,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_liste_a_sauver' => 'Liste des fichiers et dossiers pouvant être sauvegardés :',
-	'info_sauver_1' => 'Cette option fabrique un fichier d\'archives contenant les données de personnalisation du site comme le dernier dump de sauvegarde de la base, les dossiers des squelettes nommés, le dossier images...',
+	'info_sauver_1' => 'Cette option fabrique un fichier d\'archive contenant les données de personnalisation du site comme le dernier dump de sauvegarde de la base, les dossiers des squelettes nommés, le dossier images...',
 	'info_sauver_2' => 'Le fichier d\'archive est créé dans <em>tmp/mes_fichiers/</em> et se nomme <em>@prefixe@_aaaammjj_hhmmss.zip</em>.',
 	'info_sauver_3' => 'La sauvegarde automatique est activée (fréquence en jours : @frequence@).',
 
