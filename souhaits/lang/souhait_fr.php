@@ -31,6 +31,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_prix' => 'Prix',
 	'label_statut' => 'Statut',
 	'label_titre' => 'Titre',
+	
+	// O
+	'offrir_contribution_explication' => 'Utilisez le "." pour les centimes.',
+	'offrir_contribution_label' => 'Votre contribution',
+	'offrir_email_label' => 'Email',
+	'offrir_explication_cagnotte' => '<strong>@souhait@</strong> est un très gros cadeau ! Il reste actuellement <strong>@reste@</strong> pour l’offrir. Vous pouvez participer à la cagnotte, en donnant votre nom et votre contribution.',
+	'offrir_explication_libre' => 'Vous pouvez proposer d’offrir <strong>@souhait@</strong> en donnant votre nom.',
+	'offrir_message_label' => 'Un petit message ?',
+	'offrir_message_ok_merci' => 'Merci beaucoup d’avoir proposé ce cadeau.',
+	'offrir_nom_label' => 'Nom',
 
 	// R
 	'retirer_lien_souhait' => 'Retirer ce souhait',
@@ -41,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_achete_label' => 'acheté',
 	'statut_cagnotte_explication' => 'Vous pouvez participer à une cagnotte pour ce gros cadeau.',
 	'statut_cagnotte_label' => 'cagnotte',
-	'statut_libre_explication' => 'Personne n\'a encore proposé ce cadeau.',
+	'statut_libre_explication' => 'Personne n’a encore proposé ce cadeau.',
 	'statut_libre_label' => 'libre',
 	'statut_propose_explication' => 'Quelqu’un a proposé d’offrir ce cadeau mais il n’est pas encore acheté.',
 	'statut_propose_label' => 'proposé',
