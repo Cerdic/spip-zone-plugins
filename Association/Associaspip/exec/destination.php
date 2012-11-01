@@ -27,11 +27,11 @@ function exec_destination() {
 		debut_cadre_association('euro-39.gif', 'destination_comptable');
 		//Affichage de la table
 		echo association_bloc_listehtml(
-			array("d.*, CONCAT('<:asso:nombre_fois{nombre=', COUNT(o.id_destination),'}:>') AS nombre_fois", 'spip_asso_destination AS d INNER JOIN spip_asso_destination_op AS o ON d.id_destination=o.id_destination', '', 'd.id_destination', 'intitule'), // requete
+			array("*", 'spip_asso_destination', '', 'id_destination', 'intitule'), // requete
 			array(
 				'id_destination' => array('asso:entete_id', 'entier'),
 				'intitule' => array('asso:entete_intitule', 'texte'),
-//				'nombre_fois' => array('asso:entete_utilise', 'texte', 'propre', 'integer'),
+
 				'commentaire' => array('asso:entete_commentaire', 'texte', 'typo'),
 			), // entetes et formats des donnees
 			array(

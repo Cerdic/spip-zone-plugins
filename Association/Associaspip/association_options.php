@@ -2135,8 +2135,8 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
 			if ( !is_array($param) ) // ...de tableaux ?
 				return '';
 	}
-	$res =  '<table width="100%" class="asso_tablo'. ($table ? '" id="liste_'.$table : '') .'">';
-	$res .= "\n<thead>\n<tr>";
+	$res =  '<table width="100%" class="asso_tablo'. ($table ? '" id="liste_'.$table : '') .'">'. "\n<thead>\n<tr>";
+
 	foreach ($presentation as &$param) { // entetes
 		$entete = array_shift($param);
 		$res .= '<th>'. ($entete ? association_langue($entete) : '&nbsp;' ) .'</th>';
@@ -2153,9 +2153,25 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
 		else
 			$objet = $cle1;
 	}
+	$res .= association_bloc_tr($reponse_sql, $extra, $cle1, $cle2, $objet, $presentation, $boutons) .
+	"</tbody>\n</table>\n";
+
+	sql_free($reponse_sql);
+	if ( $cle1 && $selection ) {
+// comme on ne peut placer un evenement "onLoad" que sur une ressource externe 
+// (IMG, FRAME, SCRIPT, BODY) ; il vaut mieux appliquer un SCRIPT inclus
+// (tout juste apres ou dans HEAD si possible)
+		$res .= '<script type="text/javascript"> document.getElementById("'.$objet.$selection.'").scrollIntoView(true); </script>' ; 
+	}
+	return $res;
+}
+
+function association_bloc_tr($query, $extra, $cle1, $cle2, $objet, $presentation, $boutons) {
 	$nbr_lignes = 0;
-	while ($data = sql_fetch($reponse_sql)) {
-		if ( is_array($extra) && $nbr_couleurs=count($extra) ) { // on a bien un tableau de classes supplementaires
+	$nbr_couleurs = count($extra);
+	$class_sup = (is_array($extra) AND $nbr_couleurs);
+	while ($data = sql_fetch($query)) {
+		if ($class_sup) { // on a  un tableau de classes supplementaires
 			if ( $cle2 ) { // lignes colorees selon les valeurs d'un champ
 				$tr_css = $extra[$data[$cle2]];
 			} else { // simple alternance de couleurs
@@ -2167,12 +2183,20 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
 		}
 		if ( $cle1 && $data[$cle1]==$selection ) {
 			$tr_css = 'surligne';
-			$onLoad_js = '<script type="text/javascript"> document.getElementById("'.$objet.$selection.'").scrollIntoView(true);  </script>' ; // ensuite, trouver une roussource externe (IMG, FRAME, SCRIPT, BODY) ou appliquer ceci : '" onLoad="document.getElementById(\''.$objet.$selection.'\').scrollIntoView(true);';
 		}
-		$res .= '<tr'. ($cle1?' id="'.$objet.$data[$cle1].'"':'') . ($tr_css?' class="'.$tr_css.'"':'') .'>';
-		foreach ($presentation as $champ=>$params) {
-			$format = array_shift($params);
-			switch ($format) {
+		$res .= '<tr'. ($cle1?' id="'.$objet.$data[$cle1].'"':'') . ($tr_css?' class="'.$tr_css.'"':'') .'>' .
+		association_bloc_format($presentation, $data, $cle1, $selection).
+		association_bloc_bouton($boutons, $data[$cle1]) .
+		"</tr>\n";
+	}
+	return $res;
+}
+
+function association_bloc_format($presentation, $data, $cle1, $selection) {
+	$res = '';
+	foreach ($presentation as $champ=>$params) {
+		$format = array_shift($params);
+		switch ($format) {
 				case 'date' :
 				case 'heure' :
 					$td_css = 'date';
@@ -2195,29 +2219,27 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
 				default :
 					$td_css = 'text';
 					break;
-			}
-			if ( $data[$cle1]==$selection )
-				$classes .= ' surligne';
-			$ok = array_unshift($params,$data[$champ]);
-			$res .= '<td class="'.$td_css.'">'. call_user_func_array("association_formater_$format", $params) .'</td>';
 		}
-		foreach ($boutons as $params) {
-			$type = array_shift($params);
-			foreach ($params as &$param) {
-				$param = str_replace('$$', $data[$cle1], $param);
-			}
-			$res .= call_user_func_array("association_bouton_$type", $params);
-		}
-		$res .= "</tr>\n";
-	}
-	$res .= "</tbody>\n</table>\n";
-	sql_free($reponse_sql);
-	if ( $cle1 && $selection ) {
-		$res .= '<script type="text/javascript"> document.getElementById("'.$objet.$selection.'").scrollIntoView(true); </script>' ; // comme on ne peut placer un evenement "onLoad" que sur une roussource externe (IMG, FRAME, SCRIPT, BODY) ; il vaut mieux appliquer faire un SCRIPT inclus (tout juste apres ou dans HEAD si possible)
+		if ( $data[$cle1]==$selection )
+			$td_css .= ' surligne';
+		array_unshift($params, $data[$champ]);
+		$format = call_user_func_array("association_formater_$format", $params);
+		$res .= '<td class="'.$td_css.'">'. $format .'</td>';
 	}
 	return $res;
 }
 
+function association_bloc_bouton($boutons, $champ) {
+	$res = '';
+	foreach ($boutons as $params) {
+		$type = array_shift($params);
+		foreach ($params as &$param) {
+			$param = str_replace('$$', $champ, $param);
+		}
+		$res .= call_user_func_array("association_bouton_$type", $params);
+	}
+	return $res;
+}
 /** @} */
 
 
