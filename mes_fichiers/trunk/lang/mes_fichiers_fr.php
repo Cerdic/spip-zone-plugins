@@ -15,9 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_bouton_voir' => 'Voir le contenu de l\'archive',
 
 	// C
-	'colonne_date' => 'Date',
 	'colonne_nom' => 'Nom',
-	'colonne_taille_octets' => 'Taille',
 
 	// E
 	'erreur_aucun_fichier_sauver' => 'Il n\'y a aucun fichier à sauvegarder',
