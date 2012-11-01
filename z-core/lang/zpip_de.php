@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accueil' => 'Accueil', # NEW
+	'accueil' => 'Startseite',
 	'adapte_de' => 'auf Grundlage von',
 
 	// C
@@ -17,28 +17,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'conception_graphique_par' => 'Design von (c)',
 
 	// D
-	'date_forum' => 'Le @date@ à @heure@', # MODIF
+	'date_forum' => 'Am @date@ um @heure@ Uhr',
 
 	// I
-	'info_1_commentaire' => '1 commentaire', # NEW
-	'info_nb_commentaires' => '@nb@ commentaires', # NEW
+	'info_1_commentaire' => '1 Beitrag',
+	'info_nb_commentaires' => '@nb@ Beiträge',
 
 	// L
 	'lire_la_suite' => 'Ganzer Text',
 	'lire_la_suite_de' => ' von ',
 
 	// P
-	'pagination_next' => 'Suivant »', # MODIF
-	'pagination_pages' => 'Pages', # NEW
-	'pagination_prev' => '« Précédent', # MODIF
+	'pagination_next' => 'Vorwärts »',
+	'pagination_pages' => 'Seiten',
+	'pagination_prev' => '« Zurück',
 	'personaliser_nav' => 'Menü anpassen',
 
 	// S
 	'sous_licence' => 'Lizenz: ',
 
 	// Z
-	'zapl_loading' => 'Chargement en cours...', # NEW
-	'zapl_reload_off' => 'Cliquer ici si la page reste incomplète (ou activer le javascript dans votre navigateur)' # MODIF
+	'zapl_loading' => 'Wird geladen ...',
+	'zapl_reload_off' => 'Klicken Sie hier, falls die Seite nicht vollständig geladen wird (oder aktivieren Sie Javascript in Ihrem Webbrowser)'
 );
 
 ?>
