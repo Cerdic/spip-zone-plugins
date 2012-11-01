@@ -26,9 +26,9 @@ function exec_encaisse() {
 		// INTRO : rappel de l'exercicee affichee
 		echo association_totauxinfos_intro('encaisse', '');
 		// STATS recettes et depenses par comptes financiers (indique rapidement les comptes financiers avec les mouvements les plus importants --en montant !)
-		$journaux = sql_allfetsel('journal, intitule', 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON journal=code', "date>=date_anterieure AND date<=NOW()", "intitule DESC"); // on se permet sql_allfetsel car il n'y en a pas des masses a priori...
+		$journaux = sql_allfetsel('journal, intitule', 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON journal=code', "date_operation>=date_anterieure AND date_operation<=NOW()", "intitule DESC"); // on se permet sql_allfetsel car il n'y en a pas des masses a priori...
 		foreach ($journaux as $financier) {
-			echo association_totauxinfos_stats($financier['intitule'], 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), 'journal='.sql_quote($financier['journal']) .' AND date>='. sql_quote($financier['date_anterieure']) .' AND date<=NOW()');
+			echo association_totauxinfos_stats($financier['intitule'], 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), 'journal='.sql_quote($financier['journal']) .' AND date_operation>='. sql_quote($financier['date_anterieure']) .' AND date_operation<=NOW()');
 		}
 		// datation et raccourcis
 		raccourcis_association(array('comptes', "exercice=$id_exercice"), array(
@@ -42,7 +42,7 @@ function exec_encaisse() {
 		$encaisses = sql_select(
 			'a_p.id_plan, a_p.code, a_p.intitule, a_p.date_anterieure, a_p.solde_anterieur, SUM(a_c.recette) AS recettes, SUM(a_c.depense) AS depenses, SUM(a_c.recette-a_c.depense) AS solde_actuel ', // select
 			'spip_asso_comptes AS a_c INNER JOIN spip_asso_plan AS a_p ON a_c.journal=a_p.code', // from
-			'a_p.classe='. sql_quote($GLOBALS['association_metas']['classe_banques']) .' AND LEFT(a_c.imputation,1)<>'. sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']) .' AND a_p.active=1 AND a_c.date>=a_p.date_anterieure AND a_c.date<=NOW() ', // where
+			'a_p.classe='. sql_quote($GLOBALS['association_metas']['classe_banques']) .' AND LEFT(a_c.imputation,1)<>'. sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']) .' AND a_p.active=1 AND a_c.date_operation>=a_p.date_anterieure AND a_c.date_operation<=NOW() ', // where
 			'a_c.journal', // group by
 			'a_p.code', // order by
 			'', // limit

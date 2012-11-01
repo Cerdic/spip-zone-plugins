@@ -442,7 +442,7 @@ function association_passeparam_compta($classes=array()) {
     $params['type'] = _request('type');
     if ( !$classes ) { // pas en parametre, on prend dans la requete
 //	$params['classes'] = array_flip( explode(',', association_recuperer_liste('classes')) );
-	$keys = explode(',', association_recuperer_liste('classes'));
+	$keys = association_recuperer_liste('classes');
 	if ( count($keys) ) {
 	    $vals = array_fill(0, count($keys) ,0);
 	    $params['classes'] = array_combine($keys, $vals);
@@ -504,7 +504,7 @@ function association_calcul_soldes_comptes_classe($classe, $periode=0, $destinat
 	    $exercice = sql_fetsel('date_debut, date_fin', 'spip_asso_exercices', "id_exercice=".intval($periode));
 	    $c_where = "a_c.date_operation>='$exercice[date_debut]' AND a_c.date_operation<='$exercice[date_fin]' ";
 	} else { // exercice budgetaire par annee civile
-	    $c_where = "DATE_FORMAT(a_c.date, '%Y')=".intval($periode);
+	    $c_where = "DATE_FORMAT(a_c.date_operation, '%Y')=".intval($periode);
 	}
 #    } elseif ( $classe==$GLOBALS['association_metas']['classe_banques'] ) { // encaisse
 #	$c_where = 'LEFT(a_c.imputation,1)<>'. sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']) .' AND a_c.date>=a_p.date_anterieure AND a_c.date<=NOW() ';
