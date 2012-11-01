@@ -92,7 +92,7 @@ var geocoder;]
 		maj_inputs(form_map,query,'geocoding');
 	}]
 	
-	var init_map = function() {
+	var init_map = function(callback) {
 		// creer la carte
 		var map_container = 'map_[(#ENV{nom})]';
 		form_map = new L.Map(map_container);
