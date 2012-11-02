@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,selection_objet,#ID_SELECTION_OBJET}|sinon_interdire_acces)]
+<BOUCLE_objet(SELECTION_OBJETS){id_selection_objet}{statut==.*}{si #ENV{exec}|=={selection_objet}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,selection_objet,#ID_OBJET})
+		[(#ID_SELECTION_OBJET|afficher_qui_edite{selection_objet}|non)
+			[(#URL_ECRIRE{selection_objet_edit,id_selection_objet=#ID_SELECTION_OBJET}|icone_verticale{<:selection_objet:icone_modifier_selection_objet:>,objet,edit,right ajax preload})]
+		]
+		[(#ID_SELECTION_OBJET|afficher_qui_edite{objet}|oui)
+			[(#URL_ECRIRE{selection_objet_edit,id_selection_objet=#ID_SELECTION_OBJET}|icone_verticale{#ID_SELECTION_OBJET|afficher_qui_edite{selection_objet},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{objet-24.png}|balise_img{objet,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{selection_objet,#ID_SELECTION_OBJET}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/selection_objet,id=#ID_SELECTION_OBJET,id_objet=#ID_SELECTION_OBJET,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,selection_objet,#ID_SELECTION_OBJET})
+	[(#ID_OBJET|afficher_qui_edite{selection_objet}|non)
+		[(#URL_ECRIRE{selection_objet_edit,id_objet=#ID_SELECTION_OBJET}|icone_verticale{<:selection_objet:icone_modifier_selection_objet:>,objet,edit,right ajax preload})]
+	]
+	[(#ID_OBJET|afficher_qui_edite{selection_objet}|oui)
+		[(#URL_ECRIRE{selection_objet_edit,id_selection_objet=#ID_SELECTION_OBJET}|icone_verticale{#ID_SELECTION_OBJET|afficher_qui_edite{selection_objet},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,selection_objet,id,#ID_SELECTION_OBJET},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_objet>
+[(#ENV**{exec}|=={selection_objet_edit}|?{#INCLURE{fond=prive/squelettes/contenu/selection_objet_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_objet>

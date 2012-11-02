@@ -1,0 +1,35 @@
+#SET{objets,#ARRAY}
+
+<BOUCLE_objets_liste(DATA){source tableau,#VAL|lister_tables_objets_sql}{par cle}{editable = oui}>
+    [(#VALEUR{page}|is_string|oui)
+        [(#SET{objets,#GET{objets}|array_merge{#ARRAY{#VALEUR{page},#VALEUR{texte_objets}|_T}}})]
+    ]
+</BOUCLE_objets_liste>
+
+
+
+<div class="formulaire_spip formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+	<form action="#ENV{action}" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			 [(#SAISIE{selecteur_rubrique,selection_rubrique_dest,
+                multiple=oui,
+                label=<:selection_objet:selection_rubrique_dest:>,
+                explication=<:selection_objet:explication_selection_rubrique_dest:>}
+                )] 
+            [(#SAISIE{checkbox,selection_rubrique_objet,
+            datas=#GET{objets},
+            label=<:selection_objet:selection_rubrique_objet:>}
+            )]             
+		</ul>
+		
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+		
+	</div></form>
+</div>

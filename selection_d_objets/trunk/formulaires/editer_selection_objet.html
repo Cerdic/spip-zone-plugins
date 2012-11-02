@@ -1,0 +1,26 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_objet,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_objet' value='#ENV{id_objet}' />
+		<ul>
+
+			[(#SAISIE{input, titre,
+				label=<:selection_objet:label_titre:>})]
+
+			[(#SAISIE{textarea, descriptif,
+				label=<:selection_objet:label_descriptif:>})]
+
+			[(#SAISIE{input, url,
+				label=<:selection_objet:label_url:>})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

@@ -1,0 +1,30 @@
+#CACHE{0}#ENV{compteur}
+<B_art>
+
+<B_art>
+	<BOUCLE_art(RUBRIQUES){id_rubrique}{tout}>
+
+	<tr class='tr_liste'>
+		<td></td>
+		
+		<td>
+		[(#ENV{compteur_boucle}|!={1}|oui)
+			<div><a  class="ajax"  href="[(#URL_ACTION_AUTEUR{ranger,remonter_ordre-[(#ENV{langue})]-[(#ID_RUBRIQUE)]-rubrique-[(#ENV{objet_dest})]-[(#ENV{id_objet_dest})],[(#SELF)]})]"><img src="#CHEMIN{imgs/fleche-haut.gif}" /></a></div> 
+			]
+			
+		[(#ENV{compteur_boucle}|!={#ENV{total_boucle}}|oui)	
+			<div><a class="ajax"  href="[(#URL_ACTION_AUTEUR{ranger,descendre_ordre-[(#ENV{langue})]-[(#ID_RUBRIQUE)]-rubrique-[(#ENV{objet_dest})]-[(#ENV{id_objet_dest})],[(#SELF)]})]" ><img src="#CHEMIN{imgs/fleche-bas.gif}" /></a></div> 
+			]
+		</td>
+		
+		<td style='text-align: center;'>[<a href="[(#URL_ECRIRE{rubrique}|parametre_url{id_rubrique,#ID_RUBRIQUE})]"><img src="(#LOGO_RUBRIQUE||image_reduire{50}|extraire_attribut{src}|url_absolue)" [style="(#LOGO_RUBRIQUE||image_reduire{50}|extraire_attribut{style})]"  /></a>]</td>
+		<td class="arial2"><a href="[(#URL_ECRIRE{rubrique}|parametre_url{id_rubrique,#ID_RUBRIQUE})]">[(#SURTITRE)<br />]<b>#TITRE</b>[<br />(#SOUSTITRE)]</a></td>
+		<td class="arial1">[(#DATE|affdate)]</td>
+		<td class="arial1"><b style="white-space: nowrap;">N°#ID_RUBRIQUE</b></td>
+		
+		<td>
+			<a class="ajax" title='Retirer de la liste'  href="[(#URL_ACTION_AUTEUR{ranger,supprimer_ordre-[(#ENV{langue})]-[(#ID_RUBRIQUE)]-rubrique-[(#ENV{objet_dest})]-[(#ENV{id_objet_dest})],[(#SELF)]#[(#ENV{langue})]})]"><img src="#CHEMIN{imgs/item-remove.png}" alt="X" /></a>
+		</td>
+	</tr>
+</BOUCLE_art>
+</B_art>
