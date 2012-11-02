@@ -12,12 +12,10 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_vente() {
-	if (!autoriser('gerer_ventes', 'association')) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
+	$r = association_controle_id('vente', 'asso_ventes', 'gerer_ventes', 'association');
+	if (!$r) {
 		include_spip ('inc/navigation_modules');
-		list($id_vente, $vente) = association_passeparam_id('vente', 'asso_ventes');
+		list($id_vente, $vente) = $r;
 		onglets_association('titre_onglet_ventes', 'ventes');
 		// info
 		$infos['ventes_entete_date_vente'] = association_formater_date($vente['date_vente'],'dtstart');

@@ -21,12 +21,10 @@ if (!defined('SIGNATURE_PRES'))
     define('SIGNATURE_PRES', find_in_path('signature_pres.png'));
 
 function exec_pdf_fiscal() {
-    include_spip('inc/navigation_modules');
-    list($id_auteur, $mbr_qui) = association_passeparam_id('auteur', 'asso_membres');
-    if ( !autoriser('associer', 'adherents') OR ($id_auteur!=$GLOBALS['visiteur_session']['id_auteur'])) {
-        include_spip('inc/minipres');
-		echo minipres();
-    } else {
+	$r = association_controle_id('auteur', 'asso_membres', 'fiscaliser', 'membres');
+	if ($r) {
+	list($id_auteur, $mbr_qui) = $r;
+	include_spip('inc/navigation_modules');
         include_spip('pdf/fpdi_pdf_parser');
         include_spip('fpdf');
         include_spip('pdf/fpdf_tpl');
@@ -67,7 +65,7 @@ function exec_pdf_fiscal() {
             else // remplir le PDF
                 build_pdf("$annee-$id_auteur", $montants, $annee, $mbr_qui['nom_famille'], $mbr_qui['prenom'], $rue, $cp, $mbr_ou['ville'] );
 		}
-    }
+	}
 }
 
 function build_pdf($code, $montant, $isodate, $nom, $prenoms, $adresse, $cp, $commune, $forme=0, $nature=0, $mode=0) {

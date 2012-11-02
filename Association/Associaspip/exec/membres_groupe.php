@@ -12,12 +12,10 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_membres_groupe() {
-	include_spip ('inc/navigation_modules');
-	list($id_groupe, $groupe) = association_passeparam_id('groupe', 'asso_groupes');
-	if (!autoriser('voir_groupes', 'association', $id_groupe)) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
+	$r = association_controle_id('groupe', 'asso_groupes', 'voir_groupes', 'association');
+	if ($r) {
+		include_spip ('inc/navigation_modules');
+		list($id_groupe, $groupe) = $r;
 		onglets_association(($id_groupe>=100)?'gestion_groupes':'gerer_les_autorisations', ($id_groupe>=100?'adherents':'association') );
 		// INFO
 		if ($id_groupe>=100) {

@@ -24,7 +24,9 @@ function exec_prets() {
 			$ressource = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource");
 			$statut = '';
 		} else { // on peut prendre en compte les filtres ; on recupere les parametres de :
-			list($id_ressource, $ressource) = association_passeparam_id('ressource', 'asso_ressources');
+			$r = association_controle_id('ressource', 'asso_ressources');
+			if (!$r) return;
+			list($id_ressource, $ressource) = $r;
 			$statut = association_passeparam_statut(); // etat de restitution du pret
 		}
 		onglets_association('titre_onglet_prets', 'ressources');

@@ -12,12 +12,10 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_ajout_cotisation() {
-	include_spip('inc/navigation_modules');
-	list($id_auteur, $membre) = association_passeparam_id('auteur', 'asso_membres');
-	if (!autoriser('associer', 'adherents', $id_auteur)) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
+	$r = association_controle_id('auteur', 'asso_membres', 'associer', 'adherents');
+	if ($r) {
+		include_spip('inc/navigation_modules');
+		list($id_auteur, $membre) = $r;
 		onglets_association('titre_onglet_membres', 'adherents');
 		// info : membre et categorie par defaut
 		$categorie = sql_fetsel('*', 'spip_asso_categories', 'id_categorie='. intval($membre['id_categorie']));

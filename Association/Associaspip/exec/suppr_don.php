@@ -12,12 +12,10 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_don() {
-	if (!autoriser('gerer_dons', 'association')) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
+	$r = association_controle_id('don', 'asso_dons', 'gerer_dons', 'association');
+	if ($r) {
 		include_spip ('inc/navigation_modules');
-		list($id_don, $don) = association_passeparam_id('don', 'asso_dons');
+		list($id_don, $don) = $r;
 		onglets_association('titre_onglet_dons', 'dons');
 		// info
 		$infos['entete_date'] = association_formater_date($don['date_don'], '');

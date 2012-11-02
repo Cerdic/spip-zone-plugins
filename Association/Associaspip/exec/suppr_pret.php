@@ -12,12 +12,10 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_pret() {
-	if (!autoriser('gerer_prets', 'association')) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
+	$r = association_controle_id('pret', 'asso_prets', 'gerer_prets', 'association');
+	if (!$r) {
 		include_spip ('inc/navigation_modules');
-		list($id_pret, $pret) = association_passeparam_id('pret', 'asso_prets');
+		list($id_pret, $pret) = $r;
 		onglets_association('titre_onglet_prets', 'ressources');
 		$ressource = sql_fetsel('*', 'spip_asso_ressources', 'id_ressource='.$pret['id_ressource'] ) ;
 		$infos['entete_article'] = $ressource['intitule'];

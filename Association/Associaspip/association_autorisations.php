@@ -332,4 +332,13 @@ function autoriser_association_voir_ventes($faire, $type, $id, $qui, $opt) {
 	return is_in_groups($qui['id_auteur'], array(51,50,11,10)); // le groupe 41 peut voir toutes les donations (liste sensible de donateurs et de montants auxquels tous les membres n'ont pas acces) ; les groupes ayant un acces total au module aussi.
 }
 
+/**
+ * Recevoir un recu fiscal
+ * defaut : admin non restreint et le genereux donateur pour lui meme
+ * groupe : 10,11,50,51.
+ */
+function autoriser_fiscaliser_membres($faire, $type, $id, $qui, $opt) {
+  return (($qui['statut']=='0minirezo' && !$qui['restreint']) || ($id==$GLOBALS['visiteur_session']['id_auteur']));
+}
+
 ?>

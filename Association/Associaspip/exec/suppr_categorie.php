@@ -12,12 +12,10 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_categorie() {
-	if (!autoriser('editer_profil', 'association')) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
+	$r = association_controle_id('categorie', 'asso_categories', 'editer_profil', 'association');
+	if ($r) {
 		include_spip ('inc/navigation_modules');
-		list($id_categorie, $categorie) = association_passeparam_id('categorie', 'asso_categories');
+		list($id_categorie, $categorie) = $r;
 		onglets_association('categories_de_cotisations', 'association');
 		// INTRO : resume ressource
 		$infos['entete_code'] = association_formater_code($categorie['valeur'], 'x-spip_asso_categories');

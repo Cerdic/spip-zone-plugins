@@ -12,12 +12,10 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_ressource() {
-	if (!autoriser('gerer_ressources', 'association')) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
+	$r = association_controle_id('ressource', 'asso_ressources', 'gerer_ressources', 'association');
+	if ($r) {
 		include_spip ('inc/navigation_modules');
-		list($id_ressource, $ressource) = association_passeparam_id('ressource', 'asso_ressources');
+		list($id_ressource, $ressource) = $r;
 		onglets_association('titre_onglet_prets', 'ressources');
 		// INTRO : resume ressource
 		$infos['ressources_libelle_code'] = association_formater_code($ressource['code'], 'spip_asso_ressources');

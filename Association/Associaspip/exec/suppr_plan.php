@@ -12,12 +12,10 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_plan() {
-	if (!autoriser('configurer_compta', 'association')) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
+	$r = association_controle_id('plan', 'asso_plan', 'configurer_compta', 'association');
+	if ($r) {
 		include_spip ('inc/navigation_modules');
-		list($id_plan, $plan) = association_passeparam_id('plan', 'asso_plan');
+		list($id_plan, $plan) = $r;
 		onglets_association('plan_comptable', 'association');
 		// info
 		$infos['entete_code'] = $plan['code'];

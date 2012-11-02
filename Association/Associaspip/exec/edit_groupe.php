@@ -12,12 +12,10 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_edit_groupe() {
-	if (!autoriser('editer_groupes', 'association')) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
+	$r = association_controle_id('groupe', 'asso_groupes', 'editer_groupes', 'association');
+	if ($r) {
 		include_spip ('inc/navigation_modules');
-		list($id_groupe, $groupe) = association_passeparam_id('groupe', 'asso_groupes');
+		list($id_groupe, $groupe) = $r;
 		onglets_association('gestion_groupes', 'adherents');
 		// INFO
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe")) );

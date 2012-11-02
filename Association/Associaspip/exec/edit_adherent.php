@@ -12,12 +12,10 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_edit_adherent() {
-	if (!autoriser('editer_membres', 'association')) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
+	$r = association_controle_id('auteur', 'asso_membres', 'editer_membres', 'association');
+	if ($r)  {
 		include_spip ('inc/navigation_modules');
-		list($id_auteur, $data) = association_passeparam_id('auteur', 'asso_membres');
+		list($id_auteur, $data) = $r;
 		onglets_association('titre_onglet_membres', 'adherents');
 		$nom_membre = association_formater_nom($data['sexe'], $data['prenom'], $data['nom_famille']);
 		$adresses = association_formater_adresses(array($id_auteur));

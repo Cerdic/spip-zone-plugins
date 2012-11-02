@@ -12,12 +12,10 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_activite() {
-	if (!autoriser('gerer_activites', 'association')) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
+	$r = association_controle_id('activite', 'asso_activites', 'gerer_activites', 'association');
+	if ($r) {
 		include_spip ('inc/navigation_modules');
-		list($id_activite, $activite) = association_passeparam_id('activite', 'asso_activites');
+		list($id_activite, $activite) = $r;
 		onglets_association('titre_onglet_activite', 'activites');
 		// INTRO : Rappel Infos Evenement & Participant
 		$evenement = sql_fetsel('*', 'spip_evenements', 'id_evenement='.$activite['id_evenement']);

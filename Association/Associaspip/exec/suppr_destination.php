@@ -12,12 +12,10 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_destination() {
-	if (!autoriser('configurer_compta', 'association')) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
+	$r = association_controle_id('destination', 'asso_destination', 'configurer_compta', 'association');
+	if ($r) {
 		include_spip ('inc/navigation_modules');
-		list($id_destination, $destination) = association_passeparam_id('destination', 'asso_destination');
+		list($id_destination, $destination) = $r;
 		onglets_association('plan_comptable', 'association');
 		// INTRO :
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_destination_op',"id_destination=$id_destination")) );

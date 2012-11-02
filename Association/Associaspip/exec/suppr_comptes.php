@@ -12,14 +12,10 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_comptes() {
-	include_spip('inc/navigation_modules');
-	if (!autoriser('associer', 'comptes')) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
-		list($id_compte, $row) =
-			association_passeparam_id('compte', 'asso_comptes');
-
+	$r = association_controle_id('compte', 'asso_comptes', 'associer', 'comptes');
+	if ($r) {
+		include_spip('inc/navigation_modules');
+		list($id_compte, $row) = $r;
 		onglets_association('titre_onglet_comptes', 'comptes');
 		// info
 		echo _T('asso:confirmation');
