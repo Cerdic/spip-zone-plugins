@@ -97,8 +97,7 @@ function formulaires_bouton_objet_traiter_dist($id_objet,$objet,$langue,$lang=''
 				'lang='.sql_quote($langue[0]),	
 				);
 			// on vérifie l'ordre des objets déjà enregistrés et on corrige si beselection_objetin
-			
-			if($objet=='article')$lang=
+
 			$ordre=$verifier_ordre($where);
 				
 			// on rajoute comme dernier le nouveau objet			
