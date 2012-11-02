@@ -112,7 +112,7 @@ function contenu_boite_resume($id_form, $row, &$apercu){
 		array('FROM' => 'spip_articles AS articles, spip_forms_articles AS lien',
 		'WHERE' => "lien.id_article=articles.id_article AND id_form="._q($id_form)." AND statut!='poubelle'",
 		'ORDER BY' => "titre"));*/
-	if (_DIR_PLUGIN_AFFICHER_OBJETS) {
+	if (defined('_DIR_PLUGIN_AFFICHER_OBJETS')) {
 		$liste = afficher_objets('forms',_T("$prefixei18n:articles_utilisant"),
 			array('id_form' => _q($id_form),
 			'ORDER BY' => "titre"));
