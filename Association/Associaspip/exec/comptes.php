@@ -35,7 +35,7 @@ function exec_comptes() {
 		// TOTAUX : operations de l'exercice par compte financier (indique rapidement les comptes financiers les plus utilises ou les modes de paiement preferes...)
 		foreach (array('recette','depense') as $direction) {
 			foreach ($journaux as $financier) {
-				$nombre_direction = sql_countsel('spip_asso_comptes', "journal=".sql_quote($financier['journal'])." $critere_periode AND $direction<>0 ");
+				$nombre_direction = sql_countsel('spip_asso_comptes', "journal=".sql_quote($financier['journal'])." AND $critere_periode AND $direction<>0 ");
 				if ($nombre_direction) { // on ne s'embarasse pas avec ceux a zero
 					$direction_decomptes[$financier['journal']] = array( $financier['intitule'], $nombre_direction, );
 				}

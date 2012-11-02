@@ -134,7 +134,7 @@ function association_editeur_destinations($destinations, $defaut='') {
  */
 function association_ajouter_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal) {
     $modifs = array(
-	'date' => $date,
+	'date_operation' => $date,
 	'imputation' => $imputation,
 	'recette' => $recette,
 	'depense' => $depense,
@@ -217,7 +217,7 @@ function association_modifier_operation_comptable($date, $recette, $depense, $ju
  *   comptable quand different de 0, et une suppression pure et simple sinon
  */
 function association_supprimer_operation_comptable1($id_operation, $securite=FALSE) {
-    list($date, $recette, $depense, $imputation, $journal, $id_journal, $verrou) = sql_fetsel('date, recette, depense, imputation, journal, id_journal, vu', 'spip_asso_comptes', "id_compte=$id_operation"); // recuperer les informations sur l'operation pour le fichier de log
+    list($date, $recette, $depense, $imputation, $journal, $id_journal, $verrou) = sql_fetsel('date_operation, recette, depense, imputation, journal, id_journal, vu', 'spip_asso_comptes', "id_compte=$id_operation"); // recuperer les informations sur l'operation pour le fichier de log
     if ( ($securite AND !$verrou) || !$securite ) { // operation non verouillee ou controle explicitement desactive...
 	$annulation = 0;
 	sql_delete('spip_asso_destination_op', "id_compte=$id_operation"); // on efface de la table destination_op toutes les entrees correspondant a cette operation  si on en trouve
@@ -225,7 +225,7 @@ function association_supprimer_operation_comptable1($id_operation, $securite=FAL
 	sql_delete('spip_asso_comptes', "id_compte=$id_operation"); // on efface enfin de la table comptes l'entree correspondant a cette operation
     } else { // on ne supprime pas les ecritures validees/verouillees ; il faut annuler l'operation par une operation comptable inverse...
 	$annulation = sql_insertq('spip_asso_comptes', array(
-	    'date' => date('Y-m-d'),
+	    'date_operation' => date('Y-m-d'),
 	    'depense' => $recette,
 	    'recette' => $depense,
 	    'imputation' => _T('asso:compte_annulation_operation', array('numero'=>$id_compte,'date'=>$date) ),
