@@ -111,5 +111,5 @@ L.Geocoder = L.Class.extend({
 			
 			this._user_callback(return_location);
 		}
-	},
+	}
 });
