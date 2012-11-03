@@ -11,16 +11,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_configurer' => 'My files',
 	'bouton_mes_fichiers' => 'Backup my files',
 	'bouton_sauver' => 'Backup',
-	'bouton_telecharger' => 'Download',
 	'bouton_tout_cocher' => 'Select all',
 	'bouton_tout_decocher' => 'Deselect all',
 	'bouton_voir' => 'Show',
 	'bulle_bouton_voir' => 'Visualise archive\'s content',
 
 	// C
-	'colonne_date' => 'Date',
 	'colonne_nom' => 'Filename',
-	'colonne_taille_octets' => 'Size',
 
 	// E
 	'erreur_aucun_fichier_sauver' => 'No file to backup',
