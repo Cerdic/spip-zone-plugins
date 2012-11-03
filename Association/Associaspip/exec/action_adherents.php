@@ -21,7 +21,10 @@ function exec_action_adherents() {
 			echo minipres();
 	} else {
 		$id_auteurs = association_recuperer_liste('id_auteurs', TRUE);
-		if ($action_adherents && count($id_auteurs)) {
+		if (!($action_adherents && $id_auteurs)) {
+			include_spip('inc/minipres');
+			echo minipres(_T('asso:erreur_titre'));
+		} else {
 			onglets_association('titre_onglet_membres', 'adherents');
 			// info
 			echo association_totauxinfos_intro(_T('asso:confirmation'));
@@ -57,9 +60,6 @@ function exec_action_adherents() {
 				echo modification_adherents($id_auteurs,'degrouper');
 			}
 			fin_page_association();
-		} else {
-			include_spip('inc/headers');
-			redirige_par_entete(generer_url_ecrire('adherents'));
 		}
 	}
 }
