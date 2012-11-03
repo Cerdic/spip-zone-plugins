@@ -18,28 +18,31 @@ function exec_inscrits_activite() {
 	} else {
 		include_spip ('inc/navigation_modules');
 		$id_evenement = association_passeparam_id('evenement');
-		list($id_periode, $critere_periode) = association_passeparam_periode('debut', 'evenements', $id_evenement);
 		onglets_association('titre_onglet_activite', 'activites');
-		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement");
-		$statut = association_passeparam_statut();
-		// INTRO : Rappel Infos Evenement
-		$format = 'association_formater_'. (($evenement['horaire']=='oui')?'heure':'date');
-		$infos['agenda:evenement_date_du'] = $format($evenement['date_debut'],'dtstart');
-		$infos['agenda:evenement_date_au'] = $format($evenement['date_fin'],'dtend');
-		$infos['agenda:evenement_lieu'] = '<span class="location">'.$evenement['lieu'].'</span>';
-		echo '<div class="vevent">'. association_totauxinfos_intro('<span class="summary">'.$evenement['titre'].'</span>', 'evenement', $id_evenement, $infos, 'evenement') .'</div>';
+
+		if ( test_plugin_actif('agenda')) {
+			list($id_periode, $critere_periode) = association_passeparam_periode('debut', 'evenements', $id_evenement);
+			$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement");
+			$statut = association_passeparam_statut();
+			// INTRO : Rappel Infos Evenement
+			$format = 'association_formater_'. (($evenement['horaire']=='oui')?'heure':'date');
+			$infos['agenda:evenement_date_du'] = $format($evenement['date_debut'],'dtstart');
+			$infos['agenda:evenement_date_au'] = $format($evenement['date_fin'],'dtend');
+			$infos['agenda:evenement_lieu'] = '<span class="location">'.$evenement['lieu'].'</span>';
+			echo '<div class="vevent">'. association_totauxinfos_intro('<span class="summary">'.$evenement['titre'].'</span>', 'evenement', $id_evenement, $infos, 'evenement') .'</div>';
 		// TOTAUX : nombres d'inscriptions par etat de paiement
-		echo association_totauxinfos_effectifs('participations', array(
+			echo association_totauxinfos_effectifs('participations', array(
 			'valide' => array( 'asso:activite_entete_validees', array('spip_asso_activites', "id_evenement=$id_evenement AND date_paiement<date_inscription "), ),
 			'pair' => array( 'asso:activite_entete_impayees', array('spip_asso_activites', "id_evenement=$id_evenement AND NOT date_paiement<date_inscription "), ),
-		));
+										       ));
 		// STATS sur les participations a cette activite (nombre de place et montant paye)
-		echo association_totauxinfos_stats('participations', 'activites', array('entete_quantite'=>'quantite','entete_montant'=>'prix_activite',), "id_evenement=$id_evenement");
+			echo association_totauxinfos_stats('participations', 'activites', array('entete_quantite'=>'quantite','entete_montant'=>'prix_activite',), "id_evenement=$id_evenement");
 		// TOTAUX : montants des participations
-		echo association_totauxinfos_montants('participations', array('SUM(montant) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " ), NULL);
+			echo association_totauxinfos_montants('participations', array('SUM(prix_activite) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " ), NULL);
 		// datation et raccourcis
-		$res['activite_bouton_modifier_article'] = array('edit-12.gif', array('articles', 'id_article='.$evenement['id_article']));
-		$res['activite_bouton_ajouter_inscription'] = array('panier_in.gif', array('edit_activite', "id_evenement=$id_evenement"));
+			$res['activite_bouton_modifier_article'] = array('edit-12.gif', array('articles', 'id_article='.$evenement['id_article']));
+			$res['activite_bouton_ajouter_inscription'] = array('panier_in.gif', array('edit_activite', "id_evenement=$id_evenement"));
+		}
 		if ( test_plugin_actif('FPDF') && sql_countsel('spip_asso_activites', "id_evenement=$id_evenement", 'id_auteur') ) { // PDF des inscrits
 			$res['activite_bouton_imprimer_inscriptions'] = array('print-24.png', array('pdf_activite', "id=$id_evenement"));
 		}
