@@ -32,7 +32,7 @@
 			<td>
 				<BOUCLE_test_ref2(ARTICLES){id_article}{id_article!=#ID_LIRE}{statut==prop|prepa|publie|refuse|poubelle}>
 				[(#EVAL{autoriser('modifier','article', #ID_ARTICLE)==1}|?{" ",""})
-				<a title='Retirer de la liste' onclick="$('#pave_lire_aussi').load('?exec=lire_aussi_interface&id_article=#ENV{id_article}&id_lire=#ID_LIRE&supprimer_lire=#ID_ARTICLE'); return false;" href="#"><img src="#CHEMIN{images/croix-rouge.gif}" alt="X" /></a>
+				<a title='Retirer de la liste' onclick="$('#pave_lire_aussi').load('?exec=lire_aussi_interface&id_article=#ENV{id_article}&id_lire=#ID_LIRE&supprimer_lire=#ID_ARTICLE'); return false;" href="#"><img src="#CHEMIN{imgs/croix-rouge.gif}" alt="X" /></a>
 				]
 				</BOUCLE_test_ref2>
 			</td>

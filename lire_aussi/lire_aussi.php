@@ -1,14 +1,14 @@
 <?php
 
 
-function lire_aussi_interface($vars="") {
-		$exec = $vars["args"]["exec"];
-		$id_rubrique = $vars["args"]["id_rubrique"];
-		$id_article = $vars["args"]["id_article"];
-		$data =	$vars["data"];
+function lire_aussi_interface($flux="") {
+		$exec = $flux["args"]["exec"];
+		$id_rubrique = $flux["args"]["id_rubrique"];
+		$id_article = $flux["args"]["id_article"];
+		$data =	$flux["data"];
 
 
-	if ($exec == "articles" AND $id_article > 0) {
+	if (($exec == "articles" OR $exec == "article") AND $id_article > 0) {
 		include_spip("inc/utils");
 
 
@@ -23,14 +23,16 @@ function lire_aussi_interface($vars="") {
 
 		$ret .= "</div>";
 
+		if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
+			$flux['data'] = substr_replace($flux['data'],$ret,$p,0);
+		else
+			$flux['data'] .= $ret;
+
 
 	}
 
-	$data .= $ret;
-	
-	$vars["data"] = $data;
 
-	return $vars;
+	return $flux;
 
 }
 
