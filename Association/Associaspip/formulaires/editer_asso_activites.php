@@ -19,7 +19,8 @@ function formulaires_editer_asso_activites_charger_dist($id_activite='') {
 	if (!$id_activite) { // si c'est un ajout
 		$contexte['id_evenement'] = association_recuperer_entier('id_evenement');
 		if ( !sql_countsel('spip_evenements', 'id_evenement='. $contexte['id_evenement']) )
-			exit; // sortir sans proces si evenement inexistant
+			// sortir si evenement inexistant
+			return (_T('zxml_inconnu_id', array('id'=>$contexte['id_evenement'])));
 		$contexte['date_inscription'] = date('Y-m-d');
 		$contexte['date_paiement'] = '';
 	}
