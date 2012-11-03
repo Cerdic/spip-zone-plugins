@@ -17,6 +17,7 @@ function exec_export_soldescomptes_tab() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
+		include_spip('exec/export_soldescomptes_tsv');
 		exec_export_soldescomptes_tsv();
 	}
 }

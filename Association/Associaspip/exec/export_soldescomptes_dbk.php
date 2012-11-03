@@ -11,7 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('exec/compte_resultat'); // c'est pour la definition de classe ExportCompteResultats
+include_spip('inc/association_comptabilite');
 
 // Export du Compte de Resultat au format XML : balisage DocBooK
 // http://fr.wikipedia.org/wiki/DocBook
@@ -21,7 +21,7 @@ function exec_export_soldescomptes_dbk() {
 		echo minipres();
 	} else {
 		include_spip('inc/association_comptabilite');
-		$dbk = new ExportCompteResultats(_request('var'));
+		$dbk = new ExportComptes_TXT(_Request('var'));
 		$balises = array();
 		foreach (array('charges', 'produits', 'contributions_volontaires') as $key) {
 			$balises[$key.'1'] = '<simplesect><title>'. ucfirst(_T("asso:$key")) .'</title>';
