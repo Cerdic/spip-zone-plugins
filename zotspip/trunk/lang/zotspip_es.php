@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'droits_insuffisants' => 'No tienen los derechos exigidos para  realizar esta modificación.',
 
 	// E
-	'erreur_connexion' => 'ZotSpip no fue capaz de conectarse a Zotero. Por favor, Por favor, compruebe su configuración de conexión. Si utiliza un proxy, asegúrese de que está correctamente configurado en Spip (Configuración > Opciones avanzadas). A saber, ZopSpip no siempre funciona si se requiere un proxy.
+	'erreur_connexion' => 'ZotSpip no fue capaz de conectarse a Zotero. Por favor, compruebe su configuración de conexión. Si utilizan un proxy, asegúrese de que está correctamente configurado en Spip (Configuración > Opciones avanzadas). A saber, ZopSpip no siempre funciona si se requiere un proxy.
 ',
 	'erreur_dom' => 'Para  funcionar ZotSpip necesita la extensión PHP DOM. Habilitan/instalan esta extensión.',
 	'erreur_openssl' => 'Para funccionar, ZotSpip necesita  la extensión PHP openSSL. Habilitan/instalan esta extensión.',
@@ -40,12 +40,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_api_key' => 'Se obtiene en la <a href="https://www.zotero.org/settings/keys">página Zotero de gestión de las claves personales</a>. Piense en conceder derechos de acceso de accesos  suficientes a esta clave.',
 	'explication_autoriser_modif_zotero' => '¿Habilitar las opciones de modificación de la librería Zotero (por ejemplo, la unión de autores)? Si es así, ¿quien tiene los derechos suficientes para verificar estas modificaciones? ¡CUIDADO! deben también  comprobar que su <em>Clé API</em> tiene los derechos para escribir.',
 	'explication_corriger_date' => 'Zotero transmite las fechas de publicación tales como han sido introducidas. Desde entonces, el procesador CSL no está siempre en capacidad de descomponerlas correctamente debido a la gran variedad de formatos diferentes. En este caso, la fecha de publicación  no aparecerá una vez las referencias  formateadas. ZotSpip puede corregir más arriba las fechas de publicación. ¡Cuidado! sólo el año se transmitirá entonces al procesador CSL, salvo si la fecha esta de forma aaaa-mm-jj o aaaa-mm. En cambio, este opción no tiene ninguna repercusión sobre la librería Zotero si mismo.',
-	'explication_depuis' => 'Sea un año (por ejemplo: <em>2009</em>), sea una duración en año seguida de la palabra francesa<em>ans</em> (por ejemplo: <em>3ans</em>) o de la palabra inglés<em>years</em> (por ejemplo: <em>3years</em>).',
+	'explication_depuis' => 'Sea un año (por ejemplo: <em>2009</em>), sea una duración en año seguida de la palabra francesa<em>ans</em> (por ejemplo: <em>3ans</em>) o de la palabra inglesa<em>years</em> (por ejemplo: <em>3years</em>) o de la palabra española<em>años</em> (por ejemplo: <em>3años</em>).',
 	'explication_id_librairie' => 'Para una librería personal, la identificación <em>userID</em> se indica en la <a href="https://www.zotero.org/settings/keys"> pagina Zotero de  gestión de las  claves personales</a>. Para un grupo, la identificación  <em>groupID</em> se encuentra en el URL de configuración del grupo que aparece como  <em>https://www.zotero.org/groups/&lt;groupID&gt;/settings</em>.',
 	'explication_maj_zotspip' => 'ZotSpip se sincroniza con regularidad (aproximadamente cada cuatro horas) con el servidor Zotero. Solamente se toman en cuenta las últimas modificaciones (desde la última sincronización) En caso necesario, pueden forzar una actualización completa de la base de datos, entonces todas las referencias vuelven a descargarse (si su librería es grande, esta sincronización se realizara en múltiples pasos, solamente  se puede sincronizar simultáneamente 50 referencias).',
 	'explication_ordre_types' => 'Se puede personalizar el orden utilizado para las clasificaciones por tipo de referencia (cambie el orden por deslizarse/depositar).
 ',
-	'explication_username' => 'Para una librería personal, el nombre de usuario es indicado sobre la <a href="https://www.zotero.org/settings/account"> página de configuración de la cuenta </a>. Para un grupo compartido, el nombre del grupo se sitúa al final del URL de la página inicial del grupo que es de la forma <em>https://www.zotero.org/groups/<nom_du_groupe></em>  (en cierto caso, el nombre del grupo correspondiente a su identificador numérico).',
+	'explication_username' => 'Para una librería personal, el nombre de usuario es indicado sobre la <a href="https://www.zotero.org/settings/account"> página de configuración de la cuenta </a>. Para un grupo compartido, el nombre del grupo se sitúa al final del URL de la página inicial del grupo que aparece como <em>https://www.zotero.org/groups/<nom_du_groupe></em>  (en cierto caso, el nombre del grupo correspondiente a su identificador numérico).',
 	'exporter' => 'Exportar',
 	'exporter_reference' => 'Exportar la referencia:',
 	'exporter_selection' => 'Exportar la selección al formato',
@@ -89,9 +89,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_collection' => 'Colección
 
 ',
-	'label_conference' => 'Cconferencia',
+	'label_conference' => 'Conferencia',
 	'label_corriger_date' => 'Corregir las fechas de publicación',
-	'label_csl' => 'CSL estilo (formato)',
+	'label_csl' => 'Estilo CSL (formato)',
 	'label_csl_defaut' => 'Estilo predeterminado',
 	'label_depuis' => 'Desde',
 	'label_details' => 'Detalles',
@@ -99,7 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_export' => '¿Mostrar las opciones de exportación?',
 	'label_id_librairie' => 'Identificador de la librería',
 	'label_identifiants_zotero' => 'Identificadores Zotero',
-	'label_liens' => '¿ Mostrar los vínculos?',
+	'label_liens' => '¿Mostrar los vínculos?',
 	'label_max' => 'Número máximo de referencias mostradas',
 	'label_options' => 'Opciones',
 	'label_options_affichage' => 'Opciones de vizualización',
@@ -120,7 +120,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_username' => 'Nombre del usuario o del grupo',
 	'label_variante' => 'Variante',
 	'label_zcollection' => 'Colección Zotero',
-	'lien_ressource' => 'Vinculo hacia este recurso ',
+	'lien_ressource' => 'Vínculo hacia este recurso ',
 	'liste_createurs' => 'Lista des contribuidores',
 	'liste_references' => 'Lista des referencias Zotero',
 	'liste_tags' => 'Lista de palabras clave',
@@ -134,7 +134,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_prenom' => 'Apellido, Nombre',
 
 	// O
-	'outil_explication_inserer_ref' => 'Identificador Zotero de la referencia.En el caso de una citación, se puede especificar un número de página o número de sección después del identificador, separadas por  @. Se pueden enumerar varias referencias, separados por una coma. Por ejemplo: 4JA2I4UC@page 16-17,FSCANX5W',
+	'outil_explication_inserer_ref' => 'Identificador Zotero de la referencia.En el caso de una citación, se puede especificar un número de página o número de sección después del identificador, separado por @. Se pueden enumerar varias referencias, separadas por una coma.',
 	'outil_explication_inserer_ref_exemple' => 'Ejemplo: 4JA2I4UC@page 16-17,FSCANX5W',
 	'outil_inserer_ref' => 'Insertar una referencia bibliográfica [ref=XXX]',
 
@@ -154,7 +154,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer_createur' => 'Borrar este autor',
 	'supprimer_tag' => 'Borrar esta palabra clave',
 	'sync_complete_demandee' => 'Se ha solicitado una sincronización completa de la base.',
-	'sync_en_cours' => 'La sincronización está siendo procesado pero no siempre esta terminada. Haz clic en el lienzo <em>Sincronizar</em> de nuevo.',
+	'sync_en_cours' => 'La sincronización está siendo procesado pero no siempre esta terminada. Haz clic en <em>Sincronizar</em> de nuevo.',
 	'synchronisation_effectuee' => 'Sincronización realizada',
 
 	// T
