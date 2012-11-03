@@ -1,5 +1,6 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
+#CACHE{0}
 
 body {
 	font-family: 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;
@@ -55,7 +56,8 @@ body {
 #bando_navigation {
 	ul {
 		li {
-		
+			line-height: 125%;
+			
 			ul {
 				min-width: 170px;
 				-spip-border-bottom-left-radius: 5px;
@@ -144,12 +146,24 @@ body {
 	}
 }
 #contenu .fiche_objet {
+	.propose .inner {
+		-spip-box-shadow: 0px 0px 0px #ffffff;
+		-spip-border-radius: 0;
+		background-color: #ffde00;
+		margin: 0px -15px;
+		
+		p {
+			margin: 0;
+		}
+	}
+
+
 	.inner {
 		border: 0px;
-		-spip-box-shadow:  0px 0px 20px #f0f0f0;
+		-spip-box-shadow:  0px 0px 20px #e0e0e0;
 
 		. :hover {
-			-spip-box-shadow:  0px 0px 20px #eeeeee;
+			-spip-box-shadow:  0px 0px 20px #cccccc;
 		}
 		
 		.hd {
@@ -169,6 +183,15 @@ body {
 		}
 		.bd {
 			padding: 15px;
+		}
+	}
+	.editer_urls {
+		margin: 10px 0px;
+		.formulaire_editer_url_objet  {
+			margin: 10px -15px 0px -15px;
+		}
+		.formulaire_editer_url_objet, .boutons {
+			-spip-border-radius: 0px;
 		}
 	}
 }
@@ -227,7 +250,7 @@ h1, .h1 {
 	-spip-border-top-left-radius: 5px;
 	-spip-border-top-right-radius: 5px;
 	position: relative;
-	z-index: 2;
+	z-index: 1;
 	display: block;
 
 	. :hover {
@@ -251,6 +274,15 @@ h1, .h1 {
 	  right: 10px;
 	}
 	
+	. .selection-articles {
+		table {
+			background-color: white;
+			border-bottom: 1px solid #ccc;
+		}
+		form {
+			background-color: #[(#ENV{claire}|couleur_luminance{0.25})];
+		}
+	}
 	
 	table {
 		background: transparent;
@@ -453,7 +485,7 @@ div.titrem, h3.titrem {
 
 	.toggle_box_link {
 		visibility: hidden;
-		z-index: 2;
+		z-index: 1;
 		font-size: 10px;
 		color: ##ENV{lien};
 		
@@ -584,6 +616,9 @@ div.titrem, h3.titrem {
 			color: #999;
 			font-weight: normal;
 		}
+		p {
+			margin: 0.5em 0em;
+		}
 	}
 	.contenu_nom_site {
 		.label, .nom_site {
@@ -637,24 +672,9 @@ div.titrem, h3.titrem {
 		vertical-align: bottom;
 	}
 }
-
-
-
-
-
 .formulaire_editer_liens .liste-objets tr:hover > .action button {
 	visibility: visible;
 }
-
-.formulaire_editer_liens .action {
-    background: none repeat scroll 0 0 #EEEEEE;
-    position: relative;
-    text-align: right;
-    z-index: 300;}
-
-
-
-
 .logo_du_site {
 	text-align: center;
 }
@@ -795,6 +815,5 @@ div.titrem, h3.titrem {
 		}
 	}
 }
-div.bd div.descriptif{margin:10px; padding-bottom: 1px;}
-.fiche_objet .editer_urls .link {padding-bottom: 10px;} 
+
 #FILTRE{css_imbriques_decouper}
