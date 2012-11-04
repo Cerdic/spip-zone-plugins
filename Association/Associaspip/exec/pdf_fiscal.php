@@ -22,7 +22,7 @@ if (!defined('SIGNATURE_PRES'))
 
 function exec_pdf_fiscal() {
 	$r = association_controle_id('auteur', 'asso_membres', 'fiscaliser', 'membres');
-	if ($r) {
+	if ($r AND test_plugin_actif('fpdf')) {
 	list($id_auteur, $mbr_qui) = $r;
 	include_spip('inc/navigation_modules');
         include_spip('pdf/fpdi_pdf_parser');
@@ -44,7 +44,7 @@ function exec_pdf_fiscal() {
            //$mail = sql_getfetsel('email', 'spip_auteurs',"id_auteur=$id_auteur");
 		if (!$montants) {
             echo "Pas de versement(s) &quot;valid&eacute;(s)&quot; en $annee pour l'adh&eacute;rent <a href='". generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur)."'> {$mbr_qui['prenom']} {$mbr_qui['nom_famille']}</a>.";
-        } else {
+		} else {
             $mbr_ou=sql_fetsel('*','spip_adresses AS p JOIN spip_adresses_liens AS l ON p.id_adresse=l.id_adresse', "objet='auteur' AND id_objet=$id_auteur AND type IN ('pref','dom','home','perso','domicile','main','principale','principal') LIMIT 0, 1");
             if (!$mbr_ou)
                 $mbr_ou = sql_fetsel('*','spip_adresses AS p JOIN spip_adresses_liens AS l ON p.id_adresse=l.id_adresse', " objet='auteur' AND id_objet=$id_auteur LIMIT 0, 1)");

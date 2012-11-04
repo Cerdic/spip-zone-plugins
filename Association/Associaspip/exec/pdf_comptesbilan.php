@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 // Version PDF de la synthese des Comptes de Bilan
 function exec_pdf_comptesbilan() {
-	if (!autoriser('voir_compta', 'association')) {
+	if (!autoriser('voir_compta', 'association') OR !test_plugin_actif('fpdf')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
