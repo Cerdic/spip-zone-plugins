@@ -38,9 +38,7 @@ function exec_compte_bilan() {
 			if (test_plugin_actif('FPDF')) {  // impression en PDF : _T('asso:bouton_impression')
 				echo icone1_association('PDF', generer_url_ecrire('pdf_comptesbilan', "$ids[type_periode]=$ids[id_periode]".($ids['destination']?"&destination=$ids[destination]":'')), 'print-24.png');
 			}
-			foreach(array('csv','ctx','dbk','json','tex','tsv','xml','yaml') as $type) { // autres exports (donnees brutes) possibles
-				echo icone1_association(strtoupper($type), generer_url_ecrire("export_soldescomptes_$type", 'type=bilan&'."$ids[type_periode]=$ids[id_periode]".($ids['destination']?"&destination=$ids[destination]":'')), 'export-24.png'); //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
-			}
+			export_compte($ids, 'bilan');
 			echo fin_cadre_enfonce(TRUE);
 		}
 		debut_cadre_association('finances-24.png', 'cpte_bilan_titre_general');
