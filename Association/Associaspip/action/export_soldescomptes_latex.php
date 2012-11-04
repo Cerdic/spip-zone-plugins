@@ -13,10 +13,12 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 // Export du Compte de Resultat au format LaTeX
 // http://fr.wikipedia.org/wiki/LaTeX
-function exec_export_soldescomptes_latex() {
-	if (!autoriser('voir_compta', 'association')) {
-		include_spip('inc/minipres');
-		echo minipres();
+function action_export_soldescomptes_latex() {
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
+
+	if (!preg_match(',^(\d+)-(\w+)-(\w+)(-(\w+))?$,', $arg, $r)) {
+		spip_log("action_export_soldescomptes incompris: " . $arg);
 	} else {
 		include_spip('inc/association_comptabilite');
 		$latex = new LaTeX(_request('var'));

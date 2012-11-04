@@ -15,10 +15,12 @@ include_spip('inc/association_comptabilite');
 
 // Export du Compte de Resultat au format XML : balisage DocBooK
 // http://fr.wikipedia.org/wiki/DocBook
-function exec_export_soldescomptes_dbk() {
-	if (!autoriser('voir_compta', 'association')) {
-		include_spip('inc/minipres');
-		echo minipres();
+function action_export_soldescomptes_dbk() {
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
+
+	if (!preg_match(',^(\d+)-(\w+)-(\w+)(-(\w+))?$,', $arg, $r)) {
+		spip_log("action_export_soldescomptes incompris: " . $arg);
 	} else {
 		include_spip('inc/association_comptabilite');
 		$dbk = new ExportComptes_TXT(_Request('var'));

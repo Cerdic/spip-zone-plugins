@@ -13,10 +13,12 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 // Export du Compte de Resultat au format CTX
 // http://www.creativyst.com/Doc/Std/ctx/ctx.htm
-function exec_export_soldescomptes_ctx() {
-	if (!autoriser('voir_compta', 'association')) {
-		include_spip('inc/minipres');
-		echo minipres();
+function action_export_soldescomptes_ctx() {
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
+
+	if (!preg_match(',^(\d+)-(\w+)-(\w+)(-(\w+))?$,', $arg, $r)) {
+		spip_log("action_export_soldescomptes incompris: " . $arg);
 	} else {
 		include_spip('inc/association_comptabilite');
 		$ctx = new ExportComptes_TXT();

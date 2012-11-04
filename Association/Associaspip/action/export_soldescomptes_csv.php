@@ -14,10 +14,12 @@ if (!defined('_ECRIRE_INC_VERSION'))
 // Export du Compte de Resultat au format CSV
 // http://fr.wikipedia.org/wiki/Comma-separated_values
 // (forme commune de base : champs separes par une virgule et point decimal !)
-function exec_export_soldescomptes_csv() {
-	if (!autoriser('voir_compta', 'association')) {
-		include_spip('inc/minipres');
-		echo minipres();
+function action__soldescomptes_csv() {
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
+
+	if (!preg_match(',^(\d+)-(\w+)-(\w+)(-(\w+))?$,', $arg, $r)) {
+		spip_log("action_export_soldescomptes incompris: " . $arg);
 	} else {
 		include_spip('inc/association_comptabilite');
 		$csv = new ExportComptes_TXT();

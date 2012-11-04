@@ -637,13 +637,15 @@ function association_liste_resultat_net($recettes, $depenses) {
 function export_compte($ids, $mode)
 {
 	// exports connus (a completer au besoin)
-	foreach(array('csv','ctx','dbk','json','tex','tsv','xml','yaml') as $t) {
-	  $args = "type=$mode&"."$ids[type_periode]=$ids[id_periode]".($ids['destination']?"&destination=$ids[destination]":'');
-	  $s = ($t == 'tex') ? 'latex' : $t;
-	  $script = "export_soldescomptes_$s";
-	  $script = generer_url_ecrire($script, $args);
-	  echo icone1_association(strtoupper($t), $script, 'export-24.png');
- //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
+	foreach(array('csv','ctx','dbk','json','tex','tsv','xml','yaml') as $t){
+		$args = $ids['id_periode'] . "-$mode-" . $ids['type_periode']
+		    .($ids['destination']? ('-' . $ids['destination']) :'');
+
+		$s = ($t == 'tex') ? 'latex' : $t;
+		$script = "export_soldescomptes_$s";
+		include_spip('inc/actions');
+		$url = generer_action_auteur($script, $args);
+		echo icone1_association(strtoupper($t), $url, 'export-24.png');
 	}
 }
 
