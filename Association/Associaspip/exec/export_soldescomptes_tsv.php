@@ -21,7 +21,7 @@ function exec_export_soldescomptes_tsv() {
 		include_spip('inc/association_comptabilite');
 		$tsv = new ExportComptes_TXT();
 		$tsv->exportLignesUniques("\t", "\n", array("\t"=>'\t',"\n"=>'\n'), '"', '"');
-		$tsv->leFichier('tab');
+		$tsv->leFichier('tsv');
 	}
 }
 
