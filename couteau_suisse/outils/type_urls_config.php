@@ -45,6 +45,7 @@ if(%%urls_minuscules%%) {\$flux['data']=strtolower(\$flux['data']);}",
 	'pipelinecode:affiche_milieu' => "if(\$flux['args']['exec']==='configurer_urls') \$flux['data'] .= propre('['._T('couteau:configurer').'->'.generer_url_ecrire('admin_couteau_suisse', 'cmd=descrip&outil=type_urls#cs_infos').'].');",
 ));
 
+
 // Ajout des variables utilisees ci-dessus
 add_variables(
 
@@ -70,7 +71,7 @@ array(
 					 'standard' => 'couteauprive:url_standard',
 					 'propres-qs' => 'couteauprive:url_propres-qs'),
 	'radio/ligne' => 4,
-	'defaut' => "'page'",
+	'defaut' => "isset(\$GLOBALS['meta']['type_urls'])?\$GLOBALS['meta']['type_urls']:'page'",
 	'code' => "\$GLOBALS['type_urls']=%s;\n",
 ),
 
