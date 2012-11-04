@@ -1,9 +1,5 @@
 [(#SET{fichiers, [(#REM|mes_fichiers_a_telecharger)]})]
 
-[#BOITE_OUVRIR{'', error}
-	(#ENV{etat}|=={nok_tele}|oui)<:mes_fichiers:message_telechargement_nok:>
-#BOITE_FERMER]
-
 <B_telechager>
 #ANCRE_PAGINATION
 <div class="liste-objets mes_fichiers">
