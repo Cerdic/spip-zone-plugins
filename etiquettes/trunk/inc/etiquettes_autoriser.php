@@ -32,7 +32,7 @@ function autoriser_ajoutertags_dist($faire, $type, $id, $qui, $opt) {
 }
 
 // Teste si on peut supprimer un tag lie a un objet
-function autoriser_supprimertags_dist($faire, $type, $id_groupe, $qui, $opt) {
+function autoriser_supprimertags_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('remplaceretiquettes', $type, $id, $qui, $opt);
 }
 
