@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 function exec_suppr_pret() {
 	$r = association_controle_id('pret', 'asso_prets', 'gerer_prets', 'association');
-	if (!$r) {
+	if ($r) {
 		include_spip ('inc/navigation_modules');
 		list($id_pret, $pret) = $r;
 		onglets_association('titre_onglet_prets', 'ressources');
