@@ -1,4 +1,4 @@
-<div class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{_objet}-#ENV{_id_objet}">
+<span class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{_objet}-#ENV{_id_objet}">
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
@@ -15,4 +15,5 @@
 			<input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
 	]
-</div>
+</span>
+<style type="text/css">#INCLURE{css/tagger.css}</style>

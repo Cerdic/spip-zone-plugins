@@ -18,9 +18,9 @@ function tags_autoadd(node,e){
 		for(var i=0;i<tags.length;i++){
 			var tag = tags[i].replace(/^\s+/g,'').replace(/\s+$/g,'');
 			if(tag.length){
-				var li = jQuery('<li class="tag">'+tag+'</li>');
+				var li = jQuery('<li class="tag"><span class="label"><i class="icon-tag"></i>'+tag+'</span></li>');
 				li.append(jQuery('<input type="hidden" name="tags[]" />').attr('value',tag));
-				if (ul.is('.supprimable')) li.append(tags_remove_img.clone());
+				if (ul.is('.supprimable')) li.find('>span').append(tags_remove_img.clone());
 				ul.append(li);
 				if (ul.is('.empty'))
 				 	ul.removeClass('empty').find('.notag').remove();
