@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <plugin>
 	<nom>CSS imbriqu&#233;s</nom>
 	<slogan>Traiter des CSS imbriqu&#233;s</slogan>
 	<auteur>ARNO*</auteur>
-	<version>3.0.1</version>
+	<version>3.0.2</version>
 	<etat>stable</etat>
 	<description>
 		Ce plugin permet de traiter des CSS imbriqu&#233;s.
@@ -11,13 +12,13 @@
 		rapidement des comportements qui demandent des notations
 		diff&#233;rentes pour viser diff&#233;rents navigateurs.
 
-		Il permet &#233;galement d'ins&#233;rer des @media queries {&#224; l'int&#233;rieur} des classes elles-m&#234;êmes.
+		Il permet &#233;galement d'ins&#233;rer des @media queries {&#224; l'int&#233;rieur} des classes elles-m&#234;√™mes.
 	</description>
-	<lien>http://www.paris-beyrouth.org/tutoriaux-spip/article/plugin-css-imbriques</lien>
+	<lien>http://www.paris-beyrouth.org/tutoriaux-spip/article/plugin-spip-pre-processeur-de-css</lien>
 	<prefix>css_imbriques</prefix>
 	<fonctions>css_imbriques_fonctions.php</fonctions>
 
-	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.9.9]" />
 	<categorie>outil</categorie>
 </plugin>
 

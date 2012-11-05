@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
@@ -38,8 +37,10 @@ function css_inserer_tab($def) {
 
 
 function css_contruire($css, $niveau, $chemin, $classe, $enfants, $definition) {
-	$ret = ''; // retour
+
 	$intitule = trim($classe[$niveau]);
+
+
 	if (substr($intitule, 0, 2) == ". ") {
 		$intitule = substr($intitule, 2, strlen($intitule));
 		$chemin = $chemin.$intitule;
@@ -60,8 +61,23 @@ function css_contruire($css, $niveau, $chemin, $classe, $enfants, $definition) {
 //		echo "<pre>$css</pre>";
 	}
 	
-
-	if (isset($enfants[$niveau]) and $enfants[$niveau]) {
+	if (preg_match(",^\@(-spip-)?keyframes,", $intitule)) {
+		// autoriser @keyframes et @-spip-keyframes
+		$intitule = str_replace("@-spip-keyframes", "@keyframes", $intitule);
+	
+		if (isset($enfants[$niveau]) and $enfants[$niveau]) {
+			$def_keyframes = "";
+			foreach($enfants[$niveau] as $num) {
+				 $def_keyframes .= css_contruire($css, $num, "", $classe, $enfants, $definition);
+			}
+			
+			$ret .= preg_replace(",^@keyframes,","@-moz-keyframes",$intitule)." { $def_keyframes }";
+			$ret .= preg_replace(",^@keyframes,","@-webkit-keyframes",$intitule)." { $def_keyframes }";
+			$ret .= preg_replace(",^@keyframes,","@-o-keyframes",$intitule)." { $def_keyframes }";
+			$ret .= $intitule." { $def_keyframes }";
+		}
+	}
+	else if ($enfants[$niveau]) {
 		foreach($enfants[$niveau] as $num) {
 			$ret .= css_contruire($css, $num, $chemin, $classe, $enfants, $definition);
 	
@@ -93,7 +109,7 @@ function css_imbriques_traiter_spip($regs) {
 	// -spip-font-smoothing
 	
 	if (_UTILISER_PIE_HTC) {
-		if (function_exists('chemin')) $pie = url_absolue(chemin("PIE.htc"));
+		if (function_exists("chemin")) $pie = url_absolue(chemin("PIE.htc"));
 		else $pie = url_absolue(find_in_path("PIE.htc"));
 	}
 
@@ -266,8 +282,7 @@ function extraire_filters_ie($css) {
 }
 
 function css_imbriques_decouper ($css) {
-	
-	$compteur = 0;
+	$compteur = 0;	
 	
 	$css = preg_replace(",\n[\t\ ]*,", "\n", trim($css));
 	$css = preg_replace(",\n+,", "\n", $css);
@@ -292,11 +307,13 @@ function css_imbriques_decouper ($css) {
 
 			if (preg_match(",^@media,", $intitule)) $intitule .= " media@";
 
+			// le minifieur de CSS vire les intitulés "0%"
+			if ($intitule == "0%") $intitule = "from";
+
+
 						
 			$def = trim($regs[2]);
 			$def = css_imbriques_forcer_position($def);
-
-
 
 			$chaine = $regs[0];
 			$pos = strpos($css, $chaine);
@@ -325,8 +342,6 @@ function css_imbriques_decouper ($css) {
 				
 			} else {
 			
-				
-		
 				$compteur ++;
 			
 				$classe[$compteur] = $intitule;
@@ -355,12 +370,10 @@ function css_imbriques_decouper ($css) {
 			
 		
 	}
-
 	
 	$css = "";
 	
 	$css = css_contruire($css, $compteur, "", $classe, $enfants, $definition);
-
 
 	
 	
@@ -369,6 +382,8 @@ function css_imbriques_decouper ($css) {
 	$css = preg_replace(",\t,", "", $css);
 	$css = preg_replace(",\},", "}\n", $css);
 
+
+
 	// Rechercher les media_queries
 	$css = preg_replace_callback(",(.*(@media .* media@).*)\{(.*)\}\n?,", "css_imbriques_traiter_media", $css);
 	if (count($GLOBALS["css_imbriques_medias_queries"]) > 0) {
@@ -376,7 +391,6 @@ function css_imbriques_decouper ($css) {
 			$css .= $k ."{\n". $val . "}\n";
 		}
 	}
-
 
 	return $css;
 }
@@ -394,6 +408,10 @@ function css_imbriques_traiter_media($reg) {
 
 	$GLOBALS["css_imbriques_medias_queries"]["$query"] .= $intitule."{".$definition."}\n";
 	return;
+}
+function css_imbriques_traiter_keyframe ($flux) {
+	print_r($flux);
+	die();
 }
 
 function css_imbriques ($css) {
@@ -423,10 +441,14 @@ function css_imbriques ($css) {
 	}
 
 	$contenu = css_imbriques_decouper ($contenu);
+	
 
 	// passer les url relatives a la css d'origine en url absolues
 	$contenu = preg_replace(",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),UimsS",
 		"url($path\\1)",$contenu);
+
+
+
 	// virer les fausses url absolues que l'on a mis dans les import
 	if (count($src_faux_abs))
 		$contenu = str_replace(array_keys($src_faux_abs),$src_faux_abs,$contenu);
