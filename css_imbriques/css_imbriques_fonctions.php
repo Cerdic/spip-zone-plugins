@@ -74,6 +74,7 @@ function css_contruire($css, $niveau, $chemin, $classe, $enfants, $definition) {
 			$ret .= preg_replace(",^@keyframes,","@-moz-keyframes",$intitule)." { $def_keyframes }";
 			$ret .= preg_replace(",^@keyframes,","@-webkit-keyframes",$intitule)." { $def_keyframes }";
 			$ret .= preg_replace(",^@keyframes,","@-o-keyframes",$intitule)." { $def_keyframes }";
+			$ret .= preg_replace(",^@keyframes,","@-ms-keyframes",$intitule)." { $def_keyframes }";
 			$ret .= $intitule." { $def_keyframes }";
 		}
 	}
