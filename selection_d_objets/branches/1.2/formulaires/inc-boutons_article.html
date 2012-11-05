@@ -1,5 +1,11 @@
 #SET{id_secteur,0}
 
+[(#ENV{langue}|?{
+    #SET{lang,#ENV{langue}|explode{','}}
+    ,
+    #SET{lang,#CONFIG{langues_multilingue}|explode{','}}
+    })]
+
 	<B_rub>
 	<li>
 	<label><:selection_objet:affichage_section:></label>
@@ -9,7 +15,7 @@
 		<option value="0"><:selection_objet:racine:></option>
 		]
 	]
-      <BOUCLE_rub(RUBRIQUES){id_rubrique IN #ENV{rubriques}} {lang=#ENV{langue}}{id_rubrique !IN #ENV{exclure}}{tout}>
+      <BOUCLE_rub(RUBRIQUES){id_rubrique IN #ENV{rubriques}} {lang IN #GET{lang}}{id_rubrique !IN #ENV{exclure}}{tout}>
    	<option value="#ID_RUBRIQUE" >#TITRE</option>
       </BOUCLE_rub>  
 	</select>

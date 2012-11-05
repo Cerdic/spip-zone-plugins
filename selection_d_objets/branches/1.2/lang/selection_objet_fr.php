@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'objet_destination_choisis'=>'Destination(s) choisie(s) :',
 	
 	//E
-	'explication_selection_rubrique_dest'=>'Quelles rubriques doient être proposé comme rubrique de déstination de l\'objet séléctionné',
+	'explication_selection_rubrique_dest'=>'Choix des rubriques pouvant accueillir les objets sélectionnés',
 	// f
 	'favoris' => 'Favoris',	
 	
@@ -28,20 +28,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//r
 	'racine' => 'Racine',
-	'rubriques_choisis' => 'Rubriques choisis :',
+	'rubriques_choisis' => 'Rubriques choisies :',
 	
 	//s
 	'selection_objet' => 'Sélection',
 	'selection_objets_pour' => 'Sélection objets pour',		
-	'selection_rubrique_dest' => 'Rubrique(s) de déstination',
-    'selection_rubrique_objet' => 'Objets proposé pour la sélection',
+	'selection_rubrique_dest' => 'Rubrique(s) de destination',
+    'selection_rubrique_objet' => 'Objets proposés pour la sélection',
     'selection_objet_titre' => 'Selection d\'objets',
     
         // A
-    'ajouter_lien_objet' => 'Séléctionner cet objet',
+    'ajouter_lien_objet' => 'Sélectionner cet objet',
 
     // I
-    'icone_creer_selection_objet' => 'Séléctionner un objet',
+    'icone_creer_selection_objet' => 'Sélectionner un objet',
     'icone_modifier_selection_objet' => 'Modifier cet objet séléctionné',
     'info_1_selection_objet' => 'Un objet séléctionné',
     'info_aucun_selection_objet' => 'Aucun objet sélectionné',
@@ -59,18 +59,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'label_url' => 'Url',
 
     // R
-    'retirer_lien_objet' => 'Retirer cet objet de la séléction',
-    'retirer_tous_liens_selection_objets' => 'Retirer tous les selection objets',
+    'retirer_lien_objet' => 'Retirer cet objet de la sélection',
+    'retirer_tous_liens_selection_objets' => 'Retirer toutes les sélection d\'objets',
 
     // T
-    'texte_ajouter_objet' => 'Séléctionner un objet',
-    'texte_changer_statut_objet' => 'Cet  objet séléctionné est :',
-    'texte_creer_asselection_objetcier_objet' => 'Créer et asselection_objetcier un objet',
-    'titre_langue_objet' => 'Langue de cet objet séléctionné',
-    'titre_logo_selection_objet' => 'Logo de cet objet séléctionné',
+    'texte_ajouter_objet' => 'Sélectionner un objet',
+    'texte_changer_statut_objet' => 'Cet  objet sélectionné est :',
+    'texte_creer_asselection_objetcier_objet' => 'Créer et associer un objet',
+    'titre_langue_objet' => 'Langue de cet objet sélectionné',
+    'titre_logo_selection_objet' => 'Logo de cet objet sélectionné',
     'titre_objet' => 'Objet sélectionné',
-    'titre_selection_objets' => 'Selection objets',
-    'titre_selection_objets_rubrique' => 'Objets séléctionnés de la rubrique',
+    'titre_selection_objets' => 'Selection d\'objets',
+    'titre_selection_objets_rubrique' => 'Objets sélectionnés de la rubrique',
     
 );
 
