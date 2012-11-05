@@ -8,7 +8,7 @@
 	<B_selection>
 <div class="liste-elements selection_objets" id="selection_objets">
 <table class='spip liste'>
-    [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{selection_objet:info_1_selection_objet,selection_objet:info_nb_selection_objets}}) - [(#ID_OBJET_DEST|info_objet{#OBJET_DEST,titre})]
+    [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{selection_objet:info_1_selection_objet,selection_objet:info_nb_selection_objets}})
               [(#GET{langues}|count|>{1}|oui)
                 [(#VALEUR)]
               ]</strong>
@@ -35,7 +35,7 @@ date,#DATE,
 
 <script type="text/javascript">
     $(document).ready(function(){    
-   $('.tr_liste a').click(function(){
+   $('.tr_liste a.select').click(function(){
       $('#selection_objets').load($(this).attr("href"));
        return false;
     });
