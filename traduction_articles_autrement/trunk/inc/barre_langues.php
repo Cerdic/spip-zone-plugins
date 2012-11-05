@@ -92,9 +92,6 @@ function inc_barre_langues_dist($id_article){
 						}
 					elseif(test_plugin_actif('trad_rub')){
                        
-						if($id_trad_rub==0){
-							$trad_new='oui';
-							}
 						$donnes_trad=destination_traduction($value,$id_rubrique,$creer_racine='');
 						$parent_trad=$donnes_trad[0];
 						$trad=$donnes_trad[1];
