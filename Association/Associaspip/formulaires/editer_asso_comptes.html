@@ -69,12 +69,12 @@
 			<li class="editer_imputation">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{imputation})</span>]
 				<label for="imputation">
-					<div id="saisie_label_imputation" name="saisie_label_imputation" class="[(#ENV{type_operation}|affichage_div{charges-produits-contributions_volontaires})]">
+					<span id="saisie_label_imputation" class="[(#ENV{type_operation}|affichage_div{charges-produits-contributions_volontaires})]">
 							<:asso:compte_libelle_imputation:>
-					</div>
-					<div id="saisie_label_destination" name="saisie_label_destination" class="[(#ENV{type_operation}|affichage_div{banques})]">
+					</span>
+					<span id="saisie_label_destination" class="[(#ENV{type_operation}|affichage_div{banques})]">
 							<:asso:compte_credite:>
-					</div>
+					</span>
 				</label>
 				#SELECTEUR_IMPUTATION
 			</li>
@@ -86,24 +86,24 @@
 			<li id="saisie_depense" class="editer_depense [(#ENV{type_operation}|affichage_div{charges-banques-contributions_volontaires})]">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{depense})</span>]
 				<label for="depense">
-					<div id="saisie_label_depense" name="saisie_label_depense" class="[(#ENV{type_operation}|affichage_div{charges})]">
+					<span id="saisie_label_depense" class="[(#ENV{type_operation}|affichage_div{charges})]">
 							<:asso:libelle_montant:>
-					</div>
-					<div id="saisie_label_depense_evaluee" name="saisie_label_depense_evaluee" class="[(#ENV{type_operation}|affichage_div{contributions_volontaires})]">
+					</span>
+					<span id="saisie_label_depense_evaluee"  class="[(#ENV{type_operation}|affichage_div{contributions_volontaires})]">
 						<:asso:depense_evaluee:>
-					</div>
+					</span>
 				</label>
 				<input type="[(#HTML5|?{number,text})]" name="depense" value="[(#ENV{depense})]" id="depense"  class="number float price" />
 			</li>
 			<li id="saisie_recette" class="editer_recette [(#ENV{type_operation}|affichage_div{produits-contributions_volontaires})]">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{recette})</span>]
 				<label for="recette">
-					<div id="saisie_label_recette" name="saisie_label_recette" class="[(#ENV{type_operation}|affichage_div{produits})]">
+					<span id="saisie_label_recette" class="[(#ENV{type_operation}|affichage_div{produits})]">
 						<:asso:libelle_montant:>
-					</div>
-					<div id="saisie_label_recette_evaluee" name="saisie_label_recette_evaluee" class="[(#ENV{type_operation}|affichage_div{contributions_volontaires})]">
+					</span>
+					<span id="saisie_label_recette_evaluee"  class="[(#ENV{type_operation}|affichage_div{contributions_volontaires})]">
 						<:asso:recette_evaluee:>
-					</div>
+					</span>
 				</label>
 				<input type="[(#HTML5|?{number,text})]" name="recette" value="[(#ENV{recette})]" id="recette" class="number float price" />
 			</li>

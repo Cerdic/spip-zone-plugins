@@ -38,7 +38,7 @@ function balise_SELECTEUR_IMPUTATION_dyn($id_compte, $type_operation, $imputatio
 	}
 	$res .= ');
 	//--><!]]>
-	</script><noscript>
+	</script><noscript><div>
 	<select name="imputation" id="imputation" class="select">
 <option value="0">-- ' . _T('choisir_ref_compte') . '</option>';
 	foreach ( array(
@@ -47,7 +47,7 @@ function balise_SELECTEUR_IMPUTATION_dyn($id_compte, $type_operation, $imputatio
 	$GLOBALS['association_metas']['classe_banques'],
 	$GLOBALS['association_metas']['classe_contributions_volontaires']
 	) as $key => $val) {
-		$res .= "\n<optgroup lable='$val - "._T("asso:classe_$val")."'>";
+		$res .= "\n<optgroup label='$val - "._T("asso:classe_$val")."'>";
 		$tableau = association_liste_plan_comptable($val,1);
 		foreach ($tableau as $k => $v) {
 			if($k!=$GLOBALS['association_metas']['pc_intravirements']) { // code virement interne
@@ -56,7 +56,7 @@ function balise_SELECTEUR_IMPUTATION_dyn($id_compte, $type_operation, $imputatio
 		}
 		$res .= "\n</optgroup>";
 	}
-	$res .= "\n</select>\n</noscript>";
+	$res .= "\n</select>\n</div></noscript>";
 	return $res;
 }
 
