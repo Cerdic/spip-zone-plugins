@@ -1,7 +1,7 @@
 <div class="formulaire_spip formulaire_#FORM">
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-    <form name="formulaire_#FORM" method="post" action="#ENV{action}">
+    <form id="formulaire_#FORM" method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<fieldset>
 			<legend><:asso:ressources_libelle_acquisition:></legend>

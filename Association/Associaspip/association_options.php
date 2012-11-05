@@ -1589,7 +1589,7 @@ function association_selectionner_destinations($sel='', $exec='', $plus='', $lst
 		$res1 .= ' selected="selected"';
 		$res2 .= ' checked="checked"';
     }
-    $res1 .= '>'. _T('asso:toutes_destinations') .'</option><option disabled="disabled"><hr /></option>';
+    $res1 .= '>'. _T('asso:toutes_destinations') .'</option><option disabled="disabled"></option>';
     $res2 .= ' /><label for="destination_0">'._T('asso:toutes_destinations').'</label></div>';
     $res2 .= '<div class="choix"><hr /></div>';
     $intitule_destinations = array();
@@ -1609,7 +1609,7 @@ function association_selectionner_destinations($sel='', $exec='', $plus='', $lst
     $res1 .= '</select>'.$plus;
     $res2 .= ''.$plus;
     $res = ($lst?$res1:$res2);
-	return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>') : $res;
+	return $exec ? generer_form_ecrire($exec, $res.'<input type="submit" value="'. _T('asso:bouton_lister') .'" />') : $res;
 }
 
 /**
@@ -2005,7 +2005,7 @@ function association_bloc_suppression($type, $id, $retour='') {
 function association_bloc_filtres($liste_filtres, $exec='', $supplements='', $td=TRUE) {
 	$res = '<form method="get" action="'. ($exec?generer_url_ecrire($exec):'') .'">';
 	if ($exec)
-		$res .= "\n<input type='hidden' name='exec' value='$exec' />";
+		$res .= "\n<div><input type='hidden' name='exec' value='$exec' /></div>";
 	$res .= "\n<". ($td?'table width="100%"':'ul') .' class="asso_tablo_filtres">'. ($td?'<tr>':'');
 	foreach($liste_filtres as $filtre_selection =>$params) {
 		$res .= ($td?'<td':'<li') ." class='filtre_$filtre_selection'>". call_user_func_array("association_selectionner_$filtre_selection", association_recuperer_liste($params, FALSE) ) . ($td?'</td>':'</li>');
@@ -2017,7 +2017,7 @@ function association_bloc_filtres($liste_filtres, $exec='', $supplements='', $td
 	} else {
 		$res .= $supplements;
 	}
-	$res .= ($td?'<td':'<li') . ' class="boutons"><noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript></td>' . ($td?'</td>':'</li>');
+	$res .= ($td?'<td':'<li') . ' class="boutons"><input type="submit" value="'. _T('asso:bouton_lister') .'" />' . ($td?'</td>':'</li>');
 	return $res. ($td?'</tr></table':'</ul>') .">\n</form>\n";
 }
 

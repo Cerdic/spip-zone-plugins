@@ -1,22 +1,22 @@
-<div class="formulaire_spip formulaire_#FORM">
-    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-    <form name="formulaire_#FORM" method="post" action="#ENV{action}">
+<div class="formulaire_spip formulaire_#FORM">[
+    <p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>][
+    <p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form id="formulaire_#FORM" method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<ul>
-			<li class="editer_intitule">
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{intitule})</span>]
+			<li class="editer_intitule">[
+				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{intitule})</span>]
 				<label for="intitule"><:asso:libelle_intitule:></label>
-				<input name="intitule" type="text" [value="(#ENV{intitule})"] id="valeur" class="text" />
+				<input name="intitule" type="text" [value="(#ENV{intitule})"] id="intitule" class="text" />
 			</li>
-			<li class="editer_debut">
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{debut})</span>]
+			<li class="editer_debut">[
+				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{debut})</span>]
 				<label for="debut"><:asso:exercice_libelle_debut:></label>
 				<input name="debut" type="[(#HTML5|?{date,text})]" [value="(#ENV{debut})"] id="debut" class="date" />
 			</li>
-			<li class="editer_fin">
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{fin})</span>]
-				<label for="duree"><:asso:exercice_libelle_fin:></label>
+			<li class="editer_fin">[
+				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{fin})</span>]
+				<label for="fin"><:asso:exercice_libelle_fin:></label>
 				<input name="fin" type="[(#HTML5|?{date,text})]" [value="(#ENV{fin})"] id="fin" class="date" />
 			</li>
 			<INCLURE{fond=inc/saisir_commentaires, commentaire }>

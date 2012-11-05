@@ -1,7 +1,7 @@
 <div class="formulaire_spip formulaire_#FORM">
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-    <form name="formulaire_#FORM" method="post" action="#ENV{action}">
+    <form id="formulaire_#FORM" method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<fieldset>
 			<legend><:asso:prets_entete_reservation:></legend>
@@ -45,7 +45,7 @@
 				<INCLURE{fond=inc/saisir_membre, nom, id_auteur }>
 				<li class="editer_commentaire_sortie">
 					<label for="commentaire_sortie"><:asso:libelle_commentaire:></label>
-					<textarea name="commentaire_sortie" id="commentaire_sortie" rows="3">[(#ENV{commentaire_sortie})]</textarea>
+					<textarea name="commentaire_sortie" id="commentaire_sortie" rows="3" cols='64'>[(#ENV{commentaire_sortie})]</textarea>
 				</li>
 			</ul>
 		</fieldset>

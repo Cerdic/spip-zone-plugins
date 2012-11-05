@@ -1,7 +1,7 @@
 <div class="formulaire_spip formulaire_#FORM">
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-    <form name="formulaire_#FORM" method="post" action="#ENV{action}">
+    <form id="formulaire_#FORM" method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<ul>
 			<li class="editer_type_operation">
@@ -15,7 +15,7 @@
 						,
 							[(#ENV{id_compte}|oui) disabled="disabled"]
 						})]
-						id="type_operation_depense" onClick="remplirSelectImputation(#META{/association/classe_charges}); afficheDiv('label_imputation','label_depense','depense','label_journal_depense','mode_paiement','justification','destination'); cacheDiv('label_destination','label_depense_evaluee','label_journal_recette','recette');" />
+						id="type_operation_depense" onclick="remplirSelectImputation(#META{/association/classe_charges}); afficheDiv('label_imputation','label_depense','depense','label_journal_depense','mode_paiement','justification','destination'); cacheDiv('label_destination','label_depense_evaluee','label_journal_recette','recette');" />
 					<label for="type_operation_depense"><:asso:depense:></label>
 				<BOUCLE_type_operation_depense(ASSO_PLAN){active=1}{classe=#META{/association/classe_charges}}>
 				</BOUCLE_type_operation_depense>
@@ -28,7 +28,7 @@
 						,
 							[(#ENV{id_compte}|oui) disabled="disabled"]
 						})]
-						id="type_operation_recette" onClick="remplirSelectImputation(#META{/association/classe_produits}); afficheDiv('label_imputation','label_recette','recette','label_journal_recette','mode_paiement','justification','destination'); cacheDiv('label_destination','label_recette_evaluee','label_journal_depense','depense');" />
+						id="type_operation_recette" onclick="remplirSelectImputation(#META{/association/classe_produits}); afficheDiv('label_imputation','label_recette','recette','label_journal_recette','mode_paiement','justification','destination'); cacheDiv('label_destination','label_recette_evaluee','label_journal_depense','depense');" />
 					<label for="type_operation_recette"><:asso:recette:></label>
 				<BOUCLE_type_operation_recette(ASSO_PLAN){active=1}{classe=#META{/association/classe_produits}}>
 				</BOUCLE_type_operation_recette>
@@ -41,7 +41,7 @@
 						,
 							[(#ENV{id_compte}|oui) disabled="disabled"]
 						})]
-						id="type_operation_virement" onClick="remplirSelectImputation(#META{/association/classe_banques}); afficheDiv('label_destination','label_depense','depense','label_journal_depense','mode_paiement','justification'); cacheDiv('label_imputation','label_depense_evaluee','label_journal_recette','recette','destination');" />
+						id="type_operation_virement" onclick="remplirSelectImputation(#META{/association/classe_banques}); afficheDiv('label_destination','label_depense','depense','label_journal_depense','mode_paiement','justification'); cacheDiv('label_imputation','label_depense_evaluee','label_journal_recette','recette','destination');" />
 					<label for="type_operation_virement">Virement</label>
 				<BOUCLE_type_operation_virement(ASSO_PLAN){active=1}{classe=#META{/association/classe_banques}}>
 				</BOUCLE_type_operation_virement>
@@ -55,7 +55,7 @@
 							,
 							[(#ENV{id_compte}|oui) disabled="disabled"]
 						})]
-						id="type_operation_contribution_volontaire" onClick="remplirSelectImputation(#META{/association/classe_contributions_volontaires}); afficheDiv('label_imputation','label_depense_evaluee','label_recette_evaluee','depense','recette','justification','destination'); cacheDiv('label_destination','label_depense','label_recette','mode_paiement');" />
+						id="type_operation_contribution_volontaire" onclick="remplirSelectImputation(#META{/association/classe_contributions_volontaires}); afficheDiv('label_imputation','label_depense_evaluee','label_recette_evaluee','depense','recette','justification','destination'); cacheDiv('label_destination','label_depense','label_recette','mode_paiement');" />
 					<label for="type_operation_contribution_volontaire">Contrib. volontaire</label>
 				<BOUCLE_type_operation_contribution_volontaire(ASSO_PLAN){active=1}{classe=#META{/association/classe_contributions_volontaires}}>
 				</BOUCLE_type_operation_contribution_volontaire>

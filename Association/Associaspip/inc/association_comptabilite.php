@@ -85,9 +85,9 @@ function association_editeur_destinations($destinations, $defaut='') {
 		    $res .= '<li class="editer_montant_dest['.$idIndex.']"><input name="montant_dest['.$idIndex.']" value="'
 			. association_formater_nombre($destMontant)
 			. '" type="text" id="montant_dest['.$idIndex.']" class="number decimal price" /></li>'
-			. '<button class="destButton" type="button" onClick="addFormField(); return FALSE;">+</button>';
+			. '<button class="destButton" type="button" onclick="addFormField(); return FALSE;">+</button>';
 		    if ($idIndex>1) {
-			$res .= '<button class="destButton" type="button" onClick="removeFormField(\'#row'.$idIndex.'\'); return FALSE;">-</button>';
+			$res .= '<button class="destButton" type="button" onclick="removeFormField(\'#row'.$idIndex.'\'); return FALSE;">-</button>';
 		    }
 		}
 		$res .= '<ul></div>';
@@ -102,7 +102,7 @@ function association_editeur_destinations($destinations, $defaut='') {
 	    if (!$GLOBALS['association_metas']['unique_dest']) { // destinations multiples
 		$res .= '<li class="editer_montant_dest[1]"><input name="montant_dest[1]" value="'
 		    .'" type="text" id="montant_dest[1]"/></li>'
-		    . '</ul><button class="destButton" type="button" onClick="addFormField(); return FALSE;">+</button>';
+		    . '</ul><button class="destButton" type="button" onclick="addFormField(); return FALSE;">+</button>';
 	    }
 	    $res .= '</div>';
 	}
@@ -550,18 +550,18 @@ function association_liste_totaux_comptes_classes($classes, $prefixe='', $direct
     }
     $titre = $prefixe.'_'. ( ($direction) ? (($direction<0)?'depenses':'recettes') : 'soldes' );
     echo "<table width='100%' class='asso_tablo' id='asso_tablo_$titre'>\n";
-    echo "<thead>\n<tr>";
-    echo '<th width="10">&nbsp;</td>';
-    echo '<th width="30">&nbsp;</td>';
+    echo "\n<tr>";
+    echo '<th style="width:10px">&nbsp;</th>';
+    echo '<th style="width:30px">&nbsp;</th>';
     echo '<th>'. _T("asso:$titre") .'</th>';
     if ($direction) { // mode liste comptable : charge, produit, actifs, passifs
-	echo '<th width="80">&nbsp;</th>';
+	echo '<th style="width:80px">&nbsp;</th>';
     } else { // mode liste standard : contributions volontaires et autres
-	echo '<th width="80">'. _T("asso:$prefixe".'_recettes') .'</th>';
-	echo '<th width="80">'. _T("asso:$prefixe".'_depenses') .'</th>';
+	echo '<th style="width:80px">'. _T("asso:$prefixe".'_recettes') .'</th>';
+	echo '<th style="width:80px">'. _T("asso:$prefixe".'_depenses') .'</th>';
 	// echo '<th width="80">'. _T("asso:$prefixe".'_solde') .'</th>';
     }
-    echo "</tr>\n</thead><tbody>";
+    echo "</tr>\n";
     $total_valeurs = $total_recettes = $total_depenses = 0;
     $chapitre = '';
     $i = 0;
@@ -595,7 +595,7 @@ function association_liste_totaux_comptes_classes($classes, $prefixe='', $direct
 #	    }
 	}
     }
-    echo "</tbody><tfoot>\n<tr>";
+    echo "\n<tr>";
     echo '<th colspan="2">&nbsp;</th>';
     echo '<th class="text">'. _T("asso:$prefixe".'_total') .'</th>';
     if ($direction) { // mode liste comptable
@@ -605,7 +605,7 @@ function association_liste_totaux_comptes_classes($classes, $prefixe='', $direct
 	echo '<th class="decimal">'. association_formater_nombre($total_depenses) . '</th>';
 	// echo '<th class="decimal">'. association_formater_nombre($total_valeurs) . '</th>';
     }
-    echo "</tr>\n</tfoot>\n</table>\n";
+    echo "</tr>\n</table>\n";
     return $total_valeurs;
 }
 
@@ -620,18 +620,18 @@ function association_liste_totaux_comptes_classes($classes, $prefixe='', $direct
  */
 function association_liste_resultat_net($recettes, $depenses) {
     echo "<table width='100%' class='asso_tablo' id='asso_tablo_bilan_solde'>\n";
-    echo "<thead>\n<tr>";
-    echo '<th width="10">&nbsp;</td>';
-    echo '<th width="30">&nbsp;</td>';
+    echo "<tr>";
+    echo '<th style="width: 10px">&nbsp;</th>';
+    echo '<th style="width: 30px">&nbsp;</th>';
     echo '<th>'. _T('asso:cpte_resultat_titre_resultat') .'</th>';
-    echo '<th width="80">&nbsp;</th>';
-    echo "</tr>\n</thead>";
-    echo "<tfoot>\n<tr>";
+    echo '<th style="width: 80px">&nbsp;</th>';
+    echo "</tr>";
+    echo "\n<tr>";
     echo '<th colspan="2">&nbsp;</th>';
     $res = $recettes-$depenses;
     echo '<th class="text">'. (($res<0) ? _T('asso:cpte_resultat_perte') : _T('asso:cpte_resultat_benefice')) .'</th>';
     echo '<th class="decimal">'. association_formater_nombre(abs($res)) .'</th>';
-    echo "</tr></tfoot></table>";
+    echo "</tr></table>";
 }
 
 function export_compte($ids, $mode)

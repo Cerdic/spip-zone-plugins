@@ -39,7 +39,7 @@ function balise_SELECTEUR_CODE_COMPTABLE_dyn($code) {
 			} else { // sinon c'est une definition de compte -> une option du select
 				$res .= '<option value="'.$index_code.'-'.$intitule.'"';
 				if ($code!='' && $code==$index_code) $res .=' selected="selected"';
-				$res .= '>'.$index_code.' - '.$intitule.'</option>';
+				$res .= '>'.$index_code.' - '.$intitule."</option>\n";
 			}
 		}
 		$res .= '</optgroup></select>';
