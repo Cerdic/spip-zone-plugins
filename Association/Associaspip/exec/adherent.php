@@ -82,7 +82,7 @@ function exec_adherent() {
 		}
 		if (test_plugin_actif('fpdf') AND $GLOBALS['association_metas']['recufiscal']) { // JUSTIFICATIFS : afficher le lien vers les justificatifs seulemeunt si active en configuration et si FPDF est actif
 			echo debut_cadre_relief('', TRUE, '', _T('asso:liens_vers_les_justificatifs') );
-			$data = array_map('array_shift', sql_allfetsel("DATE_FORMAT(date, '%Y')  AS annee", 'spip_asso_comptes', "id_journal=$id_auteur", 'annee', 'annee ASC') );
+			$data = array_map('array_shift', sql_allfetsel("DATE_FORMAT(date_operation, '%Y')  AS annee", 'spip_asso_comptes', "id_journal=$id_auteur", 'annee', 'annee ASC') );
 			foreach($data as $k => $annee) {
 				echo '<a href="'. generer_url_ecrire('pdf_fiscal', "id=$id_auteur&annee=$annee") .'">'.$annee.'</a> ';
 			}
@@ -95,7 +95,7 @@ function exec_adherent() {
 			}
 			$association_imputation = charger_fonction('association_imputation', 'inc');
 			echo voir_adherent_paiements(
-				array('id_compte, recette AS montant, date, justification, journal', 'spip_asso_comptes', $association_imputation('pc_cotisations', $id_auteur), '', 'date DESC, id_compte DESC', '0,10' ),
+				array('id_compte, recette AS montant, date_operation, justification, journal', 'spip_asso_comptes', $association_imputation('pc_cotisations', $id_auteur), '', 'date_operation DESC, id_compte DESC', '0,10' ),
 				$full,
 				'cotisation'
 			);

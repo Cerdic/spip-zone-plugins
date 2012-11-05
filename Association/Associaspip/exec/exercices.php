@@ -21,7 +21,7 @@ function exec_exercices() {
 		// notice
 		echo '';
 		// quelques stats sur les exrcices
-		echo association_totauxinfos_stats('tous', 'exercices', array('semaines'=>"TIMESTAMPDIFF(week,date_debut,date_fin)", 'mois'=>"TIMESTAMPDIFF(month,debut,fin)") );
+		echo association_totauxinfos_stats('tous', 'exercices', array('semaines'=>"TIMESTAMPDIFF(week,date_debut,date_fin)", 'mois'=>"TIMESTAMPDIFF(month,date_debut,date_fin)") );
 		//!\ portability issue on DATEDIFF vs TIMESTAMPDIFF
 		// MS SQL Server : "DATEDIFF(day,debut,fin)" & "DATEDIFF(week,debut,fin)" & "DATEDIFF(month,debut,fin)"
 		// MySQL : "DATEDIFF(debut,fin)" & "TIMESTAMPDIFF(week,debut,fin)" & "TIMESTAMPDIFF(month,debut,fin)"
