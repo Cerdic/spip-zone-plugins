@@ -57,7 +57,7 @@
         #ACTION_FORMULAIRE{#ENV{action}}
         <ul>
         [(#GET{id_rub}|=={0}|?
-                {<:pb_selection:racine:>,
+                {<:selection_objet:racine:>,
                 [<li>(#INCLURE{fond=formulaires/inc-boutons_article_trub}{id_rubrique=#GET{id_rub}})</li>]
                 }
             )]

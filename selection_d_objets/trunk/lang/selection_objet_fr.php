@@ -5,28 +5,20 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// a
+	// A
 	'affichage_section' => 'Afficher dans :',
 	
-	// c
-	'choix_favoris' => 'Afficher comme favoris :',
+	// C
 	'configurations' => 'Configurations',	
 	
     //D
     'objet_destination_choisis'=>'Destination(s) choisie(s) :',
 	
 	//E
-	'explication_selection_rubrique_dest'=>'Choix des rubriques pouvant accueillir les objets sélectionnés',
-	// f
-	'favoris' => 'Favoris',	
+	'explication_selection_rubrique_dest'=>'Les rubriques ou pourront être affichés les objets sélectionnés',
+
 	
-	// o
-	'oui' => 'OUI',
-	
-	// n
-	'non' => 'NON',
-	
-	//r
+	//R
 	'racine' => 'Racine',
 	'rubriques_choisis' => 'Rubriques choisies :',
 	
@@ -34,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'selection_objet' => 'Sélection',
 	'selection_objets_pour' => 'Sélection objets pour',		
 	'selection_rubrique_dest' => 'Rubrique(s) de destination',
-    'selection_rubrique_objet' => 'Objets proposés pour la sélection',
+    'selection_rubrique_objet' => 'Objets qui peuvent être sélectionnés',
     'selection_objet_titre' => 'Selection d\'objets',
     
         // A
@@ -42,10 +34,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // I
     'icone_creer_selection_objet' => 'Sélectionner un objet',
-    'icone_modifier_selection_objet' => 'Modifier cet objet séléctionné',
-    'info_1_selection_objet' => 'Un objet séléctionné',
+    'icone_modifier_selection_objet' => 'Modifier cet objet sélectionné',
+    'info_1_selection_objet' => 'Un objet sélectionné',
     'info_aucun_selection_objet' => 'Aucun objet sélectionné',
-    'info_nb_selection_objets' => '@nb@ objets séléctionnés',
+    'info_nb_selection_objets' => '@nb@ objets sélectionnés',
     'info_selection_objets_auteur' => 'Les selection objets de cet auteur',
 
     // L
@@ -68,8 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'texte_creer_asselection_objetcier_objet' => 'Créer et associer un objet',
     'titre_langue_objet' => 'Langue de cet objet sélectionné',
     'titre_logo_selection_objet' => 'Logo de cet objet sélectionné',
-    'titre_objet' => 'Objet sélectionné',
-    'titre_selection_objets' => 'Selection d\'objets',
+    'titre_selection_objets' => 'Objet sélectionné',
     'titre_selection_objets_rubrique' => 'Objets sélectionnés de la rubrique',
     
 );
