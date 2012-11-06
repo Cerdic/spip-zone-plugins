@@ -34,5 +34,6 @@
 		<inclure>head.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;2.9]" />
+	<necessite id="saisies" />
 	<categorie>maintenance</categorie>
 </plugin>
