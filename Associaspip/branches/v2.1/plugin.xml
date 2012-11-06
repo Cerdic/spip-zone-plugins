@@ -7,7 +7,7 @@
 	<version>2.1.0</version>
 	<version_base>47731</version_base>
 	<meta>association_metas</meta>
-	<etat>dev</etat>
+	<etat>stable</etat>
 	<description>Gestion d'associations</description>
 	<prefix>association</prefix>	
 	<install>base/association_gestion.php</install>
