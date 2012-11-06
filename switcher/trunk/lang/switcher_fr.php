@@ -5,9 +5,11 @@
 
     $GLOBALS[$GLOBALS['idx_lang']] = array(
         'configurer_switcher' => 'Configurer le switcher',
-
+    
         'repertoires_alternatifs_label' => 'Liste des squelettes alternatifs',
+        'repertoires_alternatifs_explication' => 'Indiquez les repertoires contenant vos squeletts alternatifs, vous pouvez les sépararer avec ;',
 
         'switcher_activer_label' => 'Activer le switcher pour tout le monde',
+        'switcher_activer_explication' => 'Par défaut le switcher n\'est actif que pour les administrateurs. Activer l\'option rend public le switcher.'
     );
 ?>
