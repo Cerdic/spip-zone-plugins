@@ -698,4 +698,28 @@ $GLOBALS['association_maj'][66942] = array(
 	array('sql_alter', "TABLE spip_asso_comptes DROP date"),
 );
 
+// reorganisation des autorisations
+$GLOBALS['association_maj'][67499] = array(
+	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>13), 'id_groupe=12' ), // lister livres de comptes et etats comptables
+	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>43), 'id_groupe=41' ), // lister dons
+	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>41), 'id_groupe=40' ), // editer dons
+	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>53), 'id_groupe=51' ), // lister ventes
+	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>51), 'id_groupe=50' ), // editer ventes
+	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>66), 'id_groupe=63' ), // lister prets
+	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>64), 'id_groupe=62' ), // editer prets
+	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>63), 'id_groupe=61' ), // lister ressources
+	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>61), 'id_groupe=60' ), // editer ressources
+	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>23), 'id_groupe=21' ), // voir profil association
+	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>21), 'id_groupe=20' ), // editer profil association
+	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>35), 'id_groupe=33' ), // relancer membres
+	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>33), 'id_groupe=31' ), // voir profils membres
+	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>31), 'id_groupe=30' ), // editer membres
+	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>30), 'id_groupe=32' ), // synchroniser membres
+);
+
+// ajout de nouvelles autorisations
+$GLOBALS['association_maj'][67500] = array(
+	array('sql_insertq_multi', 'spip_asso_groupes', array( array('id_groupe'=>73), array('id_groupe'=>74), array('id_groupe'=>76), array('id_groupe'=>61), array('id_groupe'=>63), array('id_groupe'=>64), array('id_groupe'=>66), ), ),
+);
+
 ?>

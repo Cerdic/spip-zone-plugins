@@ -33,7 +33,7 @@ maj:2011-10-03; version:0.4.1; licence:GPL; copyleft:gilcot; -->]
 [(#REM)<!-- FICHE HISTORIQUE COTISATIONS -->]
 [(#GET{droit_acces}|=={oui }|oui)
 	<hr class="nettoyeur" />
-	[(#AUTORISER{associer_adherents,asso_comptes,#ID_COMPTE}|oui)
+	[(#AUTORISER{voir_compta,association,#ID_COMPTE}|oui)
 	[(#BOUTON_ACTION{
 		<:asso:adherent_label_ajouter_cotisation:>,
 		[(#URL_ECRIRE{ajout_cotisation}
@@ -54,7 +54,7 @@ maj:2011-10-03; version:0.4.1; licence:GPL; copyleft:gilcot; -->]
 	#SET{liste_activites, #GET{liste_activites}|push{#ID_ACTIVITE}}
 </BOUCLE_activites>
 [(#META{/association/activites}|=={on}|et{#GET{droit_acces}|=={oui }}|oui)
-	[(#AUTORISER{associer_adherents,asso_comptes,#ID_COMPTE}|oui)
+	[(#AUTORISER{voir_compta,association,#ID_COMPTE}|oui)
 	[(#BOUTON_ACTION{
 		<:asso:activite_titre_ajouter_inscriptions:>,
 		[(#URL_ECRIRE{ajout_participation}
@@ -79,7 +79,7 @@ maj:2011-10-03; version:0.4.1; licence:GPL; copyleft:gilcot; -->]
 	#SET{liste_achats, #GET{liste_achats}|push{#ID_VENTE}}
 </BOUCLE_achats>
 [(#META{/association/ventes}|=={on}|et{#GET{droit_acces}|=={oui }}|oui)
-	[(#AUTORISER{associer_adherents,asso_comptes,#ID_COMPTE}|oui)
+	[(#AUTORISER{voir_compta,association,#ID_COMPTE}|oui)
 	[(#BOUTON_ACTION{
 		<:asso:ajouter_une_vente:>,
 		[(#URL_ECRIRE{edit_vente}
@@ -104,7 +104,7 @@ maj:2011-10-03; version:0.4.1; licence:GPL; copyleft:gilcot; -->]
 	#SET{liste_dons, #GET{liste_dons}|push{#ID_DON}}
 </BOUCLE_dons>
 [(#META{/association/dons}|=={on}|et{#GET{droit_acces}|=={oui }}|oui)
-	[(#AUTORISER{associer_adherents,asso_comptes,#ID_COMPTE}|oui)
+	[(#AUTORISER{voir_compta,association,#ID_COMPTE}|oui)
 	[(#BOUTON_ACTION{
 		<:asso:ajouter_un_don:>,
 		[(#URL_ECRIRE{edit_don}

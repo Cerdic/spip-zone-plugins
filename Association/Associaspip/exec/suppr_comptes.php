@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_comptes() {
-	$r = association_controle_id('compte', 'asso_comptes', 'associer', 'comptes');
+	$r = association_controle_id('compte', 'asso_comptes', 'editer_compta', 'association');
 	if ($r) {
 		include_spip('inc/navigation_modules');
 		list($id_compte, $row) = $r;

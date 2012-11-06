@@ -20,7 +20,7 @@ maj:2011-10-05; version:0.7.1; licence:GPL; copyleft:gilcot; -->]
 #ANCRE_PAGINATION
 <table class="spip" align="#LANG_LEFT" widht="90%">
 		<col align="#LANG_RIGHT" />
-		[(#AUTORISER{associer_adherents,asso_comptes,#ID_COMPTE}|oui)
+		[(#AUTORISER{voir_compta,association,#ID_COMPTE}|oui)
 		<col align="#LANG_LEFT" />
 		]
 		<col align="#LANG_RIGHT" char="." />
@@ -29,14 +29,14 @@ maj:2011-10-05; version:0.7.1; licence:GPL; copyleft:gilcot; -->]
 		<col align="#LANG_LEFT" />
 		<col align="#LANG_LEFT" />
 		]
-		[(#AUTORISER{associer_adherents,asso_comptes,#ID_COMPTE}|oui)
+		[(#AUTORISER{voir_compta,association,#ID_COMPTE}|oui)
 		<col align="center" />
 		]
 	[<caption>(#ENV{titre}|replace{'@#@',#TOTAL_BOUCLE})</caption>]
 <thead>
 	<tr class="row_first">
 		<th><:asso:entete_date:></th>
-		[(#AUTORISER{associer_adherents,asso_comptes,#ID_COMPTE}|oui)
+		[(#AUTORISER{voir_compta,association,#ID_COMPTE}|oui)
 		<th><:asso:adherent_entete_justification:></th>
 		]
 		<th><:asso:entete_montant:></th>
@@ -45,7 +45,7 @@ maj:2011-10-05; version:0.7.1; licence:GPL; copyleft:gilcot; -->]
 		<th><:asso:adherent_entete_journal:></th>
 		<th><:asso:compte_entete_imputation:></th>
 		]
-		[(#AUTORISER{associer_adherents,asso_comptes,#ID_COMPTE}|oui)
+		[(#AUTORISER{voir_compta,association,#ID_COMPTE}|oui)
 		<th><:asso:entete_action:></th>
 		]
 	</tr>
@@ -57,7 +57,7 @@ maj:2011-10-05; version:0.7.1; licence:GPL; copyleft:gilcot; -->]
  {pagination #ENV{rpp,#META{/association/pagination_historiques,10}}} >
 	<tr id="compte#ID_COMPTE" class="[row_(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 		<td><span title="#DATE">[(#DATE|affdate)]</span></td>
-		[(#AUTORISER{associer_adherents,asso_comptes,#ID_COMPTE}|oui)
+		[(#AUTORISER{voir_compta,association,#ID_COMPTE}|oui)
 		<td>[(#JUSTIFICATION|propre)]</td>
 		]
 		<td>[(#RECETTE|>{0}|?{[<span title="+#RECETTE">(#VAL{'%.2n'}|money_format{#RECETTE})</span>],[<span title="-#DEPENSE">-(#VAL{'%.2n'}|money_format{#DEPENSE})</span>]})]</td>
@@ -66,7 +66,7 @@ maj:2011-10-05; version:0.7.1; licence:GPL; copyleft:gilcot; -->]
 		<td>#ID_JOURNAL</td>
 		<td>#IMPUTATION</td>
 		]
-		[(#AUTORISER{associer_adherents,asso_comptes,#ID_COMPTE}|oui)
+		[(#AUTORISER{voir_compta,association,#ID_COMPTE}|oui)
 		<td>
 			[(#BOUTON_ACTION{
 				[(#CHEMIN{img_pack/edit-12.gif}

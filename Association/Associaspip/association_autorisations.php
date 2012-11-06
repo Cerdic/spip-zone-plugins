@@ -208,7 +208,7 @@ function autoriser_association_voir_compta_dist($faire, $type, $id, $qui, $opt) 
  * Ceux qui peuvent voir les infos de l'association doivent avoir le bouton dans
  * l'espace privé avec l'interface normale
  * defaut : redacteurs.
- * groupes : 10,20.
+ * groupes : 10,20,21,23.
  */
 function autoriser_association_bouton_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser_association_voir_profil_dist($faire, $type, $id, $qui, $opt);
@@ -218,7 +218,7 @@ function autoriser_association_bouton_dist($faire, $type, $id, $qui, $opt) {
  * Ceux qui peuvent voir les infos de l'association doivent avoir le bouton dans
  * l'espace privé avec le plugin navigation prive (bando)
  * defaut : redacteurs.
- * groupes : 10,20.
+ * groupes : 10,20,21,23.
  */
 function autoriser_association_bando_bouton_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser_association_voir_profil_dist($faire, $type, $id, $qui, $opt);
@@ -227,25 +227,25 @@ function autoriser_association_bando_bouton_dist($faire, $type, $id, $qui, $opt)
 /**
  * Modifier le profil de l'association.
  * defaut : webmestre
- * groupes : 10,20.
+ * groupes : 10,20,21.
  */
 function autoriser_association_editer_profil_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut']=='0minirezo' && $qui['webmestre']=='oui') {
 		return TRUE;
 	}
-	return is_in_groups($qui['id_auteur'], array(20,10));
+	return is_in_groups($qui['id_auteur'], array(21,20,10));
 }
 
 /**
  * Voir le profil de l'association.
  * defaut : rédacteurs.
- * groupes : 20,21.
+ * groupes : 20,21,22,23.
  */
 function autoriser_association_voir_profil_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut']=='0minirezo' || $qui['statut']=='1comite') {
 		return TRUE;
 	}
-	return is_in_groups($qui['id_auteur'], array(21,20,13,12,11,10));
+	return is_in_groups($qui['id_auteur'], array(23,22,21,20,13,12,11,10));
 }
 
 /// 3 /// membres de l'association
@@ -260,21 +260,45 @@ function autoriser_associer_adherents_dist($faire, $type, $id, $qui, $opt) {
 }
 
 /**
- * Editer/exporter les informations des membres.
+ * Synchroniser les membres avec les auteurs SPIP.
  * defaut : admin non restreint.
  * groupe : 30.
+ */
+function autoriser_association_gerer_membres($faire, $type, $id, $qui, $opt) {
+	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
+		return TRUE;
+	}
+	return is_in_groups($qui['id_auteur'], 30);
+}
+
+/**
+ * Editer les informations des membres.
+ * defaut : admin non restreint.
+ * groupe : 30,31.
  */
 function autoriser_association_editer_membres($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
 		return TRUE;
 	}
-	return is_in_groups($qui['id_auteur'], 30); // c'est le groupe 30 qui a le pouvoir de modifier les infos de tout le monde
+	return is_in_groups($qui['id_auteur'], array(31,30));
+}
+
+/**
+ * Voir et exporter les informations des membres.
+ * defaut : admin non restreint.
+ * groupe : 30,31,32.
+ */
+function autoriser_association_exporter_membres($faire, $type, $id, $qui, $opt) {
+	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
+		return TRUE;
+	}
+	return is_in_groups($qui['id_auteur'], array(32,31,30));
 }
 
 /**
  * Voir la page des membres et leurs pages personnelle.
  * defaut : admin non restreint et membre en question.
- * groupe : 30,31.
+ * groupe : 30,31,32,33.
  */
 function autoriser_association_voir_membres($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
@@ -283,31 +307,19 @@ function autoriser_association_voir_membres($faire, $type, $id, $qui, $opt) {
 	if ($id == intval($GLOBALS['visiteur_session']['id_auteur'])) {
 		return TRUE;
 	}
-	return is_in_groups($qui['id_auteur'], array(31,30));
-}
-
-/**
- * Synchroniser les membres avec les auteurs SPIP.
- * defaut : admin non restreint.
- * groupes : 31,32.
- */
-function autoriser_association_synchroniser_membres($faire, $type, $id, $qui, $opt) {
-	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
-		return TRUE;
-	}
-	return is_in_groups($qui['id_auteur'], array(32,30));
+	return is_in_groups($qui['id_auteur'], array(33,32,31,30));
 }
 
 /**
  * Publiposter des messages (de rappels) aux membres.
  * defaut : admin non restreint.
- * groupes : 11,33.
+ * groupes : 11,30,32,35.
  */
 function autoriser_association_relancer_membres($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
 		return TRUE;
 	}
-	return is_in_groups($qui['id_auteur'], array(33,11)); // c'est le groupe 33 qui a le pouvoir de relancer les membres (est-ce que cela fait parti des messages envoyes par le secretaire ?), le 11 celui de reclamer les cotisations... (mais dans certaines associations il ne s'occupe pas de cet aspect administratif qui est laisse a la charge du secretaire avec qui il collabore sur ce point)
+	return is_in_groups($qui['id_auteur'], array(35,32,30,11)); // c'est le groupe 35 qui a le pouvoir de relancer les membres, le 32 celui de generer les listes et etiquettes... (est-ce que les relances font parti des messages envoyes par le secretaire ?), le 11 celui de reclamer les cotisations... (mais dans certaines associations il ne s'occupe pas de cet aspect administratif qui est laisse a la charge du secretaire avec qui il collabore sur ce point)
 }
 
 /**

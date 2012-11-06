@@ -37,7 +37,7 @@ function exec_adherents() {
 		raccourcis_association(array(), array(
 			'gerer_les_groupes' => array('annonce.gif', 'groupes', array('voir_groupes', 'association', 100) ), // l'id groupe passe en parametre est a 100 car ce sont les groupes definis par l'utilisateur et non ceux des autorisation qu'on liste dans cette page
 			'menu2_titre_relances_cotisations' => array('relance-24.png', 'edit_relances'.($id_groupe?"&groupe=$id_groupe":'').($statut_interne?"&statut_interne=$statut_interne":''), array('relancer_membres', 'association') ),
-			'synchronise_asso_membre_lien' => array('reload-32.png', 'synchroniser_asso_membres', array('synchroniser_membres', 'association') ),
+			'synchronise_asso_membre_lien' => array('reload-32.png', 'synchroniser_asso_membres', array('gerer_membres', 'association') ),
 		));
 		if ( test_plugin_actif('FPDF') && test_plugin_actif('COORDONNEES') && autoriser('relancer_membres', 'association') ) { // etiquettes
 			echo debut_cadre_enfonce('',TRUE);

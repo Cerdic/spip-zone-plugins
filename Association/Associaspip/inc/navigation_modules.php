@@ -29,11 +29,11 @@ function association_navigation_onglets($titre='', $top_exec='', $INSERT_HEAD=TR
 	$modules = pipeline('modules_asso', array(
 		'association' => array('asso:menu2_titre_association', 'assoc_qui.png', array('voir_profil', 'association'), ), // accueil
 		'adherents' => array('asso:menu2_titre_gestion_membres', 'annonce.gif', array('voir_membres', 'association'), ), // gestion des membres
-		'dons' => array('asso:menu2_titre_gestion_dons', 'dons-24.gif', array('associer', 'dons'), ), // gestion des dons
-		'ventes' => array('asso:menu2_titre_ventes_asso', 'ventes.gif', array('associer', 'ventes'), ), // gestion des ventes
-		'activites' => array('asso:menu2_titre_gestion_activites', 'activites.gif', array('associer', 'activites'), ), // gestion des activites
-		'ressources' => array('asso:menu2_titre_gestion_prets', 'pret-24.gif', array('associer', 'ressources'), ), // gestion des ressources
-		'comptes' => array('asso:menu2_titre_livres_comptes', 'finances-24.png', array('associer', 'comptes'), ), // compta
+		'dons' => array('asso:menu2_titre_gestion_dons', 'dons-24.gif', array('voir_dons', 'association'), ), // gestion des dons
+		'ventes' => array('asso:menu2_titre_ventes_asso', 'ventes.gif', array('voir_ventes', 'association'), ), // gestion des ventes
+		'activites' => array('asso:menu2_titre_gestion_activites', 'activites.gif', array('voir_activites', 'association'), ), // gestion des activites
+		'ressources' => array('asso:menu2_titre_gestion_prets', 'pret-24.gif', array('voir_ressources', 'association'), ), // gestion des ressources
+		'comptes' => array('asso:menu2_titre_livres_comptes', 'finances-24.png', array('voir_compta', 'association'), ), // compta
 	)); // Liste (en fait tableau PHP) des modules geres par le plugin, sous la forme : 'exec' => array("chaine:langue", "chemin/icone", array("autorisation", ...), )
 // Recuperation de la liste des ongles
 	$res = '';
