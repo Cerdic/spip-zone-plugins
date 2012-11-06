@@ -21,7 +21,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_selection_objet' => 'Un objet sélectionné',
 	'info_aucun_selection_objet' => 'Aucun objet sélectionné',
 	'info_nb_selection_objets' => '@nb@ objets sélectionnés',
-	'info_selection_objets_auteur' => 'Les selection objets de cet auteur',
 
 	// L
 	'label_descriptif' => 'Descriptif',
