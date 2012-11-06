@@ -1,4 +1,4 @@
-<BOUCLE_module(TRADLANG_MODULES){module?}{id_tradlang_module?}>
+<BOUCLE_module(TRADLANG_MODULES){id_tradlang_module?}{module?}>
 #SET{lang_orig,#ENV{lang_orig,#LANG_MERE}}
 #SET{str_mere,#ARRAY}
 #SET{str_cible,#ARRAY}
@@ -9,7 +9,7 @@
 <BOUCLE_revise(TRADLANGS){module}{lang=#LANG_MERE}>[(#SET{str_mere,[(#GET{str_mere}|push{#ID})]})] </BOUCLE_revise>
 #SET{total_mere,#GRAND_TOTAL}
 <p><:tradlang:nb_items_langue_mere{nb=#GET{total_mere}}:></p>
-	<BOUCLE_total_orig(TRADLANGS){module}{lang=#ENV{lang_orig}}{statut=OK}> </BOUCLE_total_orig>
+	<BOUCLE_total_orig(TRADLANGS){module}{statut=OK}{lang=#ENV{lang_orig}}> </BOUCLE_total_orig>
 		[(#GRAND_TOTAL|<{#GET{total_mere}})
 			#SET{compte_langue_orig,#GRAND_TOTAL}
 			#SET{lang_orig,#LANG_MERE}
@@ -30,15 +30,15 @@
 	</div>
 <//B_revise>
 
-<BOUCLE_total_item(TRADLANGS){module}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}>[(#SET{str_cible,#GET{str_cible}|push{#ID}})] </BOUCLE_total_item>
+<BOUCLE_total_item(TRADLANGS){module}{id IN #GET{str_mere}}{lang=#ENV{lang_cible}}>[(#SET{str_cible,#GET{str_cible}|push{#ID}})] </BOUCLE_total_item>
 #SET{total_cible,#GRAND_TOTAL}</B_total_item>#SET{total_cible,0}<//B_total_item>
-<BOUCLE_total_item_ok(TRADLANGS){module}{statut=OK}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}> </BOUCLE_total_item_ok>
+<BOUCLE_total_item_ok(TRADLANGS){module}{id IN #GET{str_mere}}{statut=OK}{lang=#ENV{lang_cible}}> </BOUCLE_total_item_ok>
 #SET{total_ok,#GRAND_TOTAL}
 </B_total_item_ok>#SET{total_ok,0}<//B_total_item_ok>
-<BOUCLE_total_item_new(TRADLANGS){module}{statut=NEW}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}> </BOUCLE_total_item_new>
+<BOUCLE_total_item_new(TRADLANGS){module}{id IN #GET{str_mere}}{statut=NEW}{lang=#ENV{lang_cible}}> </BOUCLE_total_item_new>
 #SET{total_new,#GRAND_TOTAL}
 </B_total_item_new>#SET{total_new,0}<//B_total_item_new>
-<BOUCLE_total_item_modif(TRADLANGS){module}{statut=MODIF}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}> </BOUCLE_total_item_modif>
+<BOUCLE_total_item_modif(TRADLANGS){module}{id IN #GET{str_mere}}{statut=MODIF}{lang=#ENV{lang_cible}}> </BOUCLE_total_item_modif>
 #SET{total_modif,#GRAND_TOTAL}
 </B_total_item_modif>#SET{total_modif,0}<//B_total_item_modif>
 #SET{percent_ok,#GET{total_ok}|div{#GET{total_mere}}|mult{100}|floor}
@@ -103,7 +103,7 @@
 	<div class="actions"><p class="filtrer"><:tradlang:info_filtrer_status:>
 	[(#ENV{statut}|oui)<a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,''}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="ajax bouton"><:tradlang:lien_aucun_status:></a><span class="sep"> | </span>]
 	[(#ENV{statut}|non)<:tradlang:lien_aucun_status:><span class="sep"> | </span>]]
-<BOUCLE_statut(TRADLANGS){module}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{fusion statut}{'<span class="sep"> | </span>'}>
+<BOUCLE_statut(TRADLANGS){module}{id IN #GET{str_mere}}{lang=#ENV{lang_cible}}{fusion statut}{'<span class="sep"> | </span>'}>
 [(#GRAND_TOTAL|>{1}|oui)
 	[(#STATUT|!={#ENV{statut}}|oui)<a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,#STATUT}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="ajax bouton">#STATUT</a>]
 	[(#STATUT|!={#ENV{statut}}|non)#STATUT]
@@ -167,10 +167,10 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_revise_inexistants(TRADLANGS){module}{lang=#LANG_MERE}{id !IN #GET{str_cible}}>
+	<BOUCLE_revise_inexistants(TRADLANGS){module}{id !IN #GET{str_cible}}{lang=#LANG_MERE}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 		<td>#ID</td>
-		<BOUCLE_revise_inexistants_orig(TRADLANGS){module}{lang=#GET{lang_orig}}{id=#ID}>
+		<BOUCLE_revise_inexistants_orig(TRADLANGS){module}{id=#ID}{lang=#GET{lang_orig}}>
 		<td style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|entites_html|nl2br)]</td>
 		</BOUCLE_revise_inexistants_orig>
 		<td style="text-align:#LANG_LEFT;" dir="#LANG_DIR"><:tradlang:str_existe_pas_in_langue:></td>
@@ -207,7 +207,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_revise_en_trop(TRADLANGS){module}{lang=#ENV{lang_cible}}{!id IN #GET{str_mere}}>
+	<BOUCLE_revise_en_trop(TRADLANGS){module}{!id IN #GET{str_mere}}{lang=#ENV{lang_cible}}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 		<td>#ID</td>
 		<td style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|entites_html|nl2br)]</td>
@@ -249,10 +249,10 @@
 	</thead>
 	<tbody>
 	[(#REM)on n'affiche que les id qui existent dans la langue mère] 
-	<BOUCLE_revise_cible(TRADLANGS tradlang_modules){module}{statut ?}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{tri #ENV{par,statut},#GET{defaut_tri}}{par id}>
+	<BOUCLE_revise_cible(TRADLANGS tradlang_modules){module}{id IN #GET{str_mere}}{statut ?}{lang=#ENV{lang_cible}}{tri #ENV{par,statut},#GET{defaut_tri}}{par id}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})] statut_[(#STATUT|strtolower)]" id="tradlang-#ID_TRADLANG">
 		<td class="code_langue">#ID</td>
-		<BOUCLE_revise_orig(TRADLANGS){module}{lang=#GET{lang_orig,#LANG_MERE}}{id=#ID}>
+		<BOUCLE_revise_orig(TRADLANGS){module}{id=#ID}{lang=#GET{lang_orig,#LANG_MERE}}>
 		<td class="origine" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html|nl2br)]</td>
 		</BOUCLE_revise_orig>
 		<td class="origine" style="text-align:#LANG_LEFT;" dir="#LANG_DIR"><:tradlang:str_existe_plus:></td>

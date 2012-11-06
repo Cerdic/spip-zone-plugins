@@ -53,11 +53,11 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_recherche_tradlang(TRADLANGS tradlang_modules){recherche?}{id_tradlang_module?}{module?}{statut?}{lang==^#ENV{lang_string,.*}$}{tri #GET{par},#GET{defaut_tri}}{pagination #ENV{pagination,20}}>
+	<BOUCLE_recherche_tradlang(TRADLANGS tradlang_modules){id_tradlang_module?}{module?}{statut?}{lang==^#ENV{lang_string,.*}$}{recherche?}{tri #GET{par},#GET{defaut_tri}}{pagination #ENV{pagination,20}}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})] statut_[(#STATUT|strtolower)]">
 		<td>#ID</td>
 		<td>#NOM_MOD</td>
-		<BOUCLE_revise_orig(TRADLANGS){lang=#LANG_MERE}{id=#ID}{0,1}>
+		<BOUCLE_revise_orig(TRADLANGS){id=#ID}{lang=#LANG_MERE}{0,1}>
 		#SET{id_lang_mere,#ID_TRADLANG}
 		<td class="status[_(#STATUT|strtolower)]">[(#STR**|entites_html|nl2br)]</td>
 		</BOUCLE_revise_orig>

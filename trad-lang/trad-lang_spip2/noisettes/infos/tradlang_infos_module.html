@@ -61,11 +61,11 @@
 		<div class="modif" style="left: #GET{percent_ok}px; width: #GET{percent_modif}px"></div>
 		<div class="new" style="left: [(#GET{percent_ok}|plus{#GET{percent_modif}})]px; width: #GET{percent_new}px"> </div>
 	</div>
-	<BOUCLE_revise_inexistants(TRADLANGS){module}{lang=#LANG_MERE}{!id IN #GET{str_cible}}> </BOUCLE_revise_inexistants>
+	<BOUCLE_revise_inexistants(TRADLANGS){module}{!id IN #GET{str_cible}}{lang=#LANG_MERE}> </BOUCLE_revise_inexistants>
 	[(#SET{nb_manquant,#TOTAL_BOUCLE})]  #SET{update,oui}
 	<div class="notice">[(#GET{nb_manquant}|singulier_ou_pluriel{tradlang:item_manquant,tradlang:items_manquants})]</div>
 	</B_revise_inexistants>
-	<BOUCLE_total_item_trop(TRADLANGS){module}{lang=#LANG}{id !IN #GET{str_mere}}> </BOUCLE_total_item_trop>
+	<BOUCLE_total_item_trop(TRADLANGS){module}{id !IN #GET{str_mere}}{lang=#LANG}> </BOUCLE_total_item_trop>
 	#SET{nb_trop,#TOTAL_BOUCLE} #SET{update,oui}
 	<div class="notice"><:tradlang:items_en_trop{nb=#GET{nb_trop}}:></div></B_total_item_trop>
 	[(#GET{update}|=={oui}|oui)
