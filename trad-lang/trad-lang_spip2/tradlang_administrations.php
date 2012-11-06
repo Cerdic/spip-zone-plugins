@@ -74,6 +74,9 @@ function tradlang_upgrade($nom_meta_base_version,$version_cible){
 	$maj['0.4.5'] = array(
 		array('sql_alter',"TABLE spip_tradlangs ADD INDEX id_tradlang_module (id_tradlang_module)"),
 	);
+	$maj['0.4.6'] = array(
+		array('sql_alter',"TABLE spip_tradlangs ADD INDEX statut (statut)"),
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

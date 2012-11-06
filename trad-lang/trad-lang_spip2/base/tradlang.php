@@ -90,7 +90,8 @@ function tradlang_declarer_tables_objets_sql($tables){
 			"INDEX" => "id",
 			"INDEX" => "module",
 			"INDEX" => "module,lang",
-			"INDEX" => "id_tradlang_module"
+			"INDEX" => "id_tradlang_module",
+			"INDEX" => "statut"
 		),
 		'join' => array(
 			"id_tradlang"=>"id_tradlang",
