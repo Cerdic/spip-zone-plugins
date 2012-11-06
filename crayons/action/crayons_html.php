@@ -190,7 +190,7 @@ class Crayon {
 
 	// recuperer les elements de style
 	function css() {
-		foreach(array('color', 'font-size', 'font-family', 'font-weight', 'line-height', 'text-align') as $property) {
+		foreach(array('color', 'font-size', 'font-family', 'font-weight', 'line-height', 'min-height', 'text-align') as $property) {
 			if (null !== ($p = _request($property)))
 				$this->styles[] = "$property:$p;";
 		}
