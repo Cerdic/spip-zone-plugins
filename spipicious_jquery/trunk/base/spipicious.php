@@ -43,8 +43,8 @@ function spipicious_declarer_tables_principales($tables_principales){
 		"PRIMARY KEY"	=> "id_mot, id_auteur, objet, id_objet",
 		"KEY id_mot" => "id_mot",
 		"KEY id_auteur" => "id_auteur",
-		"KEY id_auteur" => "objet",
-		"KEY id_auteur" => "id_objet");
+		"KEY objet" => "objet",
+		"KEY id_objet" => "id_objet");
 
 	$tables_principales['spip_spipicious'] = array(
 		'field' => &$spip_spipicious,
