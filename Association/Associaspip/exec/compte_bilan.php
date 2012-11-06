@@ -32,7 +32,7 @@ function exec_compte_bilan() {
 			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "$ids[type_periode]=$ids[id_periode]".($ids['destination']?"&destination=$ids[destination]":'')) ),
 #			'annexe_titre_general' => array('finances-24.png', array('annexe', "$ids[type_periode]=$ids[id_periode]".($ids['destination']?"&destination=$ids[destination]":'')) ),
 		));
-		if(autoriser('associer', 'export_comptes')) { // on peut exporter : pdf, csv, xml, ...
+		if(autoriser('voir_compta', 'association')) { // on peut exporter : pdf, csv, xml, ...
 			echo debut_cadre_enfonce('', TRUE);
 			echo '<h3>'. _T('asso:cpte_bilan_mode_exportation') .'</h3>';
 			if (test_plugin_actif('FPDF')) {  // impression en PDF : _T('asso:bouton_impression')

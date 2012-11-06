@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_vente() {
-	$r = association_controle_id('vente', 'asso_ventes', 'gerer_ventes', 'association');
+	$r = association_controle_id('vente', 'asso_ventes', 'editer_ventes', 'association');
 	if ($r) {
 		include_spip ('inc/navigation_modules');
 		list($id_vente, $vente) = $r;

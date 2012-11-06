@@ -117,7 +117,7 @@ function exec_prets() {
 				'duree' => array('asso:entete_duree', 'duree', $unite),
 				'date_retour' => array('asso:prets_entete_date_retour', 'date', 'dtend'),
 			), // entetes et formats des donnees
-			autoriser('gerer_prets', 'association') ? array(
+			autoriser('editer_prets', 'association') ? array(
 				array('suppr', 'pret', 'id=$$'),
 				array('edit', 'pret', 'id=$$'),
 			) : array(), // boutons d'action

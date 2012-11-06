@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_edit_ressource() {
-	if (!autoriser('gerer_ressources', 'association')) {
+	if (!autoriser('editer_ressources', 'association')) {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {

@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_activites() {
-	if (!autoriser('voir_profil', 'association')) {
+	if (!autoriser('voir_activites', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -109,7 +109,7 @@ function exec_activites() {
 				'quantites' => array('asso:entete_quantite', 'entier'),
 				'montants' => array('asso:entete_montant', 'prix', 'fee'),
 			), // entetes et formats des donnees
-			autoriser('voir_activites', 'association') ? array(
+			autoriser('voir_inscriptions', 'association') ? array(
 				array('act', 'activite_bouton_ajouter_inscription', 'creer-12.gif', 'edit_activite', 'id_evenement=$$'),
 				array('list', 'inscrits_activite', 'id=$$'),
 			) : array(), // boutons d'action

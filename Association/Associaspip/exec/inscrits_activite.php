@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_inscrits_activite() {
-	if (!autoriser('associer', 'activites')) {
+	if (!autoriser('voir_inscriptions', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -79,10 +79,10 @@ function exec_inscrits_activite() {
 				'prix_activite' => array('asso:entete_montant', 'prix', 'fees'),
 				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),
 			), // entetes et formats des donnees
-			array(
+			autoriser('editer_inscriptions', 'association') ? array(
 				array('suppr', 'activite', 'id=$$'),
 				array('paye', 'edit_activite', 'id=$$'),
-			), // boutons d'action
+			) : array(), // boutons d'action
 			'id_activite', // champ portant la cle des lignes et des boutons
 			array('pair', 'valide'), 'statut_paiement'
 		);

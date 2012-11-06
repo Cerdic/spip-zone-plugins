@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_activite() {
-	$r = association_controle_id('activite', 'asso_activites', 'gerer_activites', 'association');
+	$r = association_controle_id('activite', 'asso_activites', 'editer_inscriptions', 'association');
 	if ($r) {
 		include_spip ('inc/navigation_modules');
 		list($id_activite, $activite) = $r;

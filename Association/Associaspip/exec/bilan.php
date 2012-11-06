@@ -70,7 +70,7 @@ function exec_bilan() {
 			// TABLEAU EXPLOITATION
 			echo debut_cadre_relief('', TRUE, '', ($id_destination ? $intitule_destinations[$id_destination] : ($GLOBALS['association_metas']['destinations']?_T('asso:toutes_destination'):'') ) );
 			$solde = association_liste_totaux_comptes_classes($classes, 'cpte_resultat', 0, $ids['id_periode'], $id_destination);
-			if(autoriser('associer', 'export_comptes') && !$id_destination) { // on peut exporter : pdf, csv, xml, ...
+			if(autoriser('voir_compta', 'association') && !$id_destination) { // on peut exporter : pdf, csv, xml, ...
 				echo "<br /><table width='100%' class='asso_tablo' cellspacing='6' id='asso_tablo_exports'>\n";
 				echo '<tbody><tr>';
 				echo '<td><b>'. _T('asso:cpte_resultat_mode_exportation') .'</b></td>';

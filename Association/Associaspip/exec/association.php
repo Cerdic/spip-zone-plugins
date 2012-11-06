@@ -26,9 +26,9 @@ function exec_association() {
 			'editer_asso_metas_utilisateur_lien' => array('assoc_qui.png', 'editer_asso_metas_utilisateur', array('editer_profil', 'association'), ),
 			'categories_de_cotisations' => array('cotisation.png', 'categories', array('editer_profil', 'association'), ),
 			'gerer_les_autorisations' => array('annonce.gif', 'association_autorisations', array('gerer_autorisations', 'association'), ),
-			'plan_comptable' => array('plan_compte.png', 'plan_comptable', array('configurer_compta', 'association') ),
-			'destination_comptable' => array('euro-39.gif', 'destination', array('configurer_compta', 'association') && $GLOBALS['association_metas']['destinations'] ),
-			'exercices_budgetaires_titre' => array('calculatrice.gif', 'exercices', array('configurer_compta', 'association') ),
+			'plan_comptable' => array('plan_compte.png', 'plan_comptable', array('gerer_compta', 'association') ),
+			'destination_comptable' => array('euro-39.gif', 'destination', array('gerer_compta', 'association') && $GLOBALS['association_metas']['destinations'] ),
+			'exercices_budgetaires_titre' => array('calculatrice.gif', 'exercices', array('gerer_compta', 'association') ),
 		));
 		debut_cadre_association('assoc_qui.png', 'association_infos_contacts');
 		echo '<div class="vcard">';

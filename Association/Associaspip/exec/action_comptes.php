@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_action_comptes() {
-	if (!autoriser('associer', 'comptes')) {
+	if (!autoriser('editer_compta', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

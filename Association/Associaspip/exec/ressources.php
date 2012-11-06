@@ -111,7 +111,7 @@ function exec_ressources() {
 				'ud' => array('asso:entete_duree', 'duree', 1),
 				'prix_caution' => array('asso:ressources_entete_caution', 'prix', 'guarantee'),
 			), // entetes et formats des donnees
-			autoriser('gerer_ressources', 'association') ? array(
+			autoriser('editer_ressources', 'association') ? array(
 				array('suppr', 'ressource', 'id=$$'),
 				array('edit', 'ressource', 'id=$$'),
 				array('list', 'prets', 'id=$$'),

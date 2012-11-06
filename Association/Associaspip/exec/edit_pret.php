@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_edit_pret() {
-	if (!autoriser('gerer_prets', 'association')) {
+	if (!autoriser('editer_prets', 'association')) {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {

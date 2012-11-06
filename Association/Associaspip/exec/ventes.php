@@ -81,7 +81,7 @@ function exec_ventes() {
 				'prix_vente' => array('asso:entete_montant', 'prix', 'purchase cost offer'),
 //				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),
 			), // entetes et formats des donnees
-			autoriser('gerer_ventes', 'association') ? array(
+			autoriser('editer_ventes', 'association') ? array(
 				array('suppr', 'vente', 'id=$$'),
 				array('edit', 'vente', 'id=$$'),
 			) : array(), // boutons d'action

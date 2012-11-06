@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_destination() {
-	$r = association_controle_id('destination', 'asso_destination', 'configurer_compta', 'association');
+	$r = association_controle_id('destination', 'asso_destination', 'gerer_compta', 'association');
 	if ($r) {
 		include_spip ('inc/navigation_modules');
 		list($id_destination, $destination) = $r;

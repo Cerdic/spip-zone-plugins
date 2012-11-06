@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_plan() {
-	$r = association_controle_id('plan', 'asso_plan', 'configurer_compta', 'association');
+	$r = association_controle_id('plan', 'asso_plan', 'gerer_compta', 'association');
 	if ($r) {
 		include_spip ('inc/navigation_modules');
 		list($id_plan, $plan) = $r;

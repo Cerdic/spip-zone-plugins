@@ -73,7 +73,7 @@ function exec_dons() {
 //				'contrepartiet' => array('asso:argent', 'texte', 'propre'),
 //				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),
 			), // entetes et formats des donnees
-			autoriser('gerer_dons', 'association') ? array(
+			autoriser('editer_dons', 'association') ? array(
 				array('suppr', 'don', 'id=$$'),
 				array('edit', 'don', 'id=$$'),
 			) : array(), // boutons d'action
