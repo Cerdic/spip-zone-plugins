@@ -30,7 +30,7 @@ function gisgeom_header_prive($flux){
  * @return mixed
  */
 function gisgeom_recuperer_fond($flux){
-	if ($flux['args']['fond'] == 'formulaires/editer_gis') {
+	if ($flux['args']['fond'] == 'saisies/carte') {
 		$saisie = recuperer_fond('formulaires/inc-editer_gis-geom',$flux['data']['contexte']);
 		$flux['data']['texte'] = preg_replace('%<!--extra-->%is', '$0'.$saisie, $flux['data']['texte']);
 	}

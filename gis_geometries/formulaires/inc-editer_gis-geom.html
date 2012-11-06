@@ -5,7 +5,7 @@
 	[(#SAISIE{hidden,type,
 		defaut='',
 		obligatoire=oui})]
-	[(#ENV{id_gis}|intval|non)
+	[(#ENV{id_gis}|intval|non|et{#ENV{noimport}|non})
 	<li class="fieldset import">
 	<fieldset><ul>
 		[(#SAISIE{input,import,
