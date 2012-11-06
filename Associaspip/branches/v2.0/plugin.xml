@@ -1,10 +1,10 @@
 <plugin>
 	<nom>Associaspip</nom>
 	<auteur>Bernard Blazin, Fran&#231;ois de Montlivault, Emmanuel Saint-James</auteur>
-	<version>1.0.0</version>
+	<version>2.0.0</version>
 	<version_base>42024</version_base>
 	<meta>association_metas</meta>
-	<etat>stable</etat>
+	<etat>test</etat>
 	<slogan>Gestion d'associations</slogan>
 	<description>Gestion d'associations</description>
 	<prefix>association</prefix>	

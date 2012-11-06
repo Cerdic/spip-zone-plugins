@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Associaspip</nom>
 	<auteur>Bernard Blazin, Fran&#231;ois de Montlivault</auteur>
-	<version>0.7.0</version>
+	<version>1.9.2</version>
 	<etat>test</etat>
 	<slogan>Gestion d'associations</slogan>
 	<description>Gestion de petites associations.</description>
