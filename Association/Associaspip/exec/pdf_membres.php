@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 function exec_pdf_membres() {
 // on s'assure qu'il n'y ai pas d'id associe a la demande d'autorisation
 // sur voir_membres car on les consulte tous
-	if (!autoriser('voir_membres', 'association', 0) OR !test_plugin_actif('fpdf')) {
+	if (!autoriser('exporter_membres', 'association') OR !test_plugin_actif('fpdf')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

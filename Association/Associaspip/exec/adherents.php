@@ -39,7 +39,7 @@ function exec_adherents() {
 			'menu2_titre_relances_cotisations' => array('relance-24.png', 'edit_relances'.($id_groupe?"&groupe=$id_groupe":'').($statut_interne?"&statut_interne=$statut_interne":''), array('relancer_membres', 'association') ),
 			'synchronise_asso_membre_lien' => array('reload-32.png', 'synchroniser_asso_membres', array('gerer_membres', 'association') ),
 		));
-		if ( test_plugin_actif('FPDF') && test_plugin_actif('COORDONNEES') && autoriser('relancer_membres', 'association') ) { // etiquettes
+		if ( test_plugin_actif('FPDF') && test_plugin_actif('COORDONNEES') && autoriser('exporter_membres', 'association') ) { // etiquettes
 			echo debut_cadre_enfonce('',TRUE);
 			echo recuperer_fond('prive/editer/imprimer_etiquettes', array(
 				'statut_interne' => $statut_interne,
@@ -65,7 +65,8 @@ function exec_adherents() {
 			$champsExclus[] = 'prenom';
 		if ( !$GLOBALS['association_metas']['id_asso'] )
 			$champsExclus[] = 'id_asso';
-		echo association_bloc_listepdf('membre', array('where_adherents'=>$where_adherents, 'jointure_adherents'=>$jointure_adherents, 'statut_interne'=>$statut_interne), 'adherent_libelle_', $champsExclus, TRUE);
+		if ( autoriser('exporter_membres', 'association') )
+			echo association_bloc_listepdf('membre', array('where_adherents'=>$where_adherents, 'jointure_adherents'=>$jointure_adherents, 'statut_interne'=>$statut_interne), 'adherent_libelle_', $champsExclus, TRUE);
 		debut_cadre_association('annonce.gif', 'adherent_titre_liste_actifs');
 		// FILTRES
 		filtres_association(array(

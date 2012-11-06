@@ -256,7 +256,7 @@ function autoriser_association_voir_profil_dist($faire, $type, $id, $qui, $opt) 
  * groupe : aucun.
  */
 function autoriser_associer_adherents_dist($faire, $type, $id, $qui, $opt) {
-	return ($qui['statut']=='0minirezo' && !$qui['restreint']);
+	return autoriser_association_gerer_membres_dist($faire, $type, $id, $qui, $opt);
 }
 
 /**
@@ -264,7 +264,7 @@ function autoriser_associer_adherents_dist($faire, $type, $id, $qui, $opt) {
  * defaut : admin non restreint.
  * groupe : 30.
  */
-function autoriser_association_gerer_membres($faire, $type, $id, $qui, $opt) {
+function autoriser_association_gerer_membres_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
 		return TRUE;
 	}
@@ -274,40 +274,40 @@ function autoriser_association_gerer_membres($faire, $type, $id, $qui, $opt) {
 /**
  * Editer les informations des membres.
  * defaut : admin non restreint.
- * groupe : 30,31.
+ * groupe : 10,11,30,31.
  */
-function autoriser_association_editer_membres($faire, $type, $id, $qui, $opt) {
+function autoriser_association_editer_membres_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
 		return TRUE;
 	}
-	return is_in_groups($qui['id_auteur'], array(31,30));
+	return is_in_groups($qui['id_auteur'], array(31,30,11,10));
 }
 
 /**
  * Voir et exporter les informations des membres.
  * defaut : admin non restreint.
- * groupe : 30,31,32.
+ * groupes : 11,30,31,32.
  */
-function autoriser_association_exporter_membres($faire, $type, $id, $qui, $opt) {
+function autoriser_association_exporter_membres_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
 		return TRUE;
 	}
-	return is_in_groups($qui['id_auteur'], array(32,31,30));
+	return is_in_groups($qui['id_auteur'], array(32,31,30,11));
 }
 
 /**
  * Voir la page des membres et leurs pages personnelle.
  * defaut : admin non restreint et membre en question.
- * groupe : 30,31,32,33.
+ * groupes : 10,11,12,30,31,32,33.
  */
-function autoriser_association_voir_membres($faire, $type, $id, $qui, $opt) {
+function autoriser_association_voir_membres_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
 		return TRUE;
 	}
 	if ($id == intval($GLOBALS['visiteur_session']['id_auteur'])) {
 		return TRUE;
 	}
-	return is_in_groups($qui['id_auteur'], array(33,32,31,30));
+	return is_in_groups($qui['id_auteur'], array(33,32,31,30,12,11,10));
 }
 
 /**
@@ -315,7 +315,7 @@ function autoriser_association_voir_membres($faire, $type, $id, $qui, $opt) {
  * defaut : admin non restreint.
  * groupes : 11,30,32,35.
  */
-function autoriser_association_relancer_membres($faire, $type, $id, $qui, $opt) {
+function autoriser_association_relancer_membres_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
 		return TRUE;
 	}
