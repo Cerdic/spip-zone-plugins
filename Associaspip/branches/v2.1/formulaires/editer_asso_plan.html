@@ -1,0 +1,71 @@
+<div class="formulaire_spip formulaire_demo">
+[<span class='erreur'>(#ENV*{message_erreur})</span>]
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<h3 class="legend"><:asso:edition_plan_comptable:></h3>
+		<li class="editer_classe">
+			<label for="classe"><strong><:asso:classe:></strong></label>
+			<select name="classe" id="classe" class="formo">
+				<option value="1" [(#ENV{classe}|=={1}|?{selected="selected"})]>1</option>
+				<option value="2" [(#ENV{classe}|=={2}|?{selected="selected"})]>2</option>
+				<option value="3" [(#ENV{classe}|=={3}|?{selected="selected"})]>3</option>
+				<option value="4" [(#ENV{classe}|=={4}|?{selected="selected"})]>4</option>
+				<option value="5" [(#ENV{classe}|=={5}|?{selected="selected"})]>5</option>
+				<option value="6" [(#ENV{classe}|=={6}|?{selected="selected"})]>6</option>
+				<option value="7" [(#ENV{classe}|=={7}|?{selected="selected"})]>7</option>
+				<option value="8" [(#ENV{classe}|=={8}|?{selected="selected"})]>8</option>
+				<option value="9" [(#ENV{classe}|=={9}|?{selected="selected"})]>9</option>
+				<option value="0" [(#ENV{classe}|=={0}|?{selected="selected"})]>0</option>
+			</select>
+		</li>
+
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{code}}
+		<li class="editer_code">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<label for="code"><strong><:asso:code:></strong></label>
+			<input type="text" name="code" [value="(#ENV{code})"] id="code" class='formo'/>
+		</li>
+
+		<li class="editer_intitule">
+			<label for="intitule"><strong><:asso:intitule:></strong></label>
+			<input type="text" name="intitule" [value="(#ENV{intitule})"] id="intitule"  class='formo'/>
+		</li>
+
+		<li class="editer_solde_anterieur">
+			<label for="solde_anterieur"><strong><:asso:solde_reporte_en_euros:></strong></label>
+			<input type="text" name="solde_anterieur" [value="(#ENV{solde_anterieur})"] id="solde_anterieur"  class='formo'/>
+		</li>
+
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{date_anterieure}}
+		<li class="editer_date_anterieure">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<label for="date_anterieure"><strong><:asso:date_report_aaa_mm_jj:></strong></label>
+			<input type="text" name="date_anterieure" [value="(#ENV{date_anterieure}|affdate{Y-m-d})"] id="date_anterieure"  class='formo'/>
+		</li>
+
+		<li class="editer_type_op">
+			<label for="type_op"><strong><:asso:direction_plan:></strong></label>
+			<select name="type_op" id="type_op" class="formo">
+				<option value="multi" [(#ENV{direction}|=={multi}|?{selected="selected"})]>multi</option>
+				<option value="credit" [(#ENV{direction}|=={credit}|?{selected="selected"})]>credit</option>
+				<option value="debit" [(#ENV{direction}|=={debit}|?{selected="selected"})]>debit</option>
+			</select>
+		</li>
+	
+		<li class="editer_active">
+			<label for="active"><strong><:asso:compte_active:></strong></label>
+			<input type="checkbox" name="active" [(#ENV{active}|?{checked="checked"})] id="active" />
+		</li>
+
+		<li class="editer_commentaire">
+			<label for="commentaire"><strong><:asso:commentaires:></strong></label>
+			<textarea rows="3" name="commentaire" id="commentaire"  class='formo'/>[(#ENV{commentaire})]</textarea>
+		</li>
+	</ul>
+
+<p class="boutons"><input type="submit" value="<:pass_ok:>" class="submit" /></p>
+
+</div>
+</form>
+</div>

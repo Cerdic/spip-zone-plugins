@@ -1,0 +1,63 @@
+<div class="formulaire_spip formulaire_demo">
+[<span class='erreur'>(#ENV*{message_erreur})</span>]
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<h3 class="legend"><:asso:ressources_titre_edition_ressources:></h3>
+
+		<li class="editer_code">
+			<label for="code"><strong><:asso:ressources_libelle_code:></strong></label>
+			<input type="text" name="code" [value="(#ENV{code})"] id="code"  class='formo'/>
+		</li>
+
+		<li class="editer_intitule">
+			<label for="intitule"><strong><:asso:ressources_libelle_intitule:></strong></label>
+			<input type="text" name="intitule" [value="(#ENV{intitule})"] id="intitule"  class='formo'/>
+		</li>
+
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{date_acquisition}}
+		<li class="editer_date_acquisition">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<label for="date_acquisition"><strong><:asso:ressources_libelle_date_acquisition:></strong></label>
+			<input type="text" name="date_acquisition" [value="(#ENV{date_acquisition}|affdate{Y-m-d})"] id="date_acquisition"  class='formo'/>
+		</li>
+
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{pu}}
+		<li class="editer_pu">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<label for="pu"><strong><:asso:ressources_libelle_prix_location:></strong></label>
+			<input type="text" name="pu" [value="(#ENV{pu})"] id="pu"  class='formo'/>
+		</li>
+
+		<li class="editer_statut">
+			<label for="statut"><strong><:asso:ressources_libelle_statut:></strong></label>
+			<div class="choix">
+				<input type='radio' class="radio" name='statut' value='ok' id='statut_ok'[ (#ENV{statut}|=={ok}|oui)checked="checked"] />
+				<label for='statut_ok'><:asso:ressources_libelle_statut_ok:></label>
+			</div>
+			<div class="choix">
+				<input type='radio' class="radio" name='statut' value='reserve' id='statut_reserve'[ (#ENV{statut}|=={reserve}|oui)checked="checked"] />
+				<label for='statut_reserve'><:asso:ressources_libelle_statut_reserve:></label>
+			</div>
+			<div class="choix">
+				<input type='radio' class="radio" name='statut' value='suspendu' id='statut_suspendu'[ (#ENV{statut}|=={suspendu}|oui)checked="checked"] />
+				<label for='statut_suspendu'><:asso:ressources_libelle_statut_suspendu:></label>
+			</div>
+			<div class="choix">
+				<input type='radio' class="radio" name='statut' value='sorti' id='statut_sorti'[ (#ENV{statut}|=={sorti}|oui)checked="checked"] />
+				<label for='statut_sorti'><:asso:ressources_libelle_statut_sorti:></label>
+			</div>
+		</li>
+
+		<li class="editer_commentaire">
+			<label for="commentaire"><strong><:asso:remarques:></strong></label>
+			<input type="text" name="commentaire" [value="(#ENV{commentaire})"] id="commentaire"  class='formo'/>
+		</li>
+
+	</ul>
+
+<p class="boutons"><input type="submit" value="<:pass_ok:>" class="submit" /></p>
+
+</div>
+</form>
+</div>

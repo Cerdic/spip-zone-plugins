@@ -1,0 +1,87 @@
+<div class="formulaire_spip formulaire_demo">
+[<span class='erreur'>(#ENV*{message_erreur})</span>]
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<h3 class="legend"><:asso:ressources_titre_mise_a_jour:></h3>
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{date_vente}}
+		<li class="editer_date_vente">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<label for="date_vente"><strong><:asso:date_aaaa_mm_jj:></strong></label>
+			<input type="text" name="date_vente" [value="(#ENV{date_vente}|affdate{Y-m-d})"] id="date_vente"  class='formo'/>
+		</li>
+
+		<li class="editer_article">
+			<label for="article"><strong><:asso:article:></strong></label>
+			<input type="text" name="article" [value="(#ENV{article})"] id="article"  class='formo'/>
+		</li>
+
+		<li class="editer_code">
+			<label for="code"><strong><:asso:code_de_l_article:></strong></label>
+			<input type="text" name="code" [value="(#ENV{code})"] id="code"  class='formo'/>
+		</li>
+
+		<li class="editer_acheteur">
+			<label for="acheteur"><strong><:asso:nom_de_l_acheteur:></strong></label>
+			<input type="text" name="acheteur" [value="(#ENV{acheteur})"] id="acheteur"  class='formo'/>
+		</li>
+
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{id_acheteur}}
+		<li class="editer_id_acheteur">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<label for="id_acheteur"><strong><:asso:nd_de_membre:></strong></label>
+			<input type="text" name="id_acheteur" [value="(#ENV{id_acheteur})"] id="id_acheteur"  class='formo'/>
+		</li>
+
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{quantite}}
+		<li class="editer_quantite">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<label for="quantite"><strong><:asso:quantite_achetee:></strong></label>
+			<input type="text" name="quantite" [value="(#ENV{quantite})"] id="quantite"  class='formo'/>
+		</li>
+
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{prix_vente}}
+		<li class="editer_prix_vente">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<label for="prix_vente"><strong><:asso:prix_de_vente_en_e__:></strong></label>
+			<input type="text" name="prix_vente" [value="(#ENV{prix_vente})"] id="prix_vente"  class='formo'/>
+		</li>
+
+		[(#ENV{classe_banques}|oui) <!-- si il n'a pas de classe banques definie, on ne propose pas de mode de paiement -->
+		<li class="editer_journal">
+			<INCLURE{fond=inc/mode_de_paiement, journal, classe_banques}>
+		</li>
+		]
+
+		<!-- si la variable destinations est assignee, on insere l'editeur de destinations -->
+		[#SET{erreurs,#ENV**{erreurs}|table_valeur{destinations}}
+		<li [ class="(#GET{erreurs}|oui)erreur"]>
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			(#ENV{destinations_on}|oui)#EDITEUR_DESTINATIONS
+		</li>]
+
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{date_envoi}}
+		<li class="editer_date_envoi">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<label for="date_envoi"><strong><:asso:envoye_le_aaaa_mm_jj:></strong></label>
+			<input type="text" name="date_envoi" [value="(#ENV{date_envoi}|affdate{Y-m-d})"] id="date_envoi"  class='formo'/>
+		</li>
+
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{frais_envoi}}
+		<li class="editer_frais_envoi">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<label for="frais_envoi"><strong><:asso:frais_d_envoi_en_e__:></strong></label>
+			<input type="text" name="frais_envoi" [value="(#ENV{frais_envoi})"] id="frais_envoi"  class='formo'/>
+		</li>
+
+		<li class="editer_commentaire">
+			<label for="commentaire"><strong><:asso:commentaires:></strong></label>
+			<input type="text" name="commentaire" [value="(#ENV{commentaire})"] id="commentaire"  class='formo'/>
+		</li>
+	</ul>
+
+<p class="boutons"><input type="submit" value="<:pass_ok:>" class="submit" /></p>
+
+</div>
+</form>
+</div>
