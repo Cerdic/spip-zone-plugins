@@ -70,11 +70,11 @@ function exec_plan_comptable() {
 		//Affichage de la table
 		echo "<table width='100%' class='asso_tablo' id='liste_asso_plan'>\n";
 		echo "<thead>\n<tr>";
-		echo '<th>'. _T('asso:classe') .'</th>';
-		echo '<th>'. _T('asso:entete_code') .'</th>';
-		echo '<th>'. _T('asso:entete_intitule') .'</th>';
-		echo '<th>'. _T('asso:solde_initial') .'</th>';
-		echo '<th>'. _T('asso:entete_date') .'</th>';
+		echo "\n<th>". _T('asso:classe') .'</th>';
+		echo "\n<th>". _T('asso:entete_code') .'</th>';
+		echo "\n<th>". _T('asso:entete_intitule') .'</th>';
+		echo "\n<th>". _T('asso:solde_initial') .'</th>';
+		echo "\n<th>". _T('asso:entete_date') .'</th>';
 		echo '<th colspan="2" class="actions">' . _T('asso:entete_actions') .'</th>';
 		echo "</tr>\n</thead><tbody>";
 		$query = sql_select('*', 'spip_asso_plan', 'classe LIKE '. sql_quote($classe) .' AND active=' . sql_quote($active), '', 'classe, code' );
@@ -85,20 +85,21 @@ function exec_plan_comptable() {
 			if ($classe!=$data['classe']) {
 				if ($i!=0) {
 					echo '<td colspan="8" style="border:0;"><hr style="color: #EEE;" /></td>';
-					echo '<tr>';
+					echo "</tr>\n<tr>";
 				} else {
 					$i++;
 				}
 				$classe = $data['classe'];
-				echo '<td class="integer">'. $data['classe'] .'</td>';
+				echo '<td class="integer">'. $data['classe'] ."</td>\n";
 			} else {
 				echo '<td> </td>';
 			}
-			echo '<td class="text">'.$data['code'].'</td>';
-			echo '<td class="text">'.$data['intitule'].'</td>';
-			echo '<td class="decimal">'. association_formater_prix($data['solde_anterieur']) .'</td>';
-			echo '<td class="date">'. association_formater_date($data['date_anterieure'], 'dtstart') .'</td>';
+			echo '<td class="text">'.$data['code']."</td>\n";
+			echo '<td class="text">'.$data['intitule']."</td>\n";
+			echo '<td class="decimal">'. association_formater_prix($data['solde_anterieur']) ."</td>\n";
+			echo '<td class="date">'. association_formater_date($data['date_anterieure'], 'dtstart') ."</td>\n";
 			echo association_bouton_suppr('plan', $data['id_plan']);
+			echo "\n";
 			echo association_bouton_edit('plan', $data['id_plan']);
 			echo "</tr>\n";
 		}

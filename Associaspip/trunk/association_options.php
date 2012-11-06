@@ -91,16 +91,19 @@ if (!defined('_ASSOCIASPIP_AUJOURDHUI_HORAIRE'))
  * @todo voir s'il est possible d'utiliser plutot la fonction bouton_action($libelle, $url, $class="", $confirm="", $title="") definie dans /ecrire/inc/filtres.php
  */
 function association_bouton_act($texte, $image, $script='', $exec_args='', $img_attrs='', $tag='td') {
-	$res = ($tag?"<$tag class='action'>":'');
-	$res .= ($script ? '<a href="'.generer_url_ecrire($script, $exec_args).'">' : '' );
 	$chemin = _DIR_PLUGIN_ASSOCIATION_ICONES.$image; // icone Associaspip
 	if ( !file_exists($chemin) )
 		$chemin = find_in_path($image); // icone alternative
-	$res .= '<img src="'.$chemin.'" alt="';
-	$res .= htmlspecialchars($texte ?association_langue($texte).'" title="'. association_langue($texte) : ' ' );
-	$res .= '" '.$img_attrs.' />';
-	$res .= ($script?'</a>':'');
-	return $res;
+	if ($texte) {
+		$texte = htmlspecialchars(association_langue($texte));
+		$texte = "\nalt=\"$texte\" title=\"$texte\"";
+	}
+	$res = "<img src=\"$chemin\"$texte $img_attrs />";
+	if ($script) {
+		$h = generer_url_ecrire($script, $exec_args);
+		$res = "<a href='$h'>$res</a>";
+	}
+	return $tag ? "<$tag class='action'>$res</$tag>" : $res;
 }
 
 /**
@@ -142,7 +145,7 @@ function association_bouton_list($objet, $args='', $tag='td') {
 			$titre = 'bouton_voir';
 			break;
 	}
-	$res = association_bouton_act($titre, 'voir-12.png', "$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#x2380;"', $tag);
+	$res = association_bouton_act($titre, 'voir-12.png', "$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12"', $tag);
 	return $res;
 }
 
@@ -150,7 +153,7 @@ function association_bouton_list($objet, $args='', $tag='td') {
  * bouton edit[ion|er] (modifi[cation|er])
  */
 function association_bouton_edit($objet, $args='', $tag='td') {
-	$res = association_bouton_act('bouton_modifier', 'edit-12.gif', "edit_$objet", is_numeric($args)?"id_$objet=$args":$args, 'width="12" height="12" alt="&#9088;"', $tag);
+	$res = association_bouton_act('bouton_modifier', 'edit-12.gif', "edit_$objet", is_numeric($args)?"id_$objet=$args":$args, 'width="12" height="12"', $tag);
 	return $res;
 }
 
@@ -158,7 +161,7 @@ function association_bouton_edit($objet, $args='', $tag='td') {
  * bouton suppr[ession|imer] (efface[ment|r])
  */
 function association_bouton_suppr($objet, $args='', $tag='td') {
-	$res = association_bouton_act('bouton_supprimer', 'suppr-12.gif', "suppr_$objet", is_numeric($args)?"id_$objet=$args":$args, 'width="12" height="12" alt="&#8999;" class="danger"', $tag);
+	$res = association_bouton_act('bouton_supprimer', 'suppr-12.gif', "suppr_$objet", is_numeric($args)?"id_$objet=$args":$args, 'width="12" height="12" class="danger"', $tag);
 	return $res;
 }
 
@@ -177,7 +180,7 @@ function association_bouton_paye($objet, $args='', $tag='td') {
 			$titre = ' '; // ??
 			break;
 	}
-	$res = association_bouton_act($titre, 'cotis-12.gif', "$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#164;"', $tag); // "ajout_$objet" jusqu'a ce que ajout_participation fusionne avec edit_activite
+	$res = association_bouton_act($titre, 'cotis-12.gif', "$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12"', $tag); // "ajout_$objet" jusqu'a ce que ajout_participation fusionne avec edit_activite
 	return $res;
 }
 
@@ -648,6 +651,7 @@ function association_formater_texte($texte, $filtre='', $css_class='', $html_spa
 function association_formater_puce($statut, $icone,  $acote='', $img_attrs='') {
 	if ( is_array($icone) )
 		$icone = $icone[$statut];
+	if (!$statut) $img_attrs .= " alt=' '";
 	return association_bouton_act($statut, 'puce-'.$icone.'.gif', '', '', $img_attrs, '').' '. association_langue($acote) ; // c'est comme un bouton... sans action/lien...
 }
 
@@ -1829,25 +1833,27 @@ function association_totauxinfos_stats($legende='', $sql_table_asso, $sql_champs
 		return FALSE;
 	$res = '<table width="100%" class="asso_infos">';
 	$res .= '<caption>'. _T('asso:totaux_moyens', array('de_par'=>_T("local:$legende"))) .'</caption><thead>';
-	$res .= '<tr class="row_first"> <th>&nbsp;</th>';
-	$res .= '<th title="'. _T('entete_stats_moy') .'">x&#772</th>'; // X <span style="font-size:75%;">X</span>&#772 <span style="text-decoration:overline;">X</span> X<span style="position:relative; bottom:1.0ex; letter-spacing:-1.2ex; right:1.0ex">&ndash;</span> x<span style="position:relative; bottom:1.0ex; letter-spacing:-1.2ex; right:1.0ex">&macr;</span>
-	$res .= '<th title="'. _T('entete_stats_mea') .'">&sigma;</th>'; // σ &sigma; &#963; &#x3C3;
+	$res .= "\n<tr class='row_first'>\n<th>&nbsp;</th>";
+	$res .= '<th title="'. _T('entete_stats_moy') .'">x&#772</th>';
+ // X <span style="font-size:75%;">X</span>&#772 <span style="text-decoration:overline;">X</span> X<span style="position:relative; bottom:1.0ex; letter-spacing:-1.2ex; right:1.0ex">&ndash;</span> x<span style="position:relative; bottom:1.0ex; letter-spacing:-1.2ex; right:1.0ex">&macr;</span>
+	$res .= '<th title="'. _T('entete_stats_mea') ."\">&sigma;</th>\n"; 
+// σ &sigma; &#963; &#x3C3;
 	if ($avec_extrema) {
 		$res .= '<th title="'. _T('entete_stats_min') .'">[&lt;</th>';
 		$res .= '<th title="'. _T('entete_stats_max') .'">&gt;]</th>';
 	}
-	$res .= '</tr>';
+	$res .= "</tr>\n";
 	$res .= '</thead><tbody>';
 	$compteur = 0;
 	foreach ($sql_champs as $libelle=>$champs) {
 		$stats = sql_fetsel("AVG($champs) AS valMoy, STDDEV($champs) AS ekrTyp, MIN($champs) AS valMin, MAX($champs) AS valMax ", "spip_asso_$sql_table_asso", $sql_criteres);
 		$res .= '<tr class="'. ($compteur%2?'row_odd':'row_even') .'">';
-		$res .= '<td class"text">'. association_langue((is_numeric($libelle)?$champs:$libelle)) .'</td>';
-		$res .= '<td class="'.($decimales_significatives?'decimal':'integer').'">'. association_formater_nombre($stats['valMoy'],$decimales_significatives) .'</td>';
-		$res .= '<td class="'.($decimales_significatives?'decimal':'integer').'">'. association_formater_nombre($stats['ekrTyp'],$decimales_significatives) .'</td>';
+		$res .= '<td class"text">'. association_langue((is_numeric($libelle)?$champs:$libelle)) ."</td>\n";
+		$res .= '<td class="'.($decimales_significatives?'decimal':'integer').'">'. association_formater_nombre($stats['valMoy'],$decimales_significatives) ."</td>\n";
+		$res .= '<td class="'.($decimales_significatives?'decimal':'integer').'">'. association_formater_nombre($stats['ekrTyp'],$decimales_significatives) ."</td>\n";
 		if ($avec_extrema) {
-			$res .= '<td class="'.($decimales_significatives?'decimal':'integer').'">'. association_formater_nombre($stats['valMin'],$decimales_significatives) .'</td>';
-			$res .= '<td class="'.($decimales_significatives?'decimal':'integer').'">'. association_formater_nombre($stats['valMax'],$decimales_significatives) .'</td>';
+			$res .= '<td class="'.($decimales_significatives?'decimal':'integer').'">'. association_formater_nombre($stats['valMin'],$decimales_significatives) ."</td>\n";
+			$res .= '<td class="'.($decimales_significatives?'decimal':'integer').'">'. association_formater_nombre($stats['valMax'],$decimales_significatives) ."</td>\n";
 		}
 		$res .= '</tr>';
 		$compteur++;
@@ -1873,27 +1879,24 @@ function association_totauxinfos_stats($legende='', $sql_table_asso, $sql_champs
  *   Les classes CSS sont utilisees comme cle des tables parce-qu'il ne doit y en avoir qu'une par ligne.
  */
 function association_totauxinfos_effectifs($legende='', $lignes, $decimales_significatives=0) {
-	if (!is_array($lignes) )
-		return FALSE;
+	if (!is_array($lignes) OR !$lignes)
+		return '';
 	$nbr_actuel = $nbr_total = 0;
 	$res = '<table width="100%" class="asso_infos">';
-	$res .= '<caption>'. _T('asso:totaux_nombres', array('de_par'=>_T("local:$legende"))) .'</caption><tbody>';
+	$res .= "\n<caption>". _T('asso:totaux_nombres', array('de_par'=>_T("local:$legende"))) ."</caption>\n";
 	foreach ($lignes as $classe_css=>$params) {
-		$res .= '<tr class="'.$classe_css.'">';
-		$res .= '<td class="text">'. $params[2]. association_langue($params[0]) .$params[3].'</td>';
+		$res .= "<tr class='$classe_css'>";
+		$res .= '<td class="text">'. $params[2]. association_langue($params[0]) .$params[3]."</td>\n";
 		$nbr_actuel = is_array($params[1]) ? call_user_func_array('sql_countsel', $params[1]) : $params[1] ;
-		$res .= '<td class="' .($decimales_significatives?'decimal':'integer') .'">'. association_formater_nombre($nbr_actuel, $decimales_significatives) .'</td>';
+		$res .= '<td class="' .($decimales_significatives?'decimal':'integer') .'">'. association_formater_nombre($nbr_actuel, $decimales_significatives) ."</td>\n";
 		$nbr_total += $nbr_actuel;
-		$res .= '</tr>';
+		$res .= "</tr>\n";
 	}
-	$res .= '</tbody>';
 	if ( count($lignes)>1 ) {
-		$res .= '<tfoot>';
-		$res .= '<tr><th class="text">'._T('asso:liste_nombre_total').'</th>';
+		$res .= '<tr><th class="text">'._T('asso:liste_nombre_total')."</th>\n";
 		$res .= '<th class="' .($decimales_significatives?'decimal':'integer') .'">'. association_formater_nombre($nbr_total, $decimales_significatives) .'</th></tr>';
-		$res .= '</tfoot>';
 	}
-	return $res.'</table>';
+	return $res."</table>\n";
 }
 
 /**
@@ -1913,27 +1916,27 @@ function association_totauxinfos_effectifs($legende='', $lignes, $decimales_sign
  */
 function association_totauxinfos_montants($legende='', $somme_recettes=0, $somme_depenses=0) {
 	$res = '<table width="100%" class="asso_infos">';
-	$res .= '<caption>'. _T('asso:totaux_montants', array('de_par'=>_T("local:$legende"))) .'</caption><tbody>';
+	$res .= '<caption>'. _T('asso:totaux_montants', array('de_par'=>_T("local:$legende"))) ."</caption><tbody>\n";
 	$recettes = is_array($somme_recettes) ? call_user_func_array('sql_getfetsel', $somme_recettes) : $somme_recettes ;
 #	if ($recettes) {
-		$res .= '<tr class="impair">'
-		. '<th class="entree">'. _T('asso:bilan_recettes') .'</th>'
+		$res .= "<tr class='impair'>"
+		. '<th class="entree">'. _T('asso:bilan_recettes') ."</th>\n"
 		. '<td class="decimal">' .association_formater_prix($recettes). ' </td>'
-		. '</tr>';
+		. "</tr>\n";
 #	}
 	$depenses = is_array($somme_depenses) ? call_user_func_array('sql_getfetsel', $somme_depenses) : $somme_depenses ;
 #	if ($depenses) {
 		$res .= '<tr class="pair">'
-		. '<th class="sortie">'. _T('asso:bilan_depenses') .'</th>'
-		. '<td class="decimal">'.association_formater_prix($depenses) .'</td>'
-		. '</tr>';
+		. '<th class="sortie">'. _T('asso:bilan_depenses') ."</th>\n"
+		. '<td class="decimal">'.association_formater_prix($depenses) ."</td>\n"
+		. "</tr>\n";
 #	}
 	if ($recettes && $depenses) {
 		$solde = $recettes-$depenses;
 		$res .= '<tr class="'.($solde>0?'impair':'pair').'">'
-		. '<th class="solde">'. _T('asso:bilan_solde') .'</th>'
-		. '<td class="decimal">'.association_formater_prix($solde).'</td>'
-		. '</tr>';
+		. '<th class="solde">'. _T('asso:bilan_solde') ."</th>\n"
+		. '<td class="decimal">'.association_formater_prix($solde)."</td>\n"
+		. "</tr>\n";
 	}
 	return $res.'</tbody></table>';
 }
@@ -2008,7 +2011,7 @@ function association_bloc_filtres($liste_filtres, $exec='', $supplements='', $td
 		$res .= "\n<div><input type='hidden' name='exec' value='$exec' /></div>";
 	$res .= "\n<". ($td?'table width="100%"':'ul') .' class="asso_tablo_filtres">'. ($td?'<tr>':'');
 	foreach($liste_filtres as $filtre_selection =>$params) {
-		$res .= ($td?'<td':'<li') ." class='filtre_$filtre_selection'>". call_user_func_array("association_selectionner_$filtre_selection", association_recuperer_liste($params, FALSE) ) . ($td?'</td>':'</li>');
+		$res .= ($td?'<td':'<li') ." class='filtre_$filtre_selection'>". call_user_func_array("association_selectionner_$filtre_selection", association_recuperer_liste($params, FALSE) ) . ($td?"</td>\n":'</li>');
 	}
 	if ( is_array($supplements) ) {
 		foreach ($supplements as $nom => $supplement) {
@@ -2017,7 +2020,7 @@ function association_bloc_filtres($liste_filtres, $exec='', $supplements='', $td
 	} else {
 		$res .= $supplements;
 	}
-	$res .= ($td?'<td':'<li') . ' class="boutons"><input type="submit" value="'. _T('asso:bouton_lister') .'" />' . ($td?'</td>':'</li>');
+	$res .= ($td?'<td':'<li') . ' class="boutons"><input type="submit" value="'. _T('asso:bouton_lister') .'" />' . ($td?"</td>\n":'</li>');
 	return $res. ($td?'</tr></table':'</ul>') .">\n</form>\n";
 }
 
@@ -2135,16 +2138,16 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
 			if ( !is_array($param) ) // ...de tableaux ?
 				return '';
 	}
-	$res =  '<table width="100%" class="asso_tablo'. ($table ? '" id="liste_'.$table : '') .'">'. "\n<thead>\n<tr>";
+	$res =  '<table width="100%" class="asso_tablo'. ($table ? '" id="liste_'.$table : '') .'">'. "\n<tr>";
 
 	foreach ($presentation as &$param) { // entetes
 		$entete = array_shift($param);
-		$res .= '<th>'. ($entete ? association_langue($entete) : '&nbsp;' ) .'</th>';
+		$res .= '<th>'. ($entete ? association_langue($entete) : '&nbsp;' ) ."</th>\n";
 	}
 	if ( count($boutons) ) { // colonne(s) de bouton(s) d'action
-		$res .= '<th colspan="'. count($boutons) .'" class="actions">'. _T('asso:entete_action' .(count($boutons)-1?'s':'')) .'</th>';
+		$res .= '<th colspan="'. count($boutons) .'" class="actions">'. _T('asso:entete_action' .(count($boutons)-1?'s':'')) ."</th>\n";
 	}
-	$res .= "</tr>\n</thead><tbody>";
+	$res .= "</tr>\n";
 	if ( !is_array($boutons) )
 		return $res; // c'est une astuce pour generer la partie entete seulement
 	if ( $cle1 ) {
@@ -2154,7 +2157,7 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
 			$objet = $cle1;
 	}
 	$res .= association_bloc_tr($reponse_sql, $extra, $cle1, $cle2, $objet, $presentation, $boutons) .
-	"</tbody>\n</table>\n";
+	"</table>\n";
 
 	sql_free($reponse_sql);
 	if ( $cle1 && $selection ) {
@@ -2224,7 +2227,7 @@ function association_bloc_format($presentation, $data, $cle1, $selection) {
 			$td_css .= ' surligne';
 		array_unshift($params, $data[$champ]);
 		$format = call_user_func_array("association_formater_$format", $params);
-		$res .= '<td class="'.$td_css.'">'. $format .'</td>';
+		$res .= '<td class="'.$td_css.'">'. $format ."</td>\n";
 	}
 	return $res;
 }

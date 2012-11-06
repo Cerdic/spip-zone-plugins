@@ -26,7 +26,7 @@ function exec_ressources() {
 		}
 		onglets_association('titre_onglet_prets', 'ressources');
 		// INTRO : presentation du module
-		echo '<p>'._T('asso:ressources_info').'</p>';
+		echo "\n<p>"._T('asso:ressources_info')."</p>\n";
 		// preparation des listes associees aux statuts
 		$s_ico = $s_css = array();
 		$s_query = sql_select('DISTINCT statut', 'spip_asso_ressources'); // liste des statuts utilises
@@ -90,7 +90,7 @@ function exec_ressources() {
 		$filtre_statut = '<select name="statut" onchange="form.submit()">';
 		$filtre_statut .= '<option value="">' ._T('asso:entete_tous') .'</option>';
 		foreach ( $liste_statuts as $type=>$puce ) {
-			$filtre_statut .= "<option value='$type'". ($type==$statut?" selected='selected'":'') .'>'. association_formater_puce($type, $puce, "ressources_libelle_statut_$type") .'</option>';
+			$filtre_statut .= "<option value='$type'". ($type==$statut?" selected='selected'":'') .'>'. association_formater_puce($type, $puce, "ressources_libelle_statut_$type") ."</option>\n";
 		}
 		$filtre_statut .= '</select>';
 		filtres_association(array(
