@@ -69,7 +69,7 @@ function gisgeom_formulaire_charger($flux){
  * @return mixed
  */
 function gisgeom_formulaire_verifier($flux){
-	if ($flux['args']['form'] == 'editer_gis' AND $_FILES['import']['error'] != 4) {
+	if ($flux['args']['form'] == 'editer_gis' AND isset($_FILES['import']) AND $_FILES['import']['error'] != 4) {
 		include_spip('action/ajouter_documents');
 		$infos_doc = verifier_upload_autorise($_FILES['import']['name']);
 		if (in_array($infos_doc['extension'], array('gpx', 'kml'))) {
@@ -91,7 +91,7 @@ function gisgeom_formulaire_verifier($flux){
  * @return mixed
  */
 function gisgeom_pre_insertion($flux){
-	if (!_request('geojson') AND $_FILES['import']['error'] != 4) {
+	if (!_request('geojson') AND isset($_FILES['import']) AND $_FILES['import']['error'] != 4) {
 		include_spip('action/ajouter_documents');
 		$infos_doc = verifier_upload_autorise($_FILES['import']['name']);
 		$fichier = $_FILES['import']['tmp_name'];
