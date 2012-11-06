@@ -110,6 +110,12 @@ function spipicious_upgrade($nom_meta_base_version,$version_cible){
 			}
 			ecrire_meta($nom_meta_base_version,$current_version='0.6.2','non');
 		}
+		if(version_compare($current_version,'0.6.2','<')){
+			sql_alter("TABLE `spip_spipicious` ADD INDEX id_mot (`id_mot`)");
+			sql_alter("TABLE `spip_spipicious` ADD INDEX id_objet (`id_objet`)");
+			sql_alter("TABLE `spip_spipicious` ADD INDEX objet (`objet`)");
+			ecrire_meta($nom_meta_base_version,$current_version='0.6.3','non');
+		}
 		ecrire_metas();
 	}
 }
