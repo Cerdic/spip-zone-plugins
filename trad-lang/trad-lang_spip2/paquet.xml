@@ -1,11 +1,11 @@
 <paquet
 	prefix="tradlang"
 	categorie="outil"
-	version="2.0.6"
+	version="2.0.7"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/spip_lang.png"
-	schema="0.4.4"
+	schema="0.4.5"
 >
 
 	<nom>Trad-Lang</nom>
