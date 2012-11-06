@@ -1,6 +1,7 @@
 <?php
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_NUMEROTE_STEP')) define('_NUMEROTE_STEP',10);
 
 function numero_denumerote_titre($titre){
 	return preg_replace(',^([0-9]+[.]\s+),','',$titre);
@@ -24,15 +25,16 @@ function numero_numeroter_rubrique($id_rubrique,$type='rubrique',$numerote=true)
 				"a.id_rubrique=".sql_quote($id_rubrique)."
 			 AND J.id_mot=".sql_quote(_NUMERO_MOT_ARTICLE_ACCUEIL),'',"0+a.titre, a.maj DESC","0,1");
 		}
-		if (defined('_DIR_PLUGIN_FONDS')){
+		if (defined('_DIR_PLUGIN_ARTICLE_ACCUEIL')){
 			// numeroter 0. l'article d'accueil de la rubrique
 			$row = sql_fetsel("a.id_article,a.titre",
-				"spip_articles AS a INNER JOIN spip_rubriques as J ON J.id_accueil=a.id_article",
+				"spip_articles AS a INNER JOIN spip_rubriques as J ON J.id_article_accueil=a.id_article",
 				"a.id_rubrique=".sql_quote($id_rubrique),'',"0+a.titre, a.maj DESC","0,1");
 		}
 		if ($row){
 			$titre = "0. " . numero_denumerote_titre($row['titre']);
-			sql_updateq($table_sql,array('titre'=>$titre),"$key=".sql_quote($row[$key]));
+			if ($titre!==$row['titre'])
+				sql_updateq($table_sql,array('titre'=>$titre),"$key=".sql_quote($row[$key]));
 			$zero = false;
 			$cond = " AND id_article<>".sql_quote($row[$key]);
 		}
@@ -49,8 +51,9 @@ function numero_numeroter_rubrique($id_rubrique,$type='rubrique',$numerote=true)
 			$zero = false;
 			$cpt = 0;
 		}
-		$titre = ($numerote?($cpt*10) . ". ":"") . numero_denumerote_titre($row['titre']);
-		sql_updateq($table_sql,array('titre'=>$titre),"$key=".sql_quote($row[$key]));
+		$titre = ($numerote?($cpt*_NUMEROTE_STEP) . ". ":"") . numero_denumerote_titre($row['titre']);
+		if ($titre!==$row['titre'])
+			sql_updateq($table_sql,array('titre'=>$titre),"$key=".sql_quote($row[$key]));
 		$cpt++;
 	}
 	return;

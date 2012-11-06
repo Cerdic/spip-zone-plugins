@@ -7,16 +7,32 @@ function numero_affiche_droite($flux){
 		$out = "";
 		$id_rubrique = $flux['args']['id_rubrique'];
 		$out .= boite_ouvrir('', 'simple');
-		$out .= "<h4 style='margin-bottom:0;'>Rubriques</h4>";
-		$url = generer_action_auteur('renumeroter', "rubrique-$id_rubrique", self('&'));
-		$out .= "<div><a href='$url'><img src='"._DIR_PLUGIN_NUMERO."img_pack/numerote.gif' width='48' height='24' alt='Re-numeroter' /></a>";
-		$url = generer_action_auteur('denumeroter', "rubrique-$id_rubrique", self('&'));
-		$out .= "&nbsp;<a href='$url'><img src='"._DIR_PLUGIN_NUMERO."img_pack/denumerote.gif' width='48' height='24' alt='Enlever la numerotation' /></a></div>";
-		$out .= "<h4 style='margin-bottom:0;'>Articles</h4>";
-		$url = generer_action_auteur('renumeroter', "article-$id_rubrique", self('&'));
-		$out .= "<div><a href='$url'><img src='"._DIR_PLUGIN_NUMERO."img_pack/numerote.gif' width='48' height='24' alt='Re-numeroter' /></a>";
-		$url = generer_action_auteur('denumeroter', "article-$id_rubrique", self('&'));
-		$out .= "&nbsp;<a href='$url'><img src='"._DIR_PLUGIN_NUMERO."img_pack/denumerote.gif' width='48' height='24' alt='Enlever la numerotation' /></a></div>";
+
+		$out .= "<h4 style='overflow: hidden'>Rubriques<span style='float:right;'>";
+		$out .= bouton_action(
+			http_img_pack(find_in_theme("images/numerote-24.png"),"Re-numeroter"),
+			generer_action_auteur('renumeroter', "rubrique-$id_rubrique", self('&')),
+			"","","Re-numeroter"
+		);
+		$out .= bouton_action(
+			http_img_pack(find_in_theme("images/denumerote-24.png"),"Enlever la numerotation"),
+			generer_action_auteur('denumeroter', "rubrique-$id_rubrique", self('&')),
+			"","","Enlever la numerotation"
+		);
+
+		$out .= "</span></h4><h4>Articles<span style='float:right;'>";
+		$out .= bouton_action(
+			http_img_pack(find_in_theme("images/numerote-24.png"),"Re-numeroter"),
+			generer_action_auteur('renumeroter', "article-$id_rubrique", self('&')),
+			"","","Re-numeroter"
+		);
+		$out .= bouton_action(
+			http_img_pack(find_in_theme("images/denumerote-24.png"),"Enlever la numerotation"),
+			generer_action_auteur('denumeroter', "article-$id_rubrique", self('&')),
+			"","","Enlever la numerotation"
+		);
+
+		$out .= "</span></h4>";
 		$out .= boite_fermer();
 		$flux['data'].= $out;
 	}
