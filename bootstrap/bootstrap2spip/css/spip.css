@@ -8,6 +8,7 @@
 
 /* ajax */
 /* loading ajax */
+.bugajaxie {display: none;}
 .ariaformprop,.ajaxbloc {position: relative;}
 .ariaformprop .image_loading,.ajaxbloc .image_loading  {position: absolute;top: 0;right: 0;}
 
