@@ -1831,13 +1831,14 @@ function association_totauxinfos_intro($titre, $type='', $id=0, $DesLignes=array
 function association_totauxinfos_stats($legende='', $sql_table_asso, $sql_champs, $sql_criteres='1=1',$decimales_significatives=1, $avec_extrema=FALSE) {
 	if (!is_array($sql_champs) || !$sql_table_asso)
 		return FALSE;
-	$res = '<table width="100%" class="asso_infos">';
-	$res .= '<caption>'. _T('asso:totaux_moyens', array('de_par'=>_T("local:$legende"))) .'</caption><thead>';
-	$res .= "\n<tr class='row_first'>\n<th>&nbsp;</th>";
-	$res .= '<th title="'. _T('entete_stats_moy') .'">x&#772</th>';
- // X <span style="font-size:75%;">X</span>&#772 <span style="text-decoration:overline;">X</span> X<span style="position:relative; bottom:1.0ex; letter-spacing:-1.2ex; right:1.0ex">&ndash;</span> x<span style="position:relative; bottom:1.0ex; letter-spacing:-1.2ex; right:1.0ex">&macr;</span>
-	$res .= '<th title="'. _T('entete_stats_mea') ."\">&sigma;</th>\n"; 
-// σ &sigma; &#963; &#x3C3;
+	$res = '<table width="100%" class="asso_infos"><caption>'
+	. _T('asso:totaux_moyens', array('de_par'=>_T("local:$legende")))
+	. "</caption>\n<thead>"
+	. "\n<tr class='row_first'>\n<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>"
+	. '<th title="'. _T('entete_stats_moy') .'">'
+	. '<span style="text-decoration:overline;">X</span>' . "</th>\n"
+	. "<th title='". _T('entete_stats_mea') ."'>&sigma;</th>\n"; 
+	// σ &sigma; &#963; &#x3C3;
 	if ($avec_extrema) {
 		$res .= '<th title="'. _T('entete_stats_min') .'">[&lt;</th>';
 		$res .= '<th title="'. _T('entete_stats_max') .'">&gt;]</th>';
@@ -1848,7 +1849,7 @@ function association_totauxinfos_stats($legende='', $sql_table_asso, $sql_champs
 	foreach ($sql_champs as $libelle=>$champs) {
 		$stats = sql_fetsel("AVG($champs) AS valMoy, STDDEV($champs) AS ekrTyp, MIN($champs) AS valMin, MAX($champs) AS valMax ", "spip_asso_$sql_table_asso", $sql_criteres);
 		$res .= '<tr class="'. ($compteur%2?'row_odd':'row_even') .'">';
-		$res .= '<td class"text">'. association_langue((is_numeric($libelle)?$champs:$libelle)) ."</td>\n";
+		$res .= "\n<td class='text'>". association_langue((is_numeric($libelle)?$champs:$libelle)) ."</td>\n";
 		$res .= '<td class="'.($decimales_significatives?'decimal':'integer').'">'. association_formater_nombre($stats['valMoy'],$decimales_significatives) ."</td>\n";
 		$res .= '<td class="'.($decimales_significatives?'decimal':'integer').'">'. association_formater_nombre($stats['ekrTyp'],$decimales_significatives) ."</td>\n";
 		if ($avec_extrema) {
