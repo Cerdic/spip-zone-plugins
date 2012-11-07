@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 // Export du Compte de Resultat au format YAML
 // http://fr.wikipedia.org/wiki/Yaml
-function action_export_compteresultats_yaml() {
+function action_export_soldescomptes_yaml() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 

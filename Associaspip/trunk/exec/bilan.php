@@ -75,10 +75,10 @@ function exec_bilan() {
 				echo '<tbody><tr>';
 				echo '<td><b>'. _T('asso:cpte_resultat_mode_exportation') .'</b></td>';
 				if (test_plugin_actif('FPDF')) { // impression en PDF
-					echo "\n<td class='action'><a href='".generer_url_ecrire('export_compteresultats_pdf').'&amp;var='.rawurlencode($var). "'><strong>PDF</strong></a></td>"; //!\ generer_url_ecrire() utilise url_enconde() or il est preferable avec les grosses variables serialisees d'utiliser rawurlencode()
+					echo "\n<td class='action'><a href='".generer_url_ecrire('export_soldescomptes_pdf').'&amp;var='.rawurlencode($var). "'><strong>PDF</strong></a></td>"; //!\ generer_url_ecrire() utilise url_enconde() or il est preferable avec les grosses variables serialisees d'utiliser rawurlencode()
 				}
 				foreach(array('csv','ctx','tex','tsv','xml','yaml') as $type) { // autres exports (donnees brutes) possibles
-					echo "\n<td class='action'><a href='". generer_url_ecrire('export_compteresultats_'.$type).'&amp;var='.rawurlencode($var). "'><strong>". strtoupper($type) .'</strong></a></td>'; //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
+					echo "\n<td class='action'><a href='". generer_url_ecrire('export_soldescomptes_'.$type).'&amp;var='.rawurlencode($var). "'><strong>". strtoupper($type) .'</strong></a></td>'; //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
 				}
 				echo '</tr></tbody></table>';
 			}

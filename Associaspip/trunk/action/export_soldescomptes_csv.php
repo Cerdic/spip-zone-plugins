@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 // Export du Compte de Resultat au format CSV
 // http://fr.wikipedia.org/wiki/Comma-separated_values
 // (forme commune de base : champs separes par une virgule et point decimal !)
-function action__soldescomptes_csv() {
+function action_export_soldescomptes_csv() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 

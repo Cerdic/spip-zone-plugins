@@ -952,6 +952,7 @@ class ExportComptes_PDF extends FPDF {
 	$this->SetFont(($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial'), 'I', 8); // police: italique 8px
 	$this->SetTextColor(128); // Couleur du texte : gris-50.2% (fond blanc)
 	// Date et Numéro de page
+	include_spip('inc/filtres');
 	$this->Cell(0, 10, html_entity_decode(_T('asso:cpte_export_pied_notice') .' -- '. affdate(date('Y-m-d')) .' -- '. _T('asso:cpte_export_page', array('numero'=>$this->PageNo()) )), 0, 0, 'C');
     }
 
