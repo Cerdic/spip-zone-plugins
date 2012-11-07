@@ -34,6 +34,16 @@ dl.spip dt {}
 dl.spip dd {}
 
 /* Citations, code et poesie */
+/* retablir le meme font-size que le corps du texte dans les blockquote */
+blockquote {
+  font-weight: 300;
+  p {
+    margin-bottom: @baseLineHeight / 2;
+    font-size : inherit;
+    line-height : inherit;
+    font-weight : inherit;
+  }
+}
 blockquote.spip {}
 .spip_poesie {}
 .spip_poesie div {}
