@@ -1,3 +1,9 @@
 <traduction module="selection_objet" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/selection_d_objets/trunk/lang/" reference="fr">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/selection_objet?lang_cible=en">
+		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/selection_objet?lang_cible=es">
+		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
+	</langue>
 	<langue code="fr" />
 </traduction>
