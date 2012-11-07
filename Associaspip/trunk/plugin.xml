@@ -2,7 +2,7 @@
 	<nom>Associaspip</nom>
 	<auteur>
 	Bernard Blazin - Fran&#231;ois de Montlivault
-	Emmanuel Saint-James - Jeannolapin - Glicot
+	Emmanuel Saint-James - Jeannolapin - gilcot
 	</auteur>
 	<version>2.2.0</version>
 	<version_base>67570</version_base>
@@ -12,7 +12,7 @@
 	<description>Gestion d'associations</description>
 	<prefix>association</prefix>
 	<install>base/association_gestion.php</install>
-	<lien>http://www.spip-contrib.net/Associaspip</lien>
+	<lien>http://contrib.spip.net/Associaspip</lien>
 	<icon>img_pack/annonce.gif</icon>
 
 	<options>association_options.php</options>
