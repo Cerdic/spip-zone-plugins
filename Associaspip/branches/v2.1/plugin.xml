@@ -11,9 +11,7 @@
 	<description>Gestion d'associations</description>
 	<prefix>association</prefix>	
 	<install>base/association_gestion.php</install>
-	<lien>
-         [Documentation->http://www.spip-contrib.net/Plugin-Gestion-d-associations]
-	</lien>
+	<lien>http://www.spip-contrib.net/Plugin-Gestion-d-associations</lien>
 	<icon>img_pack/annonce.gif</icon>
 
 	<options>association_options.php</options>
