@@ -722,4 +722,17 @@ $GLOBALS['association_maj'][67500] = array(
 	array('sql_insertq_multi', 'spip_asso_groupes', array( array('id_groupe'=>73), array('id_groupe'=>74), array('id_groupe'=>76), array('id_groupe'=>61), array('id_groupe'=>63), array('id_groupe'=>64), array('id_groupe'=>66), ), ),
 );
 
+// normalisation de la base (suite)
+$GLOBALS['association_maj'][67570] = array(
+// ventes d'articles
+	array('sql_alter', "TABLE spip_asso_ventes ADD prix_unitaire DECIMAL(19,2) NOT NULL DEFAULT 0"),
+	array('sql_update', 'spip_asso_ventes', array('prix_unitaire'=>'prix_vente') ),
+	array('sql_alter', "TABLE spip_asso_ventes DROP prix_vente"),
+// participations aux activites
+	array('sql_alter', "TABLE spip_asso_activites ADD prix_unitaire DECIMAL(19,2) NOT NULL DEFAULT 0"),
+	array('sql_update', 'spip_asso_activites', array('prix_unitaire'=>'prix_activite'), 'quantite=0' ),
+	array('sql_update', 'spip_asso_activites', array('prix_unitaire'=>'prix_activite/quantite'), 'quantite<>0' ),
+	array('sql_alter', "TABLE spip_asso_activites DROP prix_activite"),
+);
+
 ?>

@@ -42,7 +42,7 @@ function association_declarer_tables_principales($tables_principales) {
 		'colis' => "TINYTEXT NOT NULL",
 		'valeur' => "DECIMAL(19,2) NOT NULL DEFAULT '0'", // estimation du colis
 		'contrepartie' => "TINYTEXT NOT NULL",
-		'commentaire' => "TEXT",
+		'commentaire' => "TEXT NOT NULL",
 		'maj' => "TIMESTAMP NOT NULL"
 	);
 	$spip_asso_dons_key = array(
@@ -63,9 +63,9 @@ function association_declarer_tables_principales($tables_principales) {
 		'quantite' => "FLOAT UNSIGNED NOT NULL DEFAULT 0",
 		'date_vente' => "DATE NOT NULL DEFAULT '0000-00-00'",
 		'date_envoi' => "DATE DEFAULT '0000-00-00'",
-		'prix_vente' => "DECIMAL(19,2) NOT NULL DEFAULT '0'", // transformer en prix_unitaire ou prix_total...
+		'prix_unitaire' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
 		'frais_envoi' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
-		'commentaire' => "TEXT",
+		'commentaire' => "TEXT NOT NULL",
 		'maj' => "TIMESTAMP NOT NULL"
 	);
 	$spip_asso_ventes_key = array(
@@ -82,9 +82,9 @@ function association_declarer_tables_principales($tables_principales) {
 		'date_operation' => "DATE NOT NULL DEFAULT '0000-00-00'",
 		'recette' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
 		'depense' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
-		'justification' => "TEXT",
-		'imputation' => "TINYTEXT",
-		'journal' => "TINYTEXT",
+		'justification' => "TEXT NOT NULL",
+		'imputation' => "TINYTEXT NOT NULL",
+		'journal' => "TINYTEXT NOT NULL",
 		'id_journal' => "BIGINT UNSIGNED NOT NULL DEFAULT '0'",
 		'vu' => "BOOLEAN DEFAULT 0",
 		'maj' => "TIMESTAMP NOT NULL"
@@ -123,6 +123,7 @@ function association_declarer_tables_principales($tables_principales) {
 		'id_destination' => "INT UNSIGNED NOT NULL",
 		'intitule' => "TINYTEXT NOT NULL",
 		'commentaire' => "TEXT NOT NULL",
+		'maj' => "TIMESTAMP NOT NULL"
 	);
 	$spip_asso_destination_key = array(
 		'PRIMARY KEY' => 'id_destination'
@@ -217,10 +218,10 @@ function association_declarer_tables_principales($tables_principales) {
 	);
 
 	//-- Table GROUPES de membres ----------------------------
-	$spip_asso_groupes= array(
+	$spip_asso_groupes = array(
 		'id_groupe' => "INT UNSIGNED NOT NULL",
 		'nom' => "VARCHAR(128) NOT NULL",
-		'commentaire' => "TEXT",
+		'commentaire' => "TEXT NOT NULL",
 		'affichage' => "TINYINT NOT NULL DEFAULT 0",
 		'maj' => "TIMESTAMP NOT NULL"
 	);
@@ -232,7 +233,7 @@ function association_declarer_tables_principales($tables_principales) {
 		'key' => &$spip_asso_groupes_key
 	);
 
-	$spip_asso_groupes_liaisons= array(
+	$spip_asso_groupes_liaisons = array(
 		'id_groupe' => "BIGINT UNSIGNED NOT NULL",
 		'id_auteur' => "BIGINT UNSIGNED NOT NULL",
 		'fonction' => "VARCHAR(128) NOT NULL",
@@ -247,7 +248,7 @@ function association_declarer_tables_principales($tables_principales) {
 	);
 
 	//-- Table MEMBRES ----------------------------------------
-	$spip_asso_membres= array(
+	$spip_asso_membres = array(
 		'id_auteur' => "BIGINT UNSIGNED NOT NULL",
 		'id_asso' => "TINYTEXT NOT NULL",
 		'nom_famille' => "TEXT NOT NULL",
@@ -257,8 +258,9 @@ function association_declarer_tables_principales($tables_principales) {
 		'statut_interne' => "TINYTEXT NOT NULL",
 		'commentaire' => "TEXT NOT NULL",
 		'date_validite' => "DATE NOT NULL DEFAULT '0000-00-00'",
+		'maj' => "TIMESTAMP NOT NULL"
 	);
-	$spip_asso_membres_key= array(
+	$spip_asso_membres_key = array(
 		'PRIMARY KEY' => 'id_auteur'
 	);
 	$tables_principales['spip_asso_membres'] = array(
@@ -273,6 +275,7 @@ function association_declarer_tables_principales($tables_principales) {
 		'commentaire' => "TEXT NOT NULL",
 		'date_debut' => "DATE NOT NULL DEFAULT '0000-00-00'",
 		'date_fin' => "DATE NOT NULL DEFAULT '0000-00-00'"
+		'maj' => "TIMESTAMP NOT NULL"
 	);
 	$spip_asso_exercices_key = array(
 		'PRIMARY KEY' => 'id_exercice'

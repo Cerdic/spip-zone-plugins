@@ -36,9 +36,9 @@ function exec_inscrits_activite() {
 			'pair' => array( 'asso:activite_entete_impayees', array('spip_asso_activites', "id_evenement=$id_evenement AND NOT date_paiement<date_inscription "), ),
 										       ));
 		// STATS sur les participations a cette activite (nombre de place et montant paye)
-			echo association_totauxinfos_stats('participations', 'activites', array('entete_quantite'=>'quantite','entete_montant'=>'prix_activite',), "id_evenement=$id_evenement");
+			echo association_totauxinfos_stats('participations', 'activites', array('entete_quantite'=>'quantite','entete_montant'=>'prix_unitaire',), "id_evenement=$id_evenement");
 		// TOTAUX : montants des participations
-			echo association_totauxinfos_montants('participations', array('SUM(prix_activite) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " ), NULL);
+			echo association_totauxinfos_montants('participations', array('SUM(prix_unitaire) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " ), NULL);
 		// datation et raccourcis
 			$res['activite_bouton_modifier_article'] = array('edit-12.gif', array('articles', 'id_article='.$evenement['id_article']));
 			$res['activite_bouton_ajouter_inscription'] = array('panier_in.gif', array('edit_activite', "id_evenement=$id_evenement"));
@@ -76,7 +76,7 @@ function exec_inscrits_activite() {
 //				'date_paiement' => array('asso:entete_date', 'date', ''),
 				'id_auteur' => array('asso:entete_nom', 'idnom', array('spip_asso_activites', 'nom', 'id_auteur'), 'membre'),
 				'quantite' => array('asso:entete_quantite', 'entier'),
-				'prix_activite' => array('asso:entete_montant', 'prix', 'fees'),
+				'prix_unitaire' => array('asso:entete_montant', 'prix', 'fees'),
 				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),
 			), // entetes et formats des donnees
 			autoriser('editer_inscriptions', 'association') ? array(

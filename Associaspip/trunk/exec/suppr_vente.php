@@ -24,7 +24,7 @@ function exec_suppr_vente() {
 //		$infos['entete_code'] = association_formater_code($vente['code'], 'x-spip_asso_ventes');
 		$infos['entete_nom'] = association_formater_idnom($vente['id_auteur'], $vente['nom'], 'membre');
 		$infos['entete_quantite'] = association_formater_nombre($vente['quantite'], 2, 'quantity');
-		$infos['entete_montant'] = association_formater_prix($vente['prix_vente'], 'purchase cost offer');
+		$infos['entete_montant'] = association_formater_prix($vente['prix_unitaire'], 'purchase cost offer');
 		$infos['entete_commentaire'] = $vente['commentaire'];
 		echo '<div class="hproduct">'. association_totauxinfos_intro('', 'vente', $id_vente, $infos ) .'</div>';
 		// datation et raccourcis

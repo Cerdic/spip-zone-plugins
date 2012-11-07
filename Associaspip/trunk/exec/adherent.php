@@ -110,7 +110,7 @@ function exec_adherent() {
 					'date_debut' => array('asso:entete_date', 'date'),
 					'titre' => array('asso:adherent_entete_activite', 'texte', $full?'propre':'nettoyer_raccourcis_typo', ),
 					'quantite' => array('asso:entete_quantite', 'entier'),
-					'prix_activite' => array('asso:entete_montant', 'prix'),
+					'prix_unitaire' => array('asso:entete_montant', 'prix'),
 				), // entetes et formats des donnees
 				autoriser('editer_activites', 'association') ? array(
 					array('edit', 'activite', 'id=$$'),

@@ -33,9 +33,9 @@ function exec_activites() {
 			'impair'=>array( 'activites_avec_inscrits', $avec_inscrits, ),
 		));
 		// STATS : places et participations pour la periode en cours
-		echo association_totauxinfos_stats('participations_par_personne_par_activite', 'activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', array('entete_quantite'=>'quantite','entete_montant'=>'prix_activite',), $critere_periode);
+		echo association_totauxinfos_stats('participations_par_personne_par_activite', 'activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', array('entete_quantite'=>'quantite','entete_montant'=>'prix_unitaire',), $critere_periode);
 		// TOTAUX : montants des participations pour la periode
-		echo association_totauxinfos_montants('activites', sql_getfetsel('SUM(prix_activite) AS somme_recettes', 'spip_asso_activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', $critere_periode), 0);
+		echo association_totauxinfos_montants('activites', sql_getfetsel('SUM(prix_unitaire) AS somme_recettes', 'spip_asso_activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', $critere_periode), 0);
 		// datation et raccourci vers la gestion des evenements
 		if ( test_plugin_actif('SIMPLECAL') ) { // gestion des evenements avec Simple Calendrier
 			raccourcis_association(array(), array(

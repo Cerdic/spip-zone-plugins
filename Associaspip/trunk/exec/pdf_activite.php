@@ -27,7 +27,7 @@ function exec_pdf_activite() {
 		$pdf->AddCol('nom',50,utf8_decode(_T('asso:entete_nom')),'L');
 		$pdf->AddCol('id_auteur',20,'N°','R');
 		$pdf->AddCol('quantite',10,_T('asso:activite_entete_quantite'),'R');
-		$pdf->AddCol('prix_activite',20,utf8_decode(_T('asso:entete_montant')),'R');
+		$pdf->AddCol('prix_unitaire',20,utf8_decode(_T('asso:entete_montant')),'R');
 		$pdf->Table("SELECT * FROM spip_asso_activites WHERE id_evenement=$id_evenement ORDER BY nom, date_inscription");
 		$pdf->Output();
 	}

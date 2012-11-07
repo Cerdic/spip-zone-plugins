@@ -48,11 +48,11 @@ function formulaires_editer_asso_activites_verifier_dist($id_activite='') {
 		$erreurs['date_paiement'] = $erreur;
 	if ($erreur = association_verifier_montant('quantite') )
 		$erreurs['quantite'] = $erreur;
-	if ($erreur = association_verifier_montant('prix_activite') )
-		$erreurs['prix_activite'] = $erreur;
+	if ($erreur = association_verifier_montant('prix_unitaire') )
+		$erreurs['prix_unitaire'] = $erreur;
 	if ($erreur = association_verifier_membre('id_auteurt') )
 		$erreurs['id_auteur'] = $erreur;
-	if ($erreur = association_verifier_destinations('prix_activite') )
+	if ($erreur = association_verifier_destinations('prix_unitaire') )
 		$erreurs['destinations'] = $erreur;
 
 	if (count($erreurs)) {

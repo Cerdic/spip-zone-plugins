@@ -26,8 +26,8 @@ function formulaires_editer_asso_ventes_charger_dist($id_vente='') {
 	// paufiner la presentation des valeurs
 	if (!$contexte['id_auteur'])
 		$contexte['id_auteur'] = '';
-	if ($contexte['prix_vente'])
-		$contexte['prix_vente'] = association_formater_nombre($contexte['prix_vente']);
+	if ($contexte['prix_unitaire'])
+		$contexte['prix_unitaire'] = association_formater_nombre($contexte['prix_unitaire']);
 	if ($contexte['frais_envoi'])
 		$contexte['frais_envoi'] = association_formater_nombre($contexte['frais_envoi']);
 	if ($contexte['quantite'])
@@ -39,15 +39,15 @@ function formulaires_editer_asso_ventes_charger_dist($id_vente='') {
 function formulaires_editer_asso_ventes_verifier_dist($id_vente) {
 	$erreurs = array();
 
-	if ($erreur = association_verifier_montant('prix_vente') )
-		$erreurs['prix_vente'] = $erreur;
+	if ($erreur = association_verifier_montant('prix_unitaire') )
+		$erreurs['prix_unitaire'] = $erreur;
 	if ($erreur = association_verifier_montant('frais_envoi') )
 		$erreurs['frais_envoi'] = $erreur;
 	if ($erreur = association_verifier_montant('quantite') )
 		$erreurs['quantite'] = $erreur;
 	if ($erreur = association_verifier_membre('id_auteur') )
 		$erreurs['id_auteur'] = $erreur;
-	if ($erreur = association_verifier_destinations('prix_vente') )
+	if ($erreur = association_verifier_destinations('prix_unitaire') )
 		$erreurs['destinations'] = $erreur;
 	if ($erreur = association_verifier_date('date_vente') )
 		$erreurs['date_vente'] = $erreur;

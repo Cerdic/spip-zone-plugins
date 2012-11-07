@@ -19,7 +19,7 @@ function action_ajouter_participations() {
 	$nom = _request('nom');
 	$id_auteur = association_recuperer_entier('id_auteur');
 	$quantite = association_recuperer_montant('quantite');
-	$montant = association_recuperer_montant('prix_activite');
+	$montant = association_recuperer_montant('prix_unitaire');
 	$date_paiement = association_recuperer_date('date_paiement');
 	$journal = _request('journal');
 	$statut = association_passeparam_statut();
@@ -30,7 +30,7 @@ function action_ajouter_participations() {
 		'nom' => $nom,
 		'id_auteur' => $id_auteur,
 		'quantite' => $quantite,
-		'prix_activite' => $montant,
+		'prix_unitaire' => $montant,
 		'date_paiement' => $date_paiement,
 		'statut' => $statut,
 		'commentaire' => $commentaire,

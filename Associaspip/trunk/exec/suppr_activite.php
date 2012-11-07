@@ -29,7 +29,7 @@ function exec_suppr_activite() {
 //		$infos['date'] = association_formater_date($activite['date_inscription']);
 		$infos['date'] = association_formater_date($activite['date_paiement']);
 		$infos['entete_quantite'] = association_formater_nombre($activite['quantite'], 1);
-		$infos['entete_montant'] = association_formater_prix($activite['prix_activite'], 'fees');
+		$infos['entete_montant'] = association_formater_prix($activite['prix_unitaire'], 'fees');
 		association_totauxinfos_intro('', 'activite', $id_activite, $infos );
 		// datation et raccourcis
 		raccourcis_association('');

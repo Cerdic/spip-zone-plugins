@@ -31,9 +31,9 @@ function exec_ventes() {
 			'impair' => array( 'ventes_expediees', sql_countsel('spip_asso_ventes', "date_envoi>=date_vente AND  $critere_periode"), ),
 		));
 		// STATS sur les paniers/achats/commandes
-		echo association_totauxinfos_stats('paniers/commandes', 'ventes', array('entete_quantite'=>'quantite','entete_montant'=>'prix_vente*quantite',), $critere_periode);
+		echo association_totauxinfos_stats('paniers/commandes', 'ventes', array('entete_quantite'=>'quantite','entete_montant'=>'prix_unitaire*quantite',), $critere_periode);
 		// TOTAUX : montants des ventes et des frais de port
-		$data = sql_fetsel('SUM(prix_vente*quantite) AS somme_ventes, SUM(frais_envoi) AS somme_frais', 'spip_asso_ventes', $critere_periode);
+		$data = sql_fetsel('SUM(prix_unitaire*quantite) AS somme_ventes, SUM(frais_envoi) AS somme_frais', 'spip_asso_ventes', $critere_periode);
 		echo association_totauxinfos_montants($id_periode, $data['somme_ventes']+$data['somme_frais'], $data['somme_frais']); // les frais de port etant facturees a l'acheteur, ce sont bien des recettes... mais ces frais n'etant (normalement) pas refacturees (et devant meme etre transparents) ils n'entrent pas dans la marge (enfin, facon de dire car les couts d'acquisition ne sont pas pris en compte... le "solde" ici est le montant effectif des ventes.)
 		// datation et raccourcis
 		raccourcis_association(array(), array(
@@ -78,7 +78,7 @@ function exec_ventes() {
 				'code' => array('asso:entete_code', 'code', 'x-spip_asso_ventes'),
 				'id_auteur' => array('asso:entete_nom', 'idnom', array('spip_asso_ventes', 'nom', 'id_auteur'), 'membre'),
 				'quantite' => array('asso:entete_quantite', 'nombre', 2, 'quantity'),
-				'prix_vente' => array('asso:entete_montant', 'prix', 'purchase cost offer'),
+				'prix_unitaire' => array('asso:entete_montant', 'prix', 'purchase cost offer'),
 //				'commentaire' => array('asso:entete_commentaire', 'texte', 'propre'),
 			), // entetes et formats des donnees
 			autoriser('editer_ventes', 'association') ? array(

@@ -26,7 +26,7 @@ function action_editer_asso_ventes() {
 	$quantite = association_recuperer_montant('quantite');
 	$date_envoi = association_recuperer_date('date_envoi');
 	$frais_envoi = association_recuperer_montant('frais_envoi');
-	$prix_unite =  association_recuperer_montant('prix_vente');
+	$prix_unite =  association_recuperer_montant('prix_unitaire');
 	if (test_plugin_actif('CATALOGUE') && intval($code)==$code) { // le plugin "Catalogue est actif" : certains champs peuvent ne pas etre saisis...
 		if ($code>0) { // c'est une variante
 			$variante = sql_fetsel('*', 'spip_cat_variantes', 'id_cat_variante='.$code);
@@ -51,7 +51,7 @@ function action_editer_asso_ventes() {
 		'quantite' => $quantite,
 		'date_envoi' => $date_envoi,
 		'frais_envoi' => $frais_envoi,
-		'prix_vente' => $prix_unite,
+		'prix_unitaire' => $prix_unite,
 		'commentaire' => _request('commentaire'),
 	);
     include_spip('base/association');
