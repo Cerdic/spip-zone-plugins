@@ -69,18 +69,14 @@ function exec_bilan() {
 		foreach ($ids_destinations as $id_destination) { // on boucle sur le tableau des destinations en refaisant le fetch a chaque iteration
 			// TABLEAU EXPLOITATION
 			echo debut_cadre_relief('', TRUE, '', ($id_destination ? $intitule_destinations[$id_destination] : ($GLOBALS['association_metas']['destinations']?_T('asso:toutes_destination'):'') ) );
-			$solde = association_liste_totaux_comptes_classes($classes, 'cpte_resultat', 0, $ids['id_periode'], $id_destination);
+			association_liste_totaux_comptes_classes($classes, 'cpte_resultat', 0, $ids['id_periode'], $id_destination);
 			if(autoriser('voir_compta', 'association') && !$id_destination) { // on peut exporter : pdf, csv, xml, ...
-				echo "<br /><table width='100%' class='asso_tablo' cellspacing='6' id='asso_tablo_exports'>\n";
-				echo '<tbody><tr>';
-				echo '<td><b>'. _T('asso:cpte_resultat_mode_exportation') .'</b></td>';
-				if (test_plugin_actif('FPDF')) { // impression en PDF
-					echo "\n<td class='action'><a href='".generer_url_ecrire('export_soldescomptes_pdf').'&amp;var='.rawurlencode($var). "'><strong>PDF</strong></a></td>"; //!\ generer_url_ecrire() utilise url_enconde() or il est preferable avec les grosses variables serialisees d'utiliser rawurlencode()
-				}
-				foreach(array('csv','ctx','tex','tsv','xml','yaml') as $type) { // autres exports (donnees brutes) possibles
-					echo "\n<td class='action'><a href='". generer_url_ecrire('export_soldescomptes_'.$type).'&amp;var='.rawurlencode($var). "'><strong>". strtoupper($type) .'</strong></a></td>'; //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
-				}
-				echo '</tr></tbody></table>';
+			  echo "<div class='action'>\n",  _T('asso:cpte_resultat_mode_exportation');
+			  if (test_plugin_actif('FPDF')) { // impression en PDF
+			    echo "<a href='".generer_action_auteur('pdf_comptesresultat', 0) ."'>PDF</a> ";
+			  }
+			  export_compte(array('id_periode' => 0, 'type_periode' => 'annee'), 'x', false) ;
+			  echo "\n</div>";
 			}
 			echo fin_cadre_relief(TRUE);
 		}

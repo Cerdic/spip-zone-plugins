@@ -12,7 +12,8 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_activites() {
-	if (!autoriser('voir_activites', 'association')) {
+	if (!autoriser('voir_activites', 'association')
+	OR !test_plugin_actif('AGENDA')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

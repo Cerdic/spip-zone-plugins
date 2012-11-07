@@ -11,7 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_pdf_activite() {
+function action_pdf_activite() {
 	if (!autoriser('exporter_inscriptions', 'association') OR !test_plugin_actif('fpdf')) {
 		include_spip('inc/minipres');
 		echo minipres();

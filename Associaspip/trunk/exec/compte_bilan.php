@@ -36,7 +36,7 @@ function exec_compte_bilan() {
 			echo debut_cadre_enfonce('', TRUE);
 			echo '<h3>'. _T('asso:cpte_bilan_mode_exportation') .'</h3>';
 			if (test_plugin_actif('FPDF')) {  // impression en PDF : _T('asso:bouton_impression')
-				echo icone1_association('PDF', generer_url_ecrire('pdf_comptesbilan', "$ids[type_periode]=$ids[id_periode]".($ids['destination']?"&destination=$ids[destination]":'')), 'print-24.png');
+				echo icone1_association('PDF', generer_action_auteur('pdf_comptesbilan', 0), 'print-24.png');
 			}
 			export_compte($ids, 'bilan');
 			echo fin_cadre_enfonce(TRUE);

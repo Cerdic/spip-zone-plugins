@@ -80,11 +80,14 @@ function exec_adherent() {
 			);
 			echo fin_cadre_relief(TRUE);
 		}
-		if (test_plugin_actif('fpdf') AND $GLOBALS['association_metas']['recufiscal']) { // JUSTIFICATIFS : afficher le lien vers les justificatifs seulemeunt si active en configuration et si FPDF est actif
+
+		if (test_plugin_actif('fpdf') AND $GLOBALS['association_metas']['recufiscal']) {
+// JUSTIFICATIFS : afficher le lien vers les justificatifs
+// seulemeunt si active en configuration et si FPDF est actif
 			echo debut_cadre_relief('', TRUE, '', _T('asso:liens_vers_les_justificatifs') );
 			$data = array_map('array_shift', sql_allfetsel("DATE_FORMAT(date_operation, '%Y')  AS annee", 'spip_asso_comptes', "id_journal=$id_auteur", 'annee', 'annee ASC') );
 			foreach($data as $k => $annee) {
-				echo '<a href="'. generer_url_ecrire('pdf_fiscal', "id=$id_auteur&annee=$annee") .'">'.$annee.'</a> ';
+				echo '<a href="'. generer_action_auteur('pdf_fiscal', "$id_auteur-$annee") .'">'.$annee.'</a> ';
 			}
 			echo fin_cadre_relief(TRUE);
 		}

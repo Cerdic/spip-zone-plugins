@@ -16,35 +16,45 @@ if (!defined('_ECRIRE_INC_VERSION'))
 // (article 200-5 du Code General des Impots)
 // http://www.impots.gouv.fr/portal/deploiement/p1/fichedescriptiveformulaire_5184/fichedescriptiveformulaire_5184.pdf
 
-define('RECU_FISCAL', find_in_path('recu_fiscal.pdf'));
+define('RECU_FISCAL', find_in_path('pdf/recu_fiscal.pdf'));
 if (!defined('SIGNATURE_PRES'))
     define('SIGNATURE_PRES', find_in_path('signature_pres.png'));
 
-function exec_pdf_fiscal() {
-	$r = association_controle_id('auteur', 'asso_membres', 'fiscaliser', 'membres');
-	if ($r AND test_plugin_actif('fpdf')) {
-	list($id_auteur, $mbr_qui) = $r;
+function action_pdf_fiscal() {
+        $securiser_action = charger_fonction('securiser_action', 'inc');
+        $arg = $securiser_action();
+
+        if (!preg_match(',^(\d+)\D(\d*)$,', $arg, $r)) {
+                spip_log("action_pdf_fiscal incompris: " . $arg);
+        } else {
+	if (!test_plugin_actif('fpdf')) return;
+	list(,$id_auteur, $annee) = $r;
+	$mbr_qui = sql_fetsel('*', 'spip_asso_membres', "id_auteur=$id_auteur");
 	include_spip('inc/navigation_modules');
         include_spip('pdf/fpdi_pdf_parser');
         include_spip('fpdf');
         include_spip('pdf/fpdf_tpl');
         include_spip('pdf/fpdi');
-        include_spip('pdf/chiffreEnLettre');
+        include_spip('chiffreEnLettre');
         include_spip('inc/association_comptabilite');
-        $annee = association_passeparam_annee();
-        $id_don = association_recuperer_entier('id_don');
-		$association_imputation = charger_fonction('association_imputation', 'inc');
-		if (!preg_match('/^\d{4}$/', $annee))
+	$association_imputation = charger_fonction('association_imputation', 'inc');
+	if (!preg_match('/^\d{4}$/', $annee))
 			$annee = date('Y')-1;
-		$montants = sql_getfetsel('SUM(recette) AS montant', 'spip_asso_comptes', $association_imputation('pc_cotisations', $id_auteur) ." AND vu AND DATE_FORMAT(date, '%Y')=$annee");
-		$montants = $montants*($GLOBALS['association_metas']['tauxfiscal']/100);
-		$montants += sql_getfetsel('SUM(D.argent) AS montant',
+	$montants = sql_getfetsel('SUM(recette) AS montant', 'spip_asso_comptes', $association_imputation('pc_cotisations', $id_auteur) ." AND vu AND DATE_FORMAT(date, '%Y')=$annee");
+	$montants = 100; # HACK!!!!!!!!!!!!!
+	if ($taux = $GLOBALS['association_metas']['tauxfiscal'])
+		$montants = $montants*($taux/100);
+	$montants += sql_getfetsel('SUM(D.argent) AS montant',
             'spip_asso_dons AS D LEFT JOIN spip_asso_comptes AS C ON C.id_journal=D.id_don',
             $association_imputation('pc_dons', '', 'C') ." AND C.vu AND DATE_FORMAT(D.date_don, '%Y')=$annee AND id_auteur=$id_auteur AND contrepartie=''");
            //$mail = sql_getfetsel('email', 'spip_auteurs',"id_auteur=$id_auteur");
-		if (!$montants) {
-            echo "Pas de versement(s) &quot;valid&eacute;(s)&quot; en $annee pour l'adh&eacute;rent <a href='". generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur)."'> {$mbr_qui['prenom']} {$mbr_qui['nom_famille']}</a>.";
-		} else {
+	$prenom = $mbr_qui['prenom'];
+	$nom =  $mbr_qui['nom_famille'];
+
+	if (!$montants) {
+		$url = generer_url_ecrire('auteur_infos', "id_auteur=$id_auteur");
+		echo _L("Pas de versement(s) valid&eacute;(s) en $annee pour l'adh&eacute;rent <a href='$url'>$prenom $nom</a>.");
+	} else {
             $mbr_ou=sql_fetsel('*','spip_adresses AS p JOIN spip_adresses_liens AS l ON p.id_adresse=l.id_adresse', "objet='auteur' AND id_objet=$id_auteur AND type IN ('pref','dom','home','perso','domicile','main','principale','principal') LIMIT 0, 1");
             if (!$mbr_ou)
                 $mbr_ou = sql_fetsel('*','spip_adresses AS p JOIN spip_adresses_liens AS l ON p.id_adresse=l.id_adresse', " objet='auteur' AND id_objet=$id_auteur LIMIT 0, 1)");
@@ -60,10 +70,7 @@ function exec_pdf_fiscal() {
                 $rue = $mbr_ou['voie'].' -- '.$mbr_ou['complement'];
             else
                 $rue = $mbr_ou['voie'];
-            if (isset($_GET['var_profile'])) // debogage
-                erreur_squelette();
-            else // remplir le PDF
-                build_pdf("$annee-$id_auteur", $montants, $annee, $mbr_qui['nom_famille'], $mbr_qui['prenom'], $rue, $cp, $mbr_ou['ville'] );
+	    build_pdf("$annee-$id_auteur", $montants, $annee, $nom, $prenom, $rue, $cp, $mbr_ou['ville'] );
 		}
 	}
 }
@@ -107,8 +114,9 @@ function build_pdf($code, $montant, $isodate, $nom, $prenoms, $adresse, $cp, $co
     $pdf->Write(0, utf8_decode($objet[2]));
     $pdf->SetXY(20, 82);
     $pdf->Write(0, utf8_decode($objet[3]));
+
     // Beneficiaire : case habilitation a delivrer recu fiscal
-    switch ($GLOBALS['association_metas']['recufiscal'])
+    switch (1) #$GLOBALS['association_metas']['recufiscal'])
     {
         case 1:
             $ycase = 99;
@@ -233,6 +241,7 @@ function build_pdf($code, $montant, $isodate, $nom, $prenoms, $adresse, $cp, $co
     $pdf->SetXY(98, 88);
     $pdf->Write(0, $ladate[0]);
     $pdf->SetXY(80, 88);
+
     switch (intval($ladate[1]))
     {
         case 1:
@@ -371,7 +380,7 @@ function build_pdf($code, $montant, $isodate, $nom, $prenoms, $adresse, $cp, $co
 #    $pdf->Rect(135,247,25,4,'F');
 
 // telechargement pages
-    $pdf->Output("recu_fiscal_$isodate.pdf", 'I');
+    $pdf->Output('recu_fiscal_' . $isodate . '.pdf', 'I');
 }
 
 ?>

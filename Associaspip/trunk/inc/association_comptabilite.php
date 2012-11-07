@@ -634,18 +634,22 @@ function association_liste_resultat_net($recettes, $depenses) {
     echo "</tr></table>";
 }
 
-function export_compte($ids, $mode)
+function export_compte($ids, $mode, $icone = true)
 {
 	// exports connus (a completer au besoin)
 	foreach(array('csv','ctx','dbk','json','tex','tsv','xml','yaml') as $t){
-		$args = $ids['id_periode'] . "-$mode-" . $ids['type_periode']
-		    .($ids['destination']? ('-' . $ids['destination']) :'');
+			$args = $ids['id_periode'] . "-$mode-"
+			. $ids['type_periode']
+			.($ids['destination']? ('-' . $ids['destination']) :'');
 
 		$s = ($t == 'tex') ? 'latex' : $t;
 		$script = "export_soldescomptes_$s";
 		include_spip('inc/actions');
 		$url = generer_action_auteur($script, $args);
-		echo icone1_association(strtoupper($t), $url, 'export-24.png');
+		$t = strtoupper($t);
+		if ($icone)
+		  echo icone1_association($t, $url, 'export-24.png');
+		else echo "<a href='$url'>$t</a> ";
 	}
 }
 
@@ -931,10 +935,21 @@ class ExportComptes_PDF extends FPDF {
 	$this->SetTitle('Module Comptabilite');
 	$this->SetSubject('Etats comptables');
 	// typo par defaut
-	$this->SetFont(($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial'), '', 12);
+	$this->underline = '';
+	$this->FontStyle = '';
+	$this->FontSizePy = 12;
+	$this->FontFamily = ($GLOBALS['association_metas']['fpdf_font']?$GLOBALS['association_metas']['fpdf_font']:'Arial');
 	// engager la page
 	// http://fpdf.org/en/doc/addpage.htm
-	$this->AddPage($GLOBALS['association_metas']['fpdf_orientation'], $GLOBALS['association_metas']['fpdf_format']?$GLOBALS['association_metas']['fpdf_format']: array(($GLOBALS['association_metas']['fpdf_widht']?$GLOBALS['association_metas']['fpdf_widht']:210), ($GLOBALS['association_metas']['fpdf_height']?$GLOBALS['association_metas']['fpdf_height']:297) ) );
+	$this->AddPage($GLOBALS['association_metas']['fpdf_orientation'],
+		       $GLOBALS['association_metas']['fpdf_format']
+		       ? $GLOBALS['association_metas']['fpdf_format']
+		       : array(($GLOBALS['association_metas']['fpdf_widht']
+				? $GLOBALS['association_metas']['fpdf_widht']
+				: 210),
+			       ($GLOBALS['association_metas']['fpdf_height']
+				? $GLOBALS['association_metas']['fpdf_height']
+				:297) ) );
     }
 
     /**

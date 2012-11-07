@@ -13,11 +13,9 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 // Version PDF de la synthese des Comptes de Bilan
-function exec_pdf_comptesbilan() {
-	if (!autoriser('voir_compta', 'association') OR !test_plugin_actif('fpdf')) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
+function action_pdf_comptesbilan() {
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
 		include_spip('inc/association_comptabilite');
 		$pdf = new ExportComptes_PDF($GLOBALS['association_metas']['fpdf_orientation']?$GLOBALS['association_metas']['fpdf_orientation']:'P', $GLOBALS['association_metas']['fpdf_unit']?$GLOBALS['association_metas']['fpdf_unit']:'mm', $GLOBALS['association_metas']['fpdf_format']?$GLOBALS['association_metas']['fpdf_format']:( ($GLOBALS['association_metas']['fpdf_widht'] AND $GLOBALS['association_metas']['fpdf_height'])?array($GLOBALS['association_metas']['fpdf_widht'],$GLOBALS['association_metas']['fpdf_height']):'A4') );
 		$pdf->init();
@@ -37,7 +35,6 @@ function exec_pdf_comptesbilan() {
 		$lesActifs = $pdf->association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', -1, $pdf_>exercice, $pdf->destination);
 		$pdf->association_liste_resultat_net($lesPassifs, $lesActifs);
 		$pdf->File('comptes_bilan');
-	}
 }
 
 ?>

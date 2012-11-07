@@ -65,8 +65,15 @@ function exec_adherents() {
 			$champsExclus[] = 'prenom';
 		if ( !$GLOBALS['association_metas']['id_asso'] )
 			$champsExclus[] = 'id_asso';
-		if ( autoriser('exporter_membres', 'association') )
-			echo association_bloc_listepdf('membre', array('where_adherents'=>$where_adherents, 'jointure_adherents'=>$jointure_adherents, 'statut_interne'=>$statut_interne), 'adherent_libelle_', $champsExclus, TRUE);
+		if ( autoriser('exporter_membres', 'association')
+		AND test_plugin_actif('FPDF')) { // liste
+			echo debut_cadre_enfonce('', TRUE);
+			echo '<h3>'. _T('plugins_vue_liste') .'</h3>';
+			echo '<div class="formulaire_spip formulaire_asso_liste_'.$objet.'s">';
+			echo generer_action_auteur("pdf_membres", 0, '', association_bloc_listepdf('membre', array('where_adherents'=>$where_adherents, 'jointure_adherents'=>$jointure_adherents, 'statut_interne'=>$statut_interne), 'adherent_libelle_', $champsExclus, TRUE) , '', '');
+			echo '</div>';
+			echo fin_cadre_enfonce(TRUE);
+		}
 		debut_cadre_association('annonce.gif', 'adherent_titre_liste_actifs');
 		// FILTRES
 		filtres_association(array(

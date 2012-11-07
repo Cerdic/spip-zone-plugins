@@ -11,13 +11,9 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_pdf_membres() {
-// on s'assure qu'il n'y ai pas d'id associe a la demande d'autorisation
-// sur voir_membres car on les consulte tous
-	if (!autoriser('exporter_membres', 'association') OR !test_plugin_actif('fpdf')) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
+function action_pdf_membres() {
+	        $securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
 		include_spip('pdf/extends');
 		// on recupere ce qu'il faut pour faire la requete SQL pour generer la liste d'id_auteurs dont on a besoin pour recuperer les adresses et telephones
 		$where = htmlspecialchars_decode(_request('where_adherents'));
@@ -89,7 +85,6 @@ function exec_pdf_membres() {
 
 		$pdf->Query(sql_select('*, c.libelle as categorie','spip_asso_membres m LEFT JOIN spip_asso_categories c ON m.id_categorie = c.id_categorie', sql_in('id_auteur', $liste_id_auteurs), '', $order), $adresses_tels, 'id_auteur');
 		$pdf->Output();
-	}
 }
 
 ?>

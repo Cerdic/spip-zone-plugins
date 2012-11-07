@@ -13,11 +13,10 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 // Version PDF de la synthese des Comptes de Resultat
-function exec_pdf_comptesresultat() {
-	if (!autoriser('voir_compta', 'association') OR !test_plugin_actif('fpdf')) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
+function action_pdf_comptesresultat() {
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+
 		include_spip('inc/association_comptabilite');
 		$pdf = new ExportComptes_PDF($GLOBALS['association_metas']['fpdf_orientation']?$GLOBALS['association_metas']['fpdf_orientation']:'P', $GLOBALS['association_metas']['fpdf_unit']?$GLOBALS['association_metas']['fpdf_unit']:'mm', $GLOBALS['association_metas']['fpdf_format']?$GLOBALS['association_metas']['fpdf_format']:( ($GLOBALS['association_metas']['fpdf_widht'] AND $GLOBALS['association_metas']['fpdf_height'])?array($GLOBALS['association_metas']['fpdf_widht'],$GLOBALS['association_metas']['fpdf_height']):'A4') );
 		$pdf->init();
@@ -27,7 +26,6 @@ function exec_pdf_comptesresultat() {
 		$pdf->association_liste_resultat_net($lesProduits, $lesCharges);
 		$pdf->association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_contributions_volontaires'], 'cpte_benevolat', 0, $pdf_>exercice, $pdf->destination);
 		$pdf->File('comptes_resultats');
-	}
 }
 
 ?>
