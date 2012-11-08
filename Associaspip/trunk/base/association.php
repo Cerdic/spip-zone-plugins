@@ -274,7 +274,7 @@ function association_declarer_tables_principales($tables_principales) {
 		'intitule' => "TINYTEXT NOT NULL",
 		'commentaire' => "TEXT NOT NULL",
 		'date_debut' => "DATE NOT NULL DEFAULT '0000-00-00'",
-		'date_fin' => "DATE NOT NULL DEFAULT '0000-00-00'"
+		'date_fin' => "DATE NOT NULL DEFAULT '0000-00-00'",
 		'maj' => "TIMESTAMP NOT NULL"
 	);
 	$spip_asso_exercices_key = array(
