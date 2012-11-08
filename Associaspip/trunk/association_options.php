@@ -1978,10 +1978,10 @@ function association_bloc_infosgauche($TitreObjet, $NumObjet, $DesLignes=array()
  *   Par defaut, quand rien n'est indique, c'est l'objet suffixe de "s" qui est utilise
  */
 function association_bloc_suppression($type, $id, $retour='') {
-	$res = '<p><strong>'. _T('asso:vous_aller_effacer', array('quoi'=>'<i>'. _T('asso:objet_num', array('objet'=>$type,'num'=>$id)) .'</i>') ) .'</strong></p>';
-	$res .= '<p class="boutons"><input type="submit" value="'. _T('asso:bouton_confirmer') .'" /></p>';
-	echo redirige_action_post("supprimer_{$type}s", $id, ($retour?$retour:$type.'s'), '', $res);
-
+	$res = _T('asso:objet_num', array('objet'=>$type,'num'=>$id));
+	$res = _T('asso:vous_aller_effacer', array('quoi'=>'<i>'.$res.'</i>'));
+	$res = '<p><strong>'. $res  .'</strong></p><p class="boutons"><input type="submit" value="'. _T('asso:bouton_confirmer') .'" /></p>';
+	return redirige_action_post("supprimer_{$type}s", $id, ($retour?$retour:$type.'s'), '', $res);
 }
 
 /**
@@ -2123,6 +2123,7 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
 	} elseif ( !is_array($boutons) ) { // premier parametre non valide : impossible de poursuivre ; on sort sans erreur
 		return '';
 	}
+
 	if ( !is_array($presentation) ) { // second parametre non valide : impossible de poursuivre ; on sort sans erreur
 		return '';
 	} else { // ok, c'est un tableau...
@@ -2130,6 +2131,12 @@ function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(
 			if ( !is_array($param) ) // ...de tableaux ?
 				return '';
 	}
+	return association_bloc_listehtml2($reponse_sql, $presentation, $boutons, $cle1, $extra, $cle2, $selection);
+}
+
+/* auxiliare de la fonction precedente */
+
+function association_bloc_listehtml2($reponse_sql, $presentation, $boutons=array(), $cle1='', $extra=array(), $cle2='', $selection=0 ) {
 	$res =  '<table width="100%" class="asso_tablo'. ($table ? '" id="liste_'.$table : '') .'">'. "\n<tr>";
 
 	foreach ($presentation as &$param) { // entetes

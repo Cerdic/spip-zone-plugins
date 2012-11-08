@@ -51,11 +51,13 @@ function action_pdf_fiscal() {
 	$nom =  $mbr_qui['nom_famille'];
 
 	if (!$montants) {
+		include_spip('inc/minipres');
 		$h = generer_url_ecrire('auteur_infos', "id_auteur=$id_auteur");
-		echo _T('asso:versement_valide_annee_pour',
+		$h = _T('asso:versement_valide_annee_pour',
 			array('url' => $h,
 			      'annee' => $annee,
 			      'nom' => "$prenom $nom"));
+		echo minipres($h, generer_form_ecrire('accueil', '','',_T('public:accueil_site')));
 	} else {
             $mbr_ou=sql_fetsel('*','spip_adresses AS p JOIN spip_adresses_liens AS l ON p.id_adresse=l.id_adresse', "objet='auteur' AND id_objet=$id_auteur AND type IN ('pref','dom','home','perso','domicile','main','principale','principal') LIMIT 0, 1");
             if (!$mbr_ou)

@@ -329,8 +329,11 @@ function association_ajouter_destinations_comptables($id_compte, $recette, $depe
  *   sous-requete SQL de selection/restriction a une imputation comptable
  */
 function inc_association_imputation_dist($nom, $id='', $table='') {
-    $champ = ($table ? ($table . '.') : '') . 'imputation';
-    return "$champ=". sql_quote($GLOBALS['association_metas'][$nom]) .($id?(" AND id_journal=".sql_quote($id)):'') ;
+	if ($GLOBALS['association_metas'][$nom])
+		$w = ($table ? ($table . '.') : '') . 'imputation='. sql_quote($GLOBALS['association_metas'][$nom]);
+	else $w = '';
+	$w2 = $id ? ("id_journal=".intval($id)) : '';
+	return ($w AND $w2) ? "$w AND $w2" : "$w$w2";
 }
 
 /**
