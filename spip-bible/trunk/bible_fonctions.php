@@ -260,7 +260,6 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nom
 	$livre = str_replace('2','2 ',$livre);
 	$livre = str_replace('3','3 ',$livre);
 
-
     if ($nommer_trad=='true'){
         if ($url=='oui'){
              $url = bible_url_passage($livre,$cd,$vd,$cf,$vf,$trad,$lang);
@@ -275,32 +274,32 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nom
 	}
 	if ($cd==$cf and $vd=='' and $vf==''){
 		
-		return "[$livre|$livre_long] ".$cd.$bloc_fin;
+		$chaine = "[$livre|$livre_long] ".$cd;
 	
 	}
 	
-	if ($vd=='' and $vf==''){
+	else if ($vd=='' and $vf==''){
 		
-		return "[$livre|$livre_long] ".$cd.'-'.$cf.$bloc_fin;
+		$chaine = "[$livre|$livre_long] ".$cd.'-'.$cf;
 	
 	}
-
-	$chaine = "[$livre|$livre_long] ".$cd.$separateur." ".$vd;
-	
-	if ($cd!=$cf){
-			
-		$chaine .= '-'.$cf.$separateur.' '.$vf;
-	
-	}
-	elseif ($vd!=$vf) {
-		
-		$chaine .= '-'.$vf;
-		
-	}
-	
+    else{
+    	$chaine = "[$livre|$livre_long] ".$cd.$separateur." ".$vd;
+    	
+    	if ($cd!=$cf){
+    			
+    		$chaine .= '-'.$cf.$separateur.' '.$vf;
+    	
+    	}
+    	elseif ($vd!=$vf) {
+    		
+    		$chaine .= '-'.$vf;
+    		
+    	}
+    }
 	$chaine.= $bloc_fin;
     
-
+    
 	if ($propre!='non'){$chaine = propre($chaine);}
 
 	return $chaine;
