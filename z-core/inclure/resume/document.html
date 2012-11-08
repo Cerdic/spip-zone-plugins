@@ -6,7 +6,7 @@
 ]
 <BOUCLE_documents(DOCUMENTS) {id_document} {statut?}>
 <article class="entry document">
-	<strong class="h3-like entry-title"><a href="#URL_DOCUMENT" rel="bookmark" type="#MIME_TYPE" title="<:bouton_telecharger:> [(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]" >[(#LOGO_DOCUMENT|image_reduire{150,100})][(#TITRE|couper{#EVAL{_SARKASPIP_CONFIG_TAILLE_TITRE_DOCUMENT}}|sinon{[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]<span
+	<strong class="h3-like entry-title"><a href="#URL_DOCUMENT" rel="bookmark" type="#MIME_TYPE" title="<:bouton_telecharger:> [(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]" >[(#LOGO_DOCUMENT|image_reduire{#ENV{largeur_logo,-1},#ENV{hauteur_logo,-1}})][(#TITRE|sinon{[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]<span
 		class="lire-la-suite hide"><i class="icon-chevron-right" title="<:bouton_telecharger|attribut_html:>"></i></span></a></strong>
 	<p class="info-publi">[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> (#DATE|affdate_jourcourt)</time>]
 	<span class="type"><span class="sep"> - </span>[(#TYPE_DOCUMENT)]</span><span class="poids"><span class="sep"> - </span>[(#TAILLE|taille_en_octets)]</span>
