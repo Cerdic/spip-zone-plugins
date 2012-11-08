@@ -9,7 +9,7 @@
 	Ce plugin permet de compter les t&#233;l&#233;chargements de documents sur son site. Il introduit une balise #URL_DOC_COMPTEUR qui va compter chaque clic fait sur ce lien. Il affiche une page de statistique.
 	</description>
 	<prefix>anaclic</prefix>
-	<lien>http://www.spip-contrib.net/Analyclick-un-compteur-de-telechargements</lien>
+	<lien>http://contrib.spip.net/?article3735</lien>
 
 	<install>base/anaclic_install.php</install>
 	<fonctions>base/anaclic.php</fonctions>
