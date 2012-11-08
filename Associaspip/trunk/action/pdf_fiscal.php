@@ -41,7 +41,6 @@ function action_pdf_fiscal() {
 	if (!preg_match('/^\d{4}$/', $annee))
 			$annee = date('Y')-1;
 	$montants = sql_getfetsel('SUM(recette) AS montant', 'spip_asso_comptes', $association_imputation('pc_cotisations', $id_auteur) ." AND vu AND DATE_FORMAT(date, '%Y')=$annee");
-	$montants = 100; # HACK!!!!!!!!!!!!!
 	if ($taux = $GLOBALS['association_metas']['tauxfiscal'])
 		$montants = $montants*($taux/100);
 	$montants += sql_getfetsel('SUM(D.argent) AS montant',
@@ -52,8 +51,11 @@ function action_pdf_fiscal() {
 	$nom =  $mbr_qui['nom_famille'];
 
 	if (!$montants) {
-		$url = generer_url_ecrire('auteur_infos', "id_auteur=$id_auteur");
-		echo _L("Pas de versement(s) valid&eacute;(s) en $annee pour l'adh&eacute;rent <a href='$url'>$prenom $nom</a>.");
+		$h = generer_url_ecrire('auteur_infos', "id_auteur=$id_auteur");
+		echo _T('asso:versement_valide_annee_pour',
+			array('url' => $h,
+			      'annee' => $annee,
+			      'nom' => "$prenom $nom"));
 	} else {
             $mbr_ou=sql_fetsel('*','spip_adresses AS p JOIN spip_adresses_liens AS l ON p.id_adresse=l.id_adresse', "objet='auteur' AND id_objet=$id_auteur AND type IN ('pref','dom','home','perso','domicile','main','principale','principal') LIMIT 0, 1");
             if (!$mbr_ou)
