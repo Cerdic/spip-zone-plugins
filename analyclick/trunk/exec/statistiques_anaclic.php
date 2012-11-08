@@ -2,12 +2,11 @@
 /**
 * Plugin Analyclick
 *
-* @author: Jean-Marc Viglino (ign.fr)
+* @author: Jean-Marc Viglino (ign.fr) V0.1
+* @author: Pierre KUHN V1
 *
-* Copyright (c) 2011
-* Logiciel distribue sous licence GNU/GPL.
-*
-* Affichage des statistiques
+* Copyright (c) 2011-12
+* Logiciel distribue sous licence GPL.
 *
 **/
 

@@ -2,48 +2,44 @@
 /**
 * Plugin Analyclick
 *
-* @author: Jean-Marc Viglino (ign.fr)
+* @author: Jean-Marc Viglino (ign.fr) V0.1
+* @author: Pierre KUHN V1
 *
-* Copyright (c) 2011
-* Logiciel distribue sous licence GNU/GPL.
+* Copyright (c) 2011-12
+* Logiciel distribue sous licence GPL.
 *
 **/
 
-include_spip('base/serial'); // pour eviter une reinit posterieure des tables modifiees
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
-global $tables_principales, $tables_auxiliaires, $table_des_tables;
+function anaclic_declarer_tables_interfaces($interface){
+	$interface['tables_jointures']['spip_documents'][] = 'clics';
+	$interface['table_des_tables']['clics']	= 'clics';
 
-/** Table pour le comptage **/
-$spip_doc_count = array(
-					"id_document"	=> "BIGINT(21) NOT NULL default 0",
-					"date"			=> "DATE NOT NULL",
-					"telechargement"=> "INTEGER UNSIGNED NOT NULL"
-				);
+	return $interface;
+}
 
-$spip_doc_count_key = array(
-					"PRIMARY KEY" => "id_document, date"
-				);
+function anaclic_declarer_tables_auxiliaires($tables_auxiliaires){
 
-$tables_principales['spip_doc_compteurs'] = array('field' => &$spip_doc_count, 'key' => &$spip_doc_count_key);
+	$spip_clics = array(
+			"id_clic"	=> 	"bigint(21) DEFAULT '0' NOT NULL",
+			"id_objet"	=> 	"bigint(21) DEFAULT '0' NOT NULL",
+			"objet"		=>	"VARCHAR (25) DEFAULT '' NOT NULL",
+			"ip"		=>	"VARCHAR (30) DEFAULT '' NOT NULL",
+			"maj"		=>	"TIMESTAMP"
+	);
 
-/** Table pour eviter le multi-clic */
-$spip_doc_count_fix = array(
-					"id_document"	=> "BIGINT(21) NOT NULL default 0",
-					"ip"			=> "VARCHAR(30) NOT NULL",
-					"time"			=> "INT"
-				);
-					
-$spip_doc_count_fix_key = array(
-					"PRIMARY KEY" => "id_document, ip"
-				);
+	$spip_clics_key = array(
+			"PRIMARY KEY"	=> "id_clic,id_objet,objet",
+			"KEY id_clic"	=> "id_clic"
+	);
 
-$tables_auxiliaires['spip_doc_compteurs_fix'] = array('field' => &$spip_doc_count_fix, 'key' => &$spip_doc_count_fix_key);
+	$tables_auxiliaires['spip_clics'] = array(
+		'field' => &$spip_clics,
+		'key' => &$spip_clics_key
+	);
 
-// Declarer dans la table des tables 
-global $table_des_tables;
-$table_des_tables['doc_compteurs']		= 'doc_compteurs';
-
-global $tables_jointures;
-$tables_jointures['spip_doc_compteurs']['id_document'] = 'documents';
+	return $tables_auxiliaires;
+}
 
 ?>

@@ -1,20 +1,29 @@
 <paquet
 	prefix="anaclic"
 	categorie="statistique"
-	version="0.0.1"
+	version="1.0.0"
+	schema="0.0.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="anaclic.png"
-	documentation="http://www.spip-contrib.net/Analyclick-un-compteur-de-telechargements"
+	documentation="http://www.spip-contrib.net/"
 >	
 
 	<nom>Analyclick NE PAS ACTIVER </nom>
 	<!-- Compteur de téléchargements pour les documents SPIP -->
 
 	<auteur lien="http://www.spip-contrib.net/_Viglino-Jean-Marc_">Jean-Marc Viglino</auteur>
+	<auteur lien="http://www.pierre-kuhn.org">Pierre KUHN</auteur>
+	
+	<copyright>2011-2012</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
 
 	<pipeline nom="insert_head" inclure="head.php" />
-	<pipeline nom="autoriser" inclure="inc/anaclic_autorisations.php" />
+	<pipeline nom="autoriser" inclure="inc/anaclic_autoriser.php" />
+	
+	<pipeline nom="declarer_tables_interfaces" inclure="base/anaclic.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/anaclic.php" />
 
 	<menu nom="statistiques_anaclic" titre="anaclic:statistiques_documents" parent="menu_activite" icone="images/statistiques-24.gif" />
 </paquet>
