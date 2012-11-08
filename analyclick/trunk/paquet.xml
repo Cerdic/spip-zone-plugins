@@ -5,7 +5,7 @@
 	schema="0.0.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="anaclic.png"
+	logo="prive/themes/spip/images/anaclic.png"
 	documentation="http://www.spip-contrib.net/"
 >	
 
@@ -25,5 +25,5 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/anaclic.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/anaclic.php" />
 
-	<menu nom="statistiques_anaclic" titre="anaclic:statistiques_documents" parent="menu_activite" icone="images/statistiques-24.gif" />
+	<menu nom="stats_anaclic" titre="anaclic:statistiques_documents" parent="menu_activite" icone="images/anaclic-24.png" />
 </paquet>
