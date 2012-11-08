@@ -36,7 +36,7 @@ function formulaires_bible_reference_verifier_dist(){
 }
 
 function formulaires_bible_reference_traiter_dist(){
-
+    include_spip('inc/filtres');
     $passage    = str_replace(' ','',_request('passage'));
     $version    = _request('version');
     $numeros    = _request('numeros');
@@ -44,7 +44,7 @@ function formulaires_bible_reference_traiter_dist(){
     $ref        = _request('ref');
     include_spip('bible_fonctions');
     include_spip('inc/utils');
-    $resultat = recuperer_fond('modeles/bible',array('passage'=>$passage,'traduction'=>$version,'retour'=>!$retour ? 'non' : $retour,'numeros'=>!$numeros ? 'non' : $numeros,'ref'=>!$ref ? 'non' : $ref,'propre'=>'non'));
+    $resultat = proteger_amp(recuperer_fond('modeles/bible',array('passage'=>$passage,'traduction'=>$version,'retour'=>!$retour ? 'non' : $retour,'numeros'=>!$numeros ? 'non' : $numeros,'ref'=>!$ref ? 'non' : $ref,'propre'=>'non')));
     
 
 
