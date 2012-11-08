@@ -2110,28 +2110,30 @@ function association_bloc_listepdf($objet, $params=array(), $prefixeLibelle='', 
  */
 
 function association_bloc_listehtml2($table, $reponse_sql, $presentation, $boutons=array(), $cle1='', $extra=array(), $cle2='', $selection=0) {
-	$res =  '<table width="100%" class="asso_tablo'. ($table ? '" id="liste_'.$table : '') .'">'. "\n<tr>";
 
-	foreach ($presentation as &$param) { // entetes
-		$entete = array_shift($param);
-		$res .= '<th>'. ($entete ? association_langue($entete) : '&nbsp;' ) ."</th>\n";
-	}
-	if ( count($boutons) ) { // colonne(s) de bouton(s) d'action
-		$res .= '<th colspan="'. count($boutons) .'" class="actions">'. _T('asso:entete_action' .(count($boutons)-1?'s':'')) ."</th>\n";
-	}
-	$res .= "</tr>\n";
-	if ( !is_array($boutons) )
-		return $res; // c'est une astuce pour generer la partie entete seulement
 	if ( $cle1 ) {
 		if ( strpos($cle1, 'id_')===0 )
 			$objet = substr($cle1, 3);
 		else
 			$objet = $cle1;
 	}
-	$res .= association_bloc_tr($reponse_sql, $extra, $cle1, $cle2, $objet, $presentation, $boutons) .
-	"</table>\n";
-
+	$res = '';
+	foreach ($presentation as &$param) { // affecter le tableau au passage
+		$entete = array_shift($param);
+		$res .= '<th>'. ($entete ? association_langue($entete) : '&nbsp;' ) ."</th>\n";
+	}
+	$lignes = association_bloc_tr($reponse_sql, $extra, $cle1, $cle2, $objet, $presentation, $boutons);
 	sql_free($reponse_sql);
+
+	if (!$lignes) return _T('asso:aucun');
+
+	if ( count($boutons) ) { // colonne(s) de bouton(s) d'action
+		$res .= '<th colspan="'. count($boutons) .'" class="actions">'. _T('asso:entete_action' .(count($boutons)-1?'s':'')) ."</th>\n";
+	}
+
+	$res =  '<table width="100%" class="asso_tablo"'. ($table ? " id='liste_$table'" : '') . ">\n<tr>$res</tr>\n$lignes</table>\n";
+
+
 	if ( $cle1 && $selection ) {
 // comme on ne peut placer un evenement "onLoad" que sur une ressource externe 
 // (IMG, FRAME, SCRIPT, BODY) ; il vaut mieux appliquer un SCRIPT inclus
