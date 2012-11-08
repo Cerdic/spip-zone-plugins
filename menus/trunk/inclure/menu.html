@@ -10,7 +10,7 @@
 			</BOUCLE_sous_menu>
 		[(#REM)
 			On ferme le li si le type d'entrée accepte des sous-menus
-			et si on a bien quelque chose dans le li (cas des menus sur #SESSION)
+			et si on a bien quelque chose dans le li (cas des menus sur Balise SESSION)
 		][(#TYPE_ENTREE|menus_type_refuser_sous_menu|non)
 			[(#MENUS_AFFICHER_ENTREE|trim|oui)</li>]
 		]
