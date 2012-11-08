@@ -1,5 +1,5 @@
 <?php
-
+include_spip('inc/config');
 function formulaires_bible_reference_charger_dist($lang='fr',$cadre=1){
     
 	$valeurs = array(
