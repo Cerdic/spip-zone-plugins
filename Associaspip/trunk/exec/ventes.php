@@ -68,8 +68,8 @@ function exec_ventes() {
 			default :
 				break;
 		}
-		echo association_bloc_listehtml(
-			array('*, CASE WHEN date_envoi<date_vente THEN 0 ELSE 1 END AS statut_vente', 'spip_asso_ventes', $q_where, '',  'id_vente DESC'), // requete
+		echo association_bloc_listehtml2('asso_ventes',
+			sql_select('*, CASE WHEN date_envoi<date_vente THEN 0 ELSE 1 END AS statut_vente', 'spip_asso_ventes', $q_where, '',  'id_vente DESC'),
 			array(
 				'id_vente' => array('asso:entete_id', 'entier'),
 				'date_vente' => array('asso:ventes_entete_date_vente', 'date', 'dtstart'),

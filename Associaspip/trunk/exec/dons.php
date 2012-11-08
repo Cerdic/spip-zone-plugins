@@ -61,8 +61,8 @@ function exec_dons() {
 		));
 		$critere_type = $type?"$type AND ":'';
 		// TABLEAU
-		echo association_bloc_listehtml(
-			array("*, CASE WHEN argent<>0 AND colis='' THEN 'argent' WHEN argent=0 AND colis<>''  THEN 'colis' ELSE 'mixte' END AS type_don ", 'spip_asso_dons', "$critere_type $critere_periode", '', 'date_don DESC'), // requete
+		echo association_bloc_listehtml2('asso_dons',
+			sql_select("*, CASE WHEN argent<>0 AND colis='' THEN 'argent' WHEN argent=0 AND colis<>''  THEN 'colis' ELSE 'mixte' END AS type_don ", 'spip_asso_dons', "$critere_type $critere_periode", '', 'date_don DESC'), // requete
 			array(
 				'id_don' => array('asso:entete_id', 'entier'),
 				'date_don' => array('asso:entete_date', 'date', ''),

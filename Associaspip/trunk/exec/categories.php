@@ -27,8 +27,8 @@ function exec_categories() {
 			'ajouter_une_categorie_de_cotisation' => array('cotisation.png', 'edit_categorie'),
 		));
 		debut_cadre_association('cotisation.png', 'toutes_categories_de_cotisations');
-		echo association_bloc_listehtml(
-			array('*', 'spip_asso_categories', '', 'id_categorie'), // requete
+		echo association_bloc_listehtml2('asso_categories',
+			sql_select('*', 'spip_asso_categories', '', 'id_categorie'),
 			array(
 				'id_categorie' => array('asso:entete_id', 'entier'),
 				'valeur' => array('asso:entete_code', 'code', 'x-spip_asso_categories'),

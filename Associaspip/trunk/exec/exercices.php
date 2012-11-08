@@ -35,8 +35,8 @@ function exec_exercices() {
 			'ajouter_un_exercice' => array('calculatrice.gif', 'edit_exercice'),
 		) );
 		debut_cadre_association('calculatrice.gif', 'tous_les_exercices');
-		echo association_bloc_listehtml(
-			array('*', 'spip_asso_exercices', '', 'intitule DESC'), // requete
+		echo association_bloc_listehtml2('asso_exercices',
+			sql_select('*', 'spip_asso_exercices', '', 'intitule DESC'),
 			array(
 				'id_exercice' => array('asso:entete_id', 'entier'),
 				'intitule' => array('asso:entete_intitule', 'texte'),

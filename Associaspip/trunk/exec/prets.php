@@ -108,8 +108,8 @@ function exec_prets() {
 			default :
 				break;
 		}
-		echo association_bloc_listehtml(
-			array("*, CASE WHEN date_retour='0000-00-00T00:00:00' THEN 1 WHEN date_retour>NOW() THEN 1 ELSE 0 END AS statut_sortie ", 'spip_asso_prets', $q_where, '', 'date_sortie DESC'), // requete
+		echo association_bloc_listehtml2('asso_prets',
+			sql_select("*, CASE WHEN date_retour='0000-00-00T00:00:00' THEN 1 WHEN date_retour>NOW() THEN 1 ELSE 0 END AS statut_sortie ", 'spip_asso_prets', $q_where, '', 'date_sortie DESC'), // requete
 			array(
 				'id_pret' => array('asso:entete_id', 'entier'),
 				'date_sortie' => array('asso:prets_entete_date_sortie', 'date', 'dtstart'),

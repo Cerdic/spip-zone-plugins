@@ -68,8 +68,8 @@ function exec_inscrits_activite() {
 		if ($statut) { // restriction de la selection
 			$critereSupplementaire = ' AND '. ($statut>0?"date_paiement<date_inscription ":"date_paiement>=date_inscription ");
 		}
-		echo association_bloc_listehtml(
-			array("*, CASE date_paiement WHEN '0000-00-00' THEN 0 ELSE 1 END AS statut_paiement ", 'spip_asso_activites', "id_evenement=$id_evenement $critereSupplementaire ", '', 'id_activite DESC'), // requete
+		echo association_bloc_listehtml2('asso_activites',
+			sql_select("*, CASE date_paiement WHEN '0000-00-00' THEN 0 ELSE 1 END AS statut_paiement ", 'spip_asso_activites', "id_evenement=$id_evenement $critereSupplementaire ", '', 'id_activite DESC'), // requete
 			array(
 				'id_activite' => array('asso:entete_id', 'entier'),
 				'date_inscription' => array('asso:entete_date', 'date', ''),

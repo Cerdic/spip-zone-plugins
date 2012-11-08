@@ -26,8 +26,8 @@ function exec_destination() {
 		));
 		debut_cadre_association('euro-39.gif', 'destination_comptable');
 		//Affichage de la table
-		echo association_bloc_listehtml(
-			array("*", 'spip_asso_destination', '', 'id_destination', 'intitule'), // requete
+		echo association_bloc_listehtml2('asso_destination',
+			sql_select("*", 'spip_asso_destination', '', 'id_destination', 'intitule'),
 			array(
 				'id_destination' => array('asso:entete_id', 'entier'),
 				'intitule' => array('asso:entete_intitule', 'texte'),

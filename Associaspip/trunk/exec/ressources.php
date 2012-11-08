@@ -99,8 +99,8 @@ function exec_ressources() {
 			'statut' => $filtre_statut,
 		));
 		// affichage du tableau
-		echo association_bloc_listehtml(
-			array('*', 'spip_asso_ressources', $s_sql[$statut],'',  'id_ressource'), // requete
+		echo association_bloc_listehtml2('asso_ressources',
+			sql_select('*', 'spip_asso_ressources', $s_sql[$statut],'',  'id_ressource'),
 			array(
 				'id_ressource' => array('asso:entete_id', 'entier'),
 				'statut' => array('', 'puce', $s_ico, ''), // quantity? availability?

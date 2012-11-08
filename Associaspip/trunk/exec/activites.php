@@ -98,8 +98,8 @@ function exec_activites() {
 		} else {
 			$q_having = '';
 		}
-		echo association_bloc_listehtml(
-			array("e.id_evenement, e.date_debut, e.date_fin, e.titre  AS intitule, e.lieu,  COUNT(a.id_activite) AS inscriptions, SUM(a.quantite) AS quantites, SUM(a.montant) AS montants, CASE COUNT(a.id_activite) WHEN 0 THEN 0 ELSE 1 END AS participations $mc_sel", $q_from, $q_where, 'e.id_evenement', 'date_debut DESC, date_fin DESC', sql_asso1page(), $q_having), // requete
+		$q = sql_select("e.id_evenement, e.date_debut, e.date_fin, e.titre  AS intitule, e.lieu,  COUNT(a.id_activite) AS inscriptions, SUM(a.quantite) AS quantites, SUM(a.montant) AS montants, CASE COUNT(a.id_activite) WHEN 0 THEN 0 ELSE 1 END AS participations $mc_sel", $q_from, $q_where, 'e.id_evenement', 'date_debut DESC, date_fin DESC', sql_asso1page(), $q_having);
+		echo association_bloc_listehtml2('evenements', $q,
 			array(
 				'id_evenement' => array('asso:entete_id', 'entier'),
 				'date_debut' => array('agenda:evenement_date_du', 'date', 'dtstart'),

@@ -2083,9 +2083,10 @@ function association_bloc_listepdf($objet, $params=array(), $prefixeLibelle='', 
 /**
  * Listing sous forme de tableau HTML
  *
- * @param ressource|array $requete_sql
- *   Ressource de requete SQL
- *   Liste des parametres de "sql_select()"
+ * @param string $table
+ *   nom de table SQL
+ * @param ressource $reponse_sql
+ *   Ressource de requete sql_select sur cette table (avec jointure eventuelle)
  *   http://doc.spip.org/@sql_select
  *   http://programmer.spip.net/sql_select,569
  * @param array $presentation
@@ -2107,36 +2108,8 @@ function association_bloc_listepdf($objet, $params=array(), $prefixeLibelle='', 
  * @return string $res
  *   Table-HTML listant les donnees formatees
  */
-function association_bloc_listehtml($requete_sql, $presentation, $boutons=array(), $cle1='', $extra=array(), $cle2='', $selection=0 ) {
-	if ( is_array($requete_sql) && count($requete_sql)>1 ) {
-		$table = ($requete_sql[1] ? $requete_sql[1] : ($requete_sql['table'] ? $requete_sql['table'] : ($requete_sql['from']?$requete_sql['from']:$requete_sql['tables']) ) ) ; // on recupere la partie "FROM" de la requete SQL...
-		$table = substr_replace(trim( is_array($table)?$table[0]:$table ), '', 0, 5); //  on supprime le prefixe "spip_" de la 1ere table (normalement la principale...)
-		$spc_pos = strpos($table, ' '); // requete avec alias (" AS ") ou jointure de plusieurs tables ( " JOIN ")
-		$table = substr($table, 0, $spc_pos?$spc_pos:strlen($table) ); // on recupere jusqu'au premier espace (donc le vrai nom de la 1ere table) sinon jusqu'a la fin.
-		$reponse_sql = call_user_func_array('sql_select', $requete_sql);
-	} elseif ( is_resource($requete_sql) ) {
-		$reponse_sql = $requete_sql;
-	} elseif ( is_string($requet_sql) ) {
-		$reponse_sql = call_user_func_array('sql_query', $requete_sql);
-		$table = substr_replace(substr($requete_sql, stripos(trim($requeste_sql), ' from ') ), '', 0, 5); // on recupere la partie "FROM" de la requete SQL... et on supprime le prefixe "spip_" de la premiere table (normalement la principale...)
-		$table = substr($table, 0, strlen($table)-strpos("$table ", ' ') ); // on recupere jusqu'au premier espace (donc le vrai nom de la 1ere table) sinon jusqu'a la fin.
-	} elseif ( !is_array($boutons) ) { // premier parametre non valide : impossible de poursuivre ; on sort sans erreur
-		return '';
-	}
 
-	if ( !is_array($presentation) ) { // second parametre non valide : impossible de poursuivre ; on sort sans erreur
-		return '';
-	} else { // ok, c'est un tableau...
-		foreach ($presentation as $param)
-			if ( !is_array($param) ) // ...de tableaux ?
-				return '';
-	}
-	return association_bloc_listehtml2($reponse_sql, $presentation, $boutons, $cle1, $extra, $cle2, $selection);
-}
-
-/* auxiliare de la fonction precedente */
-
-function association_bloc_listehtml2($reponse_sql, $presentation, $boutons=array(), $cle1='', $extra=array(), $cle2='', $selection=0 ) {
+function association_bloc_listehtml2($table, $reponse_sql, $presentation, $boutons=array(), $cle1='', $extra=array(), $cle2='', $selection=0) {
 	$res =  '<table width="100%" class="asso_tablo'. ($table ? '" id="liste_'.$table : '') .'">'. "\n<tr>";
 
 	foreach ($presentation as &$param) { // entetes

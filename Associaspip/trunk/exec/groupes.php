@@ -26,8 +26,8 @@ function exec_groupes() {
 		));
 		debut_cadre_association('annonce.gif', 'tous_les_groupes');
 		// affichage du tableau
-		echo association_bloc_listehtml(
-			array('*', 'spip_asso_groupes', 'id_groupe>=100','',  'nom'), // requete
+		echo association_bloc_listehtml2('asso_groupes',
+			sql_select('*', 'spip_asso_groupes', 'id_groupe>=100','',  'nom'),
 			array(
 #				'id_groupe' => array('asso:entete_id', 'entier'),
 				'nom' => array('asso:entete_nom', 'texte'),

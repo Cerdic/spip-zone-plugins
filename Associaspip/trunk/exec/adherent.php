@@ -66,7 +66,7 @@ function exec_adherent() {
 		$query_groupes = sql_select('g.*, fonction', 'spip_asso_groupes g LEFT JOIN spip_asso_groupes_liaisons l ON g.id_groupe=l.id_groupe', 'g.id_groupe>=100 AND l.id_auteur='.$id_auteur, '', 'g.nom'); // Liste des groupes (on ignore les groupes d'id <100 qui sont dedies a la gestion des autorisations)
 		if (sql_count($query_groupes)) {
 			echo debut_cadre_relief('', TRUE, '', _T('asso:groupes_membre') );
-			echo association_bloc_listehtml(
+			echo association_bloc_listehtml2('asso_groupes',
 				$query_groupes, // requete
 				array(
 					'id_groupe' => array('asso:entete_id', 'entier'),
@@ -119,15 +119,15 @@ function voir_adherent_cotisations($id_auteur, $full) {
 	}
 	$association_imputation = charger_fonction('association_imputation', 'inc');
 	$where =  $association_imputation('pc_cotisations', $id_auteur);
-	echo voir_adherent_paiements(sql_select('id_compte, recette AS montant, date_operation, justification, journal', 'spip_asso_comptes', $where, '', 'date_operation DESC, id_compte DESC', '0,10' ),
-		$full);
+	$q = sql_select('id_compte, recette AS montant, date_operation, justification, journal', 'spip_asso_comptes', $where, '', 'date_operation DESC, id_compte DESC', '0,10' );
+	echo voir_adherent_paiements('asso_comptes', $q, $full);
 	echo fin_cadre_relief(TRUE);
 }
 
 /// HISTORIQUE ACTIVITES
 function voir_adherent_activites($id_auteur) {
 	echo debut_cadre_relief('', TRUE, '', _T('asso:adherent_titre_historique_activites') );
-	echo association_bloc_listehtml(
+	echo association_bloc_listehtml2('spip_asso_activites',
 		array('*', 'spip_asso_activites As a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', "id_auteur=$id_auteur", '', 'date_debut DESC, date_fin DESC', '0,10'), // requete
 		array(
 			'id_activite' => array('asso:entete_id', 'entier'),
@@ -147,7 +147,7 @@ function voir_adherent_activites($id_auteur) {
 /// HISTORIQUE VENTES
 function voir_adherent_ventes($id_auteur) {
 	echo debut_cadre_relief('', TRUE, '', _T('asso:adherent_titre_historique_ventes') );
-	echo association_bloc_listehtml(
+	echo association_bloc_listehtml2('asso_ventes',
 		array('*', 'spip_asso_ventes', "id_auteur=$id_auteur", '', 'date_vente DESC', '0,10'), // requete
 		array(
 			'id_vente' => array('asso:entete_id', 'entier'),
@@ -168,7 +168,7 @@ function voir_adherent_ventes($id_auteur) {
 
 function voir_adherent_dons($id_auteur, $full) {
 	echo debut_cadre_relief('', TRUE, '', _T('asso:adherent_titre_historique_dons') );
-	echo association_bloc_listehtml(
+	echo association_bloc_listehtml2('asso_dons',
 		array('*', 'spip_asso_dons', "id_auteur=$id_auteur", '', 'date_don DESC', '0,10'),
 		array(
 			'id_don' => array('asso:entete_id', 'entier'),
@@ -197,7 +197,7 @@ function voir_adherent_dons($id_auteur, $full) {
 
 function voir_adherent_prets($id_auteur) {
 	echo debut_cadre_relief('', TRUE, '', _T('asso:adherent_titre_historique_prets') );
-	echo association_bloc_listehtml(
+	echo association_bloc_listehtml2('asso_prets',
 		array('*', 'spip_asso_prets AS P LEFT JOIN spip_asso_ressources AS R ON P.id_ressource=R.id_ressource', "id_auteur=$id_auteur", '', 'id_pret DESC', '0,10'),
 		array(
 			'id_pret' => array('asso:entete_id', 'entier'),
@@ -214,10 +214,10 @@ function voir_adherent_prets($id_auteur) {
 	echo fin_cadre_relief(TRUE);
 }
 
-function voir_adherent_paiements($data, $lien) {
+function voir_adherent_paiements($table, $requte, $lien) {
 
-	return association_bloc_listehtml2(
-		$data, // requete
+	return association_bloc_listehtml2($table,
+		$requete,
 		array(
 			'id_compte' => array('asso:entete_id', 'entier'),
 			'date' => array('asso:entete_date', 'date'),
