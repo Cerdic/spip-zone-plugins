@@ -1,0 +1,15 @@
+[(#REM)
+	Exemple:
+	var tinyMCEMediaList = new Array(
+        // Name, URL
+        \["Moxiecode", "http://www.moxiecode.com"\],
+        \["Freshmeat", "http://www.freshmeat.com"\],
+        \["Sourceforge", "http://www.sourceforge.com"\]
+	);
+]
+var tinyMCEMediaList = new Array(
+<BOUCLE_documents_portfolio(DOCUMENTS) {mode=document}{extension !IN png,jpg,gif} {par num titre, date}{doublons}>
+	  \["[(#TITRE|sinon{[(#FICHIER)]})]", "[(#URL_DOCUMENT|url_absolue)]"\][
+	  (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|non),]
+</BOUCLE_documents_portfolio>
+);

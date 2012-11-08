@@ -1,0 +1,38 @@
+
+SPIP TinyMCE - READ ME
+=============================================
+
+
+# Concernant la librairie TinyMCE
+
+La librairie javascript TinyMCE est disponible sous licence LGPL sur le site http://www.tinymce.com.
+
+Elle est présente sous forme empaquetée et en utilisation avec jQuery dans le répertoire 'jscripts/' du plugin. Un script bash vous permet d'ajouter des fichiers de langue simplement depuis une archive de la page http://www.tinymce.com/i18n/index.php?ctrl=lang&act=download&pr_id=1. Pour cela, désarchivez le répertoire téléchargé et exécutez le fichier "add_lang.sh' avec la commande :
+    ~$ sh add_lang -d /chemin/vers/les/langues/
+
+Pour une aide sur ce script, tapez la commande :
+    ~$ sh add_lang -h
+
+
+# Règles de développement
+
+Ce plugin est en développement ouvert à toutes les propositions ! 
+
+N'hésitez pas à intervenir, corriger ou apporter des idées d'évolution, en les soumettant avant toute intervention sur le repository à l'adresse mail en fin de ce fichier.
+
+Si votre modification concerne la traduction d'une chaîne de langue ou du fichier de langue complet, il n'est pas nécessaire que vous demandiez l'autorisation au préalable (et merci pour cette intervention ;-).
+
+Vous pouvez suivre en ligne les modifications du plugin à l'adresse suivante :
+<http://zone.spip.org/trac/spip-zone/log/_plugins_/tinymce/spip3>
+
+Une documentation est en cours de rédaction sur Spip-Contrib :
+<http://www.spip-contrib.net/?article3516>
+
+
+=============================================
+
+Pour toute modification du repository '_plugins_/tinymce/spip3', veuillez contacter au préalable le responsable du plugin :
+
+<piero.wbmstr@gmail.com>
+
+

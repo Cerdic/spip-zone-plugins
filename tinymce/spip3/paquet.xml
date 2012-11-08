@@ -1,0 +1,27 @@
+<paquet
+	prefix="tinymce"
+	categorie="edition"
+	version="0.9"
+	etat="test"
+	compatibilite="[3.0.0;["
+	logo="images/logo_tinymce.png"
+	documentation=""
+>	
+
+	<nom>TinyMCE pour SPIP</nom>
+	<!-- Un WYSIWYG pour SPIP -->
+
+	<auteur lien="http://www.spip-contrib.net/PieroWbmstr">Piero Wbmstr</auteur>
+
+	<licence lien="http://www.gnu.org/copyleft/lesser.html">LGPL 1991</licence>
+
+	<pipeline nom="pre_edition" inclure="tinymce_piepelines.php" />
+	<pipeline nom="editer_contenu_objet" inclure="tinymce_piepelines.php" />
+	<pipeline nom="insert_head" inclure="tinymce_piepelines.php" />
+	<pipeline nom="header_prive" inclure="tinymce_piepelines.php" />
+
+	<pipeline nom="porte_plume_barre_pre_charger" inclure="tinymce_piepelines.php" />
+	<pipeline nom="porte_plume_barre_charger" inclure="tinymce_piepelines.php" />
+	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="tinymce_piepelines.php" />
+
+</paquet>

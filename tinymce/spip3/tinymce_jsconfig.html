@@ -1,0 +1,56 @@
+#HTTP_HEADER{Content-Type: application/javascript; charset=#CHARSET}
+#SET{TMCE_CONF,#EVAL{tinymce_config()}}
+[(#SET{TMCE_CSS_TABLE,[(#GET{TMCE_CONF}|table_valeur{content_css})]})]
+#SET{TMCE_CSS,''}
+<BOUCLE_for(DATA){source tableau,#GET{TMCE_CSS_TABLE}}>[
+(#SET{TMCE_CSS,[(#GET{TMCE_CSS}|concat{[(#CHEMIN{#VALEUR}|url_absolue)],[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{'',','})]})]})
+]</BOUCLE_for>
+#SET{TMCE_PLUGINS_MODEL,simple}
+[(#ENV{objet}|=={''}|non)
+[(#SET{TMCE_PLUGINS_MODEL,[(#GET{TMCE_CONF}|table_valeur{objets_barres}|table_valeur{#ENV{objet}})]})]
+]
+[(#GET{TMCE_PLUGINS_MODEL}|=={''}|oui)#SET{TMCE_PLUGINS_MODEL,simple}]
+function TinyMCE_Spip_init (){
+
+	var tmce_inst = $("textarea[name=texte]");
+	if (tmce_inst){
+		var tmcewidth = tmce_inst.width();
+		tmce_inst.tinymce({
+			// size
+			width: tmcewidth,
+			theme_advanced_resizing_max_width : tmcewidth,
+			
+			// Location of TinyMCE script
+			script_url : "[(#CHEMIN{jscripts/tiny_mce/tiny_mce.js})]",
+	
+			// General options
+			theme : "advanced",
+			skin : "[(#GET{TMCE_CONF}|table_valeur{skin}|sinon{o2k7})]",
+			skin_variant : "[(#GET{TMCE_CONF}|table_valeur{skin_variant}|sinon{silver})]",
+			language: "#LANG",
+			directionality : "#LANG_DIR",
+	
+			[(#REM) Theme et Plugin options depuis le modele choisi ]
+			[(#INCLURE{fond=fonds/tinymce/#GET{TMCE_PLUGINS_MODEL}})]
+				
+			// CSS, ID and classes
+			content_css : "#GET{TMCE_CSS}",
+			body_class: "[(#GET{TMCE_CONF}|table_valeur{body_class}|sinon{page content texte spiptinymce})]",
+			body_id: "[(#GET{TMCE_CONF}|table_valeur{body_id})]",
+	
+			// Drop lists for link/image/media/template dialogs
+			external_link_list_url : "[(#URL_PAGE{tinymce_json}|parametre_url{type,list_links}|url_absolue)]",
+			external_image_list_url : "[(#URL_PAGE{tinymce_json}|parametre_url{type,list_images}|url_absolue)]",
+			media_external_list_url : "[(#URL_PAGE{tinymce_json}|parametre_url{type,list_medias}|url_absolue)]",
+			external_template_list_url : "[(#URL_PAGE{tinymce_json}|parametre_url{type,list_templates}|url_absolue)]",
+			relative_urls : false
+		})
+//		.closest("form").bind('submit', function(){
+//			if (tinyMCE.activeEditor.isDirty()){
+//				$("textarea[name=texte]").val( tinyMCE.activeEditor.getBody().innerHTML );
+//				alert('ok');
+//			}
+//		})
+		;
+	}
+}

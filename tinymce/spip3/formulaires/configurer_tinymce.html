@@ -1,0 +1,95 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	
+<h3 class="titrem"><:tinymce:tinymce:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+
+<ul>
+
+	<li class="explication">
+		<:tinymce:cfgform_comment_objets|propre:>
+	</li>
+
+<BOUCLE_forobjets(DATA){source tableau,#ENV{objets_spip}}>
+	#SET{name,objet_barre_#CLE}
+	#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	#SET{valeur,#ENV**{objets_barres}|table_valeur{#CLE}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="#GET{name}">#VALEUR</label>[
+		<span class='erreur_message'>(#GET{erreurs})</span>
+		]<select name="#GET{name}" id="#GET{name}" class="forml verdana1">
+			<option value="porteplume"[(#GET{valeur}|=={''}|?{ selected="selected"})]><:tinymce:porte_plume:></option>
+<BOUCLE_forobjets_opts(DATA){source tableau,#ENV{fonds_config}}>
+			[<option value="#VALEUR"[ selected="(#GET{valeur}|=={#VALEUR}|?{selected})"]>(#VALEUR)</option>]
+</BOUCLE_forobjets_opts>
+		</select>
+	</li>	
+</BOUCLE_forobjets>
+
+	<li><br /></li>
+	<li class="explication">
+		<:tinymce:cfgform_comment_habillage|propre:>
+	</li>
+
+	#SET{name,body_id}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="#GET{name}"><:tinymce:cfgform_titre_body_id:></label>
+		<div class="explication"><:tinymce:cfgform_comment_body_id|propre:></div>[
+		<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="#GET{name}" id="#GET{name}" class="text" value="#ENV{body_id}" />
+	</li>	
+
+	#SET{name,body_class}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="#GET{name}"><:tinymce:cfgform_titre_body_class:></label>
+		<div class="explication"><:tinymce:cfgform_comment_body_class|propre:></div>[
+		<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="#GET{name}" id="#GET{name}" class="text" value="#ENV{body_class}" />
+	</li>	
+
+	#SET{name,content_css_str}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="#GET{name}"><:tinymce:cfgform_titre_content_css:></label>
+		<div class="explication"><:tinymce:cfgform_comment_content_css|propre:></div>[
+		<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="#GET{name}" id="#GET{name}" class="text" value="#ENV{content_css_str}" />
+	</li>	
+
+	#SET{name,skin}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="#GET{name}"><:tinymce:cfgform_titre_skin:></label>[
+		<span class='erreur_message'>(#GET{erreurs})</span>
+		]<select name="#GET{name}" id="#GET{name}" class="forml verdana1">
+<BOUCLE_for(DATA){source tableau,#ENV{habillages}}>
+			<option value="#CLE"[ selected="(#ENV{#GET{name}}|=={#CLE}|?{selected})"]>#CLE</option>
+</BOUCLE_for>
+		</select>
+	</li>	
+
+[(#ENV{habillage_variants}|=={''}|non)
+	[(#SET{name,skin_variant})][(#SET{erreurs,[(#ENV**{erreurs}|table_valeur{[(#GET{name})]})]})]
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="[(#GET{name})]"><:tinymce:cfgform_titre_skin_variant:></label>[
+		<span class='erreur_message'>(#GET{erreurs})</span>
+		]<select name="[(#GET{name})]" id="[(#GET{name})]" class="forml verdana1">
+]
+<BOUCLE_for2(DATA){source tableau,#ENV{habillage_variants}}>
+			[<option value="[(#VALEUR)]"[ selected="(#ENV{[(#GET{name})]}|=={[(#VALEUR)]}|?{selected})"]>(#VALEUR)</option>]
+</BOUCLE_for2>
+[(#ENV{habillage_variants}|=={''}|non)
+		</select>
+	</li>	
+]
+
+</ul>
+
+<input type="hidden" name="_meta_casier" value="adxmenu" />
+<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+
+</div>
+</form>
+</div>

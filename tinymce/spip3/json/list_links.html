@@ -1,0 +1,32 @@
+[(#REM)
+	Exemple:
+	var tinyMCELinkList = new Array(
+        // Name, URL
+        \["Moxiecode", "http://www.moxiecode.com"\],
+        \["Freshmeat", "http://www.freshmeat.com"\],
+        \["Sourceforge", "http://www.sourceforge.com"\]
+	);
+]
+#SET{links_table,#ARRAY}
+<BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre}{!par date}>
+	<BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par num titre}{!par date}>[
+		(#SET{links_table,#GET{links_table}|array_merge{#ARRAY{#TITRE,#URL_ARTICLE|url_absolue}}})
+	]</BOUCLE_articles_racine>
+	<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par num titre}{!par date}>[
+		(#SET{links_table,#GET{links_table}|array_merge{#ARRAY{#TITRE,#URL_RUBRIQUE|url_absolue}}})
+		]<BOUCLE_articles(ARTICLES) {id_rubrique} {par num titre}{!par date}>[
+			(#SET{links_table,#GET{links_table}|array_merge{#ARRAY{#TITRE,#URL_ARTICLE|url_absolue}}})
+		]</BOUCLE_articles>
+	</BOUCLE_rubriques>
+	<BOUCLE_breves(BREVES) {id_rubrique} {!par date}>[
+		(#SET{links_table,#GET{links_table}|array_merge{#ARRAY{#TITRE,#URL_BREVE|url_absolue}}})
+	]</BOUCLE_breves>
+	<BOUCLE_sites(SITES) {id_secteur} {par nom_site}>[
+		(#SET{links_table,#GET{links_table}|array_merge{#ARRAY{#NOM_SITE,#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT}|url_absolue}}})
+	]</BOUCLE_sites>
+</BOUCLE_secteurs>
+var tinyMCELinkList = new Array(
+<BOUCLE_forobjets_opts(DATA){source tableau,#GET{links_table}}>
+	  \["#CLE", "#VALEUR"\][(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|non),]
+</BOUCLE_forobjets_opts>
+);

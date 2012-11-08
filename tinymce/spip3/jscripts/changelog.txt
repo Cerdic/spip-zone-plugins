@@ -1,0 +1,6 @@
+## Versions TinyMCE
+- Version 3.5.7 (2012-09-20)
+
+## Languages
+- en (default)
+- fr
