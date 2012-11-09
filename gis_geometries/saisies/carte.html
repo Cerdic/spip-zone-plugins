@@ -81,6 +81,9 @@ var geocoder;]
 				form_map.panTo(data.point);
 				marker.setLatLng(data.point);
 			}
+			[(#ENV{nodraw}|oui)
+			$('#champ_#ENV{champ_type,type}').val('Point');
+			$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(marker));]
 		}
 		if (!marker._map)
 			form_map.addLayer(marker);
