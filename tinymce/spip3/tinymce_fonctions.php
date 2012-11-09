@@ -5,6 +5,17 @@
  * => oui si page d'edition d'un objet valide en config
  */
 function tinymce_doitetrecharge() {	
+	// si on demande explicitement le porte-plume
+	$arg_barre = _request( $GLOBALS['tinymce_arg_barre'] );
+	if ('porteplume'===$arg_barre) {
+		return false;
+	}
+	// si les preferences utilisateur interdisent TMCE
+	if (!empty($GLOBALS['visiteur_session']) && true===isset($GLOBALS['visiteur_session']['prefs']['tinymce']) &&
+		'non'===$GLOBALS['visiteur_session']['prefs']['tinymce']) {
+		return false;
+	}
+	// si on est sur une page d'edition et que la config est ok pour TMCE
 	$tiny_config = tinymce_config();
 	$exec = _request('exec');
 	if (1===preg_match('~^([a-z_]+)_(edit)$~', $exec, $match)) {
@@ -16,6 +27,7 @@ function tinymce_doitetrecharge() {
 			return true;
 		}
 	}
+	// non par defaut
 	return false;
 }
 
@@ -76,6 +88,7 @@ function tinymce_listerobjetsspip() {
 			foreach($table['field'] as $fieldname=>$fieldsql){
 				if (1===preg_match('/longtext/i', $fieldsql)){
 					$_name = str_replace('spip_', '', substr($name, 0, strlen($name)-1));
+					// cas particulier de 'groupes_mot'
 					if ('groupes_mot'===$_name){
 						$_name = 'groupe_mot';
 					}
@@ -132,19 +145,26 @@ $(document).ready(function(){ TinyMCE_Spip_init(); });
 }
 
 /**
- * On tente de retirer la librairie par defaut de SPIP (!! c'est moche !!)
+ * On tente de retirer tout le porte-plume (!! c'est moche !!)
  */
 function tinymce_nettoyerheader( $content ) {	
 		$lines = explode("\n", $content);
 		$n_flux='';
 		foreach($lines as $_line)
 		{
+/*
+plugins-dist/porte_plume
 			if (
 				0==substr_count($_line, 'jquery.markitup_pour_spip') &&
 				0==substr_count($_line, 'jquery.previsu_spip')
 			) $n_flux .= $_line."\n";
+*/
+			if (0==substr_count($_line, 'porte_plume')) {
+				$n_flux .= $_line."\n";
+			}
 		}
 		$content = $n_flux;
 		return $content;
 }
+
 ?>

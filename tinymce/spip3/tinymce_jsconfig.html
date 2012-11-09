@@ -10,6 +10,7 @@
 [(#SET{TMCE_PLUGINS_MODEL,[(#GET{TMCE_CONF}|table_valeur{objets_barres}|table_valeur{#ENV{objet}})]})]
 ]
 [(#GET{TMCE_PLUGINS_MODEL}|=={''}|oui)#SET{TMCE_PLUGINS_MODEL,simple}]
+
 function TinyMCE_Spip_init (){
 
 	var tmce_inst = $("textarea[name=texte]");

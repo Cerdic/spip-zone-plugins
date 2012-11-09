@@ -20,6 +20,9 @@ Pour plus d\'info, voir le site [->http://www.tinymce.com/].',
 	'cfgform_titre_skin'=> 'Habillage TinyMCE (skin)',
 	'cfgform_titre_skin_variant'=> 'Thème de l\'habillage (skin_variant)',
 	
-	
+	// PREFS
+	'barre_par_defaut'=>'Barre d\'édition préférée',
+	'editeur_tinymce'=>'Autoriser la barre TinyMCE',
+	'editeur_porte_plume'=>'Toujours utiliser la barre du Porte-Plume',
 );
 ?>

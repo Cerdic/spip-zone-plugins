@@ -46,6 +46,10 @@ $GLOBALS['tinymce_habillages'] = array(
 	),
 );
 
+/**
+ * Argument d'URL pour attitrer la barre
+ */
+$GLOBALS['tinymce_arg_barre'] = 'tmce_barre';
 
 // debug direct
 //echo '<pre>'; var_export( unserialize( $GLOBALS['meta']['tinymce'] ) ); exit('yo');

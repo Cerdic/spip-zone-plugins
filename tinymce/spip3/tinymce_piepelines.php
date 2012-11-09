@@ -7,9 +7,11 @@ include_spip("tinymce_fonctions") ;
  * Avant chargement de la barre du PortePlume
  */
 function tinymce_porte_plume_barre_pre_charger($barres) {	
-	if (true===tinymce_doitetrecharge())
-		if (true===isset($barres['edition']))
+	if (true===tinymce_doitetrecharge()){
+		if (true===isset($barres['edition'])){
 			unset($barres['edition']);
+		}
+	}
 	return $barres;
 }
 
@@ -17,9 +19,11 @@ function tinymce_porte_plume_barre_pre_charger($barres) {
  * Pendant chargement de la barre du PortePlume
  */
 function tinymce_porte_plume_barre_charger($barres) {	
-	if (true===tinymce_doitetrecharge())
-		if (true===isset($barres['edition']))
+	if (true===tinymce_doitetrecharge()){
+		if (true===isset($barres['edition'])){
 			unset($barres['edition']);
+		}
+	}
 	return $barres;
 }
 
@@ -34,7 +38,7 @@ function tinymce_pre_edition($flux) {
  * Header de l'espace prive
  */
 function tinymce_header_prive($flux) {
-	if (true===tinymce_doitetrecharge()) {
+	if (true===tinymce_doitetrecharge()){
 		// on nettoie le header
 		$flux = tinymce_nettoyerheader( $flux );
 		// on ajoute TinyMCE

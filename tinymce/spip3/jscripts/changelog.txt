@@ -1,6 +1,10 @@
 ## Versions TinyMCE
 - Version 3.5.7 (2012-09-20)
 
+## Plugin SpipBackBarre
+Plugin créant le bouton de retour à la barre du porte-plume.
+- version 1.0
+
 ## Languages
 - en (default)
 - fr
