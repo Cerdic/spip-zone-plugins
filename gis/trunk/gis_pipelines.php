@@ -211,7 +211,12 @@ function gis_post_edition($flux){
 					'pays' => $pays,
 					'code_pays' => $code_pays
 				);
-		
+				
+				if (defined('_DIR_PLUGIN_GISGEOM')) {
+					$geojson = '{"type":"Point","coordinates":['.$longitude.','.$latitude.']}';
+					set_request('geojson',$geojson);
+				}
+				
 				include_spip('action/editer_gis');
 	
 				if($id_gis = sql_getfetsel("G.id_gis","spip_gis AS G LEFT  JOIN spip_gis_liens AS T ON T.id_gis=G.id_gis ","T.id_objet=" . intval($id_document) . " AND T.objet='document'")){
