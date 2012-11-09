@@ -10,7 +10,7 @@
 	<li>
 	<label><:selection_objet:affichage_section:></label>
 	<select name="id_objet_dest">
-	[([(#GET{id_secteur}|in_array{#ENV{id_rubrique}}|oui)
+	[(#GET{id_secteur}|in_array{#ENV{id_rubrique}}|oui)
 		<option value="0"><:selection_objet:racine:></option>
 	]
       <BOUCLE_rub(RUBRIQUES){id_rubrique IN #ENV{rubriques}} {lang IN #GET{lang}}{id_rubrique !IN #ENV{exclure}}{tout}>
