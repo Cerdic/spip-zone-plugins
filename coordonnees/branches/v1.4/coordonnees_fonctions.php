@@ -44,4 +44,11 @@ function logo_type_mel($type_email) {
 	return logo_type_('mel', $type_email);
 }
 
+function coordonnees_interdit_sinon($autoriser) {
+	if (!$autoriser) {
+		include_spip('inc/minipres');
+		echo minipres();
+		exit;
+	}
+}
 ?>
