@@ -4,8 +4,8 @@
 	version="0.9.1"
 	etat="test"
 	compatibilite="[3.0.0;["
-	logo="images/logo_tinymce.png"
-	documentation=""
+	logo="images/spip-tinymce-60.png"
+	documentation="http://www.spip-contrib.net/?article4276"
 >	
 
 	<nom>TinyMCE pour SPIP</nom>
