@@ -39,6 +39,6 @@
 
 
 	<necessite nom="saisies" compatibilite="[1.14.0;]" />
-	<utilise nom="pays" compatibilite="[1.0.5;]" />
+	<necessite nom="pays" compatibilite="[1.0.5;]" />
 
 </paquet>
