@@ -23,12 +23,19 @@ $GLOBALS['tinymce_config_def'] = array(
 	'content_css'=>array(
 		'squelettes-dist/css/typo.css',
 		'squelettes-dist/css/layout.css',
-		'css/tinymce_layout.css',
 	),
 	'body_id' => '',
-	'body_class' => 'page content texte spiptinymce',
+	'body_class' => 'page content texte',
 	'skin' => 'o2k7',
 	'skin_variant' => 'silver',
+);
+
+/**
+ * Entrées de config automatiques et obligatoires
+ */	
+$GLOBALS['tinymce_config_obligatoire'] = array(
+	'content_css'=>array( 'css/tinymce_layout.css' ),
+	'body_class' => 'spiptinymce',
 );
 
 /**

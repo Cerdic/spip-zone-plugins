@@ -62,18 +62,34 @@ function tinymce_trouverobjet() {
 
 /**
  * Recupere la config du plugin, definit en BO si present, sinon par defaut
+ * @param bool $obligatoire Doit-on ajouter les entrées obligatoires ?
  */
-function tinymce_config() {	
-	$def_cfg = $GLOBALS['tinymce_config_def'];
-	$usr_cfg = !empty($GLOBALS['meta']['tinymce']) ? unserialize($GLOBALS['meta']['tinymce']) : array();
-	if (
-		true===isset($GLOBALS['meta']['tinymce']) && 
-		0<count($GLOBALS['meta']['tinymce'])
-	){
-		$tinymce_cfg = $usr_cfg;
+function tinymce_config( $obligatoire=true ) {	
+	$meta_tinymce = true===empty($GLOBALS['meta']['tinymce']) ? array() : 
+		( is_string($GLOBALS['meta']['tinymce']) ? unserialize($GLOBALS['meta']['tinymce']) : $GLOBALS['meta']['tinymce'] );
+	if (0<count($meta_tinymce)){
+		$tinymce_cfg = $meta_tinymce;
 	} else {
-		$tinymce_cfg = $def_cfg;
+		$tinymce_cfg = $GLOBALS['tinymce_config_def'];
 	}
+	if (true===$obligatoire){
+		foreach($tinymce_cfg as $_var=>$_val){
+			if (true===isset($GLOBALS['tinymce_config_obligatoire']) && true===isset($GLOBALS['tinymce_config_obligatoire'][$_var])){
+				if (true===is_array($_val)){
+					$tinymce_cfg[$_var] = array_unique(
+						array_filter(
+							array_merge( $_val, $GLOBALS['tinymce_config_obligatoire'][$_var] )
+						)
+					);
+				} else {
+					if (0==preg_match('/'.$GLOBALS['tinymce_config_obligatoire'][$_var].'/', $_val)){
+						$tinymce_cfg[$_var] .= ' '.$GLOBALS['tinymce_config_obligatoire'][$_var];
+					}
+				}
+			}
+		}
+	}	
+//echo '<pre>';var_export($tinymce_cfg);exit('yo');
 	return $tinymce_cfg;
 }
 

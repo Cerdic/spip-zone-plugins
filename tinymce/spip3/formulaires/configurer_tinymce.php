@@ -7,6 +7,7 @@ include_spip("tinymce_fonctions") ;
 function formulaires_configurer_tinymce_charger_dist(){
 	$cfg_actuelle = tinymce_config();
 	$tinymce_themes = $GLOBALS['tinymce_habillages'];
+//var_export($cfg_actuelle);
 
 	$valeurs = $cfg_actuelle;
 	$valeurs['content_css_str'] = join(', ', $valeurs['content_css']);
@@ -29,7 +30,7 @@ function formulaires_configurer_tinymce_charger_dist(){
 	// liste des modeles de config : faire fonction ?
 	$valeurs['fonds_config'] = tinymce_listerfondsconfig();	
 
-//	var_export($valeurs);
+//var_export($valeurs);
 	return $valeurs;
 }
 
@@ -41,6 +42,7 @@ function formulaires_configurer_tinymce_traiter_dist(){
 		'objets_barres'=>array(),
 		'content_css'=>array(),
 		'body_class' => _request('body_class'),
+		'body_id' => _request('body_id'),
 		'skin' => _request('skin'),
 		'skin_variant' => _request('skin_variant') ? _request('skin_variant') : 'default',
 	);

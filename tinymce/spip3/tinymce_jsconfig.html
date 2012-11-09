@@ -15,11 +15,18 @@ function TinyMCE_Spip_init (){
 
 	var tmce_inst = $("textarea[name=texte]");
 	if (tmce_inst){
-		var tmcewidth = tmce_inst.width();
+		var tmcewidth = tmce_inst.outerWidth();
+		var tmceheight = tmce_inst.outerHeight()+120;
 		tmce_inst.tinymce({
 			// size
-			width: tmcewidth,
+			width: tmcewidth+'px',
+			height: tmceheight+'px',
+			theme_advanced_resizing_min_width : 20,
 			theme_advanced_resizing_max_width : tmcewidth,
+			theme_advanced_resizing_min_height : 20,
+			theme_advanced_resizing_max_height : 20000,
+			[(#REM) On interdit les cookies, ca a l'air de deconner ?? ]
+			theme_advanced_resizing_use_cookie : false,
 			
 			// Location of TinyMCE script
 			script_url : "[(#CHEMIN{jscripts/tiny_mce/tiny_mce.js})]",
