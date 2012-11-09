@@ -78,5 +78,9 @@ function revisions_emails($id_email, $c=false) {
 			'invalideur' => "id='id_email/$id_email'"
 		),
 		$c);
+	sql_update("spip_emails_liens", array(
+			'type'=>sql_quote(_request('type'))
+		), "id_email=".intval($id_email)." AND id_objet=".intval(_request('id_objet'))." AND objet=".sql_quote(_request('objet')) );
 }
+
 ?>

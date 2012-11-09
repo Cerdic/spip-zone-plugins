@@ -78,5 +78,9 @@ function revisions_adresses($id_adresse, $c=false) {
 			'invalideur' => "id='id_adresse/$id_adresse'"
 		),
 		$c);
+	sql_update("spip_adresses_liens", array(
+			'type'=>sql_quote(_request('type'))
+		), "id_adresse=".intval($id_adresse)." AND id_objet=".intval(_request('id_objet'))." AND objet=".sql_quote(_request('objet')) );
 }
+
 ?>
