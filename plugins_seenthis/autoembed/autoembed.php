@@ -41,8 +41,10 @@ function embed_url($url) {
 		}
 		else if (preg_match("/^http\:\/\/(www\.)?pastebin\.com\/(.*)/i", $url, $regs)) {
 			$val = $regs[2];
-			$html = join("", file($url));
+
 			
+			/*
+			$html = join("", file($url));
 			$html = substr($html, strpos($html, '<div id="code_frame">'), strlen($html));
 			$html = substr($html, 0, strpos($html, '<div class="content_title">'));
 			
@@ -51,6 +53,9 @@ function embed_url($url) {
 					$html = $regs[0];
 			
 			$html = trim($html);
+			*/
+			$html = "<iframe src='http://pastebin.com/embed_iframe.php?i=".$val."' style='border:none;width:100%;'></iframe>";
+			//$html = "<script src='http://pastebin.com/embed_js.php?i=".$val."'></script>";
 			$code_ae = "<div class='oembed-container oembed-code'>$html</div>";
 			
 		}
