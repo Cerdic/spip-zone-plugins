@@ -1,22 +1,24 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
-	<h3 class='titrem'><img src="#CHEMIN_IMAGE{mes_fichiers-24.png}" class="cadre-icone" /><:mes_fichiers:titre_boite_configurer:></h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
-			<li class="editer editer_prefixe">
-				<p class="explication"><:mes_fichiers:explication_cfg_prefixe:></p>
-				<label for="prefixe"><:mes_fichiers:label_cfg_prefixe:></label>
-				<input type="text" name="prefixe" class="text" id="prefixe" value="[(#ENV{prefixe, mf2})]" />
-			</li>
-			<li class="editer editer_taille_max_rep">
-				<p class="explication"><:mes_fichiers:explication_cfg_taille_max_rep:></p>
-				<label for="taille_max_rep"><:mes_fichiers:label_cfg_taille_max_rep:></label>
-				<input type="text" name="taille_max_rep" class="text" id="taille_max_rep" value="[(#ENV{taille_max_rep, 75})]" />
-			</li>
-		</ul>
+		<fieldset>
+			<legend><:mes_fichiers:legende_cfg_generale:></legend>
+			<ul>
+				<li class="editer editer_prefixe">
+					<p class="explication"><:mes_fichiers:explication_cfg_prefixe:></p>
+					<label for="prefixe"><:mes_fichiers:label_cfg_prefixe:></label>
+					<input type="text" name="prefixe" class="text" id="prefixe" value="[(#ENV{prefixe, mf2})]" />
+				</li>
+				<li class="editer editer_taille_max_rep">
+					<p class="explication"><:mes_fichiers:explication_cfg_taille_max_rep:></p>
+					<label for="taille_max_rep"><:mes_fichiers:label_cfg_taille_max_rep:></label>
+					<input type="text" name="taille_max_rep" class="text" id="taille_max_rep" value="[(#ENV{taille_max_rep, 75})]" />
+				</li>
+			</ul>
+		</fieldset>
 
 		<fieldset>
 			<legend><:mes_fichiers:legende_cfg_sauvegarde_reguliere:></legend>

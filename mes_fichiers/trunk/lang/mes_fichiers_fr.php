@@ -41,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_cfg_prefixe' => 'Préfixe',
 	'label_cfg_sauvegarde_reguliere' => 'Activer la sauvegarde régulière',
 	'label_cfg_taille_max_rep' => 'Taille maximale des dossiers',
+	'legende_cfg_generale' => 'Paramètres d\'archivage généraux',
 	'legende_cfg_notification' => 'Notifications',
 	'legende_cfg_sauvegarde_reguliere' => 'Traitements automatiques',
 
@@ -65,7 +66,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resume_zip_statut' => 'Statut',
 
 	// T
-	'titre_boite_configurer' => 'Paramètres d\'archivage',
 	'titre_boite_sauver' => 'Créer une archive',
 	'titre_boite_telecharger' => 'Liste des archives disponibles au téléchargement',
 	'titre_page_configurer' => 'Configuration du plugin Mes fichiers',
