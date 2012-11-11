@@ -7,12 +7,12 @@
 		<fieldset>
 			<legend><:mes_fichiers:legende_cfg_generale:></legend>
 			<ul>
-				<li class="editer editer_prefixe">
+				<li class="editer editer_prefixe obligatoire">
 					<p class="explication"><:mes_fichiers:explication_cfg_prefixe:></p>
 					<label for="prefixe"><:mes_fichiers:label_cfg_prefixe:></label>
 					<input type="text" name="prefixe" class="text" id="prefixe" value="[(#ENV{prefixe, mf2})]" />
 				</li>
-				<li class="editer editer_taille_max_rep">
+				<li class="editer editer_taille_max_rep obligatoire">
 					<p class="explication"><:mes_fichiers:explication_cfg_taille_max_rep:></p>
 					<label for="taille_max_rep"><:mes_fichiers:label_cfg_taille_max_rep:></label>
 					<input type="text" name="taille_max_rep" class="text" id="taille_max_rep" value="[(#ENV{taille_max_rep, 75})]" />
@@ -42,7 +42,7 @@
 					<input type="text" name="frequence" class="text" id="frequence" value="[(#ENV{frequence, 1})]" />
 				</li>
 			</ul>
-			<ul>
+			<fieldset><ul>
 				<li class="editer editer_nettoyage_journalier">
 				<label><:mes_fichiers:label_cfg_nettoyage_journalier:></label>
 					<div class="choix">
@@ -61,7 +61,7 @@
 					<label for="duree_sauvegarde"><:mes_fichiers:label_cfg_duree_sauvegarde:></label>
 					<input type="text" name="duree_sauvegarde" class="text" id="duree_sauvegarde" value="[(#ENV{duree_sauvegarde, 15})]" />
 				</li>
-			</ul>
+			</ul></fieldset>
 		</fieldset>
 
 		<fieldset>
