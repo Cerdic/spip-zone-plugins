@@ -121,15 +121,15 @@ function nospam_pre_edition($flux) {
 		  // activer aussi le flag spammeur connu en cas de flood, meme si aucune detection spam jusqu'ici
 		  // on sera plus severe sur les liens dans ce cas
 		  // cas du spammeur qui envoie que des messages a 3 liens a haute frequence (passe a travers tous les filtres)
-		  // au bout du 10e message on va moderer tout message avec un lien
+		  // au bout du 5e message en <10min ou 10e en <30min on va moderer tout message avec un lien
 		  if (!$spammeur_connu){
-			  if ($nb=sql_countsel('spip_forum','(ip='.sql_quote($GLOBALS['ip']).$email.') AND '.sql_date_proche('date_heure','-30','minute'))>10){
+			  if (($nb=sql_countsel('spip_forum','(ip='.sql_quote($GLOBALS['ip']).$email.') AND '.sql_date_proche('date_heure','-30','minute')))>=7){
 			  spip_log("[Flood] $nb message pour (ip=".$GLOBALS['ip']."$email) dans les 30 dernieres minutes",'nospam');
 			  $spammeur_connu = true;
 			  }
 		  }
 		  if (!$spammeur_connu){
-			  if ($nb=sql_countsel('spip_forum','(ip='.sql_quote($GLOBALS['ip']).$email.') AND '.sql_date_proche('date_heure','-10','minute'))>5){
+			  if (($nb=sql_countsel('spip_forum','(ip='.sql_quote($GLOBALS['ip']).$email.') AND '.sql_date_proche('date_heure','-10','minute')))>=3){
 			  spip_log("[Flood] $nb message pour (ip=".$GLOBALS['ip']."$email) dans les 10 dernieres minutes",'nospam');
 			  $spammeur_connu = true;
 			  }
@@ -137,14 +137,14 @@ function nospam_pre_edition($flux) {
 
 			// si c'est un spammeur connu,
 			// verifier que cette ip n'en est pas a son N-ieme spam en peu de temps
-			// a partir d'un moment on refuse carrement le spam massif
+			// a partir d'un moment on refuse carrement le spam massif, le posteur devra attendre pour reposter
 			if ($spammeur_connu) {
-				// plus de 10 spams dans les dernieres 2h, faut se calmer ...
-				// ou plus de 30 spams dans la dernieres 1h, faut se calmer ...
+				// plus de 30 spams dans les dernieres 2h, faut se calmer ...
+				// ou plus de 10 spams dans la dernieres 1h, faut se calmer ...
 				if (
-					($nb = sql_countsel('spip_forum', 'statut=\'spam\' AND (ip=' . sql_quote($GLOBALS['ip']) . $email . ') AND ' . sql_date_proche('date_heure','-120','minute'))) > 10
+					($nb = sql_countsel('spip_forum', 'statut=\'spam\' AND (ip=' . sql_quote($GLOBALS['ip']) . $email . ') AND ' . sql_date_proche('date_heure','-120','minute'))) >= 30
 					OR
-					($nb = sql_countsel('spip_forum', 'statut=\'spam\' AND (ip=' . sql_quote($GLOBALS['ip']) . $email .') AND ' . sql_date_proche('date_heure','-60','minute'))) > 30
+					($nb = sql_countsel('spip_forum', 'statut=\'spam\' AND (ip=' . sql_quote($GLOBALS['ip']) . $email .') AND ' . sql_date_proche('date_heure','-60','minute'))) >= 10
 					){
 					$flux['data']['statut'] = ''; // on n'en veut pas !
 					spip_log("[Refuse] $nb spam pour (ip=" . $GLOBALS['ip'] . "$email) dans les 2 dernieres heures", 'nospam');
@@ -176,11 +176,13 @@ function nospam_pre_edition($flux) {
 				if ($infos['contenu_cache']) {
 					// s'il y a du contenu caché avec des styles => spam direct
 					$flux['data']['statut'] = 'spam';
+					spip_log("\t" . $flux['data']['auteur'] . "\t" . $GLOBALS['ip'] . "\t" . "requalifié en spam car contenu cache", 'nospam');
 				}
 				elseif ($infos['nombre_liens'] > 0) {
 					// si un lien a un titre de moins de 3 caracteres, c'est louche...
 					if ($infos['caracteres_texte_lien_min'] < 3) {
 						$flux['data']['statut'] = 'prop'; // en dur en attendant une idee plus generique
+						spip_log("\t" . $flux['data']['auteur'] . "\t" . $GLOBALS['ip'] . "\t" . "requalifié en prop car moins de 3car hors liens", 'nospam');
 					}
 
 					if (isset($seuils[$champ]))
@@ -207,15 +209,18 @@ function nospam_pre_edition($flux) {
 
 			// verifier qu'un message identique n'a pas ete publie il y a peu
 			if ($flux['data']['statut'] != 'spam') {
-				if (sql_countsel('spip_forum', 'texte=' . sql_quote($flux['data']['texte']) . " AND statut IN ('publie','off','spam')") > 0)
+				if (sql_countsel('spip_forum', 'texte=' . sql_quote($flux['data']['texte']) . " AND statut IN ('publie','off','spam')") > 0){
 					$flux['data']['statut'] = 'spam';
+					spip_log("\t" . $flux['data']['auteur'] . "\t" . $GLOBALS['ip'] . "\t" . "requalifié en spam car message identique deja existant", 'nospam');
+				}
 			}
 			// verifier que cette ip n'en est pas a son N-ieme post en peu de temps
 			// plus de 5 messages en 5 minutes c'est suspect ...
 			if ($flux['data']['statut'] != 'spam') {
-				if (($nb = sql_countsel('spip_forum', 'ip=' . sql_quote($GLOBALS['ip']) . ' AND ' . sql_date_proche('date_heure','-5','minute'))) > 5)
+				if (($nb = sql_countsel('spip_forum', 'ip=' . sql_quote($GLOBALS['ip']) . ' AND ' . sql_date_proche('date_heure','-5','minute'))) >= 5){
 					$flux['data']['statut'] = 'spam';
-				#spip_log("$nb post pour l'ip ".$GLOBALS['ip']." dans les 5 dernieres minutes",'nospam');
+					spip_log("[Flood2] $nb message pour (ip=".$GLOBALS['ip']."$email) dans les 5 dernieres minutes : requalif en spam",'nospam');
+				}
 			}
 		}
 	}
