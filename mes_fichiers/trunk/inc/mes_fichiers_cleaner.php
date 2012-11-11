@@ -35,7 +35,7 @@ function inc_mes_fichiers_cleaner_dist($options=array()){
 			'args' => array(
 				'liste' => $liste,
 				'auteur' => $auteur,
-				'type' => 'mes_fichiers_clean'
+				'type' => 'mes_fichiers_cleaner'
 			),
 			'data' => ''
 		)
