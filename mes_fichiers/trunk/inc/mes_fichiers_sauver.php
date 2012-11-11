@@ -81,7 +81,7 @@ function inc_mes_fichiers_sauver_dist($liste=null, $options=array()) {
 			'args' => array(
 				'err' => $erreur_texte,
 				'auteur' => $auteur,
-				'type' => 'mes_fichiers'
+				'type' => 'mes_fichiers_sauver'
 			),
 			'data' => ''
 		)
