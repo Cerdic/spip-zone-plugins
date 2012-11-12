@@ -37,6 +37,7 @@ function TinyMCE_Spip_init (){
 			skin_variant : "[(#GET{TMCE_CONF}|table_valeur{skin_variant}|sinon{silver})]",
 			language: "#LANG",
 			directionality : "#LANG_DIR",
+			relative_urls : false,
 	
 			[(#REM) Theme et Plugin options depuis le modele choisi ]
 			[(#INCLURE{fond=fonds/tinymce/#GET{TMCE_PLUGINS_MODEL}})]
@@ -46,12 +47,27 @@ function TinyMCE_Spip_init (){
 			body_class: "[(#GET{TMCE_CONF}|table_valeur{body_class}|sinon{page content texte spiptinymce})]",
 			body_id: "[(#GET{TMCE_CONF}|table_valeur{body_id})]",
 	
+			// SPIP specials
+			setup : function(ed) {
+				ed.onSetContent.add(function(ed, o) {
+					o.content = o.content.replace(
+						/<div class="spiptmceInsert">(.*)<\/div>/g, 
+						function(m){ return spiptmce_proteger_modeles(m); }
+					);
+				});
+				ed.onPostProcess.add(function(ed, o) {
+					o.content = o.content.replace(
+						/<div class="spiptmceInsert">(.*)<\/div>/g, 
+						function(m){ return spiptmce_proteger_modeles(m); }
+					);
+				});
+			},
+
 			// Drop lists for link/image/media/template dialogs
 			external_link_list_url : "[(#URL_PAGE{tinymce_json}|parametre_url{type,list_links}|url_absolue)]",
 			external_image_list_url : "[(#URL_PAGE{tinymce_json}|parametre_url{type,list_images}|url_absolue)]",
 			media_external_list_url : "[(#URL_PAGE{tinymce_json}|parametre_url{type,list_medias}|url_absolue)]",
-			external_template_list_url : "[(#URL_PAGE{tinymce_json}|parametre_url{type,list_templates}|url_absolue)]",
-			relative_urls : false
+			external_template_list_url : "[(#URL_PAGE{tinymce_json}|parametre_url{type,list_templates}|url_absolue)]"
 		})
 //		.closest("form").bind('submit', function(){
 //			if (tinyMCE.activeEditor.isDirty()){
@@ -61,4 +77,12 @@ function TinyMCE_Spip_init (){
 //		})
 		;
 	}
+}
+
+function barre_inserer( what, inst ){
+    tinyMCE.execCommand( 'mceInsertContent', false, '<div class="spiptmceInsert">'+what+'</div>' );
+}
+
+function spiptmce_proteger_modeles( str ){ 
+	return '<div class="spiptmceInsert">'+$('<div/>').html(str).text()+'</div>';
 }
