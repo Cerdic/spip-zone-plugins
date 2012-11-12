@@ -22,7 +22,7 @@ function anaclic_declarer_tables_interfaces($interface){
 function anaclic_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	$spip_clics = array(
-			"id_clic"	=> 	"bigint(21) DEFAULT '0' NOT NULL",
+			"id_clic"	=> 	"int(10) unsigned NOT NULL auto_increment",
 			"id_objet"	=> 	"bigint(21) DEFAULT '0' NOT NULL",
 			"objet"		=>	"VARCHAR (25) DEFAULT '' NOT NULL",
 			"ip"		=>	"VARCHAR (30) DEFAULT '' NOT NULL",
