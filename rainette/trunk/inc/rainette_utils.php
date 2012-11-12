@@ -9,9 +9,9 @@ function meteo2resume($meteo){
 	// On utilise l'option de _T permettant de savoir si un item existe ou pas
 	$resume = _T('rainette:meteo_' . $meteo, array(), array('force' => false));
 	if (!$resume)
-		$resume = _T('rainette:meteo_na');
+		$resume = _T('rainette:meteo_na'." ($meteo)");
 
-	return ucfirst($resume." ($meteo)");
+	return ucfirst($resume);
 }
 
 function angle2direction($degre) {

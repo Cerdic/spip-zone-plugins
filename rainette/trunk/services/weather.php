@@ -147,6 +147,7 @@ function weather_xml2conditions($xml, $lieu) {
 			// La traduction du resume dans la bonne langue est toujours faite par les fichiers de langue SPIP
 			// car l'API ne permet pas de choisir la langue. On ne stocke donc que le code meteo
 			$tableau['icone'] = $tableau['code_meteo'];
+			$tableau['code_icone'] = $tableau['code_meteo']; // compat ascendante
 			$tableau['resume'] = $tableau['code_meteo'];
 		}
 	}
