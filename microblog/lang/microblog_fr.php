@@ -52,6 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'poster_forums' => 'Forums post&#233;s',
+	'publier_forums' => 'Forums publi&#233;s',
 	'proposer_articles' => 'Articles propos&#233;s',
 	'propose' => 'propos&#233;',
 	'publier_articles' => 'Articles publi&#233;s',

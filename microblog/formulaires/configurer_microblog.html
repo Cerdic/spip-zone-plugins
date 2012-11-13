@@ -34,18 +34,18 @@
 -->
 							<select name="service" id="service">
 								<option value="">(<:microblog:choisir:>)</option>
-								<option value="" disabled="disabled">- laconica -</option>
-								<option value="spipo"[
-									(#ENV{service}|=={spipo}|?{selected="selected"})]>SPIP.org (spipo)</option>
+								<option value="" disabled="disabled">- StatusNet -</option>
+								<!--<option value="spipo"[
+									(#ENV{service}|=={spipo}|?{selected="selected"})]>SPIP.org (spipo)</option>-->
 								<option value="identica"[
 									(#ENV{service}|=={identica}|?{selected="selected"})]>Status.net (identica)</option>
 								<option value="" disabled="disabled">&nbsp;</option>
-								<option value="" disabled="disabled">- twitter -</option>
+								<option value="" disabled="disabled">- Twitter -</option>
 								<option value="twitter"[
 									(#ENV{service}|=={twitter}|?{selected="selected"})]>Twitter.com</option>
 <!--
 								<option value="supertweet"[
-									(#ENV{service}|=={supertweet}|?{selected="selected"})]>Supertweet.net</option>
+									(#ENV{service}|=={supertweet}|?{selected="selected"})]>(via) Supertweet.net</option>
 -->
 							</select>
 						</li>
@@ -112,19 +112,24 @@
 							<label><:microblog:notifications_publiques:></label>
 							<p class="explication"><:microblog:elements_signaler:> :</p>
 							<div class="choix">
-								<input type="checkbox" name="evt_forumposte"[
-									(#ENV{evt_forumposte}|?{checked="checked"})] id="evt_forumposte" />
+								<input type="checkbox" name="evt_forumposte" id="evt_forumposte" [
+									(#ENV{evt_forumposte}|?{checked="checked"})] />
 								<label for="evt_forumposte"><:microblog:poster_forums:></label>
 							</div>
 							<div class="choix">
-								<input type="checkbox" name="evt_proposerarticles"[
-									(#ENV{evt_proposerarticles}|?{checked="checked"})] id="evt_proposerarticles" />
+								<input type="checkbox" name="evt_proposerarticles" id="evt_proposerarticles"[
+									(#ENV{evt_proposerarticles}|?{checked="checked"})]  />
 								<label for="evt_proposerarticles"><:microblog:proposer_articles:></label>
 							</div>
 							<hr />
 							<div class="choix">
-								<input type="checkbox" name="evt_publierarticles"[
-									(#ENV{evt_publierarticles}|?{checked="checked"})] id="evt_publierarticles" />
+								<input type="checkbox" name="evt_forumvalide" id="evt_forumvalide" [
+									(#ENV{evt_forumvalide}|?{checked="checked"})] />
+								<label for="evt_forumvalide"><:microblog:publier_forums:></label>
+							</div>
+							<div class="choix">
+								<input type="checkbox" name="evt_publierarticles" id="evt_publierarticles"[
+									(#ENV{evt_publierarticles}|?{checked="checked"})] />
 								<label for="evt_publierarticles"><:microblog:publier_articles:></label>
 								<div id="evt_publierarticles_options"[(#ENV{evt_publierarticles}|non)style="display:none;"]>
 								[(#CONFIG{post_dates}|=={non}|oui)

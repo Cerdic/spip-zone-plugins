@@ -24,11 +24,22 @@ function Microblog_notifications($x) {
 		case 'forumposte':      // post forums
 			if ($cfg['evt_forumposte']
 			AND $id = intval($x['args']['id'])) {
-				$status = Microblog_annonce('forumposte',array('id_forum'=>$id));
+				// ne pas poster si le forum est valide et config forum valide activee
+				if (sql_getfetsel("statut","spip_forum","id_forum=".intval($id))!="publie"
+					OR !$cfg['evt_forumvalide']){
+					$status = Microblog_annonce('forumposte',array('id_forum'=>$id));
+					envoyer_microblog($status,array('objet'=>'forum','id_objet'=>$id));
+				}
+			}
+			break;
+		case 'forumvalide':      // forum valide
+			if ($cfg['evt_forumvalide']
+			AND $id = intval($x['args']['id'])) {
+				$status = Microblog_annonce('forumvalide',array('id_forum'=>$id));
 				envoyer_microblog($status,array('objet'=>'forum','id_objet'=>$id));
 			}
 			break;
-		
+
 		case 'instituerarticle':    // publier | proposer articles
 		if ($id = intval($x['args']['id'])
 			AND (
