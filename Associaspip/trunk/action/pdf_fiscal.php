@@ -40,7 +40,7 @@ function action_pdf_fiscal() {
 	$association_imputation = charger_fonction('association_imputation', 'inc');
 	if (!preg_match('/^\d{4}$/', $annee))
 			$annee = date('Y')-1;
-	$montants = sql_getfetsel('SUM(recette) AS montant', 'spip_asso_comptes', $association_imputation('pc_cotisations', $id_auteur) ." AND vu AND DATE_FORMAT(date, '%Y')=$annee");
+	$montants = sql_getfetsel('SUM(recette) AS montant', 'spip_asso_comptes', $association_imputation('pc_cotisations', $id_auteur) ." AND vu AND DATE_FORMAT(date_operation, '%Y')=$annee");
 	if ($taux = $GLOBALS['association_metas']['tauxfiscal'])
 		$montants = $montants*($taux/100);
 	$montants += sql_getfetsel('SUM(D.argent) AS montant',
