@@ -39,15 +39,18 @@ function info_objet($id_objet,$objet,$champ='*'){
 }
 
 /* Fonction qui fournit le lien */
-function url_objet($id_objet,$objet){
+function url_objet($id_objet,$objet,$titre='',$url=''){
+    
+    if(!$titre AND !$url){
+        $objet_sel=sql_fetsel('titre,url','spip_selection_objets','id_objet='.$id_objet.' AND objet='.sql_quote($objet));
+        $url=$objet_sel['url'];
+        $titre=$objet_sel['titre'];
+    }
 
-	$title=info_objet($id_objet,$objet,'titre');
-
-	$string_objet=substr($objet,0,strlen($objet)-1);
-
-	$url=generer_url_entite($id_objet,$string_objet);
+	if(!$titre)$titre=info_objet($id_objet,$objet,'titre');
+    if(!$url)$url=generer_url_entite($id_objet,$objet);
 	
-	$lien = '<a href="'.$url.'" title="'.$title.'">'.$title.'</a>';
+	$lien = '<a href="'.$url.'" title="'.$titre.'">'.$titre.'</a>';
 	return $lien;
 }
 
