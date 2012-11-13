@@ -30,16 +30,14 @@ function generer_url_microblog($id, $entite='article', $args='', $ancre='', $pub
  * @param $params array : les paramètres dans un array de la commande
  * @param $retour string : le retour souhaité par défaut cela renverra la chaine
  * ou l'array retourné par la commande. Sinon on peut utiliser les valeurs http_code,http_info,url
+ * @param array $tokens
+ * @return bool|string|array
  */
 function microblog_twitter_api($command,$type='get',$params=array(),$retour='',$tokens=null){
-	$cfg = @unserialize($GLOBALS['meta']['microblog']);
-	if($tokens){
-		$cfg = array_merge($cfg,$tokens);
-	}
-	include_spip('inc/twitteroauth');
-	
-	$connection = new TwitterOAuth($cfg['twitter_consumer_key'], $cfg['twitter_consumer_secret'], $cfg['twitter_token'], $cfg['twitter_token_secret']);
-	
+	include_spip('inc/microblog');
+	if (!$connection = twitter_connect($tokens))
+		return false;
+
 	switch($type){
 		case 'get':
 			$content = $connection->get($command,$params);
@@ -63,6 +61,8 @@ function microblog_twitter_api($command,$type='get',$params=array(),$retour='',$
 			return $connection->url;
 		default:
 			if (!is_string($content)) {
+				// recopie ?
+				$contents = array();
 				foreach($content as $key => $val){
 					$contents[$key] = $val;	
 				}

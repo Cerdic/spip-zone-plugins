@@ -20,7 +20,7 @@ class TwitterOAuth {
   /* Contains the last API call. */
   public $url;
   /* Set up the API root URL. */
-  public $host = "https://api.twitter.com/1/";
+  public $host = "https://api.twitter.com/1.1/";
   /* Set timeout default. */
   public $timeout = 30;
   /* Set connect timeout. */
@@ -45,8 +45,8 @@ class TwitterOAuth {
    * Set API URLS
    */
   function accessTokenURL()  { return 'https://api.twitter.com/oauth/access_token'; }
-  function authenticateURL() { return 'https://twitter.com/oauth/authenticate'; }
-  function authorizeURL()    { return 'https://twitter.com/oauth/authorize'; }
+  function authenticateURL() { return 'https://api.twitter.com/oauth/authenticate'; }
+  function authorizeURL()    { return 'https://api.twitter.com/oauth/authorize'; }
   function requestTokenURL() { return 'https://api.twitter.com/oauth/request_token'; }
 
   /**
