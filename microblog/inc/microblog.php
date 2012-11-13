@@ -39,10 +39,8 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null, $t
 
 	// services connus
 	$apis = array(
-		'spipo' => 'http://%user%:%pass%@spip.org/api/statuses/update.xml',
 		'identica' => 'http://%user%:%pass%@identi.ca/api/statuses/update.xml',
-		'twitter' => 'http://twitter.com/statuses/update.xml',
-		'supertweet' => 'http://%user%:%pass%@api.supertweet.net/statuses/update.xml'
+		'twitter' => 'oAuth',
 	);
 
 	// Choix de l'API
@@ -55,37 +53,15 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null, $t
 		}
 		$api = $apis[$service];
 	}
-	if(is_array($tokens)){
-		$cfg = array_merge($cfg,$tokens);
-	}
 	/**
 	 * Si l'API utilisée est twitter, on force le passage en oAuth
 	 */
-	if($service == 'twitter'){
-		if(
-			isset($cfg['twitter_consumer_key']) 
-				&& isset($cfg['twitter_consumer_secret'])
-				&& isset($cfg['twitter_token'])
-				&& isset($cfg['twitter_token_secret'])){
-			// Cas de twitter et oAuth
-			include_spip('inc/twitteroauth');
-			$consumer_key = $cfg['twitter_consumer_key'];
-			$consumer_secret = $cfg['twitter_consumer_secret'];
-			$connection = new TwitterOAuth($consumer_key, $consumer_secret, $cfg['twitter_token'], $cfg['twitter_token_secret']);
-			
-			if($connection){
-				$oAuth = true;
-			}
-			else{
-				spip_log('Erreur de connexion à twitter, verifier la configuration','microblog');
-				return false;
-			}
-		}
-		else{
-			spip_log('Erreur de connexion à twitter, verifier la configuration','microblog');
-			return false;
-		}
-	}else{
+	$oAuthConnection = null;
+	if($api == 'oAuth'){
+		$api = false;
+		$oAuthConnection = twitter_connect($tokens);
+	}
+	else {
 		if (!isset($user))
 			$user = $cfg['user'];
 		if (!isset($pass))
@@ -94,6 +70,10 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null, $t
 		// Inserer les credits d'authentification
 		$api = str_replace(array('%user%','%pass%'), array(urlencode($user),urlencode($pass)), $api);
 	}
+
+	// si pas d'api utilisable on sort
+	if (!$api AND !$oAuthConnection)
+		return false;
 	
 	// Preparer le message (utf8 < 140 caracteres)
 	include_spip('inc/charsets');
@@ -116,15 +96,16 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null, $t
 	}
 
 	// ping et renvoyer la reponse xml
-	if($oAuth){
+	if($oAuthConnection){
 		$ret = 'ok';
 		$api = 'statuses/update';
-		$connection->post($api,$datas);
-		if (200 != $connection->http_code){
-			spip_log('Erreur '.$connection->http_code,'microblog');
-			return false;
+		$oAuthConnection->post($api,$datas);
+		if (200 != $oAuthConnection->http_code){
+			spip_log('Erreur '.$oAuthConnection->http_code,'microblog');
+			$ret = false;
 		}
-	}else{
+	}
+	elseif ($api) {
 		include_spip('inc/distant');
 		$ret = recuperer_page($api, false, false, null, $datas);
 		spip_log("$service $user $status ".strlen($ret), 'microblog');
@@ -137,6 +118,37 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null, $t
 	return $ret;
 }
 
+function twitter_connect($tokens=null){
+	static $connection = null;
+
+	if (!$connection){
+		$cfg = @unserialize($GLOBALS['meta']['microblog']);
+		if(is_array($tokens)){
+			$cfg = array_merge($cfg,$tokens);
+		}
+		if(
+			isset($cfg['twitter_consumer_key'])
+				&& isset($cfg['twitter_consumer_secret'])
+				&& isset($cfg['twitter_token'])
+				&& isset($cfg['twitter_token_secret'])){
+			// Cas de twitter et oAuth
+			include_spip('inc/twitteroauth');
+			$consumer_key = $cfg['twitter_consumer_key'];
+			$consumer_secret = $cfg['twitter_consumer_secret'];
+			$connection = new TwitterOAuth($consumer_key, $consumer_secret, $cfg['twitter_token'], $cfg['twitter_token_secret']);
+
+			if(!$connection) {
+				spip_log('Erreur de connexion à twitter, verifier la configuration','microblog');
+				return false;
+			}
+		}
+		else{
+			spip_log('Erreur de connexion à twitter, verifier la configuration','microblog');
+			return false;
+		}
+	}
+	return $connection;
+}
 
 /**
  * Affichage du formulaire de microblog
