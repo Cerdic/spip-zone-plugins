@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=lb
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -9,60 +9,60 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'Mir Rechter fir dës Zone ginn',
-	'aucune_zone' => 'Aucune zone', # NEW
+	'aucune_zone' => 'Kéng Zone',
 	'auteurs' => 'Auteuren',
 
 	// B
-	'bouton_configurer_acces' => 'Configuration des acc&#232;s .htaccess', # NEW
+	'bouton_configurer_acces' => 'Astellen vum .htaccess',
 	'bouton_creer_la_zone' => 'Déi nei Zone derbäi setzen',
 
 	// C
 	'colonne_id' => 'Num',
-	'confirmer_ajouter_auteurs' => 'Êtes vous sûr de vouloir ajouter cet auteur à la zone ?', # NEW
-	'confirmer_retirer_auteur_zone' => 'Êtes vous sûr de vouloir retirer cet auteur de la zone ?', # NEW
-	'confirmer_retirer_auteurs' => 'Êtes vous sûr de vouloir retirer tous les auteurs de cette zone ?', # NEW
-	'confirmer_retirer_rubrique_zone' => 'Êtes vous sûr de vouloir retirer cette rubrique de cette zone ?', # NEW
-	'confirmer_supprimer_zone' => 'Êtes vous sûr de vouloir supprimer cette zone ?', # NEW
+	'confirmer_ajouter_auteurs' => 'Soll dësen Auteur wierklech bei dës Zone bäigesat ginn?',
+	'confirmer_retirer_auteur_zone' => 'Wëllt dir dësen Auteur aus dëser Zone ewech huelen?',
+	'confirmer_retirer_auteurs' => 'Wëllt dir wierklech all d\'Auteuren aus dëser Zone ewech huelen?',
+	'confirmer_retirer_rubrique_zone' => 'Wëllt dir dës Rubrik aus dëser Zone ewech huelen?',
+	'confirmer_supprimer_zone' => 'Wëllt dir dës Zone wierklech läschen?',
 	'creer_zone' => 'Eng nei Zone derbäi setzen',
 
 	// D
 	'descriptif' => 'Beschreiwung',
 
 	// E
-	'explication_creer_htaccess' => 'Cette option interdit la lecture des documents joints si le texte auquel ils se rattachent n\'est pas publi&eacute', # NEW
+	'explication_creer_htaccess' => 'Dës Optioun verhënnert d\'Uweisen vu verlinkten Dokumenter wann den Text nët verëffentlecht ass',
 
 	// I
 	'icone_menu_config' => 'Limitéierten Zougang',
 	'icone_supprimer_zone' => 'Dës Zone läschen',
-	'info_1_zone' => '1 zone', # NEW
-	'info_acces_restreint' => 'L\'accès à cette page est restreint. Identifiez vous pour y accéder', # NEW
-	'info_ajouter_auteur' => 'Ajouter cet auteur', # NEW
-	'info_ajouter_auteurs' => 'Ajouter tous les auteurs', # NEW
+	'info_1_zone' => '1 Zone',
+	'info_acces_restreint' => 'Den Zougang zu dëser Säit ass beschränkt. Loggt Iech an',
+	'info_ajouter_auteur' => 'Dësen Auteur bäiflécken',
+	'info_ajouter_auteurs' => 'All d\'Auteure bäiflécken',
 	'info_ajouter_zones' => 'All d\'Zonen derbäi setzen',
-	'info_aucun_acces' => 'Aucun accès autorisé', # NEW
-	'info_aucun_auteur' => 'Aucun auteur dans la zone', # NEW
-	'info_aucune_zone' => 'Aucune zone', # NEW
+	'info_aucun_acces' => 'Keen erlaabten Zougang',
+	'info_aucun_auteur' => 'Keen Auteur an dëser Zone',
+	'info_aucune_zone' => 'Keng Zone',
 	'info_auteurs_lies_zone' => 'D\'Auteuren déi Zougang an dës Zone hun',
-	'info_lien_action_proteger' => 'Prot&eacute;ger l\'acc&egrave;s &agrave; cette rubrique.', # NEW
-	'info_nb_zones' => '@nb@ zones', # NEW
+	'info_lien_action_proteger' => 'Den Zougang op dës Rubrik aschränken.',
+	'info_nb_zones' => '@nb@ Zonen',
 	'info_page' => 'Dës Säit erlabt déi limitéiert Zonen vun ärem Site anzestellen',
-	'info_retirer_auteurs' => 'Retirer tous les auteurs', # NEW
+	'info_retirer_auteurs' => 'All d\'Auteuren ewech huelen',
 	'info_retirer_zone' => 'Vun der Zone ewech huelen',
 	'info_retirer_zones' => 'Vun allen Zonen ewech huelen',
-	'info_rubrique_dans_zone' => 'Cette rubrique fait partie de la zone :', # NEW
-	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :', # NEW
+	'info_rubrique_dans_zone' => 'Dës Rubrik gehéiert zur Zone:',
+	'info_rubrique_dans_zones' => 'Dës Rubrik gehéiert zu den Zonen:',
 
 	// L
-	'label_creer_htaccess' => 'Acc&egrave;s aux document joints par leur URL', # NEW
-	'label_creer_htaccess_non' => 'autoriser la lecture', # NEW
-	'label_creer_htaccess_oui' => 'interdire la lecture', # NEW
+	'label_creer_htaccess' => 'Zougang op verlinkten Dokumenter iwwert d\'Url',
+	'label_creer_htaccess_non' => 'Liesen erlaaben',
+	'label_creer_htaccess_oui' => 'Liesen verbidden',
 
 	// M
-	'modifier_zone' => 'Modifier la zone', # NEW
+	'modifier_zone' => 'Zone änneren',
 
 	// P
 	'page_zones_acces' => 'Limitéierten Zougang',
-	'par_titre' => 'Par titre', # NEW
+	'par_titre' => 'No Titel',
 	'privee' => 'Privat',
 	'publique' => 'Öffentlech',
 
@@ -74,18 +74,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'selectionner_une_zone' => 'Eng Zone auswielen',
 
 	// T
-	'texte_ajouter_zone' => 'Ajouter une zone', # NEW
-	'texte_creer_associer_zone' => 'Créer et associer une zone', # NEW
+	'texte_ajouter_zone' => 'Eng Zone bäiflécken',
+	'texte_creer_associer_zone' => 'Eng Zone erstellen an zouweisen',
 	'titre' => 'Titel',
 	'titre_ajouter_zone' => 'Bei d\'Zone derbäi kommen',
-	'titre_boite_protegee_non' => 'Acc&egrave;s non prot&eacute;g&eacute;', # NEW
-	'titre_boite_protegee_oui' => 'Acc&egrave;s prot&eacute;g&eacute;', # NEW
-	'titre_cadre_modifier_zone' => 'Modifier une zone', # NEW
-	'titre_page_config' => 'Configuration des accès', # NEW
+	'titre_boite_protegee_non' => 'Zougang nët ageschränkt',
+	'titre_boite_protegee_oui' => 'Zougang ageschränkt',
+	'titre_cadre_modifier_zone' => 'Eng Zone änneren',
+	'titre_page_config' => 'Zougäng astellen',
 	'titre_table' => 'All Zougangs-Zonen',
-	'titre_zone_acces' => 'Zone d\'accès restreint', # NEW
+	'titre_zone_acces' => 'Ageschränkten Zone',
 	'titre_zones_acces' => 'Zonen mat limitéiertem Zougang',
-	'toutes' => 'Toutes', # NEW
+	'toutes' => 'Alleguer',
 
 	// V
 	'voir_toutes' => 'All Zonen weisen',

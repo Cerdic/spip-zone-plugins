@@ -24,6 +24,9 @@
 		<traducteur nom="orlammd" lien="http://trad.spip.net/auteur/orlammd" />
 	</langue>
 	<langue code="gl" />
+	<langue code="lb" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=lb">
+		<traducteur nom="jwander" lien="http://trad.spip.net/auteur/jwander" />
+	</langue>
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=nl">
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
