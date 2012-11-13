@@ -33,10 +33,12 @@ function pb_selection_interface ( $vars="" ) {
 }
 
 function pb_selection_jqueryui_plugins($plugins) {
-	$plugins[] = "jquery.ui.core";
-	$plugins[] = "jquery.ui.widget";
-	$plugins[] = "jquery.ui.mouse";
-	$plugins[] = "jquery.ui.sortable";
+	if (_DIR_RACINE == "../") {
+		$plugins[] = "jquery.ui.core";
+		$plugins[] = "jquery.ui.widget";
+		$plugins[] = "jquery.ui.mouse";
+		$plugins[] = "jquery.ui.sortable";
+	}
 	return $plugins;
 }
 
