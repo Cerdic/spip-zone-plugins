@@ -23,20 +23,21 @@ function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config
 	if (!intval($id_ticket)) $id_ticket='oui'; // oui pour le traitement de l'action (new, c'est pas suffisant)
 
 	if (!autoriser('ecrire', 'ticket', $id_ticket)) {
-		$editable = false;
+		$valeurs['editable'] = false;
 	}else{
 		$valeurs = formulaires_editer_objet_charger('ticket',$id_ticket,0,0,$retour,$config_fonc,$row,$hidden);
-		$editable = true;
-	}
-	// si nouveau ticket et qu'une url d'exemple est donnee dans l'environnement, on la colle
-	if ((!$id_ticket or $id_ticket=='oui') and ($exemple = _request('exemple'))) {
-		$valeurs['exemple'] = $exemple;
-	}
+		$valeurs['editable'] = true;
 	
-	if ((!$id_ticket or $id_ticket=='oui')){
-		$valeurs['id_assigne'] = $GLOBALS['visiteur_session']['id_auteur'];
+		// si nouveau ticket
+		if (!$id_ticket or $id_ticket=='oui'){
+			$valeurs['id_assigne'] = $GLOBALS['visiteur_session']['id_auteur'];
+			// Si un des champs de ce tableau est passé dans l'URL, on l'utilise dans le formulaire
+			foreach(array('composant','version','severite','navigateur','tracker','id_assigne','exemple') as $champ){
+				if(!$valeurs[$champ] && _request($champ))
+					$valeurs[$champ] = _request($champ);
+			}
+		}
 	}
-	$valeurs['editable'] = $editable;
 	return $valeurs;
 }
 

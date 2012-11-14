@@ -46,7 +46,7 @@ function tickets_champ_optionnel_actif($nom){
 
 	if ($liste == '') return false;
 
-	return explode(':', $liste);
+	return array_map('trim',explode(':', $liste));
 }
 
 
