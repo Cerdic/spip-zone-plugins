@@ -1,8 +1,0 @@
-#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
-<div class="nettoyeur"></div>
-
-<INCLURE{fond=prive/objets/liste/ad_deux_roues, par=titre, env, ajax, sinon=<:ad_deux_roue:info_aucun_ad_deux_roue:>}>
-
-[(#AUTORISER{creer,ad_deux_roue})
-	[(#URL_ECRIRE{ad_deux_roue_edit,new=oui}|icone_verticale{<:ad_deux_roue:icone_creer_ad_deux_roue:>,ad_deux_roue,new,right})]
-]
