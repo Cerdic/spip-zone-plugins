@@ -114,24 +114,22 @@ function tickets_forum_objets_depuis_env($objets){
 	return $objets;
 }
 
-
-
-
 /**
  * Insertion dans le pipeline formulaire_charger (SPIP)
  * Si on est dans un formulaire de forum sur un ticket, on ajoute l'id_ticket dans les champs chargés
  * Permet de le récupérer par la suite dans le contexte de recuperer_fond
  * 
  * @param array $flux Le contexte du formulaire
+ * @return array $flux Le contexte du formulaire modifié
  */
 function tickets_formulaire_charger($flux){
 	$args = $flux['args'];
 	$form = $flux['args']['form'];
 	if ($form == 'forum'){
-		if($args['args'][4] == 'id_ticket'){
+		if($args['args'][0] == 'ticket'){
 			$flux['data']['objet'] = 'ticket';
-			$flux['data']['id_objet'] = $args['args'][6];
-			$flux['data']['id_ticket'] = $args['args'][6];
+			$flux['data']['id_objet'] = $args['args'][1];
+			$flux['data']['id_ticket'] = $args['args'][1];
 		}
 	}
 	return $flux;
@@ -158,8 +156,8 @@ function tickets_recuperer_fond($flux){
 				$infos_ticket['statut'] = _request('statut');
 			}
 			if(is_array($infos_ticket)){
-				$saisie_ticket = recuperer_fond('inclure/inc-formulaire_forum',array_merge($args['contexte'],$infos_ticket));
-				$flux['data']['texte'] = preg_replace(",(<fieldset.*<\/fieldset>),Uims","\\1".$saisie_ticket,$flux['data']['texte'],1);
+				$saisie_ticket = recuperer_fond('inclure/inc-tickets_formulaire_forum',array_merge($args['contexte'],$infos_ticket));
+				$flux['data']['texte'] = preg_replace(",(<fieldset>.*<\/fieldset>),Uims","\\1".$saisie_ticket,$flux['data']['texte'],1);
 			}
 		}
 	}
@@ -169,23 +167,21 @@ function tickets_recuperer_fond($flux){
 /**
  * Insertion dans le pipeline formulaire_traiter (SPIP)
  * Si on est dans un formulaire de forum sur un ticket, on récupère le statut et l'assignation si présents
- * pour les notifications de forums des tickets en 2.1
+ * pour modifier le ticket en conséquence
  *
  * @param array $flux
  * @return array $flux
  */
 function tickets_formulaire_traiter($flux){
-	if (($flux['args']['form']=='forum') AND ($flux['args']['args'][3]=='ticket')) {
-		if($flux['args']['args'][3] == 'ticket'){
-			include_spip('action/editer_ticket');
-			$id_ticket = $flux['args']['args'][6];
-			$infos_ticket = sql_fetsel('*','spip_tickets','id_ticket='.intval($id_ticket));
-			if(($new_statut = _request('statut')) && ($new_statut != $infos_ticket['statut'])){
-				ticket_instituer($id_ticket, array('statut'=>$new_statut));
-			}
-			if(($new_assigne=_request('id_assigne')) && ($new_assigne != $infos_ticket['id_assigne'])){
-				ticket_modifier($id_ticket, array('id_assigne'=>$new_assigne));
-			}
+	if (($flux['args']['form']=='forum') AND ($flux['args']['args'][0]=='ticket')) {
+		include_spip('action/editer_ticket');
+		$id_ticket = $flux['args']['args'][1];
+		$infos_ticket = sql_fetsel('*','spip_tickets','id_ticket='.intval($id_ticket));
+		if(($new_statut = _request('statut')) && ($new_statut != $infos_ticket['statut'])){
+			ticket_instituer($id_ticket, array('statut'=>$new_statut));
+		}
+		if(($new_assigne=_request('id_assigne')) && ($new_assigne != $infos_ticket['id_assigne'])){
+			ticket_modifier($id_ticket, array('id_assigne'=>$new_assigne));
 		}
 	}
 	return $flux;

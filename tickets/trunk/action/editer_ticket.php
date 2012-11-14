@@ -1,17 +1,18 @@
 <?php
 
 /**
- * Plugin Tickets pour Spip 2.x
- * Licence GPL (c) 2008-2011
+ * Plugin Tickets pour SPIP
+ * Licence GPL (c) 2008-2012
  *
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * editer un ticket (action apres creation/modif de ticket)
+ * Editer un ticket (action apres creation/modif de ticket)
  *
  * @return array
+ * 	Un array contenant l'identifiant numérique du ticket et l'erreur s'il y a lieu
  */
 function action_editer_ticket() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -21,10 +22,6 @@ function action_editer_ticket() {
 	// mais on verifie qu'on a toutes les donnees qu'il faut.
 	if (!$id_ticket = intval($arg)) {
 		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
-		/*if (!$id_auteur) {
-			include_spip('inc/headers');
-			redirige_url_ecrire();
-		}*/
 		$id_ticket = ticket_inserer($id_auteur);
 	}
 
@@ -35,12 +32,15 @@ function action_editer_ticket() {
 }
 
 /**
- *
  * Mettre a jour un ticket
  *
- * @return
+ * 
  * @param int $id_ticket
- *
+ * 	L'identifiant numérique du ticket à modifier
+ * @param array|null $set
+ * 	Un array des valeurs par défaut si appel direct de la fonction
+ * @return string $err
+ * 	L'erreur retournée sinon ''
  */
 function ticket_modifier($id_ticket, $set=null) {
 	$err = '';
@@ -56,7 +56,7 @@ function ticket_modifier($id_ticket, $set=null) {
 		$set
 	);
 
-	$invalideur = "id='article/$id_article'";
+	$invalideur = "id='ticket/$id_ticket'";
 	$indexation = true;
 		
 	if ($err = objet_modifier_champs('ticket', $id_ticket,
@@ -96,23 +96,26 @@ function ticket_modifier($id_ticket, $set=null) {
 }
 
 /**
- * Creer un nouveau ticket
+ * Création d'un nouveau ticket
  *
- * @return int
+ * Si anonyme, on ne propose pas le ticket en redaction : on ouvre aussitot en lecture
+ * vu que l'autorisation de modifier de ticket dans instituer_ticket()
+ * risque d'interdire l'edition ensuite si l'autorisation de creation et de modification
+ * ne concernent pas les memes personnes.
+ * Ceci n'est pas encore ideal :
+ * si autoriser creer renvoie toujours true, et modifier false, pour un anonyme,
+ * un statut different de 'ouvert' ne sera pas pris en compte tout simplement.
+ * Mais a la creation, on met rarement "resolu" !
+ *
+ * Cependant, lorsqu'on cree un ticket anonyme,
+ * on stocke l'adresse ip ; cela peut servir pour filtrer des spam
+ * 
+ * @param int $id_auteur
+ * 	Identifiant numérique de l'auteur qui crée le ticket
+ * @return int $id_ticket
+ * 	Identifiant numérique du nouveau ticlet
  */
-function ticket_inserer($id_auteur) {
-	/* Si anonyme, on ne propose pas le ticket en redaction : on ouvre aussitot en lecture
-	 * vu que l'autorisation de modifier de ticket dans instituer_ticket()
-	 * risque d'interdire l'edition ensuite si l'autorisation de creation et de modification
-	 * ne concernent pas les memes personnes.
-	 * Ceci n'est pas encore ideal :
-	 * si autoriser creer renvoie toujours true, et modifier false, pour un anonyme,
-	 * un statut different de 'ouvert' ne sera pas pris en compte tout simplement.
-	 * Mais a la creation, on met rarement "resolu" !
-	 *
-	 * Cependant, lorsqu'on cree un ticket anonyme,
-	 * on stocke l'adresse ip ; cela peut servir pour filtrer des spam
-	 */
+function ticket_inserer($id_auteur=null) {
 	$ip = $id_auteur ? '' : $GLOBALS['ip'];
 	$statut = intval($id_auteur) ? 'redac' : 'ouvert';
 	
@@ -148,34 +151,31 @@ function ticket_inserer($id_auteur) {
 	return $id_ticket;
 }
 
-
-
 /**
  *
  * Gestion du statut d'un ticket
  * Tout changement de statut devrait passer par là
  *
- * @return
  * @param int $id_ticket
- * @param array $c
+ * @param array $c Les valeurs passées en paramètre
+ * @return string Erreurs, '' si pas d'erreur
  */
 function ticket_instituer($id_ticket, $c) {
 	include_spip('inc/autoriser');
 	include_spip('inc/modifier');
 
-	$row = sql_fetsel("statut", "spip_tickets", "id_ticket=$id_ticket");
+	$row = sql_fetsel("statut", "spip_tickets", "id_ticket=".intval($id_ticket));
 	$statut_ancien = $statut = $row['statut'];
 	$champs = array();
 	$date = $c['date'];
 
 	$s = $c['statut'];
 
-	// cf autorisations dans inc/instituer_article
 	if ($s AND $s != $statut) {
 		if (autoriser('ecrire', 'ticket', $id_ticket))
 			$statut = $champs['statut'] = $s;
 		else
-			spip_log("editer_ticket $id_ticket refus " . join(' ', $c));
+			spip_log("editer_ticket $id_ticket refus " . join(' ', $c),'tickets');
 
 		// En cas de publication, fixer la date a "maintenant"
 		// sauf si $c commande autre chose
@@ -193,7 +193,7 @@ function ticket_instituer($id_ticket, $c) {
 					'statut'=>'publie',
 					'date_publication'=>date('Y-m-d H:i:s'));
 				$id_document=$document['id_document'];
-				sql_updateq('spip_documents',$champs,"id_document=$id_document AND statut='prepa'");
+				sql_updateq('spip_documents',$champs,"id_document=".intval($id_document)." AND statut='prepa'");
 			}
 		}
 		// On met à jour la date_modif à chaque mise à jour de statut
@@ -216,7 +216,7 @@ function ticket_instituer($id_ticket, $c) {
 	if (!count($champs)) return;
 
 	// Envoyer les modifs.
-	sql_updateq('spip_tickets', $champs, "id_ticket=$id_ticket");
+	sql_updateq('spip_tickets', $champs, "id_ticket=".intval($id_ticket));
 
 	// Invalider les caches
 	include_spip('inc/invalideur');
@@ -244,7 +244,7 @@ function ticket_instituer($id_ticket, $c) {
 }
 
 // Obsolete
-function revision_ticket ($id_ticket, $c=false) {
+function revision_ticket($id_ticket, $c=false) {
 	return ticket_modifier($id_ticket,$c);
 }
 ?>

@@ -8,8 +8,8 @@
 .ticket .infos .formulaire_spip {margin:0; padding:0;}
 .ticket table { margin:0 0 .5em 0;} 
 .ticket dl { margin:0 0 .5em 0;} 
-.ticket dt {float: left; clear: left; width: 60px; text-align: right;} 
-.ticket dd {margin: 0 0 0 70px; padding: 0 .2em .2em 0;}
+.ticket dt {float: left; clear: left; width: 80px; text-align: right;} 
+.ticket dd {margin: 0 0 0 90px; padding: 0 .2em .2em 0;}
 
 .ticket_commentaires {clear:both;}
 
