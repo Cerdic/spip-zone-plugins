@@ -63,14 +63,17 @@ function inc_spipmotion_mediainfo_dist($chemin){
 					switch ($mime) {
 						case 'image/jpg':
 							$ext = 'jpg';
+							break;
 					 	case 'image/png':
 							$ext = 'png';
+							break;
 						case 'image/gif':
 							$ext = 'gif';
+							break;
 						default:
 							$ext = 'jpg';
 					}
-					$tmp_file = 'spipmotion-'.str_replace(' ','_',$infos['titre']).'.'.$ext;
+					$tmp_file = 'spipmotion-'.str_replace('.','_',str_replace(':','_',str_replace(' ','_',$infos['titre']))).'.'.$ext;
 		            $dest = sous_repertoire(_DIR_VAR, 'cache-spipmotion_logo');
 					$dest = $dest.$tmp_file;
 					if ($ok = ecrire_fichier($dest, base64_decode(array_shift(explode(' / ',$info[0]['Cover_Data'][0]))))){
