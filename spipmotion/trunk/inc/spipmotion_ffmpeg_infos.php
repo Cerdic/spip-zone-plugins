@@ -46,10 +46,10 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 		supprimer_fichier($chemin_fichier);
 		spimotion_write($chemin_fichier,"==VERSION==\n");
 		exec($spipmotion_sh.' --info "-version" --log '.$chemin_fichier,$retour,$bool);
-		spimotion_write($chemin_fichier,"\n==FORMATS==\n");
-		exec($spipmotion_sh.' --info "-formats" --log '.$chemin_fichier,$retour,$bool);
-		spimotion_write($chemin_fichier,"\n==CODECS==\n");
-		exec($spipmotion_sh.' --info "-codecs" --log '.$chemin_fichier,$retour,$bool);
+		spimotion_write($chemin_fichier.'_formats',"\n==FORMATS==\n");
+		exec($spipmotion_sh.' --info "-formats" --log '.$chemin_fichier.'_formats',$retour,$bool);
+		spimotion_write($chemin_fichier.'_codecs',"\n==CODECS==\n");
+		exec($spipmotion_sh.' --info "-codecs" --log '.$chemin_fichier.'_codecs',$retour,$bool);
 		spimotion_write($chemin_fichier,"\n==BSFS==\n");
 		exec($spipmotion_sh.' --info "-bsfs" --log '.$chemin_fichier,$retour,$bool);
 		spimotion_write($chemin_fichier,"\n==FILTERS==\n");
@@ -61,12 +61,11 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 		spimotion_write($chemin_fichier,"\n==FIN==");
 		
 		if (lire_fichier($chemin_fichier, $contenu)){
+			$contenu=trim($contenu);
 			$data = array();
 			$look_ups = array(
 				'version' => 'ffmpeg version',
 				'configuration'=>'configuration:',
-				'formats'=>'==FORMATS==',
-				'codecs'=>'==CODECS==',
 				'bitstream_filters'=>'==BSFS==',
 				'avfilters' => 'Filters:',
 				'pix_formats' => '==PIX_FMTS==',
@@ -83,9 +82,11 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 					$indexs[$key] = $index;
 				}
 			}
+			spip_log($indexs,'test');
+			spip_log($pregs,'test');
+			spip_log(implode('(.*)', $pregs),'test');
+			$result = preg_match('/'.implode('(.*)', $pregs).'/s', $contenu, $matches);
 
-			preg_match('/'.implode('(.*)', $pregs).'/s', $contenu, $matches);
-			
 			/**
 			 * Récupération des informations de version
 			 */
@@ -93,12 +94,12 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			$data['spipmotion_compiler']['versions'] = array();
 
 			$version = trim($matches[$indexs['version']]);
-			
 			preg_match('/([a-zA-Z0-9\-]+[0-9\.]+).* on (.*) with gcc (.*)/s', $version, $versions);
 			$data['spipmotion_compiler']['ffmpeg_version'] = $versions[1];
 			$data['spipmotion_compiler']['gcc'] = $versions[3];
 			$data['spipmotion_compiler']['build_date'] = $versions[2];
 			$data['spipmotion_compiler']['build_date_timestamp'] = strtotime($versions[2]);
+			spip_log($data['spipmotion_compiler'],'test');
 
 			/**
 			 * Récupération des éléments de configuration
@@ -115,50 +116,56 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			 * Récupération des formats disponibles
 			 * Pour chaque format reconnu on retourne un array avec
 			 */
-			preg_match_all('/ (DE|D|E) (.*) {1,} (.*)/', trim($matches[$indexs['formats']]), $formats);
-			$data['spipmotion_formats'] = array();
-			for($i=0, $a=count($formats[0]); $i<$a; $i++){
-				$data['spipmotion_formats'][strtolower(trim($formats[2][$i]))] = array(
-					'encode' 	=> $formats[1][$i] == 'DE' || $formats[1][$i] == 'E',
-					'decode' 	=> $formats[1][$i] == 'DE' || $formats[1][$i] == 'D',
-					'fullname'	=> $formats[3][$i]
-				);
+			if (lire_fichier($chemin_fichier.'_formats', $contenu_formats)){
+				preg_match_all('/ (DE|D|E) (.*) {1,} (.*)/', $contenu_formats, $formats);
+				$data['spipmotion_formats'] = array();
+				for($i=0, $a=count($formats[0]); $i<$a; $i++){
+					$data['spipmotion_formats'][strtolower(trim($formats[2][$i]))] = array(
+						'encode' 	=> $formats[1][$i] == 'DE' || $formats[1][$i] == 'E',
+						'decode' 	=> $formats[1][$i] == 'DE' || $formats[1][$i] == 'D',
+						'fullname'	=> $formats[3][$i]
+					);
+				}
+				ecrire_meta('spipmotion_formats',serialize($data['spipmotion_formats']),'','spipmotion_metas');
 			}
-			ecrire_meta('spipmotion_formats',serialize($data['spipmotion_formats']),'','spipmotion_metas');
 
 			/**
 			 * Récupération des codecs disponibles
 			 */
-			preg_match_all('/ (D| )(E| )(V|A|S)(S| )(D| )(T| ) (.*) {1,} (.*)/', trim($matches[$indexs['codecs']]), $codecs);
-			$data['spipmotion_codecs'] = array();
-			$data['spipmotion_codecs_audio_decode'] = array();
-			$data['spipmotion_codecs_video_decode'] = array();
-			$data['spipmotion_codecs_audio_encode'] = array();
-			$data['spipmotion_codecs_video_encode'] = array();
-			for($i=0, $a=count($codecs[0]); $i<$a; $i++){
-				$data['spipmotion_codecs'][strtolower(trim($codecs[7][$i]))] = array(
-					'decode' 	=> $codecs[1][$i] == 'D',
-					'encode' 	=> $codecs[2][$i] == 'E',
-					'type'	=> $codecs[3][$i],
-					'draw_horiz_band'	=> $codecs[4][$i] == 'S',
-					'direct_rendering'	=> $codecs[5][$i] == 'D',
-					'weird_frame_truncation' => $codecs[6][$i] == 'T',
-					'fullname' => $codecs[8][$i]
-				);
-				if(($codecs[1][$i] == 'D') && ($codecs[3][$i] == 'A'))
-					$data['spipmotion_codecs_audio_decode'][] = trim($codecs[7][$i]);
-				if(($codecs[1][$i] == 'D') && ($codecs[3][$i] == 'V'))
-					$data['spipmotion_codecs_video_decode'][] = trim($codecs[7][$i]);
-				if(($codecs[2][$i] == 'E') && ($codecs[3][$i] == 'A'))
-					$data['spipmotion_codecs_audio_encode'][] = trim($codecs[7][$i]);
-				if(($codecs[2][$i] == 'E') && ($codecs[3][$i] == 'V'))
-					$data['spipmotion_codecs_video_encode'][] = trim($codecs[7][$i]);
+			if (lire_fichier($chemin_fichier.'_codecs', $contenu_codecs)){
+				spip_log($contenu_codecs,'test');
+				preg_match_all('/ (D| |\.)(E| |\.)(V|A|S|\.)(S| |\.|I)(D|L| |\.)(T|S| ) (.*) {1,} (.*)/', $contenu_codecs, $codecs);
+				$data['spipmotion_codecs'] = array();
+				$data['spipmotion_codecs_audio_decode'] = array();
+				$data['spipmotion_codecs_video_decode'] = array();
+				$data['spipmotion_codecs_audio_encode'] = array();
+				$data['spipmotion_codecs_video_encode'] = array();
+				for($i=0, $a=count($codecs[0]); $i<$a; $i++){
+					$data['spipmotion_codecs'][strtolower(trim($codecs[7][$i]))] = array(
+						'decode' 	=> $codecs[1][$i] == 'D',
+						'encode' 	=> $codecs[2][$i] == 'E',
+						'type'	=> $codecs[3][$i],
+						'draw_horiz_band'	=> $codecs[4][$i] == 'S',
+						'direct_rendering'	=> $codecs[5][$i] == 'D',
+						'weird_frame_truncation' => $codecs[6][$i] == 'T',
+						'fullname' => $codecs[8][$i]
+					);
+					spip_log($data['spipmotion_codecs'][strtolower(trim($codecs[7][$i]))],'test');
+					if(($codecs[1][$i] == 'D') && ($codecs[3][$i] == 'A'))
+						$data['spipmotion_codecs_audio_decode'][] = trim($codecs[7][$i]);
+					if(($codecs[1][$i] == 'D') && ($codecs[3][$i] == 'V'))
+						$data['spipmotion_codecs_video_decode'][] = trim($codecs[7][$i]);
+					if(($codecs[2][$i] == 'E') && ($codecs[3][$i] == 'A'))
+						$data['spipmotion_codecs_audio_encode'][] = trim($codecs[7][$i]);
+					if(($codecs[2][$i] == 'E') && ($codecs[3][$i] == 'V'))
+						$data['spipmotion_codecs_video_encode'][] = trim($codecs[7][$i]);
+				}
+				ecrire_meta('spipmotion_codecs',serialize($data['spipmotion_codecs']),'','spipmotion_metas');
+				ecrire_meta('spipmotion_codecs_audio_decode',serialize($data['spipmotion_codecs_audio_decode']),'','spipmotion_metas');
+				ecrire_meta('spipmotion_codecs_video_decode',serialize($data['spipmotion_codecs_video_decode']),'','spipmotion_metas');
+				ecrire_meta('spipmotion_codecs_audio_encode',serialize($data['spipmotion_codecs_audio_encode']),'','spipmotion_metas');
+				ecrire_meta('spipmotion_codecs_video_encode',serialize($data['spipmotion_codecs_video_encode']),'','spipmotion_metas');
 			}
-			ecrire_meta('spipmotion_codecs',serialize($data['spipmotion_codecs']),'','spipmotion_metas');
-			ecrire_meta('spipmotion_codecs_audio_decode',serialize($data['spipmotion_codecs_audio_decode']),'','spipmotion_metas');
-			ecrire_meta('spipmotion_codecs_video_decode',serialize($data['spipmotion_codecs_video_decode']),'','spipmotion_metas');
-			ecrire_meta('spipmotion_codecs_audio_encode',serialize($data['spipmotion_codecs_audio_encode']),'','spipmotion_metas');
-			ecrire_meta('spipmotion_codecs_video_encode',serialize($data['spipmotion_codecs_video_encode']),'','spipmotion_metas');
 
 			/**
 			 * On récupère les filtres bitstream disponibles

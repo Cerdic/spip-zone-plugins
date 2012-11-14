@@ -485,7 +485,8 @@ function encodage($source,$options){
 					}else{
 						$infos_sup_normal = $preset_quality ? "-preset $preset_quality $infos_sup_normal" : $infos_sup_normal;
 					}
-					$metadatas = "-map_metadata 0:0";
+					$metadatas = "";
+					//$metadatas = "-map_metadata 0:0";
 					$metadatas_supp = '';
 					$metas_orig = @unserialize($source['metas']);
 					
@@ -509,7 +510,7 @@ function encodage($source,$options){
 				if($source['rotation'] == '90'){
 					$rotation = "-vf transpose=1";
 				}
-				$infos_sup_normal .= " -map_metadata 0:0";
+				//$infos_sup_normal .= " -map_metadata 0:0";
 				if($infos_sup_normal){
 					$infos_sup_normal = "--params_supp \"$infos_sup_normal\"";
 				}
