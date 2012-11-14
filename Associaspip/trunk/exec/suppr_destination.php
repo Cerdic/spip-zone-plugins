@@ -23,7 +23,7 @@ function exec_suppr_destination() {
 		// datation et raccourcis
 		raccourcis_association('');
 		debut_cadre_association('euro-39.gif', 'suppression_de_destination');
-		echo association_bloc_suppression('destination', $id_destination);
+		echo association_bloc_suppression('destination', $id_destination,'destination');
 		fin_page_association();
 	}
 }

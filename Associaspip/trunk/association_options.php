@@ -2425,7 +2425,7 @@ function association_passeparam_annee($type='', $objet='', $id=0) {
 function association_passeparam_exercice($type='', $objet='', $id=0) {
 	$exo = intval(_request('exercice'));
 	if (!$exo) // exercice non precise
-		$exo = sql_getfetsel('id_exercice','spip_asso_exercices','','','date_debut DESC'); // on recupere le dernier exercice en date
+		$exo = intval(sql_getfetsel('id_exercice','spip_asso_exercices','','','date_debut DESC')); // on recupere le dernier exercice en date
 	if ($type && $objet) {
 		if ($id) { // on veut un enregistrement precis : on ne va pas tenir compte de l'exercice passe en requete...
 			$dt = sql_getfetsel("date_$type", table_objet_sql($objet), id_table_objet($objet).'='.sql_quote($id) ); // ...on recupere la date correspondante a l'enregistrement recherche
