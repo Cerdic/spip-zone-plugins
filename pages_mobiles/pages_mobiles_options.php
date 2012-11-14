@@ -202,6 +202,12 @@ if ($type_page!="pages_mobiles" AND !test_espace_prive()) {
 			foreach ($contexte as $key => $value) {
 				$liste_params .= "&".$key."=".$value;
 			}
+			// ??? étrange, le $contexte est parfois vide, il faut alors aller rechercher les paramètres dans la query_string
+			if (!$contexte) {
+				foreach(explode("&",$_SERVER['QUERY_STRING']) as $value) {
+					if (substr($value,0,5) != "page=") $liste_params .= "&".$value;
+				}
+			}
 			include_spip('inc/headers');
 			redirige_par_entete("spip.php?page=pages_mobiles&squelette_mobile=$chemin_mobile".$liste_params);
 		}
