@@ -39,6 +39,6 @@
 	<utilise nom="licence" />
 	<utilise nom="fonctions_images" />
 
+	<menu nom="ffmpeg_infos" titre="spipmotion:titre_page_ffmpeg_infos" parent="menu_administration" icone="images/spipmotion-16.png" action="ffmpeg_infos" />
 	<menu nom="spipmotion_erreurs" titre="spipmotion:titre_page_erreurs" parent="menu_administration" icone="images/spipmotion-16.png" action="spipmotion_erreurs" />
-	<menu nom="ffmpeg_infos" titre="spipmotion:titre_page_ffmpeg_infos" parent="menu_configuration" icone="images/spipmotion-16.png" action="ffmpeg_infos" />
 </paquet>
