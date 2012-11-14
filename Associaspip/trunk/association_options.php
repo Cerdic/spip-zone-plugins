@@ -1294,35 +1294,38 @@ function association_verifier_membre($valeur, $rex=FALSE, $req=TRUE) {
  * sont recuperes directement dans $_POST
  */
 function association_verifier_destinations($valeur, $req=TRUE) {
-	if ( ($GLOBALS['association_metas']['destinations']) && !array_key_exists($valeur, $erreurs) ) { // verifier si besoin que le montant des destinations correspond bien au montant de l'operation
-		$montant_attendu = floatval($req?_request($valeur):$valeur);
-		$err = '';
-		$toutesDestinationsIds = _request('id_dest');
-		$toutesDestinationsMontants = _request('montant_dest');
-		$total_destination = 0;
-		$id_inserted = array();
-		if (count($toutesDestinationsIds)>1) { // on a plusieurs destinations
-			foreach ($toutesDestinationsIds as $id => $id_destination) { // on verifie qu'il n'y a pas plusieurs fois la meme destination, tout en recalculant le total
-				if (!array_key_exists($id_destination,$id_inserted)) {
-					$id_inserted[$id_destination] = 0;
-				} else {
-					$err = _T('asso:erreur_destination_dupliquee');
-				}
-				$total_destination += association_recuperer_montant($toutesDestinationsMontants[$id], FALSE); // les montants sont dans un autre tableau aux meme cles
+	if (!$GLOBALS['association_metas']['destinations']) return FALSE;
+
+	// verifier si besoin que le montant des destinations
+	// correspond bien au montant de l'operation
+	$montant_attendu = floatval($req?_request($valeur):$valeur);
+	$err = '';
+	$toutesDestinationsIds = _request('id_dest');
+	$toutesDestinationsMontants = _request('montant_dest');
+	$total_destination = 0;
+	$id_inserted = array();
+	if (count($toutesDestinationsIds)>1) { // on a plusieurs destinations
+		foreach ($toutesDestinationsIds as $id => $id_destination) { 
+		  // on verifie qu'il n'y a pas plusieurs fois
+		  // la meme destination, tout en recalculant le total
+			if (!array_key_exists($id_destination,$id_inserted)) {
+				$id_inserted[$id_destination] = 0;
+			} else {
+				$err = _T('asso:erreur_destination_dupliquee');
 			}
-			if ( $montant_attendu!=$total_destination ) { // on verifie que la somme des montants des destinations correspond au montant attendu
+			$total_destination += association_recuperer_montant($toutesDestinationsMontants[$id], FALSE); // les montants sont dans un autre tableau aux meme cles
+		}
+		if ( $montant_attendu!=$total_destination ) { // on verifie que la somme des montants des destinations correspond au montant attendu
 				$err .= _T('asso:erreur_montant_destination');
-			}
-		} else { // une seule destination, le montant peut ne pas avoir ete precise, dans ce cas pas de verif, c'est le montant attendu qui sera entre dans la base
-			if ($toutesDestinationsMontants[1]) { // quand on a une seule destination, l'id dans les tableaux est forcement 1 par contruction de l'editeur
-				if ( $montant_attendu!=association_recuperer_montant($toutesDestinationsMontants[1], FALSE) ) { // on verifie que le montant indique correspond au montant attendu
-					$err = _T('asso:erreur_montant_destination');
-				}
+		}
+	} else { // une seule destination, le montant peut ne pas avoir ete precise, dans ce cas pas de verif, c'est le montant attendu qui sera entre dans la base
+		if ($toutesDestinationsMontants[1]) { // quand on a une seule destination, l'id dans les tableaux est forcement 1 par contruction de l'editeur
+			if ( $montant_attendu!=association_recuperer_montant($toutesDestinationsMontants[1], FALSE) ) { // on verifie que le montant indique correspond au montant attendu
+			  $err = _T('asso:erreur_montant_destination');
 			}
 		}
-		return $err;
-	} else
-		return FALSE;
+	}
+	return $err;
 }
 
 /** @} */
