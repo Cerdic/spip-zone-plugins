@@ -27,7 +27,7 @@ function exec_ajout_cotisation() {
 		raccourcis_association('', array(
 			'voir_adherent' => array('edit-24.gif', array('adherent', "id=$id_auteur") ),
 		));
-		debut_cadre_association('annonce.gif', 'nouvelle_cotisation');
+		debut_cadre_association('annonce.gif', 'cotisation');
 		echo recuperer_fond('prive/editer/ajouter_cotisation', array (
 			'id_auteur' => $id_auteur,
 			'nom_prenom' => association_formater_nom($membre['sexe'], $membre['prenom'], $membre['nom_famille']),

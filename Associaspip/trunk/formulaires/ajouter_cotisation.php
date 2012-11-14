@@ -28,7 +28,7 @@ function formulaires_ajouter_cotisation_charger_dist($id_auteur, $nom_prenom, $i
 		$contexte['validite'] = date('Y-m-d');
 		$contexte['montant'] = 0;
 	} // validite et montant de cotisation
-	$contexte['justification'] = _T('asso:nouvelle_cotisation') ." [$nom_prenom"."->membre$id_auteur]"; // la justification
+	$contexte['justification'] = _T('asso:cotisation') ." [$nom_prenom"."->membre$id_auteur]"; // la justification
 	$contexte['_action'] = array('ajouter_cotisation',$id_auteur); // pour passer securiser action
 	association_chargeparam_destinations('cotisations', $contexte); // les destinations
 

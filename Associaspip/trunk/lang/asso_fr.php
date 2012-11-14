@@ -467,6 +467,7 @@ Commentaire: @commentaire@
 	'contenu_des_etiquettes' => 'Contenu des &eacute;tiquettes',
 	'contre_valeur_en_e__' => 'Contre-valeur (en &euro;)',
 	'contrepartie' => 'Contrepartie',
+	'cotisation' => 'Cotisation',
 	'cpte_benevolat_depenses' => 'D&eacute;pense<br />&eacute;valu&eacute;e',
 	'cpte_benevolat_recettes' => 'Recette<br />&eacute;valu&eacute;e',
 	'cpte_benevolat_soldes' => 'CONTRIBUTIONS VOLONTAIRES',
@@ -795,7 +796,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique',
 	'nom_meta_utilisateur' => 'Nom',
 	'nombre_fois' => '@nombre@ fois',
 	'non_implemente' => 'Fonctionnalit&eacute; non encore impl&eacute;ment&eacute;e !',
-	'nouvelle_cotisation' => 'Nouvelle cotisation',
+
 
 // O
 	'objet_num' => '@objet@ n<sup>o</sup>&nbsp;:&nbsp;@num@',
