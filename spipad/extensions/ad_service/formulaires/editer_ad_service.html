@@ -1,0 +1,53 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_ad_service,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_ad_service' value='#ENV{id_ad_service}' />
+		<ul>
+
+			[(#SAISIE{input, titre, obligatoire=oui,
+				label=<:ad_service:label_titre:>,
+				explication=<:ad_service:explication_titre:> })]
+
+			[(#SAISIE{selection, type_service, obligatoire=oui,
+				label=<:ad_service:label_type_service:>,
+				explication=<:ad_service:explication_type_service:> ,
+				datas=[(#ARRAY{1,Travaux /jardinage,2,Ménage repassage,3,Soins à la personne,4,Garde d'enfant,5,Cours particuliers,6,informatique})]})]
+
+			[(#SAISIE{hidden, lattitude,
+				label=<:ad_service:label_lattitude:>})]
+
+			[(#SAISIE{hidden, longitude,
+				label=<:ad_service:label_longitude:>,
+				explication=<:ad_service:explication_longitude:> })]
+
+			[(#SAISIE{input, centre,
+				label=<:ad_service:label_centre:>,
+				explication=<:ad_service:explication_centre:> })]
+
+			[(#SAISIE{input, rayon, obligatoire=oui,
+				label=<:ad_service:label_rayon:>,
+				explication=<:ad_service:explication_rayon:> })]
+
+			[(#SAISIE{textarea, descriptif, obligatoire=oui,
+				label=<:ad_service:label_descriptif:>})]
+
+			[(#SAISIE{input, tarif_horaire, obligatoire=oui,
+				label=<:ad_service:label_tarif_horaire:>})]
+
+			[(#SAISIE{oui_non, deduction_fiscale,
+				label=<:ad_service:label_deduction_fiscale:>})]
+
+			[(#SAISIE{oui_non, cesu, obligatoire=oui,
+				label=<:ad_service:label_cesu:>})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1, 
+	date,-1, 
+	id_ad_service,1,
+	points,-1
+}})]<B_liste_ad_services>
+#ANCRE_PAGINATION
+<div class="liste-objets ad_services">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{ad_service:info_1_ad_service,ad_service:info_nb_ad_services}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='titre' scope='col'>[(#TRI{titre,<:ad_service:label_titre:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='id' scope='col'>[(#TRI{id_ad_service,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_ad_services(AD_SERVICES){id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{ad_service-16.png}|balise_img)]</td>
+			<td class='statut'>[(#STATUT|puce_statut{ad_service,#ID_AD_SERVICE})]</td> 
+			<td class='titre principale'>[(#LOGO_AD_SERVICE|image_reduire{20,26})]<a href="[(#ID_AD_SERVICE|generer_url_entite{ad_service})]" title="<:info_numero_abbreviation|attribut_html:> #ID_AD_SERVICE">[(#RANG). ]#TITRE</a></td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+			<td class='id'>[(#AUTORISER{modifier,ad_service,#ID_AD_SERVICE}|?{
+				<a href="[(#URL_ECRIRE{ad_service_edit,id_ad_service=#ID_AD_SERVICE})]">#ID_AD_SERVICE</a>,
+				#ID_AD_SERVICE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_ad_services>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_ad_services>[
+<div class="liste-objets ad_services caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_ad_services>

@@ -1,0 +1,33 @@
+<paquet
+	prefix="ad_service"
+	categorie="divers"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.5;3.0.*]"
+	logo="prive/themes/spip/images/ad_service-64.png"
+	documentation=""
+	schema="1.0.0" 
+>
+	<!--
+		Paquet généré le 2012-11-13 11:11:04
+	-->
+
+	<nom>Annonces services</nom>
+
+	<auteur lien='http://montpel-libre.fr/'>Collectif SPIP - Montpellier</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies" compatibilite="[1.21.0;]" />
+	<necessite nom="spipad" compatibilite="[1.0.1;]" />
+	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
+
+	<pipeline nom="autoriser" inclure="ad_service_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/ad_service.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/ad_service.php" /> 
+	<pipeline nom="affiche_milieu" inclure="ad_service_pipelines.php" /> 
+	<pipeline nom="affiche_auteurs_interventions" inclure="ad_service_pipelines.php" /> 
+
+	<menu nom="ad_services" titre="ad_service:titre_ad_services" parent="menu_edition" icone="images/ad_service-16.png" action="ad_services" /> 
+	<menu nom="ad_service_creer" titre="ad_service:icone_creer_ad_service" parent="outils_rapides" icone="images/ad_service-new-16.png" action="ad_service_edit" parametres="new=oui" /> 
+</paquet>

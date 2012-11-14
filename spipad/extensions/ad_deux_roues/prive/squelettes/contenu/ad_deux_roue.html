@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,ad_deux_roue,#ID_AD_DEUX_ROUE}|sinon_interdire_acces)]
+<BOUCLE_ad_deux_roue(AD_DEUX_ROUES){id_ad_deux_roue}{statut==.*}{si #ENV{exec}|=={ad_deux_roue}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,ad_deux_roue,#ID_AD_DEUX_ROUE})
+		[(#ID_AD_DEUX_ROUE|afficher_qui_edite{ad_deux_roue}|non)
+			[(#URL_ECRIRE{ad_deux_roue_edit,id_ad_deux_roue=#ID_AD_DEUX_ROUE}|icone_verticale{<:ad_deux_roue:icone_modifier_ad_deux_roue:>,ad_deux_roue,edit,right ajax preload})]
+		]
+		[(#ID_AD_DEUX_ROUE|afficher_qui_edite{ad_deux_roue}|oui)
+			[(#URL_ECRIRE{ad_deux_roue_edit,id_ad_deux_roue=#ID_AD_DEUX_ROUE}|icone_verticale{#ID_AD_DEUX_ROUE|afficher_qui_edite{ad_deux_roue},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{ad_deux_roue-24.png}|balise_img{ad_deux_roue,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{ad_deux_roue,#ID_AD_DEUX_ROUE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/ad_deux_roue,id=#ID_AD_DEUX_ROUE,id_ad_deux_roue=#ID_AD_DEUX_ROUE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,ad_deux_roue,#ID_AD_DEUX_ROUE})
+	[(#ID_AD_DEUX_ROUE|afficher_qui_edite{ad_deux_roue}|non)
+		[(#URL_ECRIRE{ad_deux_roue_edit,id_ad_deux_roue=#ID_AD_DEUX_ROUE}|icone_verticale{<:ad_deux_roue:icone_modifier_ad_deux_roue:>,ad_deux_roue,edit,right ajax preload})]
+	]
+	[(#ID_AD_DEUX_ROUE|afficher_qui_edite{ad_deux_roue}|oui)
+		[(#URL_ECRIRE{ad_deux_roue_edit,id_ad_deux_roue=#ID_AD_DEUX_ROUE}|icone_verticale{#ID_AD_DEUX_ROUE|afficher_qui_edite{ad_deux_roue},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,ad_deux_roue,id,#ID_AD_DEUX_ROUE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_ad_deux_roue>
+[(#ENV**{exec}|=={ad_deux_roue_edit}|?{#INCLURE{fond=prive/squelettes/contenu/ad_deux_roue_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_ad_deux_roue>

@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,ad_service,#ID_AD_SERVICE}|sinon_interdire_acces)]
+<BOUCLE_ad_service(AD_SERVICES){id_ad_service}{statut==.*}{si #ENV{exec}|=={ad_service}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,ad_service,#ID_AD_SERVICE})
+		[(#ID_AD_SERVICE|afficher_qui_edite{ad_service}|non)
+			[(#URL_ECRIRE{ad_service_edit,id_ad_service=#ID_AD_SERVICE}|icone_verticale{<:ad_service:icone_modifier_ad_service:>,ad_service,edit,right ajax preload})]
+		]
+		[(#ID_AD_SERVICE|afficher_qui_edite{ad_service}|oui)
+			[(#URL_ECRIRE{ad_service_edit,id_ad_service=#ID_AD_SERVICE}|icone_verticale{#ID_AD_SERVICE|afficher_qui_edite{ad_service},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{ad_service-24.png}|balise_img{ad_service,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{ad_service,#ID_AD_SERVICE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/ad_service,id=#ID_AD_SERVICE,id_ad_service=#ID_AD_SERVICE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,ad_service,#ID_AD_SERVICE})
+	[(#ID_AD_SERVICE|afficher_qui_edite{ad_service}|non)
+		[(#URL_ECRIRE{ad_service_edit,id_ad_service=#ID_AD_SERVICE}|icone_verticale{<:ad_service:icone_modifier_ad_service:>,ad_service,edit,right ajax preload})]
+	]
+	[(#ID_AD_SERVICE|afficher_qui_edite{ad_service}|oui)
+		[(#URL_ECRIRE{ad_service_edit,id_ad_service=#ID_AD_SERVICE}|icone_verticale{#ID_AD_SERVICE|afficher_qui_edite{ad_service},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,ad_service,id,#ID_AD_SERVICE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_ad_service>
+[(#ENV**{exec}|=={ad_service_edit}|?{#INCLURE{fond=prive/squelettes/contenu/ad_service_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_ad_service>

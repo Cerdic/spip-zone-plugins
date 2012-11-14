@@ -1,0 +1,72 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi titre,1,
+	date,-1, 
+	id_ad_service,1
+}})
+]
+#SET{exclus,#ENV**{exclus,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutad_a,#EVAL{_request("debutad_a");}}}
+<B_liste_ad_services>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutad_a,#EVAL{_request("debutad_a");}}}
+#SET{afficher_lettres,#TRI|=={'multi titre'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-associer ad_services">
+<table class='spip liste'>
+[<caption><span class="caption"><strong>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{ad_service:info_1_ad_service,ad_service:info_nb_ad_services}})</strong>
+<span class="recherche">
+	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
+	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
+	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
+</span>
+</span>
+</caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(AD_SERVICES){tout}{!id_ad_service IN #GET{exclus}}{where?}{recherche?}{statut?}
+			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_ad_service==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#TITRE**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutad_a,@#ID_AD_SERVICE}|ancre_url{paginationad_a}|afficher_initiale{#TITRE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="3"><p class='pagination'>(#GET{p})</p></td></tr>]
+	
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='titre' scope='col'>[(#TRI{multi titre,<:ad_service:label_titre:>,ajax})]</th>
+			<th class='action' scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_ad_services(AD_SERVICES){!id_ad_service IN #GET{exclus}}{where?}{recherche?}{statut?}
+		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} ad_a}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
+			<td class='statut'>[(#STATUT|puce_statut{ad_service})]</td> 
+			<td class='titre'>[(#LOGO_AD_SERVICE|image_reduire{20,20})]<a href="[(#ID_AD_SERVICE|generer_url_entite{ad_service})]">#TITRE</a></td>
+			<td class='action'>
+				<button class="button link add" name="ajouter_lien\[ad_service-#ID_AD_SERVICE-#OBJET-#ID_OBJET\]" value="+"><:ad_service:ajouter_lien_ad_service:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
+			</td>
+		</tr>
+	</BOUCLE_liste_ad_services>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_ad_services>[(#ENV{recherche}|oui)
+<div class="liste-objets liste-objets-associer ad_services caption-wrap">
+<span class="caption"><strong>[(#VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}})]</strong>
+<span class="recherche">
+	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
+	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
+	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
+</span>
+</span>
+</div>
+]<//B_liste_ad_services>

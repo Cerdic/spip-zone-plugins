@@ -1,0 +1,30 @@
+[(#ID_OBJET|oui)
+	[(#AUTORISER{modifier,ad_service,#ID_AD_SERVICE}|sinon_interdire_acces)]
+][(#ID_OBJET|non)
+	[(#AUTORISER{creer,ad_service}|sinon_interdire_acces)]
+]
+ 
+#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_AD_SERVICE}|?{#ENV{lier_trad,#ID_AD_SERVICE}|generer_url_entite{ad_service},#URL_ECRIRE{ad_services}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_AD_SERVICE|oui)
+	[(#GET{redirect}|icone_verticale{Retour,ad_service,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_AD_SERVICE|?{<:ad_service:icone_modifier_ad_service:>,<:ad_service:icone_creer_ad_service:>})]
+		<h1>(#ENV{titre,#INFO_TITRE{ad_service,#ID_AD_SERVICE}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_AD_SERVICE|generer_url_entite{ad_service}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_AD_SERVICE{#ENV{id_ad_service,oui}, #GET{redirect}, #ENV{associer_objet}, #ENV{lier_trad}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

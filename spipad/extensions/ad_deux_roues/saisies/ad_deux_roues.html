@@ -1,0 +1,13 @@
+[(#ENV{multiple}|oui)
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+]
+<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
+	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
+		<option value="">[(#ENV{option_intro})]</option>]
+	<BOUCLE_ad_deux_roues(AD_DEUX_ROUES){par num titre, titre}{statut?}{recherche?}{tout}>
+		[(#ENV{multiple}|oui)
+		<option value="#ID_AD_DEUX_ROUE"[(#ID_AD_DEUX_ROUE|in_array{#ENV{valeur_forcee,#GET{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>#TITRE</option>]
+		[(#ENV{multiple}|non)
+		<option value="#ID_AD_DEUX_ROUE"[(#ID_AD_DEUX_ROUE|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#TITRE</option>]
+	</BOUCLE_ad_deux_roues>
+</select>

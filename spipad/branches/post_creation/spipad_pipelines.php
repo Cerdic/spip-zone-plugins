@@ -15,30 +15,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 
 
-/**
- * Ajouter les objets sur les vues de rubriques
-**/
-function spipad_affiche_enfants($flux) {
-	if ($e = trouver_objet_exec($flux['args']['exec'])
-		AND $e['type'] == 'rubrique'
-		AND $e['edition'] == false) {
-
-		$id_rubrique = $flux['args']['id_rubrique'];
-		$lister_objets = charger_fonction('lister_objets', 'inc');
-
-		$bouton = '';
-		if (autoriser('creeraddans', 'rubrique', $id_rubrique)) {
-			$bouton .= icone_verticale(_T("ad:icone_creer_ad"), generer_url_ecrire("ad_edit", "id_rubrique=$id_rubrique"), "ad-24.png", "new", "right")
-					. "<br class='nettoyeur' />";
-		}
-
-		$flux['data'] .= $lister_objets('ads', array('titre'=>_T('ad:titre_ads_rubrique') , 'id_rubrique'=>$id_rubrique, 'par'=>'titre'));
-		$flux['data'] .= $bouton;
-
-	}
-	return $flux;
-}
-
 
 /**
  * Ajout de contenu sur certaines pages,
@@ -58,8 +34,8 @@ function spipad_affiche_milieu($flux) {
 	}
 
 
-	// ads sur les articles, auteurs, documents, groupes_mots, messages, mots, rubriques
-	if (!$e['edition'] AND in_array($e['type'], array('article', 'auteur', 'document', 'groupe_mots', 'message', 'mot', 'rubrique'))) {
+	// ads sur les ad_services, ad_deux_roues, auteurs
+	if (!$e['edition'] AND in_array($e['type'], array('ad_service', 'ad_deux_roue', 'auteur'))) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => 'ads',
 			'objet' => $e['type'],
