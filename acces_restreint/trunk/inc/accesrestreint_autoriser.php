@@ -124,6 +124,16 @@ function autoriser_document_voir($faire, $type, $id, $qui, $opt) {
 	$publique = isset($opt['publique'])?$opt['publique']:!test_espace_prive();
 	$id_auteur = isset($qui['id_auteur']) ? $qui['id_auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
 	if (!isset($documents_statut[$id_auteur][$publique][$id])){
+
+		// il faut hacker la meta "creer_htaccess" le temps du calcul de l'autorisation car le core
+		$clean_meta = false;
+		if (isset($GLOBALS['meta']["accesrestreint_proteger_documents"]) AND $GLOBALS['meta']["accesrestreint_proteger_documents"]=='oui'){
+			if (!isset($GLOBALS['meta']["creer_htaccess"]) OR $GLOBALS['meta']["creer_htaccess"] != 'oui'){
+				$GLOBALS['meta']["creer_htaccess"] = 'oui';
+				$clean_meta = true;
+			}
+		}
+
 		if (!$id)
 			$documents_statut[$id_auteur][$publique][$id] = autoriser_document_voir_dist($faire, $type, $id, $qui, $opt);
 		else {
@@ -137,6 +147,11 @@ function autoriser_document_voir($faire, $type, $id, $qui, $opt) {
 			if ($documents_statut[$id_auteur][$publique][$id])
 				$documents_statut[$id_auteur][$publique][$id] = autoriser_document_voir_dist($faire, $type, $id, $qui, $opt);
 		}
+
+		if ($clean_meta){
+			unset($GLOBALS['meta']["creer_htaccess"]);
+		}
+
 	}
 	return $documents_statut[$id_auteur][$publique][$id];
 }

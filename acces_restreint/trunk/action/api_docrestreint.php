@@ -40,6 +40,13 @@ function action_api_docrestreint_dist($arg=null) {
 		// file exige pour eviter le scan id_document par id_document
 		$f = implode("/",$arg);
 
+		if ($id_document==0
+			AND $cle==1
+		  AND $f=="test/.test") {
+			echo "OK";
+			return;
+		}
+
 		include_spip('inc/documents');
 
 		$file = get_spip_doc($f);
@@ -69,21 +76,34 @@ function action_api_docrestreint_dist($arg=null) {
 				// ETag pour gerer le status 304
 				$ETag = md5($file . ': '. filemtime($file));
 				if (isset($_SERVER['HTTP_IF_NONE_MATCH'])
-				AND $_SERVER['HTTP_IF_NONE_MATCH'] == $ETag) {
+				  AND $_SERVER['HTTP_IF_NONE_MATCH'] == $ETag) {
 					http_status(304); // Not modified
 					exit;
-				} else {
+				}
+				else {
 					header('ETag: '.$ETag);
 				}
 
 				//
 				// Verifier les droits de lecture du document
-				// en controlant la cle passee en argument
-				//
-				include_spip('inc/securiser_action');
-				if (!verifier_cle_action($doc['id_document'].','.$f, $cle)) {
-					spip_log("acces interdit $cle erronee");
-					$status = 403;
+
+				// en controlant la cle passee en argument si elle est dispo
+				// (perf issue : toutes les urls ont en principe cette cle fournie dans la page au moment du calcul de la page)
+				if ($cle){
+					include_spip('inc/securiser_action');
+					if (!verifier_cle_action($doc['id_document'].','.$f, $cle)) {
+						spip_log("acces interdit $cle erronee");
+						$status = 403;
+					}
+				}
+				// en verifiant le droit explicitement sinon, plus lent !
+				else {
+					if (!function_exists("autoriser"))
+						include_spip("inc/autoriser");
+					if (!autoriser('voir', 'document', $doc['id_document'])) {
+						$status = 403;
+						spip_log("acces interdit $cle erronee");
+					}
 				}
 			}
 		}
@@ -94,14 +114,14 @@ function action_api_docrestreint_dist($arg=null) {
 
 	case 403:
 		include_spip('inc/minipres');
-		echo minipres();
+		echo minipres("","","",true);
 		break;
 
 	case 404:
 		http_status(404);
 		include_spip('inc/minipres');
 		echo minipres(_T('erreur').' 404',
-			_T('info_document_indisponible'));
+			_T('medias:info_document_indisponible'),"",true);
 		break;
 
 	default:

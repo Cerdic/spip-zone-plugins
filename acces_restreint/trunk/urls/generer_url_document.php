@@ -50,5 +50,10 @@ function urls_generer_url_document_dist($id, $args='', $ancre='', $public=null, 
 
 	// cette url doit etre publique !
 	$cle = calculer_cle_action($id.','.$f);
-	return _DIR_RACINE."docrestreint.api/$id/$cle/$f";
+
+	// renvoyer une url plus ou moins jolie
+	if ($GLOBALS['meta']['creer_htaccess'])
+		return _DIR_RACINE."docrestreint.api/$id/$cle/$f";
+	else
+		return get_spip_doc($f)."?$id/$cle";
 }
