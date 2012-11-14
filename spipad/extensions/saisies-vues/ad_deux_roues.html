@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_ad_deux_roues_selectionnes>
+	<ul>
+	<BOUCLE_ad_deux_roues_selectionnes(AD_DEUX_ROUES){id_ad_deux_roue IN #GET*{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+		<li class="choix">#TITRE (#ID_AD_DEUX_ROUE)</li>
+	</BOUCLE_ad_deux_roues_selectionnes>
+	</ul>
+	</B_ad_deux_roues_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_ad_deux_roues_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_ad_deux_roue_selectionne(AD_DEUX_ROUES){id_ad_deux_roue=#ENV{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+	  	<p>#TITRE (#ID_AD_DEUX_ROUE)</p>
+	</BOUCLE_ad_deux_roue_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_ad_deux_roue_selectionne>
+<//B_test_multiple>
