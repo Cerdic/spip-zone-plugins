@@ -58,6 +58,11 @@ $GLOBALS['tinymce_habillages'] = array(
  */
 $GLOBALS['tinymce_arg_barre'] = 'tmce_barre';
 
+/**
+ * Classe CSS pour protéger les codes SPIP
+ */
+$GLOBALS['tinymce_protect_class'] = 'spiptmceInsert';
+
 // debug direct
 //echo '<pre>'; var_export( unserialize( $GLOBALS['meta']['tinymce'] ) ); exit('yo');
 

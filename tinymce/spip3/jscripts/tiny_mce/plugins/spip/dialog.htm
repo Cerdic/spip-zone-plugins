@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>{#spip_dlg.desc}</title>
+	<script type="text/javascript" src="../../tiny_mce_popup.js"></script>
+	<script type="text/javascript" src="js/dialog.js"></script>
+	<style type="text/css">
+.comment { display: block; margin: 4px 1em 12px 1em; }
+textarea#spipcode { padding: 4px 5%; }
+	</style>
+</head>
+<body>
+
+<div class="comment">{#spip_dlg.comment}</div>
+
+<form onsubmit="SpipCodeDialog.insert();return false;" action="#">
+	<div>
+		<textarea style="width: 90%" rows="14" cols="30" id="spipcode">{#spip_dlg.insert_spip_code_here}</textarea>
+	</div>
+	<div class="mceActionPanel">
+		<input type="button" id="insert" name="insert" value="{#insert}" onclick="SpipCodeDialog.insert();" />
+		<input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
+	</div>
+</form>
+
+</body>
+</html>
