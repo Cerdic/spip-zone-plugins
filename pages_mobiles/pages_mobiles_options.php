@@ -39,17 +39,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 		$pages_mobiles = isset($_COOKIE['pages_mobiles']) ? $_COOKIE['pages_mobiles'] : '';
 	}
 	// détection du mobile
-	if (!$pages_mobiles) {
+	if (!$pages_mobiles OR $pages_mobiles == "reinit_mobile") {
 
-		$user_agent = isset($_SERVER['HTTP_USER_AGENT'])?strtolower($_SERVER['HTTP_USER_AGENT']):'';
-		
-		// Cas d'un desktop (pour eviter des tests inutiles)
-		if (strpos($user_agent,'firefox')!==false AND strpos($user_agent,'fennec')===false) {
-			// firefox (sauf version mobile)
-			$pages_mobiles = 'web';
-		} elseif (strpos($user_agent,'msie')!==false AND strpos($user_agent,'windows ce')===false AND strpos($user_agent,'iemobile')===false) {
-			// internet explorer (sauf version mobile)
-			$pages_mobiles = 'web';
+		// si on ne demande pas de re-détecter le mobile
+		if (!$pages_mobiles) {
+			$user_agent = isset($_SERVER['HTTP_USER_AGENT'])?strtolower($_SERVER['HTTP_USER_AGENT']):'';
+			
+			// Cas d'un desktop (pour eviter des tests inutiles)
+			if (strpos($user_agent,'firefox')!==false AND strpos($user_agent,'fennec')===false) {
+				// firefox (sauf version mobile)
+				$pages_mobiles = 'web';
+			} elseif (strpos($user_agent,'msie')!==false AND strpos($user_agent,'windows ce')===false AND strpos($user_agent,'iemobile')===false) {
+				// internet explorer (sauf version mobile)
+				$pages_mobiles = 'web';
+			}
 		}
 		// Tableau des mobiles individualises (smartphones et tablettes)
 		// expression reguliere sur le user agent => nom du mobile
@@ -205,7 +208,8 @@ if ($type_page!="pages_mobiles" AND !test_espace_prive()) {
 			// ??? étrange, le $contexte est parfois vide, il faut alors aller rechercher les paramètres dans la query_string
 			if (!$contexte) {
 				foreach(explode("&",$_SERVER['QUERY_STRING']) as $value) {
-					if (substr($value,0,5) != "page=") $liste_params .= "&".$value;
+					if (substr($value,0,5) != "page=" AND substr($value,0,13) != "page_mobiles=")
+						$liste_params .= "&".$value;
 				}
 			}
 			include_spip('inc/headers');
