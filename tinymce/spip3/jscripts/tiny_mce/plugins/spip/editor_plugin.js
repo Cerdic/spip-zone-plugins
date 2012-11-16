@@ -3,7 +3,7 @@
  * - Retour à la barre du Porte-Plume
  * - Protection des codes d'inclusion de modeles et balises dans une SPAN speciale
  *
- * @version 1.2
+ * @version 1.3
  */
 
 (function() {
@@ -32,7 +32,7 @@
 					plugin_url : t.url,
 					special_class : t.getSpecialClass(),
 					special_class_regexp : t.getSpecialClassRegexp(),
-					must_be_protected : !t.isProtected( ed.selection.getNode() )
+					must_be_protected : t.mustBeProtected( ed.selection.getNode() )
 				});
 			});
 			ed.addButton('spipinsert',{ title: 'spip.desc_insert', cmd: 'spip_insert_code', image: url+'/img/spip-code.gif' });
@@ -80,51 +80,34 @@
 		isProtected: function( n ){
 			return (n && n.nodeName=='SPAN' && n.className==this.getSpecialClass());
 		},
+		// un noeud doit-il protege ?
+		// s'il l'est deja, on regarde si le noeud parent ne contient que la span,
+		// sinon on doit le re-proteger
+		mustBeProtected: function( n ){
+			var _isp = this.isProtected(n);
+			if (_isp===true){
+				var t = this, blockparent=false;
+				tinyMCE.each(this.editor.dom.getParents(n), function(parent) {
+					if (t.editor.dom.isBlock(parent) && blockparent===false) blockparent = parent;
+				});
+				if (blockparent)
+					return (t.getContenuText(blockparent.innerHTML) != t.getContenuText(n.innerHTML));
+			}
+			return !_isp;
+		},
 		// on encadre si necessaire par une div
 		selectionnerContenuNode: function( node ){ 
 			this.editor.selection.select( this.editor.dom.get(node), true );
 		},
 		// creation de la DIV avec la classe pour proteger les contenus SPIP
 		protegerContenuText: function( str ){ 
-				return '<span class="'+this.getSpecialClass()+'">'+$('<div/>').html(str).text()+'</span>';
+				return '<span class="'+this.getSpecialClass()+'">'+this.getContenuText(str)+'</span>';
+		},
+		// creation de la DIV avec la classe pour proteger les contenus SPIP
+		getContenuText: function( str ){ 
+				return $('<div/>').html(str).text();
 		}
 	});
 	// enregistrement du plugin
 	tinymce.PluginManager.add('spip', tinymce.plugins.SpipSpecialPlugin);
 })();
-
-/*
-// Differents essais pour proteger les selections ... sans succes
-			ed.addCommand('spip_pre_insert_code', function() {
-				var _node = ed.selection.getNode();
-				if ( t.isProtected(_node) ) {
-console.debug('=> cas d un noeud deja protege');
-					ed.selection.select(ed.dom.get(_node), true);
-				} else {
-console.debug('=> cas d un noeud non protege');
-
-
-					var _node_ctt = _node.innerHTML.replace('<br data-mce-bogus="1">', '');
-					// cas ou la selection est un noeud complet ou vide
-					if (ed.selection.getContent()==_node_ctt){
-console.debug('=> cas d un noeud complet ou vide, on entoure de la div');
-//						new_node = _node.cloneNode(true);
-						var new_node = ed.dom.create('div', {'class': t.getSpecialClass()}, ed.selection.getContent());
-//						ed.dom.removeAllAttribs(new_node);
-//						ed.dom.setAttrib(new_node, 'class', t.getSpecialClass());
-//						ed.dom.rename(new_node, 'div');
-						ed.dom.replace(_node, new_node);
-						ed.selection.select( new_node.firstChild() );
-					// sinon, on cree une div
-					} else {
-console.debug('=> cas d un noeud existant, on entoure la selection de la div');
-						ed.selection.setContent( t.protegerContenuText(ed.selection.getContent()) );
-					}
-
-					ed.execCommand('mceInsertContent', false, t.protegerContenuText(ed.selection.getContent({format : 'text'})));
-					ed.selection.select(ed.dom.get(_node).firstChild('div'), true);
-				}
-				ed.execCommand('spip_insert_code');
-			});
-//			ed.addButton('spipinsert',{ title: 'spip.desc_insert', cmd: 'spip_pre_insert_code', image: url+'/img/spip-code.gif' });
-*/

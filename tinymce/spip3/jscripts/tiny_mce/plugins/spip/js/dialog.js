@@ -13,13 +13,13 @@ var SpipCodeDialog = {
 
 		// recuperation du contenu selectionne et insertion dans la textarea
     	t.form.spipcode.value = tinyMCEPopup.editor.selection.getContent({format : 'text'});
+    	t.form.spipcode.focus();
 	},
 
 	insert : function() {
 		// insertion du contenu dans l'editeur avec protection
 		var c = this.form.spipcode.value;
 		if ( this.mustbeprotected===true ){
-//			c = '<div class="'+this.special_class+'">'+c+'</div>';
 			c = '<span class="'+this.special_class+'">'+c+'</span>';
 		}
 		tinyMCEPopup.editor.execCommand('mceInsertContent', false, c);
