@@ -2,8 +2,8 @@
 	<nom>Mes Favoris 2</nom>
 	<slogan>S&#233;lection de favoris</slogan>
 	<icon>images/mesfavoris-128.png</icon>
-	<version>2.3.2</version>
-	<version_base>1.0.0</version_base>
+	<version>2.3.3</version>
+	<version_base>1.1.0</version_base>
 	<etat>stable</etat>
 	<prefix>mesfavoris</prefix>
 	<auteur>Olivier Sallou, [C&#233;dric Morin->yterium.net]</auteur>

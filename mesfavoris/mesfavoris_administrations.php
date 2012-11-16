@@ -33,7 +33,9 @@ function mesfavoris_declarer_tables_principales($tables_principales){
 	$spip_favoris_key = array(
 		"PRIMARY KEY"		=> "id_favori",
 		"KEY auteur_objet"	=> "id_auteur,id_objet,objet",
-		"KEY id_auteur"	=> "id_auteur"
+		"KEY id_auteur"	=> "id_auteur",
+		"KEY id_objet" => "id_objet",
+		"KEY objet" => "objet"
 	);
 
 	$tables_principales['spip_favoris'] =
@@ -71,6 +73,11 @@ function mesfavoris_upgrade($nom_meta_base_version,$version_cible){
 				sql_drop_table("spip_favtextes");
 			}
 			ecrire_meta($nom_meta_base_version,$current_version="1.0.0",'non');
+		}
+		if (version_compare($current_version,'1.1.0','<')){
+			sql_alter("TABLE spip_favoris ADD INDEX objet (objet)");
+			sql_alter("TABLE spip_favoris ADD INDEX id_objet (id_objet)");
+			ecrire_meta($nom_meta_base_version,$current_version="1.1.0",'non');
 		}
 	}
 }
