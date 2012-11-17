@@ -20,6 +20,7 @@
 	- control_type|controle_type = non			ne pas afficher les controles de changement de type
 	- no_control|aucun_controle = oui				ne pas afficher les controles de la carte
 	- scale = oui					afficher l'échelle de la carte
+	- overview = oui				afficher une mini carte de situation
 	- limit|limite = 500					nombre max de marqueurs à afficher, 500 par defaut
 	- objets = gis					type d'objets à afficher (fichier json/gis_xx qui génère la source de donnees)
 	- autocenterandzoom|centrer_auto = oui		centrer et zoomer la carte automatiquement pour afficher tous les marqueurs
@@ -108,9 +109,12 @@ var map[(#GET{id})];
 		map[(#GET{id})].attributionControl.setPrefix('');
 		
 		[(#ENV{scale}|et{#ENV{no_control,#ENV{aucun_controle}}|!={oui}}|oui)
-			map[(#GET{id})].addControl(new L.Control.Scale());
+		map[(#GET{id})].addControl(new L.Control.Scale());
 		][(#ENV{fullscreen}|et{#ENV{no_control,#ENV{aucun_controle}}|!={oui}}|oui)
-			map[(#GET{id})].addControl(new L.Control.FullScreen());
+		map[(#GET{id})].addControl(new L.Control.FullScreen());
+		][(#ENV{overview}|et{#ENV{no_control,#ENV{aucun_controle}}|!={oui}}|oui)
+		var minimap_layer = [new (#GET{layers}|table_valeur{#GET{layer_defaut}/layer})];
+		var miniMap = new L.Control.MiniMap(minimap_layer,{width: 100,height: 100}).addTo(map[(#GET{id})]);
 		]
 
 		[(#ENV{point}|!={non}|oui)
