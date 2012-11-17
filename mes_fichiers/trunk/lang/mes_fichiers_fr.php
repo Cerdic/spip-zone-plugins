@@ -46,14 +46,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_cfg_sauvegarde_reguliere' => 'Traitements automatiques',
 
 	// M
-	'message_cleaner_sujet' => 'Suppression des sauvegardes de fichiers',
-	'message_notif_cleaner_intro' => 'L\'action de suppression automatique des sauvegardes de fichiers obsolètes (dont la date est antérieure à @duree@ jours) a été effectuée avec succès. Les fichiers suivants ont été supprimés : ',
-	'message_notif_sauver_intro' => 'Une nouvelle sauvegarde de vos fichiers est disponible pour votre site. Elle a été réalisée par @auteur@.',
+	'message_cleaner_sujet' => 'Nettoyage des sauvegardes',
+	'message_notif_cleaner_intro' => 'La suppression automatique des sauvegardes obsolètes (dont la date est antérieure à @duree@ jours) a été effectuée avec succès. Les archives suivantes ont été supprimées : ',
+	'message_notif_sauver_intro' => 'Une nouvelle sauvegarde de vos fichiers est disponible. Elle a été réalisée par @auteur@.',
 	'message_rien_a_sauver' => 'Aucun fichier ni dossier à sauvegarder.',
 	'message_rien_a_telecharger' => 'Aucune sauvegarde disponible au téléchargement.',
 	'message_sauvegarde_nok' => 'Erreur lors de la sauvegarde. Le fichier d\'archives n\'a pas été créé.',
 	'message_sauvegarde_ok' => 'Le fichier d\'archives a bien été créé.',
-	'message_sauver_sujet' => 'Sauvegarde des fichiers',
+	'message_sauver_sujet' => 'Sauvegarde',
 	'message_telechargement_nok' => 'Erreur lors du téléchargement.',
 	'message_zip_auteur_indetermine' => 'Non déterminé',
 	'message_zip_propriete_nok' => 'Aucune propriété n\'est disponible sur cette archive.',
