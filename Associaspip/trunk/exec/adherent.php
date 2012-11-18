@@ -20,7 +20,7 @@ function exec_adherent() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$data = sql_fetsel('m.sexe, m.nom_famille, m.prenom, m.date_validite, m.id_asso, c.libelle','spip_asso_membres as m LEFT JOIN spip_asso_categories as c ON m.id_categorie=c.id_categorie', "m.id_auteur=$id_auteur");
+		$data = sql_fetsel('m.sexe, m.nom_famille, m.prenom, m.date_validite, m.id_asso, c.libelle, m.commentaire','spip_asso_membres as m LEFT JOIN spip_asso_categories as c ON m.id_categorie=c.id_categorie', "m.id_auteur=$id_auteur");
 		include_spip('inc/association_comptabilite');
 		$nom_membre = association_formater_nom($data['sexe'], $data['prenom'], $data['nom_famille']);
 		$validite = $data['date_validite'];
@@ -47,13 +47,13 @@ function exec_adherent() {
 		if ($GLOBALS['association_metas']['id_asso']) {
 			$infos['adherent_libelle_reference_interne'] = ($data['id_asso']?$data['id_asso']:_T('asso:pas_de_reference_interne_attribuee')) ;
 		}
-		if ($adresses[$id_auteur])
+		if (isset($adresses[$id_auteur]))
 			$infos['coordonnees:adresses'] = $adresses[$id_auteur];
-		if ($emails[$id_auteur])
+		if (isset($emails[$id_auteur]))
 			$infos['coordonnees:emails'] = $emails[$id_auteur];
-		if ($telephones[$id_auteur])
+		if (isset($telephones[$id_auteur]))
 			$infos['coordonnees:numeros'] =  $telephones[$id_auteur];
-		if ($sites[$id_auteur])
+		if (isset($sites[$id_auteur]))
 			$infos['coordonnees:pages'] =  $sites[$id_auteur];
 		echo '<div class="vcard">'. association_totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos, 'asso_membre') .'</div>';
 		// datation et raccourcis

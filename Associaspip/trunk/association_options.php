@@ -290,7 +290,7 @@ function association_formater_date($iso_date, $css_class='', $format='entier', $
 		return '';
 	$res = '';
 	if ( $html_abbr=='auto' )
-		$html_abbr = ($GLOBAL['meta']['html5']?'time':'abbr');
+		$html_abbr = (@$GLOBALS['meta']['html5']?'time':'abbr');
 	if ( $html_abbr )
 		$res = "<$html_abbr ". ($css_class?"class='$css_class' ":'') . ($html_abbr=='time'?'datetime':'title'). "='$iso_date'>";
 	$res .= affdate_base($iso_date, $format?$format:'entier'); // on fait appel a la fonction centrale des filtres SPIP... comme ca c'est traduit et formate dans les langues supportees ! si on prefere les mois en chiffres et non en lettre, y a qu'a changer les chaines de langue date_mois_XX
@@ -1040,7 +1040,7 @@ function association_formater_emails($id_objets, $objet='auteur', $html_span='di
 				unset($courriel['id_email']); // ne devrait pas etre utilise par le modele
 				$courriel['email'] = ( $courriel['titre'] ? $courriel['titre'] : ucwords(str_replace('@', ' ['._T('perso:at').'] ', $courriel['email'])) ); // on affiche le titre si present sinon la valeur
 			}
-			$emails_string[$id_objet] .= $courriel['email']. ($html_span?('</'.($href?'a':'span')."></$htm_span>\n"):'');
+			$emails_string[$id_objet] .= $courriel['email']. ($html_span?('</'.($href?'a':'span')."></$html_span>\n"):'');
 		}
 		$emails_string[$id_objet] = $emails_string[$id_objet].$sep;
 	}
@@ -2125,7 +2125,7 @@ function association_bloc_listehtml2($table, $reponse_sql, $presentation, $bouto
 		$entete = array_shift($param);
 		$res .= '<th>'. ($entete ? association_langue($entete) : '&nbsp;' ) ."</th>\n";
 	}
-	$lignes = association_bloc_tr($reponse_sql, $extra, $cle1, $cle2, $objet, $presentation, $boutons);
+	$lignes = association_bloc_tr($reponse_sql, $extra, $cle1, $cle2, $objet, $presentation, $boutons, $selection);
 	sql_free($reponse_sql);
 
 	if (!$lignes) return _T('asso:aucun');
@@ -2146,10 +2146,11 @@ function association_bloc_listehtml2($table, $reponse_sql, $presentation, $bouto
 	return $res;
 }
 
-function association_bloc_tr($query, $extra, $cle1, $cle2, $objet, $presentation, $boutons) {
+function association_bloc_tr($query, $extra, $cle1, $cle2, $objet, $presentation, $boutons, $selection) {
 	$nbr_lignes = 0;
 	$nbr_couleurs = count($extra);
 	$class_sup = (is_array($extra) AND $nbr_couleurs);
+	$res ='';
 	while ($data = sql_fetch($query)) {
 		if ($class_sup) { // on a  un tableau de classes supplementaires
 			if ( $cle2 ) { // lignes colorees selon les valeurs d'un champ
@@ -2160,7 +2161,7 @@ function association_bloc_tr($query, $extra, $cle1, $cle2, $objet, $presentation
 			}
 		} elseif ( $extra ) { // classe supplementaire appliquee inconditionnellement
 				$tr_css = $extra;
-		}
+		} else $tr_css = '';
 		if ( $cle1 && $data[$cle1]==$selection ) {
 			$tr_css = 'surligne';
 		}
@@ -2555,7 +2556,7 @@ function association_date_du_jour($phraser=TRUE) {
 	$format = 'affdate_'. (_ASSOCIASPIP_AUJOURDHUI_HORAIRE?'heure':'base');
 	$frmt_h = $format($frmt_m, 'entier');  // format human-readable
 	if ( $phraser )
-		return '<p class="clear date">'. _T('asso:date_du_jour', array('date'=> ($GLOBAL['meta']['html5']?'<time datetime="':'<abbr title="'). $frmt_m.'">'.$frmt_h. ($GLOBAL['meta']['html5']?'</time>':'</abbr>') ) ) .'</p>';
+		return '<p class="clear date">'. _T('asso:date_du_jour', array('date'=> (@$GLOBALS['meta']['html5']?'<time datetime="':'<abbr title="'). $frmt_m.'">'.$frmt_h. (@$GLOBALS['meta']['html5']?'</time>':'</abbr>') ) ) .'</p>';
 	else
 		return $frmt_h;
 }

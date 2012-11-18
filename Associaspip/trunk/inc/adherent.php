@@ -23,7 +23,7 @@ function voir_adherent_recu_fiscal($id_auteur) {
 }
 
 /// HISTORIQUE COTISATIONS
-function voir_adherent_cotisations($id_auteur, $full) {
+function voir_adherent_cotisations($id_auteur, $full=false) {
 	$association_imputation = charger_fonction('association_imputation', 'inc');
 	$where =  $association_imputation('pc_cotisations', $id_auteur);
 	$q = sql_select('id_compte, recette AS montant, date_operation, justification, journal', 'spip_asso_comptes', $where, '', 'date_operation DESC, id_compte DESC', '0,10' );
@@ -70,7 +70,7 @@ function voir_adherent_ventes($id_auteur) {
 
 /// HISTORIQUE DONS
 
-function voir_adherent_dons($id_auteur, $full) {
+function voir_adherent_dons($id_auteur, $full=false) {
 
 	return association_bloc_listehtml2('asso_dons',
 		sql_select('*', 'spip_asso_dons', "id_auteur=$id_auteur", '', 'date_don DESC', '0,10'),
@@ -122,7 +122,7 @@ function voir_adherent_paiements($table, $requete, $lien=false) {
 		$requete,
 		array(
 			'id_compte' => array('asso:entete_id', 'entier'),
-			'date' => array('asso:entete_date', 'date'),
+			'date_operation' => array('asso:entete_date', 'date'),
 			'journal' => array('asso:adherent_entete_journal', 'texte'),
 			'justification' => array('asso:adherent_entete_justification', 'texte', $lien?'propre':'nettoyer_raccourcis_typo', ),
 			'montant' => array('asso:entete_montant', 'prix'),

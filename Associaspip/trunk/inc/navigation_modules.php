@@ -119,7 +119,11 @@ function association_navigation_raccourcis($adresse_retour='',  $raccourcis=arra
 		if ( count($adresse_retour) )
 			$res .= icone1_association('asso:bouton_retour',  generer_url_ecrire($adresse_retour[0],$adresse_retour[1]), 'retour-24.png');
 	} else { // chaine de caractere : uri_complet
-		$res .= icone1_association('asso:bouton_retour', (($adresse_retour=='')?str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']):generer_url_ecrire($adresse_retour)), 'retour-24.png');
+		$url = $adresse_retour ? generer_url_ecrire($adresse_retour) :
+			(isset($_SERVER['HTTP_REFERER']) ?
+			 str_replace('&', '&amp;', $_SERVER['HTTP_REFERER'])
+			 : '');
+		if ($url) $res .= icone1_association('asso:bouton_retour', $url, 'retour-24.png');
 	}
 	if ($FIN_BOITE_INFO) {
 		echo association_date_du_jour();
@@ -185,8 +189,6 @@ function fin_page_association($FIN_CADRE_RELIEF=TRUE) {
 function debut_cadre_association($icone, $titre, $DEBUT_DROITE=TRUE) {
 	if ($DEBUT_DROITE)
 		echo debut_droite('',TRUE);
-	if ( is_array($T_args) )
-		array_unshift($T_args, $titre);
 	$chemin = _DIR_PLUGIN_ASSOCIATION_ICONES.$icone; // icone Associaspip
 	if ( !file_exists($chemin) )
 		$chemin = find_in_path($icone); // icone alternative
