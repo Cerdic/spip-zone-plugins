@@ -4,7 +4,6 @@
 - taille     : taille des icones : 20px
 - couleur    : couleur du bord : #FFFFFF 
 - bord       : taille du bord : 4
-- id_article : limiter a un article
 - id_auteur	 : limiter a un auteur
 - id_rubrique: limiter a une rubrique
 - id_secteur : limiter a un secteur
@@ -44,7 +43,7 @@ function initSpipMap#ENV{id_geoportail,0} (map,id)
 				
 	// Ajouter les articles
 	var extent = new OpenLayers.Bounds();
-	<BOUCLE_geo_article(ARTICLES){geoposition}{id_article?}{id_auteur?}{id_rubrique?}{id_secteur?}{id_mot?}{id_groupe?}{par date}{inverse}{0,#ENV{max,200}}>
+	<BOUCLE_geo_article(ARTICLES){geoposition}{id_auteur?}{id_rubrique?}{id_secteur?}{id_mot?}{id_groupe?}{par date}{inverse}{0,#ENV{max,200}}>
 	{	var lon = #LON;
 		var lat = #LAT;
 		<BOUCLE_mot(MOTS){id_groupe=#ENV{legende,0}}{id_article}{0,1}>

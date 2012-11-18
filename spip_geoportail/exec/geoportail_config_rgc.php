@@ -49,8 +49,8 @@ function exec_geoportail_config_rgc()
 		$form = debut_cadre_trait_couleur("breve-24.gif", true, "", _T('geoportail:rgc'))
 			."<p>"._T('geoportail:rgc_info')."</p>";
 		// Scanner le repertoire rgc
-		//$dir = opendir(_FULLDIR_PLUGIN_GEOPORTAIL."rgc");
-		$dir = @opendir(url_absolue(_DIR_PLUGIN_GEOPORTAIL)."rgc");
+		$dir = opendir(_FULLDIR_PLUGIN_GEOPORTAIL."rgc");
+		//$dir = @opendir(url_absolue(_DIR_PLUGIN_GEOPORTAIL)."rgc");
 		$count = 0;
 		while ($file = @readdir($dir))
 		{	if (is_dir($file)) continue;
