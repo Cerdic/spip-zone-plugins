@@ -95,7 +95,7 @@ function association_bouton_act($texte, $image, $script='', $exec_args='', $img_
 	if ( !file_exists($chemin) )
 		$chemin = find_in_path($image); // icone alternative
 	if ($texte) {
-		$texte = htmlspecialchars(association_langue($texte));
+		$texte = association_langue($texte);
 		$texte = "\nalt=\"$texte\" title=\"$texte\"";
 	}
 	$res = "<img src=\"$chemin\"$texte $img_attrs />";
