@@ -5,8 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	//C
-	'caractere_max_input' => 'ATTENTION : la longueur (@nb_caractere_max_input@ caractères) du champs input @input_id@ dépasse le maximum de 10000 caractères.<br />La traduction sera effective pour les 10000 premiers caractères.<br />Vous devrez complèter la traduction pour les car. au délà.<br />Il est également possible que cela provoque une erreur 414 (requête trop longue).',
-	'caractere_max_textarea' => 'ATTENTION : la longueur (@nb_caractere_max_textarea@ caractères) du champs textarea @textarea_id@ dépasse le maximum de 10000 caractères.<br />La traduction sera effective pour les 10000 premiers caractères.<br />Vous devrez complèter la traduction pour les car. au délà.<br />Il est également possible que cela provoque une erreur 414 (requête trop longue).',
+	'caractere_max' => 'ATTENTION : la longueur du champs dépasse le maximum de 10000 caractères.\nLa traduction sera effective pour les 10000 premiers caractères.\nVous devrez complèter la traduction pour les car. au délà.\nIl est également possible que cela provoque une erreur 414 (requête trop longue).',
 	'configuration' => 'Configuration',
 	'configurer_parametre' => 'Configurez quelques parametres',
 	'connecter_creer_id' => 'Se connecter ou créer un identifiant Windows Live ID',
@@ -38,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tradauto' => 'Tradauto',
 	'traduction_effectuer' => 'Traduction effectuée',
 	'traduction_en_cours' => 'Traduction en cours. Patientez...',
-	'traduction_effectuer_succes' => 'Traduction effectuée avec succès.<br />Vous pouvez maintenant corriger la traduction et/ou enregistrer.',
+	'traduction_effectuer_succes' => 'Traduction effectuée avec succès.\nVous pouvez maintenant corriger la traduction et/ou enregistrer.',
 );
 
 ?>

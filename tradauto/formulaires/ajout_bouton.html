@@ -17,7 +17,6 @@ var t_traduit_txt = new Array();
 var t_traduit_id = new Array();
 var from = "#ENV{lang}";
 
-window.onload=init_tradauto;
 
 function init_tradauto()
 {
@@ -26,7 +25,7 @@ function init_tradauto()
 	for (var i = 0 ; i < t_input.length ; i ++)
 		if (t_input[i].type == "text")
 		{
-			if (t_input[i].value.length > 10000) alert (_T('tradauto:caractere_max_input', array('nb_caractere_max_input'=>"+t_input[i].value.length+", 'input_id'=>"+t_input[i].id+"));
+			if (t_input[i].value.length > 10000) alert(t_input[i].id+":"+t_input[i].value.length+"\n<:tradauto:caractere_max:>");
 			t_atraduire_txt.push(prepare_texte(t_input[i].value));
 			t_atraduire_id.push([t_input[i].id]);
 		}
@@ -35,12 +34,13 @@ function init_tradauto()
 	var t_textarea = document.getElementsByTagName('textarea');
 	for (var i = 0 ; i < t_textarea.length ; i ++)
 	{
-		if (t_textarea[i].value.length > 10000) alert (_T('tradauto:caractere_max_textarea', array('nb_caractere_max_textarea'=>"+t_textarea[i].value.length+", 'textarea_id'=>"+t_textarea[i].id+"));
+		if (t_textarea[i].value.length > 10000) alert(t_textarea[i].id+":"+t_textarea[i].value.length+"\n<:tradauto:caractere_max:>");
 		t_atraduire_txt.push(prepare_texte(t_textarea[i].value));
 		t_atraduire_id.push([t_textarea[i].id]);
 	}
 //alert ("Qté de chaine à traduire="+t_atraduire_txt.length);
 //for (i in t_atraduire_txt) 	alert(t_atraduire_txt[i]);
+	traduire(); // lance la traduction
 }
 
 
@@ -67,12 +67,12 @@ function traduire()
 
 		document.body.appendChild(s);
 		document.getElementsByTagName('body')[0].style.cursor = 'wait'; // Sablier
-		tradauto_msg(_T('tradauto:traduction_en_cours'));
+		tradauto_msg("<:tradauto:traduction_en_cours:>");
 	}
 	else
 	{
 		document.getElementsByTagName('body')[0].style.cursor = 'default'; // curseur par défaut
-		tradauto_msg(_T('tradauto:traduction_effectuer'));
+		tradauto_msg("<:tradauto:traduction_effectuer:>");
 
 		// On a tout traduit, on met à jour la page
 		for (var i = 0 ; i < t_traduit_txt.length ; i ++)
@@ -81,7 +81,7 @@ function traduire()
 //alert(document.getElementById(t_traduit_id[i]).value);
 		}
 
-		alert(_T('tradauto:traduction_effectuer_succes'))
+		alert("<:tradauto:traduction_effectuer_succes:>");
 	}
 }
 
@@ -194,6 +194,6 @@ function restitue_texte(texte)
     </BOUCLE_option>
 	</select>
 
-	<input class="submit" type="submit" value="Traduire" name="traduire" onClick="traduire()">
+	<input class="submit" type="submit" value="Traduire" name="traduire" onClick="init_tradauto()">
 	<span id="msg_tradauto"></span>
 </div>

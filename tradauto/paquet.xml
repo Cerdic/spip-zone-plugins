@@ -1,7 +1,7 @@
 <paquet
 	prefix="tradauto"
 	categorie="edition"
-	version="0.0.3"
+	version="0.0.4"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/tradauto-64.png"
@@ -17,5 +17,5 @@
 
 	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL 3</licence>
 
-	<pipeline nom="editer_contenu_objet" inclure="tradauto.php" />
+	<pipeline nom="editer_contenu_objet" inclure="tradauto.php" action="ajout_bouton" />
 </paquet>
