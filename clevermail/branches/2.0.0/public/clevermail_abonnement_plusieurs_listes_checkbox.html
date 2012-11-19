@@ -5,7 +5,7 @@
   [<span class='erreur_message'>(#GET{erreurs})</span>]
   	<p class="explication"><:clevermail:label_inscription_lettres:></p>
   	<ul>
-    <BOUCLE_lists(CM_LISTS){par lst_name}>
+    <BOUCLE_lists(CM_LISTS){par lst_name}{lst_moderation!=closed}>
     <li><div class="choix">
       <input type="checkbox" name="#GET{name}[]" class="checkbox" id='#GET{name}_#COMPTEUR_BOUCLE' value="#LST_ID"[(#LST_ID|in_array{#ENV{#GET{name}}}|oui) checked="checked"] />
       <label for="#GET{name}_#COMPTEUR_BOUCLE">#LST_NAME[ : (#LST_COMMENT|textebrut)]</label>
