@@ -57,7 +57,22 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 			// on differe la maj du cache et on affiche le contenu du cache ce coup ci encore
 			$where = is_null($contexte_cache)?"principal":"inclure_page";
 			// on reprogramme avec un $use_cache=2 qui permettra de reconnaitre ces calculs
-			job_queue_add('public_produire_page',$c="Calcul du cache $fond [$where]",array($fond, $contexte, 2, $chemin_cache, $contexte_cache, array('contexte_implicite'=>$page['contexte_implicite']), $lastinclude, $connect, cache_cool_get_global_context(), $_SERVER['REQUEST_TIME']),"",TRUE);
+			$args = array($fond, $contexte, 2, $chemin_cache, $contexte_cache, array('contexte_implicite'=>$page['contexte_implicite']), $lastinclude, $connect, cache_cool_get_global_context(), $_SERVER['REQUEST_TIME']);
+
+			// mode de fonctionnement de cache_cool : QUEUE ou MEMORY
+			if (!defined('_CACHE_COOL_MODE')) define('_CACHE_COOL_MODE','QUEUE');
+			if (_CACHE_COOL_MODE=="QUEUE"){
+				job_queue_add('public_produire_page',$c="Calcul du cache $fond [$where]",$args,"",TRUE);
+			}
+			else {
+				if (!is_array($GLOBALS['cache_cool_queue'])){
+					spip_log("ob:".ob_get_level(),'cachecool'._LOG_DEBUG);
+					ob_start("cache_cool_flush");
+					register_shutdown_function("cache_cool_process");
+					$GLOBALS['cache_cool_queue'] = array();
+				}
+				$GLOBALS['cache_cool_queue'][] = $args;
+			}
 			spip_log("au frigo : $fond [$where]",'cachecool'._LOG_DEBUG);
 		}
 		gunzip_page($page); // decomprimer la page si besoin
@@ -105,6 +120,30 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 	if ($background) $processing = false;
 
 	return $page;
+}
+
+function cache_cool_flush($content){
+	header("Content-Length: ".($l=ob_get_length()));
+	header("Connection: close");
+	spip_log("Connection: close ($l)",'cachecool'._LOG_DEBUG);
+	return $content;
+}
+
+function cache_cool_process(){
+	ob_end_flush();
+	flush();
+	if (function_exists('fastcgi_finish_request'))
+		fastcgi_finish_request();
+
+
+  // se remettre dans le bon dossier, car Apache le change parfois (toujours?)
+	chdir(_ROOT_CWD);
+
+	while (is_array($GLOBALS['cache_cool_queue'])
+		AND $args = array_shift($GLOBALS['cache_cool_queue'])){
+		spip_log("calcul en fin de hit public_produire_page($args[0],$args[1],$args[2],$args[3],$args[4],$args[5],$args[6],$args[7],$args[8],$args[9])",'cachecool'._LOG_DEBUG);
+		public_produire_page($args[0],$args[1],$args[2],$args[3],$args[4],$args[5],$args[6],$args[7],$args[8],$args[9]);
+	}
 }
 
 // en SPIP 3 le test de doublon sur f_jQuery a ete supprime,
