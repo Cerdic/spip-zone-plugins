@@ -12,17 +12,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'en_travaux' => 'En obras',
-	'erreur_droit' => 'Debe ser Webmaster para usar el plugin En Obras!',
+	'erreur_droit' => '¡Debes ser Webmestre para usar el plugin "En Obras"!',
 
 	// I
-	'info_disallow_robot' => 'Votre site est protégé contre les robots et moteur de recherche pendant la maintenance.', # NEW
-	'info_maintenance_en_cours' => 'Le site est en maintenance ! Seuls les webmestres du site peuvent voir le site public et accèder à l\'espace privé.', # NEW
+	'info_disallow_robot' => 'Tu sitio está protegido contra los robots y motores de búsqueda durante el mantenimiento.',
+	'info_maintenance_en_cours' => '¡El sitio está en mantenimiento! Sólo los webmestres del sitio pueden ver el sitio público y acceder al espacio privado.',
 	'info_message' => 'Esta página permite dejar un mensaje temporal en todas las páginas del sitio durante una fase de mantenimiento.',
 	'info_travaux_texte' => 'Este sitio se encuentra actualmente en obras.
 _ Por favor regrese más tarde.',
 
 	// L
-	'label_disallow_robots' => 'Protéger le site contre les robots et moteur de recherche', # NEW
+	'label_disallow_robots' => 'Proteger el sitio contra los robots y motores de búsqueda',
 
 	// M
 	'message_temporaire' => 'Su mensaje temporal:',
@@ -31,7 +31,7 @@ _ Por favor regrese más tarde.',
 	'parametrage_page_travaux' => 'Configuración de la página temporal',
 
 	// T
-	'texte_lien_publier' => 'Rendre le site public' # NEW
+	'texte_lien_publier' => 'Hacer público el sitio'
 );
 
 ?>
