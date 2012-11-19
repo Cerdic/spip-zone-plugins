@@ -7,6 +7,16 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// si deja un buffer avec une sortie on ne peut plus se lancer pour forcer le flush
+if ($cache_cool_oblevel=ob_get_level()
+	AND $cache_cool_oblength=ob_get_length()){
+	spip_log("previous ob : $cache_cool_oblevel / previous length: $cache_cool_oblength",'cachecool'._LOG_DEBUG);
+}
+else {
+	spip_log("starting ob",'cachecool'._LOG_DEBUG);
+	ob_start("cache_cool_flush");
+}
+
 /**
  * Fonction chargee de produire le cache pour un contexte et un fond donne
  * et de le memoriser si besoin
@@ -66,8 +76,6 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 			}
 			else {
 				if (!is_array($GLOBALS['cache_cool_queue'])){
-					spip_log("ob:".ob_get_level(),'cachecool'._LOG_DEBUG);
-					ob_start("cache_cool_flush");
 					register_shutdown_function("cache_cool_process");
 					$GLOBALS['cache_cool_queue'] = array();
 				}
@@ -125,16 +133,16 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 function cache_cool_flush($content){
 	header("Content-Length: ".($l=ob_get_length()));
 	header("Connection: close");
-	spip_log("Connection: close ($l)",'cachecool'._LOG_DEBUG);
+	spip_log("Connection: close (length $l)",'cachecool'._LOG_DEBUG);
 	return $content;
 }
 
 function cache_cool_process(){
+	// forcer le flush des tampons pas envoyes (complete le content-length/conection:close envoye dans cache_cool_flush)
 	ob_end_flush();
 	flush();
 	if (function_exists('fastcgi_finish_request'))
 		fastcgi_finish_request();
-
 
   // se remettre dans le bon dossier, car Apache le change parfois (toujours?)
 	chdir(_ROOT_CWD);
