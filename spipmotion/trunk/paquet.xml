@@ -1,7 +1,7 @@
 <paquet
 	prefix="spipmotion"
 	categorie="multimedia"
-	version="1.1.8"
+	version="1.2.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/spipmotion.png"
@@ -38,7 +38,8 @@
 	<utilise nom="podcast" />
 	<utilise nom="licence" />
 	<utilise nom="fonctions_images" />
-
+	
+	<menu nom="configurer_spipmotion" titre="spipmotion:spipmotion_boite" parent="menu_administration" icone="images/spipmotion-16.png" action="configurer_spipmotion" />
 	<menu nom="ffmpeg_infos" titre="spipmotion:titre_page_ffmpeg_infos" parent="menu_administration" icone="images/spipmotion-16.png" action="ffmpeg_infos" />
 	<menu nom="spipmotion_erreurs" titre="spipmotion:titre_page_erreurs" parent="menu_administration" icone="images/spipmotion-16.png" action="spipmotion_erreurs" />
 </paquet>

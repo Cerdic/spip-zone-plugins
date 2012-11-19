@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'ffmpeg2theora_install' => 'FFMpeg2Theora sur votre serveur :',
 	'ffmpeg_install' => 'FFMpeg sur votre serveur :',
+	'ffprobe_install' => 'FFprobe sur votre serveur :',
 	'flvtool2_install' => 'FLVtool2 sur votre serveur :',
 	'flvtoolplus_install' => 'FLVtool++ sur votre serveur :',
 	'framerate' => 'Nombre d\'images par seconde',
@@ -107,6 +108,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreurs' => 'Erreurs',
 	'info_ffmpeg2theora_libtheora_version' => 'Version de libtheora utilisée par ffmpeg2theora :',
 	'info_ffmpeg2theora_version' => 'Version de ffmpeg2theora :',
+	'info_ffprobe_disponible' => 'FFprobe est disponible',
 	'info_flvtool2_version' => 'Version de FLVtool2 installée :',
 	'info_flvtoolplus_version' => 'Version de FLVtool++ installée :',
 	'info_format' => 'Format : ',
@@ -215,7 +217,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'select_all' => 'Tout sélectionner',
 	'spipmotion_boite' => 'Configuration de SPIPmotion',
-	'spipmotion_descriptif' => 'Ce plugin permet d"encoder à la volée des documents audios et vidéos.',
+	'spipmotion_descriptif' => 'Ce plugin permet d\'encoder à la volée des documents audios et vidéos.',
 	'spipmotion_sh_install' => 'Script d\'encodage de SPIPmotion :',
 	'spipmotion_sh_vignettes_install' => 'Script de création de vignettes :',
 

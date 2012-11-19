@@ -82,9 +82,6 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 					$indexs[$key] = $index;
 				}
 			}
-			spip_log($indexs,'test');
-			spip_log($pregs,'test');
-			spip_log(implode('(.*)', $pregs),'test');
 			$result = preg_match('/'.implode('(.*)', $pregs).'/s', $contenu, $matches);
 
 			/**
@@ -279,6 +276,17 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			}
 			
 			/**
+			 * On regarde si ffprobe est installé
+			 * Si oui on dit juste qu'il est présent
+			 */
+			$ffprobe = exec('ffprobe --version',$retour_ffprobe,$int_ffprobe);
+			if($int_mediainfo == 0){
+				$data['spipmotion_ffprobe']['ffprobe'] = true;
+				$data['spipmotion_ffprobe']['version'] = "present";
+				ecrire_meta('spipmotion_ffprobe',serialize($data['spipmotion_ffprobe']),'','spipmotion_metas');
+			}
+
+			/**
 			 * On regarde si mediainfo est installé
 			 * http://mediainfo.sourceforge.net/fr
 			 * Si oui on ajoute sa version dans les metas aussi
@@ -308,6 +316,7 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 		$data['spipmotion_flvtool2'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_flvtool2']);
 		$data['spipmotion_flvtoolplus'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_flvtoolplus']);
 		$data['spipmotion_mediainfo'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_mediainfo']);
+		$data['spipmotion_ffprobe'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_ffprobe']);
 	}
 	return $data;
 }

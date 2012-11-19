@@ -105,6 +105,14 @@
 	</ul>
 	#BOITE_FERMER
 	</BOUCLE_simediainfo>
+	
+	<BOUCLE_siffprobe(CONDITION){si #GET{ffmpeg_infos}|table_valeur{spipmotion_ffprobe}|table_valeur{ffprobe}|oui}>
+	[(#BOITE_OUVRIR{<:spipmotion:ffprobe_install:>,'simple'})]
+	<ul class="liste-items">
+		<li class="item"><:spipmotion:info_ffprobe_disponible:></li>
+	</ul>
+	#BOITE_FERMER
+	</BOUCLE_siffprobe>
 </div>
 #BOITE_FERMER
 

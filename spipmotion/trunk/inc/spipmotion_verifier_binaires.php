@@ -17,6 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 
  * -* l'état du safe_mode;
  * -* ffmpeg;
+ * -* ffprobe;
  * -* ffmpeg2theora (facultatif);
  * -* flvtool++;
  * -* flvtool2 (facultatif);
@@ -127,6 +128,19 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 			ecrire_config('spipmotion_mediainfo_casse', 'oui');
 		}else{
 			effacer_config('spipmotion_mediainfo_casse');
+		}
+		
+		/**
+		 * Tester ffprobe
+		 * ffprobe n'est pas indispensable au bon fonctionnement
+		 * On n'envoie pas de mail de notification
+		 * On ne bloquera pas les encodages
+		 */
+		exec('ffprobe --help',$retour_ffprobe,$retour_ffprobe_int);
+		if($retour_ffprobe_int != 0){
+			ecrire_config('spipmotion_ffprobe_casse', 'oui');
+		}else{
+			effacer_config('spipmotion_ffprobe_casse');
 		}
 	
 		/**

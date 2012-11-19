@@ -76,6 +76,7 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 		spip_log('Erreur : le document n a pas de durée','spipmotion');
 		return false;
 	}
+
 	if($document['hasvideo'] == 'oui'){
 		$vignette = false;
 		if($GLOBALS['spipmotion_metas']['spipmotion_safe_mode'] == 'oui'){

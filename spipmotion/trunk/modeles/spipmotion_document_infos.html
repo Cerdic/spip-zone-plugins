@@ -1,5 +1,6 @@
-<BOUCLE_doc(DOCUMENTS){id_document}{tout}>
-<div class="infos_techniques">
+<BOUCLE_doc(DOCUMENTS){id_document=#ENV{id,#ENV{id_document}}}{tout}>
+<div class="infos_techniques #ENV{class}"[ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};](#ENV{align,center}|=={center}|?{'',' '})']>
+	[<h4>(#ENV{titre})</h4>]
 	[<p>
 		<strong>
 			<:spipmotion:info_nom_fichier:>
@@ -14,29 +15,23 @@
 	[<p>
 		<strong><:spipmotion:info_mime:></strong> (#MIME_TYPE)
 	</p>]
-	[<p>
+	[(#DUREE|>{0}|oui)<p>
 		<strong>
 			<:spipmotion:info_duree:>
 		</strong>
-		[(#DUREE|spipmotion_duree)] ((#DUREE|floor) sec.)
+		[(#DUREE|spipmotion_duree)] ([(#DUREE|floor)] sec.)
 	</p>]
-	<p>
+	[(#LARGEUR|>{0}|et{#HAUTEUR|>{0}}|oui)<p>
 		<strong>
 			<:spipmotion:info_format:>
 		</strong>
 		#LARGEUR/#HAUTEUR px
-	</p>
+	</p>]
 	[<p>
 		<strong>
 			<:spipmotion:info_framecount:>
 		</strong>
 		(#FRAMECOUNT)
-	</p>]
-	[<p>
-		<strong>
-			<:spipmotion:info_bitrate:>
-		</strong>
-		(#BITRATE|>{0}|oui)[(#BITRATE|div{1000}|round) kb/s.]
 	</p>]
 	[<p>
 		<strong>
@@ -66,7 +61,7 @@
 		<strong>
 			<:spipmotion:info_videobitrate:>
 		</strong>
-		(#VIDEOBITRATE|div{1000}|round) kb/s.
+		(#VIDEOBITRATE|>{0}|oui)[(#VIDEOBITRATE|div{1000}|round) kb/s.]
 	</p>]
 	[<p>
 		<strong>
@@ -78,7 +73,7 @@
 		<strong>
 			<:spipmotion:info_audiobitrate:>
 		</strong>
-		(#AUDIOBITRATE|div{1000}|round) kb/s.
+		(#AUDIOBITRATE|>{0}|oui)[(#AUDIOBITRATE|div{1000}|round) kb/s.]
 	</p>]
 	[<p>
 		<strong>
@@ -92,6 +87,12 @@
 		</strong>
 		(#AUDIOCHANNELS)
 	</p>]
+	[(#HASVIDEO|=={oui}|oui)[<p>
+		<strong>
+			<:spipmotion:info_bitrate:>
+		</strong>
+		(#BITRATE|>{0}|oui)[(#BITRATE|div{1000}|round) kb/s.]
+	</p>]]
 	[(#METADATAS|strlen|oui)
 	<p>
 		<a href="[(#URL_PAGE{spipmotion_metas}|parametre_url{id_document,#ID_DOCUMENT})]" class="popin"><:spipmotion:lien_voir_metadatas:></a>

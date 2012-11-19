@@ -91,6 +91,20 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 		$mediainfo = charger_fonction('spipmotion_mediainfo','inc');
 		$infos = $mediainfo($fichier);
 	}
+	/**
+	 * Récupérayion des métadonnées de ffprobe
+	 */
+	$infos_ffprobe = array();
+	if(!$GLOBALS['meta']['spipmotion_ffprobe_casse']){
+		$ffprobe = charger_fonction('spipmotion_ffprobe','inc');
+		$infos_ffprobe = $ffprobe($fichier);
+	}
+	
+	foreach($infos_ffprobe as $info => $valeur){
+		if(!isset($infos[$info]) OR !$infos[$info])
+			$infos[$info] = $valeur;
+	}
+	
 	if(strlen($document['titre']) > 0){
 		unset($infos['titre']);
 	}

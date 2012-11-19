@@ -16,7 +16,8 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 	
 	$maj['create'] = array(
 		array('maj_tables',array('spip_documents','spip_spipmotion_metas')),
-		array('spipmotion_install_recuperer_infos',array())
+		array('spipmotion_install_recuperer_infos',array()),
+		array('spipmotion_conf_base',array())
 	);
 	$maj['0.3'] = array(
 		array('maj_tables',array('spip_documents')),
@@ -67,6 +68,7 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 	$maj['1.1.4'] = array(
 		array('maj_tables',array('spip_documents')),
 	);
+	
 	/**
 	 * TODO : générer un htaccess dans le répertoire script_bash/
 	 * TODO : insérer une préconfiguration par défaut
@@ -90,6 +92,7 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
  */
 function spipmotion_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_spipmotion_metas");
+	effacer_meta('spipmotion');
 	effacer_meta($nom_meta_base_version);
 }
 
@@ -186,6 +189,58 @@ function spipmotion_remove_idorig(){
 				return;
 		}
 		sql_alter('TABLE spip_documents DROP id_orig');
+	}
+}
+
+/**
+ * Insertion d'une configuration de base
+ */
+ 
+function spipmotion_conf_base(){
+	include_spip('inc/config');
+	if(count(lire_config('spipmotion/fichiers_audios')) == 0){
+		$config = array(
+			'fichiers_audios' => array('3ga','aac','ac3','aifc','aiff','flac','m4a','mka','mp3','oga','ogg','wav','wma'),
+			'fichiers_videos' => array('3gp','avi','dv','f4v','flv','m2p','m2ts','m4v','mkv','mpg','mov','mp4','mts','ogv','qt','ts','webm','wmv','y4m'),
+			'fichiers_audios_encodage' => array('3ga','aac','ac3','aifc','aiff','flac','m4a','mka','mp3','oga','ogg','wav','wma'),
+			'fichiers_videos_encodage' => array('3gp','avi','dv','f4v','flv','m2p','m2ts','m4v','mkv','mpg','mov','mp4','mts','ogv','qt','ts','webm','wmv','y4m'),
+			'fichiers_audios_sortie' => array('mp3','ogg'),
+			'fichiers_videos_sortie' => array('mp4','ogv','webm'),
+			'frequence_audio_ogg' => '44100',
+			'frequence_audio_ogv' => '44100',
+			'frequence_audio_mp3' => '44100',
+			'frequence_audio_mp4' => '44100',
+			'frequence_audio_webm' => '44100',
+			'bitrate_audio_mp3' => '128',
+			'bitrate_audio_mp4' => '128',
+			'bitrate_ogv' => '600',
+			'bitrate_mp4' => '660',
+			'bitrate_webm' => '660',
+			'width_ogv' => '640',
+			'width_mp4' => '640',
+			'width_webm' => '640',
+			'height_mp4' => '480',
+			'height_ogv' => '480',
+			'height_webm' => '480',
+			'qualite_audio_ogg' => '5',
+			'qualite_audio_ogv' => '5',
+			'qualite_audio_webm' => '5',
+			'acodec_mp3' => 'libmp3lame',
+			'acodec_ogg' => 'libvorbis',
+			'acodec_ogv' => 'libvorbis',
+			'acodec_webm' => 'libvorbis',
+			'acodec_mp4' => 'libfaac',
+			'vcodec_ogv' => 'libtheora',
+			'vcodec_webm' => 'libvpx',
+			'vcodec_mp4' => 'libx264',
+			'format_mp4' => 'ipod',
+			'vpreset_mp4' => 'slow',
+			'passes_ogv' => '2',
+			'passes_mp4' => '2',
+			'passes_webm' => '2'
+		);
+
+		ecrire_meta('spipmotion',serialize($config));
 	}
 }
 ?>

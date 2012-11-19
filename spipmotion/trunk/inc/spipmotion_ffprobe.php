@@ -1,0 +1,80 @@
+<?php 
+/**
+ * SPIPmotion
+ * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
+ *
+ * Auteurs :
+ * kent1 (http://www.kent1.info - kent1@arscenic.info)
+ * 2008-2012 - Distribué sous licence GNU/GPL
+ *
+ */
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+/**
+ * Récupération des métadonnées via FFprobe
+ * 
+ * @param string $chemin : le chemin du fichier à analyser
+ * @return array $infos : un tableau des informations récupérées
+ */
+function inc_spipmotion_ffprobe_dist($chemin){
+	include_spip('inc/filtres');
+	$infos = array();
+	if(file_exists($chemin)){
+		ob_start();
+		passthru(escapeshellcmd("ffprobe -i $chemin -show_format -show_streams"));
+		$metadatas=ob_get_contents();
+		ob_end_clean();
+		preg_match('/\[FORMAT\](.*)\[\/FORMAT\]/s', $metadatas, $formats);
+		if(isset($formats[1])){
+			$formats =  explode("\n",trim($formats[1]));
+			foreach ($formats as $infos){
+				$info = explode('=',$infos);
+				if($info[0] == 'duration'){
+					$metas['duree'] = $info[1];
+				}
+				if($info[0] == 'bit_rate'){
+					$metas['bitrate'] = $info[1];
+				}
+			}
+		}
+		preg_match_all('/\[STREAM\](.*)\[\/STREAM\]/sU', $metadatas, $streams);
+		if(count($streams) > 1){
+			foreach($streams[1] as $stream){
+				$stream_final = array();
+				$lignes_stream = explode("\n",trim($stream));
+				foreach($lignes_stream as $ligne){
+					$ligne = explode('=',$ligne);
+					$stream_final[$ligne[0]] = $ligne[1];
+				}
+				if(isset($stream_final['codec_type']) && $stream_final['codec_type'] == 'video'){
+					if(isset($stream_final['width'])){
+						$metas['largeur'] = $stream_final['width'];
+					}
+					if(isset($stream_final['height'])){
+						$metas['hauteur'] = $stream_final['height'];
+					}
+					if(isset($stream_final['nb_frames'])){
+						$metas['framecount'] = $stream_final['nb_frames'];
+					}
+					if(isset($stream_final['r_frame_rate'])){
+						 $framerate = explode('/',$stream_final['r_frame_rate']);
+						 $metas['framerate'] = $framerate[0];
+					}
+					$metas['hasvideo'] = 'oui';
+				}
+				if(isset($stream_final['codec_type']) && $stream_final['codec_type'] == 'audio'){
+					if(isset($stream_final['channels'])){
+						$metas['audiochannels'] = $stream_final['channels'];
+					}
+					if(isset($stream_final['sample_rate'])){
+						$metas['audiosamplerate'] = intval($stream_final['sample_rate']);
+					}
+					$metas['hasaudio'] = 'oui';
+				}
+			}
+		}
+	}
+	return $metas;
+}
+?>
