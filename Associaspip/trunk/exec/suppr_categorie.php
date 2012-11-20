@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_categorie() {
-	$r = association_controle_id('categorie', 'asso_categories', 'editer_profil', 'association');
+	$r = association_controle_id('categorie', 'asso_categories', 'editer_profil');
 	if ($r) {
 		include_spip ('inc/navigation_modules');
 		list($id_categorie, $categorie) = $r;

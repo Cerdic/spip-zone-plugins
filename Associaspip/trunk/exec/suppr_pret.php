@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_pret() {
-	$r = association_controle_id('pret', 'asso_prets', 'editer_prets', 'association');
+	$r = association_controle_id('pret', 'asso_prets', 'editer_prets');
 	if ($r) {
 		include_spip ('inc/navigation_modules');
 		list($id_pret, $pret) = $r;

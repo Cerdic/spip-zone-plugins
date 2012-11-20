@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_ajout_cotisation() {
-	$r = association_controle_id('auteur', 'asso_membres', 'editer_membres', 'association');
+	$r = association_controle_id('auteur', 'asso_membres', 'editer_membres');
 	if ($r) {
 		include_spip('inc/navigation_modules');
 		list($id_auteur, $membre) = $r;

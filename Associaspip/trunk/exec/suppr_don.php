@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_don() {
-	$r = association_controle_id('don', 'asso_dons', 'editer_dons', 'association');
+	$r = association_controle_id('don', 'asso_dons', 'editer_dons');
 	if ($r) {
 		include_spip ('inc/navigation_modules');
 		list($id_don, $don) = $r;

@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_membres_groupe() {
-	$r = association_controle_id('groupe', 'asso_groupes', 'voir_groupes', 'association');
+	$r = association_controle_id('groupe', 'asso_groupes', 'voir_groupes');
 	if ($r) {
 		include_spip ('inc/navigation_modules');
 		list($id_groupe, $groupe) = $r;

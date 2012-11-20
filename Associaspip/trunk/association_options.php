@@ -2372,7 +2372,7 @@ function association_passeparam_id($type='') {
  *   Numero de l'ID et ligne correspondante dans la table si ok, vide sinon
  *
  */
-function association_controle_id($type, $table, $controle='', $quoi='') {
+function association_controle_id($type, $table, $controle='') {
 	if ($id = association_passeparam_id($type)) {
 		include_spip('base/association');
 		$trouver_table = charger_fonction('trouver_table', 'base');
@@ -2382,7 +2382,7 @@ function association_controle_id($type, $table, $controle='', $quoi='') {
 		$type = sql_fetsel('*', $table, "$id_table=$id");
 	}
 	// Si ok, $type est devenu $type la ligne.
-	if ($id AND $type AND (!$controle OR autoriser($controle, $quoi, $id)))
+	if ($id AND $type AND (!$controle OR autoriser($controle, 'association', $id)))
 		return array($id, $type);
 	include_spip('inc/minipres');
 	// $type est un tableau ssi autorisation fautive

@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_ressource() {
-	$r = association_controle_id('ressource', 'asso_ressources', 'editer_ressources', 'association');
+	$r = association_controle_id('ressource', 'asso_ressources', 'editer_ressources');
 	if ($r) {
 		include_spip ('inc/navigation_modules');
 		list($id_ressource, $ressource) = $r;

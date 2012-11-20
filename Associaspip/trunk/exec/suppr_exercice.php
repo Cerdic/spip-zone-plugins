@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_suppr_exercice() {
-	$r = association_controle_id('exercice', 'asso_exercices', 'editer_compta', 'association');
+	$r = association_controle_id('exercice', 'asso_exercices', 'editer_compta');
 	if ($r) {
 		include_spip ('inc/navigation_modules');
 		list($id_exercice, $exercice) = $r;
