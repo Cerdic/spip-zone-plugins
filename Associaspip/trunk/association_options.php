@@ -2518,12 +2518,15 @@ function association_chargeparam_operation($type, $id, &$contexte) {
 }
 
 function association_chargeparam_destinations($type, &$contexte) {
-	if ($GLOBALS['association_metas']['destinations']) { // on ajoute au contexte : id_dest, montant_dest, defaut_dest ; ces variables sont recuperees par la balise dynamique directement dans l'environnement
+	if ($GLOBALS['association_metas']['destinations'] AND $contexte['id_compte']) {
+		// Recuperer les destinations associees a id_compte
+		// pour ajouter au contexte : id_dest, montant_dest, defaut_dest
+		// ces variables sont recuperees par la balise dynamique 
 		include_spip('inc/association_comptabilite');
-		$dest_id_montant = association_liste_destinations_associees($contexte['id_compte']); // on recupere les destinations associes a id_compte
-		if (is_array($dest_id_montant)) {
-			$contexte['id_dest'] = array_keys($dest_id_montant);
-			$contexte['montant_dest'] = array_values($dest_id_montant);
+		$dest = association_liste_destinations_associees($contexte['id_compte']);
+		if ($dest) {
+			$contexte['id_dest'] = array_keys($dest);
+			$contexte['montant_dest'] = array_values($dest);
 		} else {
 			$contexte['id_dest'] = '';
 			$contexte['montant_dest'] = '';

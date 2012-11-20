@@ -26,23 +26,17 @@ include_spip('inc/association_plan_comptable');
  * @param int $id_operation
  *   id_compte de l'operation dans spip_asso_compte (et spip_asso_destination)
  * @return array $destinations
- *   Un tableau de id_destination=>montant
- *   ou une chaine vide
+ *   Un tableau eventuellement vide de id_destination=>montant
  */
 function association_liste_destinations_associees($id_operation) {
-    if (!$id_compte)
-	return '';
-    if ($sql = sql_select(' spip_asso_destination_op.*, spip_asso_destination.intitule', 'spip_asso_destination_op RIGHT JOIN spip_asso_destination ON spip_asso_destination.id_destination=spip_asso_destination_op.id_destination', "id_compte=$id_operation", '', 'spip_asso_destination.intitule')) {
+	$sql = sql_select(' spip_asso_destination_op.*', 'spip_asso_destination_op RIGHT JOIN spip_asso_destination ON spip_asso_destination.id_destination=spip_asso_destination_op.id_destination', "id_compte=" . intval($id_operation));
 	$destinations = array();
-	while ( $ventilations = sql_fetch($sql) ) {
-	    $destination[$ventilations['id_destination']] = $destination_op['recette']+$destination_op['depense']; // soit recette soit depense est egal a 0, donc pour l'affichage du montant on se contente les additionner
+	while ( $r = sql_fetch($sql) ) {
+	  // soit recette soit depense est egal a 0, 
+	  // on se contente les additionner
+	    $destination[$r['id_destination']] = $r['recette'] + $r['depense']; 
 	}
-	if ( !count($destinations) )
-	    $destinations = '';
-    } else {
-	$destinations = '';
-    }
-    return $destinations;
+	return $destinations;
 }
 
 /**
