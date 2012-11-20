@@ -16,8 +16,8 @@ function liste_objets_coordonnees($quoi = '') {
 		'auteur'       => array('titre'=>_T('ecrire:info_auteurs'),      'exec'=>'auteur_infos'),
 		'article'      => array('titre'=>_T('ecrire:info_articles_2'),     'exec'=>'articles'),
 		'rubrique'     => array('titre'=>_T('ecrire:info_rubriques'),    'exec'=>'naviguer'),
-		'breve'     => array('titre'=>_T('ecrire:info_breves_03'),    'exec'=>'breves_edit'),
-		'site'     => array('titre'=>_T('ecrire:titre_page_sites_tous'),    'exec'=>'sites'),
+		'breve'        => array('titre'=>_T('breves:breves'),    'exec'=>'breves_edit'),
+		'site'         => array('titre'=>_T('sites:titre_page_sites_tous'),    'exec'=>'sites'),
 	);
 #	if ( test_plugin_actif('AGENDA') ) // Agenda 2
 #		$liste['evenement'] = array('titre'=>_T('agenda:evenements'),    'exec'=>'evenements_edit'); // ca marche, mais comme les evenements sont obligatoirement lies a un article et qu'ils ont des repetitions, il vaut mieux lier le contact directement a l'article
