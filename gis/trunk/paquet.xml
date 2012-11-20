@@ -29,7 +29,7 @@
 
 	<utilise nom="selecteur_generique" compatibilite="[1.12;]" />
 	<necessite nom="saisies" compatibilite="[1.19.0;]" />
-	<lib nom="leaflet-gis-4.1.13" lien="https://github.com/downloads/brunob/Leaflet/leaflet-gis-4.1.13.zip" />
+	<lib nom="leaflet-gis-4.1.13" lien="http://github.com/downloads/brunob/Leaflet/leaflet-gis-4.1.13.zip" />
 
 	<pipeline
 		nom="declarer_tables_interfaces"
