@@ -28,6 +28,6 @@
 	<pipeline nom="pre_boucle" inclure="gisgeom_pipelines.php" />
 
 	<necessite nom="gis" compatibilite="[4.1.2;[" />
-	<lib nom="phayes-geoPHP-7db2aa3" lien="https://github.com/phayes/geoPHP/zipball/1.0" />
-	<lib nom="brunob-leaflet.draw-9248774" lien="https://github.com/brunob/leaflet.draw/zipball/v1.0.0" />
+	<lib nom="phayes-geoPHP-7db2aa3" lien="http://github.com/phayes/geoPHP/zipball/1.0" />
+	<lib nom="brunob-leaflet.draw-9248774" lien="http://github.com/brunob/leaflet.draw/zipball/v1.0.0" />
 </paquet>
