@@ -12,14 +12,7 @@
 			<input type='hidden' name='id_objet' value='#ENV{id_objet}' />
 			<ul>
 			[(#ENV{id_objet}|oui)
-				<li class="editer editer_type saisie_selection">
-					<label for="champ_type"><:coordonnees:label_type_email:></label>
-					<select name="type" id="champ_type">
-						<option value=""></option>
-						<option value="work"[(#ENV{type}|=={work}|oui)selected="selected"]><:coordonnees:type_mel_work:></option>
-						<option value="home"[(#ENV{type}|=={home}|oui) selected="selected"]><:coordonnees:type_mel_home:></option>
-					</select>
-				</li>
+				[(#SAISIE{selection, type, label=<:coordonnees:label_type_email:>, defaut=#ENV{type}, datas=#ARRAY{work,<:coordonnees:type_mel_work:>, home,<:coordonnees:type_mel_home:> } })]
 			]
 				[(#SAISIE{input, titre,	label=<:coordonnees:label_titre:>})]
 				[(#SAISIE{input, email, label=<:coordonnees:label_email:>})]
