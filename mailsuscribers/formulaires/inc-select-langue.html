@@ -1,0 +1,7 @@
+
+<select name="#ENV{name}" class="select" id="#ENV{name}">
+<BOUCLE_langues(POUR){tableau #CONFIG{langues_proposees}|explode{','}}>
+	#SET{val,#VALEUR}
+	<option value="#GET{val}"[(#ENV{#ENV{name},#ENV{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#VALEUR|traduire_nom_langue)]</option>
+</BOUCLE_langues>
+</select>

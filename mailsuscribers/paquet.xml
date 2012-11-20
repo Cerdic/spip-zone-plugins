@@ -1,0 +1,25 @@
+<paquet
+	prefix="mailsuscribers"
+	categorie="communication"
+	version="0.1.5"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/mailsuscriber-32.png"
+	documentation="http://contrib.spip.net/mailsuscribers"
+	schema="0.1.1"
+>
+	<nom>Newsletter.Inscription</nom>
+	<auteur lien='http://nursit.com'>Cédric Morin</auteur>
+
+	<licence>GNU/GPL v3</licence>
+
+	<pipeline nom="autoriser" inclure="mailsuscribers_autorisations.php" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/mailsuscribers.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/mailsuscribers.php" />
+	<pipeline nom="pre_insertion" inclure="mailsuscribers_pipelines.php" />
+	<pipeline nom="pre_edition" inclure="mailsuscribers_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="mailsuscribers_pipelines.php" />
+
+	<menu nom="mailsuscribers" titre="mailsuscriber:titre_mailsuscribers" parent="menu_activite" icone="images/mailsuscriber-16.png" action="mailsuscribers" />
+</paquet>

@@ -1,0 +1,28 @@
+<BOUCLE_mailsuscriber(MAILSUSCRIBERS){id_mailsuscriber}{statut?}>
+
+[<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
+	<div class='label'><:mailsuscriber:label_email:> : </div>
+	<span dir='#LANG_DIR' class='#EDIT{email} email'>(#EMAIL)</span>
+</div>]
+
+[<div class="champ contenu_nom[ (#NOM*|strlen|?{'',vide})]">
+	<div class='label'><:mailsuscriber:label_nom:> : </div>
+	<span dir='#LANG_DIR' class='#EDIT{nom} nom'>(#NOM)</span>
+</div>]
+
+[<div class="champ contenu_abonnements[ (#ABONNEMENTS*|strlen|?{'',vide})]">
+	<div class='label'><:mailsuscriber:label_abonnements:> : </div>
+	<span dir='#LANG_DIR' class='#EDIT{abonnements} abonnements'>(#ABONNEMENTS)</span>
+</div>]
+
+[<div class="champ contenu_lang[ (#LANG*|strlen|?{'',vide})]">
+	<div class='label'><:mailsuscriber:label_lang:> : </div>
+	<span dir='#LANG_DIR' class='#EDIT{lang} lang'>(#LANG|traduire_nom_langue)</span>
+</div>]
+
+[<div class="champ contenu_optin[ (#OPTIN*|strlen|?{'',vide})]">
+	<div class='label'><:mailsuscriber:label_optin:> : </div>
+	<span dir='#LANG_DIR' class='#EDIT{optin} optin'><tt>(#OPTIN|nl2br)</tt></span>
+</div>]
+
+</BOUCLE_mailsuscriber>
