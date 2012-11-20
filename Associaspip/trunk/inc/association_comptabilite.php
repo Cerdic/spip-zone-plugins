@@ -29,7 +29,7 @@ include_spip('inc/association_plan_comptable');
  *   Un tableau eventuellement vide de id_destination=>montant
  */
 function association_liste_destinations_associees($id_operation) {
-	$sql = sql_select(' spip_asso_destination_op.*', 'spip_asso_destination_op RIGHT JOIN spip_asso_destination ON spip_asso_destination.id_destination=spip_asso_destination_op.id_destination', "id_compte=" . intval($id_operation));
+	$sql = sql_select(' spip_asso_destination_op.*', 'spip_asso_destination_op', "id_compte=" . intval($id_operation));
 	$destinations = array();
 	while ( $r = sql_fetch($sql) ) {
 	  // soit recette soit depense est egal a 0, 
@@ -55,27 +55,26 @@ function association_liste_destinations_associees($id_operation) {
  *   un <div> le code HTML/javascript correspondant au selecteur de destinations
  */
 function association_editeur_destinations($destinations, $defaut='') {
-    $options_destinations = '';
-    $sql = sql_select('id_destination,intitule', 'spip_asso_destination', '', '', 'intitule');
-    while ($destination_info = sql_fetch($sql)) { // recupere la liste de toutes les destinations dans un code HTML <option value="destination_id">destination</option>
-	$options_destinations .= '<option value="'. $destination_info['id_destination'] .'">'.$destination_info['intitule'].'</option>';
+    $options = sql_allfetsel('id_destination,intitule', 'spip_asso_destination', '', '', 'intitule');
+    if (!$options) return '';
+    // Constuire les balises Options d'un Select
+    // mais il faudrait arranger ca si une seule
+    foreach ($options as $k => $v) {
+	$options[$k] = '<option value="'. $v['id_destination'] .'">'.$v['intitule'].'</option>';
     }
+    $options = join("\n", $options);
+    $idIndex = 1;
     $res = '';
-    if ($options_destinations) { // des destinations sont definies et on en a genere la liste HTML
-	$res = '<script type="text/javascript" src="'.find_in_path('javascript/jquery.destinations_form.js').'"></script>';
-	$res .= '<label for="destination">'
-	    . _T('asso:destination') .'</label>'
-	    . '<div id="divTxtDestination" class="formulaire_edition_destinations">';
-	$idIndex = 1;
-	if ( is_array($destinations) ) { // si on a une liste de destinations (on edite une operation)
+    if ( is_array($destinations) ) {
+      // si on a une liste de destinations (on edite une operation)
 	    foreach ($destinations as $destId => $destMontant) { // restitution des listes de selection HTML
-		$destination_selected = preg_replace('/(value="'.$destId.'")/', '$1 selected="selected"', $options_destinations);
-		$res .= '<div id="row'.$idIndex.'" class="choix"><ul>';
-		$res .= '<li class="editer_id_dest['.$idIndex.']">'
-		    . '<select name="id_dest['.$idIndex.']" id="id_dest['.$idIndex.']" >'
-		    . $destination_selected
-		    . '</select></li>';
-		if (!$GLOBALS['association_metas']['unique_dest']) { // destinations multiples
+		$res .= '<div id="row'.$idIndex.'" class="choix"><ul>'
+		. '<li class="editer_id_dest['.$idIndex.']">'
+		. '<select name="id_dest['.$idIndex.']" id="id_dest['.$idIndex.']" >'
+		. preg_replace('/(value="'.$destId.'")/', '$1 selected="selected"', $options)
+		. '</select></li>';
+
+		if (!$GLOBALS['association_metas']['unique_dest']) {
 		    $res .= '<li class="editer_montant_dest['.$idIndex.']"><input name="montant_dest['.$idIndex.']" value="'
 			. association_formater_nombre($destMontant)
 			. '" type="text" id="montant_dest['.$idIndex.']" class="number decimal price" /></li>'
@@ -87,24 +86,30 @@ function association_editeur_destinations($destinations, $defaut='') {
 		$res .= '<ul></div>';
 		$idIndex++;
 	    }
-	} else { // pas de destination deja definies pour cette operation
+    } else { // pas de destination deja definies pour cette operation
 	    if ($defaut!='') {
-		$options_destinations = preg_replace('/(value="'.$defaut.'")/', '$1 selected="selected"', $options_destinations);
+		$options = preg_replace('/(value="'.$defaut.'")/', '$1 selected="selected"', $options);
 	    }
 	    $res .= '<div id="row1" class="choix"><ul><li class="editer_id_dest[1]"><select name="id_dest[1]" id="id_dest[1]" >'
-		. $options_destinations . '</select></li>';
+		. $options . '</select></li>';
 	    if (!$GLOBALS['association_metas']['unique_dest']) { // destinations multiples
 		$res .= '<li class="editer_montant_dest[1]"><input name="montant_dest[1]" value="'
 		    .'" type="text" id="montant_dest[1]"/></li>'
 		    . '</ul><button class="destButton" type="button" onclick="addFormField(); return FALSE;">+</button>';
 	    }
 	    $res .= '</div>';
-	}
-	if (!$GLOBALS['association_metas']['unique_dest']) // destinations multiples
-	    $res .= '<input type="hidden" id="idNextDestination" value="'.($idIndex+1).'">';
-	$res .= '</div>';
     }
-    return $res;
+    if (!$GLOBALS['association_metas']['unique_dest']) // destinations multiples
+	    $res .= '<input type="hidden" id="idNextDestination" value="'.($idIndex+1).'">';
+
+    return '<script type="text/javascript" src="'.find_in_path('javascript/jquery.destinations_form.js').'"></script>'
+      . '<label for="destination">'
+      . _T('asso:destination')
+      . '</label>'
+      . '<div id="divTxtDestination" class="formulaire_edition_destinations">'
+      . $res
+      . '</div>';
+
 }
 
 /**
