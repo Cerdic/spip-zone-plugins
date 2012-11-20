@@ -61,6 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'ffmpeg2theora_install' => 'FFMpeg2Theora on your server:',
 	'ffmpeg_install' => 'FFMpeg on your server:',
+	'ffprobe_install' => 'FFprobe sur votre serveur :', # NEW
 	'flvtool2_install' => 'Flvtool2 on your server:',
 	'flvtoolplus_install' => 'FLVtool + + on your server:',
 	'framerate' => 'Frame rate',
@@ -109,6 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreurs' => 'Errors',
 	'info_ffmpeg2theora_libtheora_version' => 'Libtheora version used by ffmpeg2theora:',
 	'info_ffmpeg2theora_version' => 'ffmpeg2theora version:',
+	'info_ffprobe_disponible' => 'FFprobe est disponible', # NEW
 	'info_flvtool2_version' => 'Flvtool2 version installed:',
 	'info_flvtoolplus_version' => 'Version FLVtool + + installed:',
 	'info_format' => 'Format: ',
@@ -217,7 +219,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'select_all' => 'Select all',
 	'spipmotion_boite' => 'Configuration of SPIPmotion',
-	'spipmotion_descriptif' => 'This plugin allows to encode audio and video files.',
+	'spipmotion_descriptif' => 'This plugin allows to encode audio and video files.', # MODIF
 	'spipmotion_sh_install' => 'SPIPmotion encoding script:',
 	'spipmotion_sh_vignettes_install' => 'Thumbnail creation script:',
 
