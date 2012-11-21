@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Chargement des valeurs
  * @return array
  */
-function formulaires_hasher_charger_dist(){
+function formulaires_configurer_hasher_charger_dist(){
 
 	list($oui, $non) = hasher_compter_documents();
 
@@ -29,7 +29,7 @@ function formulaires_hasher_charger_dist(){
 }
 
 
-function formulaires_hasher_traiter_dist(){
+function formulaires_configurer_hasher_traiter_dist(){
    $message = array();
 	switch(_request('choix_action')) {
 		case 'hasher' :

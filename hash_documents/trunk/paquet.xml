@@ -15,5 +15,5 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<pipeline nom="post_edition" inclure="hash_fonctions.php" />
+	<pipeline nom="post_edition" inclure="hasher_fonctions.php" />
 </paquet>
