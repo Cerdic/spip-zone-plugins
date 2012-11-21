@@ -169,4 +169,172 @@ function geoportail_latitude ($l, $short=false)
 	}
 	return $l;
 }
+
+/** 
+	Gestion des regions : renvoie les departements d'une region 
+	(pour utilisation dans un critere de boucle : {id_dep IN #REGION|geoportail_region}
+*/
+function geoportail_region ($region)
+{	// Nom de la region en minuscule sans accent et sans -
+	$region = str_replace('-',' ',strtolower(translitteration($region)));
+
+	// Renvoyer les departements composant la region
+	switch ($region)
+	{	case 'alsace':
+		case '42':
+		case 'strasbourg':
+			return array('67','68');
+			
+		case 'aquitaine':
+		case '72':
+		case 'bordeaux':
+			return array('24','33','40','47','64');
+			
+		case 'auvergne':
+		case '83':
+		case 'clermont ferrand':
+			return array('03','15','43','63');
+			
+		case 'basse normandie':
+		case '25':
+		case 'caen':
+			return array('14','50','61');
+			
+		case 'bourgogne':
+		case '26':
+		case 'dijon':
+			return array('21','58','71','89');
+			
+		case 'bretagne':
+		case '53':
+		case 'rennes':
+			return array('22','29','35','56');
+
+		case 'centre':
+		case '24':
+		case 'orleans':
+			return array('18','28','36','37','41','45');
+			
+		case 'champagne ardenne':
+		case 'champagne':
+		case 'ardenne':
+		case '21':
+		case 'chalons en champagne':
+			return array('24','33','40','47','64');
+			
+		case 'corse':
+		case '94':
+		case 'ajaccio':
+			return array('2A','2B');
+		
+		case 'franche comte':
+		case 'comte':
+		case '43':
+		case 'besancon':
+			return array('25','39','70','90');
+		
+		case 'guadeloupe':
+		case '01':
+		case 'basse terre':
+			return array('971');
+		
+		case 'guyane':
+		case '03':
+		case 'cayenne':
+			return array('973');
+		
+		case 'haute normandie':
+		case '23':
+		case 'rouen':
+			return array('14','50','61');
+		
+		case 'ile de france':
+		case '11':
+		case 'paris':
+			return array('75','77','78','91','92','93','94');
+		
+		case 'la reunion':
+		case 'reunion':
+		case '04':
+		case 'saint denis':
+			return array('974');
+		
+		case 'languedoc roussillon':
+		case 'languedoc':
+		case 'roussillon':
+		case '91':
+		case 'montpellier':
+			return array('11','30','34','48','66');
+			
+		case 'limousin':
+		case '74':
+		case 'limoges':
+			return array('19','23','87');
+		
+		case 'lorraine':
+		case '41':
+		case 'metz':
+			return array('54','55','57','88');
+		
+		case 'martinique':
+		case '02':
+		case 'fort de france':
+			return array('972');
+		
+		case 'mayotte':
+		case '06':
+		case 'dzaoudzi':
+			return array('976');
+		
+		case 'midi pyrenees':
+		case 'pyrenees':
+		case '73':
+		case 'toulouse':
+			return array('25','39','70','90');
+		
+		case 'nord pas de calais':
+		case 'nord':
+		case 'calais':
+		case '31':
+		case 'lille':
+			return array('59','62');
+			
+		case 'pays de la loire':
+		case 'pays de loire':
+		case 'loire':
+		case '52':
+		case 'nantes':
+			return array('44','49','53','72','85');
+		
+		case 'picardie':
+		case '22':
+		case 'amiens':
+			return array('02','60','80');
+		
+		case 'poitou charentes':
+		case 'poitou':
+		case 'charentes':
+		case '54':
+		case 'poitiers':
+			return array('16','17','79','86');
+		
+		case 'provence alpes cote d\'azur':
+		case 'provence':
+		case 'alpes cote d\'azur':
+		case 'cote d\'azur':
+		case '93':
+		case 'marseille':
+			return array('25','39','70','90');
+		
+		case 'rhone alpes':
+		case 'rhone':
+		case '82':
+		case 'lyon':
+			return array('01','07','26','38','42','69','73','74');
+		
+		default: return array('0');
+/* */
+	}
+}
+/* */
 ?>
