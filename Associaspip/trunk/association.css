@@ -222,6 +222,8 @@ span.erreur {
 	border: 1px inset #333;
 }
 
+.formulaire_spip input[readonly] {border:0}
+
 /* formulaires specifiques du plugin */
 .formulaire_ajouter_membres_groupe
 {

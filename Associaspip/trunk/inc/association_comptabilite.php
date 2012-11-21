@@ -55,19 +55,24 @@ function association_liste_destinations_associees($id_operation) {
  *   un <div> le code HTML/javascript correspondant au selecteur de destinations
  */
 function association_editeur_destinations($destinations, $defaut='') {
-    $options = sql_allfetsel('id_destination,intitule', 'spip_asso_destination', '', '', 'intitule');
-    if (!$options) return '';
-    // Constuire les balises Options d'un Select
-    // mais il faudrait arranger ca si une seule
-    foreach ($options as $k => $v) {
-	$options[$k] = '<option value="'. $v['id_destination'] .'">'.$v['intitule'].'</option>';
-    }
-    $options = join("\n", $options);
-    $idIndex = 1;
-    $res = '';
-    if ( is_array($destinations) ) {
+	$options = array();
+        // Constuire les balises Options d'un Select
+	// mais il faudrait arranger ca si une seule
+	$q = sql_select('id_destination,intitule', 'spip_asso_destination', '', '', 'intitule');
+
+	while ($v = sql_fetch($q)) {
+	  // Ces deux variables sont utilisees plus bas si une seule iteration
+		$id = $v['id_destination'];
+		$texte = $v['intitule'];
+		$options[$id] = "<option value='$id'>$texte</option>";
+	}
+	if (!$options) return '';
+	$idIndex = 1;
+	if ( is_array($destinations) ) {
       // si on a une liste de destinations (on edite une operation)
-	    foreach ($destinations as $destId => $destMontant) { // restitution des listes de selection HTML
+	  $options = join("\n", $options) ;
+	  $res = '';
+	  foreach ($destinations as $destId => $destMontant) { // restitution des listes de selection HTML
 		$res .= '<div id="row'.$idIndex.'" class="choix"><ul>'
 		. '<li class="editer_id_dest['.$idIndex.']">'
 		. '<select name="id_dest['.$idIndex.']" id="id_dest['.$idIndex.']" >'
@@ -86,12 +91,15 @@ function association_editeur_destinations($destinations, $defaut='') {
 		$res .= '<ul></div>';
 		$idIndex++;
 	    }
-    } else { // pas de destination deja definies pour cette operation
+	} else { // pas de destination deja definies pour cette operation
 	    if ($defaut!='') {
-		$options = preg_replace('/(value="'.$defaut.'")/', '$1 selected="selected"', $options);
+	      $options[$defaut] = str_replace('<option ', '<option selected="selected" ', $options[$defaut]);
 	    }
-	    $res .= '<div id="row1" class="choix"><ul><li class="editer_id_dest[1]"><select name="id_dest[1]" id="id_dest[1]" >'
-		. $options . '</select></li>';
+	    $n = " name='id_dest[1]' id='id_dest[1]'";
+	    if ((count($options) == 1) AND $GLOBALS['association_metas']['unique_dest']) {
+	      $sel = "<input$n readonly='readonly' value='$id' /> ($texte)";
+	    } else $sel = "<select$n>" . join("\n", $options) . '</select>';
+	    $res = "<div id='row1' class='choix'><ul>\n<li class='editer_id_dest[1]'>$sel\n</li>";
 	    if (!$GLOBALS['association_metas']['unique_dest']) { // destinations multiples
 		$res .= '<li class="editer_montant_dest[1]"><input name="montant_dest[1]" value="'
 		    .'" type="text" id="montant_dest[1]"/></li>'
@@ -99,15 +107,16 @@ function association_editeur_destinations($destinations, $defaut='') {
 	    }
 	    $res .= '</div>';
     }
-    if (!$GLOBALS['association_metas']['unique_dest']) // destinations multiples
-	    $res .= '<input type="hidden" id="idNextDestination" value="'.($idIndex+1).'">';
-
-    return '<script type="text/javascript" src="'.find_in_path('javascript/jquery.destinations_form.js').'"></script>'
+    return '<script type="text/javascript" src="'
+      . find_in_path('javascript/jquery.destinations_form.js')
+      . '"></script>'
       . '<label for="destination">'
       . _T('asso:destination')
       . '</label>'
       . '<div id="divTxtDestination" class="formulaire_edition_destinations">'
       . $res
+      . ($GLOBALS['association_metas']['unique_dest'] ? '' :
+	('<input type="hidden" id="idNextDestination" value="'.($idIndex+1).'" />'))
       . '</div>';
 
 }
