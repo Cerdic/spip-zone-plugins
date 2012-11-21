@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_lang' => 'Langue',
 	'label_nom' => 'Nom',
 	'label_optin' => 'Opt-in',
+	'label_mailsuscriber_optin' => 'Je veux recevoir la Newsletter',
 
 	// S
 	'suscribe_sujet_email' => '[@nom_site_spip@] Inscription à la Newsletter',

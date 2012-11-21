@@ -80,4 +80,64 @@ function mailsuscribers_optimiser_base_disparus($flux){
 	return $flux;
 
 }
+
+/**
+ * Ajout de la coche d'optin sur le formulaire inscription
+ *
+ * @param array $flux
+ * @return array
+ */
+function mailsuscribers_formulaire_charger($flux){
+	if ($flux['args']['form']=="inscription"){
+		// ici on ne lit pas la config pour aller plus vite (pas grave si on a ajoute le champ sans l'utiliser)
+		$flux['data']['mailsuscriber_optin'] = '';
+	}
+	return $flux;
+}
+
+/**
+ * Ajout de la coche d'optin sur le formulaire inscription
+ *
+ * @param array $flux
+ * @return array
+ */
+function mailsuscribers_formulaire_fond($flux){
+	if ($flux['args']['form']=="inscription"){
+		include_spip('inc/config');
+		if (lire_config("mailsuscribers/proposer_signup_optin",0)){
+			if (($p = strpos($flux['data'],"</ul>"))!==false){
+				$input = recuperer_fond("formulaires/inc-optin-suscribe",$flux['args']['contexte']);
+				$flux['data'] = substr_replace($flux['data'],$input,$p,0);
+			}
+		}
+	}
+	return $flux;
+}
+
+/**
+ * Ajout de la coche d'optin sur le formulaire inscription
+ *
+ * @param array $flux
+ * @return array
+ */
+function mailsuscribers_formulaire_traiter($flux){
+	if ($flux['args']['form']=="inscription"
+	  AND _request('mailsuscriber_optin')
+	  AND isset($flux['data']['id_auteur'])
+		AND $id_auteur = $flux['data']['id_auteur']){
+		// si on a poste l'optin et auteur inscrit en base
+		// verifier quand meme que la config autorise cet optin, et que l'inscription s'est bien faite)
+		include_spip('inc/config');
+		if (lire_config("mailsuscribers/proposer_signup_optin",0)){
+			$row = sql_fetsel('nom,email','spip_auteurs','id_auteur='.intval($id_auteur));
+			if ($row){
+				// inscrire le nom et email
+				$newsletter_suscribe = charger_fonction('suscribe','newsletter');
+				$newsletter_suscribe($row['email'],array('nom'=>$row['nom']));
+			}
+		}
+	}
+	return $flux;
+}
+
 ?>
