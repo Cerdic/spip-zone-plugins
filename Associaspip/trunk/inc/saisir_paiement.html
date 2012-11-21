@@ -16,40 +16,34 @@ remarques:
 - les parametres relatifs aux destinations sont dans l'environnemnet du formulaire, il faut donc juste penser a passer le parametre "env" lors de l'inclusion de ce fichier
 - perfectible
 
-maj:2012-10-15; version:0.2.1; licence:GPL; copyleft:Jeannot Lapin, Marcel Bolla; -->]
-
-#CACHE{0}
-[
+maj:2012-10-15; version:0.2.1; licence:GPL; copyleft:Jeannot Lapin, Marcel Bolla; -->
+]#CACHE{0}[
 <fieldset>
     <legend>(#ENV{champs_legende})</legend>
     <ul>
-]
-		<li id="saisie_mode_paiement" class="editer_journal [(#ENV{type_operation}|affichage_div{charges-produits-banques})]">
-			<label for="journal">
-				<div id="saisie_label_journal_depense" name="saisie_label_journal_depense" class="[(#ENV{type_operation}|affichage_div{charges-banques})]">
-					<:asso:compte_debite:>
-				</div>
-				<div id="saisie_label_journal_recette" name="saisie_label_journal_recette" class="[(#ENV{type_operation}|affichage_div{produits})]">
-					<:asso:compte_credite:>
-				</div>
-			</label>
-<B_mode_paiement>
-			<select name="journal" id="journal" class="select">
-	<BOUCLE_mode_paiement(ASSO_PLAN) {par code} {active=1}{classe=#META{/association/classe_banques}}{code!=#META{/association/pc_intravirements}}>
-				<option value="#CODE"[(#ENV{journal}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
-	</BOUCLE_mode_paiement>
-			</select>
-	[
-		</li>
-		<li id="saisie_destination" class="editer_destinations[ (#ENV{type_operation}|affichage_div{charges-produits-contributions_volontaires})]">
+]<B_mode_paiement>
+<li id="saisie_mode_paiement" class="editer_journal [(#ENV{type_operation}|affichage_div{charges-produits-banques})]">
+	<label for="journal">
+		<span class="[(#ENV{type_operation}|affichage_div{charges-banques})]">
+<:asso:compte_debite:>
+		</span>
+		<span class="[(#ENV{type_operation}|affichage_div{produits})]">
+<:asso:compte_credite:>
+		</span>
+	</label>
+	<select name="journal" id="journal" class="select">
+<BOUCLE_mode_paiement(ASSO_PLAN) {par code} {active=1}{classe=#META{/association/classe_banques}}{code!=#META{/association/pc_intravirements}}>
+		<option value="#CODE"[(#ENV{journal}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option></BOUCLE_mode_paiement>
+	</select>
+</li>[
+<li id="saisie_destination" class="editer_destinations[ (#ENV{type_operation}|affichage_div{charges-produits-contributions_volontaires})]">
 			[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{destinations})</span>]
-			(#EDITEUR_DESTINATIONS)
-	]
+			(#EDITEUR_DESTINATIONS)]
+</li>
 </B_mode_paiement>
-			<span class="erreur_message"><:asso:erreur_pas_de_classe_financiere:></span>
-<//B_mode_paiement>
-		</li>
-[(#ENV{champs_legende}|oui)
+<li><span class="erreur_message"><:asso:erreur_pas_de_classe_financiere:></span></li>
+<//B_mode_paiement>[
+(#ENV{champs_legende}|oui)
     </ul>
 </fieldset>
 ]
