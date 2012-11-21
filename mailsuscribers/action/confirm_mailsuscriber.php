@@ -8,6 +8,12 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
+/**
+ * Confirmer l'inscription d'un email deja en base
+ * (appelle lors du double-optin : delegue a suscribe le changement de statut en valide)
+ *
+ * @param string $email
+ */
 function action_confirm_mailsuscriber_dist($email=null){
 	include_spip('mailsuscribers_fonctions');
 	if (is_null($email)){

@@ -7,7 +7,13 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-
+/**
+ * Inscrire un email deja en base
+ * (mise a jour du statut en prop ou valide selon l'option double-optin)
+ *
+ * @param string $email
+ * @param null|bool $double_optin
+ */
 function action_suscribe_mailsuscriber_dist($email=null, $double_optin=null){
 	include_spip('mailsuscribers_fonctions');
 	include_spip('inc/config');

@@ -7,7 +7,12 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-
+/**
+ * Des-inscrire un email deja en base
+ * (mise a jour du statut en refuse)
+ *
+ * @param string $email
+ */
 function action_unsuscribe_mailsuscriber_dist($email=null){
 	include_spip('mailsuscribers_fonctions');
 	if (is_null($email)){
