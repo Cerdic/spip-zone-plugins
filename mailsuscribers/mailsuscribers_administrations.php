@@ -13,13 +13,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 function mailsuscribers_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
+	include_spip("inc/mailsuscribers");
 
 	$maj['create'] = array(
 		array('maj_tables', array('spip_mailsuscribers'))
 	);
 
 	$maj['0.1.1'] = array(
-		array('maj_tables', array('spip_mailsuscribers'))
+		array('maj_tables', array('spip_mailsuscribers')),
+	);
+	$maj['0.1.2'] = array(
+		array('sql_alter',"TABLE spip_mailsuscribers CHANGE abonnements listes text NOT NULL DEFAULT ''"),
+	);
+	$maj['0.1.3'] = array(
+		array('sql_updateq',"spip_mailsuscribers",array('listes'=>mailsuscribers_normaliser_nom_liste()),"listes=".sql_quote('')),
 	);
 
 	include_spip('base/upgrade');

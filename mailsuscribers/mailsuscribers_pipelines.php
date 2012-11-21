@@ -17,6 +17,9 @@ function mailsuscribers_pre_insertion($flux){
 	  AND !isset($flux['data']['jeton'])){
 		include_spip("inc/acces");
 		$flux['data']['jeton'] = creer_uniqid();
+		include_spip("inc/mailsuscribers");
+		if (!isset($flux['data']['listes']))
+			$flux['data']['listes'] = mailsuscribers_normaliser_nom_liste();
 	}
 	return $flux;
 }

@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_poubelle' => 'poubelle',
 
 	// L
-	'label_abonnements' => 'Abonnements',
+	'label_listes' => 'Listes',
 	'label_email' => 'Email',
 	'label_lang' => 'Langue',
 	'label_nom' => 'Nom',
