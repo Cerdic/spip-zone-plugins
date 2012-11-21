@@ -200,6 +200,45 @@ function agenda_post_edition($flux){
 	return $flux;
 }
 
+/*
+ * Synchroniser les liaisons (mots, docs, gis, etc) de l'événement édité avec ses répétitions s'il en a
+ * @param array $flux
+ * @param array
+ */
+function agenda_post_edition_lien($flux){
+	// Si on est en train de lier ou délier quelque chose a un événement
+	if ($flux['args']['objet'] == 'evenement'){
+		// On cherche si cet événement a des répétitions
+		if ($id_evenement = $flux['args']['id_objet']
+			and $id_evenement > 0
+			and $repetitions = sql_allfetsel('id_evenement', 'spip_evenements', 'id_evenement_source = '.$id_evenement)
+			and is_array($repetitions)
+		){
+			include_spip('action/editer_liens');
+			
+			// On a la liste des ids des répétitions
+			$repetitions = array_map('reset', $repetitions);
+			
+			// Si c'est un ajout de lien, on l'ajoute à toutes les répétitions
+			if ($flux['args']['action'] == 'insert'){
+				objet_associer(
+					array($flux['args']['objet_source'] => $flux['args']['id_objet_source']),
+					array('evenement' => $repetitions)
+				);
+			}
+			// Si c'est une suppression de lien, on le supprime à toutes les répétitions
+			elseif ($flux['args']['action'] == 'delete'){
+				objet_dissocier(
+					array($flux['args']['objet_source'] => $flux['args']['id_objet_source']),
+					array('evenement' => $repetitions)
+				);
+			}
+		}
+	}
+	
+	return $flux;
+}
+
 /**
  * Les evenements peuvent heriter des compositions des articles
  * @param array $heritages
