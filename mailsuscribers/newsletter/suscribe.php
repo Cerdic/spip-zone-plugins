@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip("action/editer_objet");
 include_spip('inc/mailsuscribers');
-include_spip('inc/lire_config');
+include_spip('inc/config');
 include_spip('inc/autoriser');
 
 /**
@@ -59,6 +59,9 @@ function newsletter_suscribe_dist($email,$options = array()){
 			$set['lang'] = $GLOBALS['meta']['langue_site'];
 		if (!isset($set['listes']))
 			$set['listes'] = mailsuscribers_normaliser_nom_liste();
+		// statut et date par defaut
+		$set['statut'] = 'prepa';
+		$set['date'] = date('Y-m-d H:i:s');
 
 		// Envoyer aux plugins
 		$champs = pipeline('pre_insertion',
@@ -119,11 +122,12 @@ function newsletter_suscribe_dist($email,$options = array()){
 			$set['statut'] = 'prop';
 		}
 	}
-
 	if (count($set)){
 		autoriser_exception("modifier","mailsuscriber",$row['id_mailsuscriber']);
+		autoriser_exception("instituer","mailsuscriber",$row['id_mailsuscriber']);
 		objet_modifier("mailsuscriber",$row['id_mailsuscriber'],$set);
 		autoriser_exception("modifier","mailsuscriber",$row['id_mailsuscriber'],false);
+		autoriser_exception("instituer","mailsuscriber",$row['id_mailsuscriber'],false);
 	}
 
 	return true;
