@@ -30,7 +30,8 @@ include_spip('inc/autoriser');
  *   nom : string
  *   listes : array (si non fourni, inscrit a la liste generale 'newsletter')
  *   lang : string
- *   force : bool permet de forcer une inscription sans doubleoptin (passe direct en valide)
+ *   doubleoptin : bool permet de forcer une inscription sans doubleoptin (passe direct en valide)
+ *   graceful : bool permet a contrario de ne pas inscrire quelqu'un qui s'est desabonne (utilise lors de l'import en nombre, l'utilisateur est ignore dans ce cas)
  * @return bool
  *   true si inscrit comme demande, false sinon
  */
@@ -95,6 +96,12 @@ function newsletter_subscribe_dist($email,$options = array()){
 		}
 	}
 	else {
+		// si on est graceful et que l'inscrit s'est deja desabonne, on ne fait rien
+		if ($row['statut']=='refuse'
+		  AND isset($options['graceful'])
+		  AND $options['graceful']==true)
+			return false;
+
 		$row['listes'] = explode(',',$row['listes']);
 		if (!isset($set['listes'])){
 			// filtrer les listes de newsletter pour voir si l'abonne est abonne a quelque chose
