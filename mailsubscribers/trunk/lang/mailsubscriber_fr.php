@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_lang' => 'Langue',
 	'label_nom' => 'Nom',
 	'label_optin' => 'Opt-in',
+	'label_statut' => 'Statut',
 	'label_mailsubscriber_optin' => 'Je veux recevoir la Newsletter',
 
 	// S
@@ -61,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_mailsubscriber' => 'Logo de cet inscrit',
 	'titre_mailsubscriber' => 'Inscrit à la newsletter',
 	'titre_mailsubscribers' => 'Inscrits à la newsletter',
+	'titre_export_mailsubscribers' => 'Exporter les inscrits',
 
 	'texte_statut_pas_encore_inscrit' => 'pas inscrit',
 	'texte_statut_en_attente_confirmation' => 'en attente confirmation',

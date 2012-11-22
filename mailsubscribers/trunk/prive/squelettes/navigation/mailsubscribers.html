@@ -1,0 +1,10 @@
+[(#AUTORISER{exporter,_mailsubscribers}|oui)
+#BOITE_OUVRIR{'','raccourcis'}
+[(#PLUGIN{spip_bonux}|non)
+<p>Pour importer ou exporter les listes d'inscrits, installez le plugin <a href="http://plugins.spip.net/spip_bonux">SPIP-Bonux</a></p>
+]
+[(#PLUGIN{spip_bonux}|oui)
+[(#URL_ACTION_AUTEUR{mailsubscribers_export,valide}|icone_horizontale{Exporter les inscrits,mailsubscriber-24,export})]
+]
+#BOITE_FERMER
+]
