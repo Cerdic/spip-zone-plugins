@@ -10,12 +10,12 @@
 	<lien>http://www.spip-contrib.net/?article3793</lien>
 	<prefix>rssconfig</prefix>
 		<bouton id='rssconfig' parent='configuration'>
-		<icone>images/rssconfig-24.png</icone>
+		<icone>prive/themes/spip/images/rssconfig-24.png</icone>
 		<titre>rssconfig:rssconfig</titre>
 		<url>configurer_rssconfig</url>
 	</bouton>
 	<bouton id='rssconfig21' parent='bando_squelette'>
-		<icone>images/rssconfig-16.png</icone>
+		<icone>prive/themes/spip/images/rssconfig-16.png</icone>
 		<titre>rssconfig:rssconfig</titre>
 		<url>configurer_rssconfig</url>
 	</bouton>
