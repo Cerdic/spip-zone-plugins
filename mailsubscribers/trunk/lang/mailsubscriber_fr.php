@@ -63,6 +63,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_mailsubscriber' => 'Inscrit à la newsletter',
 	'titre_mailsubscribers' => 'Inscrits à la newsletter',
 	'titre_export_mailsubscribers' => 'Exporter les inscrits',
+	'titre_export_mailsubscribers_all' => 'Exporter toutes les adresses',
+
 
 	'texte_statut_pas_encore_inscrit' => 'pas inscrit',
 	'texte_statut_en_attente_confirmation' => 'en attente confirmation',
