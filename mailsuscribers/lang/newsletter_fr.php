@@ -7,16 +7,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_suscribe' => 'M\'inscrire à la Newsletter',
-	'bouton_unsuscribe' => 'Me désinscrire de la Newsletter',
+	'bouton_subscribe' => 'M\'inscrire à la Newsletter',
+	'bouton_unsubscribe' => 'Me désinscrire de la Newsletter',
 
 	// L
-	'label_email_suscribe' => 'Email',
-	'label_email_unsuscribe' => 'Email',
+	'label_email_subscribe' => 'Email',
+	'label_email_unsubscribe' => 'Email',
 
 	// S
-	'suscribe_message_ok' => 'Votre inscription avec l\'adresse @email@ a bien été prise en compte',
-	'unsuscribe_message_ok' => 'L\'adresse @email@ a été désinscrite de la Newsletter',
+	'subscribe_message_ok' => 'Votre inscription avec l\'adresse @email@ a bien été prise en compte',
+	'unsubscribe_message_ok' => 'L\'adresse @email@ a été désinscrite de la Newsletter',
 
 
 );

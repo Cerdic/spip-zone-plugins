@@ -1,0 +1,9 @@
+<h1 class="grostitre"><:mailsubscriber:titre_mailsubscribers:></h1>
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/mailsubscribers, par=email, env, ajax, sinon=<:mailsubscriber:info_aucun_mailsubscriber:>}>
+
+[(#AUTORISER{creer,mailsubscriber})
+	[(#URL_ECRIRE{mailsubscriber_edit,new=oui}|icone_verticale{<:mailsubscriber:icone_creer_mailsubscriber:>,mailsubscriber,new,right})]
+]

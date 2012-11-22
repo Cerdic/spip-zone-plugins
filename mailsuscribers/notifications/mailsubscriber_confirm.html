@@ -1,0 +1,17 @@
+[(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<BOUCLE_susc(MAILSUBSCRIBERS){id_mailsubscriber}{statut?}{tout}>
+[(#VAL{mailsubscriber:confirmsubscribe_sujet_email}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]
+
+# <:mailsubscriber:confirmsubscribe_titre_email:>
+
+Bonjour[ (#NOM)],
+
+<:mailsubscriber:confirmsubscribe_texte_email_1{email=#EMAIL,nom_site_spip=#NOM_SITE_SPIP,url_site_spip=#URL_SITE_SPIP}:>
+
+#SET{url,#EMAIL|mailsubscriber_url_confirm{#JETON}|url_absolue}
+<:mailsubscriber:confirmsubscribe_texte_email_2{url_confirmsubscribe=#GET{url}}:>
+
+
+<:mailsubscriber:confirmsubscribe_texte_email_3{nom_site_spip=#NOM_SITE_SPIP,url_site_spip=#URL_SITE_SPIP}:>
+</BOUCLE_susc>
+#FILTRE{supprimer_tags|filtrer_entites|trim}
