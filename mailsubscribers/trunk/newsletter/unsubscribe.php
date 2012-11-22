@@ -53,7 +53,7 @@ function newsletter_unsubscribe_dist($email,$options = array()){
 			// si il y a d'autres inscriptions, on ne laisse que celles-ci
 			$restantes = array();
 			foreach ($listes as $l){
-				if ($l!=="newsletter" AND strncmp($l,'newsletter::',12)!==0)
+				if (strncmp($l,'newsletter::',12)!==0)
 					$restantes[] = $l;
 			}
 			if (count($restantes)){

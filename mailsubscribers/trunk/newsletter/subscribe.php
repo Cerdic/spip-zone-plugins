@@ -95,11 +95,18 @@ function newsletter_subscribe_dist($email,$options = array()){
 		}
 	}
 	else {
-		if (!$row['listes'] AND !isset($set['listes']))
-			$set['listes'] = mailsubscribers_normaliser_nom_liste();
+		$row['listes'] = explode(',',$row['listes']);
+		if (!isset($set['listes'])){
+			// filtrer les listes de newsletter pour voir si l'abonne est abonne a quelque chose
+			$listes = array_map('mailsuscribers_filtre_liste',$row['listes']);
+			$listes = array_filter($listes);
+			// sinon l'abonner a la liste par defaut
+			if (!count($listes))
+				$set['listes'] = mailsubscribers_normaliser_nom_liste();
+		}
 		// si c'est un inscrit existant faire les mises a jour des listes si besoins
 		if (isset($set['listes'])){
-			$set['listes'] = array_merge(explode(',',$row['listes']),explode(',',$set['listes']));
+			$set['listes'] = array_merge($row['listes'],explode(',',$set['listes']));
 			$set['listes'] = array_map('trim',$set['listes']);
 			$set['listes'] = array_unique($set['listes']);
 			$set['listes'] = array_filter($set['listes']);

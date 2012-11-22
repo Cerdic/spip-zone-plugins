@@ -28,16 +28,20 @@ function newsletter_subscribers_dist($listes = array(),$options = array()){
 	$select = "email,nom,listes,lang,'on' AS status,jeton";
 	$where = array('statut='.sql_quote('valide'));
 	$limit = "";
-	if ($listes AND is_array($listes)){
-		$sous_where = array();
-		foreach ($listes as $l){
-			$l = mailsubscribers_normaliser_nom_liste($l);
-			$sous_where[] = "listes REGEXP ".sql_quote('(,|^)'.$l.'(,|$)');
-		}
-		if (count($sous_where)){
-			$sous_where = "(".implode(" OR ",$sous_where).")";
-			$where[] = $sous_where;
-		}
+
+	// si pas de liste precisee : liste newsletter par defaut (newsletter::newsletter)
+	if (!$listes OR !is_array($listes)){
+		$listes = array(mailsubscribers_normaliser_nom_liste());
+	}
+
+	$sous_where = array();
+	foreach ($listes as $l){
+		$l = mailsubscribers_normaliser_nom_liste($l);
+		$sous_where[] = "listes REGEXP ".sql_quote('(,|^)'.$l.'(,|$)');
+	}
+	if (count($sous_where)){
+		$sous_where = "(".implode(" OR ",$sous_where).")";
+		$where[] = $sous_where;
 	}
 
 	// si simple comptage
@@ -54,16 +58,4 @@ function newsletter_subscribers_dist($listes = array(),$options = array()){
 	$rows = array_map('mailsubscribers_informe_subscriber',$rows);
 
 	return $rows;
-}
-
-/**
- * Informer un subscriber : ici juste l'url unsubscribe a calculer
- * @param array $infos
- * @return array mixed
- */
-function mailsubscribers_informe_subscriber($infos){
-	$infos['listes'] = explode(',',$infos['listes']);
-	$infos['url_unsubscribe'] = mailsubscriber_url_unsubscribe($infos['email'],$infos['jeton']);
-	unset($infos['jeton']);
-	return $infos;
 }

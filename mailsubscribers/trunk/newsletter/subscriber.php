@@ -8,6 +8,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+include_spip('inc/mailsubscribers');
 include_spip('mailsubscribers_fonctions');
 
 /**
@@ -31,7 +32,6 @@ function newsletter_subscriber_dist($email){
 	// chercher si un tel email est deja en base
 	$infos = sql_fetsel('email,nom,listes,lang,statut,jeton','spip_mailsubscribers','email='.sql_quote($email));
 	if ($infos){
-		$infos['listes'] = explode(",",$infos['listes']);
 		if ($infos['statut']=='valide')
 			$infos['status']=='on';
 		elseif (in_array($infos['statut'],array('prepa','prop'))){
@@ -42,8 +42,7 @@ function newsletter_subscriber_dist($email){
 		}
 		unset($infos['statut']);
 
-		$infos['url_unsubscribe'] = mailsubscriber_url_unsubscribe($infos['email'],$infos['jeton']);
-		unset($infos['jeton']);
+		$infos = mailsubscribers_informe_subscriber($infos);
 
 		return $infos;
 	}
