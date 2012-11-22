@@ -10,6 +10,8 @@ include_spip('inc/meta');
 include_spip('base/create');
 
 function commandes_upgrade($nom_meta_base_version, $version_cible){
+    include_spip('commandes_fonctions');
+    include_spip('inc/config');
 	$current_version = "0.0";
 	if ( (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){

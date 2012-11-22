@@ -2,7 +2,7 @@
 	<nom>Commandes</nom>
 	<auteur>[Ateliers CYM->http://www.cym.fr], [Les D&#233;veloppements Durables->http://www.ldd.fr], [Matthieu Marcillaud->http://magraine.net]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.5.3</version>
+	<version>1.0.0</version>
 	<version_base>0.3</version_base>
 	<etat>dev</etat>
     
@@ -70,7 +70,7 @@
 		<url>configurer_commandes</url>
 	</bouton>
 
-	<necessite id="SPIP" version="[2.1.10;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.10;3.0.99]" />
 	<necessite id="saisies" version="[1.18.2;]" />
 	<necessite id="prix" version="[0.1.0;]" />
 </plugin>

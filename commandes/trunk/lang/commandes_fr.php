@@ -115,6 +115,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_retour' => 'Retournée',
 	'statut_retour_partiel' => 'Retour partiel',
 	'supprimer' => 'Supprimer',
+	
+    //T
+    'texte_changer_statut_commande'=>'Cette commande est :',
 
 	// U
 	'une_commande_de' => 'Une commande de : ',
