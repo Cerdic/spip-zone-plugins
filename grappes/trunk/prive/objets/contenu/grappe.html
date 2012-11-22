@@ -10,10 +10,12 @@
 	<span dir='#LANG_DIR' class='acces'><BOUCLE_options(DATA){source table, #OPTIONS|unserialize|table_valeur{acces}}{", "}>[(#VALEUR|traduire_statut_auteur)]</BOUCLE_options></span>
 </div>
 
-[<div class="champ contenu_liaisons[ (#LIAISONS*|strlen|?{'',vide})]">
+<div class="champ contenu_liaisons[ (#LIAISONS*|strlen|?{'',vide})]">
 	<label><:grappes:label_liaisons:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{liaisons} liaisons'>(#LIAISONS)</span>
-</div>]
+	<span dir='#LANG_DIR' class='#EDIT{liaisons} liaisons'>
+	<BOUCLE_liaisons(DATA){source table,#LIAISONS|explode{","}}{", "}>[(#VALEUR|objet_info{texte_objets}|_T)]</BOUCLE_liaisons>
+	</span>
+</div>
 
 [<div class="champ contenu_type[ (#TYPE*|strlen|?{'',vide})]">
 	<label><:grappes:label_type:> : </label>
