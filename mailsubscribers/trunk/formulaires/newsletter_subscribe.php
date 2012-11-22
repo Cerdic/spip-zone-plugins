@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Declarer les champs postes et y integrer les valeurs par defaut
  */
-function formulaires_newsletter_subscribe_charger_dist(){
+function formulaires_newsletter_subscribe_charger_dist($listes=''){
 	$valeurs = array(
 		'session_email' => ''
 	);
@@ -26,7 +26,7 @@ function formulaires_newsletter_subscribe_charger_dist(){
 /**
  * Verifier les champs postes et signaler d'eventuelles erreurs
  */
-function formulaires_newsletter_subscribe_verifier_dist(){
+function formulaires_newsletter_subscribe_verifier_dist($listes=''){
 
 	$erreurs = array();
 	if (!$email = _request('session_email')){
@@ -43,14 +43,18 @@ function formulaires_newsletter_subscribe_verifier_dist(){
 /**
  * Traiter les champs postes
  */
-function formulaires_newsletter_subscribe_traiter_dist(){
+function formulaires_newsletter_subscribe_traiter_dist($listes=''){
 
 	// langue par defaut lors de l'inscription : la langue courante dans la page
-	$lang = $GLOBALS['spip_lang'];
+	$options = array('lang'=>$GLOBALS['spip_lang']);
 	$email = _request('session_email');
+	if ($listes AND is_string($listes))
+		$listes = explode(',',$listes);
+	if ($listes AND is_array($listes) AND count($listes))
+		$options['listes'] = $listes;
 
 	$newsletter_subscribe = charger_fonction("subscribe","newsletter");
-	$newsletter_subscribe($email,array('lang'=>$lang));
+	$newsletter_subscribe($email,$options);
 
 	set_request('email');
 	return array('message_ok'=>_T('newsletter:subscribe_message_ok',array('email'=>$email)),'editable'=>true);

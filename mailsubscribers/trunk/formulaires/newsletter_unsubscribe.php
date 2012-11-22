@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Declarer les champs postes et y integrer les valeurs par defaut
  */
-function formulaires_newsletter_unsubscribe_charger_dist(){
+function formulaires_newsletter_unsubscribe_charger_dist($listes=''){
 	$valeurs = array(
 		'email' => ''
 	);
@@ -22,7 +22,7 @@ function formulaires_newsletter_unsubscribe_charger_dist(){
 /**
  * Verifier les champs postes et signaler d'eventuelles erreurs
  */
-function formulaires_newsletter_unsubscribe_verifier_dist(){
+function formulaires_newsletter_unsubscribe_verifier_dist($listes=''){
 
 	$erreurs = array();
 	if (!$email = _request('email_unsubscribe')){
@@ -39,13 +39,18 @@ function formulaires_newsletter_unsubscribe_verifier_dist(){
 /**
  * Traiter les champs postes
  */
-function formulaires_newsletter_unsubscribe_traiter_dist(){
+function formulaires_newsletter_unsubscribe_traiter_dist($listes=''){
 
 	// langue par defaut lors de l'inscription : la langue courante dans la page
 	$email = _request('email_unsubscribe');
+	$options = array();
+	if ($listes AND is_string($listes))
+		$listes = explode(',',$listes);
+	if ($listes AND is_array($listes) AND count($listes))
+		$options['listes'] = $listes;
 
 	$newsletter_unsubscribe = charger_fonction("unsubscribe","newsletter");
-	$newsletter_unsubscribe($email);
+	$newsletter_unsubscribe($email, $options);
 
 	set_request('email_unsubscribe');
 	return array('message_ok'=>_T('newsletter:unsubscribe_message_ok',array('email'=>$email)),'editable'=>true);
