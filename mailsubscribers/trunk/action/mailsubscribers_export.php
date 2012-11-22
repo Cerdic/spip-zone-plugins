@@ -34,12 +34,12 @@ function action_mailsubscribers_export_dist($statut=null){
 
 
 	$entetes = array(
-		_T('mailsubscriber:label_email'),
-		_T('mailsubscriber:label_nom'),
-		_T('mailsubscriber:label_lang'),
-		_T('public:date'),
-		_T('mailsubscriber:label_statut'),
-		_T('mailsubscriber:label_listes'),
+		'email',
+		'nom',
+		'lang',
+		'date',
+		'statut',
+		'listes',
 	);
 
 	$titre = _T('mailsubscriber:titre_mailsubscribers')."-".$GLOBALS['meta']['nom_site']."-".date('Y-m-d');
