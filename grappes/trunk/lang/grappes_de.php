@@ -9,29 +9,33 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bouton_ajouter' => 'Hinzuf&uuml;gen',
-'bouton_chercher' => 'Suchen',
 'bouton_checkbox_qui_administrateurs' => 'Administratoren',
+'bouton_checkbox_qui_id_admin' => 'Traube angelegt von (Ihnen?)',
 'bouton_checkbox_qui_redacteurs' => 'Redakteure',
+'bouton_chercher' => 'Suchen',
 
 // D
-'delier' => 'trennen',
+'delier' => 'Trennen',
+'delier_tout' => 'Alles trennen',
 
 // I
 'icone_creation_grappe' => 'Neue Traube anlegen',
 'icone_modifier_grappe' => 'Traube bearbeiten',
 'icone_supprimer_grappe' => 'Traube l&ouml;schen',
 'icone_voir_toutes_grappes' => 'Alle Trauben zeigen',
-'info_acces_0minirezo' => 'Administratoren',
-'info_acces_1comite' => 'Redakteure',
-'info_changer_nom_grappe' => 'Name der Traube &auml;ndern',
+'info_1_grappe' => '1 Traube',
+'info_aucune_grappe' => 'Keine Traube',
+'info_changer_nom_grappe' => 'Name der Traube ändern',
 'info_creation_grappes' => 'Trauben aus Elementen zusammenstellen oder bearbeiten',
 'info_grappes_association' => 'Welche Objekte kann man in die Traube einf&uuml;gen?',
-'info_lier_auteurs' => 'Autoren',
+'info_grappes_miennes' => 'Meine Trauben',
+'info_grappes_toutes' => 'Alle Trauben',
 'info_lier_articles' => 'Artikel',
+'info_lier_auteurs' => 'Autoren',
 'info_lier_breves' => 'Meldungen',
 'info_lier_documents' => 'Dokumente',
-'info_lier_mots' => 'Schlagworte',
 'info_lier_grappes' => 'Trauben',
+'info_lier_mots' => 'Schlagworte',
 'info_lier_rubriques' => 'Rubriken',
 'info_lier_sites' => 'Websites',
 'info_lier_syndic' => 'Websites',
@@ -50,6 +54,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_groupes_association_syndic' => 'Websites',
 
 // L
+'label_acces' => 'Zugang',
+'label_liaisons' => 'Objekte',
+'label_type' => 'Typ',
 'lier' => 'Verbinden',
 
 // P
@@ -59,6 +66,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_descriptif' => 'Beschreibung',
 
 'titre_grappe' => 'Trauben',
+'titre_grappes' => 'Trauben',
+'titre_logo_grappe' => 'Logo der Traube',
 'titre_nouvelle_grappe' => 'Neue Traube',
 'titre_page_grappes' => 'Trauben',
 
