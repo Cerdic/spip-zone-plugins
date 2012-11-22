@@ -18,14 +18,18 @@ function exec_edit_don() {
 	} else {
 		include_spip ('inc/navigation_modules');
 		$id_don = association_passeparam_id('don');
+		$id_auteur = association_passeparam_id('auteur');
 		onglets_association('titre_onglet_dons', 'dons');
 		// INTRO : resume don
 		echo association_totauxinfos_intro('', 'don', $id_don);
 		// datation et raccourcis
 		raccourcis_association('');
 		debut_cadre_association('dons-24.gif', 'dons_titre_mise_a_jour');
-		echo recuperer_fond('prive/editer/editer_asso_dons', array (
-			'id_don' => $id_don
+		echo recuperer_fond('prive/editer/editer_asso_dons',
+				    array (
+					   'id_don' => $id_don,
+					   'id_auteur' => $id_auteur
+									    
 		));
 		fin_page_association();
 	}

@@ -91,10 +91,8 @@ function exec_adherent() {
 		if ($GLOBALS['association_metas']['pc_cotisations']) {
 			$t = _T('asso:adherent_titre_historique_cotisations');
 			echo debut_cadre_relief('', TRUE, '', $t);
-			if ($full)
-				// si on a l'autorisation admin,
-				// placer un bouton pour ajouter une cotisation
-				echo '<p> <a href="' .generer_url_ecrire('ajout_cotisation', "id=$id_auteur").'">' . _T('asso:adherent_label_ajouter_cotisation') .'</a> '. association_bouton_paye('ajout_cotisation','id='.$id_auteur, '') .' </p>';
+			if (autoriser('ajouter_cotisation', 'association'))
+				echo '<p> <a href="' .generer_url_ecrire('ajout_cotisation', "id_auteur=$id_auteur").'">' . _T('asso:adherent_label_ajouter_cotisation') .'</a> '. association_bouton_paye('ajout_cotisation','id_auteur='.$id_auteur, '') .' </p>';
 			echo voir_adherent_cotisations($id_auteur, $full);
 			echo fin_cadre_relief(TRUE);
 		}
@@ -111,6 +109,8 @@ function exec_adherent() {
 			echo fin_cadre_relief(TRUE);
 		} if ($GLOBALS['association_metas']['dons']) {
 			$t = _T('asso:adherent_titre_historique_dons');
+			if (autoriser('editer_don', 'association'))
+				echo '<p> <a href="' .generer_url_ecrire('edit_don', "id_auteur=$id_auteur").'">' . _T('asso:ajouter_un_don') .'</a> '. association_bouton_paye('edit_don','id_auteur='.$id_auteur, '') .' </p>';
 			echo debut_cadre_relief('', TRUE, '', $t);
 			echo voir_adherent_dons($id_auteur, $full);
 			echo fin_cadre_relief(TRUE);

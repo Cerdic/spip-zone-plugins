@@ -17,7 +17,7 @@ function action_editer_asso_dons() {
 	$erreur = '';
 	$date_don = association_recuperer_date('date_don');
 	$bienfaiteur = _request('nom');
-	$id_auteur = association_recuperer_entier('id_aauteur');
+	$id_auteur = association_recuperer_entier('id_auteur');
 	if (!$bienfaiteur) {
 		$bienfaiteur = association_formater_idnom($id_auteur, array('spip_asso_membres'), '');
 	}
@@ -47,7 +47,7 @@ function action_editer_asso_dons() {
 			// modification du don en nature
 			$association_imputation = charger_fonction('association_imputation', 'inc');
 			$err2 = association_modifier_operation_comptable($date_don, $valeur, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:colis'),'num'=>$id_don) ) .$ref_don, $GLOBALS['association_metas']['pc_colis'], '', $id_don, sql_getfetsel('id_compte', 'spip_asso_comptes', $association_imputation('pc_colis', $id_don)) );
-			$erreur = ($err1?:$err1:$err2);
+			$erreur = ($err1?$err1:$err2);
 		}
 		if (!$erreur) // on modifie les informations relatives au don
 			sql_updateq('spip_asso_dons', $modifs, "id_don=$id_don");
