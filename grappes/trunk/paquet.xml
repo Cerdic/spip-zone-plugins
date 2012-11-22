@@ -13,6 +13,7 @@
 	<!-- Regrouper des objets Spip dans un même univers -->
 
 	<auteur>Matthieu Marcillaud</auteur>
+	<auteur>b_b</auteur>
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/grappes.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/grappes.php" />
