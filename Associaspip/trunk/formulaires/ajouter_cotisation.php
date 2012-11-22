@@ -15,7 +15,7 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/autoriser');
 
-function formulaires_ajouter_cotisation_charger_dist($id_auteur, $nom_prenom, $id_categorie, $validite) {
+function formulaires_ajouter_cotisation_charger_dist($id_auteur, $nom_prenom, $id_categorie, $validite, $editable) {
 	if ($id_categorie) { // si le membre a une categorie
 		$categorie = sql_fetsel('duree, prix_cotisation', 'spip_asso_categories', "id_categorie=". intval($id_categorie));
 		list($annee, $mois, $jour) = explode('-', $validite);
@@ -29,6 +29,7 @@ function formulaires_ajouter_cotisation_charger_dist($id_auteur, $nom_prenom, $i
 		$contexte['montant'] = 0;
 	} // validite et montant de cotisation
 	$contexte['justification'] = _T('asso:cotisation') ." [$nom_prenom"."->membre$id_auteur]"; // la justification
+	$contexte['readonly'] = $editable ? '' : ' readonly="readonly"';
 	$contexte['_action'] = array('ajouter_cotisation',$id_auteur); // pour passer securiser action
 	association_chargeparam_destinations('cotisations', $contexte); // les destinations
 

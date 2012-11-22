@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_ajout_cotisation() {
-	$r = association_controle_id('auteur', 'asso_membres', 'editer_membres');
+	$r = association_controle_id('auteur', 'asso_membres', 'ajouter_cotisation');
 	if ($r) {
 		include_spip('inc/navigation_modules');
 		list($id_auteur, $membre) = $r;
@@ -33,6 +33,7 @@ function exec_ajout_cotisation() {
 			'nom_prenom' => association_formater_nom($membre['sexe'], $membre['prenom'], $membre['nom_famille']),
 			'categorie' => $membre['id_categorie'],
 			'validite' => $membre['date_validite'],
+			'editable' => autoriser('editer_compta', 'association')
 		));
 		fin_page_association();
 	}

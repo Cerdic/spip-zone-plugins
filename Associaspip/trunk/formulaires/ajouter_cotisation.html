@@ -9,7 +9,7 @@
 			<li class="editer_date">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date})</span>]
 				<label for="saisie_date"><:asso:date_du_paiement_aaaa_mm_jj:></label>
-				<input type="[(#HTML5|?{date,text})]" name="date" [value="(#ENV{date}|affdate{Y-m-d})"] id="saisie_date" class="date" />
+				<input type="[(#HTML5|?{date,text})]" name="date" [value="(#ENV{date}|affdate{Y-m-d})"] id="saisie_date" class="date"#ENV{readonly} />
 			</li>
 			<li class="editer_montant">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{montant})</span>]
@@ -20,7 +20,7 @@
 			<li class="editer_justification">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{justification})</span>]
 				<label for="saisie_justification"><:asso:libelle_jusfification:></label>
-				<input type="text" name="justification" [value="(#ENV{justification})"] id="saisie_justification"  class="text" />
+				<input type="text" name="justification" [value="(#ENV{justification})"] id="saisie_justification"  class="text"#ENV{readonly} />
 			</li>
 		]
 		[(#META{/association/classe_banques}|et{#META{/association/comptes}}|non)
@@ -31,7 +31,7 @@
 			<li class="editer_validite">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{validite})</span>]
 				<label for="saisie_validite"><:asso:validite:></label>
-				<input type="[(#HTML5|?{date,text})]" name="validite" [value="(#ENV{validite})"] id="saisie_validite"  class="date" />
+				<input type="[(#HTML5|?{date,text})]" name="validite" [value="(#ENV{validite})"] id="saisie_validite"  class="date"#ENV**{readonly} />
 			</li>
 		</ul>
 		<p class="boutons">

@@ -97,12 +97,11 @@ function association_editeur_destinations($destinations, $defaut='') {
 	    }
 	    $n = " name='id_dest[1]' id='id_dest[1]'";
 	    if ((count($options) == 1) AND $GLOBALS['association_metas']['unique_dest']) {
-	      $sel = "<input$n readonly='readonly' value='$id' /> ($texte)";
+	      $sel = "<input$n readonly='readonly' value='$id' /> $texte";
 	    } else $sel = "<select$n>" . join("\n", $options) . '</select>';
 	    $res = "<div id='row1' class='choix'><ul>\n<li class='editer_id_dest[1]'>$sel\n</li>";
 	    if (!$GLOBALS['association_metas']['unique_dest']) { // destinations multiples
-		$res .= '<li class="editer_montant_dest[1]"><input name="montant_dest[1]" value="'
-		    .'" type="text" id="montant_dest[1]"/></li>'
+		$res .= '<li class="editer_montant_dest[1]"><input name="montant_dest[1]" id="montant_dest[1]"/></li>'
 		    . '</ul><button class="destButton" type="button" onclick="addFormField(); return FALSE;">+</button>';
 	    }
 	    $res .= '</div>';
