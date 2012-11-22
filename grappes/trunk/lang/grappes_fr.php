@@ -9,10 +9,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bouton_ajouter' => 'Ajouter',
-'bouton_chercher' => 'Chercher',
 'bouton_checkbox_qui_administrateurs' => 'Les administrateurs',
 'bouton_checkbox_qui_id_admin' => 'Le créateur de la grappe (Vous?)',
 'bouton_checkbox_qui_redacteurs' => 'Les rédacteurs',
+'bouton_chercher' => 'Chercher',
 
 // D
 'delier' => 'Délier',
@@ -20,8 +20,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'icone_creation_grappe' => 'Créer une nouvelle grappe',
-'info_grappes_toutes' => 'Toutes les grappes',
-'info_grappes_miennes' => 'Mes grappes',
 'icone_modifier_grappe' => 'Modifier cette grappe',
 'icone_supprimer_grappe' => 'Supprimer cette grappe',
 'icone_voir_toutes_grappes' => 'Voir toutes les grappes',
@@ -30,12 +28,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_changer_nom_grappe' => 'Changer le nom de la grappe',
 'info_creation_grappes' => 'Créer ou modifier des grappes d\'éléments',
 'info_grappes_association' => 'Quels objets peut on lier à la grappe ?',
-'info_lier_auteurs' => 'Auteurs',
+'info_grappes_miennes' => 'Mes grappes',
+'info_grappes_toutes' => 'Toutes les grappes',
 'info_lier_articles' => 'Articles',
+'info_lier_auteurs' => 'Auteurs',
 'info_lier_breves' => 'Breves',
 'info_lier_documents' => 'Documents',
-'info_lier_mots' => 'Mots',
 'info_lier_grappes' => 'Grappes',
+'info_lier_mots' => 'Mots',
 'info_lier_rubriques' => 'Rubriques',
 'info_lier_sites' => 'Sites',
 'info_lier_syndic' => 'Sites',
