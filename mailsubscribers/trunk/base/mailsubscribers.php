@@ -29,7 +29,7 @@ function mailsubscribers_declarer_tables_objets_sql($tables) {
 		'principale' => "oui",
 		'field'=> array(
 			"id_mailsubscriber"   => "bigint(21) NOT NULL",
-			"email"              => "text NOT NULL DEFAULT ''",
+			"email"              => "varchar(256) NOT NULL DEFAULT ''",
 			"nom"                => "text NOT NULL DEFAULT ''",
 			"listes"             => "text NOT NULL DEFAULT ''",
 			"optin"              => "text NOT NULL DEFAULT ''",
@@ -41,7 +41,7 @@ function mailsubscribers_declarer_tables_objets_sql($tables) {
 		),
 		'key' => array(
 			"PRIMARY KEY"        => "id_mailsubscriber",
-			"UNIQUE email"           => "email",
+			"UNIQUE email"           => "email(256)",
 			"KEY lang"           => "lang",
 			"KEY statut"         => "statut",
 		),

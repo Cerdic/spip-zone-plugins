@@ -16,6 +16,9 @@ function notifications_instituermailsubscriber_dist($quoi, $id_mailsubscriber, $
 		spip_log("statut inchange",'notifications');
 		return;
 	}
+	// desactivable
+	if (isset($GLOBALS['instituermailsubscriber_status']) AND !$GLOBALS['instituermailsubscriber_status'])
+		return;
 
 	include_spip('inc/texte');
 
