@@ -5,6 +5,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_importer' => 'Importer',
+	'bouton_previsu_importer' => 'Prévisualiser',
+
 	// C
 	'confirmsubscribe_sujet_email' => '[@nom_site_spip@] Confirmation d\'inscription à la Newsletter',
 	'confirmsubscribe_titre_email' => 'Confirmation d\'inscription à la Newsletter',
@@ -22,6 +27,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_mailsubscriber' => '1 inscrit à la newsletter',
 	'info_aucun_mailsubscriber' => 'Aucun inscrit à la newsletter',
 	'info_nb_mailsubscribers' => '@nb@ inscrits à la newsletter',
+	'info_1_adresse_a_importer' => '1 adresse à importer',
+	'info_nb_adresses_a_importer' => '@nb@ adresses à importer',
 	'info_statut_prepa' => 'pas inscrit',
 	'info_statut_prop' => 'en attente',
 	'info_statut_valide' => 'inscrit',
@@ -36,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_optin' => 'Opt-in',
 	'label_statut' => 'Statut',
 	'label_mailsubscriber_optin' => 'Je veux recevoir la Newsletter',
+	'label_file_import' => 'Fichier à importer',
 
 	// S
 	'subscribe_sujet_email' => '[@nom_site_spip@] Inscription à la Newsletter',
@@ -57,6 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_ajouter_mailsubscriber' => 'Ajouter un inscrit à la newsletter',
+	'texte_avertissement_import' => 'Une colonne <tt>statut</tt> est fournie : les données seront importées telles quelles, en ecrasant celles qui peuvent déjà exister pour certains email.',
 	'texte_changer_statut_mailsubscriber' => 'Cet inscrit à la newsletter est :',
 	'titre_langue_mailsubscriber' => 'Langue de cet inscrit',
 	'titre_logo_mailsubscriber' => 'Logo de cet inscrit',
@@ -64,6 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_mailsubscribers' => 'Inscrits à la newsletter',
 	'titre_export_mailsubscribers' => 'Exporter les inscrits',
 	'titre_export_mailsubscribers_all' => 'Exporter toutes les adresses',
+	'titre_import_mailsubscribers' => 'Importer des adresses',
 
 
 	'texte_statut_pas_encore_inscrit' => 'pas inscrit',

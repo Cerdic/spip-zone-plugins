@@ -11,6 +11,10 @@
 [(#PLUGIN{spip_bonux}|oui)
 [(#URL_ACTION_AUTEUR{mailsubscribers_export,valide}|icone_horizontale{<:mailsubscriber:titre_export_mailsubscribers:>,mailsubscriber-24,export})]
 [(#URL_ACTION_AUTEUR{mailsubscribers_export,all}|icone_horizontale{<:mailsubscriber:titre_export_mailsubscribers_all:>,mailsubscriber-24,export})]
+
+[(#AUTORISER{importer,mailsubscriber}|et{#ENV{importer,''}|non})
+[(#SELF|parametre_url{importer,oui}|icone_horizontale{<:mailsubscriber:titre_import_mailsubscribers:>,mailsubscriber-24,import})]
+]
 ]
 #BOITE_FERMER
 ]

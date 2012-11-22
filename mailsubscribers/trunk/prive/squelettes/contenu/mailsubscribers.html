@@ -7,3 +7,10 @@
 [(#AUTORISER{creer,mailsubscriber})
 	[(#URL_ECRIRE{mailsubscriber_edit,new=oui}|icone_verticale{<:mailsubscriber:icone_creer_mailsubscriber:>,mailsubscriber,new,right})]
 ]
+
+[(#ENV{importer,''}|oui)
+<div class="nettoyeur"></div>
+<div class="ajax">
+	#FORMULAIRE_IMPORTER_MAILSUBSCRIBERS
+</div>
+]

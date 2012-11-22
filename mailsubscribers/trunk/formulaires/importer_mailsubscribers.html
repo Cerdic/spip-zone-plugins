@@ -1,0 +1,34 @@
+<div class='formulaire_spip formulaire_importer formulaire_#FORM'>
+	<h3 class="titrem"><:mailsubscriber:titre_import_mailsubscribers:></h3>
+	[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</div>]
+	[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype="multipart/form-data"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			#SET{fl,mailsubscriber}
+			#SET{name,file_import}#SET{obli,#ENV**{erreurs/test,''}|?{'',obligatoire}}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="file" name="#GET{name}" class="file text" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+			</li>
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:mailsubscriber:bouton_previsu_importer|attribut_html:>' /></p>
+
+		[
+		<ul>
+			<li class="fieldset">
+				<div style="width: 100%;overflow:auto;">
+				(#ENV**{erreurs/test}|propre)
+				</div>
+			</li>
+		</ul>
+		<p class="boutons"><input type='submit' class='submit' name='go' value='<:mailsubscriber:bouton_importer|attribut_html:>' /></p>
+		]
+	</div></form>
+	]
+</div>
