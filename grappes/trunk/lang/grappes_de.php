@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'autoriser_associer_non' => 'Die Aktion d&uuml;fen sie nicht ausf&uuml;hren.',
 
 // B
-'bouton_ajouter' => 'Hinzuf&uuml;gen',
+'bouton_ajouter' => 'Hinzufügen',
 'bouton_checkbox_qui_administrateurs' => 'Administratoren',
 'bouton_checkbox_qui_id_admin' => 'Traube angelegt von (Ihnen?)',
 'bouton_checkbox_qui_redacteurs' => 'Redakteure',
@@ -21,13 +21,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // I
 'icone_creation_grappe' => 'Neue Traube anlegen',
 'icone_modifier_grappe' => 'Traube bearbeiten',
-'icone_supprimer_grappe' => 'Traube l&ouml;schen',
+'icone_supprimer_grappe' => 'Traube löschen',
 'icone_voir_toutes_grappes' => 'Alle Trauben zeigen',
 'info_1_grappe' => '1 Traube',
 'info_aucune_grappe' => 'Keine Traube',
 'info_changer_nom_grappe' => 'Name der Traube ändern',
 'info_creation_grappes' => 'Trauben aus Elementen zusammenstellen oder bearbeiten',
-'info_grappes_association' => 'Welche Objekte kann man in die Traube einf&uuml;gen?',
+'info_grappes_association' => 'Welche Objekte kann man in die Traube einfügen?',
 'info_grappes_miennes' => 'Meine Trauben',
 'info_grappes_toutes' => 'Alle Trauben',
 'info_lier_articles' => 'Artikel',
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_lier_sites' => 'Websites',
 'info_lier_syndic' => 'Websites',
 'info_nom_grappe' => 'Name der Taube',
-'info_qui_peut_lier' => 'Wer kann Elemente zur Taube hinzuf&uuml;gen?',
+'info_qui_peut_lier' => 'Wer kann Elemente zur Taube hinzufügen?',
 'info_rechercher' => 'Suchen', // neue Elemente für eine Traube
 
 'item_groupes_association_articles' => 'Artikel',
