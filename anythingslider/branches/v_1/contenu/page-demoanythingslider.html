@@ -1,0 +1,40 @@
+[(#REM)
+  Copie du 2012-03-13 18:24:35 par François Rygaert
+  Fichier original plugins/anythingslider/contenu/page-demoanythingslider.html
+]
+<B_liste_articles>
+<div id="liste anythingslider articles">
+  <h2 class="h2">A la une</h2>
+  <ul id="slider1">
+  <BOUCLE_liste_articles(ARTICLES){par date}{0,10}>
+  <li class="item hentry" style="width:100%;">
+    <h3 class="h3 entry-title"><a href="#URL_ARTICLE" rel="bookmark">
+      [(#LOGO_ARTICLE|image_reduire{150})]<span>#TITRE</span>
+    </a></h3>
+    [<div class="info-publi"><abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr></div>]
+    [<div class="introduction entry-content">(#INTRODUCTION)</div>]
+    <div class="meta-publi">
+      <a class="lire-la-suite" href="#URL_ARTICLE"><:zpip:lire_la_suite:><span class="lire-la-suite-titre"><:zpip:lire_la_suite_de:> <em>#TITRE</em></span></a>
+    </div>
+  </li>
+  </BOUCLE_liste_articles>
+  </ul>
+</div>
+<script type="text/javascript">// <![CDATA[
+  $(document).ready(function(){
+    $('ul.#slider1').anythingSlider({
+      expand: false,
+      resizeContents: false,
+      startText : "Start",
+      stopText : "Stop",
+      theme : 'simple', // Si la CSS du theme n'a pas ete activee dans le formulaire de config, le theme par defaut sera utilise.
+      buildArrows: true,
+      buildNavigation: true,
+      buildStartStop: false,
+      toggleControls: false,
+      autoPlay: true,
+      delay : 2000
+    });
+  });
+ //]]></script>
+</B_liste_articles>
