@@ -23,8 +23,11 @@ function formulaires_editer_asso_dons_charger_dist($id_don=0, $id_auteur=0) {
 	association_chargeparam_destinations('dons', $contexte);
 
 	// paufiner la presentation des valeurs
-	if (!$contexte['id_auteur'])
+	if (!$contexte['id_auteur'] AND is_numeric($id_auteur)) {
 		$contexte['id_auteur']= $id_auteur;
+		$contexte['nom']= sql_getfetsel('nom', 'spip_auteurs', "id_auteur=$id_auteur");
+		$contexte['auteur_fixe']= true;
+	}
 	if ($contexte['argent'])
 		$contexte['argent'] = association_formater_nombre($contexte['argent']);
 	if ($contexte['valeur'])

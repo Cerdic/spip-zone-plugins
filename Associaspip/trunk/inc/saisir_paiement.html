@@ -18,10 +18,7 @@ remarques:
 
 maj:2012-10-15; version:0.2.1; licence:GPL; copyleft:Jeannot Lapin, Marcel Bolla; -->
 ]#CACHE{0}[
-<fieldset>
-    <legend>(#ENV{champs_legende})</legend>
-    <ul>
-][(#REM) reperer d'abord l'erreur de mode de paiement absent)
+(#REM) reperer d'abord l'erreur de mode de paiement absent)
 ]<BOUCLE_mode_paiement_v(ASSO_PLAN) {active=1}{classe=#META{/association/classe_banques}}{code!=#META{/association/pc_intravirements}}{0,1}>
 <li id="saisie_mode_paiement" class="editer_journal [(#ENV{type_operation}|affichage_div{charges-produits-banques})]">
 	<label for="journal">
@@ -48,8 +45,4 @@ maj:2012-10-15; version:0.2.1; licence:GPL; copyleft:Jeannot Lapin, Marcel Bolla
 </BOUCLE_mode_paiement_v>
 <li><span class="erreur_message"><:asso:erreur_pas_de_classe_financiere:></span>
 <//B_mode_paiement_v>
-</li>[
-(#ENV{champs_legende}|oui)
-    </ul>
-</fieldset>
-]
+</li>

@@ -34,8 +34,8 @@
 // Produit automatiquement par le plugin LangOnet a partir de la langue source fr
 // Module: asso
 // Langue: fr
-// Date: 08-11-2012 08:15:45
-// Items: 834
+// Date: 23-11-2012
+// Items: 835
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
@@ -251,6 +251,7 @@ Commentaire: @commentaire@
 	'avoir_initial' => 'Avoir initial',
 
 // B
+	'bienfaiteur' => 'Bienfaiteur',
 	'bilan' => 'Bilan',
 	'bilan_depenses' => 'D&eacute;penses',
 	'bilan_recettes' => 'Recettes',
@@ -535,7 +536,7 @@ Commentaire: @commentaire@
 	'direction_plan' => 'Type d\'op&eacute;rations',
 	'disposition_des_etiquettes' => 'Espace entre &eacute;tiquettes hauteur',
 	'don' => 'Don',
-	'don_financier_en_e__' => 'Don financier (en &euro;)',
+	'don_financier_en_e__' => 'Don (en &euro;)',
 	'dons_aide_contrepartie' => 'Les dons avec contrepartie ne donnent pas lieu &agrave; de r&eacute;duction fiscale...',
 	'dons_en_argent' => 'Dons financiers',
 	'dons_en_nature' => 'Dons mat&eacute;riels',

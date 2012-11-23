@@ -24,7 +24,7 @@ function exec_edit_don() {
 		echo association_totauxinfos_intro('', 'don', $id_don);
 		// datation et raccourcis
 		raccourcis_association('');
-		debut_cadre_association('dons-24.gif', 'dons_titre_mise_a_jour');
+		debut_cadre_association('dons-24.gif', $id_don ? 'dons_titre_mise_a_jour' : 'ajouter_un_don');
 		echo recuperer_fond('prive/editer/editer_asso_dons',
 				    array (
 					   'id_don' => $id_don,
