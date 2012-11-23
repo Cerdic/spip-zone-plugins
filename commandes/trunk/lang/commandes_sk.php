@@ -118,6 +118,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_retour_partiel' => 'Čiastočne vrátiť',
 	'supprimer' => 'Odstrániť',
 
+	// T
+	'texte_changer_statut_commande' => 'Cette commande est :', # NEW
+
 	// U
 	'une_commande_de' => 'Objednávka: ',
 	'une_commande_sur' => 'Vaša objednávka – @nom@',
