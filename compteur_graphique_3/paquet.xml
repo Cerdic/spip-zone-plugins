@@ -2,7 +2,7 @@
   prefix="compteurgraphique"
   categorie="statistique"
   version="0.5.0"
-  etat="stable"
+  etat="dev"
   compatibilite="[3.0.0;3.0.99]"
   logo="prive/themes/spip/images/CompteurGraphique.gif"
   documentation="http://www.spip-contrib.net/Plugin-Compteur-Graphique"
