@@ -17,7 +17,8 @@ function mailsubscribers_upgrade($nom_meta_base_version, $version_cible) {
 
 	$maj['create'] = array(
 		array('maj_tables', array('spip_mailsubscribers')),
-		array('mailsubscribers_import_from_spiplistes')
+		array('mailsubscribers_import_from_spiplistes'),
+		array('mailsubscribers_import_from_mesabonnes'),
 	);
 
 
@@ -59,7 +60,7 @@ function mailsubscribers_import_from_spiplistes(){
 			}
 			mailsubscriber_import_one($email,$set);
 			sql_updateq("spip_auteurs_elargis",array('imported'=>1),"id_auteur=".intval($row['id_auteur']));
-			spip_log("import $email ".var_export($set,true),"mailsubscribers");
+			spip_log("import from spip_listes $email ".var_export($set,true),"mailsubscribers");
 
 			// timeout ? on reviendra
 			if (time() >= _TIME_OUT)
@@ -68,6 +69,41 @@ function mailsubscribers_import_from_spiplistes(){
 		sql_alter("TABLE spip_auteurs_elargis DROP imported");
 	}
 }
+
+
+function mailsubscribers_import_from_mesabonnes(){
+	$trouver_table = charger_fonction("trouver_table","base");
+	if ($trouver_table('spip_mesabonnes')){
+
+		include_spip("inc/mailsubscribers");
+
+
+		include_spip("action/editer_objet");
+		sql_alter("TABLE spip_mesabonnes ADD imported tinyint NOT NULL DEFAULT 0");
+		$res = sql_select('id_abonne,email,nom,date_modif as date,statut','spip_mesabonnes',"imported=0");
+		while ($row = sql_fetch($res)){
+			$email = $row['email'];
+
+			$set = array(
+				'nom' => $row['nom'],
+				'date' => $row['date'],
+				'statut' => $row['statut'],
+			);
+			if ($set['statut']=='0') $set['statut'] = 'prepa';  // precaution
+			if ($set['statut']=='publie') $set['statut'] = 'valide';
+			mailsubscriber_import_one($email,$set);
+
+			sql_updateq("spip_mesabonnes",array('imported'=>1),"id_abonne=".intval($row['id_abonne']));
+			spip_log("import from mesabonnes $email ".var_export($set,true),"mailsubscribers");
+
+			// timeout ? on reviendra
+			if (time() >= _TIME_OUT)
+				return;
+		}
+		sql_alter("TABLE spip_mesabonnes DROP imported");
+	}
+}
+
 
 function mailsubscriber_import_one($email,$set){
 	$GLOBALS['instituermailsubscriber_status'] = false;
