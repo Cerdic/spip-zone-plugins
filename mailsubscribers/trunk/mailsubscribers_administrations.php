@@ -20,6 +20,7 @@ function mailsubscribers_upgrade($nom_meta_base_version, $version_cible) {
 		array('mailsubscribers_import_from_spiplistes'),
 		array('mailsubscribers_import_from_mesabonnes'),
 		array('mailsubscribers_import_from_spiplettres'),
+		array('mailsubscribers_import_from_clevermail'),
 	);
 
 
@@ -177,6 +178,57 @@ function mailsubscribers_import_from_spiplettres(){
 	}
 }
 
+
+function mailsubscribers_import_from_clevermail(){
+	$trouver_table = charger_fonction("trouver_table","base");
+	if ($desc = $trouver_table('spip_cm_subscribers')
+	  AND $trouver_table('spip_cm_lists_subscribers')
+	  AND $trouver_table('spip_cm_lists')
+	  ){
+
+		include_spip("inc/mailsubscribers");
+
+		// reperer les listes
+		$rows = sql_allfetsel("lst_id,lst_name","spip_cm_lists");
+		$listes = array();
+		foreach ($rows as $row){
+			$listes[$row['lst_id']] = mailsubscribers_normaliser_nom_liste($row['lst_id']."-".strtolower($row['titre']));
+		}
+
+
+		include_spip("action/editer_objet");
+		sql_alter("TABLE spip_cm_subscribers ADD imported tinyint NOT NULL DEFAULT 0");
+		$res = sql_select('sub_id,sub_email AS email','spip_cm_subscribers',"imported=0");
+		while ($row = sql_fetch($res)){
+			$email = $row['email'];
+			$set = array();
+			$set['statut'] = 'valide';
+
+			$ll = sql_allfetsel("lst_id","spip_cm_lists_subscribers","sub_id=".intval($row['sub_id']));
+			if (count($ll)){
+				$set['listes'] = array();
+				while ($l = array_shift($ll))
+					$set['listes'][] = $listes[$l['lst_id']];
+				$set['listes'] = implode(',',$set['listes']);
+			}
+			else {
+				// un abonnement suspendu est passe en md5(email)@example.com
+				if (strpos($email,'@example.com')!==false)
+					$set['statut'] = 'refuse';
+				else
+					$set['statut'] = 'prepa';
+			}
+			mailsubscriber_import_one($email,$set);
+			sql_updateq("spip_cm_subscribers",array('imported'=>1),"sub_id=".intval($row['sub_id']));
+			spip_log("import from clevermail $email ".var_export($set,true),"mailsubscribers");
+
+			// timeout ? on reviendra
+			if (time() >= _TIME_OUT)
+				return;
+		}
+		sql_alter("TABLE spip_cm_subscribers DROP imported");
+	}
+}
 
 
 function mailsubscriber_import_one($email,$set){
