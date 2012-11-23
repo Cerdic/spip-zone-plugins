@@ -8,6 +8,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
+include_spip('inc/mailsubscribers');
 include_spip('inc/editer');
 
 /**
@@ -22,6 +23,8 @@ function formulaires_editer_mailsubscriber_identifier_dist($id_mailsubscriber='n
  */
 function formulaires_editer_mailsubscriber_charger_dist($id_mailsubscriber='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('mailsubscriber',$id_mailsubscriber,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+	$valeurs['listes'] = explode(',',$valeurs['listes']);
+	$valeurs['_listes_dispo'] = mailsubscribers_listes();
 	return $valeurs;
 }
 
@@ -29,17 +32,20 @@ function formulaires_editer_mailsubscriber_charger_dist($id_mailsubscriber='new'
  * Verifier les champs postes et signaler d'eventuelles erreurs
  */
 function formulaires_editer_mailsubscriber_verifier_dist($id_mailsubscriber='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	$erreurs = formulaires_editer_objet_verifier('mailsubscriber',$id_mailsubscriber, array('email'));
+	$erreurs = formulaires_editer_objet_verifier('mailsubscriber',$id_mailsubscriber, array('email','listes'));
 	if (!isset($erreurs['email'])){
 		$email = _request('email');
 		// verifier que l'email est valide
 		if (!email_valide($email))
 			$erreurs['email'] = _T('info_email_invalide');
 		else {
-			if (sql_countsel('spip_mailsubscribers','email='.sql_quote($email))>0)
+			// verifier que l'email n'est pas deja dans la base si c'est une tentative de creation
+			if (!intval($id_mailsubscriber) AND sql_countsel('spip_mailsubscribers','email='.sql_quote($email))>0)
 				$erreurs['email'] = _T('mailsubscriber:erreur_adresse_existante');
 		}
 	}
+	if (count($erreurs) AND !_request('listes'))
+		set_request('listes',array(''));
 	return $erreurs;
 }
 
@@ -48,6 +54,7 @@ function formulaires_editer_mailsubscriber_verifier_dist($id_mailsubscriber='new
  */
 function formulaires_editer_mailsubscriber_traiter_dist($id_mailsubscriber='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	set_request('lang',_request('langue'));
+	set_request('listes',implode(',',_request('langue')));
 	return formulaires_editer_objet_traiter('mailsubscriber',$id_mailsubscriber,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 }
 

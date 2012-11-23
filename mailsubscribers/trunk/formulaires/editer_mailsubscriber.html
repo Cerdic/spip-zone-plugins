@@ -29,7 +29,13 @@
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]#INCLURE{fond=formulaires/inc-select-langue,name=#GET{name},defaut=#GET{defaut},env}
 			</li>
-
+			#SET{name,listes}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				<INCLURE{fond=formulaires/inc-check-subscribinglists,name=#GET{name},choix_listes=#ENV{_listes_dispo},status=open,env} />
+			</li>
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->

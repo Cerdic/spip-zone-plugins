@@ -50,9 +50,75 @@ function mailsubscribers_informe_subscriber($infos){
 	return $infos;
 }
 
+/**
+ * Filtrer une liste a partir de sa category
+ * @param $liste
+ * @param string $category
+ * @return string
+ *   chaine vide si la liste n'est pas dans la category
+ *   nom de la liste sans le prefix de la category si ok
+ */
 function mailsuscribers_filtre_liste($liste,$category="newsletter"){
 	if (strncmp($liste,"$category::",$l=strlen("$category::"))==0){
 		return substr($liste,$l);
 	}
 	return '';
+}
+
+/**
+ * Renvoi les listes de diffusion disponibles avec leur status
+ * (open,close,?)
+ *
+ * @param array $options
+ *   category : filtrer les listes par category (dans ce cas la categorie est enlevee de l'id)
+ *   status : filtrer les listes sur le status
+ * @return array
+ *   listes
+ */
+function mailsubscribers_listes($options = array()){
+	$filtrer_status = $filtrer_category = false;
+	if (isset($options['status']))
+		$filtrer_status = $options['status'];
+
+	$listes = array();
+
+	// d'abord les listes connues en config
+	if ($known_lists = lire_config("mailsubscribers/lists",array())
+		AND is_array($known_lists)
+		AND count($known_lists)){
+
+		foreach ($known_lists as $kl){
+			$id = $kl['id'];
+			if (!$filtrer_category OR $id=mailsuscribers_filtre_liste($id,$filtrer_category)){
+				$status = ($kl['status']=='open'?'open':'close');
+				if (!$filtrer_status OR $filtrer_status==$status) {
+					$listes[$id] = array(
+						'titre' => $kl['titre'],
+						'status' => $status
+					);
+				}
+			}
+		}
+	}
+
+	// puis trouver toutes les listes qui existent en base et non connues en config
+	// pas la peine si on a demande de filtrer les listes open ou close
+	if ($filtrer_status!=='?') {
+		$rows = sql_allfetsel("DISTINCT listes","spip_mailsubscribers","statut=".sql_quote('valide'));
+		foreach ($rows as $row){
+			$ll = explode(",",$row['listes']);
+			foreach($ll as $l){
+
+				if ($id=$l
+					AND (
+						!$filtrer_category OR $id=mailsuscribers_filtre_liste($l,$filtrer_category)
+					)){
+					if (!isset($listes[$id]))
+						$listes[$id] = array('titre'=>$id,'status'=>'?');
+				}
+			}
+		}
+	}
+
+	return $listes;
 }
