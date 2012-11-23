@@ -16,7 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return string
  */
 function mailsubscribers_normaliser_nom_liste($liste='', $category="newsletter"){
-	$category = trim(preg_replace(",\W,","",$category));
+	$category = strtolower(trim(preg_replace(",\W,","",$category)));
 
 	if (!$liste)
 		return "$category::$category"; // valeur fixe en cas de reantrance
@@ -25,8 +25,11 @@ function mailsubscribers_normaliser_nom_liste($liste='', $category="newsletter")
 		$liste = explode("::",$liste);
 		return mailsubscribers_normaliser_nom_liste($liste[1],$liste[0]);
 	}
+	include_spip("inc/charsets");
+	$liste = translitteration($liste);
+	$liste = strtolower($liste);
 
-	$liste = trim(preg_replace(",\W,","",$liste));
+	$liste = trim(preg_replace(",[^\w-],","",$liste));
 	$liste = "$category::$liste";
 	return $liste;
 }

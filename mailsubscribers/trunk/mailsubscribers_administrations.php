@@ -19,6 +19,7 @@ function mailsubscribers_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables', array('spip_mailsubscribers')),
 		array('mailsubscribers_import_from_spiplistes'),
 		array('mailsubscribers_import_from_mesabonnes'),
+		array('mailsubscribers_import_from_spiplettres'),
 	);
 
 
@@ -48,6 +49,7 @@ function mailsubscribers_import_from_spiplistes(){
 		$res = sql_select('A.id_auteur,A.email,A.nom,E.spip_listes_format','spip_auteurs as A JOIN spip_auteurs_elargis AS E ON E.id_auteur=A.id_auteur',"imported=0");
 		while ($row = sql_fetch($res)){
 			$email = $row['email'];
+			$set = array();
 			$set['statut'] = ($row['spip_listes_format']=="non"?'refuse':'valide');
 			$set['nom'] = $row['nom'];
 
@@ -103,6 +105,78 @@ function mailsubscribers_import_from_mesabonnes(){
 		sql_alter("TABLE spip_mesabonnes DROP imported");
 	}
 }
+
+
+function mailsubscribers_import_from_spiplettres(){
+	$trouver_table = charger_fonction("trouver_table","base");
+	if ($trouver_table('spip_abonnes')
+	  AND $trouver_table('spip_desabonnes')
+	  AND $trouver_table('spip_abonnes_rubriques')
+	){
+
+		include_spip("inc/mailsubscribers");
+
+		// reperer les listes
+		$rubs = sql_allfetsel("DISTINCT id_rubrique","spip_abonnes_rubriques","statut=".sql_quote('valide'));
+		$rubs = array_map('reset',$rubs);
+		$listes = array();
+		$rows = sql_allfetsel("id_rubrique,titre","spip_rubriques",sql_in('id_rubrique',$rubs));
+		foreach ($rows as $row){
+			$listes[$row['id_rubrique']] = mailsubscribers_normaliser_nom_liste($row['id_rubrique']."-".strtolower($row['titre']));
+		}
+
+
+		include_spip("action/editer_objet");
+
+		// les abonnes
+		sql_alter("TABLE spip_abonnes ADD imported tinyint NOT NULL DEFAULT 0");
+		$res = sql_select('id_abonne,email,nom','spip_abonnes',"imported=0");
+		while ($row = sql_fetch($res)){
+			$email = $row['email'];
+			$set = array(
+				'nom' => $row['nom'],
+				'statut' => 'valide',
+			);
+
+			$ll = sql_allfetsel("id_rubrique","spip_abonnes_rubriques","id_abonne=".intval($row['id_abonne'])." AND statut=".sql_quote('valide'));
+			if (count($ll)){
+				$set['listes'] = array();
+				while ($l = array_shift($ll))
+					$set['listes'][] = $listes[$l['id_rubrique']];
+				$set['listes'] = implode(',',$set['listes']);
+			}
+			else
+				$set['statut'] = 'prepa'; // aucune liste ? pas un vrai abonne en fait !
+			mailsubscriber_import_one($email,$set);
+			sql_updateq("spip_abonnes",array('imported'=>1),"id_abonne=".intval($row['id_abonne']));
+			spip_log("import from spip_lettres $email ".var_export($set,true),"mailsubscribers");
+
+			// timeout ? on reviendra
+			if (time() >= _TIME_OUT)
+				return;
+		}
+
+		// les desabonnes
+		sql_alter("TABLE spip_desabonnes ADD imported tinyint NOT NULL DEFAULT 0");
+		$res = sql_select('id_desabonne,email','spip_desabonnes',"imported=0");
+		while ($row = sql_fetch($res)){
+			$email = $row['email'];
+			$set = array(
+				'statut' => 'refuse',
+			);
+			mailsubscriber_import_one($email,$set);
+			sql_updateq("spip_desabonnes",array('imported'=>1),"id_desabonne=".intval($row['id_desabonne']));
+			spip_log("import from spip_lettres $email ".var_export($set,true),"mailsubscribers");
+
+			// timeout ? on reviendra
+			if (time() >= _TIME_OUT)
+				return;
+		}
+		sql_alter("TABLE spip_abonnes DROP imported");
+		sql_alter("TABLE spip_desabonnes DROP imported");
+	}
+}
+
 
 
 function mailsubscriber_import_one($email,$set){
