@@ -1,7 +1,7 @@
 <paquet
 	prefix="twidget"
 	categorie="communication"
-	version="0.5.0"
+	version="0.5.1"
 	etat="stable"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/twidget-32.png"
@@ -11,4 +11,8 @@
 	<!-- Un widget Twitter facile a installer -->
 
 	<auteur lien="http://www.yterium.net">C&#233;dric Morin</auteur>
+
+    <menu nom="menu_twidget" titre="twidget:titre_twidget" parent="bando_squelette" icone="images/twidget-16.png" action="configurer_twidget" />
+
 </paquet>
+        

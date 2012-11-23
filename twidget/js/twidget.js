@@ -1,6 +1,9 @@
 /*
  * twitter-text-js 1.4.10
  *
+ * La version d'origine non compactée étant ici : https://github.com/twitter/twitter-text-js
+ *
+ *
  * Copyright 2011 Twitter, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

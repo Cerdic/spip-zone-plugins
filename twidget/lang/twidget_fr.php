@@ -1,26 +1,40 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/twidget/lang/
+// extrait automatiquement de http://trad.spip.net/tradlang_module/paquet-twidget?lang_cible=en
+// ** ne pas modifier le fichier **
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	
-	'nom_noisette_twidget'=>'Noisette twidget',
-	'description_noisette_twidget'=>'Paramétrez la noisette twidget pour Twitter',
-	'noisette_label_width_twidget'=>'Largeur',
-	'noisette_label_shell_background_twidget'=>'Couleur du cadre',
-	'noisette_label_shell_color_twidget'=>'Couleur du texte',
-	'noisette_label_tweets_background_twidget'=>'Couleur fond des tweets',
-	'noisette_label_tweets_color_twidget'=>'Couleur des tweets',
-	'noisette_label_tweets_links_twidget'=>'Couleur des liens des tweets',
-	'noisette_label_demande'=>'Choisissez le type de compte',
-	'noisette_demande_twidget_profile'=>'Compte avec un nom d\'utilisateur',
-	'noisette_demande_twidget_search'=>'Compte avec un mot recherché',
-	'noisette_label_user_twidget_profile'=>'Un nom d\'utilisateur',
-	'label_avatar_true_false'=>'Pour afficher les avatars entrer true ou false',
-	'noisette_label_search_twidget_search'=>'La recherche comme #SPIP',
-	'noisette_label_title_twidget_search'=>'Le titre de votre recherche',
-	'noisette_label_subject_twidget_search'=>'Le sujet de votre recherche comme SPIP',
+
+
+	'explication_commun_fieldset' => "Configuration Nécessaire à l'utilisation du plugin Twitdget. Partie commune entre le widget profil et le widget recherche",
+	'explication_recherche_fieldset' => "Configuration pour le widget de recherche",
+	'explication_profil_fieldset' => "Configuration Nécessaire à l'utilisation du widget profil ",
+
+	'label_search' => "Recherche. Terme recherché, l'usage de tweeter implique souvent de précéder le terme par un # ",
+	'label_interval' => "Intervalle de temps après lequel la page tweeter est rechargée",
+	'label_subject' => "Sujet de la fenêtre tweete",
+	'label_title' => "Titre de la fenêtre",
+	'label_width' => "Largeur de la fenêtre",
+	'label_height' => "Hauteur de la fenêtre",
+	'label_shell_background' => "Couleur de fond de la fenêtre tweeter",
+	'label_shell_color' => "Couleur du texte",
+	'label_tweets_background' => "Couleur fond tweet",
+	'label_tweets_color' => "Couleur de fond des tweet",
+	'label_tweets_link' => "Couleur des liens",
+	'label_rpp' => "Nombre de résultats par page",
+	'label_user' => "Utilisateur twitter (ne pas précéder du @)",
+
+	'legend_commun_fieldset' => "Configuration Commune",
+	'legend_recherche_fieldset' => "Recherche",
+	'legend_profil_fieldset' => "Profil",
+
+
+	// T
+	'titre_config' => "Configuration du plugin Twidget",
+	'titre_twidget' => "Twidget",
+	'titre_configuration' => "Configuration du plugin Twidget"
 );
 
 ?>

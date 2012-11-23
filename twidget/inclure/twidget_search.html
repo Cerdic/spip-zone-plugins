@@ -17,21 +17,21 @@ var twidget_rien='#CHEMIN{rien.gif}';
 new TWTR.Widget({
 	version: 2,
 	type: 'search',
-	search: '[(#ENV{search,#CONFIG{twidget/search,#spip}}|texte_script)]',
-	interval: [(#ENV{interval,#CONFIG{twidget/interval,6000}}|intval)],
-	title: '[(#ENV{title,#CONFIG{twidget/title,Du nouveau sur twitter}}|texte_script)]',
-	subject: '[(#ENV{subject,#CONFIG{twidget/subject,SPIP}}|texte_script)]',
-	width: [(#ENV{width,#CONFIG{twidget/width,250}}|intval)],
-	height: [(#ENV{height,#CONFIG{twidget/height,300}}|intval)],
+	search: '[(#ENV{search,#CONFIG{twidget/search}}|texte_script)]',
+	interval: [(#ENV{interval,#CONFIG{twidget/interval}}|intval)],
+	title: '[(#ENV{title,#CONFIG{twidget/title}}|texte_script)]',
+	subject: '[(#ENV{subject,#CONFIG{twidget/subject}}|texte_script)]',
+	width: [(#ENV{width,#CONFIG{twidget/width}}|intval)],
+	height: [(#ENV{height,#CONFIG{twidget/height}}|intval)],
 	theme: {
 		shell: {
-			background: '[(#ENV{shell_background,#CONFIG{twidget/shell_background,#8ec1da}}|texte_script)]',
-			color: '[(#ENV{shell_color,#CONFIG{twidget/shell_color,#ffffff}}|texte_script)]'
+			background: '[(#ENV{shell_background,#CONFIG{twidget/shell_background}}|texte_script)]',
+			color: '[(#ENV{shell_color,#CONFIG{twidget/shell_color}}|texte_script)]'
 		},
 		tweets: {
-			background: '[(#ENV{tweets_background,#CONFIG{twidget/tweets_background,#ffffff}}|texte_script)]',
-			color: '[(#ENV{tweets_color,#CONFIG{twidget/tweets_color,#444444}}|texte_script)]',
-			links: '[(#ENV{tweets_links,#CONFIG{twidget/tweets_links,#1986b5}}|texte_script)]'
+			background: '[(#ENV{tweets_background,#CONFIG{twidget/tweets_background}}|texte_script)]',
+			color: '[(#ENV{tweets_color,#CONFIG{twidget/tweets_color}}|texte_script)]',
+			links: '[(#ENV{tweets_links,#CONFIG{twidget/tweets_links}}|texte_script)]'
 		}
 	},
 	features: {
