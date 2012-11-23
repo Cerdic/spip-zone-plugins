@@ -3,8 +3,8 @@
 	<slogan>Int&#233;gration d'un fil twitter</slogan>
 	<auteur>Dr Abdou, Mr Waz</auteur>
 	<licence>&#169; 2009 LGPL</licence>
-	<version>1.0.0</version>
-	<icon></icon>
+	<version>1.1.0</version>
+	<icon>twitter-bird.png</icon>
 	<etat>stable</etat>
 	<description>
 [jQuery plugin for Twitter par Damien du Toit->http://coda.co.za/blog/2008/10/26/jquery-plugin-for-twitter] 
