@@ -180,6 +180,7 @@ function mailsubscribers_import_from_spiplettres(){
 
 
 function mailsubscriber_import_one($email,$set){
+	if (!$email) return false;
 	$GLOBALS['instituermailsubscriber_status'] = false;
 	if ($id = sql_getfetsel("id_mailsubscriber","spip_mailsubscribers","email=".sql_quote($email))){
 		objet_modifier("mailsubscriber",$id,$set);

@@ -45,6 +45,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mailsubscriber_optin' => 'Je veux recevoir la Newsletter',
 	'label_file_import' => 'Fichier à importer',
 
+	// M
+	'mailsubscribers_tous' => 'Tous',
+	'mailsubscribers_valide' => 'Actifs',
+	'mailsubscribers_prepa' => 'Non inscrits',
+	'mailsubscribers_prop' => 'A confirmer',
+	'mailsubscribers_refuse' => 'Désinscrits',
+	'mailsubscribers_poubelle' => 'Supprimés',
+
 	// S
 	'subscribe_sujet_email' => '[@nom_site_spip@] Inscription à la Newsletter',
 	'subscribe_titre_email' => 'Inscription à la Newsletter',
