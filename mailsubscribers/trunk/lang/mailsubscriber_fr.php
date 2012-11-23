@@ -47,9 +47,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'mailsubscribers_tous' => 'Tous',
-	'mailsubscribers_valide' => 'Actifs',
+	'mailsubscribers_valide' => 'Inscrits',
 	'mailsubscribers_prepa' => 'Non inscrits',
-	'mailsubscribers_prop' => 'A confirmer',
+	'mailsubscribers_prop' => 'À confirmer',
 	'mailsubscribers_refuse' => 'Désinscrits',
 	'mailsubscribers_poubelle' => 'Supprimés',
 
