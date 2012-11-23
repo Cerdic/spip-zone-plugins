@@ -8,12 +8,12 @@ function tweetnspip_insert_head($flux){
 		$config = array();
 	$config = array_merge(array(
 		'username' => 'MrWaz',
-    'numtweets' => '5',    
-    'loadertext' => 'Charge les tweets...',
-    'slidein' => 'true',
-    'showheading' => 'true',
-    'headingtext' => 'Derniers tweets',
-    'showprofilelink' => 'true'
+		'numtweets' => '5',
+		'loadertext' => 'Charge les tweets...',
+		'slidein' => 'true',
+		'showheading' => 'true',
+		'headingtext' => 'Derniers tweets',
+		'showprofilelink' => 'true'
 	), $config);
 	// Insertion des librairies js
 	$flux .='<script src="'.url_absolue(find_in_path('javascript/jquery.twitter.js')).'" type="text/javascript"></script>';

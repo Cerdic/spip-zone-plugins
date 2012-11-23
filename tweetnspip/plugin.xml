@@ -15,14 +15,14 @@ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEA
 	<lien>http://www.wakzine.com</lien>
 	<categorie>communication</categorie>
 	<prefix>tweetnspip</prefix>
-	<necessite id="SPIP" version="[2.0;2.1.99]" />
-	<utilise id="cfg" version="[1.12;]" />
+	<necessite id="SPIP" version="[2.0;3.0.99]" />
+	<utilise id="bonux" version="[2.2;]" />
 	<fonctions>tweetnspip_fonctions.php</fonctions>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>tweetnspip_pipelines.php</inclure>
 	</pipeline>
-		<pipeline>
+	<pipeline>
 		<nom>header_prive</nom>
 		<action>insert_head</action>
 		<inclure>tweetnspip_pipelines.php</inclure>
