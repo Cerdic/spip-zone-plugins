@@ -18,3 +18,17 @@
 ]
 #BOITE_FERMER
 ]
+
+
+<!-- Filtrer par listes de diffusion -->
+<B_listes>
+	<div class="listes">
+		<h3>Listes</h3>
+	<ul class="liste-items">
+		<li class="item[(#ENV{liste}|non)on]">[(#SELF|parametre_url{liste,' '}|lien_ou_expose{Toutes,#ENV{liste}|trim|non})]</li>
+	<BOUCLE_listes(POUR){tableau #REM|mailsubscribers_listes}>
+		<li class="item[(#ENV{liste}|=={#CLE}|oui)on]">[(#SELF|parametre_url{liste,#CLE}|lien_ou_expose{#VALEUR{titre},#ENV{liste}|=={#CLE}})]</li>
+	</BOUCLE_listes>
+	</ul>
+	</div>
+</B_listes>
