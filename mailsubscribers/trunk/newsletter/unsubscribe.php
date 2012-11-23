@@ -45,6 +45,7 @@ function newsletter_unsubscribe_dist($email,$options = array()){
 			$set['listes'] = implode(",",$listes);
 			if (!count($listes)){
 				$set['statut'] = "refuse";
+				$set['email'] = md5($email)."@example.org";
 			}
 		}
 		else {
@@ -61,6 +62,7 @@ function newsletter_unsubscribe_dist($email,$options = array()){
 			}
 			else {
 				$set['statut'] = "refuse";
+				$set['email'] = mailsubscribers_obfusquer_email($email);
 			}
 		}
 

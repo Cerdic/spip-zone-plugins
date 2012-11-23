@@ -213,8 +213,10 @@ function mailsubscribers_import_from_clevermail(){
 			}
 			else {
 				// un abonnement suspendu est passe en md5(email)@example.com
-				if (strpos($email,'@example.com')!==false)
+				if (strpos($email,'@example.com')!==false){
 					$set['statut'] = 'refuse';
+					$email = str_replace("@example.com","@example.org",$email);
+				}
 				else
 					$set['statut'] = 'prepa';
 			}
@@ -234,7 +236,8 @@ function mailsubscribers_import_from_clevermail(){
 function mailsubscriber_import_one($email,$set){
 	if (!$email) return false;
 	$GLOBALS['instituermailsubscriber_status'] = false;
-	if ($id = sql_getfetsel("id_mailsubscriber","spip_mailsubscribers","email=".sql_quote($email))){
+	if ($id = sql_getfetsel("id_mailsubscriber","spip_mailsubscribers","email=".sql_quote($email)." OR email=".sql_quote(mailsubscribers_obfusquer_email($email)))){
+		$set['email'] = $email; // si mail obfusque
 		objet_modifier("mailsubscriber",$id,$set);
 		return $id;
 	}

@@ -1,3 +1,18 @@
+<!-- Filtrer par listes de diffusion -->
+<B_listes>
+	[(#BOITE_OUVRIR{<h3><:mailsubscriber:titre_listes_de_diffusion:></h3>,simple})]
+	<ul class="liste-items">
+		<li class="item[(#ENV{liste}|trim|non)on]">[(#SELF|parametre_url{liste,' '}|lien_ou_expose{<:mailsubscriber:label_toutes_les_listes:>,#ENV{liste}|trim|non})]</li>
+	<BOUCLE_listes(POUR){tableau #REM|mailsubscribers_listes}>
+		<li class="item[(#ENV{liste}|=={#CLE}|oui)on]">[(#SELF|parametre_url{liste,#CLE}|lien_ou_expose{#VALEUR{titre},#ENV{liste}|=={#CLE}})]
+		[(#SET{listes,[(^|,)(#CLE)($|,)]})]
+		<BOUCLE_cpt(MAILSUBSCRIBERS){listes==#GET{listes}}{tout} />([(#TOTAL_BOUCLE)])<//B_cpt>
+		</li>
+	</BOUCLE_listes>
+	</ul>
+	#BOITE_FERMER
+</B_listes>
+
 [(#AUTORISER{exporter,_mailsubscribers}|oui)
 #BOITE_OUVRIR{'','raccourcis'}
 [(#AUTORISER{configurer,_mailsubscribers}|oui)
@@ -19,16 +34,3 @@
 #BOITE_FERMER
 ]
 
-
-<!-- Filtrer par listes de diffusion -->
-<B_listes>
-	<div class="listes">
-		<h3>Listes</h3>
-	<ul class="liste-items">
-		<li class="item[(#ENV{liste}|non)on]">[(#SELF|parametre_url{liste,' '}|lien_ou_expose{Toutes,#ENV{liste}|trim|non})]</li>
-	<BOUCLE_listes(POUR){tableau #REM|mailsubscribers_listes}>
-		<li class="item[(#ENV{liste}|=={#CLE}|oui)on]">[(#SELF|parametre_url{liste,#CLE}|lien_ou_expose{#VALEUR{titre},#ENV{liste}|=={#CLE}})]</li>
-	</BOUCLE_listes>
-	</ul>
-	</div>
-</B_listes>

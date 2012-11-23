@@ -32,7 +32,7 @@ function formulaires_editer_mailsubscriber_charger_dist($id_mailsubscriber='new'
  * Verifier les champs postes et signaler d'eventuelles erreurs
  */
 function formulaires_editer_mailsubscriber_verifier_dist($id_mailsubscriber='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	$erreurs = formulaires_editer_objet_verifier('mailsubscriber',$id_mailsubscriber, array('email','listes'));
+	$erreurs = formulaires_editer_objet_verifier('mailsubscriber',$id_mailsubscriber, array('email'));
 	if (!isset($erreurs['email'])){
 		$email = _request('email');
 		// verifier que l'email est valide
@@ -54,7 +54,13 @@ function formulaires_editer_mailsubscriber_verifier_dist($id_mailsubscriber='new
  */
 function formulaires_editer_mailsubscriber_traiter_dist($id_mailsubscriber='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	set_request('lang',_request('langue'));
-	set_request('listes',implode(',',_request('langue')));
+	if (_request('listes'))
+		set_request('listes',implode(',',_request('listes')));
+
+	// creation : verifier qu'on retombe pas sur un email obfusque, et dans ce cas se retablir dessus
+	if (!intval($id_mailsubscriber)
+		AND $id = sql_getfetsel('id_mailsubscriber','spip_mailsubscribers',"email=".sql_quote(mailsubscribers_obfusquer_email(_request('email')))))
+		$id_mailsubscriber = $id;
 	return formulaires_editer_objet_traiter('mailsubscriber',$id_mailsubscriber,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 }
 

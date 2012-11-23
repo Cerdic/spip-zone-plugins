@@ -20,6 +20,10 @@ function mailsubscribers_pre_insertion($flux){
 		include_spip("inc/mailsubscribers");
 		if (!isset($flux['data']['listes']))
 			$flux['data']['listes'] = mailsubscribers_normaliser_nom_liste();
+		if (!isset($flux['data']['email'])){
+			include_spip("inc/acces");
+			$flux['data']['email'] = creer_uniqid(); // eviter l'eventuel echec unicite sur email vide
+		}
 	}
 	return $flux;
 }

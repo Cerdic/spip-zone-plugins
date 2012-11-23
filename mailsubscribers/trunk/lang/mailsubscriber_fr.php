@@ -24,9 +24,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_creer_mailsubscriber' => 'Ajouter une inscription',
 	'icone_modifier_mailsubscriber' => 'Modifier cette inscription',
-	'info_1_mailsubscriber' => '1 inscrit à la newsletter',
-	'info_aucun_mailsubscriber' => 'Aucun inscrit à la newsletter',
-	'info_nb_mailsubscribers' => '@nb@ inscrits à la newsletter',
+	'info_1_mailsubscriber' => '1 inscrit aux envois',
+	'info_aucun_mailsubscriber' => 'Aucun inscrit aux envois',
+	'info_nb_mailsubscribers' => '@nb@ inscrits aux envois',
 	'info_1_adresse_a_importer' => '1 adresse à importer',
 	'info_nb_adresses_a_importer' => '@nb@ adresses à importer',
 	'info_statut_prepa' => 'pas inscrit',
@@ -44,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_statut' => 'Statut',
 	'label_mailsubscriber_optin' => 'Je veux recevoir la Newsletter',
 	'label_file_import' => 'Fichier à importer',
+	'label_toutes_les_listes' => 'Toutes',
 
 	// M
 	'mailsubscribers_tous' => 'Tous',
@@ -78,10 +79,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_langue_mailsubscriber' => 'Langue de cet inscrit',
 	'titre_logo_mailsubscriber' => 'Logo de cet inscrit',
 	'titre_mailsubscriber' => 'Inscrit à la newsletter',
-	'titre_mailsubscribers' => 'Inscrits à la newsletter',
+	'titre_mailsubscribers' => 'Inscrits aux envois par email',
 	'titre_export_mailsubscribers' => 'Exporter les inscrits',
 	'titre_export_mailsubscribers_all' => 'Exporter toutes les adresses',
 	'titre_import_mailsubscribers' => 'Importer des adresses',
+	'titre_listes_de_diffusion' => 'Listes de diffusion',
 
 
 	'texte_statut_pas_encore_inscrit' => 'pas inscrit',

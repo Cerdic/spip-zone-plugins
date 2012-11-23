@@ -49,7 +49,7 @@ function newsletter_subscribe_dist($email,$options = array()){
 	}
 
 	// chercher si un tel email est deja en base
-	$row = sql_fetsel('*','spip_mailsubscribers','email='.sql_quote($email));
+	$row = sql_fetsel('*','spip_mailsubscribers','email='.sql_quote($email)." OR email=".sql_quote(mailsubscribers_obfusquer_email($email)));
 
 	// Si c'est une creation d'inscrit
 	if (!$row){
@@ -64,28 +64,7 @@ function newsletter_subscribe_dist($email,$options = array()){
 		$set['statut'] = 'prepa';
 		$set['date'] = date('Y-m-d H:i:s');
 
-		// Envoyer aux plugins
-		$champs = pipeline('pre_insertion',
-			array(
-				'args' => array(
-					'table' => 'spip_mailsubscribers',
-				),
-				'data' => $set
-			)
-		);
-
-		if ($id = sql_insertq('spip_mailsubscribers', $set)){
-
-			pipeline('post_insertion',
-				array(
-					'args' => array(
-						'table' => 'spip_mailsubscribers',
-						'id_objet' => $id,
-					),
-					'data' => $champs
-				)
-			);
-
+		if ($id = objet_inserer("mailsubscriber",0,$set)){
 			$row = sql_fetsel('*','spip_mailsubscribers','id_mailsubscriber='.intval($id));
 			$set = array();
 		}
@@ -96,6 +75,7 @@ function newsletter_subscribe_dist($email,$options = array()){
 		}
 	}
 	else {
+		$set['email'] = $email; // si email obfusque
 		// si on est graceful et que l'inscrit s'est deja desabonne, on ne fait rien
 		if ($row['statut']=='refuse'
 		  AND isset($options['graceful'])

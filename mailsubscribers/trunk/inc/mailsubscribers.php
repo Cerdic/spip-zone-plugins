@@ -34,6 +34,9 @@ function mailsubscribers_normaliser_nom_liste($liste='', $category="newsletter")
 	return $liste;
 }
 
+function mailsubscribers_obfusquer_email($email){
+	return md5($email)."@example.org";
+}
 
 /**
  * Informer un subscriber : ici juste l'url unsubscribe a calculer
@@ -79,6 +82,8 @@ function mailsubscribers_listes($options = array()){
 	$filtrer_status = $filtrer_category = false;
 	if (isset($options['status']))
 		$filtrer_status = $options['status'];
+	if (isset($options['category']))
+		$filtrer_category = $options['category'];
 
 	$listes = array();
 
@@ -93,6 +98,7 @@ function mailsubscribers_listes($options = array()){
 				$status = ($kl['status']=='open'?'open':'close');
 				if (!$filtrer_status OR $filtrer_status==$status) {
 					$listes[$id] = array(
+						'id' => $id,
 						'titre' => $kl['titre'],
 						'status' => $status
 					);
@@ -104,17 +110,16 @@ function mailsubscribers_listes($options = array()){
 	// puis trouver toutes les listes qui existent en base et non connues en config
 	// pas la peine si on a demande de filtrer les listes open ou close
 	if ($filtrer_status!=='?') {
-		$rows = sql_allfetsel("DISTINCT listes","spip_mailsubscribers","statut=".sql_quote('valide'));
+		$rows = sql_allfetsel("DISTINCT listes","spip_mailsubscribers","statut!=".sql_quote('poubelle'));
 		foreach ($rows as $row){
 			$ll = explode(",",$row['listes']);
 			foreach($ll as $l){
-
 				if ($id=$l
 					AND (
 						!$filtrer_category OR $id=mailsuscribers_filtre_liste($l,$filtrer_category)
 					)){
 					if (!isset($listes[$id]))
-						$listes[$id] = array('titre'=>$id,'status'=>'?');
+						$listes[$id] = array('id'=>$id,'titre'=>$id,'status'=>'?');
 				}
 			}
 		}

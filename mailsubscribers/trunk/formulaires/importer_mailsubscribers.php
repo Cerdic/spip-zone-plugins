@@ -174,7 +174,8 @@ function importer_mailsuscribers_importe($filename){
 	$data = importer_mailsubscribers_data($filename);
 	$newsletter_subscribe = charger_fonction('subscribe','newsletter');
 	include_spip('inc/filtres'); // email_valide
-	include_spip('action/editer_objet'); // email_valide
+	include_spip('action/editer_objet');
+	include_spip('inc/mailsubscribers');
 	set_request('id_auteur',''); // pas d'auteur associe a nos inscrits
 
 	foreach ($data as $d){
@@ -199,7 +200,8 @@ function importer_mailsuscribers_importe($filename){
 			else {
 				if (isset($set['listes'])) $set['listes'] = implode(',',$set['listes']);
 				if (isset($d['date'])) $set['date'] = $d['date'];
-				if ($id = sql_getfetsel("id_mailsubscriber","spip_mailsubscribers","email=".sql_quote($email))){
+				if ($id = sql_getfetsel("id_mailsubscriber","spip_mailsubscribers","email=".sql_quote($email)." OR email=".sql_quote(mailsubscribers_obfusquer_email($email)))){
+					$set['email'] = $email; // si mail obfusque
 					$set['statut'] = $d['statut'];
 					objet_modifier("mailsubscriber",$id,$set);
 					$res['count']++;

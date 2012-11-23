@@ -34,9 +34,55 @@
 					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 				</div>
 			</li>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:mailsubscriberscfg:legend_listes_diffusion:></legend>
+					#SET{tableau,#ARRAY{category,newsletter}|mailsubscribers_listes}
+					<BOUCLE_listes(POUR){tableau #GET{tableau}|array_merge{#ARRAY{new1,#LISTE,new2,#LISTE}}}>
+						#SET{index,#COMPTEUR_BOUCLE|moins{1}}
+						<ul class="liste-diffusion">
+							#SET{name,id}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/lists/#GET{index}/#GET{name}}}
+							<li class="editer editer_lists_[(#GET{index})]_#GET{name}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<label for="lists_[(#GET{index})]_#GET{name}">[(#GET{fl}|concat{':label_list_',#GET{name}}|_T)]</label>[
+								<span class='erreur_message'>(#GET{erreurs})</span>
+								]<input type="text" name="lists[#GET{index}][#GET{name}]" class="text" value="#ENV*{lists/#GET{index}/#GET{name},#VALEUR{#GET{name}}}" id="lists_[(#GET{index})]_#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+							</li>
+							#SET{name,titre}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/lists/#GET{index}/#GET{name}}}
+							<li class="editer editer_lists_[(#GET{index})]_#GET{name}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<label for="lists_[(#GET{index})]_#GET{name}">[(#GET{fl}|concat{':label_list_',#GET{name}}|_T)]</label>[
+								<span class='erreur_message'>(#GET{erreurs})</span>
+								]<input type="text" name="lists[#GET{index}][#GET{name}]" class="text" value="#ENV*{lists/#GET{index}/#GET{name},#VALEUR{#GET{name}}}" id="lists_[(#GET{index})]_#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+							</li>
+							#SET{name,status}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/lists/#GET{index}/#GET{name}}}
+							<li class="editer editer_lists_[(#GET{index})]_#GET{name}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<label for="lists_[(#GET{index})]_#GET{name}">[(#GET{fl}|concat{':label_list_',#GET{name}}|_T)]</label>[
+								<span class='erreur_message'>(#GET{erreurs})</span>
+								]
+								#SET{val,open}
+								<div class="choix left">
+									<input type="radio" name="lists[#GET{index}][#GET{name}]" class="radio" id="lists_[(#GET{index})]_#GET{name}_#GET{val}" value="#GET{val}"[(#ENV*{lists/#GET{index}/#GET{name},#VALEUR{#GET{name}}}|=={#GET{val}}|oui)checked="checked"] />
+									<label for="lists_[(#GET{index})]_#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+								</div>
+								#SET{val,close}
+								<div class="choix right">
+									<input type="radio" name="lists[#GET{index}][#GET{name}]" class="radio" id="lists_[(#GET{index})]_#GET{name}_#GET{val}" value="#GET{val}"[(#ENV*{lists/#GET{index}/#GET{name},#VALEUR{#GET{name}}}|=={#GET{val}}|oui)checked="checked"] />
+									<label for="lists_[(#GET{index})]_#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+								</div>
+							</li>
+						</ul>
+					</BOUCLE_listes>
+				</fieldset>
+			</li>
+
 		</ul>
 
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
 	</form>
 </div>
+<style type="text/css">
+ul.liste-diffusion {border-bottom: 1px solid #eee;padding-top: 1em !important;padding-bottom: 1em !important;}
+ul.liste-diffusion .editer {padding-top: 2px;padding-bottom: 2px;}
+ul.liste-diffusion .editer .choix.left {float: left}
+ul.liste-diffusion .editer .choix.right {float: right}
+</style>
