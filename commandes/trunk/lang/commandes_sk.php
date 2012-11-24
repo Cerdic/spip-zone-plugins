@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_numero' => 'Objednávka č. ',
 	'commande_reference' => 'Číslo',
 	'commande_reference_numero' => 'Č. objednávky ',
-	'commande_statut' => 'Stav vybavenia',
+	'commande_statut' => 'Štádium',
 	'commandes_titre' => 'Objednávky',
 	'configurer_titre' => 'Nastaviť zásuvný modul Objednávka',
 	'confirmer_supprimer_commande' => 'Môžete potvrdiť odstránenie tejto objednávky?',
@@ -95,7 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'parametres_cfg_titre' => 'Parametre',
-	'parametres_duree_vie_explication' => 'Zadajte čas platnosti objednávky v tomto stave spracovania (v hodinách):',
+	'parametres_duree_vie_explication' => 'Zadajte čas platnosti objednávky v tomto štádiu spracovania (v hodinách):',
 	'parametres_duree_vie_label' => 'Čas platnosti',
 	'passer_la_commande' => 'Zadať objednávku',
 
@@ -119,7 +119,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer' => 'Odstrániť',
 
 	// T
-	'texte_changer_statut_commande' => 'Cette commande est :', # NEW
+	'texte_changer_statut_commande' => 'Táto objednávka je:',
 
 	// U
 	'une_commande_de' => 'Objednávka: ',
