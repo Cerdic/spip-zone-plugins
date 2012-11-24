@@ -14,7 +14,7 @@ _ <code>#INCLURE{fond=inclure/twidget_profile,user=GusLeLapin}</code>
  alebo <code>#INCLURE{fond=inclure/twidget_search,search=#SPIP,title=\'Sledovať na Twitteri\',subject=\'SPIP\'}</code>
 
  Zásuvný modul funguje ako proxy, aby ho mohli vaši návštevníci používať na Twitteri 
-a zabrániť možnosti sledovania ich aktivity  (ukladania ich osobných údajov).',
+a zabrániť možnosti sledovania ich aktivity  (ukladania ich osobných údajov).', # MODIF
 	'twidget_slogan' => 'Jednoduchý widget pre Twitter na nainštalovanie'
 );
 

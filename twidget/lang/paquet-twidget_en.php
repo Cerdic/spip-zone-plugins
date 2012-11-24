@@ -13,7 +13,7 @@ _ Add an include to your templates to display a Twitter widget:
 _ <code>#INCLURE{fond=inclure/twidget_profile,user=GusLeLapin}</code>
  or <code>#INCLURE{fond=inclure/twidget_search,search=#SPIP,title=\'Follow Twitter\',subject=\'SPIP\'}</code>
 
-The plugin acts as a proxy so that no request is made by your visitors to Twitter and avoid the possibility to trace their activities (preservation of personal life).',
+The plugin acts as a proxy so that no request is made by your visitors to Twitter and avoid the possibility to trace their activities (preservation of personal life).', # MODIF
 	'twidget_slogan' => 'A Twitter widget easy to install'
 );
 
