@@ -117,9 +117,16 @@ function souhaits_post_edition($flux){
 		// On calcule si l'ancien statut est considéré comme publié ou pas
 		$statut_ancien = in_array($flux['args']['statut_ancien'], $statuts_publies) ? 'publie' : 'new';
 		
-		// On calcule si le nouveau statut est considéré comme publié ou pas (s'il existe)
+		//  S'il y a changements de statut
 		$champs = $flux['data'];
 		if (isset($champs['statut'])){
+			// Si un admin a repassé manuellement un souhait en libre ou cagnotte, on vide les propositions
+			if (in_array($champs['statut'], array('libre', 'cagnotte')) and $champs['statut'] != $flux['args']['statut_ancien']){
+				include_spip('action/editer_objet');
+				objet_modifier('souhait', $flux['args']['id_objet'], array('propositions'=>''));
+			}
+			
+			// On calcule si le nouveau statut est considéré comme publié ou pas pour une rubrique
 			$champs['statut'] = in_array($champs['statut'], $statuts_publies) ? 'publie' : 'new';
 			
 			// Si les statuts sont les mêmes on ne fait rien

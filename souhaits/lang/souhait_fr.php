@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_souhait' => 'Un souhait',
 	'info_aucun_souhait' => 'Aucun souhait',
 	'info_nb_souhaits' => '@nb@ souhaits',
+	'info_reste' => 'Reste @reste@',
 	'info_souhaits_auteur' => 'Les souhaits de cet auteur',
 
 	// L
@@ -40,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'offrir_explication_libre' => 'Vous pouvez proposer d’offrir <strong>@souhait@</strong> en donnant votre nom.',
 	'offrir_message_label' => 'Un petit message ?',
 	'offrir_message_ok_merci' => 'Merci beaucoup d’avoir proposé ce cadeau.',
+	'offrir_message_ok_merci_cagnotte' => 'Merci beaucoup de participer à cette cagnotte.',
 	'offrir_nom_label' => 'Nom',
 
 	// R

@@ -39,7 +39,7 @@ function formulaires_offrir_souhait_saisies_dist($id_souhait, $retour=''){
 		),
 	);
 	
-	if ($souhait = sql_fetsel('titre,statut,propositions,prix', 'spip_souhaits', 'id_souhait = '.$id_souhait)){
+	if (include_spip('base/abstract_sql') and $souhait = sql_fetsel('titre,statut,propositions,prix', 'spip_souhaits', 'id_souhait = '.$id_souhait)){
 		$propositions = unserialize($souhait['propositions']);
 		if ($souhait['statut'] == 'libre'){
 			$explication = _T('souhait:offrir_explication_libre', array('souhait' => $souhait['titre']));
@@ -65,7 +65,7 @@ function formulaires_offrir_souhait_saisies_dist($id_souhait, $retour=''){
 				'verifier' => array(
 					'type' => 'decimal',
 					'options' => array(
-						'min' => 0,
+						'min' => 0.01,
 						'max' => $reste
 					)
 				)
@@ -111,9 +111,14 @@ function formulaires_offrir_souhait_verifier_dist($id_souhait, $retour=''){
 function formulaires_offrir_souhait_traiter_dist($id_souhait, $retour=''){
 	if ($retour){ refuser_traiter_formulaire_ajax(); }
 	include_spip('action/editer_objet');
+	include_spip('inc/session');
 	$retours = array();
 	
 	$souhait = sql_fetsel('statut, propositions, prix', 'spip_souhaits', 'id_souhait = '.$id_souhait);
+	
+	// Méga crade : on émule le fait d'être un admin (spip c nul)
+	$statut = session_get('statut');
+	session_set('statut', '0minirezo');
 	
 	// Cadeau normal
 	if ($souhait['statut'] == 'libre'){
@@ -141,8 +146,11 @@ function formulaires_offrir_souhait_traiter_dist($id_souhait, $retour=''){
 		$erreur = objet_modifier('souhait', $id_souhait, $modifs);
 	}
 	
+	// On remet l'ancien statut
+	session_set('statut', $statut);
+	
 	if ($erreur){ $retours['message_erreur'] = $erreur; }
-	else { $retours['message_ok'] = _T('souhait:offrir_message_ok_merci'); }
+	else { $retours['message_ok'] = ($souhait['statut'] == 'cagnotte') ? _T('souhait:offrir_message_ok_merci_cagnotte') : _T('souhait:offrir_message_ok_merci'); }
 	
 	return $retours;
 }

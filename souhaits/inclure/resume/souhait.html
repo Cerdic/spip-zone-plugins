@@ -15,6 +15,12 @@
 	<p class="infos">
 		[<span class="prix">
 			<i class="icon-barcode"></i> (#PRIX|>{0}|?{#PRIX}) €
+			[(#REM) Si c'est une cagnotte et qu'il y a des propositions, on affiche le reste ]
+			[(#STATUT|=={cagnotte}|et{#PROPOSITIONS|oui})
+				#SET{deja_propose, #PROPOSITIONS|unserialize|array_sum}
+				#SET{reste,#PRIX|moins{#GET{deja_propose}}|concat{" €"}}
+				<small>(<:souhait:info_reste{reste=#GET{reste}}|strtolower:>)</small>
+			]
 		</span>]
 		[(#PRIX|et{#URL_SITE})<br/>]
 		[<span class="site">
