@@ -1,0 +1,37 @@
+<plugin>
+	<nom>Export Auteurs (ExAu)</nom>
+	<auteur>Christian Paulus</auteur>
+	<licence>&#169; 2009 - MIT - GPL</licence>
+	<slogan>Exporter la liste des auteurs</slogan>
+	<description>
+Raccourci en espace priv&#233; pour exporter la table des auteurs.
+_ Le r&#233;sultat appara&#238;t dans une nouvelle fen&#234;tre.
+
+Pour personnaliser l'export, recopiez et adaptez le squelette {{lister_auteurs.html}} dans votre r&#233;pertoire de squelettes.
+	</description>
+	
+	<icon>images/export_auteurs-64.png</icon>
+	<etat>stable</etat>
+	<version>1.2.0</version>
+	<lien>http://www.quesaco.org/Exporter-les-auteurs</lien>
+	<!-- espace de nommage -->
+	<prefix>exau</prefix>
+	
+	<options>exau_options.php</options>
+
+	<pipeline>
+		<!-- importer le css et js necessaires en espace prive' -->
+		<nom>header_prive</nom>
+		<inclure>inc/exau_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<!-- afficher le lien en espace prive' -->
+		<nom>affiche_droite</nom>
+		<inclure>inc/exau_pipelines.php</inclure>
+	</pipeline>
+	
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
+	<necessite id="cfg" version="[1.14.0;]" />
+	<categorie>auteur</categorie>
+</plugin>

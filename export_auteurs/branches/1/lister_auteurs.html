@@ -1,0 +1,31 @@
+[<!--(#REM)
+
+lister_auteurs.html
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+Tous les champs de la table des auteurs peuvent être exportés ici.
+
+Pour ajouter/retirer un champ de la table auteurs :
+recopiez ce squelette dans votre repertoire de squelette, 
+ou a la racine du site,
+puis adaptez-le.
+
+
+-->]<html>
+<head><title>#FILENAME</title>
+<meta http-equiv='Content-Type' content='text/html; charset=#CHARSET' />
+<!-- #ENV{zstatut} -->
+</head><body><B_lister_auteurs>
+<table style='font-size:80%;text-align:left'>
+<tr><th><:info_nom:></th><th><:item_login:></th><th><:email:></th></tr>
+<BOUCLE_lister_auteurs(AUTEURS){nom==^[A-Z]}{statut==^[#ZSTATUT]}{par nom}>
+<tr><td>#NOM</td><td>#LOGIN</td><td>#EMAIL</td></tr>
+</BOUCLE_lister_auteurs>
+</table>
+</B_lister_auteurs>
+<:vide:>
+<//B_lister_auteurs>
+</body></html>
