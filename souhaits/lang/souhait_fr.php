@@ -36,6 +36,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'offrir_contribution_explication' => 'Utilisez le "." pour les centimes.',
 	'offrir_contribution_label' => 'Votre contribution',
+	'offrir_courriel_merci' => '(N’oublie pas de dire merci !)',
+	'offrir_courriel_sujet_cagnotte' => '@nom@ met @contribution@ dans la cagnotte de "@souhait@"',
+	'offrir_courriel_sujet_propose' => '@nom@ propose d’offrir "@souhait@"',
 	'offrir_email_label' => 'Email',
 	'offrir_explication_cagnotte' => '<strong>@souhait@</strong> est un très gros cadeau ! Il reste actuellement <strong>@reste@</strong> pour l’offrir. Vous pouvez participer à la cagnotte, en donnant votre nom et votre contribution.',
 	'offrir_explication_libre' => 'Vous pouvez proposer d’offrir <strong>@souhait@</strong> en donnant votre nom.',

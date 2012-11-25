@@ -114,9 +114,9 @@ function formulaires_offrir_souhait_traiter_dist($id_souhait, $retour=''){
 	include_spip('inc/session');
 	$retours = array();
 	
-	$souhait = sql_fetsel('statut, propositions, prix', 'spip_souhaits', 'id_souhait = '.$id_souhait);
+	$souhait = sql_fetsel('titre,statut, propositions, prix', 'spip_souhaits', 'id_souhait = '.$id_souhait);
 	
-	// Méga crade : on émule le fait d'être un admin (spip c nul)
+	// Méga crade : on émule le fait d'être un admin (spipCnul)
 	$statut = session_get('statut');
 	session_set('statut', '0minirezo');
 	
@@ -149,8 +149,64 @@ function formulaires_offrir_souhait_traiter_dist($id_souhait, $retour=''){
 	// On remet l'ancien statut
 	session_set('statut', $statut);
 	
-	if ($erreur){ $retours['message_erreur'] = $erreur; }
-	else { $retours['message_ok'] = ($souhait['statut'] == 'cagnotte') ? _T('souhait:offrir_message_ok_merci_cagnotte') : _T('souhait:offrir_message_ok_merci'); }
+	// S'il n'y a pas eu d'erreur, on envoie un courriel aux auteurs du souhait pour les prévenirs
+	if (!$erreur){
+		include_spip('action/editer_liens');
+		
+		// On récupère les auteurs
+		$auteurs = objet_trouver_liens(array('auteur'=>'*'), array('souhait'=>$id_souhait));
+		if ($auteurs){
+			include_spip('inc/envoyer_mail');
+			include_spip('inc/urls');
+			
+			$destinataires = array();
+			foreach($auteurs as $auteur){
+				$email = sql_getfetsel('email', 'spip_auteurs', 'id_auteur = '.$auteur['id_auteur']);
+				$destinataires[] = $email;
+			}
+			$destinataires = join(',', $destinataires);
+			
+			if ($souhait['statut'] == 'cagnotte') {
+				$sujet = _T(
+					'souhait:offrir_courriel_sujet_cagnotte',
+					array(
+						'souhait' => $souhait['titre'],
+						'contribution' => _request('contribution').' €',
+						'nom' => _request('nom')
+					)
+				);
+			}
+			else{
+				$sujet = _T(
+					'souhait:offrir_courriel_sujet_propose',
+					array(
+						'souhait' => $souhait['titre'],
+						'nom' => _request('nom')
+					)
+				);
+			}
+			$message = _request('message');
+			
+			$envoyer_mail = charger_fonction('envoyer_mail', 'inc/');
+			$envoyer_mail(	
+				$destinataires,
+				$sujet,
+				array(
+					'texte' => $message."\n\n--\n"._T('souhait:offrir_courriel_merci')."\n".generer_url_ecrire_objet('souhait', $id_souhait, '', '', false),
+					'from' => _request('email'),
+					'nom_envoyeur' => _request('nom')
+				)
+			);
+		}
+	}
+	
+	if ($erreur){
+		$retours['message_erreur'] = $erreur;
+	}
+	else {
+		if ($souhait['statut'] == 'cagnotte'){ $retours['message_ok'] = _T('souhait:offrir_message_ok_merci_cagnotte'); }
+		else{ $retours['message_ok'] = _T('souhait:offrir_message_ok_merci'); } 
+	}
 	
 	return $retours;
 }
