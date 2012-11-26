@@ -1,0 +1,25 @@
+	<B_galerie>
+	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?} {tri id_document,inverse}{media?}{extension?}{distant?}{brise?}{statut==#ENV{statut,.*}}{orphelins?}{titre==(#ENV{sanstitre}|?{'^$','.*'})}{pagination 5}>
+		#SET{fichier,#DISTANT|=={oui}|?{#FICHIER,#FICHIER|basename}}
+		<div class="row">
+			<div class="left">
+				#ID_DOCUMENT
+			</div>
+			<div class="right fixed">
+				[<strong class="titre #EDIT{titre}">(#TITRE|sinon{#VAL{<i>}|concat{<:info_sans_titre:>,'</i>'}})</strong>]
+				[<br/>(#DESCRIPTIF|attribut_html)]
+				[<br/>(#LARGEUR|?{[(#LARGEUR)[ x (#HAUTEUR) px]],''})]
+				[<br/>(#TAILLE|taille_en_octets)]
+			</div>
+			<div class="right fixed centered">
+				[(#MEDIA|=={image}|oui)[
+					<a href="#" title="IMG/#EXTENSION/#GET{fichier}" onclick='select(this);return false;'>(#LOGO_DOCUMENT{apercu,180,100}|inserer_attribut{alt,[(#GET{fichier}|couper{60}|texte_backend)]})</a>
+				]]
+			</div>
+		</div>
+	</BOUCLE_galerie>
+	<br class="clear" />
+	[<p class="explication centered">(#PAGINATION{prive})</p>]
+	</B_galerie>
+	<p class="error"><:tng:no_doc:></p>
+	<//B_galerie>
