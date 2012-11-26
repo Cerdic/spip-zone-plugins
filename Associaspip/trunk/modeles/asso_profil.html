@@ -1,0 +1,46 @@
+[(#REM)<!-- affichage du profli de l'association
+plugin = associaspip ; tables = spip_association_metas
+plugins necessaires = aucun
+parametres = aucun
+
+//!\ non encore teste !!!
+
+maj:2012-11-26; version:0.0.1; licence:GPL; -->]
+
+<BOUCLE_pays_asso(PAYS) {code= OR id_pays= }>
+[(#SET{nom_pays,#NOM})]
+</BOUCLE_pays_asso>
+
+<div class="vcard">
+    <h3 class="fn org"><strong class="organization-name">#META{/association/nom}</strong></h3>
+    <p class="adr" id="vcard-asso-adr">
+        [(#MODELE{coordonnees_adresse}
+            {voie=<span class="street-address">#META{/association/rue}</span>}
+            {code_postal=<span class="code_postal">#META{/association/cp}</span>}
+            {voie=<span class="street-address">#META{/association/rue}</span>}
+            {ville=<span class="locality">#META{/association/ville}</span>}
+            {nom_pays=<abbr class=country" title="#GET{nom_pays}"></abbr>}
+        )]
+    </p>
+    [<p class="tel">(#MODELE{coordonnees_telephone}
+        {numero=#META{/association/telephone}}
+    )</p>]
+    [<p class="email">
+    (#META{/association/telephone})
+    </p>]
+    [<p class="email"><:asso:infofiscal:>
+    (#META{/association/infofiscal})
+    </p>]
+    <dl class="note">
+        [<dt><:asso:config_libelle_declaration:></dt>
+            <dd>(#META{/association/declaration})</dd>]
+        [<dt><:asso:config_libelle_prefet:></dt>
+            <dd>(#META{/association/prefet})</dd>]
+        [<dt><:asso:config_libelle_objet:></dt>
+            <dd>(#META{/association/objet})</dd>]
+<BOUCLE_metas_utilisateurs(ASSOCIATION_METAS) {nom LIKE 'meta_utilisateur_%'}>
+        <dt>[(#VAL{meta_utilisateur_}|str_replace('', #NOM}|ucfirst)]</dt>
+            <dd>#VALEUR</dd>
+</BOUCLE_metas_utilisateurs>
+    </dl>
+</div>

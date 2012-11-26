@@ -31,45 +31,56 @@ function exec_association() {
 			'exercices_budgetaires_titre' => array('calculatrice.gif', 'exercices', array('gerer_compta', 'association') ),
 		));
 		debut_cadre_association('assoc_qui.png', 'association_infos_contacts');
-		echo '<div class="vcard">';
 		// Profil de l'association
 		echo debut_cadre_enfonce('', TRUE);
 		if (!$GLOBALS['association_metas']['nom'] && autoriser('editer_profil', 'association')) { // c'est surement une nouvelle installation (vu que le nom est obligatoire)
 			echo '<a href="'.generer_url_ecrire('configurer_association').'">'. gros_titre(_T('asso:profil_de_lassociation'), '', FALSE).'</a>';
-		}
-		echo '<h3 class="fn org"><strong class="organization-name">'.$GLOBALS['association_metas']['nom']."</strong></h3>\n";
-		echo '<p class="adr" id="vcard-asso-adr">';
-		echo '<span class="street-address">'.$GLOBALS['association_metas']['rue']."</span><br />\n";
-		echo '<span class="postal-code">'.$GLOBALS['association_metas']['cp'].'</span>&nbsp;';
-		echo '<span class="locality">'.$GLOBALS['association_metas']['ville']."</span><br />\n";
-		echo '<abbr class="country" title="';
-		$pays = $GLOBALS['association_metas']['pays'];
-		if (test_plugin_actif('PAYS')) {
-			$pays = sql_getfetsel('nom', 'spip_pays', (is_numeric($pays)?"id_pays=$pays":"code='$pays'") );
-			echo propre($row['nom']);
 		} else {
-			echo $pays;
+			echo '<div class="vcard">';
+			echo '<h3 class="fn org"><strong class="organization-name">'.$GLOBALS['association_metas']['nom']."</strong></h3>\n";
+			$pays = $GLOBALS['association_metas']['pays'];
+			echo '<p class="adr" id="vcard-asso-adr">'. recuperer_fond('modeles/coordonnees_adresse', array(
+				'voie' => '<span class="street-address">'.$GLOBALS['association_metas']['rue'].'</span>',
+//				'complement'
+//				'boite_postale'
+				'code_postal' => '<span class="postal-code">'.$GLOBALS['association_metas']['cp'].'</span>',
+				'ville' => '<span class="locality">'.$GLOBALS['association_metas']['ville'].'</span>',
+//				'region'
+				'nom_pays' => '<abbr class="country" title="'. ( (test_plugin_actif('PAYS')) ? propre(sql_getfetsel('nom', 'spip_pays', (is_numeric($pays)?"id_pays=$pays":"code='$pays'") )) : $pays ) .'"></abbr>',
+				'_ht' => '&nbsp;',
+				'_nl' => '<br />',
+			)) ."</p>\n";
+			if ($GLOBALS['association_metas']['telephone'])
+				echo '<p class="tel">'. recuperer_fond('modeles/coordonnees_telephone', array(
+					'numero' => $GLOBALS['association_metas']['telephone'],
+				)) ."</p>\n";
+			if ($GLOBALS['association_metas']['email'])
+				echo '<p class="email">'.$GLOBALS['association_metas']['email']."</p>\n";
+			if ($GLOBALS['association_metas']['infofiscal'])
+				echo  '<p class="bday">'. _T('asso:config_libelle_infofiscal') .association_formater_date($GLOBALS['association_metas']['infofiscal'], 'bday') ."</p>\n";
+			echo '<dl class="note">';
+			if ($GLOBALS['association_metas']['declaration'])
+				echo '<dt>'. _T('asso:config_libelle_declaration') .'</dt>'
+				. '<dd>'.$GLOBALS['association_metas']['declaration']."</dd>\n";
+			if ($GLOBALS['association_metas']['prefet'])
+				echo '<dt>'. _T('asso:config_libelle_prefet') .'</dt>'
+				. '<dd>'.$GLOBALS['association_metas']['prefet']."</dd>\n";
+			if ($GLOBALS['association_metas']['objet'])
+				echo '<dt>'. _T('asso:config_libelle_objet') .'</dt>'
+				. '<dd>'.$GLOBALS['association_metas']['declaration']."</dd>\n";
+			$query = sql_select('nom,valeur', 'spip_association_metas', "nom LIKE 'meta_utilisateur_%'");
+			while ($row = sql_fetch($query)) { // afficher les metas definies par l'utilisateur si il y en a
+				echo '<dt>'. _T('perso:'. str_replace('meta_utilisateur_', '', $row['nom'])) .'</dt>'
+				.'<dd>'.$row['valeur']."</dd>\n";
+			}
+			echo "</dl>";
+			echo "</div>\n";
 		}
-		echo '"></abbr>';
-		echo "</p>\n";
-		echo '<p class="tel">'.$GLOBALS['association_metas']['telephone']."</p>\n";
-		echo '<p class="email">'.$GLOBALS['association_metas']['email']."</p>\n";
-		echo '<ul class="note">';
-		if ($GLOBALS['association_metas']['declaration'])
-			echo '<li>'.$GLOBALS['association_metas']['declaration']."</li>\n";
-		if ($GLOBALS['association_metas']['prefet'])
-			echo '<li>'.$GLOBALS['association_metas']['prefet']."</li>\n";
-		$query = sql_select('nom,valeur', 'spip_association_metas', "nom LIKE 'meta_utilisateur_%'");
-		while ($row = sql_fetch($query)) { // afficher les metas definies par l'utilisateur si il y en a
-			echo '<li>'. ucfirst(_T(str_replace('meta_utilisateur_', '', $row['nom']))).'&nbsp;:&nbsp;'.$row['valeur']."</li>\n";
-		}
-		echo "</ul>";
 		echo fin_cadre_enfonce(TRUE);
-		echo "</div>\n";
 		$queryGroupesAffiches = sql_select('id_groupe, nom', 'spip_asso_groupes', 'affichage>0', '', 'affichage');
 		while ($row = sql_fetch($queryGroupesAffiches)) { // affiche tous les groupes devant l'etre
 			echo '<div class="vcard"><a class="include" href="#vcard-asso-adr"></a><div class="org" id="vcard-group'.$row['id_groupe'].'"><abbr class="organization-name" title="'.$GLOBALS['association_metas']['nom'].'"></abbr>'; //!\ inclusion de fragments :  http://microformats.org/wiki/include-pattern
-			echo debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif', TRUE, '', '<a class="organization-unit"'. (autoriser('editer_groupe', 'association') ? (' title="'._T('asso:editer_groupe').'" href="'.generer_url_ecrire('edit_groupe', 'id='.$row['id_groupe']) ):'').'">'.$row['nom'].'</a>');
+			echo debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif', TRUE, '', '<a class="organization-unit"'. (autoriser('editer_groupe', 'association') ? (' title="'. _T('asso:editer_groupe') .'" href="'. generer_url_ecrire('edit_groupe', 'id='.$row['id_groupe']) ):'') .'">'.$row['nom'].'</a>');
 //			echo '<a class="org organization-unit" title="'._T('asso:editer_groupe').'" href="'.generer_url_ecrire('edit_groupe', 'id='.$row['id_groupe']).'">'.gros_titre($row['nom'], _DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif', FALSE).'</a>';
 			echo '</div></div>';
 			echo recuperer_fond('modeles/asso_membres', array(
