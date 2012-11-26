@@ -31,6 +31,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 		foreach($tracks as $track => $info){
 			$metas[$track] = $info;
 			if($track == 'track type="General"'){
+				spip_log($info[0],'test');
 				$infos['titre'] = $info[0]['Title'][0] ? $info[0]['Title'][0] : ($info[0]['Movie_name'][0] ? $info[0]['Movie_name'][0] : $info[0]['Track_name '][0]);
 				$infos['descriptif'] = $info[0]['Description'][0] ? $info[0]['Description'][0] : $info[0]['desc'][0];
 				if($infos['descriptif'] == ''){
@@ -144,8 +145,8 @@ function inc_spipmotion_mediainfo_dist($chemin){
 				if(!$infos['titre'])
 					$infos['titre'] = $info[0]['Title'][0] ? $info[0]['Title'][0] : '';
 				$infos['videobitrate'] = $info[0]['Bit_rate'][0] ? $info[0]['Bit_rate'][0] : ($info[0]['Nominal_bit_rate'][0] ? $info[0]['Nominal_bit_rate'][0] : '');
-				$infos['hauteur'] = $info[0]['Height'][0];
-				$infos['largeur'] = $info[0]['Width'][0];
+				$infos['hauteur'] = $info[0]['Original_height'][0] ? $info[0]['Original_height'][0] : $info[0]['Height'][0];
+				$infos['largeur'] = $info[0]['Original_width'][0] ? $info[0]['Original_width'][0] : $info[0]['Width'][0];
 				$infos['videocodec'] = $info[0]['Format'][0];
 				$infos['videocodecid'] = $info[0]['Codec_ID'][0] ? $info[0]['Codec_ID'][0] : strtolower($info[0]['Format'][0]);
 				if($infos['videocodecid'] == 'avc1'){
@@ -160,6 +161,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 				}else if($infos['videocodec'] == 'Sorenson Spark'){
 					$infos['videocodecid'] = 'h263';
 				}
+				$infos['aspect_ratio'] = $info[0]['Display_aspect_ratio'][0] ? $info[0]['Display_aspect_ratio'][0] : '';
 				$infos['framerate'] = $info[0]['Frame_rate'][0];
 				$infos['framecount'] = $info[0]['Frame_count'][0];
 				$infos['rotation'] = intval($info[0]['Rotation'][0]);

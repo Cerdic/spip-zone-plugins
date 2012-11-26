@@ -89,7 +89,15 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 		$dossier_temp = _DIR_VAR;
 		$fichier_temp = "$dossier_temp$query.jpg";
 		while(!$vignette && ($seconde <= intval($document['duree']))){
-			$cmd_vignette = $spipmotion_sh.' --e '.$chemin.' --size '.$document['largeur'].'x'.$document['hauteur'].' --s '.$fichier_temp.' --ss '.$seconde;
+			$params_supp = '';
+			/**
+			 * Forcer la vignette comme le display aspect ratio
+			 */
+			if(is_numeric($document['aspect_ratio'])){
+				$params_supp = " --params_supp \"-aspect ".$document['aspect_ratio']."\"";
+				$document['hauteur'] = intval($document['largeur'] / $document['aspect_ratio']);
+			}
+			$cmd_vignette = $spipmotion_sh.' --e '.$chemin.' --size '.$document['largeur'].'x'.$document['hauteur'].' --s '.$fichier_temp.' --ss '.$seconde." $params_supp";
 			$lancement_vignette = exec($cmd_vignette,$retour_vignette,$retour_int);
 			/**
 			 * Le retour du script n'est pas bon, il est certainement non exécutable

@@ -344,7 +344,7 @@ function encodage($source,$options){
 			 * Calcul de la hauteur en fonction de la largeur souhaitée
 			 * et de la taille de la video originale
 			 */
-			$height_finale = intval(round($source['hauteur']/($source['largeur']/$width_finale)));
+			$height_finale = intval(round($height/($width/$width_finale)));
 		}
 
 		/**
@@ -430,7 +430,7 @@ function encodage($source,$options){
 				$infos_sup_normal .= ' -level 21';
 				$infos_sup_normal .= ' -refs 2';
 			}
-			$infos_sup_normal .= " -aspect $width_finale:$height_finale";
+			
 			//if($format)
 			//	$infos_sup_normal .= ' -f '.$format;
 		}
@@ -439,6 +439,10 @@ function encodage($source,$options){
 				$infos_sup_normal .= " -threads 0 ";
 			}
 		}
+		
+		$aspect = $source['aspect_ratio'] ? $source['aspect_ratio']: "$width_finale:$height_finale";
+		$infos_sup_normal .= " -aspect $aspect";
+			
 		$fichier_texte = "$dossier$query.txt";
 
 		ecrire_fichier($fichier_texte,$texte);

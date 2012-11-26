@@ -68,7 +68,9 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 	$maj['1.1.4'] = array(
 		array('maj_tables',array('spip_documents')),
 	);
-	
+	$maj['1.1.5'] = array(
+		array('maj_tables',array('spip_documents')),
+	);
 	/**
 	 * TODO : générer un htaccess dans le répertoire script_bash/
 	 * TODO : insérer une préconfiguration par défaut

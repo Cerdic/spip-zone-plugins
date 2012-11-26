@@ -19,6 +19,7 @@ function spipmotion_declarer_tables_principales($tables_principales){
 	$tables_principales['spip_documents']['field']['framecount'] = "INTEGER";
 	$tables_principales['spip_documents']['field']['framerate'] = "FLOAT";
 	$tables_principales['spip_documents']['field']['rotation'] = "INTEGER";
+	$tables_principales['spip_documents']['field']['aspect_ratio'] = "VARCHAR(255) DEFAULT '' NOT NULL";
 	$tables_principales['spip_documents']['field']['pixelformat'] = "VARCHAR(255) DEFAULT '' NOT NULL";
 	$tables_principales['spip_documents']['field']['videobitrate'] = "INTEGER";
 	$tables_principales['spip_documents']['field']['videocodec'] = "VARCHAR(255) DEFAULT '' NOT NULL";
@@ -73,6 +74,7 @@ function spipmotion_declarer_tables_objets_sql($tables){
 	$tables['spip_documents']['champs_editables'][] = 'framecount';
 	$tables['spip_documents']['champs_editables'][] = 'framerate';
 	$tables['spip_documents']['champs_editables'][] = 'pixelformat';
+	$tables['spip_documents']['champs_editables'][] = 'aspect_ratio';
 	$tables['spip_documents']['champs_editables'][] = 'bitrate_mode';
 	$tables['spip_documents']['champs_editables'][] = 'videobitrate';
 	$tables['spip_documents']['champs_editables'][] = 'videocodec';
