@@ -91,7 +91,7 @@ function relances_liste($critere, $id_groupe=0) {
 		$jointure_groupe = '';
 	}
 	$query = sql_select(
-		'id_auteur, sexe, nom_famille, prenom, statut_interne, date_validite', "spip_asso_membres AS a_m $jointure_groupe", $critere, '', 'nom_famille, prenom, validite' );
+		'id_auteur, sexe, nom_famille, prenom, statut_interne, date_validite', "spip_asso_membres AS a_m $jointure_groupe", $critere, '', 'nom_famille, prenom, date_validite' );
 	$res = '';
 	while ($data = sql_fetch($query)) {
 		$res .= '<tr class="'.$GLOBALS['association_styles_des_statuts'][$data['statut_interne']].'" id="membre'.$data['id_auteur'].'">'
