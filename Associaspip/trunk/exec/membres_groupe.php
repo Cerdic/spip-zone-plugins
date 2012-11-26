@@ -29,7 +29,7 @@ function exec_membres_groupe() {
 			'editer_groupe' => array('edit-24.gif', array(($id_groupe<100?'edit_groupe_autorisations':'edit_groupe'), "id=$id_groupe" ) ),
 		) );
 		debut_cadre_association('annonce.gif', 'groupe_membres');
-		echo recuperer_fond('modeles/asso_membres', array(
+		echo recuperer_fond('modeles/membres_groupe', array(
 			'id_groupe' => $id_groupe
 		));
 		fin_page_association();

@@ -83,7 +83,7 @@ function exec_association() {
 			echo debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif', TRUE, '', '<a class="organization-unit"'. (autoriser('editer_groupe', 'association') ? (' title="'. _T('asso:editer_groupe') .'" href="'. generer_url_ecrire('edit_groupe', 'id='.$row['id_groupe']) ):'') .'">'.$row['nom'].'</a>');
 //			echo '<a class="org organization-unit" title="'._T('asso:editer_groupe').'" href="'.generer_url_ecrire('edit_groupe', 'id='.$row['id_groupe']).'">'.gros_titre($row['nom'], _DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif', FALSE).'</a>';
 			echo '</div></div>';
-			echo recuperer_fond('modeles/asso_membres', array(
+			echo recuperer_fond('modeles/membres_groupe', array(
 				'id_groupe' => $row['id_groupe']
 			));
 			echo fin_cadre_relief(TRUE);

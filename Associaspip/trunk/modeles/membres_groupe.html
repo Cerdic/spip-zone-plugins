@@ -21,7 +21,9 @@ maj:2012-09-27; version:0.1.1; licence:GPL; -->]
 <table width="100%" class="asso_tablo">
 	<thead>
 		<tr>
+	[(#META{association/aff_photo}|oui)
 			<th></th>
+	]
 			<th><:asso:entete_nom:></th>
 			<th><:asso:fonction:></th>
 	[(#AUTORISER{voir_profil,association}|oui)
@@ -35,7 +37,9 @@ maj:2012-09-27; version:0.1.1; licence:GPL; -->]
 	<tbody>
 <BOUCLE_membres2groupe(ASSO_GROUPES_LIAISONS asso_membres){id_groupe=#ENV{id_groupe}}{par nom_famille}{pagination}>
 		<tr class="agent vcard [(#COMPTEUR_BOUCLE|alterner{'pair','impair'})]">
+	[(#META{association/aff_photo}|oui)
 			<td class="url photo">[(#LOGO_AUTEUR{#URL_AUTEUR,left}|image_reduire{60})]</td>
+	]
 			<td>[(#SEXE|association_formater_nom{#PRENOM, #NOM_FAMILLE, 'span'})]</td>
 			<td><a class="include" href="#vcard-group#ENV{id_groupe}"></a> [<span class="role">(#FONCTION)</span>]</td>
 	[(#AUTORISER{voir_profil,association}|oui)
