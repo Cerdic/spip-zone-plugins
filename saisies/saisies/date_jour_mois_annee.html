@@ -43,16 +43,19 @@ function activer_dateur_#GET{id}() {
 		</div>\
 	';
 
-	jQuery('##GET{id}')[0].type = 'hidden';
+	if(!$.browser.msie || parseInt($.browser.version) >= 9)
+		jQuery('##GET{id}')[0].type = 'hidden';
+	else
+		jQuery('##GET{id}').css({'height':'0px','width':'0px','border':'none'});
 	jQuery('##GET{id}').after(jour + mois + annee);
 }
 
 function changer_la_date(me) {
-	li = jQuery(me).parent().parent();
-	jour = li.find('.date_jour').attr('value').trim();
-	mois = li.find('.date_mois').attr('value').trim();
-	annee = li.find('.date_annee').attr('value').trim();
-	date = li.find('.datetime').attr('value').trim();
+	var li = jQuery(me).parents('li'),
+		jour = jQuery.trim(li.find('.date_jour').val()),
+		mois = jQuery.trim(li.find('.date_mois').val()),
+		annee = jQuery.trim(li.find('.date_annee').val()),
+		date = jQuery.trim(li.find('.datetime').val());
 	while(jour.length < 2) {jour = '0' + jour;}
 	while(mois.length < 2) {mois = '0' + mois;}
 	while(annee.length < 4) {annee = '0' + annee;}
