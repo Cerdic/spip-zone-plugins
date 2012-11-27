@@ -1,13 +1,26 @@
 h1. AnythingSlider jQuery Plugin
 
-*Just what the world needs, another jQuery slider. YAWN.* I know, check this one out though, it’s got lots of cool features.
+A very robust jQuery-based slider plugin. Need to link to a specific slide? No problem. Like a choice of themes? Got it. Need callbacks for when specific slider actions happen? Sure. Need custom tab names? You got it. Need more than one slider per page? Easy. 
 
-Here on CSS-Tricks, I’ve created a number of different sliders. Three, in fact. A "“featured content”":http://css-tricks.com/creating-a-slick-auto-playing-featured-content-slider/ slider, a "“start/stop slider”":http://css-tricks.com/startstop-slider/, and "“moving boxes”":http://css-tricks.com/moving-boxes/. Each of them had some cool interesting feature that I needed to build at the time. All were well-received, but as is the case with these things, people want them to do X, Y, and Z in addition to what they already did.
+* Having problems with installing or getting the plugin to work? Ask your question in the "CSS-Tricks forums":http://css-tricks.com/forums/ or on "StackOverflow":http://stackoverflow.com/questions/tagged/anythingslider
+* Find a bug or have an enhancement request? Submit it "here":https://github.com/CSS-Tricks/AnythingSlider/issues
 
-This new AnythingSlider is an attempt at bringing together the functionality of all of those previous sliders and adding new features. In other words, to create a really “full featured” slider that could be widely useful. This is the first time (on CSS-Tricks) that one of these sliders is an actual plugin as well, which should make implementing it and customizing it much easier.
+h2. Main Demo
 
-* "Documentation Wiki":https://github.com/ProLoser/AnythingSlider/wiki
-* "Keep Reading":http://css-tricks.com/anythingslider-1-4/
-* "Main Demo":http://proloser.github.com/AnythingSlider/
-* "More Demos":https://github.com/ProLoser/AnythingSlider/wiki
-* Having an issue? Submit it "here":https://github.com/ProLoser/AnythingSlider/issues
+* "Documentation":https://github.com/CSS-Tricks/AnythingSlider/wiki is maintained in the wiki pages.
+* "CSS-Tricks demo":http://css-tricks.com/examples/AnythingSlider/
+* "Github demos!":http://css-tricks.github.com/AnythingSlider/
+* "Download":https://github.com/CSS-Tricks/AnythingSlider/zipball/master
+
+h2. Related Projects
+
+Download the full repo for a full set of all the cool stuff AnythingSlider can do.
+
+* More themes - "AnythingSlider-Themes":https://github.com/CSS-Tricks/AnythingSlider-Themes
+* Fx bookmarklet - "AnythingSlider-FX-Builder":https://github.com/CSS-Tricks/AnythingSlider-Fx-Builder
+
+CMS plugins/mods
+
+* Wordpress plugin - "AnythingSlider-for-WordPress":https://github.com/jacobdubail/AnythingSlider-for-WordPress
+* Movable Type plugin - "mt-plugin-anythingslider":https://github.com/meancode/mt-plugin-anythingslider
+* Joomla 2.5 mod - "mod_anythingslider":https://github.com/CSS-Tricks/mod_anythingslider

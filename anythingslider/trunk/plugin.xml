@@ -1,32 +1,22 @@
 <plugin>
 	<nom>AnythingSlider</nom>
 	<slogan>Faire d&#233;filer du contenu dans vos squelettes</slogan>
-	<auteur>[Chris Coyier, Remy Sharp, Doug Neiner, ProLoser->https://github.com/ProLoser/AnythingSlider/wiki/Credits] pour le script AnythingSlider, [Joseph->http://www.spip-contrib.net/Joseph] pour la mise en plugin SPIP</auteur>
-	<icon>images/anythingslider.png</icon>
+	<auteur><i lang="en">Original by [Chris Coyier->http://css-tricks.com] and [many others->https://github.com/CSS-Tricks/AnythingSlider/wiki/Credits]</i>, incluant [AnythingSlider-Themes->https://github.com/CSS-Tricks/AnythingSlider-Themes], mis en plugin par [Joseph->http://www.spip-contrib.net/Joseph], [Cedric Morin Yterium->http://www.yterium.com] et [romy.tetue.net->http://romy.tetue.net]</auteur>
+	<icon>prive/themes/spip/images/anythingslider.png</icon>
 	<licence>GNU/GPL</licence>
 	<version>2.0.0</version>
 	<etat>dev</etat>
-	<description>Ce plugin permet d'ins&#233;rer facilement le script jQuery [AnythingSlider->https://github.com/ProLoser/AnythingSlider/wiki] dans votre SPIP pour l’utiliser dans vos squelettes. Il peut &#234;tre &#233;galement &#234;tre utilis&#233; comme ressource pour d'autres plugins.</description>
-	<lien>http://www.spip-contrib.net/?article3897</lien>
+	<description>Ce plugin permet d'ins&#233;rer facilement le script jQuery [AnythingSlider->https://github.com/CSS-Tricks/AnythingSlider] dans votre SPIP pour l’utiliser dans vos squelettes. Il peut &#234;tre &#233;galement &#234;tre utilis&#233; comme ressource pour d'autres plugins.</description>
+	<lien>http://www.spip-contrib.net/?article4283</lien>
 	<prefix>anythingslider</prefix>
 	<pipeline>
-		<nom>anythingslider_charger</nom>
+		<nom>affichage_final</nom>
 		<inclure>anythingslider_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>insert_head</nom>
+		<nom>header_prive</nom>
 		<inclure>anythingslider_pipelines.php</inclure>
 	</pipeline>
-	<bouton id='anythingslider_2' parent='configuration'>
-		<icone>images/anythingslider-24.png</icone>
-		<titre>anythingslider:anythingslider</titre>
-		<url>configurer_anythingslider</url>
-	</bouton>
-	<bouton id='anythingslider' parent='bando_squelette'>
-		<icone>images/anythingslider-16.png</icone>
-		<titre>anythingslider:anythingslider</titre>
-		<url>configurer_anythingslider</url>
-	</bouton>
 	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<categorie>multimedia</categorie>
 </plugin>
