@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type_email' => 'Type de courriel',
 	'label_type_numero' => 'Type de numéro',
 	'label_ville' => 'Commune',
-	'label_voie' => 'N<sup>o</sup>, Type &amp; nom de voie',
+	'label_voie' => 'Adresse',
 
 	// M
 	'modifier_adresse' => 'Modifier cette adresse',
