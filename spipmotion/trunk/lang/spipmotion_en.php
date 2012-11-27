@@ -75,6 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'height_video' => 'Height of the output in px',
 
 	// I
+	'info_aspect_ratio' => 'Ratio d\'affichage de la vidéo', # NEW
 	'info_aucun_resultat_attente' => 'No documents awaiting encoding.',
 	'info_audiobitrate' => 'Audio bitrate: ',
 	'info_audiochannels' => 'Audio channels number: ',
