@@ -37,6 +37,9 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 	$maj['1.4'] = array(
 		array('maj_tables',array('spip_tickets'))
 	);
+	$maj['1.4.1'] = array(
+		array('sql_alter',"TABLE spip_tickets CHANGE version version varchar(255) DEFAULT '' NOT NULL")
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

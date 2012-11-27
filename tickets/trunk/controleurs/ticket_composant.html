@@ -10,7 +10,7 @@
 <select class="crayon-active" name="#ENV{name_composant}"
 	style="width:#ENV{largeur}px;#ENV{style}" >
 	<BOUCLE_composants(POUR){tableau #GET{valeurs}}>>
-		<option value="#VALEUR"[(#COMPOSANT|=={#VALEUR}|?{selected})]>[(#VALEUR)]</option>
+		<option value="#VALEUR"[(#COMPOSANT**|=={#VALEUR}|?{selected})]>[(#VALEUR|typo)]</option>
 	</BOUCLE_composants>
 </select>
 </B_composants>

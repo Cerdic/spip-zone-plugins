@@ -9,6 +9,9 @@ function tickets_declarer_tables_interfaces($interface){
 	
 	$interface['tables_jointures']['spip_tickets'][] = 'forums';
 
+	$interface['table_des_traitements']['COMPOSANT'][] = _TRAITEMENT_TYPO;
+	$interface['table_des_traitements']['VERSION'][] = _TRAITEMENT_TYPO;
+	
 	return $interface;
 }
 
@@ -44,7 +47,7 @@ function tickets_declarer_tables_objets_sql($tables){
 			"tracker"	=> "integer DEFAULT '0' NOT NULL",
 			"projet"	=> "varchar(60) DEFAULT '' NOT NULL",
 			"composant"	=> "varchar(40) DEFAULT '' NOT NULL",
-			"version"	=> "varchar(30) DEFAULT '' NOT NULL",
+			"version"	=> "varchar(255) DEFAULT '' NOT NULL",
 			"jalon"	=> "varchar(30) DEFAULT '' NOT NULL",
 			"navigateur" => "varchar(60) DEFAULT '' NOT NULL",
 			"sticked" 	=> "varchar(3) DEFAULT '' NOT NULL",
