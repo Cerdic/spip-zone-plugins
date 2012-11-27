@@ -46,7 +46,7 @@ function exec_association() {
 				'code_postal' => '<span class="postal-code">'.$GLOBALS['association_metas']['cp'].'</span>',
 				'ville' => '<span class="locality">'.$GLOBALS['association_metas']['ville'].'</span>',
 //				'region'
-				'nom_pays' => '<abbr class="country" title="'. ( (test_plugin_actif('PAYS')) ? propre(sql_getfetsel('nom', 'spip_pays', (is_numeric($pays)?"id_pays=$pays":"code='$pays'") )) : $pays ) .'"></abbr>',
+				'nom_pays' => '<abbr class="country" title="'. ( (test_plugin_actif('PAYS')) ? sql_getfetsel('nom', 'spip_pays', (is_numeric($pays)?"id_pays=$pays":"code='$pays'") ) : $pays ) .'"></abbr>',
 				'_ht' => '&nbsp;',
 				'_nl' => '<br />',
 			)) ."</p>\n";

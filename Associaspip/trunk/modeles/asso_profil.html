@@ -16,10 +16,12 @@ maj:2012-11-26; version:0.0.1; licence:GPL; -->]
     <p class="adr" id="vcard-asso-adr">
         [(#MODELE{coordonnees_adresse}
             {voie=<span class="street-address">#META{/association/rue}</span>}
-            {code_postal=<span class="code_postal">#META{/association/cp}</span>}
+            {code_postal=<span class="postal-code">#META{/association/cp}</span>}
             {voie=<span class="street-address">#META{/association/rue}</span>}
             {ville=<span class="locality">#META{/association/ville}</span>}
-            {nom_pays=<abbr class=country" title="#GET{nom_pays}"></abbr>}
+            {nom_pays=<abbr class="country" title="#GET{nom_pays}"></abbr>}
+            {_nl=<br />}
+            {_ht=&nbsp;}
         )]
     </p>
     [<p class="tel">(#MODELE{coordonnees_telephone}
@@ -28,7 +30,7 @@ maj:2012-11-26; version:0.0.1; licence:GPL; -->]
     [<p class="email">
     (#META{/association/telephone})
     </p>]
-    [<p class="email"><:asso:infofiscal:>
+    [<p class="bday"><:asso:infofiscal:>
     (#META{/association/infofiscal})
     </p>]
     <dl class="note">
@@ -39,7 +41,7 @@ maj:2012-11-26; version:0.0.1; licence:GPL; -->]
         [<dt><:asso:config_libelle_objet:></dt>
             <dd>(#META{/association/objet})</dd>]
 <BOUCLE_metas_utilisateurs(ASSOCIATION_METAS) {nom LIKE 'meta_utilisateur_%'}>
-        <dt>[(#VAL{meta_utilisateur_}|str_replace('', #NOM}|ucfirst)]</dt>
+        <dt>[(#VAL{meta_utilisateur_}|str_replace{'', #NOM}|_T)]</dt>
             <dd>#VALEUR</dd>
 </BOUCLE_metas_utilisateurs>
     </dl>
