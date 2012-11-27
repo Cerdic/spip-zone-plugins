@@ -1,15 +1,19 @@
 [(#REM)<!-- affichage du profli de l'association
-plugin = associaspip ; tables = spip_association_metas
+plugin = Associaspip ; tables = spip_association_metas
 plugins necessaires = aucun
 parametres = aucun
 
-//!\ non encore teste !!!
+maj:2012-11-27; version:0.1.0; licence:GPL; -->]
 
-maj:2012-11-26; version:0.0.1; licence:GPL; -->]
-
-<BOUCLE_pays_asso(PAYS) {code= OR id_pays= }>
+<BOUCLE_pays_code(PAYS?) {code=#META{/association/pays}}>
 [(#SET{nom_pays,#NOM})]
-</BOUCLE_pays_asso>
+</BOUCLE_pays_code>
+    <BOUCLE_pays_num(PAYS?) {id_pays=#META{/association/pays}}>
+[(#SET{nom_pays,#NOM})]
+    </BOUCLE_pays_num>
+[(#SET{nom_pays,#META{/association/pays}})]
+    <//B_pays_num>
+<//B_pays_code>
 
 <div class="vcard">
     <h3 class="fn org"><strong class="organization-name">#META{/association/nom}</strong></h3>
@@ -19,7 +23,7 @@ maj:2012-11-26; version:0.0.1; licence:GPL; -->]
             {code_postal=<span class="postal-code">#META{/association/cp}</span>}
             {voie=<span class="street-address">#META{/association/rue}</span>}
             {ville=<span class="locality">#META{/association/ville}</span>}
-            {nom_pays=<abbr class="country" title="#GET{nom_pays}"></abbr>}
+            {nom_pays=<abbr class="country" title="[(#GET{nom_pays})]"></abbr>}
             {_nl=<br />}
             {_ht=&nbsp;}
         )]
