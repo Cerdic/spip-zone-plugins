@@ -86,18 +86,15 @@ function exec_ressources() {
 		) );
 		debut_cadre_association('pret-24.gif', 'ressources_titre_liste_ressources');
 		// Filtres
-		$liste_statuts = array('ok'=>'verte', 'suspendu'=>'orange', 'reserve'=>'rouge', 'sorti'=>'poubelle');
-		$filtre_statut = '<select name="statut" onchange="form.submit()">';
-		$filtre_statut .= '<option value="">' ._T('asso:entete_tous') .'</option>';
-		foreach ( $liste_statuts as $type=>$puce ) {
-			$filtre_statut .= "<option value='$type'". ($type==$statut?" selected='selected'":'') .'>'. association_formater_puce($type, $puce, "ressources_libelle_statut_$type") ."</option>\n";
+		$filtre = '';
+		foreach (array('ok', 'suspendu', 'reserve', 'sorti') as $type) {
+			$s = ($type==$statut) ? " selected='selected'" : '';
+			$p = association_langue("ressources_libelle_statut_$type");
+			$filtre .= "<option value='$type'$s>$p</option>\n";
 		}
-		$filtre_statut .= '</select>';
-		filtres_association(array(
-#			'id' => $id_ressource,
-		), 'ressources', array(
-			'statut' => $filtre_statut,
-		));
+		$filtre = '<select name="statut" onchange="form.submit()"><option value="">' ._T('asso:entete_tous') .'</option>' . $filtre . '</select>';
+
+		echo association_bloc_filtres(array(), 'ressources', array('statut' => $filtre));
 		// affichage du tableau
 		echo association_bloc_listehtml2('asso_ressources',
 			sql_select('*', 'spip_asso_ressources', $s_sql[$statut],'',  'id_ressource'),
