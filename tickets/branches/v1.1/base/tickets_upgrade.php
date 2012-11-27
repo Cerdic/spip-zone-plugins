@@ -70,6 +70,11 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 		maj_tables('spip_tickets');
 		ecrire_meta($nom_meta_base_version,$current_version="1.4");
 	}
+	if (version_compare($current_version,"1.4.1","<")){
+		// modifications de la table spip_tickets
+		sql_alter("TABLE spip_tickets CHANGE version version varchar(255) DEFAULT '' NOT NULL");
+		ecrire_meta($nom_meta_base_version,$current_version="1.4.1");
+	}
 }
 
 function tickets_vider_tables($nom_meta_base_version) {
