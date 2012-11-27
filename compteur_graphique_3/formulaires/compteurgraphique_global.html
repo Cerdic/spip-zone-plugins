@@ -22,7 +22,7 @@ function calcule_repertoire_max2() {
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-<form method='post' action='#ENV{action}' name ="compteur_tous_articles">
+<form method='post' action='#ENV{action}' name ="compteurgraphique_global">
 [(#REM) declarer les hidden qui declencheront le service du formulaire
 parametre : url d'action ]
 #ACTION_FORMULAIRE{#ENV{action}}
@@ -96,6 +96,5 @@ parametre : url d'action ]
 		<input type='submit' value='<:compteurgraphique:cg_creer:>' name='creer_compteur_tous' /></p>";
 	}
 ?>
-	</div>
 </form>
 </div>

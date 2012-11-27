@@ -1,0 +1,224 @@
+<?php
+
+function calcule_repertoire_max() {
+$icone = "../"._DIR_PLUGIN_COMPTEURGRAPHIQUE."/img_pack/CompteurGraphique.gif";
+    $i=0;
+    $j=0;
+    $cheminCG_rel=_DIR_PLUGIN_COMPTEURGRAPHIQUE."img_pack/";
+    while ($j==0) {
+        $i++;
+        if (file_exists($cheminCG_rel.$i.'/0.gif') || file_exists($cheminCG_rel.$i.'/0.png')) {}
+        else {$j=1;}
+    }
+    $i--;
+    return $i;        
+}
+
+
+$CG_nom_table = "spip_compteurgraphique";
+$cheminCG_rel=_DIR_PLUGIN_COMPTEURGRAPHIQUE."img_pack/";
+
+//On récupère le numéro de rubrique
+$id_rubrique=_request('id_rubrique');
+
+//On récupère les éventuelles données concernant la configuration des compteurs de visite des articles de cette rubrique
+$resultat1 = sql_select("id_compteur,statut,longueur,habillage",$CG_nom_table,"id_rubrique = $id_rubrique");
+$resultat1_tableau = sql_fetch($resultat1);
+$CG_id_compteur = $resultat1_tableau['id_compteur'];
+$CG_statut = $resultat1_tableau['statut'];
+$CG_longueur = $resultat1_tableau['longueur'];
+$CG_habillage = $resultat1_tableau['habillage'];
+
+//On vérifie si un compteur pour tous les articles du site a été créé
+$resultat_tous = sql_select("habillage",$CG_nom_table,"statut = 6");
+$resultat_tous_tableau = sql_fetch($resultat_tous);
+$CG_tous_habillage = $resultat_tous_tableau['habillage'];
+
+//On traite la demande de création d'un compteur pour tous les articles de la rubrique
+if (_request('creation_compteur_initial')) {
+	$limiteCG = calcule_repertoire_max();
+    $nbre_cellules=3;
+	?>
+	<:compteurgraphique:cg_rubrique_creer_compteur:><br />
+	<:compteurgraphique:cg_rubrique_stat_compteur:><br />
+	<form method='post' action='#ENV{action}' name ="compteur_rubrique_creation">
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div style="text-align:center;">
+		<table class="spip" style="margin:0;padding:0;">
+		<?php
+		for ($k=1;$k<=$limiteCG;$k++) {
+			if (($k%$nbre_cellules)==1){echo '<tr style="margin:0;padding:0;text-align:center;">';}
+			echo '<td align="center" style="margin:0;padding:0;text-align:center;">';
+			if (file_exists($cheminCG_rel.$k.'/8.gif')) {
+				echo '<div style="text-align:center;margin:0;padding:0;">
+				<img src="'.$cheminCG_rel.$k.'/8.gif"  style="text-align:center;margin:0;padding:0;">
+				</div>
+				<input type="radio" style="text-align:center;margin:0;padding:0;"
+				name="nouveau_habillage_creation" value='.$k;
+				if ($k==1) {echo ' checked';}
+				echo ' >';
+			}
+			echo '</td>';
+			if (($k%$nbre_cellules)==0){echo '</tr>';}
+		}
+		if (($limiteCG%$nbre_cellules)!=0) {echo '</tr>';}
+		?>
+		</table><hr />
+		<:compteurgraphique:cg_choix_nombre_chiffres:>
+		<select name="nouveau_chiffres"><option value="0" selected>
+		<:compteurgraphique:cg_chiffre_auto:>
+		</option>
+		<?php
+		for ($n=1;$n<=10;$n++) {
+			echo '<option value="'.$n.'">'.$n._T('compteurgraphique:cg_chiffre');
+			if ($n!=1){echo _T('compteurgraphique:cg_pluriel');}
+			echo '</option>';
+		}
+		?>
+		</select><br />&nbsp;<br />
+		#BOITE_PIED
+		<input type="submit" value="<:compteurgraphique:cg_creer:>"
+		name="creer_compteur_rubrique_valide">
+		</div>
+	</form>
+	<?php
+}
+elseif (_request('modif_compteur_rubrique')) {
+	$limiteCG = calcule_repertoire_max();
+    $nbre_cellules=3;
+	?>
+	<:compteurgraphique:cg_rubrique_creer_compteur:><br />
+	<:compteurgraphique:cg_rubrique_stat_compteur:><br />
+	<form method='post' action='#ENV{action}' name ="compteur_rubrique_creation">
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div style="text-align:center;">
+		<table class="spip" style="margin:0;padding:0;">
+		<?php
+		for ($k=1;$k<=$limiteCG;$k++) {
+			if (($k%$nbre_cellules)==1){echo '<tr style="margin:0;padding:0;text-align:center;">';}
+			echo '<td align="center" style="margin:0;padding:0;text-align:center;">';
+			if (file_exists($cheminCG_rel.$k.'/8.gif')) {
+				echo '<div style="text-align:center;margin:0;padding:0;">
+				<img src="'.$cheminCG_rel.$k.'/8.gif"  style="text-align:center;margin:0;padding:0;">
+				</div>
+				<input type="radio" style="text-align:center;margin:0;padding:0;"
+				name="habillage_modif" value='.$k;
+				if ($k==$CG_habillage) {echo ' checked';}
+				echo ' >';
+			}
+			echo '</td>';
+			if (($k%$nbre_cellules)==0){echo '</tr>';}
+		}
+		if (($limiteCG%$nbre_cellules)!=0) {echo '</tr>';}
+		?>
+		</table><hr />
+		<:compteurgraphique:cg_choix_nombre_chiffres:>
+		<select name="nouveau_chiffres"><option value="0"
+		<?php
+		if ($CG_longueur==0) {echo 'selected';}
+		?>
+		>
+		<:compteurgraphique:cg_chiffre_auto:>
+		</option>
+		<?php
+		for ($n=1;$n<=10;$n++) {
+			echo '<option value="'.$n.'"';
+			if ($CG_longueur==$n) {echo 'selected';}
+			echo '>'.$n._T('compteurgraphique:cg_chiffre');
+			if ($n!=1){echo _T('compteurgraphique:cg_pluriel');}
+			echo '</option>';
+		}
+		?>
+		</select><br />&nbsp;<br />
+		#BOITE_PIED
+		<input type="submit" value="<:compteurgraphique:cg_modif:>"
+		name="modif_compteur_rubrique_valide"><br />
+		<input type="submit" value="<:compteurgraphique:cg_annuler_modif:>"
+		name="modif_compteur_rubrique_annuler">
+		</div>
+	</form>
+	<?php
+}
+//On traite le cas où le modèle est interdit pour la rubrique
+elseif ($CG_statut==5) {
+	?>
+	<form method='post' action='#ENV{action}' name ="compteur_articles">
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div style="text-align:center;">
+		<:compteurgraphique:cg_rubrique_desactive:>
+		<:compteurgraphique:cg_rubrique_stop_desactiv:>
+		#BOITE_PIED
+		<input type="submit" value="<:compteurgraphique:cg_reactive:>"
+		name="reactive_compteur_rubrique">
+		</div>
+	</form>
+	<?php
+}
+//On traite le cas où un modèle de compteur est créé pour tous les articles de la rubrique
+elseif ($CG_statut==4) {
+	$limiteCG = calcule_repertoire_max();
+    $nbre_cellules=3;
+	?>
+	<form method='post' action='#ENV{action}' name ="compteur_articles">
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div style="text-align:center;">
+		<:compteurgraphique:cg_rubrique_modele_cree:>
+		<:compteurgraphique:cg_habillage_choisi:>
+		<?php
+		for ($m=1;$m<=5;$m++){
+			echo '<img src="'.$cheminCG_rel.$CG_habillage.'/'.$m.'.gif">';
+		}
+		?>
+		<br />&nbsp;<br />
+		<?php
+		if ($CG_longueur==0) {echo _T('compteurgraphique:cg_gestion_chiffres_automatique');}
+		else {
+			echo $CG_longueur." ";
+			if ($CG_longueur==1) echo _T('compteurgraphique:cg_affiche_chiffre');
+			else {echo _T('compteurgraphique:cg_affiche_chiffres');}
+			echo _T('compteurgraphique:cg_rubrique_modele_compteur');
+		}
+		?>
+		<input type="submit" value="<:compteurgraphique:cg_modif:>" name="modif_compteur_rubrique">
+		<input type="submit" value="<:compteurgraphique:cg_suppr:>" name="suppr_compteur_rubrique">
+		</div>
+	</form>
+	<?php
+}
+//On traite le cas où aucun modèle n'est créé pour la rubrique
+else {
+?>
+	<form method='post' action='#ENV{action}' name ="compteur_rubriques">
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div style="text-align:center;">
+		<:compteurgraphique:cg_rubrique_aucun_modele_compteur:>
+		<?php
+		if (isset($CG_tous_habillage)) {
+			echo _T('compteurgraphique:cg_rubrique_modele_compteur_cree');
+			for ($m=1;$m<=5;$m++){
+                echo '<img src="'.$cheminCG_rel.$CG_tous_habillage.'/'.$m.'.gif">';
+            }
+		}
+		?>
+		<hr />
+		<:compteurgraphique:cg_rubrique_interdire:><br />
+		<input type="submit" value="<:compteurgraphique:cg_interdire:>" name="interdire_compteur_rubrique">
+		<hr />
+		<:compteurgraphique:cg_rubrique_creer_compteur:>
+		#BOITE_PIED
+		<input type="submit" value="<:compteurgraphique:cg_creer:>" name="creation_compteur_initial">
+		</div>
+	</form>
+<?php
+}
+?>
