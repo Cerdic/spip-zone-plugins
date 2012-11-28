@@ -53,7 +53,7 @@ function exec_dons() {
 		$filtre_typedon .= '<option value="colis"'. ($type=='colis'?' selected="selected"':'') .'>'. _T('asso:dons_en_nature') .'</option>';
 //		$filtre_typedon .= '<option value="argent AND colis"'. (($type=='argent AND colis' OR $type=='colis AND argent')?' selected="selected"':'') .'>'. _T('asso:dons_mixtes') .'</option>';
 		$filtre_typedon .= '</select>';
-		filtres_association(array(
+		echo association_bloc_filtres(array(
 			'periode' => array($id_periode, 'asso_dons', 'don'),
 #			'id' => $id_don,
 		), 'dons', array(

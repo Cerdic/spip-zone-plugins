@@ -76,7 +76,7 @@ function exec_adherents() {
 		}
 		debut_cadre_association('annonce.gif', 'adherent_titre_liste_actifs');
 		// FILTRES
-		filtres_association(array(
+		echo association_bloc_filtres(array(
 			'lettre' => array($lettre, 'asso_membres', 'nom_famille', 'adherents', ),
 			'id' => $id,
 			'groupe' => $id_groupe, // ne pas proposer que si on affiche les groupes : on peut vouloir filtrer par groupe sans pour autant les afficher
@@ -223,29 +223,38 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe) {
 	if ($GLOBALS['association_metas']['aff_validite']) {
 		$res .= '<th>'. _T('asso:adherent_libelle_validite') .'</th>';
 	}
-	$res .= '<th colspan="'. (autoriser('editer_membres', 'association')?4:2) .'" class="actions">'._T('asso:entete_actions').'</th>'
-	. '<th><input title="'._T('asso:selectionner_tout').'" type="checkbox" id="selectionnerTous" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName(\'id_auteurs[]\'); for (var i in checkboxList) {checkboxList[i].checked=currentVal;}" /></th>'
+	$res .= '<th colspan="'
+	  . (autoriser('editer_membres', 'association')?4:2) 
+	  .'" class="actions">'._T('asso:entete_actions')
+	  ."</th>\n"
+	  . '<th><input title="'._T('asso:selectionner_tout')
+	  .'" type="checkbox" id="selectionnerTous" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName(\'id_auteurs[]\'); for (var i in checkboxList) {checkboxList[i].checked=currentVal;}" /></th>'
 	. "</tr>\n</thead><tbody>"
 	. $auteurs
 	. "</tbody>\n</table>\n";
 	// SOUS-PAGINATION
+	$arg = array();
+	if ($lettre)
+		$arg[]= "lettre=$lettre";
+	if ($statut_interne != 'defaut')
+		$arg[]= "statut_interne=$statut_interne";
 	$res .= "<table width='100%' class='asso_tablo_filtres'><tr>\n";
-	$res .= association_selectionner_souspage(array('spip_asso_membres', $critere), 'adherents', 'lettre='.$lettre.'&statut_interne='.$statut_interne, FALSE);
+	$res .= association_selectionner_souspage(array('spip_asso_membres', $critere), 'adherents', $arg, FALSE);
 	if (autoriser('editer_membres', 'association', 100)) {
-		$res .= "</td><td align='right' class='formulaire'><form>\n";
+		$res .= "<td align='right' class='formulaire'>\n";
 		if ($auteurs) {
 			if (autoriser('editer_membres', 'association')) {
-				$res .=  '<select name="action_adherents"><option value="" selected="">'._T('asso:choisir_action').'</option><option value="desactive">'
+				$res .=  '<select name="action_adherents"><option value="">'._T('asso:choisir_action')."</option>\n<option value='desactive'>"
 				.($statut_interne=='sorti' ? _T('asso:reactiver_adherent') : _T('asso:desactiver_adherent'))
-				.'</option><option value="delete">'._T('asso:supprimer_adherent').'</option>';
+				."</option>\n<option value='delete'>"._T('asso:supprimer_adherent')."</option>\n";
 			}
 			if (autoriser('editer_groupes', 'association', 100)) {
-				$res .=sql_countsel('spip_asso_groupes', '') ? '<option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_un_groupe').'</option>' : '';
+				$res .=sql_countsel('spip_asso_groupes', '') ? '<option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_un_groupe')."</option>\n" : '';
 			}
 			$res .='</select><input type="submit" value="'._T('asso:bouton_confirmer').'" />';
 		}
 		$res .= '<input type="hidden" name="statut_courant" value="'.$statut_interne.'" />'
-		.  '</form></td>';
+		.  '</td>';
 	}
 	$res .= '</tr></table>';
 	return 	array($critere, $jointure_groupe, generer_form_ecrire('action_adherents', $res));

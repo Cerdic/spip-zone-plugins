@@ -50,7 +50,7 @@ function exec_ventes() {
 		$filtre_statut .= ($etat=='traites'?' selected="selected"':'');
 		$filtre_statut .= '>'. _T('asso:ventes_expediees') .'</option>';
 		$filtre_statut .= '</select>';
-		filtres_association(array(
+		echo association_bloc_filtres(array(
 			'periode' => array($id_periode, 'asso_ventes', 'vente'),
 #			'id' => $id_vente,
 		), 'ventes', array(

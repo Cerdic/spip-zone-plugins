@@ -35,7 +35,7 @@ function exec_annexe() {
 		));
 		debut_cadre_association('finances-24.png', 'annexe_titre_general');
 		// Filtres
-		filtres_association(array(
+		echo association_bloc_filtres(array(
 			'periode' => array($ids['id_periode'], 'asso_comptes', 'operation'),
 			'destination' => $ids['destination'],
 		), 'annexe');

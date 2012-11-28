@@ -57,7 +57,7 @@ function exec_inscrits_activite() {
 		$filtre_statut .= '<option value="1"'. (intval($statut)>0?' selected="selected"':'') .'>'. _T('asso:activite_entete_validees') .'</option>';
 		$filtre_statut .= '<option value="-1"'. (intval($statut)<0?' selected="selected"':'') .'>'. _T('asso:activite_entete_impayees') .'</option>';
 		$filtre_statut .= '</select>';
-		filtres_association(array(
+		echo association_bloc_filtres(array(
 //			'periode' => array($id_periode, 'asso_activites', 'inscription'),
 #			'id' => $id_activite,
 		), 'inscrits_activite', array(

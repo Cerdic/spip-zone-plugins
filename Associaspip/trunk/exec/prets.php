@@ -91,7 +91,7 @@ function exec_prets() {
 		$filtre_statut .= (intval($statut)>0||$statut=='retour'?' selected="selected"':'');
 		$filtre_statut .= '>'. _T('asso:prets_restitues') .'</option>';
 		$filtre_statut .= '</select>';
-		filtres_association(array(
+		echo association_bloc_filtres(array(
 			'periode' => array($id_periode, 'asso_prets', 'sortie'),
 		), 'prets', array(
 			'' => "<input type='hidden' name='id' value='$id_ressource' />", // "prets&id=$id_ressource" a la place de 'prets' ne fonctionne pas...

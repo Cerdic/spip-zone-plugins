@@ -1427,17 +1427,19 @@ function association_selectionner_groupe($sel='', $exec='', $plus='') {
  *   Idem instituer_adherent_ici
  */
 function association_selectionner_statut($sel='', $exec='', $plus='') {
-    $res = '<select name="statut_interne" onchange="form.submit()">';
+    $res = '<select id="statut_interne" name="statut_interne" onchange="form.submit()">';
 #    $res .= '<option value="tous"';
 #    $res .= (($sel=='tous' || $sel=='%')?' selected="selected"':'');
 #    $res .= '>'. _T('asso:entete_tous') .'</option>';
     $res .= '<option value=""';
     $res .= (($sel=='defaut' || $sel=='')?' selected="selected"':'');
-    $res .= '>'. _T('asso:actifs') .'</option>';
+    $res .= '>'. _T('asso:actifs') ."</option>\n";
     foreach ($GLOBALS['association_liste_des_statuts'] as $statut) {
-		$res .= '<option value="'.$statut.'"';
-		$res .= ($sel==$statut?' selected="selected"':'');
-		$res .= '> '. _T('asso:adherent_entete_statut_'.$statut) .'</option>';
+		$res .= '<option value="'.$statut.'"'
+		. ($sel==$statut?' selected="selected"':'')
+		. '> '
+		. _T('asso:adherent_entete_statut_'.$statut)
+		. "</option>\n";
 	}
 	$res .= '</select>'.$plus;
     return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>') : $res;
@@ -1637,7 +1639,7 @@ function association_selectionner_destinations($sel='', $exec='', $plus='', $lst
  * @return string $res
  *   HTML du bandeau de pagination
  */
-function association_selectionner_souspage($pages, $exec='', $params='', $tbl=TRUE, $debut='debut', $req=TRUE) {
+function association_selectionner_souspage($pages, $exec='', $arg=array(), $tbl=TRUE, $debut='debut', $req=TRUE) {
 	$res = ($tbl?"<table width='100%' class='asso_tablo_filtres'><tr>\n":'') .'<td align="left">';
 	if ( is_array($pages) ) {
 		$nbr_pages = ceil(call_user_func_array('sql_countsel',$pages)/_ASSOCIASPIP_LIMITE_SOUSPAGE); // ceil() ou intval()+1 ?
@@ -1647,16 +1649,19 @@ function association_selectionner_souspage($pages, $exec='', $params='', $tbl=TR
 	if ( $nbr_pages>1 ) {
 		$debut = ($req?_request($debut):$debut);
 		$exec = ($exec?$exec:_request($exec));
+		if (!is_array($arg)) $arg = array($arg);
 		for ($i=0; $i<$nbr_pages; $i++) {
 			$position = $i*_ASSOCIASPIP_LIMITE_SOUSPAGE;
 			if ($position==$debut) { // page courante
-				$res .= ' <strong>'.$position.' </strong> ';
+				$res .= "\n<strong>".$position.' </strong> ';
 			} else { // autre page
-				$res .= '<a href="'. generer_url_ecrire($exec, ($params?"$params&":'').'debut='.$position) .'">'.$position.'</a>  ';
+				$arg['debut']= 'debut='.$position;
+				$h = generer_url_ecrire($exec, join('&', $arg));
+				$res .= "<a href='$h'>$position</a>\n";
 			}
 		}
 	}
-	$res .= '</td>';
+	$res .= "</td>\n";
 	return $res. ($tbl?"\n</tr></table>":'');
 }
 

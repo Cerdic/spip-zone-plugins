@@ -16,9 +16,9 @@ maj:2012-10-15; version:0.1.0; licence:GPL; copyleft:gilcot; -->]
             <label for="categorie"><:asso:adherent_libelle_categorie:></label>
 <B_categorie>
             <select name="categorie" [(#ENV{lecture_seule}|oui) readonly="readonly" ]id="categorie">
-                <option>[(#ENV{tous_aucun})]</option>
+                [<option>(#ENV{tous_aucun})</option>]
 <BOUCLE_categorie(ASSO_CATEGORIES){par libelle} >
-                <option value="#ID_CATEGORIE" [(#ENV{categorie}|=={#ID_CATEGORIE}|?{selected="selected"})]>#LIBELLE</option>
+                <option value="#ID_CATEGORIE" [(#ENV{categorie}|=={#ID_CATEGORIE}|?{selected="selected"})]>[(#LIBELLE|entites_html)]</option>
 </BOUCLE_categorie>
             </select>
 </B_categorie>

@@ -75,7 +75,7 @@ function exec_activites() {
 		$filtre_incrits .= ($inscription=='sans'?' selected="selected"':'');
 		$filtre_incrits .= '>'. _T('asso:activites_sans_inscrits') .'</option>';
 		$filtre_incrits .= '</select>';
-		filtres_association(array(
+		echo association_bloc_filtres(array(
 			'periode' => array($id_periode, 'evenements', 'debut'),
 #			'id' => $id_evenement,
 		), 'activites', array(

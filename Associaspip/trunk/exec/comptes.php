@@ -85,7 +85,7 @@ function exec_comptes() {
 		$filtre_vu .= '<option value="0" '. ($vu=='0'?' selected="selected"':'') .'>'. _T('asso:cpte_op_vu_non') .'</option>';
 		$filtre_vu .= '<option value="1" '. ($vu=='1'?' selected="selected"':'') .'>'. _T('asso:cpte_op_vu_oui') .'</option>';
 		$filtre_vu .= '</select>';
-		filtres_association(array(
+		echo association_bloc_filtres(array(
 			'periode' => array($id_periode, 'asso_comptes', 'operation'),
 #			'id' => $id_compte,
 		), 'comptes', array(

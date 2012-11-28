@@ -194,18 +194,4 @@ function debut_cadre_association($icone, $titre, $DEBUT_DROITE=TRUE) {
 		$chemin = find_in_path($icone); // icone alternative
 	debut_cadre_relief($chemin, FALSE, '', association_langue($titre) );
 }
-
-/**
- * Bloc (tableau en ligne) d'affinage (filtrage) des resultats dans les pages principales... (ici il s'agit de la navigation au sein des donnees tabulaires --un grand listing-- d'un module...)
- *
- * @see association_bloc_filtres
- * @note
- *   Ici il s'agit d'un vrai formulaire qui influe sur les donnees affichees
- *   et non sur la fonctionnalite en cours (onglet), contrairement aux apparences
- *   http://comments.gmane.org/gmane.comp.web.spip.devel/61824
- */
-function filtres_association($liste_filtres, $exec='', $supplements='', $td=TRUE) {
-	echo association_bloc_filtres($liste_filtres, $exec, $supplements, $td);
-}
-
 ?>
