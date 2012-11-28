@@ -5,6 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="images/zeroclipboard_logo.png"
+	documentation="http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/article/copier-coller-facile-zeroclipboard"
 >
 
 	<nom>Zeroclipboard</nom>
