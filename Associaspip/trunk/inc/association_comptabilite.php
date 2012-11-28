@@ -99,12 +99,13 @@ function association_editeur_destinations($destinations, $defaut='') {
 	    if ((count($options) == 1) AND $GLOBALS['association_metas']['unique_dest']) {
 	      $sel = "<input$n readonly='readonly' value='$id' /> $texte";
 	    } else $sel = "<select$n>" . join("\n", $options) . '</select>';
-	    $res = "<div id='row1' class='choix'><ul>\n<li class='editer_id_dest[1]'>$sel\n</li>";
+
 	    if (!$GLOBALS['association_metas']['unique_dest']) { // destinations multiples
-		$res .= '<li class="editer_montant_dest[1]"><input name="montant_dest[1]" id="montant_dest[1]"/></li>'
-		    . '</ul><button class="destButton" type="button" onclick="addFormField(); return FALSE;">+</button>';
-	    }
-	    $res .= '</div>';
+	      $alt = '<li class="editer_montant_dest[1]"><input name="montant_dest[1]" id="montant_dest[1]"/></li>';
+	      $but ='<button class="destButton" type="button" onclick="addFormField(); return FALSE;">+</button>';
+	    } else $alt = $but = '';
+
+	    $res = "<div id='row1' class='choix'><ul>\n<li class='editer_id_dest[1]'>$sel\n</li>$res$alt</ul>$but</div>\n";
     }
     return '<script type="text/javascript" src="'
       . find_in_path('javascript/jquery.destinations_form.js')

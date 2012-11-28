@@ -70,10 +70,11 @@
 			</ul>
 		</fieldset>
 		<fieldset>
-		  <legend><asso:adherent_entete_paiement:></legend>
+		  <legend><:asso:adherent_entete_paiement:></legend>
 		  <ul>
-<INCLURE{fond=inc/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, defaut_dest, champs_legende=Paiement, env}>
-		  </ul>
+<INCLURE{fond=inc/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, defaut_dest, env}
+>		  </ul>
+		</fieldset>
 <INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_vente} }>
 	</form>
 </div>
