@@ -11,7 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function association_plan_comptable_complet($code='', $returnCode=FALSE) {
+
 	/**
 	 * Plan comptable prenant en compte les nouvelles dispositions du règlement
 	 * N° 99-01 du 16 février 1999 relatif aux modalités d’établissement des comptes
@@ -35,7 +35,7 @@ function association_plan_comptable_complet($code='', $returnCode=FALSE) {
 	 * plus long commencant pareil et present dans le plan
 	 *
 	 */
-	$pcc = array(
+$GLOBALS['association_plan_comptable'] = array(
 		1 => "Comptes de capitaux",
 		10 => "Fonds associatifs et réserves",
 		102 => "Fonds associatifs sans droit de reprise",
@@ -522,9 +522,9 @@ function association_plan_comptable_complet($code='', $returnCode=FALSE) {
 		72 => "Production immobilisée",
 		720 => "Report exercice précédent",
 		74 => "Subvention d’exploitation",
-		740 => "Subvention \"municipale\"",
-		741 => "Subvention \"département\"",
-		742 => "Subvention \"région\"",
+		740 => "Subvention municipale",
+		741 => "Subvention départementale",
+		742 => "Subvention régionale",
 		75 => "Autres produits de gestion courante",
 		751 => "Redevances pour concessions, brevets, licences, marques, procédés, droits et valeurs similaires",
 		754 => "Collectes",
@@ -599,24 +599,27 @@ function association_plan_comptable_complet($code='', $returnCode=FALSE) {
 		871 => "Prestations en nature",
 		875 => "Dons en nature"
 	);
+
+function association_plan_comptable_complet($code='', $returnCode=FALSE) {
+
 	/* pas de parametre, on retourne tout le tableau ou rien si c'est le code qui est demande en retour */
 	if ($code==='') {
 		if ($returnCode==true)
 			return;
-		return $pcc;
+		return $GLOBALS['association_plan_comptable'];
 	}
 	/* parametre non valide(il ne commence pas par un chiffre entre 1 et 8), on retourne rien */
 	if (!preg_match("/^[1-8]\w*$/", $code))
 		return;
 	/* tant qu'on n'a pas d'entree correspondante dans la table on enleve le dernier caractere du code et on essaye de nouveau */
 	while (strlen($code>0)) {
-		if (array_key_exists($code, $pcc)) { /* si une entree existe on la renvoie */
+		if (array_key_exists($code, $GLOBALS['association_plan_comptable'])) { /* si une entree existe on la renvoie */
 			if ($returnCode==true)
 				return $code;
-		return $pcc[$code];
+			return $GLOBALS['association_plan_comptable'][$code];
+		}
+		$code = substr($code, 0, -1); /* sinon on enleve le dernier caractere */
 	}
-	$code = substr($code, 0, -1); /* sinon on enleve le dernier caractere */
-}
 	/* normalement on ne devrait jamais arriver ici mais par securite on renvoi rien */
 	return;
 }
