@@ -123,6 +123,13 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 		}
 	}
 
+	/**
+	 * On insère un attribut data-clipboard-text si on n'a pas le lien de téléchargement car pas de saut de ligne
+	 */
+	$datatext = !$telecharge && PLUGIN_COLORATION_CODE_TELECHARGE;
+	if($datatext)
+		$datatext_content = ' data-clipboard-text="'.attribut_html($code).'"';
+		
 	if ($cadre == 'cadre') {
 	  $spip_cadre = ' spip_cadre';
 	  $geshi->set_header_type(GESHI_HEADER_DIV);
@@ -136,15 +143,10 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 	//
 	// And echo the result!
 	//
-	$rempl = $stylecss . '<' . $englobant . ' class="coloration_code"><' . $englobant . ' class="spip_'.$language.' '.$cadre.$spip_cadre.'">'.$geshi->parse_code().'</' . $englobant . '>';
+	$rempl = $stylecss . '<' . $englobant . ' class="coloration_code"><' . $englobant . ' class="spip_'.$language.' '.$cadre.$spip_cadre.'"'.$datatext_content.'>'.$geshi->parse_code().'</' . $englobant . '>';
 
 	if ($telecharge) {
-		$rempl .= "<div class='" . $cadre . "_download'
-		style='text-align: $spip_lang_right;'>
-		<a href='$fichier'
-		style='font-family: verdana, arial, sans; font-weight: bold; font-style: normal;'>" .
-		  _T('bouton_download') .
-				"</a></div>";
+		$rempl .= "<div class='" . $cadre . "_download'><a href='$fichier'>"._T('bouton_download')."</a></div>";
 	}
 	return $rempl.'</' . $englobant . '>';
 }
