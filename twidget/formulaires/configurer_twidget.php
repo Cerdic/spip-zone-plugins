@@ -17,7 +17,7 @@ function formulaires_configurer_twidget_charger_dist() {
 	if ($config['interval'])
 		$valeurs['interval'] = $config['interval'];
 	else
-		$valeurs['interval'] = "6000";
+		$valeurs['interval'] = "30000";
 
 	if ($config['title'])
 		$valeurs['title'] = $config['title'];
