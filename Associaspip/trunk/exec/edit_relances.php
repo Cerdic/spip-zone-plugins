@@ -35,15 +35,15 @@ function exec_edit_relances() {
 		$filtre_relance .= '>'. _T('asso:autre') .'</option>';
 		$filtre_relance .= '<option value="1" ';
 		$filtre_relance .= (($num_relance==1)?' selected="selected"':'');
-		$filtre_relance .= '>'. _T('asso:relance') .'</option>';
-		filtres_association(array(
+		$filtre_relance .= '>'. _T('asso:relance') .'</option></select>';
+		echo association_bloc_filtres(array(
 			'groupe'=>$id_groupe,
 			'statut'=>$statut_interne,
 		), 'edit_relances', array(
 			'relance'=>$filtre_relance,
 		));
 		// MAILING
-		$res = '<div class="formulaire_spip formulaire_editer_relances"><form>'
+		$res = '<div class="formulaire_spip formulaire_editer_relances">'
 			// message (objet/titre et corps)
 			. '<ul>'
 			. '<li class="editer_sujet">'
@@ -52,7 +52,7 @@ function exec_edit_relances() {
 			. "</li>\n"
 			. '<li class="editer_message">'
 			. '<label for="message">'. _T('asso:message') . '</label>'
-			. '<textarea name="message" rows="15" id="message">'.stripslashes(_T('asso:message_relance')).'</textarea>'
+			. '<textarea name="message" cols="80" rows="15" id="message">'.stripslashes(_T('asso:message_relance')).'</textarea>'
 			. "</li>\n"
 			. "</ul>\n"
 			// destinataires (liste des resultats de filtrage, a affiner en decochant les membres a exclure)
@@ -65,8 +65,11 @@ function exec_edit_relances() {
 			. '<th>' . _T('asso:envoi') .'</th>'
 			. "</tr>\n</thead><tbody>"
 			.  relances_liste($critere, $groupe)
-			. "</tbody>\n</table>\n";
-		$res .= '<p class="boutons"><input type="submit" value="'. ( isset($action) ? _T('asso:bouton_'.$action) : _T('asso:bouton_envoyer') ) .'" /></p>';
+			. "</tbody>\n</table>\n"
+			. '<p class="boutons"><input type="submit" value="'
+			. ( isset($action) ? _T('asso:bouton_'.$action) : _T('asso:bouton_envoyer') )
+			.'" /></p></div>';
+
 		echo generer_form_ecrire('relance_adherents', $res, '', '');
 		fin_page_association();
 	}
@@ -93,12 +96,19 @@ function relances_liste($critere, $id_groupe=0) {
 	$query = sql_select(
 		'id_auteur, sexe, nom_famille, prenom, statut_interne, date_validite', "spip_asso_membres AS a_m $jointure_groupe", $critere, '', 'nom_famille, prenom, date_validite' );
 	$res = '';
+
+	// La fonction association_bouton_coch ne sachant pas construire
+	// des checkbox avec un nom indexe
+	// on fait double le nombre de balise Input
+	// cf formulaires/relancer_adherents qui utilise un foreach bancal
+	// pour recoller les morceaux. A simplifier
 	while ($data = sql_fetch($query)) {
-		$res .= '<tr class="'.$GLOBALS['association_styles_des_statuts'][$data['statut_interne']].'" id="membre'.$data['id_auteur'].'">'
-		.'<td class="integer"><label for="id'.$data['id_auteur'].'">'.$data['id_auteur'].'</label></td>'
-		.'<td class="text"><label for="id'.$data['id_auteur'].'">'. association_formater_nom($data['sexe'], $data['prenom'], $data['nom_famille']) .'</label></td>'
-		.'<td class="date"><label for="mbr'.$data['id_auteur'].'">'. association_formater_date($data['date_validite']) .'</label></td>'
-		. association_bouton_coch('id', $data['id_auteur'], '<input name="statut['.$data['id_auteur'].']" type="hidden" value="'.$data['statut_interne'].'" />')
+		$id =  $data['id_auteur'];
+		$res .= '<tr class="'.$GLOBALS['association_styles_des_statuts'][$data['statut_interne']] . '">'
+		. "<td class='integer'><label for='statut$id'>$id</label></td>\n"
+		. "<td class='text'>". association_formater_nom($data['sexe'], $data['prenom'], $data['nom_famille']) . "</td>\n"
+		. "<td class='date'>". association_formater_date($data['date_validite']) ."</td>\n"
+		. association_bouton_coch('id', $id, "<input name='statut[$id]' id='statut$id' type='hidden' value='" . $data['statut_interne']."' />")
 		."</tr>\n";
 	}
 	return $res;
