@@ -7,6 +7,6 @@
   documentation="http://evaweb.fr/spip.php?rubrique22"
 >
   <nom>Int&#233;gration d'activit&#233;s de g&#233;om&#233;trie</nom>
-  <auteur>[Olivier Gautier->http://spip.ac-rouen.fr]</auteur>
+  <auteur>Olivier Gautier, d&#233;veloppeur EVA-web</auteur>
   <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 </paquet>
