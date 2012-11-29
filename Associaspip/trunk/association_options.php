@@ -857,7 +857,7 @@ function association_formater_telephones($id_objets, $objet='auteur', $html_span
 				$telephone['numero'] = $telephone;
 			}
 			if ($html_span) { // formatage HTML avec microformat
-				$telephones_string[$id_objet] =  "<$html_span id='$telephone[id_telephone]' class='tel'>". association_formater_typecoord('tel', $telephone['type']);
+				$telephones_string[$id_objet] =  "<$html_span class='tel'>". association_formater_typecoord('tel', $telephone['type']);
 				$tel_num = ($telephone['pays']?"+$telephone[pays]$telephone[region]$telephone[numero]":$telephone['numero']);
 				$telephones_string[$id_objet] .=  ($href_pre?("<a title='". _T('asso:composer_le') ." $tel_num' href='$href_pre"):"<abbr title='"). preg_replace('/[^\d+]/', '', $tel_num) . ($href_pre?$href_post:'') ."' class='value'>";
 				unset($telephone['type']); // ne devrait plus etre traite par le modele
@@ -865,7 +865,7 @@ function association_formater_telephones($id_objets, $objet='auteur', $html_span
 				unset($telephone['id_numero']); // ne devrait pas etre utilise par le modele
 			}
 			$telephone['_spc'] = $space; // parametre supplementaire pour le modele
-			$telephones_string[$id_objet] .=  recuperer_fond("modeles/coordonnees_telephone", $telephone) .($html_span?('</'.($href_pre?'a':'abbr')."></$htm_span>\n"):'') .$sep;
+			$telephones_string[$id_objet] .=  recuperer_fond("modeles/coordonnees_telephone", $telephone) .($html_span?('</'.($href_pre?'a':'abbr')."></$html_span>\n"):'') .$sep;
 		}
 	}
 	return $telephones_string;
@@ -1031,7 +1031,7 @@ function association_formater_emails($id_objets, $objet='auteur', $html_span='di
 				$courriel['email'] = $courriel;
 			}
 			if ($html_span) { // balisage HTML avec microformat
-				$emails_string[$id_objet] = "<$html_span id='$courriel[id_email]' class='email'>". association_formater_typecoord('mel', $courriel['type']);
+				$emails_string[$id_objet] = "<$html_span class='email'>". association_formater_typecoord('mel', $courriel['type']);
 				if ( !$courriel['type'] || stripos($courriel['type'], 'internet')!==FALSE )
 					$href = TRUE;
 				$emails_string[$id_objet] .= ($href?("<a title='". _T('asso:ecrire_a') ." $courriel[email]' href='mailto:$courriel[email]'"):'<span') ." class='value'>";

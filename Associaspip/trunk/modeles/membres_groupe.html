@@ -8,14 +8,6 @@ parametres =
 
 maj:2012-09-27; version:0.1.1; licence:GPL; -->]
 
-#SET{listeIdAuteurs, #ARRAY}
-<BOUCLE_listeID(ASSO_GROUPES_LIAISONS){id_groupe=#ENV{id_groupe}}>
-	#SET{listeIdAuteurs, #GET{listeIdAuteurs}|push{#ID_AUTEUR}}
-</BOUCLE_listeID>
-#SET{emails,#ARRAY}
-#SET{emails,#GET{listeIdAuteurs}|appliquer_filtre{association_formater_emails}}
-#SET{telephones,#ARRAY}
-#SET{telephones,#GET{listeIdAuteurs}|appliquer_filtre{association_formater_telephones}}
 <B_membres2groupe>
 <p class="pagination">#PAGINATION</p>
 <table width="100%" class="asso_tablo">
@@ -37,11 +29,11 @@ maj:2012-09-27; version:0.1.1; licence:GPL; -->]
 					     {pagination}
 					     ><tr class="agent vcard [(#COMPTEUR_BOUCLE|alterner{'pair','impair'})]">[(#META{association/aff_photo}|oui)
 	<td class="url photo">[(#LOGO_AUTEUR{#URL_AUTEUR,left}|image_reduire{60})]</td>]
-	<td>[(#SEXE|association_formater_nom{#PRENOM, #NOM_FAMILLE, 'span'})]</td>
+	<td>[<a href='#URL_ECRIRE{adherent,id_auteur=#ID_AUTEUR}'>(#SEXE|association_formater_nom{#PRENOM, #NOM_FAMILLE, 'span'})</a>]</td>
 	<td><a class="include" href="#vcard-group#ENV{id_groupe}"></a> [<span class="role">(#FONCTION)</span>]</td>[(#AUTORISER{voir_profil,association}|oui)
 			[(#PLUGIN{coordonnees}|oui)
-			<td>[(#GET{telephones}|table_valeur{#ID_AUTEUR})]</td>]
-			<td>[(#GET{emails}|table_valeur{#ID_AUTEUR})]</td>]
+			<td>[(#ID_AUTEUR|association_formater_telephones|array_shift)]</td>]
+			<td>[(#ID_AUTEUR|association_formater_emails|array_shift)]</td>]
 </tr>
 </BOUCLE_membres2groupe>
 	</tbody>
