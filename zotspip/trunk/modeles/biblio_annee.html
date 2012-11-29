@@ -5,6 +5,7 @@
 #SET{alea,#EVAL{rand()}} [(#REM) besoin d'un alea pour unique car le modele peut etre appele plusieurs fois (typiquement pour l'intro, puis pour le texte). ]
 [(#REM) pagination de 50 car limite pour l'export des references. ]
 <B_biblio>
+#ANCRE_PAGINATION
 [(#GET{export}|oui)
 	<form method="get" action="spip.php" target="_blank">
 	<input type="hidden" name="page" value="zotspip_unapi">]

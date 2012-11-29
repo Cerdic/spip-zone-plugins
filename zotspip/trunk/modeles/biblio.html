@@ -13,6 +13,7 @@
 
 <BOUCLE_test_tri(CONDITION){si #ENV{par}|=={type}}>
 	<B_biblio_type>
+	#ANCRE_PAGINATION
 	[(#GET{export}|oui)
 		<form method="get" action="spip.php" target="_blank">
 		<input type="hidden" name="page" value="zotspip_unapi">]
@@ -28,6 +29,7 @@
 	</B_biblio_type>
 </BOUCLE_test_tri>
 	<B_biblio>
+	#ANCRE_PAGINATION
 	[(#GET{export}|oui)
 		<form method="get" action="spip.php" target="_blank">
 		<input type="hidden" name="page" value="zotspip_unapi">]
