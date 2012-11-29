@@ -1,13 +1,13 @@
 <paquet
 	prefix="contacts"
 	categorie="auteur"
-	version="2.2.1"
+	version="2.2.2"
 	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="images/contacts-128.png"
 	schema="1.7.2"
 	documentation="http://www.spip-contrib.net/Plugin-Contacts-Organisations"
->	
+>
 
 	<nom>Contacts &#38; Organisations</nom>
 	<!-- Ajouter un gestionnaire de contacts à SPIP -->

@@ -4,7 +4,7 @@
  * Plugin Contacts & Organisations pour Spip 3.0
  * Licence GPL (c) 2009 - 2012 - Ateliers CYM
  */
- 
+
 
 /**
  * Ajouter un fil d'ariane
@@ -13,7 +13,8 @@
  */
 function contacts_affiche_hierarchie($flux)
 {
-	if ($flux['args']['objet'] == 'auteur') {
+	if ($flux['args']['objet'] == 'auteur'
+        and $id = $flux["args"]["id_auteur"]) {
 		if (lire_config('contacts_et_organisations/associer_aux_auteurs')) {
 			$id = intval($flux['args']['id_objet']);
 			// cherchons un contact
@@ -61,8 +62,8 @@ function contacts_afficher_contenu_objet($flux)
 			}
 		}
 	}
-	
-	if ($flux['args']['type'] == 'rubrique') 
+
+	if ($flux['args']['type'] == 'rubrique')
 	{
 		if (lire_config('contacts_et_organisations/lier_organisations_rubriques')) {
 			$id = $flux['args']['id_objet'];
@@ -74,8 +75,8 @@ function contacts_afficher_contenu_objet($flux)
 			));
 			$flux['data'] .= $infos;
 		}
-	} 
-	
+	}
+
 	return $flux;
 }
 
@@ -84,7 +85,7 @@ function contacts_afficher_contenu_objet($flux)
 /**
  * Affichage du formulaire de choix Contact/Organisation
  * dans la colonne de vue d'un auteur
- * et 
+ * et
  * Affichage du formulaire de recherche et de sélection d'Organisations
  * dans la colonne de vue d'une rubrique
 **/
