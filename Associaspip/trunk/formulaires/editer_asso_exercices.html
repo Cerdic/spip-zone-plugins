@@ -10,14 +10,14 @@
 				<input name="intitule" type="text" [value="(#ENV{intitule})"] id="intitule" class="text" />
 			</li>
 			<li class="editer_debut">[
-				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{debut})</span>]
-				<label for="debut"><:asso:exercice_libelle_debut:></label>
-				<input name="debut" type="[(#HTML5|?{date,text})]" [value="(#ENV{debut})"] id="debut" class="date" />
+				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_debut})</span>]
+				<label for="date_debut"><:asso:exercice_libelle_debut:></label>
+				<input name="date_debut" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_debut})"] id="date_debut" class="date" />
 			</li>
 			<li class="editer_fin">[
-				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{fin})</span>]
-				<label for="fin"><:asso:exercice_libelle_fin:></label>
-				<input name="fin" type="[(#HTML5|?{date,text})]" [value="(#ENV{fin})"] id="fin" class="date" />
+				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_fin})</span>]
+				<label for="date_fin"><:asso:exercice_libelle_fin:></label>
+				<input name="date_fin" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_fin})"] id="date_fin" class="date" />
 			</li>
 			<INCLURE{fond=inc/saisir_commentaires, commentaire }>
 		</ul>
