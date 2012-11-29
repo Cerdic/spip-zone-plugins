@@ -836,7 +836,7 @@ function association_formater_telephones($id_objets, $objet='auteur', $html_span
 	if ($objet) { // ancien comportement : ce sont les id_auteur qui sont transmis
 		$telephones_array = array(); // initialisation du tableau des donnees
 		$trouver_table = charger_fonction('trouver_table', 'base');
-		if ( $trouver_table('spip_numeros') && $trouver_table('spip_numeros_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
+		if ( $trouver_table('numeros') && $trouver_table('numeros_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
 			foreach ($id_objets as $id_objet) { // prepare la structure du tableau renvoye
 				$telephones_array[$id_objet] = array();
 			}
