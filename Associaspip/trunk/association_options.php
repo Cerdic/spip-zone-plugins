@@ -2654,8 +2654,8 @@ function association_trouver_iextras($ObjetEtendu, $id=0) {
 				}
 			}
 		}
-	} else { // le plugin "Interfaces pour ChampsExtras2" n'est pas actif :-S Mais peut-etre a-t-il ete installe ?
-*/
+		} else */ { // le plugin "Interfaces pour ChampsExtras2" n'est pas actif :-S Mais peut-etre a-t-il ete installe ?
+
 		$ChampsExtrasGeres = @unserialize(str_replace('O:10:"ChampExtra"', 'a', $GLOBALS['meta']['iextras'])); // "iextras (interface)" stocke la liste des champs geres dans un meta. Ce meta est un tableau d'objets "ChampExtra" (un par champ extra) manipules par "cextras (core)". On converti chaque objet en tableau
 		if ( !is_array($ChampsExtrasGeres) )
 			return array(); // fin : ChampsExtras2 non installe ou pas d'objet etendu.
