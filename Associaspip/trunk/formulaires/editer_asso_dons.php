@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 include_spip('inc/actions');
 include_spip('inc/editer');
 
-function formulaires_editer_asso_dons_charger_dist($id_don=0, $id_auteur=0) {
+function formulaires_editer_asso_dons_charger_dist($id_don=0, $id_auteur=0, $editable=true) {
 	$contexte = formulaires_editer_objet_charger('asso_dons', $id_don, '', '',  generer_url_ecrire('dons'), '');
 	if (!$id_don) { // si c'est une nouvelle operation, on charge la date d'aujourd'hui
 		$contexte['date_don'] = date('Y-m-d');
@@ -32,7 +32,7 @@ function formulaires_editer_asso_dons_charger_dist($id_don=0, $id_auteur=0) {
 		$contexte['argent'] = association_formater_nombre($contexte['argent']);
 	if ($contexte['valeur'])
 		$contexte['valeur'] = association_formater_nombre($contexte['valeur']);
-
+	$contexte['readonly'] = $editable ? '' : ' readonly="readonly"';
 	return $contexte;
 }
 

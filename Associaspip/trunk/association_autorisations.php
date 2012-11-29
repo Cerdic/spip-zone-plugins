@@ -358,14 +358,13 @@ function autoriser_association_gerer_dons_dist($faire, $type, $id, $qui, $opt) {
 
 /**
  * Editer les donations.
- * defaut : admin non restreint.
  * groupes : 10,11,40,41.
+ * sinon, comme les cotisations
  */
 function autoriser_association_editer_dons_dist($faire, $type, $id, $qui, $opt) {
-	if ($qui['statut']=='0minirezo' && !$qui['restreint']) {
+	if (is_in_groups($qui['id_auteur'], array(41,40,11,10)))
 		return TRUE;
-	}
-	return is_in_groups($qui['id_auteur'], array(41,40,11,10));
+	return autoriser_association_ajouter_cotisation_dist($faire, $type, $id, $qui, $opt);
 }
 
 /**
