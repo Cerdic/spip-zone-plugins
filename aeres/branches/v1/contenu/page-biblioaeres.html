@@ -1,0 +1,114 @@
+#CACHE{0}
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on">Bibliographie AERES</strong></p>
+
+<h1 class="h1">Bibliographie au format AERES #CONFIG{aeres/debut}-#CONFIG{aeres/fin}</h1>
+[(#CONFIG{aeres/debut}|non)<div class="aeres_info_erreur">ATTENTION : l'année de début n'est pas renseignée.</div>]
+[(#CONFIG{aeres/fin}|non)<div class="aeres_info_erreur">ATTENTION : l'année de fin n'est pas renseignée.</div>]
+
+<h2 class="h2">Bibliographie par auteur</h2>
+<div class="formulaire_spip">
+	<form method="get" action="spip.php"><div>
+	<ul>
+		<li>
+			<label>Action</label>
+			<div class="choix">
+				<input type="radio" name="page" class="radio" id="page_verif" value="biblioaeres_verif" checked="checked" />
+				<label for='page_verif'>Vérifier les publications de cet auteur</label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="page" class="radio" id="page_voir" value="biblioaeres_voir" />
+				<label for='page_voir'>Afficher la bibliographie de cet auteur au format AERES</label>
+			</div>
+		</li>
+		<li>
+			<label for='auteur'>Auteur</label>
+			<div class="explication">Note : cette liste comporte tous les auteurs ayant au moins une publication dans la base de données.</div>
+			<select name="auteur" id="auteur">
+				<option value="">Tous les auteurs</option>
+				<BOUCLE_auteur(ZCREATORS){fusion auteur}{par auteur}>
+				<option value="#AUTEUR">#AUTEUR</option>
+				</BOUCLE_auteur>
+			</select>
+			<div class="explication">Il est possible qu'un même auteur apparaisse deux ou plusieurs fois. Cela est généralement dû à des erreurs d'orthographe, d'accents ou encore de prénom incomplet. Si tel est le cas, veuillez le signaler comme correction à effectuer.[<br />Pour toute question, envoyez un email à <a href="mailto:#CONFIG{aeres/contact}">(#CONFIG{aeres/contact})</a>.]</div>
+		</li>
+		<li>
+			<label>Personnaliser la période</label>
+			<input type="text" name="debut" id="debut" class="text" value="#ENV{debut,#CONFIG{aeres/debut}}" style="width:45%;"/>
+			<input type="text" name="fin" id="fin" class="text" value="#ENV{fin,#CONFIG{aeres/fin}}" style="width:45%;"/>
+		</li>
+	</ul>
+	<p class='boutons'>
+		<input type='submit' class='submit' value='Vérifier / Afficher' />
+	</p>
+	</form></div>
+</div>
+
+<h2 class="h2">Nouvel auteur</h2>
+<div class="formulaire_spip">
+	<form method="get" action="spip.php"><div>
+	<input type="hidden" name="page" value="biblioaeres_verif" />
+	<div class="explication">Pour indiquer les références d'un auteur non encore présent dans la base de données, veuillez saisir son nom ci-dessous.</div>
+	<ul>
+		<li>
+			<label>Nom de l'auteur (sous la forme <em>Nom, Prénom</em>)</label>
+			<input type="text" name="auteur" class="text" value="" />
+		</li>
+	</ul>
+	<p class='boutons'>
+		<input type='submit' class='submit' value='Renseigner les publications de cet auteur' />
+	</p>
+	</form></div>
+</div>
+
+<h2 class="h2">Bibliographie générale de l'unité</h2>
+<div class="formulaire_spip">
+	<div class="explication">Cette liste est restreinte aux publications des membres de l'unité. (Cette liste des membres est définie dans la configuration du plugin).</div>
+	<form method="get" action="spip.php"><div>
+	<input type="hidden" name="page" value="biblioaeres_unite" />
+	<ul>
+		<li>
+			<label>Personnaliser la période</label>
+			<input type="text" name="debut" id="debut" class="text" value="#ENV{debut,#CONFIG{aeres/debut}}" style="width:45%;"/>
+			<input type="text" name="fin" id="fin" class="text" value="#ENV{fin,#CONFIG{aeres/fin}}" style="width:45%;"/>
+		</li>
+		<B_csl>
+		<li class="editer_csl[ (#ENV**{erreurs}|table_valeur{csl}|oui)erreur]">
+			<label for='csl'>Personnaliser le style des références</label>
+			<select name="csl" id="csl">
+				<BOUCLE_csl(POUR){tableau #LISTER_CSL}{par valeur}>
+				<option value="#CLE"[(#CONFIG{aeres/csl}|=={#CLE}|oui)selected="selected"]>#VALEUR</option>
+				</BOUCLE_csl>
+			</select>
+		</li>
+		</B_csl>
+		<li>
+			<label for="compteur">Afficher le nombre de références de chaque type ?</label>
+			<select name="compteur" id="compteur">
+				<option value=""><:non:></option>
+				<option value="oui"><:oui:></option>
+			</select>
+		</li>
+		[(#SESSION{statut}|=={0minirezo}|oui)
+		<li>
+			<label for="stats">Afficher les statistiques par auteur ?</label>
+			<select name="stats" id="stats">
+				<option value=""><:non:></option>
+				<option value="oui"><:oui:></option>
+			</select>
+		</li>]
+		<li>
+			<label for="auteurs">Personnaliser la liste des membres</label>
+			<div class="explication">Vous pouvez sélectionner plusieurs membres de l'unité. Utilisez les touches CTRL et SHIFT. La bibliographie produite sera alors restreinte aux membres sélectionnés.</div>
+			<select multiple id="auteurs" name="auteurs[]" class="select" size="10">
+				<BOUCLE_membres(POUR){tableau #AERES_MEMBRES}>
+				<option value="#VALEUR">#VALEUR</option>
+				</BOUCLE_membres>
+			</select>
+		</li>
+	</ul>
+	<p class='boutons'>
+		<input type='submit' class='submit' value='Afficher' />
+	</p>
+	</form></div>
+</div>
