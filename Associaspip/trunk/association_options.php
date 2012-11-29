@@ -1305,7 +1305,7 @@ function association_verifier_destinations($valeur, $req=TRUE) {
 	$total_destination = 0;
 	$id_inserted = array();
 	if (count($toutesDestinationsIds)>1) { // on a plusieurs destinations
-		foreach ($toutesDestinationsIds as $id => $id_destination) { 
+		foreach ($toutesDestinationsIds as $id => $id_destination) {
 		  // on verifie qu'il n'y a pas plusieurs fois
 		  // la meme destination, tout en recalculant le total
 			if (!array_key_exists($id_destination,$id_inserted)) {
@@ -1852,7 +1852,7 @@ function association_totauxinfos_stats($legende='', $sql_table_asso, $sql_champs
 	. "\n<tr class='row_first'>\n<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>"
 	. '<th title="'. _T('entete_stats_moy') .'">'
 	. '<span style="text-decoration:overline;">X</span>' . "</th>\n"
-	. "<th title='". _T('entete_stats_mea') ."'>&sigma;</th>\n"; 
+	. "<th title='". _T('entete_stats_mea') ."'>&sigma;</th>\n";
 	// σ &sigma; &#963; &#x3C3;
 	if ($avec_extrema) {
 		$res .= '<th title="'. _T('entete_stats_min') .'">[&lt;</th>';
@@ -2150,10 +2150,10 @@ function association_bloc_listehtml2($table, $reponse_sql, $presentation, $bouto
 
 
 	if ( $cle1 && $selection ) {
-// comme on ne peut placer un evenement "onLoad" que sur une ressource externe 
+// comme on ne peut placer un evenement "onLoad" que sur une ressource externe
 // (IMG, FRAME, SCRIPT, BODY) ; il vaut mieux appliquer un SCRIPT inclus
 // (tout juste apres ou dans HEAD si possible)
-		$res .= '<script type="text/javascript"> document.getElementById("'.$objet.$selection.'").scrollIntoView(true); </script>' ; 
+		$res .= '<script type="text/javascript"> document.getElementById("'.$objet.$selection.'").scrollIntoView(true); </script>' ;
 	}
 	return $res;
 }
@@ -2357,7 +2357,7 @@ function sql_asso1set($operateur='UNION', $q1=array(), $q2=array() ) {
  * &id=
  *
  * @return int $id
- * 
+ *
  */
 function association_passeparam_id($type='') {
 	if ($type) // recuperer en priorite : id_compte, id_don, id_evenement, id_ressource, id_vente, etc.
@@ -2369,7 +2369,7 @@ function association_passeparam_id($type='') {
 }
 
 /**
- * Retourne la ligne SQL correspondant a la table donnee et au ID dans l'URL 
+ * Retourne la ligne SQL correspondant a la table donnee et au ID dans l'URL
  * et controle l'autorisation
  *
  * @param string $type
@@ -2533,7 +2533,7 @@ function association_chargeparam_destinations($type, &$contexte) {
 	if ($GLOBALS['association_metas']['destinations'] AND $contexte['id_compte']) {
 		// Recuperer les destinations associees a id_compte
 		// pour ajouter au contexte : id_dest, montant_dest, defaut_dest
-		// ces variables sont recuperees par la balise dynamique 
+		// ces variables sont recuperees par la balise dynamique
 		include_spip('inc/association_comptabilite');
 		$dest = association_liste_destinations_associees($contexte['id_compte']);
 		if ($dest) {
@@ -2628,6 +2628,7 @@ function affichage_div($type_operation, $list_operation) {
  */
 function association_trouver_iextras($ObjetEtendu, $id=0) {
 	$champsExtrasVoulus = array();
+/*
 	if (test_plugin_actif('IEXTRAS')) { // le plugin "Interfaces pour ChampsExtras2" est installe et active : on peut donc utiliser les methodes/fonctions natives...
 		include_spip('inc/iextras'); // charger les fonctions de l'interface/gestionnaire (ce fichier charge les methode du core/API)
 		include_spip('inc/cextras_gerer'); // semble necessaire aussi
@@ -2654,6 +2655,7 @@ function association_trouver_iextras($ObjetEtendu, $id=0) {
 			}
 		}
 	} else { // le plugin "Interfaces pour ChampsExtras2" n'est pas actif :-S Mais peut-etre a-t-il ete installe ?
+*/
 		$ChampsExtrasGeres = @unserialize(str_replace('O:10:"ChampExtra"', 'a', $GLOBALS['meta']['iextras'])); // "iextras (interface)" stocke la liste des champs geres dans un meta. Ce meta est un tableau d'objets "ChampExtra" (un par champ extra) manipules par "cextras (core)". On converti chaque objet en tableau
 		if ( !is_array($ChampsExtrasGeres) )
 			return array(); // fin : ChampsExtras2 non installe ou pas d'objet etendu.
