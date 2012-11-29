@@ -1,0 +1,151 @@
+<BOUCLE_zitem(ZITEMS){id_zitem}>
+<div class="zotspip_item aeres_verifier_item">
+	<div class="liens">
+		[<a href="http://dx.doi.org/(#DOI|trim|urlencode)" title="<:zotspip:identifier_via_doi:>"><img src="#CHEMIN{images/zotero/go.png}" alt=""></a><br />]
+		[<a href="http://www.worldcat.org/isbn/(#ISBN|trim|urlencode)" title="<:zotspip:identifier_via_isbn:>"><img src="#CHEMIN{images/zotero/go.png}" alt=""></a><br />]
+		[<a href="(#URL)" title="<:zotspip:lien_ressource:>"><img src="#CHEMIN{images/zotero/url.png}" alt=""></a>]
+	</div>
+	#REFERENCE{#CONFIG{aeres/csl},#ENV{auteur}}
+	<abbr class="unapi-id" title="#ID_ZITEM"></abbr>
+	
+	[(#REM) Faire les vérifications ici]
+	[(#TYPE|in_array{#ARRAY{0,attachment,1,note}}|non|et{#TITRE|non}|oui)
+		<div class="aeres_info_erreur">Le titre n'est pas renseigné.</div>]
+	[(#TYPE|in_array{#ARRAY{0,journalArticle,1,magazineArticle,2,bookSection}}|et{#PAGES|non}|oui)
+		<div class="aeres_info_erreur">Les pages de début et de fin ne sont pas renseignés (normal seulement s'il s'agit d'une revue exclusivement en ligne).</div>]
+	[(#TYPE|in_array{#ARRAY{0,book,1,report,2,thesis,3,manuscript}}|et{#PAGES|non}|oui)
+		<div class="aeres_info_erreur">Le nombre de pages n'est pas renseigné.</div>]
+	[(#TYPE|=={conferencePaper}|et{#PUBLICATION}|et{#PAGES|non}|oui)
+		<div class="aeres_info_erreur">Les pages de début et de fin ne sont pas renseignés.</div>]
+	[(#TYPE|in_array{#ARRAY{0,book,1,bookSection}}|oui|et{#EDITEUR|non}|oui)
+		<div class="aeres_info_erreur">La maison d'édition n'est pas renseignée.</div>]
+	[(#TYPE|in_array{#ARRAY{0,journalArticle,1,magazineArticle}}|oui|et{#PUBLICATION|non}|oui)
+		<div class="aeres_info_erreur">Le nom de la revue n'est pas renseigné.</div>]
+	[(#TYPE|=={bookSection}|et{#PUBLICATION|non}|oui)
+		<div class="aeres_info_erreur">Le nom de l'ouvrage n'est pas renseigné.</div>]
+	[(#TYPE|=={conferencePaper}|et{#PUBLICATION|non}|et{#CONFERENCE|non}|oui)
+		<div class="aeres_info_erreur">Le nom de la conférence n'est pas renseigné</div>]
+	[(#TYPE|=={report}|et{#TYPE_DOC|non}|oui)
+		<div class="aeres_info_erreur">Le type de rapport n'est pas renseigné.</div>]
+	<BOUCLE_test_chapitre(CONDITION){si #TYPE|=={bookSection}}>
+		<BOUCLE_nb_aut_livre(ZCREATORS){id_zitem}{role IN editor,bookAuthor} />[(#TOTAL_BOUCLE|non)<div class="aeres_info_erreur">Les auteurs/éditeurs de l'ouvrage ne sont pas renseignés.</div>]<//B_nb_aut_livre>
+	</BOUCLE_test_chapitre>
+	
+	<div class="afficher_details" id="afficher_details_#ID_ZITEM" style="display:none;"><a href="javascript:void(0);"  onClick="$('#details_#ID_ZITEM').toggle(400);"><:zotspip:afficher_masquer_details:></a></div>
+	<div class="details" id="details_#ID_ZITEM">
+	#ZITEM_DETAILS
+	#INCLURE{fond=inclure/zitem_sousitems,id_parent=#ENV{id_zitem},type=attachment}
+	<div class="export">
+		<strong><:zotspip:exporter_reference:></strong>
+		<a href="#URL_PAGE{zotspip_unapi,id=#ID_ZITEM&format=bibtex}">BibTeX</a> |
+		<a href="#URL_PAGE{zotspip_unapi,id=#ID_ZITEM&format=mods}">MODS</a> |
+		<a href="#URL_PAGE{zotspip_unapi,id=#ID_ZITEM&format=refer}">Refer/BibIX</a> |
+		<a href="#URL_PAGE{zotspip_unapi,id=#ID_ZITEM&format=rdf_bibliontology}">Bibliographic Ontology RDF</a> |
+		<a href="#URL_PAGE{zotspip_unapi,id=#ID_ZITEM&format=rdf_dc}">Unqualified Dublin Core RDF</a> |
+		<a href="#URL_PAGE{zotspip_unapi,id=#ID_ZITEM&format=rdf_zotero}">Zotero RDF</a> |
+		<a href="#URL_PAGE{zotspip_unapi,id=#ID_ZITEM&format=ris}">RIS (EndNote)</a> |
+		<a href="#URL_PAGE{zotspip_unapi,id=#ID_ZITEM&format=wikipedia}">Wikipedia Citation Templates</a>
+	</div>
+	</div>
+
+
+	<BOUCLE_ticket_ouvert(TICKETS){id_zitem}{statut=ouvert}>
+	<div class="formulaire_spip formulaire_#FORM">
+	[<div class="aeres_info_ok">(#ENV*{message_ok})</div>]
+	<div class="aeres_info"><h4 class="h4">Correction demandée</h4></div>
+	<div id="correction_#ID_ZITEM">
+	
+	<div class="aeres_comment">
+		[<div class="aeres_date">le (#DATE|affdate) à [(#DATE|heures)]h[(#DATE|minutes)]  (ticket #ID_TICKET)</div>]
+		<div class="aeres_texte">#TEXTE</div>
+		[<div class="aeres_exemple"><strong>Voir :</strong> <a href="#EXEMPLE">(#EXEMPLE|couper{80})</a></div>]
+		<BOUCLE_doc_ticket(DOCUMENTS){id_ticket}{tout}><div class="aeres_doc"><strong>Document joint :</strong> <a href="#URL_DOCUMENT">[(#FICHIER|basename)]</a> (#TYPE_DOCUMENT [(#TAILLE|taille_en_octets)])</div></BOUCLE_doc_ticket>
+	</div>
+	
+	<BOUCLE_commentaires(TICKETS_FORUM){id_ticket}{par date}>
+	<div class="aeres_comment">
+		[<div class="aeres_date">le (#DATE|affdate) à [(#DATE|heures)]h[(#DATE|minutes)]</div>]
+		<div class="aeres_texte">#TEXTE</div>
+		<BOUCLE_doc_comment(DOCUMENTS){id_ticket_forum}{tout}><div class="aeres_doc"><strong>Document joint :</strong> <a href="#URL_DOCUMENT">[(#FICHIER|basename)]</a> (#TYPE_DOCUMENT [(#TAILLE|taille_en_octets)])</div></BOUCLE_doc_comment>
+	</div>
+	</BOUCLE_commentaires>
+	
+	<form method="post" action="#ENV{action}">
+		<h4 class="h4"><a href="javascript:void(0);" onClick="$('#form_comment_#ID_ZITEM').toggle(400);">Ajouter un commentaire</a></h4>
+		<div id="form_comment_#ID_ZITEM">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="ajout" value="commentaire" />
+		<input type="hidden" name="id_ticket" value="#ID_TICKET" />
+		<ul>
+			<li class="editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+				<label for="texte">Commentaire</label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+				<textarea name='texte' id='texte' class='inserer_barre_forum'>[(#ENV*{message_ok}|non)[(#ENV**{texte})]]</textarea>
+			</li>
+			[(#CONFIG{aeres/format_docs}|oui)<li class="editer_ajouter_document">
+				<label for="ajouter_document">Joindre un document</label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ajouter_document})</span>]
+				<div class="explication">Formats acceptés : #CONFIG{aeres/format_docs}.</div>
+				<input class='file' type="file" name="ajouter_document" id="ajouter_document" />
+			</li>]
+			[<li>
+				<label>Un problème, une question ?</label>
+				<div>Envoyez un email à <a href="mailto:#CONFIG{aeres/contact}">(#CONFIG{aeres/contact})</a>.</div>
+			</li>]
+		</ul>
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form>
+	</div></div>
+	</BOUCLE_ticket_ouvert>
+	<div class="formulaire_spip formulaire_#FORM">
+	<h4 class="h4"><a href="javascript:void(0);" onClick="$('#ajout_correction_#ID_ZITEM').toggle(400);">Indiquer une correction</a></h4>
+	
+	<form method="post" action="#ENV{action}"><div id="ajout_correction_#ID_ZITEM">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="ajout" value="correction" />
+		<div class="explication">
+			Décrivez aussi précisément que possible la correction à apporter à cette référence (coquilles, informations manquantes...). Le cas échéant, n'hésitez pas à préciser l'ISBN de l'ouvrage ou le DOI de l'article. [(#CONFIG{aeres/format_docs}|oui)N'hésitez pas à joindre un fichier (par exemple un export Zotero ou EndNote)].
+		</div>
+		<ul>
+			<li class="editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+				<label for="texte">Description de la correction</label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+				<textarea name='texte' id='texte' class='inserer_barre_forum'>[(#ENV**{texte})]</textarea>
+			</li>
+			<li class="editer_exemple">
+				<label for="exemple">Lien</label>
+				<div class="explication">Indiquez ici un lien vers la publication ou vers sa description (site de la revue par exemple).</div>
+				<input type='text' class='text' name='exemple' id='exemple' value="[(#ENV**{exemple})]" />
+			</li>
+			[(#CONFIG{aeres/format_docs}|oui)<li class="editer_ajouter_document">
+				<label for="ajouter_document">Joindre un document</label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ajouter_document})</span>]
+				<div class="explication">Formats acceptés : #CONFIG{aeres/format_docs}.</div>
+				<input class='file' type="file" name="ajouter_document" id="ajouter_document" />
+			</li>]
+			[<li>
+				<label>Un problème, une question ?</label>
+				<div>Envoyez un email à <a href="mailto:#CONFIG{aeres/contact}">(#CONFIG{aeres/contact})</a>.</div>
+			</li>]
+		</ul>
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form>
+	</div>
+	<//B_ticket_ouvert>
+
+</div>
+<script type="text/javascript">// <![CDATA[
+	$(document).ready(function(){
+		$('#afficher_details_#ID_ZITEM').show();
+		[(#ENV**{erreurs}|non)$('#ajout_correction_#ID_ZITEM').hide();]
+		$('#details_#ID_ZITEM').hide();
+		$('#form_comment_#ID_ZITEM').hide();
+	});
+ //]]></script>
+</BOUCLE_zitem>
+
+
