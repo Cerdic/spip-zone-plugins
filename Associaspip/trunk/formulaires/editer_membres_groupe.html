@@ -1,9 +1,9 @@
+<B_membresDansGroupe>
 <div class="formulaire_spip formulaire_#FORM">
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
     <form id="formulaire_#FORM" method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
-<B_membresDansGroupe>
 		<p class="pagination">#PAGINATION</p>
 		<table class='formulaire_table_editable arial2' border='0' cellpadding='2' cellspacing='0' width='100%' style='border: 1px solid #aaaaaa;'>
 			<tr style='background-color: #DBE1C5;'>
@@ -32,7 +32,5 @@
 	</form>
 </div>
 </B_membresDansGroupe>
-<div class="erreur">
-	<:asso:aucun_membre_dans_ce_groupe:>
-</div>
+<div class="erreur"><:asso:aucun_membre_dans_ce_groupe:></div>
 <//B_membresDansGroupe>

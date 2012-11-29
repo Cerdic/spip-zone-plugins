@@ -37,6 +37,7 @@ function exec_ajout_inscription() {
 			'id_activite' => $id_activite,
 			'id_evenement' => $id_evenement,
 		));
+		fin_page_association();
 	}
 }
 

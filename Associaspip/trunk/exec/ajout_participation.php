@@ -36,6 +36,7 @@ function exec_ajout_participation() {
 		echo recuperer_fond('prive/editer/ajouter_participation', array (
 			'id_activite' => $id_activite,
 		));
+		fin_page_association();
 	}
 }
 

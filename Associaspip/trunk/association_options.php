@@ -703,7 +703,7 @@ function association_formater_heure($iso_date, $css_class='', $html_abbr='auto')
 function association_formater_code($code, $type='x-associaspip', $p_v=TRUE, $html_span='span' ) {
 	$res = $html_span  ? ("<$html_span class='". ($p_v?'p-v':'identifier') ."'>") : '';
 	if ( is_string($type) ) { // label implied
-		$res .= "<span class='". ($p_v?'property':'type') ."$type title='$type'>$code</span>";
+		$res .= "<span class='". ($p_v?'property':'type') ."$type' title='$type'>$code</span>";
 	} else { // label explicit
 		$res .= "<abbr class='". ($p_v?'property':'type') ."' title='$type'>$type</abbr> <span class='value'>$code</span>";
 	}
