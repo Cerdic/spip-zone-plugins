@@ -1,15 +1,18 @@
 
 
-1.3.5 (2010-08-24) : 
-	ajout picto auteur par dÈfaut dans les listes; 
-	ajout picto "dÈlier"; 
-	modif base 1.2.1 : 
-		ajout champ organisations.secteur; 
-		remplacement champ organisations.type par organisations.statut_juridique; 
+1.3.5 (2010-08-24) :
+	ajout picto auteur par d√©faut dans les listes;
+	ajout picto "d√©lier";
+	modif base 1.2.1 :
+		ajout champ organisations.secteur;
+		remplacement champ organisations.type par organisations.statut_juridique;
 		remplacement champ organisations.siret par organisations.identification;
-		
+
 1.3.7 (2010-09-23) :
-	suite remarque AurÈlie sur le forum, changement du type de champ descriptif;
-	
+	suite remarque Aur√©lie sur le forum, changement du type de champ descriptif;
+
 1.3.9 (2010-12-21) :
-	ajout d'une proto-v-card avec feuille de style, appelÈe par le modele <auteur123>
+	ajout d'une proto-v-card avec feuille de style, appel√©e par le modele <auteur123>
+
+1.13.7 (2012-11-29)
+	Correction d'un bug d'affichage dans affiche gauche lors de la cr√©ation d'un nouvel auteur (affichage de tous les contacts dont le id_auteur=0);

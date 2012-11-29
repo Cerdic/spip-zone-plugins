@@ -3,7 +3,7 @@
  * Plugin Contacts & Organisations pour Spip 2.0
  * Licence GPL (c) 2009 - 2010 - Ateliers CYM
  */
- 
+
 
 /**
  *
@@ -47,28 +47,28 @@ function contacts_afficher_contenu_objet($flux)
 			{
 				// informations du contact
 				$infos  = recuperer_fond('prive/contenu/contact', array('id_contact' => $id_contact));
-				
+
 				// bouton "Modifier le contact"
 				if ( autoriser('modifier', 'contact', $id_contact) )
 				{
 					$texte = _T('contacts:contact_editer');
 					$lien = parametre_url(generer_url_ecrire('contact_edit', 'id_contact='.$id_contact), 'redirect' , $self);
-					$fond = find_in_path('images/co_contact-24.png');				
+					$fond = find_in_path('images/co_contact-24.png');
 					$bouton_edit = icone_inline($texte, $lien, $fond, '', 'right') . '<br class="nettoyeur" />' ;
 				}
 			}
-			
+
 			else if ($id_organisation)
 			{
 				// informations de l'organisation
 				$infos = recuperer_fond('prive/contenu/organisation', array('id_organisation' => $id_organisation));
-				
+
 				// bouton "Modifier l'organisation"
 				if ( autoriser('modifier', 'organisation', $id_organisation) )
 				{
 					$texte = _T('contacts:organisation_editer');
 					$lien = parametre_url(generer_url_ecrire('organisation_edit', 'id_organisation='.$id_organisation), 'redirect' , $self);
-					$fond = find_in_path('images/co_organisation-24.png');				
+					$fond = find_in_path('images/co_organisation-24.png');
 					$bouton_edit = icone_inline($texte, $lien, $fond, '', 'right') . '<br class="nettoyeur" />' ;
 				}
 			}
@@ -86,18 +86,18 @@ function contacts_boite_infos($flux){
 	/*
 	if ($flux['args']['type'] == 'contact'){
 
-		$id_auteur = sql_getfetsel('id_objet', 
-		'spip_contacts_liens', 
+		$id_auteur = sql_getfetsel('id_objet',
+		'spip_contacts_liens',
 		'objet=\'auteur\' AND id_contact=' . intval($flux['args']['id_contact']));
 
 		if ( $id_auteur > 0 )
 		{
 			$auteur = sql_fetsel("*", "spip_auteurs", "id_auteur=$id_auteur");
-			
-			$flux['data']			.= '<div>toto</div>';			
+
+			$flux['data']			.= '<div>toto</div>';
 		}
 	}
-	
+
 	$flux['data']			=  $flux['data'] ;
 	*/
 	return $flux;
@@ -106,26 +106,26 @@ function contacts_boite_infos($flux){
 /**
  * Affichage du formulaire de choix Contact/Organisation
  * dans la colonne de vue d'un auteur
- * et 
+ * et
  * Affichage du formulaire de recherche et de sélection d'Organisations
  * dans la colonne de vue d'une rubrique
 **/
 function contacts_affiche_gauche($flux){
 
-	if ($flux['args']['exec'] == 'auteur_infos'){
+	if ($flux['args']['exec'] == 'auteur_infos'
+            and $id = $flux["args"]["id_auteur"]) {
 
-		$id = $flux["args"]["id_auteur"];
 		$id_contact = sql_getfetsel('id_contact', 'spip_contacts', 'id_auteur=' . intval($id));
 		$id_organisation = sql_getfetsel('id_organisation', 'spip_organisations', 'id_auteur=' . intval($id));
 
 		if ($id_contact || $id_organisation)
 		{
-			$self = generer_url_ecrire('auteur_infos', 'id_auteur='.$id, '&', true);
+            $self = generer_url_ecrire('auteur_infos', 'id_auteur='.$id, '&', true);
 
 			// boîte selection de contacts ou d'organisations liés
 			$flux['data'] .= recuperer_fond('prive/boite/selecteur_contacts_organisations',
 						 array('id_auteur'=>$id), array('ajax'=>true));
-			
+
 			if ($id_contact)
 			{
 				// fil d'ariane du contact
@@ -135,10 +135,10 @@ function contacts_affiche_gauche($flux){
 						'prenom'			=> $contact['prenom']
 					));
 			} // fin 'si contact'
-	
+
 			else if ($id_organisation)
 			{
-				
+
 				// bouton "Créer un contact"
 				if ( autoriser('creer', 'contact') )
 				{
@@ -147,16 +147,16 @@ function contacts_affiche_gauche($flux){
 					$fond = find_in_path('images/co_contact-24.png');
 					$flux['data'] .= icone($texte, $lien, $fond, '', 'right') ;
 				}
-	
+
 				// fil d'ariane de l'organisation
 				$flux['data'] .= recuperer_fond('prive/boite/ariane_organisation', array(
 						'id_organisation' => $id_organisation
 					));
 			}// fin 'si organisation'
 		} else {
-			$flux['data'] .= recuperer_fond('prive/boite/selecteur_contacts_organisations', array( 
-								'id_auteur'=>$flux['args']['id_auteur'] 
-								)); 
+			$flux['data'] .= recuperer_fond('prive/boite/selecteur_contacts_organisations', array(
+								'id_auteur'=>$flux['args']['id_auteur']
+								));
 		}
 	}
 
@@ -194,7 +194,7 @@ function contacts_affiche_milieu($flux){
 			if ($id_contact)
 			{
 				// liste des organisations auxquelles est lié le contact
-				$ajout .= recuperer_fond('prive/liste/linked_organisations', 
+				$ajout .= recuperer_fond('prive/liste/linked_organisations',
 					array(
 						'id_contact'  => $id_contact,
 						'titre'       => _T('contacts:info_organisations_appartenance')
@@ -202,12 +202,12 @@ function contacts_affiche_milieu($flux){
 					array('ajax'      => true)
 				);
 			}
-	
-	
+
+
 			else if ($id_organisation)
 			{
-				// liste des organisations filles 
-				$ajout  .= recuperer_fond('prive/liste/organisations', 
+				// liste des organisations filles
+				$ajout  .= recuperer_fond('prive/liste/organisations',
 					array(
 						'id_parent' => $id_organisation,
 						'titre'     => _T('contacts:info_organisations_filles')
@@ -226,7 +226,7 @@ function contacts_affiche_milieu($flux){
 				}
 
 				// liste des contacts liés à l'organisation
-				$ajout  .= recuperer_fond('prive/liste/linked_contacts', 
+				$ajout  .= recuperer_fond('prive/liste/linked_contacts',
 					array(
 						'id_organisation'	=> $id_organisation,
 						'titre'			=> _T('contacts:info_contacts_organisation')
@@ -236,14 +236,14 @@ function contacts_affiche_milieu($flux){
 			}
 
 			// portfolio documents
-			$porfolio_documents = recuperer_fond('prive/contenu/portfolio_document', 
+			$porfolio_documents = recuperer_fond('prive/contenu/portfolio_document',
 							array(),
 							array('ajax'		=> true));
-							
+
 			$flux['data'] = $ajout . $flux['data'] . $porfolio_documents  ;
 		}// fin page contact ou organisation
-	} 
-		
+	}
+
 	if ($flux['args']['exec'] == 'naviguer' && $flux['args']['id_rubrique'])
 	{
 		$flux['data'] .= recuperer_fond('prive/liste/organisations_liees_rubrique', array(
@@ -257,18 +257,18 @@ function contacts_affiche_milieu($flux){
 
 
 /**
- * Prendre en compte les tables dans la recherche d'éléments. 
+ * Prendre en compte les tables dans la recherche d'éléments.
  *
- * @param 
- * @return 
+ * @param
+ * @return
 **/
 function contacts_rechercher_liste_des_champs($tables){
-	
+
 	// ajouter la recherche sur contact
 	$tables['contact']['id_contact'] = 12;
 	$tables['contact']['nom'] = 4;
 	$tables['contact']['prenom'] = 2;
-	
+
 	// ajouter la recherche sur organisations
 	$tables['organisation']['id_organisation'] = 12;
 	$tables['organisation']['nom'] = 4;
@@ -299,10 +299,10 @@ function contacts_insert_head($flux){
 	return $flux;
 }
 
-function contacts_declarer_url_objets($array){ 
-	$array[] = 'organisation'; 
-	$array[] = 'contact'; 
-	return $array; 
-} 
+function contacts_declarer_url_objets($array){
+	$array[] = 'organisation';
+	$array[] = 'contact';
+	return $array;
+}
 
 ?>
