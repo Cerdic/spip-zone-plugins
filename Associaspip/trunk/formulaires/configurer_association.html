@@ -5,16 +5,16 @@
     <div>#ACTION_FORMULAIRE{#ENV{action}}</div>
     <ul>
 [(#REM)<!-- Informations sur l'association -->]
-      <li class="fieldset">
-#INCLURE{fond=formulaires/configurer_association_informations,env}
+      <li class="fieldset" id="conf_informations">
+#INCLURE{fond=inc/configurer_association_informations,env}
       </li>
 [(#REM)<!-- Options de gestion des membres -->]
-      <li class="fieldset">
-#INCLURE{fond=formulaires/configurer_association_membres,env}
+      <li class="fieldset" id="conf_membres">
+#INCLURE{fond=inc/configurer_association_membres,env}
       </li>
 [(#REM)<!-- PDF des listes a telecharger pour impression et CERFA -->]
 [(#PLUGIN{fpdf}|oui)
-      <li class="fieldset">
+      <li class="fieldset" id="conf_pdf">
 #INCLURE{fond=formulaires/configurer_association_pdf,env}
       </li>
 ]
