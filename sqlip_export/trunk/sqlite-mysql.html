@@ -17,6 +17,6 @@ DROP TABLE IF EXISTS `#VALEUR{name}`;CREATE TABLE `#VALEUR{name}` (
 [KEY  `(#GET{key})` ]
 [(#REM) les valeurs des autres clés ]#SET{req_cle,PRAGMA index_info( #VALEUR{name})}
 <B_keys> ( <BOUCLE_keys(DATA){source sql,#GET{req_cle}}{", "}>`#VALEUR{name}`</BOUCLE_keys> )</B_keys>
-</BOUCLE_keys_liste>) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+</BOUCLE_keys_liste>) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 [(#REM) insérons-maintenant les valeurs]#SET{req_donnees,SELECT * FROM  #GET{table}} 
 <B_lignes>INSERT INTO `#GET{table}` (<BOUCLE_champs(DATA){source tableau,#GET{champs}}{", "}>`#VALEUR`</BOUCLE_champs>) VALUES <BOUCLE_lignes(DATA){source sql,#GET{req_donnees}}{", "}><B_donnees>(<BOUCLE_donnees(DATA){source table,#VALEUR}{", "}>[(#VALEUR|?{['(#VALEUR|mysql_prep)'],"''"})]</BOUCLE_donnees>)</B_donnees></BOUCLE_lignes>;</B_lignes></BOUCLE_tables>

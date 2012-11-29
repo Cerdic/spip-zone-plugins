@@ -1,0 +1,1 @@
+gogogo, faites-ce que vous voulez (mais commentez le code et logs SVN explicites svp).
