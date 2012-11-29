@@ -1,0 +1,16 @@
+<paquet
+  prefix="jclicmodele"
+  categorie="divers"
+  version="0.2.0"
+  etat="test"
+  compatibilite="[3.0.0;3.0.99]"
+  logo="img_pack/jclic_logo.png"
+  documentation="http://www.spip-contrib.net/Jclic-Modele"
+  schema="2012.11.29"
+>
+  <nom>Jclic Mod&#232;le</nom>
+  <auteur>Olivier Gautier</auteur>
+  <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+  <pipeline nom="insert_head" inclure="jclicmodele_pipeline.php" />
+  <pipeline nom="header_prive" inclure="jclicmodele_pipeline.php" />
+</paquet>
