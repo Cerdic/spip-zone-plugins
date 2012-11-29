@@ -1427,7 +1427,7 @@ function association_selectionner_groupe($sel='', $exec='', $plus='') {
  *   Idem instituer_adherent_ici
  */
 function association_selectionner_statut($sel='', $exec='', $plus='') {
-    $res = '<select id="statut_interne" name="statut_interne" onchange="form.submit()">';
+    $res = "<select id='statut_interne' name='statut_interne' onchange='form.submit()'>";
 #    $res .= '<option value="tous"';
 #    $res .= (($sel=='tous' || $sel=='%')?' selected="selected"':'');
 #    $res .= '>'. _T('asso:entete_tous') .'</option>';
@@ -1443,6 +1443,13 @@ function association_selectionner_statut($sel='', $exec='', $plus='') {
 	}
 	$res .= '</select>'.$plus;
     return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>') : $res;
+}
+
+/* Meme fonction que la precedente, mais en donnat l'ID */
+
+function association_selectionner_statut_id($sel, $id) {
+	$res = association_selectionner_statut($sel);
+	return str_replace("id='statut_interne'", "id='$id'", $res);
 }
 
 /**
@@ -2073,7 +2080,7 @@ function association_bloc_listepdf($objet, $params=array(), $prefixeLibelle='', 
 			}
 	}
 	if ($coords) {
-			$frm .= '<div class="choix"><input type="checkbox" name="champs[email]" id="liste_'.$objet.'s_email" /><label for="liste_'.$objet.'_s_email">'. _T('asso:adherent_libelle_email') .'</label></div>'; // on ajoute aussi l'adresse electronique principale (table spip_auteurs ou spip_emails)
+			$frm .= '<div class="choix"><input type="checkbox" name="champs[email]" id="liste_'.$objet.'s_email" /><label for="liste_'.$objet.'s_email">'. _T('asso:adherent_libelle_email') .'</label></div>'; // on ajoute aussi l'adresse electronique principale (table spip_auteurs ou spip_emails)
 			if (test_plugin_actif('COORDONNEES')) {
 				$frm .= '<div class="choix"><input type="checkbox" name="champs[adresse]" id="liste_'.$objet.'_s_adresse" /><label for="liste_'.$objet.'_s_adresse">'. _T('coordonnees:adresses') .'</label></div>'; // on ajoute aussi l'adresse postale (table spip_adresses)
 				$frm .= '<div class="choix"><input type="checkbox" name="champs[telephone]" id="liste_'.$objet.'_s_telephone" /><label for="liste_'.$objet.'_s_telephone">'. _T('coordonnees:numeros') .'</label></div>'; // on ajoute aussi le numero de telephone (table spip_numeros)

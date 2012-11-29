@@ -5,8 +5,8 @@
 		<ul>
 			<li class="editer_statut_interne">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{statut_interne})</span>]
-				<label for="statut_interne"><:asso:adherent_libelle_statut:></label>
-				[(#ENV{statut_interne}|association_selectionner_statut)]
+				<label for="statut_interne_etiquette"><:asso:adherent_libelle_statut:></label>
+				[(#ENV{statut_interne}|association_selectionner_statut_id{statut_interne_etiquette})]
 			</li>
 		<INCLURE{fond=inc/saisir_categorie, categorie, tous_aucun=<:asso:tous:> }>
 			<li class="editer_filtre_email">

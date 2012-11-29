@@ -27,9 +27,9 @@
 				<input type="[(#HTML5|?{date,text})]" name="date_validite" value="[(#ENV{date_validite}|affdate{Y-m-d})]" id="saisie_date_validite" class="date" />
 			</li>
 			<li class="editer_statut_interne">
-				<label for="statut_interne"><:asso:adherent_libelle_statut:></label>
+				<label for="statut_interne_membre"><:asso:adherent_libelle_statut:></label>
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{statut_interne})</span>]
-				[(#STATUT_INTERNE|association_selectionner_statut)]
+				[(#STATUT_INTERNE|association_selectionner_statut_id{statut_interne_membre})]
 			</li>
 		[(#META{/association/id_asso}|oui)
 			<li class="editer_id_asso">
