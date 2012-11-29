@@ -71,6 +71,9 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 	$maj['1.1.5'] = array(
 		array('maj_tables',array('spip_documents')),
 	);
+	$maj['1.1.6'] = array(
+		array('spipmotion_remove_idorig',array())
+	);
 	/**
 	 * TODO : générer un htaccess dans le répertoire script_bash/
 	 * TODO : insérer une préconfiguration par défaut
@@ -176,17 +179,19 @@ function spipmotion_peuple_facd(){
 /**
  * On vérifie si on a id_orig dans la table spip_documents et
  * on transforme tous les documents ayant id_orig > 0 en documents liés au document original
+ * On enlève également le lien à l'ancien article
  */
 function spipmotion_remove_idorig(){
 	$desc = sql_showtable('spip_documents', true, $connect);
-	if (is_array($desc['field']) && isset($desc['fields']['id_orig'])) {
+	if (is_array($desc['field']) && isset($desc['field']['id_orig'])) {
 		$res = sql_select("*","spip_documents","id_orig > 0");
 		while($row = sql_fetch($res)){
+			sql_delete('spip_documents_liens','id_document='.intval($row['id_document']).' AND objet!= "document"');
 			sql_insertq('spip_documents_liens',array(
 													'id_document' => $row['id_document'],
 													'objet' => 'document',
 													'id_objet' => $row['id_orig']));
-			sql_updateq('spip_documents',array('id_orig'=>0),'id_document='.intval($row['id_document']));
+			sql_updateq('spip_documents',array('id_orig'=>0,'mode'=>'conversion'),'id_document='.intval($row['id_document']));
 			if (time() >= _TIME_OUT)
 				return;
 		}
