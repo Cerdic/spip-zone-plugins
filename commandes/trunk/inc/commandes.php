@@ -22,8 +22,16 @@ function creer_commande_encours(){
 			if ($adresses_commande = sql_allfetsel('id_adresse', 'spip_adresses_liens', array('objet = '.sql_quote('commande'), 'id_objet = '.$id_commande))){
 				$adresses_commande = array_map('reset', $adresses_commande);
 				$in = sql_in('id_adresse', $adresses_commande);
-				sql_delete('spip_adresses_liens', $in);
-				sql_delete('spip_adresses', $in);
+				sql_delete('spip_adresses_liens', array($in, 'objet='.sql_quote('commande'), 'id_objet = '.$id_commande));
+
+				// si les adresses ne sont plus utilisées nul part, on les supprime
+				$adresses_non_orphelines = sql_allfetsel('id_adresse', 'spip_adresses_liens', $in);
+				$adresses_non_orphelines = array_map('reset', $adresses_non_orphelines);
+				$adresses_orphelines = array_diff($adresses_commande, $adresses_non_orphelines);
+				if ($adresses_orphelines) {
+					$in = sql_in('id_adresse', $adresses_orphelines);
+					sql_delete('spip_adresses', $in);
+				}
 			}
 		
 			// On supprime la commande
