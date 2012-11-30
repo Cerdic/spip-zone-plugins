@@ -434,7 +434,7 @@ Commentaire: @commentaire@
 	'config_libelle_prefet' => 'Pr&eacute;fecture ou Sous-pr&eacute;fecture',
 	'config_libelle_prets' => 'Gestion des pr&egrave;ts et ressources',
 	'config_libelle_recufisc0' => 'D&eacute;sactiver (gestion manuelle ou non-usage)',
-	'config_libelle_recufisc1' => 'Asso./fond. reconnue d-u-p (pr&eacute;ciser dates)',
+	'config_libelle_recufisc1' => 'Asso./fond. reconnue d-u-p',
 	'config_libelle_recufisc10' => 'Org. ayant pour activit&eacute; principale l\'organisation de festivals',
 	'config_libelle_recufisc11' => 'Asso. fournissant gratuitement aide/soins &agrave; pers. en difficult&eacute;...',
 	'config_libelle_recufisc12' => 'Fond. du patrimoine ou fond./asso. lui affectant ses dons',

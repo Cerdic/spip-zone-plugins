@@ -2779,6 +2779,10 @@ function association_langue($chaine) {
 	return _T((strpos($head,':') ? '' : 'asso:').$head, $tail );
 }
 
+function association_langue_index($index, $head) {
+	return _T((strpos($head,':') ? '' : 'asso:'). $head . $index);
+}
+
 /** @} */
 
 
