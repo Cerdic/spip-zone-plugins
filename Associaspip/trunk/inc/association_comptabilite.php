@@ -29,12 +29,12 @@ include_spip('inc/association_plan_comptable');
  *   Un tableau eventuellement vide de id_destination=>montant
  */
 function association_liste_destinations_associees($id_operation) {
-	$sql = sql_select(' spip_asso_destination_op.*', 'spip_asso_destination_op', "id_compte=" . intval($id_operation));
+	$sql = sql_select('recette,depense,id_destination', 'spip_asso_destination_op', "id_compte=" . intval($id_operation));
 	$destinations = array();
 	while ( $r = sql_fetch($sql) ) {
 	  // soit recette soit depense est egal a 0, 
 	  // on se contente les additionner
-	    $destination[$r['id_destination']] = $r['recette'] + $r['depense']; 
+	    $destinations[$r['id_destination']] = $r['recette'] + $r['depense']; 
 	}
 	return $destinations;
 }
@@ -68,6 +68,14 @@ function association_editeur_destinations($destinations, $defaut='') {
 	}
 	if (!$options) return '';
 	$idIndex = 1;
+	
+	if (!$GLOBALS['association_metas']['unique_dest']) { // destinations multiples, on insere le js qui permet de les gerer
+	      $script = '<script type="text/javascript" src="'
+		. find_in_path('javascript/jquery.destinations_form.js')
+		. '"></script>';
+		$addDestinationButton = "\n<button class='destButton' type='button' onclick='addFormField(); return FALSE;'>+</button>";
+	}
+
 	if ( is_array($destinations) ) {
       // si on a une liste de destinations (on edite une operation)
 	  $options = join("\n", $options) ;
@@ -76,16 +84,16 @@ function association_editeur_destinations($destinations, $defaut='') {
 		$res .= '<div id="row'.$idIndex.'" class="choix"><ul>'
 		. '<li class="editer_id_dest['.$idIndex.']">'
 		. '<select name="id_dest['.$idIndex.']" id="id_dest['.$idIndex.']" >'
-		. preg_replace('/(value="'.$destId.'")/', '$1 selected="selected"', $options)
+		. preg_replace("/(value='".$destId."')/", '$1 selected="selected"', $options)
 		. '</select></li>';
 
 		if (!$GLOBALS['association_metas']['unique_dest']) {
 		    $res .= '<li class="editer_montant_dest['.$idIndex.']"><input name="montant_dest['.$idIndex.']" value="'
 			. association_formater_nombre($destMontant)
 			. '" type="text" id="montant_dest['.$idIndex.']" class="number decimal price" /></li>'
-			. '<button class="destButton" type="button" onclick="addFormField(); return FALSE;">+</button>';
+			. '<button class="destButton" type="button" onclick="addFormField(); return false;">+</button>';
 		    if ($idIndex>1) {
-			$res .= '<button class="destButton" type="button" onclick="removeFormField(\'#row'.$idIndex.'\'); return FALSE;">-</button>';
+			$res .= '<button class="destButton" type="button" onclick="removeFormField(\'#row'.$idIndex.'\'); return false;">-</button>';
 		    }
 		}
 		$res .= '<ul></div>';
@@ -96,22 +104,13 @@ function association_editeur_destinations($destinations, $defaut='') {
 	      $options[$defaut] = str_replace('<option ', '<option selected="selected" ', $options[$defaut]);
 	    }
 	    $n = " name='id_dest[1]' id='id_dest[1]'";
-	    if ((count($options) == 1) AND $GLOBALS['association_metas']['unique_dest']) {
+	    if ((count($options) == 1)) { // on a une seule destination possible, pas de selecteur
 	      $res = "<input$n readonly='readonly' value='$id' /> $texte";
-	    } else $res = "<select$n>" . join("\n", $options) . '</select>';
-
-	    if (!$GLOBALS['association_metas']['unique_dest']) { // destinations multiples
-	      $script = '<script type="text/javascript" src="'
-		. find_in_path('javascript/jquery.destinations_form.js')
-		. '"></script>';
-
+	    } else  {
 	      $res = "<ul>\n<li class='editer_id_dest[1]'>"
-		. $res
+		. "<select$n>" . join("\n", $options) . '</select>'
 		. "\n</li><li class='editer_montant_dest[1]'><input name='montant_dest[1]' id='montant_dest[1]'/></li>\n</ul>"
-		. $but
-		. "\n<button class='destButton' type='button' onclick='addFormField(); return FALSE;'>+</button>";
-	    } else {
-	      $script = '';
+		. $addDestinationButton;
 	    }
 
 	}
@@ -311,8 +310,8 @@ function association_ajouter_destinations_comptables($id_compte, $recette, $depe
     } else {
 	$attribution_montant = 'depense';
     }
-    $toutesDestinationsIds = association_recuperer_liste('id_dest');
-    $toutesDestinationsMontants = association_recuperer_liste('montant_dest');
+    $toutesDestinationsIds = association_recuperer_liste('id_dest', TRUE);
+	$toutesDestinationsMontants = association_recuperer_liste('montant_dest', TRUE);
     if ( count($toutesDestinationsIds)>1 ) { // plusieurs destinations
 	foreach ($toutesDestinationsIds as $id => $id_destination) { // ventilation des montants. le tableau des montants a des cles indentique a celui des id
 	    $id_dest_op = sql_insertq('spip_asso_destination_op', array(
@@ -324,7 +323,7 @@ function association_ajouter_destinations_comptables($id_compte, $recette, $depe
     } elseif ( count($toutesDestinationsIds)==1 ) { // une seule destination : le montant peut ne pas avoir ete precise, on entre directement le total recette+depense
 	$id_dest_op = sql_insertq('spip_asso_destination_op', array(
 	    'id_compte' => $id_compte,
-	    'id_destination' => $toutesDestinations[1],
+	    'id_destination' => $toutesDestinationsIds[1],
 	    $attribution_montant => $depense+$recette
 	));
     }
