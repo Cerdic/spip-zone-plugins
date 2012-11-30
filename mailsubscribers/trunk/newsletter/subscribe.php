@@ -66,6 +66,15 @@ function newsletter_subscribe_dist($email,$options = array()){
 
 		if ($id = objet_inserer("mailsubscriber",0,$set)){
 			$row = sql_fetsel('*','spip_mailsubscribers','id_mailsubscriber='.intval($id));
+			if ($row['email']!==$set['email']){
+				// securite car $set pas forcement pris en charge dans objet_inserer
+				autoriser_exception("modifier","mailsubscriber",$row['id_mailsubscriber']);
+				autoriser_exception("instituer","mailsubscriber",$row['id_mailsubscriber']);
+				objet_modifier("mailsubscriber",$row['id_mailsubscriber'],$set);
+				autoriser_exception("modifier","mailsubscriber",$row['id_mailsubscriber'],false);
+				autoriser_exception("instituer","mailsubscriber",$row['id_mailsubscriber'],false);
+				$row = sql_fetsel('*','spip_mailsubscribers','id_mailsubscriber='.intval($id));
+			}
 			$set = array();
 		}
 
