@@ -25,7 +25,27 @@ function formulaires_editer_asso_comptes_charger_dist($id_compte='new') {
 	$contexte['type_operation'] = substr($contexte['imputation'],0,1); // le type d'operation est fonction du compte (de l'imputation dans le cas present) : c'est le 1er caractere du code (la classe)
     }
     association_chargeparam_destinations('', $contexte);
-    include_spip('inc/generer_plan_js'); // Recuperation du plan comptable sous forme de tableau javascript correspondant aux classes utilisees. Ces tableaux sont ensuite utilises pour initialiser le selecteur d'imputation (js)
+    include_spip('inc/association_comptabilite');
+    // Recuperation du plan comptable sous forme de tableau javascript
+    // correspondant aux classes utilisees. 
+    // Ces tableaux sont ensuite utilises pour initialiser 
+    // le selecteur d'imputation (js)
+
+    $code = '';
+    foreach ($GLOBALS['association_metas'] as $key => $val) {
+	// ne prendre dans les metas que les classes
+	if (substr($key, 0, 6)==="classe") { 
+		$code .= "var classe$val = new Array();\n";
+		// code virement interne
+		$interne = $GLOBALS['association_metas']['pc_intravirements'];
+		foreach (association_liste_plan_comptable($val,1) as $k => $v) {
+			if ($k != $înterne) {
+				$code .= "classe$val" . "['$k'] = '". addslashes($v) ."';\n";
+			}
+		}
+	}
+    }
+    if ($code) echo http_script($code);
 
     // paufiner la presentation des valeurs
     $contexte['depense'] = association_formater_nombre($contexte['depense']);
