@@ -15,11 +15,11 @@
 [(#REM)<!-- PDF des listes a telecharger pour impression et CERFA -->]
 [(#PLUGIN{fpdf}|oui)
       <li class="fieldset" id="conf_pdf">
-#INCLURE{fond=formulaires/configurer_association_pdf,env}
+#INCLURE{fond=inc/configurer_association_pdf,env}
       </li>
 ]
 [(#REM)<!-- Compta -->]
-#INCLURE{fond=formulaires/configurer_association_compta,env}
+#INCLURE{fond=inc/configurer_association_compta,env}
     </ul>
     <p class="boutons">
 	<input type="submit" value="<:pass_ok:>" class="submit" />
