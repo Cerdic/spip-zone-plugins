@@ -205,7 +205,7 @@ function association_declarer_tables_principales($tables_principales) {
 		'quantite' => "FLOAT UNSIGNED NOT NULL DEFAULT 0", // C'est la quantite appliquee a un montant unique (equivaut alors au "nombre de tarifs"...) ou le nombre d'invites du participant
 		'date_inscription' => "DATE NOT NULL DEFAULT '0000-00-00'",
 		'commentaire' => "TEXT NOT NULL",
-		'prix_activite' => "DECIMAL(19,2) NOT NULL DEFAULT 0", // prix_unite ou prix_total
+		'prix_unitaire' => "DECIMAL(19,2) NOT NULL DEFAULT 0", // tarif de base par lequel on va multiplier la quantite (nombre de places) pour avoir le "montant" paye
 		'date_paiement' => "DATE NOT NULL DEFAULT '0000-00-00'",
 		'maj' => "TIMESTAMP NOT NULL"
 	);
