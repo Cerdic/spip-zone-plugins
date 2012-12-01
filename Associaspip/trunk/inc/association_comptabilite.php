@@ -82,41 +82,41 @@ function association_editeur_destinations($destinations, $defaut='') {
 	  $res = '';
 	  foreach ($destinations as $destId => $destMontant) { // restitution des listes de selection HTML
 		$res .= '<div id="row'.$idIndex.'" class="choix"><ul>'
-		. '<li class="editer_id_dest['.$idIndex.']">'
-		. '<select name="id_dest['.$idIndex.']" id="id_dest['.$idIndex.']" >'
+		. '<li>'
+		. '<select name="id_dest['.$idIndex.']" id="id_dest_'.$idIndex.'" >'
 		. preg_replace("/(value='".$destId."')/", '$1 selected="selected"', $options)
 		. '</select></li>';
 
 		if (!$GLOBALS['association_metas']['unique_dest']) {
-		    $res .= '<li class="editer_montant_dest['.$idIndex.']"><input name="montant_dest['.$idIndex.']" value="'
+		    $res .= '<li><input name="montant_dest['.$idIndex.']" value="'
 			. association_formater_nombre($destMontant)
-			. '" type="text" id="montant_dest['.$idIndex.']" class="number decimal price" /></li>'
+			. '" type="text" id="montant_dest_'.$idIndex.'" class="number decimal price" />'
 			. '<button class="destButton" type="button" onclick="addFormField(); return false;">+</button>';
 		    if ($idIndex>1) {
 			$res .= '<button class="destButton" type="button" onclick="removeFormField(\'#row'.$idIndex.'\'); return false;">-</button>';
-		    }
+			}
 		}
-		$res .= '<ul></div>';
+		$res .= '</li></ul></div>';
 		$idIndex++;
 	  }
 	} else { // pas de destination deja definies pour cette operation
 	    if ($defaut!='') {
 	      $options[$defaut] = str_replace('<option ', '<option selected="selected" ', $options[$defaut]);
 	    }
-	    $n = " name='id_dest[1]' id='id_dest[1]'";
+	    $n = " name='id_dest[1]' id='id_dest_1'";
 	    if ((count($options) == 1)) { // on a une seule destination possible, pas de selecteur
 	      $res = "<input$n readonly='readonly' value='$id' /> $texte";
 	    } else  {
-	      $res = "<ul>\n<li class='editer_id_dest[1]'>"
+	      $res = "<ul>\n<li>"
 		. "<select$n>" . join("\n", $options) . '</select>'
-		. "\n</li><li class='editer_montant_dest[1]'><input name='montant_dest[1]' id='montant_dest[1]'/></li>\n</ul>"
-		. $addDestinationButton;
+		. "\n</li><li><input name='montant_dest[1]' id='montant_dest_1'/>"
+		. $addDestinationButton.'</li></ul>';
 	    }
 
 	}
     return $script
       . '<div id="divTxtDestination" class="formulaire_edition_destinations">'
-      . '<label for="destination">'
+      . '<label>'
       . _T('asso:destination')
       . '</label>'
       . $res
