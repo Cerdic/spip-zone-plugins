@@ -1,0 +1,32 @@
+WHY
+
+L'idée: que SPIP génère un fichier utilisable ensuite dans phpmyadmin/adminer: drop tables, définitions, données.
+A ce jour (1/12/2012) les restaurations SPIP sqlite->MYSQL ne sont pas top. Une résolution stable et efficace n'est pas triviale.
+J'ai tenté d'apporter une solution par curiosité et au titre d'exercice auto-formation.
+
+RESSOURCES
+- http://www.sqlite.org/docs.html
+- itérateurs SPIP 
+
+
+LIMITES
+
+- Les bases ne doivent pas être trop grosses... PHP limite la durée du script et la taille du pauet en upload (mysql aussi)
+- La production d'un squelette peut-être longue et n'est pas le système le plus sûr pour cette tâche mais... C'est ce que je sais faire... Une solution en php basée sur SHOWTABLE et utilisant les fonctions intégrées de SPIP est souhaitable. Cette solution mériterait le nom de plugin "SQLITE2MYSQL", ce qui n'est pas le cas de celle-ci.
+- Pas de détection du CHARSET d'origine => UTF-8 nécessaire au départ (cas par défaut en SQLite semble-t-il) et UTF-8 à l'arrivée.
+
+
+TODO
+
+* contenus
+- comparer structure MySQl d'origine avec celle importée par ce plugin
+- Implémenter plus correctement les définitions de champs 
+- ...
+
+* Interface
+- permettre découpage en sous fichiers pour bases plus grosses 
+- Une page dans le privé...
+- mettre tout ça dans le privé
+- zipper ?
+
+

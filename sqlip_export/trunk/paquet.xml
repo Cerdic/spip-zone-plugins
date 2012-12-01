@@ -1,7 +1,7 @@
 <paquet
    prefix='sqlip_export'
    categorie='maintenance'
-   version='0.0.3'
+   version='0.1.0'
    etat='experimental'
    compatibilite="[3.0.4;3.0.*]"
 >

@@ -5,6 +5,10 @@ function cle_prim($val) {
 if ($position_cle=strpos($val,"PRIMARY")) {
 $cle_primaire=substr($val,$position_cle);
 $cle_primaire=str_replace("))",")",$cle_primaire); 
+if (preg_match(",PRIMARY KEY \(([^\)]+)\),Uims", $cle_primaire, $reg)) {
+#	echo "<br>".$reg[1];
+	return 	$reg[1];
+}
 }
 return $cle_primaire;
 }
@@ -28,3 +32,4 @@ function mysql_prep($value) {
 }
 
 ?>
+
