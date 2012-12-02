@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_boite_opensearch' => 'پيكربندي پلاگين اوپن سرچ (OpenSearch)',
-	'cfg_descr_opensearch' => 'اوپن سرچ: موتور جستجوگر سفارشي براي سايت شما.',
+	'cfg_descr_opensearch' => 'اوپن سرچ: موتور جستجوگر سفارشي براي سايت شما.', # MODIF
 	'cfg_inf_id_rubrique' => 'بخش مورد نظر براي جستچو را برگزينيد',
 	'cfg_inf_page_recherche' => 'اسكلت براي حستجو در سايت را مشخص كنيد (مثلن: جستجو روي اسلكت recherche.html )',
 	'cfg_lbl_id_rubrique' => 'بخش هدف',

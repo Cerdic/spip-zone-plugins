@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_boite_opensearch' => 'OpenSearch plugin configuration',
-	'cfg_descr_opensearch' => 'OpenSearch : custom search engine for your website.',
+	'cfg_descr_opensearch' => 'OpenSearch : custom search engine for your website.', # MODIF
 	'cfg_inf_id_rubrique' => 'Select the section in which to search.',
 	'cfg_inf_page_recherche' => 'Specify the skeleton to use for the site search (exemple : look for the recherche.html skeleton)',
 	'cfg_lbl_id_rubrique' => 'Target section',

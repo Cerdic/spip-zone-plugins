@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_boite_opensearch' => 'Nastavenie zásuvného modulu OpenSearch',
-	'cfg_descr_opensearch' => 'OpenSearch: vyhľadávač prispôsobený pre vašu stránku.',
+	'cfg_descr_opensearch' => 'OpenSearch: vyhľadávač prispôsobený pre vašu stránku.', # MODIF
 	'cfg_inf_id_rubrique' => 'Vyberte rubriku, v ktorej sa má vyhľadávať.',
 	'cfg_inf_page_recherche' => 'Uveďte šablónu, ktorá sa použije na vyhľadávanie na stránke (príklad: vyhľadávanie šablóny recherche.html)',
 	'cfg_lbl_id_rubrique' => 'Cieľová rubrika',
