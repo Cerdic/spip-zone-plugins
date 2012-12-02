@@ -23,4 +23,9 @@ function courtcircuit_calculer_balise_URL_RUBRIQUE ($id_rubrique) {
 	return ($url_redirect!='') ? $url_redirect : $url_base;
 }
 
+function critere_rang_titre_positif_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];	
+	$boucle->where[] = array("'>'", "'0+articles.titre'", 0);
+}
+
 ?>
