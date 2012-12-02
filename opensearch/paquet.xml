@@ -1,7 +1,7 @@
 <paquet
 	prefix="opensearch"
 	categorie="navigation"
-	version="0.1.1"
+	version="0.2.0"
 	etat="stable"
 	compatibilite="[2.0.0;3.0.99]"
 	logo="images/opensearch-64.png"
