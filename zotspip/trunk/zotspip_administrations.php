@@ -11,7 +11,7 @@ function zotspip_upgrade($nom_meta_base_version, $version_cible){
   $maj = array();
   
   $maj['create'] = array(
-    array('maj_tables',array('spip_zitems','spip_zcollections','spip_zcreators','spip_ztags','spip_zitems_zcollections'),
+    array('maj_tables',array('spip_zitems','spip_zcollections','spip_zcreators','spip_ztags','spip_zitems_zcollections')),
     array('zotspip_installer_schema_zotero')
   );
 
