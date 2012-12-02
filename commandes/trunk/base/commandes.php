@@ -16,32 +16,7 @@ function commandes_declarer_tables_interfaces($interface){
 }
 
 function commandes_declarer_tables_principales($tables_principales){
-	// Table commandes
-	$commandes = array(
-		'id_commande' => 'bigint(21) not null',
-		'reference' => 'varchar(255) not null default ""',
-		'id_auteur' => 'bigint(21) not null default 0',
-		'statut' => 'varchar(25) not null default "encours"', // pourra être "encours", "paye", "envoye", "retour", "retour_partiel"...
-		'date' => 'datetime not null default "0000-00-00 00:00:00"',
-		'date_paiement' => 'datetime not null default "0000-00-00 00:00:00"',
-		'date_envoi' => 'datetime not null default "0000-00-00 00:00:00"',
-		'maj' => 'timestamp'
-	);
-	
-	$commandes_cles = array(
-		'PRIMARY KEY' => 'id_commande',
-		'KEY id_auteur' => 'id_auteur'
-	);
-	
-	$tables_principales['spip_commandes'] = array(
-		'field' => &$commandes,
-		'key' => &$commandes_cles,
-		'join'=> array(
-			'id_commande' => 'id_commande'
-		)
-	);
 
-	
 	// Table commandes_details
 	$commandes_details = array(
 		'id_commandes_detail' => 'bigint(21) not null',
@@ -73,6 +48,57 @@ function commandes_declarer_tables_principales($tables_principales){
 	return $tables_principales;
 }
 
+function commandes_declarer_tables_objets_sql($tables) {
+
+    $tables['spip_commandes'] = array(
+        'type' => 'commande',
+        'principale' => "oui",
+        'field'=> array(
+            'id_commande' => 'bigint(21) not null',
+            'reference' => 'varchar(255) not null default ""',
+            'id_auteur' => 'bigint(21) not null default 0',
+            'statut' => 'varchar(25) not null default "encours"', // pourra être "encours", "paye", "envoye", "retour", "retour_partiel"...
+            'date' => 'datetime not null default "0000-00-00 00:00:00"',
+            'date_paiement' => 'datetime not null default "0000-00-00 00:00:00"',
+            'date_envoi' => 'datetime not null default "0000-00-00 00:00:00"',
+            'maj' => 'timestamp'
+            ),
+        'key' => array(
+            "PRIMARY KEY"        => "id_commande",
+            "KEY statut"         => "statut",
+            "KEY id_auteur"         => "id_auteur",              
+            ),
+        'date' => "date",
+        'champs_editables'  => array('id_auteur', 'date_paiement', 'date_envoi'),
+        'champs_versionnes' => array('id_auteur', 'date_paiement', 'date_envoi'),
+        'rechercher_champs' => array('reference' => 8, 'id_commande' => 8),
+        'tables_jointures'  => array(),
+        'statut_textes_instituer' => array(
+            'encours'    => 'commandes:statut_encours',
+            'paye'     => 'commandes:statut_paye',
+            'partiel'     => 'statut_partiel',            
+            'envoye'   => 'commandes:statut_envoye',
+            'retour'   => 'commandes:statut_retour',
+            'attente'   => 'commandes:statut_attente',            
+            'retour_partiel' => 'commandes:statut_retour_partiel',
+            'erreur' => 'commandes:statut_erreur',            
+        ),
+        'statut'=> array(
+            array(
+                'champ'     => 'statut',
+                'publie'    => 'paye,envoye',
+                'previsu'   => 'paye,envoye',
+                'post_date' => 'date', 
+                'exception' => array('statut','tout')
+            )
+        ),
+        'texte_changer_statut' => 'commandes:texte_changer_statut_commande', 
+        
+
+    );
+
+    return $tables;
+}
 
 function commandes_rechercher_liste_des_champs($tables){
 	$tables['commande']['reference'] = 8;
