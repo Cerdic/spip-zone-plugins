@@ -1,7 +1,11 @@
 <?php
 
 if (!defined('_DIR_TMP')) define('_DIR_TMP', 'tmp/');
-if (!defined('_DIR_FILECACHE')) define('_DIR_FILECACHE', 'cache/');
+if (!defined('_DIR_CACHE_FILECACHE')) {
+	if (defined('_DIR_FILECACHE')) define('_DIR_CACHE_FILECACHE', _DIR_TMP._DIR_FILECACHE); // compat
+	elseif(defined('_DIR_CACHE')) define('_DIR_CACHE_FILECACHE', _DIR_CACHE);
+	else define('_DIR_CACHE_FILECACHE', _DIR_TMP.'cache/');
+}
 
 class MCacheBackend_filecache extends MCacheBackend {
 
@@ -14,18 +18,17 @@ class MCacheBackend_filecache extends MCacheBackend {
 	
 		# SPIP
 		if (function_exists('sous_repertoire')) {
-			return
-				sous_repertoire(
-					sous_repertoire(_DIR_TMP, _DIR_FILECACHE),
-					$d
-				)
-				. $u;
+			$rep = _DIR_CACHE_FILECACHE;
+			if(!@file_exists(_DIR_CACHE_FILECACHE)) {
+				$rep = sous_repertoire(_DIR_CACHE_FILECACHE, '');
+			}
+			return sous_repertoire($rep,$d) . $u;
 		}
 	
 		# Normal PHP
-		if (!is_dir(_DIR_TMP._DIR_FILECACHE))
-			@mkdir(_DIR_TMP._DIR_FILECACHE);
-		if (!is_dir($sub = _DIR_TMP._DIR_FILECACHE.$d))
+		if (!is_dir(_DIR_CACHE_FILECACHE))
+			@mkdir(_DIR_CACHE_FILECACHE);
+		if (!is_dir($sub = _DIR_CACHE_FILECACHE.$d))
 			@mkdir($sub);
 		return $sub.'/'.$u;
 	}
