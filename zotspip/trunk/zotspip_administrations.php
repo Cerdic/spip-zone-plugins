@@ -4,35 +4,24 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/meta');
+include_spip('inc/zotspip');
 
 // Installation et mise à jour
-function zotspip_upgrade($nom_meta_version_base, $version_cible){
-	$version_actuelle = '0.0';
-	if (
-		(!isset($GLOBALS['meta'][$nom_meta_version_base]))
-		|| (($version_actuelle = $GLOBALS['meta'][$nom_meta_version_base]) != $version_cible)
-	){
-		
-		if (version_compare($version_actuelle,'0.0','=')) {
-			// Création des tables
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
-			creer_base();
-			zotspip_installer_schema_zotero();
-		}
-		
-		if (version_compare($version_actuelle,'0.2','<')) {
-			// Ajout du champ 'date_ajout'
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
-			maj_tables('spip_zitems');
-			ecrire_meta($nom_meta_version_base, $version_actuelle='0.2', 'non');
-			include_spip('inc/zotspip');
-			zotspip_maj_items(true,5); // On lance une mise à jour complète de la base
-		}
-		
-		ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
-	}
+function zotspip_upgrade($nom_meta_base_version, $version_cible){
+  $maj = array();
+  
+  $maj['create'] = array(
+    array('maj_tables',array('spip_zitems','spip_zcollections','spip_zcreators','spip_ztags','spip_zitems_zcollections'),
+    array('zotspip_installer_schema_zotero')
+  );
+
+  $maj['0.2'] = array(
+    array('maj_tables',array('spip_zitems')),
+    array('zotspip_maj_items',true,5)
+  );
+  
+  include_spip('base/upgrade');
+  maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 // Désinstallation
