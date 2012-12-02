@@ -32,9 +32,15 @@ function courtcircuit_url_redirection($id_rubrique) {
 		if (strlen(compositions_determiner('rubrique', $id_rubrique)))
 			return '';
 	}
+	// Déterminer le fond à utiliser
+		if (isset($config['restreindre_langue']) && $config['restreindre_langue']=='oui')
+			$fond = 'courtcircuit_selection_article_lang';
+		else
+			$fond = 'courtcircuit_selection_article';
+
 	// On teste si on doit rediriger
 	$redirect_article = recuperer_fond(
-		'courtcircuit_selection_article', 
+			$fond, 
 			array_merge(array('id_rubrique' => $id_rubrique),$config)
 		);
 	if (intval($redirect_article))

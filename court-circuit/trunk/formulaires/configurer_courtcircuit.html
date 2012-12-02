@@ -36,6 +36,18 @@
 		
 		<h3 class="titrem"><:courtcircuit:label_regles:></h3>
 		<ul>
+			<li class="editer_restreindre_langue[ (#ENV**{erreurs}|table_valeur{restreindre_langue}|oui)erreur]">
+				<label><:courtcircuit:label_restreindre_langue:></label>
+				<p class="explication"><:courtcircuit:explication_restreindre_langue:></p>
+				<div class="choix">
+					<input type="radio" name="restreindre_langue" class="radio" id="restreindre_langue_oui" value="oui" [(#ENV{restreindre_langue,non}|=={oui}|oui) checked="checked"] />
+					<label for='restreindre_langue_oui'><:item_oui:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="restreindre_langue" class="radio" id="restreindre_langue_non" value="non" [(#ENV{restreindre_langue,non}|=={non}|oui) checked="checked"] />
+					<label for='restreindre_langue_non'><:item_non:></label>
+				</div>
+			</li>
 			<li class="explication"><:courtcircuit:explication_regles:></li>
 			#SET{ordre,1}
 			<li class="editer_un_article[ (#ENV**{erreurs}|table_valeur{un_article}|oui)erreur]">
