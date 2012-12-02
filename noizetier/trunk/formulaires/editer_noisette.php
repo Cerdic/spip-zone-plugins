@@ -26,10 +26,10 @@ function formulaires_editer_noisette_charger_dist($id_noisette, $retour=''){
 	$valeurs['_params'][] = array(
 		'saisie' => 'input',
 		'options' => array(
-			'nom' => 'noizetier_css',
+			'nom' => 'css',
 			'label' => _T('noizetier:label_noizetier_css'),
 			'explication' => _T('noizetier:explication_noizetier_css'),
-			'defaut' => $css
+			'defaut' => $entree['css']
 		)
 	);
 	$valeurs['editable'] = autoriser('configurer','noizetier') ? 'on' : '';
