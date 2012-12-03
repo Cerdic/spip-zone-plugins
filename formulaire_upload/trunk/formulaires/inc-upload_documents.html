@@ -38,9 +38,9 @@
 	<div class="insert_code">
 		<strong><:formupload:insert_code:></strong>
 		[(#EXTENSION|match{jpg|gif|png}|oui)
-		<div class="abbrimg"><abbr title="<:formupload:img_left:>">&lt;img#ID_DOCUMENT|left&gt;</abbr> <abbr title="<:formupload:img_center:>">&lt;img#ID_DOCUMENT|center&gt;</abbr> <abbr title="<:formupload:img_right:>">&lt;img#ID_DOCUMENT|right&gt;]</div>
-		[(#EXTENSION|match{jpg|gif|png}|oui)
-		<div class="abbrdoc"><abbr title="<:formupload:doc_left:>">&lt;doc#ID_DOCUMENT|left&gt;</abbr> <abbr title="<:formupload:doc_center:>">&lt;doc#ID_DOCUMENT|center&gt;</abbr> <abbr title="<:formupload:doc_right:>">&lt;doc#ID_DOCUMENT|right&gt;</abbr>]</div>
+		<div class="abbrimg"><abbr title="<:formupload:img_left:>">&lt;img#ID_DOCUMENT|left&gt;</abbr> <abbr title="<:formupload:img_center:>">&lt;img#ID_DOCUMENT|center&gt;</abbr> <abbr title="<:formupload:img_right:>">&lt;img#ID_DOCUMENT|right&gt;</div>]
+		[(#EXTENSION|match{jpg|gif|png}|non)
+		<div class="abbrdoc"><abbr title="<:formupload:doc_left:>">&lt;doc#ID_DOCUMENT|left&gt;</abbr> <abbr title="<:formupload:doc_center:>">&lt;doc#ID_DOCUMENT|center&gt;</abbr> <abbr title="<:formupload:doc_right:>">&lt;doc#ID_DOCUMENT|right&gt;</abbr></div>]
 	</div>]
   
 </div>
