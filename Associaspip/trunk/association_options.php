@@ -1012,7 +1012,7 @@ function association_formater_emails($id_objets, $objet='auteur', $html_span='di
 			sql_free($query);
 		}
 		$trouver_table = charger_fonction('trouver_table', 'base');
-		if ( $trouver_table('spip_emails') && $trouver_table('spip_emails_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
+		if ( $trouver_table('emails') && $trouver_table('emails_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
 			$query = sql_select('l.id_objet, l.type, e.*','spip_emails AS e INNER JOIN spip_emails_liens AS l ON l.id_email=e.id_email', sql_in('l.id_objet', $id_objets)." AND l.objet='$objet' ");
 			while ($data = sql_fetch($query)) { // on recupere tous les numeros dans un tableau de tableaux
 				$emails_array[$data['id_objet']][] = $data;

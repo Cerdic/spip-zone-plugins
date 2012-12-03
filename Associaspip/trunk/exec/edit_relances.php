@@ -104,9 +104,10 @@ function relances_liste($critere, $id_groupe=0) {
 	// pour recoller les morceaux. A simplifier
 	while ($data = sql_fetch($query)) {
 		$id =  $data['id_auteur'];
+		$h = generer_url_ecrire('auteur_infos', "id_auteur=$id");
 		$res .= '<tr class="'.$GLOBALS['association_styles_des_statuts'][$data['statut_interne']] . '">'
 		. "<td class='integer'><label for='statut$id'>$id</label></td>\n"
-		. "<td class='text'>". association_formater_nom($data['sexe'], $data['prenom'], $data['nom_famille']) . "</td>\n"
+		. "<td class='text'><a href='$h'>". association_formater_nom($data['sexe'], $data['prenom'], $data['nom_famille']) . "</a></td>\n"
 		. "<td class='date'>". association_formater_date($data['date_validite']) ."</td>\n"
 		. association_bouton_coch('id', $id, "<input name='statut[$id]' id='statut$id' type='hidden' value='" . $data['statut_interne']."' />")
 		."</tr>\n";

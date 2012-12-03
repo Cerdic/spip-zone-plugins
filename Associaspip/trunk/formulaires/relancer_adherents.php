@@ -31,7 +31,7 @@ function formulaires_relancer_adherents_charger_dist() {
 	foreach ($id_tab as $id_auteur) { // tableau statut[] contenant uniquement les cases cochees au formulaire precedent id_auteur => statut_auteur
 		$contexte['_hidden'] .= '<input name="statut['.$id_auteur.']" type="hidden" value="'.$statut_tab[$id_auteur].'" />';
 	}
-	$contexte['_action'] = array('relance_adherents',$id_auteur); // pour passer securiser action
+	$contexte['_action'] = array('relancer_adherents',$id_auteur); // pour passer securiser action
 
 	return $contexte;
 }
