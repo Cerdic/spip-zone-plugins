@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explication_liens_rubriques' => 'Zmeniť internetové adresy presmerovaných rubrík priamo v šablónach?',
 	'explication_regles' => 'Rôzne pravidlá budú testované v tomto poradí. Ak presmerovanie neupravuje žiadne pravidlo, potom bude rubrika zobrazená normálne.',
+	'explication_restreindre_langue' => 'Si cette option est activée, seuls les articles de la langue active seront pris en compte pour le calcul de la rediretion. Cette option n\'est utile que si vos rubriques contiennent des articles de différentes langues. Ne pas utiliser si votre site est organisé en secteurs de langue ou si vous utilisez des champs multi.', # NEW
 	'explication_sousrubrique' => 'Prehľadať prvú podrubriku (zotriedenú podľa čísla nadpisu a dátumu)? Pravidlá na presmerovanie budú v tejto podrubrike testované znova.',
 	'explication_variantes_squelettes' => 'Príklad: šablóny v podobe rubrique-2.html alebo rubrique=3.html.',
 
@@ -36,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_plus_recent_branche' => 'Článok najnovšej vetvy',
 	'label_rang_un' => 'Prvý článok (číslované články)',
 	'label_regles' => 'Pravidlá presmerovania rubrík',
+	'label_restreindre_langue' => 'Ne prendre en compte que les articles de la langue ?', # NEW
 	'label_sousrubrique' => 'Podrubriky',
 	'label_un_article' => 'Jediný článok rubriky',
 	'label_variantes_squelettes' => 'Rubrika s variantom šablón'

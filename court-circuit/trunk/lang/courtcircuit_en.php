@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explication_liens_rubriques' => 'Change the URL of redirected sections directly into the skeletons?',
 	'explication_regles' => 'The different rules below are tested in that order. If no rule defines a redirection, then the section will be displayed normally.',
+	'explication_restreindre_langue' => 'Si cette option est activée, seuls les articles de la langue active seront pris en compte pour le calcul de la rediretion. Cette option n\'est utile que si vos rubriques contiennent des articles de différentes langues. Ne pas utiliser si votre site est organisé en secteurs de langue ou si vous utilisez des champs multi.', # NEW
 	'explication_sousrubrique' => 'Browse the first subsection (sort by title number and date)? Redirection rules will be tested again in this subsection.',
 	'explication_variantes_squelettes' => 'Example: skeletons of type rubrique-2.html or rubrique=3.html.',
 
@@ -36,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_plus_recent_branche' => 'The most recent article of the branch',
 	'label_rang_un' => 'First article (numbered articles)',
 	'label_regles' => 'Redirection rules of the sections',
+	'label_restreindre_langue' => 'Ne prendre en compte que les articles de la langue ?', # NEW
 	'label_sousrubrique' => 'Subsections',
 	'label_un_article' => 'The only article of the section',
 	'label_variantes_squelettes' => 'Section with alternative skeletons'
