@@ -8,7 +8,7 @@
 	<ul class="liste-items">
         <BOUCLE_navigation_cfg(DATA){source table, #EVAL{_TICKETS_PAGES_CONFIG}|explode{:}}{par cle}>
         [<li class="item">
-			(#URL_ECRIRE{#ENV{exec}}|parametre_url{cfg, #VALEUR}
+			(#SELF|parametre_url{cfg, #VALEUR}
 				|lien_ou_expose{
 					[(#VAL{tickets:tickets_}|concat{#VALEUR}|_T)],
 					[(#ENV{cfg, general}|=={#VALEUR})]})
