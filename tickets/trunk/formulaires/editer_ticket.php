@@ -93,9 +93,11 @@ function formulaires_editer_ticket_verifier($id_ticket='new', $retour='', $confi
         }
 	}
 	if(count($erreurs) == 0){
-		if (!isset($GLOBALS['visiteur_session']['tmp_ticket_document']))
-		session_set('tmp_ticket_document',
-			sous_repertoire(_DIR_TMP, 'documents_ticket') . md5(uniqid(rand())));
+		if (!isset($GLOBALS['visiteur_session']['tmp_ticket_document'])) {
+			include_spip('inc/session');
+			session_set('tmp_ticket_document',
+				sous_repertoire(_DIR_TMP, 'documents_ticket') . md5(uniqid(rand())));
+		}
 		$tmp = $GLOBALS['visiteur_session']['tmp_ticket_document'];
 		$doc = &$_FILES['ajouter_document'];
 		if (isset($_FILES['ajouter_document'])
