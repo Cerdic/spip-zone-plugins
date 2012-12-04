@@ -93,10 +93,15 @@ function formulaires_editer_ticket_verifier($id_ticket='new', $retour='', $confi
         }
 	}
 	if(count($erreurs) == 0){
+		if (!isset($GLOBALS['visiteur_session']['tmp_ticket_document']))
+		session_set('tmp_ticket_document',
+			sous_repertoire(_DIR_TMP, 'documents_ticket') . md5(uniqid(rand())));
+		$tmp = $GLOBALS['visiteur_session']['tmp_ticket_document'];
 		$doc = &$_FILES['ajouter_document'];
 		if (isset($_FILES['ajouter_document'])
 		AND $_FILES['ajouter_document']['tmp_name']) {
-			include_spip('inc/ajouter_documents');
+			include_spip('inc/joindre_document');
+			include_spip('action/ajouter_documents');
 			list($extension,$doc['name']) = fixer_extension_document($doc);
 			$acceptes = ticket_documents_acceptes();
 	
@@ -114,7 +119,7 @@ function formulaires_editer_ticket_verifier($id_ticket='new', $retour='', $confi
 				#		else if (...)
 				#		verifier le type_document autorise
 				#		retailler eventuellement les photos
-				}
+			}
 	
 			// si ok on stocke les meta donnees, sinon on efface
 			if (isset($erreurs['ajouter_document'])) {

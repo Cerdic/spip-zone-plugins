@@ -72,11 +72,10 @@ function ticket_modifier($id_ticket, $set=null) {
 	// Ajouter un document
 	if (isset($_FILES['ajouter_document'])
 	AND $_FILES['ajouter_document']['tmp_name']) {
-		$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
-		$ajouter_documents(
-			$_FILES['ajouter_document']['tmp_name'],
-			$_FILES['ajouter_document']['name'], 'ticket', $id_ticket,
-			'document', 0, $documents_actifs);
+		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
+		$ajouter_documents('',
+			$_FILES, 'ticket', $id_ticket,
+			'document');
 		// supprimer le temporaire et ses meta donnees
 		spip_unlink($_FILES['ajouter_document']['tmp_name']);
 		spip_unlink(preg_replace(',\.bin$,',
