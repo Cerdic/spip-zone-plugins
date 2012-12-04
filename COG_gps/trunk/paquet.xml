@@ -1,7 +1,7 @@
 <paquet
 	prefix="coggps"
 	categorie="divers"
-	version="2.0.0"
+	version="2.0.1"
 	etat="stable"
 	compatibilite="[3.0.0;["
 	logo="prive/themes/spip/images/coggps-32.png"
@@ -21,5 +21,5 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/coggps.php" />
 	<pipeline nom="affiche_gauche" inclure="coggps_pipelines.php" />
 
-	<necessite nom="cog" compatibilite="[2.0.0;[" />
+	<necessite nom="cog" compatibilite="[2.0.1;[" />
 </paquet>

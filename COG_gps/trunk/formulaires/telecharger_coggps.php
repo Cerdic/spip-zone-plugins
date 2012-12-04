@@ -7,7 +7,6 @@ include_spip('coggps_config');
 $tab_objet=coggps_config_tab_fichier();
 foreach($tab_objet as $key=>&$objet)
 {
-	//var_dump($fichier);
 	if(is_array($objet['url_fichier'])){
 		$objet['url_fichier']=implode(',',$objet['url_fichier']);
 	}
@@ -29,9 +28,10 @@ return array('tab_objet'=>$tab_objet);
 
 function formulaires_telecharger_coggps_verifier_dist(){
 	include_spip('coggps_config');
+	include_spip('inc/config');
 	$erreurs = array();
 	$tab_objet=coggps_config_tab_fichier();
-	$emplacement=_DIR_PLUGIN_coggps.lire_config('cog/chemin_donnee');
+	$emplacement=_DIR_TMP.lire_config('cog/chemin_donnee');
 	// login trop court ou existant
 	if ($objet = _request('objet')) {
 		if (!isset($tab_objet[$objet])) {
@@ -58,6 +58,7 @@ foreach($tab_fichier as $fichier) {
 	$nom_fichier_txt="";
 if(isset($tab_objet[$objet]['nom_fichier'])){
 	$nom_fichier_txt=$tab_objet[$objet]['nom_fichier'];
+	
 	}
 	$nom_fichier=coggps_telecharger_fichier_distant($fichier,$nom_fichier_txt);
 	if($nom_fichier)
@@ -82,7 +83,7 @@ include_spip('inc/distant');
 include_spip('inc/config');
 $fichier=copie_locale($source);
 $infos_fichier=pathinfo($source);
-$emplacement=_DIR_PLUGIN_COG.lire_config('cog/chemin_donnee');
+$emplacement=_DIR_TMP.lire_config('cog/chemin_donnee');
 $nom_fichier=$emplacement.$infos_fichier['filename'].'.'.$infos_fichier['extension'];
 if(empty($nom_fichier_txt)){
 	$nom_fichier_txt=$emplacement.$infos_fichier['filename'].'.txt';
@@ -90,10 +91,8 @@ if(empty($nom_fichier_txt)){
 else {
 	$nom_fichier_txt=$emplacement.$nom_fichier_txt;
 	}
-
 rename(_DIR_RACINE.$fichier,$nom_fichier);
 $infos_fichier=pathinfo($nom_fichier);
-
 // Si c'est un zip on l'extrait
 if($infos_fichier['extension']=='zip')
 {
@@ -106,7 +105,7 @@ if($infos_fichier['extension']=='zip')
 	if(isset($contenu[0]))	{
 		foreach ($contenu[0] as $fichier) {
 			if($fichier['filename']!="readme.txt"){
-				rename(_DIR_TMP.$fichier['filename'],$nom_fichier_txt);
+				rename(_DIR_RACINE.$fichier['filename'],$nom_fichier_txt);
 				}
 		}
 	}

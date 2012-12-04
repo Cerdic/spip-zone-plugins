@@ -3,10 +3,13 @@
 // http://doc.spip.org/@inc_editer_mot_dist
 function formulaires_completer_commune_gps_charger(){
 include_spip('coggps_config');
+include_spip('inc/config');
 $fichier=false;
-$dir=_DIR_PLUGIN_COG.lire_config('cog/chemin_donnee');
-$fichier=file_exists($dir.'geonames_FR.txt');
-	return array('fichier'=>$fichier);
+$tab_objet=coggps_config_tab_fichier();
+$nom_fichier=$tab_objet['FR']['nom_fichier'];
+$dir=_DIR_TMP.lire_config('cog/chemin_donnee');
+$fichier=file_exists($dir.$nom_fichier);
+	return array('fichier'=>$fichier,'repertoire'=>$dir);
 }
 
 
@@ -40,6 +43,7 @@ return $retour;
 function coggps_complete_commune_gps($fichier)
 {
 include_spip('coggps_config');
+include_spip('inc/config');
 $tab_colonne =coggps_config_correspondance_colonne();
 $tab_colonne=$tab_colonne['FR'];
 $colonnes=$tab_colonne['colonnes'];
@@ -57,7 +61,7 @@ foreach($tab_departement as &$departement)
 
 $tab_fichier = array();
     $nb = 0;
-	$dir=_DIR_PLUGIN_COG.lire_config('cog/chemin_donnee');
+	$dir=_DIR_TMP.lire_config('cog/chemin_donnee');
 	$fichier=$dir.'geonames_FR.txt';
 	$pointeur_fichier = @fopen($fichier, "r");
 	$commune_temp='';

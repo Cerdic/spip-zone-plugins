@@ -10,8 +10,8 @@
 	<ul>
 	    <li class="editer_fichier obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
 				<label for="fichier"><:cog:fichiers:></label>
-				[(#ENV{fichier}|non)<span class="erreur">Le fichier n'est pas pr&eacute;sent dans le r&eacute;pertoire d'importation</span>]
-				[(#ENV{fichier}|oui)<span class="erreur">Le fichier est pr&eacute;sent dans le r&eacute;pertoire &laquo;import&raquo;</span>]
+				[(#ENV{fichier}|non)<span class="erreur">Le fichier n'est pas pr&eacute;sent dans le r&eacute;pertoire #ENV{repertoire}</span>]
+				[(#ENV{fichier}|oui)<span>Le fichier est pr&eacute;sent dans le r&eacute;pertoire &laquo;#ENV{repertoire}&raquo;</span>]
 
 	    </li>
             </ul>
