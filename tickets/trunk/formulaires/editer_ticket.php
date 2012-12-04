@@ -166,10 +166,10 @@ function formulaires_editer_ticket_traiter($id_ticket='new',$retour='', $config_
 	return $message;
 }
 
-function ticket_documents_acceptes()
-{
-	$formats = trim($GLOBALS['meta']['formats_documents_ticket']);
-	if (!$formats) return array('jpg','txt','gif','png');
+function ticket_documents_acceptes(){
+	include_spip('inc/config');
+	$formats = trim(lire_config('tickets/general/formats_documents_ticket'));
+	if (!$formats) return array('jpg','gif','png','txt');
 	if ($formats !== '*')
 		$formats = array_filter(preg_split(',[^a-zA-Z0-9/+_],', $formats));
 	else {

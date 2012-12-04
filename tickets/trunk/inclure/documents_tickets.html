@@ -32,9 +32,9 @@
 	<div class="liste documents documents_joints">
 	<h2 class="h2"><:medias:titre_documents_joints:></h2>
 	<ul class="liste-items">
-		<BOUCLE_documents_joints(DOCUMENTS) {id_ticket} {extension !IN gif,jpg,png} {vu=non}{par num titre, date}{tout}>[
+		<BOUCLE_documents_joints(DOCUMENTS) {id_ticket} {extension !IN gif,jpg,png} {vu=non}{par num titre, date}{tout}>
 		<li class="item">
-			<strong class="#EDIT{titre}"><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a></strong>
+			<strong class="#EDIT{titre}"><a href="[(#URL_DOCUMENT)]" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a></strong>
 			<span class="small">(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</span>
 			[<div class="date"><:tickets:info_document_ajoute:> <abbr title="[(#DATE|date_iso)]">(#DATE|affdate)</abbr></div>]
 			[<div class="#EDIT{descriptif}">(#DESCRIPTIF|sinon{...})</div>]
@@ -44,7 +44,7 @@
 				[(#ID_OBJET|<{0}|ou{#AUTORISER{modifier,#OBJET,#ID_OBJET}})[(#BOUTON_ACTION{<:medias:bouton_enlever_document:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_TICKET-ticket-#ID_DOCUMENT,#SELF},ajax,'','',[(function(){jQuery("#doc(#ID_DOCUMENT)").animateRemove();return true;})()]})]]
 			</div>
 			<//B_compte2>
-		</li>]</BOUCLE_documents_joints>
+		</li></BOUCLE_documents_joints>
 	</ul>
 	</div>
 </B_documents_joints>
