@@ -23,6 +23,8 @@ function pb_couleur_rubrique_affiche_droite($flux) {
 		$contexte = array('id_rubrique'=>$id_rubrique);
 		$flux["data"] .= recuperer_fond("inclure/couleur_rubrique", $contexte);
 		}
+	} elseif ($exec == "rubriques"){
+		$flux["data"] .= recuperer_fond("inclure/couleur_rubrique", 0);
 	}
 
         return $flux;
