@@ -37,9 +37,9 @@ function formulaires_choisir_commune_traiter_dist($type,$id){
 		{
 		$tab_nom_commune=explode(',',_request('nom_commune'));
 		foreach($tab_nom_commune as $nom_commune){
-			$commune=recherche_cog_commune_strict($nom_commune);
+			$commune=cog_recherche_commune_strict($nom_commune);
 			if(!empty($commune)){
-				$tab_id_cog_commune[] = $commune['id'];
+				$tab_id_cog_commune[] = $commune['id_cog_commune'];
 				}
 			}
 		}

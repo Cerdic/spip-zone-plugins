@@ -19,7 +19,7 @@ if (!defined('_DIR_PLUGIN_COG'))
 function cog_affiche_milieu($flux){
 if(lire_config('cog/afficher_bloc_cog'))
 {
-	$tab_page_bloc=array('articles'=>'article','naviguer'=>'rubrique');
+	$tab_page_bloc=array('article'=>'article','naviguer'=>'rubrique');
 	if (in_array($flux['args']['exec'],array_keys($tab_page_bloc))){
 
 		$objet=$tab_page_bloc[$flux['args']['exec']];
@@ -40,7 +40,7 @@ if(lire_config('cog/afficher_bloc_cog'))
 			if (!(in_array(-1,$tab_rubriques_cog) OR in_array($id_rubrique, $tab_rubriques_cog))) {
 				return $flux;
 			}
-		include_spip('inc/prive');
+		include_spip('inc/cog_boitier');
 		$flux['data'].= cog_boitier_cog($id_objet,$objet);
 		}
 	}
@@ -75,7 +75,7 @@ return $texte;
 
 
 
-function cog_jqueryui_forcer($scripts){
+function cog_jqueryui_plugins($scripts){
 	$scripts[] = "jquery.ui.autocomplete";
 	return $scripts;
 }

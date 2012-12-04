@@ -89,12 +89,15 @@ if($infos_fichier['extension']=='zip')
 {
 
 	include_spip('inc/pclzip');
-	include_spip('inc/ajouter_documents');
+	include_spip('inc/joindre_document');
 	$archive = new PclZip($nom_fichier);
 	$archive->extract(_DIR_TMP);
-	$contenu = verifier_compactes($archive);
-	foreach ($contenu as $fichier => $size) {
-		rename(_DIR_TMP.$fichier,$nom_fichier_txt);
+	$contenu = joindre_decrire_contenu_zip($archive);
+
+	if(isset($contenu[0]))	{
+		foreach ($contenu[0] as $fichier) {
+			rename(_DIR_TMP.$fichier['filename'],$nom_fichier_txt);
+		}
 	}
 	unlink($nom_fichier);
 }

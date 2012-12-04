@@ -8,7 +8,7 @@ function cog_autoriser(){
 	return true;
 }
 // declarations d'autorisations
-function autoriser_cog_bouton_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_cog_menu_dist($faire, $type, $id, $qui, $opt) {
 return autoriser('voir', 'cog', $id, $qui, $opt);
 }
 

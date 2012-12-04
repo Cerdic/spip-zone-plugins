@@ -239,32 +239,59 @@ $p->code = "cog_config_tab_table()";
 return $p;
 }
 
-function recherche_cog_commune($nom_ville)
+function cog_recherche_commune($nom_ville,$code_departement="")
 {
-    $items=sql_allfetsel('distinct id_cog_commune as id,trim(concat(MID(article,2,LENGTH(article_majuscule)-2),concat(\' \',nom))) as label','spip_cog_communes','nom_majuscule like '.sql_quote(strtoupper($nom_ville).'%').' or concat(MID(article_majuscule,2,LENGTH(article_majuscule)-2),concat(\' \',nom_majuscule)) like '.sql_quote(strtoupper($nom_ville).'%'));
-    return $items;
+	$where='';
+	if (!empty($code_departement))
+		$where = 'and departement='.sql_quote($code_departement);
+	$items=sql_allfetsel('distinct id_cog_commune as id,trim(concat(MID(article,2,LENGTH(article_majuscule)-2),concat(\' \',nom))) as label','spip_cog_communes','nom_majuscule like '.sql_quote(strtoupper($nom_ville).'%').' or concat(MID(article_majuscule,2,LENGTH(article_majuscule)-2),concat(\' \',nom_majuscule)) like '.sql_quote(strtoupper($nom_ville).'%').$where);
+	return $items;
 }
 
-function recherche_cog_commune_strict($nom_ville)
+
+function cog_formulaire_recherche_commune($id_cog_commune,$nom_ville,$code_departement="")
 {
-    $items=sql_fetsel('distinct id_cog_commune as id,trim(concat(MID(article,2,LENGTH(article_majuscule)-2),concat(\' \',nom))) as label','spip_cog_communes','nom_majuscule = '.sql_quote(strtoupper($nom_ville)).' or concat(MID(article_majuscule,2,LENGTH(article_majuscule)-2),concat(\' \',nom_majuscule)) = '.sql_quote(strtoupper($nom_ville)));
-    return $items;
+	if(intval($id_cog_commune)!=0)
+		{
+			$item=sql_fetsel('distinct id_cog_commune as id_cog_commune,trim(concat(MID(article,2,LENGTH(article_majuscule)-2),concat(\' \',nom))) as label,code,departement','spip_cog_communes','id_cog_commune='.intval($where));
+		}
+	else
+		{
+			$item=cog_recherche_commune_strict($nom_ville,$code_departement);
+		}
+	if(isset($item['id_cog_commune'])) {
+		return $item;
+		}
+	else {
+		$erreurs='La commune de "'.$nom_ville.'" est introuvable';
+	}
 }
+
+
+function cog_recherche_id_commune_strict($nom_ville,$code_departement="")
+{
+	$cog_commune=cog_recherche_commune_strict($nom_ville,$code_departement);
+	if(isset($cog_commune['id_cog_commune']))
+		return $cog_commune['id_cog_commune'];
+	return null;
+}
+
+
+function cog_recherche_commune_strict($nom_ville,$code_departement="")
+{
+	$where='';
+	if (!empty($code_departement))
+		$where = 'and departement='.sql_quote($code_departement);
+	$item=sql_fetsel('distinct id_cog_commune as id_cog_commune,trim(concat(MID(article,2,LENGTH(article_majuscule)-2),concat(\' \',nom))) as label,code,departement','spip_cog_communes','nom_majuscule = '.sql_quote(strtoupper($nom_ville)).' or concat(MID(article_majuscule,2,LENGTH(article_majuscule)-2),concat(\' \',nom_majuscule)) = '.sql_quote(strtoupper($nom_ville)).$where);
+	return $item;
+}
+
 
 function get_nom_commune($id_cog_commune)
 {
     return sql_getfetsel('trim(concat(MID(article,2,LENGTH(article_majuscule)-2),concat(\' \',nom))) as nom_commune', 'spip_cog_communes','id_cog_commune = '.sql_quote($id_cog_commune));
 }
 
-function verifie_commune_code($code)
-{
-	$res=sql_getfetsel("count(*)", "spip_cog_communes", "id_cog_commune=".sql_quote($code));
-	if($res==1)
-		{
-		return true;
-		}
-return 	false;
-}
 
 
 ////////////////////////////////////////
