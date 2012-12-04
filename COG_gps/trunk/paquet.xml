@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;["
 	logo="prive/themes/spip/images/coggps-32.png"
 	schema="1.0"
-	documentation="http://contrib.spip.net/COG-Toutes-les-communes-departements-regions"
+	documentation="http://contrib.spip.net/COG-GPS-Ajoutez-une-position-a-vos-communes"
 >
 
 	<nom>COG-GPS</nom>
