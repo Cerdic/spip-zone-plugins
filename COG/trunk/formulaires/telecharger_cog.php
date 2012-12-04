@@ -29,9 +29,10 @@ return array('tab_objet'=>$tab_objet);
 
 function formulaires_telecharger_cog_verifier_dist(){
 	include_spip('cog_config');
+	include_spip('inc/config');
 	$erreurs = array();
 	$tab_objet=cog_config_tab_fichier();
-	$emplacement=_DIR_PLUGIN_COG.lire_config('cog/chemin_donnee');
+	$emplacement=_DIR_TMP.lire_config('cog/chemin_donnee');
 	// login trop court ou existant
 	if ($objet = _request('objet')) {
 		if (!isset($tab_objet[$objet])) {
@@ -78,7 +79,8 @@ include_spip('inc/distant');
 include_spip('inc/config');
 $fichier=copie_locale($source);
 $infos_fichier=pathinfo($source);
-$emplacement=_DIR_PLUGIN_COG.lire_config('cog/chemin_donnee');
+$emplacement=sous_repertoire(_DIR_TMP,lire_config('cog/chemin_donnee'));
+chmod($emplacement,0777);
 $nom_fichier=$emplacement.$infos_fichier['filename'].'.'.$infos_fichier['extension'];
 $nom_fichier_txt=$emplacement.$infos_fichier['filename'].'.txt';
 rename(_DIR_RACINE.$fichier,$nom_fichier);

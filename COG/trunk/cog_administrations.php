@@ -44,7 +44,8 @@ function cog_vider_tables($nom_meta_base_version) {
 
 function cog_peupler_base()
 {
-	ecrire_config('cog/chemin_donnee','donnees/');
+	include_spip('inc/config');
+	ecrire_config('cog/chemin_donnee','cog_donnees/');
 }
 
 ?>

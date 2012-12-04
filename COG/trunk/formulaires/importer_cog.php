@@ -4,8 +4,9 @@
 function formulaires_importer_cog_charger(){
 include_spip('cog_config');
 include_spip('inc/cog_import');
+include_spip('inc/config');
 $tab_objet=cog_config_tab_fichier();
-$emplacement=_DIR_PLUGIN_COG.lire_config('cog/chemin_donnee');
+$emplacement=_DIR_TMP.lire_config('cog/chemin_donnee');
 foreach($tab_objet as &$objet)
 	{
 		$fichier_manquant=false;
@@ -27,8 +28,9 @@ return array('objet'=>'','tab_objet'=>$tab_objet);
 
 function formulaires_importer_cog_verifier_dist(){
 	include_spip('cog_config');
+	include_spip('inc/config');
 	$tab_objet=cog_config_tab_fichier();
-	$emplacement=_DIR_PLUGIN_COG.lire_config('cog/chemin_donnee');
+	$emplacement=_DIR_TMP.lire_config('cog/chemin_donnee');
 
 	if ($objet = _request('objet')) {
 		if (!isset($tab_objet[$objet])) {
@@ -150,13 +152,14 @@ function cog_renvoyer_valeur(&$ligne,&$correspondance,&$fichier,&$contenu_fichie
 
 function cog_ramener_valeur(&$ligne,&$correspondance,&$fichier,&$contenu_fichier,$one=true)
 {
+	include_spip('inc/config');
 	$tab_result=array();
 	$num_fichier=$correspondance['fichier'];
 	$col_key1=$fichier['fichier'][$num_fichier][1];
 	$col_key2=$fichier['fichier'][$num_fichier][2];
 	if(!isset($contenu_fichier[$num_fichier]))
 		{
-			$emplacement=_DIR_PLUGIN_COG.lire_config('cog/chemin_donnee');
+			$emplacement=_DIR_TMP.lire_config('cog/chemin_donnee');
 			$nom_fichier=$emplacement.$fichier['fichier'][$num_fichier][0];
 			$pointeur_fichier = fopen($nom_fichier,"r");
 			if($pointeur_fichier<>0)
@@ -215,6 +218,7 @@ function cog_ramener_valeur(&$ligne,&$correspondance,&$fichier,&$contenu_fichier
 function cog_import($objet,$options,$tab_correspondance=array(),$tab_relation=array())
 {
 include_spip('cog_config');
+include_spip('inc/config');
 $erreurs=array();
 	$contenu_fichier=array();
 	$message="";
@@ -241,7 +245,7 @@ $erreurs=array();
 		$tab_filtres[$tab_temp[0]]=$tab_temp[1];
 		}
 	$tab_objet=cog_config_tab_fichier();
-	$emplacement=_DIR_PLUGIN_COG.lire_config('cog/chemin_donnee');
+	$emplacement=_DIR_TMP.lire_config('cog/chemin_donnee');
 	$message=  'Importation du fichier '.$objet."<br />";
 //	$message.= 'Emplacement du fichier : '.$emplacement."<br />";
 	if(is_array($tab_objet[$objet]['fichier']))
