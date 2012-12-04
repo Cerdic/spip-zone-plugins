@@ -9,7 +9,7 @@
 <B_jalons>
 <select class="crayon-active" name="#ENV{name_jalon}"
 	style="width:#ENV{largeur}px;#ENV{style}" >
-	<BOUCLE_jalons(POUR){tableau #GET{valeurs}}>>
+	<BOUCLE_jalons(DATA){source table, #GET{valeurs}}>>
 		<option value="#VALEUR"[(#JALON|=={#VALEUR}|?{selected})]>[(#VALEUR)]</option>
 	</BOUCLE_jalons>
 </select>
