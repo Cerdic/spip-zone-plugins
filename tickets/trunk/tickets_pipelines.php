@@ -1,7 +1,11 @@
 <?php
-
+/**
+ * Plugin Tickets
+ * Licence GPL (c) 2008-2012
+ *
+ */
+ 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
 
 /**
  * Insertion dans le pipeline affiche_aguche

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Plugin Tickets pour Spip 2.0
- * Licence GPL (c) 2008-2011
+ * Plugin Tickets
+ * Licence GPL (c) 2008-2012
  *
  * Formulaire d'édition de tickets
  *

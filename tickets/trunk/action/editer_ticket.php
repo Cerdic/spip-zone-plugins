@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Tickets pour SPIP
+ * Plugin Tickets
  * Licence GPL (c) 2008-2012
  *
  */

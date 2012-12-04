@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Plugin Tickets
+ * Licence GPL (c) 2008-2012
+ *
+ */
+ 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function inc_notifier_publication_ticket($id_ticket,$statut_nouveau='',$statut_ancien=''){

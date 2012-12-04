@@ -1,13 +1,20 @@
 <?php
 
+/**
+ * Plugin Tickets
+ * Licence GPL (c) 2008-2012
+ * 
+ * Formulaire de tri de tickets
+ * 
+ */
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_spip('inc/date_gestion');
 
 /**
  * Chargement des valeurs par defaut des champs du formulaire
  */
-
-include_spip('inc/date_gestion');
-
 function formulaires_trier_tickets_charger_dist($lien_filtre = NULL,$lien_arg = NULL){
 	$lien = $lien_filtre ? $lien_filtre : $lien_arg;
 
