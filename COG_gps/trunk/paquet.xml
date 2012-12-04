@@ -1,0 +1,25 @@
+<paquet
+	prefix="coggps"
+	categorie="divers"
+	version="2.0.0"
+	etat="stable"
+	compatibilite="[3.0.0;["
+	logo="prive/themes/spip/images/coggps-32.png"
+	schema="1.0"
+	documentation="http://contrib.spip.net/COG-Toutes-les-communes-departements-regions"
+>
+
+	<nom>COG-GPS</nom>
+	<!-- Outils pour ajouter faciliement la position GPS du centroid de chaque commune présente dans la table cog_communes -->
+
+	<auteur>Guillaume Wauquier</auteur>
+
+	<copyright>2012</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/coggps.php" />
+	<pipeline nom="affiche_gauche" inclure="coggps_pipelines.php" />
+
+	<necessite nom="cog" compatibilite="[2.0.0;[" />
+</paquet>
