@@ -12,7 +12,7 @@
 		<h1 class="titre">#GET{texte}</h1>
 	</div>
 	[(#AUTORISER{ecrire,ticket,#ENV{id_ticket,oui}})
-		#FORMULAIRE_EDITER_TICKET{#ENV{id_ticket,oui},#URL_TICKET{#ENV{id_ticket}}}
+		#FORMULAIRE_EDITER_TICKET{#ENV{id_ticket,oui},#ENV{id_ticket}|?{#URL_TICKET{#ENV{id_ticket}},#URL_PAGE{ticket}}}
 	]
 	[(#AUTORISER{ecrire,ticket,#ENV{id_ticket,oui}}|non)
 		[(#SESSION{id_auteur}|non)
