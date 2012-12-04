@@ -67,7 +67,7 @@
 		<BOUCLE_si_list(CONDITION){si #GET{config_thread}|=={list}|oui}>
 		<BOUCLE_comments-list(FORUMS) {statut IN publie} {id_ticket} {plat} {par date}>
 		<li class="comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
-			<INCLURE{fond=insclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE}/>
+			<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE}/>
 			[(#BOUTONS_ADMIN_FORUM)]
 		</li>
 		</BOUCLE_comments-list>
