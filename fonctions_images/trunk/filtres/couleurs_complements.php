@@ -270,4 +270,9 @@ function couleur_melanger($arg1, $arg2, $arg3=50) {
 	return $couleur;
 }
 
+function couleur_hexa_to_dec($couleur) {
+	include_spip('inc/filtres_images_lib_mini');
+	return _couleur_hex_to_dec($couleur);
+}
+
 ?>

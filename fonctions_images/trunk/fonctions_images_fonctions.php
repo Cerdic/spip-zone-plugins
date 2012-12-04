@@ -30,6 +30,7 @@ if(is_array($GLOBALS['spip_matrice'])){
 	$GLOBALS['spip_matrice']['couleur_foncerluminosite'] = 'filtres/couleurs_complements.php';
 	$GLOBALS['spip_matrice']['couleur_eclaircirluminosite'] = 'filtres/couleurs_complements.php';
 	$GLOBALS['spip_matrice']['couleur_melanger'] = 'filtres/couleurs_complements.php';
+	$GLOBALS['spip_matrice']['couleur_hexa_to_dec'] = 'filtres/couleurs_complements.php';
 }
 
 ?>
