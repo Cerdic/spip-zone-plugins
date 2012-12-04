@@ -19,7 +19,7 @@ function zeroclipboard_insert_head($flux){
 
 
 function zeroclipboard_jquery_plugins($plugins){
-	$plugins[] = find_in_path(_DIR_LIB_ZEROCLIPBOARD.'src/javascript/ZeroClipboard.js');
+	$plugins[] = _DIR_LIB_ZEROCLIPBOARD.'src/javascript/ZeroClipboard.js';
 	$plugins[] = 'javascript/spip_zeroclipboard.js';
 
 	return $plugins;
