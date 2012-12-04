@@ -8,8 +8,7 @@
 
 	<div class="cartouche">
 	[(#AUTORISER{modifier, ticket, #ID_TICKET}|oui)
-		<a class="i_edit" href="[(#URL_PAGE{editer_ticket}|parametre_url{id_ticket,#ID_TICKET})]"><:tickets:icone_modifier_ticket:></a>
-	]
+		<a class="i_edit" href="[(#URL_PAGE{editer_ticket}|parametre_url{id_ticket,#ID_TICKET})]"><:tickets:icone_modifier_ticket:></a>]
 		<h1 class="h1 titre #EDIT{titre}"><:tickets:ticket:> <small>##ID_TICKET</small> : #TITRE</h1>
 		<div class="actions rss">
 			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_ticket,#ID_TICKET})]"><:tickets:suivre_tickets_rss_unique:></a>
@@ -83,7 +82,7 @@
 			[<p class="repondre"><a
 				href="(#PARAMETRES_FORUM|url_reponse_forum)"
 				onclick="jQuery(this).add_reply_to([(#ID_FORUM)]);return false;"
-				rel="noindex nofollow"><:repondre_message:></a></p>]]
+				rel="noindex nofollow"><:forum:repondre_message:></a></p>]]
 			<B_comments-fils>
 			<ul class="comments-ul comments-fils">
 				<BOUCLE_comments-fils(FORUMS){id_parent}{par date}>
@@ -94,7 +93,7 @@
 					[<p class="repondre"><a
 						href="(#PARAMETRES_FORUM|url_reponse_forum)"
 						onclick="jQuery(this).add_reply_to([(#ID_FORUM)]);return false;"
-						rel="noindex nofollow"><:repondre_message:></a></p>]]
+						rel="noindex nofollow"><:forum:repondre_message:></a></p>]]
 					<BOUCLE_comments-fils-etc(boucle_comments-fils)></BOUCLE_comments-fils-etc>
 				</li>
 				</BOUCLE_comments-fils>
@@ -122,7 +121,7 @@
 					[<p class="repondre"><a
 						href="(#PARAMETRES_FORUM|url_reponse_forum)"
 						onclick="jQuery(this).add_reply_to([(#ID_THREAD)]);return false;"
-						rel="noindex nofollow"><:repondre_message:></a></p>]]
+						rel="noindex nofollow"><:forum:repondre_message:></a></p>]]
 				</li>
 				</BOUCLE_comments-fils-1>
 			</ul>
@@ -131,7 +130,7 @@
 			[<p class="repondre"><a
 					href="(#PARAMETRES_FORUM|url_reponse_forum)"
 					onclick="jQuery(this).add_reply_to([(#ID_THREAD)]);return false;"
-					rel="noindex nofollow"><:repondre_message:></a></p>]]
+					rel="noindex nofollow"><:forum:repondre_message:></a></p>]]
 		</li>
 		</BOUCLE_comments-list-1>
 		[<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
