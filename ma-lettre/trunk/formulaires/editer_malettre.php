@@ -98,11 +98,11 @@ function formulaires_editer_malettre_traiter_dist(){
                 //$message = "titre: $lettre_title / sel;  $selection  / sek, $selection_eve / <textarea>$sourceHTML</textarea>"; 
       							
       					// ecriture fichier       											
-    						if ($handle = fopen($path_archive_full."/.malettre.html", w)) { 						    
+    						if ($handle = fopen($path_archive_full."/_malettre.html", w)) { 						    
       							fwrite($handle, $sourceHTML);					
       							fclose($handle); 
                     
-                    if ($handle = fopen($path_archive_full."/.malettre_txt.html", w)) { 			
+                    if ($handle = fopen($path_archive_full."/_malettre_txt.html", w)) { 			
         							fwrite($handle, $sourceTXT);					
         							fclose($handle);
       						  } else {

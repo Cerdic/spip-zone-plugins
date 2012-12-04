@@ -17,8 +17,8 @@ function formulaires_envoi_malettre_charger_dist(){
                   else   $lettre_title = "";
 
 
-  $sourcehtml = recuperer_page(lire_meta("adresse_site")."/IMG/lettre/.malettre.html");
-  $sourcetxt = recuperer_page(lire_meta("adresse_site")."/IMG/lettre/.malettre_txt.html");
+  $sourcehtml = recuperer_page(lire_meta("adresse_site")."/IMG/lettre/_malettre.html");
+  $sourcetxt = recuperer_page(lire_meta("adresse_site")."/IMG/lettre/_malettre_txt.html");
 
   $contexte = array(
     'lettre_title'=>$lettre_title,
@@ -104,7 +104,7 @@ function formulaires_envoi_malettre_traiter_dist(){
             $url_lettre_archive_txt = "$path_url_archive/$path_archive/$url_lettre_archive_txt_short";
             
             // recup contenu HTML
-            $texte = $path_archive_full."/.malettre.html";
+            $texte = $path_archive_full."/_malettre.html";
             $fr=fopen($texte,"r");
             while(!feof($fr)){
                   $recup = '';
@@ -116,7 +116,7 @@ function formulaires_envoi_malettre_traiter_dist(){
             $recup = str_replace("{TITRE_MALETTRE}",$sujet,$recup);
            
             // recup contenu TXT
-            $texte = $path_archive_full."/.malettre_txt.html";
+            $texte = $path_archive_full."/_malettre_txt.html";
             $fr=fopen($texte,"r");
             while(!feof($fr)){
                   $recup_txt = '';
