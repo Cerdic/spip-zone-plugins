@@ -68,7 +68,7 @@
 		<BOUCLE_si_list(CONDITION){si #GET{config_thread}|=={list}|oui}>
 		<BOUCLE_comments-list(FORUMS) {statut IN publie} {id_ticket} {plat} {par date}>
 		<li class="comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
-			[(#MODELE{comment}{id_forum}{compteur=#COMPTEUR_BOUCLE})]
+			<INCLURE{fond=insclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE}/>
 			[(#BOUTONS_ADMIN_FORUM)]
 		</li>
 		</BOUCLE_comments-list>
@@ -77,7 +77,7 @@
 		<BOUCLE_si_thread(CONDITION){si #GET{config_thread}|=={thread}|oui}>
 		<BOUCLE_comments-thread(FORUMS) {statut IN publie} {id_ticket} {par date}>
 		<li class="comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
-			[(#MODELE{comment}{id_forum}{compteur=#COMPTEUR_BOUCLE}{thread=oui})]
+			<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE,thread=oui}/>
 			[(#BOUTONS_ADMIN_FORUM)]
 			[(#GET{autoriser_commenter}|=={oui}|oui)
 			[<p class="repondre"><a
@@ -110,13 +110,13 @@
 		<BOUCLE_si_thread-1(CONDITION){si #GET{config_thread}|=={thread-1}|oui}>
 		<BOUCLE_comments-list-1(FORUMS){id_ticket} {!par date_thread}{pagination 10}>
 		<li class="comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
-			<INCLURE{fond=modeles/comment}{id_forum}{compteur=#COMPTEUR_BOUCLE}{thread=oui}>
+			<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE,thread=oui}>
 			[(#BOUTONS_ADMIN_FORUM)]
 			<B_comments-fils-1>
 			<ul class="comments-ul">
 				<BOUCLE_comments-fils-1(FORUMS){id_thread}{id_forum!=#_comments-list:ID_FORUM}{par date}>
 				<li class="comment-li[ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)last]">
-					<INCLURE{fond=modeles/comment}{id_forum}{thread=oui}>
+					<INCLURE{fond=inclure/comment,id_forum,thread=oui}>
 					[(#BOUTONS_ADMIN_FORUM)]
 					[(#GET{autoriser_commenter}|=={oui}|oui)
 					[<p class="repondre"><a
