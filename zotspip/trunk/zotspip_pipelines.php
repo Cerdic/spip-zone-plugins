@@ -72,5 +72,35 @@ function zotspip_porte_plume_lien_classe_vers_icone($flux) {
 	return array_merge($flux, $icones);
 }
 
+// Pipeline post-boucle, utilise pour le champs annee de zitems, cf. http://core.spip.org/issues/2912
+
+function zotspip_post_boucle ($boucle) {
+	if ($boucle->id_table == 'zitems') {
+		$boucle->where = replaceTree ('YEAR(zitems.date)','zitems.annee',$boucle->where);
+	}
+	return $boucle;
+}
+
+// Source: http://kvz.io/blog/2008/09/05/php-recursive-str-replace-replacetree/
+function replaceTree($search="", $replace="", $array=false, $keys_too=false)
+{
+    if (!is_array($array)) {
+        // Regular replace
+        return str_replace($search, $replace, $array);
+    }
+
+    $newArr = array();
+    foreach ($array as $k=>$v) {
+        // Replace keys as well?
+        $add_key = $k;
+        if ($keys_too) {
+            $add_key = str_replace($search, $replace, $k);
+        }
+
+        // Recurse
+        $newArr[$add_key] = replaceTree($search, $replace, $v, $keys_too);
+    }
+    return $newArr;
+}
 
 ?>

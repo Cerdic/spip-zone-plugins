@@ -1,7 +1,7 @@
 <paquet
 	prefix="zotspip"
 	categorie="edition"
-	version="2.0.4"
+	version="2.0.5"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/zotspip-48.png"
@@ -28,6 +28,7 @@
 	<pipeline nom="autoriser" inclure="zotspip_pipelines.php" />
 	<pipeline nom="porte_plume_barre_pre_charger" inclure="zotspip_pipelines.php" />
 	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="zotspip_pipelines.php" />
+	<pipeline nom="post_boucle" inclure="zotspip_pipelines.php" />
 
 	<necessite nom="saisies" />
 

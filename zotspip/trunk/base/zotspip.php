@@ -18,7 +18,6 @@ function zotspip_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_ztags'][]= 'zitems';
 	$interface['tables_jointures']['spip_zcreators'][]= 'zitems';
 
-	
 	return $interface;
 }
 

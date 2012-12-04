@@ -16,7 +16,7 @@
 
 <select name="#ENV{nom}" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ size="(#ENV{size})"]>
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
-<BOUCLE_selection(ZITEMS){fusion annee}{!par annee}{annee!=''}>
+<BOUCLE_selection(ZITEMS){fusion annee}{!par annee}{annee>0}>
 	<option value="#ANNEE"[(#ANNEE|=={#GET{valeur}}|oui)selected="selected"]>#ANNEE</option>
 </BOUCLE_selection>
 </select>

@@ -38,10 +38,10 @@ parametres:
         options:
           nom: 'souligne'
           label: '<:zotspip:label_souligne:>'
-          option_intro: '<:oui:>'
+          option_intro: '<:item_oui:>'
           afficher_si: '@auteur@!=""'
           datas:
-            non: '<:non:>'
+            non: '<:item_non:>'
       -
         saisie: 'zotspip_type'
         options:

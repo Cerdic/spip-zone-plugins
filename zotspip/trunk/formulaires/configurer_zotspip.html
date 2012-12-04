@@ -12,7 +12,7 @@
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-		<li class="fieldset"><fieldset><legend><:zotspip:label_identifiants_zotero:></legend>
+		<li class="fieldset"><fieldset><h3 class="legend"><:zotspip:label_identifiants_zotero:></h3>
 		[(#REM) Tester la connexion à l'API Zotéro ]
 		[(#TESTER_CONNEXION_ZOTERO|?{<p class="reponse_formulaire reponse_formulaire_ok"><:zotspip:connexion_ok:></p>,<p class="reponse_formulaire reponse_formulaire_erreur"><:zotspip:erreur_connexion:></p>})]<ul>
 			<li class="editer_type_librairie[ (#ENV**{erreurs}|table_valeur{type_librairie}|oui)erreur]">
@@ -42,7 +42,7 @@
 				<input type="text" name="api_key" class="text" value="#ENV*{api_key}" id="api_key" [(#HTML5|oui)required='required']/>
 			</li>
 		</ul></fieldset></li>
-		<li class="fieldset"><fieldset><legend><:zotspip:label_options:></legend><ul>
+		<li class="fieldset"><fieldset><h3 class="legend"><:zotspip:label_options:></h3><ul>
 			<B_csl_defaut>
 			<li class="editer_csl_defaut[ (#ENV**{erreurs}|table_valeur{csl_defaut}|oui)erreur]">
 				<label for='csl_defaut'><:zotspip:label_csl_defaut:></label>
