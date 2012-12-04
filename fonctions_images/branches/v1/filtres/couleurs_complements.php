@@ -212,6 +212,76 @@ function couleur_eclaircirluminosite($coul,$pourcentage=20) {
 	return $couleurs;
 }
 
+/**
+ * Melanger 2 couleurs hexa
+ *
+ * @param string/array $arg1
+ *     tableau couleur 1 & 2, ou string couleur 1
+ * @param string $arg2
+ *     couleur 2 ou pourcentage : nombre entre 0 et 100 (defaut 50)
+ * @param int $arg3
+ *     pourcentage : nombre entre 0 et 100 (defaut 50)
+ * @return string
+ *     nouvelle couleur hexa
+ *
+ * ex: #VAL{888888}|couleur_melanger{ff0066, 75}
+ *     #CONFIG{mon_plugin/ma_couleur}|couleur_melanger{#ffffff, 20}
+ *     #LISTE{ff3366,888888}|couleur_melanger{20}
+**/
+function couleur_melanger($arg1, $arg2, $arg3=50) {
+
+	// 2 cas pour les arguments : tableau des 2 couleurs, pourcentage // couleur1, couleur2, pourcentage 
+	if (is_string($arg1)){
+		$couleur1 = $arg1;
+		$couleur2 = $arg2;
+		$pourcentage = $arg3;
+	} elseif (is_array($arg1)){
+		$couleur1 = $arg1[0];
+		$couleur2 = $arg1[1];
+		$pourcentage = $arg2;
+		if (!isset($pourcentage)) $pourcentage=50;
+	}; 
+
+	/* => Desactive !
+	/* compatibilité : les pourcentages compris entre 0 et 1 fonctionnent
+	   comme pour les filtres de couleurs de Spip.
+	   Ainsi couleur_melanger{0.25} = couleur_melanger{25} */
+	/*
+	if ($pourcentage>=0 AND $pourcentage<=1) {
+		$coef = 1;
+	} else {
+		$coef = 100;
+	};
+	*/
+	$coef = 100;
+
+	// verifications
+	if (!$couleur2 OR $pourcentage<=0 OR !is_numeric($pourcentage)) return(preg_replace(",^#,","",$couleur1));
+	if ($pourcentage>=$coef) return(preg_replace(",^#,","",$couleur2));
+
+	// definition du pourcentage
+	$pourcentage1 = ($coef-$pourcentage)/$coef;
+	$pourcentage2 = $pourcentage/$coef;
+
+	// conversion
+	$couleurs1 = couleur_hexa_to_dec($couleur1);
+	$couleurs2 = couleur_hexa_to_dec($couleur2);
+	$red1   = $couleurs1["red"];
+	$green1 = $couleurs1["green"];
+	$blue1  = $couleurs1["blue"];
+	$red2   = $couleurs2["red"];
+	$green2 = $couleurs2["green"];
+	$blue2  = $couleurs2["blue"];
+
+	// melange
+	$red   = round($red1*$pourcentage1 + $red2*$pourcentage2);
+	$green = round($green1*$pourcentage1 + $green2*$pourcentage2);
+	$blue  = round($blue1*$pourcentage1 + $blue2*$pourcentage2);
+
+	$couleur = _couleur_dec_to_hex($red, $green, $blue);
+	return $couleur;
+}
+
 function couleur_hexa_to_dec($couleur) {
 	include_spip('inc/filtres_images_lib_mini');
 	return _couleur_hex_to_dec($couleur);
