@@ -38,7 +38,7 @@
 				datas=[(#ENV{id_ticket}|tickets_liste_severite)]})]
 
 			#SET{saisies, #ARRAY{projet,projets,composant,composants,version,versions,jalon,jalons}}
-			<BOUCLE_saisies(POUR) {tableau #GET{saisies}}>
+			<BOUCLE_saisies(DATA){source table, #GET{saisies}}>
 			[(#VALEUR|tickets_champ_optionnel_actif|oui)
 				[(#SAISIE{selection, #CLE,
 					label=[(#VAL{tickets:champ_}|concat{#CLE}|_T)],

@@ -10,7 +10,7 @@
 <select class="crayon-active" name="#ENV{name_navigateur}"
 	style="width:#ENV{largeur}px;#ENV{style}">
 	<option value="">-</option>
-	<BOUCLE_versions(POUR){tableau #GET{valeurs}}>>
+	<BOUCLE_versions(DATA){source table, #GET{valeurs}}>>
 		<option value="#CLE"[(#NAVIGATEUR|=={#CLE}|?{selected})]>[(#VALEUR)]</option>
 	</BOUCLE_versions>
 </select>

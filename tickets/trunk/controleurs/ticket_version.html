@@ -9,7 +9,7 @@
 <B_versions>
 <select class="crayon-active" name="#ENV{name_version}"
 	style="width:#ENV{largeur}px;#ENV{style}" >
-	<BOUCLE_versions(POUR){tableau #GET{valeurs}}>>
+	<BOUCLE_versions(DATA){source table, #GET{valeurs}}>>
 		<option value="#VALEUR"[(#VERSION**|=={#VALEUR}|?{selected})]>[(#VALEUR|typo)]</option>
 	</BOUCLE_versions>
 </select>

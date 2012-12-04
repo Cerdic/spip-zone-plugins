@@ -9,7 +9,7 @@
 <B_projets>
 <select class="crayon-active" name="#ENV{name_projet}"
 	style="width:#ENV{largeur}px;#ENV{style}" >
-	<BOUCLE_projets(POUR){tableau #GET{valeurs}}>>
+	<BOUCLE_projets(DATA){source table, #GET{valeurs}}>>
 		<option value="#VALEUR"[(#PROJET|=={#VALEUR}|?{selected})]>[(#VALEUR)]</option>
 	</BOUCLE_projets>
 </select>
