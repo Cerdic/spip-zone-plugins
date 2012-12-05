@@ -7,7 +7,7 @@
 		</multi>
 	</slogan>
 	<auteur>Fil</auteur>
-	<licence>&#169; 2005-2011 - GNU/GPL</licence>
+	<licence>&#169; 2005-2012 - GNU/GPL</licence>
 	<version>1.2.0</version>
 	<etat>stable</etat>
 	<description>
@@ -18,7 +18,7 @@ Son objectif est d&#8217;&#234;tre et de rester simple dans son code, et rapide 
 	<lien>http://www.spip-contrib.net/Sedna-agregateur</lien>
 	<icon>images/sedna-logo.jpg</icon>
 	<prefix>sedna</prefix>
-	<necessite id='SPIP' version='[2.1.0;3.0.*]' />
+	<necessite id='SPIP' version='[2.1.0;2.1.99]' />
 	<options>sedna_options.php</options>
 	<categorie>squelette</categorie>
 	<traduire gestionnaire="salvatore" module="sedna" reference="fr" />
