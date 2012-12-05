@@ -39,11 +39,13 @@ function sedna_utils(){
 		$titre,
 		$lesauteurs,
 		$desc,
-		$lang
+		$lang,
+		$nom_site,
+		$url_site
 		) {
 		static $vu, $lus, $ferme_ul, $id, $iddesc;
 		global $ex_syndic, $class_desc;
-
+		$ret = '';
 		// Articles a ignorer
 		if (!_request('id_syndic')
 		AND $_COOKIE['sedna_ignore_'.$id_syndic])
@@ -65,62 +67,61 @@ function sedna_utils(){
 
 		// indiquer un intertitre si on change de source ou de date
 		if ($affdate OR ($id_syndic != $ex_syndic)) {
-			echo $ferme_ul; $ferme_ul="</ul>\n";
-			echo $affdate;
+			$ret .= $ferme_ul; $ferme_ul="</ul>\n";
+			$ret .= $affdate;
 		}
 
 		// Suite intertitres
 		if ($affdate OR ($id_syndic != $ex_syndic)) {
-			echo "<h2 id='site${id_syndic}_".(++$id)."'
+			$ret .= "<h2 id='site${id_syndic}_".(++$id)."'
 			onmouseover=\"getElementById('url".$id."').className='urlsiteon';\"
 			onmouseout=\"getElementById('url".$id."').className='urlsite';\"
 			>";
 			$link = parametre_url(self(),'id_syndic',$id_syndic);
 			if ($age = intval($GLOBALS['age']))
 				$link = parametre_url($link,'age',$age);
-			echo "<a href=\"$link\">".$GLOBALS['nom_site_'.$id_syndic]
+			$ret .= "<a href=\"$link\">".$nom_site
 				."</a>";
-			echo " <a class=\"urlsite\"
+			$ret .= " <a class=\"urlsite\"
 					href=\""
-					.$GLOBALS['url_site_'.$id_syndic]
+					.$url_site
 					.'" id="url'.$id.'">'
-					.$GLOBALS['url_site_'.$id_syndic]
+					.$url_site
 					."</a>";
-			echo "</h2>\n<ul>\n";
+			$ret .= "</h2>\n<ul>\n";
 			$ex_syndic = $id_syndic;
 		}
 
-		echo "<li class='hentry'";
+		$ret .= "<li class='hentry'";
 		if (!$_GET['id_syndic'] AND !strlen($_GET['recherche']))
-			echo " id='item${id_syndic}_${id_syndic_article}'";
-		echo "	onmousedown=\"jai_lu('$id_lien');\">\n",
-#		"<small>".affdate($date,'H:i')."</small>",
-		"<abbr class='published updated'
-		title='".date_iso($date)."'>".affdate($date,'H:i')."</abbr>",
-		"<div class=\"titre\">",
-		"<a href=\"$url\"
+			$ret .= " id='item${id_syndic}_${id_syndic_article}'";
+		$ret .= "	onmousedown=\"jai_lu('$id_lien');\">\n";
+		$ret .= "<abbr class='published updated' title='".date_iso($date)."'>".affdate($date,'H:i')."</abbr>";
+		$ret .= "<div class=\"titre\">";
+		$ret .= "<a href=\"$url\"
 			title=\"$url\"
 			class=\"link$class_link\"
 			id=\"news$id_lien\"
 			rel=\"bookmark\"";
-		if ($lang) echo " hreflang=\"$lang\"";
-		echo ">",
-		"<span class=\"entry-title\">", # le "title" du microformat hAtom.hfeed.hentry
-		$titre, "</span></a>",
-		$lesauteurs,
-		"\n<span class=\"source\"><a href=\"",
-		$GLOBALS['url_site_'.$id_syndic]."\">",
-		$GLOBALS['nom_site_'.$id_syndic]."</a></span>\n",
-		"</div>\n";
+		if ($lang) $ret .= " hreflang=\"$lang\"";
+		$ret .= ">";
+		$ret .= "<span class=\"entry-title\">"; # le "title" du microformat hAtom.hfeed.hentry
+		$ret .= $titre."</span></a>";
+		$ret .= $lesauteurs;
+		$ret .= "\n<span class=\"source\"><a href=\"";
+		$ret .= $url_site."\">";
+		$ret .= $nom_site."</a></span>\n";
+		$ret .= "</div>\n";
 
 		if ($desc)
-			echo "<div class=\"desc\">",
-			"<div class=\"$class_desc\" id=\"desc_".(++$iddesc)."\">\n",
-			"<span class=\"entry-summary\">", $desc, "</span>\n",
-			'</div></div>';
+			$ret .= "<div class=\"desc\">
+			<div class=\"$class_desc\" id=\"desc_".(++$iddesc)."\">\n
+			<span class=\"entry-summary\">".$desc."</span>\n
+			</div></div>";
 
 
-		echo "\n</li>\n";
+		$ret .= "\n</li>\n";
+		return $ret;
 	}
 
 	// Si synchro active il faut comparer le contenu du cookie et ce
@@ -129,10 +130,6 @@ function sedna_utils(){
 	if ($_COOKIE['sedna_synchro'] == 'oui'
 	AND $id = $GLOBALS['visiteur_session']['id_auteur']) {
 		// Recuperer ce qu'on a stocke
-		if (!$s = sql_fetsel("sedna","spip_auteurs","id_auteur=$id")) {
-			// creer le champ sedna si ce n'est pas deja fait
-			sql_alter("TABLE spip_auteurs ADD sedna TEXT NOT NULL DEFAULT ''");
-		}
 		$champ = $champ['sedna'];
 		// mixer avec le cookie en conservant un ordre chronologique
 		if ($_COOKIE['sedna_lu'] <> $champ) {
@@ -147,7 +144,7 @@ function sedna_utils(){
 			}
 			$lus = substr(join('-', array_keys($lus)),0,3000); # 3ko maximum
 			// Mettre la base a jour
-			sql_updateq("spip_auteurs",array('sedna',$lus),"id_auteur=$id");
+			sql_updateq("spip_auteurs",array('sedna',$lus),"id_auteur=".intval($id));
 			$synchro = ' *';
 
 			// Si le cookie n'est pas a jour, on l'update sur le brouteur
