@@ -22,108 +22,11 @@ function sedna_utils(){
 
 	// Descriptifs : affiches ou masques ?
 	// l'accessibilite sans javascript => affiches par defaut
-	if ($_COOKIE['sedna_style'] == 'masquer') {
+	if ($_COOKIE['sedna_style'] == 'masquer')
 		$class_desc = "desc_masquer";
-	} else {
+	else
 		$class_desc = "desc_afficher";
-	}
-	// l'identifiant du lien est fonction de son url et de sa date
-	// ce qui permet de reperer les "updated" *et* les doublons
-	include_spip('inc/filtres');
-	function afficher_lien(
-		$id_syndic_article,
-		$id_lien,
-		$id_syndic,
-		$date,
-		$url,
-		$titre,
-		$lesauteurs,
-		$desc,
-		$lang,
-		$nom_site,
-		$url_site
-		) {
-		static $vu, $lus, $ferme_ul, $id, $iddesc;
-		global $ex_syndic, $class_desc;
-		$ret = '';
-		// Articles a ignorer
-		if (!_request('id_syndic')
-		AND $_COOKIE['sedna_ignore_'.$id_syndic])
-			return;
-
-		// initialiser la liste des articles lus
-		if (!is_array($lus))
-			$lus = array_flip(explode('-', '-'.$_COOKIE['sedna_lu']));
-
-		if ($vu[$id_lien]++) return;
-
-		// regler la classe des liens, en fonction du cookie sedna_lu
-		$class_link = $lus[$id_lien] ? 'vu' : '';
-
-		if (unique(substr($date,0,10)))
-			$affdate = '<h1 class="date">'
-				.jour($date).' '.nom_mois($date).'</h1>';
-
-
-		// indiquer un intertitre si on change de source ou de date
-		if ($affdate OR ($id_syndic != $ex_syndic)) {
-			$ret .= $ferme_ul; $ferme_ul="</ul>\n";
-			$ret .= $affdate;
-		}
-
-		// Suite intertitres
-		if ($affdate OR ($id_syndic != $ex_syndic)) {
-			$ret .= "<h2 id='site${id_syndic}_".(++$id)."'
-			onmouseover=\"getElementById('url".$id."').className='urlsiteon';\"
-			onmouseout=\"getElementById('url".$id."').className='urlsite';\"
-			>";
-			$link = parametre_url(self(),'id_syndic',$id_syndic);
-			if ($age = intval($GLOBALS['age']))
-				$link = parametre_url($link,'age',$age);
-			$ret .= "<a href=\"$link\">".$nom_site
-				."</a>";
-			$ret .= " <a class=\"urlsite\"
-					href=\""
-					.$url_site
-					.'" id="url'.$id.'">'
-					.$url_site
-					."</a>";
-			$ret .= "</h2>\n<ul>\n";
-			$ex_syndic = $id_syndic;
-		}
-
-		$ret .= "<li class='hentry'";
-		if (!$_GET['id_syndic'] AND !strlen($_GET['recherche']))
-			$ret .= " id='item${id_syndic}_${id_syndic_article}'";
-		$ret .= "	onmousedown=\"jai_lu('$id_lien');\">\n";
-		$ret .= "<abbr class='published updated' title='".date_iso($date)."'>".affdate($date,'H:i')."</abbr>";
-		$ret .= "<div class=\"titre\">";
-		$ret .= "<a href=\"$url\"
-			title=\"$url\"
-			class=\"link$class_link\"
-			id=\"news$id_lien\"
-			rel=\"bookmark\"";
-		if ($lang) $ret .= " hreflang=\"$lang\"";
-		$ret .= ">";
-		$ret .= "<span class=\"entry-title\">"; # le "title" du microformat hAtom.hfeed.hentry
-		$ret .= $titre."</span></a>";
-		$ret .= $lesauteurs;
-		$ret .= "\n<span class=\"source\"><a href=\"";
-		$ret .= $url_site."\">";
-		$ret .= $nom_site."</a></span>\n";
-		$ret .= "</div>\n";
-
-		if ($desc)
-			$ret .= "<div class=\"desc\">
-			<div class=\"$class_desc\" id=\"desc_".(++$iddesc)."\">\n
-			<span class=\"entry-summary\">".$desc."</span>\n
-			</div></div>";
-
-
-		$ret .= "\n</li>\n";
-		return $ret;
-	}
-
+	
 	// Si synchro active il faut comparer le contenu du cookie et ce
 	// qu'on a stocke dans le champ spip_auteurs.sedna (a creer au besoin)
 	$synchro = '';

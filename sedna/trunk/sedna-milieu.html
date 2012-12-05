@@ -10,13 +10,11 @@
 <B_syndic>
 
 <div id="total_articles">
-#TOTAL_BOUCLE [(#TOTAL_BOUCLE|=={1}|?{<:sedna:liens:>,<:sedna:liens_pluriel:>})]
+[(#TOTAL_BOUCLE|singulier_ou_pluriel{<:sedna:liens:>,<:sedna:liens_pluriel:>})]
 </div>
 [(#REM)
-	Voir la definition des criteres {contenu} et {tri_sedna} dans sedna.php
-]
-
-<BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic?}{id_syndic IN #GET{sites}|array_filter} {contenu} {tri_sedna} {age<=#ENV{age,1}} {0,500}>
+	Voir la definition des criteres {contenu} et {tri_sedna} dans sedna-milieu_fonctions.php
+]<BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic?}{id_syndic IN #GET{sites}|array_filter} {contenu} {tri_sedna} {age<=#ENV{age,1}} {0,500}>
 	[(#ID_SYNDIC_ARTICLE|afficher_lien{
 		[(#URL_ARTICLE|creer_identifiant{#DATE})],
 		#ID_SYNDIC,
@@ -32,10 +30,8 @@
 </BOUCLE_syndic>
 </ul>
 </B_syndic>
-
-	<div id="total_articles"><:sedna:pas_articles:></div>
-	<div class="centre_image">
-	<img src="#CHEMIN{images/sedna-big.png}" alt="" width="196" height="196" />
-	</div>
-
+<div id="total_articles"><:sedna:pas_articles:></div>
+<div class="centre_image">
+	[(#CHEMIN{images/sedna-big.png}|balise_img)]
+</div>
 <//B_syndic>
