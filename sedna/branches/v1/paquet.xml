@@ -1,0 +1,21 @@
+<paquet
+	prefix="sedna"
+	categorie="squelette"
+	version="1.2.1"
+	etat="stable"
+	compatibilite="[2.1.0;3.0.*]"
+	logo="images/sedna-logo.jpg"
+	documentation="http://www.spip-contrib.net/Sedna-agregateur"
+>	
+
+	<nom>Sedna</nom>
+	<!-- Agrégateur RSS -->
+
+	<auteur>Fil</auteur>
+
+	<copyright>2005-2012</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<traduire module="sedna" reference="fr" gestionnaire="salvatore" />
+</paquet>
