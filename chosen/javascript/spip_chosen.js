@@ -36,12 +36,20 @@ jQuery(document).ready(function(){
 		
 	}
 
+	/* Ajoute la propriete overflow:visible au li contenant le select chosen (pour contrer le css de SPIP) */
+	spip_chosen_visible = function() {
+		$('.chzn-container').parent('li').each(function () {
+			$(this).css("overflow", "visible");
+		});
+	}
+
 	/* lance Chosen sur les .chosen */
 	spip_chosen = function() {
 		var selecteur = (typeof(selecteur_chosen) != 'undefined') ? selecteur_chosen+',' : '';
 		var options = (typeof(options_chosen) == 'object') ? $.extend(options_chosen, ((typeof(langue_chosen) == 'object') ? langue_chosen : {})) : ((typeof(langue_chosen) == 'object') ? langue_chosen : {});
 		$(selecteur +" select.chosen").chosen(options);
 		spip_chosen_title();
+		spip_chosen_visible();
 		spip_chosen_table_width();
 	}
 
