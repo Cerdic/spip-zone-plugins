@@ -16,8 +16,10 @@ if (!defined('_FIL_ARIANE_ACCUEIL')) define('_FIL_ARIANE_ACCUEIL',true);
 if (!defined('_FIL_ARIANE_LIEN')) define('_FIL_ARIANE_LIEN',false);
 
 // Cette constante définit le nom de la classe CSS attribué au conteneur du fil
-if (!defined('_FIL_ARIANE_STYLE')) define('_FIL_ARIANE_STYLE','hierarchie');
+if (!defined('_FIL_ARIANE_STYLE')) define('_FIL_ARIANE_STYLE','fil_ariane hierarchie breadcrumb');
 
+// Cette constante définit le caractère séparateur entre chaque élément du fil (les espaces comptent !)
+if (!defined('_FIL_ARIANE_SEP')) define('_FIL_ARIANE_SEP',' &gt; ');
 
 /***
  * Balise #FIL_ARIANE
@@ -96,7 +98,7 @@ function construire_FIL_ARIANE($fil){
 
         // si on a déja tracé un élément, mais qu'on est pas encore arrivé au dernier
         if($passe>0)
-            $fil_ariane.=" &gt; ";
+            $fil_ariane.="<span class=\"sep divider\">" . _FIL_ARIANE_SEP . "</span>";
 
         // tant qu'on est pas encore arrivé au dernier élément
         if($passe<$nb-1)
