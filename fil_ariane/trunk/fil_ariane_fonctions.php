@@ -133,10 +133,6 @@ function fil_ariane_organisation_dist($id_organisation) {
     return fil_ariane_hierarchie_objet('organisation', $id_organisation, 'nom', 'id_parent');
 }
 
-function fil_ariane_produit_dist($id_produit) {
-    return fil_ariane_hierarchie_objet('produit', $id_objet, 'titre', 'id_rubrique');
-}
-
 function fil_ariane_rubrique_dist($id_rubrique) {
     return fil_ariane_hierarchie_objet('rubrique', $id_rubrique, 'titre', 'id_parent');
 }
@@ -145,12 +141,26 @@ function fil_ariane_article_dist($id_article) {
     // récupere l'id de la rubrique parent, le titre de l'article
     $item = sql_fetsel('id_rubrique, titre','spip_articles',"id_article = ".sql_quote($id_article));
 
-    // récuère la hierarchie de la rubrique parent
+    // récupère la hierarchie de la rubrique parent
     $fil_ariane_rubrique = charger_fonction ('rubrique' , 'fil_ariane');
     $fil = $fil_ariane_rubrique($item['id_rubrique']);
 
     // ajoute le titre et l'url de l'article
     $fil[typo(supprimer_numero($item['titre']))] = generer_url_entite($id_article,'article');
+
+    return $fil;
+}
+
+function fil_ariane_produit_dist($id_produit) {
+    // récupère l'id de la rubrique parent ainsi que le titre du produit
+    $item = sql_fetsel('id_rubrique, titre','spip_produits',"id_produit = ".sql_quote($id_produit));
+
+    // récupère la hierarchie de la rubrique du produit
+    $fil_ariane_rubrique = charger_fonction ('rubrique' , 'fil_ariane');
+    $fil = $fil_ariane_rubrique($item['id_rubrique']);
+
+    // ajoute le titre et l'url du produit
+    $fil[typo(supprimer_numero($item['titre']))] = generer_url_entite($id_produit,'produit');
 
     return $fil;
 }
