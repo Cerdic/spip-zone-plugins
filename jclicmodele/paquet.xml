@@ -1,12 +1,11 @@
 <paquet
   prefix="jclicmodele"
   categorie="divers"
-  version="0.2.1"
+  version="0.2.2"
   etat="stable"
   compatibilite="[3.0.0;3.0.99]"
   logo="img_pack/jclic_logo.png"
   documentation="http://www.spip-contrib.net/Jclic-Modele"
-  schema="2012.11.29"
 >
   <nom>Jclic Mod&#232;le</nom>
   <auteur>Olivier Gautier</auteur>
