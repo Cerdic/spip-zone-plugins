@@ -12,7 +12,7 @@
 ########################################################################
 
 
-// Interdire 
+// Interdire
 
 chdir('../');
 include('ecrire/inc_version.php3');
@@ -41,8 +41,8 @@ $r = array(
 	'descriptif' => 'texte',
 	'sedna' => 'sedition',
 	'#NOM_SITE<' => '#TITRE<',
-	
-	
+
+
 );
 
 return str_replace(array_keys($r), array_values($r), $fichier);
@@ -62,7 +62,7 @@ foreach (array(
 }
 
 copy('sedna/sedna-badge.png', 'sedition/sedition-badge.png');
-copy('sedna/sedna-icon.png', 'sedition/sedition-icon.png');
+copy('sedna/images/sedna-icon.png', 'sedition/sedition-icon.png');
 copy('sedna/sedna-big.png', 'sedition/sedition-big.png');
 copy('sedna/sedna-pink.gif', 'sedition/sedition-pink.gif');
 copy('sedna/sedna-red.gif', 'sedition/sedition-red.gif');

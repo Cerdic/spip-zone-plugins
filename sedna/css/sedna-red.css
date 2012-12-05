@@ -1,0 +1,15 @@
+h2 {
+	background: transparent url(img/sedna-red.gif);
+}
+div.top {
+	background: transparent url(img/sedna-red.gif);
+}
+div.bottom {
+	background: transparent url(img/sedna-red.gif);
+}
+div.marge a:hover {
+	background-color: #ff3333;
+}
+div.marge a.selected {
+	background-color: #cc3333;
+}
