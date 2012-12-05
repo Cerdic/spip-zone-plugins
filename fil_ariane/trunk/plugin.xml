@@ -10,7 +10,7 @@
    	</description>
 	<lien>http://contrib.spip.net/Plugin-Fil-d-Ariane?var_mode=preview</lien> <!-- URI de documentation -->
 	<icon>img/fil_ariane-128.png</icon>
-	<version>0.1.7</version>
+	<version>0.1.8</version>
 	<etat>dev</etat>
 
 	<prefix>fil_ariane</prefix>

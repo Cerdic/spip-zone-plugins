@@ -133,6 +133,10 @@ function fil_ariane_organisation_dist($id_organisation) {
     return fil_ariane_hierarchie_objet('organisation', $id_organisation, 'nom', 'id_parent');
 }
 
+function fil_ariane_produit_dist($id_produit) {
+    return fil_ariane_hierarchie_objet('produit', $id_objet, 'titre', 'id_rubrique');
+}
+
 function fil_ariane_rubrique_dist($id_rubrique) {
     return fil_ariane_hierarchie_objet('rubrique', $id_rubrique, 'titre', 'id_parent');
 }
