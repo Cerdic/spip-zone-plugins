@@ -15,6 +15,10 @@ if (!defined('_FIL_ARIANE_ACCUEIL')) define('_FIL_ARIANE_ACCUEIL',true);
 // Si cette constante est vraie le fil d'Ariane se termine par un lien
 if (!defined('_FIL_ARIANE_LIEN')) define('_FIL_ARIANE_LIEN',false);
 
+// Cette constante définit le nom de la classe CSS attribué au conteneur du fil
+if (!defined('_FIL_ARIANE_STYLE')) define('_FIL_ARIANE_STYLE','hierarchie');
+
+
 /***
  * Balise #FIL_ARIANE
  * Récupère l'objet depuis le contexte
@@ -74,7 +78,7 @@ function calcule_hierarchie_objet($objet, $id_objet) {
  */
 function construire_FIL_ARIANE($fil){
 
-    $fil_ariane = '<div class="fil_ariane">';
+    $fil_ariane = '<div class="'. _FIL_ARIANE_STYLE .'">';
 
     if (!is_array($fil)) {
         return '';
