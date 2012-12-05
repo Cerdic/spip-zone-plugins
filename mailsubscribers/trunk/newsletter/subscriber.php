@@ -20,12 +20,12 @@ include_spip('mailsubscribers_fonctions');
  * @return bool|array
  *   false si n'existe pas
  *   array :
- *     email : string
- *     nom : string
- *     listes : array
- *     lang : string
- *     status : on|pending|off
- *     url_unsubscribe : url de desabonnement
+ *     string email
+ *     string nom
+ *     array listes
+ *     string lang
+ *     string status : on|pending|off
+ *     string url_unsubscribe : url de desabonnement
  */
 function newsletter_subscriber_dist($email){
 

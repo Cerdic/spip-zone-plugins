@@ -21,7 +21,7 @@ include_spip('mailsubscribers_fonctions');
  *   count : si true renvoyer le nombre de resultats au lieu de la liste (perf issue, permet de tronconner)
  *   limit : ne recuperer qu'un sous ensemble des inscrits "10,20" pour recuperer 20 resultats a partir du 10e (idem SQL)
  * @return int|array
- *   liste d'utiisateurs, chacun decrit par un array dans le meme format que newsletter/subscriber
+ *   liste d'utilisateurs, chacun decrit par un array dans le meme format que newsletter/subscriber
  */
 function newsletter_subscribers_dist($listes = array(),$options = array()){
 

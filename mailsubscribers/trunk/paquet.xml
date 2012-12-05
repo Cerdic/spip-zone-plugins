@@ -8,7 +8,7 @@
 	documentation="http://contrib.spip.net/mailsubscribers"
 	schema="0.2.0"
 >
-	<nom>Newsletter.Inscription</nom>
+	<nom>MailSubscribers</nom>
 	<auteur lien='http://nursit.com'>Cédric Morin</auteur>
 
 	<licence>GNU/GPL v3</licence>

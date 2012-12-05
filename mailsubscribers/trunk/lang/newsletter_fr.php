@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_email_subscribe' => 'Email',
 	'label_email_unsubscribe' => 'Email',
+	'label_link_unsubscribe' => 'Me désinscrire de cette Newsletter',
 
 	// S
 	'subscribe_message_ok' => 'Votre inscription avec l\'adresse @email@ a bien été prise en compte',
