@@ -147,10 +147,10 @@ function formater_resultats($verification, $resultats, $corrections,$ou_fichier)
 		if (count($resultats['item_non']) > 0) {
 			$texte['non'] .= '<div class="error">'  . "\n";
 			if (count($resultats['item_non']) == 1) {
-				$texte['non'] .= _T('langonet:message_ok_non_definis_1', array('module' => $resultats['module'], 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
+				$texte['non'] .= _T('langonet:message_ok_non_definis_1', array('module' => $resultats['module'], 'ou_fichier' => join(' ', $resultats['ou_fichier']), 'langue' => $resultats['langue'])) . "\n";
 			}
 			else {
-				$texte['non'] .= _T('langonet:message_ok_non_definis_n', array('module' => $resultats['module'], 'nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
+				$texte['non'] .= _T('langonet:message_ok_non_definis_n', array('module' => $resultats['module'], 'nberr' => count($resultats['item_non']), 'ou_fichier' => join(' ', $resultats['ou_fichier']), 'langue' => $resultats['langue'])) . "\n";
 			}
 			$texte['non'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
 			$texte['non'] .= afficher_lignes('non', $resultats['fichier_non'], array(), $f_coloriser);
@@ -163,7 +163,7 @@ function formater_resultats($verification, $resultats, $corrections,$ou_fichier)
 		}
 		else {
 			$texte['non'] .= '<div class="success">' . "\n";
-			$texte['non'] .= _T('langonet:message_ok_non_definis_0', array('module' => $resultats['module'], 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
+			$texte['non'] .= _T('langonet:message_ok_non_definis_0', array('module' => $resultats['module'], 'ou_fichier' => join(' ', $resultats['ou_fichier']), 'langue' => $resultats['langue'])) . "\n";
 			$texte['non'] .= "</div>\n";
 		}
 
@@ -172,10 +172,10 @@ function formater_resultats($verification, $resultats, $corrections,$ou_fichier)
 		if (count($resultats['item_non_mais_nok']) > 0) {
 			$texte['non_mais_nok'] .= '<div class="error">'  . "\n";
 			if (count($resultats['item_non_mais_nok']) == 1) {
-				$texte['non_mais_nok'] .= _T('langonet:message_ok_nonmaisnok_definis_1', array('ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
+				$texte['non_mais_nok'] .= _T('langonet:message_ok_nonmaisnok_definis_1', array('ou_fichier' => join(' ', $resultats['ou_fichier']), 'module' => $resultats['module'])) . "\n";
 			}
 			else {
-				$texte['non_mais_nok'] .= _T('langonet:message_ok_nonmaisnok_definis_n', array('nberr' => count($resultats['item_non_mais_nok']), 'ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
+				$texte['non_mais_nok'] .= _T('langonet:message_ok_nonmaisnok_definis_n', array('nberr' => count($resultats['item_non_mais_nok']), 'ou_fichier' => join(' ', $resultats['ou_fichier']), 'module' => $resultats['module'])) . "\n";
 			}
 			$texte['non_mais_nok'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
 			$texte['non_mais_nok'] .= afficher_lignes('non_mais_nok', $resultats['fichier_non_mais_nok'], $resultats['definition_non_mais_nok'], $f_coloriser);
@@ -183,7 +183,7 @@ function formater_resultats($verification, $resultats, $corrections,$ou_fichier)
 		}
 		else {
 			$texte['non_mais_nok'] .= '<div class="success">' . "\n";
-			$texte['non_mais_nok'] .= _T('langonet:message_ok_nonmaisnok_definis_0', array('ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
+			$texte['non_mais_nok'] .= _T('langonet:message_ok_nonmaisnok_definis_0', array('ou_fichier' => join(' ', $resultats['ou_fichier']), 'module' => $resultats['module'])) . "\n";
 			$texte['non_mais_nok'] .= "</div>\n";
 		}
 
@@ -192,10 +192,10 @@ function formater_resultats($verification, $resultats, $corrections,$ou_fichier)
 		if (count($resultats['item_non_mais']) > 0) {
 			$texte['non_mais'] .= '<div class="notice">' . "\n";
 			if (count($resultats['item_non_mais']) == 1) {
-				$texte['non_mais'] .= _T('langonet:message_ok_nonmais_definis_1', array('ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
+				$texte['non_mais'] .= _T('langonet:message_ok_nonmais_definis_1', array('ou_fichier' => join(' ', $resultats['ou_fichier']), 'module' => $resultats['module'])) . "\n";
 			}
 			else {
-				$texte['non_mais'] .= _T('langonet:message_ok_nonmais_definis_n', array('nberr' => count($resultats['item_non_mais']), 'ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
+				$texte['non_mais'] .= _T('langonet:message_ok_nonmais_definis_n', array('nberr' => count($resultats['item_non_mais']), 'ou_fichier' => join(' ', $resultats['ou_fichier']), 'module' => $resultats['module'])) . "\n";
 			}
 			$texte['non_mais'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
 			$texte['non_mais'] .= afficher_lignes('non_mais', $resultats['fichier_non_mais'], $resultats['definition_non_mais'], $f_coloriser);
@@ -203,7 +203,7 @@ function formater_resultats($verification, $resultats, $corrections,$ou_fichier)
 		}
 		else {
 			$texte['non_mais'] .= '<div class="success">' . "\n";
-			$texte['non_mais'] .= _T('langonet:message_ok_nonmais_definis_0', array('ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
+			$texte['non_mais'] .= _T('langonet:message_ok_nonmais_definis_0', array('ou_fichier' => join(' ', $resultats['ou_fichier']), 'module' => $resultats['module'])) . "\n";
 			$texte['non_mais'] .= "</div>\n";
 		}
 
@@ -291,10 +291,10 @@ function formater_resultats($verification, $resultats, $corrections,$ou_fichier)
 		if (count($resultats['item_non']) > 0) {
 			$texte['non'] .= '<div class="error">'  . "\n";
 			if (count($resultats['item_non']) == 1) {
-				$texte['non'] .= _T('langonet:message_ok_fonction_l_1', array('ou_fichier' => $resultats['ou_fichier'])) . "\n";
+				$texte['non'] .= _T('langonet:message_ok_fonction_l_1', array('ou_fichier' => join(' ', $resultats['ou_fichier']))) . "\n";
 			}
 			else {
-				$texte['non'] .= _T('langonet:message_ok_fonction_l_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'])) . "\n";
+				$texte['non'] .= _T('langonet:message_ok_fonction_l_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => join(' ', $resultats['ou_fichier']))) . "\n";
 			}
 			$texte['non'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
 			$texte['non'] .= afficher_lignes('non', $resultats['fichier_non'], $resultats['item_md5'], $f_coloriser);
@@ -307,7 +307,7 @@ function formater_resultats($verification, $resultats, $corrections,$ou_fichier)
 		}
 		else {
 			$texte['non'] .= '<div class="success">' . "\n";
-			$texte['non'] .= _T('langonet:message_ok_fonction_l_0', array('ou_fichier' => $resultats['ou_fichier'])) . "\n";
+			$texte['non'] .= _T('langonet:message_ok_fonction_l_0', array('ou_fichier' => join(' ', $resultats['ou_fichier']))) . "\n";
 			$texte['non'] .= "</div>\n";
 		}
 	}
@@ -528,7 +528,7 @@ function creer_log($verification, $resultats, $texte, &$log_fichier) {
  * @return boolean
  */
 function creer_script($resultats, $verification) {
-	$ou = $resultats['ou_fichier'];
+	$ou = join(' ',$resultats['ou_fichier']);
 	$prefixe = ($resultats['module'] == 'spip' 
 				OR $resultats['module'] == 'ecrire' 
 				OR $resultats['module'] == 'public') ? '' : $resultats['module'] . ':' ;
@@ -554,7 +554,8 @@ function creer_script($resultats, $verification) {
 			else {
 			// gestion des backslash imparfaite, mais c'est deja ca
 				$occ = str_replace('\\', '.', $m[2]);
-				if (preg_match_all("/'[$](\w*?)'/", $occ, $m)) {
+				// insuffisant au niveau du Sed
+				if (preg_match_all("/'[$](\w[][\w\d)]*?)'/", $occ, $m)) {
 				  $args = array();
 				  foreach($m[1] as $s) {
 				    $args[]= "'$s' => \\\$$s";

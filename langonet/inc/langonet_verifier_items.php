@@ -100,13 +100,19 @@ function langonet_collecter_items($files) {
 
 function langonet_match(&$utilises, $occ, $_fichier, $ligne, $eval=false)
 {
-	if (!trim($occ[2])) return;
-	list($item, $args) = langonet_argumenter($occ[2]);
-	$index = langonet_index($occ[2], $utilises['items']) . $args;
+	list($tout, $module, $nom, $suite) = $occ;
+	if (($tout[0] == '<') AND ($suite[0] == '{') AND ($suite[1] == '=')) {
+		// $nom approximatif, mais pas grave: c'est pour le msg
+		$nom .= ' . ' . substr($suite,3); 
+		$eval = true;
+	} else $eval = (($suite AND ($suite[0]==='.')) OR ($eval AND strpos($nom, '$')));
+	if (!$nom) return;
+	list($item, $args) = langonet_argumenter($nom);
+	$index = langonet_index($nom, $utilises['items']) . $args;
 	$utilises['items'][$index] = $item;
-	$utilises['modules'][$index] = $occ[1];
+	$utilises['modules'][$index] = $module;
 	$utilises['item_tous'][$index][$_fichier][$ligne][] = $occ;
-	$utilises['suffixes'][$index] = (($occ[3] AND ($occ[3][0]==='.')) OR ($eval AND strpos($occ[2], '$')));
+	$utilises['suffixes'][$index] = $eval;
 }
 
 include_spip('public/phraser_html');
