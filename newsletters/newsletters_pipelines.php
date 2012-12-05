@@ -10,9 +10,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
- * Quand une newsletter est publiee la generer si necessaire
- * et la figer (baked)
-
+ * Quand une newsletter est publiee fixer les images dans un dossier IMG/nl/xx/
+ * pour ne jamais perdre les images temporaires
+ *
  * @param $flux
  * @return mixed
  */
@@ -30,6 +30,9 @@ function newsletters_pre_edition($flux){
 		$generer_newsletter = charger_fonction("generer_newsletter","action");
 		$generer_newsletter($id_newsletter);
 
+		// fixer les images et autre
+		$fixer_newsletter = charger_fonction("fixer_newsletter","action");
+		$fixer_newsletter($id_newsletter);
 
 		$flux['data']['baked'] = 1;
 	}

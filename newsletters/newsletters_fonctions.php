@@ -78,4 +78,51 @@ function newsletter_affiche_version_enligne($page){
 	}
 	return $page;
 }
+
+/**
+ * Un filtre pour fixer une image
+ * appele par l'action fixer_newsletter, mais peut etre utilise aussi directement dans la newsletter pour fixer les images
+ * manuellement et forcer une url absolue sur un domaine particulier
+ *
+ * Le filtre genere une url finissant par #fixed pour ne pas y retoucher si il est rappelle
+ * (y compris si c'est un domaine qu'il ne connait pas)
+ *
+ * @param $src
+ * @param $id_newsletter
+ * @return bool|string
+ */
+function newsletter_fixer_image($src,$id_newsletter){
+	static $dir = array();
+	if (!isset($dir[$id_newsletter])){
+		$dir[$id_newsletter] = sous_repertoire(_DIR_IMG,"nl");
+		$dir[$id_newsletter] = sous_repertoire($dir[$id_newsletter],$id_newsletter);
+	}
+
+	// recuperer l'image par copie directe si possible
+	if (strncmp($src,$GLOBALS['meta']['adresse_site'].'/',$l=strlen($GLOBALS['meta']['adresse_site'].'/'))==0)
+		$src = _DIR_RACINE . substr($src,$l);
+
+	$url = parse_url($src);
+	// hack : mettre un #fixed sur une url d'image pour indiquer qu'elle a deja ete fixee
+	// on ne fait plus rien dans ce cas
+	if ($url['fragment']=='fixed') return false;
+
+	$path_parts = pathinfo($url['path']);
+	$dest = $dir[$id_newsletter].md5($src).".".$path_parts['extension'];
+
+	if (!$url['scheme']
+		AND !$url['host']
+	  AND file_exists($src)){
+		deplacer_fichier_upload($src, $dest, false);
+	}
+	else {
+		include_spip("inc/distant");
+		recuperer_page($src,$dest);
+	}
+
+	if (!file_exists($dest))
+		return false;
+
+	return "$dest#fixed";
+}
 ?>
