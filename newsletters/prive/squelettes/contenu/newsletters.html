@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/newsletters, par=date, env, ajax, sinon=<:newsletter:info_aucun_newsletter:>}>
+
+[(#AUTORISER{creer,newsletter})
+	[(#URL_ECRIRE{newsletter_edit,new=oui}|icone_verticale{<:newsletter:icone_creer_newsletter:>,newsletter,new,right})]
+]
