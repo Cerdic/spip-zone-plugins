@@ -3,7 +3,7 @@
 	categorie="squelette"
 	version="1.2.1"
 	etat="stable"
-	compatibilite="[2.1.0;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/sedna-logo.jpg"
 	documentation="http://www.spip-contrib.net/Sedna-agregateur"
 >	
@@ -16,6 +16,6 @@
 	<copyright>2005-2012</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
-
+	<necessite nom="sites" compatibilite="[1.7.0;[" />
 	<traduire module="sedna" reference="fr" gestionnaire="salvatore" />
 </paquet>
