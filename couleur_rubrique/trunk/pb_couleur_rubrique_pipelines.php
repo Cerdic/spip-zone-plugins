@@ -23,11 +23,12 @@ function pb_couleur_rubrique_affiche_droite($flux) {
 		$contexte = array('id_rubrique'=>$id_rubrique);
 		$flux["data"] .= recuperer_fond("inclure/couleur_rubrique", $contexte);
 		}
-	} elseif ($exec == "rubriques"){
+	} 
+	// quoi qu'il en soit, la couleur du site sera toujours
+	if ($exec == "rubriques"){
 		$contexte = array('id_rubrique'=>'0');
 		$flux["data"] .= recuperer_fond("inclure/couleur_rubrique",$contexte);
 	}
-
         return $flux;
 }
 
