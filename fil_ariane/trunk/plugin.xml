@@ -1,6 +1,6 @@
 <plugin>
-	<nom><multi>[fr]Fil d'Ariane[en]Breadcrum</multi></nom>
-	<auteur>Cyril MArion</auteur>
+	<nom><multi>[fr]Fil d'Ariane[en]Breadcrumb</multi></nom>
+	<auteur>Cyril Marion</auteur>
     <auteur>Matthieu Marcillaud</auteur>
 	<licence>GPL v3</licence>
     <description>
