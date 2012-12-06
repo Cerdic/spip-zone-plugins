@@ -16,9 +16,9 @@ function action_editer_asso_membres() {
 	$id_auteur = $securiser_action();
 	$modifs = array(
 		'commentaire' => _request('commentaire'),
-		'date_validite' => association_recuperer_date('date_validite'),
-		'id_categorie' => association_recuperer_entier('categorie'),
-		'statut_interne' =>association_passeparam_statut('interne'),
+		'date_validite' => _request('date_validite'),
+		'id_categorie' => intval(_request('categorie')),
+		'statut_interne' => _request('statut_interne'),
 		'nom_famille' => _request('nom_famille'),
 	);
 	// pour ne pas ecraser les champs quand ils sont desactives
