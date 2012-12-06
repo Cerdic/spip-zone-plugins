@@ -36,6 +36,14 @@ $GLOBALS['association_styles_des_statuts'] = array(
 );
 
 /**
+ * recuperer la valeur du tableau par un appel de fonction pour pouvoir le faire depuis un squelette
+ * @param enum statut
+ */
+function association_styles_des_statuts($statut='prospect') {
+	return $GLOBALS['association_styles_des_statuts'][$statut];
+}
+
+/**
  * @var const _DIR_PLUGIN_ASSOCIATION_ICONES
  *   Repertoire de base des images (icones/logos/etc) d'Associaspip
  */

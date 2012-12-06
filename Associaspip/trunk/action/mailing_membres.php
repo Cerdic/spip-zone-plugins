@@ -11,24 +11,26 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function action_relancer_adherents() {
+function action_mailing_membres() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$count = $securiser_action();
-	$sujet = _request('sujet');
-	$relance = association_recuperer_entier('relance');
-	$message = html_entity_decode(_request('message'), ENT_QUOTES, 'UTF-8');
-	$statut_tab = association_recuperer_liste('statut', TRUE); // contient un tableau id_auteur => statut_interne
+	$securiser_action();
+	$sujet = _request('_sujet');
+	$message = html_entity_decode(_request('_message'), ENT_QUOTES, 'UTF-8');
+	$selectedId = _request('id');
+	$relance = intval(_request('filtre_relance')); // si a 1, c'est un mail de relance
 	$exp = $GLOBALS['association_metas']['nom'].'<'.$GLOBALS['association_metas']['email'].'>';
-	include_spip ('inc/envoyer_mail'); //= $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 
 	// on recupere les adresses emails de tous les auteurs selectionnes
-	$emails_auteurs = association_formater_emails(array_keys($statut_tab), 'auteur', ''); // cette fonction renvoie un tableau auteur_id => array(emails)
+	include_spip('inc/association_coordonnees');
+	include_spip ('inc/envoyer_mail');
+	$emails_auteurs = association_recuperer_emails(array_keys($selectedId)); // cette fonction renvoie un tableau auteur_id => array(emails)
 
 	// initialise les valeurs retournees
 	$emails_envoyes_ok = 0;
 	$emails_envoyes_echec = 0;
 	$nb_membres_avec_email = 0;
 	$membres_sans_email = array();
+	$membres_ok = array(); // stocke l'id des membres pour qui ca a marche' pour changer leur statut si besoin
 	// envoyer les messages
 	foreach ($emails_auteurs as $id_auteur => $emails) {
 		if (count($emails)) { // decompte des membres avec email
@@ -42,13 +44,14 @@ function action_relancer_adherents() {
 				spip_log("non envoi du mail a $email",'associaspip');
 			} else {
 				$emails_envoyes_ok++;
-				if ($relance && $statut_tab[$id_auteur]=='echu') { // dans le cas d'une relance on met a jour le statut interne (qui passe d'echu a relance) ; et dans le cas d'en simple publipostage (ou pour les membres non echus) le statut n'est pas modifie
-					sql_updateq('spip_asso_membres',
-						array('statut_interne' => 'relance'),
-						"id_auteur=$id_auteur");
-				}
+				$membres_ok[]=$id_auteur;
 			}
 		}
+	}
+	// si c'est une relance, on met a jour le statut de tous les membres relances 
+	if ($relance==1) {
+		$where = sql_in('id_auteur', $membres_ok);	
+		sql_updateq('spip_asso_membres', array('statut_interne' => 'relance'), $where);
 	}
 
 	return array($emails_envoyes_ok, $emails_envoyes_echec, $nb_membres_avec_email, $membres_sans_email);

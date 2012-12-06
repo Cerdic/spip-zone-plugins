@@ -33,10 +33,21 @@ function exec_adherents() {
 		$annee = date('Y'); // dans la requete SQL est : DATE_FORMAT(NOW(), '%Y') ou YEAR(NOW())
 		$data = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=$annee AND imputation=".sql_quote($GLOBALS['association_metas']['pc_cotisations']) );
 		echo association_totauxinfos_montants('cotisations_'.$annee, $data['somme_recettes'], $data['somme_depenses']);
+		
+		//Filtres ID et groupe : si le filtre id est actif, on ignore le filtre groupe
+		$id = association_passeparam_id('auteur');
+		if (!$id) {
+			$id = _T('asso:adherent_libelle_id_auteur');
+			$id_groupe = association_recuperer_entier('groupe');
+		} else {
+			$critere = "a.id_auteur=$id";
+			$id_groupe = 0;
+		}
+
 		// datation et raccourcis
 		raccourcis_association(array(), array(
 			'gerer_les_groupes' => array('annonce.gif', 'groupes', array('voir_groupes', 'association', 100) ), // l'id groupe passe en parametre est a 100 car ce sont les groupes definis par l'utilisateur et non ceux des autorisation qu'on liste dans cette page
-			'menu2_titre_relances_cotisations' => array('relance-24.png', 'edit_relances'.($id_groupe?"&groupe=$id_groupe":'').($statut_interne?"&statut_interne=$statut_interne":''), array('relancer_membres', 'association') ),
+			'menu2_titre_mailing' => array('mail-24.png', 'mailing'.((intval($id_groupe)>99)?"&filtre_id_groupe=$id_groupe":'').($statut_interne?"&filtre_statut_interne=$statut_interne":''), array('relancer_membres', 'association') ),
 			'synchronise_asso_membre_lien' => array('reload-32.png', 'synchroniser_asso_membres', array('gerer_membres', 'association') ),
 		));
 		if ( test_plugin_actif('FPDF') && test_plugin_actif('COORDONNEES') && autoriser('exporter_membres', 'association') ) { // etiquettes
@@ -47,15 +58,7 @@ function exec_adherents() {
 			));
 			echo fin_cadre_enfonce(TRUE);
 		}
-		//Filtres ID et groupe : si le filtre id est actif, on ignore le filtre groupe
-		$id = association_passeparam_id('auteur');
-		if (!$id) {
-			$id = _T('asso:adherent_libelle_id_auteur');
-			$id_groupe = association_recuperer_entier('groupe');
-		} else {
-			$critere = "a.id_auteur=$id";
-			$id_groupe = 0;
-		}
+
 		// on appelle ici la fonction qui calcule le code du formulaire/tableau de membres pour pouvoir recuperer la liste des membres affiches a transmettre pour la generation du pdf
 		list($where_adherents, $jointure_adherents, $code_liste_membres) = adherents_liste($lettre, $critere, $statut_interne, $id_groupe);
 		$champsExclus = array();
