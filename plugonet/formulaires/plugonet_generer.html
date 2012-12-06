@@ -45,7 +45,7 @@
 							<p class="explication"><:plugonet:info_choisir_pluginxml_generer:></p>
 							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{xml})</span>]
 							<INCLURE{fond=formulaires/inc-checkbox_xml, 
-								dossier=#EVAL{_DIR_PLUGINS},
+								dossier=#EVAL{_DIR_RACINE},
 								regexp=plugin.xml$,
 								onglet=plugonet_generer,
 								message_nok_xml=<:plugonet:message_nok_aucun_xml{dtd=plugin}:>,
