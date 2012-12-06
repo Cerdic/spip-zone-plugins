@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'createurs' => 'Auteur(s)',
 
 	// D
+	'description_page-biblio' => 'Recherche et affichage des références bibliographiques de la librairie Zotero synchronisée avec ZotSpip.',
 	'deselectionner_tout' => 'Déselectionner tout',
 	'droits_insuffisants' => 'Vous n\'avez pas les droits requis pour procéder à cette modification.',
 
@@ -124,6 +125,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modifier_en_ligne' => 'Modifier en ligne sur zotero.org',
 
 	// N
+	'nom_page-biblio' => 'Biblio',
 	'nom_prenom' => 'Nom, Prénom',
 
 	// O

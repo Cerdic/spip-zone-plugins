@@ -1,8 +1,8 @@
 <paquet
 	prefix="zotspip"
 	categorie="edition"
-	version="2.1.0"
-	etat="dev"
+	version="2.2.0"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/zotspip-48.png"
 	schema="0.2"
