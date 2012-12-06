@@ -1,0 +1,7 @@
+##############################################################
+# Fichier .htaccess SPIPIMMO                                 #
+# Exemple pour l'url rewriting des annonces                  #
+##############################################################
+
+RewriteEngine on
+RewriteRule ^([0-9]+)-([a-zA-Z]+)-([a-zA-Z]+)$ spip.php?page=annonce&id_annonce=$1&type=$2&ville=$3 [L]

@@ -1,0 +1,45 @@
+<div class="formulaire_spipimmo" style="width:500px; margin:auto;">
+	<form action="[(#ENV{lien})]" method="get">
+		<div><input type="hidden" name="page" value="resultat_spipimmo" /></div>
+		<table>
+			<tr>
+				<td style="width:250px; text-align:right;">Type : </td> 
+				<td><input type="radio" name="vl" id="vl" value="vente" /> Vente 
+					<input type="radio" name="vl" id="vl" value="location" /> Location</td>
+			</tr>
+			<tr>
+				<td style="width:250px; text-align:right;">Type d'offre : </td>
+				<td><select name="type" id="type">
+					<option value="" selected="selected"></option>	
+						<BOUCLE_typeOffre(TYPES_OFFRES)>
+							<BOUCLE_typeOffreAnnonce(ANNONCES){type_offre=#LIBELLE_OFFRE}{0,1}>
+								<option value="#TYPE_OFFRE">#LIBELLE_OFFRE</option>							
+							</BOUCLE_typeOffreAnnonce>
+						</BOUCLE_typeOffre>
+				</select></td>
+			</tr>
+			<tr>
+				<td style="width:250px; text-align:right;">Nb pi&egrave;ces min : </td>
+				<td><select name="pi" id="pi">
+					<option value="" selected="selected"></option>
+					<option value="2">2</option>							
+					<option value="3">3</option>							
+					<option value="4">4</option>							
+				</select></td>
+			</tr>
+			<tr>
+				<td style="width:250px; text-align:right;">Budget min. : </td> <td><input type="text" name="bmin" id="bmin" /></td>
+			</tr>
+			<tr>
+				<td style="width:250px; text-align:right;">Budget max. : </td> <td><input type="text" name="bmax" id="bmax" /></td>
+			</tr>
+			<tr>
+				<td style="width:250px; text-align:right;">Ville : </td> <td><input type="text" name="ville" id="ville" /></td>
+			</tr>
+			<tr>
+				<td style="width:250px; text-align:right;">Code postal : </td> <td><input type="text" name="cp" id="cp" /></td>
+			</tr>
+		</table>
+			<div style="width:300px; margin:auto; text-align:center;"><input type="submit" value="Rechercher" /></div>
+	</form>
+</div>

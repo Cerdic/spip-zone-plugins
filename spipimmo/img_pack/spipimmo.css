@@ -1,0 +1,232 @@
+
+
+/*==============================================================================================
+
+	--------------------------------------------------------------------------------------------
+	SPIP Immo 3.1d is a SPIP's plugin for real estate agencies & agents
+	Copyright (C) 2007-2009 SARL Comme a la Ville http://www.commealaville.com - contact@commealaville.com
+	http://spipimmo.commealaville.com
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	--------------------------------------------------------------------------------------------
+	SPIP Immo 3.1d est un plugin de SPIP à destination des agences immobilières
+	Copyright (C) 2007-2009 SARL Comme à la Ville http://www.commealaville.com - contact@commealaville.com
+	http://spipimmo.commealaville.com
+
+	Ce programme est un logiciel libre ; vous pouvez le redistribuer et/ou le
+	modifier au titre des clauses de la Licence Publique Générale GNU, telle
+	que publiée par la Free Software Foundation ; soit la version 2 de la
+	Licence, ou (à votre discrétion) une version ultérieure quelconque.
+
+	Ce programme est distribué dans l'espoir qu'il sera utile, mais SANS AUCUNE
+	GARANTIE ; sans même une garantie implicite de COMMERCIABILITE ou DE
+	CONFORMITE A UNE UTILISATION PARTICULIERE. Voir la Licence Publique
+	Générale GNU pour plus de détails.
+
+	Vous devriez avoir reçu un exemplaire de la Licence Publique Générale
+	GNU avec ce programme ; si ce n'est pas le cas, écrivez à la Free
+	Software Foundation Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+
+==============================================================================================*/
+
+/*============================================================
+Les styles communs
+============================================================*/
+label{
+	cursor:pointer;
+}
+
+/*============================================================
+Pagination
+============================================================*/
+#pagination{
+	width:100%;
+	border-collapse:collapse;
+	text-align:center;
+}
+
+#pgpagination{
+	width:45px;
+	text-align:left;
+}
+
+#detpagination{
+	text-align:center;
+}
+
+#precpagination{
+	width:100px;
+	text-align:right;
+}
+
+.acpage{
+	height:15px;
+	width:50px;
+}
+
+.hrpagination{
+	height:1px;
+	color:#999999;
+	background-color:#999999;
+	width:100%;
+	border:none;
+}
+
+
+/*============================================================
+Liste des annonces
+============================================================*/
+#tableannonces{
+	clear:both;
+	width:100%;
+	border-collapse:collapse;
+	margin-top:10px;
+	margin-bottom:10px;
+	text-align:center;
+}
+
+.trtableannonces{
+	border-bottom:1px solid #EEEEEE;
+}
+
+#tableannonces td{
+	text-align:center;
+	padding:0px;
+	padding-top:2px;
+	padding-bottom:2px;
+}
+
+#aucuneannonce{
+	height:35px;
+	text-align:center;
+	font-weight:bold;
+}
+
+
+/*============================================================
+Création/modification d'annonce
+============================================================*/
+.annonce{
+	width:100%;
+	margin:auto;
+	border-collapse:collapse;
+}
+
+.annonce tr{
+	height:26px;
+}
+
+.tableannoncestitre{
+	font-weight:bold;
+}
+
+.libelle_annonce{
+	text-align:right;
+	padding-right:15px;
+	font-weight:bold;
+}
+
+table .intitule{
+	width:100%;
+	border-collapse:separate;
+	margin:auto;
+}
+
+.intitule tr{
+	height:25px;
+}
+
+.intitule td{
+	width:160px;
+	text-align:center;
+	border:1px solid #CCCCCC;
+	cursor:pointer;
+}
+
+#intitule_tableau1{
+	background-color:#EEEEEE;
+}
+
+#tableau1, #tableau2, #tableau3, #tableau4, #tableau5, #tableau6{
+	width:100%;
+	margin:auto;
+	padding-top:15px;
+	padding-bottom:15px;
+}
+
+#tableau2, #tableau3, #tableau4, #tableau5, #tableau6{
+	display:none;
+}
+
+#tr_surface_habitable, #tr_vente_location, #tr_type_mandat, #tr_publier_offre, #tr_type_offre, #tr_code_postal, #tr_ville, #tr_prix_loyer, #tr_prestige, #tr_texte_francais{
+	background-color:#FFE9A6;
+}
+
+.obligatoire{
+	font-size:10px;
+}
+
+.bouton{
+	height:30px;
+	text-align:right;
+}
+
+
+/*============================================================
+Les vérifications
+============================================================*/
+.chargementok{
+	font-size:13px;
+	text-align:center;
+	color:#00CC00;
+	font-weight:bold;
+}
+
+.chargementrate{
+	font-size:13px;
+	text-align:center;
+	color:#FF0000;
+	font-weight:bold;
+}
+
+/*============================================================
+Ajout/Suppression de document
+============================================================*/
+.ligneimage{
+	clear:both;
+	margin-left:18px;
+}
+
+.galerieimage{
+	float:left;
+	width:110px;
+	text-align:center;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+.aucuneimage{
+	text-align:center;
+	font-weight:bold;
+}
+
+.supprimerselection{
+	clear:both;
+	text-align:right;
+}
+
+.main span, input{
+	vertical-align:middle;
+	display:inline-block;
+}

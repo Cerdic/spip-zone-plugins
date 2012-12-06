@@ -1,0 +1,20 @@
+<paquet
+	prefix="spipimmo"
+	categorie="divers"
+	version="3.2.0"
+	etat="stable"
+	compatibilite="[2.0.0;3.0.*]"
+	logo="img_pack/spipimmo.png"
+	documentation="http://www.spip-contrib.net/rubrique999"
+>
+
+	<nom>SPIP-Immo : Gestion d'annonces immobilières</nom>
+	<!-- Plugin à destination des agences immobilières souhaitant publier facilement leurs annonces en ligne -->
+
+	<auteur lien="http://www.commealaville.com">Comme à la Ville</auteur>
+	<auteur lien="http://www.pierre-kuhn.org">Pierre KUHN</auteur>
+
+	<copyright>2007-2012</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+</paquet>
