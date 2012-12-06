@@ -22,8 +22,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'deuxjours' => 'ពីរថ្ងៃ',
 
 	// L
-	'liens' => 'អត្ថបទ',
-	'liens_pluriel' => 'អត្ថបទ នានា',
+	'liens' => 'អត្ថបទ', # MODIF
+	'liens_pluriel' => 'អត្ថបទ នានា', # MODIF
 
 	// M
 	'masquer_resume' => 'បិទបាំង អត្ថបទសង្ខេប',

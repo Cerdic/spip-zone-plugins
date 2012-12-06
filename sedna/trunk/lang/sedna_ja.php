@@ -22,8 +22,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'deuxjours' => 'この２日間',
 
 	// L
-	'liens' => '投稿',
-	'liens_pluriel' => 'いくつかの投稿',
+	'liens' => '投稿', # MODIF
+	'liens_pluriel' => 'いくつかの投稿', # MODIF
 
 	// M
 	'masquer_resume' => '概要を隠す',

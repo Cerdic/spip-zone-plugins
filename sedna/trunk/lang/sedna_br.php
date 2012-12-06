@@ -22,8 +22,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'deuxjours' => 'Daou zevezh',
 
 	// L
-	'liens' => 'pennad',
-	'liens_pluriel' => 'pennad',
+	'liens' => 'pennad', # MODIF
+	'liens_pluriel' => 'pennad', # MODIF
 
 	// M
 	'masquer_resume' => 'Kuzhat ar berradennoù',

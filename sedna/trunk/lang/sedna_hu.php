@@ -22,8 +22,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'deuxjours' => 'Két nap',
 
 	// L
-	'liens' => 'cikk',
-	'liens_pluriel' => 'cikk',
+	'liens' => 'cikk', # MODIF
+	'liens_pluriel' => 'cikk', # MODIF
 
 	// M
 	'masquer_resume' => 'Összefoglalások rejtése',

@@ -22,8 +22,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'deuxjours' => 'Zwei Tage',
 
 	// L
-	'liens' => 'Artikel',
-	'liens_pluriel' => 'Artikel',
+	'liens' => 'Artikel', # MODIF
+	'liens_pluriel' => 'Artikel', # MODIF
 
 	// M
 	'masquer_resume' => 'Zusammenfassungen ausblenden',
