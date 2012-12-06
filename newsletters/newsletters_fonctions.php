@@ -7,10 +7,50 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+
+/**
+ * un filtre pour transformer les URLs relatives en URLs absolues ;
+ * ne s'applique qu'aux textes contenant des liens
+ *
+ * idem le filtre liens_absolus du core mais ne touche pas aux urls commencant par @@ qui sont en fait des variables
+ *
+ * @param string $texte
+ * @param string $base
+ * @return string
+ */
+function newsletters_liens_absolus($texte, $base='') {
+	if (preg_match_all(',(<(a|link|image)[[:space:]]+[^<>]*>),imsS',$texte, $liens, PREG_SET_ORDER)) {
+		foreach ($liens as $lien) {
+			$href = extraire_attribut($lien[0],"href");
+			if ($href AND strncmp($href,'#',1)!==0 AND strncmp($href,'@@',2)!==0){
+				$abs = url_absolue($href, $base);
+				if ($abs <> $href){
+					$href = str_replace($href,$abs,$lien[0]);
+					$texte = str_replace($lien[0], $href, $texte);
+				}
+			}
+		}
+	}
+	if (preg_match_all(',(<(img|script)[[:space:]]+[^<>]*>),imsS',$texte, $liens, PREG_SET_ORDER)) {
+		foreach ($liens as $lien) {
+			if ($src = extraire_attribut($lien[0],"src")){
+				$abs = url_absolue($src, $base);
+				if ($abs <> $src){
+					$src = str_replace($src,$abs,$lien[0]);
+					$texte = str_replace($lien[0], $src, $texte);
+				}
+			}
+		}
+	}
+	return $texte;
+}
+
+
 /**
  * Lister les patrons disponibles
  * (en enlevant les masques par configuration et en les titrant comme dans la configuration)
  *
+ * @param string $selected
  * @return array
  */
 function liste_choix_patrons($selected=null){

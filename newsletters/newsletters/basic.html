@@ -2,8 +2,7 @@
 <!-- titre=<multi>[fr]Simple (une colonne, responsive)[en]Simple (one column, responsive)</multi> -->
 </BOUCLE_rem>
 <BOUCLE_newsletter(NEWSLETTERS){id_newsletter}{statut?}>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -17,7 +16,7 @@
 		#outlook a {padding: 0;}
 		body {width: 100% !important;}
 		body {margin: 0;padding: 0;}
-		img {border: none;font-size: 16px;font-weight: bold;height: auto;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;}
+		img {border: none;font-size: 16px;font-weight: bold;height: auto;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;-ms-interpolation-mode: bicubic;}
 		#backgroundTable {height: 100% !important;margin: 0;padding: 0;width: 100% !important;}
 		body, .backgroundTable {background-color: #FAFAFA;}
 		#templateContainer {border: 1px solid #DDDDDD;}
@@ -63,20 +62,6 @@
 			.padding {padding-left:0 !important;padding-right:0 !important;}
 			.text {font-size: 16px !important;color: #101010 !important;}
 		}
-		@media only screen and (max-device-width: 480px) {
-			html,body {width: 320px !important;}
-			#templatePreheader {width: 320px !important;display: none;}
-			.preheaderContent,.bodyContent,.footerContent {padding: 0 !important;}
-			#templateContainer {width: 320px !important;border: 0 !important;}
-			#templateHeader {width: 320px !important;border: 0 !important;}
-			#templateBody {width: 320px !important;}
-			#templateFooter {width: 320px !important;}
-			#canspamBar {width: auto !important;}
-			.padding {padding-left:0 !important;padding-right:0 !important;}
-			.text {font-size: 16px !important;color: #101010 !important;}
-			textarea.spip_cadre {width: 100% !important;}
-		}
-	
 	</style>
 </head>
 <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0"
@@ -125,10 +110,11 @@
 									<td class="headerContent"
 									    style="border-collapse: collapse;color: #202020;font-family: Arial;font-size: 34px;font-weight: bold;line-height: 100%;padding: 0;text-align: center;vertical-align: middle;">
 										<!-- // Begin Module: Standard Header Image \\ -->
-										[<img src="(#LOGO_NEWSLETTER|sinon{#LOGO_SITE_SPIP}|image_passe_partout{600,250}|image_recadre{600,250,center,transparent}|extraire_attribut{src})" alt=""
-										     border="0"
-										     style="margin: 0;padding: 0;width: 100%;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;"
-										     id="headerImage">]
+										[(#LOGO_NEWSLETTER|sinon{#LOGO_SITE_SPIP}|image_passe_partout{600,250}|image_recadre{600,250,center,transparent}|image_aplatir{jpg,#ffffff,75}
+										  |inserer_attribut{alt,''}
+										  |inserer_attribut{border,'0'}
+										  |inserer_attribut{style,'margin: 0;padding: 0;width: 100%;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;'}
+										  |inserer_attribut{id,headerImage})]
 										<!-- // End Module: Standard Header Image \\ -->
 									</td>
 								</tr>
@@ -171,10 +157,11 @@
 													<div
 														style="color: #505050;font-family: Arial;font-size: 14px;line-height: 150%;text-align: left;">
 														<h2 class="#EDIT{titre} h2" style="color: #202020;display: block;font-family: Arial;font-size: 26px;font-weight: bold;line-height: 100%;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;text-align: left;">
-															[<img src="(#LOGO_ARTICLE|image_reduire{100,200}|extraire_attribut{src})" alt=""
-																									     border="0"
-																									     style="margin: 0;margin-left: 1em;margin-bottom: 1em;float:right;max-width: 100px;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;"
-																									     class="logo">]
+															[(#LOGO_ARTICLE|image_reduire{100,200}
+																|inserer_attribut{alt,''}
+															  |inserer_attribut{border,'0'}
+															  |inserer_attribut{style,'margin: 0;margin-left: 1em;margin-bottom: 1em;float:right;padding: 0;max-width: 100%;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;'}
+															  |inserer_attribut{class,logo})]
 															#TITRE</h2>
 														<div class="#EDIT{introduction}">#INTRODUCTION</div>
 														<div class="lire_en_ligne"><a href="#URL_ARTICLE">Lire en ligne &laquo; #TITRE &raquo;</a></div>
@@ -225,7 +212,11 @@
 												<td valign="top" width="190" id="logo_site" style="border-collapse: collapse;">
 													<div
 														style="color: #707070;font-family: Arial;font-size: 14px;line-height: 125%;text-align: right;">
-														[(#LOGO_SITE_SPIP|image_reduire{190,95})]
+														[(#LOGO_SITE_SPIP|image_reduire{190,95}|image_aplatir{jpg,#ffffff,75}
+														|inserer_attribut{alt,''}
+													  |inserer_attribut{border,'0'}
+													  |inserer_attribut{style,'margin: 0;padding: 0;max-width: 100%;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;'}
+														)]
 													</div>
 												</td>
 											</tr>
@@ -257,4 +248,4 @@
 </body>
 </html>
 </BOUCLE_newsletter>
-#FILTRE{liens_absolus}
+#FILTRE{newsletters_liens_absolus}
