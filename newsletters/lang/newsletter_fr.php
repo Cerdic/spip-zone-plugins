@@ -9,6 +9,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'ajouter_lien_newsletter' => 'Ajouter cette infolettre',
 
+	// B
+	'bouton_tester_envoi' => 'Tester !',
+
 	// E
 	'explication_html_page_vide' => 'Permet d\'afficher dans le navigateur une version différente de celle envoyée par email (pour des raisons techniques ou éditoriales). Laissez le vide si vous voulez afficher la même version dans l\'email et dans le navigateur.',
 	'explication_baked' => 'Édition avancée&nbsp;: vous pouvez modifier directement le HTML et le texte de l\'infolettre. Elle ne sera plus générée automatiquement. Si vous repassez en édition normale vos modifications seront perdues.',
@@ -24,14 +27,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_newsletter_generer' => 'Générer l\'infolettre (Version HTML et version texte)',
 	'info_email_not_displaying' => 'Cet email ne s\'affiche pas correctement&nbsp;?',
 	'info_email_voir_en_ligne' => 'Voir cette Infolettre dans votre navigateur',
+	'info_test_sujet' => 'TEST',
+	'info_test_envoye' => 'La newsletter a été envoyée en test à @email@',
 
 	'info_preview_version_html_email' => 'Version HTML email',
 	'info_preview_version_texte_email' => 'Version Texte email',
 	'info_preview_version_html_page' => 'Version HTML en ligne',
 	'info_preview_version_html_page_noiframe' => '(afficher sans iframe)',
 
+	'info_tester_newsletter' => 'Tester avec un envoi par courriel',
+
 	// L
 	'label_chapo' => 'Chapeau',
+	'label_email_test' => 'Adresse email',
 	'label_date_redac' => 'Date de rédaction',
 	'label_texte' => 'Texte',
 	'label_titre' => 'Titre',

@@ -26,6 +26,10 @@
 
 <div class="nettoyeur"></div>
 
+<div class="ajax">
+#FORMULAIRE_TESTER_NEWSLETTER{#ID_NEWSLETTER}
+</div>
+
 [(#AUTORISER{modifier,newsletter,#ID_NEWSLETTER})
 	[(#ID_NEWSLETTER|afficher_qui_edite{newsletter}|non)
 		[(#URL_ECRIRE{newsletter_edit,id_newsletter=#ID_NEWSLETTER}|icone_verticale{<:newsletter:icone_modifier_newsletter:>,newsletter,edit,right ajax preload})]
