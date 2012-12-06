@@ -89,8 +89,9 @@ function formulaires_imprimer_etiquettes_traiter_dist() {
 
 	$table = array('m'=>'spip_asso_membres', 'al'=>'spip_adresses_liens','a'=>'spip_adresses');
 	$where = "al.objet='auteur' AND al.id_objet=m.id_auteur AND al.id_adresse=a.id_adresse AND ( (code_postal<>'' AND ville<>'') OR (boite_postale<>'') )";
+
 	list($statut_interne, $critere) = association_passeparam_statut('interne', 'defaut');
-	$where .= $critere;
+	if ($critere) $where .= ' AND ' . $critere;
 	$filtre_categorie = intval(_request('categorie'));
 	if ($filtre_categorie) {
 		$where .= ' AND id_categorie= '.sql_quote($filtre_categorie);
