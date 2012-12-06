@@ -35,7 +35,7 @@
 	<utilise nom="Zpip" compatibilite="[2.0.3;[" />
 	<utilise nom="Z" compatibilite="[1.7.21;[" />
 
-	<menu nom="tickets" titre="tickets:titre" parent="bando_publication" icone="images/ticket-16.png" />
+	<menu nom="tickets" titre="tickets:titre" parent="menu_publication" icone="images/ticket-16.png" />
 	<menu nom="ticket_edit" parametres="new=oui" titre="tickets:creer_ticket" parent="outils_rapides" icone="images/ticket-16-new.png" />
-	<menu nom="configurer_tickets" titre="tickets:cfg_bouton_tickets" parent="bando_configuration" icone="images/ticket-16.png" />
+	<menu nom="configurer_tickets" titre="tickets:cfg_bouton_tickets" parent="menu_configuration" icone="images/ticket-16.png" />
 </paquet>
