@@ -1,0 +1,37 @@
+
+
+[(#REM) Contenu principal : corps de la feuille ]
+<div class="content_ticketspublics">
+#SET{retour,#ENV{retour}}
+
+	<p class="boutons_ticketspublics">
+	
+		[(#SET{tris,#ARRAY{
+		asuivre,<:tickets:classement_asuivre:>,
+		type,<:tickets:classement_type:>,
+		assigne,<:tickets:classement_assigne:>,
+		termine,<:tickets:classement_termine:>}})]
+	[(#VAL{_TICKETS_LISTE_JALONS}defined|oui)
+		[(#SET{tris,#GET{tris}|array_merge{#ARRAY{jalon,<:tickets:classement_jalon:>}}})]
+	]
+	<BOUCLE_tri(DATA){source tableau,#GET{tris}}{"<span class='sep'> | </span>"}>
+		<a href="[(#SELF|parametre_url{classement,#CLE})]" class="trier_ticketspublics[(#ENV{classement}|=={#CLE}|oui) on]">#VALEUR</a>
+	</BOUCLE_tri>
+		<span class='sep'> | </span>
+		<a href="#" class="fermer" title="fermer les tickets">refermer</a>
+	</p>
+	
+	<div class="liste">
+		<INCLURE{fond=inclure/inc_classement_#ENV{classement,asuivre}}{env}>
+	</div>
+		
+	[(#AUTORISER{ecrire, ticket}|oui)
+	<hr />
+	<div class="ecrire_ticket" id="ecrire_ticket"><a href="#ecrire_ticket" class="poignee"><:ticketspublics:ecrire_un_nouveau_ticket:></a>
+		[<div class="tiroir" style="display:none;"><div class="ajax">(#FORMULAIRE_EDITER_TICKET{#ID_TICKET,[(#GET{retour})]} )</div></div>]
+	</div>
+	]
+
+	<hr />
+</div><!--.content_ticketspublics-->
+

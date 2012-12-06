@@ -1,0 +1,5 @@
+
+	<BOUCLE_principale(TICKETS){statut IN redac,ouvert,resolu}{!par date}>
+	#INCLURE{fond=inclure/ticketpublic,env,id_ticket=#ID_TICKET}
+	</BOUCLE_principale><:ticketspublics:aucun_ticket:>
+	<//B_principale>

@@ -1,0 +1,61 @@
+	#SET{retour,#ENV{retour}}
+	<BOUCLE_principale(TICKETS){id_ticket}>
+	<div class="ticketpublic">
+
+		[<h2>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})</h2>]
+
+		<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+		<div dir='#LANG_DIR' class='#EDIT{texte} texte'>[(#TEXTE|image_reduire{500,0})]</div>
+		</div>
+		[<div class="champ contenu_notes">
+		<div class='label'><:info_notes:></div>
+		<div dir='#LANG_DIR' class='#EDIT{notes} notes'>(#NOTES)</div>
+		</div>]
+		[<div><:tickets:champ_exemple:> : <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
+
+			
+			<div><a href="#" class="poignee details"><:ticketspublics:details:></a>
+				<div class="tiroir" style="display:none;">
+					<div style="float: #LANG_RIGHT; padding-#LANG_RIGHT: 20px;">
+						[<div class="champ">
+							<:tickets:champ_statut:> <strong>(#STATUT|tickets_texte_statut)</strong>
+						</div>]
+						<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tous}>
+							<div style="color: red;"><:tickets:assigne_a:> <strong>#NOM</strong></div>
+						</BOUCLE_assigne>
+					</div>
+					<div>
+						[<div class="champ">
+							<:tickets:champ_severite:> <strong>(#SEVERITE|tickets_texte_severite)</strong>
+						</div>]
+						[<:tickets:champ_type:> <strong>(#TRACKER|tickets_texte_tracker)</strong>]
+					</div>
+
+					[(#REM) - Date de creation et auteur du ticket]
+					<div class="champ">
+						<BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}>
+						[(#SET{date,[(#_afficher_contenu:DATE|affdate_court)]})]
+						<:tickets:date_creation_auteur{date=#GET{date},nom=#NOM}:>
+						</BOUCLE_auteur>
+					</div>
+					[(#REM) - Champs optionnels]
+					[(#PROJET|ou{#COMPOSANT}|ou{#VERSION}|ou{#JALON}|oui)
+					<div>
+						[<div><:tickets:champ_projet:> <strong>(#PROJET)</strong></div>]
+						[<div><:tickets:champ_composant:> <strong>(#COMPOSANT)</strong></div>]
+						[<div><:tickets:champ_version:> <strong>(#VERSION)</strong></div>]
+						[<div><:tickets:champ_jalon:> <strong>(#JALON)</strong></div>]
+					</div>]
+					[<div class="champ">
+						<:tickets:champ_navigateur:> (#NAVIGATEUR|tickets_texte_navigateur)
+					</div>]
+				</div>
+			</div>
+			
+			[(#AUTORISER{modifier,ticket,#ID_TICKET})
+			<div class="ecrire_ticket" id="ecrire_ticket#ID_TICKET"><a href="#ecrire_ticket#ID_TICKET" class="poignee"><:ticketspublics:modifier_ce_ticket:></a>
+				[<div class="tiroir" style="display:none;"><div class="ajax">(#FORMULAIRE_EDITER_TICKET{#ID_TICKET,[(#GET{retour})]} )</div></div>]
+			</div>
+			]
+	</div><!-- fin ticketpublic -->
+	</BOUCLE_principale>
