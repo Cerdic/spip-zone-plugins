@@ -1,18 +1,17 @@
 <?php
-
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-
-///  Fichier produit par PlugOnet
-// Module: paquet-sedna
-// Langue: en
-// Date: 05-12-2012 09:56:23
-// Items: 1
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.net/tradlang_module/paquet-sedna?lang_cible=en
+// ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// S
-	'sedna_slogan' => 'RSS aggregator',
+	// S
+	'sedna_description' => 'Sedna est un agrégateur de flux RSS (et ATOM etc) basé sur les sites syndiqués de SPIP. Il s’inspire vaguement de « Safari RSS » pour la présentation.
+
+Son objectif est d’être et de rester simple dans son code, et rapide à charger. Esthétique un peu, aussi.', # NEW
+	'sedna_slogan' => 'RSS aggregator'
 );
+
 ?>
