@@ -91,9 +91,9 @@ function formulaires_imprimer_etiquettes_traiter_dist() {
 	$where = "al.objet='auteur' AND al.id_objet=m.id_auteur AND al.id_adresse=a.id_adresse AND ( (code_postal<>'' AND ville<>'') OR (boite_postale<>'') )";
 	list($statut_interne, $critere) = association_passeparam_statut('interne', 'defaut');
 	$where .= $critere;
-	$filtre_categorie = _request('categorie');
+	$filtre_categorie = intval(_request('categorie'));
 	if ($filtre_categorie) {
-		$where .= ' AND id_categore= '.sql_quote($filtre_categorie);
+		$where .= ' AND id_categorie= '.sql_quote($filtre_categorie);
 	}
 	$filtre_email = _request('filtre_email');
 	if($filtre_email) {
@@ -155,7 +155,7 @@ function formulaires_imprimer_etiquettes_traiter_dist() {
 	if ($indice==0) {
 		$message .= _T('asso:etiquette_aucune_impression');
 	} else {
-		$nom_fic = 'etiquettes_'.$statut_interne.'_'. intval($filtre_categorie) .'_'. ($filtre_email?'avec':'sans'). 'email.pdf';
+		$nom_fic = 'etiquettes_'.$statut_interne.'_'. $filtre_categorie .'_'. ($filtre_email?'avec':'sans'). 'email.pdf';
 		$pdf->Output($nom_fic, 'D');
 		$message .= _T('asso:etiquette_fichier_telecharger', array('fichier'=>$nom_fic) );
 	}
