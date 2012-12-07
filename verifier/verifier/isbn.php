@@ -70,41 +70,41 @@ function verifier_isbn_dist($valeur, $options=array()){
 				$C = $segments[2];
 				$K = $segments[3];
 			}
-			// on ne sait jamais
+			// nombre de segments incorrect (on ne sait jamais)
 			else {
 				return _T('verifier:erreur_isbn_nb_segments', $val);
 			}
 
 			// puis ensuite, on verifie leur conformite
-			// G
+			// G : 978 ou 979
 			if ($G AND !preg_match("/97[89]/", $G)) {
 				return _T('verifier:erreur_isbn_G');
 			}
-			// pas de lettres pour A, B et C
+			// A, B et C doivent contenir des chiffres
 			foreach (array($A,$B,$C) as $segment){
 				$val['segment'] = $segment;
 				if (!is_numeric($segment))
 					return _T('verifier:erreur_isbn_segment_lettre', $val);
 			}
-			// A (code zone geographique)
+			// A (code zone geographique) : 5 caracteres max
 			if ($nbA = strlen($A) AND $nbA > 5) {
 				$val['nb'] = $nbA - 5;
 				$val['segment'] = $A;
 				return _T('verifier:erreur_isbn_segment', $val);
 			}
-			// B (code editeur)
+			// B (code editeur) : 7 caracteres max
 			if ($nbB = strlen($B) AND $nbB > 7) {
 				$val['nb'] = $nbB - 7;
 				$val['segment'] = $B;
 				return _T('verifier:erreur_isbn_segment', $val);
 			}
-			// C (code livre)
+			// C (code livre) : 6 caracteres max
 			if ($nbC = strlen($C) AND $nbC > 6) {
 				$val['nb'] = $nbC - 6;
 				$val['segment'] = $C;
 				return _T('verifier:erreur_isbn_segment', $val);
 			}
-			// K (cle de controle)
+			// K (cle de controle) : 1 caractere max
 			if ($nbK = strlen($K) AND $nbK > 1) {
 				$val['nb'] = $nbK - 1;
 				$val['segment'] = $K;
