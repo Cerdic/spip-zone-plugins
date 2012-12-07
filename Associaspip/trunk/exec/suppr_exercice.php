@@ -22,7 +22,7 @@ function exec_suppr_exercice() {
 		$infos['exercice_entete_fin'] = association_formater_date($exercice['date_fin'], 'dtend');
 		echo association_totauxinfos_intro($exercice['intitule'], 'exercice', $id_exercice, $infos);
 		// datation et raccourcis
-		raccourcis_association('exercices');
+		echo association_navigation_raccourcis('exercices');
 		debut_cadre_association('calculatrice.gif', 'exercice_budgetaire_titre');
 		echo association_bloc_suppression('exercice', $id_exercice);
 		fin_page_association();

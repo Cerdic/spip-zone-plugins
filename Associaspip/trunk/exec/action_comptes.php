@@ -21,7 +21,7 @@ function exec_action_comptes() {
 		// info
 		echo _T('asso:confirmation');
 		// datation et raccourcis
-		raccourcis_association('');
+		echo association_navigation_raccourcis('');
 		debut_cadre_association('finances-32.jpg', 'operations_comptables');
 		echo '<p>'. _T('asso:vous_vous_appretez_a_valider_les_operations') .'</p>';
 		$res = action_comptes_ligne(sql_in("id_compte", association_recuperer_liste('valide', true) ) );

@@ -79,7 +79,7 @@ function exec_prets() {
 		// datation et raccourcis
 		if ( (is_numeric($ressource['statut']) && $ressource['statut']>0) || $ressource['statut']=='ok' )
 			$res['prets_nav_ajouter'] = array('creer-12.gif', array('edit_pret', "id_ressource=$id_ressource&id_pret="), array('gerer_prets', 'association') );
-		raccourcis_association('ressources', $res);
+		echo association_navigation_raccourcis('ressources', $res);
 		debut_cadre_association('pret-24.gif', 'prets_titre_liste_reservations');
 		// FILTRES
 		$filtre_statut = '<select name="statut" onchange="form.submit()">';

@@ -21,7 +21,7 @@ function exec_association() {
 		// presentation du plugin
 		echo propre(_T('asso:association_info_doc'));
 		// datation et raccourcis
-		raccourcis_association(array(), array(
+		echo association_navigation_raccourcis(array(), array(
 			'profil_de_lassociation' => array('assoc_qui.png', 'configurer_association', array('editer_profil', 'association'), ),
 			'editer_asso_metas_utilisateur_lien' => array('assoc_qui.png', 'editer_asso_metas_utilisateur', array('editer_profil', 'association'), ),
 			'categories_de_cotisations' => array('cotisation.png', 'categories', array('editer_profil', 'association'), ),

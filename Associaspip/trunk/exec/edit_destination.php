@@ -23,7 +23,7 @@ function exec_edit_destination() {
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_destination_op',"id_destination=$id_destination")) );
 		echo association_totauxinfos_intro(sql_getfetsel('intitule','spip_asso_destination',"id_destination=$id_destination"), 'destination', $id_destination, $infos );
 		// datation et raccourcis
-		raccourcis_association('');
+		echo association_navigation_raccourcis('');
 		debut_cadre_association('euro-39.gif', 'destination_nav_ajouter');
 		echo recuperer_fond('prive/editer/editer_asso_destinations', array (
 			'id_destination' => $id_destination,

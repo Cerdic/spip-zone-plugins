@@ -31,7 +31,7 @@ function exec_edit_groupe() {
 				$titre = 'titre_editer_groupe';
 			} else  $titre = 'titre_creer_groupe';
 			// datation et raccourcis
-			raccourcis_association('groupes');
+			echo association_navigation_raccourcis('groupes');
 			debut_cadre_association('annonce.gif', $titre);
 			echo recuperer_fond('prive/editer/editer_asso_groupes',
 					array ('id' => $id_groupe));

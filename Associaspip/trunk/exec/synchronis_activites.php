@@ -47,7 +47,7 @@ function exec_synchronis_activites() {
 		// TOTAUX : nombres d'inscrits par reponse
 		echo association_totauxinfos_effectifs('inscriptions',  $reponses);
 		// datation et raccourcis
-		raccourcis_association(array('inscrits_activite', "id=$id_evenement"));
+		echo association_navigation_raccourcis(array('inscrits_activite', "id=$id_evenement"));
 		debut_cadre_association('reload-32.png', 'options_synchronisation');
 		echo recuperer_fond('prive/editer/synchroniser_asso_activites', array (
 			'id_evenement' => $id_evenement,

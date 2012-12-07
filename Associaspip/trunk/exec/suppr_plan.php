@@ -24,7 +24,7 @@ function exec_suppr_plan() {
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_comptes',"imputation='$plan[code]' OR journal='$plan[code]'")) );
 		echo association_totauxinfos_intro($plan['intitule'], 'plan', $id_plan, $infos );
 		// datation et raccourcis
-		raccourcis_association('');
+		echo association_navigation_raccourcis('');
 		debut_cadre_association('plan_compte.png', 'suppression_de_compte');
 		echo association_bloc_suppression('plan', $id_plan,'plan_comptable');
 		fin_page_association();

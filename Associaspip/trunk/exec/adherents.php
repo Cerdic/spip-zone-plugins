@@ -45,7 +45,7 @@ function exec_adherents() {
 		}
 
 		// datation et raccourcis
-		raccourcis_association(array(), array(
+		echo association_navigation_raccourcis(array(), array(
 			'gerer_les_groupes' => array('annonce.gif', 'groupes', array('voir_groupes', 'association', 100) ), // l'id groupe passe en parametre est a 100 car ce sont les groupes definis par l'utilisateur et non ceux des autorisation qu'on liste dans cette page
 			'menu2_titre_mailing' => array('mail-24.png', 'mailing'.((intval($id_groupe)>99)?"&filtre_id_groupe=$id_groupe":'').($statut_interne?"&filtre_statut_interne=$statut_interne":''), array('relancer_membres', 'association') ),
 			'synchronise_asso_membre_lien' => array('reload-32.png', 'synchroniser_asso_membres', array('gerer_membres', 'association') ),

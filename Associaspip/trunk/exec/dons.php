@@ -42,7 +42,7 @@ function exec_dons() {
 		$remboursements = sql_getfetsel('SUM(argent) AS somme_reversees', 'spip_asso_dons', "argent AND contrepartie AND $critere_periode" );
 		echo association_totauxinfos_montants($id_periode, $dons_financiers, $remboursements);
 		// datation et raccourcis
-		raccourcis_association(array(), array(
+		echo association_navigation_raccourcis(array(), array(
 			'ajouter_un_don' => array('ajout-24.png', 'edit_don', array('gerer_dons', 'association') ),
 		));
 		debut_cadre_association('dons-24.gif', 'tous_les_dons');

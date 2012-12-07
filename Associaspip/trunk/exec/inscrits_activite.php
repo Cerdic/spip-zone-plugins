@@ -49,7 +49,7 @@ function exec_inscrits_activite() {
 		if ( test_plugin_actif('AGENDA') && sql_countsel('spip_evenements_participants', "id_evenement=$id_evenement", 'id_auteur') ) { // inscrits via le formulaire d'Agenda2
 			$res['activite_bouton_synchroniser_inscriptions'] = array('reload-32.png', array('synchronis_activites', "id=$id_evenement"));
 		}
-		raccourcis_association(array('activites',($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode"), $res);
+		echo association_navigation_raccourcis(array('activites',($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode"), $res);
 		debut_cadre_association('activites.gif', 'activite_titre_inscriptions_activites');
 		// FILTRES
 		$filtre_statut = '<select name="statut" onchange="form.submit()">';

@@ -20,7 +20,7 @@ function exec_suppr_comptes() {
 		// info
 		echo _T('asso:confirmation');
 		// datation et raccourcis
-		raccourcis_association('');
+		echo association_navigation_raccourcis('');
 		debut_cadre_association('finances-32.jpg', 'operations_comptables');
 		echo '<p><strong>', _T('asso:vous_vous_appretez_a_effacer_la_ligne_de_compte'),  ' ', $id_compte, '</strong></p>';
 

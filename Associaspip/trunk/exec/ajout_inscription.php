@@ -31,7 +31,7 @@ function exec_ajout_inscription() {
 		$infos['agenda:evenement_lieu'] = '<span class="location">'.$evenement['lieu'].'</span>';
 		echo '<div class="vevent">'. association_totauxinfos_intro('<span class="summary">'.$evenement['titre'].'</span>', 'evenement', $id_evenement, $infos, 'evenement') .'</div>';
 		// datation et raccourcis
-		raccourcis_association('');
+		echo association_navigation_raccourcis('');
 		debut_cadre_association(($id_activite?'activites.gif':'panier_in.gif'), 'activite_titre_ajouter_inscriptions');
 		echo recuperer_fond('prive/editer/ajouter_inscription', array (
 			'id_activite' => $id_activite,

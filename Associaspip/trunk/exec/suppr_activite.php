@@ -32,7 +32,7 @@ function exec_suppr_activite() {
 		$infos['entete_montant'] = association_formater_prix($activite['prix_unitaire'], 'fees');
 		association_totauxinfos_intro('', 'activite', $id_activite, $infos );
 		// datation et raccourcis
-		raccourcis_association('');
+		echo association_navigation_raccourcis('');
 		debut_cadre_association('activites.gif', 'activite_titre_inscriptions_activites');
 		echo association_bloc_suppression('activite', $id_activite);
 		fin_page_association();

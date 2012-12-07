@@ -22,7 +22,7 @@ function exec_edit_plan() {
 		// Notice
 		echo propre(_T('asso:edit_plan'));
 		// datation et raccourcis
-		raccourcis_association('');
+		echo association_navigation_raccourcis('');
 		debut_cadre_association('plan_compte.png', 'edition_plan_comptable');
 		echo recuperer_fond('prive/editer/editer_asso_plan', array (
 			'id_plan' => $id_plan

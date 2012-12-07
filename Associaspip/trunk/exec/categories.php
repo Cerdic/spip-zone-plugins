@@ -23,7 +23,7 @@ function exec_categories() {
 		// quelques stats sur les categories
 		echo association_totauxinfos_stats('tous', 'categories', array('entete_duree'=>'duree', 'entete_montant'=>'prix_cotisation') );
 		// datation et raccourcis
-		raccourcis_association('association', array(
+		echo association_navigation_raccourcis('association', array(
 			'ajouter_une_categorie_de_cotisation' => array('cotisation.png', 'edit_categorie'),
 		));
 		debut_cadre_association('cotisation.png', 'toutes_categories_de_cotisations');

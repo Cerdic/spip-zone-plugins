@@ -26,7 +26,7 @@ function exec_suppr_don() {
 		$infos['entete_commentaire'] = $don['commentaire'];
 		echo '<div class="hproduct">'. association_totauxinfos_intro('', 'don', $id_don, $infos ) .'</div>';
 		// datation et raccourcis
-		raccourcis_association('');
+		echo association_navigation_raccourcis('');
 		debut_cadre_association('dons-24.gif', 'action_sur_les_dons');
 		echo association_bloc_suppression('don', $id_don);
 		fin_page_association();

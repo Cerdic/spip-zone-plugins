@@ -22,7 +22,7 @@ function exec_edit_compte() {
 		// INTRO : resume compte
 		echo association_totauxinfos_intro('', 'compte', $id_compte);
 		// datation et raccourcis
-		raccourcis_association('');
+		echo association_navigation_raccourcis('');
 		debut_cadre_association('compts.gif', 'modification_des_comptes');
 		echo recuperer_fond('prive/editer/editer_asso_comptes', array (
 			'id_compte' => $id_compte

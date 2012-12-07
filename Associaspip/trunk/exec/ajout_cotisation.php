@@ -24,7 +24,7 @@ function exec_ajout_cotisation() {
 		$infos['adherent_libelle_validite'] = association_formater_date($membre['date_validite'], 'dtend');
 		echo association_totauxinfos_intro(htmlspecialchars(association_formater_nom($membre['sexe'], $membre['prenom'], $membre['nom_famille'])), 'membre', $id_auteur, $infos );
 		// datation et raccourcis
-		raccourcis_association('', array(
+		echo association_navigation_raccourcis('', array(
 			'voir_adherent' => array('edit-24.gif', array('adherent', "id=$id_auteur") ),
 		));
 		debut_cadre_association('annonce.gif', 'cotisation');

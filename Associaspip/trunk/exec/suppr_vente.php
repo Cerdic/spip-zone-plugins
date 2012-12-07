@@ -28,7 +28,7 @@ function exec_suppr_vente() {
 		$infos['entete_commentaire'] = $vente['commentaire'];
 		echo '<div class="hproduct">'. association_totauxinfos_intro('', 'vente', $id_vente, $infos ) .'</div>';
 		// datation et raccourcis
-		raccourcis_association('');
+		echo association_navigation_raccourcis('');
 		debut_cadre_association('ventes.gif', 'action_sur_les_ventes_associatives');
 		echo association_bloc_suppression('vente', $id_vente);
 		fin_page_association();

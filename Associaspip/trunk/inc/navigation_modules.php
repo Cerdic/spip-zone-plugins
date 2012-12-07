@@ -8,6 +8,8 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 
 include_spip('inc/presentation'); // utilise par "onglet1_association" (pour "onglet") puis aussi dans les pages appelantes
 include_spip('inc/autoriser'); // utilise par "onglet1_association" (pour le test "autoriser") puis aussi dans les pages appelantes
@@ -94,12 +96,9 @@ function onglets_association($titre='', $top_exec='', $INSERT_HEAD=TRUE) {
  * @param array $raccourcis
  *   Tableau des raccourcis definis chacun sous la forme :
  *   'titre' => array('icone', array('url_ecrire', 'parametres_url'), array('permission' ...), ),
- * @param bool $FIN_BOITE_INFO
- *   Indique s'il faut generer (vrai, par defaut) ou pas la fin du bloc infos
- *   qui doit alors etre obligatoirement celui qui precede !
  * @return void
  */
-function association_navigation_raccourcis($adresse_retour='',  $raccourcis=array(), $FIN_BOITE_INFO=TRUE) {
+function association_navigation_raccourcis($adresse_retour='',  $raccourcis=array()) {
 	$res = ''; // initialisation
 	if ( is_array($raccourcis) AND count($raccourcis) ) {
 		foreach($raccourcis as $raccourci_titre => $params) {
@@ -125,18 +124,7 @@ function association_navigation_raccourcis($adresse_retour='',  $raccourcis=arra
 			 : '');
 		if ($url) $res .= icone1_association('asso:bouton_retour', $url, 'retour-24.png');
 	}
-	if ($FIN_BOITE_INFO) {
-		echo association_date_du_jour();
-		echo fin_boite_info(TRUE);
-	}
-	echo bloc_des_raccourcis($res);
-}
-
-/**
- * @see association_navigation_raccourcis
- */
-function raccourcis_association($adresse_retour='',  $raccourcis=array(), $PrefixeLangue='asso', $FIN_BOITE_INFO=TRUE) {
-	association_navigation_raccourcis($adresse_retour,  $raccourcis, $PrefixeLangue, $FIN_BOITE_INFO);
+	return association_date_du_jour() . fin_boite_info(TRUE) . bloc_des_raccourcis($res);
 }
 
 /**

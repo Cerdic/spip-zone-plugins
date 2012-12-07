@@ -29,7 +29,7 @@ function exec_action_adherents() {
 			// info
 			echo association_totauxinfos_intro(_T('asso:confirmation'));
 			// datation et raccourcis
-			raccourcis_association('adherents');
+			echo association_navigation_raccourcis('adherents');
 			if ($action_adherents=='desactive') {
 				$statut_courant = _request('statut_courant');
 				if($statut_courant==='sorti') {

@@ -45,7 +45,7 @@ function exec_edit_adherent() {
 			$infos['coordonnees:pages'] =  $sites[$id_auteur];
 		echo '<div class="vcard">'. association_totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos ) .'</div>';
 		// datation et raccourcis
-		raccourcis_association('');
+		echo association_navigation_raccourcis('');
 		debut_cadre_association('annonce.gif', 'adherent_titre_modifier_membre');
 		echo recuperer_fond('prive/editer/editer_asso_membres', array (
 			'id_auteur' => $id_auteur,

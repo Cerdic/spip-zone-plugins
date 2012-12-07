@@ -31,7 +31,7 @@ function exec_encaisse() {
 			echo association_totauxinfos_stats($financier['intitule'], 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), 'journal='.sql_quote($financier['journal']) .' AND date_operation>='. sql_quote($financier['date_anterieure']) .' AND date_operation<=NOW()');
 		}
 		// datation et raccourcis
-		raccourcis_association(array('comptes', "exercice=$id_exercice"), array(
+		echo association_navigation_raccourcis(array('comptes', "exercice=$id_exercice"), array(
 			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "exercice=$id_exercice") ),
 			'cpte_bilan_titre_general' => array('finances-24.png', array('compte_bilan', "exercice=$id_exercice") ),
 #			'annexe_titre_general' => array('finances-24.png', array('annexe', "exercice=$id_exercice") ),
