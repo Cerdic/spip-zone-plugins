@@ -10,7 +10,7 @@
 	<a id="bouton_insc_conv" href="#" onclick="insc_with_openid(false);return false;">Retour</a>
 </div>
 <ul>
-	<li class='saisie_url_openid obligatoire[ (#ENV*{erreurs}|table_valeur{url_openid}|oui)erreur]'>
+	<li class='editer saisie_url_openid obligatoire[ (#ENV*{erreurs}|table_valeur{url_openid}|oui)erreur]'>
 		<label for="url_openid"><:openid:form_pet_votre_openid:></label>[
 		<span class="erreur_message">(#ENV*{erreurs}|table_valeur{url_openid})</span>
 		]<input type="text" class="text" name="url_openid" id="url_openid" value="#ENV*{url_openid}" size="30" />
