@@ -84,47 +84,34 @@ function onglets_association($titre='', $top_exec='', $INSERT_HEAD=TRUE) {
 }
 
 /**
- * Bloc de raccourci(s) constitue d'au moins du bouton retour
+ * Bloc de raccourci(s)
  *
- * @param string|array $adresse_retour
- *   - Juste le nom du fichier "exec" du bouton retour
- *     Ou une chaine vide pour generere automatiquement l'URL de la page precedente
- *   - Un tableau comportant le nom du fichier "exec" et une chaine de parametres
- *     passes a l'URL ;
- *     Ou un tableau vide pour ne pas generer de bouton retour (quand on est dans
- *     la page principale du module)
+ * @param string $retour
+ *     URL de retour
  * @param array $raccourcis
  *   Tableau des raccourcis definis chacun sous la forme :
  *   'titre' => array('icone', array('url_ecrire', 'parametres_url'), array('permission' ...), ),
  * @return void
  */
-function association_navigation_raccourcis($adresse_retour='',  $raccourcis=array()) {
+function association_navigation_raccourcis($retour='',  $raccourcis=array()) {
 	$res = ''; // initialisation
-	if ( is_array($raccourcis) AND count($raccourcis) ) {
-		foreach($raccourcis as $raccourci_titre => $params) {
-			// autorisation d'acces au module
-			if ( is_array($params[2]) && count($params[2]) ) { // autorisation a calculer
-				$acces = call_user_func_array('autoriser', $params[2]);
-			} elseif ( is_scalar($params[2]) ) { // autorisation deja calculee (chaine ou entier ou booleen, evalue en vrai/faux...)
-				$acces = autoriser($params[2]);
-			} else // pas d'autorisation definie = autorise pour tous
-				$acces = TRUE;
-			// generation du raccourci
-			if ( $acces )
-				$res .= icone1_association($raccourci_titre,  (is_array($params[1])?generer_url_ecrire($params[1][0],$params[1][1]):generer_url_ecrire($params[1])), $params[0]);
-		}
+	foreach($raccourcis as $titre => $params) {
+		// autorisation d'acces au module
+		if ( is_array($params[2]) && count($params[2]) ) { // autorisation a calculer
+			$acces = call_user_func_array('autoriser', $params[2]);
+		} elseif ( is_scalar($params[2]) ) { // autorisation deja calculee (chaine ou entier ou booleen, evalue en vrai/faux...)
+			$acces = autoriser($params[2]);
+		} else // pas d'autorisation definie = autorise pour tous
+			$acces = TRUE;
+		// generation du raccourci
+		if ( $acces )
+			$res .= icone1_association($titre,  (is_array($params[1])?generer_url_ecrire($params[1][0],$params[1][1]):generer_url_ecrire($params[1])), $params[0]);
 	}
-	if ( is_array($adresse_retour) ) { // tableau : url_exec, parametres_exec
-		if ( count($adresse_retour) )
-			$res .= icone1_association('asso:bouton_retour',  generer_url_ecrire($adresse_retour[0],$adresse_retour[1]), 'retour-24.png');
-	} else { // chaine de caractere : uri_complet
-		$url = $adresse_retour ? generer_url_ecrire($adresse_retour) :
-			(isset($_SERVER['HTTP_REFERER']) ?
-			 str_replace('&', '&amp;', $_SERVER['HTTP_REFERER'])
-			 : '');
-		if ($url) $res .= icone1_association('asso:bouton_retour', $url, 'retour-24.png');
-	}
-	return association_date_du_jour() . fin_boite_info(TRUE) . bloc_des_raccourcis($res);
+
+	return association_date_du_jour()
+	. fin_boite_info(TRUE)
+	. bloc_des_raccourcis($res)
+	. ($retour ? icone1_association('asso:bouton_retour', $retour, 'retour-24.png') : '');
 }
 
 /**

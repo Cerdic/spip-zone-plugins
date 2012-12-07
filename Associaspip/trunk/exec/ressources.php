@@ -81,7 +81,7 @@ function exec_ressources() {
 		$depences = sql_getfetsel('SUM(prix_acquisition) AS somme_depences', 'spip_asso_ressources', "DATE_FORMAT('date_acquisition', '%Y')=DATE_FORMAT(NOW(), '%Y') ");
 		echo association_totauxinfos_montants('ressources', $recettes, $depenses);
 		// datation et raccourcis
-		echo association_navigation_raccourcis(array(), array(
+		echo association_navigation_raccourcis('', array(
 			'ressources_nav_ajouter' => array('ajout-24.png', 'edit_ressource', array('gerer_ressources', 'association'), ),
 		) );
 		debut_cadre_association('pret-24.gif', 'ressources_titre_liste_ressources');

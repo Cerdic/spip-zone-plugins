@@ -27,7 +27,7 @@ function exec_compte_bilan() {
 		echo association_totauxinfos_intro($ids['titre_periode'], 'exercice', $ids['id_periode'], $infos);
 		// pas de sommes de synthes puisque tous les totaux sont dans la zone centrale ;-
 		// datation et raccourcis
-		echo association_navigation_raccourcis(array('comptes', "$ids[type_periode]=$ids[id_periode]"), array(
+		echo association_navigation_raccourcis(generer_url_ecrire('comptes', "$ids[type_periode]=$ids[id_periode]"), array(
 			'encaisse_titre_general' => array('finances-24.png', array('encaisse', "$ids[type_periode]=$ids[id_periode]") ),
 			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "$ids[type_periode]=$ids[id_periode]".($ids['destination']?"&destination=$ids[destination]":'')) ),
 #			'annexe_titre_general' => array('finances-24.png', array('annexe', "$ids[type_periode]=$ids[id_periode]".($ids['destination']?"&destination=$ids[destination]":'')) ),

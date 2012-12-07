@@ -39,11 +39,11 @@ function exec_activites() {
 		echo association_totauxinfos_montants('activites', sql_getfetsel('SUM(prix_unitaire) AS somme_recettes', 'spip_asso_activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', $critere_periode), 0);
 		// datation et raccourci vers la gestion des evenements
 		if ( test_plugin_actif('SIMPLECAL') ) { // gestion des evenements avec Simple Calendrier
-			echo association_navigation_raccourcis(array(), array(
+			echo association_navigation_raccourcis('', array(
 				'evenements' => array('simplecal-logo-16.png', 'evenement_tous'),
 			) );
 		} elseif ( test_plugin_actif('AGENDA') ) { // gestion des evenements avec Agenda 2
-			echo association_navigation_raccourcis(array(), array(
+			echo association_navigation_raccourcis('', array(
 				'evenements' => array('agenda-evenements-16.png', 'agenda_evenements'),
 			) );
 		} else { // pas de bloc de raccourcis
