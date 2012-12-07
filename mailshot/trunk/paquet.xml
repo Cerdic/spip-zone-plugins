@@ -1,12 +1,12 @@
 <paquet
 	prefix="mailshot"
 	categorie="communication"
-	version="0.2.0"
+	version="0.3.0"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/mailshot-32.png"
 	documentation=""
-	schema="0.1.0" 
+	schema="0.1.1"
 >
 
 	<nom>MailShot</nom>
@@ -15,6 +15,7 @@
 
 	<licence>GNU/GPL</licence>
 	<pipeline nom="autoriser" inclure="mailshot_autorisations.php" /> 
+	<pipeline nom="taches_generales_cron" inclure="mailshot_pipelines.php" />
 
 
 	<necessite nom="facteur" compatibilite="[2.3.0;]" />

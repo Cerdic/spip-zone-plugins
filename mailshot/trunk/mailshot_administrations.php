@@ -14,6 +14,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function mailshot_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
+	$maj['create'] = array(
+		array('maj_tables', array('spip_mailshots')),
+	);
+	$maj['0.1.1'] = array(
+		array('maj_tables', array('spip_mailshots')),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -24,6 +31,7 @@ function mailshot_upgrade($nom_meta_base_version, $version_cible) {
 **/
 function mailshot_vider_tables($nom_meta_base_version) {
 
+	sql_drop_table("spip_mailshots");
 
 	effacer_meta($nom_meta_base_version);
 }

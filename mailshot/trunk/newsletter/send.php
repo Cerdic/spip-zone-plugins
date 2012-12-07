@@ -9,6 +9,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip("inc/config");
 
 /**
+ * TODO : compter chaque envoi et prendre en compte une limite de rate generale
+ * renvoyer false si trop de mail et qu'il faut attendre !
+ *
+ *
+ *
  * @param array $destinataire
  *   description du destinataire
  *     string email
@@ -36,8 +41,9 @@ include_spip("inc/config");
  *     bool test : mode test (ajoute un [TEST] dans le sujet
  *     string tracking_id
  *
- * @return string
+ * @return string|int
  *   vide si ok, ou message d'erreur sinon
+ *   nb de sec d'attente (ou 0 si indetermine) si trop de mails envoyes compte tenu de la limite nbmails/j
  */
 function newsletter_send_dist($destinataire,$corps,$options=array()){
 	static $config = null;
