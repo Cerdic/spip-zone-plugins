@@ -1,4 +1,14 @@
 <?php
+/**
+* Plugin SPIP-Immo
+*
+* @author: CALV V3
+* @author: Pierre KUHN V3
+*
+* Copyright (c) 2007-12
+* Logiciel distribue sous licence GPL.
+*
+**/
 
 	//Plugin
 	define("_SPIPIMMO_TITRE", "Spip-Immo");

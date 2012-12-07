@@ -2,6 +2,7 @@
 	prefix="spipimmo"
 	categorie="divers"
 	version="3.2.0"
+	schema="0.0.1"
 	etat="stable"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="img_pack/spipimmo.png"
@@ -16,5 +17,8 @@
 
 	<copyright>2007-2012</copyright>
 
-	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>       
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/spipimmo.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/spipimmo.php" />
 </paquet>
