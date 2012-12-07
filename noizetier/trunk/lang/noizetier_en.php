@@ -105,6 +105,7 @@ nuts on the following pages:',
 	'masquer' => 'Hide',
 	'mode_noisettes' => 'Edit the nuts',
 	'modif_en_cours' => 'Ongoing changes',
+	'modifier_dans_prive' => 'Modifier dans l\'espace privé', # NEW
 
 	// N
 	'ne_pas_definir_d_heritage' => 'Do not define heritage',
