@@ -53,7 +53,7 @@ function newsletters_liens_absolus($texte, $base='') {
  * @param string $selected
  * @return array
  */
-function liste_choix_patrons($selected=null){
+function liste_choix_patrons($selected=null, $tout_voir = false){
 	$patrons = array();
 	$files = find_all_in_path("newsletters/","\.html$");
 	if (!$files) return $patrons;
@@ -66,7 +66,7 @@ function liste_choix_patrons($selected=null){
 		if (count($e = explode(".",$fond))<2
 			OR !in_array(end($e),array('page','texte'))){
 
-			if (!in_array($fond,$masquer) OR $fond==$selected)
+			if ($tout_voir OR !in_array($fond,$masquer) OR $fond==$selected)
 				$patrons[$fond] = afficher_titre_patron($fond);
 
 		}

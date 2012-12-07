@@ -15,7 +15,7 @@
 				<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
-				<BOUCLE_patrons(POUR){tableau #REM|liste_choix_patrons}>
+				<BOUCLE_patrons(POUR){tableau #REM|liste_choix_patrons{tout}}>
 				#SET{val,#CLE}
 				<div class="choix">
 					<input type="checkbox" name="#GET{name}#EVAL{chr(91)}#EVAL{chr(93)}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
