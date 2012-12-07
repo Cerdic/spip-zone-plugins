@@ -34,7 +34,6 @@ class Facteur extends PHPMailer {
 			'adresse_envoi' => $GLOBALS['meta']['facteur_adresse_envoi'],
 			'adresse_envoi_email' => $GLOBALS['meta']['facteur_adresse_envoi_email'],
 			'adresse_envoi_nom' => $GLOBALS['meta']['facteur_adresse_envoi_nom'],
-			'smtp_sender' => $GLOBALS['meta']['facteur_smtp_sender'],
 			'cc' => $GLOBALS['meta']['facteur_cc'],
 			'bcc' => $GLOBALS['meta']['facteur_bcc'],
 			'smtp' => $GLOBALS['meta']['facteur_smtp'],
@@ -44,6 +43,7 @@ class Facteur extends PHPMailer {
 			'smtp_username' => $GLOBALS['meta']['facteur_smtp_username'],
 			'smtp_password' => $GLOBALS['meta']['facteur_smtp_password'],
 			'smtp_secure' => $GLOBALS['meta']['facteur_smtp_secure'],
+			'smtp_sender' => $GLOBALS['meta']['facteur_smtp_sender'],
 			'filtre_images' => $GLOBALS['meta']['facteur_filtre_images'],
 			'filtre_iso_8859' => $GLOBALS['meta']['facteur_filtre_iso_8859'],
 		);
