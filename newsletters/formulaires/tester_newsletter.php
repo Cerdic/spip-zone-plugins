@@ -54,14 +54,6 @@ function formulaires_tester_newsletter_traiter_dist($id_newsletter){
 			'url_unsubscribe' => url_absolue(_DIR_RACINE . "unsubscribe"),
 		);
 
-	// generer une version a jour (ne fera rien si deja cuite)
-	$generer_newsletter = charger_fonction("generer_newsletter","action");
-	$generer_newsletter($id_newsletter);
-
-	// fixer les images et autre
-	$fixer_newsletter = charger_fonction("fixer_newsletter","action");
-	$fixer_newsletter($id_newsletter);
-
 	// ok, maintenant on prepare un envoi
 	$send = charger_fonction("send","newsletter");
 	$res = $send($dest, $id_newsletter, array('test'=>true));

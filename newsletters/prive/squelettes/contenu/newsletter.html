@@ -19,16 +19,15 @@
 </div>
 
 <!--affiche_milieu-->
+<div class="ajax">
+#FORMULAIRE_TESTER_NEWSLETTER{#ID_NEWSLETTER}
+</div>
 
 <div id="wysiwyg">
 <INCLURE{fond=prive/objets/contenu/newsletter,id=#ID_NEWSLETTER,id_newsletter=#ID_NEWSLETTER,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
 </div>
 
 <div class="nettoyeur"></div>
-
-<div class="ajax">
-#FORMULAIRE_TESTER_NEWSLETTER{#ID_NEWSLETTER}
-</div>
 
 [(#AUTORISER{modifier,newsletter,#ID_NEWSLETTER})
 	[(#ID_NEWSLETTER|afficher_qui_edite{newsletter}|non)

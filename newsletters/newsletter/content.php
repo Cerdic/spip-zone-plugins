@@ -17,6 +17,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *   string texte
  */
 function newsletter_content_dist($id){
+	// generer une version a jour (ne fera rien si deja cuite)
+	$generer_newsletter = charger_fonction("generer_newsletter","action");
+	$generer_newsletter($id);
+
+	// fixer les images et autre
+	$fixer_newsletter = charger_fonction("fixer_newsletter","action");
+	$fixer_newsletter($id);
+
 	// recuperer les messages
 	$corps = sql_fetsel('titre as sujet,html_email as html,texte_email as texte','spip_newsletters','id_newsletter='.intval($id));
 	if (!$corps)
