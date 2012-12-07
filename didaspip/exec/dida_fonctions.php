@@ -84,37 +84,37 @@ function verifConformite ($chaine,$typeverif) {
 	$msg=false;
 	//verifier que le nom d'utilisateur a 4 à 12 caractères
 	if ($typeverif=="utilisateur" and (!is_string($chaine) or strlen($chaine)<4 or strlen($chaine)>12)){
-		$msg=$lang['erreursaisie1'];
+		$msg=_T('dida:erreursaisie1');
 		return $msg;
 	}
 	//verifier que le mot de passe a 4 à 12 caractères
 	if ($typeverif=="motdepasse" and (!is_string($chaine) or strlen($chaine)<4 or strlen($chaine)>12)){
-		$msg=$lang['erreursaisie2'];
+		$msg=_T('dida:erreursaisie2');
 		return $msg;
 	}
 	//verifier que le nom a 1 à 20 caractères
 	if ($typeverif=="nom" and (!is_string($chaine) or strlen($chaine)<1 or strlen($chaine)>20)){
-		$msg=$lang['erreursaisie3'];
+		$msg=_T('dida:erreursaisie3');
 		return $msg;
 	}
 	//verifier que le mot de passe a 4 à 12 caractères
 	if ($typeverif=="prenom" and (!is_string($chaine) or strlen($chaine)<1 or strlen($chaine)>20)){
-		$msg=$lang['erreursaisie4'];
+		$msg=_T('dida:erreursaisie4');
 		return $msg;
 	}
 	//verifier que le nom de groupe a 1 à 12 caractères
 	if ($typeverif=="groupe" and (!is_string($chaine) or strlen($chaine)<1 or strlen($chaine)>12)){
-		$msg=$lang['erreursaisie5'];
+		$msg=_T('dida:erreursaisie5');
 		return $msg;
 	}
 	//verifier que le nom de cours a 1 à 12 caractères
 	if ($typeverif=="nomcours" and (!is_string($chaine) or strlen($chaine)<1 or strlen($chaine)>12)){
-		$msg=$lang['erreurimport6'];
+		$msg=_T('dida:erreurimport6');
 		return $msg;
 	}
 	//verifier que le titre du cours a 1 à 100 caractères
 	if ($typeverif=="titrecours" and (!is_string($chaine) or strlen($chaine)<1 or strlen($chaine)>80)){
-		$msg=$lang['erreurimport7'];
+		$msg=_T('dida:erreurimport7');
 		return $msg;
 	}
 	//verifier absence de char interdits : seuls a-z,A-Z et - sont autorisés
@@ -125,7 +125,7 @@ function verifConformite ($chaine,$typeverif) {
 			if (($chaine[$i]>='A' and $chaine[$i]<='Z') or ($chaine[$i]>='a' and $chaine[$i]<='z')) $ok=true;
 			else if (($chaine[$i]>='0' and $chaine[$i]<='9')or($chaine[$i]=='-') ) $ok=true;
 			if ($ok==false) {
-				$msg=$lang['erreursaisie6'];
+				$msg=_T('dida:erreursaisie6');
 				return $msg;
 			}
 		}

@@ -1,0 +1,299 @@
+<?php
+include_once(_DIR_PLUGIN_DIDA."exec/dida_fonctions.php");
+//Cas de la suppression d'un projet
+if (_request('suppr_cours') AND $GLOBALS['meta']['accessuppr']!="non") {
+	if (is_dir(_DIR_IMG.'/didapages/'._request('suppr_cours'))) rmdirr(_DIR_IMG."didapages/"._request('suppr_cours'));
+}
+if (_request('testimport')=='ok') {
+$erreurmsg=false;
+//verifier les erreurs d'upload
+if ($erreurmsg==false and $_FILES['fichiercours']['error']==UPLOAD_ERR_INI_SIZE) $erreurmsg=_T('dida:erreurimport1');
+if ($erreurmsg==false and $_FILES['fichiercours']['error']==UPLOAD_ERR_FORM_SIZE) $erreurmsg=_T('dida:erreurimport1');
+if ($erreurmsg==false and $_FILES['fichiercours']['error']==UPLOAD_ERR_PARTIAL) $erreurmsg=_T('dida:erreurimport2');
+if ($erreurmsg==false and $_FILES['fichiercours']['error']==UPLOAD_ERR_NO_FILE) $erreurmsg=_T('dida:erreurimport3');
+//au cas où erreur alors que tout s'est bien passé quand même
+if (is_file($_FILES['fichiercours']['tmp_name'])) $erreurmsg=false;
+//Vérifier que le fichier uploadé est bien un fichier zip
+$extension = explode(".", $_FILES['fichiercours']['name']);
+if ($erreurmsg==false and array_pop($extension)!="zip") $erreurmsg=_T('dida:erreurimport5');
+//Vérifier la conformité des infos saisies
+if ($erreurmsg==false) $erreurmsg=verifConformite(_request('nom'),"nomcours");
+//Vérifier que le nom de cours n'existe pas déjà
+if (($erreurmsg==false) AND (is_dir(_DIR_IMG.'/didapages/'._request('nom'))))	{$erreurmsg=_T('dida:erreurimport8');}
+//dezipper le cours dans un dossier tmp d'un dossier a son nom
+if ($erreurmsg==false) {
+	if (!is_dir(_DIR_IMG.'didapages/'._request('nom'))) mkdir(_DIR_IMG.'didapages/'._request('nom'));
+	mkdir(_DIR_IMG.'didapages/'._request('nom').'/tmp');
+	//dezipper a l'aide de la (grosse) librairie pclzip
+	include_once(_DIR_PLUGIN_DIDA."exec/pclzip.lib.php");
+	$archive = new PclZip($_FILES['fichiercours']['tmp_name']);
+	if ($archive->extract(PCLZIP_OPT_PATH, _DIR_IMG."didapages/"._request('nom').'/tmp')==0) $erreurmsg=_T('dida:erreurimport9');
+	elseif (!is_file(_DIR_IMG."didapages/"._request('nom')."/tmp/data.xml")){
+		//supprimer tout si pas de fichier data.xml (pas un cours didapages)
+		$erreurmsg=_T('dida:erreurimport5');
+		rmdirr(_DIR_IMG."didapages/"._request('nom')."/tmp");
+		rmdirr(_DIR_IMG."didapages/"._request('nom'));
+	}
+}
+//un cours Didapages (exporté pour MSP)) se compose d'un fichier data.xml, 
+//accompagné d'eventuels médias jpg, mp3,swf et flv
+//Le data.xml doit aller dans le dossier /admin/cours qui est protegé
+//les médias doivent aller dans le dossier /cours
+//s'il y a d'autres fichiers, ils doivent être supprimés par sécurité
+if ($erreurmsg==false){
+	$dir = @opendir(_DIR_IMG."didapages/"._request('nom')."/tmp");
+	$fichentrop="";
+	if (!is_dir(_DIR_IMG.'didapages/'._request('nom')))  mkdir(_DIR_IMG.'didapages/'._request('nom'));
+	copy(_DIR_PLUGIN_DIDA."/index.html",_DIR_IMG."didapages/"._request('nom')."/index.html");// Copie du fichier index
+	copy(_DIR_PLUGIN_DIDA."/lecteur.swf",_DIR_IMG."didapages/"._request('nom')."/lecteur.swf");// Copie du fichier lecteur flash	
+	while (false !== ($fichier = readdir($dir))) {
+		if ($fichier=='data.xml'){
+			copy(_DIR_IMG."didapages/"._request('nom')."/tmp/".$fichier,_DIR_IMG."didapages/"._request('nom')."/".$fichier);
+		} else if ($fichier!='.' and $fichier!='..'){
+			$extension = explode(".", $fichier);
+			$extension=strtolower(array_pop($extension));
+   			if ($extension=="jpg" or $extension=="swf" or $extension=="mp3" or $extension=="flv" or $extension=="html"){
+				copy(_DIR_IMG."didapages/"._request('nom')."/tmp/".$fichier,_DIR_IMG."didapages/"._request('nom')."/".$fichier);
+			} else {
+				$fichentrop.=" ".$fichier;
+			}
+		}
+	}
+	closedir($dir);
+	//supprimer le dossier temporaire
+	rmdirr(_DIR_IMG."didapages/"._request('nom')."/tmp");
+	//signaler que des fichiers ont été supprimés
+	if ($fichentrop!="") $erreurmsg=_T('dida:erreurimport10')."(".$fichentrop." )";
+	//si tout s'est bien passé, réafficher la page normale et effacer les champs
+	?>
+	<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	<h3 class='titrem'>Import d'un projet Didapages</h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method='post' action='#ENV{action}' name ="apresimportdida">
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	
+		<table class="spip">
+			<tr>
+				<td><div align="center"><b>
+				<?php 
+				if (_request('act')=="modifcours" or _request('act')=="modifcourssuite") echo _T('dida:courstitremodif'); 
+				else echo _T('dida:courstitreimport'); 
+				?>
+				</b></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<table class="spip" >
+					<tr>
+						<td>
+						<?php 
+						echo  _T('dida:consigneimport')." : (Zip &lt; ".ini_get("upload_max_filesize").")";
+						?>&nbsp;&nbsp;&nbsp;&nbsp;
+						<INPUT type=file name="fichiercours" size="40">
+						</td>
+					</tr>
+					<tr>
+						<td align="center" border="0"><?php 
+						echo _T('dida:nom').'&nbsp;&nbsp;';
+						if (_request('act')=="modifcours" or _request('act')=="modifcourssuite") echo ': '._request('nom'); 
+						else {
+							echo '<input type="text" name="nom" size="12" maxlength="12" />'; 
+						}
+						echo '&nbsp;&nbsp;&nbsp;&nbsp;';
+						echo _T('dida:explication')."<br />";
+	
+						//vérification de l'accès à la suppression des projets 
+						@$acces_suppression=$GLOBALS['meta']['accessuppr'];
+						if (!isset($acces_suppression)) $acces_suppression="oui";
+						?>
+						</td>
+					</tr>
+					<tr style="text-align:center;">
+						<td style="text-align:center;">
+						<input type="submit" value="Importer" name="import_projet_didapages">
+						<input type="hidden" value="ok" name="testimport">
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<?php
+						echo _T('dida:recommandation');
+						?>
+						</td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+	</table>
+	</form>
+	</div>
+	<?php
+}	
+else {
+?>
+	<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	<h3 class='titrem'>Import d'un projet Didapages : phase d'import du projet échouée !</h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method='post' action='#ENV{action}' name ="listedida">
+	[(#REM) declarer les hidden qui declencheront le service du formulaire
+	parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<h4 style='text-align:center;'>
+	<?php
+	echo $erreurmsg;
+	?>
+	</h4>
+	<p style="text-align:center;">
+	<input type="submit" value="Retour au module d'import" name="retour_vers_import">
+	</p>
+	</form>
+	</div>
+	<?php
+}
+?>
+
+
+<?php
+}
+else {
+?>
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<h3 class='titrem'>Import d'un projet Didapages</h3>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method='post' action='#ENV{action}' name ="listedida">
+	[(#REM) declarer les hidden qui declencheront le service du formulaire
+	parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+	<table class="spip">
+		<tr>
+			<td><div align="center"><b>
+			<?php 
+			if (_request('act')=="modifcours" or _request('act')=="modifcourssuite") echo _T('dida:courstitremodif'); 
+			else echo _T('dida:courstitreimport'); 
+			?>
+			</b></div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<?php
+			//affichage d'un eventuel message d'erreur
+			if ($erreurmsg!=false){
+			echo '<table align="center" cellspacing=0><tr><td>'.$erreurmsg.'</td></tr></table>';
+			}
+			?>
+			<table class="spip" >
+				<tr>
+					<td>
+					<?php 
+					echo  _T('dida:consigneimport')." : (Zip &lt; ".ini_get("upload_max_filesize").")";
+					?>&nbsp;&nbsp;&nbsp;&nbsp;
+					<INPUT type=file name="fichiercours" size="40">
+					</td>
+				</tr>
+				<tr>
+					<td align="center" border="0"><?php 
+					echo _T('dida:nom').'&nbsp;&nbsp;';
+					if (_request('act')=="modifcours" or _request('act')=="modifcourssuite") echo ': '._request('nom'); 
+					else {
+						echo '<input type="text" name="nom" size="12" maxlength="12"';
+						if (_request("nom")) echo ' value="'._request('nom').'"';
+						echo '>'; 
+					}
+					echo '&nbsp;&nbsp;&nbsp;&nbsp;';
+					echo _T('dida:explication')."<br />";
+
+					//vérification de l'accès à la suppression des projets 
+					@$acces_suppression=$GLOBALS['meta']['accessuppr'];
+					if (!isset($acces_suppression)) $acces_suppression="oui";
+					?>
+					</td>
+				</tr>
+				<tr style="text-align:center;">
+					<td style="text-align:center;">
+					<input type="submit" value="Importer" name="import_projet_didapages">
+					<input type="hidden" value="ok" name="testimport">
+					</td>
+				</tr>
+				<tr>
+					<td>
+					<?php
+					echo _T('dida:recommandation');
+					?>
+					</td>
+				</tr>
+			</table>
+			</td>
+		</tr>
+</table>
+</form>
+</div>
+<?php
+}
+?>
+
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<h3 class='titrem'><:dida:courstitreliste:></h3>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method='post' action='#ENV{action}' name ="listedida">
+	[(#REM) declarer les hidden qui declencheront le service du formulaire
+	parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+<table class="spip" style="text-align:center;">
+<?php
+//liste des cours
+$listecours=array();
+recuplistecours($listecours);
+
+if (count($listecours)==0){
+	//message aucun cours
+	echo '<tr><td style="text-align:center;font-weight:bolder;">'._T('dida:aucuncours').'</td></tr>';
+} else {
+?>
+	<tr>
+		<td style="text-align:center;font-weight:bolder;">
+		<:dida:taille:>
+		</td>
+		<td style="text-align:center;font-weight:bolder;">
+		<:dida:nom:>
+		</td>
+		<td style="text-align:center;font-weight:bolder;">
+		<:dida:code:>
+		</td>
+		<td style="text-align:center;font-weight:bolder;">
+		<:dida:voir:>
+		</td>
+		<td style="text-align:center;font-weight:bolder;">
+		<?php if ($GLOBALS['meta']['accessuppr']=="non") echo "suppression non autoris&eacute;e"; else echo _T('dida:supprimer');?>
+		</td>
+	</tr>
+<?php
+	//lister les cours
+	for ($i=0;$i<count($listecours);$i++){
+		if ($i%2==1) echo '<tr>';
+		else echo '<tr>';
+		echo '<td><div align="center">'.$listecours[$i][3].' '._T('dida:ko').'</div></td>';
+		echo '<td><div align="center">'.$listecours[$i][0].'</div></td>';
+    	echo '<td><div align="center">didapages<b></b>@'.$listecours[$i][1].'<b></b>@</div></td>';
+    	echo '<td><div align="center"><a href="'._DIR_IMG.'didapages/'.$listecours[$i][0].'/index.html" target="_blank">';
+		echo ' <img src="'._DIR_PLUGIN_DIDA.'img_pack/voirlivre.gif".></a></div></td>';
+		if ($GLOBALS['meta']['accessuppr']=="non") echo "<td> &nbsp;</td></tr>";
+		else echo '<td><div align="center"><a href="./?exec=dida_configurer&suppr_cours='.$listecours[$i][0].'"><img src="'._DIR_PLUGIN_DIDA.'img_pack/annuler.gif".></a></div></td></tr>';
+	}
+}
+?>
+</table>
+</form>
+</div>

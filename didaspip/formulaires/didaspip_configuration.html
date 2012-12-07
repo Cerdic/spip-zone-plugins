@@ -1,0 +1,54 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<h3 class='titrem'><:dida:configurer:></h3>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method='post' action='#ENV{action}' name ="formdida">
+	[(#REM) declarer les hidden qui declencheront le service du formulaire
+	parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+	
+	<h4>URL du site</h4>
+	<p>Racine du site spip &agrave; utiliser : 
+	<input type="text" name="url" size="40"value="[(#ENV{didaspip_url}|?{#ENV{didaspip_url},#URL_SITE_SPIP})]">
+	</p>
+	<hr />
+	
+	<h4>Param&egrave;tres d'affichage</h4>
+	<p>Mode d'affichage :<br />
+	<select name="box">
+		<option value="Blank" [(#ENV{didaspip_box}|=={"Blank"}|?{selected="selected",''})]>Nouvelle page</option>
+		<option value="Iframe" [(#ENV{didaspip_box}|=={"Iframe"}|?{selected="selected",''})]>Iframe</option>
+	</select>
+	</p>
+	<hr />
+
+	<h4>Taille de la fen&ecirc;tre d'affichage</h4>
+	<p>Largeur : <input type="text" name="width" size="4" value="#ENV{didawidth}"> pixels<br />
+	Hauteur : <input type="text" name="height" size="4" value="#ENV{didaheight}"> pixels
+	</p>
+	<hr />
+
+	<h4>Acc&egrave;s &agrave; la fen&ecirc;tre de gestion Didapages</h4>
+	<p>Les r&eacute;dacteurs peuvent-ils avoir acc&egrave;s &agrave; la page de gestion des projets Didapage ?
+	<select name="acces">
+		<option value="oui" [(#ENV{accesdida}|=={"oui"}|?{selected="selected",''})]>Oui</option>
+		<option value="non" [(#ENV{accesdida}|=={"non"}|?{selected="selected",''})]>Non</option>
+	</select>
+	</p>
+	<hr />
+
+	<h4>Suppression des projets Didapages</h4>
+	<p>Les r&eacute;dacteurs peuvent supprimer les projets en ligne ?
+	<select name="suppr">
+		<option value="oui" [(#ENV{accessuppr}|=={"oui"}|?{selected="selected",''})]>Oui</option>
+		<option value="non" [(#ENV{accessuppr}|=={"non"}|?{selected="selected",''})]>Non</option>
+	</select>
+	</p>
+	
+	<p>
+	<input type="submit" name="dida_ok" value="Valider" />
+	<input type="submit" name="dida_reinit" value="R&eacute;initialiser" />
+	</p>
+</form>
+</div>
