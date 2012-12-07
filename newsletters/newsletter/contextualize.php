@@ -31,16 +31,19 @@ function newsletter_contextualize_dist($content,$context){
 
 	// remplacer les @@truc@@ par [(#ENV{truc,''})]
 	$content = preg_replace(",@@([\w\d]+)@@,Uims","[(#ENV{\\1,''})]",$content);
+	$content = "#CACHE{0}\n".$content; // pas de cache, on ne va calculer qu'une fois pour chaque contexte !
+
+	$md5 = md5($content);
+
 	// ecrire le squelette dans un fichier temporaire
 	$dir = sous_repertoire(_DIR_CACHE,"newsletters");
-	$tmp = tempnam($dir,'context');
-	$tmp = $dir . basename($tmp);
+	$tmp = $dir."cont".$md5; // un meme contenu = un meme nom = un meme skel compile (evite la recompilation a chaque appel)
 
-	if (file_put_contents($f=$tmp.".html",$content)){
+	if (file_exists($f=$tmp.".html") OR file_put_contents($f,$content)){
 		if (_DIR_RACINE AND strncmp($tmp,_DIR_RACINE,strlen(_DIR_RACINE))==0)
 			$tmp = substr($tmp,strlen(_DIR_RACINE));
 		$content = recuperer_fond($tmp,$context);
-		@unlink($f);
+		#@unlink($f); // on le garde pour l'envoi suivant, mais il faudrait purger a un moment !
 	}
 
 	return $content;
