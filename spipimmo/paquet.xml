@@ -21,4 +21,8 @@
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/spipimmo.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/spipimmo.php" />
+
+	<pipeline nom="header_prive" inclure="spipimmo_pipelines.php" />
+
+	<menu nom="spipimmo" titre="spipimmo:spipimmo" parent="menu_edition" icone="images/spipimmo-24.png" />
 </paquet>
