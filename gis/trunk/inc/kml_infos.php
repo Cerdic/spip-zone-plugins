@@ -126,13 +126,58 @@ function inc_kml_infos($id_document){
 				}
 			}
 		}
-		if(isset($infos['titre']))
-			$infos['titre'] = preg_replace('/<!\[cdata\[(.*?)\]\]>/is', '$1',$infos['titre']);
-		if(isset($infos['descriptif']))
-			$infos['descriptif'] = preg_replace('/<!\[cdata\[(.*?)\]\]>/is', '$1', $infos['descriptif']);
+	}else if(in_array($extension,array('gpx'))){
+		$supprimer_chemin = false;
+		include_spip('inc/xml');
+		$ret = lire_fichier($chemin,$donnees);
+		$arbre = spip_xml_parse($donnees);
+		spip_xml_match_nodes(",^metadata,",$arbre, $metadatas);
+		foreach($metadatas as $metadata => $info){
+			$infos['titre'] = $info[0]['name'][0];
+			//$infos['date'] =  $info[0]['time'][0];
+			$infos['descriptif'] = $info[0]['description'][0];
+			foreach($info[0] as $meta => $data){
+				if(preg_match(',^bounds ,',$meta)){
+					$meta = '<'.$meta.'>';
+					$maxlat = extraire_attribut($meta,'maxlat');
+					$minlat = extraire_attribut($meta,'minlat');
+					$maxlon = extraire_attribut($meta,'maxlon');
+					$minlon = extraire_attribut($meta,'minlon');
+					if($maxlat && $minlat)
+						$infos['latitude'] = (($maxlat+$minlat)/2);
+					if($maxlon && $minlon)
+						$infos['longitude'] = (($maxlon+$minlon)/2);
+				}
+			}
+		}
+		/**
+		 * Si on n'a pas de longitude ou de latitude, 
+		 * on essaie de faire une moyenne des placemarks
+		 */
+		if(!$infos['longitude'] OR !$infos['latitude']){
+			spip_xml_match_nodes(",^trkpt,",$arbre, $trackpoints);
+			$latitude = 0;
+			$longitude = 0;
+			$compte = 0;
+			foreach($trackpoints as $places => $place){
+				foreach($place as $placemark => $lieu){
+					if($compte > 10)
+							break;
+				}
+			}
+			if(($latitude != 0) && ($longitude != 0)){
+				$infos['latitude'] = $latitude / $compte;
+				$infos['longitude'] = $longitude / $compte; 
+			}
+		}
 	}else
 		return false;
 	
+	if(isset($infos['titre']))
+		$infos['titre'] = preg_replace('/<!\[cdata\[(.*?)\]\]>/is', '$1',$infos['titre']);
+	if(isset($infos['descriptif']))
+		$infos['descriptif'] = preg_replace('/<!\[cdata\[(.*?)\]\]>/is', '$1', $infos['descriptif']);
+		
 	if($supprimer_chemin){
 		supprimer_fichier($chemin);
 	}

@@ -232,7 +232,7 @@ function gis_post_edition($flux){
 					spip_log("GIS EXIFS : Création des coordonnées depuis EXIFS pour le document $id_document => id_gis = $id_gis","gis");
 				}
 			}
-		}elseif(in_array($document['extension'],array('kml','kmz'))){
+		}elseif(in_array($document['extension'],array('kml','kmz','gpx'))){
 			$recuperer_info = charger_fonction('kml_infos','inc');
 			$infos = $recuperer_info($document['id_document']);
 			if($infos){
