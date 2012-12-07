@@ -11,8 +11,8 @@
 				<td style="width:250px; text-align:right;">Type d'offre : </td>
 				<td><select name="type" id="type">
 					<option value="" selected="selected"></option>	
-						<BOUCLE_typeOffre(TYPES_OFFRES)>
-							<BOUCLE_typeOffreAnnonce(ANNONCES){type_offre=#LIBELLE_OFFRE}{0,1}>
+						<BOUCLE_typeOffre(SPIPIMMO_TYPES_OFFRES)>
+							<BOUCLE_typeOffreAnnonce(SPIPIMMO_ANNONCES){type_offre=#LIBELLE_OFFRE}{0,1}>
 								<option value="#TYPE_OFFRE">#LIBELLE_OFFRE</option>							
 							</BOUCLE_typeOffreAnnonce>
 						</BOUCLE_typeOffre>

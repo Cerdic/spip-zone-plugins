@@ -4,6 +4,10 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	//C
+	'creer_annonce' => 'Créer une annonce',
+	//L
+	'liste_annonces' => 'Liste des annonces',
 	//S
 	'spipimmo' => 'SPIP-Immo',
 

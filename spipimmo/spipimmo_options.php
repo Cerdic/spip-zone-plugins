@@ -10,12 +10,6 @@
 *
 **/
 
-	//Plugin
-	define("_SPIPIMMO_TITRE", "Spip-Immo");
-
-	//Version du plugin
-	define("_SPIPIMMO_VERSION", "3.2.0");
-
 	//Le nombre de pièces
 	define("_SPIPIMMO_NBPIECE_PIECE", "40");
 	define("_SPIPIMMO_NBPIECE_CHAMBRE", "30");
