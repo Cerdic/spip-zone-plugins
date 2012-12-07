@@ -1,0 +1,115 @@
+<div class='formulaire_spip formulaire_spipimmo formulaire_editer formulaire_#FORM'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<form method='post' action='#ENV{action}'><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<input type='hidden' name='id_annonce' value='#ENV{id_annonce}' />
+		<ul>
+			[(#SAISIE{selection, vente_location, 
+					label=<:spipimmo:vente_location:>, 
+					datas=#ARRAY{
+							vente, <:spipimmo:vente:>,
+							location, <:spipimmo:location:>
+							}
+					}
+			)]
+			[(#SAISIE{input, numero_mandat, label=<:spipimmo:numero_mandat:>})]
+			[(#SAISIE{selection, type_mandat, 
+					label=<:spipimmo:type_mandat:>, 
+					datas=#ARRAY{
+							simple, <:spipimmo:vente:>,
+							semi_privilege, <:spipimmo:semi_privilege:>,
+							privilege, <:spipimmo:privilege:>,
+							exclusif, <:spipimmo:exlusif:>
+							}
+					}
+			)]
+			[(#SAISIE{input, negociateur, label=<:spipimmo:negociateur:>})]
+			[(#SAISIE{input, honoraires, label=<:spipimmo:honoraires:>})]
+			[(#SAISIE{oui_non, publier, label=<:spipimmo:publier:>})]
+			<li class="editer editer_type_offre saisie_selection">
+			<label for="champ_type_offre"><:spipimmo:type_offre:></label>
+				<BOUCLE_type_offre(SPIPIMMO_TYPES_OFFRES) {par id_type_offre}>
+					<li class="choix">#LIBELLE_OFFRE</li>
+				</BOUCLE_type_offre>
+				pas de type encore
+				<//B_type_offre>
+			</li>
+			[(#SAISIE{input, adresse_1, label=<:spipimmo:adresse:> 1})]
+			[(#SAISIE{input, adresse_2, label=<:spipimmo:adresse:> 2})]
+			[(#SAISIE{input, code_postal, label=<:spipimmo:code_postal:>})]
+			[(#SAISIE{input, code_postal_internet, label=<:spipimmo:code_postal_internet:>})]
+			[(#SAISIE{input, ville, label=<:spipimmo:ville:>})]
+			[(#SAISIE{input, ville_internet, label=<:spipimmo:ville_internet:>})]
+			[(#SAISIE{input, prix_loyer, label=<:spipimmo:prix_loyer:>})]
+			[(#SAISIE{input, taxe_habitation, label=<:spipimmo:taxe_habitation:>})]
+			[(#SAISIE{input, taxe_fonciere, label=<:spipimmo:taxe_fonciere:>})]
+			[(#SAISIE{input, travaux, label=<:spipimmo:travaux:>})]
+			[(#SAISIE{input, charge, label=<:spipimmo:charge:>})]
+			[(#SAISIE{selection, dpe,
+					label=<:spipimmo:dpe:>,
+					datas=#ARRAY{
+							a, A,
+							b, B 51 à 90,
+							c, C 91 &agrave; 150,
+							d, D 151 &agrave; 230,
+							e, E 231 &agrave; 330,
+							f, F 331 &agrave; 450,
+							g, G >450,
+							n.c, N.C Non communiqu&eacute;
+							}
+					}
+			)]
+			[(#SAISIE{input, depot_garantie, label=<:spipimmo:depot_garantie:>})]
+			[(#SAISIE{date, date_modif, label=<:spipimmo:date_modif:>})]
+			[(#SAISIE{date, date_dispo, label=<:spipimmo:date_dispo:>})]
+			[(#SAISIE{input, quartier, label=<:spipimmo:quartier:>})]
+			[(#SAISIE{input, secteur, label=<:spipimmo:secteur:>})]
+			[(#SAISIE{input, residence, label=<:spipimmo:residence:>})]
+			[(#SAISIE{input, transport, label=<:spipimmo:transport:>})]
+			[(#SAISIE{input, proximite, label=<:spipimmo:proximite:>})]
+			[(#SAISIE{input, annee_construction, label=<:spipimmo:annee_construction:>})]
+			[(#SAISIE{oui_non, prestige, label=<:spipimmo:prestige:>})]
+			[(#SAISIE{selection, dpe, 
+					label=<:spipimmo:dpe:>, 
+					datas=#ARRAY{
+							maison, <:spipimmo:maison:>,
+							appartement, <:spipimmo:appartement:>,
+							studio, <:spipimmo:studio:>
+							}
+					}
+			)]
+			[(#SAISIE{input, nombre_piece, label=<:spipimmo:nbr_piece:>})]
+			[(#SAISIE{input, nombre_chambre, label=<:spipimmo:nbr_chambre:>})]
+			[(#SAISIE{input, surface_habitable, label=<:spipimmo:surface_habitable:>})]
+			[(#SAISIE{input, surface_total, label=<:spipimmo:surface_total:>})]
+			[(#SAISIE{input, surface_sejour, label=<:spipimmo:surface_sejour:>})]
+			[(#SAISIE{input, surface_terrain, label=<:spipimmo:surface_terrain:>})]
+			[(#SAISIE{input, etage, label=<:spipimmo:etage:>})]
+			[(#SAISIE{input, etage_code, label=<:spipimmo:etage_code:>})]
+			[(#SAISIE{input, nombre_etage, label=<:spipimmo:nombre_etage:>})]
+			[(#SAISIE{input, type_cuisine, label=<:spipimmo:type_cuisine:>})]
+			[(#SAISIE{input, nombre_wc, label=<:spipimmo:nbr_wc:>})]
+			[(#SAISIE{input, nombre_bain, label=<:spipimmo:nbr_sdb:>})]
+			[(#SAISIE{input, nombre_eau, label=<:spipimmo:nbr_sde:>})]
+			[(#SAISIE{input, nombre_parcking_interieur, label=<:spipimmo:nbr_parck_int:>})]
+			[(#SAISIE{input, nombre_parcking_exterieur, label=<:spipimmo:nbr_parck_ext:>})]
+			[(#SAISIE{input, nombre_garage, label=<:spipimmo:nbr_garage:>})]
+			[(#SAISIE{input, type_sous_sol, label=<:spipimmo:type_sous_sol:>})]
+			[(#SAISIE{input, nombre_cave, label=<:spipimmo:nbr_cave:>})]
+			[(#SAISIE{input, type_chauffage, label=<:spipimmo:type_chauffage:>})]
+			[(#SAISIE{input, nature_chauffage, label=<:spipimmo:nature_chauffage:>})]
+			[(#SAISIE{oui_non, ascenseur, label=<:spipimmo:ascenseur:>})]
+			[(#SAISIE{input, nombre_balcon, label=<:spipimmo:nbr_balcon:>})]
+			[(#SAISIE{input, nombre_terrasse, label=<:spipimmo:nbr_terrase:>})]
+			[(#SAISIE{oui_non, piscine, label=<:spipimmo:piscine:>})]
+			[(#SAISIE{oui_non, acces_handicape, label=<:spipimmo:acces_handicape:>})]
+			[(#SAISIE{input, nombre_mur, label=<:spipimmo:nbr_mur_mitoyen:>})]
+			[(#SAISIE{input, surface_facade, label=<:spipimmo:surface_facade:>})]
+			[(#SAISIE{textarea, annonce, label=<:spipimmo:annonce:>, rows=10, cols=58})]
+		</ul>
+	<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>

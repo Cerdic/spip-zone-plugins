@@ -10,20 +10,6 @@
 *
 **/
 
-	//Le nombre de pièces
-	define("_SPIPIMMO_NBPIECE_PIECE", "40");
-	define("_SPIPIMMO_NBPIECE_CHAMBRE", "30");
-	define("_SPIPIMMO_NBPIECE_WC", "10");
-	define("_SPIPIMMO_NBPIECE_GARAGE", "10");
-	define("_SPIPIMMO_NBPIECE_SALLE_EAU", "20");
-	define("_SPIPIMMO_NBPIECE_SALLE_BAIN", "20");
-	define("_SPIPIMMO_NBPIECE_PARK_INT", "10");
-	define("_SPIPIMMO_NBPIECE_PARK_EXT", "10");
-	define("_SPIPIMMO_NBPIECE_CAVE", "10");
-	define("_SPIPIMMO_NBPIECE_TERRASSE", "10");
-	define("_SPIPIMMO_NBPIECE_BALCON", "10");
-	define("_SPIPIMMO_NBPIECE_MUR_MITOYEN", "3");
-
 	//Repertoire IMG PACK
 	define("_DIR_PLUGIN_SPIPIMMO_IMG_PACK", _DIR_PLUGIN_SPIPIMMO."img_pack/");
 
