@@ -2669,7 +2669,7 @@ function association_trouver_iextras($ObjetEtendu, $id=0) {
 			return array(); // fin : ChampsExtras2 non installe ou pas d'objet etendu.
 		$TT = function_exists('_T_ou_typo') ? '_T_ou_typo' : '_T' ; // Noter que les <multi>...</multi> et <:xx:> sont aussi traites par propre() et typo() :  http://contrib.spip.net/PointsEntreeIncTexte
 		foreach ($ChampsExtrasGeres as $ChampExtra) { // Chaque champ extra defini est un tableau avec les cle=>type suivants (les cles commencant par "_" initialisent des methodes de meme nom sans le prefixe) : "table"=>string, "champ"=>string, "label"=>string, "precisions"=>string, "obligatoire"=>string, "verifier"=>bool, "verifier_options"=>array, "rechercher"=>string, "enum"=>string, "type"=>string, "sql"=>string, "traitements"=>string, "_id"=>string, "_type"=>string, "_objet"=>string, "_table_sql"=>string, "saisie_externe"=>bool, "saisie_parametres"]=>array("explication"=>string, "attention"=>string, "class"=> string, "li_class"]=>string,)
-			if ($ChampExtra['table']==$ObjetEtendu) // c'est un champ extra de la 'table' ou du '_type' d'objet qui nous interesse
+			if ($ChampExtra['table']==$ObjetEtendu) {// c'est un champ extra de la 'table' ou du '_type' d'objet qui nous interesse
 				$label = $TT($ChampExtra['label']);
 				if ( $id ) {
 					$datum_raw = sql_getfetsel($ChampExtra['champ'], $ChampExtra['_table_sql'], id_table_objet($ChampExtra['_type']).'='.intval($id) ); // on recupere les donnees...
@@ -2762,6 +2762,7 @@ function association_trouver_iextras($ObjetEtendu, $id=0) {
 				} else {
 					$champsExtrasVoulus[$ChampExtra['champ']] = $label;
 				}
+			}
 		}
 	}
 	return $champsExtrasVoulus;
