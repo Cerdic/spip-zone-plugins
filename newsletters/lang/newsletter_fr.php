@@ -9,8 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'ajouter_lien_newsletter' => 'Ajouter cette infolettre',
 
-	// B
-	'bouton_tester_envoi' => 'Tester !',
 
 	// E
 	'explication_html_page_vide' => 'Permet d\'afficher dans le navigateur une version différente de celle envoyée par email (pour des raisons techniques ou éditoriales). Laissez le vide si vous voulez afficher la même version dans l\'email et dans le navigateur.',
@@ -35,11 +33,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_preview_version_html_page' => 'Version HTML en ligne',
 	'info_preview_version_html_page_noiframe' => '(afficher sans iframe)',
 
-	'info_tester_newsletter' => 'Tester avec un envoi par courriel',
-
 	// L
 	'label_chapo' => 'Chapeau',
-	'label_email_test' => 'Adresse email',
 	'label_date_redac' => 'Date de rédaction',
 	'label_texte' => 'Texte',
 	'label_titre' => 'Titre',
