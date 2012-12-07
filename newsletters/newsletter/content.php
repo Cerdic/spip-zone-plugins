@@ -7,7 +7,15 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-
+/**
+ * Renvoyer le contenu d'une newsletter par son id
+ *
+ * @param int|string $id
+ * @return array|bool
+ *   string sujet
+ *   string html
+ *   string texte
+ */
 function newsletter_content_dist($id){
 	// recuperer les messages
 	$corps = sql_fetsel('titre as sujet,html_email as html,texte_email as texte','spip_newsletters','id_newsletter='.intval($id));
