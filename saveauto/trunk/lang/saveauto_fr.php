@@ -108,6 +108,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_sauvegarde_nok' => 'Erreur lors de la sauvegarde SQL de la base.',
 	'message_sauvegarde_ok' => 'La sauvegarde SQL de la base a été faite avec succès.',
 	'message_pas_envoi' => 'Les sauvegardes ne seront pas envoyées !',
+	'message_cleaner_sujet' => 'Nettoyage des sauvegardes',
+	'message_notif_cleaner_intro' => 'La suppression automatique des sauvegardes obsolètes (dont la date est antérieure à @duree@ jours) a été effectuée avec succès. Les fichiers suivants ont été supprimés : ',
 
 	// S
 	'saveauto_titre' => 'Sauvegarde SQL',
