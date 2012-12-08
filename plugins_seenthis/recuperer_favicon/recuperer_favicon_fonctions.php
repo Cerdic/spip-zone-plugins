@@ -13,16 +13,14 @@ function recuperer_favicon($url) {
 	$racine = str_replace(".", "-", $racine) . "-";
 
 	$destination = sous_repertoire(_DIR_VAR, 'cache-favicon') .$racine.md5($url).".png";
-	if (!file_exists($destination)){		
-		$copie = copie_locale("http://www.google.com/s2/favicons?domain=$url");
+	if (!file_exists($destination)
+	AND $copie = copie_locale("http://www.google.com/s2/favicons?domain=$url")
+	) {
 		copy($copie, $destination);
 	}
 	
 	$destination = inserer_attribut($destination, "alt", "favicon $url");
-	return $destination;		
-		
-	
+	return $destination;
 }
-
 
 ?>
