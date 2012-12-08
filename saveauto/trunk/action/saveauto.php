@@ -8,7 +8,7 @@ function action_saveauto_dist(){
 	/**
 	 * Erreur si l'on n'est pas autorisé à sauvegarder
 	 */
-	if(!autoriser('sauvegarder','saveauto')) {
+	if(!autoriser('sauvegarder')) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;

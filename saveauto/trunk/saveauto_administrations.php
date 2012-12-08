@@ -5,38 +5,52 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Fonction d'installation du plugin
  */
-function saveauto_upgrade($nom_meta_base_version,$version_cible){
-	$current_version = 0.0;
+function saveauto_upgrade($nom_meta_base_version,$version_cible) {
+	$maj = array();
 
-	/**
-	 * Installation de base
-	 */
-	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
-			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-		/**
-		 * On insere une configuration de base pour que le plugin
-		 * soit actif des son activation
-		 */
-		if(!is_array(unserialize($GLOBALS['meta']['saveauto']))){
-			$config = array(
-				'gz' => 'false',
-				'structure' => 'true',
-				'donnees' => 'true',
-				'ecrire_succes' => 'true',
-				'base' => $GLOBALS['connexions'][0]['db'],
-				'jours_obso' => 15,
-				'rep_bases' => 'tmp/',
-				'prefixe_save' => 'saveauto_',
-				'frequence_maj' => 1,
-				'destinataire_save' => $GLOBALS['meta']['email_webmaster'],
-				'eviter' => '_index;_temp;_cache',
-				'mail_max_size' => 2
-			);
-			ecrire_meta('saveauto',serialize($config));
-		}
-		ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
-	}
+	// Déclaration des valeurs par défaut de chaque variable de config
+	$defaut = saveauto_declarer_config();
+
+	// On considère que la configuration existante n'est plus utile étant donnés les changements
+	// donc on se contente de la supprimer tout simplement (permet d'éviter un souci si le plugin
+	// n'a pas été désinstallé comme précisé dans la documentation)
+	$maj['create'] = array(
+		array('effacer_meta', 'saveauto'),
+		array('effacer_meta', 'saveauto_creation'),
+		array('ecrire_config','saveauto', $defaut),
+	);
+
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
+
+function saveauto_declarer_config() {
+	include_spip('base/dump');
+
+	// On determine la liste des tables exportées par défaut.
+	$exclude = lister_tables_noexport();
+	$tables = base_lister_toutes_tables('', array(), $exclude);
+
+	$config =array(
+		'prefixe_save'			=> 'sav',
+		'max_zip'				=> 75,
+		'sauvegarde_reguliere'	=> 'non',
+		'frequence_maj'			=> 1,
+		'structure'				=> 'true',
+		'donnees'				=> 'true',
+		'ecrire_succes'			=> 'true',
+		'nettoyage_journalier'	=> 'oui',
+		'jours_obso'			=> 15,
+		'notif_active'			=> 'non',
+		'notif_mail'			=> '',
+		'mail_max_size'			=> 2,
+		'tout_saveauto'			=> 'oui',
+		'tables_saveauto'		=> $tables,
+	);
+
+	return $config;
+}
+
 
 /**
  * Fonction de désinstallation
@@ -47,7 +61,6 @@ function saveauto_upgrade($nom_meta_base_version,$version_cible){
  */
 function saveauto_vider_tables($nom_meta_base_version) {
 	effacer_meta('saveauto');
-	effacer_meta('saveauto_creation');
 	effacer_meta($nom_meta_base_version);
 }
 ?>

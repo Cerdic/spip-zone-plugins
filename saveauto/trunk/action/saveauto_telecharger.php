@@ -7,24 +7,23 @@ function action_saveauto_telecharger() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	if (!@is_readable($arg)) {
-		$redirect = urldecode(_request('redirect'));
-		if($redirect){
-			$redirect = parametre_url($redirect,'etat','nok_tele');
-		}else{
-			return false;
-		}
+		redirige_par_entete(generer_url_ecrire('sauvegarder', 'etat=nok_tele', true));
 	}
 
 	// Autorisation
-	if(!autoriser('sauvegarder','mes_fichiers')) {
+	if(!autoriser('sauvegarder')) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}
 
+	// Determination du mime-type
+	$extension = pathinfo($arg, PATHINFO_EXTENSION);
+	$mime_type = ($extension == 'zip') ? 'application/zip' : 'text/plain';
+
 	// Telechargement du fichier
 	header("Content-type: application/force-download;");
-	header("Content-Transfer-Encoding: application/zip");
+	header("Content-Transfer-Encoding: ${mime_type}");
 	header("Content-Length: ".filesize($arg));
 	header("Content-Disposition: attachment; filename=\"".basename($arg)."\"");
 	header("Pragma: no-cache");
@@ -32,11 +31,7 @@ function action_saveauto_telecharger() {
 	header("Expires: 0");
 	readfile($arg);
 
-	if($redirect = _request('redirect')){
-		$redirect = parametre_url(urldecode($redirect),'etat','ok_tele','&');
-		include_spip('inc/headers');
-		redirige_par_entete($redirect);
-	}
+	redirige_par_entete(generer_url_ecrire('sauvegarder', 'etat=ok_tele', true));
 	return;
 }
 ?>

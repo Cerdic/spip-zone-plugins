@@ -1,10 +1,10 @@
 <paquet
 	prefix="saveauto"
 	categorie="maintenance"
-	version="0.8.1"
-	etat="stable"
+	version="1.0.0"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="prive/themes/spip/img_pack/saveauto-24.png"
+	logo="prive/themes/spip/images/saveauto-24.png"
 	schema="0.1.0"
 	documentation="http://www.spip-contrib.net/Le-plugin-saveauto-sauvegarde"
 >	
@@ -18,11 +18,11 @@
 
 	<traduire module="saveauto" reference="fr" gestionnaire="salvatore" />
 
+	<pipeline nom="taches_generales_cron" inclure="genie/saveauto_cron.php" />
 	<pipeline nom="mes_fichiers_a_sauver" inclure="saveauto_pipelines.php" />
-	<pipeline nom="autoriser" inclure="saveauto_autoriser.php" />
-	<pipeline nom="taches_generales_cron" inclure="saveauto_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="saveauto_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="saveauto_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="saveauto_pipelines.php" />
 
-	<necessite nom="facteur" compatibilite="[1.5.6;[" />
-	<menu nom="configurer_saveauto" titre="saveauto:titre_page_saveauto" parent="menu_configuration" icone="img_pack/saveauto-16.png" />
-	
+	<menu nom="configurer_saveauto" titre="saveauto:titre_saveauto" parent="menu_configuration" icone="images/saveauto-16.png" />
 </paquet>

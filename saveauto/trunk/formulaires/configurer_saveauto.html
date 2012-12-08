@@ -1,119 +1,178 @@
-<div class="formulaire_spip formulaire_config formulaire_config_saveauto">
+<div class="formulaire_spip formulaire_config formulaire_config_#FORM">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-	<form method="post" action="#ENV{action}">
-		<div>
-			#ACTION_FORMULAIRE{#ENV{action}}
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:saveauto:legend_cfg_generale:></legend>
+			<p><:saveauto:help_cfg_generale:></p>
 			<ul>
-				<li class="editer_base">
-					<label for="base"><:saveauto:label_nom_base:></label>
-					<input type="text" name="base" class="text" id="base" value="[(#CONFIG{saveauto/base}|sinon{nom_base_SPIP})]" />
-				</li>
-				<li class="editer_rep_bases">
-					<label for="rep_bases"><:saveauto:label_repertoire_stockage:></label>
-					<p class="explication"><:saveauto:help_rep:></p>
-					<input type="text" name="rep_bases" class="text" id="rep_bases" value="[(#CONFIG{saveauto/rep_bases}|sinon{tmp/})]" />
-					[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV**{erreurs}|table_valeur{rep_bases})</p>]
-				</li>
-				<li class="editer_prefixe_save">
+				<li class="editer editer_prefixe_save obligatoire">
 					<label for="prefixe_save"><:saveauto:label_prefixe_sauvegardes:></label>
 					<p class="explication"><:saveauto:help_prefixe:></p>
-					<input type="text" name="prefixe_save" class="text" id="prefixe_save" value="[(#CONFIG{saveauto/prefixe_save,saveauto_})]" />
+					<input type="text" name="prefixe_save" class="text" id="prefixe_save" value="[(#ENV{prefixe_save, sav})]" />
 				</li>
-				<li class="editer_frequence_maj">
+				<li class="editer editer_max_zip obligatoire">
+					<p class="explication"><:saveauto:help_max_zip:></p>
+					<label for="max_zip"><:saveauto:label_max_zip:></label>
+					<input type="text" name="max_zip" class="text" id="max_zip" value="[(#ENV{max_zip, 75})]" />
+				</li>
+			</ul>
+		</fieldset>
+
+		<fieldset>
+			<legend><:saveauto:legend_cfg_sauvegarde_reguliere:></legend>
+			<ul>
+				<li class="editer editer_sauvegarde_reguliere">
+				<label><:saveauto:label_sauvegarde_reguliere:></label>
+					<div class="choix">
+						 <input type="radio" name="sauvegarde_reguliere" id="sauvegarde_reguliere_true" value="oui"[(#ENV{sauvegarde_reguliere, non}|=={oui}|oui)checked="checked"] />
+						 <label for="sauvegarde_reguliere_true"><:item_oui:></label>
+					</div>
+					<div class="choix">
+						 <input type="radio" name="sauvegarde_reguliere" id="sauvegarde_reguliere_false" value="non"[(#ENV{sauvegarde_reguliere, non}|=={oui}|non)checked="checked"] />
+						 <label for="sauvegarde_reguliere_false"><:item_non:></label>
+					</div>
+				</li>
+			</ul>
+			<ul id="sauve_plus">
+				<li class="editer editer_frequence_maj">
+					<p class="explication"><:saveauto:help_frequence:></p>
 					<label for="frequence_maj"><:saveauto:label_frequence:></label>
-					<input type="text" name="frequence_maj" class="text" id="frequence_maj" value="[(#CONFIG{saveauto/frequence_maj,1})]" style="width: 30px;" /> <:saveauto:valeur_jours:>
+					<input type="text" name="frequence_maj" class="text" id="frequence_maj" value="[(#ENV{frequence_maj, 1})]" />
 				</li>
-				<li class="editer_gz">
-					<label><:saveauto:label_compression_gz:></label>
-					<p class="explication"><:saveauto:help_gz:></p>
+				<li class="editer_structure">
+					<p class="explication"><:saveauto:help_contenu_auto:></p>
+					<label><:saveauto:label_structure:></label>
 					<div class="choix">
-						 <input type="radio" name="gz" id="gz_true" value="true"[(#CONFIG{saveauto/gz}|=={true}|oui)checked="checked"] />
-						 <label for="gz_true"><:item_oui:></label>
+						 <input type="radio" name="structure" id="structure_true" value="true"[(#ENV{structure, true}|=={true}|oui)checked="checked"] />
+						 <label for="structure_true"><:item_oui:></label>
 					</div>
 					<div class="choix">
-						 <input type="radio" name="gz" id="gz_false" value="false"[(#CONFIG{saveauto/gz}|=={false}|oui)checked="checked"] />
-						 <label for="gz_false"><:item_non:></label>
+						 <input type="radio" name="structure" id="structure_false" value="false"[(#ENV{structure, true}|=={false}|oui)checked="checked"] />
+						 <label for="structure_false"><:item_non:></label>
 					</div>
 				</li>
-				<li class="fieldset">
-					<fieldset>
-						<h3 class="legend"><:saveauto:legend_structure_donnees:></h3>
-						<ul>
-							<li class="editer_structure">
-								<label><:saveauto:label_structure:></label>
-								<div class="choix">
-									 <input type="radio" name="structure" id="structure_true" value="true"[(#CONFIG{saveauto/structure}|=={true}|oui)checked="checked"] />
-									 <label for="structure_true"><:item_oui:></label>
-								</div>
-								<div class="choix">
-									 <input type="radio" name="structure" id="structure_false" value="false"[(#CONFIG{saveauto/structure}|=={false}|oui)checked="checked"] />
-									 <label for="structure_false"><:item_non:></label>
-								</div>
-							</li>
-							<li class="editer_donnees">
-								<label><:saveauto:label_donnees:></label>
-								<div class="choix">
-									 <input type="radio" name="donnees" id="donnees_true" value="true" [(#CONFIG{saveauto/donnees}|=={true}|oui)checked="checked"] />
-									 <label for="donnees_true"><:item_oui:></label>
-								</div>
-								<div class="choix">
-									 <input type="radio" name="donnees" id="donnees_false" value="false"[(#CONFIG{saveauto/donnees}|=={false}|oui)checked="checked"] />
-									 <label for="donnees_false"><:item_non:></label>
-								</div>
-							</li>
-						</ul>
-					</fieldset>
+				<li class="editer_donnees">
+					<label><:saveauto:label_donnees:></label>
+					<div class="choix">
+						 <input type="radio" name="donnees" id="donnees_true" value="true" [(#ENV{donnees, true}|=={true}|oui)checked="checked"] />
+						 <label for="donnees_true"><:item_oui:></label>
+					</div>
+					<div class="choix">
+						 <input type="radio" name="donnees" id="donnees_false" value="false"[(#ENV{donnees, true}|=={false}|oui)checked="checked"] />
+						 <label for="donnees_false"><:item_non:></label>
+					</div>
 				</li>
-				<li class="editer_destinataire_save">
-					<label for="destinataire_save"><:saveauto:envoi_mail:><:saveauto:label_adresse:></label>
-					<p class="explication"><:saveauto:help_envoi:></p>
-					[(#EVAL{function_exists('mail');}|non)
-	                	<em class="attention"><strong><:saveauto:attention:></strong><:saveauto:erreur_config_inadaptee_mail:> <:saveauto:message_pas_envoi:></em>
-					]
-					<input type="text" name="destinataire_save" class="text" id="destinataire_save" value="[(#CONFIG{saveauto/destinataire_save})]" />
+				<INCLURE{fond=formulaires/inc-liste_tables,env}/>
+			</ul>
+			<fieldset><ul>
+				<li class="editer editer_nettoyage_journalier">
+				<label><:saveauto:label_nettoyage_journalier:></label>
+					<div class="choix">
+						 <input type="radio" name="nettoyage_journalier" id="nettoyage_journalier_true" value="oui"[(#ENV{nettoyage_journalier, oui}|=={oui}|oui)checked="checked"] />
+						 <label for="nettoyage_journalier_true"><:item_oui:></label>
+					</div>
+					<div class="choix">
+						 <input type="radio" name="nettoyage_journalier" id="nettoyage_journalier_false" value="non"[(#ENV{nettoyage_journalier, oui}|=={oui}|non)checked="checked"] />
+						 <label for="nettoyage_journalier_false"><:item_non:></label>
+					</div>
+				</li>
+			</ul>
+			<ul id="lave_plus">
+				<li class="editer_jours_obso">
+					<label for="jours_obso"><:saveauto:label_obsolete_jours:></label>
+					<p class="explication"><:saveauto:help_obsolete:></p>
+					<input type="text" name="jours_obso" class="text" id="jours_obso" value="[(#ENV{jours_obso, 15})]" />
+				</li>
+			</ul></fieldset>
+		</fieldset>
+
+		<fieldset>
+			<legend><:saveauto:legend_cfg_notification:></legend>
+			<ul>
+				<li class="editer editer_notif_active">
+					<label><:saveauto:label_notif_active:></label>
+					<div class="choix">
+						 <input type="radio" name="notif_active" id="notif_active_true" value="oui"[(#ENV{notif_active, non}|=={oui}|oui)checked="checked"] />
+						 <label for="notif_active_true"><:item_oui:></label>
+					</div>
+					<div class="choix">
+						 <input type="radio" name="notif_active" id="notif_active_false" value="non"[(#ENV{notif_active, non}|=={oui}|non)checked="checked"] />
+						 <label for="notif_active_false"><:item_non:></label>
+					</div>
+				</li>
+			</ul>
+			<ul id="notif_plus">
+				<li class="editer editer_notif_mail">
+					<p class="explication"><:saveauto:help_notif_mail:></p>
+					<label for="notif_mail"><:saveauto:label_notif_mail:></label>
+					<input type="text" name="notif_mail" class="text" id="notif_mail" value="[(#ENV{notif_mail})]" />
 				</li>
 				<li class="editer_mail_max_size">
 					<label for="mail_max_size"><:saveauto:label_mail_max_size:></label>
 					<p class="explication"><:saveauto:help_mail_max_size:></p>
-					<input type="text" name="mail_max_size" class="text" id="mail_max_size" value="[(#CONFIG{saveauto/mail_max_size}|sinon{2})]" size="2" style="width:30px" /> Mo
+					<input type="text" name="mail_max_size" class="text" id="mail_max_size" value="[(#ENV{mail_max_size, 2})]" size="2" />
 				</li>
-				<li class="editer_accepter">
-					<label for="accepter"><:saveauto:label_tables_acceptes:></label>
-					<p class="explication"><:saveauto:help_accepter:></p>
-					<input type="text" name="accepter" class="text" id="accepter" value="[(#CONFIG{saveauto/accepter})]" />
-				</li>
-				<li class="editer_eviter">
-					<label for="eviter"><:saveauto:label_donnees_ignorees:></label>
-					<p class="explication"><:saveauto:help_eviter:></p>
-					<input type="text" name="eviter" class="text" id="eviter" value="[(#CONFIG{saveauto/eviter,_index;_temp;_cache})]" />
-				</li>
+			</ul>
+
+			<ul>
 				<li class="editer_ecrire_succes">
 					<label><:saveauto:label_message_succes:></label>
 					<p class="explication"><:saveauto:help_msg:></p>
 					<div class="choix">
-						 <input type="radio" name="ecrire_succes" id="ecrire_succes_true" value="true" [(#CONFIG{saveauto/ecrire_succes}|=={true}|oui)checked="checked"] />
+						 <input type="radio" name="ecrire_succes" id="ecrire_succes_true" value="true" [(#ENV{ecrire_succes, true}|=={true}|oui)checked="checked"] />
 						 <label for="ecrire_succes_true"><:item_oui:></label>
 					</div>
 					<div class="choix">
-						 <input type="radio" name="ecrire_succes" id="ecrire_succes_false" value="false"[(#CONFIG{saveauto/ecrire_succes}|=={false}|oui)checked="checked"] />
+						 <input type="radio" name="ecrire_succes" id="ecrire_succes_false" value="false"[(#ENV{ecrire_succes, true}|=={false}|oui)checked="checked"] />
 						 <label for="ecrire_succes_false"><:item_non:></label>
 					</div>
 				</li>
-				<li class="editer_jours_obso">
-					<label for="jours_obso"><:saveauto:label_obsolete_jours:></label>
-					<p class="explication"><:saveauto:help_obsolete:></p>
-					<input type="text" name="jours_obso" class="text" id="jours_obso" value="[(#CONFIG{saveauto/jours_obso,15})]" style="width: 30px;" /><:saveauto:valeur_jours:>
-				</li>
-				<li>
-					<label><:saveauto:label_restauration:></label>
-					<:saveauto:help_restauration:>
-				</li>
 			</ul>
-			<p class="boutons">
-				<input type="submit" class="submit" value="<:bouton_valider:>" />
-			</p>
-		</div>
-	</form>
+		</fieldset>
+
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
 </div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{notif_active, non}|!={oui}|oui) jQuery("#notif_plus").hide();]
+		[(#ENV{sauvegarde_reguliere, non}|!={oui}|oui) jQuery("#sauve_plus").hide();]
+		[(#ENV{nettoyage_journalier, oui}|!={oui}|oui) jQuery("#lave_plus").hide();]
+
+		jQuery("input[name='notif_active']").change(function() {
+			if (jQuery("input[name='notif_active']:checked").val() == 'oui') {
+				jQuery("#notif_plus").show();
+			}
+			else {
+				jQuery("#notif_plus").hide();
+			}
+			jQuery(this).blur();
+		});
+		jQuery("input[name='sauvegarde_reguliere']").change(function() {
+			if (jQuery("input[name='sauvegarde_reguliere']:checked").val() == 'oui') {
+				jQuery("#sauve_plus").show();
+			}
+			else {
+				jQuery("#sauve_plus").hide();
+			}
+			jQuery(this).blur();
+		});
+		jQuery("input[name='nettoyage_journalier']").change(function() {
+			if (jQuery("input[name='nettoyage_journalier']:checked").val() == 'oui') {
+				jQuery("#lave_plus").show();
+			}
+			else {
+				jQuery("#lave_plus").hide();
+			}
+			jQuery(this).blur();
+		});
+	});
+//]]>
+</script>

@@ -54,14 +54,49 @@ function saveauto_mes_fichiers_a_sauver($flux){
  *
  * @param array $taches_generales
  */
-function saveauto_taches_generales_cron($taches_generales){
-	if ($cfg = @unserialize($GLOBALS['meta']['saveauto'])){
-		$taches_generales['saveauto'] = $cfg['frequence_maj']*24*3600;
-		//$taches_generales['saveauto'] = $cfg['frequence_maj']*60; #pour debug
-	}else{
-		$taches_generales['saveauto'] = 24*3600;
+function saveauto_affiche_milieu($flux) {
+
+	// on exclut le cas d'affichage de la page après le dump SQLite
+	if ((($type = $flux['args']['type-page'])=='sauvegarder')
+	AND (!$flux['args']['status'])) {
+		$contexte = array();
+		if (isset($flux['args']['etat']))
+			$contexte['etat'] = $flux['args']['etat'];
+		$flux['data'] .= recuperer_fond('prive/squelettes/contenu/sauvegarder_saveauto', $contexte);
 	}
-	return $taches_generales;
+
+	return $flux;
+}
+
+/**
+ * Surcharge de la fonction charger du formulaire de configuration :
+ * - permet de fournir au formulaire la liste de toutes les tables de la base et celles des tables exportees par defaut
+ *
+ * @param array $flux
+ * @return array
+ *
+**/
+function saveauto_formulaire_charger($flux){
+
+	$form = $flux['args']['form'];
+
+	if ($form == 'configurer_saveauto') {
+		include_spip('base/dump');
+
+		// Liste de toutes les tables de la base pour que le formulaire boucle dessus
+		$tables = base_lister_toutes_tables();
+		$flux['data']['_toutes_tables'] = $tables;
+
+		// Liste des tables exportables.
+		// On a besoin de cette liste si l'option tout_saveauto est à 'oui' : en effet, dans ce cas
+		// la liste en stockée en base de données n'est pas forcément bonne car on a pas la possibilité
+		// de forcer un mise à jour lors du traiter
+		// TODO : s'insérer plutôt dans le traiter du formulaire
+		$exclude = lister_tables_noexport();
+		$flux['data']['_tables_export'] = base_lister_toutes_tables('', array(), $exclude);
+	}
+
+	return $flux;
 }
 
 ?>

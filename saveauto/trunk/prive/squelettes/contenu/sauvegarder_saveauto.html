@@ -1,0 +1,26 @@
+[(#AUTORISER{sauvegarder}|sinon_interdire_acces)]
+<h1><:saveauto:titre_page_saveauto:></h1>
+
+[(#REM) <!-- Information sur la sauvegarde --> ]
+#SET{prefixe, #CONFIG{saveauto/prefixe_save, sav}}
+#SET{frequence, #CONFIG{saveauto/frequence, 1}}
+#BOITE_OUVRIR{'', info}
+<p><:saveauto:help_sauvegarde_1{prefixe=#GET{prefixe}}:></p>
+[(#CONFIG{saveauto/sauvegarde_reguliere, non}|=={oui}|oui)
+	<p><:saveauto:help_sauvegarde_2{frequence=#GET{frequence}}:></p>
+]
+<p><:saveauto:help_restauration:></p>
+#BOITE_FERMER
+
+[(#REM) <!-- Formulaire de sauvegarde manuelle en format SQL de la base --> ]
+<div class="noajax">
+	#FORMULAIRE_SAVEAUTO
+</div>
+
+[(#REM) <!-- Affichage de l'erreur eventuelle de telechargement --> ]
+[#BOITE_OUVRIR{'', error}
+	(#ENV{etat}|=={nok_tele}|oui)<:saveauto:message_telechargement_nok:>
+#BOITE_FERMER]
+
+[(#REM) <!-- Liste des sauvegardes SQL disponibles --> ]
+<INCLURE{fond=prive/squelettes/inclure/inc-liste_saveauto, env, ajax} />
