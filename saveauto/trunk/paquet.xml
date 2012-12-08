@@ -22,7 +22,6 @@
 	<pipeline nom="mes_fichiers_a_sauver" inclure="saveauto_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="saveauto_pipelines.php" />
 	<pipeline nom="formulaire_charger" inclure="saveauto_pipelines.php" />
-	<pipeline nom="formulaire_traiter" inclure="saveauto_pipelines.php" />
 
 	<menu nom="configurer_saveauto" titre="saveauto:titre_saveauto" parent="menu_configuration" icone="images/saveauto-16.png" />
 </paquet>

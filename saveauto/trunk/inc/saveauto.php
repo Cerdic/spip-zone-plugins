@@ -158,7 +158,8 @@ function inc_saveauto_dist($tables=array(), $options=array()) {
 			 * zipper si necessaire
 			 * si ok on efface le fichier sql + pour l'envoi par mail on utilise le zip
 			 */
-			if (!$erreur AND $gz){
+			if (!$erreur
+			AND (filesize($chemin_fichier) < $max_zip*1000*1000)) {
 				$fichier_zip = $chemin_fichier.'.zip';
 				$options = array('auteur' => $auteur, 'tables' => $tables);
 				if (!$erreur = creer_zip($chemin_fichier, $fichier_zip, $dir_dump, $options)) {

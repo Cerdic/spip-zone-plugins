@@ -94,6 +94,7 @@ function saveauto_formulaire_charger($flux){
 		// TODO : s'insérer plutôt dans le traiter du formulaire
 		$exclude = lister_tables_noexport();
 		$flux['data']['_tables_export'] = base_lister_toutes_tables('', array(), $exclude);
+		$flux['data']['_noexport'] = implode(', ', $exclude);
 	}
 
 	return $flux;
