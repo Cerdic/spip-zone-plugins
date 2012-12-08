@@ -73,9 +73,7 @@ function albums_vider_tables($nom_meta_base_version) {
 
 	# Suppression des liens des documents lies aux albums
 	# -> utiliser optimiser_base_disparus a la place ?
-	if (sql_countsel("spip_documents_liens", "objet='album'")){
-		sql_delete("spip_documents_liens", "objet='album'");
-	}
+	sql_delete("spip_documents_liens",	sql_in("objet", array('album')));
 
 	# Nettoyer les versionnages et forums
 	sql_delete("spip_versions",		sql_in("objet", array('album')));
