@@ -1,0 +1,16 @@
+En vrac (sans aucune priorité) :
+
+	A vérifier : 
+		- le fonctionnement de chaque option
+
+	A faire : 
+		- des icones différentes pour les 8 onglets de configuration
+		- utiliser CKEditor 4.0
+		- porter les plugins CKEditor 3.x vers CKEditor 4.x (voir s'il est possible d'avoir une seule version des plugins compatibles pour CK4 et CK3)
+		- trouver une solution pour retirer la dépendance à CFG (pour spip 2.x - il manque ecrire_config dans spip-bonux)
+		- traduire complètement vers l'anglais (l'arabe ?) le fichier de langue
+
+	A voir :
+		- utiliser une table pour les modeles de documents ?
+		- est-il possible utiliser le plugin composition ?
+

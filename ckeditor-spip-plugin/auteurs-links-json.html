@@ -1,0 +1,11 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: application/json[; charset=(#CHARSET)]})]
+<BOUCLE_si(CONDITION){si #SESSION{statut}|<{2}}>
+[<BOUCLE_auteurs(AUTEURS) {par nom}{inverse}>
+	{ 
+		"titre": [(#NOM|strip_tags|couper{30}|json_encode)], 
+		"url": [(#URL_PAGE{auteur}|parametre_url{id_auteur,#ID_AUTEUR}|json_encode)],
+		"id": [(#ID_AUTEUR|json_encode)]
+	}[(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{',',''})]
+</BOUCLE_auteurs>]
+</BOUCLE_si>

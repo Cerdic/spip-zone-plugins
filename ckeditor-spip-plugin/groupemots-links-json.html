@@ -1,0 +1,11 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: application/json[; charset=(#CHARSET)]})]
+<BOUCLE_si(CONDITION){si #SESSION{statut}|<{2}}>
+[<BOUCLE_groupes(GROUPES_MOTS) {par titre}>
+	{ 
+		"titre": [(#TITRE|strip_tags|couper{30}|json_encode)], 
+		"url": [(#URL_PAGE{groupe}|parametre_url{id_groupe,#ID_GROUPE}|json_encode)],
+		"id": [(#ID_GROUPE|json_encode)]
+	}[(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{',',''})]
+</BOUCLE_groupes>]
+</BOUCLE_si>

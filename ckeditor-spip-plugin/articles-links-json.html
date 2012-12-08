@@ -1,0 +1,11 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: application/json[; charset=(#CHARSET)]})]
+<BOUCLE_si(CONDITION){si #SESSION{statut}|<{2}}>
+[<BOUCLE_articles(ARTICLES) {id_rubrique=#ENV{id_rubrique}} {par num titre, titre}{inverse}>
+	{ 
+		"titre": [(#TITRE|strip_tags|couper{30}|json_encode)], 
+		"url": [(#URL_PAGE{article}|parametre_url{id_article,#ID_ARTICLE}|json_encode)],
+		"id": [(#ID_ARTICLE|json_encode)]
+	}[(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{',',''})]
+</BOUCLE_articles>]
+</BOUCLE_si>

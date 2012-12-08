@@ -1,0 +1,21 @@
+<B_alldoc>
+<div id="fichiers">
+	[(#ANCRE_PAGINATION)]
+	<div>
+	[(#ENV{article}|oui)<a class='ckbutton' href='[(#URL_PAGE{select_documents}|parametre_url{article,#ENV{article}}|parametre_url{CKEditor,#ENV{CKEditor}}|parametre_url{CKEditorFuncNum,#ENV{CKEditorFuncNum}}|parametre_url{langCode,#ENV{langCode}}|parametre_url{connect,''})]' title='<:ckeditor:documents_article:>'><:ckeditor:article:></a>]
+	[(#ENV{rubrique}|oui)<a class='ckbutton' href='[(#URL_PAGE{select_documents}|parametre_url{rubrique,#ENV{rubrique}}|parametre_url{CKEditor,#ENV{CKEditor}}|parametre_url{CKEditorFuncNum,#ENV{CKEditorFuncNum}}|parametre_url{langCode,#ENV{langCode}}|parametre_url{connect,''})]' title='<:ckeditor:documents_rubrique:>'><:ckeditor:rubrique:></a>]
+	[| (#PAGINATION) | ]
+	</div>
+<BOUCLE_alldoc(DOCUMENTS){tout}{mode IN document,image}{pagination 16}>
+	<div class='fichier'>
+		<div class='fichier-apercu'>
+			<a onclick="SelectFile('[(#EXTENSION|match{(jpg|gif|png)}|?{#FICHIER,[(#LOGO_DOCUMENT||image_reduire{150,50}|extraire_attribut{src})]}|url_absolue|parametre_url{docid,#ID_DOCUMENT})]');">[(#EXTENSION|match{(jpg|gif|png)}|?{[(#FICHIER|image_reduire{150,50})],[(#LOGO_DOCUMENT||image_reduire{150,50})]})]</a>
+ 		</div>
+		<div class='fichier-nom'>[(#TITRE|sinon{[(#FICHIER|basename)]})]</div>
+	</div>
+</BOUCLE_alldoc>
+</div>
+</B_alldoc>
+	<div><a class='ckbutton' ref='[(#URL_PAGE{select_documents}|parametre_url{article,#ENV{article}}|parametre_url{CKEditor,#ENV{CKEditor}}|parametre_url{CKEditorFuncNum,#ENV{CKEditorFuncNum}}|parametre_url{langCode,#ENV{langCode}}|parametre_url{connect,''})]'><:ckeditor:article:></a></div>
+	#MODELE{inc-aucun-document}
+<//B_alldoc>

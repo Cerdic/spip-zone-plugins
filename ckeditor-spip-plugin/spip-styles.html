@@ -1,0 +1,10 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/css[; charset=(#CHARSET)]})]
+<BOUCLE_si(CONDITION){si #SESSION{statut}|<{2}}>
+<?php
+	include_spip('inc/ckeditor_cfgtools') ;
+	include_spip('inc/ckeditor_lire_config') ;
+	include_spip('inc/ckeditor_constantes') ;
+	echo parse_spipcss(ckeditor_lire_config('styles', _CKE_STYLES_DEF)) ;
+?>
+</BOUCLE_si>

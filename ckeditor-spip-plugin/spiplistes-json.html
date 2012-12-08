@@ -1,0 +1,44 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: application/json[; charset=(#CHARSET)]})]
+<BOUCLE_si(CONDITION){si #SESSION{statut}|<{2}}>
+{<BOUCLE_si_articles(CONDITION){si #ENV{doctype}|=={articles}}>
+	<BOUCLE_articles(ARTICLES){par date}{inverse}>
+	"#ID_ARTICLE":[(#TITRE|couper{30}|replace{'&nbsp;',' '}|json_encode)][(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{',',''})]
+	</BOUCLE_articles>
+</BOUCLE_si_articles>
+<BOUCLE_si_rubriques(CONDITION){si #ENV{doctype}|=={rubriques}}>
+	<BOUCLE_rubriques(RUBRIQUES){par date}{inverse}>
+	"#ID_RUBRIQUE":[(#TITRE|couper{30}|replace{'&nbsp;',' '}|json_encode)][(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{',',''})]
+	</BOUCLE_rubriques>
+</BOUCLE_si_rubriques>
+<BOUCLE_si_auteurs(CONDITION){si #ENV{doctype}|=={auteurs}}>
+	<BOUCLE_auteurs(AUTEURS){par nom}>
+	"#ID_AUTEUR":[(#NOM|couper{30}|replace{'&nbsp;',' '}|json_encode)][(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{',',''})]
+	</BOUCLE_auteurs>
+</BOUCLE_si_auteurs>
+<BOUCLE_si_mots(CONDITION){si #ENV{doctype}|=={mots}}>
+	<BOUCLE_mots(MOTS){par titre}>
+	"#ID_MOT":[(#TITRE|couper{30}|replace{'&nbsp;',' '}|json_encode)][(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{',',''})]
+	</BOUCLE_mots>
+</BOUCLE_si_mots>
+<BOUCLE_si_groupes_mots(CONDITION){si #ENV{doctype}|=={groupes_mots}}>
+	<BOUCLE_groupes_mots(GROUPES_MOTS){par titre}>
+	"#ID_GROUPE":[(#TITRE|couper{30}|replace{'&nbsp;',' '}|json_encode)][(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{',',''})]
+	</BOUCLE_groupes_mots>
+</BOUCLE_si_groupes_mots>
+<BOUCLE_si_breves(CONDITION){si #ENV{doctype}|=={breves}}>
+	<BOUCLE_breves(BREVES){par titre}>
+	"#ID_BREVE":[(#TITRE|couper{30}|replace{'&nbsp;',' '}|json_encode)][(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{',',''})]
+	</BOUCLE_breves>
+</BOUCLE_si_breves>
+<BOUCLE_si_sites(CONDITION){si #ENV{doctype}|=={sites}}>
+	<BOUCLE_sites(SITES){par nom_site}>
+	"#ID_SYNDIC":[(#NOM_SITE|?{#NOM_SITE,#URL_SITE}|couper{60}|replace{'&nbsp;',' '}|json_encode)][(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{',',''})]
+	</BOUCLE_sites>
+</BOUCLE_si_sites>
+<BOUCLE_si_documents(CONDITION){si #ENV{doctype}|=={documents}}>
+	<BOUCLE_documents(DOCUMENTS){par titre}{tous}>
+	"#ID_DOCUMENT":[(#TITRE|?{#TITRE,#URL_DOCUMENT|basename}|couper{40}|replace{'&nbsp;',' '}|json_encode)][(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{',',''})]
+	</BOUCLE_documents>
+</BOUCLE_si_documents>}
+</BOUCLE_si>
