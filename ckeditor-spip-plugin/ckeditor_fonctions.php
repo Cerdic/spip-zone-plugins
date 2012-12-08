@@ -64,23 +64,15 @@ function ckeditor_getcss() {
 }
 
 function ckeditor_prepare_champs($type, $default_tb = 'Full') {
-	$editer_champs = array( 
-	// on prépare le terrain : ici, on peut mettre n'importe quel idenfifiant, 
-	// voir plusieurs pour permettre d'utiliser ckeditor sur plusieurs champs différents
-		'article'=>array(array('textarea[name=texte]',$default_tb)),
-		'rubrique'=>array(array('textarea[name=texte]',$default_tb)),
-		'breve'=>array(array('textarea[name=texte]',$default_tb)),
-		'auteur_info'=>array(array('textarea[name=bio]',$default_tb)),
-		'mot'=>array(array('textarea[name=texte]',$default_tb)),
-		'groupe_mot'=>array(array('textarea[name=texte]',$default_tb)),
-		'document'=>array(array('textarea[name=descriptif]',$default_tb)),
-		'site' =>array(array('textarea[name=descriptif]',$default_tb))	
+	$champs = array(
+		array('textarea[name=texte]',$default_tb),
+		array('textarea[name=bio]',$default_tb),
+		array('textarea[name=descriptif]',$default_tb)
 	) ;
 
 	$ckeditor_prepare_champs_post = charger_fonction('ckeditor_prepare_champs_post','');
-	$editer_champs = $ckeditor_prepare_champs_post($editer_champs, $default_tb) ;
+	$champs = $ckeditor_prepare_champs_post($champs, $default_tb) ;
 
-	$champs = $editer_champs[$type] ;
 	if ($iextras = $GLOBALS['meta']['iextras']) { // y'a-t-il des champs extra ?
 		include_spip('inc/cextras');
 		$iextras = unserialize($iextras) ;
@@ -123,6 +115,7 @@ function ckeditor_get_scaytlang($type, $id_type) {
 }
 
 function ckeditor_header_prive($flux) {
+	$flux .= "\n<!-- début de : ckeditor_header_prive -->\n" ;
 	if (ckeditor_lire_config('insertcssprivee', _CKE_INSERT_CSSPRIVEE_DEF)) {
 		$flux .= ckeditor_getcss() ;
 	}
@@ -144,51 +137,40 @@ function ckeditor_header_prive($flux) {
 					break ;
 			}
 		}
-		$edition=(($match[2]=='edit') || defined('_DIR_PLUGIN_AED') || defined('_DIR_PLUGIN_EDITION_DIRECTE'));
-	} else {
+	}
+	if (!$config['type'] && !$config['id']) {
 		$type = $exec ;
 		switch($type) {
 			case 'article':
 			case 'rubrique':
 				$id_type = _request('id_'.$type) ;
-				$config['scayt_sLang'] = ckeditor_get_scaytlang($type, $id_type) ;
-				$edition=true;
+				if ($id_type) {
+					$config['type'] = $type ;
+					$config['id'] = $id_type ;
+					$config['scayt_sLang'] = ckeditor_get_scaytlang($type, $id_type) ;
+				}
 				break;
 			default: 
-				$edition=false;
 		}
 	}
-	$inserescript = false ;
-	if($edition && ($champs = ckeditor_prepare_champs($type))) {
+	if($champs = ckeditor_prepare_champs($type))
 		$config['ajaxload']=$champs;
-		$inserescript = true ;
-	} else if (($_GET['exec'] == 'cfg') && ($_GET['cfg'] == 'ckeditor_f')) {
-		$config['ajaxload']= array(array('textarea[name=modele]', _CKE_PRIVE_TB_DEF)) ;
-		$insertscript = true ;
-	}
 
+	if (ckeditor_lire_config('crayons', _CKE_CRAYONS_DEF)) 
+		$config['ajaxload'][] = array("textarea.crayon-active",ckeditor_lire_config('crayons_tb',_CKE_CRAYONS_TB_DEF)) ;
 
-	if (ckeditor_lire_config('crayons', _CKE_CRAYONS_DEF)) {
-		$config['ajaxload']=array(array("textarea.crayon-active",ckeditor_lire_config('crayons_tb',_CKE_CRAYONS_TB_DEF)));
-		$inserescript = true ;
-	}	
-	if (ckeditor_lire_config('partie_privee', _CKE_PARTIE_PRIVE_DEF) && 
-		($class = ckeditor_lire_config('class_privee', _CKE_CLASS_PRIVE_DEF))
-	) {
-		$c = array('textarea.'.$class, ckeditor_lire_config('prive_tb', _CKE_PRIVE_TB_DEF)) ;
-		$config['ajaxload'][] = $c ;
-		$c = array('textarea[name=texte]', ckeditor_lire_config('prive_tb', _CKE_PRIVE_TB_DEF)) ;
-		$config['ajaxload'][] = $c ;
-		$inserescript = true ;
-	}
+	if (ckeditor_lire_config('partie_privee', _CKE_PARTIE_PRIVE_DEF)
+		&& ($class = ckeditor_lire_config('class_privee', _CKE_CLASS_PRIVE_DEF)))
+		$config['ajaxload'][] = array('textarea.'.$class, ckeditor_lire_config('prive_tb', _CKE_PRIVE_TB_DEF)) ;
 
-	if ($inserescript) {
+	if (count($config['ajaxload']))
 		$flux .= ckeditor_preparescript($config) ;
-	}
-	return $flux ;
+
+	return $flux."\n<!-- fin de : ckeditor_header_prive -->\n" ;
 }
 
 function ckeditor_insert_head($flux) {
+	$flux .= "\n<!-- début de : ckeditor_insert_head -->\n" ;
 	if (ckeditor_lire_config('insertcsspublic', _CKE_INSERT_CSSPUBLIC_DEF)) {
 		$flux .= ckeditor_getcss() ;
 	}
@@ -221,18 +203,17 @@ function ckeditor_insert_head($flux) {
 			$config['id']=$id;
 		}
 	}		
-	if (ckeditor_lire_config('crayons', _CKE_CRAYONS_DEF)) {
+	if (ckeditor_lire_config('crayons', _CKE_CRAYONS_DEF))
 		$config['ajaxload'][]=array("textarea.crayon-active",ckeditor_lire_config('crayons_tb',_CKE_CRAYONS_TB_DEF));
-	}
-	if (ckeditor_lire_config('partie_publique', _CKE_PARTIE_PUBLIQUE_DEF) && 
-		($class = ckeditor_lire_config('class_publique', _CKE_CLASS_PUBLIQUE_DEF))
-	) {
-		$c = array('textarea.'.$class, ckeditor_lire_config('publique_tb', _CKE_PUBLIQUE_TB_DEF)) ;
-		$config['ajaxload'][] = $c ;
-	}
+
+	if (ckeditor_lire_config('partie_publique', _CKE_PARTIE_PUBLIQUE_DEF)
+		&& ($class = ckeditor_lire_config('class_publique', _CKE_CLASS_PUBLIQUE_DEF)))
+		$config['ajaxload'][] = array('textarea.'.$class, ckeditor_lire_config('publique_tb', _CKE_PUBLIQUE_TB_DEF)) ;
+
 	if (count($config['ajaxload'])) // s'il y a quelque chose à charger :
 		$flux .= ckeditor_preparescript($config) ;
-	return $flux ;
+
+	return $flux."\n<!-- fin de : ckeditor_insert_head -->\n" ;
 }
 
 function ckeditor_prepare_champs_post_dist($editer_champs, $default_tb) {
@@ -598,7 +579,6 @@ function ckeditor_preparescript($config) {
 	$ckeditor_json_encode = charger_fonction('ckeditor_json_encode','');
 
 	$cpt_ajaxload = (is_array($config['ajaxload'])?count($config['ajaxload']):0);
-	$cpt_windowload = (is_array($config['windowload'])?count($config['windowload']):0);
 
 	if (!$init_done) {
 		$script = "
@@ -635,7 +615,12 @@ $ajaxload
 	}
 	$script .= "	<script type=\"text/javascript\">
 function loadCKEditor() {
-	var prefix_id=$(this).attr('id');
+	var prefix_id ;
+	try {
+		prefix_id = $(this).attr('id');
+	} catch (E) {
+		prefix_id = undefined ;
+	}
 	var ajaxload=".$ckeditor_json_encode($config['ajaxload']).";
 	if ((prefix_id != undefined) && prefix_id.match(/^\w+$/)){
 		$.each(ajaxload, function(i){
