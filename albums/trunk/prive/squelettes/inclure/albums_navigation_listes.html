@@ -111,7 +111,7 @@
 	[(#REM) Vides ]
 	<li class='vides[ (#ENV{media}|match{sans}|oui)on][ (#GET{albums_vides}|non)off]'>
 		[(#GET{albums_vides}|oui)
-		[(#GET{self}|parametre_url{media,#ENV{media}|toggle_parametre{'image|file',retirer}|toggle_parametre{sans}}
+		[(#GET{self}|parametre_url{media,#ENV{media}|permuter_parametre{'image|file',retirer}|permuter_parametre{sans}}
 			|icone_horizontale{'',#VAL{icone-vide},'',ajax}
 			|inserer_attribut{title,<:album:filtre_albums_vides:>})]
 		]
@@ -125,7 +125,7 @@
 	<BOUCLE_medias_presents(DATA){liste #GET{medias_contenus}}>
 	<li class='#VALEUR[ (#ENV{media}|match{#VALEUR}|oui)on]'>
 		#SET{titre, #VAL{album:heading_contenu}|_T|concat{' : '}|concat{#VAL{medias:des_}|concat{#VALEUR}|concat{s}|_T|replace{'@nb@ ',''}}
-		[(#GET{self}|parametre_url{media,#ENV{media}|toggle_parametre{sans,retirer}|toggle_parametre{#VALEUR}}
+		[(#GET{self}|parametre_url{media,#ENV{media}|permuter_parametre{sans,retirer}|permuter_parametre{#VALEUR}}
 			|icone_horizontale{'',#VAL{media-}|concat{#VALEUR},'',ajax}
 			|inserer_attribut{title,#GET{titre}})]
 	</li>

@@ -79,7 +79,7 @@
 
 		[(#EVAL{_request('message')}|match{suppression}|?{
 			[(#SET{message,#EVAL{_request('message')}})],
-			[(#SET{message,#EVAL{_request('message')}|toggle_parametre{suppression}})][(#SET{texte_message,#VAL{<:album:avis_suppression_album:>}})]
+			[(#SET{message,#EVAL{_request('message')}|permuter_parametre{suppression}})][(#SET{texte_message,#VAL{<:album:avis_suppression_album:>}})]
 		})]
 
 		[<span title='<:album:bouton_supprimer:>'>(#BOUTON_ACTION{

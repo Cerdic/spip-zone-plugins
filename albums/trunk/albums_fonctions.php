@@ -43,69 +43,78 @@ function table_retirer_valeur($table_balise, $valeur){
 
 
 /**
- * Ajouter ou retirer un parametre d'une chaine en forme de liste concatenee
- * Utile pour generer un lien en y ajoutant/supprimant un parametre
- * @param string $balise
- * @param string $parametre =	param1|param2|...
- * @param string $delimiteur =	|/-, ...
- * @param string $action =	toggle,ajouter,retirer
+ * Filtre permettant de permuter un element d une chaine sous forme de liste concatenee A|B|C|D
+ * Permuter, c est a dire retirer l element s il est present dans la chaine, et inversement l ajouter s il est absent.
+ * Il s utilise a priori en complement du filtre |parametre_url
  *
- * exemples : 
- * valeur initale : parametres = paramA|paramB|paramC|paramD
- * ----------
- * #ENV{parametres}|toggle_parametre{'paramB',toggle,'|'}
- * retour : parametres = paramA|paramC|paramD
- * ----------
- * #ENV{parametres}|toggle_parametre{'paramB|paramC'}
- * retour : parametres = paramA|paramD
+ * Exemple d utilisation : l adresse de la page contient ?fruits=pomme|poire|melon
+ * On souhaite qu'un lien recharge la page en permutant le parametre "poire"
+ * On definit le lien ainsi : #SELF|parametre_url{fruits, #ENV{fruits}|permuter_parametre{poire}}
+ * Le premier clic va renvoyer pomme|melon, le second clic pomme|melon|poire et ainsi de suite 
+ * On peut eventuellement forcer l action a effectuer (ajouter ou retirer) et preciser le delimiteur (par defaut, un pipe)
+ *
+ * @param string $balise
+ * @param string $parametre
+ * 		le ou les parametres a retirer ou a ajouter, separes par un delimiteur : param1|param2|param3...
+ * @param string $delimiteur
+ *		(optionnel) caractere separant les parametres : |/-, etc.
+ * @param string $action
+ *		(optionnel) action a effectuer : permuter, ajouter, retirer
+ *
+ * exemples
+ * #VAL{A|B|C|D}|permuter_parametre{B} -> A|C|D
+ * #VAL{A|B|C|D}|permuter_parametre{B|C} -> A|D
+ * #VAL{A|B|C|D}|permuter_parametre{B,retirer} -> A|C|D
+ * #VAL{A|B|C|D}|permuter_parametre{B,ajouter} -> A|B|C|D  (aucun effet)
+ * #VAL{A-B-C-D}|permuter_parametre{B-D,permuter,-} -> A|C
  */
-function toggle_parametre($balise, $parametre, $action='toggle', $delimiteur='|'){
+function permuter_parametre($balise, $parametre, $action='permuter', $delimiteur='|'){
 
-	$delimiteur = (string)$delimiteur;
 	$parametre = (string)$parametre;
-	$action = (string)$action;
 	$table_balise = explode($delimiteur, $balise); # tableau des anciens parametres
 	$table_parametres = explode($delimiteur, $parametre); # tableau des nouveaux parametres
 
-	switch ($action) {
-		case 'toggle':
-			foreach ($table_parametres as $parametre){
-				if (!empty($balise)){
-					// si le parametre est present, on le retire
-					if (in_array($parametre, $table_balise)) {
-						unset($table_balise[array_search($parametre, $table_balise)]); # supprime le parametre du tableau
-						$balise = implode($delimiteur, $table_balise); # recree la liste
+	if ($parametre) {
+		switch ($action) {
+			case 'permuter':
+				foreach ($table_parametres as $parametre){
+					if (!empty($balise)){
+						// si le parametre est present, on le retire...
+						if (in_array($parametre, $table_balise)) {
+							unset($table_balise[array_search($parametre, $table_balise)]); # supprime le parametre du tableau
+							$balise = implode($delimiteur, $table_balise); # recree la liste
+						}
+						// ...et inversement
+						else {
+							array_push($table_balise, $parametre);
+							$balise = implode($delimiteur, $table_balise);
+						}
 					}
-					//sinon on le rajoute
 					else {
-						array_push($table_balise, $parametre);
+						$balise = $parametre;
+					}
+				}
+				break;
+			case 'retirer':
+				foreach ($table_parametres as $parametre){
+					if (!empty($balise) AND in_array($parametre, $table_balise)){
+						unset($table_balise[array_search($parametre, $table_balise)]);
 						$balise = implode($delimiteur, $table_balise);
 					}
 				}
-				else {
-					$balise = $parametre;
+				break;
+			case 'ajouter':
+				foreach ($table_parametres as $parametre){
+					if (!empty($balise)){
+						array_push($table_balise, $parametre);
+						$balise = implode($delimiteur, $table_balise);
+					}
+					else {
+						$balise = $parametre;
+					}
 				}
-			}
-			break;
-		case 'retirer':
-			foreach ($table_parametres as $parametre){
-				if (!empty($balise) AND in_array($parametre, $table_balise)){
-					unset($table_balise[array_search($parametre, $table_balise)]);
-					$balise = implode($delimiteur, $table_balise);
-				}
-			}
-			break;
-		case 'ajouter':
-			foreach ($table_parametres as $parametre){
-				if (!empty($balise)){
-					array_push($table_balise, $parametre);
-					$balise = implode($delimiteur, $table_balise);
-				}
-				else {
-					$balise = $parametre;
-				}
-			}
-			break;
+				break;
+		}
 	}
 
 	return $balise;
