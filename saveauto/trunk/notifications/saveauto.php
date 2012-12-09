@@ -1,7 +1,45 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function notifications_saveauto_dist($quoi, $id, $options){
+function notifications_saveauto_dist($quoi, $id, $options) {
+	include_spip('inc/config');
+	$notif_active = (lire_config('saveauto/notif_active', 'non') == 'oui');
+
+	if ($notif_active
+	AND !$options['err']) {
+		// preparation de la liste des destinataires
+		$preparer = charger_fonction('preparer_destinataires', 'inc');
+		$destinataires = $preparer($quoi, $id, $options);
+
+		// Determination de l'auteur de la sauvegarde
+		if (intval($options['auteur'])) {
+			$auteur = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur='.intval($options['auteur']));
+		}else{
+			$auteur = $options['auteur'];
+		}
+
+		// Construction du sujet du mail
+		include_spip('inc/texte');
+		$base = $GLOBALS['connexions'][0]['db'];
+		$sujet_mail = "[" . typo($GLOBALS['meta']['nom_site'])
+					. "][saveauto] "
+					. _T('saveauto:message_sauver_sujet', array('base' => $base));
+
+		// Construction du texte du mail
+		$msg_mail = _T('saveauto:message_notif_sauver_intro', array('base' => $base, 'auteur' => $auteur));
+
+		// Mise en pièce jointe de la sauvegarde si elle ne depasse pas le seuil défini
+		$max_mail = lire_config('saveauto/mail_max_size');
+		if (filesize($options['chemin_fichier']) < $max_mail*1000*1000) {
+			$supp = array('piece_jointe' => $options['chemin_fichier']);
+		}
+
+		// Envoi de la notification
+		notifications_envoyer_mails($destinataires, $msg_mail, $sujet_mail);
+    }
+}
+
+function notifications_saveauto_old_dist($quoi, $id, $options){
 	$cfg = lire_config('saveauto');
 	include_spip('inc/envoyer_mail');
 	if(defined('_DIR_SITE')){
@@ -43,7 +81,7 @@ function notifications_saveauto_dist($quoi, $id, $options){
 				,
 					'data'=>$tous)
 			);
-			if((filesize($options['chemin_fichier']) / 1000000) < lire_config('saveauto/mail_max_size','2')){
+			if((filesize($options['chemin_fichier']) / 1000000) < lire_config('saveauto/mail_max_size')){
 				$corps['texte'] = $msg_mail;
 				$corps['pieces_jointes'][0] = array(
 					'chemin'=>$options['chemin_fichier'],

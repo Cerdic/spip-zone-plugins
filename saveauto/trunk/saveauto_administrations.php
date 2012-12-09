@@ -38,12 +38,11 @@ function saveauto_declarer_config() {
 		'frequence_maj'			=> 1,
 		'structure'				=> 'true',
 		'donnees'				=> 'true',
-		'ecrire_succes'			=> 'true',
 		'nettoyage_journalier'	=> 'oui',
 		'jours_obso'			=> 15,
 		'notif_active'			=> 'non',
 		'notif_mail'			=> '',
-		'mail_max_size'			=> 2,
+		'mail_max_size'			=> 5,
 		'tout_saveauto'			=> 'oui',
 		'tables_saveauto'		=> $tables,
 	);
