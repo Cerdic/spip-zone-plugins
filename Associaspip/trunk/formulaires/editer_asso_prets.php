@@ -22,19 +22,19 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='') {
 		$contexte['heure_sortie'] = $contexte['heure_retour'] = date('H:i');
 		$contexte['commentaire_sortie'] = $contexte['commentaire_retour'] = '';
 		$contexte['id_ressource'] = association_passeparam_id('ressource');
-		$ressource = sql_fetsel('pu, ud, prix_caution', 'spip_asso_ressources', "id_ressource=$contexte[id_ressource]");
+		$ressource = sql_fetsel('pu, ud, prix_caution', 'spip_asso_ressources', "id_ressource=" . intval($contexte['id_ressource']));
 		$contexte['ud'] = $ressource['ud'];
 		$montant = $contexte['prix_unitaire'] = $ressource['pu'];
 		$caution = $contexte['prix_caution'] = $ressource['prix_caution'];
 	} else { // sinon on recupere les informations relatives au depot de caution
 		$montant = sql_getfetsel('recette', 'spip_asso_comptes', "imputation=". sql_quote($GLOBALS['association_metas']['pc_prets']) ." AND id_journal='$id_pret' ");
-		$contexte['ud'] =  sql_asso1champ('ressource', $contexte['id_ressource'], 'ud');
+		$contexte['ud'] =  sql_getfetsel('ud', 'spip_asso_ressources', "id_ressource=" . intval($contexte['id_ressource'])); 
 		$contexte['heure_sortie'] = substr($contexte['date_sortie'],12,5);
 		$contexte['date_sortie'] = substr($contexte['date_sortie'],0,10);
 		$contexte['heure_retour'] = substr($contexte['date_retour'],12,5);
 		$contexte['date_retour'] = substr($contexte['date_retour'],0,10);
-		$contexte['mode_caution1'] = sql_getfetsel('journal', 'spip_asso_comptes', "imputation=". sql_quote($GLOBALS['association_metas']['pc_cautions']) ." AND id_journal='$id_pret' AND date='$contexte[date_caution1]' and recette>0 ");
-		$contexte['mode_caution0'] = sql_getfetsel('journal', 'spip_asso_comptes', "imputation=". sql_quote($GLOBALS['association_metas']['pc_cautions']) ." AND id_journal='$id_pret' AND date='$contexte[date_caution0]' and depense>0 ");
+		$contexte['mode_caution1'] = sql_getfetsel('journal', 'spip_asso_comptes', "imputation=". sql_quote($GLOBALS['association_metas']['pc_cautions']) ." AND id_journal='$id_pret' AND date_operation='$contexte[date_caution1]' and recette>0 ");
+		$contexte['mode_caution0'] = sql_getfetsel('journal', 'spip_asso_comptes', "imputation=". sql_quote($GLOBALS['association_metas']['pc_cautions']) ." AND id_journal='$id_pret' AND date_operation='$contexte[date_caution0]' and depense>0 ");
 	}
 	association_chargeparam_operation('prets', $id_pret, $contexte);
 	association_chargeparam_destinations('prets', $contexte);
