@@ -104,7 +104,8 @@ function exec_comptes() {
 			}
 		}
 		// TABLEAU
-		$table = comptes_while($where, sql_asso1page(), $id_compte);
+		$limit = intval(_request('debut')) . "," . _ASSOCIASPIP_LIMITE_SOUSPAGE;
+		$table = comptes_while($where, $limit, $id_compte);
 		if ($table) { // affichage de la liste
 			// SOUS-PAGINATION
 			$nav = association_selectionner_souspage(array('spip_asso_comptes', $where), 'comptes', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($imputation?"&imputation=$imputation":''). (is_numeric($vu)?"&vu=$vu":''), FALSE);

@@ -120,7 +120,8 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe) {
 	}
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	include_spip('inc/filtres_images_mini');
-	$query = sql_select('m.id_auteur AS id_auteur, a.email AS email, m.sexe, m.nom_famille, m.prenom, m.id_asso, a.statut AS statut, m.date_validite, m.statut_interne, m.id_categorie, a.bio AS bio',"spip_asso_membres AS m LEFT JOIN spip_auteurs AS a ON m.id_auteur=a.id_auteur $jointure_groupe", $critere, '', 'm.nom_famille, m.prenom, m.date_validite', sql_asso1page() );
+	$limit = intval(_request('debut')) . "," . _ASSOCIASPIP_LIMITE_SOUSPAGE;
+	$query = sql_select('m.id_auteur AS id_auteur, a.email AS email, m.sexe, m.nom_famille, m.prenom, m.id_asso, a.statut AS statut, m.date_validite, m.statut_interne, m.id_categorie, a.bio AS bio',"spip_asso_membres AS m LEFT JOIN spip_auteurs AS a ON m.id_auteur=a.id_auteur $jointure_groupe", $critere, '', 'm.nom_famille, m.prenom, m.date_validite', $limit);
 	$auteurs = '';
 	while ($data = sql_fetch($query)) {
 		$id_auteur = $data['id_auteur'];

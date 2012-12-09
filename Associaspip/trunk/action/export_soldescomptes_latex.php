@@ -43,7 +43,9 @@ class LaTeX extends ExportComptes_TXT {
 		$this->out .= '\\usepackage[french]{babel}'."\n";
 		$this->out .= '\\usepackage[table]{xcolor}'."\n";
 		$this->out .= '%generator: Associaspip'."\n";
-		$this->out .= '\\title{'. html_entity_decode(_T('asso:cpte_resultat_titre_general')) .'\\\\ '. _T('Exercice') .' : '. sql_asso1champ('exercice', $this->exercice, 'intitule') .'}'."\n";
+		$t = sql_getfetsel('intitule', 'spip_asso_exercices', "id_exercice=" . intval($this->exercice));
+		$g = html_entity_decode(_T('asso:cpte_resultat_titre_general'));
+		$this->out .= '\\title{'. $g .'\\\\ '. _T('Exercice') . " : $t}\n";
 		$this->out .= '\\author{'. $GLOBALS['association_metas']['nom'] .'}'."\n";
 		$this->out .= '\\date{\\today}'."\n";
 		$this->out .= '\\begin{document}'."\n";

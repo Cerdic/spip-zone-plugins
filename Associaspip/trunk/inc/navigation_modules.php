@@ -96,16 +96,17 @@ function onglets_association($titre='', $top_exec='', $INSERT_HEAD=TRUE) {
 function association_navigation_raccourcis($retour='',  $raccourcis=array()) {
 	$res = ''; // initialisation
 	foreach($raccourcis as $titre => $params) {
+		list($image, $script, $aut) = $params;
 		// autorisation d'acces au module
-		if ( is_array($params[2]) && count($params[2]) ) { // autorisation a calculer
-			$acces = call_user_func_array('autoriser', $params[2]);
-		} elseif ( is_scalar($params[2]) ) { // autorisation deja calculee (chaine ou entier ou booleen, evalue en vrai/faux...)
-			$acces = autoriser($params[2]);
+		if ( is_array($aut) && count($aut) ) { // autorisation a calculer
+			$acces = call_user_func_array('autoriser', $aut);
+		} elseif ( is_scalar($aut) ) { // autorisation deja calculee (chaine ou entier ou booleen, evalue en vrai/faux...)
+			$acces = autoriser($aut);
 		} else // pas d'autorisation definie = autorise pour tous
 			$acces = TRUE;
 		// generation du raccourci
 		if ( $acces )
-			$res .= icone1_association($titre,  (is_array($params[1])?generer_url_ecrire($params[1][0],$params[1][1]):generer_url_ecrire($params[1])), $params[0]);
+			$res .= icone1_association($titre,  is_array($script)?generer_url_ecrire($script[0],$script[1]):generer_url_ecrire($script), $image);
 	}
 
 	return association_date_du_jour()
