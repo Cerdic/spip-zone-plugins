@@ -283,8 +283,16 @@ function fullInitCKEDITOR(editor_ids){
 [(#REM)	// on insère le menu déroulant de changement de contexte s'il existe des contextes]
 <B_options>		buttons=buttons+'<span style="padding-right:5px;"><:ckeditor:changer_de_contexte:></span>'
 			+'<select id="contexte_'+ndx+'" name="contexte_'+ndx+'" onchange="contexteChange(\''+editor_id+'\');" style="width:33%;"><option value="" selected><:ckeditor:sans_contexte:></option><BOUCLE_options(POUR){tableau #CONFIG{ckeditor/contextes}|ck_enliste{1}}><option value="[(#VALEUR|table_valeur{0})]">[(#VALEUR|table_valeur{1}|replace{(\.|#)})]</option></BOUCLE_options></select>';</B_options>;
-		if(buttons && ($('.before_'+editor_md5).length == 0))
-			$(editor_id).closest('.markItUpContainer').prepend('<div id="cke_buttons_'+ndx+'" class="before_'+editor_md5+'" style="width;100%;text-align:right;position:relative;top:-24px;height:0px;"><a name="cke_buttons_ancre_'+ndx+'"></a>'+buttons+'</div>');
+		if(buttons && ($('.before_'+editor_md5).length == 0)) {
+			var div = $(editor_id).closest('.markItUpContainer') ;
+			var style = "width;100%;text-align:right;position:relative;top:-24px;height:0px;" ;
+			if (div.length == 0) { // cas où le porteplume n'est pas là...
+				div = $(editor_id).siblings('label:first') ;
+				style = "width;100%;text-align:right;position:relative;top:-8px;height:0px;" ;
+			}
+
+			div.prepend('<div id="cke_buttons_'+ndx+'" class="before_'+editor_md5+'" style="'+style+'"><a name="cke_buttons_ancre_'+ndx+'"></a>'+buttons+'</div>');
+		}
 [(#REM)	// gestion des crayons :]
 		if(crayon){
 			$('#'+crayon+' .crayon-submit')
