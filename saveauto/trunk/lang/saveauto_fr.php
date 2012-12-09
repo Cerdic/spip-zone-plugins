@@ -12,8 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_sauvegarder' => 'Sauvegarder la base',
 
 	// C
-	'colonne_nom' => 'Nom',
 	'colonne_auteur' => 'Créé par',
+	'colonne_nom' => 'Nom',
 
 	// E
 	'envoi_mail' => 'Envoi par mail',
@@ -31,33 +31,34 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// H
 	'help_accepter' => 'Optionnel : ne sauver que les tables ayant la chaîne spécifiée dans leur nom, ex : annuaire_, important, machin.
 	 								 		Ne mettez rien pour accepter toutes les tables. Séparez les différents noms par le symbole point-virgule (;)',
+	'help_cfg_generale' => 'Ces paramètres de configuration s\'appliquent à toutes les sauvegardes, manuelles ou automatiques.',
+	'help_contenu' => 'Choisissez les paramètres de contenu de votre fichier de sauvegarde.',
+	'help_contenu_auto' => 'Choisir le contenu des sauvegardes automatiques.',
 	'help_envoi' => 'Saisir une adresse mail pour activer l\'envoi de la sauvegarde',
 	'help_eviter' => 'Optionnel : si la table contient dans son nom la chaîne spécifiée : les données sont ignorées (pas la structure). Séparez les différents noms par le symbole point-virgule (;)',
 	'help_frequence' => 'Saisir la fréquence des sauvegardes automatiques en jours.',
 	'help_gz' => 'Sinon les sauvegardes seront au format .sql',
+	'help_liste_tables' => 'Par défaut, toutes les tables sont exportées à l\'exception des tables @noexport@. Si vous souhaitez choisir précisément les tables à sauvegarder ouvrez la liste en décochant la case ci-dessous.',
 	'help_mail_max_size' => 'Saisir la taille maximale en Mo du fichier de sauvegarde au-delà de laquelle le mail ne sera pas envoyé (valeur à vérifier auprès de votre fournisseur de mail).',
+	'help_max_zip' => 'Le fichier de sauvegarde est automatiquement zippé si sa taille est inférieure à un seuil. Saisir ce seuil en Mo.',
 	'help_msg' => 'Afficher un message dans l\'interface privée en cas de succès de la sauvegarde',
+	'help_notif_mail' => 'Saisir les adresses en les séparant par des virgules ",". Ces adresses s\'ajoutent à celle du webmestre du site.',
 	'help_obsolete' => 'Saisir la durée de conservation des sauvegardes en jours',
 	'help_prefixe' => 'Saisir le préfixe accolé au nom de chaque fichier de sauvegarde',
-	'help_max_zip' => 'Le fichier de sauvegarde est automatiquement zippé si sa taille est inférieure à un seuil. Saisir ce seuil en Mo.',
 	'help_rep' => 'Répertoire où stocker les fichiers (chemin à partir de la <strong>racine</strong> du SPIP, tmp/data/ par ex). <strong>DOIT</strong> se terminer par un /.',
-	'help_sauvegarde_1' => 'Cette option vous permet de sauvegarder la structure et le contenu de la base dans un fichier au format SQL qui sera stocké dans le répertoire tmp/dump/. La fichier se nomme <em>@prefixe@_aaaammjj_hhmmss.</em>',
-	'help_sauvegarde_2' => 'La sauvegarde automatique est activée (fréquence en jours : @frequence@).',
 	'help_restauration' => '<strong>Attention !!!</strong> ces sauvegardes ne sont <strong>pas au format de celles de SPIP</strong> et ne peuvent pas être utiliser avec l\'outil de restauration de la base de SPIP.<br /><br />
 							Pour toute restauration il faut donc utiliser l\'interface <strong>phpmyadmin</strong> de votre
 							serveur de base de données.<br /><br />
 							Ces sauvegardes contiennent les commandes permettant d\'<strong>effacer</strong> les tables de votre base SPIP et de les <strong>remplacer</strong> par les
 							données archivées. Les données <strong>plus récentes</strong> que celles de la sauvegarde seront donc <strong>PERDUES</strong>!',
+	'help_sauvegarde_1' => 'Cette option vous permet de sauvegarder la structure et le contenu de la base dans un fichier au format SQL qui sera stocké dans le répertoire tmp/dump/. La fichier se nomme <em>@prefixe@_aaaammjj_hhmmss.</em>',
+	'help_sauvegarde_2' => 'La sauvegarde automatique est activée (fréquence en jours : @frequence@).',
 	'help_titre' => 'Cette page vous permet de configurer les options de sauvegarde automatique de la base.',
-	'help_contenu' => 'Choisissez les paramètres de contenu de votre fichier de sauvegarde.',
-	'help_contenu_auto' => 'Choisir le contenu des sauvegardes automatiques.',
-	'help_liste_tables' => 'Par défaut, toutes les tables sont exportées à l\'exception des tables @noexport@. Si vous souhaitez choisir précisément les tables à sauvegarder ouvrez la liste en décochant la case ci-dessous.',
-	'help_cfg_generale' => 'Ces paramètres de configuration s\'appliquent à toutes les sauvegardes, manuelles ou automatiques.',
-	'help_notif_mail' => 'Saisir les adresses en les séparant par des virgules ",". Ces adresses s\'ajoutent à celle du webmestre du site.',
 
 	// I
 	'info_mail_message_mime' => 'Ceci est un message au format MIME.',
 	'info_sauvegardes_obsolete' => 'Une sauvegarde de la base est conservée @nb@ jours à partir du jour de sa réalisation.',
+	'info_sql_auteur' => 'Auteur : ',
 	'info_sql_base' => 'Base : ',
 	'info_sql_compatible_phpmyadmin' => 'Fichier SQL 100% compatible PHPMyadmin',
 	'info_sql_date' => 'Date : ',
@@ -65,7 +66,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_sql_donnees_table' => 'Donnees de @table@',
 	'info_sql_fichier_genere' => 'Ce fichier est genere par le plugin saveauto',
 	'info_sql_fin_fichier' => 'Fin du fichier',
-	'info_sql_auteur' => 'Auteur : ',
 	'info_sql_ipclient' => 'IP Client : ',
 	'info_sql_mysqlversion' => 'Version mySQL : ',
 	'info_sql_os' => 'OS Serveur : ',
@@ -83,33 +83,33 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_donnees_ignorees' => 'Données ignorées : ',
 	'label_frequence' => 'Fréquence des sauvegardes',
 	'label_mail_max_size' => 'Seuil d\'envoi du mail',
+	'label_max_zip' => 'Seuil des zips',
 	'label_message_succes' => 'Alerte',
+	'label_nettoyage_journalier' => 'Activer le nettoyage journalier des archives',
 	'label_nom_base' => 'Nom de la base SPIP : ',
+	'label_notif_active' => 'Activer les notifications',
+	'label_notif_mail' => 'Adresses email à notifier',
 	'label_obsolete_jours' => 'Conservation des sauvegardes',
 	'label_prefixe_sauvegardes' => 'Préfixe',
 	'label_repertoire_stockage' => 'Répertoire de stockage : ',
 	'label_restauration' => 'Restauration d\'une sauvegarde :',
+	'label_sauvegarde_reguliere' => 'Activer la sauvegarde régulière',
 	'label_structure' => 'Structure des tables',
 	'label_tables_acceptes' => 'Tables acceptées : ',
 	'label_toutes_tables' => 'Sauvegarder toutes les tables',
-	'label_max_zip' => 'Seuil des zips',
-	'label_nettoyage_journalier' => 'Activer le nettoyage journalier des archives',
-	'label_notif_active' => 'Activer les notifications',
-	'label_notif_mail' => 'Adresses email à notifier',
-	'label_sauvegarde_reguliere' => 'Activer la sauvegarde régulière',
-	'legend_structure_donnees' => 'Eléments à sauvegarder : ',
 	'legend_cfg_generale' => 'Paramètres généraux des sauvegardes',
 	'legend_cfg_notification' => 'Notifications',
 	'legend_cfg_sauvegarde_reguliere' => 'Traitements automatiques',
+	'legend_structure_donnees' => 'Eléments à sauvegarder : ',
 
 	// M
 	'message_aucune_sauvegarde' => 'Aucune sauvegarde disponible au téléchargement.',
-	'message_telechargement_nok' => 'Erreur lors du téléchargement.',
-	'message_sauvegarde_nok' => 'Erreur lors de la sauvegarde SQL de la base.',
-	'message_sauvegarde_ok' => 'La sauvegarde SQL de la base a été faite avec succès.',
-	'message_pas_envoi' => 'Les sauvegardes ne seront pas envoyées !',
 	'message_cleaner_sujet' => 'Nettoyage des sauvegardes',
 	'message_notif_cleaner_intro' => 'La suppression automatique des sauvegardes obsolètes (dont la date est antérieure à @duree@ jours) a été effectuée avec succès. Les fichiers suivants ont été supprimés : ',
+	'message_pas_envoi' => 'Les sauvegardes ne seront pas envoyées !',
+	'message_sauvegarde_nok' => 'Erreur lors de la sauvegarde SQL de la base.',
+	'message_sauvegarde_ok' => 'La sauvegarde SQL de la base a été faite avec succès.',
+	'message_telechargement_nok' => 'Erreur lors du téléchargement.',
 
 	// S
 	'saveauto_titre' => 'Sauvegarde SQL',
@@ -117,8 +117,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_boite_historique' => 'Sauvegardes SQL disponibles au téléchargement',
 	'titre_boite_sauver' => 'Créer une sauvegarde SQL',
-	'titre_page_saveauto' => 'Sauvegarder la base au format SQL',
 	'titre_page_configurer' => 'Configuration du plugin Sauvegarde automatique',
+	'titre_page_saveauto' => 'Sauvegarder la base au format SQL',
 	'titre_saveauto' => 'Sauvegarde automatique',
 
 	// V
