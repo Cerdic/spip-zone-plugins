@@ -25,21 +25,9 @@ function formulaires_configurer_ckeditor_p3_charger_dist() {
 		'html2spip_identite' => array_key_exists('html2spip_identite', $cfg)?$cfg['html2spip_identite']:_CKE_HTML2SPIP_IDENTITE,
 		'spiplinks' => array_key_exists('spiplinks', $cfg)?$cfg['spiplinks']:_CKE_SPIPLINKS_DEF,
 		'insertall' => array_key_exists('insertall', $cfg)?$cfg['insertall']:_CKE_INSERTALL_DEF,
-		'crayons' => array_key_exists('crayons', $cfg)?$cfg['crayons']:_CKE_CRAYONS_DEF,
-		'forums' => array_key_exists('forums', $cfg)?$cfg['forums']:_CKE_FORUMS_DEF,
-		'cisf' => array_key_exists('cisf', $cfg)?$cfg['cisf']:_CKE_CISF_DEF,
-		'champs_extras' => array_key_exists('champs_extras', $cfg)?$cfg['champs_extras']:array(),
-		'crayons_tb' => array_key_exists('crayons_tb', $cfg)?$cfg['crayons_tb']:_CKE_CRAYONS_TB_DEF,
-		'forums_tb' => array_key_exists('forums_tb', $cfg)?$cfg['forums_tb']:_CKE_FORUMS_TB_DEF,
-		'extras_tb' => $default_ce,
-		'cisf_tb' => array_key_exists('cisf_tb', $cfg)?$cfg['cisf_tb']:_CKE_CISF_TB_DEF,
-		'partie_publique' => array_key_exists('partie_publique', $cfg)?$cfg['partie_publique']:_CKE_PARTIE_PUBLIQUE_DEF,
-		'class_publique' => array_key_exists('class_publique', $cfg)?$cfg['class_publique']:_CKE_CLASS_PUBLIQUE_DEF,
-		'publique_tb' => array_key_exists('publique_tb', $cfg)?$cfg['publique_tb']:_CKE_PUBLIQUE_TB_DEF,
-		'partie_privee' => array_key_exists('partie_privee', $cfg)?$cfg['partie_privee']:_CKE_PARTIE_PRIVE_DEF,
-		'class_privee' => array_key_exists('class_privee', $cfg)?$cfg['class_privee']:_CKE_CLASS_PRIVE_DEF,
-		'prive_tb' => array_key_exists('prive_tb', $cfg)?$cfg['prive_tb']:_CKE_PRIVE_TB_DEF,
 
+		'selecteurs_public' => array_key_exists('selecteurs_public', $cfg)?$cfg['selecteurs_public']:_CKE_PUBLIC_DEF,
+		'selecteurs_prive' => array_key_exists('selecteurs_prive', $cfg)?$cfg['selecteurs_prive']:_CKE_PRIVE_DEF,
 
 		'cktoolslenlarge' => array_key_exists('cktoolslenlarge', $cfg)?$cfg['cktoolslenlarge']:_CKE_LARGE_DEF,
 		'cktoolslenetroit' => array_key_exists('cktoolslenetroit', $cfg)?$cfg['cktoolslenetroit']:_CKE_ETROIT_DEF,
@@ -104,7 +92,6 @@ function formulaires_configurer_ckeditor_p3_charger_dist() {
 					'saisie' => 'selection',
 					'options' => array(
 						'nom' => 'convertion',
-						//'explication' => $cvt_explication,
 						'cacher_option_intro' => 'oui',
 						'label' => _T('ckeditor:options_html2spip'),
 						'datas' => $cvt_options
@@ -157,8 +144,7 @@ function formulaires_configurer_ckeditor_p3_charger_dist() {
 				)
 			)			
 		),
-		array(
-			'saisie' => 'fieldset',
+		array(	'saisie' => 'fieldset',
 			'options' => array(
 				'nom' => 'options_activation',
 				'label' => _T('ckeditor:utiliser_ckeditor_avec'),
@@ -166,189 +152,26 @@ function formulaires_configurer_ckeditor_p3_charger_dist() {
 				'plie' => 'oui'
 			),
 			'saisies' => array(
-				array(
-					'saisie' => 'case',
+				array(	'saisie' => 'explication_spip',
 					'options' => array(
-						'nom' => 'crayons',
-						'label_case' => _T('ckeditor:les_crayons')
-					)
-				),
-				array(
-					'saisie' => 'fieldset',
+						'nom' => 'explication_selecteurs',
+						'texte' => _T('ckeditor:aide_selecteurs')
+					)),
+				array(	'saisie' => 'textarea',
 					'options' => array(
-						'pliable' => 'oui',
-						'plie' => 'oui',
-						'nom' => 'active_crayon',
-						'li_class' => 'niveau2',
-						'label' => _T('ckeditor:options_crayons')
-					),
-					'saisies' => array(
-						array(
-							'saisie' => 'radio',
-							'options' => array(
-								'nom' => 'crayons_tb',
-								'label' => _T('ckeditor:toolbar'),
-								'datas' => array(
-									'Basic' => _T('ckeditor:tb_basic') ,
-									'Full' =>_T('ckeditor:tb_full')
-								)
-							)
-						)
-					)
-				),
-				array(
-					'saisie' => 'case',
+						'nom' => 'selecteurs_public',
+						'label' => _T('ckeditor:selecteurs_espace_public'),
+						'rows' => 6
+					)),
+				array(	'saisie' => 'textarea',
 					'options' => array(
-						'nom' => 'forums',
-						'label_case' => _T('ckeditor:les_forums')
-					)
-				),
-				array(
-					'saisie' => 'fieldset',
-					'options' => array(
-						'pliable' => 'oui',
-						'plie' => 'oui',
-						'nom' => 'active_forums',
-						'li_class' => 'niveau2',
-						'label' => _T('ckeditor:options_forums')
-					),
-					'saisies' => array(
-						array(
-							'saisie' => 'radio',
-							'options' => array(
-								'nom' => 'forums_tb',
-								'label' => _T('ckeditor:toolbar'),
-								'datas' => array(
-									'Basic' => _T('ckeditor:tb_basic') ,
-									'Full' =>_T('ckeditor:tb_full')
-								)
-							)
-						)
-					)
-				),
-				array(
-					'saisie' => 'case',
-					'options' => array(
-						'nom' => 'cisf',
-						'label_case' => _T('ckeditor:cisf')
-					)
-				),
-				array(
-					'saisie' => 'fieldset',
-					'options' => array(
-						'pliable' => 'oui',
-						'plie' => 'oui',
-						'nom' => 'active_cisf',
-						'li_class' => 'niveau2',
-						'label' => _T('ckeditor:options_cisf')
-					),
-					'saisies' => array(
-						array(
-							'saisie' => 'radio',
-							'options' => array(
-								'nom' => 'cisf_tb',
-								'label' => _T('ckeditor:toolbar'),
-								'datas' => array(
-									'Basic' => _T('ckeditor:tb_basic') ,
-									'Full' =>_T('ckeditor:tb_full')
-								)
-							)
-						)
-					)
-				),
-				array(
-					'saisie' => 'case',
-					'options' => array(
-						'nom' => 'partie_publique',
-						'label_case' => _T('ckeditor:partie_publique')
-					)
-				),
-				array(
-					'saisie' => 'fieldset',
-					'options' => array(
-						'pliable' => 'oui',
-						'plie' => 'oui',
-						'nom' => 'active_publique',
-						'li_class' => 'niveau2',
-						'label' => _T('ckeditor:options_publique')
-					),
-					'saisies' => array(
-						array(
-							'saisie' => 'explication',
-							'options' => array(
-								'nom' => 'explication_class_publique',
-								'texte' => _T('ckeditor:aide_class_css_formulaire')
-							)
-						),
-						array(
-							'saisie' => 'input',
-							'options' => array(
-								'nom' => 'class_publique',
-								'label' => _T('ckeditor:class_partie_publique')
-							)
-						),
-						array(
-							'saisie' => 'radio',
-							'options' => array(
-								'nom' => 'publique_tb',
-								'label' => _T('ckeditor:toolbar'),
-								'datas' => array(
-									'Basic' => _T('ckeditor:tb_basic') ,
-									'Full' =>_T('ckeditor:tb_full')
-								)
-							)
-						)
-					)
-				),
-				array(
-					'saisie' => 'case',
-					'options' => array(
-						'nom' => 'partie_privee',
-						'label_case' => _T('ckeditor:partie_privee')
-					)
-				),
-				array(
-					'saisie' => 'fieldset',
-					'options' => array(
-						'pliable' => 'oui',
-						'plie' => 'oui',
-						'nom' => 'active_privee',
-						'li_class' => 'niveau2',
-						'label' => _T('ckeditor:options_privee')
-					),
-					'saisies' => array(
-						array(
-							'saisie' => 'explication',
-							'options' => array(
-								'nom' => 'explication_class_publique',
-								'texte' => _T('ckeditor:aide_class_css_formulaire')
-							)
-						),
-						array(
-							'saisie' => 'input',
-							'options' => array(
-								'nom' => 'class_privee',
-								'label' => _T('ckeditor:class_partie_privee')
-							)
-						),
-						array(
-							'saisie' => 'radio',
-							'options' => array(
-								'nom' => 'prive_tb',
-								'label' => _T('ckeditor:toolbar'),
-								'datas' => array(
-									'Basic' => _T('ckeditor:tb_basic') ,
-									'Full' =>_T('ckeditor:tb_full')
-								)
-							)
-						)
-					)
-				)
-
+						'nom' => 'selecteurs_prive',
+						'label' => _T('ckeditor:selecteurs_espace_prive'),
+						'rows' => 6
+					)),
 			)
 		),
-		array(
-			'saisie' => 'fieldset',
+		array(	'saisie' => 'fieldset',
 			'options' => array(
 				'nom' => 'options_spip',
 				'label' => _T('ckeditor:options_spip'),
@@ -356,8 +179,7 @@ function formulaires_configurer_ckeditor_p3_charger_dist() {
 				'plie' => 'oui'
 			),
 			'saisies' => array(
-				array(
-					'saisie' => 'case',
+				array(	'saisie' => 'case',
 					'options' => array(
 						'nom' => 'spiplinks',
 						'label_case' => _T('ckeditor:autoriser_liens_spip')
@@ -522,20 +344,10 @@ function formulaires_configurer_ckeditor_p3_traiter_dist() {
 		ecrire_config("ckeditor/html2spip_identite", _request("html2spip_identite")) ;
 		ecrire_config("ckeditor/spiplinks", (bool) _request("spiplinks")) ;
 		ecrire_config("ckeditor/insertall",(bool) _request("insertall")) ;
-		ecrire_config("ckeditor/crayons", (bool) _request("crayons")) ;
-		ecrire_config("ckeditor/forums", (bool) _request("forums")) ;
-		ecrire_config("ckeditor/cisf", _request("cisf")) ;
-		ecrire_config("ckeditor/crayons_tb", _request("crayons_tb")) ;
-		ecrire_config("ckeditor/forums_tb", _request("forums_tb")) ;
-		ecrire_config("ckeditor/cisf_tb", _request("cisf_tb")) ;
-		ecrire_config("ckeditor/champs_extras", _request("champs_extras")) ;
-		ecrire_config("ckeditor/extras_tb", _request("extras_tb")) ;
-		ecrire_config("ckeditor/partie_publique", (bool) _request("partie_publique")) ;
-		ecrire_config("ckeditor/class_publique", _request("class_publique")) ;
-		ecrire_config("ckeditor/publique_tb", _request("publique_tb")) ;
-		ecrire_config("ckeditor/partie_prive", (bool) _request("partie_prive")) ;
-		ecrire_config("ckeditor/class_prive", _request("class_prive")) ;
-		ecrire_config("ckeditor/prive_tb", _request("prive_tb")) ;
+
+		ecrire_config("ckeditor/selecteurs_public", _request("selecteurs_public")) ;
+		ecrire_config("ckeditor/selecteurs_prive", _request("selecteurs_prive")) ;
+
 		ecrire_config("ckeditor/cktoolslenlarge", _request("cktoolslenlarge")) ;
 		ecrire_config("ckeditor/cktoolslenetroit", _request("cktoolslenetroit")) ;
 		ecrire_config("ckeditor/cklanguage", _request("cklanguage")) ;

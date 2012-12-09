@@ -25,12 +25,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aide_images_modele' => 'Si vous voulez modifier les images proposées, vous pouvez créer un répertoire <code>images/templates/</code> dans votre répertoire <code>squelettes</code>.',
 	'aide_inserer_la_css' => 'Si vous cochez ces options, c\'est le plugin qui va se charger d\'insérer le code HTML chargeant les CSS des polices, sinon, vous devrez modifier les squelettes de vos pages pour les insérer dans celles que vous désirez.',
 	'aide_plugin' => 'Si vous voulez installez des [plugins->http://ckeditor.com/Forums/Plugins-0] pour CKEditor, il faut créer un dossier <code>plugins/ckeditor</code> accessible depuis la commande <code>#CHEMIN</code> de SPIP (par exemple dans le dossier <code>squelettes</code>). Puis installer chaque plugin dans un répertoire de ce dossier.',
+	'aide_selecteurs' => 'Entrez ici une liste de sélecteurs (un par ligne), suivis éventuellement de <code>|basique</code> pour n\'utiliser qu\'une barre d\'outils basique.
+Exemple : 
+<cadre class=css>
+.inserer_barre_outils
+#formulaire_forum textarea|basique
+</cadre>',
 	'aide_styles' => 'Tout style correctement défini ici s\'affichera dans le « combo » styles de CKEditor.<br/>Un style doit respecter la syntaxe : <code>NOM : element.class { css }</code>. Dans lequel,
 -* {{NOM}} est : n\'importe quelle chaine de caractères, c\'est le nom qui s\'affichera dans CKEditor,
 -* {{element}} est : un élément HTML (strong, em, span, et c...), la sélection à laquelle vous appliquerez ce styles sera dans un bloc HTML du type de cet élément,
 -* {{class}} ({facultatif}) est : un nom de classe CSS à définir dans votre feuille de style,
 -* {{css}} ({facultatif}) est : du code CSS valide, comme par exemple <code style="color: green;">color: blue;</code> (aucun test n\'est fait, une erreur peut faire planter le javascript généré et empêcher l\'éditeur de s\'afficher).',
-'aide_syntaxe_modele' => 'Les paramêtres des modèles spip sont normalement passés avec la syntaxe (spip) : <code><modele|param1=val1|param2=val2...></code>, si vous voulez que votre modèle utilise la syntaxe (html) : <code><modele param1=ˮval1ˮ param2=ˮval2ˮ...></code>, sélectionnez l\'option <code>html</code>.',
+	'aide_syntaxe_modele' => 'Les paramêtres des modèles spip sont normalement passés avec la syntaxe (spip) : <code><modele|param1=val1|param2=val2...></code>, si vous voulez que votre modèle utilise la syntaxe (html) : <code><modele param1=ˮval1ˮ param2=ˮval2ˮ...></code>, sélectionnez l\'option <code>html</code>.',
 	'aide_vignette' => 'Entrez ici la taille maximale des vignettes utilisées par CKEditor. Si vous laissez cette zone vide, les images seront affichées avec leur taille normale par CKEditor.',
 	'aide_webfonts' => 'Entrez ici, une liste (séparée par des virgules) de noms de police <a target="_blank" onclick="window.open(this.href,\'_blank\',\'height=500,width=500,location=no,scrollbar=yes\');return false;" href="http://code.google.com/webfonts">Google Web Fonts</a>. Les noms doivent être exactement ceux proposés dans le répertoire de polices de google.',
 	'apres' => 'après',
@@ -89,8 +95,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_des_polices' => 'Configuration des polices :',
 	'configuration_formats' => 'Configuration des « formats » CKEditor',
 	'configuration_modeles' => 'Gestion des modèles :',
-	'config_avancee' => 'Configuration avancée',
-	'config_barres_outils' => 'Configuration des barres d\'outils',
 	'confirmer_supprimer_modele' => 'Êtes vous sur de vouloir supprimer ce modèle ?',
 	'confirme_reinitialiser_plugin' => 'Êtes vous sur de vouloir réinitialiser le plugin ? (Cela supprimera toutes vos préférences)',
 	'contenu_du_modele' => 'Contenu du modèle :',
@@ -243,7 +247,7 @@ Valeur détectée : ',
 	'ordre_du_bouton' => 'Ordre du bouton :',
 
 // P
-	'parametre_nomme' => 'Paramètre : @PARAMETRE@',	
+	'parametre_nomme' => 'Paramètre : @PARAMETRE@',
 	'partie_privee' => 'les formulaires en partie privée',
 	'partie_publique' => 'les formulaires en partie publique',
 	'pas_numerique' => 'non numérique',
@@ -265,6 +269,8 @@ Valeur détectée : ',
 
 // S
 	'sans_contexte' => 'sans contexte',
+	'selecteurs_espace_prive' => 'Sélecteurs jQuery pour l\'espace privé :',
+	'selecteurs_espace_public' => 'Sélecteurs jQuery pour l\'espace publique :',
 	'selection_aucun' => 'Tout désélectionner',
 	'selection_document_spip' => 'Sélection d\'un document SPIP',
 	'selection_inverse' => 'Inverser la  sélection',

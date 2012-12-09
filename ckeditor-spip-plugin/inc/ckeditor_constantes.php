@@ -64,19 +64,10 @@ define('_CKE_WEBFONTS_DEF', '' ) ;
 define('_CKE_FONTKIT_DEF', true ) ;
 define('_CKE_INSERT_CSSPUBLIC_DEF', true ) ;
 define('_CKE_INSERT_CSSPRIVEE_DEF', true ) ;
-define('_CKE_CRAYONS_DEF', false ) ;
-define('_CKE_FORUMS_DEF', false ) ;
-define('_CKE_CISF_DEF', false ) ;
-define('_CKE_CRAYONS_TB_DEF', 'Full' ) ;
-define('_CKE_FORUMS_TB_DEF', 'Basic' ) ;
-define('_CKE_CISF_TB_DEF', 'Full' ) ;
-define('_CKE_CHAMPS_EXTRAS_TB_DEF', 'Basic') ;
-define('_CKE_PARTIE_PUBLIQUE_DEF', false) ;
-define('_CKE_CLASS_PUBLIQUE_DEF', 'inserer_barre_edition') ;
-define('_CKE_PUBLIQUE_TB_DEF', 'Basic') ;
-define('_CKE_PARTIE_PRIVE_DEF', true) ;
-define('_CKE_CLASS_PRIVE_DEF', 'inserer_barre_edition') ;
-define('_CKE_PRIVE_TB_DEF', 'Full') ;
+
+define('_CKE_PRIVE_DEF', ".inserer_barre_edition\ntextarea[name=texte]"  ) ;
+define('_CKE_PUBLIC_DEF', "#formulaire_forum textarea[name=texte]|basique\ntextarea.crayon-active" ) ;
+
 define('_CKE_STYLES_DEF', 'Gras: strong.spip
 Italique: i.spip
 Intertitre: h3.spip

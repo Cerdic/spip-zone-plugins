@@ -64,27 +64,24 @@ function ckeditor_getcss() {
 }
 
 function ckeditor_prepare_champs($type, $default_tb = 'Full') {
-	$champs = array(
-		array('textarea[name=texte]',$default_tb),
-		array('textarea[name=bio]',$default_tb),
-		array('textarea[name=descriptif]',$default_tb)
-	) ;
+
+	if (!is_array($type))
+		$type = preg_split("/(\r\n|\n\r|\n|\r)/s", $type) ;
+
+	$champs = array() ;
+	foreach($type as $item) {
+		if (preg_match("~^(.*)\s*\|\s*basi(c|que)\si*$~", $item, $match)) {
+			$tb = 'Basic' ;
+			$item = $match[1] ;
+		} else {
+			$tb = 'Full' ;
+		}
+		$champs[] = array($item, $tb) ;
+	}
 
 	$ckeditor_prepare_champs_post = charger_fonction('ckeditor_prepare_champs_post','');
 	$champs = $ckeditor_prepare_champs_post($champs, $default_tb) ;
 
-	if ($iextras = $GLOBALS['meta']['iextras']) { // y'a-t-il des champs extra ?
-		include_spip('inc/cextras');
-		$iextras = unserialize($iextras) ;
-		$champs_extras = lire_config("ckeditor/champs_extras") ;
-		$extras_tbs = lire_config("ckeditor/extras_tb") ;
-		foreach($iextras as $id => $iextra) {
-			if ($champs_extras[$iextra->champ]) {
-				$val = is_array($extras_tbs)&&!is_null($extras_tbs[$iextra->champ])?$extras_tbs[$iextra->champ]:_CKE_CHAMPS_EXTRAS_TB_DEF;
-				$champs[] = array("#" . $iextra->champ,$val) ; // on l'ajoute à la liste des champs ckeditor-editable
-			}
-		}
-	}
 	return $champs;
 }
 
@@ -153,15 +150,8 @@ function ckeditor_header_prive($flux) {
 			default: 
 		}
 	}
-	if($champs = ckeditor_prepare_champs($type))
+	if($champs = ckeditor_prepare_champs(ckeditor_lire_config('ckeditor/selecteurs_prive',_CKE_PRIVE_DEF)))
 		$config['ajaxload']=$champs;
-
-	if (ckeditor_lire_config('crayons', _CKE_CRAYONS_DEF)) 
-		$config['ajaxload'][] = array("textarea.crayon-active",ckeditor_lire_config('crayons_tb',_CKE_CRAYONS_TB_DEF)) ;
-
-	if (ckeditor_lire_config('partie_privee', _CKE_PARTIE_PRIVE_DEF)
-		&& ($class = ckeditor_lire_config('class_privee', _CKE_CLASS_PRIVE_DEF)))
-		$config['ajaxload'][] = array('textarea.'.$class, ckeditor_lire_config('prive_tb', _CKE_PRIVE_TB_DEF)) ;
 
 	if (count($config['ajaxload']))
 		$flux .= ckeditor_preparescript($config) ;
@@ -202,13 +192,9 @@ function ckeditor_insert_head($flux) {
 			$config['type']=$type;
 			$config['id']=$id;
 		}
-	}		
-	if (ckeditor_lire_config('crayons', _CKE_CRAYONS_DEF))
-		$config['ajaxload'][]=array("textarea.crayon-active",ckeditor_lire_config('crayons_tb',_CKE_CRAYONS_TB_DEF));
-
-	if (ckeditor_lire_config('partie_publique', _CKE_PARTIE_PUBLIQUE_DEF)
-		&& ($class = ckeditor_lire_config('class_publique', _CKE_CLASS_PUBLIQUE_DEF)))
-		$config['ajaxload'][] = array('textarea.'.$class, ckeditor_lire_config('publique_tb', _CKE_PUBLIQUE_TB_DEF)) ;
+	}
+	if($champs = ckeditor_prepare_champs(ckeditor_lire_config('ckeditor/selecteurs_public',_CKE_PUBLIC_DEF)))
+		$config['ajaxload']=$champs;
 
 	if (count($config['ajaxload'])) // s'il y a quelque chose à charger :
 		$flux .= ckeditor_preparescript($config) ;
