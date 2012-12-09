@@ -140,9 +140,9 @@ function ckeditor_header_prive($flux) {
 		switch($type) {
 			case 'article':
 			case 'rubrique':
+				$config['type'] = $type ;
 				$id_type = _request('id_'.$type) ;
 				if ($id_type) {
-					$config['type'] = $type ;
 					$config['id'] = $id_type ;
 					$config['scayt_sLang'] = ckeditor_get_scaytlang($type, $id_type) ;
 				}
