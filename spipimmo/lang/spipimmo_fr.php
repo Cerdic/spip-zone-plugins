@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//A
 	'acces_handicape' => 'Accès handicapé',
 	'adresse' => 'Adresse',
+	'annee_construction' => 'Année de construction',
 	'annonce' => 'Annonce',
 	'ascenseur' => 'Ascenseur',
 	//C
@@ -16,16 +17,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_proprietaire' => 'Créer un propriétaire',
 	//D
 	'dpe' => 'DPE',
+	'date_annonce' => 'Date de l\'annonce',
 	'date_dispo' => 'Date de disponibilité',
 	'date_modif' => 'Date de modification',
 	'depot_garantie' => 'Dépot de garantie',
 	//E
 	'etage' => 'Etage',
 	'etage_code' => 'Etage code',
+	'exclusif' => 'Exclusif',
 	//H
 	'honoraires' => 'Honoraires',
 	//L
 	'liste_annonces' => 'Liste des annonces',
+	'location' => 'Location',
 	//N
 	'nature_chauffage' => 'Nature de chauffage',
 	'nbr_balcon' => 'Nombre de balcon',
@@ -46,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//P
 	'piscine' => 'Piscine',
 	'prestige' => 'Prestige',
+	'privilège' => 'Privilège',
 	'prix_loyer' => 'Prix loyer',
 	'proximite' => 'Proximité',
 	'publier' => 'Publier',
@@ -54,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'residence' => 'Résidence',
 	//S
 	'secteur' => 'Secteur',
+	'semi_privilege' => 'Semi-privilège',
 	'spipimmo' => 'SPIP-Immo',
 	'surface_facade' => 'Surface de facade',
 	'surface_habitable' => 'Surface habitable',
@@ -71,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_offre' => 'Type de sous sol',
 	'type_sous_sol' => 'Nombre de mur mitoyen',
 	//V
+	'vente' => 'Vente',
 	'vente_location' => 'Vente/Location',
 	'ville' => 'Ville',
 

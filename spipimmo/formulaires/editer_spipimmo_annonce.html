@@ -2,7 +2,7 @@
 
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	
+
 	<form method='post' action='#ENV{action}'><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<input type='hidden' name='id_annonce' value='#ENV{id_annonce}' />
@@ -61,6 +61,7 @@
 					}
 			)]
 			[(#SAISIE{input, depot_garantie, label=<:spipimmo:depot_garantie:>})]
+			[(#SAISIE{date, date_annonce, label=<:spipimmo:date_annonce:>})]
 			[(#SAISIE{date, date_modif, label=<:spipimmo:date_modif:>})]
 			[(#SAISIE{date, date_dispo, label=<:spipimmo:date_dispo:>})]
 			[(#SAISIE{input, quartier, label=<:spipimmo:quartier:>})]
@@ -72,30 +73,30 @@
 		<li class="fieldset">
 		<fieldset>
 			<ul>
-			[(#SAISIE{input, nombre_piece, label=<:spipimmo:nbr_piece:>})]
-			[(#SAISIE{input, nombre_chambre, label=<:spipimmo:nbr_chambre:>})]
-			[(#SAISIE{input, nombre_etage, label=<:spipimmo:nbr_etage:>})]
-			[(#SAISIE{input, nombre_wc, label=<:spipimmo:nbr_wc:>})]
-			[(#SAISIE{input, nombre_bain, label=<:spipimmo:nbr_sdb:>})]
-			[(#SAISIE{input, nombre_eau, label=<:spipimmo:nbr_sde:>})]
-			[(#SAISIE{input, nombre_balcon, label=<:spipimmo:nbr_balcon:>})]
-			[(#SAISIE{input, nombre_terrasse, label=<:spipimmo:nbr_terrasse:>})]
-			[(#SAISIE{input, nombre_mur, label=<:spipimmo:nbr_mur_mitoyen:>})]
-			[(#SAISIE{input, nombre_parcking_interieur, label=<:spipimmo:nbr_park_int:>})]
-			[(#SAISIE{input, nombre_parcking_exterieur, label=<:spipimmo:nbr_park_ext:>})]
-			[(#SAISIE{input, nombre_garage, label=<:spipimmo:nbr_garage:>})]
-			[(#SAISIE{input, nombre_cave, label=<:spipimmo:nbr_cave:>})]
+			[(#SAISIE{input, nbr_piece, label=<:spipimmo:nbr_piece:>})]
+			[(#SAISIE{input, nbr_chambre, label=<:spipimmo:nbr_chambre:>})]
+			[(#SAISIE{input, nbr_etage, label=<:spipimmo:nbr_etage:>})]
+			[(#SAISIE{input, nbr_wc, label=<:spipimmo:nbr_wc:>})]
+			[(#SAISIE{input, nbr_sdb, label=<:spipimmo:nbr_sdb:>})]
+			[(#SAISIE{input, nbr_sde, label=<:spipimmo:nbr_sde:>})]
+			[(#SAISIE{input, nbr_balcon, label=<:spipimmo:nbr_balcon:>})]
+			[(#SAISIE{input, nbr_terrasse, label=<:spipimmo:nbr_terrasse:>})]
+			[(#SAISIE{input, nbr_mur_mit, label=<:spipimmo:nbr_mur_mitoyen:>})]
+			[(#SAISIE{input, nbr_park_int, label=<:spipimmo:nbr_park_int:>})]
+			[(#SAISIE{input, nbr_park_ext, label=<:spipimmo:nbr_park_ext:>})]
+			[(#SAISIE{input, nbr_garage, label=<:spipimmo:nbr_garage:>})]
+			[(#SAISIE{input, nbr_cave, label=<:spipimmo:nbr_cave:>})]
 			</ul>
 		</fieldset>
 		</li>
 		<li class="fieldset">
 		<fieldset>
 			<ul>
-			[(#SAISIE{input, surface_facade, label=<:spipimmo:surface_facade:>})]
-			[(#SAISIE{input, surface_habitable, label=<:spipimmo:surface_habitable:>})]
-			[(#SAISIE{input, surface_sejour, label=<:spipimmo:surface_sejour:>})]
-			[(#SAISIE{input, surface_terrain, label=<:spipimmo:surface_terrain:>})]
-			[(#SAISIE{input, surface_total, label=<:spipimmo:surface_total:>})]
+			[(#SAISIE{input, surf_facade, label=<:spipimmo:surface_facade:>})]
+			[(#SAISIE{input, surf_habitable, label=<:spipimmo:surface_habitable:>})]
+			[(#SAISIE{input, surf_sejour, label=<:spipimmo:surface_sejour:>})]
+			[(#SAISIE{input, surf_terrain, label=<:spipimmo:surface_terrain:>})]
+			[(#SAISIE{input, surf_total, label=<:spipimmo:surface_total:>})]
 			</ul>
 		</fieldset>
 		</li>
@@ -103,7 +104,7 @@
 			[(#SAISIE{input, etage, label=<:spipimmo:etage:>})]
 			[(#SAISIE{input, etage_code, label=<:spipimmo:etage_code:>})]
 			[(#SAISIE{input, type_cuisine, label=<:spipimmo:type_cuisine:>})]
-			[(#SAISIE{input, type_sous_sol, label=<:spipimmo:type_sous_sol:>})]
+			[(#SAISIE{input, type_soussol, label=<:spipimmo:type_sous_sol:>})]
 			[(#SAISIE{input, type_chauffage, label=<:spipimmo:type_chauffage:>})]
 			[(#SAISIE{input, nature_chauffage, label=<:spipimmo:nature_chauffage:>})]
 		<li class="fieldset">
