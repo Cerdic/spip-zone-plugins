@@ -21,7 +21,7 @@ function exec_edit_groupe_autorisations() {
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe")) );
 		echo association_totauxinfos_intro(_T("asso:groupe_".$id_groupe), 'groupe', $id_groupe, $infos );
 		// datation et raccourcis
-		echo association_navigation_raccourcis('association_autorisations');
+		echo association_navigation_raccourcis(generer_url_ecrire('association_autorisations'));
 		debut_cadre_association('annonce.gif', 'titre_editer_groupe');
 		echo recuperer_fond('prive/editer/editer_asso_groupes', array (
 			'id' => $id_groupe

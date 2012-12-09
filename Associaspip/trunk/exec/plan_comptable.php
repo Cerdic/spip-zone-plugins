@@ -21,7 +21,7 @@ function exec_plan_comptable() {
 		// notice
 		echo propre(_T('asso:plan_info'));
 		// datation et raccourcis
-		echo association_navigation_raccourcis('association', array(
+		echo association_navigation_raccourcis(generer_url_ecrire('association'), array(
 			'plan_nav_ajouter' => array('plan_compte.png', 'edit_plan'),
 		));
 		debut_cadre_association('plan_compte.png',  'plan_comptable');

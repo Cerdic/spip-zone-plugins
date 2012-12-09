@@ -24,7 +24,7 @@ function exec_suppr_categorie() {
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_membres', "categorie=$id_categorie"), ));
 		echo '<div class="hproduct">'. association_totauxinfos_intro('<span class="n">'.$categorie['libelle'].'</span>', 'categorie', $id_categorie, $infos ) .'</div>';
 		// datation et raccourcis
-		echo association_navigation_raccourcis('categories');
+		echo association_navigation_raccourcis(generer_url_ecrire('categories'));
 		debut_cadre_association('cotisation.png', 'categories_de_cotisations');
 		echo association_bloc_suppression('categorie', $id_categorie);
 		fin_page_association();

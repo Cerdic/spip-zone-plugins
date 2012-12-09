@@ -21,7 +21,7 @@ function exec_association_autorisations() {
 		// notice
 		echo _T('asso:aide_gerer_autorisations');
 		// datation et raccourcis
-		echo association_navigation_raccourcis('association');
+		echo association_navigation_raccourcis(generer_url_ecrire('association'));
 		debut_cadre_association('annonce.gif', 'les_groupes_dacces');
 		echo recuperer_fond('prive/contenu/voir_groupes_autorisations', array ());
 		fin_page_association();

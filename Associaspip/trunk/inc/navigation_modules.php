@@ -109,10 +109,12 @@ function association_navigation_raccourcis($retour='',  $raccourcis=array()) {
 			$res .= icone1_association($titre,  is_array($script)?generer_url_ecrire($script[0],$script[1]):generer_url_ecrire($script), $image);
 	}
 
+	if ($retour)
+		$res .= icone1_association('asso:bouton_retour', $retour, 'retour-24.png');
+
 	return association_date_du_jour()
 	. fin_boite_info(TRUE)
-	. bloc_des_raccourcis($res)
-	. ($retour ? icone1_association('asso:bouton_retour', $retour, 'retour-24.png') : '');
+	. bloc_des_raccourcis($res);
 }
 
 /**
