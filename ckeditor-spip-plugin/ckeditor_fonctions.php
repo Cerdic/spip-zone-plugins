@@ -150,7 +150,7 @@ function ckeditor_header_prive($flux) {
 			default: 
 		}
 	}
-	if($champs = ckeditor_prepare_champs(ckeditor_lire_config('ckeditor/selecteurs_prive',_CKE_PRIVE_DEF)))
+	if($champs = ckeditor_prepare_champs(ckeditor_lire_config('selecteurs_prive',_CKE_PRIVE_DEF)))
 		$config['ajaxload']=$champs;
 
 	if (count($config['ajaxload']))
@@ -165,9 +165,6 @@ function ckeditor_insert_head($flux) {
 		$flux .= ckeditor_getcss() ;
 	}
 	$config=array('ajaxload'=>array());
-	if((ckeditor_lire_config('forums', _CKE_FORUMS_DEF))) {
-		$config['ajaxload'][]=array("#formulaire_forum textarea[name=texte]",ckeditor_lire_config('forums_tb',_CKE_FORUMS_TB_DEF));
-	}
 	if ((_request('page')=='cisf_article')&&ckeditor_lire_config('cisf', _CKE_CISF_DEF)) {
 		$config['ajaxload']=ckeditor_prepare_champs('article',ckeditor_lire_config('cisf_tb',_CKE_CISF_TB_DEF));
 		$config['type'] = 'article' ;
@@ -193,7 +190,7 @@ function ckeditor_insert_head($flux) {
 			$config['id']=$id;
 		}
 	}
-	if($champs = ckeditor_prepare_champs(ckeditor_lire_config('ckeditor/selecteurs_public',_CKE_PUBLIC_DEF)))
+	if($champs = ckeditor_prepare_champs(ckeditor_lire_config('selecteurs_public',_CKE_PUBLIC_DEF)))
 		$config['ajaxload']=$champs;
 
 	if (count($config['ajaxload'])) // s'il y a quelque chose à charger :
