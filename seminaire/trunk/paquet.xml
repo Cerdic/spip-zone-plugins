@@ -2,10 +2,10 @@
 	prefix="seminaire"
 	categorie="date"
 	version="2.0.0"
-	etat="dev"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/seminaire-64.png"
-	documentation="http://www.spip-contrib.net/Seminaire-LATP"
+	documentation="http://www.spip-contrib.net/?article4288"
 	schema="1.0.0" 
 >
 	<nom>Séminaire</nom>
