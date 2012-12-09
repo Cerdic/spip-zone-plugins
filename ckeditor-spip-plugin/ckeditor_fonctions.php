@@ -70,13 +70,15 @@ function ckeditor_prepare_champs($type, $default_tb = 'Full') {
 
 	$champs = array() ;
 	foreach($type as $item) {
-		if (preg_match("~^(.*)\s*\|\s*basi(c|que)\si*$~", $item, $match)) {
-			$tb = 'Basic' ;
-			$item = $match[1] ;
-		} else {
-			$tb = 'Full' ;
+		if ($item) {
+			if (preg_match("~^(.*)\s*\|\s*basi(c|que)\si*$~", $item, $match)) {
+				$tb = 'Basic' ;
+				$item = $match[1] ;
+				} else {
+				$tb = 'Full' ;
+			}
+			$champs[] = array($item, $tb) ;
 		}
-		$champs[] = array($item, $tb) ;
 	}
 
 	$ckeditor_prepare_champs_post = charger_fonction('ckeditor_prepare_champs_post','');
