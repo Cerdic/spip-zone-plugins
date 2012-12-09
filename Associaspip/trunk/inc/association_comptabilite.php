@@ -887,13 +887,11 @@ class ExportComptes_TXT {
      * @return
      */
     function leFichier($ext, $subtype='') {
-	$fichier = _DIR_RACINE.'/'._NOM_TEMPORAIRES_ACCESSIBLES.'compte_'. ($subtype?$subtype:$this->type) .'_'.$this->periode.'_'.$this->destination.".$ext"; // on essaye de creer le fichier dans le cache local/ http://www.spip.net/fr_article4637.html
-	$f = fopen($fichier, 'w');
-	fputs($f, $this->out);
-		fclose($f);
+	$fichier = 'compte_'. ($subtype?$subtype:$this->type) .'_'.$this->periode.'_'.$this->destination.".$ext";
+
 	header('Content-type: application/'.$ext);
 	header('Content-Disposition: attachment; filename="'.$fichier.'"');
-	readfile($fichier);
+	echo  $this->out;
     }
 
 }
