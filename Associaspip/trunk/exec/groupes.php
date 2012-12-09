@@ -22,7 +22,7 @@ function exec_groupes() {
 		echo _T('asso:aide_groupes');
 		// datation et raccourcis
 		echo association_navigation_raccourcis(generer_url_ecrire('adherents'), array(
-			'ajouter_un_groupe' => array('annonce.gif', 'edit_groupe'),
+		      'ajouter_un_groupe' => array('annonce.gif', array('edit_groupe'))
 		));
 		debut_cadre_association('annonce.gif', 'tous_les_groupes');
 		// affichage du tableau

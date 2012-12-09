@@ -32,7 +32,7 @@ function exec_exercices() {
 		///
 		// datation et raccourcis
 		echo association_navigation_raccourcis(generer_url_ecrire('association'), array(
-			'ajouter_un_exercice' => array('calculatrice.gif', 'edit_exercice'),
+			'ajouter_un_exercice' => array('calculatrice.gif', array('edit_exercice'))
 		) );
 		debut_cadre_association('calculatrice.gif', 'tous_les_exercices');
 		echo association_bloc_listehtml2('asso_exercices',

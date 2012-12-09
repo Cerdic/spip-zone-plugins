@@ -22,7 +22,7 @@ function exec_destination() {
 		echo propre(_T('asso:destination_info'));
 		// datation et raccourcis
 		echo association_navigation_raccourcis(generer_url_ecrire('association'), array(
-			'destination_nav_ajouter' => array('euro-39.gif', 'edit_destination'),
+			'destination_nav_ajouter' => array('euro-39.gif', array('edit_destination')),
 		));
 		debut_cadre_association('euro-39.gif', 'destination_comptable');
 		//Affichage de la table

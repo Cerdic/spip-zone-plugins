@@ -40,11 +40,11 @@ function exec_activites() {
 		// datation et raccourci vers la gestion des evenements
 		if ( test_plugin_actif('SIMPLECAL') ) { // gestion des evenements avec Simple Calendrier
 			echo association_navigation_raccourcis('', array(
-				'evenements' => array('simplecal-logo-16.png', 'evenement_tous'),
+									 'evenements' => array('simplecal-logo-16.png', array('evenement_tous')),
 			) );
 		} elseif ( test_plugin_actif('AGENDA') ) { // gestion des evenements avec Agenda 2
 			echo association_navigation_raccourcis('', array(
-				'evenements' => array('agenda-evenements-16.png', 'agenda_evenements'),
+									 'evenements' => array('agenda-evenements-16.png', array('agenda_evenements')),
 			) );
 		} else { // pas de bloc de raccourcis
 			echo association_date_du_jour();

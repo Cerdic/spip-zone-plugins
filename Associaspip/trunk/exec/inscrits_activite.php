@@ -44,7 +44,7 @@ function exec_inscrits_activite() {
 			$res['activite_bouton_ajouter_inscription'] = array('panier_in.gif', array('edit_activite', "id_evenement=$id_evenement"));
 		}
 		if ( test_plugin_actif('FPDF') && sql_countsel('spip_asso_activites', "id_evenement=$id_evenement", 'id_auteur') ) { // PDF des inscrits
-			$res['activite_bouton_imprimer_inscriptions'] = array('print-24.png', array('pdf_activite', "id=$id_evenement"));
+			$res['activite_bouton_imprimer_inscriptions'] = array('print-24.png', generer_action_auteur('pdf_activite', $id_evenement));
 		}
 		if ( test_plugin_actif('AGENDA') && sql_countsel('spip_evenements_participants', "id_evenement=$id_evenement", 'id_auteur') ) { // inscrits via le formulaire d'Agenda2
 			$res['activite_bouton_synchroniser_inscriptions'] = array('reload-32.png', array('synchronis_activites', "id=$id_evenement"));

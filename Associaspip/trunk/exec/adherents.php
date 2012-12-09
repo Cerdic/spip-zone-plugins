@@ -45,10 +45,13 @@ function exec_adherents() {
 		}
 
 		// datation et raccourcis
+		// l'id groupe passe en parametre est a 100 
+		// car ce sont les groupes definis par l'utilisateur
+		// et non ceux des autorisation qu'on liste dans cette page
 		echo association_navigation_raccourcis('', array(
-			'gerer_les_groupes' => array('annonce.gif', 'groupes', array('voir_groupes', 'association', 100) ), // l'id groupe passe en parametre est a 100 car ce sont les groupes definis par l'utilisateur et non ceux des autorisation qu'on liste dans cette page
-			'menu2_titre_mailing' => array('mail-24.png', 'mailing'.((intval($id_groupe)>99)?"&filtre_id_groupe=$id_groupe":'').($statut_interne?"&filtre_statut_interne=$statut_interne":''), array('relancer_membres', 'association') ),
-			'synchronise_asso_membre_lien' => array('reload-32.png', 'synchroniser_asso_membres', array('gerer_membres', 'association') ),
+			'gerer_les_groupes' => array('annonce.gif', array('groupes'), array('voir_groupes', 'association', 100) ),
+			'menu2_titre_mailing' => array('mail-24.png', array('mailing', ((intval($id_groupe)>99)?"&filtre_id_groupe=$id_groupe":'').($statut_interne?"&filtre_statut_interne=$statut_interne":'')), array('relancer_membres', 'association') ),
+		       'synchronise_asso_membre_lien' => array('reload-32.png', array('synchroniser_asso_membres'), array('gerer_membres', 'association') ),
 		));
 		if ( test_plugin_actif('FPDF') && test_plugin_actif('COORDONNEES') && autoriser('exporter_membres', 'association') ) { // etiquettes
 			echo debut_cadre_enfonce('',TRUE);

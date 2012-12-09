@@ -24,7 +24,7 @@ function exec_categories() {
 		echo association_totauxinfos_stats('tous', 'categories', array('entete_duree'=>'duree', 'entete_montant'=>'prix_cotisation') );
 		// datation et raccourcis
 		echo association_navigation_raccourcis(generer_url_ecrire('association'), array(
-			'ajouter_une_categorie_de_cotisation' => array('cotisation.png', 'edit_categorie'),
+			'ajouter_une_categorie_de_cotisation' => array('cotisation.png', array('edit_categorie'))
 		));
 		debut_cadre_association('cotisation.png', 'toutes_categories_de_cotisations');
 		echo association_bloc_listehtml2('asso_categories',
@@ -47,5 +47,4 @@ function exec_categories() {
 		fin_page_association();
 	}
 }
-
 ?>

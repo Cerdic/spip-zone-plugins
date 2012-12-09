@@ -91,12 +91,13 @@ function onglets_association($titre='', $top_exec='', $INSERT_HEAD=TRUE) {
  * @param array $raccourcis
  *   Tableau des raccourcis definis chacun sous la forme :
  *   'titre' => array('icone', array('url_ecrire', 'parametres_url'), array('permission' ...), ),
+ *   toutefois si le 2e element est une chaine, on la prend comme URL
  * @return void
  */
 function association_navigation_raccourcis($retour='',  $raccourcis=array()) {
 	$res = ''; // initialisation
 	foreach($raccourcis as $titre => $params) {
-		list($image, $script, $aut) = $params;
+		list($image, $url, $aut) = $params;
 		// autorisation d'acces au module
 		if ( is_array($aut) && count($aut) ) { // autorisation a calculer
 			$acces = call_user_func_array('autoriser', $aut);
@@ -105,8 +106,11 @@ function association_navigation_raccourcis($retour='',  $raccourcis=array()) {
 		} else // pas d'autorisation definie = autorise pour tous
 			$acces = TRUE;
 		// generation du raccourci
-		if ( $acces )
-			$res .= icone1_association($titre,  is_array($script)?generer_url_ecrire($script[0],$script[1]):generer_url_ecrire($script), $image);
+		if ( $acces ) {
+			if (is_array($url))
+				$url = generer_url_ecrire($url[0],$url[1]);
+			$res .= icone1_association($titre, $url, $image);
+		}
 	}
 
 	if ($retour)

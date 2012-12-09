@@ -78,8 +78,8 @@ function exec_prets() {
 		echo association_totauxinfos_montants('emprunts', sql_getfetsel('SUM(duree*prix_unitaire) AS totale', 'spip_asso_prets', "id_ressource=$id_ressource"), $ressource['prix_acquisition']); // /!\ les recettes sont calculees simplement (s'il y a un systeme de penalite pour retard, il faut s'adapter a la saisie pour que le module soit utile) ; les depenses ne prennent pas en compte les eventuels frais d'entretien ou de reparation de la ressource...
 		// datation et raccourcis
 		if ( (is_numeric($ressource['statut']) && $ressource['statut']>0) || $ressource['statut']=='ok' )
-			$res['prets_nav_ajouter'] = array('creer-12.gif', array('edit_pret', "id_ressource=$id_ressource&id_pret="), array('gerer_prets', 'association') );
-		echo association_navigation_raccourcis(generer_url_ecrire('ressources'), $res);
+			echo association_navigation_raccourcis(generer_url_ecrire('ressources'), array('prets_nav_ajouter' => array('creer-12.gif', array('edit_pret', "id_ressource=$id_ressource&id_pret="), array('gerer_prets', 'association'))));
+
 		debut_cadre_association('pret-24.gif', 'prets_titre_liste_reservations');
 		// FILTRES
 		$filtre_statut = '<select name="statut" onchange="form.submit()">';
