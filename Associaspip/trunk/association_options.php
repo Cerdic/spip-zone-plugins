@@ -1975,21 +1975,6 @@ function association_totauxinfos_montants($legende='', $somme_recettes=0, $somme
 ** @{ */
 
 /**
- * Boite d'infos sur un objet (colonne gauche)
- *
- *
- * @note
- *   Une certaine similitude avec http://programmer.spip.org/boite_infos :)
-  */
-function association_bloc_infosgauche($TitreObjet, $NumObjet, $DesLignes=array(), $ObjetEtendu='') {
-	$res = debut_boite_info(TRUE);
-	$res .= association_totauxinfos_intro($TitreObjet, $TitreObjet, $NumObjet, $DesLignes, $ObjetEtendu);
-	$res .= association_date_du_jour();
-	$res .= fin_boite_info(TRUE);
-	return $res;
-}
-
-/**
  * Demande de confirmation dans la suppression d'un objet
  *
  * @param string $type

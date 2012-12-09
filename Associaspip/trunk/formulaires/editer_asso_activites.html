@@ -15,7 +15,7 @@
 				<li class="editer_quantite">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{quantite})</span>]
 					<label for="nombre_places"><:asso:libelle_quantite:></label>
-					<input name="quantite" type="[(#HTML5|?{number,text})]" [value="(#ENV{inscrits})"] id="nombre_places" class="number integer" [(#ENV{date_paiement}|oui) readonly="readonly"]/>
+					<input name="quantite" type="[(#HTML5|?{number,text})]" [value="(#ENV{quantite})" ]id="nombre_places" class="number integer" [(#ENV{date_paiement}|oui) readonly="readonly"]/>
 				</li>
 				<INCLURE{fond=inc/saisir_commentaires, commentaire }>
 			</ul>
@@ -27,13 +27,13 @@
 			<ul>
 				<li class="editer_montant">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{montant})</span>]
-					<label for="montant_inscriptions"><:asso:activite_libelle_montant_inscription:></label>
-					<input name="montant" type="[(#HTML5|?{number,text})]" [value="(#ENV{montant})"] id="montant_inscriptions" class="number float price" />
+					<label for="prix_unitaire"><:asso:activite_libelle_montant_inscription:></label>
+					<input name="prix_unitaire" type="[(#HTML5|?{number,text})]" [value="(#ENV{prix_unitaire})" ]id="prix_unitaire" class="number float price" />
 				</li>
 				<li class="editer_date">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_paiement})</span>]
 					<label for="date_paiement"><:asso:libelle_date:></label>
-					<input name="date_paiement" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_paiement})"] id="date_paiement" class="date" />
+					<input name="date_paiement" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_paiement})" ]id="date_paiement" class="date" />
 				</li>
 				<INCLURE{fond=inc/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, defaut_dest, env}>
 			</ul>
