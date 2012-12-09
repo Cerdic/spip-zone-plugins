@@ -1,25 +1,67 @@
 <!--#navigation-->
+
 <div class="box simple spipimmo">
+
 	<div class="inner">
+
 	<ul>
+
 		<!-- Gestion des annonces -->
+
 		<li class="menu">
-			<a href="#URL_ECRIRE{spipimmo}" 
+
+			<a href="#URL_ECRIRE{spipimmo}"
+ 
 				class="page_accueil [(#ENV{exec}|=={spipimmo}|oui)on]" 
+
 				title="<:spipimmo:liste_annonces:>">
+
 				<img src="#CHEMIN{prive/themes/spip/images/breve-24.png}" />
+
 				<:spipimmo:liste_annonces:>
+
 			</a>
+
 		</li>
+
 		<li class="menu">
-			<a href="#URL_ECRIRE{spipimmo_annonce}" 
-				class="page_accueil [(#ENV{exec}|=={spipimmo_annonce}|oui)on]" 
+
+			<a href="#URL_ECRIRE{spipimmo_annonce}"
+
+ 
+				class="page_accueil [(#ENV{exec}|=={spipimmo_annonce}|oui)on]"
+ 
 				title="<:spipimmo:creer_annonce:>">
+
 				<img src="#CHEMIN{prive/themes/spip/images/mot-24.png}" />
+
 				<:spipimmo:creer_annonce:>
+
 			</a>
+
 		</li>
+
+		<li class="menu">
+
+			<a href="#URL_ECRIRE{spipimmo_proprio}"
+
+ 
+				class="page_accueil [(#ENV{exec}|=={spipimmo_proprio}|oui)on]"
+ 
+				title="<:spipimmo:creer_proprietaire:>">
+
+				<img src="#CHEMIN{prive/themes/spip/images/mot-24.png}" />
+
+				<:spipimmo:creer_proprietaire:>
+
+			</a>
+
+		</li>
+
 	</ul>
+
 	</div>
+
 </div>
+
 <!--/#navigation-->
