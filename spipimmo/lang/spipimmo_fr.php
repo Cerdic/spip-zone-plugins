@@ -73,9 +73,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'travaux' => 'Travaux',
 	'type_chauffage' => 'Type de chauffage',
 	'type_cuisine' => 'Type de cuisine',
-	'type_mandat' => 'Type de Mandat',
-	'type_offre' => 'Type de sous sol',
-	'type_sous_sol' => 'Nombre de mur mitoyen',
+	'type_mandat' => 'Type de mandat',
+	'type_offre' => 'Type d\'offre',
+	'type_sous_sol' => 'Type de sous sol',
 	//V
 	'vente' => 'Vente',
 	'vente_location' => 'Vente/Location',

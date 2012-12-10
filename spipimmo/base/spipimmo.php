@@ -3,7 +3,7 @@
 * Plugin SPIP-Immo
 *
 * @author: CALV V3
-* @author: Pierre KUHN V3
+* @author: Pierre KUHN V4
 *
 * Copyright (c) 2007-12
 * Logiciel distribue sous licence GPL.
@@ -103,8 +103,8 @@ function spipimmo_declarer_tables_principales($tables_principales)
 
 	//Table du type d'offre
 	$spip_spipimmo_types_offres_field=array(
-		"id_type_offre"	=>	"int(10) unsigned NOT NULL auto_increment",
-		"libelle_offre"	=>	"varchar(255)");
+		"id_type_offre"	=>	"smallint(6) NOT NULL auto_increment",
+		"libelle_offre"	=>	"text NOT NULL default ''");
 
 	$spip_spipimmo_types_offres_key=array(
 		"PRIMARY KEY" => "id_type_offre");
