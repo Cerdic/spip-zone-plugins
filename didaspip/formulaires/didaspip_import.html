@@ -15,6 +15,7 @@ if ($erreurmsg==false and $_FILES['fichiercours']['error']==UPLOAD_ERR_NO_FILE) 
 if (is_file($_FILES['fichiercours']['tmp_name'])) $erreurmsg=false;
 //Vérifier que le fichier uploadé est bien un fichier zip
 $extension = explode(".", $_FILES['fichiercours']['name']);
+$nom_initial=$extension[0];
 if ($erreurmsg==false and array_pop($extension)!="zip") $erreurmsg=_T('dida:erreurimport5');
 //Vérifier la conformité des infos saisies
 if ($erreurmsg==false) $erreurmsg=verifConformite(_request('nom'),"nomcours");
@@ -28,11 +29,15 @@ if ($erreurmsg==false) {
 	include_once(_DIR_PLUGIN_DIDA."exec/pclzip.lib.php");
 	$archive = new PclZip($_FILES['fichiercours']['tmp_name']);
 	if ($archive->extract(PCLZIP_OPT_PATH, _DIR_IMG."didapages/"._request('nom').'/tmp')==0) $erreurmsg=_T('dida:erreurimport9');
-	elseif (!is_file(_DIR_IMG."didapages/"._request('nom')."/tmp/data.xml")){
-		//supprimer tout si pas de fichier data.xml (pas un cours didapages)
-		$erreurmsg=_T('dida:erreurimport5');
-		rmdirr(_DIR_IMG."didapages/"._request('nom')."/tmp");
-		rmdirr(_DIR_IMG."didapages/"._request('nom'));
+	else {
+		if (is_file(_DIR_IMG."didapages/"._request('nom')."/tmp/data.xml")) $test_file=1;
+		elseif (is_file(_DIR_IMG."didapages/"._request('nom')."/tmp/".$nom_initial."/data.xml")) $test_file=2;
+		if (($test_file!=1) AND ($test_file!=2)) {
+			//supprimer tout si pas de fichier data.xml (pas un cours didapages)
+			$erreurmsg=_T('dida:erreurimport5');
+			rmdirr(_DIR_IMG."didapages/"._request('nom')."/tmp");
+			rmdirr(_DIR_IMG."didapages/"._request('nom'));
+		}
 	}
 }
 //un cours Didapages (exporté pour MSP)) se compose d'un fichier data.xml, 
@@ -41,19 +46,22 @@ if ($erreurmsg==false) {
 //les médias doivent aller dans le dossier /cours
 //s'il y a d'autres fichiers, ils doivent être supprimés par sécurité
 if ($erreurmsg==false){
-	$dir = @opendir(_DIR_IMG."didapages/"._request('nom')."/tmp");
+	if ($test_file==2) $dir = @opendir(_DIR_IMG."didapages/"._request('nom')."/tmp/".$nom_initial);
+	else $dir = @opendir(_DIR_IMG."didapages/"._request('nom')."/tmp");
 	$fichentrop="";
 	if (!is_dir(_DIR_IMG.'didapages/'._request('nom')))  mkdir(_DIR_IMG.'didapages/'._request('nom'));
 	copy(_DIR_PLUGIN_DIDA."/index.html",_DIR_IMG."didapages/"._request('nom')."/index.html");// Copie du fichier index
 	copy(_DIR_PLUGIN_DIDA."/lecteur.swf",_DIR_IMG."didapages/"._request('nom')."/lecteur.swf");// Copie du fichier lecteur flash	
 	while (false !== ($fichier = readdir($dir))) {
 		if ($fichier=='data.xml'){
-			copy(_DIR_IMG."didapages/"._request('nom')."/tmp/".$fichier,_DIR_IMG."didapages/"._request('nom')."/".$fichier);
+			if ($test_file==2) copy(_DIR_IMG."didapages/"._request('nom')."/tmp/".$nom_initial."/".$fichier,_DIR_IMG."didapages/"._request('nom')."/".$fichier);
+			else copy(_DIR_IMG."didapages/"._request('nom')."/tmp/".$fichier,_DIR_IMG."didapages/"._request('nom')."/".$fichier);
 		} else if ($fichier!='.' and $fichier!='..'){
 			$extension = explode(".", $fichier);
 			$extension=strtolower(array_pop($extension));
    			if ($extension=="jpg" or $extension=="swf" or $extension=="mp3" or $extension=="flv" or $extension=="html"){
-				copy(_DIR_IMG."didapages/"._request('nom')."/tmp/".$fichier,_DIR_IMG."didapages/"._request('nom')."/".$fichier);
+				if ($test_file==2) copy(_DIR_IMG."didapages/"._request('nom')."/tmp/".$nom_initial."/".$fichier,_DIR_IMG."didapages/"._request('nom')."/".$fichier);
+				else copy(_DIR_IMG."didapages/"._request('nom')."/tmp/".$fichier,_DIR_IMG."didapages/"._request('nom')."/".$fichier);
 			} else {
 				$fichentrop.=" ".$fichier;
 			}
