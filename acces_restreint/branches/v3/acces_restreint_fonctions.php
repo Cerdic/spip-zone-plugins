@@ -60,9 +60,11 @@ function accesrestreint_rubrique_restreinte($id_rubrique, $id_auteur=null){
  */
 function accesrestreint_acces_zone($id_zone,$id_auteur=null){
 	static $liste_zones = array();
-	if (is_null($id_auteur)) $id_auteur=$GLOBALS['visiteur_session']['id_auteur'];
+	if (is_null($id_auteur) AND isset($GLOBALS['visiteur_session']['id_auteur']))
+		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
 	if (!isset($liste_zones[$id_auteur])){
 		if ($GLOBALS['accesrestreint_zones_autorisees']
+		  AND isset($GLOBALS['visiteur_session']['id_auteur'])
 		  AND ($id_auteur==$GLOBALS['visiteur_session']['id_auteur']))
 			$liste_zones[$id_auteur] = explode(',',$GLOBALS['accesrestreint_zones_autorisees']);
 		elseif (!is_null($id_auteur)){

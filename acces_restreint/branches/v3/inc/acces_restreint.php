@@ -152,7 +152,7 @@ function accesrestreint_liste_contenu_zone_auteur($id_zone) {
  * au visiteur courant
  * d'ou le recours a $GLOBALS['accesrestreint_zones_autorisees']
  *
- * @param bool $publique Sélectionner les rubriques interdites dans l'espace public (true) ou privé (false)
+ * @param bool $publique Sï¿½lectionner les rubriques interdites dans l'espace public (true) ou privï¿½ (false)
  * @param int $id_auteur Identifiant de l'auteur
  * @param bool $quelquesoit_visibilite Si true, on ne s'occupe pas de savoir si une zone est restreinte sur le prive ou sur le public.
  * @return array
@@ -163,7 +163,9 @@ function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL,
 	static $liste_rub_inclues = array();
 	if ($quelquesoit_visibilite) { $publique = 'tout'; }
 	
-	$id_auteur = is_null($id_auteur)?$GLOBALS['visiteur_session']['id_auteur']:$id_auteur;
+	if (is_null($id_auteur) AND isset($GLOBALS['visiteur_session']['id_auteur']))
+		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
+
 	if (!isset($liste_rub_exclues[$id_auteur][$publique]) || !is_array($liste_rub_exclues[$id_auteur][$publique])) {
 
 		$where = array();
@@ -192,10 +194,10 @@ function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL,
 	$final_liste_rub_exclues = $liste_rub_exclues[$id_auteur][$publique];
 	
 	if (defined("AR_TYPE_RESTRICTION") AND AR_TYPE_RESTRICTION == "faible") {
-		// AR_TYPE_RESTRICTION définit le type de restriction pour traiter les elements communs à plusieurs zone
+		// AR_TYPE_RESTRICTION dï¿½finit le type de restriction pour traiter les elements communs ï¿½ plusieurs zone
 		// Une restriction exclusive (ou forte) donne l'acces aux rubriques restreintes par 
 		// plusieurs zone aux seuls membres de toutes les zones concernees.
-		// Une restriction faible donne acces à une rubrique, même restreinte par 
+		// Une restriction faible donne acces ï¿½ une rubrique, mï¿½me restreinte par 
 		// plusieurs zones, aux membres de chaque zone concernee.
 		// valeurs : 'faible', 'forte, ou 'exclusive'		
 
@@ -222,6 +224,7 @@ function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL,
 			// Calcul des rubriques dans des zones autorisees
 			include_spip('base/abstract_sql');
 			if ($GLOBALS['accesrestreint_zones_autorisees']
+			  AND isset($GLOBALS['visiteur_session']['id_auteur'])
 			  AND $id_auteur==$GLOBALS['visiteur_session']['id_auteur'])
 				$where[] = sql_in('zr.id_zone',$GLOBALS['accesrestreint_zones_autorisees']);
 			elseif ($id_auteur)
