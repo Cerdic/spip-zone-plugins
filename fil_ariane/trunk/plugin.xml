@@ -23,7 +23,7 @@
    		<inclure>fil_ariane_pipelines.php</inclure>
    	</pipeline>
 
-	<categorie>divers</categorie>
+	<categorie>navigation</categorie>
 	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 
     <!-- pour la fonction generer_url_entite -->
