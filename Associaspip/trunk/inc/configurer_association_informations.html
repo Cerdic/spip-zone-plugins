@@ -1,7 +1,7 @@
 <fieldset>
   <h3 class="legend"><:asso:config_info_asso:></h3>
   <ul>
-	<li class="editer_nom obligatoire"> <!-- il faut au moins le nom de l'association !!!! -->
+	<li class="editer_nom obligatoire">[(#REM)<!-- Obligatoire car il faut au moins le nom de l'association !!!! -->]
 		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{nom})</span>]
 		<label for="nom"><:asso:config_libelle_nom:></label>
 		<input type="text" name="nom" [value="(#ENV{nom})"] id="nom" class="text" />
@@ -24,7 +24,7 @@
 		<select name="pays">
 			<option value=""></option>
 	<BOUCLE_pays(PAYS?) {par nom}>
-			<option value="#CODE" [(#ENV{pays,FR}|=={#CODE}|?{selected="selected"})]>#NOM</option>
+			<option value="#CODE"[ (#ENV{pays,FR}|=={#CODE}|?{selected="selected"})]>#NOM</option>
 	</BOUCLE_pays>
 		</select>
 	</B_pays>

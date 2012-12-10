@@ -15,15 +15,14 @@
 	  </div>
 	</li>
 	<li>
+	  <label><:asso:config_libelle_affichage_champs_page_membres:></label>
 	  <div class="choix">
 		<input type="checkbox" name="aff_id_auteur" [(#ENV{aff_id_auteur}|oui) checked="checked"] id="aff_id_auteur" />
 		<label for="aff_id_auteur"><:asso:adherent_libelle_id_auteur:></label>
 		<br />
 		<input type="checkbox" name="aff_photo" [(#ENV{aff_photo}|oui)checked="checked"] id="aff_photo" />
 		<label for="aff_photo"><:asso:adherent_libelle_photo:></label>
-	  </div>
-	  <label><:asso:config_libelle_affichage_champs_page_membres:></label>
-	  <div class="choix">
+		<br />
 	[(#ENV{civilite}|oui)
 		<input type="checkbox" name="aff_civilite" [(#ENV{aff_civilite}|oui) checked="checked"] id="aff_civilite" />
 		<label for="aff_civilite"><:asso:adherent_libelle_sexe:></label>
@@ -39,22 +38,21 @@
 		<label for="aff_id_asso"><:asso:config_libelle_utiliser_champ_id_asso:></label>
 		<br />
 	]
-		<B_okGrp>
+	<B_okGrp>
 		<input type="checkbox" name="aff_groupes" [(#ENV{aff_groupes}|oui) checked="checked"] id="aff_groupes" />
-		<BOUCLE_okGrp(ASSO_GROUPES)>
-		</BOUCLE_okGrp>
-		</B_okGrp>
+	<BOUCLE_okGrp(ASSO_GROUPES)>
+	</BOUCLE_okGrp>
+	</B_okGrp>
 		<input type="checkbox" name="aff_groupes" disabled="disabled" id="aff_groupes" />
-		<//B_okGrp>
+	<//B_okGrp>
 		<label for="aff_groupes"><:asso:adherent_libelle_groupes:></label>
 		<br />
-		<B_okCat>
+	<B_okCat>
 		<input type="checkbox" name="aff_categorie" [(#ENV{aff_categorie}|oui) checked="checked"] id="aff_categorie" />
-		<BOUCLE_okCat(ASSO_CATEGORIES)>
-		</BOUCLE_okCat>
-		</B_okCat>
+	<BOUCLE_okCat(ASSO_CATEGORIES)></BOUCLE_okCat>
+	</B_okCat>
 		<input type="checkbox" name="aff_categorie" disabled="disabled" id="aff_categorie" />
-		<//B_okCat>
+	<//B_okCat>
 		<label for="aff_categorie"><:asso:adherent_libelle_categorie:></label>
 		<br />
 		<input type="checkbox" name="aff_validite" [(#ENV{aff_validite}|oui) checked="checked"] id="aff_validite" />
@@ -71,7 +69,7 @@
 	<li class="editer_import_nom_auteur">
 	  <label for="import_nom_auteur"><:asso:config_libelle_import_nom_auteur:></label>
 	  <select name="import_nom_auteur" id="import_nom_auteur">
- <!-- option par defaut, elle n'a donc pas de valeur et est donc selectionne meme si on n'a pas touche a ce reglage -->
+		[(#REM)<!-- option par defaut, elle n'a donc pas de valeur et est donc selectionne meme si on n'a pas touche a ce reglage -->]
 		<option value=""><:asso:import_nom_auteur_nom_prenom:></option>
 		<option value="prenom_nom" [(#ENV{import_nom_auteur}|=={prenom_nom}|?{selected="selected"})]><:asso:import_nom_auteur_prenom_nom:></option>
 		<option value="nom" [(#ENV{import_nom_auteur}|=={nom}|?{selected="selected"})]><:asso:import_nom_auteur_nom:></option>
@@ -83,7 +81,7 @@
 		<select name="categorie_par_defaut" id="categorie_par_defaut">
 			<option value=""><:asso:choisir_cat_defaut:></option>
 	<BOUCLE_categories(ASSO_CATEGORIES){par valeur}>
-			<option value="#ID_CATEGORIE" [(#ENV{categorie_par_defaut}|=={#ID_CATEGORIE}|?{selected="selected"})]>#VALEUR</option>
+			<option value="#ID_CATEGORIE" [(#ENV{categorie_par_defaut}|=={#ID_CATEGORIE}|?{selected="selected"})]>[(#VALEUR|entites_html)]- [(#LIBELLE|entites_html)]</option>
 	</BOUCLE_categories>
 		</select>
 	</B_categories>

@@ -8,8 +8,10 @@ parametres =
 - tous_aucun (texte) : texte correspondant a l'absence d'ID
 - lecture_seule (booleen) : indique si la selection est non-editables ou au contraire.
 
-maj:2012-10-15; version:0.1.0; licence:GPL; copyleft:gilcot; -->]
+a faire =
+- passer en parametre le nom du champ afin de mutualiser cette portion avec configurer_association_membres ?
 
+maj:2012-10-15; version:0.1.1; licence:GPL; copyleft:gilcot; -->]
 #CACHE{0}
         <li class="editer_categorie">
             [<span class="erreur_message">(#ENV**{erreurs}|table_valeur{categorie})</span>]
@@ -17,8 +19,8 @@ maj:2012-10-15; version:0.1.0; licence:GPL; copyleft:gilcot; -->]
 <B_categorie>
             <select name="categorie" [(#ENV{lecture_seule}|oui) readonly="readonly" ]id="categorie">
                 [<option>(#ENV{tous_aucun})</option>]
-<BOUCLE_categorie(ASSO_CATEGORIES){par libelle} >
-                <option value="#ID_CATEGORIE" [(#ENV{categorie}|=={#ID_CATEGORIE}|?{selected="selected"})]>[(#LIBELLE|entites_html)]</option>
+<BOUCLE_categorie(ASSO_CATEGORIES){par valeur} >
+                <option value="#ID_CATEGORIE" [(#ENV{categorie}|=={#ID_CATEGORIE}|?{selected="selected"})]>[(#VALEUR|entites_html)]- [(#LIBELLE|entites_html)]</option>
 </BOUCLE_categorie>
             </select>
 </B_categorie>
