@@ -1,18 +1,17 @@
 <paquet
 	prefix="fil_ariane"
-	categorie="divers"
-	version="0.1.9"
+	categorie="navigation"
+	version="0.1.0"
 	etat="dev"
 	compatibilite="[2.1.0;3.0.*]"
-	logo="img/fil_ariane-128.png"
+	logo="imgs/logo-fil_ariane.png"
 	schema="1.5"
-	documentation="http://contrib.spip.net/Plugin-Fil-d-Ariane?var_mode=preview"
+	documentation="http://www.spip-contrib.net/Plugin-Fil-d-Ariane"
 >
 
 	<nom>Fil d'Ariane</nom>
 
 	<auteur lien="http://www.cym.fr">Cyril MARION</auteur>
-    <auteur lien="http://magraine.net">Matthieu Marcillaud</auteur>
 
 	<licence>GNU/GPL</licence>
 	<traduire gestionnaire="salvatore" module="fil_ariane" reference="fr" />

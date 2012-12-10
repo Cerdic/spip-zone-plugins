@@ -1,16 +1,16 @@
 <plugin>
-	<nom><multi>[fr]Fil d'Ariane[en]Breadcrumb</multi></nom>
-	<auteur>Cyril Marion</auteur>
-    <auteur>Matthieu Marcillaud</auteur>
+	<nom><multi>[fr]Fil d'Ariane[en]Breadcrum</multi></nom>
+	<auteur>Cyril MArion</auteur>
 	<licence>GPL v3</licence>
     <description>
         <multi>
             [fr]Le plugin <i>Fil d'Ariane</i> facilite la création du petit menu de navigation communément appelé "Fil d'Ariane" et permettant de situer un objet éditorial dans un site SPIP. Il est destiné aux concepteur de squelettes et permet de générer un "fil d'Ariane" complet simplement avec la balise #FIL_ARIANE.
         </multi>
    	</description>
-	<lien>http://contrib.spip.net/Plugin-Fil-d-Ariane?var_mode=preview</lien> <!-- URI de documentation -->
-	<icon>img/fil_ariane-128.png</icon>
-	<version>0.1.9</version>
+	<lien>http://www.spip-contrib.net/Plugin-Fil-d-Ariane</lien> <!-- URI de documentation -->
+	<icon>imgs/logo-fil_ariane.png</icon>
+
+	<version>0.1.0</version>
 	<etat>dev</etat>
 
 	<prefix>fil_ariane</prefix>
@@ -22,9 +22,6 @@
    		<inclure>fil_ariane_pipelines.php</inclure>
    	</pipeline>
 
-	<categorie>divers</categorie>
+	<categorie>navigation</categorie>
 	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
-
-    <!-- pour la fonction generer_url_entite -->
-    <necessite id="spip_bonux" version="[2.3.0;]" />
 </plugin>
