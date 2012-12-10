@@ -201,10 +201,10 @@ function formulaires_envoi_malettre_traiter_dist(){
 			              "from" => $exp_email,
 			              "renvoyer_a" => $exp_email
 		              );
-		              $envoyer_mail($adresse,$lettre_title,$corps);
+		              $res = $envoyer_mail($adresse,$lettre_title,$corps);
 	              }
 
-                if(!$res) {
+                if (!$res) {
                     $message.= "<div style='color:red'><strong>$adresse</strong> - "._T('malettre:erreur_envoi')."</div>";  
                     //$message.= "Mailer Error: " . $mail->ErrorInfo; 
                     $success_flag = false;
@@ -232,13 +232,13 @@ function formulaires_envoi_malettre_traiter_dist(){
                   $f_archive=fopen($lettre_archive,"w");
                   fwrite($f_archive,$recup); 
                   fclose($f_archive);
-                  $message.= " <a href='$url_lettre_archive' target='_blank'>html</a> - ";
+                  $message.= " <a href='$lettre_archive' target='_blank'>html</a> - ";
                  
                   $lettre_archive = "$path_archive_full/lettre_".date("Ymd")."_".$lettre_hash."_"._request('lang_select').".txt";
                   $f_archive=fopen($lettre_archive,"w");
                   fwrite($f_archive,$recup_txt); 
                   fclose($f_archive);
-                  $message.= "<a href='$url_lettre_archive_txt' target='_blank'>txt</a></div>";
+                  $message.= "<a href='$lettre_archive' target='_blank'>txt</a></div>";
                   
                   // stockage en base
                   include_spip('base/abstract_sql');

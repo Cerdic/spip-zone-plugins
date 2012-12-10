@@ -1,4 +1,7 @@
 [(#REM) archives lettre
+
+         [(#CHEMIN{#EVAL{_DIR_IMG}|concat{lettre/_malettre.html}})]
+
 ]<B_archive>
 <table class="spip"><tbody>
   <tr>
@@ -12,10 +15,10 @@
 <BOUCLE_archive(MESLETTRES){pagination 5}{!par date}>
   <tr>
       <td width="20">#ID_MALETTRE</td>
-      <td width="230"><a href='#'[ onclick="malettref.location.href='(#CHEMIN{IMG/#URL_HTML})'"] style='color:green;'>#TITRE</a> - <small>#LANG</small></td>
+      <td width="230"><a href='#'[ onclick="malettref.location.href='(#CHEMIN{#EVAL{_DIR_IMG}|concat{#URL_HTML}})'"] style='color:green;'>#TITRE</a> - <small>#LANG</small></td>
       <td width="40">[(#DATE|affdate_court)]</td>
-       <td width="30">[<a href="(#CHEMIN{IMG/#URL_HTML})" target="_blank">html</a>]</td>
-      <td width="30">[<a href="(#CHEMIN{IMG/#URL_TXT})"  target="_blank">txt</a>]</td>
+       <td width="30">[<a href="(#CHEMIN{#EVAL{_DIR_IMG}|concat{#URL_HTML}})" target="_blank">html</a>]</td>
+      <td width="30">[<a href="(#CHEMIN{#EVAL{_DIR_IMG}|concat{#URL_TXT}})"  target="_blank">txt</a>]</td>
       <td width="30"><a href='[(#URL_ACTION_AUTEUR{supprimer_lettre,#ID_MALETTRE,#SELF})]'  onclick='return confirm("<:malettre:effacer_confirm:>");' style='color:red;'><:malettre:effacer:></a></td>      
   </tr>
 </BOUCLE_archive>
@@ -28,4 +31,3 @@
 </B_archive>
 <div class="pagination">0  <:malettre:lettres_dispo:></div>
 <//B_archive>
-
