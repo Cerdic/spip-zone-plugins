@@ -10,12 +10,24 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+// A
+	'aide_choix_champs' => 'Champs sql séparés par une "," .Laisser vide pour sélectionner les champs principaux.',
+
 // C
 	'choix_type' => 'Sélectionner le ou les mode(s) de duplication',
+	'choix_champs' => 'Choisir les champs à dupliquer',
+
 	'configuration_duplicator' => 'Configuration du Duplicator',
 
+// I
 	'icone_dupliquer' => 'Dupliquer la rubrique',
-	
+
+// L
+	'label_art_champs' => 'Liste des champs à dupliquer pour chaque article :',
+	'label_rub_champs' => 'Liste des champs à dupliquer pour chaque rubrique :',
+
+
+// M	
 	'message_annuler' => 'Annuler',
 	'message_confirmer' => 'Confirmer',	
 	

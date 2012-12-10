@@ -5,6 +5,7 @@
  * Duplication de rubriques et d'articles
  *
 \***************************************************************************/
+function trim_value(&$value){$value = trim($value);}
 
 /**
  * Duplique un article dans la rubrique cible
@@ -16,7 +17,8 @@ function dupliquer_article($article,$rubrique){
 	include_spip('action/editer_article');
 	include_spip('inc/modifier_article');
 	include_spip('inc/modifier');
-
+	include_spip('inc/config');
+		
 	// On lit l'article qui va etre dupliqué
 	$champs = array('*');
 	$from = 'spip_articles';
@@ -25,8 +27,10 @@ function dupliquer_article($article,$rubrique){
 	);
 	$infos = sql_allfetsel($champs, $from, $where);
 	// On choisi les champs que l'on veut conserver
-	// TODO éventuellement passer cette variable en CFG pour choisir depuis SPIP les champs à conserver ?
-	$champs_dupliques = array(
+	$champs_dupliques = explode(",", lire_config('duplicator/art_champs'));
+	array_walk($champs_dupliques, 'trim_value');
+	
+	if (empty($champs_dupliques)) $champs_dupliques = array(
 		'surtitre','titre','soustitre','descriptif','chapo','texte','ps','accepter_forum','lang','langue_choisie','nom_site','url_site'
 	);
 	foreach ($champs_dupliques as $key => $value) {
@@ -53,6 +57,24 @@ function dupliquer_article($article,$rubrique){
 	dupliquer_logo($article,$id_article,'article',false);
 	dupliquer_logo($article,$id_article,'article',true);
 	
+	/////////////////////////////////////
+	// Duplication des url dans spip_url
+	/////////////////////////////////////
+	$where = array( 
+		"id_objet=".$article,
+		"type='article'",
+	);
+//	$infos_url = sql_allfetsel('*', 'spip_urls', $where, );
+	$infos_url = sql_fetsel('*', 'spip_urls', $where, 'date', 'date DESC');
+	
+	$infos_url['id_objet'] = $id_article;
+	$url = $infos_url['url'];
+	//$infos_url['url']
+	$u = preg_replace('/(.*)(-|,)\d*$/', '$1', $url, -1, $c); // supprimer le numéro à la fin
+	if ($c == 0) $infos_url['url'] = $url.'-'.$id_article; // Ajoute le numéro de l'article
+	else $infos_url['url'] = $u.'-'.$id_article;
+	sql_insertq('spip_urls', $infos_url);
+	
 	return $id_article;
 }
 
@@ -64,7 +86,8 @@ function dupliquer_article($article,$rubrique){
  */
 function dupliquer_rubrique($rubrique,$cible=null,$titre=' (copie)'){
 	include_spip('action/editer_rubrique');
-
+	include_spip('inc/config');
+		
 	// On lit la rubrique qui va etre dupliqué
 	$champs = array('*');
 	$from = 'spip_rubriques';
@@ -73,8 +96,10 @@ function dupliquer_rubrique($rubrique,$cible=null,$titre=' (copie)'){
 	);
 	$infos = sql_allfetsel($champs, $from, $where);
 	// On choisi les champs que l'on veut conserver
-	// TODO éventuellement passer cette variable en CFG pour choisir depuis SPIP les champs à conserver ?
-	$champs_dupliques = array(
+	$champs_dupliques = explode(",", lire_config('duplicator/rub_champs'));
+	array_walk($champs_dupliques, 'trim_value');
+	
+	if (empty($champs_dupliques)) $champs_dupliques = array(
 		'id_parent','titre','descriptif','texte','lang','langue_choisie'
 	);
 	foreach ($champs_dupliques as $key => $value) {
@@ -111,6 +136,24 @@ function dupliquer_rubrique($rubrique,$cible=null,$titre=' (copie)'){
 	// On la publie (pour activer l'aperçu)
 	$maj_statut_rubrique = sql_updateq("spip_rubriques", array('statut' => 'publie'), "id_rubrique=".$id_nouvelle_rubrique);
 
+	/////////////////////////////////////
+	// Duplication des url dans spip_url
+	/////////////////////////////////////
+	$where = array( 
+		"id_objet=".$rubrique,
+		"type='rubrique'",
+	);
+	$infos_url = sql_fetsel('*', 'spip_urls', $where, 'date', 'date DESC');
+	
+	$infos_url['id_objet'] = $id_nouvelle_rubrique;
+	$url = $infos_url['url'];
+	//$infos_url['url']
+	$u = preg_replace('/(.*)(-|,)\d*$/', '$1', $url, -1, $c); // supprimer le numéro à la fin
+	if ($c == 0) $infos_url['url'] = $url.'-'.$id_nouvelle_rubrique; // Ajoute le numéro de l'article
+	else $infos_url['url'] = $u.'-'.$id_nouvelle_rubrique;
+	sql_insertq('spip_urls', $infos_url);
+	
+	
 	// On lui remet ses mots clefs
 	remettre_les_mots_clefs($mots_clefs_de_la_rubrique,$id_nouvelle_rubrique,'rubrique');
 

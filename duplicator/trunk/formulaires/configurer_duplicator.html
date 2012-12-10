@@ -8,21 +8,36 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-<fieldset><legend><:duplicator:texte_duplicator:></legend>
+		<fieldset><legend><:duplicator:texte_duplicator:></legend>
 
-<label for="sizeLimit"><:duplicator:choix_type:></label>
-<p>
-<input type="checkbox" name="duplic_article" [checked="(#ENV{duplic_article}|!={''}|?{'checked'})"] /> Duplication sur les articles<br />
-<input type="checkbox" name="duplic_rubrique"  [checked="(#ENV{duplic_rubrique}|!={''}|?{'checked'})"] /> Duplication sur les rubriques
-</p>
+			<label for="sizeLimit"><:duplicator:choix_type:></label>
+			<p>
+				<input type="checkbox" name="duplic_article" [checked="(#ENV{duplic_article}|!={''}|?{'checked'})"] /> Duplication sur les articles<br />
+				<input type="checkbox" name="duplic_rubrique"  [checked="(#ENV{duplic_rubrique}|!={''}|?{'checked'})"] /> Duplication sur les rubriques
+			</p>
+		</fieldset>
 
-</fieldset>
+		<fieldset><legend><:duplicator:choix_champs:></legend>
+			<ul>
+				<li>
+			        <p class="explication"><:duplicator:aide_choix_champs:></p>
+			        <label for="art_champs_1"><:duplicator:label_art_champs:></label>
+			        <textarea name="art_champs" id="art_champs" cols="60" rows="10">[(#CONFIG{duplicator/art_champs})]</textarea> 
+	        	</li>
+
+			    <li>
+			        <p class="explication"><:duplicator:aide_choix_champs:></p>
+			        <label for="rub_champs_1"><:duplicator:label_rub_champs:></label>
+			        <textarea name="rub_champs" id="rub_champs" cols="60" rows="10">[(#CONFIG{duplicator/rub_champs})]</textarea> 
+			      </li>	        	
+	    	</ul>
+		</fieldset>
 
 
-<div>
-<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
-</div>
-</form>
+		<div>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</div>
+	</form>
 ]
 </div>
 
