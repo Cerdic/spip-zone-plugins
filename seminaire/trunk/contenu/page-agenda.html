@@ -30,7 +30,7 @@
 					<BOUCLE_ev(EVENEMENTS){!evenement_passe #ENV{date_debut,#ENV{date}}}{!evenement_a_venir #ENV{date_debut,#ENV{date}}|agenda_moisdecal{1,'Y-m-d H:i:00'}}{par date_debut}{id_article}{id_evenement_source?}{titre_mot=#_mot_evenement:TITRE}>
 							<li>#MODELE{evenement_vevent}
 							<p class='renseignements'>
-							<span class='lien_article'>[<a href='[(#URL_ARTICLE)]'>Article</a>]</span>
+							<span class='lien_article'><a href='#URL_ARTICLE'>Article</a></span>
 							</p>
 							</li>
 					</BOUCLE_ev>

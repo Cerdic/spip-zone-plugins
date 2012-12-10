@@ -28,30 +28,28 @@
 	<BOUCLE_agenda(EVENEMENTS){par date_debut}{age_relatif_debut<=0}{id_evenement?}{id_article?}{id_rubrique?}{titre_mot=#TITRE}{id_evenement_source?}{pagination #ENV{pas,9}}>
 		<li class='item[ (#EXPOSE)][ (#ID_EVENEMENT_SOURCE|oui)repetition]'>
 			[(#MODELE{evenement_vevent}|trim|sinon{'?'})]
+			<div class="ajax">
+				#FORMULAIRE_PARTICIPER_EVENEMENT{#ID_EVENEMENT}
+			</div>
 		</li>
 		<hr>
-		<!--<INCLURE{fond=formulaires/participation_evenement}>-->
 	</BOUCLE_agenda>
 	[<p class='pagination'>(#PAGINATION{page})</p>]
 </ul>
 </B_agenda>
 </BOUCLE_mots>
 
-	<!-- On n'affiche le formulaire d'édition des événements que si la personne connectée est autorisée à modifier l'événement (edit, on verra les autorisations plus tard) (edit+ encore moins puisqu'il semblerait que ce ne soit pas nécessaire)-->
-
 <div class='espace'></div>
 
 <span class="bouton">[(#REM)bouton de création d'événement]
 <a href="#URL_ECRIRE{evenement_edit,id_evenement=new&id_article=#ID_ARTICLE}" class='noajax creer'><:seminaire:creer_evenement:></a>
 </span>
-<!--<a class="google" href="http://www.google.com/calendar/render?cid=[(#URL_PAGE{seminaire_ical}|parametre_url{id_article, #ID_ARTICLE}|url_absolue|attribut_html)]" target="_blank"><img src="http://www.google.com/calendar/images/ext/gc_button1_fr.gif" border=0></a>-->
+
 <a class="google" href="http://www.google.com/calendar/render?cid=#URL_SITE_SPIP/%3Fpage%3Dseminaire_ical%26id_article%3D#ID_ARTICLE" target="_blank"><img src="http://www.google.com/calendar/images/ext/gc_button1_fr.gif" border=0></a>
 <a class="ical" href="[(#URL_PAGE{seminaire_ical}|parametre_url{id_article, #ID_ARTICLE}|url_absolue|replace{'http://','webcal://'})]" title="<:seminaire:abonnement:>"><img src="#CHEMIN{images/calendrier.png}"/><span class="texte">iCal</span></a>[(#REM)bouton d'abonnement au calendrier]
 <div class='espace'></div>
 
 <script type="text/javascript" src="#CHEMIN{javascript/toggle.js}"></script>
-
-
 
 </BOUCLE_seminaire>
 
