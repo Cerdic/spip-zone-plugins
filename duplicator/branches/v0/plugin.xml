@@ -4,7 +4,7 @@
 	<icon>images/apsulis.png</icon>
 	<auteur>[Apsulis->http://demo.apsulis.com]</auteur>
 	<licence>GPL &#169; 2010</licence>
-	<version>0.2.0</version>
+	<version>0.3.0</version>
 
 	<etat>test</etat>
 	<description>Ce plugin permet de dupliquer une rubrique et son contenu depuis l'espace priv&#233; en ajoutant un bouton dans la navigation de gauche dans l'espace priv&#233; des rubriques.
