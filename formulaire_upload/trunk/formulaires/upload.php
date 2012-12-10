@@ -52,7 +52,7 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
     foreach (_request('ref') as $ref) {
       $ref = intval($ref);
       if ($titre = _request("titrer_$ref")) {
-        if (forumaireupload_verifier_doc_liaison($ref,$id_objet,$type))
+        if (formulaireupload_verifier_doc_liaison($ref,$id_objet,$type))
   		      	sql_updateq('spip_documents', array('titre' => $titre) ,'id_document='.$ref);         
       }
   	}     
@@ -63,7 +63,7 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
   	foreach (_request('supprimer') as $supprimer) {
   		if ($supprimer = intval($supprimer)) {
   			include_spip('inc/autoriser');
-        if (forumaireupload_verifier_doc_liaison($ref,$id_objet,$type)) {
+        if (formulaireupload_verifier_doc_liaison($supprimer,$id_objet,$type)) {
             sql_delete('spip_documents_liens', 'id_document='.$supprimer);
       			$supprimer_document = charger_fonction('supprimer_document','action');
       			$supprimer_document($supprimer);
@@ -128,7 +128,7 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
 //  fonction de securite
 //  verifier la liaison entre objet et le document
 //  pour eviter toucher d'autres documents que ceux traiter ds le doc
-function forumaireupload_verifier_doc_liaison($id_document, $id_objet, $type) {
+function formulaireupload_verifier_doc_liaison($id_document, $id_objet, $type) {
   if (sql_countsel('spip_documents_liens', "id_document=".intval($id_document)." AND id_objet=".intval($id_objet)." AND objet='$type'"))
 		return true;  
     
