@@ -917,7 +917,7 @@ function association_formater_adresses($id_objets, $objet='auteur', $html_span='
 	if ($objet) { // ancien comportement : ce sont les id_auteur qui sont transmis
 		$adresses_array = array(); // initialisation du tableau des donnees
 		$trouver_table = charger_fonction('trouver_table', 'base');
-		if ( $trouver_table('spip_adresses') && $trouver_table('spip_adresses_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
+		if ( $trouver_table('adresses') && $trouver_table('adresses_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
 			foreach ($id_objets as $id_objet) { // prepare la structure du tableau renvoye
 				$adresses_array[$id_objet] = array();
 			}
@@ -926,7 +926,7 @@ function association_formater_adresses($id_objets, $objet='auteur', $html_span='
 				$adresses_array[$data['id_objet']][] = $data;
 			}
 			sql_free($query);
-		} elseif ( $trouver_table('spip_gis') && $trouver_table('spip_gis_liens') ) { // le plugin "GIS" est installe (active ou pas)
+		} elseif ( $trouver_table('gis') && $trouver_table('gis_liens') ) { // le plugin "GIS" est installe (active ou pas)
 			foreach ($id_objets as $id_objet) { // prepare la structure du tableau renvoye
 				$adresses_array[$id_objet] = array();
 			}
@@ -959,9 +959,9 @@ function association_formater_adresses($id_objets, $objet='auteur', $html_span='
 					$adresse['boite_postale'] = "<span class='post-office-box'>$adresse[boite_postale]</span>";
 				if ( !$adresse['nom_pays'] && $adresse['code_pays']!=$GLOBALS['association_metas']['pays'] )
 					if ($adresse['code_pays']) {
-						if ( is_numeric($adresse['code_pays']) && $trouver_table('spip_geo_pays' ) ) // tenter de recuperer le nom avec le plugin "Geographie"
+						if ( is_numeric($adresse['code_pays']) && $trouver_table('geo_pays' ) ) // tenter de recuperer le nom avec le plugin "Geographie"
 							$adresse['nom_pays'] = sql_getfetsel('nom', 'spip_geo_pays', "id_pays=$adresse[code_pays]");
-						elseif ( $trouver_table('spip_geo_pays') ) // tenter de recuperer le nom avec le plugin "Pays"
+						elseif ( $trouver_table('geo_pays') ) // tenter de recuperer le nom avec le plugin "Pays"
 							$adresse['nom_pays'] = sql_getfetsel('nom', 'spip_pays', 'code='.sql_quote($adresse['code_pays']) );
 						else // un code langue ?
 							$adresse['nom_pays'] = _T($adresse['code_pays']);
@@ -1105,7 +1105,7 @@ function association_formater_urls($id_objets, $objet='auteur', $a=TRUE, $sep=' 
 			sql_free($query);
 		}
 		$trouver_table = charger_fonction('trouver_table', 'base');
-		if ( $trouver_table('spip_syndic') && $trouver_table('spip_syndic_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
+		if ( $trouver_table('syndic') && $trouver_table('syndic_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
 			$query = sql_select('l.id_syndic AS id_url, l.id_objet, l.type, s.url_site AS url, s.nom_site AS titre, s.id_syndic AS id_url','spip_syndic AS s INNER JOIN spip_syndic_liens AS l ON l.id_syndic=s.id_syndic', sql_in('l.id_objet', $id_objets)." AND l.objet='$objet' ");
 			while ($data = sql_fetch($query)) { // on recupere tous les sites lies dans un tableau de tableaux
 				$urls_array[$data['id_objet']][] = $data;
@@ -1113,14 +1113,14 @@ function association_formater_urls($id_objets, $objet='auteur', $a=TRUE, $sep=' 
 			sql_free($query);
 		}
 /*
-		if ( $trouver_table('spip_sites') && $trouver_table('spip_sites_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
+		if ( $trouver_table('sites') && $trouver_table('sites_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
 			$query = sql_select('l.id_site AS id_url, l.id_objet, l.type, s.*','spip_sites AS s INNER JOIN spip_sites_liens AS l ON l.id_site=s.id_site', sql_in('l.id_objet', $id_objets)." AND l.objet='$objet' ");
 			while ($data = sql_fetch($query)) { // on recupere tous les sites lies dans un tableau de tableaux
 				$urls_array[$data['id_objet']][] = $data;
 			}
 			sql_free($query);
 		}
-		if ( $trouver_table('spip_ims') && $trouver_table('spip_ims_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
+		if ( $trouver_table('ims') && $trouver_table('ims_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
 			$query = sql_select("l.id_objet, l.type, m.id_im AS id_url, m.identifiant AS titre,  CONCAT(CONCAT(t.url_debut,m.titre),t.url_fin) AS url ",
 			'spip_ims AS m INNER JOIN spip_ims_liens AS l ON l.id_im=m.id_im INNER JOIN spip_ims_types AS t ON l.type=t.type',
 			sql_in('l.id_objet', $id_objets)." AND l.objet='$objet' ");
@@ -1206,8 +1206,6 @@ function association_recuperer_montant($valeur, $req=TRUE) {
 /**
  * @return int $valeur
  *   Nombre entier
- * @note
- *   Bien qu'il s'agisse en fait de s'assurer que la valeur est un entier, la fonction s'appelle _id car elle est utilisee surtout pour les identifiants de table.
  */
 function association_recuperer_entier($valeur, $req=TRUE) {
 	$valeur = ($req?_request($valeur):$valeur);
@@ -1215,22 +1213,12 @@ function association_recuperer_entier($valeur, $req=TRUE) {
 }
 
 /**
- * @param string  $sep
- *   Separateur a utiliser pour concatener les elements du tableau
- * @return array|string $valeur
+ * @return array $valeur
  *   Liste de valeurs
- * @note
- *   ...
  */
-function association_recuperer_liste($valeur, $req=FALSE, $sep='') {
+function association_recuperer_liste($valeur, $req=FALSE) {
 	$valeur = ($req?_request($valeur):$valeur);
-	if ( !is_array($valeur) )
-		if ( is_scalar($valeur) ) // chaine ou nombre
-			$valeur = array($valeur);
-		else // objet ou ressource ou autre
-			$valeur = array();
-	return ($sep ? implode($sep, $valeur) : $valeur);
-//	return ($sep ? sql_in($sep, $valeur) : $valeur);
+	return $valeur = (array)$valeur;
 }
 
 /** @} */
@@ -1407,7 +1395,7 @@ function association_selectionner_destination($sel='', $exec='', $plus='') {
 }
 
 /**
- * Selecteur de grouoe de membres
+ * Selecteur de groupe de membres
  */
 function association_selectionner_groupe($sel='', $exec='', $plus='') {
     $sql = sql_select('id_groupe, nom', 'spip_asso_groupes', 'id_groupe>=100', '', 'nom');  // on ne prend en consideration que les groupe d'id >= 100, les autres sont reserves a la gestion des autorisations
@@ -1856,18 +1844,17 @@ function association_totauxinfos_stats($legende='', $sql_table_asso, $sql_champs
 		return FALSE;
 	$res = '<table width="100%" class="asso_infos"><caption>'
 	. _T('asso:totaux_moyens', array('de_par'=>_T("local:$legende")))
-	. "</caption>\n<thead>"
+	. "</caption>\n"
 	. "\n<tr class='row_first'>\n<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>"
-	. '<th title="'. _T('entete_stats_moy') .'">'
+	. '<th scope="col" title="'. _T('entete_stats_moy') .'">'
 	. '<span style="text-decoration:overline;">X</span>' . "</th>\n"
-	. "<th title='". _T('entete_stats_mea') ."'>&sigma;</th>\n";
+	. "<th  scope='col' title='". _T('entete_stats_mea') ."'>&sigma;</th>\n";
 	// σ &sigma; &#963; &#x3C3;
 	if ($avec_extrema) {
-		$res .= '<th title="'. _T('entete_stats_min') .'">[&lt;</th>';
-		$res .= '<th title="'. _T('entete_stats_max') .'">&gt;]</th>';
+		$res .= '<th  scope="col" title="'. _T('entete_stats_min') .'">[&lt;</th>';
+		$res .= '<th  scope="col" title="'. _T('entete_stats_max') .'">&gt;]</th>';
 	}
 	$res .= "</tr>\n";
-	$res .= '</thead><tbody>';
 	$compteur = 0;
 	foreach ($sql_champs as $libelle=>$champs) {
 		$stats = sql_fetsel("AVG($champs) AS valMoy, STDDEV($champs) AS ekrTyp, MIN($champs) AS valMin, MAX($champs) AS valMax ", "spip_asso_$sql_table_asso", $sql_criteres);
@@ -1882,7 +1869,7 @@ function association_totauxinfos_stats($legende='', $sql_table_asso, $sql_champs
 		$res .= '</tr>';
 		$compteur++;
 	}
-	$res .= '</tbody></table>';
+	$res .= '</table>';
 	return $res;
 }
 
@@ -1940,29 +1927,29 @@ function association_totauxinfos_effectifs($legende='', $lignes, $decimales_sign
  */
 function association_totauxinfos_montants($legende='', $somme_recettes=0, $somme_depenses=0) {
 	$res = '<table width="100%" class="asso_infos">';
-	$res .= '<caption>'. _T('asso:totaux_montants', array('de_par'=>_T("local:$legende"))) ."</caption><tbody>\n";
+	$res .= '<caption>'. _T('asso:totaux_montants', array('de_par'=>_T("local:$legende"))) ."</caption>\n";
 	$recettes = is_array($somme_recettes) ? call_user_func_array('sql_getfetsel', $somme_recettes) : $somme_recettes ;
 #	if ($recettes) {
 		$res .= "<tr class='impair'>"
-		. '<th class="entree">'. _T('asso:bilan_recettes') ."</th>\n"
+		. '<th scope="row" class="entree">'. _T('asso:bilan_recettes') ."</th>\n"
 		. '<td class="decimal">' .association_formater_prix($recettes). ' </td>'
 		. "</tr>\n";
 #	}
 	$depenses = is_array($somme_depenses) ? call_user_func_array('sql_getfetsel', $somme_depenses) : $somme_depenses ;
 #	if ($depenses) {
 		$res .= '<tr class="pair">'
-		. '<th class="sortie">'. _T('asso:bilan_depenses') ."</th>\n"
+		. '<th scope="row" class="sortie">'. _T('asso:bilan_depenses') ."</th>\n"
 		. '<td class="decimal">'.association_formater_prix($depenses) ."</td>\n"
 		. "</tr>\n";
 #	}
 	if ($recettes && $depenses) {
 		$solde = $recettes-$depenses;
 		$res .= '<tr class="'.($solde>0?'impair':'pair').'">'
-		. '<th class="solde">'. _T('asso:bilan_solde') ."</th>\n"
+		. '<th scope="row" class="solde">'. _T('asso:bilan_solde') ."</th>\n"
 		. '<td class="decimal">'.association_formater_prix($solde)."</td>\n"
 		. "</tr>\n";
 	}
-	return $res.'</tbody></table>';
+	return $res.'</table>';
 }
 
 /** @} */
@@ -2029,7 +2016,7 @@ function association_bloc_filtres($liste_filtres, $exec='', $supplements='', $td
 	} else {
 		$res .= $supplements;
 	}
-	$res .= ($td?'<td':'<li') . ' class="boutons"><input type="submit" value="'. _T('asso:bouton_lister') .'" />' . ($td?"</td>\n":'</li>');
+	$res .= ($td?'<td':'<li') . ' class="boutons"><noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>' . ($td?"</td>\n":'</li>');
 	return $res. ($td?'</tr></table':'</ul>') .">\n</form>\n";
 }
 
@@ -2128,7 +2115,7 @@ function association_bloc_listehtml2($table, $reponse_sql, $presentation, $bouto
 	$res = '';
 	foreach ($presentation as &$param) { // affecter le tableau au passage
 		$entete = array_shift($param);
-		$res .= '<th>'. ($entete ? association_langue($entete) : '&nbsp;' ) ."</th>\n";
+		$res .= '<th scope="col">'. ($entete ? association_langue($entete) : '&nbsp;' ) ."</th>\n";
 	}
 	$lignes = association_bloc_tr($reponse_sql, $extra, $cle1, $cle2, $objet, $presentation, $boutons, $selection);
 	sql_free($reponse_sql);
@@ -2136,10 +2123,10 @@ function association_bloc_listehtml2($table, $reponse_sql, $presentation, $bouto
 	if (!$lignes) return _T('asso:aucun');
 
 	if ( count($boutons) ) { // colonne(s) de bouton(s) d'action
-		$res .= '<th colspan="'. count($boutons) .'" class="actions">'. _T('asso:entete_action' .(count($boutons)-1?'s':'')) ."</th>\n";
+		$res .= '<th scope="col" colspan="'. count($boutons) .'" class="actions">'. _T('asso:entete_action' .(count($boutons)-1?'s':'')) ."</th>\n";
 	}
 
-	$res =  '<table width="100%" class="asso_tablo"'. ($table ? " id='liste_$table'" : '') . ">\n<tr>$res</tr>\n$lignes</table>\n";
+	$res =  '<table width="100%" class="asso_tablo"'. ($table ? " id='liste_$table'" : '') . ">\n<tr class='row_first'>$res</tr>\n$lignes</table>\n";
 
 
 	if ( $cle1 && $selection ) {
