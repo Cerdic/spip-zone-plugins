@@ -29,12 +29,12 @@ maj:2012-11-27; version:0.1.0; licence:GPL; -->]
         )]
     </p>
     [<p class="tel">(#MODELE{coordonnees_telephone}
-        {numero=#META{/association/email}}
+        {numero=#META{/association/telephone}}
     )</p>]
-    [<p class="email">
-    (#META{/association/telephone})
+    [<p class="email"><a href="#META{/association/email}">
+    (#META{/association/email})</a>
     </p>]
-    [<p class="bday"><:asso:config_libelle_recufiscal:>
+    [<p><:asso:config_libelle_recufiscal:>
     (#META{/association/recufiscal}|association_langue_index{config_libelle_recufisc})
     </p>]
     <dl class="note">
