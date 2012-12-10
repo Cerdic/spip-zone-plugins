@@ -105,12 +105,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_aucune_sauvegarde' => 'Aucune sauvegarde disponible au téléchargement.',
 	'message_cleaner_sujet' => 'Nettoyage des sauvegardes',
-	'message_sauver_sujet' => 'Sauvegarde de la base @base@',
 	'message_notif_cleaner_intro' => 'La suppression automatique des sauvegardes obsolètes (dont la date est antérieure à @duree@ jours) a été effectuée avec succès. Les fichiers suivants ont été supprimés : ',
 	'message_notif_sauver_intro' => 'La sauvegarde de la base @base@ a été effectuée avec succès par l\'auteur @auteur@.',
 	'message_pas_envoi' => 'Les sauvegardes ne seront pas envoyées !',
 	'message_sauvegarde_nok' => 'Erreur lors de la sauvegarde SQL de la base.',
 	'message_sauvegarde_ok' => 'La sauvegarde SQL de la base a été faite avec succès.',
+	'message_sauver_sujet' => 'Sauvegarde de la base @base@',
 	'message_telechargement_nok' => 'Erreur lors du téléchargement.',
 
 	// S

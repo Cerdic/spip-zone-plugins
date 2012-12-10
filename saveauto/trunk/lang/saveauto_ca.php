@@ -113,9 +113,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_aucune_sauvegarde' => 'No hi ha cap còpia de seguretat.', # MODIF
 	'message_cleaner_sujet' => 'Nettoyage des sauvegardes', # NEW
 	'message_notif_cleaner_intro' => 'La suppression automatique des sauvegardes obsolètes (dont la date est antérieure à @duree@ jours) a été effectuée avec succès. Les fichiers suivants ont été supprimés : ', # NEW
+	'message_notif_sauver_intro' => 'La sauvegarde de la base @base@ a été effectuée avec succès par l\'auteur @auteur@.', # NEW
 	'message_pas_envoi' => 'No s\'enviaran les còpies de seguretat!',
 	'message_sauvegarde_nok' => 'Erreur lors de la sauvegarde SQL de la base.', # NEW
 	'message_sauvegarde_ok' => 'La sauvegarde SQL de la base a été faite avec succès.', # NEW
+	'message_sauver_sujet' => 'Sauvegarde de la base @base@', # NEW
 	'message_telechargement_nok' => 'Erreur lors du téléchargement.', # NEW
 
 	// S
