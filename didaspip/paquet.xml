@@ -1,7 +1,7 @@
 <paquet
   prefix="dida"
   categorie="divers"
-  version="3.1"
+  version="3.2"
   etat="test"
   compatibilite="[2.9.9;3.0.99]"
   logo="img_pack/dida_ico.png"
@@ -13,4 +13,5 @@
   <menu nom="dida_configurer" titre="dida:icone" parent="menu_edition" icone="images/dida_ico_16.png" />
   <menu nom="configurer_dida" titre="dida:configurer" parent="menu_configuration" icone="images/dida_ico_16.png" />
   <pipeline nom="post_typo" inclure="didafonctions.php" />
+  <pipeline nom="autoriser" inclure="dida_autoriser.php" />
 </paquet>
