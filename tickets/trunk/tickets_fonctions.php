@@ -72,16 +72,80 @@ function tickets_select_assignation($en_cours='0',$format='select'){
 	return $options;
 }
 
+// Affichage de la page des tickets classes par version
+function tickets_classer_par_version($bidon) {
+	$page = NULL;
+	if (defined('_TICKETS_LISTE_VERSIONS') OR lire_config('tickets/general/versions')) {
+		if (defined('_TICKETS_LISTE_VERSIONS'))
+			$liste = explode(":", _TICKETS_LISTE_VERSIONS);
+		else
+			$liste = explode(":", lire_config('tickets/general/versions'));
+		$i = 0;
+		foreach($liste as $_version) {
+			$i += 1;
+			$_version = trim($_version);
+			$page .= recuperer_fond('prive/squelettes/inclure/inc_liste_detaillee',
+				array_merge($_GET, array('titre' => _T('tickets:champ_version').' '.$_version, 'statut' => 'ouvert', 'version' => $_version, 'bloc' => "_bloc$i")),
+				array('ajax'=>true));
+		}
+	}
+	return $page;
+}
+
 // Affichage de la page des tickets classes par jalon
 function tickets_classer_par_jalon($bidon) {
 	$page = NULL;
-	if (defined('_TICKETS_LISTE_JALONS') OR lire_config()) {
-		$liste = explode(":", _TICKETS_LISTE_JALONS);
+	if (defined('_TICKETS_LISTE_JALONS') OR lire_config('tickets/general/jalons')) {
+		if (defined('_TICKETS_LISTE_JALONS'))
+			$liste = explode(":", _TICKETS_LISTE_JALONS);
+		else
+			$liste = explode(":", lire_config('tickets/general/jalons'));
 		$i = 0;
 		foreach($liste as $_jalon) {
 			$i += 1;
+			$_jalon = trim($_jalon);
 			$page .= recuperer_fond('prive/squelettes/inclure/inc_liste_detaillee',
 				array_merge($_GET, array('titre' => _T('tickets:champ_jalon').' '.$_jalon, 'statut' => 'ouvert', 'jalon' => $_jalon, 'bloc' => "_bloc$i")),
+				array('ajax'=>true));
+		}
+	}
+	return $page;
+}
+
+// Affichage de la page des tickets classes par composant
+function tickets_classer_par_composant($bidon) {
+	$page = NULL;
+	if (defined('_TICKETS_LISTE_COMPOSANTS') OR lire_config('tickets/general/composants')) {
+		if (defined('_TICKETS_LISTE_COMPOSANTS'))
+			$liste = explode(":", _TICKETS_LISTE_COMPOSANTS);
+		else
+			$liste = explode(":", lire_config('tickets/general/composants'));
+		$i = 0;
+		foreach($liste as $_composant) {
+			$_composant = trim($_composant);
+			$i += 1;
+			$page .= recuperer_fond('prive/squelettes/inclure/inc_liste_detaillee',
+				array_merge($_GET, array('titre' => _T('tickets:champ_composant').' '.$_composant, 'statut' => 'ouvert', 'composant' => $_composant, 'bloc' => "_bloc$i")),
+				array('ajax'=>true));
+		}
+	}
+	return $page;
+}
+
+// Affichage de la page des tickets classes par projet
+function tickets_classer_par_projet($bidon) {
+	$page = NULL;
+	if (defined('_TICKETS_LISTE_PROJETS') OR lire_config('tickets/general/projets')) {
+		if (defined('_TICKETS_LISTE_PROJETS'))
+			$liste = explode(":", _TICKETS_LISTE_PROJETS);
+		else
+			$liste = explode(":", lire_config('tickets/general/projets'));
+		$i = 0;
+		foreach($liste as $_projet) {
+			$i += 1;
+			$_projet = trim($_projet);
+			$page .= recuperer_fond('prive/squelettes/inclure/inc_liste_detaillee',
+				array_merge($_GET, array('titre' => _T('tickets:champ_projet').' '.$_projet, 'statut' => 'ouvert', 'projet' => $_projet, 'bloc' => "_bloc$i")),
 				array('ajax'=>true));
 		}
 	}
