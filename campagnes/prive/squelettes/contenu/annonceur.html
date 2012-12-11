@@ -1,0 +1,53 @@
+[(#AUTORISER{voir,annonceur,#ID_ANNONCEUR}|sinon_interdire_acces)]
+<BOUCLE_annonceur(ANNONCEURS){id_annonceur}{si #ENV{exec}|=={annonceur}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,annonceur,#ID_ANNONCEUR})
+		[(#ID_ANNONCEUR|afficher_qui_edite{annonceur}|non)
+			[(#URL_ECRIRE{annonceur_edit,id_annonceur=#ID_ANNONCEUR}|icone_verticale{<:annonceur:icone_modifier_annonceur:>,annonceur,edit,right ajax preload})]
+		]
+		[(#ID_ANNONCEUR|afficher_qui_edite{annonceur}|oui)
+			[(#URL_ECRIRE{annonceur_edit,id_annonceur=#ID_ANNONCEUR}|icone_verticale{#ID_ANNONCEUR|afficher_qui_edite{annonceur},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{annonceur-24.png}|balise_img{annonceur,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{annonceur,#ID_ANNONCEUR}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/annonceur,id=#ID_ANNONCEUR,id_annonceur=#ID_ANNONCEUR,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,annonceur,#ID_ANNONCEUR})
+	[(#ID_ANNONCEUR|afficher_qui_edite{annonceur}|non)
+		[(#URL_ECRIRE{annonceur_edit,id_annonceur=#ID_ANNONCEUR}|icone_verticale{<:annonceur:icone_modifier_annonceur:>,annonceur,edit,right ajax preload})]
+	]
+	[(#ID_ANNONCEUR|afficher_qui_edite{annonceur}|oui)
+		[(#URL_ECRIRE{annonceur_edit,id_annonceur=#ID_ANNONCEUR}|icone_verticale{#ID_ANNONCEUR|afficher_qui_edite{annonceur},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,annonceur,id,#ID_ANNONCEUR},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+#SET{enfants,''}
+[(#VAL{annonceur-enfants}|trouver_fond{prive/objets/contenu/}|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/annonceur-enfants,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{objet,annonceur,id_objet,#ID_ANNONCEUR},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_annonceur>
+[(#ENV**{exec}|=={annonceur_edit}|?{#INCLURE{fond=prive/squelettes/contenu/annonceur_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_annonceur>

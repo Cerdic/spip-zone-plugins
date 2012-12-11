@@ -1,0 +1,44 @@
+
+[(#ENV{erreurs}|non)
+	[(#ENV{_type}|=={campagne}|oui)
+	<INCLURE{fond=prive/objets/statistiques/campagne, id_campagne=#ENV{_id}, date_debut=#ENV{date_debut}, date_fin=#ENV{date_fin}}/>
+	]
+	[(#ENV{_type}|=={annonceur}|oui)
+	<INCLURE{fond=prive/objets/statistiques/annonceur, id_annonceur=#ENV{_id}, date_debut=#ENV{date_debut}, date_fin=#ENV{date_fin}}/>
+	]
+	
+	[(#BOUTON_ACTION{<:campagne:statistiques_telecharger:>, #URL_ACTION_AUTEUR{exporter_statistiques_campagnes, #ENV{_type}/#ENV{_id}/#ENV{date_debut}/#ENV{date_fin}}})]
+]
+
+<div class="formulaire_spip formulaire_editer formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id,nouveau})]">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	[(#ENV{editable}|oui)
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:campagne:statistiques_champ_filtrer:></legend>
+					<ul>
+					[(#SAISIE{date,date_debut,label=<:campagne:champ_date_debut_label:>})]
+					[(#SAISIE{date,date_fin,label=<:campagne:champ_date_debut_label:>})]
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+		
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		
+		<p class="boutons">
+			<span class="image_loading"></span>
+			<input type="submit" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
+	]
+</div>

@@ -1,0 +1,16 @@
+<BOUCLE_annonceur(ANNONCEURS){id_annonceur}>
+
+<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+<div class="champ contenu_id_auteur">
+	<label><:annonceur:champ_id_auteur_label:> : </label>
+	<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"><span dir='#LANG_DIR' class='#EDIT{id_auteur} id_auteur'>#NOM</span></a>
+</div>
+</BOUCLE_auteur>
+
+<hr class="spip"/>
+
+<div class="ajax">
+#FORMULAIRE_STATISTIQUES_CAMPAGNES{annonceur, #ID_ANNONCEUR}
+</div>
+
+</BOUCLE_annonceur>

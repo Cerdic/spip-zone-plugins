@@ -1,0 +1,5 @@
+<a href="#URL_ECRIRE{encarts}"><:encart:titre_encarts:></a><BOUCLE_campagne(CAMPAGNES){id_campagne}{statut?}><span class="sep">
+&gt; </span><a href="[(#ID_ENCART|generer_url_entite{encart})]">#INFO_TITRE{encart,#ID_ENCART}</a><span class="sep">
+&gt; </span><strong class="on">#TITRE</strong></BOUCLE_campagne><BOUCLE_encart(ENCARTS){id_encart=#ENV{id_encart}}><span class="sep">
+&gt; </span><a href="[(#ID_ENCART|generer_url_entite{encart})]">#TITRE</a></BOUCLE_encart><span class="sep">
+&gt; </span><strong class="on"><:campagne:texte_ajouter_campagne:></strong><//B_campagne>

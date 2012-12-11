@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/campagnes, par=titre, env, ajax, sinon=<:campagne:info_aucun_campagne:>}>
+
+[(#AUTORISER{creer,campagne})
+	[(#URL_ECRIRE{campagne_edit,new=oui}|icone_verticale{<:campagne:icone_creer_campagne:>,campagne,new,right})]
+]

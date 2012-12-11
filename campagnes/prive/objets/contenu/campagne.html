@@ -1,0 +1,52 @@
+<BOUCLE_campagne(CAMPAGNES){id_campagne}{statut?}>
+
+<BOUCLE_media(DOCUMENTS){id_campagne}{0,1}{tout}>
+<div class="champ contenu_media">
+[<a href="#FICHIER" class="mediabox">(#MODELE{emb,id_document})</a>]
+</div>
+</BOUCLE_media>
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:campagne:champ_titre_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:campagne:champ_descriptif_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</span>
+</div>]
+
+[<div class="champ contenu_url[ (#URL*|strlen|?{'',vide})]">
+	<label><:campagne:champ_url_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{url} url'>(#URL)</span>
+</div>]
+
+[(#ID_ANNONCEUR|oui)
+<div class="champ contenu_id_annonceur[ (#ID_ANNONCEUR*|?{'',vide})]">
+	<strong><:campagne:champ_id_annonceur_label:></strong> :
+	<div dir='#LANG_DIR' class='#EDIT{id_annonceur} titre'>
+		<a href="[(#ID_ANNONCEUR|generer_url_entite{annonceur})]">#INFO_TITRE{annonceur,#ID_ANNONCEUR}</a>
+	</div>
+</div>
+]
+
+[<div class="champ contenu_date_debut[ (#DATE_DEBUT*|!={0000-00-00}|?{'',vide})]">
+	<label><:campagne:champ_date_debut_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{date_debut} date_debut'>(#DATE_DEBUT|!={0000-00-00}|?{#DATE_DEBUT|affdate})</span>
+</div>]
+
+[<div class="champ contenu_date_fin[ (#DATE_FIN*|!={0000-00-00}|?{'',vide})]">
+	<label><:campagne:champ_date_fin_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{date_fin} date_fin'>(#DATE_FIN|!={0000-00-00}|?{#DATE_FIN|affdate})</span>
+</div>]
+
+[<div class="champ contenu_contextes[ (#CONTEXTES*|strlen|?{'',vide})]">
+	<label><:campagne:champ_contextes_label:> : </label>
+	<div dir='#LANG_DIR' class='#EDIT{contextes} date_debut'>(#CONTEXTES|propre)</div>
+</div>]
+
+<hr class="spip" />
+
+<div class="ajax">#FORMULAIRE_STATISTIQUES_CAMPAGNES{campagne,#ID_CAMPAGNE}</div>
+
+</BOUCLE_campagne>

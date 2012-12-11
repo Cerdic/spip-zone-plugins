@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_annonceurs_selectionnes>
+	<ul>
+	<BOUCLE_annonceurs_selectionnes(ANNONCEURS){id_annonceur IN #GET*{valeur}}
+		{par num nom, nom}{tout}>
+		<li class="choix">#NOM (#ID_ANNONCEUR)</li>
+	</BOUCLE_annonceurs_selectionnes>
+	</ul>
+	</B_annonceurs_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_annonceurs_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_annonceur_selectionne(ANNONCEURS){id_annonceur=#ENV{valeur}}
+		{par num nom, nom}{tout}>
+	  	<p>#NOM (#ID_ANNONCEUR)</p>
+	</BOUCLE_annonceur_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_annonceur_selectionne>
+<//B_test_multiple>

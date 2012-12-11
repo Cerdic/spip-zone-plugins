@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_encarts_selectionnes>
+	<ul>
+	<BOUCLE_encarts_selectionnes(ENCARTS){id_encart IN #GET*{valeur}}
+		{par num titre, titre}{tout}>
+		<li class="choix">#TITRE (#ID_ENCART)</li>
+	</BOUCLE_encarts_selectionnes>
+	</ul>
+	</B_encarts_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_encarts_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_encart_selectionne(ENCARTS){id_encart=#ENV{valeur}}
+		{par num titre, titre}{tout}>
+	  	<p>#TITRE (#ID_ENCART)</p>
+	</BOUCLE_encart_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_encart_selectionne>
+<//B_test_multiple>

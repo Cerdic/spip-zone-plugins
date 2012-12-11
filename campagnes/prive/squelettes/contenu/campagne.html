@@ -1,0 +1,53 @@
+[(#AUTORISER{voir,campagne,#ID_CAMPAGNE}|sinon_interdire_acces)]
+<BOUCLE_campagne(CAMPAGNES){id_campagne}{statut==.*}{si #ENV{exec}|=={campagne}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,campagne,#ID_CAMPAGNE})
+		[(#ID_CAMPAGNE|afficher_qui_edite{campagne}|non)
+			[(#URL_ECRIRE{campagne_edit,id_campagne=#ID_CAMPAGNE}|icone_verticale{<:campagne:icone_modifier_campagne:>,campagne,edit,right ajax preload})]
+		]
+		[(#ID_CAMPAGNE|afficher_qui_edite{campagne}|oui)
+			[(#URL_ECRIRE{campagne_edit,id_campagne=#ID_CAMPAGNE}|icone_verticale{#ID_CAMPAGNE|afficher_qui_edite{campagne},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{campagne-24.png}|balise_img{campagne,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{campagne,#ID_CAMPAGNE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/campagne,id=#ID_CAMPAGNE,id_campagne=#ID_CAMPAGNE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,campagne,#ID_CAMPAGNE})
+	[(#ID_CAMPAGNE|afficher_qui_edite{campagne}|non)
+		[(#URL_ECRIRE{campagne_edit,id_campagne=#ID_CAMPAGNE}|icone_verticale{<:campagne:icone_modifier_campagne:>,campagne,edit,right ajax preload})]
+	]
+	[(#ID_CAMPAGNE|afficher_qui_edite{campagne}|oui)
+		[(#URL_ECRIRE{campagne_edit,id_campagne=#ID_CAMPAGNE}|icone_verticale{#ID_CAMPAGNE|afficher_qui_edite{campagne},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,campagne,id,#ID_CAMPAGNE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+#SET{enfants,''}
+[(#VAL{campagne-enfants}|trouver_fond{prive/objets/contenu/}|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/campagne-enfants,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{objet,campagne,id_objet,#ID_CAMPAGNE},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_campagne>
+[(#ENV**{exec}|=={campagne_edit}|?{#INCLURE{fond=prive/squelettes/contenu/campagne_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_campagne>

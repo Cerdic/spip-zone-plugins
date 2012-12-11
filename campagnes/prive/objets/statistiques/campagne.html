@@ -1,0 +1,21 @@
+
+<table>
+	<caption>
+		<:campagne:statistiques_campagne:>
+		[(#ENV{date_debut}|et{#ENV{date_fin}}|?{#ENV{date_debut}|affdate_debut_fin{#ENV{date_fin},non}|strtolower})]
+	</caption>
+	<thead>
+		<tr class="row_first">
+			<th><:campagne:statistiques_champ_vues:></th>
+			<th><:campagne:statistiques_champ_clics:></th>
+			<th><:campagne:statistiques_champ_ratio:></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><BOUCLE_total_vues(CAMPAGNES_VUES){id_campagne}{date>=#ENV{date_debut,0000-00-00}}{date<=#ENV{date_fin,3000-00-00}}/>#TOTAL_BOUCLE#SET{vues,#TOTAL_BOUCLE}<//B_total_vues></td>
+			<td><BOUCLE_total_clics(CAMPAGNES_CLICS){id_campagne}{date>=#ENV{date_debut,0000-00-00}}{date<=#ENV{date_fin,3000-00-00}}/>#TOTAL_BOUCLE#SET{clics,#TOTAL_BOUCLE}<//B_total_clics></td>
+			<td>[(#GET{clics}|div{#GET{vues}}|mult{100}|round{2})%]</td>
+		</tr>
+	</tbody>
+</table>

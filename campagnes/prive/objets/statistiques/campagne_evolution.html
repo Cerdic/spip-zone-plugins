@@ -1,0 +1,24 @@
+
+<B_stats_campagne>
+<table class="graph columns replace">
+	<caption><:campagne:statistiques_campagne_evolution:></caption>
+	<thead>
+		<tr class="row_first">
+			<th><:date|trim{':'}|trim:></th>
+			<th><:campagne:statistiques_champ_vues:></th>
+			<th><:campagne:statistiques_champ_clics:></th>
+			<th><:campagne:statistiques_champ_ratio:></th>
+		</tr>
+	</thead>
+	<tbody>
+		<BOUCLE_stats_campagne(DATA){source statistiques_campagnes, campagne, #ENV{id_campagne}, #ENV{date_debut}, #ENV{date_fin}}>
+		<tr class="c_[(#VALEUR{date}|affdate{l}|substr{0,3})][(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)c_today]">
+			<th title="[(#VALEUR{date}|affdate{Y/m/d})]">[(#VALEUR{date}|affdate_jourcourt)]</th>
+			<td>#VALEUR{vues}</td>
+			<td>#VALEUR{clics}</td>
+			<td>#VALEUR{ratio}%</td>
+		</tr>
+		</BOUCLE_stats_campagne>
+	</tbody>
+</table>
+</B_stats_campagne>

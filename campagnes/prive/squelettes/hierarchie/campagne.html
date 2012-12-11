@@ -1,0 +1,10 @@
+<a href="#URL_ECRIRE{encarts}"><:encart:titre_encarts:></a><BOUCLE_campagne(CAMPAGNES){id_campagne}{statut?}><span class="sep">
+&gt; </span><a href="[(#ID_ENCART|generer_url_entite{encart})]">#INFO_TITRE{encart,#ID_ENCART}</a><span class="sep">
+&gt; </span><strong class="on">#TITRE</strong></BOUCLE_campagne>
+
+<BOUCLE_annonceur(ANNONCEURS){id_annonceur=#INFO_ID_ANNONCEUR{campagne,#ENV{id_campagne}}}>
+<div class="chemin_annonceur">
+<a href="#URL_ECRIRE{annonceurs}"><:annonceur:titre_annonceurs:></a><span class="sep">
+&gt; </span><a href="[(#ID_ANNONCEUR|generer_url_entite{annonceur})]">#NOM</a>
+</div>
+</BOUCLE_annonceur>

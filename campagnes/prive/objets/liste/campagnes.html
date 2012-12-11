@@ -1,0 +1,57 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1, 
+	date,-1, 
+	id_campagne,1,
+	points,-1
+}})]<B_liste_campagnes>
+#ANCRE_PAGINATION
+<div class="liste-objets campagnes">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{campagne:info_1_campagne,campagne:info_nb_campagnes}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='titre' scope='col'>[(#TRI{titre,<:campagne:champ_titre_label:>,ajax})]</th>
+			<th class="vues" scope="col"><:campagne:statistiques_champ_vues:></th>
+			<th class="clics" scope="col"><:campagne:statistiques_champ_clics:></th>
+			<th class="ratio" scope="col"><:campagne:statistiques_champ_ratio:></th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='id' scope='col'>[(#TRI{id_campagne,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_campagnes(CAMPAGNES){id_encart?}{id_annonceur?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='statut'>[(#STATUT|puce_statut{campagne,#ID_CAMPAGNE})]</td> 
+			<td class='titre principale'>
+				<a href="[(#ID_CAMPAGNE|generer_url_entite{campagne})]" title="<:info_numero_abbreviation|attribut_html:> #ID_CAMPAGNE">
+					[(#RANG). ]#TITRE
+					<div>
+						<BOUCLE_doc(DOCUMENTS){id_campagne}{0,1}{tout}>
+							[(#EXTENSION|in_array{#ARRAY{0,jpg,1,png,2,gif}}|oui)
+								[(#FICHIER|image_reduire{200,150})]
+							]
+							[(#EXTENSION|=={swf}|oui)
+								[(#LOGO_DOCUMENT|extraire_attribut{src}|image_reduire{200,150})]
+							]
+						</BOUCLE_doc>
+					</div>
+				</a>
+			</td>
+			<td class="vues"><BOUCLE_total_vues(CAMPAGNES_VUES){id_campagne}/>#TOTAL_BOUCLE#SET{vues,#TOTAL_BOUCLE}<//B_total_vues></td>
+			<td class="clics"><BOUCLE_total_clics(CAMPAGNES_CLICS){id_campagne}/>#TOTAL_BOUCLE#SET{clics,#TOTAL_BOUCLE}<//B_total_clics></td>
+			<td class="ratio">[(#GET{clics}|div{#GET{vues}}|mult{100}|round{2})%]</td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+			<td class='id'>[(#AUTORISER{modifier,campagne,#ID_CAMPAGNE}|?{
+				<a href="[(#URL_ECRIRE{campagne_edit,id_campagne=#ID_CAMPAGNE})]">#ID_CAMPAGNE</a>,
+				#ID_CAMPAGNE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_campagnes>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_campagnes>[
+<div class="liste-objets campagnes caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_campagnes>

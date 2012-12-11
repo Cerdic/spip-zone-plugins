@@ -1,0 +1,36 @@
+<paquet
+	prefix="campagnes"
+	categorie="divers"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.5;3.0.*]"
+	logo="prive/themes/spip/images/campagnes-64.png"
+	documentation=""
+	schema="1.0.0" 
+>
+	<!--
+		Paquet généré le 2012-11-26 11:32:50
+	-->
+
+	<nom>Campagnes publicitaires</nom>
+
+	<auteur lien="http://www.spip-contrib.net/PieroWbmstr">Piero Wbmstr</auteur>
+	<auteur lien='http://www.ldd.fr'>Les Développements Durables</auteur>
+	<auteur lien='http://www.latribunedelart.fr'>La tribune de l'art</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
+	<necessite nom="verifier" compatibilite="[0.1.18;]" /> 
+	<necessite nom="spip_bonux" compatibilite="[3.0.3;]" /> 
+	
+	<pipeline nom="autoriser" inclure="campagnes_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/campagnes.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/campagnes.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/campagnes.php" /> 
+	<pipeline nom="taches_generales_cron" inclure="campagnes_pipelines.php" />
+
+	<menu nom="encarts" titre="encart:titre_encarts_menu" parent="menu_squelette" icone="images/encart-16.png" action="encarts" />
+	<menu nom="annonceurs" titre="annonceur:titre_annonceurs" parent="menu_activite" icone="images/annonceur-16.png" action="annonceurs" /> 
+	<menu nom="campagne_creer" titre="campagne:icone_creer_campagne" parent="outils_rapides" icone="images/campagne-new-16.png" action="campagne_edit" parametres="new=oui" /> 
+</paquet>

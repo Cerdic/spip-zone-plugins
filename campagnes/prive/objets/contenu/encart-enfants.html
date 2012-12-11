@@ -1,0 +1,6 @@
+<INCLURE{fond=prive/objets/liste/campagnes, par=titre, env, ajax, sinon=<:campagne:info_aucun_campagne:>, id_encart=#ENV{id_encart}}>
+
+[(#AUTORISER{creer,campagne})
+	[(#URL_ECRIRE{campagne_edit,new=oui&id_encart=#ENV{id_encart}}|icone_verticale{<:campagne:icone_creer_campagne:>,campagne,new,right})]
+]
+<div class="nettoyeur"></div>
