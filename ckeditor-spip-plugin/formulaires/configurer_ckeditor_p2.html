@@ -9,60 +9,9 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-	<div class='cke-div'>
-	<center>
-	<a href="#" onclick="javascript:return selectAllTools(true);"><:ckeditor:selection_tout:></a> |
-	<a href="#" onclick="javascript:return selectAllTools(false);"><:ckeditor:selection_aucun:></a> |
-	<a href="#" onclick="javascript:return selectAllTools('inverse');"><:ckeditor:selection_inverse:></a>
-	</center>
-	<?php
-	include_spip('inc/ckeditor_lire_config') ;
-	include_spip('inc/ckeditor_tools') ;
-	include_spip("inc/toolbars") ;
-	$html2spip = ckeditor_lire_config('html2spip_limite', _CKE_HTML2SPIP_LIMITE_DEF) ;
-	foreach($GLOBALS['toolbars'] as $toolbar) {
-		echo "<div style=\"float:left;border:1px solid #bbb; padding:3px; margin:3px;\">" ;
-		$cp=0;
-		foreach($toolbar as $tool => $item) {
-			if ($html2spip && !$item[2]) { 
-				$disabled = ' disabled="disabled"' ; 
-				$style = ' style="color:gray;" title="'._T('ckeditor:desactive_car_zappe_par_html2spip').'"' ; 
-			} else { 
-				$disabled = '' ; 
-				$style = ' style="color:black;"' ;
-			}
-			if (!ckeditor_tweaks_actifs('smileys') && ($tool == 'Smiley')) continue ;
-			echo "<input type=\"checkbox\" name=\"tool_$tool\"" ;
-			if (ckeditor_lire_config("tool_$tool", $item[1])) {
-				echo " checked" ;
-			}
-			echo " class=\"toolbar_tool\"$disabled><a onclick=\"javascript:clickontool('$tool');\" title=\""._T('ckeditor:tool_'.$tool)."\"$style>" ;
-			if (isset($item[3]) && ($icon = find_in_path(sprintf("prive/themes/spip/images/icons/icon-%02d.png",$item[3])))) {
-				echo "<img src='$icon' alt='"._T('ckeditor:tool_'.$tool)."'/>" ;
-			} else {
-				echo _T('ckeditor:tool_'.$tool) ;
-			}
-			echo "</a></input>\n" ;
-		}
-		echo "</div>\n" ;
-	}
-?>
-	</div>
-<script type='text/javascript'>
-function selectAllTools(select) {
-	$('.toolbar_tool').each( function() {
-		$(this).attr('checked', (select == 'inverse' ? ! $(this).attr('checked') : select) ) ; 
-	} );
-	return false;
-}
-function clickontool(tool) {
-	var cb = $('input[name=tool_'+tool+']') ;
-	cb.attr('checked', ! cb.attr('checked') ) ;
-}
-</script>
-
-		<input type="hidden" name="_meta_casier" value="ckeditor" />
-
+	<ul>
+		#GENERER_SAISIES{#ENV{cke_saisies_p2}}
+	</ul>
 		<p class="boutons"><span class="image_loading">&nbsp;</span>
 			<input type="submit" class="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" />
 			<input type="submit" class="submit" name="_cfg_delete" value="<:ckeditor:supprimer:>" />
