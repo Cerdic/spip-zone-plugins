@@ -39,6 +39,7 @@ function init_entete($titre='', $id_rubrique=0, $minipres=false) {
 	if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"])))
 		$nom_site_spip=  _T('info_mon_site_spip');
 
+
 	$head = "<title>["
 		. $nom_site_spip
 		. "] " . textebrut(typo($titre)) . "</title>\n"
@@ -48,10 +49,12 @@ function init_entete($titre='', $id_rubrique=0, $minipres=false) {
 		. "' />\n"
 		. envoi_link($nom_site_spip,$minipres);
 
+	// compatibilite SPIP >= 20045
+	$js = str_replace('init_bandeau', 'init', repercuter_gadgets($id_rubrique));
 	$head .= "
 	<script type='text/javascript'><!--
 	jQuery(document).ready(function(){
-	" .	repercuter_gadgets($id_rubrique) . '
+	" . $js  . '
 	});
 	// --></script>
 	';
