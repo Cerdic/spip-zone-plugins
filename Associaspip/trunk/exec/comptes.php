@@ -61,7 +61,7 @@ function exec_comptes() {
 			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode") ),
 			'cpte_bilan_titre_general' => array('finances-24.png', array('compte_bilan', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode") ),
 #			'annexe_titre_general' => array('finances-24.png', array('annexe', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode") ),
-			'ajouter_une_operation' => array('ajout-24.png', 'edit_compte'),
+			'ajouter_une_operation' => array('ajout-24.png', array('edit_compte')),
 		) );
 		debut_cadre_association('finances-24.png', 'informations_comptables');
 		// FILTRES
