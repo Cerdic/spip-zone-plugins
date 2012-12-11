@@ -16,6 +16,5 @@
 		[<p class="soustitre">(#GET{selection}|implode{', '}).</p>]
 	</div>
 </div>
-[(#REM) Le type de reference est passe dans type_ref pour eviter colision avec Zpip et le type de page. ]
-	[(#INCLURE{fond=modeles/biblio_#ENV{tri,annee},type=#ENV{type_ref},env}|sinon{<:zotspip:aucune_reference:>})]
+	[(#INCLURE{fond=modeles/biblio_#ENV{tri,annee},env}|sinon{<:zotspip:aucune_reference:>})]
 ]

@@ -1,5 +1,5 @@
 [(#CONFIG{zotspip/page_biblio}|oui)
-[(#SET{tri, #ARRAY{annee,<:zotspip:item_annee:>,type,<:zotspip:item_type:>,annee_type,<:zotspip:item_annee_type:>,type_annee,<:zotspip:item_type_annee:>,premier_auteur,<:zotspip:item_premier_auteur:>}})]
+[(#SET{tri, #ARRAY{annee,<:zotspip:item_annee:>,type_ref,<:zotspip:item_type:>,annee_type,<:zotspip:item_annee_type:>,type_annee,<:zotspip:item_type_annee:>,premier_auteur,<:zotspip:item_premier_auteur:>}})]
 [(#PLUGIN{aeres}|oui)[(#SET{tri,#GET{tri}|array_merge{#ARRAY{aeres,<:zotspip:item_aeres:>}}})]]
 <div class="formulaire_spip">
 <form action="spip.php" method="get"><div>

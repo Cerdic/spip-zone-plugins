@@ -88,7 +88,7 @@ function zotspip_maj_items($forcer=false, $n=50) {
 				'pages' => '',
 				'publication' => '',
 				'editeur' => '',
-				'type' => '',
+				'type_ref' => '',
 				'volume' => '',
 				'numero' => '',
 				'doi' => '',
@@ -162,7 +162,7 @@ function zotspip_maj_items($forcer=false, $n=50) {
 				'ISSN' => 'issn',
 				'issue' => 'numero',
 				'issueDate' => 'date',
-				'itemType' => 'type',
+				'itemType' => 'type_ref',
 				'label' => 'editeur',
 				'letterType' => 'type_doc',
 				'manuscriptType' => 'type_doc',
@@ -202,7 +202,7 @@ function zotspip_maj_items($forcer=false, $n=50) {
 					$insertion[$spip] = $data[$zot];
 			
 			// Vider le cache des documents distants
-			if ($insertion['type'] == 'attachment') {
+			if ($insertion['type_ref'] == 'attachment') {
 				include_spip('inc/invalideur');
 				purger_repertoire(_DIR_VAR."cache-zotspip/$id_zitem/");
 				include_spip('inc/flock');

@@ -114,7 +114,7 @@ function zotspip_lister_csl(){
 	return $liste_csl;
 }
 
-// Traduire le type de document
+// Traduire le type de reference
 function zotspip_traduire_type($type) {
 	return ($type!='') ? _T('zotero:itemtypes_'.strtolower($type)) : '';
 }
@@ -390,9 +390,9 @@ function critere_par_type_zotero($idb, &$boucles, $crit) {
 	include_spip('inc/config');
 	$config = lire_config('zotspip/ordre_types');
 	if (is_array($config) && count($config))
-		$boucle->order[] = "\"FIELD($id_table.type,'".implode("','",$config)."')\"";
+		$boucle->order[] = "\"FIELD($id_table.type_ref,'".implode("','",$config)."')\"";
 	else
-		$boucle->order[] = "'$id_table.type'";
+		$boucle->order[] = "'$id_table.type_ref'";
 }
 
 // Renvoie le premier auteur a partir du champs auteurs de la table zitems

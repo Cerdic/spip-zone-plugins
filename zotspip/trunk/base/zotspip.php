@@ -26,7 +26,7 @@ function zotspip_declarer_tables_principales($tables_principales){
 	$zitems = array(
 		"id_zitem" => "varchar(16) DEFAULT '' NOT NULL",
 		"id_parent" => "varchar(16) DEFAULT '' NOT NULL",
-		"type" => "varchar(255) DEFAULT '' NOT NULL",
+		"type_ref" => "varchar(255) DEFAULT '' NOT NULL",
 		"annee" => "smallint(6)",
 		"titre" => "text DEFAULT '' NOT NULL",
 		"auteurs" => "text DEFAULT '' NOT NULL",

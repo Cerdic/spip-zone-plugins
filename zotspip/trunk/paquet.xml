@@ -1,11 +1,11 @@
 <paquet
 	prefix="zotspip"
 	categorie="edition"
-	version="2.2.0"
+	version="3.0.0"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/zotspip-48.png"
-	schema="0.2"
+	schema="0.3"
 	documentation="http://contrib.spip.net/spip.php?article4161"
 >	
 

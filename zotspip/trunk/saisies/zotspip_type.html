@@ -16,7 +16,7 @@
 
 <select name="#ENV{nom}" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ size="(#ENV{size})"]>
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
-<BOUCLE_selection(ZITEMS){fusion type}{par_type_zotero}>
-	<option value="#TYPE"[(#TYPE|=={#GET{valeur}}|oui)selected="selected"]>[(#TYPE|zotspip_traduire_type)]</option>
+<BOUCLE_selection(ZITEMS){fusion type_ref}{par_type_zotero}>
+	<option value="#TYPE_REF"[(#TYPE_REF|=={#GET{valeur}}|oui)selected="selected"]>[(#TYPE_REF|zotspip_traduire_type)]</option>
 </BOUCLE_selection>
 </select>

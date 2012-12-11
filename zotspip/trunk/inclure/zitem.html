@@ -1,16 +1,16 @@
 <BOUCLE_zitem(ZITEMS){id_zitem}>
-<[(#ENV{liste}|?{li,div})] class="zotspip_item"[(#ENV{icones}|oui)style="list-style-type:none; padding-left:20px; background:url([(#TYPE|zotspip_icone_type{#MIMETYPE,#FICHIER}|extraire_attribut{src})]) no-repeat 0 0px;"]>
+<[(#ENV{liste}|?{li,div})] class="zotspip_item"[(#ENV{icones}|oui)style="list-style-type:none; padding-left:20px; background:url([(#TYPE_REF|zotspip_icone_type{#MIMETYPE,#FICHIER}|extraire_attribut{src})]) no-repeat 0 0px;"]>
 	[(#ENV{form_export}|oui)<input type="checkbox" name="id#EVAL**{chr(91)}#EVAL**{chr(93)}" value="#ID_ZITEM" class="zotspip_select_ref" />]
 	[(#ENV{liens}|oui)<div class="liens">
 			[<a href="http://dx.doi.org/(#DOI|trim|urlencode)" title="<:zotspip:identifier_via_doi:>"><img src="#CHEMIN{images/zotero/go.png}" alt=""></a><br />]
 			[<a href="http://www.worldcat.org/isbn/(#ISBN|trim|urlencode)" title="<:zotspip:identifier_via_isbn:>"><img src="#CHEMIN{images/zotero/go.png}" alt=""></a><br />]
 			[<a href="(#URL)" title="<:zotspip:lien_ressource:>"><img src="#CHEMIN{images/zotero/url.png}" alt=""></a><br />]
 	</div>]
-	[(#TYPE|=={attachment}|ou{#TYPE|=={note}}|non)
+	[(#TYPE_REF|=={attachment}|ou{#TYPE_REF|=={note}}|non)
 		#REFERENCE{#ENV{csl},#ENV{souligne}}]
-	[(#TYPE|=={note}|oui)
+	[(#TYPE_REF|=={note}|oui)
 		<div class="note">#RESUME</div>]
-	[(#TYPE|=={attachment}|oui)
+	[(#TYPE_REF|=={attachment}|oui)
 		[(#FICHIER|oui)[<a href="#URL_PAGE{zotspip_file,zitem=#ID_ZITEM}">(#TITRE)</a>] [(#POIDS|>{0}|oui)[(#POIDS|taille_en_octets)]] [(<a href="(#URL)"><:zotspip:source:></a>)]]
 		[(#FICHIER|non)[<a href="#URL">(#TITRE)</a>]]]
 	<abbr class="unapi-id" title="#ID_ZITEM"></abbr>
@@ -19,7 +19,7 @@
 	<div class="details" id="details_#ID_ZITEM">]
 	[(#ENV{details}|oui)<div class="details">
 		[(#ENV{details}|=={complet}|non)
-			[(#TYPE|=={note}|non)[<div class="resume"><strong><:zotspip:resume:></strong> (#RESUME)</div>]]
+			[(#TYPE_REF|=={note}|non)[<div class="resume"><strong><:zotspip:resume:></strong> (#RESUME)</div>]]
 			[<div class="tags"><strong><:zotspip:tags:></strong> (#INCLURE{fond=inclure/zitem_tags,id_zitem}).</div>]
 		][(#ENV{details}|=={complet}|oui)
 			#ZITEM_DETAILS

@@ -45,7 +45,7 @@ parametres:
       -
         saisie: 'zotspip_type'
         options:
-          nom: 'type'
+          nom: 'type_ref'
           label: '<:zotspip:label_type_ref:>'
       -
         saisie: 'zotspip_annee'
@@ -113,7 +113,7 @@ parametres:
           option_intro: '<:zotspip:item_auteur:>'
           datas:
             annee: '<:zotspip:item_annee:>'
-            type: '<:zotspip:item_type:>'
+            type_ref: '<:zotspip:item_type:>'
             volume: '<:zotspip:item_volume:>'
             numero: '<:zotspip:item_numero:>'
             date_ajout: '<:zotspip:item_date_ajout:>'
