@@ -12,6 +12,7 @@
 			]
 			<th><:tickets:champ_importance:></th>
 			<th><:tickets:champ_date:></th>
+			<th><:tickets:assigne_a:></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -29,6 +30,7 @@
 				[&nbsp;(#SEVERITE|tickets_texte_severite)]
 			</td>
 			<td>[(#DATE|affdate)]</td>
+			<td>[<a href="#INFO_URL{auteur,#ID_ASSIGNE}">(#INFO_NOM{auteur,#ID_ASSIGNE})</a>]</td>
 		</tr>
 	</BOUCLE_detaillee>
 	</tbody>
