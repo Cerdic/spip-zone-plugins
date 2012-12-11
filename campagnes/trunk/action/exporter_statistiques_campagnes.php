@@ -30,6 +30,9 @@ function action_exporter_statistiques_campagnes_dist($arg=null) {
 		);
 		// Le nom du fichier
 		$fichier = "statistiques_${type}_${id}".($date_debut?"_depuis-$date_debut":'').($date_fin?"_jusque-$date_fin":'');
+		
+		header('Status: 200 OK');
+		header("Content-type: text/csv; charset=utf-8");
 		echo $exporter_csv($fichier, $statistiques);
 		exit();
 	}
