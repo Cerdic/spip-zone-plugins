@@ -221,9 +221,13 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles=true){
 					or (is_array($valeur) and count($valeur) == 0)
 				))
 			)
-		)
-			$erreurs[$champ] = $saisie['options']['erreur_obligatoire'] ? $saisie['options']['erreur_obligatoire'] : _T('info_obligatoire');
-		
+		) {
+			$erreurs[$champ] =
+				(isset($saisie['options']['erreur_obligatoire']) and $saisie['options']['erreur_obligatoire'])
+				? $saisie['options']['erreur_obligatoire']
+				: _T('info_obligatoire');
+		}
+
 		// On continue seulement si ya pas d'erreur d'obligation et qu'il y a une demande de verif
 		if ((!isset($erreurs[$champ]) or !$erreurs[$champ]) and is_array($verifier) and $verif_fonction){
 			$normaliser = null;
