@@ -127,17 +127,17 @@ parametres:
         options:
           nom: 'liens'
           label: '<:zotspip:label_liens:>'
-          option_intro: '<:oui:>'
+          option_intro: '<:item_oui:>'
           datas:
-            non: '<:non:>'
+            non: '<:item_non:>'
       -
         saisie: 'selection'
         options:
           nom: 'export'
           label: '<:zotspip:label_export:>'
-          option_intro: '<:oui:>'
+          option_intro: '<:item_oui:>'
           datas:
-            non: '<:non:>'
+            non: '<:item_non:>'
       -
         saisie: 'selection'
         options:
