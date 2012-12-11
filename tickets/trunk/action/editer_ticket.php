@@ -123,7 +123,9 @@ function ticket_inserer($id_auteur=null) {
 		'date' => date('Y-m-d H:i:s'),
 		'date_modif' => date('Y-m-d H:i:s'),
 		'ip' => $ip,
-		'id_auteur' => $id_auteur);
+		'id_auteur' => $id_auteur,
+		'id_assigne' => 0
+		);
 		
 	// Envoyer aux plugins
 	$champs = pipeline('pre_insertion',

@@ -152,19 +152,22 @@ function tickets_edit_config(){
  */
 function formulaires_editer_ticket_traiter($id_ticket='new',$retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
 	$res = formulaires_editer_objet_traiter('ticket',$id_ticket,0,0,$retour,$config_fonc,$row,$hidden);
-
-	$message['message_ok'] = _T('tickets:ticket_enregistre');
-	/**
-	 * Si pas d'adresse de retour on revient sur la page en cours avec l'id_ticket en paramètre
-	 * Utile pour l'utilisation dans le public
-	 */
-	if (!$retour) {
-		$message['redirect'] = parametre_url(parametre_url(self(),'id_ticket', $res['id_ticket']),'ticket','');
-	} else {
-		// sinon on utilise la redirection donnee.
-		$message['redirect'] = parametre_url($retour, 'id_ticket', $res['id_ticket']);
-	}
 	
+	if (isset($res['message_erreur']))
+		$message['message_erreur'] = $res['message_erreur'];
+	else {
+		$message['message_ok'] = _T('tickets:ticket_enregistre');
+		/**
+		 * Si pas d'adresse de retour on revient sur la page en cours avec l'id_ticket en paramètre
+		 * Utile pour l'utilisation dans le public
+		 */
+		if (!$retour) {
+			$message['redirect'] = parametre_url(parametre_url(self(),'id_ticket', $res['id_ticket']),'ticket','');
+		} else {
+			// sinon on utilise la redirection donnee.
+			$message['redirect'] = parametre_url($retour, 'id_ticket', $res['id_ticket']);
+		}
+	}
 	return $message;
 }
 
