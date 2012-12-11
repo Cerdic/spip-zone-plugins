@@ -115,6 +115,12 @@ function ckeditor_get_scaytlang($type, $id_type) {
 
 function ckeditor_header_prive($flux) {
 	$flux .= "\n<!-- début de : ckeditor_header_prive -->\n" ;
+	$exec = _request('exec') ;
+	if (version_compare($GLOBALS['spip_version_affichee'],'3.0','<') && preg_match('~^configurer_ckeditor~',$exec)) {
+		$head = inclure_page("prive/squelettes/head/".$exec."-v2",null) ;
+		$flux .= "<!-- fond=prive/squelettes/head/".$exec."-v2 -->\n" ;
+		$flux .= $head['texte'] ;
+	}
 	if (ckeditor_lire_config('insertcssprivee', _CKE_INSERT_CSSPRIVEE_DEF)) {
 		$flux .= ckeditor_getcss() ;
 	}

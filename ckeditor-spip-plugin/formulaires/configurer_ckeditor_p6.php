@@ -7,7 +7,7 @@ function formulaires_configurer_ckeditor_p6_charger_dist() {
 	($cfg = lire_config("ckeditor")) || ($cfg = array()) ;
 	$modele_edite = _request('modele_a_editer') ;
 
-	if ($modele_edite && !_request('nouveau_modele')) {
+	if ($modele_edite && !_request('nouveau_modele') && !_request('supprimer_modele')) {
 		$var = lire_config('ckeditor/modeles/'.$modele_edite) ;
 
 		$valeurs = array(
