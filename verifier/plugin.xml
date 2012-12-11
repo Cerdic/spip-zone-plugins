@@ -21,8 +21,7 @@
 	<lien>http://www.spip-contrib.net/Verifier,1505</lien>
 	<pipeline>
 		<nom>verifier</nom>
-		<action>verifier_verifier</action>
-		<inclure>verifier_pipelines.php</inclure>
+		<action></action>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.10;3.0.99]" />
 	<utilise id="yaml" />	
