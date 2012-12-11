@@ -91,7 +91,7 @@ function formulaires_configurer_ckeditor_p3_charger_dist() {
 				array(
 					'saisie' => 'selection',
 					'options' => array(
-						'nom' => 'convertion',
+						'nom' => 'conversion',
 						'cacher_option_intro' => 'oui',
 						'label' => _T('ckeditor:options_html2spip'),
 						'datas' => $cvt_options

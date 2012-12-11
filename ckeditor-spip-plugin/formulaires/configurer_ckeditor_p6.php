@@ -23,7 +23,7 @@ function formulaires_configurer_ckeditor_p6_charger_dist() {
 				'saisie' => 'fieldset',
 				'options' => array(
 					'nom' => 'edition_modele',
-					'label' => _T('ckeditor:edition_du_modele')." : ".$modele_edite,
+					'label' => _T('ckeditor:edition_du_modele', array('MODELE' => $modele_edite)),
 					'pliable' => 'non'
 				),
 				'saisies' => array(
@@ -92,18 +92,18 @@ function formulaires_configurer_ckeditor_p6_charger_dist() {
 			foreach($cke_modeles  as $id => $modele) {
 				$modeles[$id] = ($modele['desc']?$modele['desc']:$id) ;
 			}
-		}
-		$valeurs['saisies_cke_page6_2'] = array(
-			array(
-				'saisie' => 'selection',
-				'options' => array(
-					'nom' => 'modele_a_editer',
-					'label' => _T('ckeditor:nom_nouveau_modele'),
-					'cacher_option_intro' => 'oui',
-					'datas' => $modeles
+			$valeurs['saisies_cke_page6_2'] = array(
+				array(
+					'saisie' => 'selection',
+					'options' => array(
+						'nom' => 'modele_a_editer',
+						'label' => _T('ckeditor:nom_nouveau_modele'),
+						'cacher_option_intro' => 'oui',
+						'datas' => $modeles
+					)
 				)
-			)
-		) ;
+			) ;
+		}
 	}
 
 	return $valeurs ;

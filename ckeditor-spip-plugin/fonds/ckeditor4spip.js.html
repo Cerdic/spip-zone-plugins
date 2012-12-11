@@ -128,6 +128,7 @@ function SpipEditor2CKEditor(editor_id){
 				.attr('src','[(#CHEMIN{images/ckeditor_spip.png}|url_absolue)]') ;
 		$('#swapeditor_'+stack[editor_id].ndx).attr('disabled',false);
 		cke.setReadOnly(false);
+		cke.resize(CKEDITOR.ckConfig.minwidth,CKEDITOR.ckConfig.height,true);
 	},EdConfig);
 }
 

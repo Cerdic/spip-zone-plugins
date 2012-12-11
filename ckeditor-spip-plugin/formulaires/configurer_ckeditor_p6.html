@@ -10,35 +10,34 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-
-		[(#SET{test,#EVAL{_request('modele_a_editer') && ! _request('nouveau_modele')}})]
-
-<BOUCLE_editer_modele(CONDITION){si #GET{test} }>
+[
 		<ul>
-			#GENERER_SAISIES{#ENV{saisies_cke_page6_3}}
+			(#GENERER_SAISIES{#ENV{saisies_cke_page6_3}})
 		</ul>
 	<p class="boutons"><span class="image_loading">&nbsp;</span>
 		<input type="submit" name="retour" value="<:ckeditor:retour:>" />
 		<input type="submit" name="enregistrer_modele" value="<:ckeditor:enregistrer_modele:>" />
 	</p>
-</BOUCLE_editer_modele>
+]
+[
 		<ul>
-			#GENERER_SAISIES{#ENV{saisies_cke_page6_1}}
+			(#GENERER_SAISIES{#ENV{saisies_cke_page6_1}})
 		</ul>
 
 	<p class="boutons">
 		<input type="submit" name="nouveau_modele" value="<:ckeditor:nouveau_modele:>" />
 	</p>
-
+]	
+[
 		<ul>
-			#GENERER_SAISIES{#ENV{saisies_cke_page6_2}}
+			(#GENERER_SAISIES{#ENV{saisies_cke_page6_2}})
 		</ul>
 			
 	<p class="boutons"><span class="image_loading">&nbsp;</span>
 		<input type="submit" name="editer_modele" value="<:ckeditor:editer_modele:>" />
 		<input type="submit" name="supprimer_modele" value="<:ckeditor:supprimer_modele:>" onclick="javascript:return confirm('<:ckeditor:confirmer_supprimer_modele:>');"/>
 	</p>
-<//B_editer_modele>
+]
 
 	</div>
 </form>
