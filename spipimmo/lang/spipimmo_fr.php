@@ -1,7 +1,7 @@
-﻿<?php
+<?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	//A
@@ -82,6 +82,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ville' => 'Ville',
 
 );
-
 
 ?>
