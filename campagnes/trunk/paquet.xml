@@ -20,6 +20,7 @@
 
 	<licence>GNU/GPL</licence>
 	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
+	<necessite nom="yaml" compatibilite="[1.5.0;]" /> 
 	<necessite nom="verifier" compatibilite="[0.1.18;]" /> 
 	<necessite nom="spip_bonux" compatibilite="[3.0.3;]" /> 
 	
