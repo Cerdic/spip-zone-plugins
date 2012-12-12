@@ -104,7 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'masquer' => 'Schovať',
 	'mode_noisettes' => 'Upraviť oriešky',
 	'modif_en_cours' => 'Prebiehajú úpravy',
-	'modifier_dans_prive' => 'Modifier dans l\'espace privé', # NEW
+	'modifier_dans_prive' => 'Upraviť zo súkromnej zóny',
 
 	// N
 	'ne_pas_definir_d_heritage' => 'Nedefinovať dedičnosť',
