@@ -18,6 +18,9 @@
 			[<p class="lieu"><strong><:seminaire:lieu:> : </strong><span class="location #EDIT{lieu}">(#LIEU|textebrut)</span>[<span class="adresse #EDIT{adresse}"> - (#ADRESSE|PtoBR)</span>]</p>]
 			[<p class="#EDIT{notes} notes"><strong><:seminaire:notes:> :</strong> (#CHAMP_SQL{notes}|typo)</p>]
 		</ACM.msc>
+		<div class="ajax">
+			#FORMULAIRE_PARTICIPER_EVENEMENT{#ID_EVENEMENT}
+		</div>	
 	</div>
 </BOUCLE_vevent>
 <div class="espace"></div>

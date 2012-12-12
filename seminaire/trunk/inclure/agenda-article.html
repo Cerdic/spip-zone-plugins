@@ -1,4 +1,5 @@
 <BOUCLE_compte(EVENEMENTS){id_article}{0,1}>
+</BOUCLE_compte>
  <div id="seminaire">
 <BOUCLE_seminaire(ARTICLES){id_article}>
 [(#REM) Se placer au debut du mois en cours par defaut]
@@ -28,9 +29,6 @@
 	<BOUCLE_agenda(EVENEMENTS){par date_debut}{age_relatif_debut<=0}{id_evenement?}{id_article?}{id_rubrique?}{titre_mot=#TITRE}{id_evenement_source?}{pagination #ENV{pas,9}}>
 		<li class='item[ (#EXPOSE)][ (#ID_EVENEMENT_SOURCE|oui)repetition]'>
 			[(#MODELE{evenement_vevent}|trim|sinon{'?'})]
-			<div class="ajax">
-				#FORMULAIRE_PARTICIPER_EVENEMENT{#ID_EVENEMENT}
-			</div>
 		</li>
 		<hr>
 	</BOUCLE_agenda>
@@ -133,4 +131,4 @@ margin-bottom: -28px;
 
 
 </div><!--fin du bloc seminaire-->
-</BOUCLE_compte>
+</B_compte>
