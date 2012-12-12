@@ -8,7 +8,7 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
-/// pour les entites (X)HTML cf. 
+/// pour les entites (X)HTML cf.
 /// http:///fr.wikipedia.org/wiki/Aide:Liste_de_caract%C3%A8res_sp%C3%A9ciaux#Symboles_mon.C3.A9taires
 /// http:///webdesign.about.com/od/localization/l/blhtmlcodes-cur.htm
 /// http:///fr.wikipedia.org/wiki/Symbole_mon%C3%A9taire
@@ -22,7 +22,7 @@
 /// http:///fr.wikipedia.org/wiki/Codes_ISO_4217_des_monnaies
 
 /// pays francophones/lusophone/etc. : '@nombre@&nbsp;@devise@' ;
-/// pays anglophones/germanophones/etc. : '@devise@&nbsp;@nombre@' 
+/// pays anglophones/germanophones/etc. : '@devise@&nbsp;@nombre@'
 /// pour l'usage, cf.
 /// http:///programmer.spip.org/Syntaxe-complete-des-codes-de
 /// http://programmer.spip.org/Codes-de-langue-en-PHP
@@ -51,64 +51,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activation_des_adherents' => 'Activation des adh&eacute;rents',
 	'activer_agenda_pour_activer_module' => 'Il faut installer et activer <a href=\'\'>Agenda 2</a> ou <a href=\'\'>Simple Agenda</a> pour pouvoir activer ce module.',
 	'activer_gestion_comptable_pour_activer_ce_module' => 'Il faut activer la gestion comptable pour pouvoir activer ce module',
-	'activite_ajouter_inscription' => 'Ajouter une inscription',
 	'activite_bouton_ajouter_inscription' => 'Ajouter une inscription',
 	'activite_bouton_imprimer_inscriptions' => 'Imprimer la liste des inscriptions',
 	'activite_bouton_maj_inscription' => 'Mettre &agrave; jour l\'inscription',
 	'activite_bouton_modifier_article' => 'Modifier l\'article',
 	'activite_bouton_synchroniser_inscriptions' => 'Importer la liste des inscriptions',
 	'activite_bouton_voir_liste_inscriptions' => 'Voir la liste des inscriptions',
-	'activite_entete_adherent' => 'Adh&eacute;rent',
-	'activite_entete_heure' => 'Heure',
 	'activite_entete_impayees' => 'Sans paiement',
-	'activite_entete_inscrits' => 'Nbre',
-	'activite_entete_intitule' => 'Intitul&eacute;',
-	'activite_entete_lieu' => 'Lieu',
-	'activite_entete_toutes' => 'Toutes',
 	'activite_entete_validees' => 'Avec paiement',
-	'activite_justification_compte_inscription' => 'Inscription n&deg; @id_activite@ - @nom@',
-	'activite_libelle_accompagne_de' => 'Je serai accompagn&eacute; de',
-	'activite_libelle_date_paiement' => 'Date de paiement (AAAA-MM-JJ)',
-	'activite_libelle_inscription' => 'Inscription n&deg;',
-	'activite_libelle_invitation' => ' -- Invitation ext&eacute;rieure -- ',
-	'activite_libelle_membres' => 'Noms des participants membres',
-	'activite_libelle_montant_inscription' => 'Montant de l\'inscription (en &euro;)',
-	'activite_libelle_nombre_inscrit' => 'Nombre total d\'invit&eacute;s',
-	'activite_libelle_nomcomplet' => 'Nom complet',
-	'activite_libelle_non_membres' => 'Noms des participants non membres',
-	'activite_liste_nombre_inscrits' => 'Nombre d\'inscrits : @total@',
-	'activite_liste_total_participations' => 'Total des participations : @total@ &euro;',
-	'activite_message_ajout_inscription' => 'L\'inscription de @nom@ a &eacute;t&eacute; enregistr&eacute;e pour un montant de @montant@ &euro;',
-	'activite_message_confirmation_inscription' => '
-Bonjour,
-
-Nous venons d\'enregistrer pour vous l\'inscription suivante:
-
-Activit&eacute;: @activite@
-Date: @date@
-Lieu: @lieu@
-
-De: @nom@
-Accompagn&eacute; de
-	Membres: @membres@
-	Non-membres: @non_membres@
-Nombre total d\'inscrits: @inscrits@
-
-Cette inscription ne sera d&eacute;finitive qu\'apr&egrave;s v&eacute;rification et dans la mesure o&ugrave;, sauf stipulation contraire, le montant de @montant@ euros nous est parvenu.
-
-Dans cette attente et dans l\'attente de vous retrouver, nous vous adressons nos salutations les meilleures.
-
-L\'&eacute;quipe @nomasso@',
-	'activite_message_confirmation_supprimer' => 'Vous vous appr&ecirc;tez &agrave; effacer @nombre@ inscription@pluriel@ !',
-	'activite_message_maj_inscription' => 'L\'inscription de @nom@ a &eacute;t&eacute; mise &agrave; jour',
-	'activite_message_sujet' => 'Inscription activit&eacute;',
-	'activite_message_suppression' => 'Suppression effectu&eacute;e !',
-	'activite_message_webmaster' => '
-De: @nom@
-Activit&eacute;: @activite@
-Nombre: @inscrits@
-Commentaire: @commentaire@
-	',
+	'activite_libelle_inscription' => 'Inscription',
+	'activite_libelle_paiement' => 'Paiement',
 	'activite_mise_a_jour_inscription' => 'Mettre &agrave; jour une inscription',
 	'activite_titre_action_sur_inscriptions' => 'Action sur les inscriptions',
 	'activite_titre_ajouter_inscriptions' => 'Ajouter des inscriptions',
