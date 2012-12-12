@@ -19,7 +19,6 @@
 	[(#SAISIE{selecteur_article,id_article,
 		label=<:plugin:article_en_une:>})] 
 ]
-[(#REM) Donner a manger a CFG si aucune valeur definie ]
 [(#SET{val,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}})]
 
 [(#SET{filtrer_langue_article,[(#ENV{afficher_art_dans_langue_interface,0}|oui) #ENV{lang}]})]
@@ -30,7 +29,8 @@
    Comme ca a l'air un peu tordu tout ca, tant pis pour l'erreur HTML
    Yffic
 ]
-<!--<input type="hidden" name="[(#ENV{nom,id_item})][]" value="" />-->
+[(#REM) Donner a manger a CFG ou CVT-configurer si aucune valeur definie ]
+<!--keepme: <input type="hidden" name="[(#ENV{nom,id_item})][]" value="" />-->
 [(#INCLURE{fond=formulaires/selecteur/articles,
 	selected=#GET{val},
 	name=#ENV{nom},
