@@ -1,0 +1,18 @@
+<BOUCLE_partageur(PARTAGEURS){id_partageur}{statut?}>
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:partageur:label_titre:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_url_site[ (#URL_SITE*|strlen|?{'',vide})]">
+	<label><:partageur:label_url_site:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{url_site} url_site'>(#URL_SITE)</span>
+</div>]
+
+[<div class="champ contenu_cle[ (#CLE*|strlen|?{'',vide})]">
+	<label><:partageur:label_cle:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{cle} cle'>(#CLE)</span>
+</div>]
+
+</BOUCLE_partageur>
