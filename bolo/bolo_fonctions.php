@@ -8,10 +8,10 @@
 
 // La balise BOLO
 function balise_BOLO($p) {
-	include_spip('inc/bolo_latin');
-	$p->code = "$bolo";
+    $type = "'latin'";
+    $p->code = "((\$x = charger_fonction($type, 'bolo', true)) ? \$x() : '')"; // si fonction bolo_latin
 	$p->interdire_scripts = false;
-	return $p;   
+	return $p;
 }
 
 ?>
