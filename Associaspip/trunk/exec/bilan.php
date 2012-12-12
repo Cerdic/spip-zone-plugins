@@ -123,11 +123,11 @@ function bilan_encaisse() {
 	}
 	echo debut_cadre_relief('', TRUE, '', _T('asso:encaisse') );
 	echo "<table width='100%' class='asso_tablo' id='asso_tablo_bilan_encaisse'>\n";
-	echo "<thead>\n<tr>";
+	echo '<tr class="row_first">';
 	echo '<th colspan="2">&nbsp;</th>';
 	echo '<th>'. _T('asso:avoir_initial') .'</th>';
 	echo '<th>'. _T('asso:avoir_actuel') .'</th>';
-	echo "</tr>\n</thead><tbody>";
+	echo "</tr>\n";
 	$total_actuel = $total_initial = 0;
 	foreach($lesEcritures as $compteFinancier) {
 		if( substr($compteFinancier['code'],0,1)==$GLOBALS['association_metas']['classe_banques'] ) { //!\ Tous les comptes financiers ne sont normalement pas concernes : idealement il aurait fallu configurer un groupe "caisse" (51xx) et un groupe "banque" (53xx) mais d'une part nous ignorons si d'autres systemes comptables n'utilisent pas plus de groupes et d'autre part (meme une association francaise) peut bien ne pas avoir les deux types de comptes...
@@ -144,7 +144,7 @@ function bilan_encaisse() {
 			}
 		}
 	}
-	echo "</tr>\n</tbody><tfoot>\n<tr>";
+	echo "</tr>\n<tr class='row_last'>";
 	echo '<th  colspan="2" class="text">'. _T('asso:encaisse') .'</th>';
 	echo '<th class="decimal">'. association_formater_prix($total_initial) .'</th>';
 	echo '<th class="decimal">'. association_formater_prix($total_actuel) .'</th>';
@@ -154,7 +154,7 @@ function bilan_encaisse() {
 	if( $compteFinancier['_86xx']['solde']!=$compteFinancier['_87xx']['solde'] ) {
 		echo '<td  colspan="4" class="erreur">'. _T('asso:erreur_equilibre_comptes8687') .'</td>';
 	}
-	echo "</tr>\n</tfoot>\n</table>\n";
+	echo "</tr>\n</table>\n";
 	echo fin_cadre_relief(TRUE);
 }
 

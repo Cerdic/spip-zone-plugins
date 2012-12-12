@@ -69,14 +69,14 @@ function exec_plan_comptable() {
 		echo '</tr></table>';
 		//Affichage de la table
 		echo "<table width='100%' class='asso_tablo' id='liste_asso_plan'>\n";
-		echo "<thead>\n<tr>";
+		echo '<tr class="row_first">';
 		echo "\n<th>". _T('asso:classe') .'</th>';
 		echo "\n<th>". _T('asso:entete_code') .'</th>';
 		echo "\n<th>". _T('asso:entete_intitule') .'</th>';
 		echo "\n<th>". _T('asso:solde_initial') .'</th>';
 		echo "\n<th>". _T('asso:entete_date') .'</th>';
 		echo '<th colspan="2" class="actions">' . _T('asso:entete_actions') .'</th>';
-		echo "</tr>\n</thead><tbody>";
+		echo "</tr>\n";
 		$query = sql_select('*', 'spip_asso_plan', 'classe LIKE '. sql_quote($classe) .' AND active=' . sql_quote($active), '', 'classe, code' );
 		$classe = '';
 		$i = 0;
@@ -103,7 +103,7 @@ function exec_plan_comptable() {
 			echo association_bouton_edit('plan', $data['id_plan']);
 			echo "</tr>\n";
 		}
-		echo "</tbody>\n</table>\n";
+		echo "</table>\n";
 		fin_page_association();
 	}
 }

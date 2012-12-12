@@ -13,7 +13,7 @@
 		<div [(#ENV{'confirmForm'}|oui)style='display:none']>
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<ul>
-			<table class="asso_tablo_filtres"><tbody><tr>
+			<table class="asso_tablo_filtres"><tr>
 				<B_filtre_groupes>
 				<td class='filtre_groupe'>
 					<select class='filtreSelect' onchange="var p=document.createElement('input'); p.type='hidden'; p.name='majFiltres'; p.value='1'; form.appendChild(p); form.submit()" name="filtre_id_groupe">
@@ -48,7 +48,7 @@
 					</td>
 				</noscript>
 				</B_filtre_relance>
-			</tr></tbody></table>
+			</tr></table>
 			<li class="fieldset">
 			<ul>
 				<li class="editer_sujet">
@@ -66,15 +66,12 @@
 		</ul>
 		<table width='100%' class='asso_tablo' id='asso_tablo_relances'>
 			<caption><:asso:membres:></caption>
-			<thead>
-				<tr>
+				<tr class="row_first">
 					<th><:asso:entete_id:></th>
 					<th><:asso:entete_nom:></th>
 					<th><:asso:adherent_libelle_validite:></th>
 					<th><:asso:envoi:></th>
 				</tr>
-			</thead>
-			<tbody>
 				<B_destinataires>
 				<BOUCLE_destinataires(asso_membres asso_groupes_liaison){id_groupe?=#ENV{'filtre_id_groupe'}}{statut_interne IN (#ENV{'statut_interne'}|explode{:})}{par nom_famille,prenom}>
 				<tr class="[(#STATUT_INTERNE|association_styles_des_statuts)]">
@@ -87,13 +84,12 @@
 				</tr>
 				</BOUCLE_destinataires>
 				</B_destinataires>
-			</tbody>
 		</table>
 	</div>
 
 [(#ENV{editable})
 	<div [(#ENV{'confirmForm'}|non)style='display:none']>
-		[(#ENV{'confirmForm'}|oui)<input type='hidden' name='confirmForm' value='2'/>]	
+		[(#ENV{'confirmForm'}|oui)<input type='hidden' name='confirmForm' value='2'/>]
 		<p><em class="explication"><:asso:vous_vous_appretez_a_envoyer:> [(#ENV{_nb_messages})] [(#ENV{_nb_messages}|>{1}|?{<:asso:messages:>,<:asso:message:>})]</em></p>
 		<div class="fieldset previsu">
 			<p class="titre">

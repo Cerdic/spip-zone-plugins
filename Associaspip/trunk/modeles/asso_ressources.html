@@ -2,7 +2,6 @@
 #ANCRE_PAGINATION
 <table class="spip">
 	<caption><:asso:ressources_titre_liste_ressources:></caption>
-	<thead>
 		<tr class="row_first">
 		[(#ENV{code}|=={oui}|oui)
 			<th><:asso:ressources_entete_code:></th>
@@ -21,8 +20,6 @@
 			<th><:asso:prets_entete_date_retour:></th>
 		]
 		</tr>
-	</thead>
-	<tbody>
 <BOUCLE_ressources_disponibles(ASSO_RESSOURCES){pagination 20}{!par date_acquisition}{statut !IN sorti, suspendu }{!statut<0}>
 		<tr id="#ID_RESSOURCE" [class="(#EVAL{[(#_ressources_disponibles:COMPTEUR_BOUCLE)]}|alterner{'row_even','row_odd'})"]>
 		[(#ENV{code}|=={oui}|oui)
@@ -60,11 +57,8 @@
 		<//B_dernier_retour>
 		</tr>
 </BOUCLE_ressources_disponibles>
-	</tbody>
-	<tfoot>
-		<tr class="row_first">
+		<tr class="row_last">
 			<th colspan="5">[: <span class="pagination">(#PAGINATION)</span>]</th>
 		</tr>
-	</tfoot>
 </table>
 </B_ressources_disponibles>

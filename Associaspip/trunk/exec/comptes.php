@@ -111,7 +111,7 @@ function exec_comptes() {
 			$nav = association_selectionner_souspage(array('spip_asso_comptes', $where), 'comptes', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($imputation?"&imputation=$imputation":''). (is_numeric($vu)?"&vu=$vu":''), FALSE);
 			// ENTETES
 			$table = "<table width='100%' class='asso_tablo' $onload_option id='asso_liste_comptes'>\n"
-			. "<thead>\n<tr>"
+			. '<tr class="row_first">'
 			. '<th>'. _T('asso:entete_id') .'</th>'
 			. '<th>'. _T('asso:entete_date') .'</th>'
 			. '<th>'. _T('asso:compte_entete_imputation') .'</th>'
@@ -120,13 +120,13 @@ function exec_comptes() {
 			. '<th>'. _T('asso:compte_entete_financier') .'</th>'
 			. '<th colspan="2" class="actions">'. _T('asso:entete_actions') .'</th>'
 			. '<th><input title="'._T('asso:selectionner_tout').'" type="checkbox" id="selectionnerTous" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName(\'valide[]\'); for (var i in checkboxList) {checkboxList[i].checked=currentVal;}" /></th>'
-			. "</tr>\n</thead><tbody>"
+			. '</tr>'
 			. $table
-			. "</tbody>\n</table>\n"
+			. "\n</table>\n"
 			. "<table width='100%' class='asso_tablo_filtres'><tr>\n" . $nav . '<td align="right"><input type="submit" value="'. _T('asso:bouton_valider') . '"  /></td></tr></table>';
 			echo generer_form_ecrire('action_comptes', $table);
 		} else { // absence d'operation pour l'exercice
-			echo '<table width="100%"><tbody><tr><td class="actions erreur">' .( $id_periode ? _T('asso:exercice_sans_operation') : '<a href="'.generer_url_ecrire('exercices').'">'._T('asso:ajouter_un_exercice').'</a>' ). '</td></tr></tbody></table>';
+			echo '<table width="100%"><tr><td class="actions erreur">' .( $id_periode ? _T('asso:exercice_sans_operation') : '<a href="'.generer_url_ecrire('exercices').'">'._T('asso:ajouter_un_exercice').'</a>' ). '</td></tr></table>';
 		}
 		fin_page_association();
 	}

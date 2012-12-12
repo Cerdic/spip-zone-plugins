@@ -44,13 +44,10 @@
     <div class="cadre-padding">
 <B_metas>
 	<table width="100%" class="asso_tablo" id="liste_asso_metasutilisateur">
-	<thead>
-	    <tr>
+	    <tr class="row_first">
 		<th><:asso:nom_meta_utilisateur:></th>
 		<th colspan="2" class="actions"><:asso:action_meta_utilisateur:></th>
 	    </tr>
-	</thead>
-	<tbody>
 <BOUCLE_metas(ASSOCIATION_METAS){nom LIKE meta_utilisateur_%}{par nom}>
 	    <tr>
 		<td class="text">[(#NOM|replace{^meta_utilisateur_}|replace{_,&nbsp;})]</td>
@@ -58,7 +55,6 @@
 		<td class="action"><a title="<:asso:editer_meta_utilisateur:>" href="#URL_ECRIRE{editer_asso_meta_utilisateur,nom_meta_ut=#NOM}"><img src="#CHEMIN{img_pack/edit-12.gif}"/></a></td>
 	    </tr>
 </BOUCLE_metas>
-	</tbody>
 	</table>
 </B_metas>
 <!--

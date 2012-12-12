@@ -33,7 +33,7 @@ function exec_adherents() {
 		$annee = date('Y'); // dans la requete SQL est : DATE_FORMAT(NOW(), '%Y') ou YEAR(NOW())
 		$data = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=$annee AND imputation=".sql_quote($GLOBALS['association_metas']['pc_cotisations']) );
 		echo association_totauxinfos_montants('cotisations_'.$annee, $data['somme_recettes'], $data['somme_depenses']);
-		
+
 		//Filtres ID et groupe : si le filtre id est actif, on ignore le filtre groupe
 		$id = association_passeparam_id('auteur');
 		if (!$id) {
@@ -45,7 +45,7 @@ function exec_adherents() {
 		}
 
 		// datation et raccourcis
-		// l'id groupe passe en parametre est a 100 
+		// l'id groupe passe en parametre est a 100
 		// car ce sont les groupes definis par l'utilisateur
 		// et non ceux des autorisation qu'on liste dans cette page
 		echo association_navigation_raccourcis('', array(
@@ -208,7 +208,7 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe) {
 		. "</tr>\n";
 	}
 	$res = "<table width='100%' class='asso_tablo' id='liste_adherents'>\n"
-	. "<thead>\n<tr>";
+	. '<tr class="row_first">';
 	if ($GLOBALS['association_metas']['aff_id_auteur'])
 		$res .= '<th>'. _T('asso:entete_id') .'</th>';
 	if ($GLOBALS['association_metas']['aff_photo'])
@@ -231,14 +231,14 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe) {
 		$res .= '<th>'. _T('asso:adherent_libelle_validite') .'</th>';
 	}
 	$res .= '<th colspan="'
-	  . (autoriser('editer_membres', 'association')?4:2) 
+	  . (autoriser('editer_membres', 'association')?4:2)
 	  .'" class="actions">'._T('asso:entete_actions')
 	  ."</th>\n"
 	  . '<th><input title="'._T('asso:selectionner_tout')
 	  .'" type="checkbox" id="selectionnerTous" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName(\'id_auteurs[]\'); for (var i in checkboxList) {checkboxList[i].checked=currentVal;}" /></th>'
-	. "</tr>\n</thead><tbody>"
+	. '</tr>'
 	. $auteurs
-	. "</tbody>\n</table>\n";
+	. "\n</table>\n";
 	// SOUS-PAGINATION
 	$arg = array();
 	if ($lettre)

@@ -33,7 +33,6 @@ maj:2011-10-05; version:0.7.1; licence:GPL; copyleft:gilcot; -->]
 		<col align="center" />
 		]
 	[<caption>(#ENV{titre}|replace{'@#@',#TOTAL_BOUCLE})</caption>]
-<thead>
 	<tr class="row_first">
 		<th><:asso:entete_date:></th>
 		[(#AUTORISER{voir_compta,association,#ID_COMPTE}|oui)
@@ -49,8 +48,6 @@ maj:2011-10-05; version:0.7.1; licence:GPL; copyleft:gilcot; -->]
 		<th><:asso:entete_action:></th>
 		]
 	</tr>
-</thead>
-<tbody>
 <BOUCLE_historique(ASSO_COMPTES)
  {id_journal?IN #ENV{id_journal}} {imputation?IN #ENV{imputation}}
  {!par date} {par id_journal,imputation}
@@ -88,7 +85,6 @@ maj:2011-10-05; version:0.7.1; licence:GPL; copyleft:gilcot; -->]
 		]
 	</tr>
 </BOUCLE_historique>
-</tbody>
 </table>
 <div>
     [<p class="pagination">(#PAGINATION{prive})</p>]

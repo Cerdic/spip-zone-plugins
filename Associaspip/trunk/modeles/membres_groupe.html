@@ -11,8 +11,7 @@ maj:2012-09-27; version:0.1.1; licence:GPL; -->]
 <B_membres2groupe>
 <p class="pagination">#PAGINATION</p>
 <table width="100%" class="asso_tablo">
-	<thead>
-		<tr>[(#META{association/aff_photo}|oui)
+		<tr class="row_first">[(#META{association/aff_photo}|oui)
 			<th></th>]
 			<th><:asso:entete_nom:></th>
 			<th><:asso:fonction:></th>[
@@ -21,8 +20,6 @@ maj:2012-09-27; version:0.1.1; licence:GPL; -->]
 			<th><:coordonnees:label_numero:></th>]
 			<th><:asso:email:></th>]
 		</tr>
-	</thead>
-	<tbody>
 <BOUCLE_membres2groupe(ASSO_GROUPES_LIAISONS asso_membres)
 					     {id_groupe=#ENV{id_groupe}}
 					     {par nom_famille}
@@ -36,7 +33,6 @@ maj:2012-09-27; version:0.1.1; licence:GPL; -->]
 			<td>[(#ID_AUTEUR|association_formater_emails|array_shift)]</td>]
 </tr>
 </BOUCLE_membres2groupe>
-	</tbody>
 </table>
 </B_membres2groupe>
 <div><:asso:aucun_membre_dans_ce_groupe:></div>
