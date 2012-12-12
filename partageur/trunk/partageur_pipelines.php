@@ -36,7 +36,7 @@ function partageur_affiche_enfants($flux) {
 		    $id_rubrique = $flux['args']['id_rubrique'];
 
     if (autoriser('voir', 'partageur')) {           
-       $bouton_sites .= icone_verticale(_T('partageur:ajout_via_partageur'), generer_url_ecrire('partageur_add', "id_rubrique=$id_rubrique"), "partageur-24.png", "new", 'right')
+       $bouton_sites .= icone_verticale(_T('partageur:ajout_via_partageur'), generer_url_ecrire('partageur_edit', "id_rubrique=$id_rubrique"), "partageur-24.png", "new", 'right')
 					. "<br class='nettoyeur' />";   
       
        $flux['data'] .= $bouton_sites;    
