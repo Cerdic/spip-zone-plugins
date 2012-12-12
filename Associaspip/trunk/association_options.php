@@ -1369,7 +1369,7 @@ function association_selectionner_exercice($sel='', $exec='', $plus='') {
     }
     sql_free($sql);
     $res .= '</select>'.$plus;
-    return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>') : $res;
+    return $exec ? generer_form_ecrire($exec, $res.'<noscript><div class="boutons"><input type="submit" value="'._T('asso:bouton_lister').'" /></div></noscript>') : $res;
 }
 
 /**
@@ -1391,7 +1391,7 @@ function association_selectionner_destination($sel='', $exec='', $plus='') {
     }
     sql_free($sql);
     $res .= '</select>'.$plus;
-	return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>') : $res;
+	return $exec ? generer_form_ecrire($exec, $res.'<noscript><div class="boutons"><input type="submit" value="'._T('asso:bouton_lister').'" /></div></noscript>') : $res;
 }
 
 /**
@@ -1412,7 +1412,7 @@ function association_selectionner_groupe($sel='', $exec='', $plus='') {
 	}
 	sql_free($sql);
 	$res .= '</select>'.$plus;
-	return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>') : $res;
+	return $exec ? generer_form_ecrire($exec, $res.'<noscript><div class="boutons"><input type="submit" value="'. _T('asso:bouton_lister') .'" /></div></noscript>') : $res;
 }
 
 /**
@@ -1438,7 +1438,7 @@ function association_selectionner_statut($sel='', $exec='', $plus='') {
 		. "</option>\n";
 	}
 	$res .= '</select>'.$plus;
-    return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>') : $res;
+    return $exec ? generer_form_ecrire($exec, $res.'<noscript><div class="boutons"><input type="submit" value="'. _T('asso:bouton_lister') .'" /></div></noscript>') : $res;
 }
 
 /* Meme fonction que la precedente, mais en donnat l'ID */
@@ -1453,7 +1453,7 @@ function association_selectionner_statut_id($sel, $id) {
  */
 function association_selectionner_id($sel='', $exec='', $plus='') {
     $res = '<input type="text" name="id" onfocus=\'this.value=""\' size="5"  value="'. ($sel?$sel:_T('asso:entete_id')) .'" />'.$plus;
-    return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>') : $res;
+    return $exec ? generer_form_ecrire($exec, $res.'<noscript><div class="boutons"><input type="submit" value="'. _T('asso:bouton_lister') .'" /></div></noscript>') : $res;
 }
 
 //@}
@@ -1507,7 +1507,7 @@ function association_selectionner_annee($annee='', $table, $champ, $exec='', $pl
     $res .= '</select>'.$plus;
     sql_free($sql);
     if ($exec) {
-		$res .= '<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>';
+		$res .= '<noscript><div class="boutons"><input type="submit" value="'. _T('asso:bouton_lister') .'" /></div></noscript>';
 		$res .= '</div></form>';
     }
     return ($lst?$res:$pager.$plus);
@@ -1549,7 +1549,7 @@ function association_selectionner_lettre($lettre='', $table, $champ, $exec='', $
     sql_free($sql);
     $res .= '</select>'.$plus;
     if ($exec) {
-		$res .= '<noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>';
+		$res .= '<noscript><div class="boutons"><input type="submit" value="'. _T('asso:bouton_lister') .'" /></div></noscript>';
 		$res .= '</div></form>';
     }
     if ( !$lettre || $lettre=='%' ) {
@@ -2016,7 +2016,7 @@ function association_bloc_filtres($liste_filtres, $exec='', $supplements='', $td
 	} else {
 		$res .= $supplements;
 	}
-	$res .= ($td?'<td':'<li') . ' class="boutons"><noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript>' . ($td?"</td>\n":'</li>');
+	$res .= ($td?'<td':'<li') . ' class="boutons"><noscript><div class="boutons"><input type="submit" value="'. _T('asso:bouton_lister') .'" /></div></noscript>' . ($td?"</td>\n":'</li>');
 	return $res. ($td?'</tr></table':'</ul>') .">\n</form>\n";
 }
 
