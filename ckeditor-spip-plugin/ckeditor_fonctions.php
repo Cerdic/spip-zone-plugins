@@ -161,6 +161,10 @@ function ckeditor_header_prive($flux) {
 	if($champs = ckeditor_prepare_champs(ckeditor_lire_config('selecteurs_prive',_CKE_PRIVE_DEF)))
 		$config['ajaxload']=$champs;
 
+	if(_request('exec') == 'configurer_ckeditor_p6') {
+		$config['ajaxload'][] = array('textarea#champ_modele','Full') ;
+	}
+
 	if (count($config['ajaxload']))
 		$flux .= ckeditor_preparescript($config) ;
 

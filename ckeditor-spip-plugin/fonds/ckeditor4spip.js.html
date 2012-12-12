@@ -109,14 +109,19 @@ function SpipEditor2CKEditor(editor_id){
 	var EdConfig={};$.extend(EdConfig,CKEDITOR.ckConfig) ;
 	EdConfig.toolbar='Spip'+stack[editor_id].tb;
 	HideSpipUI(editor_id);
+	try {	// fix les problèmes des instances de ckeditor répertoriées, mais non visibles/accessibles du fait du rechargement via ajax
+		if (stack[editor_id] && stack[editor_id].editor && CKEDITOR.instances[stack[editor_id].editor]) {
+			CKEDITOR.remove(CKEDITOR.instances[stack[editor_id].editor]) ;
+		}
+	} catch (E) { /* rien */ }
 	$(editor_id).ckeditor(function(){
 		stack[editor_id].n='#'+this.container.getId();
 [(#REM) // calcul de la somme des deux marges de part et d'autre du texte area]
 		stack[editor_id].dw=$('.cadre-formulaire-editer').width()-$(stack[editor_id].n).width() ;
 		
-		var cke=$(editor_id).ckeditorGet() ;
+		stack[editor_id].editor = this.name ;
 
-		cke.on('resize', function(e) {
+		this.on('resize', function(e) {
 			$('.cadre-formulaire-editer').width($(stack[editor_id].n).width()+stack[editor_id].dw);
 		});
 
@@ -127,8 +132,8 @@ function SpipEditor2CKEditor(editor_id){
 			.find('img')
 				.attr('src','[(#CHEMIN{images/ckeditor_spip.png}|url_absolue)]') ;
 		$('#swapeditor_'+stack[editor_id].ndx).attr('disabled',false);
-		cke.setReadOnly(false);
-		cke.resize(CKEDITOR.ckConfig.minwidth,CKEDITOR.ckConfig.height,true);
+		this.setReadOnly(false);
+		this.resize(CKEDITOR.ckConfig.minwidth,CKEDITOR.ckConfig.height,true);
 	},EdConfig);
 }
 
@@ -252,7 +257,7 @@ function fullInitCKEDITOR(editor_ids){
 	}
 	for(var id in editor_ids){
 		[(#REM) // on évite les appels multiples]
-		//if (defined_ed[editor_ids[id][0]]) { continue ; } else { defined_ed[editor_ids[id][0]] = true ; }
+		if (defined_ed[editor_ids[id][0]]) { continue ; } else { defined_ed[editor_ids[id][0]] = true ; }
 		var editor_id=editor_ids[id][0], editor_tb=editor_ids[id][1], crayon=editor_ids[id][2], editor_md5=editor_ids[id][3] ;
 			
 		var ndx=$('[id^=cke_cpt_]').size(),buttons='';
