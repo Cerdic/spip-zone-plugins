@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_partageur' => 'Aucun site partageur',
 	'info_nb_partageurs' => '@nb@ sites partageurs',
 	'info_partageurs_auteur' => 'Les sites partageurs de cet auteur',
+  'import_aide' => 'Naviguez dans les sites distants et choisissez l\'article que vous voulez importer dans la rubrique',
 
 	// L
 	'label_cle' => 'Clé d\'authentification',
