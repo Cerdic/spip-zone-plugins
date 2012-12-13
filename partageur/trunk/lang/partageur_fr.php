@@ -25,12 +25,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'cfg_import_mot_groupe_creer' => 'Si l\'import est activé, où placer les mots-clés importés ?',
   'cfg_import_mot_groupe_creer_oui' => 'Récréer les groupes des mots-clés d\'origine',
   'cfg_import_mot_groupe_creer_non' => 'Placer les mots-clés dans le groupe',
+  'copie' => 'Partageur: Import d\'article',
   
   // E
+  'erreur_aucun_article' => 'Aucun article &agrave; syndiquer actuellement',
   'erreur_cle_incorrecte' => 'Clé d\'authentification incorrecte',
   'erreur_obligatoire' => 'Ce champ est obligatoire',
   'erreur_flux_inconnu' => 'Le site proposé ne semble pas avoir installé le plugin partageur. Le flux suivant est inaccessible:',
   'erreur_flux_doublon' => 'Le site est déjà inscrit dans les sites partageurs',
+  'erreur_aucun_site' => 'Aucun site partageur disponible',
+  'erreur_echec_syndication' => 'Erreur de syndication, le flux de syndication n\'est plus disponible',
+  'erreur_rubrique_invalide' => ' Erreur: rubrique destination inconnue',
 
 
 	// I
@@ -41,6 +46,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_partageurs' => '@nb@ sites partageurs',
 	'info_partageurs_auteur' => 'Les sites partageurs de cet auteur',
   'import_aide' => 'Naviguez dans les sites distants et choisissez l\'article que vous voulez importer dans la rubrique',
+  'imported_already' => 'Article d&eacute;j&agrave;  import&eacute;',
+  'imported_new' => 'Nouvel article',
 
 	// L
 	'label_cle' => 'Clé d\'authentification',
@@ -50,6 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'retirer_lien_partageur' => 'Retirer ce site partageur',
 	'retirer_tous_liens_partageurs' => 'Retirer tous les sites partageurs',
+  'retour_partageur' => 'Retour au partageur',
 
 	// T
 	'texte_ajouter_partageur' => 'Ajouter un site partageur',

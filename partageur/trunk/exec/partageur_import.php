@@ -25,18 +25,17 @@ function exec_partageur_import() {
         $redirect =  generer_url_ecrire('article', "id_article=$callback",'&');
         redirige_par_entete($redirect); 
   } else {
-        // erreur: page  FIXME --> migrer 3
+        // erreur: page  
         $commencer_page = charger_fonction('commencer_page', 'inc');
-        echo $commencer_page(_T("partageur:copie"),_T("partageur:copie"),_T("partageur:copie"));
-        echo gros_titre(_T('partageur:copie'),'',false);
+        echo $commencer_page(_T("partageur:ajout_via_partageur"),_T("partageur:ajout_via_partageur"),_T("partageur:ajout_via_partageur"));
         echo debut_gauche('', true);
-
-  
         echo debut_droite('', true);
+        echo "<h1>"._T('partageur:ajout_via_partageur')."</h1>";
         echo debut_cadre_relief(true);
         echo $callback;
         
-        echo "<p><a href=\"?exec=partageur_add&id_rubrique=$id_rubrique\">"._T("partageur:retour_rubrique")."</a></p>";
+        echo icone_verticale(_T('partageur:retour_partageur'), generer_url_ecrire('partageur_add', "id_rubrique=$id_rubrique"), "partageur-24.png", "new", 'right')
+					. "<br class='nettoyeur' />"; 
         echo fin_cadre_relief();
         echo fin_gauche().fin_page();
 
@@ -85,9 +84,12 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
       // Aller chercher les donnees du flux RSS et les analyser
       $rss = recuperer_page($url_syndic, true);
       if (!$rss) {
-        $log_html .= "<div style='color:red'>"._T('avis_echec_syndication_02')."</div>";
+        $log_html .= "<div style='color:red'>"._T('partageur:erreur_echec_syndication')."</div>";  
       } else {
-        
+      
+              
+
+             
         $articles = analyser_backend_partageur($rss);              
         //----*************        
         // Des articles dispo pour ce site ?
@@ -105,7 +107,7 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
                 if ($nb_reponses>0) {                                   
                    // article deja connu et present ds la base
                    $log_html .= "[<span style='color:#999'>"._T('partageur:imported_already')."</span>] <a href='$current_link'>$current_titre</a>\n";
-                   spip_log("partageur: deja importe: ".$current_link);                    
+                   spip_log("partageur: deja importe: ".$current_link); 
                 } else {
                    // nouvel article à importer
                    $log_html .= "[<span style='color:#090'>"._T('partageur:imported_new')."</span>] <a href='$current_link'>$current_titre</a>\n";
@@ -296,7 +298,7 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
 
             }
         } else {
-          $log_html .= "<div style='color:purple'>"._T('partageur:aucun_article')."</div>";
+          $log_html .= "<div style='color:purple'>"._T('partageur:erreur_aucun_article')."</div>";
         }
         // #analyse article
         //----*************
