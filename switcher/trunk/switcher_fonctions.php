@@ -1,13 +1,24 @@
 <?php
-function switcher_affichage_final($texte){
+function switcher_affichage_final($texte = ""){
+
+    include_spip('inc/config');
 
 	global 	$html;
 	global $squelettes_alternatifs;
 	global $styleListeSwitcher;
 
+    $code = "";
+    $texte = trim($texte);
+    
+	if(!$GLOBALS['visiteur_session'])
+	    return $texte;
+
 	if ($html) {
+
+	    $auteur_autorise = in_array($GLOBALS['visiteur_session']['id_auteur'],lire_config('switcher/auteurs_autorises')) ? true : false;
+#	    var_dump(lire_config('switcher/auteurs_autorises'),$auteur_autorise,$GLOBALS['visiteur_session']['id_auteur']);
 	
-		if (SWITCHER_AFFICHER) {
+		if (SWITCHER_AFFICHER || $auteur_autorise) {
 			
 			// Insertion du Javascript de rechargement de page
 			$code='<script type="text/javascript">
