@@ -31,13 +31,12 @@ function exec_edit_activite() {
 			echo '<div class="vevent">'. association_totauxinfos_intro('<span class="summary">'.$evenement['titre'].'</span>', 'evenement', $id_evenement, $infos, 'evenement') .'</div>';
 		}
 		// datation et raccourcis
-		echo association_navigation_raccourcis('');
+		echo association_navigation_raccourcis(generer_url_ecrire('inscrits_activite',"id=$id_evenement"));
 		debut_cadre_association(($id_activite?'activites.gif':'panier_in.gif'), 'activite_titre_mise_a_jour_inscriptions');
 		// formulaire
-		echo recuperer_fond('prive/editer/editer_asso_activites',
-				    array (
-					   'id_activite' => $id_activite,
-					   'id_evenement' => $id_evenement));
+		echo recuperer_fond('prive/editer/editer_asso_activites', array (
+			'id_activite' => $id_activite,
+			'id_evenement' => $id_evenement));
 		fin_page_association();
 	}
 }
