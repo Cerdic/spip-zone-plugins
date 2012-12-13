@@ -155,7 +155,7 @@ function comptes_while($where, $limit, $id_compte) {
 		}
 		$comptes .= "<tr id='compte".$data['id_compte']."' class='$class'>"
 		. '<td class="integer">'.$data['id_compte'].'</td>'
-		. '<td class="date">'. association_formater_date($data['date']) .'</td>'
+		. '<td class="date">'. association_formater_date($data['date_operation']) .'</td>'
 		. '<td class="text">'. $data['imputation'].'</td>'
 		. '<td class="text">&nbsp;'. propre($data['justification']) .'</td>'
 		. '<td class="decimal">'. association_formater_prix($data['recette']-$data['depense']) .'</td>'

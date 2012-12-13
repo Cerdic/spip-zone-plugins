@@ -32,9 +32,9 @@ function association_liste_destinations_associees($id_operation) {
 	$sql = sql_select('recette,depense,id_destination', 'spip_asso_destination_op', "id_compte=" . intval($id_operation));
 	$destinations = array();
 	while ( $r = sql_fetch($sql) ) {
-	  // soit recette soit depense est egal a 0, 
+	  // soit recette soit depense est egal a 0,
 	  // on se contente les additionner
-	    $destinations[$r['id_destination']] = $r['recette'] + $r['depense']; 
+	    $destinations[$r['id_destination']] = $r['recette'] + $r['depense'];
 	}
 	return $destinations;
 }
@@ -68,7 +68,7 @@ function association_editeur_destinations($destinations, $defaut='') {
 	}
 	if (!$options) return '';
 	$idIndex = 1;
-	
+
 	if (!$GLOBALS['association_metas']['unique_dest']) { // destinations multiples, on insere le js qui permet de les gerer
 	      $script = '<script type="text/javascript" src="'
 		. find_in_path('javascript/jquery.destinations_form.js')
@@ -202,7 +202,7 @@ function association_modifier_operation_comptable($date, $recette, $depense, $ju
 	$err = association_ajouter_destinations_comptables($id_operation, $recette, $depense);
     }
     $modifs = array(
-	'date' => $date,
+	'date_operation' => $date,
 	'imputation' => $imputation,
 	'recette' => $recette,
 	'depense' => $depense,
@@ -242,7 +242,7 @@ function association_supprimer_operation_comptable1($id_operation, $securite=FAL
 	    'date_operation' => date('Y-m-d'),
 	    'depense' => $recette,
 	    'recette' => $depense,
-	    'imputation' => _T('asso:compte_annulation_operation', array('numero'=>$id_compte,'date'=>$date) ),
+	    'imputation' => _T('asso:compte_annulation_operation', array('numero'=>$id_compte,'date_operation'=>$date) ),
 	    'imputation' => $imputation, // pas forcement vrai, mais on fait au plus simples...
 	    'journal' => $journal, // pas forcement vrai, mais on fait au plus simples...
 	    'id_journal' => -$id_journal, // on garde la trace par rapport au module ayant cree l'operation
