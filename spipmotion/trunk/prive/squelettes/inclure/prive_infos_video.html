@@ -15,7 +15,7 @@
 					<strong>(#FICHIER|basename)</strong>
 					</td>
 				</tr>]
-				
+
 				[(#LARGEUR|>{0}|et{#HAUTEUR}|>{0}|oui)
 				<tr>
 					<td class="video_left">
@@ -25,13 +25,12 @@
 					<strong>#LARGEUR/#HAUTEUR px</strong>
 					</td>
 				</tr>]
-
 				[<tr>
 					<td class="video_left">
 						<:spipmotion:info_duree:>
 					</td>
 					<td >
-					<strong>[(#DUREE|getid3_duree)] ((#DUREE|floor) sec.)</strong>
+					<strong>[(#DUREE|spipmotion_duree)] ((#DUREE|floor) sec.)</strong>
 					</td>
 				</tr>]
 
