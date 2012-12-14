@@ -150,7 +150,7 @@ function agenda_quete_calendrier_prive($flux){
 			);
 		}
 	}
-	return $flux['data'];
+	return $flux;
 }
 
 /**
