@@ -162,6 +162,19 @@ function inc_spipmotion_mediainfo_dist($chemin){
 					$infos['videocodecid'] = 'h263';
 				}
 				$infos['aspect_ratio'] = $info[0]['Display_aspect_ratio'][0] ? $info[0]['Display_aspect_ratio'][0] : '';
+				
+				/**
+				 * On a un display aspect ratio
+				 * 
+				 * Si le ration de width / height est vraiment trop différent de celui qui est dans les metas,
+				 * c'est un truc étrange de la vidéo
+				 * 
+				 * On doit donc recréer une largeur en fonction de la hauteur qui soit valable, sinon les encodages auront des problèmes de ratio,
+				 * notamment lors de la lecture en flash
+				 */
+				if(($infos['aspect_ratio'] != '') && (($infos['aspect_ratio'] - ($infos['largeur']/$infos['hauteur'])) > '0.1')){
+					$infos['largeur'] = round($infos['hauteur']*$infos['aspect_ratio']);
+				}
 				$infos['framerate'] = $info[0]['Frame_rate'][0];
 				$infos['framecount'] = $info[0]['Frame_count'][0];
 				$infos['rotation'] = intval($info[0]['Rotation'][0]);
@@ -188,12 +201,10 @@ function inc_spipmotion_mediainfo_dist($chemin){
 			}
 		}
 	}
-	if(!$infos['hasaudio']){
+	if(!$infos['hasaudio'])
 		$infos['hasaudio'] = 'non';
-	}
-	if(!$infos['hasvideo']){
+	if(!$infos['hasvideo'])
 		$infos['hasvideo'] = 'non';
-	}
 
 	$metas['Retrieved infos in database'] = $infos;
 	$infos['metadatas'] = serialize($metas);
