@@ -120,7 +120,8 @@
 
 			elem[attr] = '';
 			$('body').prepend($a);
-			location = link.hash;
+			location = link;
+			//location = link.hash;
 			$a.remove();
 			elem[attr] = id;
 		}
