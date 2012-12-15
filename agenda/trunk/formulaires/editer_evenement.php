@@ -116,7 +116,9 @@ function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_arti
 
 	$res = formulaires_editer_objet_traiter('evenement',$id_evenement,$id_article,0,$retour,$config_fonc,$row,$hidden);
 	// si c'est une creation dans un article publie, passer l'evenement en publie
+	// l'article peut être renseigné/modifié par l'utilisateur dans le formulaire. On le retrouve.
 	if (!intval($id_evenement)
+	  AND $id_article = sql_getfetsel('id_article', 'spip_evenements', 'id_evenement='.$res['id_evenement'])
 	  AND objet_test_si_publie('article',$id_article)){
 		// sera refuse si auteur pas autorise
 		evenement_modifier($res['id_evenement'],array('statut'=>'publie'));
