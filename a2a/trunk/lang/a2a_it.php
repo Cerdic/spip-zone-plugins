@@ -8,21 +8,30 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'appliquer_type_liaison' => 'Type de liaison :', # NEW
-	'appliquer_type_liaison_explication' => 'Décrivez le type de lien à appliquer lors de la liaison. Utilisez de préférence un code ou un mot court.', # NEW
 	'articles_lies' => 'ARTICOLI COLLEGATI',
+
+	// C
+	'cfg_a2a' => 'Relations entre articles', # NEW
+	'changer_type_liaison' => 'Changer', # NEW
+	'configurer_a2a' => 'Configurer les relations entre articles', # NEW
 
 	// E
 	'explication_navigateur' => 'Clicca su [Aggiungi] per navigare nella gerarchia del sito per selezionare gli articoli da collegare.',
+	'explication_type_obligatoire' => 'Vous pouvez imposer de typer les liaisons', # NEW
+	'explication_types_differents' => 'Cochez cette case pour permettre de lier plusieurs fois les deux mêmes articles, en changeant le type à chaque fois', # NEW
+	'explication_types_liaisons' => 'Vous pouvez définir des types de relations : indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par défaut. La description peut être une chaîne de langue.', # NEW
 
 	// I
-	'info_nombre_articles_lies' => '@nb@ articles liés', # NEW
-	'info_un_article_lie' => '1 article lié', # NEW
+	'info_nombre_articles_lies' => '@nb@ articoli collegati',
+	'info_un_article_lie' => '1 articolo collegato',
 
 	// L
-	'lien_lier_article' => 'Lier à un ou des articles', # NEW
+	'lien_lier_article' => 'Collega a uno o più articoli',
 	'lier_cet_article' => 'Collega',
-	'lier_cet_article_deux_cotes' => 'Lier des deux cotés', # NEW
+	'lier_cet_article_deux_cotes' => 'Collega da due lati',
+
+	// O
+	'ob_pb' => 'Il n\'est pas possible de rendre obligatoire le type de liaison : en effet les articles ci-dessous possèdent des liaisons non typées. Typez les d\'abords, puis rendez-obligatoire le typage.', # NEW
 
 	// P
 	'pas_articles_lies' => 'Nessun articolo collegato',
@@ -40,12 +49,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rechercher_un_article_a_lier' => 'Ricerca un articolo:',
 
 	// S
+	'sup_pb' => 'Impossible de supprimer les types de liaisons suivantes : des liaisons les utilisent. Il vous faut donc modifier au préalable ces liaions.', # NEW
 	'supprimer_le_lien' => 'Scollega',
-	'supprimer_le_lien_deux_cotes' => 'Délier des deux cotés', # NEW
+	'supprimer_le_lien_deux_cotes' => 'Scollega da due lati',
 
 	// T
-	'type' => 'Type', # NEW
-	'type_liaison' => 'Type de liaison', # NEW
+	'td_pb' => 'Vous demandez l\'interdiction de lier plusieurs fois deux mêmes articles. Or certains articles possèdent plusieurs liaisons avec d\'autres articles. Corrigez cela avant.', # NEW
+	'type' => 'Tipo',
+	'type_inexistant' => 'Tipo di collegamento inesistente',
+	'type_liaison' => 'Tipo di collegamento',
+	'type_obligatoire' => 'Typage obligatoire', # NEW
+	'types_differents' => 'Liaisons multiples', # NEW
+	'types_liaisons' => 'Tipi di collegamento',
+	'types_liaisons_non_modifiables' => 'Les types de liaisons suivants ne sont pas modifiables via la configuration', # NEW
+
+	// U
+	'utilise_par_articles' => ', utilisé par les liaisons des articles :', # NEW
 
 	// V
 	'voir' => 'Vedi'
