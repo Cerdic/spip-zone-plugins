@@ -4,10 +4,9 @@
 [(#AUTORISER{commenter, ticket, #ID_TICKET}|oui)
 [(#SET{autoriser_commenter,oui})]]
 </BOUCLE_si_ouvert>
-<div class="ticket contenu-principal">
-
+<div class="ticket content-principal">
 	<div class="cartouche">
-	[(#AUTORISER{modifier, ticket, #ID_TICKET}|oui)
+		[(#AUTORISER{modifier, ticket, #ID_TICKET}|oui)
 		<a class="i_edit" href="[(#URL_PAGE{editer_ticket}|parametre_url{id_ticket,#ID_TICKET})]"><:tickets:icone_modifier_ticket:></a>]
 		<h1 class="h1 titre #EDIT{titre}"><:tickets:ticket:> <small>##ID_TICKET</small> : #TITRE</h1>
 		<div class="actions rss">
@@ -49,9 +48,10 @@
 	<INCLURE{fond=inclure/documents_tickets,id_ticket=#ID_TICKET}>
 </div>
 
+<a href="#forum" name="forum" id="forum"></a>
 [(#PARAMETRES_FORUM|?{''})]
 #SET{config_thread,#CONFIG{comments/comments_fil,list}}
-<div class="ticket_commentaires comments comments-#GET{config_thread}">
+<div class="ticket_commentaires comments comments-#GET{config_thread}" id="comments">
 	<BOUCLE_decompte(FORUMS){id_ticket} {plat}> </BOUCLE_decompte>
 	[<h2 class="h2">(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
 	[(#GRAND_TOTAL|singulier_ou_pluriel{tickets:commentaire,tickets:commentaires})]</h2>]
@@ -61,21 +61,18 @@
 
 	[(#REM) Bloc 2: liste des commentaires sur le ticket]
 	<B_messages>
-	<ul class="forum comment-ul">
+	<ul class="forum comments-items">
 	<BOUCLE_messages(FORUMS?) {id_ticket}{0,1}>
 	<BOUCLE_si_comment(CONDITION){si #PLUGIN{comments}|oui}>
-		<BOUCLE_si_list(CONDITION){si #GET{config_thread}|=={list}|oui}>
-		<BOUCLE_comments-list(FORUMS) {statut IN publie} {id_ticket} {plat} {par date}>
-		<li class="comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
+		<BOUCLE_comments-list(FORUMS) {si #GET{config_thread}|=={list}|oui}{statut IN publie} {id_ticket} {plat} {par date}>
+		<li class="comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
 			<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE}/>
 			[(#BOUTONS_ADMIN_FORUM)]
 		</li>
 		</BOUCLE_comments-list>
-		</BOUCLE_si_list>
-		</B_si_list>
-		<BOUCLE_si_thread(CONDITION){si #GET{config_thread}|=={thread}|oui}>
-		<BOUCLE_comments-thread(FORUMS) {statut IN publie} {id_ticket} {par date}>
-		<li class="comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
+		</B_comments-list>
+		<BOUCLE_comments-thread(FORUMS) {si #GET{config_thread}|=={thread}|oui}{statut IN publie} {id_ticket} {par date}>
+		<li class="comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
 			<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE,thread=oui}/>
 			[(#BOUTONS_ADMIN_FORUM)]
 			[(#GET{autoriser_commenter}|=={oui}|oui)
@@ -86,8 +83,8 @@
 			<B_comments-fils>
 			<ul class="comments-ul comments-fils">
 				<BOUCLE_comments-fils(FORUMS){id_parent}{par date}>
-				<li class="comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
-					[(#MODELE{comment}{id_forum}{thread=oui})]
+				<li class="comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
+					<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE,thread=oui}/>
 					[(#BOUTONS_ADMIN_FORUM)]
 					[(#GET{autoriser_commenter}|=={oui}|oui)
 					[<p class="repondre"><a
@@ -104,17 +101,15 @@
 		[<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 		(#INCLURE{javascript/thread-move.js}|compacte{js})
 		/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>]
-		</BOUCLE_si_thread>
-		</B_si_thread>
-		<BOUCLE_si_thread-1(CONDITION){si #GET{config_thread}|=={thread-1}|oui}>
-		<BOUCLE_comments-list-1(FORUMS){id_ticket} {!par date_thread}{pagination 10}>
-		<li class="comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
+		</B_comments-thread>
+		<BOUCLE_comments-list-1(FORUMS){si #GET{config_thread}|=={thread-1}|oui}{id_ticket} {!par date_thread}{pagination 10}>
+		<li class="comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
 			<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE,thread=oui}>
 			[(#BOUTONS_ADMIN_FORUM)]
 			<B_comments-fils-1>
 			<ul class="comments-ul">
 				<BOUCLE_comments-fils-1(FORUMS){id_thread}{id_forum!=#_comments-list:ID_FORUM}{par date}>
-				<li class="comment-li[ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)last]">
+				<li class="comment-item[ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)last]">
 					<INCLURE{fond=inclure/comment,id_forum,thread=oui}>
 					[(#BOUTONS_ADMIN_FORUM)]
 					[(#GET{autoriser_commenter}|=={oui}|oui)
@@ -136,22 +131,37 @@
 		[<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 		(#INCLURE{javascript/thread-move.js}|compacte{js})
 		/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>]
-		</BOUCLE_si_thread-1>
-		<//B_si_thread>
-		<//B_si_list>
+		</B_si_thread-1>
+		<//B_comments-thread>
+		<//B_comments-list>
 	</BOUCLE_si_comment>
 	</B_si_comment>
 	<BOUCLE_messages_ticket(FORUMS){id_ticket}{par date}>
-		<li class="forum-fil comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]" id="forum#ID_FORUM">
-			<div class="forum-message">
+		<li class="forum-fil comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]" id="forum#ID_FORUM">
+			<div class="comment comment-message forum-message">
 				<div class="forum-chapo">
-					<BOUCLE_auteur_message(AUTEURS){id_auteur}{tout}>
-					<:par_auteur:> <strong><a href="#URL_AUTEUR">#NOM</a></strong>
-					</BOUCLE_auteur_message>
-					le [(#DATE|affdate)]
+					[(#LOGO_AUTEUR|image_reduire{64,64})]
+					<a href="#forum#ID_FORUM" title="#ID_FORUM" class="ancre permalink comment-number">#</a>
+					<strong class="#EDIT{titre} comment-titre"><a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM">#TITRE</a></strong>
+					[(#DATE|oui)<abbr class="date"[ title="(#DATE|date_iso)"]>
+						[(#SET{date,[(#DATE|affdate_jourcourt)]})]
+						[(#SET{heure,[(#DATE|heures)][:(#DATE|minutes)]})]
+						<:zpip:date_forum{date=#GET{date},heure=#GET{heure}}:></abbr>]
+					[<span class="comment-author vcard"><span class="sep">,</span> <:par_auteur:> <strong class="fn n #EDIT{qui}">(#NOM)</strong></span>]
 				</div>
-				<div class="#EDIT{texte} forum-texte">
-					[(#TEXTE)]
+				<div class="comment-content">
+					[<div class="#EDIT{texte} comment-texte forum-texte">(#TEXTE|lignes_longues)</div>]
+					[<div class="comment-notes">(#NOTES|safehtml|lignes_longues)</div>]
+					[<p class="#EDIT{hyperlien} comment-external-link"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+					<BOUCLE_doc(DOCUMENTS){id_forum}>
+					[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+						[(#EMBED_DOCUMENT|image_reduire{300})]
+					,
+						[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+					})]
+					</BOUCLE_doc>
+
+					[<p class="comment-reply"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:forum:repondre_message:></a></p>]
 				</div>
 			</div>
 		</li>
