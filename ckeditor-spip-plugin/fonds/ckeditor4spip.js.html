@@ -116,14 +116,29 @@ function SpipEditor2CKEditor(editor_id){
 	} catch (E) { /* rien */ }
 	$(editor_id).ckeditor(function(){
 		stack[editor_id].n='#'+this.container.getId();
-[(#REM) // calcul de la somme des deux marges de part et d'autre du texte area]
-		stack[editor_id].dw=$('.cadre-formulaire-editer').width()-$(stack[editor_id].n).width() ;
-		
-		stack[editor_id].editor = this.name ;
+		stack[editor_id].editor=this.name ;
 
-		this.on('resize', function(e) {
-			$('.cadre-formulaire-editer').width($(stack[editor_id].n).width()+stack[editor_id].dw);
-		});
+		[(#REM) // calcul de la somme des deux marges de part et d'autre du texte area
+			// pour cela on teste la présence de divers parents possible...
+			// dw : Delta Width (différence de largeur entre le conteneur et l'éditeur)
+		]
+	
+		var parents_class = [ '.cadre-formulaire-editer', '.cadre-formulaire', '.formulaire_spip', '#contenu' ] ;
+		var pc=0,parent_trouve=false ;
+		do {
+			stack[editor_id].conteneur_class = parents_class[pc++] ;
+			if ($(stack[editor_id].conteneur_class).length>0) {
+				parent_trouve=true ;
+				stack[editor_id].marges=$(stack[editor_id].conteneur_class).width()-$(stack[editor_id].n).width() ;
+			}
+		} while ((pc<parents_class.length) && (!parent_trouve)) ;
+		
+
+		if (parent_trouve) {
+			this.on('resize', function(e) {
+				$(editor_id).parents(stack[editor_id].conteneur_class).width($(stack[editor_id].n).width()+stack[editor_id].marges);
+			});
+		}
 
 		contexteChange(editor_id);
 		$(editor_id).attr('disabled',false);
@@ -138,18 +153,21 @@ function SpipEditor2CKEditor(editor_id){
 }
 
 function barrebouilles_editor(editor_id){ 
+[(#REM)
 // basée sur 'barrebouilles' du fichier : porte_plume/porte_plume_start.js.html
 // (c) Matthieu Marcillaud
 	// fonction generique appliquee aux classes CSS :
 	// inserer_barre_forum, inserer_barre_edition, inserer_previsualisation
+]
 	if ($(editor_id).hasClass('inserer_barre_forum'))
 		$(editor_id).barre_outils('forum');
 	if ($(editor_id).hasClass('inserer_barre_edition'))
 		$(editor_id).barre_outils('edition');
 	if ($(editor_id).hasClass('inserer_previsualisation'))
 		$(editor_id).barre_previsualisation();
-	// fonction specifique aux formulaires de SPIP :
+[(#REM)	// fonction specifique aux formulaires de SPIP :
 	// barre de forum
+]
 	if ($(editor_id).hasClass('textarea_forum'))
 		$(editor_id).barre_outils('forum');
 	if($(editor_id).attr('name').match(/^(texte|\w+_texte)$/)) {
@@ -237,6 +255,7 @@ function fullInitCKEDITOR(editor_ids){
 				dialogDefinition=ev.data.definition;
 			if(dialogName==='about'){
 				var aboutTab=dialogDefinition.getContents('tab1');
+				aboutTab.style='height:280px;';
 				aboutTab.add({
 					'type':'html',
 					'html':'<div class="cke_about_container"><:ckeditor:spipification:></div>'

@@ -278,8 +278,8 @@ function ckeditor_preparescript($config) {
 				}
 			}
 			$barre_outils = array() ;
-			$max_sizetools = _CKE_MAXSIZETOOLS ;
-			$cke_cfg['minwidth'] = (int)_CKE_MAXSIZETOOLS ;
+			$max_sizetools = (int)_CKE_MAXSIZETOOLS ;
+			$cke_cfg['minwidth'] = (int)_CKE_MAXSIZETOOLS+28 ;
 			$cke_cfg['vignette'] = (int)ckeditor_lire_config('vignette', _CKE_VIGNETTE_DEF) ;
 
 			$arg_select = ((array_search($config['type'], $GLOBALS['cke_types_img_attachable']) !== false) && $config['id'] 
@@ -335,7 +335,7 @@ function ckeditor_preparescript($config) {
 			if (is_array($GLOBALS['toolbars'])) {
 				$tbsize = 0 ;
 				$html2spip = ckeditor_lire_config('html2spip_limite', _CKE_HTML2SPIP_LIMITE_DEF) ;
-				foreach($GLOBALS['toolbars'] as $toolbar) {
+				foreach($GLOBALS['toolbars'] as $ndx => $toolbar) {
 					$tb = array() ;
 					if (is_array($toolbar)) {
 						$thissize = 0 ;
@@ -384,12 +384,12 @@ function ckeditor_preparescript($config) {
 							}
 			
 						}
-						if (count($tb)) { /* 6 : largeur des bordures des barres d'outils, 5 : espace inter barre d'outils */ 
-							if ($barre_outils && ($tbsize + $thissize + 6 + 5 >= $max_sizetools)) { 
+						if (count($tb)) { /* 4 : largeur des bordures des barres d'outils, 6 : espace inter barre d'outils */ 
+							if ($barre_outils && ($tbsize + $thissize + 4 + 6 >= $max_sizetools)) {
 								$barre_outils[] = '/' ;
-								$tbsize=$thissize + 6 ;
+								$tbsize=$thissize + 4 ;
 							} else {
-								$tbsize+=$thissize + 6 + 5 ;
+								$tbsize+=$thissize + 4 + 6 ;
 							}
 							$barre_outils[] = $tb ;
 						}
@@ -563,8 +563,6 @@ function ckeditor_preparescript($config) {
 			$cke_cfg['readOnly'] = false ;
 			$cke_cfg['spip_contexte'] = array('id'=>$config['id'], 'type'=>$config['type']) ;
 			$cke_cfg['forceEnterMode'] = true ;
-			$cke_cfg['utf8chars']['subsets'] = array(68,67,69,70,71,74,75,76,77,78,79,80,81,82,83,84,85,86,185,187) ;
-			$cke_cfg['utf8chars']['hide_subset_ids'] = true ;
 			if(ckeditor_lire_config('conversion', _CKE_CONVERSION_DEF)=='aucune')
 				$cke_cfg['fullPage'] = true ;
 

@@ -310,8 +310,8 @@ function formulaires_configurer_ckeditor_p3_traiter_dist() {
 	if (_request('_cfg_delete')) {
 		$valeurs = formulaires_configurer_ckeditor_p3_charger_dist() ;
 		foreach($valeurs as $cle =>$valeur) {
-			ecrire_config('ckeditor/'.$cle, $valeur) ;
-			$_GET[$cle] = $valeur ;
+			effacer_config('ckeditor/'.$cle) ;
+			unset($_POST[$cle]) ;
 		}
 		return array('message_ok' => _T('ckeditor:ck_delete')) ;
 	} else {

@@ -8,15 +8,12 @@
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-
 	<ul>
 		#GENERER_SAISIES{#ENV{cke_saisies_p2}}
 	</ul>
 		<p class="boutons"><span class="image_loading">&nbsp;</span>
+			<input type="submit" class="submit" name="_cfg_delete" value="<:ckeditor:reinitialiser:>" />
 			<input type="submit" class="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" />
-			<input type="submit" class="submit" name="_cfg_delete" value="<:ckeditor:supprimer:>" />
-			<input type="submit" class="submit" name="_cfg_reset_toolbars" value="<:ckeditor:reset_toolbars:>" />
-								 
 		</p>
 	</div>
 	</form>

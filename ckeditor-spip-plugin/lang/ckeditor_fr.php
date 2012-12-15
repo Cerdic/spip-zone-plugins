@@ -257,6 +257,7 @@ Valeur détectée : ',
 
 // R
 	'reinitialiser_le_plugin' => 'Réinitialiser le plugin',
+	'reinitialiser' => 'Réinitialiser',
 	'repertoires_telechargement' => 'Répertoires de téléchargement :',
 	'repertoire_des_fichiers' => 'Répertoire des fichiers:',
 	'repertoire_des_flash' => 'Répertoire des documents Flash®:',

@@ -16,13 +16,6 @@ function cke_case($val) {
 function formulaires_configurer_ckeditor_p2_charger_dist() {
         ($cfg = lire_config("ckeditor")) || ($cfg = array()) ;
 	$valeurs = array() ;
-	foreach($GLOBALS['toolbars'] as $toolbar) {
-		foreach($toolbar as $tool => $item) {
-			if (!ckeditor_tweaks_actifs('smileys') && ($tool == 'Smiley')) continue ;
-			$valeurs["tool_$tool"] = cke_case(array_key_exists("tool_$tool", $cfg)?$cfg["tool_$tool"]:($item[1])) ;
-		}
-	}
-
 	$saisies = array() ;
 
 	$html2spip = ckeditor_lire_config('html2spip_limite', _CKE_HTML2SPIP_LIMITE_DEF) ;
@@ -38,6 +31,7 @@ function formulaires_configurer_ckeditor_p2_charger_dist() {
 		$cp=0;
 		foreach($toolbar as $tool => $item) {
 			if (!ckeditor_tweaks_actifs('smileys') && ($tool == 'Smiley')) continue ;
+			$valeurs["tool_$tool"] = cke_case(array_key_exists("tool_$tool", $cfg)?$cfg["tool_$tool"]:($item[1])) ;
 			$saisie =  array('options'=>array('nom'=>'tool_'.$tool)) ;
 			if ($html2spip && !$item[2]) {
 				$saisie['options']['disabled']='oui' ;
@@ -69,17 +63,18 @@ function formulaires_configurer_ckeditor_p2_traiter_dist() {
 	if (_request("_cfg_delete")) {
 		$valeurs = formulaires_configurer_ckeditor_p2_charger_dist() ;
 		foreach($valeurs as $cle => $valeur) {
-			$_GET[$cle] = $valeur ;
-			ecrire_config("ckeditor/$cle", $valeur) ;
+			if (preg_match('~^tool_~',$cle)) { 
+				effacer_config("ckeditor/$cle") ;
+				// éviter que les champs ne soit préremplis avec les valeurs précédentes
+				unset($_POST[$cle]) ;
+			}
 		}
-		return array('message_ok' => _T('ckeditor:ck_delete')) ;
+		return array('message_erreur' => _T('ckeditor:ck_delete')) ;
 	} else {
-		$action = (_request('_cfg_reset_toolbars') ? 'reset' : (_request('_cfg_ok') ? 'ok' : '' ) ) ;
 		foreach($GLOBALS['toolbars'] as $toolbar) {
 			foreach($toolbar as $tool => $size) {
 				if (!ckeditor_tweaks_actifs('smileys') && ($tool == 'Smiley')) continue ;
-				if ($action == 'ok' ) ecrire_config("ckeditor/tool_$tool", _request("tool_$tool")==='on'?1:0) ;
-				if ($action == 'reset') effacer_config("ckeditor/tool_$tool") ;
+				ecrire_config("ckeditor/tool_$tool", _request("tool_$tool")==='on'?1:0) ;
 			}
 		}
 		return array('message_ok' => _T('ckeditor:ck_ok')) ;
