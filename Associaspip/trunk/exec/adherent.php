@@ -85,7 +85,8 @@ function exec_adherent() {
 		if ($GLOBALS['association_metas']['recufiscal']) {
 			$t =  _T('asso:liens_vers_les_justificatifs');
 			echo debut_cadre_relief('', TRUE, '', $t);
-			echo voir_adherent_recu_fiscal($id_auteur);
+			$t = voir_adherent_recu_fiscal($id_auteur);
+			echo $t ? $t : _T('asso:aucun');
 			echo fin_cadre_relief(TRUE);
 		}
 		if ($GLOBALS['association_metas']['pc_cotisations']) {

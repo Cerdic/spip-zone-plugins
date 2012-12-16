@@ -152,9 +152,10 @@ function icone1_association($texte, $lien, $image) {
  *   http://programmer.spip.org/Contenu-d-un-fichier-exec
  */
 function fin_page_association($FIN_CADRE_RELIEF=TRUE) {
-	$copyright = fin_page();
-	$copyright = str_replace("<div class='table_page'>", "<div class='table_page contenu_nom_site'>", $copyright); // Pour eliminer le copyright a l'impression
-	echo ($FIN_CADRE_RELIEF ? fin_cadre_relief() : '') . fin_gauche() . $copyright;
+	// Pour eliminer le copyright a l'impression
+	$copyright = str_replace("<div class='table_page'>", "<div class='table_page contenu_nom_site'>", fin_page()); 
+	$fin = $FIN_CADRE_RELIEF ? fin_cadre_relief(true) : ''; 
+	echo $fin, fin_gauche(), $copyright;
 }
 
 /**

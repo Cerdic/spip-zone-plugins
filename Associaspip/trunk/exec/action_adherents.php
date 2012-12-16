@@ -24,44 +24,50 @@ function exec_action_adherents() {
 		if (!($action_adherents && $id_auteurs)) {
 			include_spip('inc/minipres');
 			echo minipres(_T('asso:erreur_titre'));
-		} else {
-			onglets_association('titre_onglet_membres', 'adherents');
-			// info
-			echo association_totauxinfos_intro(_T('asso:confirmation'));
-			// datation et raccourcis
-			echo association_navigation_raccourcis(generer_url_ecrire('adherents'));
-			if ($action_adherents=='desactive') {
-				$statut_courant = _request('statut_courant');
-				if($statut_courant==='sorti') {
-					debut_cadre_association('annonce.gif', 'activation_des_adherents');
-					echo '<p>'. _T('asso:adherent_message_detail_activation').'</p>';
-					echo '<p>'. _T('asso:adherent_message_confirmer_activation').' : </p>';
-				} else {
-					debut_cadre_association('annonce.gif', 'desactivation_des_adherents');
-					echo '<p>'. _T('asso:adherent_message_detail_desactivation').'</p>';
-					echo '<p>'. _T('asso:adherent_message_confirmer_desactivation').' : </p>';
-				}
-				echo modification_adherents($id_auteurs,'desactiver', $statut_courant);
-			}
-			if ($action_adherents=='delete') {
-				debut_cadre_association('annonce.gif', 'suppression_des_adherents');
-				echo '<p>'. _T('asso:adherent_message_detail_suppression').'</p>';
-				echo '<p>'. _T('asso:adherent_message_confirmer_suppression').' : </p>';
-				echo modification_adherents($id_auteurs,'supprimer');
-			}
-			if ($action_adherents=='grouper') {
-				debut_cadre_association('annonce.gif', 'rejoindre_un_groupe');
-				echo _T('asso:adherent_message_grouper');
-				echo modification_adherents($id_auteurs,'grouper');
-			}
-			if ($action_adherents=='degrouper') {
-				debut_cadre_association('annonce.gif', 'quitter_un_groupe');
-				echo _T('asso:adherent_message_degrouper');
-				echo modification_adherents($id_auteurs,'degrouper');
-			}
-			fin_page_association();
-		}
+		} else exec_action_adherents_args($id_auteurs, $action_adherents);
 	}
+}
+
+function exec_action_adherents_args($id_auteurs, $action_adherents) {
+	onglets_association('titre_onglet_membres', 'adherents');
+	// info
+	echo association_totauxinfos_intro(_T('asso:confirmation'));
+	// datation et raccourcis
+	echo association_navigation_raccourcis(generer_url_ecrire('adherents'));
+	if ($action_adherents=='desactive') {
+		$statut_courant = _request('statut_courant');
+		if($statut_courant==='sorti') {
+			debut_cadre_association('annonce.gif', 'activation_des_adherents');
+			echo '<p>'. _T('asso:adherent_message_detail_activation').'</p>';
+			echo '<p>'. _T('asso:adherent_message_confirmer_activation').' : </p>';
+		} else {
+			debut_cadre_association('annonce.gif', 'desactivation_des_adherents');
+			echo '<p>'. _T('asso:adherent_message_detail_desactivation').'</p>';
+			echo '<p>'. _T('asso:adherent_message_confirmer_desactivation').' : </p>';
+		}
+		echo modification_adherents($id_auteurs,'desactiver', $statut_courant);
+		echo fin_cadre_relief(true);
+	}
+	if ($action_adherents=='delete') {
+		debut_cadre_association('annonce.gif', 'suppression_des_adherents');
+		echo '<p>'. _T('asso:adherent_message_detail_suppression').'</p>';
+		echo '<p>'. _T('asso:adherent_message_confirmer_suppression').' : </p>';
+		echo modification_adherents($id_auteurs,'supprimer');
+		echo fin_cadre_relief(true);
+	}
+	if ($action_adherents=='grouper') {
+		debut_cadre_association('annonce.gif', 'rejoindre_un_groupe');
+		echo _T('asso:adherent_message_grouper');
+		echo modification_adherents($id_auteurs,'grouper');
+		echo fin_cadre_relief(true);
+	}
+	if ($action_adherents=='degrouper') {
+		debut_cadre_association('annonce.gif', 'quitter_un_groupe');
+		echo _T('asso:adherent_message_degrouper');
+		echo modification_adherents($id_auteurs,'degrouper');
+		echo fin_cadre_relief(true);
+	}
+	fin_page_association(false);
 }
 
 function modification_adherents($tab, $action, $statut='') {
