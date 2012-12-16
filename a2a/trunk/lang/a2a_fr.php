@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rechercher_un_article_a_lier' => 'Rechercher un article :',
 
 	// S
-	'sup_pb' => 'Impossible de supprimer les types de liaisons suivantes : des liaisons les utilisent. Il vous faut donc modifier au préalable ces liaions.',
+	'sup_pb' => 'Impossible de supprimer les types de liaisons suivantes : des liaisons les utilisent. Il vous faut donc modifier au préalable ces liaisons.',
 	'supprimer_le_lien' => 'Délier',
 	'supprimer_le_lien_deux_cotes' => 'Délier des deux côtés',
 

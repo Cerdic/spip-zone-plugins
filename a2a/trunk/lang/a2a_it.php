@@ -11,9 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'articles_lies' => 'ARTICOLI COLLEGATI',
 
 	// C
-	'cfg_a2a' => 'Relations entre articles', # NEW
-	'changer_type_liaison' => 'Changer', # NEW
-	'configurer_a2a' => 'Configurer les relations entre articles', # NEW
+	'cfg_a2a' => 'Relazioni tra articoli',
+	'changer_type_liaison' => 'Cambiare',
+	'configurer_a2a' => 'Configuri le relazioni tra articoli',
 
 	// E
 	'explication_navigateur' => 'Clicca su [Aggiungi] per navigare nella gerarchia del sito per selezionare gli articoli da collegare.',
