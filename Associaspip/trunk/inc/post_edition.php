@@ -58,8 +58,12 @@ function update_spip_asso_membre($id_auteur) {
 		$modif['prenom'] = $prenom;
 		$modif['statut_interne'] = 'prospect';
 		$modif['id_auteur'] = $id_auteur;
-		if ($GLOBALS['association_metas']['categorie_par_defaut']!='') { // on verifie s'il existe une categorie par defaut
-			$modif['categorie'] = $GLOBALS['association_metas']['categorie_par_defaut'];
+		if ($GLOBALS['association_metas']['categorie_par_defaut']) {
+			// on affecte une categorie definie par defaut en configuration
+			// le test parait inutile puisque de toute facon on a "0"
+			// ...sauf si la definition en base de donnees est changee pour une autre
+			// valeur par defaut qu'on preserve alors.
+			$modif['id_categorie'] = $GLOBALS['association_metas']['categorie_par_defaut'];
 		}
 		sql_insertq('spip_asso_membres', $modif);
 	}
