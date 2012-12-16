@@ -47,20 +47,23 @@ function HideSpipUI(editor_id){
 			.css('border','none')
 			.css('background-color','white');
 	}
-	var item=$(editor_id).parents().find('.edition');
-	if (editor_id.match(/^#formulaire_forum\s/)) {
-		stack[editor_id].fobd=item.css('border');
-		stack[editor_id].fobg=item.css('background');
-		item.css('border','none');
-		item.css('background','none');
-	}
-	item
-		.find('.spip_barre').css('display','none').end()
-		.find('.explication').css('display','none').end()
-		.find('.markItUpHeader').css('display','none').end()
-		.find('.markItUpTabs').css('display','none').end()
-		.find('.markItUpPreview').css('display','none').end()
-		.find('.markItUpFooter').css('display','none');
+	var item=$(editor_id).parents().find('div.edition:has('+editor_id+')');
+	item.each(function() {
+		if ($(this).find(editor_id).length == 1) {
+			if (editor_id.match(/^#formulaire_forum\s/)) {
+				stack[editor_id].fobd=$(this).css('border');
+				stack[editor_id].fobg=$(this).css('background');
+				$(this).css('border','none');
+				$(this).css('background','none');
+			}
+			$(this).find('.spip_barre').css('display','none').end()
+				.find('.explication').css('display','none').end()
+				.find('.markItUpHeader').css('display','none').end()
+				.find('.markItUpTabs').css('display','none').end()
+				.find('.markItUpPreview').css('display','none').end()
+				.find('.markItUpFooter').css('display','none');
+		}
+	}) ;
 }
 
 function ShowSpipUI(editor_id){
@@ -70,30 +73,32 @@ function ShowSpipUI(editor_id){
 		barrebouilles_editor(editor_id) ;
 		stack[editor_id].nobarre = false ;
 	}
-	var item=$(editor_id).parents().find('.edition');
-	if (editor_id.match(/^#formulaire_forum\s/)) {
-		item.css('border',stack[editor_id].fobd);
-		item.css('background',stack[editor_id].fobg);
-	}
-	var crayon=editor_id.match(/^(#crayon_\d+)\s/);
-    if(crayon) {
-		$(crayon[1]+' .formulaire_spip')
-			.css('border',stack[editor_id].crborder)
-			.css('background-color',stack[editor_id].crbg);
-	}
-	if(item.find('.markItUpTabs .previsuVoir').hasClass('on')){
-		item.find('.markItUpTabs').css('display','').end()
-			.find('.markItUpPreview').css('display','block').end()
-			.find('.markItUpEditor').css('display','none');
-	}else{
-		item.find('.spip_barre').css('display','').end()
-			.find('.explication').css('display','').end()
-			.find('.markItUpHeader').css('display','').end()
-			.find('.markItUpTabs').css('display','').end()
-			.find('.markItUpFooter').css('display','').end()
-			.find('.markItUpEditor').css('display','block').end()
-			.find('.markItUpPreview').css('display','none');
-	}
+	var item=$(editor_id).parents().find('div.edition:has('+editor_id+')');
+	item.each(function() {
+		if (editor_id.match(/^#formulaire_forum\s/)) {
+			$(this).css('border',stack[editor_id].fobd);
+			$(this).css('background',stack[editor_id].fobg);
+		}
+		var crayon=editor_id.match(/^(#crayon_\d+)\s/);
+		if(crayon) {
+			$(crayon[1]+' .formulaire_spip')
+				.css('border',stack[editor_id].crborder)
+				.css('background-color',stack[editor_id].crbg);
+		}
+		if($(this).find('.markItUpTabs .previsuVoir').hasClass('on')){
+			$(this).find('.markItUpTabs').css('display','').end()
+				.find('.markItUpPreview').css('display','block').end()
+				.find('.markItUpEditor').css('display','none');
+		}else{
+			$(this).find('.spip_barre').css('display','').end()
+				.find('.explication').css('display','').end()
+				.find('.markItUpHeader').css('display','').end()
+				.find('.markItUpTabs').css('display','').end()
+				.find('.markItUpFooter').css('display','').end()
+				.find('.markItUpEditor').css('display','block').end()
+				.find('.markItUpPreview').css('display','none');
+		}
+		}) ;	
 }
 [(#REM)// pile permettant d'avoir plusieurs éditeurs]
 var stack=[];
