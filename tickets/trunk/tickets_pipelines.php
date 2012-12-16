@@ -227,4 +227,15 @@ function tickets_notifications_destinataires($flux){
 	}
 	return $flux;
 }
+
+/**
+ * Declaration du pipeline tickets_liste_tracker permettant a d'autres plugins de completer la lsite
+ * 
+ * @param array $flux : le contexte du pipeline
+ * @return array $flux : le contexte modifié
+ */
+function tickets_tickets_liste_tracker($flux) {
+	return $flux;
+}
+
 ?>

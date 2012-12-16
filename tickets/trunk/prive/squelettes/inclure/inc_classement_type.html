@@ -3,6 +3,6 @@
 	- tache
 	- amelioration
 ]
-<INCLURE{fond=prive/squelettes/inclure/inc_liste_detaillee}{ajax}{env}{titre=<:tickets:type_probleme_long:>}{statut=ouvert}{tracker=1}{bloc=_bloc1}>
-<INCLURE{fond=prive/squelettes/inclure/inc_liste_detaillee}{ajax}{env}{titre=<:tickets:type_tache_long:>}{statut=ouvert}{tracker=3}{bloc=_bloc2}>
-<INCLURE{fond=prive/squelettes/inclure/inc_liste_detaillee}{ajax}{env}{titre=<:tickets:type_amelioration_long:>}{statut=ouvert}{tracker=2}{bloc=_bloc3}>
+<BOUCLE_trackers(DATA){source table, #VAL{1}|tickets_liste_tracker_nom_long}>
+	<INCLURE{fond=prive/squelettes/inclure/inc_liste_detaillee}{ajax}{env}{titre=#VALEUR}{statut=ouvert}{tracker=#CLE}{bloc=_bloc#CLE}>
+</BOUCLE_trackers>

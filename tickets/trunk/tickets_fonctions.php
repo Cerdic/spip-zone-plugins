@@ -211,8 +211,20 @@ function tickets_liste_tracker($id_ticket = null){
 		2 => _T("tickets:type_amelioration"),
 		3 => _T("tickets:type_tache"),
 	);
+	$trackers = pipeline('tickets_liste_tracker',array('args'=>'nom_court','data'=>$trackers));
 	return $trackers;
 }
+
+function tickets_liste_tracker_nom_long($id_ticket = null){
+	$trackers = array(
+		1 => _T("tickets:type_probleme_long"),
+		3 => _T("tickets:type_tache_long"),
+		2 => _T("tickets:type_amelioration_long"),
+	);
+	$trackers = pipeline('tickets_liste_tracker',array('args'=>'nom_long','data'=>$trackers));
+	return $trackers;
+}
+
 
 function tickets_liste_severite($id_ticket = null){
 	$severites = array(
