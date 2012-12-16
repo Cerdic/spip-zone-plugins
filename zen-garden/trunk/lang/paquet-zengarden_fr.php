@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Z
 	'zengarden_description' => ' ',
-	'zengarden_slogan' => 'Un jardin Zen pour Zpip'
+	'zengarden_slogan' => 'Un jardin Zen pour les squelettes'
 );
 
 ?>

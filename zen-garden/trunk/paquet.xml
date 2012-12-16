@@ -1,14 +1,16 @@
 <paquet
 	prefix="zengarden"
 	categorie="maintenance"
-	version="2.4.4"
+	version="2.5.0"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/themes-32.png"
 	documentation="http://www.spip-contrib.net/SPIP-Zen-Garden"
 >
 	<nom>Zen-Garden</nom>
-  <auteur lien='http://www.yterium.com'>Cedric Morin, Yterium</auteur>
+	<!-- Un jardin Zen pour les squelettes -->
+
+	<auteur lien='http://www.yterium.com'>Cedric Morin, Yterium</auteur>
 
 	<pipeline nom="affichage_final" />
 	<pipeline nom="filtrer_liste_plugins" inclure="zengarden_fonctions.php" />
