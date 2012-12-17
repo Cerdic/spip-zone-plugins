@@ -32,6 +32,12 @@ function formulaires_editer_mailsubscriber_charger_dist($id_mailsubscriber='new'
  * Verifier les champs postes et signaler d'eventuelles erreurs
  */
 function formulaires_editer_mailsubscriber_verifier_dist($id_mailsubscriber='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	$listes = _request('listes');
+	if ($listes AND is_array($listes))
+		set_request('listes',implode(',',$listes));
+	if (!$listes)
+		$listes = array();
+
 	$erreurs = formulaires_editer_objet_verifier('mailsubscriber',$id_mailsubscriber, array('email'));
 	if (!isset($erreurs['email'])){
 		$email = _request('email');
@@ -44,8 +50,8 @@ function formulaires_editer_mailsubscriber_verifier_dist($id_mailsubscriber='new
 				$erreurs['email'] = _T('mailsubscriber:erreur_adresse_existante');
 		}
 	}
-	if (count($erreurs) AND !_request('listes'))
-		set_request('listes',array(''));
+	if (count($erreurs))
+		set_request('listes',$listes);
 	return $erreurs;
 }
 
@@ -54,8 +60,6 @@ function formulaires_editer_mailsubscriber_verifier_dist($id_mailsubscriber='new
  */
 function formulaires_editer_mailsubscriber_traiter_dist($id_mailsubscriber='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	set_request('lang',_request('langue'));
-	if (_request('listes'))
-		set_request('listes',implode(',',_request('listes')));
 
 	// creation : verifier qu'on retombe pas sur un email obfusque, et dans ce cas se retablir dessus
 	if (!intval($id_mailsubscriber)
