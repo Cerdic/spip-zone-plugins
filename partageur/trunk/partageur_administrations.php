@@ -13,14 +13,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 function partageur_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
-
-  // FIXME gerer la migration SPIP 2 -> SPIP 3 ?
  
   $maj['create'] = array(
 	   array('maj_tables', array('spip_partageurs')),
      array('sql_alter','TABLE spip_articles ADD s2s_url VARCHAR(255) DEFAULT \'\' NOT NULL'),
 	   array('sql_alter','TABLE spip_articles ADD s2s_url_trad VARCHAR(255) DEFAULT \'\' NOT NULL'),
 	);
+  
+  // pour la migration venant de SPIP 2 : ajout du statut
+  $maj['1.1'] = array( 		
+    array('sql_alter',"TABLE spip_partageurs ADD `statut` varchar(20) NOT NULL DEFAULT 'publie'")
+	); 
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

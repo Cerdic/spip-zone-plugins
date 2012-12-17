@@ -282,7 +282,7 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
                             if ($motevts!="" && $import_mot_evt) { 
                               foreach($motevts as $motevt) {                                
                                 $groupe = stripslashes($motevt['groupe']);                            
-                                $titre  = stripslashes($motevt['titre']); 
+                                $titre  = stripslashes($motevt['titre']);
                                 partageur_insert_mode_article($id_nouvel_evt, $titre, $groupe, $import_mot_groupe_creer, $id_import_mot_groupe, "evenement");                              
                               }
                             }                            
