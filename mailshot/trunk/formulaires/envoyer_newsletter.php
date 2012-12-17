@@ -11,15 +11,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Declarer les champs postes et y integrer les valeurs par defaut
  */
-function formulaires_envoyer_newsletter_charger_dist($id_newsletter,$bulkable=true){
+function formulaires_envoyer_newsletter_charger_dist($id_newsletter,$mode_test=false){
 
 	$valeurs = array(
 		'email_test' => $GLOBALS['visiteur_session']['email'],
 		'liste' => '',
-		'_bulkable' => $bulkable?' ':'',
+		'_mode_test' => $mode_test?$mode_test:'',
 	);
 
-	if ($bulkable){
+	if (!$mode_test){
 		$lists = charger_fonction('lists','newsletter');
 		$valeurs['_listes_dispo'] = $lists(array('status'=>'open'));
 	}
@@ -30,7 +30,7 @@ function formulaires_envoyer_newsletter_charger_dist($id_newsletter,$bulkable=tr
 /**
  * Verifier les champs postes et signaler d'eventuelles erreurs
  */
-function formulaires_envoyer_newsletter_verifier_dist($id_newsletter,$bulkable=true){
+function formulaires_envoyer_newsletter_verifier_dist($id_newsletter,$mode_test=false){
 	$erreurs = array();
 
 	if (_request('envoi_test')){
@@ -49,7 +49,7 @@ function formulaires_envoyer_newsletter_verifier_dist($id_newsletter,$bulkable=t
 /**
  * Traiter les champs postes
  */
-function formulaires_envoyer_newsletter_traiter_dist($id_newsletter,$bulkable=true){
+function formulaires_envoyer_newsletter_traiter_dist($id_newsletter,$mode_test=false){
 
 	$res = array('message_erreur'=>"lapin compris");
 
@@ -71,7 +71,7 @@ function formulaires_envoyer_newsletter_traiter_dist($id_newsletter,$bulkable=tr
 
 		// ok, maintenant on prepare un envoi
 		$send = charger_fonction("send","newsletter");
-		$res = $send($dest, $id_newsletter, array('test'=>true));
+		$res = $send($dest, $id_newsletter, array('test'=>$mode_test?true:false));
 
 		if (!$res)
 			$res = array('message_ok'=>_T('newsletter:info_test_envoye',array('email'=>$email)));

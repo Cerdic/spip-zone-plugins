@@ -11,7 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_tester_envoi' => 'Tester !',
 
 	// I
-	'info_tester_newsletter' => 'Tester avec un envoi par courriel',
+	'info_tester_newsletter' => 'Tester avec un envoi unique',
+	'info_envoi_unique_newsletter' => 'Envoyer à 1 personne',
 	'info_envoyer_newsletter' => 'Envoyer l\'infolettre',
 
 	// L
