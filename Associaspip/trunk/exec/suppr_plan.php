@@ -14,21 +14,25 @@ if (!defined('_ECRIRE_INC_VERSION'))
 function exec_suppr_plan() {
 	$r = association_controle_id('plan', 'asso_plan', 'gerer_compta');
 	if ($r) {
-		include_spip ('inc/navigation_modules');
 		list($id_plan, $plan) = $r;
-		onglets_association('plan_comptable', 'association');
-		// info
-		$infos['entete_code'] = $plan['code'];
-		$infos['solde_initial'] = association_formater_prix($plan['solde_anterieur']);
-		$infos['entete_date'] = association_formater_date($plan['date_anterieure']);
-		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_comptes',"imputation='$plan[code]' OR journal='$plan[code]'")) );
-		echo association_totauxinfos_intro($plan['intitule'], 'plan', $id_plan, $infos );
-		// datation et raccourcis
-		echo association_navigation_raccourcis('');
-		debut_cadre_association('plan_compte.png', 'suppression_de_compte');
-		echo association_bloc_suppression('plan', $id_plan,'plan_comptable');
-		fin_page_association();
+		exec_suppr_plan_args($id_plan, $plan);
 	}
+}
+
+function exec_suppr_plan_args($id_plan, $plan) {
+	include_spip ('inc/navigation_modules');
+	onglets_association('plan_comptable', 'association');
+	// info
+	$infos['entete_code'] = $plan['code'];
+	$infos['solde_initial'] = association_formater_prix($plan['solde_anterieur']);
+	$infos['entete_date'] = association_formater_date($plan['date_anterieure']);
+	$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_comptes',"imputation='$plan[code]' OR journal='$plan[code]'")) );
+	echo association_totauxinfos_intro($plan['intitule'], 'plan', $id_plan, $infos );
+	// datation et raccourcis
+	echo association_navigation_raccourcis('');
+	debut_cadre_association('plan_compte.png', 'suppression_de_compte');
+	echo association_bloc_suppression('plan', $id_plan,'plan_comptable');
+	fin_page_association();
 }
 
 ?>

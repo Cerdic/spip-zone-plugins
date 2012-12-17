@@ -14,18 +14,22 @@ if (!defined('_ECRIRE_INC_VERSION'))
 function exec_suppr_destination() {
 	$r = association_controle_id('destination', 'asso_destination', 'gerer_compta');
 	if ($r) {
-		include_spip ('inc/navigation_modules');
 		list($id_destination, $destination) = $r;
-		onglets_association('plan_comptable', 'association');
-		// INTRO :
-		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_destination_op',"id_destination=$id_destination")) );
-		echo association_totauxinfos_intro($destination['intitule'], 'destination', $id_destination, $infos );
-		// datation et raccourcis
-		echo association_navigation_raccourcis('');
-		debut_cadre_association('euro-39.gif', 'suppression_de_destination');
-		echo association_bloc_suppression('destination', $id_destination,'destination');
-		fin_page_association();
+		exec_suppr_destination_args($id_destination, $destination);
 	}
+}
+
+function exec_suppr_destination_args($id_destination, $destination) {
+	include_spip ('inc/navigation_modules');
+	onglets_association('plan_comptable', 'association');
+	// INTRO :
+	$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_destination_op',"id_destination=$id_destination")) );
+	echo association_totauxinfos_intro($destination['intitule'], 'destination', $id_destination, $infos );
+	// datation et raccourcis
+	echo association_navigation_raccourcis('');
+	debut_cadre_association('euro-39.gif', 'suppression_de_destination');
+	echo association_bloc_suppression('destination', $id_destination,'destination');
+	fin_page_association();
 }
 
 ?>
