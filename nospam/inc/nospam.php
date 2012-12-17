@@ -219,7 +219,7 @@ function rechercher_presence_liens_spammes($liens,$seuil,$table,$champs,$condsta
 			// loger les 10 premiers messages concernes pour aider le webmestre
 			$all = sql_allfetsel(id_table_objet($table),$table,$where,'','','0,10');
 			$all = array_map('reset',$all);
-			spip_log("$n liens trouves $like dans table $table (".implode(",",$all)." [champs ".implode(',',$champs)."]","nospam");
+			spip_log("$n liens trouves $like dans table $table (".implode(",",$all).") [champs ".implode(',',$champs)."]","nospam");
 			return $h;
 		}
 	}
