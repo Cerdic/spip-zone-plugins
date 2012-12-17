@@ -94,7 +94,7 @@ function newsletter_subscribe_dist($email,$options = array()){
 		$row['listes'] = explode(',',$row['listes']);
 		if (!isset($set['listes'])){
 			// filtrer les listes de newsletter pour voir si l'abonne est abonne a quelque chose
-			$listes = array_map('mailsuscribers_filtre_liste',$row['listes']);
+			$listes = array_map('mailsubscribers_filtre_liste',$row['listes']);
 			$listes = array_filter($listes);
 			// sinon l'abonner a la liste par defaut
 			if (!count($listes))

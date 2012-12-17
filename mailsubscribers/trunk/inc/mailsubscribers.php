@@ -45,7 +45,7 @@ function mailsubscribers_obfusquer_email($email){
  */
 function mailsubscribers_informe_subscriber($infos){
 	$infos['listes'] = explode(',',$infos['listes']);
-	$infos['listes'] = array_map('mailsuscribers_filtre_liste',$infos['listes']);
+	$infos['listes'] = array_map('mailsubscribers_filtre_liste',$infos['listes']);
 	$infos['listes'] = array_filter($infos['listes']);
 
 	$infos['url_unsubscribe'] = mailsubscriber_url_unsubscribe($infos['email'],$infos['jeton']);
@@ -61,7 +61,7 @@ function mailsubscribers_informe_subscriber($infos){
  *   chaine vide si la liste n'est pas dans la category
  *   nom de la liste sans le prefix de la category si ok
  */
-function mailsuscribers_filtre_liste($liste,$category="newsletter"){
+function mailsubscribers_filtre_liste($liste,$category="newsletter"){
 	if (strncmp($liste,"$category::",$l=strlen("$category::"))==0){
 		return substr($liste,$l);
 	}
@@ -94,7 +94,7 @@ function mailsubscribers_listes($options = array()){
 
 		foreach ($known_lists as $kl){
 			$id = $kl['id'];
-			if (!$filtrer_category OR $id=mailsuscribers_filtre_liste($id,$filtrer_category)){
+			if (!$filtrer_category OR $id=mailsubscribers_filtre_liste($id,$filtrer_category)){
 				$status = ($kl['status']=='open'?'open':'close');
 				if (!$filtrer_status OR $filtrer_status==$status) {
 					$listes[$id] = array(
@@ -116,7 +116,7 @@ function mailsubscribers_listes($options = array()){
 			foreach($ll as $l){
 				if ($id=$l
 					AND (
-						!$filtrer_category OR $id=mailsuscribers_filtre_liste($l,$filtrer_category)
+						!$filtrer_category OR $id=mailsubscribers_filtre_liste($l,$filtrer_category)
 					)){
 					if (!isset($listes[$id]))
 						$listes[$id] = array('id'=>$id,'titre'=>$id,'status'=>'?');

@@ -68,7 +68,7 @@ function formulaires_importer_mailsubscribers_traiter_dist(){
 	refuser_traiter_formulaire_ajax();// pour recharger toute la page
 
 	$res = array('editable'=>true);
-	$r = importer_mailsuscribers_importe(session_get('importer_mailsubscribers::filename'));
+	$r = importer_mailsubscribers_importe(session_get('importer_mailsubscribers::filename'));
 
 	$message =
 		sinon(
@@ -168,7 +168,7 @@ function importer_mailsubscribers_data($filename){
 	return $data;
 }
 
-function importer_mailsuscribers_importe($filename){
+function importer_mailsubscribers_importe($filename){
 	$res = array('count'=>0,'erreurs'=>array());
 
 	$data = importer_mailsubscribers_data($filename);

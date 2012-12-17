@@ -18,7 +18,7 @@ function formulaires_configurer_mailsubscribers_charger_dist(){
 	);
 
 	foreach ($valeurs['lists'] as $k => $v){
-		$valeurs['lists'][$k]['id'] = mailsuscribers_filtre_liste($v['id']);
+		$valeurs['lists'][$k]['id'] = mailsubscribers_filtre_liste($v['id']);
 	}
 
 	return $valeurs;

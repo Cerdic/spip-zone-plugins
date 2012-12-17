@@ -19,7 +19,7 @@ function action_mailsubscribers_export_dist($statut=null){
 		$statut = $securiser_action();
 	}
 
-	if (!autoriser('exporter','_mailsuscribers')){
+	if (!autoriser('exporter','_mailsubscribers')){
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;
