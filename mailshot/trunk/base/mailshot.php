@@ -27,7 +27,9 @@ function mailshot_declarer_tables_objets_sql($tables) {
 	$tables['spip_mailshot'] = array(
 		'type' => 'mailshot',
 		'table_objet_surnoms'=>array('mailshot'),
-		'principale' => "non",
+		'url_voir' => false,  // pas de vue
+		'url_edit' => false,  // pas d'edition
+		'principale' => "oui",  // auto-increment
 		'field'=> array(
 			"id_mailshot"   => "bigint(21) NOT NULL",
 			"id" => "varchar(32)  DEFAULT '' NOT NULL",

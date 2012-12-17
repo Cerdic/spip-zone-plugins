@@ -32,7 +32,7 @@ function mailshot_upgrade($nom_meta_base_version, $version_cible) {
 **/
 function mailshot_vider_tables($nom_meta_base_version) {
 
-	sql_drop_table("spip_mailshots");
+	sql_drop_table("spip_mailshot");
 
 	effacer_meta($nom_meta_base_version);
 }

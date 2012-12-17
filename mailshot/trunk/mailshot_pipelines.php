@@ -15,7 +15,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function mailshot_taches_generales_cron($taches_generales){
 
-	$taches_generales['mailshot_bulksend'] = 60;
+	// on active la tache cron uniquement si necessaire (un envoi en cours)
+	if (isset($GLOBALS['meta']['mailshot_processing'])){
+		$taches_generales['mailshot_bulksend'] = 60;
+	}
 
 	return $taches_generales;
 }
