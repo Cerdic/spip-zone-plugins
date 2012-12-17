@@ -101,7 +101,7 @@ if (window.jQuery)(function($){
 	
 	$(window).scroll(function() {
 		if($(this).scrollTop() > limite)
-			$("#formulaire_gestion_forum .boutons").css({'border-bottom': '3px solid black' , 'position': 'fixed', 'top': 0, 'width': '481px'});
+			$("#formulaire_gestion_forum .boutons").css({'border-bottom': '3px solid black' , 'position': 'fixed', 'top': 0, 'width': ($("#formulaire_gestion_forum").width()-22)+'px'});
 		if($(this).scrollTop() < limite)
 			$("#formulaire_gestion_forum .boutons").css({'border-bottom': '0' , 'position': 'static', 'width': 'auto'});	
 	});		

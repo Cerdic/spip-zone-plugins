@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_marque_comme_spam' => 'Un message marqu&eacute; comme spam',
 	'message_publie' => 'Un message publi&eacute;',
-	'message_rien_a_faire' => 'Aucun forum n\'a &eacute;t&eacute; s&eacute;lectionn&eacute;',
+	'message_rien_a_faire' => 'Aucun message n\'a &eacute;t&eacute; s&eacute;lectionn&eacute;',
 	'message_supprime' => 'Un message supprim&eacute;',
 	'messages_aucun' => 'Aucun',
 	'messages_marques_comme_spam' => '@nb@ messages marqu&eacute;s comme spam',
