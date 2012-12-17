@@ -22,7 +22,7 @@ function newsletters_liens_absolus($texte, $base='') {
 	if (preg_match_all(',(<(a|link|image)[[:space:]]+[^<>]*>),imsS',$texte, $liens, PREG_SET_ORDER)) {
 		foreach ($liens as $lien) {
 			$href = extraire_attribut($lien[0],"href");
-			if ($href AND strncmp($href,'#',1)!==0 AND strncmp($href,'@@',2)!==0){
+			if ($href AND strncmp($href,'#',1)!==0 AND strncmp($href,'@',1)!==0){
 				$abs = url_absolue($href, $base);
 				if ($abs <> $href){
 					$href = str_replace($href,$abs,$lien[0]);
@@ -60,6 +60,8 @@ function liste_choix_patrons($selected=null, $tout_voir = false){
 
 	include_spip("inc/config");
 	$masquer = lire_config("newsletters/masquer_fond");
+	if (!$masquer)
+		$masquer = array();
 	foreach ($files as $k=>$file){
 		$fond = basename($k,'.html');
 		//  ignorer les variantes .texte.html et .page.html utilisee pour generer les version textes et page en ligne
@@ -107,6 +109,18 @@ function inline_base64src($texte, $type="text/html"){
  */
 function newsletter_affiche_version_enligne($page){
 
+	// contextualiser !
+	$contextualize = charger_fonction("contextualize","newsletter");
+	$infos = array(
+		'email' => 'mail@example.org',
+		'nom' => '',
+		'lang' => $GLOBALS['spip_lang'],
+		'url_unsubscribe' => _DIR_RACINE?_DIR_RACINE:"./",
+		'listes' => array(),
+	);
+	$page = $contextualize($page, $infos);
+
+	// css-izer
 	if ($f = find_in_path("css/newsletter_inline.css")){
 		lire_fichier($f,$css);
 		$css = '<style type="text/css">'.$css.'</style>';

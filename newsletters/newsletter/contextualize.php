@@ -26,11 +26,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function newsletter_contextualize_dist($content,$context){
 
 	// vite si rien a faire !
-	if (strpos($content,"@@")==false AND strpos($content,"#ENV")==false)
+	if (strpos($content,"@")==false AND strpos($content,"#ENV")==false)
 		return $content;
 
 	// remplacer les @@truc@@ par [(#ENV{truc,''})]
-	$content = preg_replace(",@@([\w\d]+)@@,Uims","[(#ENV{\\1,''})]",$content);
+	$content = preg_replace(",@([\w\d]+)@,Uims","[(#ENV{\\1,''})]",$content);
+
+	// vite si rien a faire ! (le premier coup on a pu etre trompe par un email en clair)
+	if (strpos($content,"@")==false AND strpos($content,"#ENV")==false)
+		return $content;
+
 	$content = "#CACHE{0}\n".$content; // pas de cache, on ne va calculer qu'une fois pour chaque contexte !
 
 	$md5 = md5($content);
