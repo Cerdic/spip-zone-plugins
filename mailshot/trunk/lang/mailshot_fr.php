@@ -18,6 +18,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_envoi_mail_bloque_debug' => 'Envoi du mail bloqué par <tt>_TEST_EMAIL_DEST</tt>',
 	'erreur_envoi_mail_force_debug' => 'Envoi du mail forcé vers @email@ par <tt>_TEST_EMAIL_DEST</tt>',
 
+	// I
+	'info_envoi_programme_1_destinataire' => 'Envoi programmé vers 1 destinataire',
+	'info_envoi_programme_nb_destinataires' => 'Envoi programmé vers @nb@ destinataires',
+	'info_1_mailsubscriber' => '1 inscrit',
+	'info_nb_mailsubscribers' => '@nb@ inscrits',
+
 	// L
 	'label_mailer_defaut' => 'Utiliser le même service d\'envoi que pour les autres mails',
 	'label_mailer_defaut_desactive' => '(aucun service d\'envoi configuré par défaut)',
