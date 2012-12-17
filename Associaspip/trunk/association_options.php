@@ -944,7 +944,7 @@ function association_formater_adresses($id_objets, $objet='auteur', $html_span='
 		$adresses_string[$id_objet] = ''; // initialisation de la chaine renvoyee
 		foreach ($adresses as $adresse) { // chaque adresse est forcement un tableau bien qu'on le verifie pas
 			if ($html_span) { // formatage HTML avec microformat
-				$adresses_string[$id_objet] =  "<$html_span id='$adresse[id_adresse]' class='adr'>". association_formater_typecoord('adr', $adresse['type']);
+				$adresses_string[$id_objet] =  "<$html_span class='adr'>". association_formater_typecoord('adr', $adresse['type']);
 				if ($adresse['voie'])
 					$adresse['voie'] = "<span class='street-address'>$adresse[voie]</span>";
 				if ($adresse['ville'])
@@ -974,7 +974,7 @@ function association_formater_adresses($id_objets, $objet='auteur', $html_span='
 			}
 			$adresse['_nl'] = $newline; // parametre supplementaire pour le modele
 			$adresse['_spc'] = $space; // parametre supplementaire pour le modele
-			$adresses_string[$id_objet] .=  recuperer_fond('modeles/coordonnees_adresse', $adresse) .($html_span?"</$htm_span>\n":'');
+			$adresses_string[$id_objet] .=  recuperer_fond('modeles/coordonnees_adresse', $adresse) .($html_span?"</$html_span>\n":'');
 		}
 	}
 	return $adresses_string;
@@ -1789,16 +1789,16 @@ function association_totauxinfos_intro($titre, $type='', $id=0, $DesLignes=array
 	if ( !is_array($DesLignes) )
 		return $res;
 	if ( count($DesLignes) OR $ObjetEtendu )
-		$res .= '<dl class="verdana1 spip_xx-small">';
+		$res .= "\n<dl class='verdana1 spip_xx-small'>";
 	foreach ($DesLignes as $dt=>$dd) {
-		$res .= '<dt>'. association_langue($dt) .'</dt><dd>'. propre($dd) .'</dd>'; // propre() paragraphe (rajoute <p>)... mais ce comportement peut etre change en mettant "paragrapher" a FALSE dans mes_options.php : http://www.spip.net/fr_article889.html Cette presentation-ci est propre a Associaspip ; Habituellement on a : $res .= "<div class='$dt'><strong>". association_langue($dt) ."</strong> $dd</div>";
+		$res .= "\n<dt>". association_langue($dt) ."</dt>\n<dd>". propre($dd) .'</dd>'; // propre() paragraphe (rajoute <p>)... mais ce comportement peut etre change en mettant "paragrapher" a FALSE dans mes_options.php : http://www.spip.net/fr_article889.html Cette presentation-ci est propre a Associaspip ; Habituellement on a : $res .= "<div class='$dt'><strong>". association_langue($dt) ."</strong> $dd</div>";
 	}
 	if ($ObjetEtendu) {
 		$champsExtras = association_trouver_iextras($ObjetEtendu, $id); // on recupere les champs extras crees manuellement (i.e. via l'interface d'edition du prive, pas ceux rajoutes par les plugins !)
 		if ( count($champsExtras) ) {
 			foreach ($champsExtras as $champExtra) {
-				$res .= '<dt>'. $champExtra[0] .'</dt>';
-				$res .= '<dd>'. $champExtra[1] .'</dd>';
+				$res .= "\n<dt>". $champExtra[0] .'</dt>';
+				$res .= "\n<dd>". $champExtra[1] .'</dd>';
 /*
 				if ( strstr($champExtra[1], '<div')===0 ) { // c'est dans un "DIV" superflu
 					$res .= substr_replace( substr_replace($chamExtra[1], '</dd>', strrpos($chamExtra[1],'</div>'), 6), 'dd', 1, 3);
@@ -1811,7 +1811,7 @@ function association_totauxinfos_intro($titre, $type='', $id=0, $DesLignes=array
 		}
 	}
 	if ( count($DesLignes) OR $ObjetEtendu )
-		$res .= '</dl>';
+		$res .= "</dl>\n";
 	return $res;
 }
 
