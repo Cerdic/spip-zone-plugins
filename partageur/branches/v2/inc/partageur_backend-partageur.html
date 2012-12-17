@@ -20,7 +20,7 @@
                     [<lieu>(#LIEU|texte_backend)</lieu>]
                     [<adresse>(#ADRESSE|partageur_respecte_ln|texte_backend)</adresse>]
                     [<horaire>(#HORAIRE|texte_backend)</horaire>]                    
-                    [(#CONFIG{spip2spip/export_mot_evnt}|oui)
+                    [(#CONFIG{partageur/export_mot_evnt}|oui)
                         [(#GET{which_groupe}|find{-1}|oui)<INCLURE{fond=inc/partageur_mot_article}{id_evenement}{type_objet=evt} />]
                         [(#GET{which_groupe}|find{-1}|non)<INCLURE{fond=inc/partageur_mot_article_restreint}{id_evenement}{type_objet=evt} />]
                     ]                    
