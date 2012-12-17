@@ -102,12 +102,16 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
                 
                 $current_titre = $article['titre'];
                 $current_link  = $article['link'];                                              
-                // Est que l'article n'a pas été déjà importé ?
-                $nb_reponses = sql_countsel("spip_articles","s2s_url=".sql_quote($current_link));                               
-                if ($nb_reponses>0) {                                   
-                   // article deja connu et present ds la base
-                   $log_html .= "[<span style='color:#999'>"._T('partageur:imported_already')."</span>] <a href='$current_link'>$current_titre</a>\n";
-                   spip_log("partageur: deja importe: ".$current_link); 
+                // Est que l'article n'a pas été déjà importé ?                 
+                $articles_importes = sql_select("id_article,titre","spip_articles","s2s_url=".sql_quote($current_link));
+                if ($articles_importes and sql_count($articles_importes)>0) { 
+                   // article deja connu et present ds la base                    
+                   $log_html .= "[<span style='color:#999'>"._T('partageur:imported_already')."</span>]\n";
+                   while ($r = sql_fetch($articles_importes)) {
+                       $log_html .= "<a href='".generer_url_ecrire('article', "id_article=".$r['id_article'],'&')."'>".$r['titre']."</a><br />";
+                   }                   
+                   spip_log("partageur: deja importe: ".$current_link);                    
+                    
                 } else {
                    // nouvel article à importer
                    $log_html .= "[<span style='color:#090'>"._T('partageur:imported_new')."</span>] <a href='$current_link'>$current_titre</a>\n";
@@ -165,7 +169,7 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
                   		$_ps = partageur_convert_extra($article['ps'],$documents_current_article,$version_flux);
                   		$_date =  date('Y-m-d H:i:s',time()); // $article['date'];  // date de la syndication ou date de l'article ?
                   		$_lang = $article['lang'];
-                  		$_logo = $article['logo'];
+                  		$_logo = $article['logo'];  
                   		$_id_rubrique = $target; 
                       $_id_secteur = partageur_get_id_secteur($target);           		          		
                   		$_statut = $import_statut;
@@ -214,7 +218,7 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
       				            foreach($auteurs as $auteur) {
       				                $id_auteur = partageur_get_id_auteur($auteur);
       				                if ($id_auteur)   	
-                                @sql_insertq("spip_auteurs_articles",array('id_auteur'=>$id_auteur,'id_article'=>$id_nouvel_article));
+                                @sql_insertq("spip_auteurs_liens",array('id_auteur'=>$id_auteur,'objet'=>'article','vu'=>'non','id_objet'=>$id_nouvel_article));
                           }
                       }
                       
@@ -226,7 +230,7 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
                       }  
                       
                       // ... si logo, tente de l'importer                      
-                      if ($_logo) {                                                      
+                      if ($_logo) {                                         
                             $logo_local = copie_locale($_logo);                         
                             if ($logo_local) {                                 
                                 $logo_local_dest = "IMG/arton$id_nouvel_article.".substr($logo_local,-3);                                                        
@@ -238,7 +242,7 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
                       $_mots = $article['mots'];                                           
                       if ($_mots!="" && $import_mot_article) {  
                         $_mots = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_mots );                     
-                        $_mots = unserialize($_mots); 
+                        $_mots = unserialize($_mots);                         
                         foreach($_mots as $_mot) {                                               
                             $groupe = stripslashes($_mot['groupe']);                            
                             $titre  = stripslashes($_mot['titre']);                                                     
@@ -248,12 +252,12 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
                             
                       
                       // etape 4 - traitement des evenements
-                      $_evenements = $article['evenements'];                      
-                      if ($_evenements!="") {  
-                        $_evenements = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_evenements );                      
-                        $_evenements = unserialize($_evenements);                                                          
-                        foreach($_evenements as $_evenement) {                  
-                            $datedeb = $_evenement['datedeb'];
+                      $_evenements = $article['evenements'];                                           
+                      if ($_evenements!="") { 
+                        $_evenements = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_evenements ); 
+                        $_evenements = unserialize(base64_decode($_evenements)); 
+                        foreach($_evenements as $_evenement) { 
+                            $datedeb = $_evenement['datedeb'];                            
                             $datefin = $_evenement['datefin'];
                             $lieu = stripslashes($_evenement['lieu']);
                             $adresse = partageur_convert_extra(stripslashes($_evenement['adresse']),$documents_current_article,$version_flux);
@@ -261,7 +265,7 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
                             $titre = stripslashes($_evenement['titre']);                        
                             $desc = partageur_convert_extra(stripslashes($_evenement['desc']),$documents_current_article,$version_flux);
                             $motevts = $_evenement['motevts'];
-                                                                                     		  		                      
+                                                                                                                 		  		                      
                             $id_nouvel_evt = sql_insertq('spip_evenements',array(
                 						            'id_article'=> $id_nouvel_article,
                 						            'date_debut'=> $datedeb,
@@ -270,19 +274,20 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
                 						            'descriptif'=>$desc,
                 						            'lieu'=>$lieu,
                 						            'adresse'=>$adresse,
-                						            'horaire'=>$horaire));
+                						            'horaire'=>$horaire,
+                                        'statut'=>$import_statut));
                             $log_html .= "<div style='padding:2px 5px;border-bottom:1px solid #5DA7C5;background:#eee;display:block;'>"._T('partageur:event_ok')." : $datedeb  $lieu</div>";
                 						
                             // mot cle ?                            
                             if ($motevts!="" && $import_mot_evt) { 
                               foreach($motevts as $motevt) {                                
                                 $groupe = stripslashes($motevt['groupe']);                            
-                                $titre  = stripslashes($motevt['titre']);                                  
+                                $titre  = stripslashes($motevt['titre']);  
+                                echo "\n<br> found: $titre  / $groupe";                                
                                 partageur_insert_mode_article($id_nouvel_evt, $titre, $groupe, $import_mot_groupe_creer, $id_import_mot_groupe, "evenement");                              
                               }
-                            }
-                            // #mot cle   
-                						            			
+                            }                            
+                            // #mot cle 		
                         } 
                       } // # etape 4: evenements
                    
@@ -509,7 +514,7 @@ function analyser_backend_partageur($rss){
     if ($data['evenements'] != "") {
           $evenements = array();
           if (preg_match_all($evenement_regexp['evenement'],$data['evenements'],$r3, PREG_SET_ORDER))
-          	foreach ($r3 as $regs) {
+          foreach ($r3 as $regs) {
           		$debut_item = strpos($data['evenements'],$regs[0]);
           		$fin_item = strpos($data['evenements'],$evenement_regexp['evenementfin'])+strlen($evenement_regexp['evenementfin']);
           		$evenements[] = substr($data['evenements'],$debut_item,$fin_item-$debut_item);
@@ -520,15 +525,20 @@ function analyser_backend_partageur($rss){
           
           $agenda = array();
           if (count($evenements)) {          
-              foreach ($evenements as $evenement) {                 
+              foreach ($evenements as $evenement) {  
+                 
                  $data_node = array();
                  foreach ($xml_event_tags as $xml_event_tag) {
                     if (preg_match($evenement_regexp[$xml_event_tag],$evenement,$match)) $data_node[$xml_event_tag] = $match[1]; 
-  				                                                                      else $data_node[$xml_event_tag] = "";
-  				       } 
+                                                                                    else $data_node[$xml_event_tag] = "";
+  				       }
+                 
+                 // bug lieu et desc  (suite au p)
+                 $data_node['lieu'] = strip_tags(html_entity_decode($data_node['lieu'])); 
+                 $data_node['desc'] = strip_tags(html_entity_decode($data_node['desc']));
   				       
   				       // On parse le noeud motevt (mot evenement) ?
-  				       if ($data_node['motevts'] != "") {                              
+  				       if ($data_node['motevts'] != "") { 
                         $motevts = array(); 
                         if (preg_match_all($motevt_regexp['motevt'],$data_node['motevts'],$r2, PREG_SET_ORDER))
                         foreach ($r2 as $regs) {
@@ -551,7 +561,7 @@ function analyser_backend_partageur($rss){
                 				       } 
                               $motcleevt[] = $data_node_evt;                  
                             }
-                            $data_node['motevts'] = $motcleevt; ;                            
+                            $data_node['motevts'] = $motcleevt;                                                       
                         }       
                  }  				       
   				       // #noeud motevt
@@ -559,7 +569,7 @@ function analyser_backend_partageur($rss){
                 $agenda[] = $data_node;                                                     
               }  
      
-              $data['evenements'] =  serialize($agenda); 
+              $data['evenements'] =  base64_encode(serialize($agenda));  // astuce php.net
           }       
     } #noeud evenements
     
@@ -676,9 +686,11 @@ function partageur_insert_mode_article($id_objet, $mot_titre, $groupe_titre, $mo
                                       'type' => $type));                                      
         }
             
-        sql_insertq("spip_mots_".$objet_lie."s", array(
-                                      'id_mot' => intval($id_mot), 
-                                      "id_".$objet_lie => intval($id_objet)));
+        sql_insertq("spip_mots_liens", array(
+                                      'id_mot'   => intval($id_mot), 
+                                      'id_objet' => intval($id_objet),
+                                      'objet' => $objet_lie
+                                      ));
                    
    } else {
       spip_log("partageur pas de groupe-clé import specifie");
