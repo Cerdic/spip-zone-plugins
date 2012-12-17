@@ -215,7 +215,11 @@ function rechercher_presence_liens_spammes($liens,$seuil,$table,$champs,$condsta
 	foreach($hosts as $h){
 		$like = " LIKE ".sql_quote("%$h%");
 		$where = $condstatut . "(".implode("$like OR ",$champs)."$like)";
-		if (sql_countsel($table,$where)>=$seuil){
+		if (($n=sql_countsel($table,$where))>=$seuil){
+			// loger les 10 premiers messages concernes pour aider le webmestre
+			$all = sql_allfetsel(id_table_objet($table),$table,$where,'','','0,10');
+			$all = array_map('reset',$all);
+			spip_log("$n liens trouves $like dans table $table (".implode(",",$all)." [champs ".implode(',',$champs),"]","nospam");
 			return $h;
 		}
 	}
