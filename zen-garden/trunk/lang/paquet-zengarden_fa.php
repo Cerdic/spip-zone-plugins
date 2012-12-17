@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Z
 	'zengarden_description' => ' ',
-	'zengarden_slogan' => 'باغ ذن براي اسپيپ '
+	'zengarden_slogan' => 'باغ ذن براي اسپيپ ' # MODIF
 );
 
 ?>
