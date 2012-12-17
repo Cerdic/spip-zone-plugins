@@ -19,9 +19,9 @@
 </div>
 
 <!--affiche_milieu-->
-<div class="ajax">
-#FORMULAIRE_ENVOYER_NEWSLETTER{#ID_NEWSLETTER,#STATUT|=={publie}|oui}
-</div>
+[<div class="ajax">
+(#FORMULAIRE_ENVOYER_NEWSLETTER{#ID_NEWSLETTER,#STATUT|=={publie}|?{'',<:newsletter:info_publier_pour_envoyer:>}})
+</div>]
 
 
 <div id="wysiwyg">
