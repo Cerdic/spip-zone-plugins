@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Déclaration des alias de tables et filtres automatiques de champs
  */
-function mailshots_declarer_tables_interfaces($interfaces) {
+function mailshot_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['mailshot'] = 'mailshot';
 
@@ -22,7 +22,7 @@ function mailshots_declarer_tables_interfaces($interfaces) {
 /**
  * Déclaration des objets éditoriaux
  */
-function mailshots_declarer_tables_objets_sql($tables) {
+function mailshot_declarer_tables_objets_sql($tables) {
 
 	$tables['spip_mailshot'] = array(
 		'type' => 'mailshot',

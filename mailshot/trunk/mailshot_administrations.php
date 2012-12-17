@@ -15,10 +15,11 @@ function mailshot_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	$maj['create'] = array(
-		array('maj_tables', array('spip_mailshots')),
+		array('maj_tables', array('spip_mailshot')),
 	);
-	$maj['0.1.1'] = array(
-		array('maj_tables', array('spip_mailshots')),
+
+	$maj['0.1.4'] = array(
+		array('maj_tables', array('spip_mailshot')),
 	);
 
 	include_spip('base/upgrade');
