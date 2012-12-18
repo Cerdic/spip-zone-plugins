@@ -13,6 +13,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'alexa_activate' => 'Activer Alexa',
 	'alexa_id' => 'Identifiant du site pour Alexa',
 
+	// B
+	'bing_webmaster' => 'Bing Webmaster Tools',
+	'bing_webmaster_activate' => 'Activer Bing Webmaster Tools',
+	'bing_webmaster_id' => 'Meta code de vérification',
+	
 	// C
 	'canonical_url' => 'URL Canoniques',
 	'canonical_url_activate' => 'Activer les URL Canoniques',
