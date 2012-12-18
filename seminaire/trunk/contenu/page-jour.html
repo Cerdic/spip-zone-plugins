@@ -6,10 +6,11 @@
 
 ]
 
-
+[(#PLUGIN{kitcnrs}|non)
 	<p id="chemin">
 		<a href="#URL_SITE_SPIP"><:accueil_site:></a> &gt; <:seminaire:aujour:>
 	</p>
+]
 <div id="texte">
 <BOUCLE_mot_evenements(MOTS){type=Type}>
 
@@ -21,7 +22,8 @@
 	<ul class="liste-items evenements">
 	<BOUCLE_ev(EVENEMENTS){date_debut<=#ENV{date}|replace{00:00:00, 23:59:59}}{date_fin>=#ENV{date}}{par date_debut}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{titre_mot=#_mot_evenements:TITRE}>
 		<li class="item">
-			<h3>#INFO_TITRE{article,#ID_ARTICLE}</h3>#MODELE{evenement_vevent}
+			<h3>#INFO_TITRE{article,#ID_ARTICLE}</h3>
+			#MODELE{evenement_vevent}
 			<a href="#URL_ARTICLE{#ID_ARTICLE}"><:seminaire:plus:> : #INFO_TITRE{article, #ID_ARTICLE}</a>
 		</li>
 	</BOUCLE_ev>
