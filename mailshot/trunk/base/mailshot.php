@@ -78,4 +78,26 @@ function mailshot_declarer_tables_objets_sql($tables) {
 
 
 
+/**
+ * Déclaration des tables secondaires (liaisons)
+ */
+function mailshot_declarer_tables_auxiliaires($tables) {
+
+	$tables['spip_mailshot_destinataires'] = array(
+		'field' => array(
+			"id_mailshot"      => "bigint(21) DEFAULT '0' NOT NULL",
+			"email"              => "varchar(256) NOT NULL DEFAULT ''",
+			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
+			"statut"             => "char(4)  DEFAULT 'todo' NOT NULL", // todo, sent, fail, [read, [clic]]
+		),
+		'key' => array(
+			"PRIMARY KEY"        => "id_mailshot,email",
+			"KEY email"  => "email",
+			"KEY statut"  => "statut"
+		)
+	);
+
+	return $tables;
+}
+
 ?>

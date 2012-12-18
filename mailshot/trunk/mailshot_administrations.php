@@ -21,6 +21,9 @@ function mailshot_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.1.4'] = array(
 		array('maj_tables', array('spip_mailshot')),
 	);
+	$maj['0.2.0'] = array(
+		array('maj_tables', array('spip_mailshot_destinataires')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

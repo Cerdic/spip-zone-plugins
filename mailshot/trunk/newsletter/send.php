@@ -57,7 +57,7 @@ function newsletter_send_dist($destinataire,$corps,$options=array()){
 	// refuser si pas de reglage specifique d'envoi mailshot et que facteur est configure pour utiliser mail()
 	if ($config['mailer']=='defaut' AND lire_config("facteur_smtp")=='non'){
 		$url_config = generer_url_ecrire("configurer_mailshot");
-		spip_log("mailer non configure pour l'envoi de $corps a ".$destinataire['email'],'mailshot'._LOG_ERREUR);
+		spip_log("mailer non configure pour l'envoi de $corps a ".$destinataire['email'],'mailshot_send'._LOG_ERREUR);
 		return _T('mailshot:erreur_aucun_service_configure',array('url'=>$url_config));
 	}
 
@@ -125,7 +125,7 @@ function newsletter_send_dist($destinataire,$corps,$options=array()){
 			))){
 
 		$url_config = generer_url_ecrire("configurer_mailshot");
-		spip_log("mailer non configure pour l'envoi de $corps a ".$destinataire['email'],'mailshot'._LOG_ERREUR);
+		spip_log("mailer non configure pour l'envoi de $corps a ".$destinataire['email'],'mailshot_send'._LOG_ERREUR);
 		return _T('mailshot:erreur_aucun_service_configure',array('url'=>$url_config));
 	}
 
@@ -135,7 +135,7 @@ function newsletter_send_dist($destinataire,$corps,$options=array()){
 	if (empty($from) AND empty($mailer->From)) {
 		$from = $GLOBALS['meta']["email_envoi"];
 		if (empty($from) OR !email_valide($from)) {
-			spip_log("Meta email_envoi invalide. Le mail sera probablement vu comme spam.","mailshot");
+			spip_log("Meta email_envoi invalide. Le mail sera probablement vu comme spam.","mailshot_send");
 			$from = $dest_email;
 		}
 	}
@@ -190,11 +190,11 @@ function newsletter_send_dist($destinataire,$corps,$options=array()){
 
 	// Et c'est parti on envoie enfin
 	spip_log("mail via mailshot\n$head"."Destinataire:".print_r($destinataire['email'],true),'mail');
-	spip_log("mail "."a :".print_r($destinataire['email'],true)."\n".trim($head),'mailshot'._LOG_DEBUG);
+	spip_log("mail "."a :".print_r($destinataire['email'],true)."\n".trim($head),'mailshot_send'._LOG_DEBUG);
 	$retour = $mailer->Send();
 
 	if (!$retour) {
-		spip_log("Erreur Envoi mail via Facteur : ".print_r($mailer->ErrorInfo,true),'mailshot'._LOG_ERREUR);
+		spip_log("Erreur Envoi mail via Facteur : ".print_r($mailer->ErrorInfo,true),'mailshot_send'._LOG_ERREUR);
 		return $mailer->ErrorInfo;
 	}
 
