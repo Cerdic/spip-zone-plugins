@@ -33,11 +33,20 @@ function inc_instituer_forms_donnee_dist($id_form, $id_donnee, $statut, $rang=NU
 	"<b>" .
 	_T("$pi18n:texte_donnee_statut") .
 	"</b>" .
-	"\n<select name='statut_nouv' size='1' class='fondl'\n" .
-	"onchange=\"this.nextSibling.nextSibling.src='" .
-	_DIR_PLUGIN_FORMS."img_pack/".
-	"' + puce_statut(options[selectedIndex].value);" .
-	" setvisibility('valider_statut', 'visible');\">\n";
+	
+	//--LLM 2012-12-17 TEST
+	"<span class=\"show\">" .
+	//-- FIN TEST
+	
+	"\n<select name='statut_nouv' size='1' class='fondl select statut'\n" . ">";
+	//--LLM 2012-12-17 TEST
+	
+	// "onchange=\"this.nextSibling.nextSibling.src='" .
+	// _DIR_PLUGIN_FORMS."img_pack/".
+	// "' + puce_statut(options[selectedIndex].value);" .
+	// " setvisibility('valider_statut', 'visible');\">\n";
+	
+	//-- FIN TEST
 
 	$atts = array(
 	"prepa"=>"style='background-color: white'",
@@ -58,18 +67,41 @@ function inc_instituer_forms_donnee_dist($id_form, $id_donnee, $statut, $rang=NU
 				trim($lib) .
 				"</option>\n";
 	}
+	
+	
 
 	if (version_compare($GLOBALS['spip_version_code'],'1.9250','>'))
 		$puce = inserer_attribut(puce_statut($statut),'alt','');
 	else 
 		$puce = http_img_pack("puce-".puce_statut($statut).'.gif', "", "border='0'");
 	$res .=	"</select>" .
-	" &nbsp; $puce &nbsp;\n";
+	//--LLM 2012-12-17 TEST
+	"";
+	// " &nbsp; $puce &nbsp;\n";
+	
+	
+	
+		$res.="
+		</span>
+		<script type=\"text/javascript\">
+			function update_select(statut_default){
+				jQuery(this).attr('style',jQuery(this.options[this.selectedIndex]).attr('style')).closest('form').find('.boutons').css('visibility',this.options[this.selectedIndex].value==statut_default?'hidden':'visible');
+			}
+			jQuery(function(){
+				jQuery(\".verifformok .show select\")
+				.each(function(){update_select.apply(this,['".$statut."']);})
+				.bind('change',function(){update_select.apply(this,['".$statut."']);})
+				.bind('keyup',function(){update_select.apply(this,['".$statut."']);});
+			});
+		</script>";
+	//-- FIN TEST
+	
+	
 	if ($rang!==NULL){
 		$res .= "<input name='rang_nouv' size='4' class='fondl' value='$rang' onchange=\"setvisibility('valider_statut', 'visible');\" />";
 	}
 	$res .= "<span class='visible_au_chargement' id='valider_statut'>" .
-	"<input type='submit' value='"._T('bouton_valider')."' class='fondo' />" .
+	"<input type='submit' value='"._T('bouton_valider')."' class='fondo boutons' />" .
 	"</span>" .
 	 "</center>"
 	. '</div>';

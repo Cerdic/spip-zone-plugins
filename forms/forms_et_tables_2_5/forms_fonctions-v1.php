@@ -354,6 +354,14 @@ if(!function_exists('ajax_action_auteur')) {
 		return pipeline('forms_ajoute_styles',$texte);
 	}
 
+	if(!function_exists("ajax_action_declencheur")){
+		function ajax_action_declencheur($request, $noeud, $fct_ajax='') {
+			if (strpos($request, 'this') !== 0)
+				$request = "'".$request."'";
+			return '"return AjaxSqueeze2(' . $request . ",'" . $noeud . "'," . ($fct_ajax ? $fct_ajax : "''") . ',event)"';
+		}
+	}
+	
 	if(!function_exists("mySel")){
 function mySel($varaut,$variable, $option = NULL) {
 	$res = ' value="'.$varaut.'"' . (($variable==$varaut) ? ' selected="selected"' : '');
