@@ -72,22 +72,25 @@ function newsletter_send_dist($destinataire,$corps,$options=array()){
 	if (!$corps['sujet'])
 		return "il faut un sujet !";
 
+	$corps_cont = array();
+
 	// proceder au remplacement des variables contextuelles du destinataire
 	$contextualize = charger_fonction("contextualize","newsletter");
-	$corps['html'] = $contextualize($corps['html'], $destinataire);
-	$corps['texte'] = $contextualize($corps['texte'], $destinataire);
+	$corps_cont['sujet'] = $contextualize($corps['sujet'], $destinataire);
+	$corps_cont['html'] = $contextualize($corps['html'], $destinataire);
+	$corps_cont['texte'] = $contextualize($corps['texte'], $destinataire);
 
 	// preparer les messages : generer un texte si manquant ou un html si manquant ?
-	if (!$corps['html']){
-		$corps['html'] = recuperer_fond("emails/texte",array('texte'=>$corps['texte'],'sujet'=>$corps['sujet']));
+	if (!$corps_cont['html']){
+		$corps_cont['html'] = recuperer_fond("emails/texte",array('texte'=>$corps_cont['texte'],'sujet'=>$corps_cont['sujet']));
 	}
-	elseif (!$corps['texte']){
+	elseif (!$corps_cont['texte']){
 		// tant pis... : pas de bras, pas de chocolat
 	}
 
 	// Mode test ?
 	if ($options['test'])
-		$corps['sujet'] = "["._T('newsletter:info_test_sujet')."] " . $corps['sujet'];
+		$corps_cont['sujet'] = "["._T('newsletter:info_test_sujet')."] " . $corps_cont['sujet'];
 
 	// TODO : ajouter le tracking (1 image tracker + clic tracking sur les liens)
 
@@ -97,7 +100,7 @@ function newsletter_send_dist($destinataire,$corps,$options=array()){
 	if (!function_exists('nettoyer_titre_email'))
 		$envoyer_mail = charger_fonction('envoyer_mail','inc'); // pour nettoyer_titre_email()
 
-	$sujet = nettoyer_titre_email($corps['sujet']);
+	$sujet = nettoyer_titre_email($corps_cont['sujet']);
 	$dest_email = $destinataire['email'];
 
 	// mode TEST : forcer l'email
@@ -117,8 +120,8 @@ function newsletter_send_dist($destinataire,$corps,$options=array()){
 			array(
 				'email' => $dest_email,
 				'sujet' => $sujet,
-				'html' => &$corps['html'],
-				'texte' => &$corps['texte'],
+				'html' => &$corps_cont['html'],
+				'texte' => &$corps_cont['texte'],
 			))){
 
 		$url_config = generer_url_ecrire("configurer_mailshot");
