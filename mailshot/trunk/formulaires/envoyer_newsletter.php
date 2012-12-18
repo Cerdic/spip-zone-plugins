@@ -17,6 +17,7 @@ function formulaires_envoyer_newsletter_charger_dist($id_newsletter,$mode_test=f
 		'email_test' => $GLOBALS['visiteur_session']['email'],
 		'liste' => '',
 		'_mode_test' => $mode_test?$mode_test:'',
+		'_id_newsletter' => $id_newsletter,
 	);
 
 	if (!$mode_test){

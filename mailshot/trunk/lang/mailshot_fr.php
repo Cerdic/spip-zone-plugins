@@ -23,11 +23,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_envoi_programme_nb_destinataires' => 'Envoi programmé vers @nb@ destinataires',
 	'info_1_mailsubscriber' => '1 inscrit',
 	'info_nb_mailsubscribers' => '@nb@ inscrits',
+	'info_1_mailshot' => '1 envoi',
+	'info_nb_mailshot' => '@nb@ envois',
+
+	'info_statut_pause' => 'Pause',
+	'info_statut_processing' => 'En cours',
+	'info_statut_end' => 'Fini',
+	'info_statut_cancel' => 'Annulé',
+	'info_statut_poubelle' => 'Poubelle',
+
 
 	// L
+	'label_sujet' => 'Sujet',
 	'label_mailer_defaut' => 'Utiliser le même service d\'envoi que pour les autres mails',
 	'label_mailer_defaut_desactive' => '(aucun service d\'envoi configuré par défaut)',
 	'label_mailer_smtp' => 'Serveur SMTP',
+	'label_control_pause' => 'Pause',
+	'label_control_play' => 'Relancer',
+	'label_control_stop' => 'Abandonner',
 
 	'legend_configuration_adresse_envoi' => 'Adresse d\'envoi',
 	'legend_configuration_mailer' => 'Service d\'envoi des mails',
