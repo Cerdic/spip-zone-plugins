@@ -18,13 +18,18 @@ function seo_insert_head($flux) {
 	if ($config['insert_head']['activate'] == 'yes') {
 		$contexte = $GLOBALS['contexte'];
 		unset($contexte['lang']);
+		unset($contexte['date']);
+		unset($contexte['date_default']);
+		unset($contexte['date_redac']);
+		unset($contexte['date_redac_default']);
+		unset($contexte['lang']);
 		if (count($contexte) == 0) {
 			$objet = 'sommaire';
 		} elseif (isset($contexte['id_article'])) {
-			$id_objet   = $contexte['id_article'];
+			$id_objet = $contexte['id_article'];
 			$objet = 'article';
 		} elseif (isset($contexte['id_rubrique'])) {
-			$id_objet   = $contexte['id_rubrique'];
+			$id_objet = $contexte['id_rubrique'];
 			$objet = 'rubrique';
 		}
 		/* META TAGS */
@@ -37,6 +42,10 @@ function seo_insert_head($flux) {
 		/* META GOOGLE WEBMASTER TOOLS */
 		if ($config['webmaster_tools']['activate'] == 'yes' && $objet == 'sommaire') {
 			$flux .= generer_webmaster_tools();
+		}
+
+		if ($config['bing']['activate'] == 'yes' && $objet == 'sommaire') {
+			$flux .= generer_bing();
 		}
 	
 		/* CANONICAL URL */

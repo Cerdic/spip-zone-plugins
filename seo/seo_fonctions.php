@@ -168,6 +168,23 @@ function generer_webmaster_tools(){
 	return $flux;
 }
 
+
+/**
+ * Renvoyer la META BING TOOLS
+ * @return string $flux
+ */
+function generer_bing(){
+	/* CONFIG */
+	$config = unserialize($GLOBALS['meta']['seo']);
+
+	if($config['bing']['id']){
+		$flux .= '<meta name="msvalidate.01" content="'. $config['bing']['id'] .'" />
+		';
+	}
+	
+	return $flux;
+}
+
 /**
  * Renvoyer la META ALEXA
  * @return string $flux
