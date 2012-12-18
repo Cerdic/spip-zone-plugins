@@ -107,7 +107,7 @@ function exec_spiplistes_abonne_edit () {
 		($flag_editable)
 		? icone_verticale (
 				_T('admin_modifier_auteur')
-				, generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur&edit=oui")
+				, generer_url_ecrire("auteur_edit", "id_auteur=$id_auteur&edit=oui")
 				, 'redacteurs-24.gif'
 				, "edit.gif"
 				, "right"
@@ -233,7 +233,7 @@ function exec_spiplistes_abonne_edit () {
 		$page_result .= ""
 			. "</td><td></td></tr></table>\n"
 			. "<p>"._T('spiplistes:adresse_mail_obligatoire')."</p>\n"
-			. "<p><a href='".generer_url_ecrire("auteur_infos","id_auteur=$id_auteur&edit=oui")."'>"
+			. "<p><a href='".generer_url_ecrire("auteur_edit","id_auteur=$id_auteur&edit=oui")."'>"
 				._T('spiplistes:editer_fiche_abonne')."</a></p>\n"
 			;
 	}
