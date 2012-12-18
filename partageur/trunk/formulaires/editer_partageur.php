@@ -47,7 +47,7 @@ function formulaires_editer_partageur_verifier_dist($id_partageur='new', $retour
     	$ping = recuperer_lapage($url);  
     	if (!$ping) {    		
     		 $erreurs['url_site'] = _T('partageur:erreur_flux_inconnu')."<br /><a href='$url'>$url</a>";
-    	} else if ($row_site = sql_fetsel("url_site","spip_partageurs",'statut="publie" AND url_site='.sql_quote(_request('url_site'))))   
+    	} else if ($row_site = sql_fetsel("url_site","spip_partageurs",'id_partageur!='.intval($id_partageur).' AND statut="publie" AND url_site='.sql_quote(_request('url_site'))))   
     	   $erreurs['url_site'] = _T('partageur:erreur_flux_doublon');
  
 
