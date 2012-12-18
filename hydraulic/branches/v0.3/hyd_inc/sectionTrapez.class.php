@@ -106,16 +106,23 @@ class cSnTrapez extends acSection {
     }
 
     /**
-     * Calcul de la distance du centre de gravité de la section à la surface libre.
-     * @return Distance du centre de gravité de la section à la surface libre
+     * Calcul de la distance du centre de gravité de la section à la surface libre
+     * multiplié par la surface hydraulique
+     * @return S x Yg
      */
     protected function CalcSYg() {
-        if($this->Calc('S') != 0){
-            return ($this->rLargeurFond / 2 + $this->rFruit * $this->rY / 3) * pow($this->rY,2) / $this->Calc('S');
-        }
-        else{
-            return INF;
-        }
+        return ($this->rLargeurFond / 2 + $this->rFruit * $this->rY / 3) * pow($this->rY,2);
+    }
+
+    /**
+     * Calcul de la dérivée de la distance du centre de gravité de la section à la surface libre
+     * multiplié par la surface hydraulique
+     * @return S x Yg
+     */
+    protected function CalcSYgder() {
+        $SYg = $this->rFruit / 3 * pow($this->rY,2);
+        $SYg += ($this->rLargeurFond / 2 + $this->rFruit * $this->rY / 3) * 2 * $this->rY;
+        return $SYg;
     }
 
 }

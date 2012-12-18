@@ -104,11 +104,21 @@ class cSnPuiss extends acSection {
     }
 
     /**
-     * Calcul de la distance du centre de gravité de la section à la surface libre.
-     * @return Distance du centre de gravité de la section à la surface libre
+     * Calcul de la distance du centre de gravité de la section à la surface libre
+     * multiplié par la surface hydraulique
+     * @return S x Yg
      */
     protected function CalcSYg() {
         return $this->Calc('Alpha')*pow($this->rY, $this->rk+2)/(($this->rk+1)*($this->rk+2));
+    }
+    /**
+     * Calcul de la dérivée distance du centre de gravité de la section à la surface libre
+     * multiplié par la surface hydraulique
+     * @return S x Yg
+     */
+    protected function CalcSYgder() {
+        $SYg = $this->Calc('dAlpha')*pow($this->rY, $this->rk+2) + $this->Calc('Alpha')*pow($this->rY, $this->rk+1)*($this->rk+2);
+        return $SYg/(($this->rk+1)*($this->rk+2));
     }
 
 }

@@ -406,6 +406,76 @@ class cOuvrage {
                     }
                 }
             }
+        case 2 : // Loi de seuil et vanne Cemagref
+            $mu0 = 2 / 3 * $tP['C'];
+            if($tP['ZM']<=$tP['W']) {
+                // Surface libre
+                $bSurfLibre = true;
+                $alpha = 0.75;
+            }
+            else {
+                // Ecoulements en charge
+                $bSurfLibre = false;
+                $alpha = 1 - 0.14 * $tP['ZV'] / $tP['W'];
+                if($alpha < 0.4) {$alpha = 0.4;}
+                if($alpha > 0.75) {$alpha = 0.75;}
+            }
+            if($tP['ZV'] <= $alpha * $tP['ZM']) {
+                // Ecoulement dénoyé
+                $bDenoye = true;
+            }
+            else { // Ecoulement noyé
+                $bdenoye = false;
+                $x = sqrt(1 - $tP['ZV'] / $tP['ZM']);
+                $beta = -2 * $alpha + 2.6;
+                if ($x > 0.2) {
+                    $KF = 1 - pow(1 - $x / sqrt(1 - $alfa), $beta);
+                }
+                else {
+                    $KF= 5 * $x * (1 - pow(1 - 0.2 / sqrt(1 - $alfa), $beta));
+                }
+            }
+            if($bSurfLibre) { // Seuil
+                $muf=$mu0-0.08;
+                $Q = $muf * $tP['L'] * self::R2G * pow($tP['ZM'],1.5);
+                if($bDenoye) { // Seuil dénoyé
+                    return array($Q,1);
+                }
+                else { // Seuil noyé
+                    $Q = $KF * $Q;
+                    return array($Q,2);
+                }
+            }
+            else { // Vanne
+                $mu = $mu0 - 0.08 / ($tP['ZM'] / $tP['W']);
+                $mu1 = $mu0 - 0.08 / ($tP['ZM'] / $tP['W'] - 1);
+                if($bdenoye) { // Vanne dénoyée
+                    $Q = $tP['L'] * self::R2G * ($mu * pow($tP['ZM'],1.5) - $mu1 * pow($tP['ZM'] - $tP['W'],1.5));
+                    return array($Q,3);
+                }
+                else {
+                    $alfa1 = 1 - 0.14 * ($tP['ZV'] - $tP['W']) / $tP['W'];
+                    if ($alfa1<0.4) {$alfa1 = 0.4;}
+                    if ($alfa1>0.75) {$alfa1 = 0.75;}
+                    if($tP['ZV'] <= $alfa1 * $tP['ZM'] + (1 - $alfa1) * $tP['W']) {
+                        // Vanne partiellement noyée
+                        $Q = $tP['L'] * self::R2G * ($KF * $mu * pow($tP['ZM'],1.5) - $mu1 * pow($tP['ZM'] - $tP['W'],1.5));
+                        return array($Q,4);
+                    }
+                    else { // Vanne totalement noyée
+                        $x1 = sqrt(1 - ($tP['ZV'] - $tP['W']) / ($tP['ZM'] - $tP['W']));
+                        $beta1 = -2 * $alfa1 + 2.6;
+                        if ($x1 > 0.2) {
+                            $KF1 = 1 - pow(1 - $x1 / sqrt(1 - $alfa1), $beta1);
+                        }
+                        else {
+                            $KF1 = 5*  $x1 * (1 - pow(1 - 0.2 / sqrt(1 - $alfa1), $beta1));
+                        }
+                        $Q = $tP['L'] * self::R2G * ($KF * $mu * pow($tP['ZM'],1.5) - $KF1 * $mu1 * pow($tP['ZM'] - $tP['W'],1.5));
+                        return array($Q,5);
+                    }
+                }
+            }
         case 3 : // Equation classique du seuil dénoyé
             return $this->SeuilDen($rC,$rZ);
         case 4 : // Equation du seuil noyé

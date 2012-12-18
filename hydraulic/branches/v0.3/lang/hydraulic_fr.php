@@ -62,11 +62,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'h_amont_imposee' => "Hauteur d'eau imposée à l'amont (m)",
     'h_aval_imposee'  => "Hauteur d'eau aval imposée (m)",
     'h_berge'         => "Hauteur de berge (m)",
+    'h_conjuguee'      => "Hauteur conjuguée",
     'h_critique'      => "Hauteur critique",
     'h_normale'       => "Hauteur normale",
     'h_pelle'         => "Hauteur de pelle (m)",
     //I
-    'impulsion'       => "Impulsion",
+    'impulsion'       => "Impulsion (N)",
     // L
     'largeur_fond'    => "Largeur au fond (m)",
     'largeur_berge'   => "Largeur au niveau des berges",
