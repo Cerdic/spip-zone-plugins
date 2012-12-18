@@ -10,11 +10,11 @@
 			<li class="fieldset">
 				<h3 class="legend">[(#CHEMIN{img_pack/google_analytics-24.png}|image_reduire{0,24})] <:seo:google_analytics:></h3>
 				<ul>
-					<li class="editer_analytics_activate">
+					<li class="editer editer_analytics_activate">
 						<label for="analytics_activate"><:seo:google_analytics_activate:></label>
-						<input type="checkbox" value="yes" name="activate" id="analytics_activate"[(#ENV{activate}|=={yes}|oui)checked="checked"] onChange="active_analytics($(this), $('.editer_analytics_id'))"/>
+						<input type="checkbox" value="yes" name="activate" id="analytics_activate"[(#ENV{activate}|=={yes}|oui)checked="checked"] onChange="active_analytics(jQuery(this), jQuery('.editer_analytics_id'))"/>
 					</li>
-					<li class="editer_analytics_id">
+					<li class="editer editer_analytics_id">
 						<label for="analytics_id"><:seo:google_analytics_id:></label>
 						<input type="text" name="analytics_id" value="#ENV{analytics_id}" id="analytics_id" class="text" />
 					</li>
@@ -28,9 +28,9 @@
 </form>
 <script type="text/javascript">
 	function active_analytics(checkbox, form) {
-		(checkbox.attr('checked')==true) ? form.slideDown()  : form.slideUp();
+		checkbox.is(':checked') ? form.slideDown()  : form.slideUp();
 	}
 	[(#ENV{activate}|=={yes}|non)
-	$('.editer_analytics_id').hide();]
+	jQuery('.editer_analytics_id').hide();]
 </script>
 </div>

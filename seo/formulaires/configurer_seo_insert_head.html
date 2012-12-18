@@ -10,12 +10,12 @@
 			<li class="fieldset">
 				<h3 class="legend"><:seo:insert_head:></h3>
 				<ul>
-					<li class="editer_insert_head_activate">
+					<li class="editer editer_insert_head_activate">
 						<p class="explication"><:seo:insert_head_descriptif:></p>
 						<label for="insert_head_activate"><:seo:insert_head_activate:></label>
 						<input type="checkbox" value="yes" name="activate" id="insert_head_activate"[(#ENV{activate}|=={yes}|oui)checked="checked"] />
 					</li>
-					<li class="editer_forcer_squelette">
+					<li class="editer editer_forcer_squelette">
 						<p class="explication"><:seo:forcer_squelette_descriptif:></p>
 						<label for="forcer_squelette"><:seo:forcer_squelette_label:></label>
 						<input type="checkbox" value="yes" name="forcer_squelette" id="forcer_squelette"[(#ENV{forcer_squelette}|=={yes}|oui)checked="checked"] />

@@ -12,7 +12,7 @@
 				<ul>
 					<li class="editer editer_alexa_activate">
 						<label for="alexa_activate"><:seo:alexa_activate:></label>
-						<input type="checkbox" value="yes" name="activate" id="alexa_activate"[(#ENV{activate}|=={yes}|oui)checked="checked"] onChange="active_alexa($(this), $('.editer_alexa_id'))"/>
+						<input type="checkbox" value="yes" name="activate" id="alexa_activate"[(#ENV{activate}|=={yes}|oui)checked="checked"] onChange="active_alexa(jQuery(this), jQuery('.editer_alexa_id'))"/>
 					</li>
 					<li class="editer editer_alexa_id">
 						<label for="alexa_id"><:seo:alexa_id:></label>
@@ -28,9 +28,9 @@
 </form>
 <script type="text/javascript">
 	function active_alexa(checkbox, form) {
-		(checkbox.attr('checked')==true) ? form.slideDown()  : form.slideUp();
+		checkbox.is(':checked') ? form.slideDown()  : form.slideUp();
 	}
 	[(#ENV{activate}|=={yes}|non)
-	$('.editer_alexa_id').hide();]
+	jQuery('.editer_alexa_id').hide();]
 </script>
 </div>
