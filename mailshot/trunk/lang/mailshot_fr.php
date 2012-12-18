@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_exemple' => 'Exemple',
 	'cfg_exemple_explication' => 'Explication de cet exemple',
-	'cfg_titre_parametrages' => 'Paramétrages',
+	'cfg_titre_parametrages' => 'Configurer l\'envoi de mails en nombre',
 
 	// E
 	'erreur_aucun_service_configure' => 'Aucun service d\'envoi configuré. <a href="@url@">Configurer un service</a>',
@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_envoi_mail_force_debug' => 'Envoi du mail forcé vers @email@ par <tt>_TEST_EMAIL_DEST</tt>',
 
 	// I
+	'info_aucun_envoi' => 'Aucun envoi',
 	'info_envoi_programme_1_destinataire' => 'Envoi programmé vers 1 destinataire',
 	'info_envoi_programme_nb_destinataires' => 'Envoi programmé vers @nb@ destinataires',
 	'info_1_mailsubscriber' => '1 inscrit',
@@ -47,6 +48,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_page_configurer_mailshot' => 'MailShot',
+	'titre_menu_mailshot' => 'Suivi des envois de mails en nombre',
+	'titre_envois_en_cours' => 'Envois en cours',
+	'titre_envois_termines' => 'Envois terminés',
 );
 
 ?>
