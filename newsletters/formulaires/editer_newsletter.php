@@ -91,19 +91,21 @@ function formulaires_editer_newsletter_traiter_dist($id_newsletter='new', $retou
 
 	if (!$baked AND $res['id_newsletter']) {
 		// mettre a jour les liens vers les articles selectionnes
-		$selection = _request('selection_articles');
 		$possibles = array('article'=>'*');
 		$liens = array();
-		foreach ($selection as $s){
-			$s = explode("|",$s);
-			list($objet,$id_objet) = $s;
-			if (isset($possibles[$objet])){
-				$liens[$objet][] = $id_objet;
+		if ($selection = _request('selection_articles')){
+			foreach ($selection as $s){
+				$s = explode("|",$s);
+				list($objet,$id_objet) = $s;
+				if (isset($possibles[$objet])){
+					$liens[$objet][] = $id_objet;
+				}
 			}
 		}
 		include_spip("action/editer_liens");
 		objet_dissocier(array("newsletter"=>$id_newsletter),$possibles);
-		objet_associer(array("newsletter"=>$id_newsletter),$liens);
+		if (count($liens))
+			objet_associer(array("newsletter"=>$id_newsletter),$liens);
 
 		// regenerer le html et texte...
 		$generer_newsletter = charger_fonction("generer_newsletter","action");
