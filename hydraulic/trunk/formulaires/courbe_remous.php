@@ -107,7 +107,7 @@ function formulaires_courbe_remous_verifier_dist(){
     $erreurs = array();
     $datas = array();
     $tChOblig= champs_obligatoires();
-    
+
     // On vérifie que les champs obligatoires sont bien là :
     foreach($tChOblig as $obligatoire) {
         if (!_request($obligatoire)) {
@@ -187,7 +187,7 @@ function formulaires_courbe_remous_traiter_dist(){
     // Enregistrement des paramètres dans les classes qui vont bien
     $oParam= new cParam($Caract_bief_rKs,$Cond_lim_rQ,$Caract_bief_rIf,$Param_calc_rPrec,$Caract_bief_rYBerge,$Cond_lim_rYaval,$Param_calc_rDx,$Caract_bief_rLong);
 
-	// Création d'un objet de type Section selon la section choisie. 
+	// Création d'un objet de type Section selon la section choisie.
     switch($crTypeSection) {
         case 'FT':
             include_spip('hyd_inc/sectionTrapez.class');
@@ -196,7 +196,7 @@ function formulaires_courbe_remous_traiter_dist(){
 
         case 'FR':
             include_spip('hyd_inc/sectionRectang.class');
-            $oSection=new cSnRectang($oLog,$oParam,$FR_rLarg);
+            $oSection=new cSnRectang($oLog,$oParam,$FR_rLargeurBerge);
             break;
 
         case 'FC':
@@ -206,7 +206,7 @@ function formulaires_courbe_remous_traiter_dist(){
 
         case 'FP':
             include_spip('hyd_inc/sectionPuiss.class');
-            $oSection=new cSnPuiss($oLog,$oParam,$FP_rCoef,$FP_rLargBerge);
+            $oSection=new cSnPuiss($oLog,$oParam,$FP_rCoef,$FP_rLargeurBerge);
             break;
 
         default:

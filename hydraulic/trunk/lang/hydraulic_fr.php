@@ -5,14 +5,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'abscisse'        => "Abscisse",
     'arret_calcul'    => "Arrêt du calcul : Hauteur critique atteinte à l'abscisse",
     'acier_lamine'    => "Acier laminé - Béton lisse",
-    //B
+    //
     'berge'           => "Berge",
     // C
     'calcul_caract'   => "Le calcul a les caractéristiques suivantes :",
     'calcul_remous'   => "Calcul d'une courbe de remous",
     'calculer_remous' => "Calculer la courbe de remous",
     'caract_bief'     => "Caractéristiques du bief",
-    'coef_strickler'  => "Coefficient de Strickler (SI)",
+    'coef_strickler'  => "Coefficient de Strickler (m<sup>1/3</sup>s<sup>-1</sup>)",
     'condition_limite'=> "Conditions aux limites",
     'calcul_fluvial'  => "Condition limite aval >= Hauteur critique : calcul de la partie fluviale à partir de l'aval",
     'calcul_torrentiel'=> "Condition limite amont <= Hauteur critique : calcul de la partie torrentielle à partir de l'amont",
@@ -30,14 +30,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'coef'            => "Coefficient",
     'cunge'           => "Cunge 1980",
     // D
-    'debit_amont'     => "Débit amont (m³/s)",
+    'debit_amont'     => "Débit amont (m<sup>3</sup>/s)",
     'def_section_trap'=> "Définition de la section trapézoïdale",
     'def_section_rect'=> "Définition de la section rectangulaire",
     'def_section_circ'=> "Définition de la section circulaire",
     'def_section_parab'=> "Définition de la section parabolique",
     'diametre'        => "Diamètre (m)",
     'donnee_calc'     => "Donnée à calculer",
-    'debit'           => "Débit (m³/s)",
+    'debit'           => "Débit (m<sup>3</sup>/s)",
     // F
     'flag_erreur_calcul'=> "Erreur de calcul",
     'flag_débit_nul'    => "Débit nul",
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'flag_surverse_den' => "Surverse dénoyée",
     'flag_surverse_noy' => "Surverse noyée",
     'fond'            => "Fond",
-    'fruit'           => "Fruit (m/m)",
+    'fruit'           => "Fruit des berges (m/m)",
     'fixer_val'       => "Paramètre fixé",
     'fonte_beton_corrosive' =>"Fonte ou acier non revêtus - Béton grossier (eau corrosive)",
     'fonte_beton_ncorrosive' =>"Fonte ou acier non revêtus - Béton grossier (eau peu corrosive)",
@@ -115,7 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'perte_charge'    => "La perte de charge (m/m)",
     //R
     'rayon_hyd'       => "Le rayon hydraulique (m)",
-    'rugosite_nc'     => "Rugosité (SI)",
+    'rugosite_nc'     => "Rugosité (Strickler en m<sup>1/3</sup>s<sup>-1</sup>)",
     //S
     'saisie_erreur'   => "Votre saisie contient des erreurs !",
     'section_trap'    => "Section Trapézoïdale",
@@ -124,7 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'section_parab'   => "Section Parabolique",
     'seuil_rect'      => "Seuil Rectangulaire",
     'seuil_trap'      => "Seuil Trapézoïdal",
-    'surf_mouille'    => "La surface mouillée (m²)",
+    'surf_mouille'    => "La surface mouillée (m<sup>2</sup>)",
     's_cemagref88'    => "Vanne de fond/Seuil Cemagref 88",
     's_denoye'        => "Seuil dénoyé",
     's_noye'          => "Seuil noyé",
@@ -148,7 +148,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'val_min'         => "De la valeur minimum",
     'val_max'         => "A la valeur maximum",
     'val_min'         => "De la Valeur minimum",
-    'val_max'         => "A la Valeur maximum",
     'vanne_circ'      => "Vanne Circulaire",
     'vanne_rect'      => "Vanne Rectangulaire",
     'vanne_trap'      => "Vanne Trapézoïdale",

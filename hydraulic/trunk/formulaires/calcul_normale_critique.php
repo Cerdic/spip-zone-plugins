@@ -236,29 +236,29 @@ function formulaires_calcul_normale_critique_traiter_dist(){
     ***************************************************************************/
     $oParam= new cParam($Cr_rKs, $Cr_rQ, $Cr_rIf, $Param_calc_rPrec, $Cr_rYB);
     switch($ncTypeSection) {
-            case 'FT':
-                include_spip('hyd_inc/sectionTrapez.class');
-                $oSection=new cSnTrapez($oLog,$oParam,$FT_rLargeurFond,$FT_rFruit);
-                break;
+		case 'FT':
+			include_spip('hyd_inc/sectionTrapez.class');
+			$oSection=new cSnTrapez($oLog,$oParam,$FT_rLargeurFond,$FT_rFruit);
+			break;
 
-            case 'FR':
-                include_spip('hyd_inc/sectionRectang.class');
-                $oSection=new cSnRectang($oLog,$oParam,$FR_rLarg);
-                break;
+		case 'FR':
+			include_spip('hyd_inc/sectionRectang.class');
+			$oSection=new cSnRectang($oLog,$oParam,$FR_rLargeurBerge);
+			break;
 
-            case 'FC':
-                include_spip('hyd_inc/sectionCirc.class');
-                $oSection=new cSnCirc($oLog,$oParam,$FC_rD);
-                break;
+		case 'FC':
+			include_spip('hyd_inc/sectionCirc.class');
+			$oSection=new cSnCirc($oLog,$oParam,$FC_rD);
+			break;
 
-            case 'FP':
-                include_spip('hyd_inc/sectionPuiss.class');
-                $oSection=new cSnPuiss($oLog,$oParam,$FP_rCoef,$FP_rLargBerge);
-                break;
+		case 'FP':
+			include_spip('hyd_inc/sectionPuiss.class');
+			$oSection=new cSnPuiss($oLog,$oParam,$FP_rCoef,$FP_rLargBerge);
+			break;
 
-            default:
-                include_spip('hyd_inc/sectionTrapez.class');
-                $oSection=new cSnTrapez($oLog,$oParam,$FT_rLargeurfond,$FT_rFruit);
+		default:
+			include_spip('hyd_inc/sectionTrapez.class');
+			$oSection=new cSnTrapez($oLog,$oParam,$FT_rLargeurfond,$FT_rFruit);
 
     }
     $oSection->rY = $Cr_rY;
@@ -293,12 +293,19 @@ function formulaires_calcul_normale_critique_traiter_dist(){
         }
     }
     else {
-        $tVarCal = array('Hs', 'Hsc', 'B', 'P', 'S', 'R', 'V', 'Fr', 'Yc', 'Yn', 'Yf', 'Yt', 'Yco', 'J', 'I-J', 'Imp', 'Tau0');
+		switch($ncTypeSection) {
+			case 'FR':
+				$tVarCal = array('Hs', 'Hsc', 'B', 'P', 'S', 'R', 'V', 'Fr', 'Yc', 'Yn', 'Yf', 'Yt', 'Yco', 'J', 'I-J', 'Imp', 'Tau0');
+				break;
+			default:
+				// Le calcul de la hauteur conjuguée n'est pas OK pour les sections autres que rectangulaire
+				$tVarCal = array('Hs', 'Hsc', 'B', 'P', 'S', 'R', 'V', 'Fr', 'Yc', 'Yn', 'Yf', 'Yt', 'J', 'I-J', 'Imp', 'Tau0');
+		}
     }
 
     $max += $pas/2;
 
-    $bNoCache = false; // true pour débugage
+    $bNoCache = true; // true pour débugage
     if(!$bNoCache && is_file(HYD_CACHE_DIRECTORY.$CacheFileName)) {
         // On récupère toutes les données dans un cache déjà créé
         $result = ReadCacheFile($CacheFileName);

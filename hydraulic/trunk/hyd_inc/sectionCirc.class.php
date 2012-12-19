@@ -179,7 +179,7 @@ class cSnCirc extends acSection {
         $cos = cos($this->Calc('Alpha'));
         $sin = sin($this->Calc('Alpha'));
         $SYg = $this->Calc('dAlpha') * $cos;
-        $SYg += - $this->Calc('dAlpha') * $cos * pow($sin,2)
+        $SYg += - $this->Calc('dAlpha') * $cos * pow($sin,2);
         $SYg += - $this->Calc('dAlpha') * $cos + $this->Calc('Alpha') * $this->Calc('dAlpha') * $sin;
         $SYg = 3 *pow($this->rD,3) / 8 * $SYg;
         return $SYg;

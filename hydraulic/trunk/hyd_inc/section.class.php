@@ -461,9 +461,18 @@ abstract class acSection {
     * Calcul du tirant d'eau conjugué.
     * @return tirant d'eau conjugué
     */
-    private function CalcYco() {
+    protected function CalcYco() {
         $oHautConj= new cHautConjuguee($this, $this->oP);
-        if(!$Yco = $oHautConj->Newton($this->CalcGeo('Yc')) or !$oHautConj->HasConverged()) {
+        // Choisir une valeur initiale du bon côté de la courbe
+        if($this->Calc('Fr') < 1) {
+			// Ecoulement fluvial, on cherche la conjuguée à partir du tirant d'eau torrentiel
+			$rY0 = $this->Calc('Yt');
+		}
+		else {
+			// Ecoulement torrentiel, on cherche la conjuguée à partir du tirant d'eau fluvial
+			$rY0 = $this->Calc('Yf');
+		}
+        if(!$Yco = $oHautConj->Newton($rY0) or !$oHautConj->HasConverged()) {
             $this->oLog->Add(_T('hydraulic:h_conjuguee').' : '._T('hydraulic:newton_non_convergence'));
         }
         return $Yco;
@@ -700,11 +709,20 @@ class cHautCorrespondante extends acNewton {
  * Calcul de la hauteur conjuguée (Impulsion égale)
  */
 class cHautConjuguee extends acNewton {
-    private $rY; // Tirant d'eau connu
-    private $rS2; // 1/S^2 associé au tirant d'eau connu
-    private $oSn; // Section contenant les données de la section avec la hauteur à calculer
-    private $rG; // Constante de gravité
-    private $rQ; // débit
+    /** Tirant d'eau connu */
+    private $rY;
+    /** 1/S^2 associé au tirant d'eau connu */
+    private $rS2;
+    /** Section contenant les données de la section avec la hauteur à calculer */
+    private $oSn;
+    /** Constante de gravité */
+    private $rG;
+    /** Carré du débit */
+    private $rQ2;
+    /** Surface hydraulique associée au tirant d'eau connu */
+    private $rS;
+    /** SYg associée au tirant d'eau connu */
+    private $rSYg;
 
     /**
      * Constructeur de la classe
@@ -714,18 +732,11 @@ class cHautConjuguee extends acNewton {
     function __construct(acSection $oSn, cParam $oP) {
         parent::__construct($oP);
         $this->rY = $oSn->rY;
-        $this->rQ = $oP->rQ;
-        if($oSn->Calc('S')>0) {
-            $this->rdV = - $this->rQ * $oSn->Calc('dS') * pow($oSn->Calc('S'),-2);
-        }
-        else {
-            $this->rdV = INF;
-        }
+        $this->rQ2 = pow($oP->rQ,2);
         $this->oSn = clone $oSn;
         $this->rG = $oP->rG;
-        $this->rV = $oSn->Calc('V');
+        $this->rS = $oSn->Calc('S');
         $this->rSYg = $oSn->Calc('SYg');
-        $this->rdSYg = $oSn->Calc('dSYg');
     }
 
     /**
@@ -733,10 +744,14 @@ class cHautConjuguee extends acNewton {
      * @param $rX Variable dont dépend la fonction
      */
     protected function CalcFn($rX) {
-
-        // Calcul de la fonction
-        $rFn = $this->rQ * ($this->rV - $this->oSn->Calc('V',$rX));
-        $rFn += $this->rG * ($this->rSYg - $this->oSn->Calc('SYg',$rX));
+        // Réinitialisation des paramètres hydrauliques de oSn avec l'appel $this->oSn->Calc('S',$rX)
+        if($this->rS > 0 && $this->oSn->Calc('S',$rX) > 0) {
+			$rFn = $this->rQ2 * (1 / $this->rS - 1 / $this->oSn->Calc('S'));
+			$rFn += $this->rG * ($this->rSYg - $this->oSn->Calc('SYg'));
+		}
+		else {
+			$rFn = -INF;
+		}
         spip_log('cHautConjuguee:CalcFn('.$rX.')='.$rFn,'hydraulic');
         return $rFn;
     }
@@ -747,9 +762,9 @@ class cHautConjuguee extends acNewton {
      */
     protected function CalcDer($rX) {
         // L'initialisation a été faite lors de l'appel à CalcFn
-        if($this->oSn->Calc('S')!=0) {
-            $rDer = $this->rQ * ($this->rdV + $this->rQ * $this->oSn->Calc('dS') * pow($this->oSn->Calc('S'),-2));
-            $rDer += $this->rG * ($this->rdSYg - $this->oSn->Calc('dSYg',$rX));
+        if($this->rS > 0 && $this->oSn->Calc('S') > 0) {
+            $rDer = $this->rQ2 * $this->oSn->Calc('dS') * pow($this->oSn->Calc('S'),-2);
+            $rDer += - $this->rG * $this->oSn->Calc('dSYg',$rX);
         }
         else {
             $rDer = -INF;

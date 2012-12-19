@@ -29,7 +29,7 @@ include_spip('hyd_inc/section.class');
  * Calculs de la section rectangulaire
  */
 class cSnRectang extends acSection {
-	
+
     function __construct(&$oLog,&$oP,$rLargeurFond) {
         $this->rLargeurBerge = $rLargeurFond;
         parent::__construct($oLog,$oP);
@@ -44,11 +44,29 @@ class cSnRectang extends acSection {
     }
 
     /**
-     * Calcul de la distance du centre de gravité de la section à la surface libre.
-     * @return Distance du centre de gravité de la section à la surface libre
+     * Calcul de la distance du centre de gravité de la section à la surface libre
+     * multiplié par la section
+     * @return SYg
      */
     protected function CalcSYg() {
         return parent::CalcSYg($this->rY);
+    }
+
+    /**
+     * Calcul de la dérivée de la distance du centre de gravité de la section à la surface libre
+     * multiplié par la section
+     * @return Dérivée de SYg par rapport à Y
+     */
+    protected function CalcSYgder() {
+        return parent::CalcSYgder($this->rY);
+    }
+
+   /**
+    * Calcul du tirant d'eau conjugué avec la formule analytique pour la section rectangulaire
+    * @return tirant d'eau conjugué
+    */
+    protected function CalcYco() {
+        return $this->rY*(sqrt(1 + 8 * pow($this->Calc('Fr'),2)) - 1) / 2;
     }
 
 }
