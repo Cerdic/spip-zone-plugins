@@ -11,6 +11,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function mailshot_autoriser(){}
 
 
-
+function autoriser_mailshot_iconifier_dist() {return false;}
 
 ?>

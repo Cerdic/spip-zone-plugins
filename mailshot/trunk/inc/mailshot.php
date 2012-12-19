@@ -51,7 +51,7 @@ function mailshot_update_meta_processing($force = false){
 	$current = ((isset($GLOBALS['meta']['mailshot_processing']) AND $GLOBALS['meta']['mailshot_processing'])?true:false);
 
 	$new = false;
-	if ($force OR sql_countsel("spip_mailshot","statut=".sql_quote('processing')))
+	if ($force OR sql_countsel("spip_mailshots","statut=".sql_quote('processing')))
 		$new = true;
 
 	if ($new OR $new!==$current){
@@ -82,7 +82,7 @@ function mailshot_envoyer_lot($nb_max=5){
 	define('_MAILSHOT_MAX_TIME',$now+15); // 15s maxi
 
 	// on traite au maximum 2 serie d'envois dans un appel
-	$shot = sql_allfetsel("*","spip_mailshot","statut=".sql_quote('processing'),'','id_mailshot','0,2');
+	$shot = sql_allfetsel("*","spip_mailshots","statut=".sql_quote('processing'),'','id_mailshot','0,2');
 	foreach($shot as $shoot){
 		spip_log("mailshot_envoyer_lot #".$shoot['id_mailshot']." ".$shoot['current']."/".$shoot['total']." (max $nb_max)","mailshot");
 
@@ -90,7 +90,7 @@ function mailshot_envoyer_lot($nb_max=5){
 		mailshot_initialiser_destinataires($shoot);
 
 		// chercher les N prochains destinataires
-		$dests = sql_allfetsel("*","spip_mailshot_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('todo'),'','',"0,$nb_max");
+		$dests = sql_allfetsel("*","spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('todo'),'','',"0,$nb_max");
 		if (count($dests)){
 			$subscriber = charger_fonction("subscriber","newsletter");
 			$send = charger_fonction("send","newsletter");
@@ -100,34 +100,34 @@ function mailshot_envoyer_lot($nb_max=5){
 				$s = $subscriber($d['email']);
 				$erreur = $send($s, $corps);
 				if ($erreur){
-					sql_updateq("spip_mailshot_destinataires",array('statut'=>'fail','date'=>date('Y-m-d H:i:s')),"id_mailshot=".intval($shoot['id_mailshot'])." AND email=".sql_quote($d['email']));
-					sql_update("spip_mailshot",array("current"=>"current+1","failed"=>"failed+1"),"id_mailshot=".intval($shoot['id_mailshot']));
+					sql_updateq("spip_mailshots_destinataires",array('statut'=>'fail','date'=>date('Y-m-d H:i:s')),"id_mailshot=".intval($shoot['id_mailshot'])." AND email=".sql_quote($d['email']));
+					sql_update("spip_mailshots",array("current"=>"current+1","failed"=>"failed+1"),"id_mailshot=".intval($shoot['id_mailshot']));
 					spip_log("mailshot_envoyer_lot #".$shoot['id_mailshot']."/".$d['email']." : $erreur","mailshot"._LOG_ERREUR);
 				}
 				else {
 					$nb++;
-					sql_updateq("spip_mailshot_destinataires",array('statut'=>'sent','date'=>date('Y-m-d H:i:s')),"id_mailshot=".intval($shoot['id_mailshot'])." AND email=".sql_quote($d['email']));
-					sql_update("spip_mailshot",array("current"=>"current+1"),"id_mailshot=".intval($shoot['id_mailshot']));
+					sql_updateq("spip_mailshots_destinataires",array('statut'=>'sent','date'=>date('Y-m-d H:i:s')),"id_mailshot=".intval($shoot['id_mailshot'])." AND email=".sql_quote($d['email']));
+					sql_update("spip_mailshots",array("current"=>"current+1"),"id_mailshot=".intval($shoot['id_mailshot']));
 					spip_log("mailshot_envoyer_lot #".$shoot['id_mailshot']."/".$d['email']." OK","mailshot");
 				}
 				$nb_max--;
 			}
 			// si $nb_max non nul verifier qu'il n'y a plus de dests sur cette envoi pour maj le statut juste en dessous
 			if ($nb_max)
-				$dests = sql_allfetsel("*","spip_mailshot_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('todo'),'','',"0,$nb_max");
+				$dests = sql_allfetsel("*","spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('todo'),'','',"0,$nb_max");
 		}
 
 		if (!count($dests)){
 			// plus de destinataires ? on a fini, on met a jour compteur et statut
-			$sent = sql_countsel("spip_mailshot_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('sent'));
-			$failed = sql_countsel("spip_mailshot_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('fail'));
+			$sent = sql_countsel("spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('sent'));
+			$failed = sql_countsel("spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('fail'));
 			$set = array(
 				'statut' => 'end',
 				'failed' => $failed,
 				'current' => $sent+$failed,
 				'date' => date('Y-m-d H:i:s'),
 			);
-			sql_updateq("spip_mailshot",$set,"id_mailshot=".intval($shoot['id_mailshot']));
+			sql_updateq("spip_mailshots",$set,"id_mailshot=".intval($shoot['id_mailshot']));
 			mailshot_update_meta_processing();
 		}
 		if (time()>_MAILSHOT_MAX_TIME) return $nb;
@@ -148,7 +148,7 @@ function mailshot_envoyer_lot($nb_max=5){
 function mailshot_initialiser_destinataires($shoot){
 
 	// verifier qu'on a bien initialise tous les destinataires
-	$nbd = sql_countsel("spip_mailshot_destinataires","id_mailshot=".intval($shoot['id_mailshot']));
+	$nbd = sql_countsel("spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot']));
 	if ($nbd<$shoot['total']){
 		spip_log("mailshot_initialiser_destinataires #".$shoot['id_mailshot']." : $nbd/".$shoot['total'],"mailshot");
 
@@ -175,9 +175,9 @@ function mailshot_initialiser_destinataires($shoot){
 					);
 				}
 
-				if (!sql_insertq_multi('spip_mailshot_destinataires',$ins)){
+				if (!sql_insertq_multi('spip_mailshots_destinataires',$ins)){
 					foreach ($ins as $i){
-						sql_insertq('spip_mailshot_destinataires',$i);
+						sql_insertq('spip_mailshots_destinataires',$i);
 						if (time()>_MAILSHOT_MAX_TIME) return;
 					}
 				}
@@ -188,9 +188,9 @@ function mailshot_initialiser_destinataires($shoot){
 
 		// ici on a fini toutes les init des destinataires
 		// on remet a jour le compteur de total au cas ou
-		$nbd = sql_countsel("spip_mailshot_destinataires","id_mailshot=".intval($shoot['id_mailshot']));
+		$nbd = sql_countsel("spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot']));
 		if ($nbd<$shoot['total'])
-			sql_updateq("spip_mailshot",array('total'=>$nbd),"id_mailshot=".intval($shoot['id_mailshot']));
+			sql_updateq("spip_mailshots",array('total'=>$nbd),"id_mailshot=".intval($shoot['id_mailshot']));
 		spip_log("mailshot_initialiser_destinataires #".$shoot['id_mailshot']." OK ($nbd)","mailshot");
 	}
 

@@ -1,0 +1,29 @@
+<BOUCLE_mailshot(MAILSHOTS){id_mailshot}{statut?}>
+
+[<div class="champ contenu_sujet[ (#SUJET*|strlen|?{'',vide})]">
+	<div class='label'><:mailshot:label_sujet:> : </div>
+	<span dir='#LANG_DIR' class='#EDIT{sujet} sujet'>(#SUJET)[ \[<a href="(#ID|mailshot_url_newsletter)" title="<:info_numero_abbreviation|attribut_html:> #ID"><:mailshot:lien_voir_newsletter:></a>\]]</span>
+</div>]
+
+[<div class="champ contenu_date_start[ (#DATE_START*|strlen|?{'',vide})]">
+	<div class='label'><:mailshot:label_date_start:> : </div>
+	<span dir='#LANG_DIR' class='#EDIT{date_start} date_start'>(#DATE_START|affdate_heure)</span>
+</div>]
+[(#STATUT|in_array{#LISTE{processing,pause}}|non)
+[<div class="champ contenu_date[ (#DATE*|strlen|?{'',vide})]">
+	<div class='label'><:mailshot:label_date_fin:> : </div>
+	<span dir='#LANG_DIR' class='#EDIT{date} date'>(#DATE|affdate_heure)</span>
+</div>]
+]
+
+[<div class="champ contenu_listes[ (#LISTES*|strlen|?{'',vide})]">
+	<div class='label'><:mailshot:label_listes:> : </div>
+	<span dir='#LANG_DIR' class='#EDIT{listes} listes'>(#LISTES)</span>
+</div>]
+
+[<div class="champ contenu_avancement">
+	<div class='label'><:mailshot:label_avancement:> : </div>
+	<span dir='#LANG_DIR' class='avancement'>(#CURRENT|mailshot_afficher_avancement{#TOTAL,#FAILED})</span>
+</div>]
+
+</BOUCLE_mailshot>

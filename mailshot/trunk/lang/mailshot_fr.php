@@ -25,7 +25,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_mailsubscriber' => '1 inscrit',
 	'info_nb_mailsubscribers' => '@nb@ inscrits',
 	'info_1_mailshot' => '1 envoi',
-	'info_nb_mailshot' => '@nb@ envois',
+	'info_nb_mailshots' => '@nb@ envois',
+	'info_1_mailshot_destinataire' => '1 destinataire',
+	'info_nb_mailshots_destinataires' => '@nb@ destinataires',
+	'info_aucun_destinataire' => 'Aucun destinataire',
 
 	'info_statut_pause' => 'Pause',
 	'info_statut_processing' => 'En cours',
@@ -33,9 +36,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_cancel' => 'Annulé',
 	'info_statut_poubelle' => 'Poubelle',
 
+	'info_statut_destinataire_todo' => 'À envoyer',
+	'info_statut_destinataire_sent' => 'Envoyé',
+	'info_statut_destinataire_read' => 'Ouvert',
+	'info_statut_destinataire_clic' => 'Cliqué',
+	'info_statut_destinataire_fail' => 'Echoué',
+
 
 	// L
+	'label_envoi' => 'Envoi',
 	'label_sujet' => 'Sujet',
+	'label_date_start' => 'Date de début d\'envoi',
+	'label_date_fin' => 'Date de fin d\'envoi',
+	'label_listes' => 'Listes',
+	'label_avancement' => 'Avancement',
+	'lien_voir_newsletter' => 'Voir l\'infolettre',
+
 	'label_mailer_defaut' => 'Utiliser le même service d\'envoi que pour les autres mails',
 	'label_mailer_defaut_desactive' => '(aucun service d\'envoi configuré par défaut)',
 	'label_mailer_smtp' => 'Serveur SMTP',
@@ -50,9 +66,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_page_configurer_mailshot' => 'MailShot',
-	'titre_menu_mailshot' => 'Suivi des envois de mails en nombre',
+	'titre_menu_mailshots' => 'Suivi des envois de mails en nombre',
 	'titre_envois_en_cours' => 'Envois en cours',
 	'titre_envois_termines' => 'Envois terminés',
+	'titre_mailshot' => 'Envoi en nombre',
+	'titre_mailshots' => 'Envois en nombre',
+	'texte_changer_statut_mailshot' => 'Cet envoi est :',
+	'texte_statut_pause' => 'en pause',
+	'texte_statut_processing' => 'en cours',
+	'texte_statut_end' => 'fini',
+	'texte_statut_cancel' => 'annulé',
+	'titre_envois_destinataires_todo' => 'Envois a venir',
+	'titre_envois_destinataires_ok' => 'Envois réussis',
+	'titre_envois_destinataires_fail' => 'Envois echoués',
+	'titre_envois_destinataires_init_encours' => 'Aucun destinataire programmé (initialisation en cours)',
 );
 
 ?>

@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function mailshot_declarer_tables_interfaces($interfaces) {
 
-	$interfaces['table_des_tables']['mailshot'] = 'mailshot';
+	$interfaces['table_des_tables']['mailshots'] = 'mailshots';
 
 	return $interfaces;
 }
@@ -24,11 +24,8 @@ function mailshot_declarer_tables_interfaces($interfaces) {
  */
 function mailshot_declarer_tables_objets_sql($tables) {
 
-	$tables['spip_mailshot'] = array(
-		'type' => 'mailshot',
-		'table_objet_surnoms'=>array('mailshot'),
-		'url_voir' => false,  // pas de vue
-		'url_edit' => false,  // pas d'edition
+	$tables['spip_mailshots'] = array(
+		'editable' => false,  // pas d'edition
 		'principale' => "oui",  // auto-increment
 		'field'=> array(
 			"id_mailshot"   => "bigint(21) NOT NULL",
@@ -68,6 +65,13 @@ function mailshot_declarer_tables_objets_sql($tables) {
 			'cancel'=>'mailshot:info_statut_cancel',
 			'poubelle'=>'mailshot:info_statut_poubelle',
 		),
+		'statut_textes_instituer' => array(
+			'pause'=>'mailshot:texte_statut_pause',
+			'processing'=>'mailshot:texte_statut_processing',
+			'end'=>'mailshot:texte_statut_end',
+			'cancel'=>'mailshot:texte_statut_cancel',
+			'poubelle' => 'texte_statut_poubelle',
+		),
 		'texte_changer_statut' => 'mailshot:texte_changer_statut_mailshot',
 
 	);
@@ -82,7 +86,7 @@ function mailshot_declarer_tables_objets_sql($tables) {
  */
 function mailshot_declarer_tables_auxiliaires($tables) {
 
-	$tables['spip_mailshot_destinataires'] = array(
+	$tables['spip_mailshots_destinataires'] = array(
 		'field' => array(
 			"id_mailshot"      => "bigint(21) DEFAULT '0' NOT NULL",
 			"email"              => "varchar(256) NOT NULL DEFAULT ''",

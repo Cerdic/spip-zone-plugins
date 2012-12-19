@@ -48,14 +48,13 @@ function newsletter_bulkstart_dist($corps,$listes = array(),$options=array()){
 		'listes' => implode(',',$listes),
 		'total' => $count,
 		'current' => 0,
-		'next' => 0,
 		'failed' => 0,
 		'date' => $now,
 		'date_start' => $now,
 		'statut' => $options['statut'],
 	);
 
-	$id_mailshot = sql_insertq("spip_mailshot",$bulk);
+	$id_mailshot = sql_insertq("spip_mailshots",$bulk);
 
 	if ($id_mailshot){
 		include_spip('inc/mailshot');

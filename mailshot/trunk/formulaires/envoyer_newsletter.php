@@ -94,7 +94,7 @@ function formulaires_envoyer_newsletter_traiter_dist($id_newsletter,$mode_test=f
 		$bulkstart = charger_fonction("bulkstart","newsletter");
 
 		if ($id_mailshot = $bulkstart($id_newsletter, $listes)){
-			$total = sql_getfetsel('total','spip_mailshot','id_mailshot='.intval($id_mailshot));
+			$total = sql_getfetsel('total','spip_mailshots','id_mailshot='.intval($id_mailshot));
 			$res = array('message_ok'=>singulier_ou_pluriel($total,'mailshot:info_envoi_programme_1_destinataire','mailshot:info_envoi_programme_nb_destinataires'));
 			set_request('liste','');
 		}

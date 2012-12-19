@@ -5,9 +5,9 @@
 	points,-1
 }})]#SET{autoreload,''}<B_mailshot>
 #ANCRE_PAGINATION
-<div class="liste-objets mailshot">
+<div class="liste-objets mailshots">
 <table class='spip liste'>
-	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{mailshot:info_1_mailshot,mailshot:info_nb_mailshot}})</strong></caption>]
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{mailshot:info_1_mailshot,mailshot:info_nb_mailshots}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
@@ -19,13 +19,16 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_mailshot(MAILSHOT){id?}{where?}{statut?}{recherche?}{tri #ENV{par,id_mailshot},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+	<BOUCLE_mailshot(MAILSHOTS){id?}{where?}{statut?}{recherche?}{tri #ENV{par,id_mailshot},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
-			<td class='statut'>[(#STATUT|puce_statut{mailshot,#ID_MAILSHOT})]</td>
-			<td class='id_mailshot'>#ID_MAILSHOT</td>
-			<td class='sujet principale'><a href="[(#ID|generer_url_entite{newsletter})]" title="<:info_numero_abbreviation|attribut_html:> #ID">[(#SUJET|couper{50})]</a></td>
+			<td class='statut'>[(#STATUT|mailshot_puce_statut{mailshot,#ID_MAILSHOT})]</td>
+			<td class='id_mailshot'><a href="[(#ID_MAILSHOT|generer_url_entite{mailshot})]" title="<:mailshot:label_envoi|attribut_html:> <:info_numero_abbreviation|attribut_html:>#ID_MAILSHOT">#ID_MAILSHOT</a></td>
+			<td class='sujet principale'>
+				<a href="[(#ID_MAILSHOT|generer_url_entite{mailshot})]">[(#SUJET|couper{50})]</a>
+				[<span class="small">\[<a href="(#ID|mailshot_url_newsletter)" title="<:info_numero_abbreviation|attribut_html:> #ID"><:mailshot:lien_voir_newsletter:></a>\]</span>]
+			</td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
-			<td class='progress'>#CURRENT/#TOTAL[(#FAILED|oui)\(#FAILED fail\)]</td>
+			<td class='progress'>[(#CURRENT|mailshot_afficher_avancement{#TOTAL,#FAILED})]</td>
 			<td class='action'>
 			[(#AUTORISER{instituer,mailshot,#ID_MAILSHOT}|oui)
 			[(#STATUT|in_array{#LISTE{processing}}|oui)
