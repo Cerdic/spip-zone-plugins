@@ -15,6 +15,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'alexa_activate' => 'Aktivovať Alexu',
 	'alexa_id' => 'Identifikátor stránky na Alexu',
 
+	// B
+	'bing_webmaster' => 'Bing Webmaster Tools', # NEW
+	'bing_webmaster_activate' => 'Activer Bing Webmaster Tools', # NEW
+	'bing_webmaster_id' => 'Meta code de vérification', # NEW
+
 	// C
 	'canonical_url' => 'Kanonická podoba adries',
 	'canonical_url_activate' => 'Aktivovať kanonickú podobu adries',
