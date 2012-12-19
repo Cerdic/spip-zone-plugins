@@ -89,12 +89,20 @@ class cOuvrage {
      * @param $tP Tableaux des caractéristiques à l'ouvrage (largeur...)
      * @param $nLoiSurverse Loi de débit de la surverse
      */
-    public function __construct(&$oLog,$nLoi, $tP, $nLoiSurverse = 0) {
+    public function __construct(&$oLog, $tP) {
         $this->oLog = &$oLog;
-        $this->nL = $nLoi;
-        $this->nLS = $nLoiSurverse;
+        if(isset($tP['OuvrageLoi'])) {
+            $this->nL = $tP['OuvrageLoi'];
+        }
+        if(isset($tP['SurverseLoi'])) {
+            $this->nLS = $tP['SurverseLoi'];
+        }
+        else {
+            $this->nLS = 0;
+        }
         $this->tP = $tP;
-        //spip_log($this,'hydraulic');
+        if(!isset($this->tP['C'])) {$this->tP['C']=0;} // Pour les lois trapézoïdales CEM02
+        spip_log($this,'hydraulic');
     }
 
 
@@ -105,6 +113,7 @@ class cOuvrage {
      */
     public function Set($sMaj,$rMaj) {
         $this->tP[$sMaj] = $rMaj;
+        spip_log("cOuvrage->Set($sMaj,$rMaj)",'hydraulic');
     }
 
 
@@ -125,7 +134,6 @@ class cOuvrage {
      * - 12 : surverse noyé
      */
     public function Calc($sCalc,$rInit=0.) {
-        //print_r($this->tP);
         // Calcul du débit (facile !)
         if($sCalc=='Q') {
             return $this->OuvrageQ();
@@ -150,7 +158,7 @@ class cOuvrage {
             list($Q,$nFlag) = $this->OuvrageQ();
             $Q1 = $Q;
             $Q2 = $Q;
-            //echo "\n".'nIterMax='.$nIterMax.'  XMinInit='.$XMinInit.'  XMaxInit='.$XMaxInit.'  DX='.$DX;
+            //echo "\nQT=$QT nIterMax=$nIterMax XMinInit=$XMinInit XMaxInit=$XMaxInit DX=$DX";
 
 
             for($nIter=1;$nIter<=$nIterMax;$nIter++) {
@@ -181,11 +189,13 @@ class cOuvrage {
                     $Q1 = $Q;
                     $X1 = $Xmin;
                 }
+
 /*
                 echo "\n".'nIter='.$nIter.' Xmin='.$Xmin.' Xmax='.$Xmax;
                 echo "\n".'X1='.$X1.' Q1='.$Q1.' X2='.$X2.' Q2='.$Q2;
                 echo "\n".'$QT > $Q1 xor $QT >= $Q2 = '.($QT > $Q1 xor $QT >= $Q2);
 */
+
                 if($QT > $Q1 xor $QT >= $Q2) {break;}
             }
 
@@ -226,6 +236,7 @@ class cOuvrage {
                 }
             }
         }
+        //echo "\nCalc rVarC=$rVarC nFlag=$nFlag";
         return array($rVarC,$nFlag);
     }
 
@@ -236,21 +247,21 @@ class cOuvrage {
      */
     private function OuvrageQ() {
         $nFlag=-1; // Initialisé à -1 pour détecter les modifications
-        // Gestion des sens de l'écoulement
-        if($this->tP['ZM'] == $this->tP['ZV']){
-            // Ecoulement nul
-            return array(0,0);
-        }
-        elseif($this->tP['ZM']>$this->tP['ZV']){
-            // Ecoulement amont -> aval
-            $bSensAmAv = true;
-        }
-        else {
-            // Ecoulement Aval -> amont
-            $bSensAmAv = false;
-            $ZV = $this->tP['ZV'];
-            $this->tP['ZV'] = $this->tP['ZM'];
-            $this->tP['ZM'] = $ZV;
+        $bSensAmAv = true; // Par défaut on considère le sens d'écoulement amont -> aval
+        if(!in_array($this->nL,array(3,5))) {
+            // Pour les lois autres que seuil et vanne dénoyé,
+            // On gère le sens de l'écoulement
+            if($this->tP['ZM'] == $this->tP['ZV']){
+                // Ecoulement nul
+                return array(0,0);
+            }
+            elseif($this->tP['ZM']<$this->tP['ZV']){
+                // Ecoulement Aval -> amont
+                $bSensAmAv = false;
+                $ZV = $this->tP['ZV'];
+                $this->tP['ZV'] = $this->tP['ZM'];
+                $this->tP['ZM'] = $ZV;
+            }
         }
 
         // Gestion des écoulements nuls
@@ -268,7 +279,10 @@ class cOuvrage {
             list($rQ,$nFlag)=$this->CalculQ($this->nL,$this->tP['C']);
             if($this->nLS and isset($this->tP['H']) and $this->tP['W']+$this->tP['H'] < $this->tP['ZM']) {
                 // Vanne avec surverse autorisée et la cote amont est supérieure à la cote de surverse
-                list($rQS,$nFlagS)=$this->CalculQ($this->nLS,$this->tP['CS'],$this->tP['ZM']-$this->tP['W']-$this->tP['H']);
+                $W = $this->tP['W'];
+                $this->tP['W'] = 99999;
+                list($rQS,$nFlagS)=$this->CalculQ($this->nLS,$this->tP['CS'],$W+$this->tP['H']);
+                $this->tP['W'] = $W;
                 $rQ += $rQS;
                 $nFlag = $nFlagS+10;
             }
@@ -336,8 +350,7 @@ class cOuvrage {
      */
     private function SeuilDen($rC,$rZ=0) {
         $rQ=$rC*$this->tP['L']*self::R2G*pow($this->tP['ZM']-$rZ,1.5);
-        $nFlag=1;
-        return array($rQ,$nFlag);
+        return array($rQ,1);
     }
 
     /**
@@ -348,8 +361,7 @@ class cOuvrage {
      */
     private function SeuilNoy($rC,$rZ=0) {
         $rQ=$rC*self::R32*$this->tP['L']*self::R2G*sqrt($this->tP['ZM']-$rZ-$this->tP['ZV'])*$this->tP['ZV'];
-        $nFlag=2;
-        return array($rQ,$nFlag);
+        return array($rQ,2);
     }
 
     /**
@@ -364,32 +376,113 @@ class cOuvrage {
         $nFlag=0; // Flag par défaut
         $tP = &$this->tP;
         switch($nLoi) {
-        case 1 : // Equation seuil orifice Cemagref
-            $bSurfacelibre=($tP['ZM']<=$tP['W']);
+        case 1 : // Equation seuil-orifice Cemagref
             $bDenoye=($tP['ZV']<=2/3*$tP['ZM']);
-            $bPartiel=true;
-            if(!$bDenoye) $bPartiel=($tP['ZV']<=2/3*$tP['ZM']+$tP['W']/3);
-            if($bDenoye) {
-                $Res=$this->SeuilDen($rC);
-            }
-            elseif($bPartiel or $bSurfacelibre) {
-                $Res=$this->SeuilNoy($rC);
+            if($tP['ZM']<=$tP['W']) {
+                // Surface libre
+                if($bDenoye) { // Seuil dénoyé
+                    return $this->SeuilDen($rC);
+                }
+                else { // Seuil noyé
+                    return $this->SeuilNoy($rC);
+                }
             }
             else {
-                // Ennoyement total
+                // Ecoulements en charge
+                if($bDenoye) { // Orifice dénoyé
+                    $Q1 = $this->SeuilDen($rC);
+                    $Q2 = $this->SeuilDen($rC,$tP['W']);
+                    return array($Q1[0]-$Q2[0],3);
+                }
+                else { // Orifice noyé
+                    if($tP['ZV']<=2/3*$tP['ZM']+$tP['W']/3) {
+                        // Ennoyement partiel
+                        $Q1 = $this->SeuilNoy($rC);
+                        $Q2 = $this->SeuilDen($rC,$tP['W']);
+                        return array($Q1[0]-$Q2[0],4);
+                    }
+                    else { // Ennoyement total
+                        return $this->VanneNoy($rC*self::R32);
+                    }
+                }
             }
-            if(!$bSurfacelibre and $bPartiel) {
-                // Ecoulement en charge : on soustrait la partie en contact avec la pelle
-                $Res2=$this->SeuilDen($rC,$tP['ZM']-$tP['W']);
-                $Res[0]-= $Res2[0];
-                $Res[1]=($Res[1]==1)?3:4;
+        case 2 : // Loi de seuil et vanne Cemagref
+            $mu0 = 2 / 3 * $tP['C'];
+            if($tP['ZM']<=$tP['W']) {
+                // Surface libre
+                $bSurfLibre = true;
+                $alpha = 0.75;
             }
-
+            else {
+                // Ecoulements en charge
+                $bSurfLibre = false;
+                $alpha = 1 - 0.14 * $tP['ZV'] / $tP['W'];
+                if($alpha < 0.4) {$alpha = 0.4;}
+                if($alpha > 0.75) {$alpha = 0.75;}
+            }
+            if($tP['ZV'] <= $alpha * $tP['ZM']) {
+                // Ecoulement dénoyé
+                $bDenoye = true;
+            }
+            else { // Ecoulement noyé
+                $bdenoye = false;
+                $x = sqrt(1 - $tP['ZV'] / $tP['ZM']);
+                $beta = -2 * $alpha + 2.6;
+                if ($x > 0.2) {
+                    $KF = 1 - pow(1 - $x / sqrt(1 - $alfa), $beta);
+                }
+                else {
+                    $KF= 5 * $x * (1 - pow(1 - 0.2 / sqrt(1 - $alfa), $beta));
+                }
+            }
+            if($bSurfLibre) { // Seuil
+                $muf=$mu0-0.08;
+                $Q = $muf * $tP['L'] * self::R2G * pow($tP['ZM'],1.5);
+                if($bDenoye) { // Seuil dénoyé
+                    return array($Q,1);
+                }
+                else { // Seuil noyé
+                    $Q = $KF * $Q;
+                    return array($Q,2);
+                }
+            }
+            else { // Vanne
+                $mu = $mu0 - 0.08 / ($tP['ZM'] / $tP['W']);
+                $mu1 = $mu0 - 0.08 / ($tP['ZM'] / $tP['W'] - 1);
+                if($bdenoye) { // Vanne dénoyée
+                    $Q = $tP['L'] * self::R2G * ($mu * pow($tP['ZM'],1.5) - $mu1 * pow($tP['ZM'] - $tP['W'],1.5));
+                    return array($Q,3);
+                }
+                else {
+                    $alfa1 = 1 - 0.14 * ($tP['ZV'] - $tP['W']) / $tP['W'];
+                    if ($alfa1<0.4) {$alfa1 = 0.4;}
+                    if ($alfa1>0.75) {$alfa1 = 0.75;}
+                    if($tP['ZV'] <= $alfa1 * $tP['ZM'] + (1 - $alfa1) * $tP['W']) {
+                        // Vanne partiellement noyée
+                        $Q = $tP['L'] * self::R2G * ($KF * $mu * pow($tP['ZM'],1.5) - $mu1 * pow($tP['ZM'] - $tP['W'],1.5));
+                        return array($Q,4);
+                    }
+                    else { // Vanne totalement noyée
+                        $x1 = sqrt(1 - ($tP['ZV'] - $tP['W']) / ($tP['ZM'] - $tP['W']));
+                        $beta1 = -2 * $alfa1 + 2.6;
+                        if ($x1 > 0.2) {
+                            $KF1 = 1 - pow(1 - $x1 / sqrt(1 - $alfa1), $beta1);
+                        }
+                        else {
+                            $KF1 = 5*  $x1 * (1 - pow(1 - 0.2 / sqrt(1 - $alfa1), $beta1));
+                        }
+                        $Q = $tP['L'] * self::R2G * ($KF * $mu * pow($tP['ZM'],1.5) - $KF1 * $mu1 * pow($tP['ZM'] - $tP['W'],1.5));
+                        return array($Q,5);
+                    }
+                }
+            }
         case 3 : // Equation classique du seuil dénoyé
             return $this->SeuilDen($rC,$rZ);
-        case 4 : // Equation classique de la vanne en charge dénoyée
+        case 4 : // Equation du seuil noyé
+            return $this->SeuilNoy($rC,$rZ);
+        case 5 : // Equation classique de la vanne en charge dénoyée
             return $this->VanneDen($rC);
-        case 5 : // Equation classique de la vanne en charge totalement noyée
+        case 6 : // Equation classique de la vanne en charge totalement noyée
             return $this->VanneNoy($rC);
         }
     }

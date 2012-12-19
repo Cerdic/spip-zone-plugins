@@ -198,6 +198,8 @@ abstract class acSection {
                     break;
                 case 'SYg' : // Distance du centre de gravité de la section à la surface libre
                     $this->arCalc[$sDonnee] = $this->CalcSYg();
+                case 'dSYg' : // Dérivée Distance du centre de gravité de la section à la surface libre
+                    $this->arCalc[$sDonnee] = $this->CalcSYgder();
                     break;
                 case 'Imp' : // Impulsion hydraulique
                     $this->arCalc[$sDonnee] = $this->CalcImp();
@@ -236,6 +238,7 @@ abstract class acSection {
             $this->rY = $this->oP->rYB;
             switch($sDonnee) {
                 case 'B' : // Largeur aux berges
+
                     $this->arCalcGeo[$sDonnee] = $this->CalcB();
                     if($this->arCalcGeo[$sDonnee] < $this->oP->rYB / 100) {
                         // Section fermée
@@ -262,7 +265,7 @@ abstract class acSection {
             }
         }
         $this->Swap(false); // On restitue les données hydrauliques en cours
-        spip_log('CalcGeo('.$sDonnee.')='.$this->arCalcGeo[$sDonnee],'hydraulic');
+        //spip_log('CalcGeo('.$sDonnee.')='.$this->arCalcGeo[$sDonnee],'hydraulic');
         return $this->arCalcGeo[$sDonnee];
     }
 
@@ -459,7 +462,11 @@ abstract class acSection {
     * @return tirant d'eau conjugué
     */
     private function CalcYco() {
-        return $this->rY*(sqrt(1 + 8 * pow($this->Calc('Fr'),2)) - 1) / 2;
+        $oHautConj= new cHautConjuguee($this, $this->oP);
+        if(!$Yco = $oHautConj->Newton($this->CalcGeo('Yc')) or !$oHautConj->HasConverged()) {
+            $this->oLog->Add(_T('hydraulic:h_conjuguee').' : '._T('hydraulic:newton_non_convergence'));
+        }
+        return $Yco;
     }
 
    /**
@@ -467,16 +474,28 @@ abstract class acSection {
     * @return contrainte de cisaillement
     */
     private function CalcTau0() {
-        return 1000 * $this->oP->rG * $this->Calc('R') * $this->oP->rIf;
+        return 1000 * $this->oP->rG * $this->Calc('R') * $this->Calc('J');
     }
 
     /**
-     * Calcul de la distance du centre de gravité de la section à la surface libre.
-     * @return Distance du centre de gravité de la section à la surface libre
+     * Calcul de la distance du centre de gravité de la section à la surface libre
+     * multiplié par la surface hydraulique
+     * @return S x Yg
      */
     protected function CalcSYg($rY) {
-        return $rY / 2;
+        return pow($rY,2) * $this->rLargeurBerge / 2;
     }
+
+    /**
+     * Calcul de la dérivée distance du centre de gravité de la section à la surface libre
+     * multiplié par la surface hydraulique
+     * @return S x Yg
+     */
+    protected function CalcSYgder($rY) {
+        return $rY * $this->rLargeurBerge;
+    }
+
+
     /**
      * Calcul de l'impulsion hydraulique.
      * @return Impulsion hydraulique
@@ -629,9 +648,9 @@ class cHautNormale extends acNewton {
  */
 class cHautCorrespondante extends acNewton {
     private $rY; // Tirant d'eau connu
-    private $rV2; // Vitesse moyenne au carré associée au tirant d'eau connu
-    private $oSnCal; // Section contenant les données de la section avec la hauteur à calculer
-    private $rG; // Constante de gravité
+    private $rS2; // 1/S^2 associé au tirant d'eau connu
+    private $oSn; // Section contenant les données de la section avec la hauteur à calculer
+    private $rQ2G; // Constante de gravité
 
     /**
      * Constructeur de la classe
@@ -671,6 +690,71 @@ class cHautCorrespondante extends acNewton {
             $rDer = INF;
         }
         spip_log('cHautCorrespondante:CalcDer('.$rX.')='.$rDer,'hydraulic');
+        return $rDer;
+    }
+
+}
+
+
+/**
+ * Calcul de la hauteur conjuguée (Impulsion égale)
+ */
+class cHautConjuguee extends acNewton {
+    private $rY; // Tirant d'eau connu
+    private $rS2; // 1/S^2 associé au tirant d'eau connu
+    private $oSn; // Section contenant les données de la section avec la hauteur à calculer
+    private $rG; // Constante de gravité
+    private $rQ; // débit
+
+    /**
+     * Constructeur de la classe
+     * @param $oSn Section sur laquelle on fait le calcul
+     * @param $oP Paramètres supplémentaires (Débit, précision...)
+     */
+    function __construct(acSection $oSn, cParam $oP) {
+        parent::__construct($oP);
+        $this->rY = $oSn->rY;
+        $this->rQ = $oP->rQ;
+        if($oSn->Calc('S')>0) {
+            $this->rdV = - $this->rQ * $oSn->Calc('dS') * pow($oSn->Calc('S'),-2);
+        }
+        else {
+            $this->rdV = INF;
+        }
+        $this->oSn = clone $oSn;
+        $this->rG = $oP->rG;
+        $this->rV = $oSn->Calc('V');
+        $this->rSYg = $oSn->Calc('SYg');
+        $this->rdSYg = $oSn->Calc('dSYg');
+    }
+
+    /**
+     * Calcul de la fonction dont on cherche le zéro
+     * @param $rX Variable dont dépend la fonction
+     */
+    protected function CalcFn($rX) {
+
+        // Calcul de la fonction
+        $rFn = $this->rQ * ($this->rV - $this->oSn->Calc('V',$rX));
+        $rFn += $this->rG * ($this->rSYg - $this->oSn->Calc('SYg',$rX));
+        spip_log('cHautConjuguee:CalcFn('.$rX.')='.$rFn,'hydraulic');
+        return $rFn;
+    }
+
+    /**
+     * Calcul analytique de la dérivée de la fonction dont on cherche le zéro
+     * @param $rX Variable dont dépend la fonction
+     */
+    protected function CalcDer($rX) {
+        // L'initialisation a été faite lors de l'appel à CalcFn
+        if($this->oSn->Calc('S')!=0) {
+            $rDer = $this->rQ * ($this->rdV + $this->rQ * $this->oSn->Calc('dS') * pow($this->oSn->Calc('S'),-2));
+            $rDer += $this->rG * ($this->rdSYg - $this->oSn->Calc('dSYg',$rX));
+        }
+        else {
+            $rDer = -INF;
+        }
+        spip_log('cHautConjuguee:CalcDer('.$rX.')='.$rDer,'hydraulic');
         return $rDer;
     }
 

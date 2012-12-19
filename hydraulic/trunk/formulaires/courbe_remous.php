@@ -107,6 +107,7 @@ function formulaires_courbe_remous_verifier_dist(){
     $erreurs = array();
     $datas = array();
     $tChOblig= champs_obligatoires();
+    
     // On vérifie que les champs obligatoires sont bien là :
     foreach($tChOblig as $obligatoire) {
         if (!_request($obligatoire)) {
@@ -121,6 +122,7 @@ function formulaires_courbe_remous_verifier_dist(){
         if ($data < 0) $erreurs[$champ] = _T('hydraulic:valeur_positive');
     }
 
+	// On compte s'il y a des erreurs. Si oui, alors on affiche un message
     if (count($erreurs)) {
         $erreurs['message_erreur'] = _T('hydraulic:saisie_erreur');
     }

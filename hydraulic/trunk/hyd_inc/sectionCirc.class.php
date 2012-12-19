@@ -160,12 +160,28 @@ class cSnCirc extends acSection {
     }
 
     /**
-     * Calcul de la distance du centre de gravité de la section à la surface libre.
-     * @return Distance du centre de gravité de la section à la surface libre
+     * Calcul de la distance du centre de gravité de la section à la surface libre
+     * multiplié par la surface hydraulique
+     * @return S x Yg
      */
     protected function CalcSYg() {
         $SYg = sin($this->Calc('Alpha'))-pow(sin($this->Calc('Alpha')),3) / 3 - $this->Calc('Alpha') * cos($this->Calc('Alpha'));
         $SYg = pow($this->rD,3) / 8 * $SYg;
+        return $SYg;
+    }
+
+    /**
+     * Calcul de la dérivée de la distance du centre de gravité de la section à la surface libre
+     * multiplié par la surface hydraulique
+     * @return S x Yg
+     */
+    protected function CalcSYgder() {
+        $cos = cos($this->Calc('Alpha'));
+        $sin = sin($this->Calc('Alpha'));
+        $SYg = $this->Calc('dAlpha') * $cos;
+        $SYg += - $this->Calc('dAlpha') * $cos * pow($sin,2)
+        $SYg += - $this->Calc('dAlpha') * $cos + $this->Calc('Alpha') * $this->Calc('dAlpha') * $sin;
+        $SYg = 3 *pow($this->rD,3) / 8 * $SYg;
         return $SYg;
     }
 

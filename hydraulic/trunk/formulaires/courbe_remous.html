@@ -5,8 +5,10 @@
 //Permet d'afficher ou cacher les champs correspondant à une section.
 function afficher_cacher() {
 	var section = getSelectValue('choix_section_cr');
+	// On récupère tous le formulaire
 	var f = document.getElementById("form_courbe_remous");
     if(f) {
+		// On récupère seulement les lignes <tr> du formulaire stocké dans f
 		var champs = f.getElementsByTagName("tr");
 		// On parcourt tous les <tr> du formulaire
 		for(var i=0, n=champs.length; i<n; i++) {
