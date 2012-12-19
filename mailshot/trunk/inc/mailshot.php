@@ -7,6 +7,38 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Definir la combinaison (periode,nb envois) pour respecter la cadence maxi configuree
+ *
+ * @return array
+ *   (periode du cron, nb envois a chaque appel)
+ */
+function mailshot_cadence(){
+	// cadence maxi
+	$cadence = array(60,5);
+
+	include_spip('inc/config');
+	$max_rate = lire_config("mailshot/rate_limit");
+	if ($max_rate = intval($max_rate)){
+		$rate_one_per_one = 24*60*60/$cadence[0];
+		if ($max_rate<$rate_one_per_one){
+			// 1 mail toutes les N secondes pour ne pas en envoyer plus que le rate demande
+			$cadence = array(intval(ceil($rate_one_per_one/$max_rate*$cadence[0])),1);
+		}
+		else if($max_rate>$rate_one_per_one*$cadence[1]){
+			// rien on garde la cadence maxi
+		}
+		else {
+			// envoyer N mails toutes les M secondes pour respecter la cadence max
+			$nb = $max_rate/$rate_one_per_one;
+			// on se cale sur le N superieur et on ajuste le delai entre chaque envoi
+			$nb = intval(ceil($nb));
+			$cadence = array(intval(ceil($nb*$rate_one_per_one/$max_rate*$cadence[0])),$nb);
+		}
+	}
+
+	return $cadence;
+}
 
 /**
  * Mettre a jour la meta qui indique qu'au moins un envoi est en cours
@@ -93,6 +125,7 @@ function mailshot_envoyer_lot($nb_max=5){
 				'statut' => 'end',
 				'failed' => $failed,
 				'current' => $sent+$failed,
+				'date' => date('Y-m-d H:i:s'),
 			);
 			sql_updateq("spip_mailshot",$set,"id_mailshot=".intval($shoot['id_mailshot']));
 			mailshot_update_meta_processing();

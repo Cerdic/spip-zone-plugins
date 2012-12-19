@@ -42,6 +42,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_control_pause' => 'Pause',
 	'label_control_play' => 'Relancer',
 	'label_control_stop' => 'Abandonner',
+	'label_rate_limit' => 'Limiter la cadence d\'envoi',
+	'explication_rate_limit' => 'Indiquer le nombre maximum de mail envoyés par jour ou laisser vide pour ne pas fixer de limite',
 
 	'legend_configuration_adresse_envoi' => 'Adresse d\'envoi',
 	'legend_configuration_mailer' => 'Service d\'envoi des mails',
