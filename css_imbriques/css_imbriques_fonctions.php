@@ -3,6 +3,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 if (!defined("_UTILISER_PIE_HTC")) define("_UTILISER_PIE_HTC", true);
+if (!defined("_UTILISER_BOXSIZING_HTC")) define("_UTILISER_BOXSIZING_HTC", true);
 
 
 $GLOBALS["css_imbriques_medias_queries"] = array();
@@ -106,14 +107,17 @@ function css_imbriques_conv_dec255 ($coul) {
 }
 
 function css_imbriques_traiter_spip($regs) {
-	// -spip-box-sizing
 	// -spip-font-smoothing
 	
 	if (_UTILISER_PIE_HTC) {
-		if (function_exists("chemin")) $pie = url_absolue(chemin("PIE.htc"));
-		else $pie = url_absolue(find_in_path("PIE.htc"));
+		if (function_exists("chemin")) $pie = chemin("PIE.htc");
+		else $pie = find_in_path("PIE.htc");
 	}
 
+	if (_UTILISER_BOXSIZING_HTC) {
+		if (function_exists("chemin")) $boxsizing = url_absolue(chemin("boxsizing.htc"));
+		else $boxsizing = url_absolue(find_in_path("boxsizing.htc"));
+	}
 	
 	$style = $regs[1];
 	$val = trim($regs[2]);
@@ -148,7 +152,12 @@ function css_imbriques_traiter_spip($regs) {
 			$ret .= "border-bottom-left-radius:$val;";
 			if (_UTILISER_PIE_HTC) $ret .= "behavior: url($pie);";
 			break;
-			
+		case "box-sizing" :
+			$ret = "-webkit-box-sizing:$val;";
+			$ret .= "-moz-box-sizing:$val;";
+			$ret .= "box-sizing:$val;";
+			if (_UTILISER_BOXSIZING_HTC) $ret .= "*behavior: url($boxsizing);";
+			break;
 		case "opacity" :
 			$val_ie = round($val * 100);
 			$ret = "-webkit-opacity:$val;";
