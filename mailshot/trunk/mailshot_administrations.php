@@ -17,6 +17,7 @@ function mailshot_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['create'] = array(
 		array('maj_tables', array('spip_mailshots','spip_mailshots_destinataires')),
 		array('mailshot_import_from_spiplistes'),
+		array('mailshot_import_from_spiplettres'),
 	);
 
 	$maj['0.1.4'] = array(
@@ -70,6 +71,112 @@ function mailshot_import_from_spiplistes(){
 		sql_alter("TABLE spip_courriers DROP id_mailshot");
 	}
 }
+
+function mailshot_import_from_spiplettres(){
+	$trouver_table = charger_fonction("trouver_table","base");
+	if ($trouver_table('spip_lettres')
+	  AND $trouver_table('spip_abonnes_lettres')){
+
+		include_spip("action/editer_objet");
+
+		// importer les envois
+		sql_alter("TABLE spip_lettres ADD id_mailshot bigint(21) NOT NULL DEFAULT 0");
+		$res = sql_select(
+			"id_lettre,titre as sujet,message_html as html,message_texte as texte,date_fin_envoi as date,date_debut_envoi as date_start",
+			'spip_lettres',"id_mailshot=0 AND statut=".sql_quote('envoyee'));
+		while ($row = sql_fetch($res)){
+
+			$id_lettre = $row['id_lettre'];
+			unset($row['id_lettre']);
+
+			$row['id'] = md5(serialize(array('sujet'=>&$row['sujet'],'html'=>&$row['html'],'texte'=>&$row['texte'])));
+			// compter les envois depuis spip_abonnes_lettres
+			$row['total'] = sql_countsel("spip_abonnes_lettres","id_lettre=".intval($id_lettre));
+			$row['failed'] = sql_countsel("spip_abonnes_lettres","id_lettre=".intval($id_lettre)." AND statut=".sql_quote('echec'));
+			$row['current'] = $row['failed']+sql_countsel("spip_abonnes_lettres","id_lettre=".intval($id_lettre)." AND statut=".sql_quote('envoye'));
+
+			$row['statut'] = (($row['current']==$row['total'])?'end':'cancel');
+
+			if ($id_mailshot = mailshot_import_one($row)){
+				sql_updateq("spip_lettres",array('id_mailshot'=>$id_mailshot),"id_lettre=".intval($id_lettre));
+				spip_log("import from spip_lettres mailshot $id_mailshot ".var_export($row,true),"mailshot");
+			}
+
+			// timeout ? on reviendra
+			if (time() >= _TIME_OUT)
+				return;
+		}
+
+		// importer le detail des destinataires
+		$lettres2mailshot = array();
+		sql_alter("TABLE spip_abonnes_lettres ADD imported tinyint(1) NOT NULL DEFAULT 0");
+		do {
+
+			$lot = sql_allfetsel("D.*,A.email","spip_abonnes_lettres AS D LEFT JOIN spip_abonnes as A ON D.id_abonne=A.id_abonne","D.imported=0",'','','0,50');
+			if (count($lot)){
+				$ins = array();
+				foreach($lot as $l){
+
+					if (!isset($lettres2mailshot[$l['id_lettre']]))
+						$lettres2mailshot[$l['id_lettre']] = sql_getfetsel("id_mailshot","spip_lettres","id_lettre=".intval($l['id_lettre']));
+
+					$statut = 'todo';
+					if ($l['statut']=='echec') $statut = 'fail';
+					if ($l['statut']=='envoye') $statut = 'sent';
+
+					$email = $l['email'];
+					if (!$email)
+						$email = (rand(0,1)?'jane':'john').".doe.".$l['id_abonne'].'@example.org';
+
+					$ins[] = array(
+						'id_mailshot' => $lettres2mailshot[$l['id_lettre']],
+						'email' => $email,
+						'date' => date('Y-m-d H:i:s',strtotime($l['maj'])),
+						'statut' => $statut,
+					);
+					sql_updateq("spip_abonnes_lettres",array('imported'=>1),'id_abonne='.intval($l['id_abonne']).' AND id_lettre='.intval($l['id_lettre']));
+				}
+				if (!sql_insertq_multi('spip_mailshots_destinataires',$ins)){
+					foreach ($ins as $i){
+						sql_insertq('spip_mailshots_destinataires',$i);
+					}
+				}
+			}
+			// timeout ? on reviendra
+			if (time() >= _TIME_OUT)
+				return;
+
+		} while (count($lot));
+
+		// remettre a jour les compteurs pour etre coherent
+		$res = sql_select("id_lettre,id_mailshot",'spip_lettres',"id_mailshot>0");
+		while ($row = sql_fetch($res)){
+
+			$id_lettre = $row['id_lettre'];
+			$id_mailshot = $row['id_mailshot'];
+
+			$set = array();
+			// compter les envois depuis spip_abonnes_lettres
+			$set['total'] = sql_countsel("spip_mailshots_destinataires","id_mailshot=".intval($id_mailshot));
+			$set['failed'] = sql_countsel("spip_mailshots_destinataires","id_mailshot=".intval($id_mailshot)." AND statut=".sql_quote('fail'));
+			$set['current'] = $set['failed']+sql_countsel("spip_mailshots_destinataires","id_mailshot=".intval($id_mailshot)." AND statut=".sql_quote('sent'));
+			$set['statut'] = (($set['current']==$set['total'])?'end':'cancel');
+
+
+			sql_updateq("spip_mailshots",$set,"id_mailshot=".intval($id_mailshot));
+			sql_updateq("spip_lettres",array('id_mailshot'=>-$id_mailshot),"id_lettre=".intval($id_lettre));
+
+			// timeout ? on reviendra
+			if (time() >= _TIME_OUT)
+				return;
+		}
+
+		// et c'est tout !
+		sql_alter("TABLE spip_lettres DROP id_mailshot");
+		sql_alter("TABLE spip_abonnes_lettres DROP imported");
+	}
+}
+
 
 function mailshot_import_one($set){
 	$id = objet_inserer("mailshot",0,$set);
