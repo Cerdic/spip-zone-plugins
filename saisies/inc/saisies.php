@@ -235,6 +235,7 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles=true){
 			$options = isset($verifier['options']) ? $verifier['options'] : array();
 			if ($erreur_eventuelle = $verif_fonction($valeur, $verifier['type'], $options, $normaliser)) {
 				$erreurs[$champ] = $erreur_eventuelle;
+			// S'il n'y a pas d'erreur et que la variable de normalisation a été remplie, on l'injecte dans le POST
 			} elseif (!is_null($normaliser)) {
 				set_request($champ, $normaliser);
 			}
