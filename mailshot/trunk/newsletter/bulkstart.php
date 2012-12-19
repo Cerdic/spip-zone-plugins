@@ -14,7 +14,7 @@ include_spip("inc/config");
  *   array si contenu a envoyer
  *     string sujet
  *     string html
- *     string teste
+ *     string texte
  * @param array $listes
  *   listes a qui on envoie (1 ou ++)
  * @param array $options

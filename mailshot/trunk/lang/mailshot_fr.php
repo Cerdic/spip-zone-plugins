@@ -46,6 +46,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_envoi' => 'Envoi',
 	'label_sujet' => 'Sujet',
+	'label_html' => 'Version HTML',
+	'label_texte' => 'Version Texte',
 	'label_date_start' => 'Date de début d\'envoi',
 	'label_date_fin' => 'Date de fin d\'envoi',
 	'label_listes' => 'Listes',

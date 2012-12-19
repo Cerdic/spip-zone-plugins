@@ -26,4 +26,15 @@
 	<span dir='#LANG_DIR' class='avancement'>(#CURRENT|mailshot_afficher_avancement{#TOTAL,#FAILED})</span>
 </div>]
 
+[<div class="champ contenu_html[ (#HTML*|strlen|?{'',vide})]">
+	<div class="label"><:mailshot:label_html:> : </div>
+	<div dir='#LANG_DIR' class='html'><iframe src="(#HTML**|mailshot_inline_base64src)" style="width: 100%;"></iframe></div>
+</div>]
+
+[<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+	<div class="label"><:mailshot:label_texte:> : </div>
+	<div dir='#LANG_DIR' class='texte'><iframe src="(#TEXTE**|mailshot_inline_base64src{text/plain})" style="width: 100%;"></iframe></div>
+</div>]
+
+
 </BOUCLE_mailshot>

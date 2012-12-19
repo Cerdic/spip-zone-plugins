@@ -15,9 +15,20 @@
 
 .mailshot #wysiwyg {margin-bottom: 2.0775em;padding:0;}
 .mailshot #wysiwyg .label {display: inline;}
+.mailshot #wysiwyg .contenu_avancement,
+.mailshot #wysiwyg .contenu_html,
+.mailshot #wysiwyg .contenu_texte {margin-bottom: 3em;}
+.mailshot #wysiwyg .contenu_html .label,
+.mailshot #wysiwyg .contenu_texte .label {display: block}
+.mailshot #wysiwyg .html iframe,
+.mailshot #wysiwyg .texte iframe {width:100%;height:400px;overflow:auto;border:1px solid #ddd;}
+
+
 .mailshot .infos .actions {text-align: right;}
 .mailshot .mailshots_destinataires .id_mailshot {display: none;}
 .mailshot .mailshots_destinataires .date {width: 180px}
 .mailshot .dest_todo .mailshots_destinataires .statut,
 .mailshot .dest_todo .mailshots_destinataires .date,
 .mailshot .dest_fail .mailshots_destinataires .statut {display: none;}
+
+.mailshot_ended .mailshots .action {display: none}

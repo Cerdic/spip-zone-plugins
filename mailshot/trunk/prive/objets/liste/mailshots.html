@@ -24,7 +24,7 @@
 			<td class='statut'>[(#STATUT|mailshot_puce_statut{mailshot,#ID_MAILSHOT})]</td>
 			<td class='id_mailshot'><a href="[(#ID_MAILSHOT|generer_url_entite{mailshot})]" title="<:mailshot:label_envoi|attribut_html:> <:info_numero_abbreviation|attribut_html:>#ID_MAILSHOT">#ID_MAILSHOT</a></td>
 			<td class='sujet principale'>
-				<a href="[(#ID_MAILSHOT|generer_url_entite{mailshot})]">[(#SUJET|couper{50})]</a>
+				<a href="[(#ID_MAILSHOT|generer_url_entite{mailshot})]">[(#SUJET|couper{160})]</a>
 				[<span class="small">\[<a href="(#ID|mailshot_url_newsletter)" title="<:info_numero_abbreviation|attribut_html:> #ID"><:mailshot:lien_voir_newsletter:></a>\]</span>]
 			</td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
