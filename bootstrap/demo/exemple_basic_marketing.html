@@ -19,10 +19,15 @@
         padding-top: 60px;
         padding-bottom: 40px;
       }
+     /* Unfix the navbars : pour préserver les boutons d'admin de spip
+     @import : ../bootstrap/css/responsive-navbar.less
+     */
+    .navbar-fixed-top,
+    .navbar-fixed-bottom {
+      position: fixed;
+    }
     </style>
     
-
-
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="#CHEMIN{js/html5.js}"></script>
@@ -116,22 +121,20 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <!--<script src="#CHEMIN{js/bootstrap-tooltip.js}"></script>-->
+    
     <script src="#CHEMIN{js/bootstrap-dropdown.js}"></script>
-<!--    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>-->
-<!--    <script src="#CHEMIN{js/bootstrap.min.js}"></script>-->
-    <!--<script src="js/bootstrap-transition.js"></script>
-    <script src="js/bootstrap-alert.js"></script>
-    <script src="js/bootstrap-modal.js"></script>
-    <script src="js/bootstrap-dropdown.js"></script>
-    <script src="js/bootstrap-scrollspy.js"></script>
-    <script src="js/bootstrap-tab.js"></script>
-    <script src="js/bootstrap-tooltip.js"></script>
-    <script src="js/bootstrap-popover.js"></script>
-    <script src="js/bootstrap-button.js"></script>
-    <script src="js/bootstrap-collapse.js"></script>
-    <script src="js/bootstrap-carousel.js"></script>
-    <script src="js/bootstrap-typeahead.js"></script>-->
+    <!--<script src="#CHEMIN{js/bootstrap-transition.js}"></script>
+    <script src="#CHEMIN{js/bootstrap-alert.js}"></script>
+    <script src="#CHEMIN{js/bootstrap-modal.js}"></script>
+    <script src="#CHEMIN{js/bootstrap-dropdown.js"}></script>
+    <script src="#CHEMIN{js/bootstrap-scrollspy.js}"></script>
+    <script src="#CHEMIN{js/bootstrap-tab.js}"></script>
+    <script src="#CHEMIN{js/bootstrap-tooltip.js}"></script>
+    <script src="#CHEMIN{js/bootstrap-popover.js}"></script>
+    <script src="#CHEMIN{js/bootstrap-button.js}"></script>
+    <script src="#CHEMIN{js/bootstrap-collapse.js}"></script>
+    <script src="#CHEMIN{js/bootstrap-carousel.js}"></script>
+    <script src="#CHEMIN{js/bootstrap-typeahead.js}"></script>-->
 
   </body>
 </html>
