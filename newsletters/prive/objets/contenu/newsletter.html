@@ -34,17 +34,17 @@
 
 [<div class="champ contenu_html_email[ (#HTML_EMAIL*|strlen|?{'',vide})]">
 	<div class="label"><:newsletter:label_html_email:> : </div>
-	<div dir='#LANG_DIR' class='html_email'><iframe src="(#HTML_EMAIL**|inline_base64src)" style="width: 100%;"></iframe></div>
+	<div dir='#LANG_DIR' class='html_email'><iframe src="(#HTML_EMAIL**|newsletters_inline_base64src)" style="width: 100%;"></iframe></div>
 </div>]
 
 [<div class="champ contenu_texte_email[ (#TEXTE_EMAIL*|strlen|?{'',vide})]">
 	<div class="label"><:newsletter:label_texte_email:> : </div>
-	<div dir='#LANG_DIR' class='texte_email'><iframe src="(#TEXTE_EMAIL**|inline_base64src{text/plain})" style="width: 100%;"></iframe></div>
+	<div dir='#LANG_DIR' class='texte_email'><iframe src="(#TEXTE_EMAIL**|newsletters_inline_base64src{text/plain})" style="width: 100%;"></iframe></div>
 </div>]
 
 [<div class="champ contenu_html_page[ (#HTML_PAGE*|strlen|?{'',vide})]">
 	<div class="label"><:newsletter:label_html_page:> : </div>
-	<div dir='#LANG_DIR' class='html_page'><iframe src="(#HTML_PAGE**|inline_base64src)" style="width: 100%;"></iframe></div>
+	<div dir='#LANG_DIR' class='html_page'><iframe src="(#HTML_PAGE**|newsletters_inline_base64src)" style="width: 100%;"></iframe></div>
 </div>]
 
 ]

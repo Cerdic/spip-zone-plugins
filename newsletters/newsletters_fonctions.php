@@ -96,7 +96,7 @@ function afficher_titre_patron($patron){
  * @param string $type
  * @return string
  */
-function inline_base64src($texte, $type="text/html"){
+function newsletters_inline_base64src($texte, $type="text/html"){
 	return "data:$type;base64,".base64_encode($texte);
 }
 

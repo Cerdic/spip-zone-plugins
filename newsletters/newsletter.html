@@ -30,7 +30,7 @@
 <object class="html_email" type="text/html" >[(#HTML_EMAIL**)]</object>
 ][(#GET{quoi}|=={texte_email}|oui)
 <iframe
-	class="texte_email" src="[(#TEXTE_EMAIL**|trim|inline_base64src{text/plain})]" style=""></iframe>
+	class="texte_email" src="[(#TEXTE_EMAIL**|trim|newsletters_inline_base64src{text/plain})]" style=""></iframe>
 ][(#GET{quoi}|=={html_page}|oui)
 <object class="html_page" type="text/html" >[(#HTML_PAGE**|sinon{#HTML_EMAIL**}|newsletter_affiche_version_enligne)]</object>
 ]
