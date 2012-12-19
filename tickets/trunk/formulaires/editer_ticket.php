@@ -164,8 +164,10 @@ function formulaires_editer_ticket_traiter($id_ticket='new',$retour='', $config_
 		if (!$retour) {
 			$message['redirect'] = parametre_url(parametre_url(self(),'id_ticket', $res['id_ticket']),'ticket','');
 		} else {
-			// sinon on utilise la redirection donnee.
-			$message['redirect'] = parametre_url($retour, 'id_ticket', $res['id_ticket']);
+			if (strncmp($retour,'javascript:',11)==0)
+				$message['message_ok'] .= '<script type="text/javascript">/*<![CDATA[*/'.substr($retour,11).'/*]]>*/</script>';
+			else // sinon on utilise la redirection donnee.
+				$message['redirect'] = parametre_url($retour, 'id_ticket', $res['id_ticket']);
 		}
 	}
 	return $message;
