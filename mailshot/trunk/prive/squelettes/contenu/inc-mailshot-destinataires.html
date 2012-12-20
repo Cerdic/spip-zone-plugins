@@ -15,7 +15,7 @@
 		<div class="nettoyeur"></div>
 	]
 	<h2><:mailshot:titre_envois_destinataires_ok:></h2>#SET{un,' '}
-	(#INCLURE{fond=prive/objets/liste/mailshots_destinataires,env,par=date,statut=#LISTE{sent,read,clic},ajax})
+	(#INCLURE{fond=prive/objets/liste/mailshots_destinataires,env,par=date,statut=#LISTE{sent,read,clic,spam},ajax})
 ]
 
 [

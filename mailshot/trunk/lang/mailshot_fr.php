@@ -40,7 +40,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_destinataire_sent' => 'Envoyé',
 	'info_statut_destinataire_read' => 'Ouvert',
 	'info_statut_destinataire_clic' => 'Cliqué',
-	'info_statut_destinataire_fail' => 'Echoué',
+	'info_statut_destinataire_fail' => 'Échoué',
+	'info_statut_destinataire_spam' => '>Spam',
 
 
 	// L
