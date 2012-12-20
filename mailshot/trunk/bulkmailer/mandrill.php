@@ -62,7 +62,7 @@ function bulkmailer_mandrill_webhook_dist($arg){
 	include_spip("inc/json");
 	$events = json_decode($events, true);
 
-	spip_log("bulkmailer_mandrill_webhook_dist ".var_export($events,true),"mailshot");
+	#spip_log("bulkmailer_mandrill_webhook_dist ".var_export($events,true),"mailshot");
 
 	foreach ($events as $event){
 		$quoi = $event['event'];
