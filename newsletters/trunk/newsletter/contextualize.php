@@ -38,6 +38,11 @@ function newsletter_contextualize_dist($content,$context){
 
 	$content = "#CACHE{0}\n".$content; // pas de cache, on ne va calculer qu'une fois pour chaque contexte !
 
+	// eviter de planter l'evaluation via un <?php restant dans une version texte dans laquelle les < ne sont plus echappes
+	// corrolaire : pas de php pour la contextualization (ni de balise dynamique)
+	if (strpos($content,'<'.'?')!==false)
+		$content = str_replace('<'.'?', "<\1?", $content);
+
 	$md5 = md5($content);
 
 	// ecrire le squelette dans un fichier temporaire
@@ -48,6 +53,10 @@ function newsletter_contextualize_dist($content,$context){
 		if (_DIR_RACINE AND strncmp($tmp,_DIR_RACINE,strlen(_DIR_RACINE))==0)
 			$tmp = substr($tmp,strlen(_DIR_RACINE));
 		$content = recuperer_fond($tmp,$context);
+
+		if (strpos($content,'<\1?')!==false)
+			$content = str_replace("<\1?", '<'.'?', $content);
+
 		#@unlink($f); // on le garde pour l'envoi suivant, mais il faudrait purger a un moment !
 	}
 
