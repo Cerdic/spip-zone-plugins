@@ -27,6 +27,7 @@ include_spip("classes/facteur");
  *     string errorsto
  *   string adresse_envoi_nom
  *   string adresse_envoi_email
+ *   string sender_class : permet de specifier une autre class que "Facteur" (surcharges)
  * @return Facteur
  */
 function &bulkmailer_defaut_dist($to_send,$options=array()){
@@ -36,6 +37,7 @@ function &bulkmailer_defaut_dist($to_send,$options=array()){
 	}
 
 	if (!isset($options['smtp'])
+	  AND !isset($options['sender_class'])
 	  AND lire_config("facteur_smtp")=='non'){
 		spip_log("Pas de smtp configure et envoi par mail() refuse pour le bulk","mailshot"._LOG_ERREUR);
 		return false;
@@ -64,7 +66,10 @@ function &bulkmailer_defaut_dist($to_send,$options=array()){
 		$options['smtp'] = 'oui';
 	}
 
-	$facteur = new Facteur($to_send['email'], $to_send['sujet'], $to_send['html'], $to_send['texte'], $options);
+	$sender_class = "Facteur";
+	if (isset($options['sender_class']))
+		$sender_class = $options['sender_class'];
+	$facteur = new $sender_class($to_send['email'], $to_send['sujet'], $to_send['html'], $to_send['texte'], $options);
 
 	// We are Bulk : https://support.google.com/mail/bin/answer.py?hl=en&answer=81126
 	$facteur->AddCustomHeader("Precedence: bulk");
