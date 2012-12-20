@@ -41,7 +41,7 @@ function newsletter_contextualize_dist($content,$context){
 	// eviter de planter l'evaluation via un <?php restant dans une version texte dans laquelle les < ne sont plus echappes
 	// corrolaire : pas de php pour la contextualization (ni de balise dynamique)
 	if (strpos($content,'<'.'?')!==false)
-		$content = str_replace('<'.'?', "<\1?", $content);
+		$content = str_replace('<'.'?', "\\<\\@\\?", $content);
 
 	$md5 = md5($content);
 
@@ -54,11 +54,10 @@ function newsletter_contextualize_dist($content,$context){
 			$tmp = substr($tmp,strlen(_DIR_RACINE));
 		$content = recuperer_fond($tmp,$context);
 
-		if (strpos($content,'<\1?')!==false)
-			$content = str_replace("<\1?", '<'.'?', $content);
-
 		#@unlink($f); // on le garde pour l'envoi suivant, mais il faudrait purger a un moment !
 	}
+	if (strpos($content,"\\<\\@\\?")!==false)
+		$content = str_replace("\\<\\@\\?", '<'.'?', $content);
 
 	return $content;
 }
