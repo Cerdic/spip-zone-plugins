@@ -185,6 +185,10 @@ class FacteurMandrill extends Facteur {
 
 		$mandrill = new Mandrill($api_key);
 
+		//WARNING: this would prevent curl from detecting a 'man in the middle' attack
+		curl_setopt($mandrill->ch, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($mandrill->ch, CURLOPT_SSL_VERIFYPEER, 0);
+
 		try {
 			$res = $mandrill->messages->send($this->message, false);
 		}
@@ -193,11 +197,24 @@ class FacteurMandrill extends Facteur {
       return false;
     }
 
-		switch ($res['status']){
-			case 'error':
-				$this->SetError($res['name'].": ".$res['message']);
-				return false;
-				break;
+		// statut d'erreur au premier niveau ?
+		if (isset($res['status'])){
+			switch ($res['status']){
+				case 'error':
+					$this->SetError($res['name'].": ".$res['message']);
+					return false;
+					break;
+				default:
+					$this->SetError("??????".var_export($res,true));
+					return false;
+					break;
+			}
+		}
+
+		// sinon regarder le status du premier mail envoye (le to)
+		// ici on ne gere qu'un destinataire
+		$rmail = reset($res);
+		switch ($rmail['status']){
 			case 'invalid':
 				$this->SetError("invalid");
 				return false;
@@ -212,8 +229,11 @@ class FacteurMandrill extends Facteur {
 				break;
 		}
 
-		$this->SetError("??????");
+		// ici on ne sait pas ce qu'il s'est passe !
+		$this->SetError("??????".var_export($res,true));
+		spip_log("FacteurMandrill->Send resultat inatendu : ".var_export($res,true),"mailshot"._LOG_ERREUR);
 		return false;
+
 	}
 
 	public function CreateHeader(){}
