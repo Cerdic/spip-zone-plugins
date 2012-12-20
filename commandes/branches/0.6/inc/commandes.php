@@ -75,7 +75,7 @@ function creer_commande_encours(){
 **/
 function commandes_effacer($ids_commande) {
 	if (!$ids_commande) return false;
-	if (!is_array($ids_commande) $ids_commande = array($ids_commande);
+	if (!is_array($ids_commande)) $ids_commande = array($ids_commande);
 
 	spip_log("Suppression de commande : " . implode(',', $ids_commande));
 
