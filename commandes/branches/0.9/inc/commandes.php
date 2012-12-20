@@ -15,27 +15,8 @@ function creer_commande_encours(){
 	if (($id_commande = intval(session_get('id_commande'))) > 0){
 		// Si la commande est toujours "encours" on la supprime de la base
 		if ($statut = sql_getfetsel('statut', 'spip_commandes', 'id_commande = '.$id_commande) and $statut == 'encours'){
-			// On supprime son contenu
-			sql_delete('spip_commandes_details', 'id_commande = '.$id_commande);
-		
-			// S'il y a des adresses attachées à la commande, on les supprime
-			if ($adresses_commande = sql_allfetsel('id_adresse', 'spip_adresses_liens', array('objet = '.sql_quote('commande'), 'id_objet = '.$id_commande))){
-				$adresses_commande = array_map('reset', $adresses_commande);
-				$in = sql_in('id_adresse', $adresses_commande);
-				sql_delete('spip_adresses_liens', array($in, 'objet='.sql_quote('commande'), 'id_objet = '.$id_commande));
-
-				// si les adresses ne sont plus utilisées nul part, on les supprime
-				$adresses_non_orphelines = sql_allfetsel('id_adresse', 'spip_adresses_liens', $in);
-				$adresses_non_orphelines = array_map('reset', $adresses_non_orphelines);
-				$adresses_orphelines = array_diff($adresses_commande, $adresses_non_orphelines);
-				if ($adresses_orphelines) {
-					$in = sql_in('id_adresse', $adresses_orphelines);
-					sql_delete('spip_adresses', $in);
-				}
-			}
-		
-			// On supprime la commande
-			sql_delete('spip_commandes', 'id_commande = '.$id_commande);
+			spip_log("Suppression d'une commande encours ancienne en session : $id_commande");
+			commandes_effacer($id_commande);
 		}
 		
 		// Dans tous les cas on supprime la valeur de session
@@ -80,6 +61,56 @@ function creer_commande_encours(){
 	
 	return $id_commande;
 }
+
+
+
+
+/**
+ * Suppression d'une ou plusieurs commandes
+ * et de ses données associées
+ *
+ * @param int|array $ids_commande
+ *     Identifiant de commande ou tableau d'identifiants
+ * @return bool
+ *     false si pas d'identifiant de commande transmis
+ *     true sinon.
+**/
+function commandes_effacer($ids_commande) {
+	if (!$ids_commande) return false;
+	if (!is_array($ids_commande)) $ids_commande = array($ids_commande);
+
+	spip_log("Suppression de commande : " . implode(',', $ids_commande));
+
+	$in_commandes = sql_in('id_commande', $ids_commande);
+	$in_objet_commandes = sql_in('id_objet', $ids_commande);
+
+	// On supprime son contenu
+	sql_delete('spip_commandes_details', $in_commandes);
+
+	// S'il y a des adresses attachées aux commandes et inutiliséses ailleurs, on les supprime
+	if ($adresses_commande = sql_allfetsel('id_adresse', 'spip_adresses_liens', array('objet = '.sql_quote('commande'), $in_objet_commandes))){
+		$adresses_commande = array_map('reset', $adresses_commande);
+		spip_log("Suppression d'adresses des commandes supprimées : " . implode(',', $adresses_commande));
+		$in_adresses = sql_in('id_adresse', $adresses_commande);
+		sql_delete('spip_adresses_liens', array($in_adresses, 'objet='.sql_quote('commande'), $in_objet_commandes));
+
+		// si les adresses ne sont plus utilisées nul part, on les supprime
+		$adresses_non_orphelines = sql_allfetsel('id_adresse', 'spip_adresses_liens', $in_adresses);
+		$adresses_non_orphelines = array_map('reset', $adresses_non_orphelines);
+		$adresses_orphelines = array_diff($adresses_commande, $adresses_non_orphelines);
+		if ($adresses_orphelines) {
+			spip_log("Suppression d'adresses orphelines : " . implode(',', $adresses_orphelines));
+			sql_delete('spip_adresses', sql_in('id_adresse', $adresses_orphelines));
+		}
+	}
+
+	// On supprime les commandes
+	sql_delete('spip_commandes', $in_commandes);
+
+	return true;
+}
+
+
 
 /*
  * Envoyer un mail de notification

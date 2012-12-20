@@ -21,43 +21,15 @@ function commandes_optimiser_base_disparus($flux){
 		'spip_commandes',
 		'statut = '.sql_quote('encours').' and date<'.sql_quote($depuis)
 	);
-	if (is_array($commandes))
-		$commandes = array_map('reset', $commandes);
-	
+
 	// S'il y a bien des commandes à supprimer
-	if ($commandes){
-		// Le in
-		$in = sql_in('id_commande', $commandes);
-		
-		// On supprime d'abord les détails
-		sql_delete(
-			'spip_commandes_details',
-			$in
-		);
-		
-		//On cherche des adresses attachées
-		if ($adresses_commande = sql_allfetsel(
-			'id_adresse', 
-			'spip_adresses_liens', 
-			array(
-				'objet = '.sql_quote('commande'), 
-				sql_in('id_objet', $commandes)
-			)
-		)){
-			$adresses_commande = array_map('reset', $adresses_commande);
-			$in2 = sql_in('id_adresse', $adresses_commande);
-			sql_delete('spip_adresses_liens', $in2);
-			sql_delete('spip_adresses', $in2);
-		}
-		
-		// Puis les commandes
-		$nombre = intval(sql_delete(
-			'spip_commandes',
-			$in
-		));
+	if ($commandes) {
+		$commandes = array_map('reset', $commandes);
+		include_spip('inc/commandes');
+		commandes_effacer($commandes);
+		$flux['data'] += count($commandes);
 	}
-	
-	$flux['data'] += $nombre;
+
 	return $flux;
 }
 
