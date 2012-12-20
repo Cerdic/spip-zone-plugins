@@ -60,7 +60,9 @@ function bulkmailer_mandrill_webhook_dist($arg){
 	spip_log("bulkmailer_mandrill_webhook_dist $events","mailshot");
 
 	include_spip("inc/json");
-	$events = json_decode($events);
+	$events = json_decode($events, true);
+
+	spip_log("bulkmailer_mandrill_webhook_dist ".var_export($events,true),"mailshot");
 
 	foreach ($events as $event){
 		$quoi = $event['event'];
@@ -106,7 +108,7 @@ function bulkmailer_mandrill_init_dist($id_mailshot=0){
 
 	// son webhook
 	$url = url_absolue(_DIR_RACINE."mailshot_webhook.api/mandrill/");
-	#$url = url_absolue(_DIR_RACINE."mailshot_webhook.api/mandrill/","http://www.yterium.net/");
+	$url = url_absolue(_DIR_RACINE."mailshot_webhook.api/mandrill/","http://www.yterium.net/");
 	$events = array(/*"send",*/"hard_bounce", "soft_bounce", "open", "click", "spam", "reject");
 
 	// chercher si un webhook deja existant avec cette url, et si les events sont ok
