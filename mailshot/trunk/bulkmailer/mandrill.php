@@ -108,7 +108,6 @@ function bulkmailer_mandrill_init_dist($id_mailshot=0){
 
 	// son webhook
 	$url = url_absolue(_DIR_RACINE."mailshot_webhook.api/mandrill/");
-	$url = url_absolue(_DIR_RACINE."mailshot_webhook.api/mandrill/","http://www.yterium.net/");
 	$events = array(/*"send",*/"hard_bounce", "soft_bounce", "open", "click", "spam", "reject");
 
 	// chercher si un webhook deja existant avec cette url, et si les events sont ok
