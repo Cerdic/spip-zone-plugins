@@ -41,7 +41,7 @@ function mailsubscribers_declarer_tables_objets_sql($tables) {
 		),
 		'key' => array(
 			"PRIMARY KEY"        => "id_mailsubscriber",
-			"UNIQUE email"           => "email(256)",
+			"UNIQUE email"           => "email(255)",
 			"KEY lang"           => "lang",
 			"KEY statut"         => "statut",
 		),
