@@ -57,6 +57,14 @@ function newsletter_bulkstart_dist($corps,$listes = array(),$options=array()){
 	$id_mailshot = sql_insertq("spip_mailshots",$bulk);
 
 	if ($id_mailshot){
+		// initialiser le mailer si necessaire
+		// On cree l'objet Mailer (PHPMailer) pour le manipuler ensuite
+		if ($mailer = lire_config("mailshot/mailer")
+			AND charger_fonction($mailer,'bulkmailer',true)
+			AND $init = charger_fonction($mailer."_init",'bulkmailer',true)){
+			$init($id_mailshot);
+		}
+
 		include_spip('inc/mailshot');
 		mailshot_update_meta_processing($options['statut']=='processing');
 	}

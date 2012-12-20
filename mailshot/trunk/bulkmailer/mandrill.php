@@ -44,6 +44,67 @@ function &bulkmailer_mandrill_dist($to_send,$options=array()){
 
 }
 
+function bulkmailer_mandrill_webhook_dist($arg){
+
+	if ($_SERVER['REQUEST_METHOD'] == 'HEAD'){
+		http_status(200);
+		exit;
+	}
+
+	$event = _request('mandrill_events');
+	spip_log("bulkmailer_mandrill_webhook_dist $event","mailshot");
+
+	# TODO
+}
+
+
+function bulkmailer_mandrill_init_dist($id_mailshot=0){
+	$api_key = lire_config("mailshot/mandrill_api_key");
+	$mandrill = new Mandrill($api_key);
+
+	//WARNING: this would prevent curl from detecting a 'man in the middle' attack
+	curl_setopt($mandrill->ch, CURLOPT_SSL_VERIFYHOST, 0);
+	curl_setopt($mandrill->ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+	// recuperer les webhooks existants
+	try {
+		$list = $mandrill->webhooks->getList();
+	}
+	catch (Exception $e) {
+		spip_log($e="Mandrill Exception ".$e->getMessage(),"mailshot"._LOG_ERREUR);
+		var_dump("Erreur:$e");
+    return false;
+  }
+
+	var_dump($list);
+
+	// TODO chercher si un deja existant
+	// ajouter son webhook
+	$url = url_absolue(_DIR_RACINE."mailshot_webhook.api/mandrill/","http://www.yterium.net/");
+	$events = array("hard_bounce", "soft_bounce", "open", "click", "spam", "reject");
+	try {
+		var_dump($mandrill->webhooks->add($url,$events));
+	}
+	catch (Exception $e) {
+		spip_log($e="Mandrill Exception ".$e->getMessage(),"mailshot"._LOG_ERREUR);
+		var_dump("Erreur:$e");
+    return false;
+  }
+
+
+	try {
+		$list = $mandrill->webhooks->getList();
+	}
+	catch (Exception $e) {
+		spip_log($e="Mandrill Exception ".$e->getMessage(),"mailshot"._LOG_ERREUR);
+		var_dump("Erreur:$e");
+    return false;
+  }
+	var_dump($list);die();
+
+
+}
+
 
 class FacteurMandrill extends Facteur {
 
