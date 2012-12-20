@@ -56,9 +56,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'texte_boite_info' => 'This page allows you to easily configure the hidden settings of SPIP.
 
-If you force some settings in your <tt>config/mes_options.php</tt> file, this form won\'t affect them.
+If you force some settings in your <tt>config/mes_options.php</tt> file, this form will not affect them.
 
-When you finish configuring your website, you can, if you wish, copy and paste the content of <tt>tmp/ck_options</tt> in <tt>config/mes_options.php</tt> before uninstalling this plugin which will no longer be useful.', # MODIF
+When you finish configuring your website, you can, if you wish, copy and paste the content of <tt>tmp/ck_options</tt> into <tt>config/mes_options.php</tt> before uninstalling this plugin as it will no longer be useful.', # MODIF
 	'titre_page_couteau' => 'KISS knife'
 );
 
