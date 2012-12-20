@@ -103,11 +103,11 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		$ok &= sql_alter('TABLE spip_emails_liens DROP PRIMARY KEY');
 		$ok &= sql_alter('TABLE spip_emails_liens ADD PRIMARY KEY (id_email, id_objet, objet, type)');
 
-		if ($ok){
+		#if ($ok){
 			spip_log('Tables coordonnées correctement passsées en version 1.4','coordonnees');
 			ecrire_meta($nom_meta_base_version, $current_version="1.4");
-		}
-		else return false;
+		#}
+		#else return false;
 	}
 
 	if (version_compare($current_version, "1.5", "<")) {
