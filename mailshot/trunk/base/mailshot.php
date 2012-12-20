@@ -91,7 +91,7 @@ function mailshot_declarer_tables_auxiliaires($tables) {
 			"id_mailshot"      => "bigint(21) DEFAULT '0' NOT NULL",
 			"email"              => "varchar(255) NOT NULL DEFAULT ''",
 			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
-			"statut"             => "char(4)  DEFAULT 'todo' NOT NULL", // todo, sent, fail, [read, [clic]]
+			"statut"             => "char(4)  DEFAULT 'todo' NOT NULL", // todo, sent, fail, [read, [clic]],[spam]
 		),
 		'key' => array(
 			"PRIMARY KEY"        => "id_mailshot,email",

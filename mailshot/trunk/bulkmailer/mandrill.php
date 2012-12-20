@@ -44,6 +44,11 @@ function &bulkmailer_mandrill_dist($to_send,$options=array()){
 
 }
 
+/**
+ * Prendre en charge le webhook mandrill
+ *
+ * @param $arg
+ */
 function bulkmailer_mandrill_webhook_dist($arg){
 
 	if ($_SERVER['REQUEST_METHOD'] == 'HEAD'){
@@ -51,16 +56,40 @@ function bulkmailer_mandrill_webhook_dist($arg){
 		exit;
 	}
 
-	$event = _request('mandrill_events');
-	spip_log("bulkmailer_mandrill_webhook_dist $event","mailshot");
+	$events = _request('mandrill_events');
+	spip_log("bulkmailer_mandrill_webhook_dist $events","mailshot");
 
-	# TODO
+	include_spip("inc/json");
+	$events = json_decode($events);
+
+	foreach ($events as $event){
+		$quoi = $event['event'];
+		if ($quoi=="open") $quoi=="read"; // open chez mandrill, read ici
+
+		$email = $event['msg']['email'];
+		$tags = $event['msg']['tags'];
+		if (count($tags)){
+			$tracking_id = end($tags);
+			spip_log("tracking $quoi $email $tracking_id",'mailshot');
+			// appeler l'api webhook mailshot
+			$feedback = charger_fonction("feedback","newsletter");
+			$feedback($quoi,$email,$tracking_id);
+		}
+	}
 }
 
 
+/**
+ * Initialiser mandrill : declarer un webhook pour recuperer les retours sur bounce, reject, open, clic....
+ *
+ * @param int $id_mailshot
+ * @return bool
+ */
 function bulkmailer_mandrill_init_dist($id_mailshot=0){
 	$api_key = lire_config("mailshot/mandrill_api_key");
 	$mandrill = new Mandrill($api_key);
+
+	spip_log("bulkmailer_mandrill_init_dist $id_mailshot","mailshot");
 
 	//WARNING: this would prevent curl from detecting a 'man in the middle' attack
 	curl_setopt($mandrill->ch, CURLOPT_SSL_VERIFYHOST, 0);
@@ -72,37 +101,58 @@ function bulkmailer_mandrill_init_dist($id_mailshot=0){
 	}
 	catch (Exception $e) {
 		spip_log($e="Mandrill Exception ".$e->getMessage(),"mailshot"._LOG_ERREUR);
-		var_dump("Erreur:$e");
     return false;
   }
 
-	var_dump($list);
+	// son webhook
+	$url = url_absolue(_DIR_RACINE."mailshot_webhook.api/mandrill/");
+	#$url = url_absolue(_DIR_RACINE."mailshot_webhook.api/mandrill/","http://www.yterium.net/");
+	$events = array(/*"send",*/"hard_bounce", "soft_bounce", "open", "click", "spam", "reject");
 
-	// TODO chercher si un deja existant
-	// ajouter son webhook
-	$url = url_absolue(_DIR_RACINE."mailshot_webhook.api/mandrill/","http://www.yterium.net/");
-	$events = array("hard_bounce", "soft_bounce", "open", "click", "spam", "reject");
-	try {
-		var_dump($mandrill->webhooks->add($url,$events));
+	// chercher si un webhook deja existant avec cette url, et si les events sont ok
+	if (count($list)){
+		foreach ($list as $l){
+			if ($l['url']==$url){
+				$e = $l['events'];
+				if (!count(array_diff($e,$events)) AND !count(array_diff($events,$e)))
+					return true;
+
+				// la liste des events est non ok : supprimer ce webhook
+				try {
+					$mandrill->webhooks->delete($l['id']);
+				}
+				catch (Exception $e) {
+					spip_log($e="Mandrill Exception ".$e->getMessage(),"mailshot"._LOG_ERREUR);
+			    return false;
+			  }
+			}
+		}
 	}
-	catch (Exception $e) {
-		spip_log($e="Mandrill Exception ".$e->getMessage(),"mailshot"._LOG_ERREUR);
-		var_dump("Erreur:$e");
-    return false;
-  }
 
+	// donc on a pas de webhook pour ce site, on l'ajoute
 
-	try {
-		$list = $mandrill->webhooks->getList();
+	if (count($events)){
+		try {
+			$mandrill->webhooks->add($url,$events);
+		}
+		catch (Exception $e) {
+			spip_log($e="Mandrill Exception ".$e->getMessage(),"mailshot"._LOG_ERREUR);
+	    return false;
+	  }
+
+		// Debug : on verifie
+		/*
+		try {
+			$list = $mandrill->webhooks->getList();
+		}
+		catch (Exception $e) {
+			spip_log($e="Mandrill Exception ".$e->getMessage(),"mailshot"._LOG_ERREUR);
+	    return false;
+	  }
+		*/
 	}
-	catch (Exception $e) {
-		spip_log($e="Mandrill Exception ".$e->getMessage(),"mailshot"._LOG_ERREUR);
-		var_dump("Erreur:$e");
-    return false;
-  }
-	var_dump($list);die();
 
-
+	return true;
 }
 
 
@@ -184,7 +234,13 @@ class FacteurMandrill extends Facteur {
 		$this->message['headers'][$key] = trim($value);
 	}
 
-	public function Send() {
+	/**
+	 * @param array $options
+	 *   options d'envoi
+	 *     string tracking_id
+	 * @return bool
+	 */
+	public function Send($options) {
 		$api_key = lire_config("mailshot/mandrill_api_key");
 
 		/**
@@ -244,6 +300,12 @@ class FacteurMandrill extends Facteur {
 		$this->message['from_email'] = $this->From;
 		$this->message['from_name'] = $this->FromName;
 
+		// ajouter le tracking_id en tag, pour retrouver le message apres webhook
+		if (isset($options['tracking_id'])
+		  AND $id = $options['tracking_id']){
+			$this->message['tags'][] = $options['tracking_id'];
+		}
+
 		$mandrill = new Mandrill($api_key);
 
 		//WARNING: this would prevent curl from detecting a 'man in the middle' attack
@@ -257,6 +319,8 @@ class FacteurMandrill extends Facteur {
       $this->SetError($e->getMessage());
       return false;
     }
+
+		spip_log("FacteurMandrill->Send resultat:".var_export($res,true),"mailshot");
 
 		// statut d'erreur au premier niveau ?
 		if (isset($res['status'])){
