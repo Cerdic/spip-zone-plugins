@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_telecharger_fichier_log' => 'Download the log file of @date@',
 
 	// E
-	'entete_log_avertissement_nonmais' => 'WARNING : items n\'appartenant pas au module', # NEW
+	'entete_log_avertissement_nonmais' => 'WARNING: some items do not belong to this module', # NEW
 	'entete_log_avertissement_peutetre_definition' => 'WARNING: items maybe undefined',
 	'entete_log_avertissement_peutetre_utilisation' => 'WARNING: items maybe not used',
 	'entete_log_date_creation' => 'File generated on @log_date_jour@ at @log_date_heure@.',
@@ -31,14 +31,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entete_log_erreur_utilisation' => 'ERROR : unused items',
 
 	// I
-	'info_arborescence_scannee' => 'Choisissez le répertoire de base dont l\'arborescence sera scannée', # NEW
-	'info_bloc_langues_generees' => 'Cliquez sur un lien ci-dessous pour télécharger l\'un des fichiers de langue générés.', # NEW
-	'info_bloc_logs_definition' => 'Cliquez sur un lien ci-dessous pour télécharger le dernier fichier de logs de vérification des définitions manquantes d\'un fichier de langue.', # NEW
-	'info_bloc_logs_fonction_l' => 'Cliquez sur un lien ci-dessous pour télécharger le dernier fichier de logs de vérification des utilisations de _L() dans une arborescence donnée.', # NEW
-	'info_bloc_logs_utilisation' => 'Cliquez sur un lien ci-dessous pour télécharger le dernier fichier de logs de vérification des définitions obsolètes d\'un fichier de langue.', # NEW
-	'info_chemin_langue' => 'Dossier dans lequel est installé le fichier de langue (exemple : <em>plugins/rainette/lang/</em>, ou <em>ecrire/lang/</em>)', # NEW
-	'info_fichier_liste' => 'Choisissez le fichier de langue dont vous voulez afficher les items, parmi ceux présents dans le site.', # NEW
-	'info_fichier_verifie' => 'Choisissez le fichier de langue à vérifier parmi ceux présents dans le site.', # NEW
+	'info_arborescence_scannee' => 'Choose the root folder for which all subdirectories will be scanned', # NEW
+	'info_bloc_langues_generees' => 'Click on one of the links below to download one of the generated language files.', # NEW
+	'info_bloc_logs_definition' => 'Click on one of the links below to download the latest log file for the verification of missing definitions in the language file.', # NEW
+	'info_bloc_logs_fonction_l' => 'Click on one of the links below to download the latest log file for the verification of uses of _L() in a given context.', # NEW
+	'info_bloc_logs_utilisation' => 'Click on one of the links below to download the latest log file for the verification of obsolete definitions in a language file.', # NEW
+	'info_chemin_langue' => 'Folder containing the language file (e.g. <em>plugins/rainette/lang/</em>, or <em>ecrire/lang/</em>)', # NEW
+	'info_fichier_liste' => 'Choose, from those available on the site, the language file for which you want to output the items.', # NEW
+	'info_fichier_verifie' => 'Choose, from those available on the site, the language file you wish to verify.', # NEW
 	'info_generer' => 'Cette option vous permet de générer, à partir d\'une langue source, le fichier de langue d\'un module donné dans une langue cible. Si le fichier cible existe déjà son contenu est réutilisé pour construire le nouveau fichier.', # NEW
 	'info_langue' => 'Abréviation de la langue (exemple : <em>fr</em>, <em>en</em>, <em>es</em>...)', # NEW
 	'info_lister' => 'Cette option vous permet de visualiser les items d\'un fichier de langue classés par ordre alphabétique.', # NEW
