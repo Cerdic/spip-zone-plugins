@@ -21,4 +21,5 @@
 
 	<pipeline nom="afficher_complement_objet" inclure="abozones_pipelines.php" />
 	<pipeline nom="post_edition" inclure="abozones_pipelines.php" />
+	<pipeline nom="post_edition_lien" inclure="abozones_pipelines.php" />
 </paquet>

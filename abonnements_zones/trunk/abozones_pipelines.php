@@ -64,4 +64,43 @@ function abozones_post_edition($flux){
 	return $flux;
 }
 
+/*
+ * Ajouter ou retirer un utilisateur d'une zone qui vient d'être liée ou déliée à une offre
+ */
+function abozones_post_edition_lien($flux){
+	// Lorsqu'on vient de modifier un lien de zone pour une offre, et que celle-ci a des abonnements actifs
+	if (
+		$flux['args']['objet_source'] == 'zone'
+		and $id_zone = intval($flux['args']['id_objet_source'])
+		and $flux['args']['objet'] == 'abonnements_offre'
+		and $id_abonnements_offre = intval($flux['args']['id_objet'])
+		and $auteurs_actifs = sql_allfetsel(
+			'u.id_auteur',
+			'spip_auteurs as u join spip_abonnements as a on a.id_auteur=u.id_auteur',
+			array('a.id_abonnements_offre = '.$id_abonnements_offre, 'a.statut = "actif"')
+		)
+		and is_array($auteurs_actifs)
+	) {
+		include_spip('inc/autoriser');
+		include_spip('action/editer_zone');
+		
+		// Pour chacun des auteurs ayant un abonnement actif de l'offre
+		$auteurs_actifs = array_map('reset', $auteurs_actifs);
+		foreach ($auteurs_actifs as $id_auteur){
+			// Si c'était un ajout de zone, on ajoute la zone aux auteurs
+			if ($flux['args']['action'] == 'insert') {
+				autoriser_exception('affecterzones', 'auteur', $id_auteur);
+				zone_lier($id_zone, 'auteur', $id_auteur);
+				autoriser_exception('affecterzones', 'auteur', $id_auteur, false);
+			}
+			// Si c'était une suppression de zone, on supprime la zone aux auteurs
+			elseif ($flux['args']['action'] == 'delete') {
+				autoriser_exception('retirerzones', 'auteur', $id_auteur);
+				zone_lier($id_zone, 'auteur', $id_auteur, 'del');
+				autoriser_exception('retirerzones', 'auteur', $id_auteur, false);
+			}
+		}
+	}
+}
+
 ?>
