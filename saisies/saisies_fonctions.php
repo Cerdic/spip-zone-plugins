@@ -15,7 +15,7 @@ include_spip('formulaires/selecteur/generique_fonctions');
  * toto[truc] => toto_truc,
 **/
 function saisie_nom2classe($nom) {
-	return str_replace(array('/', '[', ']'), array('_', '_', ''), $nom);
+	return str_replace(array('/', '[', ']', '&#91;', '&#93;'), array('_', '_', '', '_', ''), $nom);
 }
 
 /**
