@@ -37,8 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_byday_moins_4_day' => 'le quatrième @day@ avant la fin du mois',
 	'info_byday_moins_5_day' => 'le cinquième @day@ avant la fin du mois',
 
-	'info_bymonthday_1' => 'le 1er jour du mois',
-	'info_bymonthday_nb' => 'le @nb@e jour du mois',
+	'info_bymonthday_1' => 'le 1er',
+	'info_bymonthday_nb' => 'le @nb@',
 	'info_bymonthday_moins_1' => 'le dernier jour du mois',
 	'info_bymonthday_moins_2' => 'l\'avant-dernier jour du mois',
 	'info_bymonthday_moins_nb' => 'le @nb@e jour avant la fin du mois',
