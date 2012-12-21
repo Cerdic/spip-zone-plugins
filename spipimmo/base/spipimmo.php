@@ -15,6 +15,7 @@ function spipimmo_declarer_tables_interfaces($interface)
 	$interface['table_des_tables']['spipimmo_annonces']='spipimmo_annonces';
 	$interface['table_des_tables']['spipimmo_documents_annonces']='spipimmo_documents_annonces';
 	$interface['table_des_tables']['spipimmo_types_offres']='spipimmo_types_offres';
+	$interface['table_des_traitements']['LIBELLE_OFFRE'][] = _TRAITEMENT_RACCOURCIS;
 	return $interface;
 }
 

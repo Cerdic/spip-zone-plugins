@@ -22,13 +22,12 @@ include_spip('inc/meta');
 function spipimmo_upgrade($nom_meta_base_version,$version_cible){
 
 	$maj = array();
+	include_spip('base/importer_spip_spipimmo_types_offres');
 	$maj['create'] = array(
 		array('maj_tables',array('spip_spipimmo_annonces','spip_spipimmo_documents_annonces','spip_spipimmo_types_offres')),
-		array('peupler_base_pays')
+		array('importer_spip_spipimmo_types_offres')
 	);
-
 	include_spip('base/upgrade');
-	include_spip('base/pays_peupler_base');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 

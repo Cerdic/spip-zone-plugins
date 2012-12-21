@@ -3,7 +3,7 @@
 	categorie="divers"
 	version="4.0.1"
 	schema="0.0.1"
-	etat="stable"
+	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/spipimmo.png"
 	documentation="http://www.spip-contrib.net/rubrique999"
