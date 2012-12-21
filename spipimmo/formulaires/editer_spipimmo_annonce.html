@@ -31,11 +31,12 @@
 			[(#SAISIE{oui_non, publier, label=<:spipimmo:publier:>})]
 			<li class="editer editer_type_offre saisie_selection">
 			<label for="champ_type_offre"><:spipimmo:type_offre:></label>
+			<select name="type_offre" id="champ_type_offre">
+				<option value=""></option>
 				<BOUCLE_type_offre(SPIPIMMO_TYPES_OFFRES) {par id_type_offre}>
-					<li class="choix">#LIBELLE_OFFRE</li>
+					<option value="#ID_TYPE_OFFRE">#LIBELLE_OFFRE</option>
 				</BOUCLE_type_offre>
-				pas de type encore
-				<//B_type_offre>
+			</select>
 			</li>
 			[(#SAISIE{input, adresse_1, label=<:spipimmo:adresse:> 1})]
 			[(#SAISIE{input, adresse_2, label=<:spipimmo:adresse:> 2})]
