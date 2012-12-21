@@ -2,8 +2,7 @@
 <!-- titre=<multi>[fr]Lettre[en]Letter</multi> -->
 </BOUCLE_rem>
 <BOUCLE_newsletter(NEWSLETTERS){id_newsletter}{statut?}>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
 	<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -29,7 +28,7 @@
 				</h1>
 			</td>
 			<td width="1%">
-				[<a href="#URL_SITE_SPIP">(#LOGO_SITE_SPIP
+				[<a href="#URL_SITE_SPIP">(#LOGO_SITE_SPIP|image_reduire{100,200}
 					|inserer_attribut{id,feedimage}
 					|inserer_attribut{style,padding:0 0 10px 3px;border:0;})</a>]
 			</td>
@@ -58,6 +57,7 @@
 					[<div class='chapo'>(#CHAPO)</div>]
 					[<div class='texte'>(#TEXTE)</div>]
 					[<br/><hr/><div class="notes">(#NOTES)</div>]
+				</div>
 			</td>
 		</tr>
 		<BOUCLE_selectionarticles(ARTICLES){id_newsletter}>
@@ -72,7 +72,7 @@
 						|inserer_attribut{border,'0'}
 						|inserer_attribut{style,'margin: 0;margin-left: 1em;margin-bottom: 1em;float:right;padding: 0;max-width: 100%;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;'}
 						|inserer_attribut{class,logo})]
-					#TITRE</h2>
+					#TITRE</a></h2>
 				<div class="#EDIT{introduction}">#INTRODUCTION</div>
 				<div class="lire_en_ligne"><a href="#URL_ARTICLE">Lire en ligne &laquo; #TITRE &raquo;</a></div>
 			</td>
@@ -99,3 +99,4 @@
 </div>
 </body>
 </html>
+#FILTRE{newsletters_liens_absolus}
