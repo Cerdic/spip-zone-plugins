@@ -162,7 +162,7 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 	include_once(_RACINE_THELIA."fonctions/moteur.php");
 
 	//Connexion à SPIP à la création du compte Thelia
-	if ($_GET['page'] == 'nouveau' || $_GET['page_thelia'] == 'nouveau') {
+		if ($_REQUEST['page'] == 'nouveau' || $_REQUEST['page_thelia'] == 'nouveau' || $_REQUEST['action'] == 'transport' || $_REQUEST['action'] == 'paiement' || !$_REQUEST['page']) {
 		if ($_SESSION['navig']->connecte == 1 && lire_config("spip_thelia/auth_unique_spip_thelia","non")=="oui")  {
 			include_spip('auth/thelia');
 			$auteur = creer_auteur_thelia(
@@ -174,7 +174,7 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 			);
 			$session = charger_fonction('session','inc');
 			$session($auteur);
-			$data = pipeline('thelia_authentifie',array("auteur" => $result,"statut"=>"nouveau"));
+			$data = pipeline('thelia_authentifie',array("auteur" => $auteur,"statut"=>"nouveau"));
 		}
 	}
 
