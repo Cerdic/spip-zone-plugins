@@ -25,6 +25,15 @@ function mailshot_taches_generales_cron($taches_generales){
 	return $taches_generales;
 }
 
+function mailshot_afficher_fiche_objet($flux){
+	if ($flux['args']['type']=='mailshot'
+	  AND $id_mailshot = intval($flux['args']['id'])){
+
+		$flux['data'] = preg_replace(",(<h1[^>]*>).*(</h1>),Uims","\\1"._T("mailshot:info_mailshot_no",array('id'=>$id_mailshot))."\\2",$flux['data'],1);
+	}
+	return $flux;
+}
+
 function mailshot_afficher_complement_objet($flux){
 	if ($flux['args']['type']=='mailshot'
 	  AND $id_mailshot=intval($flux['args']['id'])){

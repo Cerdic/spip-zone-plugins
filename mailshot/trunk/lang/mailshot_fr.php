@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_mailshot_destinataire' => '1 destinataire',
 	'info_nb_mailshots_destinataires' => '@nb@ destinataires',
 	'info_aucun_destinataire' => 'Aucun destinataire',
+	'info_mailshot_no' => 'Envoi N°@id@',
 
 	'info_statut_pause' => 'Pause',
 	'info_statut_processing' => 'En cours',

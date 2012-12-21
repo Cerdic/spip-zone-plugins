@@ -22,9 +22,8 @@
 	<BOUCLE_mailshot(MAILSHOTS){id?}{where?}{statut?}{recherche?}{tri #ENV{par,id_mailshot},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='statut'>[(#STATUT|mailshot_puce_statut{mailshot,#ID_MAILSHOT})]</td>
-			<td class='id_mailshot'><a href="[(#ID_MAILSHOT|generer_url_entite{mailshot})]" title="<:mailshot:label_envoi|attribut_html:> <:info_numero_abbreviation|attribut_html:>#ID_MAILSHOT">#ID_MAILSHOT</a></td>
-			<td class='sujet principale'>
-				<a href="[(#ID_MAILSHOT|generer_url_entite{mailshot})]">[(#SUJET|couper{160})]</a>
+			<td class='id_mailshot'><a href="[(#ID_MAILSHOT|generer_url_entite{mailshot})]" title="<:mailshot:label_envoi|attribut_html:> <:info_numero_abbreviation|attribut_html:>#ID_MAILSHOT"><:mailshot:info_mailshot_no{id=#ID_MAILSHOT}:></a></td>
+			<td class='sujet principale'>[(#SUJET|couper{160})]
 				[<span class="small">\[<a href="(#ID|mailshot_url_newsletter)" title="<:info_numero_abbreviation|attribut_html:> #ID"><:mailshot:lien_voir_newsletter:></a>\]</span>]
 			</td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
