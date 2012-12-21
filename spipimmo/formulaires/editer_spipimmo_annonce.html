@@ -7,8 +7,9 @@
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<input type='hidden' name='id_annonce' value='#ENV{id_annonce}' />
 		<ul>
-			[(#SAISIE{selection, vente_location, 
-					label=<:spipimmo:vente_location:>, 
+			[(#SAISIE{selection, vente_location,
+					label=<:spipimmo:vente_location:>,
+					obligatoire=oui,
 					datas=#ARRAY{
 							vente, <:spipimmo:vente:>,
 							location, <:spipimmo:location:>
@@ -26,7 +27,7 @@
 							}
 					}
 			)]
-			[(#SAISIE{input, negociateur, label=<:spipimmo:negociateur:>})]
+			[(#SAISIE{input, negociateur, label=<:spipimmo:negociateur:>, obligatoire=oui})]
 			[(#SAISIE{input, honoraires, label=<:spipimmo:honoraires:>})]
 			[(#SAISIE{oui_non, publier, label=<:spipimmo:publier:>})]
 			<li class="editer editer_type_offre saisie_selection">
@@ -38,17 +39,18 @@
 				</BOUCLE_type_offre>
 			</select>
 			</li>
-			[(#SAISIE{input, adresse_1, label=<:spipimmo:adresse:> 1})]
+			[(#SAISIE{input, adresse_1, label=<:spipimmo:adresse:> 1, obligatoire=oui})]
 			[(#SAISIE{input, adresse_2, label=<:spipimmo:adresse:> 2})]
-			[(#SAISIE{input, code_postal, label=<:spipimmo:code_postal:>})]
-			[(#SAISIE{input, ville, label=<:spipimmo:ville:>})]
-			[(#SAISIE{input, prix_loyer, label=<:spipimmo:prix_loyer:>})]
+			[(#SAISIE{input, code_postal, label=<:spipimmo:code_postal:>, obligatoire=oui})]
+			[(#SAISIE{input, ville, label=<:spipimmo:ville:>, obligatoire=oui})]
+			[(#SAISIE{input, prix_loyer, label=<:spipimmo:prix_loyer:>, obligatoire=oui})]
 			[(#SAISIE{input, taxe_habitation, label=<:spipimmo:taxe_habitation:>})]
 			[(#SAISIE{input, taxe_fonciere, label=<:spipimmo:taxe_fonciere:>})]
 			[(#SAISIE{input, travaux, label=<:spipimmo:travaux:>})]
 			[(#SAISIE{input, charge, label=<:spipimmo:charge:>})]
 			[(#SAISIE{selection, dpe,
 					label=<:spipimmo:dpe:>,
+					obligatoire=oui,
 					datas=#ARRAY{
 							a, A,
 							b, B 51 à 90,
@@ -61,10 +63,10 @@
 							}
 					}
 			)]
-			[(#SAISIE{input, depot_garantie, label=<:spipimmo:depot_garantie:>})]
-			[(#SAISIE{date, date_annonce, label=<:spipimmo:date_annonce:>})]
-			[(#SAISIE{date, date_modif, label=<:spipimmo:date_modif:>})]
-			[(#SAISIE{date, date_dispo, label=<:spipimmo:date_dispo:>})]
+			[(#SAISIE{input, depot_garantie, label=<:spipimmo:depot_garantie:>, obligatoire=oui})]
+			[(#SAISIE{date, date_annonce, label=<:spipimmo:date_annonce:>, obligatoire=oui, defaut=#DATE{now}})]
+			[(#SAISIE{date, date_modif, label=<:spipimmo:date_modif:>, obligatoire=oui, defaut=#DATE{now}})]
+			[(#SAISIE{date, date_dispo, label=<:spipimmo:date_dispo:>, obligatoire=oui})]
 			[(#SAISIE{input, quartier, label=<:spipimmo:quartier:>})]
 			[(#SAISIE{input, secteur, label=<:spipimmo:secteur:>})]
 			[(#SAISIE{input, residence, label=<:spipimmo:residence:>})]
@@ -118,7 +120,7 @@
 			</ul>
 		</fieldset>
 		</li>
-			[(#SAISIE{textarea, annonce, label=<:spipimmo:annonce:>, rows=10, cols=58})]
+			[(#SAISIE{textarea, annonce, label=<:spipimmo:annonce:>, rows=10, cols=58, obligatoire=oui})]
 		</ul>
 	<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
