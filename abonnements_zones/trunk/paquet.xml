@@ -2,7 +2,7 @@
 	prefix="abozones"
 	categorie="auteur"
 	version="1.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="abozones.png"
 	documentation=""
