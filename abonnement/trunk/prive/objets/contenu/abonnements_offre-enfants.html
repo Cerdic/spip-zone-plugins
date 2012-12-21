@@ -1,0 +1,6 @@
+<INCLURE{fond=prive/objets/liste/abonnements, masquer_offre=oui, par=date_debut, env, ajax, sinon=<:abonnement:info_aucun_abonnement:>, id_abonnements_offre=#ENV{id_abonnements_offre}}>
+
+[(#AUTORISER{creer,abonnement})
+	[(#URL_ECRIRE{abonnement_edit,new=oui&id_abonnements_offre=#ENV{id_abonnements_offre}}|icone_verticale{<:abonnement:icone_creer_abonnement:>,abonnement,new,right})]
+]
+<div class="nettoyeur"></div>

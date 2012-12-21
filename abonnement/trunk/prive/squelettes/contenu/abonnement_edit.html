@@ -1,0 +1,27 @@
+[(#ID_ABONNEMENT|oui)
+	[(#AUTORISER{modifier,abonnement,#ID_ABONNEMENT}|sinon_interdire_acces)]
+][(#ID_ABONNEMENT|non)
+	[(#AUTORISER{creer,abonnement}|sinon_interdire_acces)]
+]
+#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_ABONNEMENT}|?{#ENV{lier_trad,#ID_ABONNEMENT}|generer_url_entite{abonnement},#ENV{id_abonnements_offre}|generer_url_entite{abonnements_offre}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_ABONNEMENT|oui)
+	[(#GET{redirect}|icone_verticale{[(#VAL{abonnement}|objet_info{texte_retour}|_T)],#VAL{abonnement}|objet_info{icone_objet},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[(#VAL{abonnement}|objet_info{#ID_ABONNEMENT|?{texte_modifier,''}}|_T)]
+	<h1>[(#ID_ABONNEMENT|?{#VAL{abonnement}|objet_info{texte_objet}|_T|concat{" ",#ID_ABONNEMENT}}|sinon{#VAL{abonnement}|objet_info{texte_creer}|_T})]</h1>
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_ABONNEMENT|generer_url_entite{abonnement}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		#FORMULAIRE_EDITER_ABONNEMENT{#ENV{id_abonnement,oui},#GET{redirect},#ENV{lier_trad}}
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</div>
