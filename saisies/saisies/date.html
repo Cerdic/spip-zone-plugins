@@ -21,9 +21,10 @@
 [(#REM) Regex de date SQL ]
 #SET{date_sql,"[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]( [0-9][0-9]:[0-9][0-9]:[0-9][0-9])?"}
 
-[(#REM) Si la valeur est un tableau, on considère que c'est date et heure au format SQL et on remet tout en String ]
+[(#REM) Si la valeur est un tableau, on considère que c'est date et heure dans un format déjà reconnu (j/m/a ou SQL) ]
 [(#GET{valeur}|is_array|oui)
-	[(#SET{valeur,[(#GET{valeur}|table_valeur{date})][ (#GET{valeur}|table_valeur{heure})]})]
+	#SET{date, #GET{valeur}|table_valeur{date}}
+	#SET{heure, #GET{valeur}|table_valeur{heure}}
 ]
 
 [(#REM) Si la valeur est une chaîne, on regarde si SQL ]
