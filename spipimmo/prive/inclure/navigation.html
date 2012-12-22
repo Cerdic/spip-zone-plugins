@@ -2,7 +2,7 @@
 <BOUCLE_proprietaires(SPIPIMMO_PROPRIETAIRES) {tout}> </BOUCLE_proprietaires>#SET{grand_total,#GRAND_TOTAL}</B_proprietaires>
 [(#ENV{exec}|=={proprietaires_liste}|oui)
 	#BOITE_OUVRIR{'','info'}
-	<p><b>[(#GET{grand_total}|singulier_ou_pluriel{spipimmo:info_1_proprietaire,spipimmo:info_nb_proprietaire})]</b></p>
+	[<p><b>(#GET{grand_total}|singulier_ou_pluriel{spipimmo:info_1_proprietaire,spipimmo:info_nb_proprietaire})</b></p>]
 	[(#PLUGIN{pays}|non)<p><:spipimmo:pas_plugin_pays_navigation:></p>]
 	[(#PLUGIN{pays}|oui)<p><:spipimmo:pas_plugin_pays_navigation:></p>]
 	#BOITE_FERMER

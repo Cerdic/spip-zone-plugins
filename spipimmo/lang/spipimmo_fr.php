@@ -85,6 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'surface_terrain' => 'Surface terrain',
 	'surface_total' => 'Surface total',
 	//T
+	'table_vide_aucun_enregistrement' => 'Nous avons aucun propriétaire pour le moment.<br />Il vous en faut au moins 1 pour créé des annonces ensuite.',
 	'taxe_fonciere' => 'Taxe foncière',
 	'taxe_habitation' => 'Taxe d\'habitation',
 	'transport' => 'Transport',
