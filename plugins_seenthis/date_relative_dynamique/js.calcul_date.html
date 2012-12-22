@@ -113,6 +113,7 @@ $(document).ready(function() {
 	$.ajax({
 		type: "POST",
 		url: "[(#CHEMIN{vide_date.html}|url_absolue)]",
+		data: { rien: 0 },
 		complete: function(data, textStatus) {
 			if (data.getResponseHeader('Date') != null) {
 				var dateStr = data.getResponseHeader('Date');
