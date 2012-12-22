@@ -10,7 +10,7 @@
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-le-fil-de-marianne</lien>
 	<prefix>fildemarianne</prefix>
-	<necessite id='spip' version='[2.0.10;2.1.99]' />
+	<necessite id='spip' version='[2.0.10;3.0.99]' />
 	<utilise id='bannieres' version='[0.22;]' />
 	<utilise id='notation' version='[0.7.0;]' />
 	<categorie>squelette</categorie>
