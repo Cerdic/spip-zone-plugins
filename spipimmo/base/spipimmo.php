@@ -14,6 +14,7 @@ function spipimmo_declarer_tables_interfaces($interface)
 {
 	$interface['table_des_tables']['spipimmo_annonces']='spipimmo_annonces';
 	$interface['table_des_tables']['spipimmo_documents_annonces']='spipimmo_documents_annonces';
+	$interface['table_des_tables']['spipimmo_proprietaires']='spipimmo_proprietaires';
 	$interface['table_des_tables']['spipimmo_types_offres']='spipimmo_types_offres';
 	$interface['table_des_traitements']['LIBELLE_OFFRE'][] = _TRAITEMENT_RACCOURCIS;
 	return $interface;
@@ -25,15 +26,15 @@ function spipimmo_declarer_tables_principales($tables_principales)
 	$spip_spipimmo_annonces_field=array(
 		"id_annonce"	=>	"int(10) unsigned NOT NULL auto_increment",
 		"vente_location"=>	"varchar(8)",
-		"numero_mandat"		=>	"varchar(255)",
+		"numero_mandat"	=>	"varchar(255)",
 		"type_mandat"	=>	"varchar(50)",
 		"negociateur"	=>	"varchar(255)",
 		"honoraires"	=>	"int(30)",
 		"publier"		=>	"bool",
-		"adresse_1"	=>	"longtext",
-		"adresse_2"	=>	"longtext",
-		"code_postal"		=>	"varchar(10)",
-		"ville"	=>	"varchar(255)",
+		"adresse_1"		=>	"longtext",
+		"adresse_2"		=>	"longtext",
+		"code_postal"	=>	"varchar(10)",
+		"ville"			=>	"varchar(255)",
 		"prix_loyer"	=>	"int(30)",
 		"taxe_habitation"=>"int(10)",
 		"taxe_fonciere"	=>	"int(10)",
@@ -50,35 +51,36 @@ function spipimmo_declarer_tables_principales($tables_principales)
 		"transport"		=>	"varchar(255)",
 		"proximite"		=>	"varchar(255)",
 		"annee_construction"	=>	"varchar(255)",
-		"nbr_pieces"		=>	"int(2)",
+		"nbr_pieces"	=>	"int(2)",
 		"nbr_chambres"	=>	"int(2)",
 		"nbr_etage"		=>	"int(2)",
-		"nbr_wc"			=>	"int(2)",
+		"nbr_wc"		=>	"int(2)",
 		"nbr_sdb"		=>	"int(2)",
 		"nbr_sde"		=>	"int(2)",
-		"nbr_balcon"		=>	"int(2)",
-		"nbr_terrasse"		=>	"int(2)",
+		"nbr_balcon"	=>	"int(2)",
+		"nbr_terrasse"	=>	"int(2)",
 		"nbr_mur_mit"	=>	"int(1)",
 		"nbr_park_int"	=>	"int(2)",
 		"nbr_park_ext"	=>	"int(2)",
 		"nbr_garage"	=>	"int(2)",
-		"nbr_cave"	=>	"int(2)",
+		"nbr_cave"		=>	"int(2)",
 		"surf_facade"	=>	"int(6)",
-		"surf_habitable"	=>	"int(6)",
+		"surf_habitable"=>	"int(6)",
 		"surf_sejour"	=>	"int(6)",
 		"surf_terrain"	=>	"int(6)",
 		"surf_total"	=>	"int(6)",
 		"etage"			=>	"int(2)",
-		"etage_code"			=>	"int(2)",
+		"etage_code"	=>	"int(2)",
 		"type_cuisine"	=>	"varchar(255)",
 		"type_soussol"	=>	"varchar(255)",
-		"type_chauffage"	=>	"varchar(255)",
-		"nat_chauffage"		=>	"varchar(255)",
+		"type_chauffage"=>	"varchar(255)",
+		"nat_chauffage"	=>	"varchar(255)",
 		"prestige"		=>	"bool",
 		"ascenseur"		=>	"bool",
 		"piscine"		=>	"bool",
 		"acces_handicape"	=>	"bool",
-		"annonce"	=>	"longtext",);
+		"annonce"		=>	"longtext",
+	);
 		
 	$spip_spipimmo_annonces_key=array(
 		"PRIMARY KEY" => "id_annonce");
@@ -93,7 +95,8 @@ function spipimmo_declarer_tables_principales($tables_principales)
 		"numero_dossier"=>	"int(50)",
 		"fichier"		=>	"varchar(255)",
 		"taille"		=>	"int(11)",
-		"type"			=>	"bool");
+		"type"			=>	"bool",
+	);
 
 	$spip_spipimmo_documents_annonces_key=array(
 		"PRIMARY KEY" => "id_document");
@@ -101,6 +104,26 @@ function spipimmo_declarer_tables_principales($tables_principales)
 	$tables_principales['spip_spipimmo_documents_annonces']=array(
 		'field' => &$spip_spipimmo_documents_annonces_field,
 		'key' => &$spip_spipimmo_documents_annonces_key);
+
+	//Table des prorietaires
+	$spip_spipimmo_proprietaires_field=array(
+		"id_proprio"	=>	"bigint(21) NOT NULL",
+		"civilite"		=>	"smallint(1)",
+		"nom"			=>	"varchar(255)",
+		"prenom"		=>	"varchar(255)",
+		"adresse_1"		=>	"longtext",
+		"adresse_2"		=>	"longtext",
+		"code_postal"	=>	"varchar(10)",
+		"ville"			=>	"varchar(255)",
+		"pays"			=>	"smallint(6)",
+	);
+
+	$spip_spipimmo_proprietaires_key=array(
+		"PRIMARY KEY" => "id_proprio");
+
+	$tables_principales['spip_spipimmo_proprietaires']=array(
+		'field' => &$spip_spipimmo_proprietaires_field,
+		'key' => &$spip_spipimmo_proprietaires_key);
 
 	//Table du type d'offre
 	$spip_spipimmo_types_offres_field=array(

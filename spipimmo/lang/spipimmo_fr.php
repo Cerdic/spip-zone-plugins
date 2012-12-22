@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ascenseur' => 'Ascenseur',
 	//C
 	'charge' => 'Charge',
+	'civilite' => 'Civilité',
 	'code_postal' => 'Code postal',
 	'creer_annonce' => 'Créer une annonce',
 	'creer_proprietaire' => 'Créer un propriétaire',
@@ -30,6 +31,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//L
 	'liste_annonces' => 'Liste des annonces',
 	'location' => 'Location',
+	//M
+	'mademoiselle' => 'Mademoiselle',
+	'madamme' => 'Madamme',
+	'monsieur' => 'Monsieur',
 	//N
 	'nature_chauffage' => 'Nature de chauffage',
 	'nbr_balcon' => 'Nombre de balcon',
@@ -46,9 +51,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nbr_terrasse' => 'Nombre de terrasse',
 	'nbr_wc' => 'Nombre de WC',
 	'negociateur' => 'Négociateur',
+	'nom' => 'Nom',
 	'numero_mandat' => 'Numéro de mandat',
 	//P
+	'pas_plugin_pays' => 'Pour pouvoir sélectionner un pays, il faut le plugins "Pays"',
+	'pays' => 'Pays',
 	'piscine' => 'Piscine',
+	'prenom' => 'Prénom',
 	'prestige' => 'Prestige',
 	'privilège' => 'Privilège',
 	'prix_loyer' => 'Prix loyer',

@@ -1,0 +1,33 @@
+﻿<div class='formulaire_spip formulaire_spipimmo formulaire_editer formulaire_#FORM'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method='post' action='#ENV{action}'><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<input type='hidden' name='id_annonce' value='#ENV{id_annonce}' />
+		<ul>
+			[(#SAISIE{radio, civilite,
+					label=<:spipimmo:civilite:>,
+					obligatoire=oui,
+	                datas=#ARRAY{
+	                        1,<:spipimmo:mademoiselle:>,
+	                        2,<:spipimmo:madamme:>,
+	                        3,<:spipimmo:monsieur:>}})]
+			[(#SAISIE{input, nom, label=<:spipimmo:nom:>, obligatoire=oui})]
+			[(#SAISIE{input, prenom, label=<:spipimmo:prenom:>, obligatoire=oui})]
+			[(#SAISIE{input, adresse_1, label=<:spipimmo:adresse:> 1, obligatoire=oui})]
+			[(#SAISIE{input, adresse_2, label=<:spipimmo:adresse:> 2})]
+			[(#SAISIE{input, code_postal, label=<:spipimmo:code_postal:>, obligatoire=oui})]
+			[(#SAISIE{input, ville, label=<:spipimmo:ville:>, obligatoire=oui})]
+			[(#PLUGIN{pays}|oui)[(#SAISIE{pays, pays, label=<:spipimmo:pays:>})]]
+			[(#PLUGIN{pays}|non)
+				<li>
+					<label><:spipimmo:pays:></label>
+					<p class="explication"><:spipimmo:pas_plugin_pays:></p>
+				</li>
+			]
+		</ul>
+	<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>

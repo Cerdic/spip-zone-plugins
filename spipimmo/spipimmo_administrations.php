@@ -15,17 +15,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/meta');
 /**
  * Fonction d'installation, mise a jour de la base
- *
- * @param unknown_type $nom_meta_base_version
- * @param unknown_type $version_cible
  */
 function spipimmo_upgrade($nom_meta_base_version,$version_cible){
 
 	$maj = array();
 	include_spip('base/importer_spip_spipimmo_types_offres');
 	$maj['create'] = array(
-		array('maj_tables',array('spip_spipimmo_annonces','spip_spipimmo_documents_annonces','spip_spipimmo_types_offres')),
+		array('maj_tables',array('spip_spipimmo_annonces','spip_spipimmo_documents_annonces','spip_spipimmo_proprietaires','spip_spipimmo_types_offres')),
 		array('importer_spip_spipimmo_types_offres')
+	);
+	$maj['0.0.3'] = array(
+		array('maj_tables',array('spip_spipimmo_proprietaires'))
 	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -33,12 +33,11 @@ function spipimmo_upgrade($nom_meta_base_version,$version_cible){
 
 /**
  * Fonction de desinstallation
- *
- * @param unknown_type $nom_meta_base_version
  */
 function spipimmo_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_spipimmo_annonces");
 	sql_drop_table("spip_spipimmo_documents_annonces");
+	sql_drop_table("spip_spipimmo_proprietaires");
 	sql_drop_table("spip_spipimmo_types_offres");
 	effacer_meta($nom_meta_base_version);
 }
