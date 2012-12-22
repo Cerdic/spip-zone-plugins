@@ -38,7 +38,7 @@ function association_vider_tables($nom_meta, $table) {
 		'spip_asso_ventes',
 		'spip_association_metas',
 	);
-	// On efface les tables du plugin en consignant le resultat dans /tmp/spip_prive.log
+	// On efface les tables du plugin en consignant le resultat
 	foreach($tables_a_supprimer as $table ) {
 		if (sql_drop_table($table))
 			spip_log("Associaspip : echec de la desinstallation de la table '$table' ",'associaspip');
@@ -53,7 +53,16 @@ function association_vider_tables($nom_meta, $table) {
 // pour y a definir les groupes gerant les autorisations (id<100)
 function association_gestion_autorisations_upgrade() {
 	// definir tous les groupes qui doivent exister
-	$groupes_autorisations = array(1,2,3,20,21,30,31);
+	$groupes_autorisations = array(
+#		1, 2, 3, 20, 21, 30, 31, // r59886 avant r67499
+		1, 2, 3, 21, 23, 31, 33, // r59886 apres r67499
+#		10, 32, 33, // r66289 avant r67499
+		10, 30, 35, // r66289 apres r67499
+#		11, 12, 40, 41, 50, 51, // r66769 avant r67499
+		11, 13, 41, 43, 51, 53, // r66769 apres r67499
+#		61, 63, 62, 66, 73, 74, 76, // r67500 avant r67499
+		63, 66, 64, 66, 73, 74, 76, // r67500 apres r67499
+	);
 
 	// recuperer tous ceux existants
 	$groupes_existants = array();
@@ -78,6 +87,7 @@ function association_gestion_autorisations_upgrade() {
 // MAJ des tables de la base SQL
 // Retourne 0 si ok, le dernier numero de MAJ ok sinon
 function association_upgrade($meta, $courante, $table='meta') {
+
 	if (!isset($GLOBALS['association_metas']['base_version'])) { // Compatibilite : le nom de la meta donnant le numero de version n'etait pas std puis est parti dans une autre table puis encore une autre
 		lire_metas('asso_metas');
 		if (isset($GLOBALS['asso_metas']['base_version'])) {
@@ -91,7 +101,8 @@ function association_upgrade($meta, $courante, $table='meta') {
 		$n = $GLOBALS['association_metas']['base_version'];
 	effacer_meta('association_base_version');
 	spip_log("association upgrade: $table $meta = $n =>> $courante",'associaspip');
-	if (!$n) {
+
+	if (!$n) { // Creation de la base
 		include_spip('base/create');
 		alterer_base($GLOBALS['tables_principales'],
 			     $GLOBALS['tables_auxiliaires']);
@@ -99,12 +110,12 @@ function association_upgrade($meta, $courante, $table='meta') {
 		association_gestion_autorisations_upgrade();
 		ecrire_meta($meta, $courante, NULL, $table);
 		return 0; // Reussite (supposee !)
-	} else { // compatibilite avec les numeros de version non entiers
-		$installee = ($n>1) ? $n : ($n*100);
+	} else { // Mise-A-Jour de la base
+		$installee = ($n>1) ? $n : ($n*100); // compatibilite avec les numeros de version non entiers
 		$GLOBALS['association_maj_erreur'] = 0;
 		if ($courante>$installee) {
 			include_spip('base/upgrade');
-			$n = maj_while($installee, $courante, $GLOBALS['association_maj'], $meta, $table);
+			$n = maj_while($installee, $courante, $GLOBALS['association_maj'], $meta, $table); // jouer les mises a jour ci-apres
 			$n = $n ? $n[0] : $GLOBALS['association_maj_erreur'];
 			if ($n) // signaler que les dernieres MAJ sont a refaire
 				ecrire_meta($meta, $n-1, '', $table);
@@ -584,9 +595,9 @@ $GLOBALS['association_maj'][58894] = array(
 	array('sql_alter', "TABLE spip_asso_activites DROP date "),
 );
 
-// introduction des groupes dans la table spip_asso_groupes
+// introduction des autorisations: 1,2,3,20,21,30,31.
 $GLOBALS['association_maj'][59886] = array(
-	array('association_gestion_autorisations_upgrade')
+	array('association_gestion_autorisations_upgrade'),
 );
 
 // Correction de l'erreur aux niveau de l'auto-increment des id_groupe presente pour les nouvelles installations effectuees entre la r53901  et r60035
@@ -599,7 +610,7 @@ function association_maj_60038() {
 		$max_id = ($max_id<100)?100:$max_id;
 		while ($data=sql_fetch($query)) {
 			sql_updateq('spip_asso_groupes', array('id_groupe'=>($data['id_groupe']+$max_id)), 'id_groupe='.$data['id_groupe']); // on ajoute $max_id_ a l'ID des groupes selectionnes
-			sql_updateq('spip_asso_groupes_liaisons', array('id_groupe'=>($data['id_groupe']+$max_id)), 'id_groupe='.$data['id_groupe']); // on fait pareul dans la table des liaisons
+			sql_updateq('spip_asso_groupes_liaisons', array('id_groupe'=>($data['id_groupe']+$max_id)), 'id_groupe='.$data['id_groupe']); // on fait pareil dans la table des liaisons
 		}
 	}
 
@@ -619,9 +630,9 @@ $GLOBALS['association_maj'][62712] = array(
 	array('sql_alter', "TABLE spip_asso_prets ADD date_reservation DATETIME DEFAULT NULL "),
 );
 
-// ajout de nouvelles autorisations
+// ajout de nouvelles autorisations: 10,32,33.
 $GLOBALS['association_maj'][66289] = array(
-	array('sql_insertq_multi', 'spip_asso_groupes', array( array('id_groupe'=>10), array('id_groupe'=>32), array('id_groupe'=>33), ), ),
+	array('association_gestion_autorisations_upgrade'),
 );
 
 // normalisation de la base
@@ -630,7 +641,6 @@ $GLOBALS['association_maj'][66346] = array(
 	array('sql_alter', "TABLE spip_asso_categories ADD commentaire TEXT NOT NULL"),
 	array('sql_update', 'spip_asso_categories', array('commentaire'=>'commentaires') ),
 	array('sql_alter', "TABLE spip_asso_categories DROP commentaires"),
-
 
 	array('sql_alter', "TABLE spip_asso_groupes ADD commentaire TEXT NOT NULL"),
 	array('sql_update', 'spip_asso_groupes', array('commentaire'=>'commentaires') ),
@@ -649,9 +659,9 @@ $GLOBALS['association_maj'][66346] = array(
 	array('sql_alter', "TABLE spip_asso_prets DROP id_emprunteur"),
 );
 
-// ajout de nouvelles autorisations
+// ajout de nouvelles autorisations: 11,12,40,41,50,51.
 $GLOBALS['association_maj'][66769] = array(
-	array('sql_insertq_multi', 'spip_asso_groupes', array( array('id_groupe'=>11), array('id_groupe'=>12), array('id_groupe'=>40), array('id_groupe'=>41), array('id_groupe'=>50), array('id_groupe'=>51), ), ),
+	array('association_gestion_autorisations_upgrade'),
 );
 
 // normalisation de la base
@@ -717,9 +727,9 @@ $GLOBALS['association_maj'][67499] = array(
 	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>30), 'id_groupe=32' ), // synchroniser membres
 );
 
-// ajout de nouvelles autorisations
+// ajout de nouvelles autorisations: 61,63,64,66,73,74,76.
 $GLOBALS['association_maj'][67500] = array(
-	array('sql_insertq_multi', 'spip_asso_groupes', array( array('id_groupe'=>73), array('id_groupe'=>74), array('id_groupe'=>76), array('id_groupe'=>61), array('id_groupe'=>63), array('id_groupe'=>64), array('id_groupe'=>66), ), ),
+	array('association_gestion_autorisations_upgrade'),
 );
 
 // normalisation de la base (suite)
