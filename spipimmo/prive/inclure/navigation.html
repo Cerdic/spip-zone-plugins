@@ -1,6 +1,16 @@
 <!--#navigation-->
-<div class="box simple spipimmo">
-	<div class="inner">
+<BOUCLE_proprietaires(SPIPIMMO_PROPRIETAIRES) {tout}> </BOUCLE_proprietaires>#SET{grand_total,#GRAND_TOTAL}</B_proprietaires>
+[(#ENV{exec}|=={proprietaires_liste}|oui)
+	#BOITE_OUVRIR{'','info'}
+	<p><b>[(#GET{grand_total}|singulier_ou_pluriel{spipimmo:info_1_proprietaire,spipimmo:info_nb_proprietaire})]</b></p>
+	[(#PLUGIN{pays}|non)<p><:spipimmo:pas_plugin_pays_navigation:></p>]
+	[(#PLUGIN{pays}|oui)<p><:spipimmo:pas_plugin_pays_navigation:></p>]
+	#BOITE_FERMER
+]
+
+
+<div class="box raccourcis [(#ENV{exec}|=={proprietaires_liste}|non)spipimmo]">
+	<div class="inner"><div class="bd">
 	<ul>
 		<!-- Gestion des annonces -->
 		<li class="menu">
@@ -9,6 +19,14 @@
 				title="<:spipimmo:liste_annonces:>">
 				<img src="#CHEMIN{prive/themes/spip/images/breve-24.png}" />
 				<:spipimmo:liste_annonces:>
+			</a>
+		</li>
+		<li class="menu">
+			<a href="#URL_ECRIRE{proprietaires_liste}"
+				class="page_accueil [(#ENV{exec}|=={proprietaires_liste}|oui)on]" 
+				title="<:spipimmo:liste_proprietaires:>">
+				<img src="#CHEMIN{prive/themes/spip/images/breve-24.png}" />
+				<:spipimmo:liste_proprietaires:>
 			</a>
 		</li>
 		<li class="menu">
@@ -28,6 +46,6 @@
 			</a>
 		</li>
 	</ul>
-	</div>
+	</div></div>
 </div>
 <!--/#navigation-->

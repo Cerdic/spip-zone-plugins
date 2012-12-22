@@ -6,6 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	//A
 	'acces_handicape' => 'Accès handicapé',
+	'action' => 'Action',
+	'action_modifier' => 'Modifier',
+	'action_supprimer' => 'Supprimer',
 	'adresse' => 'Adresse',
 	'annee_construction' => 'Année de construction',
 	'annonce' => 'Annonce',
@@ -28,8 +31,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exclusif' => 'Exclusif',
 	//H
 	'honoraires' => 'Honoraires',
+	//I
+	'info_1_proprietaire' => 'Il y a 1 propriétaire.',
+	'info_nb_proprietaire' => 'Il y a @nb@ propriétaires.',
 	//L
 	'liste_annonces' => 'Liste des annonces',
+	'liste_proprietaires' => 'Liste des propriétaires',
 	'location' => 'Location',
 	//M
 	'mademoiselle' => 'Mademoiselle',
@@ -55,8 +62,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'numero_mandat' => 'Numéro de mandat',
 	//P
 	'pas_plugin_pays' => 'Pour pouvoir sélectionner un pays, il faut le plugins "Pays"',
+	'pas_plugin_pays_navigation' => 'Une colonne pays est prévu si vous disposé du plugins "Pays"',
 	'pays' => 'Pays',
 	'piscine' => 'Piscine',
+	'plugin_pays_navigation' => 'Via la colonne "pays", vous pouvez trier les annonces vu que le plugin "Pays" est actif',
 	'prenom' => 'Prénom',
 	'prestige' => 'Prestige',
 	'privilège' => 'Privilège',

@@ -1,0 +1,7 @@
+<INCLURE{fond=prive/inclure/navigation,env,ajax}>
+
+<h1 class="grostitre"><:spipimmo:spipimmo:></h1>
+
+#BOITE_OUVRIR{#CHEMIN_IMAGE{breve-24.png}|balise_img{'',cadre-icone}|concat{#VAL{spipimmo:liste_proprietaires}|_T}|wrap{'<h3>'},'simple','titrem'}
+	<INCLURE{fond=prive/inclure/liste_proprietaires,env,ajax}>
+#BOITE_FERMER
