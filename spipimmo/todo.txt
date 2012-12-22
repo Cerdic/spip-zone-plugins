@@ -1,3 +1,3 @@
 - suite de la refonte du formulaire pour les annonces
-- rajouter un bloquage pour pas supprimer un propriétaire aui a des fiches.
+- rajouter un bloquage pour pas supprimer un propriétaire qui à des fiches en cours
 - revoir les images
