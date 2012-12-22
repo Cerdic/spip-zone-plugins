@@ -18,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'civilite' => 'Civilité',
 	'code_postal' => 'Code postal',
 	'creer_annonce' => 'Créer une annonce',
-	'creer_proprietaire' => 'Créer un propriétaire',
 	//D
 	'dpe' => 'DPE',
 	'date_annonce' => 'Date de l\'annonce',
@@ -32,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//H
 	'honoraires' => 'Honoraires',
 	//I
+	'icone_creer_nouveau_proprietaire' => 'Créer un nouveau propriétaire',
 	'info_1_proprietaire' => 'Il y a 1 propriétaire.',
 	'info_nb_proprietaire' => 'Il y a @nb@ propriétaires.',
 	//L

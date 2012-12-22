@@ -19,7 +19,7 @@
 		<td class="code_postal">#CODE_POSTAL</td>
 		<td class="ville">#VILLE</td>
 		[(#PLUGIN{pays}|oui)<td class="pays">#PAYS</td>]
-		<td><a href='[(#URL_PAGE{spipimmo_proprio}|parametre_url{id_proprio,#ID_PROPRIO})]'><:spipimmo:action_modifier:></a>
+		<td><a href='[(#URL_ECRIRE{spipimmo_proprio}|parametre_url{id_proprio,#ID_PROPRIO})]'><:spipimmo:action_modifier:></a>
 		|	<a href='[(#URL_ACTION_AUTEUR{supprimer_spipimmo_proprio,#ID_PROPRIO,#SELF})]'><:spipimmo:action_supprimer:></a>
 		</td>
 	</tr>

@@ -5,3 +5,6 @@
 #BOITE_OUVRIR{#CHEMIN_IMAGE{breve-24.png}|balise_img{'',cadre-icone}|concat{#VAL{spipimmo:liste_proprietaires}|_T}|wrap{'<h3>'},'simple','titrem'}
 	<INCLURE{fond=prive/inclure/liste_proprietaires,env,ajax}>
 #BOITE_FERMER
+[(#AUTORISER{creer,proprietaire})
+        [(#URL_ECRIRE{spipimmo_proprio,new=oui}|icone_verticale{<:spipimmo:icone_creer_nouveau_proprietaire:>,auteur,new,right})]
+]
