@@ -48,7 +48,7 @@ function revision_spipimmo_proprio($id_proprio, $c=false) {
 	// recuperer les champs dans POST s'ils ne sont pas transmis
         if ($c === false) {
                 $c = array();
-                foreach (array('civilite', 'nom', 'prenom', 'adresse_1', 'code_postal', 'ville') as $champ) {
+                foreach (array('civilite', 'nom', 'prenom', 'adresse_1', 'code_postal', 'ville', 'tel_fixe') as $champ) {
                         if (($a = _request($champ)) !== null) {
                                 $c[$champ] = $a;
                         }

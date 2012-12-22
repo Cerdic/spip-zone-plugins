@@ -21,7 +21,7 @@ function formulaires_editer_spipimmo_proprio_charger_dist($id_proprio='new', $re
 }
 
 function formulaires_editer_spipimmo_proprio_verifier_dist($id_proprio='new', $retour=''){
-		$erreurs = formulaires_editer_objet_verifier('spipimmo_proprietaires', $id_proprio, array('civilite', 'nom', 'prenom', 'adresse_1', 'code_postal', 'ville'));
+		$erreurs = formulaires_editer_objet_verifier('spipimmo_proprietaires', $id_proprio, array('civilite', 'nom', 'prenom', 'adresse_1', 'code_postal', 'ville', 'tel_fixe'));
         return $erreurs;
 }
 

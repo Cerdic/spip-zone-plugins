@@ -115,6 +115,8 @@ function spipimmo_declarer_tables_principales($tables_principales)
 		"adresse_2"		=>	"longtext",
 		"code_postal"	=>	"varchar(10)",
 		"ville"			=>	"varchar(255)",
+		"tel_fixe"		=>	"text",
+		"tel_port"		=>	"text",
 		"pays"			=>	"smallint(6)",
 	);
 

@@ -27,6 +27,9 @@ function spipimmo_upgrade($nom_meta_base_version,$version_cible){
 	$maj['0.0.3'] = array(
 		array('maj_tables',array('spip_spipimmo_proprietaires'))
 	);
+	$maj['0.0.4'] = array(
+		array('maj_tables',array('spip_spipimmo_proprietaires'))
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
