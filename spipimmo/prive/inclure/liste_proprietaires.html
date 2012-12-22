@@ -7,6 +7,8 @@
 		<th class="prenom" scope='col'><:spipimmo:prenom:></th>
 		<th class="code_postal" scope='col'>[(#TRI{code_postal,<:spipimmo:code_postal:>})]</th>
 		<th class="ville" scope='col'>[(#TRI{ville,<:spipimmo:ville:>})]</th>
+		<th class="tel_fixe" scope='col'><:spipimmo:tel_fixe:></th>
+		<th class="tel_fixe" scope='col'><:spipimmo:tel_port:></th>
 		[(#PLUGIN{pays}|oui)<th class="pays" scope='col'>[(#TRI{pays,<:spipimmo:pays:>})]</th>]
 		<th><:spipimmo:action:></th>
 	</tr>
@@ -18,6 +20,8 @@
 		<td class="prenom">#PRENOM</td>
 		<td class="code_postal">#CODE_POSTAL</td>
 		<td class="ville">#VILLE</td>
+		<td class="tel_fixe">#TEL_FIXE</td>
+		<td class="tel_port">#TEL_PORT</td>
 		[(#PLUGIN{pays}|oui)<td class="pays">#PAYS</td>]
 		<td><a href='[(#URL_ECRIRE{spipimmo_proprio}|parametre_url{id_proprio,#ID_PROPRIO})]'><:spipimmo:action_modifier:></a>
 		|	<a href='[(#URL_ACTION_AUTEUR{supprimer_spipimmo_proprio,#ID_PROPRIO,#SELF})]'><:spipimmo:action_supprimer:></a>
