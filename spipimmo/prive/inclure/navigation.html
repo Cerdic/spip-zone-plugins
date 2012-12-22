@@ -14,8 +14,8 @@
 	<ul>
 		<!-- Gestion des annonces -->
 		<li class="menu">
-			<a href="#URL_ECRIRE{spipimmo}"
-				class="page_accueil [(#ENV{exec}|=={spipimmo}|oui)on]" 
+			<a href="#URL_ECRIRE{annonces_liste}"
+				class="page_accueil [(#ENV{exec}|=={annonces_liste}|oui)on]" 
 				title="<:spipimmo:liste_annonces:>">
 				<img src="#CHEMIN{prive/themes/spip/images/breve-24.png}" />
 				<:spipimmo:liste_annonces:>
@@ -27,14 +27,6 @@
 				title="<:spipimmo:liste_proprietaires:>">
 				<img src="#CHEMIN{prive/themes/spip/images/breve-24.png}" />
 				<:spipimmo:liste_proprietaires:>
-			</a>
-		</li>
-		<li class="menu">
-			<a href="#URL_ECRIRE{spipimmo_annonce}"
-				class="page_accueil [(#ENV{exec}|=={spipimmo_annonce}|oui)on]"
-				title="<:spipimmo:creer_annonce:>">
-				<img src="#CHEMIN{prive/themes/spip/images/mot-24.png}" />
-				<:spipimmo:creer_annonce:>
 			</a>
 		</li>
 	</ul>

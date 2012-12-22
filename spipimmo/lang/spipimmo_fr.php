@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'honoraires' => 'Honoraires',
 	//I
 	'icone_creer_nouveau_proprietaire' => 'Créer un nouveau propriétaire',
+	'icone_creer_nouvelle_annonce' => 'Créer une nouvelle annonce',
 	'info_1_proprietaire' => 'Il y a 1 propriétaire.',
 	'info_nb_proprietaire' => 'Il y a @nb@ propriétaires.',
 	//L
@@ -85,7 +86,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'surface_terrain' => 'Surface terrain',
 	'surface_total' => 'Surface total',
 	//T
-	'table_vide_aucun_enregistrement' => 'Nous avons aucun propriétaire pour le moment.<br />Il vous en faut au moins 1 pour créé des annonces ensuite.',
+	'table_proprio_vide_aucun_enregistrement' => 'Nous avons aucun propriétaire pour le moment.<br />Il vous en faut au moins 1 pour créé des annonces ensuite.',
+	'table_annonce_vide_aucun_enregistrement' => 'Nous avons aucune anonce pour le moment.<br />Pour créer la première, il vous faut au moins un propriétaire.',
 	'taxe_fonciere' => 'Taxe foncière',
 	'taxe_habitation' => 'Taxe d\'habitation',
 	'tel_fixe' => 'Téléphone fixe',

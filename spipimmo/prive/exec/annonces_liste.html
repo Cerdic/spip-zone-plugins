@@ -1,0 +1,10 @@
+<INCLURE{fond=prive/inclure/navigation,env,ajax}>
+
+<h1 class="grostitre"><:spipimmo:spipimmo:></h1>
+
+#BOITE_OUVRIR{#CHEMIN_IMAGE{breve-24.png}|balise_img{'',cadre-icone}|concat{#VAL{spipimmo:liste_annonces}|_T}|wrap{'<h3>'},'simple','titrem'}
+	<INCLURE{fond=prive/inclure/liste_annonces,env,ajax}>
+#BOITE_FERMER
+[(#AUTORISER{creer,annonce})
+        [(#URL_ECRIRE{spipimmo_annonces,new=oui}|icone_verticale{<:spipimmo:icone_creer_nouvelle_annonce:>,annonce,new,right})]
+]

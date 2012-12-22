@@ -18,10 +18,13 @@ function action_editer_spipimmo_proprio_dist() {
 
 	// pas de spipimmo_proprio ? on en cree un nouveau, mais seulement si 'oui' en argument.
 	if (!$id_proprio = intval($arg)) {
-		if (!autoriser('creer','spipimmo_proprietaires') or !$id_proprio = insert_spipimmo_proprio())
-			return array(false,_L('echec'));
+		if ($arg != 'oui') {
+			include_spip('inc/headers');
+			redirige_url_ecrire();
+		}
+		$id_proprio = insert_spipimmo_proprio();
 	}
-	$err = revision_spipimmo_proprio($id_proprio);
+	if ($id_proprio) $err = revision_spipimmo_proprio($id_proprio);
 	return array($id_proprio,$err);
 }
 
@@ -46,19 +49,19 @@ function insert_spipimmo_proprio() {
 function revision_spipimmo_proprio($id_proprio, $c=false) {
 
 	// recuperer les champs dans POST s'ils ne sont pas transmis
-        if ($c === false) {
-                $c = array();
-                foreach (array('civilite', 'nom', 'prenom', 'adresse_1', 'code_postal', 'ville', 'tel_fixe') as $champ) {
-                        if (($a = _request($champ)) !== null) {
-                                $c[$champ] = $a;
-                        }
-                }
-        }
+    if ($c === false) {
+		$c = array();
+			foreach (array('civilite', 'nom', 'prenom', 'adresse_1', 'code_postal', 'ville', 'tel_fixe') as $champ) {
+				if (($a = _request($champ)) !== null) {
+					$c[$champ] = $a;
+				}
+			}
+	}
 
-        include_spip('inc/modifier');
-        modifier_contenu('spipimmo_proprietaires', $id_proprio, array(
-                        'invalideur' => "id='id_proprio/$id_proprio'"
-                ),
-                $c);
+	include_spip('inc/modifier');
+	modifier_contenu('spipimmo_proprietaires', $id_proprio, array(
+		'invalideur' => "id='id_proprio/$id_proprio'"
+	),
+	$c);
 }
 ?>
