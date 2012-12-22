@@ -18,7 +18,7 @@ function action_editer_spipimmo_proprio_dist() {
 
 	// pas de spipimmo_proprio ? on en cree un nouveau, mais seulement si 'oui' en argument.
 	if (!$id_proprio = intval($arg)) {
-		if (!autoriser('creer','gis') or !$id_gis = gis_inserer())
+		if (!autoriser('creer','spipimmo_proprietaires') or !$id_proprio = insert_spipimmo_proprio())
 			return array(false,_L('echec'));
 	}
 	$err = revision_spipimmo_proprio($id_proprio);
