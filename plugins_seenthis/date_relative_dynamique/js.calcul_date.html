@@ -1,12 +1,5 @@
 [(#HTTP_HEADER{Content-type: text/javascript[; charset=(#CHARSET)]})]
 
-
-var date_now = 0;
-
-
-var date_debut = new Date();
-date_debut = Math.floor(date_debut.getTime()/1000);
-
 var chaines_lang = new Array();
 chaines_lang['date_il_y_a'] = '<:date_il_y_a:>';
 chaines_lang['date_une_seconde'] = '<:date_une_seconde:>';
@@ -32,23 +25,20 @@ function _T(chaine, nom_val, val) {
 
 
 function afficher_dates() {
-	var date_maintenant = new Date();
-	date_maintenant = Math.floor(date_maintenant.getTime() / 1000);
-	
-	var date_diff = date_maintenant - date_debut;
-	setTimeout("afficher_dates()", 1000);
-	
+	var date_now = Math.floor((new Date()).getTime() / 1000) + Math.floor($.cookie('dateoffset'));
+
 	$(".calcul_date").each(function() {
-		if ($(this).attr("title")) var date = Math.floor($(this).attr("title")) - date_diff;
-		else if ($(this).attr("datetime")) {
+		if ($(this).attr("datetime")) {
 			var date = new Date($(this).attr("datetime")); 
-			date = Math.floor(date.getTime()/1000) - date_diff;
+			date = Math.floor(date.getTime()/1000);
+		} else if ($(this).attr("title")) {
+			var date = Math.floor($(this).attr("title"));
 		}
 
 		// L'age de l'article depend du serveur
 		// l'age affichee depend du client
 		age = date_now - date;
-		
+
 		if (age < 1) age = false;
 		else if (age < 2) age = _T( "date_il_y_a", "delai",  age + " " + _T("date_une_seconde") );
 		else if (age < 60) age = _T( "date_il_y_a", "delai",  age + " " + _T("date_secondes") );
@@ -107,27 +97,22 @@ function afficher_dates() {
 // Masquer les dateServer
 // puis recuperer date serveur
 // donc reafficher dates pour calcul
-$(document).ready(function() {
-	$(".calcul_date").css({"visibility": "hidden"});
+$(function() {
+	setInterval("afficher_dates()", 1000);
 
-	$.ajax({
-		type: "POST",
-		url: "[(#CHEMIN{vide_date.html}|url_absolue)]",
-		data: { rien: 0 },
-		complete: function(data, textStatus) {
-			if (data.getResponseHeader('Date') != null) {
-				var dateStr = data.getResponseHeader('Date');
-				var dateServer =  Date.parse(new Date(Date.parse(dateStr)).toUTCString());
-				date_now = Math.floor(dateServer/1000);
-			} else { // systematique en crossdomain (pas de lecture du header "Date")
-				date_now = new Date();
-				date_now = Math.floor(date_now.getTime()/1000);
-			
+	if ($.cookie('dateoffset') == null) {
+		var date_now = Math.floor((new Date()).getTime() / 1000);
+		$.ajax({
+			type: "POST",
+			url: "[(#VAL{spip.php?action=dateoffset}|url_absolue)]",
+			data: { time: date_now },
+			complete: function(data) {
+				var date_sql = Math.floor(data.responseText);
+				if (date_sql > 1200000000) // sanity check sur la reponse
+					$.cookie('dateoffset', date_sql - date_now, { path: "/" });
 			}
-			$(".calcul_date").css({"visibility": "visible"});
-			afficher_dates();
-		}
-	});	
+		});
+	}
 
 });
 
