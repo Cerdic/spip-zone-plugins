@@ -14,7 +14,7 @@ function _fichier_microcache($id, $fond) {
 function _supprimer_microcache($id, $fond) {
 	//	echo "<li>$id - $fond</li>";
 	$microcache = _fichier_microcache($id, $fond);
-	@unlink($microcache);	
+	if (file_exists($microcache)) unlink($microcache);
 }
 
 function _esi_microcache($id, $fond) {
