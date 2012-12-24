@@ -16,6 +16,24 @@
 							}
 					}
 			)]
+			<li class="editer editer_id_proprio saisie_selection obligatoire">
+			<label for="champ_id_proprio"><:spipimmo:proprietaire:><span class="obligatoire"><:info_obligatoire_02:></span></label>
+			<select name="id_proprio" id="champ_id_proprio">
+				<option value=""></option>
+				<BOUCLE_proprio(SPIPIMMO_PROPRIETAIRES) {par nom}>
+					<option value="#ID_PROPRIO">#NOM #PRENOM</option>
+				</BOUCLE_proprio>
+			</select>
+			</li>
+			<li class="editer editer_negociateur saisie_selection obligatoire">
+			<label for="champ_negociateur"><:spipimmo:negociateur:><span class="obligatoire"><:info_obligatoire_02:></span></label>
+			<select name="proprio" id="champ_proprio">
+				<option value=""></option>
+				<BOUCLE_negociateur(SPIPIMMO_NEGOCIATEURS) {par nom}>
+					<option value="#ID_NEGOCIATEUR">#NOM #PRENOM</option>
+				</BOUCLE_negociateur>
+			</select>
+			</li>
 			[(#SAISIE{input, numero_mandat, label=<:spipimmo:numero_mandat:>})]
 			[(#SAISIE{selection, type_mandat, 
 					label=<:spipimmo:type_mandat:>, 
@@ -27,8 +45,7 @@
 							}
 					}
 			)]
-			[(#SAISIE{input, negociateur, label=<:spipimmo:negociateur:>, obligatoire=oui})]
-			[(#SAISIE{input, honoraires, label=<:spipimmo:honoraires:>})]
+			[(#SAISIE{input, honoraires, label=<:spipimmo:honoraires:>, obligatoire=oui})]
 			[(#SAISIE{oui_non, publier, label=<:spipimmo:publier:>})]
 			<li class="editer editer_type_offre saisie_selection">
 			<label for="champ_type_offre"><:spipimmo:type_offre:></label>
@@ -39,30 +56,46 @@
 				</BOUCLE_type_offre>
 			</select>
 			</li>
-			[(#SAISIE{input, adresse_1, label=<:spipimmo:adresse:> 1, obligatoire=oui})]
-			[(#SAISIE{input, adresse_2, label=<:spipimmo:adresse:> 2})]
+			[(#SAISIE{textarea, adresse, label=<:spipimmo:adresse:>, obligatoire=oui, rows=4})]
 			[(#SAISIE{input, code_postal, label=<:spipimmo:code_postal:>, obligatoire=oui})]
 			[(#SAISIE{input, ville, label=<:spipimmo:ville:>, obligatoire=oui})]
 			[(#SAISIE{input, prix_loyer, label=<:spipimmo:prix_loyer:>, obligatoire=oui})]
+			[(#SAISIE{input, prix_vente, label=<:spipimmo:prix_vente:>, obligatoire=oui})]
 			[(#SAISIE{input, taxe_habitation, label=<:spipimmo:taxe_habitation:>})]
 			[(#SAISIE{input, taxe_fonciere, label=<:spipimmo:taxe_fonciere:>})]
 			[(#SAISIE{input, travaux, label=<:spipimmo:travaux:>})]
 			[(#SAISIE{input, charge, label=<:spipimmo:charge:>})]
-			[(#SAISIE{selection, dpe,
-					label=<:spipimmo:dpe:>,
+			[(#SAISIE{selection, dpe_energie,
+					label=<:spipimmo:dpe_energie:>,
 					obligatoire=oui,
 					datas=#ARRAY{
-							a, A,
+							a, A inférieur à 50,
 							b, B 51 à 90,
-							c, C 91 &agrave; 150,
-							d, D 151 &agrave; 230,
-							e, E 231 &agrave; 330,
-							f, F 331 &agrave; 450,
-							g, G >450,
-							n.c, N.C Non communiqu&eacute;
+							c, C 91 à 150,
+							d, D 151 à 230,
+							e, E 231 à 330,
+							f, F 331 à 450,
+							g, G suppérieur à 450,
+							n.c, N.C Non communiqué
 							}
 					}
 			)]
+			[(#SAISIE{selection, dpe_gaz,
+					label=<:spipimmo:dpe_gaz:>,
+					obligatoire=oui,
+					datas=#ARRAY{
+							a, A inférieur à 5,
+							b, B 6 à 10,
+							c, C 11 à 20,
+							d, D 21 à 35,
+							e, E 36 à 55,
+							f, F 56 à 80,
+							g, G suppérieur à 81,
+							n.c, N.C Non communiqué
+							}
+					}
+			)]
+			[(#SAISIE{date, date_dpe, label=<:spipimmo:date_dps:>, obligatoire=oui})]
 			[(#SAISIE{input, depot_garantie, label=<:spipimmo:depot_garantie:>, obligatoire=oui})]
 			[(#SAISIE{date, date_annonce, label=<:spipimmo:date_annonce:>, obligatoire=oui, defaut=#DATE{now}})]
 			[(#SAISIE{date, date_modif, label=<:spipimmo:date_modif:>, obligatoire=oui, defaut=#DATE{now}})]

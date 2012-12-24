@@ -1,0 +1,10 @@
+<INCLURE{fond=prive/inclure/navigation,env,ajax}>
+
+<h1 class="grostitre"><:spipimmo:negociateur:></h1>
+
+#BOITE_OUVRIR{#CHEMIN_IMAGE{breve-24.png}|balise_img{'',cadre-icone}|concat{#VAL{spipimmo:liste_proprietaires}|_T}|wrap{'<h3>'},'simple','titrem'}
+	<INCLURE{fond=prive/inclure/liste_negociateurs,env,ajax}>
+#BOITE_FERMER
+[(#AUTORISER{creer,proprietaire})
+        [(#URL_ECRIRE{spipimmo_negociateur,new=oui}|icone_verticale{<:spipimmo:icone_creer_nouveau_negociateur:>,auteur,new,right})]
+]

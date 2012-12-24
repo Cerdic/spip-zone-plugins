@@ -19,8 +19,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'code_postal' => 'Code postal',
 	'creer_annonce' => 'Créer une annonce',
 	//D
-	'dpe' => 'DPE',
+	'dpe_energie' => 'DPE énergie',
+	'dpe_gaz' => 'DPE gaz',
 	'date_annonce' => 'Date de l\'annonce',
+	'date_dpe' => 'Date de renouvellement DPE',
 	'date_dispo' => 'Date de disponibilité',
 	'date_modif' => 'Date de modification',
 	'depot_garantie' => 'Dépot de garantie',
@@ -31,12 +33,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//H
 	'honoraires' => 'Honoraires',
 	//I
+	'icone_creer_nouveau_negociateur' => 'Créer un nouveau négociateur',
 	'icone_creer_nouveau_proprietaire' => 'Créer un nouveau propriétaire',
 	'icone_creer_nouvelle_annonce' => 'Créer une nouvelle annonce',
+	'info_1_negociateur' => 'Il y a 1 négociateur.',
+	'info_nb_negociateur' => 'Il y a @nb@ negociateur.',
 	'info_1_proprietaire' => 'Il y a 1 propriétaire.',
 	'info_nb_proprietaire' => 'Il y a @nb@ propriétaires.',
 	//L
 	'liste_annonces' => 'Liste des annonces',
+	'liste_negociateurs' => 'Liste des negociateurs',
 	'liste_proprietaires' => 'Liste des propriétaires',
 	'location' => 'Location',
 	//M
@@ -71,6 +77,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'prestige' => 'Prestige',
 	'privilège' => 'Privilège',
 	'prix_loyer' => 'Prix loyer',
+	'prix_vente' => 'Prix vente',
+	'proprietaire' => 'Propriétaire',
 	'proximite' => 'Proximité',
 	'publier' => 'Publier',
 	'quartier' => 'Quartier',
@@ -86,8 +94,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'surface_terrain' => 'Surface terrain',
 	'surface_total' => 'Surface total',
 	//T
+	'table_annonce_vide_aucun_enregistrement' => 'Nous avons aucune anonce pour le moment.<br />Pour créer la première, il vous faut au moins un propriétaire et un négociateur.',
+	'table_negociateur_vide_aucun_enregistrement' => 'Nous avons aucun negociateur pour le moment.<br />Il vous en faut au moins 1 pour créé des annonces ensuite.',
 	'table_proprio_vide_aucun_enregistrement' => 'Nous avons aucun propriétaire pour le moment.<br />Il vous en faut au moins 1 pour créé des annonces ensuite.',
-	'table_annonce_vide_aucun_enregistrement' => 'Nous avons aucune anonce pour le moment.<br />Pour créer la première, il vous faut au moins un propriétaire.',
 	'taxe_fonciere' => 'Taxe foncière',
 	'taxe_habitation' => 'Taxe d\'habitation',
 	'tel_fixe' => 'Téléphone fixe',

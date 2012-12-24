@@ -1,0 +1,13 @@
+<INCLURE{fond=prive/inclure/navigation,env,ajax}>
+
+<h1><:spipimmo:spipimmo:></h1>
+
+<div class="cadre cadre-trait-couleur">
+	<div class="titrem impliable">
+		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{prive/themes/spip/images/mot-24.png}">
+		<:spipimmo:icone_creer_nouveau_negociateur:>
+	</div>
+	<div class="cadre_padding">
+		#FORMULAIRE_EDITER_SPIPIMMO_NEGOCIATEUR{#ID_NEGOCIATEUR,#ENV{redirect,#URL_ECRIRE{negociateurs_liste}}}
+	</div>
+</div>

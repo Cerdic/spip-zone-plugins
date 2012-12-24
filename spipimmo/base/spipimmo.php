@@ -14,6 +14,7 @@ function spipimmo_declarer_tables_interfaces($interface)
 {
 	$interface['table_des_tables']['spipimmo_annonces']='spipimmo_annonces';
 	$interface['table_des_tables']['spipimmo_documents_annonces']='spipimmo_documents_annonces';
+	$interface['table_des_tables']['spipimmo_negociateurs']='spipimmo_negociateurs';
 	$interface['table_des_tables']['spipimmo_proprietaires']='spipimmo_proprietaires';
 	$interface['table_des_tables']['spipimmo_types_offres']='spipimmo_types_offres';
 	$interface['table_des_traitements']['LIBELLE_OFFRE'][] = _TRAITEMENT_RACCOURCIS;
@@ -24,15 +25,15 @@ function spipimmo_declarer_tables_principales($tables_principales)
 {
 	//Table des spipimmo_annonces
 	$spip_spipimmo_annonces_field=array(
-		"id_annonce"	=>	"int(10) unsigned NOT NULL auto_increment",
+		"id_annonce"	=>	"bigint(21) NOT NULL auto_increment",
 		"vente_location"=>	"varchar(8)",
+		"id_proprio"	=>	"bigint(21) NOT NULL auto_increment",
+		"id_negociateur"=>	"bigint(21) NOT NULL auto_increment",
 		"numero_mandat"	=>	"varchar(255)",
 		"type_mandat"	=>	"varchar(50)",
-		"negociateur"	=>	"varchar(255)",
 		"honoraires"	=>	"int(30)",
 		"publier"		=>	"bool",
-		"adresse_1"		=>	"longtext",
-		"adresse_2"		=>	"longtext",
+		"adresse"		=>	"text",
 		"code_postal"	=>	"varchar(10)",
 		"ville"			=>	"varchar(255)",
 		"prix_loyer"	=>	"int(30)",
@@ -40,7 +41,9 @@ function spipimmo_declarer_tables_principales($tables_principales)
 		"taxe_fonciere"	=>	"int(10)",
 		"travaux"		=>	"int(10)",
 		"charges"		=>	"int(10)",
-		"dpe"			=>	"varchar(3)",
+		"dpe_energie"	=>	"varchar(3)",
+		"dpe_gaz"		=>	"varchar(3)",
+		"date_dpe"		=>	"datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"depot_garantie"=>	"int(10)",
 		"date_annonce"	=>	"datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"date_modif"	=>	"datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
@@ -107,12 +110,11 @@ function spipimmo_declarer_tables_principales($tables_principales)
 
 	//Table des prorietaires
 	$spip_spipimmo_proprietaires_field=array(
-		"id_proprio"	=>	"bigint(21) NOT NULL",
+		"id_proprio"	=>	"bigint(21) NOT NULL auto_increment",
 		"civilite"		=>	"smallint(1)",
 		"nom"			=>	"varchar(255)",
 		"prenom"		=>	"varchar(255)",
-		"adresse_1"		=>	"longtext",
-		"adresse_2"		=>	"longtext",
+		"adresse"		=>	"text",
 		"code_postal"	=>	"varchar(10)",
 		"ville"			=>	"varchar(255)",
 		"tel_fixe"		=>	"text",
@@ -126,6 +128,27 @@ function spipimmo_declarer_tables_principales($tables_principales)
 	$tables_principales['spip_spipimmo_proprietaires']=array(
 		'field' => &$spip_spipimmo_proprietaires_field,
 		'key' => &$spip_spipimmo_proprietaires_key);
+
+	//Table des prorietaires
+	$spip_spipimmo_negociateurs_field=array(
+		"id_negociateur"=>	"bigint(21) NOT NULL auto_increment",
+		"civilite"		=>	"smallint(1)",
+		"nom"			=>	"varchar(255)",
+		"prenom"		=>	"varchar(255)",
+		"adresse"		=>	"text",
+		"code_postal"	=>	"varchar(10)",
+		"ville"			=>	"varchar(255)",
+		"tel_fixe"		=>	"text",
+		"tel_port"		=>	"text",
+		"pays"			=>	"smallint(6)",
+	);
+
+	$spip_spipimmo_negociateurs_key=array(
+		"PRIMARY KEY" => "id_negociateur");
+
+	$tables_principales['spip_spipimmo_negociateurs']=array(
+		'field' => &$spip_spipimmo_negociateurs_field,
+		'key' => &$spip_spipimmo_negociateurs_key);
 
 	//Table du type d'offre
 	$spip_spipimmo_types_offres_field=array(

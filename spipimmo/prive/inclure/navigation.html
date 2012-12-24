@@ -1,15 +1,23 @@
 <!--#navigation-->
-<BOUCLE_proprietaires(SPIPIMMO_PROPRIETAIRES) {tout}> </BOUCLE_proprietaires>#SET{grand_total,#GRAND_TOTAL}</B_proprietaires>
+<BOUCLE_proprietaires(SPIPIMMO_PROPRIETAIRES) {tout}> </BOUCLE_proprietaires>#SET{grand_total_proprio,#GRAND_TOTAL}</B_proprietaires>
 [(#ENV{exec}|=={proprietaires_liste}|oui)
 	#BOITE_OUVRIR{'','info'}
-	[<p><b>(#GET{grand_total}|singulier_ou_pluriel{spipimmo:info_1_proprietaire,spipimmo:info_nb_proprietaire})</b></p>]
+	[<p><b>(#GET{grand_total_proprio}|singulier_ou_pluriel{spipimmo:info_1_proprietaire,spipimmo:info_nb_proprietaire})</b></p>]
+	[(#PLUGIN{pays}|non)<p><:spipimmo:pas_plugin_pays_navigation:></p>]
+	[(#PLUGIN{pays}|oui)<p><:spipimmo:pas_plugin_pays_navigation:></p>]
+	#BOITE_FERMER
+]
+<BOUCLE_negociateurs(SPIPIMMO_NEGOCIATEURS) {tout}> </BOUCLE_negociateurs>#SET{grand_total_negociateur,#GRAND_TOTAL}</B_negociateurs>
+[(#ENV{exec}|=={negociateurs_liste}|oui)
+	#BOITE_OUVRIR{'','info'}
+	[<p><b>(#GET{grand_total_negociateur}|singulier_ou_pluriel{spipimmo:info_1_negociateur,spipimmo:info_nb_negociateur})</b></p>]
 	[(#PLUGIN{pays}|non)<p><:spipimmo:pas_plugin_pays_navigation:></p>]
 	[(#PLUGIN{pays}|oui)<p><:spipimmo:pas_plugin_pays_navigation:></p>]
 	#BOITE_FERMER
 ]
 
 
-<div class="box raccourcis [(#ENV{exec}|=={proprietaires_liste}|non)spipimmo]">
+<div class="box raccourcis [(#ENV{exec}|=={annonces_liste}|oui)spipimmo]">
 	<div class="inner"><div class="bd">
 	<ul>
 		<!-- Gestion des annonces -->
@@ -21,12 +29,22 @@
 				<:spipimmo:liste_annonces:>
 			</a>
 		</li>
+		<!-- Gestion des proprietaires -->
 		<li class="menu">
 			<a href="#URL_ECRIRE{proprietaires_liste}"
 				class="page_accueil [(#ENV{exec}|=={proprietaires_liste}|oui)on]" 
 				title="<:spipimmo:liste_proprietaires:>">
 				<img src="#CHEMIN{prive/themes/spip/images/breve-24.png}" />
 				<:spipimmo:liste_proprietaires:>
+			</a>
+		</li>
+		<!-- Gestion des negociateurs -->
+		<li class="menu">
+			<a href="#URL_ECRIRE{negociateurs_liste}"
+				class="page_accueil [(#ENV{exec}|=={negociateurs_liste}|oui)on]" 
+				title="<:spipimmo:liste_negociateurs:>">
+				<img src="#CHEMIN{prive/themes/spip/images/breve-24.png}" />
+				<:spipimmo:liste_negociateurs:>
 			</a>
 		</li>
 	</ul>

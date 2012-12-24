@@ -1,8 +1,8 @@
 <paquet
 	prefix="spipimmo"
 	categorie="divers"
-	version="4.0.4"
-	schema="0.0.4"
+	version="4.0.5"
+	schema="0.0.7"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/spipimmo.png"
