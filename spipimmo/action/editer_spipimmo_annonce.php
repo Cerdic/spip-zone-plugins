@@ -51,7 +51,7 @@ function revision_spipimmo_annonce($id_annonce, $c=false) {
 	// recuperer les champs dans POST s'ils ne sont pas transmis
     if ($c === false) {
 		$c = array();
-			foreach (array('vente_location', 'id_proprio', 'id_negociateur', 'honoraires', 'adresse', 'code_postal', 'ville', 'tel_fixe') as $champ) {
+			foreach (array('vente_location', 'id_proprio', 'id_negociateur', 'honoraires', 'adresse', 'code_postal', 'ville', 'dpe_energie', 'dpe_gaz', 'date_dpe', 'depot_garantie', 'date_annonce', 'date_modification', 'date_dispo', 'annonce') as $champ) {
 				if (($a = _request($champ)) !== null) {
 					$c[$champ] = $a;
 				}

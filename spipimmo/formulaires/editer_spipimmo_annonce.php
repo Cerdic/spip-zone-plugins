@@ -21,7 +21,7 @@ function formulaires_editer_spipimmo_annonce_charger_dist($id_annonce='new', $re
 }
 
 function formulaires_editer_spipimmo_annonce_verifier_dist($id_annonce='new', $retour=''){
-	$erreurs = formulaires_editer_objet_verifier('spipimmo_annonces', $id_annonce, array('civilite', 'id_proprio', 'id_negociateur', 'nom', 'prenom', 'adresse', 'code_postal', 'ville', 'tel_fixe'));
+	$erreurs = formulaires_editer_objet_verifier('spipimmo_annonces', $id_annonce, array('vente_location', 'id_proprio', 'id_negociateur', 'honoraires', 'adresse', 'code_postal', 'ville', 'dpe_energie', 'dpe_gaz', 'date_dpe', 'depot_garantie', 'date_annonce', 'date_modification', 'date_dispo', 'annonce'));
 	return $erreurs;
 }
 
