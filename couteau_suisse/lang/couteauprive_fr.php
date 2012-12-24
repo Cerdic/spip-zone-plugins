@@ -593,6 +593,7 @@ Objets publiés mais masqués du public :
 	// O
 	'orientation:description' => '3 nouveaux critères pour vos squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Idéal pour le classement des photos en fonction de leur forme.',
 	'orientation:nom' => 'Orientation des images',
+	'outil_actualiser' => 'Actualiser l\'outil',
 	'outil_actif' => 'Outil actif',
 	'outil_actif_court' => 'actif',
 	'outil_activer' => 'Activer',
