@@ -71,7 +71,7 @@ function rainette_resume_meteo($meteo) {
 	if (is_numeric($meteo))
 		$resume = meteo2resume($meteo);
 	else
-		$resume = $meteo;
+		$resume = $meteo ? $meteo : _T('rainette:meteo_na');
 	return $resume;
 }
 
@@ -119,7 +119,7 @@ function rainette_afficher_unite($valeur, $type_valeur='', $service='weather') {
 	include_spip('inc/config');
 	$unite = lire_config("rainette/${service}/unite");
 
-	$valeur_affichee = '';
+	$valeur_affichee = _T('rainette:valeur_indeterminee');
 	if ($valeur) {
 		$suffixe = ($unite == 'm') ? 'metrique' : 'standard';
 		$espace = (($type_valeur == 'temperature') ||

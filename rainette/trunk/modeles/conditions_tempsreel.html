@@ -13,7 +13,7 @@
 			<div class="resume">[(#ENV{resume}|rainette_resume_meteo)]</div>
 		</div>
 		<div class="maj">
-			<:rainette:derniere_maj|ucfirst:>&nbsp;:[&nbsp;(#ENV{derniere_maj}|affdate_heure)]<br/>
+			<:rainette:derniere_maj|ucfirst:>&nbsp;:[&nbsp;(#ENV{derniere_maj, #VAL{Y-m-d H:i:s}|date}|affdate_heure)]<br/>
 			[<:rainette:station_observation|ucfirst:>&nbsp;:&nbsp;(#ENV{station})]
 		</div>
 	</div>
