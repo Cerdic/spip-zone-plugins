@@ -80,3 +80,29 @@
 
 [(#GET{code}|rainette_debug{infos, wunderground})]
 [(#GET{code}|rainette_debug{conditions, wunderground})]
+
+<br />
+<hr />
+<br />
+
+
+[(#REM) Les informations d'une ville - yahoo ]
+#SET{code, #ENV{ville,615702}}
+<div class="cartouche">
+	<h1 class="h1">Yahoo Weather</h1>
+	[(#MODELE{rainette_infos,
+		code=#GET{code},
+		sous_modele=infos_ville,
+		service=yahoo})]
+</div>
+<br class="nettoyeur"/>
+
+<h2 class="h2"><:rainette:meteo_conditions|ucfirst:></h2>
+[(#MODELE{rainette_conditions,
+	code=#GET{code},
+	sous_modele=conditions_tempsreel,
+	service=yahoo})]
+<br class="nettoyeur"/>
+
+[(#GET{code}|rainette_debug{infos, yahoo})]
+[(#GET{code}|rainette_debug{conditions, yahoo})]

@@ -31,13 +31,11 @@ function wwo_service2url($lieu, $mode) {
 	return $url;
 }
 
+
 function wwo_url2flux($url) {
 
-	include_spip('inc/distant');
-	$flux = recuperer_page($url);
-
 	include_spip('inc/rainette_utils');
-	$xml = @simplexml2array(simplexml_load_string($flux));
+	$xml = url2flux_xml($url);
 
 	return $xml;
 }
@@ -109,7 +107,7 @@ function wwo_meteo2weather($meteo, $periode=0) {
  * @param array $xml
  * @return array
  */
-function wwo_xml2previsions($xml, $lieu) {
+function wwo_flux2previsions($xml, $lieu) {
 	include_spip('inc/xml');
 	$tableau = array();
 	$n = spip_xml_match_nodes(",^dayf,",$xml,$previsions);
@@ -162,7 +160,7 @@ function wwo_xml2previsions($xml, $lieu) {
 	return $tableau;
 }
 
-function wwo_xml2conditions($xml, $lieu) {
+function wwo_flux2conditions($xml, $lieu) {
 	$tableau = array();
 
 	// On stocke les informations disponibles dans un tableau standard
@@ -243,7 +241,7 @@ function wwo_xml2conditions($xml, $lieu) {
 	return $tableau;
 }
 
-function wwo_xml2infos($xml, $lieu){
+function wwo_flux2infos($xml, $lieu){
 	$tableau = array();
 
 	// On stocke les informations disponibles dans un tableau standard

@@ -71,14 +71,36 @@ function charger_meteo($lieu, $mode='previsions', $service='weather') {
 		$flux = $acquerir($url);
 
 		if ($mode == 'infos')
-			$convertir = "${service}_xml2infos";
+			$convertir = "${service}_flux2infos";
 		else
-			$convertir = ($mode == 'previsions') ? "${service}_xml2previsions" : "${service}_xml2conditions";
+			$convertir = ($mode == 'previsions') ? "${service}_flux2previsions" : "${service}_flux2conditions";
 		$tableau = $convertir($flux, $lieu);
 		ecrire_fichier($cache, serialize($tableau));
 	}
 
 	return $cache;
+}
+
+
+function url2flux_xml($url) {
+
+	include_spip('inc/distant');
+	$flux = recuperer_page($url);
+
+	$xml = @simplexml2array(simplexml_load_string($flux));
+
+	return $xml;
+}
+
+
+function url2flux_json($url) {
+
+	include_spip('inc/distant');
+	$flux = recuperer_page($url);
+
+	// TODO : à compléter avec le traitement JSON pour OpenWeatherMap
+
+	return $xml;
 }
 
 
@@ -93,7 +115,7 @@ function charger_meteo($lieu, $mode='previsions', $service='weather') {
 function simplexml2array($obj) {
 
 	// Cette fonction getDocNamespaces() est longue sur de gros xml
-	# $namespace = $obj->getDocNamespaces(true);
+	$namespace = $obj->getDocNamespaces(true);
 	$namespace[NULL] = NULL;
 
 	$children = array();

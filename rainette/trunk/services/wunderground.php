@@ -65,11 +65,8 @@ function wunderground_service2url($lieu, $mode) {
 
 function wunderground_url2flux($url) {
 
-	include_spip('inc/distant');
-	$flux = recuperer_page($url);
-
 	include_spip('inc/rainette_utils');
-	$xml = @simplexml2array(simplexml_load_string($flux));
+	$xml = url2flux_xml($url);
 
 	return $xml;
 }
@@ -327,7 +324,7 @@ function wunderground_langue2code($langue) {
  * @param array $xml
  * @return array
  */
-function wunderground_xml2previsions($xml, $lieu) {
+function wunderground_flux2previsions($xml, $lieu) {
 	include_spip('inc/xml');
 	$tableau = array();
 	$n = spip_xml_match_nodes(",^dayf,",$xml,$previsions);
@@ -380,7 +377,7 @@ function wunderground_xml2previsions($xml, $lieu) {
 	return $tableau;
 }
 
-function wunderground_xml2conditions($xml, $lieu) {
+function wunderground_flux2conditions($xml, $lieu) {
 	$tableau = array();
 	include_spip('inc/rainette_utils');
 
@@ -467,7 +464,7 @@ function wunderground_xml2conditions($xml, $lieu) {
 	return $tableau;
 }
 
-function wunderground_xml2infos($xml, $lieu) {
+function wunderground_flux2infos($xml, $lieu) {
 	$tableau = array();
 
 	// On stocke les informations disponibles dans un tableau standard
