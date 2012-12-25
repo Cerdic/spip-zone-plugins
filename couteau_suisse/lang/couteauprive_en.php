@@ -596,6 +596,7 @@ Objets publiés mais masqués du public :
 	'outil_actif_court' => 'active',
 	'outil_activer' => 'Activate',
 	'outil_activer_le' => 'Activate the tool',
+	'outil_actualiser' => 'Actualiser l\'outil', # NEW
 	'outil_cacher' => 'No longer show',
 	'outil_desactiver' => 'Deactivate',
 	'outil_desactiver_le' => 'Deactivate this tool',

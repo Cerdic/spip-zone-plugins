@@ -589,6 +589,7 @@ Publikované objekty, ale skryté pred verejnosťou:
 	'outil_actif_court' => 'aktívny',
 	'outil_activer' => 'Aktivovať',
 	'outil_activer_le' => 'Aktivovať nástroj',
+	'outil_actualiser' => 'Actualiser l\'outil', # NEW
 	'outil_cacher' => 'Už viac nezobrazovať',
 	'outil_desactiver' => 'Deactivate',
 	'outil_desactiver_le' => 'Deactivate this tool',
