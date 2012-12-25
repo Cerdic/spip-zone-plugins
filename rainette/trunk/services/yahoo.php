@@ -27,7 +27,7 @@ function yahoo_service2url($lieu, $mode) {
 function yahoo_url2flux($url) {
 
 	include_spip('inc/rainette_utils');
-	$xml = url2flux_xml($url);
+	$xml = url2flux_xml($url, true);
 
 	return $xml;
 }

@@ -82,12 +82,12 @@ function charger_meteo($lieu, $mode='previsions', $service='weather') {
 }
 
 
-function url2flux_xml($url) {
+function url2flux_xml($url, $utiliser_namespace='false') {
 
 	include_spip('inc/distant');
 	$flux = recuperer_page($url);
 
-	$xml = @simplexml2array(simplexml_load_string($flux));
+	$xml = @simplexml2array(simplexml_load_string($flux), $utiliser_namespace);
 
 	return $xml;
 }
@@ -112,10 +112,12 @@ function url2flux_json($url) {
 **/
 // http://www.php.net/manual/pt_BR/book.simplexml.php#108688
 // xaviered at gmail dot com 17-May-2012 07:00
-function simplexml2array($obj) {
+function simplexml2array($obj, $utiliser_namespace='false') {
 
-	// Cette fonction getDocNamespaces() est longue sur de gros xml
-	$namespace = $obj->getDocNamespaces(true);
+	// Cette fonction getDocNamespaces() est longue sur de gros xml. On permet donc
+	// de l'activer ou pas suivant le contenu supposé du XML
+	if ($utiliser_namespace)
+		$namespace = $obj->getDocNamespaces(true);
 	$namespace[NULL] = NULL;
 
 	$children = array();

@@ -35,7 +35,7 @@ function wwo_service2url($lieu, $mode) {
 function wwo_url2flux($url) {
 
 	include_spip('inc/rainette_utils');
-	$xml = url2flux_xml($url);
+	$xml = url2flux_xml($url, false);
 
 	return $xml;
 }

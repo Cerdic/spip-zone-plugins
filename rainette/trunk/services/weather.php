@@ -38,7 +38,9 @@ function weather_url2flux($url) {
 
 function weather_meteo2icone($meteo) {
 	$icone = 'na';
-	if (($meteo >= 0) && ($meteo < 48)) $icone = strval($meteo);
+	if ($meteo
+	AND	(($meteo >= 0) AND ($meteo < 48)))
+		$icone = strval($meteo);
 
 	return $icone;
 }
