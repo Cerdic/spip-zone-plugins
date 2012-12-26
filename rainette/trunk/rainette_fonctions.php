@@ -25,8 +25,8 @@ function calculer_infos($lieu, $type, $service) {
 	if (!$lieu) return '';
 	if (!$service) $service = 'weather';
 
-	include_spip('inc/rainette_utils');
-	$nom_fichier = charger_meteo($lieu, 'infos', $service);
+	$charger = charger_fonction('charger_meteo', 'inc');
+	$nom_fichier = $charger($lieu, 'infos', $service);
 	lire_fichier($nom_fichier,$tableau);
 	if (!isset($type) OR !$type)
 		return $tableau;
@@ -84,7 +84,7 @@ function rainette_resume_meteo($meteo) {
 function rainette_afficher_direction($direction) {
 	static $liste_direction = 'N:NNE:NE:ENE:E:ESE:SE:SSE:S:SSW:SW:WSW:W:WNW:NW:NNW:V';
 
-	include_spip('inc/rainette_utils');
+	include_spip('inc/convertir');
 	$direction_abregee = (intval($direction)) ? angle2direction($direction) : $direction;
 	if (!in_array($direction_abregee, explode(':', $liste_direction)))
 		return _T('rainette:valeur_indeterminee');
@@ -94,7 +94,6 @@ function rainette_afficher_direction($direction) {
 
 function rainette_afficher_tendance($tendance_en, $methode='texte', $chemin='', $extension="png"){
 	$html = '';
-	include_spip('inc/rainette_utils');
 
 	if ($methode == 'texte') {
 		$html = _T('rainette:tendance_texte_'.$tendance_en);
@@ -144,12 +143,12 @@ function rainette_afficher_unite($valeur, $type_valeur='', $service='weather') {
  * @return string
  */
 function rainette_coasse_previsions($lieu, $type='x_jours', $jour=0, $modele='previsions_24h', $service='weather'){
-	include_spip('inc/rainette_utils');
 
 	if ($type == '1_jour') {
 		$jour = min($jour, _RAINETTE_JOURS_PREVISION-1);
 
-		$nom_fichier = charger_meteo($lieu, 'previsions', $service);
+		$charger = charger_fonction('charger_meteo', 'inc');
+		$nom_fichier = $charger($lieu, 'previsions', $service);
 		lire_fichier($nom_fichier,$tableau);
 		$tableau = unserialize($tableau);
 		// Si jour=0 (aujourd'hui), on complete par le tableau du lendemain matin
@@ -172,7 +171,8 @@ function rainette_coasse_previsions($lieu, $type='x_jours', $jour=0, $modele='pr
 		if ($jour == 0) $jour = _RAINETTE_JOURS_PREVISION;
 		$jour = min($jour, _RAINETTE_JOURS_PREVISION);
 
-		$nom_fichier = charger_meteo($lieu, 'previsions', $service);
+		$charger = charger_fonction('charger_meteo', 'inc');
+		$nom_fichier = $charger($lieu, 'previsions', $service);
 		lire_fichier($nom_fichier,$tableau);
 		$tableau = unserialize($tableau);
 		$texte = "";
@@ -185,10 +185,10 @@ function rainette_coasse_previsions($lieu, $type='x_jours', $jour=0, $modele='pr
 }
 
 function rainette_coasse_conditions($lieu, $modele='conditions_tempsreel', $service='weather'){
-	include_spip('inc/rainette_utils');
 
 	// Recuperation du tableau des conditions courantes
-	$nom_fichier = charger_meteo($lieu, 'conditions', $service);
+	$charger = charger_fonction('charger_meteo', 'inc');
+	$nom_fichier = $charger($lieu, 'conditions', $service);
 	lire_fichier($nom_fichier,$tableau);
 	$tableau = unserialize($tableau);
 
@@ -201,10 +201,10 @@ function rainette_coasse_conditions($lieu, $modele='conditions_tempsreel', $serv
 }
 
 function rainette_coasse_infos($lieu, $modele='infos_ville', $service='weather'){
-	include_spip('inc/rainette_utils');
 
 	// Recuperation du tableau des conditions courantes
-	$nom_fichier = charger_meteo($lieu, 'infos', $service);
+	$charger = charger_fonction('charger_meteo', 'inc');
+	$nom_fichier = $charger($lieu, 'infos', $service);
 	lire_fichier($nom_fichier,$tableau);
 	$tableau = unserialize($tableau);
 
@@ -217,10 +217,10 @@ function rainette_coasse_infos($lieu, $modele='infos_ville', $service='weather')
 }
 
 function rainette_debug($lieu, $mode='previsions', $service='weather') {
-	include_spip('inc/rainette_utils');
 
 	// Recuperation du tableau des conditions courantes
-	$nom_fichier = charger_meteo($lieu, $mode, $service);
+	$charger = charger_fonction('charger_meteo', 'inc');
+	$nom_fichier = $charger($lieu, $mode, $service);
 	if ($nom_fichier) {
 		lire_fichier($nom_fichier,$tableau);
 		$tableau = unserialize($tableau);

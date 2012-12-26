@@ -36,7 +36,7 @@ function wwo_service2url($lieu, $mode) {
 
 function wwo_url2flux($url) {
 
-	include_spip('inc/rainette_utils');
+	include_spip('inc/phraser');
 	$xml = url2flux_xml($url, false);
 
 	return $xml;
@@ -176,12 +176,13 @@ function wwo_flux2conditions($xml, $lieu) {
 		$tableau['station'] = '';
 
 		// Liste des conditions meteo extraite dans le systeme metrique
+		include_spip('inc/convertir');
 		$tableau['vitesse_vent'] = (isset($conditions['windspeedkmph'])) ? intval($conditions['windspeedkmph'][0]['text']) : '';
 		$tableau['angle_vent'] = (isset($conditions['winddirdegree'])) ? intval($conditions['winddirdegree'][0]['text']) : '';
 		$tableau['direction_vent'] = (isset($conditions['winddir16point'])) ? $conditions['winddir16point'][0]['text'] : '';
 
 		$tableau['temperature_reelle'] = (isset($conditions['temp_c'])) ? intval($conditions['temp_c'][0]['text']) : '';
-		$tableau['temperature_ressentie'] = temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']);
+		$tableau['temperature_ressentie'] = round(temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']), 0);
 
 		$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity'][0]['text']) : '';
 		$tableau['point_rosee'] = '';
@@ -195,7 +196,6 @@ function wwo_flux2conditions($xml, $lieu) {
 		include_spip('inc/config');
 		$unite = lire_config('rainette/wwo/unite', 'm');
 		if ($unite == 's') {
-			include_spip('inc/rainette_utils');
 			$tableau['temperature_reelle'] = (isset($conditions['temp_f']))
 				? intval($conditions['temp_f'][0]['text'])
 				: celsius2farenheit($tableau['temperature_reelle']);

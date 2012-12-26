@@ -67,7 +67,7 @@ function wunderground_service2url($lieu, $mode) {
 
 function wunderground_url2flux($url) {
 
-	include_spip('inc/rainette_utils');
+	include_spip('inc/phraser');
 	$xml = url2flux_xml($url, false);
 
 	return $xml;
@@ -381,7 +381,6 @@ function wunderground_flux2previsions($xml, $lieu) {
 
 function wunderground_flux2conditions($xml, $lieu) {
 	$tableau = array();
-	include_spip('inc/rainette_utils');
 
 	// On stocke les informations disponibles dans un tableau standard
 	if (isset($xml['children']['current_observation'][0]['children'])) {
