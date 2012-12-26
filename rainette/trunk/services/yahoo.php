@@ -103,7 +103,7 @@ function yahoo_flux2conditions($flux, $lieu) {
 		$tableau['point_rosee'] = '';
 
 		$tableau['pression'] = (isset($conditions['pressure'])) ? intval($conditions['pressure']) : '';
-		$tableau['tendance_pression'] = (isset($conditions['rising'])) ? $tendance[intval($conditions['pressure'])] : '';
+		$tableau['tendance_pression'] = (isset($conditions['rising'])) ? $tendance[intval($conditions['rising'])] : '';
 
 		$tableau['visibilite'] = (isset($conditions['visibility'])) ? intval($conditions['visibility']) : '';
 	}

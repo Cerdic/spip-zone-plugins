@@ -208,8 +208,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'titre_form_configurer_weather' => 'Service Weather.com&reg;',
 	'titre_form_configurer_wwo' => 'Service World Weather Online',
-	'titre_form_configurer_wunderground' => 'Service Wunderground.com',
-	'titre_form_configurer_yahoo' => 'Service Yahoo Weather',
+	'titre_form_configurer_wunderground' => 'Service Weather Underground',
+	'titre_form_configurer_yahoo' => 'Service Yahoo! Weather',
 	'titre_page_configurer' => 'Configuration du plugin Rainette',
 
 	// U
