@@ -61,7 +61,61 @@ function yahoo_flux2previsions($flux, $lieu) {
 
 
 function yahoo_flux2conditions($flux, $lieu) {
+
+	static $tendance = array(0 => 'steady', 1 => 'rising', 2 => 'steady');
 	$tableau = array();
+
+	include_spip('inc/convertir');
+
+	if (isset($flux['children']['channel'][0]['children']['yweather:wind'][0]['attributes'])) {
+		$conditions = $flux['children']['channel'][0]['children']['yweather:wind'][0]['attributes'];
+
+		// Données aérologiques
+		$tableau['vitesse_vent'] = (isset($conditions['speed'])) ? intval($conditions['speed']) : '';
+		$tableau['angle_vent'] = (isset($conditions['direction'])) ? intval($conditions['direction']) : '';
+		$tableau['direction_vent'] = (isset($conditions['direction'])) ? angle2direction($tableau['angle_vent']) : '';
+	}
+
+	if (isset($flux['children']['channel'][0]['children']['item'][0]['children']['yweather:condition'][0]['attributes'])) {
+		$conditions = $flux['children']['channel'][0]['children']['item'][0]['children']['yweather:condition'][0]['attributes'];
+
+		// Date d'observation
+		$date_maj = (isset($conditions['date'])) ? strtotime($conditions['date']) : '';
+		$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
+		// Station d'observation
+		$tableau['station'] = '';
+
+		// Températures : la température ressentie est calculée
+		$tableau['temperature_reelle'] = (isset($conditions['temp'])) ? intval($conditions['temp']) : '';
+		$tableau['temperature_ressentie'] = round(temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']), 0);
+
+		// Etat météorologique
+		$tableau['code_meteo'] = (isset($conditions['code'])) ? intval($conditions['code']) : '';
+		$tableau['icon_meteo'] = '';
+		$tableau['desc_meteo'] = (isset($conditions['text'])) ? intval($conditions['text']) : '';
+	}
+
+	if (isset($flux['children']['channel'][0]['children']['yweather:atmosphere'][0]['attributes'])) {
+		$conditions = $flux['children']['channel'][0]['children']['yweather:atmosphere'][0]['attributes'];
+
+		// Données atmosphériques : humidité, point de rosée, pression et visibilité
+		$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity']) : '';
+		$tableau['point_rosee'] = '';
+
+		$tableau['pression'] = (isset($conditions['pressure'])) ? intval($conditions['pressure']) : '';
+		$tableau['tendance_pression'] = (isset($conditions['rising'])) ? $tendance[intval($conditions['pressure'])] : '';
+
+		$tableau['visibilite'] = (isset($conditions['visibility'])) ? intval($conditions['visibility']) : '';
+	}
+
+	// TODO : determiner la periode jour ou nuit
+	$tableau['periode'] = '';
+
+	// La traduction du resume dans la bonne langue est toujours faite par les fichiers de langue SPIP
+	// car l'API ne permet pas de choisir la langue. On ne stocke donc que le code meteo
+	$tableau['icone'] = $tableau['code_meteo'];
+	$tableau['code_icone'] = $tableau['code_meteo']; // compat ascendante
+	$tableau['resume'] = $tableau['code_meteo'];
 
 	return $tableau;
 }

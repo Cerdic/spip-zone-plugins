@@ -122,7 +122,7 @@ function rainette_afficher_unite($valeur, $type_valeur='', $service='weather') {
 
 	if (!$service) $service = 'weather';
 	include_spip('inc/config');
-	$unite = lire_config("rainette/${service}/unite");
+	$unite = lire_config("rainette/${service}/unite", 'm');
 
 	$valeur_affichee = _T('rainette:valeur_indeterminee');
 	if ($valeur) {
