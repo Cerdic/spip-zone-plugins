@@ -114,6 +114,7 @@ function wwo_flux2previsions($flux, $lieu) {
 
 function wwo_flux2conditions($flux, $lieu) {
 	$tableau = array();
+	include_spip('inc/convertir');
 
 	// On stocke les informations disponibles dans un tableau standard
 	if (isset($flux['children']['current_condition'][0]['children'])) {
@@ -126,7 +127,6 @@ function wwo_flux2conditions($flux, $lieu) {
 		$tableau['station'] = '';
 
 		// Liste des conditions meteo extraite dans le systeme metrique
-		include_spip('inc/convertir');
 		$tableau['vitesse_vent'] = (isset($conditions['windspeedkmph'])) ? intval($conditions['windspeedkmph'][0]['text']) : '';
 		$tableau['angle_vent'] = (isset($conditions['winddirdegree'])) ? intval($conditions['winddirdegree'][0]['text']) : '';
 		$tableau['direction_vent'] = (isset($conditions['winddir16point'])) ? $conditions['winddir16point'][0]['text'] : '';

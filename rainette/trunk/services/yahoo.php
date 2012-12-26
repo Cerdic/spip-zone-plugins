@@ -5,6 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define('_RAINETTE_YAHOO_URL_BASE', 'http://weather.yahooapis.com/forecastrss');
 define('_RAINETTE_YAHOO_JOURS_PREVISION', 2);
 
+
 function yahoo_service2cache($lieu, $mode) {
 
 	$dir = sous_repertoire(_DIR_CACHE, 'rainette');
@@ -29,7 +30,7 @@ function yahoo_service2url($lieu, $mode) {
 
 function yahoo_service2reload_time($mode) {
 
-	static $reload = array('conditions' => 1800, 'previsions' => 7200);
+	static $reload = array('conditions' => 3600, 'previsions' => 7200);
 
 	return $reload[$mode];
 }
@@ -70,7 +71,8 @@ function yahoo_flux2conditions($flux, $lieu) {
 	if (isset($flux['children']['channel'][0]['children']['yweather:wind'][0]['attributes'])) {
 		$conditions = $flux['children']['channel'][0]['children']['yweather:wind'][0]['attributes'];
 
-		// Données aérologiques
+		// Données aérologiques : vitesse, angle et direction (16 valeurs)
+		// -- la direction est calculée car la valeur du service est en anglais
 		$tableau['vitesse_vent'] = (isset($conditions['speed'])) ? intval($conditions['speed']) : '';
 		$tableau['angle_vent'] = (isset($conditions['direction'])) ? intval($conditions['direction']) : '';
 		$tableau['direction_vent'] = (isset($conditions['direction'])) ? angle2direction($tableau['angle_vent']) : '';
@@ -79,26 +81,39 @@ function yahoo_flux2conditions($flux, $lieu) {
 	if (isset($flux['children']['channel'][0]['children']['item'][0]['children']['yweather:condition'][0]['attributes'])) {
 		$conditions = $flux['children']['channel'][0]['children']['item'][0]['children']['yweather:condition'][0]['attributes'];
 
-		// Date d'observation
+		// Données d'observation : date et station
+		// -- la station n'est pas précisée par le service
 		$date_maj = (isset($conditions['date'])) ? strtotime($conditions['date']) : '';
 		$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
-		// Station d'observation
 		$tableau['station'] = '';
 
-		// Températures : la température ressentie est calculée
+		// Températures : réelle et ressentie
+		// -- La température ressentie est calculée
 		$tableau['temperature_reelle'] = (isset($conditions['temp'])) ? intval($conditions['temp']) : '';
 		$tableau['temperature_ressentie'] = round(temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']), 0);
 
-		// Etat météorologique
+		// Etat météorologique : code, icône et résumé natis au service
+		// Ces données sont stockées à titre conservatoire mais ne sont pas utilisées dans les modèles v2
+		// -- le code météo est le même que celui de Weather ce qui permet d'utiliser les mêmes icônes
+		// -- Il n'y a pas d'icône proposé par le service
+		// -- la description n'est pas utilisée car toujours en anglais. On utilise le code méteo
 		$tableau['code_meteo'] = (isset($conditions['code'])) ? intval($conditions['code']) : '';
 		$tableau['icon_meteo'] = '';
-		$tableau['desc_meteo'] = (isset($conditions['text'])) ? intval($conditions['text']) : '';
+		$tableau['desc_meteo'] = (isset($conditions['text'])) ? $conditions['text'] : '';
+
+		// La traduction du resume dans la bonne langue est toujours faite par les fichiers de langue SPIP
+		// car l'API ne permet pas de choisir la langue. On ne stocke donc que le code meteo
+		// Ce sont les données utilisées par les modèles v2
+		$tableau['icone'] = $tableau['code_meteo'];
+		$tableau['resume'] = $tableau['code_meteo'];
 	}
 
 	if (isset($flux['children']['channel'][0]['children']['yweather:atmosphere'][0]['attributes'])) {
 		$conditions = $flux['children']['channel'][0]['children']['yweather:atmosphere'][0]['attributes'];
 
 		// Données atmosphériques : humidité, point de rosée, pression et visibilité
+		// -- pas de point de rosée fourni par le service
+		// -- la tendance barométrique du service est convertie en texte comme pour les autres services
 		$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity']) : '';
 		$tableau['point_rosee'] = '';
 
@@ -110,12 +125,6 @@ function yahoo_flux2conditions($flux, $lieu) {
 
 	// TODO : determiner la periode jour ou nuit
 	$tableau['periode'] = '';
-
-	// La traduction du resume dans la bonne langue est toujours faite par les fichiers de langue SPIP
-	// car l'API ne permet pas de choisir la langue. On ne stocke donc que le code meteo
-	$tableau['icone'] = $tableau['code_meteo'];
-	$tableau['code_icone'] = $tableau['code_meteo']; // compat ascendante
-	$tableau['resume'] = $tableau['code_meteo'];
 
 	return $tableau;
 }
@@ -145,14 +154,6 @@ function yahoo_flux2infos($flux, $lieu){
 	$tableau['zone'] = '';
 
 	return $tableau;
-}
-
-
-function yahoo_meteo2icone($meteo) {
-	$icone = 'na';
-	if (($meteo >= 0) && ($meteo < 48)) $icone = strval($meteo);
-
-	return $icone;
 }
 
 ?>
