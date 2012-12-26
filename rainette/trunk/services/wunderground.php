@@ -65,6 +65,14 @@ function wunderground_service2url($lieu, $mode) {
 	return $url;
 }
 
+
+function wunderground_service2reload_time($mode) {
+
+	static $reload = array('conditions' => 1800, 'previsions' => 7200);
+
+	return $reload[$mode];
+}
+
 function wunderground_url2flux($url) {
 
 	include_spip('inc/phraser');

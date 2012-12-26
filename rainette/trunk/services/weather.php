@@ -29,22 +29,20 @@ function weather_service2url($lieu, $mode) {
 }
 
 
+function weather_service2reload_time($mode) {
+
+	static $reload = array('conditions' => 1800, 'previsions' => 7200);
+
+	return $reload[$mode];
+}
+
+
 function weather_url2flux($url) {
 
 	include_spip('inc/xml');
 	$flux = spip_xml_load($url);
 
 	return $flux;
-}
-
-
-function weather_meteo2icone($meteo) {
-	$icone = 'na';
-	if ($meteo
-	AND	(($meteo >= 0) AND ($meteo < 48)))
-		$icone = strval($meteo);
-
-	return $icone;
 }
 
 
@@ -180,6 +178,17 @@ function weather_flux2infos($xml, $lieu){
 	}
 
 	return $tableau;
+}
+
+
+
+function weather_meteo2icone($meteo) {
+	$icone = 'na';
+	if ($meteo
+	AND	(($meteo >= 0) AND ($meteo < 48)))
+		$icone = strval($meteo);
+
+	return $icone;
 }
 
 ?>

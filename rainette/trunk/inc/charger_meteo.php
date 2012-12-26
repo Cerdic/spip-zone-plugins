@@ -26,7 +26,8 @@ function inc_charger_meteo_dist($lieu, $mode='previsions', $service='weather') {
 	$cacher = "${service}_service2cache";
 	$cache = $cacher($lieu, $mode);
 
-	$reload_time = ($mode == 'previsions') ? _RAINETTE_RELOAD_TIME_PREVISIONS : _RAINETTE_RELOAD_TIME_CONDITIONS;
+	$reloader = "${service}_service2reload_time";
+	$reload_time = ($mode == 'previsions') ? $reloader('previsions') : $reloader('conditions');
 
 	if (!file_exists($cache)
 	OR (($mode != 'infos') AND (!filemtime($cache) OR (time()-filemtime($cache)>$reload_time)))) {
