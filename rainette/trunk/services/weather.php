@@ -52,12 +52,12 @@ function weather_url2flux($url) {
  * utilise le parseur xml de Spip
  *
  * ne gere pas encore le jour et la nuit de la date courante suivant l'heure!!!!
- * @param array $xml
+ * @param array $flux
  * @return array
  */
-function weather_flux2previsions($xml, $lieu) {
+function weather_flux2previsions($flux, $lieu) {
 	$tableau = array();
-	$n = spip_xml_match_nodes(",^dayf,",$xml,$previsions);
+	$n = spip_xml_match_nodes(",^dayf,",$flux,$previsions);
 	if ($n==1){
 		$previsions = reset($previsions['dayf']);
 		// recuperer la date de debut des previsions (c'est la date de derniere maj)
@@ -109,9 +109,9 @@ function weather_flux2previsions($xml, $lieu) {
 }
 
 
-function weather_flux2conditions($xml, $lieu) {
+function weather_flux2conditions($flux, $lieu) {
 	$tableau = array();
-	$n = spip_xml_match_nodes(",^cc,",$xml,$conditions);
+	$n = spip_xml_match_nodes(",^cc,",$flux,$conditions);
 	if ($n==1){
 		$conditions = reset($conditions['cc']);
 		// recuperer la date de derniere mise a jour des conditions
@@ -158,12 +158,12 @@ function weather_flux2conditions($xml, $lieu) {
 }
 
 
-function weather_flux2infos($xml, $lieu){
+function weather_flux2infos($flux, $lieu){
 	$tableau = array();
 
 	// On stocke les informations disponibles dans un tableau standard
 	$regexp = 'loc id=\"' . $lieu . '\"';
-	$n = spip_xml_match_nodes(",^$regexp,", $xml, $infos);
+	$n = spip_xml_match_nodes(",^$regexp,", $flux, $infos);
 	if ($n==1){
 		$infos = reset($infos['loc id="' . $lieu . '"']);
 		// recuperer la date de debut des conditions

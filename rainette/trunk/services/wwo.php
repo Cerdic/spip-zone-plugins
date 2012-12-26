@@ -45,67 +45,9 @@ function wwo_service2reload_time($mode) {
 function wwo_url2flux($url) {
 
 	include_spip('inc/phraser');
-	$xml = url2flux_xml($url, false);
+	$flux = url2flux_xml($url, false);
 
-	return $xml;
-}
-
-
-function wwo_meteo2weather($meteo, $periode=0) {
-	static $wwo2weather = array(
-							'395'=> array(41,46),
-							'392'=> array(41,46),
-							'389'=> array(38,47),
-							'386'=> array(37,47),
-							'377'=> array(6,6),
-							'374'=> array(6,6),
-							'371'=> array(14,14),
-							'368'=> array(13,13),
-							'365'=> array(6,6),
-							'362'=> array(6,6),
-							'359'=> array(11,11),
-							'356'=> array(11,11),
-							'353'=> array(9,9),
-							'350'=> array(18,18),
-							'338'=> array(16,16),
-							'335'=> array(16,16),
-							'332'=> array(14,14),
-							'329'=> array(14,14),
-							'326'=> array(13,13),
-							'323'=> array(13,13),
-							'320'=> array(18,18),
-							'317'=> array(18,18),
-							'314'=> array(8,8),
-							'311'=> array(8,8),
-							'308'=> array(40,40),
-							'305'=> array(39,45),
-							'302'=> array(11,11),
-							'299'=> array(39,45),
-							'296'=> array(9,9),
-							'293'=> array(9,9),
-							'284'=> array(10,10),
-							'281'=> array(9,9),
-							'266'=> array(9,9),
-							'263'=> array(9,9),
-							'260'=> array(20,20),
-							'248'=> array(20,20),
-							'230'=> array(16,16),
-							'227'=> array(15,15),
-							'200'=> array(38,47),
-							'185'=> array(10,10),
-							'182'=> array(18,18),
-							'179'=> array(16,16),
-							'176'=> array(40,49),
-							'143'=> array(20,20),
-							'122'=> array(26,26),
-							'119'=> array(28,27),
-							'116'=> array(30,29),
-							'113'=> array(32,31));
-
-	$icone = 'na';
-	if (array_key_exists($meteo,  $wwo2weather))
-		$icone = strval($wwo2weather[$meteo][$periode]);
-	return $icone;
+	return $flux;
 }
 
 /**
@@ -114,13 +56,13 @@ function wwo_meteo2weather($meteo, $periode=0) {
  * utilise le parseur xml de Spip
  *
  * ne gere pas encore le jour et la nuit de la date courante suivant l'heure!!!!
- * @param array $xml
+ * @param array $flux
  * @return array
  */
-function wwo_flux2previsions($xml, $lieu) {
+function wwo_flux2previsions($flux, $lieu) {
 	include_spip('inc/xml');
 	$tableau = array();
-	$n = spip_xml_match_nodes(",^dayf,",$xml,$previsions);
+	$n = spip_xml_match_nodes(",^dayf,",$flux,$previsions);
 	if ($n==1){
 		$previsions = reset($previsions['dayf']);
 		// recuperer la date de debut des previsions (c'est la date de derniere maj)
@@ -170,12 +112,12 @@ function wwo_flux2previsions($xml, $lieu) {
 	return $tableau;
 }
 
-function wwo_flux2conditions($xml, $lieu) {
+function wwo_flux2conditions($flux, $lieu) {
 	$tableau = array();
 
 	// On stocke les informations disponibles dans un tableau standard
-	if (isset($xml['children']['current_condition'][0]['children'])) {
-		$conditions = $xml['children']['current_condition'][0]['children'];
+	if (isset($flux['children']['current_condition'][0]['children'])) {
+		$conditions = $flux['children']['current_condition'][0]['children'];
 
 		// Date d'observation
 		$date_maj = (isset($conditions['localobsdatetime'])) ? strtotime($conditions['localobsdatetime'][0]['text']) : '';
@@ -251,12 +193,12 @@ function wwo_flux2conditions($xml, $lieu) {
 	return $tableau;
 }
 
-function wwo_flux2infos($xml, $lieu){
+function wwo_flux2infos($flux, $lieu){
 	$tableau = array();
 
 	// On stocke les informations disponibles dans un tableau standard
-	if (isset($xml['children']['nearest_area'][0]['children'])) {
-		$infos = $xml['children']['nearest_area'][0]['children'];
+	if (isset($flux['children']['nearest_area'][0]['children'])) {
+		$infos = $flux['children']['nearest_area'][0]['children'];
 
 		if (isset($infos['areaname'])) {
 			$tableau['ville'] = $infos['areaname'][0]['text'];
@@ -272,6 +214,65 @@ function wwo_flux2infos($xml, $lieu){
 	}
 
 	return $tableau;
+}
+
+
+
+function wwo_meteo2weather($meteo, $periode=0) {
+	static $wwo2weather = array(
+							'395'=> array(41,46),
+							'392'=> array(41,46),
+							'389'=> array(38,47),
+							'386'=> array(37,47),
+							'377'=> array(6,6),
+							'374'=> array(6,6),
+							'371'=> array(14,14),
+							'368'=> array(13,13),
+							'365'=> array(6,6),
+							'362'=> array(6,6),
+							'359'=> array(11,11),
+							'356'=> array(11,11),
+							'353'=> array(9,9),
+							'350'=> array(18,18),
+							'338'=> array(16,16),
+							'335'=> array(16,16),
+							'332'=> array(14,14),
+							'329'=> array(14,14),
+							'326'=> array(13,13),
+							'323'=> array(13,13),
+							'320'=> array(18,18),
+							'317'=> array(18,18),
+							'314'=> array(8,8),
+							'311'=> array(8,8),
+							'308'=> array(40,40),
+							'305'=> array(39,45),
+							'302'=> array(11,11),
+							'299'=> array(39,45),
+							'296'=> array(9,9),
+							'293'=> array(9,9),
+							'284'=> array(10,10),
+							'281'=> array(9,9),
+							'266'=> array(9,9),
+							'263'=> array(9,9),
+							'260'=> array(20,20),
+							'248'=> array(20,20),
+							'230'=> array(16,16),
+							'227'=> array(15,15),
+							'200'=> array(38,47),
+							'185'=> array(10,10),
+							'182'=> array(18,18),
+							'179'=> array(16,16),
+							'176'=> array(40,49),
+							'143'=> array(20,20),
+							'122'=> array(26,26),
+							'119'=> array(28,27),
+							'116'=> array(30,29),
+							'113'=> array(32,31));
+
+	$icone = 'na';
+	if (array_key_exists($meteo,  $wwo2weather))
+		$icone = strval($wwo2weather[$meteo][$periode]);
+	return $icone;
 }
 
 ?>

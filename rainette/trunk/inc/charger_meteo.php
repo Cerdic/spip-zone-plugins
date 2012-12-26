@@ -2,8 +2,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define ('_RAINETTE_RELOAD_TIME_PREVISIONS',2*3600); // pas la peine de recharger des previsions de moins de 2h
-define ('_RAINETTE_RELOAD_TIME_CONDITIONS',1800); // pas la peine de recharger les conditions courantes de moins de 30mn
 
 /**
  * charger le fichier des infos meteos correspondant au code

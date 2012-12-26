@@ -37,17 +37,9 @@ function yahoo_service2reload_time($mode) {
 function yahoo_url2flux($url) {
 
 	include_spip('inc/phraser');
-	$xml = url2flux_xml($url, true);
+	$flux = url2flux_xml($url, true);
 
-	return $xml;
-}
-
-
-function yahoo_meteo2icone($meteo) {
-	$icone = 'na';
-	if (($meteo >= 0) && ($meteo < 48)) $icone = strval($meteo);
-
-	return $icone;
+	return $flux;
 }
 
 
@@ -57,17 +49,17 @@ function yahoo_meteo2icone($meteo) {
  * utilise le parseur xml de Spip
  *
  * ne gere pas encore le jour et la nuit de la date courante suivant l'heure!!!!
- * @param array $xml
+ * @param array $flux
  * @return array
  */
-function yahoo_flux2previsions($xml, $lieu) {
+function yahoo_flux2previsions($flux, $lieu) {
 	$tableau = array();
 
 	return $tableau;
 }
 
 
-function yahoo_flux2conditions($xml, $lieu) {
+function yahoo_flux2conditions($flux, $lieu) {
 	$tableau = array();
 
 	return $tableau;
@@ -98,6 +90,14 @@ function yahoo_flux2infos($flux, $lieu){
 	$tableau['zone'] = '';
 
 	return $tableau;
+}
+
+
+function yahoo_meteo2icone($meteo) {
+	$icone = 'na';
+	if (($meteo >= 0) && ($meteo < 48)) $icone = strval($meteo);
+
+	return $icone;
 }
 
 ?>
