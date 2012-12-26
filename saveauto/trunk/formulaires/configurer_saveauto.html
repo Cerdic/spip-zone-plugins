@@ -93,6 +93,7 @@
 			<legend><:saveauto:legend_cfg_notification:></legend>
 			<ul>
 				<li class="editer editer_notif_active">
+					<p class="explication"><:saveauto:help_notif_active:></p>
 					<label><:saveauto:label_notif_active:></label>
 					<div class="choix">
 						 <input type="radio" name="notif_active" id="notif_active_true" value="oui"[(#ENV{notif_active, non}|=={oui}|oui)checked="checked"] />
@@ -117,7 +118,7 @@
 				</li>
 			</ul>
 
-			<ul>
+			<fieldset><ul>
 				<li class="editer_ecrire_succes">
 					<label><:saveauto:label_message_succes:></label>
 					<p class="explication"><:saveauto:help_msg:></p>
@@ -130,7 +131,7 @@
 						 <label for="ecrire_succes_false"><:item_non:></label>
 					</div>
 				</li>
-			</ul>
+			</ul></fieldset>
 		</fieldset>
 
 		<p class="boutons">
