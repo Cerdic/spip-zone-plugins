@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 define ('_RAINETTE_ICONES_PATH','rainette/');
 
 // Balises du plugin utilisables dans les squelettes et modeles
@@ -66,13 +68,17 @@ function rainette_icone_meteo($icone, $taille='petit', $service='weather', $chem
 }
 
 function rainette_resume_meteo($meteo) {
-	include_spip('inc/rainette_utils');
 
-	if (is_numeric($meteo))
-		$resume = meteo2resume($meteo);
+	if (is_numeric($meteo)) {
+		// On utilise l'option de _T permettant de savoir si un item existe ou pas
+		$resume = _T('rainette:meteo_' . $meteo, array(), array('force' => false));
+		if (!$resume)
+			$resume = _T('rainette:meteo_na') . " ($meteo)";
+	}
 	else
 		$resume = $meteo ? $meteo : _T('rainette:meteo_na');
-	return $resume;
+
+	return ucfirst($resume);
 }
 
 function rainette_afficher_direction($direction) {

@@ -1,42 +1,9 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 define ('_RAINETTE_RELOAD_TIME_PREVISIONS',2*3600); // pas la peine de recharger des previsions de moins de 2h
 define ('_RAINETTE_RELOAD_TIME_CONDITIONS',1800); // pas la peine de recharger les conditions courantes de moins de 30mn
-
-
-function meteo2resume($meteo){
-
-	// On utilise l'option de _T permettant de savoir si un item existe ou pas
-	$resume = _T('rainette:meteo_' . $meteo, array(), array('force' => false));
-	if (!$resume)
-		$resume = _T('rainette:meteo_na') . " ($meteo)";
-
-	return ucfirst($resume);
-}
-
-function angle2direction($degre) {
-	$dir = '';
-	switch(round($degre / 22.5) % 16)
-	{
-		case 0:  $dir = 'N'; break;
-		case 1:  $dir = 'NNE'; break;
-		case 2:  $dir = 'NE'; break;
-		case 3:  $dir = 'ENE'; break;
-		case 4:  $dir = 'E'; break;
-		case 5:  $dir = 'ESE'; break;
-		case 6:  $dir = 'SE'; break;
-		case 7:  $dir = 'SSE'; break;
-		case 8:  $dir = 'S'; break;
-		case 9:  $dir = 'SSW'; break;
-		case 10: $dir = 'SW'; break;
-		case 11: $dir = 'WSW'; break;
-		case 12: $dir = 'W'; break;
-		case 13: $dir = 'WNW'; break;
-		case 14: $dir = 'NW'; break;
-		case 15: $dir = 'NNW'; break;
-	}
-	return $dir;
-}
 
 /**
  * charger le fichier des infos meteos correspondant au code
@@ -161,6 +128,32 @@ function simplexml2array($obj, $utiliser_namespace='false') {
 		'attributes'=>$attributes,
 		'children'=>$children
 	);
+}
+
+
+
+function angle2direction($degre) {
+	$dir = '';
+	switch(round($degre / 22.5) % 16)
+	{
+		case 0:  $dir = 'N'; break;
+		case 1:  $dir = 'NNE'; break;
+		case 2:  $dir = 'NE'; break;
+		case 3:  $dir = 'ENE'; break;
+		case 4:  $dir = 'E'; break;
+		case 5:  $dir = 'ESE'; break;
+		case 6:  $dir = 'SE'; break;
+		case 7:  $dir = 'SSE'; break;
+		case 8:  $dir = 'S'; break;
+		case 9:  $dir = 'SSW'; break;
+		case 10: $dir = 'SW'; break;
+		case 11: $dir = 'WSW'; break;
+		case 12: $dir = 'W'; break;
+		case 13: $dir = 'WNW'; break;
+		case 14: $dir = 'NW'; break;
+		case 15: $dir = 'NNW'; break;
+	}
+	return $dir;
 }
 
 function kilometre2mile($km) {

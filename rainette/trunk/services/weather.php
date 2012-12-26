@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 define('_RAINETTE_WEATHER_URL_BASE', 'http://xml.weather.com/weather/local/');
 define('_RAINETTE_WEATHER_JOURS_PREVISION', 10);
 
