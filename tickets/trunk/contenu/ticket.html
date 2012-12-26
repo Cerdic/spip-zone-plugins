@@ -62,7 +62,7 @@
 
 	[(#REM) Bloc 2: liste des commentaires sur le ticket]
 	<B_messages>
-	<ul class="forum comment-ul">
+	<ul class="forum comments-ul">
 	<BOUCLE_messages(FORUMS?) {id_ticket}{0,1}>
 	<BOUCLE_si_comment(CONDITION){si #PLUGIN{comments}|oui}>
 		<BOUCLE_si_list(CONDITION){si #GET{config_thread}|=={list}|oui}>
@@ -142,16 +142,16 @@
 		<//B_si_list>
 	</BOUCLE_si_comment>
 	</B_si_comment>
-	<BOUCLE_messages_ticket(FORUMS){id_ticket}{par date}>
+	<BOUCLE_messages_ticket(FORUMS){id_ticket}{plat}{par date}>
 		<li class="forum-fil comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]" id="forum#ID_FORUM">
-			<div class="forum-message">
-				<div class="forum-chapo">
+			<div class="comment forum-message">
+				<div class="comment-meta forum-chapo">
 					<BOUCLE_auteur_message(AUTEURS){id_auteur}{tout}>
 					<:par_auteur:> <strong><a href="#URL_AUTEUR">#NOM</a></strong>
 					</BOUCLE_auteur_message>
 					le [(#DATE|affdate)]
 				</div>
-				<div class="#EDIT{texte} forum-texte">
+				<div class="#EDIT{texte} comment-content forum-texte">
 					[(#TEXTE)]
 				</div>
 			</div>

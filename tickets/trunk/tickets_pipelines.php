@@ -141,9 +141,11 @@ function tickets_formulaire_charger($flux){
 
 /**
  * Insertion dans le pipeline recuperer_fond (SPIP)
- * Sur le formulaire de forum, on ajoute 2 champs quand on commente un ticket :
+ * Sur le formulaire de forum (public seulement), on ajoute 2 champs quand on commente un ticket :
  * -* La possibilité de changer le statut;
  * -* La possibilité de changer l'assignation
+ * Dans le privé, recours au formulaire usuel de l'espace privé, le changement de statut et d'assignation étant
+ * directement disponibles dans la page.
  * 
  * @param array $flux Le contexte du pipeline
  */
@@ -171,7 +173,9 @@ function tickets_recuperer_fond($flux){
 /**
  * Insertion dans le pipeline formulaire_traiter (SPIP)
  * Si on est dans un formulaire de forum sur un ticket, on récupère le statut et l'assignation si présents
- * pour modifier le ticket en conséquence
+ * pour modifier le ticket en conséquence.
+ *
+ * De plus, si configuration de tickets, on repercute la configuration des documents joints au plugin medias.
  *
  * @param array $flux
  * @return array $flux
@@ -187,6 +191,13 @@ function tickets_formulaire_traiter($flux){
 		if(($new_assigne=_request('id_assigne')) && ($new_assigne != $infos_ticket['id_assigne'])){
 			ticket_modifier($id_ticket, array('id_assigne'=>$new_assigne));
 		}
+	}
+	if ($flux['args']['form']=='configurer_tickets_general') {
+		$config_docs = explode(',',$GLOBALS['meta']['documents_objets']);
+		$cle = array_search('spip_tickets', $config_docs);
+		if ($cle AND !_request('joindre_fichiers')) unset($config_docs[$cle]);
+		if (!$cle AND _request('joindre_fichiers')) $config_docs[] = 'spip_tickets';
+		ecrire_meta('documents_objets',implode(',', $config_docs));
 	}
 	return $flux;
 }
@@ -225,16 +236,6 @@ function tickets_notifications_destinataires($flux){
 			}
 		}
 	}
-	return $flux;
-}
-
-/**
- * Declaration du pipeline tickets_liste_tracker permettant a d'autres plugins de completer la lsite
- * 
- * @param array $flux : le contexte du pipeline
- * @return array $flux : le contexte modifié
- */
-function tickets_tickets_liste_tracker($flux) {
 	return $flux;
 }
 

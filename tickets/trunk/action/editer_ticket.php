@@ -71,7 +71,8 @@ function ticket_modifier($id_ticket, $set=null) {
 
 	// Ajouter un document
 	if (isset($_FILES['ajouter_document'])
-	AND $_FILES['ajouter_document']['tmp_name']) {
+	AND $_FILES['ajouter_document']['tmp_name']
+	AND defined('_DIR_PLUGIN_MEDIAS')) {
 		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 		$ajouter_documents('',
 			$_FILES, 'ticket', $id_ticket,

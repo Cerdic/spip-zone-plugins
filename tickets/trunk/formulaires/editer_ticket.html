@@ -62,7 +62,7 @@
 				class=inserer_barre_edition,
 				rows=20})]
 			
-			[(#CONFIG{tickets/general/joindre_fichiers}|=={on}|oui)
+			[(#CONFIG{tickets/general/joindre_fichiers}|=={on}|et{#ENV{public}}|et{#PLUGIN{medias}}|oui)
 				[(#SAISIE{input, ajouter_document,
 					type=file,
 					label=<:tickets:champ_fichier:>,

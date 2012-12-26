@@ -62,10 +62,13 @@
 <div dir='#LANG_DIR' class='#EDIT{notes} notes'>(#NOTES)</div>
 </div>]
 [<div><:tickets:champ_exemple:> : <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,ticket,id,#ID_TICKET},data,'<div class="nettoyeur"></div>'}}
+
 #BOITE_FERMER
 
 
-[(#INCLURE{fond=prive/squelettes/inclure/ticket_commenter,env})]
+<INCLURE{fond=prive/squelettes/inclure/discuter_forum, env, objet=ticket, id_objet=#ID_TICKET, statut=publie, ajax} />
 
 
 [(#EVAL{_AJAX}|oui)

@@ -46,6 +46,7 @@ function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config
 			}
 		}
 	}
+	$valeurs['public'] = test_espace_prive() ? '' : 'on';
 	return $valeurs;
 }
 
