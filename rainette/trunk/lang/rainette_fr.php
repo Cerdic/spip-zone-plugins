@@ -6,6 +6,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+	'bouton_configurer' => 'Plugin Rainette',
+
+	// C
 	'coucher_soleil' => 'coucher du soleil',
 
 	// D
@@ -42,6 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_utilisation_wunderground' => 'Les conditions....',
 	'info_utilisation_yahoo' => 'Les conditions....',
 	'info_configurer_theme' => 'Choisissez le thème d\'icônes utilisé dans les affichages.',
+	'info_page_configurer' => 'Rainette propose une configuration pour chacun des services de météorologie intégré au plugin. Néanmoins, seuls les services utilisés dans votre site doivent être configurés.',
 
 	// J
 	'jour' => 'jour',
@@ -206,10 +210,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tendance_texte_rising' => 'en hausse',
 	'tendance_texte_steady' => 'stable',
 
-	'titre_form_configurer_weather' => 'Service Weather.com&reg;',
-	'titre_form_configurer_wwo' => 'Service World Weather Online',
-	'titre_form_configurer_wunderground' => 'Service Weather Underground',
-	'titre_form_configurer_yahoo' => 'Service Yahoo! Weather',
+	'titre_service_weather' => 'Weather.com&reg;',
+	'titre_service_wwo' => 'World Weather Online',
+	'titre_service_wunderground' => 'Weather Underground',
+	'titre_service_yahoo' => 'Yahoo! Weather',
 	'titre_page_configurer' => 'Configuration du plugin Rainette',
 
 	// U

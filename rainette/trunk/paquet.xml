@@ -1,7 +1,7 @@
 <paquet
 	prefix="rainette"
 	categorie="divers"
-	version="2.0.6"
+	version="2.0.7"
 	etat="dev"
 	compatibilite="[3.0.0;3.*]"
 	logo="rainette-64.png"
@@ -20,4 +20,6 @@
 
 	<pipeline nom="insert_head_css" inclure="rainette_pipelines.php" />
 	<pipeline nom="insert_head" action="insert_head_css" inclure="rainette_pipelines.php" />
+
+	<menu nom="configurer_rainette" titre="rainette:bouton_configurer" parent="menu_configuration" icone="images/rainette-24.png" action="configurer_rainette" parametres="service=weather" />
 </paquet>
