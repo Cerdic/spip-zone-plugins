@@ -1,0 +1,5 @@
+<composition>
+	<nom>Rubrique Gallery</nom>
+	<description>Afficher Gallery 2 comme contenu de la rubrique</description>
+	<icon>images/article-portfolio.png</icon>
+</composition>

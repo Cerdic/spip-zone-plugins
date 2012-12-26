@@ -1,0 +1,23 @@
+#CACHE{7 * 24 * 3600}#HTTP_HEADER{'Content-Type: text/css'}
+/* les styles du plugin gallery 2 pour connecter au moins pire Gallery2 dans SPIP.. */
+
+[(#REM) masquer en-tete/ pied de gallery?]  
+  [(#CONFIG{g2/masquer_gallery}|=={oui}|oui) #gsHeader,#gsFooter { display : none; }]
+
+.g2page { position: relative; width: 58em; margin: 0 auto; text-align: left; }
+
+#gallery { font-size: 80%; text-align: left;}
+
+#hidesidebar, #showsidebar { cursor: pointer; }
+#hidesidebar { float: right; }
+#showsidebar { display: none; }
+
+
+/* les imagesblock hors Gallery en inline */
+.one-image { display: inline; }
+ 
+/* les select listant les fonctions sur les éléments */
+#gallery td.giAlbumCell select, #gallery td.giItemCell select, .block-core-ItemLinks select { width:150px; }
+
+/* les titres des éléments */
+.giTitle { font-size:1em; }

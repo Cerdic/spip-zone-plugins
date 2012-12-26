@@ -1,0 +1,176 @@
+<!-- titre=<:gallery:titre_gallery:> -->
+<!-- icone=g2-24.png-->
+<!-- boite=<:gallery:configuration_gallery:> -->
+
+<!-- autoriser=webmestre -->
+
+<!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; 
+modifier ces param&#232;tres. Pour en savoir plus, 
+voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>. -->
+
+<!-- descriptif=
+<h4><:gallery:descriptif_configuration:></h4>
+-->
+
+<!-- head=
+	
+	<style type="text/css">
+	table.def td{padding-left:1em; padding-right:1em;}
+	</style>
+
+-->
+#CACHE{0}
+
+<script type="text/javascript">
+    jQuery(document).ready( function(){
+        jQuery(".affmasq").click( function(){
+            var id_ec = jQuery(this).attr("id");
+            jQuery("#details_" + id_ec).toggle("slow");
+        }).css({cursor: "pointer", fontWeight: "bold"});
+        jQuery(".details").css({display: "none"});
+    });
+</script>
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+[(#REM) ------------------------ CHEMINS ------------------------ ]
+<fieldset>
+    <legend>
+    	<:gallery:chemins_appli:>
+    </legend>
+    <p>
+    <label><:gallery:chemin_spip:> :</label>
+    <input type="text" name="chemin_spip" id="chemin_spip" style="width: 100%;" 
+        value="[(#ENV{chemin_spip}|?{
+                [(#ENV{chemin_spip})],
+                '/'
+            })]" />
+    <small><:gallery:chemin_spip_explication:></small>
+    </p>
+    <p>
+    <label><:gallery:chemin_gallery:> :</label>
+    <input type="text" name="chemin_gallery" id="chemin_gallery" style="width: 100%;" 
+        value="[(#ENV{chemin_gallery}|?{
+                [(#ENV{chemin_gallery})],
+                '/gallery/'
+            })]" />
+    <small><:gallery:chemin_gallery_explication:></small>
+    </p>
+    
+</fieldset>    
+[(#REM) ------------------------ CHOIX SQUELETTE ------------------------ ]
+<fieldset>
+    <legend>
+    	<:gallery:choix_squelette:>
+    </legend>
+    <p>
+        <label><:gallery:choix_squelette_integration:> :</label>
+        #SET{liste_rep,#NOOP|liste_ssreps}
+        <select name="choix_squelette_integration" id="choix_squelette_integration">
+            <BOUCLE_liste_reps(POUR){tableau #GET{liste_rep}}>
+                <option value="#VALEUR" [(#ENV{choix_squelette_integration}|=={#VALEUR}|?{selected="selected",''})]>
+                    <:gallery:squelette:> #VALEUR
+                </option>
+            </BOUCLE_liste_reps>
+        </select>
+        <br/><small><:gallery:explication_squelette_dist:></small>
+    </p>
+    <p>
+    <label><:gallery:squelette_gallery:> :</label>
+    <input type="text" name="squelette_gallery" id="squelette_gallery" style="width: 100px;" 
+        value="[(#ENV{squelette_gallery}|?{
+                [(#ENV{squelette_gallery})],
+                'gallerie'
+            })]" />
+    <br/><small><:gallery:squelette_gallery_explication:></small>
+    </p>
+
+</fieldset>    
+
+[(#REM) ------------------------ HABILLAGE ------------------------ ]
+<fieldset>
+    <legend>
+    	<:gallery:habillage:>
+    </legend>
+    <p><:gallery:masquer_gallery:> :<br/>
+       <label><:gallery:oui:></label>
+       <input type="radio" name="masquer_gallery" [checked="(#ENV{masquer_gallery}|!={non})checked" ]value="oui"/>
+       &nbsp;&nbsp;<label><:gallery:non:></label>
+       <input type="radio" name="masquer_gallery" [checked="(#ENV{masquer_gallery}|=={non})checked" ]value="non"/>
+    </p>
+    <p><:gallery:integrer_affmasq_barre:> :<br/>
+       <label><:gallery:oui:></label>
+       <input type="radio" name="integrer_affmasq_barre" [checked="(#ENV{integrer_affmasq_barre}|!={non})checked" ]value="oui"/>
+       &nbsp;&nbsp;<label><:gallery:non:></label>
+       <input type="radio" name="integrer_affmasq_barre" [checked="(#ENV{integrer_affmasq_barre}|=={non})checked" ]value="non"/>
+    </p>    
+    <p><:gallery:integrer_page_spip:> :<br/>
+       <label><:gallery:oui:></label>
+       <input type="radio" name="integrer_page_spip" [checked="(#ENV{integrer_page_spip}|!={non})checked" ]value="oui"/>
+       &nbsp;&nbsp;<label><:gallery:non:></label>
+       <input type="radio" name="integrer_page_spip" [checked="(#ENV{integrer_page_spip}|=={non})checked" ]value="non"/>
+    </p>
+    <span id="exp_integrer" class="affmasq">[<:gallery:plus_details:>]</span>
+    <small id="details_exp_integrer" class="details"><:gallery:integrer_page_spip_explication:></small>
+    
+</fieldset>    
+
+[(#REM) ------------------------ CONFIG MODELE gphoto ------------------------ ]
+<fieldset>
+    <legend>
+    	<:gallery:g2photo_modele:>
+    </legend>
+    <p>
+    <:gallery:g2photo_elements:> :<br/>
+       <label><:gallery:g2photo_elem_titre:></label>
+       <input type="checkbox" name="g2photo_elem_titre" [checked="(#ENV{g2photo_elem_titre})"] value="title" />
+       &nbsp;&nbsp;<label><:gallery:g2photo_elem_date:></label>
+       <input type="checkbox" name="g2photo_elem_date" [checked="(#ENV{g2photo_elem_date})"] value="date" />
+       &nbsp;&nbsp;<label><:gallery:g2photo_elem_nbvues:></label>
+       <input type="checkbox" name="g2photo_elem_nbvues" [checked="(#ENV{g2photo_elem_nbvues})"] value="views" />	 
+       &nbsp;&nbsp;<label><:gallery:g2photo_elem_proprio:></label>
+       <input type="checkbox" name="g2photo_elem_proprio" [checked="(#ENV{g2photo_elem_proprio})"] value="owner" />
+    </p>
+    <p>
+       <label><:gallery:g2photo_taille:></label>
+       <input type="text" name="g2photo_taille" id="g2photo_taille" style="width: 100px;" 
+        value="[(#ENV{g2photo_taille}|?{
+                [(#ENV{g2photo_taille})],
+                '150'
+            })]" />
+    </p>
+    <span id="exp_g2photo" class="affmasq">[<:gallery:plus_details:>]</span>
+    <small id="details_exp_g2photo" class="details"><:gallery:g2photo_modele_presentation:></small>
+    <p><a href="#URL_PAGE{g2_test}"><:gallery:voir_page_tests:></a></p>
+</fieldset>    
+
+[(#REM) ------------------------ CONFIG MODELE gimg ------------------------ ]
+<fieldset>
+    <legend>
+    	<:gallery:gimg_modele:>
+    </legend>
+    <p>
+       <label><:gallery:gimg_taille:></label>
+       <input type="text" name="gimg_taille" id="gimg_taille" style="width: 100px;" 
+        value="[(#ENV{gimg_taille}|?{
+                [(#ENV{gimg_taille})],
+                '640'
+            })]" />
+    </p>
+    <span id="exp_gimg" class="affmasq">[<:gallery:plus_details:>]</span>
+    <small id="details_exp_gimg" class="details"><:gallery:gimg_modele_presentation:></small>
+    <p><a href="#URL_PAGE{g2_test}"><:gallery:voir_page_tests:></a></p>
+</fieldset>
+ 
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+<!--
+<input type="reset" value="<:Reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
+-->
+</div>
+
+</form>
+
+
+

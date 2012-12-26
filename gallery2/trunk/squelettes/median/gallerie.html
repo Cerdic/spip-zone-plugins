@@ -1,0 +1,87 @@
+#CACHE{0}[(#NOOP|gallery2)
+]<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+[(#REM) le head de gallery2 ]
+  [(#NOOP|g2data{headHtml})]
+  
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+
+[(#REM) le head du plugin g2 ]
+    [<link rel="stylesheet" type="text/css" href="(#URL_PAGE{g2.css})"/>]
+    [(#CONFIG{g2/integrer_affmasq_barre}|=={oui}|oui)
+        [<script type="text/javascript" src="(#CHEMIN{javascript/jquery.cookie.js})"></script>]
+        [<script type="text/javascript" src="(#URL_PAGE{g2.js})"></script>]
+    ]
+</head>
+
+[(#REM) la totale pour faire fonctionner le mot clé _invisible_ ]
+[(#REM) choper en doublon les rubriques ayant le mot clé invisible, les articles et breves qu'elles contiennent ]
+<BOUCLE_rubriques_exclues(RUBRIQUES) {titre_mot=_invisible_} {doublons}>
+  <BOUCLE_articles_int(ARTICLES) {doublons} {id_rubrique}></BOUCLE_articles_int>
+  <BOUCLE_breves_int(BREVES) {doublons} {id_rubrique}></BOUCLE_breves_int>
+  
+  [(#REM) choper en doublon les sous-rubriques, récursivement, et les articles inclus dans des rubriques avec le mot clé invisible ]
+  <BOUCLE_rubriques_int(RUBRIQUES) {doublons} {id_parent}>
+    <BOUCLE_art_int(ARTICLES) {doublons} {id_rubrique}></BOUCLE_art_int>
+    <BOUCLE_recursive(BOUCLE_rubriques_int)></BOUCLE_recursive>
+  </BOUCLE_rubriques_int>
+  
+</BOUCLE_rubriques_exclues>
+
+[(#REM) choper en doublon les articles et brèves ayant le mot clé invisible ]
+<BOUCLE_articles_exclus(ARTICLES) {titre_mot=_invisible_} {doublons}></BOUCLE_articles_exclus>
+<BOUCLE_breves_exclues(BREVES) {titre_mot=_invisible_} {doublons}></BOUCLE_breves_exclues>
+
+#SET_DOUBLONS
+
+<body class="page_sommaire">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+    
+  [(#REM) Menu de navigation par rubriques = barre de navigation ]
+  [(#INCLURE{fond=inc-rubriques}{sommaire=on})]
+
+	[(#REM) bloc rechercher ]
+	<div id="rechercher">
+		#FORMULAIRE_RECHERCHE
+  </div><!--#rechercher-->
+	
+  
+	[(#REM) Contenu principal ]
+	<div class="hfeed" id="conteneur">
+	<div id="contenu">
+[(#REM) ici le code à afficher avant gallery2 ]
+  
+
+
+		
+[(#REM) sortir du div#contenu/div#conteneur/div#page de SPIP selon l'option de config integrer_page_spip ]  
+  [(#CONFIG{g2/integrer_page_spip}|=={oui}|non)</div></div></div>]
+
+[(#REM) le body de gallery2 ]
+  [(#NOOP|g2data{bodyHtml})]
+
+  
+[(#REM) ici le code qui s'affichera après les photos de Gallery2 ]
+
+
+[(#REM) Pied de page de SPIP ]
+  [(#REM) retour dans un pseudo div#contenu/div#conteneur/div#page si l'option de config integrer_page_spip est à "non" ]
+  [(#CONFIG{g2/integrer_page_spip}|!={oui}|?{
+      <div class="g2page">
+      ,
+      </div><!--#contenu-->
+    </div><!--#conteneur-->
+  })]
+  
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=sommaire}>
+	
+</div><!--#page-->
+</body>
+</html>
