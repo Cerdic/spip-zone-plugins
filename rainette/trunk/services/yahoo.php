@@ -18,9 +18,10 @@ function yahoo_service2cache($lieu, $mode) {
 function yahoo_service2url($lieu, $mode) {
 
 	include_spip('inc/config');
-	$unite = lire_config('rainette/yahoo/unite', 'c');
+	$unite = lire_config('rainette/yahoo/unite', 'm');
 
-	$url = _RAINETTE_YAHOO_URL_BASE . '?w=' . $lieu . '&u=' . $unite;
+	$url = _RAINETTE_YAHOO_URL_BASE . '?w=' . $lieu
+		. '&u=' . ($unite == 'm' ? 'c' : 'f');
 
 	return $url;
 }

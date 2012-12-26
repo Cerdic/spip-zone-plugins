@@ -1,0 +1,35 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	<h3 class="titrem"><:rainette:titre_form_configurer_yahoo:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:rainette:legende_configurer_inscription:></legend>
+			<p><:rainette:info_configurer_cle_aucune:></p>
+		</fieldset>
+
+		<fieldset>
+			<legend><:rainette:legende_configurer_affichage:></legend>
+			<ul>
+				<INCLURE{fond=formulaires/inc-configurer_unite,
+					service=yahoo,
+					env} />
+			</ul>
+		</fieldset>
+
+		<fieldset>
+			<legend><:rainette:legende_configurer_utilisation:></legend>
+			<p><:rainette:info_utilisation_yahoo:></p>
+		</fieldset>
+		<ul>
+		</ul>
+
+		<input type="hidden" name="_meta_casier" value="rainette/yahoo" />
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
+</div>

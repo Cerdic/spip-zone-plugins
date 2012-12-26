@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_utilisation_weather' => 'Les conditions....',
 	'info_utilisation_wwo' => 'Les conditions....',
 	'info_utilisation_wunderground' => 'Les conditions....',
+	'info_utilisation_yahoo' => 'Les conditions....',
 	'info_configurer_theme' => 'Choisissez le thème d\'icônes utilisé dans les affichages.',
 
 	// J
@@ -208,6 +209,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_form_configurer_weather' => 'Service Weather.com&reg;',
 	'titre_form_configurer_wwo' => 'Service World Weather Online',
 	'titre_form_configurer_wunderground' => 'Service Wunderground.com',
+	'titre_form_configurer_yahoo' => 'Service Yahoo Weather',
 	'titre_page_configurer' => 'Configuration du plugin Rainette',
 
 	// U
