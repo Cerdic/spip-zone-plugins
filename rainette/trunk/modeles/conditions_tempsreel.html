@@ -7,8 +7,8 @@
 	<div class="statut">
 		<div class="cadre">
 			<div class="icone">[(#ENV{icone}|rainette_icone_meteo{grand, #ENV{service}})]</div>
-			<div class="t_reelle">[(#ENV{temperature_reelle}|rainette_afficher_unite{temperature, #ENV{service}})]</div>
-			<div class="t_ressentie"><:rainette:temperature_ressentie:>&nbsp;:[&nbsp;(#ENV{temperature_ressentie}|rainette_afficher_unite{temperature, #ENV{service}})]<br/></div>
+			<div class="t_reelle">[(#ENV{temperature_reelle}|rainette_afficher_unite{temperature})]</div>
+			<div class="t_ressentie"><:rainette:temperature_ressentie:>&nbsp;:[&nbsp;(#ENV{temperature_ressentie}|rainette_afficher_unite{temperature})]<br/></div>
 			<br clear="all"/>
 			<div class="resume">[(#ENV{resume}|rainette_resume_meteo)]</div>
 		</div>
@@ -20,16 +20,16 @@
 	
 	<div class="details">
 		<span><:rainette:vent|ucfirst:></span><br/>
-		[(#ENV{vitesse_vent}|rainette_afficher_unite{vitesse, #ENV{service}})]
+		[(#ENV{vitesse_vent}|rainette_afficher_unite{vitesse})]
 		[ - (#ENV{direction_vent}|rainette_afficher_direction)]<br/><br/>
 		<span><:rainette:humidite|ucfirst:></span><br/>
-		[(#ENV{humidite}|rainette_afficher_unite{pourcentage, #ENV{service}})]<br/><br/>
+		[(#ENV{humidite}|rainette_afficher_unite{pourcentage})]<br/><br/>
 		<span><:rainette:pression|ucfirst:></span><br/>
-		[(#ENV{pression}|rainette_afficher_unite{pression, #ENV{service}})]
+		[(#ENV{pression}|rainette_afficher_unite{pression})]
 		[ (#ENV{tendance_pression}|rainette_afficher_tendance{icone})]<br/><br/>
 		[<span><:rainette:point_rosee|ucfirst:></span><br/>
-		(#ENV{point_rosee}|rainette_afficher_unite{temperature, #ENV{service}})<br/><br/>]
+		(#ENV{point_rosee}|rainette_afficher_unite{temperature})<br/><br/>]
 		[<span><:rainette:visibilite|ucfirst:></span><br/>
-		(#ENV{visibilite}|rainette_afficher_unite{distance, #ENV{service}})]
+		(#ENV{visibilite}|rainette_afficher_unite{distance})]
 	</div>
 </div>

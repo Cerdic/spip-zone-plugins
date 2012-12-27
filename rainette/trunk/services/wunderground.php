@@ -145,6 +145,7 @@ function wunderground_flux2previsions($flux, $lieu) {
 }
 
 function wunderground_flux2conditions($flux, $lieu) {
+	static $tendance = array('=' => 'steady', '+' => 'rising', '-' => 'falling');
 	$tableau = array();
 
 	// On stocke les informations disponibles dans un tableau standard
@@ -172,7 +173,7 @@ function wunderground_flux2conditions($flux, $lieu) {
 
 
 		// Liste des conditions meteo extraites dans le systeme demande
-		$tableau['vitesse_vent'] = (isset($conditions['wind_'.$uv])) ? intval($conditions['wind_'.$uv][0]['text']) : '';
+		$tableau['vitesse_vent'] = (isset($conditions['wind_'.$uv])) ? floatval($conditions['wind_'.$uv][0]['text']) : '';
 		$tableau['angle_vent'] = (isset($conditions['wind_degrees'])) ? intval($conditions['wind_degrees'][0]['text']) : '';
 		// TODO : a confirmer suite a la reponse au post - http://gsfn.us/t/32w74
 		// -> La documentation indique que les directions uniques sont fournies sous forme de texte comme North
@@ -186,10 +187,10 @@ function wunderground_flux2conditions($flux, $lieu) {
 		$tableau['humidite'] = (isset($conditions['relative_humidity'])) ? intval($conditions['relative_humidity'][0]['text']) : '';
 		$tableau['point_rosee'] = (isset($conditions['dewpoint_'.$ut])) ? intval($conditions['dewpoint_'.$ut][0]['text']) : '';
 
-		$tableau['pression'] = (isset($conditions['pressure_'.$up])) ? intval($conditions['pressure_'.$up][0]['text']) : '';
-		$tableau['tendance_pression'] = (isset($conditions['pressure_trend'])) ? intval($conditions['pressure_trend'][0]['text']) : '';
+		$tableau['pression'] = (isset($conditions['pressure_'.$up])) ? floatval($conditions['pressure_'.$up][0]['text']) : '';
+		$tableau['tendance_pression'] = (isset($conditions['pressure_trend'])) ? $tendance[$conditions['pressure_trend'][0]['text']] : '';
 
-		$tableau['visibilite'] = (isset($conditions['visibility_'.$ud])) ? intval($conditions['visibility_'.$ud][0]['text']) : '';
+		$tableau['visibilite'] = (isset($conditions['visibility_'.$ud])) ? floatval($conditions['visibility_'.$ud][0]['text']) : '';
 
 		// Code meteo, resume et icone natifs au service
 		$tableau['code_meteo'] = (isset($conditions['icon'])) ? $conditions['icon'][0]['text'] : '';
@@ -243,8 +244,8 @@ function wunderground_flux2infos($flux, $lieu) {
 		}
 		$tableau['region'] = '';
 
-		$tableau['longitude'] = (isset($infos['lon'])) ? round(floatval($infos['lon'][0]['text']), 2) : '';
-		$tableau['latitude'] = (isset($infos['lat'])) ? round(floatval($infos['lat'][0]['text']), 2) : '';
+		$tableau['longitude'] = (isset($infos['lon'])) ? floatval($infos['lon'][0]['text']) : '';
+		$tableau['latitude'] = (isset($infos['lat'])) ? floatval($infos['lat'][0]['text']) : '';
 
 		$tableau['population'] = '';
 		$tableau['zone'] = '';

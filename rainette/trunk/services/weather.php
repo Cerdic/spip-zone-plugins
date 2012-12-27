@@ -124,7 +124,7 @@ function weather_flux2conditions($flux, $lieu) {
 			$tableau['station'] = $conditions['obst'][0];
 
 			// Liste des conditions meteo
-			$tableau['vitesse_vent'] = intval($conditions['wind'][0]['s'][0]);
+			$tableau['vitesse_vent'] = floatval($conditions['wind'][0]['s'][0]);
 			$tableau['angle_vent'] = intval($conditions['wind'][0]['d'][0]);
 			$tableau['direction_vent'] = $conditions['wind'][0]['t'][0];
 
@@ -134,10 +134,10 @@ function weather_flux2conditions($flux, $lieu) {
 			$tableau['humidite'] = intval($conditions['hmid'][0]);
 			$tableau['point_rosee'] = intval($conditions['dewp'][0]);
 
-			$tableau['pression'] = intval($conditions['bar'][0]['r'][0]);
+			$tableau['pression'] = floatval($conditions['bar'][0]['r'][0]);
 			$tableau['tendance_pression'] = $conditions['bar'][0]['d'][0];
 
-			$tableau['visibilite'] = intval($conditions['vis'][0]);
+			$tableau['visibilite'] = floatval($conditions['vis'][0]);
 
 			$tableau['code_meteo'] = intval($conditions['icon'][0]);
 			$tableau['icon_meteo'] = '';
@@ -170,8 +170,8 @@ function weather_flux2infos($flux, $lieu){
 		$tableau['ville'] = $infos['dnam'][0];
 		$tableau['region'] = '';
 
-		$tableau['longitude'] = round(floatval($infos['lon'][0]), 2);
-		$tableau['latitude'] = round(floatval($infos['lat'][0]), 2);
+		$tableau['longitude'] = floatval($infos['lon'][0]);
+		$tableau['latitude'] = floatval($infos['lat'][0]);
 
 		$tableau['population'] = '';
 		$tableau['zone'] = intval($infos['zone'][0]);

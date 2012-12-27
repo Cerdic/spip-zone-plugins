@@ -118,7 +118,26 @@ function rainette_afficher_tendance($tendance_en, $methode='texte', $chemin='', 
 	return $html;
 }
 
-function rainette_afficher_unite($valeur, $type_valeur='', $service='weather') {
+/**
+ * Affiche toute donnée météorologique au format numérique avec son unité.
+ *
+ *
+ * @package	RAINETTE/AFFICHAGE
+ * @api
+ *
+ * @param int/float	$valeur			La valeur à afficher
+ * @param string	$type_valeur	Type de données à afficher parmi 'temperature', 'pourcentage', 'angle', 'pression', 'distance', 'vitesse', 'population'
+ * @param int		$precision		Nombre de décimales à afficher pour les réels uniquement ou -1 pour utiliser le défaut
+ *
+ * @return string	La chaine calculée ou le texte désignant une valeur indéterminée
+ */
+function rainette_afficher_unite($valeur, $type_valeur='', $precision=-1) {
+
+	static $precision_defaut = array(
+						'pression' => 1,
+						'distance' => 1,
+						'angle' => 0,
+						'vitesse' => 0);
 
 	if (!$service) $service = 'weather';
 	include_spip('inc/config');
@@ -126,10 +145,18 @@ function rainette_afficher_unite($valeur, $type_valeur='', $service='weather') {
 
 	$valeur_affichee = _T('rainette:valeur_indeterminee');
 	if ($valeur) {
-		$suffixe = ($unite == 'm') ? 'metrique' : 'standard';
+		// Détermination de l'arrondi si la donnée est stockée sous format réel
+		if (array_key_exists($type_valeur, $precision_defaut)) {
+			$precision = ($precision < 0) ? $precision_defaut[$type_valeur] : $precision;
+			$valeur = round($valeur, $precision);
+		}
+		$suffixe = ($type_valeur == 'population')
+					? ''
+					: (($unite == 'm') ? 'metrique' : 'standard');
 		$espace = (($type_valeur == 'temperature') ||
 				   ($type_valeur == 'pourcentage') || ($type_valeur == 'angle')) ? '' : '&nbsp;';
-		$valeur_affichee = strval($valeur) . $espace . _T('rainette:unite_'.$type_valeur.'_'.$suffixe);
+		$item = 'rainette:unite_' . $type_valeur . ($suffixe ? '_' . $suffixe : '');
+		$valeur_affichee = strval($valeur) . $espace . _T($item);
 	}
 	return $valeur_affichee;
 }

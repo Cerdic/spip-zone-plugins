@@ -231,6 +231,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'unite_temperature_standard' => '°F',
 	'unite_vitesse_metrique' => 'km/h',
 	'unite_vitesse_standard' => 'mph',
+	'unite_population' => 'habitants',
 
 	// V
 	'valeur_indeterminee' => 'N/D',

@@ -127,20 +127,20 @@ function wwo_flux2conditions($flux, $lieu) {
 		$tableau['station'] = '';
 
 		// Liste des conditions meteo extraite dans le systeme metrique
-		$tableau['vitesse_vent'] = (isset($conditions['windspeedkmph'])) ? intval($conditions['windspeedkmph'][0]['text']) : '';
+		$tableau['vitesse_vent'] = (isset($conditions['windspeedkmph'])) ? floatval($conditions['windspeedkmph'][0]['text']) : '';
 		$tableau['angle_vent'] = (isset($conditions['winddirdegree'])) ? intval($conditions['winddirdegree'][0]['text']) : '';
 		$tableau['direction_vent'] = (isset($conditions['winddir16point'])) ? $conditions['winddir16point'][0]['text'] : '';
 
 		$tableau['temperature_reelle'] = (isset($conditions['temp_c'])) ? intval($conditions['temp_c'][0]['text']) : '';
-		$tableau['temperature_ressentie'] = round(temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']), 0);
+		$tableau['temperature_ressentie'] = (isset($conditions['temp_c'])) ? temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']) : '';
 
 		$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity'][0]['text']) : '';
 		$tableau['point_rosee'] = '';
 
-		$tableau['pression'] = (isset($conditions['pressure'])) ? intval($conditions['pressure'][0]['text']) : '';
+		$tableau['pression'] = (isset($conditions['pressure'])) ? floatval($conditions['pressure'][0]['text']) : '';
 		$tableau['tendance_pression'] = '';
 
-		$tableau['visibilite'] = (isset($conditions['visibility'])) ? intval($conditions['visibility'][0]['text']) : '';
+		$tableau['visibilite'] = (isset($conditions['visibility'])) ? floatval($conditions['visibility'][0]['text']) : '';
 
 		// On convertit les informations exprimees en systeme metrique dans le systeme US si besoin
 		include_spip('inc/config');
@@ -148,10 +148,10 @@ function wwo_flux2conditions($flux, $lieu) {
 		if ($unite == 's') {
 			$tableau['temperature_reelle'] = (isset($conditions['temp_f']))
 				? intval($conditions['temp_f'][0]['text'])
-				: celsius2farenheit($tableau['temperature_reelle']);
-			$tableau['temperature_ressentie'] = celsius2farenheit($tableau['temperature_ressentie']);
+				: intval(round(celsius2farenheit($tableau['temperature_reelle']), 0));
+			$tableau['temperature_ressentie'] = intval(round(celsius2farenheit($tableau['temperature_ressentie']), 0));
 			$tableau['vitesse_vent'] = (isset($conditions['windspeedmiles']))
-				? intval($conditions['windspeedmiles'][0]['text'])
+				? floatval($conditions['windspeedmiles'][0]['text'])
 				: kilometre2mile($tableau['vitesse_vent']);
 			$tableau['visibilite'] = kilometre2mile($tableau['visibilite']);
 			$tableau['pression'] = millibar2inch($tableau['pression']);
@@ -206,8 +206,8 @@ function wwo_flux2infos($flux, $lieu){
 		}
 		$tableau['region'] = (isset($infos['region'])) ? $infos['region'][0]['text'] : '';
 
-		$tableau['longitude'] = (isset($infos['longitude'])) ? round(floatval($infos['longitude'][0]['text']), 2) : '';
-		$tableau['latitude'] = (isset($infos['latitude'])) ? round(floatval($infos['latitude'][0]['text']), 2) : '';
+		$tableau['longitude'] = (isset($infos['longitude'])) ? floatval($infos['longitude'][0]['text']) : '';
+		$tableau['latitude'] = (isset($infos['latitude'])) ? floatval($infos['latitude'][0]['text']) : '';
 
 		$tableau['population'] = (isset($infos['population'])) ? intval($infos['population'][0]['text']) : '';
 		$tableau['zone'] = '';

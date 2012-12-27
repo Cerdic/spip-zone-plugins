@@ -51,11 +51,12 @@ function temperature2ressenti($temperature, $vitesse_vent) {
 			$ressenti = 13.12 + 0.6215*$temperature + (0.3965*$temperature - 11.37)*pow($vitesse_vent, 0.16);
 		else
 			$ressenti = $temperature + 0.2*(0.1345*$temperature - 1.59)*$vitesse_vent;
+		$ressenti = round($ressenti, 0);
 	}
 	else
 		$ressenti = $temperature;
 
-	return $ressenti;
+	return intval($ressenti);
 }
 
 ?>
