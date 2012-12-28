@@ -44,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help_mail_max_size' => 'Certain databases may exceed the maximum size for documents attached to an email. Check with your web host to find out the maximum size authorised. The default limit is 2 MB.', # MODIF
 	'help_max_zip' => 'Le fichier de sauvegarde est automatiquement zippé si sa taille est inférieure à un seuil. Saisir ce seuil en Mo.', # NEW
 	'help_msg' => 'Display a successful completion message on the screen', # MODIF
+	'help_notif_active' => 'Activer l\'envoi des sauvegardes par mail', # NEW
 	'help_notif_mail' => 'Saisir les adresses en les séparant par des virgules ",". Ces adresses s\'ajoutent à celle du webmestre du site.', # NEW
 	'help_obsolete' => 'Based on the number of days old, determine if an archive is considered as obsolete and if so delete it from the server.
              Enter -1 to deactivate this functionality', # MODIF

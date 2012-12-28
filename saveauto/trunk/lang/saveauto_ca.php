@@ -44,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help_mail_max_size' => 'Algunes bases de dades poden sobrepassar la mida màxima permesa en els fitxers adjunts per un correu electrònic. Consulteu al vostre proveïdor de correu electrònic per tal de saber la mida màxima autoritzada. El límit predeterminat és de 2MB.', # MODIF
 	'help_max_zip' => 'Le fichier de sauvegarde est automatiquement zippé si sa taille est inférieure à un seuil. Saisir ce seuil en Mo.', # NEW
 	'help_msg' => 'Mostra un missatge d\'èxit a la interfície', # MODIF
+	'help_notif_active' => 'Activer l\'envoi des sauvegardes par mail', # NEW
 	'help_notif_mail' => 'Saisir les adresses en les séparant par des virgules ",". Ces adresses s\'ajoutent à celle du webmestre du site.', # NEW
 	'help_obsolete' => 'Determina a partir de quants dies un arxiu es considera obsolet i automàticament l\'elimina del servidor.
              Poseu-hi -1 per desactivar aquesta funció', # MODIF

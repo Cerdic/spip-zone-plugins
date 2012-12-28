@@ -44,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help_mail_max_size' => 'Niektoré databázy môžu prevyšovať maximálnu veľkosť určenú pre dokumenty pripojené k e-mailom. Zistite u poskytovateľa hostingu, aká maximálna veľkosť je povolená. Predvolený limit je 2 MB.', # MODIF
 	'help_max_zip' => 'Le fichier de sauvegarde est automatiquement zippé si sa taille est inférieure à un seuil. Saisir ce seuil en Mo.', # NEW
 	'help_msg' => 'Na obrazovke zobrazí správu o úspešnom dokončení', # MODIF
+	'help_notif_active' => 'Activer l\'envoi des sauvegardes par mail', # NEW
 	'help_notif_mail' => 'Saisir les adresses en les séparant par des virgules ",". Ces adresses s\'ajoutent à celle du webmestre du site.', # NEW
 	'help_obsolete' => 'Podľa počtu dní od vytvorenia určí, či sa archív považuje za neaktuálny a ak je neaktuálny, odstráni ho zo servera.
              Na deaktivovanie tejto funkcie zadajte -1', # MODIF
