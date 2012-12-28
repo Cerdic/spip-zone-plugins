@@ -259,7 +259,7 @@ function ckeditor_html2spip_post_dist($texte) {
 
 function ckeditor_tag_protect($code,$tag,$params) {
 	return "<".stripslashes($tag).stripslashes($params).">".
-		strip_tags(preg_replace(
+		preg_replace(
 		array(
 			/* 1 */ '~<br/?>(\n|\r|\s)*~is',
 			/* 2 */ '~(&nbsp;|&#160;)~is'
@@ -268,7 +268,7 @@ function ckeditor_tag_protect($code,$tag,$params) {
 			/* 1 */ "\n",
 			/* 2 */ ' '
 		),
-		stripslashes($code))).
+		stripslashes($code)).
 		"</".stripslashes($tag).">";
 }
 
@@ -365,7 +365,7 @@ function ckeditor_html2spip($texte) {
 		$replace[] = "$1<$2" ;
 	}
 
-	$search[] = "#<br/?>(\r|\n|\s)*<(td|caption|tr|tbody|/td|/caption|/tr|/tbody)>(\r|\n|\s)*#si" ;
+	$search[] = "#<br/?>(\r|\n|\s)*<(td|caption|tr|tbody|/td|/caption|/tr|/tbody)[^>]*>(\r|\n|\s)*#si" ;
 	$replace[] = "<$2>" ;
 
 	/* plus de nettoyage : */
@@ -394,11 +394,12 @@ function ckeditor_html2spip($texte) {
 		require_once(find_in_path('lib/'._CKE_HTML2SPIP_VERSION.'/misc_tools.php'));
 		require_once(find_in_path('lib/'._CKE_HTML2SPIP_VERSION.'/HTMLEngine.class'));
 		require_once(find_in_path('lib/'._CKE_HTML2SPIP_VERSION.'/HTML2SPIPEngine.class'));
+		include_spip('inc/ckeditor_class') ;
 
 		$identity_tags = ckeditor_lire_config("html2spip_identite", _CKE_HTML2SPIP_IDENTITE);
 
 		define('_HTML2SPIP_PRESERVE_DISTANT', true);
-		$parser = new HTML2SPIPEngine($GLOBALS['db_ok']['link'], _DIR_IMG);
+		$parser = new CKE_HTML2SPIPEngine($GLOBALS['db_ok']['link'], _DIR_IMG);
 		$parser->loggingEnable();
 		if (trim($identity_tags) != '')
 			$parser->addIdentityTags(explode(';', $identity_tags));
@@ -460,11 +461,6 @@ function ckeditor_spip2html($texte) {
 
 	$search[] = "~@~" ; // protection de @ : pour que Mailcrypt ne casse pas les liens
 	$replace[] = "&#64;" ;
-
-	if (ckeditor_tweaks_actifs('decoupe')) {
-		$search[] = "~(<p>)?\+\+\+\+(</p>)?~" ; // saut de page
-		$replace[] = "<div style=\"page-break-after:always;\"><span style=\"display: none;\">&nbsp;</span></div>" ;
-	}
 
 	if (CLOSED_PROTECTED_SPIP_TAGS) {
 		$search[] = "#&lt;((".CLOSED_PROTECTED_SPIP_TAGS.")-protected)(.*?)&gt;(.*?)&lt;/\\1&gt;#se" ;

@@ -39,17 +39,20 @@ function htmldecode(s){
 
 function HideSpipUI(editor_id){
 	if($(editor_id).size()==0){return;}
-	var crayon=editor_id.match(/^(#crayon_\d+)\s/);
+	var crayon=editor_id.match(/^(#crayon_\d+)\s/), item, editor_id_light = editor_id ;
 	if(crayon) {
+		editor_id_light='textarea.crayon-active' ;
 		stack[editor_id].crborder=$(crayon[1]+' .formulaire_spip').css('border');
 		stack[editor_id].crbg=$(crayon[1]+' .formulaire_spip').css('background-color');
 		$(crayon[1]+' .formulaire_spip')
 			.css('border','none')
 			.css('background-color','white');
+		item=$(crayon+' div.edition');
+	} else {
+		item=$(editor_id).parents().find('div.edition:has('+editor_id+')');
 	}
-	var item=$(editor_id).parents().find('div.edition:has('+editor_id+')');
 	item.each(function() {
-		if ($(this).find(editor_id).length == 1) {
+		if ($(this).find(editor_id_light).length == 1) {
 			if (editor_id.match(/^#formulaire_forum\s/)) {
 				stack[editor_id].fobd=$(this).css('border');
 				stack[editor_id].fobg=$(this).css('background');
@@ -73,13 +76,17 @@ function ShowSpipUI(editor_id){
 		barrebouilles_editor(editor_id) ;
 		stack[editor_id].nobarre = false ;
 	}
-	var item=$(editor_id).parents().find('div.edition:has('+editor_id+')');
+	var crayon=editor_id.match(/^(#crayon_\d+)\s/), item ;
+	if(crayon) {
+		item=$(crayon+' div.edition');
+	} else {
+		item=$(editor_id).parents().find('div.edition:has('+editor_id+')');
+	}
 	item.each(function() {
 		if (editor_id.match(/^#formulaire_forum\s/)) {
 			$(this).css('border',stack[editor_id].fobd);
 			$(this).css('background',stack[editor_id].fobg);
 		}
-		var crayon=editor_id.match(/^(#crayon_\d+)\s/);
 		if(crayon) {
 			$(crayon[1]+' .formulaire_spip')
 				.css('border',stack[editor_id].crborder)
@@ -115,36 +122,35 @@ function SpipEditor2CKEditor(editor_id){
 	EdConfig.toolbar='Spip'+stack[editor_id].tb;
 	HideSpipUI(editor_id);
 	try {	// fix les problèmes des instances de ckeditor répertoriées, mais non visibles/accessibles du fait du rechargement via ajax
-		if (stack[editor_id] && stack[editor_id].editor && CKEDITOR.instances[stack[editor_id].editor]) {
-			CKEDITOR.remove(CKEDITOR.instances[stack[editor_id].editor]) ;
-		}
-	} catch (E) { /* rien */ }
+		CKEDITOR.remove(CKEDITOR.instances[stack[editor_id].editor]) ;
+	} catch (E) { 
+		/* rien */
+	}
+	try { 
 	$(editor_id).ckeditor(function(){
 		stack[editor_id].n='#'+this.container.getId();
 		stack[editor_id].editor=this.name ;
 
 		[(#REM) // calcul de la somme des deux marges de part et d'autre du texte area
 			// pour cela on teste la présence de divers parents possible...
-			// dw : Delta Width (différence de largeur entre le conteneur et l'éditeur)
 		]
 	
-		var parents_class = [ '.cadre-formulaire-editer', '.cadre-formulaire', '.formulaire_spip', '#contenu' ] ;
+		var parent_ids = [ '.cadre-formulaire-editer', '.formulaire_crayon', '.cadre-formulaire', '.formulaire_spip', '#contenu' ] ;
 		var pc=0,parent_trouve=false ;
 		do {
-			stack[editor_id].conteneur_class = parents_class[pc++] ;
-			if ($(stack[editor_id].conteneur_class).length>0) {
+			stack[editor_id].parent_id = parent_ids[pc++] ;
+			if ($(stack[editor_id].parent_id).length>0) {
 				parent_trouve=true ;
-				stack[editor_id].marges=$(stack[editor_id].conteneur_class).width()-$(stack[editor_id].n).width() ;
+				stack[editor_id].marges=$(editor_id).parents(stack[editor_id].parent_id).width()-$(stack[editor_id].n).width() ;
 			}
-		} while ((pc<parents_class.length) && (!parent_trouve)) ;
+		} while ((pc<parent_ids.length) && (!parent_trouve)) ;
 		
 
 		if (parent_trouve) {
 			this.on('resize', function(e) {
-				$(editor_id).parents(stack[editor_id].conteneur_class).width($(stack[editor_id].n).width()+stack[editor_id].marges);
+				$(editor_id).parents(stack[editor_id].parent_id).width($(stack[editor_id].n).width()+stack[editor_id].marges);
 			});
 		}
-
 		contexteChange(editor_id);
 		$(editor_id).attr('disabled',false);
 		$('#swapeditor_'+stack[editor_id].ndx)
@@ -153,8 +159,11 @@ function SpipEditor2CKEditor(editor_id){
 				.attr('src','[(#CHEMIN{images/ckeditor_spip.png}|url_absolue)]') ;
 		$('#swapeditor_'+stack[editor_id].ndx).attr('disabled',false);
 		this.setReadOnly(false);
-		this.resize(CKEDITOR.ckConfig.minwidth,CKEDITOR.ckConfig.height,true);
+		this.resize(CKEDITOR.ckConfig.minwidth,CKEDITOR.ckConfig.height);
 	},EdConfig);
+	} catch (E) {
+		alert("Erreur non prévue : \n"+E) ;
+	}
 }
 
 function barrebouilles_editor(editor_id){ 
@@ -241,8 +250,7 @@ function contexteChange(editor_id){
 
 function cke_crayon_submit(editor_id){
 	if($(editor_id).size()==0){return;}
-	try{[(#REM)// si on est en mode 'ckeditor'
-		// on synchronise le textarea]
+	try{[(#REM)// si on est en mode 'ckeditor', on synchronise le textarea]
 		$(editor_id).ckeditorGet().updateElement();
 	}catch(e){ /* rien */ }
 	$(this).parents('.formulaire_crayon').submit();
@@ -280,61 +288,72 @@ function fullInitCKEDITOR(editor_ids){
 		CKEDITOR.fullInitDone=true;
 	}
 	for(var id in editor_ids){
-		[(#REM) // on évite les appels multiples]
-		if (defined_ed[editor_ids[id][0]]) { continue ; } else { defined_ed[editor_ids[id][0]] = true ; }
-		var editor_id=editor_ids[id][0], editor_tb=editor_ids[id][1], crayon=editor_ids[id][2], editor_md5=editor_ids[id][3] ;
+		if (($(editor_ids[id][0]).length > 0) && ($(editor_ids[id][0]).css('display') != 'none')) { 
+		try {
+			$(editor_ids[id][0]).ckeditorGet() ;
+		} catch(e) {
+			var editor_id=editor_ids[id][0], editor_tb=editor_ids[id][1], crayon=editor_ids[id][2], editor_md5=editor_ids[id][3] ;
+				
+			var ndx=$('[id^=cke_cpt_]').size(),buttons='';
+			while ($('[id=cke_cpt_'+ndx+']').size()>0) { ndx++ ; }
+			if (typeof stack[editor_id] == 'undefined') {
+				stack[editor_id] = {} ;
+			}
+			stack[editor_id].crayons = 0 ;
+			stack[editor_id].ndx = ndx ;
+			stack[editor_id].tb = editor_tb ;
+			stack[editor_id].nobarre = ($(editor_id).hasClass('no_barre') || CKEDITOR.ckeditmode == 'spip') ;
+			if (! stack[editor_id].nobarre)
+				$(editor_id).addClass('no_barre');[(#REM) // on fait en sorte de désactiver l'affichage du porte plume avant qu'il n'entre en scène ...]
+
+			if ($('.after_'+editor_md5).length==0) {
+				$(editor_id).after('<span id="cke_cpt_'+ndx+'" class="after_'+editor_md5+'"></span>');
+	[(#CONFIG{ckeditor/ignoreversion}|non)
+				if(CKEDITOR.version<CKEDITOR.ckpreferedversion){
+					var pref='<:ckeditor:version_preferee:>';
+					$('#cke_cpt_'+ndx).prepend(
+						'<div class="erreur_message">'+pref.replace(/%2/,CKEDITOR.ckpreferedversion).replace(/%1/,CKEDITOR.version)+'</div>'
+					);
+				}
+	]
+			}
 			
-		var ndx=$('[id^=cke_cpt_]').size(),buttons='';
-		while ($('[id=cke_cpt_'+ndx+']').size()>0) { ndx++ ; }
-		stack[editor_id]={'n':null,'w':null,'wr':null,'ctx':null,'crayons':0,'ndx':ndx,'tb':editor_tb};
-		stack[editor_id].nobarre = ($(editor_id).hasClass('no_barre') || CKEDITOR.ckeditmode == 'spip') ;
-		if (! stack[editor_id].nobarre)
-			$(editor_id).addClass('no_barre');[(#REM) // on fait en sorte de désactiver l'affichage du porte plume avant qu'il n'entre en scène ...]
-
-		if ($('.after_'+editor_md5).length==0) {
-			$(editor_id).after('<span id="cke_cpt_'+ndx+'" class="after_'+editor_md5+'"></span>');
-[(#CONFIG{ckeditor/ignoreversion}|non)
-			if(CKEDITOR.version<CKEDITOR.ckpreferedversion){
-				var pref='<:ckeditor:version_preferee:>';
-				$('#cke_cpt_'+ndx).prepend(
-					'<div class="erreur_message">'+pref.replace(/%2/,CKEDITOR.ckpreferedversion).replace(/%1/,CKEDITOR.version)+'</div>'
-				);
-			}
-]
-		}
-		
-		if(CKEDITOR.ckeditmode!='ckeditor-exclu'){
-			buttons=buttons +
-				'<button style="margin:0;width:40px;height:24px;" type="button" id="swapeditor_'+ndx+'" onclick="javascript:SwapEditor(\''+editor_id+'\');" title="' 
-				+htmldecode(CKEDITOR.ckeditmode=='spip'?'<:ckeditor:use_ckeditor:>':'<:ckeditor:use_spip_editor:>') 
-				+'"><img src="[(#CHEMIN{images/ckeditor.png}|url_absolue)]"/></button>';
-		}
-
-[(#REM)	// on insère le menu déroulant de changement de contexte s'il existe des contextes]
-<B_options>		buttons=buttons+'<span style="padding-right:5px;"><:ckeditor:changer_de_contexte:></span>'
-			+'<select id="contexte_'+ndx+'" name="contexte_'+ndx+'" onchange="contexteChange(\''+editor_id+'\');" style="width:33%;"><option value="" selected><:ckeditor:sans_contexte:></option><BOUCLE_options(POUR){tableau #CONFIG{ckeditor/contextes}|ck_enliste{1}}><option value="[(#VALEUR|table_valeur{0})]">[(#VALEUR|table_valeur{1}|replace{(\.|#)})]</option></BOUCLE_options></select>';</B_options>;
-		if(buttons && ($('.before_'+editor_md5).length == 0)) {
-			var div = $(editor_id).closest('.markItUpContainer') ;
-			var style = "width;100%;text-align:right;position:relative;top:-24px;height:0px;" ;
-			if (div.length == 0) { // cas où le porteplume n'est pas là...
-				div = $(editor_id).siblings('label:first') ;
-				style = "width;100%;text-align:right;position:relative;top:-8px;height:0px;" ;
+			if(CKEDITOR.ckeditmode!='ckeditor-exclu'){
+				buttons=buttons +
+					'<button style="margin:0;width:40px;height:24px;" type="button" id="swapeditor_'+ndx+'" onclick="javascript:SwapEditor(\''+editor_id+'\');" title="' 
+					+htmldecode(CKEDITOR.ckeditmode=='spip'?'<:ckeditor:use_ckeditor:>':'<:ckeditor:use_spip_editor:>') 
+					+'"><img src="[(#CHEMIN{images/ckeditor.png}|url_absolue)]"/></button>';
 			}
 
-			div.prepend('<div id="cke_buttons_'+ndx+'" class="before_'+editor_md5+'" style="'+style+'"><a name="cke_buttons_ancre_'+ndx+'"></a>'+buttons+'</div>');
-		}
-[(#REM)	// gestion des crayons :]
-		if(crayon){
-			$('#'+crayon+' .crayon-submit')
-				.after('<button id="save" style=\'background:url("[(#CHEMIN{images/ok.png}|url_absolue)]") no-repeat scroll left top transparent;\' onclick="javascript:return cke_crayon_submit(\''+editor_id+'\');" title="<:bouton_enregistrer:>"><:bouton_enregistrer:></button>')[(#REM)// on ajoute notre bouton qui synchronisera le textarea avant l'editeur avec de soumettre le formulaire]
-				.remove();[(#REM)// on supprime le bouton original]
-		}
-
-	}
-	if(CKEDITOR.ckeditmode!='spip'){
-		for(var id in editor_ids){
-			SpipEditor2CKEditor(editor_ids[id][0]);
-		}
+	[(#REM)	// on insère le menu déroulant de changement de contexte s'il existe des contextes]
+	<B_options>		buttons=buttons+'<span style="padding-right:5px;"><:ckeditor:changer_de_contexte:></span>'
+				+'<select id="contexte_'+ndx+'" name="contexte_'+ndx+'" onchange="contexteChange(\''+editor_id+'\');" style="width:33%;"><option value="" selected><:ckeditor:sans_contexte:></option><BOUCLE_options(POUR){tableau #CONFIG{ckeditor/contextes}|ck_enliste{1}}><option value="[(#VALEUR|table_valeur{0})]">[(#VALEUR|table_valeur{1}|replace{(\.|#)})]</option></BOUCLE_options></select>';</B_options>;
+			if(buttons && ($('.before_'+editor_md5).length == 0)) {
+				var div ;
+				var style = "width;100%;text-align:right;position:relative;top:-24px;height:0px;" ;
+				if (crayon) {
+					div = $(editor_id).closest('.formulaire_crayon') ;
+				} else {
+					div = $(editor_id).closest('.markItUpContainer') ;
+					if (div.length == 0) { [(#REM) // cas où le porteplume n'est pas là... ]
+						div = $(editor_id).siblings('label:first') ;
+						style = "width;100%;text-align:right;position:relative;top:-8px;height:0px;" ;
+					}
+				}
+				if (div.length != 0) {
+					div.prepend('<div id="cke_buttons_'+ndx+'" class="before_'+editor_md5+'" style="'+style+'"><a name="cke_buttons_ancre_'+ndx+'"></a>'+buttons+'</div>');
+				}
+			}
+	[(#REM)	// gestion des crayons :]
+			if(crayon){
+				$('#'+crayon+' .crayon-submit')
+					.after('<button id="save" style=\'background:url("[(#CHEMIN{images/ok.png}|url_absolue)]") no-repeat scroll left top transparent;\' onclick="javascript:return cke_crayon_submit(\''+editor_id+'\');" title="<:bouton_enregistrer:>"><:bouton_enregistrer:></button>')[(#REM)// on ajoute notre bouton qui synchronisera le textarea avant l'editeur avec de soumettre le formulaire]
+					.remove();[(#REM)// on supprime le bouton original]
+			}
+			if(CKEDITOR.ckeditmode!='spip'){
+				SpipEditor2CKEditor(editor_ids[id][0]) ;
+			}
+		}}
 	}
 }
 </BOUCLE_si>

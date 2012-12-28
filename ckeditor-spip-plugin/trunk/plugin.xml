@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]CKEditor pour SPIP[en]CKEditor for SPIP[ar]CKEDITOR &#1604; SPIP</multi></nom>
 	<auteur>Auteurs : [Fr&#233;d&#233;ric Bonnaud->mailto:fred@lea-linux.org], [Mehdi Cherifi (Superyms)->mailto:superyms@gmail.com], [Emmanuel Dreyfus->mailto:manu@netbsd.org]</auteur>
-	<version>0.16.2</version>
+	<version>0.16.3</version>
 	<etat>test</etat>
 	<description>
 		<h3><multi>[fr]Int&#233;gration de l'&#233;diteur WYSIWYG CKEditor à SPIP 2.0.9+[en]Integration of WYSIWYG editor CKEditor with SPIP 2.0.9+[ar]&#1578;&#1603;&#1575;&#1605;&#1604; CKEditor &#1606;&#1575;&#1588;&#1585; &#1604;SPIP 2.0.9+ et SPIP 3.0.4+</multi></h3>
@@ -14,7 +14,9 @@
 		Le mode d'&#233;dition de SPIP reste disponible, et on peut configurer le plugin pour que ce mode soit le mode d'&#233;dition par d&#233;faut.
 
 		N&#233;cessite : spip-bonux et CFG
-		
+
+		Les icones des onglets de configuration sont créées par [Patricia Clausnitzer->http://pc.de/icons/pc.de-berlin-icon-pack.zip].
+
 [en]
 		This integration of the editor CKEditor is noninvasive (it does not alter the SPIP code). It uses the mechanism of pipelines (here we use the pipeline: <code>editer_contenu_objet</code>). The version of CKeditor used is {{3.6}}. 
 
@@ -23,7 +25,7 @@
         The editing mode SPIP still available, and you can configure the plugin so that this mode is edit mode by default.		
 		
 		Need/Require : spip-bonux and CFG
-		
+
 [ar]
 &#1607;&#1584;&#1575; &#1575;&#1604;&#1578;&#1603;&#1575;&#1605;&#1604; &#1605;&#1606; CKEditor &#1575;&#1604;&#1606;&#1575;&#1588;&#1585; &#1607;&#1608; &#1605;&#1608;&#1587;&#1593; &#40;&#1571;&#1610; : &#1604;&#1575; &#1578;&#1594;&#1610;&#1610;&#1585; &#1585;&#1605;&#1586; SPIP). &#1601;&#1573;&#1606;&#1607; &#1610;&#1587;&#1578;&#1582;&#1583;&#1605; &#1570;&#1604;&#1610;&#1577; &#1605;&#1606; &#1582;&#1591;&#1608;&#1591; &#1575;&#1604;&#1571;&#1606;&#1575;&#1576;&#1610;&#1576;
 _ &#1608;&#1607;&#1606;&#1575; &#1606;&#1587;&#1578;&#1582;&#1583;&#1605; &#1575;&#1604;&#1582;&#1591; : <code>editer_contenu_objet</code>
@@ -47,43 +49,37 @@ _ &#1608;&#1607;&#1606;&#1575; &#1606;&#1587;&#1578;&#1582;&#1583;&#1605; &#1575
 	</bouton>
 
 	<onglet id="configurer_ckeditor" parent="configurer_ckeditor">
-		<icone>prive/themes/spip/images/ckspip-logo-24.png</icone>
+		<icone>prive/themes/spip/images/cke24-basique.png</icone>
 		<titre>ckeditor:ckeditor_p1</titre>
 	</onglet>
 	<onglet id="configurer_ckeditor_p2" parent="configurer_ckeditor">
-		<icone>prive/themes/spip/images/ckspip-logo-24.png</icone>
+		<icone>prive/themes/spip/images/cke24-toolbars.png</icone>
 		<titre>ckeditor:ckeditor_p2</titre>
 	</onglet>
 	<onglet id="configurer_ckeditor_p3" parent="configurer_ckeditor">
-		<icone>prive/themes/spip/images/ckspip-logo-24.png</icone>
+		<icone>prive/themes/spip/images/cke24-avance.png</icone>
 		<titre>ckeditor:ckeditor_p3</titre>
 	</onglet>
 	<onglet id="configurer_ckeditor_p4" parent="configurer_ckeditor">
-		<icone>prive/themes/spip/images/ckspip-logo-24.png</icone>
+		<icone>prive/themes/spip/images/cke24-imgdoc.png</icone>
 		<titre>ckeditor:ckeditor_p4</titre>
 	</onglet>
 	<onglet id="configurer_ckeditor_p5" parent="configurer_ckeditor">
-		<icone>prive/themes/spip/images/ckspip-logo-24.png</icone>
+		<icone>prive/themes/spip/images/cke24-styles.png</icone>
 		<titre>ckeditor:ckeditor_p5</titre>
 	</onglet>
 	<onglet id="configurer_ckeditor_p6" parent="configurer_ckeditor">
-		<icone>prive/themes/spip/images/ckspip-logo-24.png</icone>
+		<icone>prive/themes/spip/images/cke24-modeles.png</icone>
 		<titre>ckeditor:ckeditor_p6</titre>
 	</onglet>
 	<onglet id="configurer_ckeditor_p7" parent="configurer_ckeditor">
-		<icone>prive/themes/spip/images/ckspip-logo-24.png</icone>
+		<icone>prive/themes/spip/images/cke24-styles.png</icone>
 		<titre>ckeditor:ckeditor_p7</titre>
 	</onglet>
 	<onglet id="configurer_ckeditor_p8" parent="configurer_ckeditor">
-		<icone>prive/themes/spip/images/ckspip-logo-24.png</icone>
+		<icone>prive/themes/spip/images/cke24-spipmodeles.png</icone>
 		<titre>ckeditor:ckeditor_p8</titre>
 	</onglet>
-
-
-
-
-
-
 
 
 	<pipeline>

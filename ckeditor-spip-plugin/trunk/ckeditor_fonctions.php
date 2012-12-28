@@ -60,6 +60,7 @@ function ckeditor_getcss() {
 			@closedir($fkdir) ;
 		}
 	}
+	$flux .= "<link rel='stylesheet' href='".find_in_path('css/cked-editor.css')."' type='text/css' />\n" ;
 	return $flux ;
 }
 
