@@ -400,6 +400,7 @@ function css_imbriques_decouper ($css) {
 		foreach($GLOBALS["css_imbriques_medias_queries"] as $k=>$val) {
 			$css .= $k ."{\n". $val . "}\n";
 		}
+		$GLOBALS["css_imbriques_medias_queries"] = array();
 	}
 
 	return $css;
