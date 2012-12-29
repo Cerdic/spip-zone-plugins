@@ -145,7 +145,7 @@ function wunderground_flux2previsions($flux, $lieu) {
 }
 
 function wunderground_flux2conditions($flux, $lieu) {
-	static $tendance = array('=' => 'steady', '+' => 'rising', '-' => 'falling');
+	static $tendance = array('0' => 'steady', '+' => 'rising', '-' => 'falling');
 	$tableau = array();
 
 	// On stocke les informations disponibles dans un tableau standard
