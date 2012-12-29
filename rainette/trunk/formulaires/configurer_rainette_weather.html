@@ -22,7 +22,9 @@
 
 		<fieldset>
 			<legend><:rainette:legende_configurer_utilisation:></legend>
-			<p><:rainette:info_utilisation_weather:></p>
+			<INCLURE{fond=formulaires/inc-configurer_usage,
+				service=weather,
+				env} />
 		</fieldset>
 		<ul>
 		</ul>

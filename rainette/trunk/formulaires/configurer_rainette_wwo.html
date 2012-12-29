@@ -30,7 +30,9 @@
 		</fieldset>
 		<fieldset>
 			<legend><:rainette:legende_configurer_utilisation:></legend>
-			<p><:rainette:info_utilisation_wwo:></p>
+			<INCLURE{fond=formulaires/inc-configurer_usage,
+				service=wwo,
+				env} />
 		</fieldset>
 
 		<input type="hidden" name="_meta_casier" value="rainette/wwo" />

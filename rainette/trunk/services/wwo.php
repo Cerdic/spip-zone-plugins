@@ -36,7 +36,7 @@ function wwo_service2url($lieu, $mode) {
 
 function wwo_service2reload_time($mode) {
 
-	static $reload = array('conditions' => 1800, 'previsions' => 7200);
+	static $reload = array('conditions' => 10800, 'previsions' => 14400);
 
 	return $reload[$mode];
 }
