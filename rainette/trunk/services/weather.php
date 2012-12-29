@@ -105,6 +105,9 @@ function weather_flux2previsions($flux, $lieu) {
 		ksort($tableau);
 	}
 
+	// Traitement des erreurs de flux
+	$tableau['erreur'] = (!$tableau) ? true : false;
+
 	return $tableau;
 }
 
@@ -154,6 +157,9 @@ function weather_flux2conditions($flux, $lieu) {
 		}
 	}
 
+	// Traitement des erreurs de flux
+	$tableau['erreur'] = (!$tableau) ? true : false;
+
 	return $tableau;
 }
 
@@ -176,6 +182,9 @@ function weather_flux2infos($flux, $lieu){
 		$tableau['population'] = '';
 		$tableau['zone'] = intval($infos['zone'][0]);
 	}
+
+	// Traitement des erreurs de flux
+	$tableau['erreur'] = (!$tableau) ? true : false;
 
 	return $tableau;
 }

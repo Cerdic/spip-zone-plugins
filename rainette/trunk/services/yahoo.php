@@ -57,6 +57,9 @@ function yahoo_url2flux($url) {
 function yahoo_flux2previsions($flux, $lieu) {
 	$tableau = array();
 
+	// Traitement des erreurs de flux
+	$tableau['erreur'] = (!$tableau) ? true : false;
+
 	return $tableau;
 }
 

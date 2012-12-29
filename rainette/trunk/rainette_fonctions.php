@@ -219,11 +219,16 @@ function rainette_coasse_conditions($lieu, $modele='conditions_tempsreel', $serv
 	lire_fichier($nom_fichier,$tableau);
 	$tableau = unserialize($tableau);
 
-	// On ajoute le lieu et le service au contexte fourni au modele
+	// On ajoute le lieu, le mode et le service au contexte fourni au modele
 	$tableau['lieu'] = $lieu;
+	$tableau['mode'] = 'conditions';
 	$tableau['service'] = $service;
 
-	$texte = recuperer_fond("modeles/$modele", $tableau);
+	if ($tableau['erreur'])
+		$texte = recuperer_fond("modeles/erreur", $tableau);
+	else
+		$texte = recuperer_fond("modeles/$modele", $tableau);
+
 	return $texte;
 }
 
@@ -235,11 +240,17 @@ function rainette_coasse_infos($lieu, $modele='infos_ville', $service='weather')
 	lire_fichier($nom_fichier,$tableau);
 	$tableau = unserialize($tableau);
 
-	// On ajoute le lieu et le service au contexte fourni au modele
+	// On ajoute le lieu, le mode et le service au contexte fourni au modele
 	$tableau['lieu'] = $lieu;
+	$tableau['mode'] = 'infos';
 	$tableau['service'] = $service;
+	$tableau['erreur'] = true;
 
-	$texte = recuperer_fond("modeles/$modele", $tableau);
+	if ($tableau['erreur'])
+		$texte = recuperer_fond("modeles/erreur", $tableau);
+	else
+		$texte = recuperer_fond("modeles/$modele", $tableau);
+
 	return $texte;
 }
 
@@ -252,8 +263,9 @@ function rainette_debug($lieu, $mode='previsions', $service='weather') {
 		lire_fichier($nom_fichier,$tableau);
 		$tableau = unserialize($tableau);
 
-		// On ajoute le lieu et le service au contexte fourni au modele
+		// On ajoute le lieu, le mode et le service au contexte fourni au modele
 		$tableau['lieu'] = $lieu;
+		$tableau['mode'] = $mode;
 		$tableau['service'] = $service;
 
 		var_dump($tableau);

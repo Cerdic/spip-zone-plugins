@@ -32,6 +32,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'direction_WNW' => 'ouest nord-ouest',
 	'direction_WSW' => 'ouest sud-ouest',
 
+	// E
+	'erreur_chargement_conditions' => 'Le service @service@ ne fournit actuellement aucune information géographique sur le lieu @lieu@.',
+	'erreur_chargement_infos' => 'Le service @service@ ne fournit actuellement aucune condition météorologique sur le lieu @lieu@.',
+	'erreur_chargement_previsions' => 'Le service @service@ ne fournit actuellement aucune prévision météorologique sur le lieu @lieu@.',
+	'erreur_chargement_conseil' => 'Veuillez vérifier le nom du lieu ou la disponibilité du service.',
+
 	// H
 	'humidite' => 'humidité',
 

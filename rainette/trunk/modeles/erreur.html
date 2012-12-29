@@ -1,0 +1,12 @@
+[(#REM)<!-- 
+	Ce sous-modele est celui utilise par defaut par Rainette pour avertir d'une erreur de chargement des données
+ -->
+]
+#SET{nom_service, #VAL{rainette:titre_service_}|concat{#ENV{service}}_T}
+
+<div class="notice">
+	[(#VAL{rainette:erreur_chargement_}|concat{#ENV{mode}}|_T{#ARRAY{service, #GET{nom_service}, lieu, #ENV{lieu}}})]
+	<br />
+	<:rainette:erreur_chargement_conseil:>
+</div>
+
