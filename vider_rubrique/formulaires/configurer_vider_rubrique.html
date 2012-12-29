@@ -1,0 +1,111 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	
+<h3 class="titrem"><:vider_rubrique:titre_vider_rubrique:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<style type="text/css" media="screen">
+	.desactive{display:none;}
+	.en_dev{opacity:0.5}
+</style>
+
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+<ul>
+	
+	#SET{name,activer}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	[(#SET{valeur,[(#ENV{#GET{name}}|sinon{non})]})]
+	<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+		<label for="#GET{name}"><:vider_rubrique:label_activer_vider_rubrique:></label>
+		<div class="explication"><:vider_rubrique:explication_activer_vider_rubrique:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<div class="choix">
+			<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+			[(#GET{valeur}|=={non}|non)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+		</div>
+		<div class="choix">
+			<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+			[(#GET{valeur}|=={non}|oui)checked="checked"#SET{activ_config,desactive}] /><label for="#GET{name}_non"><:item_non:></label>
+		</div>
+	</li>
+
+	#SET{name,restreindre}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	[(#SET{valeur,[(#ENV{#GET{name}}|sinon{non})]})]
+	<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur][ (#GET{activ_config})]">
+		<label for="#GET{name}"><:vider_rubrique:label_restreindre_vider_rubrique:></label>
+		<div class="explication"><:vider_rubrique:explication_restreindre_vider_rubrique:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<div class="choix">
+			<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+			[(#GET{valeur}|=={non}|non)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+		</div>
+		<div class="choix">
+			<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+			[(#GET{valeur}|=={non}|oui)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+		</div>
+	</li>
+
+	#SET{name,restreindre_valeur}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	[(#SET{valeur,[(#ENV{#GET{name}}|sinon{''})]})]
+	<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur][ (#GET{activ_config})]">
+		<label for="#GET{name}"><:vider_rubrique:label_restreindre_val_vider_rubrique:></label>
+		<div class="explication"><:vider_rubrique:explication_restreindre_val_vider_rubrique:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<div class="choix">
+			<input type="text" name="#GET{name}" id="#GET{name}_oui" value="#GET{valeur}" />
+		</div>
+	</li>
+	
+	#SET{name,auteurs_autorises}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	[(#SET{valeur,[(#ENV{#GET{name}}|sinon{webmaster})]})]
+	<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur][ (#GET{activ_config})] en_dev">
+		<label for="#GET{name}"><:vider_rubrique:label_auteurs_autorises:></label>
+		<div class='explication'><:vider_rubrique:explication_auteurs_autorises:></div>
+		<select name="#GET{name}" id="#GET{name}" size="1">
+			<option value="webmaster"[(#GET{valeur}|=={webmaster}|oui) selected='selected']>Webmestres uniquement</option>
+			<option value="admin"[(#GET{valeur}|=={admin}|oui) selected='selected']>Admins et webmestres</option>
+		</select>
+	</li>
+
+	#SET{name,docs}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	[(#SET{valeur,[(#ENV{#GET{name}}|sinon{non})]})]
+	<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur][ (#GET{activ_config})] en_dev">
+		<label for="#GET{name}"><:vider_rubrique:label_suppression_document:></label>
+		<div class="explication"><:vider_rubrique:explication_suppression_document:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<div class="choix">
+			<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+			[(#GET{valeur}|=={non}|non)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+		</div>
+		<div class="choix">
+			<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+			[(#GET{valeur}|=={non}|oui)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+		</div>
+	</li>
+
+	#SET{name,forums}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	[(#SET{valeur,[(#ENV{#GET{name}}|sinon{non})]})]
+	<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur][ (#GET{activ_config})] en_dev">
+		<label for="#GET{name}"><:vider_rubrique:label_suppression_forums:></label>
+		<div class="explication"><:vider_rubrique:explication_suppression_forums:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<div class="choix">
+			<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+			[(#GET{valeur}|=={non}|non)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+		</div>
+		<div class="choix">
+			<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+			[(#GET{valeur}|=={non}|oui)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+		</div>
+	</li>
+
+</ul>
+
+<input type="hidden" name="_meta_casier" value="vider_rubrique/config" />
+<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+
+</div>
+</form>
+</div>

@@ -1,0 +1,35 @@
+[(#SET{rubrique_source,#ENV{id_rubrique}})]
+<BOUCLE_principale(RUBRIQUES){id_rubrique=#GET{rubrique_source}}{tout}>
+
+	[(#REM) Lister toutes les sous rub ]
+	<BOUCLE_sousRub(RUBRIQUES){branche}{tout}{!id_rubrique=#GET{rubrique_source}}{tout}>
+		[(#SET_PUSH{lesRub,#ID_RUBRIQUE})]
+	</BOUCLE_sousRub>
+	[(#REM) Lister tous les articles ]
+	<BOUCLE_articles(ARTICLES){branche}{statut IN publie,prop,prepa}>
+		[(#SET_PUSH{lesArt,#ID_ARTICLE})]
+	</BOUCLE_articles>
+	
+[(#REM) TODO
+	Faudrait faire la bonne boucle :
+	- celle qui supprime TOUS les documents liés aux articles supprimés
+	- ET qui ne sont pas liés à d'autres articles de SPIP
+]
+	[(#REM) lister documents des articles ]
+	<BOUCLE_lesDoc(DOCUMENTS){id_article IN #GET{lesArt}}>
+		#SET_PUSH{lesDoc,#ID_DOCUMENT}
+	</BOUCLE_lesDoc>
+[(#REM) // FIN DU TODO ]
+	
+[(#REM) séparer le tout par des virgules ]
+	[(#SET{lesRub,[(#GET{lesRub}|implode{','})]})]
+	[(#SET{lesArt,[(#GET{lesArt}|implode{','})]})]
+	[(#SET{lesDoc,[(#GET{lesDoc}|implode{','})]})]
+
+[(#REM) Lancer les hostilités ]	
+	[(#REM|supprimer_objet{article,#GET{lesArt}})]
+	[(#REM|supprimer_objet{rubrique,#GET{lesRub}})]
+	[(#ENV{documents}|=={oui}|oui) [(#REM) pour l'instant inactif, faut faire la boucle |supprimer_objet{document,#GET{lesDoc}})] ]
+
+[(#ENV{forums}|=={oui}|oui) [(#REM) TODO Il faudrait traiter les forums liés aux articles ??? ] ]
+</BOUCLE_principale>
