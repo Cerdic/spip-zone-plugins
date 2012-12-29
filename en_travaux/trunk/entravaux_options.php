@@ -106,13 +106,13 @@ function entravaux_styliser($flux){
 			AND !in_array(
 				    $flux['args']['fond'],
 						// les pages exceptions
-			      array('login_sos','robots.txt','spip_pass',
+			      array('login_sos','robots.txt','spip_pass','favicon.ico',
 			      )
 			    )
 			AND !in_array(
 						$flux['args']['contexte'][_SPIP_PAGE],
 						// les pages exceptions
-						array('login_sos','robots.txt','spip_pass',
+						array('login_sos','robots.txt','spip_pass','favicon.ico',
 						)
 					)
 			// et on laisse passer modeles et formulaires,
