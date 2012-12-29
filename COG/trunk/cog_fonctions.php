@@ -253,7 +253,7 @@ function cog_formulaire_recherche_commune($id_cog_commune,$nom_ville,$code_depar
 {
 	if(intval($id_cog_commune)!=0)
 		{
-			$item=sql_fetsel('distinct id_cog_commune as id_cog_commune,trim(concat(MID(article,2,LENGTH(article_majuscule)-2),concat(\' \',nom))) as label,code,departement','spip_cog_communes','id_cog_commune='.intval($where));
+			$item=sql_fetsel('distinct id_cog_commune as id_cog_commune,trim(concat(MID(article,2,LENGTH(article_majuscule)-2),concat(\' \',nom))) as label,code,departement','spip_cog_communes','id_cog_commune='.intval($id_cog_commune));
 		}
 	else
 		{
@@ -282,7 +282,8 @@ function cog_recherche_commune_strict($nom_ville,$code_departement="")
 	$where='';
 	if (!empty($code_departement))
 		$where = 'and departement='.sql_quote($code_departement);
-	$item=sql_fetsel('distinct id_cog_commune as id_cog_commune,trim(concat(MID(article,2,LENGTH(article_majuscule)-2),concat(\' \',nom))) as label,code,departement','spip_cog_communes','nom_majuscule = '.sql_quote(strtoupper($nom_ville)).' or concat(MID(article_majuscule,2,LENGTH(article_majuscule)-2),concat(\' \',nom_majuscule)) = '.sql_quote(strtoupper($nom_ville)).$where);
+	$nom_ville =strtoupper(str_replace(array("œ"),array("oe"),$nom_ville));		
+	$item=sql_fetsel('distinct id_cog_commune as id_cog_commune,trim(concat(MID(article,2,LENGTH(article_majuscule)-2),concat(\' \',nom))) as label,code,departement','spip_cog_communes','nom_majuscule = '.sql_quote($nom_ville).' or concat(MID(article_majuscule,2,LENGTH(article_majuscule)-2),concat(\' \',nom_majuscule)) = '.sql_quote($nom_ville).$where);
 	return $item;
 }
 
