@@ -64,20 +64,20 @@ Exemple :
 	'ckeditor_defaut' => 'CKEditor by default',
 	'ckeditor_exclu' => 'CKEditor only',
 	'ckeditor_p1' => '', /* missing (Basique) */
-	'ckeditor_p1_titre' => '', /* missing (CKEditor : Configuration de base) */
+	'ckeditor_p1_titre' => '', /* missing (Configuration de base) */
 	'ckeditor_p2' => '', /* missing (Barres d'outils) */
-	'ckeditor_p2_titre' => '', /* missing (CKEditor : Configuration des barres d'outils) */
+	'ckeditor_p2_titre' => '', /* missing (Configuration des barres d'outils) */
 	'ckeditor_p3' => '', /* missing (Avancée) */
-	'ckeditor_p3_titre' => '', /* missing (CKEditor : Configuration avancée) */
+	'ckeditor_p3_titre' => '', /* missing (Configuration avancée) */
 	'ckeditor_p4' => '', /* missing (Images et documents) */
-	'ckeditor_p4_titre' => '', /* missing (CKEditor : Images et documents) */
+	'ckeditor_p4_titre' => '', /* missing (Images et documents) */
 	'ckeditor_p5' => '', /* missing (Styles) */
-	'ckeditor_p5_titre' => '', /* missing (CKEditor : Configuration des styles) */
+	'ckeditor_p5_titre' => '', /* missing (Configuration des styles) */
 	'ckeditor_p6' => '', /* missing (Modèles de pages) */
 	'ckeditor_p7' => '', /* missing (Plugins) */
-	'ckeditor_p7_titre' => '', /* missing (CKEditor : Configuration des Add-ons) */
+	'ckeditor_p7_titre' => '', /* missing (Configuration des Add-ons) */
 	'ckeditor_p8' => '', /* missing (Modèles SPIP) */
-	'ckeditor_p8_titre' => '', /* missing (CKEditor : Modèles SPIP) */
+	'ckeditor_p8_titre' => '', /* missing (Modèles SPIP) */
 	'ckeditor_titre' => '', /* missing (Configurer CKeditor) */
 	'ck_delete' => 'Reset configuration',
 	'ck_ko' => 'Error in parameters.',
@@ -143,6 +143,7 @@ Exemple :
 	'files_extensions_autorisees' => 'List of allowed extensions:',
 	'fin' => 'end',
 	'flash_extensions_autorisees' => 'List of allowed extensions:',
+	'forcer_copie_comme_texte' => '', /* missing (Forcer la copie « comme texte » en provenance du presse papier.) */
 	'formats' => '	List of HTML-tags present in the "combo format":',
 
 // H
@@ -250,6 +251,7 @@ Exemple :
 	'plugin_bouton' => '', /* missing (activer le bouton) */
 
 // R
+	'reinitialiser' => '', /* missing (Réinitialiser) */
 	'reinitialiser_le_plugin' => 'Reset plugin',
 	'repertoires_telechargement' => '', /* missing (Répertoires de téléchargement :) */
 	'repertoire_des_fichiers' => 'Files directory',
@@ -383,5 +385,8 @@ Exemple :
 	'valeurs_du_parametre' => 'Parameter values​​:',
 	'version_preferee' => 'CKEditor version %1 is installed, this plugin would prefer the version %2. Please first uninstall this version.',
 
+// Chaines probablement pas utilisée :
+/* On les garde au cas où ...
+*/
 );
 ?>

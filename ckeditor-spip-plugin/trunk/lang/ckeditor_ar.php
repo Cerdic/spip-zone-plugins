@@ -65,20 +65,20 @@ Exemple :
 	'ckeditor_defaut' => 'CKEditor &#1575;&#1601;&#1578;&#1585;&#1575;&#1590;&#1610;&#1575;',
 	'ckeditor_exclu' => 'CKEditor &#1601;&#1602;&#1591;',
 	'ckeditor_p1' => '', /* missing (Basique) */
-	'ckeditor_p1_titre' => '', /* missing (CKEditor : Configuration de base) */
+	'ckeditor_p1_titre' => '', /* missing (Configuration de base) */
 	'ckeditor_p2' => '', /* missing (Barres d'outils) */
-	'ckeditor_p2_titre' => '', /* missing (CKEditor : Configuration des barres d'outils) */
+	'ckeditor_p2_titre' => '', /* missing (Configuration des barres d'outils) */
 	'ckeditor_p3' => '', /* missing (Avancée) */
-	'ckeditor_p3_titre' => '', /* missing (CKEditor : Configuration avancée) */
+	'ckeditor_p3_titre' => '', /* missing (Configuration avancée) */
 	'ckeditor_p4' => '', /* missing (Images et documents) */
-	'ckeditor_p4_titre' => '', /* missing (CKEditor : Images et documents) */
+	'ckeditor_p4_titre' => '', /* missing (Images et documents) */
 	'ckeditor_p5' => '', /* missing (Styles) */
-	'ckeditor_p5_titre' => '', /* missing (CKEditor : Configuration des styles) */
+	'ckeditor_p5_titre' => '', /* missing (Configuration des styles) */
 	'ckeditor_p6' => '', /* missing (Modèles de pages) */
 	'ckeditor_p7' => '', /* missing (Plugins) */
-	'ckeditor_p7_titre' => '', /* missing (CKEditor : Configuration des Add-ons) */
+	'ckeditor_p7_titre' => '', /* missing (Configuration des Add-ons) */
 	'ckeditor_p8' => '', /* missing (Modèles SPIP) */
-	'ckeditor_p8_titre' => '', /* missing (CKEditor : Modèles SPIP) */
+	'ckeditor_p8_titre' => '', /* missing (Modèles SPIP) */
 	'ckeditor_titre' => '', /* missing (Configurer CKeditor) */
 	'ck_delete' => '', /* missing (Configuration réinitialisée.) */
 	'ck_ko' => '', /* missing (Erreur dans les paramètres.) */
@@ -144,6 +144,7 @@ Exemple :
 	'files_extensions_autorisees' => '', /* missing (Liste des extensions autorisées :) */
 	'fin' => '', /* missing (fin) */
 	'flash_extensions_autorisees' => '', /* missing (Liste des extensions autorisées :) */
+	'forcer_copie_comme_texte' => '', /* missing (Forcer la copie « comme texte » en provenance du presse papier.) */
 	'formats' => '&#1602;&#1575;&#1574;&#1605;&#1577; &#1575;&#1604;&#1593;&#1604;&#1575;&#1605;&#1575;&#1578; HTML &#1575;&#1604;&#1605;&#1608;&#1580;&#1608;&#1583;&#1577; &#1601;&#1610; "&#1587;&#1585;&#1583; &#1575;&#1604;&#1571;&#1606;&#1605;&#1575;&#1591;":',
 
 // H
@@ -251,6 +252,7 @@ Exemple :
 	'plugin_bouton' => '', /* missing (activer le bouton) */
 
 // R
+	'reinitialiser' => '', /* missing (Réinitialiser) */
 	'reinitialiser_le_plugin' => '', /* missing (Réinitialiser le plugin) */
 	'repertoires_telechargement' => '', /* missing (Répertoires de téléchargement :) */
 	'repertoire_des_fichiers' => '', /* missing (Répertoire des fichiers:) */
@@ -387,5 +389,8 @@ Exemple :
 	'valeurs_du_parametre' => '', /* missing (Valeurs possibles pour ce paramètre :) */
 	'version_preferee' => 'CKEditor &#1575;&#1604;&#1606;&#1587;&#1582;&#1577; %1 &#1605;&#1579;&#1576;&#1577;&#1548; &#1607;&#1584;&#1575; &#1575;&#1604;&#1576;&#1585;&#1606;&#1575;&#1605;&#1580; &#1575;&#1604;&#1605;&#1587;&#1575;&#1593;&#1583; &#1610;&#1601;&#1590;&#1604; &#1575;&#1604;&#1606;&#1587;&#1582;&#1577; %2 &#1610;&#1585;&#1580;&#1609; &#1573;&#1604;&#1594;&#1575;&#1569; &#1607;&#1584;&#1607; &#1575;&#1604;&#1606;&#1587;&#1582;&#1577; &#1571;&#1608;&#1604;&#1575; .',
 
+// Chaines probablement pas utilisée :
+/* On les garde au cas où ...
+*/
 );
 ?>

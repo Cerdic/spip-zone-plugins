@@ -52,6 +52,7 @@ define('_CKE_HTML2SPIP_IDENTITE', 'script;embed;param;object') ;
 define('_CKE_CACHE_REDIM_DEF', false ) ;
 define('_CKE_SPIPLINKS_DEF', true ) ;
 define('_CKE_INSERTALL_DEF', false ) ;
+define('_CKE_PASTETEXT_DEF', true ) ;
 define('_CKE_USE_DIRECTUPLOAD_DEF', true ) ;
 define('_CKE_PARCOURS_DEF', true ) ;
 define('_CKE_UPLOAD_DEF', true ) ;

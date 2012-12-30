@@ -25,7 +25,7 @@ function formulaires_configurer_ckeditor_p3_charger_dist() {
 		'html2spip_identite' => array_key_exists('html2spip_identite', $cfg)?$cfg['html2spip_identite']:_CKE_HTML2SPIP_IDENTITE,
 		'spiplinks' => array_key_exists('spiplinks', $cfg)?$cfg['spiplinks']:_CKE_SPIPLINKS_DEF,
 		'insertall' => array_key_exists('insertall', $cfg)?$cfg['insertall']:_CKE_INSERTALL_DEF,
-
+		'pastetext' => array_key_exists('pastetext', $cfg)?$cfg['pastetext']:_CKE_PASTETEXT_DEF,
 		'selecteurs_public' => array_key_exists('selecteurs_public', $cfg)?$cfg['selecteurs_public']:_CKE_PUBLIC_DEF,
 		'selecteurs_prive' => array_key_exists('selecteurs_prive', $cfg)?$cfg['selecteurs_prive']:_CKE_PRIVE_DEF,
 
@@ -109,6 +109,13 @@ function formulaires_configurer_ckeditor_p3_charger_dist() {
 					'options' => array(
 						'nom' => 'html2spip_limite',
 						'label_case' => _T('ckeditor:html2spip_limite')
+					)
+				),
+				array(
+					'saisie' => 'case',
+					'options' => array(
+						'nom' => 'pastetext',
+						'label_case' => _T('ckeditor:forcer_copie_comme_texte')
 					)
 				),
 				array(
@@ -340,11 +347,11 @@ function formulaires_configurer_ckeditor_p3_traiter_dist() {
 			}
 		}
 		ecrire_config("ckeditor/conversion", _request("conversion")) ;
-		ecrire_config("ckeditor/html2spip_limite", _request("html2spip_limite")) ;
+		ecrire_config("ckeditor/html2spip_limite", (bool) _request("html2spip_limite")) ;
 		ecrire_config("ckeditor/html2spip_identite", _request("html2spip_identite")) ;
 		ecrire_config("ckeditor/spiplinks", (bool) _request("spiplinks")) ;
 		ecrire_config("ckeditor/insertall",(bool) _request("insertall")) ;
-
+		ecrire_config("ckeditor/pastetext",(bool) _request("pastetext")) ;
 		ecrire_config("ckeditor/selecteurs_public", _request("selecteurs_public")) ;
 		ecrire_config("ckeditor/selecteurs_prive", _request("selecteurs_prive")) ;
 

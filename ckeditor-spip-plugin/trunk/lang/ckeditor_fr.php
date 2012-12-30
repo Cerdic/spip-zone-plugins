@@ -148,6 +148,7 @@ Exemple :
 	'files_extensions_autorisees' => 'Liste des extensions autorisées :',
 	'fin' => 'fin',
 	'flash_extensions_autorisees' => 'Liste des extensions autorisées :',
+	'forcer_copie_comme_texte' => 'Forcer la copie « comme texte » en provenance du presse papier.',
 	'formats' => 'Liste des tags HTML présents dans le menu déroulant formats :',
 
 // H

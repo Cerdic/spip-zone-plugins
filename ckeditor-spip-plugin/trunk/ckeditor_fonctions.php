@@ -564,6 +564,7 @@ function ckeditor_preparescript($config) {
 			$cke_cfg['readOnly'] = false ;
 			$cke_cfg['spip_contexte'] = array('id'=>$config['id'], 'type'=>$config['type']) ;
 			$cke_cfg['forceEnterMode'] = true ;
+			$cke_cfg['forcePasteAsPlainText'] = ckeditor_lire_config('pastetext', _CKE_PASTETEXT_DEF) ;
 			if(ckeditor_lire_config('conversion', _CKE_CONVERSION_DEF)=='aucune')
 				$cke_cfg['fullPage'] = true ;
 
