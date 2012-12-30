@@ -216,7 +216,13 @@ function wwo_service2credits() {
 	return $credits;
 }
 
-
+/**
+ * @internal
+ *
+ * @param string $meteo
+ * @param int $periode
+ * @return string
+ */
 function meteo_wwo2weather($meteo, $periode=0) {
 	static $wwo2weather = array(
 							'395'=> array(41,46),

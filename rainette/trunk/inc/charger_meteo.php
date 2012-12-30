@@ -4,15 +4,27 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * Charger le fichier des données météos correspondant au lieu et au mode choisi.
- * Si le fichier cache est obsolète ou absent, on charge le flux,  on l'analyse
- * et on stocke les données collectées apres transcodage en cache.
+ * Renvoyer le nom du fichier cache des données météos correspondant au lieu et au mode choisis.
+ *
+ * Si le fichier cache est obsolète ou absent, on le crée après avoir chargé puis phrasé le flux XML ou JSON
+ * et stocké les données collectées et transcodées dans un tableau standardisé.
  *
  * @param string $lieu
+ * 		Le lieu concerné par la méteo exprimé selon les critères requis par le service
  * @param string $mode
+ * 		Le type de données météorologiques demandé :
+ * 			- 'previsions', la valeur par défaut
+ * 			- 'conditions'
+ * 			- 'infos'
  * @param string $service
+ * 		Le nom abrégé du service :
+ * 			- 'weather' pour le weather.com, la valeur par défaut
+ * 			- 'wwo' pour World Weather Online
+ * 			- 'wunderground' pour Wunderground
+ * 			- 'yahoo' pour Yahoo! Weather
  *
  * @return string
+ * 		Le nom du fichier cache correspondant à la demande.
  */
 function inc_charger_meteo_dist($lieu, $mode='previsions', $service='weather') {
 
@@ -32,6 +44,7 @@ function inc_charger_meteo_dist($lieu, $mode='previsions', $service='weather') {
 	$reloader = "${service}_service2reload_time";
 	$reload_time = ($mode == 'previsions') ? $reloader('previsions') : $reloader('conditions');
 
+	// Mise à jour du cache avec les nouvelles données météo si besoin
 	if (!file_exists($cache)
 	OR (($mode != 'infos') AND (!filemtime($cache) OR (time()-filemtime($cache)>$reload_time)))) {
 		// Construire l'url de la requête
@@ -49,7 +62,7 @@ function inc_charger_meteo_dist($lieu, $mode='previsions', $service='weather') {
 			$convertir = ($mode == 'previsions') ? "${service}_flux2previsions" : "${service}_flux2conditions";
 		$tableau = $convertir($flux, $lieu);
 
-		// Ajout du crédit affiché en regard de chaque modèle
+		// Ajouter les crédits affichés en regard de chaque modèle
 		$crediter = "${service}_service2credits";
 		$tableau['credits'] = $crediter();
 
