@@ -172,4 +172,12 @@ function yahoo_flux2infos($flux, $lieu){
 	return $tableau;
 }
 
+function yahoo_service2credits() {
+
+	$credits = array('titre' => '', 'logo' => '');
+	$credits['lien'] = 'http://weather.yahoo.com/';
+
+	return $credits;
+}
+
 ?>

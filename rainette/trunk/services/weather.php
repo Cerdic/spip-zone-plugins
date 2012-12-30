@@ -163,7 +163,6 @@ function weather_flux2conditions($flux, $lieu) {
 	return $tableau;
 }
 
-
 function weather_flux2infos($flux, $lieu){
 	$tableau = array();
 
@@ -187,6 +186,14 @@ function weather_flux2infos($flux, $lieu){
 	$tableau['erreur'] = (!$tableau) ? true : false;
 
 	return $tableau;
+}
+
+function weather_service2credits() {
+
+	$credits = array('titre' => '', 'logo' => '');
+	$credits['lien'] = 'http://www.weather.com/';
+
+	return $credits;
 }
 
 

@@ -49,6 +49,10 @@ function inc_charger_meteo_dist($lieu, $mode='previsions', $service='weather') {
 			$convertir = ($mode == 'previsions') ? "${service}_flux2previsions" : "${service}_flux2conditions";
 		$tableau = $convertir($flux, $lieu);
 
+		// Ajout du crédit affiché en regard de chaque modèle
+		$crediter = "${service}_service2credits";
+		$tableau['credits'] = $crediter();
+
 	    // Pipeline de fin de chargement des données météo. Peut-être utilisé :
 		// -- pour effectuer des traitements annexes à partir des données météo (archivage, par exemple)
 		// -- pour ajouter ou modifier des données au tableau (la modification n'est pas conseillée cependant)

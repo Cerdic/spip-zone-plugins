@@ -1,5 +1,6 @@
 /* Styles generaux  */
 .rainette_titre {margin: 5px 0 5px 10px; 	padding:0 0 0 0;}
+.rainette_credits {float: left; margin: 10px 0 0 10px; clear:both; font-size: 10px;}
 
 /* INFOS: Styles utilises par le modele rainette_infos */
 .rainette_infos {

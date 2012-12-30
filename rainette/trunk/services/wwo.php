@@ -178,6 +178,14 @@ function wwo_flux2infos($flux, $lieu){
 	return $tableau;
 }
 
+function wwo_service2credits() {
+
+	$credits = array('logo' => '');
+	$credits['lien'] = 'http://www.worldweatheronline.com/';
+	$credits['titre'] = 'Free local weather content provider';
+
+	return $credits;
+}
 
 
 function wwo_meteo2weather($meteo, $periode=0) {

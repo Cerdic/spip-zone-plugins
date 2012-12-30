@@ -48,11 +48,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_configurer_condition' => 'Choisissez le mode d\'affichage du résumé et de l\'icone représentatifs d\'une condition météorologique donnée.',
 	'info_utilisation_rainette' => 'Les modèles d\'affichage fournis par Rainette suivent les règles d\'usage de chaque service. Si vous créez vos propres modèles veillez également à les respecter.',
 	'info_utilisation_weather' => 'Le service fournit gratuitement les données météorologiques. Il est demandé de créditer le service avec un lien vers le site web et le logo du service.',
-	'info_utilisation_wwo' => 'Le service fournit gratuitement les données météorologiques. Il est demandé de créditer le service avec un lien vers le site web. Pour consulter les termes exacts d\'utilisation veuillez vous rendre sur la page <a href="http://www.worldweatheronline.com/free-weather-feed.aspx?menu=usage">Usage Policy Data</a>.',
+	'info_utilisation_wwo' => 'Le service fournit gratuitement les données météorologiques pour une utilisation commerciale ou pas. Il est demandé de créditer le service avec un lien vers le site web. Pour consulter les termes exacts d\'utilisation veuillez vous rendre sur la page <a href="http://www.worldweatheronline.com/free-weather-feed.aspx?menu=usage">Usage Policy Data</a>.',
 	'info_utilisation_wunderground' => 'Le service fournit gratuitement les données météorologiques. Il est demandé de créditer le service avec le nom et le logo du service. Pour consulter les termes exacts d\'utilisation veuillez vous rendre sur la page <a href="http://www.wunderground.com/weather/api/d/terms.html">Weather API Terms of Service</a>.',
 	'info_utilisation_yahoo' => 'Le service fournit gratuitement les données météorologiques pour les usages personnel et à but non lucratif. Il est demandé de créditer le service avec le nom du service ou le logo. Pour consulter les termes exacts d\'utilisation veuillez vous rendre sur la page <a href="http://developer.yahoo.com/weather/#terms">Terms of Use</a>.',
 	'info_configurer_theme' => 'Choisissez le thème d\'icônes utilisé dans les affichages.',
 	'info_page_configurer' => 'Rainette propose une configuration pour chacun des services de météorologie intégré au plugin. Néanmoins, seuls les services utilisés dans votre site nécessitent d\'être configurés.',
+	'info_credits' => 'Données fournies par @service@',
 
 	// J
 	'jour' => 'jour',
@@ -217,7 +218,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tendance_texte_rising' => 'en hausse',
 	'tendance_texte_steady' => 'stable',
 
-	'titre_service_weather' => 'Weather.com&reg;',
+	'titre_service_weather' => 'weather.com&reg;',
 	'titre_service_wwo' => 'World Weather Online',
 	'titre_service_wunderground' => 'Weather Underground',
 	'titre_service_yahoo' => 'Yahoo! Weather',

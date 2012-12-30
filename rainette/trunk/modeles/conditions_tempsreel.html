@@ -17,7 +17,7 @@
 			[<:rainette:station_observation|ucfirst:>&nbsp;:&nbsp;(#ENV{station})]
 		</div>
 	</div>
-	
+
 	<div class="details">
 		<span><:rainette:vent|ucfirst:></span><br/>
 		[(#ENV{vitesse_vent}|rainette_afficher_unite{vitesse})]
@@ -32,4 +32,6 @@
 		[<span><:rainette:visibilite|ucfirst:></span><br/>
 		(#ENV{visibilite}|rainette_afficher_unite{distance})]
 	</div>
+
+	#INCLURE{fond=modeles/inc-credits, env}
 </div>

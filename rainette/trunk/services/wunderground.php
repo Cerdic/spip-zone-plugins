@@ -216,6 +216,15 @@ function wunderground_flux2infos($flux, $lieu) {
 	return $tableau;
 }
 
+function wunderground_service2credits() {
+
+	$credits = array('titre' => '');
+	$credits['lien'] = 'http://www.wunderground.com/';
+	$credits['logo'] = 'wunderground-126.png';
+
+	return $credits;
+}
+
 
 function wunderground_meteo2weather($meteo, $periode=0) {
 	static $wunderground2weather = array(

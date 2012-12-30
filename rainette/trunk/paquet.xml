@@ -1,12 +1,13 @@
 <paquet
 	prefix="rainette"
 	categorie="divers"
-	version="2.0.10"
+	version="2.0.11"
 	etat="dev"
 	compatibilite="[3.0.0;3.*]"
 	logo="rainette-64.png"
 	documentation="http://www.spip-contrib.net/article3133"
->	
+	developpement="http://blog.smellup.net/spip.php?rubrique23"
+>
 
 	<nom>Rainette</nom>
 	<!-- La météo au quotidien -->
