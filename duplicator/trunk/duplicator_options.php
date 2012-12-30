@@ -1,10 +1,13 @@
 <?php
+
 /***************************************************************************\
- * Plugin Duplicator pour Spip 2.0
- * Licence GPL (c) 2010 - Apsulis
- * Duplication de rubriques et d'articles
+ * Plugin Vider Rubrique pour Spip 3.0
+ * Licence GPL (c) 2012 - Apsulis
+ * Suppression de tout le contenu d'une rubrique
  *
 \***************************************************************************/
+
+
 function trim_value(&$value){$value = trim($value);}
 
 /**
@@ -27,7 +30,7 @@ function dupliquer_article($article,$rubrique){
 	);
 	$infos = sql_allfetsel($champs, $from, $where);
 	// On choisi les champs que l'on veut conserver
-	$champs_dupliques = explode(",", lire_config('duplicator/art_champs'));
+	$champs_dupliques = explode(",", lire_config('duplicator/config/art_champs'));
 	array_walk($champs_dupliques, 'trim_value');
 	
 	if (empty($champs_dupliques)) $champs_dupliques = array(
@@ -88,7 +91,7 @@ function dupliquer_rubrique($rubrique,$cible=null,$titre=' (copie)'){
 	include_spip('action/editer_rubrique');
 	include_spip('inc/config');
 		
-	// On lit la rubrique qui va etre dupliqué
+	// On lit la rubrique qui va etre dupliquée
 	$champs = array('*');
 	$from = 'spip_rubriques';
 	$where = array( 
@@ -96,7 +99,7 @@ function dupliquer_rubrique($rubrique,$cible=null,$titre=' (copie)'){
 	);
 	$infos = sql_allfetsel($champs, $from, $where);
 	// On choisi les champs que l'on veut conserver
-	$champs_dupliques = explode(",", lire_config('duplicator/rub_champs'));
+	$champs_dupliques = explode(",", lire_config('duplicator/config/rub_champs'));
 	array_walk($champs_dupliques, 'trim_value');
 	
 	if (empty($champs_dupliques)) $champs_dupliques = array(

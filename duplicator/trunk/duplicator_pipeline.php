@@ -13,20 +13,19 @@ function duplicator_boite_infos($flux){
 	$type = $flux['args']['type'];
 
 	if(autoriser("webmestre")){
-		if (lire_config('duplicator/duplic_rubrique')){
-			if (($id = intval($flux['args']['id'])) && ($type=='rubrique')) {
-			$contexte = array('id_rubrique'=>$id);
-			$flux["data"] .= recuperer_fond("inclure/duplicator_rubrique", $contexte);
+		if ( (lire_config('duplicator/config/duplic_rubrique')=="oui") ){
+			if ( ($id = intval($flux['args']['id'])) && ($type=='rubrique') ) {
+				$contexte = array('id_objet'=>$id,'objet'=>$type);
+				$flux["data"] .= recuperer_fond("noisettes/bouton_duplicator", $contexte);
 			}
 		}
-		if (lire_config('duplicator/duplic_article')){
-			if (($id = intval($flux['args']['id'])) && ($type=='article')) {
-			$contexte = array('id_article'=>$id);
-			$flux["data"] .= recuperer_fond("inclure/duplicator_article", $contexte);
+		if ( (lire_config('duplicator/config/duplic_article')=="oui") ){
+			if ( ($id = intval($flux['args']['id'])) && ($type=='article') ) {
+				$contexte = array('id_objet'=>$id,'objet'=>$type);
+				$flux["data"] .= recuperer_fond("noisettes/bouton_duplicator", $contexte);
 			}
 		}
 	}
 
 	return $flux;
 }
-?>

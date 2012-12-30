@@ -11,20 +11,26 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
-	'aide_choix_champs' => 'Champs sql séparés par une "," .Laisser vide pour sélectionner les champs principaux.',
+	'aide_choix_champs' => 'Liste des noms des champs SQL s&eacute;par&eacute;s par des ","<br/><em>Laisser vide pour s&eacute;lectionner tous les champs principaux.</em>',
+	'action_dupliquer_article' => "Dupliquer cet article",
+	'action_dupliquer_rubrique' => "Dupliquer cette rubrique",
 
 // C
-	'choix_type' => 'Sélectionner le ou les mode(s) de duplication',
-	'choix_champs' => 'Choisir les champs à dupliquer',
+	'choix_type' => 'S&eacute;lectionner le ou les mode(s) de duplication',
+	'choix_champs' => 'Choisir les champs &agrave; dupliquer',
 
-	'configuration_duplicator' => 'Configuration du Duplicator',
+	'configuration_duplicator' => 'Configuration de Duplicator',
+
+// D
+	'dupli_art' => "Duplication sur les articles",
+	'dupli_rub' => "Duplication sur les rubriques",
 
 // I
 	'icone_dupliquer' => 'Dupliquer la rubrique',
 
 // L
-	'label_art_champs' => 'Liste des champs à dupliquer pour chaque article :',
-	'label_rub_champs' => 'Liste des champs à dupliquer pour chaque rubrique :',
+	'label_art_champs' => 'Liste des champs &agrave; dupliquer pour chaque article :',
+	'label_rub_champs' => 'Liste des champs &agrave; dupliquer pour chaque rubrique :',
 
 
 // M	
@@ -41,5 +47,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'operation_retour_ok_article' => "Se rendre dans l'article dupliqu&eacute;.",
 	'operation_retour_ko_article' => "Retour aux articles.",
 
-	'texte_duplicator' => "Appliquer la duplication aux articles et / ou aux rubriques"
+	'texte_duplicator' => "Appliquer la duplication aux rubriques et/ou articles"
 );
