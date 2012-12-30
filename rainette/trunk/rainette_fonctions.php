@@ -244,7 +244,6 @@ function rainette_coasse_infos($lieu, $modele='infos_ville', $service='weather')
 	$tableau['lieu'] = $lieu;
 	$tableau['mode'] = 'infos';
 	$tableau['service'] = $service;
-	$tableau['erreur'] = true;
 
 	if ($tableau['erreur'])
 		$texte = recuperer_fond("modeles/erreur", $tableau);
