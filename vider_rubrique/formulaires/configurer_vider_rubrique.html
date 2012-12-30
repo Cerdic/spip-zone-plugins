@@ -58,14 +58,30 @@
 		</div>
 	</li>
 	
+	#SET{name,effacement}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	[(#SET{valeur,[(#ENV{#GET{name}}|sinon{non})]})]
+	<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur][ (#GET{activ_config})]">
+		<label for="#GET{name}"><:vider_rubrique:label_suppression_effacement:></label>
+		<div class="explication"><:vider_rubrique:explication_suppression_effacement:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<div class="choix">
+			<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+			[(#GET{valeur}|=={non}|non)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+		</div>
+		<div class="choix">
+			<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+			[(#GET{valeur}|=={non}|oui)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+		</div>
+	</li>
+
 	#SET{name,auteurs_autorises}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 	[(#SET{valeur,[(#ENV{#GET{name}}|sinon{webmaster})]})]
 	<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur][ (#GET{activ_config})] en_dev">
 		<label for="#GET{name}"><:vider_rubrique:label_auteurs_autorises:></label>
 		<div class='explication'><:vider_rubrique:explication_auteurs_autorises:></div>
 		<select name="#GET{name}" id="#GET{name}" size="1">
-			<option value="webmaster"[(#GET{valeur}|=={webmaster}|oui) selected='selected']>Webmestres uniquement</option>
-			<option value="admin"[(#GET{valeur}|=={admin}|oui) selected='selected']>Admins et webmestres</option>
+			<option value="webmaster"[(#GET{valeur}|=={webmaster}|oui) selected='selected']><:vider_rubrique:val1_auteurs_autorises:></option>
+			<option value="admin"[(#GET{valeur}|=={admin}|oui) selected='selected']><:vider_rubrique:val2_auteurs_autorises:></option>
 		</select>
 	</li>
 

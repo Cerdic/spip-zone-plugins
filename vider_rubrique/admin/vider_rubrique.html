@@ -1,13 +1,21 @@
 [(#SET{rubrique_source,#ENV{id_rubrique}})]
+[(#SET{effacement,[(#CONFIG{"vider_rubrique/config/effacement"}|sinon{"non"})]})]
+[(#SET{docs,[(#CONFIG{vider_rubrique/config/docs}|sinon{"non"})]})]
+[(#SET{forums,[(#CONFIG{vider_rubrique/config/forums}|sinon{"non"})]})]
+
 <BOUCLE_principale(RUBRIQUES){id_rubrique=#GET{rubrique_source}}{tout}>
 
 	[(#REM) Lister toutes les sous rub ]
 	<BOUCLE_sousRub(RUBRIQUES){branche}{tout}{!id_rubrique=#GET{rubrique_source}}{tout}>
 		[(#SET_PUSH{lesRub,#ID_RUBRIQUE})]
 	</BOUCLE_sousRub>
-	[(#REM) Lister tous les articles ]
+	[(#REM)
+		- Lister tous les articles
+		- Les dépublier (pour l'instant sans effacer les logos)
+	]
 	<BOUCLE_articles(ARTICLES){branche}{statut IN publie,prop,prepa}>
 		[(#SET_PUSH{lesArt,#ID_ARTICLE})]
+		[(#VAL{article}|vider_rubrique_objet_poubelle{#ID_ARTICLE,"poubelle"})]
 	</BOUCLE_articles>
 	
 [(#REM) TODO
@@ -27,7 +35,7 @@
 	[(#SET{lesDoc,[(#GET{lesDoc}|implode{','})]})]
 
 [(#REM) Lancer les hostilités ]	
-	[(#REM|supprimer_objet{article,#GET{lesArt}})]
+	[(#GET{effacement}|=={oui}|oui) [(#REM|supprimer_objet{article,#GET{lesArt}})] ]
 	[(#REM|supprimer_objet{rubrique,#GET{lesRub}})]
 	[(#ENV{documents}|=={oui}|oui) [(#REM) pour l'instant inactif, faut faire la boucle |supprimer_objet{document,#GET{lesDoc}})] ]
 
