@@ -5,6 +5,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define('_RAINETTE_WWO_URL_BASE', 'http://free.worldweatheronline.com/feed/weather.ashx');
 define('_RAINETTE_WWO_JOURS_PREVISIONS', 5);
 
+/**
+ * @param string	$lieu
+ * @param string	$mode
+ * @return string
+ */
 function wwo_service2cache($lieu, $mode) {
 
 	$dir = sous_repertoire(_DIR_CACHE, 'rainette');
@@ -14,6 +19,11 @@ function wwo_service2cache($lieu, $mode) {
 	return $fichier_cache;
 }
 
+/**
+ * @param string	$lieu
+ * @param string	$mode
+ * @return string
+ */
 function wwo_service2url($lieu, $mode) {
 
 	include_spip('inc/config');
@@ -33,7 +43,10 @@ function wwo_service2url($lieu, $mode) {
 	return $url;
 }
 
-
+/**
+ * @param string $mode
+ * @return int
+ */
 function wwo_service2reload_time($mode) {
 
 	static $reload = array('conditions' => 10800, 'previsions' => 14400);
@@ -41,7 +54,10 @@ function wwo_service2reload_time($mode) {
 	return $reload[$mode];
 }
 
-
+/**
+ * @param string	$url
+ * @return array
+ */
 function wwo_url2flux($url) {
 
 	include_spip('inc/phraser');
@@ -68,6 +84,11 @@ function wwo_flux2previsions($flux, $lieu) {
 	return $tableau;
 }
 
+/**
+ * @param array 	$flux
+ * @param string	$lieu
+ * @return array
+ */
 function wwo_flux2conditions($flux, $lieu) {
 	$tableau = array();
 	include_spip('inc/convertir');
@@ -140,7 +161,7 @@ function wwo_flux2conditions($flux, $lieu) {
 		}
 		else {
 			// On affiche les conditions traduites dans le systeme weather.com
-			$meteo = wwo_meteo2weather($tableau['code_meteo'], $tableau['periode']);
+			$meteo = meteo_wwo2weather($tableau['code_meteo'], $tableau['periode']);
 			$tableau['icone'] = $meteo;
 			$tableau['resume'] = $meteo;
 		}
@@ -152,6 +173,11 @@ function wwo_flux2conditions($flux, $lieu) {
 	return $tableau;
 }
 
+/**
+ * @param array 	$flux
+ * @param string	$lieu
+ * @return array
+ */
 function wwo_flux2infos($flux, $lieu){
 	$tableau = array();
 
@@ -178,6 +204,9 @@ function wwo_flux2infos($flux, $lieu){
 	return $tableau;
 }
 
+/**
+ * @return array
+ */
 function wwo_service2credits() {
 
 	$credits = array('logo' => '');
@@ -188,7 +217,7 @@ function wwo_service2credits() {
 }
 
 
-function wwo_meteo2weather($meteo, $periode=0) {
+function meteo_wwo2weather($meteo, $periode=0) {
 	static $wwo2weather = array(
 							'395'=> array(41,46),
 							'392'=> array(41,46),

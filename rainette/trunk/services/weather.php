@@ -196,15 +196,4 @@ function weather_service2credits() {
 	return $credits;
 }
 
-
-
-function weather_meteo2icone($meteo) {
-	$icone = 'na';
-	if ($meteo
-	AND	(($meteo >= 0) AND ($meteo < 48)))
-		$icone = strval($meteo);
-
-	return $icone;
-}
-
 ?>

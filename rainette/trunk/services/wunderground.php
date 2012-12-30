@@ -53,7 +53,7 @@ function wunderground_service2url($lieu, $mode) {
 	$condition = lire_config('rainette/wunderground/condition', 'wunderground');
 	$code_langue = '';
 	if ($condition == 'wunderground')
-		$code_langue = wunderground_langue2code($GLOBALS['spip_lang']);
+		$code_langue = langue2code_wunderground($GLOBALS['spip_lang']);
 
 	$url = _RAINETTE_WUNDERGROUND_URL_BASE_REQUETE
 		.  '/' . $cle
@@ -178,7 +178,7 @@ function wunderground_flux2conditions($flux, $lieu) {
 			// On affiche les conditions traduites dans le systeme weather.com
 			// Pour le resume on stocke le code et non la traduction pour eviter de generer 
 			// un cache par langue comme pour le mode natif. La traduction est faite via les fichiers de langue
-			$meteo = wunderground_meteo2weather($tableau['code_meteo'], $tableau['periode']);
+			$meteo = meteo_wunderground2weather($tableau['code_meteo'], $tableau['periode']);
 			$tableau['icone'] = $meteo;
 			$tableau['resume'] = $meteo;
 		}
@@ -226,7 +226,7 @@ function wunderground_service2credits() {
 }
 
 
-function wunderground_meteo2weather($meteo, $periode=0) {
+function meteo_wunderground2weather($meteo, $periode=0) {
 	static $wunderground2weather = array(
 							'chanceflurries'=> array(41,46),
 							'chancerain'=> array(39,45),
@@ -261,7 +261,7 @@ function wunderground_meteo2weather($meteo, $periode=0) {
 	return $icone;
 }
 
-function wunderground_langue2code($langue) {
+function langue2code_wunderground($langue) {
 	static $langue2wunderground = array(
 		'aa' => array('', ''), 					// afar
 		'ab' => array('', ''), 					// abkhaze

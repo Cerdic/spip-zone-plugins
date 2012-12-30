@@ -49,7 +49,7 @@ function rainette_icone_meteo($icone, $taille='petit', $service='weather', $chem
 	}
 	else {
 		// Utilisation des icones weather.com
-		$icone = weather_meteo2icone($icone);
+		$icone = ($icone AND (($icone >= 0) AND ($icone < 48))) ? strval($icone) : 'na';
 		if (!$chemin) $chemin = _RAINETTE_ICONES_PATH.$taille.'/';
 
 		// Le dossier personnalise ou le dossier passe en argument a bien l'icone requise
