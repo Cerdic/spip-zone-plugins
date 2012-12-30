@@ -28,7 +28,7 @@ function vider_rubrique_boite_infos($flux){
 			if($restreindre=="oui" && $id!=intval($restreindre_val)) return $flux;
 			 
 			$contexte = array('id_rubrique'=>$id);
-			$flux["data"] .= recuperer_fond("inclure/vider_rubrique", $contexte);
+			$flux["data"] .= recuperer_fond("noisettes/bouton_vider_rubrique", $contexte);
 		}
 	}
 
