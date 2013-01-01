@@ -85,8 +85,6 @@ function millibar2inch($millibar) {
  */
 function temperature2ressenti($temperature, $vitesse_vent) {
 
-	// La temperature ressentie n'est calculee que pour des temperatures ambiantes comprises entre
-	// -50°C et +10°C
 	if (($temperature >= -50) AND ($temperature <= 10)) {
 		if ($vitesse_vent > 4.8)
 			$ressenti = 13.12 + 0.6215*$temperature + (0.3965*$temperature - 11.37)*pow($vitesse_vent, 0.16);

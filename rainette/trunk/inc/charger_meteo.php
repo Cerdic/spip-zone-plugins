@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * Renvoyer le nom du fichier cache des données météos correspondant au lieu et au mode choisis.
+ * Renvoyer le nom du fichier cache des données météos correspondant au lieu et au type de données choisis.
  *
  * Si le fichier cache est obsolète ou absent, on le crée après avoir chargé puis phrasé le flux XML ou JSON
  * et stocké les données collectées et transcodées dans un tableau standardisé.

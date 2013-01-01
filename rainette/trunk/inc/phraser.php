@@ -2,6 +2,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * @param string $url
+ * @param string $utiliser_namespace
+ * @return array
+ */
 function url2flux_xml($url, $utiliser_namespace='false') {
 
 	include_spip('inc/distant');
@@ -12,7 +17,10 @@ function url2flux_xml($url, $utiliser_namespace='false') {
 	return $xml;
 }
 
-
+/**
+ * @param string $url
+ * @return mixed
+ */
 function url2flux_json($url) {
 
 	include_spip('inc/distant');
