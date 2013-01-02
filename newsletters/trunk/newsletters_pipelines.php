@@ -54,4 +54,17 @@ function newsletters_optimiser_base_disparus($flux){
 	return $flux;
 }
 
+
+/**
+ * Tache periodique d'envoi
+ *
+ * @param array $taches_generales
+ * @return array
+ */
+function newsletters_taches_generales_cron($taches_generales){
+
+	$taches_generales['newsletters_programmees'] = 3*60*60; // 3h
+
+	return $taches_generales;
+}
 ?>

@@ -1,7 +1,7 @@
 <paquet
 	prefix="newsletters"
 	categorie="communication"
-	version="0.5.1"
+	version="0.5.2"
 	etat="test"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/newsletters-64.png"
@@ -19,8 +19,9 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/newsletters.php" /> 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/newsletters.php" /> 
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/newsletters.php" /> 
-	<pipeline nom="optimiser_base_disparus" inclure="newsletters_pipelines.php" /> 
 	<pipeline nom="pre_edition" inclure="newsletters_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="newsletters_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="newsletters_pipelines.php" />
 
 	<menu nom="newsletters" titre="newsletter:titre_newsletters" parent="menu_edition" icone="images/newsletter-16.png" action="newsletters" />
 
