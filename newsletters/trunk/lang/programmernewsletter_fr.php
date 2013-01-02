@@ -10,6 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_deprogrammer_newsletter' => 'Supprimer cette programmation',
 
 	'legend_recurrence' => 'Récurrence',
+	'legend_contenu' => 'Contenu',
+	'legend_envoi' => 'Envoyer',
 
 	'label_date_debut' => 'Date de début',
 	'label_date_prochaine' => 'Prochaine',
@@ -33,6 +35,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_has_end_no' => 'Jamais',
 	'label_has_end_count' => 'Après le nombre de fois :',
 	'label_has_end_until' => 'A la date du :',
+
+	'label_email_test' => 'En test à une adresse mail',
+	'label_liste' => 'À la liste',
 
 	'texte_programmer_newsletter' => 'Programmer une infolettre',
 );

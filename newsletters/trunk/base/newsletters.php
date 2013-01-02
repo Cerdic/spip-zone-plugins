@@ -44,7 +44,11 @@ function newsletters_declarer_tables_objets_sql($tables) {
 			/* Version page html pour afficher dans le navigateur (version en ligne) */
 			"html_page"          => "longtext NOT NULL DEFAULT ''",
 			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
+			/* pour la programmation */
 			"recurrence"         => "text NOT NULL DEFAULT ''",
+			"email_test"         => "text NOT NULL DEFAULT ''",
+			"liste"              => "text NOT NULL DEFAULT ''",
+
 			"statut"             => "varchar(20)  DEFAULT '0' NOT NULL",
 			"lang"               => "VARCHAR(10) NOT NULL DEFAULT ''",
 			"maj"                => "TIMESTAMP"
@@ -56,7 +60,7 @@ function newsletters_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "titre AS titre, lang AS lang",
 		'date' => "date",
-		'champs_editables'  => array('titre','chapo','texte','date_redac','patron','baked','html_email','texte_email','html_page','recurrence'),
+		'champs_editables'  => array('titre','chapo','texte','date_redac','patron','baked','html_email','texte_email','html_page','recurrence','email_test','liste'),
 		'champs_versionnes' => array(),
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array('newsletters_liens'),

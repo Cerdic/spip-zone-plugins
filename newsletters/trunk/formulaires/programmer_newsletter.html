@@ -150,35 +150,61 @@
 					</ul>
 				</fieldset>
 			</li>
-
-			#SET{name,patron}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-				<label for="#GET{name}"><:newsletter:label_patron:></label>[
-				<span class='erreur_message'>(#GET{erreurs})</span>
-				]<INCLURE{fond=formulaires/inc-options-patrons,name=#GET{name},defaut=#GET{defaut},env} />
+			<li class="fieldset">
+				<fieldset>
+					<legend><:programmernewsletter:legend_contenu:></legend>
+					<ul>
+						#SET{name,patron}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}"><:newsletter:label_patron:></label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<INCLURE{fond=formulaires/inc-options-patrons,name=#GET{name},defaut=#GET{defaut},env} />
+						</li>
+						#SET{name,selection_articles}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label><:newsletter:label_selection_articles:></label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<INCLURE{fond=formulaires/selecteur/articles,name=#GET{name},selected=#ENV*{#GET{name},#GET{defaut}}} />
+						</li>
+						#SET{name,chapo}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}"><:info_chapeau:><em class="aide">#AIDER{chapo}</em></label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<textarea name="#GET{name}" class="textarea"[ lang='(#LANGUE)'][ rows='(#ENV**{config}|table_valeur{lignes})'] cols='40'>
+			#ENV*{#GET{name},#GET{defaut}}</textarea>
+						</li>
+						#SET{name,texte}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}"><:info_texte:><em class="aide">#AIDER{text_area}</em></label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							][(#ENV**{_texte_trop_long,''})
+							]<textarea name="#GET{name}" class="textarea"[ lang='(#LANGUE)'] rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'>
+			#ENV*{#GET{name},#GET{defaut}}</textarea>
+						</li>
+					</ul>
+				</fieldset>
 			</li>
-			#SET{name,selection_articles}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-				<label><:newsletter:label_selection_articles:></label>[
-				<span class='erreur_message'>(#GET{erreurs})</span>
-				]<INCLURE{fond=formulaires/selecteur/articles,name=#GET{name},selected=#ENV*{#GET{name},#GET{defaut}}} />
-			</li>
-			#SET{name,chapo}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-				<label for="#GET{name}"><:info_chapeau:><em class="aide">#AIDER{chapo}</em></label>[
-				<span class='erreur_message'>(#GET{erreurs})</span>
-				]<textarea name="#GET{name}" class="textarea"[ lang='(#LANGUE)'][ rows='(#ENV**{config}|table_valeur{lignes})'] cols='40'>
-#ENV*{#GET{name},#GET{defaut}}</textarea>
-			</li>
-			#SET{name,texte}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-				<label for="#GET{name}"><:info_texte:><em class="aide">#AIDER{text_area}</em></label>[
-				<span class='erreur_message'>(#GET{erreurs})</span>
-				][(#ENV**{_texte_trop_long,''})
-				]<textarea name="#GET{name}" class="textarea"[ lang='(#LANGUE)'] rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'>
-#ENV*{#GET{name},#GET{defaut}}</textarea>
-			</li>
-		</ul>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:programmernewsletter:legend_envoi:></legend>
+					<ul>
+						#SET{name,email_test}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}"[(#HTML5|et{#GET{obli}})required='required']/>
+						</li>
+						#SET{name,liste}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<select name="#GET{name}" class="select" id="#GET{name}">
+							<INCLURE{fond=formulaires/inc-options-subscribinglists-prog,name=#GET{name},choix_listes=#ENV{_listes_dispo},status=open,env} />
+							</select>
+						</li>
+					</ul>
+				</fieldset>
+			</li>		</ul>
 
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->

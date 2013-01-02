@@ -31,6 +31,9 @@ function formulaires_programmer_newsletter_charger_dist($id_newsletter='new', $r
 	$r = when_rule_ro_array($valeurs['recurrence']);
 	$valeurs = formulaires_programmer_newsletter_charger_rule($r, $valeurs);
 
+	$lists = charger_fonction('lists','newsletter');
+	$valeurs['_listes_dispo'] = $lists(array('status'=>'open'));
+
 	return $valeurs;
 }
 
@@ -193,6 +196,11 @@ function formulaires_programmer_newsletter_traiter_rule(){
 
 	$rule = implode(';',$rule);
 	return $rule;
+}
+
+function newsletters_list_subscribers($list){
+	$subscribers = charger_fonction('subscribers','newsletter');
+	return $subscribers(array($list),array('count'=>true));
 }
 
 ?>

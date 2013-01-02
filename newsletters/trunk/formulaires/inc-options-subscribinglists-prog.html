@@ -1,0 +1,10 @@
+#SET{name,#ENV{name}}#SET{defaut,''}
+<option value=""></option>
+<BOUCLE_listes(POUR){tableau #ENV{choix_listes}}>
+	#SET{val,#CLE}
+	[(#ENV{status,''}|non
+	  |ou{#ENV{status,''}|=={#VALEUR{status}}}
+	  |ou{#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}})
+	[<option value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)selected="selected"]>[(#VALEUR{titre})] \((#GET{val}|newsletters_list_subscribers|singulier_ou_pluriel{newsletter:info_1_mailsubscriber,newsletter:info_nb_mailsubscribers})\)</option>]
+	]
+</BOUCLE_listes>

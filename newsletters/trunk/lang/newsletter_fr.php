@@ -36,6 +36,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_preview_version_html_page' => 'Version HTML en ligne',
 	'info_preview_version_html_page_noiframe' => '(afficher sans iframe)',
 
+	'info_1_mailsubscriber' => '1 inscrit',
+	'info_nb_mailsubscribers' => '@nb@ inscrits',
+
 	// L
 	'label_chapo' => 'Chapeau',
 	'label_date_redac' => 'Date de rédaction',

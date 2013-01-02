@@ -14,6 +14,7 @@
 			<th class='titre' scope='col'>[(#TRI{titre,<:newsletter:label_titre:>,ajax})]</th>
 			<th class='date' scope='col'>[(#TRI{date,<:programmernewsletter:label_date_debut:>,ajax})]</th>
 			<th class='date' scope='col'>[(#TRI{date,<:programmernewsletter:label_date_prochaine:>,ajax})]</th>
+			<th class='dest' scope='col'>A</th>
 			<th class='id' scope='col'></th>
 		</tr>
 	</thead>
@@ -25,6 +26,9 @@
 			<br/>[(#RECURRENCE|newsletter_afficher_recurrence{<br />})]</td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='date secondaire'>[(#DATE_REDAC|affdate_jourcourt|sinon{#VAL{'('}|concat{<:programmernewsletter:info_prochaine_occurence_fini:>,')'}})]</td>
+			<td class='secondaire'>[(#EMAIL_TEST)
+			][(#CHAMP_SQL{liste})
+			]</td>
 			<td class='id'>[(#AUTORISER{modifier,newsletter,#ID_NEWSLETTER}|?{
 				<a href="[(#URL_ECRIRE{newsletter_prog,id_newsletter=#ID_NEWSLETTER})]">Modifier</a>,
 				#ID_NEWSLETTER
