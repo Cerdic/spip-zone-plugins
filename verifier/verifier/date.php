@@ -65,28 +65,29 @@ function verifier_date_dist($valeur, $options=array(), &$valeur_normalisee=null)
 		list($jour,$mois,$annee) = explode('-',$valeur);
 	}
 
-	// Validité de la date
-	$erreur = _T('verifier:erreur_date');
-	if (!checkdate($mois, $jour, $annee)) return $erreur;
+		// Validité de la date
+		$erreur = _T('verifier:erreur_date');
+		if (!checkdate($mois, $jour, $annee)) return $erreur;
 	
-	// Format de l'heure
-	$options['heure'] = str_replace(array('h','m','min'), array(':','',''), $options['heure']);
-	if (!preg_match('#^([0-9]{1,2}):([0-9]{1,2})$#', $options['heure'], $hetm)) {
-		return _T('verifier:erreur_heure_format');
-	}
-	// Si c'est le bon format, on teste si les nombres donnés peuvent exister
-	else {
-		$heures = intval($hetm[1]);
-		$minutes = intval($hetm[2]);
-		if ($heures < 0 or $heures > 23 or $minutes < 0 or $minutes > 59){
-			return _T('verifier:erreur_heure');
+	if($horaire) {
+		// Format de l'heure
+		$options['heure'] = str_replace(array('h','m','min'), array(':','',''), $options['heure']);
+		if (!preg_match('#^([0-9]{1,2}):([0-9]{1,2})$#', $options['heure'], $hetm)) {
+			return _T('verifier:erreur_heure_format');
 		}
-		// Si tout est bon pour l'heure, on recompose en ajoutant des 0 si besoin
+		// Si c'est le bon format, on teste si les nombres donnés peuvent exister
 		else {
-			$options['heure'] = sprintf('%02d:%02d', $heures, $minutes);
+			$heures = intval($hetm[1]);
+			$minutes = intval($hetm[2]);
+			if ($heures < 0 or $heures > 23 or $minutes < 0 or $minutes > 59){
+				return _T('verifier:erreur_heure');
+			}
+			// Si tout est bon pour l'heure, on recompose en ajoutant des 0 si besoin
+			else {
+				$options['heure'] = sprintf('%02d:%02d', $heures, $minutes);
+			}
 		}
 	}
-	
 	// normaliser si demandé
 	if ($options['normaliser'] and $options['normaliser'] == 'datetime') {
 		$valeur_normalisee = normaliser_date_datetime_dist($valeur, $options, $ok);
