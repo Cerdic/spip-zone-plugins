@@ -1,5 +1,6 @@
 [(#AUTORISER{voir,newsletter,#ID_NEWSLETTER}|sinon_interdire_acces)]
 <BOUCLE_newsletter(NEWSLETTERS){id_newsletter}{statut==.*}{si #ENV{exec}|=={newsletter}}>
+[(#STATUT|=={prog}|non|sinon_interdire_acces{#URL_ECRIRE{newsletters}})]
 [(#BOITE_OUVRIR{[
 	[(#AUTORISER{modifier,newsletter,#ID_NEWSLETTER})
 		[(#ID_NEWSLETTER|afficher_qui_edite{newsletter}|non)

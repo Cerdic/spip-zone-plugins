@@ -22,6 +22,10 @@ function newsletters_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter', "table spip_newsletters ADD baked tinyint NOT NULL DEFAULT 0"),
 	);
 
+	$maj['0.2.0'] = array(
+		array('sql_alter', "table spip_newsletters ADD recurrence text NOT NULL DEFAULT ''"),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

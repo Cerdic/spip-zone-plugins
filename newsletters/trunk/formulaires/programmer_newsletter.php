@@ -9,25 +9,27 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
 include_spip('inc/editer');
+include_spip('inc/when');
+
+/**
+ * Identifier le formulaire en faisant abstraction des parametres qui ne representent pas l'objet edite
+ */
+function formulaires_programmer_newsletter_identifier_dist($id_newsletter='new', $retour='', $lier_trad=0, $config_fonc='newsletter_edit_config', $row=array(), $hidden=''){
+	return serialize(array(intval($id_newsletter)));
+}
 
 
 /**
  * Declarer les champs postes et y integrer les valeurs par defaut
  */
-function formulaires_programmer_newsletter_charger_dist(){
-	$valeurs = array(
-		'date_debut' => '',
-		'frequence' => 'monthly',
-		'daily_interval' => 1,
-		'weekly_interval' => 1,
-		'byweekday' => array(1,2,3,4,5,6,7),
-		'monthly_interval' => 1,
-		'yearly_interval' => 1,
-		'has_end' => 'no',
-		'until' => '',
-		'count' => '',
-	);
+function formulaires_programmer_newsletter_charger_dist($id_newsletter='new', $retour='', $lier_trad=0, $config_fonc='newsletter_edit_config', $row=array(), $hidden=''){
+	$charger = charger_fonction("charger","formulaires/editer_newsletter");
+	$valeurs = $charger($id_newsletter, $retour, $lier_trad, $config_fonc, $row, $hidden);
 
+	$now = $valeurs['date']?strtotime($valeurs['date']):time();
+	$valeurs['date_debut'] = date('d/m/Y',$now);
+	$r = when_rule_ro_array($valeurs['recurrence']);
+	$valeurs = formulaires_programmer_newsletter_charger_rule($r, $valeurs);
 
 	return $valeurs;
 }
@@ -35,8 +37,10 @@ function formulaires_programmer_newsletter_charger_dist(){
 /**
  * Verifier les champs postes et signaler d'eventuelles erreurs
  */
-function formulaires_programmer_newsletter_verifier_dist(){
-	$erreurs = array();
+function formulaires_programmer_newsletter_verifier_dist($id_newsletter='new', $retour='', $lier_trad=0, $config_fonc='newsletter_edit_config', $row=array(), $hidden=''){
+	set_request('baked',0);
+	$verifier = charger_fonction("verifier","formulaires/editer_newsletter");
+	$erreurs = $verifier($id_newsletter, $retour, $lier_trad, $config_fonc, $row, $hidden);
 
 	if (!_request('date_debut'))
 		$erreurs['date_debut'] = _T('info_obligatoire');
@@ -56,8 +60,106 @@ function formulaires_programmer_newsletter_verifier_dist(){
 /**
  * Traiter les champs postes
  */
-function formulaires_programmer_newsletter_traiter_dist(){
+function formulaires_programmer_newsletter_traiter_dist($id_newsletter='new', $retour='', $lier_trad=0, $config_fonc='newsletter_edit_config', $row=array(), $hidden=''){
+	set_request('baked',0);
 
+	// date debut
+	list($annee, $mois, $jour, $heures, $minutes, $secondes) = recup_date(_request('date_debut'));
+	$date_debut = mktime($heures,$minutes,$secondes,$mois,$jour,$annee);
+	$date_debut = date('Y-m-d H:i:s',$date_debut);
+	set_request('date',$date_debut);
+
+	$recurrence = formulaires_programmer_newsletter_traiter_rule();
+	set_request('recurrence',$recurrence);
+
+	// prochaine occurence : la premiere que l'on trouve a partir d'aujourd'hui inclus
+	set_request('date_redac',when_rule_to_next_date($date_debut,$recurrence,date('Y-m-d H:i:s',strtotime("-1 day"))));
+
+	// statut prog
+	set_request('statut','prog'); // toujours en 'prog'
+
+	$traiter = charger_fonction("traiter","formulaires/editer_newsletter");
+	$res = $traiter($id_newsletter, $retour, $lier_trad, $config_fonc, $row, $hidden);
+
+	if (isset($res['message_ok']))
+		$res['message_ok'] .= "<br />".when_rule_to_texte($recurrence);
+
+	return $res;
+}
+
+
+/**
+ * Transformer la rule texte en saisie
+ *
+ * @param string $r
+ * @param array $valeurs
+ * @return array
+ */
+function formulaires_programmer_newsletter_charger_rule($r, &$valeurs){
+
+	$valeurs['frequence'] = 'monthly';
+	$valeurs['daily_interval'] = 1;
+	$valeurs['weekly_interval'] = 1;
+	$valeurs['monthly_interval'] = 1;
+	$valeurs['yearly_interval'] = 1;
+	$valeurs['byweekday'] = array(1,2,3,4,5,6,7);
+	$valeurs['has_end'] = 'no';
+	$valeurs['until'] = '';
+	$valeurs['count'] = '';
+
+	// FREQ + INTERVAL
+	if (in_array($r['FREQ'],array('DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'))){
+		$valeurs['frequence'] = strtolower($r['FREQ']);
+		$interval = (isset($r['INTERVAL'])?$r['INTERVAL']:1);
+		$valeurs[$valeurs['frequence']."_interval"] = $interval;
+	}
+
+	// TODO : "BYSETPOS"
+	// pas de saisie pour le moment
+
+	// TODO : "BYWEEKNO"
+	// pas de saisie pour le moment
+
+	// "WKST"
+	// pas de saisie
+	if (isset($r['BYDAY'])
+	  AND $valeurs['frequence']=="weekly"){
+		$day2n = array('SU'=>1, 'MO'=>2, 'TU'=>3, 'WE'=>4, 'TH'=>5, 'FR'=>6, 'SA'=>7);
+		$valeurs['byweekday'] = array();
+		$bydays = explode(',',$r['BYDAY']);
+		foreach ($bydays as $byday){
+			$day = substr($byday,-2);
+			$valeurs['byweekday'][] = $day2n[$day];
+		}
+	}
+
+	// "BYMONTHDAY"
+	// pas de saisie : c'est le jour de la date de depart qui fixe le monthday en freq monthly
+
+	// "BYMONTH"
+	// pas de saisie : c'est le jour de la date de depart qui fixe le monthday en freq monthly
+
+	// "BYYEARDAY"
+	// pas de saisie : c'est le jour de la date de depart qui fixe le monthday en freq monthly
+
+	if (isset($r['COUNT']) AND $r['COUNT']>1){
+		$valeurs['has_end'] = 'count';
+		$valeurs['count'] = intval($r['COUNT']);
+	}
+
+	if (isset($r['UNTIL']) AND $r['UNTIL']){
+		$valeurs['has_end'] = 'until';
+		$valeurs['until'] = date('d/m/Y',strtotime($r['UNTIL']));
+	}
+
+	return $valeurs;
+}
+
+/**
+ * Recuperer la saisie de recurrence et la transformer en rule ics texte
+ * @return string
+ */
+function formulaires_programmer_newsletter_traiter_rule(){
 	// FREQ=DAILY;INTERVAL=10;COUNT=5
 	$rule = array();
 
@@ -85,18 +187,12 @@ function formulaires_programmer_newsletter_traiter_dist(){
 
 	if (_request('has_end')=='until'){
 		list($annee, $mois, $jour, $heures, $minutes, $secondes) = recup_date(_request('until'));
-		$date = mktime($heures,$minutes,$secondes,$mois,$jour,$annee);
-		$rule[] = "UNTIL=".date("Ymd\THis\Z",$date);
+		$date = mktime(23,59,59,$mois,$jour,$annee);
+		$rule[] = "UNTIL=".gmdate("Ymd\THis\Z",$date);
 	}
 
 	$rule = implode(';',$rule);
-	include_spip("inc/when");
-	$texte = when_rule_to_texte($rule);
-
-	$res = array('message_ok'=>"$rule<br />$texte");
-
-	return $res;
+	return $rule;
 }
-
 
 ?>

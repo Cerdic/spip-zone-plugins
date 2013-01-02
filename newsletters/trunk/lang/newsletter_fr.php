@@ -18,9 +18,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_creer_newsletter' => 'Créer une infolettre',
 	'icone_modifier_newsletter' => 'Modifier cette infolettre',
-	'info_1_newsletter' => 'Une infolettre',
+	'info_1_newsletter' => '1 infolettre',
 	'info_aucun_newsletter' => 'Aucune infolettre',
 	'info_nb_newsletters' => '@nb@ infolettres',
+	'info_1_newsletter_prog' => '1 infolettre programée',
+	'info_nb_newsletters_prog' => '@nb@ infolettres programées',
 	'info_newsletters_auteur' => 'Les infolettres de cet auteur',
 	'info_newsletter_generer' => 'Générer l\'infolettre (Version HTML et version texte)',
 	'info_email_not_displaying' => 'Cet email ne s\'affiche pas correctement&nbsp;?',

@@ -51,6 +51,7 @@ function newsletters_liens_absolus($texte, $base='') {
  * (en enlevant les masques par configuration et en les titrant comme dans la configuration)
  *
  * @param string $selected
+ * @param bool $tout_voir
  * @return array
  */
 function liste_choix_patrons($selected=null, $tout_voir = false){
@@ -178,5 +179,10 @@ function newsletter_fixer_image($src,$id_newsletter){
 		return false;
 
 	return "$dest#fixed";
+}
+
+function newsletter_afficher_recurrence($recurrence,$sep=", "){
+	include_spip("inc/when");
+	return when_rule_to_texte($recurrence,$sep);
 }
 ?>

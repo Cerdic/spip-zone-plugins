@@ -55,7 +55,7 @@ function formulaires_editer_newsletter_charger_dist($id_newsletter='new', $retou
 function formulaires_editer_newsletter_verifier_dist($id_newsletter='new', $retour='', $lier_trad=0, $config_fonc='newsletter_edit_config', $row=array(), $hidden=''){
 	$baked = 1;
 	$statut = (intval($id_newsletter)?sql_getfetsel('statut','spip_newsletters','id_newsletter='.intval($id_newsletter)):'prepa');
-	if (in_array($statut,array('prepa','prop')))
+	if (in_array($statut,array('prepa','prop','prog')))
 		$baked = _request('baked');
 
 	if (!$baked)
@@ -72,7 +72,7 @@ function formulaires_editer_newsletter_verifier_dist($id_newsletter='new', $reto
 function formulaires_editer_newsletter_traiter_dist($id_newsletter='new', $retour='', $lier_trad=0, $config_fonc='newsletter_edit_config', $row=array(), $hidden=''){
 	$baked = 1;
 	$statut = (intval($id_newsletter)?sql_getfetsel('statut','spip_newsletters','id_newsletter='.intval($id_newsletter)):'prepa');
-	if (in_array($statut,array('prepa','prop')))
+	if (in_array($statut,array('prepa','prop','prog')))
 		$baked = _request('baked');
 
 	if ($baked){
@@ -108,8 +108,11 @@ function formulaires_editer_newsletter_traiter_dist($id_newsletter='new', $retou
 			objet_associer(array("newsletter"=>$id_newsletter),$liens);
 
 		// regenerer le html et texte...
-		$generer_newsletter = charger_fonction("generer_newsletter","action");
-		$generer_newsletter($res['id_newsletter']);
+		// sauf si c'est une nl prog (statut=prog)
+		if(!_request('statut')=='prog'){
+			$generer_newsletter = charger_fonction("generer_newsletter","action");
+			$generer_newsletter($res['id_newsletter']);
+		}
 	}
 	return $res;
 }

@@ -9,7 +9,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Recuperer la prochaine occurence d'une repetition
- * (occurence après la date $prev si founie)
+ * (occurence après la date $prev si fournie)
  *
  * @param string $date_start
  * @param string $rule
@@ -42,23 +42,17 @@ function when_rule_to_next_date($date_start,$rule,$prev=''){
  * @return string
  */
 function when_rule_to_texte($rule, $sep=", "){
-	$r = array();
-	// strip off a trailing semi-colon
-	$rule = trim($rule, ";");
-	$parts = explode(";", $rule);
-	foreach($parts as $part)
-	{
-		list($rule, $param) = explode("=", $part);
-		$r[$rule] = $param;
-	}
 
+	$r = when_rule_ro_array($rule);
 	$texte = array();
 
 	// FREQ + INTERVAL
 	// array('SECONDLY', 'MINUTELY', 'HOURLY', 'DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY');
-	$interval = (isset($r['INTERVAL'])?$r['INTERVAL']:1);
-	$chaine = "when:info_freq_".$r['FREQ'];
-	$texte[] = singulier_ou_pluriel($interval,$chaine,$chaine."_nb");
+	if (isset($r['FREQ'])){
+		$interval = (isset($r['INTERVAL'])?$r['INTERVAL']:1);
+		$chaine = "when:info_freq_".$r['FREQ'];
+		$texte[] = singulier_ou_pluriel($interval,$chaine,$chaine."_nb");
+	}
 
 	// TODO : "BYSETPOS"
 
@@ -90,6 +84,27 @@ function when_rule_to_texte($rule, $sep=", "){
 	$texte = array_filter($texte);
 
 	return implode($sep,$texte);
+}
+
+/**
+ * Transformer une rule texte en tableau constitue de chacun de ses arguments
+ * @param string $rule_string
+ * @return array
+ */
+function when_rule_ro_array($rule_string){
+	$licites = array("INTERVAL","FREQ","BYWEEKNO","WKST","BYDAY","BYMONTHDAY","BYMONTH","BYYEARDAY","COUNT","UNTIL","BYSETPOS");
+	$r = array();
+	// strip off a trailing semi-colon
+	$rule_string = trim($rule_string, ";");
+	$parts = explode(";", $rule_string);
+
+	foreach($parts as $part) {
+		list($rule, $param) = explode("=", $part);
+		if (in_array($rule,$licites))
+			$r[$rule] = $param;
+	}
+
+	return $r;
 }
 
 /**

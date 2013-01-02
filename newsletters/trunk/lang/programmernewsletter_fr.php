@@ -5,9 +5,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	'info_prochaine_occurence_fini' => 'fini',
+	'icone_programmer_newsletter' => 'Programmer une infolettre',
+	'icone_deprogrammer_newsletter' => 'Supprimer cette programmation',
 
+	'legend_recurrence' => 'Récurrence',
 
 	'label_date_debut' => 'Date de début',
+	'label_date_prochaine' => 'Prochaine',
 	'label_frequence' => 'Répeter',
 	'label_frequence_daily' => 'Tous les jours',
 	'label_frequence_weekly' => 'Toutes les semaines',
@@ -28,6 +33,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_has_end_no' => 'Jamais',
 	'label_has_end_count' => 'Après le nombre de fois :',
 	'label_has_end_until' => 'A la date du :',
+
+	'texte_programmer_newsletter' => 'Programmer une infolettre',
 );
 
 ?>
