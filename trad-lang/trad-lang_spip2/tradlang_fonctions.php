@@ -264,9 +264,9 @@ function tradlang_utf8($str){
 function langue_possible($langue){
 	include_spip('inc/lang');
 	$langues = $GLOBALS['codes_langues'];
-	if(key_exists($langue,$langues)){
+	if(key_exists($langue,$langues))
 		return true;
-	}
+	
 	return false;
 }
 ?>

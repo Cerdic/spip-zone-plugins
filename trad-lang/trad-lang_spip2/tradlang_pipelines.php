@@ -52,7 +52,8 @@ function tradlang_forum_objets_depuis_env($array){
  */
 function tradlang_post_edition($flux){
 	if($flux['args']['table'] == "spip_tradlangs"){
-		$config = @unserialize($GLOBALS['meta']['tradlang']);
+		include_spip('inc/config');
+		$config = lire_config('tradlang');
 		if (!is_array($config))
 			return $flux;
 		if(($config['sauvegarde_locale'] == 'on') && ($config['sauvegarde_post_edition'] == 'on')){
@@ -100,9 +101,8 @@ function tradlang_insert_head_css($flux){
  * pour éviter de bloquer ces langues dans la configuration du multilinguisme
  */
 function tradlang_pre_boucle($boucle){
-	if(isset($boucle->nom) && ($boucle->nom == 'calculer_langues_utilisees') && ($boucle->id_boucle == 'tradlang')){
+	if(isset($boucle->nom) && ($boucle->nom == 'calculer_langues_utilisees') && ($boucle->id_boucle == 'tradlangs'))
 		array_unshift($boucle->where,array("'='", "'$id_table." ."id_tradlang'", "'0'"));
-	}
 	return $boucle;
 }
 
