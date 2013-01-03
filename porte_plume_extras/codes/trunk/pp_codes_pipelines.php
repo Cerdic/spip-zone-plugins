@@ -25,6 +25,15 @@ function pp_codes_porte_plume_barre_pre_charger($barres){
 				"closeWith" => "\n</cadre>",
 				"display"     => false,
 			),
+			// bouton <cadre html>				
+					array(
+						"id"			=> 'cadre_html',
+						"name"			=> _T('pp_codes:outil_inserer_cadre_html'),
+						"className"		=> "outil_cadre_html",
+						"openWith"		=> "<cadre class='html4strict'>\n",
+						"closeWith"		=> "\n</cadre>",
+						"display"		=> false,
+					),
 			// bouton <cadre xml>
 			 array(
 				"id"          => 'cadre_xml',
@@ -118,6 +127,7 @@ function pp_codes_porte_plume_lien_classe_vers_icone($flux){
 	return array_merge($flux, array(
 		'outil_cadre_spip'=>'cadre_spip.png',
 		'outil_cadre_php'=>'page_white_php.png',
+		'outil_cadre_html'=>'html.png',
 		'outil_cadre_xml'=>'page-xml.png',
 		'outil_cadre_css'=>'css.png',
 		'outil_pre'=>'page_white_code_red.png',
