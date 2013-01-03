@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_style_formulaire32' => 'Grande (32px)',
 	'legend_formulaire_public' => 'Formulario público',
 	'legend_style_formulaire' => 'Estilo del formulario',
-	'login_first' => 'Disculpe la acción requiere ser registrado,  identifíquese primero',
+	'login_first' => 'Disculpe, la acción requiere ser registrado. Identifíquese primero',
 
 	// M
 	'mes_favoris' => 'Mis favoritos',
@@ -34,10 +34,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'remove_from' => 'Quitar de mi selección',
 
 	// S
-	'ses_favoris' => 'Ses favoris', # NEW
+	'ses_favoris' => 'Sus favoritos',
 
 	// V
-	'vos_favoris' => 'Vos favoris' # Utile pour modifier le titre de l'inclusion NEW
+	'vos_favoris' => 'Sus favoritos' # Utile pour modifier le titre de l'inclusion
 );
 
 ?>
