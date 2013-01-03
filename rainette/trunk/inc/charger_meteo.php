@@ -64,7 +64,13 @@ function inc_charger_meteo_dist($lieu, $mode='previsions', $service='weather') {
 
 		// Ajouter les crédits affichés en regard de chaque modèle
 		$crediter = "${service}_service2credits";
-		$tableau['credits'] = $crediter();
+		if ($mode == 'previsions') {
+			// Pour les prévisions les informations communes sont stockées dans un index supplémentaire en fin de tableau
+			$index = count($tableau)-1;
+			$tableau[$index]['credits'] = $crediter();
+		}
+		else
+			$tableau['credits'] = $crediter();
 
 	    // Pipeline de fin de chargement des données météo. Peut-être utilisé :
 		// -- pour effectuer des traitements annexes à partir des données météo (archivage, par exemple)

@@ -172,12 +172,14 @@ function rainette_afficher_unite($valeur, $type_valeur='', $precision=-1) {
 function rainette_coasse_previsions($lieu, $type='x_jours', $jour=0, $modele='previsions_24h', $service='weather'){
 
 	if ($type == '1_jour') {
-		$jour = min($jour, _RAINETTE_JOURS_PREVISION-1);
-
 		$charger = charger_fonction('charger_meteo', 'inc');
 		$nom_fichier = $charger($lieu, 'previsions', $service);
 		lire_fichier($nom_fichier,$tableau);
 		$tableau = unserialize($tableau);
+
+		$nb_jours_previsions = count($tableau) - 1;
+		$jour = min($jour, $nb_jours_previsions);
+
 		// Si jour=0 (aujourd'hui), on complete par le tableau du lendemain matin
 		if ($jour == 0) {
 			$tableau[$jour]['lever_soleil_demain'] = $tableau[$jour+1]['lever_soleil'];
@@ -190,18 +192,20 @@ function rainette_coasse_previsions($lieu, $type='x_jours', $jour=0, $modele='pr
 			$tableau[$jour]['humidite_demain'] = $tableau[$jour+1]['humidite_jour'];
 		}
 		// On ajoute la date de derniere maj
-		$tableau[$jour]['derniere_maj'] = $tableau[_RAINETTE_JOURS_PREVISION]['derniere_maj'];
+		$tableau[$jour]['derniere_maj'] = $tableau[$nb_jours_previsions]['derniere_maj'];
 		$page = recuperer_fond("modeles/$modele", $tableau[$jour]);
 		$texte = $page;
 	}
 	else if ($type == 'x_jours') {
-		if ($jour == 0) $jour = _RAINETTE_JOURS_PREVISION;
-		$jour = min($jour, _RAINETTE_JOURS_PREVISION);
-
 		$charger = charger_fonction('charger_meteo', 'inc');
 		$nom_fichier = $charger($lieu, 'previsions', $service);
 		lire_fichier($nom_fichier,$tableau);
 		$tableau = unserialize($tableau);
+
+		$nb_jours_previsions = count($tableau) - 1;
+		if ($jour == 0) $jour = $nb_jours_previsions;
+		$jour = min($jour, $nb_jours_previsions);
+
 		$texte = "";
 		while (count($tableau) && $jour--){
 			$page = recuperer_fond("modeles/$modele", array_shift($tableau));
@@ -263,9 +267,18 @@ function rainette_debug($lieu, $mode='previsions', $service='weather') {
 		$tableau = unserialize($tableau);
 
 		// On ajoute le lieu, le mode et le service au contexte fourni au modele
-		$tableau['lieu'] = $lieu;
-		$tableau['mode'] = $mode;
-		$tableau['service'] = $service;
+		if ($mode == 'previsions') {
+			// Pour les prévisions les informations communes sont stockées dans un index supplémentaire en fin de tableau
+			$index = count($tableau)-1;
+			$tableau[$index]['lieu'] = $lieu;
+			$tableau[$index]['mode'] = $mode;
+			$tableau[$index]['service'] = $service;
+		}
+		else {
+			$tableau['lieu'] = $lieu;
+			$tableau['mode'] = $mode;
+			$tableau['service'] = $service;
+		}
 
 		var_dump($tableau);
 	}

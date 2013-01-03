@@ -57,8 +57,53 @@ function yahoo_url2flux($url) {
 function yahoo_flux2previsions($flux, $lieu) {
 	$tableau = array();
 
+	if (isset($flux['children']['channel'][0]['children']['item'][0]['children']['yweather:forecast'])) {
+		$previsions = $flux['children']['channel'][0]['children']['item'][0]['children']['yweather:forecast'];
+
+		foreach ($previsions as $index => $attributes) {
+			$prevision = $attributes['attributes'];
+
+			// 1- Identifiants du jour : index dans le tableau et la date
+			$tableau[$index]['index'] = $index;
+			$date_jour = (isset($prevision['date'])) ? strtotime($prevision['date']) : '';
+			$tableau[$index]['date'] = date('Y-m-d', $date_jour);
+
+			// 2 Données astronomiques
+			$tableau[$index]['lever_soleil'] = '';
+			$tableau[$index]['coucher_soleil'] = '';
+
+			// 3- Prévisions pour le jour
+			$tableau[$index]['temperature_jour'] = (isset($prevision['high'])) ? intval($prevision['high']) : '';
+			$tableau[$index]['code_icone_jour'] = (isset($prevision['code'])) ? intval($prevision['code']) : '';
+			$tableau[$index]['vitesse_vent_jour'] = '';
+			$tableau[$index]['angle_vent_jour'] = '';
+			$tableau[$index]['direction_vent_jour'] = '';
+			$tableau[$index]['risque_precipitation_jour'] = '';
+			$tableau[$index]['humidite_jour'] = '';
+
+			// 4- Prévisions pour la nuit
+			$tableau[$index]['temperature_nuit'] = (isset($prevision['low'])) ? intval($prevision['low']) : '';
+			$tableau[$index]['code_icone_nuit'] = '';
+			$tableau[$index]['vitesse_vent_nuit'] = '';
+			$tableau[$index]['angle_vent_nuit'] = '';
+			$tableau[$index]['direction_vent_nuit'] = '';
+			$tableau[$index]['risque_precipitation_nuit'] = '';
+			$tableau[$index]['humidite_nuit'] = '';
+		}
+
+		// Date de la mise à jour des prévisions
+		// -- comme toutes les informations communes elles sont stockées dans un index supplémentaire en fin de tableau
+		$index += 1;
+		if (isset($flux['children']['channel'][0]['children']['lastbuilddate'][0]['text'])) {
+			$date_maj = isset($flux['children']['channel'][0]['children']['lastbuilddate'][0]['text'])
+					  ? strtotime($flux['children']['channel'][0]['children']['lastbuilddate'][0]['text'])
+					  : '';
+			$tableau[$index]['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
+		}
+	}
+
 	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? true : false;
+	$tableau[$index]['erreur'] = (!$tableau) ? true : false;
 
 	return $tableau;
 }

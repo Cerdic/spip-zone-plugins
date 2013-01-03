@@ -27,8 +27,25 @@
 	service=weather})]
 <br class="nettoyeur"/>
 
+<h2 class="h2"><:rainette:meteo_previsions_n_jours{nbj=5}|ucfirst:></h2>
+[(#MODELE{rainette_previsions,
+	code=#GET{code},
+	type=x_jours,
+	jour=5,
+	sous_modele=previsions_24h,
+	service=weather})]
+<br class="nettoyeur"/>
+[(#MODELE{rainette_previsions,
+	code=#GET{code},
+	type=1_jour,
+	jour=0,
+	sous_modele=previsions_2x12h,
+	service=weather})]
+<br class="nettoyeur"/>
+
 [(#GET{code}|rainette_debug{infos, weather})]
 [(#GET{code}|rainette_debug{conditions, weather})]
+[(#GET{code}|rainette_debug{previsions, weather})]
 
 <br />
 <hr />
@@ -104,5 +121,22 @@
 	service=yahoo})]
 <br class="nettoyeur"/>
 
+<h2 class="h2"><:rainette:meteo_previsions_n_jours{nbj=2}|ucfirst:></h2>
+[(#MODELE{rainette_previsions,
+	code=#GET{code},
+	type=x_jours,
+	jour=2,
+	sous_modele=previsions_24h,
+	service=yahoo})]
+<br class="nettoyeur"/>
+[(#MODELE{rainette_previsions,
+	code=#GET{code},
+	type=1_jour,
+	jour=0,
+	sous_modele=previsions_2x12h,
+	service=yahoo})]
+<br class="nettoyeur"/>
+
 [(#GET{code}|rainette_debug{infos, yahoo})]
 [(#GET{code}|rainette_debug{conditions, yahoo})]
+[(#GET{code}|rainette_debug{previsions, yahoo})]
