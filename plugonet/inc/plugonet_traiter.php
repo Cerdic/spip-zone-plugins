@@ -418,7 +418,7 @@ function plugin2balise_pipeline($D) {
 	$res = '';
 	foreach($D as $i) {
 		$att = " nom=\"" . $i['nom'] . "\"" .
-				(isset($i['action']) and !is_null($i['action']) ? (" action=\"" . $i['action'] . "\"") : '') .
+				(isset($i['action']) ? (" action=\"" . $i['action'] . "\"") : '') .
 				(!empty($i['inclure']) ? (" inclure=\"" . $i['inclure'] . "\"") : '');
 		$res .= "\n\t<pipeline$att />";
 	}
