@@ -181,8 +181,28 @@ function newsletter_fixer_image($src,$id_newsletter){
 	return "$dest#fixed";
 }
 
-function newsletter_afficher_recurrence($recurrence,$sep=", "){
+/**
+ * Afficher la regle de recurrence en clair a partir de l'ics simplifie
+ * @param string $ics
+ * @param string $sep
+ * @return string
+ */
+function newsletter_afficher_recurrence_regle($ics,$sep=", "){
+	include_spip("inc/newsletters");
+	list($date_debut,$rule) = newsletter_ics_to_date_rule($ics);
 	include_spip("inc/when");
-	return when_rule_to_texte($recurrence,$sep);
+	return when_rule_to_texte($rule,$sep);
 }
+
+/**
+ * Afficher la date de debut de la recurrence a partir de l'ics simplifie
+ * @param string $ics
+ * @return string
+ */
+function newsletter_afficher_recurrence_debut($ics){
+	include_spip("inc/newsletters");
+	list($date_debut,$rule) = newsletter_ics_to_date_rule($ics);
+	return $date_debut;
+}
+
 ?>

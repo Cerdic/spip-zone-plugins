@@ -142,3 +142,41 @@ function newsletters_html2text($html){
 	return trim(wordwrap($texte));
 
 }
+
+/**
+ * Transformer date+rule en string ics
+ *
+ * @param string $date
+ * @param string $rule
+ * @return string
+ */
+function newsletter_date_rule_to_ics($date,$rule){
+	$ics = "BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\n";
+
+	$ics .= "DTSTART:".gmdate("Ymd\THis\Z",strtotime($date))."\n";
+	$ics .= "RRULE:".$rule;
+
+	$ics .= "\nEND:VEVENT\nEND:VCALENDAR\n";
+	return $ics;
+}
+
+/**
+ * Transformer la string ics en date+rule
+ * @param string $ics
+ * @return array
+ */
+function newsletter_ics_to_date_rule($ics){
+	$date = null;
+	$rule = "";
+	$ics = explode("\n",$ics);
+	foreach($ics as $ic){
+		if (strncmp($ic,"DTSTART:",8)==0){
+			$date = date('Y-m-d H:i:s',strtotime(substr($ic,8)));
+		}
+		if (strncmp($ic,"RRULE:",6)==0){
+			$rule = substr($ic,6);
+		}
+	}
+
+	return array($date,$rule);
+}

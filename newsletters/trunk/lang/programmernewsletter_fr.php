@@ -5,6 +5,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	'erreur_date_incorrecte' => 'Cette date est incorrecte',
+
 	'info_prochaine_occurence_fini' => 'fini',
 	'icone_programmer_newsletter' => 'Programmer une infolettre',
 	'icone_deprogrammer_newsletter' => 'Supprimer cette programmation',
@@ -15,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'label_date_debut' => 'Date de début',
 	'label_date_prochaine' => 'Prochaine',
+	'label_date_derniere' => 'dernière :',
 	'label_frequence' => 'Répeter',
 	'label_frequence_daily' => 'Tous les jours',
 	'label_frequence_weekly' => 'Toutes les semaines',

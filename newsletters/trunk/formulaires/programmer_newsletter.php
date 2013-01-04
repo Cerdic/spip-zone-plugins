@@ -10,6 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/when');
+include_spip('inc/newsletters');
 
 /**
  * Identifier le formulaire en faisant abstraction des parametres qui ne representent pas l'objet edite
@@ -25,15 +26,18 @@ function formulaires_programmer_newsletter_identifier_dist($id_newsletter='new',
 function formulaires_programmer_newsletter_charger_dist($id_newsletter='new', $retour='', $lier_trad=0, $config_fonc='newsletter_edit_config', $row=array(), $hidden=''){
 	$charger = charger_fonction("charger","formulaires/editer_newsletter");
 	$valeurs = $charger($id_newsletter, $retour, $lier_trad, $config_fonc, $row, $hidden);
+	unset($valeurs['id_newsletter']);
 
-	$now = $valeurs['date']?strtotime($valeurs['date']):time();
-	$valeurs['date_debut'] = date('d/m/Y',$now);
-	$r = when_rule_ro_array($valeurs['recurrence']);
+
+	list($date_start,$rule) = newsletter_ics_to_date_rule($valeurs['recurrence']);
+	$date_start = ($date_start?strtotime($date_start):time());
+	$valeurs['date_debut'] = date('d/m/Y',$date_start);
+
+	$r = when_rule_ro_array($rule);
 	$valeurs = formulaires_programmer_newsletter_charger_rule($r, $valeurs);
 
 	$lists = charger_fonction('lists','newsletter');
 	$valeurs['_listes_dispo'] = $lists(array('status'=>'open'));
-
 	return $valeurs;
 }
 
@@ -47,6 +51,11 @@ function formulaires_programmer_newsletter_verifier_dist($id_newsletter='new', $
 
 	if (!_request('date_debut'))
 		$erreurs['date_debut'] = _T('info_obligatoire');
+	else {
+		list($annee, $mois, $jour,,,) = recup_date(_request('date_debut'));
+		if (!mktime(0,0,0,$mois,$jour,$annee))
+			$erreurs['date_debut'] = _T('programmernewsletter:erreur_date_incorrecte');
+	}
 
 	if (!in_array(_request('frequence'),array('daily','weekly','monthly','yearly')))
 		$erreurs['frequence'] = _T('info_obligatoire');
@@ -54,8 +63,15 @@ function formulaires_programmer_newsletter_verifier_dist($id_newsletter='new', $
 	if (_request('has_end')=='count' AND !_request('count'))
 		$erreurs['has_end'] = _T('info_obligatoire');
 
-	if (_request('has_end')=='until' AND !_request('until'))
-		$erreurs['has_end'] = _T('info_obligatoire');
+	if (_request('has_end')=='until'){
+		if (!_request('until'))
+			$erreurs['until'] = _T('info_obligatoire');
+		else {
+			list($annee, $mois, $jour,,,) = recup_date(_request('until'));
+			if (!mktime(0,0,0,$mois,$jour,$annee))
+				$erreurs['until'] = _T('programmernewsletter:erreur_date_incorrecte');
+		}
+	}
 
 	return $erreurs;
 }
@@ -70,13 +86,18 @@ function formulaires_programmer_newsletter_traiter_dist($id_newsletter='new', $r
 	list($annee, $mois, $jour, $heures, $minutes, $secondes) = recup_date(_request('date_debut'));
 	$date_debut = mktime($heures,$minutes,$secondes,$mois,$jour,$annee);
 	$date_debut = date('Y-m-d H:i:s',$date_debut);
-	set_request('date',$date_debut);
 
 	$recurrence = formulaires_programmer_newsletter_traiter_rule();
-	set_request('recurrence',$recurrence);
 
-	// prochaine occurence : la premiere que l'on trouve a partir d'aujourd'hui inclus
-	set_request('date_redac',when_rule_to_next_date($date_debut,$recurrence,date('Y-m-d H:i:s',strtotime("-1 day"))));
+	$ics = newsletter_date_rule_to_ics($date_debut, $recurrence);
+	set_request('recurrence',$ics);
+
+	// prochaine occurence dans "date" : la premiere que l'on trouve a partir d'aujourd'hui inclus
+	// date_redac contient ensuite la date de la precedente occurence
+	$d = when_rule_to_next_date($date_debut,$recurrence,date('Y-m-d H:i:s',strtotime("-1 day")));
+	if (!$d)
+		$d = "0001-01-01 00:00:00";
+	set_request('date',$d);
 
 	// statut prog
 	set_request('statut','prog'); // toujours en 'prog'
@@ -145,7 +166,7 @@ function formulaires_programmer_newsletter_charger_rule($r, &$valeurs){
 	// "BYYEARDAY"
 	// pas de saisie : c'est le jour de la date de depart qui fixe le monthday en freq monthly
 
-	if (isset($r['COUNT']) AND $r['COUNT']>1){
+	if (isset($r['COUNT']) AND $r['COUNT']){
 		$valeurs['has_end'] = 'count';
 		$valeurs['count'] = intval($r['COUNT']);
 	}
@@ -189,7 +210,7 @@ function formulaires_programmer_newsletter_traiter_rule(){
 		$rule[] = "COUNT=".intval(_request('count'));
 
 	if (_request('has_end')=='until'){
-		list($annee, $mois, $jour, $heures, $minutes, $secondes) = recup_date(_request('until'));
+		list($annee, $mois, $jour,,,) = recup_date(_request('until'));
 		$date = mktime(23,59,59,$mois,$jour,$annee);
 		$rule[] = "UNTIL=".gmdate("Ymd\THis\Z",$date);
 	}

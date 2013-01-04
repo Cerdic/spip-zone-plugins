@@ -22,10 +22,11 @@
 	<BOUCLE_liste_newsletters(NEWSLETTERS){id_mot?}{id_auteur?}{where?}{statut=prog}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{newsletter-16.png}|balise_img)]</td>
-			<td class='titre principale'>[(#LOGO_NEWSLETTER|image_reduire{20,26})]<a href="[(#ID_NEWSLETTER|generer_url_entite{newsletter})]" title="<:info_numero_abbreviation|attribut_html:> #ID_NEWSLETTER">[(#RANG). ]#TITRE</a>
-			<br/>[(#RECURRENCE|newsletter_afficher_recurrence{<br />})]</td>
-			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
-			<td class='date secondaire'>[(#DATE_REDAC|affdate_jourcourt|sinon{#VAL{'('}|concat{<:programmernewsletter:info_prochaine_occurence_fini:>,')'}})]</td>
+			<td class='titre principale'>[(#LOGO_NEWSLETTER|image_reduire{20,26})]<a href="[(#URL_ECRIRE{newsletter_prog,id_newsletter=#ID_NEWSLETTER})]" title="<:info_numero_abbreviation|attribut_html:> #ID_NEWSLETTER">[(#RANG). ]#TITRE</a>
+			[<p class="small">(#RECURRENCE|newsletter_afficher_recurrence_regle{<br />})</p>]</td>
+			<td class='date secondaire'>[(#RECURRENCE|newsletter_afficher_recurrence_debut|affdate_jourcourt)][
+				<br />\(<:programmernewsletter:label_date_derniere:> (#DATE_REDAC|affdate_jourcourt)\)]</td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt|sinon{#VAL{'('}|concat{<:programmernewsletter:info_prochaine_occurence_fini:>,')'}})]</td>
 			<td class='secondaire'>[(#EMAIL_TEST)
 			][(#CHAMP_SQL{liste})
 			]</td>
