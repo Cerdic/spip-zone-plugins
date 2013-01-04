@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Contextualiser la newsletter en fonction des infos utilisateur
- * Par simplification, les variables contextuelles sont exprimees par un simple @@nom_variable@@
+ * Par simplification, les variables contextuelles sont exprimees par un simple @nom_variable@
  * mais on peut ecrire des variantes complexes avec le balisage SPIP  #ENV{nom_variable,truc} etc
  * C'est plus complique a ecrire car ces balises ne doivent pes etre valuees au premier hit
  * et donc echappees dans le modele de newsletter :
