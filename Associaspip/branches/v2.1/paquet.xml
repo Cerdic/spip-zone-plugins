@@ -1,0 +1,25 @@
+<paquet
+	prefix="association"
+	categorie="divers"
+	version="2.1.0"
+	etat="stable"
+	compatibilite="];["
+	logo="img_pack/annonce.gif"
+	schema="47731"
+	meta="association_metas"
+	documentation="http://www.spip-contrib.net/Plugin-Gestion-d-associations"
+>	
+
+	<nom>Associaspip</nom>
+	<!-- Gestion d'associations -->
+
+	<auteur>Bernard Blazin</auteur>
+	<auteur>François de Montlivault (V1)</auteur>
+	<auteur>Emmanuel Saint-James</auteur>
+	<auteur>Jeannolapin (V2)</auteur>
+
+	<pipeline nom="header_prive" />
+	<pipeline nom="delete_tables" />
+	<pipeline nom="ajouter_boutons" />
+	<pipeline nom="post_edition" inclure="inc/post_edition.php" />
+</paquet>
