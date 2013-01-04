@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *   le contenu (html ou texte) de la newsletter
  * @param $context
  *   le contexte des variables
- * @return mixed
+ * @return string
  */
 function newsletter_contextualize_dist($content,$context){
 
