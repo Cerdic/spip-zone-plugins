@@ -9,6 +9,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip("inc/config");
 
 /**
+ * Permettre la prise en compte d'un evenement concernant un mail envoye
+ * (tracking de l'ouverture, clic, bounce...)
+ * pour mettre a jour le status de l'envoi correspondant
+ *
  * @param string $quoi
  *   open : l'email a ete ouvert
  *   clic : un lien a ete clique

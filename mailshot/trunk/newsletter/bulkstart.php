@@ -9,9 +9,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip("inc/config");
 
 /**
+ * Demarrer un envoi en nombre d'une infolettre vers une ou plusieurs listes
+ *
  * @param string|array $corps
- *   string si id de la newsletter a envoyer en lot
- *   array si contenu a envoyer
+ *   string id de la newsletter a envoyer en lot
+ *ou array contenu a envoyer
  *     string sujet
  *     string html
  *     string texte
@@ -19,7 +21,8 @@ include_spip("inc/config");
  *   listes a qui on envoie (1 ou ++)
  * @param array $options
  *   string statut : statut par defaut
- * @return bool
+ * @return int
+ *   0 si echec ou id de l'envoi sinon
  */
 function newsletter_bulkstart_dist($corps,$listes = array(),$options=array()){
 	// TODO : recuperer la limite de rate d'apres la config
