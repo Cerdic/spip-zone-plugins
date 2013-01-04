@@ -12,10 +12,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'outil_inserer_cadre_css' => 'Insérer un code préformaté CSS (cadre)',
+	'outil_inserer_cadre_html' => 'Insérer un code préformaté HTML (cadre)',
 	'outil_inserer_cadre_php' => 'Insérer un code préformaté PHP (cadre)',
 	'outil_inserer_cadre_spip' => 'Insérer un code préformaté SPIP (cadre)',
 	'outil_inserer_cadre_xml' => 'Insérer un code préformaté XML (cadre)',
-	'outil_inserer_cadre_html' => 'Insérer un code préformaté HTML (cadre)',
 	'outil_inserer_kbd' => 'Insérer une entrée clavier (kdb)',
 	'outil_inserer_lien_trac' => 'Insérer un lien vers le trac de SPIP',
 	'outil_inserer_pre' => 'Insérer un code préformaté (pre)',

@@ -13,13 +13,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_outils_actifs' => 'Active tools',
 
 	// O
-	'outil_inserer_cadre_css' => 'Insert a CSS preformatted code (cadre)',
-	'outil_inserer_cadre_php' => 'Insert tags for a PHP class frame segment (cadre)',
-	'outil_inserer_cadre_spip' => 'Insert tags for a SPIP class frame segment (cadre)',
-	'outil_inserer_cadre_xml' => 'Insert a preformatted XML code (cadre)',
+	'outil_inserer_cadre_css' => 'Insert a CSS preformatted code (cadre)', # MODIF
+	'outil_inserer_cadre_html' => 'Insérer un code préformaté HTML (cadre)', # NEW
+	'outil_inserer_cadre_php' => 'Insert tags for a PHP class frame segment (cadre)', # MODIF
+	'outil_inserer_cadre_spip' => 'Insert tags for a SPIP class frame segment (cadre)', # MODIF
+	'outil_inserer_cadre_xml' => 'Insert a preformatted XML code (cadre)', # MODIF
 	'outil_inserer_kbd' => 'Insert tags for keyboard sequence (kdb)',
 	'outil_inserer_lien_trac' => 'Insert a link to SPIP\'s trac repository',
-	'outil_inserer_pre' => 'Insert tags for preformatted text (pre)',
+	'outil_inserer_pre' => 'Insert tags for preformatted text (pre)', # MODIF
 	'outil_inserer_samp' => 'Insert tags for an escaped sample (samp)',
 	'outil_inserer_var' => 'Insert tags for a variable (var)',
 
