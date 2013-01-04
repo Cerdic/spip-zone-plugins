@@ -16,6 +16,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  */
 function c2f_post_edition($flux) {
+	// config: la taille du texte du credit
+	// en proportion de la hauteur de l'image: par ex 20 => taille texte = hteur/20
+	$ratio_hauteur_texte = 20;
+	
 	if ($flux['args']['table'] != 'spip_documents'
 		OR !isset($flux['args']['id_objet'])
 		OR (intval($flux['args']['id_objet']) != $flux['args']['id_objet'])
@@ -29,6 +33,11 @@ function c2f_post_edition($flux) {
 	if (!in_array($res['extension'], array('jpg', 'gif', 'png')))
 		return;
 	$fichier = $res['fichier'];
+	
+	if (isset($res['hauteur']) AND $res['hauteur'] > 0)
+		$hteur_txt = round($res['hauteur'] / $ratio_hauteur_texte);
+	else
+		$hteur_txt = 20;
 
 	// si l'image existe dans IMG_sans_filigrane c'est cette version qu'il faut utiliser: ecraser l'ancienne image filigranée
 	// sinon c'est que celle de IMG n'est pas filigranée donc on l'utilise après l'avoir copiée dans IMG_sans_filigrane
@@ -62,10 +71,10 @@ function c2f_post_edition($flux) {
 	// si elle n'existe pas déja, générer l'image typo du filigrane et la stocker dans le dossier IMG/filigranes
 	$credits = $flux['data']['credits'];
 	$nomfic_credits = substr(str_replace(' ', '_', translitteration($credits)), 0, 100);
-	$masque = 'filigranes/'.$nomfic_credits.'_'.$coul_txt.'.png';
+	$masque = 'filigranes/'.$nomfic_credits.'_'.$coul_txt.'_'.$hteur_txt.'px.png';
 	
 	if (!find_in_path($masque)){
-		$img_typo = produire_image_typo('© '.$credits, 'taille=20', 'couleur='.$coul_txt, 'padding_horizontal=10', 'padding_vertital=5');
+		$img_typo = produire_image_typo('© '.$credits, 'taille='.$hteur_txt, 'couleur='.$coul_txt, 'padding_horizontal=10', 'padding_vertical=5');
 		$img_typo = extraire_attribut(image_aplatir($img_typo, 'png', '808080',128,0), 'src');
 
 		if (!is_dir(_DIR_IMG.'filigranes')){
@@ -75,7 +84,7 @@ function c2f_post_edition($flux) {
 		@rename($img_typo, _DIR_IMG.$masque);
 		$masque = _DIR_IMG.$masque;
 	}
-//spip_log('fip masque: '.find_in_path($masque), 'c2f');
+spip_log('fip masque: '.find_in_path($masque), 'c2f');
 
 	// appliquer le filigrane et generer un fichier jpg ou gif a partir du PNG obtenu
 	switch ($res['extension']) {
