@@ -9,10 +9,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip("inc/config");
 
 /**
- * TODO : compter chaque envoi et prendre en compte une limite de rate generale
- * renvoyer false si trop de mail et qu'il faut attendre !
- *
- *
+ * Envoi une newsletter a un destinataire
  *
  * @param array $destinataire
  *   description du destinataire
@@ -25,8 +22,8 @@ include_spip("inc/config");
  *
  *
  * @param array|string $corps
- *   id de la newsletter (string)
- *   contenu de la newsletter (array)
+ *   string id de la newsletter
+ *ou array contenu de la newsletter
  *     string sujet
  *     string html
  *     string texte
@@ -43,7 +40,6 @@ include_spip("inc/config");
  *
  * @return string|int
  *   vide si ok, ou message d'erreur sinon
- *   nb de sec d'attente (ou 0 si indetermine) si trop de mails envoyes compte tenu de la limite nbmails/j
  */
 function newsletter_send_dist($destinataire,$corps,$options=array()){
 	static $config = null;
