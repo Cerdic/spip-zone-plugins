@@ -8,15 +8,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_attributs_html_interdits' => 'Il n\'est pas permis d\'utiliser les attributs html <tt>class</tt> ou <tt>style</tt>', # NEW
+	'erreur_attributs_html_interdits' => 'No está permitido el uso de atributos html <tt>class</tt> ou <tt>style</tt>',
 	'erreur_jeton' => 'No se puede tener en cuenta su mensaje. ¡Gracias a presentar de nuevo!',
 	'erreur_spam' => 'No se puede tener en cuenta su mensaje!',
 	'erreur_spam_doublon' => 'Un mensaje idéntico ya existe!',
 	'erreur_spam_ip' => 'También muchos comentarios en detrimento de la calidad!',
-	'erreur_url_deja_spammee' => 'Ce message contient des liens suspects qui ressemblent à du SPAM. Merci de les retirer.', # NEW
+	'erreur_url_deja_spammee' => 'Este mensaje contiene enlaces sospechos de ser SPAM. Gracias por eliminarlos.',
 
 	// F
-	'forum_saisie_texte_info' => 'Pour la mise en forme de votre message, ce formulaire n\'accepte que les raccourcis SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> &lt;cadre&gt;</cadre> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pour créer des paragraphes, laissez simplement des lignes vides.' # NEW
+	'forum_saisie_texte_info' => 'Para aplicar el formato de su mensaje, este formulario no acepta más que los atajos SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> &lt;cadre&gt;</cadre> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Para crear párrafos, deje simplemente una línea vacía entre los mismos.'
 );
 
 ?>
