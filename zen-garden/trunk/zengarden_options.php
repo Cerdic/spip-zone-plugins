@@ -49,9 +49,6 @@ if (!defined('_DIR_PLUGIN_THEME')){
 	}
 }
 
-// Déclaration du pipeline permettant d'ajouter traitements lors de la preview et de l'activiation
-$GLOBALS['spip_pipeline']['zengarden_activer_theme'] = '';
-
 function zengarden_affichage_final($texte){
 	if ($GLOBALS['html'] and isset($GLOBALS['meta']['zengarden_switcher'])){
 		include_spip('prive/zengarden_theme_fonctions');
