@@ -53,14 +53,13 @@
 [(#REM|?{'','modifier'}|autoriser{'donnee',#ID_DONNEE}|?{' '})
 #SET{lien_edit,#ENV{lien_edit,#URL_ECRIRE{donnees_edit,id_form=#ID_FORM}}|parametre_url{id_donnee,#ID_DONNEE}|parametre_url{retour,#SELF} }
 ]
-	<tr class='tr_liste' <?php /*onmouseover='$(this).activeCrayons();'*/?>>
+	<tr class='tr_liste'>
 		<td>[(#ID_DONNEE|forms_puce_statut_donnee{#STATUT,#ID_FORM})]</td>
 		<td>[<a href='(#GET{lien_edit})'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/loupe.png' alt='' width='16' height='16' style='vertical-align:middle' /></a><a href='#GET{lien_edit}'>]#ID_DONNEE[(#GET{lien_edit}|?{' '})</a>]</td>
 		[(#ENV{affiche_rang,1}|?{' '})<td>#RANG</td>]
 		[(#ENV{affiche_date,1}|?{' '})<td>#DATE</td>]
 		<BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}>[(#ENV{affiche_de,1}|?{' '})<td>#NOM</td>]</BOUCLE_auteur>[(#ENV{affiche_de,1}|?{' '})<td>#IP</td>]<//B_auteur>
 		<BOUCLE_body(FORMS_CHAMPS){id_form}{tout}{type !IN (separateur,textestatique)}{listable_admin=oui}{par rang}>
-		<?php //<td><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{'<br />'}</span></td> ?>
 		<td><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS</span></td>
 		</BOUCLE_body>
 		[(#GET{documents})<td>]

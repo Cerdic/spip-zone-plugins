@@ -201,11 +201,13 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 	include_spip('public/assembler');
 	$out = "";
 	if (!$id_form = intval($id_form)) return $out;
-	$res = spip_query("SELECT arborescent,titre FROM spip_forms WHERE id_form="._q($id_form));
-	$row=spip_fetch_array($res);
+	// $res = spip_query("SELECT arborescent,titre FROM spip_forms WHERE id_form="._q($id_form));
+	$res = sql_select('arborescent,titre',  'spip_forms',  'id_form='.sql_quote($id_form));
+	$row=sql_fetch($res);
 	if ($titre_page===false){
 		$titre_page = $row['titre'];
 	}
+	
 	$fond = "fonds/donnees_tous" . ($row['arborescent']=='oui'?'_arbo':'');
 
 	$prefix = forms_prefixi18n($type_form);
@@ -281,8 +283,9 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 
 		// verifier si il y a des donnees
 		$in = "statut IN (".implode(',',array_map('_q',$contexte['statuts'])).")";
-		$res2 = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE $in AND id_form="._q($id_form));
-		if ($row2 = spip_fetch_array($res2)){
+		// $res2 = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE $in AND id_form="._q($id_form));
+		$res2 = sql_select('id_donnee',  'spip_forms_donnees',  array($in,'id_form='.sql_quote($id_form)));
+		if ($row2 = sql_fetch($res2)){
 			$out .=  "<div style='float:$spip_lang_left;'>";
 			// $out .=  icone(_T("$prefix:telecharger_reponses"),
 				// generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), 
@@ -357,7 +360,7 @@ function affichage_donnees_tous($type_form,$c=NULL){
 	}
 
   _Forms_install();
-	$row=spip_fetch_array(spip_query("SELECT titre FROM spip_forms WHERE id_form="._q(_request('id_form'))));
+	$row=sql_fetch(sql_select('titre',  'spip_forms',  'id_form='.sql_quote(_request('id_form'))));
 	$titre_page = $row['titre'];
 	/*echo debut_page($titre_page, "documents", "forms");*/
 	$commencer_page = charger_fonction("commencer_page", "inc") ;
