@@ -10,6 +10,121 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function genie_newsletters_programmees_dist($t){
 
-
+	$now = date('Y-m-d H:i:s');
+	// trouver une newsletter programmee a envoyer
+	if ($row = sql_fetsel("*",'spip_newsletters',"statut=".sql_quote('prog')." AND date<".sql_quote($now)." AND date>".sql_quote('1000-01-01 00:00:00'))){
+		spip_log("programmer #".$row['id_newsletter']." date : ".$row['date'],"newsletterprog");
+		newsletter_creer_programmee($row);
+	}
 	return 0;
+}
+
+function newsletter_creer_newsletter_programmee($row){
+
+	// verifier deja si il y a qqchose a envoyer
+	$generer_newsletter = charger_fonction("generer_newsletter","action");
+
+	$patron = $row['patron'];
+	$html = newsletters_recuperer_fond($row['id_newsletter'], $patron, $row['date'], $row['date_redac']);
+	if (!strlen(trim($html))){
+		spip_log("Rien a envoyer pour programmation #".$row['id_newsletter'],"newsletterprog");
+		return;
+	}
+
+	// OK creons l'objet de base
+	$set = array(
+		"titre" => $row["titre"],
+		"chapo" => $row["chapo"],
+		"texte" => $row["texte"],
+		"date" => $row["date"],
+		"patron" => $patron,
+		"baked" => 1,
+		"statut" => "prop",
+		"lang" => "lang",
+	);
+
+	include_spip("action/editer_objet");
+	include_spip("inc/autoriser");
+	if (!$id_newsletter = objet_inserer("newsletter",0)){
+		spip_log("Erreur : impossible de creer une newsletter pour programmation #".$row['id_newsletter']." :".var_export($set,true),"newsletterprog"._LOG_ERREUR);
+		return;
+	}
+
+	autoriser_exception("modifier","newsletter",$id_newsletter);
+	autoriser_exception("instituer","newsletter",$id_newsletter);
+
+	objet_modifier("newsletter",$id_newsletter,$set);
+
+	// ensuite on calcule vraiment les 3 versions (html, texte, html_page)
+	$generer_newsletter($id_newsletter, true, $row['date_redac']);
+
+	$fixer_newsletter = charger_fonction("fixer_newsletter","action");
+	$fixer_newsletter($id_newsletter);
+
+	// verifions au cas ou
+	$row2 = sql_fetsel("*","spip_newsletters","id_newsletter=".intval($id_newsletter));
+	if (!strlen(trim($row2['html_email']))){
+		spip_log("Rien a envoyer pour programmation #".$row['id_newsletter'],"newsletterprog");
+		return;
+	}
+
+	// on passe en publie
+	$set = array('statut'=>'publie','date'=>$row2['date']);
+	objet_modifier("newsletter",$id_newsletter,$set);
+
+	autoriser_exception("modifier","newsletter",$id_newsletter,false);
+	autoriser_exception("instituer","newsletter",$id_newsletter,false);
+
+	// on met a jour la date et date_redac sur la source
+	include_spip("inc/when");
+	include_spip("inc/newsletters");
+	list($date_start,$rule) = newsletter_ics_to_date_rule($row['recurrence']);
+	$set = array(
+		'date_redac' => $row['date'],
+		'date' => when_rule_to_next_date($date_start,$rule,$row['date'])
+	);
+	if (!$set['date']) $set['date'] = "0001-01-01 00:00:00";
+	autoriser_exception("modifier","newsletter",$row['id_newsletter']);
+	autoriser_exception("instituer","newsletter",$row['id_newsletter']);
+	objet_modifier("newsletter",$row['id_newsletter'],$set);
+	autoriser_exception("modifier","newsletter",$row['id_newsletter'],false);
+	autoriser_exception("instituer","newsletter",$row['id_newsletter'],false);
+
+	// Les envois
+
+	// un envoi de test sur une adresse ?
+	if ($row['email_test']){
+		$email = $row['email_test'];
+		// recuperer l'abonne si il existe avec cet email
+		$subscriber = charger_fonction('subscriber','newsletter');
+		$dest = $subscriber($email);
+
+		// si abonne inconnu, on simule (pour les tests)
+		if (!$dest)
+			$dest = array(
+				'email' => $email,
+				'nom' => $email,
+				'lang' => $row['lang'],
+				'status' => 'on',
+				'url_unsubscribe' => url_absolue(_DIR_RACINE . "unsubscribe"),
+			);
+
+		// ok, maintenant on prepare un envoi
+		$send = charger_fonction("send","newsletter");
+		$err = $send($dest, $id_newsletter, array('test'=>true));
+
+		if ($err){
+			spip_log("Erreur lors de l'envoi de test a $email : $err","newsletterprog"._LOG_ERREUR);
+		}
+	}
+
+	// un envoi a une liste ?
+	if ($row['liste']){
+		$listes = array($row['liste']);
+
+		$bulkstart = charger_fonction("bulkstart","newsletter");
+		if (!$bulkstart($id_newsletter, $listes))
+			spip_log("Erreur lors de l'envoi groupe a la liste ".$row['liste'],"newsletterprog"._LOG_ERREUR);
+	}
+
 }
