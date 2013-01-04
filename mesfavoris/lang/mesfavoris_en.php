@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_style_formulaire32' => 'Big (32px)',
 	'legend_formulaire_public' => 'Public form',
 	'legend_style_formulaire' => 'Form style',
-	'login_first' => 'Sorry, this action requires you to be authenticated. Please log in before trying again.', # NEW
+	'login_first' => 'Sorry, this action requires you to be authenticated. Please log in first',
 
 	// M
 	'mes_favoris' => 'My favs',
