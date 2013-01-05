@@ -11,22 +11,22 @@
 				<p class="explication"><:saveauto:help_contenu:></p>
 				<label><:saveauto:label_structure:></label>
 				<div class="choix">
-					 <input type="radio" name="structure" id="structure_true" value="true"[(#CONFIG{saveauto/structure}|=={true}|oui)checked="checked"] />
+					 <input type="radio" name="structure" id="structure_true" value="true"[(#ENV{saveauto/structure, true}|=={true}|oui)checked="checked"] />
 					 <label for="structure_true"><:item_oui:></label>
 				</div>
 				<div class="choix">
-					 <input type="radio" name="structure" id="structure_false" value="false"[(#CONFIG{saveauto/structure}|=={false}|oui)checked="checked"] />
+					 <input type="radio" name="structure" id="structure_false" value="false"[(#ENV{saveauto/structure, true}|=={false}|oui)checked="checked"] />
 					 <label for="structure_false"><:item_non:></label>
 				</div>
 			</li>
 			<li class="editer editer_donnees">
 				<label><:saveauto:label_donnees:></label>
 				<div class="choix">
-					 <input type="radio" name="donnees" id="donnees_true" value="true" [(#CONFIG{saveauto/donnees}|=={true}|oui)checked="checked"] />
+					 <input type="radio" name="donnees" id="donnees_true" value="true" [(#ENV{saveauto/donnees, true}|=={true}|oui)checked="checked"] />
 					 <label for="donnees_true"><:item_oui:></label>
 				</div>
 				<div class="choix">
-					 <input type="radio" name="donnees" id="donnees_false" value="false"[(#CONFIG{saveauto/donnees}|=={false}|oui)checked="checked"] />
+					 <input type="radio" name="donnees" id="donnees_false" value="false"[(#ENV{saveauto/donnees, true}|=={false}|oui)checked="checked"] />
 					 <label for="donnees_false"><:item_non:></label>
 				</div>
 			</li>

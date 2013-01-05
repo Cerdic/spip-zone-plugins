@@ -39,6 +39,7 @@ function formulaires_saveauto_verifier_dist() {
 function formulaires_saveauto_traiter_dist() {
 
 	$options = array();
+	$options['manuel'] = true;
 	if ($o = _request('structure'))
 		$options['structure'] = $o;
 	if ($o = _request('donnees'))

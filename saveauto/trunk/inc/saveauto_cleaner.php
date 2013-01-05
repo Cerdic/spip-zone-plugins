@@ -44,7 +44,8 @@ function inc_saveauto_cleaner_dist($options=array()){
     /**
      * notifications si necessaire
      */
-	if ($notifications = charger_fonction('notifications', 'inc')) {
+	if (!$options['manuel']
+	AND ($notifications = charger_fonction('notifications', 'inc'))) {
 		$notifications('saveauto_cleaner', '',
 			array('liste' => $liste, 'auteur' => $auteur)
 		);

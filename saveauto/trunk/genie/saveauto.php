@@ -11,7 +11,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function genie_saveauto_dist($last) {
 
 	$tables = array();
-	$options = array('auteur' => 'cron');
+	$options = array('auteur' => 'cron', 'manuel' => false);
 
 	// On recherche la configuration des tables
 	include_spip('inc/config');

@@ -189,7 +189,8 @@ function inc_saveauto_dist($tables=array(), $options=array()) {
     /**
      * notifications si necessaire
      */
-	if ($notifications = charger_fonction('notifications', 'inc')) {
+	if (!$manuel
+	AND ($notifications = charger_fonction('notifications', 'inc'))) {
 		$notifications('saveauto', '',
 			array('err' => $erreur, 'chemin_fichier' => $chemin_fichier, 'nom_fichier'=>$nom_fichier)
 		);
