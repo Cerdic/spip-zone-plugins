@@ -150,7 +150,7 @@
 			-->][(#ENV{activer_formulaire}|=={oui}|oui)
 				[(#ENV{statut_auteur}|oui)
 					<label lang='#LANG'>
-					<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ',''})checked="checked"] value="#ID_LISTE" />
+					<input type="checkbox" name="list&#91;&#93;" checked="checked" value="#ID_LISTE" />
 					]]<span class='liste-titre'>#TITRE</span>
 				<span id='listeDescriptif#ID_LISTE' class='listeDescriptif liste-descriptif'>[(#TEXTE|textebrut|couper{80})]</span>
 				[<!--(#REM)</label>-->]
@@ -160,7 +160,7 @@
 			sinon, proposer la liste complete
 			
 			-->]<BOUCLE_inscription(AUTEURS){tous}{id_liste}{id_auteur=#ENV{id_auteur}}></BOUCLE_inscription>
-			[(#TOTAL_BOUCLE|>={1}|?{' ',''})
+			[(#TOTAL_BOUCLE|>{1}|?{' ',''})
 			<li>
 				[<!--(#REM)
 				
