@@ -2,7 +2,7 @@
 @Misc{[,
 	title = {(#ENV{title}|trim)}][,
 	journal = {(#ENV{site}|trim)}][,
-	(#ENV{authors}|cite_authors_bibtex)][,
+	(#ENV*{authors}|cite_authors_bibtex)][,
 	year = {(#ENV{accessdate}|trim|cite_date|annee)}][,
 	month = {(#ENV{accessdate}|trim|cite_date|mois|bibtex_month)}][,
 	howpublished = {\url{(#ENV{url}|trim)}}][,
