@@ -2,7 +2,7 @@
 @phdthesis{[,
 	title = {(#ENV{title}|trim)}][,
 	type = {(#ENV{thesis_type}|trim)}][,
-	(#ENV{authors}|cite_authors_bibtex)][,
+	(#ENV*{authors}|cite_authors_bibtex)][,
 	year = {(#ENV{year}|trim)}][,
 	number = {(#ENV{number}|trim)}][,
 	address = {(#ENV{place}|trim)}][,
