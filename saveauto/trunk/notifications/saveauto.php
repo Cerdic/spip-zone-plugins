@@ -44,7 +44,7 @@ function notifications_saveauto_dist($quoi, $id, $options) {
 
 		// Envoi de la notification
 		$envoyer = charger_fonction('envoyer_notification', 'inc');
-		$envoyer($destinataires, $msg_mail, $sujet_mail);
+		$envoyer($destinataires, $msg_mail, $sujet_mail, $pieces);
     }
 }
 
