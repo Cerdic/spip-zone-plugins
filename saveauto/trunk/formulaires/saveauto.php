@@ -14,8 +14,8 @@ function formulaires_saveauto_charger_dist(){
 
 	$valeurs = array(
 		'tout_saveauto' => 'oui',
-		'_toutes_tables' => base_lister_toutes_tables(),
-		'_tables_export' => base_lister_toutes_tables('', array(), $exclude),
+		'_toutes_tables' => base_lister_toutes_tables('', array(), array(), true),
+		'_tables_export' => base_lister_toutes_tables('', array(), $exclude, true),
 		'_noexport' => implode(', ', $exclude),
 	);
 

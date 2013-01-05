@@ -50,7 +50,7 @@ function inc_saveauto_dist($tables=array(), $options=array()) {
 		// - Sinon il faut calculer la liste des tables à exporter en excluant celles définies en noexport
 		if (!$tables) {
 			$exclude = lister_tables_noexport();
-			$tables = base_lister_toutes_tables('', $tables, $exclude);
+			$tables = base_lister_toutes_tables('', $tables, $exclude, true);
 		}
 
 	    /**

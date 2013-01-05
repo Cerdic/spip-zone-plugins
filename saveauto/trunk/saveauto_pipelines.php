@@ -82,7 +82,7 @@ function saveauto_formulaire_charger($flux){
 		include_spip('base/dump');
 
 		// Liste de toutes les tables de la base pour que le formulaire boucle dessus
-		$tables = base_lister_toutes_tables();
+		$tables = base_lister_toutes_tables('', array(), array(), true);
 		$flux['data']['_toutes_tables'] = $tables;
 
 		// Liste des tables exportables.
@@ -91,7 +91,7 @@ function saveauto_formulaire_charger($flux){
 		// de forcer un mise à jour lors du traiter
 		// TODO : s'insérer plutôt dans le traiter du formulaire
 		$exclude = lister_tables_noexport();
-		$flux['data']['_tables_export'] = base_lister_toutes_tables('', array(), $exclude);
+		$flux['data']['_tables_export'] = base_lister_toutes_tables('', array(), $exclude, true);
 		$flux['data']['_noexport'] = implode(', ', $exclude);
 	}
 

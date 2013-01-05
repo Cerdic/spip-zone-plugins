@@ -29,7 +29,7 @@ function saveauto_declarer_config() {
 
 	// On determine la liste des tables exportées par défaut.
 	$exclude = lister_tables_noexport();
-	$tables = base_lister_toutes_tables('', array(), $exclude);
+	$tables = base_lister_toutes_tables('', array(), $exclude, true);
 
 	$config =array(
 		'prefixe_save'			=> 'sav',
