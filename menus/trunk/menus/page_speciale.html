@@ -12,6 +12,9 @@
 	[(#ENV{suivant_connexion}|=={deconnecte}|et{#SESSION{id_auteur}|oui})
 		#SET{afficher_entree,''}
 	]
+	[(#ENV{suivant_connexion}|=={admin}|et{#SESSION{statut}|!={"0minirezo"}})
+		#SET{afficher_entree,''}
+	]
 ]
 
 [(#ENV{appel_formulaire}|oui)
