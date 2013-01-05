@@ -6,8 +6,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
  *
  */
-$sauver_base = false;
-$fin_sauvegarde_base = false;
 
 /**
  * Insertion dans le pipeline "mes_fichiers_a_sauver"

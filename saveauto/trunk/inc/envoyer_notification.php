@@ -11,7 +11,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param string $pieces
  * @param string $headers
  */
-function inc_envoyer_notification_dist($emails, $texte, $sujet="", $pieces = "", $headers = ""){
+function inc_envoyer_notification_dist($emails, $texte, $sujet="", $pieces=array(), $headers=""){
 	include_spip('inc/notifications');
 
 	// rien a faire si pas de texte !

@@ -1,8 +1,8 @@
 <paquet
 	prefix="saveauto"
 	categorie="maintenance"
-	version="1.0.0"
-	etat="test"
+	version="1.0.1"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/saveauto-24.png"
 	schema="0.1.0"
@@ -18,6 +18,7 @@
 
 	<traduire module="saveauto" reference="fr" gestionnaire="salvatore" />
 
+	<pipeline nom="post_sauvegarde" action="" />
 	<pipeline nom="taches_generales_cron" inclure="genie/saveauto_cron.php" />
 	<pipeline nom="mes_fichiers_a_sauver" inclure="saveauto_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="saveauto_pipelines.php" />

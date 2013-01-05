@@ -29,8 +29,10 @@ function notifications_saveauto_cleaner_dist($quoi, $id, $options) {
 			}
 			$msg_mail = _T('saveauto:message_notif_cleaner_intro', array('duree' => $duree)) . $liste_fichiers;
 
-			// Envoi de la notification
-			notifications_envoyer_mails($destinataires, $msg_mail, $sujet_mail);
+			// Envoi de la notification en utilisant la fonction interne qui n'utilise pas job_queue et permet l'envoi
+			// de pièces jointes
+			$envoyer = charger_fonction('envoyer_notification', 'inc');
+			$envoyer($destinataires, $msg_mail, $sujet_mail);
 		}
     }
 }

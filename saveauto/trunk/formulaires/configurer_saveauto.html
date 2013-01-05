@@ -118,22 +118,6 @@
 				</li>
 			</ul>
 
-			<fieldset><ul>
-				<li class="editer_ecrire_succes">
-					<label><:saveauto:label_message_succes:></label>
-					<p class="explication"><:saveauto:help_msg:></p>
-					<div class="choix">
-						 <input type="radio" name="ecrire_succes" id="ecrire_succes_true" value="true" [(#ENV{ecrire_succes, true}|=={true}|oui)checked="checked"] />
-						 <label for="ecrire_succes_true"><:item_oui:></label>
-					</div>
-					<div class="choix">
-						 <input type="radio" name="ecrire_succes" id="ecrire_succes_false" value="false"[(#ENV{ecrire_succes, true}|=={false}|oui)checked="checked"] />
-						 <label for="ecrire_succes_false"><:item_non:></label>
-					</div>
-				</li>
-			</ul></fieldset>
-		</fieldset>
-
 		<p class="boutons">
 			<input type="submit" class="submit" value="<:bouton_valider:>" />
 		</p>
