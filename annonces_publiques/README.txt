@@ -23,7 +23,7 @@ Version 1.0 - 2008-02-01
 BUGS:
 -----
 
--* s'arrurer qu'une annonce ne sort pas des creneaux correspondant aux criteres a_venir, en_cours et revolus.
+-* s'assurer qu'une annonce ne sort pas des creneaux correspondant aux criteres a_venir, en_cours et revolus.
 
 TODO:
 -----
@@ -32,3 +32,5 @@ Selection annonce publique/privee
 Mots-Cles => Categories
 Repetitions -> RRULE, EXRULE, RDATE, EXDATE (RFC iCal)
 Squelettes annonce(rdz), ical, atom et rss
+
+Proposition de logos z68730 : http://thenounproject.com/noun/advocacy/#icon-No4186 CC0
