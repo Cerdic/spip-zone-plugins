@@ -15,7 +15,7 @@ function genie_saveauto_dist($last) {
 
 	// On recherche la configuration des tables
 	include_spip('inc/config');
-	$tout_exporter =(lire_config('saveauto/tout_saveauto', 'oui') == 'oui');
+	$tout_exporter = (lire_config('saveauto/tout_saveauto') == 'oui');
 	if (!$tout_exporter)
 		$tables = lire_config('saveauto/tables_saveauto');
 

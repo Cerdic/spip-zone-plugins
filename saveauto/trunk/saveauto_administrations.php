@@ -55,7 +55,6 @@ function saveauto_declarer_config() {
  * Fonction de désinstallation
  * On supprime les trois metas du plugin :
  * - saveauto : la meta de configuration
- * - saveauto_creation : la meta de la date de dernière création d'archive
  * - saveauto_base_version : la meta du numero de version de la base
  */
 function saveauto_vider_tables($nom_meta_base_version) {
