@@ -30,12 +30,21 @@ function notifications_saveauto_dist($quoi, $id, $options) {
 
 		// Mise en pièce jointe de la sauvegarde si elle ne depasse pas le seuil défini
 		$max_mail = lire_config('saveauto/mail_max_size');
+		$pieces = array();
 		if (filesize($options['chemin_fichier']) < $max_mail*1000*1000) {
-			$supp = array('piece_jointe' => $options['chemin_fichier']);
+			// Determination du mime-type
+			$extension = pathinfo($options['chemin_fichier'], PATHINFO_EXTENSION);
+			$mime_type = ($extension == 'zip') ? 'application/zip' : 'text/plain';
+			$pieces[] = array(
+						'chemin' => $options['chemin_fichier'],
+						'nom' => basename($options['chemin_fichier']),
+						'encodage' => 'base64',
+						'mime' => $mime_type);
 		}
 
 		// Envoi de la notification
-		notifications_envoyer_mails($destinataires, $msg_mail, $sujet_mail);
+		$envoyer = charger_fonction('envoyer_notification', 'inc');
+		$envoyer($destinataires, $msg_mail, $sujet_mail);
     }
 }
 
