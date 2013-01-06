@@ -1,0 +1,18 @@
+<paquet
+	prefix="mail2img"
+	categorie="communication"
+	version="0.0.1"
+	etat="dev"
+	compatibilite="[3.0.5;3.0.*]"
+	logo=""
+	documentation=""
+>
+	<nom>mail2img</nom>
+	<auteur>cy_altern</auteur>
+	<licence>GNU/GPL v3</licence>
+
+	<pipeline nom="taches_generales_cron" inclure="mail2img_pipelines.php" />
+	
+	<necessite nom="oembed" />
+	<necessite nom="auteurspartout" />
+</paquet>
