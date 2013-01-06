@@ -30,12 +30,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help_notif_mail' => 'Saisir les adresses en les séparant par des virgules ",". Ces adresses s\'ajoutent à celle du webmestre du site.',
 	'help_obsolete' => 'Saisir la durée de conservation des sauvegardes en jours',
 	'help_prefixe' => 'Saisir le préfixe accolé au nom de chaque fichier de sauvegarde',
-	'help_restauration' => '<strong>Attention !!!</strong> ces sauvegardes ne sont <strong>pas au format de celles de SPIP</strong> et ne peuvent pas être utiliser avec l\'outil de restauration de la base de SPIP.<br /><br />
+	'help_restauration' => '<strong>Attention !!!</strong> ces sauvegardes ne sont <strong>pas au format de celles de SPIP</strong> et ne peuvent pas être utilisées avec l\'outil de restauration de la base de SPIP.<br /><br />
 							Pour toute restauration il faut donc utiliser l\'interface <strong>phpmyadmin</strong> de votre
 							serveur de base de données.<br /><br />
 							Ces sauvegardes contiennent les commandes permettant d\'<strong>effacer</strong> les tables de votre base SPIP et de les <strong>remplacer</strong> par les
 							données archivées. Les données <strong>plus récentes</strong> que celles de la sauvegarde seront donc <strong>PERDUES</strong>!',
-	'help_sauvegarde_1' => 'Cette option vous permet de sauvegarder la structure et le contenu de la base dans un fichier au format SQL qui sera stocké dans le répertoire tmp/dump/. La fichier se nomme <em>@prefixe@_aaaammjj_hhmmss.</em>. Le préfixe des tables est conservé.',
+	'help_sauvegarde_1' => 'Cette option vous permet de sauvegarder la structure et le contenu de la base dans un fichier au format MySQL qui sera stocké dans le répertoire tmp/dump/. La fichier se nomme <em>@prefixe@_aaaammjj_hhmmss.</em>. Le préfixe des tables est conservé.',
 	'help_sauvegarde_2' => 'La sauvegarde automatique est activée (fréquence en jours : @frequence@).',
 
 	// I
@@ -48,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_sql_fichier_genere' => 'Ce fichier est genere par le plugin Saveauto',
 	'info_sql_fin_fichier' => 'Fin du fichier',
 	'info_sql_ipclient' => 'IP Client : ',
-	'info_sql_mysqlversion' => 'Version mySQL : ',
+	'info_sql_mysqlversion' => 'Version MySQL : ',
 	'info_sql_os' => 'OS Serveur : ',
 	'info_sql_phpversion' => 'Version PHP : ',
 	'info_sql_plugins_utilises' => '@nb@ plugins utilises :',
@@ -78,16 +78,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_cleaner_sujet' => 'Nettoyage des sauvegardes',
 	'message_notif_cleaner_intro' => 'La suppression automatique des sauvegardes obsolètes (dont la date est antérieure à @duree@ jours) a été effectuée avec succès. Les fichiers suivants ont été supprimés : ',
 	'message_notif_sauver_intro' => 'La sauvegarde de la base @base@ a été effectuée avec succès par l\'auteur @auteur@.',
-	'message_sauvegarde_nok' => 'Erreur lors de la sauvegarde SQL de la base.',
-	'message_sauvegarde_ok' => 'La sauvegarde SQL de la base a été faite avec succès.',
+	'message_sauvegarde_nok' => 'Erreur lors de la sauvegarde de la base.',
+	'message_sauvegarde_ok' => 'La sauvegarde de la base a été faite avec succès.',
 	'message_sauver_sujet' => 'Sauvegarde de la base @base@',
 	'message_telechargement_nok' => 'Erreur lors du téléchargement.',
 
 	// T
-	'titre_boite_historique' => 'Sauvegardes SQL disponibles au téléchargement',
-	'titre_boite_sauver' => 'Créer une sauvegarde SQL',
+	'titre_boite_historique' => 'Sauvegardes MySQL disponibles au téléchargement',
+	'titre_boite_sauver' => 'Créer une sauvegarde MySQL',
 	'titre_page_configurer' => 'Configuration du plugin Sauvegarde automatique',
-	'titre_page_saveauto' => 'Sauvegarder la base au format SQL',
+	'titre_page_saveauto' => 'Sauvegarder la base au format MySQL',
 	'titre_saveauto' => 'Sauvegarde automatique'
 );
 
