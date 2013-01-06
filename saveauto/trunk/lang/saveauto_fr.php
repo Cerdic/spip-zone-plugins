@@ -88,7 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_boite_sauver' => 'Créer une sauvegarde SQL',
 	'titre_page_configurer' => 'Configuration du plugin Sauvegarde automatique',
 	'titre_page_saveauto' => 'Sauvegarder la base au format SQL',
-	'titre_saveauto' => 'Sauvegarde automatique',
+	'titre_saveauto' => 'Sauvegarde automatique'
 );
 
 ?>
