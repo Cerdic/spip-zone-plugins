@@ -1,22 +1,29 @@
-============================================
-A faire avant passage à l'état "en test"
-et publication d'un article sur spip-contrib
-============================================
+======
+v 2.1
+======
 
-- critère {contenu}
-  contenu=0 doit être équivalent à !contenu
-
-- autorisations : verifier si tout est ok.
+- Autorisations : verifier si tout est ok.
   * un admin doit pouvoir tout faire
   * un redacteur doit pouvoir :
-    - voir tous les albums (meme s'il n'est pas l'auteur d'un article/rubrique/objet)
-    - s'il est l'auteur d'un objet, creer/associer/modifier un album
+    - gérer ses propres albums
+    - voir tous les albums, mais pas modifier ceux dont il n'est pas l'auteur
+    - s'il est l'auteur d'un objet, creer/associer un album
 
-- espace privé : simplifier/standardiser
-    - options de configuration : supprimer celles inutiles/expérimentales (la liste des éléments à afficher dans les modèles).
-    - feuilles de style : supprimer toutes les retouches visuelles, c'est le rôle des thèmes.
-    - squelettes : utiliser de préférences des éléments "standards" -> supprimer les éléments superflus (icone "vous êtes l'auteur" etc.)
-                   éventuellement, simplifier la liste des albums dans la fiche d'un objet.
+- Intégration avec le plugin 'insérer modèle' :
+  depuis la barre d'outil : ça chie dans la colle !
+  depuis la colonne de gauche : vérifier que le double clic fonctionne, sinon rajouter ça dans le plugin en s'inspirant du plugin medias (déjà testé : facile à faire).
 
-- Bugs non bloquants :
-    - Quand on retire des documents à un album, le nombre affiché n'est pas mis à jour.
+===========
+v 2.2 / 2.3
+===========
+- Pipeline complement_objet
+  * Portfolio : bouton pour déplacer tous les documents dans un nouvel album lié à l'objet.
+  * Albums : bouton inverse : déplacer tous les documents d'un l'album dans le portfolio de l'objet.
+
+- Pipeline affiche_gauche (édition d'un objet)
+Soit on se repose sur le plugin 'insérer_modèle' et on se contente de faciliter l'insertion des balises d'albums existants.
+Ou alors on propose des fonctionnalités à peu près similaires au plugin medias :
+  * créer un album
+  * sélection d'albums et insertion des balises dans le texte au double clic
+  
+- Prendre en compte le plugin mosaïque (qui permet de trier les documents)
