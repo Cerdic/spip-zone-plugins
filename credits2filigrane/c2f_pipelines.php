@@ -74,8 +74,12 @@ function c2f_post_edition($flux) {
 
 	// pour restaurer l'image sans filigrane: mettre 0 dans le champ credits
 	$credits = (!$nouveau_fic ? $flux['data']['credits'] : $res['credits']);
-	if ($credits == '0')
+	if ($credits == '0') {
+		sql_updateq('spip_documents',
+				array('filigrane' => '0', 'taille' => filesize($fichier)),
+				"id_document = $id_doc");
 		return;
+	}
 
 	// le petit nécessaire pour générer le masque et l'appliquer
 	include_spip('filtres/couleurs');
