@@ -5,78 +5,43 @@
 	Inclus dans /prive/squelettes/contenu/albums_complement_objet.html
 ]
 
-[(#REM) 
-	VARIABLES 
-]
-
 #SET{self,#SELF|parametre_url{debut_galerie,''}}
+
 
 [(#REM) Variables indiquant les onglets à afficher ]
 <BOUCLE_navigation(DATA){liste #ENV{navigation}}>
 #SET{#VAL{navigation_}|concat{#VALEUR},oui}
 </BOUCLE_navigation>
 
-[(#REM) SELECTION D'IDS : tous les albums ]
-#SET{tous,#ARRAY}
-<BOUCLE_id_tous(ALBUMS){tout}>
-#SET{tous,#GET{tous}|push{#ID_ALBUM}}
-</BOUCLE_id_tous>
-
-[(#REM) SELECTION D'IDS : selon les contenus ]
-#SET{medias,#ARRAY}
-<BOUCLE_id_contenus(spip_documents_liens spip_documents albums){media IN #ENV{media}|explode{'|'}}{objet = album}{tout}>
-[(#GET{medias}|find{#ID_OBJET}|non) #SET{medias,#GET{medias}|push{#ID_OBJET}} ]
-</BOUCLE_id_contenus>
-
-[(#REM) SELECTION D'IDS : albums vides ]
-#SET{vides,#GET{tous}}
-<BOUCLE_id_vides(spip_documents_liens){objet=album}{tout}>
-[(#SET{vides, #GET{vides}|table_retirer_valeur{#ID_OBJET}})]
-</BOUCLE_id_vides>
-[(#GET{vides}|count|>{0}|oui) #SET{albums_vides,oui} ]
-
-[(#REM) SELECTION FINALE ]
-[(#ENV{media}|non)				#SET{selection,#GET{tous}} ]
-[(#ENV{media}|=={sans}|oui)			#SET{selection,#GET{vides}} ]
-[(#ENV{media}|et{#ENV{media}|!={sans}}|oui)	#SET{selection,#GET{medias}} ]
-
-[(#REM) TABLEAU : types de media présents dans les albums ]
-#SET{medias_contenus,#ARRAY}
-<BOUCLE_tableau_medias_presents(DOCUMENTS liens){objet=album}{tout}>
-[(#GET{medias_contenus}|find{#MEDIA}|non) #SET{medias_contenus,#GET{medias_contenus}|push{#MEDIA}} ]
-</BOUCLE_tableau_medias_presents>
-
-[(#REM) TABLEAU : types de medias absents des albums ]
-#SET{medias_non_contenus,#ARRAY}
-<BOUCLE_tableau_medias_absents(DATA){liste image,audio,video,file}{tout}>
-[(#GET{medias_contenus}|find{#VALEUR}|non) #SET{medias_non_contenus,#GET{medias_non_contenus}|push{#VALEUR}} ]
-</BOUCLE_tableau_medias_absents>
-
-[(#REM)
-	HTML
-]
 
 [(#REM) Onglets : objets parents et albums auteur]
 <BOUCLE_afficher_parents(CONDITION){si #GET{navigation_parents}}>
-<div class='onglets_simple premier clearfix'>
+<div class='onglets_simple clearfix'>
 <ul class='auteur'>
-	[<li class='first'>(#GET{self}|parametre_url{id_auteur,''}|lien_ou_expose{<:album:onglet_tous:>,#ENV{id_auteur,''}|=={''},ajax})</li>]
-	[<li>(#GET{self}|parametre_url{id_auteur,#SESSION{id_auteur}}|lien_ou_expose{'mes albums', #ENV{id_auteur}|=={#SESSION{id_auteur}}, ajax})</li>]
+	[<li class='first'>(#GET{self}|parametre_url{id_auteur,''}|lien_ou_expose{
+		<:album:onglet_tous:>,
+		#ENV{id_auteur,''}|=={''},
+		ajax}
+	)</li>]
+	[<li>(#GET{self}|parametre_url{id_auteur,#SESSION{id_auteur}}|lien_ou_expose{
+		<:album:onglet_mes_albums:>,
+		#ENV{id_auteur}|=={#SESSION{id_auteur}},
+		ajax}
+	)</li>]
 </ul>
-<ul class='parents'>
-	[<li class='first'>(#GET{self}|parametre_url{objet,''}|lien_ou_expose{<:album:onglet_tous:>,#ENV{objet,''}|=={''},ajax})</li>]
-	<BOUCLE_objets_actives(DATA){source table, #CONFIG{albums/objets}}>
-	<BOUCLE_objets_presents(ALBUMS liens){objet=#VALEUR|objet_info{type}}>
-	[<li>(#GET{self}|parametre_url{objet,#OBJET}
-		|lien_ou_expose{#OBJET|objet_info{info_nb_objets}|_T|replace{@nb@}, #OBJET|=={#ENV{objet}}, ajax}
-		|unique)</li>]
-	</BOUCLE_objets_presents>
-	[(#VALEUR|oui) <li><strong class='off'>[(#VALEUR|objet_info{info_nb_objets}|_T|replace{@nb@})]</strong></li> ]
-	<//B_objets_presents>
-	</BOUCLE_objets_actives>
+<ul class='parents icones'>
+	[<li class='first'>(#GET{self}|parametre_url{objet,''}|lien_ou_expose{<:album:onglet_parents_tous:>,#ENV{objet,''}|=={''},ajax})</li>]
+	<BOUCLE_objets(ALBUMS liens){fusion objet}>
+	[<li>(#GET{self}|parametre_url{objet,#OBJET}|lien_ou_expose{
+		#OBJET|objet_icone{16}|concat{#OBJET|objet_info{type}},
+		#OBJET|=={#ENV{objet}},
+		ajax}
+	)</li>]
+	</BOUCLE_objets>
 </ul>
 </div>
 </BOUCLE_afficher_parents>
+
 
 [(#REM) Filtres : Statuts, vus, orphelins ]
 <BOUCLE_afficher_divers(CONDITION){si #GET{navigation_divers}}>
@@ -98,62 +63,52 @@
 </div>
 </BOUCLE_afficher_divers>
 
-[(#REM) Filtres : contenus ]
-<BOUCLE_afficher_contenus(CONDITION){si #GET{navigation_contenus}}>
-<div class='filtres'>
-	<ul class='contenus'>
 
+[(#REM) Filtres : types de medias contenus (image, audio, video, file) ]
+<BOUCLE_afficher_contenus(CONDITION){si #GET{navigation_contenus}}>
+<div class='onglets_simple second clearfix filtres'>
+	<ul class='contenus'>
 	[(#REM) Tous ]
 	<li class='tous'>
-		[(#GET{self}|parametre_url{media,''}|lien_ou_expose{[(#CHEMIN_IMAGE{icone-medias-tous-24.png}|balise_img)],[(#ENV{media}|is_null)],ajax})]
+		[(#GET{self}|parametre_url{contenu,''}|lien_ou_expose{
+			<:album:filtre_tous:>,
+			#ENV{contenu}|=={''},
+			ajax}
+		)]
 	</li>
-
 	[(#REM) Vides ]
-	<li class='vides[ (#ENV{media}|match{sans}|oui)on][ (#GET{albums_vides}|non)off]'>
-		[(#GET{albums_vides}|oui)
-		[(#GET{self}|parametre_url{media,#ENV{media}|permuter_parametre{'image|file',retirer}|permuter_parametre{sans}}
-			|icone_horizontale{'',#VAL{icone-vide},'',ajax}
-			|inserer_attribut{title,<:album:filtre_albums_vides:>})]
-		]
-		[(#GET{albums_vides}|non) 
-			[(#SET{titre_vide,<:album:info_aucun_album_vide:>})]
-			[(#CHEMIN_IMAGE{icone-vide-24.png}|balise_img{#GET{titre_vide}}|inserer_attribut{title,#GET{titre_vide}})]
-		]
+	<li class='vides[ (#ENV{contenu}|=={0}|oui)on]'>
+		[(#GET{self}|parametre_url{contenu,non}|lien_ou_expose{
+			[(#CHEMIN_IMAGE{icone-vide-24.png}|balise_img|inserer_attribut{title,<:album:filtre_sans_contenu:>})],
+			#ENV{contenu}|=={non},
+			ajax,
+			<:album:filtre_sans_contenu:>}
+		)]
 	</li>
-
+	[(#REM) Pleins ]
+	<li class='tous'>
+		[(#GET{self}|parametre_url{contenu,oui}|lien_ou_expose{
+			[(#CHEMIN_IMAGE{icone-medias-tous-24.png}|balise_img|inserer_attribut{title,<:album:filtre_avec_contenu:>})],
+			#ENV{contenu}|=={oui},
+			ajax,
+			<:album:filtre_avec_contenu:>}
+		)]
+	</li>
 	[(#REM) Medias ]
-	<BOUCLE_medias_presents(DATA){liste #GET{medias_contenus}}>
-	<li class='#VALEUR[ (#ENV{media}|match{#VALEUR}|oui)on]'>
-		#SET{titre, #VAL{album:heading_contenu}|_T|concat{' : '}|concat{#VAL{medias:des_}|concat{#VALEUR}|concat{s}|_T|replace{'@nb@ ',''}}
-		[(#GET{self}|parametre_url{media,#ENV{media}|permuter_parametre{sans,retirer}|permuter_parametre{#VALEUR}}
-			|icone_horizontale{'',#VAL{media-}|concat{#VALEUR},'',ajax}
-			|inserer_attribut{title,#GET{titre}})]
+	<BOUCLE_contenu(DATA){liste image,audio,video,file}>
+	<li class='#VALEUR[ (#ENV{contenu}|=={#VALEUR}|oui)on]'>
+		[(#GET{self}|parametre_url{contenu,#VALEUR}|lien_ou_expose{
+			[(#CHEMIN_IMAGE{#VAL{media-}|concat{#VALEUR}|concat{-24.png}}|balise_img|inserer_attribut{title,#VAL{medias:media_}|concat{#VALEUR}|_T})],
+			#ENV{contenu}|=={#VALEUR},
+			ajax,
+			#VAL{medias:media_}|concat{#VALEUR}|_T}
+		)]
 	</li>
-	</BOUCLE_medias_presents>
-	<BOUCLE_medias_absents(DATA){liste #GET{medias_non_contenus}}>
-	#SET{titre, #VAL{medias:des_}|concat{#VALEUR}|concat{s}|_T|replace{'@nb@ ',''}|replace{s$,''}|concat{&nbsp;:0}}
-	<li class='#VALEUR off'>
-		[(#SET{fichier_image, [media-(#VALEUR|strtolower)-24.png]})] [(#VALEUR|=={'file'}|oui) #SET{fichier_image,'document-24.png'}]
-		[(#CHEMIN_IMAGE{#GET{fichier_image}}
-			|image_nb
-			|inserer_attribut{'alt',#GET{titre}}
-			|inserer_attribut{'title',#GET{titre}})]
-	</li>
-	</BOUCLE_medias_absents>
-
-	<li class='info_contenu'>
-	<BOUCLE_lesmedias(DATA){source table, #ENV{media}|explode{'|'}}{'ou'}>
-		[(#VALEUR|et{#VALEUR|!={sans}}|oui)
-			[(#VAL{<:album:heading_contenu:> :}|unique) ][<strong>(#VAL{medias:des_}|concat{#VALEUR}|concat{s}|_T|replace{'@nb@ ',''})</strong>]
-		]
-	</BOUCLE_lesmedias>
-	</li>
-
+	</BOUCLE_contenu>
 	</ul>
 </div>
 </BOUCLE_afficher_contenus>
 
-[(#REM) LISTE ]
-[(#INCLURE{fond=prive/objets/liste/albums,
-		selection=#GET{selection}}
-		{env})]
+
+[(#REM) LISTE DES ALBUMS EN FONCTION DES CRITERES ]
+<INCLURE{fond=prive/objets/liste/albums, env}>

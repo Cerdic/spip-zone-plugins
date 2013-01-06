@@ -1,76 +1,46 @@
 [(#REM)
 	Modèle album : vue en mode 'liste'
 ]
+
 #SET{statut,#ENV{statut,publie}}
 [(#REM|test_espace_prive|oui)
 	#SET{statut,'.*'}
 	[(#INCLURE{fond=prive/squelettes/inclure/albums_modele_infos_prive,env})]
 ]
 
-
 <BOUCLE_album(ALBUMS){id_album}{statut == #GET{statut}}>
+<B_documents_joints>
+<div class="album liste clearfix p #ENV{align}">
 
-<div class="albums album vue_liste clearfix p #ENV{align}">
+	[<h2>(#ENV{titre,#_album:TITRE})</h2>]
 
-	[<h2>(#_album:TITRE)</h2>]
-
-	<table>
-	<BOUCLE_documents_joints(DOCUMENTS) {id_album}{tout}>
+	<table><tbody>
+	<BOUCLE_documents_joints(DOCUMENTS){id_album}{media?}>
+	#SET{titre, #TITRE|sinon{#FICHIER|basename}|attribut_html}
 	<tr>
-
-		[(#REM) définition de l'affichage de chaque type d'information ]
-		[(#SET{titre,
-			[(#TITRE|sinon{#FICHIER|basename})]
-		})]
-		[(#SET{icone,
-			[(#LOGO_DOCUMENT{icone}|image_reduire{32}|inserer_attribut{alt,#GET{titre}}|inserer_attribut{title,#GET{titre}})]
-		})]
-		[(#SET{mimetype,
-			[<abbr class="ext mimetype" title="[(#TYPE_DOCUMENT)">](#EXTENSION|strtoupper)</abbr>]
-		})]
-		[(#SET{poids,
+		<td>
+			<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="album" class="spip_doc[ (#EXTENSION|attribut_html)][ (#EXPOSER)]"  title="#GET{titre}">
+			[(#LOGO_DOCUMENT{icone}
+				|image_reduire{32}
+				|inserer_attribut{alt,#GET{titre}}
+				|inserer_attribut{title,#GET{titre}}
+			)]
+			[<strong class="titre">(#GET{titre})</strong>]
+			</a>
+		</td>
+		<td>
+			<small>
+			[<abbr class="ext mimetype" title="#TYPE_DOCUMENT">(#EXTENSION|strtoupper)</abbr>]
 			[<span class="poids">(#TAILLE|taille_en_octets)</span>]
-		})]
-		[(#SET{dimensions,
+			[(#MEDIA|=={image}|oui)
 			[<span class="dimensions">(#LARGEUR)x][(#HAUTEUR)&nbsp;pixels</span>]
-		})]
-
-		[(#REM)tableau contenant les infos à afficher après le titre]
-		#SET{infos, #ARRAY} 
-		<BOUCLE_afficher(DATA){source table, #CONFIG*{albums/vue_liste}}{valeur != icone}>
-		[(#MIME_TYPE|match{image}|non)
-			[(#VALEUR|!={dimensions}|oui)
-			[(#SET{infos,#GET{infos}|array_merge{#ARRAY{#VALEUR,#GET{#VALEUR}}}})]
 			]
-		]
-		[(#MIME_TYPE|match{image}|oui)
-			[(#SET{infos,#GET{infos}|array_merge{#ARRAY{#VALEUR,#GET{#VALEUR}}}})]
-		]
-		</BOUCLE_afficher>
-
-		<td>
-		<a href="[(#URL_DOCUMENT)]" type="[(#MIME_TYPE)]" class="spip_doc[ (#EXTENSION|attribut_html)]">
-		[(#CONFIG{albums/vue_liste}|find{icone}|oui)
-			[(#GET{icone})]
-		]
-		[<strong class="#EDIT{titre} titre">(#GET{titre})</strong>]
-		</a>
+			</small>
 		</td>
-
-		<td>
-		<B_infos><small>(
-		<BOUCLE_infos(DATA){source table, #GET*{infos}}{'&ndash;'}>
-		#VALEUR
-		</BOUCLE_infos>
-		)</small></B_infos>
-		[(#REM)
-		[<div class="#EDIT{descriptif} descriptif">(#DESCRIPTIF)</div>]
-		]
-		</td>
-
 	</tr>
 	</BOUCLE_documents_joints>
-	</table>
+	</tbody></table>
 
 </div>
+</B_documents_joints>
 </BOUCLE_album>

@@ -23,12 +23,10 @@
 			</li>
 
 			[(#REM) Descriptif ]
-			[(#CONFIG{albums/afficher_champ_descriptif}|ou{#ENV**{descriptif}|strlen})
-				[(#SAISIE{textarea, descriptif, 
-				label=<:texte_descriptif_rapide:>,
-				rows=4,
-				inserer_barre=''})]
-			]
+			[(#SAISIE{textarea, descriptif, 
+			label=<:texte_descriptif_rapide:>,
+			rows=4,
+			inserer_barre=''})]
 
 		</ul>
 

@@ -6,20 +6,28 @@
 
 -------------------------------------------------------------- */
 
+/*===================
+  === ALIGNEMENTS ===
+  ===================*/
 .album					{}
-
-/* VUE EN ICONES */
-.album.vue_icones li			{ float: left; margin: 0 10px 10px 0; }
-.album.vue_icones li .spip_logos	{ float: none; margin: 0; }
-.album.vue_icones figure		{ display: table; width: 1px;} /* pour empecher le titre de dépasser */
-  .album.vue_icones a,
-  .album.vue_icones figcaption,
-  .album.vue_icone img 			{ display: table-row; }
-
-/* VUE EN LISTE */
-.album.vue_liste 			{}
-
-/* ALIGNEMENTS */
 .album.center				{}
 .album.left				{}
 .album.right				{}
+
+/*=================
+  === VIGNETTES ===
+  =================*/
+.album.vignettes li			{float: left; margin: 0 10px 10px 0;}
+.album.vignettes li .spip_logos		{float: none; margin: 0;}
+.album.vignettes figure,
+  .album.vignettes .figure		{display: table; width: 1px;} /* width : pour empecher le titre de dépasser */
+.album.vignettes a,
+  .album.vignettes figcaption,
+  .album.vignettes .figcaption,
+  .album.vignettes img 			{display: table-row;}
+
+/*=============
+  === LISTE ===
+  =============*/
+.album.liste td 			{padding-top: 0; padding-bottom: 0;}
+.album.liste tr:nth-child(2n) td	{background-color: transparent;}

@@ -5,86 +5,43 @@
 ]
 
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+
 <h3 class='titrem'><img src="#CHEMIN_IMAGE{album-24.png}" class="cadre-icone" /><:album:titre_albums:></h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	[(#ENV{editable})
-
-	[(#CONFIG{documents_objets}|match{spip_albums}|non)
-		<p class='notice'><strong><a href='[(#URL_ECRIRE{'configurer_contenu'})]'><:album:info_documents_joints_albums:></a></strong></p>
+	[(#REM) message affiché si l'ajout de document aux albums n'est pas activé ]
+	[(#VAL{spip_albums}|in_array{#CONFIG{documents_objets}|explode{','}}|non)
+	<p class="reponse_formulaire reponse_formulaire_erreur"><a href='[(#URL_ECRIRE{configurer_contenu})]'><:album:info_documents_joints_albums:></a></p>
 	]
 
+	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-		[(#REM) choix des objets ]
-		<fieldset>
-		<legend><:album:label_fieldset_objets_albums:></legend>
 		<ul>
-			#SET{name,objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-				<label><:album:label_activer_album_objets:></label>[
-				<span class='erreur_message'>(#GET{erreurs})</span>
-				]
-				#SET{exclus, #ARRAY{ex1,spip_albums,ex2,spip_documents}}
-				#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name}},exclus=#GET{exclus}}
-			</li>
-		</ul>
-		</fieldset>
+
+		[(#REM) choix des objets ]
+		[(#SAISIE{choisir_objets, objets,
+			label=<:album:label_activer_album_objets:>,
+			exclus=#LISTE{spip_albums,spip_documents}
+		})]
 
 		[(#REM) choix des champs d'édition ]
-		<fieldset>
-		<legend><:album:label_fieldset_champs:></legend>
-		<ul>
-
-			[(#SAISIE{case, utiliser_titre_defaut,
-				label=<:album:label_utiliser_titre_defaut:>&nbsp;:,
-				label_case=<:album:label_case_utiliser_titre_defaut:>,
-				defaut=#CONFIG{albums/utiliser_titre_defaut}
-			})]
-
-			[(#SAISIE{oui_non, afficher_champ_descriptif,
-				label=<:album:label_afficher_descriptif:>&nbsp;:,
-				defaut=#CONFIG{albums/afficher_champ_descriptif},
-				li_class='inline'})]
+		[(#SAISIE{case, utiliser_titre_defaut,
+			label=<:album:label_utiliser_titre_defaut:>,
+			label_case=<:album:label_case_utiliser_titre_defaut:>,
+			defaut=#CONFIG{albums/utiliser_titre_defaut}
+		})]
 
 		</ul>
-		</fieldset>
 
-		[(#REM) choix informations à afficher dans les vues du modèle ]
-		<fieldset>
-		<legend><:album:label_fieldset_affichage_modele:></legend>
-		<ul>
-
-			<ins style="margin-left:1em;"><:album:explication_affichage_modele:></ins>
-
-			[(#SAISIE{checkbox, vue_icones,
-				label=<:album:label_vue_icones:>,
-				defaut=#CONFIG{albums/vue_icones},
-				datas=#ARRAY{
-					titre,<:album:label_vue_icones_titre:>
-					},
-				li_class='inline'})]
-
-			[(#SAISIE{checkbox, vue_liste,
-				label=<:album:label_vue_liste:>,
-				defaut=#CONFIG{albums/vue_liste},
-				datas=#ARRAY{
-					icone,<:album:label_vue_liste_icone:>,
-					mimetype,<:album:label_vue_liste_mimetype:>,
-					poids,<:album:label_vue_liste_poids:>,
-					dimensions,<:album:label_vue_liste_dimensions:>
-				},
-				li_class='inline'})]
-
-		</ul>
-		</fieldset>
 
 	[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	<!--extra-->
 	<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
 	]
+
 </div>

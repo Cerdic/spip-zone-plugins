@@ -4,18 +4,52 @@
 	Appelé par la pipeline 'affiche_milieu'
 ]
 
-<BOUCLE_test_afficher(ALBUMS liens objets){id_album}{statut==.*}{0,1}> [(#OBJET|oui) #SET{afficher,oui} ] </BOUCLE_test_afficher>
+<B_objets_associes>
+[(#REM) on utilise la classe formulaire_spip pour avoir un habillage identique aux autres formulaires ]
+<div class='formulaire_spip albums liaison'>
 
-[(#GET{afficher}|oui)
-<div class='albums'>
-#BOITE_OUVRIR{'','simple liste-objets'}
+	<ul>
+	<li class='editer liste-objets'>
 
+	[<label>(#GRAND_TOTAL|singulier_ou_pluriel{album:info_1_objet_lie,album:info_nb_objets_lies})</label>]
 
-	<h3><:album:info_association:> :</h3>
+	<table class='spip liste'><tbody>
+	<BOUCLE_objets_associes(ALBUMS albums_liens){id_album}{par objet}{tout}{pagination 5}>
+	<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 
-	[(#INCLURE{fond=prive/squelettes/inclure/inc-albums_objets_lies,
-		afficher=#LISTE{auteur, icone, info, titre, bouton, expose}}{env})]
+		<td class='icone_objet'>
+			[(#OBJET|objet_icone{16}|inserer_attribut{title,#OBJET})]
+		</td>
 
-#BOITE_FERMER
+		<td class='info'>
+			[(#VU|=={oui}|oui)
+				[(#SET{titre,#VAL{<:album:titre_album:>&nbsp;}|concat{<:medias:document_vu:>}|strtolower})]
+				[(#CHEMIN_IMAGE{vu-album-12.png}|balise_img{<:album:info_album_vu:>,''}|inserer_attribut{title,#GET{titre}})]
+			]
+			<a href='[(#ID_OBJET|generer_url_entite{#OBJET})]'>
+			#OBJET&nbsp;n°#ID_OBJET
+			</a>
+		</td>
+
+		<td class='titre'>
+			#INFO_TITRE{#OBJET,#ID_OBJET}
+		</td>
+
+		<td class='action'>
+		[(#INCLURE{fond=prive/squelettes/inclure/inc-albums_boutons_actions,
+			bouton=dissocier,
+			id_album=#ID_ALBUM, 
+			objet_lien=#OBJET,
+			id_objet_lien=#ID_OBJET,
+			vu=#VU}{env})]
+		</td>
+
+	</tr>
+	</BOUCLE_objets_associes>
+	[<tr><td colspan="4" class='pagination'>(#PAGINATION{prive})</td></tr>]
+	</tbody></table>
+
+	</li></ul>
+
 </div>
-]
+</B_objets_associes>

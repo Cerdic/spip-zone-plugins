@@ -1,24 +1,14 @@
 [(#REM)
 	Affiche le nombre de documents d'un album.
 ][(#REM)
-	inclus dans le squelette /prive/squelettes/objets/liste/albums_lies.html
+	inclus dans le squelette /prive/squelettes/objets/liste/albums.html
 ]
 <div id='[nb_documents_album(#ID_ALBUM)]'>
 #SET{nb_documents,#VAL{documents}|lister_objets_lies{album,#ID_ALBUM,''}|count}
 
-[(#ENV{vide_seulement}|non)
-	[(#GET{nb_documents}|objet_afficher_nb{document}|=={<:medias:aucun_document:>}|?{
-		#GET{nb_documents}|objet_afficher_nb{document}|wrap{<em>}|wrap{<ins>},
-		#GET{nb_documents}|objet_afficher_nb{document}
-	})]
-]
-
-[(#ENV{vide_seulement}|oui)
-	[(#GET{nb_documents}|objet_afficher_nb{document}|=={<:medias:aucun_document:>}|oui)
-		<span class='album notice_prive'>
-		[(#GET{nb_documents}|objet_afficher_nb{document}|wrap{<strong>})]
-		</span>
-	]
-]
+[(#GET{nb_documents}|=={0}|?{
+	#GET{nb_documents}|objet_afficher_nb{document}|wrap{<ins>},
+	#GET{nb_documents}|objet_afficher_nb{document}
+})]
 
 </div>

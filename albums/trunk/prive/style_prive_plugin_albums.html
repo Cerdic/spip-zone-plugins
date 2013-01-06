@@ -1,197 +1,270 @@
-#CACHE{0}
 [(#REM)<style>]
-#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-#SET{claire,##ENV{couleur_claire,c5e41c}} #SET{claire-,##GET{claire}|couleur_foncer} #SET{claire+,##GET{claire}|couleur_eclaircir}
-#SET{foncee,##ENV{couleur_foncee,9dba00}} #SET{foncee-,##GET{foncee}|couleur_foncer} #SET{foncee+,##GET{foncee}|couleur_eclaircir}
-#SET{background-color,##ENV{background_color,f8f7f3}}
-#SET{fond+,##GET{background-color}|couleur_luminance{.08}} #SET{fond-,##GET{background-color}|couleur_luminance{.24}}
-#SET{gris_clair,#f2f2f2} #SET{gris,#808080} #SET{gris_fonce,#252525}
-#SET{bordure,#ccc;}
-#SET{ombre_texte,'0 0 8px rgba(0,0,0,.3), 1px 1px 1px rgba(0,0,0,.3)'}
-#SET{fond_actif,#GET{foncee}} #SET{bordure_actif,1px solid #GET{foncee}}
-#SET{radius,4px} #SET{fond_lies_actif,#GET{claire}} #SET{bordure_lies_actif,#GET{foncee}}
+#SET{claire,##ENV{couleur_claire,c5e41c}}
+#SET{foncee,##ENV{couleur_foncee,9dba00}}
 
-/******************************/
-/*** BOITE COMPLEMENT OBJET ***/
-/******************************/
 
-/** BOITE **/
-.albums					{clear:both;}
 
-/** HEADER **/
-.albums .header h3.titrem		{padding:.2em; margin:0; background-color:#GET{claire};}
-.albums .header h3.titrem img		{margin-right:.5em; vertical-align:middle;}
 
-/** ONGLETS : créer et associer**/
-.albums .onglets			{display:table; width:100%; font-weight:bold; margin-top:1.5em;}
-  .albums .onglets a,
-  .albums .onglets strong		{display:table-cell; padding:.2em .8em; background-color:#fff; border:1px solid #dfdfdf; border-left:none; border-bottom:1px solid #GET{foncee}; font-size:.92em; text-align:center; text-transform:uppercase;}
-  .albums .onglets a:first-child,
-  .albums .onglets strong:first-child	{border-left:1px solid #dfdfdf;}
-.albums .onglets a:hover		{background-color:#GET{claire+}; text-decoration:none; color:#GET{gris_fonce};}
-.albums .onglets strong.on		{background-color:#GET{fond_actif}; border:#GET{bordure_actif}; border-bottom:none;}
-.albums .onglets .fermer 		{width:1%; max-width:24px; padding:.3em;}
-.albums .onglets .fermer img		{vertical-align:middle;}
+/*==============================
+  === BOITE COMPLEMENT OBJET ===
+  ==============================*/
 
-/** ENTETE **/
-.albums .entete_ajouter			{padding:1em .5em; background-color:#GET{fond_actif}; border:#GET{bordure_actif}; border-top:none;}
-.albums .entete_ajouter h4		{display:inline; margin:0; font-size:1.3em; font-weight:normal; color:#fff; text-shadow:#GET{ombre_texte};}
+/* titre boite */
+.albums > .portfolios > h3		{margin: 0 0 10px;}
+
+/* ONGLETS + ENTETE + FORMULAIRES */
+.albums .entete_ajouter,
+  .albums #associer,
+  .albums .onglets strong.on		{border:1px solid #GET{foncee};}
+
+/* ONGLETS */
+.albums .onglets			{
+					display: table;
+					width: 100%;
+					font-weight: bold;
+					}
+.albums .onglets a,
+  .albums .onglets strong		{
+					display: table-cell;
+					padding:.2em .8em;
+					background-color: #fff;
+					border: 1px solid #dfdfdf;
+					border-left: none;
+					border-bottom: 1px solid #GET{foncee};
+					font-size: .92em;
+					text-align: center;
+					text-transform: uppercase;
+					}
+.albums .onglets > *:first-child	{border-left: 1px solid #dfdfdf;}
+.albums .onglets a:hover		{
+					background-color: rgba(0,0,0,.04); 
+					text-decoration: none;
+					}
+.albums .onglets strong.on		{
+					background-color: #GET{foncee};
+					border-bottom: none;
+					}
+.albums .onglets .fermer 		{
+					width: 0; /* pour taille minimale */
+					padding: 0 .3em;
+					}
+
+/* ENTETE */
+.albums .entete_ajouter			{
+					padding: 1.5em .5em;
+					background-color: #GET{foncee};
+					border-top: none;
+					}
+.albums .entete_ajouter h4		{
+					display: inline;
+					margin: 0;
+					font-size: 1.3em;
+					font-weight: normal;
+					color: #fff;
+					}
 .albums .entete_ajouter img		{vertical-align:bottom;}
 
-/** FORMULAIRE ASSOCIER **/
-.albums .associer .entete		{background-color:#GET{fond_actif}; border:#GET{bordure_actif}; border-bottom:none; padding:.4em;}
-.albums .associer .formulaire_recherche	{margin:0; border-color:#GET{claire-}; background-color:#GET{gris_clair};}
-.albums .associer input			{color:#GET{gris}; background:none;}
-.albums .associer input.text		{border:none;}
-.albums .associer input.image		{background-color:#GET{gris}; padding:.1em; outline:1px solid #GET{claire-};}
+/* FORMULAIRE ASSOCIER */
+.albums #associer			{
+					background-color: #fff;
+					border-color: #aaa;
+					border-top: none;
+					}
+.albums #associer .entete		{
+					padding:.4em;
+					border-top: none;
+					border-bottom: none;
+					}
+.albums #associer .formulaire_recherche {margin: 0;}
 
-/** FORMULAIRE CREER **/
-.albums .creer .formulaire_editer	{margin:0; border-top:none;}
-.albums .creer .explication.note	{margin:10px; border:none; padding:.2em; color:#GET{gris}; background-color:#fef5c3;}
-.albums .creer .explication.note p	{margin:0;}
+/* FORMULAIRE CREER */
+.albums #creer .formulaire_editer	{margin-top:0; border-top:none;}
 
 
-/*************/
-/*** LISTES **/
-/*************/
-/* div.liste-objets.(lies/associer/galerie) table.spip.liste tr td */
 
-/** LISTES : toutes **/
-  .albums .liste-objets,
+
+/*==============
+  === LISTES ===
+  ==============*/
+
+/*==========
+  = TOUTES =
+  ==========*/
+.albums .entete h2			{display: inline;}
+.albums .liste-objets,
   .albums .liste			{margin:0; border-width:0;}
-.albums td				{vertical-align:top;}
-/**/
-.albums td.logo				{width:1px;}
-.albums td.id				{width:1.5em; text-align:center;}
-.albums td.infos			{min-width:10em;}
-.albums td.action			{width:38px; text-align:right;}
-  .albums  td.contenu,
-  .albums  td.liaison			{min-width:8em;}
-.albums .supprimer.off			{margin-right:3px; display:inline-block;}
-/** LISTES : entete **/
-.albums .entete h2			{display:inline; margin:0; font-size:1.3em;}
-/** LISTES : pagination **/
-.albums .liste-objets navigation		{display:table; width:100%;}
-.albums .liste-objets navigation .pagination	{display:table-cell;}
-.albums .liste-objets navigation .tri		{display:table-cell;}
+.albums td				{vertical-align: top;}
+.albums td img				{vertical-align: middle;}
+.albums td.logo				{width: 1px;}
+.albums th.id,
+  .albums td.id				{width: 1.5em; text-align: center;}
+.albums td.infos			{/*min-width: 13em;*/}
+.albums td.descriptif			{max-width: 15em;}
+.albums td.descriptif p			{margin: 0;}
+.albums td.action			{
+					/*width: 60px;*/
+					text-align: right;
+					}
+.albums td.action .submit		{line-height: 0;}
+.albums  td.contenu,
+  .albums  td.liaison			{min-width: 8em;}
 
-/* LISTES : associer */
-.albums .associer .liste-objets		{border:#GET{bordure_actif};}
+/*============
+  = ASSOCIER =
+  ============*/
+.albums .associer td.action img		{/*vertical-align: middle;*/}
 
-/* LISTES : galerie */
-.albums .galerie .liste-objets		{margin-bottom:1em;}
-.albums .galerie .liste-objets th	{background-color:#888;}
-.albums .galerie td			{padding:.8em .5em; font-size:.95em;}
-.albums .galerie td.logo		{width:1px;}
-  .albums .galerie th.id,
-  .albums .galerie td.id		{text-align:center;}
-.albums .galerie td.id			{width:1.5em; font-size:1.5em; color:#555753;}
-.albums .galerie td.action		{width:48px;}
-.albums .galerie table li img			{vertical-align:middle;}
-/* objets lies */
-.albums .galerie .objets-lies		{background:none;}
-  .albums .galerie .objets-lies tr,
-  .albums .galerie .objets-lies td	{background:none; border:none;}
-.albums .galerie .objets-lies td.action	{width:1px;}
+/*===========
+  = GALERIE =
+  ===========*/
+.albums .entete.galerie			{margin-top: 1em;}
+.albums .galerie td			{padding: .8em .5em; font-size: .95em;}
+.albums .galerie td.id,
+  .albums .galerie th.id		{
+					width: 1.5em;
+					text-align: center;
+					}
+.albums .galerie td.id			{font-size: 1.5em;}
+.albums .galerie td.logo		{width: 1px;} /* répéter sinon style du plugin medias pose probleme */
 
-/* LISTES : selecteur */
-.albums .selecteur			{font-size:.9em; line-height:.8em;}
-.albums .selecteur .entete h2		{font-size:1em;}
-.albums .selecteur td.id		{width:auto;}
-.albums .selecteur td.action		{display:table-cell; width:auto;}
-.albums .selecteur td.action input[type=radio]	{margin:0;}
-.albums .selecteur input.text		{width:8em;}
+/*=============
+  = SELECTEUR =
+  =============*/
+.albums .selecteur			{font-size:.9em; line-height: .8em;}
+.albums .selecteur .entete h2		{font-size: 1em;}
+.albums .selecteur td.id		{width: auto;}
+.albums .selecteur td.action		{display: table-cell; width: auto;}
+.albums .selecteur td.action input[type=radio]	{margin: 0;}
+.albums .selecteur input.text		{width: 8em;}
 
-/* LISTES : liés */
-.albums .lies .liste-objets		{margin:.75em 0;}
-.albums .lies table			{border-collapse:separate; border-spacing:0 .5em;}
- .albums .lies .liste-objets,
- .albums .lies table,
- .albums .lies tr,
- .albums .lies td			{border:none; background:none;}
-.albums .lies td			{border-bottom:1px solid #GET{fond-}; background-color:#GET{fond+};}
-.albums .lies tr td:first-child		{border-bottom:none; padding-right:1em; background:none;}
-.albums .lies tr td:nth-child(2)	{border-left:1px solid #GET{fond-}; border-radius:[(#GET{radius}) ]0 0[ (#GET{radius})];}
-.albums .lies tr td:last-child		{border-radius:0[ (#GET{radius}) ][(#GET{radius}) ]0;}
-.albums .lies td img			{vertical-align:middle;}
-/**/
-<BOUCLE_liste1(DATA){liste :hover,.actif,.deplie}>
-.albums .lies tr[(#VALEUR) ]td			{border-color:#GET{bordure_lies_actif};}
-.albums .lies tr[(#VALEUR) ]td			{background-color:#GET{fond_lies_actif};}
-.albums .lies tr[(#VALEUR) ]td.logo		{background:none;}
-.albums .lies tr[(#VALEUR) ].puce-gauche:after	{border-right-color:#GET{fond_lies_actif};}
-</BOUCLE_liste1>
-.albums .lies tr.actif td		{border-bottom:none;}
-.albums .lies tr.actif td:nth-child(2)	{border-radius:[(#GET{radius}) ]0 0 0;}
-.albums .lies tr.actif td:last-child	{border-radius:0[ (#GET{radius}) ]0 0;}
-.albums .lies tr.deplie td		{padding:0; background:none;}
-/**/
-.albums .lies tr.inactif:hover td.clic	{cursor:url([(#CHEMIN_IMAGE{curseur-depli-20.png})]),auto;}
-.albums .lies tr.actif:hover td.clic	{cursor:url([(#CHEMIN_IMAGE{curseur-repli-20.png})]),auto;}
-/**/
-.albums .lies .puce-gauche		{position:relative;}
-.albums .lies .puce-gauche:after	{
-	content:""; display:block; position:absolute; top:1.8em; left: -14px;
-	border-top:10px solid transparent; border-bottom:10px solid transparent; border-right:10px solid #GET{fond+};
-	}
-/**/
-.albums .lies .conteneur_portfolios		{background-color:#GET{fond_lies_actif}; position:relative; top:-.6em; padding:.5em; border:1px solid #GET{bordure_lies_actif}; border-top:none; border-right:none; border-radius:0 0[ (#GET{radius}) ][(#GET{radius})];}
-.albums .lies .portfolios			{background-color:#fff; border:1px solid #GET{foncee};}
-.albums .lies .portfolios #portfolios h3	{color:#fff; font-size:1em; text-shadow:#GET{ombre_texte}; background:#GET{foncee};}
-.albums .lies .portfolios .liste_items		{padding-left:.5em; padding-right:.5em;}
-.albums .lies .formulaire_joindre_document	{margin:.5em;}
-
-/* LISTE : boite 'simple' */
-  .albums .boite tr td,
-  .albums .boite tr:nth-child(2n) td	{background-color:transparent;}
-.albums .boite tr:first-child td	{border-top:none;}
-.albums .boite tr:last-child td		{border-bottom:none;}
-.albums .boite td			{padding:.2em;}
-.albums .boite td img			{vertical-align:middle; margin:0;}
-.albums .boite .icone			{display:table-cell; width:1px;}
-.albums .boite .info			{white-space:nowrap;}
-.albums .boite .action			{width:1px;}
-
-
-/***********************/
-/*** BOITE VUE ALBUM ***/
-/***********************/
-.albums .box.simple			{margin:2em 0; padding:0;}
-.albums .box.simple .bd			{padding:0;}
-  .albums .box.simple b.bottom,
-  .albums .box.simple .top		{display:none;}
-.albums .box.simple h3			{display:block; float:left; margin:.35em 10px; text-transform:uppercase; font-size:.9em;}
-.albums .box.simple .liste.boite	{width:80%; float:right;}
-
-
-/*************/
-/*** LOGOS ***/
-/*************/
-.albums.logo				{position:relative; margin:0 auto;}
-.albums .decoration_logo		{
-	position:absolute; top:0; left:0; display:block; content:'';
-	background-repeat: no-repeat; background-position: 50% 50%;
-	}
-
-
-/*******************/
-/*** PUCE STATUT ***/
-/*******************/
-.puce_objet.albums:hover .puce_objet_popup	{visibility:visible; margin-top:-1px; cursor:pointer;}
-/* reset : le formulaire doit avoir la taille de l'image (8px) et un padding de  2px */
-.puce_objet.albums form			{display:inline-block; float:left; padding:2px;}
-  .puce_objet.albums form div,
-  .puce_objet.albums button		{display:block; width:8px; height:8px;}
-.puce_objet.albums button		{position:relative;}
-.puce_objet.albums button:hover		{border:none;}
-.puce_objet.albums button img		{position:absolute; top:0; left:0; padding:0;}
+/*========
+  = LIES =
+  ========*/
+/* conteneur général */
+.album.lie				{
+					display: table;
+					width: 100%;
+					margin: 0 0 10px;
+					}
+/* logo */
+.album.lie .logo			{
+					width: 1px; /* taille minimum quel que soit la taille du logo */
+					padding-right: 10px;
+					}
+.album.lie .logo,
+.album.lie .contenu			{display: table-cell;}
+/* contenu */
+.album.lie .contenu			{
+					padding: 1px;
+					vertical-align: top;
+					border: 1px solid #ddd;
+					border-color: rgba(0,0,0,.1);
+					box-shadow: inset 0 0 1em rgba(0,0,0,.03);
+					border-radius: 2px;
+					}
+.album.lie .contenu:hover		{
+					background-color: #eee;
+					background-color: rgba(0,0,0,.025);
+					}
+.album.lie.actif .contenu		{border-color: #GET{claire};}
+/* header = tableau */
+.album.lie .header 			{margin: 0;}
+.album.lie .infos			{
+					width: 5em;
+					font-size: 0.9em;
+					}
+.album.lie .infos img			{vertical-align: middle;}
+.album.lie .titre > *			{margin: 0;}
+.album.lie .titre > *:first-letter	{text-transform: uppercase;}
+.album.lie .action			{width: 10em;}
+/* bouton permuter */
+.album.lie .permuter			{
+					color: #888;
+					color: rgba(0,0,0,.5);
+					font-size: 0.7em;
+					font-weight: bold;
+					text-transform: uppercase;
+					}
+.album.lie .permuter:before		{display: inline-block; content:''; width: 8px; height: 8px; margin-right: .25em;}
+.album.lie .permuter.afficher:before	{background:url([(#CHEMIN_IMAGE{curseur-depli-8.png})]) no-repeat;}
+.album.lie .permuter.cacher:before	{background:url([(#CHEMIN_IMAGE{curseur-repli-8.png})]) no-repeat;}
+/* */
+.album.lie .apercu,
+  .album.lie .detail			{
+  					border-top: 1px dotted #ccc;
+					border-top-color: rgba(0,0,0,.1);
+					}
+/* documents : apercu */
+.album.lie .apercu			{
+					padding: .5em;
+					line-height: 0; /* supprime l'espace apres les images */
+					}
+.album.lie .apercu .vignette		{
+					float: #ENV{left};
+					/*width: 52px;*/ height: 52px;
+					line-height: 52px; /* pour centrer verticalement l'image */
+					padding: .2em .35em;
+					text-align: center;
+					}
+.album.lie .apercu .vignette img	{vertical-align: middle;}
+/* documents : vue detaillée */
+.album.lie .detail 			{padding: .5em;}
+.album.lie .portfolios,
+.album.lie .formulaire_joindre		{margin: 0;}
 
 
-/**************/
-/*** DIVERS ***/
-/**************/
+
+
+/*===============
+  === ONGLETS ===
+  ===============*/
+
+.albums .onglets_simple .parents li:first-child {margin-#ENV{left}: 2.5em;}
+.albums .onglets_simple .icones img	{
+					margin-right: 0.4em;
+					vertical-align: middle;
+					}
+.albums .onglets_simple.filtres strong,
+  .albums .onglets_simple.filtres a	{/*line-height: 0;*/} /* enleve la marge apres l'image */
+.albums .onglets_simple.filtres a	{
+					border-color: transparent;
+					background-color: transparent;
+					}
+
+
+
+
+/*========================= 
+  === BOITE OBJETS LIES === 
+  =========================*/
+.albums.liaison > ul		{
+				padding-top: 0;
+				padding-bottom: 0;
+				}
+.albums.liaison .liste-objets {
+				padding-bottom: 0;
+				padding-right: 0;
+				padding-top: 0;
+				}
+.albums.liaison label		{
+				margin-top: .34em;
+				font-weight: bold;
+				}
+.albums.liaison .liste td.icone_objet	{width: 20px;}
+.albums.liaison .liste tr:first-child td {border-top: none;}
+.albums.liaison .liste tr:last-child td {border-bottom: none;}
+
+
+
+
+/*==============
+  === DIVERS ===
+  ==============*/
+/* logo */
+.album.logo			{margin:0 auto;}
 /* bouton action */
   .albums button:hover,
   .albums button:hover			{cursor:pointer;}
@@ -201,26 +274,28 @@
 .albums .inline .choix label		{margin-left:0; margin-right:.8em;}
 .albums .inline .choix strong small	{font-weight:normal;}
 /* message compagnon */
-.box.compagnon .albums > ul		{margin:.5em 0; list-style:disc inside;}
+.box.compagnon .albums > ul		{margin:.5em 0;}
 .box.compagnon .albums > ul li > ul	{display:inline-block; vertical-align:top; list-style:none inside;}
 
 
-/**********/
-/* MODELE */
-/**********/
 
-/* vue en icones */
-.album.vue_icones li			{float:left; margin:0 10px 10px 0;}
-.album.vue_icones li .spip_logos	{float:none; margin:0;}
-.album.vue_icones figure		{display: table; width: 1px;} /* pour empecher le titre de dépasser */
-  .album.vue_icones a,
-  .album.vue_icones figcaption,
-  .album.vue_icone img 			{display: table-row;}
-/* vue en liste : r.a.z. du tableau */
-.album.vue_liste table			{margin:0;}
-  .album.vue_liste td,
-  .album.vue_liste img			{vertical-align:middle;}
-.album.vue_liste p			{margin:0;}
+
+/*==============
+  === MODELE ===
+  ==============*/
+/* vue en vignettes */
+.album.vignettes li			{float: left; margin: 0 10px 10px 0;}
+.album.vignettes li .spip_logos		{float: none; margin: 0;}
+.album.vignettes figure,
+  .album.vignettes .figure		{display: table; width: 1px;} /* width : pour empecher le titre de dépasser */
+.album.vignettes a,
+  .album.vignettes figcaption,
+  .album.vignettes .figcaption,
+  .album.vignettes img 			{display: table-row;}
+/* vue en liste */
+.album.liste td 			{padding-top: 0; padding-bottom: 0;}
+.album.liste tr:nth-child(2n) td	{background-color: transparent;}
+
 /* notice espace privé */
   .album.warning,
   .album.notice_prive 			{background:url('[(#CHEMIN_IMAGE{background.png})]') repeat fixed;}
@@ -229,32 +304,3 @@
 .album.notice_prive form		{float:right; opacity:.3}
 .album.notice_prive form:hover 		{opacity:1}
 .album.notice_prive form .submit	{padding:0; margin:.1em; font-size:.75em;text-transform:uppercase;}
-
-
-
-/***********/
-/* ONGLETS */
-/***********/
-
-.albums .onglets_simple.premier ul li:last-child	{margin-right:2em;}
-.albums .onglets_simple.premier strong.off {opacity:.4; border-color:#999; border-bottom:none; font-weight:normal;}
-.albums .onglets_simple.premier ul.parents 	{font-size:.9em;}
-
-.albums .filtres			{margin: .5em 0;}
-.albums .filtres li			{display:inline-block; margin:0 .5em;}
-.albums .filtres img			{padding:.2em;}
-/* survol & actif */
-.albums .filtres a			{}
-  .albums .filtres a:hover,
-  .albums .filtres .on			{opacity:1; text-decoration:none;}
-  .albums .filtres a:hover img,
-  .albums .filtres .on img		{background-color: rgba(0,0,0,.15);}
-/* off */
-.albums .filtres .off			{opacity:.35;}
-
-/* Filtres : associer */
-.albums .associer .filtres		{background-color:#GET{fond_actif}; margin:0; border:1px dotted rgba(0,0,0,.15); border-left:none; border-right:none;}
-
-.albums .filtres .info_contenu		{max-width:30em; vertical-align:top; color:#GET{foncee};}
-.albums .associer .filtres .info_contenu	{max-width:16em; color:#GET{foncee-};}
-

@@ -49,9 +49,10 @@ function formulaires_migrer_albums_verifier_dist(){
 	if (!count($erreurs) AND !_request('confirm')){
 		$where = migrer_albums_where_articles(_request('id_parent'),_request('toute_la_branche'));
 		$nba = sql_countsel("spip_articles",$where);
+		$erreurs['nb'] = $nba;
 
-		$message = _T('migreralbums:info_migration_articles')." ";
-		$message .= sinon(singulier_ou_pluriel($nba,'info_1_article','info_nb_articles'),_T('info_aucun_article'));
+		$message = sinon(singulier_ou_pluriel($nba,'info_1_article','info_nb_articles'),_T('info_aucun_article'));
+		$message .= " " ._T('migreralbums:info_migration_articles');
 
 		$erreurs['confirmer'] = $message;
 	}
@@ -72,8 +73,8 @@ function formulaires_migrer_albums_traiter_dist(){
 	// et migrer les articles
 	$nb = albums_migrer_articles($where_articles, $where_mots, $refuser);
 
-	$message = _T('migreralbums:info_migration_articles_reussi')." ";
-	$message .= sinon(singulier_ou_pluriel($nb,'info_1_article','info_nb_articles'),_T('info_aucun_article'));
+	$message = sinon(singulier_ou_pluriel($nb,'info_1_article','info_nb_articles'),_T('info_aucun_article'));
+	$message .= " " ._T('migreralbums:info_migration_articles_reussi');
 
 	return array('message_ok'=>$message);
 }
@@ -188,6 +189,7 @@ function migrer_albums_where_mots($groupes){
 	}
 
 	$where = array(sql_in('id_groupe',$id_groupe));
+
 	return $where;
 }
 

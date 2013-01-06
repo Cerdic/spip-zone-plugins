@@ -14,18 +14,19 @@ function albums_afficher_complement_objet($flux) {
 
 	$e = trouver_objet_exec($flux['args']['type']);
 	$type = $e['type'];
+	$id = intval($flux['args']['id']);
 
 	if (!$e['edition'] AND in_array(table_objet_sql($type),lire_config('albums/objets'))) {
-		$texte .= '<div id="albums" class="albums">';
+		$texte .= '<div class=\'nettoyeur\'></div>';
 		$texte .= recuperer_fond('prive/squelettes/contenu/albums_afficher_complement_objet', array(
 			'table_source' => 'albums',
 			'objet' => $type,
-			'id_objet' => intval($flux['args']['id']),
-			'associer_objet' => $type . '|' . intval($flux['args']['id'])
+			'id_objet' => $id,
+			'objet_lien' => $type,
+			'id_objet_lien' => $id,
 			),
 			array('ajax'=>true)
 		);
-		$texte .= '</div>';
 	}
 
 	if ($texte) {
@@ -40,25 +41,29 @@ function albums_afficher_complement_objet($flux) {
 
 
 /**
-* Objets associes et auteur sur la page de visualisation d'un album
+* Objets associes et auteurs sur la page de visualisation d'un album
 **/
 function albums_affiche_milieu($flux){
 	$texte = "";
 	$e = trouver_objet_exec($flux['args']['exec']);
 
 	if (!$e['edition'] AND $e['type']=='album') {
-
-		// auteur
-		$texte .= recuperer_fond('prive/squelettes/contenu/albums_affiche_milieu_auteur', array(
-			'id_album' => $flux['args'][$e['id_table_objet']]
+		$id_album = $flux['args'][$e['id_table_objet']];
+		// boite auteurs
+		$texte .= recuperer_fond('prive/objets/editer/liens', array(
+			'table_source' => 'auteurs',
+			'objet' => 'album',
+			'id_objet' => $id_album
 		));
-
-		// objets associes
-		$texte .= recuperer_fond('prive/squelettes/contenu/albums_affiche_milieu_objets_lies', array(
-			'id_album' => $flux['args'][$e['id_table_objet']]
-			),
-			array('ajax'=>true)
-		);
+		// boite objets associes (inseree uniquement si liens presents)
+		if (lister_objets_lies('*','album',$id_album,'album')){
+			$texte .= recuperer_fond('prive/squelettes/contenu/albums_affiche_milieu_objets_lies', array(
+				'id_album' => $id_album,
+				'test' => $test
+				),
+				array('ajax'=>true)
+			);
+		}
 	}
 
 	if ($texte) {

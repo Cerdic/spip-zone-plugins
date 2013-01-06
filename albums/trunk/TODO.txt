@@ -3,12 +3,8 @@ A faire avant passage à l'état "en test"
 et publication d'un article sur spip-contrib
 ============================================
 
-- critère "contenu"
-  pouvoir sélectionner les albums en fonction des médias qu'ils contiennent
-  {contenu = video}
-  {contenu IN audio,video}
-  {contenu} -> albums non vides (ou alors {contenu != ''})
-  {!contenu} -> albums vides
+- critère {contenu}
+  contenu=0 doit être équivalent à !contenu
 
 - autorisations : verifier si tout est ok.
   * un admin doit pouvoir tout faire

@@ -3,7 +3,8 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * critere {orphelins} selectionne les albums sans liens avec un objet editorial
+ * critere {orphelins}
+ * selectionne les albums sans liens avec un objet editorial
  *
  * @param string $idb
  * @param object $boucles
@@ -16,10 +17,10 @@ function critere_ALBUMS_orphelins_dist($idb, &$boucles, $crit) {
 	$not = $crit->not?"":"NOT";
 
 	$select = sql_get_select("DISTINCT id_album","spip_albums_liens as oooo");
-	$where = "'".$boucle->id_table.".id_album $not IN ($select)'";
+	$where = "'" .$boucle->id_table.".id_album $not IN ($select)'";
 	if ($cond){
 		$_quoi = '@$Pile[0]["orphelins"]';
-		$where = "($_quoi)?$where:''";
+		$where = "($_quoi) ? $where : ''";
 	}
 
 	$boucle->where[]= $where;
@@ -27,97 +28,302 @@ function critere_ALBUMS_orphelins_dist($idb, &$boucles, $crit) {
 
 
 /**
- * Retirer une valeur d'un tabeau
- * param array $table_balise
- * param string $valeur
+ * critere {contenu}
+ * selectionne les albums en fonction de leur contenu (image, audio, file, video)
+ * 	{contenu} -> albums remplis
+ * 	{!contenu} -> albums vides
+ * 	{contenu xxx} -> albums contenant des xxx : medias sous forme de regexp
+ * 	en fonction de la valeur de *contenu* dans l environnement :
+ * 	oui : albums remplis
+ * 	non : albums vides
+ * 	xxx -> albums contenant des xxx : medias sous forme de regexp
  *
- * exemple : #GET{tableau}|table_retirer_valeur{'valeur'}
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
  */
-function table_retirer_valeur($table_balise, $valeur){
+function critere_ALBUMS_contenu_dist($idb, &$boucles, $crit) {
 
-	$valeur = (string)$valeur;
-	unset($table_balise[array_search($valeur, $table_balise)]); # supprime la valeur du tableau
+	$boucle = &$boucles[$idb];
+	$cond = $crit->cond;
+	$not = $crit->not ? "NOT" : "";
+	// par defaut, parametre adjacent au critere, sinon parametre present dans l environnement
+	if (isset($crit->param[0]))
+		$_media = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	else
+		$_media = $_env = '@$Pile[0]["contenu"]';
 
-	return $table_balise;
+	$where = "'" .$boucle->id_table.".id_album $not IN ('.albums_calculer_critere_contenu_select($_media).')'";
+	if ($cond)
+		$where = "($_env) ? $where : ''";
+
+	$boucle->where[]= $where;
+
 }
 
 
 /**
- * Filtre permettant de permuter un element d une chaine sous forme de liste concatenee A|B|C|D
- * Permuter, c est a dire retirer l element s il est present dans la chaine, et inversement l ajouter s il est absent.
- * Il s utilise a priori en complement du filtre |parametre_url
+ * fonction privee pour le calcul du critere {contenu}
+ * renvoie un sql select en fonction des documents lies au albums
+ * 
+ * note : la selection des albums vides (avec contenu=non) fait une requete a rallonge... a revoir
  *
- * Exemple d utilisation : l adresse de la page contient ?fruits=pomme|poire|melon
- * On souhaite qu'un lien recharge la page en permutant le parametre "poire"
- * On definit le lien ainsi : #SELF|parametre_url{fruits, #ENV{fruits}|permuter_parametre{poire}}
- * Le premier clic va renvoyer pomme|melon, le second clic pomme|melon|poire et ainsi de suite 
- * On peut eventuellement forcer l action a effectuer (ajouter ou retirer) et preciser le delimiteur (par defaut, un pipe)
- *
- * @param string $balise
- * @param string $parametre
- * 		le ou les parametres a retirer ou a ajouter, separes par un delimiteur : param1|param2|param3...
- * @param string $delimiteur
- *		(optionnel) caractere separant les parametres : |/-, etc.
- * @param string $action
- *		(optionnel) action a effectuer : permuter, ajouter, retirer
- *
- * exemples
- * #VAL{A|B|C|D}|permuter_parametre{B} -> A|C|D
- * #VAL{A|B|C|D}|permuter_parametre{B|C} -> A|D
- * #VAL{A|B|C|D}|permuter_parametre{B,retirer} -> A|C|D
- * #VAL{A|B|C|D}|permuter_parametre{B,ajouter} -> A|B|C|D  (aucun effet)
- * #VAL{A-B-C-D}|permuter_parametre{B-D,permuter,-} -> A|C
+ * @param string $media		types de medias contenus dans les albums, separes par des virgules
+ * @return string		select
  */
-function permuter_parametre($balise, $parametre, $action='permuter', $delimiteur='|'){
+function albums_calculer_critere_contenu_select ($media='') {
 
-	$parametre = (string)$parametre;
-	$table_balise = explode($delimiteur, $balise); # tableau des anciens parametres
-	$table_parametres = explode($delimiteur, $parametre); # tableau des nouveaux parametres
-
-	if ($parametre) {
-		switch ($action) {
-			case 'permuter':
-				foreach ($table_parametres as $parametre){
-					if (!empty($balise)){
-						// si le parametre est present, on le retire...
-						if (in_array($parametre, $table_balise)) {
-							unset($table_balise[array_search($parametre, $table_balise)]); # supprime le parametre du tableau
-							$balise = implode($delimiteur, $table_balise); # recree la liste
-						}
-						// ...et inversement
-						else {
-							array_push($table_balise, $parametre);
-							$balise = implode($delimiteur, $table_balise);
-						}
-					}
-					else {
-						$balise = $parametre;
-					}
-				}
-				break;
-			case 'retirer':
-				foreach ($table_parametres as $parametre){
-					if (!empty($balise) AND in_array($parametre, $table_balise)){
-						unset($table_balise[array_search($parametre, $table_balise)]);
-						$balise = implode($delimiteur, $table_balise);
-					}
-				}
-				break;
-			case 'ajouter':
-				foreach ($table_parametres as $parametre){
-					if (!empty($balise)){
-						array_push($table_balise, $parametre);
-						$balise = implode($delimiteur, $table_balise);
-					}
-					else {
-						$balise = $parametre;
-					}
-				}
-				break;
+	// albums contenant un type de media en particulier
+	if ($media AND preg_match('#image|audio|video|file#', $media)) {
+		$select = sql_get_select(
+			"DISTINCT(id_album)",
+			array(
+				"spip_documents AS docs",
+				"spip_documents_liens AS liens",
+			),
+			array(
+				"liens.objet = 'album'",
+				"liens.id_objet = id_album",
+				"docs.id_document = liens.id_document",
+				"docs.media REGEXP " . sql_quote($media)
+			)
+		);
+	// albums pleins ou vides
+	} else if (!$media OR in_array($media, array('oui','non'))) {
+		// albums pleins : contenant au moins un document
+		$select_pleins = sql_get_select(
+			"DISTINCT liens.id_objet AS id_album",
+			"spip_documents_liens AS liens",
+			"liens.objet = 'album'"
+		);
+		if (!$media OR ($media == 'oui')) {
+			$select = $select_pleins;
+		}
+		// albums vides
+		if ($media == 'non') {
+			$select = sql_get_select(
+				"DISTINCT(id_album)",
+				"spip_albums AS albums",
+				"id_album NOT IN ($select_pleins)"
+			);
 		}
 	}
 
-	return $balise;
+	return $select;
+}
+
+
+/**
+ * Fonction privee generant un tableau qui contient les types de medias presents dans un album, et leur nombre
+ * exemple: array(file=>5, image=>2, ...)
+ *
+ * @param string $id_album	identifiant de l'album
+ * @param boolean $grouper	grouper les types de media ?
+ * @return array		tableau des types de medias contenus
+ * 				array ( media => nombre, ... )
+ */
+function album_determiner_contenu($id_album) {
+	if (intval($id_album)){
+
+		// selection des medias (sans doublons) contenus dans les documents lies a l album
+		// select from where groupby orderby limit having
+		$res_medias = sql_select(
+			array(
+				"docs.media AS media",
+				"COUNT(*) AS nombre"
+			),
+			array(
+				"spip_documents AS docs", 
+				"spip_documents_liens AS lien", 
+				"spip_albums AS albums"
+			),
+			array(
+				"docs.id_document = lien.id_document",
+				"lien.objet = 'album'",
+				"albums.id_album = lien.id_objet", 
+				"albums.id_album = $id_album"
+			),
+			"media", 
+			"media DESC"
+		);
+
+		// tableau
+		while ($row = sql_fetch($res_medias)) {
+			$medias[$row['media']] = $row['nombre']; // (file => 5, image => 2, ...)
+		}
+	}
+
+	return $medias;
+}
+
+
+/**
+ * filtre |album_contenu
+ * Renvoie des infos sur les types de medias contenus dans un album (image, audio, video, file).
+ * Simplifie la vie pour l ecriture des squelettes.
+ * On peut avoir :
+ * 	true ou false pour savoir si l'album est vide ou pas
+ * 	une liste simple des types de media
+ * 	une liste detaillee (icone + nombre pour chaque type de media)
+ * 	les icones des types de media
+ * 	une qualification du contenu pour choisir le fichier du logo (vide, mixte, ou type de media)
+ *
+ * @param string $id_album	identifiant de l'album
+ * @param string $info		'', 'liste', 'liste_detaillee', 'logo'
+ * @param string $format	'', 'tableau' : format du retour
+ * @return string/array/boolean
+ */
+function filtre_album_contenu($id_album, $info='', $format='') {
+	if (intval($id_album)){
+
+		$medias = array();
+		$medias = album_determiner_contenu($id_album); // renvoit array(media=>nb, ...)
+
+		switch ($info){
+
+			// qualification de l album en fonction des medias (vide, mixte ou type de media)
+			case 'logo';
+				$nb_types = count($medias);
+				echo $medias[0];
+				if ($nb_types == 0)
+					$retour = 'vide';
+				if ($nb_types == 1)
+					$retour = key($medias);
+				/*if ($nb_types > 1)
+					$retour = 'mixte';*/
+				break;
+
+			// liste des medias
+			case 'liste';
+				if (!empty($medias)) {
+					if ($format=='tableau') {
+						$retour = array_keys($medias);
+					} else {
+						$retour = '<ul>';
+						foreach ($medias AS $media=>$nombre) {
+							$retour .= '<li>'
+								. _T('medias:media_'.$media)
+								. '</li>';
+						}
+						$retour .= '</ul>';
+					}
+				}
+				break;
+
+			// liste des medias
+			case 'liste_detaillee';
+				if (!empty($medias)) {
+					if ($format == 'tableau') {
+						$retour = $medias;
+					} else {
+						$balise_img = charger_filtre('balise_img');
+						include_spip('inc/filtres');
+						$retour = '<ul>';
+						foreach ($medias AS $media=>$nombre) {
+							$retour .= '<li>'
+								. $balise_img(chemin_image('media-'. $media . '-16.png'))
+								. '&nbsp;'. singulier_ou_pluriel($nombre, 'medias:un_'.$media, 'medias:des_'.$media.'s') 
+								. '</li>';
+						}
+						$retour .= '</ul>';
+					}
+				}
+				break;
+
+			// liste des medias
+			case 'icones';
+				if (!empty($medias)) {
+					$balise_img = charger_filtre('balise_img');
+					include_spip('inc/filtres');
+					$retour = '<ul>';
+					foreach ($medias AS $media=>$nombre) {
+						$retour .= inserer_attribut($balise_img(chemin_image('media-'. $media . '-24.png')),'title', _T('medias:media_'.$media));
+					}
+					$retour .= '</ul>';
+				}
+
+				break;
+
+			// vrai ou faux
+			default;
+				if (empty($medias))
+					$retour = false;
+				else
+					$retour = true;
+				break;
+				
+
+		}
+
+	}
+
+	return $retour;
+}
+
+
+/**
+ * filtre |album_liaison
+ * Renvoie des infos sur les objet lies a un album.
+ * Simplifie la vie pour l ecriture des squelettes.
+ * On peut avoir :
+ * 	une liste (+icone)
+ * 	une liste compacte (regroupement par objets) (+icone)
+ * 	le nombre total d objets lies
+ *
+ * @param string $id_album	identifiant de l'album
+ * @param string $info		liste, liste_icone, liste_compacte, liste_compacte_icone, nombre
+ * @return string
+ */
+function filtre_album_liaison($id_album, $format='liste') {
+
+	include_spip('action/editer_liens');
+
+	if ($res= objet_trouver_liens(array('album'=>intval($id_album)),array('*'=>'*'))) {
+		while ($row = array_shift($res)) {
+			$liste[] = array($row['objet'], $row['id_objet']);
+			//$objets[] = $row['objet'];
+		}
+
+		// liste simple
+		if (in_array($format, array('liste','liste_icone'))) {
+			$retour = "<ul>";
+			foreach ($liste as $k=>$v) {
+				$objet = $v[0];
+				$id_objet = $v[1];
+				$icone = ($format == "liste_icone") ? objet_icone($objet, 16) . '&nbsp;' : '';
+				$retour .= "<li>"
+					. "<a href='".generer_url_entite($id_objet, $objet)."'>"
+					. $icone
+					. $objet
+					. "&nbsp;n°"
+					. $id_objet
+					. "</a>"
+					. "<li>";
+			};
+			$retour .= "</ul>";
+		}
+		// liste compacte
+		else if (in_array($format, array('liste_compacte','liste_compacte_icone'))) {
+			foreach ($liste as $k){
+				$objets[] = $k[0];
+			}
+			$retour = "<ul>";
+			foreach (array_count_values($objets) as $k=>$v) {
+				$icone = ($format == "liste_compacte_icone") ? objet_icone($k, 16) . '&nbsp;' : '';
+				$retour .= "<li>"
+					. $icone
+					. singulier_ou_pluriel($v, objet_info($k,'info_1_objet'), objet_info($k, 'info_nb_objets'))
+					. "</li>";
+			}
+			$retour .= "</ul>";
+		}
+		// nombre
+		else if ($format == 'nombre') {
+			$retour = count($liste) . " objets";
+		}
+	}
+
+	return $retour;
 }
 
 
