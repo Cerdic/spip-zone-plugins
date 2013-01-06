@@ -1,9 +1,10 @@
 <paquet
 	prefix="c2f"
 	categorie="multimedia"
-	version="0.1.1"
+	version="0.2.0"
+	schema="0.1.1"	
 	etat="dev"
-	compatibilite="[2.1.10;["
+	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="images/c2f-64.png"
 >	
 
