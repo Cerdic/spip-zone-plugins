@@ -105,9 +105,13 @@ function inc_saveauto_dist($tables=array(), $options=array()) {
 					// requete de creation de la table
 					$query = "SHOW CREATE TABLE $_table";
 					$resCreate = mysql_query($query);
-					$row = mysql_fetch_array($resCreate);
-					$schema = $row[1].";";
-					$contenu .= "$schema\n"."\n";
+					if ($resCreate) {
+						$row = mysql_fetch_array($resCreate);
+						if ($row) {
+							$schema = $row[1].";";
+							$contenu .= "$schema\n"."\n";
+						}
+					}
 				}
 				// sauve les donnees
 				if ($donnees) {
