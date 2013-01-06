@@ -71,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ',
 	'entree_sousrub_cond' => 'فقط نمايش زيربخش‌هاي بخش فعلي (بگذاريد «بله»، در غيراينصورت خالي بگذاريد)',
 	'entree_suivant_connexion' => 'منحصر سازي مدخل بعدي به اتصال (بگذاريد «اتصال» براي نمايش فقط اگر بازديد كننده متصل باشد، بگذاريد «قطع» براي مورد عكس، يا خالي بگذاريد تا هميشه نشان داده شود).
-',
+', # MODIF
 	'entree_suivant_connexion_connecte' => 'فقط اگر متصل باشد',
 	'entree_suivant_connexion_deconnecte' => 'فقط اگر قطع باشد',
 	'entree_sur_n_articles' => '@n@ مقاله‌ي منتشره',
