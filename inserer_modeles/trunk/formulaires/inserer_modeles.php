@@ -104,8 +104,8 @@ function formulaires_inserer_modeles_traiter_dist() {
 		}
 		set_request('_code_modele',$code);
 
-		// pour inserer la balise dans le texte en faisant un double clic
-		$codejs = "barre_inserer('$code', $('textarea[name=texte]')[0]);";
+		// js pour inserer la balise dans le texte en faisant un double clic
+		$codejs = "barre_inserer('".texte_script($code)."', $('textarea[name=texte]')[0]);";
 		set_request('_js_ondblclick',$codejs);
 
 		return array('message_ok' => _T('inserer_modeles:message_copier_code'));
