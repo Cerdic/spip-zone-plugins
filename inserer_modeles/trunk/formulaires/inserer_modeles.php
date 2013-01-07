@@ -32,6 +32,8 @@ function formulaires_inserer_modeles_charger_dist($formulaire_modele,$modalbox,$
 		$contexte['_saisies'] = $infos_modele['parametres'];
 		if (_request('_code_modele'))
 			$contexte['_code_modele'] = _request('_code_modele');
+		if (_request('_js_ondblclick'))
+			$contexte['_js_ondblclick'] = _request('_js_ondblclick');
 	}
 	
 	if ($modalbox!='') {
@@ -101,6 +103,11 @@ function formulaires_inserer_modeles_traiter_dist() {
 			$code .= '>';
 		}
 		set_request('_code_modele',$code);
+
+		// pour inserer la balise dans le texte en faisant un double clic
+		$codejs = "barre_inserer('$code', $('textarea[name=texte]')[0]);";
+		set_request('_js_ondblclick',$codejs);
+
 		return array('message_ok' => _T('inserer_modeles:message_copier_code'));
 	}
 }
