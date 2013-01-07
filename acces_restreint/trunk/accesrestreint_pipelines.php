@@ -57,31 +57,41 @@ function accesrestreint_affiche_gauche($flux) {
  * @return array
  */
 function accesrestreint_page_indisponible($contexte){
-	if ($contexte['status']=='404' AND isset($contexte['type'])){
-		$objet = $contexte['type'];
-		$table_sql = table_objet_sql($objet);
-		$id_table_objet = id_table_objet($objet);
-		if ($id = intval($contexte[$id_table_objet])){
+	if ($contexte['status']=='404'){
+		$objet = "";
+		if (isset($contexte['type'])) $objet = $contexte['type'];
+		elseif (isset($contexte['type-page'])) $objet = $contexte['type-page'];
+		elseif(isset($contexte['fond_erreur'])) {
+			define('_DEFINIR_CONTEXTE_TYPE_PAGE',true);
+			$c2 = $contexte;
+			list($fond2,$c2,$url_redirect) = urls_decoder_url(nettoyer_uri(),$contexte['fond_erreur'],$c2,true);
+			$objet = $c2['type-page'];
+		}
+		if ($objet){
+			$table_sql = table_objet_sql($objet);
+			$id_table_objet = id_table_objet($objet);
+			if ($id = intval($contexte[$id_table_objet])){
 
-			$publie = true;
-			$restreint = false;
+				$publie = true;
+				$restreint = false;
 
-			$trouver_table = charger_fonction('trouver_table','base');
-			$desc = $trouver_table($table_sql);
-			if (isset($desc['field']['statut'])){
-				$statut = sql_getfetsel('statut', $table_sql, "$id_table_objet=".intval($id));
-				if ($statut!='publie')
-					$publie = false;
-			}
-			
-			include_spip('inc/autoriser');
-			if ($publie AND !autoriser('voir',$objet,$id)){
-				// c'est un contenu restreint
-				$contexte['status'] = '401';
-				$contexte['code'] = '401 Unauthorized';
-				$contexte['fond'] = '401';
-				$contexte['erreur'] = _T('accesrestreint:info_acces_restreint');
-				$contexte['cible'] = self();
+				$trouver_table = charger_fonction('trouver_table','base');
+				$desc = $trouver_table($table_sql);
+				if (isset($desc['field']['statut'])){
+					$statut = sql_getfetsel('statut', $table_sql, "$id_table_objet=".intval($id));
+					if ($statut!='publie')
+						$publie = false;
+				}
+
+				include_spip('inc/autoriser');
+				if ($publie AND !autoriser('voir',$objet,$id)){
+					// c'est un contenu restreint
+					$contexte['status'] = '401';
+					$contexte['code'] = '401 Unauthorized';
+					$contexte['fond'] = '401';
+					$contexte['erreur'] = _T('accesrestreint:info_acces_restreint');
+					$contexte['cible'] = self();
+				}
 			}
 		}
 	}
