@@ -73,14 +73,18 @@ function accesrestreint_page_indisponible($contexte){
 			if ($id = intval($contexte[$id_table_objet])){
 
 				$publie = true;
-				$restreint = false;
-
-				$trouver_table = charger_fonction('trouver_table','base');
-				$desc = $trouver_table($table_sql);
-				if (isset($desc['field']['statut'])){
-					$statut = sql_getfetsel('statut', $table_sql, "$id_table_objet=".intval($id));
-					if ($statut!='publie')
-						$publie = false;
+				if (include_spip("base/objets")
+				  AND function_exists("objet_test_si_publie")){
+					$publie = objet_test_si_publie($objet,$id);
+				}
+				else {
+					$trouver_table = charger_fonction('trouver_table','base');
+					$desc = $trouver_table($table_sql);
+					if (isset($desc['field']['statut'])){
+						$statut = sql_getfetsel('statut', $table_sql, "$id_table_objet=".intval($id));
+						if ($statut!='publie')
+							$publie = false;
+					}
 				}
 
 				include_spip('inc/autoriser');
@@ -91,6 +95,10 @@ function accesrestreint_page_indisponible($contexte){
 					$contexte['fond'] = '401';
 					$contexte['erreur'] = _T('accesrestreint:info_acces_restreint');
 					$contexte['cible'] = self();
+					if (!isset($contexte['objet'])){
+						$contexte['objet'] = $objet;
+						$contexte['id_objet'] = $id;
+					}
 				}
 			}
 		}
