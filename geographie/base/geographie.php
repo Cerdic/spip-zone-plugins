@@ -4,6 +4,7 @@
 function geographie_declarer_tables_principales($tables_principales){
 	$spip_geo_pays = array(
 			"id_pays"	=> "smallint NOT NULL",
+			"code"	=> "varchar(2) default '' NOT NULL",
 			"nom"	=> "text DEFAULT '' NOT NULL",
 	);
 	$spip_geo_pays_key = array(
@@ -73,6 +74,7 @@ function geographie_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['geo_departements'] = 'geo_departements';
 	$interface['table_des_tables']['geo_arrondissements'] = 'geo_arrondissements';
 	$interface['table_des_tables']['geo_communes'] = 'geo_communes';
+
 
 	return $interface;
 }
