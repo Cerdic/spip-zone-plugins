@@ -1,0 +1,11 @@
+
+
+// TODO.txt
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+
+
+- interface edition des citations en espace privé avec possibilité de déléguer à un auteur ;

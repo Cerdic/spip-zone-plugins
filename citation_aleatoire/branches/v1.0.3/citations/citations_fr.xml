@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE citations[
+	<!ELEMENT citations (citation)*>
+	<!ELEMENT citation (auteur,texte)>
+	<!ELEMENT auteur (#PCDATA)>
+	<!ELEMENT texte (#PCDATA)>
+]>
+<citations>
+	<citation>
+		<auteur>Victor Hugo</auteur>
+		<texte>L&#39;Homme est une prison o&#249; l&#39;&#194;me reste libre.</texte>
+	</citation>
+	<citation>
+		<auteur>Pierre Desproges</auteur>
+		<texte>En cas de morsure de vip&#232;re, sucez-vous le genou, &#231;a fait marrer les &#233;cureuils.</texte>
+	</citation>
+	<citation>
+		<auteur>Chateaubriand</auteur>
+		<texte>La m&#233;moire est souvent la qualit&#233; de la sottise.</texte>
+	</citation>
+	<citation>
+		<auteur>Pierre Dac</auteur>
+		<texte>Ce n&#39;est pas le tout d&#39;&#234;tre une femme du monde. Encore faut-il savoir de quel monde il s&#39;agit.</texte>
+	</citation>
+	<citation>
+		<auteur>Pierre Dac</auteur>
+		<texte>A l&#39;inverse des hommes, l&#39;oc&#233;an se retire pour que la mer garde ses poissons.</texte>
+	</citation>
+	<citation>
+		<auteur>Alfred de Musset</auteur>
+		<texte>Qu&#39;importe le flacon, pourvu qu&#39;on ait l&#39;ivresse.</texte>
+	</citation>
+	<citation>
+		<auteur>Michel Audiard</auteur>
+		<texte>L&#39;id&#233;al quand on veut &#234;tre admir&#233;, c&#39;est d&#39;&#234;tre mort.</texte>
+	</citation>
+	<citation>
+		<auteur>Michel Audiard</auteur>
+		<texte>Les cons &#231;a ose tout. C&#39;est m&#234;me &#224; &#231;a qu&#39;on les reconna&#238;t.</texte>
+	</citation>
+	<citation>
+		<auteur>Michel Audiard</auteur>
+		<texte>La d&#233;mocratie est le pire des r&#233;gimes, &#224; l&#39;exception de tous les autres.</texte>
+	</citation>
+	<citation>
+		<auteur>Emile Zola</auteur>
+		<texte>Savoir o&#249; l&#39;on veut aller, c&#39;est tr&#232;s bien. Mais il faut encore montrer qu&#39;on y va.</texte>
+	</citation>
+	<citation>
+		<auteur>Jules Renard (Journal) </auteur>
+		<texte>Il y a des moments o&#249; tout r&#233;ussit. Il ne faut pas s&#39;effrayer : &#231;a passe.</texte>
+	</citation>
+	<citation>
+		<auteur>Albert Einstein</auteur>
+		<texte>Un probl&#232;me sans solution est un probl&#232;me mal pos&#233;.</texte>
+	</citation>
+	<citation>
+		<auteur>Albert Einstein</auteur>
+		<texte>Une personne qui n&#39;a jamais commis d&#39;erreurs n&#39;a jamais tent&#233; d&#39;innover.</texte>
+	</citation>
+	<citation>
+		<auteur>Albert Einstein</auteur>
+		<texte>C&#39;est le devoir de chaque homme de rendre au monde au moins autant qu&#39;il en a re&#231;u.</texte>
+	</citation>
+	<citation>
+		<auteur>Joanne Rowling</auteur>
+		<texte>Pour un esprit &#233;quilibr&#233;, la mort n&#39;est qu&#39;une grande aventure de plus.</texte>
+	</citation>
+	<citation>
+		<auteur>Joseph Joubert</auteur>
+		<texte>Le but n&#39;est pas toujours plac&#233; pour &#234;tre atteint, mais pour servir de point de mire.</texte>
+	</citation>
+	<citation>
+		<auteur>Eug&#232;ne Labiche</auteur>
+		<texte>Ce n&#39;est pas pour me vanter, mais il fait rudement chaud.</texte>
+	</citation>
+	<citation>
+		<auteur>Abb&#233; Pierre</auteur>
+		<texte>On n&#39;est jamais heureux que dans le bonheur qu&#39;on donne. Donner, c&#39;est recevoir.</texte>
+	</citation>
+	<citation>
+		<auteur>Joanne Rowling</auteur>
+		<texte>Ce sont nos choix qui montrent ce que nous sommes vraiment, beaucoup plus que nos aptitudes.</texte>
+	</citation>
+	<citation>
+		<auteur>Albert Einstein</auteur>
+		<texte>Si les faits ne correspondent pas &#224; la th&#233;orie, changez les faits.</texte>
+	</citation>
+	<citation>
+		<auteur>Woody Allen</auteur>
+		<texte>L&#39;&#233;ternit&#233; c&#39;est long, surtout vers la fin.</texte>
+	</citation>
+	<citation>
+		<auteur>Romain Gary (Au-del&#224; de cette limite...)</auteur>
+		<texte>Les hommes vieillissent toujours mal quand ils restent jeunes.</texte>
+	</citation>
+	<citation>
+		<auteur>Lao-Tseu</auteur>
+		<texte>L'homme qui ne tente rien ne se trompe qu'une fois.</texte>
+	</citation>
+	<citation>
+		<auteur>Proverbe chinois</auteur>
+		<texte>Quand on a dix pas &#224; faire, neuf font la moiti&#233; du chemin.</texte>
+	</citation>
+	<citation>
+		<auteur>Proverbe japonais</auteur>
+		<texte>Aucune route n&#39;est longue &#224; côt&#233; d&#39;un ami.</texte>
+	</citation>
+	<citation>
+		<auteur>Pierre Desproges</auteur>
+		<texte>L&#39;amour... il y a ceux qui en parlent et il y a ceux qui le font. A partir de quoi il m&#39;appara&#238;t urgent de me taire.</texte>
+	</citation>
+	<citation>
+		<auteur>Christophe Colomb</auteur>
+		<texte>On ne va jamais aussi loin que lorsqu&#39;on ne sait pas o&#249; l&#39;on va.</texte>
+	</citation>
+	<citation>
+		<auteur>Diction africain</auteur>
+		<texte>Quand un vieillard meurt, c&#39;est une biblioth&#232;que qui br&#251;le.</texte>
+	</citation>
+	<citation>
+		<auteur>Paul Val&#233;ry (Mauvaises pens&#233;es)</auteur>
+		<texte>Ce qui est simple est toujours faux. Ce qui ne l&#39;est pas est inutilisable.</texte>
+	</citation>
+	<citation>
+		<auteur>Jean Racine</auteur>
+		<texte>Il n&#39;est point de secret que le temps ne r&#233;v&#232;le.</texte>
+	</citation>
+	<citation>
+		<auteur>Proverbe chinois</auteur>
+		<texte>Si per&#231;ante soit la vue, on ne se voit jamais de dos.</texte>
+	</citation>
+	<citation>
+		<auteur>Paul Laffitte</auteur>
+		<texte>Un idiot pauvre est un idiot, un idiot riche est un riche.</texte>
+	</citation>
+	<citation>
+		<auteur>Proverbe africain</auteur>
+		<texte>Un seul arbre qui tombe fait plus de bruit qu'une forêt qui pousse.</texte>
+	</citation>
+	<citation>
+		<auteur>Fran&#231;ois Rabelais</auteur>
+		<texte>Science sans conscience n&#8217;est que ruine de l&#8217;&#226;me.</texte>
+	</citation>
+</citations>

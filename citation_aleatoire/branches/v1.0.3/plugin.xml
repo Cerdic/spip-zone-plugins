@@ -1,0 +1,32 @@
+<plugin>
+	<nom>Citation al&#233;atoire</nom>
+	<slogan>Gestionnaire de citations</slogan>
+	<auteur>paladin@quesaco.org</auteur>
+	
+	<version>1.0.3</version>
+	
+	<etat>stable</etat>
+	
+	<description>
+		Placer la balise <code>#CITATION</code> dans vos squelettes pour faire appara&#238;tre une citation choisie al&#233;atoirement
+		dans le fichier de citations (citations_fr.xml).
+	</description>
+	
+	<lien>http://www.quesaco.org/Citation-aleatoire</lien>
+	
+	<prefix>cital</prefix>
+	
+	<icon>images/cital-64.png</icon>
+	
+	<options>cital_options.php</options>
+	<fonctions>cital_fonctions.php</fonctions>
+	
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>inc/cital_pipeline_insert_head.php</inclure>
+	</pipeline>
+	
+	<categorie>edition</categorie>
+	<necessite id='spip' version='[1.9.1;2.1.99]' />
+	
+</plugin>
