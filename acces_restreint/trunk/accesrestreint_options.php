@@ -11,7 +11,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 if (isset($GLOBALS['meta']["accesrestreint_base_version"])){
 	// Si on n'est pas connecte, aucune autorisation n'est disponible
 	// pas la peine de sortir la grosse artillerie
-	if (!isset($GLOBALS['auteur_session']['id_auteur'])){
+	if (!isset($GLOBALS['visiteur_session']['id_auteur'])){
 		$GLOBALS['accesrestreint_zones_autorisees'] = '';
 	}
 	else {
