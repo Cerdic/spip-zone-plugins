@@ -1,0 +1,36 @@
+[(#REM) 
+
+  Sélection d'un album (sélecteur de type radio)
+
+  Parametres :
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+  - contenu : medias contenus dans l'album
+  - orphelins : 0 ou 1
+  - statut : prepa, publie, poubelle
+  - pagination : nombre pour pagination
+  - afficher : #LISTE des colonnes a afficher : statut, logo, id, titre, infos, descriptif, contenu
+  
+  Exemple d'appel :
+	[(#SAISIE{selecteur_album, id_modele,
+		contenu=image,
+		orphelins=1,
+		pagination=5})] 
+]
+
+#SET{valeur, #ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}
+
+<div class='albums'>
+[(#INCLURE{fond=prive/squelettes/inclure/albums_navigation_listes,
+	liste=selecteur,
+	colonnes=#ENV{afficher,#LISTE{id, titre}},
+	actions=#LISTE{choisir},
+	statut=#ENV{statut,publie},
+	contenu=#ENV{contenu,oui},
+	orphelins,
+	nb=#ENV{pagination,5},
+	nom_radio=#ENV{nom},
+	valeur_radio=#GET{valeur}}
+	{ajax}
+)]
+</div>

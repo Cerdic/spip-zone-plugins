@@ -2,7 +2,7 @@
 	<h3 class="titrem"><:migreralbums:titre_migrer_albums:></h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
-	[(#ENV{editable}|oui)
+	<BOUCLE_editable(CONDITION){si #ENV{editable}}>
 	<form method='post' action='#ENV{action}'><div>
 		[(#REM) déclarer les hidden qui déclencheront le service du formulaire
 		paramètre : url d'action ]
@@ -21,20 +21,31 @@
 			 </li>]
 
 			[(#SAISIE{case, toute_la_branche,
-				label_case=<:migreralbums:label_toute_la_branche_oui:>}
+				label_case=<:migreralbums:label_toute_la_branche_oui:>,
+				li_class=long_label}
 			)]
 
 			[(#SAISIE{case, refuser_articles,
-				label_case=<:migreralbums:label_refuser_articles_oui:>}
+				label_case=<:migreralbums:label_refuser_articles_oui:>,
+				li_class=long_label}
 			)]
 
-			[(#SAISIE{groupe_mots, groupes_mots,
-				table_liaison=albums,
-				label=<:migreralbums:label_groupes_mots:>,
-				multiple=oui,
-				size=4,
-				class=chosen}
-			)]
+			[(#REM) CHOIX DES GROUPES DE MOTS ]
+			#SET{name,groupes_mots}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<B_gr>
+			<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				<BOUCLE_gr(GROUPES_MOTS){par num titre,titre}{si #ENV{editable}}>
+				#SET{val,#ID_GROUPE}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}#EVAL{chr(91)}#EVAL{chr(93)}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">#TITRE (<:info_numero_abbreviation:> #ID_GROUPE)</label>
+				</div>
+				</BOUCLE_gr>
+			</li>
+			</B_gr>
 
 		</ul>
 
@@ -55,5 +66,5 @@
 		]
 
 	</div></form>
-	]
+	</BOUCLE_editable>
 </div>

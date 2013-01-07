@@ -1,13 +1,17 @@
 [(#REM)
 	Affiche une liste d'albums
 	Paramètres d'inclusion :
-		liste (texte)		associer ou galerie ou selecteur
+
+		==> selection des albums
 		exclus (tableau d'ids)
-		statut (texte)		prepa|publie|poubelle
-		navigation (liste)	parents, divers, contenus
-		header (liste)		tri, thead
+		statut (texte)		prepa, publie, poubelle
+
+		==> affichage
+		liste (texte)		albumotheque, associer, selecteur
+		header (liste)		tri, thead, recherche
 		colonnes (liste)	statut, logo, id, titre, infos, descriptif, contenu
-		actions (liste)		associer, dissocier, choisir
+		actions (liste)		associer, choisir
+
 ][(#REM)
 	inclus dans /prive/squelettes/contenu/albums_afficher_complement_objet.html
 	inclus dans /prive/squelettes/inclure/albums_navigation_listes.html
@@ -29,7 +33,7 @@
 <BOUCLE_actions(DATA){liste #ENV{actions}}>
 #SET{#VAL{action_}|concat{#VALEUR},oui}
 </BOUCLE_actions>
-#SET{liste, #ENV{liste,galerie}}
+#SET{liste, #ENV{liste,albumotheque}}
 
 
 <B_albums>
@@ -40,29 +44,27 @@
 		[(#GRAND_TOTAL|singulier_ou_pluriel{album:info_resultat_recherche_un,album:info_resultat_recherche_plus})],
 		[(#GRAND_TOTAL|objet_afficher_nb{album})]
 	})</h2>]
-	[(#GRAND_TOTAL|>{#ENV{nb}}|ou{#ENV{recherche}}|ou{#GET{header_recherche}}|oui)
+	[(#GRAND_TOTAL|>{#ENV{nb}}|ou{#ENV{recherche}}|et{#GET{header_recherche}}|oui)
 		#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 	]
 </div>
 
-<div class="[(#GET{liste}|!={galerie}|oui)liste-objets ][(#GET{liste})]">
+<div class="liste-objets[ (#GET{liste})]">
 
-	[(#ENV{liste}|=={galerie}|ou{#GET{header_tri}}|oui)
-	<navigation>
 	[(#GET{header_tri}|oui)
-	<div class='pagination tri'>
-		[(#TRI{'>', #CHEMIN_IMAGE{tri-asc-16.png}|balise_img{<:par_tri_croissant:>}})]
-		[(#TRI{'<', #CHEMIN_IMAGE{tri-desc-16.png}|balise_img{<:par_tri_decroissant:>}})]
-		[(#TRI{id_album, <:medias:par_id:>})]
-		[(#TRI{date, <:medias:par_date:>})]
-		[(#TRI{titre, <:medias:par_titre:>})]
-	</div>
-	]
-	[(#ENV{liste}|=={galerie}|oui) [<div class='pagination'>(#PAGINATION{prive})</div>] ]
+	<navigation>
+		<div class='pagination tri'>
+			[(#TRI{'>', #CHEMIN_IMAGE{tri-asc-16.png}|balise_img{<:par_tri_croissant:>}})]
+			[(#TRI{'<', #CHEMIN_IMAGE{tri-desc-16.png}|balise_img{<:par_tri_decroissant:>}})]
+			[(#TRI{id_album, <:medias:par_id:>})]
+			[(#TRI{date, <:medias:par_date:>})]
+			[(#TRI{titre, <:medias:par_titre:>})]
+		</div>
+		[(#GET{liste}|=={albumotheque}|oui) [<div class='pagination'>(#PAGINATION{prive})</div>] ]
 	</navigation>
 	]
 
-	<table class="[(#GET{liste}|!={galerie}|oui)spip liste]">
+	<table class="spip liste">
 
 		[(#GET{header_thead}|oui)
 		<thead>
@@ -133,10 +135,7 @@
 			[(#REM) DESCRIPTIF ]
 			[(#GET{colonne_descriptif}|oui)
 			<td class='descriptif'>
-				[(#ENV{liste}|=={associer}|?{
-					#DESCRIPTIF|couper{60},
-					#DESCRIPTIF|couper{100}
-				})]
+				[(#DESCRIPTIF|couper{100})]
 			</td>
 			]
 
@@ -163,7 +162,7 @@
 					id_album=#ID_ALBUM}{env})]
 			]
 			[(#GET{action_choisir}|oui)
-				[(#SAISIE{radio,[radio(#ID_ALBUM)]})]
+			<input type="radio" name="#ENV{nom_radio}" id="radio_album#ID_ALBUM" class="radio"[ (#ENV{valeur_radio}|=={#ID_ALBUM}|oui)checked="checked"] value="#ID_ALBUM" />
 			]
 			</td>
 			]
@@ -172,7 +171,6 @@
 		</BOUCLE_albums>
 		</tbody>
 	</table>
-
 	[<p class='pagination'>(#PAGINATION{prive})</p>]
 
 </div>
@@ -188,11 +186,11 @@
 			<:album:info_aucun_album:>
 		]
 		[(#GET{nb_albums_total}=={0}|non)
-			[(#ENV{liste}|=={associer}|oui) <:album:info_aucun_album_supplementaire:> ]
-			[(#ENV{liste}|=={galerie}|oui) <:album:info_aucun_album_criteres:> ]
+			[(#GET{liste}|=={associer}|oui) <:album:info_aucun_album_supplementaire:> ]
+			[(#GET{liste}|=={albumotheque}|oui) <:album:info_aucun_album_criteres:> ]
 		]
 	]
-	[(#GRAND_TOTAL|>{#ENV{nb}}|ou{#ENV{recherche}}|ou{#GET{afficher_recherche}}|oui)
+	[(#GRAND_TOTAL|>{#ENV{nb}}|ou{#ENV{recherche}}|et{#GET{afficher_recherche}}|oui)
 		#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 	]
 </div>

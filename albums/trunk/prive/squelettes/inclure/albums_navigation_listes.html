@@ -1,5 +1,7 @@
 [(#REM)
 	Liste des albums avec tris, filtres et critères
+	Paramètres d'inclusion :
+		navigation (liste)	parents, divers, contenu
 ][(#REM)
 	Inclus dans /prive/squelettes/contenu/albums.html
 	Inclus dans /prive/squelettes/contenu/albums_complement_objet.html
@@ -65,7 +67,7 @@
 
 
 [(#REM) Filtres : types de medias contenus (image, audio, video, file) ]
-<BOUCLE_afficher_contenus(CONDITION){si #GET{navigation_contenus}}>
+<BOUCLE_afficher_contenu(CONDITION){si #GET{navigation_contenu}}>
 <div class='onglets_simple second clearfix filtres'>
 	<ul class='contenus'>
 	[(#REM) Tous ]
@@ -107,7 +109,7 @@
 	</BOUCLE_contenu>
 	</ul>
 </div>
-</BOUCLE_afficher_contenus>
+</BOUCLE_afficher_contenu>
 
 
 [(#REM) LISTE DES ALBUMS EN FONCTION DES CRITERES ]
