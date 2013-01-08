@@ -11,6 +11,13 @@ parametres:
     saisie: 'selection_album'
     options:
       nom: 'id_modele'
+      label: <:album:label_modele_identifiant:>
+      defaut: ' '
+    verifier:
+      type: 'entier'
+      options:
+        min: 1
+        #max: 9999
   -
     saisie: 'input'
     options:

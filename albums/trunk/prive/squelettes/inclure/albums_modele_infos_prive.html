@@ -5,9 +5,7 @@
 	inclus dans /modeles/albums_liste.html
 ]
 <BOUCLE_album(ALBUMS){id_album}{statut==.*}>
-
-[(#REM) Notice affichée dans l'espace privé ]
-<BOUCLE_vide(DOCUMENTS){id_album}{tout}> </BOUCLE_vide> #SET{notice,vide} <//B_vide>
+#SET{notice, #ID_ALBUM|album_contenu|?{'','vide'}}
 [(#STATUT|!={publie}|oui) #SET{notice, #GET{notice}|concat{'statut'}} ]
 [(#GET{notice}|oui)
 

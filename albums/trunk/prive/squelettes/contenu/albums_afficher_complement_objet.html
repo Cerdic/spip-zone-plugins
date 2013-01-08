@@ -102,8 +102,8 @@
 		oui,
 		#GET{self}|parametre_url{albums,''}|ancre_url{albums},
 		#OBJET_LIEN|concat{'|'}|concat{#ID_OBJET_LIEN},
-		#ENV{lier_trad}
-	})]
+		#ENV{lier_trad}}
+	)]
 	</div>
 ]
 
@@ -111,15 +111,17 @@
 [(#REM) AJOUTER : FORMULAIRE ASSOCIATION ]
 [(#ENV{albums}|=={associer}|et{#GET{albums_libres}}|oui)
 	<div id='associer'>
-	[(#INCLURE{fond=prive/squelettes/inclure/albums_navigation_listes,
+	[(#INCLURE{fond=prive/squelettes/inclure/albums_navigation,
 		liste=associer,
 		exclus=#GET{exclus},
-		statut='prepa|publie',
+		statut=publie,
+		navigation=contenus,
 		colonnes=#LISTE{logo,infos,descriptif,contenu},
-		actions=#LISTE{associer},
+		bouton=associer,
 		nb=#GET{nombre_pagination},
-		objet=''}
-		{env})]
+		objet='',
+		env}
+	)]
 	</div>
 ]
 

@@ -6,13 +6,9 @@
 
 
 <div class='albums'>
-[(#INCLURE{fond=prive/squelettes/inclure/albums_navigation_listes,
-	liste=albumotheque,
-	navigation=#LISTE{parents, divers, contenu},
-	header=#LISTE{tri, thead, recherche},
-	colonnes=#LISTE{statut, logo, id, titre, descriptif, contenu, liaison},
-	nb=10}
-	{env}{ajax}
+[(#INCLURE{fond=prive/squelettes/inclure/albums_navigation,
+	nb=10,
+	env}{ajax}
 )]
 </div>
 

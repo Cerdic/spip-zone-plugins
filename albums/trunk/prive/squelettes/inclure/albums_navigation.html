@@ -1,23 +1,29 @@
 [(#REM)
-	Liste des albums avec tris, filtres et critères
+	Affiche les critères de sélection pour l'affichage de la liste des albums
 	Paramètres d'inclusion :
-		navigation (liste)	parents, divers, contenu
+		le paramètre peut être soit une #LISTE,
+		soit une chaine de mots séparés par des caractères non alphanumériques (afin de pouvoir transmettre via l'url).
+ 
+		navigation		parents, divers, contenus
 ][(#REM)
 	Inclus dans /prive/squelettes/contenu/albums.html
 	Inclus dans /prive/squelettes/contenu/albums_complement_objet.html
+	Inclus dans /prive/squelettes/contenu/popin-choisir_album.html
 ]
 
-#SET{self,#SELF|parametre_url{debut_galerie,''}}
-
-
-[(#REM) Variables indiquant les onglets à afficher ]
-<BOUCLE_navigation(DATA){liste #ENV{navigation}}>
-#SET{#VAL{navigation_}|concat{#VALEUR},oui}
-</BOUCLE_navigation>
+#SET{self,#SELF|parametre_url{debut_albums,''}}
+[(#REM)
+	Variables pour définir les éléments à afficher 
+	On convertit en tableau si nécessaire, et on donne les valeurs par défaut
+]
+#SET{navigation, #ENV{navigation}|?{
+	#ENV{navigation}|is_array|?{#ENV{navigation},#VAL{'/\W/'}|preg_split{#ENV{navigation}}},
+	#LISTE{parents, divers, contenus}}
+}
 
 
 [(#REM) Onglets : objets parents et albums auteur]
-<BOUCLE_afficher_parents(CONDITION){si #GET{navigation_parents}}>
+<BOUCLE_afficher_parents(CONDITION){si #VAL{parents}|in_array{#GET{navigation}}}>
 <div class='onglets_simple clearfix'>
 <ul class='auteur'>
 	[<li class='first'>(#GET{self}|parametre_url{id_auteur,''}|lien_ou_expose{
@@ -46,7 +52,7 @@
 
 
 [(#REM) Filtres : Statuts, vus, orphelins ]
-<BOUCLE_afficher_divers(CONDITION){si #GET{navigation_divers}}>
+<BOUCLE_afficher_divers(CONDITION){si #VAL{divers}|in_array{#GET{navigation}}}>
 <div class='onglets_simple second clearfix'>
 <ul class='statut'>
 	[<li class='first'>(#GET{self}|parametre_url{statut,''}|lien_ou_expose{<:medias:documents_tous:>,#ENV{statut,.*}|=={.*},ajax})</li>]
@@ -67,7 +73,7 @@
 
 
 [(#REM) Filtres : types de medias contenus (image, audio, video, file) ]
-<BOUCLE_afficher_contenu(CONDITION){si #GET{navigation_contenu}}>
+<BOUCLE_afficher_contenu(CONDITION){si #VAL{contenus}|in_array{#GET{navigation}}}>
 <div class='onglets_simple second clearfix filtres'>
 	<ul class='contenus'>
 	[(#REM) Tous ]
@@ -112,5 +118,5 @@
 </BOUCLE_afficher_contenu>
 
 
-[(#REM) LISTE DES ALBUMS EN FONCTION DES CRITERES ]
+[(#REM) LISTE DES ALBUMS EN FONCTION DES CRITERES CI-DESSUS]
 <INCLURE{fond=prive/objets/liste/albums, env}>

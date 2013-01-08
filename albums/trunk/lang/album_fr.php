@@ -82,9 +82,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_modele_alignement_defaut' => 'Défaut',
 	'label_modele_alignement_droite' => 'Droite',
 	'label_modele_alignement_gauche' => 'Gauche',
-	'label_modele_titre' => 'Utiliser un titre différent',
+	'label_modele_identifiant' => 'Numéro de l\'album',
+	'label_modele_parcourir_albums' => 'Parcourir les albums',
+	'label_modele_titre' => 'Titre personnalisé',
 	'label_modele_variante' => 'Variante',
-	'label_modele_variante_defaut' => 'Vignettes',
+	'label_modele_variante_defaut' => 'Vignettes (défaut)',
 	'label_titre' => 'Titre',
 	'label_utiliser_titre_defaut' => 'Titre d\'un nouvel album',
 
