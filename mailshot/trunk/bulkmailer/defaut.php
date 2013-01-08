@@ -66,6 +66,12 @@ function &bulkmailer_defaut_dist($to_send,$options=array()){
 		$options['smtp'] = 'oui';
 	}
 
+	// desactiver les cc&bcc automatique eventuel de facteur
+	if (!isset($options['bcc']))
+		$options['bcc'] = '';
+	if (!isset($options['cc']))
+		$options['cc'] = '';
+
 	$sender_class = "Facteur";
 	if (isset($options['sender_class']))
 		$sender_class = $options['sender_class'];
