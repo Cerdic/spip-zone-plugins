@@ -37,7 +37,7 @@
 		ajax}
 	)</li>]
 </ul>
-<ul class='parents icones'>
+<ul class='parents'>
 	[<li class='first'>(#GET{self}|parametre_url{objet,''}|lien_ou_expose{<:album:onglet_parents_tous:>,#ENV{objet,''}|=={''},ajax})</li>]
 	<BOUCLE_objets(ALBUMS liens){fusion objet}>
 	[<li>(#GET{self}|parametre_url{objet,#OBJET}|lien_ou_expose{
@@ -87,7 +87,7 @@
 	[(#REM) Vides ]
 	<li class='vides[ (#ENV{contenu}|=={0}|oui)on]'>
 		[(#GET{self}|parametre_url{contenu,non}|lien_ou_expose{
-			[(#CHEMIN_IMAGE{icone-vide-24.png}|balise_img|inserer_attribut{title,<:album:filtre_sans_contenu:>})],
+			[(#CHEMIN_IMAGE{icone-vide-16.png}|balise_img)]<:album:filtre_sans_contenu:>,
 			#ENV{contenu}|=={non},
 			ajax,
 			<:album:filtre_sans_contenu:>}
@@ -96,7 +96,7 @@
 	[(#REM) Pleins ]
 	<li class='tous'>
 		[(#GET{self}|parametre_url{contenu,oui}|lien_ou_expose{
-			[(#CHEMIN_IMAGE{icone-medias-tous-24.png}|balise_img|inserer_attribut{title,<:album:filtre_avec_contenu:>})],
+			[(#CHEMIN_IMAGE{icone-medias-tous-16.png}|balise_img)]<:album:filtre_avec_contenu:>,
 			#ENV{contenu}|=={oui},
 			ajax,
 			<:album:filtre_avec_contenu:>}
@@ -106,7 +106,7 @@
 	<BOUCLE_contenu(DATA){liste image,audio,video,file}>
 	<li class='#VALEUR[ (#ENV{contenu}|=={#VALEUR}|oui)on]'>
 		[(#GET{self}|parametre_url{contenu,#VALEUR}|lien_ou_expose{
-			[(#CHEMIN_IMAGE{#VAL{media-}|concat{#VALEUR}|concat{-24.png}}|balise_img|inserer_attribut{title,#VAL{medias:media_}|concat{#VALEUR}|_T})],
+			[(#CHEMIN_IMAGE{#VAL{media-}|concat{#VALEUR}|concat{-16.png}}|balise_img)][(#VAL{medias:media_}|concat{#VALEUR}|_T)],
 			#ENV{contenu}|=={#VALEUR},
 			ajax,
 			#VAL{medias:media_}|concat{#VALEUR}|_T}

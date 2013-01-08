@@ -28,9 +28,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_albums' => 'Albums',
 
 	// F
-	'filtre_avec_contenu' => 'Avec contenu',
+	'filtre_avec_contenu' => 'Remplis',
 	'filtre_non_vus' => 'Non vus',
-	'filtre_sans_contenu' => 'Sans contenu',
+	'filtre_sans_contenu' => 'Vides',
 	'filtre_tous' => 'Tous',
 	'filtre_tous_contenus' => 'Tous les contenus',
 	'filtre_vus' => 'Vus',
