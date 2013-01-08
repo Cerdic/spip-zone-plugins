@@ -79,6 +79,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_activer_album_objets' => 'Enable albums for the contents :',
 	'label_case_utiliser_titre_defaut' => 'By default, use the parent object\'s title',
+	'label_modele_alignement' => 'Alignement', # NEW
+	'label_modele_alignement_centre' => 'Centré', # NEW
+	'label_modele_alignement_defaut' => 'Défaut', # NEW
+	'label_modele_alignement_droite' => 'Droite', # NEW
+	'label_modele_alignement_gauche' => 'Gauche', # NEW
+	'label_modele_titre' => 'Utiliser un titre différent', # NEW
+	'label_modele_variante' => 'Variante', # NEW
+	'label_modele_variante_defaut' => 'Vignettes', # NEW
 	'label_titre' => 'Title',
 	'label_utiliser_titre_defaut' => 'Title of a new album',
 
@@ -103,6 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_album' => 'Album',
 	'titre_album_sans_titre' => 'Titleless album',
 	'titre_albums' => 'Albums',
+	'titre_inserer_modele_album' => 'un album', # NEW
 	'titre_logo_album' => 'Logo',
 	'titre_page_configurer_albums' => 'Configure Albums',
 
