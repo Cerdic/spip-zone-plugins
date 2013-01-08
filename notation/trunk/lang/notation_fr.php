@@ -56,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_aut' => 'aux auteurs ',
 	'item_id' => 'un vote par utilisateur ',
 	'item_ide' => 'aux personnes enregistrées ',
-	'item_ip' => 'un votepar IP',
+	'item_ip' => 'un vote par IP',
 
 	// J
 	'jaidonnemonavis' => 'J\'ai donné mon avis !',
