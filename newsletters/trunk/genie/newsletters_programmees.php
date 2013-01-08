@@ -13,10 +13,53 @@ function genie_newsletters_programmees_dist($t){
 	$now = date('Y-m-d H:i:s');
 	// trouver une newsletter programmee a envoyer
 	if ($row = sql_fetsel("*",'spip_newsletters',"statut=".sql_quote('prog')." AND date<".sql_quote($now)." AND date>".sql_quote('1000-01-01 00:00:00'))){
+		// par defaut la date de la newsletter programmee est celle de la programmation
+		// sauf si on a rate des echeances : on les rattrape dans une seule NL dans ce cas
+		$date = $row["date"];
+		include_spip('inc/when');
+		include_spip('inc/newsletters');
+		list($date_start,$rrule) = newsletter_ics_to_date_rule($row['recurrence']);
+		while ($next=when_rule_to_next_date($date_start,$rrule,$date)
+			AND $next<$now){
+			spip_log("programmer #".$row['id_newsletter']." date : $date manquee, fusionnee avec celle du $next","newsletterprog");
+			$date = $next;
+		}
+
+		if ($date!=$row['date']){
+			// il faut maj en base pour etre coherent au moment de la generation de la NL de test
+			sql_updateq("spip_newsletters",array('date'=>$date),"id_newsletter=".intval($row['id_newsletter']));
+			$row['date'] = $date;
+		}
+
 		spip_log("programmer #".$row['id_newsletter']." date : ".$row['date'],"newsletterprog");
-		newsletter_creer_programmee($row);
+		newsletter_creer_newsletter_programmee($row);
 	}
 	return 0;
+}
+
+function newsletter_update_next_occurence($row, $sent=true){
+	// on met a jour la date et date_redac sur la source
+	include_spip("action/editer_objet");
+	include_spip("inc/autoriser");
+	include_spip("inc/when");
+	include_spip("inc/newsletters");
+
+	list($date_start,$rule) = newsletter_ics_to_date_rule($row['recurrence']);
+	$set = array(
+		'date_redac' => $row['date'],
+		'date' => when_rule_to_next_date($date_start,$rule,$row['date'])
+	);
+
+	// si on a rien envoye on ne touche pas a la date de derniere occurence
+	if (!$sent)
+		unset($set['date_redac']);
+
+	if (!$set['date']) $set['date'] = "0001-01-01 00:00:00";
+	autoriser_exception("modifier","newsletter",$row['id_newsletter']);
+	autoriser_exception("instituer","newsletter",$row['id_newsletter']);
+	objet_modifier("newsletter",$row['id_newsletter'],$set);
+	autoriser_exception("modifier","newsletter",$row['id_newsletter'],false);
+	autoriser_exception("instituer","newsletter",$row['id_newsletter'],false);
 }
 
 function newsletter_creer_newsletter_programmee($row){
@@ -28,6 +71,7 @@ function newsletter_creer_newsletter_programmee($row){
 	$html = newsletters_recuperer_fond($row['id_newsletter'], $patron, $row['date'], $row['date_redac']);
 	if (!strlen(trim($html))){
 		spip_log("Rien a envoyer pour programmation #".$row['id_newsletter'],"newsletterprog");
+		newsletter_update_next_occurence($row,false);
 		return;
 	}
 
@@ -37,6 +81,7 @@ function newsletter_creer_newsletter_programmee($row){
 		"chapo" => $row["chapo"],
 		"texte" => $row["texte"],
 		"date" => $row["date"],
+		"date_redac" => $row['date_redac'], // occurence precedente
 		"patron" => $patron,
 		"baked" => 1,
 		"statut" => "prop",
@@ -76,19 +121,7 @@ function newsletter_creer_newsletter_programmee($row){
 	autoriser_exception("instituer","newsletter",$id_newsletter,false);
 
 	// on met a jour la date et date_redac sur la source
-	include_spip("inc/when");
-	include_spip("inc/newsletters");
-	list($date_start,$rule) = newsletter_ics_to_date_rule($row['recurrence']);
-	$set = array(
-		'date_redac' => $row['date'],
-		'date' => when_rule_to_next_date($date_start,$rule,$row['date'])
-	);
-	if (!$set['date']) $set['date'] = "0001-01-01 00:00:00";
-	autoriser_exception("modifier","newsletter",$row['id_newsletter']);
-	autoriser_exception("instituer","newsletter",$row['id_newsletter']);
-	objet_modifier("newsletter",$row['id_newsletter'],$set);
-	autoriser_exception("modifier","newsletter",$row['id_newsletter'],false);
-	autoriser_exception("instituer","newsletter",$row['id_newsletter'],false);
+	newsletter_update_next_occurence($row);
 
 	// Les envois
 
