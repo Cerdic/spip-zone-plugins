@@ -62,6 +62,7 @@ function accesrestreint_page_indisponible($contexte){
 		if (isset($contexte['type'])) $objet = $contexte['type'];
 		elseif (isset($contexte['type-page'])) $objet = $contexte['type-page'];
 		elseif(isset($contexte['fond_erreur'])) {
+			include_spip('inc/urls');
 			define('_DEFINIR_CONTEXTE_TYPE_PAGE',true);
 			$c2 = $contexte;
 			list($fond2,$c2,$url_redirect) = urls_decoder_url(nettoyer_uri(),$contexte['fond_erreur'],$c2,true);
