@@ -11,6 +11,7 @@ parametres:
     saisie: 'selection_album'
     options:
       nom: 'id_modele'
+      env: 'oui'
       label: <:album:label_modele_identifiant:>
       defaut: ' '
     verifier:

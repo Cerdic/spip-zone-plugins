@@ -12,9 +12,11 @@
   - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
   - objet_parent : pour restreindre aux albums liés à un type d'objet
   - contenu : critère {contenu} (defaut : 'oui')
+  - env : 'oui' cf. note
   
   Note : si on appelle le sélecteur depuis une modalbox, il faut alors lui passer _modalbox_retour qui correspond a l'url de retour
   apres sélection de l'album. L'id de l'album sera alors passé par URL.
+  Dans ce cas il faut utiliser l'option env : 'oui'.
 ]
 
 #SET{mod_fn, #ENV{_modalbox_retour}|?{'2','1'}}
