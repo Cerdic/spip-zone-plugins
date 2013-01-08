@@ -11,26 +11,28 @@
 <form action="#ENV{action}" method="post"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<BOUCLE_deja_choisi(CONDITION){si #ENV{formulaire_modele}}>
-		[(#ENV{modalbox}|?{
-			[<code id="code_modele">(#ENV{_code_modele})</code>],
-			[<code class="code_modele"[ ondblclick="(#ENV**{_js_ondblclick})"]>(#ENV{_code_modele})</code>]
-		})]
-		[(#REM) Si on appelle depuis le porte-plume on renvoie le code au porte-plume ]
-		[(#ENV{modalbox}|et{#ENV{_code_modele}}|oui)<script>
-			$(document).ready(function(){
-				var code_modele = $("#code_modele").text();
-				if (code_modele != '') {
-					parent.$.markItUp( { replaceWith: code_modele } );
-					jQuery.modalboxclose();
-				}
-			});
-		</script>]
+		[<code class="code_modele" id="code_modele"[ (#ENV{_code_modele}|et{#ENV{_js_inserer_code}}|oui)ondblclick="#ENV**{_js_inserer_code}"]>(#ENV{_code_modele})</code>]
+		[(#REM) Insertion du code dans le texte après validation ]
+		[(#ENV{_code_modele}|oui)
+			<script>$(document).ready(function(){
+				[(#ENV{modalbox}|oui)
+					var code_modele = $("#code_modele").text();
+					if (code_modele != '') {
+						parent.$.markItUp( { replaceWith: code_modele } );
+						jQuery.modalboxclose();
+					}
+				]
+				[(#ENV{modalbox}|non)
+					[(#ENV**{_js_inserer_code})]
+				]
+			});</script>
+		]
 		<input type="hidden" name="formulaire_modele" value="#ENV{formulaire_modele}" />
 		<ul>
 		#GENERER_SAISIES{#ENV{_saisies}}
 		</ul>
 		<p class="boutons">
-			<input type="submit" class="submit" name="inserer" value="[(#ENV{_code_modele}|?{<:inserer_modeles:bouton_maj:>,<:inserer_modeles:bouton_inserer:>})]" />
+			<input type="submit" class="submit" name="inserer" value="<:inserer_modeles:bouton_inserer:>" />
 			[(#ENV{ne_pas_afficher_bouton_annuler}|non)<input type="submit" class="submit link" name="annuler" value="<:bouton_annuler:>" />]
 		</p>
 	</BOUCLE_deja_choisi>

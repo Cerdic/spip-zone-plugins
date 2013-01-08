@@ -32,8 +32,8 @@ function formulaires_inserer_modeles_charger_dist($formulaire_modele,$modalbox,$
 		$contexte['_saisies'] = $infos_modele['parametres'];
 		if (_request('_code_modele'))
 			$contexte['_code_modele'] = _request('_code_modele');
-		if (_request('_js_ondblclick'))
-			$contexte['_js_ondblclick'] = _request('_js_ondblclick');
+		if (_request('_js_inserer_code'))
+			$contexte['_js_inserer_code'] = _request('_js_inserer_code');
 	}
 	
 	if ($modalbox!='') {
@@ -46,6 +46,9 @@ function formulaires_inserer_modeles_charger_dist($formulaire_modele,$modalbox,$
 		foreach ($env as $var => $val)
 			if (substr($var,0,3)=='id_' && is_numeric($val))
 				$_modalbox_retour = parametre_url($_modalbox_retour,$var,$val,'&');
+		// Dans le cas ou une saisie ouvre une nouvelle modalbox, il faut transmettre le param modalbox au retour
+		// sinon le bouton submit ne fermera pas la modalbox
+		$_modalbox_retour = parametre_url($_modalbox_retour,'modalbox','oui','&');
 		$contexte['_modalbox_retour'] = $_modalbox_retour;
 	}
 	
@@ -104,11 +107,11 @@ function formulaires_inserer_modeles_traiter_dist() {
 		}
 		set_request('_code_modele',$code);
 
-		// js pour inserer la balise dans le texte en faisant un double clic
+		// js pour inserer la balise dans le texte
 		$codejs = "barre_inserer('".texte_script($code)."', $('textarea[name=texte]')[0]);";
-		set_request('_js_ondblclick',$codejs);
+		set_request('_js_inserer_code',$codejs);
 
-		return array('message_ok' => _T('inserer_modeles:message_copier_code'));
+		return array('message_ok' => _T('inserer_modeles:message_code_insere'));
 	}
 }
 
