@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nb_etoiles' => 'Valeur des notes',
 	'nbobjets_note' => 'Nombre d\'objets ayant une note : ',
-	'nbvotes' => 'Nb votes',
+	'nbvotes' => 'Nombre de votes',
 	'nbvotes_moyen' => 'Nombre de votes moyens par objet : ',
 	'nbvotes_total' => 'Nombre de votes total sur le site : ',
 	'notation' => 'Notations',
