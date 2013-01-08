@@ -5,6 +5,7 @@ function skiplink_affichage_final(&$page) {
 	// ne pas se fatiguer si pas HTML
 	if (!$GLOBALS['html']
 	  OR strpos($page, 'id="skiplinks"') # pas deux fois, au cas ou !
+		OR strpos($page,"<!-- insert_head -->")===false # pas de insert_head, pas d'insertion auto des liens
 	)
 		return $page;
 
