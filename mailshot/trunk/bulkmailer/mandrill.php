@@ -7,6 +7,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip("inc/config");
+include_spip("inc/json"); // compat avec les PHP sans json_truc
 include_spip("classes/facteur");
 include_spip("lib/mandrill-api-php/src/Mandrill");
 
