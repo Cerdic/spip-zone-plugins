@@ -115,11 +115,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_album' => 'Logo',
 	'titre_page_configurer_albums' => 'Configurer les Albums',
 
-	// U
-	'un_audio' => 'bande-son',
-	'un_file' => 'document',
-	'un_image' => 'image',
-	'un_video' => 'vidéo'
 );
 
 ?>
