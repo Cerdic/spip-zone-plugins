@@ -12,7 +12,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'albums_nom' => 'Albums',
 	'albums_slogan' => 'Grouper vos documents sous forme d\'albums',
 	'albums_titre' => 'Albums'
-
 );
 
 ?>
