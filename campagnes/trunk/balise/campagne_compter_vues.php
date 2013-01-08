@@ -12,10 +12,10 @@ function balise_CAMPAGNE_COMPTER_VUES_stat($args, $context_compil) {
 }
 
 function balise_CAMPAGNE_COMPTER_VUES_dyn($id_campagne) {
-	static $fait = false;
+	static $fait = array();
 	
 	// On s'assure que le comptage d'une même pub n'est fait qu'une seule fois par hit et pas par un robot
-	if (!$fait and !_IS_BOT){
+	if (!isset($fait[$id_campagne]) and !_IS_BOT){
 		include_spip('inc/campagnes');
 		$infos = campagnes_recuperer_infos_visiteur();
 		
@@ -32,7 +32,7 @@ function balise_CAMPAGNE_COMPTER_VUES_dyn($id_campagne) {
 		);
 		
 		// On marque que c'est fait
-		if ($ok !== false) $fait = true;
+		if ($ok !== false) $fait[$id_campagne] = true;
 	}
 }
 
