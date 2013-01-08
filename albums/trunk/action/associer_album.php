@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * exemple : [(#URL_ACTION_AUTEUR{editer_liens_album, associer/#OBJET/#ID_OBJET/#ID_ALBUM, #SELF})]
  */
 
-function action_editer_liens_album_dist(){
+function action_associer_album_dist(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	list($action, $objet_lien, $id_objet_lien, $id_album) = preg_split('/\W/', $arg);

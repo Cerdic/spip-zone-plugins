@@ -36,7 +36,7 @@
 	[(#ENV{bouton}|=={associer}|oui)
 		[(#BOUTON_ACTION{
 			[<:album:icone_ajouter:>(#CHEMIN_IMAGE{ajouter-16.png}|balise_img{<:album:icone_associer_album:>})],
-			[(#URL_ACTION_AUTEUR{editer_liens_album,
+			[(#URL_ACTION_AUTEUR{associer_album,
 				associer/#OBJET_LIEN/#ID_OBJET_LIEN/#ID_ALBUM,
 				#ENV{retour,#SELF}
 			})],
@@ -60,7 +60,7 @@
 			)],
 			[(#BOUTON_ACTION{
 				[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'album:icone_supprimer_album'})],
-				[(#URL_ACTION_AUTEUR{editer_liens_album,
+				[(#URL_ACTION_AUTEUR{associer_album,
 					dissocier/#OBJET_LIEN/#ID_OBJET_LIEN/#ID_ALBUM,
 					#ENV{retour,#SELF}
 				})],
