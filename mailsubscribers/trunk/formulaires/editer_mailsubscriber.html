@@ -29,6 +29,23 @@
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]#INCLURE{fond=formulaires/inc-select-langue,name=#GET{name},defaut=#GET{defaut},env}
 			</li>
+			#SET{name,statut}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:mailsubscriber:texte_changer_statut_mailsubscriber:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<select name="#GET{name}" class="select" id="#GET{name}">
+					#SET{val,prepa}
+					<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]><:mailsubscriber:texte_statut_pas_encore_inscrit:></option>
+					#SET{val,prop}
+					<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]><:mailsubscriber:texte_statut_en_attente_confirmation:></option>
+					#SET{val,valide}
+					<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]><:mailsubscriber:texte_statut_valide:></option>
+					#SET{val,refuse}
+					<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]><:mailsubscriber:texte_statut_refuse:></option>
+					#SET{val,poubelle}
+					<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]><:texte_statut_poubelle:></option>
+				</select>
+			</li>
 			#SET{name,listes}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[

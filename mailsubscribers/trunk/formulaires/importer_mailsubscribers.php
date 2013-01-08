@@ -12,7 +12,11 @@ include_spip('inc/session');
  * Declarer les champs postes et y integrer les valeurs par defaut
  */
 function formulaires_importer_mailsubscribers_charger_dist(){
-	$valeurs = array('file_import' => '');
+	$valeurs = array(
+		'file_import' => '',
+		'desactiver_notif' => '',
+		'vider_table' => '',
+	);
 	return $valeurs;
 }
 
@@ -66,6 +70,13 @@ function formulaires_importer_mailsubscribers_verifier_dist(){
  */
 function formulaires_importer_mailsubscribers_traiter_dist(){
 	refuser_traiter_formulaire_ajax();// pour recharger toute la page
+
+	if (_request('desactiver_notif'))
+		$GLOBALS['instituermailsubscriber_status'] = false; // pas de notification pour cet import
+	if (_request('vider_table') AND autoriser('detruire')){
+		include_spip('base/abstract_sql');
+		sql_delete("spip_mailsubscribers");
+	}
 
 	$res = array('editable'=>true);
 	$r = importer_mailsubscribers_importe(session_get('importer_mailsubscribers::filename'));

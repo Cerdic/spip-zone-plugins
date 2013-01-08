@@ -45,6 +45,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mailsubscriber_optin' => 'Je veux recevoir la Newsletter',
 	'label_file_import' => 'Fichier à importer',
 	'label_toutes_les_listes' => 'Toutes',
+	'label_desactiver_notif_1' => 'Desactiver la notification des inscriptions pour cet import',
+	'label_vider_table_1' => 'Supprimer toutes les adresses en base avant cet import',
 
 	// M
 	'mailsubscribers_tous' => 'Tous',
