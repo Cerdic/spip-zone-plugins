@@ -10,20 +10,20 @@ v 2.1
     - s'il est l'auteur d'un objet, creer/associer un album
 
 - Intégration avec le plugin 'insérer modèle' :
-  depuis la barre d'outil : ça chie dans la colle !
-  depuis la colonne de gauche : vérifier que le double clic fonctionne, sinon rajouter ça dans le plugin en s'inspirant du plugin medias (déjà testé : facile à faire).
+  message d'erreur en utilisant le bouton du porte-plume: 'This content failed to load.'
 
 ===========
 v 2.2 / 2.3
 ===========
 - Pipeline complement_objet
   * Portfolio : bouton pour déplacer tous les documents dans un nouvel album lié à l'objet.
-  * Albums : bouton inverse : déplacer tous les documents d'un l'album dans le portfolio de l'objet.
+  * Albums : bouton inverse : déplacer tous les documents d'un album dans le portfolio de l'objet.
 
 - Pipeline affiche_gauche (édition d'un objet)
-Soit on se repose sur le plugin 'insérer_modèle' et on se contente de faciliter l'insertion des balises d'albums existants.
-Ou alors on propose des fonctionnalités à peu près similaires au plugin medias :
-  * créer un album
-  * sélection d'albums et insertion des balises dans le texte au double clic
+  * Soit on se repose sur le plugin 'insérer_modèle' et on se contente de faciliter l'insertion des balises d'albums existants.
+    Problème : s'il y a beaucoup de documents, la boîte 'insérer un modèle' se retrouve tout en bas.
+  * Soit on propose des fonctionnalités à peu près similaires au plugin medias :
+    - créer un album
+    - sélection d'albums et insertion des balises dans le texte au double clic
   
 - Prendre en compte le plugin mosaïque (qui permet de trier les documents)
