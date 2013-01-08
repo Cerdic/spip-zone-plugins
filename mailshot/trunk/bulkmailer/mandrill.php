@@ -73,10 +73,14 @@ function bulkmailer_mandrill_webhook_dist($arg){
 		$tags = $event['msg']['tags'];
 		if (count($tags)){
 			$tracking_id = end($tags);
-			spip_log("tracking $quoi $email $tracking_id",'mailshot');
-			// appeler l'api webhook mailshot
-			$feedback = charger_fonction("feedback","newsletter");
-			$feedback($quoi,$email,$tracking_id);
+			$tracking_id = explode('/#',$tracking_id);
+			if (reset($tracking_id)==$GLOBALS['meta']['adresse_site']){
+				$tracking_id = end($tracking_id);
+				spip_log("tracking $quoi $email $tracking_id",'mailshot');
+				// appeler l'api webhook mailshot
+				$feedback = charger_fonction("feedback","newsletter");
+				$feedback($quoi,$email,$tracking_id);
+			}
 		}
 	}
 }
@@ -305,7 +309,8 @@ class FacteurMandrill extends Facteur {
 		// ajouter le tracking_id en tag, pour retrouver le message apres webhook
 		if (isset($options['tracking_id'])
 		  AND $id = $options['tracking_id']){
-			$this->message['tags'][] = $options['tracking_id'];
+			// prefixer le tracking par l'url du site pour ne pas melanger les feedbacks
+			$this->message['tags'][] = $GLOBALS['meta']['adresse_site']."/#".$options['tracking_id'];
 		}
 
 		$mandrill = new Mandrill($api_key);
