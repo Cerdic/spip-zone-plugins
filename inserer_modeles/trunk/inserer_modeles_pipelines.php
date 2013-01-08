@@ -32,10 +32,10 @@ function inserer_modeles_porte_plume_barre_pre_charger($barres) {
 				"id" => 'inserer_modele_'.$nom,
 				"name" => _T_ou_typo($formulaire['nom']),
 				"className" => 'outil_inserer_modele_'.$nom,
-				"beforeInsert" => "function() {jQuery.modalboxload('".generer_url_public(
+				"beforeInsert" => "function() {jQuery.modalboxload('".url_absolue(generer_url_public(
 					'inserer_modeles',
 					"modalbox=oui&formulaire_modele=$nom&id_article='+$(\"[name='id_article']\").val()+'&id_rubrique='+$(\"[name='id_rubrique']\").val()+'&id_breve='+$(\"[name='id_breve']\").val()"
-				).",{minHeight: '90%'});}",
+				)).",{minHeight: '90%'});}",
 				"display" => true
 			);
 		}
@@ -46,10 +46,10 @@ function inserer_modeles_porte_plume_barre_pre_charger($barres) {
 			"name"        => _T('inserer_modeles:outil_inserer_modeles'),
 			"key"         => "M",
 			"className"   => 'outil_inserer_modeles',
-			"beforeInsert" => "function() {jQuery.modalboxload('".generer_url_public(
+			"beforeInsert" => "function() {jQuery.modalboxload('".url_absolue(generer_url_public(
 				'inserer_modeles',
 				"modalbox=oui&id_article='+$(\"[name='id_article']\").val()+'&id_rubrique='+$(\"[name='id_rubrique']\").val()+'&id_breve='+$(\"[name='id_breve']\").val()"
-			).",{minHeight: '90%'});}",
+			)).",{minHeight: '90%'});}",
 			"display"     => true,
 			"dropMenu"    => $sous_menu
 		 ));

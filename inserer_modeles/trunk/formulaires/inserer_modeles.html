@@ -11,8 +11,10 @@
 <form action="#ENV{action}" method="post"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<BOUCLE_deja_choisi(CONDITION){si #ENV{formulaire_modele}}>
-		[ #BOITE_OUVRIR{'','info'} <code[ ondblclick="(#ENV**{_js_ondblclick})"]><small>(#ENV{_code_modele})</small></code> #BOITE_FERMER ]
-		[(#REM) [<textarea readonly="readonly" id="code_modele"[ ondblclick="(#ENV{_js_ondblclick})"]>(#ENV**{_code_modele})</textarea>] ]
+		[(#ENV{modalbox}|?{
+			[<code id="code_modele">(#ENV{_code_modele})</code>],
+			[<code class="code_modele"[ ondblclick="(#ENV**{_js_ondblclick})"]>(#ENV{_code_modele})</code>]
+		})]
 		[(#REM) Si on appelle depuis le porte-plume on renvoie le code au porte-plume ]
 		[(#ENV{modalbox}|et{#ENV{_code_modele}}|oui)<script>
 			$(document).ready(function(){
@@ -28,7 +30,7 @@
 		#GENERER_SAISIES{#ENV{_saisies}}
 		</ul>
 		<p class="boutons">
-			<input type="submit" class="submit" name="inserer" value="[(#ENV**{_code_modele}|?{<:inserer_modeles:bouton_maj:>,<:inserer_modeles:bouton_inserer:>})]" />
+			<input type="submit" class="submit" name="inserer" value="[(#ENV{_code_modele}|?{<:inserer_modeles:bouton_maj:>,<:inserer_modeles:bouton_inserer:>})]" />
 			[(#ENV{ne_pas_afficher_bouton_annuler}|non)<input type="submit" class="submit link" name="annuler" value="<:bouton_annuler:>" />]
 		</p>
 	</BOUCLE_deja_choisi>
