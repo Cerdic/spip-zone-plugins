@@ -1,0 +1,40 @@
+<paquet
+	prefix="amap"
+	categorie="divers"
+	version="3.0.0"
+	etat="dev"
+	compatibilite="[2.0.10;3.0.*]"
+	logo="prive/themes/spip/images/amapconfig-64.png"
+	schema="1.2.0"
+	documentation="http://www.spip-contrib.net/Plugin-AMAP-Version-2"
+>	
+
+	<nom>AMAP</nom>
+	<!-- Gestion des paniers et adhérents pour les AMAP -->
+
+	<auteur>Stéphane Moulinet</auteur>
+	<auteur>E-cosystems</auteur>
+	<auteur lien="http://www.pierre-kuhn.org">Pierre KUHN</auteur>
+
+	<copyright>2010-2013</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="autoriser" inclure="amap_autoriser.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/amap_tables.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/amap_tables.php" />
+	<pipeline nom="declarer_champs_extras" inclure="base/amap_tables.php" />
+	<pipeline nom="affiche_gauche" inclure="amap_pipelines.php" />
+
+	<necessite nom="agenda" compatibilite="[3.11.2;[" />
+	<necessite nom="cextras" compatibilite="[3.2.3;[" />
+	<necessite nom="facteur" compatibilite="[2.3.0;[" />
+	<necessite nom="saisies" compatibilite="[1.28.1;[" />
+	<necessite nom="verifier" compatibilite="[1.0.1;[" />
+	<necessite nom="z" compatibilite="[1.7.21;[" />
+
+	<utilise nom="fpdf" compatibilite="[0.0.1;[" />
+
+	<menu nom="amap" titre="amap:gestion_amap" parent="configuration" icone="prive/themes/spip/images/amapconfig-24.gif" action="mini_doc" />
+	<menu nom="amap_bandeau" titre="amap:gestion_amap" parent="bando_configuration" icone="prive/themes/spip/images/amapconfig-16.gif" action="mini_doc" />
+</paquet>
