@@ -103,9 +103,9 @@ function formulaires_editer_newsletter_traiter_dist($id_newsletter='new', $retou
 			}
 		}
 		include_spip("action/editer_liens");
-		objet_dissocier(array("newsletter"=>$id_newsletter),$possibles);
+		objet_dissocier(array("newsletter"=>$res['id_newsletter']),$possibles);
 		if (count($liens))
-			objet_associer(array("newsletter"=>$id_newsletter),$liens);
+			objet_associer(array("newsletter"=>$res['id_newsletter']),$liens);
 
 		// regenerer le html et texte...
 		// sauf si c'est une nl prog (statut=prog)
