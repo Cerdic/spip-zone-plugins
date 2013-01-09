@@ -56,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_aut' => 'авторов ',
 	'item_id' => '1 голос пользователя ',
 	'item_ide' => 'зарегистрированных посетителей  ',
-	'item_ip' => 'Один голос с одного IP-адреса',
+	'item_ip' => 'Один голос с одного IP-адреса', # MODIF
 
 	// J
 	'jaidonnemonavis' => 'Голосование осуществлено !',
@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nb_etoiles' => 'Примечание',
 	'nbobjets_note' => 'К-во статтей в которых проголосовали : ',
-	'nbvotes' => 'К-во голосов',
+	'nbvotes' => 'К-во голосов', # MODIF
 	'nbvotes_moyen' => 'Среднее к-во голосов на объект',
 	'nbvotes_total' => 'Общее к-во голосов : ',
 	'notation' => 'Голосование',

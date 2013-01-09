@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_aut' => 'autorom',
 	'item_id' => 'jedno hodnotenie na používateľa',
 	'item_ide' => 'zaregistrovaným ľuďom',
-	'item_ip' => 'jedno hodnotenie na IP',
+	'item_ip' => 'jedno hodnotenie na IP', # MODIF
 
 	// J
 	'jaidonnemonavis' => 'Svoj názor som povedal(a)!',
@@ -77,7 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nb_etoiles' => 'Hodnota známok',
 	'nbobjets_note' => 'Počet objektov so známkou: ',
-	'nbvotes' => 'Počet známok',
+	'nbvotes' => 'Počet známok', # MODIF
 	'nbvotes_moyen' => 'Priemerný počet hodnotení podľa objektu: ',
 	'nbvotes_total' => 'Celkový počet hodnotení na stránke:',
 	'notation' => 'Hodnotenia',
