@@ -13,13 +13,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_a2a' => 'Relations between articles',
 	'changer_type_liaison' => 'Change',
-	'configurer_a2a' => 'Configurer les relations entre articles', # NEW
+	'configurer_a2a' => 'Configure relations between articles',
 
 	// E
 	'explication_navigateur' => 'Click on [Add] to navigate through the site and select the article(s) to link.',
-	'explication_type_obligatoire' => 'Vous pouvez imposer de typer les liaisons', # NEW
-	'explication_types_differents' => 'Cochez cette case pour permettre de lier plusieurs fois les deux mêmes articles, en changeant le type à chaque fois', # NEW
-	'explication_types_liaisons' => 'Vous pouvez définir des types de relations : indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par défaut. La description peut être une chaîne de langue.', # NEW
+	'explication_type_obligatoire' => 'You can force to give a type to links',
+	'explication_types_differents' => 'Check this box to enable to link several times the same two articles, by changing the type every time',
+	'explication_types_liaisons' => 'You can define the types of relationships: please indicate one per line, followed by a comma and a description. A blank line for the default value. The description can be a language item.',
 
 	// I
 	'info_nombre_articles_lies' => '@nb@ linked articles',
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lier_cet_article_deux_cotes' => 'Link both sides',
 
 	// O
-	'ob_pb' => 'Il n\'est pas possible de rendre obligatoire le type de liaison : en effet les articles ci-dessous possèdent des liaisons non typées. Typez les d\'abords, puis rendez-obligatoire le typage.', # NEW
+	'ob_pb' => 'It is not possible to make mandatory the type of link: in fact the articles below have untyped links . Give them a type first , and then make the typing mandatory.',
 
 	// P
 	'pas_articles_lies' => 'No linked articles',
@@ -49,22 +49,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rechercher_un_article_a_lier' => 'Search for an article:',
 
 	// S
-	'sup_pb' => 'Impossible de supprimer les types de liaisons suivantes : des liaisons les utilisent. Il vous faut donc modifier au préalable ces liaions.', # NEW
+	'sup_pb' => 'Unable to delete the following types of links: links are using them. So you need first to modify these links.',
 	'supprimer_le_lien' => 'Unlink',
 	'supprimer_le_lien_deux_cotes' => 'Unlink both sides',
 
 	// T
-	'td_pb' => 'Vous demandez l\'interdiction de lier plusieurs fois deux mêmes articles. Or certains articles possèdent plusieurs liaisons avec d\'autres articles. Corrigez cela avant.', # NEW
+	'td_pb' => 'You ask the prohibition on linking several times the same two items. However, some items have several links to other articles. Correct this before.',
 	'type' => 'Type',
-	'type_inexistant' => 'Type de liaison inexistant', # NEW
+	'type_inexistant' => 'Type of link nonexistent',
 	'type_liaison' => 'Type of link',
 	'type_obligatoire' => 'Typing mandatory',
 	'types_differents' => 'Multiple links',
 	'types_liaisons' => 'Types of link',
-	'types_liaisons_non_modifiables' => 'Les types de liaisons suivants ne sont pas modifiables via la configuration', # NEW
+	'types_liaisons_non_modifiables' => 'The following types of links can\'t be changed using the configuration',
 
 	// U
-	'utilise_par_articles' => ', utilisé par les liaisons des articles :', # NEW
+	'utilise_par_articles' => ', used by articles links:',
 
 	// V
 	'voir' => 'See'
