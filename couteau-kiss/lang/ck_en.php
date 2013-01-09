@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 If you force some settings in your <tt>config/mes_options.php</tt> file, this form will not affect them.
 
-When you finish configuring your website, you can, if you wish, copy and paste the content of <tt>tmp/ck_options</tt> into <tt>config/mes_options.php</tt> before uninstalling this plugin as it will no longer be useful.', # MODIF
+When you finish configuring your website, you can, if you wish, copy and paste the content of <tt>tmp/ck_options</tt> into <tt>config/mes_options.php</tt> before uninstalling this plugin as it will no longer be useful.',
 	'titre_page_couteau' => 'KISS knife'
 );
 
