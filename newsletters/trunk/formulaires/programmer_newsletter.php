@@ -32,6 +32,7 @@ function formulaires_programmer_newsletter_charger_dist($id_newsletter='new', $r
 	list($date_start,$rule) = newsletter_ics_to_date_rule($valeurs['recurrence']);
 	$date_start = ($date_start?strtotime($date_start):time());
 	$valeurs['date_debut'] = date('d/m/Y',$date_start);
+	$valeurs['date_debut_heure'] = date('H:i',$date_start);
 
 	$r = when_rule_ro_array($rule);
 	$valeurs = formulaires_programmer_newsletter_charger_rule($r, $valeurs);
@@ -53,8 +54,14 @@ function formulaires_programmer_newsletter_verifier_dist($id_newsletter='new', $
 		$erreurs['date_debut'] = _T('info_obligatoire');
 	else {
 		list($annee, $mois, $jour,,,) = recup_date(_request('date_debut'));
-		if (!mktime(0,0,0,$mois,$jour,$annee))
+		if (!$d=mktime(0,0,0,$mois,$jour,$annee))
 			$erreurs['date_debut'] = _T('programmernewsletter:erreur_date_incorrecte');
+		else {
+			$d2 = date("Y-m-d ",$d)._request('date_debut_heure');
+			$d2 = strtotime($d2);
+			if ($d2<$d OR $d2>$d+24*3600)
+				$erreurs['date_debut'] = _T('programmernewsletter:erreur_heure_incorrecte');
+		}
 	}
 
 	if (!in_array(_request('frequence'),array('daily','weekly','monthly','yearly')))
@@ -68,7 +75,7 @@ function formulaires_programmer_newsletter_verifier_dist($id_newsletter='new', $
 			$erreurs['until'] = _T('info_obligatoire');
 		else {
 			list($annee, $mois, $jour,,,) = recup_date(_request('until'));
-			if (!mktime(0,0,0,$mois,$jour,$annee))
+			if (!mktime(23,59,59,$mois,$jour,$annee))
 				$erreurs['until'] = _T('programmernewsletter:erreur_date_incorrecte');
 		}
 	}
@@ -83,9 +90,10 @@ function formulaires_programmer_newsletter_traiter_dist($id_newsletter='new', $r
 	set_request('baked',0);
 
 	// date debut
-	list($annee, $mois, $jour, $heures, $minutes, $secondes) = recup_date(_request('date_debut'));
-	$date_debut = mktime($heures,$minutes,$secondes,$mois,$jour,$annee);
-	$date_debut = date('Y-m-d H:i:s',$date_debut);
+	list($annee, $mois, $jour,,,) = recup_date(_request('date_debut'));
+	$date_debut = mktime(0,0,0,$mois,$jour,$annee);
+	$date_debut = date('Y-m-d ',$date_debut)._request('date_debut_heure');
+	$date_debut = date('Y-m-d H:i:s',strtotime($date_debut));
 
 	$recurrence = formulaires_programmer_newsletter_traiter_rule();
 
@@ -104,6 +112,11 @@ function formulaires_programmer_newsletter_traiter_dist($id_newsletter='new', $r
 
 	$traiter = charger_fonction("traiter","formulaires/editer_newsletter");
 	$res = $traiter($id_newsletter, $retour, $lier_trad, $config_fonc, $row, $hidden);
+
+	// mettre a jour le cron : on supprime la tache et on reprogramme tous les crons
+	include_spip("inc/genie");
+	sql_delete("spip_jobs","fonction=".sql_quote('newsletters_programmees'));
+	genie_queue_watch_dist();
 
 	if (isset($res['message_ok']))
 		$res['message_ok'] .= "<br />".when_rule_to_texte($recurrence);

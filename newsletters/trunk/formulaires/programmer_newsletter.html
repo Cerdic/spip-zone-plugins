@@ -21,6 +21,7 @@
 							<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<input type="text" name="#GET{name}" class="text date" value="#ENV*{#GET{name},#GET{defaut}}" size='10' maxlength='10' id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+							<input type="text" class="text heure time" name="#GET{name}_heure" id="#GET{name}_heure" value="#ENV{#GET{name}_heure}" size="5"/>
 						</li>
 						#SET{name,frequence}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">

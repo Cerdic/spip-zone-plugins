@@ -63,7 +63,15 @@ function newsletters_optimiser_base_disparus($flux){
  */
 function newsletters_taches_generales_cron($taches_generales){
 
-	$taches_generales['newsletters_programmees'] = 3*60*60; // 3h
+	// date de la prochaine newsletter programmee
+	$next = sql_getfetsel('date','spip_newsletters','statut='.sql_quote('prog')." AND date>".sql_quote("1000-01-01"),"","date","0,1");
+	if ($next){
+		$next = strtotime($next);
+		$delai = $next-$_SERVER['REQUEST_TIME'];
+		$delai = max($delai,110);
+		$delai = min($delai,31*24*60*60);
+		$taches_generales['newsletters_programmees'] = $delai;//3*60*60; // 3h
+	}
 
 	return $taches_generales;
 }

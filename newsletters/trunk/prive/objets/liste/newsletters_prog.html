@@ -26,7 +26,7 @@
 			[<p class="small">(#RECURRENCE|newsletter_afficher_recurrence_regle{<br />})</p>]</td>
 			<td class='date secondaire'>[(#RECURRENCE|newsletter_afficher_recurrence_debut|affdate_jourcourt)][
 				<br />\(<:programmernewsletter:label_date_derniere:> (#DATE_REDAC|affdate_jourcourt)\)]</td>
-			<td class='date secondaire'>[(#DATE|affdate_jourcourt|sinon{#VAL{'('}|concat{<:programmernewsletter:info_prochaine_occurence_fini:>,')'}})]</td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt|?{[(#DATE|affdate_jourcourt)[ (#DATE|heures_minutes)]],#VAL{'('}|concat{<:programmernewsletter:info_prochaine_occurence_fini:>,')'}})]</td>
 			<td class='secondaire'>[(#EMAIL_TEST)
 			][(#CHAMP_SQL{liste})
 			]</td>

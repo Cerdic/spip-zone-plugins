@@ -7,6 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'erreur_date_incorrecte' => 'Cette date est incorrecte',
+	'erreur_heure_incorrecte' => 'Cet horaire est incorrect',
 
 	'info_prochaine_occurence_fini' => 'fini',
 	'icone_programmer_newsletter' => 'Programmer une infolettre',
