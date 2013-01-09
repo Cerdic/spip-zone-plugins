@@ -11,18 +11,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucune_date' => 'Nothing for this month',
 
 	// C
-	'config_titre_calendriermini' => 'Mini-Calender', # NEW
+	'config_titre_calendriermini' => 'Mini-Calendar',
 
 	// L
 	'label_affichage_hors_mois' => 'Days displayed',
-	'label_affichage_hors_mois_0' => 'Hide the days of earlier and later months', # NEW
-	'label_affichage_hors_mois_1' => 'Show the days of earlier and later months', # NEW
-	'label_changement_rapide' => 'Navigation', # NEW
-	'label_changement_rapide_0' => 'Deactivate quick selection of the month or year.', # NEW
-	'label_changement_rapide_1' => 'Activate quick selection of the month or year.', # NEW
+	'label_affichage_hors_mois_0' => 'Hide days of previous and next months',
+	'label_affichage_hors_mois_1' => 'Display days of previous and next months',
+	'label_changement_rapide' => 'Navigation',
+	'label_changement_rapide_0' => 'Enable quick selection of the month or year.',
+	'label_changement_rapide_1' => 'Enable quick selection of the month or year.',
 	'label_format_jour' => 'Days format',
 	'label_format_jour_abbr' => 'Short',
-	'label_format_jour_initiale' => 'First', # NEW
+	'label_format_jour_initiale' => 'Initial letter',
 	'label_jour1' => 'First day of the week',
 
 	// M
