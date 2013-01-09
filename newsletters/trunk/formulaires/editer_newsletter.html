@@ -22,11 +22,11 @@
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<INCLURE{fond=formulaires/inc-options-patrons,name=#GET{name},defaut=#GET{defaut},env} />
 			</li>
-			#SET{name,selection_articles}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			#SET{name,selection_edito}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
-				]<INCLURE{fond=formulaires/selecteur/articles,name=#GET{name},selected=#ENV*{#GET{name},#GET{defaut}}} />
+				]<INCLURE{fond=formulaires/selecteur/articles,rubriques=1,name=#GET{name},selected=#ENV*{#GET{name},#GET{defaut}}} />
 			</li>
 			#SET{name,chapo}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">

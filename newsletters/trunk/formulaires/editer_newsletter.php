@@ -38,12 +38,12 @@ function newsletter_edit_config($row)
 function formulaires_editer_newsletter_charger_dist($id_newsletter='new', $retour='', $lier_trad=0, $config_fonc='newsletter_edit_config', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('newsletter',$id_newsletter,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 
-	$valeurs['selection_articles'] = array();
-	$possibles = array('article'=>'*');
+	$valeurs['selection_edito'] = array();
+	$possibles = array('article'=>'*','rubrique'=>'*');
 	include_spip("action/editer_liens");
 	$liens = objet_trouver_liens(array("newsletter"=>$id_newsletter),$possibles);
 	foreach ($liens as $lien){
-		$valeurs['selection_'.table_objet($lien['objet'])][] = $lien['objet'].'|'.$lien['id_objet'];
+		$valeurs['selection_edito'][] = $lien['objet'].'|'.$lien['id_objet'];
 	}
 
 	return $valeurs;
@@ -91,9 +91,9 @@ function formulaires_editer_newsletter_traiter_dist($id_newsletter='new', $retou
 
 	if (!$baked AND $res['id_newsletter']) {
 		// mettre a jour les liens vers les articles selectionnes
-		$possibles = array('article'=>'*');
+		$possibles = array('article'=>'*','rubrique'=>'*');
 		$liens = array();
-		if ($selection = _request('selection_articles')){
+		if ($selection = _request('selection_edito')){
 			foreach ($selection as $s){
 				$s = explode("|",$s);
 				list($objet,$id_objet) = $s;

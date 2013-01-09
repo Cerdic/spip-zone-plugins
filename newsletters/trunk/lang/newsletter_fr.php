@@ -51,6 +51,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_baked_1' => 'Edition avancée de l\'infolettre',
 	'label_masquer_fond' => 'Masquer les modèles d\'infolettre :',
 	'label_selection_articles' => 'Selection d\'articles',
+	'label_selection_rubriques' => 'Selection de rubriques',
+	'label_selection_edito' => 'Selection éditoriale (articles&rubriques)',
 
 	// R
 	'retirer_lien_newsletter' => 'Retirer cette infolettre',

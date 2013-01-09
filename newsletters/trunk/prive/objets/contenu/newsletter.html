@@ -9,6 +9,15 @@
 	<span dir='#LANG_DIR' class='#EDIT{patron} patron'>(#PATRON)</span>
 </p>]
 ]
+<B_selectionrubriques>
+<p class="champ contenu_selection_rubriques[ (#PATRON*|strlen|?{'',vide})]">
+	<span class="label"><:newsletter:label_selection_rubriques:> : </span>
+	<span dir='#LANG_DIR' class='selection_rubriques'>
+	<BOUCLE_selectionrubriques(RUBRIQUES){id_newsletter}{si #BAKED|non}{', '}>
+		<span dir='#LANG_DIR'><a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]">#TITRE</a></span>
+	</BOUCLE_selectionrubriques>
+	</span>
+</B_selectionrubriques>
 <B_selectionarticles>
 <p class="champ contenu_selection_articles[ (#PATRON*|strlen|?{'',vide})]">
 	<span class="label"><:newsletter:label_selection_articles:> : </span>
