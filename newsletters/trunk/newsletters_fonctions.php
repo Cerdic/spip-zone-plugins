@@ -135,6 +135,41 @@ function newsletter_affiche_version_enligne($page){
 }
 
 /**
+ * Encapsuler les img du bon markup pour qu'elles ne depassent pas de la largeur maxi
+ * sans pour autant etre deformee en plein ecran
+ *
+ * max-width:100% sur un img ne suffit pas
+ * Il faut les mettre dans un div en width:100% avec un max-width:Npx correspondant a la taille maxi de l'image
+ * et appliquer un width:100% sur l'image
+ *
+ * @param $texte
+ * @return mixed
+ */
+function newsletter_responsive_img($texte){
+	$texte = preg_replace_callback(",<img[^>]*>,Uims",'newsletter_responsive_img_wrap',$texte);
+	return $texte;
+}
+
+/**
+ * Callback de la fonction de dessus
+ * @param $m
+ * @return string
+ */
+function newsletter_responsive_img_wrap($m){
+	$img = $m[0];
+	$w = largeur($img);
+	// on n'encapsule que les images de plus de 100px
+	if ($w<100) return $img;
+
+	$s = extraire_attribut($img,"style");
+	if ($s) $s=rtrim($s,";").";";
+	return
+		"<div class='responsive-img' style='{$s}width:100%;max-width:{$w}px'>"
+		.inserer_attribut($img,"style","{$s}width:100%;height:auto;")
+		."</div>";
+}
+
+/**
  * Un filtre pour fixer une image
  * appele par l'action fixer_newsletter, mais peut etre utilise aussi directement dans la newsletter pour fixer les images
  * manuellement et forcer une url absolue sur un domaine particulier
