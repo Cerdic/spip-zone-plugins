@@ -8,40 +8,40 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_parcourir_docs_article' => 'Parcourir l\'article', # NEW
-	'bouton_parcourir_docs_breve' => 'Parcourir la brève', # NEW
-	'bouton_parcourir_docs_rubrique' => 'Parcourir la rubrique', # NEW
-	'bouton_parcourir_mediatheque' => 'Parcourir la médiathèque', # NEW
+	'bouton_parcourir_docs_article' => 'Buscar artículo',
+	'bouton_parcourir_docs_breve' => 'Buscar breve',
+	'bouton_parcourir_docs_rubrique' => 'Buscar la sección',
+	'bouton_parcourir_mediatheque' => 'Buscar mediateca',
 
 	// C
-	'construire_action_annuler' => 'Annuler', # NEW
-	'construire_action_configurer' => 'Configurer', # NEW
-	'construire_action_deplacer' => 'Déplacer', # NEW
-	'construire_action_dupliquer' => 'Dupliquer', # NEW
-	'construire_action_dupliquer_copie' => '(copie)', # NEW
-	'construire_action_supprimer' => 'Supprimer', # NEW
+	'construire_action_annuler' => 'Anular',
+	'construire_action_configurer' => 'Configurar',
+	'construire_action_deplacer' => 'Mover',
+	'construire_action_dupliquer' => 'Duplicar',
+	'construire_action_dupliquer_copie' => '(copia)',
+	'construire_action_supprimer' => 'Eliminar',
 	'construire_ajouter_champ' => 'Añadir un campo',
-	'construire_attention_enregistrer' => 'N\'oubliez pas d\'enregistrer vos modifications !', # NEW
-	'construire_attention_modifie' => 'Le formulaire ci-dessous est différent du formulaire initial. Vous avez la possibilité de le réinitialiser à son état avant vos modifications.', # NEW
-	'construire_attention_supprime' => 'Vos modifications comportent des suppressions de champs. Veuillez confirmer l\'enregistrement de cette nouvelle version du formulaire.', # NEW
-	'construire_aucun_champs' => 'Il n\'y a pour l\'instant aucun champ dans ce formulaire.', # NEW
-	'construire_confirmer_supprimer_champ' => 'Voulez-vous vraiment supprimer ce champ ?', # NEW
-	'construire_info_nb_champs_masques' => '@nb@ champ(s) masqué(s) le temps de configurer le groupe.', # NEW
-	'construire_position_explication' => 'Indiquez devant quel autre champ sera placé celui-ci.', # NEW
-	'construire_position_fin_formulaire' => 'À la fin du formulaire', # NEW
-	'construire_position_fin_groupe' => 'À la fin du groupe @groupe@', # NEW
+	'construire_attention_enregistrer' => '¡No olvide guardar sus cambios!',
+	'construire_attention_modifie' => 'Este formulario es diferente al original. Tiene la posibilidad de restablecerlo conforme a su estado inical. ',
+	'construire_attention_supprime' => 'Sus cambios implican suprimir campos. Confirme por favor esta nueva versión del formulario. ',
+	'construire_aucun_champs' => 'Actualmente no existen campos en este formulario. ',
+	'construire_confirmer_supprimer_champ' => '¿Desea eliminar realmente este campo?',
+	'construire_info_nb_champs_masques' => '@nb@ campo(s) oculto(s) el tiempo de configurar el grupo.',
+	'construire_position_explication' => 'Indique delante de qué otro campo se cololocará.',
+	'construire_position_fin_formulaire' => 'Al final del formulario',
+	'construire_position_fin_groupe' => 'Al final del grupo @groupe@',
 	'construire_position_label' => 'Posición del campo',
-	'construire_reinitialiser' => 'Réinitialiser le formulaire', # NEW
-	'construire_reinitialiser_confirmer' => 'Vous allez perdre toutes vos modifications. Êtes-vous sûr de vouloir revenir au formulaire initial ?', # NEW
+	'construire_reinitialiser' => 'Restablecer el formulario',
+	'construire_reinitialiser_confirmer' => 'Va a perder todos los cambios. ¿Está seguro de volver al formulario original?',
 	'construire_verifications_aucune' => 'Ninguna',
-	'construire_verifications_label' => 'Type de vérification à effectuer', # NEW
+	'construire_verifications_label' => 'Tipo de verificación a efectuar',
 
 	// E
-	'erreur_generique' => 'Il y a des erreurs dans les champs ci-dessous, veuillez vérifier vos saisies', # NEW
-	'erreur_option_nom_unique' => 'Ce nom est déjà utilisé par un autre champ et il doit être unique dans ce formulaire.', # NEW
+	'erreur_generique' => 'Hay errores en los siguientes campos, revise por favor sus entradas',
+	'erreur_option_nom_unique' => 'Este nombre ya ha sido utilizado en otro campo, y ha de ser único en el formulario.',
 
 	// I
-	'info_configurer_saisies' => 'Page de test des Saisies', # NEW
+	'info_configurer_saisies' => 'Página de prueba de las entradas',
 
 	// L
 	'label_annee' => 'Año',
@@ -57,9 +57,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_rub_interface_label' => 'Aparencia multilingüe',
 	'option_attention_explication' => 'Un mensaje más importante que la explicación.',
 	'option_attention_label' => 'Aviso',
-	'option_autocomplete_defaut' => 'Laisser par défaut', # NEW
-	'option_autocomplete_explication' => 'Au chargement de la page, votre navigateur peut pré-remplir le champ en fonction de son historique', # NEW
-	'option_autocomplete_label' => 'Pré-remplissage du champ', # NEW
+	'option_autocomplete_defaut' => 'Dejar por defecto',
+	'option_autocomplete_explication' => 'Al cargar la página, su navegador puede rellenar el campo en función de sus historial',
+	'option_autocomplete_label' => 'Pre-relleno del campo',
 	'option_autocomplete_off' => 'Desactivar',
 	'option_autocomplete_on' => 'Activar',
 	'option_cacher_option_intro_label' => 'Esconder la primera opción vacía',
@@ -75,8 +75,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_disable_avec_post_label' => 'Deactivar pero enviar',
 	'option_disable_explication' => 'El campo ya no puede obtener el foco.',
 	'option_disable_label' => 'Deactivar el campo',
-	'option_erreur_obligatoire_explication' => 'Vous pouvez personnaliser le message d\'erreur affiché pour indiquer l\'obligation (sinon laisser vide).', # NEW
-	'option_erreur_obligatoire_label' => 'Message d\'obligation', # NEW
+	'option_erreur_obligatoire_explication' => 'Puede personalizar el mensaje de error mostrado para indicar una obligación (sino dejar en blanco).',
+	'option_erreur_obligatoire_label' => 'Mensaje de obligación',
 	'option_explication_explication' => 'Si hace falta, una frase corta que describe el campo',
 	'option_explication_label' => 'Explicación',
 	'option_groupe_affichage' => 'Aparencia',
@@ -122,13 +122,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_text' => 'Normal',
 
 	// S
-	'saisie_auteurs_explication' => 'Permet de sélectionner un ou plusieurs auteurs', # NEW
+	'saisie_auteurs_explication' => 'Permite seleccionar uno o más autores',
 	'saisie_auteurs_titre' => 'Autores',
 	'saisie_case_explication' => 'Permite activar o deactivar algo.',
 	'saisie_case_titre' => 'Checkbox único',
 	'saisie_checkbox_explication' => 'Permite elegir varias opciones con checkboxes',
 	'saisie_checkbox_titre' => 'Checkboxes',
-	'saisie_date_explication' => 'Permet de saisir une date ? l\'aide d\'un calendrier', # NEW
+	'saisie_date_explication' => '¿Permitir introducir una fecha? Ayuda de calendario',
 	'saisie_date_titre' => 'Fecha',
 	'saisie_destinataires_explication' => 'Permite elegir una o varias personas destinatorias dentro de las autoras seleccionadas.',
 	'saisie_destinataires_titre' => 'Personas destinatorias',
