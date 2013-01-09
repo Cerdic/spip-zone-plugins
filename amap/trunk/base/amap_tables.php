@@ -4,7 +4,7 @@
 *
 * @author: Stephane Moulinet
 * @author: E-cosystems
-* @author: Pierre KUHN 
+* @author: Pierre KUHN
 *
 * Copyright (c) 2010-2013
 * Logiciel distribue sous licence GPL.
@@ -17,7 +17,7 @@ include_spip('inc/meta');
 function find_rubrique($titre) {
         $titre = addslashes($titre);
         $count = sql_countsel(
-                "spip_rubriques", 
+                "spip_rubriques",
                 "titre = '$titre'"
         );
         return $count;
@@ -26,8 +26,8 @@ function find_rubrique($titre) {
 //fonction qui permet de trouver l'id d'une rubrique à partir du titre
 function id_rubrique($titre) {
         $result = sql_fetsel(
-                "id_rubrique", 
-                "spip_rubriques", 
+                "id_rubrique",
+                "spip_rubriques",
                 "titre='$titre'"
         );
         $resultat = $result['id_rubrique'];
@@ -48,7 +48,7 @@ function rename_rubrique($titre, $nouveau_titre) {
         }
         return true;
 }
-       
+
 //fonction qui permet de créer une rubrique
 function create_rubrique($titre, $id_parent='0', $descriptif='') {
         $id_rubrique = find_rubrique($titre);
@@ -105,8 +105,8 @@ function amap_declarer_tables_interfaces($interface){
 function amap_declarer_tables_principales($tables_principales){
 	//-- Table amap_disponibles -------------------
 	$spip_amap_disponibles = array(
-		'id_amap_disponible'  => 'bigint NOT NULL AUTO_INCREMENT',
-		'id_amap_panier'  => 'bigint NOT NULL',
+		'id_amap_disponible'  => 'bigint(21) NOT NULL auto_increment',
+		'id_amap_panier'  => 'bigint(21) NOT NULL',
 		'type_disponibilite'  => 'text DEFAULT "" NOT NULL',
 		'info_supplementaire'  => 'text DEFAULT "" NOT NULL',
 		);
@@ -120,7 +120,7 @@ function amap_declarer_tables_principales($tables_principales){
 
 	//-- Table amap_livraisons -------------------
 	$spip_amap_livraisons = array(
-		'id_amap_livraison'  => 'bigint NOT NULL AUTO_INCREMENT',
+		'id_amap_livraison'  => 'bigint(21) NOT NULL auto_increment',
 		'date_livraison'  => 'datetime DEFAULT "0000-00-00 00:00:00" NOT NULL',
 		'contenu_panier'  => 'text DEFAULT "" NOT NULL',
 		);
@@ -134,11 +134,11 @@ function amap_declarer_tables_principales($tables_principales){
 
 	//-- Table amap_paniers -------------------
 	$spip_amap_paniers = array(
-		'id_amap_panier'  => 'bigint NOT NULL AUTO_INCREMENT',
-		'id_auteur'  => 'bigint NOT NULL',
-		'id_producteur'  => 'bigint NOT NULL',
+		'id_amap_panier'  => 'bigint(21) NOT NULL auto_increment',
+		'id_auteur'  => 'bigint(21) NOT NULL',
+		'id_producteur'  => 'bigint(21) NOT NULL',
 		'date_distribution'  => 'datetime DEFAULT "0000-00-00 00:00:00" NOT NULL',
-		'dispo'  => 'bigint DEFAULT "0" NOT NULL',
+		'dispo'  => 'bigint(21) DEFAULT "0" NOT NULL',
 		);
 	$spip_amap_paniers_key = array(
 		'PRIMARY KEY'   => 'id_amap_panier'
@@ -150,8 +150,8 @@ function amap_declarer_tables_principales($tables_principales){
 
 	//-- Table amap_responsables -------------------
 	$spip_amap_responsables = array(
-		'id_amap_responsable'  => 'bigint NOT NULL AUTO_INCREMENT',
-		'id_auteur'  => 'bigint NOT NULL',
+		'id_amap_responsable'  => 'bigint(21) NOT NULL auto_increment',
+		'id_auteur'  => 'bigint(21) NOT NULL',
 		'date_distribution'  => 'datetime DEFAULT "0000-00-00 00:00:00" NOT NULL',
 		);
 	$spip_amap_responsables_key = array(
@@ -167,38 +167,54 @@ function amap_declarer_tables_principales($tables_principales){
 
 //creation de champs extra
 function amap_declarer_champs_extras($champs = array()){
-	// table auteur un champ adherent
-	$champs[] = new ChampExtra(array(
-		'table' => 'auteurs', // sur quelle table ?
-		'champ' => 'type_adherent', // nom sql
-		'label' => 'amap:type_adherent_auteur', // chaine de langue 'prefix:cle'
-		'type' => 'menu-radio', // type de saisie
-		'enum' => array(
-			"adherent" => _T('amap:adherent'),
-			"producteur" => _T('amap:producteur'),
+	// type d'adhérent
+	$champs['spip_auteurs']['type_adherent'] = array(
+		'saisie' => 'radio',//Type du champ (voir plugin Saisies)
+		'options' => array(
+				'nom' => 'type_adherent',
+				'label' => _T('amap:type_adherent_auteur'),
+				'sql' => "text NOT NULL DEFAULT ''",
+				'defaut' => '',// Valeur par défaut
+				'restrictions'=>array('voir' => array('auteur' => ''),//Tout le monde peut voir
+				'modifier' => array('auteur' => 'auteur')),//Seuls les webmestres peuvent modifier
+				'enum' => array(
+						"adherent" => _T('amap:adherent'),
+						"producteur" => _T('amap:producteur'),
+				),
 		),
-		'sql' => "text NOT NULL DEFAULT ''", // declaration sql
-	));
-	// table auteurs un champ adhésion
-	$champs[] = new ChampExtra(array(
-		'table' => 'auteurs', // sur quelle table ?
-		'champ' => 'adhesion', // nom sql
-		'label' => 'amap:adhesion_auteur', // chaine de langue 'prefix:cle'
-		'type' => 'input', // type de saisie
-		'sql' => "bigint NULL", // declaration sql
-	));
-	// table auteur un champ type_panier
-	$champs[] = new ChampExtra(array(
-		'table' => 'auteurs', // sur quelle table ?
-		'champ' => 'type_panier', // nom sql
-		'label' => 'amap:type_panier_auteur', // chaine de langue 'prefix:cle'
-		'type' => 'menu-radio', // type de saisie
-		'enum' => array(
-			"petit" => _T('amap:petit'),
-			"grand" => _T('amap:grand'),
+	);
+	return $champs;
+
+	// l'adhésion
+	$champs['spip_auteurs']['adhesion'] = array(
+		'saisie' => 'input',//Type du champ (voir plugin Saisies)
+		'options' => array(
+				'nom' => 'adhesion',
+				'label' => _T('amap:adhesion_auteur'),
+				'sql' => "bigint(21) NULL", // declaration sql
+				'defaut' => '',// Valeur par défaut
+				'restrictions'=>array('voir' => array('auteur' => ''),//Tout le monde peut voir
+				'modifier' => array('auteur' => 'auteur')),//Seuls les webmestres peuvent modifier
 		),
-		'sql' => "text NOT NULL DEFAULT ''", // declaration sql
-	));
+	);
+	return $champs;
+
+	// type de panier
+	$champs['spip_auteurs']['type_panier'] = array(
+		'saisie' => 'radio',//Type du champ (voir plugin Saisies)
+		'options' => array(
+				'nom' => 'type_panier',
+				'label' => _T('amap:type_panier_auteur'),
+				'sql' => "text NOT NULL DEFAULT ''", // declaration sql
+				'defaut' => '',// Valeur par défaut
+				'restrictions'=>array('voir' => array('auteur' => ''),//Tout le monde peut voir
+				'modifier' => array('auteur' => 'auteur')),//Seuls les webmestres peuvent modifier
+				'enum' => array(
+					"petit" => _T('amap:petit'),
+					"grand" => _T('amap:grand'),
+				),
+		),
+	);
 	return $champs;
 }
 ?>
