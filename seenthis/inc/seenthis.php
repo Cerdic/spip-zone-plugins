@@ -78,6 +78,12 @@ class Seenthis {
 		return $xml;
 	}
 	
+	// acces un peu detourne au bouton favori
+	function favori($me) {
+		$uri = '?action=favori&id_me='.$me;
+		return $this->curl(null, 'GET', $uri);
+	}
+
 	function curl($xml, $method, $uri) {
 		$request = curl_init(); // initiate curl object
 		curl_setopt($request, CURLOPT_URL, $this->post_url.$uri);
@@ -88,8 +94,9 @@ class Seenthis {
 		curl_setopt($request, CURLOPT_RETURNTRANSFER, true );	
 		curl_setopt($request, CURLOPT_USERPWD, $this->login.':'.$this->pass);
 		curl_setopt($request, CURLOPT_POSTFIELDS, "$xml");
-
 		$post_response = curl_exec($request); // execute curl post and store results in $post_response
+
+
 		curl_close ($request); // close curl object
 
 #		try {
