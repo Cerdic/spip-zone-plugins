@@ -58,8 +58,15 @@ class Seenthis {
 		$xml = "<?xml version='1.0' encoding='UTF-8'?>\n"
 				."<entry xmlns='http://www.w3.org/2005/Atom' xmlns:thr='http://purl.org/syndication/thread/1.0'>\n";
 
-		if ($id = $this->numeric($id))
-			$xml .= "<id>message:$id</id>\n";
+		if (strlen($id)) {
+			include_spip('inc/uuid');
+			if (is_numeric($id)) {
+				$xml .= "<id>message:$id</id>\n";
+			} else if (strlen($id) == 36 AND UUID::Valid($id)) {
+				$xml .= "<id>uuid:$id</id>\n";
+			} else
+				return false; # erreur de syntaxe de l'id
+		}
 
 		$xml .= "<summary><![CDATA[".trim($message)."]]></summary>\n";
 
@@ -85,6 +92,7 @@ class Seenthis {
 		$post_response = curl_exec($request); // execute curl post and store results in $post_response
 		curl_close ($request); // close curl object
 
+#		try {
 		if (is_object($r = new SimpleXmlIterator($post_response))
 		AND !$r->body  # le controle d'erreur n'est pas proprement indique dans la reponse de l'API, on se rabat sur la presence d'un body
 		) {
@@ -98,6 +106,9 @@ class Seenthis {
 			if (!$r->error)
 				$r->error = "Empty response";
 		}
+#		} catch(Exception $e) {
+#			var_dump($e);
+#		};
 
 		return $r;
 	}
@@ -120,8 +131,8 @@ class Seenthis {
 			return $this->curl("", 'GET', 'messages/'.$this->numeric($id));
 	}
 
-	function post($message, $inreplyto=null) {
-		$xml = $this->create_xml($message, null, $inreplyto) ;
+	function post($message, $inreplyto=null, $id=null) {
+		$xml = $this->create_xml($message, $id, $inreplyto) ;
 		return $this->curl($xml, 'POST', 'messages');
 	}
 	
