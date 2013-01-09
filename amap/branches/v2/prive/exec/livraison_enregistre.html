@@ -1,0 +1,20 @@
+[(#REM)
+
+  Squelette
+  (c) 2011 - 2013 Amap
+  Distribue sous licence GPL
+
+]
+<INCLURE{fond=prive/inclure/navigation,env,ajax}>
+
+<h1><:amap:gestion_amap:></h1>
+
+<div class="cadre cadre-trait-couleur">
+	<div class="titrem impliable">
+		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata.gif}">
+		<:amap:enregistrement_livraison:>
+	</div>
+	<div class="cadre_padding">
+		#FORMULAIRE_EDITER_AMAP_LIVRAISON{#ID_AMAP_LIVRAISON,#ENV{redirect,#URL_ECRIRE{livraison_liste}}}
+	</div>
+</div>

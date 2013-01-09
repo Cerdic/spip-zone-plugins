@@ -1,0 +1,22 @@
+[(#REM)
+
+  Squelette
+  (c) 2011 - 2013 Amap
+  Distribue sous licence GPL
+
+]
+<div class='formulaire_spip formulaire_amap formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_amap_livraison,nouveau}'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method='post' action='#ENV{action}'><div>
+	[(#ACTION_FORMULAIRE{#ENV{action}})]
+	<input type='hidden' name='id_amap_livraison' value='#ENV{id_amap_livraison}' />
+		<ul>
+			[(#SAISIE{date_distributions, date_livraison, label=<:amap:date_distribution:>, obligatoire=oui})]
+			[(#SAISIE{textarea, contenu_panier, label=<:amap:contenu_panier:>, explication=<:amap:contenu_panier_explication:>, obligatoire=oui, rows=10, cols=56})]
+		</ul>
+	<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>

@@ -1,0 +1,20 @@
+<INCLURE{fond=prive/inclure/navigation,env,ajax}>
+<!--#extra-->
+<div class="cadre cadre-info verdana1">
+	<div class="cadre_padding">
+	<:amap:responsables_explication:>
+	</div>
+</div>
+<!--/#extra-->
+
+<h1><:amap:gestion_amap:></h1>
+
+<div class="cadre cadre-trait-couleur">
+	<div class="titrem impliable">
+		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata.gif}">
+		<:amap:liste_responsables:>
+	</div>
+	<div class="cadre_padding">
+		<INCLURE{fond=prive/inclure/liste_responsables,env,ajax}>
+	</div>
+</div>
