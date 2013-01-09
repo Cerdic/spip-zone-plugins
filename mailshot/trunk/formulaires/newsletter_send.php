@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Declarer les champs postes et y integrer les valeurs par defaut
  */
-function formulaires_envoyer_newsletter_charger_dist($id_newsletter,$mode_test=false){
+function formulaires_newsletter_send_charger_dist($id_newsletter,$mode_test=false){
 
 	$valeurs = array(
 		'email_test' => $GLOBALS['visiteur_session']['email'],
@@ -36,7 +36,7 @@ function mailshot_list_subscribers($list){
 /**
  * Verifier les champs postes et signaler d'eventuelles erreurs
  */
-function formulaires_envoyer_newsletter_verifier_dist($id_newsletter,$mode_test=false){
+function formulaires_newsletter_send_verifier_dist($id_newsletter,$mode_test=false){
 	$erreurs = array();
 
 	if (_request('envoi_test')){
@@ -55,7 +55,7 @@ function formulaires_envoyer_newsletter_verifier_dist($id_newsletter,$mode_test=
 /**
  * Traiter les champs postes
  */
-function formulaires_envoyer_newsletter_traiter_dist($id_newsletter,$mode_test=false){
+function formulaires_newsletter_send_traiter_dist($id_newsletter,$mode_test=false){
 
 	$res = array('message_erreur'=>"lapin compris");
 
