@@ -1,3 +1,10 @@
+[(#REM)
+
+  Squelette
+  (c) 2011 - 2013 Amap
+  Distribue sous licence GPL
+
+]
 <!-- adherent -->
 <BOUCLE_panier(AMAP_PANIERS){id_auteur}{tous}{age<0}{0,1}>
 	<BOUCLE_aut(AUTEURS){id_auteur}{tous}><a href="[(#URL_ECRIRE{panier_adherent}|parametre_url{id_auteur,#ID_AUTEUR})]"><:amap:les_paniers{nom=#NOM}:></a>

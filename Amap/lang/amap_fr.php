@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									<p><strong>LE NON RESPECT DE CES QUELQUES PRINCIPES ENTRAINERA UN DYSFONCTIONNEMENT DU PLUGIN AMAP</strong></p>',
 	'aucun_panier_pour_nom' => 'Nous n\'avons aucun panier pour @nom@.',
 	'aucun_panier_produit_par_nom' => 'Nous n\'avons aucun panier produit par "@nom@".',
-	'autorise_envoie_email_explication' => 'L\'envoie de email est utiliser pour la mise a disposition des paniers et la reprise. Non est conseiller pour de grosses amap, à la place on vous propose une interphase de gestion.',
+	'autorise_envoie_email_explication' => 'L\'envoie d\'email est utiliser pour la mise a disposition des paniers et la reprise. Non est conseiller pour de grosses amap, à la place on vous propose une interphase de gestion.',
 	'autorise_envoie_email_label' => 'Voulez vous envoyez des mails ?',
 	'avant_le' => 'avant le',
 

@@ -1,4 +1,15 @@
 <?php
+/**
+* Plugin Amap
+*
+* @author: Stephane Moulinet
+* @author: E-cosystems
+* @author: Pierre KUHN 
+*
+* Copyright (c) 2010-2013
+* Logiciel distribue sous licence GPL.
+*
+**/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

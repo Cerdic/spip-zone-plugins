@@ -1,11 +1,16 @@
 <?php
-
 /**
-* Plugin AMAP pour Spip 2.0
-* Pierre KUHN
-* Config pris sur Soyezcreateurs
+* Plugin Amap
 *
-*/
+* @author: Stephane Moulinet
+* @author: E-cosystems
+* @author: Pierre KUHN 
+*
+* Copyright (c) 2010-2013
+* Logiciel distribue sous licence GPL.
+*
+**/
+
 include_spip('inc/meta');
 
 // fonction qui permet de trouver si une rubrique existe à partir du titre

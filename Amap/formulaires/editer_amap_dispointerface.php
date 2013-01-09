@@ -1,4 +1,16 @@
 <?php
+/**
+* Plugin Amap
+*
+* @author: Stephane Moulinet
+* @author: E-cosystems
+* @author: Pierre KUHN 
+*
+* Copyright (c) 2010-2013
+* Logiciel distribue sous licence GPL.
+*
+**/
+
 function formulaires_editer_amap_dispomail_traiter_dist() {
 	// Le numéro du panier dispo
 	$id_amap_panier = _request('id_amap_panier');
