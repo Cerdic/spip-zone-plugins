@@ -14,6 +14,7 @@
 #SET{nouvel_album, #EVAL{_request('id_album_ajoute');}|=={#ID_ALBUM}|?{oui,''}}
 #SET{bouton, #ENV{portfolio_album}|=={#ID_ALBUM}
 	|ou{#GET{nouvel_album}}
+	|ou{#GET{contenu}|non}
 	|?{cacher,afficher}}
 #SET{alt, #VAL{album:titre_album}|_T|concat{' n°'}|concat{#ID_ALBUM}|attribut_html}
 <div class='album lie clearfix[ (#ENV{portfolio_album}|=={#ID_ALBUM}|oui)actif]'>
