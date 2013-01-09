@@ -686,19 +686,27 @@ class Markdownify {
         #  [1]: mailto:mail@example.com Title
         $tag['href'] = 'mailto:'.$bufferDecoded;
       }
-      # [This link][id]
-      foreach ($this->stack['a'] as $tag2) {
-        if ($tag2['href'] == $tag['href'] && $tag2['title'] === $tag['title']) {
-          $tag['linkID'] = $tag2['linkID'];
-          break;
-        }
-      }
-      if (!isset($tag['linkID'])) {
-        $tag['linkID'] = count($this->stack['a']) + 1;
-        array_push($this->stack['a'], $tag);
-      }
+	    if ($this->linksAfterEachParagraph!=='inline'){
+	      # [This link][id]
+	      foreach ($this->stack['a'] as $tag2) {
+	        if ($tag2['href'] == $tag['href'] && $tag2['title'] === $tag['title']) {
+	          $tag['linkID'] = $tag2['linkID'];
+	          break;
+	        }
+	      }
+	      if (!isset($tag['linkID'])) {
+	        $tag['linkID'] = count($this->stack['a']) + 1;
+	        array_push($this->stack['a'], $tag);
+	      }
 
-      $this->out('['.$buffer.']['.$tag['linkID'].']', true);
+	      $this->out('['.trim($buffer).']['.$tag['linkID'].']', true);
+	    }
+	    else {
+		    # [This link|title](url)
+		    if ($tag['title'])
+			    $buffer.="|".$tag['title'];
+		    $this->out('['.trim($buffer).']('.$tag['href'].')', true);
+	    }
     }
   }
   /**
