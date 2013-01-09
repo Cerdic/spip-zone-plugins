@@ -30,9 +30,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_albums' => 'Albums',
 
 	// F
-	'filtre_avec_contenu' => 'With content',
+	'filtre_avec_contenu' => 'With content', # MODIF
 	'filtre_non_vus' => 'Not inserted in text',
-	'filtre_sans_contenu' => 'Without content',
+	'filtre_sans_contenu' => 'Without content', # MODIF
 	'filtre_tous' => 'All',
 	'filtre_tous_contenus' => 'All contents',
 	'filtre_vus' => 'Inserted in text',
@@ -79,11 +79,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_activer_album_objets' => 'Enable albums for the contents :',
 	'label_case_utiliser_titre_defaut' => 'By default, use the parent object\'s title',
-	'label_modele_alignement' => 'Alignement', # NEW
-	'label_modele_alignement_centre' => 'Centré', # NEW
-	'label_modele_alignement_defaut' => 'Défaut', # NEW
-	'label_modele_alignement_droite' => 'Droite', # NEW
-	'label_modele_alignement_gauche' => 'Gauche', # NEW
+	'label_modele_alignement' => 'Alignment',
+	'label_modele_alignement_centre' => 'Center',
+	'label_modele_alignement_defaut' => 'Default',
+	'label_modele_alignement_droite' => 'Right',
+	'label_modele_alignement_gauche' => 'Left',
+	'label_modele_identifiant' => 'Numéro de l\'album', # NEW
+	'label_modele_parcourir_albums' => 'Parcourir les albums', # NEW
 	'label_modele_titre' => 'Utiliser un titre différent', # NEW
 	'label_modele_variante' => 'Variante', # NEW
 	'label_modele_variante_defaut' => 'Vignettes', # NEW
@@ -113,13 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_albums' => 'Albums',
 	'titre_inserer_modele_album' => 'un album', # NEW
 	'titre_logo_album' => 'Logo',
-	'titre_page_configurer_albums' => 'Configure Albums',
-
-	// U
-	'un_audio' => 'sound',
-	'un_file' => 'document',
-	'un_image' => 'image',
-	'un_video' => 'video'
+	'titre_page_configurer_albums' => 'Configure Albums'
 );
 
 ?>

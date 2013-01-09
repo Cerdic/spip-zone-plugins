@@ -113,8 +113,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_albums' => 'Albums',
 	'titre_inserer_modele_album' => 'un album',
 	'titre_logo_album' => 'Logo',
-	'titre_page_configurer_albums' => 'Configurer les Albums',
-
+	'titre_page_configurer_albums' => 'Configurer les Albums'
 );
 
 ?>
