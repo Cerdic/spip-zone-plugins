@@ -82,7 +82,10 @@ function newsletters_html2text($html){
 	$html = preg_replace(",</p>\s*<br/?>,ims","</p>",$html);
 	$html = preg_replace(",(</p>\s*(@@@hr@@@)?\s*)+,ims","</p>\\2",$html);
 	$html = preg_replace(",(<p>\s*</p>),ims","",$html);
-	#return $html;
+
+	// succession @@@hr@@@<hr> et <hr>@@@hr@@@
+	$html = preg_replace(",@@@hr@@@\s*(<[^>]*>\s*)?<hr[^>]*>,ims","@@@hr@@@\n",$html);
+	$html = preg_replace(",<hr[^>]*>\s*(<[^>]*>\s*)?@@@hr@@@,ims","\n@@@hr@@@",$html);
 
 	$html = preg_replace(",<textarea[^>]*spip_cadre[^>]*>(.*)</textarea>,Uims","<code>\n\\1\n</code>",$html);
 
@@ -118,7 +121,7 @@ function newsletters_html2text($html){
 
 	#return $html;
 	include_spip("lib/markdownify/markdownify");
-	$parser = new Markdownify(false,false,false);
+	$parser = new Markdownify('inline',false,false);
 	$texte = $parser->parseString($html);
 
 	$texte = str_replace(array_keys($postlinks), array_values($postlinks),$texte);
@@ -128,9 +131,9 @@ function newsletters_html2text($html){
 	$texte = trim($texte);
 	$texte = str_replace("<br />\n","\n",$texte);
 	$texte = preg_replace(",(@@@hr@@@\s*)+\Z,ims","",$texte);
-	$texte = preg_replace(",(@@@hr@@@\s*)+,ims","\n\n\n".str_pad("-",75,"-")."\n\n\n",$texte);
+	$texte = preg_replace(",(@@@hr@@@\s*\n)+,ims","\n\n\n".str_pad("-",75,"-")."\n\n\n",$texte);
 	$texte = preg_replace(",(\n#+\s),ims","\n\n\\1",$texte);
-	$texte = preg_replace(",(\n\s*)(\n\s*)(\n\s*)+,ims","\n\n\n",$texte);
+	$texte = preg_replace(",(\n\s*)(\n\s*)+(\n)+,ims","\n\n\n",$texte);
 
 	// entites restantes ? (dans du code...)
 	include_spip('inc/charsets');
