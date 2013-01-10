@@ -20,7 +20,7 @@
 							#SET{disable,#CONFIG{facteur_smtp}|=={oui}|non}
 							<div class="choix[(#GET{disable}|oui)disabled]">
 								<input type="radio" name="mailer" class="radio" value="defaut" id="mailer_defaut"[(#GET{disable}|non)[(#ENV{mailer,'defaut'}|=={defaut}|oui)checked="checked"]][(#GET{disable}|oui)disabled="disabled"]/>
-								<label for="mailer_defaut"><:mailshot:label_mailer_defaut:>[(#GET{disable}|oui)<:mailshot:label_mailer_defaut_desactive:>]</label>
+								<label for="mailer_defaut"><:mailshot:label_mailer_defaut:>[(#GET{disable}|oui)<br /><b><:mailshot:label_mailer_defaut_desactive:>]</b></label>
 							</div>
 							<div class="choix">
 								<input type="radio" name="mailer" class="radio" value="smtp" id="mailer_smtp"[(#ENV{mailer,'defaut'}|=={smtp}|oui)checked="checked"]/>

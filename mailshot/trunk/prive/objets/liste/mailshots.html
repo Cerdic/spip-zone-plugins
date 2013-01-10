@@ -31,11 +31,11 @@
 			<td class='action'>
 			[(#AUTORISER{instituer,mailshot,#ID_MAILSHOT}|oui)
 			[(#STATUT|in_array{#LISTE{processing}}|oui)
-			  [(#BOUTON_ACTION{#CHEMIN_IMAGE{mailshot-pause-16.png}|balise_img{<:mailshot:label_control_pause:>,<:mailshot:label_control_pause:>},#URL_ACTION_AUTEUR{instituer_objet,mailshot-#ID_MAILSHOT-pause,#SELF},ajax})]
+			  [(#BOUTON_ACTION{#CHEMIN_IMAGE{mailshot-pause-16.png}|balise_img{<:mailshot:label_control_pause:>},#URL_ACTION_AUTEUR{instituer_objet,mailshot-#ID_MAILSHOT-pause,#SELF},ajax,'',<:mailshot:label_control_pause:>})]
 			][(#STATUT|in_array{#LISTE{pause}}|oui)
-				[(#BOUTON_ACTION{#CHEMIN_IMAGE{mailshot-play-16.png}|balise_img{<:mailshot:label_control_play:>},#URL_ACTION_AUTEUR{instituer_objet,mailshot-#ID_MAILSHOT-processing,#SELF},ajax})]
+				[(#BOUTON_ACTION{#CHEMIN_IMAGE{mailshot-play-16.png}|balise_img{<:mailshot:label_control_play:>},#URL_ACTION_AUTEUR{instituer_objet,mailshot-#ID_MAILSHOT-processing,#SELF},ajax,'',<:mailshot:label_control_play:>})]
 			][(#STATUT|in_array{#LISTE{pause,processing}}|oui)
-				[(#BOUTON_ACTION{#CHEMIN_IMAGE{mailshot-stop-16.png}|balise_img{<:mailshot:label_control_stop:>},#URL_ACTION_AUTEUR{instituer_objet,mailshot-#ID_MAILSHOT-cancel,#SELF},ajax})]
+				[(#BOUTON_ACTION{#CHEMIN_IMAGE{mailshot-stop-16.png}|balise_img{<:mailshot:label_control_stop:>},#URL_ACTION_AUTEUR{instituer_objet,mailshot-#ID_MAILSHOT-cancel,#SELF},ajax,'',<:mailshot:label_control_stop:>})]
 			]
 			]
 			</td>

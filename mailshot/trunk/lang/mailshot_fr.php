@@ -57,7 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_voir_newsletter' => 'Voir l\'infolettre',
 
 	'label_mailer_defaut' => 'Utiliser le même service d\'envoi que pour les autres mails',
-	'label_mailer_defaut_desactive' => '(aucun service d\'envoi configuré par défaut)',
+	'label_mailer_defaut_desactive' => 'Impossible : aucun service d\'envoi d\'email n\'est configuré',
 	'label_mailer_smtp' => 'Serveur SMTP',
 	'label_mailer_mandrill' => 'Service Mandrill',
 	'label_mandrill_api_key' => 'Mandrill API Key',
