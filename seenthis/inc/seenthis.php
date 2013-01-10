@@ -3,7 +3,7 @@
 ## a definir dans mes_options (ou cfg)
 # define('_SEENTHIS_LOGIN', 'xxx');
 # define('_SEENTHIS_PASS', 'xxx');
-
+define('_URL_SEENTHIS', 'https://seenthis.net/');
 
 // (c) Fil base sur le code d'ARNO* / Seenthis.net 2011
 // Licence LGPL / MIT (je suppose)
@@ -25,7 +25,7 @@ class Seenthis {
 		else
 			$this->pass = _SEENTHIS_PASS;
 
-		$this->post_url = "https://seenthis.net/api/";
+		$this->post_url = _URL_SEENTHIS."api/";
 	}
 
 	function create_message($titre, $link, $quote, $comment, $tags) {
@@ -79,8 +79,8 @@ class Seenthis {
 	}
 	
 	// acces un peu detourne au bouton favori
-	function favori($me) {
-		$uri = '?action=favori&id_me='.$me;
+	function favori($me, $share=1) {
+		$uri = '?action=favori&id_me='.intval($me).'&share='.intval($share);
 		return $this->curl(null, 'GET', $uri);
 	}
 
