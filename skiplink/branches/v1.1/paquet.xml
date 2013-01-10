@@ -1,0 +1,21 @@
+<paquet
+	prefix="skiplink"
+	categorie="navigation"
+	version="1.1.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.99]"
+	logo="icon/skiplink-64.png"
+	documentation="http://www.spip-contrib.net/skiplink"
+>	
+
+	<nom>SkipLink</nom>
+	<!-- Liens facilitant la navigation dans la page  -->
+
+	<auteur lien="http://romy.tetue.net">romy.tetue.net</auteur>
+	<auteur>2009</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="affichage_final" inclure="insere_skiplink.php" />
+	<pipeline nom="insert_head_css" inclure="skiplink_pipelines.php" />
+</paquet>

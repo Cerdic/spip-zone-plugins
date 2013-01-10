@@ -1,7 +1,7 @@
 <plugin>
 <nom>SkipLink</nom>
 <icon>icon/skiplink-64.png</icon>
-<version>1.0.3</version>
+<version>1.1.0</version>
 <etat>stable</etat>
 <description>
 <multi>
@@ -23,5 +23,5 @@
 	<inclure>skiplink_pipelines.php</inclure>
 </pipeline>
 <categorie>navigation</categorie>
-<necessite id='SPIP' version='[1.9.0;]' />
+<necessite id='SPIP' version='[2.0.0;2.1.99]' />
 </plugin>
