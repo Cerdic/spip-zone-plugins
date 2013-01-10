@@ -11,7 +11,7 @@
 <form action="#ENV{action}" method="post"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<BOUCLE_deja_choisi(CONDITION){si #ENV{formulaire_modele}}>
-		[<code class="code_modele" id="code_modele"[ (#ENV{_code_modele}|et{#ENV{_js_inserer_code}}|oui)ondblclick="#ENV**{_js_inserer_code}"]>(#ENV{_code_modele})</code>]
+		[<textarea readonly="readonly" class="code_modele" id="code_modele"[ (#ENV{_code_modele}|et{#ENV{_js_inserer_code}}|oui)ondblclick="#ENV**{_js_inserer_code}"]>(#ENV{_code_modele})</textarea>]
 		[(#REM) Insertion du code dans le texte après validation ]
 		[(#ENV{_code_modele}|oui)
 			<script>$(document).ready(function(){
