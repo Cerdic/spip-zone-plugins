@@ -310,6 +310,8 @@ class FacteurMandrill extends Facteur {
 		// ajouter le tracking_id en tag, pour retrouver le message apres webhook
 		if (isset($options['tracking_id'])
 		  AND $id = $options['tracking_id']){
+			$this->message['track_opens'] = true;
+			$this->message['track_clicks'] = true;
 			// prefixer le tracking par l'url du site pour ne pas melanger les feedbacks
 			$this->message['tags'][] = protocole_implicite($GLOBALS['meta']['adresse_site'])."/#".$options['tracking_id'];
 		}
