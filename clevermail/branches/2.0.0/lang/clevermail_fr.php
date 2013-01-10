@@ -161,6 +161,7 @@ Merci',
 	'erreur' => 'Erreur',
 	'erreur_contenu_vide' => 'Un nouveau message n\'a pas pu être créé faute de contenu.',
 	'et_ou_saisir_des_adresses' => '...et/ou saisir des adresses.',
+	'exporter' => 'Exporter la liste des abonnés',
 
 	// F
 	'front_clevermail_action_validation' => 'Validation d\'une opération',
