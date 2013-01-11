@@ -1,63 +1,81 @@
 [(#REM)
-	modèle Nivoslider pour Albums : 
-	- Depuis un article : < album|nivoslider >
-	- Selon le modele CROCHET(# MODELE{album_nivoslider,id_album=X})CROCHET
+	Variante du modèle 'album' : Nivoslider
+	- Depuis le texte d'un objet : <albumXX|nivoslider>
+	- Dans un squelette # MODELE{album_nivoslider}{id_album=XX}
+	Paramètres :
+		titre:			titre personnalisé ('non' pour ne pas afficher le titre)
+		align:			left,right,center -> alignement du bloc, défaut:''
+		statut:			statut de l'album, défaut:publie
+		width:			hauteur 
+		height:			largeur 
+		limite:			nb max d'images
+		manuel:			
+		effect:			
+		slices:			
+		animSpeed:		
+		pauseTime:		
+		directionNav:		
+		directionNavHide:	
+		controlNav:		
+		keyboardNav:		
+		pauseOnHover:		
+		captionOpacity:		
+		imageAlign:		
+		imageBackcolor:		
+		controlNavThumbs:	
+		controlNavThumbsWidth:	
+		controlNavThumbsHeight:	
 ]
 
-[(#SET{width,[(#ENV{width, #CONFIG{nivoslider/width, 500} })]} )]
-[(#SET{height,[(#ENV{height, #CONFIG{nivoslider/height, 240} })]} )]
-[(#SET{effect,[(#ENV{effect, #CONFIG{nivoslider/effect, random} })]} )]
-[(#SET{slices,[(#ENV{slices, #CONFIG{nivoslider/slices,15} })]} )]
-[(#SET{animSpeed,[(#ENV{animSpeed, #CONFIG{nivoslider/animSpeed,500} })]} )]
-[(#SET{pauseTime,[(#ENV{pauseTime, #CONFIG{nivoslider/pauseTime,3000} })]} )]
-[(#SET{directionNav,[(#ENV{directionNav, #CONFIG{nivoslider/directionNav,true} })]} )]
-[(#SET{directionNavHide,[(#ENV{directionNavHide, #CONFIG{nivoslider/directionNavHide,true} })]} )]
-[(#SET{controlNav,[(#ENV{controlNav, #CONFIG{nivoslider/controlNav,true} })]} )]
-[(#SET{keyboardNav,[(#ENV{keyboardNav, #CONFIG{nivoslider/keyboardNav,false} })]} )]
-[(#SET{pauseOnHover,[(#ENV{pauseOnHover, #CONFIG{nivoslider/pauseOnHover,true} })]} )]
-[(#SET{captionOpacity,[(#ENV{captionOpacity, #CONFIG{nivoslider/captionOpacity,0.8} })]} )]
-[(#SET{imageAlign,[(#ENV{imageAlign, #CONFIG{nivoslider/imageAlign,'center center'} })]} )]
-[(#SET{imageBackcolor,[(#ENV{imageBackcolor, #CONFIG{nivoslider/imageBackcolor,'transparent'} })]} )]
-[(#SET{controlNavThumbs,[(#ENV{controlNavThumbs, #CONFIG{nivoslider/controlNavThumbs,false} })]} )]
-[(#SET{controlNavThumbsWidth,[(#ENV{controlNavThumbsWidth, #CONFIG{nivoslider/controlNavThumbsWidth,50} })]} )]
-[(#SET{controlNavThumbsHeight,[(#ENV{controlNavThumbsHeight, #CONFIG{nivoslider/controlNavThumbsHeight,50} })]} )]
-
-[(#SET{id_rand,	#VAL{1}|rand{1000}})]
-
-[(#REM|test_espace_prive|?{#SET{statut,'.*'},#SET{statut,#ENV{statut,publie}}} )]
-
-<BOUCLE_album(ALBUMS){id_album}{statut == #GET{statut}}>
-
-[(#REM) Notice affichée dans l'espace privé ]
-<BOUCLE_vide(DOCUMENTS){id_album}{tout}> </BOUCLE_vide> #SET{notice,vide} <//B_vide>
-[(#STATUT|!={publie}|oui) #SET{notice,#GET{notice}|toggle_parametre{statut}} ]
-[(#REM|test_espace_prive|=={1}|et{#GET{notice}}|oui)
-	[(#INCLURE{fond=prive/squelettes/inclure/albums_modele_infos_prive, notice=#GET{notice}}{env})]
+<B_album>
+[(#REM|test_espace_prive|oui)
+	[(#INCLURE{fond=prive/squelettes/inclure/albums_modele_infos_prive, id_album, js=oui})]
 ]
+<BOUCLE_album(ALBUMS){id_album}{statut == #REM|test_espace_prive|?{.*,#ENV{statut,publie}}}>
 
-[<h2>(#_album:TITRE)</h2>]
+#SET{width, #ENV{width, #CONFIG{nivoslider/width, 500}}}
+#SET{height, #ENV{height, #CONFIG{nivoslider/height, 240}}}
+#SET{effect, #ENV{effect, #CONFIG{nivoslider/effect, random}}}
+#SET{slices, #ENV{slices, #CONFIG{nivoslider/slices,15}}}
+#SET{animSpeed, #ENV{animSpeed, #CONFIG{nivoslider/animSpeed,500}}}
+#SET{pauseTime, #ENV{pauseTime, #CONFIG{nivoslider/pauseTime,3000}}}
+#SET{directionNav, #ENV{directionNav, #CONFIG{nivoslider/directionNav,true}}}
+#SET{directionNavHide, #ENV{directionNavHide, #CONFIG{nivoslider/directionNavHide,true}}}
+#SET{controlNav, #ENV{controlNav, #CONFIG{nivoslider/controlNav,true}}}
+#SET{keyboardNav, #ENV{keyboardNav, #CONFIG{nivoslider/keyboardNav,false}}}
+#SET{pauseOnHover, #ENV{pauseOnHover, #CONFIG{nivoslider/pauseOnHover,true}}}
+#SET{captionOpacity, #ENV{captionOpacity, #CONFIG{nivoslider/captionOpacity,0.8}}}
+#SET{imageAlign, #ENV{imageAlign, #CONFIG{nivoslider/imageAlign,'center center'}}}
+#SET{imageBackcolor, #ENV{imageBackcolor, #CONFIG{nivoslider/imageBackcolor,'transparent'}}}
+#SET{controlNavThumbs, #ENV{controlNavThumbs, #CONFIG{nivoslider/controlNavThumbs,false}}}
+#SET{controlNavThumbsWidth, #ENV{controlNavThumbsWidth, #CONFIG{nivoslider/controlNavThumbsWidth,50}}}
+#SET{controlNavThumbsHeight, #ENV{controlNavThumbsHeight, #CONFIG{nivoslider/controlNavThumbsHeight,50}}}
+#SET{id_rand, #VAL{1}|rand{1000}}
 
-<div id='slider' style="[width:(#GET{width})px;][height:(#GET{height})px]">
+<B_doc>
+[<h2>(#ENV{titre}|!={non}|oui)#ENV{titre,#_album:TITRE}</h2>]
+
+<div id='slider' style="[width:(#GET{width})px;][height:(#GET{height})px]"[ class="(#ENV{align})"]>
 	<div id="slider_#GET{id_rand}" class="nivoSlider">
-	<BOUCLE_doc(DOCUMENTS){extension IN png,jpg,gif}{id_album}{par num titre, date}{doublons}>
+	<BOUCLE_doc(DOCUMENTS){extension IN png,jpg,gif}{id_album}{par num titre, date}{doublons}{0, #REM|test_espace_prive|?{1,#ENV{limite,1000}}}{tout}>
 
-		[(#DESCRIPTIF|?{'',' '})
-			[(#FICHIER|image_passe_partout{#GET{width},#GET{height}}|image_recadre{#GET{width},#GET{height},#GET{imageAlign},#GET{imageBackcolor}}|inserer_attribut{title,[(#TITRE|supprimer_numero)]}|inserer_attribut{rel,#FICHIER|image_reduire{#GET{controlNavThumbsWidth},#GET{controlNavThumbsHeight}}|extraire_attribut{src}})]
+		[(#DESCRIPTIF|non)
+			[(#FICHIER|image_passe_partout{#GET{width},#GET{height}}|image_recadre{#GET{width},#GET{height},#GET{imageAlign},#GET{imageBackcolor}}|inserer_attribut{title,#TITRE|supprimer_numero}|inserer_attribut{rel,#FICHIER|image_reduire{#GET{controlNavThumbsWidth},#GET{controlNavThumbsHeight}}|extraire_attribut{src}})]
 		]
 
-		[(#DESCRIPTIF|?{' ',''})
-			[(#SET{lien,#VAL{'spip.php?'#DESCRIPTIF}|attribut_html|replace{' ',''}})]
-			[(#SET{fancyornot,''})]
-			[(#DESCRIPTIF|match{doc}|=={doc}|?{
+		[(#DESCRIPTIF|oui)
+			#SET{lien, #VAL{'spip.php?'#DESCRIPTIF}|attribut_html|trim}
+			#SET{fancyornot,''}
+			[(#DESCRIPTIF|match{doc}|=={doc}|oui)
 				[(#PLUGIN{FANCYBOX}|oui)
-					[(#SET{fancyornot, [(#CONFIG{fancybox/selecteur_commun,'.fancybox'}|replace{'\.',''})]})]
+					#SET{fancyornot, #CONFIG{fancybox/selecteur_commun,'.fancybox'}|replace{'\.',''}}
 				]
-				[(#SET{lien, #URL_DOCUMENT})]
-			})]
-			[(#DESCRIPTIF|match{http}|=={http}|?{
-				[(#SET{lien, [(#DESCRIPTIF|textebrut)]})]
-			})]
-			<a href="#GET{lien}" [class="(#GET{fancyornot})"]>
+				#SET{lien, #URL_DOCUMENT}
+			]
+			[(#DESCRIPTIF|match{http}|=={http}|oui)
+				#SET{lien, #DESCRIPTIF|textebrut}
+			]
+			<a href="#GET{lien}"[ class="(#GET{fancyornot})"]>
 			[(#FICHIER|image_passe_partout{#GET{width},#GET{height}}|image_recadre{#GET{width},#GET{height}}|inserer_attribut{title,[(#TITRE|supprimer_numero)]}|inserer_attribut{rel,#FICHIER|image_reduire{#GET{controlNavThumbsWidth},#GET{controlNavThumbsHeight}}|extraire_attribut{src}})]
 			</a>
 		]
@@ -69,7 +87,7 @@
 <br style="clear:both"/>
 
 <script type="text/javascript">/*<![CDATA[*/
-	[(#REM) ne pas charger le script dans l espace prive ]
+	[(#REM) on ne charge pas le script dans l espace privé ]
 	[(#REM|test_espace_prive|non)
 		jQuery(function() {
 		$('#slider_#GET{id_rand}').nivoSlider({
@@ -97,4 +115,5 @@
 	]
 /*]]>*/</script>
 
+</B_doc>
 </BOUCLE_album>
