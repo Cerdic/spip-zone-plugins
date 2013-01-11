@@ -29,5 +29,4 @@
 /*=============
   === LISTE ===
   =============*/
-.album.liste td 			{padding-top: 0; padding-bottom: 0;}
-.album.liste tr:nth-child(2n) td	{background-color: transparent;}
+.album.liste 				{}
