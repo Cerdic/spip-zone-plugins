@@ -4,7 +4,7 @@
 	version="0.7.0"
 	etat="test"
 	compatibilite="[2.0.0;3.0.99]"
-	logo="fulltext.png"
+	logo="images/fulltext-32.png"
 	schema="0.2"
 	documentation="http://www.spip-contrib.net/Fulltext"
 >	
@@ -25,8 +25,8 @@
 	<pipeline nom="autoriser" inclure="fulltext_autoriser.php" />
 	<pipeline nom="taches_generales_cron" inclure="fulltext_pipelines.php" />
 
-	<menu nom="fulltext" titre="fulltext:fulltext_index" parent="bando_configuration" icone="images/fulltext-22.png" />
-	<menu nom="fulltext_document" titre="fulltext:fulltext_documents" parent="bando_configuration" icone="images/fulltext-22.png" />
+	<menu nom="fulltext" titre="fulltext:fulltext_index" parent="menu_configuration" icone="images/fulltext-16.png" />
+	<menu nom="fulltext_document" titre="fulltext:fulltext_documents" parent="menu_configuration" icone="images/fulltext-16.png" />
 
-	<onglet nom="fulltext" titre="Fulltext" parent="configuration" icone="fulltext-22.png" />
+	<onglet nom="fulltext" titre="Fulltext" parent="configuration" icone="images/fulltext-24.png" />
 </paquet>

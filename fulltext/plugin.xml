@@ -43,16 +43,16 @@ Pour un fonctionnement optimal, il faut installer des programmes compl&#233;ment
 	<install>base/fulltext_install.php</install>
 	<chemin dir='' />
 	<onglet id="fulltext" parent="configuration">
-		<icone>fulltext-22.png</icone>
+		<icone>images/fulltext-24.png</icone>
 		<titre>Fulltext</titre>
 	</onglet>
 	<bouton id='fulltext' parent='bando_configuration'>
 		<titre>Fulltext - Index</titre>
-		<icone>images/fulltext-22.png</icone>
+		<icone>images/fulltext-16.png</icone>
 	</bouton>
 	<bouton id='fulltext_document' parent='bando_configuration'>
 		<titre>Fulltext - Documents</titre>
-		<icone>images/fulltext-22.png</icone>
+		<icone>images/fulltext-16.png</icone>
 	</bouton>
 	<pipeline>
     	<nom>declarer_tables_principales</nom>
