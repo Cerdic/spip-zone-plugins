@@ -27,7 +27,7 @@ function exec_association() {
 			'categories_de_cotisations' => array('cotisation.png', array('categories'), array('editer_profil', 'association')),
 			'gerer_les_autorisations' => array('annonce.gif', array('association_autorisations'), array('gerer_autorisations', 'association')),
 			'plan_comptable' => array('plan_compte.png', array('plan_comptable'), array('gerer_compta', 'association') ),
-			'destination_comptable' => array('euro-39.gif', 'destination', $GLOBALS['association_metas']['destinations'] ? array('gerer_compta', 'association') : ''),
+			'destination_comptable' => array('euro-39.gif', array('destination'), $GLOBALS['association_metas']['destinations'] ? array('gerer_compta', 'association') : ''),
 			'exercices_budgetaires_titre' => array('calculatrice.gif', array('exercices'), array('gerer_compta', 'association') ),
 		));
 		debut_cadre_association('assoc_qui.png', 'association_infos_contacts');
