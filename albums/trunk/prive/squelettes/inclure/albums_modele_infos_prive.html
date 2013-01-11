@@ -1,31 +1,29 @@
 [(#REM)
-	Affiche des infos sur l'album uniquement dans l'espace prive
+	Affiche éventuellement un message d'avertissement, uniquement dans l'espace prive
+	- si l'album n'est pas publié
+	- s'il s'agit d'un diaporama ou autre, message indiquant que le script est désactivé
+	Paramètres :
+	id_album		requis
+	js = xxx		pour afficher le message concernant la désactivation du js
 ][(#REM)
 	inclus dans /modeles/albums.html
 	inclus dans /modeles/albums_liste.html
+	+ éventuellement dans les modèles 'album' des plugins tiers
 ]
-<BOUCLE_album(ALBUMS){id_album}{statut==.*}>
-#SET{notice, #ID_ALBUM|album_contenu|?{'','vide'}}
-[(#STATUT|!={publie}|oui) #SET{notice, #GET{notice}|concat{'statut'}} ]
-[(#GET{notice}|oui)
 
-	<div class='album notice_prive clearfix'>
+#SET{non_publie, #INFO_STATUT{album,#ID_ALBUM}|!={publie}|?{oui,''}}
 
-	[(#GET{notice}|match{statut}|oui)
-		<strong><:album:info_statut_modele:></strong>
-		[(#AUTORISER{modifier,album,#ID_ALBUM}|oui)
-			[(#BOUTON_ACTION{
-				Publier&nbsp;
-				[(#CHEMIN_IMAGE{puce-publier-8.png}|balise_img{#STATUT})],
-				#URL_ACTION_AUTEUR{instituer_album,publie-#ID_ALBUM,#SELF},'ajax'}
-			)]
-		]
+[(#GET{non_publie}|oui)
+	<ins><:album:info_statut_modele:></ins>
+	[(#AUTORISER{modifier,album,#ID_ALBUM}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{puce-publier-8.png}|balise_img)&nbsp;<:album:info_publier:>],
+			#URL_ACTION_AUTEUR{instituer_album,publie-#ID_ALBUM,#SELF},
+			'ajax album publier'}
+		)]
 	]
-
-	[(#GET{notice}|match{vide}|oui)
-		<strong><:album:info_album_vide:></strong>
-	]
-
-	</div>
 ]
-</BOUCLE_album>
+
+[(#ENV{js}|oui)
+	<ins><:album:info_js_prive:></ins>
+]

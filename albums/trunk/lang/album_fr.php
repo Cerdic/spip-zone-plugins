@@ -73,6 +73,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_resultat_recherche_plus' => '@nb@ résultats',
 	'info_resultat_recherche_un' => '1 résultat',
 	'info_statut_modele' => 'Album non publié',
+	'info_publier' => 'publier',
+	'info_js_prive' => 'animation désactivée dans l\'espace privé',
 
 	// L
 	'label_activer_album_objets' => 'Activer les albums pour les contenus :',

@@ -1,0 +1,27 @@
+==================================
+Plugin Albums 2 : règles de commit
+==================================
+
+Pour faire simple : tout le monde est encouragé à commiter dans la mesure ou ça ne bouleverse pas l'utilisation ou l'apparence du plugin.
+Si c'est le cas, rendez-vous sur la liste de discussion spip-zone pour en discuter.
+
+==========
+Squelettes
+==========
+En cas d'ajout de nouveaux squelettes, pensez aux autres contributeurs.
+Chaque squelette devrait commencer par un [(#REM) ... ] expliquant la fonction du squelette, les paramètres s'il s'agit d'une inclusion, et éventuellement le squelette appelant.
+Les commentaires dans la page sont vivement encouragés.
+
+=======
+Modèles
+=======
+Le plugin n'a pas vocation à fournir nombre de variantes différentes.
+C'est aux autres plugins qui reposent sur les documents de proposer des variantes de modèles Album.
+On s'en tient donc aux 2 modèles de base, en cas d'idée géniale pour un nouveau modèle, discutons en avant.
+De plus, les styles publics des 2 modèles doivent être le plus minimal possible, afin d'être facilement surchargeables.
+
+========================
+Styles de l'espace privé
+========================
+On essaie de rester sobre, et de respecter tant que faire se peut la charte de SPIP.
+Pour info, une charte est dispo page ?exec=charte après installation du plugin 'développement'.

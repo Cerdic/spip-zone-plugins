@@ -289,12 +289,11 @@
   .album.vignettes .figcaption,
   .album.vignettes img 			{display: table-row;}
 
-
 /* notice espace privé */
-  .album.warning,
-  .album.notice_prive 			{background:url('[(#CHEMIN_IMAGE{background.png})]') repeat fixed;}
-.album.notice_prive strong		{display:inline-block; position:relative; margin-left:24px; vertical-align:middle; color:#ff6600;}
-.album.notice_prive strong:before	{position:absolute; left:-24px; width:24px; height:24px; content:''; background:url('[(#CHEMIN_IMAGE{warning-16.png})]') no-repeat 50% 10%;}
-.album.notice_prive form		{float:right; opacity:.3}
-.album.notice_prive form:hover 		{opacity:1}
-.album.notice_prive form .submit	{padding:0; margin:.1em; font-size:.75em;text-transform:uppercase;}
+.album.publier				{opacity:.3}
+.album.publier:hover 			{opacity: 1}
+.album.publier .submit			{
+					padding: 0;
+					font-size: .8em;
+					}
+.album.publier .submit:hover		{cursor: pointer;}
