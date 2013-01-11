@@ -33,7 +33,7 @@
 			[(#VU|=={oui}|oui) [(#CHEMIN_IMAGE{vu-16.png}|balise_img{<:medias:document_vu:>}|inserer_attribut{title,<:medias:document_vu:>})] ]
 			[<a href="[(#ID_ALBUM|generer_url_entite{album})]" title="#GET{alt}">n°(#ID_ALBUM)</a>]
 		</td>
-		<td class='titre'>
+		<td class='titre'[ title='(#DESCRIPTIF|couper{150}|attribut_html)']>
 			[<h3>(#TITRE|sinon{<:album:titre_album_sans_titre:>})</h3>]
 		</td>
 		[(#REM) BOUTONS D'ACTION ]

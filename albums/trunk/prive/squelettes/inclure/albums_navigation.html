@@ -37,6 +37,7 @@
 		ajax}
 	)</li>]
 </ul>
+<B_objets>
 <ul class='parents'>
 	[<li class='first'>(#GET{self}|parametre_url{objet,''}|lien_ou_expose{<:album:onglet_parents_tous:>,#ENV{objet,''}|=={''},ajax})</li>]
 	<BOUCLE_objets(ALBUMS liens){fusion objet}>
@@ -49,6 +50,7 @@
 	]
 	</BOUCLE_objets>
 </ul>
+</B_objets>
 </div>
 </BOUCLE_afficher_parents>
 

@@ -181,6 +181,7 @@
 		<:album:info_resultat_recherche_aucun:>
 	]
 	[(#ENV{recherche}|non)
+		<h2>
 		#SET{nb_albums_total,#VAL{album}|table_objet_sql|sql_countsel{#ARRAY{objet=album}}}
 		[(#GET{nb_albums_total}=={0}|oui)
 			<:album:info_aucun_album:>
@@ -189,6 +190,7 @@
 			[(#GET{liste}|=={associer}|oui) <:album:info_aucun_album_supplementaire:> ]
 			[(#GET{liste}|=={albumotheque}|oui) <:album:info_aucun_album_criteres:> ]
 		]
+		</h2>
 	]
 	[(#GRAND_TOTAL|>{#ENV{nb}}|ou{#ENV{recherche}}|et{#VAL{recherche}|in_array{#GET{header}}}|oui)
 		#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
