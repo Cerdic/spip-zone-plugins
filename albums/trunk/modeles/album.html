@@ -2,17 +2,17 @@
 	Modèle album : vue par défaut en mode 'vignettes'
 ]
 
+<B_album>
 #SET{statut,#ENV{statut,publie}}
 [(#REM|test_espace_prive|oui)
 	#SET{statut,'.*'}
 	[(#INCLURE{fond=prive/squelettes/inclure/albums_modele_infos_prive,env})]
 ]
-
 <BOUCLE_album(ALBUMS){id_album}{statut == #GET{statut}}>
 <B_documents_joints>
 <div class="album vignettes clearfix p #ENV{align}">
 
-	[<h2>(#ENV{titre,#_album:TITRE})</h2>]
+	[<h2>(#ENV{titre}|!={non}|oui)#ENV{titre,#_album:TITRE}</h2>]
 
 	<ul>
 		<BOUCLE_documents_joints(DOCUMENTS){id_album}{media?}{tout}>
@@ -21,7 +21,7 @@
 		<[(#HTML5|?{figure,div}) ]class="figure">
 		<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="album"[ class="(#EXPOSER)"] title="#GET{titre}">
 		[(#LOGO_DOCUMENT
-			|image_reduire{#ENV{largeur,0},#ENV{hauteur,100}}
+			|image_reduire{#ENV{largeur,0},#ENV{hauteur,85}}
 			|inserer_attribut{class,spip_logos}
 			|inserer_attribut{alt,#GET{titre}|couper{60}}
 			|inserer_attribut{title,#GET{titre}|couper{60}}

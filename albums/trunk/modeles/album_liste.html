@@ -2,17 +2,17 @@
 	Modèle album : vue en mode 'liste'
 ]
 
+<B_album>
 #SET{statut,#ENV{statut,publie}}
 [(#REM|test_espace_prive|oui)
 	#SET{statut,'.*'}
 	[(#INCLURE{fond=prive/squelettes/inclure/albums_modele_infos_prive,env})]
 ]
-
 <BOUCLE_album(ALBUMS){id_album}{statut == #GET{statut}}>
 <B_documents_joints>
 <div class="album liste clearfix p #ENV{align}">
 
-	[<h2>(#ENV{titre,#_album:TITRE})</h2>]
+	[<h2>(#ENV{titre}|!={non}|oui)#ENV{titre,#_album:TITRE}</h2>]
 
 	<table><tbody>
 	<BOUCLE_documents_joints(DOCUMENTS){id_album}{media?}>
