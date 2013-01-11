@@ -1,7 +1,7 @@
 <paquet
 	prefix="griseusico"
 	categorie="theme"
-	version="0.1.0"
+	version="0.1.1"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/griseus/images/griseusico-256.png"
@@ -13,8 +13,5 @@
 	<auteur>Charles Razack</auteur>
 
 	<licence>GNU/GPL</licence>
-
-	<!-- dépendances afin de pouvoir surcharger les styles -->
-	<!--<necessite nom="medias" compatibilite="[2.7;]" />-->
 
 </paquet>
