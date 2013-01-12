@@ -49,6 +49,8 @@ class AutoEmbed {
   public function parseUrl($url) {
     global $AutoEmbed_stubs;
 
+	$url = preg_replace(',^https:,', 'http:', $url);
+
     foreach ($AutoEmbed_stubs as $stub) { 
       if ( preg_match('~'.$stub['url-match'].'~imu', $url, $match) ) {
         $this->_stub = $stub;
