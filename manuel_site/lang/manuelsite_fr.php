@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_article' => 'L’article du manuel défini dans la configuration du plugin est introuvable : #@idart@',
+	'erreur_article_publie' => 'L’article du manuel défini dans la configuration du plugin n\'est pas publié en ligne : <a href="@url@">#@idart@</a>',
 	'erreur_pas_darticle' => 'L’article du manuel n’est pas défini dans la configuration du plugin',
 	'explication_afficher_bord_gauche' => 'Afficher l’icone du manuel en haut à gauche (sinon le manuel sera affiché en colonne)',
 	'explication_background_color' => 'Entrez la couleur de fond de la zone d’affichage du manuel',

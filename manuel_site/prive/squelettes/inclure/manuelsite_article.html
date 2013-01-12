@@ -1,7 +1,10 @@
-[(#REM) Largeur max image. Soit largeur définie dans la config, soit largeur #extra de prive/style_prive.html (180 moins 20 de marge) ]
-#SET{taille_max_image,180}
+#CACHE{0}
+[(#REM)
+	Largeur max image. Soit largeur dÃ©finie dans la config, soit largeur #extra de prive/style_prive.html (180 moins 20 de marge)
+]
+[(#SET{taille_max_image,180})]
 [(#CONFIG{manuelsite/afficher_bord_gauche}|oui)
-	#SET{taille_max_image,#CONFIG{manuelsite/largeur,300}|moins{20}}
+	[(#SET{taille_max_image,[(#CONFIG{manuelsite/largeur,300}|moins{20})]})]
 ]
 [(#ENV{bouton_fermer}|oui)
 	<a id="manuelsite_bouton_fermer" href="#" title="<:manuelsite:fermer_le_manuel:>">X</a>
@@ -31,7 +34,14 @@
 
 	</div>
 </BOUCLE_contenu_article>
+</B_contenu_article>
+	<BOUCLE_manuel_non_publie(ARTICLES){id_article}{statut?}>
+	#SET{url,#URL_ARTICLE}
+	<:manuelsite:erreur_article_publie{idart=#ID_ARTICLE,url=#GET{url}}:>
+	</BOUCLE_manuel_non_publie>
+	</B_manuel_non_publie>
 	<:manuelsite:erreur_article{idart=#ID_ARTICLE}:>
+	<//B_manuel_non_publie>
 <//B_contenu_article>
 
 <script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
