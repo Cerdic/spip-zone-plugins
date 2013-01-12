@@ -29,13 +29,12 @@ function dupliquer_article($article,$rubrique){
 		"id_article=".$article
 	);
 	$infos = sql_allfetsel($champs, $from, $where);
+
 	// On choisi les champs que l'on veut conserver
 	$champs_dupliques = explode(",", lire_config('duplicator/config/art_champs'));
 	array_walk($champs_dupliques, 'trim_value');
 	
-	if (empty($champs_dupliques)) $champs_dupliques = array(
-		'surtitre','titre','soustitre','descriptif','chapo','texte','ps','accepter_forum','lang','langue_choisie','nom_site','url_site'
-	);
+	if ($champs_dupliques[0]==''){ $champs_dupliques = array( 'surtitre','titre','soustitre','descriptif','chapo','texte','ps','accepter_forum','lang','langue_choisie','nom_site','url_site' ); }
 	foreach ($champs_dupliques as $key => $value) {
 		$infos_de_l_article[$value] = $infos[0][$value];
 	}
@@ -102,9 +101,7 @@ function dupliquer_rubrique($rubrique,$cible=null,$titre=' (copie)'){
 	$champs_dupliques = explode(",", lire_config('duplicator/config/rub_champs'));
 	array_walk($champs_dupliques, 'trim_value');
 	
-	if (empty($champs_dupliques)) $champs_dupliques = array(
-		'id_parent','titre','descriptif','texte','lang','langue_choisie'
-	);
+	if ($champs_dupliques[0]=="") $champs_dupliques = array('id_parent','titre','descriptif','texte','lang','langue_choisie');
 	foreach ($champs_dupliques as $key => $value) {
 		$infos_de_la_rubrique[$value] = $infos[0][$value];
 	}

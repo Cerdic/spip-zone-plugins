@@ -34,8 +34,6 @@ function formulaires_duplicator_article_confirm_traiter_dist($article){
 		$res = sql_select($champs, "spip_articles", $where);
 		$r = sql_fetch($res);
 		$rubrique = $r['id_rubrique'];
-spip_log("ID RUBRIQUE : $rubrique");
-spip_log("ID ARTICLE : $article");
 		$nouvel_article = dupliquer_article(intval($article),intval($rubrique));
 
 		$message = array('message_ok'=>array(
