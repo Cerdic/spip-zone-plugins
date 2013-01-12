@@ -1,5 +1,7 @@
 <?php
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/traduire');
 include_spip('inc/plugin');
 
@@ -9,10 +11,9 @@ include_spip('inc/plugin');
  *
  */
 function manuelsite_article_si_cacher() {
-	$conf_manuelsite = lire_config('manuelsite');
-	if (!test_espace_prive() && $conf_manuelsite["cacher_public"] && $id=$conf_manuelsite["id_article"]) {
+	$conf_manuelsite = lire_config('manuelsite',array());
+	if (!test_espace_prive() && $conf_manuelsite["cacher_public"] && $id=intval($conf_manuelsite["id_article"]))
 		return($id);
-	}
 	return 0;
 }
 
@@ -48,7 +49,7 @@ function manuelsite_lister_blocs_faq() {
 }
 
 /**
- * Fonction retournant les blocs de FAQ utilisables pour un plugin donné
+ * Fonction retournant les blocs de FAQ utilisables pour un plugin donnÃ©
  *
  */
 function manuelsite_afficher_raccourcis($module = "faq-manuelsite") {
