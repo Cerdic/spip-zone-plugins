@@ -989,5 +989,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'abonees_titre' => 'Abonn&#233;s'
 , 'options' => 'radio|brut|Format :|Html,Texte,D&#233;sabonnement|html,texte,non'
 , 'souhait_modifier_abo' => 'Vous souhaitez modifier votre abonnement.'
+, 'form_pet_votre_nom' => 'Votre nom'
+
 
 );
