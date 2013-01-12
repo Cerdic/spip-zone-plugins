@@ -1,27 +1,20 @@
 <?php
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/plugin');
 
-function manuelsite_header_prive($flux) {
-	$flux .= '<link rel="stylesheet" href="'.url_absolue(generer_url_public('manuelsite.css')).'" type="text/css" media="all" />' . "\n";
-	return $flux;
-}
-
-function manuelsite_insert_head($flux){
-	return $flux;
-}
-
 function manuelsite_body_prive($flux){
-	$conf_manuelsite = lire_config('manuelsite');
-	if($conf_manuelsite["id_article"] && (!isset($conf_manuelsite["afficher_bord_gauche"]) || $conf_manuelsite["afficher_bord_gauche"])) {
+	include_spip('inc/config');
+	$conf_manuelsite = lire_config('manuelsite',array());
+	if($conf_manuelsite["id_article"] && (!isset($conf_manuelsite["afficher_bord_gauche"]) || $conf_manuelsite["afficher_bord_gauche"]))
 		$flux .= recuperer_fond('prive/manuelsite',array('id_article'=>$conf_manuelsite["id_article"]));
-	}
-   return $flux;
+	return $flux;
 }
 
-function manuelsite_affiche_droite(&$flux){
-	$conf_manuelsite = lire_config('manuelsite');
+function manuelsite_affiche_droite($flux){
+	include_spip('inc/config');
+	$conf_manuelsite = lire_config('manuelsite',array());
 	if($conf_manuelsite["id_article"] && !$conf_manuelsite["afficher_bord_gauche"]) {
 		// Spip 2
 		if(spip_version_compare($GLOBALS['spip_version_branche'],"2.1.99","<")) {
@@ -37,13 +30,12 @@ function manuelsite_affiche_droite(&$flux){
 			$flux['data'] .= $cadre;
 
 		// Spip3
-		} else { 
+		} else
 			$flux["data"] .= recuperer_fond('prive/squelettes/navigation/bloc_manuelsite',array('id_article'=>$conf_manuelsite["id_article"]));
-		}
 	}
    return $flux;
 }
-function manuelsite_affiche_gauche(&$flux){
+function manuelsite_affiche_gauche($flux){
 	// Si c'est un article en edition ou un article dans le prive,
 	// on propose le formulaire, si l'article n'existe pas encore, on ne fait rien
 

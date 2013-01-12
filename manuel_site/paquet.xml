@@ -1,7 +1,7 @@
 <paquet
 	prefix="manuelsite"
 	categorie="edition"
-	version="0.8.1"
+	version="0.9.0"
 	etat="stable"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="prive/themes/spip/images/manuelsite-32.png"
@@ -18,7 +18,6 @@
 
 	<pipeline nom="pre_boucle" inclure="manuelsite_pipelines.php" />
 	<pipeline nom="body_prive" inclure="manuelsite_prive_pipelines.php" />
-	<pipeline nom="header_prive" inclure="manuelsite_prive_pipelines.php" />
 	<pipeline nom="affiche_droite" inclure="manuelsite_prive_pipelines.php" />
 	<pipeline nom="affiche_gauche" inclure="manuelsite_prive_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="formulaires/configurer_manuelsite.php" />

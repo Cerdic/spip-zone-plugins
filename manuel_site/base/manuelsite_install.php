@@ -16,12 +16,11 @@ include_spip('inc/meta');
  */
 function manuelsite_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
-	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
-			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-		$config = lire_config('manuelsite');
-		if (!is_array($config)) {
+	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
+		|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
+		$config = lire_config('manuelsite',array());
+		if (!is_array($config))
 			$config = array();
-		}
 		
 		$url_contrib = "http://www.spip-contrib.net/?article2986";
 		$config = array_merge(array(
@@ -29,15 +28,12 @@ function manuelsite_upgrade($nom_meta_base_version,$version_cible){
 				'cacher_public' => '',
 				'intro' => _T('manuelsite:intro',array('url'=>$url_contrib)),
 				'email' => '',
-				'afficher_bord_gauche' => 'on',
-				'largeur' => '300',
-				'background_color' => '#D6DDE5'
+				'afficher_bord_gauche' => 'on'
 		), $config);
 		ecrire_meta('manuelsite', serialize($config));
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 	}
 }
-
 
 /**
  * Fonction de desinstallation

@@ -13,7 +13,7 @@
 	</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.8.1</version>
+	<version>0.9.0</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<description>
@@ -32,10 +32,6 @@
 	</pipeline>
 	<pipeline>
 		<nom>body_prive</nom>
-		<inclure>manuelsite_prive_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>header_prive</nom>
 		<inclure>manuelsite_prive_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>

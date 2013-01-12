@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/config');
 
 function formulaires_configurer_manuelsite_saisies_dist(){
-	$config = lire_config('manuelsite');
+	$config = lire_config('manuelsite',array());
 	
 	return array(
 		array(
@@ -78,9 +78,8 @@ function formulaires_configurer_manuelsite_saisies_dist(){
 						'nom' => 'largeur',
 						'label' => _T('manuelsite:label_largeur'),
 						'explication' => _T('manuelsite:explication_largeur'),
-						'obligatoire' => 'oui',
 						'defaut' => $config['largeur'],
-                  'afficher_si' => '@afficher_bord_gauche@ == "on"' 
+						'afficher_si' => '@afficher_bord_gauche@ == "on"' 
 					)
 				),
 				array(
@@ -89,9 +88,8 @@ function formulaires_configurer_manuelsite_saisies_dist(){
 						'nom' => 'background_color',
 						'label' => _T('manuelsite:label_background_color'),
 						'explication' => _T('manuelsite:explication_background_color'),
-						'obligatoire' => 'oui',
 						'defaut' => $config['background_color'],
-                  'afficher_si' => '@afficher_bord_gauche@ == "on"' 
+						'afficher_si' => '@afficher_bord_gauche@ == "on"' 
 					)
 				)
 			)
@@ -108,18 +106,14 @@ function formulaires_configurer_manuelsite_verifier(){
 
 /**
  * Pipeline
- * Invalider le cache si l'option de config "cacher_public" a ete modifee
- * Puis poursuivre le traitement normal de sauvegarde des paramètres
+ * Invalider le cache pour tout changement de configuration
  *
  * @param array $flux
  * @return array
  */
 function manuelsite_formulaire_traiter($flux){
-	if ( $flux['args']['form'] == "configurer_manuelsite" &&
-		  _request('cacher_public') != _request('ancien_cacher_public')) {
-		include_spip('inc/invalideur');
-		suivre_invalideur('1');
-	}
+	include_spip('inc/invalideur');
+	suivre_invalideur('1');
 	return $flux;
 }
 

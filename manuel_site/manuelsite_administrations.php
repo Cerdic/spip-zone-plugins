@@ -36,9 +36,7 @@ function manuelsite_creer_config(){
 			'cacher_public' => '',
 			'intro' => _T('manuelsite:intro',array('url'=>$url_contrib)),
 			'email' => '',
-			'afficher_bord_gauche' => 'on',
-			'largeur' => '300',
-			'background_color' => '#D6DDE5'
+			'afficher_bord_gauche' => 'on'
 	), $config);
 	
 	ecrire_meta('manuelsite', serialize($config_defaut));
