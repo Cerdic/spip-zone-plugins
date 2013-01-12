@@ -65,16 +65,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_album_vide' => 'Aucun album vide',
 	'info_dans_objet' => 'dans des',
 	'info_documents_joints_albums' => 'Veillez à activer l\'ajout de documents-joints aux albums',
+	'info_js_prive' => 'animation désactivée dans l\'espace privé',
 	'info_nb_albums' => '@nb@ albums',
 	'info_nb_objets_lies' => 'Lié à @nb@ objets',
 	'info_nouvel_album' => 'Nouvel album',
+	'info_publier' => 'publier',
 	'info_recherche_album_zero' => 'Aucun résultat pour « @cherche_album@ »',
 	'info_resultat_recherche_aucun' => 'Aucun résultat',
 	'info_resultat_recherche_plus' => '@nb@ résultats',
 	'info_resultat_recherche_un' => '1 résultat',
 	'info_statut_modele' => 'Album non publié',
-	'info_publier' => 'publier',
-	'info_js_prive' => 'animation désactivée dans l\'espace privé',
 
 	// L
 	'label_activer_album_objets' => 'Activer les albums pour les contenus :',
