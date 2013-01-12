@@ -1,28 +1,28 @@
 <div id="manuelsite_divbouton" >
-   <a id="manuelsite_bouton" [href="?exec=manuelsite_affiche&amp;id_article=(#ID_ARTICLE)&amp;bouton_fermer=1"] title="<:manuelsite:titre_manuel:>">
+   <a id="manuelsite_bouton"[(#ID_ARTICLE|oui) href="[(#URL_ECRIRE{manuelsite_affiche,id_article=#ID_ARTICLE}|parametre_url{bouton_fermer,1})]"] title="<:manuelsite:titre_manuel:>">
       [(#CHEMIN{prive/themes/spip/images/manuelsite-32.png}|balise_img{<:manuelsite:titre_manuel:>})] 
    </a>
 </div>
-<div id="manuelsite_contenu" class="manuelsite_contenu_bord_gauche" style="background-color:#CONFIG{manuelsite/background_color};width:#CONFIG{manuelsite/largeur}px;">
+<div id="manuelsite_contenu" class="manuelsite_contenu_bord_gauche">
  
 	[(#REM) le contenu de manuelsite_article.html sera charge ici ]
 
 </div>
 
 <script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
-	$(function() {
+	(function($){
 		// Ouvrir le Manuel
 		$( "#manuelsite_bouton" ).click(function() {
 			// recupere url a charger
 			var charge_url = $(this).attr('href');
 			// charge le contenu avant de le montrer
 			$('#manuelsite_contenu').load(charge_url,function(){
-				$( "#manuelsite_contenu" ).show(300);
+				$("#manuelsite_contenu" ).show(300);
 			});
 			return false;
 		});
 		// Cacher le contenu
-		$( "#manuelsite_contenu" ).hide();
+		$("#manuelsite_contenu").hide();
 
-	});
+	})(jQuery);
 /*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
