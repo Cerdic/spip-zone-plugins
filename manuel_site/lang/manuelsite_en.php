@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_article' => 'The article of the manual defined in the plugin\'s configuration is not found: #@idart@',
+	'erreur_article_publie' => 'L’article du manuel défini dans la configuration du plugin n\'est pas publié en ligne : <a href="@url@">#@idart@</a>', # NEW
 	'erreur_pas_darticle' => 'The article of the manuel is not defined in the plugin\'s configuration',
 	'explication_afficher_bord_gauche' => 'Display the manual\'s icon in the top left corner (if not, the manual will be displayed in a column)',
 	'explication_background_color' => 'Type in the background color of the manual display area',
