@@ -1,0 +1,19 @@
+<BOUCLE_form(GUESTBOOK){id_message}>
+	<form action='#SELF' method='post'>
+		<fieldset style="border:0 none;width: 50%;margin:auto;">
+			<legend><:repondre_message:></legend>
+			<p>[<b>(#NOM)</b>] [<b>(#PRENOM)</b>] [((#PSEUDO))] : [<em>(#MESSAGE)</em>]</p>
+			<ul>
+				<li>
+					<label for="message"><:guestbook:message:>&nbsp;(<em><:guestbook:obligatoire:></em>)</label><br />
+					<textarea style="width: 65%;" name="reponse" cols="30" rows="5" ></textarea>
+					<input name="id_auteur" type="hidden" value="#SESSION{id_auteur}" />
+					[<br /><p style="font-size: 18px; color: red;">(#ENV{no_message}|!={'none'}|oui) #ENV{no_message}</p>]
+				</li>
+			</ul>
+		</fieldset>
+		<p class="boutons">
+			<input type="submit" class="submit" value="Poster" />
+		</p>
+	</form>
+</BOUCLE_form>
