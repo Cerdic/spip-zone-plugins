@@ -28,7 +28,11 @@ function spip_suggest_complete($q) {
 		arsort($res);
 	}
 	foreach ($res as $key=>$value) {
-		$w[] = array('label' => strtolower($key), 'nb' => $value);
+		if (intval($value) > 1)
+			$aff = $value.' '._T('resultats');
+		else
+			$aff = $value.' '._T('resultat');
+		$w[] = array('label' => strtolower($key), 'nb' => $aff);
 	}
 	return json_encode($w);
 }
@@ -36,19 +40,17 @@ function spip_suggest_insert_head_css($flux) {
 	static $done = false;
 	if (!$done) {
 		$done = true;
-		//$flux .= '<link rel="stylesheet" href="'.find_in_path("javascript/jquery.autocomplete.css").'" type="text/css" media="all" />';
+		$flux .= '<link rel="stylesheet" href="'.find_in_path("javascript/jquery.autocomplete.css").'" type="text/css" media="all" />';
 	}
 	return $flux;
 }
 
 function spip_suggest_insert_head($flux) {
-	//$flux = spip_suggest_insert_head_css($flux); // au cas ou il n'est pas implemente
-	//$flux .= '<script type="text/javascript" src="'.find_in_path("javascript/jquery-ui-1.9.2.autocomplete.js").'"></script>';
+	$flux = spip_suggest_insert_head_css($flux); // au cas ou il n'est pas implemente
+	$flux .= '<script type="text/javascript" src="'.find_in_path("javascript/jquery.ui.autocomplete.js").'"></script>';
 	$flux .= '
 <script type="text/javascript">
 	$(document).ready(function(){
-
-
 $( "#recherche" ).autocomplete({
       minLength: 0,
       source:"'.generer_url_public("suggest").'",
