@@ -33,7 +33,7 @@ function formulaires_guestbooksign_verifier_dist($id_guestmessage='new', $retour
 		$caracteres = compter_caracteres_utiles(_request('guestmessage'));
 		// moins de 10 caracteres sans les liens = spam !
 		if ($caracteres < 10){
-			$erreurs['guestmessage'] = _T('forum_attention_dix_caracteres');
+			$erreurs['guestmessage'] = _T('guestmessage:formulaire_attention_dix_caracteres');
 			$erreurs['guestmessage-erreur'] = 'erreur';
 		}
 		// on analyse le pseudo, le prenom, le nom
@@ -79,8 +79,8 @@ function formulaires_guestbooksign_traiter_dist($id_guestmessage='new', $retour=
 		'note' => _request('note'),
 		'date' => date('Y-m-d H:i:s'),
 	)))
-		$message['message_ok'] = _T('guestbook:message_poste');
-	else $message['message_ok'] = "Erreur à l'enregistrement du message";
+		$message['message_ok'] = _T('guestmessage:texte_message_poste_ok');
+	else $message['message_ok'] = _T('guestmessage:texte_erreur_traiter_post');
 	return $message;
 }
 

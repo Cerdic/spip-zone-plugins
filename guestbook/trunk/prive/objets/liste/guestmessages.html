@@ -1,18 +1,10 @@
 	#SET{couleurs,#ARRAY{'prop', '#f1dec0', 'publie', '#cce7b9', 'refuse', '#e7a1a1', 'poubelle', '#888'}}
-	<table width="20%" style="margin: 10px auto;" border="" cellspacing="0" cellpadding="2">
+	<table class='guestmessage_legende'>
 		<tr>
-			<td[ style="background:(#GET{couleurs}|table_valeur{publie});text-align:center;"]>
-				<:guestmessage:texte_statut_publie:>
-			</td>
-			<td[ style="background:(#GET{couleurs}|table_valeur{prop});text-align:center;"]>
-				<:guestmessage:texte_statut_propose:>
-			</td>
-			<td[ style="background:(#GET{couleurs}|table_valeur{refuse});text-align:center;"]>
-				<:guestmessage:texte_statut_refuse:>
-			</td>
-			<td[ style="background:(#GET{couleurs}|table_valeur{poubelle});text-align:center;"]>
-				<:guestmessage:texte_statut_poubelle:>
-			</td>
+			<td class='guestmessage_publie'><:guestmessage:texte_statut_publie:></td>
+			<td class='guestmessage_prop'><:guestmessage:texte_statut_propose:></td>
+			<td class='guestmessage_refuse'><:guestmessage:texte_statut_refuse:></td>
+			<td class='guestmessage_poubelle'><:guestmessage:texte_statut_poubelle:></td>
 		</tr>
 	</table>
 
@@ -43,8 +35,9 @@
 		<:guestmessage:aucun_message_livre:></h2>]
 	[<h2>(#GRAND_TOTAL|=={1}|oui)
 		<:guestmessage:un_message_livre:></h2>]
-	[<h2>(#GRAND_TOTAL|>{1}|oui) #GRAND_TOTAL
-		<:guestmessage:texte_nombre_messages_livre:>[, <:guestbook:dont:> (#GET{total_publie})  [(#GET{total_publie}|>{1}|?{<:guestbook:publies:>,<:guestbook:publie:>})]]</h2>]
+	[<h2>(#GRAND_TOTAL|>{1}|oui)
+		#GRAND_TOTAL <:guestmessage:texte_nombre_messages_livre:>
+		[, <:guestbook:dont:> (#GET{total_publie})  [(#GET{total_publie}|>{1}|?{<:guestbook:publies:>,<:guestbook:publie:>})]]</h2>]
 
 #ANCRE_PAGINATION
 <div class="liste-objets guestmessages">
@@ -67,13 +60,13 @@
 	<tbody>
 	<BOUCLE_liste_guestmessages(GUESTMESSAGES){id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num pseudo},#GET{defaut_tri}}{par pseudo}{pagination #ENV{nb,10}}>
 		#SET{parite,#COMPTEUR_BOUCLE|alterner{row_odd,row_even}}
-		<tr class='guestmessage_#STATUT[ (#GET{parite})]'>
+		<tr class='guestmessage_#STATUT'>
 			<td class='statut' rowspan='2'>[(#STATUT|puce_statut{guestmessage,#ID_GUESTMESSAGE})]</td>
-			<td class='id' rowspan='2'>[(#AUTORISER{modifier,guestmessage,#ID_GUESTMESSAGE}|?{
+			<td class='id'>[(#AUTORISER{modifier,guestmessage,#ID_GUESTMESSAGE}|?{
 				<a href="[(#URL_ECRIRE{guestmessage_edit,id_guestmessage=#ID_GUESTMESSAGE})]">#ID_GUESTMESSAGE</a>,
 				#ID_GUESTMESSAGE
 			})]</td>
-			<td class='note principale' rowspan='2'>#NOTE</td>
+			<td class='note principale'>#NOTE</td>
 			<td class='pseudo principale'>#PSEUDO</td>
 			<td class='nom principale'>#NOM</td>
 			<td class='prenom principale'>#PRENOM</td>
@@ -100,11 +93,13 @@
 			</td>
 		</tr>
 		<tr class='guestmessage_#STATUT[ (#GET{parite})]'>
-			<td><i><:guestmessage:label_guestmessage:></i></td>
-			<td class='guestmessage principale' colspan='4'>#GUESTMESSAGE</td>
-			<td class='guestreponse principale' colspan='2'>
-					<BOUCLE_rep(GUESTREPONSES auteurs){id_guestmessage}>
+			<td colspan='2'><i><:guestmessage:label_guestmessage:>&nbsp;:</i></td>
+			<td class='guestmessage principale[ (#GET{parite})]' colspan='5'>#GUESTMESSAGE</td>
+			<td class='guestreponse principale[ (#GET{parite})]' colspan='2'>
+					<BOUCLE_rep(GUESTREPONSES auteurs){tout}{id_guestmessage}{par statut,date}>
+						[(#STATUT|puce_statut{guestreponse,#ID_GUESTREPONSE})]
 						[<i>(#NOM)</i>] <:guestbook:repondu:> : [<em>(#GUESTREPONSE)</em>]
+						<br />
 					</BOUCLE_rep>
 			</td>
 		</tr>

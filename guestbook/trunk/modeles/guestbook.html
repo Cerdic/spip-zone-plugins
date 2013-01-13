@@ -1,0 +1,31 @@
+[(#ENV{form_pos}|=={haut}|oui)
+	<h2>Formulaire du Livre d'Or</h2>
+	#FORMULAIRE_GUESTBOOKSIGN
+]
+<h2><:guestbook:titre_messages_livredor:></h2>
+<B_message>
+<ul>
+<BOUCLE_message(GUESTMESSAGES)>
+	<li>#PRENOM #NOM, [(#DATE|affdate_court)][ à (#VILLE)] : Note #NOTE/10<br>
+	  #GUESTMESSAGE
+		<B_rep>
+			<ul>
+		<BOUCLE_rep(GUESTREPONSES auteurs){id_guestmessage}{par date}>
+		    <li>
+						[<i>(#NOM)</i>] : [<em>(#GUESTREPONSE)</em>]
+				</li>
+		</BOUCLE_rep>
+		  </ul>
+		</B_rep>
+	</li>
+</BOUCLE_message>
+</ul>
+</B_message>
+ <:guestbook:texte_aucun_message_publie:>
+<//B_message>
+
+[(#ENV{form_pos}|=={non}|non)
+	[(#ENV{form_pos}|=={haut}|non)
+		<h2><:guestbook:titre_formulaire_livredor:></h2>
+		#FORMULAIRE_GUESTBOOKSIGN
+]]

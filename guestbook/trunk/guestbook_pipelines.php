@@ -61,5 +61,13 @@ function guestbook_affiche_auteurs_interventions($flux) {
 	return $flux;
 }
 
+function guestbook_insert_head_css( $flux) {
+	static $done = false;
+	if (!$done) {
+		$done = true;
+		$flux .= "\n".'<link media="all" type="text/css" href="'.find_in_path('css/guestbook.css').'" rel="stylesheet" />';
+	}
+	return $flux;
+}
 
 ?>

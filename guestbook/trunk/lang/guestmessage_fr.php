@@ -12,12 +12,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_proposer_message' => 'Proposer',
 	'action_publier_message' => 'Publier',
 	'action_refuser_message' => 'Refuser',
-	'action_poubelle_message' => 'Poubelle',
+	'action_supprimer_message' => 'Poubelle',
 
 	// E
 	'explication_guestmessage' => 'Texte du message de livre d\'or',
 	'explication_ip' => 'Identification de l\'ordi de saisie',
 	'explication_note' => 'De 0 à 10',
+
+	//F
+	'formulaire_attention_dix_caracteres' => 'Le message doit contenir au moins 10 caractères !',
 
 	// I
 	'icone_creer_guestmessage' => 'Créer un message livre d\'or',
@@ -55,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_guestmessages_rubrique' => 'Messages livre d\'or de la rubrique',
 	'titre_langue_guestmessage' => 'Langue de ce message livre d\'or',
 	'titre_logo_guestmessage' => 'Logo de ce message livre d\'or',
-	
+
 	'texte_mombre_messages_livre' => 'messages de livre d\'or',
 	'texte_moyenne_publie' => 'Moyenne des messages publiés',
 	'texte_moyenne_tous' => 'Moyenne des messages proposés et publiés',
@@ -63,6 +66,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_publie' => 'Statut Publié',
 	'texte_statut_refuse' => 'Statut Refusé',
 	'texte_statut_poubelle' => 'Statut Poubelle',
+	
+	'texte_message_poste_ok' => 'Merci d\'avoir proposé votre message. Il a bien été pris en compte.',
+	'texte_erreur_traiter_post' => 'Une erreur est apparue à l\'envoi de votre message. Il est probable qu\il n\'ait pas été pris en compte. Veuillez nous en excuser.',
+
 
 );
 
