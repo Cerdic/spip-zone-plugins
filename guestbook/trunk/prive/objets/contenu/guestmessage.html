@@ -1,0 +1,48 @@
+<BOUCLE_guestmessage(GUESTMESSAGES){id_guestmessage}{statut?}>
+
+[<div class="champ contenu_guestmessage[ (#GUESTMESSAGE*|strlen|?{'',vide})]">
+	<label><:guestmessage:label_guestmessage:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{guestmessage} guestmessage'>(#GUESTMESSAGE)</span>
+</div>]
+
+[<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
+	<label><:guestmessage:label_email:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{email} email'>(#EMAIL)</span>
+</div>]
+
+[<div class="champ contenu_nom[ (#NOM*|strlen|?{'',vide})]">
+	<label><:guestmessage:label_nom:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{nom} nom'>(#NOM)</span>
+</div>]
+
+[<div class="champ contenu_prenom[ (#PRENOM*|strlen|?{'',vide})]">
+	<label><:guestmessage:label_prenom:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{prenom} prenom'>(#PRENOM)</span>
+</div>]
+
+[<div class="champ contenu_pseudo[ (#PSEUDO*|strlen|?{'',vide})]">
+	<label><:guestmessage:label_pseudo:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{pseudo} pseudo'>(#PSEUDO)</span>
+</div>]
+
+[<div class="champ contenu_ville[ (#VILLE*|strlen|?{'',vide})]">
+	<label><:guestmessage:label_ville:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{ville} ville'>(#VILLE)</span>
+</div>]
+
+[<div class="champ contenu_ip[ (#IP*|strlen|?{'',vide})]">
+	<label><:guestmessage:label_ip:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{ip} ip'>(#IP)</span>
+</div>]
+
+[<div class="champ contenu_note[ (#NOTE*|strlen|?{'',vide})]">
+	<label><:guestmessage:label_note:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{note} note'>(#NOTE)</span>
+</div>]
+
+[<div class="champ contenu_date[ (#DATE*|strlen|?{'',vide})]">
+	<label><:guestmessage:label_date:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{date} date'>(#DATE)</span>
+</div>]
+
+</BOUCLE_guestmessage>

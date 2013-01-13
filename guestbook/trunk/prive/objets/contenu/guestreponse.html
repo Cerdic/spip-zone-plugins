@@ -1,0 +1,23 @@
+<BOUCLE_guestreponse(GUESTREPONSES){id_guestreponse}{statut?}>
+
+[<div class="champ contenu_id_guestmessage[ (#ID_GUESTMESSAGE*|strlen|?{'',vide})]">
+	<label><:guestreponse:label_id_guestmessage:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{id_guestmessage} id_guestmessage'>(#ID_GUESTMESSAGE)</span>
+</div>]
+
+[<div class="champ contenu_id_auteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
+	<label><:guestreponse:label_id_auteur:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{id_auteur} id_auteur'>(#ID_AUTEUR)</span>
+</div>]
+
+[<div class="champ contenu_guestreponse[ (#GUESTREPONSE*|strlen|?{'',vide})]">
+	<label><:guestreponse:label_guestreponse:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{guestreponse} guestreponse'>(#GUESTREPONSE)</span>
+</div>]
+
+[<div class="champ contenu_date[ (#DATE*|strlen|?{'',vide})]">
+	<label><:guestreponse:label_date:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{date} date'>(#DATE)</span>
+</div>]
+
+</BOUCLE_guestreponse>
