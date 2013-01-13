@@ -33,7 +33,7 @@ function polpriv_polices_fontface () {
 	include_spip('inc/polpriv');
 	if ($familles = polpriv_familles_polices_fontface()) {
 		foreach ($familles as $famille=>$v) {
-			$label = ucwords(preg_replace('/[-_.]/', ' ' ,$famille)) . " @font-face";
+			$label = polpriv_formater_label_fontface($famille) . " @font-face";
 			$fontface[$label] = $famille;
 		}
 	}

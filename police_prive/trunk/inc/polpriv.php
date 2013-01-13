@@ -93,4 +93,27 @@ function polpriv_generer_style_polices_fontface ($familles) {
 	return $style;
 }
 
+/*
+ * Formater un nom de fichier en truc plus lisible
+ * Goudy_ModernLightCondensed_Western-webfont -> Goudy Modern Light Condensed Western 
+ *
+ * @param $nom string		nom brut
+ * @return string		nom formate
+ */
+function polpriv_formater_label_fontface($nom) {
+	// si extension, la retirer
+	if ($ext = pathinfo($nom, PATHINFO_EXTENSION))
+		$nom = preg_replace("/.$ext$/", '', $nom);
+	// si minuscule collee a une majuscule, inserer un espace
+	$nom = preg_replace('/([a-z])([A-Z])/', '$1 $2', $nom);
+	// retirer '-webfont' final
+	$nom = preg_replace('/\W?[wW]ebfont$/', '', $nom);
+	// remplacer separateurs par des espaces
+	$nom = preg_replace('/[-_.]/', ' ', $nom);
+	// mise en majuscules
+	$nom = ucwords($nom);
+
+	return $nom;
+}
+
 ?>
