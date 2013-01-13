@@ -28,9 +28,22 @@ function polpriv_polices () {
 		);
 }
 
+// Renvoie un tableau pour saisies radio avec les familles de polices fontface trouvees dans le repertoire polices.
+function polpriv_polices_fontface () {
+	include_spip('inc/polpriv');
+	if ($familles = polpriv_familles_polices_fontface()) {
+		foreach ($familles as $famille=>$v) {
+			$label = ucwords(preg_replace('/[-_.]/', ' ' ,$famille)) . " @font-face";
+			$fontface[$label] = $famille;
+		}
+	}
+	return $fontface;
+}
+
 function polpriv_formulaire_charger ($flux) {
 	if ($flux['args']['form'] == 'configurer_preferences'){
-		$flux['data']['_polices'] = polpriv_polices();
+		$flux['data']['_polices'] = polpriv_polices(); // polices normales
+		$flux['data']['_polices_fontface'] = polpriv_polices_fontface(); // polices fontface
 		$flux['data']['police_prive'] = isset($GLOBALS['visiteur_session']['prefs']['police_prive'])?$GLOBALS['visiteur_session']['prefs']['police_prive']:'';
 	}
 	return $flux;
@@ -57,11 +70,28 @@ function polpriv_recuperer_fond ($flux) {
 
 function polpriv_header_prive($flux){
 	if (isset($GLOBALS['visiteur_session']['prefs']['police_prive'])){
+		include_spip('inc/polpriv');
 		$police = $GLOBALS['visiteur_session']['prefs']['police_prive'];
 		$polices = polpriv_polices();
+		$polices_fontface = array_keys(polpriv_familles_polices_fontface());
+		// polices normales
 		if (isset($polices[$police]))
 			$flux .= "<style type='text/css'>body {font-family: ".$polices[$police].";}</style>";
+		// polices fontface
+		if (in_array($police, $polices_fontface)) {
+			$police_info = polpriv_familles_polices_fontface(array($police));
+			$flux .= polpriv_generer_style_polices_fontface($police_info);
+			$flux .= "<style type='text/css'>body {font-family: '".$police."';}</style>";
+		}
 	}
+	// formulaire configurer_preferences -> inserer les styles de toutes les polices fontface 
+	// il doit y avoir plus propre pour trouver l exec...
+	if (_request('exec') == "configurer_preferences") {
+		include_spip('inc/polpriv');
+		if ($familles = polpriv_familles_polices_fontface())
+			$flux .= polpriv_generer_style_polices_fontface($familles);
+	}
+
 	return $flux;
 }
 
