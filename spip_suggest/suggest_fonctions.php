@@ -5,7 +5,7 @@ function spip_suggest_complete($q) {
 	$s = lire_config('db_name');
 	// lire les cles fulltext
 	$k = lire_config('db_keys');
-
+	$w = array();
 	$tout = array();
 	// on parse les donnes pour stocker tout dans un tableau
 	foreach(array_filter(explode(',', $k)) as $table) {
@@ -28,40 +28,46 @@ function spip_suggest_complete($q) {
 		arsort($res);
 	}
 	foreach ($res as $key=>$value) {
-		$w .= strtolower($key).'|'.$value."\n";
+		$w[] = array('label' => strtolower($key), 'nb' => $value);
 	}
-	return $w;
+	return json_encode($w);
 }
 function spip_suggest_insert_head_css($flux) {
 	static $done = false;
 	if (!$done) {
 		$done = true;
-		$flux .= '<link rel="stylesheet" href="'.find_in_path("javascript/jquery.autocomplete.css").'" type="text/css" media="all" />';
+		//$flux .= '<link rel="stylesheet" href="'.find_in_path("javascript/jquery.autocomplete.css").'" type="text/css" media="all" />';
 	}
 	return $flux;
 }
 
 function spip_suggest_insert_head($flux) {
-	$flux = spip_suggest_insert_head_css($flux); // au cas ou il n'est pas implemente
-	$flux .= '<script type="text/javascript" src="'.find_in_path("javascript/jquery.ui.autocomplete.js").'"></script>';
+	//$flux = spip_suggest_insert_head_css($flux); // au cas ou il n'est pas implemente
+	//$flux .= '<script type="text/javascript" src="'.find_in_path("javascript/jquery-ui-1.9.2.autocomplete.js").'"></script>';
 	$flux .= '
 <script type="text/javascript">
 	$(document).ready(function(){
-		function formatItem(row) {
-			if (row[1] == 1) {
-				return row[0] + " (" + row[1] + " r&eacute;sultat)";
-			}
-			else if (row[1] > 1) {
-				return row[0] + " (" + row[1] + " r&eacute;sultats)";
-			} 
-		 }
-		$("'.lire_config("suggest_selecteur", "#recherche").'").autocomplete("'.generer_url_public("suggest").'", {
-			width: '.lire_config("suggest_width", 205).',
-			matchContains: true, 
-			selectFirst: false,
-			formatItem: formatItem
-		}); 
-	});
+
+
+$( "#recherche" ).autocomplete({
+      minLength: 0,
+      source:"'.generer_url_public("suggest").'",
+      focus: function( event, ui ) {
+        $("#recherche").val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+        $( "#recherche" ).val( ui.item.label );
+		$("#formulaire_recherche form").submit();
+        return false;
+      }
+    }).data( "autocomplete" )._renderItem = function( ul, item ) {
+      return $( "<li>" )
+        .data( "item.autocomplete", item )
+        .append( "<a>" + item.label + " (" + item.nb + ")</a>" )
+        .appendTo( ul );
+    };
+});
 </script>';
 	return $flux;
 }
