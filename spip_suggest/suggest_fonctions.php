@@ -34,7 +34,7 @@ function spip_suggest_complete($q) {
 			$aff = $value.' '._T('spip_suggest:resultat');
 		$w[] = array('label' => strtolower($key), 'nb' => $aff);
 	}
-	return $w;
+	return json_encode($w);
 }
 
 function spip_suggest_insert_head($flux) {
