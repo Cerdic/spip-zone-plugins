@@ -95,7 +95,7 @@ function newsletter_creer_newsletter_programmee($row){
 		// retrouver une instance initiee mais pas finie
 		// (cas d'une ereur fatale pendant la generation de la lettre)
 		// evite de creer un nombre d'instance infini pour rien
-		!$id_newsletter = sql_getfetsel("id_newsletter","spip_newsletters","date_redac=".sql_quote($set['recurrence'])." AND recurrence=".sql_quote($set['recurrence'],'','text')." AND statut=".sql_quote('prop'))
+		!$id_newsletter = sql_getfetsel("id_newsletter","spip_newsletters","date_redac=".sql_quote($set['date_redac'])." AND recurrence=".sql_quote($set['recurrence'],'','text')." AND statut=".sql_quote('prop'))
 
 		// et sinon on cree la newsletter
 		AND !$id_newsletter = objet_inserer("newsletter",0)){
