@@ -117,7 +117,14 @@ function newsletter_creer_newsletter_programmee($row){
 	// verifions au cas ou
 	$row2 = sql_fetsel("*","spip_newsletters","id_newsletter=".intval($id_newsletter));
 	if (!strlen(trim($row2['html_email']))){
-		spip_log("Rien a envoyer pour programmation #".$row['id_newsletter'],"newsletterprog");
+		spip_log("Rien a envoyer (apres tentative de generation) pour programmation #".$row['id_newsletter'],"newsletterprog");
+		// du coup on met a jour la prochaine occurence
+		newsletter_update_next_occurence($row,false);
+
+		// passer cette tentative ratee a la poubelle ?
+		// a priori si on arrive la c'est un bug ou un cas tordu
+		// donc pour le moment on laisse la newsletter ratee en prop
+		// elle sera recyclee a la prochaine echeance
 		return;
 	}
 
