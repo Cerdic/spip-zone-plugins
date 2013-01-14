@@ -105,6 +105,7 @@ function newsletter_creer_newsletter_programmee($row){
 
 	autoriser_exception("modifier","newsletter",$id_newsletter);
 	autoriser_exception("instituer","newsletter",$id_newsletter);
+	autoriser_exception("generer","newsletter",$id_newsletter);
 
 	objet_modifier("newsletter",$id_newsletter,$set);
 
@@ -134,6 +135,7 @@ function newsletter_creer_newsletter_programmee($row){
 
 	autoriser_exception("modifier","newsletter",$id_newsletter,false);
 	autoriser_exception("instituer","newsletter",$id_newsletter,false);
+	autoriser_exception("generer","newsletter",$id_newsletter,false);
 
 	// on met a jour la date et date_redac sur la source
 	newsletter_update_next_occurence($row);
