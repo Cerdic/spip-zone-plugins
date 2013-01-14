@@ -1,7 +1,7 @@
 <paquet
 	prefix="Albums"
 	categorie="multimedia"
-	version="2.1.13"
+	version="2.1.14"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/albums-128.png"
@@ -13,7 +13,7 @@
 
 	<auteur lien="http://romy.tetue.net">romy.tetue.net</auteur>
 	<auteur lien="http://razack.wordpress.com">Charles Razack</auteur>
-	<credit lien="http://tiheum.deviantart.com/art/Faenza-Icons-173323228">Tiheum (icone tirée du thème "Faenza")</credit>
+	<credit lien="http://tiheum.deviantart.com/art/Faenza-Icons-173323228">Matthieu James (icone inspirée du thème "Faenza")</credit>
 	<licence>GPL - 2011</licence>
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/albums.php" />

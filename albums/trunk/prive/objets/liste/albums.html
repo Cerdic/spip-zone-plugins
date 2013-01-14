@@ -91,7 +91,9 @@
 			[(#REM) LOGO ]
 			[(#VAL{logo}|in_array{#GET{colonnes}}|oui)
 			<td class='logo'>
-			[(#INCLURE{fond=prive/squelettes/inclure/inc-albums_logo, id_album, taille=#ENV{logo,48}})]
+			[<a href="[(#ID_ALBUM|generer_url_entite{album})]">
+			(#INCLURE{fond=prive/squelettes/inclure/inc-albums_logo, id_album, taille=#ENV{logo,48}})
+			</a>]
 			</td>
 			]
 
@@ -104,7 +106,7 @@
 
 			[(#REM) TITRE ]
 			[(#VAL{titre}|in_array{#GET{colonnes}}|oui)
-			<td class='titre principale'>
+			<td class='titre principale #EDIT{titre}'>
 				[<a href="[(#ID_ALBUM|generer_url_entite{album})]">(#TITRE)</a>]
 			</td>
 			]
@@ -133,7 +135,7 @@
 
 			[(#REM) DESCRIPTIF ]
 			[(#VAL{descriptif}|in_array{#GET{colonnes}}|oui)
-			<td class='descriptif'>
+			<td class='descriptif #EDIT{descriptif}'>
 				[(#DESCRIPTIF|couper{100})]
 			</td>
 			]
