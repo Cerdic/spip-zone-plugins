@@ -22,6 +22,9 @@ function formulaires_editer_guestreponse_identifier_dist($id_guestreponse='new',
  */
 function formulaires_editer_guestreponse_charger_dist($id_guestreponse='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('guestreponse',$id_guestreponse,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+	$valeurs['id_guestmessage']=_request('id_guestmessage');
+	$valeurs['id_auteur']=  session_get('id_auteur');
+  $valeurs['date']=  date( 'Y-m-d');
 	return $valeurs;
 }
 

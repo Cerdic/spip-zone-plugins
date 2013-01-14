@@ -59,8 +59,7 @@
 	</thead>
 	<tbody>
 	<BOUCLE_liste_guestmessages(GUESTMESSAGES){id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num pseudo},#GET{defaut_tri}}{par pseudo}{pagination #ENV{nb,10}}>
-		#SET{parite,#COMPTEUR_BOUCLE|alterner{row_odd,row_even}}
-		<tr class='guestmessage_#STATUT'>
+		<tr class='guestmessage_#STATUT guestsuivant'>
 			<td class='statut' rowspan='2'>[(#STATUT|puce_statut{guestmessage,#ID_GUESTMESSAGE})]</td>
 			<td class='id'>[(#AUTORISER{modifier,guestmessage,#ID_GUESTMESSAGE}|?{
 				<a href="[(#URL_ECRIRE{guestmessage_edit,id_guestmessage=#ID_GUESTMESSAGE})]">#ID_GUESTMESSAGE</a>,
@@ -72,8 +71,8 @@
 			<td class='prenom principale'>#PRENOM</td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='ville principale'>#VILLE</td>
-			<td class='repondre principale'><a href="[(#URL_ECRIRE{guestreponse_edit,new=oui,id_guestmessage=#ID_GUESTMESSAGE})]"><:guestmessage:lien_repondre_message:></a></td>
-			<td class='statut principale'>
+			<td class='repondre principale'><a href="[(#URL_ECRIRE{guestreponse_edit,new=oui&id_guestmessage=#ID_GUESTMESSAGE})]"><:guestmessage:lien_repondre_message:></a></td>
+			<td class='statut principale' rowspan='2'>
 				[(#STATUT|=={prop}|non)
 					<a class='ajax' href="#URL_ACTION_AUTEUR{'instituer_guestbook',#ID_GUESTMESSAGE-prop, #SELF|ancre_url{guestmessage#ID_GUESTMESSAGE}}">
 						<:guestmessage:action_proposer_message:>
@@ -92,17 +91,20 @@
 					</a>]
 			</td>
 		</tr>
-		<tr class='guestmessage_#STATUT[ (#GET{parite})]'>
-			<td colspan='2'><i><:guestmessage:label_guestmessage:>&nbsp;:</i></td>
-			<td class='guestmessage principale[ (#GET{parite})]' colspan='5'>#GUESTMESSAGE</td>
-			<td class='guestreponse principale[ (#GET{parite})]' colspan='2'>
-					<BOUCLE_rep(GUESTREPONSES auteurs){tout}{id_guestmessage}{par statut,date}>
-						[(#STATUT|puce_statut{guestreponse,#ID_GUESTREPONSE})]
-						[<i>(#NOM)</i>] <:guestbook:repondu:> : [<em>(#GUESTREPONSE)</em>]
-						<br />
-					</BOUCLE_rep>
-			</td>
+		<tr class='guestmessage_#STATUT'>
+			<td class='guestmessage' colspan='2'><i><:guestmessage:label_guestmessage:>&nbsp;:</i></td>
+			<td class='guestmessage principale' colspan='6'>#GUESTMESSAGE</td>
 		</tr>
+		
+		<BOUCLE_rep(GUESTREPONSES auteurs){tout}{id_guestmessage}{par statut,date}>
+		<tr class='guestmessage_#_liste_guestmessages:STATUT'>
+			<td class='statut principale'>R&nbsp;:</td>
+			<td class='guestreponse principale' colspan='2'>[<i>[(#STATUT|puce_statut{guestreponse,#ID_GUESTREPONSE})]&nbsp;(#NOM)</i>]</td>
+			<td class='guestreponse principale' colspan='6'><em>#GUESTREPONSE</em></td>
+			<td class='guestreponse principale'><a href="[(#URL_ECRIRE{guestreponse_edit,id_guestreponse=#ID_GUESTREPONSE})]">Editer</a></td>
+		</tr>
+		</BOUCLE_rep>
+
 	</BOUCLE_liste_guestmessages>
 	</tbody>
 </table>
