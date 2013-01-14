@@ -266,50 +266,56 @@ function filtre_album_contenu($id_album, $info='', $format='') {
  * Renvoie des infos sur les objet lies a un album.
  * Simplifie la vie pour l ecriture des squelettes.
  * On peut avoir :
- * 	une liste (+icone)
- * 	une liste compacte (regroupement par objets) (+icone)
+ * 	une liste : id-objet, objet (+icone)
+ * 	une liste detaillee: id-objet, objet, titre (+icone)
+ * 	une liste compacte: regroupement par objets (+icone)
  * 	le nombre total d objets lies
  *
- * @param string $id_album	identifiant de l'album
- * @param string $info		liste, liste_icone, liste_compacte, liste_compacte_icone, nombre
+ * @param string $id_album		identifiant de l'album
+ * @param string $format		liste, liste_detaillee, liste_compacte, nombre
+ * @param string $afficher_icone	si 'icone', affiche les icones des objets
  * @return string
  */
-function filtre_album_liaison($id_album, $format='liste') {
+function filtre_album_liaison($id_album, $format='liste', $afficher_icone='') {
 
 	include_spip('action/editer_liens');
+	$balise_img = charger_filtre('balise_img');
 
 	if ($res= objet_trouver_liens(array('album'=>intval($id_album)),array('*'=>'*'))) {
 		while ($row = array_shift($res)) {
-			$liste[] = array($row['objet'], $row['id_objet']);
-			//$objets[] = $row['objet'];
+			$liste[] = array($row['objet'], $row['id_objet'], $row['vu']);
 		}
 
 		// liste simple
-		if (in_array($format, array('liste','liste_icone'))) {
+		if ($format == 'liste' OR $format == 'liste_detaillee') {
 			$retour = "<ul>";
 			foreach ($liste as $k=>$v) {
 				$objet = $v[0];
 				$id_objet = $v[1];
-				$icone = ($format == "liste_icone") ? objet_icone($objet, 16) . '&nbsp;' : '';
+				$icone = ($afficher_icone == "icone") ? objet_icone($objet, 16) . '&nbsp;' : '';
+				$vu = ($v[2] == 'oui') ? $balise_img(chemin_image('vu-16-10.png')) . '&nbsp;' : '';
+				$titre = ($format == 'liste_detaillee') ? '&nbsp;<span class=\'titre\'>' .generer_info_entite($id_objet,$objet,'titre') . '</span>' : '';
 				$retour .= "<li>"
 					. "<a href='".generer_url_entite($id_objet, $objet)."'>"
 					. $icone
+					. $vu
 					. $objet
 					. "&nbsp;n°"
 					. $id_objet
 					. "</a>"
+					. $titre
 					. "<li>";
 			};
 			$retour .= "</ul>";
 		}
 		// liste compacte
-		else if (in_array($format, array('liste_compacte','liste_compacte_icone'))) {
+		else if ($format == 'liste_compacte') {
 			foreach ($liste as $k){
 				$objets[] = $k[0];
 			}
 			$retour = "<ul>";
 			foreach (array_count_values($objets) as $k=>$v) {
-				$icone = ($format == "liste_compacte_icone") ? objet_icone($k, 16) . '&nbsp;' : '';
+				$icone = ($afficher_icone == "icone") ? objet_icone($k, 16) . '&nbsp;' : '';
 				$retour .= "<li>"
 					. $icone
 					. singulier_ou_pluriel($v, objet_info($k,'info_1_objet'), objet_info($k, 'info_nb_objets'))
