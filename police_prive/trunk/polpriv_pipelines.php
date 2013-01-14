@@ -45,6 +45,10 @@ function polpriv_formulaire_charger ($flux) {
 		$flux['data']['_polices'] = polpriv_polices(); // polices normales
 		$flux['data']['_polices_fontface'] = polpriv_polices_fontface(); // polices fontface
 		$flux['data']['police_prive'] = isset($GLOBALS['visiteur_session']['prefs']['police_prive'])?$GLOBALS['visiteur_session']['prefs']['police_prive']:'';
+		// inserer dans la page les styles de toutes les polices fontface (et pas dans la feuille de style)
+		include_spip('inc/polpriv');
+		if ($familles = polpriv_familles_polices_fontface())
+			$flux['data']['_style_fontface'] .= polpriv_generer_style_polices_fontface($familles);
 	}
 	return $flux;
 }
@@ -79,17 +83,10 @@ function polpriv_header_prive($flux){
 			$flux .= "<style type='text/css'>body {font-family: ".$polices[$police].";}</style>";
 		// polices fontface
 		if (in_array($police, $polices_fontface)) {
-			$police_info = polpriv_familles_polices_fontface(array($police));
-			$flux .= polpriv_generer_style_polices_fontface($police_info);
+			$famille = polpriv_familles_polices_fontface(array($police));
+			$flux .= polpriv_generer_style_polices_fontface($famille);
 			$flux .= "<style type='text/css'>body {font-family: '".$police."';}</style>";
 		}
-	}
-	// formulaire configurer_preferences -> inserer les styles de toutes les polices fontface 
-	// il doit y avoir plus propre pour trouver l exec...
-	if (_request('exec') == "configurer_preferences") {
-		include_spip('inc/polpriv');
-		if ($familles = polpriv_familles_polices_fontface())
-			$flux .= polpriv_generer_style_polices_fontface($familles);
 	}
 
 	return $flux;
