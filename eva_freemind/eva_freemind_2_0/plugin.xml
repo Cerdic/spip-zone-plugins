@@ -4,7 +4,7 @@
 	<icon>img_pack/freemind_icon-24.png</icon>
 	<auteur>[Olivier Gautier->http://www.eva-web.edres74.ac-grenoble.fr], Dominique Lepaisant, Gilles Quiniou</auteur>
 	<licence>GNU/GPL</licence>
-	<version>1.2.0</version>
+	<version>1.2.1</version>
 	<etat>stable</etat>
     <description>
 Permet d'ins&#233;rer des animations Freemind ou Freeplane (format mm) gr&#226;ce &#224; un mod&#232;le.
@@ -14,5 +14,5 @@ _ Plugin cr&#233;&#233; gr&#226;ce &#224; l'article de [ivandps sur SPIP-Contrib
 	<prefix>eva_freemind</prefix>
 	<install>eva_freemind_install.php</install>
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 </plugin>
