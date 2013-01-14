@@ -75,7 +75,7 @@ function newsletter_creer_newsletter_programmee($row){
 		return;
 	}
 
-	// OK creons l'objet de base
+	// OK retrouvons ou creons l'objet de base
 	$set = array(
 		"titre" => $row["titre"],
 		"chapo" => $row["chapo"],
@@ -86,11 +86,19 @@ function newsletter_creer_newsletter_programmee($row){
 		"baked" => 1,
 		"statut" => "prop",
 		"lang" => "lang",
+		"recurrence" => $row['id_newsletter'],
 	);
 
 	include_spip("action/editer_objet");
 	include_spip("inc/autoriser");
-	if (!$id_newsletter = objet_inserer("newsletter",0)){
+	if (
+		// retrouver une instance initiee mais pas finie
+		// (cas d'une ereur fatale pendant la generation de la lettre)
+		// evite de creer un nombre d'instance infini pour rien
+		!$id_newsletter = sql_getfetsel("id_newsletter","spip_newsletters","date_redac=".sql_quote($set['recurrence'])." AND recurrence=".sql_quote($set['recurrence'],'','text')." AND statut=".sql_quote('prop'))
+
+		// et sinon on cree la newsletter
+		AND !$id_newsletter = objet_inserer("newsletter",0)){
 		spip_log("Erreur : impossible de creer une newsletter pour programmation #".$row['id_newsletter']." :".var_export($set,true),"newsletterprog"._LOG_ERREUR);
 		return;
 	}
