@@ -78,12 +78,13 @@ function albums_calculer_critere_contenu_select ($media='') {
 		$select = sql_get_select(
 			"DISTINCT(id_album)",
 			array(
+				"spip_albums AS albums",
 				"spip_documents AS docs",
 				"spip_documents_liens AS liens",
 			),
 			array(
 				"liens.objet = 'album'",
-				"liens.id_objet = id_album",
+				"liens.id_objet = albums.id_album",
 				"docs.id_document = liens.id_document",
 				"docs.media REGEXP " . sql_quote($media)
 			)
