@@ -47,9 +47,9 @@ function mailshot_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "sujet AS titre, '' AS lang",
 		'date' => "date",
-		'champs_editables'  => array('email', 'nom', 'listes', 'lang'),
-		'champs_versionnes' => array('email', 'nom', 'listes', 'lang'),
-		'rechercher_champs' => array("email" => 1, "nom" => 1),
+		'champs_editables'  => array(),
+		'champs_versionnes' => array(),
+		'rechercher_champs' => array(),
 		'tables_jointures'  => array(),
 		'statut_images' => array(
 			'pause'=>'puce-preparer-8.png',
