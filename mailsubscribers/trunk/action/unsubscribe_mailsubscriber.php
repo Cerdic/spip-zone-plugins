@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin mailsubscribers
- * (c) 2012 Cédric Morin
+ * (c) 2012 Cï¿½dric Morin
  * Licence GNU/GPL v3
  */
 
@@ -35,6 +35,9 @@ function action_unsubscribe_mailsubscriber_dist($email=null){
 
 	include_spip("inc/lang");
 	changer_langue($row['lang']);
+	include_spip("inc/autoriser");
+	autoriser_exception("modifier","mailsubscriber",$row['id_mailsubscriber']);
+	autoriser_exception("instituer","mailsubscriber",$row['id_mailsubscriber']);
 
 	if ($row['statut']=='valide'){
 		// OK l'email est connu et valide
@@ -45,6 +48,8 @@ function action_unsubscribe_mailsubscriber_dist($email=null){
 	else {
 		$titre = _T('mailsubscriber:unsubscribe_deja_texte',array('email'=>$row['email']));
 	}
+	autoriser_exception("modifier","mailsubscriber",$row['id_mailsubscriber'],false);
+	autoriser_exception("instituer","mailsubscriber",$row['id_mailsubscriber'],false);
 
 
 	// Dans tous les cas on finit sur un minipres qui dit si ok ou echec

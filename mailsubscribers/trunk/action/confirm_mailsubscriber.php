@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin mailsubscribers
- * (c) 2012 Cédric Morin
+ * (c) 2012 Cï¿½dric Morin
  * Licence GNU/GPL v3
  */
 
