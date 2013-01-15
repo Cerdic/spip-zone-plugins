@@ -91,7 +91,7 @@
 	[(#REM) Vides ]
 	<li class='vides[ (#ENV{contenu}|=={0}|oui)on]'>
 		[(#GET{self}|parametre_url{contenu,non}|lien_ou_expose{
-			[(#CHEMIN_IMAGE{icone-vide-16.png}|balise_img)]<:album:filtre_sans_contenu:>,
+			[(#CHEMIN_IMAGE{album-vide-16.png}|balise_img)]<:album:filtre_sans_contenu:>,
 			#ENV{contenu}|=={non},
 			ajax,
 			<:album:filtre_sans_contenu:>}
@@ -100,7 +100,7 @@
 	[(#REM) Pleins ]
 	<li class='tous'>
 		[(#GET{self}|parametre_url{contenu,oui}|lien_ou_expose{
-			[(#CHEMIN_IMAGE{icone-medias-tous-16.png}|balise_img)]<:album:filtre_avec_contenu:>,
+			[(#CHEMIN_IMAGE{album-plein-16.png}|balise_img)]<:album:filtre_avec_contenu:>,
 			#ENV{contenu}|=={oui},
 			ajax,
 			<:album:filtre_avec_contenu:>}
