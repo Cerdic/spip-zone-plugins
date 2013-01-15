@@ -147,15 +147,14 @@ function icone1_association($texte, $lien, $image) {
  *   Indique s'il faut (vrai, par defaut) rajouter ou pas (faux) "fin_cadre_relief"
  * @return void
  * @note
- *   Cette fonction remplace et personnalise le couplet final :
+ *   Cette fonction remplace le couplet final :
  *   echo fin_gauche(), fin_page();
  *   http://programmer.spip.org/Contenu-d-un-fichier-exec
  */
 function fin_page_association($FIN_CADRE_RELIEF=TRUE) {
-	// Pour eliminer le copyright a l'impression
-	$copyright = str_replace("<div class='table_page'>", "<div class='table_page contenu_nom_site'>", fin_page()); 
-	$fin = $FIN_CADRE_RELIEF ? fin_cadre_relief(true) : ''; 
-	echo $fin, fin_gauche(), $copyright;
+	if ($FIN_CADRE_RELIEF)
+		echo fin_cadre_relief(true);
+	echo $fin, fin_gauche(), fin_page();
 }
 
 /**
@@ -177,4 +176,5 @@ function debut_cadre_association($icone, $titre, $DEBUT_DROITE=TRUE) {
 		$chemin = find_in_path($icone); // icone alternative
 	debut_cadre_relief($chemin, FALSE, '', association_langue($titre) );
 }
+
 ?>
