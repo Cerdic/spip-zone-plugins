@@ -1,5 +1,7 @@
 <traduction module="videos" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/videos/trunk/lang/" reference="fr">
-	<langue code="en" />
+	<langue code="en" url="http://trad.spip.net/tradlang_module/videos?lang_cible=en">
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+	</langue>
 	<langue code="fr" />
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/videos?lang_cible=nl">
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />

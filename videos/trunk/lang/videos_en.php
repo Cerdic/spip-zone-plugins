@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_configurations_html5' => 'HTML5 / Alternative settings',
 	'cfg_titre_configurations_vimeo' => 'Vimeo settings',
 	'cfg_titre_configurations_youtube' => 'Youtube settings',
-	'confirmation_ajout' => 'The video "@type@:@titre@" has been added.', # MODIF
+	'confirmation_ajout' => 'The video "@type@:@titre@" has been added. &lt;video@id_document@&gt;',
 
 	// E
 	'erreur_adresse_invalide' => 'This URL address is not valid. If you are trying to import an MP4 video, you must use the SPIP\'s document upload form.',
