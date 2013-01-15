@@ -19,23 +19,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_account' => 'Corresponds to email the seller\'s account',
-	'explication_environnement' => 'Vous pouvez indiquer dans ce formulaire des données
-		qui concernent le site de test de Paypal (Sandbox, pour le développement)
-		ainsi que celles valables uniquement pour de vraies transactions.
-		Quel environnement souhaitez-vous utiliser ?', # NEW
+	'explication_environnement' => 'You can indicate in this form datas for the Paypal test website (Sandbox, for development) and the ones for real transaction only.
+		Which environment do you want to use ?',
 	'explication_identifiant_vendeur' => 'Corresponds to email the seller\'s account',
 	'explication_soumission' => 'On what page of Paypal is submitted the form?',
 	'explication_tax' => 'Eventually the value of the tax to apply (for example, French VAT: 19.60)',
 
 	// I
-	'info_bouton_paypal' => 'Make payments with PayPal: it\'s fast, free and secure!', # MODIF
+	'info_bouton_paypal' => 'Make payments with PayPal: it\'s fast, free and secure!',
 
 	// L
 	'label_account' => 'Account (email)',
 	'label_currency_code' => 'Currency',
 	'label_currency_code_eur' => 'Euro (€)',
-	'label_currency_code_usd' => 'Dollar (
-)',
+	'label_currency_code_usd' => 'Dollar ($)', # Caractère manquant
 	'label_environnement' => 'Environment',
 	'label_environnement_prod' => 'Production environment',
 	'label_environnement_test' => 'Test environment',
