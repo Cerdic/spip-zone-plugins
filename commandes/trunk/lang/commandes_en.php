@@ -19,8 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commande_client' => 'Customer',
-	'commande_date' => 'Order date', # MODIF
-	'commande_date_paiement' => 'Payment date', # MODIF
+	'commande_date' => 'Order date',
+	'commande_date_paiement' => 'Payment date',
 	'commande_editer' => 'Edit the order',
 	'commande_modifier' => 'Modify the order:',
 	'commande_montant' => 'Amount',
@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_expediteur_choix_email' => 'an e-mail',
 	'notifications_expediteur_choix_facteur' => 'idem plugin Facteur',
 	'notifications_expediteur_choix_webmaster' => 'a webmaster',
-	'notifications_expediteur_email_label' => 'Enter an e-mail:', # MODIF
+	'notifications_expediteur_email_label' => 'Enter an e-mail:',
 	'notifications_expediteur_explication' => 'Choose the sender notifications for the seller and buyer',
 	'notifications_expediteur_label' => 'Sender',
 	'notifications_expediteur_webmaster_label' => 'Select a webmaster:',
@@ -119,7 +119,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer' => 'Delete',
 
 	// T
-	'texte_changer_statut_commande' => 'Cette commande est :', # NEW
+	'texte_changer_statut_commande' => 'This order is :',
 
 	// U
 	'une_commande_de' => 'An order of: ',
