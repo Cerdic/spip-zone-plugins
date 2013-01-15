@@ -16,7 +16,7 @@
 	]
 	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{ticket-24.png}|balise_img{article,cadre-icone})]</h1>
 ],simple fiche_objet})]
-#FORMULAIRE_ASSIGNER_TICKET{#ID_TICKET}
+
 <div>
 		<div style="float: #LANG_RIGHT; padding-#LANG_RIGHT: 20px;">
 			[<div class="champ">
@@ -53,6 +53,8 @@
 			<:tickets:champ_navigateur:> (#NAVIGATEUR|tickets_texte_navigateur)
 		</div>]
 </div>
+<!--affiche_milieu-->
+#FORMULAIRE_ASSIGNER_TICKET{#ID_TICKET}
 <div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
 <div class='label'><:info_texte:></div>
 <div dir='#LANG_DIR' class='#EDIT{texte} texte'>[(#TEXTE|image_reduire{500,0})]</div>
@@ -62,6 +64,17 @@
 <div dir='#LANG_DIR' class='#EDIT{notes} notes'>(#NOTES)</div>
 </div>]
 [<div><:tickets:champ_exemple:> : <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,ticket,#ID_TICKET})
+	[(#ID_TICKET|afficher_qui_edite{ticket}|non)
+		[(#URL_ECRIRE{ticket_edit,id_ticket=#ID_TICKET}|icone_verticale{<:tickets:icone_modifier_ticket:>,ticket,edit,right ajax preload})]
+	]
+	[(#ID_TICKET|afficher_qui_edite{ticket}|oui)
+		[(#URL_ECRIRE{ticket_edit,id_ticket=#ID_TICKET}|icone_verticale{#ID_TICKET|afficher_qui_edite{ticket},warning-24,'',right ajax preload})]
+	]
+]
 
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,ticket,id,#ID_TICKET},data,'<div class="nettoyeur"></div>'}}
 
