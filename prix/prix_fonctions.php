@@ -49,7 +49,18 @@ function balise_PRIX_dist($p) {
  * @param float $prix Valeur du prix à formater
  * @return string Retourne une chaine contenant le prix formaté avec une devise (par défaut l'euro)
  */
-function prix_formater($prix){
+ 
+function prix_formater($prix){ 
+	$fonction_formater = charger_fonction('prix_formater', 'filtres/'); 
+	return $fonction_formater($prix); 
+}
+
+/*
+ *  Déport de la fonction pour pouvoir au besoin la surcharger avec
+ *  function filtres_prix_formater
+ *
+ */
+function filtres_prix_formater_dist($prix){
 
 	// Pouvoir débrayer la devise de référence
 	if (! defined('PRIX_DEVISE')) {
