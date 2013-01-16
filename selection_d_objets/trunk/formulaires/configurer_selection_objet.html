@@ -1,5 +1,5 @@
 #SET{objets,#ARRAY}
-
+#SET{objets_saisies,#LISTE{article,rubrique}}
 <BOUCLE_objets_liste(DATA){source tableau,#VAL|lister_tables_objets_sql}{par cle}{editable = oui}>
     [(#VALEUR{page}|is_string|oui)
         [(#SET{objets,#GET{objets}|array_merge{#ARRAY{#VALEUR{page},#VALEUR{texte_objets}|_T}}})]
@@ -16,15 +16,38 @@
 	<form action="#ENV{action}" method="post"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			 [(#SAISIE{selecteur_rubrique,selection_rubrique_dest,
-                multiple=oui,
-                label=<:selection_objet:selection_rubrique_dest:>,
-                explication=<:selection_objet:explication_selection_rubrique_dest:>}
-                )] 
+		    <li class="fieldset">
+		      <fieldset>
+		          <legend><:selection_objet:objets_destination:></legend>
+        		    <ul>
+        		    [(#SAISIE{checkbox,selection_objets_dest,
+                    datas=#GET{objets},
+                    label=<:selection_objet:selection_objets_dest:>}
+                    )]
+        		    <BOUCLE_objets_dest(DATA){source tableau, #CONFIG{selection_objet/selection_objets_dest}}>
+        		    [(#VALEUR|in_array{#GET{objets_saisies}}|oui)
+            		    [(#SAISIE{selecteur_#VALEUR,selection_#VALEUR_dest,
+                            multiple=oui,
+                            label=[(#GET{objets}|table_valeur{#VALEUR})]}
+                        )] 
+                    ]
+         
+		    </BOUCLE_objets_dest>
+		    		 </ul>
+		    </fieldset>
+		    </li>
+            <li class="fieldset">
+              <fieldset>
+                  <legend><:selection_objet:objets_a_selectionner:></legend>
+                  <ul>
             [(#SAISIE{checkbox,selection_rubrique_objet,
             datas=#GET{objets},
             label=<:selection_objet:selection_rubrique_objet:>}
-            )]             
+            )]
+            </ul>   
+            </fieldset>
+             
+            </li>         
 		</ul>
 		
 		<p class="boutons">
