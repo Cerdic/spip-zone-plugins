@@ -77,15 +77,18 @@ function polpriv_header_prive($flux){
 		include_spip('inc/polpriv');
 		$police = $GLOBALS['visiteur_session']['prefs']['police_prive'];
 		$polices = polpriv_polices();
-		$polices_fontface = array_keys(polpriv_familles_polices_fontface());
+		$polices_fontface = polpriv_familles_polices_fontface();
 		// polices normales
 		if (isset($polices[$police]))
 			$flux .= "<style type='text/css'>body {font-family: ".$polices[$police].";}</style>";
 		// polices fontface
-		if (in_array($police, $polices_fontface)) {
-			$famille = polpriv_familles_polices_fontface(array($police));
-			$flux .= polpriv_generer_style_polices_fontface($famille);
-			$flux .= "<style type='text/css'>body {font-family: '".$police."';}</style>";
+		if (is_array($polices_fontface) AND !empty($polices_fontface)) {
+		$polices_fontface = array_keys($polices_fontface);
+			if (in_array($police, $polices_fontface)) {
+				$famille = polpriv_familles_polices_fontface(array($police));
+				$flux .= polpriv_generer_style_polices_fontface($famille);
+				$flux .= "<style type='text/css'>body {font-family: '".$police."';}</style>";
+			}
 		}
 	}
 
