@@ -16,17 +16,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'alexa_id' => 'Сайт идентификатор для Alexa',
 
 	// B
-	'bing_webmaster' => 'Bing Webmaster Tools', # NEW
-	'bing_webmaster_activate' => 'Activer Bing Webmaster Tools', # NEW
-	'bing_webmaster_id' => 'Meta code de vérification', # NEW
+	'bing_webmaster' => 'Bing Webmaster Tools',
+	'bing_webmaster_activate' => 'Включить Bing Webmaster Tools',
+	'bing_webmaster_id' => 'Проверочный мета код',
 
 	// C
 	'canonical_url' => 'Канонические URL',
 	'canonical_url_activate' => 'Включить канонические URL',
 
 	// F
-	'forcer_squelette_descriptif' => 'Les metas SEO sont prioritaires aux meta générées par les squelettes', # NEW
-	'forcer_squelette_label' => 'Charger les metas pour tous squelettes', # NEW
+	'forcer_squelette_descriptif' => 'Мета теги, заданные в плагине, имеют больший приоритет, чем теги, указанные в шаблонах.',
+	'forcer_squelette_label' => 'Подключать мета теги во все шаблоны',
 
 	// G
 	'google_analytics' => 'Google Analytics',
