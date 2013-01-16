@@ -8,10 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_sauvegarder' => 'Sauvegarder la base', # NEW
+	'bouton_sauvegarder' => 'Backup the database',
 
 	// C
-	'colonne_auteur' => 'Créé par', # NEW
+	'colonne_auteur' => 'Created by',
 	'colonne_nom' => 'Name',
 
 	// E
@@ -21,41 +21,37 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_repertoire_inaccessible' => 'The @rep@ directory is not open for write access.',
 
 	// H
-	'help_cfg_generale' => 'Ces paramètres de configuration s\'appliquent à toutes les sauvegardes, manuelles ou automatiques.', # NEW
-	'help_contenu' => 'Choisissez les paramètres de contenu de votre fichier de sauvegarde.', # NEW
-	'help_contenu_auto' => 'Choisir le contenu des sauvegardes automatiques.', # NEW
-	'help_frequence' => 'Saisir la fréquence des sauvegardes automatiques en jours.', # NEW
-	'help_liste_tables' => 'Par défaut, toutes les tables sont exportées à l\'exception des tables @noexport@. Si vous souhaitez choisir précisément les tables à sauvegarder ouvrez la liste en décochant la case ci-dessous.', # NEW
-	'help_mail_max_size' => 'Certain databases may exceed the maximum size for documents attached to an email. Check with your web host to find out the maximum size authorised. The default limit is 2 MB.', # MODIF
-	'help_max_zip' => 'Le fichier de sauvegarde est automatiquement zippé si sa taille est inférieure à un seuil. Saisir ce seuil en Mo.', # NEW
-	'help_notif_active' => 'Activer l\'envoi des sauvegardes par mail', # NEW
-	'help_notif_mail' => 'Saisir les adresses en les séparant par des virgules ",". Ces adresses s\'ajoutent à celle du webmestre du site.', # NEW
-	'help_obsolete' => 'Based on the number of days old, determine if an archive is considered as obsolete and if so delete it from the server.
-             Enter -1 to deactivate this functionality', # MODIF
-	'help_prefixe' => 'Optional: enter a prefix for the backup file name', # MODIF
-	'help_restauration' => '<strong>Warning !!!</strong> the backups made are <strong>not in SPIP format</strong> :
-                It is useless to try to use them with the SPIP administration tool.<br /><br />
-             For any backup restores, you must use the <strong>phpmyadmin</strong> interface of your
-             database server: on the <strong>"SQL"</strong> tab, use the button labelled
-             <strong>"Location of the text file"</strong> to select the backup file
-             (tick the "gzipped" option if necessary) then click on OK.<br /><br />
-             The <strong>xxxx.gz</strong> or <strong>xxx.sql</strong> backups contain an SQL formatted file with the commands 
-             used to <strong>delete</strong> the existing SPIP tables and to <strong>replace</strong> them with
-             archived data. Any data <strong>more recent</strong> than those in the backup will therefore be <strong>LOST</strong>!', # MODIF
-	'help_sauvegarde_1' => 'Cette option vous permet de sauvegarder la structure et le contenu de la base dans un fichier au format SQL qui sera stocké dans le répertoire tmp/dump/. La fichier se nomme <em>@prefixe@_aaaammjj_hhmmss.</em>', # NEW
-	'help_sauvegarde_2' => 'La sauvegarde automatique est activée (fréquence en jours : @frequence@).', # NEW
+	'help_cfg_generale' => 'These configuration settings apply to all backups, manual or automatic.',
+	'help_contenu' => 'Choose the settings of the contents of your backup file.',
+	'help_contenu_auto' => 'Choose the content of automatic backups.',
+	'help_frequence' => 'Enter the frequency of automatic backups in days.',
+	'help_liste_tables' => 'By default, all tables are exported with the exception of tables @noexport@. If you want to choose precisely the tables to save open the list by unchecking the box below.',
+	'help_mail_max_size' => 'Enter the maximum size in MB of the backup file beyond which the mail will not be sent (value to check with your mail provider).',
+	'help_max_zip' => 'The backup file is automatically zipped if its size is less than a threshold. Enter the threshold in megabytes (This threshold is necessary to not crash the server by making a too big zip)',
+	'help_notif_active' => 'If you wish to be notified of automatic processing, enable the notifications. For automatic backup you will receive the generated file by mail if it is not too large and if the "Facteur" plugin is enabled.',
+	'help_notif_mail' => 'Enter addresses separated by commas ",". These addresses are added to the one of the webmaster.',
+	'help_obsolete' => 'Enter the storage life of the backups in days',
+	'help_prefixe' => 'Enter a prefix added to the name of each  backup file',
+	'help_restauration' => '<strong>Warning !!!</strong> the backups made are <strong>not in SPIP format</strong> and can\'t be used with the restore tool of the database from SPIP.<br /><br />
+
+For restoration, you must use the <strong>phpmyadmin</strong> interface of your database server.<br /><br />
+
+The backups contain an SQL formatted file with the commands used to <strong>delete</strong> the existing SPIP tables and to <strong>replace</strong> them with archived data. Any data <strong>more recent</strong> than those in the backup will therefore be <strong>LOST</strong>!',
+	'help_sauvegarde_1' => 'This option allows you to save the structure and content of the database in a MySQL format file that will be stored in the folder tmp/dump/. The file is named
+<em>@prefixe@_yyyymmdd_hhmmss.</em>. The table prefix is retained.',
+	'help_sauvegarde_2' => 'Automatic backup is enabled (frequency in days: @frequence@).',
 
 	// I
-	'info_sql_auteur' => 'Auteur : ', # NEW
+	'info_sql_auteur' => 'Author: ',
 	'info_sql_base' => 'Database:',
 	'info_sql_compatible_phpmyadmin' => 'SQL file 100% compatible with PHPMyadmin',
 	'info_sql_date' => 'Date:',
 	'info_sql_debut_fichier' => 'Start of file',
-	'info_sql_donnees_table' => 'Data from @table@', # MODIF
-	'info_sql_fichier_genere' => 'This file is generated by the saveauto plugin', # MODIF
+	'info_sql_donnees_table' => 'Datas from the table @table@',
+	'info_sql_fichier_genere' => 'This file is generated by the Saveauto plugin',
 	'info_sql_fin_fichier' => 'End of file',
 	'info_sql_ipclient' => 'Client IP:',
-	'info_sql_mysqlversion' => 'MySQL version:', # MODIF
+	'info_sql_mysqlversion' => 'MySQL version:',
 	'info_sql_os' => 'Server O/S:',
 	'info_sql_phpversion' => 'PHP version:',
 	'info_sql_plugins_utilises' => '@nb@ plugins used:',
@@ -64,37 +60,37 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_sql_structure_table' => 'Structure of the @table@ table',
 
 	// L
-	'label_donnees' => 'Data from the tables:', # MODIF
-	'label_frequence' => 'Frequency of the backup: every', # MODIF
-	'label_mail_max_size' => 'Maximum size of files attached to emails (MB):', # MODIF
-	'label_max_zip' => 'Seuil des zips', # NEW
-	'label_nettoyage_journalier' => 'Activer le nettoyage journalier des archives', # NEW
-	'label_notif_active' => 'Activer les notifications', # NEW
-	'label_notif_mail' => 'Adresses email à notifier', # NEW
-	'label_obsolete_jours' => 'Backups considered as obsolete after:', # MODIF
-	'label_prefixe_sauvegardes' => 'Backup prefix:', # MODIF
-	'label_sauvegarde_reguliere' => 'Activer la sauvegarde régulière', # NEW
-	'label_structure' => 'Structure of the tables:', # MODIF
-	'label_toutes_tables' => 'Sauvegarder toutes les tables', # NEW
-	'legend_cfg_generale' => 'Paramètres généraux des sauvegardes', # NEW
-	'legend_cfg_notification' => 'Notifications', # NEW
-	'legend_cfg_sauvegarde_reguliere' => 'Traitements automatiques', # NEW
+	'label_donnees' => 'Datas from the tables',
+	'label_frequence' => 'Frequency of the backups',
+	'label_mail_max_size' => 'Threshold for sending email',
+	'label_max_zip' => 'Threshold of the zips',
+	'label_nettoyage_journalier' => 'Enable daily cleaning of archives',
+	'label_notif_active' => 'Enable the notifications',
+	'label_notif_mail' => 'Email addresses to notify',
+	'label_obsolete_jours' => 'Backup storage',
+	'label_prefixe_sauvegardes' => 'Prefix:',
+	'label_sauvegarde_reguliere' => 'Enable regular backup',
+	'label_structure' => 'Structure of the tables',
+	'label_toutes_tables' => 'Backup all tables',
+	'legend_cfg_generale' => 'General settings of the backups',
+	'legend_cfg_notification' => 'Notifications',
+	'legend_cfg_sauvegarde_reguliere' => 'Automatic processing',
 
 	// M
-	'message_aucune_sauvegarde' => 'There are no backups.', # MODIF
-	'message_cleaner_sujet' => 'Nettoyage des sauvegardes', # NEW
-	'message_notif_cleaner_intro' => 'La suppression automatique des sauvegardes obsolètes (dont la date est antérieure à @duree@ jours) a été effectuée avec succès. Les fichiers suivants ont été supprimés : ', # NEW
-	'message_notif_sauver_intro' => 'La sauvegarde de la base @base@ a été effectuée avec succès par l\'auteur @auteur@.', # NEW
-	'message_sauvegarde_nok' => 'Erreur lors de la sauvegarde SQL de la base.', # NEW
-	'message_sauvegarde_ok' => 'La sauvegarde SQL de la base a été faite avec succès.', # NEW
-	'message_sauver_sujet' => 'Sauvegarde de la base @base@', # NEW
-	'message_telechargement_nok' => 'Erreur lors du téléchargement.', # NEW
+	'message_aucune_sauvegarde' => 'There are no backups to download.',
+	'message_cleaner_sujet' => 'Backup cleanup',
+	'message_notif_cleaner_intro' => 'Automatic deletion of outdated backups (which is earlier than @duree@ days) was successful. The following files were deleted:',
+	'message_notif_sauver_intro' => 'The backup of the database @base@ has been successfully done by the author @auteur@.',
+	'message_sauvegarde_nok' => 'Error during the SQL backup of the database.',
+	'message_sauvegarde_ok' => 'The SQL backup of the database was created successfully.',
+	'message_sauver_sujet' => 'Backup of the database @base@',
+	'message_telechargement_nok' => 'Error downloading.',
 
 	// T
-	'titre_boite_historique' => 'Backup history', # MODIF
-	'titre_boite_sauver' => 'Saveauto plugin: SQL database backups', # MODIF
-	'titre_page_configurer' => 'Configuration du plugin Sauvegarde automatique', # NEW
-	'titre_page_saveauto' => 'Database backups', # MODIF
+	'titre_boite_historique' => 'MySQL backups available for download',
+	'titre_boite_sauver' => 'Create a MySQL backup',
+	'titre_page_configurer' => 'Saveauto plugin configuration',
+	'titre_page_saveauto' => 'Backup the database in MySQL format',
 	'titre_saveauto' => 'Automatic backups'
 );
 
