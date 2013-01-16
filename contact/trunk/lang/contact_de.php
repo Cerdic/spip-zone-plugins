@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'alerte_effacement' => 'Bestätigen Sie das Löschen der Kontaktkonfigurationsdaten.',
+	'alerte_effacement' => 'Einstellungen wirklich löschen?',
 	'aucun_message' => 'Keine Nachricht',
 
 	// B
