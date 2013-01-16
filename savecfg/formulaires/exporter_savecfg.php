@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function formulaires_exporter_savecfg_charger_dist() {
 	$valeurs = array(
 		'fichier'=>$fichier,

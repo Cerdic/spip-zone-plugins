@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function sauvegarder_savecfg($fond, $titre, $sfg) {
 		// Insert ou Update ?
 		$id_savecfg = sql_getfetsel('id_savecfg', 'spip_savecfg', 'titre='.sql_quote($titre).' AND fond='.sql_quote($fond));

@@ -8,6 +8,9 @@
 	 * Pour plus de details voir le fichier COPYING.txt.
 	 *  
 	 **/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function savecfg_install($action){
 	switch ($action){
 		case 'test':
