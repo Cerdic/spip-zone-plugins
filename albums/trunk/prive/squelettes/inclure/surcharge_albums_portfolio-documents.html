@@ -8,7 +8,7 @@
 [(#REM) pour permettre d'inclure ce squelette plusieurs fois dans une page, fournir un parametre id_unique dans l'appel]
 
 #SET{nbdocs,0}
-<div id="portfolios#ENV{id_unique}" class="portfolios">
+<div id="portfolios" class="portfolios[ (#ENV{id_unique})]">
 [(#REM) D'abord les images illustration]
 <B_illustrations>
 <h3><span class="image_loading"></span><:medias:info_illustrations:></h3>
@@ -70,7 +70,7 @@ function check_reload_page(){
 		$('#documents[(#ENV{id_unique})]').remove();reload = true;
 	}
 	if (reload) {
-		jQuery('#portfolios[(#ENV{id_unique})]').ajaxReload();
+		jQuery('#portfolios[.(#ENV{id_unique})]').ajaxReload();
 		jQuery('#navigation .box.info').ajaxReload();
 	}
 }
