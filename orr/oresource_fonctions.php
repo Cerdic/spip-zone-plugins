@@ -16,25 +16,25 @@ function orr_joursemaine($date, $jourvoulu, $format){
 	if ($format == "jour"){
 		switch ($jourvoulu) {
 			case "lundi":
-				$date=date("d",mktime(0,0,0,$mois,$jour-3,$annee));
+				$date=date("d",mktime(0,0,0,$mois,$jour-3,intval($annee)));
 				break;
 			case "mardi":
-				$date=date("d",mktime(0,0,0,$mois,$jour-2,$annee));
+				$date=date("d",mktime(0,0,0,$mois,$jour-2,intval($annee)));
 				break;
 			case "mercredi" :
-				$date=date("d",mktime(0,0,0,$mois,$jour-1,$annee));
+				$date=date("d",mktime(0,0,0,$mois,$jour-1,intval($annee)));
 				break;
 			case "jeudi":
-				$date=date("d",mktime(0,0,0,$mois,$jour,$annee));
+				$date=date("d",mktime(0,0,0,$mois,$jour,intval($annee)));
 				break;
 			case "vendredi":
-				$date=date("d",mktime(0,0,0,$mois,$jour+1,$annee));
+				$date=date("d",mktime(0,0,0,$mois,$jour+1,intval($annee)));
 				break;
 			case "samedi":
-				$date=date("d",mktime(0,0,0,$mois,$jour+2,$annee));
+				$date=date("d",mktime(0,0,0,$mois,$jour+2,intval($annee)));
 				break;
 			default:
-				$date=date("d",mktime(0,0,0,$mois,$jour+3,$annee));
+				$date=date("d",mktime(0,0,0,$mois,$jour+3,intval($annee)));
 				break;
 		}
 	}
@@ -44,28 +44,28 @@ function orr_joursemaine($date, $jourvoulu, $format){
 	if ($format == "date"){
 		switch ($jourvoulu) {
 			case "lundi":
-				$date=date("Y-m-d H:i:s", mktime (0,0,0, $mois, $jour-3, $annee));
+				$date=date("Y-m-d H:i:s", mktime (0,0,0, $mois, $jour-3, intval($annee)));
 				break;
 			case "mardi":
-				$date=date("Y-m-d H:i:s", mktime (0,0,0, $mois, $jour-2, $annee));
+				$date=date("Y-m-d H:i:s", mktime (0,0,0, $mois, $jour-2, intval($annee)));
 				break;
 			case "mercredi" :
-				$date=date("Y-m-d H:i:s", mktime (0,0,0, $mois, $jour-1, $annee));
+				$date=date("Y-m-d H:i:s", mktime (0,0,0, $mois, $jour-1, intval($annee)));
 				break;
 			case "jeudi":
-				$date=date("Y-m-d H:i:s", mktime (0,0,0, $mois, $jour, $annee));
+				$date=date("Y-m-d H:i:s", mktime (0,0,0, $mois, $jour, intval($annee)));
 				break;
 			case "vendredi":
-				$date=date("Y-m-d H:i:s", mktime (0,0,0, $mois, $jour+1, $annee));
+				$date=date("Y-m-d H:i:s", mktime (0,0,0, $mois, $jour+1, intval($annee)));
 				break;
 			case "samedi":
-				$date=date("Y-m-d H:i:s", mktime (0,0,0, $mois, $jour+2, $annee));
+				$date=date("Y-m-d H:i:s", mktime (0,0,0, $mois, $jour+2, intval($annee)));
 				break;
 			case "dimanche":
-				$date=date("Y-m-d H:i:s", mktime (0,0,0, $mois, $jour+3, $annee));
+				$date=date("Y-m-d H:i:s", mktime (0,0,0, $mois, $jour+3, intval($annee)));
 				break;
 			default:
-				$date=date("Y-m-d H:i:s", mktime (0,0,0, $mois, $jour+4, $annee));
+				$date=date("Y-m-d H:i:s", mktime (0,0,0, $mois, $jour+4, intval($annee)));
 				break;
 		}
 	}
@@ -75,31 +75,31 @@ function orr_joursemaine($date, $jourvoulu, $format){
 	if ($format == "nom"){
 		switch ($jourvoulu) {
 			case "lundi":
-				$date=date("N",mktime(0,0,0,$mois,$jour-3,$annee));
+				$date=date("N",mktime(0,0,0,$mois,$jour-3,intval($annee)));
 				$date=orr_traduction_jour($date);
 				break;
 			case "mardi":
-				$date=date("N",mktime(0,0,0,$mois,$jour-2,$annee));
+				$date=date("N",mktime(0,0,0,$mois,$jour-2,intval($annee)));
 				$date=orr_traduction_jour($date);
 				break;
 			case "mercredi" :
-				$date=date("N",mktime(0,0,0,$mois,$jour-1,$annee));
+				$date=date("N",mktime(0,0,0,$mois,$jour-1,intval($annee)));
 				$date=orr_traduction_jour($date);
 				break;
 			case "jeudi":
-				$date=date("N",mktime(0,0,0,$mois,$jour,$annee));
+				$date=date("N",mktime(0,0,0,$mois,$jour,intval($annee)));
 				$date=orr_traduction_jour($date);
 				break;
 			case "vendredi":
-				$date=date("N",mktime(0,0,0,$mois,$jour+1,$annee));
+				$date=date("N",mktime(0,0,0,$mois,$jour+1,intval($annee)));
 				$date=orr_traduction_jour($date);
 				break;
 			case "samedi":
-				$date=date("N",mktime(0,0,0,$mois,$jour+2,$annee));
+				$date=date("N",mktime(0,0,0,$mois,$jour+2,intval($annee)));
 				$date=orr_traduction_jour($date);
 				break;
 			default:
-				$date=date("N",mktime(0,0,0,$mois,$jour+3,$annee));
+				$date=date("N",mktime(0,0,0,$mois,$jour+3,intval($annee)));
 				$date=orr_traduction_jour($date);
 				break;
 		}
