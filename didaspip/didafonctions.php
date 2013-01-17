@@ -14,7 +14,7 @@ function dida_insert_projet($texte)	{
 	if (!isset($type_affichage)) $type_affichage="Iframe";
 	
 	if($type_affichage=="Thickbox"){
-		while (@eregi("didapages@([0-9a-zA-Z]+)@", $texte, $projetdida))
+		while (preg_match ("#didapages@([0-9a-zA-Z]+)@#", $texte, $projetdida))
 		{ 
 			//on recherche le nom du projet que l'on stocke dans la variable projetdida
 			$motif="didapages@".$projetdida[1]."@"; // On recherche l'emplacement du lien
@@ -26,7 +26,7 @@ function dida_insert_projet($texte)	{
 	}
 	else{
 		if($type_affichage=="Iframe"){
-			while (@eregi ("didapages@([0-9a-zA-Z]+)@", $texte, $projetdida))
+			while (preg_match ("#didapages@([0-9a-zA-Z]+)@#", $texte, $projetdida))
 			{
 				//on recherche le nom du projet que l'on stocke dans la variable projetdida
 				$motif="didapages@".$projetdida[1]."@"; // On recherche l'emplacement du lien
@@ -38,7 +38,7 @@ function dida_insert_projet($texte)	{
 			return $texte;
 		}
 		else{
-			while (@eregi ("didapages@([0-9a-zA-Z]+)@", $texte, $projetdida))
+			while (preg_match ("#didapages@([0-9a-zA-Z]+)@#", $texte, $projetdida))
 			//on recherche le nom du projet que l'on stocke dans la variable projetdida
 			{
 				$motif="didapages@".$projetdida[1]."@"; // On recherche l'emplacement du lien
@@ -66,7 +66,7 @@ function dida_post_typo($texte)	{
 	if (!isset($type_affichage)) $type_affichage="Iframe";
 	
 	if($type_affichage=="Thickbox"){
-		while (@eregi("didapages@([0-9a-zA-Z]+)@", $texte, $projetdida))
+		while (preg_match ("#didapages@([0-9a-zA-Z]+)@#", $texte, $projetdida))
 		{ 
 			//on recherche le nom du projet que l'on stocke dans la variable projetdida
 			$motif="didapages@".$projetdida[1]."@"; // On recherche l'emplacement du lien
@@ -78,7 +78,7 @@ function dida_post_typo($texte)	{
 	}
 	else{
 		if($type_affichage=="Iframe"){
-			while (@eregi ("didapages@([0-9a-zA-Z]+)@", $texte, $projetdida))
+			while (preg_match ("#didapages@([0-9a-zA-Z]+)@#", $texte, $projetdida))
 			{
 				//on recherche le nom du projet que l'on stocke dans la variable projetdida
 				$motif="didapages@".$projetdida[1]."@"; // On recherche l'emplacement du lien
@@ -90,7 +90,7 @@ function dida_post_typo($texte)	{
 			return $texte;
 		}
 		else{
-			while (@eregi ("didapages@([0-9a-zA-Z]+)@", $texte, $projetdida))
+			while (preg_match ("#didapages@([0-9a-zA-Z]+)@#", $texte, $projetdida))
 			//on recherche le nom du projet que l'on stocke dans la variable projetdida
 			{
 				$motif="didapages@".$projetdida[1]."@"; // On recherche l'emplacement du lien
