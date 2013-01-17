@@ -1,0 +1,19 @@
+<BOUCLE_si_autorise(CONDITION){si #AUTORISER{verifier,biblio}}>
+[(#SET{tri, #ARRAY{annee,<:zotspip:item_annee:>,type_ref,<:zotspip:item_type:>,auteurs,<:zotspip:item_premier_auteur:>}})]
+<div class="formulaire_spip">
+<form action="spip.php" method="get"><div>
+	<input type="hidden" name="page" value="bibliocheck" />
+	<ul>
+		[(#SAISIE{selection,tri,label=<:zotspip:label_tri:>,cacher_option_intro=on,defaut=annee,datas=#GET{tri}})]
+		[(#SAISIE{csl,csl,label=<:zotspip:label_csl:>,cacher_option_intro=on,defaut=#CONFIG{zotspip/csl_defaut}})]
+		[(#SAISIE{zotspip_creator,auteur,label=<:zotspip:label_auteur:>})]
+		[(#SAISIE{zotspip_annee,annee,label=<:zotspip:label_annee:>})]
+		[(#SAISIE{input,recherche,label=<:zotspip:label_recherche_libre:>})]
+		[(#SAISIE{zotspip_type,type_ref,label=<:zotspip:label_type_ref:>})]
+		[(#SAISIE{zotspip_tag,tag,label=<:zotspip:label_tag:>})]
+		[(#SAISIE{zotspip_zcollection,zcollection,label=<:zotspip:label_collection:>})]
+	</ul>
+	<p class="boutons"><input type="submit" class="submit" value="<:zotspip:filtrer:>" /></p>
+</div></form>
+</div>
+</BOUCLE_si_autorise>

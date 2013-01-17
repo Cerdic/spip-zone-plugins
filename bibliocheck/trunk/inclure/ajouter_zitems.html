@@ -1,0 +1,44 @@
+<h2 class="h2" id="ajouter_references"><:bibliocheck:ajouter_references:>[ ((#ENV{auteur}))]</h2>
+
+<B_ajouts>
+<div class="liste bibliocheck">
+<BOUCLE_ajouts(TICKETS){auteur?}{statut=ouvert}{!auteur=''}{id_zitem=''}>
+	<div class="bibliocheck_info_notice" id="ticket_#ID_TICKET">
+		<div class="bibliocheck_ticket">
+			<div class="bibliocheck_date"><:tickets:ticket:> #ID_TICKET, [(#DATE|affdate)] ([(#DATE|heures)]:[(#DATE|minutes)]) [<:par_auteur:> (#INFO_NOM{auteur,#ID_AUTEUR})]</div>
+			<div class="bibliocheck_texte">#TEXTE</div>
+			[<div class="bibliocheck_exemple"><strong><:bibliocheck:lien:></strong> <a href="#EXEMPLE">(#EXEMPLE|couper{80})</a></div>]
+			<BOUCLE_doc_ticket(DOCUMENTS){id_ticket}{tout}><div class="bibliocheck_doc"><strong><:bibliocheck:fichier_joint:></strong> <a href="#URL_DOCUMENT">[(#FICHIER|basename)]</a> (#TYPE_DOCUMENT [(#TAILLE|taille_en_octets)])</div></BOUCLE_doc_ticket>
+			[(#ZITEM_JSON|zotspip_calculer_zitem_details)]
+		</div>
+		<BOUCLE_commentaires(FORUMS){objet=ticket}{id_objet=#ID_TICKET}{par date}{tout}>
+		<div class="bibliocheck_comment" id="forum#ID_FORUM">
+			<div class="bibliocheck_date">[(#DATE|affdate)] ([(#DATE|heures)]:[(#DATE|minutes)]) [<:par_auteur:> (#INFO_NOM{auteur,#ID_AUTEUR})]</div>
+			<div class="bibliocheck_texte">#TEXTE</div>
+			[<div class="bibliocheck_exemple"><strong><:bibliocheck:lien:></strong> <a href="#URL_SITE">(#NOM_SITE|sinon{#URL_SITE}|couper{80})</a></div>]
+			<BOUCLE_doc_forum(DOCUMENTS){id_forum}{tout}><div class="bibliocheck_doc"><strong><:bibliocheck:fichier_joint:></strong> <a href="#URL_DOCUMENT">[(#FICHIER|basename)]</a> (#TYPE_DOCUMENT [(#TAILLE|taille_en_octets)])</div></BOUCLE_doc_forum>
+		</div>
+		</BOUCLE_commentaires>
+
+		<div class="bibliocheck_bouton" id="bouton_commenter_#ID_TICKET" style="display:none;">
+			<a href="javascript:void(0);" onclick="$('#commenter_#ID_TICKET').toggle(400);" title="<:bibliocheck:corriger:>">
+				[(#CHEMIN_IMAGE{forum-add-24.png}|balise_img|inserer_attribut{alt,<:bibliocheck:ajouter_commentaire:>})]<br />
+				<:bibliocheck:ajouter_commentaire:>
+			</a>
+		</div>
+		<br style="clear:both;" />
+		<div id="commenter_#ID_TICKET" class="ajax">#FORMULAIRE_FORUM{#SELF}</div>
+		<script type="text/javascript">// <![CDATA[
+			$(document).ready(function(){
+				$('#bouton_commenter_#ID_TICKET').show();
+				$('#commenter_#ID_TICKET').hide();
+			});
+		//]]></script>
+	</div>
+</BOUCLE_ajouts>
+</div>
+</B_ajouts>
+
+#SET{redirect,#SELF#ajouter_references}
+#SET{redirectjava,javascript:if (window.jQuery) ajaxReload("ajouter_zitems");}
+<div class="ajax">#FORMULAIRE_AJOUTER_ZITEM{#ENV{auteur},#GET{redirect},#GET{redirectjava}}</div>
