@@ -1,0 +1,19 @@
+{
+	"type": "Feature",
+	"geometry": {"type": "Point", "coordinates": [[(#ENV{lon})], [(#ENV{lat})]]},
+	"id":"1",
+	"properties": {
+		"title":[(#ENV{titre}|json_encode)],
+		"description":[(#ENV{description}|wrap{<p>}|json_encode)]
+		#SET{icone, #CHEMIN_IMAGE{#ENV*{icone,0}}|sinon{#CHEMIN{#ENV*{icone,0}}}}
+		#SET{icone_defaut, #CHEMIN{images/marker_defaut.png}}
+		#SET{logo_doc,#GET{icone}|sinon{#GET{icone_defaut}}|image_passe_partout{32,32}|image_recadre{32,32,center}|extraire_attribut{src}|url_absolue}
+		[(#GET{logo_doc}|oui)
+		#SET{icon_w,#GET{logo_doc}|largeur}
+		#SET{icon_h,#GET{logo_doc}|hauteur}
+		[,"icon": (#GET{logo_doc}|json_encode)],
+		"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)],
+		"icon_anchor": [(#VAL{91}|chr)][(#GET{icon_w}|div{2})],[(#GET{icon_h})][(#VAL{93}|chr)]
+		]
+	}
+}

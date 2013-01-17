@@ -11,6 +11,8 @@
 	- sw_lon = lon - 10°            longitude du sud-ouest de la bounding box
 	- ne_lat = lat + 10°            latitude du nord-est de la bounding box
 	- ne_lon = lon + 10°            longitude du nord-est de la bounding box
+	- largeur = 100%
+	- hauteur = 350px
 
 ]
 
@@ -30,7 +32,7 @@
 
 <li class="pleine_largeur editer editer_[(#ENV{nom})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]"[ data-id="(#ENV{id_saisie})"]>
 #ENV*{inserer_debut}
-<div id="map_[(#ENV{nom})]" name="formMap" class="formMap" style="width: 100%; height: 350px"></div>
+<div id="map_[(#ENV{nom})]" name="formMap" class="formMap" style="width: #ENV{largeur,100%}; height: #ENV{hauteur,350px}"></div>
 <script type="text/javascript">
 <!--
 var form_map;
