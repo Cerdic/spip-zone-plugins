@@ -7,6 +7,34 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+function guestbook_v2_convert() {
+	include_spip('base/upgrade');
+
+	echo "<h3>Conversion de la table de Guestbook V2...</h3>";
+
+	echo "Table spip_guestbook : Renommage des champs...<br/>";
+	sql_alter( "TABLE spip_guestbook CHANGE COLUMN id_message id_guestmessage bigint(21) NOT NULL");
+	sql_alter( "TABLE spip_guestbook CHANGE COLUMN message guestmessage text NOT NULL DEFAULT ''");
+	sql_alter( "TABLE spip_guestbook CHANGE COLUMN email email varchar(255) NOT NULL DEFAULT ''");
+	sql_alter( "TABLE spip_guestbook CHANGE COLUMN nom nom varchar(100) NOT NULL DEFAULT ''");
+	sql_alter( "TABLE spip_guestbook CHANGE COLUMN prenom prenom varchar(100) NOT NULL DEFAULT ''");
+	sql_alter( "TABLE spip_guestbook CHANGE COLUMN pseudo pseudo varchar(100) NOT NULL DEFAULT ''");
+	sql_alter( "TABLE spip_guestbook CHANGE COLUMN statut statut varchar(20) NOT NULL DEFAULT ''");
+	sql_alter( "TABLE spip_guestbook CHANGE COLUMN ip ip varchar(15) NOT NULL DEFAULT ''");
+	sql_alter( "TABLE spip_guestbook CHANGE COLUMN note note int(2)");
+	sql_alter( "TABLE spip_guestbook CHANGE COLUMN date date datetime NOT NULL DEFAULT '0000-00-00 00:00:00'");
+	echo "Table spip_guestbook : Renommage de la table...<br/>";
+	sql_alter( "TABLE spip_guestbook RENAME spip_guestmessages");
+
+	echo "Table spip_guestbook_reponses : Renommage des champs...<br/>";
+	sql_alter( "TABLE spip_guestbook_reponses CHANGE COLUMN id_reponse id_guestreponse bigint(21) NOT NULL");
+	sql_alter( "TABLE spip_guestbook_reponses CHANGE COLUMN id_message id_guestmessage bigint(21) NOT NULL");
+	sql_alter( "TABLE spip_guestbook_reponses CHANGE COLUMN message guestreponse text NOT NULL DEFAULT ''");
+	sql_alter( "TABLE spip_guestbook_reponses CHANGE COLUMN statut statut varchar(20) NOT NULL DEFAULT ''");
+	sql_alter( "TABLE spip_guestbook_reponses CHANGE COLUMN date date datetime NOT NULL DEFAULT '0000-00-00 00:00:00'");
+	echo "Table spip_guestbook_reponses : Renommage de la table...<br/>";
+	sql_alter( "TABLE spip_guestbook_reponses RENAME spip_guestreponses");
+}
 
 /**
  * Fonction d'installation du plugin et de mise à jour.
@@ -37,7 +65,12 @@ function guestbook_upgrade($nom_meta_base_version, $version_cible) {
 	# );
 	# ...
 
-	$maj['create'] = array(array('maj_tables', array('spip_guestmessages', 'spip_guestreponses')));
+ 	$maj['2.99.0'] = array(
+	  array( 'guestbook_v2_convert', array()),
+	);
+	$maj['3.0.0'] = array(
+		array('maj_tables', array('spip_guestmessages', 'spip_guestreponses')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

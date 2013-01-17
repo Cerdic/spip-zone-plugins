@@ -39,7 +39,6 @@ function guestbook_declarer_tables_objets_sql($tables) {
 			"ip"                 => "varchar(15) NOT NULL DEFAULT ''",
 			"note"               => "int(2) ",
 			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
-			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", 
 			"statut"             => "varchar(20)  DEFAULT '0' NOT NULL", 
 			"maj"                => "TIMESTAMP"
 		),
@@ -83,7 +82,6 @@ function guestbook_declarer_tables_objets_sql($tables) {
 			"id_auteur"          => "bigint(21) NOT NULL DEFAULT 0",
 			"guestreponse"       => "text NOT NULL DEFAULT ''",
 			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
-			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", 
 			"statut"             => "varchar(20)  DEFAULT '0' NOT NULL", 
 			"maj"                => "TIMESTAMP"
 		),
@@ -91,7 +89,7 @@ function guestbook_declarer_tables_objets_sql($tables) {
 			"PRIMARY KEY"        => "id_guestreponse",
 			"KEY statut"         => "statut", 
 		),
-		'titre' => "id_guestreponse AS titre, '' AS lang",
+		'titre' => "guestreponse AS titre, '' AS lang",
 		'date' => "date",
 		'champs_editables'  => array('id_guestmessage', 'id_auteur', 'guestreponse', 'date'),
 		'champs_versionnes' => array(),

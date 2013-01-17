@@ -1,0 +1,24 @@
+<B_message>
+	#ANCRE_PAGINATION
+	<ul class='guestbookmessages'>
+<BOUCLE_message(GUESTMESSAGES){!par date}{pagination #ENV{pagin_guestmessages,10}}>
+		<li>#PRENOM #NOM, [(#DATE|affdate_court)][ à (#VILLE)] : Note #NOTE/10<br>
+	  	#GUESTMESSAGE
+		<B_rep>
+			#ANCRE_PAGINATION
+			<ul>
+		<BOUCLE_rep(GUESTREPONSES auteurs){id_guestmessage}{par date}{pagination #ENV{pagin_guestreponses,5}}>
+		    <li>
+						[<i>(#NOM)</i>] : [<em>(#GUESTREPONSE)</em>]
+				</li>
+		</BOUCLE_rep>
+		  </ul>
+			<div class='pagination'>#PAGINATION</div>
+		</B_rep>
+		</li>
+</BOUCLE_message>
+	</ul>
+	<div class='pagination'>#PAGINATION</div>
+</B_message>
+ <:guestbook:texte_aucun_message_publie:>
+<//B_message>

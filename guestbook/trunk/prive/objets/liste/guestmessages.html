@@ -53,7 +53,6 @@
 			<th class='prenom' scope='col'>[(#TRI{prenom,<:guestmessage:label_prenom:>,ajax})]</th>
 			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
 			<th class='ville' scope='col'>[(#TRI{ville,<:guestmessage:label_ville:>,ajax})]</th>
-			<th class='reponse' scope='col'><:guestmessage:label_reponse:></th>
 			<th class='statut' scope='col'><:guestbook:statut:></th>
 		</tr>
 	</thead>
@@ -71,7 +70,6 @@
 			<td class='prenom principale'>#PRENOM</td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='ville principale'>#VILLE</td>
-			<td class='repondre principale'><a href="[(#URL_ECRIRE{guestreponse_edit,new=oui&id_guestmessage=#ID_GUESTMESSAGE})]"><:guestmessage:lien_repondre_message:></a></td>
 			<td class='statut principale' rowspan='2'>
 				[(#STATUT|=={prop}|non)
 					<a class='ajax' href="#URL_ACTION_AUTEUR{'instituer_guestbook',#ID_GUESTMESSAGE-prop, #SELF|ancre_url{guestmessage#ID_GUESTMESSAGE}}">
@@ -89,18 +87,23 @@
 					<a class='ajax' href="#URL_ACTION_AUTEUR{'instituer_guestbook',#ID_GUESTMESSAGE-poubelle, #SELF|ancre_url{guestmessage#ID_GUESTMESSAGE}}">
 						<:guestmessage:action_supprimer_message:>
 					</a>]
+				[(#STATUT|=={refuse}|non)
+					<br /><br />
+					<a href="[(#URL_ECRIRE{guestreponse_edit,new=oui&id_guestmessage=#ID_GUESTMESSAGE})]">
+						<strong><:guestmessage:lien_repondre_message:></strong>
+					</a>]
 			</td>
 		</tr>
 		<tr class='guestmessage_#STATUT'>
 			<td class='guestmessage' colspan='2'><i><:guestmessage:label_guestmessage:>&nbsp;:</i></td>
-			<td class='guestmessage principale' colspan='6'>#GUESTMESSAGE</td>
+			<td class='guestmessage principale' colspan='5'>#GUESTMESSAGE</td>
 		</tr>
 		
 		<BOUCLE_rep(GUESTREPONSES auteurs){tout}{id_guestmessage}{par statut,date}>
 		<tr class='guestmessage_#_liste_guestmessages:STATUT'>
 			<td class='statut principale'>R&nbsp;:</td>
 			<td class='guestreponse principale' colspan='2'>[<i>[(#STATUT|puce_statut{guestreponse,#ID_GUESTREPONSE})]&nbsp;(#NOM)</i>]</td>
-			<td class='guestreponse principale' colspan='6'><em>#GUESTREPONSE</em></td>
+			<td class='guestreponse principale' colspan='5'><em>#GUESTREPONSE</em></td>
 			<td class='guestreponse principale'><a href="[(#URL_ECRIRE{guestreponse_edit,id_guestreponse=#ID_GUESTREPONSE})]">Editer</a></td>
 		</tr>
 		</BOUCLE_rep>
