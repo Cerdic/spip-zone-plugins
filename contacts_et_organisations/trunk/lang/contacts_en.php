@@ -30,9 +30,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_associer_aux_auteurs_explication' => 'Permettre d\'associer des contacts ou organisations
 		aux auteurs. Cela ajoute un formulaire pour associer un auteur sur les pages contact ou organisation,
 		et inversement cela ajoute un formulaire pour lier un contact ou une organisation sur les pages des auteurs.', # NEW
-	'cfg_lier_organisations_rubriques' => 'Lier aux rubriques', # NEW
-	'cfg_lier_organisations_rubriques_explication' => 'Permettre de lier les organisations aux rubriques ?
-		Cela affiche le sélecteur d\'organisations sur les rubriques ainsi que le sélecteur de rubriques sur les organisations.', # NEW
+	'cfg_lier_organisations_rubriques' => 'Link to sections',
+	'cfg_lier_organisations_rubriques_explication' => 'Allow to link organizations to sections ?
+		This display the organization selector on sections and the section selector on organizations.',
 	'changer' => 'Change',
 	'chercher_contact' => 'Search',
 	'chercher_organisation' => 'Search',
@@ -42,21 +42,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_delier_organisation_rubrique' => 'Are you sure you want to unlink this organization from this section?',
 	'confirmer_supprimer_contact' => 'Ares you sure you want to delete all information about this contact?',
 	'confirmer_supprimer_organisation' => 'Are you sure you want to delete all the information about this organisation?',
-	'contact' => 'One contact', # MODIF
-	'contact_ajouter' => 'Ajouter un contact', # NEW
-	'contact_ajouter_lien' => 'Ajouter ce contact', # NEW
+	'contact' => 'Contact',
+	'contact_ajouter' => 'Add a contact',
+	'contact_ajouter_lien' => 'Add this contact',
 	'contact_associe_a_auteur_numero' => 'Link to author number',
 	'contact_associer_a_auteur' => 'Link to an author',
-	'contact_aucun' => 'Aucun contact', # NEW
+	'contact_aucun' => 'No contact',
 	'contact_creer' => 'Create a contact',
-	'contact_creer_associer' => 'Créer et associer un contact', # NEW
+	'contact_creer_associer' => 'Create and associate a contact',
 	'contact_editer' => 'Edit this contact',
-	'contact_logo' => 'Logo de ce contact', # NEW
-	'contact_nouveau_titre' => 'Nouveau contact', # NEW
+	'contact_logo' => 'Contact logo',
+	'contact_nouveau_titre' => 'New contact',
 	'contact_numero' => 'Contact number',
-	'contact_retirer_lien' => 'Retirer le contact', # NEW
-	'contact_retirer_tous_lien' => 'Retirer tous les contacts', # NEW
-	'contact_un' => 'Un contact', # NEW
+	'contact_retirer_lien' => 'Delete the contact',
+	'contact_retirer_tous_lien' => 'Delete all the contacts',
+	'contact_un' => 'A contact',
 	'contact_voir' => 'See',
 	'contacts' => 'Contacts',
 	'contacts_nb' => '@nb@ contacts',
@@ -67,8 +67,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'definir_auteur_comme_contact' => 'Set as contact',
 	'definir_auteur_comme_organisation' => 'Set as organisation',
 	'delier_cet_auteur' => 'Unlink',
-	'delier_contact' => 'Désassocier', # NEW
-	'delier_organisation' => 'Désassocier', # NEW
+	'delier_contact' => 'Disassociate',
+	'delier_organisation' => 'Disassociate',
 
 	// E
 	'est_un_contact' => 'This author is set as a contact.',
@@ -129,51 +129,51 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nb_contact' => '1 contact',
 	'nb_contacts' => '@nb@ contacts',
-	'nom_contact' => 'Nom', # NEW
-	'nom_organisation' => 'Nom', # NEW
+	'nom_contact' => 'Name',
+	'nom_organisation' => 'Name',
 
 	// O
-	'organisation' => 'Organisation', # NEW
-	'organisation_ajouter' => 'Ajouter une organisation', # NEW
-	'organisation_ajouter_lien' => 'Ajouter cette organisation', # NEW
+	'organisation' => 'Organization',
+	'organisation_ajouter' => 'Add an organization',
+	'organisation_ajouter_lien' => 'Add this organization',
 	'organisation_associe_a_auteur_numero' => 'Linked to author number',
 	'organisation_associer_a_auteur' => 'Link to an author',
-	'organisation_aucun' => 'Aucune organisation', # NEW
+	'organisation_aucun' => 'No organization',
 	'organisation_creer' => 'Create an organization',
-	'organisation_creer_associer' => 'Créer et associer une organisation', # NEW
+	'organisation_creer_associer' => 'Create and associate an organization',
 	'organisation_creer_fille' => 'Create a child organization',
 	'organisation_editer' => 'Edit this organizatino',
-	'organisation_logo' => 'Logo de l\'organisation', # NEW
-	'organisation_nouveau_titre' => 'Nouvelle organisation', # NEW
+	'organisation_logo' => 'Organization logo',
+	'organisation_nouveau_titre' => 'New organization',
 	'organisation_numero' => 'Organization number',
-	'organisation_retirer_lien' => 'Retirer l\'organisation', # NEW
-	'organisation_retirer_tous_lien' => 'Retirer toutes les organisations', # NEW
+	'organisation_retirer_lien' => 'Delete the organization',
+	'organisation_retirer_tous_lien' => 'Delete all the organizations',
 	'organisation_un' => 'One organization',
 	'organisation_voir' => 'See',
 	'organisations' => 'Organisations',
 	'organisations_nb' => '@nb@ organizations',
 
 	// P
-	'prenom' => 'Prénom', # NEW
+	'prenom' => 'First name',
 
 	// R
 	'recherche_de' => 'Search for "@recherche@"',
 	'rechercher' => 'Search',
 
 	// S
-	'statut_juridique' => 'Statut juridique', # NEW
+	'statut_juridique' => 'Legal status',
 	'supprimer_contact' => 'Delete this contact',
 	'supprimer_organisation' => 'Delete this organisation',
 
 	// T
 	'titre_contact' => 'Contact details',
 	'titre_organisation' => 'Organization details',
-	'titre_page_configurer_contacts_et_organisations' => 'Configurer Contacts & Organisations', # NEW
+	'titre_page_configurer_contacts_et_organisations' => 'Configure Contacts & Organizations',
 	'titre_page_contacts' => 'Contacts management',
 	'titre_page_organisations' => 'Organisations management',
 	'titre_page_repertoire' => 'Directory',
-	'titre_parametrages' => 'Paramétrages', # NEW
-	'tous' => 'Tous' # NEW
+	'titre_parametrages' => 'Parameter setting',
+	'tous' => 'All'
 );
 
 ?>
