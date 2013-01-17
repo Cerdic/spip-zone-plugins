@@ -1,25 +1,23 @@
-#SET{id_rubrique,#CONFIG{selection_objet/selection_rubrique_dest,#ARRAY}|picker_selected{rubrique}}
-<div class="ajax formulaire_spip">
 #SET{exclude,#ARRAY}
+
 <B_test>
+<div class="ajax formulaire_spip">
     [(#CHEMIN_IMAGE{objet-24.png}|balise_img{selection_objet,cadre-icone})]
+
     
-        <h3 class="titrem"><:selection_objet:selection_objet:> [(#VAL|lister_tables_objets_sql|table_valeur{spip_#OBJETs}|table_valeur{texte_objets}|_T)]</h3>
+        <h3 class="titrem"><:selection_objet:selection_objet:> #TITRE_OBJET_DEST</h3>
       
     <B_affichage>
 
     <strong><:selection_objet:objet_destination_choisis:></strong>
     <ul>   
-    <BOUCLE_affichage(SELECTION_OBJETS){id_objet}{statut ?}{objet}>
-        [(#ID_RUBRIQUE|=={0}|oui)<li><:selection_objet:racine:><a href="[(#SELF|parametre_url{eliminer_rubrique,'racine'})]" class="ajax">&nbsp;
-        <img src="#CHEMIN{imgs/item-remove.png}"/></a></li>
-        #SET{exclude,#GET{exclude}|array_merge{#ARRAY{0,0}}}
-        #SET{exclude_selection_objeturce,oui}
-        ]
-        
-        <BOUCLE_rub(RUBRIQUES){id_rubrique=#ID_OBJET_DEST}{tout}>
-        #SET{exclude,#GET{exclude}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_RUBRIQUE}}}
-        <li><a href="#URL_ECRIRE{rubrique,id_rubrique=#ID_RUBRIQUE}#selection_objets">#TITRE</a>
+    #SET{nom_id_dest,id_#OBJET_DEST}    
+    <BOUCLE_affichage(SELECTION_OBJETS){id_objet}{statut ?}{objet}{objet_dest}>
+        #SET{info_objet,#ENV{objets_choisies}|table_valeur{#ID_OBJET_DEST}}
+        #SET{exclude,#GET{exclude}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_OBJET_DEST}}}
+        <li><a href="#URL_ECRIRE{#OBJET_DEST,id_#OBJET_DEST=#ID_OBJET_DEST}#selection_objets">
+            [(#GET{info_objet}|table_valeur{titre})]
+            </a>
              <a href="[(#URL_ACTION_AUTEUR{ranger,supprimer_ordre-[(#ENV{langue})]-[(#ID_OBJET)]-#OBJET-[(#OBJET_DEST)]-[(#ID_OBJET_DEST)],[(#SELF)]})]" class="ajax">
 &nbsp;<img src="[(#CHEMIN{prive/themes/spip/images/item-remove.png})]"/></a></li>
         </BOUCLE_rub>
@@ -28,50 +26,19 @@
     #SET{nombre,#TOTAL_BOUCLE}
 
     </B_affichage>
-<BOUCLE_test(POUR){tableau #GET{id_rubrique}}>
-#SET{id_rub,#VALEUR}
+<BOUCLE_test(POUR){tableau #ENV{objets_choisies}}>
+#SET{id_objet,#VALEUR}
 </BOUCLE_test>
 
 
 
-
-#SET{compteur,#COMPTEUR_BOUCLE}
-
-
-[(#GET{compteur}|>{1}|oui)
-[<div class="formulaire_spip formulaire_bouton_objet" id="formulaire_bouton_objet">
-
-    <form action="#ENV{action}" method="post">
-        #ACTION_FORMULAIRE{#ENV{action}}
-    <ul>
-        (#INCLURE{fond=formulaires/inc-boutons_article,id_rubrique=#GET{id_rubrique},exclure=#GET{exclude},rubriques=#GET{id_rubrique}}{exclure_selection_objeturce=#GET{exclude_selection_objeturce},langue})
-    </ul>
-    </form>
-</div>]
-    
-    ]
-
-[(#GET{compteur}|=={1}|oui)
-
-<div class="formulaire_spip formulaire_bouton_objet" id="formulaire_bouton_objet">
-
-    <form action="#ENV{action}" method="post">
-        #ACTION_FORMULAIRE{#ENV{action}}
+    [<div class="formulaire_spip formulaire_bouton_objet" id="formulaire_bouton_objet_#OBJET_DEST">
+        <form action="#ENV{action}" method="post"><div>
+            #ACTION_FORMULAIRE{#ENV{action}}
         <ul>
-        [(#GET{id_rub}|=={0}|?
-                {<:selection_objet:racine:>,
-                [<li>(#INCLURE{fond=formulaires/inc-boutons_article_trub}{id_rubrique=#GET{id_rub}})</li>]
-                }
-            )]
+            (#INCLURE{fond=formulaires/inc-boutons_objet,env,exclure=#GET{exclude},langue})
         </ul>
-            <input name="id_rubrique" value="#GET{id_rub}" type="hidden"/>  
-        <p class="button">   
-            <input type="submit" name="ok" class="submit" value="ok"  />
-         </p> 
-    </form>
-</div>            
-
-]
-
+        </div></form>
+    </div>]
+</div>   
 </B_test>
-</div>

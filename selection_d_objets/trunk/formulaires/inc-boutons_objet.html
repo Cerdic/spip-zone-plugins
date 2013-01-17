@@ -1,0 +1,13 @@
+<B_objets>
+	<li>
+	   <label><:selection_objet:affichage_section:></label>
+	   <select name="id_objet_dest">
+      <BOUCLE_objets(DATA){source tableau, #ENV{objets_choisies}|array_diff_key{#ENV{exclure}|array_flip}}{par titre}>
+   	        <option value="#CLE" >[(#TITRE)]</option>
+      </BOUCLE_objets>  
+	   </select>
+    <p class="boutons">
+    	 <input type="submit" name="ok" class="submit" value="ok"  />
+    </p>
+    </li>	
+</B_objets>

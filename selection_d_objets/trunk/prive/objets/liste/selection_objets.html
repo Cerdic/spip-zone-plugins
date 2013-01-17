@@ -22,7 +22,7 @@
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{objet-16.png}|balise_img)]</td>
 			<td class='statut'>[(#STATUT|puce_statut{selection_objet,#ID_SELECTION_OBJET})]</td> 
-			<td class='titre principale'>[(#LOGO_SELECTION_OBJET|image_reduire{20,26})]<a href="[(#ID_OBJET|generer_url_entite{objet})]" title="<:info_numero_abbreviation|attribut_html:> #ID_OBJET">[(#RANG). ][(#TITRE|sinon{#ID_OBJET|info_objet{#OBJET,titre}})]</a></td>
+			<td class='titre principale'>[(#LOGO_SELECTION_OBJET|image_reduire{20,26})]<a href="[(#ID_OBJET|generer_url_entite{objet})]" title="<:info_numero_abbreviation|attribut_html:> #ID_OBJET">[(#RANG). ][(#TITRE|sinon{#OBJET|info_objet{#ID_OBJET,titre}})]</a></td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
 			<td class='id'>[(#AUTORISER{modifier,objet,#ID_OBJET}|?{
 				<a href="[(#URL_ECRIRE{selection_objet_edit,id_objet=#ID_SELECTION_OBJET})]">#ID_SELECTION_OBJET</a>,

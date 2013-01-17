@@ -6,8 +6,6 @@
     ]
 </BOUCLE_objets_liste>
 
-
-
 <div class="formulaire_spip formulaire_#FORM">
 
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -18,21 +16,33 @@
 		<ul>
 		    <li class="fieldset">
 		      <fieldset>
-		          <legend><:selection_objet:objets_destination:></legend>
+		          <legend><:selection_objet:objets_cible:></legend>
+		          <p><:selection_objet:explication_selection_objets_cible:></p>
         		    <ul>
-        		    [(#SAISIE{checkbox,selection_objets_dest,
-                    datas=#GET{objets},
-                    label=<:selection_objet:selection_objets_dest:>}
-                    )]
-        		    <BOUCLE_objets_dest(DATA){source tableau, #CONFIG{selection_objet/selection_objets_dest}}>
+        		    [(#SAISIE{checkbox,objets_cible,
+                        datas=#GET{objets},
+                        label=<:selection_objet:selection_objet_cible_titre:>}
+                        )]
+                    <B_objets_dest>
+                    <li class="fieldset">
+        		    <BOUCLE_objets_dest(DATA){source tableau, #CONFIG{selection_objet/objets_cible}}>
         		    [(#VALEUR|in_array{#GET{objets_saisies}}|oui)
-            		    [(#SAISIE{selecteur_#VALEUR,selection_#VALEUR_dest,
+            		    [(#SAISIE{selecteur_#VALEUR,selection_[(#VALEUR)]_dest,
                             multiple=oui,
-                            label=[(#GET{objets}|table_valeur{#VALEUR})]}
+                            label=<:selection_objet:selection_cible:> [(#GET{objets}|table_valeur{#VALEUR})]}
                         )] 
                     ]
-         
-		    </BOUCLE_objets_dest>
+                    [(#VALEUR|in_array{#GET{objets_saisies}}|non)#VALEUR
+                        [(#VALEUR|oui)#SET{datas,#VALEUR|tableau_objet{'',*,'',#LISTE{titre,nom,nom_site}}}
+                        [(#SAISIE{selection_multiple,selection_[(#VALEUR)]_dest,
+                            label=<:selection_objet:selection_cible:> [(#GET{objets}|table_valeur{#VALEUR})],
+                            datas=#GET{datas}})]
+                                ]
+                    
+                    ]
+		            </BOUCLE_objets_dest>
+		            </B_objets_dest>
+		              </li>
 		    		 </ul>
 		    </fieldset>
 		    </li>
@@ -41,9 +51,9 @@
                   <legend><:selection_objet:objets_a_selectionner:></legend>
                   <ul>
             [(#SAISIE{checkbox,selection_rubrique_objet,
-            datas=#GET{objets},
-            label=<:selection_objet:selection_rubrique_objet:>}
-            )]
+                datas=#GET{objets},
+                label=<:selection_objet:selection_rubrique_objet:>}
+                )]
             </ul>   
             </fieldset>
              

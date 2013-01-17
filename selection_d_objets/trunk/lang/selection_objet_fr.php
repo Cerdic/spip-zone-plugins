@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurations' => 'Configurations',
 
 	// E
-	'explication_selection_rubrique_dest' => 'Les rubriques ou pourront être affichés les objets sélectionnés',
+	'explication_selection_objets_cible' => 'Les objets cibles ou pourront être affichés les objets sélectionnés',
 
 	// I
 	'icone_creer_selection_objet' => 'Sélectionner un objet',
@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_url' => 'Url',
 
 	// O
+	'objets_cible_dispos'=>'Les Objets Cible disponibles',
 	'objet_destination_choisis' => 'Destination(s) choisie(s) :',
 
 	// R
@@ -42,10 +43,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubriques_choisis' => 'Rubriques choisies :',
 
 	// S
+	'selection_cible' => 'Seléction des cibles pour',	
 	'selection_objet' => 'Sélection',
-	'selection_objet_titre' => 'Selection d\'objets',
+	'selection_objet_cible_titre' => 'Selection d\'objets cibles',
 	'selection_objets_pour' => 'Sélection objets pour',
-	'selection_rubrique_dest' => 'Rubrique(s) de destination',
 	'selection_rubrique_objet' => 'Objets qui peuvent être sélectionnés',
 
 	// T

@@ -2,55 +2,67 @@
 
 function selection_objet_affiche_gauche($flux) {
     include_spip('inc/config');
-    
-    $exec = $flux["args"]["exec"];
-    $contexte=array();
-    $objets=lire_config('selection_objet/selection_rubrique_objet',array());
+    $objet = $flux["args"]["exec"];
     $args=$flux['args'];
-    $objet_contexte=$args['exec'];
-    $contexte['objet_dest']='rubrique';
-    foreach($objets AS $objet){
-        if($objet_contexte==$objet){
-            $contexte['objet']=$objet;
-            $contexte['id_objet']=$flux["args"]['id_'.$objet]?$flux["args"]['id_'.$objet]:_request('id_'.$objet); 
-            
-            $contexte['langue']=sql_getfetsel('lang','spip_'.$objet.'s','id_'.$objet.'='.$contexte['id_objet']);
+    
+    $objets_selection=lire_config('selection_objet/selection_rubrique_objet',array());
+    $exceptions=charger_fonction('exceptions','inc');
+    $exception_objet=$exceptions('objet');
+    if($exception_objet[$objet]){
+         $objet=$exception_objet[$objet];
+         $table='spip_'.$objet;
+        }
+    else $table='spip_'.$objet.'s';
+    
+    $contexte['id_objet']=$flux["args"]['id_'.$objet]?$flux["args"]['id_'.$objet]:_request('id_'.$objet); 
+
+    if(in_array($objet,$objets_selection)){
+        $contexte['objet']=$objet;
+        $objets_cibles=lire_config('selection_objet/objets_cible',array());
+        if($objet=='rubrique' OR $objet=='article'){
+            $contexte['langue']=sql_getfetsel('lang',$table,'id_'.$objet.'='.$contexte['id_objet']);
             $contexte['lang'] = $contexte['langue'];
-            if ($objet=='rubrique' AND !$trad_rub=test_plugin_actif('tradrub')) $contexte['langue']=lire_config('langues_multilingue');
+            }
+        if($objet=='rubrique'){
+            if (!$trad_rub=test_plugin_actif('tradrub')) $contexte['langue']=lire_config('langues_multilingue');
             elseif(!$contexte['langue']){
                 if(!$trad_rub=test_plugin_actif('tradrub')) $contexte['langue']=lire_config('langues_multilingue');
-               
-            } 
-
-            $fond = recuperer_fond("prive/squelettes/navigation/affiche_gauche", $contexte);
-            $flux["data"] .= $fond;
+                } 
             }
+            foreach ($objets_cibles as $objet_dest) {
+                $contexte['objet_dest']=$objet_dest;
+                $flux["data"].= recuperer_fond("prive/squelettes/navigation/affiche_gauche", $contexte);
+            }
+             
         }
       
     return $flux;
 }
 
 function selection_objet_affiche_milieu ($vars="") {
-include_spip('inc/config');
-    $exec = $vars["args"]["exec"];
-   
-    $id_rubrique = $vars["args"]["id_rubrique"];
-        if (!$id_rubrique)$id_rubrique=0;
-        $id_article = $vars["args"]["id_article"];
+    include_spip('inc/config');
+    $objet = $vars["args"]["exec"];
+    $args=$vars["args"];
+    $objets_cibles=lire_config('selection_objet/objets_cible',array());
+
+    if(in_array($objet,$objets_cibles)){
+        //Les tables non conforme
+        $exceptions=charger_fonction('exceptions','inc');
+        $exception_objet=$exceptions('objet');
+        if($exception_objet[$objet]){
+             $objet=$exception_objet[$objet];
+            }        
+        $id_objet=$args['id_'.$objet];
         $data = $vars["data"];
+        $special=array('article','rubrique');
+        if(in_array($objet,$special)) $choisies= picker_selected(lire_config('selection_objet/selection_'.$objet.'_dest',array()),$objet);
+        else $choisies=lire_config('selection_objet/selection_'.$objet.'_dest',array());
         
-        $active = picker_selected(lire_config('selection_objet/selection_rubrique_dest'),'rubrique');
-
-        if ($exec == "rubrique" && in_array($id_rubrique,$active)) {
-            include_spip("inc/utils");
-            $contexte = array('id_objet_dest'=>$id_rubrique,'objet_dest'=>'rubrique');
-
-            $page = recuperer_fond('prive/objets/liste/selection_interface', $contexte);
+        if(in_array($id_objet,$choisies)){
+           $contexte = array('id_objet_dest'=>$id_objet,'objet_dest'=>$objet);
+           $vars["data"] .= recuperer_fond('prive/objets/liste/selection_interface', $contexte);
+            }
         }
-
-        $data .= $ret;
-    
-        $vars["data"] .=$page;
         return $vars;
     }
 
