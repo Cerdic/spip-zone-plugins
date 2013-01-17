@@ -1,7 +1,7 @@
 <paquet
   prefix="dida"
   categorie="divers"
-  version="3.3"
+  version="3.4"
   etat="test"
   compatibilite="[2.9.9;3.0.99]"
   logo="img_pack/dida_ico.png"
