@@ -50,13 +50,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'deces' => 'Death',
 	'dep' => 'Dpt.',
 	'departement' => 'Department',
-	'depose_par' => 'Déposé par', # NEW
+	'depose_par' => 'Put down by',
 	'derniere_modif_le' => 'Last modified on',
 	'derniere_modification' => 'Last file update',
 	'descriptif_cfg' => '<p>This zone is used to configure the plugin\\\'s basic variables.</p><p> In order to work properly, this plugin must be installed in parallel with the cfg plugin</p>',
 	'detail_fiche' => 'File details',
-	'document' => 'Documents', # MODIF
-	'documents' => 'Documents', # NEW
+	'document' => 'Document',
+	'documents' => 'Documents',
 
 	// E
 	'enfant' => 'child',

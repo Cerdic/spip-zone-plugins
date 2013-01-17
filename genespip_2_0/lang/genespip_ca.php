@@ -56,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_cfg' => '<p>Aquesta zona permet configurar les variables de base del connector.</p><p> Per funcionar correctament aquest connector s\'ha d\'instal·lar en paral·lel amb el connector cfg</p>',
 	'detail_fiche' => 'Detall fitxa',
 	'document' => 'Documents', # MODIF
-	'documents' => 'Documents', # NEW
+	'documents' => 'Documents',
 
 	// E
 	'enfant' => 'nen',
