@@ -143,14 +143,18 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 				$table_join = table_objet($jtable);
 				$lesliens = recherche_tables_liens();
 
-				$subscore = "MATCH(".implode($mkeys,',').") AGAINST ($p".($boolean ?' IN BOOLEAN MODE':'').")";
+				$subscore = "MATCH(".implode($mkeys,',').") AGAINST ($p".($boolean ? ' IN BOOLEAN MODE':'').")";
+
 				if (in_array($jtable, $lesliens))
 					$from .= "
 					LEFT JOIN (
 					 SELECT lien$i.id_objet,$subscore AS score
 					 FROM spip_${jtable}s_liens as lien$i
 					 JOIN spip_${jtable}s as obj$i ON obj$i.$_id_join=lien$i.$_id_join
-					 WHERE lien$i.objet='${table}' ) AS o$i ON o$i.id_objet=t.$_id_table
+					 AND lien$i.objet='${table}'
+					 WHERE $subscore > 0
+					 ORDER BY score DESC LIMIT 100
+					 ) AS o$i ON o$i.id_objet=t.$_id_table
 					";
 				else
 					$from .= "
@@ -158,6 +162,8 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 					 SELECT lien$i.$_id_table,$subscore AS score
 					 FROM spip_${jtable}s_${table}s as lien$i
 					 JOIN spip_${table_join} AS obj$i ON lien$i.$_id_join=obj$i.$_id_join
+					 WHERE $subscore > 0
+					 ORDER BY score DESC LIMIT 100
 					 ) AS o$i ON o$i.$_id_table=t.$_id_table
 					";
 			}
