@@ -21,7 +21,7 @@
 		<h2>Liste de vos vidéos</h2>
 		<B_LesVideos>
 		<ul>
-		<BOUCLE_LesVideos(DOCUMENTS){extension IN (vimeo,dailym,youtube,culturebox)}>
+		<BOUCLE_LesVideos(DOCUMENTS){extension IN (dist_daily,dist_vimeo,dist_youtu,dist_cubox)}>
 			<li><span style='text-transform:uppercase'>#EXTENSION</span> — #FICHIER<br />
 				#MODELE{video,
 					document=#ID_DOCUMENT}
