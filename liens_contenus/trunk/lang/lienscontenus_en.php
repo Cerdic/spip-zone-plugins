@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.net/tradlang_module/lienscontenus?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmation_suppression' => 'Be careful, a published content contains at least one link to this one and will be affected if you delete it!nnDo you still want to delete it?', # MODIF
 
 	// I
-	'inexistant' => 'inexistant (@id_objet@)', # NEW
+	'inexistant' => 'Non-existant (@id_objet@)',
 	'information_element_contenu' => 'Be careful, another content links to this one!', # MODIF
 
 	// L
@@ -51,9 +51,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_modele' => 'Modèle "@id_objet@"', # NEW
 	'type_modele_inexistant' => 'Modèle inexistant (@id_objet@)', # NEW
 	'type_rubrique' => '@titre@ (@id_objet@)', # NEW
-	'type_rubrique_inexistant' => 'Rubrique inexistante (@id_objet@)', # NEW
+	'type_rubrique_inexistant' => 'Nonexistant section (@id_objet@)',
 	'type_syndic' => '@titre@ (@id_objet@)', # NEW
-	'type_syndic_inexistant' => 'Site inexistant (@id_objet@)' # NEW
+	'type_syndic_inexistant' => 'Nonexistant website (@id_objet@)'
 );
 
 ?>
