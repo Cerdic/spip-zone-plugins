@@ -14,25 +14,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur' => 'Auteur',
 
 	// B
-	'bonneReponse' => 'The correct answer is:', # MODIF
+	'bonneReponse' => 'The correct answer is:',
 	'bravo' => 'Congratulation !',
 
 	// C
 	'cfg_affichage' => 'L\'affichage du jeu',
 	'cfg_correction' => 'La correction du jeu',
 	'cfg_donner_indices' => 'Afficher des indices',
-	'cfg_donner_reponse' => 'Afficher la réponse', # MODIF
-	'cfg_donner_solution' => 'Donner les bonnes réponses', # MODIF
+	'cfg_donner_reponse' => 'Display the answer',
+	'cfg_donner_solution' => 'Give the right answers',
 	'cfg_introduction' => 'Les paramètres regroupés ici correspondent à la configuration par défaut de l\'ensemble des jeux du site. Ils peuvent être surchargées au cas par cas grâce à la configuration interne des jeux (séparateur [config]).<br/><br/>Il est possible que certains jeux n\'utilisent pas certains des paramètres listés ci-dessous.', # MODIF
 	'cfg_scores' => 'Les scores du jeu',
 	'cfg_type_resultat' => 'Enregistrement des scores :', # MODIF
 	'colonne_n' => 'column @n@',
-	'configuration_jeux' => 'Configurer les jeux', # NEW
+	'configuration_jeux' => 'Configure the games',
 	'correction' => 'Correction:',
 	'corriger' => 'Check',
 
 	// E
-	'erreur_scripts' => 'Scripts not allowed: you can not play this game here!', # MODIF
+	'erreur_scripts' => 'Desactivated scripts : you can not play this game here!',
 	'erreur_syntaxe' => 'Syntax error',
 	'erreur_taille_grille' => 'Error: invalid size',
 
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'modules_dispos' => 'Modules disponibles', # NEW
-	'multi_jeux' => 'Multi Jeux', # NEW
+	'multi_jeux' => 'Multi Games',
 
 	// N
 	'n_erreurs' => '@n@ errors',
@@ -61,29 +61,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouveau_jeu' => 'New game',
 
 	// O
-	'options' => 'Options', # NEW
+	'options' => 'Options',
 
 	// P
-	'point' => ' pt', # MODIF
-	'points' => ' pts', # MODIF
+	'point' => ' pt',
+	'points' => ' pts',
 
 	// R
 	'recommencer' => 'Restart',
-	'reinitialiser' => 'Reset', # MODIF
+	'reinitialiser' => 'Reset',
 	'rejouer' => 'Rejouer',
-	'reponse' => 'Answer', # MODIF
-	'reponseFausse' => 'You were incorrect!', # MODIF
-	'reponseJuste' => 'You were correct!', # MODIF
-	'reponseNulle' => 'You didn\'t answer this question!', # MODIF
-	'resultat' => 'Résultat', # MODIF
-	'resultat2_' => 'Non défini ?', # MODIF
+	'reponse' => 'Answer',
+	'reponseFausse' => 'The answer is incorrect!',
+	'reponseJuste' => 'This answer is correct!',
+	'reponseNulle' => 'You didn\'t answer this question!',
+	'resultat' => 'Results',
+	'resultat2_' => 'Not defined ?',
 	'resultat2_aucun' => 'Pas d\'enregistrement',
 	'resultat2_defaut' => 'Selon la configuration générale du plugin', # MODIF
 	'resultat2_dernier' => 'Pour chaque auteur, le dernier résultat uniquement', # MODIF
 	'resultat2_meilleur' => 'Pour chaque auteur, le meilleur résultat uniquement', # MODIF
 	'resultat2_meilleurs' => 'L\'ensemble des meilleurs résultats', # MODIF
 	'resultat2_premier' => 'Pour chaque auteur, le premier résultat uniquement', # MODIF
-	'resultat2_tous' => 'Tous les résultats', # MODIF
+	'resultat2_tous' => 'All the results',
 	'resultat_aucun' => 'Aucun',
 	'resultat_defaut' => 'Par défaut', # MODIF
 	'resultat_dernier' => 'Le dernier',
@@ -91,34 +91,34 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resultat_meilleurs' => 'Les meilleurs',
 	'resultat_premier' => 'Le premier',
 	'resultat_tous' => 'Tous',
-	'resultats' => 'Résultats', # MODIF
-	'resultats_auteur' => 'Les résultats de @nom@', # MODIF
+	'resultats' => 'Results',
+	'resultats_auteur' => 'Results of @nom@',
 	'resultats_jeu' => 'Les résultats du jeu numéro @id@ (@nom@)', # MODIF
 	'resultats_jeux' => 'Résultats des jeux', # NEW
 
 	// S
 	'sans_titre_prive' => 'Sans titre privé', # MODIF
 	'sans_type' => 'Sans type',
-	'score' => 'Score:', # MODIF
+	'score' => 'Score:',
 	'solution' => 'Solution',
 
 	// T
 	'titre_page_configurer_jeux' => 'Configuration du plugin jeux', # NEW
 	'total' => 'Total', # NEW
-	'type_resultat' => 'Type de résultats', # MODIF
+	'type_resultat' => 'Results type',
 
 	// U
 	'une_erreur' => 'An error',
 	'une_vide' => 'One empty cell',
 
 	// V
-	'verifier' => 'Check', # MODIF
-	'verifier_validite' => 'Check the validity ', # MODIF
+	'verifier' => 'Check',
+	'verifier_validite' => 'Check the validity ',
 	'voir_auteur' => 'Voir l\'auteur', # NEW
 	'voir_jeu' => 'Voir le jeu',
-	'voir_resultats' => 'Voir les résultats', # MODIF
+	'voir_resultats' => 'See the results',
 	'votre_choix' => 'Your answer: ',
-	'votre_reponse' => 'Your answer: ' # MODIF
+	'votre_reponse' => 'Your answer: '
 );
 
 ?>
