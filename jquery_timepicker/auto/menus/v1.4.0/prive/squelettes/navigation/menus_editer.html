@@ -1,0 +1,19 @@
+[(#ENV{id_menu,0}|intval|oui)
+[(#BOITE_OUVRIR{'','info'})]
+	<div class="infos">
+		<div class="numero">
+			<:menus:info_numero_menu:>
+			<p>[(#ENV{id_menu})]</p>
+		</div>
+		[(#VAL{redirect}
+			|generer_url_action{type=menu&id=#ENV{id_menu}}
+			|parametre_url{var_mode,calcul}
+			|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+
+		[(#PLUGIN{yaml}|oui)
+			[(#URL_ACTION_AUTEUR{exporter_menu,#ENV{id_menu}}
+				|icone_horizontale{<:menus:editer_menus_exporter:>,menu-export-24.png})]
+		]
+	</div>
+#BOITE_FERMER
+]

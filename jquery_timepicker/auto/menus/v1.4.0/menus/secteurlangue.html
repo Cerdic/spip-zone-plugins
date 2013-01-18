@@ -1,0 +1,2 @@
+<BOUCLE_appel(CONDITION){si #ENV{appel_menu}|oui}><BOUCLE_secteur(RUBRIQUES){racine}{lang}{0,1}>#SET{id_rubrique,#ID_RUBRIQUE}</BOUCLE_secteur></BOUCLE_appel>
+#INCLURE{fond=menus/rubriques_completes,id_rubrique=#GET{id_rubrique},secteurlangue=oui,env}

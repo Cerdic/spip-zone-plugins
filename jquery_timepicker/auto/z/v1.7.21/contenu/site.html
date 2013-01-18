@@ -1,0 +1,36 @@
+<BOUCLE_site(SITES){id_syndic}>
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_syndic}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#NOM_SITE|couper{80})</strong>]</p>
+
+<div class="contenu-principal">
+
+  <div class="cartouche">
+      <a href="#URL_SITE">[(#LOGO_SITE||image_reduire{150,100})]</a>
+      <h1 class="h1 #EDIT{nom_site}">#NOM_SITE</h1>
+  </div>
+
+  [<div class="#EDIT{descriptif} chapo">(#DESCRIPTIF)</div>]
+  [<p class="#EDIT{url_site} hyperlien"><a href="#URL_SITE" class="spip_out">(#URL_SITE|couper{80})</a></p>]
+</div>
+
+  [(#REM) Articles issus de la syndication ]
+  <B_articles>
+  <div class="liste articles syndic">
+      #ANCRE_PAGINATION
+      <h2 class="h2"><:articles:></h2>
+      <ul class="liste-items">
+          <BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {pagination 5}>
+          <li class="item">
+              <h3 class="h3"><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></h3>
+              [<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
+              <div class="small">[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)][ &mdash; <em>(#TAGS|afficher_tags)</em>]</div>
+              [<div class="introduction">(#DESCRIPTIF|image_reduire{300})</div>]
+          </li>
+          </BOUCLE_articles>
+      </ul>
+      [<p class="pagination">(#PAGINATION)</p>]
+  </div>
+  </B_articles>
+
+  [<div class="notes"><h2 class="h2"><:info_notes:></h2>(#NOTES)</div>]
+</BOUCLE_site>

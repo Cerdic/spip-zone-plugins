@@ -1,0 +1,16 @@
+nom: '<:menus:noisette_nom_noisette:>'
+description: '<:menus:noisette_description:>'
+icon: 'menu-24.png'
+parametres:
+  -
+    saisie: 'menu'
+    options:
+      nom: 'identifiant'
+      label: '<:menus:noisette_label_identifiant:>'
+      cacher_option_intro: 'oui'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'afficher_titre_menu'
+      label: '<:menus:noisette_label_afficher_titre_menu:>'
+      defaut: 'on'

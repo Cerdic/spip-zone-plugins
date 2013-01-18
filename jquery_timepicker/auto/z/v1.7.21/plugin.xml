@@ -1,0 +1,43 @@
+<plugin>
+	<nom>Zpip-dist v1</nom>
+	<slogan>Squelette r&#233;utilisable, modulaire et th&#232;mable</slogan>
+	<auteur>Matthieu Marcillaud, C&#233;dric Morin, Romy T&#234;tue, Collectif SPIP</auteur>
+	<icon>img/zpip-128.png</icon>
+	<licence>GNU/GPL</licence>
+	<version>1.7.21</version>
+	<etat>stable</etat>
+	<description>
+Zpip est issu d'une fusion des projets Zesty et SPIP-Zen. Zpip-dist est la version de base de ce mod&#232;le de squelette, que vous pouvez utiliser telle quelle ou personnaliser et enrichir selon vos besoins.
+
+Plus qu'un squelette, Zpip est un exemple d'un syst&#232;me de squelette qui met en application les id&#233;es expos&#233;es dans [Mod&#232;le de squelette r&#233;utilisable->http://www.spip-contrib.net/Modele-de-squelette-reutilisable]. Il propose une organisation des squelettes visant &#224; le rendre :
+-* {{habillable}} par des th&#232;mes ind&#233;pendants du squelette
+-* {{maintenable}} dans le temps, par une duplication minimale du code
+-* {{rapidement d&#233;ployable}}, au prix d'un petit apprentissage initial sur son organisation
+
+Zpip s'adresse aussi bien aux d&#233;butants qui veulent profiter d'une galerie de th&#232;mes pr&#234;ts &#224; l'emploi, qu'aux webmestres avanc&#233;s auxquels il propose un fonctionnement et des m&#233;canismes productifs.
+
+Toute l'organisation et le fonctionnement de Zpip peuvent &#234;tre r&#233;utilis&#233;s pour construire de nouveaux squelettes qui b&#233;n&#233;ficieront des m&#234;mes avantages.
+	</description>
+	<prefix>Z</prefix>
+	<lien>http://www.spip-contrib.net/Le-Squelette-Zpip-dist</lien>
+	<fonctions>z_pipelines.php</fonctions>
+	<options>z_options.php</options>
+	<pipeline>
+		<nom>declarer_url_objets</nom>
+		<inclure>z_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>styliser</nom>
+		<inclure>z_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>z_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_propre</nom>
+		<inclure>z_pipelines.php</inclure>
+	</pipeline>
+	<categorie>squelette</categorie>
+	<necessite id="SPIP" version="[2.0.10;3.0.99]" />
+</plugin>

@@ -1,0 +1,15 @@
+---------------------------------------------
+TODO plugin skel_editor
+---------------------------------------------
+
+ajout de fonctionnalites:
+----------------------------
+- telecharger l'ensemble du squelette en .zip ?
+- documentation des boucles ?
+- preview "live" ?
+
+des commentaires ?
+http://www.spip-contrib.net/Plugin-editeur-de-squelettes-Skel
+
+
+---------------------------------------------

@@ -1,0 +1,35 @@
+<paquet
+	prefix="menus"
+	categorie="navigation"
+	version="1.4.0"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/menu-32.png"
+	documentation="http://www.spip-contrib.net/Plugin-Menus"
+	schema="0.5.1"
+>
+	<nom>Menus</nom>
+
+	<auteur>RastaPopoulos</auteur>
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<licence>GPL v3</licence>
+
+	<traduire module="menus" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="declarer_tables_principales" inclure="base/menus_tables.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/menus_tables.php" />
+	<pipeline nom="header_prive" inclure="menus_pipelines.php" />
+	<pipeline nom="pre_boucle" inclure="menus_pipelines.php" />
+	<pipeline nom="menus_lister_disponibles" inclure="menus_pipelines.php" />
+	<pipeline nom="declarer_url_objets" inclure="menus_pipelines.php" />
+	<pipeline nom="autoriser" inclure="inc/menus_autoriser.php" />
+	<pipeline nom="ieconfig" inclure="menus_ieconfig.php" />
+
+	<menu nom="menus_tous" titre="menus:editer_menus_titre" parent="menu_squelette" icone="images/menu-16.png" />
+
+	<!-- pour _T_ou_typo -->
+	<necessite nom="saisies" compatibilite="[1.9.10;]" />
+	
+	<utilise nom="Z" />
+	<utilise nom="Zpip" />
+</paquet>
