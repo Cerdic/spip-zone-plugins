@@ -4,7 +4,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang='',$objet_dest='rubrique') {
     include_spip('inc/config');
-    
     //Les objets destinataires choisies
      $special=array('article','rubrique');
      if(in_array($objet_dest,$special)) $choisies= picker_selected(lire_config('selection_objet/selection_'.$objet_dest.'_dest',array()),$objet_dest);
@@ -35,8 +34,17 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
     $where='id_'.$objet_dest.' IN ('.implode(',',$choisies).')';
     $where_lang='';
     if($tables[$table_dest]['field']['lang'] and $lang)$where_lang=' AND lang IN ('.sql_quote($lang).')';
-    if($choisies)$objets_choisies=tableau_objet($objet_dest_original,'','*',$where.$where_lang);
 
+    if($choisies)$objets_choisies=tableau_objet($objet_dest_original,'','*',$where.$where_lang,array('titre','id_'.$objet_dest,true));
+    
+    //Les types liens pour l'objet concerné
+    if(!$types=lire_config('selection_objet/type_liens_'.$objet_dest_original,array()))$types=lire_config('selection_objet/type_liens',array());
+    
+    
+    $types_lien=array();
+    foreach($types as $cle => $valeur){
+        $types_lien[$cle]=_T($valeur);
+        }
     $valeurs = array(
     	"id_objet"	=> $id_objet,
     	"objet"	=> $objet,	
@@ -45,7 +53,8 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
         "id_objet_dest"=>$id_objet_dest,
         "table_dest"=>$table_dest,	
         "titre_objet_dest"=>$titre_objet_dest,
-        'objets_choisies'=>$objets_choisies       	 		
+        'objets_choisies'=>$objets_choisies,
+        'types_lien' =>$types_lien,      	 		
         );
         
     $valeurs['_hidden'] .= "<input type='hidden' name='id_objet' value='$id_objet' />";
@@ -53,27 +62,7 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
     $valeurs['_hidden'] .= "<input type='hidden' name='lang' value='$langue' />";
     $valeurs['_hidden'] .= "<input type='hidden' name='objet_dest' value='$objet_dest' />";
 
-    
-    /* Je ne me souviens plus à quoi ça sert, probalement à rien
-      $where=array(
-    	'id_objet='.$id_objet,
-       	'objet='.sql_quote($objet), 		
-    	);
-    	
-	if($id_objet_dest){
-		$where['id_objet_dest'] =_request('id_objet_dest');
-		$where['objet_dest'] =_request('objet_dest');					
-		}
-		
-	if($lang)$where[2]='lang='.sql_quote($lang);	
-	
-        
-   	$l= sql_getfetsel('lang','spip_selection_objets',$where);
-   	
-	$langues=explode(',',$langue);
-	
 
-	if(in_array($l,$langues))$valeurs['selectionne']='ok';*/
 
     return $valeurs;
 }
@@ -88,6 +77,7 @@ function formulaires_bouton_objet_traiter_dist($id_objet,$objet,$langue,$lang=''
     $verifier_ordre=charger_fonction('verifier_ordre','inc');
     $statut='publie';
     $objet_dest=_request('objet_dest');
+    $type_lien=_request('type_lien');
 	
 
 
@@ -118,7 +108,8 @@ function formulaires_bouton_objet_traiter_dist($id_objet,$objet,$langue,$lang=''
 					'objet_dest'=>$objet_dest,			 	
 					'ordre'=>$ordre, 
 					'lang'=>$l,
-					'statut'=>  $statut
+					'statut'=>  $statut,
+					'type_lien'=>$type_lien
 					);
 					
 				sql_insertq("spip_selection_objets",$vals);
@@ -146,7 +137,8 @@ function formulaires_bouton_objet_traiter_dist($id_objet,$objet,$langue,$lang=''
 				'objet_dest'=>$objet_dest,			 	
 				'ordre'=>$ordre, 
 				'lang'=>$langue[0],
-				'statut'=>  $statut
+				'statut'=>  $statut,
+				'type_lien'=>$type_lien
 				);
 					
 			sql_insertq("spip_selection_objets",$vals);
@@ -154,7 +146,7 @@ function formulaires_bouton_objet_traiter_dist($id_objet,$objet,$langue,$lang=''
 			}
 			
 			
-			
+			$valeurs['message_ok']='ok';
 
 return $valeurs;
 	
