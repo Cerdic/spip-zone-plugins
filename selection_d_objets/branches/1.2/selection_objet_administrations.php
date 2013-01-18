@@ -26,6 +26,10 @@ function selection_objet_upgrade($nom_meta_base_version, $version_cible) {
     $maj['0.2.2'] = array(array('maj_tables', array('spip_selection_objets')));  
     $maj['0.2.3'] = array(array('maj_tables', array('spip_selection_objets'))); 
     $maj['0.2.4'] = array(array('maj_tables', array('spip_selection_objets')));   
+    $maj['0.3.0'] = array(array('maj_tables', array('spip_selection_objets')));     
+    $maj['0.3.2'] = array(array('sql_alter','TABLE spip_selection_objets ADD PRIMARY KEY  (id_selection_objet)'), 
+    $maj['0.3.4'] = array(array('sql_alter','TABLE spip_selection_objets CHANGE id_selection_objet id_selection_objet BIGINT( 21 ) NOT NULL AUTO_INCREMENT')),     
+    );    
         
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

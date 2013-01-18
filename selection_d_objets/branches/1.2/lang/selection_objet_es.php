@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurations' => 'Configuraciones',
 
 	// E
-	'explication_selection_rubrique_dest' => 'Las secciones dónde podrán ser listados los objetos semeccionados',
+	'explication_selection_objets_cible' => 'Les objets cibles ou pourront être affichés les objets sélectionnés', # NEW
 
 	// I
 	'icone_creer_selection_objet' => 'Seleccionar un objet',
@@ -36,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'objet_destination_choisis' => 'Destinación/ones seleccionada(s):',
+	'objets_cible_dispos' => 'Les Objets Cible disponibles', # NEW
 
 	// R
 	'racine' => 'Raíz',
@@ -44,10 +45,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubriques_choisis' => 'Secciones seleccionadas:',
 
 	// S
+	'selection_cible' => 'Seléction des cibles pour', # NEW
 	'selection_objet' => 'Selección',
-	'selection_objet_titre' => 'Selección de objetos',
+	'selection_objet_cible_titre' => 'Selection d\'objets cibles', # NEW
 	'selection_objets_pour' => 'Selección objetos para:',
-	'selection_rubrique_dest' => 'Sección/ones de destino',
 	'selection_rubrique_objet' => 'Objetos que pueden ser seleccionados',
 
 	// T
