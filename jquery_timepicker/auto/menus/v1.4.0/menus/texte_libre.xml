@@ -1,8 +1,0 @@
-<entree>
-	<nom><:menus:nom_menu_texte_libre:></nom>
-	<rang>2</rang>
-	<description><:menus:description_menu_texte_libre:></description>
-	<icone>images/menus_texte_libre.png</icone>
-	<parametre nom="contenu" label="menus:entree_contenu" class="multilang" obligatoire="oui" />
-	<parametre nom="css" label="menus:entree_css" />
-</entree>
