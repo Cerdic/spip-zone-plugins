@@ -44,10 +44,10 @@ The value of 1,000,000 pixels appears to be reasonable for a configuration with 
 	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
 
 Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.', # NEW
-	'aff_tout:nom' => 'Affiche tout', # NEW
+	'aff_tout:nom' => 'Display all',
 	'alerte_urgence:description' => 'Affiche en tête de toutes les pages publiques un bandeau d\'alerte pour diffuser le message d\'urgence défini ci-dessous.
 _ Les balises <code><multi/></code> sont recommandées en cas de site multilingue.[[%alerte_message%]]', # NEW
-	'alerte_urgence:nom' => 'Message d\'alerte', # NEW
+	'alerte_urgence:nom' => 'Alert message',
 	'attente' => 'Waiting...',
 	'auteur_forum:description' => 'Request all authors of public messages to fill in (with at least one letter!) a name and/or email in order to avoid completely anonymous messages. Note that the tool performs a JavaScript validation with the user\'s browser.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
 {Caution: The third option cancels the 2 others. It is important to verify that the forms in your SPIP templates are compatible with this tool.}',
@@ -377,7 +377,7 @@ This means that multi blocks will always displayed in the language requested by 
 	'glossaire_erreur' => 'The "@mot1@" keyword makes the "@mot2@" undetectable',
 	'glossaire_inverser' => 'Correction proposed: reverse the order of the keywords in the database.',
 	'glossaire_js' => 'JavaScript solution',
-	'glossaire_ok' => 'The list of @nb@ keyword(s) checked in the database appears to be correct.', # MODIF
+	'glossaire_ok' => 'The list of @nb@ keyword(s) checked in the database appears to be correct.',
 	'guillemets:description' => 'Automatically replaces straight inverted commas (") by curly ones, using the correct ones for the current language. The replacement does not change the text stored in the database, but only the display on the screen.',
 	'guillemets:nom' => 'Curly inverted commas',
 
@@ -436,7 +436,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	// L
 	'label:admin_travaux' => 'Close the public site for:',
 	'label:alinea' => 'Scope of application:',
-	'label:alinea2' => 'Sauf :', # NEW
+	'label:alinea2' => 'Except :',
 	'label:alinea3' => 'Désactiver la prise en compte des alinéas :', # NEW
 	'label:arret_optimisation' => 'Stop SPIP from emptying the wastebin automatically:',
 	'label:auteur_forum_nom' => 'The visitor must specify:',
@@ -779,7 +779,7 @@ _ • {Cache checking}: similar to the preceding option. However, all results ar
 _ Utile pour n\'en oublier aucune !
 
 @puce@ Un test : ', # NEW
-	'test_i18n:nom' => 'Traductions manquantes', # NEW
+	'test_i18n:nom' => 'Missing translations',
 	'titre' => 'The Swiss Army Knife',
 	'titre_parent:description' => 'Within a loop, it is common to want to show the title of the parent of the current object. You normally need to use a second loop to do this, but a new tag #TITRE_PARENT makes the syntax easier. In the case of a MOTS loop, the tag gives the title of the keyword group. For other objects (articles, sections, news items, etc.) it gives the title of the parent section (if one such exists).
 
@@ -829,7 +829,7 @@ Vos modifications seront prises en compte quelques jours plus tard sous forme d\
 {{Traductions actuellement disponibles}} :@trad@
 
 {{Merci aux traducteurs actuels}} : @contrib@.', # NEW
-	'trad_mod' => 'Module « @mod@ » : ', # NEW
+	'trad_mod' => 'Module « @mod@ » : ',
 	'travaux_masquer_avert' => 'Hide the frame indicating on the public site that maintenance is currently being carried out',
 	'travaux_nocache' => 'Désactiver également le cache de SPIP', # NEW
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
@@ -941,7 +941,7 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'urls_purger_tout' => 'Reset the URLs stored in the database:',
 	'urls_rechercher' => 'Find this object in the database',
 	'urls_titre_objet' => 'Saved title:',
-	'urls_type_objet' => 'Object:', # MODIF
+	'urls_type_objet' => 'Object:',
 	'urls_url_calculee' => 'Public URL "@type@":',
 	'urls_url_objet' => 'Saved "clean" URL:', # MODIF
 	'urls_valeur_vide' => '(An empty value triggers the recalculation of the URL)', # MODIF
@@ -967,7 +967,7 @@ _ version_plein_texte: extracts the textual content from an HTML page to display
 	'visiteurs_connectes:description' => 'Creates an HTML fragment for your templates which displays the number of visitors currently connected to the public site.
 
 Simply add <code><INCLURE{fond=fonds/visiteurs_connectes}></code> in the template.',
-	'visiteurs_connectes:inactif' => 'Attention : les statistiques du site ne sont pas activées.', # NEW
+	'visiteurs_connectes:inactif' => 'Beware : the website statistics are not activated',
 	'visiteurs_connectes:nom' => 'Vistors logged in',
 	'voir' => 'See: @voir@',
 	'votre_choix' => 'Your choice:',
