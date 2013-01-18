@@ -3,7 +3,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // pour le pipeline
-function ticketskiss_notifications() {}
+function ticketskiss_notifications($flux) {return $flux;}
 
 /**
  * 
