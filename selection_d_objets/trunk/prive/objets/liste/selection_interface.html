@@ -18,6 +18,7 @@
 	<BOUCLE_selection(SELECTION_OBJETS){par ordre,lang}{lang=#VALEUR}{statut ?}{id_objet_dest ?} {objet_dest ?}>
 	
 	[(#ID_OBJET|generer_modele{#OBJET,modeles_so/selection_interface_tr,#ARRAY{
+	    id_selection_objet,#ID_SELECTION_OBJET,
         langue,#VALEUR,
         objet_dest,#OBJET_DEST,
         id_objet_dest,#ID_OBJET_DEST,
@@ -27,8 +28,8 @@
         logo_selection_objet,#LOGO_SELECTION_OBJET,
         compteur_boucle,#COMPTEUR_BOUCLE,
         date,#DATE,
-        }})]
-	
+        type_lien,#TYPE_LIEN,       
+        }})] 
 	</BOUCLE_selection>
 	</table>
 	</B_selection>

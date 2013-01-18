@@ -16,6 +16,10 @@
 
 			[(#SAISIE{input, url,
 				label=<:selection_objet:label_url:>})]
+				
+			[(#SAISIE{selection,type_lien,
+                    label=<:selection_objet:selection_type_lien:> [(#GET{objets}|table_valeur{#VALEUR})],
+                    datas=#ENV{types_lien}})]	
 
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]

@@ -82,7 +82,7 @@ function url_objet($id_objet,$objet,$titre='',$url=''){
 
 /*Fournit un tableau avec id_objet=>donnees_objet*/
 
-function tableau_objet($objet,$id_objet='',$champs='*',$where=array(),$filtrer=array()){
+function tableau_objet($objet,$id_objet='',$champs='*',$where=array(),$filtrer=array(),$array_donnes=true){
     $d=info_objet($objet,$id_objet,$champs,$where);
     //Les tables non conforme, faudrait inclure une pipeline
     $exceptions=charger_fonction('exceptions','inc');
@@ -104,7 +104,8 @@ function tableau_objet($objet,$id_objet='',$champs='*',$where=array(),$filtrer=a
                 foreach($filtrer as $c){
                 if($r[$c])$donnees[$c]=$r[$c];  
                 }
-             $data[$r['id_'.$objet]]=$donnees;
+             if($array_donnes) $data[$r['id_'.$objet]]=$donnees; 
+             else $data[$r['id_'.$objet]]=implode(',',$donnees);
             }
         }
     }
@@ -119,7 +120,7 @@ function generer_modele($id_objet,$objet='article',$fichier='modeles_selection_o
     $contexte=sql_fetsel('*','spip_'.$objet.'s',$where);
     $cont=calculer_contexte();
     if(is_array($env))$contexte= array_merge($contexte,$env,$cont);
-    
+
     $contexte['objet']=$objet;
     $contexte['id_objet']=$id_objet; 
     if($contexte['nom'])$contexte['titre']=$contexte['nom'];
@@ -133,4 +134,14 @@ function generer_modele($id_objet,$objet='article',$fichier='modeles_selection_o
     
     return $fond;
 }
+
+//donnele nom du type de lien
+function nom_type($type,$objet){
+    include_spip('inc/config');
+    if(!$types=lire_config('selection_objet/type_liens_'.$objet_dest_original,array())) $types=lire_config('selection_objet/type_liens',array());
+    
+    $nom=_T($types[$type]);
+    
+    return $nom;
+    }
 ?>
