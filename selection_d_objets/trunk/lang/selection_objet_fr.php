@@ -47,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'selection_objet' => 'Sélection',
 	'selection_objet_cible_titre' => 'Selection d\'objets cibles',
 	'selection_objets_pour' => 'Sélection objets pour',
+	'selectione' => 'Sélectionné :',	
 	'selection_rubrique_objet' => 'Objets qui peuvent être sélectionnés',
 
 	// T

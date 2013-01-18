@@ -29,10 +29,11 @@ function selection_objet_affiche_gauche($flux) {
                 if(!$trad_rub=test_plugin_actif('tradrub')) $contexte['langue']=lire_config('langues_multilingue');
                 } 
             }
-            foreach ($objets_cibles as $objet_dest) {
+
                 $contexte['objet_dest']=$objet_dest;
+                $contexte['objets_cibles']=$objets_cibles;                
                 $flux["data"].= recuperer_fond("prive/squelettes/navigation/affiche_gauche", $contexte);
-            }
+            
              
         }
       

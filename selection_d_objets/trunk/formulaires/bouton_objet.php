@@ -35,7 +35,7 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
     $where='id_'.$objet_dest.' IN ('.implode(',',$choisies).')';
     $where_lang='';
     if($tables[$table_dest]['field']['lang'] and $lang)$where_lang=' AND lang IN ('.sql_quote($lang).')';
-    if($choisies)$objets_choisies=tableau_objet($objet_dest_original,'','*',$where.$where_lang);
+    if($choisies)$objets_choisies=tableau_objet($objet_dest_original,'','*',$where.$where_lang,array('titre','id_'.$objet_dest,'nom'));
 
     $valeurs = array(
     	"id_objet"	=> $id_objet,
@@ -154,7 +154,7 @@ function formulaires_bouton_objet_traiter_dist($id_objet,$objet,$langue,$lang=''
 			}
 			
 			
-			
+			$valeurs['message_ok']='ok';
 
 return $valeurs;
 	

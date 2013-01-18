@@ -104,7 +104,7 @@ function tableau_objet($objet,$id_objet='',$champs='*',$where=array(),$filtrer=a
                 foreach($filtrer as $c){
                 if($r[$c])$donnees[$c]=$r[$c];  
                 }
-             $data[$r['id_'.$objet]]=implode(',',$donnees);
+             $data[$r['id_'.$objet]]=$donnees;
             }
         }
     }

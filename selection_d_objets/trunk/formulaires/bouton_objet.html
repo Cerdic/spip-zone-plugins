@@ -1,15 +1,18 @@
 #SET{exclude,#ARRAY}
 
 <B_test>
-<div class="ajax formulaire_spip">
-    [(#CHEMIN_IMAGE{objet-24.png}|balise_img{selection_objet,cadre-icone})]
-
+<div class="ajax">
+[(#SET{plie,0})]    
+[(#ENV{message_ok}|ou{#ENV{message_erreur}}|oui)
+    [(#SET{plie,1})]
+]
     
-        <h3 class="titrem"><:selection_objet:selection_objet:> #TITRE_OBJET_DEST</h3>
-      
+   [(#VAL{inc/presentation}|include_spip|oui)]
+[(#SET{identifiant,[(#VAL{sel_objet_#ENV{objet_dest}_#ENV{id_objet}})]})] 
+  [(#VAL{e}|debut_cadre{'','',[(#VAL{#TITRE_OBJET_DEST}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})]})]  
     <B_affichage>
 
-    <strong><:selection_objet:objet_destination_choisis:></strong>
+    <strong><:selection_objet:selectione:></strong>
     <ul>   
     #SET{nom_id_dest,id_#OBJET_DEST}    
     <BOUCLE_affichage(SELECTION_OBJETS){id_objet}{statut ?}{objet}{objet_dest}>
@@ -30,7 +33,7 @@
 #SET{id_objet,#VALEUR}
 </BOUCLE_test>
 
-
+[(#GET{plie}|debut_block_depliable{#GET{identifiant}})]
 
     [<div class="formulaire_spip formulaire_bouton_objet" id="formulaire_bouton_objet_#OBJET_DEST">
         <form action="#ENV{action}" method="post"><div>
@@ -40,5 +43,7 @@
         </ul>
         </div></form>
     </div>]
+[(#GET{plie}|fin_block)]
+[(#VAL{e}|fin_cadre)]
 </div>   
 </B_test>
