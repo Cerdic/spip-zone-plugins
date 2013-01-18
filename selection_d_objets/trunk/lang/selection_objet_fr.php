@@ -33,8 +33,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_url' => 'Url',
 
 	// O
-	'objets_cible_dispos'=>'Les Objets Cible disponibles',
 	'objet_destination_choisis' => 'Destination(s) choisie(s) :',
+	'objets_cible_dispos' => 'Les Objets Cible disponibles',
 
 	// R
 	'racine' => 'Racine',
@@ -43,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubriques_choisis' => 'Rubriques choisies :',
 
 	// S
-	'selection_cible' => 'Seléction des cibles pour',	
+	'selection_cible' => 'Seléction des cibles pour',
 	'selection_objet' => 'Sélection',
 	'selection_objet_cible_titre' => 'Selection d\'objets cibles',
 	'selection_objets_pour' => 'Sélection objets pour',
