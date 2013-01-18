@@ -24,8 +24,10 @@
 	<div id='wysiwyg'>
 	<INCLURE{fond=prive/objets/contenu/commande,id=#ID_COMMANDE,ajax=wysiwyg}>
 	</div>
-	
+	[(#REM) vérifie que le plugin mediathèque est actif]
+	[(#PLUGIN{medias}|oui)
 	#INCLURE{fond=prive/contenu/portfolio_document,objet=commande,id_objet=#ID_COMMANDE}
+	]
 
 	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,commande,id,#ID_COMMANDE},data,'<div class="nettoyeur"></div>'}}
 </div>
