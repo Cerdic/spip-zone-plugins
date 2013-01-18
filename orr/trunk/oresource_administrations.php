@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function oresource_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
-	$maj['create'] = array(array('maj_tables', array('spip_orr_ressources', 'spip_orr_reservations', 'spip_orr_reservations_liens')));
+	$maj['create'] = array(array('maj_tables', array('spip_orr_ressources', 'spip_orr_reservations','spip_orr_autorisations', 'spip_orr_reservations_liens','spip_orr_autorisations_liens')));
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -34,13 +34,15 @@ function oresource_upgrade($nom_meta_base_version, $version_cible) {
 function oresource_vider_tables($nom_meta_base_version) {
 
 	sql_drop_table("spip_orr_ressources");
+	sql_drop_table("spip_orr_autorisations");
+	sql_drop_table("spip_orr_autorisations_liens");
 	sql_drop_table("spip_orr_reservations");
 	sql_drop_table("spip_orr_reservations_liens");
 
 	# Nettoyer les versionnages et forums
-	sql_delete("spip_versions",              sql_in("objet", array('orr_ressource', 'orr_reservation')));
-	sql_delete("spip_versions_fragments",    sql_in("objet", array('orr_ressource', 'orr_reservation')));
-	sql_delete("spip_forum",                 sql_in("objet", array('orr_ressource', 'orr_reservation')));
+	sql_delete("spip_versions",              sql_in("objet", array('orr_ressource','orr_autorisation', 'orr_reservation')));
+	sql_delete("spip_versions_fragments",    sql_in("objet", array('orr_ressource','orr_autorisation', 'orr_reservation')));
+	sql_delete("spip_forum",                 sql_in("objet", array('orr_ressource','orr_autorisation', 'orr_reservation')));
 
 	effacer_meta($nom_meta_base_version);
 }

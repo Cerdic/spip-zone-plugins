@@ -14,6 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function oresource_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['orr_ressources'] = 'orr_ressources';
+	$interfaces['table_des_tables']['orr_autorisations'] = 'orr_autorisations';
 	$interfaces['table_des_tables']['orr_reservations'] = 'orr_reservations';
 
 	return $interfaces;
@@ -71,6 +72,29 @@ function oresource_declarer_tables_objets_sql($tables) {
 		
 
 	);
+    $tables['spip_orr_autorisations'] = array(
+		'type' => 'orr_autorisation',
+		'principale' => "oui", 
+		'table_objet_surnoms' => array('orrautorisation'), // table_objet('orr_') => 'orr_autorisations' 
+		'field'=> array(
+			"id_orr_autorisation" => "bigint(21) NOT NULL",
+			"orr_type_objet"      => "varchar(25) NOT NULL DEFAULT ''",
+			"id_grappe"           => "bigint(21) NOT NULL",
+			"orr_statut"          => "varchar(25) NOT NULL DEFAULT ''",
+			"orr_droit"           => "varchar(25) NOT NULL DEFAULT ''",
+			"maj"                 => "TIMESTAMP"
+		),
+		'key' => array(
+			"PRIMARY KEY"        => "id_orr_autorisation",
+		),
+		 #'date' => "",
+		'champs_editables'  => array('orr_type_objet','id_grappe','orr_statut','orr_droit'),
+		'champs_versionnes' => array(),
+		'rechercher_champs' => array("orr_statut" => 8),
+		'tables_jointures'  => array(),
+		
+
+	);
 
 	return $tables;
 }
@@ -93,8 +117,20 @@ function oresource_declarer_tables_auxiliaires($tables) {
 			"KEY id_orr_reservation" => "id_orr_reservation"
 		)
 	);
+    $tables['spip_orr_autorisations_liens'] = array(
+		'field' => array(
+			"id_orr_autorisation" => "bigint(21) DEFAULT '0' NOT NULL",
+			"id_objet"           => "bigint(21) DEFAULT '0' NOT NULL",
+			"objet"              => "VARCHAR(25) DEFAULT '' NOT NULL",
+			"vu"                 => "VARCHAR(6) DEFAULT 'non' NOT NULL"
+		),
+		'key' => array(
+			"PRIMARY KEY"        => "id_orr_autorisation,id_objet,objet",
+			"KEY id_orr_autorisation" => "id_orr_autorisation"
+		)
+	);
 
-	return $tables;
+    	return $tables;
 }
 
 

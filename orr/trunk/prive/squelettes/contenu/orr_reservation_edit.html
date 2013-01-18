@@ -1,3 +1,4 @@
+toto
 [(#ID_OBJET|oui)
 	[(#AUTORISER{modifier,orr_reservation,#ID_ORR_RESERVATION}|sinon_interdire_acces)]
 ][(#ID_OBJET|non)
@@ -16,12 +17,14 @@
 		<h1>(#ENV{titre,#INFO_ORR_RESERVATION_NOM{orr_reservation,#ID_ORR_RESERVATION}|sinon{<:info_sans_titre:>}})</h1>
 	]
 </div>
+coucou
 
 #SET{redirect,#ENV{redirect,#ID_ORR_RESERVATION|generer_url_entite{orr_reservation}}}
 [(#ENV{retourajax,''}|oui)
 	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 	<div class="ajax">
 ]
+bonjour
 		[(#FORMULAIRE_EDITER_ORR_RESERVATION{#ENV{id_orr_reservation,oui}, #GET{redirect}, #ENV{associer_objet}})]
 [(#ENV{retourajax,''}|oui)
 	</div>

@@ -28,14 +28,23 @@ function oresource_affiche_milieu($flux) {
 
 
 	// orr_reservations sur les auteurs, orr_ressources
-	if (!$e['edition'] AND in_array($e['type'], array('auteur', 'orr_ressource'))) {
+	//if (!$e['edition'] AND in_array($e['type'], array('auteur', 'orr_ressource'))) {
+	//$texte .= recuperer_fond('prive/objets/editer/liens', array(
+	//'table_source' => 'orr_reservations',
+	//'objet'        => $e['type'],
+	//'id_objet'     => $flux['args'][$e['id_table_objet']]
+	//));
+	//}
+	
+	// orr_autorisations sur orr_ressources
+	if (!$e['edition'] AND in_array($e['type'], array('orr_ressource'))) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
-			'table_source' => 'orr_reservations',
+			'table_source' => 'orr_autorisations',
 			'objet'        => $e['type'],
 			'id_objet'     => $flux['args'][$e['id_table_objet']]
 		));
 	}
-
+	
 	if ($texte) {
 		if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
 			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
