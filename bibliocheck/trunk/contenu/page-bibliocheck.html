@@ -30,8 +30,8 @@
 	#ANCRE_PAGINATION
 	<div class="liste bibliocheck">
 	<BOUCLE_biblio_type(ZITEMS spip_zitems_zcollections spip_zcollections){id_parent==0}{auteur?}{type_ref?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{spip_zcollections.zcollection?}{json LIKE %#ENV{recherche}%}{zotsip_depuis}{0,#ENV{max,100000}}{par_type_zotero}{pagination 50}>
-	[<h3 class="h3">(#TYPE_REF|unique|zotspip_traduire_type)</h3>]
-	<div class="verifier_zitem"><INCLURE{fond=inclure/verifier_zitem,id_zitem=#ID_ZITEM,env,ajax=ref#ID_ZITEM}></div>
+		[<h3 class="h3">(#TYPE_REF|unique|zotspip_traduire_type)</h3>]
+		<INCLURE{fond=inclure/verifier_zitem,id_zitem=#ID_ZITEM,env,ajax=ref#ID_ZITEM}>
 	</BOUCLE_biblio_type>
 	</div>
 	[<p class="pagination">(#PAGINATION)</p>]
