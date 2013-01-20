@@ -32,7 +32,7 @@ sur une idee de flouvel http://www.spip-contrib.net/Plugin-SPIP-Geoportail#forum
 <BOUCLE_article(ARTICLES){id_article=#ID}> </BOUCLE_article>
 <BOUCLE_geo_rubrique(ARTICLES){geoposition}{id_rubrique?}{id_secteur?}{id_mot?}{id_groupe?}>
 <script language=javascript>
-    var att = { id_article:#ID_ARTICLE, name:"[(#TITRE|attribut_html)]", logo:"[(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{60}|addslashes)]", url:"#URL_ARTICLE", description:"[(#INTRODUCTION{100}|addslashes|replace{'\n',''}|replace{'\r',''})]" };
+    var att = { id_article:#ID_ARTICLE, name:"[(#TITRE|supprimer_numero|attribut_html)]", logo:"[(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{60}|addslashes)]", url:"#URL_ARTICLE", description:"[(#INTRODUCTION{100}|addslashes|replace{'\n',''}|replace{'\r',''})]" };
 	// Afficher
 	[(#SET{largeur,[(#LOGO_ARTICLE||image_reduire{40}|largeur|plus{[(#ENV{bord,4})]})]})]
 	[(#SET{hauteur,[(#LOGO_ARTICLE||image_reduire{40}|hauteur|plus{[(#ENV{bord,4})]})]})]

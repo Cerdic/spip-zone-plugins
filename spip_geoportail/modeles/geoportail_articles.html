@@ -55,7 +55,7 @@ function initSpipMap#ENV{id_geoportail,0} (map,id)
 			var feature = jQuery.geoportail.createFeature (map, lon,lat, "[(#LOGO_ARTICLE||image_reduire{40}|image_recadre{#GET{largeur},#GET{hauteur},center,#ENV{couleur,#FFFFFF}}|extraire_attribut{src})]",#ENV{taille,20});
 		<//B_mot>
 		feature.attributes.logo = "[(#LOGO_ARTICLE||image_reduire{60}|replace{'"',"'"})]";
-		feature.attributes.name = "[(#TITRE|attribut_html)]";
+		feature.attributes.name = "[(#TITRE|supprimer_numero|attribut_html)]";
 		feature.attributes.url = "[(#URL_ARTICLE|url_absolue)]";
 		feature.attributes.description = "[(#INTRODUCTION|couper{100}|addslashes|replace{\n,''}|replace{\r,''})]";
 		map.rlayer.addFeatures(feature);
