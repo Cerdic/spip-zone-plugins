@@ -109,6 +109,7 @@ function gravatar_img($email, $logo_auteur='') {
 	if ($config AND $t=$config['taille']){
 		$img = filtrer('image_passe_partout',$img,$t);
 		$img = filtrer('image_recadre',$img,$t,$t,'center');
+		$img = filtrer('image_graver',$img);
 	}
 
 	return $img;
