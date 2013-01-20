@@ -57,13 +57,14 @@ function weather_url2flux($url) {
  */
 function weather_flux2previsions($flux, $lieu) {
 	$tableau = array();
+	$index = 0;
+
 	$n = spip_xml_match_nodes(",^dayf,",$flux,$previsions);
 	if ($n==1){
 		$previsions = reset($previsions['dayf']);
 		// recuperer la date de debut des previsions (c'est la date de derniere maj)
 		$date_maj = $previsions['lsup'][0];
 		$date_maj = strtotime(preg_replace(',\slocal\s*time\s*,ims','',$date_maj));
-		$index = 0;
 		foreach($previsions as $day=>$p){
 			if (preg_match(",day\s*d=['\"?]([0-9]+),Uims",$day,$regs)){
 				$date_stamp = $date_maj+$regs[1]*24*3600;

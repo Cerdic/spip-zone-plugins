@@ -171,47 +171,60 @@ function rainette_afficher_unite($valeur, $type_valeur='', $precision=-1) {
  */
 function rainette_coasse_previsions($lieu, $type='x_jours', $jour=0, $modele='previsions_24h', $service='weather'){
 
-	if ($type == '1_jour') {
-		$charger = charger_fonction('charger_meteo', 'inc');
-		$nom_fichier = $charger($lieu, 'previsions', $service);
-		lire_fichier($nom_fichier,$tableau);
-		$tableau = unserialize($tableau);
+	// Recuperation du tableau des prévisions pour tous les jours disponibles
+	$charger = charger_fonction('charger_meteo', 'inc');
+	$nom_fichier = $charger($lieu, 'previsions', $service);
+	lire_fichier($nom_fichier,$tableau);
+	$tableau = unserialize($tableau);
 
-		$nb_jours_previsions = count($tableau) - 1;
-		$jour = min($jour, $nb_jours_previsions);
+	// Détermination de l'index final contenant les extra (erreur, date...)
+	$index_extra = count($tableau) - 1;
 
-		// Si jour=0 (aujourd'hui), on complete par le tableau du lendemain matin
-		if ($jour == 0) {
-			$tableau[$jour]['lever_soleil_demain'] = $tableau[$jour+1]['lever_soleil'];
-			$tableau[$jour]['temperature_demain'] = $tableau[$jour+1]['temperature_jour'];
-			$tableau[$jour]['code_icone_demain'] = $tableau[$jour+1]['code_icone_jour'];
-			$tableau[$jour]['vitesse_vent_demain'] = $tableau[$jour+1]['vitesse_vent_jour'];
-			$tableau[$jour]['angle_vent_demain'] = $tableau[$jour+1]['angle_vent_jour'];
-			$tableau[$jour]['direction_vent_demain'] = $tableau[$jour+1]['direction_vent_jour'];
-			$tableau[$jour]['risque_precipitation_demain'] = $tableau[$jour+1]['risque_precipitation_jour'];
-			$tableau[$jour]['humidite_demain'] = $tableau[$jour+1]['humidite_jour'];
-		}
-		// On ajoute la date de derniere maj
-		$tableau[$jour]['derniere_maj'] = $tableau[$nb_jours_previsions]['derniere_maj'];
-		$page = recuperer_fond("modeles/$modele", $tableau[$jour]);
-		$texte = $page;
+	// On ajoute le lieu, le mode et le service au contexte fourni au modele
+	$tableau[$index_extra]['lieu'] = $lieu;
+	$tableau[$index_extra]['mode'] = 'previsions';
+	$tableau[$index_extra]['service'] = $service;
+
+	if (($tableau[$index_extra]['erreur'])) {
+		// Affichage du message d'erreur
+		$texte = recuperer_fond("modeles/erreur", $tableau[$index_extra]);
 	}
-	else if ($type == 'x_jours') {
-		$charger = charger_fonction('charger_meteo', 'inc');
-		$nom_fichier = $charger($lieu, 'previsions', $service);
-		lire_fichier($nom_fichier,$tableau);
-		$tableau = unserialize($tableau);
+	else {
+		if ($type == '1_jour') {
+			// Dans ce cas la variable $jour indique le numéro du jour demandé (0 pour aujourd'hui)
+			// Plutôt que de renvoyer une erreur si le numéro du jour est supérieur au nombre de jours en prévisions
+			// on renvoie au moins le jour max
+			$index_jour = min($jour, $index_extra-1);
 
-		$nb_jours_previsions = count($tableau) - 1;
-		if ($jour == 0) $jour = $nb_jours_previsions;
-		$jour = min($jour, $nb_jours_previsions);
+			// Si jour=0 (aujourd'hui), on complete par le tableau du lendemain matin
+			// afin de gérer le passage des prévisions jour à celles de la nuit
+			if ($index_jour == 0) {
+				$tableau[$index_jour]['lever_soleil_demain'] = $tableau[$index_jour+1]['lever_soleil'];
+				$tableau[$index_jour]['temperature_demain'] = $tableau[$index_jour+1]['temperature_jour'];
+				$tableau[$index_jour]['code_icone_demain'] = $tableau[$index_jour+1]['code_icone_jour'];
+				$tableau[$index_jour]['vitesse_vent_demain'] = $tableau[$index_jour+1]['vitesse_vent_jour'];
+				$tableau[$index_jour]['angle_vent_demain'] = $tableau[$index_jour+1]['angle_vent_jour'];
+				$tableau[$index_jour]['direction_vent_demain'] = $tableau[$index_jour+1]['direction_vent_jour'];
+				$tableau[$index_jour]['risque_precipitation_demain'] = $tableau[$index_jour+1]['risque_precipitation_jour'];
+				$tableau[$index_jour]['humidite_demain'] = $tableau[$index_jour+1]['humidite_jour'];
+			}
 
-		$texte = "";
-		while (count($tableau) && $jour--){
-			$page = recuperer_fond("modeles/$modele", array_shift($tableau));
-			$texte .= $page;
+			// On ajoute les informations extra (date et crédits)
+			$contexte = array_merge($tableau[$index_jour], $tableau[$index_extra]);
+			$texte = recuperer_fond("modeles/$modele", $contexte);
+		}
+		else if ($type == 'x_jours') {
+			if ($jour == 0) $jour = $index_extra;
+			$nb_jours = min($jour, $index_extra);
+
+			$texte = "";
+			for ($i = 0; $i < $nb_jours; $i++) {
+				$contexte = array_merge($tableau[$i], $tableau[$index_extra]);
+				$texte .= recuperer_fond("modeles/$modele", $contexte);
+			}
 		}
 	}
+
 	return $texte;
 }
 
