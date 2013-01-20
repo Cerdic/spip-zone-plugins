@@ -41,7 +41,7 @@ function spip_suggest_insert_head($flux) {
 	$flux .= '
 <script type="text/javascript">
 	$(document).ready(function(){
-$( "#recherche" ).autocomplete({
+$("#recherche").autocomplete({
       minLength: 0,
       source:"'.generer_url_public("suggest").'",
       position: { my : "left top", at: "left bottom", of: "#formulaire_recherche" },
@@ -54,12 +54,14 @@ $( "#recherche" ).autocomplete({
 		$("#formulaire_recherche form").submit();
         return false;
       }
-    }).data( "autocomplete" )._renderItem = function( ul, item ) {
+    });
+	var obj = $("#recherche").data("autocomplete");
+	obj && (obj._renderItem = function( ul, item ) {
       return $( "<li>" )
         .data( "item.autocomplete", item )
         .append( "<a>" + item.label + " (" + item.nb + ")</a>" )
         .appendTo( ul );
-    };
+    });
 });
 </script>';
 	return $flux;
