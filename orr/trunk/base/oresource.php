@@ -45,8 +45,6 @@ function oresource_declarer_tables_objets_sql($tables) {
 		'champs_versionnes' => array('orr_ressource_couleur'),
 		'rechercher_champs' => array("orr_ressource_nom" => 8),
 		'tables_jointures'  => array(),
-		
-
 	);
 
 	$tables['spip_orr_reservations'] = array(
@@ -69,20 +67,20 @@ function oresource_declarer_tables_objets_sql($tables) {
 		'champs_versionnes' => array(),
 		'rechercher_champs' => array("orr_reservation_nom" => 8, "orr_date_debut" => 5, "orr_date_fin" => 8),
 		'tables_jointures'  => array('spip_orr_reservations_liens'),
-		
-
 	);
     $tables['spip_orr_autorisations'] = array(
 		'type' => 'orr_autorisation',
 		'principale' => "oui", 
-		'table_objet_surnoms' => array('orrautorisation'), // table_objet('orr_') => 'orr_autorisations' 
+		'table_objet_surnoms' => array('orrautorisation'), // table_objet('orr_autorisation') => 'orr_autorisations' 
 		'field'=> array(
-			"id_orr_autorisation" => "bigint(21) NOT NULL",
-			"orr_type_objet"      => "varchar(25) NOT NULL DEFAULT ''",
-			"id_grappe"           => "bigint(21) NOT NULL",
-			"orr_statut"          => "varchar(25) NOT NULL DEFAULT ''",
-			"orr_droit"           => "varchar(25) NOT NULL DEFAULT ''",
-			"maj"                 => "TIMESTAMP"
+			"id_orr_autorisation"     => "bigint(21) NOT NULL",
+			"orr_type_objet"          => "varchar(25) NOT NULL DEFAULT ''",
+			"id_grappe"               => "bigint(21) ",
+			"orr_statut"              => "varchar(25)  DEFAULT ''",
+			"orr_droit"               => "varchar(25) NOT NULL DEFAULT ''",
+			"orr_autorisation_nom"    => "varchar(25) NOT NULL DEFAULT ''",
+			"orr_autorisation_valeur" => "varchar(25) NOT NULL DEFAULT ''",
+			"maj"                     => "TIMESTAMP"
 		),
 		'key' => array(
 			"PRIMARY KEY"        => "id_orr_autorisation",
@@ -92,10 +90,7 @@ function oresource_declarer_tables_objets_sql($tables) {
 		'champs_versionnes' => array(),
 		'rechercher_champs' => array("orr_statut" => 8),
 		'tables_jointures'  => array(),
-		
-
 	);
-
 	return $tables;
 }
 
@@ -129,7 +124,6 @@ function oresource_declarer_tables_auxiliaires($tables) {
 			"KEY id_orr_autorisation" => "id_orr_autorisation"
 		)
 	);
-
     	return $tables;
 }
 

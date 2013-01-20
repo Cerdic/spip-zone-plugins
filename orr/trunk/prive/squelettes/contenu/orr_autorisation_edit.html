@@ -1,4 +1,3 @@
-toto
 [(#ID_OBJET|oui)
 	[(#AUTORISER{modifier,orr_autorisation,#ID_ORR_AUTORISATION}|sinon_interdire_acces)]
 ][(#ID_OBJET|non)
@@ -17,14 +16,13 @@ toto
 		<h1>(#ENV{titre,#INFO_ORR_AUTORISATION_NOM{orr_autorisation,#ID_ORR_AUTORISATION}|sinon{<:info_sans_titre:>}})</h1>
 	]
 </div>
-coucou
 
 #SET{redirect,#ENV{redirect,#ID_ORR_AUTORISATION|generer_url_entite{orr_autorisation}}}
 [(#ENV{retourajax,''}|oui)
 	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 	<div class="ajax">
 ]
-bonjour
+
 		[(#FORMULAIRE_EDITER_ORR_AUTORISATION{#ENV{id_orr_autorisation,oui}, #GET{redirect}, #ENV{associer_objet}})]
 [(#ENV{retourajax,''}|oui)
 	</div>
