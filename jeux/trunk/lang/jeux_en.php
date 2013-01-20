@@ -23,9 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_donner_indices' => 'Afficher des indices',
 	'cfg_donner_reponse' => 'Display the answer',
 	'cfg_donner_solution' => 'Give the right answers',
-	'cfg_introduction' => 'Les paramètres regroupés ici correspondent à la configuration par défaut de l\'ensemble des jeux du site. Ils peuvent être surchargées au cas par cas grâce à la configuration interne des jeux (séparateur [config]).<br/><br/>Il est possible que certains jeux n\'utilisent pas certains des paramètres listés ci-dessous.', # MODIF
+	'cfg_introduction' => 'The parameters gathered here correspond to the default configuration for all games of the website. They can be overloaded one by one with the internal configuration of the games (separator [config]).<br/><br/>Some games might not use some parameters listed here.',
 	'cfg_scores' => 'Les scores du jeu',
-	'cfg_type_resultat' => 'Enregistrement des scores :', # MODIF
+	'cfg_type_resultat' => 'Scores recording :',
 	'colonne_n' => 'column @n@',
 	'configuration_jeux' => 'Configure the games',
 	'correction' => 'Correction:',
@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ligne_n' => 'row @n@',
 
 	// M
-	'modules_dispos' => 'Modules disponibles', # NEW
+	'modules_dispos' => 'Available add-ons',
 	'multi_jeux' => 'Multi Games',
 
 	// N
@@ -78,14 +78,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resultat' => 'Results',
 	'resultat2_' => 'Not defined ?',
 	'resultat2_aucun' => 'Pas d\'enregistrement',
-	'resultat2_defaut' => 'Selon la configuration générale du plugin', # MODIF
-	'resultat2_dernier' => 'Pour chaque auteur, le dernier résultat uniquement', # MODIF
-	'resultat2_meilleur' => 'Pour chaque auteur, le meilleur résultat uniquement', # MODIF
-	'resultat2_meilleurs' => 'L\'ensemble des meilleurs résultats', # MODIF
-	'resultat2_premier' => 'Pour chaque auteur, le premier résultat uniquement', # MODIF
+	'resultat2_defaut' => 'Depending on the general configuration of the plugin',
+	'resultat2_dernier' => 'For each author, the last result only',
+	'resultat2_meilleur' => 'For each author, the best result only',
+	'resultat2_meilleurs' => 'Best results set',
+	'resultat2_premier' => 'For each author, the first result only',
 	'resultat2_tous' => 'All the results',
 	'resultat_aucun' => 'Aucun',
-	'resultat_defaut' => 'Par défaut', # MODIF
+	'resultat_defaut' => 'By default',
 	'resultat_dernier' => 'Le dernier',
 	'resultat_meilleur' => 'Le meilleur',
 	'resultat_meilleurs' => 'Les meilleurs',
@@ -93,18 +93,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resultat_tous' => 'Tous',
 	'resultats' => 'Results',
 	'resultats_auteur' => 'Results of @nom@',
-	'resultats_jeu' => 'Les résultats du jeu numéro @id@ (@nom@)', # MODIF
-	'resultats_jeux' => 'Résultats des jeux', # NEW
+	'resultats_jeu' => 'The results of the game @id@ (@titre@)',
+	'resultats_jeux' => 'Game results',
 
 	// S
-	'sans_titre_prive' => 'Sans titre privé', # MODIF
+	'sans_titre_prive' => 'No private title',
 	'sans_type' => 'Sans type',
 	'score' => 'Score:',
 	'solution' => 'Solution',
 
 	// T
-	'titre_page_configurer_jeux' => 'Configuration du plugin jeux', # NEW
-	'total' => 'Total', # NEW
+	'titre_page_configurer_jeux' => 'Games plugin configuration',
+	'total' => 'Total',
 	'type_resultat' => 'Results type',
 
 	// U
@@ -114,7 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'verifier' => 'Check',
 	'verifier_validite' => 'Check the validity ',
-	'voir_auteur' => 'Voir l\'auteur', # NEW
+	'voir_auteur' => 'See the author',
 	'voir_jeu' => 'Voir le jeu',
 	'voir_resultats' => 'See the results',
 	'votre_choix' => 'Your answer: ',
