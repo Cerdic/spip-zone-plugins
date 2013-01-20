@@ -11,17 +11,19 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
+/*
 // Lien pour le comptage avant telechargement
 function generer_url_doc_compteur($id_document)
 {	return generer_url_action ('telecharger', "arg=$id_document", true);
 }
 
-/** Balise url vers telechargement du document */
+// Balise url vers telechargement du document 
 function balise_URL_DOC_COMPTEUR_dist($p) 
 {	$p->code = "generer_url_doc_compteur(" . champ_sql('id_document',$p) . ")";
 	$p->interdire_scripts = false;	
 	return $p;
 }
+*/
 
 // Compter les telechargements d'un document
 function anaclic_compter_document($id_document, $debut, $fin)
