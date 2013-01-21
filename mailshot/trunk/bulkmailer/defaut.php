@@ -45,6 +45,7 @@ function &bulkmailer_defaut_dist($to_send,$options=array()){
 
 	$defaut = array(
 		'filtre_images' => false,
+		'filtre_iso_8859' => false, // le passage en iso fait foirer les envois propres par smtp et mandrill
 	);
 	// envoyeur
 	if ($config['adresse_envoi']=='oui'){
