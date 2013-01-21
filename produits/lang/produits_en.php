@@ -8,11 +8,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'configurer_editer_ttc_explication' => 'Les prix des produits sont éditables en TTC et non plus en HT', # NEW
-	'configurer_editer_ttc_label' => 'Editer les produits en TTC', # NEW
-	'configurer_precision_ttc_explication' => 'Indiquer la précision d\'arrondi après la virgule pour les prix TTC (par défaut 2)', # NEW
-	'configurer_precision_ttc_label' => 'Précision sur les prix TTC', # NEW
-	'configurer_taxe_defaut_explication' => 'Saisir la taxe par défaut applicable aux produits sous la forme 0.196 pour une TVA à 19,6% par exemple (cette valeur peut être surchargée ensuite pour chaque produit). Attention cependant à ne pas configurer à nouveau cette taxe dans un autre plugin (Paypal par exemple), sinon laissez 0.', # NEW
+	'configurer_editer_ttc_explication' => 'Products prices are editable including ATI  and no longer ET',
+	'configurer_editer_ttc_label' => 'Edit products in ATI',
+	'configurer_precision_ttc_explication' => 'Indicate the precision rounding decimal places for the price ATI (default 2)',
+	'configurer_precision_ttc_label' => 'Detail about the ATI prices',
+	'configurer_taxe_defaut_explication' => 'Enter the default tax applicable to products such as 0.196 for a 19.6% ATI for example (this value can then be overloaded for each product).',
 	'configurer_taxe_defaut_label' => 'Default tax',
 	'configurer_titre' => 'Configuration of products',
 
@@ -22,16 +22,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_produits' => '@nb@ products',
 
 	// L
-	'limiter_ajout_explication' => 'Restreindre l\'ajout de produits à un ou plusieurs secteurs', # NEW
-	'limiter_ajout_label' => 'Limiter', # NEW
-	'limiter_ident_secteur_explication' => 'Choisir le ou les secteurs concernés', # NEW
-	'limiter_ident_secteur_label' => 'Choix', # NEW
+	'limiter_ajout_explication' => 'Restrict adding products to one or more area',
+	'limiter_ajout_label' => 'Limit',
+	'limiter_ident_secteur_explication' => 'Choose one or several concerned area',
+	'limiter_ident_secteur_label' => 'Choice',
 
 	// P
 	'produit_bouton_ajouter' => 'Add a product',
 	'produit_champ_descriptif_label' => 'Short description',
 	'produit_champ_prix_ht_label' => 'Duty-free price',
-	'produit_champ_prix_ttc_label' => 'Prix TTC', # NEW
+	'produit_champ_prix_ttc_label' => 'ATI Price',
 	'produit_champ_reference_label' => 'Reference',
 	'produit_champ_rubrique_label' => 'Section',
 	'produit_champ_taxe_explication' => 'Default value on this site: @taxe@. You can leave this field empty.',
@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'produits_titre' => 'Products',
 
 	// S
-	'secteurs_autorises' => 'Choisir une rubrique dans un des secteurs autorisés : @secteurs@' # NEW
+	'secteurs_autorises' => 'Choose a section from one of the authorized areas: @secteurs@'
 );
 
 ?>
