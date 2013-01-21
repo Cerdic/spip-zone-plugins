@@ -25,7 +25,7 @@
 		#SET{titre, #TITRE|sinon{#FICHIER|basename}|attribut_html}
 		<li>
 		<[(#HTML5|?{figure,div}) ]class="figure">
-		<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="album"[ class="(#EXPOSER)"] title="#GET{titre}">
+		<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="album#ID_ALBUM"[ class="(#EXPOSER)"] title="#GET{titre}">
 		[(#LOGO_DOCUMENT
 			|image_reduire{#ENV{largeur,0},#ENV{hauteur,85}}
 			|inserer_attribut{class,spip_logos}

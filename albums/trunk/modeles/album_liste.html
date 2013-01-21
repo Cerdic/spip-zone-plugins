@@ -23,7 +23,7 @@
 	#SET{titre, #TITRE|sinon{#FICHIER|basename}|attribut_html}
 	<tr>
 		<td>
-			<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="album" class="spip_doc[ (#EXTENSION|attribut_html)][ (#EXPOSER)]"  title="#GET{titre}">
+			<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="album#ID_ALBUM" class="spip_doc[ (#EXTENSION|attribut_html)][ (#EXPOSER)]"  title="#GET{titre}">
 			[(#LOGO_DOCUMENT{icone}
 				|image_reduire{32}
 				|inserer_attribut{alt,#GET{titre}}
