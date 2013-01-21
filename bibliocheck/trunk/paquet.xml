@@ -20,7 +20,7 @@
 	<pipeline nom="ieconfig_metas" inclure="bibliocheck_ieconfig.php" />
 	<pipeline nom="affiche_milieu" inclure="bibliocheck_pipelines.php" />
 	<pipeline nom="affiche_droite" inclure="bibliocheck_pipelines.php" />
-	<pipeline nom="autoriser" />
+	<pipeline nom="autoriser" inclure="bibliocheck_pipelines.php"/>
 	<pipeline nom="tickets_liste_tracker" inclure="bibliocheck_pipelines.php" />
 
 	<necessite nom="zotspip" />

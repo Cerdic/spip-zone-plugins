@@ -27,6 +27,9 @@ function bibliocheck_affiche_droite($flux) {
 	return $flux;
 }
 
+/* pour que le pipeline ne rale pas ! */
+function bibliocheck_autoriser(){}
+
 /**
  * Autorisation de vérifier les références biblio
   * 
