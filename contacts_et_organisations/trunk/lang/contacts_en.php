@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aucun_contact' => 'There is no contact !',
 	'aucune_organisation' => 'There is no organization',
-	'auteur_lie' => 'Id de l\'auteur lié', # NEW
+	'auteur_lie' => 'Id of the linked author',
 
 	// B
 	'bouton_contacts' => 'Contacts',
@@ -20,16 +20,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_repertoire' => 'Directory',
 
 	// C
-	'cfg_activer_squelettes_publics_zpip1' => 'Squelettes publics ZPIP v1', # NEW
-	'cfg_activer_squelettes_publics_zpip1_explication' => 'Activer les squelettes publics pour ZPIP en version 1,
-		permettant le parcourir les contacts et organisations dans l\'espace public ?', # NEW
-	'cfg_afficher_infos_sur_auteurs' => 'Affichage détaillé des auteurs ?', # NEW
-	'cfg_afficher_infos_sur_auteurs_explication' => 'Afficher les infos de contact ou d\'organisation
-		également sur les pages auteurs dans l\'espace privé ?', # NEW
-	'cfg_associer_aux_auteurs' => 'Associer aux auteurs ?', # NEW
-	'cfg_associer_aux_auteurs_explication' => 'Permettre d\'associer des contacts ou organisations
-		aux auteurs. Cela ajoute un formulaire pour associer un auteur sur les pages contact ou organisation,
-		et inversement cela ajoute un formulaire pour lier un contact ou une organisation sur les pages des auteurs.', # NEW
+	'cfg_activer_squelettes_publics_zpip1' => 'Public skeleton of ZPIP v1',
+	'cfg_activer_squelettes_publics_zpip1_explication' => 'Enable public skeletons for  ZPIP version 1, which allow to go to the contacts and organizations in the public space?',
+	'cfg_afficher_infos_sur_auteurs' => 'Detail display of the authors ?',
+	'cfg_afficher_infos_sur_auteurs_explication' => 'View contact infos or organization also on the authors pages in the private area?',
+	'cfg_associer_aux_auteurs' => 'Associate to the authors ?',
+	'cfg_associer_aux_auteurs_explication' => 'Allow to associate contacts or organizations to authors. This adds a form to associate an author on the contact pages or organization, and conversely it adds a form to link to a contact or an organization on the authors pages.',
 	'cfg_lier_organisations_rubriques' => 'Link to sections',
 	'cfg_lier_organisations_rubriques_explication' => 'Allow to link organizations to sections ?
 		This display the organization selector on sections and the section selector on organizations.',
@@ -80,10 +76,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_statut_juridique' => 'company, organisation, ...',
 	'explication_supprimer_contact' => 'Deleting this contact will remove all the additional informations which have been filled on the author page.',
 	'explication_supprimer_organisation' => 'Deleting this organization will remove all the additional informations which have been filled on the author page.',
-	'explications_page_contacts' => 'Page en cours de développement. <br /><br />Actions envisagées :<ul>
- <li>voir tous les contacts</li><li>transformer les auteurs en contacts</li><li>importer des contacts</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)', # NEW
-	'explications_page_organisations' => 'Page en cours de développement. <br /><br />Actions envisagées :<ul>
- <li>voir toutes les organisations</li><li>transformer des auteurs en organisations</li><li>importer des organsations</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)', # NEW
+	'explications_page_contacts' => 'Page under development. <br /><br /> Actions considered :
+<ul>
+  <li>see all contacts</ li>   <li>transform the authors in contacts</ li><li>import contacts </ li><li>...</ li> </ ul><br / > Thanks for your suggestions on <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">the forum</a> ;-)',
+	'explications_page_organisations' => 'Page under development. <br /><br /> Actions considered :
+<ul>
+<li>see all organizations</ li> <li>transform the authors in organizations</ li><li>import organizations </ li><li>...</ li> </ ul><br / > Thanks for your suggestions on <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">the forum</a> ;-)',
 
 	// I
 	'info_contacts_organisation' => 'Organisation\'s contacts',
