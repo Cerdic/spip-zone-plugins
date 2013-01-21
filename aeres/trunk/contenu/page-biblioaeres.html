@@ -6,6 +6,8 @@
 [(#CONFIG{aeres/debut}|non)<div class="aeres_info_erreur">ATTENTION : l'année de début n'est pas renseignée.</div>]
 [(#CONFIG{aeres/fin}|non)<div class="aeres_info_erreur">ATTENTION : l'année de fin n'est pas renseignée.</div>]
 
+<BOUCLE_si_autorise(CONDITION){si #AUTORISER{verifier,biblioaeres}}>
+
 <h2 class="h2">Bibliographie par auteur</h2>
 <div class="formulaire_spip">
 	<form method="get" action="spip.php"><div>
@@ -61,6 +63,7 @@
 	</form></div>
 </div>
 
+<BOUCLE_test_bibliounite(CONDITION){si {#AUTORISER{voir,bibliounite}}>
 <h2 class="h2">Bibliographie générale de l'unité</h2>
 <div class="formulaire_spip">
 	<div class="explication">Cette liste est restreinte aux publications des membres de l'unité. (Cette liste des membres est définie dans la configuration du plugin).</div>
@@ -85,16 +88,16 @@
 		<li>
 			<label for="compteur">Afficher le nombre de références de chaque type ?</label>
 			<select name="compteur" id="compteur">
-				<option value=""><:non:></option>
-				<option value="oui"><:oui:></option>
+				<option value=""><:item_non:></option>
+				<option value="oui"><:item_oui:></option>
 			</select>
 		</li>
-		[(#SESSION{statut}|=={0minirezo}|oui)
+		[(#AUTORISER{voir,statsaeres}|oui)
 		<li>
 			<label for="stats">Afficher les statistiques par auteur ?</label>
 			<select name="stats" id="stats">
-				<option value=""><:non:></option>
-				<option value="oui"><:oui:></option>
+				<option value=""><:item_non:></option>
+				<option value="oui"><:item_oui:></option>
 			</select>
 		</li>]
 		<li>
@@ -112,3 +115,14 @@
 	</p>
 	</form></div>
 </div>
+</BOUCLE_test_bibliounite>
+
+</BOUCLE_si_autorise>
+
+[(#SESSION|non)
+<p><:bibliocheck:connexion_requise:></p>
+#LOGIN_PUBLIC
+]
+[(#SESSION|oui)<p><:bibliocheck:droits_insuffisants:></p>]
+
+<//B_si_autorise>

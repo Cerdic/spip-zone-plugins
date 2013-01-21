@@ -10,9 +10,17 @@ function formulaires_configurer_aeres_charger_dist(){
 			'debut' => '',
 			'fin' => '',
 			'csl' => '',
-			'contact' => '',
 			'conference_actes' => '',
-			'format_docs' => ''
+			'titre_biblio_unite' => '',
+			'autorisation_verif_type' => '',
+			'autorisation_verif_statuts' => '',
+			'autorisation_verif_auteurs' => '',
+			'autorisation_biblio_unite_type' => '',
+			'autorisation_biblio_unite_statuts' => '',
+			'autorisation_biblio_unite_auteurs' => '',
+			'autorisation_stats_type' => '',
+			'autorisation_stats_statuts' => '',
+			'autorisation_stats_auteurs' => ''
 		);
 	
 	// Liste des membres
@@ -55,10 +63,18 @@ function formulaires_configurer_aeres_traiter_dist(){
 		'debut' => _request('debut'),
 		'fin' => _request('fin'),
 		'csl' => _request('csl'),
-		'contact' => _request('contact'),
 		'conference_actes' => _request('conference_actes'),
-		'format_docs' => _request('format_docs'),
-		'membres' => implode(";", $membres)
+		'titre_biblio_unite' => _request('titre_biblio_unite'),
+		'membres' => implode(";", $membres),
+		'autorisation_verif_type' => _request('autorisation_verif_type'),
+		'autorisation_verif_statuts' => _request('autorisation_verif_statuts'),
+		'autorisation_verif_auteurs' => _request('autorisation_verif_auteurs'),
+		'autorisation_biblio_unite_type' => _request('autorisation_biblio_unite_type'),
+		'autorisation_biblio_unite_statuts' => _request('autorisation_biblio_unite_statuts'),
+		'autorisation_biblio_unite_auteurs' => _request('autorisation_biblio_unite_auteurs'),
+		'autorisation_stats_type' => _request('autorisation_stats_type'),
+		'autorisation_stats_statuts' => _request('autorisation_stats_statuts'),
+		'autorisation_stats_auteurs' => _request('autorisation_stats_auteurs')
 	);
 	include_spip('inc/meta');
 	ecrire_meta('aeres',serialize($config));

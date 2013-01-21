@@ -8,18 +8,18 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 		<li class="editer_debut[(#ENV**{erreurs}|table_valeur{debut}|oui)erreur]">
-			<label>Année de début</label>
+			<label>AnnÃ©e de dÃ©but</label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{debut})</span>]
 			<input type="text" name="debut" class="text" value="#ENV*{debut}" id="debut" [(#HTML5|oui)required='required']/>
 		</li>
 		<li class="editer_fin[(#ENV**{erreurs}|table_valeur{fin}|oui)erreur]">
-			<label>Année de fin</label>
+			<label>AnnÃ©e de fin</label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fin})</span>]
 			<input type="text" name="fin" class="text" value="#ENV*{fin}" id="fin" [(#HTML5|oui)required='required']/>
 		</li>
 		<B_csl>
 		<li class="editer_csl[ (#ENV**{erreurs}|table_valeur{csl}|oui)erreur]">
-			<label for='csl'>Style CSL à utiliser</label>
+			<label for='csl'>Style CSL Ã  utiliser</label>
 			<select name="csl" id="csl">
 				<BOUCLE_csl(POUR){tableau #LISTER_CSL}{par valeur}>
 				<option value="#CLE"[(#ENV{csl}|=={#CLE}|oui)selected="selected"]>#VALEUR</option>
@@ -27,36 +27,30 @@
 			</select>
 		</li>
 		</B_csl>
-		<li class="editer_contact[(#ENV**{erreurs}|table_valeur{debut}|oui)erreur]">
-			<label>Email de contact</label>
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{contact})</span>]
-			<input type="text" name="contact" class="text" value="#ENV*{contact}" id="contact" />
-		</li>
 		<li class="editer_conference_actes[(#ENV**{erreurs}|table_valeur{conference_actes}|oui)erreur]">
 			<label>Articles de colloque avec publication dans des actes</label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{conference_actes})</span>]
 			<div class="choix">
 				<input type="radio" name="conference_actes" class="radio" id="conference_actes_cact" value="cact" [(#ENV{conference_actes}|=={cact}|oui) checked="checked"] />
-				<label for='conference_actes_cact'>Catégorie AERES autonome (C-ACT)</label>
+				<label for='conference_actes_cact'>CatÃ©gorie AERES autonome (C-ACT)</label>
 			</div>
 			<div class="choix">
 				<input type="radio" name="conference_actes" class="radio" id="conference_actes_ch" value="ch" [(#ENV{conference_actes}|=={ch}|oui) checked="checked"] />
-				<label for='conference_actes_ch'>Présentés avec les chapitres d'ouvrage (CH)</label>
+				<label for='conference_actes_ch'>PrÃ©sentÃ©s avec les chapitres d'ouvrage (CH)</label>
 			</div>
 		</li>
-		<li class="editer_format_docs[(#ENV**{erreurs}|table_valeur{format_docs}|oui)erreur]">
-			<label>Format des documents joints</label>
-			<p class="explication">Formats acceptés pour les documents joints à une demande de correction / d'ajout, séparés par une virgule et un espace. Laissez vide pour ne pas accepter l'ajout de document. Exemple : <em>txt, ris, bib, rdf, xml, doc, docx, odt, ppt, pptx, odp, pdf, html, jpg, png, gif</em></p>
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{format_docs})</span>]
-			<input type="text" name="format_docs" class="text" value="#ENV*{format_docs}" id="format_docs"/>
+		<li class="editer_titre_biblio_unite[(#ENV**{erreurs}|table_valeur{titre_biblio_unite}|oui)erreur]">
+			<label>Titre de la bibliographie de l'unitÃ©</label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre_biblio_unite})</span>]
+			<input type="text" name="titre_biblio_unite" class="text" value="#ENV*{titre_biblio_unite}" id="titre_biblio_unite" />
 		</li>
-		<li class="editer_membres[(#ENV**{erreurs}|table_valeur{membres}|oui)erreur]"">
-			<label>Membres de l'unité</label>
-			<p class="explication">Liste des auteurs à prendre en compte dans la bibliographie générale.</p>
+		<li class="editer_membres[(#ENV**{erreurs}|table_valeur{membres}|oui)erreur]">
+			<label>Membres de l'unitÃ©</label>
+			<p class="explication">Liste des auteurs Ã  prendre en compte dans la bibliographie gÃ©nÃ©rale.</p>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{format_docs})</span>]
 			<div style="float:left; width:49%; text-align:center; height:100%;">
 				<strong>Non-membres</strong>
-				<select multiple id="non_membres" name="non_membres[]" style="height:200px;" class="select">
+				<select multiple id="non_membres" name="non_membres[]" style="height:250px;" class="select">
 					<BOUCLE_non_membres(POUR){tableau #ENV{non_membres}}>
 					<option value="#VALEUR">#VALEUR</option>
 					</BOUCLE_non_membres>
@@ -65,13 +59,169 @@
 			</div>
 			<div style="float:right; width:49%; text-align:center; height:100%;">
 				<strong>Membres</strong>
-				<select multiple id="membres" name="membres[]" style="height:200px;" class="select">
+				<select multiple id="membres" name="membres[]" style="height:250px;" class="select">
 					<BOUCLE_membres(POUR){tableau #ENV{membres}}>
 					<option value="#VALEUR">#VALEUR</option>
 					</BOUCLE_membres>
 				</select>
 				<a href="#" id="retirer_membre">&lt;&lt; Retirer</a>
 			 </div> 
+		</li>
+		<li class="fieldset">
+			<fieldset>
+				<h3 class="legend">Qui peut vÃ©rifier les rÃ©fÃ©rences (via la page â€˜biblioaeresâ€™) ?</h3>
+				<ul>
+				[(#REM) <!-- Choix de la methode d'autorisation --> ]
+					[(#SAISIE{radio, autorisation_verif_type,
+						label=<:tickets:cfg_lbl_type_autorisation:>,
+						explication=<:tickets:cfg_inf_type_autorisation:>,
+						datas=#ARRAY{
+							webmestre,<:tickets:cfg_lbl_autorisation_webmestre:>,
+							par_statut,<:tickets:cfg_lbl_autorisation_statuts:>,
+							par_auteur,<:tickets:cfg_lbl_autorisation_auteurs:>},
+						defaut=webmestre})]
+				</ul>
+				[(#REM) <!-- Methode par statut d'auteurs (choix multiple) --> ]
+				<ul id="autorisation_verif_bloc_par_statut" class="autorisation_verif_bloc">
+					[(#SAISIE{statuts_auteurs,autorisation_verif_statuts,
+						label=<:tickets:cfg_lbl_statuts_auteurs:>,
+						afficher_tous=oui,
+						multiple=oui})]
+				</ul>
+				[(#REM) <!-- Methode par id d'auteurs (choix multiple) --> ]
+				<ul id="autorisation_verif_bloc_par_auteur" class="autorisation_verif_bloc">
+					[(#SAISIE{auteurs,autorisation_verif_auteurs,
+						label=<:tickets:cfg_lbl_liste_auteurs:>,
+						multiple=oui,
+						option_statut=oui})]
+				</ul>
+			</fieldset>
+			<script type="text/javascript">
+			//<![CDATA[
+				jQuery(document).ready(function() {
+					// on cache tous les blocs du meme prefixe
+					jQuery(".autorisation_verif_bloc").not('.visible').hide();
+					//on recupere la valeur de celui qui est deja selectionne
+					var checked = jQuery("input[name='autorisation_verif_type']:checked").val();
+					// pour l'afficher
+					jQuery("#autorisation_verif_bloc_"+checked).show();
+					// si une checkbox change
+					jQuery("input[name='autorisation_verif_type']").change(function() {
+						var inputval = $(this).val();
+						// on cache tous les blocs du meme prefixe
+						jQuery(".autorisation_verif_bloc").fadeOut('slow',function(){
+							// pour afficher celui qui correspond a la checkbox selectionnee
+							jQuery("#autorisation_verif_bloc_"+inputval).fadeIn();
+						});
+						jQuery(this).blur();
+					});
+				});
+			//]]>
+			</script>
+		</li>
+		<li class="fieldset">
+			<fieldset>
+				<h3 class="legend">Qui peut voir la bibliographie gÃ©nÃ©rale de lâ€™unitÃ© (page â€˜biblioaeres_uniteâ€™)Â ?</h3>
+				<ul>
+				[(#REM) <!-- Choix de la methode d'autorisation --> ]
+					[(#SAISIE{radio, autorisation_biblio_unite_type,
+						label=<:tickets:cfg_lbl_type_autorisation:>,
+						explication=<:tickets:cfg_inf_type_autorisation:>,
+						datas=#ARRAY{
+							webmestre,<:tickets:cfg_lbl_autorisation_webmestre:>,
+							par_statut,<:tickets:cfg_lbl_autorisation_statuts:>,
+							par_auteur,<:tickets:cfg_lbl_autorisation_auteurs:>},
+						defaut=webmestre})]
+				</ul>
+				[(#REM) <!-- Methode par statut d'auteurs (choix multiple) --> ]
+				<ul id="autorisation_biblio_unite_bloc_par_statut" class="autorisation_biblio_unite_bloc">
+					[(#SAISIE{statuts_auteurs,autorisation_biblio_unite_statuts,
+						label=<:tickets:cfg_lbl_statuts_auteurs:>,
+						afficher_tous=oui,
+						multiple=oui})]
+				</ul>
+				[(#REM) <!-- Methode par id d'auteurs (choix multiple) --> ]
+				<ul id="autorisation_biblio_unite_bloc_par_auteur" class="autorisation_biblio_unite_bloc">
+					[(#SAISIE{auteurs,autorisation_biblio_unite_auteurs,
+						label=<:tickets:cfg_lbl_liste_auteurs:>,
+						multiple=oui,
+						option_statut=oui})]
+				</ul>
+			</fieldset>
+			<script type="text/javascript">
+			//<![CDATA[
+				jQuery(document).ready(function() {
+					// on cache tous les blocs du meme prefixe
+					jQuery(".autorisation_biblio_unite_bloc").not('.visible').hide();
+					//on recupere la valeur de celui qui est deja selectionne
+					var checked = jQuery("input[name='autorisation_biblio_unite_type']:checked").val();
+					// pour l'afficher
+					jQuery("#autorisation_biblio_unite_bloc_"+checked).show();
+					// si une checkbox change
+					jQuery("input[name='autorisation_biblio_unite_type']").change(function() {
+						var inputval = $(this).val();
+						// on cache tous les blocs du meme prefixe
+						jQuery(".autorisation_biblio_unite_bloc").fadeOut('slow',function(){
+							// pour afficher celui qui correspond a la checkbox selectionnee
+							jQuery("#autorisation_biblio_unite_bloc_"+inputval).fadeIn();
+						});
+						jQuery(this).blur();
+					});
+				});
+			//]]>
+			</script>
+		</li>
+		<li class="fieldset">
+			<fieldset>
+				<h3 class="legend">Qui peut voir les statistiques par auteurÂ ?</h3>
+				<ul>
+				[(#REM) <!-- Choix de la methode d'autorisation --> ]
+					[(#SAISIE{radio, autorisation_stats_type,
+						label=<:tickets:cfg_lbl_type_autorisation:>,
+						explication=<:tickets:cfg_inf_type_autorisation:>,
+						datas=#ARRAY{
+							webmestre,<:tickets:cfg_lbl_autorisation_webmestre:>,
+							par_statut,<:tickets:cfg_lbl_autorisation_statuts:>,
+							par_auteur,<:tickets:cfg_lbl_autorisation_auteurs:>},
+						defaut=webmestre})]
+				</ul>
+				[(#REM) <!-- Methode par statut d'auteurs (choix multiple) --> ]
+				<ul id="autorisation_stats_bloc_par_statut" class="autorisation_stats_bloc">
+					[(#SAISIE{statuts_auteurs,autorisation_stats_statuts,
+						label=<:tickets:cfg_lbl_statuts_auteurs:>,
+						afficher_tous=oui,
+						multiple=oui})]
+				</ul>
+				[(#REM) <!-- Methode par id d'auteurs (choix multiple) --> ]
+				<ul id="autorisation_stats_bloc_par_auteur" class="autorisation_stats_bloc">
+					[(#SAISIE{auteurs,autorisation_stats_auteurs,
+						label=<:tickets:cfg_lbl_liste_auteurs:>,
+						multiple=oui,
+						option_statut=oui})]
+				</ul>
+			</fieldset>
+			<script type="text/javascript">
+			//<![CDATA[
+				jQuery(document).ready(function() {
+					// on cache tous les blocs du meme prefixe
+					jQuery(".autorisation_stats_bloc").not('.visible').hide();
+					//on recupere la valeur de celui qui est deja selectionne
+					var checked = jQuery("input[name='autorisation_stats_type']:checked").val();
+					// pour l'afficher
+					jQuery("#autorisation_stats_bloc_"+checked).show();
+					// si une checkbox change
+					jQuery("input[name='autorisation_stats_type']").change(function() {
+						var inputval = $(this).val();
+						// on cache tous les blocs du meme prefixe
+						jQuery(".autorisation_stats_bloc").fadeOut('slow',function(){
+							// pour afficher celui qui correspond a la checkbox selectionnee
+							jQuery("#autorisation_stats_bloc_"+inputval).fadeIn();
+						});
+						jQuery(this).blur();
+					});
+				});
+			//]]>
+			</script>
 		</li>
 		</ul>
 		<p class='boutons'><span class='image_loading'>&nbsp;</span>
@@ -81,10 +231,6 @@
 </div>
 <script type="text/javascript">// <![CDATA[
 $(document).ready(function(){
-	$( ".editer_membres" ).resizable({
-		handles: "s, se",
-		alsoResize: "#membres, #non_membres",
-	});
 	$('#ajouter_membre').click(function() {
 		return !$('#non_membres option:selected').remove().appendTo('#membres');
 	});
