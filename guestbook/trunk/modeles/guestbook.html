@@ -1,14 +1,11 @@
 [(#ENV{form_pos}|=={haut}|oui)
-	<h2>Formulaire du Livre d'Or</h2>
-	#FORMULAIRE_GUESTBOOKSIGN
+	<INCLURE{fond=inc/inc-guestbooksign,env,ajax}>
 ]
 <h2><:guestbook:titre_messages_livredor:></h2>
 <div class='ajax'>
 	<INCLURE{fond=inc/inc-guestbookmessages,env,ajax}>
 </div>
 
-[(#ENV{form_pos}|=={non}|non)
-	[(#ENV{form_pos}|=={haut}|non)
-		<h2><:guestbook:titre_formulaire_livredor:></h2>
-		#FORMULAIRE_GUESTBOOKSIGN
-]]
+[(#ENV{form_pos}|!={non}|et{#ENV{form_pos}|!={haut}}|oui)
+	<INCLURE{fond=inc/inc-guestbooksign,env,ajax}>
+]
