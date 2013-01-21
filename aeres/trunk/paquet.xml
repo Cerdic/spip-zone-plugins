@@ -19,7 +19,7 @@
 	<pipeline nom="ieconfig_metas" inclure="aeres_ieconfig.php" />
 	<pipeline nom="affiche_milieu" inclure="aeres_pipelines.php" />
 	<pipeline nom="affiche_droite" inclure="aeres_pipelines.php" />
-	<pipeline nom="autoriser" inclure="aeres_pipelines.php" 
+	<pipeline nom="autoriser" inclure="aeres_pipelines.php" />
 
 	<necessite nom="zotspip" />
 	<necessite nom="bibliocheck" />
