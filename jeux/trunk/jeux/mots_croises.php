@@ -24,6 +24,7 @@ parametres de configurations par defaut :
 	type=0			// types de grilles : 0 ou 1
     vertical=chiffres // on met des chiffres en vertical
     horizontal=lettres // on met des lettres en horizontal
+	alphabet=latin1 // Utiliser un alphabet latin simple
 Exemple de syntaxe dans l'article :
 -----------------------------------
 
@@ -48,8 +49,8 @@ Exemple de syntaxe dans l'article :
 
 // retourne la lettre correspondant au chiffre
 function lettre_grille($chiffre) {
-	$alphabet = _T('jeux:alphabet');
-	return $alphabet[$chiffre-1];
+	$alphabet = jeux_alphabet(jeux_config('alphabet'));
+	return $chiffre<=count($alphabet)?$alphabet[$chiffre - 1]:'?';
 }
 
 // affiche la grille de mot croises, avec la solution au cas ou
@@ -175,10 +176,12 @@ function calcul_erreurs_grille($solution, $indexJeux) {
 
 // retourne une liste compactee alphabetique ou numerique
 function jeux_listes_compacte($texte, $alpha) {
-	$tableau = preg_split("/[\r\n]+/", trim($texte));	
-	$tableau2 = array(); $i=0; $a=_T('jeux:alphabet');
+	$tableau = preg_split("/[\r\n]+/", trim($texte));
+	$tableau2 = array(); $i = 0; 
+	$a = jeux_alphabet(jeux_config('alphabet'));
+	$n = count($a);
 	foreach ($tableau as $i=>$valeur) if (($valeur=trim($valeur))!='') {
-		$c=$alpha?$a[$i]:$i+1;
+		$c = $alpha?($i>=$n?'?':$a[$i]):$i+1;
 		if ($valeur[strlen($valeur)-1]!='.') $valeur.='.';
 		if ($valeur!='-.') $tableau2[] = "<strong>$c.</strong>&nbsp;$valeur";
 	}
@@ -187,12 +190,12 @@ function jeux_listes_compacte($texte, $alpha) {
 
 // definitions des mots croises
 function affichage_definitions($horizontal, $vertical) {
- if (jeux_config('compact')) return 
+    if (jeux_config('compact')) return 
  		'<p><strong>'._T('motscroises:horizontalement').'&nbsp;</strong>'
 		.jeux_listes_compacte($horizontal, jeux_config('horizontal')=='lettres') 
  		.'<br /><strong>'._T('motscroises:verticalement').'&nbsp;</strong>'
 		.jeux_listes_compacte($vertical, jeux_config('vertical')=='lettres').'</p>';
- else
+
     $liste_horizontal = jeux_config('horizontal')=='chiffres'?'<div class="spip jeux_horizontal jeux_liste_chiffres">':'<div class="spip jeux_horizontal jeux_liste_lettres">';
     
     $liste_horizontal .= '<h4 class="spip jeux_grille">'
@@ -213,6 +216,7 @@ function jeux_mots_croises_init() {
 		type=0			// types de grilles : 0 ou 1
 		vertical=chiffres // on met des chiffres en vertical
 		horizontal=lettres // on met des lettres en horizontal
+		alphabet=latin1 // Utiliser un alphabet latin simple
 	";
 }
 	

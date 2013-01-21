@@ -1,10 +1,10 @@
-<?php
+﻿<?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 #---------------------------------------------------#
 #  Plugin  : Jeux                                   #
 #  Auteur  : Patrice Vanneufville, 2006             #
 #  Gestion des scores : Maieul Rouquette, 2007      #
-#  Contact : patrice�.!vanneufville�@!laposte�.!net #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
 #  Licence : GPL                                    #
 #--------------------------------------------------------------------------#
 #  Documentation : http://www.spip-contrib.net/Des-jeux-dans-vos-articles  #
@@ -159,5 +159,33 @@ $jeux_couleurs = array(
 );
 
 global $scoreMULTIJEUX; $scoreMULTIJEUX = array();
+
+// renvoie un tableau de lettres
+function jeux_alphabet($alphabet = 'latin1', $br = false) {
+	// surcharge ou extension eventuelle par constante. Ex: define('jeux_alphabet_voyelles', 'A,E,I,O,U');
+	if(defined($a='jeux_alphabet_'.$alphabet)) $res = constant($a);
+	// quelques alphabets connus (a completer ?)
+	// le retour a la ligne est une double virgule
+	else switch($alphabet) {
+		case 'latin1' : $res = 'A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,-'; break;
+		case 'latinbr' : $res = 'A,B,C,D,,E,F,G,H,I,,J,K,L,M,N,,O,P,Q,R,S,,T,U,V,W,X,,Y,Z,-'; break;
+		case 'azerty1' : $res = 'A,Z,E,R,T,Y,U,I,O,P,,Q,S,D,F,G,H,J,K,L,M,,W,X,C,V,B,N'; break;
+		case 'azerty2' : $res = 'A,Z,E,R,T,Y,U,I,O,P,,Q,S,D,F,G,H,J,K,L,M,,W,X,C,V,B,N,-'; break;
+		case 'qwerty1' : $res = 'Q,W,E,R,T,Y,U,I,O,P,,A,S,D,F,G,H,J,K,L,,Z,X,C,V,B,N,M'; break;
+		case 'qwerty2' : $res = 'Q,W,E,R,T,Y,U,I,O,P,,A,S,D,F,G,H,J,K,L,,Z,X,C,V,B,N,M,-'; break;
+		case 'qwerty3' : $res = 'Q,W,E,R,T,Y,U,I,O,P,,A,S,D,F,G,H,J,K,L,Ñ,,Z,X,C,V,B,N,M,-'; break;
+		case 'español1' : $res = 'A,B,C,D,E,F,G,H,I,J,K,L,M,N,Ñ,O,P,Q,R,S,T,U,V,W,X,Y,Z,-'; break;
+		case 'español2' : $res = 'A,B,C,D,E,F,G,H,I,J,K,L,M,N,Ñ,O,P,Q,R,S,T,U,V,W,X,Y,Z,Á,É,Í,Ó,Ú,-'; break;
+		case 'cyrillic1': $res = 'А,Б,В,Г,Д,Е,Ё,Ж,З,И,Й,К,Л,М,Н,О,П,Р,С,Т,У,Ф,Х,Ц,Ч,Ш,Щ,Ъ,Ь,Ы,Э,Ю,Я'; break;
+		// permet de retourner eventuellement un alphabet perso. Ex: jeux_alphabet('A,E,I,O,U')
+		default: $res = $alphabet;
+	}
+ 	// mb_regex_encoding('UTF-8'); return mb_split(',', $res);
+	if(!$br) return preg_split('/,+/u', $res);
+	$res = preg_split('/,,/u', $res);
+	foreach($res as $i=>$v) $res[$i] = preg_split('/,/u', $v);
+	return $res;
+}
+
 
 ?>

@@ -1,9 +1,9 @@
-<?php
+ï»¿<?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 #---------------------------------------------------#
 #  Plugin  : jeux                                   #
 #  Auteur  : Patrice Vanneufville, 2006             #
-#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
+#  Contact : patriceÂ¡.!vanneufvilleÂ¡@!laposteÂ¡.!net #
 #  Licence : GPL                                    #
 #--------------------------------------------------------------------------#
 #  Documentation : http://www.spip-contrib.net/Des-jeux-dans-vos-articles  #
@@ -18,6 +18,7 @@ parametres de configurations par defaut :
 	pendu=1		// dessin du pendu a utiliser (voir : /jeux/img/pendu?)
 	regle=non	// Afficher la regle du jeu ?
 	indices=non // Afficher les premieres et dernieres lettres?
+	alphabet=latin1 // Utiliser un clavier latin simple
 
 Regles du jeu :
 - Vous devez choisir une lettre a chaque essai.
@@ -38,6 +39,7 @@ Exemple de syntaxe dans l'article :
 </jeux>
 
 */
+
 // fonctions d'affichage
 function pendu_titre($texte) {
  return $texte?"<div class=\"jeux_titre pendu_titre\">$texte</div>":'';
@@ -63,16 +65,22 @@ function pendu_pendu($js, $indexJeux) {
 
  return '<table class="pendu" border=0><tr><td align="center">'
  	. "<div align=\"center\"><div class=\"pendu_images\" align=center>$images</div><br/>\n$proposition</div></td>"
-	. "<td width=\"20\">&nbsp;</td><td valign=\"bottom\">\n" . affiche_un_clavier($indexJeux) . '<br/></td></tr>'
-	. "<tr><td colspan=\"3\" align=\"right\">$reset</td></tr></table>\n"
+	. "<td width=\"20\">&nbsp;</td><td valign=\"bottom\">\n" 
+	. (function_exists('affiche_un_clavier')?affiche_un_clavier($indexJeux):affiche_un_clavier_dist($indexJeux)) 
+	. "<br/></td></tr><tr><td colspan=\"3\" align=\"right\">$reset</td></tr></table>\n"
  	. $regles . $js;
 }
 
-function affiche_un_clavier($indexJeux) {
- $clav = preg_split('//', _T('jeux:alphabet'), -1, PREG_SPLIT_NO_EMPTY);
- foreach ($clav as $i=>$lettre) $clav[$i] = "<input class=\"jeux_bouton pendu_clavier\" type=\"button\" name=\"$lettre\" value=\"$lettre\" onclick=\"pendu_trouve('$lettre', '$indexJeux');\">";
- $i = floor(count($clav)/2);
- $clav = join('', array_slice($clav, 0, $i)) . "<br />\n" . join('', array_slice($clav, $i));
+// fonction surchargeable par la presence dans config/mes_options.php de : function affiche_un_clavier($indexJeux)
+function affiche_un_clavier_dist($indexJeux, $alphabet=false) {
+ if(!$alphabet) $alphabet = jeux_config('alphabet');
+ // appel d'un clavier multiligne
+ foreach (jeux_alphabet($alphabet, true) as $r=>$ligne) {
+	 foreach ($ligne as $i=>$lettre)
+	 	$ligne[$i] = "<input class=\"jeux_bouton pendu_clavier\" type=\"button\" name=\"$lettre\" value=\"$lettre\" onclick=\"pendu_trouve('$lettre', '$indexJeux');\">";
+	$clav[$r] = join($ligne);
+ }
+ $clav = join("<br />\n", $clav);
  return "\n<table class=\"pendu_clavier\" border=0><tr><td class=\"pendu_clavier\" >$clav</td></tr></table>";
 }
 
@@ -82,6 +90,7 @@ function jeux_pendu_init() {
 		pendu=1		// dessin du pendu a utiliser dans : /jeux/img/pendu?
 		regle=non	// Afficher la regle du jeu ?
 		indices=non // Afficher les premieres et dernieres lettres?
+		alphabet=latin1 // Utiliser un clavier latin simple
 	";
 }
 
