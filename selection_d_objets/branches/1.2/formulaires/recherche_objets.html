@@ -1,0 +1,40 @@
+ <div class="formulaire_spip formulaire_bouton_objet ajax" id="formulaire_bouton_objet_#OBJET_DEST">
+        <form action="#ENV{action}" method="post"><div>
+            #ACTION_FORMULAIRE{#ENV{action}}
+        <ul>
+            [(#SAISIE{input,objet_sel,
+                    label=<:selection_objet:ajouter_objet:> [(#GET{objets}|table_valeur{#VALEUR})]})]
+            [(#SAISIE{selection,type_lien,
+                    label=<:selection_objet:selection_type_lien:> [(#GET{objets}|table_valeur{#VALEUR})],
+                    datas=#ENV{types_lien}})]
+        </ul>
+        <p class="boutons">
+         <input type="submit" name="ok" class="submit" value="ok"  />
+        </p>       
+        </div>
+        </form>
+</div>   
+
+[(#REM)autocomplete recherche]
+<script type="text/javascript" >
+    $(function() {
+        $( "#champ_objet_sel" ).autocomplete({
+                source: "[(#URL_PAGE{recherche_objet})]",
+                dataType: 'json',
+                minLength: 2,
+                autoFocus: true,
+                select: function(event, ui) {
+                    //assign value back to the form element
+                    if(ui.item){
+                      $(event.target).val(ui.item.value);
+                    }
+                    //submit the form
+                    $(event.target.form).submit();
+                    $(window).load(function(){
+                    $('#dvLoading').fadeOut(2000);
+                    });
+                     ajaxReload('tableau_so', {});
+                }
+          });
+    });
+  </script> 

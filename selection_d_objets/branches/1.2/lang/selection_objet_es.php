@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_selection_objets_cible' => 'Les objets cibles ou pourront être affichés les objets sélectionnés', # NEW
+	'explication_selection_type_liens' => 'Vous pouvez définir des types de relations : indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par défaut. La description peut être une chaîne de langue.', # NEW
 
 	// I
 	'icone_creer_selection_objet' => 'Seleccionar un objet',
@@ -36,7 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'objet_destination_choisis' => 'Destinación/ones seleccionada(s):',
-	'objets_cible_dispos' => 'Les Objets Cible disponibles', # NEW
+	'objets_cible' => 'Les Objets Cible', # NEW
+	'objets_selection' => 'Les Objets Sélection', # NEW
 
 	// R
 	'racine' => 'Raíz',
@@ -50,6 +52,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'selection_objet_cible_titre' => 'Selection d\'objets cibles', # NEW
 	'selection_objets_pour' => 'Selección objetos para:',
 	'selection_rubrique_objet' => 'Objetos que pueden ser seleccionados',
+	'selection_type_lien' => 'Type lien', # NEW
+	'selection_type_liens' => 'Définition de type de liens', # NEW
+	'selectione' => 'Sélectionné :', # NEW
 
 	// T
 	'texte_ajouter_objet' => 'Seleccionar un objeto',
@@ -58,7 +63,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_langue_objet' => 'Idioma de este objeto seccionado',
 	'titre_logo_selection_objet' => 'Logo de este objeto seleccionado',
 	'titre_selection_objets' => 'Objeto seleccionado',
-	'titre_selection_objets_rubrique' => 'Objetos seleccionados de la sección'
+	'titre_selection_objets_rubrique' => 'Objetos seleccionados de la sección',
+	'type_liens_defaut' => 'utilisable pour tous les objets cibles. Pour chaque objet peuvent être définies des types de lien spécifique', # NEW
+	'type_liens_surcharge' => 'surcharge les types de lien par défaut' # NEW
 );
 
 ?>

@@ -1,0 +1,4 @@
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
+#SET{objets,#CONFIG{selection_objet/selection_rubrique_objet}}
+#SET{donnees,#ARRAY}
+<BOUCLE_objets(DATA){source tableau,#GET{objets}}>[(#SET{donnees,#GET{donnees}|array_merge{#VALEUR|tableau_recherche_objet}})]</BOUCLE_objets>[(#GET{donnees}|json_encode)]

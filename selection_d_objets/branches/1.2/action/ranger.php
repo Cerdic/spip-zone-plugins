@@ -1,13 +1,18 @@
 <?php
 
-function action_ranger_dist(){
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function action_ranger_dist($arg=null){
+    if (is_null($arg)){
+        $securiser_action = charger_fonction('securiser_action', 'inc');
+        $arg = $securiser_action();
+    }    
+    
 	include_spip("inc/autoriser");
 	include_spip("inc/config");
 
 
-    
-  
-	list($action,$lang,$id_objet,$objet,$objet_dest,$id_objet_dest,$load)=explode('-',_request('arg'));
+	list($action,$lang,$id_objet,$objet,$objet_dest,$id_objet_dest,$load)=explode('-',$arg);
 
 	if ($action=="supprimer_ordre") {
 	    $verifier_ordre=charger_fonction('verifier_ordre','inc');

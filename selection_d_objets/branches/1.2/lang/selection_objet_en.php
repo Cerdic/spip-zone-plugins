@@ -15,7 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurations' => 'Configurations',
 
 	// E
-	'explication_selection_objets_cible' => 'Les objets cibles ou pourront être affichés les objets sélectionnés', # NEW
+	'explication_selection_objets_cible' => 'The target objects where can be displayed the selected objects',
+	'explication_selection_type_liens' => 'You can define types of relationships: please indicate one per line, followed by a comma and a description. A blank line for the default value. The description can be a chain of language.',
 
 	// I
 	'icone_creer_selection_objet' => 'Select an object',
@@ -36,7 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'objet_destination_choisis' => 'Selected destination(s):',
-	'objets_cible_dispos' => 'Les Objets Cible disponibles', # NEW
+	'objets_cible' => 'The target objects',
+	'objets_selection' => 'Les Objets Sélection', # NEW
 
 	// R
 	'racine' => 'Root',
@@ -45,11 +47,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubriques_choisis' => 'Selected sections:',
 
 	// S
-	'selection_cible' => 'Seléction des cibles pour', # NEW
+	'selection_cible' => 'Target selection for',
 	'selection_objet' => 'Selection',
-	'selection_objet_cible_titre' => 'Selection d\'objets cibles', # NEW
+	'selection_objet_cible_titre' => 'Selection of target objects',
 	'selection_objets_pour' => 'Object selection for',
 	'selection_rubrique_objet' => 'Objects that can be selected',
+	'selection_type_lien' => 'Link type',
+	'selection_type_liens' => 'Links type definition',
+	'selectione' => 'Selected :',
 
 	// T
 	'texte_ajouter_objet' => 'Select an object',
@@ -58,7 +63,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_langue_objet' => 'Language of this Selected Object',
 	'titre_logo_selection_objet' => 'Logo of this Selected Object',
 	'titre_selection_objets' => 'Selected Object',
-	'titre_selection_objets_rubrique' => 'Selected Objects of the section'
+	'titre_selection_objets_rubrique' => 'Selected Objects of the section',
+	'type_liens_defaut' => 'can be used for all target objects. For each object can be defined specific link types',
+	'type_liens_surcharge' => 'overload the default link types'
 );
 
 ?>

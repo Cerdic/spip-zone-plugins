@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'affichage_section' => 'Afficher dans :',
 	'ajouter_lien_objet' => 'Sélectionner cet objet',
+	'ajouter_objet' => 'Ajoutez un objet',	
 
 	// C
 	'configurations' => 'Configurations',

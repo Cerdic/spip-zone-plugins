@@ -117,6 +117,11 @@ function selection_objet_formulaire_traiter($flux){
     return $flux;
 }
 
+function selection_objet_jqueryui_plugins($scripts){
+   $scripts[] = 'jquery.ui.autocomplete';
+   return $scripts;
+}
+
 function types_liaisons2array($type){
     $tableau    = array();
     $lignes     = explode("\n",$type);
@@ -130,5 +135,4 @@ function types_liaisons2array($type){
 
     return $tableau;
 }
-
 ?>

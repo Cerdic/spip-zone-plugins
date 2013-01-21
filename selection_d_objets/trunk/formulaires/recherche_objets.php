@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang='',$objet_dest='rubrique') {
+function formulaires_recherche_objets_charger_dist($objet_dest='rubrique',$id_objet_dest,$lang='') {
     include_spip('inc/config');
     //Les objets destinataires choisies
      $special=array('article','rubrique');
@@ -54,7 +54,8 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
         "table_dest"=>$table_dest,	
         "titre_objet_dest"=>$titre_objet_dest,
         'objets_choisies'=>$objets_choisies,
-        'types_lien' =>$types_lien,      	 		
+        'types_lien' =>$types_lien, 
+        'objet_sel' =>'',              	 		
         );
         
     $valeurs['_hidden'] .= "<input type='hidden' name='id_objet' value='$id_objet' />";
@@ -70,18 +71,16 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
 
 
 /* @annotation: Actualisation de la base de donnée */
-function formulaires_bouton_objet_traiter_dist($id_objet,$objet,$langue,$lang='',$objet_dest='rubrique'){
-
-    $valeurs=array();
-    $id_objet_dest=_request('id_objet_dest');
+function formulaires_recherche_objets_traiter_dist($objet_dest='rubrique',$id_objet_dest,$lang=''){
+    $type_lien=_request('type_lien');    
+        
     $instituer_objet=charger_fonction('instituer_objet_selectionne','action/');
-    $objet_dest=_request('objet_dest');
-    $type_lien=_request('type_lien');
-
-
+    
+    list($id_objet,$objet)=explode('-',_request('objet_sel'));
+    
     $id_selection_objet=$instituer_objet($id_objet.'-'.$objet.'-'.$langue.'-'.$lang.'-'.$objet_dest.'-'.$id_objet_dest.'-'.$type_lien);
-
-	if($id_selection_objet)$valeurs['message_ok']='ok';
+    
+    if($id_selection_objet)$valeurs['message_ok']='ok';
 
 return $valeurs;
 	

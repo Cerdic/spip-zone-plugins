@@ -33,7 +33,7 @@ function filtrer_champ($data){
 /* Fournit les champs désirés d'un objet donné */
 function info_objet($objet,$id_objet='',$champs='*',$where=array()){
 	include_spip('inc/filtres');
-    
+
     //Les tables non conforme
     $exceptions=charger_fonction('exceptions','inc');
     $exception_objet=$exceptions('objet');
@@ -47,14 +47,14 @@ function info_objet($objet,$id_objet='',$champs='*',$where=array()){
     if($id_objet){
         if(!$where)$where=array('id_'.$objet.'='.$id_objet);  
     	if($champs=='*')$data=sql_fetsel($champs,$table,$where);
-        else $data=sql_getfetsel($champs,'spip_'.$objet.'s',$where);
+        else $data=sql_getfetsel($champs,$table,$where);
         $data=filtrer_champ($data);
         }
     else{
         $data=array();
         $sql=sql_select($champs,$table,$where);
-        
         while($d = sql_fetch($sql)){
+            
             if($d)$data[$d['id_'.$objet]]=filtrer_champ($d);
             }
         }
@@ -118,8 +118,8 @@ function generer_modele($id_objet,$objet='article',$fichier='modeles_selection_o
     if(!$where)$where='id_'.$objet.'='.$id_objet;
     
     $contexte=sql_fetsel('*','spip_'.$objet.'s',$where);
-    $cont=calculer_contexte();
-    if(is_array($env))$contexte= array_merge($contexte,$env,$cont);
+
+    if(is_array($env))$contexte= array_merge($contexte,$env);
 
     $contexte['objet']=$objet;
     $contexte['id_objet']=$id_objet; 

@@ -72,81 +72,16 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
 /* @annotation: Actualisation de la base de donnée */
 function formulaires_bouton_objet_traiter_dist($id_objet,$objet,$langue,$lang='',$objet_dest='rubrique'){
 
-    $valeurs='';
+    $valeurs=array();
     $id_objet_dest=_request('id_objet_dest');
-    $verifier_ordre=charger_fonction('verifier_ordre','inc');
-    $statut='publie';
+    $instituer_objet=charger_fonction('instituer_objet_selectionne','action/');
     $objet_dest=_request('objet_dest');
     $type_lien=_request('type_lien');
-	
 
 
-	if($langue)$langue=explode(',',$langue);
-	else $langue=array(0=>sql_getfetsel('lang','spip_'.$objet_dest.'s','id_'.$objet_dest.'='.$id_objet_dest));
+    $id_selection_objet=$instituer_objet($id_objet.'-'.$objet.'-'.$langue.'-'.$lang.'-'.$objet_dest.'-'.$id_objet_dest.'-'.$type_lien);
 
-
-		// si objet pas définit par langue on enrgistre pour chaque langue du site
-		if(count($langue)>1){
-		
-			foreach ($langue as $key => $l){
-						
-				$where = array(
-					'id_objet_dest='.$id_objet_dest,
-					'objet_dest='.sql_quote($objet_dest),
-					'lang='.sql_quote($l),	
-					);
-		
-				$ordre=$verifier_ordre($where);
-					
-				// on rajoute comme dernier le nouveau objet	
-				$ordre=$ordre+1;
-			
-				$vals=array(
-					'id_objet' => $id_objet,
-					'objet'=>$objet, 
-					'id_objet_dest'=>$id_objet_dest,
-					'objet_dest'=>$objet_dest,			 	
-					'ordre'=>$ordre, 
-					'lang'=>$l,
-					'statut'=>  $statut,
-					'type_lien'=>$type_lien
-					);
-					
-				sql_insertq("spip_selection_objets",$vals);
-				}
-
-			}
-		// si objet est définit par langue on enregistre pour cette langue	
-		else{
-			$where = array(
-				'id_objet_dest='.$id_objet_dest,
-				'objet_dest='.sql_quote($objet_dest),
-				'lang='.sql_quote($langue[0]),	
-				);
-			// on vérifie l'ordre des objets déjà enregistrés et on corrige si beselection_objetin
-			
-			$ordre=$verifier_ordre($where);
-				
-			// on rajoute comme dernier le nouveau objet			
-			$ordre=$ordre+1;
-			
-			$vals=array(
-				'id_objet' => $id_objet,
-				'objet'=>$objet, 
-				'id_objet_dest'=>$id_objet_dest,
-				'objet_dest'=>$objet_dest,			 	
-				'ordre'=>$ordre, 
-				'lang'=>$langue[0],
-				'statut'=>  $statut,
-				'type_lien'=>$type_lien
-				);
-					
-			sql_insertq("spip_selection_objets",$vals);
-		
-			}
-			
-			
-			$valeurs['message_ok']='ok';
+	if($id_selection_objet)$valeurs['message_ok']='ok';
 
 return $valeurs;
 	

@@ -6,7 +6,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function inc_exceptions_dist($filtrer=''){
     $exceptions=array(
         'objet'=>array('site'=>'syndic'),
-        'titre'=>array('nom','nom_site'),
+        'titre'=>array(
+            'auteur'=>'nom',
+            'site'=>'nom_site'
+            ),
         );
     $retour=$exceptions;   
     if($filtrer)$retour=$exceptions[$filtrer];
