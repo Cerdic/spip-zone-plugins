@@ -94,7 +94,7 @@ objet_associer(array("orr_autorisation"=>$id_objet), array("orr_ressource"=>$id_
 
     $retour = array();
 $retour['message_ok'] = "bravo:$autorisation_valeur ";
-//$retour['redirect'] = "spip.php?page=perdu";
+$retour['redirect'] = "$redirect";
     //$retour['editable'] = true;
 
     return $retour;
