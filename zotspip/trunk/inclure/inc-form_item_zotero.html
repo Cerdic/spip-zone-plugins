@@ -21,7 +21,7 @@
 	</select>
 	<input type="text" name="lastName[]" class="text lastName" value="[(#ENV**{lastName}|table_valeur{#CLE})]" />, 
 	<input type="text" name="firstName[]" class="text firstName" value="[(#ENV**{firstName}|table_valeur{#CLE})]" />
-	<span class="remove_creator remove_creator_#GET{id}" style="display:none;"><a href="#" title="<:zotspip:supprimer_createur:>"><img src="#CHEMIN{images/remove-creator-16.png}" alt="" width="16" height="16" /></a></span>
+	<span class="remove_creator remove_creator_#GET{id}" style="display:none;"><a href="#" title="<:zotspip:supprimer_createur:>"><img src="#CHEMIN_IMAGE{remove-creator-16.png}" alt="" width="16" height="16" /></a></span>
 </li>
 </BOUCLE_creators>
 <li class="ajouter_creator" id="ajouter_creator_#GET{id}" style="display:none;">
@@ -44,7 +44,7 @@
 <BOUCLE_tags(POUR){tableau #ENV{tags}}>
 <li class="editer_tag_zotero editer_tag_#GET{id}">
 	<input type="text" name="tags[]" class="text" value="[(#ENV**{tags}|table_valeur{#CLE})]" />
-	<span class="remove_tag remove_tag_#GET{id}" style="display:none;"><a href="#" title="<:zotspip:supprimer_tag:>"><img src="#CHEMIN{images/remove-tag-16.png}" alt="" width="16" height="16" /></a></span>
+	<span class="remove_tag remove_tag_#GET{id}" style="display:none;"><a href="#" title="<:zotspip:supprimer_tag:>"><img src="#CHEMIN_IMAGE{remove-tag-16.png}" alt="" width="16" height="16" /></a></span>
 </li>
 </BOUCLE_tags>
 <li class="ajouter_tag" id="ajouter_tag_#GET{id}" style="display:none;">
