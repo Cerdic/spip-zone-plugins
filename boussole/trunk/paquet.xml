@@ -1,7 +1,7 @@
 <paquet
 	prefix="boussole"
 	categorie="navigation"
-	version="1.0.2"
+	version="1.0.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/boussole_logo-64.png"
@@ -18,7 +18,6 @@
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/boussole_declarer.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/boussole_declarer.php" />
-	<pipeline nom="header_prive" inclure="boussole_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="boussole_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="genie/boussole_taches_generales_cron.php" />
 
