@@ -1,5 +1,5 @@
 [(#SET{defaut_tri,#ARRAY{
-	multi orr_statut,1,
+	multi orr_autorisation_nom,1,
 	id_orr_autorisation,1
 }})
 ]
@@ -9,7 +9,7 @@
 [(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
 a mis a jour la valeur avec la page reelle]
 #SET{debut,#ENV{debutorrl,#EVAL{_request("debutorrl");}}}
-#SET{afficher_lettres,#TRI|=={'multi orr_statut'}|oui}
+#SET{afficher_lettres,#TRI|=={'multi orr_autorisation_nom'}|oui}
 #ANCRE_PAGINATION
 <div class="liste-objets liste-objets-lies orr_autorisations">
 <table class='spip liste'>
@@ -17,10 +17,10 @@ a mis a jour la valeur avec la page reelle]
 	<thead>
 		#SET{p,''}
 		<BOUCLE_lettre(ORR_AUTORISATIONS){tout}{id_orr_autorisation IN #GET{selection}}{where?}
-			{tri #ENV{par,multi orr_statut},#GET{defaut_tri}}{id_orr_autorisation==#GET{afficher_lettres}|?{'.*','A'}}>[
-		(#ORR_STATUT**|extraire_multi|initiale|unique|oui)
+			{tri #ENV{par,multi orr_autorisation_nom},#GET{defaut_tri}}{id_orr_autorisation==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#ORR_AUTORISATION_NOM**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
-		#SELF|parametre_url{debutorrl,@#ID_ORR_AUTORISATIONS}|ancre_url{paginationorrl}|afficher_initiale{#ORR_STATUT**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		#SELF|parametre_url{debutorrl,@#ID_ORR_AUTORISATIONS}|ancre_url{paginationorrl}|afficher_initiale{#ORR_AUTORISATION_NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
 		}})]
 		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
 		(#SET{p,
@@ -28,24 +28,24 @@ a mis a jour la valeur avec la page reelle]
 				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
 			}
 		})]</B_lettre>
-		[<tr><td colspan="4"><p class='pagination'>(#GET{p})</p></td></tr>]
-
+		[<tr><td colspan="4"><p class='pagination'>(#GET{p})</p></td>  </tr>]
 		<tr class='first_row'>
-			<th class='orr_statut' scope='col'>[(#TRI{multi orr_statut,<:orr_autorisation:label_orr_statut:>,ajax})]</th>
+			<th class='orr_autorisation_nom' scope='col'>[(#TRI{multi orr_autorisation_nom,<:orr_autorisation:label_orr_autorisation_nom:>,ajax})]</th>
+            <th class='orr_autorisation_valeur scope'='col'>Valeur</th>
 			<th class='action' scope='col'></th>
 		</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_liste_orr_autorisations(ORR_AUTORISATIONS){id_orr_autorisation IN #GET{selection}}
-		{tri #ENV{par,multi orr_statut},#GET{defaut_tri}}{pagination #ENV{nb,10} orrl}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#ORR_STATUT**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_ORR_AUTORISATION|=={#ENV{id_lien_ajoute}}|oui)append]">
-			<td class='orr_statut'>[(#LOGO_ORR_AUTORISATION|image_reduire{20,20})]<a href="[(#ID_ORR_RESERVATION|generer_url_entite{orr_autorisation})]">#ORR_STATUT</a></td>
+		{tri #ENV{par,multi orr_autorisation_nom},#GET{defaut_tri}}{pagination #ENV{nb,10} orrl}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#ORR_AUTORISATION_NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_ORR_AUTORISATION|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class='orr_autorisation_nom'>[(#LOGO_ORR_AUTORISATION|image_reduire{20,20})]<a href="[(#ID_ORR_RESERVATION|generer_url_entite{orr_autorisation})]">#ORR_AUTORISATION_NOM</a></td>
 
+			</td><td>#ORR_AUTORISATION_VALEUR</td>
 			<td class='action'>
 				[(#ENV{editable}|oui)
 					<button class="button link delete" name="supprimer_lien\[orr_autorisation-#ID_ORR_AUTORISATION-#OBJET-#ID_OBJET\]" value="X"><:orr_autorisation:retirer_lien_orr_autorisation:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
 				]
-			</td>
 		</tr>
 	</BOUCLE_liste_orr_autorisations>
 	</tbody>
