@@ -191,7 +191,7 @@ return array(
 						array(
                                 "id"        => 'vector',
                                 "name"      => _T('pp_latex:barre_vector'),
-                                "key"       => "V",
+                                //"key"       => "V",
                                 "className" => "outil_vector",
                                 "openWith" => "\\vec{",
                                 "closeWith" => "}",
