@@ -19,9 +19,11 @@ table.pendu_clavier, td.pendu_clavier{
 input.pendu_clavier{ 
  font-size: 120%; 
  text-align:center;
- width:1.6em;
+ width:2em;
  display:inline;
  margin:1px;
+ line-height:normal;
+ padding:0.2em 0;
 }
 
 /* mot a deviner */

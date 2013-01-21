@@ -190,21 +190,23 @@ function jeux_listes_compacte($texte, $alpha) {
 
 // definitions des mots croises
 function affichage_definitions($horizontal, $vertical) {
-    if (jeux_config('compact')) return 
- 		'<p><strong>'._T('motscroises:horizontalement').'&nbsp;</strong>'
+	if (jeux_config('compact')) return 
+		'<p><strong>'._T('motscroises:horizontalement').'&nbsp;</strong>'
 		.jeux_listes_compacte($horizontal, jeux_config('horizontal')=='lettres') 
- 		.'<br /><strong>'._T('motscroises:verticalement').'&nbsp;</strong>'
+		.'<br /><strong>'._T('motscroises:verticalement').'&nbsp;</strong>'
 		.jeux_listes_compacte($vertical, jeux_config('vertical')=='lettres').'</p>';
 
-    $liste_horizontal = jeux_config('horizontal')=='chiffres'?'<div class="spip jeux_horizontal jeux_liste_chiffres">':'<div class="spip jeux_horizontal jeux_liste_lettres">';
+	// probleme a regler : les listes non compactes ne reprennent pas l'alphabet choisi...
+	
+	$liste_horizontal = jeux_config('horizontal')=='chiffres'?'<div class="spip jeux_horizontal jeux_liste_chiffres">':'<div class="spip jeux_horizontal jeux_liste_lettres">';
     
-    $liste_horizontal .= '<h4 class="spip jeux_grille">'
+	$liste_horizontal .= '<h4 class="spip jeux_grille">'
 		._T('motscroises:horizontalement')."</h4>\n".jeux_listes($horizontal).'</div>';
 		
 	$liste_vertical = jeux_config('vertical')=='lettres'?'<div class="spip jeux_vertical jeux_liste_lettres">':'<div class="spip jeux_vertical jeux_liste_chiffres">';
 	$liste_vertical .= '<h4 class="spip jeux_grille">'
 		._T('motscroises:verticalement')."</h4>\n".jeux_listes($vertical).'</div>';
-    return $liste_horizontal.$liste_vertical;
+	return $liste_horizontal.$liste_vertical;
 }
 
 // configuration par defaut : jeu_{mon_jeu}_init()
