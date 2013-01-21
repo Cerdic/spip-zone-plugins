@@ -56,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auto_month_day' => 'Day of the month',
 	'auto_month_day_explication' => 'The available dayx are only from 1 to 28 to avoid problems for the months with less than 31 days.',
 	'auto_subscribers' => 'Automatic subscribers adding',
-	'auto_subscribers_explication' => 'Les adresses contenus dans ce fichier distant seront automatiquement abonnées une fois par jour à cette lettre.', # NEW
+	'auto_subscribers_explication' => 'Addresses contained in this remote file will be automatically subscribed once per day to this letter.',
 	'auto_subscribers_mode' => 'Subscription mode',
 	'auto_subscribers_url' => 'URL of the address file',
 	'auto_week_day_friday' => 'Friday',
@@ -88,7 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmation_votre_desinscription' => 'Deregistration confirmation',
 	'confirmation_votre_desinscription_text' => 'Hello,
 
-Please confirmyour deregistration by clicking on the following link :
+Please confirm your deregistration by clicking on the following link :
 
  @@URL_CONFIRMATION@@
 
@@ -96,38 +96,38 @@ Thanks',
 	'confirmation_votre_inscription' => 'Registration confirmation',
 	'confirmation_votre_inscription_multiple' => 'Registration confirmation',
 	'confirmation_votre_inscription_text' => '
-Bonjour,
+Hello,
 
-Pour confirmer votre inscription à la lettre d\'information @@NOM_COMPLET@@ au format @@FORMAT_INSCRIPTION@@, veuillez cliquer sur ce lien :
+Please confirm your registration  to the newsletter @@NOM_COMPLET@@ at the format @@FORMAT_INSCRIPTION@@, by clicking on the following link :
 
  @@URL_CONFIRMATION@@
 
-Merci
-', # NEW
+Thanks
+',
 	'confirmation_votre_inscription_text_multiple' => '
-Bonjour,
+Hello,
 
-Pour confirmer votre inscription aux lettres d\'information suivantes :
+Please confirm your registration  to the following newsletters :
 
  @@NOM_COMPLET@@ 
 
-veuillez cliquer sur ce lien :
+by clicking on the link :
 
  @@URL_CONFIRMATION@@
 
-Merci
-', # NEW
+Thanks
+',
 	'confirme_desabonnement_multiple_lettre' => 'You are about to delete several subscribers from this letter. Are you sure ?',
 	'confirme_suppression_multiple_base' => 'You are about to delete subscribers from the database. Are you sure ?',
-	'corps_mail_mod' => 'Bonjour,
+	'corps_mail_mod' => 'Hello,
 
-Vous recevez ce message en tant que modérateur de la lettre @@NOM_LETTRE@@.
+You receive this message as a moderator of the letter @@NOM_LETTRE@@.
 
-Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce lien :
+To valid the registration of @mail@ to this letter, click on the link :
 
  @@URL_CONFIRMATION@@
 
-Merci', # NEW
+Thanks',
 	'cree' => 'Created',
 	'creer' => 'Create',
 	'creer_lettre' => 'Create a newsletter',
@@ -135,17 +135,17 @@ Merci', # NEW
 	'creer_nouveau_message' => 'Create a new message',
 
 	// D
-	'deja_inscrit' => 'Vous étiez déjà inscrit à la lettre « @lst_name@ ». Votre mode d\'inscription a été mis à jour.', # NEW
+	'deja_inscrit' => 'You have already registered to the letter « @lst_name@ ». Your registration mode has been updated.',
 	'deja_validee' => 'Sorry. This operation has already been validated.',
-	'demande_transmise' => 'Votre demande d\'inscription à la lettre « @lst_name@ » va être examinée dans les plus brefs délais.', # NEW
+	'demande_transmise' => 'Your subscription request to the letter « @lst_name@ » will be examined as soon as possible.',
 	'desabonner' => 'Unsubscribe',
 	'desabonner2' => 'unsubscribe',
 	'desabonner_abonnes' => 'Deregister the selected subscribers',
-	'desabonner_confirmer' => 'Êtes-vous certain de vouloir désabonner cette personne ?', # NEW
+	'desabonner_confirmer' => 'Are you sure you want to unsubscribe this person?',
 	'description' => 'Description',
-	'desinscription_confirmation_debut' => 'Désinscription de la lettre d\'information', # NEW
-	'desinscription_confirmation_fin' => 'demandée. Vous allez recevoir un message demandant confirmation.', # NEW
-	'desinscription_validee' => 'Votre désinscription de la lettre « @lst_name@ » est validée. A bientôt.', # NEW
+	'desinscription_confirmation_debut' => 'Unsubscribe from the newsletter',
+	'desinscription_confirmation_fin' => 'requested. You will receive a message asking for confirmation.',
+	'desinscription_validee' => 'Unsubscribing to the letter « @lst_name@ » is enabled. See you soon.',
 
 	// E
 	'editer_lettre' => 'Edit the newsletter',
@@ -153,32 +153,32 @@ Merci', # NEW
 	'email_expediteur' => 'E-mail sender (from et reply-to)',
 	'email_moderateur' => 'Moderator E-mail',
 	'email_non_valide' => 'Unvalid address.',
-	'email_return_path' => 'E-mail des retours d\'erreurs (return-path)', # NEW
+	'email_return_path' => 'E-mail error returns (return-path)',
 	'emails' => 'E-mails',
 	'envoye' => 'Sent',
 	'envoyer' => 'Send',
 	'envoyer_non_aucun_abonne' => 'No subscriber, can not send',
 	'erreur' => 'Error',
-	'erreur_contenu_vide' => 'Un nouveau message n\'a pas pu être créé faute de contenu.', # NEW
-	'et_ou_saisir_des_adresses' => '...et/ou saisir des adresses.', # NEW
+	'erreur_contenu_vide' => 'A new message could not be created due to lack of content.',
+	'et_ou_saisir_des_adresses' => '...and/or enter addresses.',
 
 	// F
-	'front_clevermail_action_validation' => 'Validation d\'une opération', # NEW
+	'front_clevermail_action_validation' => 'Validation of an operation',
 	'front_clevermail_unsubscription_query' => 'Deregistration request',
 
 	// I
 	'importer' => 'Import',
-	'info_parametres' => 'L\'e-mail de l\'administrateur est utilisé par défaut comme l\'e-mail du modérateur lors de la création d\'une newsletter', # NEW
+	'info_parametres' => 'The e-mail address of the administrator is used by default e-mail of the moderator at the creation of a newsletter',
 	'infolettres' => 'Newsletters',
 	'informations' => 'Informations',
-	'inscription_deja_abonne_autre_mode' => 'Vous étiez déjà inscrit à la lettre « @lst_name@ » dans un autre mode, changement opéré.', # NEW
-	'inscription_deja_abonne_meme_mode' => 'Vous étiez déjà inscrit à la lettre « @lst_name@ » dans ce même mode.', # NEW
-	'inscription_encours' => 'Votre demande d\'inscription à la lettre @nom_lettre@ est en cours d\'examen. Merci de patienter.', # NEW
-	'inscription_mok' => 'Votre demande d\'inscription à la lettre « @lst_name@ » a été soumise au modérateur. Vous serez informé de sa décision.', # NEW
-	'inscription_nok' => 'Inscription non authorisée pour cette lettre d\'information', # NEW
-	'inscription_ok' => 'Vous allez recevoir un message de demande de confirmation de votre inscription à la lettre « @lst_name@ ».', # NEW
-	'inscription_ok_multiple' => 'Vous allez recevoir un message de demande de confirmation de votre inscription aux lettre « @lst_name@ ».', # NEW
-	'inscription_validee' => 'Votre inscription à la lettre « @lst_name@ » est validée. Merci.', # NEW
+	'inscription_deja_abonne_autre_mode' => 'You have already registered to the letter to the « @lst_name@ » in another mode, the modification is made.',
+	'inscription_deja_abonne_meme_mode' => 'You have already registered to the letter  « @lst_name@ » in the same mode. Nevertheless, we appreciate your enthusiasm.',
+	'inscription_encours' => 'Your subscription request to the letter @nom_lettre@ is under consideration. Thank you for your patience.',
+	'inscription_mok' => 'Your subscription request to the letter « @lst_name@ » was submitted to the moderator. You will be informed of his decision.',
+	'inscription_nok' => 'Subscription is not authorized for this newsletter',
+	'inscription_ok' => 'You will receive a message of subscription confirmation for your registration to the letter « @lst_name@ ».',
+	'inscription_ok_multiple' => 'You will receive a message asking you to confirm your subscription to the letter « @lst_name@ ».',
+	'inscription_validee' => 'Your subscribtion to the letter « @lst_name@ » is enabled. Thank you.',
 
 	// L
 	'label_contenu_html' => 'HTML content',
@@ -198,47 +198,47 @@ Merci', # NEW
 	'liste_messages' => 'Messages',
 
 	// M
-	'mail_info_desinscription_corps' => 'Alerte envoyée par le plugin CleverMail du site @nom_site@ ( @url_site@ ) :
+	'mail_info_desinscription_corps' => 'Alert sent by the plugin CleverMail form the website @nom_site@ ( @url_site@ ) :
 
-Désinscription de @sub_email@ de la lettre « @lst_name@ »', # NEW
-	'mail_info_inscription_corps' => 'Alerte envoyée par le plugin CleverMail du site @nom_site@ ( @url_site@ ) :
+Deregistration from @sub_email@ to the letter « @lst_name@ »',
+	'mail_info_inscription_corps' => 'Alert sent by the plugin CleverMail form the website @nom_site@ ( @url_site@ ) :
 
-Inscription de @sub_email@ à la lettre « @lst_name@ »', # NEW
+Subscription from @sub_email@ to the letter « @lst_name@ »',
 	'mail_info_inscription_sujet' => 'Subscription to @sub_email@',
-	'mail_inscription_multiple' => 'Bonjour,
+	'mail_inscription_multiple' => 'Hello,
 
-Pour confirmer votre inscription aux lettres d\'information suivantes :
+Please confirm your registration to the following newsletters :
 
  @@NOM_COMPLET@@
 
-veuillez cliquer sur ce lien :
+by clicking on the link :
 
  @@URL_CONFIRMATION@@
 
-Merci', # NEW
+Thanks',
 	'maj_inscription' => 'updated subscription',
 	'maj_inscriptions' => 'updated subscriptions',
-	'mauvais_affichage' => 'Si vous ne visualisez pas cet email, lisez-le sur le site', # NEW
-	'mauvais_identifiant_lettre' => 'Mauvais identifiant de lettre d\'information', # NEW
+	'mauvais_affichage' => 'If you do not see this email properly, read it on the website',
+	'mauvais_identifiant_lettre' => 'Bad identifier for the newsletter',
 	'message' => 'message',
 	'message_queue_attente' => 'message in waiting list',
 	'message_queue_envoye' => '@nb@ message sent',
 	'messages' => 'messages',
 	'messages_attentes' => 'Messages in waiting list',
-	'messages_attentes_text' => 'Ici sont listés les messages qui sont en file d\'attente pour être envoyés', # NEW
+	'messages_attentes_text' => 'Here are listed the messages that are queued to be sent',
 	'messages_cours_envoi' => 'Messages being send',
-	'messages_cours_envoi_text' => 'Ici sont listés les messages qui sont en cours d\'envoi par le facteur, lot par lot', # NEW
+	'messages_cours_envoi_text' => 'Here are listed the messages that are being sent by the postman, lot by lot',
 	'messages_envoyes' => 'Messages sent',
-	'messages_envoyes_text' => 'Ici sont listés les messages qui ont été envoyés avec succès', # NEW
+	'messages_envoyes_text' => 'Here are listed the messages that have been sent successfully',
 	'messages_queue_attente' => 'messages in waiting list',
 	'messages_queue_envoye' => '@nb@ messages sent',
 	'mod_closed' => 'Closed',
 	'mod_email' => 'E-mail',
-	'mod_explication' => 'Les différents modes de modération sont décrits ci-contre.', # NEW
+	'mod_explication' => 'The different modes of moderation are described there.',
 	'mod_explication_closed' => 'Closed : Nobody can subscribe',
-	'mod_explication_email' => 'E-mail : tout le monde peut s\'inscrire après confirmation par e-mail', # NEW
-	'mod_explication_mod' => 'Modérée : le modérateur doit accepter l\'inscription', # NEW
-	'mod_explication_open' => 'Ouverte : tout le monde peut s\'inscrire sans confirmation', # NEW
+	'mod_explication_email' => 'E-mail: anyone can register after confirmation by e-mail',
+	'mod_explication_mod' => 'Moderated : the moderator must accept the subscription',
+	'mod_explication_open' => 'Open: anyone can register without confirmation',
 	'mod_mod' => 'Moderated',
 	'mod_open' => 'Open',
 	'mode' => 'Mode',
@@ -251,16 +251,16 @@ Merci', # NEW
 
 	// N
 	'n_nouveaux_abonnes' => 'new sbscribers',
-	'nettoyer_abonnement' => 'Vider les abonnements en attente depuis plus d\'un mois', # NEW
+	'nettoyer_abonnement' => 'Empty subscriptions pending for over a month',
 	'news1' => 'The n°1 news',
 	'news_depuis' => 'The news since',
 	'nom' => 'Name',
-	'nom_formulaire_clevermail' => 'Formulaire d\'abonnement aux listes de diffusion', # NEW
+	'nom_formulaire_clevermail' => 'Subscription form to mailing lists',
 	'nombre_messages' => 'Number of messages per sending',
 	'nouveau_message' => 'new message',
 	'nouveaux_abonnes_et' => ' and ',
 	'nouveaux_messages' => 'New Messages',
-	'nouveaux_messages_text' => 'Ici sont listés les messages qui ne sont pas encore envoyés', # NEW
+	'nouveaux_messages_text' => 'Here are listed the messages that have not yet be sent',
 
 	// P
 	'parametres' => 'Parameters',
@@ -268,7 +268,7 @@ Merci', # NEW
 	'plusieurs_messages_en_cours_envoi' => '@nb@ being send',
 	'plusieurs_messages_envoyes' => '@nb@ sent',
 	'prefixer_messages' => 'Prefix',
-	'prefixer_messages_explication' => 'Préfixer les sujets des messages avec le nom de la lettre d\'information', # NEW
+	'prefixer_messages_explication' => 'Subject prefix messages subjects with the name of the newsletter',
 	'procedure_termine' => 'Click here to end',
 	'proprietes' => 'Properties',
 
@@ -277,12 +277,12 @@ Merci', # NEW
 
 	// S
 	'selection_des_listes' => 'Lists selection',
-	'send_error' => 'Erreur lors de l\'envoi du message de demande de confirmation, veuillez réessayer.', # NEW
+	'send_error' => 'Error while sending the message of confirmation request, please try again.',
 	'source_des_abonnes' => 'Subscribers list',
 	'statistiques' => 'Statistics',
 	'sujet' => 'Subject',
 	'sujet_mail_inscription_multiple' => 'Subscription confirmation',
-	'sujet_mail_mod' => 'Modération de la lettre @nom_lettre@', # NEW
+	'sujet_mail_mod' => 'Moderation of the letter @nom_lettre@',
 	'sujet_message' => 'Message subject',
 	'sujet_vide' => 'The subject must not be empty',
 	'supprimer' => 'Delete',
@@ -297,13 +297,13 @@ Merci', # NEW
 	'un_message_en_attente' => '1 in waiting list',
 	'un_message_en_cours_envoi' => '1 being sent',
 	'un_message_envoye' => '1 sent',
-	'url_templates' => 'URL des templates générés', # NEW
-	'url_templates_explication' => 'Précisez l\'URL d\'une page distante, ou le nom d\'un squelette SPIP local, sans l\'extension .html. CleverMail propose le squelette par défaut <code>clevermail_nouveautes_html</code>.', # NEW
+	'url_templates' => 'URL of the generated templates',
+	'url_templates_explication' => 'Specify the URL of a remote page, or the name of a local SPIP skeleton without the extension .html. CleverMail provides the skeleton by default <code>clevermail_nouveautes_html</code>.',
 
 	// V
 	'version_html' => 'HTML version',
 	'version_txt' => 'Raw text version',
-	'version_txt_explication' => 'Si vous ne remplissez pas ce paramètre, la version texte sera obtenue automatiquement à partir de la version HTML. CleverMail propose le squelette par défaut <code>clevermail_nouveautes_text</code>.', # NEW
+	'version_txt_explication' => 'If you do not fill in this parameter, the text version will be obtained automatically from the HTML version. CleverMail provides the skeleton by default <code>clevermail_nouveautes_text</code>.',
 	'veuillez_corriger_votre_saisie' => 'Please correct this entry.',
 	'vous_devez_choisir_au_moins_une_liste' => 'You have to choose at least one letter',
 	'vous_devez_choisir_un_fichier' => 'You have to choose a file...'
