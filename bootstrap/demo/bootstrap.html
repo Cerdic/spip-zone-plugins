@@ -3,7 +3,7 @@
   <head>
 	  <!--[if lt IE 9]><!--Perf issue--><![endif]-->
     <meta charset="utf-8">
-    <title>#NOM_SITE_SPIP</title>
+    <title>[(#NOM_SITE_SPIP|textebrut)]</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -20,6 +20,7 @@
       <script src="#CHEMIN{js/html5.js}"></script>
     <![endif]-->
 	  #INSERT_HEAD
+	  <!-- JS in head not in footer : let SPIP optimize this -->
 		<script src="#CHEMIN{js/bootstrap-affix.js}"></script>
 		<script src="#CHEMIN{js/bootstrap-alert.js}"></script>
 		<script src="#CHEMIN{js/bootstrap-button.js}"></script>
@@ -125,60 +126,296 @@
 	<!-- Typography
 	================================================== -->
 	<section id="typography">
-	  <div class="page-header">
-	    <h1>Typography</h1>
-	  </div>
+		<div class="row">
 
-	  <!-- Headings & Paragraph Copy -->
-	  <div class="row">
+		 <div class="span8">
 
-	    <div class="span4">
-	      <div class="well">
-	        <h1>h1. Heading 1</h1>
-	        <h2>h2. Heading 2</h2>
-	        <h3>h3. Heading 3</h3>
-	        <h4>h4. Heading 4</h4>
-	        <h5>h5. Heading 5</h5>
-	        <h6>h6. Heading 6</h6>
-	      </div>
-	    </div>
+			<div class="cartouche">
+				<p class="surtitre">Ceci est le sur-titre de l’article</p>
 
-	    <div class="span4">
-	      <h3>Example body text</h3>
-	      <p>Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-	      <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p>
-	    </div>
+				<h1 class="surlignable">Charte typo <small>par tetue</small></h1>
 
-	    <div class="span4">
-	      <h3>Example addresses</h3>
-	      <address>
-	        <strong>Twitter, Inc.</strong><br>
-	        795 Folsom Ave, Suite 600<br>
-	        San Francisco, CA 94107<br>
-	        <abbr title="Phone">P:</abbr> (123) 456-7890
-	      </address>
-	      <address>
-	        <strong>Full Name</strong><br>
-	        <a href="mailto:#">first.last@gmail.com</a>
-	      </address>
-	    </div>
+				<p class="soustitre">Ceci est le sous-titre de l’article</p>
 
-	  </div>
+				<p class="info-publi"><abbr class="published" title="2007-06-30T22:00:00Z">dimanche 1er juillet 2007</abbr><span
+						class="sep">, </span><span class="auteurs">par  <span class="vcard author"><a class="url fn spip_in"
+																																													href="spip.php?auteur1">Webmestre</a></span></span>
+				</p>
 
-	  <div class="row">
-	    <div class="span6">
-	      <blockquote>
-	        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-	        <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
-	      </blockquote>
-	    </div>
-	    <div class="span6">
-	      <blockquote class="pull-right">
-	        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-	        <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
-	      </blockquote>
-	    </div>
-	  </div>
+			</div>
+
+			<div class="chapo surlignable"><p>Cette page présente un échantillon des enrichissements typographiques possibles
+				sur ce site. Leur habillage est réalisé par le webmestre, en&nbsp;CSS, via des feuilles de style externes. Ce&nbsp;paragraphe
+				constitue donc le&nbsp;chapeau.</p></div>
+			<div class="texte surlignable"><h3 class="spip">Paragraphes</h3>
+
+				<p>Premier paragraphe. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed non risus. Suspendisse
+					lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam.<br
+							class='manualbr'/>Ici, retour à la ligne, généré par le raccourci SPIP &#171;&nbsp;<code class='spip_code'
+																																																			 dir='ltr'>_ </code>&nbsp;&#187;.
+					Espace&nbsp;insécable.</p>
+
+				<p>Second paragraphe. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl
+					sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque
+					congue.</p>
+				<hr class="spip"/>
+				<p>Troisième paragraphe, précédé d&#8217;une ligne horizontale de séparation, générée par le raccourci SPIP
+					&#171;&nbsp;<code class='spip_code' dir='ltr'>----</code>&nbsp;&#187;. Praesent egestas leo in pede. Praesent
+					blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales.</p>
+
+				<h3 class="spip">Un intertitre normal</h3>
+
+				<p>Voici du <i>texte en italique</i> et du <strong>texte en gras</strong>.<br class='manualbr'/>Voici un
+					<del>texte supprimé</del>
+					et le
+					<ins>texte inséré en correction</ins>
+					.<br class='manualbr'/>Une <dfn>définition</dfn> de terme avec la balise <code class='spip_code' dir='ltr'>
+						&lt;dfn&gt;</code>.<br class='manualbr'/>Un sigle, par exemple <abbr title="World Wide Web Consortium"
+																																								 lang="en">W3C</abbr>, est lu lettre par
+					lettre, tandis que <acronym title="Système de Publication pour Internet">SPIP</acronym> est un acronyme puisqu&#8217;il
+					forme un mot qui est lu normalement.
+				</p>
+
+				<p><bdo dir="ltr">Texte de gauche à droite</bdo> et <bdo dir="rtl">Texte de droite à gauche</bdo> avec <code
+						class='spip_code' dir='ltr'>&lt;bdo&gt;</code>.<br class='manualbr'/>Mise en exposant <sup>2</sup> et mise
+					en indice&nbsp;: <abbr>H<sub>2</sub>O</abbr>.<br class='manualbr'/>Et voici une note de bas de page<span
+							class="spip_note_ref">&nbsp;[<a href='#nb1' class='spip_note' rel='footnote'
+																							title='Une note de bas de page est, habituellement, signalée par un numéro placé à&nbsp;(...)'
+																							id='nh1'>1</a>]</span>.</p>
+
+				<p><img src="local/cache-vignettes/L8xH11/puce-32883.gif" width='8' height='11' class='puce' alt="-"/>&nbsp;Ici,
+					exemple de raccourci SPIP &#171;&nbsp;<code class='spip_code' dir='ltr'>- </code>&nbsp;&#187;. Attention, leur
+					succession ne constitue pas une liste&nbsp;! Pour les listes, voir ci-dessous.</p>
+
+				<p>&mdash;&nbsp;Un tiret long, généré par le raccourci SPIP &#171;&nbsp;<code class='spip_code'
+																																											dir='ltr'>--</code>&nbsp;&#187;,
+					utile pour les dialogues.</p>
+
+				<h3 class="spip">Hyperliens</h3>
+
+				<p>SPIP distingue les <a href="spip.php?article1" class='spip_in'>liens internes</a> des <a
+						href="http://checklists.opquast.com/11/criteria/687/" class='spip_out'
+						title="Bonne pratique Opquast N&#176;188" rel='external'>liens externes</a> dont URLs directes&nbsp;: <a
+						href="http://www.spip.net" class='spip_url spip_out' rel='external'>http://www.spip.net</a>, et lien généré
+					par le raccourci <code class='spip_code' dir='ltr'>[-&gt;site2]</code>&nbsp;: <a href="spip.php?site2"
+																																													 class='spip_out'>site
+						2</a>.<br class='manualbr'/>Mieux vaut spécifier la langue de destination, par exemple&nbsp;: <a
+							href="http://checklists.opquast.com/11/criteria/628/" class='spip_out' hreflang='en' rel='external'>Bonne
+						pratique Opquast N&#176;129</a>.<br class='manualbr'/>Lien vers une définition du glossaire prédéfini&nbsp;:
+					<a href="http://fr.wikipedia.org/wiki/Wikip%C3%A9dia" class='spip_glossaire' rel='external'>Wikipédia</a><br
+							class='manualbr'/>Lien vers un document, avec le raccourci <code class='spip_code'
+																																							 dir='ltr'>[-&gt;doc3]</code>&nbsp;: <a
+							href="IMG/jpg/doc3.jpg" class='spip_in' type='image/jpeg'>Titre du document</a><br class='manualbr'/>Lien
+					vers un auteur, avec le raccourci <code class='spip_code' dir='ltr'>[-&gt;auteur1]</code>&nbsp;: <a
+							href="spip.php?auteur1" class='spip_in'>Webmestre</a><br class='manualbr'/>Courriel&nbsp;: <a
+							href="mailto:adresse@courriel.net" class='spip_mail'>adresse@courriel.net</a><br class='manualbr'/>Une
+					ancre vers les citations&nbsp;: <a href="#citations" class='spip_ancre'>#citations</a></p>
+
+				<h3 class="spip">Listes</h3>
+
+				<p>Liste non ordonnée (<code class='spip_code' dir='ltr'>ul</code>), générée avec le raccourci SPIP &#171;&nbsp;<code
+						class='spip_code' dir='ltr'>-* </code>&nbsp;&#187;&nbsp;:</p>
+				<ul class="spip">
+					<li> Élément de liste non numérotée</li>
+					<li> Élément de liste non numérotée</li>
+					<li> Élément de liste non numérotée
+						<ul class="spip">
+							<li> Plantes
+								<ul class="spip">
+									<li> Ficus</li>
+									<li> Olivier</li>
+								</ul>
+							</li>
+							<li> Animaux de compagnie
+								<ul class="spip">
+									<li> Chat</li>
+									<li> Chien</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<p>Et une liste numérotée (<code class='spip_code' dir='ltr'>ol</code>), générée avec le raccourci SPIP &#171;&nbsp;<code
+						class='spip_code' dir='ltr'>-# </code>&nbsp;&#187;&nbsp;:</p>
+				<ol class="spip">
+					<li> Voici ma main&nbsp;: elle a cinq doigts. En voici deux, en voici trois.<br class='manualbr'/>Le premier,
+						ce gros bonhomme, C’est le pouce qu’il se nomme.
+					</li>
+					<li> L’index qui montre le chemin, Est le second doigt de la main.</li>
+					<li> Entre l’index et l’annulaire, Le majeur paraît un grand frère.</li>
+					<li> L’annulaire porte l’anneau, Avec sa bague, il fait le beau.</li>
+					<li> Le tout petit auriculaire Marche à côté de l’annulaire.</li>
+				</ol>
+				<p>Regardez mes doigts travailler. Chacun fait son petit métier.</p>
+
+				<p>N&#8217;oublions pas les listes de définition, générées avec les balises HTML <code class='spip_code'
+																																															 dir='ltr'>
+					&lt;dl&gt;</code>, <code class='spip_code' dir='ltr'>&lt;dd&gt;</code>, <code class='spip_code' dir='ltr'>&lt;dt&gt;</code>&nbsp;:
+				</p>
+				<dl class="spip">
+					<dt>polatouche (n.m.)</dt>
+					<dd><span class='spip_document_1 spip_documents spip_documents_right' style='float:right; width:63px;'>
+		<img src='#CHEMIN{demo/spip.gif}' width='63' height='40' alt=""/></span>Mammifère rongeur
+						omnivore méconnu d&#8217;Eurasie ou d&#8217;Amérique du Nord, dit &#171;&nbsp;écureuil volant&nbsp;&#187;
+						car il est capable de planer en ligne droite d&#8217;un arbre à l&#8217;autre grâce à son patagium (membrane
+						qui réunit ses pattes à son corps). Pelage gris et blanc.
+					</dd>
+					<dt>écureuil (n.m.)</dt>
+					<dd>Petit rongeur arboricole d&#8217;Europe à longue queue très touffue, excellent grimpeur, capable de sauts
+						très étendus, amassant des provisions pour l&#8217;hiver et aisément familier de l&#8217;homme. Pelage gris
+						ou roux.
+					</dd>
+				</dl>
+				<h3 class="spip">Tableaux</h3>
+				<table class="spip" summary="summary">
+					<caption>Titre du tableau (caption)</caption>
+					<thead>
+					<tr class='row_first'>
+						<th id='idcbd5_c0'>entête</th>
+						<th id='idcbd5_c1'>entête</th>
+						<th id='idcbd5_c2'>entête</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr class='row_odd odd'>
+						<td headers='idcbd5_c0'>valeur</td>
+						<td headers='idcbd5_c1'>valeur</td>
+						<td headers='idcbd5_c2'>valeur</td>
+					</tr>
+					<tr class='row_even even'>
+						<td headers='idcbd5_c0'>valeur</td>
+						<td headers='idcbd5_c1'>valeur</td>
+						<td headers='idcbd5_c2'>valeur</td>
+					</tr>
+					<tr class='row_odd odd'>
+						<td headers='idcbd5_c0'>valeur</td>
+						<td headers='idcbd5_c1'>valeur</td>
+						<td headers='idcbd5_c2'>valeur</td>
+					</tr>
+					</tbody>
+				</table>
+				<p><a name="citations"></a></p>
+
+				<h3 class="spip">Citations</h3>
+
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. <q>Ceci est une citation au fil du texte (avec la
+					balise HTML <code class='spip_code' dir='ltr'>&lt;q&gt;</code>)</q>.</p>
+				<blockquote>Ceci est une citation ordinaire, avec la balise HTML <code class='spip_code' dir='ltr'>&lt;blockquote&gt;</code>.
+					La route est longue mais la voie est libre.
+					<p>Second paragraphe. Deux humains s’échangent une pièce de&nbsp;1€. Chacun repart avec une pièce de&nbsp;1€.
+						Deux humains s’échangent une idée. Chacun repart avec deux idées.</p>
+				</blockquote>
+				<blockquote class="spip">
+					<p>Ceci est une citation générée avec le raccourci SPIP <code class='spip_code' dir='ltr'>&lt;quote&gt;</code>.
+						La route est longue mais la voie est libre.</p>
+
+					<p>Second paragraphe. Deux humains s’échangent une pièce de&nbsp;1€. Chacun repart avec une pièce de&nbsp;1€.
+						Deux humains s’échangent une idée. Chacun repart avec deux idées.</p>
+				</blockquote>
+				<blockquote class="spip_poesie">
+					<div>Je le vis, je rougis, je pâlis à sa vue</div>
+					<div>Un trouble s’éleva dans mon âme éperdue</div>
+					<div>Mes yeux ne voyaient plus, je ne pouvais parler</div>
+					<div>Je sentis tout mon corps et transir et brûler.</div>
+					<div>&nbsp;</div>
+					<div>Ceci est une citation du <cite>Phédre</cite> de Racine, générée avec le raccourci&nbsp;SPIP <code
+							class='spip_code' dir='ltr'>&lt;poesie&gt;</code>, idéal pour les vers des poèmes et chansons.
+					</div>
+				</blockquote>
+				<p>Maecenas mollis. Et voici du code, généré avec le raccourci SPIP <code class='spip_code' dir='ltr'>&lt;code&gt;</code>&nbsp;:
+				</p>
+
+				<div style='text-align: left;' class='spip_code' dir='ltr'><code>&lt;?php<br/>
+					&nbsp; &nbsp; // ceci est du langage php<br/>
+					&nbsp; &nbsp; echo &quot;bonjour&quot;;<br/>
+					?&gt;</code></div>
+				<textarea readonly='readonly' cols='40' rows='7' class='spip_cadre' dir='ltr'>Le raccourci SPIP &lt;cadre&gt;
+					permet publier des extraits de code que l&#039;on peut facilement copier-coller.
+
+					&lt;?php
+					// ceci est du langage php
+					echo &quot;au revoir&quot;;
+					?&gt;</textarea>
+
+				<p>Sans oublier un <kbd>raccourci-clavier</kbd> (<code class='spip_code' dir='ltr'>&lt;kbd&gt;</code>), un
+					<samp>extrait de script</samp> (<code class='spip_code' dir='ltr'>&lt;samp&gt;</code>) et une
+					<var>variable</var> (<code class='spip_code' dir='ltr'>&lt;var&gt;</code>).</p>
+
+				<p>Et pour finir en beauté, voici une formule mathématique, générée avec <code class='spip_code' dir='ltr'>&lt;math&gt;</code>&nbsp;:<br
+						class='autobr'/>
+					<img src="#CHEMIN{demo/math.png}"
+							 style='vertical-align:middle;' width='85' height='38' alt="a = \sqrt{b^{2} + c^{2}}"
+							 title="a = \sqrt{b^{2} + c^{2}}"/></p>
+
+				<h3 class="spip">À éviter</h3>
+
+				<p>Ces balises ne doivent plus être utilisées car elles sont dépréciées en XHTML&nbsp;1.0 Strict&nbsp;:
+					<basefont>exemple de basefont</basefont>, <font>exemple de font</font>, <u>exemple de u</u>, <s>exemple de
+						s</s>, <strike>exemple de strike</strike>, etc. Celles-ci sont déconseillées&nbsp;: <b>exemple de b</b>, <i>exemple
+						de i</i>, <big>exemple de big</big>,
+					<small>exemple de small</small>
+					, <tt>exemple de tt</tt>.
+				</p>
+			</div>
+
+			<hr/>
+			<p class="hyperlien">Voir en ligne : <a href="http://www.spip.net">Lien hypertexte</a></p>
+
+			<hr/>
+			<div class="ps surlignable">
+				<p>Ceci est le texte du Post-Scriptum. Cette page fait partie de la <a href="http://www.spip-contrib.net/3716"
+																																							 class='spip_out' rel='external'>base de
+					démarrage</a> pour SPIP. Voici un autre <a href="http://romy.tetue.net/11" class='spip_out' rel='external'>exemple
+					de cette charte typo</a>.</p></div>
+
+
+		 </div>
+		<div class="span4">
+			<div class="well">
+     <h1>h1. Heading 1</h1>
+     <h2>h2. Heading 2</h2>
+     <h3>h3. Heading 3</h3>
+     <h4>h4. Heading 4</h4>
+     <h5>h5. Heading 5</h5>
+     <h6>h6. Heading 6</h6>
+   </div>
+			<h3>Example addresses</h3>
+   <address>
+     <strong>Twitter, Inc.</strong><br>
+     795 Folsom Ave, Suite 600<br>
+     San Francisco, CA 94107<br>
+     <abbr title="Phone">P:</abbr> (123) 456-7890
+   </address>
+   <address>
+     <strong>Full Name</strong><br>
+     <a href="mailto:#">first.last@gmail.com</a>
+   </address>
+
+		</div>
+		</div>
+		<hr />
+		<div class="row">
+    <div class="span6">
+      <blockquote>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+        <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
+      </blockquote>
+    </div>
+    <div class="span6">
+      <blockquote class="pull-right">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+        <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
+      </blockquote>
+    </div>
+  </div>
+		<div class="notes">
+			<div id='nb1'>
+				<p><span class="spip_note_ref">[<a href='#nh1' class='spip_note' title='Notes 1'
+																					 rev='footnote'>1</a>]&nbsp;</span>Une note de bas de page est,
+					habituellement, signalée par un numéro placé à l’intérieur du texte, numéro repris en bas de page et
+					proposant un complément d’information. Cette fonctionnalité est automatisée dans SPIP.</p>
+			</div>
+		</div>
 
 	</section>
 
@@ -462,6 +699,7 @@
 
 	  <div class="row">
 	    <div class="span10 offset1">
+		    <h2>Bootstrap Forms</h2>
 
 	      <form class="well form-search">
 	        <input type="text" class="input-medium search-query">
@@ -597,6 +835,10 @@
 	          </div>
 	        </fieldset>
 	      </form>
+
+		    <h2>SPIP Forms</h2>
+		    #FORMULAIRE_CHARTER
+
 	    </div>
 	  </div>
 
