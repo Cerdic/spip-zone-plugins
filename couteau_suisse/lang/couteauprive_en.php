@@ -570,9 +570,9 @@ Note: since the <code>.zip</code> files are not always instantly reconstructed, 
 
 To override and force the display of such hidden content, just add the <code>{tout_voir}</code> (view all) criterion to the loops in your template(s).
 
-Objets publiés mais masqués du public :
+Published objects but hidden from the editorial content :
 -* Rubriques : @_RUB@.
--* Articles : @_ART@.', # MODIF
+-* Articles : @_ART@.',
 	'masquer:nom' => 'Hide editorial content',
 	'meme_rubrique:description' => 'Define here the number of objects listed in the panel labelled "<:info_meme_rubrique:>" available on some of the private zone pages.[[%meme_rubrique%]]',
 	'message_perso' => 'oh!',
@@ -944,7 +944,7 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'urls_titre_objet' => 'Saved title:',
 	'urls_type_objet' => 'Object:',
 	'urls_url_calculee' => 'Public URL "@type@":',
-	'urls_url_objet' => 'Saved "clean" URL:', # MODIF
+	'urls_url_objet' => 'Saved "clean" URL:',
 	'urls_valeur_vide' => 'Feedback : An empty value causes the removal of « clean » URL(s) saved and a recalculation of the main URL without locking.',
 	'urls_verrouiller' => '{{Lock}} this URL so that SPIP cannot change it, e.g. when someone clicks on " @voir@ " or when the title is modified.',
 
