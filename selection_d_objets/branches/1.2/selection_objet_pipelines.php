@@ -51,7 +51,10 @@ function selection_objet_affiche_milieu ($flux="") {
         $exception_objet=$exceptions('objet');
         if($exception_objet[$objet]){
              $objet=$exception_objet[$objet];
-            }        
+             $table='spip_'.$objet;
+            } 
+       else $table='spip_'.$objet.'s';   
+                
         $id_objet=$args['id_'.$objet];
         $data = $flux["data"];
         $special=array('article','rubrique');
@@ -60,6 +63,13 @@ function selection_objet_affiche_milieu ($flux="") {
         
         if(in_array($id_objet,$choisies)){
            $contexte = array('id_objet_dest'=>$id_objet,'objet_dest'=>$objet);
+            $contexte['langue']=array(sql_getfetsel('lang',$table,'id_'.$objet.'='.$id_objet));
+            
+        if($objet=='rubrique'){
+            if (!$trad_rub=test_plugin_actif('tradrub')) $contexte['langue']=lire_config('langues_multilingue');
+            elseif(!$trad_rub=test_plugin_actif('tradrub')) $contexte['langue']=lire_config('langues_multilingue');
+                
+            }            
            $flux["data"] .= recuperer_fond('prive/objets/liste/selection_interface', $contexte);
             }
         }

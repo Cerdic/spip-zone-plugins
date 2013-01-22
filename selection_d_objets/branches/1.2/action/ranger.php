@@ -174,12 +174,16 @@ function action_ranger_dist($arg=null){
             foreach($nouvel_ordre AS $id_objet){
                 $ordre++;
                 sql_updateq("spip_selection_objets", array("ordre" => $ordre),'id_objet='.$id_objet);
+                include_spip('inc/invalideur');
+                suivre_invalideur("id='selection_objet/$id_selection_objet'");    
             }
             break;
         }
 
     if($load){
-        $contexte = array('id_objet_dest'=>$id_objet_dest,'objet_dest'=>$objet_dest);
+        $contexte = array('id_objet_dest'=>$id_objet_dest,'objet_dest'=>$objet_dest,'langue'=>array($lang));
+
+        
        echo recuperer_fond('prive/objets/liste/selection_interface',$contexte);
     } 
 return $return;

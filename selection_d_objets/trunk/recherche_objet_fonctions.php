@@ -5,7 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /*Fournit un tableau avec id_objet=>donnees_objet*/
 
-function tableau_recherche_objet($objet,$id_objet='',$champs='*'){
+function tableau_recherche_objet($objet,$exclus,$lang){
     //Les tables non conforme, faudrait inclure une pipeline
     $exceptions=charger_fonction('exceptions','inc');
     $exception_objet=$exceptions();
@@ -27,8 +27,9 @@ function tableau_recherche_objet($objet,$id_objet='',$champs='*'){
 
    if($statut AND $objet !='rubrique')  $where_statut=' AND statut='.sql_quote($statut);
    if($objet=='auteur') $where_statut=' AND statut !='.sql_quote('5poubelle');
-    
-    $d=info_objet($objet,'',$champ_titre.',id_'.$objet,$where_titre.$where_statut);
+    if(isset($tables[$table_dest]['field']['lang'])) $where_lang=' AND lang IN ("'.implode('","',$lang).'")';
+
+    $d=info_objet($objet,'',$champ_titre.',id_'.$objet,$where_titre.$where_statut.$where_lang);
     
     if($exception_objet[$objet]){
          $objet=$exception_objet[$objet];
@@ -41,7 +42,7 @@ function tableau_recherche_objet($objet,$id_objet='',$champs='*'){
                 if($r['nom'])unset($r['nom']);
                 if($r['nom_site'])unset($r['nom_site']);
             }
-            $data[]=array('label'=>$r[titre].' ('.$objet.')','value'=>$r['id_'.$objet].'-'.$objet);
+            if(!isset($exclus[$r['id_'.$objet].'-'.$objet]))$data[]=array('label'=>$r[titre].' ('.$objet.')','value'=>$r['id_'.$objet].'-'.$objet);
         }
     }
     return $data;

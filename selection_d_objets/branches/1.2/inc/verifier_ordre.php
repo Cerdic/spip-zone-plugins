@@ -19,6 +19,8 @@ function inc_verifier_ordre_dist($where){
         sql_updateq("spip_selection_objets",array("ordre" => $ordre),$where) ;
         }
         
+    include_spip('inc/invalideur');
+    suivre_invalideur("id='selection_objet/$id_selection_objet'");    
     return $ordre;
 }
 

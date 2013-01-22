@@ -14,12 +14,11 @@
         </div>
         </form>
 </div>   
-
 [(#REM)autocomplete recherche]
 <script type="text/javascript" >
     $(function() {
         $( "#champ_objet_sel" ).autocomplete({
-                source: "[(#URL_PAGE{recherche_objet})]",
+                source: "[(#URL_PAGE{recherche_objet}|parametre_url{langue,#ENV{lang}}|replace{&amp;,&})]",
                 dataType: 'json',
                 minLength: 2,
                 autoFocus: true,
