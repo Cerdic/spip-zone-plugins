@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'affichage_section' => 'Display in:',
 	'ajouter_lien_objet' => 'Select this object:',
+	'ajouter_objet' => 'Ajoutez un objet', # NEW
 
 	// C
 	'configurations' => 'Configurations',
