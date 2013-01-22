@@ -1,6 +1,14 @@
 #HTTP_HEADER{Content-Type: application/json; charset=#CHARSET}
 {"type": "FeatureCollection",
 	"features": [
-		[(#INCLURE{fond=json/gis[_(#ENV{objets})],env})]
+		[(#INCLURE{fond=json/gis[_(#ENV{objets})],
+			id_rubrique=#ENV{args}|table_valeur{id_rubrique},
+			id_article=#ENV{args}|table_valeur{id_article},
+			id_breve=#ENV{args}|table_valeur{id_breve},
+			id_document=#ENV{args}|table_valeur{id_document},
+			id_mot=#ENV{args}|table_valeur{id_mot},
+			id_auteur=#ENV{args}|table_valeur{id_auteur},
+			id_syndic=#ENV{args}|table_valeur{id_syndic},
+			env})]
 	]
 }
