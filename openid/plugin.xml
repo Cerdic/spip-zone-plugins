@@ -2,7 +2,7 @@
 	<nom>OpenID</nom>
 	<auteur>[Edouard Lafargue->mailto:edouard@lafargue.name], Mathieu Marcillaud, [Cedric Morin->yterium.net], Fil</auteur>
 	<licence>&#169; 2007-2009 - GNU/GPL</licence>
-	<version>1.0.9</version>
+	<version>1.0.10</version>
 	<version_base>0.3</version_base>
 	<etat>stable</etat>
 	<icon>images/openid-100.png</icon>
@@ -65,7 +65,7 @@
 	<nom>OpenID</nom>
 	<auteur>[Edouard Lafargue->mailto:edouard@lafargue.name], Mathieu Marcillaud, [Cedric Morin->yterium.net], Fil</auteur>
 	<licence>&#169; 2007-2009 - GNU/GPL</licence>
-	<version>1.1.12</version>
+	<version>1.1.13</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<icon>images/openid-100.png</icon>

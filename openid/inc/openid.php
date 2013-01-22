@@ -23,13 +23,13 @@ function openid_login_form($texte,$contexte){
 	) {
 		$openid = preg_replace(',^http://,i','',$openid);
 		$message = _T('openid:form_login_openid_ok')  // . $openid
-		. "<br />[<a href=\"#\" onclick=\"jQuery('.editer_login .explication').hide();toggle_password(true);return false;\">"._T('openid:form_login_openid_pass')."</a>]";
+		. "<br />[<a href=\"#\" onclick=\"jQuery('.editer_session .explication').hide();toggle_password(true);return false;\">"._T('openid:form_login_openid_pass')."</a>]";
 		$scriptopenid = "jQuery('#var_login').keyup(function(){
 			if (jQuery(this).val()!='".addslashes($login)."') {
-				jQuery('.editer_login .explication').hide();
+				jQuery('.editer_session .explication').hide();
 				toggle_password(true);
 			} else {
-				jQuery('.editer_login .explication').show();
+				jQuery('.editer_session .explication').show();
 			}
 		});";
 	}
@@ -42,7 +42,7 @@ function openid_login_form($texte,$contexte){
 	$texte .= "<style type='text/css'><!--"
 	."input#var_login {width:10em;background-image : url(".find_in_path('images/openid-16.png').");background-repeat:no-repeat;background-position:center left;padding-left:18px !important;}\n"
 	."input#password {width:10em;padding-right:18px;}\n"
-	.".explication {margin:5px 0;}"
+	.".editer_session .explication {margin:-5px 0 10px;font-style:italic;}"
 	."//--></style>"
 	."<script type='text/javascript'>"
 	."/*<![CDATA[*/
@@ -62,7 +62,7 @@ else {
 	jQuery('.editer_password').hide();
 }
 };"
-	."jQuery(function(){jQuery('input#var_login').after('<div class=\'explication\'>".addslashes($message)."</div>');"
+	."jQuery(function(){jQuery('.editer_session').prepend('<div class=\'explication\'>".addslashes($message)."</div>');"
 	.($scriptopenid?"if (!jQuery('.editer_password').is('.erreur')) toggle_password(false);":"")
 	."$scriptopenid});"
 	."/*]]>*/"
