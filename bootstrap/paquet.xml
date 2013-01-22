@@ -1,7 +1,7 @@
 <paquet
 	prefix="bootstrap"
 	categorie="outil"
-	version="1.0.1"
+	version="1.1.0"
 	etat="dev"
 	compatibilite="[3.0.2;3.0.*]"
 	logo="img/bootstrap-32.png"
@@ -10,8 +10,10 @@
 
 	<nom>Bootstrap</nom>
 
-	<auteur lien='http://www.studiomaiis.net'>Pierre Basson</auteur>
 	<auteur lien='http://www.nursit.com'>Cedric Morin</auteur>
+	<auteur lien='http://www.studiomaiis.net'>Pierre Basson</auteur>
+	<credit lien='http://twitter.github.com/bootstrap/'>twitter/bootstrap v2.2.2</credit>
+	<credit lien='http://hashgrid.com/'>dotjay/hashgrid</credit>
 
 	<licence>GNU/GPL</licence>
 

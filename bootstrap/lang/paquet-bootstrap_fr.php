@@ -5,8 +5,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	'bootstrap_description' => '',
-	'bootstrap_slogan' => 'BootStrap Version 2.1.2wip',
+	'bootstrap_slogan' => 'BootStrap pour SPIP',
+	'bootstrap_description' => 'Adaptateur BootStrap pour SPIP.
+Inclue hashgrid.',
 );
 
 ?>

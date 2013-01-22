@@ -1,21 +1,21 @@
 /* ==========================================================
-* bootstrap-carousel.js v2.2.3
-* http://twitter.github.com/bootstrap/javascript.html#carousel
-* ==========================================================
-* Copyright 2012 Twitter, Inc.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-* ========================================================== */
+ * bootstrap-carousel.js v2.2.2
+ * http://twitter.github.com/bootstrap/javascript.html#carousel
+ * ==========================================================
+ * Copyright 2012 Twitter, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ========================================================== */
 
 
 !function ($) {
@@ -24,14 +24,13 @@
 
 
  /* CAROUSEL CLASS DEFINITION
-* ========================= */
+  * ========================= */
 
   var Carousel = function (element, options) {
     this.$element = $(element)
-    this.$indicators = this.$element.find('.carousel-indicators')
     this.options = options
     this.options.pause == 'hover' && this.$element
-      .on('mouseenter, mouseover', $.proxy(this.pause, this))
+      .on('mouseenter', $.proxy(this.pause, this))
       .on('mouseleave', $.proxy(this.cycle, this))
   }
 
@@ -45,17 +44,13 @@
       return this
     }
 
-  , getActiveIndex: function () {
-      this.$active = this.$element.find('.item.active')
-      this.$items = this.$active.parent().children()
-      return this.$items.index(this.$active)
-    }
-
   , to: function (pos) {
-      var activeIndex = this.getActiveIndex()
+      var $active = this.$element.find('.item.active')
+        , children = $active.parent().children()
+        , activePos = children.index($active)
         , that = this
 
-      if (pos > (this.$items.length - 1) || pos < 0) return
+      if (pos > (children.length - 1) || pos < 0) return
 
       if (this.sliding) {
         return this.$element.one('slid', function () {
@@ -63,17 +58,18 @@
         })
       }
 
-      if (activeIndex == pos) {
+      if (activePos == pos) {
         return this.pause().cycle()
       }
 
-      return this.slide(pos > activeIndex ? 'next' : 'prev', $(this.$items[pos]))
+      return this.slide(pos > activePos ? 'next' : 'prev', $(children[pos]))
     }
 
   , pause: function (e) {
       if (!e) this.paused = true
       if (this.$element.find('.next, .prev').length && $.support.transition.end) {
         this.$element.trigger($.support.transition.end)
+        this.cycle()
       }
       clearInterval(this.interval)
       this.interval = null
@@ -95,7 +91,7 @@
         , $next = next || $active[type]()
         , isCycling = this.interval
         , direction = type == 'next' ? 'left' : 'right'
-        , fallback = type == 'next' ? 'first' : 'last'
+        , fallback  = type == 'next' ? 'first' : 'last'
         , that = this
         , e
 
@@ -107,18 +103,9 @@
 
       e = $.Event('slide', {
         relatedTarget: $next[0]
-      , direction: direction
       })
 
       if ($next.hasClass('active')) return
-
-      if (this.$indicators.length) {
-        this.$indicators.find('.active').removeClass('active')
-        this.$element.one('slid', function () {
-          var $nextIndicator = $(that.$indicators.children()[that.getActiveIndex()])
-          $nextIndicator && $nextIndicator.addClass('active')
-        })
-      }
 
       if ($.support.transition && this.$element.hasClass('slide')) {
         this.$element.trigger(e)
@@ -151,7 +138,7 @@
 
 
  /* CAROUSEL PLUGIN DEFINITION
-* ========================== */
+  * ========================== */
 
   var old = $.fn.carousel
 
@@ -164,7 +151,7 @@
       if (!data) $this.data('carousel', (data = new Carousel(this, options)))
       if (typeof option == 'number') data.to(option)
       else if (action) data[action]()
-      else if (options.interval) data.pause().cycle()
+      else if (options.interval) data.cycle()
     })
   }
 
@@ -177,7 +164,7 @@
 
 
  /* CAROUSEL NO CONFLICT
-* ==================== */
+  * ==================== */
 
   $.fn.carousel.noConflict = function () {
     $.fn.carousel = old
@@ -185,20 +172,13 @@
   }
 
  /* CAROUSEL DATA-API
-* ================= */
+  * ================= */
 
-  $(document).on('click.carousel.data-api', '[data-slide], [data-slide-to]', function (e) {
+  $(document).on('click.carousel.data-api', '[data-slide]', function (e) {
     var $this = $(this), href
       , $target = $($this.attr('data-target') || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')) //strip for ie7
       , options = $.extend({}, $target.data(), $this.data())
-      , slideIndex
-
     $target.carousel(options)
-
-    if (slideIndex = $this.attr('data-slide-to')) {
-      $target.data('carousel').pause().to(slideIndex).cycle()
-    }
-
     e.preventDefault()
   })
 

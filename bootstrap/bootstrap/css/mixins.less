@@ -163,7 +163,7 @@
 // Mixin for form field states
 .formFieldState(@textColor: #555, @borderColor: #ccc, @backgroundColor: #f5f5f5) {
   // Set the text color
-  > label,
+  .control-label,
   .help-block,
   .help-inline {
     color: @textColor;
@@ -297,6 +297,7 @@
       -ms-transform: skewX(@x) skewY(@y); // See https://github.com/twitter/bootstrap/issues/4885
        -o-transform: skew(@x, @y);
           transform: skew(@x, @y);
+  -webkit-backface-visibility: hidden; // See https://github.com/twitter/bootstrap/issues/5319
 }
 .translate3d(@x, @y, @z) {
   -webkit-transform: translate3d(@x, @y, @z);
