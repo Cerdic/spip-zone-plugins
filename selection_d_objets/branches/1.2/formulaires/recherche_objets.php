@@ -43,18 +43,38 @@ function formulaires_recherche_objets_charger_dist($objet_dest='rubrique',$id_ob
     	"objet_dest"=>$objet_dest,
         "id_objet_dest"=>$id_objet_dest,
         'types_lien' =>$types_lien, 
+        'type_lien' =>'',         
         'objet_sel' =>'',              	 		
         );
 
     return $valeurs;
 }
 
+function formulaires_recherche_objets_verifier_dist($objet_dest='rubrique',$id_objet_dest,$lang=''){
+    $erreurs=array();
+    
+    if(!_request('objet_sel'))$erreurs['objet_sel']=_T("info_obligatoire");
+    else{
+        list($id_objet,$objet)=explode('-',_request('objet_sel'));
+            $where = array(
+                'id_objet_dest='.$id_objet_dest,
+                'objet_dest='.sql_quote($objet_dest),
+                'objet='.sql_quote($objet), 
+                'id_objet='.$id_objet,                                       
+                'lang='.sql_quote($lang),  
+                );
+        if($id=sql_getfetsel('id_selection_objet','spip_selection_objets',$where))$erreurs['objet_sel']=_T("selection_objet:erreur_deja_selectionne");
 
+    }
+    
+    return $erreurs;
+}
 
 /* @annotation: Actualisation de la base de donnée */
 function formulaires_recherche_objets_traiter_dist($objet_dest='rubrique',$id_objet_dest,$lang=''){
     $type_lien=_request('type_lien');    
-        
+    $valeurs=array('type_lien'=> $type_lien);  
+    unset($valeurs['objet_sel']);
     $instituer_objet=charger_fonction('instituer_objet_selectionne','action/');
     
     list($id_objet,$objet)=explode('-',_request('objet_sel'));

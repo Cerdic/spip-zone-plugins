@@ -118,11 +118,12 @@ function generer_modele($id_objet,$objet='article',$fichier='modeles_selection_o
     if(!$where)$where='id_'.$objet.'='.$id_objet;
     
     if(!$contexte=sql_fetsel('*','spip_'.$objet.'s',$where))$contexte=array();
-
-    if(is_array($env))$contexte= array_merge($contexte,$env);
+    if(!$cont=calculer_contexte())$cont=array();
+    if(is_array($env))$contexte= array_merge($contexte,$env,$cont);
 
     $contexte['objet']=$objet;
     $contexte['id_objet']=$id_objet; 
+    
     if($contexte['nom'])$contexte['titre']=$contexte['nom'];
     $rest = substr($objet, 0,3);
     $extensions=array('png','jpg','gif');

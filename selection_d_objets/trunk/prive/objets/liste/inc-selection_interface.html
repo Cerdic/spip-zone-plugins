@@ -38,7 +38,7 @@
         $( "#selection_objets_#LANG" ).sortable({items:"tr.tr_liste"});
         $( "#selection_objets_#LANG" ).bind("sortupdate", function(event, ui) {
             var ordre = $(this).sortable('toArray').toString();
-            $('#selection_objets').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre-_#LANG-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]-load}|replace{&amp;,&})]&nouvel_ordre='+ordre);
+            $('#selection_objets').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre-#LANG-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]-load}|replace{&amp;,&})]&nouvel_ordre='+ordre);
         });
     });
     </script>

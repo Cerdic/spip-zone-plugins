@@ -62,12 +62,8 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
     $valeurs['_hidden'] .= "<input type='hidden' name='lang' value='$langue' />";
     $valeurs['_hidden'] .= "<input type='hidden' name='objet_dest' value='$objet_dest' />";
 
-
-
     return $valeurs;
 }
-
-
 
 /* @annotation: Actualisation de la base de donnée */
 function formulaires_bouton_objet_traiter_dist($id_objet,$objet,$langue,$lang='',$objet_dest='rubrique'){

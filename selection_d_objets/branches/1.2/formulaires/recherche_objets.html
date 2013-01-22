@@ -1,4 +1,4 @@
- <div class="formulaire_spip formulaire_bouton_objet ajax" id="formulaire_bouton_objet_#OBJET_DEST">
+<div class="formulaire_spip formulaire_bouton_objet ajax" id="formulaire_bouton_objet_#ENV{lang}">
         <form action="#ENV{action}" method="post"><div>
             #ACTION_FORMULAIRE{#ENV{action}}
         <ul>
@@ -13,11 +13,13 @@
         </p>       
         </div>
         </form>
-</div>   
+  
 [(#REM)autocomplete recherche]
+
+</div>
 <script type="text/javascript" >
     $(function() {
-        $( "#champ_objet_sel" ).autocomplete({
+        $("#formulaire_bouton_objet_[(#ENV{lang}) ]#champ_objet_sel" ).autocomplete({
                 source: "[(#URL_PAGE{recherche_objet}|parametre_url{langue,#ENV{lang}}|replace{&amp;,&})]",
                 dataType: 'json',
                 minLength: 2,
@@ -29,11 +31,13 @@
                     }
                     //submit the form
                     $(event.target.form).submit();
-                    $(window).load(function(){
-                    $('#dvLoading').fadeOut(2000);
-                    });
-                     ajaxReload('tableau_so', {});
                 }
           });
-    });
-  </script> 
+        });
+    jQuery(document).ready(function(){
+    $('#champ_objet_sel').val('');
+    [(#ENV{message_ok}|oui)
+        ajaxReload('tableau_so', {});
+        ]         
+        });
+  </script>  

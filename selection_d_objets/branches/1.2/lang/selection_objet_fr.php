@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurations' => 'Configurations',
 
 	// E
+	'erreur_deja_selectionne' => 'Cet objet a déjà été sélectionné pour cette liste',	
 	'explication_selection_objets_cible' => 'Les objets cibles ou pourront être affichés les objets sélectionnés',
 	'explication_selection_type_liens' => 'Vous pouvez définir des types de relations : indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par défaut. La description peut être une chaîne de langue.',
 
