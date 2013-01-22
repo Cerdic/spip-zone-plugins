@@ -17,9 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_navigateur' => 'Clicca su [Aggiungi] per navigare nella gerarchia del sito per selezionare gli articoli da collegare.',
-	'explication_type_obligatoire' => 'Vous pouvez imposer de typer les liaisons', # NEW
-	'explication_types_differents' => 'Cochez cette case pour permettre de lier plusieurs fois les deux mêmes articles, en changeant le type à chaque fois', # NEW
-	'explication_types_liaisons' => 'Vous pouvez définir des types de relations : indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par défaut. La description peut être une chaîne de langue.', # NEW
+	'explication_type_obligatoire' => 'Potete imporre di definire i collegamenti', # "définir" plutôt que "typer" qui semble inconnu par nos rédacteurs italiens
+	'explication_types_differents' => 'Seleziona questo caso per permettere di collegare più volte gli stessi due articoli, cambiando il tipo  ogni volta',
+	'explication_types_liaisons' => 'Potete definire i tipi di relazione: indicateli uno per stringa, seguiti da una virgola e da una descrizione. Una stringa vuota per il valore  di predefinizione. La descrizione può essere una catena di lingua.', # 'tipi di relazione' o 'tipi di collegamenti' ?
 
 	// I
 	'info_nombre_articles_lies' => '@nb@ articoli collegati',
@@ -31,14 +31,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lier_cet_article_deux_cotes' => 'Collega da due lati',
 
 	// O
-	'ob_pb' => 'Il n\'est pas possible de rendre obligatoire le type de liaison : en effet les articles ci-dessous possèdent des liaisons non typées. Typez les d\'abords, puis rendez-obligatoire le typage.', # NEW
+	'ob_pb' => 'Non è possibile rendere obbligatorio il tipo di collegamento: in effetti gli articoli al di sotto hanno dei collegamenti non definite. Ridefinitele dall’inizio poi rendete obbligatoria la definizione.',
 
 	// P
 	'pas_articles_lies' => 'Nessun articolo collegato',
 	'pas_de_resultat' => 'Nessun risultato',
 
 	// R
-	'rang' => 'Rang', # NEW
+	'rang' => 'Posizione',
 	'rang_moins' => 'Sopra',
 	'rang_plus' => 'Sotto',
 	'recherche_arbo' => 'Ricerca per rubrica',
@@ -49,22 +49,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rechercher_un_article_a_lier' => 'Ricerca un articolo:',
 
 	// S
-	'sup_pb' => 'Impossible de supprimer les types de liaisons suivantes : des liaisons les utilisent. Il vous faut donc modifier au préalable ces liaions.', # NEW
+	'sup_pb' => 'Impossibile  sopprimere i tipi di collegamento seguenti: alcuni collegamenti sono utilizzati. Dovete modificare all’origine questi collegamenti.',
 	'supprimer_le_lien' => 'Scollega',
 	'supprimer_le_lien_deux_cotes' => 'Scollega da due lati',
 
 	// T
-	'td_pb' => 'Vous demandez l\'interdiction de lier plusieurs fois deux mêmes articles. Or certains articles possèdent plusieurs liaisons avec d\'autres articles. Corrigez cela avant.', # NEW
+	'td_pb' => 'Vi chiede il divieto di collegare più volte due stessi articoli. Oppure certi articoli hanno più collegamenti con altri articoli. Corregeteli.',
 	'type' => 'Tipo',
 	'type_inexistant' => 'Tipo di collegamento inesistente',
 	'type_liaison' => 'Tipo di collegamento',
-	'type_obligatoire' => 'Typage obligatoire', # NEW
-	'types_differents' => 'Liaisons multiples', # NEW
+	'type_obligatoire' => 'Necessariamente scegliere un tipo',
+	'types_differents' => 'Collegamenti multipli',
 	'types_liaisons' => 'Tipi di collegamento',
-	'types_liaisons_non_modifiables' => 'Les types de liaisons suivants ne sont pas modifiables via la configuration', # NEW
+	'types_liaisons_non_modifiables' => 'I tipi di collegamenti seguenti non sono modificabili attravreso la configurazione',
 
 	// U
-	'utilise_par_articles' => ', utilisé par les liaisons des articles :', # NEW
+	'utilise_par_articles' => ', utilizzato per il collegamento degli articoli:',
 
 	// V
 	'voir' => 'Vedi'
