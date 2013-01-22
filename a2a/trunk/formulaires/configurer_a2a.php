@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // Transforme en tableau une liste de type de la forme :
 // type, texte
 // type2, texte2

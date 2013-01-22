@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function formulaires_a2a_changer_typeliaison_charger_dist($id_article,$id_article_lie,$type_liaison){
 	return array('type_liaison'=>$type_liaison,'id_article'=>$id_article,'id_article_lie'=>$id_article_lie);
 	
@@ -27,7 +29,7 @@ function formulaires_a2a_changer_typeliaison_traiter_dist($id_article,$id_articl
 	$nv_type_liaison=_request('type_liaison');
 	include_spip('base/abstract_sql');
 
-	sql_updateq('spip_articles_lies',array('type_liaison'=>$nv_type_liaison),"id_article=".$id_article." AND id_article_lie=".$id_article_lie);
+	sql_updateq('spip_articles_lies',array('type_liaison'=>$nv_type_liaison),"id_article=".intval($id_article)." AND id_article_lie=".intval($id_article_lie));
 	return array('message_ok'=>$nv_type_liaison,'editable'=>false);
 	
 }	

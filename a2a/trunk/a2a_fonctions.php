@@ -5,7 +5,7 @@ function a2a_traduire_type_liaisons($type){
 	$types_liaisons = lister_types_liaisons();
 	return _T($types_liaisons[$type]);	
 }
-function lister_articles_lies($id_article, $ordren,$type_liaison=null){
+function lister_articles_lies($id_article, $ordre,$type_liaison=null){
 	if ($type_liaison==null)
 		return sql_allfetsel('id_article_lie','spip_articles_lies','id_article=' . sql_quote($id_article),'',"rang $ordre");
 	else
