@@ -418,7 +418,7 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
  * 
  */
 function inc_pmb_auteurs_select_dist(&$command, $iterateur) {
-	return inc_pmb_select_abstract_dist(&$command, $iterateur, 'auteurs', 'id_auteur');
+	return inc_pmb_select_abstract_dist($command, $iterateur, 'auteurs', 'id_auteur');
 }
 
 
@@ -433,7 +433,7 @@ function inc_pmb_auteurs_select_dist(&$command, $iterateur) {
  * 
  */
 function inc_pmb_reservations_select_dist(&$command, $iterateur) {
-	return inc_pmb_select_abstract_dist(&$command, $iterateur, 'reservations', 'pmb_session');
+	return inc_pmb_select_abstract_dist($command, $iterateur, 'reservations', 'pmb_session');
 }
 
 
@@ -494,7 +494,7 @@ function inc_pmb_prets_select_dist(&$command, $iterateur) {
  * 
  */
 function inc_pmb_collections_select_dist(&$command, $iterateur) {
-	return inc_pmb_select_abstract_dist(&$command, $iterateur, 'collections', 'id_collection');
+	return inc_pmb_select_abstract_dist($command, $iterateur, 'collections', 'id_collection');
 }
 
 
@@ -512,7 +512,7 @@ function inc_pmb_collections_select_dist(&$command, $iterateur) {
  * 
  */
 function inc_pmb_editeurs_select_dist(&$command, $iterateur) {
-	return inc_pmb_select_abstract_dist(&$command, $iterateur, 'editeurs', 'id_editeur');
+	return inc_pmb_select_abstract_dist($command, $iterateur, 'editeurs', 'id_editeur');
 }
 
 
@@ -528,7 +528,7 @@ function inc_pmb_editeurs_select_dist(&$command, $iterateur) {
  * 
  */
 function inc_pmb_exemplaires_select_dist(&$command, $iterateur) {
-	return inc_pmb_select_abstract_dist(&$command, $iterateur, 'exemplaires', 'id_notice');
+	return inc_pmb_select_abstract_dist($command, $iterateur, 'exemplaires', 'id_notice');
 }
 
 
@@ -549,7 +549,7 @@ function inc_pmb_documents_select_dist(&$command, $iterateur) {
 	// on annule certains criteres passes par boucle_DOCUMENTS() de mediatheque
 	$iterateur->exception_des_criteres('.mode'); // hum le .
 	$iterateur->exception_des_criteres('.taille'); // hum le .
-	return inc_pmb_select_abstract_dist(&$command, $iterateur, 'documents', 'id_notice');
+	return inc_pmb_select_abstract_dist($command, $iterateur, 'documents', 'id_notice');
 }
 
 

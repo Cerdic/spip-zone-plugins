@@ -98,7 +98,7 @@ function pmb_parse_unimarc_defaut($valeur, $zone, $sous_zone, $id, $element, $gr
 		if (is_array($t)) {
 			
 			// tableau de cle/valeurs
-			if (is_string(array_shift(array_keys($t)))) {
+			if (is_string(reset(array_keys($t)))) {
 
 				$res = array();
 				foreach ($t as $c => $v) {
