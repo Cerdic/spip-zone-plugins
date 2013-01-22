@@ -234,14 +234,28 @@ jQuery.geoportail.elevation = function (div, options)
 		this.drawLine(l, { color:this.options.color });
 	}
 
+	/** Calcul de grand cercle (en m) */
+	this.gdCercle = function (lon1,lat1,lon2,lat2)
+	{	var R = 6371000; // Rayon de la terre
+		var toRad = Math.PI/180;
+		
+		var dLat = (lat2-lat1) * toRad;
+		var dLon = (lon2-lon1) * toRad;
+		var lat1 = lat1 * toRad;
+		var lat2 = lat2 * toRad;
+
+		var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+				Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+				
+		return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+	}
+	
 	/** Extraction d'une trace dans un GPX */
 	this.extractTrk = function (format, segment, node)
 	{	var points = format.getElementsByTagNameNS(segment, segment.namespaceURI, node);
         var point_features = [];
         var dmax = 0;
         var zmax=null, zmin=1000000000;
-        // Terre ronde de rayon 6371km
-        var rayon_terre = 6371000/360*3.1415927 ;
         var len = points.length;
         for (var i=0; i < len; i++) 
         {	var z = format.getElementsByTagNameNS(points[i], points[i].namespaceURI, 'ele');
@@ -250,14 +264,13 @@ jQuery.geoportail.elevation = function (div, options)
 			t = t[0] ? format.getChildValue(t[0],null):null;
 			zmin = Math.min (zmin,z);
 			zmax = Math.max (zmax,z);
-			var pt = new OpenLayers.Geometry.Point(points[i].getAttribute("lon"), points[i].getAttribute("lat"));
-            point_features.push({'pt':pt,'z':z, 't':t});
+			var lon = Number(points[i].getAttribute("lon"));
+			var lat = Number(points[i].getAttribute("lat"));
+			var pt = new OpenLayers.Geometry.Point(lon,lat);
+            point_features.push({'pt':pt,'z':z, 't':t, 'lon':lon, 'lat':lat});
             if (i==0) point_features[i]['d']=0;
             else 
-            {	dmax += rayon_terre * Math.sqrt(
-				 Math.pow(pt.x-point_features[i-1]['pt'].x,2)
-				+Math.pow(pt.y-point_features[i-1]['pt'].y,2)
-				);
+            {	dmax += this.gdCercle (lon,lat, point_features[i-1].lon, point_features[i-1].lat);
 				point_features[i]['d'] = dmax;
             }
         }
