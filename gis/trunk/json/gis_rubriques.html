@@ -1,4 +1,4 @@
-		<BOUCLE_rub(RUBRIQUES){gis}{id_rubrique ?}{id_secteur ?}{id_parent?=#ENV{id_parent}}{id_mot ?}{recherche ?}{0, #ENV{limit}}{","}>
+		<BOUCLE_rub(RUBRIQUES){gis}{id_rubrique ?}{id_secteur ?}{id_parent?=#ENV{id_parent}}{id_mot ?}{recherche ?}{0, #ENV{limit,500}}{","}>
 		{"type": "Feature",
 		"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
 		"id":"#ID_GIS",
