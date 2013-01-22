@@ -79,7 +79,6 @@ $commencer_page = charger_fonction('commencer_page', 'inc') ;
 		else if (!is_file(_DIR_IMG."/didapages/".$_POST["nom"]."/tmp/data.xml")){
 			//supprimer tout si pas de fichier data.xml (pas un cours didapages)
 			 $erreurmsg=$lang['erreurimport5'];
-			 rmdirr("admin/cours/".$_POST["nom"]."/tmp");
 			 if ($_GET['act']=="installcours") rmdirr(_DIR_IMG."didapages/".$_POST["nom"]);
 		}
 	}
