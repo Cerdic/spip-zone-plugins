@@ -119,6 +119,9 @@ function selection_objet_formulaire_traiter($flux){
 
 function selection_objet_jqueryui_plugins($scripts){
    $scripts[] = 'jquery.ui.autocomplete';
+   $scripts[] = "jquery.ui.widget";
+   $scripts[] = "jquery.ui.mouse";
+   $scripts[] = "jquery.ui.sortable";
    return $scripts;
 }
 
