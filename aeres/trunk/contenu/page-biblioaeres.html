@@ -6,7 +6,7 @@
 [(#CONFIG{aeres/debut}|non)<div class="aeres_info_erreur">ATTENTION : l'année de début n'est pas renseignée.</div>]
 [(#CONFIG{aeres/fin}|non)<div class="aeres_info_erreur">ATTENTION : l'année de fin n'est pas renseignée.</div>]
 
-<BOUCLE_si_autorise(CONDITION){si #AUTORISER{verifier,biblioaeres}}>
+<BOUCLE_si_autorise(CONDITION){si #AUTORISER{verifier,aeresbiblio}}>
 
 <h2 class="h2">Bibliographie par auteur</h2>
 <div class="formulaire_spip">
@@ -92,7 +92,7 @@
 				<option value="oui"><:item_oui:></option>
 			</select>
 		</li>
-		[(#AUTORISER{voir,statsaeres}|oui)
+		[(#AUTORISER{voir,aeresstat}|oui)
 		<li>
 			<label for="stats">Afficher les statistiques par auteur ?</label>
 			<select name="stats" id="stats">

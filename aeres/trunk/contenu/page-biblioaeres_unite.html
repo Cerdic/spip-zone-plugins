@@ -179,7 +179,7 @@
 
 [(#ENV{compteur}|oui)[<div style="text-align:right;">Total : (#GET{total}|singulier_ou_pluriel{zotspip:une_reference, zotspip:plusieurs_references, nb}).</div>]]
 
-<BOUCLE_test_stats(CONDITION){si #ENV{stats}|et{#AUTORISER{voir,statsaeres}}}>
+<BOUCLE_test_stats(CONDITION){si #ENV{stats}|et{#AUTORISER{voir,aeresstat}}}>
 <B_stats_auteurs>
 <h2 class="h2">Statistiques par auteur</h2>
 <table class="spip">

@@ -6,7 +6,7 @@
 
 <h1 class="h1">[(#ENV{auteur,Tous les auteurs})] ([(#GET{debut})]-[(#GET{fin})])</h1>
 
-<BOUCLE_si_autorise(CONDITION){si #AUTORISER{verifier,biblioaeres}}>
+<BOUCLE_si_autorise(CONDITION){si #AUTORISER{verifier,aeresbiblio}}>
 
 #SET{refs, #ARRAY} [(#REM) Le critère doublons ne marche pas avec des id textuels. ]
 

@@ -15,7 +15,7 @@ function aeres_affiche_droite($flux) {
 }
 
 /* pour que le pipeline ne rale pas ! */
-function aerese_autoriser(){}
+function aeres_autoriser(){}
 
 /**
  * Autorisation de vérifier les références biblio
@@ -27,7 +27,7 @@ function aerese_autoriser(){}
  * @param array $opt : les options
  * @return boolean true/false : true si autorisé, false sinon
  */
-function autoriser_biblioaeres_verifier_dist($faire, $type, $id, $qui, $opt){
+function autoriser_aeresbiblio_verifier_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 
 	if(!function_exists('lire_config'))
@@ -103,7 +103,7 @@ function autoriser_bibliounite_voir_dist($faire, $type, $id, $qui, $opt){
 	return $autorise;
 }
 
-function autoriser_statsaeres_voir_dist($faire, $type, $id, $qui, $opt){
+function autoriser_aeresstat_voir_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 
 	if(!function_exists('lire_config'))
