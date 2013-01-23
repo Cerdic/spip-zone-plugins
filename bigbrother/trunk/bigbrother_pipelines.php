@@ -14,11 +14,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function bigbrother_boite_infos($flux){
 	if (($flux['args']['type'] =='auteur') AND ($id_auteur = $flux['args']['id']) AND ($id_auteur > 0)){
 			$icone_horizontale = chercher_filtre('icone_horizontale');
-			$flux['data'] .= $icone_horizontale(generer_url_ecrire("bigbrother_visites_articles_auteurs","id_auteur=$id_auteur"),_T('bigbrother:voir_statistiques_auteur', array('')),"bigbrother-24.png");
+			$flux['data'] .= $icone_horizontale(generer_url_ecrire("journal_stats","id_auteur=$id_auteur"), _T('bigbrother:voir_statistiques_auteur'), "bigbrother-24.png");
 	}
 	if (($flux['args']['type'] =='article') AND ($id_article = $flux['args']['id']) AND ($id_article > 0)){
 			$icone_horizontale = chercher_filtre('icone_horizontale');
-			$flux['data'] .= $icone_horizontale(generer_url_ecrire("bigbrother_visites_articles_auteurs","id_article=$id_article"),_T('bigbrother:voir_statistiques_article', array('')),"bigbrother-24.png");
+			$flux['data'] .= $icone_horizontale(generer_url_ecrire("bigbrother_visites_articles_auteurs","id_article=$id_article"),_T('bigbrother:voir_statistiques_article'),"bigbrother-24.png");
 	}
   return $flux;
 }

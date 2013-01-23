@@ -107,7 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'visites_article_auteur' => 'Visits from @nom@ on the article <em>@titre@</em>',
 	'voir_statistiques_article' => 'Visit statistics of this article',
-	'voir_statistiques_auteur' => 'Visit statistics of this person'
+	'voir_statistiques_auteur' => 'Activity of this person'
 
 );
 
