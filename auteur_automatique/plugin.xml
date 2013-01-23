@@ -1,14 +1,14 @@
 <plugin>
 	<nom>Auteur automatique</nom>
 	<slogan>Cr&#233;ation d'un auteur automatiquement</slogan>
-	<auteur>[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_]</auteur>
-	<licence>&#169; 2010 - GPL</licence>
+	<auteur>[Jacques Pyrat->http://www.mantalo.net/]</auteur>
+	<licence>&#169; 2012 - GPL</licence>
 	<lien>http://www.spip-contrib.net/?article3564</lien>
-	<version>1.0.0</version>
-	<version_base>1.0</version_base>
+	<version>2.0.0</version>
+	<version_base>1.0.1</version_base>
 	
 	<etat>stable</etat>
-	<description>Ce plugin cr&#233;e automatiquement un auteur &#224; son activation (donn&#233;es de l'auteur dans <code>mes_options.php</code>). &#192; utiliser en tant qu'extension dans le cadre de la mutualisation</description>
+	<description>Ce plugin cr&#233;e automatiquement une liste d'auteurs &#224; son activation (donn&#233;es de l'auteur dans <code>inc/liste_auteurs_automatiques.php</code>). &#192; utiliser en tant qu'extension dans le cadre de la mutualisation</description>
 	<!-- http://www.iconfinder.com/icondetails/9381/48/add_plus_user_icon -->
 	<icon>img_pack/auteur_automatique_48.png</icon>
 
@@ -17,6 +17,5 @@
 	<install>base/auteur_automatique_install.php</install>
 	
 	<categorie>maintenance</categorie>
-	<necessite id='SPIP' version='[2.1.2;2.1.99]' />
-	<necessite id='openid' version='[1.1.5;]' />
+	<necessite id='SPIP' version='[2.1.19;2.1.99]' />
 </plugin>
