@@ -33,7 +33,7 @@ function bigbrother_declarer_tables_principales($tables_principales){
 		'id_auteur' => "VARCHAR (25) DEFAULT '' NOT NULL",
 		'action' => "text NOT NULL DEFAULT ''",
 		'objet' => "VARCHAR (25) DEFAULT '' NOT NULL",
-		'id_objet' => "bigint(21) NOT NULL",
+		'id_objet' => "bigint(21) NOT NULL default 0",
 		'infos' => "text NOT NULL DEFAULT ''",
 		'date' => 'datetime default "0000-00-00 00:00" not null'
 	);
