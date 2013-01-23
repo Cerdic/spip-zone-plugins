@@ -139,9 +139,9 @@ function generer_modele($id_objet,$objet='article',$fichier='modeles_selection_o
 //donnele nom du type de lien
 function nom_type($type,$objet){
     include_spip('inc/config');
-    if(!$types=lire_config('selection_objet/type_liens_'.$objet_dest_original,array())) $types=lire_config('selection_objet/type_liens',array());
+    if(!$types=lire_config('selection_objet/type_liens_'.$objet,array())) $types=lire_config('selection_objet/type_liens',array());
     
-    $nom=_T($types[$type]);
+    if(!$nom=_T($types[$type]))$nom=$type;
     
     return $nom;
     }
