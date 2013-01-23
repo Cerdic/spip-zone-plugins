@@ -842,14 +842,11 @@ function pmb_interprete_argument_critere($criteres, $cle, $index) {
 
 /**
  * Boucle PMB:DOCUMENTS
- * eviter les traitements auto de SPIP
- *
- * note:mais ça marche pas (pas de prise en compte de la fonction
- * le connect est pas teste dans spip actuellement comme pour les criteres)
+ * Éviter les traitements automatiques de SPIP sur les boucles Documents
 **/
-#function boucle_PMB_DOCUMENTS($id_boucle, &$boucles) {
-#	return calculer_boucle($id_boucle, $boucles);
-#}
+function boucle_PMB_DOCUMENTS($id_boucle, &$boucles) {
+	return calculer_boucle($id_boucle, $boucles);
+}
 
 /**
  * 
