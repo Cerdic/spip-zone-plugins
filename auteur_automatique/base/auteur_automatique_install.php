@@ -26,8 +26,10 @@ function auteur_automatique_upgrade($nom_meta_base_version,$version_cible){
 				$id_auteur = sql_fetsel("id_auteur", "spip_auteurs", "login='".$auteur['login']."'");
 				if (!$id_auteur) {
 					$id_auteur = insert_auteur();
+					autoriser_exception('modifier', 'auteur', $id_auteur); // se donner temporairement le droit
 					$err = instituer_auteur($id_auteur, $auteur);
 					$err .= auteurs_set($id_auteur, $auteur);
+					autoriser_exception('modifier', 'auteur', $id_auteur,false); // revenir a la normale
 					if ($err) {
 						spip_log("auteur_automatique: $err");
 					} else {
