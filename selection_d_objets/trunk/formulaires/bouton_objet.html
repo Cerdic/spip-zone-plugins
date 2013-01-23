@@ -39,10 +39,16 @@
         <form action="#ENV{action}" method="post"><div>
             #ACTION_FORMULAIRE{#ENV{action}}
         <ul>
+            [(#REM) Séléction de l'objet cible]
             (#INCLURE{fond=formulaires/inc-boutons_objet,env,exclure=#GET{exclude},langue})
-            [(#SAISIE{selection,type_lien,
+            
+            [(#REM) Les types e lien]
+            [(#ENV{types_lien}|count|>{0}|oui)
+                [(#SAISIE{selection,type_lien,
                     label=<:selection_objet:selection_type_lien:> [(#GET{objets}|table_valeur{#VALEUR})],
-                    datas=#ENV{types_lien}})]
+                    datas=#ENV{types_lien}})
+                    ]
+                ]
         </ul>
         <p class="boutons">
          <input type="submit" name="ok" class="submit" value="ok"  />

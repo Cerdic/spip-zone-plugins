@@ -4,6 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang='',$objet_dest='rubrique') {
     include_spip('inc/config');
+    
     //Les objets destinataires choisies
      $special=array('article','rubrique');
      if(in_array($objet_dest,$special)) $choisies= picker_selected(lire_config('selection_objet/selection_'.$objet_dest.'_dest',array()),$objet_dest);
@@ -31,11 +32,16 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
     // Les information des objets destinataires
     $tables=lister_tables_objets_sql();
     $titre_objet_dest=_T($tables[$table_dest]['texte_objet']);
-    $where='id_'.$objet_dest.' IN ('.implode(',',$choisies).')';
-    $where_lang='';
-    if($tables[$table_dest]['field']['lang'] and $lang)$where_lang=' AND lang IN ('.sql_quote($lang).')';
+    
+    //Préparer la requette
+    $where=array();
+    if(isset($tables[$table_dest]['statut'][0]['publie']))$statut=$tables[$table_dest]['statut'][0]['publie'];
+    if($statut AND $objet !='rubrique')  $where[]='statut='.sql_quote($statut);
+    if($objet=='auteur') $where[]='statut !='.sql_quote('5poubelle');
+    if($choisies)$where[]='id_'.$objet_dest.' IN ('.implode(',',$choisies).')';
+    if($tables[$table_dest]['field']['lang'] and $lang)$where[]='lang IN ('.sql_quote($lang).')';
 
-    if($choisies)$objets_choisies=tableau_objet($objet_dest_original,'','*',$where.$where_lang,array('titre','id_'.$objet_dest,true));
+    $objets_choisies=tableau_objet($objet_dest_original,'','*',$where,array('titre','id_'.$objet_dest,true));
     
     //Les types liens pour l'objet concerné
     if(!$types=lire_config('selection_objet/type_liens_'.$objet_dest_original,array()))$types=lire_config('selection_objet/type_liens',array());
@@ -43,7 +49,7 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
     
     $types_lien=array();
     foreach($types as $cle => $valeur){
-        $types_lien[$cle]=_T($valeur);
+        if($valeur)$types_lien[$cle]=_T($valeur);
         }
     $valeurs = array(
     	"id_objet"	=> $id_objet,

@@ -32,26 +32,32 @@
                         )]
                     <B_objets_dest>
                     
+                    [(#REM)Configuration spécifiques pour chaque objet cible sélectionné]
         		    <BOUCLE_objets_dest(DATA){source tableau, #CONFIG{selection_objet/objets_cible}}>
         		    <li class="fieldset">
                         <fieldset>
                             <legend>[(#GET{objets}|table_valeur{#VALEUR})]</legend>
         		      <ul>
+        		        [(#REM)Définir des objets spécifiques]  
             		    [(#VALEUR|in_array{#GET{objets_saisies}}|oui)
                 		    [(#SAISIE{selecteur_#VALEUR,selection_[(#VALEUR)]_dest,
                                 multiple=oui,
-                                label=<:selection_objet:selection_cible:> [(#GET{objets}|table_valeur{#VALEUR})]}
+                                label=<:selection_objet:selection_cible:> [(#GET{objets}|table_valeur{#VALEUR})],
+                                explication=<:selection_objet:explication_selection_cible:>}
                             )] 
                             ]
                         [(#VALEUR|in_array{#GET{objets_saisies}}|non)
                             [(#VALEUR|oui)#SET{datas,#VALEUR|tableau_objet{'',*,'',#LISTE{titre},''}}
                             [(#SAISIE{selection_multiple,selection_[(#VALEUR)]_dest,
                                 label=<:selection_objet:selection_cible:> [(#GET{objets}|table_valeur{#VALEUR})],
-                                datas=#GET{datas}})]
+                                datas=#GET{datas},
+                                explication=<:selection_objet:explication_choix_multi:><br/><:selection_objet:explication_selection_cible:>, 
+                                                           
+                                })]
                                     ]
-                        
                             ]
-                       [(#SAISIE{textarea,type_liens_[(#VALEUR)],
+                        [(#REM)Définir des types liens par objet]       
+                        [(#SAISIE{textarea,type_liens_[(#VALEUR)],
                         label=<:selection_objet:selection_type_liens:>  (<:selection_objet:type_liens_surcharge:>),
                         rows=5,
                         cols=5,

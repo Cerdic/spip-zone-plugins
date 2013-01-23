@@ -14,8 +14,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurations' => 'Configurations',
 
 	// E
+	'explication_choix_multi' => 'Vous pouvez en choisir plusieurs en utilisant les touches ctrl ou maj (pomme ou maj pour macs)',	
 	'erreur_deja_selectionne' => 'Cet objet a déjà été sélectionné pour cette liste',
-	'explication_selection_objets_cible' => 'Les objets cibles ou pourront être affichés les objets sélectionnés',
+	'explication_selection_cible' => 'Si aucun cible n\'est choisit, tous seront retenus.',	
+	'explication_selection_objets_cible' => 'Les objets cibles auxquelles des "Objets Sélection" pourront être attachés',
 	'explication_selection_type_liens' => 'Vous pouvez définir des types de relations : indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par défaut. La description peut être une chaîne de langue.',
 
 	// I
@@ -64,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_selection_objet' => 'Logo de cet objet sélectionné',
 	'titre_selection_objets' => 'Objet sélectionné',
 	'titre_selection_objets_rubrique' => 'Objets sélectionnés de la rubrique',
-	'type_liens_defaut' => 'utilisable pour tous les objets cibles. Pour chaque objet peuvent être définies des types de lien spécifique',
+	'type_liens_defaut' => 'types de lien par défaut, peuvent être surchargés ci-bas',
 	'type_liens_surcharge' => 'surcharge les types de lien par défaut'
 );
 
