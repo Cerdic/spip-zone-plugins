@@ -42,19 +42,18 @@ To include the tags "Open Graph" in the header of your public pages, you must in
 	'doc_en_ligne' => 'Documentation',
 	'doc_titre_court' => 'Facebook models documentation',
 	'doc_titre_page' => 'Documentation page of the Facebook Models plugin',
-	'documentation' => '{{{Utilisation du plugin}}}
+	'documentation' => '{{{Plugin use}}}
 
-Comme montré ci-dessus, les modèles s\'incluent directement en leur passant les options souhaitées.
+As shown above, the models are directly included from the desired options.
 
-Chaque modèle peut recevoir une liste d\'options, dont certaines sont nécessaires à son affichage. Pour une liste complète, reportez-vous aux informations des en-tête de fichiers de modèles, dans le répertoire "<code>modeles/</code>" du plugin.
+Each model has a list of options, some of which are necessary for its display. For a complete list, refer to the information in the header models files in the directory "<code>modeles/</ code>" in the plugin.
 
-Le plugin propose également un modèle générant des informations {{Open Graph}}, les metas informations utilisées par Facebook, propres à chaque objet SPIP. Pour l\'utiliser, vous devez ajouter manuellement en en-tête de vos squelettes le modèle "{{insert_head_og}}".
+The plugin also provides a {{Open Graph}} model generating information, the meta information used by Facebook, specific to each object SPIP. To use it, you must manually "{{insert_head_og}}" add in the header of your skeleton model.
 
-{{Attention - }}Ce modèle nécessite de recevoir l\'environnement courant, vous devez donc l\'inclure dans chacun des squelettes de pages ({"article.html", "rubrique.html" ...}) et non dans l\'inclusion globale en en-tête ({"inc_head.html"}) en indiquant : 
+{{Warning -}} This model needs to receive the current environment, you must include in each of the pages skeletons  ({"article.html", "rubrique.html" ...}) and not in the global header inclusion ({"inc_head.html"}) :
 <cadre class=\'spip\'>
 {{#MODELE{insert_head_og}{env}}}
-</cadre>
-', # NEW
+</cadre>',
 
 	// E
 	'exemple' => '{{{Exemple}}}
