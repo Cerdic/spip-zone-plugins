@@ -1,0 +1,14 @@
+<BOUCLE_objet(SELECTION_OBJETS){id_selection_objet=#ENV{id}}{statut?}>
+<div class='infos'>
+[(#SET{texte_objet,<:selection_objet:titre_selection_objets:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_SELECTION_OBJET</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{selection_objet,#ID_SELECTION_OBJET})]
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+</div>
+</BOUCLE_objet>

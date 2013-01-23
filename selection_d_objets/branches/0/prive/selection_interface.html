@@ -1,0 +1,24 @@
+#CACHE{0}
+
+        [(#SET{langues,#CONFIG{langues_utilisees}|explode{','}})]
+
+
+<BOUCLE_langues(POUR){tableau #GET{langues}}>
+	<B_selection>
+	<h2>[(#VALEUR|traduire_nom_langue)]</h2>	
+	<div class='cadre cadre-liste' id="#VALEUR">
+	<table width='100%' cellpadding='2' cellspacing='0' border='0'>
+	
+	<BOUCLE_selection(SELECTION_OBJETS){lang=#VALEUR}{par ordre,lang}{id_objet_dest ?} {objet_dest?}>
+		[(#INCLURE{fond=prive/selection_interface_tr_#OBJET}{env}{id_article=#ID_OBJET}{id_rubrique=#ID_OBJET}{langue=#VALEUR}{compteur_boucle=#COMPTEUR_BOUCLE}{objet_dest}{id_objet_dest}{total_boucle=#TOTAL_BOUCLE})]
+	
+	</BOUCLE_selection>
+	</table></div>
+	</B_selection>
+</BOUCLE_langues>
+
+
+
+
+
+

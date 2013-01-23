@@ -1,0 +1,29 @@
+#CACHE{0}
+        <td>
+        [(#ENV{compteur_boucle}|!={1}|oui)
+            <div><a class="select" href="[(#URL_ACTION_AUTEUR{ranger,remonter_ordre-[(#ENV{langue})]-[(#ID_OBJET)]-[(#OBJET)]-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]-load})]#selection_objets"><img src="#CHEMIN{prive/themes/spip/images/fleche-haut.gif}" /></a></div> 
+            ]
+        [(#ENV{compteur_boucle}|!={#ENV{total_boucle}}|oui) 
+            <div><a class="select" href="[(#URL_ACTION_AUTEUR{ranger,descendre_ordre-[(#ENV{langue})]-[(#ID_OBJET)]-[(#OBJET)]-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]-load})]#selection_objets"><img src="#CHEMIN{prive/themes/spip/images/fleche-bas.gif}" /></a></div> 
+            ]
+            
+        </td>
+        <td class='statut'>[(#STATUT|puce_statut{selection_objet,#ID_SELECTION_OBJET})]</td> 
+        <td class="titre">
+           [<a class="select"  href="[(#URL_ECRIRE{#OBJET}|parametre_url{id_#OBJET,#ID_OBJET})]">(#LOGO_SELECTION_OBJET|image_reduire{25}|sinon{#ENV{logo_objet}|image_reduire{25}|inserer_attribut{class,spip_logos}}) </a>]
+            <a href="[(#URL_ECRIRE{#OBJET}|parametre_url{id_#OBJET,#ID_OBJET})]">[(#TITRE|sinon{#OBJET|info_objet{#ID_OBJET,titre}})]</a>
+            [((#TYPE_LIEN|nom_type{#OBJET_DEST}))]
+        </td>
+        <td class="arial1">[(#DATE|affdate)]</td>
+        <td class="arial1"><b style="white-space: nowrap;">N°#ID_OBJET</b></td>
+        <td>
+            [(#AUTORISER{modifier,selection_objet,#ID_SELECTION_OBJET})
+                [(#ID_SELECTION_OBJET|afficher_qui_edite{selection_objet}|non)
+                    [(#URL_ECRIRE{selection_objet,id_selection_objet=#ID_SELECTION_OBJET}|icone_verticale{<:selection_objet:icone_modifier_selection_objet:>,objet})]
+                ]
+            ]
+        </td>
+        <td>
+            <a href="[(#URL_ACTION_AUTEUR{ranger,supprimer_ordre-[(#ENV{langue})]-[(#ID_OBJET)]-[(#OBJET)]-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]-load})]#selection_objets" class="select"><img src="#CHEMIN{prive/themes/spip/images/item-remove.png}" alt="X" /></a>
+        </td>
+    </tr>
