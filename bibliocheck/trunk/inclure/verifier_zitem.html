@@ -24,7 +24,7 @@
 		<BOUCLE_nb_aut_livre(ZCREATORS){id_zitem}{role IN editor,bookAuthor} />[(#TOTAL_BOUCLE|non)<div class="bibliocheck_info_erreur"><:bibliocheck:erreur_editeurs_ouvrage:></div>]<//B_nb_aut_livre>
 	</BOUCLE_test_chapitre>
 
-	<BOUCLE_test_ticket(TICKETS){id_zitem}>
+	<BOUCLE_test_ticket(TICKETS){id_zitem}{statut=ouvert}>
 	<div class="bibliocheck_info_notice">
 		<div class="bibliocheck_ticket">
 			<div class="bibliocheck_date"><:tickets:ticket:> #ID_TICKET, [(#DATE|affdate)] ([(#DATE|heures)]:[(#DATE|minutes)]) [<:par_auteur:> (#INFO_NOM{auteur,#ID_AUTEUR})]</div>
