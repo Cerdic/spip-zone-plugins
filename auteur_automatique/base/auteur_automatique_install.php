@@ -33,7 +33,7 @@ function auteur_automatique_upgrade($nom_meta_base_version,$version_cible){
 					if ($err) {
 						spip_log("auteur_automatique: $err");
 					} else {
-						echo('<div>'.$auteur['login'].'/'.$auteur['pass'].'</div>');
+						echo('<div>'.$auteur['login'].'</div>');
 					}
 				}
 			}
