@@ -10,6 +10,7 @@ function selection_objet_affiche_gauche($flux) {
     $objets_selection=lire_config('selection_objet/selection_rubrique_objet',array());
     $exceptions=charger_fonction('exceptions','inc');
     $exception_objet=$exceptions('objet');
+    $objet_ancien=$objet;
     if($exception_objet[$objet]){
          $objet=$exception_objet[$objet];
          $table='spip_'.$objet;
@@ -18,10 +19,10 @@ function selection_objet_affiche_gauche($flux) {
     
     $contexte['id_objet']=$flux["args"]['id_'.$objet]?$flux["args"]['id_'.$objet]:_request('id_'.$objet); 
 
-    if(in_array($objet,$objets_selection)){
+    if(in_array($objet_ancien,$objets_selection)){
         $contexte['objet']=$objet;
         $objets_cibles=lire_config('selection_objet/objets_cible',array());
-        if($objet=='rubrique' OR $objet=='article'){
+        if($objet=='rubrique' OR $objet=='article'){         
             $contexte['langue']=sql_getfetsel('lang',$table,'id_'.$objet.'='.$contexte['id_objet']);
             $contexte['lang'] = $contexte['langue'];
             }
@@ -44,32 +45,39 @@ function selection_objet_affiche_milieu ($flux="") {
     $objet = $flux["args"]["exec"];
     $args=$flux["args"];
     $objets_cibles=lire_config('selection_objet/objets_cible',array());
+    
+    
 
     if(in_array($objet,$objets_cibles)){
         //Les tables non conforme
         $exceptions=charger_fonction('exceptions','inc');
-        $exception_objet=$exceptions('objet');
-        if($exception_objet[$objet]){
-             $objet=$exception_objet[$objet];
+        $exception_objet=$exceptions();
+        if($exception_objet['objet'][$objet]){
+             $objet=$exception_objet['objet'][$objet];
              $table='spip_'.$objet;
             } 
-       else $table='spip_'.$objet.'s';   
+       else $table='spip_'.$objet.'s';  
+       
+       if(!$champ_titre=$exception_objet['titre'][$objet]) $champ_titre='titre'; 
                 
         $id_objet=$args['id_'.$objet];
+        if($objet='site')$id_objet=$args['id_syndic'];
+
         $data = $flux["data"];
         $special=array('article','rubrique');
         if(in_array($objet,$special)) $choisies= picker_selected(lire_config('selection_objet/selection_'.$objet.'_dest',array()),$objet);
         else $choisies=lire_config('selection_objet/selection_'.$objet.'_dest',array());
         
-        if(in_array($id_objet,$choisies)){
-           $contexte = array('id_objet_dest'=>$id_objet,'objet_dest'=>$objet);
-            $contexte['langue']=array(sql_getfetsel('lang',$table,'id_'.$objet.'='.$id_objet));
+        if(in_array($id_objet,$choisies) OR !$choisies){
+           $contexte = array('id_objet_dest'=>$id_objet,'objet_dest'=>$objet,'champ_titre'=>$champ_titre);
+            $tables=lister_tables_objets_sql();
+           if($tables[$table]['field']['lang']) $contexte['langue']=array(sql_getfetsel('lang',$table,'id_'.$objet.'='.$id_objet));
+           else $contexte['langue']=array($args['lang']);
             
         if($objet=='rubrique'){
             if (!$trad_rub=test_plugin_actif('tradrub')) $contexte['langue']=lire_config('langues_multilingue');
             elseif(!$trad_rub=test_plugin_actif('tradrub')) $contexte['langue']=lire_config('langues_multilingue');
-                
-            }            
+            }
            $flux["data"] .= recuperer_fond('prive/objets/liste/selection_interface', $contexte);
             }
         }

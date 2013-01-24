@@ -8,7 +8,8 @@ function inc_exceptions_dist($filtrer=''){
         'objet'=>array('site'=>'syndic'),
         'titre'=>array(
             'auteur'=>'nom',
-            'site'=>'nom_site'
+            'site'=>'nom_site',
+            'syndic'=>'nom_site',            
             ),
         );
     $retour=$exceptions;   
