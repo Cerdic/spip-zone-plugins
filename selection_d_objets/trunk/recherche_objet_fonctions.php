@@ -11,25 +11,24 @@ function tableau_recherche_objet($objet,$exclus,$lang){
     $exception_objet=$exceptions();
     if(!$champ_titre=$exception_objet['titre'][$objet]) $champ_titre='titre';
     
-        
-    if($exception_objet[$objet]){
-         $objet=$exception_objet[$objet];
+    $ancien_objet=$objet;    
+    if($exception_objet['objet'][$objet]){
+         $objet=$exception_objet['objet'][$objet];
          $table_dest='spip_'.$objet;
     }
     else $table_dest='spip_'.$objet.'s';
     
     $tables=lister_tables_objets_sql();
 
-
-    $where_titre=$champ_titre.' LIKE '.sql_quote('%'._request('term').'%');
     
-  if(isset($tables[$table_dest]['statut'][0]['publie']))$statut=$tables[$table_dest]['statut'][0]['publie'];
+    $where=array($champ_titre.' LIKE '.sql_quote('%'._request('term').'%'));
 
-   if($statut AND $objet !='rubrique')  $where_statut=' AND statut='.sql_quote($statut);
-   if($objet=='auteur') $where_statut=' AND statut !='.sql_quote('5poubelle');
-    if(isset($tables[$table_dest]['field']['lang'])) $where_lang=' AND lang IN ("'.implode('","',$lang).'")';
+    if(isset($tables[$table_dest]['statut'][0]['publie']))$statut=$tables[$table_dest]['statut'][0]['publie'];
 
-    $d=info_objet($objet,'',$champ_titre.',id_'.$objet,$where_titre.$where_statut.$where_lang);
+   if($statut AND $objet !='rubrique')  $where[]='statut='.sql_quote($statut);
+   if($objet=='auteur') $where[]='statut !='.sql_quote('5poubelle');
+    if(isset($tables[$table_dest]['field']['lang'])) $where[]='lang IN ("'.implode('","',$lang).'")';
+    $d=info_objet($ancien_objet,'',$champ_titre.',id_'.$objet,$where);
     
     if($exception_objet[$objet]){
          $objet=$exception_objet[$objet];

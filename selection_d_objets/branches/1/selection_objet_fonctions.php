@@ -115,16 +115,33 @@ function tableau_objet($objet,$id_objet='',$champs='*',$where=array(),$filtrer=a
 function generer_modele($id_objet,$objet='article',$fichier='modeles_selection_objet/defaut',$env=array(),$where=''){
     include_spip('inc/utils');
     
+    //Quelques objets ne sont pas conforme, on adapte
+    $exceptions=charger_fonction('exceptions','inc');
+    $exception_objet=$exceptions();
+    
+
+    if($exception_objet['objet'][$objet]){
+         $objet=$exception_objet['objet'][$objet];
+          $table='spip_'.$objet;
+    }
+    else $table='spip_'.$objet.'s';
     if(!$where)$where='id_'.$objet.'='.$id_objet;
     
-    if(!$contexte=sql_fetsel('*','spip_'.$objet.'s',$where))$contexte=array();
+    if(!$contexte=sql_fetsel('*',$table,$where))$contexte=array();
     if(!$cont=calculer_contexte())$cont=array();
     if(is_array($env))$contexte= array_merge($contexte,$env,$cont);
 
     $contexte['objet']=$objet;
     $contexte['id_objet']=$id_objet; 
     
-    if($contexte['nom'])$contexte['titre']=$contexte['nom'];
+    if(!$exception_objet['objet'][$objet]){
+        $contexte['titre']=$contexte['titre'];
+        $contexte['champ_titre']='titre'; 
+        }
+    else{
+        $contexte['titre']=$contexte[$exception_objet['titre'][$objet]];
+        $contexte['champ_titre']=$exception_objet['titre'][$objet]; 
+        } 
     $rest = substr($objet, 0,3);
     $extensions=array('png','jpg','gif');
     foreach($extensions as $extension){
