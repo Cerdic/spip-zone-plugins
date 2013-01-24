@@ -17,9 +17,14 @@
 
 /* Structure generale des formulaires
 ----------------------------------------------- */
-.formulaire_spip { clear: both; margin-bottom: @baseLineHeight; padding: @baseLineHeight; background-color: @wellBackground;position: relative;}
+.formulaire_spip { clear: both; margin-bottom: @emLineHeight; padding: @emLineHeight; background-color: @wellBackground;position: relative;}
 .formulaire_spip form {margin-bottom: 0}
-.formulaire_spip .boutons {.form-actions;margin: 0 -@baseLineHeight -@baseLineHeight; padding: @baseLineHeight;text-align: right;}
+.formulaire_spip .boutons {.form-actions;margin: 0 -@emLineHeight -@emLineHeight; padding: @emLineHeight;text-align: right;}
+.secondary {
+  .formulaire_spip {padding: @emLineHeight/2;}
+  .formulaire_spip .boutons {margin: 0 -@emLineHeight/2 -@emLineHeight/2; padding: @emLineHeight/2;}
+}
+
 input.submit {.btn}
 
 /* Explications */
@@ -28,7 +33,7 @@ input.submit {.btn}
 /* Lignes */
 .formulaire_spip >div>ul,.formulaire_spip fieldset>ul,.formulaire_spip form>ul,.formulaire_spip form>div>ul {margin-left: 0;list-style: none;.control-group;}
 
-.formulaire_spip .editer { clear: both; margin: 0 -@baseLineHeight; padding: @baseLineHeight/4 @baseLineHeight; }
+.formulaire_spip .editer { clear: both; margin: 0 -@emLineHeight; padding: @emLineHeight/4 @emLineHeight; }
 
 /* choix */
 .formulaire_spip .choix label {display:inline;font-weight:normal;}
