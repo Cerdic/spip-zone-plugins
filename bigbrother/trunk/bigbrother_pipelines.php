@@ -44,8 +44,40 @@ function bigbrother_header_prive($flux){
  * @param unknown_type $flux
  */
 function bigbrother_post_edition($flux){
-	if(lire_config('bigbrother/modifier')){
-		$journal = charger_fonction('journal','inc');
+	$infos = array();
+	
+	// Dans tous les cas, on cherche déjà quelle est *vraiment* l'action qui vient d'être faite
+	if($flux['args']['action'] == 'instituer'){
+		$faire = 'instituer';
+		$texte = 'bigbrother:action_instituer_objet';
+	}else if(!isset($flux['args']['action']) && isset($flux['args']['operation'])){
+		if($flux['args']['operation'] == 'ajouter_document'){
+			$faire = 'inserer';
+			$texte = "bigbrother:action_".$flux['args']['operation'];
+		}else{
+			$faire = $flux['args']['operation'];
+			$texte = "bigbrother:action_$faire";
+		}
+	}
+	else{
+		$faire = 'modifier';
+		$texte = 'bigbrother:action_modifier_objet';
+		/**
+		 * Les actions de modifications passent un array à $flux['data'] des champs modifiés
+		 * On le serialize pour son insertion future en base
+		 */
+		if(is_array($flux['data'])){
+			$infos['modifs'] = $flux['data'];
+		}
+	}
+	
+	// Suivant l'action, on ne teste pas la même configuration
+	$config_a_tester = $faire;
+	if (!in_array($config_a_tester, array('inserer', 'modifier', 'instituer'))){
+		$config_a_tester = 'modifier';
+	}
+	if(lire_config("bigbrother/$config_a_tester")){
+		// On cherche qui et sur quoi porte l'action
 		$qui = $GLOBALS['visiteur_session']['nom'] ? $GLOBALS['visiteur_session']['nom'] : $GLOBALS['ip'];
 		$qui_ou_ip = $GLOBALS['visiteur_session']['id_auteur'] ? $GLOBALS['visiteur_session']['id_auteur'] : $GLOBALS['ip'];
 
@@ -54,38 +86,17 @@ function bigbrother_post_edition($flux){
 			$table = $flux['args']['table'];
 			$quoi = objet_type($table);
 		}
-
-		if($flux['args']['action'] == 'instituer'){
-			$faire = 'instituer';
-			$texte = 'bigbrother:action_instituer_objet';
-		}else if(!isset($flux['args']['action']) && isset($flux['args']['operation'])){
-			if($flux['args']['operation'] == 'ajouter_document'){
-				$faire = 'inserer';
-				$texte = "bigbrother:action_".$flux['args']['operation'];
-			}else{
-				$faire = $flux['args']['operation'];
-				$texte = "bigbrother:action_$faire";
-			}
+		$id_objet = $flux['args']['id_objet'];
+		
+		// On ne continue que si on a toutes les infos
+		if ($faire and $qui_ou_ip and $quoi and $id_objet){
+			$journal = charger_fonction('journal','inc');
+			$texte_infos = array('qui'=>$qui,'type'=> $quoi,'id'=>$id_objet);
+			$id_journal = $journal(
+				_T($texte,$texte_infos),
+				array('qui' => $qui_ou_ip,'faire' => $faire,'quoi' => $quoi,'id' => $id_objet,'infos' => $infos)
+			);
 		}
-		else{
-			$faire = 'modifier';
-			$texte = 'bigbrother:action_modifier_objet';
-			/**
-			 * Les actions de modifications passent un array à $flux['data'] des champs modifiés
-			 * On le serialize pour son insertion future en base
-			 */
-			if(is_array($flux['data'])){
-				$infos['modifs'] = serialize($flux['data']);
-			}
-		}
-
-
-		$texte_infos = array('qui'=>$qui,'type'=> $quoi,'id'=>$flux['args']['id_objet']);
-
-		$journal(
-			_T($texte,$texte_infos),
-			array('qui' => $qui_ou_ip,'faire' => $faire,'quoi' => $quoi,'id' => $flux['args']['id_objet'],'infos' => $infos)
-		);
 	}
 	return $flux;
 }
@@ -97,21 +108,24 @@ function bigbrother_post_edition($flux){
  */
 function bigbrother_post_insertion($flux){
 	if(lire_config('bigbrother/inserer')){
-		$journal = charger_fonction('journal','inc');
 		$qui = $GLOBALS['visiteur_session']['nom'] ? $GLOBALS['visiteur_session']['nom'] : $GLOBALS['ip'];
 		$qui_ou_ip = $GLOBALS['visiteur_session']['id_auteur'] ? $GLOBALS['visiteur_session']['id_auteur'] : $GLOBALS['ip'];
 
 		$table = $flux['args']['table'];
 		$quoi = objet_type($table);
+		$id_objet = $flux['args']['id_objet'];
 		$faire = 'inserer';
 		$texte = 'bigbrother:action_inserer_objet';
-
-		$texte_infos = array('qui'=>$qui,'type'=> $quoi,'id'=>$flux['args']['id_objet']);
-
-		$journal(
-			_T($texte,$texte_infos),
-			array('qui' => $qui_ou_ip,'faire' => $faire,'quoi' => $quoi,'id' => $flux['args']['id_objet'])
-		);
+		
+		// On ne continue que si on a toutes les infos
+		if ($faire and $qui_ou_ip and $quoi and $qui){
+			$journal = charger_fonction('journal','inc');
+			$texte_infos = array('qui'=>$qui,'type'=> $quoi,'id'=>$id_objet);
+			$journal(
+				_T($texte,$texte_infos),
+				array('qui' => $qui_ou_ip,'faire' => $faire,'quoi' => $quoi,'id' => $id_objet)
+			);
+		}
 	}
 }
 
