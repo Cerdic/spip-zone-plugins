@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'info_aucun_orr_autorisation' => 'Aucune autorisation',
     'info_1_orr_autorisation' => '1 autorisation',
     'info_nb_orr_autorisations' => '@nb@ autorisations',
+    'icone_creer_orr_autorisation' => 'Créer une autorisation',
 
     //L
     'label_orr_autorisation_nom'  => 'Nom de l\'autorisation',
@@ -23,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     //T
     'texte_ajouter_orr_autorisation' => 'Ajouter une autorisation',
+    'texte_creer_associer_orr_autorisation' => 'Créer et lier une autorisation',
 
     //V
     'valeur_autorisation' => 'Valeur',
