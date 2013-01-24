@@ -18,7 +18,6 @@ function selection_objet_affiche_gauche($flux) {
     else $table='spip_'.$objet.'s';
     
     $contexte['id_objet']=$flux["args"]['id_'.$objet]?$flux["args"]['id_'.$objet]:_request('id_'.$objet); 
-
     if(in_array($objet_ancien,$objets_selection)){
         $contexte['objet']=$objet;
         $objets_cibles=lire_config('selection_objet/objets_cible',array());
@@ -57,12 +56,10 @@ function selection_objet_affiche_milieu ($flux="") {
              $table='spip_'.$objet;
             } 
        else $table='spip_'.$objet.'s';  
-       
        if(!$champ_titre=$exception_objet['titre'][$objet]) $champ_titre='titre'; 
                 
         $id_objet=$args['id_'.$objet];
-        if($objet='site')$id_objet=$args['id_syndic'];
-
+        if($objet=='site')$id_objet=$args['id_syndic'];
         $data = $flux["data"];
         $special=array('article','rubrique');
         if(in_array($objet,$special)) $choisies= picker_selected(lire_config('selection_objet/selection_'.$objet.'_dest',array()),$objet);
