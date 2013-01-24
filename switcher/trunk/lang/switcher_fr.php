@@ -10,6 +10,8 @@
         'repertoires_alternatifs_explication' => 'Indiquez les repertoires contenant vos squeletts alternatifs, vous pouvez les sépararer avec ;',
 
         'switcher_activer_label' => 'Activer le switcher pour tout le monde',
-        'switcher_activer_explication' => 'Par défaut le switcher n\'est actif que pour les administrateurs. Activer l\'option rend public le switcher.'
+        'switcher_activer_explication' => 'Par défaut le switcher n\'est actif que pour les administrateurs. Activer l\'option rend public le switcher.',
+        
+        'titre_page_configurer_switcher' => 'Configurer le switcher de squelettes',
     );
 ?>
