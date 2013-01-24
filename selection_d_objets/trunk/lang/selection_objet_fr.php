@@ -14,9 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurations' => 'Configurations',
 
 	// E
-	'explication_choix_multi' => 'Vous pouvez en choisir plusieurs en utilisant les touches ctrl ou maj (pomme ou maj pour macs)',	
 	'erreur_deja_selectionne' => 'Cet objet a déjà été sélectionné pour cette liste',
-	'explication_selection_cible' => 'Si aucun cible n\'est choisit, tous seront retenus.',	
+	'explication_choix_multi' => 'Vous pouvez en choisir plusieurs en utilisant les touches ctrl ou maj (pomme ou maj pour macs)',
+	'explication_selection_cible' => 'Si aucun cible n\'est choisit, tous seront retenus.',
 	'explication_selection_objets_cible' => 'Les objets cibles auxquelles des "Objets Sélection" pourront être attachés',
 	'explication_selection_type_liens' => 'Vous pouvez définir des types de relations : indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par défaut. La description peut être une chaîne de langue.',
 
