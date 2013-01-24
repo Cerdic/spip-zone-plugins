@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfgform_comment_reset' => 'Here you can set the action of the "Cancel" button of the form (<i>redefine its action can allow you to close the thickbox window rather than a popup window eg</i>).',
 	'cfgform_comment_squelette' => 'If you have created a personal skeleton for the dialog plugin window (<i>like the model file "tip_a_friend.html"</i>) enter it here ; your skeleton will necessarily include the form "<b>tipafriend_form</b>".',
 	'cfgform_comment_taf_css' => 'the plugin defines CSS styles on the model of the SPIP\'s distribution ; by default, these styles are included in the form but you can here choose not to include them.',
-	'cfgform_info_balise' => 'The tag returns the link to open the form page. You can change the image displayed by directly editing the skeleton "<strong>modeles/tipafriend.html</strong>" in the plugin.', # MODIF
+	'cfgform_info_balise' => 'The tag returns the link to open the form page. You can change the image displayed by directly editing the skeleton "<strong>modeles/tipafriend.html</strong>" in the plugin.',
 	'cfgform_info_patron_html' => 'If the plugin <a href="http://www.spip-contrib.net/?article3371"><strong>Facteur</strong></a> is installed and running on your site it is possible to construct an HTML version of the email sent.',
 	'cfgform_info_patrons' => 'Your personal patrons are to be placed in the subdirectory "<strong>patrons/</strong>" of your skeletons directory.',
 	'cfgform_info_squelettes' => 'Your personal skeletons are to be placed directly in your home skeletons directory.',
@@ -55,23 +55,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfgform_titre_taf_css' => 'Include defaut CSS definitions',
 
 	// D
-	'doc_chapo' => 'Le plugin "Tip A Friend" propose un formulaire complet pour envoyer une page d\'un site SPIP ({n\'importe laquelle}) à une liste d\'adresses e-mail.', # NEW
-	'doc_en_ligne' => 'Documentation du plugin sur Spip-Contrib', # NEW
-	'doc_titre_court' => 'Documentation TipAFriend', # NEW
-	'doc_titre_page' => 'Documentation du plugin "Tip A Friend"', # NEW
-	'docskel_sep' => '----', # NEW
-	'documentation' => '
-Cette page vous permet de tester l\'utilisation du plugin en fonction de votre site, de votre configuration et de vos personnalisations. Les différents liens proposés ajoutent un objet SPIP ou incluent un modèle dans le corps de la page. Vous pouvez modifier ces inclusions en éditant le paramètre correspondant de l\'URL courante.
+	'doc_chapo' => 'The plugin "Tip A Friend" offers a complete form to send a page of a SPIP site ({any one}) to a list of email addresses.',
+	'doc_en_ligne' => 'Documentation',
+	'doc_titre_court' => 'TipAFriend documentation',
+	'doc_titre_page' => '"Tip A Friend" plugin documentation',
+	'docskel_sep' => '----',
+	'documentation' => 'This page allows you to test the use of the plugin to suit your site, your configuration and customizations. Different links provided add an object SPIP or include a model in the body of the page. You can change these inclusions by editing the corresponding parameter of the current URL.
 
-{{{La balise TIPAFRIEND}}}
+{{{TIPAFRIEND tag}}}
 
-{{Utilisation}}
+{{Use}}
 
-Le plugin propose une balise qui construit un lien ouvrant la page d\'envoi du mail d\'information en fonction de l\'objet SPIP courant. Cette balise accepte un unique argument, optionnel, permettant de définir :
--* soit {{le squelette utilisé pour générer ce lien}}, il faut alors indiquer le nom du squelette en question ({sans l\'extension ".html"}) ; le squelette doit être présent dans votre répertoire de modèles ;
--* soit {{le type de lien présenté}} ; si vous indiquez l\'argument "{{mini}}", la balise renverra uniquement l\'image du lien, sans le texte "Envoyer cette page ...".
+The plugin provides a tag that builds a link that opens the page sending email information based on the current object SPIP. This tag accepts a single argument, optional, to define:
+- * {{Skeleton used to generate this link}} must then specify the name of the skeleton ({without the extension ".html"}); skeleton must be present in your template directory;
+- * Or {{type of link provided}}, if you specify the argument "{{mini}}" tag will only return the image of the link without the text "Send this page ...".
 
-{{Exemple}}
+{{Example}}
 
 <cadre class="spip">
 // balise seule
@@ -84,26 +83,26 @@ Le plugin propose une balise qui construit un lien ouvrant la page d\'envoi du m
 
 {{Tests}}
 
-Les liens ci-dessous ajoutent un objet SPIP à la page courante, laissant apparaître le rendu de la balise TIPAFRIEND.
-- [Ajouter l\'article 1->@url_article@] <small>(id_article=...)</small>
-- [Ajouter la brève 2->@url_breve@] <small>(id_breve=...)</small>
-- [Recalculer la page->@url_recalcul@]
-- [Retour à la page vierge->@url_vierge@]
+The links below add a SPIP object to the current page, showing the rendering of the tag TIPAFRIEND.
+- [Add article 1->@url_article@] <small>(id_article=...)</small>
+- [Add the news 2->@url_breve@] <small>(id_breve=...)</small>
+- [Recalculate the page->@url_recalcul@]
+- [Return to a blank page->@url_vierge@]
 
-Pour modifier l\'argument de la balise dans cette page de tests, ajoutez l\'argument "{{arg=...}}" à l\'URL courante ({par exemple pour utiliser l\'argument "mini", cliquez dans la barre d\'adresse de votre navigateur et ajoutez à la fin de l\'adresse courante "&arg=mini"}).
+To change the argument of the tag in the test page, add the argument "arg = {{...}}" to the current URL ({eg to use the argument "mini", click the address of your browser and add at the end of the current address "&arg=mini"}).
 
-{{{Les modèles}}}
+{{{Models}}}
 
-Les liens ci-dessous vous permettent de tester les modèles utilisés en page web ({avec des valeurs fictives}) ou de les inclure à la page courante.
-- [Inclure le modèle \'tipafriend_mail_default.html\'->@url_model@] <small>(model=...)</small>
-- [Voir le modèle brut avec des données fictives->@url_model_brut@]
-- [Voir le modèle HTML avec des données fictives->@url_model_html@] <small>(nécessite le plugin {{[Facteur->http://www.spip-contrib.net/?article3371]}})</small>
+The links below allow you to test the models used in web page ({with dummy values ​}) or to include them in the current page.
+- [Include the model \'tipafriend_mail_default.html\'->@url_model@] <small>(model=...)</small>
+- [See the raw model with dummy values->@url_model_brut@]
+- [See the HTML model with dummy values->@url_model_html@] <small>(you need the plugin {{[Facteur->http://www.spip-contrib.net/?article3371]}})</small>
 
-{{{Paramètres de CFG pour TIPAFRIEND}}}
+{{{CFG Configuration Settings of TIPAFRIEND}}}
 
-Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubrique575]}} est actif sur votre site, le lien ci-dessous vous présente les valeurs de configuration enregistrées pour le plugin "Tip A Friend".
+If the plugin {{[CFG : Configuration Engine->http://www.spip-contrib.net/?rubrique575]}} is active on your site, the link below shows you the configuration values ​​recorded for the plugin "Tip A Friend".
 
-@cfg_param@', # NEW
+@cfg_param@',
 
 	// E
 	'error_dest' => 'You have not specified recipient',
@@ -123,13 +122,13 @@ Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubr
 	'form_title' => 'Send a page by e-mail',
 
 	// I
-	'info_doc' => 'Si vous rencontrez des problèmes pour afficher cette page, [cliquez-ici->@link@].', # NEW
-	'info_doc_titre' => 'Note concernant l\'affichage de cette page', # NEW
-	'info_skel_doc' => 'Cette page de documentation est conçue sous forme de squelette SPIP fonctionnant avec la distribution standard ({fichiers du répertoire "squelettes-dist/"}). Si vous ne parvenez pas à visualiser la page, ou que votre site utilise ses propres squelettes, les liens ci-dessous vous permettent de gérer son affichage :
+	'info_doc' => 'If you are having problems viewing this page [click here->@link@].',
+	'info_doc_titre' => 'Note on the display of this page',
+	'info_skel_doc' => 'This manual page is designed as a skeleton SPIP operating with the standard distribution ({files from the directory "squelettes-dist/"}). If you are unable to view the page, or if your site uses its own skeletons, the links below allow you to manage its display:
 
--* [Mode "texte simple"->@mode_brut@] ({html simple + balise INSERT_HEAD})
--* [Mode "squelette Zpip"->@mode_zpip@] ({squelette Z compatible})
--* [Mode "squelette SPIP"->@mode_spip@] ({compatible distribution})', # NEW
+-* ["simple text" mode ->@mode_brut@] ({simple html + tag INSERT_HEAD})
+-* ["skeleton Zpip" mode->@mode_zpip@] ({Z skeleton compatible})
+-* ["SPIP skeleton mode->@mode_spip@] ({distribution compatible})',
 
 	// L
 	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] distributed under [GNU GPL v3->http://www.opensource.org/licenses/gpl-3.0.html] license.',
@@ -155,39 +154,39 @@ Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubr
 
 	// P
 	'page_test' => 'Test page (local)',
-	'page_test_balise' => 'Rendu de la balise TIPAFRIEND', # NEW
-	'page_test_cfg_pas_installe' => 'Le Plugin [CFG->http://www.spip-contrib.net/?rubrique575] ne semble pas installé ...', # NEW
-	'page_test_fin_simulation' => '-- Fin de l\'inclusion pour simulation', # NEW
-	'page_test_in_new_window' => 'Page de test en nouvelle fenêtre', # NEW
-	'page_test_menu_inclure' => 'Inclure le modèle \'tipafriend_mail_default.html\'', # NEW
-	'page_test_models_comment' => 'Les liens ci-dessous vous permettent de tester les modèles utilisés en page web (<i>avec des valeurs fictives</i>).', # NEW
-	'page_test_test_model_brut' => 'Voir le modèle brut avec des données fictives', # NEW
-	'page_test_test_model_html' => 'Voir le modèle HTML avec des données fictives', # NEW
-	'page_test_title' => 'Test du plugin "Tip A Friend"', # NEW
-	'page_test_titre_inclusion_model' => '-- Inclusion du modèle \'@model@\' (<i>valeurs fictives</i>)', # NEW
-	'page_test_titre_inclusion_objet' => '-- Simulation de page de @objet@ n° @id_objet@ (<i>titre + introduction</i>)', # NEW
+	'page_test_balise' => 'TIPAFRIEND tag render',
+	'page_test_cfg_pas_installe' => 'The [CFG-> http://www.spip-contrib.net/?rubrique575] plugin does not seem to be installed ...',
+	'page_test_fin_simulation' => '-- End of the inclusion for simulation',
+	'page_test_in_new_window' => 'Test page in a new window',
+	'page_test_menu_inclure' => 'Include the model \'tipafriend_mail_default.html\'',
+	'page_test_models_comment' => 'The links below allow you to test the models used in web page (<i>with dummy values ​</i>).',
+	'page_test_test_model_brut' => 'View raw model with fictive data',
+	'page_test_test_model_html' => 'View HTML model with fictive data',
+	'page_test_title' => '"Tip A Friend" plugin test',
+	'page_test_titre_inclusion_model' => '-- Model inclusion \'@model@\' (<i>fictive values</i>)',
+	'page_test_titre_inclusion_objet' => '-- Page simulation for @objet@ n° @id_objet@ (<i>title + introduction</i>)',
 	'popup_name' => 'Send an information by e-mail',
 
 	// T
-	'taftest_arguments_balise_dyn' => 'Arguments reçus dans balise dynamique', # NEW
-	'taftest_arguments_balise_stat' => 'Arguments reçus dans balise statique', # NEW
-	'taftest_chargement_patron' => 'chargement du patron \'@patron@\'', # NEW
-	'taftest_content' => '<b><u>Détails du mail envoyé</u></b>', # NEW
-	'taftest_contexte_modele' => 'Contexte envoyé au modèle', # NEW
-	'taftest_creation_objet_champs' => 'Création d\'un objet \'Champs\' pour l\'ID objet', # NEW
-	'taftest_creation_objet_texte' => 'Création d\'un objet \'Texte\' pour le nom d\'objet', # NEW
-	'taftest_from' => '<b><i>Expéditeur</i></b>', # NEW
-	'taftest_mail_content' => '<b><i>Corps du mail</i></b>', # NEW
-	'taftest_mail_content_html' => '<b><i>Corps du mail version HTML</i></b>', # NEW
-	'taftest_mail_headers' => '<b><i>Headers</i></b>', # NEW
-	'taftest_mail_retour' => '<b><i>Retour de la fonction mail()</i></b>', # NEW
-	'taftest_mail_title' => '<b><i>Titre du mail</i></b>', # NEW
-	'taftest_modele_demande' => 'Modèle demandé par l\'utilisateur', # NEW
-	'taftest_param_form' => 'Paramètres transmis au formulaire', # NEW
-	'taftest_patron_pas_trouve' => 'Le patron \'@patron@\' n\'a pas été trouvé !<br />Chargement du patron par défaut.', # NEW
-	'taftest_skel_pas_trouve' => 'Le squelette \'@skel@\' n\'a pas été trouvé !<br />Chargement du squelette par défaut.', # NEW
-	'taftest_title' => 'TipAFriend DEBUG', # NEW
-	'taftest_to' => '<b><i>Destinataires</i></b>', # NEW
+	'taftest_arguments_balise_dyn' => 'Arguments received in dynamique tag',
+	'taftest_arguments_balise_stat' => 'Arguments received in a static tag',
+	'taftest_chargement_patron' => 'loading pattern \'@patron@\'',
+	'taftest_content' => '<b><u>Details of the mail sent</u></b>',
+	'taftest_contexte_modele' => 'Context send to the model',
+	'taftest_creation_objet_champs' => 'Creation of a \'Fields\' object for object ID',
+	'taftest_creation_objet_texte' => 'Creation of a \'Text\' object for the object name',
+	'taftest_from' => '<b><i>Sender</i></b>',
+	'taftest_mail_content' => '<b><i>Mail body</i></b>',
+	'taftest_mail_content_html' => '<b><i>HTML version of the mail body</i></b>',
+	'taftest_mail_headers' => '<b><i>Headers</i></b>',
+	'taftest_mail_retour' => '<b><i>mail function return()</i></b>',
+	'taftest_mail_title' => '<b><i>Mail title</i></b>',
+	'taftest_modele_demande' => 'Model requested by the user',
+	'taftest_param_form' => 'Parameters send to the form',
+	'taftest_patron_pas_trouve' => 'The pattern \'@patron@\' was not found !<br />Loading the default pattern.',
+	'taftest_skel_pas_trouve' => 'The skeleton \'@skel@\' was not found !<br />Loading the default skeleton.',
+	'taftest_title' => 'TipAFriend DEBUG',
+	'taftest_to' => '<b><i>Recipients</i></b>',
 	'tipafriend' => 'Tip A Friend'
 );
 
