@@ -70,9 +70,11 @@ function inc_journal_dist($phrase, $opt = array()) {
 			or !intval($action[$champ['action']][$champ['objet']][$champ['id']]['id_journal'])
 		){
 			$infos = $champs['infos'];
+			// Si les infos sont vides, on fait chaine vide
+			if (empty($infos)){ $infos = ''; }
 			// On sérialise les infos supplémentaires pour la base
 			if(is_array($champs['infos'])){
-				$champs['infos'] = serialize($champs['infos']);
+				$champs['infos'] = serialize($infos);
 			}
 			// On insère
 			$ok = sql_insertq(
@@ -89,6 +91,8 @@ function inc_journal_dist($phrase, $opt = array()) {
 			if (is_array($champs['infos']) and is_array($infos)){
 				// On fusionne les infos supplémentaires
 				$infos = array_merge_recursive($infos, $champs['infos']);
+				// Si les infos sont vides, on fait chaine vide
+				if (empty($infos)){ $infos = ''; }
 				// On sérialise pour la base
 				$champs['infos'] = serialize($infos);
 				// On met à jour la ligne en base
