@@ -39,6 +39,7 @@ a mis a jour la valeur avec la page reelle]
 
 		<tr class='first_row'>
 			<th class='orr_autorisation_nom' scope='col'>[(#TRI{multi orr_autorisation_nom,<:orr_autorisation:label_orr_autorisation_nom:>,ajax})]</th>
+            <th class='orr_autorisation_valeur'><:orr_autorisation:valeur_autorisation:></th>
 			<th class='action' scope='col'></th>
 		</tr>
 	</thead>
@@ -47,6 +48,7 @@ a mis a jour la valeur avec la page reelle]
 		{tri #ENV{par,multi orr_autorisation_nom},#GET{defaut_tri}}{pagination #ENV{nb,10} orra}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#ORR_AUTORISATION_NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
 			<td class='orr_autorisation_nom'>[(#LOGO_ORR_AUTORISATION|image_reduire{20,20})]<a href="[(#ID_ORR_AUTORISATION|generer_url_entite{orr_autorisation})]">#ORR_AUTORISATION_NOM</a></td>
+            <td class="orr_autorisation_valeur">#ORR_AUTORISATION_VALEUR</td>
 			<td class='action'>
 				<button class="button link add" name="ajouter_lien\[orr_autorisation-#ID_ORR_AUTORISATION-#OBJET-#ID_OBJET\]" value="+"><:orr_autorisation:ajouter_lien_orr_autorisation:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
 			</td>
