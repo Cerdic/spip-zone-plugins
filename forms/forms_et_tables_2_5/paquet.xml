@@ -4,7 +4,9 @@
 	categorie="outil"
 	etat="test"
 	compatibilite="[v3 ;["
-	logo="img_pack/form-24.png">
+	logo="img_pack/form-24.png"
+  documentation="http://contrib.spip.net/Form-Table-2-5"
+  >
 	<nom>Formulaires et Tables</nom>
 	<auteur>Sylvain BLANC</auteur>
 	<auteur>Loic LE MAO</auteur>
