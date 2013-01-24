@@ -1,25 +1,60 @@
 @import "bootstrap/css/scaffolding.less";
+@import "css/spip.variables.less";
+//
+// Scaffolding
+// --------------------------------------------------
+
+// Body reset
+// -------------------------
+html { font-size: 100.01%; } /* pour IE < 6 */
+/* Cf.: http://www.pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ et http://forum.alsacreations.com/topic-4-54377-1.html */
+
+body {
+  margin: 0;
+  font-family: @baseFontFamily;
+  font-size: @emFontSize;
+  line-height: @emLineHeight;
+  color: @textColor;
+  background-color: @bodyBackground;
+}
 
 /* Logos, documents et images */
 .spip_logos {}
 
-.spip_documents img,.spip_logos {.img-polaroid}
+.spip_documents_left,
+.spip_documents_right,
+.spip_documents_center img,
+.spip_documents:not(.spip_documents_left):not(.spip_documents_right) img,
+.spip_logos {/*.img-polaroid ou .img-rounded ou .img-circle*/}
 
-.spip_documents { margin-top: @baseLineHeight;margin-bottom: @baseLineHeight; padding: 0; background: none; }
+.spip_documents { margin-top: @emVertMargin;margin-bottom: @emVertMargin; background: none; }
 .spip_documents,
 .spip_documents_center,
 .spip_doc_titre,
 .spip_doc_descriptif { margin-right: auto; margin-left: auto; text-align: center; }
 .spip_documents_center { clear: both; display: block; width: 100%; .box-sizing(border-box);}
+
 .spip_documents_left { float: left; margin: @paddingLarge;margin-left: 0; }
-.spip_documents_right { float: right; margin: @paddingLarge;margin-right: 0;}
+.spip_documents_right { float: right; margin: @paddingLarge;margin-right: 0; }
 .spip_doc_titre {}
 .spip_doc_descriptif { clear: both; }
 
 .cartouche .spip_logos, .hero-unit .spip_logos {float: right;margin: @paddingLarge;margin-top: 0;margin-right: 0;}
-.hentry {margin-bottom: @baseLineHeight;}
-.entry-title .spip_logos { float: right; clear: right; margin: @paddingLarge; margin-top: 0;margin-right: 0; }
+.hentry {margin-bottom: @emVertMargin;}
+.entry-title .spip_logos { float: right; clear: right; margin: @paddingLarge; margin-top: 0;margin-right: 0; line-height: 1px;}
 .secondary .entry-title .spip_logos { margin: @paddingSmall; margin-top: 0;margin-right: 0; }
+
+/* Liens */
+a {color: @linkColor;}
+a:focus,
+a:hover,
+a:active { background-color: spin(lighten(@linkColor,50%) / 4 + @grayLighter / 4 * 3, 20%); color: @linkColorHover; text-decoration: none; }
+a[hreflang]:after { content: "\0000a0(" attr(hreflang) ")"; }
+@media print {
+  a, a:visited { color: @textColor; text-decoration: underline; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; } /* Don't show links for images, or javascript/internal links */
+}
+a {  }
 
 /* Liens de SPIP */
 a.spip_note { font-weight: bold; } /* liens vers notes de bas de page */
@@ -32,3 +67,5 @@ a.spip_glossaire {} /* liens vers encyclopedie */
 	a.spip_out:after,
 	a.spip_url:after { content: " (" attr(href) ")"; }
 }
+
+.on { font-weight: bold; }
