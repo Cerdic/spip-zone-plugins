@@ -18,10 +18,11 @@
 
 #SET{nom_reservation,#INFO_ORR_RESERVATION_NOM{orr_reservations,#GET{id}}}
 
-
+[(#AUTORISER{supprimer,orr_reservation,#ENV{id_ressource}})
 		<p class="#GET{affichage}" id="poubelle">
 		<a class="mediabox" href="[(#URL_PAGE{poubelle}|parametre_url{'idresa',#GET{id}}|parametre_url{'date_debut',#GET{date_debut}})]"><img id="poubelle" src="#CHEMIN{img/supprimer-32.png}" alt="poubelle" /></a>
 		</p>
+]
 
 <p><h1>Ressource : <em>#INFO_ORR_RESSOURCE_NOM{orr_ressources,#ENV{id_ressource}}</em></h1></p>
 
