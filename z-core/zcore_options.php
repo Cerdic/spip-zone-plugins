@@ -23,4 +23,33 @@ else {
 	set_request('var_zajax','');
 }
 
+/**
+ * html Pour pouvoir masquer les logos sans les downloader en petit ecran
+ * il faut le mettre dans un conteneur parent que l'on masque
+ * http://timkadlec.com/2012/04/media-query-asset-downloading-results/
+ *
+ * on fixe le height en CSS pour que le height:auto par defaut sur img ne s'applique pas ici
+ * (un logo est toujours plus petit que l'ecran, donc max-width:100% ne fait rien)
+ * Pour le reduire dans une liste en colonne par exemple il faut faire en css
+ * max-width:50px;height:auto!important;
+ *
+ * @param $logo
+ * @return string
+ */
+function responsive_logo($logo){
+	// gif transparent 1px
+	// http://proger.i-forge.net/The_smallest_transparent_pixel/eBQ
+	$gif = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
+	include_spip('inc/filtres');
+	$img = extraire_balise($logo,"img");
+	list($h,$w) = taille_image($img);
+	$src = extraire_attribut($img,"src");
+	$style = extraire_attribut($img,"style");
+	$style = "background:url($src) no-repeat center;background-size:100%;height:{$h}px;$style";
+	$img = inserer_attribut($img,"src",$gif);
+	$img = inserer_attribut($img,"style",$style);
+	$img = inserer_attribut($img,"class","");
+
+	return "<span class='spip_logos'>$img</span>";
+}
 ?>
