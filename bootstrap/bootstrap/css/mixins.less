@@ -642,6 +642,11 @@
       [class*="span"]:first-child {
         margin-left: 0;
       }
+      /* Fix CM : avoid last block falling when round computation are false by one pixel at the end */
+      [class*="span"]:last-child {
+        margin-left: 0;
+        float:right;
+      }
 
       // Space grid-sized controls properly if multiple per line
       .controls-row [class*="span"] + [class*="span"] {
