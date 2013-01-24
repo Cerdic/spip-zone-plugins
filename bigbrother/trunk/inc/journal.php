@@ -66,12 +66,12 @@ function inc_journal_dist($phrase, $opt = array()) {
 		// ou si ça s'est mal passé (pas d'id_journal correct)
 		// alors on réinsère une ligne de journal
 		if (
-			!isset($action[$champ['action']][$champ['objet']][$champ['id']]['id_journal'])
-			or !intval($action[$champ['action']][$champ['objet']][$champ['id']]['id_journal'])
+			!isset($action[$champs['action']][$champs['objet']][$champs['id']]['id_journal'])
+			or !intval($action[$champs['action']][$champs['objet']][$champs['id']]['id_journal'])
 		){
 			$infos = $champs['infos'];
 			// Si les infos sont vides, on fait chaine vide
-			if (empty($infos)){ $infos = ''; }
+			if (is_null($infos) or empty($infos)){ $infos = ''; }
 			// On sérialise les infos supplémentaires pour la base
 			if(is_array($champs['infos'])){
 				$champs['infos'] = serialize($infos);
@@ -82,12 +82,12 @@ function inc_journal_dist($phrase, $opt = array()) {
 				$champs
 			);
 			// On garde en mémoire ce qui vient d'être journalisé dans ce hit PHP
-			$action[$champ['action']][$champ['objet']][$champ['id']] = array('id_journal'=>$ok,'infos'=>$infos);
+			$action[$champs['action']][$champs['objet']][$champs['id']] = array('id_journal'=>$ok,'infos'=>$infos);
 		}
 		// Sinon on met à jour, et on fusionne les infos
 		else{
-			$id_journal = $action[$champ['action']][$champ['objet']][$champ['id']]['id_journal'];
-			$infos = $action[$champ['action']][$champ['objet']][$champ['id']]['infos'];
+			$id_journal = $action[$champs['action']][$champs['objet']][$champs['id']]['id_journal'];
+			$infos = $action[$champs['action']][$champs['objet']][$champs['id']]['infos'];
 			if (is_array($champs['infos']) and is_array($infos)){
 				// On fusionne les infos supplémentaires
 				$infos = array_merge_recursive($infos, $champs['infos']);
@@ -102,7 +102,7 @@ function inc_journal_dist($phrase, $opt = array()) {
 					'id_journal = '.intval($id_journal)
 				);
 				// On met à jour la variable statique
-				$action[$champ['action']][$champ['objet']][$champ['id']] = array('id_journal'=>$$id_journal,'infos'=>$infos);
+				$action[$champs['action']][$champs['objet']][$champs['id']] = array('id_journal'=>$$id_journal,'infos'=>$infos);
 			}
 		}
 	}

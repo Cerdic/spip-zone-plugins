@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
-	'action ajouter document' => '@qui@ a ajout&eacute; le document @id@',
+	'action_ajouter_document' => '@qui@ a ajout&eacute; le document @id@',
 	'action_entree_objet' => '@qui@ est entr&eacute; sur la page de l\'objet "@type@" num&eacute;ro @id@',
 	'action_inserer_objet' => '@qui@ a cr&eacute;&eacute; l\'objet "@type@" num&eacute;ro @id@',
 	'action_instituer_objet' => '@qui@ a modifi&eacute; le statut de l\'objet "@type@" num&eacute;ro @id@',

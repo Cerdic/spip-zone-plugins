@@ -76,7 +76,7 @@ function bigbrother_post_edition($flux){
 	if (!in_array($config_a_tester, array('inserer', 'modifier', 'instituer'))){
 		$config_a_tester = 'modifier';
 	}
-	if(lire_config("bigbrother/$config_a_tester")){
+	if(include_spip('inc/config') and lire_config("bigbrother/$config_a_tester")){
 		// On cherche qui et sur quoi porte l'action
 		$qui = $GLOBALS['visiteur_session']['nom'] ? $GLOBALS['visiteur_session']['nom'] : $GLOBALS['ip'];
 		$qui_ou_ip = $GLOBALS['visiteur_session']['id_auteur'] ? $GLOBALS['visiteur_session']['id_auteur'] : $GLOBALS['ip'];
@@ -107,7 +107,7 @@ function bigbrother_post_edition($flux){
  * @param unknown_type $flux
  */
 function bigbrother_post_insertion($flux){
-	if(lire_config('bigbrother/inserer')){
+	if(include_spip('inc/config') and lire_config('bigbrother/inserer')){
 		$qui = $GLOBALS['visiteur_session']['nom'] ? $GLOBALS['visiteur_session']['nom'] : $GLOBALS['ip'];
 		$qui_ou_ip = $GLOBALS['visiteur_session']['id_auteur'] ? $GLOBALS['visiteur_session']['id_auteur'] : $GLOBALS['ip'];
 
