@@ -85,8 +85,9 @@ Un item est compose de :
 }
 
 /* thumb */
-.thumb .item, .thumb.short {
+.thumb .item, .item.thumb {
   //padding:@emVertMargin / 4 0;
+  &:first-child:last-child {border:0;}
 }
 .thumb {
   .entry-title {padding-top: 120px+@baseLineHeight;display: block}
