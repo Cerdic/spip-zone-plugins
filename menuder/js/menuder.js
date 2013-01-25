@@ -13,3 +13,13 @@ $(document).ready(function(){
 	);
 });
 }
+
+/* dans tous les cas marquer un focus clavier */
+$(document).ready(function(){
+	$('.menuder ul')
+		.focusin(function(){
+			$(this).parent().addClass('hover') })
+		.focusout(function(){
+			$(this).parent().removeClass('hover') });
+});
+
