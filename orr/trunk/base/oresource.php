@@ -13,9 +13,21 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function oresource_declarer_tables_interfaces($interfaces) {
 
+	$interface['tables_jointures']['spip_orr_autorisations'][] = 'orr_autorisations_liens';
+	$interface['tables_jointures']['spip_orr_autorisations_liens'][] = 'orr_autorisations';
+
+	$interface['tables_jointures']['spip_orr_ressources'][] = 'orr_autorisations_liens';
+
+	$interface['tables_jointures']['spip_orr_reservations'][] = 'orr_reservations_liens';
+	$interface['tables_jointures']['spip_orr_reservations_liens'][] = 'orr_reservations';
+	$interface['tables_jointures']['spip_auteurs'][] = 'orr_reservations_liens';
+
 	$interfaces['table_des_tables']['orr_ressources'] = 'orr_ressources';
 	$interfaces['table_des_tables']['orr_autorisations'] = 'orr_autorisations';
+	$interfaces['table_des_tables']['orr_autorisations_liens'] = 'orr_autorisations_liens';
 	$interfaces['table_des_tables']['orr_reservations'] = 'orr_reservations';
+	$interfaces['table_des_tables']['orr_reservations_liens'] = 'orr_reservations_liens';
+
 
 	return $interfaces;
 }
