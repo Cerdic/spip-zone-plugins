@@ -117,7 +117,7 @@
 			</tbody>
 		</table>
 		[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
-		<INCLURE{fond=prive/journal/journal_defaut_infos,id_journals=#GET{id_journals},env,ajax}>
+		[(#GRAND_TOTAL|<{2000}|oui)<INCLURE{fond=prive/journal/journal_defaut_infos,env,ajax}>]
 		</B_journal_stats>
 		<p><:bigbrother:info_aucun_resultat:></p>
 		<//B_journal_stats>
