@@ -35,7 +35,7 @@
 			{objet ?}{id_objet ?}
 			{id_auteur ?}{id_auteur !IN #CONFIG{bigbrother/exclure_auteurs,#ARRAY}}
 			{action like #ENV{action,%}}
-			{fusion date_format(date, '%Y-%m-%d')}
+			{fusion date(date)}
 		/>#SET{nb_dates,#TOTAL_BOUCLE}<//B_nb_dates>
 		
 		<p><:bigbrother:explication_page_stats:></p>
