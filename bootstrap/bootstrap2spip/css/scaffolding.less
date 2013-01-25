@@ -39,10 +39,26 @@ body {
 .spip_doc_titre {}
 .spip_doc_descriptif { clear: both; }
 
-.cartouche .spip_logos, .hero-unit .spip_logos {float: right;margin: @paddingLarge;margin-top: 0;margin-right: 0;}
-.hentry {margin-bottom: @emVertMargin;}
-.entry-title .spip_logos { float: right; clear: right; margin: @paddingLarge; margin-top: 0;margin-right: 0; line-height: 1px;}
+.cartouche,.hero-unit,.entry-title {
+  .spip_logos {float: right; clear: right; margin: @paddingLarge; margin-top: 0;margin-right: 0; line-height: 1px;}
+}
+.cartouche,.hero-unit,.entry{
+  h1+.publication {margin-top: -1 * @emVertMargin;}
+  .publication {.opacity(80);}
+}
+.entry {margin-bottom: @emVertMargin;}
 .secondary .entry-title .spip_logos { margin: @paddingSmall; margin-top: 0;margin-right: 0; }
+
+/* Notes */
+.notes {small; padding-top: @emVertMargin;margin-top: @emVertMargin;max-width: 5*(@gridColumnWidth+@gridGutterWidth);}
+.notes > h2 {border-bottom: 2px solid lighten(@grayLight, 20%);}
+.notes > div p {font-size: inherit;line-height: inherit;font-weight: 200;}
+.notes > div {padding-left: @gridColumnWidth+@gridGutterWidth; position: relative; }
+.notes .spip_note_ref { display:block;position:absolute;left:0;width: @gridColumnWidth;}
+.secondary {
+  .notes > div {padding-left: 2*@gridGutterWidth;}
+  .notes .spip_note_ref { width: 2*@gridGutterWidth;}
+}
 
 /* Liens */
 a {color: @linkColor;}
