@@ -40,6 +40,7 @@ Un item est compose de :
 .liste-items .item .entry-title:first-child {margin-top: 0;}
 
 .entry {
+  .publication {.opacity(80);}
   div.spip,p,.p {margin-bottom: @emVertMargin / 2;}.entry-title {margin-bottom: @baseLineHeight * (@emVertMargin/@emLineHeight) / 2;}
   .entry-content > :last-child {margin-bottom: 0;}
   .entry-content {margin-bottom: @emVertMargin / 2;}
@@ -69,12 +70,6 @@ Un item est compose de :
   .entry-content {}
   .postmeta {display:block;}
 }
-.with-read-more {
-  .entry {position: relative;padding-bottom: @emLineHeight;}
-  .entry-content {}
-  .postmeta {min-height: @emLineHeight;padding:@emVertMargin / 2 0;padding-left: 2em;padding-bottom: 0;margin-bottom: -@emLineHeight;}
-  .read-more {display:block; position: absolute;z-index: 10;bottom:0;left:0;text-align: right;padding:@emVertMargin / 2 0;padding-left:0;padding-bottom: 0;line-height: @emLineHeight;font-size: @emFontSize;}
-}
 
 /* Short */
 .short .item, .item.short {
@@ -97,6 +92,21 @@ Un item est compose de :
   .spip_logos img {height: 100%!important;width: 100%}
   .entry-content {max-height: 5*@emLineHeight;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;}
 }
+
+/* on demand */
+.with-read-more {
+  .entry {position: relative;padding-bottom: @emLineHeight;}
+  .entry-content {}
+  .postmeta {min-height: @emLineHeight;padding:@emVertMargin / 2 0;padding-left: 2em;padding-bottom: 0;margin-bottom: -@emLineHeight;}
+  .read-more {display:block; position: absolute;z-index: 10;bottom:0;left:0;text-align: right;padding:@emVertMargin / 2 0;padding-left:0;padding-bottom: 0;line-height: @emLineHeight;font-size: @emFontSize;}
+}
+.with-publication .entry {.publication {display: block;}}
+.with-publication-inline .entry {.publication {display: inline;}}
+.with-postmeta .entry {.postmeta {display: block;}}
+.with-postmeta-inline .entry {.postmeta {display: inline;}}
+.with-content .entry {.entry-content {display: block;}}
+.with-content-inline .entry {.entry-content {display: inline;}}
+
 
 /* dans un .secondary */
 .secondary {
