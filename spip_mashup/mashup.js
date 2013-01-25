@@ -85,7 +85,7 @@ var mashup =
 	/** Fonction principale : Lecture du contenu de la rubrique en Ajax */
 	load : function(id_rubrique, legende)
 	{	// Mettre aux dimentions de la fenetre
-		mashup.resizeMap(true);
+		mashup.delayResizeMap();
 		// Recherche du var_mode
 		var mode = $.geoportail.getParam('var_mode');
 		// Rechercher
@@ -113,6 +113,7 @@ var mashup =
 		var h2 = h	- ($("#entete").css('display')=='none'?0:$("#entete").outerHeight(true)) 
 					- ($("#pied").css('display')=='none'?0:$("#pied").outerHeight(true)) ;
 		map0.setSize(w,Math.round(h2));
+		setTimeout (function(){ map0.getMap().updateSize(); },250);
 		$("#jqDialog_back").width(w).height(h);
 	},
 	resizeMap : function()
@@ -619,6 +620,8 @@ var mashup =
 	{	mashup.loadRubrique (map0, mashup.doc, 0);
 		// Fin
 		$.jqDialog.close();
+		// Rafraichir
+		mashup.resizeMap();
 	}
 };
 
