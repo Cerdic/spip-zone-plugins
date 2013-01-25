@@ -39,6 +39,7 @@ body {
 .spip_doc_titre {}
 .spip_doc_descriptif { clear: both; }
 
+.cartouche {&:last-child{margin-bottom: 0};margin-bottom: @emVertMargin;}
 .cartouche,.hero-unit,.entry-title {
   .spip_logos {float: right; clear: right; margin: @paddingLarge; margin-top: 0;margin-right: 0; line-height: 1px;}
 }
@@ -48,6 +49,7 @@ body {
 }
 .entry {margin-bottom: @emVertMargin;}
 .secondary .entry-title .spip_logos { margin: @paddingSmall; margin-top: 0;margin-right: 0; }
+.postmeta >:first-child >.sep:first-child {display: none}
 
 /* Notes */
 .notes {small; padding-top: @emVertMargin;margin-top: @emVertMargin;max-width: 5*(@gridColumnWidth+@gridGutterWidth);}
