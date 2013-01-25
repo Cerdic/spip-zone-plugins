@@ -5,7 +5,7 @@
 #SET{pages,#GET{premiere}|range{#GET{derniere}}}
 #SET{sep,#ENV{separateur,'-'}}
 <B_pages>
-	<span class="pagination-label"><span class="label">[(#ENV{label,<:zpip:pagination_pages:>})]</span></span>
+	<span class="pagination-label"><span class="label">[(#ENV{label,<:zcore:pagination_pages:>})]</span></span>
 	<ul>[<li><a
 	href='[(#ENV{url}|parametre_url{#ENV{debut},''}|ancre_url{#ENV{ancre}})]'
 	class='lien_pagination'
