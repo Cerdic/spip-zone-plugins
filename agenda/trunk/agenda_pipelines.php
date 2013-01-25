@@ -160,7 +160,7 @@ function agenda_quete_calendrier_prive($flux){
  */
 function agenda_post_edition($flux){
 	if ($flux['args']['table']=='spip_articles'
-	  AND $flux['args']['action'] = 'instituer'
+	  AND $flux['args']['action'] == 'instituer'
 	  AND $id_article = $flux['args']['id_objet']
 	  AND isset($flux['data']['statut'])
 	  AND $statut = $flux['data']['statut']
