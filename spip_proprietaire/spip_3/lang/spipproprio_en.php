@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'copyright_comment_label' => 'Protection comment',
 	'copyright_complement_label' => 'Extra information',
 	'copyright_default_comment' => 'Reproduction, even partial, of the contents of pages on this site without prior consent is strictly prohibited.',
-	'copyright_default_comment_multi' => '<multi>Reproduction, even partial, of the contents of pages on this site without prior consent is strictly prohibited (short citations are permitted by French law for comments and criticism, as they are strictly concurrent, and are specified the original author and the Internet link to the source page).[fr]La reproduction, même partielle, des contenus des pages de ce site sans accord préalable est strictement interdite (les citations sont autorisées par le droit français pour commentaires et critiques, tant que ceux-ci y sont strictement concomitants et que sont précisés l\'auteur original et le lien Internet vers la page source).</multi>', # NEW
+	'copyright_default_comment_multi' => '<multi>Reproduction, even partial, of the contents of pages on this site without prior consent is strictly prohibited (short citations are permitted by French law for comments and criticism, as they are strictly concurrent, and are specified the original author and the Internet link to the source page).</multi>',
 	'copyright_legend' => 'Copyright informations',
 	'createur' => 'creator',
 
@@ -145,89 +145,87 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pconfig_titre_page' => 'Owner configuration',
 	'pconfig_titre_page_short' => 'Configuration',
 	'pourquoi_ce_plugin' => 'Why this plugin ? (<i>legal recalls</i>)',
-	'presentation' => '{{{Obligations légales françaises concernant tout site internet}}}
+	'presentation' => '{{{French legal obligations on any website}}}
 
-Tout site Internet, qu’il soit professionnel ou "de loisirs", doit respecter un ensemble d’obligations légales dictées par la [LCEN|Voir le texte sur legifrance.fr->http://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000801164] ({Loi pour la confiance dans l’économie numérique}) de juin 2004. Ces informations doivent être clairement accessibles à tout internaute utilisant le site et l’éditeur du site, son propriétaire, a le devoir de contrôler son contenu, autant en terme rédactionnel que concernant les commentaires laissés par les internautes.
+Any website, whether professional or "recreational" must meet a set of legal obligations dictated by [LCEN|Voir le texte sur legifrance.fr->http://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000801164] ({Confidence Law in the Digital Economy}) in June 2004. This information must be clearly accessible to any user using the site and the site editor, owner, has the duty to control its content, both in terms of content and the comments left by users.
 
-Dans la suite de cette documentation, nous utiliserons les termes suivants :
-- l’{{éditeur du site}} est son "propriétaire", l’organisme ou la personne qui en est responsable, qui en édite le contenu ;
-- le {{créateur du site}} est l’organisme, la personne ou l’agence qui l’a créé, fabriqué, à la demande de l’éditeur ({il est parfois nécessaire de différencier le créateur graphique du créateur technique}) ;
-- l’{{hébergeur du site}} est l’organisme ou la personne qui possède le serveur sur lequel le site est hébergé physiquement.
+In the remainder of this document, we use the following terms:
+- The {{site editor}} is its "owner", the organization or person who is responsible, who publishes content;
+- The {{creator of the website}} is the body, the person or agency that created, produced at the request of the editor ({sometimes it is necessary to differentiate the technical creator of the graphic designer});
+- The {{web host}} is the body or the person who owns the server where the site is hosted physically.
 
-Ces trois entités doivent être clairement définies dans les mentions légales de tout site web. Le créateur du site ne fait l’objet d’aucune obligation légale mais il est préférable de suivre la même procédure que pour l’hébergeur.
+These three entities must be clearly defined in any legal website. The creator of the site is not subject to any legal obligation, but it is best to follow the same procedure as the host.
 
-{{Concernant les sites édités par une personne morale ({entreprise, association ...})}}
+{{For the sites published by a corporation ({company, association ...})}}
 
-Une page "mentions légales" doit apparaître clairement sur le site, listant l’ensemble des informations ci-dessous.
-- la raison sociale de l’éditeur ;
-- son siège social ;
-- un numéro de téléphone ;
-- l’identité du directeur de publication et, s’il y a lieu, du directeur de rédaction ;
-- le nom de l’organisme et le numéro d’enregistrement auprès duquel l’activité de la personne morale a été déclarée ({RCS, Maison des Artistes ...}) ;
-- le capital social de la personne morale s’il y a lieu ;
-- un contact du responsable administratif du site ({adresse courriel des directeurs cités plus haut ou du webmestre}).
+A "legal mention" page must appear clearly on the site, listing all the information below.
+- The name of the publisher;
+- Its head office;
+- A telephone number;
+- The identity of the editor and, if applicable, the managing editor;
+- The name of the organization and the registration number which the activity of the legal person has been declared ({RCS, House of Artists ...});
+- The capital of the corporation if applicable;
+- Contact of the administrative official site ({directors email address mentioned above or webmaster}).
 
-{{Concernant les sites édités par une personne physique ({un particulier})}}
+{{For the sites published by a person ({an individual })}}
 
-Une page "mentions légales" doit apparaître clairement sur le site, indiquant les {{nom}}, {{prénom}}, {{adresse de domicile}} et {{contact téléphonique}} du propriétaire.
-<br />Il est cependant possibe de conserver son anonymat et de se dispenser de mentionner ces informations à partir du moment où elles ont été transmises, complètes et correctes, à l’hébergeur du site, qui peut conserver ces informations secrètes, sauf dans le cadre d’une procédure judiciaire. Les mentions légales devront dans ce cas mentionner ce choix.
+A page "legal mention" must appear clearly on the site, indicating the {{family name}} {{first name}} {{home address}} and {{telephone contact}} of the owner.
+<br />However, it is possibe to remain anonymous and to provide the information mentioned from the moment they were transmitted, completed and corrected to the web host that can keep such information confidential, except in the context of judicial proceedings. The disclaimer must mention in this case that choice.
 
-{{Informations sur les conditions d’hébergement du site}}
+{{Information of website hosting conditions}}
 
-Pour les personnes morales {{et}} physiques ({dans tout les cas pour résumer}), il est obligatoire de préciser les conditions d’hébergement du site, même si ce dernier est hébergé à titre gratuit.
-<br />Les informations suivantes doivent être mentionnées :
-- nom de l’hébergeur ;
-- sa raison sociale ;
-- son siège social ;
-- un numéro de téléphone.
+For moral persons {{and}} physical ({in any case to summarize}), it is mandatory to specify the conditions of the site hosting, even if it is hosted free of charge.
+<br />The following information should be disclosed:
+- Name of the host;
+- Its corporate name;
+- Its head office;
+- A phone number.
 
-Dans le cas d’un site hébergé sur un serveur personnel ou propriété de l’éditeur, ces informations sont caduques mais cela devra être précisé.
+In the case of a site hosted on a personal server or property of the publisher, this information is outdated but this should be clarified.
 
-{{Informations personnelles des internautes}}
+{{Web users Personal Information}} 
 
-Dans le cas où des informations personnelles des internautes sont enregistrées par le site, comme par exemple une adresse courriel pour l’inscription à une newsletter, les conditions d’utilisation de ces informations par l’éditeur du site devront être clairement énumérées, notamment leur divulgation à des tiers. 
+In cases where personal information is stored by the web site, such as an email address to register for a newsletter, the conditions of use of such information by the site editor will be clearly listed, including their disclosure to third parties.
 
-Dans le cas d’une newsletter, il y a {{obligation de proposer un moyen de désinscription à volonté}} à l’internaute ({un lien présent dans chaque mail est la procédure courante}).
+In the case of a newsletter, there is  an {{obligation to provide a mean to unsubscribe}} to the user ({link in each email is the standard procedure}).
 
-{{Mention concernant la CNIL}}
+{{Note regarding the CNIL}}
 
-La [CNIL->http://www.cnil.fr/] ({Commission Nationale de l’Informatique et des Libertés}) est un organisme ayant pour mission la protection de la vie privée et des libertés individuelles.
-<br />Dès lors qu’une information est enregistrée par votre site, qu’elle soit directement ou indirectement nominative, une déclaration doit être faite à la CNIL, qui vous transmet en retour un numéro de récépissé, que vous avez obligation de mentionner.
-<br />Pour rappel, la CNIL propose une procédure de déclaration en ligne ({cf. site ci-dessous}).
+The [CNIL->http://www.cnil.fr/] ({National Commission for Computing and Liberties}) is an organization whose mission is the protection of privacy and individual liberties.
+<br />Once that information is recorded by your site, whether directly or indirectly nominative, a declaration must be made to the CNIL, which sends you back a receipt number, that you are required to indicate .
+<br />As a reminder, the CNIL provides a procedure for reporting online ({cf. website below}).
 
-De plus, l’internaute doit pouvoir obtenir un accès, une rectification s’il y a lieu et même un effacement de toutes les informations le concernant personnellement stockées par le site. Les mentions légales devront donc préciser clairement le moyen mis à disposition de l’internaute pour effectuer une telle demande.
+In addition, the user must be able to access, modify if necessary and even erase all stored personal information concerning the site. The disclaimer must therefore clearly specify the means made available to the user to make such a request.
 
-Site de la CNIL : [->http://www.cnil.fr/]
+CNIL website: [->http://www.cnil.fr/]
 
-A noter que des modifications récentes dispensent certains sites ({personnels, blogs ou associatifs}) de cette déclaration. Reportez-vous au site de la CNIL pour plus d’informations.
+Note that recent amendments exempt certain ({personal sites, blogs or associations}) of this statement. Refer to the CNIL website for more information.
 
-{{Mentions complémentaires conseillées}}
+{{Additional comments recommended}}
 
-Afin de vous protéger au mieux, il est très fortement conseillé d’inclure dans vos mentions légales des informations sur la protection dont les contenus et médias présents sur le site font l’objet, l’étendue de votre responsabilité quant à ces contenus ({communément "Limitation de responsabilité"}), une information concernant les cookies éventuellement déposés par le site ({conseil CNIL}).
+To be as protected as possible it is highly advisable to include in your legal mentions, information on protection such as content and media on the site which are subjected to the extent of your liability for these contents ({commonly "Limitation of Liability"}), information on cookies may be placed by the site ({CNIL council}).
 
-Plus généralement, il y a lieu d’adapter vos mentions légales à votre activité ({professions réglementées, site de commerce ...}).
-', # NEW
-	'presentation_outils_de_communication' => '{{{Valoriser son site web}}}
+More generally, it is necessary to adjust your legal mentions for your activities ({regulated professions, commerce website ...}).',
+	'presentation_outils_de_communication' => '{{{Promoting your website}}}
 
-Le plugin {{Mentions Légales}} propose également un ensemble d’outils de présentation d’informations pour valoriser et mettre en avant vos atouts.
+The {{Legal Notice}} plugin also offers a set of tools for presenting information to enhance and highlight your strengths.
 
-Il propose par exemple un modèle de "carte de visite" du site ainsi qu’une "v-Card" ({Virtual Card permettant de charger automatiquement vos informations de contact dans un gestionnaire de mails ou un carnet d’adresse}).
+It offers an example model of "business card" of the site and a "V-Card" ({Virtual Card to automatically load your contact information in an email or in an address book manager}).
 
-Nous vous renvoyons à la page d’exemples ci-dessous pour plus d’information ({cette page prend en compte les informations saisies dans les différents formulaires du plugin, il est donc nécessaire d’en remplir au minimum quelques uns pour visualisation ...}).', # NEW
-	'presentation_plugin' => '{{{Fonctionnalités du plugin Mentions Légales}}}
+Refer to the examples page below for more information ({this page takes into account the information entered in the different forms of the plugin, so it is necessary to fill in at least some for viewing...}).',
+	'presentation_plugin' => '{{{Features Legal Notice plugin}}}
 
-Ce plugin vous propose un ensemble de formulaires et de modèles pour faciliter la mise en place des informations précitées. Il vous permet notamment de définir les informations concernant l’éditeur, le créateur et l’hébergeur du site et propose des modèles d’affichages de celles-ci.
+This plugin provides a set of forms and templates to facilitate the implementation of the above information. It allows you to set information about the editor, creator and host of the site and provides models to display it.
 
-Il est conseillé de prendre un moment pour personnaliser le modèle "mentions_legales.html" présent dans le répertoire "modeles/" du plugin. C’est ici que se construisent les textes légaux. Vous pouvez modifier ou ajouter des textes depuis le bouton "Textes de langue propriétaire" ci-dessous.
+It is advisable to take a moment to customize the template "mentions_legales.html" in the directory "modeles/" of the plugin. It is here that are build legal texts. You can edit or add text with the "Owner language  texts" button below.
 
-Vous pouvez également inclure ces modèles dans les objets éditoriaux de SPIP en utilisant les raccourcis typographiques "&lt;mentions_legales|&gt;" et "&lt;conditions_utilisation|&gt;".
+You can also include these models in the editorial objects using SPIP typographical shortcuts "&lt;mentions_legales|&gt;" and "&lt;conditions_utilisation|&gt;".
 
-Pour finir, des modèles de squelettes d’en-tête et de pieds de page sont proposés, construits à l’image de ceux de la distribution de SPIP, ajoutant les informations de copyright et un accès aux mentions légales du site. Vous pouvez bien entendu les personnaliser : il s’agit des fichiers "inc-head.html" et "inc-pied.html" présents dans le répertoire "public/inc/" du plugin. Pour les utiliser, placez les directement dans le répertoire "public/" ou à la racine de votre répertoire de squelettes.
+Finally, models of skeletons headers and footers are proposed, build like those of the SPIP distribution, adding copyright information and access to the website disclaimer. You can of course customize them: they are the "inc-head.html" and "inc-pied.html" files in the "public/inc/" directory of the plugin. To use them, place them directly in the "public/" or at the root of your skeletons directory.
 
-{{{Note pour les utilisateurs de squelettes Zpip}}}
+{{{Note to Zpip skeletons users }}}
 
-Depuis sa version 1.1, le plugin propose une adaptation Z-compatible des squelettes cités plus haut. Pour les visualiser, ajoutez simplement "_zpip" aux noms de squelettes ci-dessus. Le contenu de ces squelettes est disponible dans le répertoire "public/contenu/".
-', # NEW
+Since version 1.1, the plugin offers an Z-compatible skeletons adaptation mentioned above. To view it, simply add "_zpip" to the skeletons names above. The content of these skeletons is available in the "public/contenu/" directory.',
 	'proprietaire' => 'owner',
 	'proprietaire_export_import' => 'Legal statements : maintenance',
 	'proprietaire_export_import_texte_supp' => 'Here you can save your current configuration and your personal language strings, or restore them from a previous backup (<i>including from another site</i>) ...<br /><br />',
@@ -249,7 +247,7 @@ Depuis sa version 1.1, le plugin propose une adaptation Z-compatible des squelet
 	'ptexte_info_titre' => 'Help / Reminders ...',
 	'ptexte_supprimer' => 'Delete entry',
 	'ptexte_texte' => 'This page allows you to manage certain owner texts necessary for the site without the regular edition mode (<i>modified language file on the server</i>).<br /><br />Entries \'Text displayed\' in the table are editable by clicking on the corresponding \'shortcut\'. You can also add entries using the form \'Complete Edition\'.',
-	'ptexte_titre_page' => 'Language owner texts',
+	'ptexte_titre_page' => 'Owner language  texts',
 	'ptexte_titre_page_short' => 'Language texts',
 
 	// R
