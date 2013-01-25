@@ -81,7 +81,9 @@ img.puce {vertical-align: baseline}
 
 /* Listes */
 ul, ol, li, dl, dt, dd {margin:0;padding:0;}
-ul,ol {margin-bottom: @emVertMargin;}
+ul,ol {margin-left: @indentStep;margin-bottom: @emVertMargin;}
+@media (min-width: 1200px) {ul,ol { margin-left: @indentStep1200; }}
+@media (max-width: 979px) {ul,ol{ margin-left: @indentStep768; }}
 ul ul, ol ol, ul ol, ol ul { margin-top: 0; margin-bottom: 0; }
 
 // Remove default list styles
@@ -243,15 +245,8 @@ p, .p, dl, dd, blockquote, address, pre, table, fieldset { margin:0;margin-botto
 .spip_surligne { background-color: @infoBackground; color: @infoText;}
 #descriptif_site_spip {.lead}
 
-/* Listes SPIP */
-ul.spip, ol.spip { margin-left: @indentStep; }
-@media (min-width: 1200px) {
-  ul.spip, ol.spip { margin-left: @indentStep1200; }
-}
-@media (max-width: 979px) {
-  ul.spip, ol.spip { margin-left: @indentStep768; }
-}
-
+/* Listes SPIP : indentation est par defaut sur ul,ol */
+ul.spip, ol.spip { }
 ul.spip { list-style-type: square; }
 li ul.spip { list-style-type: disc; }
 li li ul.spip { list-style-type: circle; }
