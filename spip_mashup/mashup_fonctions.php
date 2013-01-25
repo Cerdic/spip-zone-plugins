@@ -154,7 +154,8 @@ function mashup_param($p, $what, $val="")
 	- renvoie sur la page mashup_objet pour affichage dans un dialogue (si ajax_mashup==1)
 */
 function spip_mashup_styliser($flux)
-{	// On est dans une rubrique
+{	global $spip_version_branche;
+	// On est dans une rubrique
 	if (($fond = $flux['args']['fond'])
 	 AND $flux['args']['ext']="html")
 	{	// On est dans un mashup => renvoyer en AJAX
@@ -175,7 +176,8 @@ function spip_mashup_styliser($flux)
 				$n = strpos($row['descriptif'],"<mashup|carte");
 				if ($n!==FALSE) 
 				{	// Recherche du squelette
-					$base = find_in_path("mashup.html");
+					if ($spip_version_branche>=3) $base = find_in_path("mashup.3.html");
+					else $base = find_in_path("mashup.html");
 					$squelette = substr($base, 0, - 5);
 					$flux['data'] = $squelette;
 					// $flux['data'] = _DIR_PLUGIN_SPIP_MASHUP."mashup";

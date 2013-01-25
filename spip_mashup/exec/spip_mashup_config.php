@@ -23,6 +23,7 @@ function exec_spip_mashup_config()
 	{	
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('spip_mashup:spip_mashup'), "", "");
+		echo "<style>.spip_mashup_config .inner {border-width:2px}</style>";
 		echo gros_titre("Plugin "._T('spip_mashup:spip_mashup'), '', false);
 		
 		echo debut_gauche('',true);

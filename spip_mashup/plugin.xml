@@ -22,7 +22,7 @@ Les articles, rubriques et documents sont localis&#233;s g&#233;ographiquement e
 		<nom>affiche_droite</nom>
 		<inclure>mashup_fonctions.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<necessite id="geoportail" version="[1.02;]" />
 	<categorie>divers</categorie>
 </plugin>

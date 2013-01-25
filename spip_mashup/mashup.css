@@ -15,6 +15,7 @@
 #page_mashup
 {	overflow:hidden;
 	text-align:left;
+	border:0;
 }
 
 #page_mashup .GeoportalMapDiv 
@@ -34,12 +35,16 @@
 {	background:url("img/regl_Horiz_Haut_Bleu.gif") no-repeat center center;
 	height:6px!important;
 	cursor:pointer;
+	margin:0;
+	padding:0;
 }
 #page_mashup .gpViewerUpperSeparatorTop,
 #page_mashup .gpViewerLowerSeparator
 {	background:url("img/regl_Horiz_Bas_Bleu.gif") no-repeat center center;
 	height:6px!important;
 	cursor:pointer;
+	margin:0;
+	padding:0;
 }
 
 #page_mashup .gpViewerLowerSeparatorBottom

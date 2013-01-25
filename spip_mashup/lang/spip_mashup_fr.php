@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info1'			=> 'Les objets sur la carte s\'affichent &agrave; un zoom donn&eacute;. 
 					En dessous de ce niveau de zoom, ils ne s\'affichent pas. 
 					Vous pouvez configurer la mani&egrave;re dont les objets s\'affichent.
-					<br/><br/>En particulier, vou pouvez activer une couche de fond pour toujours afficher les images (sous forme de petits carr&eacute;s).',
+					<br/><br/>En particulier, vous pouvez activer une couche de fond pour toujours afficher les images (sous forme de petits carr&eacute;s).',
 'info2'			=> 'Vous pouvez choisir si les objets utilisent leur propre niveau de zoom ou celui de leur conteneur (de sa rubrique pour un article).',
 'info3'			=> 'Lorsque vous cliquez sur un article :',
 'backLayer'		=> 'activer la couche de fond',
