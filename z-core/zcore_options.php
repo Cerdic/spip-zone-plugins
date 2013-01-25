@@ -46,10 +46,11 @@ function responsive_logo($logo){
 	$src = extraire_attribut($img,"src");
 	$style = extraire_attribut($img,"style");
 	$style = "background:url($src) no-repeat center;background-size:100%;height:{$h}px;$style";
+	$class = extraire_attribut($img,"class");
 	$img = inserer_attribut($img,"src",$gif);
 	$img = inserer_attribut($img,"style",$style);
 	$img = inserer_attribut($img,"class","");
 
-	return "<span class='spip_logos'>$img</span>";
+	return "<span class='$class'>$img</span>";
 }
 ?>
