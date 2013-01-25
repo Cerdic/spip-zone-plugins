@@ -3,7 +3,7 @@
     <auteur>bertrand Gugger, Matthieu Marcillaud</auteur>
     <licence>&#169; 2009 GNU/LGPL</licence>
     <version>
-    1.16.0
+    1.16.1
     </version>
     <etat>
     stable
@@ -73,6 +73,7 @@
         <inclure>cfg_pipeline.php</inclure>
     </pipeline>
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
+	<utilise id="crayons" version="[1.0.0;]" />
 	<categorie>outil</categorie>
 	<traduire gestionnaire="salvatore" module="cfg" reference="fr" />
 </plugin>

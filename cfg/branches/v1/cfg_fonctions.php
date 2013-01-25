@@ -71,17 +71,22 @@ function balise_CFG_CHEMIN_dist($p) {
 }
 
 
+if (!function_exists('balise_EDIT_CONFIG_dist')) {
 /**
  * #EDIT_CONFIG : Pour jouer avec les Crayons et les configurations
- * 
- * <code>
- * <div class="#EDIT_CONFIG{plugin/casier/cle}">
- * 		#CONFIG{plugin/casier/cle}
- * </div>
- * </code>
  *
- * @param <type> $p
- * @return <type> 
+ * @note
+ *   crayons > 1.14 le permet aussi maintenant
+ *
+ * @example
+ *   <code>
+ *   <div class="#EDIT_CONFIG{plugin/casier/cle}">
+ *     #CONFIG{plugin/casier/cle}
+ *   </div>
+ *   </code>
+ *
+ * @param Champ $p
+ * @return Champ
  */
 function balise_EDIT_CONFIG_dist($p) {
 	$config = interprete_argument_balise(1,$p);
@@ -91,6 +96,7 @@ function balise_EDIT_CONFIG_dist($p) {
 	  $p->statut = 'php';
 	  $p->interdire_scripts = false;
 	return $p;
+}
 }
 
 /**
