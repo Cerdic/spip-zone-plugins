@@ -24,6 +24,7 @@ function oresource_upgrade($nom_meta_base_version, $version_cible) {
 	// Création du groupe de mots clés : orr et le rattacher à la basse orr_ressources
 	if (sql_countsel('spip_groupes_mots', "titre = 'orr'") == 0) {
 	$id_groupe = sql_insertq('spip_groupes_mots',array('titre'=>'orr', 'unseul'=>'nom','tables_liees'=>'orr_ressources','minirezo'=>'oui'));
+    $id_mot    = sql_insertq('spip_mots',array('titre'=>'orr_defaut','id_groupe'=>$id_groupe,'type'=>'orr'));
 	}
 }
 
@@ -45,6 +46,10 @@ function oresource_vider_tables($nom_meta_base_version) {
 	sql_delete("spip_forum",                 sql_in("objet", array('orr_ressource','orr_autorisation', 'orr_reservation')));
 
 	effacer_meta($nom_meta_base_version);
+
+    #supprimer le mots clef orr_defaut et le groupe de mot orr
+    sql_delete('spip_groupes_mots',"titre='orr'");
+    sql_delete('spip_mots',"titre='orr_defaut'");
 }
 
 ?>
