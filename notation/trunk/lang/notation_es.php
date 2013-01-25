@@ -39,26 +39,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'err_balise' => '[NOTATION_ERR: etiqueta fuera de artículo]',
 	'err_db_notation' => '[NOTATION ERREUR: una sola anotación por artículo]',
 	'exemple' => 'Distribución de notas (nota= 5, factor de ponderación= @ponderation@): ',
-	'explication_accepter_note' => 'Si "fermée", la notation sera activable au cas par cas sur les objets ayant cette fonctionnalité.', # NEW
+	'explication_accepter_note' => 'Si "cerrada", la notación será activada en cada objeto que contenga esta funcionalidad.',
 
 	// I
 	'info_acces' => 'Abrir el voto:',
-	'info_etoiles' => 'Ce paramètre vous permet de modifier la valeure maximale de la note (le nombre d\'étoiles, entre 1 et 10, et 5 par défaut).<br />
-                    <strong style="color:red">/!\\ Attention</strong> : vous ne devez pas toucher à ce paramètre une fois la notation engagée car les notes ne seront pas recalculées et cela peut provoquer des incohérences dans la notation...<br />
-                    Ce paramètres doit être fixé une fois pour toute à la création des notes.', # NEW
+	'info_etoiles' => 'Esta configuración le permite modificar el valor máximo de la nota (el número de estrellas, entre 1 y 10, y 5 por defecto).<br />
+                    <strong style="color:red">/!\\ Atención</strong>: no ha de tocar esta configuración una vez la notación quede comprometida las notas no podrán volver a calcularse y podrían darse incoherencias en la notación...<br />
+Esta configuración debe ser fijada una vez para toda la creación de las notas.',
 	'info_fonctionnement_note' => 'Funcionamiento de la anotación',
-	'info_ip' => 'Pour être le plus facile possible d\'utilisation, la note est fixée sur l\'adresse IP du votant, ce qui évite deux votes successifs dans la base, avec quelques inconvénients... en particulier si vous gérez des votes d\'auteurs.<br />
-                Dans ce cas, on fixe la note sur l\'identifiant de l\'utilisateur (quand celui-ci est enregistré, bien sûr).<br />
-                Si vous voulez garantir l\'unicité de la note, limitez le vote aux <b>seules</b> personnes enregistrées (ci-dessus).', # NEW
+	'info_ip' => 'Para un uso más fácil, la nota se adjunta a la dirección de IP del votante, lo que evita dos votos sucesivos en la base de datos, con algunos inconvenientes... en particlar si administra votos de autores.<br />
+En este caso, se fija la nota en el identificador del usuario (cuando se registra, por supuesto).<br />
+Si desea garantizar la unicidad de la nota, limite el voto a las <b>seules</b> personas registradas (arriba).',
 	'info_modifications' => 'Modificaciones de las notas',
-	'info_ponderation' => 'Le facteur de pondération permet d\'accorder plus de valeur aux articles ayant reçu suffisament de votes. <br /> Entrez ci-dessous la nombre de votes au delà duquel vous pensez que la note est fiable.', # NEW
+	'info_ponderation' => 'El factor de ponderación permite acordar más valor a los artículos que hayan recibido suficientes votos. <br /> Escriba a continuación el número de votos más allá de aquél que crea que será confiable. ',
 	'ip' => 'IP',
 	'item_adm' => 'a los administradores',
 	'item_all' => 'a todos',
 	'item_aut' => 'a los autores',
 	'item_id' => 'un voto por usuario',
 	'item_ide' => 'a las personas registradas',
-	'item_ip' => 'un voto por IP', # MODIF
+	'item_ip' => 'un voto por IP',
 
 	// J
 	'jaidonnemonavis' => '¡He dado mi opinión!',
@@ -77,7 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nb_etoiles' => 'Valor de las notas',
 	'nbobjets_note' => 'Número de objetos con nota: ',
-	'nbvotes' => 'Número de votos', # MODIF
+	'nbvotes' => 'Número de votos',
 	'nbvotes_moyen' => 'Número de votos de media por objeto:',
 	'nbvotes_total' => 'Número total de votos en el sitio: ',
 	'notation' => 'Anotaciones',
