@@ -122,7 +122,7 @@ Si se trata de un problema de visualización, precise con qué navegador lo expe
 Indique en particular si se ha producido sistemáticamente u ocasionalmente.',
 	'explication_fichier' => 'Adjuntar un archivo a su ticket.',
 	'explication_redaction' => 'Cuando haya finalizado la redacción de su ticket, seleccione el estatus «abierto y discutido».',
-	'explication_url_exemple' => 'Indiquez ici l’URL d’une page concernée par ce ticket.', # NEW
+	'explication_url_exemple' => 'Indique aquí la dirección de URL de una página a la que concierna este ticket.',
 
 	// I
 	'icone_modifier_ticket' => 'Modificar este ticket',
@@ -190,8 +190,8 @@ Indique en particular si se ha producido sistemáticamente u ocasionalmente.',
 	'suivre_tickets_rss_unique' => 'Seguir este ticket por RSS',
 	'suivre_tickets_statut' => 'Tickets que tengan el estatus o los estatus:',
 	'suivre_tickets_tous' => 'Todos los tickets',
-	'syndiquer_ticket' => 'Syndiquer le ticket :', # NEW
-	'syndiquer_tickets' => 'Syndiquer les tickets du site', # NEW
+	'syndiquer_ticket' => 'Sindicar el ticket:',
+	'syndiquer_tickets' => 'Sindicar los tickets del sitio',
 
 	// T
 	'texte_ticket_statut' => 'Estatus del ticket:',
@@ -204,7 +204,7 @@ Indique en particular si se ha producido sistemáticamente u ocasionalmente.',
 	'tickets_general' => 'Configuraciones generales',
 	'tickets_sticked' => 'Tickets anclados',
 	'tickets_sur_inscription' => 'La redacción de tickets o de comentarios sólo es posible para las personas identificadas.',
-	'tickets_sur_inscription_droits' => 'Les droits dont vous disposez sont insuffisants.', # NEW
+	'tickets_sur_inscription_droits' => 'Los derechos de los que dispone no son suficientes.',
 	'tickets_traites' => 'Todos los tickets procesados',
 	'tickets_tries' => 'Tickets correspondientes a sus criterios',
 	'titre' => 'Tickets, seguimiento de bugs',
@@ -217,12 +217,12 @@ Indique en particular si se ha producido sistemáticamente u ocasionalmente.',
 	'type_amelioration_long' => 'Tickets que piden una mejora',
 	'type_probleme' => 'Problema',
 	'type_probleme_long' => 'Problemas a resolver',
-	'type_tache' => 'Tâche', # NEW
-	'type_tache_long' => 'Les tâches à accomplir', # NEW
+	'type_tache' => 'Tarea',
+	'type_tache_long' => 'Tareas a cumplir',
 
 	// V
 	'vos_tickets_assignes' => 'Tickets que le han sido asignados',
-	'vos_tickets_assignes_auteur' => 'Les tickets de @nom@ qui vous sont assignés', # NEW
+	'vos_tickets_assignes_auteur' => 'Tickets de @nom@ que le son asignados',
 	'vos_tickets_en_cours' => 'Sus tickets en curso de redacción'
 );
 
