@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /* inserer le css et le js externes pour Crayons dans le <head>
  *
- *  Crayons plugin for spip (c) Fil, toggg 2006-2010 -- licence GPL
+ *  Crayons plugin for spip (c) Fil, toggg 2006-2013 -- licence GPL
  */
 
 # mettre a true dans mes_options pour avoir les crayons non compresses
@@ -182,30 +182,43 @@ EOH;
 	return $page;
 }
 
-// #EDIT{ps} pour appeler le crayon ps ;
-// si cette fonction est absente, balise_EDIT_dist() met a vide
+
+/**
+ * Balise indiquant un champ SQL crayonnable
+ *
+ * @note
+ *   Si cette fonction est absente, balise_EDIT_dist() déclarée par SPIP
+ *   ne retourne rien
+ * 
+ * @example
+ *   <div class="#EDIT{texte}">#TEXTE</div>
+ *   <div class="#EDIT{ps}">#PS</div>
+ *
+ * @param Champ $p
+ *   Pile au niveau de la balise
+ * @return Champ
+ *   Pile complétée par le code à générer
+**/
 function balise_EDIT($p) {
 
 	// le code compile de ce qui se trouve entre les {} de la balise
 	$label = interprete_argument_balise(1,$p);
 
 	// Verification si l'on est dans le cas d'une meta
-	// #EDIT{meta-descriptif_site} #EDIT{slogan_site} #EDIT{nom_site} et #EDIT{email_webmaster}
-	if(preg_match('/meta-(.*)\'/',$label,$meta)){
-		if(in_array($meta[1],array('descriptif_site','slogan_site','nom_site','email_webmaster'))){
-			$type = 'meta';
-			$label= 'valeur';
-			$primary = $meta[1];
-			$p->code = "classe_boucle_crayon('"
-				. $type
-				."',"
-				.sinon($label,"''")
-				.","
-				. $primary
-				.").' '";
-			$p->interdire_scripts = false;
-			return $p;
-		}
+	// #EDIT{meta-descriptif_site} ou #EDIT{meta-demo/truc}
+	if (preg_match('/meta-(.*)\'/',$label,$meta)) {
+		$type = 'meta';
+		$label= 'valeur';
+		$primary = $meta[1];
+		$p->code = "classe_boucle_crayon('"
+			. $type
+			."',"
+			.sinon($label,"''")
+			.","
+			. "str_replace('/', '__', '$primary')" # chaque / doit être remplacé pour CSS.
+			.").' '";
+		$p->interdire_scripts = false;
+		return $p;
 	}
 
 	$i_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
@@ -247,6 +260,50 @@ function balise_EDIT($p) {
 	return $p;
 }
 
+
+/**
+ * Balise indiquant une configuration crayonnable
+ *
+ * @example
+ *   <div class="#EDIT_CONFIG{descriptif_site}">#DESCRIPTIF_SITE_SPIP</div>
+ *   <div class="#EDIT_CONFIG{demo/truc}">#CONFIG{demo/truc}</div>
+ *
+ * @param Champ $p
+ *   Pile au niveau de la balise
+ * @return Champ
+ *   Pile complétée par le code à générer
+**/
+function balise_EDIT_CONFIG_dist($p) {
+
+	// le code compile de ce qui se trouve entre les {} de la balise
+	$config = interprete_argument_balise(1,$p);
+	if (!$config) return $p;
+
+	// chaque / du nom de config doit être transformé pour css.
+	// nous utiliserons '__' à la place.
+
+	$type = 'meta';
+	$label= 'valeur';
+
+	$p->code = "classe_boucle_crayon('"
+		. $type
+		. "','"
+		. $label
+		. "',"
+		. "str_replace('/', '__', $config)" 
+		. ").' '";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+/**
+ * Crée le controleur du crayon indiqué par la classe CSS
+ *
+ * @param string $class
+ *   Class CSS de crayon tel que créé par #EDIT
+ * @return string
+ *   HTML du crayon, sinon texte d'erreur
+**/
 function creer_le_crayon($class) {
 	include_spip('inc/crayons');
 	include_spip('action/crayons_html');
@@ -254,7 +311,18 @@ function creer_le_crayon($class) {
 	return $a['$erreur'] ? $a['$erreur'] : $a['$html'];
 }
 
-// #CRAYON{ps} pour creer le crayon ps SI ?edit=1;
+/**
+ * Balise #CRAYON affichant un formulaire de crayon
+ * SI ?edit=1;
+ *
+ * @example
+ *   #CRAYON{ps}
+ *
+ * @param Champ $p
+ *   Pile au niveau de la balise
+ * @return Champ
+ *   Pile complétée par le code à générer
+**/
 function balise_CRAYON($p) {
 	$p = balise_EDIT($p);
 	$p->code = 'creer_le_crayon('.$p->code.')';
@@ -262,12 +330,24 @@ function balise_CRAYON($p) {
 }
 
 
-// Donne la classe crayon en fonction
-// - du type de la boucle
-// (attention aux exceptions pour #EDIT dans les boucles HIERARCHIE et SITES)
-// - du champ demande (vide, + ou se terminant par + : (+)classe type--id)
-// - de l'id courant
+/**
+ * Donne la classe CSS crayon en fonction
+ * - du type de la boucle
+ *   (attention aux exceptions pour #EDIT dans les boucles HIERARCHIE et SITES)
+ * - du champ demande (vide, + ou se terminant par + : (+)classe type--id)
+ * - de l'id courant
+ * 
+ * @param string $type
+ *   Type d'objet, ou "meta" pour un champ de configuration
+ * @param string $champ
+ *   Champ SQL concerné
+ * @param int|string $id
+ *   Identifiant de la ligne sql
+ * @return string
+ *   Classes CSS (à ajouter dans le HTML à destination du javascript de Crayons)
+**/
 function classe_boucle_crayon($type, $champ, $id) {
+	// $type = objet_type($type);
 	$type = $type[strlen($type) - 1] == 's' ?
 		substr($type, 0, -1) :
 		str_replace(

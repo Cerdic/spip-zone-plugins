@@ -12,6 +12,7 @@ function verif_secu($w, $secu) {
 
 function post_crayons() {
     $results = array();
+
     if (isset($_POST['crayons']) AND is_array($_POST['crayons']))
     foreach ($_POST['crayons'] as $crayon) {
 
@@ -164,7 +165,7 @@ function crayons_store($options = array()) {
 }
 
 // recuperer une valeur en fonction des parametres recuperes
-// cette fonction cherche une valeur d'un colonne d'une table SQL
+// cette fonction cherche une valeur d'une colonne d'une table SQL
 function crayons_store_get_valeur($content, $regs) {
 	list(,$crayon,$type,$modele,$id) = $regs;
 	return valeur_colonne_table($type, array_keys($content), $id);
@@ -393,10 +394,34 @@ function crayons_update_article($id_article, $c = false) {
 	instituer_article($id_article, $c);
 }
 
+/**
+ * Enregistre les modifications sur une configuration
+ * suite à un crayon sur une meta
+ *
+ * La colonne est toujours 'valeur' pour ces données.
+ * La donnée à enregistrer peut-être une sous partie de configuration.
+ * Si c'est le cas, on gère l'enregistrement via ecrire_config.
+ * 
+ * @param string $a
+ *   Nom ou clé de la meta (descriptif_site ou demo__truc pour demo/truc)
+ * @param bool|array $c
+ *   Liste des champs modifiés
+ *   Ici, 'valeur' normalement.
+ * @return void
+**/
 function revision_meta($a, $c = false) {
 	if (isset($c['valeur'])) {
+		// Certaines cles de configuration sont echapées ici (cf #EDIT_CONFIG{demo/truc})
+		$a = str_replace('__', '/', $a);
 		spip_log("meta '$a' = '$c[valeur]'", 'crayons');
-		ecrire_meta($a, $c['valeur']);
+		// eviter de planter les vieux SPIP
+		if (false === strpos($a, '/')) {
+			ecrire_meta($a, $c['valeur']);
+		// SPIP 3 ou Bonux 2 ou CFG
+		} else {
+			include_spip('inc/config');
+			ecrire_config($a, $c['valeur']);
+		}
 		include_spip('inc/invalideur');
 		suivre_invalideur('meta');
 	}

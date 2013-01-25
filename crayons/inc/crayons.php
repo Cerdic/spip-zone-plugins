@@ -19,18 +19,35 @@ include_spip('inc/autoriser');
 
 include_spip('inc/crayons-json');
 
-// table spip_meta, non ; sauf quelques-uns qu'on teste autoriser(configurer)
-// Attention sur les SPIP < 11515 inc/autoriser passe seulement
-// intval($id) alors qu'ici la cle est une chaine...
+
 if (!function_exists('autoriser_meta_modifier_dist')) {
-	function autoriser_meta_modifier_dist($faire, $type, $id, $qui, $opt) {
-		if (in_array("$id", array(
-			'nom_site', 'slogan_site', 'descriptif_site', 'email_webmaster'
-		)))
-			return autoriser('configurer', null, null, $qui);
-		else
-			return false;
-	}
+/**
+ * Autorisation d'éditer les configurations dans spip_meta
+ *
+ * Les admins complets OK pour certains champs,
+ * Sinon, il faut être webmestre
+ *
+ * @note
+ *  Attention sur les SPIP < 11515 (avant 04/2008) inc/autoriser
+ *  passe seulement intval($id) alors qu'ici la cle est une chaine...
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_meta_modifier_dist($faire, $type, $id, $qui, $opt) {
+	// Certaines cles de configuration sont echapées ici (cf #EDIT_CONFIG{demo/truc})
+	// $id = str_replace('__', '/', $id);
+	if (in_array("$id", array(
+		'nom_site', 'slogan_site', 'descriptif_site', 'email_webmaster'
+	)))
+		return autoriser('configurer', null, null, $qui);
+	else
+		return autoriser('webmestre', null, null, $qui);
+}
 }
 
 // table spip_messages, la c'est tout simplement non (peut mieux faire,
@@ -443,6 +460,18 @@ function valeur_colonne_table_dist($type, $col, $id) {
 	return $r;
 }
 
+/**
+ * Extrait la valeur d'une ou plusieurs colonnes d'une table
+ *
+ * @param string $table
+ *   Type d'objet de la table (article)
+ * @param string|array $col
+ *   Nom de la ou des colonnes (ps)
+ * @param string $id
+ *   Identifiant de l'objet
+ * @return array
+ *   Couples Nom de la colonne => Contenu de la colonne
+**/
 function valeur_colonne_table($table, $col, $id) {
 	if (!is_array($col))
 		$col = array($col);
@@ -452,6 +481,41 @@ function valeur_colonne_table($table, $col, $id) {
 	OR $f = 'valeur_colonne_table_dist')
 		return $f($table, $col, $id);
 }
+
+/**
+ * Extrait la valeur d'une configuration en meta
+ *
+ * Pour ces données, il n'y a toujours qu'une colonne (valeur),
+ * mais on gère l'enregistrement et la lecture via lire_config ou ecrire_config
+ * dès que l'on demande des sous parties d'une configuration.
+ *
+ * On ne retourne alors ici dans 'valeur' que la sous-partie demandée si
+ * c'est le cas.
+ *
+ * @param string $table
+ *   Nom de la table (meta)
+ * @param array $col
+ *   Nom des colonnes (valeur)
+ * @param string $id
+ *   Nom ou clé de configuration (descriptif_site ou demo__truc pour demo/truc)
+ * @return array
+ *   Couple valeur => Contenu de la configuration
+**/
+function meta_valeur_colonne_table_dist($table, $col, $id) {
+	// Certaines clés de configuration sont echapées ici (cf #EDIT_CONFIG{demo/truc})
+	$id = str_replace('__', '/', $id);
+
+	// Éviter de planter les vieux SPIP
+	if (false === strpos($id, '/')) {
+		$config = isset($GLOBALS['meta'][$id]) ? $GLOBALS['meta'][$id] : '';
+	// SPIP 3 ou Bonux 2 ou CFG
+	} else {
+		include_spip('inc/config');
+		$config =  lire_config($id, '');
+	}
+	return array('valeur' => $config);
+}
+
 
 function return_log($var) {
 	die(crayons_json_export(array('$erreur'=> var_export($var,true))));

@@ -2,6 +2,19 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Affiche le controleur (formulaire) d'un crayon
+ * suivant la classe CSS décrivant le champ à éditer (produit par #EDIT)
+ *
+ * @param string $class
+ *   Class CSS décrivant le champ
+ * @param null $c
+ * 
+ * @return array
+ *   Tableau avec 2 entrées possibles :
+ *   - '$erreur' : texte d'erreur éventuel
+ *   - '$html' : code HTML du controleur
+**/
 function affiche_controleur($class, $c=null) {
 	$return = array('$erreur'=>'');
 
@@ -28,6 +41,7 @@ function affiche_controleur($class, $c=null) {
 	} else {
 		$return['$erreur'] = _U('crayons:donnees_mal_formatees');
 	}
+
 	return $return;
 }
 
