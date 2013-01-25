@@ -33,9 +33,10 @@ Un item est compose de :
 .liste {margin-bottom: @emVertMargin};
 .liste.long {margin-bottom: @emVertMargin*2;}
 
-.liste-items {margin-left: 0; list-style: none; border-top:0;border-bottom: 1px solid @listBorderColor;}
+.liste-items {margin-left: 0; list-style: none; border-top:0;}
 //.liste .liste-items {margin-bottom: 0;}
 .liste-items .item {padding:@emVertMargin / 2 0;clear:both; overflow:hidden;border-top: 1px solid @listBorderColor;margin-top: -1px;}
+.liste-items .item:last-child {border-bottom: 1px solid @listBorderColor;}
 .liste-items .item .entry {margin-bottom: 0;}
 .liste-items .item .entry-title:first-child {margin-top: 0;}
 
@@ -74,7 +75,9 @@ Un item est compose de :
 /* Short */
 .short .item, .item.short {
   padding:@emVertMargin / 4 0;
+  &:first-child:last-child {border:0;}
 }
+
 .short {
   .entry-title {font-size: inherit;line-height: inherit;display: inline;}
   .publication,.spip_logos,.entry-content,.postmeta,.read-more {display: none;}
