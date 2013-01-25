@@ -1,0 +1,34 @@
+[(#SET{defaut_tri,#ARRAY{
+	orr_autorisation_nom,1, 
+	id_orr_autorisation,1,
+	points,-1
+}})]<B_liste_orr_autorisations>
+#ANCRE_PAGINATION
+<div class="liste-objets orr_autorisations">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{orr_autorisation:info_1_orr_autorisation,orr_autorisation:info_nb_orr_autorisations}})</strong></caption>]
+
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='orr_autorisation_nom' scope='col'>[(#TRI{orr_autorisation_nom,<:orr_autorisation:label_orr_autorisation_nom:>,ajax})]</th>
+            <th class="orr_autorisation_valeur"><:orr_autorisation:valeur_autorisation:></th>
+            <th class="orr_autorisation_ressource_associe"><:orr_autorisation:nom_orr_autorisation_ressource:></th>
+		</tr>
+	</thead>
+	<tbody>
+	    <BOUCLE_liste_orr_autorisations(ORR_AUTORISATIONS) {id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num orr_autorisation_nom},#GET{defaut_tri}}{par orr_autorisation_nom}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{orr_autorisation-16.png}|balise_img)]</td>
+			<td class='orr_autorisation_nom principale'>[(#LOGO_ORR_AUTORISATION|image_reduire{20,26})][(#RANG). ]#ORR_AUTORISATION_NOM</td>
+            <td class="orr_autorisation_valeur">#ORR_AUTORISATION_VALEUR</td>
+			<td class='orr_autorisation_ressource_associe'> ??</td>
+		</tr>
+	</BOUCLE_liste_orr_autorisations>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_orr_autorisations>[
+<div class="liste-objets orr_autorisations caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_orr_autorisations>

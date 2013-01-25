@@ -18,6 +18,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     //L
     'label_orr_autorisation_nom'  => 'Nom de l\'autorisation',
 
+    //N
+    'nom_orr_autorisation_ressource' => 'Ressource associée',
+
     //R
     'retirer_lien_orr_autorisation' => 'Supprimer le lien de cette autorisation',
     'retirer_tous_liens_orr_autorisations' => 'Supprimer tous les liens des autorisations',

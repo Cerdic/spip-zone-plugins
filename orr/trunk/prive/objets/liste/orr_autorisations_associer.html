@@ -47,7 +47,7 @@ a mis a jour la valeur avec la page reelle]
 	<BOUCLE_liste_orr_autorisations(ORR_AUTORISATIONS){!id_orr_autorisation IN #GET{exclus}}{where?}{recherche?}
 		{tri #ENV{par,multi orr_autorisation_nom},#GET{defaut_tri}}{pagination #ENV{nb,10} orra}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#ORR_AUTORISATION_NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
-			<td class='orr_autorisation_nom'>[(#LOGO_ORR_AUTORISATION|image_reduire{20,20})]<a href="[(#ID_ORR_AUTORISATION|generer_url_entite{orr_autorisation})]">#ORR_AUTORISATION_NOM</a></td>
+			<td class='orr_autorisation_nom'>[(#LOGO_ORR_AUTORISATION|image_reduire{20,20})]<a href="[(#URL_ECRIRE{orr_autorisations})]">#ORR_AUTORISATION_NOM</a></td>
             <td class="orr_autorisation_valeur">#ORR_AUTORISATION_VALEUR</td>
 			<td class='action'>
 				<button class="button link add" name="ajouter_lien\[orr_autorisation-#ID_ORR_AUTORISATION-#OBJET-#ID_OBJET\]" value="+"><:orr_autorisation:ajouter_lien_orr_autorisation:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>

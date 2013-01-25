@@ -39,7 +39,7 @@ a mis a jour la valeur avec la page reelle]
 	<BOUCLE_liste_orr_autorisations(ORR_AUTORISATIONS){id_orr_autorisation IN #GET{selection}}
 		{tri #ENV{par,multi orr_autorisation_nom},#GET{defaut_tri}}{pagination #ENV{nb,10} orrl}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#ORR_AUTORISATION_NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_ORR_AUTORISATION|=={#ENV{id_lien_ajoute}}|oui)append]">
-			<td class='orr_autorisation_nom'>[(#LOGO_ORR_AUTORISATION|image_reduire{20,20})]<a href="[(#ID_ORR_RESERVATION|generer_url_entite{orr_autorisation})]">#ORR_AUTORISATION_NOM</a></td>
+			<td class='orr_autorisation_nom'>[(#LOGO_ORR_AUTORISATION|image_reduire{20,20})]<a href="[(#URL_ECRIRE{orr_autorisations})]">#ORR_AUTORISATION_NOM</a></td>
 
 			</td><td>#ORR_AUTORISATION_VALEUR</td>
 			<td class='action'>
