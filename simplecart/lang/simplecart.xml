@@ -1,5 +1,7 @@
 <traduction module="simplecart" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/simplecart/lang/" reference="es">
-	<langue code="en" />
+	<langue code="en" url="http://trad.spip.net/tradlang_module/simplecart?lang_cible=en">
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+	</langue>
 	<langue code="es" />
 	<langue code="fa" />
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/simplecart?lang_cible=fr">
