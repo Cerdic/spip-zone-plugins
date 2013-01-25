@@ -222,7 +222,7 @@ _ Configure logging options using the tool«[.->spip_log]».[[%log_couteau_suiss
 
 If the external requests involved do not work from your server, or you wish to lock down a possible security weakness, check these boxes to turn them off.[[%distant_off%]][[->%distant_outils_off%]]',
 	'cs_comportement:nom' => 'Behaviour of the Swiss Army Knife',
-	'cs_comportement_ko' => '{{Note :}} ce paramètre requiert un filtre de gravité réglé à plus de @gr2@ au lieu de @gr1@ actuellement.', # NEW
+	'cs_comportement_ko' => '{{Note:}} This parameter requires a severity filter set over @gr2@ instead of @gr1@ now.',
 	'cs_distant_off' => 'Checks of remote versions',
 	'cs_distant_outils_off' => 'The Swiss Knife tools which have remote files',
 	'cs_log_couteau_suisse' => 'Detailed logs of the Swiss Army Knife',
@@ -466,7 +466,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:duree_cache_mutu' => 'Duration of mutualised cache:',
 	'label:enveloppe_mails' => 'Small envelope before email addresses:',
 	'label:expo_bofbof' => 'Place in superscript: <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>',
-	'label:filtre_gravite' => 'Gravité maximale acceptée :', # NEW
+	'label:filtre_gravite' => 'Maximum severity accepted :',
 	'label:forum_lgrmaxi' => 'Value (in characters):',
 	'label:glossaire_groupes' => 'Group(s) used:',
 	'label:glossaire_js' => 'Technique used:',
@@ -560,7 +560,7 @@ _ • {By default}: automatic replacement (from SPIP version 2.0).
 	'mailcrypt:description' => 'Hides all the email links in your textes and replaces them with a Javascript link which activates the visitor\'s email programme when the link is clicked. This antispam tool attempts to prevent web robots from collecting email addresses which have been placed in forums or in the text displayed by the tags in your templates.',
 	'mailcrypt:nom' => 'MailCrypt',
 	'mailcrypt_balise_email' => 'Also consider the #EMAIL tag of your skeletons',
-	'mailcrypt_fonds' => 'Ne pas protéger les fonds suivants :<br /><q4>{Séparez-les par les deux points «~:~» et vérifiez bien que ces fonds restent totalement inaccessibles aux robots du Net.}</q4>', # NEW
+	'mailcrypt_fonds' => 'Do not protect the following backgrounds :<br /><q4>{Separate them by two points «~:~» and make sure that these backgrounds remain inaccessible to web robots.}</q4>',
 	'maj_auto:description' => 'This tool is used to help you easily manage the updates of your various plugins, specifically by retrieving the version number located in your various local <code>svn.revision</code> files and comparing them with those found on the <code>zone.spip.org</code> site.
 
 The list above offers the possibility of running SPIP\'s automatic update process for each of the plugins already installed in the  <code>plugins/auto/</code> directory. The other plugins located in the  <code>plugins/</code> directory are simply listed for information purposes. If the remote version can not be located, then try to proceed with updating the plugin manually.
@@ -765,7 +765,7 @@ _ • {Cache checking}: similar to the preceding option. However, all results ar
 	'spip_log:description' => '@puce@ Manage various parameters taken into account by SPIP to log events specific to website. PHP function to use <code>spip_log()</code>.@SPIP_OPTIONS@
 [[Only keep %nombre_de_logs% file (s), each having %taille_des_logs% Ko maximum size <br/> <q3>{Reset one of these two boxes disables logs input.}</ q3>]]
  [[Other settings :->@puce@ folder where the logs are stored (leave empty by default):<q1> %dir_log% {Currently:} @DIR_LOG@</q1>]] [[->@puce@ File by default : %file_log%]] [[->@puce@ Extension : %file_log_suffix%]][[->@puce@ for each hit: %max_log% maximum file access]]',
-	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
+	'spip_log:description2' => '@puce@ the SPIP severity filter allows you to select the level of maximum importance to be considered before starting a data log. Level 8 allows for example to store all the messages sent by SPIP. The default level is level 5.',
 	'spip_log:description3' => '@puce@ specific logs of the Swiss Army Knife are activated here  «[.->cs_comportement]».',
 	'spip_log:nom' => 'SPIP and the logs',
 	'stat_auteurs' => 'Authors in statistics',
