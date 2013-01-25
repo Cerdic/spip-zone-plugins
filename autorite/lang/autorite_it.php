@@ -128,8 +128,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'visiteurs_tous' => 'à tous les visiteurs du site.', # MODIF
 
 	// W
-	'webmestre' => 'Le webmestre', # NEW
-	'webmestres' => 'Les webmestres' # NEW
+	'webmestre' => 'El webmaster',
+	'webmestres' => 'Los webmaster'
 );
 
 ?>
