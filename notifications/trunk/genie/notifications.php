@@ -54,7 +54,7 @@ function genie_notifications_dist($time) {
 		$body .= "* " . textebrut(propre(couper(
 				$t['titre']."<p>".$t['texte'], 700)))."\n\n";
 
-		$f = sql_select("titre,texte","spip_forum","id_message = " .intval($t['id_message'])
+		$f = sql_select("titre,texte","spip_forum","id_message = " .intval($t['id_objet'])
 			." AND UNIX_TIMESTAMP(date_heure) > "._q($time));
 		while ($ff = sql_fetch($f)) {
 			$body .= "----\n"
@@ -62,7 +62,7 @@ function genie_notifications_dist($time) {
 					"** ".$ff['titre']."<p>".$ff['texte'], 700)))."\n\n";
 		}
 
-		$u = generer_url_ecrire('message', 'id_message='.$t['id_message'],'&');
+		$u = generer_url_ecrire('message', 'id_message='.$t['id_objet'],'&');
 		$body .= "$u\n";
 
 		$subject = "[" .
