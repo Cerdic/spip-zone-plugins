@@ -1,0 +1,18 @@
+<paquet
+	prefix="griseusicobarre"
+	categorie="theme"
+	version="0.1.0"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/griseusicobarre-256.png"
+>
+
+	<nom>Griseus : icônes barre d'édition</nom>
+
+	<auteur>Charles Razack</auteur>
+
+	<credit lien="http://tiheum.deviantart.com/#/d47vo5d">Matthieu James pour le jeu d'icône "Faïence"</credit>
+
+	<licence>GNU/GPL</licence>
+
+</paquet>
