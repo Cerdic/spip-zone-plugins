@@ -1,0 +1,22 @@
+<div class="formulaire_spip">
+<input type="hidden" name="_meta_titre"value="<:exclure_sect:cfg_exclure_secteur:>" />
+
+
+			<form action="#ENV{action}" method="post">
+#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		
+    
+[(#SAISIE{selecteur_rubrique, idrubrique}
+        {obligatoire}
+        {label=Choisir la Rubrique support du forum }
+)]
+	
+    </ul>
+	<p class="boutons">
+	<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" />
+	</p>
+	
+    
+</form>
+</div>

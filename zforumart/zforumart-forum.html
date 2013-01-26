@@ -1,0 +1,28 @@
+<div class="miseEnFormeB lien1">
+
+    <h1><:poster_message:>, <small><:en_reponse:></small></h1>
+
+	<BOUCLE_forum_parent(FORUMS) {id_forum}>
+	
+	<div><strong>#TITRE <small>([(#DATE|affdate_jourcourt)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM)])</small></strong></div>
+	[<div>(#INTRODUCTION|lignes_longues)</div>]
+	</BOUCLE_forum_parent>
+	
+	<BOUCLE_article(ARTICLES) {id_article}>
+	[(#LOGO_ARTICLE|image_reduire{150,100})]
+	<h3>#TITRE</h3>
+	<small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
+	[<div>(#INTRODUCTION)</div>]
+	</BOUCLE_article>
+	
+	<//B_forum_parent>
+    [(#ENV{id_forum}|=={""})
+     [(#FORMULAIRE_FORUM{#URL_PAGE{zforumart2}|parametre_url{idarticle,#ENV{id_article}}})]
+]
+    [(#ENV{id_forum}|>{"0"})
+    [(#FORMULAIRE_FORUM{#URL_PAGE{zforumart-article-thread}|parametre_url{idarticle,#ENV{id_article}}|parametre_url{id_forum,#ENV{id_forum}}})]
+]
+
+</div>
+
+

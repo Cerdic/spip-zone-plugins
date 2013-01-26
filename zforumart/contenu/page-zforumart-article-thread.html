@@ -1,0 +1,49 @@
+<BOUCLE_forum(FORUMS){id_forum}>
+#CACHE{0}
+
+<div class="span-19">
+<div class=page>
+	<BOUCLE_article(ARTICLES){id_article=#ENV{idarticle}}>
+	<div id="menuzforumart">
+        <BOUCLE_ariane(HIERARCHIE){0,1}{id_article}><a href="#URL_PAGE{zforumart1}">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <a href="[(#URL_PAGE{zforumart2}|parametre_url{idarticle,#ENV{idarticle}})]">(#TITRE|couper{80})</a>]
+	</div>
+	</BOUCLE_article>
+		<table style="border:2px solid #006699;text-align: left; width: 100%;background:white" border="0" cellpadding="3" cellspacing="1" >
+			<TR style="background-color:#006699">
+				<TH  align=center colSpan=2 height=25><div class=titreTableau>Sujets</div></TH>
+			</TR>
+			
+			<tr style="background-color:#fff">
+				
+				<td style="text-align:center;vertical-align=top;width:120px;">
+					[(#LOGO_AUTEUR||image_reduire{60,0})]<br>
+					<small>[<strong>(#NOM|couper{80})</strong>]<br>le [(#DATE|affdate_jourcourt)][&nbsp;à&nbsp;(#DATE|heures)][:(#DATE|minutes)]</small></td>
+				<td>
+					<div class="miseEnFormeB lien1">
+						<h1 class="#EDIT{titre}">#TITRE</h1>
+						<div class="#EDIT{texte}">[(#TEXTE)]</div>
+					</div></td>
+			</tr>			
+
+			<BOUCLE_forums_fils(FORUMS){id_parent}{plat}{par date}>
+			<tr [(#COMPTEUR_BOUCLE|alterner{style="background-color:#e8e8e8",style="background-color:#fff"})]>
+				
+				<td style="text-align:center;vertical-align=top;width:120px;">
+					[(#LOGO_AUTEUR||image_reduire{60,0})]<br>
+					<small>[<strong>(#NOM|couper{80})</strong>]<br>le [(#DATE|affdate_jourcourt)][&nbsp;à&nbsp;(#DATE|heures)][:(#DATE|minutes)]</small></td>
+				<td>
+					<div class="miseEnFormeB lien1">
+						<h3 class="#EDIT{titre}">#TITRE</h3>
+						<div class="#EDIT{texte}">[(#TEXTE)]</div>
+					</div>
+			</td>
+			</tr>
+			</BOUCLE_forums_fils>
+		
+		</table>
+		<div class=ideeReagir><a class="mediabox" href="[(#URL_PAGE{zforumart-forum}|parametre_url{id_article,#ENV{idarticle}}|parametre_url{id_forum,#ENV{id_forum}})]"><img src="#CHEMIN{img/forum_bouton_reagirAuSujet.jpg}"></a></div>
+
+</div><!--page-->
+</div><!--miseenpage-->
+
+</BOUCLE_forum>

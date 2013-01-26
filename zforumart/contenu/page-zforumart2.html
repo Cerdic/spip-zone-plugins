@@ -1,0 +1,61 @@
+#CACHE{0}
+<BOUCLE_article_principal(ARTICLES){id_article=#ENV{idarticle}}>
+<div class="span-19">
+<div class=page>
+	
+	<div id="menuzforumart">
+        <BOUCLE_ariane(HIERARCHIE){0,1}{id_article}><a href="#URL_PAGE{zforumart1}">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]
+	</div>
+	
+	<!--[(#LOGO_ARTICLE|?{[<div class=logo><br>(#LOGO_ARTICLE||image_reduire{800,0})</div>],[<div class=titreArticle>(#TITRE|supprimer_numero)</div>]})]-->
+	
+	
+				[(#REM) Forum de l'article ]
+				<a href="#forum" name="forum" id="forum"></a>
+				<h2 class="forum-repondre">
+                    <a class="mediabox" href="[(#URL_PAGE{zforumart-forum}|parametre_url{id_article,#ENV{idarticle}})]">
+						<img src="#CHEMIN{img/forum_bouton_proposerUnSujet.jpg}" alt="zforumart">
+					</a>
+				</h2>
+
+
+	<B_forums>
+	<table style="border:2px solid #006699;text-align: left; width: 100%;background:white" border="0" cellpadding="3" cellspacing="1" >
+		<TR style="background-color:#006699">
+			<TH  align=center colSpan=2 height=25><div class=titreTableau>Sujets</div></TH>
+			<TH  align=center width=50><div class=titreTableau>Réponses</div></TH>
+			<TH  align=center width=150px><div class=titreTableau>Derniers  Messages</div></TH>
+		</TR>
+		  
+	<BOUCLE_forums(FORUMS){id_article=#ENV{idarticle}}{!par date}>
+		<tr [(#COMPTEUR_BOUCLE|alterner{style="background-color:#e0e0e0",style="background-color:#d6d6d6"})]>	
+			<td style="text-align:center;vertical-align=middle;width:70px;background:white">[(#LOGO_AUTEUR||image_reduire{60,0})]</td>
+			
+			<td>
+				<div class=titreLigne>&raquo;&nbsp;<a href="[(#URL_PAGE{zforumart-article-thread}|parametre_url{idarticle,#ENV{idarticle}}|parametre_url{id_forum,#ID_FORUM})]" id="forum#ID_FORUM" title="[(#TEXTE|couper{100})]">#TITRE</a></div>
+				<small>Ecrit le [(#DATE|affdate_jourcourt)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> <span class="#EDIT{qui}">(#NOM|couper{80})</span>]</small></td>
+			
+			<td style="text-align:center;vertical-align=middle;">
+				<!--nombre de message-->
+				<B_nb_forumtotal>
+				<BOUCLE_nb_forumtotal(FORUMS){id_thread}{plat}></BOUCLE_nb_forumtotal>
+				<? $total=#TOTAL_BOUCLE-1;echo $total ; ?>
+				<//B_nb_forumtotal></td>
+	
+			<td  style="text-align:center;vertical-align=middle;">
+				<BOUCLE_dernier_message(FORUMS){id_thread}{plat}{par date}{inverse}{0,1}>
+				<a href="[(#URL_PAGE{forum-article-thread}|parametre_url{idarticle,2}|parametre_url{id_forum,#_forums:ID_FORUM})]#ancre[(#ID_FORUM)]">
+					[(#NOM)]<br>
+					[(#DATE|affdate{'d/m/Y'})] [(#DATE|affdate{'H:i:s'})]
+					</a>
+				</BOUCLE_dernier_message></td>
+		</tr>
+	</BOUCLE_forums>
+	</B_forums>
+	</table>
+
+
+</div><!--page-->
+</div><!--miseenpage-->
+
+</BOUCLE_article_principal>
