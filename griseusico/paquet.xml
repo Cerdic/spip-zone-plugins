@@ -1,11 +1,10 @@
 <paquet
 	prefix="griseusico"
 	categorie="theme"
-	version="0.1.3"
+	version="0.1.4"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/griseus/images/griseusico-256.png"
-	documentation="http://contrib.spip.net/Jeu-d-icones-Griseus"
 >
 
 	<nom>Icônes Griseus</nom>
