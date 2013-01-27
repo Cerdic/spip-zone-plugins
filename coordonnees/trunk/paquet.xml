@@ -1,8 +1,8 @@
 <paquet
 	prefix="coordonnees"
 	categorie="auteur"
-	version="2.0.15"
-	schema="1.8"
+	version="2.0.16"
+	schema="1.8.1"
 	etat="test"
 	compatibilite="[3.0.5;["
 	logo="images/addressbook-128.png"

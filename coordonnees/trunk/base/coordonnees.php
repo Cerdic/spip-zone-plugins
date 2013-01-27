@@ -118,11 +118,12 @@ function coordonnees_declarer_tables_auxiliaires($tables) {
 		'field' => array(
 			"id_adresse"         => "bigint(21) DEFAULT '0' NOT NULL",
 			"id_objet"           => "bigint(21) DEFAULT '0' NOT NULL",
-			"objet"              => "VARCHAR(25) DEFAULT '' NOT NULL",
+			"objet"              => "VARCHAR(25) DEFAULT '' NOT NULL", // peut etre un compte ou un contact
+			"type"               => "VARCHAR(25) DEFAULT '' NOT NULL",
 			"vu"                 => "VARCHAR(6) DEFAULT 'non' NOT NULL"
 		),
 		'key' => array(
-			"PRIMARY KEY"        => "id_adresse,id_objet,objet",
+			"PRIMARY KEY"        => "id_adresse,id_objet,objet,type", // on rajoute le type car on en rajoute un par liaison et qu'il peut y en avoir plusieurs
 			"KEY id_adresse"     => "id_adresse"
 		)
 	);
@@ -130,11 +131,12 @@ function coordonnees_declarer_tables_auxiliaires($tables) {
 		'field' => array(
 			"id_numero"          => "bigint(21) DEFAULT '0' NOT NULL",
 			"id_objet"           => "bigint(21) DEFAULT '0' NOT NULL",
-			"objet"              => "VARCHAR(25) DEFAULT '' NOT NULL",
+			"objet"              => "VARCHAR(25) DEFAULT '' NOT NULL", // peut etre un contact ou un compte
+			"type"               => "VARCHAR(25) DEFAULT '' NOT NULL",
 			"vu"                 => "VARCHAR(6) DEFAULT 'non' NOT NULL"
 		),
 		'key' => array(
-			"PRIMARY KEY"        => "id_numero,id_objet,objet",
+			"PRIMARY KEY"        => "id_numero,id_objet,objet,type", // on rajoute le type car on en rajoute un par liaison et qu'il peut y en avoir plusieurs
 			"KEY id_numero"      => "id_numero"
 		)
 	);
@@ -142,11 +144,12 @@ function coordonnees_declarer_tables_auxiliaires($tables) {
 		'field' => array(
 			"id_email"           => "bigint(21) DEFAULT '0' NOT NULL",
 			"id_objet"           => "bigint(21) DEFAULT '0' NOT NULL",
-			"objet"              => "VARCHAR(25) DEFAULT '' NOT NULL",
+			"objet"              => "VARCHAR(25) DEFAULT '' NOT NULL", // peut etre un contact ou un compte
+			"type"               => "VARCHAR(25) DEFAULT '' NOT NULL",
 			"vu"                 => "VARCHAR(6) DEFAULT 'non' NOT NULL"
 		),
 		'key' => array(
-			"PRIMARY KEY"        => "id_email,id_objet,objet",
+			"PRIMARY KEY"        => "id_email,id_objet,objet,type", // on rajoute le type car on en rajoute un par liaison et qu'il peut y en avoir plusieurs
 			"KEY id_email"       => "id_email"
 		)
 	);

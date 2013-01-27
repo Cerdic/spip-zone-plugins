@@ -75,6 +75,10 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 	$maj['1.8'] = array(
 		array('maj_tables', array('spip_adresses', 'spip_adresses_liens', 'spip_numeros', 'spip_numeros_liens', 'spip_emails', 'spip_emails_liens')),
 	);
+	// Oublié le champ 'type' dans les tables de liens
+	$maj['1.8.1'] = array(
+		array('maj_tables', array('spip_adresses_liens', 'spip_numeros_liens', 'spip_emails_liens')),
+	);
 
 
 	include_spip('base/upgrade');
