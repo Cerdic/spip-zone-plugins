@@ -1,0 +1,26 @@
+<fieldset>
+  <legend>Element no [(#NO|plus{1})]</legend>
+
+  <div class="bouton-effacer"></div>
+
+  <ul>
+
+    [(#SAISIE{input, structure\[#NO\]\[cible\]}
+             {label=<:menu_evitement:label_cible:>}
+             {defaut=#ENV{structure}|table_valeur{#NO}|table_valeur{cible}}
+      )]
+    [(#SAISIE{input, structure\[#NO\]\[titre\]}
+             {label=<:menu_evitement:label_titre:>}
+             {defaut=#ENV{structure}|table_valeur{#NO}|table_valeur{titre}}
+      )]
+    [(#SAISIE{input, structure\[#NO\]\[texte_ancre\]}
+             {label=<:menu_evitement:label_texte_ancre:>}
+             {defaut=#ENV{structure}|table_valeur{#NO}|table_valeur{texte_ancre}}
+      )]
+    [(#SAISIE{input, structure\[#NO\]\[class\]}
+             {label=<:menu_evitement:label_class:>}
+             {defaut=#ENV{structure}|table_valeur{#NO}|table_valeur{class}}
+      )]
+
+  </ul>
+</fieldset>

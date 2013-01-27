@@ -1,0 +1,89 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:menu_evitement:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<input type="hidden" name="_meta_casier" value="menu_evitement" />
+
+    <ul>
+
+    [(#SAISIE{case, lien_vers_menu_admin,
+              label=<:menu_evitement:label_lien_vers_menu_admin:>})]
+
+    [(#SAISIE{case, cacher_menu_quand_pas_focus,
+              label=<:menu_evitement:label_cacher_menu_quand_pas_focus:>})]
+
+    [(#SAISIE{case, cacher_ancres_quand_pas_focus,
+              label=<:menu_evitement:label_cacher_ancres_quand_pas_focus:>})]
+
+    </ul>
+
+    #SET{structure, #ENV{structure}|nettoyer_structure}
+    <div id="structures">
+      <h3 class="titrem">Structure du menu</h3>
+      <BOUCLE_items(DATA) {enum 0,#GET{structure}|count}>
+        <INCLURE{fond=saisies/menu-item, env, no=#VALEUR, structure=#GET{structure}}>
+      </BOUCLE_items>
+    </div>
+
+    <div id="bouton-ajouter"></div>
+    <script>
+    (function ($) {
+      #INCLURE{fond=scripts/formulaire_configurer_menu_evitement.js, env}
+    })(jQuery);
+    </script>
+
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+
+  <style>
+  .formulaire_configurer_menu_evitement form label {
+      width: 100%;
+  }
+  .formulaire_configurer_menu_evitement form .choix {
+      float: left;
+  }
+
+  #structures fieldset {
+      margin: 2px;
+      border: 1px solid #FA9A00;
+      padding: 0 15px;
+      background-color: #F8F7F3;
+  }
+
+  #structures fieldset .bouton-effacer {
+      float: right;
+  }
+
+  #structures fieldset ul {
+      clear: both;
+  }
+
+  #structures fieldset li {
+      display: inline-block;
+      width: 49%;
+      padding: 0;
+  }
+
+  #structures fieldset li label {
+      display: block;
+      padding: 5px;
+      background-color: #E9E9E9;
+      margin: 0;
+  }
+
+  #structures .ui-state-highlight {
+      height: 200px;
+      background-color: #FAE9AB !important;
+      z-index: 1;
+  }
+  </style>
+
+</div>

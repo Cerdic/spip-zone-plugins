@@ -1,0 +1,40 @@
+.virer {
+    position: absolute !important;
+    left: -99999px;
+}
+
+#menu-evitement {
+    position: relative;
+}
+
+#menu-evitement .lien-menu-evitement {
+    display: block;
+    width: 15em;
+    padding: 6px;
+    background-color: white;
+    color: black;
+}
+
+#menu-evitement .lien-menu-evitement:hover,
+#menu-evitement .lien-menu-evitement:focus {
+    background-color: black;
+    color: white;
+}
+
+[(#CONFIG{menu_evitement/cacher_menu_quand_pas_focus}|oui)
+
+.no-js #menu-evitement .lien-menu-evitement {
+    position: absolute;
+    left: -99999px;
+}
+
+.no-js #menu-evitement .lien-menu-evitement:focus {
+    position: static !important;
+}
+
+]
+
+/* les ancres n'ont pas d'interet sans js */
+.no-js .ancre.lien-menu-evitement {
+    display: none;
+}

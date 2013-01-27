@@ -1,0 +1,66 @@
+function ajouterItem() {
+    var nbItems = $('fieldset').length,
+        url_saisie_menu = '#URL_PAGE{ajax/saisie-menu-item}';
+
+    $.ajax({
+        'url': parametre_url(url_saisie_menu, 'no', nbItems),
+        'success': function (data) {
+            var structures = $('#structures').append(data);
+            initBoutonEffacer(nbItems, structures.find('fieldset .bouton-effacer')[nbItems]);
+        }
+    });
+}
+
+function initBoutonEffacer (index, bouton) {
+
+    $(bouton).append('<a href="#bouton-effacer-' + index + '" name="bouton-effacer-'+ index +'" title="Efface definitivement">effacer</a>')
+        .click(function () {
+            $(this).parents('fieldset')
+                .hide()
+                .find('input')
+                .attr('value', '');
+        });
+}
+
+// Dom Ready
+$(function () {
+
+    // Bouton ajouter
+    $('#bouton-ajouter')
+        .append('<a href="#bouton-ajouter" name="bouton-ajouter" title="ajouter un element au menu">Plus</a>')
+        .find('a').click(function () {
+            ajouterItem();
+        });
+
+    // Boutons effacer
+    $('.bouton-effacer').each(initBoutonEffacer);
+
+    // glisser-deposer
+    $('#structures')
+        .prepend('<input type="hidden" name="permutation-structures" />')
+        .sortable({
+            containement: 'parent',
+            cursor: 'move',
+            items: '> fieldset',
+            placeholder: 'ui-state-highlight',
+            update: function (event, ui) {
+                $('#structures input[name="permutation-structures"]')
+                    .attr('value', (function () {
+                        var permutation = [],
+                            previousValue = '';
+
+                        $('#structures fieldset input').each(function () {
+                            var value = $(this).attr('name')
+                                            .replace(/^structure.([0-9]+).*$/, '$1');
+                            if (value !== previousValue) {
+                                previousValue = value;
+                                permutation.push(value);
+                            }
+                        });
+                        return permutation.join(',');
+                    })());
+            }
+        });
+    $('#structures').disableSelection();
+
+});

@@ -1,0 +1,55 @@
+#SET{lien_vers_menu_admin, #CONFIG{menu_evitement}|table_valeur{lien_vers_menu_admin}}
+#SET{structure, #CONFIG{menu_evitement}|table_valeur{structure}}
+
+<div id="menu-evitement">
+[(#GET{lien_vers_menu_admin}|oui|et{#ARRAY{1comite, 0minirezo}|find{#SESSION{statut}}})
+  <a href="#spip-admin" class="lien-menu-evitement">
+    <:menu_evitement:goto_admin:>
+  </a>
+]
+
+<BOUCLE_structure(DATA) {source table, #GET{structure}}>
+  [<a href="#(#VALEUR|table_valeur{cible})" class="lien-menu-evitement">
+    [(#VALEUR|table_valeur{titre})]
+  </a>]
+</BOUCLE_structure>
+
+<script>
+(function ($) {
+    $(function () {
+
+        $('.lien-menu-evitement').keyup(function (e) {
+            if (e.keyCode == 13) { // touche 'enter'
+                var href = $(this).attr('href');
+                $(href).find('a.lien-menu-evitement').first().focus();
+            }
+        });
+
+[(#CONFIG{menu_evitement/cacher_menu_quand_pas_focus}|oui)
+
+        $('#menu-evitement').addClass('virer')
+            .find('.lien-menu-evitement')
+            .focusin(function () {
+                $(this).parents('#menu-evitement').removeClass('virer');
+            })
+            .focusout(function () {
+                $(this).parents('#menu-evitement').addClass('virer');
+            });
+]
+
+[(#CONFIG{menu_evitement/cacher_ancres_quand_pas_focus}|oui)
+        $('.ancre.lien-menu-evitement')
+            .addClass('virer')
+            .focusin(function () {
+                $(this).removeClass('virer');
+            })
+            .focusout(function () {
+                $(this).addClass('virer');
+            });
+]
+
+    });
+})(jQuery);
+</script>
+
+</div>
