@@ -9,6 +9,7 @@ Parametres possibles :
 - lat|latit|latitude = 48.3        latitude du centre de la carte
 - lon|lonxit|longitude = -4.7      longitude du centre de la carte
 - zoom = 5                         zoom de la carte
+- maxZoom = 13                     zoom maximum autorisé
 
 - sw_lat = lat - 10°               latitude du sud-ouest de la bounding box
 - sw_lon = lon - 10°               longitude du sud-ouest de la bounding box
@@ -72,25 +73,28 @@ Uniquement si objets = point_libre :
 var map[(#GET{id})];
 
 (function($){
-	
+
 	var init_map[(#GET{id})] = function(callback) {
 		var map_container = 'map[(#GET{id})]';
-		
+
+		// Création de la carte Leafleat
 		map[(#GET{id})] = new L.Map(map_container,{
 			scrollWheelZoom: [(#ENV{zoom_molette,#ENV{zoom_wheel}}|=={non}|?{false,true})],
-			zoomControl: [(#ENV{no_control,#ENV{aucun_controle}}|!={oui}|?{true,false})]	
+			zoomControl: [(#ENV{no_control,#ENV{aucun_controle}}|!={oui}|?{true,false})][,
+			maxZoom: (#ENV{maxZoom})]
 		});
-		
-		// appeler l'éventuelle fonction de callback
+
+		// Appeler l'éventuelle fonction de callback
 		if (callback && typeof(callback) === "function") {
 			map[(#GET{id})].on('load',function(e){
 				callback(e.target);
 			});
 		}
-		
+
+		// Déterminer la position initiale de la carte
 		[(#GET{utiliser_bb}|non)
 		map[(#GET{id})].setView(new L.LatLng([(#GET{lat})], [(#GET{lon})]), [(#ENV{zoom,#CONFIG{gis/zoom,0}})]);]
-		
+
 		[(#GET{utiliser_bb}|oui)
 		map[(#GET{id})].fitBounds(
 			new L.LatLngBounds(
@@ -98,18 +102,22 @@ var map[(#GET{id})];
 				new L.LatLng([(#GET{ne_lat})], [(#GET{ne_lon})])
 			)
 		);]
-		
-		//default layer
+
+		// Fond de carte par défaut (layer)
 		#SET{layer_defaut,#REM|gis_layer_defaut} #SET{layers,#EVAL{$GLOBALS['gis_layers']}}
-		var [(#GET{layer_defaut})] = [new (#GET{layers}|table_valeur{#GET{layer_defaut}/layer})];
+		var [(#GET{layer_defaut})] = [new (#GET{layers/#GET{layer_defaut}/layer})];
 		map[(#GET{id})].addLayer([(#GET{layer_defaut})]);
-		
+
 		<B_layers>
+		// liste des fonds de carte possibles
 		var layers_control = new L.Control.Layers();
-		layers_control.addBaseLayer([(#GET{layer_defaut})],["(#GET{layers}|table_valeur{#GET{layer_defaut}/nom})"]);
-		<BOUCLE_layers(DATA){source table, #GET{layers}}{si #ENV{control_type,#ENV{controle_type}}|!={non}|et{#ENV{no_control,#ENV{aucun_controle}}|!={oui}}|et{#CONFIG{gis/layers,#ARRAY}|count|>{1}|oui}|oui}>[
-		(#CLE|!={#GET{layer_defaut}}|oui|et{#CLE|in_array{#CONFIG{gis/layers,#ARRAY}}|oui}|oui)
-		layers_control.addBaseLayer([new (#VALEUR|table_valeur{layer})],"[(#VALEUR|table_valeur{nom})]");]
+		layers_control.addBaseLayer([(#GET{layer_defaut})],["(#GET{layers/#GET{layer_defaut}/nom})"]);
+		<BOUCLE_layers(DATA){source table, #GET{layers}}
+			{si #ENV{control_type,#ENV{controle_type}}|!={non}}
+			{si #ENV{no_control,#ENV{aucun_controle}}|!={oui}}
+			{si #CONFIG{gis/layers,#ARRAY}|count|>{1}}>[
+		(#CLE|!={#GET{layer_defaut}}|et{#CLE|in_any{#CONFIG{gis/layers}}|oui})
+		layers_control.addBaseLayer([new (#LAYER)],"#NOM");]
 		</BOUCLE_layers>
 		map[(#GET{id})].addControl(layers_control);
 		// ajouter l'objet du controle de layers à la carte pour permettre d'y accéder depuis le callback
@@ -117,21 +125,31 @@ var map[(#GET{id})];
 		// classe noajax sur le layer_control pour éviter l'ajout de hidden par SPIP
 		$(layers_control._form).addClass('noajax');
 		</B_layers>
-		
+
 		map[(#GET{id})].setView(new L.LatLng(#GET{lat},#GET{lon}),#ENV{zoom,#CONFIG{gis/zoom,0}});
-		
+
 		map[(#GET{id})].attributionControl.setPrefix('');
-		
+
+		// Ajout des contrôles de la carte
 		[(#ENV{scale}|et{#ENV{no_control,#ENV{aucun_controle}}|!={oui}}|oui)
 		map[(#GET{id})].addControl(new L.Control.Scale());
 		][(#ENV{fullscreen}|et{#ENV{no_control,#ENV{aucun_controle}}|!={oui}}|oui)
 		map[(#GET{id})].addControl(new L.Control.FullScreen());
 		][(#ENV{overview}|et{#ENV{no_control,#ENV{aucun_controle}}|!={oui}}|oui)
-		var minimap_layer = [new (#GET{layers}|table_valeur{#GET{layer_defaut}/layer})];
+		var minimap_layer = [new (#GET{layers/#GET{layer_defaut}/layer})];
 		var miniMap = new L.Control.MiniMap(minimap_layer,{width: 100,height: 100}).addTo(map[(#GET{id})]);
 		]
 
-		[(#ENV{point}|!={non}|oui)
+
+		<BOUCLE_definir_les_points_de_la_carte(CONDITION){si #ENV{point}|!={non}}>
+		[(#REM)
+			\#ENV{args} est présent uniquement lors de l'appel d'un modèle <carte_gis|...>
+			dans un texte et contient alors les paramètres passés au modèle manuellement.
+			On considère dans ce cas que seuls ces paramètres doivent calculer le json,
+			et non pas aussi l'environnement automatique ajouté au modèle (comme objet, id_objet)
+			dans lequel le modèle est appelé.
+		]
+		// Récupération des points à mettre sur la carte, via json externe
 		jQuery.getJSON("[(#URL_PAGE{gis_json}|url_absolue)]",
 			{[
 				objets : "(#ENV{objets,#ENV{class}}|trim)",][
@@ -163,9 +181,11 @@ var map[(#GET{id})];
 			},
 			function(data) {
 				if (data){
+					// Charger le json (data) et déclarer les points
 					var geojson = new L.geoJson('', {[
 						style: (#ENV*{path_styles}|json_encode),
 						]onEachFeature: function (feature, layer) {
+							// Déclarer l'icone du points, si défini
 							if (feature.properties && feature.properties.icon){
 								layer.setIcon(new L.Icon({
 									iconUrl: feature.properties.icon,
@@ -173,6 +193,7 @@ var map[(#GET{id})];
 									iconAnchor: new L.Point( feature.properties.icon_anchor\[0\], feature.properties.icon_anchor\[1\] )
 								}));
 							}
+							// Déclarer le contenu de la popup s'il y en a
 							if (feature.properties && (feature.properties.title || feature.properties.description)){
 								var popupContent = '';
 								if (feature.properties.title)
@@ -188,9 +209,12 @@ var map[(#GET{id})];
 					map[(#GET{id})].fitBounds(geojson.getBounds());]
 				}
 			}
-		);]
-		
+		);
+		</BOUCLE_definir_les_points_de_la_carte>
+
+
 		<BOUCLE_test_kml(CONDITION){si (#ENV{kml}|oui)}>
+			// Définir les couches KML ajoutées à la carte
 			#SET{kml, #ENV{kml}}
 			[(#GET{kml}|is_array|non) #SET{kml, #ARRAY{0,#GET{kml}}} ]
 			<BOUCLE_kml(POUR){tableau #GET{kml}}>
@@ -203,7 +227,9 @@ var map[(#GET{id})];
 				map[(#GET{id})].addLayer(kml_#COMPTEUR_BOUCLE);
 			</BOUCLE_kml>
 		</BOUCLE_test_kml>
+
 		<BOUCLE_test_gpx(CONDITION){si (#ENV{gpx}|oui)}>
+			// Définir les couches GPX ajoutées à la carte
 			#SET{gpx, #ENV{gpx}}
 			[(#GET{gpx}|is_array|non) #SET{gpx, #ARRAY{0,#GET{gpx}}} ]
 			<BOUCLE_gpx(POUR){tableau #GET{gpx}}>
@@ -216,12 +242,14 @@ var map[(#GET{id})];
 				map[(#GET{id})].addLayer(gpx_#COMPTEUR_BOUCLE);
 			</BOUCLE_gpx>
 		</BOUCLE_test_gpx>
-		
+
 		[(#ENV{localize_visitor,#ENV{localiser_visiteur}}|oui)
 		map[(#GET{id})].locate({setView: true, maxZoom: [(#ENV{zoom,#CONFIG{gis/zoom,0}})]});]
-		
+
 	}
 
+
+	// Charger le javascript de GIS et initialiser la carte
 	$(function(){
 		jQuery.getScript(['(#CONFIG{auto_compress_js}|=={oui}|?{[(#PRODUIRE{fond=javascript/gis.js}|compacte)],[(#PRODUIRE{fond=javascript/gis.js})]})'],function(){
 			if (typeof(callback_map[(#GET{id})]) === "function") {
