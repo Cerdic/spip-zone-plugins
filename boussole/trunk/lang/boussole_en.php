@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'descriptif_boussole_spip' => 'The SPIP compass gather together all the « official » website of SPIP galaxy. For every website are defined its logo, its name, its slogan and its description. Do not hesitate to use it on your own website to guide your visitors into the SPIP Galaxy.',
-	'descriptif_site_spip_blog' => 'SPIP is a collaborative project, so SPIP-BLOG.net  gathers technical notes,  self-mockery... This reflect the SPIP community spirit : tederness before all !.',
+	'descriptif_site_spip_blog' => 'SPIP is a collaborative project, so SPIP-BLOG.net  gathers technical notes,  self-mockery... This reflect the SPIP community spirit : tenderness before all !.',
 	'descriptif_site_spip_contrib' => 'SPIP-CONTRIB.net is a collaborative website where all the external contributions are available  : plugins, scripts, filters, skeletons, documentations, tricks,... given to the community (download links) by SPIP users. Its forum create a link between users and developers.',
 	'descriptif_site_spip_core' => 'CORE.SPIP.org gathers modification history of SPIP code, tickets management which allow to track bugs and make improvement suggestions and a download area of the different SPIP versions.',
 	'descriptif_site_spip_demo' => 'DEMO.SPIP.org is a test website which is reset every night. There you can test the last stable SPIP  version (as an administrator or as an editor), in one click, without having to install it.',
