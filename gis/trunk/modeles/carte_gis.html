@@ -1,41 +1,49 @@
 [(#REM)
 
-	Modele carte_gis
+Modele carte_gis
+----------------
 
-	Parametres :
+Parametres possibles :
 
-	- id_map|id_carte_gis = 1		id de la carte
-	- lat|latit|latitude = 48.3		latitude du centre de la carte
-	- lon|lonxit|longitude = -4.7		longitude du centre de la carte
-	- zoom = 5				zoom de la carte
-	- sw_lat = lat - 10°			latitude du sud-ouest de la bounding box
-	- sw_lon = lon - 10°			longitude du sud-ouest de la bounding box
-	- ne_lat = lat + 10°			latitude du nord-est de la bounding box
-	- ne_lon = lon + 10°			longitude du nord-est de la bounding box
-	- titre_carte				titre affiché au dessus la carte
-	- width|largeur = 100%			largeur de la carte, 100% par defaut
-	- height|hauteur = 400px		hauteur de la carte, 400px par defaut
-	- style = non				ne pas styler la carte
-	- zoom_molette|zoom_wheel = non		désactiver le zoom avec la molette de la souris, actif par defaut
-	- fullscreen = oui			afficher un bouton pour passer la carte en plein écran
-	- control_type|controle_type = non	ne pas afficher les controles de changement de type
-	- no_control|aucun_controle = oui	ne pas afficher les controles de la carte
-	- scale = oui				afficher l'échelle de la carte
-	- overview = oui			afficher une mini carte de situation
-	- limit|limite = 500			nombre max de marqueurs à afficher, 500 par defaut
-	- objets = gis				type d'objets à afficher (fichier json/gis_xx qui génère la source de donnees)
-	- autocenterandzoom|centrer_auto = oui	centrer et zoomer la carte automatiquement pour afficher tous les marqueurs
-	- kml = 12				kml à superposer à la carte (id_document ou url)
-	- gpx = 12				gpx à superposer à la carte (id_document ou url)
-	- centrer_fichier = non			permet de ne pas centrer la carte automatiquement sur les fichiers kml/gpx surperposés
-	- localize_visitor|localiser_visiteur = oui		centrer la carte sur la position du visiteur (API geolocation HTML5)
-	- point = non				si elle vaut "non" cette option n'affichera pas de points du tout (utile pour n'afficher qu'un kml par exemple)
-	- media = non				permet de passer le critère 'media' (pour les documents)
-	- path_styles=#ARRAY{color,#fff}	options de style des éléments de la couche GeoJSON (voir http://leafletjs.com/reference.html#path-options)
-	uniquement si objets = point_libre :
-	- icone = chemin/vers/image		image utilisée pour le marker
-	- titre					titre du point
-	- description				description du point
+- id_map|id_carte_gis = 1          id de la carte
+- lat|latit|latitude = 48.3        latitude du centre de la carte
+- lon|lonxit|longitude = -4.7      longitude du centre de la carte
+- zoom = 5                         zoom de la carte
+
+- sw_lat = lat - 10°               latitude du sud-ouest de la bounding box
+- sw_lon = lon - 10°               longitude du sud-ouest de la bounding box
+- ne_lat = lat + 10°               latitude du nord-est de la bounding box
+- ne_lon = lon + 10°               longitude du nord-est de la bounding box
+
+- titre_carte                      titre affiché au dessus la carte
+- width|largeur = 100%             largeur de la carte, 100% par defaut
+- height|hauteur = 400px           hauteur de la carte, 400px par defaut
+- style = non                      ne pas styler la carte
+
+- fullscreen = oui                     afficher un bouton pour passer la carte en plein écran
+- zoom_molette|zoom_wheel = non        désactiver le zoom avec la molette de la souris, actif par defaut
+- control_type|controle_type = non     ne pas afficher les controles de changement de type
+- no_control|aucun_controle = oui      ne pas afficher les controles de la carte
+- scale = oui                          afficher l'échelle de la carte
+- overview = oui                       afficher une mini carte de situation
+
+- autocenterandzoom|centrer_auto = oui        centrer et zoomer la carte automatiquement pour afficher tous les marqueurs
+- localize_visitor|localiser_visiteur = oui   centrer la carte sur la position du visiteur (API geolocation HTML5)
+
+- objets = gis                     type d'objets à afficher (fichier json/gis_xx qui génère la source de donnees)
+- limit|limite = 500               nombre max de marqueurs à afficher, 500 par defaut
+- kml = 12                         kml à superposer à la carte (id_document ou url ou liste d'url)
+- gpx = 12                         gpx à superposer à la carte (id_document ou url ou liste d'url)
+- centrer_fichier = non            permet de ne pas centrer la carte automatiquement sur les fichiers kml/gpx surperposés
+- point = non                      si elle vaut "non" cette option n'affichera pas de points du tout (utile pour n'afficher qu'un kml par exemple)
+
+- media = non                      permet de passer le critère 'media' (pour les documents)
+- path_styles=#ARRAY{color,#fff}   options de style des éléments de la couche GeoJSON (voir http://leafletjs.com/reference.html#path-options)
+
+Uniquement si objets = point_libre :
+- icone = chemin/vers/image        image utilisée pour le marker
+- titre                            titre du point
+- description                      description du point
 
 ]
 
