@@ -46,6 +46,11 @@ Uniquement si objets = point_libre :
 - titre                            titre du point
 - description                      description du point
 
+Clustering (regroupement de points proches) :
+- cluster = oui                    Active le clustering
+- clusterMaxZoom = 11              Regroupe les points jusque à ce zoom, mais pas au delà
+- clusterStyles = #ARRAY{}         Styles appliqués aux clusters
+
 ]
 
 [(#SET{width,#ENV{width,#ENV{largeur,100%}}})]
@@ -140,6 +145,83 @@ var map[(#GET{id})];
 		var miniMap = new L.Control.MiniMap(minimap_layer,{width: 100,height: 100}).addTo(map[(#GET{id})]);
 		]
 
+		// Pour Ajouter l'icone d'un point (feature = item d'un GeoJson)
+		var setGeoJsonFeatureIcon = function (feature, layer) {
+			// Déclarer l'icone du points, si défini
+			if (feature.properties && feature.properties.icon){
+				layer.setIcon(new L.Icon({
+					iconUrl: feature.properties.icon,
+					iconSize: new L.Point( feature.properties.icon_size\[0\], feature.properties.icon_size\[1\] ),
+					iconAnchor: new L.Point( feature.properties.icon_anchor\[0\], feature.properties.icon_anchor\[1\] )
+				}));
+			}
+		}
+
+		// Pour Ajouter le texte de popup d'un point (feature = item d'un GeoJson)
+		var setGeoJsonFeaturePopup = function (feature, layer) {
+			// Déclarer le contenu de la popup s'il y en a
+			if (feature.properties && (feature.properties.title || feature.properties.description)){
+				var popupContent = '';
+				if (feature.properties.title)
+					popupContent = '<strong class="title">' + feature.properties.title + '</strong>';
+				if (feature.properties.description)
+					popupContent = popupContent + feature.properties.description;
+				layer.bindPopup(popupContent);
+			}
+		}
+
+		[(#REM)
+			Il y a pour le moment 2 façons d'analyser le GeoJson calculé
+			en fonction de si on veut faire du clustering (regrouper les points proches)
+			ou non. Il y a certainement moyen de regrouper en un seul élément
+			la plupart du code, en se passant du js L.geoJson même hors clustering.
+			À réfléchir.
+		]
+		<BOUCLE_fonction_analyse_json(CONDITION){si #ENV{cluster}|!={oui}}>
+		// Analyse des points et déclaration (sans regroupement des points en cluster)
+		var parseGeoJson = function(data, map) {
+			var geojson = new L.geoJson('', {[
+				style: (#ENV*{path_styles}|json_encode),
+				]onEachFeature: function (feature, layer) {
+					// Déclarer l'icone du point
+					setGeoJsonFeatureIcon(feature, layer);
+					// Déclarer le contenu de la popup s'il y en a
+					setGeoJsonFeaturePopup(feature, layer);
+				}
+			}).addTo(map);
+			geojson.addData(data);
+			[(#ENV{autocenterandzoom,#ENV{centrer_auto}}|oui)
+			map.fitBounds(geojson.getBounds());]
+		}
+
+		</BOUCLE_fonction_analyse_json>
+
+		// Analyse des points et déclaration (en regroupant les points en cluster)
+		var parseGeoJson = function(data,map) {
+			markers = \[\];
+			/* Pour chaque points présents, on crée un marqueur */
+			$.each(data.features, function(i, feature) {
+				if (feature.geometry.coordinates\[0\]) {
+					var latlng = new L.LatLng(feature.geometry.coordinates\[1\], feature.geometry.coordinates\[0\]);
+					var marker = new L.Marker(latlng);
+					// Déclarer l'icone du point
+					setGeoJsonFeatureIcon(feature, marker);
+					// Déclarer le contenu de la popup s'il y en a
+					setGeoJsonFeaturePopup(feature, marker);
+
+					marker.id = feature.id;
+					markers.push(marker);
+				}
+			});
+
+			/* Ajout des marqueurs dans un clustering JS client */
+			markerCluster = new L.Marker.Clusterer(map, markers, {[
+				maxZoom: (#ENV{clusterMaxZoom, #ENV{maxZoom}|?{#ENV{maxZoom}|moins{2},''}}),][
+				styles: \[[(#ENV*{clusterStyles}|json_encode)]\](#ENV*{clusterStyles}|oui)]
+			});
+		}
+		<//B_fonction_analyse_json>
+
 
 		<BOUCLE_definir_les_points_de_la_carte(CONDITION){si #ENV{point}|!={non}}>
 		[(#REM)
@@ -152,24 +234,17 @@ var map[(#GET{id})];
 		// Récupération des points à mettre sur la carte, via json externe
 		jQuery.getJSON("[(#URL_PAGE{gis_json}|url_absolue)]",
 			{[
-				objets : "(#ENV{objets,#ENV{class}}|trim)",][
-				id_objet : (#ENV{args}|?{#ENV{args/id_objet},#ENV{id_objet}}|trim),][
-				id_rubrique : (#ENV{args}|?{#ENV{args/id_rubrique},#ENV{id_rubrique}}|trim),][
-				id_secteur : (#ENV{args}|?{#ENV{args/id_secteur},#ENV{id_secteur}}|trim),][
-				id_parent : (#ENV{args}|?{#ENV{args/id_parent},#ENV{id_parent}}|trim),][
-				id_article : (#ENV{args}|?{#ENV{args/id_article},#ENV{id_article}}|trim),][
-				id_breve : (#ENV{args}|?{#ENV{args/id_breve},#ENV{id_breve}}|trim),][
-				id_document : (#ENV{args}|?{#ENV{args/id_document},#ENV{id_document}}|trim),][
-				media : "(#ENV{args}|?{#ENV{args/media},#ENV{media}}|trim)",][
-				id_mot : (#ENV{args}|?{#ENV{args/id_mot},#ENV{id_mot}}|trim),][
-				id_groupe : (#ENV{args}|?{#ENV{args/id_groupe},#ENV{id_groupe}}|trim),][
-				id_auteur : (#ENV{args}|?{#ENV{args/id_auteur},#ENV{id_auteur}}|trim),][
-				id_syndic : (#ENV{args}|?{#ENV{args/id_syndic},#ENV{id_syndic}}|trim),][
-				id_forum : (#ENV{args}|?{#ENV{args/id_forum},#ENV{id_forum}}|trim),][
-				id_evenement : (#ENV{args}|?{#ENV{args/id_evenement},#ENV{id_evement}}|trim),][
-				id_gis : (#ENV{args}|?{#ENV{args/id_gis},#ENV{id_gis}}|trim),][
-				recherche : "(#ENV{args}|?{#ENV{args/recherche},#ENV{recherche}})",][
-				mots : (#ENV{mots}|?{[(#ENV{mots}|trim|json_encode)],''}),][
+				objets       : "(#ENV{objets,#ENV{class}}|trim)",]
+				<BOUCLE_modeles_args_prioritaires(DATA){source table,#LISTE{
+					id_objet, id_rubrique, id_secteur, id_parent,
+					id_article, id_breve, id_document, id_mot,
+					id_groupe, id_auteur, id_syndic, id_forum,
+					id_gis, id_evenement
+				}}>[#VALEUR : (#ENV{args}|?{#ENV{args/#VALEUR},#ENV{#VALEUR}}|trim),
+				]</BOUCLE_modeles_args_prioritaires>[
+				media        : "(#ENV{args}|?{#ENV{args/media},#ENV{media}}|trim)",][
+				recherche    : "(#ENV{args}|?{#ENV{args/recherche},#ENV{recherche}})",][
+				mots  : (#ENV{mots}|?{[(#ENV{mots}|trim|json_encode)],''}),][
 				limit : (#ENV{limit,#ENV{limite,500}}|trim)][
 				(#ENV{objets}|=={point_libre}|oui)
 					[,lat : (#GET{lat}|trim)]
@@ -182,31 +257,7 @@ var map[(#GET{id})];
 			function(data) {
 				if (data){
 					// Charger le json (data) et déclarer les points
-					var geojson = new L.geoJson('', {[
-						style: (#ENV*{path_styles}|json_encode),
-						]onEachFeature: function (feature, layer) {
-							// Déclarer l'icone du points, si défini
-							if (feature.properties && feature.properties.icon){
-								layer.setIcon(new L.Icon({
-									iconUrl: feature.properties.icon,
-									iconSize: new L.Point( feature.properties.icon_size\[0\], feature.properties.icon_size\[1\] ),
-									iconAnchor: new L.Point( feature.properties.icon_anchor\[0\], feature.properties.icon_anchor\[1\] )
-								}));
-							}
-							// Déclarer le contenu de la popup s'il y en a
-							if (feature.properties && (feature.properties.title || feature.properties.description)){
-								var popupContent = '';
-								if (feature.properties.title)
-									popupContent = '<strong>' + feature.properties.title + '</strong>';
-								if (feature.properties.description)
-									popupContent = popupContent + feature.properties.description;
-								layer.bindPopup(popupContent);
-							}
-						}
-					}).addTo(map[(#GET{id})]);
-					geojson.addData(data);
-					[(#ENV{autocenterandzoom,#ENV{centrer_auto}}|oui)
-					map[(#GET{id})].fitBounds(geojson.getBounds());]
+					parseGeoJson(data, map[(#GET{id})]);
 				}
 			}
 		);
@@ -252,11 +303,17 @@ var map[(#GET{id})];
 	// Charger le javascript de GIS et initialiser la carte
 	$(function(){
 		jQuery.getScript(['(#CONFIG{auto_compress_js}|=={oui}|?{[(#PRODUIRE{fond=javascript/gis.js}|compacte)],[(#PRODUIRE{fond=javascript/gis.js})]})'],function(){
-			if (typeof(callback_map[(#GET{id})]) === "function") {
-				init_map[(#GET{id})](callback_map[(#GET{id})]);
-			} else {
-				init_map[(#GET{id})]();
-			}
+			[(#ENV{cluster}|=={oui}|oui)
+				jQuery.getScript('[(#CHEMIN{javascript/leafclusterer.js}|compacte)]',function(){
+			]
+				if (typeof(callback_map[(#GET{id})]) === "function") {
+					init_map[(#GET{id})](callback_map[(#GET{id})]);
+				} else {
+					init_map[(#GET{id})]();
+				}
+			[(#ENV{cluster}|=={oui}|oui)
+				});
+			]
 		});
 	});
 
