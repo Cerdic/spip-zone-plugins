@@ -148,6 +148,45 @@ function albums_insert_head_css($flux) {
 
 
 /**
+ * Compter les albums dans un objet
+ * 
+ * @param array $flux
+ * @return array
+ */
+function albums_objet_compte_enfants($flux){
+	if ($objet = $flux['args']['objet']
+	  AND $id=intval($flux['args']['id_objet'])) {
+		// juste les publies ?
+		if (array_key_exists('statut', $flux['args']) and ($flux['args']['statut'] == 'publie')) {
+			$flux['data']['album'] = sql_countsel('spip_albums AS D JOIN spip_albums_liens AS L ON D.id_album=L.id_album', "L.objet=".sql_quote($objet)."AND L.id_objet=".intval($id)." AND (D.statut='publie')");
+		} else {
+			$flux['data']['album'] = sql_countsel('spip_albums AS D JOIN spip_albums_liens AS L ON D.id_album=L.id_album', "L.objet=".sql_quote($objet)."AND L.id_objet=".intval($id)." AND (D.statut='publie' OR D.statut='prepa')");
+		}
+	}
+	return $flux;
+}
+
+
+/**
+ * Afficher le nombre d'albums dans chaque rubrique
+ *
+ * @param array $flux
+ * @return array
+ */
+function albums_boite_infos($flux){
+	if ($flux['args']['type']=='rubrique'
+	  AND $id_rubrique = $flux['args']['id']){
+		if ($nb = sql_countsel('spip_albums_liens',"objet='rubrique' AND id_objet=".intval($id_rubrique))){
+			$nb = "<div>". singulier_ou_pluriel($nb, "album:info_1_album", "album:info_nb_albums") . "</div>";
+			if ($p = strpos($flux['data'],"<!--nb_elements-->"))
+				$flux['data'] = substr_replace($flux['data'],$nb,$p,0);
+		}
+	}
+	return $flux;
+}
+
+
+/**
 * Optimiser la base de donnee en supprimant les liens orphelins
 */
 function albums_optimiser_base_disparus($flux){

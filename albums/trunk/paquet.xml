@@ -1,7 +1,7 @@
 <paquet
 	prefix="Albums"
 	categorie="multimedia"
-	version="2.1.17"
+	version="2.1.18"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/albums-128.png"
@@ -26,6 +26,8 @@
 	<pipeline nom="autoriser" inclure="albums_autorisations.php" />
 	<pipeline nom="insert_head_css" inclure="albums_pipelines.php" /> <!-- css pages publiques -->
 	<pipeline nom="post_edition" inclure="albums_pipelines.php" /> <!-- mise a jour des liens albums apres edition d'un objet-->
+	<pipeline nom="objet_compte_enfants" inclure="albums_pipelines.php" /> <!-- compter nb albums dans un objet -->
+	<pipeline nom="boite_infos" inclure="albums_pipelines.php" /> <!-- nb albums dans une rubrique -->
 	<pipeline nom="optimiser_base_disparus" inclure="albums_pipelines.php" /> <!-- suppression liens morts -->
 
 	<necessite nom="saisies" compatibilite="[1.21.0;]" />
