@@ -1,0 +1,11 @@
+<B_boussoles_liees>
+#BOITE_OUVRIR{'', raccourcis}
+	[(#TOTAL_BOUCLE|singulier_ou_pluriel{boussole:info_site_boussole, boussole:info_site_boussoles})]
+	<ul>
+<BOUCLE_boussoles_liees(BOUSSOLES) {id_syndic}>
+		[(#SET{nom_boussole, [<a href="#URL_ECRIRE{boussoles, alias=#AKA_BOUSSOLE}">(#AKA_BOUSSOLE|boussole_traduire{nom_boussole})</a>]})]
+		<li>#GET{nom_boussole}</li>
+</BOUCLE_boussoles_liees>
+	</ul>
+#BOITE_FERMER
+</B_boussoles_liees>

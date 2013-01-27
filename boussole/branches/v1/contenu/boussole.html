@@ -1,0 +1,27 @@
+[(#REM)	<!-- 
+	Partie contenu de la page boussole affichant le detail complet d'une boussole donnee
+	Un seul parametre d'appel, l'alias de la boussole nomme "boussole" (ex: ?page=boussole&boussole=spip)
+	Si on utilise le noiZetier, il est necessaire d'inclure les noisettes fil d'ariane et 
+	de contenu principal via la configuration
+ -->]
+
+[(#PLUGIN{ZVIDE}|non)
+
+[(#REM) <!-- Fil d'Ariane --> ]
+<INCLURE{
+	fond=noisettes/boussole-filariane, 
+	boussole,
+    afficher_lien_accueil=on,
+	ariane_separateur=&gt;,
+	taille_titre=80}>
+
+[(#REM) <!-- Cartouche et contenu de la boussole --> ]
+<INCLURE{
+	fond=noisettes/boussole-contenuprincipal,
+	boussole,
+	cartouche_boussole=oui, 
+	taille_logo=64, 
+	titre_groupe=oui, 
+	slogan_site=oui, 
+	descriptif_site=oui}>
+]

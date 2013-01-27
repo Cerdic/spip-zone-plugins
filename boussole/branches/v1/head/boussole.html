@@ -1,0 +1,5 @@
+<title>[(#ENV{boussole}|appliquer_filtre{boussole_traduire, nom_boussole}) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="robots" content="none" />
+[(#PLUGIN{Z, version}|version_compare{2.0.0-dev, >=}|oui)
+<INCLURE{fond=inclure/head}>
+]
