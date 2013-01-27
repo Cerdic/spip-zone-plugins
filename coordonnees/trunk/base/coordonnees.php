@@ -24,114 +24,135 @@ function coordonnees_declarer_tables_interfaces($interface){
 	return $interface;
 }
 
+/**
+ * Déclaration des objets éditoriaux
+ */
+function coordonnees_declarer_tables_objets_sql($tables) {
 
-function coordonnees_declarer_tables_principales($tables_principales){
-
-	//-- Table adresses ------------------------------------------
-	$adresses = array(
-		"id_adresse" => "BIGINT NOT NULL auto_increment",
-		"titre" => "VARCHAR(255) DEFAULT '' NOT NULL", // perso, pro, vacance...
-		"voie" => "TINYTEXT DEFAULT '' NOT NULL", // p. ex. 21 rue de cotte
-		"complement" => "TINYTEXT DEFAULT '' NOT NULL", // p. ex. 3e etage
-		"boite_postale" => "VARCHAR(40) DEFAULT '' NOT NULL",
-		"code_postal" => "VARCHAR(40) DEFAULT '' NOT NULL",
-		"ville" => "TINYTEXT DEFAULT '' NOT NULL",
-		"region" => "VARCHAR(40) DEFAULT '' NOT NULL",
-		"pays" => "VARCHAR(3) not null default ''",
-		"maj" => "TIMESTAMP"
-		);
-	$adresses_key = array(
-		"PRIMARY KEY"	=> "id_adresse",
-		"KEY iso3166"   => "pays",
-		"KEY zip"       => "region, code_postal"
-		);
-	$tables_principales['spip_adresses'] =
-		array(
-			'field' => &$adresses, 'key' => &$adresses_key);
-
-	//-- Table numeros ------------------------------------------
-	$numeros = array(
-		"id_numero" => "BIGINT NOT NULL auto_increment",
-		"titre" => "VARCHAR(255) DEFAULT '' NOT NULL", // peut etre domicile, bureau, portable
-		"numero" => "VARCHAR(255) DEFAULT '' NOT NULL",
-		"maj" => "TIMESTAMP"
-		);
-	$numeros_key = array(
-		"PRIMARY KEY" => "id_numero",
-		"KEY numero"    => "numero" // on ne met pas unique pour le cas ou 2 contacts partagent le meme numero generique
-		);
-	$tables_principales['spip_numeros'] =
-		array('field' => &$numeros, 'key' => &$numeros_key);
-
-	//-- Table emails ------------------------------------------
-	$emails = array(
-		"id_email" => "BIGINT NOT NULL auto_increment",
-		"titre" => "VARCHAR(255) DEFAULT '' NOT NULL", // peut etre perso, boulot, etc.
-		"email" => "VARCHAR(255) DEFAULT '' NOT NULL",
-		"maj" => "TIMESTAMP"
-		);
-	$emails_key = array(
-		"PRIMARY KEY"	=> "id_email",
-		"KEY email"	=> "email" // on ne met pas unique pour le cas ou 2 contacts partagent le meme mail generique
-		);
-	$tables_principales['spip_emails'] =
-		array('field' => &$emails, 'key' => &$emails_key);
+	$tables['spip_adresses'] = array(
+		'type' => 'adresse',
+		'principale' => "oui",
+		'field'=> array(
+			"id_adresse"         => "bigint(21) NOT NULL",
+			"titre"              => "varchar(255) NOT NULL DEFAULT ''", // perso, pro, vacance...
+			"voie"               => "tinytext NOT NULL", // p. ex. 21 rue de cotte
+			"complement"         => "tinytext NOT NULL", // p. ex. 3e etage
+			"boite_postale"      => "varchar(40) NOT NULL DEFAULT ''",
+			"code_postal"        => "varchar(40) NOT NULL DEFAULT ''",
+			"ville"              => "tinytext NOT NULL",
+			"region"             => "varchar(40) NOT NULL DEFAULT ''",
+			"pays"               => "varchar(3) NOT NULL DEFAULT ''",
+			"maj"                => "TIMESTAMP"
+		),
+		'key' => array(
+			"PRIMARY KEY"        => "id_adresse",
+			"KEY iso3166"        => "pays",
+			"KEY zip"            => "region, code_postal"
+		),
+		'titre' => "titre AS titre, '' AS lang",
+		 #'date' => "",
+		'champs_editables'  => array('titre', 'voie', 'complement', 'boite_postale', 'code_postal', 'ville', 'region', 'pays'),
+		'champs_versionnes' => array(),
+		'rechercher_champs' => array(),
+		'tables_jointures'  => array('spip_adresses_liens'),
 
 
-	return $tables_principales;
+	);
 
+	$tables['spip_numeros'] = array(
+		'type' => 'numero',
+		'principale' => "oui",
+		'field'=> array(
+			"id_numero"          => "bigint(21) NOT NULL",
+			"titre"              => "varchar(255) NOT NULL DEFAULT ''", // peut etre domicile, bureau, portable
+			"numero"             => "varchar(255) NOT NULL DEFAULT ''",
+			"maj"                => "TIMESTAMP"
+		),
+		'key' => array(
+			"PRIMARY KEY"        => "id_numero",
+		  "KEY numero"         => "numero" // on ne met pas unique pour le cas ou 2 contacts partagent le meme numero generique
+		),
+		'titre' => "titre AS titre, '' AS lang",
+		 #'date' => "",
+		'champs_editables'  => array( 'titre', 'numero'),
+		'champs_versionnes' => array(),
+		'rechercher_champs' => array(),
+		'tables_jointures'  => array('spip_numeros_liens'),
+
+
+	);
+
+	$tables['spip_emails'] = array(
+		'type' => 'email',
+		'principale' => "oui",
+		'field'=> array(
+			"id_email"           => "bigint(21) NOT NULL",
+			"titre"              => "varchar(255) NOT NULL DEFAULT ''", // peut etre perso, boulot, etc.
+			"email"              => "varchar(255) NOT NULL DEFAULT ''",
+			"maj"                => "TIMESTAMP"
+		),
+		'key' => array(
+			"PRIMARY KEY"        => "id_email",
+  		"KEY email"	         => "email" // on ne met pas unique pour le cas ou 2 contacts partagent le meme mail generique
+		),
+		'titre' => "titre AS titre, '' AS lang",
+		 #'date' => "",
+		'champs_editables'  => array( 'titre', 'email'),
+		'champs_versionnes' => array(),
+		'rechercher_champs' => array(),
+		'tables_jointures'  => array('spip_emails_liens'),
+
+
+	);
+
+	return $tables;
 }
 
 
+/**
+ * Déclaration des tables secondaires (liaisons)
+ */
+function coordonnees_declarer_tables_auxiliaires($tables) {
 
-function coordonnees_declarer_tables_auxiliaires($tables_auxiliaires){
-
-	//-- Table adresses_liens ---------------------------------------
-	$adresses_liens = array(
-		"id_adresse" => "BIGINT NOT NULL",
-		"id_objet" => "BIGINT NOT NULL",
-		"objet" => "VARCHAR(25) NOT NULL", // peut etre un compte ou un contact
-		'type' => "VARCHAR(25) NOT NULL DEFAULT ''"
+	$tables['spip_adresses_liens'] = array(
+		'field' => array(
+			"id_adresse"         => "bigint(21) DEFAULT '0' NOT NULL",
+			"id_objet"           => "bigint(21) DEFAULT '0' NOT NULL",
+			"objet"              => "VARCHAR(25) DEFAULT '' NOT NULL",
+			"vu"                 => "VARCHAR(6) DEFAULT 'non' NOT NULL"
+		),
+		'key' => array(
+			"PRIMARY KEY"        => "id_adresse,id_objet,objet",
+			"KEY id_adresse"     => "id_adresse"
+		)
 	);
-	$adresses_liens_key = array(
-		"PRIMARY KEY" => "id_adresse, id_objet, objet, type", // on rajoute le type car on en rajoute un par liaison et qu'il peut y en avoir plusieurs
-		"KEY id_adresse" => "id_adresse"
+	$tables['spip_numeros_liens'] = array(
+		'field' => array(
+			"id_numero"          => "bigint(21) DEFAULT '0' NOT NULL",
+			"id_objet"           => "bigint(21) DEFAULT '0' NOT NULL",
+			"objet"              => "VARCHAR(25) DEFAULT '' NOT NULL",
+			"vu"                 => "VARCHAR(6) DEFAULT 'non' NOT NULL"
+		),
+		'key' => array(
+			"PRIMARY KEY"        => "id_numero,id_objet,objet",
+			"KEY id_numero"      => "id_numero"
+		)
 	);
-	$tables_auxiliaires['spip_adresses_liens'] =
-		array('field' => &$adresses_liens, 'key' => &$adresses_liens_key);
-
-
-	//-- Table numeros_liens ------------------------------------------
-	$numeros_liens = array(
-		"id_numero" => "BIGINT NOT NULL DEFAULT 0",
-		"id_objet" => "BIGINT NOT NULL DEFAULT 0",
-		"objet" => "VARCHAR(25) NOT NULL", // peut etre un contact ou un compte
-		'type' => "VARCHAR(25) NOT NULL DEFAULT ''"
+	$tables['spip_emails_liens'] = array(
+		'field' => array(
+			"id_email"           => "bigint(21) DEFAULT '0' NOT NULL",
+			"id_objet"           => "bigint(21) DEFAULT '0' NOT NULL",
+			"objet"              => "VARCHAR(25) DEFAULT '' NOT NULL",
+			"vu"                 => "VARCHAR(6) DEFAULT 'non' NOT NULL"
+		),
+		'key' => array(
+			"PRIMARY KEY"        => "id_email,id_objet,objet",
+			"KEY id_email"       => "id_email"
+		)
 	);
-	$numeros_liens_key = array(
-		"PRIMARY KEY" => "id_numero, id_objet, objet, type", // on rajoute le type car on en rajoute un par liaison et qu'il peut y en avoir plusieurs
-		"KEY id_numero" => "id_numero"
-		);
-	$tables_auxiliaires['spip_numeros_liens'] =
-		array('field' => &$numeros_liens, 'key' => &$numeros_liens_key);
 
-
-	//-- Table emails_liens ------------------------------------------
-	$emails_liens = array(
-		"id_email" => "BIGINT NOT NULL DEFAULT 0",
-		"id_objet" => "BIGINT NOT NULL DEFAULT 0",
-		"objet" => "VARCHAR(25) NOT NULL", // peut etre un contact ou un compte
-		'type' => "VARCHAR(25) NOT NULL DEFAULT ''"
-		);
-	$emails_liens_key = array(
-		"PRIMARY KEY" => "id_email, id_objet, objet, type", // on rajoute le type car on en rajoute un par liaison et qu'il peut y en avoir plusieurs
-		"KEY id_email" => "id_email"
-		);
-	$tables_auxiliaires['spip_emails_liens'] =
-		array('field' => &$emails_liens, 'key' => &$emails_liens_key);
-
-
-	return $tables_auxiliaires;
+	return $tables;
 }
+
 
 ?>

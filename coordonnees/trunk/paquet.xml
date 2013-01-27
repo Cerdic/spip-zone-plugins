@@ -1,10 +1,10 @@
 <paquet
 	prefix="coordonnees"
 	categorie="auteur"
-	version="2.0.14"
-	schema="1.7"
+	version="2.0.15"
+	schema="1.8"
 	etat="test"
-	compatibilite="[3.0.0-dev;["
+	compatibilite="[3.0.5;["
 	logo="images/addressbook-128.png"
 	documentation="http://www.spip-contrib.net/Plugin-Coordonnees"
 >
@@ -20,10 +20,10 @@
 
 
 
-	<pipeline nom="declarer_tables_principales" inclure="base/coordonnees.php" />
+
 
 	<!-- Declaration des tables -->
-	<pipeline nom="declarer_tables_principales" inclure="base/coordonnees.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/coordonnees.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/coordonnees.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/coordonnees.php" />
 

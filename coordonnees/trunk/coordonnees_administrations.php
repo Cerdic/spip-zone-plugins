@@ -28,7 +28,7 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_alter', 'TABLE spip_emails CHANGE type_email titre varchar(255) not null default ""')
 	);
 
-	// On passe les pays en code ISO, beaucoup plus génériques que les ids SQL
+	// On passe les pays en code ISO, beaucoup plus gÃ©nÃ©riques que les ids SQL
 	$maj['1.3'] = array(
 		array('sql_alter', 'TABLE spip_adresses ADD pays_code varchar(2) not null default ""'),
 		array('coordonnees_upgrade_1_3'),
@@ -49,7 +49,7 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 			array('sql_alter', 'TABLE spip_emails_liens ADD PRIMARY KEY (id_email, id_objet, objet, type)'),
 
 			);
-	// mettre les auteurs par defaut comme objet «coordonnable»
+	// mettre les auteurs par defaut comme objet Â«coordonnableÂ»
 	$maj['1.5'] = array(
 		array('ecrire_meta','coordonnees', serialize(array('objets'=>array('auteur'))))
 	);
@@ -70,6 +70,12 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_updateq', "spip_numeros_liens", array('type'=>'cell'), "LOWER(type) LIKE 'cel%'"),
 		array('sql_updateq', "spip_numeros_liens", array('type'=>'cell'), "LOWER(type) LIKE 'mob%'"),
 	);
+
+  // Definition des tables principales par declarer_tables_objets_sql au lieu de declarer_tables_principales
+	$maj['1.8'] = array(
+		array('maj_tables', array('spip_adresses', 'spip_adresses_liens', 'spip_numeros', 'spip_numeros_liens', 'spip_emails', 'spip_emails_liens')),
+	);
+
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

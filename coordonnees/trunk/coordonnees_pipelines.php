@@ -104,6 +104,7 @@ function coordonnees_objets_extensibles($objets){
 	return array_merge($objets, array(
 		'adresse' => _T('coordonnees:adresses'),
 		'numero' => _T('coordonnees:numeros'),
+		'email' => _T('coordonnees:emails'),
 	));
 }
 
