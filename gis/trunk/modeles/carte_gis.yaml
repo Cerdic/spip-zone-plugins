@@ -32,49 +32,48 @@ parametres:
       nom: 'id_gis'
       label: <:gis:label_inserer_modele_identifiant:>
       placeholder: <:gis:label_inserer_modele_identifiant_placeholder:>
-      explication: <:gis:label_inserer_modele_explication_identifiant:>
       afficher_si: '@objets@ == ""'
   -
     saisie: 'input'
     options:
       nom: 'id_article'
       label: <:gis:label_inserer_modele_identifiant_opt:>
-      explication: <:gis:label_inserer_modele_explication_identifiant:>
+      placeholder: 'id_article'
       afficher_si: '@objets@ == "articles" || @objets@ == "articles_plus_sites"'
   -
     saisie: 'input'
     options:
       nom: 'id_rubrique'
       label: <:gis:label_inserer_modele_identifiant_opt:>
-      explication: <:gis:label_inserer_modele_explication_identifiant:>
+      placeholder: 'id_rubrique'
       afficher_si: '@objets@ == "rubriques"'
   -
     saisie: 'input'
     options:
       nom: 'id_document'
       label: <:gis:label_inserer_modele_identifiant_opt:>
-      explication: <:gis:label_inserer_modele_explication_identifiant:>
+      placeholder: 'id_document'
       afficher_si: '@objets@ == "documents"'
   -
     saisie: 'input'
     options:
       nom: 'id_mot'
       label: <:gis:label_inserer_modele_identifiant_opt:>
-      explication: <:gis:label_inserer_modele_explication_identifiant:>
+      placeholder: 'id_mot'
       afficher_si: '@objets@ == "mots"'
   -
     saisie: 'input'
     options:
       nom: 'id_site'
       label: <:gis:label_inserer_modele_identifiant_opt:>
-      explication: <:gis:label_inserer_modele_explication_identifiant:>
+      placeholder: 'id_site'
       afficher_si: '@objets@ == "sites"'
   -
     saisie: 'input'
     options:
       nom: 'id_auteur'
       label: <:gis:label_inserer_modele_identifiant_opt:>
-      explication: <:gis:label_inserer_modele_explication_identifiant:>
+      placeholder: 'id_auteur'
       afficher_si: '@objets@ == "auteurs"'
 #
 # === POINT LIBRE ===
