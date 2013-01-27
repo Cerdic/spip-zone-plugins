@@ -92,6 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_niveau_titre' => 'Niveau du titre :',
 	'label_noizetier_css' => 'Classes CSS :',
 	'label_texte' => 'Texte :',
+	'label_texte_introductif' => 'Texte introductif (optionnel) :',
 	'label_titre' => 'Titre :',
 	'label_titre_noisette' => 'Titre de la noisette :',
 	'label_titre_noisette_perso' => 'Titre personnalisé:',
