@@ -126,6 +126,7 @@ var map[(#GET{id})];
 		[(#ENV{point}|!={non}|oui)
 		jQuery.getJSON("[(#URL_PAGE{gis_json}|url_absolue)]",
 			{[
+				args : (#ENV{args}|json_encode),][
 				objets : "(#ENV{objets,#ENV{class}}|trim)",][
 				id_objet : (#ENV{id_objet}|trim),][
 				id_rubrique : (#ENV{id_rubrique}|trim),][
