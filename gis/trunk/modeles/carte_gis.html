@@ -126,24 +126,23 @@ var map[(#GET{id})];
 		[(#ENV{point}|!={non}|oui)
 		jQuery.getJSON("[(#URL_PAGE{gis_json}|url_absolue)]",
 			{[
-				args : (#ENV{args,#ARRAY}|json_encode),][
 				objets : "(#ENV{objets,#ENV{class}}|trim)",][
-				id_objet : (#ENV{id_objet}|trim),][
-				id_rubrique : (#ENV{id_rubrique}|trim),][
-				id_secteur : (#ENV{id_secteur}|trim),][
-				id_parent : (#ENV{id_parent}|trim),][
-				id_article : (#ENV{id_article}|trim),][
-				id_breve : (#ENV{id_breve}|trim),][
-				id_document : (#ENV{id_document}|trim),][
-				media : "(#ENV{media}|trim)",][
-				id_mot : (#ENV{id_mot}|trim),][
-				id_groupe : (#ENV{id_groupe}|trim),][
-				id_auteur : (#ENV{id_auteur}|trim),][
-				id_syndic : (#ENV{id_syndic}|trim),][
-				id_forum : (#ENV{id_forum}|trim),][
-				id_evenement : (#ENV{id_evenement}|trim),][
-				id_gis : (#ENV{id_gis}|trim),][
-				recherche : "(#ENV{recherche})",][
+				id_objet : (#ENV{args}|?{#ENV{args/id_objet},#ENV{id_objet}}|trim),][
+				id_rubrique : (#ENV{args}|?{#ENV{args/id_rubrique},#ENV{id_rubrique}}|trim),][
+				id_secteur : (#ENV{args}|?{#ENV{args/id_secteur},#ENV{id_secteur}}|trim),][
+				id_parent : (#ENV{args}|?{#ENV{args/id_parent},#ENV{id_parent}}|trim),][
+				id_article : (#ENV{args}|?{#ENV{args/id_article},#ENV{id_article}}|trim),][
+				id_breve : (#ENV{args}|?{#ENV{args/id_breve},#ENV{id_breve}}|trim),][
+				id_document : (#ENV{args}|?{#ENV{args/id_document},#ENV{id_document}}|trim),][
+				media : "(#ENV{args}|?{#ENV{args/media},#ENV{media}}|trim)",][
+				id_mot : (#ENV{args}|?{#ENV{args/id_mot},#ENV{id_mot}}|trim),][
+				id_groupe : (#ENV{args}|?{#ENV{args/id_groupe},#ENV{id_groupe}}|trim),][
+				id_auteur : (#ENV{args}|?{#ENV{args/id_auteur},#ENV{id_auteur}}|trim),][
+				id_syndic : (#ENV{args}|?{#ENV{args/id_syndic},#ENV{id_syndic}}|trim),][
+				id_forum : (#ENV{args}|?{#ENV{args/id_forum},#ENV{id_forum}}|trim),][
+				id_evenement : (#ENV{args}|?{#ENV{args/id_evenement},#ENV{id_evement}}|trim),][
+				id_gis : (#ENV{args}|?{#ENV{args/id_gis},#ENV{id_gis}}|trim),][
+				recherche : "(#ENV{args}|?{#ENV{args/recherche},#ENV{recherche}})",][
 				mots : (#ENV{mots}|?{[(#ENV{mots}|trim|json_encode)],''}),][
 				limit : (#ENV{limit,#ENV{limite,500}}|trim)][
 				(#ENV{objets}|=={point_libre}|oui)

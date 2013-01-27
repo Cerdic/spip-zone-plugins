@@ -2,7 +2,7 @@
 	prefix="gis"
 	categorie="divers"
 	version="4.2.0"
-	schema="2.0.2"
+	schema="2.0.3"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/gis.png"
