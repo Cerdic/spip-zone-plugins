@@ -22,7 +22,7 @@
 			<td class='picto'>[(#CHEMIN_IMAGE{orr_autorisation-16.png}|balise_img)]</td>
 			<td class='orr_autorisation_nom principale'>[(#LOGO_ORR_AUTORISATION|image_reduire{20,26})][(#RANG). ]#ORR_AUTORISATION_NOM</td>
             <td class="orr_autorisation_valeur">#ORR_AUTORISATION_VALEUR</td>
-			<td class='orr_autorisation_ressource_associe'> ??</td>
+			<td class='orr_autorisation_ressource_associe'><BOUCLE_ressources(ORR_RESSOURCES){id_orr_autorisation}> #ORR_RESSOURCE_NOM <br /> </BOUCLE_ressources> </td>
 		</tr>
 	</BOUCLE_liste_orr_autorisations>
 	</tbody>
