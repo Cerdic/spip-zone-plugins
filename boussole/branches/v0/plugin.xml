@@ -7,10 +7,10 @@
 	</nom>
 	<auteur>Eric Lupinacci</auteur>
 	<licence>GPL</licence>
-	<version>0.6.5</version>
+	<version>0.6.6</version>
 	<version_base>0.1</version_base>
 	<icon>boussole_logo-64.png</icon>
-	<etat>dev</etat>
+	<etat>stable</etat>
     <slogan>
     	<multi>
     		[fr]Les bonnes adresses de la galaxie SPIP ou d'ailleurs !
@@ -71,5 +71,5 @@ _ For DIYers, you can also use this plugin to display your own list of sites and
 		<url>boussoles_gerer</url>
 	</onglet>
 
-	<necessite id="SPIP" version='[2.0.0;3.0.99]' />
+	<necessite id="SPIP" version='[2.0.0;2.1.99]' />
 </plugin>
