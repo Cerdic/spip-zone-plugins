@@ -66,7 +66,7 @@
 				<fieldset>
 					<legend><:orthotypo:legend_corrections:></legend>
 					<ul>
-						#SET{name,corrections}#SET{obli,''}#SET{defaut,'1'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						#SET{name,corrections}#SET{obli,''}#SET{defaut,'0'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 						<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]
