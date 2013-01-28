@@ -98,6 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_niveau_titre' => 'تراز تيتر: ',
 	'label_noizetier_css' => 'كلاس‌هاي سي.اس.اس.:',
 	'label_texte' => 'متن:',
+	'label_texte_introductif' => 'Texte introductif (optionnel) :', # NEW
 	'label_titre' => 'تيتر:',
 	'label_titre_noisette' => 'تيتر فندق:',
 	'label_titre_noisette_perso' => 'تيتر شخصي:',
