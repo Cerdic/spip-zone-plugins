@@ -1,0 +1,25 @@
+<paquet
+	prefix="orthotypo"
+	categorie="edition"
+	version="1.1.0"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/orthotypo-32.png"
+	documentation=""
+>
+
+	<nom>Ortho-Typographie</nom>
+
+	<auteur lien="http://contrib.spip.net/auteur7639">Vincent Ramos</auteur>
+	<auteur lien="http://contrib.spip.net/auteur5053">Raphaël Meyssan</auteur>
+	<auteur lien="http://contrib.spip.net/auteur4">Fil</auteur>
+	<auteur lien="http://contrib.spip.net/auteur5714">Patrice Vanneufville</auteur>
+	<auteur lien="http://contrib.spip.net/auteur6809">tetue</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="insert_head_css" inclure="orthotypo_fonctions.php" />
+	<pipeline nom="post_typo" inclure="orthotypo_fonctions.php" />
+	<pipeline nom="pre_propre" inclure="orthotypo_fonctions.php" />
+
+</paquet>
