@@ -47,19 +47,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_taille_min' => 'El valor debe tener como mínimo @min@ caracteres (actualmente @nb@).',
 	'erreur_telephone' => 'El número no es válido.',
 	'erreur_url' => 'La dirección <em>@url@</em> no es válida.',
-	'erreur_url_protocole' => 'L\'adresse saisie <em>(@url@)</em> doit commencer par @protocole@', # NEW
-	'erreur_url_protocole_exact' => 'L\'adresse saisie <em>(@url@)</em> ne commence pas par un protocole valide (http:// par exemple)', # NEW
+	'erreur_url_protocole' => 'La dirección ingresada <em>(@url@)</em> debe comenzar por @protocole@',
+	'erreur_url_protocole_exact' => 'La dirección ingresada <em>(@url@)</em> no comienza por un protocolo válido (http:// por ejemplo)',
 
 	// N
-	'normaliser_option_date' => 'Normaliser la date ?', # NEW
-	'normaliser_option_date_aucune' => 'Non', # NEW
-	'normaliser_option_date_en_datetime' => 'Au format «Datetime» (pour SQL)', # NEW
+	'normaliser_option_date' => '¿Normalizar la fecha?',
+	'normaliser_option_date_aucune' => 'No',
+	'normaliser_option_date_en_datetime' => 'En formato «Datetime» (para SQL)',
 
 	// O
-	'option_couleur_normaliser_label' => 'Normaliser le code couleur ?', # NEW
-	'option_couleur_type_hexa' => 'Code couleur au format héxadécimal', # NEW
-	'option_couleur_type_label' => 'Type de vérification à effectuer', # NEW
-	'option_decimal_nb_decimales_label' => 'Nombre de décimales après la virgule', # NEW
+	'option_couleur_normaliser_label' => '¿Normalizar el código color?',
+	'option_couleur_type_hexa' => 'Código color en formato hexadecimal',
+	'option_couleur_type_label' => 'Tipo de verificación a efectuar',
+	'option_decimal_nb_decimales_label' => 'Número de decimales tras la coma',
 	'option_email_disponible_label' => 'Dirección disponible',
 	'option_email_disponible_label_case' => 'Verifique que la dirección no sea usada por otra persona.',
 	'option_email_mode_5322' => 'La verificación más conforme a los estándares existentes',
@@ -74,25 +74,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_siren_siret_mode_siret' => 'el SIRET',
 	'option_taille_max_label' => 'Tamaño máximo',
 	'option_taille_min_label' => 'Tamaño mínimo',
-	'option_url_mode_complet' => 'Vérification complète de l\'url', # NEW
-	'option_url_mode_label' => 'Mode de vérification des urls', # NEW
-	'option_url_mode_php_filter' => 'Vérification complète de l\'url via le filtre FILTER_VALIDATE_URL de php', # NEW
-	'option_url_mode_protocole_seul' => 'Vérification uniquement de la présence d\'un protocole', # NEW
-	'option_url_protocole_label' => 'Nom du protocole à vérifier', # NEW
-	'option_url_type_protocole_exact' => 'Saisir un protocole ci-dessous :', # NEW
-	'option_url_type_protocole_ftp' => 'Protocoles ftp : ftp ou sftp', # NEW
-	'option_url_type_protocole_label' => 'Type de protocole à vérifier', # NEW
-	'option_url_type_protocole_mail' => 'Protocoles mail : imap, pop3 ou smtp', # NEW
-	'option_url_type_protocole_tous' => 'Tous protocoles acceptés', # NEW
-	'option_url_type_protocole_web' => 'Protocoles web : http ou https', # NEW
+	'option_url_mode_complet' => 'Verificación completa de la url',
+	'option_url_mode_label' => 'Modo de verificación de las urls',
+	'option_url_mode_php_filter' => 'Verificación completa de la url a través del filtro FILTER_VALIDATE_URL de php',
+	'option_url_mode_protocole_seul' => 'Verificación únicamente de la presencia de un protocolo',
+	'option_url_protocole_label' => 'Nombre del protocolo a verificar',
+	'option_url_type_protocole_exact' => 'Ingresar un protocolo a continuación:',
+	'option_url_type_protocole_ftp' => 'Protocolos ftp: ftp o sftp',
+	'option_url_type_protocole_label' => 'Tipo de protocolo a verificar',
+	'option_url_type_protocole_mail' => 'Protocolos mail: imap, pop3 o smtp',
+	'option_url_type_protocole_tous' => 'Todos los protocolos aceptados',
+	'option_url_type_protocole_web' => 'Protocolos web: http o https',
 
 	// T
-	'type_couleur' => 'Couleur', # NEW
-	'type_couleur_description' => 'Vérifie que la valeur est un code couleur.', # NEW
+	'type_couleur' => 'Color',
+	'type_couleur_description' => 'Verifica que el valor es un código color.',
 	'type_date' => 'Fecha',
 	'type_date_description' => 'Comprueba que el valor es una fecha con el formato DD/MM/AAAA. El separador no importa (".", "/", etc).',
-	'type_decimal' => 'Nombre décimal', # NEW
-	'type_decimal_description' => 'Vérifie que la valeur est un nombre décimal, avec la possibilité de restreindre entre deux valeurs et de préciser le nombre de décimales après la virgule.', # NEW
+	'type_decimal' => 'Número decimal',
+	'type_decimal_description' => 'Verifica que el valor es un número decimal, con la posibilidad de restringir entre diez valores y de precisar el número de decimales tras la coma.',
 	'type_email' => 'Dirección de correo electrónico',
 	'type_email_description' => 'Comprueba que la dirección de correo electrónico tiene el formato correcto.',
 	'type_email_disponible' => 'Disponibilidad de una dirección de correo electrónico',
@@ -107,8 +107,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_taille_description' => 'Comprueba que el tamaño del valor corresponde al mínimo y/o al máximo indicado.',
 	'type_telephone' => 'Número de teléfono',
 	'type_telephone_description' => 'Comprueba que el número de teléfono corresponde a un patrón reconocido.',
-	'type_url' => 'URL', # NEW
-	'type_url_description' => 'Vérifie que l\'url correspond à un schéma reconnu.' # NEW
+	'type_url' => 'URL',
+	'type_url_description' => 'Verifica que la url corresponde a un patrón conocido.'
 );
 
 ?>
