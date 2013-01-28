@@ -103,7 +103,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_inserer_modele_description' => 'Description', # NEW
 	'label_inserer_modele_documents' => 'liés aux documents', # NEW
 	'label_inserer_modele_echelle' => 'Echelle', # NEW
-	'label_inserer_modele_explication_identifiant' => 'Attention : l\'identifiant de l\'objet dans lequel est insérée la carte est également transmis au modèle', # NEW
 	'label_inserer_modele_fullscreen' => 'Bouton plein écran', # NEW
 	'label_inserer_modele_gpx' => 'Fichier GPX à superposer', # NEW
 	'label_inserer_modele_hauteur_carte' => 'Hauteur de la carte', # NEW

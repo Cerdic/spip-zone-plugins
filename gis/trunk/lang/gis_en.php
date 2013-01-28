@@ -103,7 +103,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_inserer_modele_description' => 'Description',
 	'label_inserer_modele_documents' => 'linked to documents',
 	'label_inserer_modele_echelle' => 'Scale',
-	'label_inserer_modele_explication_identifiant' => 'Warning: the identifier of the object in which the map is inserted is also transmitted to the model',
 	'label_inserer_modele_fullscreen' => 'Full screen button',
 	'label_inserer_modele_gpx' => 'GPX file to overlay',
 	'label_inserer_modele_hauteur_carte' => 'Map height',
