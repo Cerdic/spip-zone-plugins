@@ -13,14 +13,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function oresource_declarer_tables_interfaces($interfaces) {
 
-	$interface['tables_jointures']['spip_orr_autorisations'][] = 'orr_autorisations_liens';
-	$interface['tables_jointures']['spip_orr_autorisations_liens'][] = 'orr_autorisations';
+	$interfaces['tables_jointures']['spip_orr_autorisations'][] = 'orr_autorisations_liens';
+	$interfaces['tables_jointures']['spip_orr_autorisations_liens'][] = 'orr_autorisations';
 
-	$interface['tables_jointures']['spip_orr_ressources'][] = 'orr_autorisations_liens';
+	$interfaces['tables_jointures']['spip_orr_ressources'][] = 'orr_autorisations_liens';
 
-	$interface['tables_jointures']['spip_orr_reservations'][] = 'orr_reservations_liens';
-	$interface['tables_jointures']['spip_orr_reservations_liens'][] = 'orr_reservations';
-	$interface['tables_jointures']['spip_auteurs'][] = 'orr_reservations_liens';
+	$interfaces['tables_jointures']['spip_orr_reservations'][] = 'orr_reservations_liens';
+	$interfaces['tables_jointures']['spip_orr_reservations_liens'][] = 'orr_reservations';
+	$interfaces['tables_jointures']['spip_auteurs'][] = 'orr_reservations_liens';
 
 	$interfaces['table_des_tables']['orr_ressources'] = 'orr_ressources';
 	$interfaces['table_des_tables']['orr_autorisations'] = 'orr_autorisations';
@@ -101,7 +101,7 @@ function oresource_declarer_tables_objets_sql($tables) {
 		'champs_editables'  => array('orr_type_objet','id_grappe','orr_statut','orr_droit'),
 		'champs_versionnes' => array(),
 		'rechercher_champs' => array("orr_statut" => 8),
-		'tables_jointures'  => array(),
+		'tables_jointures'  => array('spip_orr_autorisations_liens'),
 	);
 	return $tables;
 }
