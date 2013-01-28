@@ -157,7 +157,7 @@ function exec_convertisseur(){
 			echo "<textarea name='conv_out' cols='65' rows='12'>".entites_html($texte)."</textarea><br />\n";
 
 			if (isset($article[$f]))
-				echo "<div>article ".$article[$f].": <a href='".generer_url_ecrire('articles_edit', 'id_article='.$article[$f])."'>&#233;diter</a></div>\n";
+				echo "<div>article ".$article[$f].": <a href='".generer_url_ecrire('article_edit', 'id_article='.$article[$f])."'>&#233;diter</a></div>\n";
 		}
 
 		echo "</div>\n";
