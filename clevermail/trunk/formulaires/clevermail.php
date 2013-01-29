@@ -142,7 +142,7 @@ function formulaires_clevermail_traiter_dist($lst_id = 0, $lsr_mode_force = fals
 							$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
 							$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('clevermail:choix_version_html') : _T('clevermail:choix_version_texte'));
 							$template['@@EMAIL@@'] = _request('sub_email');
-							$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
+							$template['@@URL_CONFIRMATION@@'] = url_absolue(generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId));
 							$body = _T('clevermail:mail_inscription_multiple');
 						}
 						else {
@@ -161,7 +161,7 @@ function formulaires_clevermail_traiter_dist($lst_id = 0, $lsr_mode_force = fals
 							$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
 							$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('clevermail:choix_version_html') : _T('clevermail:choix_version_texte'));
 							$template['@@EMAIL@@'] = _request('sub_email');
-							$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
+							$template['@@URL_CONFIRMATION@@'] = url_absolue(generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId));
 							$body = $listData['lst_subscribe_text'];
 						}
 						if($nbLettre == count($lists)) {
@@ -214,7 +214,7 @@ function formulaires_clevermail_traiter_dist($lst_id = 0, $lsr_mode_force = fals
 						$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
 						$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
 						$template['@@EMAIL@@'] = _request('sub_email');
-						$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
+						$template['@@URL_CONFIRMATION@@'] = url_absolue(generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId));
 						$body = _T('clevermail:corps_mail_mod',array('mail' => _request('sub_email')));
 						while (list($translateFrom, $translateTo) = each($template)) {
 							$body = str_replace($translateFrom, $translateTo, $body);
