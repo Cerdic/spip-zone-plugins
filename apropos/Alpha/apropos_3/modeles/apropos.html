@@ -7,7 +7,6 @@ D'ou l'utilisation des 2 boucles pour prendre les éléments dans chacune des ta
 [<pre>(#ENV**|unserialize|print_r{1})</pre>]
 #ENV{prefixe}
  -->
-
 <div class='apropos'>
 <!-- on récupère le préfixe passé en paramètre et on le passe en majuscule pour être sûr du traitement -->
 #SET{leprefixe,#ENV*{prefixe}|mb_strtoupper} 
@@ -29,15 +28,15 @@ D'ou l'utilisation des 2 boucles pour prendre les éléments dans chacune des ta
 		<span class='apropos-version'>version #VERSION, [(#ETAT|svp_afficher_etat)].</span>
 		
 		<div class='apropos-description'>
-			Description[(#DESCRIPTION|extraire_multi)]
+			[(#DESCRIPTION|extraire_multi)]
 		</div>
 		<span class='apropos-auteur'>
 			[<:public:par_auteur:> (#AUTEUR*|svp_afficher_credits)]
 		</span><br />
 		<div class='apropos-etat'>
-				[(#GET{nombresite}|>{0}|oui)
-				[(#GET{nombresite}|singulier_ou_pluriel{svpstats:info_nbr_sites_1, svpstats:info_nbr_sites_n}).]
-				<br />]
+			[(#NBR_SITES|?{
+			[(#NBR_SITES|singulier_ou_pluriel{svpstats:info_nbr_sites_1, svpstats:info_nbr_sites_n})],<:svpstats:info_nbr_sites_0:>}).]
+			<br />
 			
 				[<:apropos:la_documentation:> <a href="#LIEN_DOC" title="Lisez la documentation du plugin [(#GET{lenom})].">(#LIEN_DOC)</a><br />]
 				[<:apropos:la_demonstration:> <a href="#LIEN_DEMO" title="La page de démonstration du plugin [(#GET{lenom})].">(#LIEN_DEMO)</a><br />]

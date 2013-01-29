@@ -84,8 +84,7 @@
 		<span class='apropos-etat'><br />
 			[(#NBR_SITES|?{
 			[(#NBR_SITES|singulier_ou_pluriel{svpstats:info_nbr_sites_1, svpstats:info_nbr_sites_n})],
-			<:svpstats:info_nbr_sites_0:>
-			}).]
+			<:svpstats:info_nbr_sites_0:>}).]
 		</span>
 	</div>
 	</BOUCLE_lesplugins>
@@ -113,9 +112,9 @@
 	<span class='apropos-auteur'>
 		[<:public:par_auteur:> (#AUTEUR*|svp_afficher_credits)]</span>
 		<span class='apropos-etat'><br />
-			[(#NBR_SITES|>{0}|oui)
-			[(#NBR_SITES|singulier_ou_pluriel{svpstats:info_nbr_sites_1, svpstats:info_nbr_sites_n}).]
-			]
+			[(#NBR_SITES|?{
+			[(#NBR_SITES|singulier_ou_pluriel{svpstats:info_nbr_sites_1, svpstats:info_nbr_sites_n})],<:svpstats:info_nbr_sites_0:>}).]
+			<br />
 		</span>
 	</div>
 	</BOUCLE_lesextensions>

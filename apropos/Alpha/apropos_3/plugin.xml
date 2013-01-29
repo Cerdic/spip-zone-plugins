@@ -1,8 +1,8 @@
 <plugin>
     <nom>À propos des Plugins actifs</nom>
     <auteur>[Jean-Philippe Guihard|Se rendre sur le site de Jean-Philippe Guihard->http://www.jp.guihard.net/]</auteur>
-    <version>0.3.6</version>
-    <etat>Test</etat>
+    <version>1.0.1</version>
+    <etat>Dev</etat>
 	<slogan>Liste les plugins actifs et affiche une description sommaire</slogan>
     <description>
     <multi>
@@ -10,18 +10,17 @@
     
     Il sert à afficher sur une page de type « à propos du site » un récapitulatif des plugins actifs, y compris l'ic&#244;ne de ceux-ci.
     <br />
-	Vous pouvez utiliser la nouvelle balise #APROPOS dans vos squelettes. Cette balise a 4 paramètres : <br />
+	Dans votre squelette, tapez les code suivant : <br />
 	
-	- soit vous écrivez :  <code>#APROPOS{liste}</code> pour retourner la liste des plugins, <br />
+	<code><INCLURE{fond=modeles/apropos_liste}></code> pour afficher la liste des plugins et plugins verrouill&eacute;s actifs ;<br />
+	<code><INCLURE{fond=modeles/apropos_nombre></code> pour n\'afficher que le nombre de plugins ET de plugins verrouill&eacute;s actifs ;<br />
+	<code><INCLURE{fond=modeles/apropos_plugins></code> pour n\'afficher que le nombre de plugins actifs ;<br />
+	<code><INCLURE{fond=modeles/apropos_extensions></code> pour n\'afficher que le nombre de plugins verrouill&eacute;s actifs ; <br />
+	<code><INCLURE{fond=modeles/apropos_adisposition></code> pour n\'afficher que le nombre de plugins dans le dossier plugins ;<br />
+	<code><INCLURE{fond=modeles/apropos_disponible></code> pour n\'afficher que le nombre total de plugins verrouill&eacute;s et de plugins de votre configuration.<br />
+	<code><INCLURE{fond=modeles/apropos}{prefixe=apropos}></code> si vous souhaitez afficher la description compl&egrave;te d\'un plugin sp&eacute;cifique, &eacute;crivez <code><INCLURE{fond=modeles/apropos}{prefixe=apropos}></code>. Ainsi, par exemple, pour afficher dans un article la description compl&egrave;te de ce plugin, utilisez <code><INCLURE{fond=modeles/apropos}{prefixe=apropos}></code>.<hr />
 	
-	- soit vous écrivez :  <code>#APROPOS{nombre}</code> pour n'afficher que le nombre de plugins ET de plugins verrouill&eacute;s actifs.<br />
-	
-	- soit vous écrivez :  <code>#APROPOS{plugins}</code> pour n'afficher que le nombre de plugins actifs.<br />
-	- soit vous écrivez :  <code>#APROPOS{extensions}</code> pour n'afficher que le nombre de plugins verrouill&eacute;s actives.<br />
-	Si vous voulez afficher la description complète d'un plugin dans un article, utilisez <code><apropos|prefixe=le préfixe du plugin></code>. Ainsi, par exemple, si vous mettez <code><apropos|prefixe=apropos></code>, vous afficherez la description complète de ce plugin.<br />
-	Pour personnaliser ce qui est affiché avant et après la liste des plugins actifs, modifiez le fichier modeles/apropos_liste.html que vous aurez préalablement copié dans le dossier squelettes/modeles.
-	<br />
-	Pour afficher la liste dans un article, il faut écrire dans l'article <code><apropos|liste></code>.<br />
+		Pour afficher la liste dans un article, il faut écrire dans l'article <code><apropos|liste></code>.<br />
 	Pour n'afficher que le nombre de plugins ET de plugins verrouill&eacute;s actifs, utilisez <code><apropos|nombre></code>.<br />
 	Pour n'afficher que le nombre de plugins actifs, utilisez <code><apropos|plugins></code>.<br />
 	Pour n'afficher que le nombre de plugins verrouill&eacute;s actifs, utilisez <code><apropos|extensions></code>.
