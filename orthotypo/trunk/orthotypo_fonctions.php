@@ -104,7 +104,7 @@ function orthotypo_filtre_texte_echappe($texte, $filtre, $balises='', $args=NULL
 		$texte = $filtre($texte);
 	else {
 		array_unshift($args,$texte);
-		$texte = call_user_func_array($texte, $args);
+		$texte = call_user_func_array($filtre, $args);
 	}
 
 	// deprotection des balises
