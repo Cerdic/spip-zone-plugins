@@ -95,7 +95,7 @@ nuts on the following pages:',
 	'label_niveau_titre' => 'Title level:',
 	'label_noizetier_css' => 'CSS classes:',
 	'label_texte' => 'Text:',
-	'label_texte_introductif' => 'Texte introductif (optionnel) :', # NEW
+	'label_texte_introductif' => 'Introduction text (optional):',
 	'label_titre' => 'Title:',
 	'label_titre_noisette' => 'Title of the nut:',
 	'label_titre_noisette_perso' => 'Custom title:',
