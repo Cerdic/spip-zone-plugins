@@ -64,23 +64,29 @@ function orthotypo_pre_propre($texte) {
  * evite les transformations typo dans les balises $balises
  * par exemple pour <html>, <cadre>, <code>, <frame>, <script>, <acronym> et <cite>, $balises = 'html|code|cadre|frame|script|acronym|cite'
  *
+ * @param $texte
+ *   $texte a filtrer
+ * @param $filtre
+ *   le filtre a appliquer pour transformer $texte
+ *   si $filtre = false, alors le texte est retourne protege, sans filtre
  * @param $balises
  *   balises concernees par l'echappement
- *   si $balises = '' alors la protection par defaut est : html|code|cadre|frame|script
+ *   si $balises = '' alors la protection par defaut est sur les balises de _PROTEGE_BLOCS
  *   si $balises = false alors le texte est utilise tel quel
- * @param $fonction
- *   la fonction prevue pour transformer $texte
- *   si $fonction = false, alors le texte est retourne simplement protege
- * @param $texte
- *   $texte a filtree
- * @param null $arg
+ * @param null|array $args
+ *   arguments supplementaires a passer au filtre
  * @return string
  */
-function orthotypo_echappe_balises($balises, $fonction, $texte, $arg=NULL){
+function orthotypo_filtre_texte_echappe($texte, $filtre, $balises='', $args=NULL){
 	if(!strlen($texte)) return '';
-	if (($fonction!==false) && !function_exists($fonction)) {
-		spip_log("orthotypo_echappe_balises() : $fonction() non definie","orthotypo"._LOG_ERREUR);
-		return $texte;
+
+	if ($filtre!==false){
+		$fonction = chercher_filtre($filtre,false);
+		if (!$fonction) {
+			spip_log("orthotypo_filtre_texte_echappe() : $filtre() non definie",_LOG_ERREUR);
+			return $texte;
+		}
+		$filtre = $fonction;
 	}
 
 	// protection du texte
@@ -89,15 +95,20 @@ function orthotypo_echappe_balises($balises, $fonction, $texte, $arg=NULL){
 		else $balises = ',<('.$balises.')(\s[^>]*)?>(.*)</\1>,UimsS';
 		if (!function_exists('echappe_html'))
 			include_spip('inc/texte_mini');
-		$texte = echappe_html($texte, 'ORTHOTYPO', true, $balises);
+		$texte = echappe_html($texte, 'FILTRETEXTECHAPPE', true, $balises);
 	}
 	// retour du texte simplement protege
-	if ($fonction===false) return $texte;
+	if ($filtre===false) return $texte;
 	// transformation par $fonction
-	$texte = (is_null($arg)?$fonction($texte):$fonction($texte, $arg));
+	if (!$args)
+		$texte = $filtre($texte);
+	else {
+		array_unshift($args,$texte);
+		$texte = call_user_func_array($texte, $args);
+	}
 
-	// deprotection en abime, notamment des modeles...
-	return echappe_retour($texte, 'ORTHOTYPO');
+	// deprotection des balises
+	return echappe_retour($texte, 'FILTRETEXTECHAPPE');
 }
 
 
@@ -205,7 +216,7 @@ function orthotypo_guillemets_rempl($texte){
 
 function orthotypo_guillemets_post_typo($texte){
 	if (strpos($texte, '"')!==false)
-		$texte = orthotypo_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'orthotypo_guillemets_rempl', $texte);
+		$texte = orthotypo_filtre_texte_echappe($texte,'orthotypo_guillemets_rempl','html|code|cadre|frame|script|acronym|cite');
 	return $texte;
 }
 
@@ -314,7 +325,7 @@ function orthotypo_exposants_post_typo($texte){
 		// prudence : on protege les balises <a> et <img>
 		if (strpos($texte, '<')!==false)
 			$texte = preg_replace_callback('/(<(a|img)\s[^>]+>)/Uims', 'orthotypo_exposants_echappe_balises_callback', $texte);
-		$texte = orthotypo_echappe_balises('html|code|cadre|frame|script|acronym|cite', $fonction, $texte);
+		$texte = orthotypo_filtre_texte_echappe($texte,$fonction,'html|code|cadre|frame|script|acronym|cite');
 		return echappe_retour($texte, 'EXPO');
 	}
 	return $texte;
@@ -349,7 +360,7 @@ function orthotypo_mois_rempl($texte){
 
 function orthotypo_mois_post_typo($texte){
 	if (strpbrk($texte,"123456789")!==false){
-		$texte = orthotypo_echappe_balises('html|code|cadre|frame|script|acronym|cite', "orthotypo_mois_rempl", $texte);
+		$texte = orthotypo_filtre_texte_echappe($texte,'orthotypo_mois_rempl','html|code|cadre|frame|script|acronym|cite');
 	}
 	return $texte;
 }
@@ -409,7 +420,7 @@ function orthotypo_caps_rempl($texte){
 }
 
 function orthotypo_caps_post_typo($texte){
-	$texte = orthotypo_echappe_balises('html|code|cadre|frame|script|acronym|cite', "orthotypo_caps_rempl", $texte);
+	$texte = orthotypo_filtre_texte_echappe($texte,'orthotypo_caps_rempl','html|code|cadre|frame|script|acronym|cite');
 	return $texte;
 }
 
@@ -472,7 +483,7 @@ function orthotypo_corrections_echappe_liens($m) {
 
 // Fonctions de traitement sur #TEXTE
 function orthotypo_corrections_pre_propre($texte) {
-	return orthotypo_echappe_balises('', 'orthotypo_corrections_rempl', $texte);
+	return orthotypo_filtre_texte_echappe($texte,'orthotypo_corrections_rempl');
 }
 
 ?>
