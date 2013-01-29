@@ -53,14 +53,14 @@ function embed_url($url) {
 			
 		}
 		else if (preg_match("/^https?\:\/\/gist\.github\.com\/(.*)/i", $url, $regs)) {
-			$html = join("", file($url));
-			
-			$html = substr($html, strpos($html, '<pre>'), strlen($html));
-			$html = substr($html, 0, strpos($html, '</pre>'));
-			$html = trim($html);
-			
-			$code_ae = "<div class='oembed-container oembed-code'>$html</div>";
-			
+			$html = file_get_contents($url);
+			$tag = 'pre'; # extraire_balise
+			if (preg_match(
+			",<$tag\b[^>]*(/>|>.*</$tag\b[^>]*>|>),UimsS",
+			$html, $regs)) {
+				$pre = $regs[0];
+				$code_ae = "<div class='oembed-container oembed-code'>$pre</div>";
+			}
 		}
 		else if (preg_match("/^http\:\/\/(www\.)?yfrog\.com/i", $url)) {
 			$oembed = "http://www.yfrog.com/api/oembed?url?format=json&url=".$url;
