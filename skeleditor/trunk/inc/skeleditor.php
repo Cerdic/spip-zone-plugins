@@ -64,20 +64,21 @@ function skeleditor_files_editables($path=null){
 	if (!$path) return array();
 
 	$files_editable = preg_files($path,'[.]('._SE_EXTENSIONS.')$');
-	#$files_editable = sort_directory_first($files_editable,$dossier_squelettes); // utile ?
+	$files_editable = sort_directory_first($files_editable,$path); // utile ?
+
 	return $files_editable;
 }
 
 
 // tri la liste des fichiers en placant ceux a la racine en premier
 function sort_directory_first($files,$root) {
-  $files_root = array();
-  $files_directory = array();
-  foreach($files as $file) {
-      if (dirname($file)."/" != $root) $files_directory[] = $file;
-                                  else $files_root[] = $file;
-  }
-  return array_merge($files_root,$files_directory);
+	$files_root = array();
+	$files_directory = array();
+	foreach($files as $file) {
+		if (dirname($file)."/" != $root) $files_directory[] = $file;
+		else $files_root[] = $file;
+	}
+	return array_merge($files_directory,$files_root);
 }
 
 function skeleditor_get_file_content_type_ctrl($fichier){
