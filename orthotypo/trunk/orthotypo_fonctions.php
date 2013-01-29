@@ -260,12 +260,13 @@ function orthotypo_exposants_fr($texte){
 		$typo = array(
 			// Mlle(s), Mme(s) et erreurs Melle(s)
 			// Mme(s) et Mgr
-			'/\b(M)(?:(gr)|(mes?)|(?:e?(lles?)))\b/u' => _TYPO_sup2,
+			'/\bM(gr|mes?)\b/u' => 'M'._TYPO_sup,
+			'/\bMe?(lles?)\b/u' => 'M'._TYPO_sup,
 			// Dr, Pr suivis d'un espace d'un point ou d'un tiret
-			'/(?<=\b[DP])(r)(?=[\s\.-])/u' => _TYPO_sup,
+			'/\b([DP])(r)(?=[\s\.-])/u' => _TYPO_sup2,
 
 			// m≤
-			'/\bm≤\b/' => 'm<sup class="typo_exposants">2</sup>',
+			'/\bm≤\b/' => 'm'._TYPO_class.'2</sup>',
 			// m2, m3
 			'/\bm([23])\b/u' => 'm'._TYPO_sup,
 
