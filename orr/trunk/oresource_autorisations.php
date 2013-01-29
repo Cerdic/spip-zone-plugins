@@ -14,6 +14,7 @@ $res = sql_select(
 		"auto.id_orr_autorisation AS idauto",
 		"auto.orr_type_objet AS type",
 		"auto.orr_statut AS statut",
+		"auto.id_auteur AS id_auteur",
 		"auto.orr_autorisation_valeur AS valeur"),
 	array(
 		"spip_orr_autorisations AS auto",
@@ -42,6 +43,8 @@ $res = sql_select(
                 if (($rg['idgrappe_auteur'] == $id_auteur) AND (strpos($r['valeur'], $autorisation) !== false)) $result = true;
             }
         }
+        if (($r['type'] == "auteur") AND ($r['id_auteur']==$id_auteur) AND (strpos($r['valeur'], $autorisation) !== false)) $result=true;
+
     }
 	
 	return $result;

@@ -17,6 +17,7 @@ function oresource_declarer_tables_interfaces($interfaces) {
 	$interfaces['tables_jointures']['spip_orr_autorisations_liens'][] = 'orr_autorisations';
 
 	$interfaces['tables_jointures']['spip_orr_ressources'][] = 'orr_autorisations_liens';
+	$interfaces['tables_jointures']['spip_auteurs'][] = 'orr_autorisations_liens';
 
 	$interfaces['tables_jointures']['spip_orr_reservations'][] = 'orr_reservations_liens';
 	$interfaces['tables_jointures']['spip_orr_reservations_liens'][] = 'orr_reservations';
@@ -89,6 +90,7 @@ function oresource_declarer_tables_objets_sql($tables) {
 			"orr_type_objet"          => "varchar(25) NOT NULL DEFAULT ''",
 			"id_grappe"               => "bigint(21) ",
 			"orr_statut"              => "varchar(25)  DEFAULT ''",
+			"id_auteur"               => "bigint(21) ",
 			"orr_droit"               => "varchar(25) NOT NULL DEFAULT ''",
 			"orr_autorisation_nom"    => "varchar(25) NOT NULL DEFAULT ''",
 			"orr_autorisation_valeur" => "varchar(25) NOT NULL DEFAULT ''",
