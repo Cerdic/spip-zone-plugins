@@ -32,7 +32,7 @@ function balise_CLEVERMAIL_UNSUBSCRIBE_dyn() {
 	      $template['@@EMAIL@@'] = $sub['sub_email'];
 	      $template['@@FORMAT_INSCRIPTION@@']  = ($data['lsr_mode'] == 1 ? 'HTML' : 'texte');
 	      //$template['@@URL_CONFIRMATION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_do&id='.$actionId;
-	      $template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
+	      $template['@@URL_CONFIRMATION@@'] = url_absolue(generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId));
 
 	      $to = $sub['sub_email'];
 	      $subject = (intval($list['lst_subject_tag']) == 1 ? '['.$template['@@NOM_COMPLET@@'].'] ' : '').html_entity_decode($list['lst_unsubscribe_subject'], ENT_QUOTES,'UTF-8');

@@ -123,7 +123,7 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
 		          		$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
 		          		$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('clevermail:choix_version_html') : _T('clevermail:choix_version_texte'));
 		          		$template['@@EMAIL@@'] = _request('sub_email');
-		          		$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
+		          		$template['@@URL_CONFIRMATION@@'] = url_absolue(generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId));
 		          		$body = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_TEXT'");
 		          		$subject = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_SUBJECT'");
 		          		$msgInscription = _T('clevermail:inscription_ok_multiple', array('lst_name' => $lists_name_complet));
@@ -142,7 +142,7 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
 		          		$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
 		          		$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('clevermail:choix_version_html') : _T('clevermail:choix_version_texte'));
 		          		$template['@@EMAIL@@'] = _request('sub_email');
-		          		$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
+		          		$template['@@URL_CONFIRMATION@@'] = url_absolue(generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId));
 		          		$body = $listData['lst_subscribe_text'];
 		          		$subject = (intval($listData['lst_subject_tag']) == 1 ? '['.$template['@@NOM_COMPLET@@'].'] ' : '').$listData['lst_subscribe_subject'];
 		          		$msgInscription = _T('clevermail:inscription_ok', array('lst_name' => $template['@@NOM_COMPLET@@']));
