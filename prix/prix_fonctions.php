@@ -64,7 +64,7 @@ function filtres_prix_formater_dist($prix){
 
 	// Pouvoir débrayer la devise de référence
 	if (! defined('PRIX_DEVISE')) {
-	  define('PRIX_DEVISE','fr_FR.utf-8');
+	  define('PRIX_DEVISE','fr_FR.UTF-8');
 	}
 
 	setlocale(LC_MONETARY, PRIX_DEVISE);
