@@ -1,0 +1,18 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#wysiwyg .nav-sommaire {border: 1px solid #eee;margin-left: 30%;margin-bottom: 1.5em;}
+#wysiwyg .nav-sommaire h2 {background: #eee;font-size: inherit;text-transform: uppercase;padding:0.5em;}
+#wysiwyg .nav-sommaire ul {}
+
+a.sommaire-back {color:#DDD;display:block;width:16px;height:16px;background:url(#CHEMIN_IMAGE{sommaire-up-16.png}) no-repeat center;float: #ENV{right};opacity:0.5;}
