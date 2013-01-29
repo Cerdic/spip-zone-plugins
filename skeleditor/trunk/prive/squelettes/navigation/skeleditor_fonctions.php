@@ -43,14 +43,16 @@ function skeleditor_afficher_dir_skel($path_base,$current_file) {
 		if (preg_match(',('._SE_EXTENSIONS_IMG.')$,',$file))
 			$icon = "image";
 
-		$cadenas = ($readonly) ? "<img src='".chemin_image('cadenas-16.png')."' title='".attribut_html(_T('texte_inc_meta_2'))."' /> " : "";
+		include_spip('inc/filtres_images_mini');
+		$cadenas = ($readonly) ? "&nbsp;".inserer_attribut(image_reduire(chemin_image('cadenas-16.png'),12),title,attribut_html(_T('texte_inc_meta_2'))) : "";
 
 		$output .= "<a href='".generer_url_ecrire('skeleditor','f='.urlencode($f=$path_base.$file))."' class='$class'
 			onclick=\"jQuery('#contenu > :first').ajaxReload({history:true,args:{f:'$f'}});return false;\">"
-			.$cadenas
 			. "<img src='"._DIR_PLUGIN_SKELEDITOR."images/se-$icon-16.png' alt='$icon' /> "
 			.basename($file)
-			. "</a>";
+			.$cadenas
+			. "</a>"
+			;
 	}
 	$output .= skeleditor_tree_open_close_dir($current_dir,$init_dir,$current_file);
   $output .= "</div></div>\n";
