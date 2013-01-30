@@ -1,11 +1,11 @@
 <paquet
 	prefix="sommaire"
 	categorie="edition"
-	version="1.0.5"
-	etat="test"
+	version="1.0.6"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/sommaire-64.png"
-	documentation=""
+	documentation="http://contrib.spip.net/Sommaire-automatique"
 >
 
 	<nom>Sommaire automatique</nom>

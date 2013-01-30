@@ -22,7 +22,7 @@ function retire_sommaire($texte){
 
 /**
  * Filtre |retire_ancres_sommaire
- * pour retirer les ancres vers le sommaire qui aont ete ajoutee automatiquement sur un texte
+ * pour retirer les ancres et le sommaire qui ont ete ajoutee automatiquement sur un texte
  * @param $texte
  * @return mixed
  */
@@ -30,17 +30,19 @@ function retire_ancres_sommaire($texte){
 	// retirer les liens de retour au sommaire
 	if (strpos($texte,"sommaire-back")!==false)
 		$texte = preg_replace(",<a class='sommaire-back'[^>]*></a>,Uims","",$texte);
-	return $texte;
+	return retire_sommaire($texte);
 }
 
 /**
  * Filtre |ancres_sommaire
- * pour ajouter les ancres de sommaire du les intertitres d'un texte
+ * pour ajouter les ancres de sommaire sur les intertitres d'un texte
+ * (enleve aussi le sommaire eventuellement genere automatiquement)
+ * 
  * @param string $texte
  * @return string
  */
 function ancres_sommaire($texte){
-	$texte = sommaire_post_propre($texte, false);
+	$texte = sommaire_post_propre(retire_sommaire($texte), false);
 	return $texte;
 }
 
