@@ -111,6 +111,23 @@ function orthotypo_filtre_texte_echappe($texte, $filtre, $balises='', $args=NULL
 	return echappe_retour($texte, 'FILTRETEXTECHAPPE');
 }
 
+function orthotypo_echappe_balises_html($texte){
+	// prudence : on protege le contenu de toute balise html
+	if (strpos($texte, '<')!==false){
+		// tout
+		#$texte = preg_replace_callback(',<[^>]*>,UmsS', 'orthotypo_echappe_balise_html', $texte);
+		// dangereux uniquement
+		$texte = preg_replace_callback(',<\w+\b[^>]+>,UmsS', 'orthotypo_echappe_balise_html', $texte);
+	}
+	return $texte;
+}
+
+function orthotypo_echappe_balise_html($m) {
+	if (strpos($m[0],'class="base64')!==false) return $m[0];
+	var_dump($m[0]);
+	return code_echappement($m[0], 'FILTRETEXTECHAPPE',true,'span');
+}
+
 
 /* *********************************************************************************************************************
  * Guillemets
@@ -416,6 +433,7 @@ function orthotypo_caps_rempl($texte){
 	            (?:[A-Z]+\.\s?)+)  # Followed by the same thing at least once more
 	            (?:\s|\b|$))/xS";
 	}
+	$texte = orthotypo_echappe_balises_html($texte);
 	return preg_replace_callback($cap_finder, 'orthotypo_caps_replace_callback', $texte);
 }
 
@@ -465,20 +483,14 @@ function orthotypo_corrections_rempl($texte) {
 	if (is_null($str)){
 		list($str,$preg) = orthotypo_corrections_regles();
 	}
-	// prudence : on protege les urls dans les raccourcis de liens SPIP
-	if (strpos($texte, '[')!==false)
-		$texte = preg_replace_callback(',(\[[^][]*->>?)([^]]*)(?=\]),msS', 'orthotypo_corrections_echappe_liens', $texte);
 
+	$texte = orthotypo_echappe_balises_html($texte);
 	if (count($str))
 		$texte = str_replace($str[0], $str[1], $texte);
 	if (count($preg))
 		$texte = preg_replace($preg[0], $preg[1], $texte);
 
-	return echappe_retour($texte, 'CORRECTIONS');
-}
-
-function orthotypo_corrections_echappe_liens($m) {
-	return $m[1].code_echappement($m[2], 'CORRECTIONS');
+	return $texte;
 }
 
 // Fonctions de traitement sur #TEXTE
