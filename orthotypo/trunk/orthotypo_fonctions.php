@@ -124,7 +124,6 @@ function orthotypo_echappe_balises_html($texte){
 
 function orthotypo_echappe_balise_html($m) {
 	if (strpos($m[0],'class="base64')!==false) return $m[0];
-	var_dump($m[0]);
 	return code_echappement($m[0], 'FILTRETEXTECHAPPE',true,'span');
 }
 
