@@ -11,6 +11,7 @@
 *
 **/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/meta');
 
 // fonction qui permet de trouver si une rubrique existe à partir du titre
@@ -169,21 +170,22 @@ function amap_declarer_tables_principales($tables_principales){
 function amap_declarer_champs_extras($champs = array()){
 	// type d'adhérent
 	$champs['spip_auteurs']['type_adherent'] = array(
-		'saisie' => 'radio',//Type du champ (voir plugin Saisies)
+		'saisie' => 'radio', // Type du champ (voir plugin Saisies)
 		'options' => array(
 				'nom' => 'type_adherent',
 				'label' => _T('amap:type_adherent_auteur'),
-				'sql' => "text NOT NULL DEFAULT ''",
-				'defaut' => '',// Valeur par défaut
-				'restrictions'=>array('voir' => array('auteur' => ''),//Tout le monde peut voir
-				'modifier' => array('auteur' => 'auteur')),//Seuls les webmestres peuvent modifier
-				'enum' => array(
-						"adherent" => _T('amap:adherent'),
-						"producteur" => _T('amap:producteur'),
+				'sql' => "varchar(15) DEFAULT ''",
+				'defaut' => '', // Valeur par défaut
+				'restrictions'=>array(
+						'voir' => array('auteur' => ''), // Tout le monde peut voir
+						'modifier' => array('auteur' => ''), // Seuls les auteurs peuvent modifier
+				),
+				'datas' => array(
+						'adherent' => _T('amap:adherent'),
+						'producteur' => _T('amap:producteur'),
 				),
 		),
 	);
-	return $champs;
 
 	// l'adhésion
 	$champs['spip_auteurs']['adhesion'] = array(
@@ -193,11 +195,12 @@ function amap_declarer_champs_extras($champs = array()){
 				'label' => _T('amap:adhesion_auteur'),
 				'sql' => "bigint(21) NULL", // declaration sql
 				'defaut' => '',// Valeur par défaut
-				'restrictions'=>array('voir' => array('auteur' => ''),//Tout le monde peut voir
-				'modifier' => array('auteur' => 'auteur')),//Seuls les webmestres peuvent modifier
+				'restrictions'=>array(
+						'voir' => array('auteur' => ''), // Tout le monde peut voir
+						'modifier' => array('auteur' => ''), // Seuls les auteurs peuvent modifier
+				),
 		),
 	);
-	return $champs;
 
 	// type de panier
 	$champs['spip_auteurs']['type_panier'] = array(
@@ -205,16 +208,19 @@ function amap_declarer_champs_extras($champs = array()){
 		'options' => array(
 				'nom' => 'type_panier',
 				'label' => _T('amap:type_panier_auteur'),
-				'sql' => "text NOT NULL DEFAULT ''", // declaration sql
+				'sql' => "varchar(10) DEFAULT ''", // declaration sql
 				'defaut' => '',// Valeur par défaut
-				'restrictions'=>array('voir' => array('auteur' => ''),//Tout le monde peut voir
-				'modifier' => array('auteur' => 'auteur')),//Seuls les webmestres peuvent modifier
-				'enum' => array(
-					"petit" => _T('amap:petit'),
-					"grand" => _T('amap:grand'),
+				'restrictions'=>array(
+						'voir' => array('auteur' => ''), // Tout le monde peut voir
+						'modifier' => array('auteur' => ''), // Seuls les auteurs peuvent modifier
 				),
-		),
+				'datas' => array(
+						'petit' => _T('amap:petit'),
+						'grand' => _T('amap:grand'),
+				)
+		)
 	);
+
 	return $champs;
 }
 ?>
