@@ -289,7 +289,7 @@ function mailshot_import_from_clevermail(){
 					$ins[] = array(
 						'id_mailshot' => $cm_posts2mailshot[$l['pst_id']]['id_mailshot'],
 						'email' => $email,
-						'date' => date('Y-m-d H:i:s', $cm_posts2mailshot[$l['pst_id']]['date_start']),
+						'date' => date('Y-m-d H:i:s', $cm_posts2mailshot[$l['pst_id']]['pst_date_sent']),
 						'statut' => $statut,
 					);
 					sql_updateq("spip_cm_posts_done",
