@@ -95,70 +95,70 @@ function amap_declarer_tables_interfaces($interface){
 	//-- filtre date
 	$interface['table_date']['amap_paniers'] = 'date_distribution';
 	$interface['table_date']['amap_responsables'] = 'date_distribution';
-	//-- Savoit traiter "_ " en <br />
-	$interface['table_des_traitements']['INFO_SUPPLEMENTAIRE']['amap_disponibles'] = _TRAITEMENT_RACCOURCIS;
-	$interface['table_des_traitements']['CONTENU_PANIER']['amap_livraisons'] = _TRAITEMENT_RACCOURCIS;
+	//-- Savoir traiter "_ " en <br />
+	$interface['table_des_traitements']['INFO_SUPPLEMENTAIRE'][] = _TRAITEMENT_RACCOURCIS;
+	$interface['table_des_traitements']['CONTENU_PANIER'][] = _TRAITEMENT_RACCOURCIS;
 	return $interface;
 }
 
 //creation des tables
 function amap_declarer_tables_principales($tables_principales){
 	//-- Table amap_disponibles -------------------
-	$spip_amap_disponibles = array(
-		'id_amap_disponible'  => 'bigint(21) NOT NULL auto_increment',
-		'id_amap_panier'  => 'bigint(21) NOT NULL',
-		'type_disponibilite'  => 'text DEFAULT "" NOT NULL',
-		'info_supplementaire'  => 'text DEFAULT "" NOT NULL',
+	$spip_amap_disponibles_field = array(
+		'id_amap_disponible'	=> 'bigint(21) NOT NULL auto_increment',
+		'id_amap_panier'  		=> 'bigint(21) NOT NULL',
+		'type_disponibilite'	=> 'text',
+		'info_supplementaire'	=> 'text',
 		);
 	$spip_amap_disponibles_key = array(
 		'PRIMARY KEY'   => 'id_amap_disponible'
 		);
 	$tables_principales['spip_amap_disponibles'] = array(
-		'field' => &$spip_amap_disponibles,
+		'field' => &$spip_amap_disponibles_field,
 		'key' => &$spip_amap_disponibles_key,
 		);
 
 	//-- Table amap_livraisons -------------------
-	$spip_amap_livraisons = array(
-		'id_amap_livraison'  => 'bigint(21) NOT NULL auto_increment',
-		'date_livraison'  => 'datetime DEFAULT "0000-00-00 00:00:00" NOT NULL',
-		'contenu_panier'  => 'text DEFAULT "" NOT NULL',
+	$spip_amap_livraisons_field = array(
+		'id_amap_livraison'	=> 'bigint(21) NOT NULL auto_increment',
+		'date_livraison'  	=> 'datetime DEFAULT "0000-00-00 00:00:00" NOT NULL',
+		'contenu_panier'  	=> 'text',
 		);
 	$spip_amap_livraisons_key = array(
 		'PRIMARY KEY'   => 'id_amap_livraison'
 		);
 	$tables_principales['spip_amap_livraisons'] = array(
-		'field' => &$spip_amap_livraisons,
+		'field' => &$spip_amap_livraisons_field,
 		'key' => &$spip_amap_livraisons_key,
 		);
 
 	//-- Table amap_paniers -------------------
-	$spip_amap_paniers = array(
-		'id_amap_panier'  => 'bigint(21) NOT NULL auto_increment',
-		'id_auteur'  => 'bigint(21) NOT NULL',
-		'id_producteur'  => 'bigint(21) NOT NULL',
-		'date_distribution'  => 'datetime DEFAULT "0000-00-00 00:00:00" NOT NULL',
-		'dispo'  => 'bigint(21) DEFAULT "0" NOT NULL',
+	$spip_amap_paniers_field = array(
+		'id_amap_panier'	=> 'bigint(21) NOT NULL auto_increment',
+		'id_auteur'  		=> 'bigint(21) NOT NULL',
+		'id_producteur' 	=> 'bigint(21) NOT NULL',
+		'date_distribution' => 'datetime DEFAULT "0000-00-00 00:00:00" NOT NULL',
+		'dispo'  			=> 'bigint(21) DEFAULT "0" NOT NULL',
 		);
 	$spip_amap_paniers_key = array(
 		'PRIMARY KEY'   => 'id_amap_panier'
 		);
 	$tables_principales['spip_amap_paniers'] = array(
-		'field' => &$spip_amap_paniers,
+		'field' => &$spip_amap_paniers_field,
 		'key' => &$spip_amap_paniers_key,
 		);
 
 	//-- Table amap_responsables -------------------
-	$spip_amap_responsables = array(
-		'id_amap_responsable'  => 'bigint(21) NOT NULL auto_increment',
-		'id_auteur'  => 'bigint(21) NOT NULL',
-		'date_distribution'  => 'datetime DEFAULT "0000-00-00 00:00:00" NOT NULL',
+	$spip_amap_responsables_field = array(
+		'id_amap_responsable'  	=> 'bigint(21) NOT NULL auto_increment',
+		'id_auteur'  			=> 'bigint(21) NOT NULL',
+		'date_distribution'  	=> 'datetime DEFAULT "0000-00-00 00:00:00" NOT NULL',
 		);
 	$spip_amap_responsables_key = array(
 		'PRIMARY KEY'   => 'id_amap_responsable'
 		);
 	$tables_principales['spip_amap_responsables'] = array(
-		'field' => &$spip_amap_responsables,
+		'field' => &$spip_amap_responsables_field,
 		'key' => &$spip_amap_responsables_key,
 		);
 
