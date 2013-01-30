@@ -127,3 +127,40 @@ function mailsubscribers_listes($options = array()){
 
 	return $listes;
 }
+
+/**
+ * Renommer un identifiant de liste dans la liste des abonnés
+ *
+ * @param string $liste_ancienne
+ *   Identifiant de liste à renommer (exemple newsletter::1-truc)
+ * @param string $liste_nouvelle
+ *   Nouvel identifiant de la liste (exemple newsletter::infolettre)
+ * @return bool
+ *   True si l'opération a été réalisée.
+**/
+function mailsubscribers_renommer_identifiant_liste($liste_ancienne, $liste_nouvelle) {
+	spip_log("Renommer la liste '$liste_ancienne' en '$liste_nouvelle'", "mailsubscribers");
+
+	while ($subscribers = sql_allfetsel(
+		'id_mailsubscriber, listes',
+		'spip_mailsubscribers',
+		"listes REGEXP '(^|,)$liste_ancienne($|,)'",
+		"","","0,50"))
+	{
+		if (!$subscribers) break;
+
+		include_spip('action/editer_objet');
+		$liste_nouvelle = trim($liste_nouvelle);
+
+		foreach ($subscribers as $s) {
+			$listes = explode(',', $s['listes']);
+			$key = array_search($liste_ancienne, $listes);
+			if ($key !== false) { // sait on jamais
+				$listes[$key] = $liste_nouvelle;
+				$listes = implode(',', $listes);
+				objet_modifier("mailsubscriber", $s['id_mailsubscriber'], array('listes' => $listes));
+			}
+		}
+	}
+	return true;
+}

@@ -46,6 +46,7 @@
 								<label for="lists_[(#GET{index})]_#GET{name}">[(#GET{fl}|concat{':label_list_',#GET{name}}|_T)]</label>[
 								<span class='erreur_message'>(#GET{erreurs})</span>
 								]<input type="text" name="lists[#GET{index}][#GET{name}]" class="text" value="#ENV*{lists/#GET{index}/#GET{name},#VALEUR{#GET{name}}}" id="lists_[(#GET{index})]_#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+								<input type="hidden" name="lists[#GET{index}][#GET{name}_bak]" class="text" value="#ENV*{lists/#GET{index}/#GET{name},#VALEUR{#GET{name}}}" />
 							</li>
 							#SET{name,titre}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/lists/#GET{index}/#GET{name}}}
 							<li class="editer editer_lists_[(#GET{index})]_#GET{name}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">

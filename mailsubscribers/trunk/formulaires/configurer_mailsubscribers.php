@@ -38,17 +38,38 @@ function formulaires_configurer_mailsubscribers_verifier_dist(){
 	return $erreurs;
 }
 
+/**
+ * Enregistrement de la configuration de mailsubscribers
+ *
+ * @note
+ *   La liste des listes de diffusion déclarées en configuration
+ *   est systématiquement complétée par celles présentes réellement
+ *   en base dans spip_mailsubscribers. Dès lors, modifier l'identifiant
+ *   d'une liste induit aussi de modifier spip_mailsubscribers.
+ *
+ * @return array
+**/
 function formulaires_configurer_mailsubscribers_traiter_dist(){
 
 	if ($lists = _request('lists')) {
-		foreach (_request('lists') as $k => $v){
-			if (strlen(trim($v['id']))){
+		foreach (_request('lists') as $k => $v) {
+
+			$id_bak = mailsubscribers_normaliser_nom_liste($v['id_bak']); # ancien nom d'identifiant.
+			unset($v['id_bak']);
+
+			if (strlen(trim($v['id']))) {
 				$lists[$k]['id'] = mailsubscribers_normaliser_nom_liste($v['id']);
-				if (!in_array($v['status'],array('open','close')))
+				if (!in_array($v['status'],array('open','close'))) {
 					$lists[$k]['status'] = 'open';
+				}
+
+				if ($lists[$k]['id'] != $id_bak) {
+					mailsubscribers_renommer_identifiant_liste($id_bak, $lists[$k]['id']);
+				}
 			}
-			else
+			else {
 				unset($lists[$k]);
+			}
 		}
 		set_request('lists',array_merge($lists)); // array_merge pour renumeroter les cles numeriques...
 		ecrire_config('mailsubscribers/',array('lists'=>$lists));
