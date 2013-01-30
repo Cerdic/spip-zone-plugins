@@ -1,15 +1,28 @@
 <?php
-/**
+/***
  * Plugin MailShot
  * (c) 2012 Cedric Morin
  * Licence GNU/GPL
  */
 
+/**
+ * Fichier gérant l'installation et désinstallation du plugin
+ *
+ * @package SPIP\Mailshot\Installation
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
  * Fonction d'installation du plugin et de mise à jour.
+ *
+ * Crée les tables SQL du plugin (spip_mailshots, spip_mailshots_destinataires)
+ * Importe à l'installation les infoslettres des plugins SPIP Listes & SPIP Lettres
+ * 
+ * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @param string $version_cible
+ *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
 **/
 function mailshot_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
@@ -18,6 +31,7 @@ function mailshot_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables', array('spip_mailshots','spip_mailshots_destinataires')),
 		array('mailshot_import_from_spiplistes'),
 		array('mailshot_import_from_spiplettres'),
+		array('mailshot_import_from_clevermail'),
 	);
 
 	$maj['0.1.4'] = array(
@@ -38,7 +52,11 @@ function mailshot_upgrade($nom_meta_base_version, $version_cible) {
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
-
+/**
+ * Importe les lettres du plugin SPIP Listes
+ *
+ * @return void|null
+**/
 function mailshot_import_from_spiplistes(){
 	$trouver_table = charger_fonction("trouver_table","base");
 	if ($desc = $trouver_table('spip_courriers')){
@@ -72,6 +90,11 @@ function mailshot_import_from_spiplistes(){
 	}
 }
 
+/**
+ * Importe les lettres & abonnés du plugin SPIP Lettres
+ *
+ * @return void|null
+**/
 function mailshot_import_from_spiplettres(){
 	$trouver_table = charger_fonction("trouver_table","base");
 	if ($trouver_table('spip_lettres')
@@ -178,6 +201,131 @@ function mailshot_import_from_spiplettres(){
 }
 
 
+/**
+ * Importe les lettres du plugin Clevermail
+ *
+ * @return void|null
+**/
+function mailshot_import_from_clevermail(){
+	$trouver_table = charger_fonction("trouver_table","base");
+	if ($trouver_table('spip_cm_posts')
+	  AND $trouver_table('spip_cm_posts_done')) {
+		spip_log('Import des lettres clevermail', 'mailshot');
+
+		include_spip("action/editer_objet");
+
+		// Importer les lettres
+		// ajout d'un champ le temps de l'import. Évite d'attraper 2 fois une même lettre et de reprendre sur timeout.
+		sql_alter("TABLE spip_cm_posts ADD id_mailshot bigint(21) NOT NULL DEFAULT 0");
+		$res = sql_select(array(
+			"C.pst_id",
+			"C.pst_subject AS sujet",
+			"C.pst_html AS html",
+			"C.pst_text AS texte",
+			"C.pst_date_create AS date",
+			"C.pst_date_sent AS date_start",
+			),
+			'spip_cm_posts AS C',
+			"C.id_mailshot=0");
+		while ($row = sql_fetch($res)){
+
+			$pst_id = $row['pst_id'];
+			unset($row['pst_id']);
+
+			// Tant qu'à faire, remplacer des mauvais restes
+			$row['html']  = str_replace('@@NOM_LETTRE@@', $row['sujet'], $row['html']);
+			$row['texte'] = str_replace('@@NOM_LETTRE@@', $row['sujet'], $row['texte']);
+
+			$row['id'] = md5(serialize(array('sujet'=>&$row['sujet'],'html'=>&$row['html'],'texte'=>&$row['texte'])));
+
+			// compter les envois depuis spip_abonnes_lettres
+			$row['total'] = sql_countsel("spip_cm_posts_done","pst_id=".intval($pst_id));
+			$row['failed'] = 0; # pas l'impression qu'on puisse savoir ça dans Clevermail
+			$row['current'] = $row['total'];
+
+			$row['statut'] = (($row['current']==$row['total'])?'end':'cancel');
+
+			// corriger les dates actuellement en time
+			$row['date']       = date('Y-m-d H:i:s', $row['date']);
+			$row['date_start'] = date('Y-m-d H:i:s', $row['date_start']);
+
+			// inserer la lettre dans mailshot
+			if ($id_mailshot = mailshot_import_one($row)){
+				sql_updateq("spip_cm_posts", array('id_mailshot'=>$id_mailshot), "pst_id=".intval($pst_id));
+				spip_log("import from spip_cm_posts mailshot $id_mailshot ".var_export($row,true),"mailshot");
+			}
+
+			// timeout ? on reviendra
+			if (time() >= _TIME_OUT)
+				return;
+		}
+
+		// Importer le détail des destinataires
+		$cm_posts2mailshot = array();
+		sql_alter("TABLE spip_cm_posts_done ADD imported tinyint(1) NOT NULL DEFAULT 0");
+		do {
+
+			$lot = sql_allfetsel(
+				array("D.*", "A.sub_email AS email"),
+				"spip_cm_posts_done AS D LEFT JOIN spip_cm_subscribers as A ON D.sub_id=A.sub_id",
+				"D.imported=0",'','','0,50');
+
+			if (count($lot)){
+				$ins = array();
+				foreach($lot as $l){
+
+					if (!isset($cm_posts2mailshot[$l['pst_id']]))
+						$cm_posts2mailshot[$l['pst_id']] = sql_fetsel(
+							"id_mailshot, pst_date_sent",
+							"spip_cm_posts",
+							"pst_id=".intval($l['pst_id']));
+
+					$statut = 'sent';
+
+					$email = $l['email'];
+					if (!$email)
+						$email = (rand(0,1)?'jane':'john').".doe.".$l['id_abonne'].'@example.org';
+
+					$ins[] = array(
+						'id_mailshot' => $cm_posts2mailshot[$l['pst_id']]['id_mailshot'],
+						'email' => $email,
+						'date' => date('Y-m-d H:i:s', $cm_posts2mailshot[$l['pst_id']]['date_start']),
+						'statut' => $statut,
+					);
+					sql_updateq("spip_cm_posts_done",
+						array('imported'=>1),
+						'sub_id='.intval($l['sub_id']).' AND pst_id='.intval($l['pst_id']));
+				}
+				if (!sql_insertq_multi('spip_mailshots_destinataires',$ins)){
+					foreach ($ins as $i){
+						sql_insertq('spip_mailshots_destinataires',$i);
+					}
+				}
+			}
+			// timeout ? on reviendra
+			if (time() >= _TIME_OUT)
+				return;
+
+		} while (count($lot));
+
+
+		// C'est fini !
+		sql_alter("TABLE spip_cm_posts DROP id_mailshot");
+		sql_alter("TABLE spip_cm_posts_done DROP imported");
+	}
+
+}
+
+
+
+/**
+ * Insère un nouvel envoi en base
+ *
+ * @param array $set
+ *     Couples de données à enregistrer
+ * @return int
+ *     Identifiant de l'envoi
+**/
 function mailshot_import_one($set){
 	$id = objet_inserer("mailshot",0,$set);
 	objet_modifier("mailshot",$id,$set); // double detente
@@ -186,7 +334,12 @@ function mailshot_import_one($set){
 
 
 /**
- * Fonction de désinstallation du plugin.
+ * Désinstallation du plugin
+ *
+ * Supprime les tables SQL du plugin (spip_mailshots, spip_mailshots_destinataires)
+ * 
+ * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
 **/
 function mailshot_vider_tables($nom_meta_base_version) {
 
