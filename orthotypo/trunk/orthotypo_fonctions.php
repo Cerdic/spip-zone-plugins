@@ -161,27 +161,27 @@ Version optimisee par Patrice Vanneufville (2007) cf http://www.spip-contrib.net
 
 // definitions des chaines de remplacement
 define('_GUILLEMETS_defaut', '&ldquo;$1&rdquo;');
-define('_GUILLEMETS_fr', '&laquo;&nbsp;$1&nbsp;&raquo;'); //LRTEUIN
+define('_GUILLEMETS_fr', '&#171;&nbsp;$1&nbsp;&#187;'); //LRTEUIN
 //define('_GUILLEMETS_ar', '');
 define('_GUILLEMETS_bg', '&bdquo;$1&ldquo;');
 //define('_GUILLEMETS_br', '');
 //define('_GUILLEMETS_bs', '');
-define('_GUILLEMETS_ca', '&laquo;$1&raquo;');
-define('_GUILLEMETS_cpf', '&laquo;&nbsp;$1&nbsp;&raquo;');
+define('_GUILLEMETS_ca', '&#171;$1&#187;');
+define('_GUILLEMETS_cpf', '&#171;&nbsp;$1&nbsp;&#187;');
 //define('_GUILLEMETS_cpf_hat', '');
 define('_GUILLEMETS_cs', '&bdquo;$1&ldquo;');
-define('_GUILLEMETS_da', '&raquo;$1&laquo;');
-define('_GUILLEMETS_de', '&bdquo;$1&ldquo;'); //ou "&raquo;$1&laquo;" // LRTEUIN
+define('_GUILLEMETS_da', '&#187;$1&#171;');
+define('_GUILLEMETS_de', '&bdquo;$1&ldquo;'); //ou "&#187;$1&#171;" // LRTEUIN
 define('_GUILLEMETS_en', '&ldquo;$1&rdquo;'); //LRTEUIN
-define('_GUILLEMETS_eo', '&laquo;$1&raquo;');
-define('_GUILLEMETS_es', '&laquo;$1&raquo;');
+define('_GUILLEMETS_eo', '&#171;$1&#187;');
+define('_GUILLEMETS_es', '&#171;$1&#187;');
 //define('_GUILLEMETS_eu', '');
 //define('_GUILLEMETS_fa', '');
 //define('_GUILLEMETS_fon', '');
 //define('_GUILLEMETS_gl', '');
 define('_GUILLEMETS_hu', '&bdquo;$1&rdquo;');
-define('_GUILLEMETS_it', '&laquo;$1&raquo;');
-define('_GUILLEMETS_it_fem', '&laquo;$1&raquo;');
+define('_GUILLEMETS_it', '&#171;$1&#187;');
+define('_GUILLEMETS_it_fem', '&#171;$1&#187;');
 define('_GUILLEMETS_ja', '&#12300;$1&#12301;');
 //define('_GUILLEMETS_lb', '');
 define('_GUILLEMETS_nl', '&bdquo;$1&rdquo;');
@@ -194,11 +194,11 @@ define('_GUILLEMETS_nl', '&bdquo;$1&rdquo;');
 //define('_GUILLEMETS_oc_prv', '');
 //define('_GUILLEMETS_oc_va', '');
 define('_GUILLEMETS_pl', '&bdquo;$1&rdquo;');
-define('_GUILLEMETS_pt', '&laquo;$1&raquo;');
-define('_GUILLEMETS_pt_br', '&laquo;$1&raquo;');
+define('_GUILLEMETS_pt', '&#171;$1&#187;');
+define('_GUILLEMETS_pt_br', '&#171;$1&#187;');
 define('_GUILLEMETS_ro', '&bdquo;$1&rdquo;');
-define('_GUILLEMETS_ru', '&laquo;$1&raquo;');
-define('_GUILLEMETS_tr', '&laquo;$1&raquo;');
+define('_GUILLEMETS_ru', '&#171;$1&#187;');
+define('_GUILLEMETS_tr', '&#171;$1&#187;');
 //define('_GUILLEMETS_vi', '');
 define('_GUILLEMETS_zh', '&#12300;$1&#12301;'); // ou "&ldquo;$1&rdquo;" en chinois simplifie
 
@@ -215,7 +215,16 @@ function orthotypo_guillemets_rempl($texte){
 	if (strpos($texte, '<')!==false){
 		$texte = preg_replace_callback('/(<[^>]+"[^>]*>)/Ums', 'orthotypo_guillemets_echappe_balises_callback', $texte);
 	}
-	if (strpos($texte, '"')!==false){
+
+	// si le texte ne contient pas de guill droit
+	// ou s'il contient deja des guillemets élaborés
+	// on ne touche pas
+	if (strpos($texte, '"')!==false
+		AND (strpos($texte, '&#171;') === false)
+	  AND (strpos($texte, '&#187;') === false)
+	  AND (strpos($texte, '&#8220;') === false)
+	  AND (strpos($texte, '&#8221;') === false)
+	){
 		// choix de la langue, de la constante et de la chaine de remplacement
 		$lang = isset($GLOBALS['lang_objet'])?$GLOBALS['lang_objet']:$GLOBALS['spip_lang'];
 		$constante = '_GUILLEMETS_'.$lang;
