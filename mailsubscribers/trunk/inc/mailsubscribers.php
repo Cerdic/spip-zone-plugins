@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin mailsubscribers
- * (c) 2012 Cédric Morin
+ * (c) 2012 CÃ©dric Morin
  * Licence GNU/GPL v3
  *
  */
@@ -129,14 +129,14 @@ function mailsubscribers_listes($options = array()){
 }
 
 /**
- * Renommer un identifiant de liste dans la liste des abonnés
+ * Renommer un identifiant de liste dans la liste des abonnÃ©s
  *
  * @param string $liste_ancienne
- *   Identifiant de liste à renommer (exemple newsletter::1-truc)
+ *   Identifiant de liste Ã  renommer (exemple newsletter::1-truc)
  * @param string $liste_nouvelle
  *   Nouvel identifiant de la liste (exemple newsletter::infolettre)
  * @return bool
- *   True si l'opération a été réalisée.
+ *   True si l'opÃ©ration a Ã©tÃ© rÃ©alisÃ©e.
 **/
 function mailsubscribers_renommer_identifiant_liste($liste_ancienne, $liste_nouvelle) {
 	spip_log("Renommer la liste '$liste_ancienne' en '$liste_nouvelle'", "mailsubscribers");

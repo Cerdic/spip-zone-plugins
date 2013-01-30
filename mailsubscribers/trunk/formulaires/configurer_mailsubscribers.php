@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin mailsubscribers
- * (c) 2012 Cédric Morin
+ * (c) 2012 CÃ©dric Morin
  * Licence GNU/GPL v3
  */
 
@@ -42,9 +42,9 @@ function formulaires_configurer_mailsubscribers_verifier_dist(){
  * Enregistrement de la configuration de mailsubscribers
  *
  * @note
- *   La liste des listes de diffusion déclarées en configuration
- *   est systématiquement complétée par celles présentes réellement
- *   en base dans spip_mailsubscribers. Dès lors, modifier l'identifiant
+ *   La liste des listes de diffusion dÃ©clarÃ©es en configuration
+ *   est systÃ©matiquement complÃ©tÃ©e par celles prÃ©sentes rÃ©ellement
+ *   en base dans spip_mailsubscribers. DÃ¨s lors, modifier l'identifiant
  *   d'une liste induit aussi de modifier spip_mailsubscribers.
  *
  * @return array
