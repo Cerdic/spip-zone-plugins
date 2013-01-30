@@ -238,6 +238,12 @@ function sommaire_recenser(&$texte) {
 		}
 	}
 
+	if (count($sommaire)){
+		// ajouter le nombre de liens en classe sur chaque ancre (masquage CSS)
+		$c = "sommaire-back-".count($sommaire);
+		$texte = str_replace("<a class='sommaire-back'","<a class='sommaire-back $c'",$texte);
+	}
+
 	#var_dump($sommaire);
 	return $sommaire;
 }
