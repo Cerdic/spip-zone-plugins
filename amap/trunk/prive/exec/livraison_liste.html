@@ -7,21 +7,15 @@
 ]
 <INCLURE{fond=prive/inclure/navigation,env,ajax}>
 <!--#extra-->
-<div class="cadre cadre-info verdana1">
-	<div class="cadre_padding">
+<div class="box raccourcis">
+	<div class="inner"><div class="bd">
 	<:amap:livraison_explication{url=#URL_PAGE{livraisons}}:>
-	</div>
+	</div></div>
 </div>
 <!--/#extra-->
 
-<h1><:amap:gestion_amap:></h1>
+<h1 class="grostitre"><:amap:gestion_amap:></h1>
 
-<div class="cadre cadre-trait-couleur">
-	<div class="titrem impliable">
-		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata.gif}">
-		<:amap:liste_livraisons:>
-	</div>
-	<div class="cadre_padding">
-		<INCLURE{fond=prive/inclure/liste_livraisons,env,ajax}>
-	</div>
-</div>
+#BOITE_OUVRIR{#CHEMIN_IMAGE{tabledata.gif}|balise_img{'',cadre-icone}|concat{#VAL{amap:liste_livraisons}|_T}|wrap{'<h3>'},'simple','titrem'}
+        <INCLURE{fond=prive/inclure/liste_livraisons,env,ajax}>
+#BOITE_FERMER

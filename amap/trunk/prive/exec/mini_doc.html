@@ -7,18 +7,14 @@
 ]
 <INCLURE{fond=prive/inclure/navigation,env,ajax}>
 
-<h1><:amap:mini_doc:></h1>
+<h1 class="grostitre"><:amap:mini_doc:></h1>
 
-<div class="cadre cadre-r">
-	<div class="cadre_padding">
-		<div class='verdana2' style='text-align: justify'>
-			<p style='text-align: center'>
-			<b><:amap:attention:></b>
-			</p>
-			<img src='#CHEMIN{prive/images/warning.gif}' alt='<:amap:attention:>' width='48' height='48' style='float: right; padding-left: 10px;' />
-			<:amap:attention_modifications:>
-		</div>
-		<div class="nettoyeur"></div>
-		#FORMULAIRE_CONFIGURER_AMAP
+#BOITE_OUVRIR{#CHEMIN_IMAGE{warning.gif}|balise_img{'',cadre-icone}|concat{#VAL{amap:attention}|_T}|wrap{'<h3>'},'simple','titrem'}
+	<div class='verdana2' style='text-align: justify'>
+		<p style='text-align: center'>
+			<b><:amap:attention_modifications:></b>
+		</p>
 	</div>
-</div>
+	<div class="nettoyeur"></div>
+	#FORMULAIRE_CONFIGURER_AMAP
+#BOITE_FERMER

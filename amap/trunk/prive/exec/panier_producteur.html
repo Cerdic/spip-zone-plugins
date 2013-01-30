@@ -6,27 +6,22 @@
 
 ]
 <!--#navigation-->
-<div class="cadre-r amap-nav">
-<ul>
-	<li class="subMenu">
-		<BOUCLE_retour(AUTEURS){tous}{id_auteur=#ID_PRODUCTEUR}>
-			<a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_PRODUCTEUR})]" title="<:amap:retour_auteur{nom=#NOM}:>"><:amap:retour_auteur{nom=#NOM}:></a>
-		</BOUCLE_retour>
-	</li>
-</ul>
+<div class="box raccourcis">
+	<div class="inner"><div class="bd">
+		<ul>
+			<li class="subMenu">
+				<BOUCLE_retour(AUTEURS){tous}{id_auteur=#ID_PRODUCTEUR}>
+					<a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_PRODUCTEUR})]" title="<:amap:retour_auteur{nom=#NOM}:>"><:amap:retour_auteur{nom=#NOM}:></a>
+				</BOUCLE_retour>
+			</li>
+		</ul>
+	</div></div>
 </div>
 <!--/#navigation-->
 
-<h1><:amap:gestion_amap:></h1>
+<h1 class="grostitre"><:amap:gestion_amap:></h1>
 
-
-<div class="cadre cadre-trait-couleur">
-	<div class="titrem impliable">
-		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata.gif}">
-		<BOUCLE_aut(AUTEURS){id_auteur=#ID_PRODUCTEUR}{tous}><:amap:liste_paniers_vendu_par{nom=#NOM}:></BOUCLE_aut>
-	</div>
-	<div class="cadre_padding">
+#BOITE_OUVRIR{#CHEMIN_IMAGE{tabledata.gif}|balise_img{'',cadre-icone}|concat{#VAL{<BOUCLE_aut(AUTEURS){id_auteur=#ID_PRODUCTEUR}{tous}><:amap:liste_paniers_vendu_par{nom=#NOM}:></BOUCLE_aut>}|_T}|wrap{'<h3>'},'simple','titrem'}
 		<INCLURE{fond=prive/inclure/liste_panier_producteur,env}>
 		<INCLURE{fond=prive/inclure/liste_responsable,env}{id_auteur=#ID_PRODUCTEUR}>
-	</div>
-</div>
+#BOITE_FERMER

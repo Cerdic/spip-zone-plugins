@@ -6,37 +6,32 @@
 
 ]
 <!--#navigation-->
-<div class="cadre-r amap-nav">
-<ul>
-	<li class="subMenu">
-		<BOUCLE_retour(AUTEURS){id_auteur}{tous}>
-			<a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_AUTEUR})]" title="<:amap:retour_auteur:>"><:amap:retour_auteur{nom=#NOM}:></a>
-		</BOUCLE_retour>
-	</li>
-</ul>
+<div class="box raccourcis">
+	<div class="inner"><div class="bd">
+		<ul>
+			<li class="subMenu">
+				<BOUCLE_retour(AUTEURS){id_auteur}{tous}>
+					<a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_AUTEUR})]" title="<:amap:retour_auteur:>"><:amap:retour_auteur{nom=#NOM}:></a>
+				</BOUCLE_retour>
+			</li>
+		</ul>
+	</div></div>
 </div>
 <!--/#navigation-->
 <!--#extra-->
-<div class="cadre cadre-info verdana1">
-	<div class="cadre_padding">
+<div class="box raccourcis">
+	<div class="inner"><div class="bd">
 	<:amap:mettre_disposition_explication:>
 	[(#CONFIG{amap/email}|=={oui}|oui)<p /><:amap:mettre_disposition_mail:>]
 	[(#CONFIG{amap/email}|=={non}|oui)<p /><:amap:mettre_disposition_interface{url=#URL_PAGE{disponible}}:>]
-	</div>
+	</div></div>
 </div>
 <!--/#extra-->
 
-<h1><:amap:gestion_amap:></h1>
+<h1 class="grostitre"><:amap:gestion_amap:></h1>
 
-
-<div class="cadre cadre-trait-couleur">
-	<div class="titrem impliable">
-		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata.gif}">
-		<BOUCLE_aut(AUTEURS){id_auteur}{tous}><:amap:les_paniers{nom=#NOM}:></BOUCLE_aut>
-	</div>
-	<div class="cadre_padding">
+#BOITE_OUVRIR{#CHEMIN_IMAGE{tabledata.gif}|balise_img{'',cadre-icone}|concat{#VAL{<BOUCLE_aut(AUTEURS){id_auteur}{tous}><:amap:les_paniers{nom=#NOM}:></BOUCLE_aut>}|_T}|wrap{'<h3>'},'simple','titrem'}
 		<INCLURE{fond=prive/inclure/liste_panier_adherent,dispo=0,env}>
 		<INCLURE{fond=prive/inclure/liste_panier_adherent,dispo=1,env}>
 		<INCLURE{fond=prive/inclure/liste_responsable,env}>
-	</div>
-</div>
+#BOITE_FERMER

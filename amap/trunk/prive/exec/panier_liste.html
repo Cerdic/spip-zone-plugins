@@ -7,23 +7,16 @@
 ]
 <INCLURE{fond=prive/inclure/navigation,env,ajax}>
 <!--#extra-->
-<div class="cadre cadre-info verdana1">
-	<div class="cadre_padding">
+<div class="box raccourcis">
+	<div class="inner"><div class="bd">
 	<:amap:panier_explication:>
-	</div>
+	</div></div>
 </div>
 <!--/#extra-->
 
-<h1><:amap:gestion_amap:></h1>
+<h1 class="grostitre"><:amap:gestion_amap:></h1>
 
-<div class="cadre cadre-trait-couleur">
-	<div class="titrem impliable">
-		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata.gif}">
-		<:amap:panier_liste:>
-	</div>
-
-	<div class="cadre_padding">
-		<p style="text-align: justify;">
+#BOITE_OUVRIR{#CHEMIN_IMAGE{tabledata.gif}|balise_img{'',cadre-icone}|concat{#VAL{amap:panier_liste}|_T}|wrap{'<h3>'},'simple','titrem'}
 		#SET{total,0}
 		<BOUCLE_totalpanier(AMAP_PANIERS){age<0} />
 			[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:reste_panier_distribuer, amap:reste_paniers_distribuer, nb})]
@@ -39,5 +32,4 @@
 		</p>
 
 		<INCLURE{fond=prive/inclure/liste_paniers,env,ajax}>
-	</div>
-</div>
+#BOITE_FERMER
