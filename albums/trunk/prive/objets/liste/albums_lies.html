@@ -1,8 +1,9 @@
 [(#REM)
 	Affiche la liste des albums liés à un objet.
 	Paramètres d'inclusion :
-		statut (texte) =	prepa|publie|poubelle
-		nb (texte)
+		statut (texte)		prepa|publie|poubelle
+		nb (texte)		nombre pagination
+		logo (texte)		si parametre present, affiche le logo
 ][(#REM)
 	inclus dans /prive/squelettes/contenu/albums_afficher_complement_objet.html
 ]
@@ -20,9 +21,11 @@
 <div class='album lie clearfix[ (#ENV{portfolio_album}|=={#ID_ALBUM}|ou{#GET{nouvel_album}}|oui)actif]'>
 
 	[(#REM) LOGO ]
+	[(#ENV{logo}|oui)
 	<div class='logo'>
 		[(#INCLURE{fond=prive/squelettes/inclure/inc-albums_logo, id_album, taille=48})]
 	</div>
+	]
 
 	<div class='contenu'>
 
@@ -30,8 +33,8 @@
 		<table class='header'><tr>
 		<td class='infos'>
 			[(#STATUT|puce_statut{album,#ID_ALBUM})]
+			[<a href="[(#ID_ALBUM|generer_url_entite{album})]" title="#GET{alt}">N°(#ID_ALBUM)</a>]
 			[(#VU|=={oui}|oui) [(#CHEMIN_IMAGE{vu-16.png}|balise_img{<:medias:document_vu:>}|inserer_attribut{title,<:medias:document_vu:>})] ]
-			[<a href="[(#ID_ALBUM|generer_url_entite{album})]" title="#GET{alt}">n°(#ID_ALBUM)</a>]
 		</td>
 		<td class='titre'[ title='(#DESCRIPTIF|couper{150}|attribut_html)']>
 			[<h3>(#TITRE|sinon{<:album:titre_album_sans_titre:>})</h3>]
@@ -44,14 +47,16 @@
 				|parametre_url{id_album_ajoute,''})]'
 				class='ajax preload bouton permuter[ (#GET{bouton})]'
 				[title="(#GET{bouton}|=={afficher}|?{<:album:icone_afficher_documents_alt:>,<:album:icone_cacher_documents_alt:>})"]
-			>[(#GET{bouton}|=={afficher}|?{<:album:icone_afficher_documents:>,<:album:icone_cacher_documents:>})]</a>
+			>[(#GET{bouton}|=={afficher}|?{
+				<span>&dArr;</span><:album:icone_afficher_documents:>,
+				<span>&uArr;</span><:album:icone_cacher_documents:>
+			}|trim)]</a>
 			]
 			[(#REM) BOUTON : editer ]
 			[(#INCLURE{fond=prive/squelettes/inclure/inc-albums_boutons_actions,
 				bouton=editer,
 				id_album=#ID_ALBUM,
 				retour=#SELF|ancre_url{albums}}
-				{env}
 			)]
 			[(#REM) BOUTON : dissocier ]
 			[(#INCLURE{fond=prive/squelettes/inclure/inc-albums_boutons_actions,
@@ -59,8 +64,7 @@
 				id_album=#ID_ALBUM,
 				objet_lien=#OBJET,
 				id_objet_lien=#ID_OBJET,
-				vu=#VU,
-				{env}
+				vu=#VU}
 			)]
 		</td>
 		</tr></table>

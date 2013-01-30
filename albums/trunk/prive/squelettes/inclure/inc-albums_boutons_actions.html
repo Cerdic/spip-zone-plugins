@@ -14,15 +14,16 @@
 ]
 
 
+#FILTRE{trim}
+
+
 [(#REM)
 	BOUTON EDITER (en fait un simple lien editbox)
 	parametre necessaire : id_album
 ]
 [(#ENV{bouton}=={editer}|oui)
 	[(#AUTORISER{modifier,album}|oui)
-		<a href="[(#URL_ECRIRE{album_edit,id_album=#ID_ALBUM}|parametre_url{redirect,#ENV{retour,#SELF}})]" class="editbox" title="<:album:icone_modifier_album:>">
-		[(#CHEMIN_IMAGE{edit-16.png}|balise_img{'album:texte_modifier'})]
-		</a>
+		<a href="[(#URL_ECRIRE{album_edit,id_album=#ID_ALBUM}|parametre_url{redirect,#ENV{retour,#SELF}})]" class="editbox" title="<:album:icone_modifier_album:>">[(#CHEMIN_IMAGE{edit-16.png}|balise_img{album:texte_modifier})]</a>
 	]
 ]
 
