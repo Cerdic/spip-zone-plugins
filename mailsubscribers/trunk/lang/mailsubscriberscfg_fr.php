@@ -15,7 +15,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_list_titre' => 'Nom de la liste',
 	'label_list_status' => 'Statut',
 	'label_status_open' => 'Ouverte',
-	'label_status_close' => 'Fermee',
+	'label_status_close' => 'Fermée',
+	'label_status_delete' => 'Supprimée',
+	'label_status_delete_explication' => 'Cette liste de diffusion et ses abonnés seront supprimés',
 
 	'label_proposer_signup_optin_1'=> 'Proposer l\'inscription à la Newsletter lors de l\'inscription au site',
 

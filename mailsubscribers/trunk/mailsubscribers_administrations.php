@@ -262,6 +262,7 @@ function mailsubscribers_vider_tables($nom_meta_base_version) {
 	sql_delete("spip_versions_fragments",    sql_in("objet", array('mailsubscriber')));
 	sql_delete("spip_forum",                 sql_in("objet", array('mailsubscriber')));
 
+	effacer_meta('mailsubscribers');
 	effacer_meta($nom_meta_base_version);
 }
 

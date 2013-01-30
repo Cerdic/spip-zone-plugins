@@ -60,14 +60,28 @@
 								<span class='erreur_message'>(#GET{erreurs})</span>
 								]
 								#SET{val,open}
-								<div class="choix left">
-									<input type="radio" name="lists[#GET{index}][#GET{name}]" class="radio" id="lists_[(#GET{index})]_#GET{name}_#GET{val}" value="#GET{val}"[(#ENV*{lists/#GET{index}/#GET{name},#VALEUR{#GET{name}}}|=={#GET{val}}|oui)checked="checked"] />
+								<div class="choix left choix_#GET{val}">
+									<input type="radio" name="lists[#GET{index}][#GET{name}]" class="radio" id="lists_[(#GET{index})]_#GET{name}_#GET{val}"
+										value="#GET{val}"[(#ENV*{lists/#GET{index}/#GET{name},#VALEUR{#GET{name}}}|=={#GET{val}}|oui)checked="checked"]
+										onchange="if ($(this).prop('checked')) $(this).parent().nextAll('.choix_delete_explication').hide();" />
 									<label for="lists_[(#GET{index})]_#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 								</div>
 								#SET{val,close}
-								<div class="choix right">
-									<input type="radio" name="lists[#GET{index}][#GET{name}]" class="radio" id="lists_[(#GET{index})]_#GET{name}_#GET{val}" value="#GET{val}"[(#ENV*{lists/#GET{index}/#GET{name},#VALEUR{#GET{name}}}|=={#GET{val}}|oui)checked="checked"] />
+								<div class="choix left choix_#GET{val}">
+									<input type="radio" name="lists[#GET{index}][#GET{name}]" class="radio" id="lists_[(#GET{index})]_#GET{name}_#GET{val}"
+										value="#GET{val}"[(#ENV*{lists/#GET{index}/#GET{name},#VALEUR{#GET{name}}}|=={#GET{val}}|oui)checked="checked"]
+										onchange="if ($(this).prop('checked')) $(this).parent().nextAll('.choix_delete_explication').hide();" />
 									<label for="lists_[(#GET{index})]_#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+								</div>
+								#SET{val,delete}
+								<div class="choix right choix_#GET{val}">
+									<input type="radio" name="lists[#GET{index}][#GET{name}]" class="radio" id="lists_[(#GET{index})]_#GET{name}_#GET{val}"
+										value="#GET{val}"[(#ENV*{lists/#GET{index}/#GET{name},#VALEUR{#GET{name}}}|=={#GET{val}}|oui)checked="checked"]
+										onchange="if ($(this).prop('checked')) $(this).parent().nextAll('.choix_delete_explication').show();" />
+									<label for="lists_[(#GET{index})]_#GET{name}_#GET{val}" title="[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val},'_explication'}|_T|attribut_html)]">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+								</div>
+								<div class="choix right choix_#GET{val}_explication explication"[(#ENV*{lists/#GET{index}/#GET{name},#VALEUR{#GET{name}}}|=={#GET{val}}|non)style="display:none"]>
+									[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val},'_explication'}|_T)]
 								</div>
 							</li>
 						</ul>
@@ -86,4 +100,5 @@ ul.liste-diffusion {border-bottom: 1px solid #eee;padding-top: 1em !important;pa
 ul.liste-diffusion .editer {padding-top: 2px;padding-bottom: 2px;}
 ul.liste-diffusion .editer .choix.left {float: left}
 ul.liste-diffusion .editer .choix.right {float: right}
+ul.liste-diffusion .choix_close { margin-left:3em;}
 </style>

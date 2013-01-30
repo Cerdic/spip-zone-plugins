@@ -129,8 +129,12 @@ function mailsubscribers_listes($options = array()){
 }
 
 /**
- * Renommer un identifiant de liste dans la liste des abonnés
+ * Renomme un identifiant de liste dans la liste des abonnés
  *
+ * @note
+ *   Si le nouveau nom est déjà un nom de liste existante, le renommage
+ *   est tout de même effectué, sans doublonner si l'abonné y est déjà inscrit.
+ * 
  * @param string $liste_ancienne
  *   Identifiant de liste à renommer (exemple newsletter::1-truc)
  * @param string $liste_nouvelle
@@ -156,9 +160,56 @@ function mailsubscribers_renommer_identifiant_liste($liste_ancienne, $liste_nouv
 			$listes = explode(',', $s['listes']);
 			$key = array_search($liste_ancienne, $listes);
 			if ($key !== false) { // sait on jamais
-				$listes[$key] = $liste_nouvelle;
+				// si le nouveau nom existe déjà, pas la peine de le dupliquer !
+				if (false === array_search($liste_nouvelle, $listes)) {
+					$listes[$key] = $liste_nouvelle;
+				} else {
+					unset($listes[$key]);
+				}
 				$listes = implode(',', $listes);
 				objet_modifier("mailsubscriber", $s['id_mailsubscriber'], array('listes' => $listes));
+			}
+		}
+	}
+	return true;
+}
+
+
+/**
+ * Supprime un identifiant de liste dans la liste des abonnés
+ *
+ * Si un abonné n'est alors plus abonné à aucune liste,
+ * on le met à la poubelle !
+ *
+ * @param string $liste
+ *   Identifiant de liste à supprimer (exemple newsletter::infolettre)
+ * @return bool
+ *   True si l'opération a été réalisée.
+**/
+function mailsubscribers_supprimer_identifiant_liste($liste) {
+	spip_log("Supprimer la liste '$liste'", "mailsubscribers");
+
+	while ($subscribers = sql_allfetsel(
+		'id_mailsubscriber, listes',
+		'spip_mailsubscribers',
+		"listes REGEXP '(^|,)$liste($|,)'",
+		"","","0,50"))
+	{
+		if (!$subscribers) break;
+
+		include_spip('action/editer_objet');
+
+		foreach ($subscribers as $s) {
+			$listes = explode(',', $s['listes']);
+			$key = array_search($liste, $listes);
+			if ($key !== false) { // sait on jamais
+				unset($listes[$key]);
+			}
+			if (count($listes)) {
+				$listes = implode(',', $listes);
+				objet_modifier("mailsubscriber", $s['id_mailsubscriber'], array('listes' => $listes));
+			} else {
+				objet_modifier("mailsubscriber", $s['id_mailsubscriber'], array('listes' => '', 'statut' => 'poubelle'));
 			}
 		}
 	}

@@ -44,33 +44,59 @@ function formulaires_configurer_mailsubscribers_verifier_dist(){
  * @note
  *   La liste des listes de diffusion déclarées en configuration
  *   est systématiquement complétée par celles présentes réellement
- *   en base dans spip_mailsubscribers. Dès lors, modifier l'identifiant
- *   d'une liste induit aussi de modifier spip_mailsubscribers.
+ *   en base dans spip_mailsubscribers.
+ * 
+ *   Changer l'identifiant d'une liste nécessite aussi de le
+ *   modifier dans spip_mailsubscribers.
  *
  * @return array
 **/
 function formulaires_configurer_mailsubscribers_traiter_dist(){
 
 	if ($lists = _request('lists')) {
+		$renommages = array(); # un renommage a t'il eu lieu ?
 		foreach (_request('lists') as $k => $v) {
 
 			$id_bak = mailsubscribers_normaliser_nom_liste($v['id_bak']); # ancien nom d'identifiant.
 			unset($v['id_bak']);
 
+			// cas d'une suppression de liste d'information
+			if ($v['status'] == 'delete') {
+				mailsubscribers_supprimer_identifiant_liste($id_bak);
+				unset($lists[$k]);
+				continue;
+			}
+
+			// autres cas
 			if (strlen(trim($v['id']))) {
 				$lists[$k]['id'] = mailsubscribers_normaliser_nom_liste($v['id']);
-				if (!in_array($v['status'],array('open','close'))) {
+				if (!in_array($v['status'], array('open', 'close'))) {
 					$lists[$k]['status'] = 'open';
 				}
 
 				if ($lists[$k]['id'] != $id_bak) {
 					mailsubscribers_renommer_identifiant_liste($id_bak, $lists[$k]['id']);
+					$renommages[$k] = $lists[$k]['id'];
 				}
 			}
 			else {
 				unset($lists[$k]);
 			}
 		}
+
+		// si une liste est renommée (identifiant) du nom d'une autre existante,
+		// on supprime la liste renommée.
+		if ($renommages) {
+			foreach ($renommages as $c => $id) {
+				foreach ($lists as $k => $v) {
+					if (($c != $k) AND ($v['id'] == $id)) {
+						unset($lists[$c]);
+						break;
+					}
+				}
+			}
+		}
+
 		set_request('lists',array_merge($lists)); // array_merge pour renumeroter les cles numeriques...
 		ecrire_config('mailsubscribers/',array('lists'=>$lists));
 	}
