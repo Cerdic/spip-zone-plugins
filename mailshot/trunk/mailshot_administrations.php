@@ -74,6 +74,14 @@ function mailshot_import_from_spiplistes(){
 			// nettoyer les vieux hacks de spip-listes
 			$row['html'] = preg_replace(",__bLg__[0-9@\.A-Z_-]+__bLg__,","",$row['html']);
 
+			if ($GLOBALS['meta']['charset']=='utf-8'){
+				if (!is_utf8($row['sujet']) AND !is_utf8($row['html']) AND !is_utf8($row['texte'])){
+					$row['sujet'] = importer_charset($row['sujet'],'iso-8859-1');
+					$row['html'] = importer_charset($row['html'],'iso-8859-1');
+					$row['texte'] = importer_charset($row['texte'],'iso-8859-1');
+				}
+			}
+
 			$row['id'] = md5(serialize(array('sujet'=>&$row['sujet'],'html'=>&$row['html'],'texte'=>&$row['texte'])));
 			$row['statut'] = (($row['current']==$row['total'])?'end':'cancel');
 
@@ -111,6 +119,14 @@ function mailshot_import_from_spiplettres(){
 
 			$id_lettre = $row['id_lettre'];
 			unset($row['id_lettre']);
+
+			if ($GLOBALS['meta']['charset']=='utf-8'){
+				if (!is_utf8($row['sujet']) AND !is_utf8($row['html']) AND !is_utf8($row['texte'])){
+					$row['sujet'] = importer_charset($row['sujet'],'iso-8859-1');
+					$row['html'] = importer_charset($row['html'],'iso-8859-1');
+					$row['texte'] = importer_charset($row['texte'],'iso-8859-1');
+				}
+			}
 
 			$row['id'] = md5(serialize(array('sujet'=>&$row['sujet'],'html'=>&$row['html'],'texte'=>&$row['texte'])));
 			// compter les envois depuis spip_abonnes_lettres
@@ -213,6 +229,7 @@ function mailshot_import_from_clevermail(){
 		spip_log('Import des lettres clevermail', 'mailshot');
 
 		include_spip("action/editer_objet");
+		include_spip("inc/charsets");
 
 		// Importer les lettres
 		// ajout d'un champ le temps de l'import. Évite d'attraper 2 fois une même lettre et de reprendre sur timeout.
@@ -235,6 +252,14 @@ function mailshot_import_from_clevermail(){
 			// Tant qu'à faire, remplacer des mauvais restes
 			$row['html']  = str_replace('@@NOM_LETTRE@@', $row['sujet'], $row['html']);
 			$row['texte'] = str_replace('@@NOM_LETTRE@@', $row['sujet'], $row['texte']);
+
+			if ($GLOBALS['meta']['charset']=='utf-8'){
+				if (!is_utf8($row['sujet']) AND !is_utf8($row['html']) AND !is_utf8($row['texte'])){
+					$row['sujet'] = importer_charset($row['sujet'],'iso-8859-1');
+					$row['html'] = importer_charset($row['html'],'iso-8859-1');
+					$row['texte'] = importer_charset($row['texte'],'iso-8859-1');
+				}
+			}
 
 			$row['id'] = md5(serialize(array('sujet'=>&$row['sujet'],'html'=>&$row['html'],'texte'=>&$row['texte'])));
 
