@@ -1,6 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+if (!function_exists('inc_lien')){
 ## pour les liens, on transforme les guill « » des titres en guill ??
 function inc_lien() {
 
@@ -17,4 +18,5 @@ function inc_lien() {
 
 	// et hop
 	return $typo;
+}
 }
