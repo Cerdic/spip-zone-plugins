@@ -128,8 +128,9 @@ function tri_auteurs_verifie_table($complet=false) {
 
 	include_spip('base/abstract_sql');
 	$table = defined('_SPIP30000')?'spip_auteurs_liens':'spip_auteurs_articles';
-	if(!sql_count(spip_query("SHOW COLUMNS FROM $table LIKE 'ordre'")))
-		spip_query("ALTER TABLE $table ADD ordre INT NOT NULL");
+	$x = sql_showtable($table);
+	if(!isset($x['field']['ordre']))
+		spip_query("ALTER TABLE $table ADD ordre INT NOT NULL DEFAULT '0'");
 	if($complet) {
 		// mise a jour du champ 'ordre' pour les articles a plusieurs auteurs et n'ayant jamais ete tries grace a ce champ
 		if(defined('_SPIP30000')) {
