@@ -7,6 +7,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+if (!function_exists('inc_lien')){
 /**
  * pour les liens, on transforme les guill francais &laquo; &raquo; des titres en guill de second niveau
  *
@@ -32,4 +33,5 @@ function inc_lien() {
 
 	// et hop
 	return $typo;
+}
 }
