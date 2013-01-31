@@ -1,11 +1,11 @@
 <paquet
 	prefix="pdfjs"
 	categorie="multimedia"
-	version="0.2.0"
-	etat="experimental"
+	version="0.2.1"
+	etat="test"
 	compatibilite="[2.0.0;["
 	logo="prive/themes/spip/images/pdfjs-32.png"
-	documentation="http://www.spip-contrib.net/Lecteur-pdf-javascript-pdf-js"
+	documentation="http://contrib.spip.net/?article4078"
 >	
 	<nom>pdf.js</nom>
 	<auteur lien="http://mozilla.github.com/pdf.js/">andreas gal</auteur>

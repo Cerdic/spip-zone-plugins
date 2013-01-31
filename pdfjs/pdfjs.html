@@ -4,20 +4,19 @@
     - Le head a été adapté pour aller rechercher les scripts au bon endroit.
     - Le body est inchangé, les surcharges étant faites dans le head.
     - Plutôt que de modifier le source de web/viewer.js, on surcharge les valeurs adéquates juste après son chargement. La surcharge sera maintenue en cas de maintenance.
-    - Les fichiers build/pdf.js, web/l10.js et web/locale.properties ne sont pas directement disponibles dans le source mais peuvent être téléchargés aux adresses :
+    - Les fichiers build/pdf.js, web/l10.js et locale/locale.properties ne sont pas directement disponibles dans le source mais peuvent être téléchargés aux adresses :
         - http://mozilla.github.com/pdf.js/build/pdf.js
         - http://mozilla.github.com/pdf.js/web/l10.js
-        - http://mozilla.github.com/pdf.js/web/locale.properties
+        - http://mozilla.github.com/pdf.js/locale/locale.properties
     - Le bouton permettant de charger un fichier personnel est masqué.
     - Pour des raisons de sécurité, on refuse la présence d'une variable d'environnement file (qui permet de passer au viewer sa propre URL).
   ]<head>
-    <meta charset="#CHARSET">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 
     <link rel="stylesheet" href="#CHEMIN{lib/pdfjs/web/viewer.css}"/>
     <script type="text/javascript" src="#CHEMIN{lib/pdfjs/web/compatibility.js}"></script>
-    <!-- This snippet is used in production, see Makefile -->
     <link rel="resource" type="application/l10n" href="#CHEMIN{lib/pdfjs/web/locale.properties}"/>
     <script type="text/javascript" src="#CHEMIN{lib/pdfjs/web/l10n.js}"></script>
     <script type="text/javascript" src="#CHEMIN{lib/pdfjs/build/pdf.js}"></script>
@@ -25,23 +24,25 @@
     <script type="text/javascript" src="#CHEMIN{lib/pdfjs/web/viewer.js}"></script>
     <script type="text/javascript">
         PDFJS.workerSrc = '#CHEMIN{lib/pdfjs/build/pdf.js}';
-        kDefaultURL = '[(#URL_DOCUMENT|copie_locale)]';
-        kImageDirectory = '#CHEMIN{lib/pdfjs/web/images/}';
+        DEFAULT_URL = '[(#URL_DOCUMENT|copie_locale)]';
+        IMAGE_DIR = '#CHEMIN{lib/pdfjs/web/images/}';
     </script>
     <style type="text/css">#openFile {display:none;}</style>
   </head>
 
-  <body>
+<body>
     <div id="outerContainer">
 
       <div id="sidebarContainer">
-        <div id="toolbarSidebar" class="splitToolbarButton toggled">
-          <button id="viewThumbnail" class="toolbarButton group toggled" title="Show Thumbnails" tabindex="1" data-l10n-id="thumbs">
-             <span data-l10n-id="thumbs_label">Thumbnails</span>
-          </button>
-          <button id="viewOutline" class="toolbarButton group" title="Show Document Outline" tabindex="2" data-l10n-id="outline">
-             <span data-l10n-id="outline_label">Document Outline</span>
-          </button>
+        <div id="toolbarSidebar">
+          <div class="splitToolbarButton toggled">
+            <button id="viewThumbnail" class="toolbarButton group toggled" title="Show Thumbnails" tabindex="1" data-l10n-id="thumbs">
+               <span data-l10n-id="thumbs_label">Thumbnails</span>
+            </button>
+            <button id="viewOutline" class="toolbarButton group" title="Show Document Outline" tabindex="2" data-l10n-id="outline">
+               <span data-l10n-id="outline_label">Document Outline</span>
+            </button>
+          </div>
         </div>
         <div id="sidebarContent">
           <div id="thumbnailView">
@@ -74,8 +75,8 @@
           <div id="toolbarContainer">
             <div id="toolbarViewer">
               <div id="toolbarViewerLeft">
-                <button id="sidebarToggle" class="toolbarButton" title="Toggle Sidebar" tabindex="3" data-l10n-id="toggle_slider">
-                  <span data-l10n-id="toggle_slider_label">Toggle Sidebar</span>
+                <button id="sidebarToggle" class="toolbarButton" title="Toggle Sidebar" tabindex="3" data-l10n-id="toggle_sidebar">
+                  <span data-l10n-id="toggle_sidebar_label">Toggle Sidebar</span>
                 </button>
                 <div class="toolbarButtonSpacer"></div>
                 <button id="viewFind" class="toolbarButton group" title="Find in Document" tabindex="4" data-l10n-id="findbar">

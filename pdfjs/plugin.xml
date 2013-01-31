@@ -2,10 +2,10 @@
 	<nom>pdf.js</nom>
 	<auteur>[andreasgal->http://mozilla.github.com/pdf.js/], mise en plugin par [erational->http://www.erational.org]</auteur>
 	<icon>prive/themes/spip/images/pdfjs-32.png</icon>
-	<version>0.2.0</version>
-	<etat>experimental</etat>
+	<version>0.2.1</version>
+	<etat>test</etat>
 	<description>Lecteur javascript de vos documents pdf via le nouveau mod&egrave;le &lt;lecteurpdfXX&gt;</description>
-  <lien>http://www.spip-contrib.net/Lecteur-pdf-javascript-pdf-js</lien>
+	<lien>http://contrib.spip.net/?article4078</lien>
 	<prefix>pdfjs</prefix>
 	<categorie>multimedia</categorie>
 	<necessite id="SPIP" version="[2.0.0;]" />
