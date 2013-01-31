@@ -135,9 +135,9 @@ Merci',
 	'creer_nouveau_message' => 'Créer un nouveau message',
 
 	// D
-	'deja_inscrit' => 'Vous étiez déjà inscrit à la lettre « @lst_name@ ». Votre mode d\'inscription a été mis à jour.',
+	'deja_inscrit' => 'Vous étiez déjà inscrit à la lettre «&nbsp;@lst_name@&nbsp;». Votre mode d\'inscription a été mis à jour.',
 	'deja_validee' => 'Cette opération a déjà été validée. Désolé.',
-	'demande_transmise' => 'Votre demande d\'inscription à la lettre « @lst_name@ » va être examinée dans les plus brefs délais.',
+	'demande_transmise' => 'Votre demande d\'inscription à la lettre «&nbsp;@lst_name@&nbsp;» va être examinée dans les plus brefs délais.',
 	'desabonner' => 'Désabonner',
 	'desabonner2' => 'désabonner',
 	'desabonner_abonnes' => 'Désabonner les abonnés selectionnés',
@@ -145,7 +145,7 @@ Merci',
 	'description' => 'Description',
 	'desinscription_confirmation_debut' => 'Désinscription de la lettre d\'information',
 	'desinscription_confirmation_fin' => 'demandée. Vous allez recevoir un message demandant confirmation.',
-	'desinscription_validee' => 'Votre désinscription de la lettre « @lst_name@ » est validée. A bientôt.',
+	'desinscription_validee' => 'Votre désinscription de la lettre «&nbsp;@lst_name@&nbsp;» est validée. A bientôt.',
 
 	// E
 	'editer_lettre' => 'Editer la lettre d\'information',
@@ -172,14 +172,14 @@ Merci',
 	'info_parametres' => 'L\'e-mail de l\'administrateur est utilisé par défaut comme l\'e-mail du modérateur lors de la création d\'une newsletter',
 	'infolettres' => 'Infolettres',
 	'informations' => 'Informations',
-	'inscription_deja_abonne_autre_mode' => 'Vous étiez déjà inscrit à la lettre « @lst_name@ » dans un autre mode, changement opéré.',
-	'inscription_deja_abonne_meme_mode' => 'Vous étiez déjà inscrit à la lettre « @lst_name@ » dans ce même mode. Néanmoins, nous apprécions votre enthousiasme.',
+	'inscription_deja_abonne_autre_mode' => 'Vous étiez déjà inscrit à la lettre «&nbsp;@lst_name@&nbsp;» dans un autre mode, changement opéré.',
+	'inscription_deja_abonne_meme_mode' => 'Vous étiez déjà inscrit à la lettre «&nbsp;@lst_name@&nbsp;» dans ce même mode. Néanmoins, nous apprécions votre enthousiasme.',
 	'inscription_encours' => 'Votre demande d\'inscription à la lettre @nom_lettre@ est en cours d\'examen. Merci de patienter.',
-	'inscription_mok' => 'Votre demande d\'inscription à la lettre « @lst_name@ » a été soumise au modérateur. Vous serez informé de sa décision.',
+	'inscription_mok' => 'Votre demande d\'inscription à la lettre «&nbsp;@lst_name@&nbsp;» a été soumise au modérateur. Vous serez informé de sa décision.',
 	'inscription_nok' => 'Inscription non authorisée pour cette lettre d\'information',
-	'inscription_ok' => 'Vous allez recevoir un message de demande de confirmation de votre inscription à la lettre « @lst_name@ ».',
-	'inscription_ok_multiple' => 'Vous allez recevoir un message de demande de confirmation de votre inscription aux lettre « @lst_name@ ».',
-	'inscription_validee' => 'Votre inscription à la lettre « @lst_name@ » est validée. Merci.',
+	'inscription_ok' => 'Vous allez recevoir un message de demande de confirmation de votre inscription à la lettre «&nbsp;@lst_name@&nbsp;».',
+	'inscription_ok_multiple' => 'Vous allez recevoir un message de demande de confirmation de votre inscription aux lettre «&nbsp;@lst_name@&nbsp;».',
+	'inscription_validee' => 'Votre inscription à la lettre «&nbsp;@lst_name@&nbsp;» est validée. Merci.',
 
 	// L
 	'label_contenu_html' => 'Contenu HTML',
@@ -201,10 +201,10 @@ Merci',
 	// M
 	'mail_info_desinscription_corps' => 'Alerte envoyée par le plugin CleverMail du site @nom_site@ ( @url_site@ ) :
 
-Désinscription de @sub_email@ de la lettre « @lst_name@ »',
+Désinscription de @sub_email@ de la lettre «&nbsp;@lst_name@&nbsp;»',
 	'mail_info_inscription_corps' => 'Alerte envoyée par le plugin CleverMail du site @nom_site@ ( @url_site@ ) :
 
-Inscription de @sub_email@ à la lettre « @lst_name@ »',
+Inscription de @sub_email@ à la lettre «&nbsp;@lst_name@&nbsp;»',
 	'mail_info_inscription_sujet' => 'Inscription de @sub_email@',
 	'mail_inscription_multiple' => 'Bonjour,
 
