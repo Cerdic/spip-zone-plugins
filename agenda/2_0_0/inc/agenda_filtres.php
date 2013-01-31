@@ -90,7 +90,7 @@ function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $for
 			$s .= " ".date("(H:i)",$date_fin);
 		$s .= $dtabbr;
 	}
-	return unicode2charset(charset2unicode(strtr($s,$trans_tbl),''));	
+	return unicode2charset(charset2unicode(strtr($s,$trans_tbl),'AUTO'));	
 }
 
 function agenda_dateplus($date,$secondes,$format){
