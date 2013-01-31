@@ -61,7 +61,9 @@ function mailshot_import_from_spiplistes(){
 	$trouver_table = charger_fonction("trouver_table","base");
 	if ($desc = $trouver_table('spip_courriers')){
 
+		include_spip('inc/charsets');
 		include_spip("action/editer_objet");
+
 		sql_alter("TABLE spip_courriers ADD id_mailshot bigint(21) NOT NULL DEFAULT 0");
 		$res = sql_select(
 			"C.id_courrier,C.titre as sujet, C.texte as html, C.message_texte as texte,C.date_fin_envoi as date,C.date_debut_envoi as date_start,C.total_abonnes as total,C.nb_emails_envoyes+C.nb_emails_non_envoyes+C.nb_emails_echec as current,C.nb_emails_non_envoyes+C.nb_emails_echec as failed",
@@ -108,6 +110,7 @@ function mailshot_import_from_spiplettres(){
 	if ($trouver_table('spip_lettres')
 	  AND $trouver_table('spip_abonnes_lettres')){
 
+		include_spip('inc/charsets');
 		include_spip("action/editer_objet");
 
 		// importer les envois
@@ -228,8 +231,8 @@ function mailshot_import_from_clevermail(){
 	  AND $trouver_table('spip_cm_posts_done')) {
 		spip_log('Import des lettres clevermail', 'mailshot');
 
-		include_spip("action/editer_objet");
 		include_spip("inc/charsets");
+		include_spip("action/editer_objet");
 
 		// Importer les lettres
 		// ajout d'un champ le temps de l'import. Évite d'attraper 2 fois une même lettre et de reprendre sur timeout.
