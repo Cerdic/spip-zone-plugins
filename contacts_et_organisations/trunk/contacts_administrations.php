@@ -160,7 +160,14 @@ function contacts_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_contacts_liens");
 	sql_drop_table("spip_organisations_contacts");
 	sql_drop_table("spip_organisations_liens");
-	
+
+	# Nettoyer les versionnages, forums et urls
+	$in = sql_in("objet", array('organisations', 'contacts'));
+	sql_delete("spip_versions", $in);
+	sql_delete("spip_versions_fragments", $in);
+	sql_delete("spip_forum", $in);
+	sql_delete("spip_urls", sql_in("type", array('organisation', 'contact')));
+
 	effacer_meta($nom_meta_base_version);
 }
 
