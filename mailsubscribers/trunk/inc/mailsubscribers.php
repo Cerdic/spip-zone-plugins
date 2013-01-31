@@ -88,6 +88,8 @@ function mailsubscribers_listes($options = array()){
 	$listes = array();
 
 	// d'abord les listes connues en config
+	if (!function_exists('lire_config'))
+		include_spip('inc/config');
 	if ($known_lists = lire_config("mailsubscribers/lists",array())
 		AND is_array($known_lists)
 		AND count($known_lists)){
