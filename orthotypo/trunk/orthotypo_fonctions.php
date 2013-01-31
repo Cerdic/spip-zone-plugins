@@ -289,6 +289,7 @@ function orthotypo_exposants_fr($texte){
 	static $egrave; static $eaigu1; static $eaigu2; static $accents;
 	if (is_null($typo)) {
 		// en principe, pas besoin de : caractere_utf_8(232)
+		$carre  = unicode2charset('&#178;').'|&#178;|&sup2;';
 		$egrave = unicode2charset('&#232;').'|&#232;|&egrave;';
 		$eaigu1 = unicode2charset('&#233;').'|&#233;|&eacute;';
 		$eaigu2 = unicode2charset('&#201;').'|&#201;|&Eacute;';
@@ -301,8 +302,8 @@ function orthotypo_exposants_fr($texte){
 			// Dr, Pr suivis d'un espace d'un point ou d'un tiret
 			'/\b([DP])(r)(?=[\s\.-])/u' => _TYPO_sup2,
 
-			// m≤
-			'/\bm≤\b/' => 'm'._TYPO_class.'2</sup>',
+			// m2
+			"/\bm(?:$carre)\b/" => 'm'._TYPO_class.'2</sup>',
 			// m2, m3
 			'/\bm([23])\b/u' => 'm'._TYPO_sup,
 
