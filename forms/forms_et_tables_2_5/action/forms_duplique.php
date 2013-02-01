@@ -32,7 +32,8 @@ function action_forms_duplique(){
 function Forms_duplique_form($duplique){
 	include_spip('base/abstract_sql');
 	// creation
-	$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($duplique));
+	// $result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($duplique));
+	$result = sql_select("*","spip_forms","id_form="._q($duplique));
 	$names = "";
 	$values = "";
 	if ($row = spip_fetch_array($result)) {
@@ -51,7 +52,8 @@ function Forms_duplique_form($duplique){
 		//$id_form = spip_insert_id();
 		//$id_form = sql_insertq( 'spip_forms',array());
 		if ($id_form){
-			$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($duplique));
+			// $res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($duplique));
+			$res = sql_select("*","spip_forms_champs","id_form="._q($duplique));
 			while($row = spip_fetch_array($res)) {
 				$names = "id_form,";
 				$values = "$id_form,";
@@ -65,7 +67,8 @@ function Forms_duplique_form($duplique){
 				$values = substr($values,0,strlen($values)-1);
 				spip_query("REPLACE INTO spip_forms_champs ($names) VALUES ($values)");
 			}
-			$res = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($duplique));
+			// $res = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($duplique));
+			$res = sql_select("*","spip_forms_champs_choix","id_form="._q($duplique));
 			while($row = spip_fetch_array($res)) {
 				$names = "id_form,";
 				$values = "$id_form,";

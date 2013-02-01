@@ -86,3 +86,28 @@ div.puce_forms_donnee_popup img {
 div.puce_forms_donnee_popup {
 	width: 45px; 
 }
+
+div.puce_article_content{
+	position:relative;
+	display:block;
+}
+
+div.puce_article_content div.puce_article_popup{
+	display:none;
+}
+
+div.puce_article_content:hover div.puce_article_popup{
+	display:block;
+	background-color: #CCCCCC;
+    border: 1px solid #666666;
+    margin:0px;
+    position: absolute;
+    width: 45px;
+	top:0px;
+	left:-12px;
+    padding: 2px 5px;
+}
+
+div.puce_article_popup a{
+	margin: 1px;
+}

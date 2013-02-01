@@ -178,6 +178,7 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type){
 	if ( _request('exec')=='tables_tous'
 		&& (_request('var_mode')=='dev' OR (defined('_OUTILS_DEVELOPPEURS') && _OUTILS_DEVELOPPEURS))) {
 		$res = spip_query("SELECT type_form FROM spip_forms GROUP BY type_form ORDER BY type_form");
+		// $res = sql_select("type_form","spip_forms","","type_form","type_form");
 		while ($row = spip_fetch_array($res)){
 			$out .= afficher_tables_tous_corps($row['type_form']);
 			if ($row['type_form']==$type_form) $bouton_defaut = false;
@@ -201,7 +202,7 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 	include_spip('public/assembler');
 	$out = "";
 	if (!$id_form = intval($id_form)) return $out;
-	// $res = spip_query("SELECT arborescent,titre FROM spip_forms WHERE id_form="._q($id_form));
+
 	$res = sql_select('arborescent,titre',  'spip_forms',  'id_form='.sql_quote($id_form));
 	$row=sql_fetch($res);
 	if ($titre_page===false){
@@ -283,7 +284,7 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 
 		// verifier si il y a des donnees
 		$in = "statut IN (".implode(',',array_map('_q',$contexte['statuts'])).")";
-		// $res2 = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE $in AND id_form="._q($id_form));
+
 		$res2 = sql_select('id_donnee',  'spip_forms_donnees',  array($in,'id_form='.sql_quote($id_form)));
 		if ($row2 = sql_fetch($res2)){
 			$out .=  "<div style='float:$spip_lang_left;'>";
@@ -377,32 +378,34 @@ function affichage_donnees_tous($type_form,$c=NULL){
 	echo fin_page();
 }
 
-function affichage_donnee_edit($type_form){
+function affichage_donnee_edit($type_form) {
 	global $spip_lang_right;
   include_spip("inc/presentation");
 	include_spip('public/assembler');
 	if (!include_spip('inc/autoriser'))
 		include_spip('inc/autoriser_compat');
 
-  _Forms_install();
+	_Forms_install();
 	$prefix = forms_prefixi18n($type_form);
-  $icone = find_in_path("img_pack/$type_form-24.png");
-  if (!$icone)
-  	$icone = _DIR_PLUGIN_FORMS."img_pack/donnees-24.png";
-  $titre_page = _T("$prefix:type_des_tables");
+	$icone = find_in_path("img_pack/$type_form-24.png");
+	if (!$icone)
+		$icone = _DIR_PLUGIN_FORMS."img_pack/donnees-24.png";
+	$titre_page = _T("$prefix:type_des_tables");
 
-  $id_form = intval(_request('id_form'));
-  $id_donnee = intval(_request('id_donnee'));
-  $res = spip_query("SELECT id_form,statut FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
-  if ($row = spip_fetch_array($res))
-  if (!$id_form && $id_donnee){
+	$id_form = intval(_request('id_form'));
+	$id_donnee = intval(_request('id_donnee'));
+
+	$res = sql_select(array("id_form","statut"),"spip_forms_donnees","id_donnee="._q($id_donnee));
+	if ($row = spip_fetch_array($res))
+	if (!$id_form && $id_donnee) {
 		$id_form = $row['id_form'];
-  }
-  $statut = $row['statut'];
+	}
+	$statut = $row['statut'];
 
 	$contexte = array('id_form'=>$id_form,'id_donnee'=>$id_donnee,'type_form'=>$type_form,'titre_liste'=>$titre_page,'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
 	$formulaire = recuperer_fond("modeles/form",$contexte);
-	$row = spip_fetch_array(spip_query("SELECT COUNT(id_donnee) AS n FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND statut!='poubelle'"));
+
+	$row = spip_fetch_array(sql_select("COUNT(id_donnee) AS n","spip_forms_donnees",array("id_donnee="._q($id_donnee),"statut!='poubelle'")));
 	$nb_reponses = intval($row['n']);
 
 	/*debut_page($titre_page, "documents", "forms");*/
@@ -431,7 +434,7 @@ function affichage_donnee_edit($type_form){
 	/*fin_boite_info();*/
 	echo fin_boite_info(true);
 
- 	$res = spip_query("SELECT documents FROM spip_forms WHERE id_form="._q($id_form));
+	$res = sql_select("documents","spip_forms","id_form="._q($id_form));
  	$row = spip_fetch_array($res);
  	if ($row['documents']=='oui'){
 		if ($id_donnee){

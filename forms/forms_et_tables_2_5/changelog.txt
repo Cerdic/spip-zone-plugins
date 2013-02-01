@@ -1,4 +1,13 @@
-﻿2012-12-26
+﻿2013-01-30
+- corrections des fonctions SQL /action/instituer_forms_donnee.php
+- corrections des fonctions SQL /action/forms_duplique.php
+- corrections des fonctions SQL /inc/forms_tables_affichage.php
+- corrections des fonctions SQL /inc/instituer_forms_donnee.php
+- corrections des fonctions SQL /exec/puce_statut_forms_donnee.php
+- Modification du CSS pour le changement de status sans JS /donnees_tous.css
+- Modification pour afficher le changement de statut "rapide" des données avec les puces (comme pour les articles)
+
+2012-12-26
 - corrections des fonctions SQL /exec/donnees_tous.php
 - corrections des fonctions SQL /exec/donnees_edit.php
 - corrections de fonctions SQL /inc/forms_tables_affichage.php

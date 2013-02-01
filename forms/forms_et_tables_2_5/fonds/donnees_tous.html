@@ -54,7 +54,7 @@
 #SET{lien_edit,#ENV{lien_edit,#URL_ECRIRE{donnees_edit,id_form=#ID_FORM}}|parametre_url{id_donnee,#ID_DONNEE}|parametre_url{retour,#SELF} }
 ]
 	<tr class='tr_liste'>
-		<td>[(#ID_DONNEE|forms_puce_statut_donnee{#STATUT,#ID_FORM})]</td>
+		<td>[(#ID_DONNEE|forms_puce_statut_donnee{#STATUT,#ID_FORM,1})]</td>
 		<td>[<a href='(#GET{lien_edit})'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/loupe.png' alt='' width='16' height='16' style='vertical-align:middle' /></a><a href='#GET{lien_edit}'>]#ID_DONNEE[(#GET{lien_edit}|?{' '})</a>]</td>
 		[(#ENV{affiche_rang,1}|?{' '})<td>#RANG</td>]
 		[(#ENV{affiche_date,1}|?{' '})<td>#DATE</td>]
@@ -76,16 +76,29 @@
 </tbody>
 </table>
 </div>
-	<?php /*<script type="text/javascript"><!--
-	var crayons_init_dynamique = true;
-	jQuery.fn.activeCrayons = function(){
-		if (typeof cQuery != 'undefined'){
-			cQuery(this).initcrayons();
+	<script>
+		function forms_changement_statut(id_form,id_donnee,statut,url_exec) {
+			$.ajax({
+				type: "POST",
+				url: url_exec,
+				data: {
+					action:"instituer_forms_donnee",
+					arg:id_donnee,
+					statut_nouv:statut,
+					redirect:"./?exec=instituer_forms_donnee&script=donnees_edit&id_form="+id_form+"&id_donnee="+id_donnee+"&var_ajax_redir=1"
+				},
+				success: function(){
+					var couleur = new Array();
+					couleur["publie"]="verte";
+					couleur["prop"]="orange";
+					couleur["poubelle"]="poubelle";
+					couleur["refuse"]="rouge";
+					$("#imgstatutforms_donnee"+id_donnee).attr("src","../prive/images/puce-"+couleur[statut]+".gif")
+					//--changement du picto
+				}
+			});
 		}
-		return this.unbind('mouseover');
-	}
-	// -->
-	</script>*/?>
+	</script>
 </B_donnees>
 <div class='verdana2' style='text-align:center;'>
 #ENV*{aucune_reponse}

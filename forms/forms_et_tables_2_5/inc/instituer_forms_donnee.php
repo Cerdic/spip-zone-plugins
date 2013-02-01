@@ -4,6 +4,9 @@
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
  *  Copyright (c) 2001-2006                                                *
+ *
+ *	Loic LE MAO, Sylvain BLANC
+ *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -20,7 +23,9 @@ function inc_instituer_forms_donnee_dist($id_form, $id_donnee, $statut, $rang=NU
 {
 	$type_form = "form";
 	$pi18n = "form";
-	$res = spip_query("SELECT type_form FROM spip_forms WHERE id_form="._q($id_form));
+
+	$res = sql_select("type_form","spip_forms","id_form="._q($id_form));
+	
 	if ($row = spip_fetch_array($res)
 		AND $row['type_form']!=''
 		AND $rox['type_form']!='sondage')
@@ -157,15 +162,19 @@ function puce_statut_donnee($id, $statut, $id_form, $ajax = false) {
 		return $inser_puce;
 
 	if ($ajax){
-		$action = "\nonmouseover=\"montrer('statutdecalforms_donnee$id');\"";
-		$res = "<span class='puce_forms_donnee_fixe'\n$action>"
+		$action="";
+		$res = "<div class=\"puce_article_content\">
+		<span class='puce_forms_donnee_fixe'>"
 		. $inser_puce
 		. "</span>"
-		. "<span class='puce_article_popup' id='statutdecalforms_donnee$id'\nonmouseout=\"cacher('statutdecalforms_donnee$id');\" style='margin-left: -".((11*$clip[$statut])+1)."px;width:{$width}px'>";
-		foreach($statuts as $s)
-			if (autoriser('instituer','donnee',$id_donnee,NULL,array('id_form'=>$id_form,'statut'=>$statut,'nouveau_statut'=>$s)))
-		  	$res .= afficher_script_statut($id, 'forms_donnee', -((11*$clip[$s])+1), $puce[$s], $s, $lib[$s], $action);
-		$res .= "</span>";
+		. "<div class='puce_article_popup' id='statutdecalforms_donnee$id'>";
+		foreach ($statuts as $s) {
+			if (autoriser('instituer','donnee',$id_donnee,NULL,array('id_form'=>$id_form,'statut'=>$statut,'nouveau_statut'=>$s))){
+				$res .= Forms_afficher_script_statut($id, 'forms_donnee', -((11*$clip[$s])+1), $puce[$s], $s, $lib[$s], $action,$id_form);
+			}
+		}
+		$res .= "</div>"
+		."</div>";
 		return $res;
 	}
 
@@ -176,7 +185,7 @@ function puce_statut_donnee($id, $statut, $id_form, $ajax = false) {
 	else {
 		$action = generer_url_ecrire('puce_statut_forms_donnee',"",true);
 		$action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut('$nom', 'forms_donnee', $id, '$action'); }";
-		$over = "\nonmouseover=\"$action\"";
+		$over = " onmouseover=\"$action\"";
 	}
 
 	return 	"<span class='puce_article' id='{$nom}forms_donnee$id'$dir_lang$over>"
@@ -184,5 +193,13 @@ function puce_statut_donnee($id, $statut, $id_form, $ajax = false) {
 	. '</span>';
 
 }
+
+function Forms_afficher_script_statut($id, $type, $n, $img, $statut, $titre, $act='',$id_form) {
+	$h = generer_action_auteur("instituer_forms_donnee","$id");
+	$t = supprimer_tags($titre);
+	$action="forms_changement_statut('$id_form','$id','$statut','$h');";
+	return "<a href=\"#\" onclick=\"".$action."\" title=\"$t\">".http_img_pack($img,$t)."</a>";
+}
+
 
 ?>
