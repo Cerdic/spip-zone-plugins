@@ -216,6 +216,10 @@ function balise_CIVILITE_AUTEUR($p) {
 
 
 
+// Gestion des branches d'organisation
+// -----------------------------------
+
+
 /**
  * Calcul de la balise IDS_ORGANISATION_BRANCHE
  * 
@@ -300,6 +304,60 @@ function calcul_organisation_branche_in($id) {
 	return $branche;
 }
 
+
+
+/**
+ * Sélectionne dans une boucle les éléments appartenant à une branche d'une organisation
+ * 
+ * Calcule une branche d'une organisation et conditionne la boucle avec.
+ * Cherche l'identifiant de l'organisation en premier paramètre du critère {branche_organisation XX}
+ * sinon dans les boucles parentes ou par jointure.
+ *
+ * @internal
+ * 		Copie quasi identique de critere_branche_dist()
+ * 
+ * @param string $idb
+ * 		Identifiant de la boucle
+ * @param array $boucles
+ * 		AST du squelette
+ * @param Critere $crit
+ * 		Paramètres du critère dans cette boucle
+ * @return void
+**/
+function critere_branche_organisation_dist($idb, &$boucles, $crit){
+
+	$not = $crit->not;
+	$boucle = &$boucles[$idb];
+	// prendre en priorite un identifiant en parametre {branche_organisation XX}
+	if (isset($crit->param[0])) {
+		$arg = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	}
+	// sinon on le prend chez une boucle parente
+	else {
+		$arg = kwote(calculer_argument_precedent($idb, 'id_organisation', $boucles));
+	}
+
+	// Trouver une jointure
+	$champ = "id_organisation";
+	$desc = $boucle->show;
+	//Seulement si necessaire
+	if (!array_key_exists($champ, $desc['field'])){
+		$cle = trouver_jointure_champ($champ, $boucle);
+		$trouver_table = charger_fonction("trouver_table", "base");
+		$desc = $trouver_table($boucle->from[$cle]);
+		if (count(trouver_champs_decomposes($champ, $desc))>1){
+			$decompose = decompose_champ_id_objet($champ);
+			$champ = array_shift($decompose);
+			$boucle->where[] = array("'='", _q($cle.".".reset($decompose)), '"'.sql_quote(end($decompose)).'"');
+		}
+	}
+	else $cle = $boucle->id_table;
+
+	$c = "sql_in('$cle".".$champ', calcul_organisation_branche_in($arg)"
+	     .($not ? ", 'NOT'" : '').")";
+	$boucle->where[] = !$crit->cond ? $c :
+		("($arg ? $c : ".($not ? "'0=1'" : "'1=1'").')');
+}
 
 
 ?>

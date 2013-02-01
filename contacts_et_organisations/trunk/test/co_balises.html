@@ -64,12 +64,21 @@ attachés à l'organisation.</p>
 
 <div class='description'>
 <p>Retourne la liste des identifiants d'organisation d'une branche
-d'organisations, séparés par des virgules. Utile avec l'opérateur <code>IN</code> dans
+d'organisations, séparés par des virgules.</p>
+
+<p>Il peut être utile avec l'opérateur <code>IN</code> dans
 un critère de boucle tel que <code>{id_organisation IN \#IDS_ORGANISATION_BRANCHE}</code>.</p>
 
 <p>Ainsi on peut afficher tous les contacts d'une organisation et de ses filles :</p>
 <pre>
 &lt;BOUCLE_contacts(CONTACTS){id_organisation IN \#IDS_ORGANISATION_BRANCHE}{par nom}>
+	\#NOM
+	...
+</pre>
+
+<p>Il conviendra cependant de préférer le critère <code>branche_organisation</code> pour cet usage.</p>
+<pre>
+&lt;BOUCLE_contacts(CONTACTS){branche_organisation}{par nom}>
 	\#NOM
 	...
 </pre>
