@@ -1,0 +1,5 @@
+[(#ENV*{type}|=={site}|oui)
+	<option value="descriptif"[(#VAL{descriptif}|in_array{#ENV{valeur_env}}|oui) selected="selected"]><:entree_description_site:></option>
+	[(#CONFIG{activer_syndic}|=={oui}|oui)<option value="syndications"[(#VAL{syndications}|in_array{#ENV{valeur_env}}|oui) selected="selected"]><:diogene:info_syndication:></option>]
+	<option value="referencement_automatise"[(#VAL{referencement_automatise}|in_array{#ENV{valeur_env}}|oui) selected="selected"]><:diogene:info_referencement_automatise:></option>
+]

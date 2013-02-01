@@ -1,0 +1,30 @@
+<BOUCLE_diogene(DIOGENES){id_diogene}>
+#SET{id_secteur,#ID_SECTEUR}
+#SET{titre_diogene,#TITRE}
+#SET{type,#TYPE}
+</BOUCLE_diogene>
+<B_sites_attente>
+<div>
+	#ANCRE_PAGINATION
+	<h3 class="h3">[(#GET{titre_diogene})] (#GRAND_TOTAL)</h3>
+	<ul class="liste-items liste_objets_attente">
+		<BOUCLE_sites_attente(SITES){id_secteur=#GET{id_secteur}}{id_auteur?}{id_auteur != #ENV{auteur_exclu,0}}{statut !IN publie,poubelle}{pagination 5}>
+		<li class="item">
+			<h4><a href="[(#URL_PAGE{#ENV{page},type_objet=#GET{type}}|parametre_url{id_syndic,#ID_SYNDIC})]">#TITRE</a></h4>
+			#INTRODUCTION
+			<B_auteur>
+			<p><:par_auteur|ucfirst:> : 
+			<BOUCLE_auteur(AUTEURS){id_syndic}{', '}>
+			#NOM
+			</BOUCLE_auteur>
+			</p>
+			[<p><a href="#URL_SITE" class="spip_out">(#URL_SITE)</a></p>]
+			</B_auteur>
+		</li>
+		</BOUCLE_sites_attente>
+	</ul>
+	[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_sites_attente>
+</B_diogene>
+#FILTRE{trim}

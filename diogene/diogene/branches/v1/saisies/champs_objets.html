@@ -1,0 +1,7 @@
+[(#ENV*{valeur}|is_array|non)
+	[(#SET{valeur_env,[(#ENV*{valeur,a:0:{}}|unserialize)]})]
+][(#ENV*{valeur}|is_array|oui)
+	[(#SET{valeur_env,[(#ENV*{valeur})]})]
+]<select name="#ENV{nom}[]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] multiple="multiple">
+	[(#INCLURE{fond=prive/champs_#ENV{type},valeur_env=#GET{valeur_env},env})]
+</select>

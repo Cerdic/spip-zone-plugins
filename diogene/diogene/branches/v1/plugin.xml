@@ -1,0 +1,129 @@
+<plugin>
+	<nom>Diogene</nom>
+	<auteur>[kent1->http://www.kent1.info]</auteur>
+	<slogan>
+		<multi>
+			[fr]Cr&#233;ation de templates de formulaires pour les objets
+			[en]Forms templates creation for the objects
+		</multi>
+	</slogan>
+	<licence>© 2010-2011 GNU/GPL v3</licence>
+	<version>0.4.14</version>
+	<version_base>0.3.2</version_base>
+	<etat>stable</etat>
+	<description>
+		<multi>
+			[fr]Le plugin Diogène permet de créer des masques de formulaires spécifiques par secteur sur les trois objets spécifiques que sont :
+-* les articles;
+-* les rubriques;
+-* les sites
+
+Il permet ainsi de définir en fonction d’un secteur particulier, un masque de formulaire par objet, ajoutant ou enlevant ainsi des champs afin de rendre le formulaire d’édition conforme à ce que l’on souhaite réellement publier dans ces secteurs mais également rassemblant au sein d’un même formulaire d’édition l’ensemble des informations permettant de publier rapidement.
+			[en]The plugin Diogene permits to create sector-specific forms masks for the three specific object types:
+-* articles;
+-* sections;
+-* websites;
+
+It allows to define for a particular sector a form mask per object, adding or removing fields to customize the edit form to conform to what we really want to publish in these areas but also bringing within the same edit form all the information to publish quickly.
+		</multi>
+	</description>
+	<lien>http://www.mediaspip.net/spip.php?article50</lien>
+	<prefix>diogene</prefix>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/diogene.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/diogene.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/diogene.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>diogene_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>diogene_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>diogene_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>diogene_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>diogene_champs_sup</nom>
+		<inclure>diogene_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>diogene_avant_formulaire</nom>
+		<inclure>diogene_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>diogene_ajouter_saisies</nom>
+		<inclure>diogene_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>diogene_verifier</nom>
+		<inclure>diogene_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>diogene_traiter</nom>
+		<inclure>diogene_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_insertion</nom>
+		<inclure>diogene_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_edition</nom>
+		<inclure>diogene_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>diogene_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>diogene_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>accueil_gadgets</nom>
+		<inclure>diogene_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>diogene_pipelines.php</inclure>
+	</pipeline>
+	<bouton id='diogenes' parent="configuration">
+		<titre>diogene:bouton_editer_diogene</titre>
+		<icone>images/diogene-24.png</icone>
+	</bouton>
+	<bouton id='diogenes_bando' parent="bando_configuration">
+		<titre>diogene:bouton_editer_diogene</titre>
+		<icone>images/diogene-16.png</icone>
+		<url>diogenes</url>
+	</bouton>
+	<icon>images/diogene-128.png</icon>
+	<install>base/diogene_installer.php</install>
+	<options>diogene_options.php</options>
+	<fonctions>diogene_fonctions.php</fonctions>
+	<necessite id='SPIP' version='[2.1.1;2.1.99]' />
+	<necessite id='saisies' version='[1.1;]' />
+	<necessite id='spip_bonux' version='[1.9.1;]' />
+	<necessite id='images' />
+	<utilise id='menus' />
+	<utilise id='polyhier' />
+	<utilise id='medias' />
+	<utilise id='cextras' />
+	<utilise id='iextras' />
+	<utilise id='pages' />
+	<utilise id='Z' />
+	<categorie>edition</categorie>
+</plugin>

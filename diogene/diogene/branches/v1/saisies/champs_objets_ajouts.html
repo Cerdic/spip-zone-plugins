@@ -1,0 +1,8 @@
+<select name="#ENV{nom}[]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] multiple="multiple">
+	<BOUCLE_champs_sup(POUR){tableau #ENV{champs_ajouts}}>
+	[(#CLE|=={diogene_max}|non)
+		[(#ENV*{valeur}|is_array|oui)<option value="#CLE"[(#CLE|in_array{[(#ENV*{valeur}|sinon{#ARRAY})]}|oui) selected="selected"]>#VALEUR</option>]
+		[(#ENV*{valeur}|is_array|non)<option value="#CLE"[(#CLE|in_array{[(#ENV*{valeur,'a:0:{}'}|unserialize|sinon{#ARRAY})]}|oui) selected="selected"]>#VALEUR</option>]
+	]
+	</BOUCLE_champs_sup>
+</select>

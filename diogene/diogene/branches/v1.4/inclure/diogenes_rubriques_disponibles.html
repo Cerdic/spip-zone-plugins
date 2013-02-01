@@ -1,0 +1,40 @@
+<B_diogenes>
+<div class="menu diogene rubriques important">
+	<h2 class="h2"><:diogene:modifier_rubriques:></h2>
+	<p class="infos_importantes">
+		<:diogene:explication_rubrique_statut:>
+	</p>
+	<BOUCLE_diogenes(DIOGENES){objet=rubrique}>
+	#SET{type,#TYPE}
+	<BOUCLE_auth_diogenes(CONDITION){si (#AUTORISER{creerdans,diogene,#ID_DIOGENE}|oui)}>
+	<h3 class="h3">#_diogenes:TITRE</h3>
+	<B_rubriques>
+	<ul class="menu-liste">
+	<BOUCLE_rubriques(RUBRIQUES){id_parent=#_diogenes:ID_SECTEUR} {par num titre, titre}{tout}>
+		<li class="menu-entree[ (#EXPOSE{ouverte,fermee})][ (#EXPOSE)]">
+			[(#ID_RUBRIQUE|=={#ENV{id_rubrique}}|non)<a href="[(#URL_PAGE{publier}|parametre_url{type_objet,#GET{type}}|parametre_url{id_rubrique,#ID_RUBRIQUE})]"[ class="(#EXPOSE)"]>]
+				[(#ID_RUBRIQUE|diogene_puce_statut{rubrique,#STATUT})] [(#TITRE|supprimer_numero|couper{80})]
+			[(#ID_RUBRIQUE|=={#ENV{id_rubrique}}|non)</a>]
+			<B_sous_rubriques>
+			<ul class="menu-liste">
+				<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}{tout}>
+				<li class="menu-entree[ (#EXPOSE{on,off})]">
+					[(#ID_RUBRIQUE|=={#ENV{id_rubrique}}|non)<a href="[(#URL_PAGE{publier}|parametre_url{type_objet,#GET{type}}|parametre_url{id_rubrique,#ID_RUBRIQUE})]"[ class="(#EXPOSE)"]>]
+						[(#ID_RUBRIQUE|diogene_puce_statut{rubrique,#STATUT})] [(#TITRE|supprimer_numero|couper{80})]
+					[(#ID_RUBRIQUE|=={#ENV{id_rubrique}}|non)</a>]
+					<BOUCLE_re(BOUCLE_sous_rubriques)> </BOUCLE_re>
+				</li>
+				</BOUCLE_sous_rubriques>
+			</ul>
+			</B_sous_rubriques>
+		</li>
+	</BOUCLE_rubriques>
+	</ul>
+	</B_rubriques>
+	<p><em class="attention"><:diogene:info_aucune_sous_rubrique:></em></p>
+	<//B_rubriques>
+	</BOUCLE_auth_diogenes>
+	</BOUCLE_diogenes>
+</div>
+</B_diogenes>
+<//B_diogenes>

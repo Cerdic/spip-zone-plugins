@@ -1,0 +1,16 @@
+#CACHE{0}
+<li class="fieldset" id="fieldset_diogene_forums">
+	<fieldset>
+		<ul>
+			<li class="editer_forums[ (#ENV**{erreurs}|table_valeur{forums}|oui)erreur]">
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{forums})</span>]
+				<label for="diogene_forums"><:diogene:champ_forum:></label>
+				<select id="diogene_forums" name="forums">
+				<BOUCLE_forums_possibles(POUR){tableau #ENV*{forums_possibles}}>
+				<option value="#VALEUR"[(#VALEUR|=={#ENV{forums_actuels}}|oui)selected="selected"]>[(#CLE|_T)]</option>
+				</BOUCLE_forums_possibles>
+				</select>
+			</li>
+		</ul>
+	</fieldset>
+</li>

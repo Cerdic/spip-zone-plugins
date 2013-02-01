@@ -1,0 +1,27 @@
+<h1 class="grostitre"><:diogene:editer_diogenes_titre:></h1>
+<p><:diogene:editer_diogene_explication:></p>
+
+<B_diogene_principaux>
+<ul class="liste_items">
+	<BOUCLE_diogene_principaux(DIOGENES){par objet, titre}>
+	<li class="item">
+		<a href="[(#URL_ECRIRE{diogenes_edit,id_diogene=#ID_DIOGENE})]">##ID_DIOGENE - #TITRE [#OBJET]</a>
+		[(#AUTORISER{diogene,modifier,#ID_DIOGENE}|oui)
+			<span>[(#BOUTON_ACTION{<:diogene:bouton_supprimer_diogene:>,#URL_ACTION_AUTEUR{supprimer_diogene,#ID_DIOGENE,#SELF},ajax})]</span>
+		]
+	</li>
+	</BOUCLE_diogene_principaux>
+</ul>
+</B_diogene_principaux>
+
+<BOUCLE_objets(POUR){tableau #PIPELINE{diogene_champs_sup}}>
+#SET{max,''}
+<BOUCLE_diogenes_cle(DIOGENES){objet=#CLE}> </BOUCLE_diogenes_cle>
+#SET{max,#VALEUR|table_valeur{diogene_max}|sinon{0}}
+[(#GET{max}|>{0}|<{#TOTAL_BOUCLE}|oui)
+	[(#URL_ECRIRE{diogenes_edit}|parametre_url{nouveau,oui}|parametre_url{objet,#CLE}|icone{<:diogene:icone_editer_diogene_nouveau{type=#CLE}:>,#CHEMIN{images/diogene-24.png},#LANG_RIGHT,creer.gif})]]
+</B_diogenes_cle>
+	[(#URL_ECRIRE{diogenes_edit}|parametre_url{nouveau,oui}|parametre_url{objet,#CLE}|icone{<:diogene:icone_editer_diogene_nouveau{type=#CLE}:>,#CHEMIN{images/diogene-24.png},#LANG_RIGHT,creer.gif})]
+<//B_diogenes_cle>
+</BOUCLE_objets>
+<div class="nettoyeur" />

@@ -1,0 +1,28 @@
+#CACHE{0}
+<li class="fieldset diogene_selecteur_statut">
+<fieldset>
+	<h3 class="legend"><:diogene:legende_selecteur_statut:></h3>
+	<ul>
+		<li>
+			<label for="statut">
+				<:diogene:label_change_statut_normal_site:>
+			</label>
+			<select id="statut" name="statut">
+				[(#ENV{statut}|oui)
+				<option value="refuse"[(#ENV{statut}|=={refuse}|oui) selected="selected"]>
+					[(#ENV{statut}|=={refuse}|oui)<:diogene:texte_statut_en_cours_poubelle_site:>]
+					[(#ENV{statut}|=={refuse}|non)<:diogene:texte_statut_poubelle_site:>]
+				</option>]]
+				<option value="prop"[(#ENV{statut}|=={prop}|ou{#ENV{statut}|non}|oui) selected="selected"]>
+					[(#ENV{statut}|=={prop}|oui)<:diogene:texte_statut_en_cours_prop_site:>]
+					[(#ENV{statut}|=={prop}|non)<:diogene:texte_statut_prop_site:>]
+				</option>
+				<option value="publie"[(#ENV{statut}|=={publie}|oui) selected="selected"]>
+					[(#ENV{statut}|=={publie}|oui)<:diogene:texte_statut_en_cours_publie_site:>]
+					[(#ENV{statut}|=={publie}|non)<:diogene:texte_statut_publie_site:>]
+				</option>
+			</select>
+		</li>
+	</ul>
+</fieldset>
+</li>

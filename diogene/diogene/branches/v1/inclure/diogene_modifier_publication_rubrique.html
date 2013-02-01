@@ -1,0 +1,13 @@
+<BOUCLE_rub(RUBRIQUES){id_rubrique}>
+<BOUCLE_diogene(DIOGENES){id_secteur=#ID_SECTEUR}{objet=rubrique}>
+[(#AUTORISER{modifier,rubrique,#_rub:ID_RUBRIQUE}|et{#AUTORISER{creerdans,diogene,#ID_DIOGENE}}|oui)
+<div class="menu liste important">
+	<h2 class="h2"><:diogene:titre_modifier_rubrique:></h2>
+	<ul class="menu-liste">
+		<li class="menu-entree">
+			<a href="[(#ID_RUBRIQUE|generer_url_publier{rubrique})]"><:diogene:lien_editer_rubrique:></a>
+		</li>
+	</ul>
+</div>]
+</BOUCLE_diogene>
+</BOUCLE_rub>

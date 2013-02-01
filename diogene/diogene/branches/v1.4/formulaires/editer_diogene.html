@@ -1,0 +1,115 @@
+<div class="formulaire_spip formulaire_editer formulaire_editer_diogene formulaire_editer_diogene-#ENV{id_diogene,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable}|oui)
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+  		<input type='hidden' name='id_diogene' value='#ENV{id_diogene}' />
+  		<input type='hidden' name='objet' value='#ENV{objet}' />
+		<ul>
+			[(#SAISIE{input,titre,
+				label=<:info_titre:>,
+				class=multilang,
+				size=40,
+				obligatoire=oui})]
+			
+			[(#SAISIE{input,identifiant,
+				label=<:diogene:info_type:>,
+				explication=<:diogene:explication_info_type:>,
+				obligatoire=oui})]
+			
+			[(#SAISIE{textarea,description,
+				class=multilang inserer_barre_edition,
+				cols=40,
+				rows=10,
+				label=<:diogene:label_description:>})]
+				
+			#SET{pipeline,#PIPELINE{diogene_objets}}
+			[(#GET{pipeline}|table_valeur{#ENV{objet,article}}|table_valeur{ss_rubrique}|non)
+			[(#SAISIE{secteur,id_secteur,
+				cacher_option_intro=oui,
+				label=<:diogene:label_limiter_secteur:>})]]
+			
+			[(#ENV{objet}|in_array{#LISTE{article,emballe_media}}|oui)
+			[(#SAISIE{input,nombre_attente,
+				label=<:diogene:label_nombre_attente:>,
+				explication=<:diogene:explication_nombre_attente:>})]]
+				
+			[(#SAISIE{case,menu,
+				label=<:diogene:label_menu:>})]
+				
+			<li class="fieldset">
+				<fieldset>
+				<legend><:diogene:legende_champs_diogene:></legend>
+				<ul>
+					[(#SAISIE{champs_objets,champs_caches,
+						label=<:diogene:label_champs_caches:>,
+						size=40,
+						type=#ENV{objet,article}})]
+					
+					[(#PLUGIN{cextras}|oui)
+						<INCLURE{fond=formulaires/cextras_diogene,env}>
+					]
+					
+					[(#REM)
+						Les champs ajoutés sont des champs non présents dans le formulaire de base
+						que l'on ajoute au formulaire en fonction de la présence d'autres plugins :
+						-* auteurs
+						-* mots
+						-* licence
+						...
+					]
+
+					#SET{champs_ajouts,#GET{pipeline}|table_valeur{#ENV{objet,article}}|table_valeur{champs_sup}}
+					#SET{size,#GET{champs_ajouts}|count}
+					[(#GET{champs_ajouts}|count|>{0}|oui)
+						[(#SAISIE{champs_objets_ajouts,champs_ajoutes,
+							label=<:diogene:label_champs_ajoutes:>,
+							type=#ENV{objet,article},
+							champs_ajouts=#GET{champs_ajouts},
+							size=#GET{size}})]
+					]
+					
+					[(#PLUGIN{polyhier}|et{#GET{pipeline}|table_valeur{#ENV{objet,article}}|table_valeur{ss_rubrique}|non}|oui)
+						[(#SAISIE{case, polyhier_desactiver,
+							label=<:diogene:label_polyhier:>,
+							label_case=<:diogene:label_polyhier_desactiver:>})]
+					]
+				</ul>
+				</fieldset>
+			</li>
+
+			[(#PIPELINE{diogene_champs_texte,[(#ARRAY{args,[(#ENV**|unserialize)],data,''})]})]
+	
+			<li class="fieldset">
+				<fieldset>
+				<legend><:diogene:legende_statuts_diogene:></legend>
+				<ul>
+					[(#SAISIE{statuts_auteurs,statut_auteur,
+						cacher_option_intro=oui,
+						explication=<:diogene:explication_statut_auteur:>,
+						label=<:diogene:label_statut_auteur:>,
+						obligatoire=oui})]
+			
+					[(#ENV{objet}|in_array{#ARRAY{0,rubrique}}|non)
+						[(#SAISIE{statuts_auteurs,statut_auteur_publier,
+							cacher_option_intro=oui,
+							explication=<:diogene:explication_statut_auteur_publier:>,
+							label=<:diogene:label_statut_auteur_publier:>,
+							obligatoire=oui})]
+					]
+				</ul>
+				</fieldset>
+			</li>
+		</ul>
+
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+		<p class='boutons'>
+			<input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</div>
+	</form>]
+</div>

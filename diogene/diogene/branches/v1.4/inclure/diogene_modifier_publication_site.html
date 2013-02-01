@@ -1,0 +1,13 @@
+<BOUCLE_site(SITES){id_syndic}>
+<BOUCLE_diogene(DIOGENES){id_secteur=#ID_SECTEUR}{objet=site}>
+[(#AUTORISER{modifier,site,#ENV{id_syndic}}|oui)
+<div class="menu liste important">
+	<h2 class="h2"><:diogene:titre_modifier_site:></h2>
+	<ul class="menu-liste">
+		<li class="menu-entree">
+			<a href="[(#ID_SYNDIC|generer_url_publier{site})]"><:diogene:lien_editer_site:></a>
+		</li>
+	</ul>
+</div>]
+</BOUCLE_diogene>
+</BOUCLE_site>

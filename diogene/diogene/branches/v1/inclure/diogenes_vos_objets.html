@@ -1,0 +1,15 @@
+<div class="menu diogene important">
+	<h2 class="h2"><:diogene:modifier_vos_objets:></h2>
+	#SET{count,false}
+	<BOUCLE_diogenes(DIOGENES)>
+	<BOUCLE_auth_diogenes(CONDITION){si (#AUTORISER{creerdans,diogene,#ID_DIOGENE}|oui)}>
+	[(#INCLURE{fond=inclure/diogenes_vos_objets_#OBJET,id_diogene,id_auteur=#SESSION{id_auteur},env,ajax})#SET{count,true}]
+	</BOUCLE_auth_diogenes>
+	</BOUCLE_diogenes>
+	[(#GET{count}|=={false}|oui)
+	<div>
+		<p><em class="attention"><:diogene:info_diogenes_rien_publie:></em></p>
+	</div>]
+	</B_diogenes>
+	<//B_diogenes>
+</div>

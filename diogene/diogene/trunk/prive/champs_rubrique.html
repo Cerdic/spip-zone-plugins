@@ -1,0 +1,4 @@
+[(#ENV*{type}|=={rubrique}|oui)
+	[(#CONFIG{rubriques_descriptif}|=={oui}|oui)<option value="descriptif"[(#VAL{descriptif}|in_array{#ENV{valeur_env}}|oui) selected="selected"]><:texte_descriptif_rapide:></option>]
+	[(#CONFIG{rubriques_texte}|=={oui}|oui)<option value="texte"[(#VAL{texte}|in_array{#ENV{valeur_env}}|oui) selected="selected"]><:info_texte:></option>]
+]

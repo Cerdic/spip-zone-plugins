@@ -1,0 +1,58 @@
+<BOUCLE_article(ARTICLES){id_article}>
+<BOUCLE_diogene(DIOGENES){objet=article}{id_secteur=#ID_SECTEUR}>
+#SET{diogene,#ID_DIOGENE}
+#SET{titre_diogene,#TITRE}
+</BOUCLE_diogene>
+<BOUCLE_autoriser_modifier(CONDITION){si #AUTORISER{modifier,article,#ENV{id_article}}|et{#GET{diogene}|intval|>{0}}|oui}>
+
+<div class="menu liste important">
+	<h2 class="h2"><:diogene:titre_modifier_article:></h2>
+	<ul class="menu-liste">
+		[(#_article:ID_TRAD|=={0}|oui)
+		#SET{origine,#_article:ID_ARTICLE}]
+		[(#_article:ID_TRAD|=={0}|non)
+		#SET{origine,#_article:ID_TRAD}]
+		#SET{langues,#CONFIG{langues_multilingue}|explode{','}}
+		#SET{langues_creees,#ARRAY|push{#_article:LANG}}
+		<li class="menu-entree">
+			<a href="[(#_article:ID_ARTICLE|generer_url_publier{article})]"><:diogene:lien_editer_publication:></a>
+		</li>
+		<BOUCLE_article_origine(ARTICLES){id_article=#GET{origine}}{statut IN prop,prepa,publie}>
+			#SET{langues_creees,#GET{langues_creees}|push{#LANG}}
+			[(#_article:ID_ARTICLE|=={#GET{origine}}|non)
+				[(#AUTORISER{modifier,article,#ID_ARTICLE}|oui)
+				#SET{lang,#LANG|traduire_nom_langue}
+				<li class="menu-entree">
+					<a href="[(#ID_ARTICLE|generer_url_publier{article})]">
+						<:diogene:lien_modifier_version_originale{lang=#GET{lang}}:>
+					</a>
+				</li>]
+			]
+			<BOUCLE_article_traduit(ARTICLES){id_trad = #ID_ARTICLE}{par lang}{id_article !IN #ID_ARTICLE,#ENV{id_article}}{statut IN prop,prepa,publie}>
+			#SET{langues_creees,#GET{langues_creees}|push{#LANG}}
+			[(#AUTORISER{modifier,article,#ID_ARTICLE}|oui)
+				#SET{lang,#LANG|traduire_nom_langue}
+				<li class="menu-entree">
+					<a href="[(#ID_ARTICLE|generer_url_publier{article})]">
+						<:diogene:lien_modifier_version{lang=#GET{lang}}:>
+					</a>
+				</li>
+			]
+			</BOUCLE_article_traduit>
+			
+			#SET{langues_creees,#GET{langues_creees}|array_unique}
+			#SET{langues,#GET{langues}|array_diff{#GET{langues_creees}}}
+			<BOUCLE_langues(POUR){tableau #GET{langues}}>
+			#SET{lang,#VALEUR|traduire_nom_langue}
+			[(#GET{diogene}|is_numeric|et{#AUTORISER{creerdans,diogene,#GET{diogene}}}|et{#VALEUR|strlen|>{1}}|oui)
+			<li class="menu-entree">
+				<a href="[(#URL_ACTION_AUTEUR{diogene_creer_traduction,[(#_article:ID_ARTICLE)]&langue_forcee=[(#_langues:VALEUR)]})]">
+					<:diogene:lien_creer_version{lang=#GET{lang}}:>
+				</a>
+			</li>]
+			</BOUCLE_langues>
+		</BOUCLE_article_origine>
+	</ul>
+</div>
+</BOUCLE_autoriser_modifier>
+</BOUCLE_article>

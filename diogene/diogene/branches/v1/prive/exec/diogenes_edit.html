@@ -1,0 +1,35 @@
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		<a href="#URL_ECRIRE{diogenes}" class="icone36" style="float:left;">
+			<img width="24" height="24" src="#CHEMIN{images/diogene-24.png}" />
+			<span><:retour:></span>
+		</a>
+		<:diogene:formulaire_modifier_diogene:>
+		<h1>
+			<BOUCLE_diogene(DIOGENES){id_diogene}>
+			#TITRE
+			#SET{objet,#OBJET}
+			</BOUCLE_diogene>
+			#SET{objet,#ENV{objet,article}}
+			[(#ENV{nouveau}|=={oui}|?{<:diogene:formulaire_nouveau:>,#ENV{id_diogene}})]
+			<//B_diogene>
+		</h1>
+	</div>
+	#FORMULAIRE_EDITER_DIOGENE{#ENV{id_diogene,new},#GET{objet},#ENV{redirect,#URL_ECRIRE{diogenes}}}
+</div>
+
+<!--#navigation-->
+[(#ENV{id_diogene,0}|intval|oui)
+<div class="cadre infos cadre-info">
+	<div class="numero">
+		<:diogene:info_numero_diogene:>
+		<p>[(#ENV{id_diogene})]</p>
+	</div>
+</div>
+
+[(#ENV**{id_diogene}|diogene_form_logo)]
+]
+<!--/#navigation-->
+
+<!--#extra-->
+<!--/#extra-->

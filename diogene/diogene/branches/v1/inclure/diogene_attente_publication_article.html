@@ -1,0 +1,19 @@
+<BOUCLE_diogene(DIOGENES){id_diogene}>
+<B_articles_attente>
+<div>
+	#ANCRE_PAGINATION
+	<h3 class="h3">[(#_diogene:TITRE)] (#GRAND_TOTAL)</h3>
+	<ul class="liste-items liste_objets_attente">
+		<BOUCLE_articles_attente(ARTICLES){id_secteur = #_diogene:ID_SECTEUR}{id_auteur != #SESSION{id_auteur}}{statut=prop}{pagination 5}>
+		<li class="item">
+			<h4><a href="[(#URL_PAGE{#ENV{page},type_objet=#_diogene:TYPE}|parametre_url{id_article,#ID_ARTICLE})]">#TITRE</a></h4>
+			[<p><:par_auteur|ucfirst:> : (#LESAUTEURS)</p>]
+			#INTRODUCTION
+		</li>
+		</BOUCLE_articles_attente>
+	</ul>
+	[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_articles_attente>
+</BOUCLE_diogene>
+#FILTRE{trim}

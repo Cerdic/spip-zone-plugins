@@ -1,0 +1,10 @@
+<entree>
+	<nom><:diogene:titre_lien_publier:></nom>
+	<rang>15</rang>
+	<description><:diogene:info_menu_diogene:></description>
+	<icone>images/diogene-24.png</icone>
+	<parametre nom="titre" class="multilang" label="menus:entree_titre" />
+	<parametre nom="page" label="emballe_medias:menu_entree_page" />
+	<parametre nom="css" label="menus:entree_css" />
+	<refuser_sous_menu/>
+</entree>
