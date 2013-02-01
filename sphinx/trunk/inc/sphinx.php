@@ -282,11 +282,14 @@ function sphinx_excerpts(&$r, &$cl, $words=null, $query=null, $sources=null) {
 	}
 	if (!$textes) return;
 
+	$limit = defined('_SPHINX_COUPER_INTRO')
+		? _SPHINX_COUPER_INTRO : 400;
+
 	$options = array(
 		'before_match'      => '<span class="spip_surligne">',
 		'after_match'       => '</span>',
 		'chunk_separator'   => ' (...) ',
-		'limit'             => 400,
+		'limit'             => $limit,
 		'around'            => 20,
 		'html_strip_mode'   => 'strip',
 	);
