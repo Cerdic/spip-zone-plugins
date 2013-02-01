@@ -1,10 +1,11 @@
 <paquet
 	prefix="griseusicobarre"
 	categorie="theme"
-	version="0.1.0"
-	etat="test"
+	version="0.1.1"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/griseusicobarre-256.png"
+	documentation="http://contrib.spip.net/Icones-Griseus-pour-la-barre-d-edition"
 >
 
 	<nom>Griseus : icônes barre d'édition</nom>
@@ -14,5 +15,7 @@
 	<credit lien="http://tiheum.deviantart.com/#/d47vo5d">Matthieu James pour le jeu d'icône "Faïence"</credit>
 
 	<licence>GNU/GPL</licence>
+
+	<utilise nom="typoenluminee" compatibilite="[3.0.0;[" />
 
 </paquet>
