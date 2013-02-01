@@ -1,0 +1,23 @@
+<paquet
+	prefix="embed_code"
+	categorie="multimedia"
+	version="0.2.0"
+	etat="test"
+	compatibilite="[3.0.0;3.0.99]"
+	logo=""
+	documentation=""
+>	
+
+	<nom>Embed code</nom>
+	<!-- Générateur de code d'embed de document -->
+
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
+
+	<copyright>2010-2012</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<necessite nom="medias" compatibilite="[1.6.12;[" />
+	<necessite nom="mediabox" compatibilite="[0.8.1;[" />
+	<utilise nom="mediaspip_player" />
+</paquet>
