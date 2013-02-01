@@ -14,6 +14,7 @@ function taa_header_prive($flux){
    $form = $flux['args']['form'];
    if ($form=='editer_article'){	
 	$id_article=$flux['data']['id_article'];
+    if(!$id_rubrique=$flux['data']['id_parent'])
 	$id_rubrique=(
 		_request('id_rubrique')?_request('id_rubrique'):
 		(intval($id_article)?sql_getfetsel('id_rubrique','spip_articles','id_article='.$id_article):'')
@@ -22,12 +23,14 @@ function taa_header_prive($flux){
 
 	if(!$lang AND intval($id_rubrique))$lang=sql_getfetsel('lang','spip_rubriques','id_rubrique='.$id_rubrique);
 	$flux['data']['lang_dest']=$lang;
+
 	
-	if(_request('lang_dest')){		
+	if($flux['data']['lang_dest']){		
 			$flux['data']['_hidden'] .= '<input type="hidden" name="lang_dest" value="'.$lang.'"/>';
 			$flux['data']['_hidden'] .= '<input type="hidden" name="changer_lang" value="'.$lang.'"/>';
-		}
+		}  
 	}
+ 
 	return $flux;
 }
 
@@ -39,8 +42,9 @@ function taa_pre_insertion($flux){
 			$flux['data']['langue_choisie'] =  'oui';		 	
 			}
 		elseif(test_plugin_actif('tradrub')){
-			$lang=sql_getfetsel('lang','spip_rubriques','id_rubrique='._request('id_rubrique'));
-			$flux['data']['lang'] =  $lang;
+		    $id_rubrique=_request('id_parent')?_request('id_parent'):_request('id_rubrique');
+			$lang=sql_getfetsel('lang','spip_rubriques','id_rubrique='.$id_rubrique);
+			$flux['data']['lang'] = $lang;
 			$flux['data']['langue_choisie'] = 'non';	
 			}		
     	}
