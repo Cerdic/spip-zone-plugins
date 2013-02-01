@@ -22,7 +22,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function verifier_date_dist($valeur, $options=array(), &$valeur_normalisee=null){
 	$erreur = _T('verifier:erreur_date_format');
-	spip_log('Verif date','test');
 	$horaire = false; // par défaut on ne teste qu'une date
 	
 	// Si ce n'est ni une chaîne ni un tableau : pas le bon format
@@ -58,7 +57,6 @@ function verifier_date_dist($valeur, $options=array(), &$valeur_normalisee=null)
 		if(!preg_match('#^[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}$#',$valeur)) return $erreur;
 		list($mois,$jour,$annee) = explode('-',$valeur);
 	} elseif ($format=='amj') {
-		spip_log('verif date amj','test');
 		if(!preg_match('#^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}$#',$valeur)) return $erreur;
 		list($annee,$mois,$jour) = explode('-',$valeur);
 	} else {
