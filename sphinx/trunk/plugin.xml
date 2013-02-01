@@ -1,0 +1,32 @@
+<plugin>
+	<nom>
+	Sphinx - Moteur de recherche
+	</nom>
+	<auteur>
+	Fil
+	</auteur>
+	<licence>
+		&#169; 2013 - GNU/GPL
+	</licence>
+	<version>
+	0.0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Intégration du moteur de recherche SPHINX
+	</description>
+	<lien></lien>
+	<prefix>
+	sphinx
+	</prefix>
+	<lien>http://contrib.spip.net/Sphinx</lien>
+	<icon></icon>
+	<fonctions>inc/sphinx.php</fonctions>
+	<chemin dir='' />
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="fulltext" />
+	<necessite id="iterateurs" />
+</plugin>
