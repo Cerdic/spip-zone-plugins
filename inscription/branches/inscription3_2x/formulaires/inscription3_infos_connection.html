@@ -1,0 +1,26 @@
+[(#REM) Charge les informations minimale d'un auteur
+On teste la présence d'au moins un des champs pour l'afficher]
+
+[(#CONFIG{inscription3/login}|=={on}|ou{
+	[(#CONFIG{inscription3/pass}|=={on})]}|oui)
+	    [(#CONFIG{inscription3/login}|=={on}|oui)
+			[(#CONFIG{inscription3/login_obligatoire}|=={on}|oui)#SET{login_obligatoire,oui}]
+			[(#SAISIE{input,login,
+				obligatoire=#GET{login_obligatoire},
+				label=<:inscription3:label_login:>,
+				size=30})]
+		]
+
+		[(#CONFIG{inscription3/pass}|=={on}|oui)
+			<li class="editer_password[ (#CONFIG{inscription3/pass_obligatoire}|=={on}|?{obligatoire})][ (#ENV**{erreurs}|table_valeur{pass}|oui)erreur]">
+			    <label for="pass"><:inscription3:label_pass:></label>
+			    <input type="password" class="text" autocomplete="off" name="pass" id="pass" value="#ENV{pass}" size="30" />
+				<label for="password1"><:inscription3:label_password_retaper:></label>
+			    <input type="password" class="text" autocomplete="off" name="password1" id="password1" value="#ENV{password1}" size="30" />
+			    [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{pass})</p>]
+				[(#CONFIG{inscription3/password_complexite}|=={on}|oui)
+				#INCLURE{fond=formulaires/inc-js_pass_verification,env}
+				]
+			</li>
+		]
+	]

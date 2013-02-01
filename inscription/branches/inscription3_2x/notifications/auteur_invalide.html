@@ -1,0 +1,20 @@
+[(#REM)
+
+	Plugin Inscription3 pour SPIP
+ 	© 2007-2010 - cmtmt, BoOz, kent1
+	Licence GPL v3
+	
+	Squelette de notification envoyé à un auteur lorsqu'il est invalidé
+  
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<BOUCLE_aut(AUTEURS){id_auteur}{statut==5poubelle}{tout}>
+[(#VAL{inscription3:message_auteur_invalide_titre_user}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP}}|nettoyer_titre_email)]
+
+<:form_forum_message_auto:>
+	
+<:form_forum_bonjour{nom=#NOM}:>
+
+<:inscription3:message_auteur_invalide_contenu_user:>
+
+</BOUCLE_aut>
+#FILTRE{supprimer_tags|filtrer_entites|trim}

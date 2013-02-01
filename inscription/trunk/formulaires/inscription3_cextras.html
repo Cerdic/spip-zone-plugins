@@ -1,0 +1,32 @@
+[(#REM)
+
+	Affichage des champs extras dans le formulaire d'inscription
+	
+	Ils doivent être configurés dans la configuration d'Inscription3 
+	comme étant disponibles dans le formulaire
+	Si dans leur déclaration en base ils sont obligatoires mais pas configurés
+	dans inscription3 comme obligatoires, on enlève cette option temporairement
+	
+]#SET{saisies,#ARRAY}
+<B_objets>
+<BOUCLE_objets(DATA){si #PLUGIN{cextras}|oui}{source tableau,#VAL{spip_auteurs}|champs_extras_objet}>
+[(#CONFIG{inscription3/[(#VALEUR|table_valeur{options}|table_valeur{nom})]_nocreation}|=={on}|oui)
+	[(#REM)
+		On enlève l'option obligatoire si elle n'est pas dans la conf d'inscription3
+	]
+	#SET{valeur,#VALEUR}
+	[(#VALEUR|table_valeur{options}|table_valeur{obligatoire}|=={on}|oui)
+		[(#CONFIG{inscription3/[(#CLE)]_obligatoire_nocreation}|!={on}|oui)
+			#SET{options,#VALEUR|table_valeur{options}}
+			#SET{array,#ARRAY{options,#GET{options}|array_merge{#ARRAY{obligatoire,non}}}}
+			#SET{valeur,#VALEUR|array_merge{#GET{array}}}
+		]
+	]
+	#SET{saisies,#GET{saisies}|array_merge{#ARRAY{#CLE,#GET{valeur}}}}
+]
+</BOUCLE_objets>
+
+[(#GET{saisies}|foreach|table_valeur{0}|foreach)]
+<INCLURE{fond=inclure/generer_saisies, env, saisies=#GET{saisies}}>
+</B_objets>
+#FILTRE{trim}

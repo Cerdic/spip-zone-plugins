@@ -1,0 +1,47 @@
+[(#REM) Charge les informations minimale d'un auteur
+On teste la présence d'au moins un des champs pour l'afficher]
+
+[(#CONFIG{inscription3/nom_fiche_mod}|=={on}|ou{
+	[(#CONFIG{inscription3/login_fiche_mod}|=={on})]}|ou{
+		[(#CONFIG{inscription3/email_fiche_mod}|=={on})]}|ou{
+			[(#CONFIG{inscription3/pass_fiche_mod}|=={on})]}|oui)
+			<fieldset class="info_connection">
+				<legend>
+				    <:inscription3:legende_info_connection:>
+				</legend>
+
+				<ul>
+					[(#CONFIG{inscription3/nom_fiche_mod}|=={on}|oui)
+						[(#CONFIG{inscription3/nom_obligatoire}|=={on}|oui)#SET{nom_obligatoire,oui}]
+						[(#SAISIE{input,nom,
+							obligatoire=#GET{nom_obligatoire},
+							label=<:inscription3:label_nom:> (<:inscription3:nom_explication:>)})]
+					]
+
+				    [(#CONFIG{inscription3/login_fiche_mod}|=={on}|oui)
+						[(#CONFIG{inscription3/login_obligatoire}|=={on}|oui)#SET{login_obligatoire,oui}]
+						[(#SAISIE{input,login,
+							obligatoire=#GET{login_obligatoire},
+							label=<:inscription3:login:>})]
+					]
+
+					[(#CONFIG{inscription3/email_fiche_mod}|=={on}|oui)
+						[(#CONFIG{inscription3/email_obligatoire}|=={on}|oui)#SET{email_obligatoire,oui}]
+						[(#SAISIE{input,email,
+							obligatoire=#GET{email_obligatoire},
+							label=<:inscription3:email:>})]
+					]
+
+					[(#CONFIG{inscription3/pass_fiche_mod}|=={on}|oui)
+					<li class="editer_password[ (#CONFIG{inscription3/pass_obligatoire}|=={on}|?{obligatoire})][ (#ENV**{erreurs}|table_valeur{pass}|oui)erreur]">
+					    <label for="password"><:inscription3:pass:></label>
+					    <input type="password" class="text" autocomplete="off" name="password" id="password" value="#ENV{password}" />
+						<label for="password1"><:inscription3:password_retaper:></label>
+					    <input type="password" class="text" autocomplete="off" name="password1" id="password1" value="#ENV{password1}" />
+					    [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{pass})</p>]
+						[(#CONFIG{inscription3/password_complexite}|=={on}|oui)
+						#INCLURE{fond=formulaires/inc-js_pass_verification,env}
+						]
+					</li>]
+				</ul>
+			</fieldset>]

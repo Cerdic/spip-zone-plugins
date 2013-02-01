@@ -1,0 +1,55 @@
+#SET{test_objets,false}
+<BOUCLE_test_objets(DATA){si #PLUGIN{cextras}|oui}{source tableau,#VAL{spip_auteurs}|champs_extras_objet}>
+[(#VALEUR|table_valeur{source}|!={inscription3}|oui)
+#SET{test_objets,true}
+]
+</BOUCLE_test_objets>
+<B_objets>
+<li class="fieldset" id="cextras">
+	<fieldset>
+		<legend><:inscription3:legende_cextras:></legend>
+		<ul>
+			<li>
+				<p class="explication"><:inscription3:info_cextras_desc:></p>
+			</li>
+			<li>
+				<table class="inscription3">
+					<thead>
+						<tr>
+							<th class="label">&nbsp;</th>
+							<th><:inscription3:thead_form:> </th>
+							<th> </th>
+							<th> <:inscription3:thead_fiche:> </th>
+							<th class="i3_table"> <:inscription3:thead_table:> </th>
+							<th> <:inscription3:thead_obligatoire:></th>
+						</tr>
+					</thead>
+					<BOUCLE_objets(DATA){si #GET{test_objets}|=={true}|oui}{source tableau,#VAL{spip_auteurs}|champs_extras_objet}>
+					[(#VALEUR|table_valeur{source}|!={inscription3}|oui)
+					<tr>
+						<td class="label">
+							<label for="[(#VALEUR|table_valeur{options}|table_valeur{nom})]">[(#VALEUR|table_valeur{options}|table_valeur{label})]</label>
+						</td>
+						<td>
+							<input type="checkbox" name="[(#VALEUR|table_valeur{options}|table_valeur{nom})]_nocreation"[(#ENV{[(#VALEUR|table_valeur{options}|table_valeur{nom})]_nocreation}|=={on}|oui) checked="checked)"] id="[(#VALEUR|table_valeur{options}|table_valeur{nom})]_nocreaction" />
+						</td>
+						<td>
+							
+						</td>
+						<td>
+							<input type="checkbox" name="[(#VALEUR|table_valeur{options}|table_valeur{nom})]_fiche_nocreation"[(#ENV{[(#VALEUR|table_valeur{options}|table_valeur{nom})]_fiche_nocreation}|=={on}|oui)checked="checked"] id="[(#VALEUR|table_valeur{options}|table_valeur{nom})]_fiche" />
+						</td>
+						<td class="i3_table">
+							<input type="checkbox" name="[(#VALEUR|table_valeur{options}|table_valeur{nom})]_table_nocreation"[(#ENV{[(#VALEUR|table_valeur{options}|table_valeur{nom})]_table_nocreation}|=={on}|oui)checked="checked"] id="[(#VALEUR|table_valeur{options}|table_valeur{nom})]_table" />
+						</td>
+						<td>
+							<input type="checkbox" name="[(#VALEUR|table_valeur{options}|table_valeur{nom})]_obligatoire_nocreation"[(#ENV{[(#VALEUR|table_valeur{options}|table_valeur{nom})]_obligatoire_nocreation}|=={on}|oui)checked="checked"] id="[(#VALEUR|table_valeur{options}|table_valeur{nom})]_obligatoire" />
+						</td>
+					</tr>]
+					</BOUCLE_objets>
+				</table>
+			</li>
+		</ul>
+	</fieldset>
+</li>
+</B_objets>

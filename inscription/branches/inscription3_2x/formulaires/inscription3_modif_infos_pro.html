@@ -1,0 +1,100 @@
+[(#REM) Afficher les coordonnées profesionnelles
+On teste la présence d'au moins un des champs de coordonnées professionnelles pour l'afficher]
+
+[(#CONFIG{inscription3/profession_fiche_mod}|=={on}|ou{
+[(#CONFIG{inscription3/societe_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription3/secteur_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription3/fonction_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription3/adresse_pro_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription3/code_postal_pro_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription3/ville_pro_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription3/pays_pro_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription3/telephone_pro_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription3/mobile_pro_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription3/fax_pro_fiche_mod}|=={on})]}|oui)`
+<fieldset class="info_pro">
+    <legend>
+        <:inscription3:info_pro:>
+    </legend>
+    <ul>
+
+		[(#CONFIG{inscription3/profession_fiche_mod}|=={on}|oui)
+			[(#CONFIG{inscription3/profession_obligatoire}|=={on}|oui)#SET{profession_obligatoire,oui}]
+			[(#SAISIE{input,profession,
+				obligatoire=#GET{profession_obligatoire},
+				label=<:inscription3:profession:>})]
+		]
+
+		[(#CONFIG{inscription3/societe_fiche_mod}|=={on}|oui)
+			[(#CONFIG{inscription3/societe_obligatoire}|=={on}|oui)#SET{societe_obligatoire,oui}]
+			[(#SAISIE{input,societe,
+				obligatoire=#GET{societe_obligatoire},
+				label=<:inscription3:societe:>})]
+		]
+
+		[(#CONFIG{inscription3/secteur_fiche_mod}|=={on}|oui)
+			[(#CONFIG{inscription3/secteur_obligatoire}|=={on}|oui)#SET{secteur_obligatoire,oui}]
+			[(#SAISIE{input,secteur,
+				obligatoire=#GET{secteur_obligatoire},
+				label=<:inscription3:secteur:>})]
+		]
+
+		[(#CONFIG{inscription3/fonction_fiche_mod}|=={on}|oui)
+			[(#CONFIG{inscription3/fonction_obligatoire}|=={on}|oui)#SET{fonction_obligatoire,oui}]
+			[(#SAISIE{input,fonction,
+				obligatoire=#GET{fonction_obligatoire},
+				label=<:inscription3:fonction:>})]
+		]
+
+		[(#CONFIG{inscription3/adresse_pro_fiche_mod}|=={on}|oui)
+			[(#CONFIG{inscription3/adresse_pro_obligatoire}|=={on}|oui)#SET{adresse_pro_obligatoire,oui}]
+			[(#SAISIE{textarea,adresse_pro,
+				rows=5,
+				obligatoire=#GET{adresse_pro_obligatoire},
+				label=<:inscription3:adresse_pro:>})]
+		]
+
+		[(#CONFIG{inscription3/code_postal_pro_fiche_mod}|=={on}|oui)
+			[(#CONFIG{inscription3/code_postal_pro_obligatoire}|=={on}|oui)#SET{code_postal_pro_obligatoire,oui}]
+			[(#SAISIE{input,code_postal_pro,
+				obligatoire=#GET{code_postal_pro_obligatoire},
+				label=<:inscription3:code_postal_pro:>})]
+		]
+
+		[(#CONFIG{inscription3/ville_pro_fiche_mod}|=={on}|oui)
+			[(#CONFIG{inscription3/ville_pro_obligatoire}|=={on}|oui)#SET{ville_pro_obligatoire,oui}]
+			[(#SAISIE{input,ville_pro,
+				obligatoire=#GET{ville_pro_obligatoire},
+				label=<:inscription3:ville_pro:>})]
+		]
+
+        [(#CONFIG{inscription3/pays_pro_fiche_mod}|=={on}|oui)
+			[(#CONFIG{inscription3/pays_pro_obligatoire}|=={on}|oui)#SET{pays_pro_obligatoire,oui}]
+			[(#SAISIE{pays,pays_pro,
+				label=<:inscription3:pays:>,
+				option_intro=-,
+				obligatoire=#GET{pays_pro_obligatoire}})]
+		]
+
+		[(#CONFIG{inscription3/telephone_pro_fiche_mod}|=={on}|oui)
+			[(#CONFIG{inscription3/telephone_pro_obligatoire}|=={on}|oui)#SET{telephone_pro_obligatoire,oui}]
+			[(#SAISIE{input,telephone_pro,
+				obligatoire=#GET{telephone_pro_obligatoire},
+				label=<:inscription3:telephone_pro:>})]
+		]
+
+		[(#CONFIG{inscription3/mobile_pro_fiche_mod}|=={on}|oui)
+			[(#CONFIG{inscription3/mobile_pro_obligatoire}|=={on}|oui)#SET{mobile_pro_obligatoire,oui}]
+			[(#SAISIE{input,mobile_pro,
+				obligatoire=#GET{mobile_pro_obligatoire},
+				label=<:inscription3:mobile_pro:>})]
+		]
+
+		[(#CONFIG{inscription3/fax_pro_fiche_mod}|=={on}|oui)
+			[(#CONFIG{inscription3/fax_pro_obligatoire}|=={on}|oui)#SET{fax_pro_obligatoire,oui}]
+			[(#SAISIE{input,fax_pro,
+				obligatoire=#GET{fax_pro_obligatoire},
+				label=<:inscription3:fax_pro:>})]
+		]
+	</ul>
+</fieldset>]

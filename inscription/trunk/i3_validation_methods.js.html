@@ -1,0 +1,51 @@
+[(#REM)
+	Règles de validation pour les crayons
+	Nécessite la librairie jquery-validate
+	
+	http://bassistance.de/jquery-plugins/jquery-plugin-validation/
+]
+#HTTP_HEADER{'Content-Type: text/javascript'}
+
+jQuery.validator.addMethod("chainenombre", function(value, element) {
+ 	return this.optional(element) || /^[A-Za-z0-9\-\'\.ßÂâÄäÁÀàËëÈèÊêÉéÏïÎîÌìÍÒòÓÔôÖöÙùÜüÛû‡,˚ ]+$/.test(value);
+},"<:inscription3:erreur_chaine_valide:> <:inscription3:erreur_chainenombre:>");
+
+jQuery.validator.addMethod("chaine", function(value, element) {
+	return this.optional(element) || /^[A-Za-z\-\'\.ßÂâÄäÁÀàËëÈèÊêÉéÏïÎîÌìÍÒòÓÔôÖöÙùÜüÛû‡,˚ ]+$/.test(value);
+},"<:inscription3:erreur_chaine_valide:> <:inscription3:erreur_chainelettre:>");
+
+jQuery.validator.addMethod("postal", function(value, element) {
+	return this.optional(element) || /^[A-Z]{1,2}[-|\s][0-9]{3,6}$|^[0-9]{3,6}$|^[0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}$|^[A-Z]{1,2} [0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}$/.test(value);
+},"<:inscription3:erreur_cp_valide:>");
+
+jQuery.validator.addMethod("numero", function(value, element) {
+	return this.optional(element) || /^[0-9\+\. \-]+$/.test(value);
+},"<:inscription3:erreur_numero_valide:>");
+
+jQuery.validator.addClassRules("obligatoire", {
+	required: true
+});
+
+jQuery.validator.addClassRules("adresse", {
+	chainenombre: true,
+	rangelength:[5,1000]
+});
+
+jQuery.validator.addClassRules("cp", {
+	postal: true,
+	rangelength:[3,20]
+});
+
+jQuery.validator.addClassRules("ville", {
+	chaine: true,
+	rangelength:[2,30]
+});
+
+jQuery.validator.addClassRules("numero", {
+	numero: true,
+	rangelength:[6,20]
+});
+
+jQuery.extend(jQuery.validator.messages, {
+	required: "<:inscription3:erreur_champ_obligatoire:>"
+});

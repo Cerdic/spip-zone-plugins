@@ -1,0 +1,21 @@
+<script src="#CHEMIN{javascript/jquery.password_strength.js}" type='text/javascript'></script>
+<style type="text/css">
+[(#INCLURE{css/password_strength.css}|compacte{css})]
+</style>
+<script type='text/javascript'>
+(function($) {
+	var verif_pass = function(){
+		$('span.password_strength').detach();
+		$('input[#(#ENV{password,pass})]').password_strength({
+			'texts' : {
+				1 : '<:inscription3:info_pass_tres_faible|html2unicode|unicode2charset:>',
+				2 : '<:inscription3:info_pass_faible|html2unicode|unicode2charset:>',
+				3 : '<:inscription3:info_pass_moyen|html2unicode|unicode2charset:>',
+				4 : '<:inscription3:info_pass_fort|html2unicode|unicode2charset:>',
+				5 : '<:inscription3:info_pass_tres_fort|html2unicode|unicode2charset:>'
+			}
+		});
+	}
+	verif_pass();
+	onAjaxLoad(verif_pass);
+})(jQuery);</script>

@@ -1,0 +1,16 @@
+<li>
+	<label for="case"><:inscription3:recherche_case:></label>
+	<select name="case" id="case">
+		<BOUCLE_recherchefields(POUR){tableau #CONFIG{inscription3}}{valeur = 'on'}>
+		[(#CLE|match{_table}|oui)
+			[(#SET{cle,[(#CLE|replace{'_table',''})]})]
+			[(#GET{cle}|=={#ENV{case}}|oui)
+				<option value='#GET{cle}' selected="selected">[(#VAL{inscription3:label_}|concat{#GET{cle}}|_T)]</option>
+			]
+			[(#GET{cle}|=={#ENV{case}}|non)
+				<option value='#GET{cle}'>[(#VAL{inscription3:label_}|concat{#GET{cle}}|_T)]</option>
+			]
+		]
+		</BOUCLE_recherchefields>
+	</select>
+</li>

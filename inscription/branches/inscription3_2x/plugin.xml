@@ -1,0 +1,143 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]Inscription 3
+			[en]Subscription 3
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+			[fr]&#201;tendre les informations sur les auteurs
+			[en]Add information on authors
+		</multi>
+	</slogan>
+	<auteur>
+		cmtmt2003, [kent1->http://www.kent1.info], BoOz and co
+	</auteur>
+	<licence>
+		&#169; 2007-2012 GNU/GPL v3
+	</licence>
+	<version>3.0.15</version>
+	<version_base>3.0.2</version_base>
+	<etat>test</etat>
+	<description>
+		<multi>
+			[fr] Plugin permettant d'avoir une gestion plus fine des comptes utilisateurs,
+lors de leur inscription et de la modification de leur profil.
+			[en]Plugin to get a finer management of user accounts,
+when registering and changing their profile.
+		</multi>
+	</description>
+	<icon>images/inscription3-64.png</icon>
+	<lien>http://www.mediaspip.net/spip.php?rubrique87</lien>
+	<prefix>inscription3</prefix>
+	<install>base/inscription3_installer.php</install>
+	<options>
+		inscription3_mes_options.php
+	</options>
+	<fonctions>
+		inscription3_mes_fonctions.php
+	</fonctions>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/inscription3.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/inscription3.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/inscription3.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_champs_extras</nom>
+		<inclure>base/inscription3.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>i3_exceptions_des_champs_auteurs_elargis</nom>
+		<inclure>inscription3_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>i3_verifications_specifiques</nom>
+		<inclure>inscription3_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>i3_definition_champs</nom>
+		<inclure>inscription3_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inscription3_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>inscription3_pipelines.php</inclure>
+	</pipeline>
+	<bouton id='inscription3_adherents' parent='auteurs'>
+	    <icone>images/fiche-perso.png</icone>
+	    <titre>inscription3:icone_afficher_utilisateurs</titre>
+	</bouton>
+	<bouton id='inscription3_adherents2' parent='bando_reactions'>
+		<icone>images/inscription2-16.png</icone>
+		<titre>inscription3:icone_afficher_utilisateurs</titre>
+		<url>inscription3_adherents</url>
+	</bouton>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouter_boutons</action>
+		<inclure>inscription3_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>inscription3_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>recuperer_fond</nom>
+		<inclure>inscription3_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>inscription3_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>inscription3_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>inscription3_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>inscription3_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>notifications_destinataires</nom>
+		<inclure>inscription3_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>inscription3_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>openid_recuperer_identite</nom>
+		<inclure>inscription3_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>openid_inscrire_redirect</nom>
+		<inclure>inscription3_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version='[2.1.2;2.1.99]' />
+	<necessite id="cfg" version="[1.14;]" />
+	<necessite id='spip_bonux' version='[1.8.2;]' />
+	<necessite id='saisies' version='[1.8.5;]' />
+	<necessite id='cextras' version='[1.4.3;]' />
+	<necessite id='verifier' version='[0.1.13;]' />
+	<necessite id="lib:jquery-validation-1.9.0" src="https://github.com/downloads/jzaefferer/jquery-validation/jquery-validation-1.9.0.zip" />
+	<utilise id="Z" />
+	<utilise id="mediabox" />
+	<utilise id="pages" />
+	<utilise id='notifications' />
+	<categorie>auteur</categorie>
+</plugin>

@@ -1,0 +1,82 @@
+#CACHE{0}
+[(#ENV{desc}|=={'-1'}|?{[(#SET{desc,1})],[(#SET{desc,-1})]})]
+[(#ENV{desc}|=={'-1'}|?{[(#SET{class_desc,asc})],[(#SET{class_desc,desc})]})]
+<input type="hidden" name="ordre" value="#ENV{ordre}" />
+<input type="hidden" name="desc" value="#ENV{desc}" />
+
+<B_auteurs>
+	<div>
+	#ANCRE_PAGINATION
+	<div style="overflow:auto;">
+	<table class="spip">
+	<thead>
+		<tr>
+			<th>
+				&nbsp;
+			</th>
+			<th class="[(#ENV{ordre}|=={id_auteur}|?{[on (#GET{class_desc})],'both'})]">
+				<a href="[(#SELF|parametre_url{'ordre','id_auteur'}|parametre_url{'desc',#GET{desc}})]" class="ajax" onclick="jQuery(this).parent('form').submit()">
+					<img src="#CHEMIN{images/admin-12.gif}" alt="admin" />
+				</a>
+			</th>
+			<BOUCLE_champshead(DATA){source table,#CONFIG{inscription3}}{valeur = 'on'}>
+			[(#CLE|match{_table}|oui)
+			<th class="[(#ENV{ordre}|=={[(#CLE|replace{'_table',''})]}|?{[on (#GET{class_desc})],'both'})]">
+				<a href="[(#SELF|parametre_url{'ordre',[(#CLE|replace{'_table',''})]}|parametre_url{'desc',#GET{desc}})]" class="ajax" onclick="jQuery(this).parent('form').submit()">
+					[(#VAL{inscription3:}|concat{[(#CLE|replace{'_table',''})]}|_T)]
+				</a>
+			</th>
+			]
+			</BOUCLE_champshead>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_auteurs(AUTEURS){i3_recherche}{tri #ENV{ordre,id_auteur},#ENV{desc,-1}}{pagination 20}{tout}>
+
+	[(#STATUT|=={0minirezo}|oui)
+		#SET{url_logo,#CHEMIN{images/admin-12.gif}}
+		[(#SET{supprimable,[<img src="(#CHEMIN{images/interdit-12.gif})" alt="<:inscription3:supprimer_adherent:>" />]})]
+	]
+	[(#STATUT|=={1comite}|oui)
+		#SET{url_logo,#CHEMIN{images/redac-12.gif}}
+		[(#SET{supprimable,[<img src="(#CHEMIN{images/interdit-12.gif})" alt="<:inscription3:supprimer_adherent:>" />]})]
+	]
+	[(#STATUT|=={6forum}|oui)
+		#SET{url_logo,#CHEMIN{images/adherent-12.gif}}
+		[(#SET{supprimable,[<a href="[(#URL_ECRIRE{inscription3_adherents,id=#ID_AUTEUR&act=sup})]" class="confirm"><img src="(#CHEMIN{images/poubelle-12.gif})" alt="<:inscription3:supprimer_adherent:>" /></a>]})]
+	]
+	[(#STATUT|=={aconfirmer}|oui)
+		#SET{url_logo,#CHEMIN{images/aconf-12.gif}}
+		[(#SET{supprimable,[<a href="[(#URL_ECRIRE{inscription3_adherents,id=#ID_AUTEUR&act=sup})]" class="confirm"><img src="(#CHEMIN{images/poubelle-12.gif})" alt="<:inscription3:supprimer_adherent:>" /></a>]})]
+	]
+	[(#GET{url_logo}|non)
+		#SET{url_logo,#CHEMIN{images/defaut-12.gif}}
+		[(#SET{supprimable,[<a href="[(#URL_ECRIRE{inscription3_adherents,id=#ID_AUTEUR&act=sup})]" class="confirm"><img src="(#CHEMIN{images/poubelle-12.gif})" alt="<:inscription3:supprimer_adherent:>" /></a>]})]
+	]
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{'row_even','row_odd'})][(#ENV{erreurs}|table_valeur{check_aut#ID_AUTEUR}|oui) erreur]">
+		<td>
+			<input type="checkbox" name="check_aut[]" value="#ID_AUTEUR" />
+		</td>
+		<td>
+			<a href="#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}">
+				<img src='#GET{url_logo}' alt="<:inscription3:fiche_adherent:>" />
+			</a>
+		</td>
+		<BOUCLE_champscorps(DATA){source table,#CONFIG{inscription3}}{valeur = 'on'}>
+			[(#CLE|match{_table}|oui)
+			<td[ class="(#_auteurs:EDIT{[(#CLE|replace{'_table',''})]})"]>
+				[(#CLE|replace{'_table',''}|inscription3_recuperer_champs{#_auteurs:ID_AUTEUR})]
+			</td>]
+		</BOUCLE_champscorps>
+	</tr>
+	</BOUCLE_auteurs>
+	</tbody>
+	</table>
+	</div>
+	[<div class="pagination">
+		(#PAGINATION{prive})
+	</div>]
+	</div>
+</B_auteurs>
+<p class="reponse_formulaire reponse_formulaire_erreur"><:inscription3:aucun_resultat_recherche:></p>
+<//B_auteurs>

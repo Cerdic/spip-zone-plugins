@@ -1,0 +1,405 @@
+<li class="fieldset" id="perso">
+	<fieldset>
+		<legend><:inscription3:legende_info_perso:></legend>
+		<ul>
+			<li>
+				<p class="explication"><:inscription3:info_perso_desc:></p>
+			</li>
+			<li>
+				<table class="inscription3">
+					<thead>
+						<tr>
+							<th class="label">&nbsp;</th>
+							<th><:inscription3:thead_form:> </th>
+							<th> <:inscription3:thead_fiche_mod:> </th>
+							<th> <:inscription3:thead_fiche:> </th>
+							<th class="i3_table"> <:inscription3:thead_table:> </th>
+							<th> <:inscription3:thead_obligatoire:></th>
+						</tr>
+					</thead>
+					<tr>
+						<td class="label">
+							<label for="sexe"><:inscription3:label_sexe:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="sexe"[ checked="(#CONFIG{inscription3/sexe}?{checked})"] id="sexe" />
+						</td>
+						<td>
+							<input type="checkbox" name="sexe_fiche_mod"[ checked="(#CONFIG{inscription3/sexe_fiche_mod}?{checked})"] id="sexe_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="sexe_fiche"[ checked="(#CONFIG{inscription3/sexe_fiche}?{checked})"] id="sexe_fiche" />
+						</td>
+						<td class="i3_table">
+							<input type="checkbox" name="sexe_table"[ checked="(#CONFIG{inscription3/sexe_table}?{checked})"] id="sexe_table" />
+						</td>
+						<td>
+							<input type="checkbox" name="sexe_obligatoire"[ checked="(#CONFIG{inscription3/sexe_obligatoire}?{checked})"] id="sexe_obligatoire" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="nom_famille"><:inscription3:label_nom_famille:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="nom_famille"[ checked="(#CONFIG{inscription3/nom_famille}?{checked})"] id="nom_famille" />
+						</td>
+						<td>
+							<input type="checkbox" name="nom_famille_fiche_mod"[ checked="(#CONFIG{inscription3/nom_famille_fiche_mod}?{checked})"] id="nom_famille_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="nom_famille_fiche"[ checked="(#CONFIG{inscription3/nom_famille_fiche}|?{checked})"] id="nom_famille_fiche" />
+						</td>
+						<td class="i3_table">
+							<input type="checkbox" name="nom_famille_table"[ checked="(#CONFIG{inscription3/nom_famille_table}?{checked})"] id="nom_famille_table" />
+						</td>
+						<td>
+							<input type="checkbox" name="nom_famille_obligatoire"[ checked="(#CONFIG{inscription3/nom_famille_obligatoire}?{checked})"] id="nom_famille_obligatoire" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="prenom"><:inscription3:label_prenom:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="prenom"[ checked="(#CONFIG{inscription3/prenom}?{checked})"] id="prenom" />
+						</td>
+						<td>
+							<input type="checkbox" name="prenom_fiche_mod"[ checked="(#CONFIG{inscription3/prenom_fiche_mod}?{checked})"] id="prenom_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="prenom_fiche"[ checked="(#CONFIG{inscription3/prenom_fiche}?{checked})"] id="prenom_fiche" />
+						</td>
+						<td class="i3_table">
+							<input type="checkbox" name="prenom_table"[ checked="(#CONFIG{inscription3/prenom_table}?{checked})"] id="prenom_table" />
+						</td>
+						<td>
+							<input type="checkbox" name="prenom_obligatoire"[ checked="(#CONFIG{inscription3/prenom_obligatoire}?{checked})"] id="prenom_obligatoire" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="logo"><:inscription3:label_logo_auteur:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="logo"[ checked="(#CONFIG{inscription3/logo}?{checked})"] id="logo" />
+						</td>
+						<td>
+							<input type="checkbox" name="logo_fiche_mod"[ checked="(#CONFIG{inscription3/logo_fiche_mod}?{checked})"] id="logo_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="logo_fiche"[ checked="(#CONFIG{inscription3/logo_fiche}?{checked})"] id="logo_fiche" />
+						</td>
+						<td class="i3_table"></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="surnom"><:inscription3:label_surnom:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="surnom"[ checked="(#CONFIG{inscription3/surnom}?{checked})"] id="surnom" />
+						</td>
+						<td>
+							<input type="checkbox" name="surnom_fiche_mod"[ checked="(#CONFIG{inscription3/surnom_fiche_mod}?{checked})"] id="surnom_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="surnom_fiche"[ checked="(#CONFIG{inscription3/surnom_fiche}?{checked})"] id="surnom_fiche" />
+						</td>
+						<td class="i3_table">
+							<input type="checkbox" name="surnom_table"[ checked="(#CONFIG{inscription3/surnom_table}?{checked})"] id="surnom_table" />
+						</td>
+						<td>
+							<input type="checkbox" name="surnom_obligatoire"[ checked="(#CONFIG{inscription3/surnom_obligatoire}?{checked})"] id="surnom_obligatoire" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="login"><:inscription3:label_login:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="login"[ checked="(#CONFIG{inscription3/login}?{checked})"] id="login" />
+						</td>
+						<td>
+							<input type="checkbox" name="login_fiche_mod"[ checked="(#CONFIG{inscription3/login_fiche_mod}?{checked})"] id="login_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="login_fiche"[ checked="(#CONFIG{inscription3/login_fiche}?{checked})"] id="login_fiche" />
+						</td>
+						<td class="i3_table">
+							<input type="checkbox" name="login_table"[ checked="(#CONFIG{inscription3/login_table}?{checked})"] id="login_table" />
+						</td>
+						<td>
+							<input type="checkbox" name="login_obligatoire"[ checked="(#CONFIG{inscription3/login_obligatoire}?{checked})"] id="login_obligatoire" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="naissance"><:inscription3:label_naissance:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="naissance"[ checked="(#CONFIG{inscription3/naissance}?{checked})"] id="naissance" />
+						</td>
+						<td>
+							<input type="checkbox" name="naissance_fiche_mod"[ checked="(#CONFIG{inscription3/naissance_fiche_mod}?{checked})"] id="naissance_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="naissance_fiche"[ checked="(#CONFIG{inscription3/naissance_fiche}?{checked})"] id="naissance_fiche" />
+						</td>
+						<td class="i3_table">
+							<input type="checkbox" name="naissance_table"[ checked="(#CONFIG{inscription3/naissance_table}?{checked})"] id="naissance_table" />
+						</td>
+						<td>
+							<input type="checkbox" name="naissance_obligatoire"[ checked="(#CONFIG{inscription3/naissance_obligatoire}?{checked})"] id="naissance_obligatoire" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="bio"><:inscription3:label_bio:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="bio"[ checked="(#CONFIG{inscription3/bio}?{checked})"] id="bio" />
+						</td>
+						<td>
+							<input type="checkbox" name="bio_fiche_mod"[ checked="(#CONFIG{inscription3/bio_fiche_mod}?{checked})"] id="bio_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="bio_fiche"[ checked="(#CONFIG{inscription3/bio_fiche}?{checked})"] id="bio_fiche" />
+						</td>
+						<td class="i3_table">
+							<input type="checkbox" name="bio_table"[ checked="(#CONFIG{inscription3/bio_table}?{checked})"] id="bio_table" />
+						</td>
+						<td>
+							<input type="checkbox" name="bio_obligatoire"[ checked="(#CONFIG{inscription3/bio_obligatoire}?{checked})"] id="bio_obligatoire" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="nom_site"><:inscription3:label_nom_site:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="nom_site"[ checked="(#CONFIG{inscription3/nom_site}?{checked})"] id="nom_site" />
+						</td>
+						<td>
+							<input type="checkbox" name="nom_site_fiche_mod"[ checked="(#CONFIG{inscription3/nom_site_fiche_mod}?{checked})"] id="nom_site_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="nom_site_fiche"[ checked="(#CONFIG{inscription3/nom_site_fiche}?{checked})"] id="nom_site_fiche" />
+						</td>
+						<td class="i3_table">
+							<input type="checkbox" name="nom_site_table"[ checked="(#CONFIG{inscription3/nom_site_table}?{checked})"] id="nom_site_table" />
+						</td>
+						<td>
+							<input type="checkbox" name="nom_site_obligatoire"[ checked="(#CONFIG{inscription3/nom_site_obligatoire}?{checked})"] id="nom_site_obligatoire" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="url_site"><:inscription3:label_url_site:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="url_site"[ checked="(#CONFIG{inscription3/url_site}?{checked})"] id="url_site" />
+						</td>
+						<td>
+							<input type="checkbox" name="url_site_fiche_mod"[ checked="(#CONFIG{inscription3/url_site_fiche_mod}?{checked})"] id="url_site_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="url_site_fiche"[ checked="(#CONFIG{inscription3/url_site_fiche}?{checked})"] id="url_site_fiche" />
+						</td>
+						<td class="i3_table">
+							<input type="checkbox" name="url_site_table"[ checked="(#CONFIG{inscription3/url_site_table}?{checked})"] id="url_site_table" />
+						</td>
+						<td>
+							<input type="checkbox" name="url_site_obligatoire"[ checked="(#CONFIG{inscription3/url_site_obligatoire}?{checked})"] id="url_site_obligatoire" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="pgp"><:inscription3:label_pgp:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="pgp"[ checked="(#CONFIG{inscription3/pgp}?{checked})"] id="pgp" />
+						</td>
+						<td>
+							<input type="checkbox" name="pgp_fiche_mod"[ checked="(#CONFIG{inscription3/pgp_fiche_mod}?{checked})"] id="pgp_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="pgp_fiche"[ checked="(#CONFIG{inscription3/pgp_fiche}?{checked})"] id="pgp_fiche" />
+						</td>
+						<td class="i3_table">
+							<input type="checkbox" name="pgp_table"[ checked="(#CONFIG{inscription3/pgp_table}?{checked})"] id="pgp_table" />
+						</td>
+						<td>
+							<input type="checkbox" name="pgp_obligatoire"[ checked="(#CONFIG{inscription3/pgp_obligatoire}?{checked})"] id="pgp_obligatoire" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="adresse"><:inscription3:label_adresse:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="adresse"[ checked="(#CONFIG{inscription3/adresse}?{checked})"] id="adresse" />
+						</td>
+						<td>
+							<input type="checkbox" name="adresse_fiche_mod"[ checked="(#CONFIG{inscription3/adresse_fiche_mod}?{checked})"] id="adresse_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="adresse_fiche"[ checked="(#CONFIG{inscription3/adresse_fiche}?{checked})"] id="adresse_fiche" />
+						</td>
+						<td class="i3_table">
+							<input type="checkbox" name="adresse_table"[ checked="(#CONFIG{inscription3/adresse_table}?{checked})"] id="adresse_table" />
+						</td>
+						<td>
+							<input type="checkbox" name="adresse_obligatoire"[ checked="(#CONFIG{inscription3/adresse_obligatoire}?{checked})"] id="adresse_obligatoire" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="code_postal"><:inscription3:label_code_postal:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="code_postal"[ checked="(#CONFIG{inscription3/code_postal}?{checked})"] id="code_postal" />
+						</td>
+						<td>
+							<input type="checkbox" name="code_postal_fiche_mod"[ checked="(#CONFIG{inscription3/code_postal_fiche_mod}?{checked})"] id="code_postal_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="code_postal_fiche"[ checked="(#CONFIG{inscription3/code_postal_fiche}?{checked})"] id="code_postal_fiche" />
+						</td>
+						<td class="i3_table">
+							<input type="checkbox" name="code_postal_table"[ checked="(#CONFIG{inscription3/code_postal_table}?{checked})"] id="code_postal_table" />
+						</td>
+						<td>
+							<input type="checkbox" name="code_postal_obligatoire"[ checked="(#CONFIG{inscription3/code_postal_obligatoire}?{checked})"] id="code_postal_obligatoire" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="ville"><:inscription3:label_ville:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="ville"[ checked="(#CONFIG{inscription3/ville}?{checked})"] id="ville" />
+						</td>
+						<td>
+							<input type="checkbox" name="ville_fiche_mod"[ checked="(#CONFIG{inscription3/ville_fiche_mod}?{checked})"] id="ville_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="ville_fiche"[ checked="(#CONFIG{inscription3/ville_fiche}?{checked})"] id="ville_fiche" />
+						</td>
+						<td class="i3_table">
+							<input type="checkbox" name="ville_table"[ checked="(#CONFIG{inscription3/ville_table}?{checked})"] id="ville_table" />
+						</td>
+						<td>
+							<input type="checkbox" name="ville_obligatoire"[ checked="(#CONFIG{inscription3/ville_obligatoire}?{checked})"] id="ville_obligatoire" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="pays"><:inscription3:label_pays:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="pays"[ checked="(#CONFIG{inscription3/pays}?{checked})"] id="pays" />
+						</td>
+						<td>
+							<input type="checkbox" name="pays_fiche_mod"[ checked="(#CONFIG{inscription3/pays_fiche_mod}?{checked})"] id="pays_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="pays_fiche"[ checked="(#CONFIG{inscription3/pays_fiche}?{checked})"] id="pays_fiche" />
+						</td>
+						<td class="i3_table">
+							<input type="checkbox" name="pays_table"[ checked="(#CONFIG{inscription3/pays_table}?{checked})"] id="pays_table" />
+						</td>
+						<td>
+							<input type="checkbox" name="pays_obligatoire"[ checked="(#CONFIG{inscription3/pays_obligatoire}?{checked})"] id="pays_obligatoire" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="telephone"><:inscription3:label_telephone:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="telephone"[ checked="(#CONFIG{inscription3/telephone}?{checked})"] id="telephone" />
+						</td>
+						<td>
+							<input type="checkbox" name="telephone_fiche_mod"[ checked="(#CONFIG{inscription3/telephone_fiche_mod}?{checked})"] id="telephone_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="telephone_fiche"[ checked="(#CONFIG{inscription3/telephone_fiche}?{checked})"] id="telephone_fiche" />
+						</td>
+						<td class="i3_table">
+							<input type="checkbox" name="telephone_table"[ checked="(#CONFIG{inscription3/telephone_table}?{checked})"] id="telephone_table" />
+						</td>
+						<td>
+							<input type="checkbox" name="telephone_obligatoire"[ checked="(#CONFIG{inscription3/telephone_obligatoire}?{checked})"] id="telephone_obligatoire" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="fax"><:inscription3:label_fax:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="fax"[ checked="(#CONFIG{inscription3/fax}?{checked})"] id="fax" />
+						</td>
+						<td>
+							<input type="checkbox" name="fax_fiche_mod"[ checked="(#CONFIG{inscription3/fax_fiche_mod}?{checked})"] id="fax_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="fax_fiche"[ checked="(#CONFIG{inscription3/fax_fiche}?{checked})"] id="fax_fiche" />
+						</td>
+						<td class="i3_table">
+							<input type="checkbox" name="fax_table"[ checked="(#CONFIG{inscription3/fax_table}?{checked})"] id="fax_table" />
+						</td>
+						<td>
+							<input type="checkbox" name="fax_obligatoire"[ checked="(#CONFIG{inscription3/fax_obligatoire}?{checked})"] id="fax_obligatoire" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="mobile"><:inscription3:label_mobile:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mobile"[ checked="(#CONFIG{inscription3/mobile}?{checked})"] id="mobile" />
+						</td>
+						<td>
+							<input type="checkbox" name="mobile_fiche_mod"[ checked="(#CONFIG{inscription3/mobile_fiche_mod}?{checked})"] id="mobile_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="mobile_fiche"[ checked="(#CONFIG{inscription3/mobile_fiche}?{checked})"] id="mobile_fiche" />
+						</td>
+						<td class="i3_table">
+							<input type="checkbox" name="mobile_table"[ checked="(#CONFIG{inscription3/mobile_table}?{checked})"] id="mobile_table" />
+						</td>
+						<td>
+							<input type="checkbox" name="mobile_obligatoire"[ checked="(#CONFIG{inscription3/mobile_obligatoire}?{checked})"] id="mobile_obligatoire" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="commentaire"><:inscription3:label_commentaire:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="commentaire"[ checked="(#CONFIG{inscription3/commentaire}?{checked})"] id="commentaire" />
+						</td>
+						<td>
+							<input type="checkbox" name="commentaire_fiche_mod"[ checked="(#CONFIG{inscription3/commentaire_fiche_mod}?{checked})"] id="commentaire_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="commentaire_fiche"[ checked="(#CONFIG{inscription3/commentaire_fiche}?{checked})"] id="commentaire_fiche" />
+						</td>
+						<td class="i3_table">
+							<input type="checkbox" name="commentaire_table"[ checked="(#CONFIG{inscription3/commentaire_table}?{checked})"] id="commentaire_table" />
+						</td>
+						<td>
+							<input type="checkbox" name="commentaire_obligatoire"[ checked="(#CONFIG{inscription3/commentaire_obligatoire}?{checked})"] id="commentaire_obligatoire" />
+						</td>
+					</tr>
+				</table>
+			</li>
+			[(#SAISIE{pays,pays_defaut,
+				label=<:inscription3:label_pays_defaut:>,
+				option_intro=-,
+				class=select_defaut,
+				valeur=[(#CONFIG{inscription3/pays_defaut})]})]
+		</ul>
+	</fieldset>
+</li>

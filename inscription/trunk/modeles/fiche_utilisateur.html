@@ -1,0 +1,89 @@
+<BOUCLE_auteur(AUTEURS){id_auteur=#ENV{id}}{tout}>
+	#SET{conf_i3,#CONFIG{inscription3}}
+	
+	[(#NOM_FAMILLE|et{#GET{conf_i3}|table_valeur{nom_famille_fiche}|=={on}}|?{#SET{fullname,ok},' '})
+		[(#PRENOM|et{#GET{conf_i3}|table_valeur{prenom_fiche}|=={on}}|?{#SET{fullname,ok},#SET{fullname,pasok}})]]
+	
+	[(#GET{fullname}|=={'ok'}|oui)<p>
+	<span class="fn">]
+		[<span class="given-name #EDIT{prenom}">(#PRENOM|et{#GET{conf_i3}|table_valeur{prenom_fiche}|=={on}}|?{#PRENOM})</span>][ <span class="family-name widget #EDIT{nom_famille}" >(#NOM_FAMILLE|et{#GET{conf_i3}|table_valeur{nom_famille_fiche}|=={on}}|?{#NOM_FAMILLE})</span>]
+	[(#GET{fullname}|=={'ok'}|oui)</span>
+	<p>]
+	
+	[(#REM) Un test pour voir si on a au moins un champs d'adresse]
+	[(#ADRESSE|et{#GET{conf_i3}|table_valeur{adresse_fiche}|=={on}}|?{#SET{adresse,ok},' '})
+		[(#CODE_POSTAL|et{#GET{conf_i3}|table_valeur{code_postal_fiche}|=={on}}|?{#SET{adresse,ok},' '})
+		[(#VILLE|et{#GET{conf_i3}|table_valeur{ville_fiche}|=={on}}|?{#SET{adresse,ok},' '})
+		[(#PAYS|et{#GET{conf_i3}|table_valeur{pays_fiche}|=={on}}|?{#SET{adresse,ok},#SET{adresse,pasok}})]
+	]]]
+	[(#GET{adresse}|=={'ok'}|oui)<p>
+		<span class="adr">]
+			[<span class="street-address #EDIT{adresse}">(#ADRESSE|et{#GET{conf_i3}|table_valeur{adresse_fiche}|=={on}}|?{[(#ADRESSE|nl2br)]})</span><br />]
+			[<span class="postal-code #EDIT{code_postal}">(#CODE_POSTAL|et{#GET{conf_i3}|table_valeur{code_postal_fiche}|=={on}}|?{#CODE_POSTAL})</span>]
+			[<span class="locality #EDIT{ville}">(#VILLE|et{#GET{conf_i3}|table_valeur{ville_fiche}|=={on}}|?{#VILLE})</span><br />]
+			[<span class="country-name #EDIT{pays}">
+				(#PAYS|et{#GET{conf_i3}|table_valeur{pays_fiche}|=={on}}|?{[(#PAYS|id_pays_to_pays)]})
+			</span>]
+		[(#GET{adresse}|=={'ok'}|oui)</span>
+	</p>]
+
+	[<p><:inscription3:label_email:> <span class="#EDIT{email}"><a class="email" href="mailto:#EMAIL">(#EMAIL|et{#GET{conf_i3}|table_valeur{email_fiche}|=={on}}|?{#EMAIL})</a></span></p>]
+
+	[(#REM) Un test pour voir si on a au moins un champs telephone]
+	[(#TELEPHONE|et{#GET{conf_i3}|table_valeur{telephone_fiche}|=={on}}|?{#SET{telephone_perso,ok},' '})
+	[(#FAX|et{#GET{conf_i3}|table_valeur{fax_fiche}|=={on}}|?{#SET{telephone_perso,ok},' '})
+	[(#MOBILE|et{#GET{conf_i3}|table_valeur{mobile_fiche}|=={on}}|?{#SET{telephone_perso,ok},#SET{telephone_perso,pasok}})]]]
+	[(#GET{telephone_perso}|=={ok}|oui)<p>]
+			[<span class="tel"><span class="type" style="display:none">Work</span><:inscription3:label_telephone:> : <span class="value #EDIT{telephone}">(#TELEPHONE|et{#GET{conf_i3}|table_valeur{telephone_fiche}|=={on}}|?{#TELEPHONE})</span></span><br />]
+			[<span class="tel"><span class="type" style="display:none">Fax</span><:inscription3:label_fax:> : <span class="value #EDIT{fax}">(#FAX|et{#GET{conf_i3}|table_valeur{fax_fiche}|=={on}}|?{#FAX})</span></span><br />]
+			[<span class="tel"><span class="type" style="display:none">cell</span><:inscription3:label_mobile:> : <span class="value #EDIT{mobile}">(#MOBILE|et{#GET{conf_i3}|table_valeur{mobile_fiche}|=={on}}|?{#MOBILE})</span></span>]
+	[(#GET{telephone_perso}|=={ok}|oui)</p>]
+
+	[<p><:inscription3:label_website:> : <span class="#EDIT{hyperlien}">[<a href="(#URL_SITE|et{#GET{conf_i3}|table_valeur{url_site_fiche}|=={on}}|?{#URL_SITE})" class="url" rel="me">#SET{url_site,oui}](#NOM_SITE|et{#GET{conf_i3}|table_valeur{nom_site_fiche}|=={on}}|?{#NOM_SITE})[(#GET{url_site}|?{</a>})]</span></p>]
+
+	[(#LATITUDE|?{#SET{geo,ok},' '})
+	[(#LONGITUDE|?{#SET{geo,ok},#SET{geo,pasok}})]]
+	[(#GET{geo}|=={'ok'}|oui)<div class="geo"><p>GEO :]
+		[<:inscription3:lat:> <abbr class="latitude #EDIT{latitude}" title="#LATITUDE">(#LATITUDE)</abbr>, ]
+		[<:inscription3:long:> <abbr class="longitude #EDIT{longitude}" title="#LONGITUDE">(#LONGITUDE)</abbr>]
+	[(#GET{geo}|=={'ok'}|oui)</p></div>]
+	
+	[<p><:inscription3:label_societe:> [<a class="org" href="(#URL_SOCIETE|et{#GET{conf_i3}|table_valeur{url_societe_fiche}|=={on}}|?{#URL_SOCIETE})">#SET{url_societe,ok}](#SOCIETE|et{#GET{conf_i3}|table_valeur{societe_fiche}|=={on}}|?{#SOCIETE})[(#GET{url_societe}|?{</a>})]</p>]
+
+	[(#REM)
+	
+		Un truc un peu compliqué pour la gestion des champs extras externes à Inscription3
+		1. On les liste avec une boucle data
+		2. On n'affiche que ceux avec un suffixe _fiche_nocreation
+			- _fiche signifie qu'ils doivent être affiché dans la fiche
+			- _nocreation signifie qu'ils ne sont pas créés par inscription3
+		3. On teste leur valeur, si == '', on ne les affiche pas, sinon on mets ces valeurs dans un array
+		4. On inclure inclure/voir_saisies avec les valeurs dans l'env
+	
+	]
+	#SET{saisies,#ARRAY}
+	#SET{env,#ARRAY}
+	<BOUCLE_extras(DATA){si #PLUGIN{cextras}|oui}{source tableau,#VAL{spip_auteurs}|champs_extras_objet}{par cle}>
+	[(#GET{conf_i3}|table_valeur{[(#CLE)]_fiche_nocreation}|=={on}|oui)
+		#SET{valeur_champ,#ID_AUTEUR|generer_info_entite{auteur,#CLE}}
+		[(#GET{valeur_champ}|=={''}|non)
+			#SET{saisies,#GET{saisies}|array_merge{#ARRAY{#CLE,#VALEUR}}}
+			#SET{env,#GET{env}|array_merge{#ARRAY{#CLE,#GET{valeur_champ}}}}
+		]
+	]
+	</BOUCLE_extras>
+	<INCLURE{fond=inclure/voir_saisies, _env=#GET{env}, saisies=#GET{saisies}}>
+	</B_extras>
+	
+	[(#REM)
+	
+		Affichage de la date de création du compte
+		
+	]
+	[(#GET{conf_i3}|table_valeur{creation}|=={on}|oui)
+	[(#CREATION|=={0000-00-00 00:00:00}|non)
+	[(#SET{date_creation,[(#CREATION|affdate)]})]
+	<p>
+		<:inscription3:label_inscription_depuis{date=#GET{date_creation}}:>
+	</p>]]
+</BOUCLE_auteur>

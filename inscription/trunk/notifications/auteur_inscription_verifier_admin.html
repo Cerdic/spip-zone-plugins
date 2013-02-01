@@ -1,0 +1,23 @@
+[(#REM)
+
+	Plugin Inscription3 pour SPIP
+ 	© 2007-2010 - cmtmt, BoOz, kent1
+	Licence GPL v3
+	
+	Squelette de notification envoyé aux administrateurs régulièrement s'il y a des comptes
+	à valider ou invalider
+  
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<B_aut>
+[(#GRAND_TOTAL|=={1}|?{[(#VAL{inscription3:message_auteur_inscription_verifier_titre_un}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP}}|nettoyer_titre_email)],[(#VAL{inscription3:message_auteur_inscription_verifier_titre_plusieurs}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP}}|nettoyer_titre_email)]})]
+
+<:form_forum_message_auto:>
+	
+[(#GRAND_TOTAL|=={1}|?{<:inscription3:message_auteur_inscription_verifier_contenu_un:>,<:inscription3:message_auteur_inscription_verifier_contenu_plusieurs:>})]
+<ul>
+<BOUCLE_aut(AUTEURS){statut=8aconfirmer}{tout}>
+<li>#NOM</li>
+</BOUCLE_aut>
+</ul>
+</B_aut>
+#FILTRE{supprimer_tags|filtrer_entites|trim}

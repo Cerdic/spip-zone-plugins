@@ -1,0 +1,177 @@
+[(#REM) information générales
+On teste la présence d'au moins un des champs pour l'afficher]
+
+[(#CONFIG{inscription3/sexe}|=={on}|ou{
+[(#CONFIG{inscription3/nom_famille}|=={on})]}|ou{
+[(#CONFIG{inscription3/prenom}|=={on})]}|ou{
+[(#CONFIG{inscription3/logo}|=={on})]}|ou{
+[(#CONFIG{inscription3/surnom}|=={on})]}|ou{
+[(#CONFIG{inscription3/naissance}|=={on})]}|ou{
+[(#CONFIG{inscription3/bio}|=={on})]}|ou{
+[(#CONFIG{inscription3/nom_site}|=={on})]}|ou{
+[(#CONFIG{inscription3/url_site}|=={on})]}|ou{
+[(#CONFIG{inscription3/pgp}|=={on})]}|ou{
+[(#CONFIG{inscription3/commentaire}|=={on})]}|ou{
+[(#CONFIG{inscription3/adresse}|=={on})]}|ou{
+[(#CONFIG{inscription3/code_postal}|=={on})]}|ou{
+[(#CONFIG{inscription3/ville}|=={on})]}|ou{
+[(#CONFIG{inscription3/pays}|=={on})]}|ou{
+[(#CONFIG{inscription3/telephone}|=={on})]}|ou{
+[(#CONFIG{inscription3/mobile}|=={on})]}|ou{
+[(#CONFIG{inscription3/fax}|=={on})]}|oui)
+<li class="fieldset info_perso">
+    <h3 class="legend">
+        <:inscription3:legende_info_perso:>
+    </h3>
+
+    <ul>
+        [(#CONFIG{inscription3/sexe}|=={on}|oui)
+        <li class="editer_sexe[ (#CONFIG{inscription3/sexe_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{sexe}|oui)erreur]">
+		    <label><:inscription3:label_civilite:></label>
+			[<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{sexe})</p>]
+		    <div class="choix">
+				<input class="radio" name="sexe" id="monsieur" type="radio" [(#ENV{sexe}|=={M}|?{'checked="checked"'})] value="M" />
+				<label for="monsieur"><:inscription3:choix_masculin:></label>
+			</div>
+			<div class="choix">
+				<input class="radio" name="sexe" id="madame" type="radio" [(#ENV{sexe}|=={F}|?{'checked="checked"'})] value="F" />
+				<label for="madame"><:inscription3:choix_feminin:></label>
+			</div>
+        </li>]
+
+		[(#CONFIG{inscription3/nom_famille}|=={on}|oui)
+			[(#CONFIG{inscription3/nom_famille_obligatoire}|=={on}|oui)#SET{nom_famille_obligatoire,oui}]
+			[(#SAISIE{input,nom_famille,
+				obligatoire=#GET{nom_famille_obligatoire},
+				label=<:inscription3:label_nom_famille:>,
+				size=30})]
+		]
+
+		[(#CONFIG{inscription3/prenom}|=={on}|oui)
+			[(#CONFIG{inscription3/prenom_obligatoire}|=={on}|oui)#SET{prenom_obligatoire,oui}]
+			[(#SAISIE{input,prenom,
+				obligatoire=#GET{prenom_obligatoire},
+				label=<:inscription3:label_prenom:>,
+				size=30})]
+		]
+
+		[(#CONFIG{inscription3/logo}|=={on}|oui)
+	    <li class="editer_logo[ (#CONFIG{inscription3/logo_obligatoire}|=={on}|?{obligatoire})][ (#ENV**{erreurs}|table_valeur{logo}|oui)erreur]">
+	        <label for="logo"><:inscription3:label_logo_auteur:></label>
+	        <input type="file" class="text" name="logo" id="logo" value="#ENV{logo}" />
+	        [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo})</p>]
+	    </li>]
+
+		[(#CONFIG{inscription3/surnom}|=={on}|oui)
+			[(#CONFIG{inscription3/surnom_obligatoire}|=={on}|oui)#SET{surnom_obligatoire,oui}]
+			[(#SAISIE{input,surnom,
+				obligatoire=#GET{surnom_obligatoire},
+				label=<:inscription3:label_surnom:>,
+				size=30})]
+		]
+
+        [(#CONFIG{inscription3/naissance}|=={on}|oui)
+        <li class="editer_naissance[ (#CONFIG{inscription3/naissance_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{naissance}|oui)erreur]">
+            <label><:inscription3:label_naissance:></label>
+            <INCLURE{fond=formulaires/inscription3_form_date_naissance}{mois}{annee}{jour}>
+            [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{naissance})</p>]
+        </li>]
+
+		[(#CONFIG{inscription3/bio}|=={on}|oui)
+			[(#CONFIG{inscription3/bio_obligatoire}|=={on}|oui)#SET{bio_obligatoire,oui}]
+			[(#SAISIE{textarea,bio,
+				rows=10,
+				obligatoire=#GET{bio_obligatoire},
+				label=<:inscription3:label_bio:>})]
+		]
+
+		[(#CONFIG{inscription3/nom_site}|=={on}|oui)
+			[(#CONFIG{inscription3/nom_site_obligatoire}|=={on}|oui)#SET{nom_site_obligatoire,oui}]
+			[(#SAISIE{input,nom_site,
+				obligatoire=#GET{nom_site_obligatoire},
+				label=<:inscription3:label_nom_site:>,
+				size=30})]
+		]
+
+		[(#CONFIG{inscription3/url_site}|=={on}|oui)
+			[(#CONFIG{inscription3/url_site_obligatoire}|=={on}|oui)#SET{url_site_obligatoire,oui}]
+			[(#SAISIE{input,url_site,
+				obligatoire=#GET{url_site_obligatoire},
+				label=<:inscription3:label_url_site:>,
+				size=30})]
+		]
+
+		[(#CONFIG{inscription3/pgp}|=={on}|oui)
+			[(#CONFIG{inscription3/pgp_obligatoire}|=={on}|oui)#SET{pgp_obligatoire,oui}]
+			[(#SAISIE{textarea,pgp,
+				rows=5,
+				obligatoire=#GET{pgp_obligatoire},
+				label=<:inscription3:label_pgp:>})]
+		]
+
+		[(#CONFIG{inscription3/adresse}|=={on}|oui)
+			[(#CONFIG{inscription3/adresse_obligatoire}|=={on}|oui)#SET{adresse_obligatoire,oui}]
+			[(#SAISIE{textarea,adresse,
+				rows=5,
+				obligatoire=#GET{adresse_obligatoire},
+				label=<:inscription3:label_adresse:>})]
+		]
+
+		[(#CONFIG{inscription3/code_postal}|=={on}|oui)
+			[(#CONFIG{inscription3/code_postal_obligatoire}|=={on}|oui)#SET{code_postal_obligatoire,oui}]
+			[(#SAISIE{input,code_postal,
+				obligatoire=#GET{code_postal_obligatoire},
+				label=<:inscription3:label_code_postal:>,
+				size=30})]
+		]
+
+		[(#CONFIG{inscription3/ville}|=={on}|oui)
+			[(#CONFIG{inscription3/ville_obligatoire}|=={on}|oui)#SET{ville_obligatoire,oui}]
+			[(#SAISIE{input,ville,
+				obligatoire=#GET{ville_obligatoire},
+				label=<:inscription3:label_ville:>,
+				size=30})]
+		]
+
+        [(#CONFIG{inscription3/pays}|=={on}|oui)
+			[(#CONFIG{inscription3/pays_obligatoire}|=={on}|oui)#SET{pays_obligatoire,oui}]
+			[(#SAISIE{pays,pays,
+				label=<:inscription3:label_pays:>,
+				option_intro=-,
+				obligatoire=#GET{pays_obligatoire},
+				defaut=#CONFIG{inscription3/pays_defaut}})]
+		]
+
+		[(#CONFIG{inscription3/telephone}|=={on}|oui)
+			[(#CONFIG{inscription3/telephone_obligatoire}|=={on}|oui)#SET{telephone_obligatoire,oui}]
+			[(#SAISIE{input,telephone,
+				obligatoire=#GET{telephone_obligatoire},
+				label=<:inscription3:label_telephone:>,
+				size=30})]
+		]
+
+		[(#CONFIG{inscription3/fax}|=={on}|oui)
+			[(#CONFIG{inscription3/fax_obligatoire}|=={on}|oui)#SET{fax_obligatoire,oui}]
+			[(#SAISIE{input,fax,
+				obligatoire=#GET{fax_obligatoire},
+				label=<:inscription3:label_fax:>,
+				size=30})]
+		]
+
+		[(#CONFIG{inscription3/mobile}|=={on}|oui)
+			[(#CONFIG{inscription3/mobile_obligatoire}|=={on}|oui)#SET{mobile_obligatoire,oui}]
+			[(#SAISIE{input,mobile,
+				obligatoire=#GET{mobile_obligatoire},
+				label=<:inscription3:label_mobile:>,
+				size=30})]
+		]
+
+		[(#CONFIG{inscription3/commentaire}|=={on}|oui)
+			[(#CONFIG{inscription3/commentaire_obligatoire}|=={on}|oui)#SET{commentaire_obligatoire,oui}]
+			[(#SAISIE{textarea,commentaire,
+				rows=10,
+				obligatoire=#GET{commentaire_obligatoire},
+				label=<:inscription3:label_commentaire:>})]
+		]
+    </ul>
+</li>]
