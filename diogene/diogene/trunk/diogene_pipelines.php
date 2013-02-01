@@ -293,7 +293,7 @@ function diogene_formulaire_verifier($flux){
 		//if (_request('id_parent') < 0) return $flux;
 
 		$id_table_objet = id_table_objet($objet);
-		$flux = pipeline('diogene_verifier',
+		$flux['data'] = pipeline('diogene_verifier',
 			array(
 				'args' => array(
 					'erreurs' => $flux['data']
@@ -301,10 +301,10 @@ function diogene_formulaire_verifier($flux){
 				'data' => $flux['data']
 			)
 		);
-		$messages = $flux;
+		$messages = $flux['data'];
 		unset($messages['message_ok']);
 		if(count($messages) > 0){
-			$flux['message_erreur'] = _T('diogene:message_erreur_general');
+			$flux['data']['message_erreur'] = _T('diogene:message_erreur_general');
 		}
 	}
 	return $flux;
