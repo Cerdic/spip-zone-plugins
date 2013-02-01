@@ -1,0 +1,25 @@
+<paquet
+	prefix="diogene_licence"
+	categorie="edition"
+	version="1.1.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.99]"
+	logo="images/diogene-128.png"
+>	
+
+	<nom>Diogene - Licence</nom>
+	<!-- Complément "licence" pour "Diogene" (utilise le plugin Licences) -->
+
+	<auteur>b_b</auteur>
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
+
+	<pipeline nom="diogene_ajouter_saisies" inclure="diogene_licence_pipelines.php" />
+	<pipeline nom="diogene_verifier" inclure="diogene_licence_pipelines.php" />
+	<pipeline nom="diogene_traiter" inclure="diogene_licence_pipelines.php" />
+	<pipeline nom="diogene_objets" inclure="diogene_licence_pipelines.php" />
+	<pipeline nom="diogene_champs_texte" inclure="diogene_licence_pipelines.php" />
+	<pipeline nom="diogene_champs_pre_edition" inclure="diogene_licence_pipelines.php" />
+
+	<necessite nom="diogene" compatibilite="[1.0.0;[" />
+	<necessite nom="licence" compatibilite="[0.1;[" />
+</paquet>

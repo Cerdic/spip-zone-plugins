@@ -1,0 +1,33 @@
+<paquet
+	prefix="diogene_geo"
+	categorie="edition"
+	version="1.1.1"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.99]"
+	logo="images/diogene-128.png"
+>	
+
+	<nom>Diogene - G&#233;o</nom>
+	<!-- Complément gégraphique pour "Diogene" -->
+
+	<auteur>b_b</auteur>
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
+
+	<copyright>2010-2012</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="diogene_texte_cfg_form" inclure="diogene_geo_pipelines.php" />
+	<pipeline nom="diogene_ajouter_saisies" inclure="diogene_geo_pipelines.php" />
+	<pipeline nom="diogene_traiter" inclure="diogene_geo_pipelines.php" />
+	<pipeline nom="diogene_verifier" inclure="diogene_geo_pipelines.php" />
+	<pipeline nom="diogene_charger" inclure="diogene_geo_pipelines.php" />
+	<pipeline nom="diogene_objets" inclure="diogene_geo_pipelines.php" />
+	<pipeline nom="diogene_champs_texte" inclure="diogene_geo_pipelines.php" />
+	<pipeline nom="diogene_champs_pre_edition" inclure="diogene_geo_pipelines.php" />
+	<pipeline nom="em_post_upload_medias" inclure="diogene_geo_pipelines.php" />
+
+	<necessite nom="diogene" compatibilite="[1.0.0;[" />
+	<necessite nom="gis" compatibilite="[4.0.2;[" />
+
+</paquet>

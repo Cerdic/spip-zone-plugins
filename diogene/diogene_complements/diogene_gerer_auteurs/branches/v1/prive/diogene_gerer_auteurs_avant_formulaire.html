@@ -1,0 +1,49 @@
+<script type="text/javascript"><!--
+	(function($) {
+		if (typeof($.fn.autocomplete) == "function") {
+			var diogene_gerer_auteurs_appliquer_selecteur = function(){
+
+				// chercher l'input de saisie
+				var diogene_gerer_auteurs = $('input[name=diogene_gerer_auteurs][autocomplete!=off]');
+
+				var id_objet = $("input[name=id_article]").val();
+
+				diogene_gerer_auteurs.autocomplete({
+					source:function( request, response ) {
+						$.ajax({
+							url: "#URL_PAGE{selecteur_auteur}",
+							data:{
+								id_article: id_objet,
+								q:extractLast( request.term )
+							},
+							success: function(data) {
+								datas = selecteur_format(data);
+								response( $.map( datas, function( item ) {
+									return item;
+								}));
+							}
+						});
+					},
+					delay: 200,
+					select: function( event, ui ) {
+						if (ui.item.result > 0) {
+							var id = ui.item.result;
+							$('#diogene_gerer_id_auteurs').val(id);
+							this.value = ui.item.value;
+						}
+						else {
+							$('#diogene_gerer_id_auteurs').val('');
+							this.value = ui.item.entry;
+						}
+						return false;
+					}
+				});
+			};
+
+			$(function(){
+				diogene_gerer_auteurs_appliquer_selecteur();
+				onAjaxLoad(diogene_gerer_auteurs_appliquer_selecteur);
+			});
+		}
+	})(jQuery);
+// --></script>

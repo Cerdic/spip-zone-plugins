@@ -1,0 +1,51 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]Diogene - Notations
+			[en]Diogene - Ratings
+		</multi>
+	</nom>
+	<auteur>
+	[kent1->http://www.kent1.info]
+	</auteur>
+	<licence>© 2010-2011 GNU/GPL v3</licence>
+	<version>
+	0.0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+		<multi>
+			[fr]Compl&#233;ment notation pour "Diogene"
+			[en]Ratings add-on for "Diogene".
+		</multi>
+	</description>
+	<prefix>
+	diogene_notation
+	</prefix>
+	<icon>images/diogene-128.png</icon>
+	<pipeline>
+		<nom>diogene_ajouter_saisies</nom>
+		<inclure>diogene_notation_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>diogene_traiter</nom>
+		<inclure>diogene_notation_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>diogene_verifier</nom>
+		<inclure>diogene_notation_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>diogene_champs_sup</nom>
+		<inclure>diogene_notation_pipelines.php</inclure>
+	</pipeline>
+	<necessite id='SPIP' version='[2.1.2;2.1.99]' />
+	<necessite id='diogene' version='[0.1;]' />
+	<necessite id='notation' version='[0.9.2;]' />
+	<necessite id='cfg' version='[1.0.6;]' />
+	<utilise id='emballe_medias' />
+	<categorie>edition</categorie>
+</plugin>

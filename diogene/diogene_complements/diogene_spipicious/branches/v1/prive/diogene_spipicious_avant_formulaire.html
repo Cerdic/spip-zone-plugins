@@ -1,0 +1,65 @@
+[(#REM)
+
+	Code Javascript inséré avant le formulaire de modification d'article
+	Utilisé pour avoir l'autocompleter disponible
+
+]<script type="text/javascript"><!--
+	(function($) {
+		if (typeof($.fn.autocomplete) == "function") {
+			var diogene_spipicious_appliquer_selecteur = function(){
+
+				// chercher l'input de saisie
+				var diogene_spipicious = $('input[name=diogene_spipicious_tags][autocomplete!=off]');
+
+				var id_objet = $("input[name=id_article]").val();
+				var type = 'article';
+
+				diogene_spipicious.autocomplete(
+					{
+						source: function( request, response ) {
+							$.ajax({
+								url: "#URL_PAGE{selecteurs_tags}",
+								data:{
+									id_objet: id_objet,
+									objet: 'article',
+									q:extractLast( request.term )
+								},
+								success: function(data) {
+									datas = selecteur_format(data);
+									response( $.map( datas, function( item ) {
+										return item;
+									}));
+								}
+							});
+						},
+						focus: function() {
+							// prevent value inserted on focus
+							return false;
+						},
+						delay: 200,
+						select: function( event, ui ) {
+							var terms = split_multiple( this.value );
+							// remove the current input
+							terms.pop();
+							// add the selected item
+							if (ui.item.result > 0) {
+								terms.push( ui.item.value );
+							}else{
+								terms.push( ui.item.entry );
+							}
+							// add placeholder to get the comma-and-space at the end
+							terms.push( "" );
+							this.value = terms.join( ";" );
+							return false;
+						}
+					}
+				);
+			};
+
+			$(function(){
+				diogene_spipicious_appliquer_selecteur();
+				onAjaxLoad(diogene_spipicious_appliquer_selecteur);
+			});
+		}
+	})(jQuery);
+// --></script>

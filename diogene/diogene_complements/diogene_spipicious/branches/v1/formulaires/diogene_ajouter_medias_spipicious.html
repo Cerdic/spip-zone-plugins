@@ -1,0 +1,19 @@
+#CACHE{0}
+<li class="fieldset" id="diogene_spipicious">
+	<fieldset>
+		<h3 class="legend"><:diogene_spipicious:form_legend:></h3>
+		<ul>
+			[(#SAISIE{input,diogene_spipicious_tags,
+				label=<:diogene_spipicious:label_tags:>,
+				explication=<:spipicious:explication_ajout_tag{separateur=;}:>})]
+
+			[(#ENV**{diogene_spipicious_removal_tags}|is_array|oui)
+				[(#SAISIE{spipicious_del_tags, diogene_spipicious_removal_tags,
+					explication=<:spipicious:explication_suppression_tag:>,
+					id_objet=#ENV{id_article},
+					objet=article,
+					label=<:diogene_spipicious:label_remove_tags:>})]
+			]
+		</ul>
+	</fieldset>
+</li>

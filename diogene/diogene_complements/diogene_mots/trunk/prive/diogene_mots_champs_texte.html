@@ -1,0 +1,23 @@
+#SET{groupes_exclus,#ARRAY}
+[(#PLUGIN{diogene_spipicious}|oui)
+	[(#CONFIG{spipicious/groupe_mot,0}|intval|>{0}|oui)
+	#SET{groupes_exclus,#GET{groupes_exclus}|push{#CONFIG{spipicious/groupe_mot,0}}}
+	]
+]
+
+[(#SAISIE{groupe_mots,mots_obligatoires,
+	label=<:diogene_mots:label_mots_obligatoires:>,
+	multiple=oui,
+	valeur=[(#ENV**{options_complements}|unserialize|table_valeur{mots_obligatoires}|unserialize)],
+	defaut=#ARRAY{0,0},
+	size=5,
+	groupes_exclus=#GET{groupes_exclus},
+	table_liaison=articles})]
+[(#SAISIE{groupe_mots,mots_facultatifs,
+	label=<:diogene_mots:label_mots_facultatifs:>,
+	multiple=oui,
+	valeur=[(#ENV**{options_complements}|unserialize|table_valeur{mots_facultatifs}|unserialize)],
+	defaut=#ARRAY{0,0},
+	size=5,
+	groupes_exclus=#GET{groupes_exclus},
+	table_liaison=articles})]

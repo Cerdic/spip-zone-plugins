@@ -1,0 +1,37 @@
+#CACHE{0}
+<li class="fieldset" id="diogene_auteurs">
+	<fieldset>
+		<h3 class="legend"><:diogene_gerer_auteurs:form_legend:></h3>
+	<ul>
+		[(#SAISIE{input,diogene_gerer_auteurs,
+			label=<:diogene_gerer_auteurs:label_diogene_gerer_auteurs:>,
+			explication=<:diogene_gerer_auteurs:explication_diogene_gerer_auteurs:>})]
+
+		<li style="display:none">
+			<input id="diogene_gerer_id_auteurs" class="hidden" type="hidden" name="diogene_gerer_id_auteurs"/>
+		</li>
+
+		<B_auteur_remove>
+		<li class="editer_gerer_auteurs_remove">
+			<label><:diogene_gerer_auteurs:label_gerer_auteurs_remove:></label>
+			<div class="explication"><p><:diogene_gerer_auteurs:explication_gerer_auteurs_remove:></p></div>
+			<BOUCLE_auteur_remove(POUR){tableau #ENV**{diogene_gerer_auteurs_remove}}>
+				<BOUCLE_si_autoriser(CONDITION){si #SESSION{id_auteur}|=={#CLE}|et{#AUTORISER{configurer}|non}|non}>
+				<div class="choix">
+					<input type="checkbox" name="diogene_gerer_auteurs_remove[]" class="checkbox" id='champ_diogene_gerer_auteurs_remove_#COMPTEUR_BOUCLE' value='#_auteur_remove:CLE' />
+					<label for="champ_diogene_gerer_auteurs_remove_#COMPTEUR_BOUCLE">[(#_auteur_remove:VALEUR|typo)]</label>
+				</div>
+				</BOUCLE_si_autoriser>
+				</B_si_autoriser>
+				<div class="choix">
+					<input type="checkbox" name="diogene_gerer_auteurs_remove[]" class="checkbox" id='champ_diogene_gerer_auteurs_remove_#COMPTEUR_BOUCLE' value='#_auteur_remove:CLE' disabled="disabled" />
+					<label for="champ_diogene_gerer_auteurs_remove_#COMPTEUR_BOUCLE">[(#_auteur_remove:VALEUR|typo)]</label>
+					<em class="important"><:diogene_gerer_auteurs:message_impossible_supprimer_auteur:></em>
+				</div>
+				<//B_si_autoriser>
+			</BOUCLE_auteur_remove>
+		</li>
+		</B_auteur_remove>
+	</ul>
+	</fieldset>
+</li>

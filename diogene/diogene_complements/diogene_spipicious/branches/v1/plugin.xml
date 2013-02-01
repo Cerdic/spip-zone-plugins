@@ -1,0 +1,47 @@
+<plugin>
+	<nom>
+	Diogene - Spip.icio.us
+	</nom>
+	<auteur>[kent1->http://www.kent1.info]</auteur>
+	<version>0.2.2</version>
+	<etat>stable</etat>
+	<icon>images/diogene-128.png</icon>
+	<licence>© 2010-2011 GNU/GPL v3</licence>
+	<slogan>
+		<multi>
+			[fr]Compl&#233;ment "tags personnels"
+			[en]"Personnal tags" add-on
+		</multi>
+	</slogan>
+	<description>
+		<multi>
+			[fr]Compl&#233;ment "tags personnels" pour "Diogene" (utilise SpipIcious)
+			[en]"Personnal tags" add-on for "Diogene" (use SpipIcious)
+		</multi>
+	</description>
+	<prefix>
+	diogene_spipicious
+	</prefix>
+	<pipeline>
+		<nom>diogene_ajouter_saisies</nom>
+		<inclure>diogene_spipicious_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>diogene_traiter</nom>
+		<inclure>diogene_spipicious_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>diogene_avant_formulaire</nom>
+		<inclure>diogene_spipicious_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>diogene_champs_sup</nom>
+		<inclure>diogene_spipicious_pipelines.php</inclure>
+	</pipeline>
+	<necessite id='SPIP' version='[2.1.2;2.1.99]' />
+	<necessite id='diogene' version='[0.4.2;]' />
+	<necessite id='spipicious' version='[0.7.0;]' />
+	<necessite id='spip_bonux' version='[1.8;]' />
+	<necessite id='cfg' version='[1.0.6;]' />
+	<categorie>edition</categorie>
+</plugin>

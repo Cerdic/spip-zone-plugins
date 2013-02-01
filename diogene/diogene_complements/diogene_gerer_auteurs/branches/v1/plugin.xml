@@ -1,0 +1,47 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]Diogene - Auteurs
+			[en]Diogene - Authors
+		</multi>
+	</nom>
+	<auteur>[kent1->http://www.kent1.info]</auteur>
+	<version>0.2.1</version>
+	<etat>stable</etat>
+	<icon>images/diogene-128.png</icon>
+	<licence>© 2010-2011 GNU/GPL v3</licence>
+	<prefix>diogene_gerer_auteurs</prefix>
+	<description>
+		<multi>
+			[fr]Compl&#233;ment "auteurs" pour "Diogene". Permet de rajouter un champs dans Diogene pour rajouter des auteurs.
+			[en]"Authors" add-on for "Diogene". Adds a field to add in authors in Diogene.
+		</multi>
+	</description>
+	<pipeline>
+		<nom>diogene_ajouter_saisies</nom>
+		<inclure>diogene_gerer_auteurs_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>diogene_traiter</nom>
+		<inclure>diogene_gerer_auteurs_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>diogene_avant_formulaire</nom>
+		<inclure>diogene_gerer_auteurs_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>diogene_champs_sup</nom>
+		<inclure>diogene_gerer_auteurs_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>diogene_gerer_auteurs_pipelines.php</inclure>
+	</pipeline>
+	<necessite id='SPIP' version='[2.1.2;2.1.99]' />
+	<necessite id='diogene' version='[0.4.2;]' />
+	<necessite id="SelecteurGenerique" version="[0.7;]" />
+	<necessite id='saisies' version='[1.1;]' />
+	<necessite id='spip_bonux' version='[1.8;]' />
+	<necessite id='cfg' version='[1.0.6;]' />
+	<categorie>edition</categorie>
+</plugin>

@@ -1,0 +1,17 @@
+#CACHE{0}
+[(#PLUGIN{notation}|oui)
+<li class="fieldset diogene_notation" id="diogene_notation">
+	<fieldset>
+		<legend><:notation:notation:></legend>
+		<ul>
+			<li class="editer editer_accepter_note[ (#ENV**{erreurs}|table_valeur{accepter_note}|oui)erreur]">
+				<label for="accepter_note"><:notation:info_fonctionnement_note:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{accepter_note})</span>]
+				<select name="accepter_note" id="accepter_note">
+					<option value="oui"[(#ENV{accepter_note}|=={oui}|oui) selected="selected"]><:notation:bouton_radio_ouvert:></option>
+					<option value="non"[(#ENV{accepter_note}|=={non}|oui) selected="selected"]><:notation:bouton_radio_fermee:></:notation:bouton_radio_fermee:></option>
+				</select>
+			</li>
+		</ul>
+	</fieldset>
+</li>]

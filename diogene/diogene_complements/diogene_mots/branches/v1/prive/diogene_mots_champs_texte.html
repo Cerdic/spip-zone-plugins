@@ -1,0 +1,14 @@
+[(#SAISIE{groupe_mots,mots_obligatoires,
+	label=<:diogene_mots:label_mots_obligatoires:>,
+	multiple=oui,
+	valeur=[(#ENV**{options_complements}|unserialize|table_valeur{mots_obligatoires}|unserialize)],
+	defaut=#ARRAY{0,0},
+	size=5,
+	table_liaison=articles})]
+[(#SAISIE{groupe_mots,mots_facultatifs,
+	label=<:diogene_mots:label_mots_facultatifs:>,
+	multiple=oui,
+	valeur=[(#ENV**{options_complements}|unserialize|table_valeur{mots_facultatifs}|unserialize)],
+	defaut=#ARRAY{0,0},
+	size=5,
+	table_liaison=articles})]

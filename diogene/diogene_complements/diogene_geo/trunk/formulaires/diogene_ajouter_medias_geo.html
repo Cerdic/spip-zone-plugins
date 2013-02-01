@@ -1,0 +1,91 @@
+#CACHE{0}
+<BOUCLE_diogene(DIOGENES){si #PLUGIN{gis}|oui}{id_diogene}>
+#SET{complements,#OPTIONS_COMPLEMENTS|unserialize}
+</BOUCLE_diogene>
+[(#REM)
+	Si un id_gis on affiche la carte tout le temps
+]
+[(#ENV{id_gis}|intval|oui)
+	#SET{geo_affiche,oui}
+]
+[(#REM)
+	Si pas d'id_gis on regarde la conf
+]
+[(#ENV{id_gis}|intval|non)
+	#SET{geo_affiche,oui}
+	[(#GET{complements}|table_valeur{geo_cacher}|=={on}|oui)
+		#SET{geo_affiche,non}	
+	]
+]
+<li class="fieldset diogene_geo" id="diogene_geo">
+<fieldset>
+	<legend><:diogene_geo:form_legend:></legend>
+	[<p class="reponse_formulaire reponse_formulaire_ok"><:diogene_geo:message_postion_auto:>(#ENV{position_auto}|oui)</p>]
+	<div class="choix">
+		<input type="checkbox" value="on"[(#GET{geo_affiche}|=={oui}|oui)checked="checked"] id="gis_afficher" name="gis_afficher" />
+		<label for="gis_afficher"><:diogene_geo:label_geo_afficher:></label> 
+	</div>
+	
+	<ul class="ul_info_gis">
+		[(#ENV{id_gis}|oui)
+			[(#SAISIE{case, gis_supprimer,
+				label=<:diogene_geo:label_supprimer_gis:>})]
+		]
+		[(#SAISIE{carte,editer_gis_#ENV{id_gis},env})]
+		
+		[(#SAISIE{hidden,id_gis})]
+		[(#GET{geocoder}|oui)
+		<li class="rechercher_adresse">
+			<label for="champ_gis_adresse"><:gis:label_rechercher_address:></label>
+			<input type="text" class="text nomulti" name="champ_gis_adresse" id="champ_gis_adresse" value="" />
+			<a id="gis_rechercher"><:info_rechercher:></a>
+		</li>]
+		[(#SAISIE{input,lat,
+			label=<:gis:lat:>,
+			class=nomulti,
+			obligatoire=oui})]
+		[(#SAISIE{input,lon,
+			label=<:gis:lon:>,
+			class=nomulti,
+			obligatoire=oui})]
+		[(#SAISIE{input,zoom,
+			label=<:gis:zoom:>,
+			size=2,
+			maxlength=2,
+			class=nomulti,
+			obligatoire=oui,
+			defaut=''})]
+		[(#SAISIE{input,gis_titre,
+			defaut=#ENV{titre}|sinon{#INFO_TITRE{#OBJET,#ID_OBJET}},
+			label=<:diogene_geo:gis_info_titre:>,
+			obligatoire=oui})]
+		[(#SAISIE{textarea,gis_descriptif,
+			label=<:diogene_geo:gis_info_descriptif:>,
+			rows=5})]
+		[(#CONFIG{gis/adresse}|=={on}|?{#SET{input_type,input},#SET{input_type,hidden}})]
+		[(#SAISIE{#GET{input_type},adresse,
+			label=<:gis:label_adress:>})]
+		[(#SAISIE{#GET{input_type},code_postal,
+			label=<:gis:label_code_postal:>})]
+		[(#SAISIE{#GET{input_type},ville,
+			label=<:gis:label_ville:>})]
+		[(#SAISIE{#GET{input_type},region,
+			label=<:gis:label_region:>})]
+		[(#SAISIE{#GET{input_type},pays,
+			label=<:gis:label_pays:>})]
+	</ul>
+</fieldset>
+</li>
+
+<script type="text/javascript"> 
+	(function($){ 
+		[(#GET{geo_affiche}|=={non}|oui)$('.ul_info_gis').hide();] 
+		$('#gis_afficher').change(function(){
+			if($(this).is(':checked')){
+				$('.ul_info_gis').slideDown('slow');
+			}else{
+				$('.ul_info_gis').slideUp();
+			}
+		});
+	})(jQuery); 
+</script>

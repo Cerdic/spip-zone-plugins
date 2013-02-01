@@ -1,0 +1,29 @@
+<paquet
+	prefix="diogene_notation"
+	categorie="edition"
+	version="1.1.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.99]"
+	logo="images/diogene-128.png"
+>	
+
+	<nom>Diogene - Notations</nom>
+	<!-- Complément notation pour "Diogene" -->
+
+	<auteur>b_b</auteur>
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
+
+	<copyright>2010-2012</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="diogene_ajouter_saisies" inclure="diogene_notation_pipelines.php" />
+	<pipeline nom="diogene_traiter" inclure="diogene_notation_pipelines.php" />
+	<pipeline nom="diogene_verifier" inclure="diogene_notation_pipelines.php" />
+	<pipeline nom="diogene_objets" inclure="diogene_notation_pipelines.php" />
+
+	<necessite nom="diogene" compatibilite="[1.0.0;[" />
+	<necessite nom="notation" compatibilite="[0.9.2;[" />
+
+	<utilise nom="emballe_medias" />
+</paquet>
