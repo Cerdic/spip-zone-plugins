@@ -1,9 +1,113 @@
 <?php
-/**
- * Plugin Contacts & Organisations pour Spip 2.0
- * Licence GPL (c) 2009 - 2010- Ateliers CYM
+/***
+ * Plugin Contacts & Organisations pour Spip 3.0
+ * Licence GPL (c) 2009 - 2013 - Ateliers CYM
  */
+
+/**
+ * Définition des critères, balises, filtres et fonctions
+ *
+ * @package SPIP\Plugins\Contacts\Fonctions
+**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
+
+
+
+/**
+ * Calcul de la balise #LESORGANISATIONS
+ *
+ * Affiche la liste des organisations d'un contact.
+ * - Soit le champs lesauteurs existe dans la table et à ce moment là,
+ *   on retourne son contenu
+ * - Soit la balise appelle le modele lesorganisations.html en lui passant
+ *   le id_contact dans son environnement
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+ */
+function balise_LESORGANISATIONS_dist ($p) {
+	// Cherche le champ 'lesorganisations' dans la pile
+	$_lesorganisations = champ_sql('lesorganisations', $p, false);
+
+	// Si le champ n'existe pas (cas de spip_contacts), on applique
+	// le modele lesorganisations.html en passant id_contact dans le contexte;
+	// dans le cas contraire on prend le champ 'lesorganisations'
+	if ($_lesorganisations
+	AND $_lesorganisations != '@$Pile[0][\'lesorganisations\']') {
+		$p->code = "safehtml($_lesorganisations)";
+		// $p->interdire_scripts = true;
+	} else {
+		$connect = !$p->id_boucle ? ''
+		  : $p->boucles[$p->id_boucle]->sql_serveur;
+
+		$c = memoriser_contexte_compil($p);
+
+		$p->code = sprintf(CODE_RECUPERER_FOND, "'modeles/lesorganisations'",
+				   "array('id_contact' => ".champ_sql('id_contact', $p) .")",
+				   "'trim'=>true, 'compil'=>array($c)",
+				   _q($connect));
+		$p->interdire_scripts = false; // securite apposee par recuperer_fond()
+	}
+
+	return $p;
+}
+
+
+/**
+ * Calcul du critère compteur_contacts
+ * 
+ * Compter les contacts liés à une organisation, dans une boucle organisations
+ * pour la vue prive/liste/organisations.html
+ *
+ * @example
+ *   ```
+ *   <BOUCLE_o(ORGANISATIONS){compteur_contacts}>
+ *     [(#COMPTEUR_CONTACTS|singulier_ou_pluriel{contacts:nb_contact,contacts:nb_contacts})]
+ *   ```
+ *
+ * @note
+ *   Fonctionnement inspiré du critère 'compteur_articles' dans SPIP
+ * 
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return void
+ */
+function critere_compteur_contacts_dist($idb, &$boucles, $crit){
+	$boucle = &$boucles[$idb];
+
+	$not="";
+	if ($crit->not)
+		$not=", 'NOT'";
+	$boucle->from['LOC'] = 'spip_organisations_contacts';
+	$boucle->from_type['LOC'] = 'left';
+	$boucle->join['LOC'] = array("'organisations'","'id_organisation'","'id_organisation'");
+
+	$boucle->select[]= "COUNT(LOC.id_contact) AS compteur_contacts";
+	$boucle->group[] = 'organisations.id_organisation';
+}
+
+
+/**
+ * Calcul de la balise #COMPTEUR_CONTACTS
+ * 
+ * Compter les contacts publies lies a une organisation, dans une boucle organisations
+ * pour la vue prive/liste/organisations.html
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+ */
+function balise_COMPTEUR_CONTACTS_dist($p) {
+	return rindex_pile($p, 'compteur_contacts', 'compteur_contacts');
+}
+
+
+
 
 /***
  * Cette balise s'emploie dans une boucle (CONTACTS).
@@ -23,24 +127,21 @@ function balise_NOM_AUTEUR_dist($p) {
 }
 
 
-/***
- * Cette balise s'emploie dans une boucle (CONTACTS).
- * Elle retourne les champs #NOM des spip_organisations liés au contact.
+/**
+ * Calcul de la balise #ORGANISATIONS
  *
+ * @deprecated Utiliser #LESORGANISATIONS
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
  */
 function balise_ORGANISATIONS_dist($p) {
-
-	$connect = !$p->id_boucle ? '' : $p->boucles[$p->id_boucle]->sql_serveur;
-
-	$p->code = "recuperer_fond('modeles/lesorganisations',
-		array('id_contact' => ".champ_sql('id_contact', $p)
-		."), array('trim'=>true), "
-		. _q($connect)
-		.")";
-	$p->interdire_scripts = false; // securite apposee par recuperer_fond()
-
-	return $p;
+	$f = charger_fonction('LESORGANISATIONS', 'balise');
+	return $f($p);
 }
+
 
 /***
  * Ces balises permettent de retrouver le nom de famille (#NOM) et le prénom (#PRENOM)

@@ -1,0 +1,26 @@
+<INCLURE{fond=test/co_inc-entete,page,titre=C&O : Balises} />
+
+
+<h1>La balise <code>\#LESORGANISATIONS</code></h1>
+
+<div class='description'>
+<p>Cette balise, à l'instar de <code>\#LESAUTEURS</code> dans SPIP liste les organisations
+d'un contact, séparés par des virgules, avec un lien vers leur page.</p>
+
+<p>Cette balise appelle le modèle <code>lesorganisations</code></p>
+
+<pre>
+\#LESORGANISATIONS
+</pre>
+</div>
+
+<B_lesorgas>
+	<div class='exemple'>
+<BOUCLE_lesorgas(CONTACTS){par hasard}{0,1}>
+	<p>Pour le contact #ID_CONTACT (#PRENOM #NOM) :</p>
+	#LESORGANISATIONS
+</BOUCLE_lesorgas>
+	</div>
+</B_lesorgas>
+
+<INCLURE{fond=test/co_inc-pied} />

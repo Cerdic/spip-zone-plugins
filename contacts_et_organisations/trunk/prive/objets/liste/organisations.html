@@ -18,6 +18,7 @@
 	</thead>
 	<tbody>
 	<BOUCLE_liste_orga(ORGANISATIONS)
+		{compteur_contacts}
 		{id_contact?}{id_auteur?}{id_parent ?= #ENV{id_parent}}
 		{recherche?}{auteurs.statut ?= #ENV{statut,''}}
 		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20}}>
@@ -29,7 +30,9 @@
 			<//BOUCLE_lien_organisation>
 			<td class="picto"><a href="#GET{url}">#INCLURE{fond=logo/organisation, id_organisation}</a></td>
 			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a></td>
-            <td class='nb_contacts'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">[(#MODELE{nb_contacts}{id_organisation})]</a></td>
+			<td class='nb_contacts'>
+				[(#COMPTEUR_CONTACTS|singulier_ou_pluriel{contacts:nb_contact,contacts:nb_contacts})]
+			</td>
 			<td class='action'>[(#AUTORISER{modifier, contact, #ID_CONTACT}|oui)
 				[(#BOUTON_ACTION{
 					[(#CHEMIN_IMAGE{organisation-del-16.png}|balise_img{<:contacts:supprimer_organisation:>})],
