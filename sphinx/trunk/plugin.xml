@@ -15,14 +15,13 @@
 	dev
 	</etat>
 	<description>
-	Intégration du moteur de recherche SPHINX
+	Int√©gration du moteur de recherche SPHINX
 	</description>
-	<lien></lien>
 	<prefix>
 	sphinx
 	</prefix>
 	<lien>http://contrib.spip.net/Sphinx</lien>
-	<icon></icon>
+	<icon>sphinx-128.png</icon>
 	<fonctions>inc/sphinx.php</fonctions>
 	<chemin dir='' />
 	<categorie>edition</categorie>
