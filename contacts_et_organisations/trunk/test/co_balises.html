@@ -34,7 +34,7 @@ d'un contact, séparés par des virgules, avec un lien vers leur page.</p>
 attachés à l'organisation.</p>
 
 <pre>
-&lt;BOUCLE_nb_orgas(ORGANISATIONS){compteur_contacts}{par nom}{pagination 3}>
+&lt;BOUCLE_nb_orgas(ORGANISATIONS){compteur_contacts}{par nom}>
 	\[(\#COMPTEUR_CONTACTS
 		|singulier_ou_pluriel{contacts:nb_contact,contacts:nb_contacts}
 		|sinon{\<:contacts:contact_aucun:\>})\]
@@ -53,6 +53,45 @@ attachés à l'organisation.</p>
 	[(#PAGINATION|?{<li>…</li>})]
 	</ul>
 </B_nb_orgas>
+
+
+
+
+
+
+
+<h1>La balise <code>\#IDS_ORGANISATION_BRANCHE</code></h1>
+
+<div class='description'>
+<p>Retourne la liste des identifiants d'organisation d'une branche
+d'organisations, séparés par des virgules. Utile avec l'opérateur <code>IN</code> dans
+un critère de boucle tel que <code>{id_organisation IN \#IDS_ORGANISATION_BRANCHE}</code>.</p>
+
+<p>Ainsi on peut afficher tous les contacts d'une organisation et de ses filles :</p>
+<pre>
+&lt;BOUCLE_contacts(CONTACTS){id_organisation IN \#IDS_ORGANISATION_BRANCHE}{par nom}>
+	\#NOM
+	...
+</pre>
+</div>
+
+<B_orgas>
+	<ul class='exemple'>
+<BOUCLE_orgas(ORGANISATIONS){racine}{par nom}{pagination 3}>
+	<li>#NOM
+	<B_contacts>
+		<ul>
+	<BOUCLE_contacts(CONTACTS){par nom}{id_organisation IN #IDS_ORGANISATION_BRANCHE}{pagination 3}>
+		<li>#NOM #PRENOM</li>
+	</BOUCLE_contacts>
+		[(#PAGINATION|?{<li>…</li>})]
+		</ul>
+	</B_contacts>
+	</li>
+</BOUCLE_orgas>
+	[(#PAGINATION|?{<li>…</li>})]
+	</ul>
+</B_orgas>
 
 
 <INCLURE{fond=test/co_inc-pied} />

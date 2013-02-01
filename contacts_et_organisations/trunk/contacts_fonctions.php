@@ -97,6 +97,8 @@ function critere_compteur_contacts_dist($idb, &$boucles, $crit){
  * Compter les contacts publies lies a une organisation, dans une boucle organisations
  * pour la vue prive/liste/organisations.html
  *
+ * Cette balise nécessite le critère compteur_contacts.
+ *
  * @param Champ $p
  *     Pile au niveau de la balise
  * @return Champ
@@ -213,16 +215,27 @@ function balise_CIVILITE_AUTEUR($p) {
 
 
 
-// --------------
 
 /**
+ * Calcul de la balise IDS_ORGANISATION_BRANCHE
+ * 
+ * Cette balise retourne un tableau listant toutes les id_organisation d'une branche.
+ * 
+ * L'identifiant de la branche (id_organisation) est pris dans la boucle
+ * la plus proche sinon dans l'environnement, sauf si l'on indique expressément
+ * les identifiants désirés
  *
- * Cette balise retourne un tableau listant toutes les id_rubrique d'une branche.
- * L'identifiant de la branche (id_rubrique) est pris dans la boucle
- * la plus proche sinon dans l'environnement.
+ * @example
+ *   ```
+ *   #IDS_ORGANISATION_BRANCHE
+ *   #IDS_ORGANISATION_BRANCHE{4,10}
+ *   <BOUCLE_contacts(CONTACTS){id_organisation IN #IDS_ORGANISATION_BRANCHE}>
+ *   ```
  *
- * On ne peut pas l'utiliser dans un {critere IN #IDS_BRANCHE} en 1.8.3 :(
- *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
  */
 function balise_IDS_ORGANISATION_BRANCHE_dist($p) {
 
@@ -249,11 +262,14 @@ function balise_IDS_ORGANISATION_BRANCHE_dist($p) {
 
 
 /**
- * Calcul d'une branche
- * (liste des id_organisation contenues dans une organisation donnee)
+ * Calcul d'une branche d'organisation
+ * 
+ * Liste des id_organisation contenues dans une organisation donnée
  *
  * @param string|int|array $id
+ *   Identifiant(s) d'organisation(s) dont on veut les branches
  * @return string
+ *   Liste des identifiants d'organisation de ou des branches, séparés par des virgules.
  */
 function calcul_organisation_branche_in($id) {
 	static $b = array();
@@ -273,7 +289,7 @@ function calcul_organisation_branche_in($id) {
 					'id_organisation',
 					'spip_organisations',
 					sql_in('id_parent', $r)." AND ". sql_in('id_organisation', $r, 'NOT')
-					)) {
+	)) {
 		$r = join(',', array_map('array_shift', $filles));
 		$branche .= ',' . $r;
 	}
