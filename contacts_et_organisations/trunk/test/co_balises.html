@@ -1,6 +1,7 @@
 <INCLURE{fond=test/co_inc-entete,page,titre=C&O : Balises} />
 
 
+
 <h1>La balise <code>\#LESORGANISATIONS</code></h1>
 
 <div class='description'>
@@ -22,5 +23,36 @@ d'un contact, séparés par des virgules, avec un lien vers leur page.</p>
 </BOUCLE_lesorgas>
 	</div>
 </B_lesorgas>
+
+
+
+<h1>La balise <code>\#COMPTEUR_CONTACTS</code></h1>
+
+<div class='description'>
+<p>Associée au critère <code>{compteur_contacts}</code>, sur une boucle
+<code>ORGANISATIONS</code>, cette balise retourne le nombre de contacts
+attachés à l'organisation.</p>
+
+<pre>
+&lt;BOUCLE_nb_orgas(ORGANISATIONS){compteur_contacts}{par nom}{pagination 3}>
+	\[(\#COMPTEUR_CONTACTS
+		|singulier_ou_pluriel{contacts:nb_contact,contacts:nb_contacts}
+		|sinon{\<:contacts:contact_aucun:\>})\]
+</pre>
+</div>
+
+<B_nb_orgas>
+	<ul class='exemple'>
+<BOUCLE_nb_orgas(ORGANISATIONS){compteur_contacts}{par nom}{pagination 3}>
+	<li>#NOM :
+	[(#COMPTEUR_CONTACTS
+		|singulier_ou_pluriel{contacts:nb_contact,contacts:nb_contacts}
+		|sinon{<:contacts:contact_aucun:>})]
+	</li>
+</BOUCLE_nb_orgas>
+	[(#PAGINATION|?{<li>…</li>})]
+	</ul>
+</B_nb_orgas>
+
 
 <INCLURE{fond=test/co_inc-pied} />
