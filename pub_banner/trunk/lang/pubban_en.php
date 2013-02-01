@@ -77,7 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'doc_info' => 'Please refer to the documentation for the plugin information :',
 	'doc_titre_court' => 'Ad Banner Documentation',
 	'doc_titre_page' => 'Documentation of plugin "Ad Banner"',
-	'docskel_sep' => '----', # NEW
+	'docskel_sep' => '----',
 	'documentation_1' => 'The plugin "Ad Banner" can be installed in the same way that all SPIP plugins ({[dedicated article on spip.net->http://www.spip.net/fr_article3396.html]}).
 
 Default values ​​are entered in the tables, namely:
@@ -108,12 +108,12 @@ Followed by the name of the banner you want to display. The tag is replaced by a
 	'documentation_3' => 'The plugin offers following campaign effectiveness in several ways :
 -* Via the page "statistics" in the private area, which presents different graphs tracking views and clicks, according to several periods to choose for each banner,
 -* Via a public page that summarizes the values ​​of each advertisement ({all, one or severam}) and allow export to CSV format ({[see for example pubs 1 and 2->@url_exemple@]}).',
-	'documentation_info' => 'Documentation/Information', # NEW
+	'documentation_info' => 'Documentation/Information',
 	'download_flash_player' => 'The display of this object requires the Adobe Flash Player. Click here to get it for free.',
 	'droits' => 'Open rights on the pub',
 	'droits_aff_pub' => 'Number of displays',
 	'droits_clic_pub' => 'Number of clicks',
-	'droits_dates_pub' => 'Dates', # NEW
+	'droits_dates_pub' => 'Dates',
 
 	// E
 	'edit_pub_ok_bannieres_differents' => 'OK - values ​​recorded but the selected advertising banners have different sizes ... This may generate display errors.',
@@ -132,7 +132,7 @@ Followed by the name of the banner you want to display. The tag is replaced by a
 	'erreur_url_not_url' => 'The address entered does not seem to be a web address ...',
 	'error_dimensions_missing_empl' => 'You must specify the dimensions for your banner',
 	'error_dimensions_numeric_empl' => 'Il semble qu\'il y ait eu une erreur de dimensions', # NEW
-	'error_global' => 'Il semble qu\'une erreur soit survenue ...', # NEW
+	'error_global' => 'An error seems to have occurred...',
 	'error_refresh_numeric_empl' => 'It seems that there has been an value error, you must specify a number of seconds',
 	'error_titre_empl' => 'You must specify a title for your banner',
 	'evo_empl' => 'Performance trends',
@@ -199,14 +199,14 @@ Followed by the name of the banner you want to display. The tag is replaced by a
 	'info_statut_publicite_1' => 'This ad is :',
 	'info_taille_banniere' => 'Size of the banner',
 	'info_titre_banniere' => 'banner title',
-	'info_titre_banniere_active' => 'Active', # NEW
-	'info_titre_banniere_inactive' => 'Inactive', # NEW
+	'info_titre_banniere_active' => 'Active',
+	'info_titre_banniere_inactive' => 'Inactive',
 	'info_titre_banniere_poubelle' => 'In the bin',
-	'info_titre_id_banniere' => 'Banner_ID', # NEW
+	'info_titre_id_banniere' => 'Banner_ID',
 	'info_titre_id_comment' => 'If the field is empty, this value will be generated from the title. <em>It is strongly recommended not to use accents or special characters, it may cause an error while calling PUBBAN tag...</em>',
-	'info_titre_publicite_active' => 'Active', # NEW
+	'info_titre_publicite_active' => 'Active',
 	'info_titre_publicite_creee' => 'Created',
-	'info_titre_publicite_inactive' => 'Inactive', # NEW
+	'info_titre_publicite_inactive' => 'Inactive',
 	'info_titre_publicite_obsolete' => 'Obsolete',
 	'info_titre_publicite_poubelle' => 'In the bin',
 	'info_titre_publicite_rompue' => 'Broken link',
@@ -248,7 +248,7 @@ Numerous statistical studies show that the banners at the top of a web page, top
 
 {{Package}} is also used for non-standard campaigns: embedding in pages, intrusive promotional products, active campaign...
 ',
-	'installation' => 'Installation', # NEW
+	'installation' => 'Installation',
 	'integer_edit' => 'Banner edition ',
 	'intro_admin' => '<em>ad banners</em> management',
 	'intro_integer' => 'The <em>banners</em> : ad banners',
@@ -263,7 +263,7 @@ Numerous statistical studies show that the banners at the top of a web page, top
 	'intro_stats_banner' => 'Reading statistics',
 	'intro_stats_pub' => 'Reading statistics',
 	'intro_texte_stats_banner' => 'Statistics figures allow to estimate effectiveness of advertisements : particularly, <b>the overall ratio</b> indicates the number of clicks per the number of display inserts.<br /><br />It is interesting to compare the ratios of banners based on their particular position.<br /><br /><em>(cf. LICENSES at the bottom of the page)</em><br />',
-	'intro_texte_stats_pub' => '', # NEW
+	'intro_texte_stats_pub' => '',
 
 	// L
 	'leaderboard_banner' => 'Banner "Leaderboard"',
@@ -339,7 +339,7 @@ Numerous statistical studies show that the banners at the top of a web page, top
 	'ratio' => 'Ratio (clicks / views)',
 	'ratio_comment' => 'Ratio pages with banner / total pages.',
 	'ratio_pages' => 'Pages ratio (visibility)',
-	'ratio_txt' => 'Ratio', # NEW
+	'ratio_txt' => 'Ratio',
 	'refresh_comment' => 'Time after which the banner content is refreshed, to cancel this option, set the value <code>0</code>.',
 	'refresh_time' => 'Refresh Time',
 	'reponse_form_def_droits' => 'Please enter the advertising rights for (on one line)',
@@ -354,7 +354,7 @@ Numerous statistical studies show that the banners at the top of a web page, top
 	// S
 	'search_pubban' => 'Search the banners',
 	'search_results' => 'Search results',
-	'secondes' => 'secondes', # NEW
+	'secondes' => 'secondes',
 	'see_doc' => 'See the documentation (internal)',
 	'see_doc_in_new_window' => 'Open the documentation in new window',
 	'see_doc_in_texte_brut' => 'See the documentation in plain text (skeletal problems)',
@@ -371,7 +371,7 @@ Numerous statistical studies show that the banners at the top of a web page, top
 	// T
 	'target_blank' => 'Redirection in a new window',
 	'target_parent' => 'Redirection in current window',
-	'testing_page_code' => 'Code : ', # NEW
+	'testing_page_code' => 'Code : ',
 	'texte_admin' => 'The ads are organized in different <b>banners</b>, the object displayed in the skeletons, have each an ad pannel, <b>inserts</b>, which are displayed alternately at every banner call.<br /><br />The plugin stores display numbers and clicks on each insert, to present <b>detailed statistics</b>, useful to estimate the performance of banners.',
 	'texte_brut' => 'Plain text',
 	'titre' => 'Title',
@@ -388,7 +388,7 @@ Numerous statistical studies show that the banners at the top of a web page, top
 	'titre_tablo_nom' => 'Title of advertising',
 	'titre_tablo_url' => 'URL redirection (by clicking)',
 	'trash_is_empty' => 'The bin is empty',
-	'type' => 'Type', # NEW
+	'type' => 'Type',
 	'type_empl' => 'Banner',
 	'type_encart' => 'Insert',
 	'type_flash' => 'another flash object',
