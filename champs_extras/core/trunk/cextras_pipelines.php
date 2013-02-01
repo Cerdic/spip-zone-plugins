@@ -23,7 +23,6 @@ function champs_extras_objet($table) {
 	if (!$saisies_tables) {
 		$saisies_tables = pipeline('declarer_champs_extras', array());
 	}
-
 	return isset($saisies_tables[$table]) ? $saisies_tables[$table] : array();
 }
 

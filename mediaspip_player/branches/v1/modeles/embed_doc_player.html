@@ -1,0 +1,22 @@
+[(#REM)
+	Modèle utilisé pour afficher le code d'embed de document
+	Gère les types de documents suivants :
+	- FLV pour les vidéos
+	- MP3 pour les sons
+]
+<BOUCLE_doc(DOCUMENTS) {id_document}>
+[(#REM) Document mp3 ? ]
+[(#EXTENSION|=={mp3}|oui)
+<div>
+[(#MODELE{player_flowplayer_audio,id_document,largeur=#ENV{largeur},hauteur=#ENV{hauteur},env})][(#ENV{titre}|!={non}|oui)[
+<p class="titre">(#TITRE)</p>]][(#ENV{descriptif}|!={non}|oui)[
+<p class="descriptif">(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</p>]
+]</div>]
+[(#REM) Document flv ou mp4 ]
+[(#EXTENSION|in_array{#ARRAY{0,flv,1,mp4}}|oui)
+<div>
+[(#MODELE{player_flowplayer_video,id_document,largeur=#ENV{largeur},hauteur=#ENV{hauteur},env})][(#ENV{titre}|!={non}|oui)[
+<p class="titre">(#TITRE)</p>]][(#ENV{descriptif}|!={non}|oui)[
+<p class="descriptif">(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</p>]]
+</div>]
+</BOUCLE_doc>

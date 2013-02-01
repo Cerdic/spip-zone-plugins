@@ -20,9 +20,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function inc_spipmotion_ffprobe_dist($chemin){
 	include_spip('inc/filtres');
 	$infos = array();
+	$metas = array();
 	if(file_exists($chemin)){
 		ob_start();
-		passthru(escapeshellcmd("ffprobe -i $chemin -show_format -show_streams"));
+		passthru("ffprobe -i '$chemin' -show_format -show_streams");
 		$metadatas=ob_get_contents();
 		ob_end_clean();
 		preg_match('/\[FORMAT\](.*)\[\/FORMAT\]/s', $metadatas, $formats);

@@ -19,10 +19,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function inc_spipmotion_mediainfo_dist($chemin){
 	include_spip('inc/filtres');
-	$infos = array();
+	$infos = array('hasaudio'=>'non','hasvideo' => 'non');
 	if(file_exists($chemin)){
 		ob_start();
-		passthru(escapeshellcmd("mediainfo -f --Output=XML $chemin"));
+		passthru("mediainfo -f --Output=XML '$chemin'");
 		$metadatas=ob_get_contents();
 		ob_end_clean();
 		include_spip('inc/xml');
@@ -31,7 +31,6 @@ function inc_spipmotion_mediainfo_dist($chemin){
 		foreach($tracks as $track => $info){
 			$metas[$track] = $info;
 			if($track == 'track type="General"'){
-				spip_log($info[0],'test');
 				$infos['titre'] = $info[0]['Title'][0] ? $info[0]['Title'][0] : ($info[0]['Movie_name'][0] ? $info[0]['Movie_name'][0] : $info[0]['Track_name '][0]);
 				$infos['descriptif'] = $info[0]['Description'][0] ? $info[0]['Description'][0] : $info[0]['desc'][0];
 				if($infos['descriptif'] == ''){
@@ -181,7 +180,6 @@ function inc_spipmotion_mediainfo_dist($chemin){
 				$infos['hasvideo'] = 'oui';
 			}
 			if($track == 'track type="Audio"'){
-				$infos['hasaudio'] = 'oui';
 				$infos['audiobitrate'] = $info[0]['Bit_rate'][0];
 				$infos['audiochannels'] = $info[0]['Channel_s_'][0];
 				$infos['audiochannels'] = $info[0]['Channel_s_'][0];
@@ -195,16 +193,15 @@ function inc_spipmotion_mediainfo_dist($chemin){
 				}else{
 					$infos['audiocodecid'] = $info[0]['Codec_ID'][0] ? $info[0]['Codec_ID'][0] : strtolower($info[0]['Codec'][0]);
 				}
-				if(!$infos['audiobitrate'] && !$infos['audiochannels'] && !$infos['audiocodec'] && !$infos['audiobitratemode']){
-					unset($infos['hasaudio']);
+				if($infos['audiobitrate'] && $infos['audiochannels'] && $infos['audiocodec'] && $infos['audiobitratemode']){
+					$infos['hasaudio'] = 'oui';
 				}
 			}
 		}
 	}
-	if(!$infos['hasaudio'])
-		$infos['hasaudio'] = 'non';
-	if(!$infos['hasvideo'])
-		$infos['hasvideo'] = 'non';
+	else{
+		spip_log('fichier_non_existant','elix_deja_base');
+	}
 
 	$metas['Retrieved infos in database'] = $infos;
 	$infos['metadatas'] = serialize($metas);

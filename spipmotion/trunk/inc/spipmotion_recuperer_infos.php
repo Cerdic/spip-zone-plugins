@@ -98,11 +98,10 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 	if(!$GLOBALS['meta']['spipmotion_ffprobe_casse']){
 		$ffprobe = charger_fonction('spipmotion_ffprobe','inc');
 		$infos_ffprobe = $ffprobe($fichier);
-	}
-	
-	foreach($infos_ffprobe as $info => $valeur){
-		if(!isset($infos[$info]) OR !$infos[$info])
-			$infos[$info] = $valeur;
+		foreach($infos_ffprobe as $info => $valeur){
+			if(!isset($infos[$info]) OR !$infos[$info])
+				$infos[$info] = $valeur;
+		}
 	}
 	
 	if(strlen($document['titre']) > 0){
