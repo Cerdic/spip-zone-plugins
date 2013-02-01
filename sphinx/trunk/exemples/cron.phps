@@ -27,6 +27,13 @@ foreach ($sources as $source => $cfg) {
       $new[] = $source;
     else
       echo "$source inchangee (modifie il y a ".(time()-$up)."s, indexe ".($last-$up)."s plus tard)\n";
+
+    # creer le dictionnaire s'il n'existe pas ou s'il date
+    $dict = 'data/'.$source.'.dict.txt';
+    if (@filemtime($dict) < $last - 7*24*3600) {
+      $cmd = "indexer --buildstops $dict 100000 --buildfreqs $source -c sphinx.conf";
+      echo `$cmd`;
+    }
   }
 }
 
