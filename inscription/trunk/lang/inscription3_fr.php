@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans http://svn.aires-de-confluxence.info/svn/plugins_spip/inscription3/lang
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/inscription/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_suppression_compte' => 'Supprimer votre compte',
-	
+
 	// C
 	'cfg_description' => 'Paramétrer les champs supplémentaires pour les utilisateurs et d\'autres fonctionnalités.',
 	'cfg_titre' => 'Inscription 3',
@@ -93,9 +93,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_afficher_utilisateurs' => 'Afficher les utilisateurs',
 	'info_aconfirmer' => 'à confirmer',
+	'info_cextras_desc' => 'Champs extras déjà présents en base.',
 	'info_connection' => 'Informations de connexion',
 	'info_defaut_desc' => 'Possibilités de paramétrage',
-	'info_cextras_desc' => 'Champs extras déjà présents en base.',
 	'info_pass_faible' => 'Faible',
 	'info_pass_fort' => 'Fort',
 	'info_pass_moyen' => 'Moyen',
@@ -139,8 +139,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_public_reglement_url' => 'J\'ai lu et j\'accepte le <a href="@url@" class="spip_in reglement">règlement</a>',
 	'label_public_reglement_url_mediabox' => 'J\'ai lu et j\'accepte le <a href="@url@" @js@ class="spip_in reglement">règlement</a>',
 	'label_reglement' => 'Règlement à valider',
-	'label_reglement_explication' => 'Afficher une case règlement et forcer sa validation',
 	'label_reglement_article' => 'Article original du site correspondant au règlement',
+	'label_reglement_explication' => 'Afficher une case règlement et forcer sa validation',
 	'label_secteur' => 'Secteur',
 	'label_sexe' => 'Civilité',
 	'label_societe' => 'Société / Association',

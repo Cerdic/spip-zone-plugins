@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.mediaspip.net/spip.php?page=tradlang
+// extrait automatiquement de http://trad.spip.net/tradlang_module/inscription3?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -17,6 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_resultat_recherche' => 'There isn\'t any result that corresponds to your query.',
 	'autre' => 'Other',
 
+	// B
+	'bouton_suppression_compte' => 'Delete your account',
+
 	// C
 	'cfg_description' => 'This plugin extends the informations about the authors of your site, you can choose here some additionnal fields and other functionnalities.',
 	'cfg_titre' => 'Subscription 3',
@@ -30,17 +33,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_inscription_texte_origine' => 'The original one (SPIP\'s default)',
 	'choix_masculin' => 'Mr.',
 	'compte_active' => 'Your account on @nom_site@',
-	'compte_efface' => 'Your account has been deleted.',
 	'configuration' => 'Configuration',
 	'contacts_personnels' => 'Personnal contacts',
 
 	// D
 	'delete_user_select' => 'Delete the selected users',
+	'descriptif_page_inscription' => 'Registration to the site @site@',
 	'descriptif_plugin' => 'You will find here all registered users on the site. Their status are indicated by the color of their icon. <br /><br />You can configure additional fields, offered as an option for visitors at the registration.',
 	'divers' => 'any other business',
 
 	// E
-	'effacement_auto_impossible' => 'The account cannot be traced automatically. Please contact us.',
 	'email_bonjour' => 'Hello @nom@,',
 	'erreur_chaine_valide' => 'Please insert a string',
 	'erreur_chainelettre' => '(composed only of letters)',
@@ -48,15 +50,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_champ_obligatoire' => 'This field is required',
 	'erreur_compte_attente' => 'Your account is awaiting validation',
 	'erreur_compte_attente_mail' => 'This address is associated with a not validated account',
+	'erreur_effacement_auto_impossible' => 'The account can\'t be automatically deleted, please contact us.',
 	'erreur_info_statut' => 'The user @nom@ has the status "@statut@".',
 	'erreur_inscription_desactivee' => 'Registration is disabled on this site',
 	'erreur_login_deja_utilise' => 'This login is already in use. Please choose another.',
+	'erreur_naissance_futur' => 'Are your really born in the future?',
+	'erreur_naissance_moins_cinq' => 'Are your really less than 5 years old?',
+	'erreur_naissance_plus_110' => 'Are your really more than 100 years old?',
 	'erreur_numero_valide' => 'Please give a valid number',
 	'erreur_numero_valide_international' => 'This number must be in international form (ex: +32 475 123 456)',
 	'erreur_reglement_obligatoire' => 'You must accept the terms of use',
 	'erreur_signature_deja_utilise' => 'This value is already used by another user.',
+	'erreur_suppression_compte_connecte' => 'You should be connected to the site to delete your account.',
+	'erreur_suppression_compte_non_auteur' => 'You don\'t have sufficient rights to delete this account.',
+	'erreur_suppression_compte_webmestre' => 'The account to delete is the one of a webmaster, you can\'t delete it.',
 	'erreur_suppression_comptes_impossible' => 'Deleting account failed',
-	'exp_divers' => 'Field which will be offered to the visitors with the name Comments',
 	'exp_statut_rel' => 'This field is different from the SPIP status, this one is used for the internal control of an institution',
 	'explication_affordance_form' => 'Label displayed on the forms of identification (#LOGIN_PUBLIC)',
 	'explication_auto_login' => 'If the password is filled in the form, the user will beautomatically connected to the website after validating the account creation form.',
@@ -65,7 +73,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_inscription_texte' => 'Introduction text visible at the beginning of the subscription from',
 	'explication_modifier_logo_auteur' => 'To edit the logo (on the left), just double click on it.',
 	'explication_password_complexite' => 'Adds a javascript check password when users are invited to choose or change it.',
+	'explication_reglement_article' => 'The article "<a href="@url@" class="spip_in">@titre@</a>" is used as a settlement.',
 	'explication_statut' => 'Choose the status to be given to new members',
+	'explication_suppression_compte' => 'Confirm the deletion of your account (@nom@ - @email@)',
 	'explication_valider_compte' => 'The accounts must be validated by an administrator before they can be used.',
 
 	// F
@@ -76,6 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_oblig_expl' => 'required field on the forms of registration and modification',
 	'form_retour_aconfirmer' => 'Your account has been created correctly. It is awaiting approval by an administrator.',
 	'form_retour_inscription_pass' => 'Your account has been created correctly. You can use it immediately to connect to the website.',
+	'form_retour_inscription_pass_logue' => 'Your account has been successfully created. You\'re currently correctly identified.', # MODIF
 	'formulaire_inscription' => 'Registration form',
 	'formulaire_inscription_ok' => 'Your registration has been noted. You will receive your login information by email.',
 	'formulaire_remplir_obligatoires' => 'Please fill in the required fields.',
@@ -84,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_afficher_utilisateurs' => 'The users',
 	'info_aconfirmer' => 'to be confirmed',
+	'info_cextras_desc' => 'Extras fields already created in the database.',
 	'info_connection' => 'Login information',
 	'info_defaut_desc' => 'Information which is required by default',
 	'info_pass_faible' => 'Weak',
@@ -107,6 +119,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_email' => 'Email',
 	'label_fax' => 'Fax',
 	'label_fonction' => 'Function',
+	'label_inscription_depuis' => 'Member since @date@.',
 	'label_inscription_texte' => 'From introduction',
 	'label_inscription_texte_libre' => 'Text in case of open choice',
 	'label_login' => 'Username (login)',
@@ -129,6 +142,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_public_reglement_url_mediabox' => 'I have read and agree the <a href="@url@" @js@ class="spip_in reglement">terms of use</a>',
 	'label_reglement' => 'Terms of use to validate',
 	'label_reglement_article' => 'Original article from the site corresponding to the terms of use',
+	'label_reglement_explication' => 'Display a settlement checkbox and force  its validation.',
 	'label_secteur' => 'Sector of activity',
 	'label_sexe' => 'Gender',
 	'label_societe' => 'Company / Association ...',
@@ -145,6 +159,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_oubli_pass' => 'No password / password forgotten',
 	'legende' => 'Caption',
 	'legende_affordance_form' => 'Identification form',
+	'legende_cextras' => 'Extras fields',
 	'legende_formulaire_inscription' => 'Subscription form',
 	'legende_info_defaut' => 'Default information',
 	'legende_info_internes' => 'Internal information',
@@ -178,6 +193,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_auteur_valide_contenu_admin' => '@admin@ has enabled the account of "@nom@".',
 	'message_auteur_valide_titre_admin' => '[@nom_site_spip@] Account of @nom@ enabled',
 	'message_auto' => '(this is an automatic message)',
+	'message_compte_efface' => 'Your account has been deleted.',
 	'message_modif_email_ok' => 'Your email address has been properly modified.',
 	'message_users_supprimes_nb' => '@nb@ user(s) have been deleted',
 	'message_users_supprimes_un' => 'One user has been deleted',
@@ -208,18 +224,17 @@ You will receive and email telling you how to change your login.',
 
 	// R
 	'raccourcis' => 'Shortcuts',
-	'recherche_case' => 'Search fields', # MODIF
-	'recherche_utilisateurs' => 'Search for users', # MODIF
-	'recherche_valeur' => 'Search', # MODIF
+	'recherche_case' => 'Search fields',
+	'recherche_utilisateurs' => 'Search an user',
+	'recherche_valeur' => 'Search:',
 
 	// S
 	'statut_rel' => 'Internal status',
 	'statuts_actifs' => 'The icons colors correspond to the following status:',
-	'supprimer_adherent' => 'Delete member', # MODIF
+	'supprimer_adherent' => 'Delete member',
 
 	// T
-	'table_expl' => 'The field will be displayed on the list of the members (private area)', # MODIF
-	'tel' => 'Tel.',
+	'table_expl' => 'The field will be displayed on the list of the users (private area)',
 	'texte_email_confirmation' => 'Your account has been activated. From now on you can access the site using your login.n
 
 Your login is: @login@
@@ -254,6 +269,7 @@ If you did not ask for this registration or do not want to take part in the site
 	'titre_modifier_auteur' => 'Edit this user\'s profile',
 	'titre_modifier_auteur_nom' => 'Edit @nom@\'s profile',
 	'titre_modifier_profil' => 'Edit your profile',
+	'titre_supprimer_compte' => 'Delete your account',
 
 	// V
 	'vos_articles_auteur' => 'Your articles',
