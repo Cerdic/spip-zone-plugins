@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.mediaspip.net/spip.php?page=tradlang
+// extrait automatiquement de http://trad.spip.net/tradlang_module/diogene?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_diogene' => 'Remove this template',
 
 	// C
-	'champ_date_publication' => 'Date of publication',
+	'champ_date_publication' => 'Publication date',
 	'champ_date_publication_anterieure' => 'Date of earlier publishing',
 	'champ_forum' => 'Enable / disable the forums',
 	'choix_langue' => 'Language',
@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'diogene' => 'Diogene',
 	'diogene_statuts' => 'Diogene (Status)',
+	'diogenes' => 'Forms templates',
 
 	// E
 	'editer_diogene_explication' => 'Diogene enables administrators to modify the classical edit forms by removing or adding some fields.',
@@ -28,16 +29,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_autorisation_login_publier' => 'You should be identified to publish something there.',
 	'erreur_autorisation_modifier_site' => 'Your status doesn\'t enables you to edit this web site',
 	'erreur_autorisation_statut_publier' => 'Your status doesn\'t enables you to publish there.',
+	'erreur_autorisation_statut_publier_limite' => 'You have reached the limit of objects that can be <a href="@url@">awaiting publication</a> (@nb@)',
 	'erreur_diogene_multiple_page' => 'You can only have one "pages" template on the site',
 	'erreur_droits_objet_publier' => 'Your current rights do not allow you to publish this kind of object.',
 	'erreur_forums' => 'Error in choosing the configuration of forums',
 	'erreur_identifiant_existant' => 'This ID already exists',
+	'erreur_objet_diogene_max' => 'The maximal number of templates (@max@) for this typo of object (@objet@) has already been reached.',
+	'erreur_objet_non_diogene' => 'This object type is not taken into account (@objet@).',
 	'erreur_objet_publier' => 'The type of object you want to publish does not exist.',
+	'erreur_secteur_diogene_inexistant' => 'Warning, the section of the form template doesn\'t exist.',
 	'erreur_valeur_float' => 'The value for "@champ@" should be a number.',
 	'erreur_valeur_int' => 'The value for "@champ@" should be a fixed number.',
 	'explication_article_deja_traduit' => 'This article has allready been translated in: ',
 	'explication_contenu_attente' => 'These objects of other authors are pending final publication. Their publication has been requested.',
 	'explication_info_type' => 'This identifier must be unique and contain no specific character',
+	'explication_nombre_attente' => 'Maximum number of objects which can be pending publication (does not affect administrators, leave 0 for unlimited).',
 	'explication_rubrique_statut' => 'A section is considered as visible (published) when it contains at least an other published element.',
 	'explication_statut_auteur' => 'This field defines the minimal author status in order to create an object corresponding to this template.',
 	'explication_statut_auteur_publier' => 'This field defines the minimal author status in order to definitively publish an object corresponding to this template.',
@@ -48,11 +54,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_editer_diogene_nouveau' => 'New template (@type@)',
+	'icone_modifier_diogene' => 'Edit this template',
+	'icone_nouveau_diogene' => 'Create a new template',
+	'info_1_diogene' => '1 template',
+	'info_aucun_diogene' => 'No template',
 	'info_aucune_sous_rubrique' => 'You have not published anything.',
 	'info_diogenes_rien_publie' => 'You have not published anything.',
 	'info_menu_diogene' => 'Menu item for plugin diogene',
+	'info_nb_diogenes' => '@nb@ templates',
 	'info_numero_diogene' => 'Template number',
-	'info_publier_rubrique' => 'Publish in this section :',
+	'info_publier_rubrique' => 'Publish in this section:',
+	'info_referencement_automatise' => 'Les informations de référencement automatisé', # NEW
 	'info_rubrique_new' => 'New empty section',
 	'info_rubrique_publie' => 'Visible section',
 	'info_rubrique_vide' => 'Empty section',
@@ -72,6 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_limiter_secteur' => 'Limit to the root section',
 	'label_logo_site' => 'Website\'s logo',
 	'label_menu' => 'Shown in the public menu',
+	'label_nombre_attente' => 'Maximum waiting',
 	'label_polyhier' => 'Polyhierarchy',
 	'label_polyhier_desactiver' => 'Deactivate polyhierarchy',
 	'label_statut_auteur' => 'Minimal status of the authors',
@@ -82,7 +95,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'libelle_logo_diogene' => 'TEMPLATE\'S LOGO',
 	'lien_creer' => 'Create: ',
 	'lien_creer_version' => 'Create a translation in: @lang@',
-	'lien_editer_article' => 'Edit this article',
 	'lien_editer_publication' => 'Edit this publication',
 	'lien_editer_rubrique' => 'Edit this section',
 	'lien_editer_site' => 'Edit this Web site',
@@ -105,8 +117,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_rubrique_mis_a_jour' => 'The section has been updated.',
 	'message_site_mis_a_jour' => 'The website has been updated',
 	'message_valider_action' => 'Are you sure?',
+	'message_valider_suppression' => 'Are you sure you want to delete this template?',
 	'modifier_rubriques' => 'Edit the sections',
 	'modifier_vos_objets' => 'Edit your publications',
+
+	// O
+	'option_statut_changer' => 'Change the status as: @statut@',
+	'option_statut_laisser' => 'Leave the status: @statut@',
 
 	// P
 	'publier_titre' => 'Publish: ',
@@ -141,8 +158,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_modifier_publication' => 'Manage this publication',
 	'titre_modifier_rubrique' => 'Manage this section',
 	'titre_modifier_site' => 'Manage this site',
+	'titre_publier_nouveau_page' => 'A new object',
 	'titre_publier_proposes' => 'A proposed object (@nb@)',
-	'titre_publier_proposes_page' => 'A proposed object'
+	'titre_publier_proposes_page' => 'A proposed object',
+	'titre_publier_proposes_page_vous' => 'Your proposed objects'
 );
 
 ?>

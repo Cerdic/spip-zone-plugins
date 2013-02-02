@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans http://svn.aires-de-confluxence.info/svn/plugins_spip/diogene/lang
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/diogene/diogene/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -17,8 +17,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'diogene' => 'Template de formulaire',
-	'diogenes' => 'Templates de formulaires',
 	'diogene_statuts' => 'Diogène (Statuts)',
+	'diogenes' => 'Templates de formulaires',
 
 	// E
 	'editer_diogene_explication' => 'Diogène permet de modifier les formulaire d\'édition classiques en enlevant ou rajoutant certains champs.',
@@ -29,11 +29,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_autorisation_statut_publier' => 'Votre statut ne vous autorise pas à publier ici.',
 	'erreur_autorisation_statut_publier_limite' => 'Vous avez atteint la limite d\'objet pouvant être <a href="@url@">en attente de publication</a> (@nb@)',
 	'erreur_diogene_multiple_page' => 'Vous ne pouvez avoir qu\'un seul template "page" sur ce site',
-	'erreur_objet_diogene_max' => 'Le nombre de masques maximum (@max@) pour ce type d\'objet (@objet@) est déjà atteint.',
-	'erreur_objet_non_diogene' => 'Ce type d\'objet n\'est pas pris en compte (@objet@).',
 	'erreur_droits_objet_publier' => 'Vos droits actuels ne vous autorisent pas à publier ce type d\'objet.',
 	'erreur_forums' => 'Erreur dans le choix de la configuration des forums',
 	'erreur_identifiant_existant' => 'Cet identifiant est déjà existant',
+	'erreur_objet_diogene_max' => 'Le nombre de masques maximum (@max@) pour ce type d\'objet (@objet@) est déjà atteint.',
+	'erreur_objet_non_diogene' => 'Ce type d\'objet n\'est pas pris en compte (@objet@).',
 	'erreur_objet_publier' => 'Le type d\'objet que vous souhaitez publier n\'existe pas.',
 	'erreur_secteur_diogene_inexistant' => 'Attention, la rubrique concernant ce template de formulaire est inexistante.',
 	'erreur_valeur_float' => 'La valeur "@champ@" doit être un nombre',
@@ -93,7 +93,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'libelle_logo_diogene' => 'Logo du template',
 	'lien_creer' => 'Créer : ',
 	'lien_creer_version' => 'Créer une version en : @lang@',
-	'lien_editer_publication' => 'Éditer cet article',
 	'lien_editer_publication' => 'Éditer cette publication',
 	'lien_editer_rubrique' => 'Éditer cette rubrique',
 	'lien_editer_site' => 'Éditer ce site',
@@ -119,7 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_valider_suppression' => 'Êtes vous sûr de vouloir supprimer ce template ?',
 	'modifier_rubriques' => 'Modifier les rubriques',
 	'modifier_vos_objets' => 'Modifier vos publications',
-	
+
 	// O
 	'option_statut_changer' => 'Changer le statut en : @statut@',
 	'option_statut_laisser' => 'Laisser le statut en : @statut@',
@@ -157,10 +156,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_modifier_publication' => 'Modifier cette publication',
 	'titre_modifier_rubrique' => 'Modifier cette rubrique',
 	'titre_modifier_site' => 'Modifier ce site',
-	'titre_publier_proposes' => 'Un objet proposé (@nb@)',
-	'titre_publier_proposes_page_vous' => 'Vos objets proposés',
 	'titre_publier_nouveau_page' => 'Un nouvel objet',
-	'titre_publier_proposes_page' => 'Un objet proposé'
+	'titre_publier_proposes' => 'Un objet proposé (@nb@)',
+	'titre_publier_proposes_page' => 'Un objet proposé',
+	'titre_publier_proposes_page_vous' => 'Vos objets proposés'
 );
 
 ?>
