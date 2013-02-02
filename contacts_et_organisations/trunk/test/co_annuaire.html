@@ -3,8 +3,8 @@
 
 [(#REM)
 -----------------------------------------------------------------------
-Détail d'un contact
-Affiché si un contact est demandé
+DÃ©tail d'un contact
+AffichÃ© si un contact est demandÃ©
 
 
 ]
@@ -14,7 +14,7 @@ Affiché si un contact est demandé
 		<BOUCLE_OrganisationContact(ORGANISATIONS organisations_contacts){id_contact}>
 			<BOUCLE_ArboOrganisations(ORGANISATIONS){id_organisation=#ID_PARENT}{tous}>
 				<BOUCLE_HierarchieArboOrganisations(BOUCLE_ArboOrganisations) />
-				[(#REM) #ID_PARENT doit être present sinon la recursivite se fait mal... etonnant ]
+				[(#REM) #ID_PARENT doit Ãªtre present sinon la recursivite se fait mal... etonnant ]
 				&gt; <a href="#URL_PAGE{test/co_annuaire,id_organisation=#ID_ORGANISATION}">#NOM</a>
 			</BOUCLE_ArboOrganisations>
 			&gt; <a href="#URL_PAGE{test/co_annuaire,id_organisation=#ID_ORGANISATION}">#NOM</a>
@@ -22,10 +22,10 @@ Affiché si un contact est demandé
 		&gt; #NOM
 	</p>
 
-	<h1>Contact : #PRENOM #NOM</h1>
+	<h1>Contact :Â #PRENOM #NOM</h1>
 
 	<div class='description'>
-		<p>Un contact peut avoir des coordonnées attachées, avec le plugin «Coordonnées».
+		<p>Un contact peut avoir des coordonnÃ©es attachÃ©es, avec le plugin Â«CoordonnÃ©esÂ».
 		Pour afficher ses adresses, on peut faire :</p>
 <pre>
 &lt;BOUCLE_adr(ADRESSES){id_contact}>
@@ -52,8 +52,8 @@ Affiché si un contact est demandé
 
 [(#REM)
 -----------------------------------------------------------------------
-Détail d'une organisation
-Affiché si un contact n'est pas demandé, mais une organisation si
+DÃ©tail d'une organisation
+AffichÃ© si un contact n'est pas demandÃ©, mais une organisation si
 
 
 ]
@@ -62,13 +62,13 @@ Affiché si un contact n'est pas demandé, mais une organisation si
 		<a href="#URL_PAGE{test/co_annuaire}">Annuaire</a>
 		<BOUCLE_ArboContacts(ORGANISATIONS){id_organisation=#ID_PARENT}{tous}>
 			<BOUCLE_HierarchieArboContacts(BOUCLE_ArboContacts) />
-			[(#REM) #ID_PARENT doit être present sinon la recursivite se fait mal... etonnant ]
+			[(#REM) #ID_PARENT doit Ãªtre present sinon la recursivite se fait mal... etonnant ]
 			&gt; <a href="#URL_PAGE{test/co_annuaire,id_organisation=#ID_ORGANISATION}">#NOM</a>
 		</BOUCLE_ArboContacts>
 		&gt; #NOM
 	</p>
 
-	<h1>Organisation : #NOM</h1>
+	<h1>Organisation :Â #NOM</h1>
 
 	<div class='description'>
 		<p>Ses organisations filles s'attrapent avec <code>{id_parent=\#ID_ORGANISATION}</code> :</p>
@@ -90,7 +90,7 @@ Affiché si un contact n'est pas demandé, mais une organisation si
 	</B_ListeOrganisationsFilles>
 
 	<div class='description'>
-		<p>Une organisation peut avoir des coordonnées attachées, avec le plugin «Coordonnées».
+		<p>Une organisation peut avoir des coordonnÃ©es attachÃ©es, avec le plugin Â«CoordonnÃ©esÂ».
 		Pour afficher ses adresses, on peut faire :</p>
 <pre>
 &lt;BOUCLE_adr(ADRESSES){id_organisation}>
@@ -142,7 +142,7 @@ Affiché si un contact n'est pas demandé, mais une organisation si
 [(#REM)
 -----------------------------------------------------------------------
 Liste des organisations.
-Affiché si ni un contact, ni une organisation n'est demandé
+AffichÃ© si ni un contact, ni une organisation n'est demandÃ©
 
 
 ]

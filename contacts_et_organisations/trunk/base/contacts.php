@@ -58,8 +58,8 @@ function contacts_declarer_tables_objets_sql($tables){
 			"id_auteur"   		=> "bigint(21) NOT NULL default 0",
 			"nom" 				=> "tinytext DEFAULT '' NOT NULL",
 			"statut_juridique"	=> "tinytext DEFAULT '' NOT NULL", // forme juridique : SA, SARL, association, etc.
-			"identification"	=> "tinytext DEFAULT '' NOT NULL", // N° d'identification : SIRET, SIREN, N° TVA...
-			"activite"			=> "tinytext DEFAULT '' NOT NULL", // Secteur d'activité : humanitaire, formation...
+			"identification"	=> "tinytext DEFAULT '' NOT NULL", // NÂ° d'identification : SIRET, SIREN, NÂ° TVA...
+			"activite"			=> "tinytext DEFAULT '' NOT NULL", // Secteur d'activitÃ© : humanitaire, formation...
 			"date_creation"		=> "datetime NOT NULL default '0000-00-00 00:00:00'",
 			"descriptif"		=> "TEXT DEFAULT '' NOT NULL",
 			"maj"				=> "TIMESTAMP"
@@ -117,7 +117,7 @@ function contacts_declarer_tables_objets_sql($tables){
 			"civilite" 		=> "tinytext DEFAULT '' NOT NULL",
 			"nom" 			=> "tinytext DEFAULT '' NOT NULL",
 			"prenom"		=> "tinytext NOT NULL DEFAULT ''",
-			"fonction"		=> "tinytext DEFAULT '' NOT NULL", // gérant, membre, trésorier, etc.
+			"fonction"		=> "tinytext DEFAULT '' NOT NULL", // gÃ©rant, membre, trÃ©sorier, etc.
 			"date_naissance"=> "datetime NOT NULL default '0000-00-00 00:00:00'",
 			"descriptif" 	=> "text DEFAULT '' NOT NULL",
 			"maj"			=> "TIMESTAMP"

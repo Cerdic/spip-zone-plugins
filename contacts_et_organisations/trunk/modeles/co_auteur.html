@@ -1,8 +1,8 @@
 [(#REM)
-	ModËle pour l'affichage d'un auteur.
-	Si auteur simple => nom en lÈgende, puis vide
-	Si contact => prÈnom, nom en lÈgende, puis organisation, fonction, coordonnÈes
-	Si organisation => nom en lÈgende, liste de contacts, TVA, coordonnÈes
+	Mod√®le pour l'affichage d'un auteur.
+	Si auteur simple => nom en l√©gende, puis vide
+	Si contact => pr√©nom, nom en l√©gende, puis organisation, fonction, coordonn√©es
+	Si organisation => nom en l√©gende, liste de contacts, TVA, coordonn√©es
 ]
 
 <fieldset class="co_vcard">
@@ -17,7 +17,7 @@
 				<BOUCLE_oc(ORGANISATIONS){id_contact}>
 					<li class="item #EDIT{nom}">#NOM</li>
 				</BOUCLE_oc>
-					<li class="erreur">Pas d'organisation trouvÈe</li>
+					<li class="erreur">Pas d'organisation trouv√©e</li>
 				<//B_oc>
 				</ul>
 
