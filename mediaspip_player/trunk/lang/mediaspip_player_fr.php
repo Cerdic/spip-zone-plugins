@@ -1,12 +1,13 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans http://svn.aires-de-confluxence.info/svn/plugins_spip/html5/lang
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/mediaspip_player/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
 	// A
 	'alt_cover_fichier' => 'Logo du document',
-	
+
 	// B
 	'bouton_ajouter_conversion' => 'Ajouter une conversion',
 	'bouton_fullscreen' => 'Passer en mode plein écran',
@@ -16,9 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_loop' => 'Mettre en boucle',
 	'bouton_loop_looped' => 'Désactiver la boucle',
 	'bouton_mute' => 'Mettre en sourdine',
-	'bouton_unmute' => 'Activer le son',
 	'bouton_pause' => 'Pause',
 	'bouton_seeking' => 'Seeking',
+	'bouton_unmute' => 'Activer le son',
 	'bouton_volume' => 'Volume',
 	'bouton_volume_muted' => 'Volume (sourdine)',
 
@@ -38,11 +39,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_ecoule' => 'Temps écoulé',
 	'info_erreur' => 'Erreur',
+	'info_nb_conversion' => '@nb@ conversions liées au document',
 	'info_restant' => 'Temps restant',
 	'info_streaming' => 'Streaming',
 	'info_total' => 'Durée',
 	'info_une_conversion' => 'Une conversion liée au document',
-	'info_nb_conversion' => '@nb@ conversions liées au document',
 
 	// L
 	'label_cookie_volume' => 'Enregistrer le volume dans un cookie',
