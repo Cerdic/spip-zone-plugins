@@ -57,6 +57,22 @@ function balise_LESORGANISATIONS_dist ($p) {
 
 
 /**
+ * Calcul de la balise #ORGANISATIONS
+ *
+ * @deprecated Utiliser #LESORGANISATIONS
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+ */
+function balise_ORGANISATIONS_dist($p) {
+	$f = charger_fonction('LESORGANISATIONS', 'balise');
+	return $f($p);
+}
+
+
+/**
  * Calcul du critère compteur_contacts
  * 
  * Compter les contacts liés à une organisation, dans une boucle organisations
@@ -110,107 +126,128 @@ function balise_COMPTEUR_CONTACTS_dist($p) {
 
 
 
+// Correction de jointures et champs spéciaux
+// ------------------------------------------
 
-/***
- * Cette balise s'emploie dans une boucle (CONTACTS).
- * Elle retourne le champ #NOM du spip_auteur d'un contact.
+
+/**
+ * Calcul du critère contacts_auteurs
+ * 
+ * Crée une jointure correcte entre auteurs et contacts et définit quelques
+ * champs spéciaux (nom_contact, prenom_contact, ...)
  *
- */
-function balise_NOM_AUTEUR_dist($p) {
-	$connect = !$p->id_boucle ? '' : $p->boucles[$p->id_boucle]->sql_serveur;
+ * 
+ * @param string $idb
+ *     Identifiant de la boucle
+ * @param array $boucles
+ *     AST du squelette
+ * @param Critere $crit
+ *     Paramètres du critère dans cette boucle
+ * @return
+ *     AST complété de la jointure correcte et des champs spéciaux
+**/
+function critere_contacts_auteurs_dist($idb, &$boucles, $crit){
+	$boucle = &$boucles[$idb];
+	if ($boucle->id_table == 'auteurs') {
+		$cle = trouver_jointure_champ('id_contact', $boucle);
 
-	$p->code = "recuperer_fond('modeles/nom_auteur',
-		array('id_contact' => ".champ_sql('id_contact', $p)
-		."), array('trim'=>true), "
-		. _q($connect)
-		.")";
-	$p->interdire_scripts = false; // securite apposee par recuperer_fond()
-	return $p;
+		// Il faut déclarer la jointure explicite pour que les balises
+		// puissent chercher dans la table jointe.
+		// Ainsi #PRENOM sera retrouvé dans contacts, comme si
+		// on avait fait (AUTEURS contacts)
+		// cf. index_tables_en_pile() de public/references
+		$boucle->jointures_explicites = ltrim($boucle->jointures_explicites . ' contacts');
+
+		// On ajoute cependant en plus des champs calculés, potentiellement homonymes
+		$boucle->select[] = "$cle.nom AS nom_contact";
+		$boucle->select[] = "$cle.prenom AS prenom_contact";
+		$boucle->select[] = "$cle.civilite AS civilite_contact";
+
+	} elseif ($boucle->id_table == 'contacts') {
+		$cle = trouver_jointure_champ('id_auteur', $boucle);
+		$boucle->jointures_explicites = ltrim($boucle->jointures_explicites . ' auteurs');
+		$boucle->select[] = "$cle.nom AS nom_auteur";
+	} else {
+		// si le critère n'est pas sur une table articles ou contacts, c'est un problème.
+		return (array('zbug_critere_inconnu', array('critere' => $crit->op." ?")));
+	}
 }
 
 
 /**
- * Calcul de la balise #ORGANISATIONS
+ * Calcul de la balise #NOM_AUTEUR
  *
- * @deprecated Utiliser #LESORGANISATIONS
+ * Cette balise s'emploie dans une boucle (CONTACTS){contacts_auteurs}
+ * Elle nécessite le critère {contacts_auteurs} et retourne le champ
+ * #NOM de la table auteurs liée au contact.
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+ */
+function balise_NOM_AUTEUR_dist($p) {
+	return rindex_pile($p, 'nom_auteur', 'contacts_auteurs');
+}
+
+
+/**
+ * Calcul de la balise #PRENOM_CONTACT
+ *
+ * Cette balise s'emploie dans une boucle (AUTEURS){contacts_auteurs}
+ * Elle nécessite le critère {contacts_auteurs} et retourne le champ
+ * #PRENOM de la table contacts liée à l'auteur.
+ *
+ * @note
+ *   Avec simplement le critère {contacts_auteurs}, la balise #PRENOM
+ *   fonctionne aussi (pour peu que la table articles n'ait pas ce champ
+ *   également).
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+ */
+function balise_PRENOM_CONTACT_dist($p) {
+	return rindex_pile($p, 'prenom_contact', 'contacts_auteurs');
+}
+
+/**
+ * Calcul de la balise #NOM_CONTACT
+ *
+ * Cette balise s'emploie dans une boucle (AUTEURS){contacts_auteurs}
+ * Elle nécessite le critère {contacts_auteurs} et retourne le champ
+ * #NOM de la table contacts liée à l'auteur.
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+ */
+function balise_NOM_CONTACT_dist($p) {
+	return rindex_pile($p, 'nom_contact', 'contacts_auteurs');
+}
+
+
+/**
+ * Calcul de la balise #CIVILITE_CONTACT
+ *
+ * Cette balise s'emploie dans une boucle (AUTEURS){contacts_auteurs}
+ * Elle nécessite le critère {contacts_auteurs} et retourne le champ
+ * #CIVILITE de la table contacts liée à l'auteur.
+ *
+ * @note
+ *   Avec simplement le critère {contacts_auteurs}, la balise #CIVILITE
+ *   fonctionne aussi (pour peu que la table articles n'ait pas ce champ
+ *   également).
  * 
  * @param Champ $p
  *     Pile au niveau de la balise
  * @return Champ
  *     Pile complétée par le code à générer
  */
-function balise_ORGANISATIONS_dist($p) {
-	$f = charger_fonction('LESORGANISATIONS', 'balise');
-	return $f($p);
-}
-
-
-/***
- * Ces balises permettent de retrouver le nom de famille (#NOM) et le prénom (#PRENOM)
- * d'un enregistrement de la table spip_contacts à partir d'un id_auteur
- * ou le nom (#NOM) d'un enregistrement de la table spip_auteurs à partir d'un id_auteur
- */
-// Balise #PRENOM_AUTEUR
-// Retrouve le prénom d'un contact à partir de l'id_auteur
-function balise_PRENOM_AUTEUR($p) {
-	$id_auteur = champ_sql('id_auteur', $p);
-	$p->code = "trouve_prenom(".$id_auteur.")";
-	$p->statut = 'php';
-	return $p;
-}
-// Balise #PRENOM_CONTACT
-// Retrouve le prénom d'un contact à partir de l'id_auteur
-function balise_PRENOM_CONTACT($p) {
-	$id_auteur = champ_sql('id_auteur', $p);
-	$p->code = "trouve_prenom(".$id_auteur.")";
-	$p->statut = 'php';
-	return $p;
-}
-// Balise #NOM_CONTACT
-// Retrouve le nom de famille d'un contact à partir de l'id_auteur
-function balise_NOM_CONTACT($p) {
-	$id_auteur = champ_sql('id_auteur', $p);
-	$p->code = "trouve_nom(".$id_auteur.")";
-	$p->statut = 'php';
-	return $p;
-}
-// a modifier pour les appeler "dist"
-function trouve_prenom($id_auteur) {
-
-    // $prenom = sql_getfetsel("prenom","spip_contacts LEFT JOIN spip_contacts_liens ON (spip_contacts.id_contact=spip_contacts_liens.id_contact AND objet='auteur')", "id_objet=" . intval($id_auteur));
-    $prenom = sql_getfetsel("prenom","spip_contacts", "id_auteur=" . intval($id_auteur));
-
-    if (!empty($prenom))
-        return $prenom;
-
-    return '';
-}
-
-function trouve_nom($id_auteur) {
-    $nom = sql_getfetsel("nom","spip_contacts", "id_auteur=" . intval($id_auteur));
-    if (!empty($nom))
-        return $nom;
-    return '';
-}
-
-
-// Balise #CIVILITE_AUTEUR
-// a modifier pour les appeler "dist"
-function trouve_civilite($id_auteur) {
-
-	// $civilite = sql_getfetsel("civilite","spip_contacts LEFT JOIN spip_contacts_liens ON (spip_contacts.id_contact=spip_contacts_liens.id_contact AND objet='auteur')", "id_objet=" . intval($id_auteur));
-	$civilite = sql_getfetsel("civilite","spip_contacts", "id_auteur=" . intval($id_auteur));
-
-	if (!empty($civilite))
-		return $civilite;
-
-	return '';
-}
-function balise_CIVILITE_AUTEUR($p) {
-	$id_auteur = champ_sql('id_auteur', $p);
-	$p->code = "trouve_civilite(".$id_auteur.")";
-	$p->statut = 'php';
-	return $p;
+function balise_CIVILITE_CONTACT_dist($p) {
+	return rindex_pile($p, 'civilite_contact', 'contacts_auteurs');
 }
 
 

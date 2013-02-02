@@ -22,3 +22,16 @@
 2.2.0
 	La colonne 'type_liaison' est limitée à 25 caractères pour avoir
 	une primary key valide en SQLite et MySQL
+
+2.5.0
+	Nettoyages & gestion plus précise des jointures
+	- Squelettes de démo réécrits et complétés (?page=test/co)
+	- Critère {branche_organisation} équivalent à {branche} mais pour id_organisation
+	- Critère (ORGANISATIONS){compteur_contacts} et balise #COMPTEUR_CONTACTS
+	- Critère (AUTEURS){contacts_auteurs} et (CONTACTS){contacts_auteurs}
+	  pour créer la jointure entre ces tables et pouvoir attraper
+	  #NOM_CONTACT, #PRENOM_CONTACT, #CIVILITE_CONTACT depuis la table AUTEURS et
+	  #NOM_AUTEUR depuis la table CONTACTS
+	- Balise #LESORGANISATIONS comme #LESAUTEURS pour charger le modèle lesorganisations.
+	  On déprécie #ORGANISATIONS qui faisait cela.
+
