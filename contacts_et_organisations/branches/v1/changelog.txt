@@ -16,3 +16,7 @@
 
 1.13.7 (2012-11-29)
 	Correction d'un bug d'affichage dans affiche gauche lors de la création d'un nouvel auteur (affichage de tous les contacts dont le id_auteur=0);
+
+1.13.8 (2013-02-02)
+	Correction du non affichage des infos de contacts sur la vue des auteurs
+

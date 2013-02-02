@@ -28,7 +28,7 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 
 	<prefix>contacts</prefix>
 
-	<version>1.13.7</version>
+	<version>1.13.8</version>
 	<version_base>1.7.1</version_base>
 
 	<install>base/contacts_upgrade.php</install>
@@ -137,8 +137,8 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="saisies" version="[1.7.7;]" />
 	<necessite id="spip_bonux" version="[2;]" />
-	<!-- coordonnees postales : cop -->
 	<necessite id="medias" version="[1.6;]" />
+	<!-- listes plus jolies avec le plugin "afficher_objet" -->
 	<utilise id="coordonnees" version="[1.2;]" />
 	<utilise id="crayons" version="[1.10.0;]" />
 

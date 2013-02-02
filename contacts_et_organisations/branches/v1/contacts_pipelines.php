@@ -34,8 +34,8 @@ function contacts_afficher_contenu_objet($flux)
 {
 	if ($flux["args"]["type"] == "auteur") {
 		$id = $flux["args"]["id_objet"];
-		$id_contact = sql_getfetsel('id_contact', 'spip_contacts_liens', array('objet=' . sql_quote('auteur'), 'id_objet=' . intval($id)));
-		$id_organisation = sql_getfetsel('id_organisation', 'spip_organisations_liens', array('objet=' . sql_quote('auteur'), 'id_objet=' . intval($id)));
+		$id_contact = sql_getfetsel('id_contact', 'spip_contacts', array('id_auteur=' . intval($id)));
+		$id_organisation = sql_getfetsel('id_organisation', 'spip_organisations', array('id_auteur=' . intval($id)));
 
 		if ($id_contact || $id_organisation)
 		{
@@ -113,14 +113,14 @@ function contacts_boite_infos($flux){
 function contacts_affiche_gauche($flux){
 
 	if ($flux['args']['exec'] == 'auteur_infos'
-            and $id = $flux["args"]["id_auteur"]) {
+		and $id = $flux["args"]["id_auteur"]) {
 
 		$id_contact = sql_getfetsel('id_contact', 'spip_contacts', 'id_auteur=' . intval($id));
 		$id_organisation = sql_getfetsel('id_organisation', 'spip_organisations', 'id_auteur=' . intval($id));
 
 		if ($id_contact || $id_organisation)
 		{
-            $self = generer_url_ecrire('auteur_infos', 'id_auteur='.$id, '&', true);
+			$self = generer_url_ecrire('auteur_infos', 'id_auteur='.$id, '&', true);
 
 			// boîte selection de contacts ou d'organisations liés
 			$flux['data'] .= recuperer_fond('prive/boite/selecteur_contacts_organisations',
@@ -181,6 +181,7 @@ function contacts_affiche_gauche($flux){
 function contacts_affiche_milieu($flux){
 	if ($flux['args']['exec'] == 'auteur_infos')
 	{
+
 		$id = $flux["args"]["id_auteur"];
 		$id_contact = sql_getfetsel('id_contact', 'spip_contacts', 'id_auteur=' . intval($id));
 		$id_organisation = sql_getfetsel('id_organisation', 'spip_organisations', 'id_auteur=' . intval($id));
