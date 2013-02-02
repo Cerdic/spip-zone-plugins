@@ -18,14 +18,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_choix_multi' => 'Vous pouvez en choisir plusieurs en utilisant les touches ctrl ou maj (pomme ou maj pour macs)',
 	'explication_selection_cible' => 'Si aucun cible n\'est choisit, tous seront retenus.',
 	'explication_selection_objets_cible' => 'Les objets cibles auxquelles des "Objets Sélection" pourront être attachés',
-	'explication_selection_type_liens' => 'Vous pouvez définir des types de relations : indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par défaut. La description peut être une chaîne de langue.',
+	'explication_selection_type_liens' => 'Vous pouvez définir des types de relations : indiquez-en une par ligne, suivie d\'une virgule et d\'une description. La description peut être une chaîne de langue.',
 
 	// I
 	'icone_creer_selection_objet' => 'Sélectionner un objet',
-	'icone_modifier_selection_objet' => 'Modifier cet objet sélectionné',
-	'info_1_selection_objet' => 'Un objet sélectionné',
-	'info_aucun_selection_objet' => 'Aucun objet sélectionné',
-	'info_nb_selection_objets' => '@nb@ objets sélectionnés',
+	'icone_modifier_selection_objet' => 'Modifier cet Objet Sélectionné',
+	'info_1_selection_objet' => 'Un Objet Sélectionné',
+	'info_aucun_selection_objet' => 'Aucun Objet Sélectionné',
+	'info_nb_selection_objets' => '@nb@ Objets Sélectionnés',
 
 	// L
 	'label_descriptif' => 'Descriptif',
@@ -51,23 +51,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'selection_cible' => 'Seléction des cibles pour',
 	'selection_objet' => 'Sélection',
-	'selection_objet_cible_titre' => 'Selection d\'objets cibles',
+	'selection_objet_cible_titre' => 'Selection d\'Objets Cibles',
 	'selection_objets_pour' => 'Sélection objets pour',
 	'selection_rubrique_objet' => 'Objets qui peuvent être sélectionnés',
 	'selection_type_lien' => 'Type lien',
-	'selection_type_liens' => 'Définition de type de liens',
+	'selection_type_liens' => 'Définition de types de liens',
 	'selectione' => 'Sélectionné :',
 
 	// T
 	'texte_ajouter_objet' => 'Sélectionner un objet',
-	'texte_changer_statut_objet' => 'Cet  objet sélectionné est :',
+	'texte_changer_statut_objet' => 'Cet Objet Sélectionné est :',
 	'texte_creer_asselection_objetcier_objet' => 'Créer et associer un objet',
-	'titre_langue_objet' => 'Langue de cet objet sélectionné',
-	'titre_logo_selection_objet' => 'Logo de cet objet sélectionné',
-	'titre_selection_objets' => 'Objet sélectionné',
-	'titre_selection_objets_rubrique' => 'Objets sélectionnés de la rubrique',
+	'titre_langue_objet' => 'Langue de cet Objet Sélectionné',
+	'titre_logo_selection_objet' => 'Logo de cet Objet Sélectionné',
+	'titre_selection_objets' => 'Objet Sélectionné',
+	'titre_selection_objets_rubrique' => 'Objets Sélectionnés de la rubrique',
 	'type_liens_defaut' => 'types de lien par défaut, peuvent être surchargés ci-bas',
-	'type_liens_surcharge' => 'surcharge les types de lien par défaut'
+	'type_liens_surcharge' => 'surcharger les types de lien par défaut'
 );
 
 ?>
