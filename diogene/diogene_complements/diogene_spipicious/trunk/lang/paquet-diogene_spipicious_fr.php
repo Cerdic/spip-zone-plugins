@@ -1,19 +1,13 @@
 <?php
-
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-
-///  Fichier produit par PlugOnet
-// Module: paquet-diogene_spipicious
-// Langue: fr
-// Date: 14-06-2012 17:40:37
-// Items: 2
-
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/diogene/diogene_complements/diogene_spipicious/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// D
+	// D
 	'diogene_spipicious_description' => 'Complément "tags personnels" pour "Diogene" (utilise SpipIcious)',
-	'diogene_spipicious_slogan' => 'Complément "tags personnels"',
+	'diogene_spipicious_slogan' => 'Complément "tags personnels"'
 );
+
 ?>
