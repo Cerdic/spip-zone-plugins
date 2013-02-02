@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans http://svn.aires-de-confluxence.info/svn/plugins_spip/diogene_complements/diogene_licence/lang
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/diogene/diogene_complements/diogene_licence/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
