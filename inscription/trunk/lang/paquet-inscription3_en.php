@@ -1,21 +1,17 @@
 <?php
-
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-
-///  Fichier produit par PlugOnet
-// Module: paquet-inscription3
-// Langue: en
-// Date: 10-08-2012 12:30:34
-// Items: 3
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.net/tradlang_module/paquet-inscription3?lang_cible=en
+// ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// I
+	// I
 	'inscription3_description' => 'Plugin to get a finer management of user accounts,
 when registering and changing their profile.',
 	'inscription3_nom' => 'Subscription 3',
-	'inscription3_slogan' => 'Add information on authors',
+	'inscription3_slogan' => 'Add information on authors'
 );
+
 ?>
