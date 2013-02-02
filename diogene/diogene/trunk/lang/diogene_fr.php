@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'diogenes' => 'Templates de formulaires',
 
 	// E
-	'editer_diogene_explication' => 'Diogène permet de modifier les formulaire d\'édition classiques en enlevant ou rajoutant certains champs.',
+	'editer_diogene_explication' => 'Diogène permet de modifier les formulaires d\'édition classiques en enlevant ou rajoutant certains champs.',
 	'editer_diogenes_titre' => 'Les templates de formulaires',
 	'erreur' => 'Erreur',
 	'erreur_autorisation_login_publier' => 'Vous devez être identifié pour publier ici.',
