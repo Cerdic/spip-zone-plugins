@@ -456,6 +456,7 @@ jQuery.geoportail =
 							{	if (map.getMap().layers[i].name == couches[j]) 
 								{	tab[tab.length] = map.getMap().layers[i];
 									map.getMap().layers[i].setOpacity(options.opacity);
+									map.getMap().layers[i].setVisibility(options.visibility);
 								}
 							}
 						}
