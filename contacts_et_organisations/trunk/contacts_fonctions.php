@@ -234,7 +234,7 @@ function critere_organisations_auteurs_dist($idb, &$boucles, $crit){
  */
 function balise_NOM_AUTEUR_dist($p) {
 	$p = rindex_pile($p, 'nom_auteur', 'contacts_auteurs');
-	if ($p->code = "''") {
+	if ($p->code == "''") {
 		$p = rindex_pile($p, 'nom_auteur', 'organisations_auteurs');
 	}
 	return $p;
