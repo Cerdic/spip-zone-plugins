@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>#ENV{titre}</title>
+<style type='text/css'>
+html {padding:1em 1em 4em 1em;}
+h1 {margin-top:2em; border-bottom:2px solid #444; }
+code, pre { color:#C70000; font-size:100%;}
+.description { padding:1em; background:#eee; clear:both; }
+.example, .exemple { margin:1em 5em; padding-left:2em; border-left:2px solid #999; }
+.titre, .title {font-size:250%; text-align:center; padding:2em;}
+a { color: #248EAE; text-decoration:none;}
+a:hover, a:focus { text-decoration:underline; }
+.menu {float:right; margin:1em;}
+.menu strong {padding:.2em; border-bottom:1px solid #444; color:#444; margin-bottom:.5em; display:block;}
+.menu a {display:block; padding:.2em .5em;}
+.menu a.on {font-weight:bold;}
+.menu a:hover, .menu a:focus {b}
+.ariane {padding:.2em; color:#444; font-style:italic; }
+.erreur { background:#fed; padding:.2em;}
+.clearfix { clear:both; }
+li.espacer {margin-bottom:1em;}
+</style>
+</head>
+<body>
+
+<div class='menu'>
+<strong>Pages</strong>
+<a href="#URL_PAGE{test/co}"[ class='on'(#PAGE|=={test/co}|oui)]>C&O : Accueil</a>
+<a href="#URL_PAGE{test/co_annuaire}"[ class='on'(#PAGE|=={test/co_annuaire}|oui)]>C&O : Annuaire</a>
+<a href="#URL_PAGE{test/co_boucles}"[ class='on'(#PAGE|=={test/co_boucles}|oui)]>C&O : Boucles</a>
+<a href="#URL_PAGE{test/co_balises}"[ class='on'(#PAGE|=={test/co_balises}|oui)]>C&O : Balises</a>
+<a href="#URL_PAGE{test/co_criteres}"[ class='on'(#PAGE|=={test/co_criteres}|oui)]>C&O : Critères</a>
+<a href="#URL_PAGE{test/co_modeles}"[ class='on'(#PAGE|=={test/co_modeles}|oui)]>C&O : Modèles</a>
+<a href="#URL_PAGE{test/co_jointures}"[ class='on'(#PAGE|=={test/co_jointures}|oui)]>C&O : Jointures</a>
+</div>
+
+<div class='titre'>#ENV{titre}</div>
+

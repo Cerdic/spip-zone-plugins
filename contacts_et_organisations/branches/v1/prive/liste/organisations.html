@@ -1,4 +1,4 @@
-[(#REM) Tableau complet des organisations, affiché sur la page ?exec=organisations ]
+[(#REM) Tableau complet des organisations, affichÃ© sur la page ?exec=organisations ]
 [(#SET{defaut_tri,#ARRAY{
 	nom,1,
 	id_auteur,1
@@ -12,12 +12,12 @@
 		<tr class='first_row'>
 			<th class="logo"></th>
 			<th class='nom'>[(#TRI{nom,<:info_nom:>,ajax})]</th>
-            <th class="nb_contacts"><:contacts:info_nb_contacts:></th>
+			<th class="nb_contacts"><:contacts:info_nb_contacts:></th>
 			<th class='action'></th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_orga(ORGANISATIONS)
+	<BOUCLE_liste_orga(ORGANISATIONS){compteur_contacts}
 		{id_contact?}{id_auteur?}{id_parent ?= #ENV{id_parent}}
 		{recherche?}{auteurs.statut ?= #ENV{statut,''}}
 		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20}}>
@@ -29,7 +29,9 @@
 			<//BOUCLE_lien_organisation>
 			<td class="logo"><a href="#GET{url}">#INCLURE{fond=logo/organisation, id_organisation}</a></td>
 			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a></td>
-            <td class='nb_contacts'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">[(#MODELE{nb_contacts}{id_organisation})]</a></td>
+			<td class='nb_contacts'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">
+				[(#COMPTEUR_CONTACTS|singulier_ou_pluriel{contacts:nb_contact,contacts:nb_contacts})]</a>
+			</td>
 			<td class='action'>[(#AUTORISER{modifier, contact, #ID_CONTACT}|oui)
 				[(#BOUTON_ACTION{
 					[(#CHEMIN{images/supprimer-16.png}|balise_img{<:contacts:supprimer_organisation:>})],

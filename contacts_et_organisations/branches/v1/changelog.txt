@@ -20,3 +20,22 @@
 1.13.8 (2013-02-02)
 	Correction du non affichage des infos de contacts sur la vue des auteurs
 
+1.20.0 (2013-02-02)
+	Report des améliorations depuis le trunk (version 2.5.0) pour SPIP 3
+	et adaptations de ceux-ci pour SPIP 2.1 :
+	Nettoyages & gestion plus précise des jointures
+	- Squelettes de démo réécrits et complétés (?page=test/co)
+	- Critère {branche_organisation} équivalent à {branche} mais pour id_organisation
+	- Critère (ORGANISATIONS){compteur_contacts} et balise #COMPTEUR_CONTACTS
+	- Critère (AUTEURS){contacts_auteurs} et (CONTACTS){contacts_auteurs}
+	  pour créer la jointure entre ces tables et pouvoir attraper
+	  #NOM_CONTACT, #PRENOM_CONTACT, #CIVILITE_CONTACT depuis la table AUTEURS et
+	  #NOM_AUTEUR depuis la table CONTACTS
+	- Balise #LESORGANISATIONS comme #LESAUTEURS pour charger le modèle lesorganisations.
+	  On déprécie #ORGANISATIONS qui faisait cela.
+
+	Report (version 2.6.0) du critère (AUTEURS){organisations_auteurs}
+	et (ORGANISATIONS){organisations_auteurs} avec balise #NOM_ORGANISATION
+
+
+
