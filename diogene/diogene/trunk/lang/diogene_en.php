@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'diogenes' => 'Forms templates',
 
 	// E
-	'editer_diogene_explication' => 'Diogene enables administrators to modify the classical edit forms by removing or adding some fields.',
+	'editer_diogene_explication' => 'Diogene enables administrators to modify the classical edit forms by removing or adding some fields.', # MODIF
 	'editer_diogenes_titre' => 'Forms templates',
 	'erreur' => 'Error',
 	'erreur_autorisation_login_publier' => 'You should be identified to publish something there.',
