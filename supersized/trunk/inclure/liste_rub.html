@@ -1,0 +1,8 @@
+<BOUCLE_docs(DOCUMENTS){extension IN jpg,png}>
+	<BOUCLE_liens(documents_liens){id_document}{objet=rubrique}>
+		<BOUCLE_rubrique(RUBRIQUES){unique}{id_rubrique=#ID_OBJET}{" | "}>
+		| <a href="[(#URL_PAGE{slide}|parametre_url{id_rubrique,#ID_OBJET})]">#TITRE</a> |
+		</BOUCLE_rubrique>
+		</B_rubrique>
+	</BOUCLE_liens>
+</BOUCLE_docs>
