@@ -114,7 +114,7 @@ de la table <code>auteurs</code>
 
 <p>
 Si on souhaite obtenir ce champ, il faut utiliser le critère <code>{contacts_auteurs}</code>
-qui en plus de réaliser la jointure la balise <code>\#NOM_AUTEUR</code>,
+qui en plus de réaliser la jointure, permet d'utiliser la balise <code>\#NOM_AUTEUR</code>,
  sur la boucle <code>CONTACTS</code>.
 </p>
 
@@ -140,6 +140,82 @@ qui en plus de réaliser la jointure la balise <code>\#NOM_AUTEUR</code>,
 	[(#PAGINATION|?{<li>…</li>})]
 	</ul>
 </B_contacts>
+
+
+
+
+
+<h1>Jointure Auteurs - organisations</h1>
+
+<div class='description'>
+
+<p>Lister les auteurs - organisations d'un coup (depuis la table auteurs).
+Voir la jointure auteurs-contacts pour des explications supplémentaires</p>
+
+<p>Il faut ajouter à la boucle <code>(AUTEURS)</code> le critère
+<code>{organisations_auteurs}</code> qui en plus de réaliser une jointure
+correcte permet d'utiliser la balise <code>\#NOM_ORGANISATION</code> sur la boucle
+<code>AUTEURS</code>.
+</p>
+
+<pre>
+&lt;BOUCLE_auteurs(AUTEURS){organisations_auteurs}>
+	\#NOM
+	\#NOM_ORGANISATION (table organisation)
+	...
+</pre>
+</div>
+
+
+<B_auteurs3>
+	<ul class='exemple'>
+<BOUCLE_auteurs3(AUTEURS){organisations_auteurs}{pagination 3}>
+		<li class='espacer'>
+			\#NOM : #NOM,<br />
+			\#NOM_ORGANISATION : #NOM_ORGANISATION
+		</li>
+</BOUCLE_auteurs3>
+	[(#PAGINATION|?{<li>…</li>})]
+	</ul>
+</B_auteurs3>
+
+
+
+
+
+<h1>Jointure Organisations - auteurs</h1>
+
+<div class='description'>
+
+<p>Lister les auteurs - organisations d'un coup (depuis la table organisations).
+Voir jointure contacts-auteurs pour des explications supplémentaires.</p>
+
+<p>
+Il faut utiliser le critère <code>{organisations_auteurs}</code>
+qui en plus de réaliser la jointure, permet l'usage de la balise <code>\#NOM_AUTEUR</code>,
+sur la boucle <code>ORGANISATIONS</code>.
+</p>
+
+<pre>
+&lt;BOUCLE_auteurs(ORGANISATIONS){organisations_auteurs}>
+	\#NOM
+	\#NOM_AUTEUR (table auteurs)
+	...
+</pre>
+</div>
+
+
+<B_organisations>
+	<ul class='exemple'>
+<BOUCLE_organisations(ORGANISATIONS){organisations_auteurs}{pagination 3}>
+		<li class='espacer'>
+			\#NOM : #NOM,<br />
+			\#NOM_AUTEUR : #NOM_AUTEUR (table auteur)
+		</li>
+</BOUCLE_organisations>
+	[(#PAGINATION|?{<li>…</li>})]
+	</ul>
+</B_organisations>
 
 
 

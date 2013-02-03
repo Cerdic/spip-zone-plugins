@@ -174,8 +174,9 @@ recursion au sein de la boucle listant les filles :</p>
 <p>Cliquez les liens d'organisation pour explorer leurs informations :</p>
 </div>
 
-<ul class='exemple'>
-<BOUCLE_ListeOrganisationsRacine(ORGANISATIONS){racine}{par nom}>
+<div class='exemple'>
+<ul>
+<BOUCLE_ListeOrganisationsRacine(ORGANISATIONS){racine}{par nom}{pagination 50}>
 	<li><a href="#URL_PAGE{test/co_annuaire,id_organisation=#ID_ORGANISATION}">#NOM</a>
 		<B_ListeOrganisationFilles>
 		<ul>
@@ -189,6 +190,8 @@ recursion au sein de la boucle listant les filles :</p>
 	</li>
 </BOUCLE_ListeOrganisationsRacine>
 </ul>
+[<p class='pagination'>(#PAGINATION)</p>]
+</div>
 </B_ListeOrganisationsRacine>
 <p class="erreur">Aucune organisation</p>
 <//B_ListeOrganisationsRacine>

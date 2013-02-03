@@ -136,6 +136,9 @@ function balise_COMPTEUR_CONTACTS_dist($p) {
  * Crée une jointure correcte entre auteurs et contacts et définit quelques
  * champs spéciaux (nom_contact, prenom_contact, ...)
  *
+ * @example
+ *     <BOUCLE_(CONTACTS){contacts_auteurs} />
+ *     <BOUCLE_(AUTEURS){contacts_auteurs} />
  * 
  * @param string $idb
  *     Identifiant de la boucle
@@ -148,6 +151,7 @@ function balise_COMPTEUR_CONTACTS_dist($p) {
 **/
 function critere_contacts_auteurs_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
+
 	if ($boucle->id_table == 'auteurs') {
 		$cle = trouver_jointure_champ('id_contact', $boucle);
 
@@ -175,6 +179,48 @@ function critere_contacts_auteurs_dist($idb, &$boucles, $crit){
 
 
 /**
+ * Calcul du critère organisations_auteurs
+ * 
+ * Crée une jointure correcte entre auteurs et organisations et définit quelques
+ * champs spéciaux (nom_organisation, ...)
+ *
+ * @example
+ *     <BOUCLE_(ORGANISATIONS){organisations_auteurs} />
+ *     <BOUCLE_(AUTEURS){organisations_auteurs} />
+ * 
+ * @param string $idb
+ *     Identifiant de la boucle
+ * @param array $boucles
+ *     AST du squelette
+ * @param Critere $crit
+ *     Paramètres du critère dans cette boucle
+ * @return
+ *     AST complété de la jointure correcte et des champs spéciaux
+**/
+function critere_organisations_auteurs_dist($idb, &$boucles, $crit){
+	$boucle = &$boucles[$idb];
+
+	if ($boucle->id_table == 'auteurs') {
+		$cle = trouver_jointure_champ('id_organisation', $boucle);
+
+		// cf critere contacts_auteurs pour explication
+		$boucle->jointures_explicites = ltrim($boucle->jointures_explicites . ' organisations');
+
+		// On ajoute cependant en plus des champs calculés, potentiellement homonymes
+		$boucle->select[] = "$cle.nom AS nom_organisation";
+
+	} elseif ($boucle->id_table == 'organisations') {
+		$cle = trouver_jointure_champ('id_auteur', $boucle);
+		$boucle->jointures_explicites = ltrim($boucle->jointures_explicites . ' auteurs');
+		$boucle->select[] = "$cle.nom AS nom_auteur";
+	} else {
+		// si le critère n'est pas sur une table articles ou contacts, c'est un problème.
+		return (array('zbug_critere_inconnu', array('critere' => $crit->op." ?")));
+	}
+}
+
+
+/**
  * Calcul de la balise #NOM_AUTEUR
  *
  * Cette balise s'emploie dans une boucle (CONTACTS){contacts_auteurs}
@@ -187,7 +233,11 @@ function critere_contacts_auteurs_dist($idb, &$boucles, $crit){
  *     Pile complétée par le code à générer
  */
 function balise_NOM_AUTEUR_dist($p) {
-	return rindex_pile($p, 'nom_auteur', 'contacts_auteurs');
+	$p = rindex_pile($p, 'nom_auteur', 'contacts_auteurs');
+	if ($p->code = "''") {
+		$p = rindex_pile($p, 'nom_auteur', 'organisations_auteurs');
+	}
+	return $p;
 }
 
 
@@ -250,7 +300,21 @@ function balise_CIVILITE_CONTACT_dist($p) {
 	return rindex_pile($p, 'civilite_contact', 'contacts_auteurs');
 }
 
-
+/**
+ * Calcul de la balise #NOM_ORGANISATION
+ *
+ * Cette balise s'emploie dans une boucle (AUTEURS){organisations_auteurs}
+ * Elle nécessite le critère {organisations_auteurs} et retourne le champ
+ * #NOM de la table organisations liée à l'auteur.
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+ */
+function balise_NOM_ORGANISATION_dist($p) {
+	return rindex_pile($p, 'nom_organisation', 'organisations_auteurs');
+}
 
 
 // Gestion des branches d'organisation
@@ -271,6 +335,8 @@ function balise_CIVILITE_CONTACT_dist($p) {
  *   #IDS_ORGANISATION_BRANCHE
  *   #IDS_ORGANISATION_BRANCHE{4,10}
  *   <BOUCLE_contacts(CONTACTS){id_organisation IN #IDS_ORGANISATION_BRANCHE}>
+ *   Pour ce dernier cas, préférer le critère branche_organisation :
+ *   <BOUCLE_contacts(CONTACTS){branche_organisation}>
  *   ```
  *
  * @param Champ $p
@@ -350,15 +416,20 @@ function calcul_organisation_branche_in($id) {
  * Cherche l'identifiant de l'organisation en premier paramètre du critère {branche_organisation XX}
  * sinon dans les boucles parentes ou par jointure.
  *
+ * @example
+ *   ```
+ *   <BOUCLE_contacts(CONTACTS){branche_organisation}>
+ *   ```
+ * 
  * @internal
- * 		Copie quasi identique de critere_branche_dist()
+ *     Copie quasi identique de critere_branche_dist()
  * 
  * @param string $idb
- * 		Identifiant de la boucle
+ *     Identifiant de la boucle
  * @param array $boucles
- * 		AST du squelette
+ *     AST du squelette
  * @param Critere $crit
- * 		Paramètres du critère dans cette boucle
+ *     Paramètres du critère dans cette boucle
  * @return void
 **/
 function critere_branche_organisation_dist($idb, &$boucles, $crit){
