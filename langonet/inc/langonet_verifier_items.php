@@ -5,6 +5,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // Les REGEXP de recherche de l'item de langue 
 // (voir le fichier regexp.txt pour des exemples)
 
+// déclaration d'items dans base/module.php
+define("_LANGONET_ITEM_B",
+       '%=>\s*[\'"](?:([a-z0-9_]+):)([^\/ \']*)[\'"]%S');
 // Fontions PHP _T ou _U avec apostrophe
 define("_LANGONET_ITEM_A",
        '%_[TU]\s*[(]\s*\'(?:([a-z0-9_]+):)?([^\']*)\'\s*([^.,)]*[^)]*)%S');
@@ -83,6 +86,8 @@ function langonet_collecter_items($files) {
 				if (preg_match_all(_LANGONET_ITEM_X, $t, $m, PREG_SET_ORDER))
 					foreach ($m as $occ) langonet_match($utilises, $occ, $_fichier, $ligne);
 			} else {
+				if (preg_match_all(_LANGONET_ITEM_B, $t, $m, PREG_SET_ORDER))
+            		foreach ($m as $occ) langonet_match($utilises, $occ, $_fichier, $ligne);
 				if (preg_match_all(_LANGONET_ITEM_A, $t, $m, PREG_SET_ORDER))
 					foreach ($m as $occ) langonet_match($utilises, $occ, $_fichier, $ligne);
 				if (preg_match_all(_LANGONET_ITEM_G, $t, $m, PREG_SET_ORDER))
