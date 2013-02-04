@@ -10,6 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//A
 	'afficher_le_formulaire_de_couleur' => 'Afficher le formulaire de couleur sur chaque page de rubrique ?',
 	'aucune_couleur' => 'Aucune couleur n\'a été choisie.',
+
+	// B
+	'bouton_supprimer' => 'Supprimer',
 	
 	// C
 	'choisir_une_nouvelle_couleur' => 'Choisir une nouvelle couleur',
@@ -20,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// I
 	'info_obligatoire' => 'Choisissez une option avant de valider.',
+	'info_message_ok' => 'Couleur modifiée',
 	
 	// L
 	'la_couleur_actuelle' => 'La couleur actuelle',

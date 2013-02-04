@@ -1,26 +1,35 @@
-
-
 <div class="formulaire_spip formulaire_config formulaire_#FORM">
+	<h3 class="titrem">[(#CHEMIN{img_pack/pb_couleur_rubrique-24.png}|balise_img{'',cadre-icone})][(#ENV{_site}|?{Couleur du site,Couleur de la rubrique})]</h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-
+	[(#ENV{editable}|oui)
 	<form method="post" action="#ENV{action}">
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
 			<ul>
-				<li class="editer_couleur_rubrique_palette">
-					<label for="pb_couleur_rubrique"><:pb_couleur_rubrique:choisir_une_nouvelle_couleur:></label>
-					<input class='palette' type='color' id='pb_couleur_rubrique' name='pb_couleur_rubrique' value='' style="width:70px;" />
-				</li>
-				<li class="supprimer_couleur_rubrique">
-					<div class="choix">
-						<input type="checkbox" name="supprimer" id="supprimer" class="checkbox" value="supprimer" />
-						<label for="supprimer"><:pb_couleur_rubrique:supprimer_la_couleur:></label>
-					</div>
+				<li class="editer_couleur_rubrique_palette[(#ENV**{erreurs}|table_valeur{pb_couleur_rubrique}|oui)erreur]">
+					<label for="pb_couleur_rubrique"><:pb_couleur_rubrique:choisir_une_nouvelle_couleur:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{pb_couleur_rubrique})</span>
+					]<input class='palette' type='color' id='pb_couleur_rubrique' name='pb_couleur_rubrique' value="#ENV{pb_couleur_rubrique,''}" style="width:70px;text-transform:uppercase;" />
+					<div class="couleur" style="width:70px;height:22px;margin:0 0 2px 2px;background:[#(#ENV{pb_couleur_rubrique,''})];float: right"></div>
 				</li>
 			</ul>
 			<div class="boutons">
-				<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+				<input type="submit" class="over" value="<:bouton_enregistrer|attribut_html:>" />
+				<small><input type="submit" class="cancel left" name="supprimer" value="<:pb_couleur_rubrique:bouton_supprimer|attribut_html:>" /></small>
+				<input type="submit" class="submit" value="<:bouton_enregistrer|attribut_html:>" />
 			</div>
 		</div>
 	</form>
+	]
+	[(#ENV{editable}|non)
+		[(#ENV{pb_couleur_rubrique,''}|non)<p><:pb_couleur_rubrique:aucune_couleur:></p>]
+		[(#ENV{pb_couleur_rubrique,''}|oui)
+		<p class="clearfix">
+			<:pb_couleur_rubrique:la_couleur_actuelle:><br />
+			<strong class="codehex" style="text-transform:uppercase;">[#(#ENV{pb_couleur_rubrique,''})]</strong>
+			<span class="couleur" style="display:block;width:70px;height:22px;margin:0 0 2px 2px;background:[#(#ENV{pb_couleur_rubrique,''})];float:right;"></span>
+		</p>
+		]
+	]
 </div>

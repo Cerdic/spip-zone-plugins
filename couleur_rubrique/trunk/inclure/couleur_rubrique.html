@@ -1,23 +1,4 @@
-[(#ENV{id_rubrique}|?{
-#SET{titre,La couleur de la rubrique}
-,
- #SET{titre,La couleur du site}
-})]
-#BOITE_OUVRIR{#CHEMIN_IMAGE{icon-24.png}|balise_img{'',cadre-icone}|concat{#GET{titre}},'simple','titrem'} 
-<div class="couleur_rubrique">
-	[(#ID_RUBRIQUE|pb_couleur_rubrique|oui) 
-	<:pb_couleur_rubrique:la_couleur_actuelle:>
-	<div class="couleur" style="width:70px;height:22px;margin:0 0 2px 2px;background:[#(#ID_RUBRIQUE|pb_couleur_rubrique)];"></div>
-	<strong class="codehex" style="text-transform:uppercase;">[#(#ID_RUBRIQUE|pb_couleur_rubrique)]</strong>
-	]
-	[(#ID_RUBRIQUE|pb_couleur_rubrique|non) <:pb_couleur_rubrique:aucune_couleur:>	]
-	[(#REM) voir le formulaire si on est admin + voir le formulaire meme apres validation ]
-	[(#SESSION{statut}|=={0minirezo}|oui)
-		[(#CONFIG{pb_couleur_rubrique/afficher}|=={non}|non)
-			[(#ID_RUBRIQUE|pb_couleur_rubrique|oui) <br /><a href="#" class="chargez_couleur" title="chargez la couleur dans la roue chromatique">chargez la couleur</a>]
-			[(#FORMULAIRE_COULEUR_RUBRIQUE{#ENV{id_rubrique}})]
-		]
-	]
+<div class="ajax">
+[(#FORMULAIRE_COULEUR_RUBRIQUE{#ENV{id_rubrique}})]
 </div>
-#BOITE_FERMER
 
