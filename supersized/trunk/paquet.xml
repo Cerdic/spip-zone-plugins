@@ -1,12 +1,12 @@
 <paquet
 	prefix="supersized"
 	categorie="multimedia"
-	version="0.2.0"
+	version="0.1.0"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo=""
 	schema="0.0"
-	documentation="http://supersized.brubel.net/spip.php?rubrique3"
+	documentation="http://supersized.brubel.net/spip.php?article1"
 >	
 
 	<nom>SuperSized slideshow</nom>
@@ -17,6 +17,6 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
 
-	<traduire module="supersized" reference="fr" gestionnaire="salvatore" />
+	<traduire module="superslider" reference="fr" gestionnaire="salvatore" />
 
 </paquet>
