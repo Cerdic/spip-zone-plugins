@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// A
-	'supersized_description' => 'Intégration dans SPIP du plugin jQuery Supersized Slideshow',
+// A-Z
+	'supersized_description' => 'Int&#233;gration dans SPIP du plugin jQuery Supersized slideshow',
 	'supersized_nom' => 'Supersized slideshow',
-	'supersized_slogan' => 'Un slideshow en plein écran pour vos images',
+	'supersized_slogan' => 'Un slideshow en plein &#233;cran pour vos images'
 );
 ?>
