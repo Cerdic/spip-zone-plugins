@@ -24,15 +24,15 @@ qui ne joint pas sur le bon champ.
 <p>
 Il faut pour l'instant ajouter à la boucle <code>(AUTEURS)</code> le critère
 <code>{contacts_auteurs}</code> qui en plus de réaliser une jointure
-correcte permet d'utiliser les balises <code>\#NOM_CONTACT</code>,
-<code>\#PRENOM_CONTACT</code>, <code>\#CIVILITE_CONTACT</code> sur la boucle
+correcte permet d'utiliser les balises <code>[(#VAL{#})]NOM_CONTACT</code>,
+<code>[(#VAL{#})]PRENOM_CONTACT</code>, <code>[(#VAL{#})]CIVILITE_CONTACT</code> sur la boucle
 <code>AUTEURS</code>.
 </p>
 
 <pre>
 &lt;BOUCLE_auteurs(AUTEURS){contacts_auteurs}>
-	\#NOM
-	\#NOM_CONTACT (table contacts)
+	[(#VAL{#})]NOM
+	[(#VAL{#})]NOM_CONTACT (table contacts)
 	...
 </pre>
 </div>
@@ -42,10 +42,10 @@ correcte permet d'utiliser les balises <code>\#NOM_CONTACT</code>,
 	<ul class='exemple'>
 <BOUCLE_auteurs(AUTEURS){contacts_auteurs}{pagination 3}>
 		<li class='espacer'>
-			\#NOM : #NOM,<br />
-			\#PRENOM : #PRENOM,<br />
-			\#NOM_CONTACT : #NOM_CONTACT,<br />
-			\#PRENOM_CONTACT : #PRENOM_CONTACT,
+			[(#VAL{#})]NOM : #NOM,<br />
+			[(#VAL{#})]PRENOM : #PRENOM,<br />
+			[(#VAL{#})]NOM_CONTACT : #NOM_CONTACT,<br />
+			[(#VAL{#})]PRENOM_CONTACT : #PRENOM_CONTACT,
 		</li>
 </BOUCLE_auteurs>
 	[(#PAGINATION|?{<li>…</li>})]
@@ -82,10 +82,10 @@ le moment, il faut d'abord corriger la jointure <code>AUTEURS contacts</code>.
 	<ul class='exemple'>
 <BOUCLE_auteurs2(AUTEURS){contacts_auteurs}{articles.id_secteur=1}{pagination 3}>
 		<li class='espacer'>
-			\#NOM : #NOM,<br />
-			\#PRENOM : #PRENOM, (table contact)<br />
-			\#NOM_CONTACT : #NOM_CONTACT, (table contact)<br />
-			\#PRENOM_CONTACT : #PRENOM_CONTACT (table contact)
+			[(#VAL{#})]NOM : #NOM,<br />
+			[(#VAL{#})]PRENOM : #PRENOM, (table contact)<br />
+			[(#VAL{#})]NOM_CONTACT : #NOM_CONTACT, (table contact)<br />
+			[(#VAL{#})]PRENOM_CONTACT : #PRENOM_CONTACT (table contact)
 		</li>
 </BOUCLE_auteurs2>
 	[(#PAGINATION|?{<li>…</li>})]
@@ -108,20 +108,20 @@ le moment, il faut d'abord corriger la jointure <code>AUTEURS contacts</code>.
 
 <p>
 Cette jointure <code>CONTACTS auteurs</code> fonctionne en SPIP 3, contrairement
-à l'inverse. Cependant elle ne permet pas d'obtenir le champ  <code>\#NOM</code>
+à l'inverse. Cependant elle ne permet pas d'obtenir le champ  <code>[(#VAL{#})]NOM</code>
 de la table <code>auteurs</code>
 </p>
 
 <p>
 Si on souhaite obtenir ce champ, il faut utiliser le critère <code>{contacts_auteurs}</code>
-qui en plus de réaliser la jointure, permet d'utiliser la balise <code>\#NOM_AUTEUR</code>,
+qui en plus de réaliser la jointure, permet d'utiliser la balise <code>[(#VAL{#})]NOM_AUTEUR</code>,
  sur la boucle <code>CONTACTS</code>.
 </p>
 
 <pre>
 &lt;BOUCLE_auteurs(CONTACTS){contacts_auteurs}>
-	\#NOM
-	\#NOM_AUTEUR (table auteurs)
+	[(#VAL{#})]NOM
+	[(#VAL{#})]NOM_AUTEUR (table auteurs)
 	...
 </pre>
 </div>
@@ -131,10 +131,10 @@ qui en plus de réaliser la jointure, permet d'utiliser la balise <code>\#NOM_AU
 	<ul class='exemple'>
 <BOUCLE_contacts(CONTACTS){contacts_auteurs}{pagination 3}>
 		<li class='espacer'>
-			\#NOM : #NOM,<br />
-			\#PRENOM : #PRENOM,<br />
-			\#LOGIN : #LOGIN, (table auteur)<br />
-			\#NOM_AUTEUR : #NOM_AUTEUR (table auteur)
+			[(#VAL{#})]NOM : #NOM,<br />
+			[(#VAL{#})]PRENOM : #PRENOM,<br />
+			[(#VAL{#})]LOGIN : #LOGIN, (table auteur)<br />
+			[(#VAL{#})]NOM_AUTEUR : #NOM_AUTEUR (table auteur)
 		</li>
 </BOUCLE_contacts>
 	[(#PAGINATION|?{<li>…</li>})]
@@ -154,14 +154,14 @@ Voir la jointure auteurs-contacts pour des explications supplémentaires</p>
 
 <p>Il faut ajouter à la boucle <code>(AUTEURS)</code> le critère
 <code>{organisations_auteurs}</code> qui en plus de réaliser une jointure
-correcte permet d'utiliser la balise <code>\#NOM_ORGANISATION</code> sur la boucle
+correcte permet d'utiliser la balise <code>[(#VAL{#})]NOM_ORGANISATION</code> sur la boucle
 <code>AUTEURS</code>.
 </p>
 
 <pre>
 &lt;BOUCLE_auteurs(AUTEURS){organisations_auteurs}>
-	\#NOM
-	\#NOM_ORGANISATION (table organisation)
+	[(#VAL{#})]NOM
+	[(#VAL{#})]NOM_ORGANISATION (table organisation)
 	...
 </pre>
 </div>
@@ -171,8 +171,8 @@ correcte permet d'utiliser la balise <code>\#NOM_ORGANISATION</code> sur la bouc
 	<ul class='exemple'>
 <BOUCLE_auteurs3(AUTEURS){organisations_auteurs}{pagination 3}>
 		<li class='espacer'>
-			\#NOM : #NOM,<br />
-			\#NOM_ORGANISATION : #NOM_ORGANISATION
+			[(#VAL{#})]NOM : #NOM,<br />
+			[(#VAL{#})]NOM_ORGANISATION : #NOM_ORGANISATION
 		</li>
 </BOUCLE_auteurs3>
 	[(#PAGINATION|?{<li>…</li>})]
@@ -192,14 +192,14 @@ Voir jointure contacts-auteurs pour des explications supplémentaires.</p>
 
 <p>
 Il faut utiliser le critère <code>{organisations_auteurs}</code>
-qui en plus de réaliser la jointure, permet l'usage de la balise <code>\#NOM_AUTEUR</code>,
+qui en plus de réaliser la jointure, permet l'usage de la balise <code>[(#VAL{#})]NOM_AUTEUR</code>,
 sur la boucle <code>ORGANISATIONS</code>.
 </p>
 
 <pre>
 &lt;BOUCLE_auteurs(ORGANISATIONS){organisations_auteurs}>
-	\#NOM
-	\#NOM_AUTEUR (table auteurs)
+	[(#VAL{#})]NOM
+	[(#VAL{#})]NOM_AUTEUR (table auteurs)
 	...
 </pre>
 </div>
@@ -209,8 +209,8 @@ sur la boucle <code>ORGANISATIONS</code>.
 	<ul class='exemple'>
 <BOUCLE_organisations(ORGANISATIONS){organisations_auteurs}{pagination 3}>
 		<li class='espacer'>
-			\#NOM : #NOM,<br />
-			\#NOM_AUTEUR : #NOM_AUTEUR (table auteur)
+			[(#VAL{#})]NOM : #NOM,<br />
+			[(#VAL{#})]NOM_AUTEUR : #NOM_AUTEUR (table auteur)
 		</li>
 </BOUCLE_organisations>
 	[(#PAGINATION|?{<li>…</li>})]
