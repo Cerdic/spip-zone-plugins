@@ -27,7 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"info_email_not_displaying" => "This email is not displayed correctly?",
 	"info_email_voir_en_ligne" => "See this newsletter in your browser",
 	"info_test_sujet" => "TEST",
-	"info_test_envoye" => "The newsletter was sent to @email@ as a test",
 	"info_publier_pour_envoyer" => "Publish this newsletter to send it to a list",
 
 	"info_preview_version_html_email" => "HTML Version email",

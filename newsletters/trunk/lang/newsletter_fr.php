@@ -28,7 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_email_not_displaying' => 'Cet email ne s\'affiche pas correctement&nbsp;?',
 	'info_email_voir_en_ligne' => 'Voir cette Infolettre dans votre navigateur',
 	'info_test_sujet' => 'TEST',
-	'info_test_envoye' => 'La newsletter a été envoyée en test à @email@',
 	'info_publier_pour_envoyer' => 'Publiez cette infolettre pour l’envoyer à une liste',
 
 	'info_preview_version_html_email' => 'Version HTML email',
