@@ -7,7 +7,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'alerte_effacement' => 'Confirmez l\'effacement des données de configuration de contact.',
-	'aucun_message' => 'Aucun message à afficher',
 
 	// B
 	'bouton_effacer' => 'Gommer',
@@ -37,7 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_barre_oui' => 'Afficher la barre typo complète.',
 	'configuration_champs_message' => 'Réglage du porte-plume.',
 	'configuration_champs_message_explication' => 'Réglage de la barre typographique associée au texte du message.',
-	'configuration_description' => 'Permet de configurer le formulaire de contact.',
 	'configuration_destinataires' => 'Destinataires',
 	'configuration_destinataires_explication' => 'Choisissez un ou plusieurs auteurs que les visiteurs pourront contacter. Si rien n\'est défini, c\'est l\'auteur numéro 1 (celui qui a installé le site) qui sera utilisé.',
 	'configuration_destinataires_plusieurs' => 'Permettre aux visiteurs de choisir <b>plusieurs</b> destinataires parmi la liste sélectionnée ci-dessus',
@@ -97,16 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modele_label_auteur' => 'Pré-sélectionner un auteur (facultatif) ?',
 	'modele_nom_formulaire' => 'le formulaire de contact avancé',
 	'monsieur' => 'Monsieur',
-	'msg_accueil' => 'Vous trouverez ici les messages de contact que vous avez reçu.',
-	'msg_contact' => 'Message de contact',
-	'msg_contacts' => 'Messages de contact',
-	'msg_expediteur' => 'Expéditeur : ',
-	'msg_lus' => 'Messages déjà lus',
 	'msg_messagerie' => 'Messagerie de contact',
-	'msg_nouveaux' => 'Nouveaux messages',
-	'msg_pas_nouveaux' => 'Vous n\'avez pas de nouveaux messages.',
-	'msg_revenir_accueil' => 'Revenir à la liste de messages de contact reçus.',
-	'msg_supprimer_message' => 'Supprimer le message',
 
 	// N
 	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?',
