@@ -1,0 +1,13 @@
+<BOUCLE_site(SITES){id_syndic}{tout}>
+	[(#SET{titre,[(#NOM_SITE|sinon{<:info_sans_titre:>})]})]
+	<h2 class="h2"><:diogene:titre_modification_site{titre=#GET{titre}}:></h2>
+	<div class="chapo description description_site">
+		<p>
+			<strong><:diogene:info_statut:></strong>
+			[(#STATUT|=={publie}|oui)
+				<a href="#URL_SITE" class="spip_in">[(#ID_SYNDIC|diogene_puce_statut{site,#STATUT})] [(#STATUT|diogene_info_statut{site})]</a>]
+			[(#STATUT|=={publie}|non)
+				[(#ID_SYNDIC|diogene_puce_statut{site,#STATUT})] [(#STATUT|diogene_info_statut{site})]]
+		</p>
+	</div>
+</BOUCLE_site>

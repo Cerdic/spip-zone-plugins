@@ -1,49 +1,57 @@
 <BOUCLE_diogene(DIOGENES){id_diogene}>
 <BOUCLE_secteur(CONDITION){si (#ID_SECTEUR|>{0})}>
 	<BOUCLE_autorise_publier_secteur(CONDITION){si (#AUTORISER{creersitedans,rubrique,#ID_SECTEUR}|oui)}>
+		[(#REM)
+			Si on a un id_syndic dans l'environnement
+		]
 		<BOUCLE_site_environnement(SITES){id_syndic}{id_secteur=#_diogene:ID_SECTEUR}{statut IN prop,publie}{0,1}>
-		[(#SET{titre,[(#NOM_SITE|sinon{<:info_sans_titre:>})]})]
-		<h2 class="h2"><:diogene:titre_modification_site{titre=#GET{titre}}:></h2>
-		<BOUCLE_autoriser_modifier_site(CONDITION){si (#AUTORISER{modifier,site,#ID_SYNDIC}|oui)}>
-			#SET{site_cree,oui}
-			#SET{id_site,#ID_SYNDIC}
-			#SET{id_rubrique,#ID_RUBRIQUE}
-			[(#PLUGIN{ajaxforms}|oui)
-				[(#FORMULAIRE_EDITER_LOGO{site,#ID_SYNDIC,#SELF,#ARRAY{image_reduire,200,label,<:diogene:label_logo_site:>}})]
-			]
-			<div id="formulaire_diogene">
-				[(#FORMULAIRE_EDITER_SITE{#ID_SYNDIC,#GET{id_rubrique,#ENV{id_rubrique,0}},#ENV{redirect},#ENV{lier_trad}})]
-			</div>
-		</BOUCLE_autoriser_modifier_site>
-			<p class="message_erreur"><:diogene:erreur_autorisation_modifier_site:></p>
-		<//B_autoriser_modifier_site>
+		[(#SET{auth_modifier,non})]
+		[(#AUTORISER{modifier,site,#ID_SYNDIC}|oui)
+			[(#SET{auth_modifier,oui})]
+			[(#SET{id_site,#ID_SYNDIC})]
+			[(#SET{id_rubrique,#ID_RUBRIQUE})]]
+		[(#GET{auth_modifier}|=={oui}|non)
+			[(#SET{erreur,<:diogene:erreur_autorisation_modifier_site:>})]
+		]
 		</BOUCLE_site_environnement>
+		</B_site_environnement>
 		<BOUCLE_site_en_cours_de_redac(SITES){id_auteur=#SESSION{id_auteur}}{id_secteur=#_diogene:ID_SECTEUR}{statut=prop}{tout}{0,1}>
-			[(#SET{titre,[(#NOM_SITE|sinon{<:info_sans_titre:>})]})]
-			<h3><:diogene:titre_modification_site{titre=#GET{titre}}:></h3>
-			<BOUCLE_autoriser_modifier_site2(CONDITION){si (#AUTORISER{modifier,site,#ID_SYNDIC}|oui)}>
-			#SET{site_cree,oui}
-			#SET{id_site,#ID_SYNDIC}
-			#SET{id_rubrique,#ID_RUBRIQUE}
-			[(#PLUGIN{ajaxforms}|oui)
-				[(#FORMULAIRE_EDITER_LOGO{site,#ID_SYNDIC,#SELF,#ARRAY{image_reduire,200,label,<:diogene:label_logo_site:>}})]
-			]
-			<div id="formulaire_diogene">
-				#GET{id_rubrique,#ENV{id_rubrique,0}}
-				[(#FORMULAIRE_EDITER_SITE{#ID_SYNDIC,#GET{id_rubrique,#ENV{id_rubrique,#_diogene:ID_SECTEUR}},#ENV{redirect},#ENV{lier_trad}})]
-			</div>
-			</BOUCLE_autoriser_modifier_site2>
-			<p class="message_erreur"><:diogene:erreur_autorisation_modifier_site:></p>
-			<//B_autoriser_modifier_site2>
+		[(#SET{auth_modifier,non})]
+		[(#AUTORISER{modifier,site,#ID_SYNDIC}|oui)
+			[(#SET{auth_modifier,oui})]
+			[(#SET{id_site,#ID_SYNDIC})]
+			[(#SET{id_rubrique,#ID_RUBRIQUE})]]
+		[(#GET{auth_modifier}|=={oui}|non)
+			[(#SET{erreur,<:diogene:erreur_autorisation_modifier_site:>})]
+		]
 		</BOUCLE_site_en_cours_de_redac>
-			<div id="formulaire_diogene">
-				[(#FORMULAIRE_EDITER_SITE{new,#GET{id_rubrique,#ENV{id_rubrique,#_diogene:ID_SECTEUR}},#ENV{redirect}})]
-			</div>
-		<//B_site_en_cours_de_redac>
 		<//B_site_environnement>
+		
+		<INCLURE{fond=inclure/diogene_site_description,id_syndic=#GET{id_site},ajax} />
+		
+		[(#GET{erreur}|oui)
+			#BOITE_OUVRIR{'',error}
+				#GET{erreur}
+			#BOITE_FERMER
+		]
+		[(#GET{erreur}|non)
+			<div id="formulaire_diogene_logo">
+				<div class="ajax">
+					[(#FORMULAIRE_EDITER_LOGO{site,#GET{id_site},#SELF})]
+				</div>	
+			</div>
+			<div id="formulaire_diogene">
+				<div class="ajax">
+					[(#FORMULAIRE_EDITER_SITE{#GET{id_site,new},#GET{id_rubrique,#ENV{id_rubrique,#_diogene:ID_SECTEUR}},#ENV{redirect},#ENV{lier_trad}})]
+				</div>
+			</div>
+		]
 	</BOUCLE_autorise_publier_secteur>
-	[(#SESSION{statut}|oui)<p class="message_erreur"><:diogene:erreur_autorisation_statut_publier:></p>]
-	[(#SESSION{statut}|non)<p class="message_erreur"><:diogene:erreur_autorisation_login_publier:></p>]
+	#BOITE_OUVRIR{'',error}
+		[(#SESSION{statut}|oui)<p class="message_erreur"><:diogene:erreur_autorisation_statut_publier:></p>]
+		#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
+			[(#SESSION{statut}|non)<:diogene:erreur_autorisation_login_publier{url=#GET{url}}:>]
+	#BOITE_FERMER
 	<//B_autorise_publier_secteur>
 </BOUCLE_secteur>
 </BOUCLE_diogene>

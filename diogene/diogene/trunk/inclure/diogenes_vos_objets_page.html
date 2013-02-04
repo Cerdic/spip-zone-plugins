@@ -4,9 +4,9 @@
 	#SET{afficher_langue,oui}
 ]
 <B_articles>
-<div class="menu diogene page" id="menu_diogene_#ID_DIOGENE">
+<div class="menu diogene page diogene_#ID_DIOGENE">
 	#ANCRE_PAGINATION
-	<h3>#TITRE</h3>
+	<h3 class="h3">#TITRE</h3>
 	<ul class="menu-liste">
 		<BOUCLE_articles(ARTICLES){id_rubrique='-1'}{id_auteur=#SESSION{id_auteur}}{par statut}{statut IN prop,prepa,publie}{pagination 5}>
 		<li class="menu-entree[ (#EXPOSE)]">

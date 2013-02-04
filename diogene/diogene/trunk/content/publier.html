@@ -31,8 +31,8 @@
 		#BOITE_OUVRIR{'',error}
 			<p>
 				<:diogene:erreur_droits_objet_publier:>
-				[(#SESSION{id_auteur}|non)
-				<br /><:diogene:erreur_autorisation_login_publier:>]
+				#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
+				[(#SESSION{statut}|non)<:diogene:erreur_autorisation_login_publier{url=#GET{url}}:>]
 			</p>
 		#BOITE_FERMER
 		<//B_articles_secteurs>

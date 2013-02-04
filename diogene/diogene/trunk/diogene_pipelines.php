@@ -28,10 +28,10 @@ function diogene_editer_contenu_objet($flux){
 	$pipeline = pipeline('diogene_objets', array());
 
 	if (in_array($type,array_keys($pipeline))){
-		$id_secteur = $args['contexte']['id_secteur'] ?
+		$id_secteur = ($args['contexte']['id_secteur'] > 0) ?
 			$args['contexte']['id_secteur'] :
 			sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.intval($args['contexte']['id_parent']));
-
+		
 		/**
 		 * Cas des pages uniques
 		 */
@@ -54,8 +54,9 @@ function diogene_editer_contenu_objet($flux){
 				$where = "id_secteur=".intval($id_secteur)." AND objet=".sql_quote($type);
 			}
 		}
+
 		if($diogene = sql_fetsel('*','spip_diogenes',$where)){
-			/*
+			/**
 			 * On ajoute dans l'environnement les champs ajoutés par diogènes et ses sous plugins
 			 */
 			if(unserialize($diogene['champs_ajoutes']) == 'false'){
@@ -63,7 +64,7 @@ function diogene_editer_contenu_objet($flux){
 			}else{
 				$args['diogene_ajouts'] = unserialize($diogene['champs_ajoutes']);
 			}
-			/*
+			/**
 			 * On ajoute dans l'environnement les options des complements
 			 */
 			if(unserialize($diogene['options_complements']) == 'false'){
@@ -168,7 +169,11 @@ function diogene_editer_contenu_objet($flux){
 				if($type=='page'){
 					$type='article';
 				}
-				if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_'.$type.'.html')){
+
+				if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_'.$diogene['objet'].'.html')){
+					$saisie .= recuperer_fond('formulaires/selecteur_statut_'.$diogene['objet'],$args['contexte']);
+				}
+				else if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_'.$type.'.html')){
 					$saisie .= recuperer_fond('formulaires/selecteur_statut_'.$type,$args['contexte']);
 				}else if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_objet.html') AND $type != 'rubrique'){
 					$args['contexte']['type'] = $type;
@@ -212,7 +217,7 @@ function diogene_formulaire_charger($flux){
 				$flux['data']['editable'] = false;
 				$flux['data']['message_erreur'] = _T('diogene:erreur_diogene_multiple_page');
 			}else{
-				$flux['data']['_hidden'] .= "\n<input type='hidden' name='id_secteur' value='0' />";
+				$flux['data']['_hidden'] .= "\n<input type='hidden' name='id_secteur' value='0' />\n";
 			}
 		}
 		$flux['data'] = array_merge($flux['data'],$valeurs);
@@ -222,7 +227,7 @@ function diogene_formulaire_charger($flux){
 			$id_table_objet = id_table_objet($objet);
 			$id_objet = $flux['data'][$id_table_objet];
 			$flux['data']['id_objet'] = $id_objet;
-			$id_secteur = $flux['data']['id_secteur'] ? $flux['data']['id_secteur'] : false;
+			$id_secteur = (intval($flux['data']['id_secteur']) > 0) ? $flux['data']['id_secteur'] : ((intval($flux['data']['id_parent']) > 0) ? $flux['data']['id_parent'] : false);
 	
 			/**
 			 * Cas spécifique pour les pages uniques
@@ -243,9 +248,12 @@ function diogene_formulaire_charger($flux){
 			
 			if(intval($id_secteur)){
 				if($objet == 'article'){
-					$id_diogene = sql_getfetsel('id_diogene','spip_diogenes','id_secteur='.intval($id_secteur).' AND objet IN ("article","emballe_media")');
+					$diogene = sql_fetsel('id_diogene,objet','spip_diogenes','id_secteur='.intval($id_secteur).' AND objet IN ("article","emballe_media")');
+					$id_diogene = $diogene['id_diogene'];
+					$type_diogene = $diogene['objet'];
 				}else{
 					$id_diogene = sql_getfetsel('id_diogene','spip_diogenes','id_secteur='.intval($id_secteur).' AND objet ='.sql_quote($objet));
+					$type_diogene = $objet;
 				}
 			}else{
 				if($pipeline[$objet]['diogene_max'] == 1){
@@ -253,11 +261,19 @@ function diogene_formulaire_charger($flux){
 				}
 			}
 			
+			/**
+			 * On est effectivement dans un diogene
+			 * On ajoute deux input hidden :
+			 * -* id_diogene qui est l'id_diogene
+			 * -* type_diogene qui est le champ 'objet' de la table spip_diogene
+			 * Ces deux informations peuvent être intéressantes dans d'autres pipeline comme formulaire_traiter ...
+			 */
 			if(intval($id_diogene)){
-				$flux['data']['_hidden'] .= '<input type="hidden" name="id_diogene" value="'.$id_diogene.'" />';
+				$flux['data']['_hidden'] .= "<input type='hidden' name='id_diogene' value='".$id_diogene."' />\n";
+				$flux['data']['_hidden'] .= "<input type='hidden' name='type_diogene' value='".$type_diogene."' />\n";
 				$flux['data']['id_diogene'] = $id_diogene;
 			}
-
+	
 			$post_valeurs = pipeline('diogene_charger',
 					array(
 						'args' => array(
@@ -304,6 +320,11 @@ function diogene_formulaire_verifier($flux){
 		$messages = $flux['data'];
 		unset($messages['message_ok']);
 		if(count($messages) > 0){
+			/**
+			 * Si c'est la récupération automatique des infos d'un site, on n'affiche pas de message d'erreur
+			 */
+			if(count($messages) == 1 && isset($messages['verif_url_auto']))
+				return $flux;
 			$flux['data']['message_erreur'] = _T('diogene:message_erreur_general');
 		}
 	}
@@ -314,80 +335,62 @@ function diogene_formulaire_verifier($flux){
  * Insertion dans le pipeline formulaire_traiter (SPIP)
  * 
  * Insertion à la fin du traitement des formulaires
- * Les sous plugins peuvent se brancher sur le pipeline spécifique à Diogene : diogene_traiter
+ * Les sous plugins peuvent également se brancher sur le pipeline spécifique à Diogene : diogene_traiter
+ * Ce pipeline agit au moment de la pré édition de SPIP
  * 
- * On ne s'insère que dans l'espace public
- * - On insère une redirection correcte si le statut est validé
- * - On affiche un message comme quoi l'objet a été mis à jour si c'est le cas
+ * On ne s'insère que sous certaines conditions :
+ * -* on se trouve dans l'espace public;
+ * -* on est dans le cas d'un formulaire du type #FORMULAIRE_EDITER_xx
+ * -* dans le cas d'un diogene (passé dans le post);
+ * -* le diogène passé dans le post existe bien;
+ * 
+ * Ce pipeline agit sur le message de retour et la redirection lors de la validation d'un formulaire
+ * -* On ne redirige pas sur la page de l'objet même si publié;
+ * -* On ajoute un lien pour voir l'objet publié dans le message de retour du formulaire
+ * -* On ajoute un ajaxReload dans le message de retour pour rafraichir certains morceaux de la page (jQuery(".description_$objet,.diogene_$id_diogene"))
  * 
  * @param array $flux Le contexte d'environnement du pipeline
  * @return array $flux Le contexte d'environnement modifié
  */
 function diogene_formulaire_traiter($flux){
-	if(!test_espace_prive()){
+	if(!test_espace_prive()
+		&& (substr($flux['args']['form'],0,7) == 'editer_')
+		&& ($objet = substr($flux['args']['form'],7))
+		&& ($id_diogene = intval(_request('id_diogene'))) 
+		&& ($id_diogene == sql_getfetsel('id_diogene','spip_diogenes','id_diogene='.intval($id_diogene)))){
+		
+		$id_table_objet = id_table_objet($objet);
+		$table_objet = table_objet_sql($objet);
+		$id_objet = intval($flux['data'][$id_table_objet]);
+		$statut_objet = sql_getfetsel('statut',$table_objet,$id_table_objet.'='.intval($id_objet));
+		
 		/**
-		 * Cas des articles
+		 * Cas de la modification d'un objet
 		 */
-		if(in_array($flux['args']['form'],array('editer_article'))){
-			$id_article = intval($flux['data']['id_article']);
-			if(!$flux['data']['page']){
-				$flux['data']['page'] = _request('page');
-			}
-			$infos_article = sql_fetsel('*','spip_articles','id_article='.intval($id_article));
-			$flux['data']['message_ok'] = _T('diogene:message_article_mis_a_jour');
-			if($infos_article['statut'] == 'publie'){
-				$flux['data']['redirect'] = generer_url_entite($id_article,'article');
-			}else if($infos_article['statut'] == 'poubelle'){
-				$flux['data']['redirect'] = parametre_url(self(),'id_article','');
-			}
-			$flux['data']['editable'] = true;
-		}
-		/**
-		 * Cas des sites
-		 */
-		elseif($flux['args']['form'] == 'editer_site'){
-			$id_site = intval($flux['data']['id_syndic']);
-			$infos_site = sql_fetsel('*','spip_syndic','id_syndic='.intval($id_site));
-			if($infos_site['statut'] != 'publie'){
-				$flux['data']['message_ok'] = _T('diogene:message_site_mis_a_jour');
-			}else{
-				$flux['data']['message_ok'] = _T('diogene:message_site_mis_a_jour');
-				$flux['data']['redirect'] = generer_url_entite($id_site,'site');
-			}
-			$flux['data']['editable'] = true;
-		}
-		/**
-		 * Cas des rubriques
-		 */
-		elseif($flux['args']['form'] == 'editer_rubrique'){
-			$id_rubrique = intval($flux['data']['id_rubrique']);
-			$infos_rubrique = sql_getfetsel('statut','spip_rubriques','id_rubrique='.intval($id_rubrique));
-			if($infos_rubrique == 'publie'){
-				$flux['data']['message_ok'] = _T('diogene:message_rubrique_mis_a_jour');
-				$flux['data']['redirect'] = generer_url_entite($id_rubrique,'rubrique');
-				$flux['data']['editable'] = false;
-			}else{
-				$flux['data']['message_ok'] = _T('diogene:message_rubrique_creee');
-				$flux['data']['editable'] = false;
-				$flux['data']['redirect'] = parametre_url(self(),'id_rubrique',$id_rubrique);
-			}
-		}
-		/**
-		 * Cas des autres objets possibles
-		 */
-		elseif(
-			substr($flux['args']['form'],0,7) == 'editer_'
-			&& ($objet = substr($flux['args']['form'],7))
-			&& $id_diogene=sql_getfetsel('id_diogene','spip_diogenes','objet='.sql_quote($objet)) 
-		){
-			$id_table_objet = id_table_objet($objet);
-			$table_objet = table_objet_sql($objet);
-			$id_objet = intval($flux['data'][$id_table_objet]);
-			$statut_objet = sql_getfetsel('statut',$table_objet,$id_table_objet.'='.intval($id_objet));
-			if($statut_objet == 'publie'){
-				$flux['data']['redirect'] = generer_url_entite($id_objet,$objet);
+		if((_request($id_table_objet) == $flux['data'][$id_table_objet]) || (_request('arg') == $flux['data'][$id_table_objet])){
+			/**
+			 * TODO Utiliser les fonctions recherchant dans la déclaration des tables pour prendre le bon statut
+			 * ici : refuse est pour les sites et poubelle pour le reste
+			 */
+			if(in_array($statut_objet,array('refuse','poubelle'))){
+				$flux['data']['message_ok'] = _T('diogene:message_objet_supprime');
+				$flux['data']['redirect'] = parametre_url(self(),$id_table_objet,'');
 				$flux['data']['editable'] = false;
 			}
+			else{
+				$flux['data']['message_ok'] = _T('diogene:message_objet_mis_a_jour');
+				if($statut_objet == 'publie'){
+					$url = generer_url_entite($id_objet,$objet);
+					$flux['data']['message_ok'] .= '<br />'._T('diogene:message_objet_mis_a_jour_lien',array('url'=>$url));
+				}
+				$flux['data']['message_ok'] .= '<script type="text/javascript">if (window.jQuery) jQuery(".description_'.$objet.',.diogene_'.$id_diogene.'").ajaxReload();</script>';
+				$flux['data']['editable'] = true;
+				$flux['data']['redirect'] = false;
+			}
+		}else{
+			$flux['data']['message_ok'] = _T('diogene:message_objet_cree');
+			$flux['data']['editable'] = false;
+			$flux['data']['redirect'] = parametre_url(self(),$id_table_objet,$id_objet);
 		}
 	}
 	return $flux;
@@ -497,20 +500,20 @@ function diogene_post_edition($flux){
  */
 function diogene_diogene_objets($flux){
 	$flux['article']['champs_sup']['date'] = _T('diogene:champ_date_publication');
-	if($GLOBALS['meta']['articles_redac'] !== 'non'){
+	if($GLOBALS['meta']['articles_redac'] !== 'non')
 		$flux['article']['champs_sup']['date_redac'] = _T('diogene:champ_date_publication_anterieure');
-	}
 	$flux['article']['champs_sup']['forum'] = _T('diogene:champ_forum');
-	if($GLOBALS['meta']['activer_sites'] == 'oui'){
-		$flux['site'] = array();
-	}
-	$flux['rubrique'] = array();
+	
 	if(defined('_DIR_PLUGIN_PAGES')){
 		$flux['page'] = $flux['article'];
 		$flux['page']['type_orig'] = 'article';
 		$flux['page']['diogene_max'] = 1;
 		$flux['page']['ss_rubrique'] = true;
 	}
+	
+	$flux['site'] = array();
+	
+	$flux['rubrique'] = array();
 	return $flux;
 }
 
@@ -653,34 +656,28 @@ function diogene_diogene_traiter($flux){
  */
 function diogene_ajouter_menus($boutons_admin) {
 	$diogenes = sql_select('*','spip_diogenes','objet != "emballe_media"');
-	include_spip('inc/filtres_images_mini');
-	include_spip('filtres/images_transforme');
-	if(!function_exists('quete_logo')){
+	if(!function_exists('quete_logo'))
 		include_spip('public/quete');
-	}
+	
 	while($diogene = sql_fetch($diogenes)){
 		if (autoriser('utiliser', 'diogene',$diogene['id_diogene'])) {
 			if($diogene['objet'] == 'rubrique'){
 				$url = generer_url_ecrire('rubrique_edit','new=oui&id_parent='.$diogene['id_secteur']);
-				$icon = find_in_theme('images/rubrique-add-24.png');
+				$icon = find_in_theme('images/rubrique-add-16.png');
 			}
 			if($diogene['objet'] == 'article'){
 				$url = generer_url_ecrire('article_edit','new=oui&id_rubrique='.$diogene['id_secteur']);
-				$icon = find_in_theme('images/article-add-24.png');
+				$icon = find_in_theme('images/article-add-16.png');
 			}
 			if($diogene['objet'] == 'site'){
 				$url = generer_url_ecrire('site_edit','new=oui&id_rubrique='.$diogene['id_secteur']);
-				$icon = find_in_theme('images/site-add-24.png');
+				$icon = find_in_theme('images/site-add-16.png');
 			}
 			
-			$icon = extraire_attribut(image_reduire($icon,'16','16'),'src');
-			
 			if($logo = quete_logo('diogene', 'ON', $diogene['id_diogene'], $diogene['id_secteur'], false)){
-				if(defined('_DIR_PLUGIN_BANDO')){
-					$icon = extraire_attribut(image_reduire($logo[0],'16','16'),'src');
-				}else{
-					$icon = extraire_attribut(image_reduire($logo[0],'24','24'),'src');
-				}
+				include_spip('inc/filtres_images_mini');
+				include_spip('filtres/images_transforme');
+				$icon = extraire_attribut(image_reduire($logo[0],'16','16'),'src');
 			}
 			
 			$boutons_admin['menu_edition']->sousmenu[$diogene['type']] =

@@ -9,7 +9,7 @@
 	<BOUCLE_auth_diogenes(CONDITION){si (#AUTORISER{creerdans,diogene,#ID_DIOGENE}|oui)}>
 	<h3 class="h3">#_diogenes:TITRE</h3>
 	<B_rubriques>
-	<ul class="menu-liste">
+	<ul class="menu-liste diogene_#_diogenes:ID_DIOGENE">
 	<BOUCLE_rubriques(RUBRIQUES){id_parent=#_diogenes:ID_SECTEUR} {par num titre, titre}{tout}>
 		<li class="menu-entree[ (#EXPOSE{ouverte,fermee})][ (#EXPOSE)]">
 			[(#ID_RUBRIQUE|=={#ENV{id_rubrique}}|non)<a href="[(#URL_PAGE{publier}|parametre_url{type_objet,#GET{type}}|parametre_url{id_rubrique,#ID_RUBRIQUE})]"[ class="(#EXPOSE)"]>]

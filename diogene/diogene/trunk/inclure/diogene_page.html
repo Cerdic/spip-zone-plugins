@@ -76,7 +76,8 @@
 		</BOUCLE_autorise_publier_secteur>
 		#BOITE_OUVRIR{'',error}
 			[(#SESSION{statut}|oui)<:diogene:erreur_autorisation_statut_publier:>]
-			[(#SESSION{statut}|non)<:diogene:erreur_autorisation_login_publier:>]
+			#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
+			[(#SESSION{statut}|non)<:diogene:erreur_autorisation_login_publier{url=#GET{url}}:>]
 		#BOITE_FERMER
 		<//B_autorise_publier_secteur>
 	</BOUCLE_secteur>
