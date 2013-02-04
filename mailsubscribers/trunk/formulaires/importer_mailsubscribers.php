@@ -72,7 +72,7 @@ function formulaires_importer_mailsubscribers_traiter_dist(){
 	refuser_traiter_formulaire_ajax();// pour recharger toute la page
 
 	if (_request('desactiver_notif'))
-		$GLOBALS['instituermailsubscriber_status'] = false; // pas de notification pour cet import
+		$GLOBALS['notification_instituermailsubscriber_status'] = false; // pas de notification pour cet import
 	if (_request('vider_table') AND autoriser('detruire')){
 		include_spip('base/abstract_sql');
 		sql_delete("spip_mailsubscribers");

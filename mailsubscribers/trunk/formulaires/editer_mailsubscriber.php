@@ -61,7 +61,7 @@ function formulaires_editer_mailsubscriber_verifier_dist($id_mailsubscriber='new
 function formulaires_editer_mailsubscriber_traiter_dist($id_mailsubscriber='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	set_request('lang',_request('langue'));
 
-	$GLOBALS['instituermailsubscriber_status'] = false; // pas de notification depuis l'edition du form
+	$GLOBALS['notification_instituermailsubscriber_status'] = false; // pas de notification depuis l'edition du form
 
 	// creation : verifier qu'on retombe pas sur un email obfusque, et dans ce cas se retablir dessus
 	if (!intval($id_mailsubscriber)

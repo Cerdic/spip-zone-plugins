@@ -17,7 +17,7 @@ function notifications_instituermailsubscriber_dist($quoi, $id_mailsubscriber, $
 		return;
 	}
 	// desactivable
-	if (isset($GLOBALS['instituermailsubscriber_status']) AND !$GLOBALS['instituermailsubscriber_status'])
+	if (isset($GLOBALS['notification_instituermailsubscriber_status']) AND !$GLOBALS['notification_instituermailsubscriber_status'])
 		return;
 
 	include_spip('inc/texte');

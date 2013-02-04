@@ -235,7 +235,7 @@ function mailsubscribers_import_from_clevermail(){
 
 function mailsubscriber_import_one($email,$set){
 	if (!$email) return false;
-	$GLOBALS['instituermailsubscriber_status'] = false;
+	$GLOBALS['notification_instituermailsubscriber_status'] = false;
 	if ($id = sql_getfetsel("id_mailsubscriber","spip_mailsubscribers","email=".sql_quote($email)." OR email=".sql_quote(mailsubscribers_obfusquer_email($email)))){
 		$set['email'] = $email; // si mail obfusque
 		objet_modifier("mailsubscriber",$id,$set);
