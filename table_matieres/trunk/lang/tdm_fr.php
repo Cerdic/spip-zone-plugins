@@ -10,9 +10,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'automatique_desription' => 'Désactivez cette option si vous placez vous-même
 		la balise <code>#TABLE_MATIERES</code> dans vos squelettes.',
 
-	// C
-	'config' => 'Paramètres',
-
 	// E
 	'explication_longueur' => 'Définit le nombre de caractères maximum que consituera chaque ancres.',
 	'explication_min' => 'Définit le nombre minimal d\'intertitres d\'un texte à partir duquel une table des matières sera affichée.',
@@ -31,10 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'separateur' => 'Séparateur :',
 
 	// T
-	'table_matiere' => 'Table des matières',
-
-	// Z
-	'zbug_champ_tdm_hors_boucle_articles' => 'Champ #TABLE_MATIERES hors boucles ARTICLES'
+	'table_matiere' => 'Table des matières'
 );
 
 ?>
