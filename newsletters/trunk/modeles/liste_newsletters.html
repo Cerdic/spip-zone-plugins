@@ -1,0 +1,26 @@
+[(#REM)
+
+Modèle pour lister les infolettres envoyées
+
+Paramètres :
+- titre : indique le titre de la liste
+- target : oui pour ouvrir dans une nouvelle page la newsletter (mauvaise pratique)
+- nombre_pagination : nombre d'éléments par page (10 par défaut)
+
+]<B_newsletters>
+<div class="liste articles">
+	#ANCRE_PAGINATION
+	[<h2 class="h2">(#ENV{titre,<:newsletter:titre_newsletters:>})</h2>]
+	<ul class="liste-items items">
+		<BOUCLE_newsletters(NEWSLETTERS){!par date}{pagination #ENV{nombre_pagination,10}}>
+		<li class="item">
+			<a href="[(#ID_NEWSLETTER|generer_url_entite{newsletter})]"[ (#ENV{target}|oui) target="_blank"]>
+				#TITRE
+			</a>
+		</li>
+		</BOUCLE_newsletters>
+		
+	</ul>
+	[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_newsletters>
