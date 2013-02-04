@@ -77,6 +77,8 @@ function autoriser_diogene_utiliser($faire, $type, $id, $qui, $opt) {
  * 
  * Changement par rapport à la fonction par défaut :
  * Si on a le plugin pages, on autorise à publier dans la rubrique 0
+ * Si on est dans un diogene et que l'on a mis un nombre > 0 comme limite d'objet en attente de publication,
+ * on vérifie que l'on n'ai pas atteint cette limite 
  * 
  * @param string $faire L'action
  * @param string $type Le type d'objet
@@ -95,7 +97,7 @@ function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
 			$id_secteur = sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.intval($id));
 			$nb_attente = sql_getfetsel('nombre_attente','spip_diogenes','id_secteur='.intval($id_secteur).' AND objet IN ("article","emballe_media")');
 			if($nb_attente > 0){
-				$articles = sql_select('art.id_article','spip_articles as art LEFT JOIN spip_auteurs_liens as lien ON lien.objet="article" AND art.id_article=lien.id_objet','lien.id_auteur='.intval($qui['id_auteur']));
+				$articles = sql_select('art.id_article','spip_articles as art LEFT JOIN spip_auteurs_liens as lien ON lien.objet="article" AND art.id_article=lien.id_objet','lien.id_auteur='.intval($qui['id_auteur']).' AND art.statut NOT IN ("poubelle","publie")');
 				$nb_articles = sql_count($articles);
 				if($nb_articles >= $nb_attente)
 					return false;
