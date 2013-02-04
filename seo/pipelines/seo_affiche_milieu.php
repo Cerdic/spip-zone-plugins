@@ -45,7 +45,7 @@ function seo_affiche_milieu($vars) {
 	$ret .= fin_block();
 		 
 	// Create the border with the content
-	$ret = debut_cadre_enfonce(_DIR_PLUGIN_SEO.'img_pack/meta_tags-24.png', true, "", $bouton) . $ret . fin_cadre_enfonce(true);
+	$ret = '<div class="nettoyeur"></div>'.debut_cadre_enfonce(_DIR_PLUGIN_SEO.'img_pack/meta_tags-24.png', true, "", $bouton) . $ret . fin_cadre_enfonce(true);
 
 	$vars["data"] .= $ret;
 	
