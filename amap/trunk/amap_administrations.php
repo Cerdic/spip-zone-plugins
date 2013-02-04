@@ -26,7 +26,7 @@ function amap_upgrade($nom_meta_base_version, $version_cible){
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
-function amap_vider_tables($nom_meta_version_base){
+function amap_vider_tables($nom_meta_base_version){
 	//supprimer toutes les tables
 	sql_drop_table('spip_amap_disponibles');
 	sql_drop_table('spip_amap_livraisons');
