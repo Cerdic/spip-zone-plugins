@@ -57,7 +57,13 @@ function formulaires_configurer_mailsubscribers_traiter_dist(){
 		$renommages = array(); # un renommage a t'il eu lieu ?
 		foreach (_request('lists') as $k => $v) {
 
-			$id_bak = mailsubscribers_normaliser_nom_liste($v['id_bak']); # ancien nom d'identifiant.
+			// l'ancien nom d'identifiant. Ne pas normaliser s'il est vide !
+			// sinon cela lui met 'newsletter::newsletter' d'office.
+			if ($v['id_bak']) {
+				$id_bak = mailsubscribers_normaliser_nom_liste($v['id_bak']);
+			} else {
+				$id_bak = '';
+			}
 			unset($v['id_bak']);
 
 			// cas d'une suppression de liste d'information
@@ -67,14 +73,15 @@ function formulaires_configurer_mailsubscribers_traiter_dist(){
 				continue;
 			}
 
-			// autres cas
+			// autres cas (nouvelle ou modification)
 			if (strlen(trim($v['id']))) {
 				$lists[$k]['id'] = mailsubscribers_normaliser_nom_liste($v['id']);
 				if (!in_array($v['status'], array('open', 'close'))) {
 					$lists[$k]['status'] = 'open';
 				}
 
-				if ($lists[$k]['id'] != $id_bak) {
+				// renommage d'une liste (il existe un ancien identifiant non vide)
+				if ($id_bak AND ($lists[$k]['id'] != $id_bak)) {
 					mailsubscribers_renommer_identifiant_liste($id_bak, $lists[$k]['id']);
 					$renommages[$k] = $lists[$k]['id'];
 				}
