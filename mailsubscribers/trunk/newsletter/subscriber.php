@@ -33,12 +33,12 @@ function newsletter_subscriber_dist($email){
 	$infos = sql_fetsel('email,nom,listes,lang,statut,jeton','spip_mailsubscribers','email='.sql_quote($email));
 	if ($infos){
 		if ($infos['statut']=='valide')
-			$infos['status']=='on';
+			$infos['status']='on';
 		elseif (in_array($infos['statut'],array('prepa','prop'))){
-			$infos['status']=='pending';
+			$infos['status']='pending';
 		}
 		else {
-			$infos['status']=='off';
+			$infos['status']='off';
 		}
 		unset($infos['statut']);
 
