@@ -365,6 +365,18 @@ function diogene_formulaire_traiter($flux){
 		$statut_objet = sql_getfetsel('statut',$table_objet,$id_table_objet.'='.intval($id_objet));
 		
 		/**
+		 * On récupère le titre dans le post que l'on passera aux chaines de langue
+		 * On test 'titre','nom_site','nom' qui sont les 3 plus probables
+		 * En dernier ressort on utilise generer_info_entite() pour trouver quelque chose
+		 * (dans ce cas on doit appeler inc/texte qui pose problème)
+		 */
+		$titre = _request('titre') ? _request('titre') : (_request('nom_site') ? _request('nom_site') : _request('nom'));
+		if(!$titre){
+			include_spip('inc/texte');
+			$titre = generer_info_entite($id_objet,$objet,'titre');
+		}
+			
+		/**
 		 * Cas de la modification d'un objet
 		 */
 		if((_request($id_table_objet) == $flux['data'][$id_table_objet]) || (_request('arg') == $flux['data'][$id_table_objet])){
@@ -373,12 +385,12 @@ function diogene_formulaire_traiter($flux){
 			 * ici : refuse est pour les sites et poubelle pour le reste
 			 */
 			if(in_array($statut_objet,array('refuse','poubelle'))){
-				$flux['data']['message_ok'] = _T('diogene:message_objet_supprime');
+				$flux['data']['message_ok'] = _T('diogene:message_objet_supprime',array('titre'=>$titre));
 				$flux['data']['redirect'] = parametre_url(self(),$id_table_objet,'');
 				$flux['data']['editable'] = false;
 			}
 			else{
-				$flux['data']['message_ok'] = _T('diogene:message_objet_mis_a_jour');
+				$flux['data']['message_ok'] = _T('diogene:message_objet_mis_a_jour',array('titre'=>$titre));
 				if($statut_objet == 'publie'){
 					$url = generer_url_entite($id_objet,$objet);
 					$flux['data']['message_ok'] .= '<br />'._T('diogene:message_objet_mis_a_jour_lien',array('url'=>$url));
@@ -388,7 +400,7 @@ function diogene_formulaire_traiter($flux){
 				$flux['data']['redirect'] = false;
 			}
 		}else{
-			$flux['data']['message_ok'] = _T('diogene:message_objet_cree');
+			$flux['data']['message_ok'] = _T('diogene:message_objet_cree',array('titre'=>$titre));
 			$flux['data']['editable'] = false;
 			$flux['data']['redirect'] = parametre_url(self(),$id_table_objet,$id_objet);
 		}
