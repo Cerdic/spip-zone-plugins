@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_article' => 'Článok manuálu definovaný v nastaveniach zásuvného modulu sa nenašiel: #@idart@',
-	'erreur_article_publie' => 'L’article du manuel défini dans la configuration du plugin n\'est pas publié en ligne : <a href="@url@">#@idart@</a>', # NEW
+	'erreur_article_publie' => 'Článok príručky definovaný v nastaveniach zásuvného modulu nie je publikovaný online: <a href="@url@">#@idart@</a>',
 	'erreur_pas_darticle' => 'Článok manuálu nie je definovaný v nastaveniach zásuvného modulu',
 	'explication_afficher_bord_gauche' => 'Ikonu manuálu zobraziť vľavo hore (ak sa manuál zobrazí v stĺpci)',
 	'explication_background_color' => 'Uveďte farbu pozadia oblasti, v ktorej sa zobrazí manuál',
