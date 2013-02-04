@@ -80,7 +80,7 @@ function formulaires_newsletter_send_traiter_dist($id_newsletter,$mode_test=fals
 		$res = $send($dest, $id_newsletter, array('test'=>$mode_test?true:false));
 
 		if (!$res)
-			$res = array('message_ok'=>_T('newsletter:info_test_envoye',array('email'=>$email)));
+			$res = array('message_ok'=>_T($mode_test?'newsletter:info_test_envoye':'newsletter:info_envoi_unique_reussi',array('email'=>$email)));
 		else
 			$res = array('message_erreur'=>$res);
 	}

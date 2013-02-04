@@ -14,6 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"info_tester_newsletter" => "Testing with a single email",
 	"info_envoi_unique_newsletter" => "Send to one person",
 	"info_envoyer_newsletter" => "Send the newsletter",
+	"info_test_envoye" => "The newsletter was sent to @email@ as a test",
+	'info_envoi_unique_reussi' => 'The newsletter was sent to @email@',
 
 	// L
 	"label_email_test" => "to the email address",
