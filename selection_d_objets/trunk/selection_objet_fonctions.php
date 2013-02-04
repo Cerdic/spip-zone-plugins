@@ -142,11 +142,6 @@ function generer_modele($id_objet,$objet='article',$fichier='modeles_selection_o
         $contexte['titre']=$contexte[$exception_objet['titre'][$objet]];
         $contexte['champ_titre']=$exception_objet['titre'][$objet]; 
         } 
-   //$rest = substr($objet, 0,3);
-   /* $extensions=array('png','jpg','gif');
-    foreach($extensions as $extension){
-        if($contexte['logo_objet']=find_in_path('IMG/'.$rest.'on'.$id_objet.'.'.$extension))break;
-    }*/
     
     //Chercher le logo correpsondant
     //Si il y a un logo Selection Objet
