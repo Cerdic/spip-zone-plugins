@@ -37,6 +37,8 @@ include_spip('inc/autoriser');
  */
 function newsletter_subscribe_dist($email,$options = array()){
 
+	if (!$email = trim($email)) return false;
+
 	$set = array();
 	foreach (array('lang', 'nom') as $k){
 		if (isset($options[$k]))

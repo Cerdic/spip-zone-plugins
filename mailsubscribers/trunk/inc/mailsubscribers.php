@@ -190,6 +190,7 @@ function mailsubscribers_renommer_identifiant_liste($liste_ancienne, $liste_nouv
 **/
 function mailsubscribers_supprimer_identifiant_liste($liste) {
 	spip_log("Supprimer la liste '$liste'", "mailsubscribers");
+	$GLOBALS['notification_instituermailsubscriber_status'] = false; // pas de notification ici
 
 	while ($subscribers = sql_allfetsel(
 		'id_mailsubscriber, listes',
