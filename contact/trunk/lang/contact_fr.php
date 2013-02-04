@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_texteinfolettre_explication' => 'Changez éventuellement le texte associé à la case à cocher infolettre.',
 	'consulter_memoire' => 'Ce message est enregistré sur votre site :',
 	'courriel_de' => 'De',
-	'courriel_pour' => 'Pour',
+
 
 	// D
 	'deplacement_possible' => 'Déplacement vertical par glissé-déposé',
