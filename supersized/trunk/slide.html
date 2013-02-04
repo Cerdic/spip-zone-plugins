@@ -1,5 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 	<!--
@@ -10,11 +9,17 @@
 		Author	: Sam Dunn
 		Company : One Mighty Roar (www.onemightyroar.com)
 		License : MIT License / GPL License
+
+		Plugin Supersized SlideShow pour SPIP
+
+		Auteur: Suske
+		License: GPL
 	-->
 
 	<head>
 
-		<title>Supersized - Full Screen Background Slideshow jQuery Plugin</title>
+		<title>#NOM_SITE_SPIP<BOUCLE_titre_rub(RUBRIQUES){id_rubrique}> | #TITRE</BOUCLE_titre_rub>
+		<BOUCLE_titre_art(ARTICLES){id_article}> | #TITRE</BOUCLE_titre_art><//B_titre_rub></title>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		
 		[<link rel="stylesheet" href="(#CHEMIN{css/supersized.css})" type="text/css" media="screen" />]
@@ -23,13 +28,17 @@
 		#INSERT_HEAD
 		
 		[<script type="text/javascript" src="(#CHEMIN{js/supersized.3.2.7.min.js})"></script>]
-		[<script type="text/javascript" src="(#CHEMIN{theme/supersized.shutter.min.js})"></script>]
+		[<script type="text/javascript" src="(#URL_PAGE{supersized.shutter.min.js})"></script>]
 		[<script type="text/javascript" src="(#CHEMIN{js/jquery-easing-compatibility.pack.js})"></script>]
 		[<script type="text/javascript" src="(#CHEMIN{js/jquery.easing.min.js})"></script>]
 
-[(#ENV{nbre_max}|?{#SET{nbre_max,#ENV{nbre_max}},#SET{nbre_max,25}})]
-[(#ENV{tri}|?{#SET{tri,#ENV{tri}},#SET{tri,hasard}})]
-[(#ENV{transition}|?{#SET{transition,#ENV{transition}},#SET{transition,3}})]
+[(#ENV{nbre_max}|?{#SET{nbre_max,#ENV{nbre_max}},#SET{nbre_max,25}})] <!-- Nombre max d'images par slideshow -->
+[(#ENV{tri}|?{#SET{tri,#ENV{tri}},#SET{tri,""}})] <!-- tri SPIP -->
+[(#ENV{triinverse}|?{#SET{triinverse,#ENV{triinverse}},#SET{triinverse,""}})] <!-- tri SPIP -->
+[(#ENV{transition}|?{#SET{transition,#ENV{transition}},#SET{transition,3}})] <!--  options 0 à 7 voir ci-dessous - mettre 00 pour 0 sinon ça vaut false -->
+[(#ENV{pause}|?{#SET{pause,#ENV{pause}},#SET{pause,3000}})] <!--  durée de l'affichage -->
+[(#ENV{vitesse}|?{#SET{vitesse,#ENV{vitesse}},#SET{vitesse,700}})] <!--  durée  -->
+[(#ENV{nolinks}|?{#SET{slide_links,"false"},#SET{slide_links,"'blank'"}})] <!--  num et name sont pas bô alors on limite à false ou 'blank' -->
 
 		
 		<script type="text/javascript">
@@ -39,15 +48,18 @@
 				$.supersized({
 				
 					// Functionality
-					slide_interval          :   3000,		// Length between transitions
+					slide_interval          :   #GET{pause},		// Length between transitions
 					transition              :   #GET{transition}, 			// 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left
-					transition_speed		:	700,		// Speed of transition
+					transition_speed		:	#GET{vitesse},		// Speed of transition
+					image_protect			:	0, // 1 pour interdire le clic droit :-/
+					new_window				:	0, // pas de popup
 															   
-					// Components							
-					slide_links				:	'blank',	// Individual links for each slide (Options: false, 'num', 'name', 'blank')
+					// Components
+
+					slide_links				:	#GET{slide_links},	// Individual links for each slide (Options: false, 'num', 'name', 'blank') 
 					slides 					:  	[			// Slideshow Images
-<BOUCLE_photos(DOCUMENTS){extension in jpg,png}{", "}{id_rubrique ?}{id_article ?}{id_mot ?}{0,#GET{nbre_max}}{par #GET{tri}}>
-{image : '#FICHIER', title : '#TITRE'[, thumb : '(#LOGO_DOCUMENT|fichier)']}
+<BOUCLE_photos(DOCUMENTS){extension in jpg,png}{mode=document}{", "}{id_rubrique ?}{id_article ?}{id_mot ?}{0,#GET{nbre_max}}{par #GET{tri}}{!par #GET{triinverse}}>
+{image : '#FICHIER', title : '#TITRE'[, thumb : '(#LOGO_DOCUMENT|fichier)'][, url : '(#URL_DOCUMENT)']}
 </BOUCLE_photos>
 												]
 					
@@ -55,7 +67,6 @@
 		    });
 		    
 		</script>
-		
 	</head>
 	
 	<style type="text/css">
@@ -77,7 +88,8 @@
 		<BOUCLE_art(ARTICLES){id_article}><a href="#URL_ARTICLE" >#TITRE</a></BOUCLE_art>
 		</li>#SET{navig,0}
 		</B_art>
-		[(#GET{navig}|=={1}|oui)<li>#INCLURE{fond=inclure/liste_rub}</li>]
+		[(#GET{navig}|=={1}|oui)[<li>(#INCLURE{fond=inclure/liste_rub})</li>]]
+		[(#GET{navig}|=={1}|oui)[<li>(#INCLURE{fond=inclure/liste_art})</li>]]
 	</ul>
 	
 	<!--End of styles-->
