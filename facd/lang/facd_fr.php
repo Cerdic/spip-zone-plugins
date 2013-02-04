@@ -8,8 +8,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_relancer_tout' => 'Reconvertir tous les documents',
 	'bouton_relancer_tout_format' => 'Reconvertir tous les documents au format @format@',
-	'bouton_relancer_tout_format_message' => 'Êtes vous sûr de vouloir relancer l\'encodage de tous les fichiers au format @format@.',
-	'bouton_relancer_tout_message' => 'Êtes vous sûr de vouloir relancer l\'encodage de tous les fichiers',
+	'bouton_relancer_tout_format_message' => 'Êtes-vous sûr de vouloir relancer l\'encodage de tous les fichiers au format @format@ ?',
+	'bouton_relancer_tout_message' => 'Êtes-vous sûr de vouloir relancer l\'encodage de tous les fichiers ?',
 
 	// E
 	'erreur_document_plus_disponible' => 'Ce document n\'est plus disponible sur le site',
