@@ -108,6 +108,9 @@ ol.inline {
 
 dl dt { font-weight: bold; }
 dl dd {}
+dl dt, dl dd { padding-left: @indentStep; }
+@media (min-width: 1200px) { dl dt, dl dd { padding-left: @indentStep1200; } }
+@media (max-width: 979px) { dl dt, dl dd { padding-left: @indentStep768; } }
 
 // Horizontal layout (like forms)
 .dl-horizontal {
@@ -118,8 +121,10 @@ dl dd {}
     clear: left;
     text-align: right;
     .text-overflow();
+    padding-left:0;
   }
   dd {
+    padding-left:0;
     margin-left: @horizontalComponentOffset;
   }
 }
@@ -183,6 +188,7 @@ address { font-style: italic; }
 
 /* Paragraphes */
 p, .p, dl, dd, blockquote, address, pre, table, fieldset { margin:0;margin-bottom: @emVertMargin; }
+dd+dd {margin-top:-1 * @emVertMargin;}
 
 .lead {
   margin-bottom: @baseLineHeight;
@@ -251,14 +257,6 @@ ul.spip { list-style-type: square; }
 li ul.spip { list-style-type: disc; }
 li li ul.spip { list-style-type: circle; }
 ol.spip { list-style-type: decimal; }
-
-dl.spip dt, dl.spip dd { padding-left: @indentStep; }
-@media (min-width: 1200px) {
-  dl.spip dt, dl.spip dd { padding-left: @indentStep1200; }
-}
-@media (max-width: 979px) {
-  dl.spip dt, dl.spip dd { padding-left: @indentStep768; }
-}
 
 dl.spip dt { clear: both; }
 dl.spip dd {}
