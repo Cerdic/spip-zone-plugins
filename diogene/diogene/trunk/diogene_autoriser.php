@@ -90,14 +90,14 @@ function autoriser_diogene_utiliser($faire, $type, $id, $qui, $opt) {
  * http://doc.spip.org/@autoriser_rubrique_creerarticledans_dist
  */
 function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
-	if(_DIR_PLUGIN_PAGES){
+	if(_DIR_PLUGIN_PAGES && ($id < 1)){
 		return $qui['statut'] && autoriser('voir','rubrique',$id);
 	}else{
 		if($qui['statut'] != '0minirezo'){
 			$id_secteur = sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.intval($id));
 			$nb_attente = sql_getfetsel('nombre_attente','spip_diogenes','id_secteur='.intval($id_secteur).' AND objet IN ("article","emballe_media")');
 			if($nb_attente > 0){
-				$articles = sql_select('art.id_article','spip_articles as art LEFT JOIN spip_auteurs_liens as lien ON lien.objet="article" AND art.id_article=lien.id_objet','lien.id_auteur='.intval($qui['id_auteur']).' AND art.statut NOT IN ("poubelle","publie")');
+				$articles = sql_select('art.id_article','spip_articles as art LEFT JOIN spip_auteurs_liens as lien ON lien.objet="article" AND art.id_article=lien.id_objet','lien.id_auteur='.intval($qui['id_auteur']).' AND art.statut NOT IN ("poubelle","publie","refuse")');
 				$nb_articles = sql_count($articles);
 				if($nb_articles >= $nb_attente)
 					return false;
