@@ -142,12 +142,23 @@ function generer_modele($id_objet,$objet='article',$fichier='modeles_selection_o
         $contexte['titre']=$contexte[$exception_objet['titre'][$objet]];
         $contexte['champ_titre']=$exception_objet['titre'][$objet]; 
         } 
-    $rest = substr($objet, 0,3);
-    $extensions=array('png','jpg','gif');
+   //$rest = substr($objet, 0,3);
+   /* $extensions=array('png','jpg','gif');
     foreach($extensions as $extension){
         if($contexte['logo_objet']=find_in_path('IMG/'.$rest.'on'.$id_objet.'.'.$extension))break;
-    }
-
+    }*/
+    
+    //Chercher le logo correpsondant
+    //Si il y a un logo Selection Objet
+    $chercher_logo = charger_fonction('chercher_logo', 'inc');
+    $logo=$chercher_logo($contexte['id_selection_objet'],'id_selection_objet','on');
+    $contexte['logo_objet']=$logo[0];
+    //sinon le logo de l'objet sélectionné
+    if(!$contexte['logo_objet']){
+        $_id_objet=id_table_objet($objet);        
+        $logo=$chercher_logo($id_objet,$_id_objet,'on');
+        $contexte['logo_objet']=$logo[0];
+        }
     $fond=recuperer_fond($fichier,$contexte);
     
     return $fond;
