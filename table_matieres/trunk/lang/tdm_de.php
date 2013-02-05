@@ -13,9 +13,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	SPIP-Tag <code>#TABLE_MATIERES</code> direkt in ihre
 	SPIP-Skelette einfügen.',
 
-	// C
-	'config' => 'Parameter',
-
 	// E
 	'explication_longueur' => 'Legt die maximale Zeichenzahl für jeden Anker fest.',
 	'explication_min' => 'Legit die Mindestanzahl der Zwischentitel fest, ab der ein Inhaltsverzeichnis eingeblendet wird.',
@@ -34,10 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'separateur' => 'Trennzeichen:',
 
 	// T
-	'table_matiere' => 'Inhaltsverzeichnis',
-
-	// Z
-	'zbug_champ_tdm_hors_boucle_articles' => 'Feld #TABLE_MATIERES außerhalb der Schleife ARTICLES'
+	'table_matiere' => 'Inhaltsverzeichnis'
 );
 
 ?>

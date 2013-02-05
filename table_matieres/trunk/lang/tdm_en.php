@@ -12,9 +12,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'automatique_desription' => 'Disable this option if you place yourself
 		the <code>#TABLE_MATIERES</code> tag in your skeletons.',
 
-	// C
-	'config' => 'Settings',
-
 	// E
 	'explication_longueur' => 'Sets the maximum number of characters that can consitute each anchor.',
 	'explication_min' => 'Defines the minimum number of subheadings of a text from which a table of contents will be displayed.',
@@ -33,10 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'separateur' => 'Separator:',
 
 	// T
-	'table_matiere' => 'Table of contents',
-
-	// Z
-	'zbug_champ_tdm_hors_boucle_articles' => 'Field #TABLE_MATIERES outside loop ARTICLES'
+	'table_matiere' => 'Table of contents'
 );
 
 ?>

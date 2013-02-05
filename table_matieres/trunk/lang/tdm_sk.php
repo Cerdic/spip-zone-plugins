@@ -12,9 +12,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'automatique_desription' => 'Túto možnosť deaktivujete, ak do šablón dáte 
 		tag <code>#TABLE_MATIERES.</code>',
 
-	// C
-	'config' => 'Parametre',
-
 	// E
 	'explication_longueur' => 'Nastaví maximálny počet znakov pre každú kotvu.',
 	'explication_min' => 'Nastaví minimálny počet nadpisov v texte, z ktorých sa vytvorí obsah.',
@@ -33,10 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'separateur' => 'Oddeľovač:',
 
 	// T
-	'table_matiere' => 'Obsah',
-
-	// Z
-	'zbug_champ_tdm_hors_boucle_articles' => 'Pole #TABLE_MATIERES mimo slučiek ARTICLES (=Články)'
+	'table_matiere' => 'Obsah'
 );
 
 ?>
