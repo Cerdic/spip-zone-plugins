@@ -39,13 +39,13 @@ function autoriser_diogene_modifier($faire,$type,$id,$qui,$opt){
  */
 function autoriser_diogene_creerdans($faire, $type, $id, $qui, $opt) {
 	$diogene = sql_fetsel('*','spip_diogenes','id_diogene='.intval($id));
-	if($qui['statut'] != '0minirezo' AND
+	if(
+		$qui['statut'] != '0minirezo' AND
 		$qui['statut'] AND 
 		$qui['statut'] <= $diogene['statut_auteur']){
 		if(in_array($diogene['objet'],array('article','emballe_media')) && $diogene['nombre_attente'] > 0){
-			$articles = sql_select('art.id_article','spip_articles as art LEFT JOIN spip_auteurs_liens as lien ON lien.objet="article" AND art.id_article=lien.id_objet','lien.id_auteur='.intval($qui['id_auteur']));
-			$nb_articles = sql_count($articles);
-			if($nb_articles >= $nb_attente)
+			$nb_articles = sql_countsel('spip_articles as art LEFT JOIN spip_auteurs_liens as lien ON lien.objet="article" AND art.id_article=lien.id_objet','lien.id_auteur='.intval($qui['id_auteur']).' AND art.statut NOT IN ("poubelle","publie","refuse") AND art.id_secteur='.intval($diogene['id_secteur']));
+			if(intval($nb_articles) >= intval($diogene['nombre_attente']))
 				return false;
 		}
 	}
@@ -97,9 +97,8 @@ function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
 			$id_secteur = sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.intval($id));
 			$nb_attente = sql_getfetsel('nombre_attente','spip_diogenes','id_secteur='.intval($id_secteur).' AND objet IN ("article","emballe_media")');
 			if($nb_attente > 0){
-				$articles = sql_select('art.id_article','spip_articles as art LEFT JOIN spip_auteurs_liens as lien ON lien.objet="article" AND art.id_article=lien.id_objet','lien.id_auteur='.intval($qui['id_auteur']).' AND art.statut NOT IN ("poubelle","publie","refuse")');
-				$nb_articles = sql_count($articles);
-				if($nb_articles >= $nb_attente)
+				$nb_articles = sql_countsel('spip_articles as art LEFT JOIN spip_auteurs_liens as lien ON lien.objet="article" AND art.id_article=lien.id_objet','lien.id_auteur='.intval($qui['id_auteur']).' AND art.statut NOT IN ("poubelle","publie","refuse") AND art.id_secteur='.intval($id_secteur));
+				if(intval($nb_articles) >= intval($nb_attente))
 					return false;
 			}
 		}
