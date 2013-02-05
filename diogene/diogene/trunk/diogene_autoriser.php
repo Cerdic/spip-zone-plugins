@@ -171,6 +171,12 @@ function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {
  * Permet de modifier l'article dont on est l'auteur et que l'on peut publier nous même
  * Surcharge de SPIP
  * 
+ * On peut modifier un article s'il existe
+ * On peut modifier un article dans tous les cas si on est admin (comme dans SPIP)
+ * On peut modifier un article si on est auteur de l'article dans tous les cas sauf si 
+ * on demande de changer le statut à publier et que la configuration du diogène ne le permet pas
+ * (on utilise autoriser_rubrique_publierdans dans ce cas)
+ * 
  * @param string $faire L'action
  * @param string $type Le type d'objet
  * @param int $id L'identifiant numérique de l'objet
@@ -179,17 +185,27 @@ function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {
  * @return boolean true/false
  */
 function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
-	$r = sql_fetsel("id_rubrique,statut", "spip_articles", "id_article=".sql_quote($id));
-	include_spip('inc/auth'); // pour auteurs_article si espace public
+	$r = sql_fetsel("id_secteur,id_rubrique,statut", "spip_articles", "id_article=".sql_quote($id));
+	
+	if(!$r)
+		return false;
+	
+	if (!function_exists('auteurs_article'))
+		include_spip('inc/auth'); // pour auteurs_article si espace public
+		
 	return
-		(autoriser('creerarticledans', 'rubrique', $r['id_rubrique'], $qui, $opt)
-			AND in_array($r['statut'], array('prop','prepa', 'publie'))
-			AND auteurs_article($id, "id_auteur=".$qui['id_auteur'])
+		(
+			(autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
+			AND auteurs_article($id, "id_auteur=".$qui['id_auteur']))
+			OR (
+				(!isset($opt['statut']) OR $opt['statut']!=='publie')
+				AND in_array($qui['statut'], array('0minirezo', '1comite'))
+				AND in_array($r['statut'], array('prop','prepa', 'publie'))
+				AND auteurs_article($id, "id_auteur=".$qui['id_auteur'])
+			)
 		)
 		OR in_array($qui['statut'], array('0minirezo'));
 }
-
-
 
 /**
  * Autoriser a creer un site dans la rubrique $id
