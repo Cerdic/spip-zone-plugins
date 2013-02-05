@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'alerte_effacement' => 'Confirm the deletion of the contact configuration data.',
-	'aucun_message' => 'There is no message to be displayed',
 
 	// B
 	'bouton_effacer' => 'Erase',
@@ -39,7 +38,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_barre_oui' => 'View the complete bar typo.',
 	'configuration_champs_message' => 'PenHolder Settings.',
 	'configuration_champs_message_explication' => 'Typo toolbar settings, associated to the text\'s message.',
-	'configuration_description' => 'Customize your contact form.',
 	'configuration_destinataires' => 'Recipients',
 	'configuration_destinataires_explication' => 'Choose one or more authors recipients your visitors may contact. When not defined, the first author will be used (the person who installed the website).',
 	'configuration_destinataires_plusieurs' => 'Allow visitors to choose among <b>several</b> recipient authors',
@@ -64,7 +62,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_texteinfolettre_explication' => 'Modify the text for the Infoletter checkbox',
 	'consulter_memoire' => 'This message is saved on your site:',
 	'courriel_de' => 'From',
-	'courriel_pour' => 'To',
 
 	// D
 	'deplacement_possible' => 'Vertical displacement by drag and drop',
@@ -99,16 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modele_label_auteur' => 'Pre-select an author (optional)?',
 	'modele_nom_formulaire' => 'the contact form',
 	'monsieur' => 'Mister',
-	'msg_accueil' => 'Here are messages from contacts you have received.',
-	'msg_contact' => 'Message from contact',
-	'msg_contacts' => 'Contact messages',
-	'msg_expediteur' => 'Sender: ',
-	'msg_lus' => 'Messages already read',
 	'msg_messagerie' => 'Contact messaging',
-	'msg_nouveaux' => 'New messages',
-	'msg_pas_nouveaux' => 'You haven\'t new messages.',
-	'msg_revenir_accueil' => 'Return to the list of contact messages.',
-	'msg_supprimer_message' => 'Delete this message',
 
 	// N
 	'noisette_label_afficher_titre_noisette' => 'Show a title?',

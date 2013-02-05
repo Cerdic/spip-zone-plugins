@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'alerte_effacement' => 'Potvrďte nastavenie údajov kontaktu.',
-	'aucun_message' => 'Žiadna správa, ktorá by sa dala zobraziť', # NEW
 
 	// B
 	'bouton_effacer' => 'Vymazať', # NEW
@@ -39,7 +38,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_barre_oui' => 'Zobraziť celý typografický panel.',
 	'configuration_champs_message' => 'Nastavenie modulu porte-plume.',
 	'configuration_champs_message_explication' => 'Nastavenia typografického panela s nástrojmi priradeného k textu správy.',
-	'configuration_description' => 'Upravte si kontaktný formulár.',
 	'configuration_destinataires' => 'Príjemcovia',
 	'configuration_destinataires_explication' => 'Vyberte jedného autora alebo viacerých ako príjemcov, ktorých môžu návštevníci kontaktovať. Ak nič nezadáte, uvedie sa prvý autor (človek, ktorý nainštaloval stránku).',
 	'configuration_destinataires_plusieurs' => 'Umožniť návštevníkom vybrať si z <b>niekoľkých</b> autorov ako príjemcov',
@@ -64,7 +62,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_texteinfolettre_explication' => 'Môžete zmeniť text priradený k týmto zaškrtávacím políčkam ',
 	'consulter_memoire' => 'Táto správa bola uložená na vašu stránku:',
 	'courriel_de' => 'Od (koho?)',
-	'courriel_pour' => 'Komu',
 
 	// D
 	'deplacement_possible' => 'Zvislý presun metódou drag and drop',
@@ -99,16 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modele_label_auteur' => 'Dopredu vybrať autora (nepovinné)?',
 	'modele_nom_formulaire' => 'Podrobný kontaktný formulár',
 	'monsieur' => 'Pán',
-	'msg_accueil' => 'Tu sú kontaktné správy, ktoré ste dostali.',
-	'msg_contact' => 'Správa od kontaktu',
-	'msg_contacts' => 'Správy od kontaktu',
-	'msg_expediteur' => 'Odosielateľ: ',
-	'msg_lus' => 'Správa bola už prečítaná',
 	'msg_messagerie' => 'Kontakt e-mailom',
-	'msg_nouveaux' => 'Nové správy',
-	'msg_pas_nouveaux' => 'Nemáte nové správy.',
-	'msg_revenir_accueil' => 'Vrátiť sa na zoznam kontakných správ.',
-	'msg_supprimer_message' => 'Odstrániť túto správu',
 
 	// N
 	'noisette_label_afficher_titre_noisette' => 'Zobraziť názov?',

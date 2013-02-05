@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'alerte_effacement' => 'Confirme a exclusão dos dados de configuração de contato.',
-	'aucun_message' => 'Nenhuma mensagem a ser exibida',
 
 	// B
 	'bouton_effacer' => 'Apagar',
@@ -39,7 +38,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_barre_oui' => 'Exibir a barra de ferramentas tipográficas completa.',
 	'configuration_champs_message' => 'Configuração do porta-caneta',
 	'configuration_champs_message_explication' => 'Configuração da barra de ferramentas tipográficas associada ao texto da mensagem.',
-	'configuration_description' => 'Permitir a configuração do formulário de contato.',
 	'configuration_destinataires' => 'Destinatários',
 	'configuration_destinataires_explication' => 'Escolha um ou mais autores que os visitantes poderão contatar. Se nada for definido, é o autor número 1 (o que instalou o site) que será usado.',
 	'configuration_destinataires_plusieurs' => 'Permite que os visitantes escolham <b>diversos</b> destinatários entre a lista selecionada abaixo',
@@ -64,7 +62,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_texteinfolettre_explication' => 'Escreva o texto associado à caixa de seleção informativo', # NEW
 	'consulter_memoire' => 'Ce message est enregistré sur votre site :', # NEW
 	'courriel_de' => 'De', # NEW
-	'courriel_pour' => 'Pour', # NEW
 
 	// D
 	'deplacement_possible' => 'Déplacement vertical par glissé-déposé', # NEW
@@ -99,16 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modele_label_auteur' => 'Pré-sélectionner un auteur (facultatif) ?', # NEW
 	'modele_nom_formulaire' => 'un formulaire de contact', # MODIF
 	'monsieur' => 'Monsieur', # NEW
-	'msg_accueil' => 'Vous trouverez ici les messages de contact que vous avez reçu.', # NEW
-	'msg_contact' => 'Message de contact', # NEW
-	'msg_contacts' => 'Messages de contact', # NEW
-	'msg_expediteur' => 'Expéditeur : ', # NEW
-	'msg_lus' => 'Messages déjà lus', # NEW
 	'msg_messagerie' => 'Messagerie de contact', # NEW
-	'msg_nouveaux' => 'Nouveaux messages', # NEW
-	'msg_pas_nouveaux' => 'Vous n\'avez pas de nouveaux messages.', # NEW
-	'msg_revenir_accueil' => 'Revenir à la liste de messages de contact reçus.', # NEW
-	'msg_supprimer_message' => 'Supprimer le message', # NEW
 
 	// N
 	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?', # NEW

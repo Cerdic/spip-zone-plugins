@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'alerte_effacement' => 'تأكيد حذف معلومات إعداد الاتصال',
-	'aucun_message' => 'لا توجد رسائل للعرض',
 
 	// B
 	'bouton_effacer' => 'محو',
@@ -39,7 +38,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_barre_oui' => 'عرض شريط كامل للتصحيح المطبعي.',
 	'configuration_champs_message' => 'إعدادات حاملة الريشة.',
 	'configuration_champs_message_explication' => 'إعدادات شريط للتصحيح المطبعي المرتبط بنص الرسالة.',
-	'configuration_description' => 'السماح لإدارة إستمارة الإتصال.',
 	'configuration_destinataires' => 'المستلمين',
 	'configuration_destinataires_explication' => 'اختيار واحد أو أكثر من الناشرين بحيث يمكن للزوار الاتصال بهم. لا شيء محدد، ثم سيكون الناشر رقم 1  (ثبت  الموقع) سيتم استخدامه.',
 	'configuration_destinataires_plusieurs' => 'يسمح للزوار اختيار <b>كثير</b> بين المستلمين',
@@ -65,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_texteinfolettre_explication' => 'Changez éventuellement le texte associé à la case à cocher infolettre.', # NEW
 	'consulter_memoire' => 'يتم تسجيل هذه الرسالة على موقعك :',
 	'courriel_de' => 'من',
-	'courriel_pour' => 'لأجل',
 
 	// D
 	'deplacement_possible' => 'الحركة العمودية بواسطة السحب والإسقاط',
@@ -100,16 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modele_label_auteur' => 'Pré-sélectionner un auteur (facultatif) ?', # NEW
 	'modele_nom_formulaire' => 'le formulaire de contact avancé', # NEW
 	'monsieur' => 'السيد',
-	'msg_accueil' => 'ستجد هنا رسائل الاتصال المتلقاة.',
-	'msg_contact' => 'رسالة الاتصال',
-	'msg_contacts' => 'Messages de contact', # NEW
-	'msg_expediteur' => 'مرسل : ',
-	'msg_lus' => 'رسائل مقروءة',
 	'msg_messagerie' => 'بريد الاتصال',
-	'msg_nouveaux' => 'رسائل جديدة',
-	'msg_pas_nouveaux' => 'لا يوجد لديك رسائل جديدة.',
-	'msg_revenir_accueil' => 'العودة إلى قائمة الرسائل المتلقاة.',
-	'msg_supprimer_message' => 'حذف الرسالة',
 
 	// N
 	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?', # NEW

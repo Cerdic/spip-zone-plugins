@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'alerte_effacement' => 'Einstellungen wirklich löschen?',
-	'aucun_message' => 'Keine Nachricht',
 
 	// B
 	'bouton_effacer' => 'Löschen',
@@ -39,7 +38,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_barre_oui' => 'Vollständige Funktionsleiste anzeigen.',
 	'configuration_champs_message' => 'Einstellungen des Federhalters.',
 	'configuration_champs_message_explication' => 'Einstellungen für die typografische Funktionsleiste zum Text der Nachricht.',
-	'configuration_description' => 'Ermöglicht das Kontaktformular zu konfigurieren.',
 	'configuration_destinataires' => 'Empfänger',
 	'configuration_destinataires_explication' => 'Wählen Sie einen oder mehrere Autoren, den die Besucher kontaktieren können. Wenn nichts definiert ist, wird der Autor Nummer 1 verwendet werden, der die Webseite installiert hat.',
 	'configuration_destinataires_plusieurs' => 'Lassen Sie die Besucher an <b>mehrere</b> Empfänger wählen',
@@ -64,7 +62,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_texteinfolettre_explication' => 'Falls erforderlich Text der Newsletter Checkbox ändern',
 	'consulter_memoire' => 'Diese Meldung wird auf Ihrer Website protokolliert:',
 	'courriel_de' => 'Von',
-	'courriel_pour' => 'Für',
 
 	// D
 	'deplacement_possible' => 'Vertikale Verschiebung per Drag and Drop',
@@ -99,16 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modele_label_auteur' => 'Vorauswahl eines Autors (fakultativ)',
 	'modele_nom_formulaire' => 'Kontaktný formulár',
 	'monsieur' => 'Herr',
-	'msg_accueil' => 'Hier finden Sie die Kontaktdaten Nachrichten, die Sie erhalten haben.',
-	'msg_contact' => 'Kontakt Botschaft',
-	'msg_contacts' => 'Kontaktnachrichten',
-	'msg_expediteur' => 'Absender:',
-	'msg_lus' => 'Nachrichten bereits gelesen',
 	'msg_messagerie' => 'Mail-Kontakt',
-	'msg_nouveaux' => 'Neue Beiträge',
-	'msg_pas_nouveaux' => 'Sie haben keine neuen Nachrichten.',
-	'msg_revenir_accueil' => 'Zurück zur Liste der empfangenen Kontaktnachrichten.',
-	'msg_supprimer_message' => 'Löschen Sie die Nachricht',
 
 	// N
 	'noisette_label_afficher_titre_noisette' => 'Titel anzeigen?',

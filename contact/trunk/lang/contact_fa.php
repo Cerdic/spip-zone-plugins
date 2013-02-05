@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'alerte_effacement' => 'تأييد حذف داده‌هاي پيكربندي تماس',
-	'aucun_message' => 'پيامي براي نمايش موجود نيست',
 
 	// B
 	'bouton_effacer' => 'پاك‌ كردن',
@@ -39,7 +38,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_barre_oui' => 'نمايش ميله‌ي كامل حروف‌ نگاري.',
 	'configuration_champs_message' => 'تنظيم‌هاي «قلم‌‌دان» (porte-plume)',
 	'configuration_champs_message_explication' => 'تنظيم ميله‌ي حروف‌ نگاري، مربوط به متن پيام.',
-	'configuration_description' => 'پيكربندي فرم تماس',
 	'configuration_destinataires' => 'دريافت‌ كنندگان',
 	'configuration_destinataires_explication' => 'انتخاب يك يا چند نويسنده‌ كه بازديدكنندگان ممكن است بخواهند با آنان تماس بگيرند.اگر انتخاب نشود، از نخستين نويسنده (كسي كه وب‌ سايت را نصب كرده)استفاده خواهد شد.',
 	'configuration_destinataires_plusieurs' => 'مجوز به بازديدكنندگان براي انتخاب <b>چند </b> گيرنده از ميان نويسندگان منتخب زير ',
@@ -64,7 +62,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_texteinfolettre_explication' => 'اصلاح متن اطلاع‌نامه چك‌ باكس.',
 	'consulter_memoire' => 'اين پيام روي سايت شما ثبت مي‌شود: ',
 	'courriel_de' => 'از',
-	'courriel_pour' => 'براي',
 
 	// D
 	'deplacement_possible' => 'جا به جايي عمودي با بكش و بيانداز',
@@ -99,16 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modele_label_auteur' => 'پيش‌ گزينش يك نويسنده (دلبخواهي)؟',
 	'modele_nom_formulaire' => 'فرم تماس پيشرفته',
 	'monsieur' => 'آقا',
-	'msg_accueil' => 'پيام‌هاي دريافت شده از تماس.',
-	'msg_contact' => 'پيام تماس',
-	'msg_contacts' => 'Messages de contact', # NEW
-	'msg_expediteur' => 'فرستنده:‌',
-	'msg_lus' => 'پيام خوانده شده',
 	'msg_messagerie' => 'پيك تماس',
-	'msg_nouveaux' => 'پيام‌هاي جديد',
-	'msg_pas_nouveaux' => 'پيام جديد نداريد.',
-	'msg_revenir_accueil' => 'بازگشت به ليست پيام‌هاي تماس.',
-	'msg_supprimer_message' => 'حذف اين پيام',
 
 	// N
 	'noisette_label_afficher_titre_noisette' => 'نمايش تيتر؟',

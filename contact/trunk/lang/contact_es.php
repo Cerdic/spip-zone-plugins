@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'alerte_effacement' => 'Confirmez l\'effacement des données de configuration de contact.', # NEW
-	'aucun_message' => 'Aucun message à afficher', # NEW
 
 	// B
 	'bouton_effacer' => 'Gommer', # NEW
@@ -39,7 +38,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_barre_oui' => 'Afficher la barre typo complète.', # NEW
 	'configuration_champs_message' => 'Réglage du porte-plume.', # NEW
 	'configuration_champs_message_explication' => 'Réglage de la barre typographique associée au texte du message.', # NEW
-	'configuration_description' => 'Permite cónfigurar el impreso de contacto.',
 	'configuration_destinataires' => 'Destinatarios',
 	'configuration_destinataires_explication' => 'elige un o varios autores quien los visitantes podrian contactar. Si nada esta definido, es el autor numero uno (el quien ha instalado la página web) quien sera utilizado.',
 	'configuration_destinataires_plusieurs' => 'Permitir a los visitadores de elegir <b>varios</b> destinarios',
@@ -64,7 +62,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_texteinfolettre_explication' => 'Changez éventuellement le texte associé à la case à cocher infolettre.', # NEW
 	'consulter_memoire' => 'Este mensaje esta registrado sobre vuestra página web',
 	'courriel_de' => 'De',
-	'courriel_pour' => 'Por',
 
 	// D
 	'deplacement_possible' => 'Traslado vertical por deslizar-depositar',
@@ -99,16 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modele_label_auteur' => 'Pré-sélectionner un auteur (facultatif) ?', # NEW
 	'modele_nom_formulaire' => 'le formulaire de contact avancé', # NEW
 	'monsieur' => 'Señor',
-	'msg_accueil' => 'Encontrarás aquí los mensajes de contacto que has recibido',
-	'msg_contact' => 'Mensaje de contacto',
-	'msg_contacts' => 'Messages de contact', # NEW
-	'msg_expediteur' => 'Remitente: ',
-	'msg_lus' => 'Mensajes ya leídos',
 	'msg_messagerie' => 'Mensajería de contacto',
-	'msg_nouveaux' => 'Nuevos mensajes',
-	'msg_pas_nouveaux' => 'No tienes nuevos mensajes.',
-	'msg_revenir_accueil' => 'Regresar a la lista de mensajes de contactos recibidos.',
-	'msg_supprimer_message' => 'Suprimir el mensaje',
 
 	// N
 	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?', # NEW

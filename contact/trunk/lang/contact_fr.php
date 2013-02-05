@@ -61,7 +61,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'consulter_memoire' => 'Ce message est enregistré sur votre site :',
 	'courriel_de' => 'De',
 
-
 	// D
 	'deplacement_possible' => 'Déplacement vertical par glissé-déposé',
 	'description_menu_contact' => 'Élément de menu vers la page du formulaire de contact',

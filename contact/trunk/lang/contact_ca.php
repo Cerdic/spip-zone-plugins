@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'alerte_effacement' => 'Confirmeu que s\'esborrin les dades de configuració de contacte.',
-	'aucun_message' => 'Cap missatge per mostrar',
 
 	// B
 	'bouton_effacer' => 'Esborrar',
@@ -39,7 +38,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_barre_oui' => 'Mostrar la barre tipus completa.',
 	'configuration_champs_message' => 'Configuració del portaplomes.',
 	'configuration_champs_message_explication' => 'Configuració de la barra tipogràfica associada al text del missatge.',
-	'configuration_description' => 'Permet configurar el formulari de contacte.',
 	'configuration_destinataires' => 'Destinataris',
 	'configuration_destinataires_explication' => 'Escolliu un o diversos autors amb els que els visitants podran contactar. Si no hi ha res definit, és l\'autor núm. 1 (el que ha instal·lat el lloc) el que s\'utilitzarà.',
 	'configuration_destinataires_plusieurs' => 'Permetre als visitants escollir <b>diversos</b> destinataris d\'entre la llista seleccionada a sota',
@@ -64,7 +62,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_texteinfolettre_explication' => 'Changez éventuellement le texte associé à la case à cocher infolettre.', # NEW
 	'consulter_memoire' => 'Aquest missatge s\'ha enregistrat al vostre lloc:',
 	'courriel_de' => 'De',
-	'courriel_pour' => 'Per',
 
 	// D
 	'deplacement_possible' => 'Desplaçament vertical per arrossegar-deixar',
@@ -99,16 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modele_label_auteur' => 'Pré-sélectionner un auteur (facultatif) ?', # NEW
 	'modele_nom_formulaire' => 'le formulaire de contact avancé', # NEW
 	'monsieur' => 'Senyor',
-	'msg_accueil' => 'Trobareu aquí els missatges de contacte que heu rebut.',
-	'msg_contact' => 'Missatge de contacte',
-	'msg_contacts' => 'Messages de contact', # NEW
-	'msg_expediteur' => 'Remitent: ',
-	'msg_lus' => 'Missatges llegits',
 	'msg_messagerie' => 'Correu electrònic de contacte',
-	'msg_nouveaux' => 'Missatges nous',
-	'msg_pas_nouveaux' => 'No teniu nous missatges.',
-	'msg_revenir_accueil' => 'Tornar a la llista de missatges de contacte rebuts.',
-	'msg_supprimer_message' => 'Suprimir el missatge',
 
 	// N
 	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?', # NEW
