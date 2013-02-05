@@ -59,7 +59,7 @@
 					slide_links				:	#GET{slide_links},	// Individual links for each slide (Options: false, 'num', 'name', 'blank') 
 					slides 					:  	[			// Slideshow Images
 <BOUCLE_photos(DOCUMENTS){extension in jpg,png}{mode=document}{", "}{id_rubrique ?}{id_article ?}{id_mot ?}{0,#GET{nbre_max}}{par #GET{tri}}{!par #GET{triinverse}}>
-{image : '#FICHIER', title : '#TITRE'[, thumb : '(#LOGO_DOCUMENT|fichier)'][, url : '(#URL_DOCUMENT)']}
+{image : '[(#FICHIER|image_reduire{1200}|extraire_attribut{src})]', title : '#TITRE'[, thumb : '(#LOGO_DOCUMENT|fichier)'][, url : '(#URL_DOCUMENT)']}
 </BOUCLE_photos>
 												]
 					
