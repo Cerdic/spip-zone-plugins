@@ -72,8 +72,7 @@ function selection_objet_affiche_milieu ($flux="") {
            else $contexte['langue']=array($args['lang']);
             
         if($objet=='rubrique'){
-            if (!$trad_rub=test_plugin_actif('tradrub')) $contexte['langue']=lire_config('langues_multilingue');
-            elseif(!$trad_rub=test_plugin_actif('tradrub')) $contexte['langue']=lire_config('langues_multilingue');
+            if (!$trad_rub=test_plugin_actif('tradrub')) $contexte['langue']=explode(',',lire_config('langues_multilingue'));
             }
            $flux["data"] .= recuperer_fond('prive/objets/liste/selection_interface', $contexte);
             }
