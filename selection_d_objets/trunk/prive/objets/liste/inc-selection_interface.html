@@ -29,8 +29,8 @@
 <script type="text/javascript">
     $(function() {
         [(#REM)action rangement]
-        $('.tr_liste a.select').click(function(){
-          $('#selection_objets').load($(this).attr("href"));
+        $('#selection_objets_#LANG .tr_liste a.select').click(function(){
+          $('#selection_objets_#LANG').load($(this).attr("href"));
            return false;
         });  
         [(#REM)drag and drop]     
