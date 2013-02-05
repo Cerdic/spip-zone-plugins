@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'diogene_gerer_auteurs_description' => '"Authors" add-on for "Diogene". Adds a field to add in authors in Diogene.',
+	'diogene_gerer_auteurs_description' => '"Authors" add-on for "Diogene". Adds a field to add in authors in Diogene.', # MODIF
 	'diogene_gerer_auteurs_nom' => 'Diogene - Authors',
 	'diogene_gerer_auteurs_slogan' => '"Authors" add-on for "Diogene"'
 );
