@@ -1,0 +1,23 @@
+<paquet
+prefix="feuillederoute"
+categorie="maintenance"
+version="0.9.5"
+etat="test"
+compatibilite="[3.0.0;3.*]"
+logo="images/feuillederoute-32.png"
+documentation=""
+	>	
+
+       <nom>Feuille de Route</nom>
+       <!-- Un bouton d'admin pour partager des informations hors publication -->
+	
+	<auteur>chankalan</auteur>
+	
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	
+	<pipeline nom="formulaire_admin" inclure="feuillederoute_pipelines.php" />
+	<pipeline nom="autoriser" inclure="feuillederoute_autoriser.php" />
+	
+	<menu nom="feuillederoute" titre="feuillederoute:feuillederoute" parent="outils_collaboratifs" icone="images/feuillederoute-16.png" action="feuillederoute" />
+		
+</paquet>

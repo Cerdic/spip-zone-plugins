@@ -1,0 +1,20 @@
+
+[(#PLUGIN{minibando}|oui)<li id="minibando_bouton_feuillederoute">]
+<a[ href="(#URL_PAGE{feuillederoute})"] class="spip-admin-boutons" id="btn_feuillederoute"><:feuillederoute:feuillederoute:></a>
+<script type="text/javascript">
+$(function() {
+		
+	// preparer le chargement ajax
+	$('body').append('<div class="charger_feuillederoute"></div>');
+	
+	// charger + afficher/masquer la feuille de route
+	$('#btn_feuillederoute').on("click",function(){
+		var url_feuillederoute = $(this).attr('href');
+		$('.charger_feuillederoute').load(url_feuillederoute,function(){
+			$(this).toggle(200);
+		});
+		return false;
+	});
+});
+</script>
+[(#PLUGIN{minibando}|oui)</li>]

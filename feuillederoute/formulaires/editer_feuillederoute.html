@@ -1,0 +1,47 @@
+[(#REM) meme formulaire pour prive/public ]
+[
+	[(#REM|test_espace_prive|oui) #BOITE_OUVRIR ]
+	<div class="affichage_feuillederoute">
+		<div class="texte">(#ENV{texte}|propre)</div>
+	</div>
+	[(#REM|test_espace_prive|oui) #BOITE_FERMER ]
+]
+
+[(#AUTORISER{editer,feuillederoute}|oui)
+
+	[(#ENV{texte}|oui)
+		<a href="#edition_feuillederoute" class="poignee_feuillederoute"><:feuillederoute:modifier_le_texte:></a>
+	]
+
+	<div class="formulaire_spip formulaire_feuillederoute[(#ENV{texte}|oui) tiroir_feuillederoute]" id="edition_feuillederoute">
+
+		[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>]
+		[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
+
+		<form action="#ENV{action}" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>[(#REM) structure ul > li juste pour pas boguer la barre des raccourcis > les onglets "voir"/"editer"]
+				<li class="editer editer_texte">
+					<!-- texte -->
+					<label><:feuillederoute:texte:></label>
+					<textarea id="texte" name="texte" rows="15">#ENV{texte}</textarea>
+				</li>
+			</ul>
+		<p class="boutons"><input type="submit" class="submit" value="<:feuillederoute:submit:>" /></p>
+		</div></form>
+
+	</div>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('.tiroir_feuillederoute').css({display:'none'});
+		$('a.poignee_feuillederoute').on("click",function(){
+			$(this).siblings('.tiroir_feuillederoute').toggle(200);
+			return false;
+		});
+		
+	});
+	</script>
+	
+][(#REM) fin autorisation]
