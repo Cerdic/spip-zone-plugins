@@ -5,7 +5,7 @@
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  *
- * © 2010-2012 - Distribue sous licence GNU/GPL
+ * © 2010-2013 - Distribue sous licence GNU/GPL
  *
  * Fonctions spécifiques à Diogene
  *
@@ -39,6 +39,33 @@ function balise_URL_ARTICLE($p) {
 		$p->interdire_scripts = false;
 	}
 	return $p;
+}
+
+/**
+ * Fonction calculant le nombre d'objets qu'un utilisateur peut encore créer
+ * Utilisé que sur les objets à base d'articles
+ * 
+ * @param int $id_diogene : l'identifiant numérique du diogene
+ * @return string|int|false : le retour à trois types de valeurs :
+ * 		string "infinite" : le nombre est infini
+ * 		boolean false : il y a une erreur, pas de limite pour ce genre d'objet
+ * 		int : le nombre possible
+ */
+function diogene_nombre_attente($id_diogene){
+	$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
+	$diogene = sql_fetsel('id_secteur,nombre_attente','spip_diogenes','id_diogene='.intval($id_diogene).' AND objet IN ("article","emballe_media")');
+	if(!$diogene['nombre_attente'] || !intval($id_auteur) || ($id_auteur < 1))
+		return false;
+	else {
+		if($GLOBALS['visiteur_session']['statut'] == "0minirezo")
+			return 'infinite';
+		
+		$nb_articles = sql_countsel('spip_articles as art LEFT JOIN spip_auteurs_liens as lien ON lien.objet="article" AND art.id_article=lien.id_objet','lien.id_auteur='.intval($id_auteur).' AND art.id_secteur='.intval($diogene['id_secteur']).' AND statut NOT IN ("publie","poubelle")');
+		$nombre_attente = ($diogene['nombre_attente'] - $nb_articles);
+		if($nombre_attente < 0)
+			$nombre_attente = 0;
+		return intval($nombre_attente);
+	}
 }
 
 if(!test_espace_prive()){
