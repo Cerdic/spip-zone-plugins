@@ -48,7 +48,7 @@
 
 <div class="impression">
 [(#CONFIG{outils_article/impression}|?{' ',''})
-<a href="#URL_ARTICLE{1 class=impression}" title="afficher une version imprimable de cet article" onclick="window.open(this.href,'_blank');return false;">
+<a href="javascript:window.print()" title="afficher une version imprimable de cet article">
 <img src="[(#CONFIG{outils_article/theme})]/printer.png" alt="impression" title="impression" />
 </a>
 ]
