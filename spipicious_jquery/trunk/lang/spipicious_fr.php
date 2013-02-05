@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'types_utilisateurs' => 'Qui a accès au formulaire d\'ajout de tags ?',
 
 	// V
-	'vos_tags' => 'Vos tags (modification)',
+	'vos_tags' => 'Vos tags (modification)'
 );
 
 ?>

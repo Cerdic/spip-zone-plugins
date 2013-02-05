@@ -9,11 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'add_tags' => 'Pridať štítky',
-	'aucun_tags' => 'Žiadne štítky nie sú priradené.',
 	'auteur_tag_usage' => 'Tento autor použil tento štítok @nb@-krát',
-
-	// B
-	'by' => 'Autor',
 
 	// C
 	'cfg_description' => 'Tento zásuvný modul vám umožňuje jednoducho pridávať štítky k objektom.',
@@ -22,24 +18,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_ajout_tag' => 'Ak chcete pridať niekoľko štítkov naraz, použite oddeľovač: "@separateur@".',
 	'explication_suppression_tag' => 'Vyberte štítky v zozname a pošlite formulár, aby boli odstránené.',
 
-	// I
-	'identifier' => 'Ak chcete pridať štítky k tomuto článku, musíte sa prihlásiť.',
-
 	// L
 	'label_tags' => 'Štítky:',
 	'liste_auteurs_tag' => 'Tento štítok používa:',
 
 	// M
 	'message_aucun_tags' => 'Žiaden štítok nie je priradený',
-	'message_installation_activation' => 'Nastavenie tabuliek a predvolené nastavenia spip.icio.us',
-	'message_upgrade_database' => 'Upgradeovať databázu spip.ici.ous na verziu @version@<br/>',
 
 	// N
 	'no_tags_associes' => 'Nemáte priradené žiadne štítky',
 	'nom_groupe_tag' => 'Priradená skupina kľúčových slov',
-
-	// S
-	'spipicious' => 'Spip.icio.us',
 
 	// T
 	'tag_ajoute' => 'Pridali ste štítok:<br />@name@',
@@ -50,14 +38,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tags_supprimes' => 'Odstránili ste @nb@ štítkov:<br>@name@',
 	'title_tag_utilise_nb' => 'Tento štítok priradili @nb@ ľudia.',
 	'title_tag_utilise_un' => 'Tento štítok priradil jeden človek.',
-	'to' => 's',
 	'types_utilisateurs' => 'Kto má prístup k formuláru a môže pridávať štítky?',
 
 	// V
-	'vos_tags' => 'Vaše štítky (zmena)',
-
-	// W
-	'waiting' => 'hľadajú sa vaše štítky'
+	'vos_tags' => 'Vaše štítky (zmena)'
 );
 
 ?>
