@@ -9,9 +9,7 @@
 		</div>
 	</div>
 </div>
-
 <style type="text/css">
-
 .charger_feuillederoute, .tiroir_feuillederoute { display:none; }
 .fond_feuillederoute { 
 	position:fixed; right:0; top:0; width:50%; height:100%; 
@@ -25,6 +23,8 @@
 	font-size:.95em; color:#333;
 	
 }
+a.fermer_feuillederoute { opacity:.8; }
+a.fermer_feuillederoute:hover { opacity:1; color:#fff; }
 .contenu_feuillederoute { padding:1em 1em 3em; }
 .contenu_feuillederoute a { color:#75507B; }
 .contenu_feuillederoute a:hover { color:#000; text-decoration:underline; }
@@ -35,18 +35,14 @@
  }
 .formulaire_feuillederoute { padding:.5em; }
 .charger_feuillederoute table { width:100%; }
-
 </style>
-
 <script type="text/javascript">
 $(document).ready(function(){
-	
 	// + un bouton special pour refermer
 	$('.fermer_feuillederoute').on("click",function(){
 		$('.charger_feuillederoute').toggle(function(){
 			$(this).empty();
 		});
 	});
-	
 });
 </script>
