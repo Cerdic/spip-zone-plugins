@@ -41,7 +41,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_valeur_float' => 'The value for "@champ@" should be a number.',
 	'erreur_valeur_int' => 'The value for "@champ@" should be a fixed number.',
 	'explication_article_deja_traduit' => 'This article has allready been translated in: ',
-	'explication_contenu_attente' => 'These objects of other authors are pending final publication. Their publication has been requested.',
 	'explication_info_type' => 'This identifier must be unique and contain no specific character',
 	'explication_nombre_attente' => 'Maximum number of objects which can be pending publication (does not affect administrators, leave 0 for unlimited).',
 	'explication_rubrique_statut' => 'A section is considered as visible (published) when it contains at least an other published element.',
@@ -104,7 +103,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_version' => 'Version: @lang@',
 
 	// M
-	'message_article_mis_a_jour' => 'The article has been updated',
 	'message_article_traduit_en' => 'This article allready exists in:',
 	'message_confirm_depublier' => 'Are you sure you want to unpublish it?',
 	'message_confirm_poubelle' => 'Are you sure you want to delete it?',
@@ -117,10 +115,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_objet_mis_a_jour_lien' => 'Vous pouvez le consulter en suivant <a href="@url@" class="spip_in">ce lien</a>.', # NEW
 	'message_objet_supprime' => '"@titre@" a été supprimé.', # NEW
 	'message_pas_auteur' => 'Warning. You are not listed as author of this object.',
-	'message_rubrique_creee' => 'The section has been created. It will be visible when something will be published inside.',
-	'message_rubrique_mis_a_jour' => 'The section has been updated.', # MODIF
-	'message_site_cree' => 'Votre site a été créé.', # NEW
-	'message_site_mis_a_jour' => 'The website has been updated', # MODIF
 	'message_valider_action' => 'Are you sure?',
 	'message_valider_suppression' => 'Are you sure you want to delete this template?',
 	'modifier_rubriques' => 'Edit the sections',
@@ -155,6 +149,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_publie_site' => 'Publish this website online',
 	'texte_statut_redaction' => 'Change your article for "in progress"',
 	'texte_statut_redaction_sans_statut' => 'Change your article for "in progress"',
+	'title_page_publier' => 'Publier', # NEW
+	'title_page_publier_titre' => 'Publier : @titre@', # NEW
 	'titre_lien_publier' => 'Publish',
 	'titre_modification_article' => 'Edit the article: @titre@',
 	'titre_modification_rubrique' => 'Edit the section: @titre@',

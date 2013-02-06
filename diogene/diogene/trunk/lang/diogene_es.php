@@ -41,7 +41,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_valeur_float' => 'El valor "@champ@" debe ser un número',
 	'erreur_valeur_int' => 'El valor "@champ@" debe ser un número fijo. ',
 	'explication_article_deja_traduit' => 'Este artículo ya está traducido en: ',
-	'explication_contenu_attente' => 'Estos objetos de otros autores están pendientes de publicación definitiva. La publicación ha sido solicitada.',
 	'explication_info_type' => 'Este identificador debe ser único y no debe tener ningún carácter específico',
 	'explication_nombre_attente' => 'Número máximo de objetos pendientes de publicación (no afecta a los administradores, indicar 0 para ilimitado).',
 	'explication_rubrique_statut' => 'Una sección se considera como visible (publicada) cuando dispone de al menos un objeto publicado.',
@@ -104,7 +103,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_version' => 'Versión: @lang@',
 
 	// M
-	'message_article_mis_a_jour' => 'El artículo ha sido actualizado',
 	'message_article_traduit_en' => 'Este artículo ya existe en:',
 	'message_confirm_depublier' => '¿Está seguro de querer publicarlo?',
 	'message_confirm_poubelle' => '¿Está seguro de querer eliminarlo?',
@@ -117,10 +115,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_objet_mis_a_jour_lien' => 'Vous pouvez le consulter en suivant <a href="@url@" class="spip_in">ce lien</a>.', # NEW
 	'message_objet_supprime' => '"@titre@" a été supprimé.', # NEW
 	'message_pas_auteur' => 'Atención. No está identificado como autor de este objeto.',
-	'message_rubrique_creee' => 'La sección se ha creado correctamente. No será visible hasta que no se publique un elemento en ella.',
-	'message_rubrique_mis_a_jour' => 'La sección ha sido actualizada.', # MODIF
-	'message_site_cree' => 'Votre site a été créé.', # NEW
-	'message_site_mis_a_jour' => 'El sitio ha sido actualizado', # MODIF
 	'message_valider_action' => '¿Está seguro?',
 	'message_valider_suppression' => '¿Está seguro de querer eliminar esta plantilla?',
 	'modifier_rubriques' => 'Modificar las secciones',
@@ -155,6 +149,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_publie_site' => 'Publicar definitivamente este sitio',
 	'texte_statut_redaction' => 'Poner su artículo en curso de redacción',
 	'texte_statut_redaction_sans_statut' => 'Poner su artículo en curso de redacción',
+	'title_page_publier' => 'Publier', # NEW
+	'title_page_publier_titre' => 'Publier : @titre@', # NEW
 	'titre_lien_publier' => 'Publicar',
 	'titre_modification_article' => 'Modificación del artículo: @titre@',
 	'titre_modification_rubrique' => 'Modificación de la sección: @titre@',
