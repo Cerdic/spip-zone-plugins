@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'diogene_gerer_auteurs_description' => 'Complément "auteurs" pour "Diogene". Permet de rajouter sur un formulaire d\'édition d\'objet via Diogene afin de lui associer un auteur.',
+	'diogene_gerer_auteurs_description' => 'Permet de rajouter via Diogene un champ afin d\'associer un auteur sur un formulaire d\'édition d\'objet.',
 	'diogene_gerer_auteurs_nom' => 'Diogene - Auteurs',
 	'diogene_gerer_auteurs_slogan' => 'Complément "auteurs" pour "Diogene"'
 );
