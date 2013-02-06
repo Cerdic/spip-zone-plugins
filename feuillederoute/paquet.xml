@@ -1,6 +1,6 @@
 <paquet
 prefix="feuillederoute"
-categorie="maintenance"
+categorie="communication"
 version="0.9.5"
 etat="test"
 compatibilite="[3.0.0;3.*]"
