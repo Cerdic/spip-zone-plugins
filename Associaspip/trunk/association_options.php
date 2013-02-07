@@ -16,6 +16,8 @@ if (!defined('_ECRIRE_INC_VERSION'))
  * Initialisations
 **/
 
+$GLOBALS['spip_pipeline']['associaspip'] = '';
+
 /**
  * @global array $GLOBALS['association_liste_des_statuts']
  * @name $association_liste_des_statuts
@@ -2647,8 +2649,9 @@ function association_trouver_iextras($ObjetEtendu, $id=0) {
 /**
  * Encapsulation de _T()
  *
- * @param string $chaine
+ * @param string|array $chaine
  *   Chaine de langue avec eventuellement le prefixe "asso" omis
+ *   Liste comportant la chaine de langue (prefixe "asso" optionnel) et les parametres
  * @return string
  *   Libelle localise
  */
@@ -2662,6 +2665,24 @@ function association_langue($chaine) {
 	} else
 		return '';
 	return _T((strpos($head,':') ? '' : 'asso:').$head, $tail );
+}
+
+/**
+ * Encapsulation de autoriser()
+ *
+ * @param string|array $aut
+ *   Valeur de l'autorisation
+ *   Liste des composantes de l'autorisation
+ * @return bool
+ *   Autorisation d'acces
+ */
+function association_acces($aut) {
+	if ( is_array($aut) && count($aut) ) { // autorisation a calculer
+		return call_user_func_array('autoriser', $aut);
+	} elseif ( is_scalar($aut) ) { // autorisation deja calculee (chaine ou entier ou booleen, evalue en vrai/faux...)
+		return autoriser($aut);
+	} else // pas d'autorisation definie = autorise pour tous
+		return '';
 }
 
 function association_langue_index($index, $head) {

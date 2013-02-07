@@ -24,63 +24,60 @@ include_spip('inc/autoriser'); // utilise par "onglet1_association" (pour le tes
  *   Nom du fichier "exec" de la page principale du module
  * @param bool $INSERT_HEAD
  *   Indique s'il s'agit d'une page exec classique en PHP (vrai, par defaut) ou
- *   en HTML (faux, ) a compiler par SPIP (cas des balises) ou PHP gere par le developpeur
- * @return void
+ *   en HTML (faux, alors) a compiler par SPIP (cas des balises) ou par le dev
+ * @return $res
+ *   Debut de la page HTML de l'espace prive
  */
 function association_navigation_onglets($titre='', $top_exec='', $INSERT_HEAD=TRUE) {
-	$modules = pipeline('modules_asso', array(
-		'association' => array('asso:menu2_titre_association', 'assoc_qui.png', array('voir_profil', 'association'), ), // accueil
-		'adherents' => array('asso:menu2_titre_gestion_membres', 'annonce.gif', array('voir_membres', 'association'), ), // gestion des membres
-		'dons' => array('asso:menu2_titre_gestion_dons', 'dons-24.gif', array('voir_dons', 'association'), ), // gestion des dons
-		'ventes' => array('asso:menu2_titre_ventes_asso', 'ventes.gif', array('voir_ventes', 'association'), ), // gestion des ventes
-		'activites' => array('asso:menu2_titre_gestion_activites', 'activites.gif', array('voir_activites', 'association'), ), // gestion des activites
-		'ressources' => array('asso:menu2_titre_gestion_prets', 'pret-24.gif', array('voir_ressources', 'association'), ), // gestion des ressources
-		'comptes' => array('asso:menu2_titre_livres_comptes', 'finances-24.png', array('voir_compta', 'association'), ), // compta
-	)); // Liste (en fait tableau PHP) des modules geres par le plugin, sous la forme : 'exec' => array("chaine:langue", "chemin/icone", array("autorisation", ...), )
-// Recuperation de la liste des ongles
 	$res = '';
-	foreach ($modules as $exec=>$params) {
-		// autorisation d'acces au module
-		if ( is_array($params[2]) && count($params[2]) ) { // autorisation complete/fine
-			$acces = call_user_func_array('autoriser', $params[2]);
-		} elseif ( $params[2] ) { // autorisation general/globale
-			$acces = autoriser($params[2]);
-		} else // pas d'autorisation definie = autorise pour tous
-			$acces = TRUE;
-		// etat d'activation du module en configuration
-		if ( in_array($exec, array('association', 'adherents')) )
-			$actif = TRUE;
-		else
-			$actif = $GLOBALS['association_metas'][$exec=='ressources'?'prets':$exec];
-		// generation de l'onglet
-		if ( $actif && $acces ) {
-			$chemin = _DIR_PLUGIN_ASSOCIATION_ICONES.$params[1]; // icone Associaspip
+// Recuperation de la liste des ongles
+	// modules natifs toujours actifs
+	$modules_actifs = array(
+		array('menu2_titre_association', 'assoc_qui.png', array('association'), array('association','voir_profil'), ),
+		array('menu2_titre_gestion_membres', 'annonce.gif', array('adherents'), array('association','voir_membres'), ),
+	);
+	// modules natifs actives en configuration
+	foreach ( array('dons'=>'don-24.gif', 'ventes'=>'ventes.gif', 'activites'=>'activites.gif', 'ressources'=>'prets-24.gif', 'comptes'=>'finances-24.png') as $module=>$icone ) {
+		if ( $GLOBALS['association_metas'][$module=='ressources'?'prets':$module] )
+			$modules_actifs[] = array("menu2_titre_gestion_$module", $icone, array($module), array('association', $module='comptes'?'voir_compta':"voir_$module") );
+	}
+	$modules_externes = pipeline('associaspip', array()); // Tableau des modules ajoutes par d'autres plugins : 'prefixe_plugin'=> array( 0=>array(bouton,onglet,actif), 1=>array(bouton,config,actif) )
+	foreach ( $modules_externes as $plugin=>$boutons ) {
+		if ( test_plugin_actif($plugin) )
+			$modules_actifs[] = $boutons[0];
+	}
+// Dessin de la liste des ongles
+	$onglets_actifs = '';
+	foreach ($modules_actifs as $module) {
+		if ( association_acces($module[3]) ) { // generation de l'onglet
+			$chemin = _DIR_PLUGIN_ASSOCIATION_ICONES.$module[1]; // icone Associaspip
 			if ( !file_exists($chemin) )
-				$chemin = find_in_path($params[1]); // icone alternative
-			$res .= onglet(_T($params[0]), generer_url_ecrire($exec), $top_exec, $exec, $chemin); // http://doc.spip.org/onglet
+				$chemin = find_in_path($module[1]); // icone alternative
+			$onglets_actifs .= onglet(association_langue($module[0]), generer_url_ecrire($module[2][0],$module[2][1]), $top_exec, $module[2][0], $chemin); // http://doc.spip.org/onglet
 		}
 	}
 // Affichage
 	if ($INSERT_HEAD) { // mettre ''|0|FALSE|NULL dans la balise (appel dans une page HTML-SPIPee donc et non PHP) pour eviter l'erreur de "Double occurrence de INSERT_HEAD"
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page();
+		$res = $commencer_page();
 	}
-	echo '<div class="table_page">';
-	echo '<h1 class="asso_titre">', $titre?association_langue($titre):_T('asso:gestion_de_lassoc', array('nom'=>$GLOBALS['association_metas']['nom']) ), '</h1>'; // Nom du module. cf:  <http://programmer.spip.org/Contenu-d-un-fichier-exec>
-	if ($res)
-		echo '<div class="bandeau_actions barre_onglet clearfix">', debut_onglet(), $res, fin_onglet(), '</div>'; // Onglets actifs
-	echo '</div>';
+	$res .= '<div class="table_page">';
+	$res .= '<h1 class="asso_titre">', $titre?association_langue($titre):_T('asso:gestion_de_lassoc', array('nom'=>$GLOBALS['association_metas']['nom']) ), '</h1>'; // Nom du module. cf:  <http://programmer.spip.org/Contenu-d-un-fichier-exec>
+	if ($onglets_actifs)
+		$res .= '<div class="bandeau_actions barre_onglet clearfix">', debut_onglet(), $res, fin_onglet(), '</div>'; // Onglets actifs
+	$res .= '</div>';
 	if ($INSERT_HEAD) { // Tant qu'a faire, on s'embete pas a le retaper dans toutes les pages...
-		echo debut_gauche('',TRUE);
-		echo debut_boite_info(TRUE);
+		$res .= debut_gauche('',TRUE);
+		$res .= debut_boite_info(TRUE);
 	}
+	return $res;
 }
 
 /**
  * @see association_navigation_onglets
  */
 function onglets_association($titre='', $top_exec='', $INSERT_HEAD=TRUE) {
-	association_navigation_onglets($titre, $top_exec, $INSERT_HEAD);
+	echo association_navigation_onglets($titre, $top_exec, $INSERT_HEAD);
 }
 
 /**
@@ -98,15 +95,7 @@ function association_navigation_raccourcis($retour='',  $raccourcis=array()) {
 	$res = ''; // initialisation
 	foreach($raccourcis as $titre => $params) {
 		list($image, $url, $aut) = $params;
-		// autorisation d'acces au module
-		if ( is_array($aut) && count($aut) ) { // autorisation a calculer
-			$acces = call_user_func_array('autoriser', $aut);
-		} elseif ( is_scalar($aut) ) { // autorisation deja calculee (chaine ou entier ou booleen, evalue en vrai/faux...)
-			$acces = autoriser($aut);
-		} else // pas d'autorisation definie = autorise pour tous
-			$acces = TRUE;
-		// generation du raccourci
-		if ( $acces ) {
+		if ( association_acces($aut) ) { // generation du raccourci
 			if (is_array($url))
 				$url = generer_url_ecrire($url[0],$url[1]);
 			$res .= icone1_association($titre, $url, $image);
