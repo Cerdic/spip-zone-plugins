@@ -8,13 +8,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_titre_piecon' => 'Configuration de Piecon', # NEW
+	'cfg_titre_piecon' => 'Piecon setup',
 
 	// E
-	'explication_fallback' => 'Le fallback est la méthode utilisée pour changer soit le title, soit la favicon de la page. Il peut avoir 3 valeurs :<br />
-"false", la valeur par défaut, ne changera que la favicon lorsque c\'est possible<br />
-"true", seul le title sera modifié en indiquant un pourcentage même si le navigateur accepte le changement de favicon<br />
-"force", changera la favicon lorsque c\'est possible ainsi que le title de la page;', # NEW
+	'explication_fallback' => 'The fallback method is used to change both the title or the favicon of the page. It can have three values​​: <br />
+"false", the default, only change the favicon when possible;<br />
+"true", only the title will be changed by specifying a percentage even if the browser accepts change of favicon;<br />
+"force", change the favicon when possible as well as the title of the page;',
 
 	// L
 	'label_background' => 'Background color',
