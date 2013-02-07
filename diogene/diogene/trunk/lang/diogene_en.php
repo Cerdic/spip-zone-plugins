@@ -23,10 +23,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'diogenes' => 'Forms templates',
 
 	// E
-	'editer_diogene_explication' => 'Diogene enables administrators to modify the classical edit forms by removing or adding some fields.', # MODIF
+	'editer_diogene_explication' => 'Diogene allow to modify the classical edit forms by removing or adding some fields.',
 	'editer_diogenes_titre' => 'Forms templates',
 	'erreur' => 'Error',
-	'erreur_autorisation_login_publier' => 'You should be identified to publish something there.', # MODIF
+	'erreur_autorisation_login_publier' => 'You should <a href="@url@" class="spip_in">be identified to publish something there</a>.',
 	'erreur_autorisation_modifier_site' => 'Your status doesn\'t enables you to edit this web site',
 	'erreur_autorisation_statut_publier' => 'Your status doesn\'t enables you to publish there.',
 	'erreur_autorisation_statut_publier_limite' => 'You have reached the limit of objects that can be <a href="@url@">awaiting publication</a> (@nb@)',
@@ -63,7 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_diogenes' => '@nb@ templates',
 	'info_numero_diogene' => 'Template number',
 	'info_publier_rubrique' => 'Publish in this section:',
-	'info_referencement_automatise' => 'Les informations de référencement automatisé', # NEW
+	'info_referencement_automatise' => 'The automatic referencing informations',
 	'info_rubrique_new' => 'New empty section',
 	'info_rubrique_publie' => 'Visible section',
 	'info_rubrique_vide' => 'Empty section',
@@ -110,10 +110,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_diogene_update' => 'The form template has been updated',
 	'message_erreur_general' => 'The form contains errors, please check its contents.',
 	'message_id_parent_unique' => 'This article can only be published in the section «@rubrique@»',
-	'message_objet_cree' => '"@titre@" a été créé.', # NEW
-	'message_objet_mis_a_jour' => '"@titre@" a été mis à jour.', # NEW
-	'message_objet_mis_a_jour_lien' => 'Vous pouvez le consulter en suivant <a href="@url@" class="spip_in">ce lien</a>.', # NEW
-	'message_objet_supprime' => '"@titre@" a été supprimé.', # NEW
+	'message_objet_cree' => '"@titre@" has been created.',
+	'message_objet_mis_a_jour' => '"@titre@" has been updated.',
+	'message_objet_mis_a_jour_lien' => 'You can visit it following <a href="@url@" class="spip_in">this link</a>.',
+	'message_objet_supprime' => '"@titre@" has been deleted.',
 	'message_pas_auteur' => 'Warning. You are not listed as author of this object.',
 	'message_valider_action' => 'Are you sure?',
 	'message_valider_suppression' => 'Are you sure you want to delete this template?',
@@ -136,7 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_en_cours_poubelle_normal' => 'Leave your article in the dustbin',
 	'texte_statut_en_cours_poubelle_site' => 'Leave this site in the dustbin',
 	'texte_statut_en_cours_prop_normal' => 'Leave your article submitted for evaluation',
-	'texte_statut_en_cours_prop_site' => 'Leave this website article submitted for evaluation', # MODIF
+	'texte_statut_en_cours_prop_site' => 'Leave this website submitted for evaluation',
 	'texte_statut_en_cours_publie_normal' => 'Leave your article published online',
 	'texte_statut_en_cours_publie_site' => 'Leave this website published online',
 	'texte_statut_en_cours_redaction' => 'Leave your article "in progress"',
@@ -149,8 +149,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_publie_site' => 'Publish this website online',
 	'texte_statut_redaction' => 'Change your article for "in progress"',
 	'texte_statut_redaction_sans_statut' => 'Change your article for "in progress"',
-	'title_page_publier' => 'Publier', # NEW
-	'title_page_publier_titre' => 'Publier : @titre@', # NEW
+	'title_page_publier' => 'Publish',
+	'title_page_publier_titre' => 'Publish : @titre@',
 	'titre_lien_publier' => 'Publish',
 	'titre_modification_article' => 'Edit the article: @titre@',
 	'titre_modification_rubrique' => 'Edit the section: @titre@',
