@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		tag <code>#TABLE_MATIERES.</code>',
 
 	// E
-	'explication_longueur' => 'Nastaví maximálny počet znakov pre každú kotvu.',
+	'explication_longueur' => 'Nastaví maximálny počet znakov pre každú kotvu.', # MODIF
 	'explication_min' => 'Nastaví minimálny počet nadpisov v texte, z ktorých sa vytvorí obsah.',
 	'explication_separateur' => 'Určí znak, ktorý sa vloží medzi slová namiesto medzier.',
 
