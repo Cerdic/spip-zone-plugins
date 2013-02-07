@@ -15,9 +15,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'convertir_page' => 'تبديل به يك صفحه',
 	'creer_page' => 'آفرينش يك صفحه‌ي نو',
 
-	// I
-	'input_page' => 'une_page',
-
 	// M
 	'modifier_page' => 'اصلاح صفحه: ',
 

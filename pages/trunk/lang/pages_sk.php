@@ -15,9 +15,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'convertir_page' => 'Zmeniť na stránku',
 	'creer_page' => 'Vytvoriť novú stránku',
 
-	// I
-	'input_page' => 'une_page',
-
 	// M
 	'modifier_page' => 'Upraviť stránku:',
 
