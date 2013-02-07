@@ -8,116 +8,116 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'alerte_effacement' => 'Confirmez l\'effacement des données de configuration de contact.', # NEW
+	'alerte_effacement' => 'Confirme el borrado de los datos de configuración de contacto.',
 
 	// B
-	'bouton_effacer' => 'Gommer', # NEW
+	'bouton_effacer' => 'Borrar',
 
 	// C
 	'champ_adresse' => 'Dirección',
-	'champ_civi_explication' => 'Réglages avancées du champ civilité', # NEW
-	'champ_civi_mademoiselle_ok' => 'Proposer un choix « Mademoiselle » dans le champ civilité', # NEW
-	'champ_civilite' => 'Civilidad',
+	'champ_civi_explication' => 'Ajustes avanzados del campo cortesía',
+	'champ_civi_mademoiselle_ok' => 'Proponer la opción «Señorita» en el campo de cortesía',
+	'champ_civilite' => 'Cortesía',
 	'champ_code_postal' => 'Código Postal',
 	'champ_etat' => 'Estado',
-	'champ_impose' => 'campo impuestas',
+	'champ_impose' => 'campo impuesto',
 	'champ_infolettre' => 'Boletín',
-	'champ_mail' => 'Mail',
+	'champ_mail' => 'Correo eletrónico',
 	'champ_nom' => 'Apellido',
-	'champ_obligatoire' => 'Obligatoria?',
+	'champ_obligatoire' => '¿Obligatorio?',
 	'champ_organisation' => 'Organización',
 	'champ_pays' => 'País',
-	'champ_portable' => 'Mobile',
+	'champ_portable' => 'Teléfono móvil',
 	'champ_prenom' => 'Nombre',
-	'champ_sujet' => 'Tema',
-	'champ_telephone' => 'Téléphone',
+	'champ_sujet' => 'Asunto',
+	'champ_telephone' => 'Teléfono',
 	'champ_texte' => 'Texto',
 	'champ_ville' => 'Ciudad',
-	'configuration_barre_forum' => 'Afficher la barre typo des forums.', # NEW
-	'configuration_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public, les réglages ci-dessous seront sans effets.', # NEW
-	'configuration_barre_oui' => 'Afficher la barre typo complète.', # NEW
-	'configuration_champs_message' => 'Réglage du porte-plume.', # NEW
-	'configuration_champs_message_explication' => 'Réglage de la barre typographique associée au texte du message.', # NEW
+	'configuration_barre_forum' => 'Mostrar la barra tipográfica de los foros.',
+	'configuration_barre_impossible' => 'Otro plugin prohibe el uso del portaplumas en el espacio público, los siguientes ajustes no tendrán efecto. ',
+	'configuration_barre_oui' => 'Mostrar la barra tipográfica completa.',
+	'configuration_champs_message' => 'Ajuste del portaplumas.',
+	'configuration_champs_message_explication' => 'Ajuste de la barra tipográfica asociada al texto del mensaje.',
 	'configuration_destinataires' => 'Destinatarios',
-	'configuration_destinataires_explication' => 'elige un o varios autores quien los visitantes podrian contactar. Si nada esta definido, es el autor numero uno (el quien ha instalado la página web) quien sera utilizado.',
-	'configuration_destinataires_plusieurs' => 'Permitir a los visitadores de elegir <b>varios</b> destinarios',
-	'configuration_destinataires_plusieurs_et' => '... majorée par les auteurs éventuellement transmis au formulaire.', # NEW
-	'configuration_destinataires_plusieurs_ou' => '... ou parmi le groupe d\'auteurs éventuellement transmis au formulaire', # NEW
+	'configuration_destinataires_explication' => 'Elija uno o varios autores a los que los visitantes podrán contactar. Si no hay nada definido, el autor número 1 (el que haya instalado la página web) será el utilizado.',
+	'configuration_destinataires_plusieurs' => 'Permitir a los visitantes elegir <b>varios</b> destinarios en la lista de arriba ',
+	'configuration_destinataires_plusieurs_et' => '... mejorada por los autores eventualmente transmitidos al grupo.',
+	'configuration_destinataires_plusieurs_ou' => '... o entre el grupo de autores eventualmente transmitido al formulario',
 	'configuration_destinataires_tous' => 'Poner <b>todos</b> estos autores como destinarios del correo electrónico',
-	'configuration_destinataires_tous_et' => '... leur ajouter le groupe d\'auteurs éventuellement transmis au formulaire', # NEW
-	'configuration_destinataires_tous_ou' => '... ou seulement ceux éventuellement transmis au formulaire', # NEW
-	'configuration_destinataires_un' => 'Permitir a los visitadores de elegir un <b>unico</b> destinario',
-	'configuration_destinataires_un_et' => '... majorée par les auteurs éventuellement transmis au formulaire.', # NEW
-	'configuration_destinataires_un_ou' => '... ou parmi le groupe d\'auteurs éventuellement transmis au formulaire', # NEW
+	'configuration_destinataires_tous_et' => '... agregarles el grupo de autores eventualmente transmitido al formulario',
+	'configuration_destinataires_tous_ou' => '... o solamente aquéllos eventualmente transmitidos al formulario',
+	'configuration_destinataires_un' => 'Obligar a los visitantes a elegir un <b>único</b> destinario en la lista de arriba',
+	'configuration_destinataires_un_et' => '... mejorada por los autores eventualmente transmitidos al formulario.',
+	'configuration_destinataires_un_ou' => '... o entre el grupo de autores eventualmente transmitidos al formulario',
 	'configuration_intro' => 'Introducción',
-	'configuration_intro_explication' => 'Escrive eventualmente un texto que introducirá el impreso.',
-	'configuration_no_barre' => 'Ne pas proposer de barre typo.', # NEW
-	'configuration_no_previsualisation' => 'Afficher la barre typo sans le bouton de prévisualisation.', # NEW
+	'configuration_intro_explication' => 'Escriba eventualmente un texto que introduzca el formulario',
+	'configuration_no_barre' => 'No proponer la barra tipográfica.',
+	'configuration_no_previsualisation' => 'Mostrar la barra tipográfica sin el botón de previsualización.',
 	'configuration_pj' => 'Documentos adjuntos',
-	'configuration_pj_autoriser' => 'Autorizar el envío de los documentos adjuntos',
-	'configuration_pj_facteur_absent' => 'Para utilisar esta función, debes instalar el plugin Facteur.',
-	'configuration_pj_nb_max' => 'Numero máximo de documentos adjuntos',
-	'configuration_regle_liste_explication' => 'Choisissez une règle de calcul de la liste des destinataires potentiels et de la méthode de sélection proposée à l\'internaute.', # NEW
-	'configuration_texteinfolettre' => 'Texte infolettre', # NEW
-	'configuration_texteinfolettre_explication' => 'Changez éventuellement le texte associé à la case à cocher infolettre.', # NEW
-	'consulter_memoire' => 'Este mensaje esta registrado sobre vuestra página web',
+	'configuration_pj_autoriser' => 'Autorizar el envío de documentos adjuntos',
+	'configuration_pj_facteur_absent' => 'Para utilizar esta función, debe instalar el plugin Facteur.',
+	'configuration_pj_nb_max' => 'Número máximo de documentos adjuntos',
+	'configuration_regle_liste_explication' => 'Elija una regla de cálculo de la lista de destinatarios potenciales y del método de selección propuesto al internauta.',
+	'configuration_texteinfolettre' => 'Texto boletín',
+	'configuration_texteinfolettre_explication' => 'Cambie eventualmente el texto asociado a la casilla para seleccionar boletín.',
+	'consulter_memoire' => 'Este mensaje se ha registrado en su sitio web:',
 	'courriel_de' => 'De',
 
 	// D
-	'deplacement_possible' => 'Traslado vertical por deslizar-depositar',
-	'description_menu_contact' => 'Élément de menu vers la page du formulaire de contact', # NEW
-	'description_page-contact' => 'Acessible via <i>spip.php?page=contact</i>, cette page optionnelle permet de fournir un formulaire de contact (pensez à ajouter un lien dans vos menus).', # NEW
+	'deplacement_possible' => 'Desplazamiento vertical mediante arrastrar-soltar',
+	'description_menu_contact' => 'Elemento de menú a la página del formulario de contacto',
+	'description_page-contact' => 'Accesible vía <i>spip.php?page=contact</i>, esta página opcional permite proporcionar un formulario de contacto (piense en añadir un enlace en su menú).',
 
 	// F
-	'form_destinataire' => 'Elige un destinario',
-	'form_destinataires' => 'Elige un destinarios',
+	'form_destinataire' => 'Elija un destinario',
+	'form_destinataires' => 'Elija los destinarios',
 	'form_pj_ajouter_pluriel' => 'Añadir documentos adjuntos',
 	'form_pj_ajouter_singulier' => 'Añadir un documento adjunto',
-	'form_pj_fichier_ajoute' => 'El fichero ha sido añadido: ',
-	'form_pj_importer' => 'Importar un fichero',
-	'form_pj_previsu_pluriel' => 'Documentos adjunto',
+	'form_pj_fichier_ajoute' => 'El archivo se ha añadido correctamente:',
+	'form_pj_importer' => 'Importar un archivo',
+	'form_pj_previsu_pluriel' => 'Documentos adjuntos',
 	'form_pj_previsu_singulier' => 'Documento adjunto',
-	'form_pj_supprimer' => 'Suprimir',
-	'form_pj_titre' => 'Titulo del fichero',
-	'forum_attention_nbre_caracteres' => '<b>¡Atención!</b> tu mensaje debe tener al menos @nbre_caract@ caracteres.',
+	'form_pj_supprimer' => 'Eliminar',
+	'form_pj_titre' => 'Titulo del archivo',
+	'forum_attention_nbre_caracteres' => '<b>¡Atención!</b> su mensaje debe tener al menos @nbre_caract@ caracteres.',
 
 	// H
-	'horodatage' => 'Impreso echado el: @horodatage@.',
+	'horodatage' => 'Formulario enviado el: @horodatage@.',
 
 	// I
-	'inforigine' => 'Information transmise par le formulaire : ', # NEW
-	'informez_moi' => 'Estoy de acuerdo en recibir, por correo electrónico, información de su empresa.',
-	'infos_collecte' => 'Informaciones colectadas',
-	'infos_supplementaires' => 'Inforciones suplementarias',
+	'inforigine' => 'Información transmitida por el formulario: ',
+	'informez_moi' => 'Estoy de acuerdo en recibir, por correo electrónico, información de su organización.',
+	'infos_collecte' => 'Informaciones recogidas',
+	'infos_supplementaires' => 'Informaciones suplementarias',
 
 	// M
 	'madame' => 'Señora',
-	'mademoiselle' => 'Mademoiselle', # NEW
-	'modele_label_auteur' => 'Pré-sélectionner un auteur (facultatif) ?', # NEW
-	'modele_nom_formulaire' => 'le formulaire de contact avancé', # NEW
+	'mademoiselle' => 'Señorita',
+	'modele_label_auteur' => '¿Preseleccionar un autor (facultativo)?',
+	'modele_nom_formulaire' => 'el formulario de contacto avanzado',
 	'monsieur' => 'Señor',
 	'msg_messagerie' => 'Mensajería de contacto',
 
 	// N
-	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?', # NEW
-	'noisette_label_niveau_titre' => 'Choisir le niveau du titre', # NEW
-	'noisette_label_titre_noisette' => 'Titre :', # NEW
-	'noisette_label_titre_noisette_perso' => 'Si titre personnalisé :', # NEW
-	'noisette_titre_perso' => 'Titre personnalisé', # NEW
+	'noisette_label_afficher_titre_noisette' => '¿Mostrar un título?',
+	'noisette_label_niveau_titre' => 'Elegir el nivel del título',
+	'noisette_label_titre_noisette' => 'Título:',
+	'noisette_label_titre_noisette_perso' => 'Si título personalizado:',
+	'noisette_titre_perso' => 'Título personalizado',
 
 	// P
-	'par' => 'Par : ', # NEW
-	'preselection' => 'Décocher tous les items de la liste de destinataires', # NEW
+	'par' => 'Por: ',
+	'preselection' => 'Desmarcar todos los items de la lista de destinatarios',
 
 	// S
 	'sauv_message' => 'Grabar los mensajes de contacto',
 	'sauv_message_explication' => 'Permite registrar los mensajes de contactos y de anunciarles en una mensajería dedicada',
-	'sauv_message_ok' => 'Grabar los mensajes',
-	'succes' => 'Gracias, su mensaje ha sido enviado.<br />Le responderemos tan pronto como sea posible.<br />Equipo de @equipe_site@',
+	'sauv_message_ok' => 'Guardar los mensajes de contactos',
+	'succes' => 'Gracias, su mensaje se ha sido enviado correctamente.<br />Le responderemos tan pronto como sea posible.<br />Equipo de @equipe_site@',
 
 	// T
-	'titre' => 'Impreso de contacto',
-	'titre_court' => 'Contact' # NEW
+	'titre' => 'Formulario de contacto',
+	'titre_court' => 'Contacto'
 );
 
 ?>
