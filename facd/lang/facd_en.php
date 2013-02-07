@@ -10,8 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_relancer_tout' => 'Reconvert all the documents',
 	'bouton_relancer_tout_format' => 'Reconvert all documents in @format@',
-	'bouton_relancer_tout_format_message' => 'Are you sure you want to restart the conversion of all files in the @format@ format.', # MODIF
-	'bouton_relancer_tout_message' => 'Are you sure you want to restart the conversion of all files', # MODIF
+	'bouton_relancer_tout_format_message' => 'Are you sure you want to restart the conversion of all files in the @format@ format?',
+	'bouton_relancer_tout_message' => 'Are you sure you want to restart the conversion of all files?',
 
 	// E
 	'erreur_document_plus_disponible' => 'This document is not available on the website anymore',
