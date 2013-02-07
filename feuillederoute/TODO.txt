@@ -1,0 +1,4 @@
+
+- les raccourcis typo ne fonctionnent pas sur les liens, les docs comme les url [le lien->art7] ou <doc1> 
+
+- peut-on/doit-on supprimer le fichier IMG/feuillederoute.php en désactivant le plugin ?
