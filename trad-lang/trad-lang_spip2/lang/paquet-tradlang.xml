@@ -1,6 +1,9 @@
 <traduction module="paquet-tradlang" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/trad-lang/trad-lang_spip2/lang/" reference="fr">
 	<langue code="ar" />
 	<langue code="en" />
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-tradlang?lang_cible=es">
+		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
+	</langue>
 	<langue code="fr" />
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/paquet-tradlang?lang_cible=ru">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
