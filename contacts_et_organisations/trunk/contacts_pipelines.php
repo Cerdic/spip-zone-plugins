@@ -52,12 +52,16 @@ function contacts_afficher_contenu_objet($flux)
 			if ($id_contact = sql_getfetsel('id_contact', 'spip_contacts', 'id_auteur ='.$id))
 			{
 				$infos = recuperer_fond('prive/squelettes/contenu/contact_sur_auteur', array('id_contact' => $id_contact));
+				// FIXME: Cette suppression est osée !
+				$infos = str_replace('ajax preload', 'ajax', $infos); // éviter un chargement ajax erroné. 
 				$flux['data'] .= $infos;
 			}
 			// informations sur l'organisation et ses liens
 			elseif ($id_organisation = sql_getfetsel('id_organisation', 'spip_organisations', 'id_auteur ='.$id))
 			{
 				$infos = recuperer_fond('prive/squelettes/contenu/organisation_sur_auteur', array('id_organisation' => $id_organisation));
+				// FIXME: Cette suppression est osée !
+				$infos = str_replace('ajax preload', 'ajax', $infos); // éviter un chargement ajax erroné. 
 				$flux['data'] .= $infos;
 			}
 		}
