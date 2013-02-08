@@ -37,7 +37,7 @@ function association_navigation_onglets($titre='', $top_exec='', $INSERT_HEAD=TR
 		array('menu2_titre_gestion_membres', 'annonce.gif', array('adherents'), array('association','voir_membres'), ),
 	);
 	// modules natifs actives en configuration
-	foreach ( array('dons'=>'don-24.gif', 'ventes'=>'ventes.gif', 'activites'=>'activites.gif', 'ressources'=>'prets-24.gif', 'comptes'=>'finances-24.png') as $module=>$icone ) {
+	foreach ( array('dons'=>'dons-24.gif', 'ventes'=>'ventes.gif', 'activites'=>'activites.gif', 'ressources'=>'pret-24.gif', 'comptes'=>'finances-24.png') as $module=>$icone ) {
 		if ( $GLOBALS['association_metas'][$module=='ressources'?'prets':$module] )
 			$modules_actifs[] = array("menu2_titre_gestion_$module", $icone, array($module), array('association', $module='comptes'?'voir_compta':"voir_$module") );
 	}
