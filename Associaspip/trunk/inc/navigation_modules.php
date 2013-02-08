@@ -62,9 +62,9 @@ function association_navigation_onglets($titre='', $top_exec='', $INSERT_HEAD=TR
 		$res = $commencer_page();
 	}
 	$res .= '<div class="table_page">';
-	$res .= '<h1 class="asso_titre">', $titre?association_langue($titre):_T('asso:gestion_de_lassoc', array('nom'=>$GLOBALS['association_metas']['nom']) ), '</h1>'; // Nom du module. cf:  <http://programmer.spip.org/Contenu-d-un-fichier-exec>
+	$res .= '<h1 class="asso_titre">'. ( $titre?association_langue($titre):_T('asso:gestion_de_lassoc', array('nom'=>$GLOBALS['association_metas']['nom']) ) ) .'</h1>'; // Nom du module. cf:  <http://programmer.spip.org/Contenu-d-un-fichier-exec>
 	if ($onglets_actifs)
-		$res .= '<div class="bandeau_actions barre_onglet clearfix">', debut_onglet(), $res, fin_onglet(), '</div>'; // Onglets actifs
+		$res .= '<div class="bandeau_actions barre_onglet clearfix">'. debut_onglet() .$onglets_actifs. fin_onglet() .'</div>'; // Onglets actifs
 	$res .= '</div>';
 	if ($INSERT_HEAD) { // Tant qu'a faire, on s'embete pas a le retaper dans toutes les pages...
 		$res .= debut_gauche('',TRUE);
