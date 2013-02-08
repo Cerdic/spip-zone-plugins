@@ -1,5 +1,6 @@
 [(#REM) copie beaucoup le squelette organisation
 	mais n'affiche pas tout (et pas d'ajax precharge)
+	et pas de pipeline complément (erreur js possible si 2 boutons "Ajouter un document" sont présents)
 ]
 <BOUCLE_organisation(ORGANISATIONS){id_organisation}{tous}>
 
@@ -46,6 +47,7 @@
 </div>
 ]
 
-#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,organisation,id,#ID_ORGANISATION},data,'<div class="nettoyeur"></div>'}}
-
+[(#REM)
+\#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,organisation,id,#ID_ORGANISATION},data,'<div class="nettoyeur"></div>'}}
+]
 </BOUCLE_organisation>

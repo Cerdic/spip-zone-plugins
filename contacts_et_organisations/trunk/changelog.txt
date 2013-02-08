@@ -42,3 +42,5 @@
 2.6.1 (2013-02-08
 	- Sur la page d'un auteur-contact, éviter un hit de préchargement qui finit en 403
 	- Afficher correctement le descripif des contacts ou organisation sur leur vue (coquille).
+	- Éviter une erreur js sur un auteur-contact lorque : les documents sont actifs
+	  sur les auteurs & contacts et qu'on souhaite ajouter un mot clé. 
