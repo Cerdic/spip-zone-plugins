@@ -82,7 +82,7 @@ if(!test_espace_prive()){
  * cela forcera le fait d'aller sur la page de modification de l'objet
  * @return string $url L'URL de la page que l'on souhaite
  */
-function generer_url_publier($id,$objet='article',$id_secteur=0,$forcer=true){
+function generer_url_publier($id=null,$objet='article',$id_secteur=0,$forcer=true){
 	include_spip('inc/urls');
 	
 	$id_table_objet = id_table_objet($objet) ? id_table_objet($objet) : 'id_article';
@@ -100,6 +100,8 @@ function generer_url_publier($id,$objet='article',$id_secteur=0,$forcer=true){
 	if(is_numeric($id)){
 		$infos_objet = sql_fetsel($infos_cherchees,$table,$id_table_objet."=".intval($id));
 		$id_secteur = $infos_objet['id_secteur'] ? $infos_objet['id_secteur'] : 0;
+	}else{
+		$infos_objet = array();
 	}
 	/**
 	 * Si on ne force pas, on envoit vers la page de l'objet
@@ -113,6 +115,7 @@ function generer_url_publier($id,$objet='article',$id_secteur=0,$forcer=true){
 		$objets[] = 'emballe_media';
 		$objets[] = 'page';
 	}
+	
 	$type_objet = sql_getfetsel('type','spip_diogenes','id_secteur='.$id_secteur.' AND '.sql_in("objet",$objets));
 	if($type_objet){
 		$url = generer_url_public('publier','type_objet='.$type_objet,'',true);
