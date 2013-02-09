@@ -1,10 +1,26 @@
 <?php
 /**
- * Plugin Contacts & Organisations pour Spip 2.0
- * Auteurs : Cyril Marion, Matthieu Marcillaud
- * Licence GPL (c) 2009 - 2012- Ateliers CYM
- */
+ * Déclarations relatives à la base de données
+ *
+ * @plugin Contacts & Organisations pour Spip 3.0
+ * @license GPL (c) 2009 - 2013
+ * @author Cyril Marion, Matthieu Marcillaud, Rastapopoulos
+ *
+ * @package SPIP\Contacts\Pipelines
+**/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+/**
+ * Déclarer les interfaces des tables organisations et contacts
+ *
+ * @pipeline declarer_tables_interfaces
+ * 
+ * @param array $interface
+ *     Déclarations d'interface pour le compilateur
+ * @return array
+ *     Déclarations d'interface pour le compilateur
+ */
 function contacts_declarer_tables_interfaces($interface){
 	
 	$interface['table_des_tables']['organisations'] = 'organisations';
@@ -30,6 +46,16 @@ function contacts_declarer_tables_interfaces($interface){
 }
 
 
+/**
+ * Déclarer les objets éditoriaux des contacts et organisations
+ *
+ * @pipeline declarer_tables_objets_sql
+ * 
+ * @param array $tables
+ *     Description des tables
+ * @return array
+ *     Description complétée des tables
+ */
 function contacts_declarer_tables_objets_sql($tables){
 	//-- Table organisations ----------------------------------------
 	$tables['spip_organisations'] = array(
@@ -156,7 +182,16 @@ function contacts_declarer_tables_objets_sql($tables){
 
 
 
-
+/**
+ * Déclarer les tables auxiliaires des contacts et organisations
+ *
+ * @pipeline declarer_tables_auxiliaires
+ * 
+ * @param array $tables_auxiliaires
+ *     Description des tables
+ * @return array
+ *     Description complétée des tables
+ */
 function contacts_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	//-- Table organisations_contacts -------------------------------------

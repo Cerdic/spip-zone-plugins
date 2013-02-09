@@ -1,11 +1,24 @@
 <?php
+
 /**
- * Plugin Contacts & Organisations 
- * Licence GPL (c) 2010 Matthieu Marcillaud 
+ * Gestion de l'action `lier_organisation_auteur` 
+ *
+ * @plugin Contacts & Organisations pour Spip 3.0
+ * @license GPL (c) 2009 - 2013
+ * @author Cyril Marion, Matthieu Marcillaud, Rastapopoulos
+ *
+ * @package SPIP\Contacts\Actions
 **/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Action pour supprimer un contact ou une organisation
+ * 
+ * @param null|string $arg
+ *     Couple `type/id` où `type` est le type d'objet (organisation ou contact)
+ *     et `id` son identifiant. En absence utilise l'argument de l'action sécurisée.
+**/
 function action_supprimer_contact_dist($arg=null) {
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -29,6 +42,12 @@ function action_supprimer_contact_dist($arg=null) {
 	}
 }
 
+/**
+ * Supprime un contact et ses liaisons
+ *
+ * @param int $id_contact
+ *     Identifiant du contact
+**/
 function action_supprimer_contact_post($id_contact) {
 	$id_contact = intval($id_contact);
 	sql_delete("spip_contacts_liens", "id_contact=" . sql_quote($id_contact));
@@ -39,6 +58,12 @@ function action_supprimer_contact_post($id_contact) {
 	suivre_invalideur("id='id_contact/$id_contact'");
 }
 
+/**
+ * Supprime une organisation et ses liaisons
+ *
+ * @param int $id_organisation
+ *     Identifiant de l'organisation
+**/
 function action_supprimer_organisation_post($id_organisation) {
 	$id_organisation = intval($id_organisation);
 	sql_delete("spip_organisations_liens", "id_organisation=" . sql_quote($id_organisation));

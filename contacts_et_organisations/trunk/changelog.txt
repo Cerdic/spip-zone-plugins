@@ -39,8 +39,11 @@
 	- Critère {organisations_auteurs} équivalent à {contacts_auteurs} pour la table organisations,
 	  accompagné de sa balise #NOM_ORGANISATION
 
-2.6.1 (2013-02-08
+2.6.1 (2013-02-08)
 	- Sur la page d'un auteur-contact, éviter un hit de préchargement qui finit en 403
 	- Afficher correctement le descripif des contacts ou organisation sur leur vue (coquille).
 	- Éviter une erreur js sur un auteur-contact lorque : les documents sont actifs
 	  sur les auteurs & contacts et qu'on souhaite ajouter un mot clé. 
+
+2.6.2 (2013-02-09)
+    - PhpDoc complet + sécurité PHP

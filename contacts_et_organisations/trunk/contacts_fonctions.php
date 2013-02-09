@@ -1,27 +1,30 @@
 <?php
-/***
- * Plugin Contacts & Organisations pour Spip 3.0
- * Licence GPL (c) 2009 - 2013 - Ateliers CYM
- */
 
 /**
  * Définition des critères, balises, filtres et fonctions
  *
- * @package SPIP\Plugins\Contacts\Fonctions
+ * @plugin Contacts & Organisations pour Spip 3.0
+ * @license GPL (c) 2009 - 2013
+ * @author Cyril Marion, Matthieu Marcillaud, Rastapopoulos
+ *
+ * @package SPIP\Contacts\Fonctions
 **/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 
-
 /**
- * Calcul de la balise #LESORGANISATIONS
+ * Calcul de la balise `#LESORGANISATIONS`
  *
  * Affiche la liste des organisations d'un contact.
- * - Soit le champs lesauteurs existe dans la table et à ce moment là,
+ * 
+ * - Soit le champs `lesauteurs` existe dans la table et à ce moment là,
  *   on retourne son contenu
- * - Soit la balise appelle le modele lesorganisations.html en lui passant
- *   le id_contact dans son environnement
+ * - Soit la balise appelle le modele `lesorganisations.html` en lui passant
+ *   le `id_contact` dans son environnement
+ * 
+ * @balise LESORGANISATIONS
  * 
  * @param Champ $p
  *     Pile au niveau de la balise
@@ -57,9 +60,10 @@ function balise_LESORGANISATIONS_dist ($p) {
 
 
 /**
- * Calcul de la balise #ORGANISATIONS
+ * Calcul de la balise `#ORGANISATIONS`
  *
- * @deprecated Utiliser #LESORGANISATIONS
+ * @deprecated Utiliser `#LESORGANISATIONS`
+ * @balise ORGANISATIONS
  * 
  * @param Champ $p
  *     Pile au niveau de la balise
@@ -73,10 +77,10 @@ function balise_ORGANISATIONS_dist($p) {
 
 
 /**
- * Calcul du critère compteur_contacts
+ * Calcul du critère `compteur_contacts`
  * 
  * Compter les contacts liés à une organisation, dans une boucle organisations
- * pour la vue prive/liste/organisations.html
+ * pour la vue `prive/liste/organisations.html`
  *
  * @example
  *   ```
@@ -85,7 +89,9 @@ function balise_ORGANISATIONS_dist($p) {
  *   ```
  *
  * @note
- *   Fonctionnement inspiré du critère 'compteur_articles' dans SPIP
+ *   Fonctionnement inspiré du critère `compteur_articles` dans SPIP
+ * 
+ * @critere compteur_contacts
  * 
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
@@ -108,13 +114,15 @@ function critere_compteur_contacts_dist($idb, &$boucles, $crit){
 
 
 /**
- * Calcul de la balise #COMPTEUR_CONTACTS
+ * Calcul de la balise `#COMPTEUR_CONTACTS`
  * 
- * Compter les contacts publies lies a une organisation, dans une boucle organisations
- * pour la vue prive/liste/organisations.html
+ * Compter les contacts publiés liés à une organisation, dans une boucle organisations
+ * pour la vue `prive/liste/organisations.html`
  *
- * Cette balise nécessite le critère compteur_contacts.
+ * Cette balise nécessite le critère `compteur_contacts`.
  *
+ * @balise COMPTEUR_CONTACTS
+ * 
  * @param Champ $p
  *     Pile au niveau de la balise
  * @return Champ
@@ -131,14 +139,18 @@ function balise_COMPTEUR_CONTACTS_dist($p) {
 
 
 /**
- * Calcul du critère contacts_auteurs
+ * Calcul du critère `contacts_auteurs`
  * 
  * Crée une jointure correcte entre auteurs et contacts et définit quelques
  * champs spéciaux (nom_contact, prenom_contact, ...)
  *
  * @example
+ *     ```
  *     <BOUCLE_(CONTACTS){contacts_auteurs} />
  *     <BOUCLE_(AUTEURS){contacts_auteurs} />
+ *     ```
+ *
+ * @critere contacts_auteurs
  * 
  * @param string $idb
  *     Identifiant de la boucle
@@ -179,14 +191,18 @@ function critere_contacts_auteurs_dist($idb, &$boucles, $crit){
 
 
 /**
- * Calcul du critère organisations_auteurs
+ * Calcul du critère `organisations_auteurs`
  * 
  * Crée une jointure correcte entre auteurs et organisations et définit quelques
  * champs spéciaux (nom_organisation, ...)
  *
  * @example
+ *     ```
  *     <BOUCLE_(ORGANISATIONS){organisations_auteurs} />
  *     <BOUCLE_(AUTEURS){organisations_auteurs} />
+ *     ```
+ *
+ * @critere organisations_auteurs
  * 
  * @param string $idb
  *     Identifiant de la boucle
@@ -221,12 +237,14 @@ function critere_organisations_auteurs_dist($idb, &$boucles, $crit){
 
 
 /**
- * Calcul de la balise #NOM_AUTEUR
+ * Calcul de la balise `#NOM_AUTEUR`
  *
- * Cette balise s'emploie dans une boucle (CONTACTS){contacts_auteurs}
- * Elle nécessite le critère {contacts_auteurs} et retourne le champ
- * #NOM de la table auteurs liée au contact.
+ * Cette balise s'emploie dans une boucle `(CONTACTS){contacts_auteurs}`
+ * Elle nécessite le critère `contacts_auteurs` et retourne le champ
+ * `#NOM` de la table auteurs liée au contact.
  *
+ * @balise NOM_AUTEUR
+ * 
  * @param Champ $p
  *     Pile au niveau de la balise
  * @return Champ
@@ -242,17 +260,19 @@ function balise_NOM_AUTEUR_dist($p) {
 
 
 /**
- * Calcul de la balise #PRENOM_CONTACT
+ * Calcul de la balise `#PRENOM_CONTACT`
  *
- * Cette balise s'emploie dans une boucle (AUTEURS){contacts_auteurs}
- * Elle nécessite le critère {contacts_auteurs} et retourne le champ
- * #PRENOM de la table contacts liée à l'auteur.
+ * Cette balise s'emploie dans une boucle `(AUTEURS){contacts_auteurs}`
+ * Elle nécessite le critère `contacts_auteurs` et retourne le champ
+ * `#PRENOM` de la table contacts liée à l'auteur.
  *
  * @note
- *   Avec simplement le critère {contacts_auteurs}, la balise #PRENOM
+ *   Avec simplement le critère `contacts_auteurs`, la balise `#PRENOM`
  *   fonctionne aussi (pour peu que la table articles n'ait pas ce champ
  *   également).
  *
+ * @balise PRENOM_CONTACT
+ * 
  * @param Champ $p
  *     Pile au niveau de la balise
  * @return Champ
@@ -263,12 +283,14 @@ function balise_PRENOM_CONTACT_dist($p) {
 }
 
 /**
- * Calcul de la balise #NOM_CONTACT
+ * Calcul de la balise `#NOM_CONTACT`
  *
- * Cette balise s'emploie dans une boucle (AUTEURS){contacts_auteurs}
- * Elle nécessite le critère {contacts_auteurs} et retourne le champ
- * #NOM de la table contacts liée à l'auteur.
+ * Cette balise s'emploie dans une boucle `(AUTEURS){contacts_auteurs}`
+ * Elle nécessite le critère `contacts_auteurs` et retourne le champ
+ * `#NOM` de la table contacts liée à l'auteur.
  *
+ * @balise NOM_CONTACT
+ * 
  * @param Champ $p
  *     Pile au niveau de la balise
  * @return Champ
@@ -280,16 +302,18 @@ function balise_NOM_CONTACT_dist($p) {
 
 
 /**
- * Calcul de la balise #CIVILITE_CONTACT
+ * Calcul de la balise `#CIVILITE_CONTACT`
  *
- * Cette balise s'emploie dans une boucle (AUTEURS){contacts_auteurs}
- * Elle nécessite le critère {contacts_auteurs} et retourne le champ
- * #CIVILITE de la table contacts liée à l'auteur.
+ * Cette balise s'emploie dans une boucle `(AUTEURS){contacts_auteurs}`
+ * Elle nécessite le critère `contacts_auteurs` et retourne le champ
+ * `#CIVILITE` de la table contacts liée à l'auteur.
  *
  * @note
- *   Avec simplement le critère {contacts_auteurs}, la balise #CIVILITE
+ *   Avec simplement le critère `contacts_auteurs`, la balise `#CIVILITE`
  *   fonctionne aussi (pour peu que la table articles n'ait pas ce champ
  *   également).
+ * 
+ * @balise CIVILITE_CONTACT
  * 
  * @param Champ $p
  *     Pile au niveau de la balise
@@ -301,12 +325,14 @@ function balise_CIVILITE_CONTACT_dist($p) {
 }
 
 /**
- * Calcul de la balise #NOM_ORGANISATION
+ * Calcul de la balise `#NOM_ORGANISATION`
  *
- * Cette balise s'emploie dans une boucle (AUTEURS){organisations_auteurs}
- * Elle nécessite le critère {organisations_auteurs} et retourne le champ
- * #NOM de la table organisations liée à l'auteur.
- *
+ * Cette balise s'emploie dans une boucle `(AUTEURS){organisations_auteurs}`
+ * Elle nécessite le critère `organisations_auteurs` et retourne le champ
+ * `#NOM` de la table organisations liée à l'auteur.
+ * 
+ * @balise NOM_ORGANISATION
+ * 
  * @param Champ $p
  *     Pile au niveau de la balise
  * @return Champ
@@ -322,9 +348,9 @@ function balise_NOM_ORGANISATION_dist($p) {
 
 
 /**
- * Calcul de la balise IDS_ORGANISATION_BRANCHE
+ * Calcul de la balise `#IDS_ORGANISATION_BRANCHE`
  * 
- * Cette balise retourne un tableau listant toutes les id_organisation d'une branche.
+ * Cette balise retourne un tableau listant toutes les `id_organisation` d'une branche.
  * 
  * L'identifiant de la branche (id_organisation) est pris dans la boucle
  * la plus proche sinon dans l'environnement, sauf si l'on indique expressément
@@ -339,6 +365,8 @@ function balise_NOM_ORGANISATION_dist($p) {
  *   <BOUCLE_contacts(CONTACTS){branche_organisation}>
  *   ```
  *
+ * @balise IDS_ORGANISATION_BRANCHE
+ * 
  * @param Champ $p
  *     Pile au niveau de la balise
  * @return Champ
@@ -371,7 +399,7 @@ function balise_IDS_ORGANISATION_BRANCHE_dist($p) {
 /**
  * Calcul d'une branche d'organisation
  * 
- * Liste des id_organisation contenues dans une organisation donnée
+ * Liste des `id_organisation` contenues dans une organisation donnée
  *
  * @param string|int|array $id
  *   Identifiant(s) d'organisation(s) dont on veut les branches
@@ -410,11 +438,12 @@ function calcul_organisation_branche_in($id) {
 
 
 /**
- * Sélectionne dans une boucle les éléments appartenant à une branche d'une organisation
+ * Compile le critère `branche_organisation`. Il sélectionne dans une
+ * boucle les éléments appartenant à une branche d'une organisation.
  * 
  * Calcule une branche d'une organisation et conditionne la boucle avec.
- * Cherche l'identifiant de l'organisation en premier paramètre du critère {branche_organisation XX}
- * sinon dans les boucles parentes ou par jointure.
+ * Cherche l'identifiant de l'organisation en premier paramètre du critère
+ * `{branche_organisation XX}` sinon dans les boucles parentes ou par jointure.
  *
  * @example
  *   ```
@@ -422,7 +451,9 @@ function calcul_organisation_branche_in($id) {
  *   ```
  * 
  * @internal
- *     Copie quasi identique de critere_branche_dist()
+ *     Copie quasi identique de `critere_branche_dist()`
+ *
+ * @critere branche_organisation
  * 
  * @param string $idb
  *     Identifiant de la boucle

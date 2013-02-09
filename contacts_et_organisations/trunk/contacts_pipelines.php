@@ -1,15 +1,26 @@
 <?php
 
 /**
- * Plugin Contacts & Organisations pour Spip 3.0
- * Licence GPL (c) 2009 - 2012 - Ateliers CYM
- */
+ * Utilisations de pipelines
+ *
+ * @plugin Contacts & Organisations pour Spip 3.0
+ * @license GPL (c) 2009 - 2013
+ * @author Cyril Marion, Matthieu Marcillaud, Rastapopoulos
+ *
+ * @package SPIP\Contacts\Pipelines
+**/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Ajouter un fil d'ariane
- * sur les auteurs
- * définis comme contacts ou organisation
+ * Ajoute un fil d'ariane sur les auteurs définis comme contacts ou organisation
+ *
+ * @pipeline affiche_hierarchie
+ * 
+ * @param array $flux
+ *     Données du pipeline
+ * @return array
+ *     Données du pipeline
  */
 function contacts_affiche_hierarchie($flux)
 {
@@ -32,12 +43,18 @@ function contacts_affiche_hierarchie($flux)
 
 
 /**
+ * Utilisation du pipeline afficher_contenu_objet
+ * 
+ * - Insertion dans la vue des auteurs des informations relatives aux
+ *   contacts et organisations
+ * - Insertion sur les rubriques du choix des organisations
  *
- * Insertion dans la vue des auteurs
- * des informations relatives aux contacts et organisations
- *
- * De même sur la vue des rubriques.
- *
+ * @pipeline afficher_contenu_objet
+ * 
+ * @param array $flux
+ *     Données du pipeline
+ * @return array
+ *     Données du pipeline
  */
 function contacts_afficher_contenu_objet($flux)
 {
@@ -83,11 +100,19 @@ function contacts_afficher_contenu_objet($flux)
 
 
 /**
- * Affichage du formulaire de choix Contact/Organisation
- * dans la colonne de vue d'un auteur
- * et
- * Affichage du formulaire de recherche et de sélection d'Organisations
- * dans la colonne de vue d'une rubrique
+ * Utilisation du pipeline affiche gauche
+ * 
+ * - Affichage du formulaire de choix Contact/Organisation
+ *   dans la colonne de vue d'un auteur
+ * - Affichage du formulaire de recherche et de sélection d'Organisations
+ *   dans la colonne de vue d'une rubrique
+ *
+ * @pipeline affiche_gauche
+ * 
+ * @param array $flux
+ *     Données du pipeline
+ * @return array
+ *     Données du pipeline
 **/
 function contacts_affiche_gauche($flux){
 
@@ -106,7 +131,13 @@ function contacts_affiche_gauche($flux){
 
 /**
  * Ajoute une feuille de style pour la v-card
- * Peut être surchargé ensuite
+ *
+ * @pipeline insert_head_css
+ * 
+ * @param string $flux
+ *     Code HTML de chargement des CSS
+ * @return string
+ *     Code HTML de chargement des CSS
 **/
 function contacts_insert_head_css($flux){
 	$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('contacts.css').'" media="all" />';

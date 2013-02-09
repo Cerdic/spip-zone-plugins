@@ -1,12 +1,27 @@
 <?php
 
+/**
+ * Gestion de l'action `editer_organisation` et des fonctions d'insertion
+ * et modification d'organisations
+ *
+ * @plugin Contacts & Organisations pour Spip 3.0
+ * @license GPL (c) 2009 - 2013
+ * @author Cyril Marion, Matthieu Marcillaud, Rastapopoulos
+ *
+ * @package SPIP\Contacts\Actions
+**/
+
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Action de création / Modification d'une organisation
- * @param unknown_type $arg
- * @return unknown_type
+ * Action de création / modification d'une organisation
+ * 
+ * @param null|int $arg
+ *     Identifiant de l'organisation.
+ *     En absence utilise l'argument de l'action sécurisée.
+ * @return array
+ *     Liste (identifiant de l'organisation, Texte d'erreur éventuel)
  */
 function action_editer_organisation_dist($arg=null) {
 	if (is_null($arg)){
@@ -28,8 +43,13 @@ function action_editer_organisation_dist($arg=null) {
 /**
  * Crée une nouvelle organisation et retourne son ID
  *
- * @param array $champs Un tableau avec les champs par défaut lors de l'insertion
- * @return int id_organisation
+ * @pipeline_appel pre_insertion
+ * @pipeline_appel post_insertion
+ * 
+ * @param array $champs
+ *     Un tableau avec les champs par défaut lors de l'insertion
+ * @return int
+ *     Identifiant de l'organisation créée
  */
 function organisation_inserer($champs=array()) {
 
@@ -61,11 +81,17 @@ function organisation_inserer($champs=array()) {
 
 
 /**
- * Appelle la fonction de modification d'une organisation
+ * Modifie les données d'une organisation
  *
+ * Récupère les valeurs qui ont été postées d'un formulaire d'édition
+ * automatiquement.
+ * 
  * @param int $id_organisation
- * @param unknown_type $set
- * @return $err
+ *     Identifiant de l'organisation
+ * @param null|array $set
+ *     Couples de valeurs à affecter d'office
+ * @return string
+ *     Vide en cas de succès, texte d'erreur sinon.
  */
 function organisation_modifier($id_organisation, $set=null) {
 
@@ -96,11 +122,20 @@ function organisation_modifier($id_organisation, $set=null) {
 }
 
 /**
- * Modifie des éléments à part que sont le parent, la date, le statut
+ * Modifie des éléments spécifiques (le parent, la date, le statut)
+ * d'une organisation
  *
+ * @pipeline_appel pre_edition
+ * @pipeline_appel post_edition
+ * 
  * @param int $id_organisation
+ *     Identifiant de l'organisation
  * @param array $c
- * @return
+ *     Couples de valeurs à affecter
+ * @param bool $calcul_rub
+ *     ? Inutilisé.
+ * @return string|null
+ *     Null si aucun champ n'est modifié, chaîne vide en cas de succès.
  */
 function organisation_instituer($id_organisation, $c, $calcul_rub=true){
 	include_spip('inc/autoriser');

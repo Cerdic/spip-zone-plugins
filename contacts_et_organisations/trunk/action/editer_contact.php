@@ -1,12 +1,27 @@
 <?php
 
+/**
+ * Gestion de l'action `editer_contact` et des fonctions d'insertion
+ * et modification de contacts
+ *
+ * @plugin Contacts & Organisations pour Spip 3.0
+ * @license GPL (c) 2009 - 2013
+ * @author Cyril Marion, Matthieu Marcillaud, Rastapopoulos
+ *
+ * @package SPIP\Contacts\Actions
+**/
+
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Action de création / Modification d'un contact
- * @param unknown_type $arg
- * @return unknown_type
+ * Action de création / modification d'un contact
+ * 
+ * @param null|int $arg
+ *     Identifiant du contact.
+ *     En absence utilise l'argument de l'action sécurisée.
+ * @return array
+ *     Liste (identifiant du contact, Texte d'erreur éventuel)
  */
 function action_editer_contact_dist($arg=null) {
 	if (is_null($arg)){
@@ -35,8 +50,13 @@ function action_editer_contact_dist($arg=null) {
 /**
  * Crée un nouveau contact et retourne son ID
  *
- * @param array $champs Un tableau avec les champs par défaut lors de l'insertion
- * @return int id_contact
+ * @pipeline_appel pre_insertion
+ * @pipeline_appel post_insertion
+ * 
+ * @param array $champs
+ *     Un tableau avec les champs par défaut lors de l'insertion
+ * @return int
+ *     Identifiant du contact créé
  */
 function contact_inserer($champs=array()) {
 
@@ -68,11 +88,17 @@ function contact_inserer($champs=array()) {
 
 
 /**
- * Appelle la fonction de modification d'un contact
+ * Modifie les données d'un contact
  *
+ * Récupère les valeurs qui ont été postées d'un formulaire d'édition
+ * automatiquement.
+ * 
  * @param int $id_contact
- * @param unknown_type $set
- * @return $err
+ *     Identifiant du contact
+ * @param null|array $set
+ *     Couples de valeurs à affecter d'office
+ * @return string
+ *     Vide en cas de succès, texte d'erreur sinon.
  */
 function contact_modifier($id_contact, $set=null) {
 

@@ -1,11 +1,33 @@
 <?php
+
 /**
- * Plugin Contacts & Organisations 
- * Licence GPL (c) 2010-2011 Matthieu Marcillaud, Cyril Marion
+ * Gestion de l'action `creer_auteur_lie`
+ * 
+ * Crée et lie un auteur à un contact ou une organisation
+ *
+ * @plugin Contacts & Organisations pour Spip 3.0
+ * @license GPL (c) 2009 - 2013
+ * @author Cyril Marion, Matthieu Marcillaud, Rastapopoulos
+ *
+ * @package SPIP\Contacts\Actions
 **/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Action qui, pour une organisation ou un contact, crée un auteur
+ * et le lie à ce contact ou organisation.
+ *
+ * Le couple `type/id` (comme `organisation/8`) est donné en paramètre de
+ * cette fonction ou en argument de l'action sécurisée et indique sur
+ * qui est lié l'auteur créé.
+ *
+ * 
+ * @param null|string
+ *     Couple `type/id` où `type` est le type d'objet (organisation ou contact)
+ *     et `id` son identifiant. En absence utilise l'argument de l'action sécurisée.
+ * @return void
+**/
 function action_creer_auteur_lie_dist($arg=null) {
 
 	if (is_null($arg)){

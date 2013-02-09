@@ -1,12 +1,29 @@
 <?php
 /**
- * Plugin Comptes & Contacts pour Spip 2.0
- * Licence GPL (c) 2009 - 2010 - Ateliers CYM
- */
+ * Fichier gérant l'installation et désinstallation du plugin
+ *
+ * @plugin Contacts & Organisations pour Spip 3.0
+ * @license GPL (c) 2009 - 2013
+ * @author Cyril Marion, Matthieu Marcillaud, Rastapopoulos
+ *
+ * @package SPIP\Contacts\Installation
+**/
+
+// sécurité
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/meta');
 include_spip('base/create');
 
+/**
+ * Installation/maj des tables contacts, organisations et leurs liaisons
+ *
+ * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @param string $version_cible
+ *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
+ * @return void
+ */
 function contacts_upgrade($nom_meta_base_version, $version_cible){
 	$maj = array();
 	
@@ -153,7 +170,13 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 }
 
 
-
+/**
+ * Désinstallation/suppression des tables contacts, organisations et leurs liaisons
+ *
+ * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @return void
+ */
 function contacts_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_organisations");
 	sql_drop_table("spip_contacts");
@@ -172,7 +195,13 @@ function contacts_vider_tables($nom_meta_base_version) {
 }
 
 
-
+/**
+ * Mise à jour 1.6.0 de la structure de base de données du plugin
+ *
+ * L'inverse de la defunte 1.5.0 : remet la table spip_organisations_contacts
+ * pour les liens entre contacts et organisations. Utiliser
+ * spip_organisations_liens pour ça créait des bugs et des confusions.
+**/
 function contacts_maj_1_6_0(){
 	// remettre spip_organisations_contacts si besoin
 	creer_base();
@@ -202,6 +231,11 @@ function contacts_maj_1_6_0(){
 }
 
 
+/**
+ * Mise à jour 1.7.1 de la structure de base de données du plugin
+ *
+ * Remet la colonne id_auteur sur les tables contacts et organisations.
+**/
 function contacts_migrer_liens_auteurs() {
 	// remettre id_auteur sur spip_contacts et spip_organisations
 	include_spip('base/create');
