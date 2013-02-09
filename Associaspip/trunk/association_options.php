@@ -761,8 +761,9 @@ function association_formater_idnom($id, $nom='', $lien='', $html_span='span') {
 			if ( $nom )
 				$res = ($html_span?"<$html_span class='n'>":'') . $nom . ($html_span?"</$html_span>":'');
 			elseif ( $lien=='membre')
-				//association_formater_idnom($id, array(), $lien, $html_span);
-				$res = "membre$id";
+				$res = association_formater_idnom($id, array(), '', $html_span); // on doit pouvoir faire mieux je pense
+			else
+				$res = _T('asso:objet_num', array('objet'=>_T("perso:$lien"), 'num'=>$id) );
 		}
 	} elseif ( $nom ) { // utiliser nom...
 		$res = ($html_span?"<$html_span class='n'>":'') .$nom. ($html_span?"</$html_span>":'');
