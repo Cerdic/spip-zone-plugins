@@ -13,6 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return string
  */
 function player_call_js() {
+	include_spip('inc/filtres');
 	$flux = "\n"
 		. '<script type="text/javascript" src="'.timestamp(find_in_path('javascript/soundmanager/soundmanager2.js')).'"></script>'
 		. '<script type="text/javascript" src="'.timestamp(find_in_path('javascript/player_enclosure.js')).'"></script>'."\n"
