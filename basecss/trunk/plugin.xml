@@ -1,4 +1,4 @@
-<plugin spip="[3.0.0-dev;]" >
+<plugin>
 	<nom>Base CSS</nom>
 	<prefix>basecss</prefix>
 	<icon>prive/img/basecss.png</icon>
@@ -13,6 +13,7 @@
 	<lien>http://www.spip-contrib.net/?rubrique214</lien>
 	<auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
 	
+	<necessite id="SPIP" version="[3.0.0;]"/>
 	<bouton id='basecss' parent='bando_squelette'>
 		<icone>prive/img/basecss-16.png</icone>
 		<titre>Base&nbsp;CSS</titre>
