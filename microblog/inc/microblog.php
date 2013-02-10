@@ -181,7 +181,7 @@ function microblog_affiche_milieu($flux){
 		$deplie = false;
 		$ids = 'formulaire_editer_microblog-article-' . $id_article;
 		include_spip("inc/presentation"); // bouton_block_depliable et al non dispo en SPIP 3 sinon
-		$bouton = bouton_block_depliable(strtoupper(_T('microblog:titre_microblog')), $deplie, $ids);
+		$bouton = bouton_block_depliable(_T('microblog:titre_microblog'), $deplie, $ids);
 		$out = debut_cadre('e', find_in_path('microblog-24.gif','themes/spip/images/'),'',$bouton, '', '', true);
 		$out .= recuperer_fond('prive/editer/microblog', array_merge($_GET, array('objet'=>'article','id_objet'=>$id_article)));
 		$out .= fin_cadre();
