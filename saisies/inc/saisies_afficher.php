@@ -330,6 +330,9 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 								case 'oui_non':
 									$condition = preg_replace('#@'.preg_quote($nom).'@#U', '$(form).find("[name=\''.$nom.'\']:checked").val()', $condition);
 									break;
+								case 'case':
+									$condition = preg_replace('#@'.preg_quote($nom).'@#U', '($(form).find("[name=\''.$nom.'\']").is(":checked") ? $(form).find("[name=\''.$nom.'\']").val() : "")', $condition);
+									break;
 								default:
 									$condition = preg_replace('#@'.preg_quote($nom).'@#U', '$(form).find("[name=\''.$nom.'\']").val()', $condition);
 							}
