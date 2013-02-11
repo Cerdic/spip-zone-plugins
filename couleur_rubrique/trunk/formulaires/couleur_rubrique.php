@@ -13,7 +13,7 @@ function formulaires_couleur_rubrique_charger_dist($id_rubrique){
 
 	// chargement des valeurs du formulaire
 	$valeurs = array(
-		'pb_couleur_rubrique' => couleur_rubrique($id_rubrique),
+		'pb_couleur_rubrique' => "#".couleur_rubrique($id_rubrique),
 		'supprimer' => '',
 		'_site' => $id_rubrique?'':' ',
 		"editable" => $editable,
@@ -42,7 +42,7 @@ function formulaires_couleur_rubrique_traiter_dist($id_rubrique){
 		ecrire_meta("pb_couleur_rubrique$id_rubrique", $couleur);
 	}
 
-	return array("message_ok" => "Couleur modifiée","editable"=>true);
+	return array("message_ok" => _T('pb_couleur_rubrique:info_message_ok'),"editable"=>true);
 }
 
 ?>

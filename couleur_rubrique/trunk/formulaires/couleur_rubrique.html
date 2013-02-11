@@ -1,6 +1,6 @@
 <div class="formulaire_spip formulaire_config formulaire_#FORM">
 	<h3 class="titrem">[(#CHEMIN{img_pack/pb_couleur_rubrique-24.png}|balise_img{'',cadre-icone})][(#ENV{_site}|?{Couleur du site,Couleur de la rubrique})]</h3>
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok none">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable}|oui)
 	<form method="post" action="#ENV{action}">
@@ -10,8 +10,8 @@
 				<li class="editer_couleur_rubrique_palette[(#ENV**{erreurs}|table_valeur{pb_couleur_rubrique}|oui)erreur]">
 					<label for="pb_couleur_rubrique"><:pb_couleur_rubrique:choisir_une_nouvelle_couleur:></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{pb_couleur_rubrique})</span>
-					]<input class='palette' type='color' id='pb_couleur_rubrique' name='pb_couleur_rubrique' value="#ENV{pb_couleur_rubrique,''}" style="width:70px;text-transform:uppercase;" />
-					<div class="couleur" style="width:70px;height:22px;margin:0 0 2px 2px;background:[#(#ENV{pb_couleur_rubrique,''})];float: right"></div>
+					]<div class="couleur" style="width:70px;margin:0 0 2px 2px;text-align:center;text-transform:uppercase;background:[#(#ENV{pb_couleur_rubrique,''}|ltrim{#})];color:[#(#ENV{pb_couleur_rubrique,''}|couleur_inverser|couleur_extreme{0.45})];border:1px solid;float: right"
+					>#ENV{pb_couleur_rubrique,''}</div><input class='palette' type='color' id='pb_couleur_rubrique' name='pb_couleur_rubrique' value="#ENV{pb_couleur_rubrique,''}" style="width:70px;text-transform:uppercase;" />
 				</li>
 			</ul>
 			<div class="boutons">
@@ -27,8 +27,7 @@
 		[(#ENV{pb_couleur_rubrique,''}|oui)
 		<p class="clearfix">
 			<:pb_couleur_rubrique:la_couleur_actuelle:><br />
-			<strong class="codehex" style="text-transform:uppercase;">[#(#ENV{pb_couleur_rubrique,''})]</strong>
-			<span class="couleur" style="display:block;width:70px;height:22px;margin:0 0 2px 2px;background:[#(#ENV{pb_couleur_rubrique,''})];float:right;"></span>
+			<span class="couleur codehex" style="text-transform:uppercase;display:block;padding:2px;text-align:center;background:[#(#ENV{pb_couleur_rubrique,''}|ltrim{#})];color:[#(#ENV{pb_couleur_rubrique,''}|couleur_inverser|couleur_extreme{0.45})];border:1px solid;">[#(#ENV{pb_couleur_rubrique,''}|ltrim{#})]</span>
 		</p>
 		]
 	]
