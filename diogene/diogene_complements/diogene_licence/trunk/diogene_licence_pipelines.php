@@ -25,7 +25,7 @@ function diogene_licence_diogene_ajouter_saisies($flux){
  */
 function diogene_licence_diogene_verifier($flux){
 	$id_article = _request('id_article');
-	$erreurs = &$flux['args']['erreurs'];
+	$erreurs = $flux['args']['erreurs'];
 
 	if(!$erreurs['id_licence'] && ($licence = _request('id_licence'))){
 		if((!empty($licence)) && !is_numeric($licence)){
