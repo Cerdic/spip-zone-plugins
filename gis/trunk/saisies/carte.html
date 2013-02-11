@@ -241,7 +241,7 @@ var geocoder;]
 #ENV*{inserer_fin}
 </li>
 [(#GET{geocoder}|oui)
-<li class="rechercher_adresse">
+<li class="rechercher_adresse editer_[(#ENV{nom})]">
 	<label for="champ_#ENV{nom}_geocoder"><:gis:label_rechercher_address:></label>
 	<input type="text" class="text" name="champ_#ENV{nom}_geocoder" id="champ_#ENV{nom}_geocoder" value="" />
 	<a id="#ENV{nom}_rechercher_geocodage"><:info_rechercher:></a>
