@@ -41,6 +41,7 @@ function formulaires_couleur_rubrique_traiter_dist($id_rubrique){
 		// enregistrer/supprimer les valeurs
 		ecrire_meta("pb_couleur_rubrique$id_rubrique", $couleur);
 	}
+	set_request('pb_couleur_rubrique'); // repasser toujours par la lecture en base
 
 	return array("message_ok" => _T('pb_couleur_rubrique:info_message_ok'),"editable"=>true);
 }
