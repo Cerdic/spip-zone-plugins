@@ -356,6 +356,7 @@ function diogene_formulaire_traiter($flux){
 	if(!test_espace_prive()
 		&& (substr($flux['args']['form'],0,7) == 'editer_')
 		&& ($objet = substr($flux['args']['form'],7))
+		&& $objet != 'diogene'
 		&& ($id_diogene = intval(_request('id_diogene'))) 
 		&& ($id_diogene == sql_getfetsel('id_diogene','spip_diogenes','id_diogene='.intval($id_diogene)))){
 		
