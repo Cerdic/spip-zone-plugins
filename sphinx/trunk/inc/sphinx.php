@@ -171,6 +171,10 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 	# lancer la query dans sphinx
 	$res = $cl->Query ( $query, $sources );
 
+	# loger une eventuelle erreur
+	if (strlen($cl->_error))
+		spip_log($cl->_error, 'sphinx');
+
 	# si ca ne donne rien au premier tour, on essaiera en relax
 	# sauf si la query est deja booleenne/complexe (l'utilisateur sait ce qu'il fait)
 	if (!isset($res['matches'])
