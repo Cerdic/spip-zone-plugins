@@ -343,7 +343,7 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 							$sel = "li.$class_li";
 						}
 						$code .= 'if ('.$condition.') {$(form).find("'.$sel.'").show(400);} ';
-						$code .= 'else {$(form).find("'.$sel.'").hide(400);} ';
+						$code .= 'else {$(form).find("'.$sel.'").hide(400).css("display", "none");} ';
 					}
 				}
 		$code .= '};';
