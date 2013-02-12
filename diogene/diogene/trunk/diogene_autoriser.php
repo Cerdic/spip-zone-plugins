@@ -159,10 +159,11 @@ function autoriser_rubrique_voir($faire, $type, $id, $qui, $opt) {
  */
 function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {
 	$id_secteur = sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.intval($id));
-	if($id == 0){
+	if($id == 0)
 		$id_secteur=0;
-	}
-	$statut = sql_getfetsel('statut_auteur_publier','spip_diogenes','id_secteur='.intval($id_secteur));
+
+	$statut_diogene = sql_getfetsel('statut_auteur_publier','spip_diogenes','id_secteur='.intval($id_secteur));
+	$statut = $statut_diogene ? $statut_diogene : '0minirezo';
 	return ($qui['statut'] AND $id
 		AND ($qui['statut'] <= $statut)) OR autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt);
 }
