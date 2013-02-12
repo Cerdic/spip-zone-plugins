@@ -369,6 +369,7 @@ function maj_auto_svp_query($dir, &$infos) {
 function maj_auto_svp_maj_plugin($ids_paquet=array()) {
 	if(!count($ids_paquet)) return;
 	$actions = $depots = $messages = $retour = $requests = $cs_messages = array();
+	$messages['decideur_erreurs'] = $cs_messages['fail'] = array();
 	// donnees du formulaire recues sous la forme id_paquet:id_depot:plugin:archive
 	foreach ($ids_paquet as $i)	{
 		$p = explode(':', $i, 4);
