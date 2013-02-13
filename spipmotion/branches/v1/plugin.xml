@@ -17,7 +17,7 @@
 	</description>
 	<lien>http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/spipmotion/</lien>
 	
-	<version>0.9.10</version>
+	<version>0.9.11</version>
 	<version_base>0.8.2</version_base>
 	<etat>test</etat>
 	<prefix>spipmotion</prefix>
