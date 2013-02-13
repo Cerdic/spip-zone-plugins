@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   // A
   'article_license' => '<br />Licence de l\'article:',
   'action_syndic' => 'syndiquer manuellement',
-  'action_delete' => 'effacer',
   'aucun_article' => 'aucun article &agrave; syndiquer actuellement',
   
   // B
@@ -18,6 +17,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   // C
   'copy_spip2spip' => 'Spip2Spip: Copie SPIP &agrave; SPIP',
   'config_spip2spip' => 'Configurer',
+  'cfg_import_statut'=> 'Statut des articles import&eacute;s',  
+  'cfg_email_alerte'=> 'Pr&eacute;venir par email à chaque nouvelle syndication ?',
+  'cfg_email_suivi' => 'Si oui, sur quel email ?',
+  'cfg_citer_source' => 'Citer l\'URL de l\'article d\'origine dans l\'article import&eacute;',
+  'cfg_export' => 'Export des articles',
+  'cfg_export_motcle' => 'Export des mots-clés',
+  'cfg_export_mot_article' => 'Exporter les mots-clés des articles',
+  'cfg_export_mot_evnt' => 'Exporter les mots-clés des événements',
+  'cfg_export_mot_groupe' => 'Choisissez les groupes dont vous voulez exporter les mots-clés',
+  'cfg_import' => 'Import des articles',
+  'cfg_import_motcle' => 'Import des mots-clés',
+  'cfg_import_mot_article' => 'Importer les mots-clés des articles',
+  'cfg_import_mot_evnt' => 'Importer les mots-clés des événements',
+  'cfg_import_mot_groupe_creer' => 'Si oui, où placer les mots-clés importés ?',
+  'cfg_import_mot_groupe_creer_oui' => 'Récréer les groupes des mots-clés d\'origine',
+  'cfg_import_mot_groupe_creer_non' => 'Placer les mots-clés dans le groupe',
+  'cfg_titre_parametrages' => 'Options d\'import et d\'export des articles d\'un réseau Spip2spip',
+  
+  // E
+  'erreur_obligatoire' => 'Champ obligatoire',
+  'erreur_flux_inconnu' => 'Impossible de charger ce flux',
   
   // F
   'form_s2s_1' => 'Titre du site',
@@ -30,6 +50,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   - attribuez les mots cl&eacute;s de ce groupe aux <strong>rubriques</strong> dans lequelles vous voulez importer les articles spip2spip li&eacute;s &agrave; une th&eacute;matique donn&eacute;e.',
   
   // I
+  'icone_creer_spip2spip' => 'Ajouter un site spip2spip',
+	'icone_modifier_spip2spip' => 'Modifier ce site spip2spip',
   'intro_spip2spip' => '<strong>SPIP 2 SPIP</strong><br /><p>Permet de recopier automatiquement des articles d\'un SPIP &agrave; l\'autre.</p>',
   'install_spip2spip' => 'Installation des tables de spip2spip',
   'install_spip2spip_1' => 'Cr&eacute;ation de la table SQL',
@@ -46,9 +68,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'event_ok' => 'Ajout d\'un &eacute;v&eacute;nement ',
   'imported_view' => 'Consulter l\'article import&eacute;',
   'installed' => 'spip2spip est install&eacute;. cette page ne sert plus &agrave; rien</p>',
+  'info_aucun_spip2spip' => 'Aucun site actuellement enregistré',
+  'icone_creer_spip2spipicone_creer_spip2spip' => 'Ajouter un nouveau site Spip2spip',
   
   // L
-  'last_syndic' => 'Derni&egrave;re syndication',
+  'label_site_titre' => 'Nom du site',
+  'label_site_rss' => 'Adresse du Flux Spip2spip',
+  'label_maj' => 'Dernière synchronisation',
+  
+  // M
+  'maj' => 'Derni&egrave;re syndication',
   
   // N
   'no_target' => 'aucune rubrique li&eacute;e &agrave; ce mot cl&eacute;',
@@ -57,6 +86,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   // O
   'origin_url' => 'L\'adresse originale de cet article est',
   
+  // R
+  'retour_spip2spip' => 'Retour',
+  
   // S
   'site_manage' => 'Gestion des sites &agrave; synchroniser',
   'site_available' => 'Sites inscrits',
@@ -64,6 +96,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   
   // T
   'titre' => 'Spip2Spip',
+  'titre_spip2spips' => 'Sites Spip2Spip',
+  'titre_page_configurer_spip2spip' => 'Spip2Spip',
   
 );
 

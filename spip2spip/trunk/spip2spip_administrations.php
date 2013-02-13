@@ -23,6 +23,7 @@ function spip2spip_upgrade($nom_meta_base_version, $version_cible) {
   // pour la migration venant de SPIP 2 : renommer champs id et le nom de la table
   $maj['1.1'] = array( 		
     array('sql_alter',"TABLE spip_spip2spip CHANGE `id` `id_spip2spip` BIGINT( 21 ) NOT NULL AUTO_INCREMENT"),
+    array('sql_alter',"TABLE spip_spip2spip CHANGE `last_syndic` `maj` TIMESTAMP"),
     array('sql_alter',"TABLE spip_spip2spip RENAME spip_spip2spips"),        
 	); 
  

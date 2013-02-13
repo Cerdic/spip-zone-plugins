@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function spip2spip_declarer_tables_interfaces($interfaces) {
 
-	$interfaces['table_des_tables']['spip2spips'] = 'spip2spip';
+	$interfaces['table_des_tables']['spip2spips'] = 'spip2spips';
 
 	return $interfaces;
 }
@@ -28,15 +28,15 @@ function spip2spip_declarer_tables_objets_sql($tables) {
 		'principale' => "oui",
 		'field'=> array(
 			"id_spip2spip"       => "bigint(21) NOT NULL",        
-			"site_titre"         => "text NOT NULL DEFAULT ''",
+			"site_titre"         => "varchar(255) NOT NULL DEFAULT ''",
 			"site_rss"           => "varchar(255) NOT NULL DEFAULT ''",
-			"last_syndic"        => "TIMESTAMP"
+			"maj"                => "TIMESTAMP"
 		),
 		'key' => array(
 			"PRIMARY KEY"        => "id_spip2spip"
 		),
-		 #'titre' => "titre AS titre, '' AS lang",
-		 #'date' => "",
+		 'titre' => "site_titre AS titre, '' AS lang",
+		// 'date' => "",
 		'champs_editables'  => array('site_titre', 'site_rss'),
 		'champs_versionnes' => array(),
 		'rechercher_champs' => array(),
