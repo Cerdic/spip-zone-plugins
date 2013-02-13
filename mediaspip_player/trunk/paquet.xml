@@ -1,8 +1,8 @@
 <paquet
 	prefix="mediaspip_player"
 	categorie="multimedia"
-	version="1.4.0"
-	etat="dev"
+	version="1.4.1"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/html5_player_logo.png"
 	schema="0.1"
@@ -12,11 +12,10 @@
 >	
 
 	<nom>Lecteur de m&#233;dias de MediaSPIP</nom>
-	<!-- Lecteur multimédia HTML5 pour MediaSPIP -->
 
 	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
 
-	<copyright>2010-2012</copyright>
+	<copyright>2010-2013</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 

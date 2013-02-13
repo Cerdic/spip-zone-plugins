@@ -8,7 +8,7 @@
 	-* autoplay string "tout sauf non ou false"	: Le son se lira dès qu'elle le pourra si la valeur est autre que non ou false
 	-* autobuffer|preload string non|auto|metadata : La méthode de preload : auto chargera l'ensemble du son, metadatas s'arrêtera aux metadatas, non ne chargera rien
 	-* loop string "tout sauf non ou false" : Le son se lira en boucle
-	-* largeur int : La largeur par défaut (défaut 350)
+	-* largeur int|% : La largeur par défaut (défaut 350), si valeur en %, % doit être indiqué (ex: 100%), sinon seul l'entier pour les px
 	-* hauteur int : La hauteur par défaut (défaut 40)
 	-* align string left|right|center : L'alignement par défaut
 	-* cookie_volume string oui : garde le volume dans un cookie pour tous les lecteurs
@@ -25,6 +25,7 @@
 [(#GET{largeur}|=={0}|oui)#SET{largeur,350}]
 [(#ENV{largeur}
 	|et{#ENV{hauteur}|=={''}}
+	|et{#ENV{largeur}|match{%}|non}
 	|et{#HAUTEUR|>{0}}
 	|et{#LARGEUR|>{0}}
 	|et{#LARGEUR|>{#ENV{largeur}}}|oui)
@@ -32,6 +33,7 @@
 	#SET{hauteur,#HAUTEUR|div{#GET{ratio}}}
 ][(#ENV{hauteur}
 	|et{#ENV{largeur}|=={''}}
+	|et{#ENV{hauteur}|match{%}|non}
 	|et{#HAUTEUR|!={0}}
 	|et{#LARGEUR|sinon{350}}
 	|et{[(#HAUTEUR|sinon{40}|>{#ENV{hauteur}})]}|oui)
@@ -39,7 +41,15 @@
 	#SET{largeur,#LARGEUR|sinon{350}|div{#GET{ratio}}}
 ]
 
-[(#SET{logo,[(#ENV{logo,#LOGO_DOCUMENT{vignette}|extraire_attribut{src}}|image_passe_partout{#GET{largeur},#GET{hauteur}}|image_recadre{#GET{largeur},#GET{hauteur}}|inserer_attribut{class,''}|inserer_attribut{alt,<:mediaspip_player:alt_cover_fichier|attribut_html:>})]})]
+[(#GET{largeur}|match{%}|non)
+[(#LOGO_DOCUMENT{vignette}|extraire_attribut{width}|>{#GET{largeur}}|oui)
+	[(#SET{logo,[(#ENV{logo,#LOGO_DOCUMENT{vignette}|extraire_attribut{src}}|image_passe_partout{#GET{largeur},#GET{hauteur}}|image_recadre{#GET{largeur},#GET{hauteur}})]})]]
+[(#LOGO_DOCUMENT{vignette}|extraire_attribut{width}|>{#GET{largeur}}|non)
+	[(#SET{logo,[(#ENV{logo,[(#LOGO_DOCUMENT{vignette}|extraire_attribut{src})]}|balise_img)]})]]
+]
+[(#GET{largeur}|match{%}|oui)
+	[(#SET{logo,[(#ENV{logo,[(#LOGO_DOCUMENT{vignette}|extraire_attribut{src})]}|balise_img|inserer_attribut{style,width:[(#GET{largeur});height:auto;]})]})]
+]
 
 [(#GET{hauteur}|=={0}|oui)
 	#SET{hauteur,#GET{logo}|extraire_attribut{height}}
@@ -66,7 +76,8 @@
 		controls][(#ENV{autoplay,non}|in_array{#ARRAY{0,false,1,non}}|non)
 		autoplay="autoplay"][(#ENV{autobuffer,#ENV{preload,metadata}}|in_array{#ARRAY{0,false,1,non}}|non)[
 		(#ENV{autobuffer,#ENV{preload,metadata}}|in_array{#ARRAY{0,auto,1,metadata}}|?{[preload="(#ENV{autobuffer,#ENV{preload,metadata}})"],preload="metadata"})]][(#ENV{loop,non}|in_array{#ARRAY{0,false,1,non}}|non)
-		loop]
+		loop][
+		width="(#GET{largeur}|match{%}|?{'',#GET{largeur}})"]
 		style="[width:(#GET{largeur}|match{%}|?{#GET{largeur},[(#GET{largeur})px]});][height:(#GET{hauteur})px]">
 			<BOUCLE_ssdoc_mp3(DOCUMENTS){mode=conversion}{objet=document}{id_objet=#ENV{id_document,#ENV{id}}}{statut==.*}{extension IN mp3}{tout}>
 			<source type="#MIME_TYPE" src="[(#FICHIER|timestamp|url_absolue)]" />
@@ -91,8 +102,8 @@
 		if(jQuery('#audio_[(#GET{id_document_voir})]').parent('.media_wrapper').size() == 0){
 			jQuery('#audio_[(#GET{id_document_voir})]').ms_player_init({
 				flowurl:'[(#CHEMIN{flash/flowplayer.swf}|url_absolue)]',
-				flasherror:erreur_flash,[(#ENV{largeur}|oui)
-				minwidth: #ENV{largeur},][(#ENV{cookie_volume,#CONFIG{mediaspip_player/cookie_volume,non}}|=={oui}|oui)
+				flasherror:erreur_flash,[
+				(#ENV{min_width}|oui)[minwidth : '(#ENV{min_width}|match{%}|?{null,#ENV{min_width}})',]][(#ENV{cookie_volume,#CONFIG{mediaspip_player/cookie_volume,non}}|=={oui}|oui)
 				cookie_volume:true,][(#ENV{autoplay,#ENV{autostart,non}}|in_array{#ARRAY{0,false,1,non}}|non)
 				autoplay:true,][(#ENV{volume}|is_numeric|oui)
 				volume:#ENV{volume},][(#ENV{volume_bloque}|=={oui}|oui)
