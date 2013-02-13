@@ -1,0 +1,25 @@
+
+[(#REM)
+	Recherche de la zone à utiliser pour la restriction :
+	- une passée explicitement en paramètre du modèle
+	- celle de la config
+	- sinon la première trouvée dans la base
+]
+
+[(#REM) On cherche la première zone venue ]
+<BOUCLE_zone(ZONES){0,1}>
+#SET{id_premiere_zone,#ID_ZONE}
+</BOUCLE_zone>
+
+#SET{id_zone, #ENV{id_zone,#CONFIG{accesrestreintvideos/id_zone_defaut, #GET{id_premiere_zone}}}}
+
+[(#REM) On n'affiche que si le visiteur est connecté et fait partie de la zone choisie ]
+<BOUCLE_autorisation(CONDITION){si #SESSION{id_auteur}|et{#GET{id_zone}|accesrestreint_acces_zone}}>
+	[(#REM) On fait suivre les mêmes paramètres, URL, tailles, etc ]
+	#INCLURE{fond=modeles/oembed,env}
+</BOUCLE_autorisation>
+	<div class="video_restreinte">
+	<h3 class="h3 h3-like"><:accesrestreintvideos:texte_restreint_titre:></h3>
+	[(#CONFIG{accesrestreintvideos/texte_restreint}|propre|sinon{<:accesrestreintvideos:texte_restreint:>})]
+	</div>
+<//B_autorisation>
