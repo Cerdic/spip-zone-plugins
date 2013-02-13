@@ -103,7 +103,8 @@
 							[(#SAISIE{case, reglement,
 								label=<:inscription3:label_reglement:>,
 								label_case=<:inscription3:label_reglement_explication:>})]
-							<BOUCLE_page_reglement(ARTICLES){si #PLUGIN{pages}|oui}{si #ENV{reglement}|=={on}}{page=reglement}{!par date}{0,1}>
+							<BOUCLE_si_page(CONDITION){si #PLUGIN{pages}|oui}>
+							<BOUCLE_page_reglement(ARTICLES){si #ENV{reglement}|=={on}}{page=reglement}{!par date}{0,1}>
 							<li>
 								<p class="explication">
 									<:inscription3:explication_reglement_article{titre=#TITRE,url=#URL_ARTICLE}:>
@@ -117,6 +118,14 @@
 								recursif=oui,
 								label=<:inscription3:label_reglement_article:>})]
 							<//B_page_reglement>
+							</BOUCLE_si_page>
+							</B_si_page>
+							[(#SAISIE{selecteur_article,
+								reglement_article,
+								option_intro=<:inscription3:option_choisissez:>,
+								recursif=oui,
+								label=<:inscription3:label_reglement_article:>})]
+							<//B_si_page>
 						</ul>
 					</fieldset>
 				</li>
