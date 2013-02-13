@@ -45,14 +45,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'form_s2s_3' => 'Ajouter ce site',
   
   // H
-  'how_to' => 'Pensez &agrave; bien attribuer les mots-cl&eacute;s du groupe - spip2spip - [<a href=\'?exec=mots_tous\'>Voir le groupe</a>]<br /><br />
+  'how_to' => 'Pensez &agrave; bien attribuer les mots-cl&eacute;s du groupe - spip2spip - [<a href=\'?exec=mots\'>Voir le groupe</a>]<br /><br />
   - attribuez les mots cl&eacute;s de ce groupe aux <strong>articles</strong> dont vous voulez envoyer le contenu vers les autres spip2spip<br /><br />
   - attribuez les mots cl&eacute;s de ce groupe aux <strong>rubriques</strong> dans lequelles vous voulez importer les articles spip2spip li&eacute;s &agrave; une th&eacute;matique donn&eacute;e.',
   
   // I
   'icone_creer_spip2spip' => 'Ajouter un site spip2spip',
 	'icone_modifier_spip2spip' => 'Modifier ce site spip2spip',
-  'intro_spip2spip' => '<strong>SPIP 2 SPIP</strong><br /><p>Permet de recopier automatiquement des articles d\'un SPIP &agrave; l\'autre.</p>',
+  'intro_spip2spip' => 'Permet de recopier automatiquement des articles d\'un SPIP &agrave; l\'autre.',
   'install_spip2spip' => 'Installation des tables de spip2spip',
   'install_spip2spip_1' => 'Cr&eacute;ation de la table SQL',
   'install_spip2spip_2' => 'Ajout des flux backends',
