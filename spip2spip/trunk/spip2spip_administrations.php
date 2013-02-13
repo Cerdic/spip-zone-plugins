@@ -18,6 +18,7 @@ function spip2spip_upgrade($nom_meta_base_version, $version_cible) {
 	   array('maj_tables', array('spip_spip2spips')),
      array('sql_alter','TABLE spip_articles ADD s2s_url VARCHAR(255) DEFAULT \'\' NOT NULL'),
 	   array('sql_alter','TABLE spip_articles ADD s2s_url_trad VARCHAR(255) DEFAULT \'\' NOT NULL'),
+     array('spip2spip_create'),     
 	);
   
   // pour la migration venant de SPIP 2 : renommer champs id et le nom de la table
@@ -31,6 +32,21 @@ function spip2spip_upgrade($nom_meta_base_version, $version_cible) {
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
+
+// creation des mots-clés de travail "- spip2spip - "
+function  spip2spip_create() { 
+  	sql_insertq("spip_groupes_mots", array(
+                                         'titre' => '- spip2spip -' , 
+                                         'descriptif' => _T('spip2spip:install_spip2spip_4'),
+                                         'texte' =>  _T('spip2spip:install_spip2spip_5'),
+                                         'unseul' => 'non',
+                                         'obligatoire' => 'non',
+                                         'tables_liees' => 'articles,rubriques',
+                                         'minirezo' => 'oui',
+                                         'comite' => 'oui' ,
+                                         'forum' => 'non' ,
+                                         'maj' => 'NOW()'));
+}
 
 /**
  * Fonction de désinstallation du plugin.
