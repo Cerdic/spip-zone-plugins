@@ -1,4 +1,4 @@
-
+#CACHE{0}
 [(#REM)
 	Recherche de la zone à utiliser pour la restriction :
 	- une passée explicitement en paramètre du modèle
@@ -13,8 +13,8 @@
 
 #SET{id_zone, #ENV{id_zone,#CONFIG{accesrestreintvideos/id_zone_defaut, #GET{id_premiere_zone}}}}
 
-[(#REM) On n'affiche que si le visiteur est connecté et fait partie de la zone choisie ]
-<BOUCLE_autorisation(CONDITION){si #SESSION{id_auteur}|et{#GET{id_zone}|accesrestreint_acces_zone}}>
+[(#REM) On n'affiche que si le visiteur est connecté et fait partie de la zone choisie OU s'il y a une date de péremption dépassée ]
+<BOUCLE_autorisation(CONDITION){si #ENV{date_fin}|et{#ENV{date}|>={#ENV{date_fin}}}|ou{#SESSION{id_auteur}|et{#GET{id_zone}|accesrestreint_acces_zone}}}>
 	[(#REM) On fait suivre les mêmes paramètres, URL, tailles, etc ]
 	#INCLURE{fond=modeles/oembed,env}
 </BOUCLE_autorisation>

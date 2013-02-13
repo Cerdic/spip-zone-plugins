@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_texte_restreint_label' => 'Texte de la restriction',
 	
 	// T
-	'texte_restreint' => 'Ce contenu est restreint.',
+	'texte_restreint' => 'Un média restreint est inséré ici, mais vous n’avez pas les droits pour le visionner.',
 	'texte_restreint_titre' => 'Contenu restreint',
 	'titre_page_configurer_accesrestreintvideos' => 'Configurer l\'accès restreint aux vidéos',
 );
