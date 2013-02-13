@@ -17,6 +17,7 @@
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/spip2spip.php" /> 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/spip2spip.php" />
+  <pipeline nom="taches_generales_cron" inclure="spip2spip_pipelines.php" />
 
 	<menu nom="spip2spips" titre="spip2spip:titre_spip2spips" parent="menu_edition" icone="images/spip2spip-16.png" action="spip2spips" /> 
 </paquet>
