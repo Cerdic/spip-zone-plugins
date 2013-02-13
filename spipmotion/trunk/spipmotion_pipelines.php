@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2008-2012 - Distribué sous licence GNU/GPL
+ * 2008-2013 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -47,13 +47,15 @@ function spipmotion_taches_generales_cron($taches_generales){
  *
  * Intervient à chaque modification d'un objet de SPIP
  * notamment lors de l'ajout d'un document
+ * 
+ * Lors de la suppression de document, supprime les versions encodées créées par spipmotion s'il y a lieu
  *
  * @return $flux Le contexte de pipeline complété
  * @param array $flux Le contexte du pipeline
  */
 function spipmotion_post_edition($flux){
-	if(in_array($flux['args']['operation'], array('ajouter_document','document_copier_local'))){
-		$id_document = $flux['args']['id_objet'];
+	if(isset($flux['args']['operation']) && in_array($flux['args']['operation'], array('ajouter_document','document_copier_local'))){
+		$id_document = isset($flux['args']['id_objet']) ? intval($flux['args']['id_objet']) : 0;
 		/**
 		 * Il n'est pas nécessaire de récupérer la vignette d'une vignette ni d'un document distant
 		 * ni ses infos.
@@ -93,6 +95,10 @@ function spipmotion_post_edition($flux){
 				suivre_invalideur("id='id_document/$id_document'");
 			}
 		}
+	}
+	if(isset($flux['args']['operation']) && ($flux['args']['operation'] == 'supprimer_document')){
+		include_spip('action/spipmotion_remove_version');
+		spipmotion_supprimer_versions($flux['args']['id_objet']);
 	}
 	return $flux;
 }
@@ -242,4 +248,5 @@ function spipmotion_recuperer_fond($flux){
 	}
 	return $flux;
 }
+
 ?>

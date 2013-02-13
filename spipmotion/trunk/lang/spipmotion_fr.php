@@ -167,9 +167,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_verifier_logiciels' => 'Revérifier les logiciels',
 	'label_vorbis_qualite' => 'Qualité d\'encodage audio (Vorbis uniquement)',
 	'lien_enlever_previsu' => 'Enlever la prévisualisation',
-	'lien_ffmpeg_linux' => 'Installer FFmpeg sur Linux',
-	'lien_ffmpeg_mac' => 'Installer FFmpeg sur Mac OSX',
-	'lien_flvtool' => 'Installer FLVTool2',
 	'lien_forcer_ffmpeg_infos' => 'Forcer la mise à de ces informations',
 	'lien_recharger' => 'Recharger',
 	'lien_recuperer_logo_fichier' => 'le fichier lui-même',
@@ -230,22 +227,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'th_format_nom_complet' => 'Nom complet',
 	'th_format_nom_court' => 'Nom court',
 	'th_format_type' => 'Type',
-	'thead_date' => 'Date',
-	'thead_document' => 'Document',
-	'thead_duree' => 'Durée',
-	'thead_duree_encodage' => 'Durée d\'encodage',
-	'thead_format' => 'Format',
-	'thead_id_auteur' => 'Utilisateur',
-	'thead_id_file' => 'Id dans la file',
-	'thead_id_origine_doc' => 'Id du document original',
-	'thead_nombre' => 'Nombre',
-	'thead_objet' => 'Objet',
-	'thead_objet_attache' => 'Attaché à l\'objet',
 	'thead_stat_duree' => 'Durée de fichier / min',
 	'thead_stat_duree_long' => 'Durée du fichier (en minutes) encodée par minute d\'encodage',
 	'thead_stat_octet' => 'Taille / min',
 	'thead_stat_octet_long' => 'Taille du fichier original encodée par minute d\'encodage',
-	'thead_statut' => 'Statut',
 	'thead_template_encodage' => 'Template',
 	'thead_template_encodage_utilise' => 'Template d\'encodage utilisé',
 	'titre_fichier_log' => 'Contenu du fichier de log de l\'id #@id@ dans la file d\'attente',
@@ -253,19 +238,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_fichiers_doubles_spip' => 'Ces fichiers semblent être le résultat de fichiers insérés plusieurs fois en base',
 	'titre_page_erreurs' => 'Erreurs potentielles de SPIPmotion',
 	'titre_page_ffmpeg_infos' => 'Informations sur FFMpeg',
-	'titre_page_file' => 'File d\'attente d\'encodage',
-	'titre_page_file_attente' => 'Documents en attente d\'encodage',
-	'titre_page_file_encodes' => 'Liste des encodages terminés',
-	'titre_page_file_encodes_jour' => 'Encodages par date',
 	'titre_page_file_stats' => 'Statistiques d\'encodage',
 	'titre_page_metas_doc' => 'Métadonnées du document #@id@',
-	'titre_previsu' => 'Prévisualisation',
 
 	// U
 	'unselect_all' => 'Tout désélectionner',
-
-	// V
-	'version_encodee_de' => 'Ce document est une version encodée du document @id_orig@',
 
 	// W
 	'width_video' => 'Largeur de la sortie en px'
