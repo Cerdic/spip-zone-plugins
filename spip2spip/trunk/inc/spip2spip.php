@@ -50,13 +50,12 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
     //-------------------------------
     // selection du site
     //-------------------------------    
-    if ($row_site = sql_fetsel("*","spip_spip2spip2","id=$id_site")) {    
+    if ($row_site = sql_fetsel("*","spip_spip2spips","id_spip2spip=".intval($id_site))) {    
       $id_site   = $row_site["id_spip2spip"];
       $site_titre = $row_site["site_titre"];
       $url_syndic   = $row_site["site_rss"];
       $date_syndic  = $row_site["maj"];
       
-      $log_html .= "<h4>$site_titre (<a href='$url_syndic'>flux</a>)</h4>";
       spip_log("spip2spip: syndication: ".$url_syndic);
       //$date =  date('Y-m-d H:i:s',time()); // utileser date OU NOW() ???
       sql_update("spip_spip2spips", array('maj' => 'NOW()'), "id_spip2spip=$id_site");

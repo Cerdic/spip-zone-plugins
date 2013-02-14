@@ -75,6 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'label_site_titre' => 'Nom du site',
   'label_site_rss' => 'Adresse du Flux Spip2spip',
   'label_maj' => 'Dernière synchronisation',
+  'label_log' => 'Rapport de syndication',
   
   // M
   'maj' => 'Derni&egrave;re syndication',
@@ -89,13 +90,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   // R
   'retour_spip2spip' => 'Retour',
   
-  // S
-  'site_manage' => 'Gestion des sites &agrave; synchroniser',
-  'site_available' => 'Sites inscrits',
-  'site_add' => 'Ajouter un nouveau site',
   
   // T
   'titre' => 'Spip2Spip',
+  'titre_spip2spip' => 'Site',
   'titre_spip2spips' => 'Sites Spip2Spip',
   'titre_page_configurer_spip2spip' => 'Spip2Spip',
   
