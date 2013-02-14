@@ -131,7 +131,7 @@ function critere_agendafull_dist($idb, &$boucles, $crit)
 function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
 	static $trans_tbl=NULL;
 	if ($trans_tbl==NULL){
-		$trans_tbl = get_html_translation_table (HTML_ENTITIES);
+		$trans_tbl = get_html_translation_table (HTML_ENTITIES, ENT_COMPAT | ENT_XHTML, 'UTF-8');
 		$trans_tbl = array_flip ($trans_tbl);
 	}
 	
