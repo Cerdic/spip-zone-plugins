@@ -16,7 +16,7 @@ include_spip('amap_fonctions');
 include_spip('inc/meta');
 include_spip('inc/cextras');
 
-function amap_upgrade($nom_meta_version_base, $version_cible){
+function amap_upgrade($nom_meta_base_version, $version_cible){
 
 	$maj = array();
 	$maj['create'] = array(
@@ -25,7 +25,7 @@ function amap_upgrade($nom_meta_version_base, $version_cible){
 	);
 	cextras_api_upgrade(amap_declarer_champs_extras(), $maj['create']);
 	include_spip('base/upgrade');
-	maj_plugin($nom_meta_version_base, $version_cible, $maj);
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 function amap_rubriques(){
@@ -36,16 +36,16 @@ function amap_rubriques(){
 		create_rubrique("002. Événements", $id_rubrique);
 	}
 	create_rubrique("001. Archives", "0");
+	ecrire_config('amap/email', 'oui');
 }
 
-function amap_vider_tables($nom_meta_version_base){
-	//supprimer toutes les tables
+function amap_vider_tables($nom_meta_base_version){
 	sql_drop_table('spip_amap_disponibles');
 	sql_drop_table('spip_amap_livraisons');
 	sql_drop_table('spip_amap_paniers');
 	sql_drop_table('spip_amap_responsables');
-	//suppression des champs supplementaire
 	cextras_api_vider_tables(amap_declarer_champs_extras());
-	effacer_meta($nom_meta_version_base);
+	effacer_meta('amap_mail');
+	effacer_meta($nom_meta_base_version);
 }
 ?>

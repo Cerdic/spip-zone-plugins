@@ -15,11 +15,11 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 			[(#SAISIE{radio, email, label=<:amap:autorise_envoie_email_label:>,
-				explication=<:amap:autorise_envoie_email_explication:>,
-				//defaut=oui,
-				datas=#ARRAY{
-				oui,<:amap:envoyez_email_oui:>,
-				non,<:amap:envoyez_email_non:>}})]
+					explication=<:amap:autorise_envoie_email_explication:>,
+					//defaut=oui,
+					datas=#ARRAY{
+					oui,<:amap:envoyez_email_oui:>,
+					non,<:amap:envoyez_email_non:>}})]
 		</ul>
 		<p class="boutons">
 			<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
