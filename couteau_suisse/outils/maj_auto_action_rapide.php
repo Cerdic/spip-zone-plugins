@@ -180,7 +180,9 @@ function maj_auto_action_rapide() {
 			$maj_lib = _T('couteau:maj'.($infos['svn']?'_svn':'_ok'),
 				array('zip'=>$infos['zip_trac'], 'url'=>$infos['url_origine']));
 		elseif($auto) {
-			$maj_lib = _T('couteau:maj_rev_ko', array('url'=>$infos['url_origine']));
+			$maj_lib = $infos['rev_local']==999999
+				? _L('Erreur. Fichier ./svn.revision incomplet ?')
+				:_T('couteau:maj_rev_ko', array('url'=>$infos['url_origine']));
 			$checked = " class='maj_checked'"; }
 		elseif($infos['rev_local'] && $infos['rev_rss']<=0)
 			$maj_lib = _T('couteau:maj_rev_ko', array('url'=>$infos['url_origine']));
@@ -303,7 +305,11 @@ function plugin_get_infos_maj($p, $timeout=false, $DIR_PLUGINS=_DIR_PLUGINS) {
 	} else $url_origine = '';
 	$infos['commit'] = ($ok && preg_match(',<commit>(.+)</commit>,', $svn, $regs))?$regs[1]:'';
 	$rev_local = (strlen($svn) && preg_match(',<revision>(.+)</revision>,', $svn, $regs))
-		?intval($regs[1]):version_svn_courante2($DIR_PLUGINS.$p);
+		?intval($regs[1]):
+			($infos['commit']>='2013-02-08'
+				?999999
+				:version_svn_courante2($DIR_PLUGINS.$p)
+			);
 	if($infos['svn'] = is_array($rev_local) || $rev_local<0) { 
 		// systeme SVN en place
 		if (is_array($rev_local)) // version SVN >= 1.7 ?
