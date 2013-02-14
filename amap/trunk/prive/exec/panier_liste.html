@@ -9,7 +9,9 @@
 <!--#extra-->
 <div class="box raccourcis">
 	<div class="inner"><div class="bd">
-	<:amap:panier_explication:>
+		<:amap:panier_explication:>
+		[(#CONFIG{amap/email}|=={oui}|oui)<:amap:panier_explication_email:>]
+		[(#CONFIG{amap/email}|=={non}|oui)<:amap:panier_explication_interface:>]
 	</div></div>
 </div>
 <!--/#extra-->
