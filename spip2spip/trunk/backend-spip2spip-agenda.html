@@ -7,7 +7,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>[
 
 ]#SET{which_groupe,#CONFIG{spip2spip/export_mot_groupe,#ARRAY{0,-1}}}#SET{evenement,oui}
 [(#ENV{evenement}|=={non}|oui)#SET{evenement,non}]
-<!-- backend utilisant SPIP2SPIP (version agenda) --><spip2spip version="1.8">
+<!-- backend utilisant SPIP2SPIP   --><spip2spip version="1.8">
 	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
 	<link>#URL_SITE_SPIP/</link>	
   <!-- thématiques proposées --><BOUCLE_thema(MOTS){type=- spip2spip -}>

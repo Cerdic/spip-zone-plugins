@@ -96,6 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'titre_spip2spip' => 'Site',
   'titre_spip2spips' => 'Sites Spip2Spip',
   'titre_page_configurer_spip2spip' => 'Spip2Spip',
+  'titre_mail' => 'Syndication automatique SPIP2SPIP',
   
 );
 

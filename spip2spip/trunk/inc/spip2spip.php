@@ -18,8 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //---------------------------------------
 function spip2spip_syndiquer($id_site, $mode='cron') {
     include_spip("inc/distant"); 
-    include_spip("inc/syndic"); 
-    include_spip("inc/mail"); 
+    include_spip("inc/syndic");     
     include_spip("inc/getdocument"); 
     include_spip("inc/ajouter_documents");
     include_spip("inc/config");
@@ -36,17 +35,17 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                                 
     // on charge les valeurs de CFG
     if (lire_config('spip2spip/import_statut')=="publie") $import_statut = "publie";  else $import_statut = "prop";
-    if (lire_config('spip2spip/citer_source')=="on") $citer_source=true; else  $citer_source=false;
-    if (lire_config('spip2spip/email_alerte')=="on") $email_alerte=true; else  $email_alerte=false;
+    if (lire_config('spip2spip/citer_source')) $citer_source=true; else  $citer_source=false;
+    if (lire_config('spip2spip/email_alerte')) $email_alerte=true; else  $email_alerte=false;
     if (lire_config('spip2spip/email_suivi')!="")
                    $email_suivi = lire_config('spip2spip/email_suivi');
               else $email_suivi = $GLOBALS['meta']['adresse_suivi']; // adresse de suivi editorial 
-    if (lire_config('spip2spip/import_mot_article')=="on")  $import_mot_article=true; else  $import_mot_article=false;
-    if (lire_config('spip2spip/import_mot_evnt')=="on")  $import_mot_evt=true; else  $import_mot_evt=false;
+    if (lire_config('spip2spip/import_mot_article'))  $import_mot_article=true; else  $import_mot_article=false;
+    if (lire_config('spip2spip/import_mot_evnt'))  $import_mot_evt=true; else  $import_mot_evt=false;
     if (lire_config('spip2spip/import_mot_groupe_creer')=="oui")  $import_mot_groupe_creer=true; else  $import_mot_groupe_creer=false;
     if (lire_config('spip2spip/import_mot_groupe'))  $id_import_mot_groupe = (int) lire_config('spip2spip/import_mot_groupe');
                                                 else $id_import_mot_groupe = -1;
-    
+   
     //-------------------------------
     // selection du site
     //-------------------------------    
@@ -301,8 +300,10 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
     } // #selection du site
     
     // alerte email ?	
-    if ($email_alerte && $log_email !="") 
-                  envoyer_mail($email_suivi,"Syndication automatique SPIP2SPIP", $log_email);	    
+    if ($email_alerte && $log_email !="")   {               
+              $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
+		          $envoyer_mail($email_suivi, _T('spip2spip:titre_mail'), $log_email);
+    }   
              
     
     if ($mode=='html') return $log_html;    

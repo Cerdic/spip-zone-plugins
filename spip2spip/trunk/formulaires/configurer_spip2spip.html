@@ -26,24 +26,24 @@
      <!-- suivi syndic -->
     [(#SAISIE{checkbox, email_alerte,
     		label='',
-        datas=#ARRAY{0,<:spip2spip:cfg_email_alerte:>}})] 
+        datas=#ARRAY{on,<:spip2spip:cfg_email_alerte:>}})] 
      [(#SAISIE{input, email_suivi,
 				label=<:spip2spip:cfg_email_suivi:>})]
      
      <!-- source -->
     [(#SAISIE{checkbox, citer_source,
     		label='',
-        datas=#ARRAY{0,<:spip2spip:cfg_citer_source:>}})]
+        datas=#ARRAY{on,<:spip2spip:cfg_citer_source:>}})]
 
 
     <li><h3><:spip2spip:cfg_import_motcle:></h3></li>
     
     [(#SAISIE{checkbox, import_mot_article,
     		label='',
-        datas=#ARRAY{0,<:spip2spip:cfg_import_mot_article:>}})]
+        datas=#ARRAY{on,<:spip2spip:cfg_import_mot_article:>}})]
     [(#SAISIE{checkbox, import_mot_evnt,
     		label='',
-        datas=#ARRAY{0,<:spip2spip:cfg_import_mot_evnt:>}})]  
+        datas=#ARRAY{on,<:spip2spip:cfg_import_mot_evnt:>}})]  
 
     [(#SAISIE{radio, import_mot_groupe_creer,
     		label=,
@@ -74,10 +74,10 @@
         
     [(#SAISIE{checkbox, export_mot_article,
     		label='',
-        datas=#ARRAY{0,<:spip2spip:cfg_export_mot_article:>}})]
+        datas=#ARRAY{on,<:spip2spip:cfg_export_mot_article:>}})]
     [(#SAISIE{checkbox, export_mot_evnt,
     		label='',
-        datas=#ARRAY{0,<:spip2spip:cfg_export_mot_evnt:>}})]   
+        datas=#ARRAY{on,<:spip2spip:cfg_export_mot_evnt:>}})]   
         
       
       #SET{groupe_motcle,#ARRAY{Tous,-1}
