@@ -26,7 +26,7 @@
 
 /*= ONGLETS =*/
 .albums .onglets		{
-				display: table; width: 100%;
+				display: table; width: 100%; margin-top: 10px;
 				font-weight: bold;
 				}
 .albums .onglets a,
@@ -41,10 +41,8 @@
 				text-decoration: none;
 				}
 .albums .onglets strong.on	{ background-color: #GET{foncee}; border-bottom: none; }
-.albums .onglets .fermer 	{
-				width: 0; /* pour taille minimale */
-				padding: 0 .3em;
-				}
+.albums .onglets .fermer 	{ width: 1px; padding: 0 .3em; }
+.albums .onglets .fermer img	{ vertical-align: middle; }
 
 /*= ENTETE =*/
 .albums .entete_ajouter		{
@@ -190,6 +188,7 @@
 .albums .associer .actions	{ width: 6em; }
 .albums .associer .actions img	{ vertical-align: middle; }
 .albums .associer .contenu	{ width: 8em; }
+.albums .associer .logo		{ width: 1px; } /* pour avoir taille minimale */
 
 
 /*=============
