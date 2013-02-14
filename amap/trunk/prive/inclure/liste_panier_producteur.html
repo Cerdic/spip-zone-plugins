@@ -21,16 +21,15 @@
 <table class="amap spip">
 	<thead>
 	<tr>
-		<th><:amap:adherent:></th>
-		<th><:amap:date_distribution:></th>
+		<th class='statut' scope='col'><:amap:adherent:></th>
+		<th class='statut' scope='col'><:amap:date_distribution:></th>
 	</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_paniers(AMAP_PANIERS) {pagination 20} {par date_distribution}{age<0}{id_producteur}>
 	<tr>
-		<td><BOUCLE_prod(AUTEURS){tous}{id_auteur}>#NOM</BOUCLE_prod></td>
-		<td>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
-		</td>
+		<td class='nom'><BOUCLE_prod(AUTEURS){tous}{id_auteur}>#NOM</BOUCLE_prod></td>
+		<td class='date_distribution'>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
 	</tr>
 	</BOUCLE_paniers>
 	</tbody>

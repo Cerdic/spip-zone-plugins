@@ -17,13 +17,13 @@
 <table class="amap spip">
 	<thead>
 	<tr>
-		<th><:amap:date_distribution:></th>
+		<th class='date_distribution' scope='col'><:amap:date_distribution:></th>
 	</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_responsables(AMAP_RESPONSABLES auteurs) {par date_distribution}{pagination 20}{id_auteur}>
 	<tr>
-		<td>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
+		<td class='date_distribution'>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
 	</tr>
 	</BOUCLE_responsables>
 	</tbody>

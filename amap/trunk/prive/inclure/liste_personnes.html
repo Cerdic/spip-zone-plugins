@@ -10,23 +10,19 @@
 <table class="amap spip">
 	<thead>
 	<tr>
-		<th></th>
-		<th><:nom:></th>
-		<th><:amap:adhesion:></th>
-		<th><:amap:type_panier:></th>
+		<th class='statut' scope='col'></th>
+		<th class='nom' scope='col'><:nom:></th>
+		<th class='adhesion' scope='col'><:amap:adhesion:></th>
+		<th class='type_panier' scope='col'><:amap:type_panier:></th>
 	</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_personnes(AUTEURS) {tous} {pagination 20}>
 	<tr>
-		<td>
-			[(#STATUT|=={'6forum'}|oui)<img src="#CHEMIN{prive/images/visit-12.gif}">]
-			[(#STATUT|=={'1comite'}|oui)<img src="#CHEMIN{prive/images/redac-12.gif}">]
-			[(#STATUT|=={'0minirezo'}|oui)<img src="#CHEMIN{prive/images/admin-12.gif}">]
-		</td>
-		<td><a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></td>
-		<td>#ADHESION</td>
-		<td>
+		<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
+		<td class='nom'><a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></td>
+		<td class='adhesion'>#ADHESION</td>
+		<td class='type_panier'>
 			[(#TYPE_PANIER|=={'petit'}|oui)<:amap:petit:>]
 			[(#TYPE_PANIER|=={'grand'}|oui)<:amap:grand:>]
 		</td>

@@ -27,18 +27,19 @@
 <table class="amap spip">
 	<thead>
 	<tr>
-		<th><:amap:producteur:></th>
-		<th><:amap:date_distribution:></th>
+		<th class='producteur' scope='col'><:amap:producteur:></th>
+		<th class='date_livraison' scope='col'><:amap:date_distribution:></th>
+		<th class='panier_dispo' scope='col'><:amap:panier_dispo:></th>
 	</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_paniers(AMAP_PANIERS) {pagination 20} {par date_distribution}{age<0}{id_auteur}{dispo=#ENV{dispo}}>
 	<tr>
-		<td><BOUCLE_producteur(AUTEURS){tous}{id_auteur=#ID_PRODUCTEUR}>#NOM</BOUCLE_producteur></td>
-		<td>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
+		<td class='nom'><BOUCLE_producteur(AUTEURS){tous}{id_auteur=#ID_PRODUCTEUR}>#NOM</BOUCLE_producteur></td>
+		<td class='date_production'>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
 		[(#ENV{dispo}|=={0}|oui)[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
 			[(#CONFIG{amap/email}|=={oui}|oui)<!-- envoie par mail d'un panier dispo -->
-			<td><a href='[(#URL_PAGE{panier_dispo}
+			<td class='panier_dispo'><a href='[(#URL_PAGE{panier_dispo}
 				|parametre_url{nom_adherent,#NOM}
 				|parametre_url{date_distribution,[(#DATE_DISTRIBUTION|affdate{"d/m/Y"})]}
 				|parametre_url{id_amap_panier,#ID_AMAP_PANIER}
@@ -49,7 +50,7 @@
 				)]'><:amap:mettre_disposition:></a></td>
 			]
 			[(#CONFIG{amap/email}|=={oui}|non)<!-- afficher sur une page les paniers dispo -->
-			<td><a href='[(#URL_PAGE{panier_dispo}
+			<td class='panier_dispo'><a href='[(#URL_PAGE{panier_dispo}
 				|parametre_url{nom_adherent,#NOM}
 				|parametre_url{date_distribution,[(#DATE_DISTRIBUTION|affdate{"d/m/Y"})]}
 				|parametre_url{id_amap_panier,#ID_AMAP_PANIER}
