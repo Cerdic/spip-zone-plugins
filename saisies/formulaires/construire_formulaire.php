@@ -28,6 +28,7 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	
 	// On passe ça pour l'affichage
 	$contexte['_contenu'] = $formulaire_actuel;
+
 	// On passe ça pour la récup plus facile des champs
 	$contexte['_saisies_par_nom'] = saisies_lister_par_nom($formulaire_actuel);
 	// Pour déclarer les champs modifiables à CVT

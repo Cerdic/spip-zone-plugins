@@ -110,13 +110,16 @@ function saisies_generer_html($champ, $env=array()){
 	if (isset($champ['identifiant'])) {
 		$contexte['id_saisie'] = $champ['identifiant'];
 	}
-	
+
 	// Peut-être des transformations à faire sur les options textuelles
 	$options = $champ['options'];
-
-	
 	foreach ($options as $option => $valeur){
-		$options[$option] = _T_ou_typo($valeur, 'multi');
+		if ($option == 'datas') {
+			// exploser une chaine datas en tableau (applique _T_ou_typo sur chaque valeur)
+			$options[$option] = saisies_chaine2tableau($valeur);
+		} else {
+			$options[$option] = _T_ou_typo($valeur, 'multi');
+		}
 	}
 	
 	// On ajoute les options propres à la saisie
@@ -204,7 +207,12 @@ function saisies_generer_vue($saisie, $env=array(), $env_obligatoire=array()){
 	// Peut-être des transformations à faire sur les options textuelles
 	$options = $saisie['options'];
 	foreach ($options as $option => $valeur){
-		$options[$option] = _T_ou_typo($valeur, 'multi');
+		if ($option == 'datas') {
+			// exploser une chaine datas en tableau (applique _T_ou_typo sur chaque valeur)
+			$options[$option] = saisies_chaine2tableau($valeur);
+		} else {
+			$options[$option] = _T_ou_typo($valeur, 'multi');
+		}
 	}
 	
 	// On ajoute les options propres à la saisie
@@ -260,6 +268,7 @@ function saisies_generer_vue($saisie, $env=array(), $env_obligatoire=array()){
 	if (is_array($env_obligatoire)) {
 		$contexte = array_merge($contexte, $env_obligatoire);
 	}
+
 	// On génère la saisie
 	return recuperer_fond(
 		'saisies-vues/_base',

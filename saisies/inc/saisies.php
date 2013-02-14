@@ -265,7 +265,8 @@ function saisies_chaine2tableau($chaine, $separateur="\n"){
 				// Si on trouve un découpage dans la ligne on fait cle|valeur
 				if (strpos($ligne, '|') !== false){
 					list($cle,$valeur) = explode('|', $ligne, 2);
-					$tableau[$cle] = $valeur;
+					// permettre les traductions de valeurs au passage
+					$tableau[$cle] = _T_ou_typo($valeur, 'multi');
 				}
 				// Sinon on génère la clé
 				else{

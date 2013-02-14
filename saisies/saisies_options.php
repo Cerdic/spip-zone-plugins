@@ -9,9 +9,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * si oui applique _T()
  * si non applique typo() suivant le mode choisi
  *
- * @param unknown_type $valeur Une valeur à tester. Si c'est un tableau, la fonction s'appliquera récursivement dessus.
- * @param string $mode_typo Le mode d'application de la fonction typo(), avec trois valeurs possibles "toujours", "jamais" ou "multi".
- * @return unknown_type Retourne la valeur éventuellement modifiée.
+ * @param mixed $valeur
+ *     Une valeur à tester. Si c'est un tableau, la fonction s'appliquera récursivement dessus.
+ * @param string $mode_typo
+ *     Le mode d'application de la fonction typo(), avec trois valeurs possibles "toujours", "jamais" ou "multi".
+ * @return mixed
+ *     Retourne la valeur éventuellement modifiée.
  */
 if (!function_exists('_T_ou_typo')){
 	function _T_ou_typo($valeur, $mode_typo='toujours') {
