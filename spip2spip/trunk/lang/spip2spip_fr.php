@@ -10,7 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'article_license' => '<br />Licence de l\'article:',
   'action_syndic' => 'syndiquer manuellement',
   'aucun_article' => 'aucun article &agrave; syndiquer actuellement',
-  
+  'avis_echec_syndication' => 'Erreur: Impossible de charger le flux',
+  'avis_echec_syndication_01' => 'Erreur: Flux mal formé',
+    
   // B
   'back' => 'retour',
   

@@ -62,7 +62,7 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
       // Aller chercher les donnees du flux RSS et les analyser
       $rss = recuperer_page($url_syndic, true);
       if (!$rss) {
-        $log_html .= "<div style='color:red'>"._T('spip2spip:avis_echec_syndication_02')."</div>";
+        $log_html .= "<div style='color:red'>"._T('spip2spip:avis_echec_syndication')."</div>";
       } else {
         $articles = analyser_backend_spip2spip($rss);              
         //----*************        
@@ -176,8 +176,8 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                                               's2s_url' => $_link,
                                               's2s_url_trad' => $_trad,
                                               ));      				        
-      				        $log_html  .= "<a href='?exec=articles&amp;id_article=$id_nouvel_article' style='padding:5px;border-bottom:3px solid;background:#eee;display:block;'>"._T('spip2spip:imported_view')."</a>";
-                      $log_email .= $article['titre'] ."\n"._T('spip2spip:imported_view').": ".$GLOBALS['meta']['adresse_site']."/ecrire/?exec=articles&id_article=$id_nouvel_article \n\n";
+      				        $log_html  .= "<a href='?exec=article&amp;id_article=$id_nouvel_article' style='padding:5px;border-bottom:3px solid;background:#eee;display:block;'>"._T('spip2spip:imported_view')."</a>";
+                      $log_email .= $article['titre'] ."\n"._T('spip2spip:imported_view').": ".$GLOBALS['meta']['adresse_site']."/ecrire/?exec=article&id_article=$id_nouvel_article \n\n";
       				        
                       // gestion lien traduction
                      if  ($_trad) {                     
