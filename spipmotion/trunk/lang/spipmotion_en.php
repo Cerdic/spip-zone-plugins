@@ -169,9 +169,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_verifier_logiciels' => 'Verify the softwares again',
 	'label_vorbis_qualite' => 'Encoding quality (Only Vorbis audio)',
 	'lien_enlever_previsu' => 'Remove the preview',
-	'lien_ffmpeg_linux' => 'Install FFmpeg on Linux',
-	'lien_ffmpeg_mac' => 'Install FFmpeg on Mac OSX',
-	'lien_flvtool' => 'Install FLVTool2',
 	'lien_forcer_ffmpeg_infos' => 'Force the update of these informations',
 	'lien_recharger' => 'Reload',
 	'lien_recuperer_logo_fichier' => 'the file itself',
@@ -232,22 +229,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'th_format_nom_complet' => 'Complete name',
 	'th_format_nom_court' => 'Short name',
 	'th_format_type' => 'Type',
-	'thead_date' => 'Date',
-	'thead_document' => 'Document',
-	'thead_duree' => 'Duration',
-	'thead_duree_encodage' => 'Encoding duration',
-	'thead_format' => 'Format',
-	'thead_id_auteur' => 'User',
-	'thead_id_file' => 'Id in the queue',
-	'thead_id_origine_doc' => 'Id of the original document',
-	'thead_nombre' => 'Amount',
-	'thead_objet' => 'Object',
-	'thead_objet_attache' => 'Attached to the object',
 	'thead_stat_duree' => 'File length / minute',
 	'thead_stat_duree_long' => 'Encoded file length (in minutes) per encoding minute',
 	'thead_stat_octet' => 'File size / minute',
 	'thead_stat_octet_long' => 'Original file size encoded per encoding minute',
-	'thead_statut' => 'Status',
 	'thead_template_encodage' => 'Template',
 	'thead_template_encodage_utilise' => 'Encoding template used',
 	'titre_fichier_log' => 'Content of the log file for the ID #@id@ in the queue',
@@ -255,19 +240,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_fichiers_doubles_spip' => 'These files appear to be the result of files several time inserted in the database',
 	'titre_page_erreurs' => 'Potential errors of SPIPmotion',
 	'titre_page_ffmpeg_infos' => 'FFMpeg informations',
-	'titre_page_file' => 'Encoding queue',
-	'titre_page_file_attente' => 'Documents waiting for encoding',
-	'titre_page_file_encodes' => 'List of realized encodings',
-	'titre_page_file_encodes_jour' => 'Encodings by date',
 	'titre_page_file_stats' => 'Encodings statistics',
 	'titre_page_metas_doc' => 'Metadatas of the document #@id@',
-	'titre_previsu' => 'Preview',
 
 	// U
 	'unselect_all' => 'Deselect all',
-
-	// V
-	'version_encodee_de' => 'This document is an encoded version of the document ID @id_orig@',
 
 	// W
 	'width_video' => 'Width of the output in px'
