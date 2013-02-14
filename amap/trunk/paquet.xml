@@ -27,6 +27,7 @@
 	<pipeline nom="affiche_gauche" inclure="amap_pipelines.php" />
 
 	<necessite nom="agenda" compatibilite="[3.11.2;[" />
+	<necessite nom="spip_bonux" compatibilite="[3.0.4;[" />
 	<necessite nom="cextras" compatibilite="[3.2.3;[" />
 	<necessite nom="facteur" compatibilite="[2.3.0;[" />
 	<necessite nom="saisies" compatibilite="[1.28.1;[" />
