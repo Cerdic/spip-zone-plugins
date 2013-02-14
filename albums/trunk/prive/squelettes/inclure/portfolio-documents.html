@@ -1,4 +1,8 @@
 [(#REM)
+	Surcharge du plugin medias pour rajouter un id unique sur les blocs, sinon pb javascript
+	Cette modif devrait etre incluse dans spip 3.06
+]
+[(#REM)
 
   Squelette
   (c) xxx
@@ -53,9 +57,7 @@
 
 <script type="text/javascript">/*<![CDATA[*/
 var multifile='[(#CHEMIN{javascript/jquery.multifile.js}|texte_script)]';
-if (!$.isFunction(window.editbox_init)) {
-    [(#INCLURE{javascript/medias_edit.js}|compacte{js})]
-}
+[(#INCLURE{javascript/medias_edit.js}|compacte{js})]
 [(#OBJET|=={rubrique}|et{#EVAL{_AJAX}}|et{#GET{nbdocs}|=={1}}|oui)
 if (window.jQuery) jQuery('#navigation .box.info').ajaxReload();]
 function check_reload_page(){

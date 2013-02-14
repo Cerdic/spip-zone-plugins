@@ -64,7 +64,6 @@ function formulaires_editer_album_traiter_dist($id_album='new', $retour='', $ass
 			objet_associer(array('album' => $id_album), array($objet => $id_objet));
 			if (isset($res['redirect'])) {
 				$res['redirect'] = parametre_url ($res['redirect'], 'id_album', '', '&');
-				$res['redirect'] = parametre_url ($res['redirect'], 'id_album_ajoute', $id_album, '&');
 			}
 		}
 

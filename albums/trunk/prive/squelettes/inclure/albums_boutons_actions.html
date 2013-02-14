@@ -1,0 +1,91 @@
+[(#REM)
+	Boutons d'actions (associer/dissocier un album à un objet).
+	Paramètres d'inclusion :
+		boutons (texte)			editer / portfolio / associer / dissocier
+		objet (texte)			objet sur lequel porte l'association
+		id_objet (texte)
+		id_album (balise)
+		vu (balise)
+		retour (texte)			adresse de retour
+		afficher (liste)		label, icone (par défaut les deux)
+		class				classe css des vrais boutons (par défaut: button link)
+][(#REM)
+	Inclus dans :
+		prive/objets/liste/albums.html
+		prive/objets/liste/albums_lies.html
+		prive/squelettes/inclure/albums_affiche_milieu_objets_lies.html
+		prive/objets/liste/albums_lies_colonne.html
+]
+
+#FILTRE{trim}
+#SET{afficher, #ENV{afficher, #LISTE{label,icone}}}
+#SET{class, #ENV{class, 'button link'}|concat{' ajax'}}
+
+
+[(#REM)
+	BOUTON EDITER (en fait un simple lien editbox)
+	parametre necessaire : id_album
+]
+[(#ENV{bouton}=={editer}|oui)
+	[(#AUTORISER{modifier,album,#ID_ALBUM}|oui)
+		<a href="[(#URL_ECRIRE{album_edit,id_album=#ID_ALBUM}|parametre_url{redirect,#ENV{retour,#SELF}})]" class="editbox" title="<:album:icone_modifier_album:>">[(#VAL{label}|in_array{#GET{afficher}}|oui)<:album:texte_modifier:>][(#VAL{icone}|in_array{#GET{afficher}}|oui)[(#CHEMIN_IMAGE{edit-16.png}|balise_img{<:album:texte_modifier:>})]]</a>
+	]
+]
+
+
+[(#REM)
+	BOUTON EDITER PORTFOLIO (en fait un simple lien editbox)
+	parametre necessaire : id_album
+]
+[(#ENV{bouton}=={portfolio}|oui)
+	[(#AUTORISER{modifier,album,#ID_ALBUM}|oui)
+		<a href="[(#URL_ECRIRE{album_edit_portfolio,id_album=#ID_ALBUM})]" class="modifier editbox #ENV{class}" title="<:album:icone_modifier_album:>">[(#VAL{label}|in_array{#GET{afficher}}|oui)<:album:texte_modifier:>][(#VAL{icone}|in_array{#GET{afficher}}|oui)[(#CHEMIN_IMAGE{edit-16.png}|balise_img{<:album:texte_modifier:>})]]</a>
+	]
+]
+
+
+[(#AUTORISER{associeralbum, #OBJET, #ID_OBJET}|oui)
+
+	[(#REM)
+		BOUTON ASSOCIER
+		parametres necessaires : id_album, objet, id_objet
+	]
+	[(#ENV{bouton}|=={associer}|oui)
+		[(#BOUTON_ACTION{
+			[(#VAL{label}|in_array{#GET{afficher}}|oui)<:album:icone_ajouter:>]
+			[(#VAL{icone}|in_array{#GET{afficher}}|oui)[(#CHEMIN_IMAGE{ajouter-16.png}|balise_img{<:album:icone_associer_album:>})]],
+			[(#URL_ACTION_AUTEUR{associer_album,
+				#ID_ALBUM/#OBJET/#ID_OBJET,
+				#ENV{retour,#SELF}
+			})],
+			#GET{class},'',
+			<:album:bouton_associer:>}
+		)]
+	]
+
+	[(#REM)
+		BOUTON DISSOCIER
+		parametres necessaires : id_album, vu, objet, id_objet
+	]
+	[(#ENV{bouton}|=={dissocier}|oui)
+		[(#VU|=={oui}|?{
+			[(#VAL{icone}|in_array{#GET{afficher}}|oui)[(#CHEMIN_IMAGE{supprimer-12.png}
+				|balise_img{#GET{titre},'supprimer off'}
+				|inserer_attribut{title,<:medias:document_vu:>}
+				|image_nb
+				|image_gamma{40}
+			)]],
+			[(#BOUTON_ACTION{
+				[(#VAL{label}|in_array{#GET{afficher}}|oui)#ENV{label,#VAL{album:bouton_dissocier}|_T}]
+				[(#VAL{icone}|in_array{#GET{afficher}}|oui)[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{<:album:bouton_dissocier:>})]],
+				[(#URL_ACTION_AUTEUR{dissocier_album,
+					#ID_ALBUM/#OBJET/#ID_OBJET,
+					#ENV{retour,#SELF}
+				})],
+				#GET{class},'',
+				<:album:bouton_dissocier:>}
+			)]
+		})]
+	]
+
+]

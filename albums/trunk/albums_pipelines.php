@@ -6,6 +6,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+
 /**
  * Albums sur la page de visualisation des objets
 **/
@@ -22,10 +23,8 @@ function albums_afficher_complement_objet($flux) {
 			'table_source' => 'albums',
 			'objet' => $type,
 			'id_objet' => $id,
-			'objet_lien' => $type,
-			'id_objet_lien' => $id,
 			),
-			array('ajax'=>true)
+			array('ajax'=>'albums')
 		);
 	}
 
@@ -41,7 +40,7 @@ function albums_afficher_complement_objet($flux) {
 
 
 /**
-* Objets associes et auteurs sur la page de visualisation d'un album
+ * Objets associes et auteurs sur la page de visualisation d'un album
 **/
 function albums_affiche_milieu($flux){
 	$texte = "";
@@ -58,8 +57,7 @@ function albums_affiche_milieu($flux){
 		// boite objets associes (inseree uniquement si liens presents)
 		if (lister_objets_lies('*','album',$id_album,'album')){
 			$texte .= recuperer_fond('prive/squelettes/contenu/albums_affiche_milieu_objets_lies', array(
-				'id_album' => $id_album,
-				'test' => $test
+				'id_album' => $id_album
 				),
 				array('ajax'=>true)
 			);
@@ -128,6 +126,22 @@ function albums_post_edition($flux){
 		}
 	}
 	return $flux;
+}
+
+
+/**
+ * Activer les plugins jquery ui
+ * 
+ * @param array $scripts
+ *     Liste des js chargés
+ * @return array
+ *     Liste complétée des js chargés
+**/
+function albums_jqueryui_plugins($scripts){
+	$scripts[] = "jquery.ui.draggable";
+	$scripts[] = "jquery.ui.droppable";
+	$scripts[] = "jquery.ui.sortable";
+	return $scripts;
 }
 
 

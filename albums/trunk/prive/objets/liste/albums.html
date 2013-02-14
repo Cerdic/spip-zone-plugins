@@ -5,10 +5,10 @@
 		soit une chaine de mots séparés par des caractères non alphanumériques (afin de pouvoir transmettre via l'url).
  
 		exclus (tableau d'ids)
-		liste			albumotheque, associer, selecteur
+		liste			associer / selecteur
 		header (liste)		tri, thead, recherche
-		colonnes (liste)	statut, logo, id, titre, infos, descriptif, contenu, liaison
-		bouton			associer, choisir
+		colonnes (liste)	statut, logo, id, titre, infos, descriptif, contenu, liaison, vignettes
+		bouton			associer / choisir
 ][(#REM)
 	inclus dans /prive/squelettes/contenu/albums_afficher_complement_objet.html
 	inclus dans /prive/squelettes/inclure/albums_navigation.html
@@ -24,14 +24,14 @@
 	Variables pour définir les éléments à afficher 
 	On convertit en tableau si nécessaire, et on donne les valeurs par défaut
 ]
-#SET{liste, #ENV{liste, albumotheque}}
+#SET{liste, #ENV{liste, associer}}
 #SET{header, #ENV{header}|?{
 	#ENV{header}|is_array|?{#ENV{header},#VAL{'/\W/'}|preg_split{#ENV{header}}},
-	#LISTE{tri, thead, recherche}}
+	#LISTE{recherche}}
 }
 #SET{colonnes, #ENV{colonnes}|?{
 	#ENV{colonnes}|is_array|?{#ENV{colonnes},#VAL{'/\W/'}|preg_split{#ENV{colonnes}}},
-	#LISTE{statut,logo,id,titre,descriptif,contenu,liaison}}
+	#LISTE{statut,id,titre,descriptif,contenu}}
 }
 
 
@@ -59,16 +59,15 @@
 			[(#TRI{date, <:medias:par_date:>})]
 			[(#TRI{titre, <:medias:par_titre:>})]
 		</div>
-		[(#GET{liste}|=={albumotheque}|oui) [<div class='pagination'>(#PAGINATION{prive})</div>] ]
 	</navigation>
 	]
 
 	<table class="spip liste">
 
 		[(#VAL{thead}|in_array{#GET{header}}|oui)
-		<thead>
-			[(#VAL{statut}|in_array{#GET{colonnes}}|oui)		<th></th> ]
+		<thead><tr class='first_row'>
 			[(#VAL{logo}|in_array{#GET{colonnes}}|oui)		<th><:album:heading_logo:></th> ]
+			[(#VAL{statut}|in_array{#GET{colonnes}}|oui)		<th></th> ]
 			[(#VAL{id}|in_array{#GET{colonnes}}|oui)		<th class='id'><:album:heading_id:></th> ]
 			[(#VAL{titre}|in_array{#GET{colonnes}}|oui)		<th><:album:heading_titre:></th> ]
 			[(#VAL{infos}|in_array{#GET{colonnes}}|oui)		<th><:album:heading_infos:></th> ]
@@ -76,25 +75,25 @@
 			[(#VAL{contenu}|in_array{#GET{colonnes}}|oui)		<th><:album:heading_contenu:></th> ]
 			[(#VAL{liaison}|in_array{#GET{colonnes}}|oui)		<th><:album:heading_liaison:></th> ]
 			[(#ENV{bouton}|oui)					<th></th> ]
-		</thead>
+		</tr></thead>
 		]
 
 		<tbody>
 		<BOUCLE_albums(ALBUMS liens){contenu?}{orphelins?}{id_album !IN #ENV{exclus}}{auteurs_liens.id_auteur?}{id_mot?}{objet?}{statut ?== #ENV{statut}}{vu?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr>
 
-			[(#REM) STATUT ]
-			[(#VAL{statut}|in_array{#GET{colonnes}}|oui)
-			<td class='statut'>[(#STATUT|puce_statut{album,#ID_ALBUM})]</td>
-			]
-
 			[(#REM) LOGO ]
 			[(#VAL{logo}|in_array{#GET{colonnes}}|oui)
 			<td class='logo'>
 			[<a href="[(#ID_ALBUM|generer_url_entite{album})]">
-			(#INCLURE{fond=prive/squelettes/inclure/inc-albums_logo, id_album, taille=#ENV{logo,48}})
+			(#INCLURE{fond=prive/squelettes/inclure/albums_logo, id_album, taille=#ENV{logo,48}})
 			</a>]
 			</td>
+			]
+
+			[(#REM) STATUT ]
+			[(#VAL{statut}|in_array{#GET{colonnes}}|oui)
+			<td class='statut'>[(#STATUT|puce_statut{album,#ID_ALBUM})]</td>
 			]
 
 			[(#REM) ID ]
@@ -127,7 +126,7 @@
 				</li>]
 				[<li>
 					(#VAL{contenu}|in_array{#GET{colonnes}}|non)
-					[(#INCLURE{fond=prive/squelettes/inclure/inc-albums_nb_documents, id_album})]
+					[(#INCLURE{fond=prive/squelettes/inclure/albums_nb_documents, id_album})]
 				</li>]
 			</ul>
 			</td>
@@ -156,11 +155,15 @@
 
 			[(#REM) BOUTONS : associer, choisir ]
 			[(#ENV{bouton}|oui)
-			<td class='action'>
+			<td class='actions'>
 			[(#ENV{bouton}|=={associer}|oui)
-				[(#INCLURE{fond=prive/squelettes/inclure/inc-albums_boutons_actions,
+				[(#INCLURE{fond=prive/squelettes/inclure/albums_boutons_actions,
 					bouton=associer,
-					id_album=#ID_ALBUM}{env}
+					id_album=#ID_ALBUM,
+					objet=#ENV{objet_associer},
+					id_objet=#ENV{id_objet_associer},
+					label=oui,
+					env}
 				)]
 			]
 			[(#ENV{bouton}|=={choisir}|oui)
@@ -170,6 +173,7 @@
 			]
 
 		</tr>
+		
 		</BOUCLE_albums>
 		</tbody>
 	</table>
@@ -190,7 +194,6 @@
 		]
 		[(#GET{nb_albums_total}=={0}|non)
 			[(#GET{liste}|=={associer}|oui) <:album:info_aucun_album_supplementaire:> ]
-			[(#GET{liste}|=={albumotheque}|oui) <:album:info_aucun_album_criteres:> ]
 		]
 		</h2>
 	]

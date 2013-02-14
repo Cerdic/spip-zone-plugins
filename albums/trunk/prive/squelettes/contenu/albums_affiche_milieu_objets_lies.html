@@ -35,13 +35,13 @@
 			#INFO_TITRE{#OBJET,#ID_OBJET}
 		</td>
 
-		<td class='action'>
-		[(#INCLURE{fond=prive/squelettes/inclure/inc-albums_boutons_actions,
+		<td class='actions'>
+		[(#INCLURE{fond=prive/squelettes/inclure/albums_boutons_actions,
 			bouton=dissocier,
-			id_album=#ID_ALBUM, 
-			objet_lien=#OBJET,
-			id_objet_lien=#ID_OBJET,
-			vu=#VU}{env})]
+			id_album, 
+			objet,
+			id_objet,
+			vu}{env})]
 		</td>
 
 	</tr>

@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_associer' => 'Associer',
 	'bouton_dissocier' => 'Dissocier',
+	'bouton_valider_deplacer_documents' => 'Enregistrer les changements',
 
 	// C
 	'c_albums_info' => 'Gestion des albums',
@@ -26,6 +27,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		</ul>
 		</div>',
 	'cfg_titre_albums' => 'Albums',
+
+	// E
+	'erreur_deplacement' => 'Le traitement n\'a pas pu être effectué',
 
 	// F
 	'filtre_avec_contenu' => 'Remplis',
@@ -46,12 +50,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_afficher_documents' => 'Vue complète',
-	'icone_afficher_documents_alt' => 'Basculer vers la vue complète pour gérer les documents de l\'album',
 	'icone_ajouter' => 'Ajouter',
 	'icone_ajouter_album' => 'Ajouter un album',
 	'icone_associer_album' => 'Associer un album existant',
-	'icone_cacher_documents' => 'Vue simple',
-	'icone_cacher_documents_alt' => 'Basculer vers la vue simple',
 	'icone_creer_album' => 'Créer un nouvel album',
 	'icone_delier_album' => 'Enlever cet album',
 	'icone_fermer' => 'Fermer',
@@ -91,6 +92,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_modele_variante_defaut' => 'Vignettes (défaut)',
 	'label_titre' => 'Titre',
 	'label_utiliser_titre_defaut' => 'Titre d\'un nouvel album',
+	'label_modifier_balise' => 'Modifier la balise',
+
+	// M
+	'message_balise_inseree_succes' => 'La balise a été insérée dans le texte',
 
 	// O
 	'onglet_associer_album' => 'Associer',

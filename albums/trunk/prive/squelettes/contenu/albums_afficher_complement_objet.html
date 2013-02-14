@@ -4,7 +4,6 @@
 	Appelé par le pipeline 'afficher_complement_objet'
 ]
 
-#SET{nombre_pagination,5}
 #SET{self,		#SELF|parametre_url{id_album_ajoute,''}|parametre_url{recherche,''}}
 
 [(#REM) définition des variables afficher_xxx ]
@@ -21,19 +20,25 @@
 #SET{autorise_creer,	#AUTORISER{creer,album}|?{oui,''}}
 #SET{autorise_associer,	#AUTORISER{associeralbum, #OBJET, #ID_OBJET}|?{oui,''}}
 
-<div class='albums'>
+<div class='albums' id='albums'>
 <a name='albums'></a>
 
 [(#GET{albums_lies}|oui)
 	[(#REM) HEADER ]
-	<div class='portfolios'>
 	<h3><:album:titre_albums:></h3>
-	</div>
 
 	[(#REM) LISTE ALBUMS LIES ]
 	[(#INCLURE{fond=prive/objets/liste/albums_lies,
-		statut='prepa|publie|poubelle',
-		nb=#GET{nombre_pagination}}{env})]
+		statut='prepa|publie',
+		nb=#ENV{nb,5},
+		env}
+	)]
+
+	[(#REM) formulaire de drag and drop ]
+	[(#AUTORISER{modifier, #OBJET, #ID_OBJET}|oui)
+	<div class='ajax'>#FORMULAIRE_ALBUMS_DEPLACER_DOCUMENTS{#OBJET, #ID_OBJET}</div>
+	]
+
 ]
 
 
@@ -41,7 +46,8 @@
 [(#AUTORISER{ajouteralbum, #OBJET, #ID_OBJET}|et{#ENV{albums}|is_null}|oui)
 	[(#SET{label,<:album:icone_ajouter_album:>})]
 	[(#GET{self}|parametre_url{albums,#GET{autorise_creer}|?{creer,associer}}
-		|icone_verticale{#GET{label},album,new,'ajax preload right'})]
+		|icone_verticale{#GET{label},album,new,'ajax preload right'}
+	)]
 ]
 
 
@@ -101,7 +107,7 @@
 	[(#FORMULAIRE_EDITER_ALBUM{
 		oui,
 		#GET{self}|parametre_url{albums,''}|ancre_url{albums},
-		#OBJET_LIEN|concat{'|'}|concat{#ID_OBJET_LIEN},
+		#OBJET|concat{'|'}|concat{#ID_OBJET},
 		#ENV{lier_trad}}
 	)]
 	</div>
@@ -120,9 +126,12 @@
 		bouton=associer,
 		nb=#GET{nombre_pagination},
 		objet='',
+		objet_associer=#OBJET,
+		id_objet_associer=#ID_OBJET,
 		env}
 	)]
 	</div>
 ]
 
-</div><!-- fin albums -->
+
+</div><!-- #albums -->

@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Plugin Albums
+ * Licence GNU/GPL
+ */
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
@@ -167,11 +170,12 @@ function album_determiner_contenu($id_album) {
  * 	une liste simple des types de media
  * 	une liste detaillee (icone + nombre pour chaque type de media)
  * 	les icones des types de media
+ * 	le nombre total de documents
  * 	une qualification du contenu pour choisir le fichier du logo (vide, mixte, ou type de media)
  *
  * @param string $id_album	identifiant de l'album
- * @param string $info		'', 'liste', 'liste_detaillee', 'logo'
- * @param string $format	'', 'tableau' : format du retour
+ * @param string $info		'' / liste / liste_detaillee / icones / nombre / logo
+ * @param string $format	'' / tableau' : format du retour
  * @return string/array/boolean
  */
 function filtre_album_contenu($id_album, $info='', $format='') {
@@ -231,6 +235,17 @@ function filtre_album_contenu($id_album, $info='', $format='') {
 				}
 				break;
 
+			// nombre des medias
+			case 'nombre';
+				if (!empty($medias)) {
+					$nb = '';
+					foreach ($medias AS $media=>$nombre) {
+						$nb += $nombre;
+					}
+					$retour = $nb;
+				}
+				break;
+
 			// liste des medias
 			case 'icones';
 				if (!empty($medias)) {
@@ -242,7 +257,6 @@ function filtre_album_contenu($id_album, $info='', $format='') {
 					}
 					$retour .= '</ul>';
 				}
-
 				break;
 
 			// vrai ou faux
@@ -273,7 +287,7 @@ function filtre_album_contenu($id_album, $info='', $format='') {
  * 	le nombre total d objets lies
  *
  * @param string $id_album		identifiant de l'album
- * @param string $format		liste, liste_detaillee, liste_compacte, nombre
+ * @param string $format		liste / liste_detaillee / liste_compacte / nombre
  * @param string $afficher_icone	si 'icone', affiche les icones des objets
  * @return string
  */

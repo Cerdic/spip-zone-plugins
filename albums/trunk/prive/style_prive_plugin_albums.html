@@ -7,86 +7,70 @@
 
 
 
-
 /*==============================
   === BOITE COMPLEMENT OBJET ===
   ==============================*/
 
-/* titre boite */
-.albums > .portfolios > h3		{
-					margin: 0 0 10px;
-					padding: 2px 10px;
-					background-color: #GET{claire};
-					}
+.albums 			{ position: relative; }
 
-/* ONGLETS + ENTETE + FORMULAIRES */
+/*= TITRE =*/
+.albums > h3			{
+				margin: 0 0 10px; padding: 2px 10px;
+				background-color: #GET{claire};
+				}
+
+/*= ONGLETS + ENTETE + FORMULAIRES =*/
 .albums .entete_ajouter,
   .albums #associer,
-  .albums .onglets strong.on		{border:1px solid #GET{foncee};}
+  .albums .onglets strong.on	{ border:1px solid #GET{foncee}; }
 
-/* ONGLETS */
-.albums .onglets			{
-					display: table;
-					width: 100%;
-					font-weight: bold;
-					}
+/*= ONGLETS =*/
+.albums .onglets		{
+				display: table; width: 100%;
+				font-weight: bold;
+				}
 .albums .onglets a,
-  .albums .onglets strong		{
-					display: table-cell;
-					padding:.2em .8em;
-					background-color: #fff;
-					border: 1px solid #dfdfdf;
-					border-left: none;
-					border-bottom: 1px solid #GET{foncee};
-					font-size: .92em;
-					text-align: center;
-					text-transform: uppercase;
-					}
-.albums .onglets > *:first-child	{border-left: 1px solid #dfdfdf;}
-.albums .onglets a:hover		{
-					background-color: rgba(0,0,0,.04); 
-					text-decoration: none;
-					}
-.albums .onglets strong.on		{
-					background-color: #GET{foncee};
-					border-bottom: none;
-					}
-.albums .onglets .fermer 		{
-					width: 0; /* pour taille minimale */
-					padding: 0 .3em;
-					}
+  .albums .onglets strong	{
+				display: table-cell; padding:.2em .8em;
+				background-color: #fff; border: 1px solid #dfdfdf; border-left: none; border-bottom: 1px solid #GET{foncee};
+				font-size: .92em; text-align: center; text-transform: uppercase;
+				}
+.albums .onglets > *:first-child{ border-left: 1px solid #dfdfdf; }
+.albums .onglets a:hover	{
+				background-color: rgba(0,0,0,.04); 
+				text-decoration: none;
+				}
+.albums .onglets strong.on	{ background-color: #GET{foncee}; border-bottom: none; }
+.albums .onglets .fermer 	{
+				width: 0; /* pour taille minimale */
+				padding: 0 .3em;
+				}
 
-/* ENTETE */
-.albums .entete_ajouter			{
-					padding: 1.5em .5em;
-					background-color: #GET{foncee};
-					border-top: none;
-					}
-.albums .entete_ajouter h4		{
-					display: inline;
-					margin: 0;
-					font-size: 1.3em;
-					font-weight: normal;
-					color: #fff;
-					}
-.albums .entete_ajouter img		{vertical-align:bottom;}
+/*= ENTETE =*/
+.albums .entete_ajouter		{
+				padding: 1.5em .5em;
+				background-color: #GET{foncee}; border-top: none;
+				}
+.albums .entete_ajouter h4	{
+				display: inline; margin: 0;
+				font-size: 1.3em; font-weight: normal; color: #fff;
+				}
+.albums .entete_ajouter img	{ vertical-align:bottom; }
 
-/* FORMULAIRE ASSOCIER */
-.albums #associer			{
-					background-color: #fff;
-					border-color: #aaa;
-					border-top: none;
-					}
-.albums #associer .entete		{
-					padding:.4em;
-					border-top: none;
-					border-bottom: none;
-					}
+/*= FORMULAIRE ASSOCIER =*/
+.albums #associer		{ background-color: #fff; border-color: #aaa; border-top: none; }
+.albums #associer .entete	{
+				padding:.4em;
+				border-top: none; border-bottom: none;
+				}
 .albums #associer .formulaire_recherche,
-  .albums #associer .filtres		{margin: 0;}
+  .albums #associer .filtres	{margin: 0;}
 
-/* FORMULAIRE CREER */
-.albums #creer .formulaire_editer	{margin-top:0; border-top:none;}
+/*= FORMULAIRE CREER =*/
+.albums #creer .formulaire_editer{
+				margin-top:0;
+				border-top:none;
+				}
 
 
 
@@ -98,118 +82,125 @@
 /*==========
   = TOUTES =
   ==========*/
-.albums .entete h2			{display: inline;}
+.albums .entete h2		{ display: inline; }
 .albums .liste-objets,
-  .albums .liste			{margin:0; border-width:0;}
-.albums td				{vertical-align: top;}
-.albums td img				{vertical-align: middle;}
-.albums td.logo				{width: 1px;}
-.albums th.id,
-  .albums td.id				{width: 1.5em; text-align: center;}
-.albums td.infos			{/*min-width: 13em;*/}
-.albums td.descriptif			{max-width: 15em;}
-.albums td.descriptif p			{margin: 0;}
-.albums td.action			{
-					/*width: 60px;*/
-					text-align: right;
-					}
-.albums td.action .submit		{line-height: 0;}
-.albums  td.contenu,
-  .albums  td.liaison			{min-width: 8em;}
-
-/*============
-  = ASSOCIER =
-  ============*/
+  .albums .liste		{ margin: 0; border-width: 0; }
+.album .header			{ margin: 0; }
+.albums td,
+  .album td			{ vertical-align: top; }
+.album td img			{ vertical-align: middle; }
+.album td.logo			{ width: 1px; }
+.album .titre h4		{ margin: 0; }
+.album .descriptif p		{ margin: 0; }
+.album .infos			{ color: #888; }
+.album td.actions		{ text-align: right; }
+.album td.actions .submit	{ line-height: 0; }
+.album .pagination 		{ background-color: transparent; border: 0 none; }
 
 
 /*================
   = ALBUMOTHEQUE =
   ================*/
-.albums .albumotheque			{margin-top: 1em;}
-.albums .albumotheque td		{padding: .8em .5em; font-size: 1em;}
-.albums .albumotheque td.id		{font-size: 1.5em;}
+.albumotheque .album.premier	{ margin-top: 10px; }
+.albums.albumotheque .album .inner { background-color: #fff; }
+.albumotheque .album .header	{ padding: .5em; }
+.albumotheque .album .header > div { max-width: 40%; }
+
+
+/*========
+  = LIES =
+  ========*/
+/* conteneurs */
+.albums .album			{ margin: 0 0 10px;}
+.albums .album .bd,
+  .albums .album .hd		{ padding: 0;}
+.albums .album .inner		{ border-color: #e5e5e5; background-color: transparent; }
+.album.actif .inner		{ border-color: #GET{claire};}
+.albums .album .inner:hover	{ background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];}
+/* header */
+.album .header,
+  .album .footer 		{padding: .2em;}
+.album .header > div 		{
+				display: inline-block; max-width: 80%; margin-#ENV{right}: 1em;
+				vertical-align: top;
+				}
+.album .header .infos 		{ float: #ENV{right}; }
+/* footer */
+.album .act			{
+				padding-bottom: 0; padding-top: 0;
+				border: none; background-color: transparent;
+				}
+/* documents : apercu */
+.album .liste_docs		{
+				padding: .5em;
+				border-top: 1px dotted #ccc; border-top-color: rgba(0,0,0,.1);
+				line-height: 0; /* supprime l'espace apres les images */
+				}
+.album .doc,
+  .placeholder-album		{ /* hauteur et line-height dans le squelette */
+				display: inline-block; position: relative; margin: 0 .2em .5em 0;
+				vertical-align: middle;
+				text-align: center;
+				}
+.album .doc a img 		{ vertical-align: middle; }
+.placeholder-album		{ background-color:#GET{claire}; box-shadow:-1px 1px 1px #GET{foncee}; } /* hauteur et largeur dans squelette */
+/* boutons */
+.album .actions,
+  .album .actions button	{ font-size: x-small; }
+.album .actions a		{ font-weight: bold; }
+.album .actions img		{ vertical-align: middle; }
+.album .reveal			{ opacity: .1; }
+.album .inner:hover .reveal	{ opacity: 1; visibility: visible; }
+/* bouton retirer */
+.album .doc .retirer,
+  .album .doc .retirer button	{ width: 16px; height: 16px;}
+.album .doc .retirer		{
+				position: absolute; #ENV{right}: 0; top: 0; display: none; opacity: .65;
+				line-height: 0;
+				background: url('[(#CHEMIN_IMAGE{del-24.png})]') no-repeat bottom right transparent;)
+				}
+.album .doc:hover .retirer	{ display: block;}
+.album .retirer:hover		{ opacity: 1; visibility: visible; }
+.album .doc .retirer button.submit,
+  .album .doc .retirer button.submit:hover{border: 0;}
+#portfolios .doc .retirer	{ display:none; } /* quand doc d'un album deplace dans portfolios */
+/* formulaire ajout */
+.album .formulaire_joindre_document { margin: 0 .5em .5em; }
+
+/* DRAG DROP */
+.formulaire_albums_deplacer_documents .fermer { float: #ENV{right}; cursor: pointer; }
+.cible-album			{ outline: 2px dashed #GET{foncee}; }
+.album .doc.drag:hover .retirer	{display: none;} /* cacher bouton retirer pendant deplacement */
+/* vignette du portfolio dans album */
+.albums .liste-items .item	{ 
+				padding: 0;
+				border: 0;
+				}
+/* placeholder quand portfolio vide */
+.liste_items.placeholder	{
+				height: 2em;
+				border-top: 0 none;
+				}
+
+
+
+/*============
+  = ASSOCIER =
+  ============*/
+.albums .associer .actions	{ width: 6em; }
+.albums .associer .actions img	{ vertical-align: middle; }
+.albums .associer .contenu	{ width: 8em; }
+
 
 /*=============
   = SELECTEUR =
   =============*/
 
-.albums .entete.selecteur h2		{font-size: 1em;}
-.albums .liste-objets.selecteur		{font-size: .9em;}
-.albums .selecteur td.id		{width: auto;}
-.albums .selecteur td.action		{display: table-cell; width: auto;}
-.albums .selecteur td.action input[type=radio]	{margin: 0;}
-
-/*========
-  = LIES =
-  ========*/
-/* conteneur général */
-.album.lie				{
-					display: table;
-					width: 100%;
-					margin: 0 0 10px;
-					}
-/* logo */
-.album.lie .logo			{
-					width: 1px; /* taille minimum quel que soit la taille du logo */
-					padding-right: 10px;
-					}
-.album.lie .logo,
-.album.lie .contenu			{display: table-cell;}
-/* contenu */
-.album.lie .contenu			{
-					padding: 1px;
-					vertical-align: top;
-					border: 1px solid #ddd;
-					border-color: rgba(0,0,0,.1);
-					/*box-shadow: inset 0 0 1em rgba(0,0,0,.03);*/
-					background-color: #fff;
-					border-radius: 2px;
-					}
-.album.lie .contenu:hover		{
-					background-color: #eee;
-					background-color: rgba(0,0,0,.025);
-					}
-.album.lie.actif .contenu		{border-color: #GET{claire};}
-/* header = tableau */
-.album.lie .header 			{margin: 0;}
-.album.lie .infos			{
-					width: 5em;
-					font-size: 0.9em;
-					}
-.album.lie .infos img			{vertical-align: middle;}
-.album.lie .titre > *			{margin: 0;}
-.album.lie .titre > *:first-letter	{text-transform: uppercase;}
-.album.lie .action			{width: 10em;}
-.album.lie .action .editbox > img	{position: relative; top:-.2em;}
-/* bouton permuter */
-.album.lie .permuter			{font-size: 0.9em;}
-.album.lie .permuter span		{font-size: 1.2em;} /* la fleche */
-/*.album.lie .permuter:before		{display: inline-block; content:''; width: 8px; height: 8px; margin-right: .25em;}
-.album.lie .permuter.afficher:before	{background:url([(#CHEMIN_IMAGE{curseur-depli-8.png})]) no-repeat;}
-.album.lie .permuter.cacher:before	{background:url([(#CHEMIN_IMAGE{curseur-repli-8.png})]) no-repeat;}*/
-/* */
-.album.lie .apercu,
-  .album.lie .detail			{
-  					border-top: 1px dotted #ccc;
-					border-top-color: rgba(0,0,0,.1);
-					}
-/* documents : apercu */
-.album.lie .apercu			{
-					padding: .5em;
-					line-height: 0; /* supprime l'espace apres les images */
-					}
-.album.lie .apercu .vignette		{
-					float: #ENV{left};
-					/*width: 52px;*/ height: 52px;
-					line-height: 52px; /* pour centrer verticalement l'image */
-					padding: .2em .35em;
-					text-align: center;
-					}
-.album.lie .apercu .vignette img	{vertical-align: middle;}
-/* documents : vue detaillée */
-.album.lie .detail 			{padding: .5em;}
-.album.lie .portfolios,
-.album.lie .formulaire_joindre		{margin: 0;}
+.albums .entete.selecteur h2	{ font-size: 1em; }
+.albums .liste-objets.selecteur	{ font-size: .9em; }
+.albums .selecteur td.id	{ width: auto; }
+.albums .selecteur td.actions	{ display: table-cell; width: auto; }
+.albums .selecteur td.actions input[type=radio]	{ margin: 0; }
 
 
 
@@ -219,17 +210,11 @@
   ===============*/
 
 .albums .onglets_simple .parents li:first-child {margin-#ENV{left}: 2.5em;}
-.albums .onglets_simple img		{
-					margin-right: 0.3em;
-					vertical-align: middle;
-					}
-.albums .onglets_simple.filtres a	{padding-left: .2em; padding-right: .2em;}
-.albums .onglets_simple.filtres strong	{padding-left: .5em; padding-right: .5em;}
+.albums .onglets_simple img	{ margin-right: 0.3em; vertical-align: middle; }
+.albums .onglets_simple.filtres a {padding-left: .2em; padding-right: .2em;}
+.albums .onglets_simple.filtres strong {padding-left: .5em; padding-right: .5em;}
 .albums .onglets_simple.filtres a,
-  .albums .onglets_simple.filtres a:hover {
-					border-color: transparent;
-					background-color: transparent;
-					}
+  .albums .onglets_simple.filtres a:hover { border-color: transparent; background-color: transparent; }
 
 
 
@@ -237,22 +222,37 @@
 /*========================= 
   === BOITE OBJETS LIES === 
   =========================*/
-.albums.liaison > ul		{
-				padding-top: 0;
-				padding-bottom: 0;
-				}
-.albums.liaison .liste-objets {
-				padding-bottom: 0;
-				padding-right: 0;
-				padding-top: 0;
-				}
+.albums.liaison > ul		{ padding-top: 0; padding-bottom: 0; }
+.albums.liaison .liste-objets	{ padding-bottom: 0; padding-right: 0; padding-top: 0; }
 .albums.liaison label		{
 				margin-top: .34em;
 				font-weight: bold;
 				}
-.albums.liaison .liste td.icone_objet	{width: 20px;}
-.albums.liaison .liste tr:first-child td {border-top: none;}
-.albums.liaison .liste tr:last-child td {border-bottom: none;}
+.albums.liaison .liste td.icone_objet { width: 20px; }
+.albums.liaison .liste tr:first-child td { border-top: none; }
+.albums.liaison .liste tr:last-child td { border-bottom: none; }
+
+
+
+
+/*============================ 
+  === BOITE COLONNE GAUCHE === 
+  ============================*/
+.album .raccourcis		{ padding: 0; }
+.album .raccourcis .toggle	{
+				display: block; margin: .6em 0;
+				font-weight: bold;
+				}
+.album .raccourcis .toggle.on	{
+				margin-bottom: 0;
+				background-color: #GET{foncee};
+				color: #333;
+				}
+.album .raccourcis .formulaire_spip {
+				margin-top: 0;
+				background: transparent;
+				}
+.album .raccourcis .formulaire_spip li { text-align: left; }
 
 
 
@@ -261,18 +261,19 @@
   === DIVERS ===
   ==============*/
 /* logo */
-.album.logo			{margin:0 auto;}
+.album.logo			{ margin: 0 auto; }
 /* bouton action */
-  .albums button:hover,
-  .albums button:hover			{cursor:pointer;}
+.albums button:hover,
+  .albums button:hover		{ cursor:pointer; }
+.actions .supprimer.off		{ margin-right: .25em; }
 /* formulaire configurer */
-.albums .inline .choix			{display:inline-block;}
-.albums .inline .choix input		{margin-right:0; vertical-align:bottom;}
-.albums .inline .choix label		{margin-left:0; margin-right:.8em;}
-.albums .inline .choix strong small	{font-weight:normal;}
+.albums .inline .choix		{ display: inline-block; }
+.albums .inline .choix input	{ margin-right: 0; vertical-align: bottom; }
+.albums .inline .choix label	{ margin-left: 0; margin-right: .8em; }
+.albums .inline .choix strong small { font-weight: normal; }
 /* message compagnon */
-.box.compagnon .albums > ul		{margin:.5em 0;}
-.box.compagnon .albums > ul li > ul	{display:inline-block; vertical-align:top; list-style:none inside;}
+.box.compagnon .albums > ul	{ margin: .5em 0;}
+.box.compagnon .albums > ul li > ul { display: inline-block; vertical-align: top; list-style: none inside;}
 
 
 
@@ -280,21 +281,22 @@
 /*==============
   === MODELE ===
   ==============*/
+.album.center			{ display: table; }
 /* vue en vignettes */
-.album.vignettes li			{float: left; margin: 0 10px 10px 0;}
-.album.vignettes li .spip_logos		{float: none; margin: 0;}
+.album.vignettes li		{ float: left; margin: 0 10px 10px 0; }
+.album.vignettes li .spip_logos	{ float: none; margin: 0; }
 .album.vignettes figure,
-  .album.vignettes .figure		{display: table; width: 1px;} /* width : pour empecher le titre de dépasser */
+  .album.vignettes .figure	{ display: table; width: 1px; } /* width : pour empecher le titre de dépasser */
 .album.vignettes a,
   .album.vignettes figcaption,
   .album.vignettes .figcaption,
-  .album.vignettes img 			{display: table-row;}
+  .album.vignettes img 		{ display: table-row; }
 
 /* notice espace privé */
-.album.publier				{opacity:.3}
-.album.publier:hover 			{opacity: 1}
-.album.publier .submit			{
-					padding: 0;
-					font-size: .8em;
-					}
-.album.publier .submit:hover		{cursor: pointer;}
+.album.publier			{ opacity:.3 }
+.album.publier:hover 		{ opacity: 1 }
+.album.publier .submit		{
+				padding: 0;
+				font-size: .8em;
+				}
+.album.publier .submit:hover	{ cursor: pointer; }
