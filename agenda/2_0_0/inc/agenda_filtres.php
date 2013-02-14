@@ -23,12 +23,6 @@
  * @return string
  */
 function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
-	static $trans_tbl=NULL;
-	if ($trans_tbl==NULL){
-		$trans_tbl = get_html_translation_table (HTML_ENTITIES, ENT_COMPAT | ENT_XHTML, 'UTF-8');
-		$trans_tbl = array_flip ($trans_tbl);
-	}
-	
 	$abbr = '';
 	if (strpos($forme,'abbr')!==false) $abbr = 'abbr';
 	$affdate = "affdate_jourcourt";
@@ -90,7 +84,7 @@ function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $for
 			$s .= " ".date("(H:i)",$date_fin);
 		$s .= $dtabbr;
 	}
-	return unicode2charset(charset2unicode(strtr($s,$trans_tbl),'AUTO'));	
+	return unicode2charset(charset2unicode($s,'AUTO'));	
 }
 
 function agenda_dateplus($date,$secondes,$format){
