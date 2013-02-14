@@ -15,10 +15,9 @@ function saisies_header_prive($flux){
 
 function saisies_affichage_final($flux){
 	if (($p = strpos($flux,"<!--!inserer_saisie_editer-->"))!==false){
-		// On insère la CSS devant le premier <script> trouvé
-		$pi = strpos($flux, "<script");
-		if (!$pi)
-			$pi = $p; // si pas de <script inserer comme un goret entre 2 <li> de saisies
+		// On insère la CSS devant le premier <link> trouvé
+		if (!$pi = strpos($flux, "<link") AND !$pi=strpos($flux, '</head'))
+			$pi = $p; // si pas de <link inserer comme un goret entre 2 <li> de saisies
 		$css = generer_url_public('saisies.css');
 		$ins_css = "\n<link rel='stylesheet' href='$css' type='text/css' media='all' />\n";
 		$flux = substr_replace($flux, $ins_css, $pi, 0);
