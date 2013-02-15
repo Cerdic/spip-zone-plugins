@@ -44,29 +44,52 @@ function dms_to_dec($ref,$deg,$min,$sec) {
  * http://snipplr.com/view/2531/calculate-the-distance-between-two-coordinates-latitude-longitude/
  * sinon voir ici : http://zone.spip.org/trac/spip-zone/browser/_plugins_/forms/geoforms/inc/gPoint.php
  * 
- * @param int $from id_gis du point de référence
- * @param int $ti id_gis du point distant
- * @param bool $miles renvoyer le résultat en miles (kilomètres par défaut)
- * @return
+ * @param int|array $from
+ *     id_gis du point de référence ou tableau de coordonnées
+ * @param int|array $to
+ *     id_gis du point distant ou tableau de coordonnées
+ * @param bool $miles
+ *     Renvoyer le résultat en miles (kilomètres par défaut)
+ * @return float
+ *     Retourne la distance en kilomètre ou en miles
  */
-function distance($from,$to,$miles=false) {
-	$from = sql_fetsel('lat,lon','spip_gis',"id_gis=$from");
-	$to = sql_fetsel('lat,lon','spip_gis',"id_gis=$to");
+function distance($from, $to, $miles=false) {
+	// On ne travaille que si on a toutes les infos
+	if (
+		// Le départ est soit un tableau soit un entier
+		(
+			(is_array($from) and isset($from['lat']) and isset($from['lon']))
+			or
+			($from = intval($from) and $from > 0 and $from = sql_fetsel('lat,lon','spip_gis',"id_gis=$from"))
+		)
+		and
+		// Le disant est soit un tableau soit un entier
+		(
+			(is_array($to) and isset($to['lat']) and isset($to['lon']))
+			or
+			($to = intval($to) and $to > 0 and $to = sql_fetsel('lat,lon','spip_gis',"id_gis=$to"))
+		)
+	){
+		$from = sql_fetsel('lat,lon','spip_gis',"id_gis=$from");
+		$to = sql_fetsel('lat,lon','spip_gis',"id_gis=$to");
 	
-	$pi80 = M_PI / 180;
-	$from['lat'] *= $pi80;
-	$from['lon'] *= $pi80;
-	$to['lat'] *= $pi80;
-	$to['lon'] *= $pi80;
+		$pi80 = M_PI / 180;
+		$from['lat'] *= $pi80;
+		$from['lon'] *= $pi80;
+		$to['lat'] *= $pi80;
+		$to['lon'] *= $pi80;
 
-	$r = 6372.797; // mean radius of Earth in km
-	$dlat = $to['lat'] - $from['lat'];
-	$dlng = $to['lon'] - $from['lon'];
-	$a = sin($dlat / 2) * sin($dlat / 2) + cos($from['lat']) * cos($to['lat']) * sin($dlng / 2) * sin($dlng / 2);
-	$c = 2 * atan2(sqrt($a), sqrt(1 - $a));
-	$km = $r * $c;
+		$r = 6372.797; // mean radius of Earth in km
+		$dlat = $to['lat'] - $from['lat'];
+		$dlng = $to['lon'] - $from['lon'];
+		$a = sin($dlat / 2) * sin($dlat / 2) + cos($from['lat']) * cos($to['lat']) * sin($dlng / 2) * sin($dlng / 2);
+		$c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+		$km = $r * $c;
 
-	return ($miles ? ($km * 0.621371192) : $km);
+		return ($miles ? ($km * 0.621371192) : $km);
+	}
+	
+	return false;
 }
 
 /**
