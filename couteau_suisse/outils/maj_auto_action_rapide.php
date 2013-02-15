@@ -16,6 +16,7 @@ define('_MAJ_SVN_TRAC', 'svn://trac.rezo.net/spip-zone/'); // ancienne URL
 define('_MAJ_ZONE', 'http://zone.spip.org/trac/spip-zone/');
 define('_MAJ_LOG_DEBUT', _MAJ_ZONE.'log/');
 define('_MAJ_LOG_FIN', '?format=changelog');
+define('_MAJ_LOG_CS', _MAJ_LOG_DEBUT .'_plugins_/couteau_suisse');
 define('_MAJ_ZIP', 'http://files.spip.org/spip-zone/');
 define('_MAJ_ZIP_SPIP', 'http://files.spip.org/spip/archives/SPIP-v');
 define('_MAJ_ECRAN_SECU', _MAJ_ZONE.'browser/_core_/securite/ecran_securite.php?format=txt');
@@ -180,8 +181,8 @@ function maj_auto_action_rapide() {
 			$maj_lib = _T('couteau:maj'.($infos['svn']?'_svn':'_ok'),
 				array('zip'=>$infos['zip_trac'], 'url'=>$infos['url_origine']));
 		elseif($auto) {
-			$maj_lib = $infos['rev_local']==999999
-				? _L('Erreur. Fichier ./svn.revision incomplet ?')
+			$maj_lib = $infos['rev_local']==999.99 && $infos['prefix']!='couteau_suisse'
+				?_L('Erreur d\'[archive distante->@zip@]. &laquo;&nbsp;svn.revision&nbsp;&raquo; incomplet ?', array('zip'=>$infos['zip_trac']))
 				:_T('couteau:maj_rev_ko', array('url'=>$infos['url_origine']));
 			$checked = " class='maj_checked'"; }
 		elseif($infos['rev_local'] && $infos['rev_rss']<=0)
@@ -197,10 +198,12 @@ function maj_auto_action_rapide() {
 		$id_paquet = abs($infos['id_paquet']);
 		if(!strlen($rev)) $rev = '&nbsp;';
 		$zip_log = (strlen($infos['zip_log']) && $infos['zip_log']!=$infos['zip_trac'])
-			?"<label><input type='radio' value='$infos[zip_log]'$checked name='$arg_chargeur'/>[->$infos[zip_log]]</label>":'';
+			?"<label><input type='radio' value='$infos[zip_log]'$checked name='$arg_chargeur'/>[->$infos[zip_log]]</label>"
+			:'';
 		$bouton = '&nbsp;';
-		// bouton si on est dans les temps, et si une mise a jour est dispo sauf si un vieux plugin auto/ est detecte
-		if(!$stop && ($infos['maj_dispo'] || $infos['id_paquet']<0)) {
+		// bouton si on est dans les temps, et si une mise a jour est dispo 
+		// (sauf si un vieux plugin auto/ est detecte ou erreur d'archivage distant)
+		if(!$stop && ($infos['maj_dispo'] || $infos['id_paquet']<0 || $infos['rev_local']==999.99)) {
 			if($id_paquet) {
 				// format des donnees en sortie
 				$bouton = $id_paquet.':'.$infos['id_depot'].':'.$p.':'.$infos['zip_trac'];
@@ -302,12 +305,12 @@ function plugin_get_infos_maj($p, $timeout=false, $DIR_PLUGINS=_DIR_PLUGINS) {
 		$url_origine = str_replace(array(_MAJ_SVN_FILE, _MAJ_SVN_DEBUT), _MAJ_LOG_DEBUT, $regs[1]);
 		// prise en compte du recent demenagement de la Zone...
 		$url_origine = preg_replace(',/_plugins_/_(?:stable|dev|test)_/,','/_plugins_/', $url_origine);
-	} else $url_origine = '';
+	} else $url_origine = $infos['prefix']=='couteau_suisse'?_MAJ_LOG_CS:'';
 	$infos['commit'] = ($ok && preg_match(',<commit>(.+)</commit>,', $svn, $regs))?$regs[1]:'';
 	$rev_local = (strlen($svn) && preg_match(',<revision>(.+)</revision>,', $svn, $regs))
 		?intval($regs[1]):
 			($infos['commit']>='2013-02-08'
-				?999999
+				?999.99 # Erreur sur le serveur SPIP survenue le 8 fevrier 2013
 				:version_svn_courante2($DIR_PLUGINS.$p)
 			);
 	if($infos['svn'] = is_array($rev_local) || $rev_local<0) { 
