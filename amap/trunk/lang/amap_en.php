@@ -111,8 +111,9 @@ The basket of @date_distribution@ is at disposal, please follow this link @lien@
 	'panier_dispo_plus' => 'Extra infos to give (It will be added in the mail sent before your name)',
 	'panier_disposition' => 'You have 1 available basket',
 	'panier_distribuer' => 'basket to deliver',
-	'panier_explication' => 'On this page, you will find the list of the baskets that you have to deliver, You can modify or delete them.',
-	'panier_explication' => 'Every modification send a mail to all the subscribers and producers.',
+	'panier_explication' => 'On this page, you will find the list of the baskets that you have to deliver, You can modify or delete them. Every modification send a mail to all the subscribers and producers.', # MODIF
+	'panier_explication_email' => 'Toutes modifications entraîne un envoie de mail en masse à tous les adhérents et les producteurs de l\'association.', # NEW
+	'panier_explication_interface' => 'Aucun mail n\'est envoyé, il est rajouté sur l\'interface de disponibilité.', # NEW
 	'panier_liste' => 'Baskets list',
 	'panier_livraison' => 'Basket content',
 	'panier_recupere' => 'Transaction of the @date_distribution@ basket done',
@@ -142,7 +143,7 @@ I will get the basket of the @date_distribution@ produced by @nom_producteur@
 	'recupere_panier' => 'Recover the basket',
 	'responsables' => 'People in charge',
 	'responsables_distribution_paniers_mois' => 'In charge for deliveries from @date_debut@ to @date_fin@',
-	'responsables_explication' => 'On, this page, there is a people in charge list with distribution dates. This table can be displayed on the website by using the code <liste|distributions>',
+	'responsables_explication' => 'On, this page, there is a people in charge list with distribution dates. This table can be displayed on the website by using the code <liste|distributions>', # MODIF
 	'reste_panier_distribuer' => 'We still have 1 basket to deliver',
 	'reste_panier_recuperer' => 'You still have 1 basket to get',
 	'reste_paniers_distribuer' => 'We still have @nb@ baskets to deliver',
