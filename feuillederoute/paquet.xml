@@ -1,7 +1,7 @@
 <paquet
 prefix="feuillederoute"
 categorie="communication"
-version="0.9.6"
+version="0.9.7"
 etat="test"
 compatibilite="[3.0.0;3.*]"
 logo="images/feuillederoute-32.png"

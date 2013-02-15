@@ -1,14 +1,17 @@
 <?php
 
+
+
 // Formulaire pour composer la feuille de route
 
 // Chargement des valeurs
 function formulaires_editer_feuillederoute_charger_dist(){
-	$valeurs = array('texte'=>'');
+	$valeurs = array( '_texte' => '' );
 	lire_fichier_securise(_DIR_IMG . 'feuillederoute.php',$contenu);
 	$contenu = @unserialize($contenu);
-	if($contenu)
-		$valeurs['texte'] = $contenu;
+	if($contenu){
+		$valeurs['_texte'] = $contenu;
+	}
 	return $valeurs;
 }
 

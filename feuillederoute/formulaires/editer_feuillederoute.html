@@ -2,18 +2,19 @@
 [
 	[(#REM|test_espace_prive|oui) #BOITE_OUVRIR ]
 	<div class="affichage_feuillederoute">
-		<div class="texte">(#ENV{texte}|propre|typo)</div>
+		<div class="texte">(#ENV*{_texte}|propre|safehtml)</div>
 	</div>
+	#SET{existe,oui}
 	[(#REM|test_espace_prive|oui) #BOITE_FERMER ]
 ]
 
 [(#AUTORISER{editer,feuillederoute}|oui)
 
-	[(#ENV{texte}|oui)
+	[(#GET{existe}|=={oui}|oui)
 		<a href="#" class="poignee_feuillederoute"><:feuillederoute:modifier_le_texte:></a>
 	]
 
-	<div class="formulaire_spip formulaire_feuillederoute[(#ENV{texte}|oui) tiroir_feuillederoute]">
+	<div class="formulaire_spip formulaire_feuillederoute[(#GET{existe}|=={oui}|oui) tiroir_feuillederoute]">
 
 		[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>]
 		[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
@@ -24,7 +25,7 @@
 				<li class="editer editer_texte">
 					<!-- texte -->
 					<label><:feuillederoute:texte:></label>
-					<textarea id="texte" name="texte" rows="15">#ENV{texte}</textarea>
+					<textarea id="texte" name="texte" rows="15">#ENV{_texte}</textarea>
 				</li>
 			</ul>
 		<p class="boutons"><input type="submit" class="submit" value="<:feuillederoute:submit:>" /></p>
