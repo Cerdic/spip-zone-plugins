@@ -90,9 +90,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_modele_titre' => 'Titre personnalisé',
 	'label_modele_variante' => 'Variante',
 	'label_modele_variante_defaut' => 'Vignettes (défaut)',
+	'label_modifier_balise' => 'Modifier la balise',
 	'label_titre' => 'Titre',
 	'label_utiliser_titre_defaut' => 'Titre d\'un nouvel album',
-	'label_modifier_balise' => 'Modifier la balise',
 
 	// M
 	'message_balise_inseree_succes' => 'La balise a été insérée dans le texte',
