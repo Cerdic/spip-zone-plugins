@@ -21,7 +21,7 @@ function partenaires_declarer_tables_interfaces($interfaces) {
 	/**
 	 * On rajoute par sécurité et habitude spipienne le type pourvoir avoir {par type} sur une boucle PARTENAIRES
 	 */
-	$interfaces['exceptions_des_jointures']['partenaires']['type'] = array('spip_types', 'id_type');
+	$interfaces['exceptions_des_jointures']['partenaires']['type'] = array('spip_types', 'titre');
 
 	return $interfaces;
 }
