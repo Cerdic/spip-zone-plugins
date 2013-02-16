@@ -1,0 +1,10 @@
+<h1 class="grostitre"><:type:titre_page_types_page:></h1>
+
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/types, par=titre, env, ajax, sinon=<:type:info_aucun_type:>}>
+
+[(#AUTORISER{creer,type})
+	[(#URL_ECRIRE{type_edit,new=oui}|icone_verticale{<:type:icone_creer_type:>,type,new,right})]
+]

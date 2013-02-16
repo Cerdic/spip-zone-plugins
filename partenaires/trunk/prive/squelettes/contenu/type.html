@@ -1,0 +1,41 @@
+[(#AUTORISER{voir,type,#ID_TYPE}|sinon_interdire_acces)]
+<BOUCLE_type(TYPES){id_type}{si #ENV{exec}|=={type}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,type,#ID_TYPE})
+		[(#ID_TYPE|afficher_qui_edite{type}|non)
+			[(#URL_ECRIRE{type_edit,id_type=#ID_TYPE}|icone_verticale{<:type:icone_modifier_type:>,type,edit,right ajax preload})]
+		]
+		[(#ID_TYPE|afficher_qui_edite{type}|oui)
+			[(#URL_ECRIRE{type_edit,id_type=#ID_TYPE}|icone_verticale{#ID_TYPE|afficher_qui_edite{type},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{type-24.png}|balise_img{type,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{type,#ID_TYPE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/type,id=#ID_TYPE,id_type=#ID_TYPE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,type,id,#ID_TYPE},data,'<div class="nettoyeur"></div>'}}
+<div class="liste">
+    <BOUCLE_objetslies(spip_types_liens){id_type}{0,1}><h3><:type:titre_objets_lies_type:></h3></BOUCLE_objetslies>
+<INCLURE{fond=prive/objets/liste/partenaires,id_type,par=nom,ajax,env} />
+</div>
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_type>
+[(#ENV**{exec}|=={type_edit}|?{#INCLURE{fond=prive/squelettes/contenu/type_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_type>
