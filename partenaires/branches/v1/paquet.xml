@@ -1,7 +1,7 @@
 <paquet
 	prefix="partenaires"
 	categorie="divers"
-	version="1.1.5"
+	version="1.1.6"
 	etat="test"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/partenaires-64.png"
@@ -15,6 +15,8 @@
 	<nom>Partenaires</nom>
 
 	<auteur lien='http://www.teddypayet.com/'>Teddy Payet</auteur>
+	<credit lien='http://thenounproject.com/noun/partnership/#icon-No4203'>Designed by United Nations OCHA from The Noun Project</credit>
+	<credit lien='http://thenounproject.com/noun/question/#icon-No8063'>Question  designed by Juan Garces from The Noun Project</credit>
 
 	<licence>GNU/GPL</licence>
 	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
