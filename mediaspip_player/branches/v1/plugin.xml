@@ -13,7 +13,7 @@
 	</slogan>
 	<auteur>[kent1->http://www.kent1.info]</auteur>
 	<licence>© 2010-2012 GNU/GPL v3</licence>
-	<version>0.8.4</version>
+	<version>0.8.5</version>
 	<version_base>0.1</version_base>
 	<install>base/mediaspip_player_upgrade.php</install>
 	<etat>

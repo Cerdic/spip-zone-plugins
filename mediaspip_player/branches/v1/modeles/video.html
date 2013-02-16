@@ -80,7 +80,7 @@
 			width="(#GET{largeur})"][
 			height="(#GET{hauteur})"][
 			poster="(#GET{logo})"
-			]id="video_#ID_DOCUMENT">
+			]>
 			#SET{variantes,#ARRAY}
 			<BOUCLE_variantes(DOCUMENTS){id_orig=#ID_DOCUMENT}>#SET{variantes,#GET{variantes}|push{#EXTENSION}}</BOUCLE_variantes>[
 			(#EXTENSION|=={mp4}|et{#EXTENSION|in_array{#GET{variantes}}|non}|oui)
