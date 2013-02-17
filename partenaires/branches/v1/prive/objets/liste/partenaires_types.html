@@ -1,0 +1,34 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1, 
+	id_type,1,
+	points,-1
+}})]<B_liste_partenaires_types>
+#ANCRE_PAGINATION
+<div class="liste-objets partenaires_types">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{partenaires_type:info_1_partenaires_type,partenaires_type:info_nb_partenaires_types}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:partenaires_type:label_titre:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_type,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_partenaires_types(PARTENAIRES_TYPES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#LOGO_PARTENAIRES_TYPE|image_reduire{20,26})]</td>
+			<td class='titre principale'><a href="[(#ID_TYPE|generer_url_entite{partenaires_type})]" title="<:info_numero_abbreviation|attribut_html:> #ID_TYPE">[(#RANG). ]#TITRE</a></td>
+			<td class='id'>[(#AUTORISER{modifier,partenaires_type,#ID_TYPE}|?{
+				<a href="[(#URL_ECRIRE{partenaires_type_edit,id_type=#ID_TYPE})]">#ID_TYPE</a>,
+				#ID_TYPE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_partenaires_types>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_partenaires_types>[
+<div class="liste-objets partenaires_types caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_partenaires_types>

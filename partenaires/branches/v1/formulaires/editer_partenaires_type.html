@@ -1,18 +1,18 @@
-<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_option,nouveau}'>
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_type,nouveau}'>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<input type='hidden' name='id_option' value='#ENV{id_option}' />
+		<input type='hidden' name='id_type' value='#ENV{id_type}' />
 		<ul>
 
 			[(#SAISIE{input, titre, obligatoire=oui,
-				label=<:option:label_titre:>})]
+				label=<:partenaires_type:label_titre:>})]
 
 			[(#SAISIE{textarea, descriptif,
-				label=<:option:label_descriptif:>,
+				label=<:partenaires_type:label_descriptif:>,
 				li_class=haut, class=inserer_barre_edition, rows=4})]
 
 		</ul>
