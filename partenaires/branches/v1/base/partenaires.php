@@ -9,22 +9,22 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
- * D残laration des alias de tables et filtres automatiques de champs
+ * Dﾃｩclaration des alias de tables et filtres automatiques de champs
  */
 function partenaires_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['partenaires'] = 'partenaires';
-	$interfaces['table_des_tables']['options'] = 'options';
-	
-	$interfaces['exceptions_des_jointures']['partenaires']['nom_option'] = array('spip_options', 'titre');
-	$interfaces['exceptions_des_jointures']['partenaires']['id_option'] = array('spip_options', 'id_option');
+	$interfaces['table_des_tables']['partenaires_types'] = 'partenaires_types';
+
+        $interfaces['exceptions_des_jointures']['partenaires']['titre_type'] = array('spip_partenaires_types', 'titre');
+        $interfaces['exceptions_des_jointures']['partenaires']['id_type'] = array('spip_partenaires_types', 'id_type');
 
 	return $interfaces;
 }
 
 
 /**
- * D残laration des objets 仕itoriaux
+ * Dﾃｩclaration des objets ﾃｩditoriaux
  */
 function partenaires_declarer_tables_objets_sql($tables) {
 
@@ -33,7 +33,7 @@ function partenaires_declarer_tables_objets_sql($tables) {
 		'principale' => "oui",
 		'field'=> array(
 			"id_partenaire"      => "bigint(21) NOT NULL",
-			"nom"                => "varchar(75) NOT NULL DEFAULT ''",
+			"nom"                => "varchar(255) NOT NULL DEFAULT ''",
 			"descriptif"         => "text NOT NULL DEFAULT ''",
 			"url_site"           => "varchar(255) NOT NULL DEFAULT ''",
 			"maj"                => "TIMESTAMP"
@@ -51,50 +51,48 @@ function partenaires_declarer_tables_objets_sql($tables) {
 
 	);
 
-	$tables['spip_options'] = array(
-		'type' => 'option',
-		'principale' => "oui",
+	$tables['spip_partenaires_types'] = array(
+		'type' => 'partenaires_type',
+		'principale' => "oui", 
+		'table_objet_surnoms' => array('partenairestype'), // table_objet('partenaires_type') => 'partenaires_types' 
 		'field'=> array(
-			"id_option"          => "bigint(21) NOT NULL",
-			"titre"              => "varchar(75) NOT NULL DEFAULT ''",
+			"id_type" => "bigint(21) NOT NULL",
+			"titre"              => "varchar(255) NOT NULL DEFAULT ''",
 			"descriptif"         => "text NOT NULL DEFAULT ''",
 			"maj"                => "TIMESTAMP"
 		),
 		'key' => array(
-			"PRIMARY KEY"        => "id_option",
+			"PRIMARY KEY"        => "id_type",
 		),
 		'titre' => "titre AS titre, '' AS lang",
 		 #'date' => "",
 		'champs_editables'  => array('titre', 'descriptif'),
 		'champs_versionnes' => array('descriptif'),
 		'rechercher_champs' => array(),
-		'tables_jointures'  => array('spip_options_liens'),
+		'tables_jointures'  => array('spip_partenaires_types_liens'),
 		
 
 	);
 
-	// jointures sur les options de partenariat pour tous les objets
-	$tables[]['tables_jointures'][]= 'options_liens';
-	$tables[]['tables_jointures'][]= 'options';
 	return $tables;
 }
 
 
 /**
- * D残laration des tables secondaires (liaisons)
+ * Dﾃｩclaration des tables secondaires (liaisons)
  */
 function partenaires_declarer_tables_auxiliaires($tables) {
 
-	$tables['spip_options_liens'] = array(
+	$tables['spip_partenaires_types_liens'] = array(
 		'field' => array(
-			"id_option"          => "bigint(21) DEFAULT '0' NOT NULL",
+			"id_type" => "bigint(21) DEFAULT '0' NOT NULL",
 			"id_objet"           => "bigint(21) DEFAULT '0' NOT NULL",
 			"objet"              => "VARCHAR(25) DEFAULT '' NOT NULL",
 			"vu"                 => "VARCHAR(6) DEFAULT 'non' NOT NULL"
 		),
 		'key' => array(
-			"PRIMARY KEY"        => "id_option,id_objet,objet",
-			"KEY id_option"      => "id_option"
+			"PRIMARY KEY"        => "id_type,id_objet,objet",
+			"KEY id_type" => "id_type"
 		)
 	);
 

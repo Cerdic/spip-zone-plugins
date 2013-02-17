@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_descriptif' => 'Descriptif',
 	'label_nom' => 'Nom',
-	'label_url_site' => 'Site du partenaire',
+	'label_url_site' => 'Site internet',
 
 	// R
 	'retirer_lien_partenaire' => 'Retirer ce partenaire',
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_creer_associer_partenaire' => 'Créer et associer un partenaire',
 	'titre_langue_partenaire' => 'Langue de ce partenaire',
 	'titre_logo_partenaire' => 'Logo de ce partenaire',
-	'titre_page_partenaires_page' => 'Les partenaires',
+        'titre_page_partenaires_page' => 'Les partenaires',
 	'titre_partenaire' => 'Partenaire',
 	'titre_partenaires' => 'Partenaires',
 	'titre_partenaires_rubrique' => 'Partenaires de la rubrique',

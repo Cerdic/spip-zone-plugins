@@ -19,10 +19,10 @@ function partenaires_affiche_milieu($flux) {
 
 
 
-	// options sur les partenaires
+	// partenaires_types sur les partenaires
 	if (!$e['edition'] AND in_array($e['type'], array('partenaire'))) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
-			'table_source' => 'options',
+			'table_source' => 'partenaires_types',
 			'objet' => $e['type'],
 			'id_objet' => $flux['args'][$e['id_table_objet']]
 		));
@@ -48,7 +48,7 @@ function partenaires_affiche_milieu($flux) {
  */
 function partenaires_optimiser_base_disparus($flux){
 	include_spip('action/editer_liens');
-	$flux['data'] += objet_optimiser_liens(array('option'=>'*'),'*');
+	$flux['data'] += objet_optimiser_liens(array('partenaires_type'=>'*'),'*');
 	return $flux;
 }
 

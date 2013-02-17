@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'partenaires_description' => 'Dans le cadre d\'une association, d\'un réseau, nous sommes amenés à avoir des partenaires. Ces derniers sont soit une personne, un groupe, une collectivité, un organisme ou une entité avec laquelle on s\'associe ou on s\'allie pour réaliser une action commune dans une affaire, une entreprise, une négociation ou un projet.',
 	'partenaires_nom' => 'Partenaires',
-	'partenaires_slogan' => 'L\'alliance de nos actions',
+	'partenaires_slogan' => 'S\'associer dans nos actions',
 );
 
 ?>

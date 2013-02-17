@@ -6,7 +6,7 @@
 #ANCRE_PAGINATION
 <div class="liste-objets partenaires">
 <table class='spip liste'>
-	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{partenaire:info_1_partenaire,partenaire:info_nb_partenaires}})</strong></caption>]
+	[<caption class="invisible"><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{partenaire:info_1_partenaire,partenaire:info_nb_partenaires}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
@@ -17,8 +17,8 @@
 	<tbody>
 	<BOUCLE_liste_partenaires(PARTENAIRES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num nom},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
-			<td class='picto'>[(#CHEMIN_IMAGE{partenaire-16.png}|balise_img)]</td>
-			<td class='nom principale'>[(#LOGO_PARTENAIRE|image_reduire{20,26})]<a href="[(#ID_PARTENAIRE|generer_url_entite{partenaire})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PARTENAIRE">[(#RANG). ]#NOM</a></td>
+			<td class='picto'>[(#LOGO_PARTENAIRE|image_reduire{20,26})]</td>
+			<td class='nom principale'><a href="[(#ID_PARTENAIRE|generer_url_entite{partenaire})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PARTENAIRE">[(#RANG). ]#NOM</a></td>
 			<td class='id'>[(#AUTORISER{modifier,partenaire,#ID_PARTENAIRE}|?{
 				<a href="[(#URL_ECRIRE{partenaire_edit,id_partenaire=#ID_PARTENAIRE})]">#ID_PARTENAIRE</a>,
 				#ID_PARTENAIRE
