@@ -1,0 +1,10 @@
+<h1 class="grostitre"><:partenaires_type:titre_page_partenaires_types_page:></h1>
+
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/partenaires_types, par=titre, env, ajax, sinon=<:partenaires_type:info_aucun_partenaires_type:>}>
+
+[(#AUTORISER{creer,partenaires_type})
+	[(#URL_ECRIRE{partenaires_type_edit,new=oui}|icone_verticale{<:partenaires_type:icone_creer_partenaires_type:>,partenaires_type,new,right})]
+]

@@ -1,0 +1,60 @@
+[(#AUTORISER{voir,partenaires_type,#ID_TYPE}|sinon_interdire_acces)]
+<BOUCLE_partenaires_type(PARTENAIRES_TYPES){id_type}{si #ENV{exec}|=={partenaires_type}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,partenaires_type,#ID_TYPE})
+		[(#ID_TYPE|afficher_qui_edite{partenaires_type}|non)
+			[(#URL_ECRIRE{partenaires_type_edit,id_type=#ID_TYPE}|icone_verticale{<:partenaires_type:icone_modifier_partenaires_type:>,partenaires_type,edit,right ajax preload})]
+		]
+		[(#ID_TYPE|afficher_qui_edite{partenaires_type}|oui)
+			[(#URL_ECRIRE{partenaires_type_edit,id_type=#ID_TYPE}|icone_verticale{#ID_TYPE|afficher_qui_edite{partenaires_type},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{partenaires_type-24.png}|balise_img{partenaires_type,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{partenaires_type,#ID_TYPE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/partenaires_type,id=#ID_TYPE,id_type=#ID_TYPE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+#BOITE_FERMER
+
+    <div class="liste">
+    <BOUCLE_objetslies(spip_partenaires_types_liens){id_type}{0,1}><h3><:partenaires_type:titre_objets_lies_partenaires_type:></h3></BOUCLE_objetslies>
+    
+    <INCLURE{fond=prive/objets/liste/partenaires,id_type,par=nom,ajax,env} />
+    
+    <BOUCLE_autresobjets(spip_partenaires_types_liens){id_type}{objet !IN partenaire}{fusion objet}{par objet}>
+            #SET{table,#OBJET|table_objet}
+            [(#SET{titre,[#OBJET:info_(#GET{table})_liees_mot]})]
+            [(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_mot}})]
+            <INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_mot,ajax,env} />
+    </BOUCLE_autresobjets>
+    </div>
+
+<div class="nettoyeur"></div>
+[(#AUTORISER{modifier,partenaires_type,#ID_TYPE})
+	[(#ID_TYPE|afficher_qui_edite{partenaires_type}|non)
+		[(#URL_ECRIRE{partenaires_type_edit,id_type=#ID_TYPE}|icone_verticale{<:partenaires_type:icone_modifier_partenaires_type:>,partenaires_type,edit,right ajax preload})]
+	]
+	[(#ID_TYPE|afficher_qui_edite{partenaires_type}|oui)
+		[(#URL_ECRIRE{partenaires_type_edit,id_type=#ID_TYPE}|icone_verticale{#ID_TYPE|afficher_qui_edite{partenaires_type},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,partenaires_type,id,#ID_TYPE},data,'<div class="nettoyeur"></div>'}}
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_partenaires_type>
+[(#ENV**{exec}|=={partenaires_type_edit}|?{#INCLURE{fond=prive/squelettes/contenu/partenaires_type_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_partenaires_type>
