@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_options_selectionnes>
+	<ul>
+	<BOUCLE_options_selectionnes(OPTIONS){id_option IN #GET*{valeur}}
+		{par num titre, titre}{tout}>
+		<li class="choix">#TITRE (#ID_OPTION)</li>
+	</BOUCLE_options_selectionnes>
+	</ul>
+	</B_options_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_options_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_option_selectionne(OPTIONS){id_option=#ENV{valeur}}
+		{par num titre, titre}{tout}>
+	  	<p>#TITRE (#ID_OPTION)</p>
+	</BOUCLE_option_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_option_selectionne>
+<//B_test_multiple>
