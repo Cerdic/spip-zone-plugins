@@ -24,7 +24,7 @@ function geoportail_affichage_final($page)
 	$api =
 '	
 <!-- API Geoportail -->
-<script type="text/javascript" src="'.$api.'">// <![CDATA[
+<script type="text/javascript" src="'.$api.'" charset="UTF-8">// <![CDATA[
     // ]]></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GEOPORTAIL.'js/Layer/Locator.js">// <![CDATA[
     // ]]></script>

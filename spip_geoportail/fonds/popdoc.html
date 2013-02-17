@@ -16,7 +16,7 @@
 	<option value=0 ><:geoportail:geo_document:></option>
 	<BOUCLE_doc(DOCUMENTS){id_article}>
 	<option value="#ID_DOCUMENT" ><:spip:info_document:> #ID_DOCUMENT [: (#TITRE) ]
-	<BOUCLE_tdoc(TYPES_DOCUMENTS){id_type}>[((#EXTENSION|majuscules))]</BOUCLE_tdoc>
+	[- (#EXTENSION|sinon{[(#FICHIER|substr{-3})]})]
 	</option>
 	</BOUCLE_doc>
 </select>
