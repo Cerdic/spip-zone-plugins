@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// G
-	'gis_description' => 'Provee la estructura y las interfaces para crear, manejar y visualizar puntos geolocalizados sobre mapas. Estás mapas puedes ser recuperadas desde varios proveedores gracias a la libreria Mapstraction.', # MODIF
+	'gis_description' => 'Este plugin permite crear puntos geolocalizados que pueden adjuntarse a los objetos de SPIP a fin de mostrarlos en los mapas de las páginas de su sitio web. Éstos útlimos pueden utilizar las tejas de diferentes proveedores gracias a la librería Leaflet. ',
 	'gis_slogan' => 'Sistema de información geográfica'
 );
 
