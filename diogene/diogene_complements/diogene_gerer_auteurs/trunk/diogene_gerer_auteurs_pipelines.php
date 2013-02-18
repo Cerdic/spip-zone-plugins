@@ -29,7 +29,7 @@ function diogene_gerer_auteurs_diogene_ajouter_saisies($flux){
 		$id_objet = $flux['args']['contexte'][$id_table_objet];
 		if(is_numeric($id_objet)){
 			include_spip('inc/autoriser');
-			if(!autoriser('modifier',$objet,$id_objet)){
+			if(!autoriser('associerauteurs',$objet,$id_objet)){
 	    		return $flux;
 			}
 			
@@ -63,7 +63,7 @@ function diogene_gerer_auteurs_diogene_traiter($flux){
 	$pipeline = pipeline('diogene_objets');
 	if(in_array($type,array_keys($pipeline)) && isset($pipeline[$type]['champs_sup']['auteurs'])){
 		include_spip('inc/autoriser');
-    	if(!autoriser('modifier',$type,$id_objet)){
+    	if(!autoriser('associerauteurs',$type,$id_objet)){
     		return $flux;
 		}
 
