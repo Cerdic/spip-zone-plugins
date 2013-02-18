@@ -8,37 +8,37 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accueil' => 'Accueil', # NEW
-	'adapte_de' => 'adapté de', # MODIF
+	'accueil' => 'Inicio',
+	'adapte_de' => 'adaptado de',
 
 	// C
 	'commentaire' => 'comentario',
 	'commentaires' => 'comentarios',
-	'conception_graphique_par' => 'Diseño gráfico (c)',
+	'conception_graphique_par' => 'Diseño gráfico ©',
 
 	// D
-	'date_forum' => 'Le @date@ à @heure@', # MODIF
+	'date_forum' => 'El @date@ a las @heure@',
 
 	// I
-	'info_1_commentaire' => '1 commentaire', # NEW
-	'info_nb_commentaires' => '@nb@ commentaires', # NEW
+	'info_1_commentaire' => '1 comentario',
+	'info_nb_commentaires' => '@nb@ comentarios',
 
 	// L
-	'lire_la_suite' => 'Seguir leyendo',
-	'lire_la_suite_de' => '',
+	'lire_la_suite' => 'Leer más',
+	'lire_la_suite_de' => ' de',
 
 	// P
-	'pagination_next' => 'Suivant »', # MODIF
-	'pagination_pages' => 'Pages', # NEW
-	'pagination_prev' => '« Précédent', # MODIF
-	'personaliser_nav' => 'Personnaliser ce menu', # NEW
+	'pagination_next' => 'Siguiente »',
+	'pagination_pages' => 'Páginas',
+	'pagination_prev' => '« Anterior',
+	'personaliser_nav' => 'Personalizar este menú',
 
 	// S
 	'sous_licence' => 'bajo Licencia',
 
 	// Z
-	'zapl_loading' => 'Chargement en cours...', # NEW
-	'zapl_reload_off' => 'Cliquer ici si la page reste incomplète (ou activer le javascript dans votre navigateur)' # MODIF
+	'zapl_loading' => 'Cargando...',
+	'zapl_reload_off' => 'Haga click aquí si la página se muestra incompleta (o active javascript en su navegador)'
 );
 
 ?>
