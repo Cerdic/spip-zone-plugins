@@ -239,9 +239,9 @@ function maj_auto_action_rapide() {
 	$html2 = "\n<div class='cs_sobre'><input class='cs_sobre' type='submit' value=\"["
 		. attribut_html(_T('couteau:maj_actu'))	. ']" /></div>';
 
-// premier formulaire non ajax, lancant directement charger_plugin
+	// premier formulaire non ajax, lancant directement charger_plugin
 	return redirige_action_post('charger_plugin', '', 'admin_couteau_suisse', "cmd=descrip&outil=maj_auto#cs_infos", $html1)
-// second formulaire ajax : lien d'actualisation forcee
+		// second formulaire ajax : lien d'actualisation forcee
 		. ajax_action_auteur('action_rapide', 'maj_auto_forcer', 'admin_couteau_suisse', "arg=maj_auto|description_outil&cmd=descrip#cs_action_rapide", $html2);
 }
 
@@ -336,7 +336,6 @@ function plugin_get_infos_maj($p, $timeout=false, $DIR_PLUGINS=_DIR_PLUGINS) {
 	$infos['zip_log'] = $infos['zip_trac'] = '';
 	$p2 = preg_match(',^auto/(.*)$,', $p, $regs)?$regs[1]:'';
 	if(strlen($p2)) {
-//echo "<hr/>$p -> $infos[prefix]<br/>";
 		if(defined('_SPIP30000')) {
 			// supposition du passage par SVP ?
 			maj_auto_svp_query($p, $infos);
