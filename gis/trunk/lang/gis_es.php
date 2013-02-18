@@ -13,110 +13,141 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_lier' => 'Asociar este punto',
-	'bouton_supprimer_gis' => 'Suprimir este punto de manera definitiva', # MODIF
-	'bouton_supprimer_lien' => 'Suprimir está asociación',
+	'bouton_supprimer_gis' => 'Eliminar definitivamente este punto',
+	'bouton_supprimer_lien' => 'Eliminar este enlace',
 
 	// C
-	'cfg_descr_gis' => 'Sistema de Información Geográfica.<br /><a href="http://www.spip-contrib.net/3887">Ir a la documentación</a>.', # MODIF
-	'cfg_inf_adresse' => 'Mostrar campos adicionales de dirección (país, ciudad, región, dirección...)', # MODIF
-	'cfg_inf_bing' => 'La couche Bing Aerial nécessite une clé à créer sur <a href=\'@url@\' class="spip_out">le site de Bing</a>.', # NEW
-	'cfg_inf_cloudmade' => 'Está API necesita una clave a generar en <a href=\'@url@\'>el sitio de CloudMade</a>.', # MODIF
-	'cfg_inf_geocoder' => 'Activar las funciones del geocoder (búsqueda desde una dirección, recuperación de la dirección a partir de las coordenadas).', # MODIF
-	'cfg_inf_geolocaliser_user_html5' => 'Si el navegador del usuario lo permite, su ubicación geográfica aproximada esta recuperada y será la posición por omisión cuando se crearó un nuevo punto.', # MODIF
-	'cfg_inf_google' => 'Esta API necesita una clave a generar en <a href=\'@url@\'>el sitio de GoogleMaps</a>.', # MODIF
-	'cfg_inf_yandex' => 'Esta API necesita una clave a generar en <a href=\'@url@\'>el sitio de Yandex</a>.', # MODIF
-	'cfg_lbl_activer_objets' => 'Activer la géolocalisation sur les contenus :', # NEW
+	'cfg_descr_gis' => 'Sistema de Información Geográfica.<br /><a href="http://www.spip-contrib.net/3887">Ir a la documentación</a>.',
+	'cfg_inf_adresse' => 'Mostrar campos adicionales de dirección (país, ciudad, región, dirección...)',
+	'cfg_inf_bing' => 'La capa Bing Aerial necesita crear una clave <a href=\'@url@\' class="spip_out">el sitio de Bing</a>.',
+	'cfg_inf_cloudmade' => 'Esta API necesita crear una clave en <a href=\'@url@\'>el sitio de CloudMade</a>.',
+	'cfg_inf_geocoder' => 'Activar las funciones del geocoder (búsqueda desde una dirección, recuperación de una dirección partiendo de coordenadas).',
+	'cfg_inf_geolocaliser_user_html5' => 'Si el navegador del usuario lo permite, su ubicación geográfica aproximada se recupera para dar la posición por defecto durante la creación de un punto.',
+	'cfg_inf_google' => 'Esta API necesita crear una clave en <a href=\'@url@\'>el sitio de GoogleMaps</a>.',
+	'cfg_inf_yandex' => 'Esta API necesita crear una clave en <a href=\'@url@\'>el sitio de Yandex</a>.',
+	'cfg_lbl_activer_objets' => 'Activar la geolocalización en los contenidos:',
 	'cfg_lbl_adresse' => 'Mostrar los campos de dirección',
-	'cfg_lbl_api' => 'API de cartográfia',
+	'cfg_lbl_api' => 'API de cartografía',
 	'cfg_lbl_api_cloudmade' => 'CloudMade',
 	'cfg_lbl_api_google' => 'Google Maps v2',
 	'cfg_lbl_api_googlev3' => 'Google Maps v3',
-	'cfg_lbl_api_key_bing' => 'Clé Bing', # NEW
-	'cfg_lbl_api_key_cloudmade' => 'Clave CloudMade', # MODIF
-	'cfg_lbl_api_key_google' => 'Clave GoogleMaps', # MODIF
-	'cfg_lbl_api_key_yandex' => 'Clave Yandex', # MODIF
+	'cfg_lbl_api_key_bing' => 'Clave Bing',
+	'cfg_lbl_api_key_cloudmade' => 'Clave CloudMade',
+	'cfg_lbl_api_key_google' => 'Clave GoogleMaps',
+	'cfg_lbl_api_key_yandex' => 'Clave Yandex',
 	'cfg_lbl_api_mapquest' => 'MapQuest',
 	'cfg_lbl_api_microsoft' => 'Microsoft Bing',
 	'cfg_lbl_api_openlayers' => 'OpenLayers',
 	'cfg_lbl_api_ovi' => 'Ovi Nokia',
 	'cfg_lbl_api_yandex' => 'Yandex',
 	'cfg_lbl_geocoder' => 'Geocoder',
-	'cfg_lbl_geolocaliser_user_html5' => 'Centrar el mapa sobre la ubicación del usuario a la creación', # MODIF
-	'cfg_lbl_layer_defaut' => 'Couche par défaut', # NEW
-	'cfg_lbl_layers' => 'Couches proposées', # NEW
-	'cfg_lbl_maptype' => 'Fond cartographique', # NEW
-	'cfg_lbl_maptype_carte' => 'Carte', # NEW
-	'cfg_lbl_maptype_hybride' => 'Hybride', # NEW
-	'cfg_lbl_maptype_relief' => 'Relief', # NEW
-	'cfg_lbl_maptype_satellite' => 'Satellite', # NEW
+	'cfg_lbl_geolocaliser_user_html5' => 'Centrar el mapa en base a la ubicación del usuario durante la creación',
+	'cfg_lbl_layer_defaut' => 'Capa por defecto',
+	'cfg_lbl_layers' => 'Capas propuestas',
+	'cfg_lbl_maptype' => 'Fondo cartográfico',
+	'cfg_lbl_maptype_carte' => 'Mapa',
+	'cfg_lbl_maptype_hybride' => 'Híbrido',
+	'cfg_lbl_maptype_relief' => 'Relieve',
+	'cfg_lbl_maptype_satellite' => 'Satélite',
 	'cfg_titre_gis' => 'GIS',
 
 	// E
 	'editer_gis_editer' => 'Modificar este punto',
-	'editer_gis_explication' => 'Está página lista todos los puntos geolocalizados del sitio.', # MODIF
-	'editer_gis_nouveau' => 'Crear un nuevo punto', # MODIF
-	'editer_gis_titre' => 'Los puntos geolocalizados', # MODIF
-	'erreur_recherche_pas_resultats' => 'Ningún punto corresponde a la búsqueda.', # MODIF
-	'erreur_xmlrpc_lat_lon' => 'La latitude et la longitude doivent être passées en argument', # NEW
-	'explication_api_forcee' => 'La API esta impuesta por un otro plugin o esqueleto.',
-	'explication_import' => 'Importer un fichier au format GPX ou KML.', # NEW
-	'explication_layer_forcee' => 'La couche est imposée par un autre plugin ou un squelette.', # NEW
-	'explication_maptype_force' => 'Le fond cartographique est imposé par un autre plugin ou squelette.', # NEW
+	'editer_gis_explication' => 'Esta página lista todos los puntos geolocalizados del sitio.',
+	'editer_gis_nouveau' => 'Crear un nuevo punto',
+	'editer_gis_titre' => 'Puntos geolocalizados',
+	'erreur_recherche_pas_resultats' => 'Ningún punto corresponde a la búsqueda.',
+	'erreur_xmlrpc_lat_lon' => 'La latitud y la longitud deben indicarse como parámetros',
+	'explication_api_forcee' => 'La API esta impuesta por otro plugin o esqueleto.',
+	'explication_import' => 'Importar un archivo en formato GPX o KML.',
+	'explication_layer_forcee' => 'La capa se ha impuesto por otro plugin o esqueleto. ',
+	'explication_maptype_force' => 'El fondo del mapa está impuesto por otro plugin o esqueleto.',
 
 	// F
-	'formulaire_creer_gis' => 'Crear un punto geolocalizado:', # MODIF
-	'formulaire_modifier_gis' => 'Modificar el punto geolocalizado:', # MODIF
+	'formulaire_creer_gis' => 'Crear un punto geolocalizado:',
+	'formulaire_modifier_gis' => 'Modificar el punto geolocalizado:',
 
 	// G
-	'gis_pluriel' => 'Points géolocalisés', # NEW
-	'gis_singulier' => 'Point géolocalisé', # NEW
+	'gis_pluriel' => 'Puntos geolocalizados',
+	'gis_singulier' => 'Punto geolocalizado',
 
 	// I
-	'icone_gis_tous' => 'Puntos geolocalizados', # MODIF
-	'info_1_gis' => 'Un point géolocalisé', # NEW
-	'info_1_objet_gis' => '1 objet lié à ce point', # NEW
-	'info_aucun_gis' => 'Aucun point géolocalisé', # NEW
-	'info_aucun_objet_gis' => 'Aucun objet lié à ce point', # NEW
-	'info_geolocalisation' => 'Géolocalisation', # NEW
-	'info_id_objet' => 'N°', # MODIF
+	'icone_gis_tous' => 'Puntos geolocalizados',
+	'info_1_gis' => 'Un punto geolocalizado',
+	'info_1_objet_gis' => '1 objeto asociado a este punto',
+	'info_aucun_gis' => 'Ningún punto geolocalizado',
+	'info_aucun_objet_gis' => 'Ningún objeto asociado a este punto',
+	'info_geolocalisation' => 'Geolocalización',
+	'info_id_objet' => 'N°',
 	'info_liste_gis' => 'Puntos geolocalizados',
-	'info_nb_gis' => '@nb@ points géolocalisés', # NEW
-	'info_nb_objets_gis' => '@nb@ objets liés à ce point', # NEW
-	'info_numero_gis' => 'Punto número', # MODIF
+	'info_nb_gis' => '@nb@ puntos geolocalizados',
+	'info_nb_objets_gis' => '@nb@ objetos asociados a este punto',
+	'info_numero_gis' => 'Punto número',
 	'info_objet' => 'Objeto',
-	'info_recherche_gis_zero' => 'Aucun résultat pour « @cherche_gis@ ».', # NEW
-	'info_supprimer_lien' => 'Suprimir la asociación', # MODIF
-	'info_supprimer_liens' => 'Détacher tous les points', # MODIF
+	'info_recherche_gis_zero' => 'Ningún resultados para «@cherche_gis@».',
+	'info_supprimer_lien' => 'Desunir',
+	'info_supprimer_liens' => 'Desunir todos los puntos',
 	'info_voir_fiche_objet' => 'Ver la ficha',
 
 	// L
 	'label_adress' => 'Dirección',
 	'label_code_postal' => 'Código postal',
-	'label_import' => 'Importer', # NEW
+	'label_import' => 'Importar',
+	'label_inserer_modele_articles' => 'asociados a los artículos',
+	'label_inserer_modele_articles_sites' => 'asociados a los artículos + sitios',
+	'label_inserer_modele_auteurs' => 'asociados a los autores',
+	'label_inserer_modele_centrer_auto' => 'Ningún autocentrado',
+	'label_inserer_modele_centrer_fichier' => 'No centrar el mapa en los archivos KLM/GPX',
+	'label_inserer_modele_controle' => 'Esconder los controles',
+	'label_inserer_modele_controle_type' => 'Esconder los tipos',
+	'label_inserer_modele_description' => 'Descripción',
+	'label_inserer_modele_documents' => 'asociados a los documentos',
+	'label_inserer_modele_echelle' => 'Escala',
+	'label_inserer_modele_fullscreen' => 'Botón de pantalla completa',
+	'label_inserer_modele_gpx' => 'Archivo GPX para sobreponer',
+	'label_inserer_modele_hauteur_carte' => 'Altura del mapa',
+	'label_inserer_modele_identifiant' => 'Identificador',
+	'label_inserer_modele_identifiant_opt' => 'Identificador (opcional)',
+	'label_inserer_modele_identifiant_placeholder' => 'id_gis',
+	'label_inserer_modele_kml' => 'Archivo KML para sobreponer',
+	'label_inserer_modele_kml_gpx' => 'id_document o url',
+	'label_inserer_modele_largeur_carte' => 'Anchura del mapa',
+	'label_inserer_modele_limite' => 'Número máximo de puntos',
+	'label_inserer_modele_localiser_visiteur' => 'Centrar en el visitante',
+	'label_inserer_modele_mini_carte' => 'Mini mapa de situación',
+	'label_inserer_modele_molette' => 'Desactivar la rueda',
+	'label_inserer_modele_mots' => 'asociados a las palabras',
+	'label_inserer_modele_objets' => 'Tipo de punto(s)',
+	'label_inserer_modele_point_gis' => 'punto único registrado',
+	'label_inserer_modele_point_libre' => 'punto único libre',
+	'label_inserer_modele_points' => 'Esconder los puntos',
+	'label_inserer_modele_rubriques' => 'asociados a las secciones',
+	'label_inserer_modele_sites' => 'asociados a los sitios',
+	'label_inserer_modele_titre_carte' => 'Título del mapa',
 	'label_pays' => 'País',
 	'label_rechercher_address' => 'Buscar una dirección',
 	'label_rechercher_point' => 'Buscar un punto',
-	'label_region' => 'Región', # MODIF
+	'label_region' => 'Región',
 	'label_ville' => 'Ciudad',
 	'lat' => 'Latitud',
 	'libelle_logo_gis' => 'LOGOTIPO DEL PUNTO',
-	'lien_ajouter_gis' => 'Ajouter ce point', # NEW
+	'lien_ajouter_gis' => 'Añadir este punto',
 	'lon' => 'Longitud',
 
 	// T
-	'telecharger_gis' => 'Télécharger au format @format@', # NEW
-	'texte_ajouter_gis' => 'Ajouter un point géolocalisé', # NEW
-	'texte_creer_associer_gis' => 'Créer et associer un point géolocalisé', # NEW
-	'texte_creer_gis' => 'Créer un point géolocalisé', # NEW
-	'texte_modifier_gis' => 'Modifier le point géolocalisé', # NEW
-	'texte_voir_gis' => 'Voir le point géolocalisé', # NEW
+	'telecharger_gis' => 'Descargar en formato @format@',
+	'texte_ajouter_gis' => 'Añadir un punto geolocalizado',
+	'texte_creer_associer_gis' => 'Crear y asociar un punto geolocalizado',
+	'texte_creer_gis' => 'Crear un punto geolocalizado',
+	'texte_modifier_gis' => 'Modificar el punto geolocalizado',
+	'texte_voir_gis' => 'Ver el punto geolocalizado',
 	'titre_bloc_creer_point' => 'Asociar un nuevo punto',
 	'titre_bloc_points_lies' => 'Puntos asociados',
 	'titre_bloc_rechercher_point' => 'Buscar un punto',
 	'titre_nombre_utilisation' => 'Una utilización',
 	'titre_nombre_utilisations' => '@nb@ utilizaciones',
-	'titre_nouveau_point' => 'Nouveau point', # NEW
-	'titre_objet' => 'Titre', # NEW
+	'titre_nouveau_point' => 'Nuevo punto',
+	'titre_objet' => 'Título',
 
 	// Z
 	'zoom' => 'Zoom'
