@@ -1,7 +1,7 @@
 <paquet
 	prefix="doc2img"
 	categorie="multimedia"
-	version="1.4.1"
+	version="1.4.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/doc2img-128.png"
