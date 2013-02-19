@@ -33,14 +33,15 @@ $(document).ready(function(){
 
 
 		/* Installer les onglets et accordions */
-		basket
-			.require("#CHEMIN{javascript/ui/jquery.ui.core.js}")
-			.require("#CHEMIN{javascript/ui/jquery.ui.widget.js}")
-			.require("#CHEMIN{javascript/ui/jquery.ui.mouse.js}")
-			.require("#CHEMIN{javascript/ui/jquery.ui.tabs.js}")
-			.require("#CHEMIN{javascript/ui/jquery.ui.accordion.js}")
-			.require("#CHEMIN{javascript/ui/jquery.ui.sortable.js}")
-			.wait(function(){
+		basket.require({url: "#CHEMIN{javascript/ui/jquery.ui.core.js}"}).then(function(){
+		basket.require({url: "#CHEMIN{javascript/ui/jquery.ui.widget.js}"}).then(function(){
+		basket.require({url: "#CHEMIN{javascript/ui/jquery.ui.mouse.js}"}).then(function(){
+			basket.require(
+				{url: "#CHEMIN{javascript/ui/jquery.ui.tabs.js}"},
+				{url: "#CHEMIN{javascript/ui/jquery.ui.accordion.js}"},
+				{url: "#CHEMIN{javascript/ui/jquery.ui.sortable.js}"}
+			)
+			.then(function(){
 				/*
 					ACCORDION avant TABS sinon la largeur de
 					l'accordion actif (autre que le premier)
@@ -119,7 +120,8 @@ $(document).ready(function(){
 							}
 						});
 				}
-		});
+			})
+		})})});
 
 		<BOUCLE_skeleditor(CONDITION){si #PLUGIN{skeleditor}}>
 		/* un peu de coloration syntaxique */
@@ -132,14 +134,13 @@ $(document).ready(function(){
 		});
 
 		function fabrique_coloriage(textarea, code) {
-			basket
-				.require("#CHEMIN{codemirror/lib/codemirror.js}")
-				.require("#CHEMIN{codemirror/mode/xml/xml.js}")
-				.require("#CHEMIN{codemirror/mode/javascript/javascript.js}")
-				.require("#CHEMIN{codemirror/mode/css/css.js}")
-				.require("#CHEMIN{codemirror/mode/clike/clike.js}")
-				.require("#CHEMIN{codemirror/mode/php/php.js}")
-				.wait(function(){
+			basket.require({url: "#CHEMIN{codemirror/lib/codemirror.js}"}).then(function(){
+			basket.require({url: "#CHEMIN{codemirror/mode/xml/xml.js}"}).then(function(){
+			basket.require(
+				{url: "#CHEMIN{codemirror/mode/javascript/javascript.js}"},
+				{url: "#CHEMIN{codemirror/mode/css/css.js}"},
+				{url: "#CHEMIN{codemirror/mode/clike/clike.js}"}).then(function(){
+			basket.require({url: "#CHEMIN{codemirror/mode/php/php.js}"}).then(function(){
 					var cm_options = {
 						lineNumbers: true,
 						matchBrackets: true,
@@ -160,7 +161,7 @@ $(document).ready(function(){
 						}
 					}
 					CodeMirror.fromTextArea(textarea, cm_options);
-			});
+			})})})});
 		}
 		</BOUCLE_skeleditor>
 
