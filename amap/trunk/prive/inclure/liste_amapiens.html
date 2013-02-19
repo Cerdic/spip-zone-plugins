@@ -21,7 +21,7 @@
 	<BOUCLE_auteurs(AUTEURS) {tri id_auteur} {tous} {pagination 20}>
 	<tr>
 		<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
-		<td class='nom[ (#NOM|non)vide]'><a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></td>
+		<td class='nom[ (#NOM|non)vide]'><a href="[(#URL_ECRIRE{auteur}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></td>
 		<td class='adhesion'>#ADHESION</td>
 		<td class='type_panier'>
 			[(#TYPE_PANIER|=={'petit'}|oui)<:amap:petit:>]
