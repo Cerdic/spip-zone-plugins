@@ -1,12 +1,28 @@
 <?php
+
+/**
+ * Gestion du formulaire de fabrication de plugin
+ *
+ * @package SPIP\Fabrique\Formulaires
+**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
+/**
+ * Hash du formulaire de fabrication de plugin
+ *
+ * @return string
+ *     Hash du formulaire
+**/
 function formulaires_fabriquer_plugin_identifier_dist(){
 	return serialize(true);
 }
 
-
+/**
+ * Chargement du formulaire de fabrication de plugin
+ *
+ * @return array
+ *     Environnement du formulaire
+**/
 function formulaires_fabriquer_plugin_charger_dist() {
 
 	// v_spip = 3.0.0-beta2
@@ -91,7 +107,12 @@ function formulaires_fabriquer_plugin_charger_dist() {
 
 
 
-
+/**
+ * Vérifications du formulaire de fabrication de plugin
+ *
+ * @return array
+ *     Erreurs du formulaire
+**/
 function formulaires_fabriquer_plugin_verifier_dist(){
 
 	// cas d'action qui n'ont pas a être testées ici.
@@ -138,7 +159,12 @@ function formulaires_fabriquer_plugin_verifier_dist(){
 
 
 
-
+/**
+ * Traitements du formulaire de fabrication de plugin
+ *
+ * @return array
+ *     Retours du traitement
+**/
 function formulaires_fabriquer_plugin_traiter_dist(){
 	include_spip('fabrique_fonctions');
 	include_spip('formulaires/fabriquer_plugin_actions');
@@ -482,8 +508,15 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 }
 
 
-// cherche un fichier dans la fabrique,
-// le calcule et le copie dans le répertoire du futur plugin
+/**
+ * Cherche un fichier dans la fabrique,
+ * le calcule et le copie dans le répertoire du futur plugin
+ *
+ * @param string $chemin
+ *     Chemin du fichier (depuis la racine du répertoire de fabrique)
+ * @param array $data
+ *     Environnement du calcul
+**/
 function fabriquer_fichier($chemin, $data) {
 	static $reps = array(); // repertoire de destination deja crees.
 	static $chemins = array(); // fichiers sources deja utilises
@@ -519,8 +552,21 @@ function fabriquer_fichier($chemin, $data) {
 
 
 
-// reduit une image dont l'adresse est donnée,
-// et la place dans prive/themes/spip/images du futur plugin
+/**
+ * Réduit une image dont l'adresse est donnée,
+ * et la place dans prive/themes/spip/images du futur plugin
+ * 
+ * @param string $prefixe
+ *     Préfixe du plugin
+ * @param string $src
+ *     Source de l'image
+ * @param string $nom
+ *     Nom du fichier d'image
+ * @param int $taille
+ *     Taille de l'image en pixels
+ * @param string $variante
+ *     Variante tel que `del`, `edit`, `new`, `add`
+**/
 function fabriquer_miniature($prefixe, $src, $nom, $taille=128, $variante='') {
 	// retrouver la destination de copie des fichiers
 	$destination = fabrique_destination();
@@ -553,9 +599,15 @@ function fabriquer_miniature($prefixe, $src, $nom, $taille=128, $variante='') {
 }
 
 
-
-// complete la description du paquet des fichiers indispensables
-// pour les objets demandes
+/**
+ * Complète la description du paquet des fichiers indispensables
+ * pour les objets demandés
+ * 
+ * @param array $data
+ *     Informations sur le plugin à construire
+ * @return array
+ *     Liste des fichiers indispensables au plugin (et ceux qui étaient déjà demandés)
+**/
 function fabrique_fichiers_paquets($data) {
 	$fichiers = array();
 	if (isset($data['paquet']['fichiers']) AND is_array($data['paquet']['fichiers'])) {
@@ -588,12 +640,14 @@ function fabrique_fichiers_paquets($data) {
 
 /**
  * Remet les infos de contexte dans l'environnement
+ * 
+ * Certaines infos sont remises dans l'environnement
  * - parce qu'on en ajoute par rapport à ce qui est posté -
  * afin de réafficher correctement le formulaire si on a des erreurs
  * dans la partie traiter(), car dans ce cas, le formulaire ne repasse pas dans le charger().
  *
  * @param array $data
- * 		Les infos postées
+ *     Les infos postées
 **/
 function fabrique_remettre_contexte($data) {
 	// on reintroduit le contexte complet, parce que l'erreur ne repasse pas dans charger() dans ce cas.
@@ -604,9 +658,18 @@ function fabrique_remettre_contexte($data) {
 	}
 }
 
-// on complete avec des donnees qui servent souvent les informations de data.
-// pour se simplifier (un peu) les squelettes, et éviter de multiples calculs
-// (type, table, id_objet, objet...)
+
+/**
+ * Complète les données connues avec des données qui servent souvent
+ * 
+ * Ceci pour se simplifier (un peu) les squelettes, et éviter de multiples calculs
+ * (type, table, id_objet, objet...)
+ * 
+ * @param array $data
+ *     Les infos du plugin à construire connues
+ * @return array
+ *     Les mêmes infos complétées
+**/
 function fabrique_completer_contexte($data) {
 	$data['prefixe']  = $data['paquet']['prefixe'];
 	$data['mprefixe'] = strtoupper($data['paquet']['prefixe']); // m = majuscule
@@ -671,7 +734,14 @@ function fabrique_completer_contexte($data) {
 
 
 
-// on complete avec le nom des fichiers d'image le tableau data.
+/**
+ * Complète les données connues avec les noms des fichiers d'images
+ * 
+ * @param array $data
+ *     Les infos du plugin à construire connues
+ * @return array
+ *     Les mêmes infos complétées
+**/
 function fabrique_completer_contexte_images($data) {
 
 	// gestion des images
@@ -723,10 +793,15 @@ function fabrique_completer_contexte_images($data) {
 
 
 /**
- * Complete les informations d'un objet
- * en fonction de la table SQL qui a ete demande.
+ * Complète les informations d'un objet
+ * en fonction de la table SQL qui a été demandé.
  *
  * On essaie d'extraire de la table le plus d'info possibles.
+ *
+ * @param array $objet
+ *     Description connue de l'objet éditorial désiré
+ * @return array $objet
+ *     Description éventuellement complétée si une table SQL source était renseignée
 **/
 function fabrique_renseigner_objet($objet) {
 	$table = $objet['renseigner_avec_table'];

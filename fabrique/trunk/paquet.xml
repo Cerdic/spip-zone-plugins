@@ -1,9 +1,9 @@
 <paquet
 	prefix="fabrique"
 	categorie="outil"
-	version="1.17.0"
+	version="2.0.0-dev"
 	etat="dev"
-	compatibilite="[3.0.0-rc;3.0.*]"
+	compatibilite="[3.1.0-dev;3.1.*]"
 	logo="prive/themes/spip/images/fabrique-64.png"
 	documentation="http://www.spip-contrib.net/?article4134"
 >
@@ -13,10 +13,10 @@
 	<auteur>Matthieu Marcillaud</auteur>
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[1.25.11;]" />
+	<necessite nom="saisies" compatibilite="[1.30.0;]" />
 
 	<utilise nom="skeleditor" compatibilite="[2.7.1;]" />
-	<utilise nom="coloration_code" compatibilite="[0.6.0;]" />
+	<utilise nom="coloration_code" compatibilite="[0.7.1;]" />
 	<utilise nom="yaml" compatibilite="[1.5.0;]" />
 
 	<pipeline nom="compagnon_messages" inclure="fabrique_pipelines.php" />
