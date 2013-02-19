@@ -6,7 +6,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_convertir' => 'Convertir',
 	'bouton_convertir_serie' => 'Convertir en une série d\'images',
 	'bouton_convertir_vignette' => 'Convertir la première page en vignette',
 
@@ -24,7 +23,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_label_largeur' => 'Largeur par défaut',
 	'cfg_label_logo_auto' => 'Première page comme logo',
 	'cfg_label_proportions' => 'Conserver les proportions',
-	'cfg_label_repertoire_sortie' => 'Répertoire par défaut',
 	'cfg_label_resolution' => 'Résolution',
 	'cfg_legende_formats_entree' => 'Format d\'entrée',
 	'cfg_legende_formats_sortie' => 'Les sorties',
@@ -34,16 +32,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'doc2img_reconvertir_doc' => '(Re)convertir ce document en une série d\'images',
 
 	// E
-	'erreur_autorisation' => 'Vous n\'êtes pas autorisé à convertir ce document',
 	'erreur_format_document' => 'Un format de document ne peut être pris en compte : @type@',
 	'erreur_formats_documents' => 'Plusieurs formats de document ne peuvent être pris en compte : @types@',
 	'erreur_class_imagick' => 'Vous ne disposez pas de la class PHP Imagick. Vous ne pouvez donc pas utiliser ce plugin.',
 	'explication_doc2img' => 'Ce plugin permet de transformer certains types de documents en une seule ou une série d\'images afin de pouvoir les visualiser.',
-	'explication_formats_possibles' => 'Les extensions acceptées par votre configuration sont : @formats@',
-
-	// F
-	'formulaire_erreur_pas_doc' => 'Aucun document ne correspond pour cet article',
-	'formulaire_label_choix_doc' => 'Choisissez le document (@formats@) à convertir en image',
 
 	// I
 	'info_desc_page' => 'Ce document est composé d\'une pages.',
