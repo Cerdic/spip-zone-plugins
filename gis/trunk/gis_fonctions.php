@@ -63,16 +63,13 @@ function distance($from, $to, $miles=false) {
 			($from = intval($from) and $from > 0 and $from = sql_fetsel('lat,lon','spip_gis',"id_gis=$from"))
 		)
 		and
-		// Le disant est soit un tableau soit un entier
+		// Le distant est soit un tableau soit un entier
 		(
 			(is_array($to) and isset($to['lat']) and isset($to['lon']))
 			or
 			($to = intval($to) and $to > 0 and $to = sql_fetsel('lat,lon','spip_gis',"id_gis=$to"))
 		)
 	){
-		$from = sql_fetsel('lat,lon','spip_gis',"id_gis=$from");
-		$to = sql_fetsel('lat,lon','spip_gis',"id_gis=$to");
-	
 		$pi80 = M_PI / 180;
 		$from['lat'] *= $pi80;
 		$from['lon'] *= $pi80;
