@@ -1,7 +1,7 @@
 <paquet
 prefix="feuillederoute"
 categorie="communication"
-version="0.9.7"
+version="1.0.0"
 etat="test"
 compatibilite="[3.0.0;3.*]"
 logo="images/feuillederoute-32.png"
@@ -16,7 +16,9 @@ documentation=""
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 	
 	<pipeline nom="formulaire_admin" inclure="feuillederoute_pipelines.php" />
-	<pipeline nom="autoriser" inclure="feuillederoute_autoriser.php" />
+	<pipeline nom="autoriser" inclure="inc/feuillederoute_autoriser.php" />
+	
+	<necessite nom="saisies" compatibilite="[1.3;[" />
 	
 	<menu nom="feuillederoute" titre="feuillederoute:feuillederoute" parent="outils_collaboratifs" icone="images/feuillederoute-16.png" action="feuillederoute" />
 		

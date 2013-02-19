@@ -1,4 +1,4 @@
 
-- le bouton en espace privé n'est pas accessible aux rédacteurs
+- le bouton en espace privé n'est pas accessible aux rédacteurs : de toutes façons on va le modifier...
 
-- peut-on/doit-on supprimer le fichier IMG/feuillederoute.php en désactivant le plugin ?
+- peut-on/doit-on supprimer le fichier IMG/feuillederoute.php en désactivant le plugin ? --- supprimer le fichier à la désinstallation du plugin....
