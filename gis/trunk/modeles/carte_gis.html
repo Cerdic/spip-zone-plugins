@@ -16,7 +16,6 @@ Parametres possibles :
 - ne_lat = lat + 10°               latitude du nord-est de la bounding box
 - ne_lon = lon + 10°               longitude du nord-est de la bounding box
 
-- titre_carte                      titre affiché au dessus la carte
 - width|largeur = 100%             largeur de la carte, 100% par defaut
 - height|hauteur = 400px           hauteur de la carte, 400px par defaut
 - style = non                      ne pas styler la carte
@@ -70,7 +69,6 @@ Clustering (regroupement de points proches) :
 	#SET{ne_lon,#ENV{ne_lon,#GET{lon}|plus{10}}}
 ]
 
-[<h3>(#ENV{titre_carte})</h3>]
 <div id="map[(#GET{id})]" class="carte_gis p"[(#ENV{style}|!={'non'}|?{' '})style="[width:(#GET{width});][ height:(#GET{height});]"]></div>
 
 <script type="text/javascript">/*<!\[CDATA\[*/

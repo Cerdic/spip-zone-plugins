@@ -57,26 +57,6 @@ $GLOBALS['gis_layers'] = array (
 		'nom' => 'Mapquest Open Aerial',
 		'layer' => 'L.TileLayer.MapQuestOpen.Aerial()'
 	),
-	'mapbox_simple' => array(
-		'nom' => 'MapBox Simple',
-		'layer' => 'L.TileLayer.MapBox.Simple()',
-	),
-	'mapbox_streets' => array(
-		'nom' => 'MapBox Streets',
-		'layer' => 'L.TileLayer.MapBox.Streets()'
-	),
-	'mapbox_light' => array(
-		'nom' => 'MapBox Light',
-		'layer' => 'L.TileLayer.MapBox.Light()'
-	),
-	'mapbox_lacquer' => array(
-		'nom' => 'MapBox Lacquer',
-		'layer' => 'L.TileLayer.MapBox.Lacquer()'
-	),
-	'mapbox_warden' => array(
-		'nom' => 'MapBox Warden',
-		'layer' => 'L.TileLayer.MapBox.Warden()'
-	),
 	'stamen_toner' => array(
 		'nom' => 'Stamen Toner',
 		'layer' => 'L.TileLayer.Stamen.Toner()'
