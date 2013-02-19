@@ -56,15 +56,17 @@ $(document).ready(function(){
 						collapsible: true,
 						autoHeight: false,
 						navigation: true,
-						change: function(event, ui) {
+						create: function(event, ui) {
 							tab_id = $(this).attr('id').substring(7);
-							$('#open_accordion_' + tab_id).val(ui.options.active);
+							i = Number($("#open_accordion_" + tab_id).val())
+							$(this).accordion("option", "active", i);
+
+						},
+						activate: function(event, ui) {
+							tab_id = $(this).attr('id').substring(7);
+							console.log(ui);
+							$('#open_accordion_' + tab_id).val( $(this).accordion('option', 'active') );
 						}
-					}).each(function() {
-						tab_id = $(this).attr('id').substring(7);
-						i = Number($("#open_accordion_" + tab_id).val());
-						/* 0 ne fonctionne pas */
-						if (i != 0) { $(this).accordion("activate", i); }
 					});
 
 					$("#tabs > div > .parties .parties").accordion({
