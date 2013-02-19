@@ -64,7 +64,6 @@ $(document).ready(function(){
 						},
 						activate: function(event, ui) {
 							tab_id = $(this).attr('id').substring(7);
-							console.log(ui);
 							$('#open_accordion_' + tab_id).val( $(this).accordion('option', 'active') );
 						}
 					});
@@ -98,8 +97,8 @@ $(document).ready(function(){
 				if ($.fn.tabs) {
 					$("#tabs").tabs({
 							selected: $('#open_tab').val(),
-							select: function(event, ui) {
-								$('#open_tab').val(ui.index);
+							beforeActivate: function(event, ui) {
+								$('#open_tab').val(ui.newTab.index());
 							},
 							create: function(event, ui) {
 								/* Se remettre en haut du formulaire après un coup d'ajax
