@@ -6,27 +6,30 @@
 		<li class="editer editer_statut">
 			<label for="statut"><:diogene:label_change_statut_normal:></label>
 			<select id="statut" name="statut">
-				[(#ENV{statut}|oui)
-				<option value="poubelle"[(#ENV{statut}|=={poubelle}|oui) selected="selected"]>
-					[(#ENV{statut}|=={poubelle}|oui)<:diogene:texte_statut_en_cours_poubelle_normal:>]
-					[(#ENV{statut}|=={poubelle}|non)<:diogene:texte_statut_poubelle_normal:>]
+				[(#ENV{statut}|=={publie}|ou{#AUTORISER{instituer,article,#ENV{id_article},'',#ARRAY{statut,publie}}|oui}|oui)
+				<option value="publie"[(#ENV{statut}|=={publie}|oui) selected="selected"]>
+					[(#ENV{statut}|=={publie}|oui)<:diogene:texte_statut_en_cours_publie_normal:>]
+					[(#ENV{statut}|=={publie}|non)<:diogene:texte_statut_publie_normal:>]
+				</option>]]
+				[(#ENV{statut}|=={prop}|ou{#AUTORISER{instituer,article,#ENV{id_article},'',#ARRAY{statut,prop}}|oui}|oui)
+				<option value="prop"[(#ENV{statut}|=={prop}|oui) selected="selected"]>
+					[(#ENV{statut}|=={prop}|oui)<:diogene:texte_statut_en_cours_prop_normal:>]
+					[(#ENV{statut}|=={prop}|non)<:diogene:texte_statut_prop_normal:>]
 				</option>]
+				[(#ENV{statut}|=={prepa}|ou{#AUTORISER{instituer,article,#ENV{id_article},'',#ARRAY{statut,prepa}}|oui}|oui)
 				<option value="prepa"[(#ENV{statut}|=={prepa}|ou{#ENV{statut}|non}|oui) selected="selected"]>
 					[(#ENV{statut}|=={prepa}|oui)<:diogene:texte_statut_en_cours_redaction:>]
 					[(#ENV{statut}|=={prepa}|non)
 						[(#ENV{statut}|oui)<:diogene:texte_statut_redaction:>]
 						[(#ENV{statut}|non)<:diogene:texte_statut_redaction_sans_statut:>]
 					]
-				</option>
-				<option value="prop"[(#ENV{statut}|=={prop}|oui) selected="selected"]>
-					[(#ENV{statut}|=={prop}|oui)<:diogene:texte_statut_en_cours_prop_normal:>]
-					[(#ENV{statut}|=={prop}|non)<:diogene:texte_statut_prop_normal:>]
-				</option>
-				[(#AUTORISER{publierdans,rubrique,#ENV{id_secteur,#ENV{id_parent}}}|oui)
-				<option value="publie"[(#ENV{statut}|=={publie}|oui) selected="selected"]>
-					[(#ENV{statut}|=={publie}|oui)<:diogene:texte_statut_en_cours_publie_normal:>]
-					[(#ENV{statut}|=={publie}|non)<:diogene:texte_statut_publie_normal:>]
 				</option>]
+				[(#ENV{statut}|oui)
+				[(#AUTORISER{instituer,article,#ENV{id_article},'',#ARRAY{statut,poubelle}}|oui)
+				<option value="poubelle"[(#ENV{statut}|=={poubelle}|oui) selected="selected"]>
+					[(#ENV{statut}|=={poubelle}|oui)<:diogene:texte_statut_en_cours_poubelle_normal:>]
+					[(#ENV{statut}|=={poubelle}|non)<:diogene:texte_statut_poubelle_normal:>]
+				</option>]]
 			</select>
 		</li>
 	</ul>
