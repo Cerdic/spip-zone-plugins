@@ -1,0 +1,30 @@
+
+
+À faire
+- afficher une liste des articles (ou autre) sur la vue d'un objet créé permettant les liaisons avec celui-ci.
+- supprimer les liaisons vers notre objet à la désinstallation
+
+- si id_auteur, proposer un onglet sur cette page vers ses objets à soi (comme mes articles)
+
+- ? lorsqu'on utilise les statuts
+  - proposer de séparer par statut sur la page de liste des objets
+  - si id_rubrique, proposer de séparer les listes aussi comme les articles|breves (publie, proposés, rédac)
+
+- permettre de déclarer les statuts qu'on veut :
+  la liste des statuts acceptés, leurs labels, lesquels sont "publie", lesquels sont "previsu"
+
+Question
+- dans la médiathèque, sur l'éditeur de document,
+on ne voit pas les liens avec les objets.
+Le brouteur ne voit pas non plus les objets dedans
+(même s'ils sont lies à une rubrique).
+
+- lorsqu'un objet est dans une rubrique, il faut ajouter le pipeline "objet_compte_entants"
+
+- lorsqu'on lie un objet à une rubrique vide,
+la rubrique ne se publie pas et peut être supprimée.
+Une option pour indiquer que cela publie la rubrique serait bien.
+
+- on pourrait générer des listes de résumés publiques pour un objet, comme ce que fait Z :
+  liste/patates-resume.html +
+  inclure/resume/patate.html

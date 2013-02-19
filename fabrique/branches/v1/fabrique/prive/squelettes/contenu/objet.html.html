@@ -1,0 +1,55 @@
+[(#SET{titre,#ENV{objet/champ_titre}})][
+(#SET{mtitre,#GET{titre}|strtoupper})][
+(#SET{date,#ENV{objet/champ_date}})][
+(#SET{mdate,#GET{date}|strtoupper})][
+(#REM)
+
+
+
+]\[(\#AUTORISER{voir,#TYPE,\##MID_OBJET}|sinon_interdire_acces)\]
+\<BOUCLE_#TYPE\(#MOBJET\){#ID_OBJET}[(#OBJET|champ_present{statut}
+	|?{'{statut==.*}'})]{si \#ENV{exec}|=={#TYPE}}>
+\[(\#BOITE_OUVRIR{\[
+	\[(\#AUTORISER{modifier,#TYPE,\##MID_OBJET})
+		\[(\##MID_OBJET|afficher_qui_edite{#TYPE}|non)
+			\[(\#URL_ECRIRE{[(#TYPE)]_edit,#ID_OBJET=\##MID_OBJET}|icone_verticale{\<:#TYPE:icone_modifier_#TYPE:>,#TYPE,edit,right ajax preload})\]
+		\]
+		\[(\##MID_OBJET|afficher_qui_edite{#TYPE}|oui)
+			\[(\#URL_ECRIRE{[(#TYPE)]_edit,#ID_OBJET=\##MID_OBJET}|icone_verticale{\##MID_OBJET|afficher_qui_edite{#TYPE},warning-24,'',right edition_deja ajax preload})\]
+		\]
+	\]
+
+	<h1>\[(\#RANG). \](\#[(#GET{mtitre})]|sinon{\<:info_sans_titre:>})\[(\#CHEMIN_IMAGE{#TYPE-24.png}|balise_img{#TYPE,cadre-icone})\]</h1>
+
+\],simple fiche_objet})\]
+
+<div class="ajax">
+	\#FORMULAIRE_DATER{#TYPE,\##MID_OBJET}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+\<INCLURE{fond=prive/objets/contenu/#TYPE,id=\##MID_OBJET,#ID_OBJET=\##MID_OBJET,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+\[(\#AUTORISER{modifier,#TYPE,\##MID_OBJET})
+	\[(\##MID_OBJET|afficher_qui_edite{#TYPE}|non)
+		\[(\#URL_ECRIRE{[(#TYPE)]_edit,#ID_OBJET=\##MID_OBJET}|icone_verticale{\<:#TYPE:icone_modifier_#TYPE:>,#TYPE,edit,right ajax preload})\]
+	\]
+	\[(\##MID_OBJET|afficher_qui_edite{#TYPE}|oui)
+		\[(\#URL_ECRIRE{[(#TYPE)]_edit,#ID_OBJET=\##MID_OBJET}|icone_verticale{\##MID_OBJET|afficher_qui_edite{#TYPE},warning-24,'',right edition_deja ajax preload})\]
+	\]
+\]
+
+\#PIPELINE{afficher_complement_objet,\#ARRAY{args,\#ARRAY{type,#TYPE,id,\##MID_OBJET},data,'<div class="nettoyeur"></div>'}}
+
+\#BOITE_FERMER
+\[(\#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\\[CDATA\\\[*/reloadExecPage('\#ENV{exec}','\#navigation,\#chemin');/*\\\]\\\]>*/</script>
+\]
+\</BOUCLE_#TYPE>
+\[(\#ENV**{exec}|=={[(#TYPE)]_edit}|?{\#INCLURE{fond=prive/squelettes/contenu/[(#TYPE)]_edit,redirect='',env,retourajax=oui},\#REM|sinon_interdire_acces})\]
+\<//B_#TYPE>

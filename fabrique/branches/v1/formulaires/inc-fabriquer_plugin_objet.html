@@ -1,0 +1,487 @@
+<BOUCLE_objet(DATA){source tableau, #OBJETS}{cle=#CLE}>
+
+[(#SET{datalist_aide,[(#CHEMIN_IMAGE{datalist-16.png}|balise_img
+	|inserer_attribut{title,<:fabrique:datalist_aide:>}
+	|inserer_attribut{class,datalist_aide})]})]
+
+
+<h3><a href="#description"><:fabrique:legend_pre_construire:></a></h3>
+<div>
+	<ul>
+	[(#SAISIE{tables_sql, objets/#CLE/renseigner_avec_table,
+		label=<:fabrique:label_charger_depuis_table_sql:>,
+		explication=<:fabrique:label_charger_depuis_table_sql_explication:>,
+		attention=<:fabrique:label_charger_depuis_table_sql_attention:>})]
+	</ul>
+	<input type='submit' name='f_action[renseigner_objet][#CLE]' class='submit right action' value='<:fabrique:bouton_renseigner_objet:>' />
+</div>
+
+
+
+
+<h3><a href="#description"><:fabrique:legend_description:></a></h3>
+<div>
+	<ul>
+	[(#SAISIE{input, objets/#CLE/nom,
+		label=<:fabrique:label_nom_pluriel:>,
+		explication=<:fabrique:label_nom_pluriel_explication:>,
+		obligatoire=oui})]
+
+	[(#SAISIE{input, objets/#CLE/nom_singulier,
+		label=<:fabrique:label_nom_singulier:>,
+		explication=<:fabrique:label_nom_singulier_explication:>})]
+
+	[(#SAISIE{radio, objets/#CLE/genre,
+		label=<:fabrique:label_genre:>,
+		explication=<:fabrique:label_genre_explication:>,
+		datas=[(#ARRAY{
+			masculin,<:fabrique:label_genre_masculin:>,
+			feminin,<:fabrique:label_genre_feminin:>})],
+		defaut=masculin})]
+	</ul>
+</div>
+
+
+
+
+<h3><a href="#description"><:fabrique:legend_logo:></a></h3>
+<div>
+	<ul>
+	[(#REM) valeur vide pour eviter une notice car sinon, la valeur recue est un tableau ]
+	[(#SAISIE{input, objets/#CLE/logo/0,
+		label=<:fabrique:label_logo:>, type=file, valeur=''})]
+	</ul>
+
+	[(#ENV{objets/#CLE/logo/0/fichier}|oui)
+		<div class='center'>
+		[(#ENV{objets/#CLE/logo/0/fichier}|fabrique_miniature_image{128})]
+			<input type='submit' name='f_action\[supprimer_logo\]\[objets/#CLE/logo/0\]' class='submit del right action' value='<:fabrique:bouton_supprimer_logo:>' />
+		</div>
+	]
+
+	<fieldset>
+		<legend class='legend'><:fabrique:legend_logo_specifiques:></legend>
+		<p class='explication'><:fabrique:legend_logo_specifiques_explication:></p>
+		<ul>
+		<BOUCLE_logos(DATA){liste 32,24,16}>
+			[(#REM) valeur vide pour eviter une notice car sinon, la valeur recue est un tableau ]
+			[(#SAISIE{input, objets/#_objet:CLE/logo/#VALEUR, label=<:fabrique:label_logo_taille{taille=#VALEUR}:>, type=file, valeur=''})]
+			[(#ENV{[objets/#_objet:CLE/logo/(#VALEUR)/fichier]}|oui)
+				<div class='center'>
+				[(#ENV{[objets/#_objet:CLE/logo/(#VALEUR)/fichier]}|fabrique_miniature_image{#VALEUR})]
+					<input type='submit' name='f_action\[supprimer_logo\]\[objets/#_objet:CLE/logo/#VALEUR\]' class='submit del right action' value='<:fabrique:bouton_supprimer_logo:>' />
+				</div>
+			]
+		</BOUCLE_logos>
+		[(#SAISIE{oui_non, objets/#CLE/logo_variantes, label=<:fabrique:label_logo_variantes:>, explication=<:fabrique:label_logo_variantes_explication:>})]
+		</ul>
+	</fieldset>
+
+</div>
+
+
+
+
+
+<h3><a href="#description"><:fabrique:legend_table:></a></h3>
+<div class='sous_parties'>
+
+	<ul>
+	[(#SAISIE{input, objets/#CLE/table,
+		label=<:fabrique:label_table:>,
+		explication=<:fabrique:label_table_explication:>,
+		attention=<:fabrique:label_table_attention:>,
+		obligatoire=oui})]
+	</ul>
+
+	<div class='parties' data-tab='#CLE'>
+		<div class="group" id='objet#CLE-table_options'>
+			<h4><a href="#objet#CLE-table_options"><:fabrique:legend_tables_hors_normes:></a></h4>
+			<div>
+				<p class='explication'><:fabrique:explication_tables_hors_normes:></p>
+
+				<ul>
+				[(#SAISIE{input, objets/#CLE/cle_primaire,
+					label=<:fabrique:label_cle_primaire:>,
+					explication=<:fabrique:label_cle_primaire_explication:>,
+					attention=<:fabrique:label_cle_primaire_attention:><br /><:fabrique:champ_auto_rempli:>})]
+
+				[(#SAISIE{input, objets/#CLE/cle_primaire_sql,
+					label=<:fabrique:label_cle_primaire_sql:>,
+					explication=<:fabrique:label_cle_primaire_sql_explication:>,
+					attention=<:fabrique:label_cle_primaire_sql_attention:><br /><:fabrique:champ_auto_rempli:>})]
+
+				[(#SAISIE{input, objets/#CLE/table_type,
+					label=<:fabrique:label_table_type:>,
+					explication=<:fabrique:label_table_type_explication:>,
+					attention=<:fabrique:label_table_type_attention:><br /><:fabrique:champ_auto_rempli:>})]
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<h3><a href="#champs"><:fabrique:legend_champs:></a></h3>
+<div class='sous_parties'>
+
+	[(#SET{defaut_titre,''})]
+	[(#SET{defaut_lang,''})]
+	[(#SET{defaut_date,''})]
+	<datalist id="champs_#CLE">
+		<BOUCLE_list_champs(DATA){source tableau, #CHAMPS}>
+		<option label="#CHAMP" value="#CHAMP"/>
+		[(#CHAMP|in_array{#LISTE{nom,titre}}|oui) #SET{defaut_titre,#CHAMP} )]
+		[(#CHAMP|in_array{#LISTE{lang}}|oui) #SET{defaut_lang,#CHAMP} )]
+		[(#CHAMP|in_array{#LISTE{date_publication,date_creation,date}}|oui) #SET{defaut_date,#CHAMP} )]
+		</BOUCLE_list_champs>
+	</datalist>
+	
+	[(#SET{id_objet,[(#ENV{objets/#CLE/id_objet}|sinon{id_objet})]})]
+	<p class='notice'><:fabrique:avertissement_champs{id_objet=#GET{id_objet}}:></p>
+	<B_champs>
+	<div class='parties' data-tab='#CLE'>
+	<BOUCLE_champs(DATA){source tableau,(#CHAMPS|sinon{#ARRAY})}>
+		<div class="group" id='objet#_objet:CLE-champ#CLE'>
+			<h4><a href="#objet#_objet:CLE-champ#CLE">[#(#CHAMP|strtoupper|sinon{#CLE})]</a></h4>
+			<div>
+				<ul>
+				[(#SAISIE{input, objets/#_objet:CLE/champs/#CLE/nom,
+					label=<:fabrique:label_libelle:>,
+					explication=<:fabrique:label_libelle_champ_explication:>,
+					obligatoire=oui})]
+
+				[(#SAISIE{input, objets/#_objet:CLE/champs/#CLE/champ,
+					label=<:fabrique:label_colonne_sql:>,
+					explication=<:fabrique:label_colonne_sql_explication:>,
+					obligatoire=oui})]
+
+				[(#SAISIE{input, objets/#_objet:CLE/champs/#CLE/sql,
+					label=<:fabrique:label_definition_sql:>,
+					list=definitions_sql, inserer_fin=#GET{datalist_aide},
+					obligatoire=oui})]
+
+				[(#REM)
+					Cette saisie possede par defaut les caracteristiques cochees
+					mais si on les decoche, et qu'on valide, pour notre cas,
+					objet/cle/champs/cle/caracteristique devient alors NULL (et non pas array())
+					et la saisie remet logiquement les valeurs par defaut.
+					Pour eviter cela, on ne met les valeurs par defaut que sur la creation du champ
+				]
+				[(#SET{defaut,[(#ENV{objets/#_objet:CLE/champs/#CLE}|non|?{#LISTE{editable,versionne},#LISTE})]})]
+				[(#SAISIE{checkbox, objets/#_objet:CLE/champs/#CLE/caracteristiques,
+					label=<:fabrique:label_caracteristiques:>,
+					defaut=#GET{defaut},
+					datas=[(#ARRAY{
+						editable,<:fabrique:label_champ_est_editable:>,
+						versionne,<:fabrique:label_champ_est_versionne:>,
+						obligatoire,<:fabrique:label_champ_est_obligatoire:>})]})]
+
+				[(#SAISIE{input, objets/#_objet:CLE/champs/#CLE/recherche,
+					label=<:fabrique:label_recherche:>,
+					explication=<:fabrique:label_recherche_explication:>})]
+				</ul>
+
+				<fieldset>
+					<legend class='legend'><:fabrique:legend_saisie:></legend>
+					<ul>
+					[(#SAISIE{input, objets/#_objet:CLE/champs/#CLE/saisie,
+						label=<:fabrique:label_saisie:>,
+						explication=<:fabrique:label_saisie_explication:>,
+						list=saisies, inserer_fin=#GET{datalist_aide}})]
+
+					[(#SAISIE{input, objets/#_objet:CLE/champs/#CLE/explication,
+						label=<:fabrique:label_explication:>})]
+
+					[(#SAISIE{textarea, objets/#_objet:CLE/champs/#CLE/saisie_options,
+						label=<:fabrique:label_saisie_options:>,
+						explication=<:fabrique:label_saisie_options_explication:>,
+						rows=3, li_class=haut})]
+					</ul>
+				</fieldset>
+				
+				<input type='submit' name='f_action[supprimer_champ][#_objet:CLE][#CLE]' class='submit del left action' value='<:fabrique:bouton_supprimer_champ:>' />
+			</div>
+		</div>
+	</BOUCLE_champs>
+	</div>
+	</B_champs>
+	<input type='submit' name='f_action[ajouter_champ][#CLE]' class='submit add left action' value='<:fabrique:bouton_ajouter_champ:>' />
+</div>
+
+
+
+
+
+
+<h3><a href="#champs_speciaux"><:fabrique:legend_champs_speciaux:></a></h3>
+<div>
+
+	<fieldset>
+		<legend class='legend'><:fabrique:legend_champs_sql:></legend>
+		<ul>
+		[(#SAISIE{input, objets/#CLE/champ_titre,
+			label=<:fabrique:label_champ_titre:>,
+			explication=<:fabrique:label_champ_titre_explication:>,
+			list=champs_#CLE, defaut=#GET{defaut_titre}, inserer_fin=#GET{datalist_aide}})]
+		</ul>
+	</fieldset>
+
+
+	<fieldset>
+		<legend class='legend'><:fabrique:legend_rubriques:></legend>
+		<ul>
+		[(#SAISIE{checkbox, objets/#CLE/rubriques,
+			label=<:fabrique:label_champ_rubriques:>,
+			explication=<:fabrique:label_champ_rubriques_explication:>,
+			datas=[(#ARRAY{
+				id_rubrique,<:fabrique:label_champ_id_rubrique:>,
+				id_secteur,<:fabrique:label_champ_id_secteur:>,
+				vue_rubrique,<:fabrique:label_champ_vue_rubrique:>})]})]
+		</ul>
+	</fieldset>
+	<fieldset>
+		<legend class='legend'><:fabrique:legend_langues_et_traductions:></legend>
+		<ul>
+		[(#SAISIE{checkbox, objets/#CLE/langues,
+			label=<:fabrique:label_champ_langues:>,
+			explication=<:fabrique:label_champ_langues_explication:>,
+			datas=[(#ARRAY{
+				lang,<:fabrique:label_champ_lang_et_langue_choisie:>,
+				id_trad,<:fabrique:label_champ_id_trad:>})]})]
+		</ul>
+	</fieldset>
+	<fieldset>
+		<legend class='legend'><:fabrique:legend_date_publication:></legend>
+		<ul>
+		[(#SAISIE{input, objets/#CLE/champ_date,
+			label=<:fabrique:label_champ_date_publication:>,
+			explication=<:fabrique:label_champ_date_publication_explication:>,
+			list=champs_date, defaut=#GET{defaut_date}, inserer_fin=#GET{datalist_aide}})]
+		</ul>
+	</fieldset>
+	<fieldset>
+		<legend class='legend'><:fabrique:legend_statut:></legend>
+		<ul>
+		[(#SAISIE{oui_non, objets/#CLE/statut,
+			label=<:fabrique:label_champ_statut:>,
+			explication=<:fabrique:label_champ_statut_explication:>})]
+		</ul>
+	</fieldset>
+</div>
+
+
+
+
+
+
+<h3><a href="#chaines"><:fabrique:legend_chaines_langues:></a></h3>
+<div class='li_colonne'>
+		[(#SET{langue_objets,#ENV{objets/#CLE/nom}|trim|fabrique_mb_strtolower})]
+		[(#SET{langue_type,#ENV{objets/#CLE/nom_singulier}|trim|fabrique_mb_strtolower|sinon{#GET{objets}|substr{0,-1}}})]
+		[(#SET{langue_mobjets,#GET{langue_objets}|fabrique_mb_strtoupper|ucfirst})]
+		[(#SET{langue_mtype,#GET{langue_type}|fabrique_mb_strtoupper|ucfirst})]
+		
+		[(#SET{objets,#ENV{objets/#CLE/table}|trim|replace{^spip_,''}|fabrique_mb_strtolower})]
+		[(#SET{type,#ENV{objets/#CLE/table_type}|trim|fabrique_mb_strtolower})]
+		[(#SET{mobjets,#GET{objets}|fabrique_mb_strtoupper|ucfirst})]
+		[(#SET{mtype,#GET{type}|fabrique_mb_strtoupper|ucfirst})]
+	<B_chaines>
+	<ul>
+	<BOUCLE_chaines(DATA){si #ENV{objets/#CLE/nom}}{liste
+		titre_objets,
+		titre_objet,
+		info_aucun_objet,
+		info_1_objet,
+		info_nb_objets,
+		icone_creer_objet,
+		icone_modifier_objet,
+		titre_logo_objet,
+		titre_langue_objet,
+		titre_objets_rubrique,
+		info_objets_auteur,
+		retirer_lien_objet,
+		retirer_tous_liens_objets,
+		ajouter_lien_objet,
+		texte_ajouter_objet,
+		texte_creer_associer_objet,
+		texte_changer_statut_objet,
+	}>
+	[(#SAISIE{input, objets/#_objet:CLE/chaines/#VALEUR,
+		label=[(#VALEUR|cle_de_langue{#ARRAY{objet,#GET{objets},type,#GET{type}}})],
+		li_class=haut,
+		defaut=[(#VAL{fabrique:chaine_#VALEUR[(#_objet:GENRE|=={feminin}|?{_feminin})]}|_T{[(#ARRAY{
+				objets,#GET{langue_objets},
+				mobjets,[(#GET{langue_objets}|ucfirst)],
+				type,#GET{langue_type},
+				mtype,[(#GET{langue_type}|ucfirst)]})]})]})]
+	</BOUCLE_chaines>
+	</ul>
+	<div class='clear'>
+		<input type='submit' name='f_action[reinitialiser_chaines][#CLE]' class='submit del left action' value='<:fabrique:bouton_reinitialiser_chaines:>' />
+	</div>
+	</B_chaines>
+	<p class='notice'><:fabrique:valider_nom_objet_avant:></p>
+	<//B_chaines>
+</div>
+
+
+
+
+
+
+
+<h3><a href="#liaisons"><:fabrique:legend_liaisons:></a></h3>
+<div class='sous_parties'>
+	<fieldset>[(#SET{o,[(#GET{objets}|sinon{objets})]})]
+		<legend class='legend'><:fabrique:legend_liaisons_objet_liens{objet=#GET{o}}:></legend>
+		<ul>
+		[(#SAISIE{oui_non, objets/#CLE/table_liens,
+			label=<:fabrique:label_table_liens:>})]
+
+		[(#SAISIE{checkbox, objets/#CLE/vue_liens,
+			label=<:fabrique:label_vue_liens:>,
+			explication=<:fabrique:label_vue_liens_explication:>,
+			datas=[(#ENV{objets}|fabrique_lister_objets_editoriaux{#ENV{objets/#CLE/vue_liens, #ARRAY}, #LISTE{#TABLE}})],
+			li_class=saisie_choisir_objets})]
+		</ul>
+
+
+		<div class='parties'>
+			<div class="group" id='objet-roles'>
+				<h4><a href="#objet#CLE-inserer-roles"><:fabrique:legend_roles:></a></h4>
+				<div>
+					<p class='experimental'><:fabrique:experimental_explication:></p>
+					<p class='explication'><:fabrique:explication_roles:></p>
+
+					<ul>
+						#SET{rows,#ENV{objets/#CLE/roles}|explode{#EVAL{'"\n"'}}|count|max{4}}
+						[(#SAISIE{textarea, objets/#CLE/roles,
+							label=<:fabrique:label_roles:>,
+							explication=<:fabrique:label_roles_explication:>,
+							rows=#GET{rows}, li_class=haut})]
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</fieldset>
+
+	<fieldset>
+		<legend class='legend'><:fabrique:legend_liaisons_auteurs_liens:></legend>
+		<ul>
+		[(#SAISIE{oui_non, objets/#CLE/auteurs_liens,
+			label=<:fabrique:label_auteurs_liens:>,
+			explication=<:fabrique:label_auteurs_liens_explication:>})]
+		
+		[(#SAISIE{oui_non, objets/#CLE/vue_auteurs_liens,
+			label=<:fabrique:label_vue_auteurs_liens:>,
+			explication=<:fabrique:label_vue_auteurs_liens_explication:>})]
+		</ul>
+	</fieldset>
+</div>
+
+
+
+
+
+
+<h3><a href="#fichiers_echafaudes"><:fabrique:legend_fichiers_echafaudes:></a></h3>
+<div>
+	<ul>
+		[(#SET{data,[(#ARRAY{
+			prive/squelettes/contenu/objets.html,prive/squelettes/contenu/objets.html,
+			prive/objets/infos/objet.html,prive/\objets/infos/objet.html,
+			prive/squelettes/contenu/objet.html,prive/squelettes/contenu/objet.html
+		}
+		|tab_cle_de_langue{[(#ARRAY{objet,#GET{objets},type,#GET{type}})]}
+		|tab_wrap{<strong>}
+		|tab_cle_traduite_ajoute_dans_valeur{echafaudage_})]})]
+
+		[(#SAISIE{checkbox, objets/#CLE/echafaudages,
+			label=<:fabrique:label_fichiers:>,
+			explication=<:fabrique:explication_fichiers_echafaudes:>,
+			datas=#GET{data}})]
+	</ul>
+</div>
+
+
+
+<h3><a href="#autorisations"><:fabrique:legend_autorisations:></a></h3>
+<div>
+	<B_autorisations>
+	<ul>
+	<BOUCLE_autorisations(DATA){si #ENV{objets/#CLE/nom}}{liste
+		objet_creer,
+		objet_voir,
+		objet_modifier,
+		objet_supprimer,
+		associerobjet,
+	}>
+	[(#SET{defaut,[(#VAL{fabrique:autorisation_}|concat{[(#VALEUR|fabrique_autorisation_defaut)]}|_T)]})]
+	[(#SET{defaut,[(#VAL{fabrique:autorisation_defaut}|_T{#ARRAY{defaut,#GET{defaut}}})]})]
+	[(#SAISIE{selection, objets/#_objet:CLE/autorisations/#VALEUR,
+		label=[(#VALEUR|cle_de_langue{#ARRAY{objet,#GET{objets},type,#GET{type}}})],
+		cacher_option_intro=oui,
+		datas=[(#ARRAY{
+			'',#GET{defaut},
+			toujours,<:fabrique:autorisation_toujours:>,
+			redacteur,<:fabrique:autorisation_redacteur:>,
+			administrateur_restreint,<:fabrique:autorisation_administrateur_restreint:>,
+			administrateur,<:fabrique:autorisation_administrateur:>,
+			webmestre,<:fabrique:autorisation_webmestre:>,
+			jamais,<:fabrique:autorisation_jamais:>})]})]
+	</BOUCLE_autorisations>
+	</ul>
+	<div class='clear'>
+		<input type='submit' name='f_action[reinitialiser_autorisations][#CLE]' class='submit del left action' value='<:fabrique:bouton_reinitialiser_autorisations:>' />
+	</div>
+	</B_autorisations>
+	<p class='notice'><:fabrique:valider_nom_objet_avant:></p>
+	<//B_autorisations>
+</div>
+
+
+
+
+
+<h3><a href="#options"><:fabrique:legend_options:></a></h3>
+<div>
+	<ul>
+	[(#REM)
+		Cette saisie possede par defaut les boutons edition et outils rapide
+		mais si on les decoche, et qu'on valide, pour notre cas,
+		objet/cle/boutons devient alors NULL (et non pas array())
+		et la saisie remet logiquement les valeurs par defaut.
+		Pour eviter cela, on ne met les valeurs par defaut que sur la creation de l'objet
+	]
+	[(#SET{defaut,[(#ENV{objets/#CLE}|non|?{#LISTE{menu_edition,outils_rapides},#LISTE})]})]
+	[(#SAISIE{checkbox, objets/#CLE/boutons,
+		label=<:fabrique:label_boutons:>,
+		explication=<:fabrique:label_boutons_explication:>,
+		defaut=#GET{defaut},
+		datas=[(#ARRAY{
+			menu_edition,<:fabrique:bouton_menu_edition:>,
+			outils_rapides,<:fabrique:bouton_outils_rapides:>})]})]
+
+	[(#SAISIE{checkbox, objets/#CLE/saisies,
+		label=<:fabrique:label_saisies:>,
+		explication=<:fabrique:label_saisies_explication:>,
+		datas=[(#ARRAY{
+			objets,<:fabrique:saisies_objets{saisie=#LOBJET}:>})]})]
+	</ul>
+</div>
+
+
+
+
+
+
+<h3><a href="#suppression"><:fabrique:legend_suppression:></a></h3>
+<div>
+	<input type='submit' name='f_action[supprimer_objet][#CLE]' class='submit del left action' value='<:fabrique:bouton_supprimer_objet:>' />
+</div>
+
+</BOUCLE_objet>

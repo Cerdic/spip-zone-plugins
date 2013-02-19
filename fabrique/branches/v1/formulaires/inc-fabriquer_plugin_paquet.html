@@ -1,0 +1,191 @@
+
+[(#SET{datalist_aide,[(#CHEMIN_IMAGE{datalist-16.png}|balise_img
+	|inserer_attribut{title,<:fabrique:datalist_aide:>}
+	|inserer_attribut{class,datalist_aide})]})]
+
+
+<h3><a href="#description"><:fabrique:legend_description:></a></h3>
+<div>
+	<ul>
+	[(#SAISIE{input, paquet/nom, label=<:fabrique:label_nom:>, obligatoire=oui})]
+	[(#SAISIE{input, paquet/slogan, label=<:fabrique:label_slogan:>})]
+	[(#SAISIE{textarea, paquet/description, label=<:fabrique:label_description:>, rows=4})]
+	[(#REM) valeur vide pour eviter une notice car sinon, la valeur recue est un tableau ]
+	[(#SAISIE{input, paquet/logo/0, label=<:fabrique:label_logo:>, type=file, valeur=''})]
+	</ul>
+	[(#ENV{paquet/logo/0/fichier}|oui)
+		<div class='center'>
+		[(#ENV{paquet/logo/0/fichier}|fabrique_miniature_image{128})]
+			<input type='submit' name='f_action\[supprimer_logo\]\[paquet/logo/0\]' class='submit del right action' value='<:fabrique:bouton_supprimer_logo:>' />
+		</div>
+	]
+</div>
+
+<h3><a href="#paquet"><:fabrique:legend_paquet:></a></h3>
+<div>
+	<ul>
+	[(#SAISIE{input, paquet/prefixe, label=<:fabrique:label_prefixe:>, obligatoire=oui})]
+	[(#SAISIE{input, paquet/version, label=<:fabrique:label_version:>, obligatoire=oui})]
+	[(#SAISIE{input, paquet/auteur, label=<:fabrique:label_auteur:>})]
+	[(#SAISIE{input, paquet/auteur_lien, label=<:fabrique:label_auteur_lien:>})]
+	[(#SAISIE{input, paquet/licence, label=<:fabrique:label_licence:>,
+		list=licences, inserer_fin=#GET{datalist_aide}})]
+	[(#SAISIE{paquet_categorie, paquet/categorie, label=<:fabrique:label_categorie:>, obligatoire=oui})]
+	[(#SAISIE{paquet_etat, paquet/etat, label=<:fabrique:label_etat:>, obligatoire=oui})]
+	[(#SAISIE{input, paquet/compatibilite, label=<:fabrique:label_compatibilite:>, obligatoire=oui})]
+	[(#SAISIE{input, paquet/documentation, label=<:fabrique:label_documentation_url:>})]
+	</ul>
+</div>
+
+
+<h3><a href="#installation"><:fabrique:legend_installation:></a></h3>
+<div>
+	<ul>
+	[(#SAISIE{oui_non, paquet/administrations, label=<:fabrique:label_fichier_administrations:>, explication=<:fabrique:label_fichier_administrations_explication:>})]
+	[(#SAISIE{input, paquet/schema, label=<:fabrique:label_schema:>, explication=<:fabrique:label_schema_explication:>})]
+	</ul>
+</div>
+
+
+<h3><a href="#configuration"><:fabrique:legend_configuration:></a></h3>
+<div>
+	<ul>
+	[(#SAISIE{oui_non, paquet/formulaire_config, label=<:fabrique:label_formulaire_configuration:>})]
+	[(#SAISIE{input, paquet/formulaire_config_titre, label=<:fabrique:label_formulaire_configuration_titre:>})]
+	</ul>
+</div>
+
+
+<h3><a href="#fichiers"><:fabrique:legend_fichiers:></a></h3>
+<div>
+	<ul>
+	[(#SAISIE{checkbox, paquet/fichiers,
+		label=<:fabrique:label_fichiers:>,
+		explication=<:fabrique:explication_fichiers:>,
+		datas=[(#ARRAY{
+			autorisations,<:fabrique:label_fichier_autorisations:>,
+			fonctions,<:fabrique:label_fichier_fonctions:>,
+			options,<:fabrique:label_fichier_options:>,
+			pipelines,<:fabrique:label_fichier_pipelines:>})]})]
+	</ul>
+</div>
+
+
+
+
+<h3[(#ENV{paquet/inserer,#ARRAY}|fabrique_implode_recursif{''}|trim|oui)class='surveiller']>
+	<a href="#insertions"><:fabrique:legend_insertion_code:></a>
+</h3>
+<div class='sous_parties colorier'>
+
+	<p class='experimental'><:fabrique:experimental_explication:></p>
+	<p class='explication'><:fabrique:insertion_code_explication:></p>
+
+	<div class='parties'>
+		<div class="group" id='paquet-inserer-paquet'>
+			<h4[(#ENV{paquet/inserer/paquet}|trim|oui)class='surveiller']>
+				<a href="#paquet-inserer-paquet"><:fabrique:legend_inserer_paquet:></a>
+			</h4>
+			<div>
+				<ul data-code="xml">
+					#SET{rows,#ENV{paquet/inserer/paquet}|explode{#EVAL{'"\n"'}}|count|max{4}}
+					[(#SAISIE{textarea, paquet/inserer/paquet,
+						label=<:fabrique:label_inserer_paquet:>,
+						rows=#GET{rows}, li_class=haut})]
+				</ul>
+			</div>
+		</div>
+		#SET{p,#ENV{paquet/prefixe,prefixe}}
+		<div class="group" id='paquet-inserer-administrations'>
+			<h4[(#ENV{paquet/inserer/administrations,#ARRAY}|implode{''}|trim|oui)class='surveiller']>
+				<a href="#paquet-inserer-paquet"><:fabrique:legend_inserer_administrations{prefixe=#GET{p}}:></a>
+			</h4>
+			<div>
+				<ul data-code="php">
+					#SET{rows,#ENV{paquet/inserer/administrations/maj}|explode{#EVAL{'"\n"'}}|count|max{4}}
+					[(#SAISIE{textarea, paquet/inserer/administrations/maj,
+						label=<:fabrique:label_inserer_administrations_maj:>,
+						rows=#GET{rows}, li_class=haut})]
+
+					#SET{rows,#ENV{paquet/inserer/administrations/desinstallation}|explode{#EVAL{'"\n"'}}|count|max{4}}
+					[(#SAISIE{textarea, paquet/inserer/administrations/desinstallation,
+						label=<:fabrique:label_inserer_administrations_desinstallation:>,
+						rows=#GET{rows}, li_class=haut})]
+
+					#SET{rows,#ENV{paquet/inserer/administrations/fin}|explode{#EVAL{'"\n"'}}|count|max{4}}
+					[(#SAISIE{textarea, paquet/inserer/administrations/fin,
+						label=<:fabrique:label_inserer_administrations_fin:>,
+						rows=#GET{rows}, li_class=haut})]
+				</ul>
+			</div>
+		</div>
+		<div class="group" id='paquet-inserer-base-tables'>
+			<h4[(#ENV{paquet/inserer/base/tables,#ARRAY}|implode{''}|trim|oui)class='surveiller']>
+				<a href="#paquet-inserer-base-tables"><:fabrique:legend_inserer_base_tables{prefixe=#GET{p}}:></a>
+			</h4>
+			<div>
+				<ul data-code="php">
+					#SET{rows,#ENV{paquet/inserer/base/tables/fin}|explode{#EVAL{'"\n"'}}|count|max{4}}
+					[(#SAISIE{textarea, paquet/inserer/base/tables/fin,
+						label=<:fabrique:label_inserer_base_tables_fin:>,
+						rows=#GET{rows}, li_class=haut})]
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<h3[(#ENV{paquet/scripts,#ARRAY}|fabrique_implode_recursif{''}|trim|oui)class='surveiller']>
+	<a href="#scripting"><:fabrique:legend_scripts:></a>
+</h3>
+<div class='sous_parties colorier'>
+	[(#WEBMESTRE|non)
+		<p class='notice'><:fabrique:scripts_securite_webmestres:></p>
+	]
+	<p class='experimental'><:fabrique:experimental_explication:></p>
+	<p class='explication'><:fabrique:scripts_explication:></p>
+
+	<div class='parties'>
+		<div class="group" id='paquet-scripts_pre_copie'>
+			<h4[(#ENV{paquet/scripts/pre_copie}|trim|oui)class='surveiller']>
+				<a href="#paquet-scripts_pre_copie"><:fabrique:label_scripts_pre_copie:></a>
+			</h4>
+			<div>
+				<ul data-code="php">
+					#SET{rows,#ENV{paquet/scripts/pre_copie}|explode{#EVAL{'"\n"'}}|count|max{4}}
+					[(#SAISIE{textarea, paquet/scripts/pre_copie,
+						label=<:fabrique:label_scripts_pre_copie_explication{destination_ancien_plugin=#DESTINATION_ANCIEN_PLUGIN}:>,
+						rows=#GET{rows}, li_class=haut})]
+				</ul>
+			</div>
+		</div>
+		<div class="group" id='paquet-scripts_post_creation'>
+			<h4[(#ENV{paquet/scripts/post_creation}|trim|oui)class='surveiller']>
+				<a href="#paquet-scripts_post_creation"><:fabrique:label_scripts_post_creation:></a>
+			</h4>
+			<div>
+				<ul data-code="php">
+					#SET{rows,#ENV{paquet/scripts/post_creation}|explode{#EVAL{'"\n"'}}|count|max{4}}
+					[(#SAISIE{textarea, paquet/scripts/post_creation,
+						label=<:fabrique:label_scripts_post_creation_explication{destination_plugin=#DESTINATION_PLUGIN}:>,
+						rows=#GET{rows}, li_class=haut})]
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<h3><a href="#options"><:fabrique:legend_options:></a></h3>
+<div>
+	<ul>
+	[(#SAISIE{oui_non, paquet/exemples,
+		label=<:fabrique:label_exemples:>,
+		explication=<:fabrique:label_exemples_explication:>})]
+	</ul>
+</div>

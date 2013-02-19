@@ -1,0 +1,53 @@
+[(#SET{titre,#ENV{objet/champ_titre}})][
+(#SET{mtitre,#GET{titre}|strtoupper})][
+(#SET{date,#ENV{objet/champ_date}})][
+(#SET{mdate,#GET{date}|strtoupper})][
+(#REM)
+
+Squelette de liste d'un objet
+
+]\[(\#SET{defaut_tri,\#ARRAY{[
+	#ENV{objet/champ_titre},1,(#ENV{objet/champ_titre}|oui)][
+	#ENV{objet/champ_date},-1,(#ENV{objet/champ_date}|oui)]
+	#ID_OBJET,1,
+	points,-1
+}})\]\<B_liste_#LOBJET>
+\#ANCRE_PAGINATION
+<div class="liste-objets #LOBJET">
+<table class='spip liste'>
+	[<caption><strong class="caption">(\#ENV*{titre,\#GRAND_TOTAL|singulier_ou_pluriel{#TYPE:info_1_#TYPE,#TYPE:info_nb_#LOBJET}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>[
+			<th class='statut' scope='col'>\[(\#TRI{statut,<span title="\<:lien_trier_statut|attribut_html:>">#</span>,ajax\})\]</th>(#OBJET|champ_present{statut})]
+			<th class='#GET{titre}' scope='col'>\[(\#TRI{#GET{titre},\<:#TYPE:label_#GET{titre}:>,ajax})\]</th>[
+			<th class='date' scope='col'>\[(\#TRI{#GET{date},\<:date:>,ajax})\]</th>(#GET{date}|oui)]
+			<th class='id' scope='col'>\[(\#TRI{#ID_OBJET,\<:info_numero_abbreviation:>,ajax})\]</th>
+		</tr>
+	</thead>
+	<tbody>
+	\<BOUCLE_liste_#LOBJET\(#MOBJET)[(#OBJET|champ_present{id_rubrique}
+		|?{'{id_rubrique?}'})][(#OBJET|champ_present{id_secteur}
+		|?{'{id_secteur?}'})][(#OBJET|criteres_champs_id)]{id_mot?}[(#OBJET|options_presentes{#LISTE{auteurs_liens,table_liens}}
+		|?{'{auteurs_liens.id_auteur?}','{id_auteur?}'})]{where?}[(#OBJET|champ_present{statut}
+		|?{'{statut?}'})]{recherche?}{tri \#ENV{par,num #GET{titre}},\#GET{defaut_tri}}[(#REM)
+			En plus du TRI, lorsqu'il y a par num sur les objets par defaut, SPIP ajoute un par en plus !
+		]{par #GET{titre}}{pagination \#ENV{nb,10}}>
+		<tr class='[(\#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(\#CHEMIN_IMAGE{#TYPE-16.png}|balise_img)]</td>[
+			<td class='statut'>\[(\#STATUT|puce_statut\{#TYPE,##MID_OBJET[,(#OBJET|champ_present{id_rubrique}|?{\#ID_RUBRIQUE})]\})\]</td>(#OBJET|champ_present{statut})]
+			<td class='[(#GET{titre})] principale'>[(\#LOGO_#MTYPE|image_reduire{20,26})]<a href="\[(#[(#MID_OBJET)]|generer_url_entite{#TYPE})\]" title="\<:info_numero_abbreviation|attribut_html:> \##MID_OBJET">\[(\#RANG). \]##GET{mtitre}</a></td>[
+			<td class='date secondaire'>\[(#[(#GET{mdate})]|affdate_jourcourt)\]</td>(#GET{date}|oui)]
+			<td class='id'>\[(\#AUTORISER{modifier,#TYPE,##MID_OBJET}|?{
+				<a href="[(\#URL_ECRIRE{#ENV{type}_edit,#ID_OBJET=##MID_OBJET})]">##MID_OBJET</a>,
+				##MID_OBJET
+			})\]</td>
+		</tr>
+	\</BOUCLE_liste_#LOBJET>
+	</tbody>
+</table>
+\[<p class='pagination'>(\#PAGINATION{prive})</p>\]
+</div>
+\</B_liste_#LOBJET>[
+<div class="liste-objets #LOBJET caption-wrap"><strong class="caption">(\#ENV*{sinon,''})</strong></div>
+]\<//B_liste_#LOBJET>

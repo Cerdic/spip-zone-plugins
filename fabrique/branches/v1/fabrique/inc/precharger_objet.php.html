@@ -1,0 +1,20 @@
+#PHP
+[(#INCLURE{fond=fabrique/entetes/php,env})]
+
+include_spip('inc/precharger_objet');
+[(#ENV{objet/champ_titre}|non)
+// /!\ Aucun champ de titre défini.
+       Il vous faudra renseigner d'un champ SQL de votre objet le dernier paramètre des fonctions
+       precharger_objet() et precharger_traduction_objet()
+]
+function inc_precharger_[(#TYPE)]_dist($#ID_OBJET, $id_rubrique=0, $lier_trad=0) {
+	return precharger_objet('#TYPE', $#ID_OBJET, $id_rubrique, $lier_trad, '#ENV{objet/champ_titre}');
+}
+
+// fonction facultative si pas de changement dans les traitements
+function inc_precharger_traduction_[(#TYPE)]_dist($#ID_OBJET, $id_rubrique=0, $lier_trad=0) {
+	return precharger_traduction_objet('#TYPE', $#ID_OBJET, $id_rubrique, $lier_trad, '#ENV{objet/champ_titre}');
+}
+
+
+?>

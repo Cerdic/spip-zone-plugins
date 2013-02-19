@@ -1,0 +1,56 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM'>
+	<h3 class="titrem"><:fabrique:aide_creation_squelette_fabrique:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<fieldset>
+			<legend class='legend'><:fabrique:legend_description:></legend>
+			<ul>
+				[(#SAISIE{checkbox, echappements,
+					label=<:fabrique:label_echappements:>, li_class=haut,
+					datas=#ARRAY{
+						diese,<:fabrique:echappement_diese:>,
+						crochets,<:fabrique:echappement_crochets:>,
+						parentheses,<:fabrique:echappement_parentheses:>,
+						accolades,<:fabrique:echappement_accolades:>,
+						tag_boucle,<:fabrique:echappement_tag_boucle:>,
+						idiome,<:fabrique:echappement_idiome:>,
+						inclure,<:fabrique:echappement_inclure:>,
+						php,<:fabrique:echappement_php:>}})]
+
+				[(#SAISIE{choisir_objet, transformer_objet,
+					label=<:fabrique:label_transformer_objet:>,
+					explication=<:fabrique:label_transformer_objet_explication:>})]
+
+				[(#SAISIE{textarea, code_squelette,
+					label=<:fabrique:label_code_squelette:>, li_class=haut})]
+			</ul>
+		</fieldset>
+		
+		<p class="boutons">
+			<input type='submit' name='reset' class='submit' value='<:fabrique:bouton_calculer:>' />
+		</p>
+		
+		[(#CODE_RESULTAT|oui)
+			<fieldset>
+				<legend class='legend'><:fabrique:legend_resultat:></legend>
+				<ul>
+					[(#SAISIE{textarea, code_resultat,
+						label=<:fabrique:label_code_resultat:>, li_class=haut})]
+				</ul>
+			</fieldset>
+		]
+
+	</div></form>
+	]
+
+<style type='text/css'>
+.formulaire_#FORM .choix {display:inline; float:left; margin:.5em; border:1px solid #ccc; border-radius:5px; background:white;}
+.formulaire_#FORM .choix label {padding:.2em 1em .2em 1em; top:-2px; left:-10px; position:relative;}
+</style>
+</div>

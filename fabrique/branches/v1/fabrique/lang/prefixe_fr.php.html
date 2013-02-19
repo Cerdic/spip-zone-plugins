@@ -1,0 +1,35 @@
+#PHP
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+[
+
+
+(#REM)
+Construire la liste des chaines a inserer
+
+][(#SET{chaines,[(#ARRAY{
+	#ENV{prefixe}_titre,#ENV{paquet/nom}})]})][
+
+
+(#REM)
+Chaines en plus si configuration
+
+][(#ENV{paquet/formulaire_config}|oui)[(#SET{chaines,[(#GET{chaines}|array_merge{[(#ARRAY{
+	cfg_exemple,<:fabrique:config_exemple:>,
+	cfg_exemple_explication,<:fabrique:config_exemple_explication:>,
+	cfg_titre_parametrages,<:fabrique:config_titre_parametrages:>,
+	titre_page_configurer_#PREFIXE,#ENV{paquet/formulaire_config_titre,#ENV{paquet/nom}}})]})]})]][
+
+
+(#REM)
+Construction du tableau de langue
+
+]
+$GLOBALS[$GLOBALS['idx_lang']] = array(<BOUCLE_chaines(DATA){source tableau,#GET{chaines}}>[
+
+	// (#CLE|substr{0,1}|unique{#TABLE}|strtoupper)][
+	'(#CLE)' => '[(#VALEUR|chaine_de_langue)]',]</BOUCLE_chaines>
+);
+
+?>

@@ -1,0 +1,86 @@
+#CACHE{0}#PHP
+#
+# Ces fichiers sont a placer dans le repertoire base/ de votre plugin
+#
+
+/**
+ * Fonction d'import de la table #TABLE_DESTINATION
+ * a utiliser dans le fichier d'administration du plugin
+ *
+ * include_spip('base/importer_#TABLE_DESTINATION');
+ * $maj['create'][] = array('importer_#TABLE_DESTINATION');
+ *
+**/
+function importer_#TABLE_DESTINATION() {
+
+	######## VERIFIEZ LE NOM DE LA TABLE D'INSERTION ###########
+	$table = '#TABLE_DESTINATION';
+
+	// nom_du_champ_source => nom_du_champ_destination
+	// mettre vide la destination ou supprimer la ligne permet de ne pas importer la colonne.
+	$correspondances = array(<BOUCLE_champs(DATA){source tableau,(#TABLE|sql_showtable{0,#CONNECTEUR}|table_valeur{field})}>
+		'#CLE' => '#CLE',</BOUCLE_champs>
+	);
+
+	// transposer les donnees dans la nouvelle structure
+	$inserts = array();
+	list($cles, $valeurs) = donnees_#TABLE_DESTINATION();
+	// on remet les noms des cles dans le tableau de valeur
+	// en s'assurant de leur correspondance au passage
+	if (is_array($valeurs)) {
+		foreach ($valeurs as $v) {
+			$i = array();
+			foreach ($v as $k => $valeur) {
+				$cle = $cles[$k];
+				if (isset($correspondances[$cle]) and $correspondances[$cle]) {
+					$i[ $correspondances[$cle] ] = $valeur;
+				}
+			}
+			$inserts[] = $i;
+		}
+		unset($valeurs);
+
+		// inserer les donnees en base.
+		$nb_inseres = 0;
+		// ne pas reimporter ceux deja la (en cas de timeout)
+		$nb_deja_la = sql_countsel($table);
+		$inserts = array_slice($inserts, $nb_deja_la);
+		$nb_a_inserer = count($inserts);
+		// on decoupe en petit bout (pour reprise sur timeout)
+		$inserts = array_chunk($inserts, 100);
+		foreach ($inserts as $i) {
+			sql_insertq_multi($table, $i);
+			$nb_inseres += count($i);
+			// serie_alter() relancera la fonction jusqu'a ce que l'on sorte sans timeout.
+			if (time() >= _TIME_OUT) {
+				// on ecrit un gentil message pour suivre l'avancement.
+				echo "<br />Insertion dans $table relanc&eacute;e : ";
+				echo "<br />- $nb_deja_la &eacute;taient d&eacute;j&agrave; l&agrave;";
+				echo "<br />- $nb_inseres ont &eacute;t&eacute; ins&eacute;r&eacute;s.";
+				$a_faire = $nb_a_inserer - $nb_inseres;
+				echo "<br />- $a_faire &agrave; faire.";
+				return;
+			}
+		}
+	}
+}
+
+
+/**
+ * Donnees de la table #TABLE_DESTINATION
+**/
+function donnees_#TABLE_DESTINATION() {
+[(#SET{data,[(#TABLE|fabrique_extraire_les_donnees_table{#CONNECTEUR})]})]
+	$cles = [(#GET{data/cles}|ecrire_tableau)];
+<B_tous>
+	$valeurs = array(<BOUCLE_tous(DATA){source tableau,#GET{data/valeurs}}{si (#COMPRESSION|non)}>
+		[(#VALEUR**|ecrire_tableau)],</BOUCLE_tous>
+	);
+</B_tous>[
+	(#REM) ecrire_fichier compresse automatiquement les .gz
+	][(#CHEMIN_COMPRESSION|ecrire_fichier{[(#GET{data/valeurs}|serialize)]}|non)]
+	lire_fichier(find_in_path('base/[(#DONNEES_COMPRESSEES)]'), $valeurs);
+	$valeurs = unserialize($valeurs);
+<//B_tous>
+	return array($cles, $valeurs);
+}

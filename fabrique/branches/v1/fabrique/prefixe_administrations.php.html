@@ -1,0 +1,69 @@
+#PHP
+[(#INCLURE{fond=fabrique/entetes/php,env})]
+
+
+/**
+ * Fonction d'installation du plugin et de mise à jour.[
+ * Vous pouvez :
+ * - créer la structure SQL,
+ * - insérer du pre-contenu,
+ * - installer des valeurs de configuration,
+ * - mettre à jour la structure SQL(#EXEMPLES|oui)]
+**/
+function #ENV{prefixe}_upgrade($nom_meta_base_version, $version_cible) {
+	$maj = array();<BOUCLE_si_exemples(CONDITION){si #EXEMPLES}>
+	# quelques exemples
+	# (que vous pouvez supprimer !)
+	# 
+	# $maj['create'] = array(array('creer_base'));
+	#
+	# include_spip('inc/config')
+	# $maj['create'] = array(
+	#	array('maj_tables', array('spip_xx', 'spip_xx_liens')),
+	#	array('ecrire_config', array('#PREFIXE', array('exemple' => "Texte de l'exemple")))
+	#);
+	#
+	# $maj['1.1.0']  = array(array('sql_alter','TABLE spip_xx RENAME TO spip_yy'));
+	# $maj['1.2.0']  = array(array('sql_alter','TABLE spip_xx DROP COLUMN id_auteur'));
+	# $maj['1.3.0']  = array(
+	#	array('sql_alter','TABLE spip_xx CHANGE numero numero int(11) default 0 NOT NULL'),
+	#	array('sql_alter','TABLE spip_xx CHANGE texte petit_texte mediumtext NOT NULL default \'\''),
+	# );
+	# ...</BOUCLE_si_exemples>
+<BOUCLE_si_objets(CONDITION){si #OBJETS}>
+	$maj['create'] = array(array('maj_tables', [(#LES_TABLES|ecrire_tableau)]));[
+(#ENV*{paquet/inserer/administrations/maj}|fabrique_tabulations{1})]
+</BOUCLE_si_objets>
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
+}
+
+
+/**
+ * Fonction de désinstallation du plugin.[
+ * Vous devez :
+ * - nettoyer toutes les données ajoutées par le plugin et son utilisation
+ * - supprimer les tables et les champs créés par le plugin.(#EXEMPLES|oui)]
+**/
+function #ENV{prefixe}_vider_tables($nom_meta_base_version) {<BOUCLE_si_exemples2(CONDITION){si #EXEMPLES}>
+	# quelques exemples
+	# (que vous pouvez supprimer !)
+	# sql_drop_table("spip_xx");
+	# sql_drop_table("spip_xx_liens");</BOUCLE_si_exemples2>
+<BOUCLE_tables(DATA) {si #OBJETS} {source tableau,#LES_TABLES}>
+	sql_drop_table("#VALEUR");</BOUCLE_tables>
+<BOUCLE_objets_autres_nettoyages(CONDITION){si #OBJETS}>
+	# Nettoyer les versionnages et forums
+	[(#VAL{'sql_delete("spip_versions",'}          |espacer{40})] sql_in("objet", [(#LES_TYPES|ecrire_tableau)]));
+	[(#VAL{'sql_delete("spip_versions_fragments",'}|espacer{40})] sql_in("objet", [(#LES_TYPES|ecrire_tableau)]));
+	[(#VAL{'sql_delete("spip_forum",'}             |espacer{40})] sql_in("objet", [(#LES_TYPES|ecrire_tableau)]));
+</BOUCLE_objets_autres_nettoyages>[
+(#ENV*{paquet/inserer/administrations/desinstallation}|fabrique_tabulations{1})]
+	effacer_meta($nom_meta_base_version);
+}
+[
+
+
+(#ENV*{paquet/inserer/administrations/fin})
+]
+?>

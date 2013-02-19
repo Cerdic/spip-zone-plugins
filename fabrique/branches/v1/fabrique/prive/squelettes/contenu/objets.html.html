@@ -1,0 +1,13 @@
+[(#SET{titre,#ENV{objet/champ_titre,#ENV{objet/champs/0/champ, titre}}})][
+
+(#REM)
+
+
+]\#FORMULAIRE_RECHERCHE_ECRIRE{\#SELF,ajax}
+<div class="nettoyeur"></div>
+
+\<INCLURE{fond=prive/objets/liste/#LOBJET, par=#GET{titre}, env, ajax, sinon=<:#TYPE:info_aucun_#TYPE:>}>
+
+\[(\#AUTORISER{creer,#TYPE})
+	\[(\#URL_ECRIRE{[(#TYPE)]_edit,new=oui}|icone_verticale{\<:#TYPE:icone_creer_#TYPE:>,#TYPE,new,right})\]
+\]

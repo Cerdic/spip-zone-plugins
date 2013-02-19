@@ -1,0 +1,13 @@
+#PHP
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+[(#SET{chaines,#OBJET|fabriquer_tableau_chaines})]
+$GLOBALS[$GLOBALS['idx_lang']] = array(<BOUCLE_chaines(DATA){source tableau,#GET{chaines}}>[
+
+	// (#CLE|substr{0,1}|unique{#TABLE}|strtoupper)][
+	'(#CLE)' => '[(#VALEUR|chaine_de_langue)]',]</BOUCLE_chaines>
+);
+
+?>

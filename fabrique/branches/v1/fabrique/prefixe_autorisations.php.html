@@ -1,0 +1,74 @@
+#PHP
+[(#INCLURE{fond=fabrique/entetes/php,env})]
+<BOUCLE_si_exemples(CONDITION){si #EXEMPLES}>
+/*
+ * Un fichier d'autorisations permet de regrouper
+ * les fonctions d'autorisations de votre plugin
+ */
+</BOUCLE_si_exemples>
+// declaration vide pour ce pipeline.
+function [(#PREFIXE)]_autoriser(){}
+
+<BOUCLE_si_exemples2(CONDITION){si #EXEMPLES}>
+/* Exemple
+function autoriser_configurer_[(#PREFIXE)]_dist($faire, $type, $id, $qui, $opt) {
+	// type est un objet (la plupart du temps) ou une chose.
+	// autoriser('configurer', '_[(#PREFIXE)]') => $type = '[(#PREFIXE)]'
+	// au choix
+	return autoriser('webmestre', $type, $id, $qui, $opt); // seulement les webmestres
+	return autoriser('configurer', '', $id, $qui, $opt); // seulement les administrateurs complets
+	return $qui['statut'] == '0minirezo'; // seulement les administrateurs (même les restreints)
+	// ...
+}
+*/
+</BOUCLE_si_exemples2>
+<BOUCLE_objets(DATA){source tableau,#OBJETS}>[
+(#SET{type,#TYPE|fabrique_type_autorisation})][
+(#SET{objet,#OBJET|fabrique_type_autorisation})
+]// -----------------
+// Objet [(#OBJET)]
+
+[
+// bouton de menu
+function autoriser_#GET{objet}_menu_dist($faire, $type, $id, $qui, $opts){
+	return true;
+}(#VAL{menu_edition}|in_any{#VALEUR{boutons}})]
+[
+// bouton d'outils rapides
+function autoriser_#GET{type}creer_menu_dist($faire, $type, $id, $qui, $opts){
+	return autoriser('creer', ['(#TYPE)'], '', $qui, $opts);
+}(#VAL{outils_rapides}|in_any{#VALEUR{boutons}})]
+
+// creer[(#SET{creer,[(#AUTORISATIONS|fabrique_code_autorisation_defaut{objet_creer})]})]
+function autoriser_#GET{type}_creer_dist($faire, $type, $id, $qui, $opt) {[
+	return \([(#GET{creer})] AND sql_countsel('spip_rubriques')>0\);(#VALEUR|champ_present{id_rubrique}|oui)][
+	return #GET{creer};(#VALEUR|champ_present{id_rubrique}|non)]
+}
+
+// voir les fiches completes
+function autoriser_#GET{type}_voir_dist($faire, $type, $id, $qui, $opt) {
+	return [(#AUTORISATIONS|fabrique_code_autorisation_defaut{objet_voir})];
+}
+
+// modifier
+function autoriser_#GET{type}_modifier_dist($faire, $type, $id, $qui, $opt) {
+	return [(#AUTORISATIONS|fabrique_code_autorisation_defaut{objet_modifier})];
+}
+
+// supprimer
+function autoriser_#GET{type}_supprimer_dist($faire, $type, $id, $qui, $opt) {
+	return [(#AUTORISATIONS|fabrique_code_autorisation_defaut{objet_supprimer})];
+}
+<BOUCLE_creer_objet_dans_rubrique(CONDITION){si (#VAL{vue_rubrique}|in_any{#VALEUR{rubriques}})}>
+// creer dans une rubrique
+function autoriser_rubrique_creer#GET{type}dans_dist($faire, $type, $id, $qui, $opt) {
+	return ($id AND autoriser('voir','rubrique', $id) AND autoriser('creer','[(#TYPE)]', $id));
+}</BOUCLE_creer_objet_dans_rubrique>
+<BOUCLE_associer_objets(CONDITION){si #TABLE_LIENS}>
+// associer (lier / delier)
+function autoriser_associer#GET{objet}_dist($faire, $type, $id, $qui, $opt) {
+	return [(#AUTORISATIONS|fabrique_code_autorisation_defaut{associerobjet})];
+}</BOUCLE_associer_objets>
+</BOUCLE_objets>
+
+?>

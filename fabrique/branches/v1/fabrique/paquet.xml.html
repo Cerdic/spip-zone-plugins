@@ -1,0 +1,63 @@
+<paquet
+	prefix="#PREFIXE"
+	categorie="#ENV{paquet/categorie}"
+	version="#ENV{paquet/version}"
+	etat="#ENV{paquet/etat}"
+	compatibilite="#ENV{paquet/compatibilite}"
+	logo="[(#ENV{paquet/logo/0/fichier}|?{prive/themes/spip/images/#PREFIXE-64.png})]"
+	documentation="#ENV{paquet/documentation}"[
+	schema="#ENV{paquet/schema}"(#ENV{paquet/administrations}|oui)]
+>
+	<!--
+		Paquet généré le #DATE[
+		(Vous pouvez bien entendu supprimer ces commentaires)(#ENV{paquet/exemples}|oui)]
+	-->
+
+	<nom>#ENV{paquet/nom}</nom>
+[
+	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs -->(#ENV{paquet/exemples}|oui)]
+	<auteur[ lien='(#ENV{paquet/auteur_lien})']>#ENV{paquet/auteur}</auteur>
+
+	<licence>#ENV{paquet/licence}</licence>[(#REM)
+]<BOUCLE_si_exemples(CONDITION){si #EXEMPLES}>
+
+	<!--
+		Exemple de commandes
+		* dependances
+		<necessite nom="saisies" compatibilite="[1.21.0;]" />
+		<utilise nom="saisies" compatibilite="[1.21.0;]" />
+		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
+		* pipelines
+		<pipeline nom="autoriser" inclure="#ENV{paquet/prefixe}_autorisations.php" />
+		<pipeline nom="insert_head" inclure="#ENV{paquet/prefixe}_pipelines.php" />
+		* declarer un pipeline 
+		<pipeline nom="mon_pipeline" action="" />
+		* parents de menus de SPIP :
+				menu_accueil (à éviter), menu_edition, menu_publication,
+				menu_activite, menu_squelette, menu_administration, menu_configuration 
+		<menu nom="#ENV{paquet/prefixe}" titre="#ENV{paquet/prefixe}:#ENV{paquet/prefixe}_titre" parent="menu_edition"  icone="images/#ENV{paquet/prefixe}-16.png" />
+		* parents d'onglets... configuration, plugins, statistiques, ... 
+		<onglet nom="#ENV{paquet/prefixe}" titre="#ENV{paquet/prefixe}:#ENV{paquet/prefixe}_titre" parent="configuration" icone="images/#ENV{paquet/prefixe}-24.png" />
+	-->
+</BOUCLE_si_exemples>[
+(#ENV*{paquet/inserer/paquet}|fabrique_tabulations{1})][
+	<necessite nom="saisies" compatibilite="\[1.24.0;\]" />(#OBJETS|count|oui)[
+	<necessite nom="roles"   compatibilite="\[1.1.0;\]" />(#OBJETS|objets_options_presentes{#LISTE{table_liens,roles}}|oui)]
+][
+	<pipeline nom="autoriser" inclure="#ENV{prefixe}_autorisations.php" />(#VAL{autorisations}|in_any{#ENV{paquet/fichiers}})]
+<BOUCLE_pipelines_tables(DATA){liste
+	declarer_tables_objets_sql,
+	declarer_tables_interfaces,
+	declarer_tables_auxiliaires}>[
+	<pipeline nom="#VALEUR" inclure="base/#PREFIXE.php" />(#OBJETS|fabrique_necessite_pipeline{#VALEUR}|oui)]</BOUCLE_pipelines_tables>[(#REM)
+]<BOUCLE_pipelines(DATA){liste
+	affiche_enfants,
+	affiche_milieu,
+	affiche_auteurs_interventions,
+	afficher_contenu_objet,
+	optimiser_base_disparus}>[
+	<pipeline nom="#VALEUR" inclure="[(#PREFIXE)]_pipelines.php" />(#OBJETS|fabrique_necessite_pipeline{#VALEUR}|oui)]</BOUCLE_pipelines>
+<BOUCLE_boutons(DATA){source tableau,#OBJETS}>[
+	<menu nom="#OBJET" titre="#TYPE:titre_#OBJET" parent="menu_edition" icone="images/#TYPE-16.png" action="#OBJET" />(#VALEUR|option_presente{menu_edition})][
+	<menu nom="[(#TYPE)]_creer" titre="#TYPE:icone_creer_#TYPE" parent="outils_rapides" icone="images/#TYPE-new-16.png" action="[(#TYPE)]_edit" parametres="new=oui" />(#VALEUR|option_presente{outils_rapides})]</BOUCLE_boutons>
+</paquet>

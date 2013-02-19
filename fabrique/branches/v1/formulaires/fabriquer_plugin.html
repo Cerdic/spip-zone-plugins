@@ -1,0 +1,114 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<BOUCLE_si_diff(CONDITION){si #ENV**{_message_diff}}>
+	<div class="reponse_formulaire reponse_formulaire_diff">
+		<h4><:fabrique:message_diff:></h4>
+		<B_suppressions>
+		<div class='notice'>
+			<p><:fabrique:message_diff_suppressions:></p>
+			<ul>
+			<BOUCLE_suppressions(DATA){source tableau,#ENV**{_message_diff_suppressions}}>
+				<li>#VALEUR</li>
+			</BOUCLE_suppressions>
+			</ul>
+		</div>
+		</B_suppressions>
+		<div class='diff'>
+			<p><:fabrique:message_diff_explication:></p>
+[(#ENV**{_message_diff})]
+		</div>
+	</div>
+	</BOUCLE_si_diff>
+
+	[<p class="notice">(#ENV**{_message_info})</p>]
+
+<BOUCLE_editable(CONDITION){si #ENV{editable}}>
+
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='submit' name='creer' class='submit invisible' value='<:fabrique:bouton_creer:>' />
+		<input type='hidden' name='open_tab' value='#ENV{open_tab}' id="open_tab" />
+		<BOUCLE_tab_open_accordion(DATA){enum 0,(#OBJETS|count|plus{1})}>
+		<input type='hidden' name='open_accordion[#CLE]' value='#ENV{open_accordion/#CLE,0}' id="open_accordion_#CLE" />
+		</BOUCLE_tab_open_accordion>
+		
+		<div id="tabs">
+			<ul class='tabs'>
+				<li id='paquet'><a href="#tab-plugin"><:fabrique:onglet_plugin:>
+					[(#REM) Attention à bien rafraichir l'image reduite lorsqu'on change de logo ]
+					[(#ENV{paquet/logo/0/fichier}|sinon{#CHEMIN_IMAGE{vide-1x24.png}}|fabrique_miniature_image{24})]
+				</a></li>
+				<BOUCLE_tab_objets(DATA){source tableau, #OBJETS}>
+					[(#SET{defaut,<:fabrique:onglet_objet_n{nb=#CLE}:>})]
+				<li id='objet#CLE'><a href="#tab-objet-#CLE">[(#NOM|fabrique_mb_strtoupper|sinon{#GET{defaut}})]
+					[(#REM) Attention à bien rafraichir l'image reduite lorsqu'on change de logo ]
+					[(#VALEUR{logo/24/fichier}
+						|sinon{#VALEUR{logo/32/fichier}}|sinon{#VALEUR{logo/0/fichier}}
+						|sinon{#CHEMIN_IMAGE{vide-1x24.png}}|fabrique_miniature_image{24})]
+				</a></li>
+				</BOUCLE_tab_objets>
+			</ul>
+
+			<div id="tab-plugin">
+				<div class='parties' id="partie_0">
+					[(#INCLURE{fond=formulaires/inc-fabriquer_plugin_paquet,env})]
+				</div>
+			</div>
+
+			<BOUCLE_objets(DATA){source tableau, #OBJETS}>
+				<div id="tab-objet-#CLE">
+					<div class='parties' id="partie_[(#CLE|plus{1})]">
+						[(#INCLURE{fond=formulaires/inc-fabriquer_plugin_objet,env,cle=#CLE})]
+					</div>
+				</div>
+			</BOUCLE_objets>
+		</div>
+
+		<p class="boutons">
+			<input type='submit' name='f_action[ajouter_objet]' class='submit add left' value='<:fabrique:bouton_ajouter_objet:>' />
+			<input type='submit' name='creer' class='submit' value='<:fabrique:bouton_creer:>' />
+		</p>
+
+		<datalist id="licences">
+			<option label="GNU/GPL"    value="GNU/GPL"/>
+			<option label="GNU/GPL v2" value="GNU/GPL v2"/>
+			<option label="GNU/GPL v3" value="GNU/GPL v3"/>
+			<option label="MIT"        value="MIT"/>
+		</datalist>
+		
+		<datalist id="definitions_sql">
+			<option label="smallint"   value="int(6) NOT NULL DEFAULT 0"/>
+			<option label="int"        value="int(11) NOT NULL DEFAULT 0"/>
+			<option label="bigint"     value="bigint(21) NOT NULL DEFAULT 0"/>
+			<option label="varchar"    value="varchar(25) NOT NULL DEFAULT ''"/>
+			<option label="tinytext"   value="tinytext NOT NULL DEFAULT ''"/>
+			<option label="mediumtext" value="mediumtext NOT NULL DEFAULT ''"/>
+			<option label="text"       value="text NOT NULL DEFAULT ''"/>
+			<option label="longtext"   value="longtext NOT NULL DEFAULT ''"/>
+			<option label="datetime"   value="datetime NOT NULL DEFAULT '0000-00-00 00:00:00'"/>
+		</datalist>
+
+		<datalist id="saisies">
+			<BOUCLE_yaml(CONDITION){si #PLUGIN{yaml}}>
+				<BOUCLE_saisies(DATA){source tableau,(#VAL|saisies_lister_disponibles)}>
+					<option label="#CLE" value="#CLE" />
+				</BOUCLE_saisies>
+			</BOUCLE_yaml>
+				<option label="input"      value="input" />
+				<option label="textarea"   value="textarea" />
+				<option label="oui_non"    value="oui_non" />
+				<option label="case"       value="case" />
+				<option label="selection"  value="selection" />
+				<option label="checkbox"   value="checkbox" />
+				<option label="date"       value="date" />
+			<//B_yaml>
+		</datalist>
+
+		<datalist id="champs_date">
+			<option label="date"              value="date" />
+			<option label="date_publication"  value="date_publication" />
+		</datalist>
+	</div></form>
+</BOUCLE_editable>
+</div>

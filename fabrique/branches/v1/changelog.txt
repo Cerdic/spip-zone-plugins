@@ -1,0 +1,383 @@
+Plugin Fabrique pour SPIP
+Ce plugin génère d'autres plugins !
+-----------------------------------
+
+
+
+1.17.0 le 30 07 2012
+--------------------
+
+* Expérimental : gestion des rôles (simples) sur les tables de liaison
+* Notice PHP
+
+1.16.4 le 18 07 2012
+--------------------
+
+* Diverses notices PHP
+* Coquille sur str_pad à la place de array_pad
+
+
+1.16.3 le 23 06 2012
+--------------------
+
+Dans le plugin généré
+* Les listes d'objets reçoivent en critère optionnels tous les id_xxx déclarés dans les champs de l'objet
+* Correction d'une erreur de boucle dans la vue des saisies
+
+Dans les outils
+* Le futilitaire a 2 nouvelles fonctions inserer() et appliquer_lignes(), la première
+  définissant des lignes à modifier/inserer qui seront appliquées par la seconde en temps voulu
+  Ça facilite un peu l'écriture.
+
+
+1.16.2 le 17 06 2012
+--------------------
+
+Dans le plugin généré
+* Nouveau squelette sélectionnable à la place d'un fichier échafaudé : prive/squelettes/contenu/$type.html
+
+Dans les outils
+* Permettre d'indiquer un objet dans l'échappeur de squelettes, qui permet
+  alors de transformer les occurences de cet objet par les balises génériques
+  pour la fabrique.
+  
+
+1.16.1 le 13 06 2012
+--------------------
+* Correction de notices PHP dans le code
+
+Dans l'interface
+* Correction de l'url du site de l'auteur mal préremplie
+* Correction probable de certains affichages d'erreurs
+* Remonter en haut du formulaire après soumission pour bien voir les erreurs éventuelles
+  (ce que fait SPIP par défaut mais qui était perturbé ici par les tabs() et accordions() JS)
+* Retours d'erreurs sur les traitements lorsque les droits des fichiers ne permettent pas
+  de supprimer ou créer la sauvegarde (cela évite de perdre bêtement des données
+  lorsqu'on ajoute des fichiers à la main mais qu'ils n'ont pas suffisamment de droits sur le serveur)
+
+1.16.0 le 02 06 2012
+--------------------
+
+Dans l'interface
+* Décocher les boutons d'un objet et ils revenaient !
+
+Dans le plugin généré
+* Possibilité de génerer une saisie et sa vue pour un objet.
+  La saisie proposée fonctionne pour les tables de petits volumes (<select>)
+  et gère la presence du champ id_parent en proposant alors le parametre recursif=oui
+
+* Une table avec un espace (spip_xx_yys) nécessite la définition d'un surnom de table objet
+* À l'inverse sur ces tables avec un espace, les fonctions d'autorisations n'en n'ont pas : autoriser_xxyy_creer_dist()
+
+
+1.15.1 le 28 05 2012
+--------------------
+
+* Coquille PHP avec le changement de saisie des liaisons (Satch)
+
+Interface :
+* Ne pas mélanger objet de traduction (texte humain) et objet de table (texte machine)
+
+
+
+1.15.0 le 04 05 2012
+--------------------
+
+* Coquille et code mort en moins
+* Suivre le déplacement de jquery-ui dans SPIP3
+* Éviter les fonctions mb_* lorsqu'elles ne sont pas présentes dans le PHP (c'est vraiment dommage) (vince)
+
+Dans le plugin généré
+* Mauvais nommage de l'autorisation du bouton d'action rapide (Cédric Couvrat)
+
+
+Interface :
+* Gestion des diff sous Windows (Julien Lanfray)
+* Affichage des diff unix plus aérés et simples
+* Permettre de saisir des liaisons vers des objets que l'on a déclaré
+  dans la Fabrique, mais qui ne sont pas encore connu de SPIP (plugin
+  non activé). [ Possible que ça ne fonctionne bien, pour ces objets
+  en cours de création, que si la table est naturelle pour SPIP
+  (spip_xxs, id_xx) ]
+* Suppression du titre du plugin en doublon (le premier ne s'affichait pas à cause d'une coquille !)
+
+
+
+1.14.0 le 27 04 2012
+--------------------
+
+Interface :
+* Permettre d'indiquer que l'on veut un champ id_secteur en meme temps que id_rubrique
+
+Dans le plugin généré :
+* Gérer le critère id_secteur sur les listes
+* Ajout de KEY sur certains champs lorsqu'ils sont là (id_secteur, lang, statut, id_trad)
+* Ajout du texte par défaut en cas de liste vide sur le squelette alternatif prive/squelette/contenu/objets
+  comme dans son homologue echafaudé par SPIP
+
+
+
+
+1.13.4 le 25 04 2012
+--------------------
+
+Outil :
+* éviter une erreur de copie sur un système de fichier Windows
+
+
+
+1.13.3 le 20 04 2012
+--------------------
+
+Interface :
+* chemin du plugin complet dans le message de retour du formulaire lors de la création
+
+Outil :
+* ne pas créer d'image vide a la restauration
+
+
+
+1.13.2 le 19 04 2012
+--------------------
+
+Interface :
+Ajout du titre du plugin en haut du formulaire.
+
+Outil :
+Dans le préremplissage d'un objet, voir le champ statut.
+
+Dans le code généré :
+* transformer le vieux code de la page appelant le formulaire de configuration
+* bien utiliser la saisie utilisateur pour le titre de cette page si présente
+* ne pas indiquer un lien de logo si l'utilisateur n'en a pas mis pour le plugin
+* bien creer le fichier de pipeline si l'on coche des liens des auteurs
+* lorsqu'on veut pouvoir lier aux auteurs (par auteurs_liens) et que la table de lien de notre objet existe
+  forcer la jointure dans le fichier de liste sur auteurs_liens.id_auteur
+* coquille dans prive/squelettes/objet_edit d'echappements en trop avec id_rubrique actif.
+* un .ok de plus enlevé qui perturbait les diffs
+* coquille dans l'appel du formulaire lorsque l'objet possede un id_rubrique
+* la date éventuelle sur un objet n'était pas déclarée !
+
+
+
+1.13.1 le 19 04 2012
+--------------------
+Interface :
+* informer du caractère expérimental de certaines parties (insertion de code et scripts)
+
+
+1.13.0 le 18 04 2012
+--------------------
+Interface :
+* possibilité d'indiquer des champs obligatoires
+* possibilité d'ajouter un champ statut (donnera des statuts comme les articles)
+* possibilité d'échafauder prive/objets/infos/$objet.html (ajoute la prévisu si un champ statut est là)
+
+Dans le plugin généré :
+* Prendre en compte le champ statut dans les listes si présent.
+
+Debug :
+* les raccourcis #LES_TABLES oubliaient les tables de liens depuis quelques temps.
+* coquilles PHP sur des fonctions reformatees.
+
+
+
+1.12.0 le 18 04 2012
+--------------------
+Interface :
+* possibilité d'ajouter du code dans base/prefixe.php
+
+Outils :
+* Un fichier inc/futilitaire contient une classe Futilitaire avec des fonctions utiles a utiliser
+  dans le script post_creation :
+  - $futil->deplacer_fichiers() deplace les fichiers indiques du backup vers la nouvelle creation
+  - $futil->ajouter_lignes() insere des lignes de code a partir d'une ligne precise d'un fichier
+
+Dans le plugin généré :
+* ne pas generer de lettres // T vides dans lang/prefixe_fr.php lorsque le formulaire de config n'est pas demande
+* chaines de langues en chaines de langue (!) pour le formulaire de config (pourra servir un jour pour creer des plugins dans d'autres langues)
+* le genie optimiser ne doit finalement s'appliquer que si des tables de liens sont la en fait, sinon optimiser_liens retourne false sans rien faire.
+
+Debug :
+* coquille PHP dans la migration
+* suppression des .ok apres le script post_creation qui peut creer des repertoires aussi
+* echafauder n'a qu'un F
+* le lien vers l'édition dans la dernière colonne d'une liste d'objet était erroné
+
+
+
+1.11.0 le 13 04 2012
+--------------------
+Interface :
+* Accélération de l'affichage en extrayant le CSS et JS dans des fichiers spécifiques
+  et en utilisant basket.js pour stocker les scripts appelés.
+
+
+
+1.10.0 le 12 04 2012
+--------------------
+Interface :
+* lorsque le plugin «skeleditor» est la, les codes inseres et les scripts sont colories
+  lorsque l'on clique dessus.
+
+Debug :
+* 1 fichier était absent,
+* fonction anonyme en moins pour PHP 5.2
+* fichier de pipeline qui ne se creait pas dans un cas precis.
+
+
+1.9.1 le 12 04 2012
+-------------------
+Interface :
+* Mettre dans des sous accordions les parties où l'on peut insérer du code et des scripts.
+* Montrer par une icone d'yeux les accordions qui ont du code ou un script inséré
+  car si ce code saisi par l'utilisateur n'est pas valide, cela peut planter SPIP ou le plugin généré.
+  Autant voir clairement pour s'en rappeler que l'on a mis du code ici.
+
+Dans le plugin généré :
+* Pouvoir insérer du code à la fin du fichier d'administrations (pour des fonctions de mises à jour)
+
+  
+1.9.0 le 10 04 2012
+-------------------
+Outils :
+* Échapper aussi <INCLURE dans le formulaire d'échappement
+
+Dans le plugin généré :
+* Pouvoir indiquer des fichiers à construire par la Fabrique qui sont normalement
+  échafaudés par SPIP. On commence avec squelettes/contenu/villes 
+
+
+1.8.0 le 09 04 2012
+-------------------
+Dans le plugin généré :
+* Pouvoir adapter quelques autorisations depuis l'interface.
+
+
+1.7.1 le 09 04 2012
+-------------------
+Dans le plugin généré :
+* Correction bug sur autorisations (fichier absent + mauvais nommage)
+
+
+1.7.0 le 08 04 2012
+-------------------
+Interface :
+* Affichage des diff (sur système Unix/Linux au moins) entre la sauvegarde et le nouveau plugin
+  au retour de la création du plugin. On montre clairement si des fichiers sont supprimés.
+* On peut insérer du code à executer à certains endroits de la Fabrique (avant la sauvegarde, après la création du plugin)
+  (code exécuté uniquement par les webmestres).
+
+Outils :
+* Sauvegarder 10 fichiers de recréation du plugin pour chaque plugin.
+
+
+1.6.0 le 08 04 2012
+-------------------
+Plutôt que de supprimer l'ancien plugin en créant le nouveau, on le copie
+dans un répertoire de sauvegarde. Ça laisse une chance de récupérer du code
+si l'on avait modifié à la main notre plugin.
+
+Outils :
+* Le script d'importation gère mieux la reprise sur timeout
+
+Interface :
+* Les onglets doivent faire la même hauteur avec ou sans logo dessus
+* Saisie d'insertion de code dans l'onglet Paquet
+
+Dans le plugn généré :
+* On peut insérer du code à certains endroits du plugin (paquet.xml, administrations.php/upgrade())
+  Le code est saisi dans l'interface.
+
+
+1.5.0 le 06 04 2012
+-------------------
+Compatibilité PHP 5.4
+
+Outils :
+* Formulaire permettant de générer un script d'importations de contenu dans une table
+  à partir d'une table SQL existante
+
+
+
+1.4.0 le 04 04 2012
+-------------------
+Interface :
+* Ouvrir l'accordion de description lorsqu'on a lancé une action «pre-construire» auparavant
+  plutôt que de revenir sur le meme accordion.
+* Ouvrir directement sur le nouvel objet lorsqu'on en crée un nouveau
+
+
+Dans le plugin généré :
+* Pouvoir gérer spip_jeux / id_jeu (pluriel différent de s final)
+* Pouvoir gérer des clés primaires sans rapport avec le nom de la table (déconseillé !)
+
+
+
+1.3.0 le 22 03 2012
+-------------------
+Interface :
+* Éviter les erreurs de crash de plugins lorsqu'on recrée un plugin qui est actif
+* Chaines de langues sur 2 colonnes
+* Permettre de pré-construire un objet avec une table SQL existante
+
+Outils :
+* Dans l'echappeur de squelettes, échapper les échappements présents !
+
+Dans le plugin généré :
+* Liaisons de l'objet sur d'autres objets
+* Formulaire d'édition de liens sur les objets
+
+
+1.2.1 le 21 03 2012
+-------------------
+* Correction d'une coquille sur la restauration d'une sauvegarde
+
+
+
+1.2.0 le 21 03 2012
+-------------------
+* Renommage du plugin en «La Fabrique» (anciennement «Le Fabricant»)
+
+Interface :
+* Gestion d'erreurs de saisies en plus.
+
+
+
+1.1.1 le 18 03 2012
+-------------------
+Interface :
+* Faire remonter en javascript les erreurs de saisies sur les accordions et onglets.
+
+Outil :
+* Formulaire pour échapper des squelettes existants avec des \ (ces echappements sont gérés par SPIP 3)
+
+Dans le plugin généré :
+* Liste d'un objet possible dans la page d'un auteur
+
+
+
+1.1.0 le 15 03 2012
+-------------------
+Interface :
+* Interface utilisant ui.accordion
+* Ordonnancement possible des objets et des champs des objets
+* Certaines listes ont une autocomplétion (datalist HTML5)
+* Texte d'accueil avec le Compagnon
+
+
+Dans le plugin généré : 
+* Création des chaines de langue
+* Création possible d'un formulaire de configuration
+* Gestion de logo (en différentes tailles)
+* Gestion des fichiers options, fonctions, administrations, autorisations, pipelines
+* Gestion d'objets (champs, logos, boutons, langues, champs)
+* Gestion de champs spéciaux sur les objets (titres, id_rubrique, id_trad...)
+* Création des listes pour les objets
+* Insertion possible d'exemples dans le code
+
+
+
+1.0.0 le 06 03 2012
+-------------------
+* Premier jet du plugin
