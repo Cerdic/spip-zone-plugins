@@ -10,6 +10,13 @@ options:
       label: '<:saisies:option_groupe_description:>'
     saisies:
       -
+        saisie: 'case'
+        options:
+          nom: 'horaire'
+          label: '<:saisies:option_horaire_label:>'
+          label_case: '<:saisies:option_horaire_label_case:>'
+          valeur_oui: 'oui'
+      -
         saisie: 'input'
         options:
           nom: 'label'
@@ -35,6 +42,24 @@ options:
       nom: 'utilisation'
       label: '<:saisies:option_groupe_utilisation:>'
     saisies:
+      -
+        saisie: 'selection'
+        options:
+          nom: 'heure_pas'
+          label: '<:saisies:option_heure_pas_label:>'
+          explication: '<:saisies:option_heure_pas_explication:>'
+          datas:
+            1: '1 minute'
+            2: '2 minutes'
+            5: '5 minutes'
+            15: '15 minutes'
+            30: '30 minutes'
+          defaut: 30
+        verifier:
+          type: 'entier'
+          options:
+            min: 1
+            max: 30
       -
         saisie: 'oui_non'
         options:
