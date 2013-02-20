@@ -10,14 +10,13 @@
 		<:amap:impression_paniers_fonction_date:>
 		<table border="0" width="100%">
 		<BOUCLE_rub(RUBRIQUES){titre = '001. Distribution'}>
-		<B_paniers>
 			<BOUCLE_paniers(EVENEMENTS){id_rubrique}{par date_debut}>
 				[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
 					<td class="center">
 						<BOUCLE_paniers_distribution(AMAP_PANIERS){date_distribution=#DATE_DEBUT}{0,1}>
 							<a href="[(#URL_ECRIRE{pdf_paniers}|parametre_url{date_distribution,#DATE_DEBUT})]" target="_blank">
 						</BOUCLE_paniers_distribution>
-							[(#DATE_DEBUT|affdate{'d/m/Y'})]
+							[(#DATE_DEBUT|affdate_court)]
 						<BOUCLE_paniers_distribution2(AMAP_PANIERS){date_distribution=#DATE_DEBUT}{0,1}>
 							</a>
 						</BOUCLE_paniers_distribution2>
@@ -34,12 +33,11 @@
 		<:amap:impression_paniers_fonction_mois:>
 		<table border="0" width="100%">
 		<BOUCLE_rub1(RUBRIQUES){titre = '001. Distribution'}>
-		<B_paniers_mois>
 			<BOUCLE_paniers_mois(EVENEMENTS){id_rubrique}{par date_debut}>
 				[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
 					[<td class="center">
-						<a href="[(#URL_ECRIRE{pdf_paniers_mois}|parametre_url{mois_distribution,#DATE_DEBUT|affdate{Y-m}})]">
-						(#DATE_DEBUT|affdate_mois_annee|unique)
+						<a href="[(#URL_ECRIRE{pdf_paniers_mois}|parametre_url{mois_distribution,#DATE_DEBUT|affdate{Y-m}})]" target="_blank">
+						(#DATE_DEBUT|affdate_mois_annee|unique{panier})
 						</a>
 					</td>]
 				[(#COMPTEUR_BOUCLE|alterner{'','','','','</tr>'})]
@@ -54,12 +52,11 @@
 		<:amap:impression_responsables_fonction_mois:>
 		<table border="0" width="100%">
 		<BOUCLE_rub2(RUBRIQUES){titre = '001. Distribution'}>
-		<B_responsable>
 			<BOUCLE_responsable(EVENEMENTS){id_rubrique}{par date_debut}>
 				[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
 					[<td class="center">
-						<a href="[(#URL_ECRIRE{pdf_responsables}|parametre_url{mois_distribution,#DATE_DEBUT|affdate{Y-m}})]">
-						(#DATE_DEBUT|affdate{'m/Y'}|unique)
+						<a href="[(#URL_ECRIRE{pdf_responsables}|parametre_url{mois_distribution,#DATE_DEBUT|affdate{Y-m}})]" target="_blank">
+						(#DATE_DEBUT|affdate_mois_annee|unique{responsable})
 						</a>
 					</td>]
 				[(#COMPTEUR_BOUCLE|alterner{'','','','','</tr>'})]
