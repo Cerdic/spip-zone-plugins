@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		the <code>#TABLE_MATIERES</code> tag in your skeletons.',
 
 	// E
-	'explication_longueur' => 'Sets the maximum number of characters that can consitute each anchor.', # MODIF
+	'explication_longueur' => 'Sets the maximum number of characters that can consitute each anchor.',
 	'explication_min' => 'Defines the minimum number of subheadings of a text from which a table of contents will be displayed.',
 	'explication_separateur' => 'Defines the character that will be inserted between each word to replace spaces.',
 
