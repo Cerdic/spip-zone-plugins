@@ -2,7 +2,12 @@ Plugin Fabrique pour SPIP
 Ce plugin génère d'autres plugins !
 -----------------------------------
 
+* PHPDoc de la fabrique
 
+1.18.0 le 20 02 2013
+--------------------
+* génère les commentaires des fonctions et fichiers PHP au format PHPDoc
+* Notices PHP
 
 1.17.0 le 30 07 2012
 --------------------

@@ -1,9 +1,21 @@
 <?php
+
+/**
+ * Gestion du formulaire de restauration d'une fabrique
+ *
+ * @package SPIP\Fabrique\Formulaires
+**/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 
-
+/**
+ * Chargement du formulaire de restauration d'une fabrique
+ *
+ * @return array
+ *     Environnement du formulaire
+**/
 function formulaires_restaurer_plugin_charger_dist() {
 	
 	// securite a cause du fichier PHP importe
@@ -38,7 +50,12 @@ function formulaires_restaurer_plugin_charger_dist() {
 	return $contexte;
 }
 
-
+/**
+ * Vérifications du formulaire de restauration d'une fabrique
+ *
+ * @return array
+ *     Erreurs du formulaire
+**/
 function formulaires_restaurer_plugin_verifier_dist(){
 	$erreurs = array();
 
@@ -64,7 +81,12 @@ function formulaires_restaurer_plugin_verifier_dist(){
 	return $erreurs;
 }
 
-
+/**
+ * Traitements du formulaire de restauration d'une fabrique
+ *
+ * @return array
+ *     Retour des traitements
+**/
 function formulaires_restaurer_plugin_traiter_dist(){
 
 	if ($d = _request('sauvegarde_locale')) {
@@ -120,7 +142,19 @@ function formulaires_restaurer_plugin_traiter_dist(){
 }
 
 
-// restaurer une description de plusieurs images
+/**
+ * Restaurer une description de plusieurs images
+ *
+ * @uses fabrique_restaurer_image()
+ * 
+ * @param string $nom_de_base
+ *     Nom de base de l'image à restaurer
+ * @param array $images
+ *     Description des images
+ *     Tableau `[type][taille] = [description]`
+ * @return array
+ *     Description complétée des images
+ */
 function fabrique_restaurer_images($nom_de_base, $images) {
 	// $type : 'logo'
 	if (is_array($images)) {
@@ -134,7 +168,20 @@ function fabrique_restaurer_images($nom_de_base, $images) {
 	return array();
 }
 
-// enregistrer dans local/ l'image reçue
+/**
+ * Enregistrer dans local/ l'image reçue
+ * 
+ * @param string $nom_de_base
+ *     Nom de base de l'image à enregistrer.
+ * @param array $l
+ *     Description de l'image.
+ *     Possède les clés `contenu` (image en base64) et `èxtension`
+ * @param int $taille
+ *     Taille de l'image à enregistrer
+ * @return array
+ *     Description complétée des images avec la clé `fichier`
+ *     ayant le chemin de l'image enregistrée.
+ */
 function fabrique_restaurer_image($nom_de_base, $l, $taille = 0) {
 	if ($l['contenu'] and $l['extension']) {
 		$im_dest = _DIR_VAR . FABRIQUE_VAR_SOURCE . $nom_de_base . '_' . $taille . '.' . $l['extension'];
@@ -150,10 +197,13 @@ function fabrique_restaurer_image($nom_de_base, $l, $taille = 0) {
 
 
 /**
- * Outil de migration de données de sauvegardes 
+ * Outil de migration de données de sauvegardes d'une fabrique
  *
+ * @param array $data
+ *     Toutes les données de sauvegarde (à une certaine version)
+ * @return array
+ *     Données de sauvegardes migrés à la dernière version de la fabrique.
 **/
-
 function fabrique_migration($data) {
 	$vdata = $data['fabrique']['version'];
 	// versions < 4, la version est ailleurs !
@@ -173,7 +223,14 @@ function fabrique_migration($data) {
 }
 
 
-// une petite migration pour l'exemple.
+/**
+ * Migration v2
+ *
+ * Passage de certains fichiers dans un tableau 'fichiers'
+ * 
+ * @param  array $data Données à migrer
+ * @return array       Données migrées
+ */
 function fabrique_migration_v2($data) {
 	// modification du tableau $data.
 	// passage de certains fichiers dans un tableau 'fichiers'
@@ -187,8 +244,14 @@ function fabrique_migration_v2($data) {
 	return $data;
 }
 
-
-// deplacer les logos dans un dossier
+/**
+ * Migration v3
+ *
+ * Déplacer les logos dans une clé `images` spécifique
+ * 
+ * @param  array $data Données à migrer
+ * @return array       Données migrées
+ */
 function fabrique_migration_v3($data) {
 	$images = $data['images'];
 	$paquet = $images['paquet'];
@@ -225,14 +288,29 @@ function fabrique_migration_v3($data) {
 	return $data;
 }
 
-// renommer le fabricant en fabrique
+
+/**
+ * Migration v3
+ *
+ * Renommer le fabricant en fabrique
+ * 
+ * @param  array $data Données à migrer
+ * @return array       Données migrées
+ */
 function fabrique_migration_v4($data) {
 	$data['fabrique'] = $data['fabricant'];
 	unset($data['fabricant']);
 	return $data;
 }
 
-// echafaudage n'a qu'un F !
+/**
+ * Migration v5
+ *
+ * Échafaudage n'a qu'un F !
+ * 
+ * @param  array $data Données à migrer
+ * @return array       Données migrées
+ */
 function fabrique_migration_v5($data) {
 	if (is_array($data['objets'])) {
 		foreach ($data['objets'] as $c => $o) {

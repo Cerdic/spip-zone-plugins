@@ -1,48 +1,55 @@
 <?php
 
 /**
- *  /!\   Gestion des diffs.   /!\
- * 
- *  Code fonctionnant sous Windows
- *  initié par Julien Lanfray
- * 
- *  Cette API est perfectible...
-**/
-
-
-/**
  * Ce fichier contient des fonctions utiles pour
- * la generation d'un diff (unix/windows) entre 2 dossiers.
+ * la génération d'un diff (unix/windows) entre 2 dossiers.
  *
- * Necessite la commande exec()
+ * Nécessite la commande `exec()`
  *
- * Ces fonctions sont encapsulees dans une classe "Fdiff"
+ * Ces fonctions sont encapsulées dans une classe "Fdiff"
  * 
+ * Cette API est perfectible...
+ *
+ * @author Marcimat
+ * @author Julien Lanfray (le fonctionnement sous windows)
+ * @package SPIP\Fabrique\Fdiff
 **/
 
 
 
 /**
- * Cette classe Fdiff
- * encapsule les fonctions permettant de realiser un diff entre 2 dossiers 
+ * Encapsule les fonctions permettant de réaliser un diff entre 2 dossiers 
  *
- * $fdiff = new Fdiff($ancien_repertoire, $nouveau_repertoire);
+ * @example
+ *     ```
+ *     $fdiff = new Fdiff($ancien_repertoire, $nouveau_repertoire);
+ *     ```
 **/
 Class Fdiff {
 
-	// dossier source de la comparaison (l'ancien)
+	/**
+	 * Dossier source de la comparaison (l'ancien)
+	 * @var string */
 	private $dossier1 = "";
 
-	// dossier destination de la comparaison (le nouveau)
+	/**
+	 * Dossier destination de la comparaison (le nouveau)
+	 * @var string */
 	private $dossier2 = "";
 
-	// Fichiers ignores
+	/**
+	 * Fichiers ignorés
+	 * @var array */
 	private $ignorer = array(".", "..");
 
-	// Fichiers ignores (par extension)
+	/**
+	 * Fichiers ignorés (par extension)
+	 * @var array */
 	private $ignorer_extensions = array("svn", "db");
 
-	// commande diff/fc non realisee sur ces fichiers (par extension)
+	/**
+	 * Commande diff/fc non realisée sur ces fichiers (par extension)
+	 * @var array */
 	private $ignorer_extensions_complementaires = array("png", "jpg", "jpeg", "gif");
 
 
@@ -50,9 +57,9 @@ Class Fdiff {
 	 * Constructeur
 	 *
 	 * @param string $dossier1
-	 * 		Chemin du repertoire source de la comparaison (l'ancien)
+	 *     Chemin du repertoire source de la comparaison (l'ancien)
 	 * @param string $dossier2
-	 * 		Chemin du repertoire destination de la comparaison (le nouveau)
+	 *     Chemin du repertoire destination de la comparaison (le nouveau)
 	 * 
 	**/
 	public function __construct($dossier1, $dossier2) {
@@ -63,11 +70,12 @@ Class Fdiff {
 
 
 	/**
-	 * Ajoute des noms de fichiers/dossiers a la liste d'exclusion.
-	 * Ces fichiers ne seront pas du tout traites.
+	 * Ajoute des noms de fichiers/dossiers à la liste d'exclusion.
+	 *
+	 * Ces fichiers ne seront pas du tout traités.
 	 *
 	 * @param array $tab
-	 * 		tableau de nom de fichiers/dossiers
+	 *     tableau de nom de fichiers/dossiers
 	 * 
 	**/
 	public function add_ignorer($tab){
@@ -82,11 +90,12 @@ Class Fdiff {
 
 
 	/**
-	 * Ajoute des extensions de fichiers/dossiers a la liste d'exclusion.
-	 * Les fichiers portants ces extensions ne seront pas du tout traites.
+	 * Ajoute des extensions de fichiers/dossiers à la liste d'exclusion.
+	 * 
+	 * Les fichiers portants ces extensions ne seront pas du tout traités.
 	 *
 	 * @param array $tab
-	 * 		tableau d'extensions - ex: array('dat')
+	 *     tableau d'extensions - ex: array('dat')
 	 * 
 	**/
 	public function add_ignorer_extensions($tab){
@@ -102,13 +111,14 @@ Class Fdiff {
 
 
 	/**
-	 * Ajoute des extensions de fichiers/dossiers a la liste d'exclusion.
-	 * Les fichiers portants ces extensions peuvent etre pris en compte
+	 * Ajoute des extensions de fichiers/dossiers à la liste d'exclusion.
+	 * 
+	 * Les fichiers portants ces extensions peuvent être pris en compte
 	 * dans le calcul des ajouts/suppressions 
 	 * mais aucune comparaison ne sera fait sur ces fichiers.
 	 *
 	 * @param array $tab
-	 * 		tableau d'extensions - ex: array('dat')
+	 *     tableau d'extensions - ex: array('dat')
 	 * 
 	**/
 	public function add_ignorer_extensions_complementaires($tab){
@@ -123,12 +133,12 @@ Class Fdiff {
 
 
 	/**
-	 * Construit une expression reguliere reconnaissant des ext. de fichiers
+	 * Construit une expression regulière reconnaissant des extensions de fichiers
 	 * 
 	 * @param array $tab
-	 *		La liste des extensions de fichiers
+	 *    La liste des extensions de fichiers
 	 * @return string
-	 *		Expression reguliere. ex: "/(\.svn|\.db)$/i"
+	 *    Expression reguliere. ex: `"/(\.svn|\.db)$/i"`
 	 * 
 	**/
 	private function ereg_filtre_extensions($tab){
@@ -148,13 +158,14 @@ Class Fdiff {
 
 
 	/**
-	 * Fonction recursive.
 	 * Retourne la liste des sous-dossiers et fichiers (racine comprise)
 	 * 
+	 * Fonction recursive.
+	 * 
 	 * @param array $dossier
-	 * 		La racine dans laquelle la recherche est lancee
+	 *     La racine dans laquelle la recherche est lancee
 	 * @return array
-	 * 		Des chemins disques (dossiers & fichiers)
+	 *     Des chemins disques (dossiers & fichiers)
 	 * 
 	**/
 	private function get_chemins_fichiers($dossier){
@@ -187,15 +198,14 @@ Class Fdiff {
 
 	/**
 	 * Retourne la liste des chemins disques 
-	 * pour lesquelles chemin_base a ete retire.
+	 * pour lesquelles chemin_base a été retiré.
 	 * 
-	 * @param array $chemins
-	 * 		Liste de chemins disque
 	 * @param string $chemin_base
-	 * 		Chemin de base sur lequel calculer la partie relative
+	 *     Chemin de base sur lequel calculer la partie relative
+	 * @param array $chemins
+	 *     Liste de chemins disque
 	 * @return array
-	 * 		Des chemins relatifs au chemin_base
-	 * 
+	 *     Des chemins relatifs au chemin_base
 	**/
 	private function get_chemins_relatifs($chemin_base, $chemins){
 		$log = "";
@@ -218,7 +228,9 @@ Class Fdiff {
 	 * Retourne un tableau des differences entre dossier1 et dossier2
 	 * base sur la commande "fc" de Windows
 	 * 
-	 * @return array("diff"=>Texte, "affiche"=>Texte, "suppressions"=>array(noms de fichier))
+	 * @return array
+	 *    Tableau de la forme :
+	 *    `array("diff"=>Texte, "affiche"=>Texte, "suppressions"=>array(noms de fichier))`
 	 * 
 	**/
 	private function get_diff_windows(){
@@ -301,10 +313,12 @@ Class Fdiff {
 
 
 	/**
-	 * Retourne un tableau des differences entre dossier1 et dossier2
+	 * Retourne un tableau des différences entre dossier1 et dossier2
 	 * base sur la commande "diff" des systemes Unix
 	 * 
-	 * @return array("diff"=>Texte, "affiche"=>Texte, "suppressions"=>array(noms de fichier))
+	 * @return array
+	 *     Tableau de la forme : 
+	 *     `array("diff"=>Texte, "affiche"=>Texte, "suppressions"=>array(noms de fichier))`
 	 * 
 	**/
 	private function get_diff_unix(){
@@ -356,15 +370,22 @@ Class Fdiff {
 
 
 	/**
-	 * Retourne un tableau des differences entre dossier1 et dossier2
+	 * Retourne un tableau des différences entre dossier1 et dossier2
 	 *
-	 * Usage:
-	 * $fdiff->get_diff();
+	 * @exemple
+	 *     ```
+	 *     $fdiff->get_diff();
+	 *     ```
 	 * 
-	 * @return array(
-	 * 		"diff"=>Texte,
-	 * 		"affiche"=>Texte, // diff plus lisible pour affichage
-	 * 		"suppressions"=>array(noms de fichier))
+	 * @return array
+	 *     Tableau de la forme :
+	 *     ```
+	 *     array(
+	 *       "diff"=>Texte,
+	 *       "affiche"=>Texte, // diff plus lisible pour affichage
+	 *       "suppressions"=>array(noms de fichier)
+	 *     )
+	 *     ```
 	 * 
 	**/
 	public function get_diff() {
