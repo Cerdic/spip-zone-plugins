@@ -13,14 +13,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_outils_actifs' => 'Aktívne nástroje',
 
 	// O
-	'outil_inserer_cadre_css' => 'Vložiť predformátovaný kód CSS (rám)', # MODIF
-	'outil_inserer_cadre_html' => 'Insérer un code préformaté HTML (cadre)', # NEW
-	'outil_inserer_cadre_php' => 'Vložiť predformátovaný kód PHP (rám)', # MODIF
-	'outil_inserer_cadre_spip' => 'Vložiť predformátovaný kód SPIPu (rám)', # MODIF
-	'outil_inserer_cadre_xml' => 'Vložiť predformátovaný kód XML (rám)', # MODIF
+	'outil_inserer_cadre_css' => 'Vložiť predformátovaný kód CSS (rám)',
+	'outil_inserer_cadre_html' => 'Vložiť predformátovaný kód HTML (rám)',
+	'outil_inserer_cadre_php' => 'Vložiť predformátovaný kód PHP (rám)',
+	'outil_inserer_cadre_spip' => 'Vložiť predformátovaný kód SPIPu (rám)',
+	'outil_inserer_cadre_xml' => 'Vložiť predformátovaný kód XML (rám)',
 	'outil_inserer_kbd' => 'Vložiť vstup z klávesnice (kdb)',
 	'outil_inserer_lien_trac' => 'Vložiť odkaz na trac SPIPu',
-	'outil_inserer_pre' => 'Vložiť predformátovaný kód (pre)', # MODIF
+	'outil_inserer_pre' => 'Vložiť predformátovaný kód (pre)',
 	'outil_inserer_samp' => 'Vložiť výstup kódu (samp)',
 	'outil_inserer_var' => 'Vložiť premennú (var)',
 
