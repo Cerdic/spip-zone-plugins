@@ -1,14 +1,24 @@
 #PHP
-[(#INCLURE{fond=fabrique/entetes/php,env})]
+[(#INCLURE{fond=fabrique/entetes/php,env,
+	description=Fichier gérant l'installation et désinstallation du plugin #ENV{paquet/nom},
+	package=Installation})]
 
 
 /**
- * Fonction d'installation du plugin et de mise à jour.[
+ * Fonction d'installation et de mise à jour du plugin #ENV{paquet/nom}.[
+ *
  * Vous pouvez :
+ *
  * - créer la structure SQL,
  * - insérer du pre-contenu,
  * - installer des valeurs de configuration,
  * - mettre à jour la structure SQL(#EXEMPLES|oui)]
+ *
+ * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @param string $version_cible
+ *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
+ * @return void
 **/
 function #ENV{prefixe}_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();<BOUCLE_si_exemples(CONDITION){si #EXEMPLES}>
@@ -40,10 +50,16 @@ function #ENV{prefixe}_upgrade($nom_meta_base_version, $version_cible) {
 
 
 /**
- * Fonction de désinstallation du plugin.[
+ * Fonction de désinstallation du plugin #ENV{paquet/nom}.[
+ * 
  * Vous devez :
+ *
  * - nettoyer toutes les données ajoutées par le plugin et son utilisation
  * - supprimer les tables et les champs créés par le plugin.(#EXEMPLES|oui)]
+ *
+ * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @return void
 **/
 function #ENV{prefixe}_vider_tables($nom_meta_base_version) {<BOUCLE_si_exemples2(CONDITION){si #EXEMPLES}>
 	# quelques exemples

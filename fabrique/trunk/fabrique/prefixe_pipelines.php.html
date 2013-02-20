@@ -1,6 +1,8 @@
 #PHP
-[(#INCLURE{fond=fabrique/entetes/php,env})]
-
+[(#INCLURE{fond=fabrique/entetes/php,env,
+	description=Utilisations de pipelines par #ENV{paquet/nom},
+	package=Pipelines})]
+	
 <BOUCLE_si_exemples(CONDITION){si #EXEMPLES}>
 /*
  * Un fichier de pipelines permet de regrouper
@@ -20,6 +22,10 @@
 ]<BOUCLE_si_affiche_enfants(CONDITION){si #OBJETS|fabrique_necessite_pipeline{affiche_enfants}}>
 /**
  * Ajouter les objets sur les vues de rubriques
+ *
+ * @pipeline affiche_enfants
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
 **/
 function [(#PREFIXE)]_affiche_enfants($flux) {
 	if ($e = trouver_objet_exec($flux['args']['exec'])
@@ -55,6 +61,10 @@ function [(#PREFIXE)]_affiche_enfants($flux) {
 /**
  * Ajout de contenu sur certaines pages,
  * notamment des formulaires de liaisons entre objets
+ *
+ * @pipeline affiche_milieu
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
  */
 function [(#PREFIXE)]_affiche_milieu($flux) {
 	$texte = "";
@@ -101,6 +111,10 @@ function [(#PREFIXE)]_affiche_milieu($flux) {
 
 /**
  * Ajout de liste sur la vue d'un auteur
+ *
+ * @pipeline affiche_auteurs_interventions
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
  */
 function [(#PREFIXE)]_affiche_auteurs_interventions($flux) {
 	if ($id_auteur = intval($flux['args']['id_auteur'])) {
@@ -125,7 +139,11 @@ function [(#PREFIXE)]_affiche_auteurs_interventions($flux) {
 ]<BOUCLE_si_afficher_contenu_objet(CONDITION){si #OBJETS|fabrique_necessite_pipeline{afficher_contenu_objet}}>
 
 /**
- * Ajout de formulaires de liens.
+ * Ajout de formulaires de liens
+ *
+ * @pipeline affiche_contenu_objet
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
  */
 function [(#PREFIXE)]_afficher_contenu_objet($flux) {
 
@@ -146,11 +164,12 @@ function [(#PREFIXE)]_afficher_contenu_objet($flux) {
 ]<BOUCLE_si_optimiser_base_disparus(CONDITION){si #OBJETS|fabrique_necessite_pipeline{optimiser_base_disparus}}>
 
 /**
- * Optimiser la base de donnees en supprimant les liens orphelins
+ * Optimiser la base de données en supprimant les liens orphelins
  * de l'objet vers quelqu'un et de quelqu'un vers l'objet.
  *
- * @param int $n
- * @return int
+ * @pipeline optimiser_base_disparus
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
  */
 function [(#PREFIXE)]_optimiser_base_disparus($flux){
 	include_spip('action/editer_liens');

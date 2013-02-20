@@ -1,12 +1,17 @@
 #PHP
-[(#INCLURE{fond=fabrique/entetes/php,env})]
+[(#INCLURE{fond=fabrique/entetes/php,env,
+	description=Définit les autorisations du plugin #ENV{paquet/nom},
+	package=Autorisations})]
+
 <BOUCLE_si_exemples(CONDITION){si #EXEMPLES}>
 /*
  * Un fichier d'autorisations permet de regrouper
  * les fonctions d'autorisations de votre plugin
  */
 </BOUCLE_si_exemples>
-// declaration vide pour ce pipeline.
+/**
+ * Fonction d'appel pour le pipeline
+ * @pipeline autoriser */
 function [(#PREFIXE)]_autoriser(){}
 
 <BOUCLE_si_exemples2(CONDITION){si #EXEMPLES}>
@@ -29,43 +34,116 @@ function autoriser_configurer_[(#PREFIXE)]_dist($faire, $type, $id, $qui, $opt) 
 // Objet [(#OBJET)]
 
 [
-// bouton de menu
-function autoriser_#GET{objet}_menu_dist($faire, $type, $id, $qui, $opts){
+/**
+ * Autorisation de voir un élément de menu \(#GET{objet}\)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_#GET{objet}_menu_dist($faire, $type, $id, $qui, $opt){
 	return true;
 }(#VAL{menu_edition}|in_any{#VALEUR{boutons}})]
 [
-// bouton d'outils rapides
-function autoriser_#GET{type}creer_menu_dist($faire, $type, $id, $qui, $opts){
-	return autoriser('creer', ['(#TYPE)'], '', $qui, $opts);
+
+/**
+ * Autorisation de voir le bouton d'accès rapide de création \(#GET{type}\)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_#GET{type}creer_menu_dist($faire, $type, $id, $qui, $opt){
+	return autoriser('creer', ['(#TYPE)'], '', $qui, $opt);
 }(#VAL{outils_rapides}|in_any{#VALEUR{boutons}})]
 
-// creer[(#SET{creer,[(#AUTORISATIONS|fabrique_code_autorisation_defaut{objet_creer})]})]
+/**
+ * Autorisation de créer \(#GET{type}\)
+ *[(#SET{creer,[(#AUTORISATIONS|fabrique_code_autorisation_defaut{objet_creer})]})]
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_#GET{type}_creer_dist($faire, $type, $id, $qui, $opt) {[
 	return \([(#GET{creer})] AND sql_countsel('spip_rubriques')>0\);(#VALEUR|champ_present{id_rubrique}|oui)][
 	return #GET{creer};(#VALEUR|champ_present{id_rubrique}|non)]
 }
 
-// voir les fiches completes
+/**
+ * Autorisation de voir \(#GET{type}\)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_#GET{type}_voir_dist($faire, $type, $id, $qui, $opt) {
 	return [(#AUTORISATIONS|fabrique_code_autorisation_defaut{objet_voir})];
 }
 
-// modifier
+/**
+ * Autorisation de modifier \(#GET{type}\)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_#GET{type}_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return [(#AUTORISATIONS|fabrique_code_autorisation_defaut{objet_modifier})];
 }
 
-// supprimer
+/**
+ * Autorisation de supprimer \(#GET{type}\)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_#GET{type}_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	return [(#AUTORISATIONS|fabrique_code_autorisation_defaut{objet_supprimer})];
 }
 <BOUCLE_creer_objet_dans_rubrique(CONDITION){si (#VAL{vue_rubrique}|in_any{#VALEUR{rubriques}})}>
-// creer dans une rubrique
+/**
+ * Autorisation de créer l'élément \(#GET{type}\) dans une rubrique
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_rubrique_creer#GET{type}dans_dist($faire, $type, $id, $qui, $opt) {
 	return ($id AND autoriser('voir','rubrique', $id) AND autoriser('creer','[(#TYPE)]', $id));
 }</BOUCLE_creer_objet_dans_rubrique>
 <BOUCLE_associer_objets(CONDITION){si #TABLE_LIENS}>
-// associer (lier / delier)
+/**
+ * Autorisation de lier/délier l'élément \(#GET{objet}\)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_associer#GET{objet}_dist($faire, $type, $id, $qui, $opt) {
 	return [(#AUTORISATIONS|fabrique_code_autorisation_defaut{associerobjet})];
 }</BOUCLE_associer_objets>
