@@ -33,7 +33,7 @@ class receiveMail
 		if($servertype=='imap')
 		{
 			if($port=='') $port='143'; 
-			$strConnect='{'.$mailserver.':'.$port. '}INBOX'; 
+			$strConnect='{'.$mailserver.':'.$port.($ssl ? "/ssl" : ""). '}INBOX'; 
 		}
 		else
 		{
