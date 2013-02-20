@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_espace_prive' => 'Odkaz umožňujúci prihlásenie na stránku, ak ste sa ešte neprihlásili a potom na vstup do súkromnej zóny, ak na to máte oprávnenie.',
 	'description_menu_groupes_mots' => 'Automaticky vypíše skupiny kľúčových slov a články, ktoré sú k ním priradené. Podľa predvolených nastavení sa zobrazia skupiny kľúčových slov a kľúčové slová v rámci nich. Ak existuje súbor šablóny groupes_mots.html, použije sa odkaz na skupinu kľúčových slov.',
 	'description_menu_lien' => 'Pridá samostatne zadaný odkaz, a to buď interný (relatívna adresa), alebo externý(http://...).',
-	'description_menu_mapage' => 'Ak sa návštevníci prihlásia, pridať odkaz na ich autorskú stránku.',
+	'description_menu_mapage' => 'Ak je návštevník prihlásený, pridá odkaz na jeho autorskú stránku.',
 	'description_menu_mots' => 'Automaticky zobrazí menu so zoznamom článkov prepojených s kľúčovým slovom.',
 	'description_menu_objet' => 'Vytvorí odkaz na objekt SPIPu: článok, rubriku alebo iný. Podľa predvolených nastavení bude niesť názov objektu.',
 	'description_menu_page_speciale' => 'Pridá odkaz na stránku šablóny pomocou adresy formulára <code>spip.php?page=name&param1=xx&param2=yyy...</code> Takéto stránky často využívajú zásuvné moduly.',
@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_parametres' => 'Zoznam parametrov',
 	'entree_rubriques_max_affichees' => 'Ak áno, obmedziť počet rubrík v zozname na maximálne xx (po položke "...Všetky rubriky" s odkazom na nadradenú rubriku)? (zadajte maximálny počet rubrík; ak chcete zobraziť všetky rubriky, nechajte toto pole prázdne)',
 	'entree_sousrub_cond' => 'Zobrazovať len podrubriky aktuálnej rubriky (zadajte "oui" (áno), v opačnom prípade nevypĺňajte)',
-	'entree_suivant_connexion' => 'Obmedziť toto pole na prihlásenie  (zobraziť možnosť "prihlásiť sa" iba ak je návštevník online, možnosť "odhlásiť sa" iba v opačnom prípade alebo toto pole nevypĺňajte, ak chcete, aby sa zobrazovalo stále)', # MODIF
+	'entree_suivant_connexion' => 'Obmedziť toto pole podľa prihlásenia  (nastavte "prihlásený" ak chcete zobraziť len návštevníka, ktorý je online; možnosť "odhlásený" v opačnom prípade;  ak autor riadi nejakú rubriku, nastavte pole "administrátor"; ak ho chcete zobraziť v každom prípade, toto pole nevypĺňajte)',
 	'entree_suivant_connexion_connecte' => 'len ak je online',
 	'entree_suivant_connexion_deconnecte' => 'len ak je offline',
 	'entree_sur_n_articles' => '@n@ zobrazených článkov',
