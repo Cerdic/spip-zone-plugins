@@ -2,13 +2,18 @@
 #
 # Ces fichiers sont a placer dans le repertoire base/ de votre plugin
 #
+/**
+ * Gestion de l'importation de `#TABLE_DESTINATION`
+**/
 
 /**
- * Fonction d'import de la table #TABLE_DESTINATION
- * a utiliser dans le fichier d'administration du plugin
+ * Fonction d'import de la table `#TABLE_DESTINATION`
+ * à utiliser dans le fichier d'administration du plugin
  *
- * include_spip('base/importer_#TABLE_DESTINATION');
- * $maj['create'][] = array('importer_#TABLE_DESTINATION');
+ *     ```
+ *     include_spip('base/importer_#TABLE_DESTINATION');
+ *     $maj['create'][] = array('importer_#TABLE_DESTINATION');
+ *     ```
  *
 **/
 function importer_#TABLE_DESTINATION() {

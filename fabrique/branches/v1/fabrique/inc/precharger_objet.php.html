@@ -1,17 +1,50 @@
 #PHP
-[(#INCLURE{fond=fabrique/entetes/php,env})]
+[(#INCLURE{fond=fabrique/entetes/php,env,
+	description=Préchargement des formulaires d'édition de #TYPE,
+	package=Formulaires})]
 
 include_spip('inc/precharger_objet');
 [(#ENV{objet/champ_titre}|non)
 // /!\ Aucun champ de titre défini.
-       Il vous faudra renseigner d'un champ SQL de votre objet le dernier paramètre des fonctions
-       precharger_objet() et precharger_traduction_objet()
+//       Il vous faudra renseigner d'un champ SQL de votre objet le dernier paramètre des fonctions
+//       precharger_objet() et precharger_traduction_objet()
+
 ]
+/**
+ * Retourne les valeurs à charger pour un formulaire d'édition d'un #TYPE
+ *
+ * Lors d'une création, certains champs peuvent être préremplis
+ * (c'est le cas des traductions) 
+ *
+ * @param string|int $#ID_OBJET
+ *     Identifiant de #TYPE, ou "new" pour une création
+ * @param int $id_rubrique
+ *     Identifiant éventuel de la rubrique parente
+ * @param int $lier_trad
+ *     Identifiant éventuel de la traduction de référence
+ * @return array
+ *     Couples clés / valeurs des champs du formulaire à charger.
+**/
 function inc_precharger_[(#TYPE)]_dist($#ID_OBJET, $id_rubrique=0, $lier_trad=0) {
 	return precharger_objet('#TYPE', $#ID_OBJET, $id_rubrique, $lier_trad, '#ENV{objet/champ_titre}');
 }
 
-// fonction facultative si pas de changement dans les traitements
+/**
+ * Récupère les valeurs d'une traduction de référence pour la création
+ * d'un #TYPE (préremplissage du formulaire). 
+ *
+ * @note
+ *     Fonction facultative si pas de changement dans les traitements
+ * 
+ * @param string|int $#ID_OBJET
+ *     Identifiant de #TYPE, ou "new" pour une création
+ * @param int $id_rubrique
+ *     Identifiant éventuel de la rubrique parente
+ * @param int $lier_trad
+ *     Identifiant éventuel de la traduction de référence
+ * @return array
+ *     Couples clés / valeurs des champs du formulaire à charger
+**/
 function inc_precharger_traduction_[(#TYPE)]_dist($#ID_OBJET, $id_rubrique=0, $lier_trad=0) {
 	return precharger_traduction_objet('#TYPE', $#ID_OBJET, $id_rubrique, $lier_trad, '#ENV{objet/champ_titre}');
 }

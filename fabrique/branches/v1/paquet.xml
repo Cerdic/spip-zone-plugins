@@ -1,8 +1,8 @@
 <paquet
 	prefix="fabrique"
 	categorie="outil"
-	version="1.17.0"
-	etat="dev"
+	version="1.18.0"
+	etat="test"
 	compatibilite="[3.0.0-rc;3.0.*]"
 	logo="prive/themes/spip/images/fabrique-64.png"
 	documentation="http://www.spip-contrib.net/?article4134"

@@ -256,7 +256,7 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 		}
 	}
 	foreach ($images['objets'] as $c => $objet) {
-		if (is_array($objet['logo'])) {
+		if (isset($objet['logo']) and is_array($objet['logo'])) { 
 			foreach ($objet['logo'] as $taille => $im) {
 				if (is_array($im)) { // evitons une fatale erreur (mais ca ne devrait pas arriver !)
 					unset($images['objets'][$c]['logo'][$taille]['fichier']);
@@ -421,8 +421,8 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 		foreach (array(32, 24, 16) as $taille) {
 			if ((isset($image['logo'][$taille]) AND $i = $image['logo'][$taille]['fichier'])
 			OR ($i = $i_precedent)
-			OR ($i = $image['logo'][0]['fichier'])
-			OR ($i = $images['paquet']['logo'][0]['fichier'])) {
+			OR (isset($image['logo'][0]['fichier']) and $i = $image['logo'][0]['fichier']) 
+			OR (isset($images['paquet']['logo'][0]['fichier']) and $i = $images['paquet']['logo'][0]['fichier'])) { 
 				$i_precedent = $i; // privilegier l'image juste plus grande que la precedente
 				fabriquer_miniature($prefixe, $i, $obj, $taille);
 				if ($data['objets'][$c]['logo_variantes']) {

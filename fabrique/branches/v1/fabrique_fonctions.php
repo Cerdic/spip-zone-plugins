@@ -244,7 +244,9 @@ function tab_wrap($tableau, $balise) {
 function fabriquer_tableau_chaines($objet) {
 	$chaines = array();
 	if (!is_array($objet)) { return $chaines; }
-	if (!$table = $objet['table'] OR !is_array($objet['chaines'])) { return $chaines; }
+	if (!$table = $objet['table'] OR !isset($objet['chaines']) OR !is_array($objet['chaines'])) { 
+		return $chaines;
+	}
 	// les chaines definies pour l'objet
 	foreach ($objet['chaines'] as $cle => $chaine) {
 		$chaines[ cle_de_langue($cle, $objet) ] = $chaine;
@@ -345,8 +347,10 @@ function champ_present($objet, $champ) {
 		if (in_array($champ, $objet['langues'])) {
 			return " "; // true
 		}
-		if ($objet['langues']['lang'] and ($champ == 'langue_choisie')) {
-			return " "; // true
+		if (isset($objet['langues']['lang'])
+			and ($objet['langues']['lang'])
+			and ($champ == 'langue_choisie')) {
+				return " "; // true
 		}
 	}
 	// date
