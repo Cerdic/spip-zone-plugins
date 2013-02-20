@@ -10,8 +10,8 @@
 <div class="box raccourcis">
 	<div class="inner"><div class="bd">
 		<:amap:panier_explication:>
-		[(#CONFIG{amap/email}|=={oui}|oui)<:amap:panier_explication_email:>]
-		[(#CONFIG{amap/email}|=={non}|oui)<:amap:panier_explication_interface:>]
+		[(#CONFIG{amap/email}|=={oui}|oui)<p /><:amap:mettre_disposition_mail:>]
+		[(#CONFIG{amap/email}|=={non}|oui)<p /><:amap:mettre_disposition_interface{url=#URL_PAGE{disponible}}:>]
 	</div></div>
 </div>
 <!--/#extra-->

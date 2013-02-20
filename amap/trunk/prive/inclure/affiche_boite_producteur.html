@@ -6,7 +6,7 @@
 
 ]
 <!-- producteur -->
-<BOUCLE_panier(AMAP_PANIERS){id_producteur=#ID_AUTEUR}{tous}{age<0}{0,1}>
+<BOUCLE_panier(AMAP_PANIERS){id_producteur=#SESSION{id_auteur}}{tous}{age<0}{0,1}>
 	<a href="[(#URL_ECRIRE{panier_producteur}|parametre_url{id_producteur,#ID_PRODUCTEUR})]">
 		<BOUCLE_prod(AUTEURS){tous}{id_auteur=#ID_PRODUCTEUR}><:amap:liste_paniers_vendu_par{nom=#NOM}:></BOUCLE_prod></a>
 		(<BOUCLE_totalpanier(AMAP_PANIERS){id_producteur}{age<0} />#TOTAL_BOUCLE<//B_totalpanier>)
@@ -14,7 +14,7 @@
 	<BOUCLE_prod2(AUTEURS){tous}{id_auteur}><:amap:aucun_panier_produit_par_nom{nom=#NOM}:></BOUCLE_prod2>
 <//B_panier>
 <!-- responsable -->
-<BOUCLE_responsable(AMAP_RESPONSABLES){id_auteur}{tous}{age<0}{0,1}>
+<BOUCLE_responsable(AMAP_RESPONSABLES){id_auteur=#SESSION{id_auteur}}{tous}{age<0}{0,1}>
 	<BOUCLE_aut2(AUTEURS){id_auteur}{tous}><a href="[(#URL_ECRIRE{panier_adherent}|parametre_url{id_auteur,#ID_AUTEUR})]"><:amap:les_responsabilites{nom=#NOM}:></a>
 		(<BOUCLE_totalpanier_respo(AMAP_RESPONSABLES){id_auteur}{age<0} />#TOTAL_BOUCLE<//B_totalpanier_respo>)
 	</BOUCLE_aut2>

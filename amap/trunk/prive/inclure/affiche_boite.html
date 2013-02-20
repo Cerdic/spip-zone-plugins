@@ -6,14 +6,10 @@
 
 ]
 #CACHE{0}
-<div class="cadre cadre-r">
-	<img class="cadre-icone" width="24" height="24" alt="" src="#CHEMIN{prive/themes/spip/images/amapconfig-24.gif}">
-	<div class="titrem"><:amap:information_amap:></div>
-	<div class="cadre_padding">
-	<BOUCLE_auteur(AUTEURS){id_auteur}{tous}>
+#BOITE_OUVRIR{#CHEMIN_IMAGE{amapconfig-24.gif}|balise_img{'',cadre-icone}|concat{#VAL{amap:information_amap}|_T}|wrap{'<h4>'},'simple','titrem'}
+	<BOUCLE_auteur(AUTEURS){id_auteur=#SESSION{id_auteur}}{tous}>
 		[(#TYPE_ADHERENT|=={adherent}|oui)<INCLURE{fond=prive/inclure/affiche_boite_adherent,env}>]
 		[(#TYPE_ADHERENT|=={producteur}|oui)<INCLURE{fond=prive/inclure/affiche_boite_producteur,env}>]
 		[(#TYPE_ADHERENT|=={''}|oui)<:amap:pas_statuts_nom{nom=#NOM}:>]
 	</BOUCLE_auteur>
-	</div>
-</div>
+#BOITE_FERMER

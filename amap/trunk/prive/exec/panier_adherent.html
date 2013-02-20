@@ -8,13 +8,9 @@
 <!--#navigation-->
 <div class="box raccourcis">
 	<div class="inner"><div class="bd">
-		<ul>
-			<li class="subMenu">
-				<BOUCLE_retour(AUTEURS){id_auteur}{tous}>
-					<a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_AUTEUR})]" title="<:amap:retour_auteur:>"><:amap:retour_auteur{nom=#NOM}:></a>
-				</BOUCLE_retour>
-			</li>
-		</ul>
+		<BOUCLE_retour(AUTEURS){id_auteur}{tous}>
+			<a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_AUTEUR})]" title="<:amap:retour_auteur:>"><:amap:retour_auteur{nom=#NOM}:></a>
+		</BOUCLE_retour>
 	</div></div>
 </div>
 <!--/#navigation-->
@@ -30,7 +26,7 @@
 
 <h1 class="grostitre"><:amap:gestion_amap:></h1>
 
-#BOITE_OUVRIR{#CHEMIN_IMAGE{tabledata.gif}|balise_img{'',cadre-icone}|concat{#VAL{<BOUCLE_aut(AUTEURS){id_auteur}{tous}><:amap:les_paniers{nom=#NOM}:></BOUCLE_aut>}|_T}|wrap{'<h3>'},'simple','titrem'}
+#BOITE_OUVRIR{#CHEMIN_IMAGE{tabledata.gif}|balise_img{'',cadre-icone}|concat{#VAL{amap:vos_paniers}|_T}|wrap{'<h3>'},'simple','titrem'}
 		<INCLURE{fond=prive/inclure/liste_panier_adherent,dispo=0,env}>
 		<INCLURE{fond=prive/inclure/liste_panier_adherent,dispo=1,env}>
 		<INCLURE{fond=prive/inclure/liste_responsable,env}>
