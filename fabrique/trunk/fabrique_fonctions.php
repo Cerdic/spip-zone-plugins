@@ -347,8 +347,10 @@ function champ_present($objet, $champ) {
 		if (in_array($champ, $objet['langues'])) {
 			return " "; // true
 		}
-		if ($objet['langues']['lang'] and ($champ == 'langue_choisie')) {
-			return " "; // true
+		if (isset($objet['langues']['lang'])
+			and ($objet['langues']['lang'])
+			and ($champ == 'langue_choisie')) {
+				return " "; // true
 		}
 	}
 	// date
