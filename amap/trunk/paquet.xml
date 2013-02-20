@@ -3,7 +3,7 @@
 	categorie="divers"
 	version="3.0.0"
 	etat="dev"
-	compatibilite="[2.0.10;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/amapconfig-64.png"
 	schema="1.2.0"
 	documentation="http://www.spip-contrib.net/Plugin-AMAP-Version-2"
