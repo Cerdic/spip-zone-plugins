@@ -63,8 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_utilisation_plusieurs' => '@nb@ utilisations',
 	'info_utilisation_unique' => 'Une utilisation',
 	'info_year' => 'Année',
-	'install_ajout_champs_documents' => 'GetID3 : Ajout des champs sur spip_documents',
-	'install_mise_a_jour_base' => 'Mise à jour de la base de getid3 en @version@',
 
 	// L
 	'label_album' => 'Album',
@@ -105,10 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_getid3' => 'GetID3',
-	'titre_infos_techniques' => 'Informations techniques',
-
-	// V
-	'verifier_formulaire' => 'Vérifiez le remplissage du formulaire.'
+	'titre_infos_techniques' => 'Informations techniques'
 );
 
 ?>
