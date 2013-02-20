@@ -17,13 +17,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param $version_cible La version actuelle du plugin
  */
 function doc2img_upgrade($nom_meta_base_version, $version_cible){
-	include_spip('base/abstract_sql');
-	include_spip('base/create');
-	$current_version = 0.0;
-
 	$maj = array();
 	
-	// Première installation
+	/**
+	 * Première installation
+	 * On ajoute les champs spécifiques à spip_documents
+	 * On crée la première configuration
+	 */
 	$maj['create'] = array(
 		array('maj_tables', array('spip_documents')),
 		array('doc2img_creer_config')
@@ -37,7 +37,7 @@ function doc2img_upgrade($nom_meta_base_version, $version_cible){
 		array('doc2img_creer_config')
 	);
 	
-	$maj['0.94s'] = array(
+	$maj['0.94'] = array(
 		array('maj_tables', array('spip_documents')),
 		array('doc2img_creer_config'),
 		array('doc2img_update_to_docs')
@@ -47,14 +47,24 @@ function doc2img_upgrade($nom_meta_base_version, $version_cible){
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
+/**
+ * Fonction de génération de configuration à l'installation
+ * 
+ * Si pas de configuration enregistrée, ajoute une configuration par défaut :
+ * -* gestion des formats de fichier pdf, bmp, tiff
+ * -* résolution à 150 dpi
+ * -* le résultat sera une série de documents png
+ * -* on garde les proportions
+ * 
+ * Si on a Imagick et que l'array des extensions gérées par Imagick n'existe pas, on le remplit
+ * 
+ */
 function doc2img_creer_config(){
 	include_spip('inc/config');
-	// Insertion d'une première configuration
     if(!is_array(lire_config('doc2img'))){
         $cfg = array(
             "format_document" => "pdf,bmp,tiff",
         	"resolution" => "150",
-            "repertoire_cible" => "doc2img",
             "format_cible" => "png",
             "proportion" => "on"
         );
@@ -70,22 +80,27 @@ function doc2img_creer_config(){
 	}
 }
 
+/**
+ * Fonction de mise à jour des anciens documents (dans la table spip_doc2img)
+ * en documents standards liés au document original
+ * 
+ * Utilisé lors du passage à la version_base 0.94
+ */
 function doc2img_update_to_docs(){
-	spip_log('on update les docs de doc2img','test');
 	include_spip('inc/documents');
 	include_spip('action/editer_document');
 	$doc2imgs = sql_select('*','spip_doc2img');
 	$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 	while($doc2img = sql_fetch($doc2imgs)){
 		/**
-		 * On déplace le document dans la table des documents
+		 * On déplace le document doc2img dans la table des documents
 		 */
 		$id_document = $doc2img['id_document'];
 		$files = array(array('tmp_name'=>get_spip_doc($doc2img['fichier']),'name'=>basename(get_spip_doc($doc2img['fichier']))));
 		$x = $ajouter_documents('new', $files,'document', $id_document, 'doc2img');
 		if(intval(reset($x))){
 			/**
-			 * Si on a un document :
+			 * Si on a un document doc2img:
 			 * - on ajoute le numéro de page dans spip_documents 
 			 * - on supprime le doc2img en base
 			 * - on supprime le fichier physique
@@ -95,17 +110,26 @@ function doc2img_update_to_docs(){
 			spip_unlink(get_spip_doc($doc2img['fichier']));
 		}
 		if (time() >= _TIME_OUT){
-			spip_log('on free et on retourne','test');
 			sql_free($doc2imgs);
 			return;
 		}
 	}
 	sql_drop_table('spip_doc2img');
 }
-// Supprimer les éléments du plugin
+/**
+ * Fonction de suppression du plugin
+ * 
+ * On efface les deux métas de configuration doc2img et doc2img_imagick_extensions
+ * On efface également la méta d'installation
+ * 
+ * TODO Peut être supprimer les documents liés au document?
+ * 
+ * @param string $nom_meta_base_version
+ * 		Le nom de la méta d'installation
+ */
 function doc2img_vider_tables($nom_meta_base_version) {
-	sql_drop_table('spip_doc2img');
 	effacer_meta('doc2img');
+	effacer_meta('doc2img_imagick_extensions');
 	effacer_meta($nom_meta_base_version);
 }
 ?>
