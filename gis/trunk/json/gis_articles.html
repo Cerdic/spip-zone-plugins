@@ -14,8 +14,8 @@
 			[(#GET{logo_doc}|oui)
 			#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
 			#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
-			#SET{icon_anchorPoint,''}
 			[,"icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
-			"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)],
-			"icon_anchor": [(#VAL{91}|chr)][(#GET{icon_w}|div{2})],[(#GET{icon_h})][(#VAL{93}|chr)]]
+			"icon_size": \[[(#GET{icon_w})],[(#GET{icon_h})]\],
+			"icon_anchor": \[[(#GET{icon_w}|div{2})],[(#GET{icon_h})]\],
+			"popup_anchor": \[1,[-(#GET{icon_h}|div{1.2})]\]]
 		}}</BOUCLE_art>
