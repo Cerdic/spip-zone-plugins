@@ -125,6 +125,7 @@ Je récupère le panier du @date_distribution@ produit par @nom_producteur@
 	'pas_connecte_ou_reconnu' => 'Vous n\'êtes pas connecté ou on ne vous a pas reconnu.',
 	'pas_date_distributions' => 'Pas de date de distribution renseigné.',
 	'pas_paniers' => 'Vous ne disposez d\'aucun panier durant cette saison, en effet aucun contrat vous concernant n\'est actuellement en cours',
+	'pas_paniers_disponible' => 'Nous avons pas de panier disponible à vous proposer actuellement.',
 	'pas_producteur_amap' => 'Vous n\'avez pas de producteur dans votre amap.',
 	'pas_responsable_distribution' => 'Vous êtes pas responsable pour les distributions de la saison en cours.',
 	'pas_responsable_pour_nom' => '@nom@ est pas responsable de distribution.',
