@@ -6,7 +6,7 @@
 
 ]
 
-#CALENDRIER_MINI{#ENV{date},'date',#SELF}
+[(#CALENDRIER_MINI{#ENV{date}, date, #URL_PAGE{jour}, #URL_PAGE{calendrier_mini_event.json}})]
 
 [(#REM) Inscription au site ]
 #FORMULAIRE_INSCRIPTION
