@@ -1,9 +1,17 @@
 #PHP
-[(#INCLURE{fond=fabrique/entetes/php,env})]
+[(#INCLURE{fond=fabrique/entetes/php,env,
+	description=Déclarations relatives à la base de données,
+	package=Pipelines})]
 
 <BOUCLE_si_objets(CONDITION){si #OBJETS}>
 /**
  * Déclaration des alias de tables et filtres automatiques de champs
+ *
+ * @pipeline declarer_tables_interfaces
+ * @param array $interfaces
+ *     Déclarations d'interface pour le compilateur
+ * @return array
+ *     Déclarations d'interface pour le compilateur
  */
 function [(#PREFIXE)]_declarer_tables_interfaces($interfaces) {
 <BOUCLE_interface(DATA) {source tableau, #OBJETS}>
@@ -15,6 +23,12 @@ function [(#PREFIXE)]_declarer_tables_interfaces($interfaces) {
 
 /**
  * Déclaration des objets éditoriaux
+ *
+ * @pipeline declarer_tables_objets_sql
+ * @param array $tables
+ *     Description des tables
+ * @return array
+ *     Description complétée des tables
  */
 function [(#PREFIXE)]_declarer_tables_objets_sql($tables) {
 <BOUCLE_objets_editoriaux(DATA) {source tableau, #OBJETS}>
@@ -84,6 +98,12 @@ function [(#PREFIXE)]_declarer_tables_objets_sql($tables) {
 <B_objets_liens>
 /**
  * Déclaration des tables secondaires (liaisons)
+ *
+ * @pipeline declarer_tables_auxiliaires
+ * @param array $tables
+ *     Description des tables
+ * @return array
+ *     Description complétée des tables
  */
 function [(#PREFIXE)]_declarer_tables_auxiliaires($tables) {
 <BOUCLE_objets_liens(DATA) {source tableau, #OBJETS}{table_liens != ''}>
