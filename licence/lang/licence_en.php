@@ -14,22 +14,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_licence' => 'License',
 
 	// D
-	'description_art_libre' => 'Free Art License',
-	'description_cc0' => 'Creative Common - Public Domain Dedication',
-	'description_cc_by' => 'Creative Commons - Attribution',
-	'description_cc_by_nc' => 'Creative Commons - Attribution Non-Commercial',
-	'description_cc_by_nc_nd' => 'Creative Commons - Attribution Non-Commercial No Derivatives',
-	'description_cc_by_nc_sa' => 'Creative Commons - Attribution Non-Commercial Share Alike',
-	'description_cc_by_nd' => 'Creative Commons - Attribution No Derivatives',
-	'description_cc_by_sa' => 'Creative Commons - Attribution Share Alike',
+	'description_art_libre' => 'Free Art License', # MODIF
+	'description_cc0' => 'Creative Common - Public Domain Dedication', # MODIF
+	'description_cc_by' => 'Creative Commons - Attribution', # MODIF
+	'description_cc_by_nc' => 'Creative Commons - Attribution Non-Commercial', # MODIF
+	'description_cc_by_nc_nd' => 'Creative Commons - Attribution Non-Commercial No Derivatives', # MODIF
+	'description_cc_by_nc_sa' => 'Creative Commons - Attribution Non-Commercial Share Alike', # MODIF
+	'description_cc_by_nd' => 'Creative Commons - Attribution No Derivatives', # MODIF
+	'description_cc_by_sa' => 'Creative Commons - Attribution Share Alike', # MODIF
 	'description_copyright' => '© copyright the article\'s author',
 	'description_gpl' => 'GNU/GPL License',
 	'description_wtfpl' => 'Do What The Fuck You Want To Public License ',
 
 	// L
 	'label_select_licence' => 'Choose a license',
-	'lien_art_libre' => 'http://artlibre.org/licence/lal/en',
-	'lien_cc0' => 'http://creativecommons.org/publicdomain/zero/1.0/',
+	'lien_art_libre' => 'http://artlibre.org/licence/lal/en', # MODIF
+	'lien_cc0' => 'http://creativecommons.org/publicdomain/zero/1.0/', # MODIF
 	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/deed.en',
 	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/deed.en',
 	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en',

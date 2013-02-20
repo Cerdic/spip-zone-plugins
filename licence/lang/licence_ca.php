@@ -14,13 +14,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_licence' => 'Llicència',
 
 	// D
-	'description_art_libre' => 'Llicència Art lliure',
+	'description_art_libre' => 'Llicència Art lliure', # MODIF
 	'description_cc0' => 'Creative Common - Contenu libre de tout droit', # NEW
-	'description_cc_by' => 'Creative Commons - Reconeixement',
-	'description_cc_by_nc' => 'Creative Commons - No comercial',
-	'description_cc_by_nc_nd' => 'Creative Commons - No comercial No es pot modificar',
+	'description_cc_by' => 'Creative Commons - Reconeixement', # MODIF
+	'description_cc_by_nc' => 'Creative Commons - No comercial', # MODIF
+	'description_cc_by_nc_nd' => 'Creative Commons - No comercial No es pot modificar', # MODIF
 	'description_cc_by_nc_sa' => 'Creative Commons - Reconeixement No ús comercial Compartir amb les mateixes condicions inicials i amb llicència idèntica', # MODIF
-	'description_cc_by_nd' => 'Creative Commons - Reconeixement sense modificació',
+	'description_cc_by_nd' => 'Creative Commons - Reconeixement sense modificació', # MODIF
 	'description_cc_by_sa' => 'Creative Commons - Reconeixement Compartir amb les mateixes condicions inicials i llicència idèntica', # MODIF
 	'description_copyright' => '© copyright autor de l\'article',
 	'description_gpl' => 'llicència GPL', # MODIF
@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_select_licence' => 'Escolliu una llicència',
-	'lien_art_libre' => 'http://artlibre.org/',
+	'lien_art_libre' => 'http://artlibre.org/', # MODIF
 	'lien_cc0' => 'http://vvlibri.org/fr/licence/cc0/10/fr/legalcode', # NEW
 	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/deed.ca',
 	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/deed.ca',

@@ -14,13 +14,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_licence' => 'Licenza',
 
 	// D
-	'description_art_libre' => 'Licenza Arte Libera',
-	'description_cc0' => 'Creative Common - Contenu libre de tout droit', # NEW
-	'description_cc_by' => 'Creative Commons - Attribuzione',
-	'description_cc_by_nc' => 'Creative Commons - Attribuzione Non uso commerciale',
-	'description_cc_by_nc_nd' => 'Creative Commons - Attribuzione Non uso commerciale Non opere derivate',
+	'description_art_libre' => 'Licenza Arte Libera', # MODIF
+	'description_cc0' => 'Creative Commons - Contenu libre de tout droit', # NEW
+	'description_cc_by' => 'Creative Commons - Attribuzione', # MODIF
+	'description_cc_by_nc' => 'Creative Commons - Attribuzione Non uso commerciale', # MODIF
+	'description_cc_by_nc_nd' => 'Creative Commons - Attribuzione Non uso commerciale Non opere derivate', # MODIF
 	'description_cc_by_nc_sa' => 'Creative Commons - Attribuzione Non uso commerciale Condividi allo stesso modo', # MODIF
-	'description_cc_by_nd' => 'Creative Commons - Attribuzione Non opere derivate',
+	'description_cc_by_nd' => 'Creative Commons - Attribuzione Non opere derivate', # MODIF
 	'description_cc_by_sa' => 'Creative Commons - Attribuzione Condividi allo stesso modo', # MODIF
 	'description_copyright' => '© copyright autore dell\'articolo',
 	'description_gpl' => 'licenza GPL', # MODIF
@@ -28,8 +28,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_select_licence' => 'Scegliete una licenza',
-	'lien_art_libre' => 'http://artlibre.org/',
-	'lien_cc0' => 'http://vvlibri.org/fr/licence/cc0/10/fr/legalcode', # NEW
+	'lien_art_libre' => 'http://artlibre.org/', # MODIF
+	'lien_cc0' => 'http://creativecommons.org/publicdomain/zero/1.0/deed.fr', # NEW
 	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/deed.it',
 	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/deed.it',
 	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/deed.it',

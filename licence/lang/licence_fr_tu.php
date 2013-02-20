@@ -14,13 +14,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_licence' => 'Licence',
 
 	// D
-	'description_art_libre' => 'licence Art libre',
-	'description_cc0' => 'Creative Common - Contenu libre de tout droit', # NEW
-	'description_cc_by' => 'Creative Commons - Paternité',
-	'description_cc_by_nc' => 'Creative Commons - Paternité Pas d\'Utilisation Commerciale',
-	'description_cc_by_nc_nd' => 'Creative Commons - Paternité Pas d\'Utilisation Commerciale Pas de Modification',
+	'description_art_libre' => 'licence Art libre', # MODIF
+	'description_cc0' => 'Creative Commons - Contenu libre de tout droit', # NEW
+	'description_cc_by' => 'Creative Commons - Paternité', # MODIF
+	'description_cc_by_nc' => 'Creative Commons - Paternité Pas d\'Utilisation Commerciale', # MODIF
+	'description_cc_by_nc_nd' => 'Creative Commons - Paternité Pas d\'Utilisation Commerciale Pas de Modification', # MODIF
 	'description_cc_by_nc_sa' => 'Creative Commons - Paternité Pas d\'Utilisation Commerciale Partage des Conditions Initiales à l\'Identique', # MODIF
-	'description_cc_by_nd' => 'Creative Commons - Paternité pas de modification',
+	'description_cc_by_nd' => 'Creative Commons - Paternité pas de modification', # MODIF
 	'description_cc_by_sa' => 'Creative Commons - Paternité Partage des Conditions Initiales à l\'Identique', # MODIF
 	'description_copyright' => '© copyright auteur de l\'article',
 	'description_gpl' => 'licence GPL', # MODIF
@@ -28,8 +28,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_select_licence' => 'Choisis une licence',
-	'lien_art_libre' => 'http://artlibre.org/',
-	'lien_cc0' => 'http://vvlibri.org/fr/licence/cc0/10/fr/legalcode', # NEW
+	'lien_art_libre' => 'http://artlibre.org/', # MODIF
+	'lien_cc0' => 'http://creativecommons.org/publicdomain/zero/1.0/deed.fr', # NEW
 	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/deed.fr',
 	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/deed.fr',
 	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/deed.fr',

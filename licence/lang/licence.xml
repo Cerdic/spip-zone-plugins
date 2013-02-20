@@ -8,6 +8,9 @@
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/licence?lang_cible=es">
+		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
+	</langue>
 	<langue code="fr" />
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/licence?lang_cible=fr_tu">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
