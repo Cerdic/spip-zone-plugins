@@ -8,8 +8,8 @@
 <div class="cadre_padding">
 	<p>
 		#SET{total,0}
-		<BOUCLE_totalpanier(AMAP_PANIERS){id_auteur}{age<0}{dispo=#ENV{dispo}} />
-			[(#ENV{dispo}|=={0}|oui)[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:reste_panier_recuperer, amap:reste_paniers_recuperer, nb})]]
+		<BOUCLE_totalpanier(AMAP_PANIERS){id_auteur}{age<0}{dispo=#ENV{dispo,0}} />
+			[(#ENV{dispo,0}|=={0}|oui)[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:reste_panier_recuperer, amap:reste_paniers_recuperer, nb})]]
 			[(#ENV{dispo}|=={1}|oui)[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:panier_disposition, amap:paniers_disposition, nb})]]
 			#SET{total,#TOTAL_BOUCLE}
 		<//B_totalpanier>
@@ -29,15 +29,15 @@
 	<tr>
 		<th class='producteur' scope='col'><:amap:producteur:></th>
 		<th class='date_livraison' scope='col'><:amap:date_distribution:></th>
-		<th class='panier_dispo' scope='col'><:amap:panier_dispo:></th>
+		<th class='panier_dispo' scope='col'><:amap:panier_dispo_interface:></th>
 	</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_paniers(AMAP_PANIERS) {pagination 20} {par date_distribution}{age<0}{id_auteur}{dispo=#ENV{dispo}}>
+	<BOUCLE_paniers(AMAP_PANIERS) {pagination 20} {par date_distribution}{age<0}{id_auteur}{dispo=#ENV{dispo,0}}>
 	<tr>
 		<td class='nom'><BOUCLE_producteur(AUTEURS){tous}{id_auteur=#ID_PRODUCTEUR}>#NOM</BOUCLE_producteur></td>
 		<td class='date_production'>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
-		[(#ENV{dispo}|=={0}|oui)[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
+		[(#ENV{dispo,0}|=={0}|oui)[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
 			[(#CONFIG{amap/email}|=={oui}|oui)<!-- envoie par mail d'un panier dispo -->
 			<td class='panier_dispo'><a href='[(#URL_PAGE{panier_dispo}
 				|parametre_url{nom_adherent,#NOM}
@@ -54,6 +54,9 @@
 				|parametre_url{nom_adherent,#NOM}
 				|parametre_url{date_distribution,[(#DATE_DISTRIBUTION|affdate{"d/m/Y"})]}
 				|parametre_url{id_amap_panier,#ID_AMAP_PANIER}
+				|parametre_url{id_auteur,#ID_AUTEUR}
+				|parametre_url{id_producteur,#ID_PRODUCTEUR}
+				|parametre_url{date_distribution2,#DATE_DISTRIBUTION}
 				|parametre_url{mail,non}
 				)]'><:amap:mettre_disposition:></a></td>
 			]

@@ -14,7 +14,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adherents_jour' => 'Adhérents du jour',
 	'adhesion' => 'Adhésion (ex:2008)',
 	'adhesion_auteur' => 'Adhésion :',
-	'administrateur' => 'Administrateur',
 	'amapiens_explication' => 'Sur cette page vous trouverez la liste des amapiens de votre association, en cliquant sur le nom vous retournerez sur la page de l\'auteur. Tenir à jours les informations de chaqu\'un est obligatoire au moment du changement de saison.',
 	'attention' => 'ATTENTION !',
 	'attention_modifications' => '<p>Vous venez d\'activer le plugin AMAP, ce dernier vient de créer une nouvelle rubrique "Agenda de la saison" avec deux sous-rubriques "Distribution" et "Évènements", ainsi que la rubrique "Archives".</p>
@@ -98,6 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'panier' => 'Panier',
 	'panier_deja_vendu' => 'Vous avez déjà vendu 1 panier',
 	'panier_dispo' => 'Panier disponible le @date_distribution@',
+	'panier_dispo_interface' => 'Panier disponible',
 	'panier_dispo_auteur' => 'Bonjour,
 		<br />Je mets à disposition le panier du @date_distribution@
 		<br />@nom_adherent@',
@@ -106,7 +106,7 @@ Je mets à disposition le panier du @date_distribution@, pour le récupérer sui
 @panier_dispo_plus@
 @nom_adherent@',
 	'panier_dispo_plus' => 'Des infos à donner en plus (elles seront rajoutées dans le courriel envoyé avant votre nom)',
-	'panier_disposition' => 'Vous avez mis 1 panier à disposition',
+	'panier_disposition' => 'Il y a 1 panier à disposition',
 	'panier_distribuer' => 'panier à distribuer',
 	'panier_explication' => 'Sur cette page vous trouverez la liste des paniers que vous devez distribuer, ils sont modifiable et supprimable. Une fois la date passez, vous ne les verez automatiquement plus.',
 	'panier_explication_email' => 'Toutes modifications entraîne un envoie de mail en masse à tous les adhérents et les producteurs de l\'association.',
@@ -118,9 +118,10 @@ Je mets à disposition le panier du @date_distribution@, pour le récupérer sui
 	'panier_recupere_auteur_mail' => 'Bonjour,
 Je récupère le panier du @date_distribution@ produit par @nom_producteur@
 @nom_adherent@',
+	'panier_vous_bien_attribuer' => 'Le panier vous a bien été attribuer',
 	'paniers_deja_vendu' => 'Vous avez déjà vendu @nb@ panier',
 	'paniers_disponibles' => 'Paniers disponibles',
-	'paniers_disposition' => 'Vous avez mis @nb@ paniers à disposition',
+	'paniers_disposition' => 'IL y a @nb@ paniers à disposition',
 	'paniers_distribuer' => 'paniers à distribuer',
 	'pas_connecte_ou_reconnu' => 'Vous n\'êtes pas connecté ou on ne vous a pas reconnu.',
 	'pas_date_distributions' => 'Pas de date de distribution renseigné.',

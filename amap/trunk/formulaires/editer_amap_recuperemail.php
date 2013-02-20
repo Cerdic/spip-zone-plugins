@@ -65,10 +65,9 @@ function formulaires_editer_amap_recuperemail_traiter_dist($id_amap_panier,$id_a
 	foreach($emails as $destinataire) {
 		$envoyer_mail($destinataire['email'],$sujet,$message_mail,$email_from);
 	}
-	
 
 	// Valeurs de retours
-	$message['message_ok'] = _T('Le panier vous a bien été attribuer');
+	$message['message_ok'] = _T('amap:panier_vous_bien_attribuer');
 	return $message;
 }
 ?>

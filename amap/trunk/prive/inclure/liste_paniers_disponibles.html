@@ -8,7 +8,7 @@
 <div class="cadre_padding">
 	<p>
 		#SET{total,0}
-		<BOUCLE_totalpanier(AMAP_PANIERS){id_auteur}{age<0}{dispo=1} />
+		<BOUCLE_totalpanier(AMAP_PANIERS){age<0}{dispo=1} />
 			[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:panier_disposition, amap:paniers_disposition, nb})]
 			#SET{total,#TOTAL_BOUCLE}
 		<//B_totalpanier>

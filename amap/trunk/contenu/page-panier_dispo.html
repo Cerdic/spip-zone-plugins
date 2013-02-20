@@ -21,6 +21,6 @@
 	<!-- envoie du panier par interface -->
 	[(#ENV{mail}|=={non}|oui)
 		<:amap:panier_dispo_auteur{date_distribution=#DATE_DISTRIBUTION, nom_adherent=#NOM_ADHERENT}:>
-		#FORMULAIRE_EDITER_AMAP_DISPOINTERFACE{#NOM_ADHERENT, #DATE_DISTRIBUTION}
+		#FORMULAIRE_EDITER_AMAP_DISPOINTERFACE{#NOM_ADHERENT, #DATE_DISTRIBUTION, #ID_AUTEUR, #ID_PRODUCTEUR, #DATE_DISTRIBUTION2}
 	]
 </div>
