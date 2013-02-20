@@ -504,17 +504,15 @@ function encodage($source,$options){
 					$retour_int = 1;
 				}
 			}else{
-				spip_log('on encode en 1 passe','spipmotion');
-				$infos_sup_normal = "$ss_audio ";
+				$infos_sup_normal .= " $ss_audio ";
 				if ($ffmpeg_version < '0.7'){
-					$infos_sup_normal .= $preset_quality ? "-vpre $preset_quality $infos_sup_normal":'';
+					$infos_sup_normal .= $preset_quality ? " -vpre $preset_quality":'';
 				}else{
-					$infos_sup_normal .= $preset_quality ? "-preset $preset_quality $infos_sup_normal":'';
+					$infos_sup_normal .= $preset_quality ? " -preset $preset_quality":'';
 				}
 				if($source['rotation'] == '90'){
 					$rotation = "-vf transpose=1";
 				}
-				//$infos_sup_normal .= " -map_metadata 0:0";
 				if($infos_sup_normal){
 					$infos_sup_normal = "--params_supp \"$infos_sup_normal\"";
 				}
