@@ -22,10 +22,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									2. Cette opération devra être effectuée avant chaque début de nouvelles saisons.<br />
 									3. À la fin de chaque saison, vous prendrez soin de mettre à jour la liste des amapiens, ainsi que l\'archivage dans la rubrique appropriée, des dates de la saison passée, ceci pour le bon fonctionnement de ce plugin.<br />
 									4. Mettre à jour les <b>type d\'adhérent</b>, <b>adhésion</b> et <b>type de panier</b> sur la page de chaque auteur sinon aucun panier ne pourra lui être attribué.<br />
-									<p><strong>LE NON RESPECT DE CES QUELQUES PRINCIPES ENTRAINERA UN DYSFONCTIONNEMENT DU PLUGIN AMAP</strong></p>',
+									<p><b>LE NON RESPECT DE CES QUELQUES PRINCIPES ENTRAINERA UN DYSFONCTIONNEMENT DU PLUGIN AMAP</b></p>',
 	'aucun_panier_pour_nom' => 'Nous n\'avons aucun panier pour @nom@.',
 	'aucun_panier_produit_par_nom' => 'Nous n\'avons aucun panier produit par "@nom@".',
-	'autorise_envoie_email_explication' => 'L\'envoie d\'email est utiliser pour la mise a disposition des paniers et la reprise. Non est conseiller pour de grosses amap, à la place on vous propose une interphase de gestion.',
+	'autorise_envoie_email_explication' => 'L\'envoie d\'email est utiliser pour la mise a disposition des paniers et la reprise. Non est conseiller pour de grosses amap, à la place on vous propose une interface de gestion.',
 	'autorise_envoie_email_label' => 'Voulez vous envoyez des mails ?',
 	'avant_le' => 'avant le',
 
@@ -63,7 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'impression_explication' => 'Seulement les dates contenant au minimum un panier sont cliquables et ouvrent une nouvelle fenêtre.',
 	'impression_paniers_fonction_date' => 'Impression des paniers en fonction d\'une date :',
 	'impression_paniers_fonction_mois' => 'Impression des paniers en fonction d\'un mois :',
-	'impression_responsables_fonction_date' => 'Impression des responsables en fonction d\'un mois :',
+	'impression_responsables_fonction_mois' => 'Impression des responsables en fonction d\'un mois :',
 	'information_amap' => 'Information AMAP',
 
 	// L
@@ -80,6 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_paniers_vendu_par' => 'Liste des paniers produit par @nom@',
 	'liste_responsables' => 'Liste des responsables',
 	'livraison' => 'Livraison',
+	'livraison_enregistre_explication' => 'Vous devez avoir déjà distribuer des paniers pour pouvoir enregistré via ce formulaire des contenus de livraison.',
 	'livraison_explication' => 'Sur cette page vous trouverez la liste des livraison que vous avez déjà effectuer, le contenu de ce tableau est visible sur la page <a href="@url@"><b>ici</b></a>.',
 
 	// M
@@ -107,7 +108,7 @@ Je mets à disposition le panier du @date_distribution@, pour le récupérer sui
 	'panier_dispo_plus' => 'Des infos à donner en plus (elles seront rajoutées dans le courriel envoyé avant votre nom)',
 	'panier_disposition' => 'Vous avez mis 1 panier à disposition',
 	'panier_distribuer' => 'panier à distribuer',
-	'panier_explication' => 'Sur cette page vous trouverez la liste des paniers que vous devez distribuer, ils sont modifiable et supprimable.',
+	'panier_explication' => 'Sur cette page vous trouverez la liste des paniers que vous devez distribuer, ils sont modifiable et supprimable. Une fois la date passez, vous ne les verez automatiquement plus.',
 	'panier_explication_email' => 'Toutes modifications entraîne un envoie de mail en masse à tous les adhérents et les producteurs de l\'association.',
 	'panier_explication_interface' => 'Aucun mail n\'est envoyé, il est rajouté sur l\'interface de disponibilité.',
 	'panier_liste' => 'Liste des paniers',

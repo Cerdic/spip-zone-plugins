@@ -11,14 +11,14 @@
 	<thead>
 	<tr>
 		<th class='statut' scope='col'>[(#TRI{statut,#CHEMIN_IMAGE{auteur-16.png}|balise_img{<:lien_trier_statut|attribut_html:>},ajax})]</th>
-		<th class='nom' scope='col'>[(#TRI{multi nom,<:info_nom:>,ajax})]</th>
-		<th class='adhesion' scope='col'>[(#TRI{adhesion,<:amap:adhesion:>})]</th>
-		<th class='type_panier' scope='col'>[(#TRI{type_panier,<:amap:type_panier:>})]</th>
-		<th class='type_adherent' scope='col'>[(#TRI{type_adherent,<:amap:type_adherent:>})]</th>
+		<th class='nom' scope='col'>[(#TRI{nom,<:info_nom:>,ajax})]</th>
+		<th class='adhesion' scope='col'>[(#TRI{adhesion,<:amap:adhesion:>,ajax})]</th>
+		<th class='type_panier' scope='col'>[(#TRI{type_panier,<:amap:type_panier:>,ajax})]</th>
+		<th class='type_adherent' scope='col'>[(#TRI{type_adherent,<:amap:type_adherent:>,ajax})]</th>
 	</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_auteurs(AUTEURS) {tri id_auteur} {tous} {pagination 20}>
+	<BOUCLE_auteurs(AUTEURS) {tri nom} {tous} {pagination 20}>
 	<tr>
 		<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
 		<td class='nom[ (#NOM|non)vide]'><a href="[(#URL_ECRIRE{auteur}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></td>
