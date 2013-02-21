@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.mediaspip.net/spip.php?page=tradlang
+// extrait automatiquement de http://trad.spip.net/tradlang_module/doc2img?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -8,7 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_convertir' => 'Convert',
+	'bouton_convertir_serie' => 'Convertir en une série d\'images', # NEW
+	'bouton_convertir_vignette' => 'Convertir la première page en vignette', # NEW
 
 	// C
 	'cfg_explication_compression' => 'Set the compression quality of the final output files (in percentage)',
@@ -24,7 +25,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_label_largeur' => 'Default width',
 	'cfg_label_logo_auto' => 'First page as a logo',
 	'cfg_label_proportions' => 'Keep the aspect ratio',
-	'cfg_label_repertoire_sortie' => 'Default folder',
 	'cfg_label_resolution' => 'Resolution',
 	'cfg_legende_formats_entree' => 'Input',
 	'cfg_legende_formats_sortie' => 'Outputs',
@@ -34,20 +34,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'doc2img_reconvertir_doc' => '(Re)convert this document to a serie of images',
 
 	// E
-	'erreur_autorisation' => 'You are not allowed to convert this document',
+	'erreur_class_imagick' => 'Vous ne disposez pas de la class PHP Imagick. Vous ne pouvez donc pas utiliser ce plugin.', # NEW
 	'erreur_format_document' => 'A document format can not be used: @type@',
 	'erreur_formats_documents' => 'Several document formats can not be used: @types@',
 	'explication_doc2img' => 'This plugin allows you to convert certain types of documents in a single or a serie of images to view them.',
-	'explication_formats_possibles' => 'The extensions accepted by your configuration: @formats@',
-
-	// F
-	'formulaire_erreur_pas_doc' => 'No available document for this article',
-	'formulaire_label_choix_doc' => 'Choose the document (@formats@) to convert in picture(s)',
 
 	// I
+	'info_alt_image' => '@titre@, page @page@', # NEW
 	'info_desc_page' => 'This document is composed by one unique sheet.',
 	'info_desc_pages' => 'This document is composed by @nb@ sheets.',
-	'info_nb_pages' => 'Number of pages:'
+	'info_nb_pages' => 'Number of pages:',
+	'info_nb_pages_converties' => '@nb@ pages converties liées', # NEW
+	'info_une_page_convertie' => 'Une page convertie liée' # NEW
 );
 
 ?>
