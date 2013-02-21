@@ -33,7 +33,7 @@ function formulaires_embed_code_charger_dist($id_document=null){
 		$valeurs['ratio'] = $infos_doc['largeur']/$infos_doc['hauteur'];
 		$valeurs['hauteur_ratio'] = $valeurs['hauteur'] = floor($valeurs['largeur']/$valeurs['ratio']);
 	}else{
-		$valeurs['hauteur_ratio'] = floor($valeurs['hauteur']*$valeurs['ratio']);
+		$valeurs['hauteur_ratio'] = $valeurs['hauteur'];
 	}
 	
 	return $valeurs;
