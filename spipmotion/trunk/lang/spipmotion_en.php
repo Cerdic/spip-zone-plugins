@@ -10,7 +10,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bitrate' => 'Video bitrate of the output in kb/s',
 	'bitrate_audio' => 'Audio bitrate of the output in kb/s',
-	'bouton_encoder' => 'Encode',
 	'bouton_reencoder_tout' => 'Encode again all files',
 	'bouton_reencoder_tout_format' => 'Encode again all files in @format@',
 	'bouton_reencoder_tout_message' => 'Are you sure you want to encode again all files. This can be very long.',
@@ -27,9 +26,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'codec_type_audio' => 'Audio',
 	'codec_type_soustitre' => 'Subtitles',
 	'codec_type_video' => 'Video',
-
-	// D
-	'document_dans_file_attente' => 'This document is in the encoding queue',
 
 	// E
 	'encoder_son' => '(Re)encode this sound',
@@ -76,7 +72,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_aspect_ratio' => 'Display ratio of the video',
-	'info_aucun_resultat_attente' => 'No documents awaiting encoding.',
 	'info_audiobitrate' => 'Audio bitrate: ',
 	'info_audiochannels' => 'Audio channels number: ',
 	'info_audiocodec' => 'Audio codec: ',
@@ -95,18 +90,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_compiler_libavcodec_build_number' => 'Version number of libavcodec at the compilation',
 	'info_compiler_libavcodec_version_number' => 'Version number of libavcodec used',
 	'info_compiler_vhook-support' => 'Compiled with vhooks support',
-	'info_document_encodage_en_cours' => 'This document is being encoded.',
-	'info_document_encodage_en_cours_attente_avant' => '@nb@ encoding(s) are awaiting before beginning to encode this document.',
-	'info_document_encodage_en_cours_attente_avant_unique' => 'This document will be the next to be encoded.',
-	'info_document_encodage_en_cours_plusieurs' => 'This document is waiting for encoding in @nb@ formats.',
-	'info_document_encodage_en_cours_unique' => 'This document is waiting for encoding in one format.',
+	'info_document_encodage_en_cours_attente_avant' => '@nb@ encoding(s) are awaiting before beginning to encode this document.', # MODIF
+	'info_document_encodage_en_cours_attente_avant_unique' => 'This document will be the next to be encoded.', # MODIF
+	'info_document_encodage_en_cours_plusieurs' => 'This document is waiting for encoding in @nb@ formats.', # MODIF
+	'info_document_encodage_en_cours_unique' => 'This document is waiting for encoding in one format.', # MODIF
 	'info_document_encodage_en_erreur' => 'The encoding of this document contains an error.',
 	'info_document_encodage_en_erreur_contacter' => 'Please contact an administrator to warn him.',
 	'info_document_encodage_en_erreur_relancer_url' => 'You can restart the encoding <a href="@url@">on this page</a>.',
-	'info_document_encodage_realise' => 'It has ever been encoded in the next formats: ',
-	'info_document_encodage_termine' => 'The encoding of this document is finished.',
+	'info_document_encodage_realise' => 'It has ever been encoded in the next formats: ', # MODIF
+	'info_document_encodage_termine' => 'The encoding of this document is finished.', # MODIF
 	'info_document_encodage_termine_recharge' => 'You can reload the page to see the definitive content.',
-	'info_document_encode_formats' => 'This document has been encoded in: ',
+	'info_document_encode_formats' => 'This document has been encoded in: ', # MODIF
 	'info_duree' => 'Duration: ',
 	'info_erreurs' => 'Errors',
 	'info_ffmpeg2theora_libtheora_version' => 'Libtheora version used by ffmpeg2theora:',
@@ -118,56 +112,39 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_framecount' => 'Frame count: ',
 	'info_framerate' => 'Framerate: ',
 	'info_infos_techniques' => 'Technical informations',
-	'info_installer_encoder_ftp' => 'As Administrator, you can install (with FTP) .AVI .MPG .MP4 or .MOV files in the directory "tmp/upload" for encoding these files here.',
 	'info_mediainfo_version' => 'MediaInfo version installed:',
 	'info_mime' => 'Mime type: ',
 	'info_nom_fichier' => 'File name: ',
-	'info_nombre_encodage_attente' => 'One document is awaiting encoding',
-	'info_nombre_encodages_attentes' => 'There are @nb@ documents awaiting encoding',
-	'info_nombre_encodes' => '@nb@ files have been properly encoded.',
-	'info_objet_non_publie' => 'Not published',
 	'info_page_ffmpeg_infos' => 'This page is only available for information. It shows the complete configuration of the FFMpeg installation on your system.',
 	'info_pixelformat' => 'Pixel format: ',
 	'info_poid_fichier' => 'File size:',
-	'info_profils_son' => 'Audio encoding profile(s)',
-	'info_profils_video' => 'Video encoding profile(s)',
-	'info_reencoder' => 'Encode (again)',
-	'info_relancer_erreurs' => 'Resume all encodings in error',
 	'info_rotation' => 'Rotation angle:',
-	'info_selectionner_fichier_encoder' => 'You can encode one of the following files',
 	'info_spipmotion_sh_chemin' => 'Path of the script:',
 	'info_spipmotion_sh_version' => 'Version of the script:',
-	'info_statut_encode_en_cours' => 'Ongoing',
-	'info_statut_encode_erreur' => 'Error',
-	'info_statut_encode_non' => 'Waiting',
-	'info_statut_encode_oui' => 'Encoded',
-	'info_statut_non_publie' => 'This object is not published',
 	'info_version' => '@version@ version',
 	'info_version_original' => 'Original',
 	'info_videobitrate' => 'Video bitrate: ',
 	'info_videocodec' => 'Video codec: ',
 	'info_voir_log_erreur' => 'Show log',
-	'install_ajout_champs_documents' => 'Adding fields on the spip_documents database table',
-	'install_creation_base' => 'Creating the SPIPmotion database',
 
 	// L
 	'label_codec_son' => 'Audio codec to use',
 	'label_codec_video' => 'Video codec to use',
 	'label_debug_mode' => 'Debug mode',
-	'label_encodage_auto' => 'Autmatically encode',
+	'label_encodage_auto' => 'Autmatically encode', # MODIF
 	'label_encodeur' => 'Encoder',
 	'label_extensions_prises_en_charge' => 'Formats supported',
-	'label_extensions_prises_en_charge_encodage' => 'Supported formats for encoding',
-	'label_extensions_sortie' => 'Encoding formats',
+	'label_extensions_prises_en_charge_encodage' => 'Supported formats for encoding', # MODIF
+	'label_extensions_sortie' => 'Encoding formats', # MODIF
 	'label_format_final' => 'Desired format',
 	'label_passes_1_encodage' => '1 pass',
 	'label_passes_2_encodage' => '2 pass',
-	'label_passes_encodage' => 'Number of passes for encoding',
-	'label_presets_qualite' => 'Video encoding quality (libx264 only)',
-	'label_qualite_video_ffmpeg2theora' => 'Video encoding quality (if use of ffmpeg2theora only)',
-	'label_relancer_encodage' => 'Re encoding',
+	'label_passes_encodage' => 'Number of passes for encoding', # MODIF
+	'label_presets_qualite' => 'Video encoding quality (libx264 only)', # MODIF
+	'label_qualite_video_ffmpeg2theora' => 'Video encoding quality (if use of ffmpeg2theora only)', # MODIF
+	'label_relancer_encodage' => 'Re encoding', # MODIF
 	'label_verifier_logiciels' => 'Verify the softwares again',
-	'label_vorbis_qualite' => 'Encoding quality (Only Vorbis audio)',
+	'label_vorbis_qualite' => 'Encoding quality (Only Vorbis audio)', # MODIF
 	'lien_enlever_previsu' => 'Remove the preview',
 	'lien_forcer_ffmpeg_infos' => 'Force the update of these informations',
 	'lien_recharger' => 'Reload',
@@ -203,12 +180,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_titre_binaires_manquant' => 'Plusieurs logiciels manquant',
 
 	// O
-	'options_config' => 'Encoding configuration',
+	'options_config' => 'Encoding configuration', # MODIF
 
 	// P
-	'profil_encodage' => 'Encoding profile for the format: @format@',
-	'profils_encodage_son' => 'Encoding profile(s) (Sound)',
-	'profils_encodage_video' => 'Encoding profile(s) (Video)',
+	'profil_encodage' => 'Encoding profile for the format: @format@', # MODIF
+	'profils_encodage_son' => 'Encoding profile(s) (Sound)', # MODIF
+	'profils_encodage_video' => 'Encoding profile(s) (Video)', # MODIF
 
 	// R
 	'recuperer_infos' => 'Retrieve technical datas',
@@ -218,7 +195,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'select_all' => 'Select all',
 	'spipmotion_boite' => 'Configuration of SPIPmotion',
 	'spipmotion_descriptif' => 'This plugin allows to encode on the fly audio and video files.',
-	'spipmotion_sh_install' => 'SPIPmotion encoding script:',
+	'spipmotion_sh_install' => 'SPIPmotion encoding script:', # MODIF
 	'spipmotion_sh_vignettes_install' => 'Thumbnail creation script:',
 
 	// T
@@ -230,17 +207,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'th_format_nom_court' => 'Short name',
 	'th_format_type' => 'Type',
 	'thead_stat_duree' => 'File length / minute',
-	'thead_stat_duree_long' => 'Encoded file length (in minutes) per encoding minute',
+	'thead_stat_duree_long' => 'Encoded file length (in minutes) per encoding minute', # MODIF
 	'thead_stat_octet' => 'File size / minute',
-	'thead_stat_octet_long' => 'Original file size encoded per encoding minute',
-	'thead_template_encodage' => 'Template',
-	'thead_template_encodage_utilise' => 'Encoding template used',
+	'thead_stat_octet_long' => 'Original file size encoded per encoding minute', # MODIF
+	'thead_template_encodage' => 'Template', # MODIF
+	'thead_template_encodage_utilise' => 'Encoding template used', # MODIF
 	'titre_fichier_log' => 'Content of the log file for the ID #@id@ in the queue',
 	'titre_fichiers_double_encodage' => 'These files appear to be the result of files encoded several times',
 	'titre_fichiers_doubles_spip' => 'These files appear to be the result of files several time inserted in the database',
 	'titre_page_erreurs' => 'Potential errors of SPIPmotion',
 	'titre_page_ffmpeg_infos' => 'FFMpeg informations',
-	'titre_page_file_stats' => 'Encodings statistics',
+	'titre_page_file_stats' => 'Encodings statistics', # MODIF
 	'titre_page_metas_doc' => 'Metadatas of the document #@id@',
 
 	// U
