@@ -16,7 +16,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adherents_jour' => 'Today subcribers',
 	'adhesion' => 'Membership (ie:2008)',
 	'adhesion_auteur' => 'Membership :',
-	'administrateur' => 'Administrator',
 	'amapiens_explication' => 'On this page, you will find the subscribers list, by clicking on their name, you wil go on their author page. Keeping updated information is mandatory for each new season.',
 	'attention' => 'WARNING !',
 	'attention_modifications' => '<p>You have just activated the CSA (Community Supported Agriculture) plugin. It created a new section "Season agenda" which includes two sub-sections "Delivery" and "Events". It also created the section "Archives".</p>
@@ -26,10 +25,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									3. At the end of each season, you have to update the CSA members list and archive into the appropriate sections, the dates of last season, this is needed for a proper functioning of this plugin.<br />
 
 									4. Update the basket type and the subscriptions on each author page, or no basket  delivery will be attributed.<br />
-									<p><strong>NON RESPECT OF THOSE RULES WILL RESULT IN THE PLUGIN DYSFUNCTION</strong></p>',
+									<p><strong>NON RESPECT OF THOSE RULES WILL RESULT IN THE PLUGIN DYSFUNCTION</strong></p>', # MODIF
 	'aucun_panier_pour_nom' => 'There is no basket for @nom@.',
 	'aucun_panier_produit_par_nom' => 'There is no basket made by @nom@.',
-	'autorise_envoie_email_explication' => 'Sending e-mails is used for availability and recovering baskets. "No" is adviced for huge CSA, instead you can use the management interface.',
+	'autorise_envoie_email_explication' => 'Sending e-mails is used for availability and recovering baskets. "No" is adviced for huge CSA, instead you can use the management interface.', # MODIF
 	'autorise_envoie_email_label' => 'Do you want to send mails ?',
 	'avant_le' => 'before',
 
@@ -67,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'impression_explication' => 'Only the dates with at least 1 basket are clickable and open a new window.',
 	'impression_paniers_fonction_date' => 'Printing baskets per date :',
 	'impression_paniers_fonction_mois' => 'Printing baskets per month :',
-	'impression_responsables_fonction_date' => 'Printing people in charge per month :',
+	'impression_responsables_fonction_mois' => 'Impression des responsables en fonction d\'un mois :', # NEW
 	'information_amap' => 'CSA information',
 
 	// L
@@ -84,6 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_paniers_vendu_par' => 'Baskets list produced by @nom@',
 	'liste_responsables' => 'People in charge list',
 	'livraison' => 'Delivery',
+	'livraison_enregistre_explication' => 'Vous devez avoir déjà distribuer des paniers pour pouvoir enregistré via ce formulaire des contenus de livraison.', # NEW
 	'livraison_explication' => 'On, this page, there is a previous delivery list. This table of this table can be seen on <a href="@url@"><b>this page</b></a>.',
 
 	// M
@@ -108,8 +108,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 The basket of @date_distribution@ is at disposal, please follow this link @lien@ to get it
 @panier_dispo_plus@
 @nom_adherent@',
+	'panier_dispo_interface' => 'Panier disponible', # NEW
 	'panier_dispo_plus' => 'Extra infos to give (It will be added in the mail sent before your name)',
-	'panier_disposition' => 'You have 1 available basket',
+	'panier_disposition' => 'You have 1 available basket', # MODIF
 	'panier_distribuer' => 'basket to deliver',
 	'panier_explication' => 'On this page, you will find the list of the baskets that you have to deliver, You can modify or delete them. Every modification send a mail to all the subscribers and producers.', # MODIF
 	'panier_explication_email' => 'Toutes modifications entraîne un envoie de mail en masse à tous les adhérents et les producteurs de l\'association.', # NEW
@@ -121,13 +122,15 @@ The basket of @date_distribution@ is at disposal, please follow this link @lien@
 	'panier_recupere_auteur_mail' => 'Hello,
 I will get the basket of the @date_distribution@ produced by @nom_producteur@
 @nom_adherent@',
+	'panier_vous_bien_attribuer' => 'Le panier vous a bien été attribuer', # NEW
 	'paniers_deja_vendu' => 'You have sold @nb@ basket(s)',
 	'paniers_disponibles' => 'Available baskets',
-	'paniers_disposition' => 'You made @nb@ baskets available',
+	'paniers_disposition' => 'You made @nb@ baskets available', # MODIF
 	'paniers_distribuer' => 'baskets to deliver',
 	'pas_connecte_ou_reconnu' => 'You are not logged in or not identified.',
 	'pas_date_distributions' => 'No distribution date are filled in.',
 	'pas_paniers' => 'You do not have any basket for this season, no contract has been done concerning you',
+	'pas_paniers_disponible' => 'Nous avons pas de panier disponible à vous proposer actuellement.', # NEW
 	'pas_producteur_amap' => 'ou do not have any producer in your CSA.',
 	'pas_responsable_distribution' => 'You are not in charge for this season deliveries.',
 	'pas_responsable_pour_nom' => '@nom@ is not in charge for deliveries.',

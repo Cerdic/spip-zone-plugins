@@ -97,7 +97,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'panier' => 'Panier',
 	'panier_deja_vendu' => 'Vous avez déjà vendu 1 panier',
 	'panier_dispo' => 'Panier disponible le @date_distribution@',
-	'panier_dispo_interface' => 'Panier disponible',
 	'panier_dispo_auteur' => 'Bonjour,
 		<br />Je mets à disposition le panier du @date_distribution@
 		<br />@nom_adherent@',
@@ -105,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Je mets à disposition le panier du @date_distribution@, pour le récupérer suiver le lien suivant @lien@
 @panier_dispo_plus@
 @nom_adherent@',
+	'panier_dispo_interface' => 'Panier disponible',
 	'panier_dispo_plus' => 'Des infos à donner en plus (elles seront rajoutées dans le courriel envoyé avant votre nom)',
 	'panier_disposition' => 'Il y a 1 panier à disposition',
 	'panier_distribuer' => 'panier à distribuer',
