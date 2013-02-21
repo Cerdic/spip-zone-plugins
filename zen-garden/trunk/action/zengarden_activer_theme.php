@@ -1,9 +1,11 @@
 <?php
 /**
  * Plugin Zen-Garden pour Spip 3.0
- * Licence GPL (c) 2006-2011 Cedric Morin
+ * Licence GPL (c) 2006-2013 Cedric Morin
  *
  */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_zengarden_activer_theme_dist(){
 	$securiser_action = charger_fonction('securiser_action','inc');

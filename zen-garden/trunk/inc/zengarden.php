@@ -1,11 +1,12 @@
 <?php
 /**
  * Plugin Zen-Garden pour Spip 3.0
- * Licence GPL (c) 2006-2011 Cedric Morin
+ * Licence GPL (c) 2006-2013 Cedric Morin
  *
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
 if (!defined('_DIR_THEMES'))
 	define('_DIR_THEMES',_DIR_RACINE."themes/");
 

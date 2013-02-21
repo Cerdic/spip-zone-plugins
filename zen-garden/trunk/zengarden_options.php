@@ -1,9 +1,14 @@
 <?php
 /**
  * Plugin Zen-Garden pour Spip 3.0
- * Licence GPL (c) 2006-2009 Cedric Morin
- *
+ * Licence GPL (c) 2006-2013 Cedric Morin
+ * 
+ * Fichier des options du plugins
+ * 
+ * @package SPIP\Zen-Garden\Options
  */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (!defined('_DIR_PLUGIN_THEME')){
 	// si on est en mode apercu, il suffit de repasser dans l'espace prive pour desactiver l'apercu
@@ -49,6 +54,16 @@ if (!defined('_DIR_PLUGIN_THEME')){
 	}
 }
 
+/**
+ * Insertion dans le pipeline affichage_final (SPIP)
+ * 
+ * Ajoute le switcher de thème dans l'espace public
+ * 
+ * @param string $texte
+ * 		Le contenu html de la page avant affichage au client
+ * @return string $texte
+ * 		Le contenu html de la page modifié
+ */
 function zengarden_affichage_final($texte){
 	if ($GLOBALS['html'] and isset($GLOBALS['meta']['zengarden_switcher'])){
 		include_spip('prive/zengarden_theme_fonctions');

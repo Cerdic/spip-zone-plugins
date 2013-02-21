@@ -3,9 +3,11 @@
  * Plugin Zen-Garden pour Spip 3.0
  * Licence GPL (c) 2006-2013 Cedric Morin
  * 
+ * @package SPIP\Zen-Garden\Fonctions
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
 
 function zengarden_affiche_version_compatible($intervalle){
 	if (!strlen($intervalle)) return '';
@@ -98,7 +100,16 @@ function zengarden_liste_themes($tous){
 	return $themes;
 }
 
-
+/**
+ * Insertion dans le pipeline filter_liste_plugins (SPIP)
+ * 
+ * Enlève les thèmes de la liste des plugins dans le privé
+ * 
+ * @param array $flux 
+ * 		 Le tableau de la liste des plugins
+ * @return array $flux 
+ * 		 Le tableau de la liste des plugins modifié
+ */
 function zengarden_filtrer_liste_plugins($flux){
 	foreach($flux['data'] as $d=>$info){
 		if ($info['categorie']=='theme'){
