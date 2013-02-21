@@ -1,9 +1,9 @@
-.ui-widget{
+.page .ui-widget{
 	font-size:inherit;
 	font-family:inherit;
 }
 
-.ui-widget-content{
+.page .ui-widget-content{
 	color:inherit;
 }
 
