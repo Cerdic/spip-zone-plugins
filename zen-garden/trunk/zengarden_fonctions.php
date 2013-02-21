@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Zen-Garden pour Spip 3.0
- * Licence GPL (c) 2006-2011 Cedric Morin
- *
+ * Licence GPL (c) 2006-2013 Cedric Morin
+ * 
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -28,12 +28,17 @@ function zengarden_affiche_version_compatible($intervalle){
 }
 
 /**
- * Lister les th�mes
+ * Lister les thèmes
+ * 
+ * Les thèmes peuvent être présent dans :
+ * - themes/* à la racine (ou autre _DIR_THEMES défini);
+ * - squelettes/themes/*;
+ * - plugins/*;
  *
  * @param bool $tous
  * @return array
  */
-function 	zengarden_liste_themes($tous){
+function zengarden_liste_themes($tous){
 	include_spip('inc/zengarden');
 
 	$themes = array();
@@ -60,12 +65,21 @@ function 	zengarden_liste_themes($tous){
 	// ceux de plugins/
 	$themes = array_merge($themes,zengarden_charge_themes(_DIR_PLUGINS,$tous));
 
-	// si on utilise ZPIP-v2 ou ZPIP-v2 invalider les themes qui n'utilisent pas
-	// ce skel
+	/**
+	 * Recherche spécifique
+	 * Invalider les thèmes incompatibles
+	 * 
+	 * Si le squelette ou un plugin définit la constante _ZENGARDEN_FILTRE_THEMES, 
+	 * on ne prend que les thèmes compatibles
+	 * Sinon, si on a le plugin zpip-dist, on ne liste que les thèmes compatibles avec zpip-dist
+	 * 
+	 * Pour être compatible un thème doit avoir un <utilise...> du squelette en question dans son paquet.xml
+	 */
 	$search = "";
-	if (defined('_DIR_PLUGIN_ZPIP')) $search="zpip";
+	if (defined('_ZENGARDEN_FILTRE_THEMES')) $search=_ZENGARDEN_FILTRE_THEMES;
+	elseif (defined('_DIR_PLUGIN_ZPIP')) $search="zpip";
 	elseif (defined('_DIR_PLUGIN_Z')) $search="z";
-	elseif (defined('_ZENGARDEN_FILTRE_THEMES')) $search=_ZENGARDEN_FILTRE_THEMES;
+	
 	if ($search){
 		foreach ($themes as $k => $theme){
 			$keep = false;
