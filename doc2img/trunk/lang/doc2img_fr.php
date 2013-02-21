@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_alt_image' => '@titre@, page @page@',
-	'info_desc_page' => 'Ce document est composé d\'une pages.',
+	'info_desc_page' => 'Ce document est composé d\'une page.',
 	'info_desc_pages' => 'Ce document est composé de @nb@ pages.',
 	'info_nb_pages' => 'Nombre de pages :',
 	'info_nb_pages_converties' => '@nb@ pages converties liées',
