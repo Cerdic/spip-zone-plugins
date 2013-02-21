@@ -19,19 +19,19 @@
 	[(#REM) Statut, severite, assignement]
 	<div class="infos">
 		<dl>
-			[<dt><:tickets:champ_statut:></dt><dd>[(#STATUT|tickets_icone_statut{true}) ](#STATUT|tickets_texte_statut)</dd>]
+			[<dt class="statut"><:tickets:champ_statut:></dt><dd class="statut">[(#STATUT|tickets_icone_statut{true}) ](#STATUT|tickets_texte_statut)</dd>]
 			<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tous}>
-			<dt><:tickets:assigne_a:></dt><dd><a href="#URL_AUTEUR" class="spip_in">#NOM</a></dd>
+			<dt class="assigne"><:tickets:assigne_a:></dt><dd class="assigne"><a href="#URL_AUTEUR" class="spip_in">#NOM</a></dd>
 			</BOUCLE_assigne>
-			[<dt><:tickets:champ_severite:></dt><dd>[(#SEVERITE|tickets_icone_severite{true}) ](#SEVERITE|tickets_texte_severite)</dd>]
-			[<dt><:tickets:champ_type:></dt><dd>(#TRACKER|tickets_texte_tracker)</dd>]
-			[<dt><:tickets:champ_date:></dt><dd>(#DATE|affdate)</dd>]
-			<B_auteur><dt><:tickets:champ_createur:></dt><BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}><dd><a href="#URL_AUTEUR" class="spip_in">#NOM</a></dd></BOUCLE_auteur>
-			[<dt><:tickets:champ_projet:></dt><dd class="#EDIT{projet}">(#PROJET)</dd>]
-			[<dt><:tickets:champ_composant:></dt><dd class="#EDIT{composant}">(#COMPOSANT)</dd>]
-			[<dt><:tickets:champ_version:></dt><dd class="#EDIT{version}">(#VERSION)</dd>]
-			[<dt><:tickets:champ_jalon:></dt><dd class="#EDIT{jalon}">(#JALON)</dd>]
-			[<dt><:tickets:champ_navigateur:></dt><dd class="#EDIT{navigateur}">(#NAVIGATEUR|tickets_texte_navigateur)</dd>]
+			[<dt class="severite"><:tickets:champ_severite:></dt><dd class="severite">[(#SEVERITE|tickets_icone_severite{true}) ](#SEVERITE|tickets_texte_severite)</dd>]
+			[<dt class="type"><:tickets:champ_type:></dt><dd class="type">(#TRACKER|tickets_texte_tracker)</dd>]
+			[<dt class="date"><:tickets:champ_date:></dt><dd class="date">(#DATE|affdate)</dd>]
+			<B_auteur><dt class="createur"><:tickets:champ_createur:></dt><BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}><dd class="createur"><a href="#URL_AUTEUR" class="spip_in">#NOM</a></dd></BOUCLE_auteur>
+			[<dt class="projet"><:tickets:champ_projet:></dt><dd class="projet #EDIT{projet}">(#PROJET)</dd>]
+			[<dt class="composant"><:tickets:champ_composant:></dt><dd class="composant #EDIT{composant}">(#COMPOSANT)</dd>]
+			[<dt class="version"><:tickets:champ_version:></dt><dd class="version #EDIT{version}">(#VERSION)</dd>]
+			[<dt class="jalon"><:tickets:champ_jalon:></dt><dd class="jalon #EDIT{jalon}">(#JALON)</dd>]
+			[<dt class="navigateur"><:tickets:champ_navigateur:></dt><dd class="navigateur #EDIT{navigateur}">(#NAVIGATEUR|tickets_texte_navigateur)</dd>]
 		</dl>
 		[(#REM) Bloc de choix du statut et de l'assignation]
 		[(#AUTORISER{modifier,ticket, #ID_TICKET}|oui)
