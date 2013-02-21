@@ -8,7 +8,7 @@
 	schema="0.1"
 	documentation="http://player.mediaspip.net/documentation/"
 	demonstration="http://player.mediaspip.net/demos/"
-	developpement="http://www.mediaspip.net/spip.php?page=tickets&amp;composant=plugins%20-%20html5_player"
+	developpement="http://www.mediaspip.net/spip.php?page=tickets&amp;composant=plugins%20-%20mediaspip_player"
 >	
 
 	<nom>Lecteur de m&#233;dias de MediaSPIP</nom>
