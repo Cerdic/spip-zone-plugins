@@ -16,10 +16,10 @@ function [(#PREFIXE)]_autoriser(){}
 
 <BOUCLE_si_exemples2(CONDITION){si #EXEMPLES}>
 /* Exemple
-function autoriser_configurer_[(#PREFIXE)]_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_[(#PREFIXE)]_configurer_dist($faire, $type, $id, $qui, $opt) {
 	// type est un objet (la plupart du temps) ou une chose.
 	// autoriser('configurer', '_[(#PREFIXE)]') => $type = '[(#PREFIXE)]'
-	// au choix
+	// au choix :
 	return autoriser('webmestre', $type, $id, $qui, $opt); // seulement les webmestres
 	return autoriser('configurer', '', $id, $qui, $opt); // seulement les administrateurs complets
 	return $qui['statut'] == '0minirezo'; // seulement les administrateurs (même les restreints)
