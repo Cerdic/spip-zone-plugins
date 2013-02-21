@@ -35,28 +35,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enfanter' => 'ولدت',
 	'enfantillage' => 'ولدن',
 	'enfants' => 'ولد',
-	'erreur_binaire_indisponible' => 'Ce logiciel n\'est pas disponible sur le serveur.', # NEW
+	'erreur_binaire_indisponible' => 'هذا البرنامج غير متوافر في الخادم',
 	'erreur_doc_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات doc.',
 	'erreur_intervalle_cron' => 'يجب تحديد مدة تفوق الثانية',
 	'erreur_nb_docs' => 'يجب تحديد عدد مستندات للمعالجة في كل تمريرة.',
 	'erreur_pdf_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات pdf.',
 	'erreur_ppt_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات ppt.',
 	'erreur_taille_index' => 'يجب فهرسة حرف واحد على الأقل.',
-	'erreur_verifier_configuration' => 'Il y a des erreurs de configuration.', # NEW
+	'erreur_verifier_configuration' => 'ثمة أخطاء إعداد.',
 	'erreur_xls_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات xls.',
 	'et' => '<strong>و</strong>',
 	'etranger' => 'غريب',
 	'exemples' => 'أمثلة على الاستخدام',
-	'explication_option_readonly' => 'Cette option est forcée sur ce site et n\'est donc pas configurable.', # NEW
+	'explication_option_readonly' => 'هذا الخيار مفروض في الموقع وبالتالي لا يمكن إعداده.',
 
 	// F
 	'fant' => 'لدي',
 	'fonctionnement_recherche' => '<strong>طريقة عمل محرك البحث</strong>',
 	'fulltext_cree' => 'تم إنشاء FULLTEXT',
-	'fulltext_creer' => 'Créer l\'index @index@', # NEW
+	'fulltext_creer' => 'إنشاء الفهرس @index@',
 	'fulltext_documentation' => 'لمزيد من المعلومات حول الإعداد، راجع التعليمات الفورية:',
-	'fulltext_documents' => 'Fulltext - Documents', # NEW
-	'fulltext_index' => 'Fulltext - Index', # NEW
+	'fulltext_documents' => 'فول تكست - المستندات',
+	'fulltext_index' => 'فول تكست - الفهرس',
 
 	// G
 	'general' => 'عام',
@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'infos' => 'المعلومات',
 	'infos_documents_proteges' => 'ستجد هنا قائمة بالمستندات المحمية والتي لم تتم فهرستها',
 	'infos_fulltext_document' => 'يمكن من هنا اختيار اي نوع من المستندات يخضع لفهرسة الملحق وإعداد التطبيقات المستخدمة وخياراتها.',
-	'intervalle_cron' => 'Intervalle de temps entre deux passages du CRON (en secondes).', # NEW
+	'intervalle_cron' => 'الفترة بين تمريرتين من CRON (بالثواني).',
 
 	// L
 	'liste_tables_connues' => 'هذه هي قائمة الجداول التي تعرّف عليها محرك البحث. يمكنك إضافة عناصر FULLTEXT، انظر التوثيق على العنوان',
@@ -87,13 +87,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_update_configuration' => 'تم تحديث تفضيلاتك',
 
 	// N
-	'nb_err' => 'En erreur d\'indexation', # NEW
+	'nb_err' => 'في خطأ الفهرسة',
 	'nb_index' => 'مفهرسة',
 	'nb_non_index' => 'غير مفهرسة',
 	'nb_ptg' => 'محمية (غير مفهرشة)',
 	'necessite_version_php' => '(يتطلب PHP 5.2 الأقل وخيار -enable-zip)',
 	'nombre_caracteres' => 'عدد الحروف المفهرسة (من بداية المستند).',
-	'nombre_documents' => 'Nombre de documents à traiter par itération du CRON', # MODIF
+	'nombre_documents' => 'عدد المستندات المطلوب معالختها لدى كل تمريرة من CRON',
 
 	// O
 	'ou_bien' => 'أو',
@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'regenerer_tous' => 'إعادة إنتاج كل فهارس FULLTEXT',
 	'reinitialise_index_doc' => 'إعادة تأصيل فهرسة المستندات الخاطئة',
-	'reinitialise_index_ptg' => 'Réinitialiser l\'indexation des documents protégés', # NEW
+	'reinitialise_index_ptg' => 'إعادة تأصيل فهرسة المستندات المحمية',
 	'reinitialise_totalement_doc' => 'إعادة تأصيل فهرسة كل المستندات',
 	'reserve_webmestres' => 'صفحة محصورة بمسؤول الموقع',
 	'retour_configuration_fulltext' => 'العودة الى إعداد الملحق',
@@ -118,7 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'sequence_exacte' => 'تسلسل الكلمات تماماً',
 	'soit' => '<strong>أو</strong>',
-	'statistiques_indexation' => 'Statistiques d\'indexation des documents :', # NEW
+	'statistiques_indexation' => 'إحصاءات فهرسة المستندات:',
 	'supprimer' => 'حذف',
 
 	// T
@@ -126,10 +126,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'table_format' => 'تنسيق هذا الجدول هو',
 	'table_non_reconnue' => 'جدول غير معروف',
 	'textes_premier' => 'ولكن يعرض أولاً النصوص التي تحتوي',
-	'titre_page_fulltext_index' => 'Configuration des index de recherche', # NEW
+	'titre_page_fulltext_index' => 'إعداد فهارس البحث',
 
 	// U
-	'une_utilisation' => '1 utilisation', # NEW
+	'une_utilisation' => 'استخدام واحد',
 	'utiliser_operateurs_logiques' => 'يستخدم البحث العوامل المنطقية الشائعة.',
 
 	// V
