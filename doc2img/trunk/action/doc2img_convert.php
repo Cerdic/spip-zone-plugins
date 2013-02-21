@@ -1,7 +1,10 @@
 <?php
-
 /**
  * Action doc2img_convert.php
+ * 
+ * Ajoute un fichier dans la liste d'attente de conversion de FACD
+ * 
+ * @package SPIP\Doc2img\Actions
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -15,8 +18,10 @@ include_spip('inc/actions');
  * - Récupère l'id_document
  * - Retourne vers la page demandée ou à defaut la page appelante
  *
- * @param $redirect url de redirection (obtenue via _request())
- * @param $id_document id_document fourni par le contexte (via _request())
+ * @param string $redirect 
+ * 		URL de redirection (obtenue via _request())
+ * @param int $id_document 
+ * 		id_document fourni par le contexte (via _request())
  */
 function action_doc2img_convert_dist(){
 

@@ -1,18 +1,21 @@
 <?php
-
 /**
  * Plugin Doc2img
  * Fichier contenant les appels aux pipelines de SPIP
+ * 
+ * @package SPIP\Doc2img\Pipelines
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Insertion dans le pipeline post-edition
- * Converti automatiquement les fichiers autorisés si possible
+ * Insertion dans le pipeline post_edition (SPIP)
+ * Ajoute automatiquement dans la file d'attente de conversion les fichiers à transformer
  *
- * @param $flux Le contexte du pipeline
- * @return $flux Le contexte du pipeline modifié
+ * @param array $flux 
+ * 		Le contexte du pipeline
+ * @return array $flux 
+ * 		Le contexte du pipeline modifié
  */
 function doc2img_post_edition($flux) {
     $id_document = $flux['args']['id_objet'];
@@ -45,38 +48,13 @@ function doc2img_post_edition($flux) {
 }
 
 /**
- * Insertion dans le pipeline document_desc_actions (Plugin Mediathèque)
- * Ajouter le bouton de conversion de document dans le bloc de document 
- *
- * @param array $flux
- * @return array $flux
- */
-function doc2img_document_desc_actions($flux) {
-	$id_document = $flux['args']['id_document'];
-	$infos = sql_fetsel('*', 'spip_documents', 'id_document=' . intval($id_document));
-	$types_autorises = explode(',',lire_config("doc2img/format_document",null,true));
-	if($infos['extension'] == 'tif'){
-		$infos['extension'] = 'tiff';
-	}
-	if(($infos['mode'] != 'vignette')
-		&& ($infos['distant'] == 'non')
-		&& in_array($infos['extension'],$types_autorises)){
-			$fond='prive/doc2img_media_boutons';
-		if ($flux['args']['position'] == 'galerie') {
-			$flux['data'] .= recuperer_fond($fond,array('mode'=>'galerie','id_document'=>$id_document));
-		} else {
-			$flux['data'] .= recuperer_fond($fond,array('id_document'=>$id_document));
-		}
-	}
-	return $flux;
-}
-
-/**
  * Insertion dans le pipeline formulaire_charger (SPIP)
  * Vérifie au chargement du formulaire de configuration que l'on a bien accès à la class Imagick 
  *
  * @param array $flux
+ * 		Le contexte du pipeline
  * @return array $flux
+ * 		Le contexte du pipeline modifié : editable à false et un message d'erreur si pas de class Imagick
  */
 function doc2img_formulaire_charger($flux) {
 	if($flux['args']['form'] == 'configurer_doc2img'){
@@ -93,7 +71,9 @@ function doc2img_formulaire_charger($flux) {
  * Vérifie la configuration du formulaire de configuration 
  *
  * @param array $flux
+ * 		Le contexte du pipeline
  * @return array $flux
+ * 		Le contexte du pipeline auquel on a ajouté nos erreurs
  */
 function doc2img_formulaire_verifier($flux) {
 	if($flux['args']['form'] == 'configurer_doc2img'){
@@ -124,7 +104,9 @@ function doc2img_formulaire_verifier($flux) {
  * On affiche en dessous des documents les pages converties
  *
  * @param array $flux
+ * 		Le contexte du pipeline
  * @return array $flux
+ * 		Le contexte du pipeline auquel on a ajoute le html dans data
  */
 function doc2img_recuperer_fond($flux){
 	if ($flux['args']['fond']=='modeles/document_desc'){
@@ -135,14 +117,46 @@ function doc2img_recuperer_fond($flux){
 
 /**
  * Insertion dans le pipeline medias_documents_visibles (Plugin medias)
+ * 
  * On ajoute le fait que les documents ayant comme mode doc2img soient visibles et non pas
  * supprimés des boucles documents
  *
  * @param array $flux
+ * 		Le contexte du pipeline, tableau des types de documents visibles possibles
  * @return array $flux
+ * 		Le contexte du pipeline modifié, tableau auquel on a ajouté doc2img
  */
 function doc2img_medias_documents_visibles($flux){
 	$flux[] = 'doc2img';
+	return $flux;
+}
+
+/**
+ * Insertion dans le pipeline document_desc_actions (Plugin Médias)
+ * Ajouter le bouton de conversion de document dans le bloc de document 
+ *
+ * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte du pipeline modifié avec le bouton de conversion 
+ */
+function doc2img_document_desc_actions($flux) {
+	$id_document = $flux['args']['id_document'];
+	$infos = sql_fetsel('*', 'spip_documents', 'id_document=' . intval($id_document));
+	$types_autorises = explode(',',lire_config("doc2img/format_document",null,true));
+	if($infos['extension'] == 'tif'){
+		$infos['extension'] = 'tiff';
+	}
+	if(($infos['mode'] != 'vignette')
+		&& ($infos['distant'] == 'non')
+		&& in_array($infos['extension'],$types_autorises)){
+			$fond='prive/doc2img_media_boutons';
+		if ($flux['args']['position'] == 'galerie') {
+			$flux['data'] .= recuperer_fond($fond,array('mode'=>'galerie','id_document'=>$id_document));
+		} else {
+			$flux['data'] .= recuperer_fond($fond,array('id_document'=>$id_document));
+		}
+	}
 	return $flux;
 }
 ?>

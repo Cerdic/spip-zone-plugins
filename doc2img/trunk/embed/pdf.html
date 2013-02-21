@@ -1,4 +1,11 @@
-<BOUCLE_doc_orig(DOCUMENTS){id_document}>
+[(#REM)
+	
+	Plugin doc2img
+	Code d'embed pour les documents pdf
+	
+	Utilisé par le plugin embed_code (http://plugins.spip.net/embed_code.html)
+	
+]<BOUCLE_doc_orig(DOCUMENTS){id_document}>
 <BOUCLE_document(DOCUMENTS){mode=doc2img}{objet=document}{id_objet=#ID_DOCUMENT}{par id_document} {statut==.*}{0,1}>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">

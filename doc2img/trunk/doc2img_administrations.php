@@ -1,8 +1,9 @@
 <?php
-
 /**
  * Plugin doc2img
  * Installation / désinstallation du plugin
+ * 
+ * @package SPIP\Doc2img\Installation
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
