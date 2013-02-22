@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'casse_indifferente' => 'El recuadro (minúscula/mayúscula) de búsqueda de palabras en indiferente',
 	'configuration_indexation_document' => 'Configuration de l\'indexation des documents', # NEW
-	'configurer_egalement_doc' => 'Vous pouvez également configurer l\'indexation des documents :', # MODIF
+	'configurer_egalement_doc' => 'También puede configurar la indexación de los documentos:',
 	'convertir_myisam' => 'Convertir en MyISAM',
 	'convertir_toutes' => 'Convertir todos las caudros en MyISAM',
 	'convertir_utf8' => 'convertir en UTF-8 para restaurar la coherencia',
@@ -25,8 +25,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'des_utilisations' => '@nb@ utilisations', # NEW
-	'descriptif' => 'Descriptif', # NEW
-	'documents_proteges' => 'Documents protégés', # MODIF
+	'descriptif' => 'Descriptivo',
+	'documents_proteges' => 'Documentos protegidos',
 
 	// E
 	'enfan' => 'hijo',
@@ -36,12 +36,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enfantillage' => 'chiquilinada',
 	'enfants' => 'hijos',
 	'erreur_binaire_indisponible' => 'Ce logiciel n\'est pas disponible sur le serveur.', # NEW
-	'erreur_doc_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .doc', # MODIF
-	'erreur_intervalle_cron' => 'Vous devez indiquer un intervalle supérieur à une seconde.', # MODIF
+	'erreur_doc_bin' => 'Debe indicar el binario a utilizar para extraer los .doc',
+	'erreur_intervalle_cron' => 'Debe indicar un intervalo superior a un segundo.',
 	'erreur_nb_docs' => 'Vous devez indiquer un nombre de documents à traiter par itération supérieur à un.', # MODIF
-	'erreur_pdf_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .pdf', # MODIF
+	'erreur_pdf_bin' => 'Debe indicar el binario a utilizar para extraer los .pdf',
 	'erreur_ppt_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .ppt', # MODIF
-	'erreur_taille_index' => 'Il faut au moins indexer un caractère.', # MODIF
+	'erreur_taille_index' => 'Hay que indexar al menos un carácter.',
 	'erreur_verifier_configuration' => 'Il y a des erreurs de configuration.', # NEW
 	'erreur_xls_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .xls', # MODIF
 	'et' => 'Y',
@@ -83,16 +83,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'mais_pas' => 'pero NO',
-	'message_ok_configuration' => 'Enregistrement de vos préférences terminée', # MODIF
-	'message_ok_update_configuration' => 'Mise à jour de vos préférences terminée', # MODIF
+	'message_ok_configuration' => 'Registro de sus preferencias terminado',
+	'message_ok_update_configuration' => 'Actualización de sus preferencias terminada',
 
 	// N
 	'nb_err' => 'En erreur d\'indexation', # NEW
-	'nb_index' => 'Indexés', # MODIF
-	'nb_non_index' => 'Non-indexés', # MODIF
-	'nb_ptg' => 'Protégés (non-indexés)', # MODIF
+	'nb_index' => 'Indexados',
+	'nb_non_index' => 'No indexados',
+	'nb_ptg' => 'Protegidos (no indexados)',
 	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip.', # MODIF
-	'nombre_caracteres' => 'Nombre de caractères indexés (depuis le debut du document).', # MODIF
+	'nombre_caracteres' => 'Número de caracteres indexados (desde el principio del documento).',
 	'nombre_documents' => 'Nombre de documents à traiter par itération du CRON', # MODIF
 
 	// O
@@ -112,7 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reinitialise_index_ptg' => 'Réinitialiser l\'indexation des documents protégés', # NEW
 	'reinitialise_totalement_doc' => 'Réinitialiser l\'indexation de tous les documents', # NEW
 	'reserve_webmestres' => 'Página reservada a los administradores web (webmaster)',
-	'retour_configuration_fulltext' => 'Retour à la configuration de Fulltext', # MODIF
+	'retour_configuration_fulltext' => 'Volver a la configuración de Fulltext',
 	'retourne' => 'Volver a los textos que contienen',
 
 	// S
