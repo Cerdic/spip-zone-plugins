@@ -1,0 +1,25 @@
+<paquet
+	prefix="Accessibilite"
+	categorie="navigation"
+	version="0.8.6"
+	etat="stable"
+	compatibilite="[2.1.0;3.0.*]"
+	logo="img_pack/wcag1AAA.png"
+	documentation="http://www.spip-contrib.net/?article3547"
+>	
+
+	<nom>Accessibilit&#233;</nom>
+	<!-- Améliorations de l'acessibilité pour les rédacteurs -->
+
+	<auteur>Goetsu</auteur>
+	<auteur lien="http://www.spip-contrib.net/_RealET_">RealET</auteur>
+
+	<copyright>2011</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL 3</licence>
+
+	<pipeline nom="pre_liens" inclure="accessibilite_pipelines.php" />
+
+	<utilise nom="gestdoc" compatibilite="[1.1.2;[" />
+	<utilise nom="medias" compatibilite="[1.5.0;[" />
+</paquet>
