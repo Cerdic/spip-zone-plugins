@@ -34,15 +34,10 @@
 	]
 	#SET{logo,''}
 	[(#GET{icon_licence}|oui)
-		[(#ENV{largeur_logo}|ou{#ENV{hauteur_logo}}|oui)
-			[(#SET{logo,[(#CHEMIN{img_pack/[(#GET{icon_licence})]}
-							|image_passe_partout{[(#ENV{largeur_logo,''})],[(#ENV{hauteur_logo,''})]}
-							|inserer_attribut{title,[(#GET{desc_licence}|attribut_html)]}
-							|inserer_attribut{alt,[(#GET{name_licence}|attribut_html)]})]})]
-		]
-		[(#ENV{largeur_logo}|ou{#ENV{hauteur_logo}}|non)
-			[(#SET{logo,[<img (#GET{icon_licence}|oui) src="#CHEMIN{img_pack/#GET{icon_licence}}" [title="(#GET{desc_licence}|attribut_html)"] [alt="(#GET{name_licence}|attribut_html)"]/>]})]
-		]
+		[(#SET{logo,[(#CHEMIN{img_pack/[(#GET{icon_licence})]}
+						|image_passe_partout{[(#ENV{largeur_logo,''})],[(#ENV{hauteur_logo,32})]}
+						|inserer_attribut{title,[(#GET{desc_licence}|attribut_html)]}
+						|inserer_attribut{alt,[(#GET{name_licence}|attribut_html)]})]})]
 	]
 	[(#ENV{modele_type}|=={mrss}|oui)
 	[<media:license type="text/html"[ href="(#GET{link_licence})"]>(#GET{name_licence})</media:license>]

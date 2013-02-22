@@ -16,7 +16,7 @@ $GLOBALS['licence_licences'] = array (
 				"id"		=> "1",
 				# nom de l'icone de la licence (optionnel)
 				# l'icone devra être placé dans le répertoire img_pack du plugin
-				"icon"		=> "copyright-24.png",
+				"icon"		=> "copyright.png",
 				# Lien documentaire vers la licence (optionnel)
 				"link"		=> "",
 				# Description un peu plus détaillée de la licence
@@ -75,7 +75,7 @@ $GLOBALS['licence_licences'] = array (
 			"9" 	=> array(
 				"name" 		=> _T('licence:titre_art_libre'),
 				"id"		=> "9",
-				"icon"		=> "copyleft-24.png",
+				"icon"		=> "copyleft.png",
 				"link"		=> _T('licence:lien_art_libre'),
 				"description" => _T('licence:description_art_libre'),
 				"abbr" 		=> "lal"),
@@ -89,14 +89,14 @@ $GLOBALS['licence_licences'] = array (
 			"11" 	=> array(
 				"name" 		=> _T('licence:titre_wtfpl'),
 				"id"		=> "11",
-				"icon"		=> "",
+				"icon"		=> "wtfpl.png",
 				"link"		=> _T('licence:lien_whfpl'),
 				"description" => _T('licence:description_wtfpl'),
 				"abbr" 		=> "wtfpl"),
 			"12" 	=> array(
 				"name" 		=> _T('licence:titre_cc0'),
 				"id"		=> "12",
-				"icon"		=> "cc-zero.png",
+				"icon"		=> "cc-zero-publicdomain.png",
 				"link"		=> _T('licence:lien_cc0'),
 				"description" => _T('licence:description_cc0'),
 				"abbr" 		=> "cc0"),
