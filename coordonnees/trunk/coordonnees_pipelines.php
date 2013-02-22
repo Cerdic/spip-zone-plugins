@@ -26,6 +26,8 @@ function liste_objets_coordonnees($quoi = '') {
 		$liste['organisation'] = array('titre'=>_T('contacts:bouton_organisations'),'exec'=>'organisation');
 	}
 
+	$liste = pipeline('objets_coordonnables', $liste);
+
 	if (!$quoi) {
 		return $liste;
 	}
