@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer' => 'إعداد',
 
 	// I
-	'info_nombre_favoris_objet' => 'Ajouté @nb@ fois en favori.', # Pas utile dans le plugin lui-même mais peut l'être dans les squelettes NEW
+	'info_nombre_favoris_objet' => 'تمت إضافته @nb@ مرة كمفضل', # Pas utile dans le plugin lui-même mais peut l'être dans les squelettes
 
 	// L
 	'label_style_formulaire16' => 'صغير (١٦ نقطة)',
