@@ -7,4 +7,9 @@ function feuillederoute_formulaire_admin($flux) {
 	return $flux;
 }
 
+function feuillederoute_body_prive($flux){
+	$flux .= recuperer_fond('prive/bouton/feuillederoute');
+	return $flux;
+}
+
 ?>

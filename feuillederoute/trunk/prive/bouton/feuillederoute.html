@@ -1,3 +1,5 @@
+[(#REM) eviter les incoherences de parametrage, par exemple les redacteurs peuvent ecrire mais pas lire : si on peut ecrire, alors on oblige a pouvoir lire meme si c'est contraire a la config ]
+
 [(#AUTORISER{lire,feuillederoute}|oui)
 [(#PLUGIN{minibando}|oui)<li id="minibando_bouton_feuillederoute">]
 <a[ href="(#URL_PAGE{feuillederoute})"] class="spip-admin-boutons" id="btn_feuillederoute"[(#PLUGIN{minibando}|oui) style="text-indent:0;font-size:10px;text-align:center;line-height:24px;"]>[(#PLUGIN{minibando}|oui) FdR][(#PLUGIN{minibando}|non)<:feuillederoute:feuillederoute:>]</a>
@@ -37,4 +39,11 @@ $(document).ready(function(){
 </script>
 [(#PLUGIN{minibando}|oui)<span></span><ul><li><p><:feuillederoute:feuillederoute:></p></li></ul></li>]
 ]
+]
+[(#REM|test_espace_prive|oui)
+<style type="text/css">
+a#btn_feuillederoute.spip-admin-boutons { position:fixed; right:0; top:2.4em; font-size:.9em; z-index:10; padding-top:0.1em; padding-bottom:0.1em;
+	-moz-border-radius: 0.3em 0 0 0.3em; -webkit-border-radius: 0.3em 0 0 0.3em; border-radius: 0.3em 0 0 0.3em;
+}
+</style>
 ]

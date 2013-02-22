@@ -21,20 +21,27 @@
 	overflow-y:auto; text-align:left; 
 	z-index:1000;
 	font-size:.95em; color:#333;
-	
 }
-a.fermer_feuillederoute { opacity:.8; }
+a.fermer_feuillederoute { 
+	position:fixed; right:12px; top:0; opacity:.8; 
+	margin: 0; padding: 0.4em 1em 0.4em; z-index:4999; /* rester sous la barre typo */
+	border: 0 none; -moz-border-radius: 0 0 0 0.3em; -webkit-border-radius: 0 0 0 0.3em; border-radius: 0 0 0 0.3em;
+	font-weight: bold; color:#fff; background:#666666;
+ }
 a.fermer_feuillederoute:hover { opacity:1; color:#fff; }
 .contenu_feuillederoute { padding:1em 1em 3em; }
 .contenu_feuillederoute a { color:#75507B; }
 .contenu_feuillederoute a:hover { color:#000; text-decoration:underline; }
-.fermer_feuillederoute { 
-	margin: 0 0 0 1em; padding: 0.4em 1em 0.4em; background:#666666;
-	border: 0 none; -moz-border-radius: 0 0 0.3em 0.3em; -webkit-border-radius: 0 0 0.3em 0.3em; border-radius: 0 0 0.3em 0.3em;
-	font-weight: bold; font-size:.8em; color:#fff;
- }
+.contenu_feuillederoute .todolist th a { color:#f5f5f5; }
+.contenu_feuillederoute .todolist th a:hover { color:#fff; }
+
 .formulaire_feuillederoute { padding:.5em; }
 .charger_feuillederoute table { width:100%; }
+@media (max-width:600px) {
+
+	.fond_feuillederoute, .feuillederoute { min-width:98%; width:98%; }
+
+}
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
