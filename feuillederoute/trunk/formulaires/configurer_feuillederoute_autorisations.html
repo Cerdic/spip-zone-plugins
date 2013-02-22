@@ -5,6 +5,8 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
+	<p class="explication"><:feuillederoute:cfg_explication_autorisations:></p>
+	
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<INCLURE{fond=formulaires/inc-feuillederoute_autorisations}{env}>
