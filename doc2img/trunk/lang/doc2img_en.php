@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_label_agrandissements' => 'Allow expansions',
 	'cfg_label_compression' => 'Compression quality',
 	'cfg_label_conversion_auto' => 'Automatic conversion when a document is attached',
-	'cfg_label_format' => 'File extensions to work with (pdf, tiff, ...)',
+	'cfg_label_format' => 'File extensions to work with (pdf, tiff...)',
 	'cfg_label_format_sortie' => 'The default output format',
 	'cfg_label_hauteur' => 'Default height',
 	'cfg_label_largeur' => 'Default width',
@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_alt_image' => '@titre@, page @page@', # NEW
-	'info_desc_page' => 'This document is composed by one unique sheet.',
+	'info_desc_page' => 'This document is composed by one unique sheet.', # MODIF
 	'info_desc_pages' => 'This document is composed by @nb@ sheets.',
 	'info_nb_pages' => 'Number of pages:',
 	'info_nb_pages_converties' => '@nb@ pages converties liées', # NEW
