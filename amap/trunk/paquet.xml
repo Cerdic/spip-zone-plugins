@@ -1,7 +1,7 @@
 <paquet
 	prefix="amap"
 	categorie="divers"
-	version="3.0.0"
+	version="3.0.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/amapconfig-64.png"
