@@ -18,6 +18,8 @@ function commandes_upgrade($nom_meta_base_version, $version_cible){
 		if (!is_array($config)) {
 			$config = array();
 		}
+
+		include_spip('commandes_fonctions');
 		$id_webmestre = commandes_id_premier_webmestre();
 		$config = array_merge(array(
 				'duree_vie' => '1',
