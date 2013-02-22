@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/amapconfig-64.png"
 	schema="1.2.0"
-	documentation="http://www.spip-contrib.net/Plugin-AMAP-Version-2"
+	documentation="http://contrib.spip.net/4331"
 >	
 
 	<nom>AMAP</nom>
