@@ -138,8 +138,6 @@ function albums_post_edition($flux){
  *     Liste complétée des js chargés
 **/
 function albums_jqueryui_plugins($scripts){
-	$scripts[] = "jquery.ui.draggable";
-	$scripts[] = "jquery.ui.droppable";
 	$scripts[] = "jquery.ui.sortable";
 	return $scripts;
 }
