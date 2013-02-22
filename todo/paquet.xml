@@ -5,7 +5,8 @@
 	etat="test"
 	compatibilite="[2.1.8;3.0.*]"
 	logo="images/todo-48.png"
->	
+	documentation="http://contrib.spip.net/4252"
+>
 
 	<nom>Todo</nom>
 	<!-- Lister rapidement des choses à faire -->
