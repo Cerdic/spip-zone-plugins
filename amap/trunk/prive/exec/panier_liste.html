@@ -19,6 +19,7 @@
 <h1 class="grostitre"><:amap:gestion_amap:></h1>
 
 #BOITE_OUVRIR{#CHEMIN_IMAGE{tabledata.gif}|balise_img{'',cadre-icone}|concat{#VAL{amap:panier_liste}|_T}|wrap{'<h3>'},'simple','titrem'}
+		<p><:amap:utiliser_entete_colone_tri:></p>
 		#SET{total,0}
 		<BOUCLE_totalpanier(AMAP_PANIERS){age<0} />
 			[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:reste_panier_distribuer, amap:reste_paniers_distribuer, nb})]
