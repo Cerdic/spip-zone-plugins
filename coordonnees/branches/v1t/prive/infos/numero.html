@@ -8,11 +8,14 @@
 	<div class='utilisation'>
 		<B_numero_utilise>
 		<:coordonnees:info_numero_utilise_par:>
-		<ul>
-		<BOUCLE_numero_utilise(numeros_liens){id_numero}{par objet,id_objet}>
-			<li><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#OBJET / #ID_OBJET</a></li>
+		<dl>
+		<BOUCLE_numero_utilise(numero_liens){id_numero}{fusion objet}{par objet}>
+			<dt>#OBJET</dt>
+			<BOUCLE_numero_usite(numero_liens){id_numero}{objet}{par id_objet}>
+				<dd>[(#TYPE|logo_type_mel) / ]<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="#OBJET#ID_OBJET">#INFO_TITRE{#OBJET,#ID_OBJET}</a></dd>
+			</BOUCLE_numero_usite>
 		</BOUCLE_numero_utilise>
-		</ul>
+		</dl>
 		</B_numero_utilise>
 	</div>
 </div>

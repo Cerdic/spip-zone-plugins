@@ -8,11 +8,14 @@
 	<div class='utilisation'>
 		<B_adresse_utilisee>
 		<:coordonnees:info_adresse_utilisee_par:>
-		<ul>
-		<BOUCLE_adresse_utilisee(adresses_liens){id_adresse}{par objet,id_objet}>
-			<li><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#OBJET / #ID_OBJET</a></li>
+		<dl>
+		<BOUCLE_adresse_utilisee(adresses_liens){id_adresse}{fusion objet}{par objet}>
+			<dt>#OBJET</dt>
+			<BOUCLE_adresse_usitee(adresses_liens){id_adresse}{objet}{par id_objet}>
+				<dd>[(#TYPE|logo_type_adr) / ]<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="#OBJET#ID_OBJET">#INFO_TITRE{#OBJET,#ID_OBJET}</a></dd>
+			</BOUCLE_adresse_usitee>
 		</BOUCLE_adresse_utilisee>
-		</ul>
+		</dl>
 		</B_adresse_utilisee>
 	</div>
 </div>
