@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 /**
  * Formulaire de création et d'édition d'un point géolocalisé
  */

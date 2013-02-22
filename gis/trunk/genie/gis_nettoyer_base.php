@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function genie_gis_nettoyer_base_dist($t){
 
 	$liens = array();

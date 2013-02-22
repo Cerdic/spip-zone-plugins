@@ -1,5 +1,7 @@
 <?php 
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 /**
  * Fonction de verification du formulaire de configuration
  * - On vérifie que la clé Bing est présente si cette couche est sélectionnée

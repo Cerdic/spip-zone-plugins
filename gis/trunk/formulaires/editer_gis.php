@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 /**
  * Formulaire de création et d'édition d'un point géolocalisé
  */
@@ -14,6 +17,7 @@ include_spip('inc/editer');
  * @param int $id_objet L'id_objet de l'objet auquel il est attaché
  * @param string $retour L'url de retour
  * @param string $ajaxload initialiser la carte à chaque onAjaxLoad()
+ * @param array $options TODO à documenter, voir avec l'auteur de http://zone.spip.org/trac/spip-zone/changeset/53906
  */
 function formulaires_editer_gis_charger_dist($id_gis='new', $objet='', $id_objet='', $retour='', $ajaxload='oui', $options=''){
 	$valeurs = formulaires_editer_objet_charger('gis', $id_gis, '', '', $retour, '');
@@ -56,6 +60,7 @@ function formulaires_editer_gis_charger_dist($id_gis='new', $objet='', $id_objet
  * @param int $id_objet L'id_objet de l'objet auquel il est attaché
  * @param string $retour L'url de retour
  * @param string $ajaxload initialiser la carte à chaque onAjaxLoad()
+ * @param array $options ???
  */
 function formulaires_editer_gis_verifier_dist($id_gis='new', $objet='', $id_objet='', $retour='', $ajaxload='oui', $options=''){
 	$erreurs = formulaires_editer_objet_verifier('gis', $id_gis,array('titre','lat','lon','zoom'));
@@ -70,6 +75,7 @@ function formulaires_editer_gis_verifier_dist($id_gis='new', $objet='', $id_obje
  * @param int $id_objet L'id_objet de l'objet auquel il est attaché
  * @param string $retour L'url de retour
  * @param string $ajaxload initialiser la carte à chaque onAjaxLoad()
+ * @param array $options ???
  */
 function formulaires_editer_gis_traiter_dist($id_gis='new', $objet='', $id_objet='', $retour='', $ajaxload='oui', $options=''){
 	if (_request('supprimer')){
