@@ -80,7 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_responsables' => 'Liste des responsables',
 	'livraison' => 'Livraison',
 	'livraison_enregistre_explication' => 'Vous devez avoir déjà distribuer des paniers pour pouvoir enregistré via ce formulaire des contenus de livraison.',
-	'livraison_explication' => 'Sur cette page vous trouverez la liste des livraison que vous avez déjà effectuer, le contenu de ce tableau est visible sur la page <a href="@url@"><b>ici</b></a>.',
+	'livraison_explication' => 'Sur cette page vous trouverez la liste des livraison que vous avez déjà effectuer. Ce tableau est affichable sur le site via un article en mettant le code &lt;liste|livraison&gt;.',
 
 	// M
 	'manque_fpdf_imprimer' => 'Il vous manque le plugins "fpdf" pour pouvoir imprimer vos listes de paniers.',
@@ -142,7 +142,7 @@ Je récupère le panier du @date_distribution@ produit par @nom_producteur@
 	'recupere_panier' => 'Récupéré le panier',
 	'responsables' => 'Responsables',
 	'responsables_distribution_paniers_mois' => 'Responsables des distributions pour le mois du @date_debut@ au @date_fin@',
-	'responsables_explication' => 'Sur cette page vous trouverez la liste des responsables avec la dates de distribution à laquelle il a été associé. Ce tableau est affichable sur le site via un article en mettant le code &lt;liste|distributions&gt;',
+	'responsables_explication' => 'Sur cette page vous trouverez la liste des responsables avec la dates de distribution à laquelle il a été associé. Ce tableau est affichable sur le site via un article en mettant le code &lt;liste|distributions&gt;.',
 	'reste_panier_distribuer' => 'Il nous reste encore 1 panier à distribuer',
 	'reste_panier_recuperer' => 'Il vous reste encore 1 panier à recupérer',
 	'reste_paniers_distribuer' => 'Il nous reste encore @nb@ paniers à distribuer',

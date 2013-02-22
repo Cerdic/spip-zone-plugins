@@ -3,11 +3,13 @@
   Squelette
   (c) 2011 - 2013 Amap
   Distribue sous licence GPL
+  
+  Appeler depuis /ecrire/?exec=responsable_liste
 
 ]
 #CACHE{0}
 <B_responsables>
-[<p class="pagination">(#PAGINATION)</p>]
+[<p class='pagination'>(#PAGINATION{prive})</p>]
 <table class="amap spip">
 	<thead>
 	<tr>
@@ -29,7 +31,7 @@
 	</BOUCLE_responsables>
 	</tbody>
 </table>
-[<p class="pagination">(#PAGINATION)</p>]
+[<p class='pagination'>(#PAGINATION{prive})</p>]
 </B_responsables>
 	<p style="text-align: justify;">
 		<:amap:table_vide_aucun_enregistrement:>

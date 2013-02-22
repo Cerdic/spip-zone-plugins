@@ -3,10 +3,12 @@
   Squelette
   (c) 2011 - 2013 Amap
   Distribue sous licence GPL
+  
+  Appeler depuis /ecrire/?exec=panier_liste
 
 ]
 <B_paniers>
-[<p class="pagination">(#PAGINATION)</p>]
+[<p class='pagination'>(#PAGINATION{prive})</p>]
 <table class="amap spip">
 	<thead>
 	<tr>
@@ -31,7 +33,7 @@
 	</BOUCLE_paniers>
 	</tbody>
 </table>
-[<p class="pagination">(#PAGINATION)</p>]
+[<p class='pagination'>(#PAGINATION{prive})</p>]
 </B_paniers>
 	<p style="text-align: justify;">
 		<:amap:table_vide_aucun_enregistrement:>

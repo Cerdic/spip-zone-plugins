@@ -3,16 +3,19 @@
   Squelette
   (c) 2011 - 2013 Amap
   Distribue sous licence GPL
+  
+  Appeler depuis /ecrire/?exec=livraison_liste
+  Appeler depuis modeles/liste_livraisons
 
 ]
 <B_livraisons>
-[<p class="pagination">(#PAGINATION)</p>]
+[<p class='pagination'>(#PAGINATION{prive})</p>]
 <table class="amap spip">
 	<thead>
 	<tr>
 		<th class='date_livraison' scope='col'><:amap:date_livraison:></th>
 		<th class='contenu_panier' scope='col'><:amap:contenu_panier:></th>
-		<th class='action' scope='col'><:amap:action:></th>
+		[(#SESSION{statut}|=={0minirezo}|oui)<th class='action' scope='col'><:amap:action:></th>]
 	</tr>
 	</thead>
 	<tbody>
@@ -20,12 +23,12 @@
 	<tr>
 		<td class='date_livraison'>[(#DATE_LIVRAISON|affdate{'d/m/Y'})]</td>
 		<td class='contenu_panier'>[(#CONTENU_PANIER|PtoBR)]</td>
-		<td class='action'><a href='[(#URL_ECRIRE{livraison_enregistre}|parametre_url{id_amap_livraison,#ID_AMAP_LIVRAISON})]'><:amap:action_modifier:></a></td>
+		[(#SESSION{statut}|=={0minirezo}|oui)<td class='action'><a href='[(#URL_ECRIRE{livraison_enregistre}|parametre_url{id_amap_livraison,#ID_AMAP_LIVRAISON})]'><:amap:action_modifier:></a></td>]
 	</tr>
 	</BOUCLE_livraisons>
 	</tbody>
 </table>
-[<p class="pagination">(#PAGINATION)</p>]
+[<p class='pagination'>(#PAGINATION{prive})</p>]
 </B_livraisons>
 	<p style="text-align: justify;">
 		<:amap:table_vide_aucun_enregistrement:>
