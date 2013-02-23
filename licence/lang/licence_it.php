@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_cc_by_nd' => 'Creative Commons - Attribuzione Non opere derivate', # MODIF
 	'description_cc_by_sa' => 'Creative Commons - Attribuzione Condividi allo stesso modo', # MODIF
 	'description_copyright' => '© copyright autore dell\'articolo',
+	'description_gfdl' => 'Licence de documentation libre GNU', # NEW
 	'description_gpl' => 'licenza GPL', # MODIF
 	'description_wtfpl' => 'Licence Publique Rien À Branler', # NEW
 
