@@ -84,7 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_responsables' => 'People in charge list',
 	'livraison' => 'Delivery',
 	'livraison_enregistre_explication' => 'Vous devez avoir déjà distribuer des paniers pour pouvoir enregistré via ce formulaire des contenus de livraison.', # NEW
-	'livraison_explication' => 'On, this page, there is a previous delivery list. This table of this table can be seen on <a href="@url@"><b>this page</b></a>.',
+	'livraison_explication' => 'On, this page, there is a previous delivery list. This table of this table can be seen on <a href="@url@"><b>this page</b></a>.', # MODIF
 
 	// M
 	'manque_fpdf_imprimer' => 'The plugin "fpdf" is missing to print your baskets lists.',
