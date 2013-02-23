@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'Akzente werden nicht berücksichtigt, es werden die selben Ausdrücke gefunden, egal ob Sie « déjà » oder « deja » eingeben.',
 	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'Asien',
-	'asterisque_terminale' => 'kein Ausdruck wird gefunden: Das Sternchen * muß am Ende stehen.',
+	'asterisque_terminale' => 'kein Ausdruck wird gefunden: Das Sternchen * muß am Ende stehen.', # MODIF
 	'aussi' => 'auch',
 
 	// C

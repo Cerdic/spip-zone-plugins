@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'Akcenty i znaki diakrytyczne nie są uwzględniane w szukaniu ("żółty" i "zolty", dadzą takie same wyniki, w tym "zołty", "żołty", "żólty", ...)',
 	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'Azja',
-	'asterisque_terminale' => 'nie da żadnego wyniku: gwiazdka może być użyta tylko na końcu',
+	'asterisque_terminale' => 'nie da żadnego wyniku: gwiazdka może być użyta tylko na końcu', # MODIF
 	'aussi' => 'także',
 
 	// C

@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'Позначки над/між буквами не беруться до уваги ("різдв\'яний" чи "різдвяний", і дадуть такий ж результат, включаючи "різдв\'яний", "різдвяний" ...)',
 	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'азія',
-	'asterisque_terminale' => 'не дасть ніякого результату: зірочка має бути в кінці',
+	'asterisque_terminale' => 'не дасть ніякого результату: зірочка має бути в кінці', # MODIF
 	'aussi' => 'також',
 
 	// C

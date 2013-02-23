@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'Aksendid tähtedel ei ole arvestatud ("ülestõusmine" või "ulestousmine", annavad sama tulemuse, ka "ülestousmine", "ulestõusmine"...)',
 	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'aasia',
-	'asterisque_terminale' => 'ei anna tulemust,tärn peab olema lõpus',
+	'asterisque_terminale' => 'ei anna tulemust,tärn peab olema lõpus', # MODIF
 	'aussi' => 'ka',
 
 	// C

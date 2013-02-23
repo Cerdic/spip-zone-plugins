@@ -8,20 +8,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accents_pas_pris' => 'Los acentos no son tenidos en cuenta',
+	'accents_pas_pris' => 'Los acentos no son tenidos en cuenta («sólo» o «solo», darán como resultado en ambos casos «sólo» y «solo»...)',
 	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'asia',
-	'asterisque_terminale' => 'no devolverá nada: el asterisco * debe ser terminal',
+	'asterisque_terminale' => 'no devolverá nada: el asterisco * debe estar al final', # MODIF
 	'aussi' => 'también',
 
 	// C
-	'casse_indifferente' => 'El recuadro (minúscula/mayúscula) de búsqueda de palabras en indiferente',
+	'casse_indifferente' => 'La sensibilidad respecto a mayúsculas en la búsqueda de palabras es indiferente.',
 	'configuration_indexation_document' => 'Configuration de l\'indexation des documents', # NEW
 	'configurer_egalement_doc' => 'También puede configurar la indexación de los documentos:',
 	'convertir_myisam' => 'Convertir en MyISAM',
-	'convertir_toutes' => 'Convertir todos las caudros en MyISAM',
+	'convertir_toutes' => 'Convertir todas las tablas en MyISAM',
 	'convertir_utf8' => 'convertir en UTF-8 para restaurar la coherencia',
-	'creer_tous' => 'Crear todo los index FULLTEXT sugeridos',
+	'creer_tous' => 'Crear todos los índices FULLTEXT sugeridos',
 
 	// D
 	'des_utilisations' => '@nb@ utilisations', # NEW
@@ -29,16 +29,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'documents_proteges' => 'Documentos protegidos',
 
 	// E
-	'enfan' => 'hijo',
-	'enfance' => 'infancia',
+	'enfan' => 'niñ',
+	'enfance' => 'niñez',
 	'enfant' => 'niño',
-	'enfanter' => 'dar a luz',
-	'enfantillage' => 'chiquilinada',
-	'enfants' => 'hijos',
+	'enfanter' => 'niñera',
+	'enfantillage' => 'niñería',
+	'enfants' => 'niños',
 	'erreur_binaire_indisponible' => 'Ce logiciel n\'est pas disponible sur le serveur.', # NEW
 	'erreur_doc_bin' => 'Debe indicar el binario a utilizar para extraer los .doc',
 	'erreur_intervalle_cron' => 'Debe indicar un intervalo superior a un segundo.',
-	'erreur_nb_docs' => 'Vous devez indiquer un nombre de documents à traiter par itération supérieur à un.', # MODIF
+	'erreur_nb_docs' => 'Debe indicar un número de documentos a tratar por iteración superior a uno. ',
 	'erreur_pdf_bin' => 'Debe indicar el binario a utilizar para extraer los .pdf',
 	'erreur_ppt_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .ppt', # MODIF
 	'erreur_taille_index' => 'Hay que indexar al menos un carácter.',
@@ -47,39 +47,39 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'et' => 'Y',
 	'etranger' => 'extranjero',
 	'exemples' => 'Ejemplos de utilización',
-	'explication_option_readonly' => 'Cette option est forcée sur ce site et n\'est donc pas configurable.', # NEW
+	'explication_option_readonly' => 'Esta opción está forcada en el sitio y por tanto no es configurable.',
 
 	// F
 	'fant' => 'fant',
 	'fonctionnement_recherche' => 'Funcionamiento del motor de búsqueda de este sitio',
 	'fulltext_cree' => 'FULLTEXT creado',
-	'fulltext_creer' => 'Créer l\'index @index@', # NEW
-	'fulltext_documentation' => 'Pour plus d\'information sur la configuration, consultez la documentation en ligne :', # NEW
-	'fulltext_documents' => 'Fulltext - Documents', # NEW
-	'fulltext_index' => 'Fulltext - Index', # NEW
+	'fulltext_creer' => 'Crear el índice @index@',
+	'fulltext_documentation' => 'Para mayor información sobre la configuración, consulte la documentación en línea:',
+	'fulltext_documents' => 'Fulltext - Documentos',
+	'fulltext_index' => 'Fulltext - Índice',
 
 	// G
-	'general' => 'Général', # NEW
+	'general' => 'General',
 
 	// I
-	'id' => 'ID', # NEW
+	'id' => 'ID',
 	'il_faut_myisam' => 'hace falta MyISAM',
-	'incoherence_charset' => 'Una incoherencia entre el charset de su sitio y el de sus base de datos puede adulterar las búsquedas con caracteres acentuados',
-	'index_regenere' => 'index de los cuadros regenerados',
+	'incoherence_charset' => 'Una incoherencia entre el charset de su sitio y el de las tablas de su base de datos puede las búsquedas con caracteres acentuados:',
+	'index_regenere' => 'índices de la tabla regenerados',
 	'index_reinitialise' => 'Los documentos en error han sido re-inicializados',
-	'index_reinitialise_ptg' => 'Les documents protégés ont tous été réinitialisés', # NEW
-	'index_reinitialise_totalement' => 'Les document ont tous été réinitialisés', # NEW
-	'index_supprime' => 'index suprimido',
-	'indiquer_chemin_bin' => 'Indiquer le chemin vers le binaire traitant l\'indexation des', # NEW
-	'indiquer_options_bin' => 'Indiquer les options pour l\'indexation des', # NEW
-	'infos' => 'Informations', # NEW
-	'infos_documents_proteges' => 'Vous trouverez ici la liste des documents protégés et donc non-indexés par Fulltext', # NEW
-	'infos_fulltext_document' => 'Vous pourrez ici choisir quels type de documents sont indexés par Fulltext et configurer les binaires utilisés et leurs options.', # NEW
-	'intervalle_cron' => 'Intervalle de temps entre deux passages du CRON (en secondes).', # NEW
+	'index_reinitialise_ptg' => 'Todos los documentos protegidos han de reiniciarse',
+	'index_reinitialise_totalement' => 'Todos los documentos han de reiniciarse',
+	'index_supprime' => 'índice eliminido',
+	'indiquer_chemin_bin' => 'Indicar la ruta hacia el binario tratando la indexación de',
+	'indiquer_options_bin' => 'Indicar las opciones para la indexación de',
+	'infos' => 'Informaciones',
+	'infos_documents_proteges' => 'Aquí encontrará la lista de documentos protegidos y por tanto no indexados por Fulltext',
+	'infos_fulltext_document' => 'Podrá elegir aquí qué tipo de documentos serán indexados por Fulltext y configurar los binarios utilizados y sus opciones.',
+	'intervalle_cron' => 'Intervalo de tiempo entre dos pasos del CRON (en segundos).',
 
 	// L
-	'liste_tables_connues' => 'Esta es la lista de los cuadros conocidas de la búsqueda. Puede agregar elementos FULLTEXT, ver la documentación de la dirección',
-	'logo' => 'Logo', # NEW
+	'liste_tables_connues' => 'Ésta es la lista de las tablas conocidas de la búsqueda. Puede agregar elementos FULLTEXT, véase la documentación en la dirección',
+	'logo' => 'Logo',
 
 	// M
 	'mais_pas' => 'pero NO',
@@ -87,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_update_configuration' => 'Actualización de sus preferencias terminada',
 
 	// N
-	'nb_err' => 'En erreur d\'indexation', # NEW
+	'nb_err' => 'Error de indexación',
 	'nb_index' => 'Indexados',
 	'nb_non_index' => 'No indexados',
 	'nb_ptg' => 'Protegidos (no indexados)',
@@ -99,41 +99,41 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ou_bien' => 'o bien',
 
 	// P
-	'pas_document_ptg' => 'Il n\'y a pas de document protégé.', # NEW
-	'pas_index' => 'Sin index FULLTEXT',
+	'pas_document_ptg' => 'No hay ningún documento protegido.',
+	'pas_index' => 'Sin índice FULLTEXT',
 	'premier_soit' => 'SEA',
 
 	// Q
 	'que_des_exemples' => 'NB : les adresses de binaires et options proposées ici ab initio ne sont que des exemples.', # MODIF
 
 	// R
-	'regenerer_tous' => 'Regenerar todos los index FULLTEXT',
-	'reinitialise_index_doc' => 'Reinicializar la indexación de los documentos en error.',
-	'reinitialise_index_ptg' => 'Réinitialiser l\'indexation des documents protégés', # NEW
-	'reinitialise_totalement_doc' => 'Réinitialiser l\'indexation de tous les documents', # NEW
+	'regenerer_tous' => 'Regenerar todos los índices FULLTEXT',
+	'reinitialise_index_doc' => 'Reiniciar la indexación de los documentos en error.',
+	'reinitialise_index_ptg' => 'Reiniciar la indexación de los documentos protegidos',
+	'reinitialise_totalement_doc' => 'Reiniciar la indexación de todos los documentos',
 	'reserve_webmestres' => 'Página reservada a los administradores web (webmaster)',
 	'retour_configuration_fulltext' => 'Volver a la configuración de Fulltext',
-	'retourne' => 'Volver a los textos que contienen',
+	'retourne' => 'Vuelve a los textos que contienen',
 
 	// S
 	'sequence_exacte' => 'la secuencia exacta de palabras',
 	'soit' => 'SEA',
-	'statistiques_indexation' => 'Statistiques d\'indexation des documents :', # NEW
-	'supprimer' => 'Suprimir',
+	'statistiques_indexation' => 'Estadísticas de indexación de los documentos:',
+	'supprimer' => 'Eliminar',
 
 	// T
-	'table_convertie' => 'cuadro convertido en MyISAM',
-	'table_format' => 'Este cuadro tiene formato',
-	'table_non_reconnue' => 'cuadro no reconocido',
+	'table_convertie' => 'tabla convertida en MyISAM',
+	'table_format' => 'Esta tabla tiene formato',
+	'table_non_reconnue' => 'tabla no reconocida',
 	'textes_premier' => 'pero mostrar primero los textos que contienen',
-	'titre_page_fulltext_index' => 'Configuration des index de recherche', # NEW
+	'titre_page_fulltext_index' => 'Configuración de los índices de búsqueda',
 
 	// U
-	'une_utilisation' => '1 utilisation', # NEW
-	'utiliser_operateurs_logiques' => 'La búsqueda utiliza los operadores lógicos más corrientes',
+	'une_utilisation' => '1 uso',
+	'utiliser_operateurs_logiques' => 'La búsqueda utiliza los operadores lógicos más corrientes.',
 
 	// V
-	'voir_doc_ptg' => 'Voir les documents protegés' # NEW
+	'voir_doc_ptg' => 'Ver los documentos protegidos' # MODIF
 );
 
 ?>

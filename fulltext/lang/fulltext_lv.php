@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'Mīkstinājuma zīmes un akcenti netiks ņemti vērā (meklējot "sāļš" vai "sals", rezultāti būs tie paši: "sāļš", "sals", "sāls"...)',
 	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'āzija',
-	'asterisque_terminale' => 'nesniegs rezultātus: zvaigznītei jābūt noslēdzošai',
+	'asterisque_terminale' => 'nesniegs rezultātus: zvaigznītei jābūt noslēdzošai', # MODIF
 	'aussi' => 'arī',
 
 	// C

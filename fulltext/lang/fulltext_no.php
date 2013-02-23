@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'Aksenter blir ikke tatt hensyn til ("andré" og "andre" vil gi samme resultat, akkurat som "andrè")',
 	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'Asia',
-	'asterisque_terminale' => 'gir ingen resultater: stjerna må komme sist i uttrykket',
+	'asterisque_terminale' => 'gir ingen resultater: stjerna må komme sist i uttrykket', # MODIF
 	'aussi' => 'også',
 
 	// C

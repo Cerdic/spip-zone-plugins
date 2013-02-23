@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'Non si tiene conto degli accenti (« perché » o « perche », daranno lo stesso « perché », « perchè », « perche »...)',
 	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'asia',
-	'asterisque_terminale' => 'non darà niente: l\'asterisco * dev\'essere alla fine',
+	'asterisque_terminale' => 'non darà niente: l\'asterisco * dev\'essere alla fine', # MODIF
 	'aussi' => 'anche',
 
 	// C

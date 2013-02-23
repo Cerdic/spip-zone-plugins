@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'Met accenten wordt geen rekening gehouden ("déjà" of "deja" geven beiden o.a. de volgende resultaten: "déjà", "dejà", "déja"...).',
 	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'Azië',
-	'asterisque_terminale' => 'levert geen resultaten op: het sterretje moet het laaste teken zijn',
+	'asterisque_terminale' => 'levert geen resultaten op: het sterretje moet het laaste teken zijn', # MODIF
 	'aussi' => 'ook',
 
 	// C

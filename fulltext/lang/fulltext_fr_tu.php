@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'Les accents ne sont pas pris en compte (« déjà » ou « deja », retourneront à l\'identique « déjà », « dejà », « déja »...)',
 	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'asie',
-	'asterisque_terminale' => 'ne retournera rien: l\'astérisque * doit être terminale',
+	'asterisque_terminale' => 'ne retournera rien: l\'astérisque * doit être terminale', # MODIF
 	'aussi' => 'aussi',
 
 	// C

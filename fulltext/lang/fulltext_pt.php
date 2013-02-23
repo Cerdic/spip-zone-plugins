@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'Os acentos são ignorados («órgão» ou «orgao» são interpretados da mesma forma...)',
 	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'Ásia',
-	'asterisque_terminale' => 'não dará nada: o asterisco * deve estar no fim',
+	'asterisque_terminale' => 'não dará nada: o asterisco * deve estar no fim', # MODIF
 	'aussi' => 'também',
 
 	// C

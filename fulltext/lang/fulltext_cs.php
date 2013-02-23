@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'Nezáleží na diakritice (Můžete napsat "růže" nebo "ruze", výsledek bude stejný. Totéž platí pro "rúže", "ruže", "růze" atp.)',
 	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'asie',
-	'asterisque_terminale' => 'nevyhledá žádné výsledky: hvězdička musí být na konci',
+	'asterisque_terminale' => 'nevyhledá žádné výsledky: hvězdička musí být na konci', # MODIF
 	'aussi' => 'také',
 
 	// C

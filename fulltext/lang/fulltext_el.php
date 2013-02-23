@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'Οι τόνοι δεν λαμβάνονται υπόψη ("déjà" ή "deja", επιστρέφουν το ίδιο αποτέλεσμα, συμπεριλαμβανομένων των "déjà", "dejà", "déja"...)',
 	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'Ασία',
-	'asterisque_terminale' => 'δεν θα επιστρέψει αποτελέσματα: ο αστερίσκος πρέπει να βρίσκεται στο τέλος',
+	'asterisque_terminale' => 'δεν θα επιστρέψει αποτελέσματα: ο αστερίσκος πρέπει να βρίσκεται στο τέλος', # MODIF
 	'aussi' => 'επίσης',
 
 	// C

@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'Los acentos nun se tienen en cuenta («cuánto» o «cuanto», devuelven el mesmu «cuánto», «cuanto», «cuantó»...)',
 	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'asia',
-	'asterisque_terminale' => 'nun devolverá nada: l\'asteriscu * tien que tar al final',
+	'asterisque_terminale' => 'nun devolverá nada: l\'asteriscu * tien que tar al final', # MODIF
 	'aussi' => 'tamién',
 
 	// C

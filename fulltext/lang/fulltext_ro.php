@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'Accentele nu sunt luate în considerare (« înţelegere » sau « intelegere », vor avea ca rezultat: « înţelegere », « inţelegere », « întelegere »...)',
 	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'asia',
-	'asterisque_terminale' => 'nu va întoarce nimic: asteriscul * trebuie să fie la final',
+	'asterisque_terminale' => 'nu va întoarce nimic: asteriscul * trebuie să fie la final', # MODIF
 	'aussi' => 'de asemenea',
 
 	// C

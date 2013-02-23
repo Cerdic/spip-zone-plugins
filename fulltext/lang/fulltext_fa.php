@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'آكسن‌ها در نظر گرفته نمي‌شوند  ( در فرانسه « déjà » يا « deja » نتايج يك ساني خواهند داشت،‌ از جمله: « déjà »،« dejà »،« déja »...) ',
 	'activer_indexation' => 'فعال‌سازي نمايه‌ي پرونده‌‌هاي @ext@',
 	'asie' => 'آسيا',
-	'asterisque_terminale' => 'هيج نتيجه‌‌اي ندارد: ستاره * بايد آخر باشد',
+	'asterisque_terminale' => 'هيج نتيجه‌‌اي ندارد: ستاره * بايد آخر باشد', # MODIF
 	'aussi' => 'نيز ',
 
 	// C
@@ -135,7 +135,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'utiliser_operateurs_logiques' => 'جستجو اوپراتور‌هاي استاندارد را استفاده مي‌كند.',
 
 	// V
-	'voir_doc_ptg' => 'ديدن سند‌هاي حفاظت شده'
+	'voir_doc_ptg' => 'ديدن سند‌هاي حفاظت شده' # MODIF
 );
 
 ?>

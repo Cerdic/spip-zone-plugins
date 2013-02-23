@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'Aksen dalam kata tidak akan diperhitungkan ("déjà" atau "deja", hasilnya akan sama saja, demikian pula dengan "déjà", "dejà", "déja"...)',
 	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'asia',
-	'asterisque_terminale' => 'tidak akan menghasilkan apa-apa: tanda bintang harus berada di akhir kata',
+	'asterisque_terminale' => 'tidak akan menghasilkan apa-apa: tanda bintang harus berada di akhir kata', # MODIF
 	'aussi' => 'juga',
 
 	// C

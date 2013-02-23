@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'Diakritika sa neberie do úvahy ("článok" alebo "clanok", vyhľadá rovnaký výsledok, to isté "článok", "članok", "clánok"...)',
 	'activer_indexation' => 'Aktivovať indexovanie súborov @ext@',
 	'asie' => 'Ázia',
-	'asterisque_terminale' => 'nevyhľadá žiadne výsledky: hviezdička musí byť na konci',
+	'asterisque_terminale' => 'nevyhľadá žiadne výsledky: hviezdička musí byť na konci', # MODIF
 	'aussi' => 'tiež',
 
 	// C
@@ -133,7 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'utiliser_operateurs_logiques' => 'Vyhľadávanie používa štandardné logické operátory ',
 
 	// V
-	'voir_doc_ptg' => 'Zobraziť chránené dokumenty'
+	'voir_doc_ptg' => 'Zobraziť chránené dokumenty' # MODIF
 );
 
 ?>

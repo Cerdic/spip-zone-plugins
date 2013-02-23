@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'Accenttegn spiller ingen rolle (idé eller ide vil give de samme resultater...)',
 	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'asien',
-	'asterisque_terminale' => 'vil ikke give resultat: man skal afslutte med stjernen (*)',
+	'asterisque_terminale' => 'vil ikke give resultat: man skal afslutte med stjernen (*)', # MODIF
 	'aussi' => 'også',
 
 	// C
