@@ -11,8 +11,8 @@ function action_informer_boussole_dist(){
 	// Securisation: argument attendu est l'alias de la boussole
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$alias = $securiser_action();
+	// TODO : en fait il faut l'alias et le prefixe
 
-	// Suppression de la boussole connue par son alias
 	if ($alias) {
 		// Acquerir la liste des boussoles prêtes à être diffusées
 		$boussoles = array();
@@ -21,25 +21,23 @@ function action_informer_boussole_dist(){
 		if ($boussoles) {
 			// Vérifier que la boussole demandée est bien disponible sur le serveur
 			if (in_array($alias, $boussoles)) {
-				// Identifier si la boussole demandée est fournie de façon complète (incluant les traductions dans
-				// le XML) ou minimale (les traductions sont dans les fichiers de langue)
-				if ($xml = find_in_path("boussole_traduite-${alias}.xml")) {
-					// XML avec traductions
-				}
-				elseif ($xml = find_in_path("boussole-${alias}.xml")) {
-					// XML sans traductions
-					// -- génération du fichier XML
-					include_spip('inc/filtres');
-					$versionner = charger_filtre('info_plugin');
-					$page = recuperer_fond('xml_boussole', array('alias' => $alias, 'xml' => $xml, 'version' => $versionner('BOUSSOLE', 'version')));
-					$x=$page;
+				// Si la boussole n'est pas encoe en cache on le crée
+				$xml = _DIR_VAR . "cache-boussoles/boussole-${alias}.xml"));
+				if (!file_exists($xml)) {
+					// Créer le cache
+					// TODO : ajouter la création du cache
 				}
 				else {
-					spip_log("ACTION INFORMER BOUSSOLE : alias = ". $alias, 'boussole' . _LOG_ERREUR);
+					$page = recuperer_fond('informer', array('alias' => $alias, 'xml' => $xml));
+					$x=$page;
+					spip_log("Information fournie sur la boussole d'alias = $alias", 'boussole' . _LOG_INFO);
 				}
-				spip_log("ACTION INFORMER BOUSSOLE : alias = ". $alias, 'boussole' . _LOG_INFO);
 			}
+			else
+				spip_log("Boussole non disponible sur ce serveur (alias = $alias)", 'boussole' . _LOG_ERREUR);
 		}
+		else
+			spip_log("Aucune boussole disponible sur ce serveur", 'boussole' . _LOG_ERREUR);
 	}
 }
 
