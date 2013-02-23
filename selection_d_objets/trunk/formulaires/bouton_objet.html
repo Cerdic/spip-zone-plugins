@@ -18,7 +18,9 @@
     <BOUCLE_affichage(SELECTION_OBJETS){id_objet}{statut ?}{objet}{objet_dest}>
         #SET{info_objet,#ENV{objets_choisies}|table_valeur{#ID_OBJET_DEST}}
         #SET{exclude,#GET{exclude}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_OBJET_DEST}}}
-        <li><a href="#URL_ECRIRE{#OBJET_DEST,id_#OBJET_DEST=#ID_OBJET_DEST}#selection_objets">
+        #SET{objet_dest,#OBJET_DEST}
+        [(#OBJET_DEST|=={document}|oui)#SET{objet_dest,document_edit}]
+        <li><a href="#URL_ECRIRE{#GET{objet_dest},id_#OBJET_DEST=#ID_OBJET_DEST}#selection_objets">
             [(#GET{info_objet}|table_valeur{titre})] [((#TYPE_LIEN|nom_type{#OBJET_DEST}))]
             </a>
              <a href="[(#URL_ACTION_AUTEUR{ranger,supprimer_ordre-[(#ENV{langue})]-[(#ID_OBJET)]-#OBJET-[(#OBJET_DEST)]-[(#ID_OBJET_DEST)],[(#SELF)]})]" class="ajax">

@@ -1,8 +1,8 @@
 #SET{objets,#ARRAY}
 #SET{objets_saisies,#LISTE{article,rubrique}}
 <BOUCLE_objets_liste(DATA){source tableau,#VAL|lister_tables_objets_sql}{par cle}{editable = oui}>
-    [(#VALEUR{page}|is_string|oui)
-        [(#SET{objets,#GET{objets}|array_merge{#ARRAY{#VALEUR{page},#VALEUR{texte_objets}|_T}}})]
+    [(#VALEUR{principale}|oui)
+        [(#SET{objets,#GET{objets}|array_merge{#ARRAY{#VALEUR{type},#VALEUR{texte_objets}|_T}}})]
     ]
 </BOUCLE_objets_liste>
 

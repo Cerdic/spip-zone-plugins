@@ -94,9 +94,11 @@ function tableau_objet($objet,$id_objet='',$champs='*',$where=array(),$filtrer=a
     if(is_array($d)){
         foreach($d as $r){
             if(!$r['titre']){
-                $r['titre']=$r['nom']?$r['nom']:($r['nom_site']?$r['nom_site']:'objet'.$r['id_'.$objet]);
-                unset($r['nom']);
-                unset($r['nom_site']);
+                if($objet=='document'){
+                    $fichier=explode('/',$r['fichier']);
+                    $r['titre']=$fichier[1];
+                    }
+                else $r['titre']=$r['nom']?$r['nom']:($r['nom_site']?$r['nom_site']:'objet'.$r['id_'.$objet]);
             }
             if(!$filtrer) $data[$r['id_'.$objet]]=$r;
             elseif(is_array($filtrer)){
@@ -128,12 +130,18 @@ function generer_modele($id_objet,$objet='article',$fichier='modeles_selection_o
     if(!$where)$where='id_'.$objet.'='.$id_objet;
     
     if(!$contexte=sql_fetsel('*',$table,$where))$contexte=array();
+    
+    //Filtrer les champs vides
+    foreach($env as $k=>$v){
+        if(!$v)unset($env[$k]);
+    }
+    
     if(!$cont=calculer_contexte())$cont=array();
-    if(is_array($env))$contexte= array_merge($contexte,$env,$cont);
+    if(is_array($env))$contexte= array_merge($cont,$contexte,$env);
 
     $contexte['objet']=$objet;
     $contexte['id_objet']=$id_objet; 
-    
+   
     if(!$exception_objet['objet'][$objet]){
         $contexte['titre']=$contexte['titre'];
         $contexte['champ_titre']='titre'; 
@@ -142,7 +150,15 @@ function generer_modele($id_objet,$objet='article',$fichier='modeles_selection_o
         $contexte['titre']=$contexte[$exception_objet['titre'][$objet]];
         $contexte['champ_titre']=$exception_objet['titre'][$objet]; 
         } 
+   
+    if(!$contexte['titre']){
+        if($objet=='document'){
+            $f=explode('/',$contexte['fichier']);
+            $contexte['titre']=$f[1];
+            }
+        else $contexte['titre']=$objet.'_'.$id_objet;
     
+    }
     //Chercher le logo correpsondant
     //Si il y a un logo Selection Objet
     $chercher_logo = charger_fonction('chercher_logo', 'inc');

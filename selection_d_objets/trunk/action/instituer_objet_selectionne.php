@@ -16,7 +16,11 @@ function action_instituer_objet_selectionne_dist($arg=null){
 	list($id_objet,$objet,$langue,$lang,$objet_dest,$id_objet_dest,$type_lien)=explode('-',$arg);
 
     if($langue)$langue=explode(',',$langue);
-    else $langue=array(sql_getfetsel('lang','spip_'.$objet_dest.'s','id_'.$objet_dest.'='.$id_objet_dest));
+    else{
+        $tables=lister_tables_objets_sql();
+        if($tables[$table]['field']['lang'])$langue=array(sql_getfetsel('lang','spip_'.$objet_dest.'s','id_'.$objet_dest.'='.$id_objet_dest));
+        else $langue=array();
+        }
 
 
         // si l'objet n'est pas définit par langue on l'enregistre pour chaque langue du site

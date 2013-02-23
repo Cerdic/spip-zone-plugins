@@ -73,7 +73,6 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
 
 /* @annotation: Actualisation de la base de donnée */
 function formulaires_bouton_objet_traiter_dist($id_objet,$objet,$langue,$lang='',$objet_dest='rubrique'){
-
     $valeurs=array();
     $id_objet_dest=_request('id_objet_dest');
     $instituer_objet=charger_fonction('instituer_objet_selectionne','action/');

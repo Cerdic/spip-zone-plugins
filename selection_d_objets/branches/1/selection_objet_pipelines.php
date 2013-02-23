@@ -5,6 +5,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function selection_objet_affiche_gauche($flux) {
     include_spip('inc/config');
     $objet = $flux["args"]["exec"];
+    /*Desactivé car il y a u problème  avec les cadres et block_depliables dans l'inclure
+     * //Exception pour les documents
+    if($objet=='document_edit')$objet='document' ;    */
     $args=$flux['args'];
     
     $objets_selection=lire_config('selection_objet/selection_rubrique_objet',array());
@@ -42,10 +45,12 @@ function selection_objet_affiche_gauche($flux) {
 function selection_objet_affiche_milieu ($flux="") {
     include_spip('inc/config');
     $objet = $flux["args"]["exec"];
+    //Exception pour les documents
+    if($objet=='document_edit')$objet='document' ;    
     $args=$flux["args"];
     $objets_cibles=lire_config('selection_objet/objets_cible',array());
     
-    
+
 
     if(in_array($objet,$objets_cibles)){
         //Les tables non conforme
@@ -69,8 +74,8 @@ function selection_objet_affiche_milieu ($flux="") {
            $contexte = array('id_objet_dest'=>$id_objet,'objet_dest'=>$objet,'champ_titre'=>$champ_titre);
             $tables=lister_tables_objets_sql();
            if($tables[$table]['field']['lang']) $contexte['langue']=array(sql_getfetsel('lang',$table,'id_'.$objet.'='.$id_objet));
-           else $contexte['langue']=array($args['lang']);
-            
+           elseif($objet!='document') $contexte['langue']=array($args['lang']);
+           else $contexte['langue']=array();
         if($objet=='rubrique'){
             if (!$trad_rub=test_plugin_actif('tradrub')) $contexte['langue']=explode(',',lire_config('langues_multilingue'));
             }

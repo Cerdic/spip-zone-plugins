@@ -11,8 +11,10 @@
         </td>
         <td class='statut'>[(#STATUT|puce_statut{selection_objet,#ID_SELECTION_OBJET})]</td> 
         <td class="titre">
-           [<a class="select"  href="[(#URL_ECRIRE{#OBJET}|parametre_url{id_#OBJET,#ID_OBJET})]">(#ENV{logo_objet}|image_reduire{25}|sinon{#ENV{logo_objet}|image_reduire{25}|inserer_attribut{class,spip_logos}}) </a>]
-            <a href="[(#URL_ECRIRE{#OBJET}|parametre_url{id_#OBJET,#ID_OBJET})]">[(#TITRE|sinon{#OBJET|info_objet{#ID_OBJET,#ENV{champ_titre}}})]</a>
+           #SET{objet,#OBJET}
+            [(#OBJET|=={document}|oui)#SET{objet,document_edit}]
+           [<a class="select"  href="[(#URL_ECRIRE{#GET{objet}}|parametre_url{id_#OBJET,#ID_OBJET})]">(#ENV{logo_objet}|image_reduire{25}|sinon{#ENV{logo_objet}|image_reduire{25}|inserer_attribut{class,spip_logos}}) </a>]
+            <a href="[(#URL_ECRIRE{#GET{objet}}|parametre_url{id_#OBJET,#ID_OBJET})]">[(#TITRE|sinon{#OBJET|info_objet{#ID_OBJET,#ENV{champ_titre}}})]</a>
             [((#TYPE_LIEN|nom_type{#OBJET_DEST}))]
         </td>
         <td class="arial1">[(#DATE|affdate)]</td>

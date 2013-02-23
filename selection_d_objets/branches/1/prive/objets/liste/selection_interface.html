@@ -10,5 +10,8 @@
     <INCLURE{fond=prive/objets/liste/inc-selection_interface,lang=#VALEUR,env,ajax=tableau_so}/>
     #FORMULAIRE_RECHERCHE_OBJETS{#OBJET_DEST,#ID_OBJET_DEST,#VALEUR}  
 </BOUCLE_langues>
+    <INCLURE{fond=prive/objets/liste/inc-selection_interface,env,ajax=tableau_so,lang='',langue=''}/>
+    #FORMULAIRE_RECHERCHE_OBJETS{#OBJET_DEST,#ID_OBJET_DEST}  
+<//B_langues>
 #BOITE_FERMER
 </div>
