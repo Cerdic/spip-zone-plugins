@@ -13,4 +13,6 @@
 
 	<auteur lien="http://blog.smellup.net/">Eric Lupinacci</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+
+	<pipeline nom="declarer_boussoles" inclure="bouspip_pipelines.php" />
 </paquet>
