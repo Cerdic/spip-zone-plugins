@@ -65,10 +65,8 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
 	}
 
 
-	$_table = str_replace('spip_', '', table_objet_sql($table));
-    // Ben. gros Hack on suppose que toutes les tables sont au pluriel : articles / rubriques ...
-    // Donc on enleve le s pour obtenir aticle et pas articles
-    $objet_delatable=substr($_table, 0, (strlen ($_table)) -1 );
+    $_table = table_objet($table);
+    $objet_delatable=objet_type($_table);
     //
 
 	$_id_table = id_table_objet($table);
