@@ -16,6 +16,8 @@
 	<BOUCLE_prod2(AUTEURS){tous}{id_auteur}><:amap:aucun_panier_produit_par_nom{nom=#NOM}:></BOUCLE_prod2>
 <//B_panier>
 <!-- responsable -->
+<B_responsable>
+<br />
 <BOUCLE_responsable(AMAP_RESPONSABLES){id_auteur=#SESSION{id_auteur}}{tous}{age<0}{0,1}>
 	<BOUCLE_aut2(AUTEURS){id_auteur}{tous}><a href="[(#URL_ECRIRE{panier_adherent}|parametre_url{id_auteur,#ID_AUTEUR})]"><:amap:les_responsabilites{nom=#NOM}:></a>
 		(<BOUCLE_totalpanier_respo(AMAP_RESPONSABLES){id_auteur}{age<0} />#TOTAL_BOUCLE<//B_totalpanier_respo>)
