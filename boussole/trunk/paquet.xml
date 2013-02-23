@@ -1,10 +1,10 @@
 <paquet
 	prefix="boussole"
 	categorie="navigation"
-	version="1.0.3"
-	etat="stable"
+	version="2.0.0"
+	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="prive/themes/spip/images/boussole_logo-64.png"
+	logo="boussole_logo-64.png"
 	schema="0.1"
 	documentation="http://www.spip-contrib.net/Boussole,3688"
 >	
@@ -16,10 +16,11 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
 
+	<pipeline nom="declarer_boussoles" action="" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/boussole_declarer.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/boussole_declarer.php" />
 	<pipeline nom="affiche_milieu" inclure="boussole_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="genie/boussole_taches_generales_cron.php" />
 
-	<menu nom="boussole" titre="boussole:bouton_boussole" parent="bando_squelette" icone="images/boussole_logo-16.png" action="boussoles" />
+	<menu nom="boussole" titre="boussole:bouton_boussole" parent="bando_squelette" icone="images/boussole-16.png" action="boussoles" />
 </paquet>

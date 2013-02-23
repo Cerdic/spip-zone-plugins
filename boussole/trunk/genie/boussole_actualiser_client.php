@@ -1,7 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function genie_boussole_spip_actualiser_dist($last) {
+function genie_boussole_actualiser_client_dist($last) {
 
 	include_spip('inc/utils');
 	include_spip('inc/deboussoler');

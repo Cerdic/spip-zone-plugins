@@ -7,7 +7,7 @@
 <!ELEMENT boussole groupe+>
 <!ATTLIST boussole
 	alias %NAME; #REQUIRED
-	version %VNUM; #REQUIRED
+	version %VNUM; #IMPLIED
 	demo %URI; #IMPLIED
 >
 
