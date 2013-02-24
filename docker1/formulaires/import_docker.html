@@ -1,0 +1,32 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id,nouveau})]">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+      <form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+         [(#REM) declarer les hidden qui declencheront le service du formulaire 
+         parametre : url d'action ]
+         #ACTION_FORMULAIRE{#ENV{action}}
+         
+         <fieldset>
+		<h3 class='legend'><:docker:docker_description:></h3>
+			<ul>
+				<li>
+					<label for="id_rubrique"><:docker:id_rubrique:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{id_rubrique})</span>]
+					<p class='explication'>
+						<:docker:entrer_id_rubrique:><br />
+					</p>
+					<input type="text" name="id_rubrique" class="text" value = "#ENV{id_rubrique}" id="id_rubrique" />
+				</li>
+			</ul>
+	</fieldset>
+	
+	[(#INCLURE{fond=prive/liste/documents_distants, env, id_rubrique=#ENV{id_rubrique}})]
+         
+         <p class="boutons">
+            <span class="image_loading">&nbsp;</span>
+            <input type="submit" class="submit" value="<:docker:docker_lancer_importation:>" />
+         </p>
+      </div></form>
+</div>
