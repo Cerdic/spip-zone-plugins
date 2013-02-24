@@ -1,0 +1,38 @@
+<B_liste_docs>
+#ANCRE_PAGINATION
+<div class="liste-elements liste-objets documents">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:info_tous_documents_distants:>}) ([(#GRAND_TOTAL)])</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:afficher_objets:info_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_document,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+
+	<BOUCLE_liste_docs(DOCUMENTS){distant=oui}{id_article?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='info'>			
+			[(#DISTANT|=={oui}|non)#SET{missing,#FICHIER|file_exists|non}]
+			[(#GET{missing}|oui)<img src='#CHEMIN{images/document-manquant-24.png}' width='22' height='22' alt='<:medias:fichier_manquant:>' title='<:medias:fichier_manquant:>' />]
+			[(#DISTANT|=={oui}|oui)<img src='#CHEMIN{images/document-distant-24.png}' width='22' height='22' alt='<:medias:fichier_distant:>'title='<:medias:fichier_distant:>'/>]
+			</td>
+			<td class='titre'>[(#LOGO_DOCUMENT||image_reduire{20,26})]<a href="[(#ID_DOCUMENT|generer_url_entite{document})]">[(#TITRE|sinon{#FICHIER**})]</a></td>
+			<td class='date'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='id'>[(#AUTORISER{modifier,document,#ID_DOCUMENT}|?{
+				<a href="[(#URL_ECRIRE{documents_edit,id_document=#ID_DOCUMENT})]">#ID_DOCUMENT</a>,
+				#ID_DOCUMENT
+			})]</td>
+		</tr>
+	</BOUCLE_liste_docs>
+
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_docs>
+<div class="liste-elements liste-objets documents caption-wrap"><strong class="caption"><:docker:aucun_document_distant:></strong></div>
+<//B_liste_docs>

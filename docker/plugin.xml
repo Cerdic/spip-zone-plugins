@@ -1,0 +1,26 @@
+<plugin>
+	<nom>Docker</nom>
+	<auteur>[Elastick.net->http://elastick.net]</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1.0</version>
+	<etat>dev</etat>
+	<slogan>Docker importe vos docs distants</slogan>
+	<description>Interface pour l'importation de documents distants. voir <code>?page=dockers</code></description>
+	<icon>images/docker-128.png</icon>
+	<categorie>outil</categorie>
+	<traduire gestionnaire="salvatore" module="docker" reference="fr" />
+	
+    <bouton id='docker' parent='configuration'>
+		<icone>images/docker-24.png</icone>
+		<titre>import_docker</titre>
+	</bouton>
+	<bouton id='docker2' parent='bando_configuration'>
+		<icone>images/docker-16.png</icone>
+		<titre>docker</titre>
+		<url>import_docker</url>
+	</bouton>
+    
+	<prefix>docker</prefix>
+	
+    <necessite id="SPIP" version="[2.1.8;3.0.99]" />
+</plugin>
