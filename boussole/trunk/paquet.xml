@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="boussole_logo-64.png"
-	schema="0.1"
+	schema="0.2"
 	documentation="http://www.spip-contrib.net/Boussole,3688"
 >	
 
