@@ -131,9 +131,14 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 }
 
 function cache_cool_flush($content){
-	header("Content-Length: ".($l=ob_get_length()));
-	header("Connection: close");
-	spip_log("Connection: close (length $l)",'cachecool'._LOG_DEBUG);
+	// on coupe la connection si il y a des caches a calculer
+	// (mais dommage car on perd le benefice de KeepAlive=on)
+	if (is_array($GLOBALS['cache_cool_queue']) AND $n=count($GLOBALS['cache_cool_queue'])){
+		header("X-Cache-Cool: $n");
+		header("Content-Length: ".($l=ob_get_length()));
+		header("Connection: close");
+		spip_log("Connection: close (length $l)",'cachecool'._LOG_DEBUG);
+	}
 	return $content;
 }
 
