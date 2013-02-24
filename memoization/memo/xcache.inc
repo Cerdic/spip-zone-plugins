@@ -2,7 +2,7 @@
 
 # http://xcache.lighttpd.net/wiki/XcacheApi
 if (!defined('_CACHE_NAMESPACE'))
-	define('_CACHE_NAMESPACE', $_SERVER['HTTP_HOST'].':');
+	define('_CACHE_NAMESPACE', $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].":");
 if (!defined('_LOCK_MAX'))
 	define('_LOCK_MAX', 30); # max lock time (seconds)
 

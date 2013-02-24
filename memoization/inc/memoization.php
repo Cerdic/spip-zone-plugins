@@ -110,7 +110,7 @@ if (!isset($GLOBALS['meta']['cache_namespace'])){
 	ecrire_meta('cache_namespace', dechex(crc32($_SERVER["DOCUMENT_ROOT"] . $_SERVER["SERVER_SIGNATURE"] . creer_uniqid())), 'non');
 }
 if (!defined('_CACHE_NAMESPACE'))
-	define('_CACHE_NAMESPACE', $_SERVER['HTTP_HOST'].':'.$GLOBALS['meta']['cache_namespace'].':');
+	define('_CACHE_NAMESPACE', $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].':'.$GLOBALS['meta']['cache_namespace'].':');
 
 global $Memoization;
 

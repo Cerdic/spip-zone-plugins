@@ -3,7 +3,7 @@
 # http://bart.eaccelerator.net/doc/phpdoc/eAccelerator/_shared_memory_php.html
 
 if (!defined('_CACHE_NAMESPACE'))
-	define('_CACHE_NAMESPACE', $_SERVER['HTTP_HOST'].':');
+	define('_CACHE_NAMESPACE', $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].":");
 
 class MCacheBackend_eaccelerator extends MCacheBackend {
 
