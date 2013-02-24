@@ -1,0 +1,24 @@
+<paquet
+	prefix="rubriquepreferee"
+	categorie="navigation"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.*]"
+	logo="images/rubriquepreferee-32.png"
+	schema="0.1"
+	documentation="http://www.spip-contrib.net/Rubrique-preferee"
+>	
+
+	<nom>Rubrique pr&#233;f&#233;r&#233;e</nom>
+	<!-- Associer une rubrique à un auteur -->
+
+	<auteur>Yffic</auteur>
+
+	<pipeline nom="declarer_champs_extras" inclure="rubriquepreferee_administrations.php" />
+
+	<necessite nom="saisies" compatibilite="[1.30.0;[" />
+	<necessite nom="spip_bonux" compatibilite="[3.0.4;[" />
+	<necessite nom="cextras" compatibilite="[3.2.3;[" />
+
+	<utilise nom="aveline" compatibilite="[1.7.0;[" />
+</paquet>

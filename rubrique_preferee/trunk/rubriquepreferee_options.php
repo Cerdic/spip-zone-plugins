@@ -2,26 +2,27 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-/**
- * Surcharge de inc_article_select_dist afin de d�terminer correctement la rubrique initiale si elle est nulle
- * Appelle inc_article_select_dist en ayant renseign� $id_rubrique avec l'id de la rubrique preferee si c'est renseign�
- * sinon la premiere rubrique que l'auteur administre (donc dans laquelle il peut publier)
+ /**
+ * Surcharge de inc_preselectionner_parent_nouvel_objet_dist lors de la création d'un article si la rubrique n'est pas définie
+ * Renvoie l'id de la rubrique preférée si renseigné pour l'auteur en cours, sinon la première rubrique que l'auteur administre (donc dans laquelle il peut publier)
+ *
+ * @param string $objet
+ * @param array $row
+ * @return string
  */
-function inc_article_select($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0) {
-
-	// Si nouvel article et pas de rubrique
-	if (!is_numeric($id_article) && !$id_rubrique) {
-	   $qui = $GLOBALS['visiteur_session'] ? $GLOBALS['visiteur_session'] : array('statut' => '', 'id_auteur' =>0, 'webmestre' => 'non');
+function inc_preselectionner_parent_nouvel_objet($objet, $row){
+	if ($objet == 'article') {
+		$qui = $GLOBALS['visiteur_session'] ? $GLOBALS['visiteur_session'] : array('statut' => '', 'id_auteur' =>0, 'webmestre' => 'non');
 		include_spip('inc/autoriser');
 		$qui['restreint'] = liste_rubriques_auteur($qui['id_auteur']);
-
 		$res = sql_select("rubrique_preferee", "spip_auteurs", "id_auteur=".$qui['id_auteur']);
 		$id_rubrique = reset(picker_selected(sql_fetch($res),"rubrique"));
 		$id_rubrique = $id_rubrique ? $id_rubrique : reset($qui['restreint']);
+		return $id_rubrique;
+	} else {
+		include_spip('inc/preselectionner_parent_nouvel_objet');
+		return(inc_preselectionner_parent_nouvel_objet_dist($objet, $row));
 	}
-
-	include_spip('inc/article_select');
-	return(inc_article_select_dist($id_article, $id_rubrique, $lier_trad, $id_version));
 }
 
 
