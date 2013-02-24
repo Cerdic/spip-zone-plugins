@@ -1,0 +1,24 @@
+<plugin>
+	<nom>Rubrique pr&#233;f&#233;r&#233;e</nom>
+	<slogan>Associer une rubrique &#224; un auteur</slogan>
+	<auteur>Yffic</auteur>
+	<version>0.3.0</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<description>Ce plugin permet de d&#233;finir une rubrique pr&#233;f&#233;r&#233;e pour chaque auteur... D&#232;s qu'il lancera la cr&#233;ation d'un article, la rubrique par d&#233;faut propos&#233;e sera cette rubrique pr&#233;f&#233;r&#233;e (s'il ne se trouve pas d&#233;j&#224; dans une rubrique), sinon, la premi&#232;re rubrique dans laquelle il est autoris&#233; &#224; publier, sinon, fonctionnement par d&#233;faut de Spip</description>
+	<icon>images/rubriquepreferee-32.png</icon>
+	<prefix>rubriquepreferee</prefix>
+   <lien>http://www.spip-contrib.net/Rubrique-preferee</lien>
+	<options>rubriquepreferee_options.php</options>
+	<install>base/rubriquepreferee_install.php</install>
+	<pipeline>
+		<nom>declarer_champs_extras</nom>
+		<inclure>base/rubriquepreferee_install.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="saisies" version="[1.1;]" />
+	<necessite id="spip_bonux" version="[1.8;]" />
+	<necessite id="cextras" version="[0.7;]" />
+	<utilise id="aveline" version="[1.7.0;]" />
+	<categorie>navigation</categorie>
+</plugin>
