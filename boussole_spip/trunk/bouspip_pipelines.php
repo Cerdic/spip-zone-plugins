@@ -10,8 +10,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return $flux
  */
 function bouspip_declarer_boussoles($flux) {
-	$flux['bouspip'] = "spip";
-
+	$flux['spip'] = "bouspip";
 	return $flux;
 }
 
