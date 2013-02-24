@@ -18,7 +18,6 @@
 	<pipeline nom="declarer_champs_extras" inclure="rubriquepreferee_administrations.php" />
 
 	<necessite nom="saisies" compatibilite="[1.30.0;[" />
-	<necessite nom="spip_bonux" compatibilite="[3.0.4;[" />
 	<necessite nom="cextras" compatibilite="[3.2.3;[" />
 
 	<utilise nom="aveline" compatibilite="[1.7.0;[" />
