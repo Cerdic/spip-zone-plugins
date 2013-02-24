@@ -10,6 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_document_distant'=>'Il n\'existe aucun document distant à importer!',
 'id_rubrique'=>'Numéro de la rubrique (option)',
 'docker_lancer_importation'=>'Lancer l\'importation',
+'liste_documents_distants'=>'Liste des documents distants',
+'info_tous_documents_distants'=>'Documents distants',
 );
 
 ?>
