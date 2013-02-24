@@ -4,7 +4,7 @@
 	<auteur>Yffic</auteur>
 	<version>0.3.0</version>
 	<version_base>0.1</version_base>
-	<etat>dev</etat>
+	<etat>stable</etat>
 	<description>Ce plugin permet de d&#233;finir une rubrique pr&#233;f&#233;r&#233;e pour chaque auteur... D&#232;s qu'il lancera la cr&#233;ation d'un article, la rubrique par d&#233;faut propos&#233;e sera cette rubrique pr&#233;f&#233;r&#233;e (s'il ne se trouve pas d&#233;j&#224; dans une rubrique), sinon, la premi&#232;re rubrique dans laquelle il est autoris&#233; &#224; publier, sinon, fonctionnement par d&#233;faut de Spip</description>
 	<icon>images/rubriquepreferee-32.png</icon>
 	<prefix>rubriquepreferee</prefix>

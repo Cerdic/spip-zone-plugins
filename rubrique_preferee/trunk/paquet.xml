@@ -2,7 +2,7 @@
 	prefix="rubriquepreferee"
 	categorie="navigation"
 	version="1.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.*]"
 	logo="images/rubriquepreferee-32.png"
 	schema="0.1"
