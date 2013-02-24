@@ -12,21 +12,25 @@
  * @return Array Liste d'objet et quelques définitions (titre, exec)
 **/
 function liste_objets_coordonnees($quoi = '') {
-	$liste = array(
-		'auteur'       => array('titre'=>_T('ecrire:info_auteurs'),      'exec'=>'auteur_infos'),
-		'article'      => array('titre'=>_T('ecrire:info_articles_2'),     'exec'=>'articles'),
-		'rubrique'     => array('titre'=>_T('ecrire:info_rubriques'),    'exec'=>'naviguer'),
-		'breve'        => array('titre'=>_T('breves:breves'),    'exec'=>'breves_edit'),
-		'site'         => array('titre'=>_T('sites:titre_page_sites_tous'),    'exec'=>'sites'),
-	);
-#	if ( test_plugin_actif('AGENDA') ) // Agenda 2
-#		$liste['evenement'] = array('titre'=>_T('agenda:evenements'),    'exec'=>'evenements_edit'); // ca marche, mais comme les evenements sont obligatoirement lies a un article et qu'ils ont des repetitions, il vaut mieux lier le contact directement a l'article
-	if ( test_plugin_actif('CONTACTS') ) { // Contacts & Organisations
-		$liste['contact'] = array('titre'=>_T('contacts:bouton_contacts'),     'exec'=>'contact');
-		$liste['organisation'] = array('titre'=>_T('contacts:bouton_organisations'),'exec'=>'organisation');
-	}
 
-	$liste = pipeline('objets_coordonnables', $liste);
+	$liste = lister_tables_objets_sql(); // tableau de donnees de TOUTES les tables...
+	$deliste = array('spip_adresses', 'spip_emails','spip_numeros', 'spip_pays', 'spip_documents', 'spip_messages'); // ...donc on retire ceux du plugin coordonnees ! ...ainsi que ceux de : pays requis (revoir sa declaration pour ne pas avoir a faire ceci), documents (comme pays n'a pas de page de vue) et messages (ca fait etrange, tout comme les mots-cles et groupes de mots-cles...)
+	for($i=0; $i<6; $i++) {
+		// http://stackoverflow.com/questions/12633877/how-to-unset-multiple-variables
+		unset($liste[$deliste[$i]]);
+	} /// @ToDo: on peut passer directement la liste a unset a partir de PHP 4.0.1
+	foreach ($liste as $tab=>$inf) {
+		if (!$liste[$tab]['principale'] OR !$liste[$tab]['editable']) {
+			// on ne prendra pas en compte les objets non editables...
+			// (ceci vire donc spip_forum spip_petitions spip_signatures spip_syndic_articles spip_depots spip_plugins spip_paquets etc.)
+			unset($liste[$tab]);
+		} else {
+			$type = $liste[$tab]['type'];
+			$liste[$type] = $liste[$tab]; // le plugin-ci utilise comme cle le type d'objet alors que le tableau renvoye a comme cle le nom de table, donc on recree l'entree...
+			unset($liste[$tab]); // ...et on supprime l'ancienne entree histoire de ne pas allourdir le tableau en memoire
+			$liste[$type]['titre'] = _T($liste[$type]['texte_objet']); // on rajoute le titre traduit pour etre affiche par la configuration (je ne sais pas utiliser directement "texte_objet")
+		}
+	}
 
 	if (!$quoi) {
 		return $liste;
@@ -43,29 +47,26 @@ function liste_objets_coordonnees($quoi = '') {
 
 /**
  * Ajout des informations de coordonnées (adresses, mails, numéros)
- * sur la page de visualisation d'un auteur
+ * sur la page de visualisation d'un objet
 **/
 function coordonnees_affiche_milieu($flux) {
 
 	$exec = isset($flux['args']['exec']) ? $flux['args']['exec'] : _request('exec');
 
 
-		$objet_exec = trouver_objet_exec($exec);
+	$objet_exec = trouver_objet_exec($exec);
 
-		// pas en édition
-		if ($objet_exec['edition']) {
-			return $flux;
-		}
+	// pas en édition
+	if ($objet_exec['edition']) {
+		return $flux;
+	}
 
-		// recuperation de l'id
-		$_id = $objet_exec['id_table_objet'];
-		// type d'objet
-		$type = $objet_exec['type'];
-
-
-
-	$liste = liste_objets_coordonnees('exec');
-	$ok = false;
+	// recuperation de l'id
+	$_id = $objet_exec['id_table_objet'];
+	// type d'objet
+	$type = $objet_exec['type'];
+	// liste des exec de visualisation pour les objets declares
+	$liste = liste_objets_coordonnees('url_voir');
 
 	if (isset($type) and isset($liste[$type])){
 		// c'est un exec que l'on peut afficher
