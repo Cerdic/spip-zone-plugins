@@ -13,6 +13,7 @@
 	<!-- Associer une rubrique à un auteur -->
 
 	<auteur>Yffic</auteur>
+	<auteur>b_b</auteur>
 
 	<pipeline nom="declarer_champs_extras" inclure="rubriquepreferee_administrations.php" />
 
