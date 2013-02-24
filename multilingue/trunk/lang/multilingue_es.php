@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'afficher_menu_select' => 'Muestra el menú desplegable (select)',
+	'afficher_menu_select' => 'Mostrar el menú desplegable (seleccionar)',
 
 	// D
 	'desactiver_traduction_logo_objet' => 'Désactiver la possibilité que la balise #LOGO_OBJET inclut le logo de l\'objet d\'origine s\'elle ne trouve pas de logo pour l\'objet en question', # NEW
