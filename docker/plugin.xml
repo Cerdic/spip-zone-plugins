@@ -2,14 +2,14 @@
 	<nom>Docker</nom>
 	<auteur>[Elastick.net->http://elastick.net]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<etat>dev</etat>
 	<slogan>Docker importe vos docs distants</slogan>
 	<description>Interface pour l'importation de documents distants. voir <code>?page=dockers</code></description>
 	<icon>images/docker-128.png</icon>
 	<categorie>outil</categorie>
 	<traduire gestionnaire="salvatore" module="docker" reference="fr" />
-	
+	<lien>http://www.spip-contrib.net/4334</lien>
     <bouton id='docker' parent='configuration'>
 		<icone>images/docker-24.png</icone>
 		<titre>import_docker</titre>
