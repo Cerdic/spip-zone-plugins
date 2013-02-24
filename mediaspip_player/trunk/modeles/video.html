@@ -138,6 +138,7 @@
 	]
 </div>
 <script type="text/javascript">
+(function($) {
 	var ms_player_init_[(#GET{id_document_voir})] = function(){
 		if($('#video_[(#GET{id_document_voir})]').parent('.media_wrapper').size() == 0){
 			$('#video_[(#GET{id_document_voir})]').ms_player_init({
@@ -157,9 +158,10 @@
 			});
 		}
 	}
-	jQuery(document).ready(function(){
+	$(function(){
 		ms_player_init_#GET{id_document_voir}();
 		onAjaxLoad(function(){setTimeout(function(){ms_player_init_#GET{id_document_voir}();},500)});
 	});
+})(jQuery);
 </script>
 </BOUCLE_si_id>
