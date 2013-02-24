@@ -18,6 +18,9 @@ function liste_objets_coordonnees($quoi = '') {
 		'rubrique'     => array('titre'=>_T('ecrire:info_rubriques'),    'exec'=>'naviguer'),
 		'breve'     => array('titre'=>_T('ecrire:info_breves_03'),    'exec'=>'breves_edit'),
 		'site'     => array('titre'=>_T('ecrire:titre_page_sites_tous'),    'exec'=>'sites'),
+		'mot'     => array('titre'=>_T('ecrire:mots_clef'),    'exec'=>'mots_edit'),
+		'groupe_mots'     => array('titre'=>_T('spip:icone_mots_cles'),    'exec'=>'mots_tous'),
+#		'message'     => array('titre'=>_T('spip:icone_messagerie_personnelle'),    'exec'=>'message'),
 	);
 #	if ( test_plugin_actif('AGENDA') ) // Agenda 2
 #		$liste['evenement'] = array('titre'=>_T('agenda:evenements'),    'exec'=>'evenements_edit'); // ca marche, mais comme les evenements sont obligatoirement lies a un article et qu'ils ont des repetitions, il vaut mieux lier le contact directement a l'article
@@ -49,40 +52,11 @@ function coordonnees_affiche_milieu($flux) {
 
 	$exec = isset($flux['args']['exec']) ? $flux['args']['exec'] : _request('exec');
 
-	// SPIP 3
-	if (function_exists('trouver_objet_exec')) {
-		$objet_exec = trouver_objet_exec($exec);
-
-		// pas en édition
-		if ($objet_exec['edition']) {
-			return $flux;
-		}
-
-		// recuperation de l'id
-		$_id = $objet_exec['id_table_objet'];
-		// type d'objet
-		$type = $objet_exec['type'];
-
-	}
-
 	$liste = liste_objets_coordonnees('exec');
-	$ok = false;
 
-	// SPIP 3
-	if (isset($type) and isset($liste[$type])) {
-		// c'est bon
-		$ok = true;
-
-	// SPIP 2.x
-	} else {
-		$liste = array_flip($liste);
-		if (isset($liste[$exec])) {
-			$type = $liste[$exec];
-			$ok = true;
-		}
-	}
-
-	if ($ok) {
+	$liste = array_flip($liste);
+	if (isset($liste[$exec])) {
+		$type = $liste[$exec];
 		// c'est un exec que l'on peut afficher
 		// verifions qu'il est coche dans la conf
 		$conf = unserialize($GLOBALS['meta']['coordonnees']);
@@ -97,7 +71,8 @@ function coordonnees_affiche_milieu($flux) {
 				include_spip('inc/presentation');
 				$contexte = array(
 					'objet' => $type,
-					'id_objet' => $id
+					'id_objet' => $id,
+					"id_$type" => _request("id_$type"),
 				);
 				$flux['data'] .= recuperer_fond('prive/boite/coordonnees', $contexte, array('ajax'=>true));
 			}

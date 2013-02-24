@@ -9,16 +9,12 @@
  * Informations sur les objets où peut s'appliquer les coordonnees
  *
  * @param String $quoi info que l'on veut recuperer (sinon tout le tableau)
- * @return Array Liste d'objet et quelques définitions (titre, exec)
+ * @return Array Liste d'objet et quelques définitions (titre, url_voir)
 **/
 function liste_objets_coordonnees($quoi = '') {
 
 	$liste = lister_tables_objets_sql(); // tableau de donnees de TOUTES les tables...
-	$deliste = array('spip_adresses', 'spip_emails','spip_numeros', 'spip_pays', 'spip_documents', 'spip_messages'); // ...donc on retire ceux du plugin coordonnees ! ...ainsi que ceux de : pays requis (revoir sa declaration pour ne pas avoir a faire ceci), documents (comme pays n'a pas de page de vue) et messages (ca fait etrange, tout comme les mots-cles et groupes de mots-cles...)
-	for($i=0; $i<6; $i++) {
-		// http://stackoverflow.com/questions/12633877/how-to-unset-multiple-variables
-		unset($liste[$deliste[$i]]);
-	} /// @ToDo: on peut passer directement la liste a unset a partir de PHP 4.0.1
+	unset($liste['spip_adresses'], $liste['spip_emails'], $liste['spip_numeros'], $liste['spip_pays'], $liste['spip_documents'], $liste['spip_messages']); // ...donc on retire ceux du plugin coordonnees ! ...ainsi que ceux de : pays requis (revoir sa declaration pour ne pas avoir a faire ceci), documents (comme pays n'a pas de page de vue) et messages (ca fait etrange, tout comme les mots-cles et groupes de mots-cles...)
 	foreach ($liste as $tab=>$inf) {
 		if (!$liste[$tab]['principale'] OR !$liste[$tab]['editable']) {
 			// on ne prendra pas en compte les objets non editables...
