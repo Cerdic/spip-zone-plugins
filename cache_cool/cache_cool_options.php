@@ -134,28 +134,68 @@ function cache_cool_flush($content){
 	// on coupe la connection si il y a des caches a calculer
 	// (mais dommage car on perd le benefice de KeepAlive=on)
 	if (is_array($GLOBALS['cache_cool_queue']) AND $n=count($GLOBALS['cache_cool_queue'])){
-		header("X-Cache-Cool: $n");
-		header("Content-Length: ".($l=ob_get_length()));
-		header("Connection: close");
-		spip_log("Connection: close (length $l)",'cachecool'._LOG_DEBUG);
+		$close = true;
+		if (defined('_DIR_PLUGIN_MEMOIZATION')){
+			#spip_log('meta cache_cool_action_refresh : '.$GLOBALS['meta']['cache_cool_action_refresh'],'cachecool'._LOG_DEBUG);
+			if (!isset($GLOBALS['meta']['cache_cool_action_refresh']) OR $GLOBALS['meta']['cache_cool_action_refresh']<$_SERVER['REQUEST_TIME']-86400){
+				if (!isset($GLOBALS['meta']['cache_cool_action_refresh_test']) OR $GLOBALS['meta']['cache_cool_action_refresh_test']<$_SERVER['REQUEST_TIME']-86400){
+					ecrire_meta('cache_cool_action_refresh_test',$_SERVER['REQUEST_TIME']);
+					$url = generer_url_action('cache_cool_refresh','',true);
+					if (strncmp($url,'http',4)!==0){
+						if (!function_exists('url_absolue')) include_spip('inc/filtres_mini');
+						$url = url_absolue($url);
+					}
+					cache_cool_async_curl($url);
+					spip_log("Test mise a jour cache async $url",'cachecool'._LOG_DEBUG);
+				}
+			}
+			else{
+				if (!function_exists('cache_set')) include_spip('inc/memoization');
+				$id = md5($GLOBALS['ip'].self().@getmypid().time().serialize($GLOBALS['visiteur_session']));
+				if (cache_set("cachecool-$id",$GLOBALS['cache_cool_queue'])){
+					$url = generer_url_action('cache_cool_refresh',"id=$id",true);
+					if (strncmp($url,'http',4)!==0){
+						if (!function_exists('url_absolue')) include_spip('inc/filtres_mini');
+						$url = url_absolue($url);
+					}
+					if (cache_cool_async_curl($url)){
+						unset($GLOBALS['cache_cool_queue']);
+						$close = false;
+						spip_log("Mise a jour $n cache lancee en async sur $url",'cachecool'._LOG_DEBUG);
+					}
+				}
+				else
+					spip_log("cache_set('cachecool-$id') return false",'cachecool');
+			}
+		}
+		if ($close){
+			header("X-Cache-Cool: $n");
+			header("Content-Length: ".($l=ob_get_length()));
+			header("Connection: close");
+			spip_log("Connection: close (length $l) ($n cache a calculer)",'cachecool'._LOG_DEBUG);
+		}
 	}
 	return $content;
 }
 
-function cache_cool_process(){
-	// forcer le flush des tampons pas envoyes (complete le content-length/conection:close envoye dans cache_cool_flush)
-	ob_end_flush();
-	flush();
-	if (function_exists('fastcgi_finish_request'))
-		fastcgi_finish_request();
+function cache_cool_process($force=false){
+	if (isset($GLOBALS['cache_cool_queue']) AND is_array($GLOBALS['cache_cool_queue'])){
+	  // se remettre dans le bon dossier, car Apache le change parfois (toujours?)
+		chdir(_ROOT_CWD);
+		if (!$force){
+			$flush_level = ob_get_level();
+			// forcer le flush des tampons pas envoyes (declenche le content-length/conection:close envoye dans cache_cool_flush)
+			while ($flush_level--) ob_end_flush();
+			flush();
+			if (function_exists('fastcgi_finish_request'))
+				fastcgi_finish_request();
+		}
 
-  // se remettre dans le bon dossier, car Apache le change parfois (toujours?)
-	chdir(_ROOT_CWD);
-
-	while (is_array($GLOBALS['cache_cool_queue'])
-		AND $args = array_shift($GLOBALS['cache_cool_queue'])){
-		spip_log("calcul en fin de hit public_produire_page($args[0],$args[1],$args[2],$args[3],$args[4],$args[5],$args[6],$args[7],$args[8],$args[9])",'cachecool'._LOG_DEBUG);
-		public_produire_page($args[0],$args[1],$args[2],$args[3],$args[4],$args[5],$args[6],$args[7],$args[8],$args[9]);
+		while (is_array($GLOBALS['cache_cool_queue'])
+			AND $args = array_shift($GLOBALS['cache_cool_queue'])){
+			spip_log("calcul en fin de hit public_produire_page($args[0],$args[1],$args[2],$args[3],$args[4],$args[5],$args[6],$args[7],$args[8],$args[9])",'cachecool'._LOG_DEBUG);
+			public_produire_page($args[0],$args[1],$args[2],$args[3],$args[4],$args[5],$args[6],$args[7],$args[8],$args[9]);
+		}
 	}
 }
 
@@ -259,5 +299,38 @@ function cache_cool_set_global_contexte($c){
 		) as $k1=>$k2){
 		$GLOBALS[$k1] = $GLOBALS[$k2];
 	}
+}
+
+function cache_cool_async_curl($url){
+	// Si fsockopen est possible, on lance l'url via un socket
+	// en asynchrone
+	if(function_exists('fsockopen')){
+		$parts=parse_url($url);
+		$fp = @fsockopen($parts['host'],isset($parts['port'])?$parts['port']:80,$errno, $errstr, 30);
+		if ($fp) {
+			$query = $parts['path'].($parts['query']?"?".$parts['query']:"");
+			$out = "GET ".$query." HTTP/1.1\r\n";
+			$out.= "Host: ".$parts['host']."\r\n";
+			$out.= "Connection: Close\r\n\r\n";
+			fwrite($fp, $out);
+			fclose($fp);
+			return true;
+		}
+	}
+
+	// ici lancer le cron par un CURL asynchrone si CURL est present
+	if (function_exists("curl_init")){
+		//setting the curl parameters.
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		// cf bug : http://www.php.net/manual/en/function.curl-setopt.php#104597
+		curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
+		// valeur mini pour que la requete soit lancee
+		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 100);
+		curl_exec($ch);
+		curl_close($ch);
+		return true;
+	}
+	return false;
 }
 ?>
