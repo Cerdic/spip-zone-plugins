@@ -1,0 +1,28 @@
+<BOUCLE_feedback(FEEDBACKS){id_feedback=#ENV{id}}{statut==.*}{!lang_select}>
+<div class='infos'>
+<div class='numero'><:feedback:info_gauche_numero_feedback:><p>#ID_FEEDBACK</p></div>
+
+#FORMULAIRE_INSTITUER_OBJET{feedback,#ID_FEEDBACK}
+
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publiee(FEEDBACKS){id_feedback}>
+	[(#VAL{redirect}
+		|generer_url_action{type=feedback&id=#ID_FEEDBACK}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publiee>
+	[(#AUTORISER{previsualiser,feedback,#ID_FEEDBACK,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=feedback&id=#ID_FEEDBACK}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publiee>
+
+</div>
+</BOUCLE_feedback>

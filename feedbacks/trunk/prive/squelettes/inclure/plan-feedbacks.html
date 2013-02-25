@@ -1,0 +1,15 @@
+#SET{nomp,sitrub#ID_RUBRIQUE}
+#SET{nb,50}
+<B_feedback>
+	<div class="menu">
+	<h4><:feedback:feedback:></h4>
+	[<p class="pagination">[<em>(#VAL{feedback}|objet_info{texte_objets}|_T)</em>](#PAGINATION{prive})</p>]
+	<ul class="menu-items feedback">
+		<BOUCLE_feedback(FEEDBACKS) {id_rubrique} {par date}{inverse}{statut==.?}{pagination #GET{nb} #GET{nomp}}>
+			<li class="item"><a href="[(#ID_FEEDBACK|generer_url_entite{feedback})]"
+						title="[(#VAL{feedback}|objet_info{texte_objet}|_T) #ID_FEEDBACK]">[(#STATUT|puce_statut{feedback,#ID_FEEDBACK,#ID_RUBRIQUE}) ][(#TITRE|couper{80}|sinon{<:info_sans_titre:>})]</a></li>
+		</BOUCLE_feedback>
+	</ul>
+	[<p class="pagination">[<em>(#VAL{feedback}|objet_info{texte_objets}|_T)</em>](#PAGINATION{prive})</p>]
+	</div>
+</B_feedback>

@@ -1,0 +1,40 @@
+<paquet
+	prefix="feedback"
+	categorie="edition"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/feedback-32.png"
+	schema="1.0.0"
+>	
+
+	<nom>Feedback</nom>
+	<!-- Gestion des feedback dans SPIP -->
+
+	<credit lien="http://www.oxygen-icons.org">Oxygen Team (icone)</credit>
+	<auteur lien="https://www.twitter.com/__cyp">Vincent Legeard</auteur>
+	<licence>GNU/GPL</licence>
+
+	<traduire module="feedback" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="configurer_liste_metas" inclure="feedbacks_pipelines.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/feedback.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/feedback.php" />
+	<pipeline nom="autoriser" inclure="feedbacks_autoriser.php" />
+	<pipeline nom="rubrique_encours" inclure="feedbacks_pipelines.php" />
+	<pipeline nom="affiche_enfants" inclure="feedbacks_pipelines.php" />
+	<pipeline nom="accueil_encours" inclure="feedbacks_pipelines.php" />
+	<pipeline nom="accueil_informations" inclure="feedbacks_pipelines.php" />
+	<pipeline nom="objet_compte_enfants" inclure="feedbacks_pipelines.php" />
+	<pipeline nom="trig_calculer_langues_rubriques" inclure="feedbacks_pipelines.php" />
+	<pipeline nom="calculer_rubriques" inclure="feedbacks_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="feedbacks_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="feedbacks_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="feedbacks_pipelines.php" />
+	<pipeline nom="ieconfig_metas" inclure="feedbacks_ieconfig.php" />
+	<pipeline nom="insert_head" action="insert_head_js" inclure="feedbacks_pipelines.php" />
+	<pipeline nom="insert_head_css" action="insert_head_css" inclure="feedbacks_pipelines.php" />
+
+	<menu nom="feedbacks" titre="feedback:icone_feedback" parent="menu_edition" icone="images/feedback-16.png" />
+	<menu nom="feedback_creer" titre="feedback:icone_nouveau_feedback" parent="outils_rapides" icone="images/feedback-new-16.png" action="feedback_edit" parametres="new=oui&amp;id_rubrique=@id_secteur@" />
+</paquet>

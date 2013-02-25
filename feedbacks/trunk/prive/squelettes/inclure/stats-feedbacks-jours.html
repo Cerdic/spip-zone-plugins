@@ -1,0 +1,44 @@
+#SET{c,#VAL{feedbacks}|classement_populaires}
+
+<ul class="feedback_tout">
+	<li><span>
+		#SET{args,#ARRAY{id_rubrique,#ID_RUBRIQUE,duree,#DUREE}}
+		<a href="[(#URL_PAGE{transmettre,[(#VAL{feedbacks}|param_low_sec{#GET{args}, '', 'transmettre'})]})]" class="noajax"><:feedback:csv:></a></span>
+	</li>
+</ul>
+#SET{max,0}
+#SET{moy,0}
+#SET{last,0}
+#SET{lastlast,0}
+<B_statsj>
+
+	<table class='feedback' id='feedback_quotidiennes'>
+	<caption><:feedback:feedback_journaliers:></caption>
+	  <thead>
+			<tr class='row_first'>
+				<th><:date|trim{':'}|trim:></th>
+				<th class='positif'><:feedback:feedback_positif_choix|trim{':'}|trim:></th>
+				<th class='negatif'><:feedback:feedback_negatif_choix|trim{':'}|trim:></th>
+				<th class='tous'><:feedback:feedback_tous|trim{':'}|trim:></th>				
+				<th class='idee'><:feedback:feedback_idee_choix|trim{':'}|trim:></th>
+			</tr>
+	  </thead>
+
+	  <tbody>
+		<BOUCLE_statsj(DATA){source stats_feedbacks,jour,#ENV{duree,90},#ENV{id_rubrique},#ENV{choix}}>
+			<tr class="c_[(#CLE|affdate{l}|substr{0,3})][(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)c_today]">
+				<th title="[(#CLE|affdate{'Y/m/d'})]">[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{<:info_aujourdhui:>,#CLE|affdate_jourcourt})]</th>
+				<td class="posit">#VALEUR{positif}</td>
+				<td class="negat">#VALEUR{negatif}</td>				
+				<td class="idee">#VALEUR{idee}</td>
+				<td class="tous">#VALEUR{feedbacks}</td>				
+			</tr>
+			#SET{max,#GET{max}|max{#VALEUR{positif}}}
+			#SET{moy,#VALEUR{moyenne}}
+			#SET{lastlast,#GET{last}}
+			#SET{last,#VALEUR{positif}}
+		</BOUCLE_statsj>
+		</tbody>
+	</table>
+
+</B_statsj>
