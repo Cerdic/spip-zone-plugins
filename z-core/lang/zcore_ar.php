@@ -12,32 +12,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adapte_de' => 'adapté de',
 
 	// C
-	'commentaire' => 'commentaire',
-	'commentaires' => 'commentaires',
+	'commentaire' => 'تعليق',
+	'commentaires' => 'التعليقات',
 	'conception_graphique_par' => 'Habillage visuel ©',
 
 	// D
 	'date_forum' => 'Le @date@ à @heure@',
 
 	// I
-	'info_1_commentaire' => '1 commentaire', # NEW
-	'info_nb_commentaires' => '@nb@ commentaires', # NEW
+	'info_1_commentaire' => 'تعليق واحد',
+	'info_nb_commentaires' => '@nb@ تعليق',
 
 	// L
 	'lire_la_suite' => 'Lire la suite',
 	'lire_la_suite_de' => ' de ',
 
 	// P
-	'pagination_next' => 'Suivant »',
-	'pagination_pages' => 'Pages',
-	'pagination_prev' => '« Précédent',
+	'pagination_next' => 'التالي »',
+	'pagination_pages' => 'الصفحات',
+	'pagination_prev' => '« السابق',
 	'personaliser_nav' => 'Personnaliser ce menu',
 
 	// S
 	'sous_licence' => 'sous Licence',
 
 	// Z
-	'zapl_loading' => 'Chargement en cours...',
+	'zapl_loading' => 'قيد التحميل...',
 	'zapl_reload_off' => 'Cliquer ici si la page reste incomplète (ou activer le javascript dans votre navigateur)'
 );
 
