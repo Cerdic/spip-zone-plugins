@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'Accents are not taken into account ("déjà" or "deja", will return the same results, including "déjà", "dejà", "déja"...)',
 	'activer_indexation' => 'Enable indexing of files @ext@',
 	'asie' => 'asia',
-	'asterisque_terminale' => 'will return no results: the asterisk must be final', # MODIF
+	'asterisque_terminale' => 'will return no results: the asterisk must be at the end',
 	'aussi' => 'also',
 
 	// C
@@ -133,7 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'utiliser_operateurs_logiques' => 'The search uses standard logical operators.',
 
 	// V
-	'voir_doc_ptg' => 'Show the protected documents' # MODIF
+	'voir_doc_ptg' => 'Show the protected documents'
 );
 
 ?>

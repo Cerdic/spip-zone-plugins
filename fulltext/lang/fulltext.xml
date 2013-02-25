@@ -13,6 +13,7 @@
 	</langue>
 	<langue code="el" />
 	<langue code="en" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=en">
+		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=es">

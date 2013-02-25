@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accents_pas_pris' => 'المحرك يتجاهل العلامات النطقية (فإدخال «déjà» او «deja» يعطي «déjà» و«dejà» و«déja»...)',
 	'activer_indexation' => 'تفعيل فهرسة ملفات @ext@',
 	'asie' => 'آسيا',
-	'asterisque_terminale' => 'لا يعطي شيئاً: فالنجمة يجب ان تكون في الآخر', # MODIF
+	'asterisque_terminale' => 'لا يعطي شيئاً: فالنجمة يجب ان تكون في الآخر',
 	'aussi' => 'أيضاً',
 
 	// C
@@ -133,7 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'utiliser_operateurs_logiques' => 'يستخدم البحث العوامل المنطقية الشائعة.',
 
 	// V
-	'voir_doc_ptg' => 'عرض المستنرات المحمية' # MODIF
+	'voir_doc_ptg' => 'عرض المستنرات المحمية'
 );
 
 ?>
