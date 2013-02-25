@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="4.3.4"
+	version="4.4.0"
 	schema="2.0.3"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
