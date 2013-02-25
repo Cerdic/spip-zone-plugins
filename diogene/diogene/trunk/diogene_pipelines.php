@@ -5,40 +5,57 @@
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  *
- * © 2010-2012 - Distribue sous licence GNU/GPL
+ * © 2010-2013 - Distribue sous licence GNU/GPL
  *
  * Utilisation des pipelines par Diogene
  *
+ * @package SPIP\Diogenes\Pipelines
  **/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Insertion dans le pipeline editer_contenu_objet (SPIP)
+ * 
  * Insère ou enlève les champs dans le formulaire
  * que l'on souhaite ajouter ou supprimer
  *
  * @param array $flux
- * @return array
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte du pipeline modifié
  */
 function diogene_editer_contenu_objet($flux){
-	$args = $flux['args'];
 	$type = $args['type'];
-	$langues_dispos = explode(',',$GLOBALS['meta']['langues_multilingue']);
 	$pipeline = pipeline('diogene_objets', array());
 
 	if (in_array($type,array_keys($pipeline))){
+		$args = $flux['args'];
+		$langues_dispos = explode(',',$GLOBALS['meta']['langues_multilingue']);
+		
+		/**
+		 * Recherche de l'id_secteur afin de trouver le bon diogène
+		 * - soit on a un id_secteur > 0 dans le contexte;
+		 * - soit on a un id_parent dans le contexte et on cherche son secteur
+		 */
 		$id_secteur = ($args['contexte']['id_secteur'] > 0) ?
 			$args['contexte']['id_secteur'] :
 			sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.intval($args['contexte']['id_parent']));
 		
 		/**
 		 * Cas des pages uniques
+		 * 
+		 * On n'a pas d'id_secteur et on a un id_parent dans le contexte soit = 0 soit = -1
+		 * Du coup c'est le cas d'une page unique, on change donc le type en "page", id_secteur en "0"
 		 */
 		if(!$id_secteur && (($args['contexte']['id_parent'] == 0) OR ($args['contexte']['id_parent'] == '-1') OR (!$args['contexte']['id_parent']  && !$args['contexte']['parents'])) && ($type=='article')){
 			$id_secteur='0';
 			$type = 'page';
 		}
+		
+		/**
+		 * Création de la clause Where de la requète pour trouver dans quel diogène on est
+		 */
 		if($type == 'article'){
 			if($id_diogene = intval(_request('id_diogene'))){
 				$where = "id_diogene = $id_diogene AND id_secteur=".intval($id_secteur)." AND objet IN ('article','emballe_media')";
@@ -55,6 +72,9 @@ function diogene_editer_contenu_objet($flux){
 			}
 		}
 
+		/**
+		 * On n'agit que si on a trouvé un diogene
+		 */
 		if($diogene = sql_fetsel('*','spip_diogenes',$where)){
 			/**
 			 * On ajoute dans l'environnement les champs ajoutés par diogènes et ses sous plugins
@@ -166,10 +186,10 @@ function diogene_editer_contenu_objet($flux){
 				 * On ajoute encore à la fin le sélecteur de statuts à la fin du formulaire
 				 * Uniquement si l'on n'est pas dans le privé
 				 */
-				if($type=='page'){
+				if($type=='page')
 					$type='article';
-				}
 
+				spip_log($args['contexte']['statut'],'test');
 				if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_'.$diogene['objet'].'.html')){
 					$saisie .= recuperer_fond('formulaires/selecteur_statut_'.$diogene['objet'],$args['contexte']);
 				}
@@ -194,8 +214,10 @@ function diogene_editer_contenu_objet($flux){
  * Diogène ajoute dans le $flux de départ l'id_diogene correspondant à l'objet édité ($flux['data']['id_diogene'])
  * ainsi que l'id_diogene dans les hidden.
  * 
- * @param array $flux Le contexte d'environnement du pipeline
- * @return array $flux Le contexte d'environnement modifié
+ * @param array $flux 
+ * 		Le contexte d'environnement du pipeline
+ * @return array $flux 
+ * 		Le contexte d'environnement modifié
  */
 function diogene_formulaire_charger($flux){
 	$form = $flux['args']['form'];
@@ -298,8 +320,10 @@ function diogene_formulaire_charger($flux){
  * Vérifie les valeurs du formulaire avant leur traitement
  * Les sous plugins peuvent se brancher sur le pipeline spécifique à Diogene : diogene_verifier
  * 
- * @param array $flux Le contexte d'environnement du pipeline
- * @return array $flux Le contexte d'environnement modifié
+ * @param array $flux 
+ * 		Le contexte d'environnement du pipeline
+ * @return array $flux 
+ * 		Le contexte d'environnement modifié
  */
 function diogene_formulaire_verifier($flux){
 	$form = $flux['args']['form'];
@@ -349,8 +373,10 @@ function diogene_formulaire_verifier($flux){
  * -* On ajoute un lien pour voir l'objet publié dans le message de retour du formulaire
  * -* On ajoute un ajaxReload dans le message de retour pour rafraichir certains morceaux de la page (jQuery(".description_$objet,.diogene_$id_diogene"))
  * 
- * @param array $flux Le contexte d'environnement du pipeline
- * @return array $flux Le contexte d'environnement modifié
+ * @param array $flux 
+ * 		Le contexte d'environnement du pipeline
+ * @return array $flux 
+ * 		Le contexte d'environnement modifié
  */
 function diogene_formulaire_traiter($flux){
 	if(!test_espace_prive()
@@ -412,11 +438,13 @@ function diogene_formulaire_traiter($flux){
 /**
  * Insertion dans le pipeline pre_insertion (SPIP)
  * 
- * A la creation d'un article on vérifie si on nous envoie la langue
+ * A la création d'un article on vérifie si on nous envoie la langue
  * si oui on la met correctement dès l'insertion
  *
- * @param array $flux le contexte du pipeline
- * @return array $flux le contexte modifié 
+ * @param array $flux 
+ * 		Le contexte du pipeline
+ * @return array $flux 
+ * 		Le contexte modifié 
  */
 function diogene_pre_insertion($flux){
 	if(($flux['args']['table'] == 'spip_articles') && _request('changer_lang')){
@@ -432,8 +460,10 @@ function diogene_pre_insertion($flux){
  * A la modification d'un article on vérifie si on nous envoie la langue
  * si elle est différente de celle de l'article on la change
  *
- * @param array $flux le contexte du pipeline
- * @return array $flux le contexte modifié 
+ * @param array $flux 
+ * 		Le contexte du pipeline
+ * @return array $flux 
+ * 		Le contexte modifié 
  */
 function diogene_pre_edition($flux){
 	$pipeline = pipeline('diogene_objets', array());
@@ -485,8 +515,10 @@ function diogene_pre_edition($flux){
  * On s'insère à la fin des actions d'edition (action/editer_*)
  * Notamment pour lancer un recalcul de la publication des rubriques
  *
- * @param array $flux le contexte du pipeline
- * @return array $flux le contexte modifié 
+ * @param array $flux 
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte modifié 
  */
 function diogene_post_edition($flux){
 	/**
@@ -508,8 +540,10 @@ function diogene_post_edition($flux){
  * 
  * On ajoute les champs que l'on peut ajouter
  * 
- * @param array $flux Un tableau bidimentionnel listant les champs pouvant être ajoutés aux objets
- * @retrun array $flux Le tableau modifié
+ * @param array $flux 
+ * 		Un tableau bidimentionnel listant les champs pouvant être ajoutés aux objets
+ * @return array $flux 
+ * 		Le tableau modifié
  */
 function diogene_diogene_objets($flux){
 	$flux['article']['champs_sup']['date'] = _T('diogene:champ_date_publication');
@@ -537,8 +571,10 @@ function diogene_diogene_objets($flux){
  * -* prive/javascript/presentation.js
  * -* formulaires/dateur/inc-dateur.html si une date est présente dans le formulaire
  * 
- * @param array $flux le contexte du pipeline
- * @return array $flux le contexte modifié
+ * @param array $flux 
+ * 		Le contexte du pipeline
+ * @return array $flux 
+ * 		Le contexte modifié
  */
 function diogene_diogene_avant_formulaire($flux){
 	$flux['data'] .= '<script type="text/javascript" src="'.find_in_path('prive/javascript/presentation.js').'"></script>';
@@ -554,8 +590,10 @@ function diogene_diogene_avant_formulaire($flux){
  * 
  * Insert les saisies configurées dans le formulaire
  * 
- * @param array $flux le contexte du pipeline
- * @return array $flux le contexte modifié
+ * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array $flux 
+ * 		Le contexte modifié
  */
 function diogene_diogene_ajouter_saisies($flux){
 	$id_article = $flux['args']['contexte']['id_article'];
@@ -604,8 +642,10 @@ function diogene_diogene_ajouter_saisies($flux){
  * -* vérifie principalement les dates "date" et "date_redac"
  * -* vérifie la valeur pour le forum également
  * 
- * @param array $flux le contexte du pipeline
- * @return array $flux le contexte modifié
+ * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte modifié
  */
 function diogene_diogene_verifier($flux){
 	$id_article = _request('id_article');
@@ -636,8 +676,10 @@ function diogene_diogene_verifier($flux){
  * -* traite principalement les dates "date" et "date_redac"
  * -* traite la valeur pour le forum également
  * 
- * @param array $flux le contexte du pipeline
- * @return array $flux le contexte modifié
+ * @param array $flux 
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte modifié
  */
 function diogene_diogene_traiter($flux){
 	$id_objet = $flux['args']['id_objet'];
@@ -660,12 +702,14 @@ function diogene_diogene_traiter($flux){
 }
 
 /**
- * Insertion dans le pipeline (ajouter_menus)
+ * Insertion dans le pipeline ajouter_menus (SPIP)
  * 
  * Ajouter des boutons dans les menus pour chaque diogène que l'on sait gérer dans l'espace privé
  * 
- * @param object $boutons_admin La description des boutons
- * @return object $boutons_admin La description des boutons complétée
+ * @param object $boutons_admin 
+ * 		La description des boutons
+ * @return object $boutons_admin
+ * 		La description des boutons complétée
  */
 function diogene_ajouter_menus($boutons_admin) {
 	$diogenes = sql_select('*','spip_diogenes','objet != "emballe_media"');

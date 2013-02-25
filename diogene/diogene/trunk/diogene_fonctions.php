@@ -8,7 +8,8 @@
  * © 2010-2013 - Distribue sous licence GNU/GPL
  *
  * Fonctions spécifiques à Diogene
- *
+ * 
+ * @package SPIP\Diogene\Fonctions
  **/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -20,7 +21,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Si l'article n'existe pas ou n'est pas publier, on envoie vers la page publique de publication
  * Pratique pour les liens vers associé à une auteur mais pas encore publiés
  * 
- * @param unknown_type $p
+ * @param Champ $p
+ * 		Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée du code compilé
  */
 function balise_URL_ARTICLE($p) {
 	include_spip('balise/url_');
@@ -45,11 +49,13 @@ function balise_URL_ARTICLE($p) {
  * Fonction calculant le nombre d'objets qu'un utilisateur peut encore créer
  * Utilisé que sur les objets à base d'articles
  * 
- * @param int $id_diogene : l'identifiant numérique du diogene
- * @return string|int|false : le retour à trois types de valeurs :
- * 		string "infinite" : le nombre est infini
- * 		boolean false : il y a une erreur, pas de limite pour ce genre d'objet
- * 		int : le nombre possible
+ * @param int 
+ * 		$id_diogene : l'identifiant numérique du diogene
+ * @return string|int|false
+ * 		le retour à trois types de valeurs :
+ * 		- string "infinite" : le nombre est infini
+ * 		- boolean false : il y a une erreur, pas de limite pour ce genre d'objet
+ * 		- int : le nombre possible
  */
 function diogene_nombre_attente($id_diogene){
 	$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
@@ -76,11 +82,15 @@ if(!test_espace_prive()){
 /**
  * Génération d'une url vers la page de publication d'un objet
  * 
- * @param int $id Identifiant numérique de l'objet
- * @param string $objet Le type de l'objet
- * @param boolean $forcer Dans le cas où l'objet est déjà publié cela renverra vers la page de l'objet. Si $forcer = true,
- * cela forcera le fait d'aller sur la page de modification de l'objet
- * @return string $url L'URL de la page que l'on souhaite
+ * @param int $id 
+ * 		Identifiant numérique de l'objet
+ * @param string 
+ * 		$objet Le type de l'objet
+ * @param boolean 
+ * 		$forcer Dans le cas où l'objet est déjà publié cela renverra vers la page de l'objet. Si $forcer = true,
+ * 		cela forcera le fait d'aller sur la page de modification de l'objet
+ * @return string $url 
+ * 		L'URL de la page que l'on souhaite
  */
 function generer_url_publier($id=null,$objet='article',$id_secteur=0,$forcer=true){
 	include_spip('inc/urls');
@@ -131,9 +141,12 @@ function generer_url_publier($id=null,$objet='article',$id_secteur=0,$forcer=tru
 /**
  * Fonction retournant la chaine de langue depuis un statut
  *
- * @param string $statut Le statut de l'objet
- * @param string $type Le type d'objet SPIP
- * @return string La locution adéquate pour le statut 
+ * @param string $statut
+ * 		Le statut de l'objet
+ * @param string $type 
+ * 		Le type d'objet SPIP
+ * @return string 
+ * 		La locution adéquate pour le statut 
  */
 function diogene_info_statut($statut, $type='article') {
 	$statuts = objet_info($type,'statut_titres');
@@ -169,6 +182,9 @@ function diogene_info_statut($statut, $type='article') {
 	return;
 }
 
+/**
+ * Être sûr d'avoir les fonctions des puces
+ */
 if(!function_exists('puce_statut')){
 	include_spip('inc/autoriser');
 	include_spip('inc/puce_statut');
@@ -223,7 +239,7 @@ if(!function_exists('puce_statut_rubrique')){
  *
  * @param string $aide
  * 		cle d'identification de l'aide souhaitee
- * @param strink $skel
+ * @param string $skel
  * 		Nom du squelette qui appelle ce bouton d'aide
  * @param array $env
  * 		Environnement du squelette
