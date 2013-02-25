@@ -7,10 +7,10 @@
     <h3  class="titrem"><:selection_objet:selection_objet:> [(#OBJET_DEST|info_objet{#ID_OBJET_DEST,#ENV{champ_titre}}|supprimer_tags)]</h3>
     ,'simple personnel infos'})]   
 <BOUCLE_langues(POUR){tableau #ENV**{langue}}>
-    <INCLURE{fond=prive/objets/liste/inc-selection_interface,lang=#VALEUR,env,ajax=tableau_so}/>
+    <INCLURE{fond=prive/objets/liste/inc-selection_interface,l=#VALEUR,env,ajax=tableau_so}/>
     #FORMULAIRE_RECHERCHE_OBJETS{#OBJET_DEST,#ID_OBJET_DEST,#VALEUR}  
-</BOUCLE_langues>
-    <INCLURE{fond=prive/objets/liste/inc-selection_interface,env,ajax=tableau_so,lang='',langue=''}/>
+</BOUCLE_langues>2
+    <INCLURE{fond=prive/objets/liste/inc-selection_interface,env,ajax=tableau_so,l='',langue=''}/>
     #FORMULAIRE_RECHERCHE_OBJETS{#OBJET_DEST,#ID_OBJET_DEST}  
 <//B_langues>
 #BOITE_FERMER

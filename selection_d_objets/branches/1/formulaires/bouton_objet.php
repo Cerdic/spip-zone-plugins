@@ -36,11 +36,13 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
     //Préparer la requette
     $where=array();
     if(isset($tables[$table_dest]['statut'][0]['publie']))$statut=$tables[$table_dest]['statut'][0]['publie'];
-    if($statut AND $objet !='rubrique')  $where[]='statut='.sql_quote($statut);
+    if($statut AND $objet_dest !='rubrique')  $where[]='statut='.sql_quote($statut);
     if($objet=='auteur') $where[]='statut !='.sql_quote('5poubelle');
     if($choisies)$where[]='id_'.$objet_dest.' IN ('.implode(',',$choisies).')';
-    if($tables[$table_dest]['field']['lang'] and $lang)$where[]='lang IN ('.sql_quote($lang).')';
-
+    if($tables[$table_dest]['field']['lang'] and $lang){
+        if($objet_dest!='rubrique')$where[l]='lang IN ('.sql_quote($lang).')';
+        elseif(test_plugin_actif('tradrub'))$where[l]='lang IN ('.sql_quote($lang).')';
+        }
     $objets_choisies=tableau_objet($objet_dest_original,'','*',$where,array('titre','id_'.$objet_dest,true));
     
     //Les types liens pour l'objet concerné

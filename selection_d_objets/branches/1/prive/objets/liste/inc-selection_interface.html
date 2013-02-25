@@ -1,5 +1,5 @@
 <B_selection>
-<div id="selection_objets[_(#ENV{lang,no_lang})]">
+<div id="selection_objets[_(#ENV{l,no_lang})]">
 <table class='spip liste'>
     [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{selection_objet:info_1_selection_objet,selection_objet:info_nb_selection_objets}})
               [(#GET{langues}|count|>{1}|oui)
@@ -7,7 +7,7 @@
               ]</strong>
       </caption>]
 
-    <BOUCLE_selection(SELECTION_OBJETS){par ordre,lang}{lang ?}{statut ?}{id_objet_dest ?} {objet_dest ?}>
+    <BOUCLE_selection(SELECTION_OBJETS){par ordre,lang}{lang ?=#ENV{l}}{statut ?}{id_objet_dest ?} {objet_dest ?}>
     
     [<tr class="tr_liste" id='#ID_OBJET'>(#ID_OBJET|generer_modele{#OBJET,modeles_so/selection_interface_tr,#ARRAY{
         id_selection_objet,#ID_SELECTION_OBJET,
@@ -29,15 +29,15 @@
 <script type="text/javascript">
     $(function() {
         [(#REM)action rangement]
-        $('#selection_objets[_(#ENV{lang,no_lang})] .tr_liste a.select').click(function(){
-          $('#selection_objets[_(#ENV{lang,no_lang})]').load($(this).attr("href"));
+        $('#selection_objets[_(#ENV{l,no_lang})] .tr_liste a.select').click(function(){
+          $('#selection_objets[_(#ENV{l,no_lang})]').load($(this).attr("href"));
            return false;
         });  
         [(#REM)drag and drop]     
-        $( "#selection_objets[_(#ENV{lang,no_lang})]" ).sortable({items:"tr.tr_liste"});
-        $( "#selection_objets[_(#ENV{lang,no_lang})]" ).bind("sortupdate", function(event, ui) {
+        $( "#selection_objets[_(#ENV{l,no_lang})]" ).sortable({items:"tr.tr_liste"});
+        $( "#selection_objets[_(#ENV{l,no_lang})]" ).bind("sortupdate", function(event, ui) {
             var ordre = $(this).sortable('toArray').toString();
-            $('#selection_objets[_(#ENV{lang,no_lang})]').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre-#ENV{lang}-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]-load}|replace{&amp;,&})]&nouvel_ordre='+ordre);
+            $('#selection_objets[_(#ENV{l,no_lang})]').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre-#ENV{l}-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]-load}|replace{&amp;,&})]&nouvel_ordre='+ordre);
         });
     });
     </script>

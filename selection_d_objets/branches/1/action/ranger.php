@@ -181,7 +181,7 @@ function action_ranger_dist($arg=null){
         }
 
     if($load){
-       $contexte = array('id_objet_dest'=>$id_objet_dest,'objet_dest'=>$objet_dest,'lang'=>$lang);
+       $contexte = array('id_objet_dest'=>$id_objet_dest,'objet_dest'=>$objet_dest,'l'=>$lang);
         echo recuperer_fond('prive/objets/liste/inc-selection_interface',$contexte);
     } 
 return $return;
