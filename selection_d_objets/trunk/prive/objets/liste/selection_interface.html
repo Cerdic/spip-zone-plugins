@@ -1,15 +1,17 @@
 #CACHE{0}
 <br class="nettoyeur"/>
 <div class="liste-elements selection_objets" id="selection_objets">
+#SET{n_langues,#ENV**{langue}|count}
 [(#VAL)]
 [(#BOITE_OUVRIR{
     [(#CHEMIN_IMAGE{selection_objet-64.png}|image_reduire{32}|extraire_attribut{src}|balise_img{selection_objet,cadre-icone})]
     <h3  class="titrem"><:selection_objet:selection_objet:> [(#OBJET_DEST|info_objet{#ID_OBJET_DEST,#ENV{champ_titre}}|supprimer_tags)]</h3>
     ,'simple personnel infos'})]   
 <BOUCLE_langues(POUR){tableau #ENV**{langue}}>
+    [(#GET{n_langues}|>{1}|oui)<h4 class="titrem">[(#VALEUR|traduire_nom_langue)]</h4>]
     <INCLURE{fond=prive/objets/liste/inc-selection_interface,l=#VALEUR,env,ajax=tableau_so}/>
     #FORMULAIRE_RECHERCHE_OBJETS{#OBJET_DEST,#ID_OBJET_DEST,#VALEUR}  
-</BOUCLE_langues>2
+</BOUCLE_langues>
     <INCLURE{fond=prive/objets/liste/inc-selection_interface,env,ajax=tableau_so,l='',langue=''}/>
     #FORMULAIRE_RECHERCHE_OBJETS{#OBJET_DEST,#ID_OBJET_DEST}  
 <//B_langues>
