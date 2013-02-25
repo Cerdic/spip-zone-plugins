@@ -90,6 +90,53 @@ function distance($from, $to, $miles=false) {
 }
 
 /**
+ * Compilation du critère {distancefrom}
+ * 
+ * Critère {distancefrom} qui permet de ne sélectionner que les objets se trouvant à une distance comparée avec un point de repère.
+ * On doit lui passer 3 paramètres obligatoires :
+ * - le point de repère qui est un tableau avec les clés "lat" et "lon"
+ * - l'opérateur de comparaison
+ * - la distance à comparer, en kilomètres
+ * Cela donne par exemple :
+ *   {distancefrom #ARRAY{lat,#LAT,lon,#LON} < 30}
+ *   {distancefrom #ARRAY{lat,#ENV{lat},lon,#ENV{lon}} <= #ENV{distance}}
+ *
+ * @param unknown $idb
+ * @param unknown &$boucles
+ * @param unknown $crit
+ */
+function critere_distancefrom_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$id_table = $boucle->id_table; // articles
+	$primary = $boucle->primary; // id_article
+	$objet = objet_type($id_table); // article
+	
+	if (
+		// Soit depuis une boucle (GIS) soit un autre objet mais avec {gis}
+		($id_table == 'gis' or isset($boucle->join['gis']))
+		// Il faut aussi qu'il y ait 3 critères obligatoires
+		and count($crit->param) == 3
+	){
+		$point_reference = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+		$operateur = calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent);
+		$distance = calculer_liste($crit->param[2], array(), $boucles, $boucles[$idb]->id_parent);
+
+		// Si le point de référence est un entier, on essaye de récupérer les coordonnées du point GIS
+		// Et si on a toujours pas de tableau correct, on met false
+		$boucle->hierarchie .= '$point_reference = '.$point_reference.';';
+		$boucle->hierarchie .= 'if (is_numeric($point_reference)){ $point_reference = sql_fetsel("lat,lon", "spip_gis", "id_gis = ".intval($point_reference)); }';
+		$boucle->hierarchie .= 'if (!is_array($point_reference) or !isset($point_reference["lat"]) or !isset($point_reference["lon"])){ $point_reference = false; }';
+		// L'opérateur doit exister dans une liste précise
+		$boucle->hierarchie .= '$operateur_distance = trim('.$operateur.');';
+		$boucle->hierarchie .= 'if (!in_array($operateur_distance, array("=","<",">","<=",">="))){ $operateur_distance = false; }';
+		$boucle->hierarchie .= '$distance = '.$distance.';';
+		
+		$boucle->select[] = '".(!$point_reference ? "\'\' as distance" : "(6371 * acos( cos( radians(".$point_reference["lat"].") ) * cos( radians( gis.lat ) ) * cos( radians( gis.lon ) - radians(".$point_reference["lon"].") ) + sin( radians(".$point_reference["lat"].") ) * sin( radians( gis.lat ) ) ) ) AS distance")."';
+		$boucle->having[] = '((!$point_reference or !$operateur_distance or !$distance) ? "1=1" : "distance $operateur_distance ".sql_quote($distance))';
+	}
+}
+
+/**
  * Critere {gis distance<XX} pour filtrer une liste de points par rapport à la distance du point de l'env
  *
  * @param unknown_type $idb
@@ -97,7 +144,6 @@ function distance($from, $to, $miles=false) {
  * @param unknown_type $crit
  */
 function critere_gis_dist($idb, &$boucles, $crit) {
-	
 	$boucle = &$boucles[$idb];
 	$id_table = $boucle->id_table; // articles
 	$primary = $boucle->primary; // id_article
@@ -157,14 +203,18 @@ function critere_gis_dist($idb, &$boucles, $crit) {
 		// permet de passer dans trouver_champ_exterieur() depuis index_tables_en_pile()
 		// cf http://article.gmane.org/gmane.comp.web.spip.zone/6628
 		$boucle->jointures[] = 'gis';
-		$boucle->jointures_explicites = 'gis_liens gis';
+		if (empty($boucle->jointures_explicites)){
+			$boucle->jointures_explicites = 'gis_liens gis';
+		}
+		else{
+			$boucle->jointures_explicites .= ' gis_liens gis';
+		}
 	}
-	
 }
 
 /**
  * Balise #DISTANCE issue du critère {gis distance<XX}
- * merci marcimant : http://formation.magraine.net/spip.php?article61
+ * merci marcimat : http://formation.magraine.net/spip.php?article61
  *
  * @param unknown_type $p
  */
