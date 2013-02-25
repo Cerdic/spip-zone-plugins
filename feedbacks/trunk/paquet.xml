@@ -1,6 +1,6 @@
 <paquet
 	prefix="feedback"
-	categorie="edition"
+	categorie="communication"
 	version="1.0.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
