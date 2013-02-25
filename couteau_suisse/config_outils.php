@@ -1420,6 +1420,7 @@ add_variable( array(
 add_outil( array(
 	'id' => 'balise_set',
 	'categorie' => 'spip',
+	'contrib' => 4336,	
 ));
 
 add_outil( array(
