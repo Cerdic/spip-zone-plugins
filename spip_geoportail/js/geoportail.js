@@ -210,6 +210,8 @@ jQuery.geoportail =
 		// En creer une
 		else {
 			var div = OpenLayers.Util.getElement('navigation');
+			// SPIP v3
+			if (!div) div = jQuery('.aside')[0];
 			if (!div) return;
 			ovDiv = document.createElement('div');
 			ovDiv.id = OpenLayers.Util.createUniqueID('overviewMap');
@@ -1159,7 +1161,17 @@ jQuery.geoportail =
 		if (att.logo) html += (lien ? lien : "") + att.logo + (lien ? "</a>" : "");
 		else if (att.img) html += (lien ? lien : "") + "<img src='"+att.img+"' class='spip_logos' />" + (lien ? "</a>" : "");
 		if (att.name) html += "<p class=titre>"+ (lien ? lien : "") + att.name + (lien ? "</a>" : "") + "</p>";
-		if (!hover && att.description) html += att.description;
+		if (!hover)
+		{	if (att.description) html += att.description;
+			else 
+			{	var t = "";
+				for (var a in att) 
+				{	if (att[a].value) t += "<tr><td>"+a+"</td><td>"+att[a].value+"</td></tr>"; // attributs KML
+					else t += "<tr><td>"+a+"</td><td>"+att[a]+"</td></tr>";
+				}
+				if (t) html += "<table class='spip_popup'>"+t+"</table>";
+			}
+		}
 		if (!html) return;
 		html = "<div class='"+(att.classe ? att.classe : "")+"'>"+html+"</div>";
 		var popup = new spip_popup("popup",
@@ -1374,6 +1386,8 @@ function geoportail_selectionnable (l, hover)
 			onSelect: jQuery.geoportail.popupFeature,
 			*/
 			onUnselect: jQuery.geoportail.unpopupFeature,
+			// autoriser pan map quand on clique dans un objet
+			handlersOptions:{feature:{stopDown:false}}, 
 			callbacks:
 			{	click: function (feature) 
 				{	// Position du curseur

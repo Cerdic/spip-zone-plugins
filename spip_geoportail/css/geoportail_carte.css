@@ -88,6 +88,16 @@ img.gpGeocodeMatchCodeMatchType
 	padding:0.5em;
 }
 
+.olPopupContent table
+{	border:1px solid #369;
+}
+.olPopupContent tr:nth-child(even) 
+{	background-color:#EFE0FF;
+}
+.olPopupContent td
+{	padding:0 0.5em;
+}
+
 .olPopupContent p,
 .olFramedCloudPopupContent  p
 {	margin:0;
