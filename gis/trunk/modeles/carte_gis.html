@@ -38,6 +38,7 @@ Parametres possibles :
 - point = non                      si elle vaut "non" cette option n'affichera pas de points du tout (utile pour n'afficher qu'un kml par exemple)
 
 - media = non                      permet de passer le critère 'media' (pour les documents)
+- mots = #LISTE{1,4,7}             plugin critere {mots} http://contrib.spip.net/Critere-mots
 - path_styles=#ARRAY{color,#fff}   options de style des éléments de la couche GeoJSON (voir http://leafletjs.com/reference.html#path-options)
 
 Uniquement si objets = point_libre :
@@ -243,7 +244,7 @@ var map[(#GET{id})];
 				]</BOUCLE_modeles_args_prioritaires>[
 				media        : "(#ENV{args}|?{#ENV{args/media},#ENV{media}}|trim)",][
 				recherche    : "(#ENV{args}|?{#ENV{args/recherche},#ENV{recherche}})",][
-				mots  : (#ENV{mots}|?{[(#ENV{mots}|trim|json_encode)],''}),][
+				mots  : (#ENV{mots}|?{[(#ENV{mots}|json_encode)],''}),][
 				limit : (#ENV{limit,#ENV{limite,500}}|trim)][
 				(#ENV{objets}|=={point_libre}|oui)
 					[,lat : (#GET{lat}|trim)]
