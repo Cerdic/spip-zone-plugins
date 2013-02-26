@@ -1,0 +1,93 @@
+#CACHE{7200}
+[(#REM)
+/**
+* Plugin SPIP Geoportail
+*
+* @author:
+* Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2010
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Affichages des articles d'un site SPIP
+*
+**/
+- legende    : groupe de mot cle a utiliser comme legende (représentation en fonction du logo du mot cle)
+- id_article : centrer sur l'article
+- id_auteur	 : limiter a un auteur
+- id_rubrique: limiter a une rubrique
+- id_secteur : limiter a un secteur
+
+]<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title><:geoportail:geoarticles:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+<meta name="robots" content="none" />
+</head>
+
+<body class="page_article">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:geoportail:geoarticles:></div>
+
+	<div id="conteneur">
+	
+		[(#REM) Le plan de site ci-dessous est a adapter selon les besoins. En particulier, on n'aura pas necessairement besoin de tous les elements (sous-rubriques, articles, breves et sites) ]
+
+		<div id="contenu">
+
+			<div class="cartouche">
+				<h1 class="titre"><:geoportail:geoarticles:></h1>
+			</div>
+			
+			[(#REM) Centrage sur l'article ]
+			<BOUCLE_gp(GEOPOSITIONS){id_objet=#ENV{id_article,0}}{objet=article}>
+				[(#SET{lon,#LON})]
+				[(#SET{lat,#LAT})]
+				[(#SET{zoom,#ZOOM})]
+			</BOUCLE_gp>
+			<div style='float:right; display:block;'>[(#MODELE{geoportail_geozone})]</div>
+			[(#MODELE{geoportail_geolien})]
+			[(#MODELE{geoportail_articles}{searchtools}{measuretools}{mode}{id_rubrique}{id_secteur}{id_auteur}{legende}{lon=#GET{lon}}{lat=#GET{lat}}{zoom=#GET{zoom}})]
+
+		</div><!-- fin contenu -->
+		
+		[(#REM) Affichage pour la v2 ]
+		[(#SPIP_VERSION|>={2}|?{</div><!-- fin navigation -->})]
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+
+			[(#REM) Retour a l'articles ]
+			<B_articles_rubrique>
+			<div class="breves">
+				<h2 class="menu-titre"><:icone_retour_article:></h2>
+				<ul>
+					<BOUCLE_articles_rubrique(ARTICLES) {id_article}>
+					<li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>#TITRE</a></li>
+					</BOUCLE_articles_rubrique>
+				</ul>
+			</div>
+			</B_articles_rubrique>
+
+		[(#REM) Affichage pour la v1.9 ]
+		[(#SPIP_VERSION|<{2}|?{</div><!-- fin navigation -->})]
+
+	</div><!-- fin conteneur -->
+	
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
