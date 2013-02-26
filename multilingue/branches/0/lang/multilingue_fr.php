@@ -7,16 +7,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'afficher_menu_select' => 'Afficher en menu dropdown (select)',
-	
-    //E
-    'explication_desactiver_traduction_logo_objet' =>'Si l\'objet est traduit (présence d\'un id_trad comme pour les articles et rubriques) ce plugin fait en sorte que la balise #LOGO_ARTICLE p.ex cherche le logo de la traduction de l\'article (article de référence) si celui-ci ne dipose pas de logo.',   
-	
+
 	// D
-	'desactiver_traduction_logo_objet' => 'Désactiver la possibilité que la balise #LOGO_OBJET inclut le logo de l\'objet d\'origine s\'elle ne trouve pas de logo pour l\'objet en question',  
-	   
-    // L
-    'logo_objet' => 'Logo Objet',
-      
+	'desactiver_traduction_logo_objet' => 'Désactiver la possibilité que la balise #LOGO_OBJET inclut le logo de l\'objet d\'origine s\'elle ne trouve pas de logo pour l\'objet en question',
+
+	// E
+	'explication_desactiver_traduction_logo_objet' => 'Si l\'objet est traduit (présence d\'un id_trad comme pour les articles et rubriques) ce plugin fait en sorte que la balise #LOGO_ARTICLE p.ex cherche le logo de la traduction de l\'article (article de référence) si celui-ci ne dipose pas de logo.',
+
+	// L
+	'logo_objet' => 'Logo Objet',
 
 	// M
 	'menu_langue' => 'Menu de langue',
