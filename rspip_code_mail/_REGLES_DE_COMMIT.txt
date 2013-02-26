@@ -12,28 +12,20 @@ user = robert.sebille
 domain = cassiopea
 tld = org
 
-+-----------------------------+
-| Le fonctionnement du plugin |
-+-----------------------------+
-est assez simple:
-
-- rspipcm_code_mail.php encode le user et l'email (+ ses éventuels paramètres) des raccourcis spip du type [ecrire à user->user@domain.tld] en tenant compte des diverses formes que peuvent prendre ces raccourcis, et avant que spip ne les traite (pipeline "pre_liens")
-- rspipcm_decode_mail.php prépare le captcha javascript et inclut la fonction de decodage javascript (dans lib/rspipcm_decode_autres_fonctions.js) via "insert_head" et "header_prive" (pour l'espace privé).
-- le reste c'est les langues et un peu de css (pour le <noscript>)
-
-NB: lib/rspipcm_decode_autres_fonctions.js contient une fonction empoisonne(), qui crée de faux emails, non utilisée dans le plugin, mais je l'ai laissée, car je me dis que je pourrais en faire un honeypot à spambot un jour.
-
 +---------------------------------------+
 | L'organisation des répertoires du svn |
 +---------------------------------------+
 
-- Les versions de développement (spip 2.1 et 3)
-dev	> rspip2_code_mail (spip 2)
-dev	> rspip3_code_mail (spip 3)
+- Les versions SPIP à la racine
+rspip2_code_mail (SPIP 2.1)
+rspip3_code_mail (SPIP 3.0)
 
-- Les versions stables (qu'on retrouvera sur spip contrib)
-stable > X.X.X > rspip2_code_mail (spip 2)
-stable > X.X.X > rspip3_code_mail (spip 3)
+- Ensuite, dans chacun des rspipX_code_mail
+rspipX_code_mail > trunk Actuellement, c'est là qu'on développe.
+rspipX_code_mail > tag > X.X.X Ce sont les versions stables, lockées pour interdire les commit
+
+- Si necessaire, des branche X.X seront créées avec la structure suivante:
+rspipX_code_mail > branch > X.X
 
 NB: A l'import (24/02/2013), toutes les versions sont 1.0.0 (tout de suite 1.0.0 et pas 0.0.1 pour éviter une confusion avec les anciennes versions de la première version du plugin: 0.10, .., 0.14). La seule différence entre la version spip 2 et spip 3 est, à ce stade, le paquet.xml <> plugin.xml et les fichiers de langues pour la description. Cependant, les versions spip 2 et 3 sont séparées, car dans l'avenir, elles pourraient diverger en fonction de l'évolution du moteur de spip 3. Comme une version prend moins de 80k, ça n'est pas très lourd …
 
