@@ -2,7 +2,7 @@
 [(#PARAMETRES_FORUM|?{''})]
 <B_comments-list>
 <div class="comments-posts comments-thread">
-	<h2 class="h2"><:comments:comments_h:></h2>
+	<h2 class="h2">[(#ENV{titre_liste_commentaires,<:comments:comments_h:>})]</h2>
 	<ul class="comments-ul comments-items">
 		<BOUCLE_comments-list(FORUMS) {statut IN publie} {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?}{objet ?}{id_objet ?}{par date}>
 		<li class="comment-li comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)][(#ID_OBJET|me{#OBJET,#ID_AUTEUR})me]">
