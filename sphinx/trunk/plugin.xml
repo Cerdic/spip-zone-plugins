@@ -9,10 +9,10 @@
 		&#169; 2013 - GNU/GPL
 	</licence>
 	<version>
-	0.0.1
+	0.1.0
 	</version>
 	<etat>
-	dev
+	test
 	</etat>
 	<description>
 	Intégration du moteur de recherche SPHINX
