@@ -17,5 +17,5 @@ Il permet également de tester l'itérateur ["simple_xml"->http://contrib.spip.n
 	<lien></lien>
 
 	<categorie>outil</categorie>
-	<necessite id="SPIP" version="[3.0.5;3.0.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 </plugin>
