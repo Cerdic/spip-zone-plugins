@@ -1,0 +1,13 @@
+<h2>yql youtube.search</h2>
+
+<BOUCLE_youtube(DATA){source yql, "select * from youtube.search(150) where query='spip'"}
+{datapath /query/results/video}
+{pagination 5}
+>
+<dt>
+<a href="#URL"><img src="#VALEUR{thumbnails/thumbnail/0/content}" /></a></dt>
+<dd><a href="#VALEUR{url}">#VALEUR{title}</a></dd>
+</BOUCLE_youtube>
+#PAGINATION
+<p>#TOTAL_BOUCLE / #GRAND_TOTAL</p>
+</B_youtube>

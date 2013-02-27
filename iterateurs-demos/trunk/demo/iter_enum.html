@@ -1,0 +1,14 @@
+#CACHE{0}
+
+<h2>Un échiquier, avec la boucle (ENUM)</h2>
+
+<table border=1>
+<BOUCLE_x(ENUM){0,8}>
+<tr>
+<BOUCLE_y(ENUM){0,8}>
+<td>[(#VALEUR|plus{65}|chr)][(#VAL{8}|moins{#_x:VALEUR})]</td>
+</BOUCLE_y>
+</tr>
+</BOUCLE_x>
+</table>
+

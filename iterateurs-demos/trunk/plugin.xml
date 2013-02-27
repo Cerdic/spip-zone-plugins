@@ -1,0 +1,21 @@
+<plugin>
+	<nom>Démos des It&#233;rateurs</nom>
+	<slogan>Boucler sur plus de types données !</slogan>
+	<auteur>Fil, Marcimat</auteur>
+	<licence>&#169; 2010-2013 GNU/GPL</licence>
+	<version>0.1.0</version>
+	<etat>stable</etat>
+	<description>Les it&#233;rateurs sont une fonctionnalit&#233; de SPIP 3. Ils permettent de faire des boucles non plus seulement sur des articles et autres objets de la base de donn&#233;es SQL de SPIP, mais sur n'importe quoi : fichiers, tableaux de donn&#233;es, webservices, etc. Ce plugin rétablit les nombreuses d&#233;mos disponibles &#224; dans le plugin Itérateurs pour SPIP 2.1, vous les trouverez à l'adresse <code>../spip.php?page=demo/iterateurs</code>. 
+
+Il permet également de tester l'itérateur ["simple_xml"->http://contrib.spip.net/Les-Iterateurs-pour-SPIP-2-1#forum457898] en vue de son inétgration à SPIP. Pensez aussi à tester [les contributions pour Itérateurs de SPIP->http://contrib.spip.net/Iterateurs]: GData, iCalendar, BookSearch... !
+	</description>
+	<prefix>iterateurs-demos</prefix>
+
+	<icon>iterateurs.png</icon>
+
+	<fonctions>iterateurs-demos_fonctions.php</fonctions>
+	<lien></lien>
+
+	<categorie>outil</categorie>
+	<necessite id="SPIP" version="[3.0.5;3.0.99]" />
+</plugin>

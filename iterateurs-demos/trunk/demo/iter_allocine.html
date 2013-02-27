@@ -1,0 +1,45 @@
+<h1>Flux allocine, films et horaires pour un cinema</h1>
+
+[(#REM) P0982 = identifiant allocine de la salle ou  lat/long sachant que le radius elargit la geographie] 
+[(#SET{source_salle,http://api.allocine.fr/rest/v3/showtimelist?partner=YW5kcm9pZC12M3M&theaters=P0982&radius=1&format=json})]
+[(#SET{xml,http://api.allocine.fr/rest/v3/showtimelist?partner=YW5kcm9pZC12M3M&format=json&lat=47.981649&long=0.24038&radius=10&zip=72000})]
+
+<BOUCLE_allocine(DATA) {source json, #GET{source_salle}}{cle=feed,theaterShowtimes}>
+
+	<BOUCLE_salle(DATA){source table,#VALEUR{theaterShowtimes}}>	
+	[<h2>(#VALEUR{place/theater/name})</h2>]
+	<em>Source salle: #GET{source_salle}</em>
+	
+		<BOUCLE_film(DATA){source table,#VALEUR{movieShowtimes}}{fusion onShow/movie/title}>
+		<div style="border-bottom:1px solid #000; padding:1em;width:60%">
+		
+			<h3>[(#VALEUR{onShow/movie/title})]</h3>
+			#SET{code,#VALEUR{onShow/movie/code}}
+			[(#SET{source_movie,http://api.allocine.fr/rest/v3/movie?code=#GET{code}&partner=YW5kcm9pZC12M3M&format=json})]
+			<em>Source movie: #GET{source_movie}</em>
+			
+			[(#VALEUR{onShow/movie/poster/href}|image_reduire{150,150})]
+			
+				[<div id="allocine_blog" style="width:450px; height:280px">
+				<object height="280px" width="100%">
+				<param name="movie" value="http://www.allocine.fr/blogvision/19194496"></param>
+				<param name="allowFullScreen" value="true"></param>
+				<param name="allowScriptAccess" value="always"></param>
+				<embed src="(#VALEUR{onShow/movie/trailer/href})" type="application/x-shockwave-flash" width="100%" height="100%" allowFullScreen="true" allowScriptAccess="always">
+				</embed></object>
+				</div>]
+				
+			<B_jour><h4>Seances</h4><ul><BOUCLE_jour(DATA){source table,#VALEUR{scr}}>
+			<li>[(#VALEUR{d}) ]<BOUCLE_horaire(DATA){source table,#VALEUR{t}}{', '}>[(#VALEUR{$})]</BOUCLE_horaire></li>
+			</BOUCLE_jour></ul></B_jour>
+		
+			<BOUCLE_movie(DATA) {source json, #GET{source_movie}}>
+			[<p>(#VALEUR{synopsis})</p>]
+			</BOUCLE_movie>
+		</div>	
+		</BOUCLE_film>
+	 
+	</BOUCLE_salle>
+</BOUCLE_allocine>
+
+

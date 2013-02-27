@@ -1,0 +1,22 @@
+<h2>Liste des fichiers de files.spip.org, scrap&#233;e sur la page</h2>
+
+<B_files>
+
+<p>#PAGINATION</p>
+
+<ul>
+<BOUCLE_files(DATA)
+{source yql, 'select * from html where url="http://files.spip.org/spip-zone/" and xpath="/html/body/div[1]/div[3]/div/div/div/ul[2]";'}
+{datapath query/results/ul/li}
+{pagination 20}
+>
+
+[<li>
+	<a href="[(#VALEUR{div/3/a/href})]">(#VALEUR{div/0/a/content})</a>
+	[<pre>(#VALEUR{div/0/a/href})</pre>]
+</li>]
+</BOUCLE_files>
+
+</ul>
+
+</B_files>
