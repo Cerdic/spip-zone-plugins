@@ -32,7 +32,7 @@ class MCache {
 		$this->backend->init($params);
 	}
 
-	function methode($methode = null) {
+	static function methode($methode = null) {
 		if (!$methode) {
 			$methodes = array('apc', 'xcache', 'eaccelerator', 'filecache', 'nocache');
 			while (!MCache::methode($methode = array_shift($methodes))){};
