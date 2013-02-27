@@ -16,7 +16,7 @@ function formulaires_recherche_objets_charger_dist($objet_dest='rubrique',$id_ob
     $exceptions=charger_fonction('exceptions','inc');
     $exception_objet=$exceptions('objet');
     
-    //On grade l'objet original pour la détection des données de l'objet
+    //On garde l'objet original pour la détection des données de l'objet
     $objet_dest_original=$objet_dest;
     
     if($exception_objet[$objet_dest]){
@@ -34,7 +34,7 @@ function formulaires_recherche_objets_charger_dist($objet_dest='rubrique',$id_ob
 
     $types_lien=array();
     foreach($types as $cle => $valeur){
-        $types_lien[$cle]=_T($valeur);
+        if($valeur)$types_lien[$cle]=_T($valeur);
         }
     $valeurs = array(
     	"id_objet"	=> $id_objet,

@@ -4,9 +4,12 @@
         <ul>
             [(#SAISIE{input,objet_sel,
                     label=<:selection_objet:ajouter_objet:> [(#GET{objets}|table_valeur{#VALEUR})]})]
+                    
+           [(#ENV{types_lien}|count|>{0}|oui)      
             [(#SAISIE{selection,type_lien,
                     label=<:selection_objet:selection_type_lien:> [(#GET{objets}|table_valeur{#VALEUR})],
                     datas=#ENV{types_lien}})]
+                ]
         </ul>
         <p class="boutons">
          <input type="submit" name="ok" class="submit" value="ok"  />
