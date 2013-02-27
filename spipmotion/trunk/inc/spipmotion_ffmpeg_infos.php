@@ -96,7 +96,6 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			$data['spipmotion_compiler']['gcc'] = $versions[3];
 			$data['spipmotion_compiler']['build_date'] = $versions[2];
 			$data['spipmotion_compiler']['build_date_timestamp'] = strtotime($versions[2]);
-			spip_log($data['spipmotion_compiler'],'test');
 
 			/**
 			 * Récupération des éléments de configuration
@@ -130,7 +129,6 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			 * Récupération des codecs disponibles
 			 */
 			if (lire_fichier($chemin_fichier.'_codecs', $contenu_codecs)){
-				spip_log($contenu_codecs,'test');
 				preg_match_all('/ (D| |\.)(E| |\.)(V|A|S|\.)(S| |\.|I)(D|L| |\.)(T|S| ) (.*) {1,} (.*)/', $contenu_codecs, $codecs);
 				$data['spipmotion_codecs'] = array();
 				$data['spipmotion_codecs_audio_decode'] = array();
@@ -147,7 +145,6 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 						'weird_frame_truncation' => $codecs[6][$i] == 'T',
 						'fullname' => $codecs[8][$i]
 					);
-					spip_log($data['spipmotion_codecs'][strtolower(trim($codecs[7][$i]))],'test');
 					if(($codecs[1][$i] == 'D') && ($codecs[3][$i] == 'A'))
 						$data['spipmotion_codecs_audio_decode'][] = trim($codecs[7][$i]);
 					if(($codecs[1][$i] == 'D') && ($codecs[3][$i] == 'V'))

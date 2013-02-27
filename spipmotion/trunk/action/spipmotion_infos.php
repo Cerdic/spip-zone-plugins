@@ -23,13 +23,11 @@ function action_spipmotion_infos_dist(){
 		if(_request('redirect')){
 			$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
 			$GLOBALS['redirect'] = $redirect;
-			spip_log($GLOBALS['redirect'],'test');
 		}
 	}
 }
 
 function action_spipmotion_infos_post($id_document){
-
 	$recuperer_infos = charger_fonction('spipmotion_recuperer_infos','inc');
 	$infos = $recuperer_infos($id_document);
 	return $infos;
