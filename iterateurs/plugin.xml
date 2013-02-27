@@ -3,18 +3,18 @@
 	<slogan>Des boucles sur n'importe quoi !</slogan>
 	<auteur>Fil, Marcimat</auteur>
 	<licence>&#169; 2010-2011 GNU/GPL</licence>
-	<version>0.6.1</version>
-	<etat>test</etat>
-	<description>Les it&#233;rateurs sont une fonctionnalit&#233; de la branche dev de SPIP (futur spip3). Ils permettent de faire des boucles non plus seulement sur des articles et autres objets de la base de donn&#233;es SQL de SPIP, mais sur n'importe quoi : fichiers, tableaux de donn&#233;es, webservices, etc.
+	<version>1.0.0</version>
+	<etat>stable</etat>
+	<description>Les it&#233;rateurs sont une fonctionnalit&#233; de SPIP 3. Ils permettent de faire des boucles non plus seulement sur des articles et autres objets de la base de donn&#233;es SQL de SPIP, mais sur n'importe quoi : fichiers, tableaux de donn&#233;es, webservices, etc.
 
-Ce plugin met cette fonctionnalit&#233; &#224; disposition dans SPIP 2.1. Prenez le temps de lire la documentation et de regarder les nombreuses d&#233;mos disponibles &#224; l'adresse <code>spip.php?page=demo/iterateurs</code>.
+Ce plugin met cette fonctionnalit&#233; &#224; disposition dans SPIP 2.1. Prenez le temps de lire la documentation et de regarder les nombreuses d&#233;mos disponibles. Depuis de la version 1.0.0, ces d&#233;mos sont disponibles via un plugin "[D&#233;mos des It&#233;rateurs->http://contrib.spip.net/Les-demos-des-iterateurs]".
 	</description>
 	<prefix>Iterateurs</prefix>
 
 	<icon>iterateurs.png</icon>
 
 	<fonctions>iterateurs_fonctions.php</fonctions>
-	<lien>http://www.spip-contrib.net/3667</lien>
+	<lien>http://www.spip-contrib.net/?article3667</lien>
 
 	<categorie>outil</categorie>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
