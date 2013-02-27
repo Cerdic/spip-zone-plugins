@@ -9,14 +9,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accents_pas_pris' => 'Los acentos no son tenidos en cuenta («sólo» o «solo», darán como resultado en ambos casos «sólo» y «solo»...)',
-	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
+	'activer_indexation' => 'Activar la indexación de los ficheros @ext@',
 	'asie' => 'asia',
-	'asterisque_terminale' => 'no devolverá nada: el asterisco * debe estar al final', # MODIF
+	'asterisque_terminale' => 'no devolverá nada: el asterisco * debe estar al final',
 	'aussi' => 'también',
 
 	// C
 	'casse_indifferente' => 'La sensibilidad respecto a mayúsculas en la búsqueda de palabras es indiferente.',
-	'configuration_indexation_document' => 'Configuration de l\'indexation des documents', # NEW
+	'configuration_indexation_document' => 'Configuración de la indexación de los documentos',
 	'configurer_egalement_doc' => 'También puede configurar la indexación de los documentos:',
 	'convertir_myisam' => 'Convertir en MyISAM',
 	'convertir_toutes' => 'Convertir todas las tablas en MyISAM',
@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_tous' => 'Crear todos los índices FULLTEXT sugeridos',
 
 	// D
-	'des_utilisations' => '@nb@ utilisations', # NEW
+	'des_utilisations' => '@nb@ utilizaciones',
 	'descriptif' => 'Descriptivo',
 	'documents_proteges' => 'Documentos protegidos',
 
@@ -35,15 +35,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enfanter' => 'niñera',
 	'enfantillage' => 'niñería',
 	'enfants' => 'niños',
-	'erreur_binaire_indisponible' => 'Ce logiciel n\'est pas disponible sur le serveur.', # NEW
+	'erreur_binaire_indisponible' => 'Este software no está disponible en el servidor',
 	'erreur_doc_bin' => 'Debe indicar el binario a utilizar para extraer los .doc',
 	'erreur_intervalle_cron' => 'Debe indicar un intervalo superior a un segundo.',
 	'erreur_nb_docs' => 'Debe indicar un número de documentos a tratar por iteración superior a uno. ',
 	'erreur_pdf_bin' => 'Debe indicar el binario a utilizar para extraer los .pdf',
-	'erreur_ppt_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .ppt', # MODIF
+	'erreur_ppt_bin' => 'Debe indicar el binario a utilizar para extraer los .ppt',
 	'erreur_taille_index' => 'Hay que indexar al menos un carácter.',
-	'erreur_verifier_configuration' => 'Il y a des erreurs de configuration.', # NEW
-	'erreur_xls_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .xls', # MODIF
+	'erreur_verifier_configuration' => 'Hay errores de configuración.',
+	'erreur_xls_bin' => 'Debe indicar el binario a utilizar para extraer los .xls',
 	'et' => 'Y',
 	'etranger' => 'extranjero',
 	'exemples' => 'Ejemplos de utilización',
@@ -91,9 +91,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_index' => 'Indexados',
 	'nb_non_index' => 'No indexados',
 	'nb_ptg' => 'Protegidos (no indexados)',
-	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip.', # MODIF
+	'necessite_version_php' => 'Necesita PHP 5.2 como mínimo, así como la opción -enable-zip.',
 	'nombre_caracteres' => 'Número de caracteres indexados (desde el principio del documento).',
-	'nombre_documents' => 'Nombre de documents à traiter par itération du CRON', # MODIF
+	'nombre_documents' => 'Número de documentos a tratar por iteración del CRON',
 
 	// O
 	'ou_bien' => 'o bien',
@@ -104,7 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'premier_soit' => 'SEA',
 
 	// Q
-	'que_des_exemples' => 'NB : les adresses de binaires et options proposées ici ab initio ne sont que des exemples.', # MODIF
+	'que_des_exemples' => 'Nótese: las direcciones de binarios y opciones propuestas aquí desde el principio no son más que ejemplos.',
 
 	// R
 	'regenerer_tous' => 'Regenerar todos los índices FULLTEXT',
@@ -133,7 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'utiliser_operateurs_logiques' => 'La búsqueda utiliza los operadores lógicos más corrientes.',
 
 	// V
-	'voir_doc_ptg' => 'Ver los documentos protegidos' # MODIF
+	'voir_doc_ptg' => 'Ver los documentos protegidos'
 );
 
 ?>
