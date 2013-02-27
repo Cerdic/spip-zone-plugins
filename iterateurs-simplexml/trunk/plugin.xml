@@ -3,14 +3,14 @@
 	<slogan>Le xml vraiment accessible dans SPIP</slogan>
 	<auteur>Cedric, Marcimat</auteur>
 	<licence>&#169; 2013 GNU/GPL</licence>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<etat>test</etat>
 	<description>La boucle DATA/xml n'est pas la plus aboutie dans les it&#233;rateurs de SPIP. Voir [la discussion sur SPIP-Contrib->http://contrib.spip.net/Les-Iterateurs-pour-SPIP-2-1#forum457893]. Ce plugin ajoute un type "simplexml" pour la boucle DATA sous SPIP 3.0, pour tests et en attendant l'int&#233;gration dans une version ult&#233;rieure. 
 	</description>
-	<prefix>iterateurs-simplexml</prefix>
+	<prefix>itersimplexml</prefix>
 
 
-	<fonctions>iterateurs-simplexml_fonctions.php</fonctions>
+	<fonctions>itersimplexml_fonctions.php</fonctions>
 	<lien></lien>
 
 	<categorie>outil</categorie>
