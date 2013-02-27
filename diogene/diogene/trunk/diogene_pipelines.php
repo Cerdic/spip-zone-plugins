@@ -26,11 +26,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		Le contexte du pipeline modifié
  */
 function diogene_editer_contenu_objet($flux){
+	$args = $flux['args'];
 	$type = $args['type'];
 	$pipeline = pipeline('diogene_objets', array());
-
 	if (in_array($type,array_keys($pipeline))){
-		$args = $flux['args'];
 		$langues_dispos = explode(',',$GLOBALS['meta']['langues_multilingue']);
 		
 		/**
@@ -189,7 +188,6 @@ function diogene_editer_contenu_objet($flux){
 				if($type=='page')
 					$type='article';
 
-				spip_log($args['contexte']['statut'],'test');
 				if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_'.$diogene['objet'].'.html')){
 					$saisie .= recuperer_fond('formulaires/selecteur_statut_'.$diogene['objet'],$args['contexte']);
 				}

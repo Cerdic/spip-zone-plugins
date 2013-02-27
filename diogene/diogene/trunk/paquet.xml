@@ -19,9 +19,9 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 	
-	<pipeline nom="diogene_champs_texte" />
-	<pipeline nom="diogene_charger" />
-	<pipeline nom="diogene_champs_pre_edition" />
+	<pipeline nom="diogene_charger" action="" />
+	<pipeline nom="diogene_champs_pre_edition" action="" />
+	<pipeline nom="diogene_champs_texte" action="" />
 	<pipeline nom="diogene_avant_formulaire" inclure="diogene_pipelines.php" />
 	<pipeline nom="diogene_objets" inclure="diogene_pipelines.php" />
 	<pipeline nom="diogene_ajouter_saisies" inclure="diogene_pipelines.php" />
