@@ -19,7 +19,4 @@
 
 	<traduire module="autorite" reference="fr" gestionnaire="salvatore" />
 
-	<spip compatibilite="[1.9.2;2.1.99]">	
-		<necessite nom='cfg' compatibilite='[1.5.0;]' />
-	</spip>
 </paquet>
