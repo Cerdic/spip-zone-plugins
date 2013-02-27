@@ -82,7 +82,7 @@
 			</td>
 		</tr>
 		]
-		<BOUCLE_nouveautes(ARTICLES){date<=#DATE}{date>#DATE_REDAC}{0,5}>
+		<BOUCLE_nouveautes(ARTICLES){date<=#DATE}{date>#DATE_REDAC}{!par date}{0,5}>
 		<tr xmlns="">
 			<td style="margin-bottom:0;line-height:1.4em;">
 
@@ -115,7 +115,7 @@
 			</td>
 		</tr>
 		</BOUCLE_nouveautes>
-		<BOUCLE_nouveautesbreves(BREVES){date_heure<=#DATE}{date_heure>#DATE_REDAC}{0,5}>
+		<BOUCLE_nouveautesbreves(BREVES){date_heure<=#DATE}{date_heure>#DATE_REDAC}{!par date}{0,5}>
 		<tr xmlns="">
 			<td style="margin-bottom:0;line-height:1.4em;">
 
