@@ -106,7 +106,8 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 
 	# lang
 	if ($env['lang']) {
-		$cl->SetFilter ( "lang", sprintf('%u',CRC32($env['lang'])), $exclude=false );
+		$crc = sprintf('%u',CRC32($env['lang']));
+		$cl->SetFilter ( "lang", array($crc) , $exclude=false );
 	}
 
 	# matching mode
