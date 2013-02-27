@@ -9,7 +9,7 @@
 	<icon>prive/themes/spip/images/jquerysuperfish-32.png</icon>
 	<description>
 		<multi>
-			[fr]Une adaptation pour Spip du plugin [jQuery Superfish->http://users.tpg.com.au/j_birch/plugins/superfish/ &#224; partir d'une structure ul/li g&#233;n&#233;r&#233;e par exemple par le plugin [Menus->http://www.spip-contrib.net/Menus,3139]
+			[fr]Une adaptation pour Spip du plugin [jQuery Superfish->http://users.tpg.com.au/j_birch/plugins/superfish/] &#224; partir d'une structure ul/li g&#233;n&#233;r&#233;e par exemple par le plugin [Menus->http://www.spip-contrib.net/Menus,3139]
 		</multi>
 	</description>
 	<prefix>jquerysuperfish</prefix>
