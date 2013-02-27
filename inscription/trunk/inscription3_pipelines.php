@@ -37,7 +37,7 @@ function inscription3_i3_exceptions_chargement_champs_auteurs_elargis($array){
  */
 
 function inscription3_i3_exceptions_des_champs_auteurs_elargis($array){
-	// liste des champs pour lesquels on ne doit pas créer de champs dans la table spip_auteurs
+	// liste des champs pour lesquels on ne doit pas créer de champ dans la table spip_auteurs
 
 	// Principalement les champs déjà présents dans spip_auteurs
 	$array[] = 'id_auteur';
@@ -78,11 +78,11 @@ function inscription3_i3_exceptions_des_champs_auteurs_elargis($array){
  * Insertion dans le pipeline i3_verifications_specifiques du plugin inscription3
  * Utilisation de l'API verifier du plugin éponyme
  *
- * Pour chaque champs on fourni un array associatif contenant :
+ * Pour chaque champ on fourni un array associatif contenant :
  * - type => la fonction de l'api de vérification à utiliser
  * - options => un array des options à passer à cette fonction
  *
- * @return array Tableau contenant plusieurs tableaux en fonction du type de champs
+ * @return array Tableau contenant plusieurs tableaux en fonction du type de champ
  * @param object $array Doit recevoir un tableau du même type
  */
 
@@ -821,8 +821,8 @@ function inscription3_editer_contenu_objet($flux){
 			}
 			/**
 			 * On vire le champs création du formulaire (ne doit pas être modifié manuellement)
-			 * Si on n'a pas ce champs rempli, on utilise la date actuelle pour le remplir
-			 * Logiquement ce champs est rempli automatiquement via pre_insertion pour tous les auteurs
+			 * Si on n'a pas ce champ rempli, on utilise la date actuelle pour le remplir
+			 * Logiquement ce champ est rempli automatiquement via pre_insertion pour tous les auteurs
 			 */
 			if($config['creation'] == 'on'){
 				$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_creation.*<\/li>),Uims","",$flux['data'],1);
