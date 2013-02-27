@@ -15,8 +15,7 @@ function recherchesphinx_array_dist($recherche, $options) {
 		$u = serialize(array('recherche' => $recherche));
 		$a = array();
 		foreach(inc_sphinx_to_array_dist($u, $selection='ecrire') as $r) {
-			if ($id_article = $r['attrs']['id_objet']
-			AND $r['attrs']['source'] == 1)
+			if ($id_article = $r['attrs']['id_objet'])
 				$a[$id_article] = $r['weight'];
 		}
 		return $a;
@@ -48,21 +47,27 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 
 	// appel par une page mot :
 	//   (ou limiter aux mots-clés)
-	// ou par l'url &mots=italie
+	// ou par l'url &mots=italie ; &mots[]=italie&mots[]=economie
 	// sprintf('%u') necessaire car le crc32 en 32 bits n'est pas le même qu'en 64
-	if (strlen($env['mots'])) {
-		$cmot = sprintf('%u',crc32(trim(mb_strtolower($env['mots'], 'UTF-8'))));
+	if (is_string($env['mots'])) {
+		$env['mots'] = array($env['mots']);
+	}
+	if (is_array($env['mots'])) {
+		foreach ($env['mots'] as $mot) {
+			if (strlen($mot))
+			$cmot[] = sprintf('%u',crc32(trim(mb_strtolower($mot, 'UTF-8'))));
+		}
 	}
 
-	# TODO
-	# $mots peut être un array &mots[]=Défense, ou un string &mots=Défense
-	# &debut=1962-05&fin=2005-09 : plage temporelle
-	# &id_auteur=13226 => auteur (highlander)
-	
+	# demande d'un id_auteur
+	if (isset($env['id_auteur'])) {
+		$id_auteur = intval($env['id_auteur']);
+	}
 
 	# validité de la requête ?
 	if (!strlen($recherche)
 	AND !isset($cmot)
+	AND !$id_auteur
 	)
 		return false;
 
@@ -83,9 +88,26 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 	$cl->SetLimits($debut, $max_pagination);
 
 
-	# mot-clé sans fulltext
-	if (isset($cmot))
-		$cl->SetFilter ( "cmot", array($cmot), $exclude=false );
+	# mots-clés sans fulltext
+	if (isset($cmot)) {
+
+		# on veut un ET logique
+		foreach ($cmot as $m) {
+			$cl->SetFilter ( "cmot", array($m), $exclude=false );
+		}
+		# ca, ca fait un OU logique
+		# $cl->SetFilter ( "cmot", $cmot, $exclude=false );
+
+	}
+
+	# id_auteur
+	if ($id_auteur)
+		$cl->SetFilter ( "id_auteurs", array($id_auteur), $exclude=false );
+
+	# lang
+	if ($env['lang']) {
+		$cl->SetFilter ( "lang", sprintf('%u',CRC32($env['lang'])), $exclude=false );
+	}
 
 	# matching mode
 	if (strlen($recherche)) {
@@ -103,7 +125,16 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 
 	# filtrage
 	#$cl->SetFilter ( "autotags", $tags );
-	#$cl->SetFilterRange ( "date", $min, $max, $exclude=false );
+
+	# debut et fin sous la forme d'une date 1999-01
+	if (isset($env['debut'])
+	OR isset($env['fin'])
+	) {
+		$min = strtotime($env['debut']);
+		$max = strtotime($env['fin']);
+		if (!$max) $max = strtotime('2999-01');
+		$cl->SetFilterRange ( "dateu", $min, $max, $exclude=false );
+	}
 
 	# booster le titre et l'auteur
 	$cl->SetFieldWeights(array(
@@ -149,17 +180,21 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 	# agir enfonction de la selection demandee :
 	if ($selection == 'ecrire') {
 		# espace prive
+		if (defined('_SPHINX_ECRIRE_SOURCE')) {
+			$cl->SetFilter ( "source", array(_SPHINX_ECRIRE_SOURCE) );
+		}
+
 		$cl->SetLimits(0,500);
 	}
 	else if (function_exists($f = 'sphinx_selection_'.$selection)) {
 		// passage par parametre de $cl et $sources
 		// pour modification eventuelle par une fonction maison
-		$f($cl,$sources,$query);
+		$f($cl,$sources,$query,$env);
 	}
 	else if (function_exists($f = 'sphinx_selection_default')) {
 		// passage par parametre de $cl et $sources
 		// pour modification eventuelle par une fonction maison
-		$f($cl,$sources,$query);
+		$f($cl,$sources,$query,$env);
 	}
 
 	# recuperer les données
