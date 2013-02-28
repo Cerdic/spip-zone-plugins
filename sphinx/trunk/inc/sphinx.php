@@ -58,6 +58,11 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 			$cmot[] = sprintf('%u',crc32(trim(mb_strtolower($mot, 'UTF-8'))));
 		}
 	}
+	else if (isset($env['id_mot'])
+	AND $mot = sql_fetsel('titre', 'spip_mots', 'id_mot='.intval($env['id_mot']))) {
+		$mot = $mot['titre'];
+		$cmot = array(sprintf('%u',crc32(trim(mb_strtolower($mot, 'UTF-8')))));
+	}
 
 	# demande d'un id_auteur
 	if (isset($env['id_auteur'])) {
