@@ -34,5 +34,13 @@
 	<pipeline nom="affiche_droite" action="affiche_droite" inclure="forms_pipeline.php" />
 	<pipeline nom="header_prive" inclure="forms_pipeline.php" />
 	<pipeline nom="affiche_milieu" inclure="forms_pipeline.php" />
+	<pipeline nom="forms_ajoute_styles" action="forms_ajoute_styles" inclure="forms_fonctions-v1.php" />
+	<pipeline nom="forms_input_champs" action="forms_input_champs" inclure="forms_fonctions-v1.php" />
+	<pipeline nom="forms_label_details" action="forms_label_details" inclure="forms_fonctions-v1.php" />
+	<pipeline nom="forms_calcule_valeur_en_clair" action="forms_calcule_valeur_en_clair" inclure="forms_fonctions-v1.php" />
+
+	<pipeline nom="forms_pre_remplit_formulaire" />
+	<pipeline nom="forms_bloc_edition_champ" />
+	<pipeline nom="forms_types_champs" />
 	<chemin path='' />
 </paquet>
