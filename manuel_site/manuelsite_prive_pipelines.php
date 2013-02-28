@@ -8,7 +8,7 @@ function manuelsite_body_prive($flux){
 	include_spip('inc/config');
 	$conf_manuelsite = lire_config('manuelsite',array());
 	if($conf_manuelsite["id_article"] && (!isset($conf_manuelsite["afficher_bord_gauche"]) || $conf_manuelsite["afficher_bord_gauche"]))
-		$flux .= recuperer_fond('prive/manuelsite',array('id_article'=>$conf_manuelsite["id_article"]));
+		$flux .= recuperer_fond('prive/manuelsite',array('id_article'=>intval($conf_manuelsite["id_article"])));
 	return $flux;
 }
 
