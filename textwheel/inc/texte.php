@@ -649,7 +649,7 @@ function traiter_tableau($bloc) {
 	  $align = true;
 	  for ($j=0;$j<$k;$j++) {
 		  $rowspans[$j][$i] = 1;
-			if ($align AND preg_match('/^\d+([.,]?)\d*$/', trim($lignes[$j][$i]), $r)){
+			if ($align AND preg_match('/^[+-]?(?:\s|\d)*([.,]?)\d*$/', trim($lignes[$j][$i]), $r)){
 				if ($r[1])
 					$align = $r[1];
 			}
