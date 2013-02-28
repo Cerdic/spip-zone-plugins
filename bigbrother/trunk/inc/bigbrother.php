@@ -54,7 +54,7 @@ function bigbrother_tester_la_visite_du_site(){
 	else if (isset($GLOBALS["HTTP_SERVER_VARS"]["HTTP_REFERER"])) $referer = $GLOBALS["HTTP_SERVER_VARS"]["HTTP_REFERER"];
 
 	// On fait seulement si qqn est connecté
-	if(($visiteur_session['id_auteur'] > 0) OR ($ouvert = (lire_config('bigbrother/enregistrer_connexion_anonyme') == 'oui'))){
+	if((include_spip('inc/session') and session_get('id_auteur') > 0) OR ($ouvert = (lire_config('bigbrother/enregistrer_connexion_anonyme') == 'oui'))){
 		include_spip('inc/filtres');
 		$time = 0;
 		if($ouvert && !intval($visiteur_session['id_auteur'])){

@@ -137,7 +137,7 @@ function bigbrother_jquery_plugins($array){
 
 function bigbrother_affichage_final($flux){
 	// Si la config est ok, à chaque hit, on teste s'il faut enregistrer la visite ou pas
-	if (lire_config('bigbrother/visite') == 'oui')
+	if (include_spip('inc/config') and lire_config('bigbrother/visite') == 'oui')
 		bigbrother_tester_la_visite_du_site();
 	return $flux;
 }

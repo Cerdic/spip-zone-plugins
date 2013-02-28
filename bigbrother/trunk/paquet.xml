@@ -1,7 +1,7 @@
 <paquet
 	prefix="bigbrother"
 	categorie="statistique"
-	version="0.3.3"
+	version="0.3.4"
 	etat="dev"
 	compatibilite="[3.0.0;["
 	logo="images/bigbrother.png"
