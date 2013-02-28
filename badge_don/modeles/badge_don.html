@@ -1,3 +1,3 @@
 <div id="badge_don">
-	<a href="#CONFIG{badge_don/url_don,#VAL{_BADGE_DON_URL}|defined|?{#EVAL{_BADGE_DON_URL},''}}"[ style="background-image: url((#CHEMIN{images/badge_don.png}))"]><:badge_don:titre_lien:></a>
+	<a href="[(#CONFIG{badge_don/url_don,#VAL{_BADGE_DON_URL}|defined|?{#EVAL{_BADGE_DON_URL},''}}|traiter_lien_implicite|sinon{#CONFIG{badge_don/url_don,#VAL{_BADGE_DON_URL}|defined|?{#EVAL{_BADGE_DON_URL},''}}})]"[ style="background-image: url((#CHEMIN{images/badge_don.png}))"]><:badge_don:titre_lien:></a>
 </div>

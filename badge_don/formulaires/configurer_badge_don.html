@@ -5,7 +5,8 @@
 #ACTION_FORMULAIRE{#ENV{action}}
 <ul>
 	<li class="badge_don_url_don[ (#ENV**{erreurs}|table_valeur{url_don}|oui)erreur]">
-		<label for="url_don"><:badge_don:label_url_don:></label>[
+		<label for="url_don"><:badge_don:label_url_don:></label>
+		<p class="explication"><:badge_don:explication_url_don:></p>[
 		<span class='erreur'>(#ENV**{erreurs}|table_valeur{url_don})</span>
 		]<input type="text" class="text" name="url_don" value="[(#ENV{url_don}|sinon{#VAL{_BADGE_DON_URL}|defined|?{#EVAL{_BADGE_DON_URL},''}})]" id="url_don" />
 	</li>

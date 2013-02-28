@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Badge pour dons</nom>
 	<auteur>b_b</auteur>
-	<version>0.1.2</version>
+	<version>0.2.0</version>
 	<etat>stable</etat>
 	<prefix>badge_don</prefix>
 	<slogan>Un badge pour appeler au don</slogan>
