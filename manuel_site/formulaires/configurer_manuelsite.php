@@ -7,7 +7,7 @@ include_spip('inc/config');
 
 function formulaires_configurer_manuelsite_saisies_dist(){
 	$config = lire_config('manuelsite',array());
-
+	
 	return array(
 		array(
 			'saisie' => 'fieldset',
@@ -17,13 +17,13 @@ function formulaires_configurer_manuelsite_saisies_dist(){
 			),
 			'saisies' => array(
 				array(
-					'saisie' => 'selecteur_article',
+					'saisie' => 'input',
 					'options' => array(
 						'nom' => 'id_article',
 						'label' => _T('manuelsite:label_id_article'),
 						'explication' => _T('manuelsite:explication_id_article'),
 						'obligatoire' => 'oui',
-						'defaut' =>'article|'.$config['id_article'],
+						'defaut' => $config['id_article']
 					)
 				),
 				array(
@@ -112,10 +112,6 @@ function formulaires_configurer_manuelsite_verifier(){
  * @return array
  */
 function manuelsite_formulaire_traiter($flux){
-	$id_article = preg_replace('(article\|)','',_request('id_article'));
-	
-	ecrire_config('manuelsite/id_article',$id_article[0]);
-	
 	include_spip('inc/invalideur');
 	suivre_invalideur('1');
 	return $flux;
