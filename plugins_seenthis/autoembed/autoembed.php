@@ -128,8 +128,11 @@ function embed_url($url) {
 				} else if ($source == "Twitpic" OR $source == "500px") {
 					$embed = "<a href='$url'><img src='$vignette' alt='' style='max-width:200px; max-height: 200px;' /></a>";
 				}
-				
-				$code_ae = "<div class='oembed-container'>".$embed."</div>";	
+
+				// inserer une "class=oembed-source-mp3audio" 
+				$src = preg_replace(',[^\w]+,', '', strtolower($source));
+
+				$code_ae = "<div class='oembed-container oembed-source-$src'>".$embed."</div>";
 				
 				
 			}
