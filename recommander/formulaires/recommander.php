@@ -77,22 +77,17 @@ function formulaires_recommander_traiter_dist($titre, $url='', $texte='', $subje
 		'recommander_message'=>_request('recommander_message'),
 	);
 	$body = recuperer_fond('modeles/recommander_email',$contexte);
+	$header = "X-Originating-IP: ".$GLOBALS['ip']."\n";
 
 	$res = true;
 	if (
 		include_spip("inc/notifications")
 		AND function_exists('notifications_envoyer_mails')){
-		notifications_envoyer_mails(_request('recommander_to'), $body, $subject, _request('recommander_from'), "X-Originating-IP: ".$GLOBALS['ip']);
+		notifications_envoyer_mails(_request('recommander_to'), $body, $subject, _request('recommander_from'), $header);
 	}
 	else {
 		$envoyer_mail = charger_fonction('envoyer_mail','inc');
-		if (!$envoyer_mail(
-			_request('recommander_to'),
-			$subject,
-			$body,
-			_request('recommander_from'),
-			"X-Originating-IP: ".$GLOBALS['ip']."\n"
-		))
+		if (!$envoyer_mail(_request('recommander_to'),$subject,$body,_request('recommander_from'),$header))
 			$res = false;
 	}
 	if (!$res)
