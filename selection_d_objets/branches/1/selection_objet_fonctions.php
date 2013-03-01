@@ -37,8 +37,7 @@ function titre_objet_sel($objet,$contexte){
     $exceptions=charger_fonction('exceptions','inc');
     $exception_titre=$exceptions('titre');
     //Les exceptions du titre
-    if(!$titre=$exception_titre[$objet])$titre=$contexte['titre'];
-   
+    if(!$titre=$contexte[$exception_titre[$objet]])$titre=$contexte['titre'];
     if(!$titre){
         if($objet=='document'){
             $f=explode('/',$contexte['fichier']);
@@ -100,7 +99,6 @@ function url_objet($id_objet,$objet,$titre='',$url=''){
 
 
 /*Fournit un tableau avec id_objet=>donnees_objet*/
-
 function tableau_objet($objet,$id_objet='',$champs='*',$where=array(),$filtrer=array(),$array_donnes=true){
     $d=info_objet($objet,$id_objet,$champs,$where);
     //Les tables non conforme, faudrait inclure une pipeline
