@@ -6,7 +6,7 @@ Mail HTML simplifie mis en forme complete par le filtre |facteur_email_wrap_to_h
 ]
 <title>[[(#NOM_SITE_SPIP|textebrut)]] [<:forum:forum_forum:>][ (#TITRE|nettoyer_titre_email)]</title>
 
-<intro>[(#STATUT|=={spam}|oui)*SPAM* ]Un court texte d'intro affiche dans certains clients mails qui affichent le debut du texte</intro>
+<intro>[*SPAM*(#STATUT|=={spam}|oui)][(#TEXTE|safehtml|couper{100})]</intro>
 
 <body>
 <div class="header">
