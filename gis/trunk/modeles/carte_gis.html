@@ -29,6 +29,7 @@ Parametres possibles :
 
 - autocenterandzoom|centrer_auto = oui        centrer et zoomer la carte automatiquement pour afficher tous les marqueurs
 - localize_visitor|localiser_visiteur = oui   centrer la carte sur la position du visiteur (API geolocation HTML5)
+- id_a_ouvrir                                 id_gis de l'infobulle à afficher au chargement(marqueur uniquement)
 
 - objets = gis                     type d'objets à afficher (fichier json/gis_xx qui génère la source de donnees)
 - limit|limite = 500               nombre max de marqueurs à afficher, 500 par defaut
@@ -192,6 +193,7 @@ var map[(#GET{id})];
 			geojson.addData(data);
 			[(#ENV{autocenterandzoom,#ENV{centrer_auto}}|oui)
 			map.fitBounds(geojson.getBounds());]
+			[gis_focus_marker((#ENV{id_a_ouvrir}),['(#GET{id})']);]
 		}
 
 		</BOUCLE_fonction_analyse_json>

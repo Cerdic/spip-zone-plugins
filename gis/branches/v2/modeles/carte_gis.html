@@ -23,6 +23,7 @@
 	- objets = gis									type d'objets à afficher (fichier json/gis_xx qui génère la source de donnees)
 	- autocenterandzoom|centrer_auto = oui			centrer et zoomer la carte automatiquement pour afficher tous les marqueurs
 	- autofocus_marker = oui						permet de forcer l'affichage d'une seule infobulle à la fois
+	- id_a_ouvrir									id_gis de l'infobulle à afficher au chargement(marqueur uniquement)
 	- kml = 12										kml à superposer à la carte (id_document ou url)
 	- localize_visitor|localiser_visiteur = oui		centrer la carte sur la position du visiteur (API geolocation HTML5)
 	- point = non									si elle vaut "non" cette option n'affichera pas de points du tout (utile pour n'afficher qu'un kml par exemple)
@@ -44,7 +45,6 @@
 	{attente=#ENV{attente}}
 	{ombre=#ENV{ombre}}
 	{load_map=#ENV{load_map}}
-	{id_a_ouvrir=#ENV{id_a_ouvrir}}
 	{swfobject=#CONFIG{gis/swfobject,oui}}
 	
 	// pas documentes
@@ -56,6 +56,7 @@
 	{latit}{lonxit}{zoom}{hauteur=#GET{height}}{largeur=#GET{width}}{id_carte_gis}{zoom_molette=#ENV{zoom_molette}}
 	{control}{control_type=#ENV{control_type}}{type}{limit=#ENV{limit}}
 	{id_rubrique=#GET{id_rubrique}}{id_secteur}{id_mot}{id_article}{id_auteur}{recherche}{id_groupe}
+	{id_a_ouvrir=#ENV{id_a_ouvrir}}
 ]
 
 <div id="map[(#GET{id})]" class="carte_gis"[(#ENV{style}|!={'non'}|?{' '})style="[width:(#GET{width});][ height:(#GET{height});]"]></div>
@@ -147,6 +148,7 @@ var map[(#GET{id})];
 					}]
 					[(#ENV{autofocus_marker}|oui)
 					gis_autofocus_marker('[(#GET{id})]');]
+					[gis_focus_marker((#ENV{id_a_ouvrir}),['(#GET{id})']);]
 				}
 			}
 		);]
