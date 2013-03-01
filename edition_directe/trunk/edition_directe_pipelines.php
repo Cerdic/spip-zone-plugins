@@ -27,6 +27,7 @@ function edition_directe_affiche_gauche($flux){
 	return $flux;
 }
 
+//Modifié la page de l'objet
 function edition_directe_recuperer_fond($flux){	
 	include_spip('edition_directe_fonctions');
 	$fond=$flux['args']['fond'] ;
@@ -86,4 +87,22 @@ function edition_directe_recuperer_fond($flux){
  return $flux;   
 }
 
+// Gérer le retour après validation du formulaire
+function edition_directe_formulaire_traiter($flux){
+    $objets=objets_edition_directe();
+     $form = $flux['args']['form'];
+     $objet=str_replace('editer_','',$form);
+    if(in_array($objet,$objets)){
+        if($objet=='site'){
+         $id_objet=$flux['data']['id_syndic'];
+        $flux['data']['redirect']=generer_url_ecrire($objet,'id_syndic='.$id_objet);   
+        }
+    else{
+        $id_objet=$flux['data']['id_'.$objet];
+        $flux['data']['redirect']=generer_url_ecrire($objet,'id_'.$objet.'='.$id_objet);
+        }
+        
+    }
+    return $flux;
+}
 ?>
