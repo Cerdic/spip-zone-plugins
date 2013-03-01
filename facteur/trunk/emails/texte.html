@@ -3,114 +3,84 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>[(#ENV{sujet})]</title>
-	<!-- Facebook sharing information tags -->
-	<meta property="og:title" content="[(#ENV{sujet}|attribut_html)]">
-	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<style type="text/css">
 		#outlook a {padding: 0;}
 		body {width: 100% !important;}
 		body {margin: 0;padding: 0;}
-		img {border: none;font-size: 16px;font-weight: bold;height: auto;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;}
+		img {border: none;font-size: inherit;font-weight: bold;height: auto;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;}
 		#backgroundTable {height: 100% !important;margin: 0;padding: 0;width: 100% !important;}
-		body, .backgroundTable {background-color: #FAFAFA;}
-		#templateContainer {border: 1px solid #DDDDDD;}
-		h1,.h1,h2,.h2,h3,.h3,h4,.h4 {color: #202020;display: block;font-family: 'Helvetica Neue',Helvetica,Arial;font-size: 22px;font-weight: bold;line-height: 100%;margin-bottom: 10px;text-align: left;}
-		h1,.h1 {font-size: 28px;} h2,.h2 {font-size: 26px;}
-		h3,.h3 {font-size: 22px;}	h4,.h4 {font-size: 20px;}
-		h5,.h5 {font-size: 18px;}	h6,.h6 {font-size: 16px;}
-		#templatePreheader {background-color: #FAFAFA;}
-		.preheaderContent div {color: #303030;font-family: 'Helvetica Neue',Helvetica,Arial;font-size: 12px;line-height: 100%;text-align: left;}
-		.preheaderContent div a:link, .preheaderContent div a:visited {color: #336699;font-weight: normal;text-decoration: underline;}
-		.preheaderContent div img {height: auto;max-width: 600px;}
+		body, .backgroundTable {background-color: #DDDDDD;}
+		#templateContainer {border: 1px solid #CCCCCC;max-width: 600px !important;}
+		h1,.h1,h2,.h2,h3,.h3,h4,.h4 {color: #202020;display: block;font-family: 'Helvetica Neue',Helvetica,Arial;margin-bottom: 0.5em;text-align: left;}
 		#templateHeader {background-color: #FFFFFF;border-bottom: 0;}
-		.headerContent {color: #202020;font-family: 'Helvetica Neue',Helvetica,Arial;font-size: 34px;font-weight: bold;line-height: 100%;padding: 0;text-align: center;vertical-align: middle;}
-		.headerContent a:link, .headerContent a:visited {color: #336699;font-weight: normal;text-decoration: underline;}
-		#headerImage {height: auto;max-width: 600px !important;}
-		#templateContainer, .bodyContent {background-color: #FDFDFD;}
-		.bodyContent div {color: #303030;font-family: 'Helvetica Neue',Helvetica,Arial;font-size: 16px;line-height: 150%;text-align: left;}
+		#templateContainer, .bodyContent {background-color: #FFFFFF;margin-top: 20px;}
+		.bodyContent {border-top:10px solid [#(#LOGO_SITE_SPIP|couleur_extraire|couleur_eclaircir_si_foncee{168}|sinon{BBB})];border-bottom:10px solid [#(#LOGO_SITE_SPIP|couleur_extraire|couleur_eclaircir_si_foncee{168}|sinon{BBB})];}
+		.bodyContent div {color: #222222;font-family: 'Helvetica Neue',Helvetica,Arial;line-height: 150%;text-align: left;}
 		.bodyContent div a:link, .bodyContent div a:visited {color: #336699;font-weight: normal;text-decoration: underline;}
 		.bodyContent img {display: inline;margin-bottom: 10px;}
-		#templateFooter {background-color: #FDFDFD;border-top: 0;}
-		.footerContent div {color: #707070;font-family: 'Helvetica Neue',Helvetica,Arial;font-size: 14px;line-height: 125%;text-align: left;}
-		.footerContent div a:link, .footerContent div a:visited {color: #336699;font-weight: normal;text-decoration: underline;}
-		.footerContent img {display: inline;}
-		#social {background-color: #FAFAFA;border: 1px solid #F5F5F5;}
-		#social div {text-align: center;}
-		#utility {background-color: #FDFDFD;border-top: 1px solid #F5F5F5;}
-		#utility div {text-align: center;}
-		.spip_code, .spip_cadre {color: #606060;font-family: Courier,"Courier New",monospace;}
+		.bodyContent img.puce {display: inline;margin-bottom: 0;}
+		.spip_code, .spip_cadre {color: #606060;font-family: Courier,"Courier New",monospace;font-size: 1em;}
 		.coloration_code ol {list-style: none;}
-		img.puce {margin-bottom: 0}
+		.spip_logos {float: right;margin-left: 10px;}
+		.text {word-wrap:break-word;}
+		.header,.footer {background: #e9e9e9;padding: 20px;margin-left: -20px;margin-right: -20px;}
+		.header hr,.footer hr {display: none}
 		@media only screen and (max-width: 640px) {
 			html,body {width: 100% !important;}
-			#templatePreheader {width: 100% !important;}
-			.preheaderContent,.bodyContent,.footerContent {padding: 0 !important;}
-			#templateContainer {width: 100% !important;border: 0 !important;}
+			body, .backgroundTable {background-color: #ffffff !important;}
+			.bodyContent {padding:0 0 10px !important;border-top:0;border-bottom:0;}
+			#templateContainer {width: 100% !important;border: 0 !important;margin-top: 0}
 			#templateBody {width: 100% !important;}
-			#templateFooter {width: 100% !important;}
-			#canspamBar {width: auto !important;}
 			.padding {padding-left:0 !important;padding-right:0 !important;}
-			.text {font-size: 16px !important;color: #101010 !important;}
+			.text {color: #101010 !important;}
+			.header,.footer {padding: 10px;margin-left: -10px;margin-right: -10px;}
 		}
 		@media only screen and (max-device-width: 480px) {
 			html,body {width: 320px !important;}
-			#templatePreheader {width: 320px !important;display: none;}
-			.preheaderContent,.bodyContent,.footerContent {padding: 0 !important;}
-			#templateContainer {width: 320px !important;border: 0 !important;}
+			body, .backgroundTable {background-color: #ffffff !important;}
+			.bodyContent {padding: 0 0 10px !important;border-top:0;border-bottom:0;}
+			#templateContainer {width: 320px !important;border: 0 !important;margin-top: 0;}
 			#templateBody {width: 320px !important;}
-			#templateFooter {width: 320px !important;}
-			#canspamBar {width: auto !important;}
 			.padding {padding-left:0 !important;padding-right:0 !important;}
-			.text {font-size: 16px !important;color: #101010 !important;}
+			.text {color: #101010 !important;}
 		}
 	</style>
 </head>
 <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0"
 			style="margin: 0;padding: 0;width: 100% !important;">
 <center>
+	[<div style="display: none;">(#ENV{intro,''})</div>]
 	<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="backgroundTable"
 				 style="margin: 0;padding: 0;height: 100% !important;width: 100% !important;">
 		<tr>
 			<td align="center" valign="top">
-				<!-- // Begin Template Preheader \\ -->
-				<table border="0" cellpadding="0" cellspacing="0" width="600" id="templatePreheader"
-							 style="background-color: #FAFAFA;">
-					<tr>
-						<td valign="top" class="preheaderContent" style="padding:10px;">
-
-							<!-- // Begin Module: Standard Preheader \\ -->
-							<table border="0" cellpadding="10" cellspacing="0" width="100%">
-								<tr>
-									<td valign="top">
-										<div style="color: #303030;font-family: 'Helvetica Neue',Helvetica,Arial;font-size: 12px;line-height: 100%;text-align: left;">
-											<br>
-										</div>
-									</td>
-									<td valign="top" width="180">
-									</td>
-								</tr>
-							</table>
-							<!-- // End Module: Standard Preheader \\ -->
-						</td>
-					</tr>
-				</table>
 				<!-- // End Template Preheader \\ -->
 				<table border="0" cellpadding="0" cellspacing="0" width="600" id="templateContainer"
-							 style="border: 1px solid #DDDDDD;background-color: #FDFDFD;">
+							 style="border: 1px solid #CCCCCC;background-color: #FFFFFF;max-width: 600px !important;">
 					<tr>
 						<td align="center" valign="top">
 							<!-- // Begin Template Body \\ -->
 							<table border="0" cellpadding="0" cellspacing="0" width="600" id="templateBody">
 								<tr>
-									<td valign="top" class="bodyContent" style="background-color: #FDFDFD;padding:10px;">
+									<td valign="top" class="bodyContent" style="background-color: #FFFFFF;padding:10px;">
 
 										<!-- // Begin Module: Standard Content \\ -->
 										<table border="0" cellpadding="10" cellspacing="0" width="100%">
 											<tr>
 												<td valign="top">
-													<div class='text' style="color:#303030;font-family:'Helvetica Neue',Helvetica,Arial;font-size:16px;line-height:150%;text-align:left;word-wrap:break-word;">
+													<div class='text' style="color:#222222;font-family: 'Helvetica Neue',Helvetica,Arial;font-size:100%;line-height:150%;text-align:left;word-wrap:break-word;">
 														[(#ENV*{html,#ENV*{texte}|replace{'<','&lt;'}|facteur_nl2br_si_pas_autobr|propre|replace{'<br />\s*<br />(\s*<br />)+?','<br /> <br />'}|concat{'<br /> <br />'}})]
 													</div>
+												</td>
+											</tr>
+											<tr>
+												<td align="left" valign="top"
+														style="color:#A39F9A !important;font-family: 'Helvetica Neue',Helvetica,Arial !important;font-size:90% !important;font-weight:normal !important;font-style:normal !important;text-decoration:none !important;vertical-align:top !important;text-align:left !important;">
+													<br/>
+													<br/>
+													&mdash; Envoyé par <a href="#URL_SITE_SPIP/">#NOM_SITE_SPIP</a>
+													<br/>
 												</td>
 											</tr>
 										</table>
@@ -123,28 +93,6 @@
 					</tr>
 				</table>
 				<br>
-			</td>
-		</tr>
-	</table>
-</center>
-<center>
-	<br/>
-	<br/>
-	<br/>
-	<table border="0" cellpadding="0" cellspacing="0" width="100%"
-				 style="background:#EEEEEE  !important; border-top:1px solid #DDDDDD; clear:both;" id="canspamBarWrapper">
-		<tr>
-			<td align="center" valign="top" style="padding:20px;padding-bottom: 0;" class="padding">
-				<table border="0" cellpadding="0" cellspacing="0" width="600" id="canspamBar">
-					<tr>
-						<td align="left" valign="top"
-								style="color:#303030 !important;font-family:Verdana,Arial,Sans !important;font-size:13px !important;font-weight:normal !important;font-style:normal !important;text-decoration:none !important;vertical-align:top !important;text-align:left !important;">
-							<a href="#URL_SITE_SPIP/">#NOM_SITE_SPIP</a>
-							<br/>
-							<br/>
-						</td>
-					</tr>
-				</table>
 			</td>
 		</tr>
 	</table>
