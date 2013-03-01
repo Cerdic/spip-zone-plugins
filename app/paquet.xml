@@ -5,7 +5,7 @@
 	schema="0.1.0"
 	etat="dev"
 	compatibilite="[3.0.0-dev;3.0.*]"
-	logo="prive/themes/spip/images/app.png"
+	logo="app.png"
 	documentation="http://www.spip-contrib.net/?articleXXXX"
 >
 	<nom>Atom Publishing Protocol</nom>
