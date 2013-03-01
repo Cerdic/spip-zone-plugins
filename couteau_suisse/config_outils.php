@@ -1456,6 +1456,22 @@ add_outil( array(
 	'code:jq_init' => 'jclock_init.apply(this);',
 ));
 
+add_variable( array(
+	'nom' => 'timezone',
+	'format' => _format_CHAINE,
+	'defaut' => "function_exists('date_default_timezone_get') && date_default_timezone_get()?date_default_timezone_get():'Europe/Paris'",
+	'code:%s' => "if(function_exists('date_default_timezone_set')) date_default_timezone_set(%s);",
+	'label' => '@_CS_CHOIX@',
+));
+add_outil( array(
+	'id' => 'timezone',
+	'categorie' => 'devel',
+	'code:spip_options' => '%%timezone%%',
+#	'autoriser' => "function_exists('date_default_timezone_get')", // Outil pour php 5.1 mini
+	'pipelinecode:pre_description_outil' => 'if($id=="timezone")
+		$texte=str_replace("@_CS_TZ@","<b>".(!(function_exists("date_default_timezone_get") && date_default_timezone_get())?"<span style=\\"color: red;\\">??</span>":@date_default_timezone_get())."</b> (PHP ".phpversion().")",$texte);',
+));
+
 $cs_temp = defined('_SPIP30000')?array(
 	'distant_action' => 'http://core.spip.org/projects/spip/repository/raw/branches/spip-2.1/ecrire/action/charger_plugin.php',
 	'distant_inc' => 'http://core.spip.org/projects/spip/repository/raw/branches/spip-2.1/ecrire/inc/charger_plugin.php',
