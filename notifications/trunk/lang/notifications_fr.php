@@ -56,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_public_thread' => '<strong>Fil de discussion</strong> : les participants au même fil de discussion reçoivent les notifications des forums (publics).',
 
 	// I
+	'info_nouveau_commentaire' => 'Nouveau commentaire',
 	'info_lien_publier_commentaire' => 'Publier ce commentaire',
 	'info_lien_signaler_spam_commentaire' => 'Signaler comme SPAM',
 	'info_lien_supprimer_commentaire' => 'Supprimer ce commentaire',
@@ -78,6 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_a_valider' => 'Message à valider : ',
+	'message_spam_a_confirmer' => 'SPAM à confirmer : ',
 	'message_voir_configuration' => 'Voir la configuration des notifications',
 	'messagerie_interne' => 'Messagerie interne',
 	'messagerie_interne_signaler' => '<strong>Signaler les nouveaux messages privés</strong> : activer cette option pour que le site envoie une notification lorsqu\'un rédacteur n\'a pas vu un nouveau message dans sa messagerie. Le système attend 20 minutes avant de notifier le rédacteur, de manière à ne pas spammer un rédacteur déjà en ligne dans l\'espace privé.',

@@ -4,21 +4,22 @@
   (c) 2009 SPIP
   Distribue sous licence GPL
 
-][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+]
 <BOUCLE_art(ARTICLES){id_article}{statut?}{tout}>
 #SET{auteurs,#LESAUTEURS}
-[(#VAL{notifications:article_publie_sujet}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]
+<title>[(#VAL{notifications:article_publie_sujet}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]</title>
 
-<:notifications:article_valide_titre:>
+<body>
+<div class="header">
+<h1><:notifications:article_valide_titre|trim|trim{-}:></h1>
+<p>
+[(#SET{titre,[<a href="(#URL_ARTICLE|url_absolue)"><strong>(#TITRE)</strong></a>]})]
+[(#VAL{notifications:article_publie_detail}|_T{#ARRAY{titre,#GET{titre},connect_nom,#SESSION{nom}}})]
+</p>
+<hr />
+</div>
 
-[(#VAL{notifications:article_publie_detail}|_T{#ARRAY{titre,#TITRE,connect_nom,#SESSION{nom}}})]
-
-[** (#TITRE) **][(#GET{auteurs}|oui)
-[(#VAL{info_les_auteurs_1}|_T{#ARRAY{les_auteurs,#GET{auteurs}}})]][
-(#VAL{date_fmt_nomjour_date}|_T{[(#ARRAY{'nomjour',[(#DATE|nom_jour)],'date',[(#DATE|affdate)]})]})]
-
-[(#CHAPO|concat{#TEXTE}|couper{700}|textebrut)]
-
-[->(#URL_ARTICLE|url_absolue)]
+<INCLURE{fond=notifications/inc-article,id_article} />
+</body>
 </BOUCLE_art>
-#FILTRE{supprimer_tags|filtrer_entites|trim}
+#FILTRE{facteur_email_wrap_to_html}
