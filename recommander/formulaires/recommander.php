@@ -95,7 +95,7 @@ function formulaires_recommander_traiter_dist($titre, $url='', $texte='', $subje
 		))
 			$res = false;
 	}
-	if ($res)
+	if (!$res)
 		return array('message_erreur' => _L("Erreur lors de l'envoi du message."));
 	else
 		return array('message_ok' => recuperer_fond('modeles/recommander_envoye',$contexte));
