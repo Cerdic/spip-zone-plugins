@@ -754,7 +754,7 @@ _ • {Kontrola cache:} rovnaké ako predchádzajúca možnosť. Všetky výsled
 	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
 [[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
 	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
-	'spip_log:description3' => '@puce@Špeciálne protokoly pre modul Vreckový nožík aktivujte tu: «[.->cs_comportement]».',
+	'spip_log:description3' => '@puce@Špeciálne protokoly pre modul Vreckový nožík aktivujte tu: «[.->cs_comportement]».', # MODIF
 	'spip_log:nom' => 'SPIP a jeho protokoly',
 	'stat_auteurs' => 'Autori v štatistikách',
 	'statuts_spip' => 'Iba tento status SPIPU:',
@@ -771,6 +771,14 @@ _ Utile pour n\'en oublier aucune !
 
 @puce@ Un test : ', # NEW
 	'test_i18n:nom' => 'Chýbajúce preklady',
+	'timezone:description' => 'Depuis PHP 5.1.0, chaque appel à une fonction date/heure génère une alerte de niveau E_NOTICE si le décalage horaire n\'est pas valide et/ou une alerte de niveau E_WARNING si vous utilisez des configurations système, ou la variable d\'environnement TZ.
+_ Depuis PHP 5.4.0, la variable d\'environnement TZ et les informations disponibles via le système d\'exploitation ne sont plus utilisées pour deviner le décalage horaire.
+
+Réglage actuellement détecté : @_CS_TZ@.
+
+@puce@ {{Définissez ci-dessous le décalage horaire à utiliser sur ce site.}}
+[[%timezone%<q3>Liste complète des fuseaux horaires : [->http://www.php.net/manual/fr/timezones.php].</q3>]].', # NEW
+	'timezone:nom' => 'Décalage horaire', # NEW
 	'titre' => 'Vreckový nožík',
 	'titre_parent:description' => 'Within a loop it is common to want to show the title of the parent of the current object. You normally need to use a second loop to do this, but a new tag #TITRE_PARENT makes the syntax easier. In the case of a MOTS loop, the tag gives the title of the keyword group. For other objetcs (articles, sections, news items, etc.) it gives the title of the parent section (if it exists).
 

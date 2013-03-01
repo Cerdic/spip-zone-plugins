@@ -766,7 +766,7 @@ _ • {Cache checking}: similar to the preceding option. However, all results ar
 [[Only keep %nombre_de_logs% file (s), each having %taille_des_logs% Ko maximum size <br/> <q3>{Reset one of these two boxes disables logs input.}</ q3>]]
  [[Other settings :->@puce@ folder where the logs are stored (leave empty by default):<q1> %dir_log% {Currently:} @DIR_LOG@</q1>]] [[->@puce@ File by default : %file_log%]] [[->@puce@ Extension : %file_log_suffix%]][[->@puce@ for each hit: %max_log% maximum file access]]',
 	'spip_log:description2' => '@puce@ the SPIP severity filter allows you to select the level of maximum importance to be considered before starting a data log. Level 8 allows for example to store all the messages sent by SPIP. The default level is level 5.',
-	'spip_log:description3' => '@puce@ specific logs of the Swiss Army Knife are activated here  «[.->cs_comportement]».',
+	'spip_log:description3' => '@puce@ specific logs of the Swiss Army Knife are activated here  «[.->cs_comportement]».', # MODIF
 	'spip_log:nom' => 'SPIP and the logs',
 	'stat_auteurs' => 'Authors in statistics',
 	'statuts_spip' => 'Only the following SPIP status:',
@@ -783,6 +783,14 @@ _ Useful not to not forget any!
 
 @puce@ A test :',
 	'test_i18n:nom' => 'Missing translations',
+	'timezone:description' => 'Depuis PHP 5.1.0, chaque appel à une fonction date/heure génère une alerte de niveau E_NOTICE si le décalage horaire n\'est pas valide et/ou une alerte de niveau E_WARNING si vous utilisez des configurations système, ou la variable d\'environnement TZ.
+_ Depuis PHP 5.4.0, la variable d\'environnement TZ et les informations disponibles via le système d\'exploitation ne sont plus utilisées pour deviner le décalage horaire.
+
+Réglage actuellement détecté : @_CS_TZ@.
+
+@puce@ {{Définissez ci-dessous le décalage horaire à utiliser sur ce site.}}
+[[%timezone%<q3>Liste complète des fuseaux horaires : [->http://www.php.net/manual/fr/timezones.php].</q3>]].', # NEW
+	'timezone:nom' => 'Décalage horaire', # NEW
 	'titre' => 'The Swiss Army Knife',
 	'titre_parent:description' => 'Within a loop, it is common to want to show the title of the parent of the current object. You normally need to use a second loop to do this, but a new tag #TITRE_PARENT makes the syntax easier. In the case of a MOTS loop, the tag gives the title of the keyword group. For other objects (articles, sections, news items, etc.) it gives the title of the parent section (if one such exists).
 

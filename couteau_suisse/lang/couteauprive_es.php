@@ -747,6 +747,14 @@ _ Utile pour n\'en oublier aucune !
 
 @puce@ Un test : ', # NEW
 	'test_i18n:nom' => 'Traductions manquantes', # NEW
+	'timezone:description' => 'Depuis PHP 5.1.0, chaque appel à une fonction date/heure génère une alerte de niveau E_NOTICE si le décalage horaire n\'est pas valide et/ou une alerte de niveau E_WARNING si vous utilisez des configurations système, ou la variable d\'environnement TZ.
+_ Depuis PHP 5.4.0, la variable d\'environnement TZ et les informations disponibles via le système d\'exploitation ne sont plus utilisées pour deviner le décalage horaire.
+
+Réglage actuellement détecté : @_CS_TZ@.
+
+@puce@ {{Définissez ci-dessous le décalage horaire à utiliser sur ce site.}}
+[[%timezone%<q3>Liste complète des fuseaux horaires : [->http://www.php.net/manual/fr/timezones.php].</q3>]].', # NEW
+	'timezone:nom' => 'Décalage horaire', # NEW
 	'titre' => 'La Navaja Suiza',
 	'titre_parent:description' => 'En el interior de un bucle, es habitual que se quiera mostrar el título del padre del objeto en curso. Tradicionalmente, bastaba utilizar un segundo bucle, pero esta nueva baliza #TITRE_PARENT aligerará la escritura de tus esqueletos. El resultado devuelto es: el título del grupo de una palabra-clave o el de la sección padre (si existe) de cualquier otro objeto (artículo, sección, breve, etc.).
 

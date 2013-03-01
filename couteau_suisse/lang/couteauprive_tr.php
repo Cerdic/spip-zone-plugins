@@ -722,6 +722,14 @@ _ Utile pour n\'en oublier aucune !
 
 @puce@ Un test : ', # NEW
 	'test_i18n:nom' => 'Traductions manquantes', # NEW
+	'timezone:description' => 'Depuis PHP 5.1.0, chaque appel à une fonction date/heure génère une alerte de niveau E_NOTICE si le décalage horaire n\'est pas valide et/ou une alerte de niveau E_WARNING si vous utilisez des configurations système, ou la variable d\'environnement TZ.
+_ Depuis PHP 5.4.0, la variable d\'environnement TZ et les informations disponibles via le système d\'exploitation ne sont plus utilisées pour deviner le décalage horaire.
+
+Réglage actuellement détecté : @_CS_TZ@.
+
+@puce@ {{Définissez ci-dessous le décalage horaire à utiliser sur ce site.}}
+[[%timezone%<q3>Liste complète des fuseaux horaires : [->http://www.php.net/manual/fr/timezones.php].</q3>]].', # NEW
+	'timezone:nom' => 'Décalage horaire', # NEW
 	'titre' => 'İsviçre Çakısı',
 	'titre_parent:description' => 'Bir döngünün ortasında o anki nesnenin "ebeveyninin" başlığını göstermek çok olağandır. Geleneksel biçimde ikinci bir döngü kullanılırdı ama yeni #TITRE_PARENT komutu iskeletlerinizin yazılma yükünü hafifletiyor. Geri döndürülen sonuç : bir anahtar-sözcüğün grubun veya diğer nesnelerin (makale, bölüm, kısa haber vb.) bir üst bölümün (eğer mevcutsa) başlığıdır.
 
