@@ -41,13 +41,7 @@ function tableau_recherche_objet($objet,$exclus,$lang=''){
     if(is_array($d)){
         foreach($d as $r){
             if(!$r['titre']){
-                $r['titre']=$r['nom']?$r['nom']:($r['nom_site']?$r['nom_site']:'objet'.$r['id_'.$objet]);
-                if($objet=='document'){
-                    $f=explode('/',$r['fichier']);
-                    $r['titre']=$f[1];
-                    }
-                if($r['nom'])unset($r['nom']);
-                if($r['nom_site'])unset($r['nom_site']);
+                $r['titre']=titre_objet_sel($objet,$r);
             }
             if(!isset($exclus[$r['id_'.$objet].'-'.$objet]))$data[]=array('label'=>$r[titre].' ('.$objet.')','value'=>$r['id_'.$objet].'-'.$objet);
         }

@@ -5,7 +5,7 @@
 [(#VAL)]
 [(#BOITE_OUVRIR{
     [(#CHEMIN_IMAGE{selection_objet-64.png}|image_reduire{32}|extraire_attribut{src}|balise_img{selection_objet,cadre-icone})]
-    <h3  class="titrem"><:selection_objet:selection_objet:> [(#OBJET_DEST|info_objet{#ID_OBJET_DEST,#ENV{champ_titre}}|supprimer_tags)]</h3>
+    <h3  class="titrem"><:selection_objet:selection_objet:>[ (#OBJET_DEST|titre_objet_sel{#OBJET_DEST|info_objet{#ID_OBJET_DEST}}|supprimer_tags) ]</h3>
     ,'simple personnel infos'})]   
 <BOUCLE_langues(POUR){tableau #ENV**{langue}}>
     [(#GET{n_langues}|>{1}|oui)<h4 class="titrem">[(#VALEUR|traduire_nom_langue)]</h4>]

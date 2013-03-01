@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_id_objet' => 'Id objet',
 	'label_id_objet_dest' => 'Id objet dest',
 	'label_objet' => 'Objet',
-	'label_objet_dest' => 'Objet dest',
+	'label_objet_dest' => 'Objet cible',
 	'label_ordre' => 'Ordre',
 	'label_titre' => 'Titre',
 	'label_url' => 'Url',
@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'objet_destination_choisis' => 'Destination(s) choisie(s) :',
 	'objets_cible' => 'Les Objets Cible',
+	'objet_lie_a' => 'Lié à',   
 	'objets_selection' => 'Les Objets Sélection',
 
 	// R
