@@ -91,7 +91,7 @@ function formulaires_recommander_traiter_dist($titre, $url='', $texte='', $subje
 			$subject,
 			$body,
 			_request('recommander_from'),
-			"X-Originating-IP: ".$GLOBALS['ip']
+			"X-Originating-IP: ".$GLOBALS['ip']."\n"
 		))
 			$res = false;
 	}
