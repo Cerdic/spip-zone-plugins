@@ -10,18 +10,13 @@ Mail HTML simplifie mis en forme complete par le filtre |facteur_email_wrap_to_h
 
 <body>
 	<div class="header">
-		<:notifications:info_nouveau_commentaire:>[(#STATUT|=={spam}|oui)<b>(SPAM)</b>]
-		<h2 style="margin-bottom: 0">#TITRE</h2>[<p style="margin-top: 0">
+		[
 		(#ENV{par_auteur})
-	  </p>][
-		<p>
-		<a href="(#ENV{url_site})">[(#NOM_SITE|sinon{#ENV{url_site}})]</a>
-		</p>]
-
+		<br />]
+		[<a href="(#ENV{url_site})">[(#NOM_SITE|sinon{#ENV{url_site}})]</a>]
 		<hr/>
 	</div>
-
-	<p>Message :</p>
+	<h2>[<b>(SPAM)</b>(#STATUT|=={spam}|oui)]#TITRE</h2>
 	[
 	(#TEXTE|safehtml)
 	]
