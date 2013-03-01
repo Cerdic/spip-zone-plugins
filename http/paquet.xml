@@ -4,7 +4,7 @@
 	version="0.1.0"
 	etat="dev"
 	compatibilite="[3.0.0-dev;3.0.*]"
-	logo="prive/themes/spip/images/http.png"
+	logo="http.png"
 	documentation="http://www.spip-contrib.net/?articleXXXX"
 >
 	<nom>Serveur HTTP abstrait</nom>

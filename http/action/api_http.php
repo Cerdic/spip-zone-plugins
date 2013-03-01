@@ -7,8 +7,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Porte d'entrée des API lecture/écriture orientés REST
  * Cette action gère donc la partie "serveur HTTP" en redirigeant les méthodes (GET, PUT, etc) vers les fonctions spécifiques
  *
- * http://www.site.tld/rest.api/atom/patates => feed, GET=liste (critères possibles), POST=création
- * http://www.site.tld/rest.api/atom/patates/1234 => entry, GET=lecture, PUT=mise à jour
+ * http://www.site.tld/http.api/atom/patates => feed, GET=liste (critères possibles), POST=création
+ * http://www.site.tld/http.api/atom/patates/1234 => entry, GET=lecture, PUT=mise à jour
  */
 function action_api_http_dist(){	
 	// Il faut au moins le format dans l'argument sinon rien
@@ -50,7 +50,7 @@ function action_api_http_dist(){
 
 		// Le GET peut se faire sur : la racine du serveur, une collection, une ressource
 		if ($methode == 'GET'
-			and $fonction = charger_fonction("get_$type", "http/$format/", true) // rest_atom_get_index()
+			and $fonction = charger_fonction("get_$type", "http/$format/", true) // http_atom_get_index()
 		){
 			// On teste l'autorisation sinon 401
 			if (
