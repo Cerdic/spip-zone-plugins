@@ -78,14 +78,24 @@ function formulaires_recommander_traiter_dist($titre, $url='', $texte='', $subje
 	);
 	$body = recuperer_fond('modeles/recommander_email',$contexte);
 
-	$envoyer_mail = charger_fonction('envoyer_mail','inc');
-	if (!$envoyer_mail(
-		_request('recommander_to'),
-		$subject,
-		$body,
-		_request('recommander_from'),
-		"X-Originating-IP: ".$GLOBALS['ip']
-	))
+	$res = true;
+	if (
+		include_spip("inc/notifications")
+		AND function_exists('notifications_envoyer_mails')){
+		notifications_envoyer_mails(_request('recommander_to'), $body, $subject, _request('recommander_from'), "X-Originating-IP: ".$GLOBALS['ip']);
+	}
+	else {
+		$envoyer_mail = charger_fonction('envoyer_mail','inc');
+		if (!$envoyer_mail(
+			_request('recommander_to'),
+			$subject,
+			$body,
+			_request('recommander_from'),
+			"X-Originating-IP: ".$GLOBALS['ip']
+		))
+			$res = false;
+	}
+	if ($res)
 		return array('message_erreur' => _L("Erreur lors de l'envoi du message."));
 	else
 		return array('message_ok' => recuperer_fond('modeles/recommander_envoye',$contexte));
