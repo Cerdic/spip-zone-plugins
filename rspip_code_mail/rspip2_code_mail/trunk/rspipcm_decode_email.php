@@ -39,7 +39,7 @@ $flux .= <<<EOD
 <script type="text/javascript">
 // code..js
 // decrypt mail address
-// By robert-A-T-attac-D-O-t-be 27/05/02
+// By Robert Sebille 27/05/02
 // Licence GNU GPL
 
 function mdecode(adr){
