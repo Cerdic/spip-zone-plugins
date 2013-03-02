@@ -6,29 +6,33 @@
 
    
 <form method='post' action='#ENV{action}'>
-<div class="abonnement">
-#ACTION_FORMULAIRE{#ENV{action}}
-<table class="spip" id="abonnees" summary="<:soapsympa:emails_liste:>" cellpadding="5">
-<tr class="row_first">
- <th> <:soapsympa:emails_liste:></th>
+	<div class="abonnement">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<table class="spip" id="abonnees" summary="<:soapsympa:emails_liste:>" cellpadding="5">
+		<tr class="row_first">
+		 <th> <:soapsympa:emails_liste:></th>
 
- <th>  </th>
-  </tr>
+		 <th>  </th>
+		</tr>
+		<B_abo>
+		
+		[<p class="pagination">(#PAGINATION{prive})</p>]
+		<BOUCLE_abo(POUR){tableau #ENV{abonnes}}{pagination 100}>
+			<tr>
+				<td class="listaddress"><label for="[(#VALEUR|table_valeur{'email'})]">[(#VALEUR|table_valeur{'email'})]</label></td>
 
-<BOUCLE_abo(POUR){tableau #ENV{abonnes}}>
-<tr>
-<td class="listaddress"><label for="[(#VALEUR|table_valeur{'email'})]">[(#VALEUR|table_valeur{'email'})]</label></td>
-
-<td><input name="emails[]" type="checkbox" id="[(#VALEUR|table_valeur{'email'})]" value="[(#VALEUR|table_valeur{'email'})]"[(#GRAND_TOTAL|=={1}|oui) checked="checked"] /></td>
-</tr>
-#SET{total, #TOTAL_BOUCLE}
-</BOUCLE_abo>
-</table>
-<br/>
-<input name="desabonnement" type="submit" value="<:soapsympa:btn_desabonnement_emails:>" class="submit" />
-<br/><br/>
-<:soapsympa:liste_total_abonnes:> #GET{total}
-</div>
+				<td><input name="emails[]" type="checkbox" id="[(#VALEUR|table_valeur{'email'})]" value="[(#VALEUR|table_valeur{'email'})]"[(#GRAND_TOTAL|=={1}|oui) checked="checked"] /></td>
+			</tr>
+		#SET{grandtotal, #GRAND_TOTAL}
+		#SET{total, #TOTAL_BOUCLE}
+		</BOUCLE_abo>
+		</B_abo>
+	</table>
+	<br/>
+	<input name="desabonnement" type="submit" value="<:soapsympa:btn_desabonnement_emails:>" class="submit" />
+	<br/><br/>
+	<:soapsympa:liste_total_abonnes:> #GET{grandtotal}
+	</div>
 </form>
    
 </div>
