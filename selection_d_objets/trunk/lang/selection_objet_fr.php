@@ -39,8 +39,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'objet_destination_choisis' => 'Destination(s) choisie(s) :',
+	'objet_lie_a' => 'Lié à',
 	'objets_cible' => 'Les Objets Cible',
-	'objet_lie_a' => 'Lié à',   
 	'objets_selection' => 'Les Objets Sélection',
 
 	// R

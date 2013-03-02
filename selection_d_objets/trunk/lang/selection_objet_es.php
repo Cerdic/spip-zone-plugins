@@ -34,13 +34,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_id_objet' => 'Id objeto',
 	'label_id_objet_dest' => 'Id objeto destino',
 	'label_objet' => 'Objeto',
-	'label_objet_dest' => 'Objeto destino',
+	'label_objet_dest' => 'Objeto destino', # MODIF
 	'label_ordre' => 'Orden',
 	'label_titre' => 'Título',
 	'label_url' => 'Url',
 
 	// O
 	'objet_destination_choisis' => 'Destinación/ones seleccionada(s):',
+	'objet_lie_a' => 'Lié à', # NEW
 	'objets_cible' => 'Los Objetos Diana',
 	'objets_selection' => 'Los Objetos Selección',
 
