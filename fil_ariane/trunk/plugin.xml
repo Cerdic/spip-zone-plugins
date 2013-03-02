@@ -11,7 +11,7 @@
 	<lien>http://www.spip-contrib.net/Plugin-Fil-d-Ariane</lien> <!-- URI de documentation -->
 	<icon>img/fil_ariane-128.png</icon>
 
-	<version>0.1.10</version>
+	<version>0.1.11</version>
 	<etat>dev</etat>
 
 	<prefix>fil_ariane</prefix>

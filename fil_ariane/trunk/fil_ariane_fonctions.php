@@ -208,7 +208,7 @@ function fil_ariane_hierarchie_objet($objet, $id_objet, $col_titre, $col_parent)
     $url = generer_url_entite($id_objet,$objet);
 
     // tant qu'il y a des parents, je place nom => url dans le tableau
-    while ($id_parent) {
+    while ($id_parent > 0) {
         // on trouve le parent, son titre; on calcule son url
         $parent = sql_fetsel("$col_titre AS titre , $col_parent AS id_parent", $table, "$col_id = ".sql_quote($id_parent));
 
