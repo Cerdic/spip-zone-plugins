@@ -61,20 +61,16 @@ function formulaires_abosympa_prive_verifier_dist($nomliste = ""){
 
 function formulaires_abosympa_prive_traiter_dist($nomliste = ""){
 	
-   $nom = _request('nom');
-	$email = _request('email');
+    $nom = _request('nom');
+    $email = _request('email');
+    $message = null;
 
-	$message = null;
-
-   $conf = unserialize($GLOBALS['meta']['soapsympa']);
-//instanciation de la classe SOAP-SYMPA 
-$Sympa = new SympaTrustedApp($conf['serveur_distant'], $conf['identifiant'], $conf['mot_de_passe']);
-
-
-	$message_listes = "<ul>";
-
-	
-		$Sympa->USER_EMAIL = $conf['proprietaire'];	//pour cette action SUBSCRIBE de SYMPA l'email
+    $conf = unserialize($GLOBALS['meta']['soapsympa']);
+    //instanciation de la classe SOAP-SYMPA 
+    $Sympa = new SympaTrustedApp($conf['serveur_distant'], $conf['identifiant'], $conf['mot_de_passe']);
+    
+    $message_listes = "<ul>";
+    $Sympa->USER_EMAIL = $conf['proprietaire'];	//pour cette action SUBSCRIBE de SYMPA l'email
 	
 		try {
 		    $soapResult = $Sympa->add($nomliste, $email, true);
@@ -89,12 +85,11 @@ $Sympa = new SympaTrustedApp($conf['serveur_distant'], $conf['identifiant'], $co
 		
 
 
-	$message_listes .= "</ul><br class='nettoyeur' />";
+      $message_listes .= "</ul><br class='nettoyeur' />";
 
-	$message .= $message_listes;
+      $message .= $message_listes;
 	
-
-	if ($probleme==false) return $message;
-	else return $message_listes;
+      if ($probleme==false) return $message;
+      else return $message_listes;
 }
 ?>

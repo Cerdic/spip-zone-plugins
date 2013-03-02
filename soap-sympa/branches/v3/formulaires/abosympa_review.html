@@ -8,6 +8,10 @@
 <form method='post' action='#ENV{action}'>
 	<div class="abonnement">
 	#ACTION_FORMULAIRE{#ENV{action}}
+	<div class="recherche">
+	    <input name="search_abonne" type="text" value=""/>
+	    <input type="submit" name="search_abonne_submit" value="<:soapsympa:btn_search_emails:>"/>
+	</div>
 	<table class="spip" id="abonnees" summary="<:soapsympa:emails_liste:>" cellpadding="5">
 		<tr class="row_first">
 		 <th> <:soapsympa:emails_liste:></th>
