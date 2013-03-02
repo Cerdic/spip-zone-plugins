@@ -66,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_moderation_interdite' => 'Na kontrolu tohto príspevku nemáte dostatočné práva',
 	'info_moderation_lien_titre' => 'Skontrolovať tento príspevok zo súkromnej zóny',
 	'info_moderation_url_perimee' => 'Tento odkaz na kontrolu už nie je platný.',
+	'info_nouveau_commentaire' => 'Nouveau commentaire', # NEW
 	'inscription' => 'Prihlásenie redaktorov',
 	'inscription_admins' => 'Administrátori',
 	'inscription_explication' => 'Ktorí autori dostanú oznamy pri zaregistrovaní nových redaktorov?',
@@ -78,6 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_a_valider' => 'Príspevok na potvrdenie: ',
+	'message_spam_a_confirmer' => 'SPAM à confirmer : ', # NEW
 	'message_voir_configuration' => 'Zobraziť nastavenia oznamov',
 	'messagerie_interne' => 'Súkromný odkazovač',
 	'messagerie_interne_signaler' => '<strong>Označiť nové súkromné správy:</strong> aktivujte túto možnosť, ak chcete, aby stránka poslala oznam redaktorovi, v prípade, že si neprečítal novú správu vo svojej schránke. Systém počká 20 minút, predtým ako upozorní redaktora, a tak nespamuje redaktora, ktorý je už online v súkromnej zóne.',

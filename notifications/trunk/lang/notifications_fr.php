@@ -56,7 +56,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_public_thread' => '<strong>Fil de discussion</strong> : les participants au même fil de discussion reçoivent les notifications des forums (publics).',
 
 	// I
-	'info_nouveau_commentaire' => 'Nouveau commentaire',
 	'info_lien_publier_commentaire' => 'Publier ce commentaire',
 	'info_lien_signaler_spam_commentaire' => 'Signaler comme SPAM',
 	'info_lien_supprimer_commentaire' => 'Supprimer ce commentaire',
@@ -67,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_moderation_interdite' => 'Vous n\'avez pas le droit de modérer ce message',
 	'info_moderation_lien_titre' => 'Modérer ce message depuis l\'espace privé',
 	'info_moderation_url_perimee' => 'Ce lien de modération n\'est plus valide.',
+	'info_nouveau_commentaire' => 'Nouveau commentaire',
 	'inscription' => 'Inscription des rédacteurs',
 	'inscription_admins' => 'Administrateurs',
 	'inscription_explication' => 'Quels auteurs reçoivent les notifications lors de l\'inscription de nouveaux rédacteurs ?',

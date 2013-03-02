@@ -66,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_moderation_interdite' => 'Usted no dispone de derecho de moderación de este mensaje',
 	'info_moderation_lien_titre' => 'Moderar este mensaje desde el espacio privado',
 	'info_moderation_url_perimee' => 'Este enlace de moderación ya no es válido.',
+	'info_nouveau_commentaire' => 'Nouveau commentaire', # NEW
 	'inscription' => 'Registro de los redactores',
 	'inscription_admins' => 'Administradores',
 	'inscription_explication' => '¿Qué autores reciben notificación con el registro de nuevos redactores?',
@@ -78,6 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_a_valider' => 'Mensaje para aprobar:',
+	'message_spam_a_confirmer' => 'SPAM à confirmer : ', # NEW
 	'message_voir_configuration' => 'Ver la configuración de las notificaciones',
 	'messagerie_interne' => 'Mensajería interna',
 	'messagerie_interne_signaler' => '<strong>Marcar nuevos mensajes privados</strong>: activar esta opción para que el sitio envíe una notificación cuando un redactor no haya advertido un nuevo mensaje en su mensajería. El sistema espera 20 minutos antes de notificarle al redactor, por lo que no se envía SPAM a un redactor ya en línea en el espacio privado.',

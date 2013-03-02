@@ -65,6 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_moderation_interdite' => 'Vous n\'avez pas le droit de moderer ce message', # NEW
 	'info_moderation_lien_titre' => 'Moderer ce message depuis l\'espace privé', # NEW
 	'info_moderation_url_perimee' => 'Ce lien de moderation n\'est plus valide.', # NEW
+	'info_nouveau_commentaire' => 'Nouveau commentaire', # NEW
 	'inscription' => 'ثبت سردبيران',
 	'inscription_admins' => 'مديران',
 	'inscription_explication' => 'كدام نويسندگان اطلاعيه ثبت سردبيران جديد را دريافت مي‌كنند؟',
@@ -77,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_a_valider' => 'Message à valider : ', # NEW
+	'message_spam_a_confirmer' => 'SPAM à confirmer : ', # NEW
 	'message_voir_configuration' => 'به پيكربندي اطلاعيه‌ها بنگريد',
 	'messagerie_interne' => 'پيك داخلي',
 	'messagerie_interne_signaler' => '<strong>خبر يك پيام خصوصي</strong>: اين گزينه‌ را فعال كنيد تا هنگامي كه  نويسندگان يك پيام خصوصي را كه برايشان ارسال شده نديده باشند سايت يك اطلاعيه ارسال كند. سامانه پيش از خبر كردن نويسنده 20 دقيقه صبر خواهد كرد،  براي آنكه نويسنده‌اي كه الان در قسمت شخصي روي خط است اسپم نباشد.
