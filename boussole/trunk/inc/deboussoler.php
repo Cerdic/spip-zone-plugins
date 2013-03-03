@@ -115,19 +115,23 @@ function boussole_supprimer($aka_boussole) {
  * @return array()
  */
 function phraser_xml_boussole($boussole, $serveur='spip') {
-	global $serveurs_boussoles;
+	global $client_serveurs_disponibles;
 
 	$infos = array();
 
 	// Acquérir les informations de la boussole à partir du serveur
 	include_spip('inc/distant');
-	$action = str_replace('[arguments]', $boussole, $serveurs_boussoles[$serveur]);
+	$action = str_replace(
+				array('[action]','[arguments]'),
+				array('serveur_informer_boussole', $boussole),
+				$client_serveurs_disponibles[$serveur]['api']);
 	$page = recuperer_page($action);
 
 	$convertir = charger_fonction('simplexml_to_array', 'inc');
 	$tableau = $convertir(simplexml_load_string($page), false);
 
-	if ($tableau['name'] == 'boussole') {
+	if (isset($tableau['name'])
+	AND ($tableau['name'] == 'boussole')) {
 		$infos['sites'] = array();
 		$infos['extras'] = array();
 
