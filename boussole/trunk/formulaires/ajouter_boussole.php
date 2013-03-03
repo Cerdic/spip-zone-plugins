@@ -32,36 +32,26 @@ function formulaires_ajouter_boussole_traiter_dist(){
 	$xml = _request('url_boussole');
 
 	// Cas de la boussole SPIP
-	if ($mode == 'standard')
-		$xml = url_absolue('http://zone.spip.org/trac/spip-zone/export/HEAD/_galaxie_/boussole.spip.org/boussole_spip.xml');
-
-	// On fait des verifications dans traiter pour renvoyer les resultats dans le message d'erreur global
-	if (!$url = boussole_localiser_xml($xml)) {
-		// Le fichier est introuvable
-		$retour['message_erreur'] = _T('boussole:message_nok_xml_introuvable', array('fichier' => $xml));
+	if ($mode == 'standard') {
+		$boussole = 'spip';
+		$serveur = 'spip';
 	}
 	else {
-		if (!boussole_valider_xml($url, $erreur)) {
-			// Le fichier ne suit pas la DTD (boussole.dtd)
-			$retour['message_erreur'] = _T('boussole:message_nok_xml_invalide', array('fichier' => $url));
-			spip_log("ERREUR DTD" . var_export($erreur['detail'], true), 'boussole' . _LOG_ERREUR);
-		}
-		else {
-			// On insere la boussole dans la base
-			// et on traite le cas d'erreur fichier ($retour['message_erreur']) non conforme
-			// si c'est encore possible apres avoir valide le fichier avec la dtd
-			list($ok, $message) = boussole_ajouter($url);
+		$boussole = 'spip';
+		$serveur = 'spip';
+	}
+
+	// On insere la boussole dans la base
+	list($ok, $message) = boussole_ajouter($boussole, $serveur);
 		
-			// Determination des messages de retour
-			if (!$ok) {
-				$retour['message_erreur'] = $message;
-				spip_log("ERREUR AJOUT", 'boussole' . _LOG_ERREUR);
-			}
-			else {
-				$retour['message_ok'] = $message;
-				spip_log("ACTION AJOUTER BOUSSOLE : url = ". $url, 'boussole' . _LOG_INFO);
-			}
-		}
+	// Determination des messages de retour
+	if (!$ok) {
+		$retour['message_erreur'] = $message;
+		spip_log("Ajout manuel : erreur lors de l'insertion de la boussole $boussole", 'boussole' . _LOG_ERREUR);
+	}
+	else {
+		$retour['message_ok'] = $message;
+		spip_log("Ajout manuel ok de la boussole $boussole", 'boussole' . _LOG_INFO);
 	}
 	$retour['editable'] = true;
 

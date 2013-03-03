@@ -4,7 +4,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
+ * Génération du cache xml de la boussole contruit soit à partir de xml non traduit soit à parti d'un xml déjà traduit
+ *
+ * @api
+ *
  * @param string	$alias
+ * @param string	$prefixe_plugin
  * @return bool
  */
 function boussole_cacher($alias, $prefixe_plugin='') {
@@ -38,8 +43,11 @@ function boussole_cacher($alias, $prefixe_plugin='') {
 
 
 /**
+ * Lecture du xml non traduit (donc issu d'un plugin) et génération du xml traduit et incluant les logos
+ *
  * @param string	$fichier_xml
  * @param string	$alias_boussole
+ * @param string	$prefixe_plugin
  * @return bool
  */
 function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin) {
@@ -111,6 +119,8 @@ function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin) {
 
 
 /**
+ * Insertion d'un balise ouvrante, fermante ou vide
+ *
  * @param string	$type
  * @param string	$balise
  * @param array		$attributs
@@ -137,6 +147,8 @@ function inserer_balise($type='ouvrante', $balise, $attributs=array(), $indentat
 
 
 /**
+ * Insertion d'une balise complète <nom>, <slogan> ou <description> incluant les traductions en <multi>
+ *
  * @param string	$alias
  * @param string	$type_objet
  * @param string	$objet
@@ -200,6 +212,8 @@ function inserer_traductions($alias, $type_objet, $objet, $indentation=0) {
 
 
 /**
+ * Contruction de la chaine de tabulations correspondant au décalage souhaité
+ *
  * @param int	$decalage
  * @return string
  */

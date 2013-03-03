@@ -47,7 +47,7 @@
 				<td class="numero">[(#GET{infos}|table_valeur{nbr_sites}|singulier_ou_pluriel{boussole:label_1_site, boussole:label_n_sites})]</td>
 				<td class="date">[(#GET{infos}|table_valeur{maj}|affdate)]</td>
 				<td class="lien">
-					[(#BOUTON_ACTION{<:boussole:bouton_supprimer:>, #URL_ACTION_AUTEUR{supprimer_boussole, #AKA_BOUSSOLE, #SELF}, '', '', ''})]
+					[(#BOUTON_ACTION{<:boussole:bouton_supprimer:>, #URL_ACTION_AUTEUR{client_supprimer_boussole, #AKA_BOUSSOLE, #SELF}, '', '', ''})]
 				</td>
 			]
 			</tr>
