@@ -4,6 +4,9 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	'maj_actualise_ok' => "Le plugin « @plugin@ » n'a pas officiellement changé de version, mais ses fichiers ont quand même été actualisés afin de bénéficier de la dernière révision de code.",
+	'maj_fichier_ko' => 'Le fichier « @file@ » est introuvable !',
+	'maj_librairies_ko' => 'Librairies introuvables !',
 
 	// 2
 	'2pts_non' => ' : non',

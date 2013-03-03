@@ -5,6 +5,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	'maj_archive_ko' => 'Erreur d\'[archive distante->@zip@]. «svn.revision» incomplet ?',
+	'maj_poursuivre' => 'Temps serveur écoulé : [poursuivre->#].',
+	
 	// 2
 	'2pts' => '@objet@ :',
 

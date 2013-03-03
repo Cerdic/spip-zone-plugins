@@ -172,7 +172,7 @@ function maj_auto_action_rapide() {
 		if(!defined('_SPIP30000') && strtoupper($infos['necessite'][0]['id'])=='SPIP') array_shift($infos['necessite']);
 		$maj_lib = $checked = '';
 		if($stop)
-			$maj_lib = '<span class="cs_relancer">'.'Temps serveur &eacute;coul&eacute; : [poursuivre->#].'.'</span>';
+			$maj_lib = '<span class="cs_relancer">'._T('couteau:maj_poursuivre').'</span>';
 		elseif($infos['maj_dispo']) { 
 			$maj_lib = _T('couteau:maj_rev_ok', 
 				array('revision' => $infos['rev_rss'], 'url'=>$infos['url_origine'], 'zip'=>$infos['zip_trac']));
@@ -182,7 +182,7 @@ function maj_auto_action_rapide() {
 				array('zip'=>$infos['zip_trac'], 'url'=>$infos['url_origine']));
 		elseif($auto) {
 			$maj_lib = $infos['rev_local']==999.99 && $infos['prefix']!='couteau_suisse'
-				?_L('Erreur d\'[archive distante->@zip@]. &laquo;&nbsp;svn.revision&nbsp;&raquo; incomplet ?', array('zip'=>$infos['zip_trac']))
+				?_T('couteau:maj_archive_ko', array('zip'=>$infos['zip_trac']))
 				:_T('couteau:maj_rev_ko', array('url'=>$infos['url_origine']));
 			$checked = " class='maj_checked'"; }
 		elseif($infos['rev_local'] && $infos['rev_rss']<=0)
@@ -415,11 +415,11 @@ function maj_auto_svp_maj_plugin($ids_paquet=array()) {
 						rename($dest, $old);
 						rename($retour['tmp'], $dest);
 						spip_unlink($retour['fichier']);
-						$cs_messages['ok'][] = ("Le plugin « $retour[nom] » n'a pas changé de version, mais ses fichiers ont quand même été actualisés.");
+						$cs_messages['ok'][] = _T('couteauprive:maj_actualise_ok', array('plugin'=>$retour['nom']));
 					} else 
-						$cs_messages['fail'][] = ('Le fichier « '.$requests[$p][3].' » est introuvable !');
+						$cs_messages['fail'][] = _T('couteauprive:maj_fichier_ko', array('file'=>$requests[$p][3]));
 				} else
-					$cs_messages['fail'][] = ('Librairies introuvables !');
+					$cs_messages['fail'][] = _T('couteauprive:maj_librairies_ko');
 		} else 
 			$cs_messages['fail'] = array_merge($messages['decideur_erreurs'], $cs_messages['fail']);
 		// sauvegarde des messages

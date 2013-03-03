@@ -31,16 +31,23 @@ function boites_privees_affiche_gauche($flux){
 		include_spip('outils/boites_privees_action_rapide');
 		$flux['data'] .= action_rapide_tri_auteurs($flux['args']['id_article']);
 	}
-	if(defined('boites_privees_URLS_PROPRES')) 
-		switch($exec) {
+	if(defined('boites_privees_URLS_PROPRES')) {
+		// fonction de SPIP >= 3.0
+		$e = function_exists('trouver_objet_exec')
+			?trouver_objet_exec($exec)
+			:array('type'=>$exec, 'id_table_objet'=>$flux['args']['id_'.$exec]?'id_'.$exec:'');
+		if($e && strlen($e['type']) && strlen($e['id_table_objet']))
+			$flux['data'] .= cs_urls_propres($e['type'], $flux['args'][$e['id_table_objet']]);
+		else switch($exec) {
 			// SPIP>=3.0 : objets au singulier uniquement (autres 'case' pour compatibilite SPIP<3.0)
-			case 'article': case 'articles': $flux['data'] .= cs_urls_propres('article', $flux['args']['id_article']); break;
-			case 'rubrique': case 'naviguer': $flux['data'] .= cs_urls_propres('rubrique', $flux['args']['id_rubrique']); break;
-			case 'auteur': case 'auteur_infos': case 'auteurs_edit': $flux['data'] .= cs_urls_propres('auteur', $flux['args']['id_auteur']); break;
-			case 'breve': case 'breves_voir': $flux['data'] .= cs_urls_propres('breve', $flux['args']['id_breve']); break;
-			case 'mot': case 'mots_edit': $flux['data'] .= cs_urls_propres('mot', $flux['args']['id_mot']); break;
+			case 'articles': $flux['data'] .= cs_urls_propres('article', $flux['args']['id_article']); break;
+			case 'naviguer': $flux['data'] .= cs_urls_propres('rubrique', $flux['args']['id_rubrique']); break;
+			case 'auteur_infos': case 'auteurs_edit': $flux['data'] .= cs_urls_propres('auteur', $flux['args']['id_auteur']); break;
+			case 'breves_voir': $flux['data'] .= cs_urls_propres('breve', $flux['args']['id_breve']); break;
+			case 'mots_edit': $flux['data'] .= cs_urls_propres('mot', $flux['args']['id_mot']); break;
 			case 'site': case 'sites': $flux['data'] .= cs_urls_propres('syndic', $flux['args']['id_syndic']); break;
 		}
+	}
 	return cs_pipeline_boite_privee($flux, 'gauche');
 }
 
