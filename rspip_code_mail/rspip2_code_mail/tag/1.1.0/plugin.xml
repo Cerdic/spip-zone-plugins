@@ -1,0 +1,44 @@
+
+<plugin>
+ <nom>Codeur d'adresses email</nom>
+ <version>1.1.0</version>
+ <auteur>
+Robert Sebille 
+_ [Contact->mailto:robert@sebille.name]
+_ [Site->http://sebille.name]
+ </auteur>
+ <description>
+	Ce plugin encode les raccourcis email spip pour éviter la récupération des adresses email par des robots collecteurs de ces adresses. Il remplace le lien mailto par un lien javascript crypté. Si le robot tente de suivre le lien javascript et de le décoder via le DOM, il sera bloqué par une captcha mathématique obligatoire pour le décodage.
+ 
+Le plugin supporte des paramètres à l'adresse email. Ces paramètres doivent être alphanumériques. Ils peuvent aussi contenir l'espace, _ et -. Si l'encodage UTF-8 est disponible, les caractères accentués sont autorisés. Les doubles et simples quotes (même échappés), # et les caractères html étendus sont à proscrire. Le : dans les paramètres retournera @.
+
+Langues actuelles disponibles (en, nl à compléter): fr, en, nl
+
+La documentation [est ici->http://contrib.spip.net/Codeur-d-adresse-email-2-plugin]."
+
+ </description>
+ <necessite id="SPIP" version="[2.1.0;2.1.99]" />
+ <licence>GNU/GPL</licence>
+ <etat>stable</etat>
+ <prefix>rspipcm</prefix>
+ <icon>icons/rspipcm-icon.jpg</icon>
+ <pipeline>
+   <nom>insert_head</nom>
+   <action>ecris_entete</action>
+   <inclure>rspipcm_decode_email.php</inclure>
+ </pipeline>
+ <pipeline>
+   <nom>header_prive</nom>
+   <action>ecris_entete</action>
+   <inclure>rspipcm_decode_email.php</inclure>
+ </pipeline>
+ <pipeline>
+   <nom>pre_liens</nom>
+   <action>filtre_email</action>
+   <inclure>rspipcm_code_email.php</inclure>
+ </pipeline>
+ <pipeline>
+   <nom>affichage_final</nom>
+   <inclure>rspipcm_code_email.php</inclure>
+ </pipeline>
+</plugin>

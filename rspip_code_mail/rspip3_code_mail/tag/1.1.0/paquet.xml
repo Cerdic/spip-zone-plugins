@@ -1,0 +1,19 @@
+
+<paquet
+	etat="stable"
+	prefix="rspipcm"
+	version="1.1.0"
+	compatibilite="[3.0.0 ;3.0.*]"
+	categorie="communication"
+	logo="icons/rspipcm-icon.jpg"
+	demonstration="http://www.etuc.org/r/158"
+>
+	<nom>Codeur d'adresses email</nom>
+	<auteur lien="http://sebille.name" mail="robert@sebille.name">Robert Sebille</auteur>
+	<licence>GNU/GPL</licence>
+	<copyright>2010-2013</copyright>
+	<pipeline nom="insert_head" action="ecris_entete" inclure="rspipcm_decode_email.php" />
+	<pipeline nom="header_prive" action="ecris_entete" inclure="rspipcm_decode_email.php" />
+	<pipeline nom="pre_liens" action="filtre_email" inclure="rspipcm_code_email.php" />
+	<pipeline nom="affichage_final" inclure="rspipcm_code_email.php" />
+</paquet>
