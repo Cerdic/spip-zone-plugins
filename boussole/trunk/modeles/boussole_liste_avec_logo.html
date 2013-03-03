@@ -40,11 +40,13 @@
 		[(#SET{bulle, [(#AKA_BOUSSOLE|boussole_traduire{#ENV{type_bulle, nom_slogan_site}, #AKA_SITE})]})]
 		<li[ class="(#ENV{li_class})"]>
 			<a rel="external" href="#URL_SITE"[ title="(#GET{bulle}|couper{80}|attribut_html)"] class="spip_out">
-				[(#CHEMIN{images/boussole/site[-(#AKA_BOUSSOLE)][-(#AKA_SITE)].png}
+			<BOUCLE_logo_site(BOUSSOLES_EXTRAS){aka_boussole}{type_objet=site}{aka_objet=#AKA_SITE}>
+				[(#CHAMP_SQL{logo_objet}
 					|image_reduire{#ENV{taille_logo, 40}}
 					|image_recadre{#ENV{taille_logo, 40},#ENV{taille_logo, 40},center,transparent}
 					|inserer_attribut{class,spip_logos}
 					|inserer_attribut{alt,[(#GET{bulle}|couper{60}|attribut_html)]})]
+			</BOUCLE_logo_site>
 				[(#ENV{titre_site}|=={oui}|oui)
 					[(#AKA_BOUSSOLE|boussole_traduire{nom_site, #AKA_SITE})]
 				]

@@ -32,7 +32,7 @@ function boussole_declarer_tables_principales($tables_principales) {
 		"nom_objet"		=> "text DEFAULT '' NOT NULL",
 		"slogan_objet"	=> "text DEFAULT '' NOT NULL",
 		"descriptif_objet"	=> "text DEFAULT '' NOT NULL",
-		"logo_objet"	=> "varchar(255) DEFAULT '' NOT NULL",
+		"logo_objet"	=> "varchar(255) DEFAULT '' NOT NULL", // Attention à utiliser avec #CHAMP_SQL{logo_objet}
 		"maj"			=> "timestamp");
 
 	$boussoles_extras_key = array(

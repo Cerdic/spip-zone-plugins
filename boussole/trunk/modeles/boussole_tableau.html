@@ -1,14 +1,21 @@
 #SET{critere_affichage, #ENV{affiche}}
+<BOUCLE_logo_boussole(BOUSSOLES_EXTRAS){aka_boussole=#ENV{boussole}}{type_objet=boussole}{aka_objet=#ENV{boussole}}>
+	[(#SET{logo_boussole, #CHAMP_SQL{logo_objet}})]
+</BOUCLE_logo_boussole>
+
 <B_groupe>
 <div[ id="(#ENV{div_id})"][ class="(#ENV{div_class})"]>
 [(#ENV{cartouche_boussole}|=={oui}|oui)
-	[(#CHEMIN{images/boussole/boussole[-(#ENV{boussole})].png}|image_reduire{#ENV{taille_logo}}|inserer_attribut{class,spip_logos}|inserer_attribut{alt,[(#ENV{boussole}|boussole_traduire{nom_boussole}|couper{60}|attribut_html)]})]
+	[(#GET{logo_boussole}
+		|image_reduire{#ENV{taille_logo}}
+		|inserer_attribut{class,spip_logos}
+		|inserer_attribut{alt,[(#ENV{boussole}|boussole_traduire{nom_boussole}|couper{60}|attribut_html)]})]
 	[<h2>(#ENV{boussole}|boussole_traduire{nom_boussole})</h2>]
 	<ul>
 		[<li><:boussole:label_slogan:> : (#ENV{boussole}|boussole_traduire{slogan_boussole})</li>]
 		[<li><:boussole:label_descriptif:> : (#ENV{boussole}|boussole_traduire{descriptif_boussole})</li>]
 		[<li><:boussole:label_version:> : (#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{version})</li>]
-		[<li>(#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{nbr_sites}) [(#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{nbr_sites}|singulier_ou_pluriel{<:boussole:label_1_site:>, <:boussole:label_n_sites:>})]</li>]
+		[<li>(#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{nbr_sites}|singulier_ou_pluriel{<:boussole:label_1_site:>, <:boussole:label_n_sites:>})</li>]
 		[<li><:boussole:label_fichier_xml:> : (#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{xml})</li>]
 		[<li><:boussole:label_actualise_le:> : (#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{maj})</li>]
 	</ul>
@@ -34,9 +41,12 @@
 		[<tr><td colspan="6">(#AKA_BOUSSOLE|boussole_traduire{nom_groupe, #AKA_GROUPE})</td></tr>]
 	]
 	<BOUCLE_site(BOUSSOLES){aka_boussole}{aka_groupe}{par rang_site}>
+		<BOUCLE_logo_site(BOUSSOLES_EXTRAS){aka_boussole}{type_objet=site}{aka_objet=#AKA_SITE}>
+			[(#SET{logo_site, #CHAMP_SQL{logo_objet}})]
+		</BOUCLE_logo_site>
 		[(#GET{critere_affichage}|non|ou{#GET{critere_affichage}|=={#_site:AFFICHE}|oui})
 		[<tr class="[row_(#COMPTEUR_BOUCLE|alterner{odd,even})]">
-			<td>[(#CHEMIN{images/boussole/site[-(#AKA_BOUSSOLE)][-(#AKA_SITE)].png}
+			<td>[(#GET{logo_site}
 				|image_reduire{#ENV{taille_logo}}
 				|image_recadre{#ENV{taille_logo},#ENV{taille_logo},center,transparent}
 				|inserer_attribut{class,spip_logos}

@@ -28,11 +28,15 @@
 	- p_class :				classe css du p englobant chaque site. Vide correspond a aucune classe
 -->]
 
+<BOUCLE_logo_boussole(BOUSSOLES_EXTRAS){aka_boussole=#ENV{boussole}}{type_objet=boussole}{aka_objet=#ENV{boussole}}>
+	[(#SET{logo_boussole, #CHAMP_SQL{logo_objet}})]
+</BOUCLE_logo_boussole>
+
 <B_groupe>
 <div class="contenu-principal">
 [(#ENV{cartouche_boussole, non}|=={oui}|oui)
 	<div class="cartouche">
-		[(#CHEMIN{images/boussole/boussole[-(#ENV{boussole})].png}
+		[(#GET{logo_boussole}
 			|image_reduire{#ENV{taille_logo, 64}}
 			|image_recadre{#ENV{taille_logo, 64},#ENV{taille_logo, 64},center,transparent}
 			|inserer_attribut{class,spip_logos}
