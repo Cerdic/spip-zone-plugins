@@ -35,7 +35,8 @@
 						#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
 						["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
 						"icon_size": \[#GET{icon_w},#GET{icon_h}\],
-						"icon_anchor": \[[(#GET{icon_w}|div{2})],[(#GET{icon_h})]\]]
+						"icon_anchor": \[[(#GET{icon_w}|div{2})],[(#GET{icon_h})]\]],
+						"popup_anchor": \[1,[-(#GET{icon_h}|div{1.2})]\]
 					}
 				}
 		</BOUCLE_points>
@@ -58,7 +59,8 @@
 						#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
 						["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
 						"icon_size": \[#GET{icon_w},#GET{icon_h}\],
-						"icon_anchor": \[[(#GET{icon_w}|div{2})],[(#GET{icon_h})]\]]
+						"icon_anchor": \[[(#GET{icon_w}|div{2})],[(#GET{icon_h})]\]],
+						"popup_anchor": \[1,[-(#GET{icon_h}|div{1.2})]\]
 					}
 				}]
 		};
