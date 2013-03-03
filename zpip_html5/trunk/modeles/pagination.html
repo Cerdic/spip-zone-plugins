@@ -6,7 +6,7 @@
 #SET{sep,#ENV{separateur,'-'}}
 <B_pages>
 	<span
-  class='label'><:zpip:pagination_pages:></span>[
+  class='label'><:zcore:pagination_pages:></span>[
 
 	(#SET{item, #ENV{page_courante}|moins{2}|mult{#ENV{pas}} })
 
@@ -14,7 +14,7 @@
 	class="prev[(#ENV{page_courante}|<={1}|oui)disabled]">(#ENV{url}
 	|parametre_url{#ENV{debut},#GET{item}}
 	|ancre_url{#ENV{ancre}}
-	|lien_ou_expose{<:zpip:pagination_prev:>,#ENV{page_courante}|<={1},'lien_pagination','',nofollow}
+	|lien_ou_expose{<:zcore:pagination_prev:>,#ENV{page_courante}|<={1},'lien_pagination','',nofollow}
 	|inserer_attribut{rel,prev}
 	)[<span
 	class='sep'>(#GET*{sep})</span>]</span>]<span
@@ -46,7 +46,7 @@
 	class="next[(#ENV{page_courante}|>={#ENV{nombre_pages}}|oui)disabled]">[<span class='sep'>(#GET*{sep})</span>](#ENV{url}
 	|parametre_url{#ENV{debut},#GET{item}}
 	|ancre_url{#ENV{ancre}}
-	|lien_ou_expose{<:zpip:pagination_next:>,#ENV{page_courante}|>={#ENV{nombre_pages}},'lien_pagination','',nofollow}
+	|lien_ou_expose{<:zcore:pagination_next:>,#ENV{page_courante}|>={#ENV{nombre_pages}},'lien_pagination','',nofollow}
 	|inserer_attribut{rel,next}
 	)</span>]
 </B_pages>

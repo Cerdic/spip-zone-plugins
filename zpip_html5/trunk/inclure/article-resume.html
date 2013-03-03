@@ -12,12 +12,12 @@
 	[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|couper{160})</div>]
 	<div class="meta-publi">
 	
-	<!-- a class="lire-la-suite" href="#URL_ARTICLE"><:zpip:lire_la_suite:><span class="lire-la-suite-titre"><:zpip:lire_la_suite_de:> <em>#TITRE</em></span></a -->
+	<!-- a class="lire-la-suite" href="#URL_ARTICLE"><:zcore:lire_la_suite:><span class="lire-la-suite-titre"><:zcore:lire_la_suite_de:> <em>#TITRE</em></span></a -->
 	[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr>][<span class="sep">, </span><span class="auteurs"><:par_auteur:> (#LESAUTEURS)</span>]
 	
 	<BOUCLE_nb_commentaires(FORUMS) {id_article}{plat} />	[(#TOTAL_BOUCLE|oui)
 		<span class="sep">|</span>
-		<a[ href="(#URL_ARTICLE|ancre_url{forum})"] class="nb_commentaires">[(#TOTAL_BOUCLE)]&nbsp;[(#TOTAL_BOUCLE|<={1}|?{<:zpip:commentaire:>,<:zpip:commentaires:>})]</a>
+		<a[ href="(#URL_ARTICLE|ancre_url{forum})"] class="nb_commentaires">[(#TOTAL_BOUCLE)]&nbsp;[(#TOTAL_BOUCLE|<={1}|?{<:zcore:commentaire:>,<:zcore:commentaires:>})]</a>
 		]
 	<//B_nb_commentaires>
 	</div>
