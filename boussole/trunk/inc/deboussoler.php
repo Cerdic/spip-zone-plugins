@@ -8,22 +8,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Ajout de la boussole dans la base de donnees
  *
- * @param string $url
- * @param string &$erreur
- * @return boolean
+ * @param string $boussole	Alias de la boussole
+ * @param string $serveur	Alias du serveur fournissant les données sur la boussole
+ * @return array
  */
-
-// $url	=> url ou path du fichier xml de description de la boussole
-// $erreur	=> message d'erreur deja traduit
-function boussole_ajouter($url) {
+function boussole_ajouter($boussole, $serveur='spip') {
 
 	// On initialise le message de sortie
 	$message = '';
 	
 	// On recupere les infos du fichier xml de description de la balise
-	$infos = boussole_parser_xml($url);
+	$infos = boussole_parser_xml($boussole, $serveur);
 	if (!$infos OR !$infos['boussole']['alias']){
-		$message = _T('boussole:message_nok_xml_invalide', array('fichier' => $url));
+		$message = _T('boussole:message_nok_xml_invalide', array('fichier' => $boussole));
 		return array(false, $message);
 	}
 
@@ -58,21 +55,26 @@ function boussole_ajouter($url) {
 		boussole_supprimer($infos['boussole']['alias']);
 	}
 	// -- insertion de la nouvelle liste de sites pour cette boussole
-	if (!$ids = sql_insertq_multi('spip_boussoles', $infos['sites'])) {
-		$message = _T('boussole:message_nok_ecriture_bdd');
+	if (!sql_insertq_multi('spip_boussoles', $infos['sites'])) {
+		$message = _T('boussole:message_nok_ecriture_bdd', array('table' => 'spip_boussoles'));
+		return array(false, $message);
+	}
+	// -- insertion de la nouvelle liste des extras pour cette boussole
+	if (sql_insertq_multi('spip_boussoles_extras', $infos['extras']) === false) {
+		$message = _T('boussole:message_nok_ecriture_bdd', array('table' => 'spip_boussoles_extras'));
 		return array(false, $message);
 	}
 	// -- consignation des informations de mise a jour de cette boussole dans la table spip_meta
 	$infos['boussole']['nbr_sites'] = count($infos['sites']);
-	$infos['boussole']['xml'] = $url;
+	$infos['boussole']['serveur'] = $serveur;
 	$infos['boussole']['maj'] = date('Y-m-d H:i:s');
 	ecrire_meta($meta_boussole, serialize($infos['boussole']));
 
 	// On definit le message de retour ok (actualisation ou ajout)
 	if ($actualisation)
-		$message = _T('boussole:message_ok_boussole_actualisee', array('fichier' => $url));
+		$message = _T('boussole:message_ok_boussole_actualisee', array('fichier' => $boussole));
 	else
-		$message = _T('boussole:message_ok_boussole_ajoutee', array('fichier' => $url));
+		$message = _T('boussole:message_ok_boussole_ajoutee', array('fichier' => $boussole));
 	
 	return array(true, $message);
 }
@@ -81,11 +83,9 @@ function boussole_ajouter($url) {
 /**
  * Suppression de la boussole dans la base de donnees
  *
- * @param int $aka_boussole
+ * @param int $aka_boussole	alias de la boussole
  * @return boolean
  */
-
-// $aka_boussole	=> alias de la boussole, par defaut, spip
 function boussole_supprimer($aka_boussole) {
 	
 	// Alias non conforme
@@ -94,8 +94,11 @@ function boussole_supprimer($aka_boussole) {
 
 	// On supprime les sites de cette boussole
 	sql_delete('spip_boussoles','aka_boussole='.sql_quote($aka_boussole));
+	// On supprime les extras de cette boussole
+	sql_delete('spip_boussoles_extras','aka_boussole='.sql_quote($aka_boussole));
 	// On supprime ensuite la meta consignant la derniere mise a jour de cette boussole
 	effacer_meta('boussole_infos_' . $aka_boussole);
+
 	return true;
 }
 
@@ -171,52 +174,92 @@ function boussole_valider_xml($url, &$erreur) {
  * Renvoie, a partir du fichier xml de la boussole, un tableau des sites de la boussole
  * Les cles du tableau correspondent au nom des champs en base de donnees
  *
- * @param string $url
+ * @param string $boussole	Alias de la boussole
+ * @param string $serveur	Alias du serveur fournissant les données sur la boussole
  * @return array()
  */
-
-// $url	=> url ou path du fichier xml de description de la boussole
-function boussole_parser_xml($url) {
+function boussole_parser_xml($boussole, $serveur='spip') {
+	global $serveurs_boussoles;
 
 	$infos = array();
 
-	// Lire les donnees du fichier xml d'une boussole
-	include_spip('inc/xml');
-	$xml = spip_xml_load($url);
-	
-	// On recupere les infos de la balise boussole
-	if (spip_xml_match_nodes(',^boussole,', $xml, $matches)){
-		$tag = array_keys($matches);
-		list($balise, $attributs) = spip_xml_decompose_tag($tag[0]);
-		$infos[$balise] = $attributs;
-	
-		// On recupere les infos des balises groupe et site
-		if (spip_xml_match_nodes(',^groupe,', $xml, $groupes)){
-			$infos['sites'] = array();
+	// Acquérir les informations de la boussole à partir du serveur
+	include_spip('inc/distant');
+	$action = str_replace('[arguments]', $boussole, $serveurs_boussoles[$serveur]);
+	$page = recuperer_page($action);
+
+	$convertir = charger_fonction('simplexml_to_array', 'inc');
+	$tableau = $convertir(simplexml_load_string($page), false);
+
+	if ($tableau['name'] == 'boussole') {
+		$infos['sites'] = array();
+		$infos['extras'] = array();
+
+		// Collecter les attributs pour la meta de la boussole
+		$infos['boussole'] = $tableau['attributes'];
+
+		// Construire l'objet extras de la boussole
+		$extra['aka_boussole'] = $infos['boussole']['alias'];
+		$extra['type_objet'] = 'boussole';
+		$extra['aka_objet'] = $infos['boussole']['alias'];
+		$extra['logo_objet'] = $infos['boussole']['logo'];
+		if (isset($tableau['children']['nom']))
+			$extra['nom_objet'] = '<multi>' . $tableau['children']['nom'][0]['children']['multi'][0]['text'] . '</multi>';
+		if (isset($tableau['children']['slogan']))
+			$extra['slogan_objet'] = '<multi>' . $tableau['children']['slogan'][0]['children']['multi'][0]['text'] . '</multi>';
+		if (isset($tableau['children']['description']))
+			$extra['descriptif_objet'] = '<multi>' . $tableau['children']['description'][0]['children']['multi'][0]['text'] . '</multi>';
+		$infos['extras'][] = $extra;
+
+		// Collecter les informations des groupes
+		if (isset($tableau['children']['groupe'])) {
 			$rang_groupe = 0;
-			foreach (array_keys($groupes) as $_groupe){
-				$site = array();
+			foreach ($tableau['children']['groupe'] as $_groupe) {
+				// Construire l'objet extras du groupe
+				$extra['aka_boussole'] = $infos['boussole']['alias'];
+				$extra['type_objet'] = 'groupe';
+				$extra['aka_objet'] = $_groupe['attributes']['type'];
+				$extra['logo_objet'] = '';
+				if (isset($_groupe['children']['nom']))
+					$extra['nom_objet'] = '<multi>' . $_groupe['children']['nom'][0]['children']['multi'][0]['text'] . '</multi>';
+				$extra['slogan_objet'] = '';
+				$extra['descriptif_objet'] = '';
+				$infos['extras'][] = $extra;
+
 				// On consigne l'alias et le rang du groupe
-				list($balise_groupe, $attributs_groupe) = spip_xml_decompose_tag($_groupe);
 				$rang_groupe = ++$i;
 				// On consigne l'alias et l'url de chaque site du groupe en cours de traitement
 				$rang_site = 0;
-				foreach (array_keys($groupes[$_groupe][0]) as $_site){
-					// Alias de la boussole
-					$site['aka_boussole'] = $infos['boussole']['alias'];
-					// Infos du groupe
-					$site['aka_groupe'] = $attributs_groupe['type'];
-					$site['rang_groupe'] = $rang_groupe;
-					// Infos du site
-					list($balise_site, $attributs_site) = spip_xml_decompose_tag($_site);
-					$site['aka_site'] = $attributs_site['alias'];
-					$site['url_site'] = $attributs_site['src'];
-					$site['rang_site'] = ++$rang_site;
-					$site['affiche'] = 'oui';
-					$site['id_syndic'] = 0;
-					// On ajoute le site ainsi defini aux tableau des sites si celui-ci est actif
-					if ($attributs_site['actif'] == 'oui')
-						$infos['sites'][] = $site;
+				if (isset($_groupe['children']['site'])) {
+					foreach ($_groupe['children']['site'] as $_site){
+						if ($_site['attributes']['actif'] == 'oui') {
+							// Alias de la boussole
+							$site['aka_boussole'] = $infos['boussole']['alias'];
+							// Infos du groupe
+							$site['aka_groupe'] = $_groupe['attributes']['type'];
+							$site['rang_groupe'] = $rang_groupe;
+							// Infos du site
+							$site['aka_site'] = $_site['attributes']['alias'];
+							$site['url_site'] = $_site['attributes']['src'];
+							$site['rang_site'] = ++$rang_site;
+							$site['affiche'] = 'oui';
+							$site['id_syndic'] = 0;
+							$infos['sites'][] = $site;
+
+							// Construire l'objet extra du site
+							$extra['aka_boussole'] = $infos['boussole']['alias'];
+							$extra['type_objet'] = 'site';
+							$extra['aka_objet'] = $_site['attributes']['alias'];
+							$extra['logo_objet'] = $_site['attributes']['logo'];
+							if (isset($_site['children']['nom']))
+								$extra['nom_objet'] = '<multi>' . $_site['children']['nom'][0]['children']['multi'][0]['text'] . '</multi>';
+							if (isset($_site['children']['slogan']))
+								$extra['slogan_objet'] = '<multi>' . $_site['children']['slogan'][0]['children']['multi'][0]['text'] . '</multi>';
+							if (isset($_site['children']['description']))
+								$extra['descriptif_objet'] = '<multi>' . $_site['children']['description'][0]['children']['multi'][0]['text'] . '</multi>';
+							$infos['extras'][] = $extra;
+						}
+					}
 				}
 			}
 		}

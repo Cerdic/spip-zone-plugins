@@ -105,7 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_nok_boussole_inconnue' => 'Aucune boussole ne correspond &agrave l\'alias « @alias@ »',
 	'message_nok_champ_obligatoire' => 'Ce champ est obligatoire',
-	'message_nok_ecriture_bdd' => 'Erreur d\'écriture en base de données',
+	'message_nok_ecriture_bdd' => 'Erreur d\'écriture en base de données (table @table@)',
 	'message_nok_xml_introuvable' => 'Le fichier « @fichier@ » est introuvable',
 	'message_nok_xml_invalide' => 'Le fichier XML « @fichier@ » de description de la boussole n\'est pas conforme à la DTD',
 	'message_ok_boussole_actualisee' => 'La boussole « @fichier@ » a été mise à jour.',

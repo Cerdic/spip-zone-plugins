@@ -8,10 +8,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_serveur_informer_boussole_dist(){
 
-	// Securisation: argument attendu est l'alias de la boussole
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
-	list($alias, $prefixe) = explode('-', $arg);
+	// Securisation: aucune car c'est une action anonyme pouvant être appeler de l'extérieur
+	$alias = _request('arg');
 
 	if ($alias) {
 		// Acquerir la liste des boussoles prêtes à être diffusées
@@ -29,6 +27,7 @@ function action_serveur_informer_boussole_dist(){
 				}
 				else {
 					$page = recuperer_fond('informer', array('alias' => $alias, 'xml' => $xml));
+					echo $page;
 					spip_log("Information fournie sur la boussole d'alias = $alias", 'boussole' . _LOG_INFO);
 				}
 			}

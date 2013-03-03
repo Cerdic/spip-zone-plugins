@@ -31,7 +31,7 @@ function boussole_declarer_tables_principales($tables_principales) {
 		"aka_objet"		=> "varchar(32) DEFAULT '' NOT NULL",
 		"nom_objet"		=> "text DEFAULT '' NOT NULL",
 		"slogan_objet"	=> "text DEFAULT '' NOT NULL",
-		"description_objet"	=> "text DEFAULT '' NOT NULL",
+		"descriptif_objet"	=> "text DEFAULT '' NOT NULL",
 		"logo_objet"	=> "varchar(255) DEFAULT '' NOT NULL",
 		"maj"			=> "timestamp");
 
