@@ -188,7 +188,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'slogan_site_spip_zone' => 'Area dedicated to SPIP contribution developement',
 
 	// T
-	'titre_actualite_spip' => 'SPIP Galaxy news',
 	'titre_boite_autres_boussoles' => 'Other compasses',
 	'titre_boite_infos_boussole' => 'ALIAS COMPASS',
 	'titre_boite_logo_boussole' => 'COMPASS LOGO',

@@ -9,7 +9,7 @@
 [(#REM) <!-- UTILISATION
 
 	- boussole :		alias de la boussole a afficher. spip, pour la galaxie SPIP
-	- titre_actualite :	indicateur oui/non d'affichage du titre du bloc d'actualites ou titre personnalise. Vide correspond a non
+	- titre_actualite :	titre du bloc d'actualites. Vide correspond a non
 	- titre_site :		indicateur oui/non d'affichage du titre de chaque site. Vide correspond a non
 	- max_sites :		nombre max de site affiches. Vide correspond a 3
 	- max_articles :	nombre max d'articles affiches par site. Vide correspond a 5
@@ -22,14 +22,7 @@
 
 <B_boussole>
 <div[ id="(#ENV{div_id})"][ class="(#ENV{div_class})"]>
-[(#ENV{titre_actualite}|oui)
-	[(#ENV{titre_actualite}|=={oui}|oui)
-		[<h2>(#ENV{boussole}|boussole_traduire{titre_actualite})</h2>]
-	]
-	[(#ENV{titre_actualite}|!={oui}|et{#ENV{titre_actualite}|!={non}}|oui)
-		[<h2>(#ENV{titre_actualite})</h2>]
-	]
-]
+	[<h2>(#ENV{titre_actualite})</h2>]
 <BOUCLE_boussole(BOUSSOLES)	{aka_boussole=#ENV{boussole}}
 							{aka_groupe?}
 							{id_syndic > 0}

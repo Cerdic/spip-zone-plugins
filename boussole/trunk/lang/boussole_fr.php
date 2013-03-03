@@ -61,6 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_site_boussoles' => 'Ce site fait partie des boussoles :',
 
 	// L
+	'label_1_boussole' => '@nb@ boussole',
 	'label_1_site' => '@nb@ site',
 	'label_a_class' => 'Classe de l\'ancre englobant le logo',
 	'label_actualise_le' => 'Actualisée le',
@@ -85,6 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mode_url_perso' => 'Boussole personnelle',
 	'label_modele' => 'Modèle d\'affichage',
 	'label_n_sites' => '@nb@ sites',
+	'label_n_boussoles' => '@nb@ boussoles',
 	'label_nom' => 'Nom',
 	'label_p_class' => 'Classe du paragraphe englobant le descriptif',
 	'label_sepia' => 'Code de la couleur de sépia (sans #)',
@@ -186,7 +188,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'slogan_site_spip_zone' => 'L\'espace de développement des contributions à SPIP',
 
 	// T
-	'titre_actualite_spip' => 'Actualités de la Galaxie SPIP',
 	'titre_boite_autres_boussoles' => 'Autres boussoles',
 	'titre_boite_infos_boussole' => 'BOUSSOLE D\'ALIAS',
 	'titre_boite_logo_boussole' => 'LOGO DE LA BOUSSOLE',

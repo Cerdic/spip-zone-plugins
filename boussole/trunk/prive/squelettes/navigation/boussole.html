@@ -23,9 +23,11 @@
 		[(#CHEMIN_IMAGE{image-24.png}|balise_img{'', cadre-icone})]
 		<:boussole:titre_boite_logo_boussole:>
 	</h3>
-	[(#SET{logo, [(#CHEMIN{[images/boussole/boussole-(#ENV{alias}).png]})]})]
+	<BOUCLE_logo_boussole(BOUSSOLES_EXTRAS){aka_boussole=#ENV{alias}}{type_objet=boussole}{aka_objet=#ENV{alias}}>
+		[(#SET{logo_boussole, #CHAMP_SQL{logo_objet}})]
+	</BOUCLE_logo_boussole>
 	<INCLURE{fond=formulaires/inc-apercu-logo,
-		logo=#GET{logo},
+		logo=#GET{logo_boussole},
 		quoi=logo_on,
 		editable='',
 		env} />

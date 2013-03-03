@@ -15,7 +15,7 @@
 #ANCRE_PAGINATION
 <div class="liste-objets boussoles">
 	<table class="spip liste">
-		[<caption><strong class="caption">(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{relecture:info_1_boussole, relecture:info_nb_boussoles}})</strong></caption>]
+		[<caption><strong class="caption">(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{boussole:label_1_boussole, boussole:label_n_boussoles}})</strong></caption>]
 		<thead>
 			<tr class="first_row">
 				<th class="titre principale" scope="col"><:boussole:colonne_titre:></th>
@@ -32,6 +32,9 @@
 		<tbody>
 	<BOUCLE_liste_boussoles(BOUSSOLES) {fusion aka_boussole}{where?}{tri #ENV{par, aka_boussole}, #GET{defaut_tri}}{pagination #ENV{pas, 5}}>
 			#SET{infos, #BOUSSOLE_INFOS{#AKA_BOUSSOLE}}
+		<BOUCLE_logo_boussole(BOUSSOLES_EXTRAS){aka_boussole}{type_objet=boussole}{aka_objet=#AKA_BOUSSOLE}>
+			[(#SET{logo_boussole, #CHAMP_SQL{logo_objet}})]
+		</BOUCLE_logo_boussole>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
 				<td class="titre principale">
 					<a[ href="(#URL_ECRIRE{boussole}|parametre_url{alias, #AKA_BOUSSOLE})"]>
@@ -41,7 +44,9 @@
 				<td class="titre" scope="col">#AKA_BOUSSOLE</td>
 			[(#ENV{affichage}|=={complet}|oui)
 				<td class="logo">
-					[(#CHEMIN{images/boussole/boussole[-(#AKA_BOUSSOLE)].png}|image_reduire{20,26}|inserer_attribut{alt, logo})]
+					[(#GET{logo_boussole}
+						|image_reduire{20,26}
+						|inserer_attribut{alt, logo})]
 				</td>
 				<td class="version">[(#GET{infos}|table_valeur{version})]</td>
 				<td class="numero">[(#GET{infos}|table_valeur{nbr_sites}|singulier_ou_pluriel{boussole:label_1_site, boussole:label_n_sites})]</td>

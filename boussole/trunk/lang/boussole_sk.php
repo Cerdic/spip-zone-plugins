@@ -188,7 +188,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'slogan_site_spip_zone' => 'Rozhranie vývoja príspevkov k SPIPu',
 
 	// T
-	'titre_actualite_spip' => 'Novinky z Galaxie SPIPu',
 	'titre_boite_autres_boussoles' => 'Ďalšie kompasy',
 	'titre_boite_infos_boussole' => 'KOMPAS PREZÝVKY',
 	'titre_boite_logo_boussole' => 'LOGO KOMPASU',

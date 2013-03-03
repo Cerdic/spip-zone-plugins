@@ -24,12 +24,14 @@
 		[(#REM) <!-- Insertion des sites du groupe -->]
 		<ul[ id="groupe-(#AKA_GROUPE)"] class="groupe_entrees">
 	<BOUCLE_site(BOUSSOLES){aka_boussole}{aka_groupe}{par rang_site}>
-			[(#SET{logo, [(#CHEMIN{images/boussole/site[-(#AKA_BOUSSOLE)][-(#AKA_SITE)].png})]})]
+		<BOUCLE_logo_site(BOUSSOLES_EXTRAS){aka_boussole}{type_objet=site}{aka_objet=#AKA_SITE}>
+			[(#SET{logo, #CHAMP_SQL{logo_objet}})]
+		</BOUCLE_logo_site>
 			<li class="entree"[ style="background-repeat:no-repeat;background-position:5px 10px;background-image:url((#GET{logo}|image_reduire{24}|extraire_attribut{src}))"]>
 				<div class="ligne #AFFICHE">
 					<div class="description arial2">
 						<div class="titre">
-							[(#ID_SYNDIC|oui)<a[ href="(#URL_ECRIRE{sites, id_syndic=#ID_SYNDIC})"] title="<:boussole:bulle_aller_site:>">]
+							[(#ID_SYNDIC|oui)<a[ href="(#URL_ECRIRE{site, id_syndic=#ID_SYNDIC})"] title="<:boussole:bulle_aller_site:>">]
 							[(#AKA_BOUSSOLE|boussole_traduire{nom_site, #AKA_SITE})]
 							[(#ID_SYNDIC|oui)</a>]
 							[<i>((#AKA_SITE))</i>]
