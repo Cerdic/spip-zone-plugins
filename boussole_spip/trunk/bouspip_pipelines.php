@@ -10,7 +10,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return $flux
  */
 function bouspip_declarer_boussoles($flux) {
-	$flux['spip'] = "bouspip";
+	$flux['spip'] = array('serveur' => 'spip', 'prefixe' => 'bouspip');
 	return $flux;
 }
 
