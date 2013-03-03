@@ -89,9 +89,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'slogan_site_spip_video' => 'SPIP media library',
 	'slogan_site_spip_zine' => 'Webzine about SPIP',
 	'slogan_site_spip_zone' => 'Area dedicated to SPIP contribution developement',
-
-	// T
-	'titre_actualite_spip' => 'SPIP Galaxy news',
 );
 
 ?>

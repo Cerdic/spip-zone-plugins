@@ -89,9 +89,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'slogan_site_spip_video' => 'Multimediálna knižnica SPIPu',
 	'slogan_site_spip_zine' => 'Webzine o SPIPe a o všetkom okolo neho',
 	'slogan_site_spip_zone' => 'Rozhranie vývoja príspevkov k SPIPu',
-
-	// T
-	'titre_actualite_spip' => 'Novinky z Galaxie SPIPu',
 );
 
 ?>
