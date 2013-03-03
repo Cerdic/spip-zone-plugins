@@ -1,7 +1,7 @@
 
 <plugin>
  <nom>Codeur d'adresses email</nom>
- <version>1.0.0</version>
+ <version>1.1.0</version>
  <auteur>
 Robert Sebille 
 _ [Contact->mailto:robert@sebille.name]
@@ -17,7 +17,6 @@ Langues actuelles disponibles (en, nl à compléter): fr, en, nl
 La documentation [est ici->http://contrib.spip.net/Codeur-d-adresse-email-2-plugin]."
 
  </description>
- <categorie>communication</categorie>
  <necessite id="SPIP" version="[2.1.0;2.1.99]" />
  <licence>GNU/GPL</licence>
  <etat>stable</etat>
@@ -36,6 +35,10 @@ La documentation [est ici->http://contrib.spip.net/Codeur-d-adresse-email-2-plug
  <pipeline>
    <nom>pre_liens</nom>
    <action>filtre_email</action>
+   <inclure>rspipcm_code_email.php</inclure>
+ </pipeline>
+ <pipeline>
+   <nom>affichage_final</nom>
    <inclure>rspipcm_code_email.php</inclure>
  </pipeline>
 </plugin>

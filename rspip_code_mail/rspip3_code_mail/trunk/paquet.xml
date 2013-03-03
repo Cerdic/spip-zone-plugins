@@ -2,7 +2,7 @@
 <paquet
 	etat="stable"
 	prefix="rspipcm"
-	version="1.0.0"
+	version="1.1.0"
 	compatibilite="[3.0.0 ;3.0.*]"
 	categorie="communication"
 	logo="icons/rspipcm-icon.jpg"
@@ -15,4 +15,5 @@
 	<pipeline nom="insert_head" action="ecris_entete" inclure="rspipcm_decode_email.php" />
 	<pipeline nom="header_prive" action="ecris_entete" inclure="rspipcm_decode_email.php" />
 	<pipeline nom="pre_liens" action="filtre_email" inclure="rspipcm_code_email.php" />
+	<pipeline nom="affichage_final" inclure="rspipcm_code_email.php" />
 </paquet>

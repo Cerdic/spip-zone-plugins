@@ -3,6 +3,9 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
    // PAS DE CHAINE VIDE. Laisser au moins un espace.
+   
+   //D
+   "dans_le_domaine" => "in the domain",
 
    //E
    // Usage sample: "ecrire_a_post" => " and after it,", "ecrire_a_pre" => "Before ", will be written 
@@ -14,9 +17,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
    // Pour javascript: pas d'entites html.
    "erreur_entrez_resultat_addition" => "Mistake! How much is",
    
-   //J
-   "javascript_est_desactive" => "Javascript is disabled in your browser. The email links of this page will not work.",
-
    // final
    "pour_les_distraits" => "Pas de virgule a la fin du tableau"
 

@@ -3,19 +3,6 @@
 // By Robert Sebille 27/05/02
 // Licence GNU GPL
 
-function empoisonne() {
-var poison="",i=0,u=0,d=0;
-   tld = new Array(".be",".com",".net",".org",".eu",".fr",".it");
-   u=Math.round(Math.random()*6)+6;
-   d=Math.round(Math.random()*5)+4;
-   for (i=1;i<=u;i++) {poison = poison.concat(String.fromCharCode(Math.round(Math.random()*25)+97));}
-   poison = poison.concat("@");
-   i=0;
-   for (i=1;i<=d;i++) {poison = poison.concat(String.fromCharCode(Math.round(Math.random()*25)+97));}
-   poison = poison.concat(tld[Math.round(Math.random()*(tld.length-1))]);
-   return poison;
-}
-
 
 function decode(adr) {
 // used by the browser
@@ -36,3 +23,40 @@ var email="",i=0,poison=300;
 		}
    return email;
 }
+
+function mdecode(adr){
+// used by the browser
+var check=100,r=101,i=0,r1,r2,email;
+
+   while (check != null && check != r) {
+      r1=Math.round(Math.random()*4)+1;
+      r2=Math.round(Math.random()*4)+1;
+      r=r1+r2;
+      if (i==0) {invite="$entrez_resultat_addition";} 
+         else {invite="$erreur_entrez_resultat_addition";}
+      check = prompt(invite+" "+r1+" + "+r2+" ?","");
+      i++;
+      }
+
+   if(check == r) {
+      email=decode(adr)
+     	document.location="mailto:"+email;
+     	}
+
+//    if (check == null) alert("   "+r1+" + "+r2+" = "+r+" ;-)");
+}
+
+// Not used in this version.
+function empoisonne() {
+var poison="",i=0,u=0,d=0;
+   tld = new Array(".be",".com",".net",".org",".eu",".fr",".it");
+   u=Math.round(Math.random()*6)+6;
+   d=Math.round(Math.random()*5)+4;
+   for (i=1;i<=u;i++) {poison = poison.concat(String.fromCharCode(Math.round(Math.random()*25)+97));}
+   poison = poison.concat("@");
+   i=0;
+   for (i=1;i<=d;i++) {poison = poison.concat(String.fromCharCode(Math.round(Math.random()*25)+97));}
+   poison = poison.concat(tld[Math.round(Math.random()*(tld.length-1))]);
+   return poison;
+}
+

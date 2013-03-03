@@ -26,9 +26,9 @@ function rspipcm_encode($adr) {
 
    for ($i = (mb_strlen($adr) - 1); $i > -1; $i--) {
       $ch = mb_substr($adr, $i, 1);
-      if ($ch=="@") {$ch=":";}
-      if ($ch=="?") {$ch="!";}
-      if ($ch=="&") {$ch="#";}
+      if ($ch=="@") {$ch="__@__";} //:
+      if ($ch=="?") {$ch="__?__";} //!
+      if ($ch=="&") {$ch="__&__";} //#
       $email .= $ch;
       }
    
@@ -50,8 +50,6 @@ function rspipcm_filtre_email($texte) {
 	// On matche les raccourcis email 
 	$to_replace = array(); $val_code = "";
 	preg_match_all("/\[.*->.*@.*\]/i", $texte, $to_replace);
-	// on regarde si il y a des matches pour l'affichage du <noscript>
-	$noscript = count($to_replace[0]);
 
 	foreach ($to_replace[0] as $val) {
 		$val_array = array(); $val_nom = "";
@@ -60,6 +58,17 @@ function rspipcm_filtre_email($texte) {
 		$val_adresse = substr($val_array[1], 0, -1);
 		// On vire le mailto: eventuel
 		$val_adresse = str_replace("mailto:", "", $val_adresse);
+
+
+		//on preserve le user originel pour un eventuel noscript
+		$val_nom_nojs = substr($val_adresse, 0, strpos($val_adresse, "@"));
+		$val_nom_nojs = _T('rspipcm:ecrire_a_pre')." : ".$val_nom_nojs." "._T('rspipcm:ecrire_a_post');
+		// on recupere le domaine pour javascript desactive
+		$val_domaine = strstr($val_adresse, '@');
+		// on backes le @ et les eventuels param
+		$val_domaine = substr($val_domaine, 1, strlen($val_domaine));
+		if (strpos($val_domaine, "?")) {$val_domaine = substr($val_domaine, 0, strpos($val_domaine, "?"));}
+
 		// On encode l'adresse (et ses param eventuels)
 		$val_adresse = rspipcm_encode($val_adresse);
 
@@ -71,6 +80,7 @@ function rspipcm_filtre_email($texte) {
 			$val_nom = substr($val_array[1], 0, strpos($val_array[1], "@"));
 			// On supprime un eventuel mailto:
 			$val_nom = str_replace("mailto:", "", $val_nom);
+			
 			// Si il y a des . dans user on l'eclate: par exple: nom.prenom > Nom Prenom
 			if (preg_match("/\./", $val_nom)) {
 				$val_nom_array = explode(".", $val_nom); $nom_prov = "";
@@ -79,20 +89,28 @@ function rspipcm_filtre_email($texte) {
 			$val_nom = _T('rspipcm:ecrire_a_pre')." ".$val_nom." "._T('rspipcm:ecrire_a_post');
 			}
 		}
-		$text_to_replace = "[".$val_nom."->javascript:mdecode('".$val_adresse."')]";
 		// On prepare la mise à jour du texte
+		// RSPIPCM_JS_MDECODE => javascript:mdecode dans affichage_final
+		$text_to_replace = "[".$val_nom."->RSPIPCM_JS_MDECODE('".$val_adresse."')]\n<noscript>\n<div class=\"rspipcm_noscript\">".$val_nom_nojs."<br />"._T('rspipcm:dans_le_domaine')." : ".$val_domaine."</div>\n</noscript>"; 
 		
 		// On met le texte a jour
 		$texte = str_replace($val, $text_to_replace, $texte);
-
 	}
 
-if ($noscript) {
-$texte = "<noscript><div class=\"rspipcm_noscript\">"._T('rspipcm:javascript_est_desactive')."</div></noscript>".$texte;
-}
-
    return $texte;
-}
 
+} // function rspipcm_filtre_email($texte)
+
+
+function rspipcm_affichage_final($texte_final) {
+	if ($GLOBALS['html']) {
+		$texte_final = str_replace("RSPIPCM_JS_MDECODE", "javascript:mdecode", $texte_final);
+		$texte_final = str_replace("__@__", ":", $texte_final);
+		$texte_final = str_replace("__?__", "!", $texte_final);
+		$texte_final = str_replace("__&amp;__", "#", $texte_final);
+	}
+	
+	return $texte_final;
+}
 
 ?>

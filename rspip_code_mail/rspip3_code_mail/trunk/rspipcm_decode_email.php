@@ -34,38 +34,8 @@ $flux .= <<<EOD
 
 <!-- feuille de style pour l'encodage sans javascript -->
 <link rel='stylesheet' type='text/css' href='$rspipcm_chemin_css' />
-<!-- Decodeur du plugin Codeur d adresse email - debut -->
+<!-- Decodeur et captcha du plugin Codeur d adresse email - debut -->
 <script type='text/javascript' src='$rspipcm_chemin_js'></script>
-<script type="text/javascript">
-// code..js
-// decrypt mail address
-// By Robert Sebille 27/05/02
-// Licence GNU GPL
-
-function mdecode(adr){
-// used by the browser
-var check=100,r=101,i=0,r1,r2,email;
-
-   while (check != null && check != r) {
-      r1=Math.round(Math.random()*4)+1;
-      r2=Math.round(Math.random()*4)+1;
-      r=r1+r2;
-      if (i==0) {invite="$entrez_resultat_addition";} 
-         else {invite="$erreur_entrez_resultat_addition";}
-      check = prompt(invite+" "+r1+" + "+r2+" ?","");
-      i++;
-      }
-
-   if(check == r) {
-      email=decode(adr)
-     	document.location="mailto:"+email;
-     	}
-
-//    if (check == null) alert("   "+r1+" + "+r2+" = "+r+" ;-)");
-}
-</script>
-<!-- Decodeur du plugin Codeur d adresse email - fin -->
-<!--  -->
 EOD;
 
    return $flux;
