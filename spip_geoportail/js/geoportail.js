@@ -542,6 +542,7 @@ jQuery.geoportail =
 		else 
 		{	opts.preFeatureInsert = Geoportal.Popup.setPointerCursorForFeature;
 			l = map.getMap().addLayer(type, name, url, opts, { formatOptions :{extractStyles : true}, preventDefaultBehavior : true });
+			l.spipType = type;
 		}
 		if (l) 
 		{	// Recherche des styles
@@ -1163,7 +1164,7 @@ jQuery.geoportail =
 		if (att.name) html += "<p class=titre>"+ (lien ? lien : "") + att.name + (lien ? "</a>" : "") + "</p>";
 		if (!hover)
 		{	if (att.description) html += att.description;
-			else 
+			else if (feature.layer.spipType == 'KML')
 			{	var t = "";
 				for (var a in att) 
 				{	if (att[a].value) t += "<tr><td>"+a+"</td><td>"+att[a].value+"</td></tr>"; // attributs KML
