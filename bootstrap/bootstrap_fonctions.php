@@ -10,21 +10,25 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * </div>]
  *
  * @param string $nav
+ * @param string $class_collapse nom de la class à plier/déplier
  * @return string
  */
-function navbar_responsive($nav){
-	if (strpos($nav,"nav-collapse")!==false) return $nav;
+function navbar_responsive($nav, $class_collapse = 'nav-collapse-main'){
+	if (strpos($nav,'nav-collapse')!==false) return $nav;
 
 	$uls = extraire_balises($nav,"ul");
 	$n = 1;
 	while ($ul = array_shift($uls)
-	  AND strpos(extraire_attribut($ul,"class"),"nav")===false){
+		AND strpos(extraire_attribut($ul,"class"),"nav")===false){
 		$n++;
 	}
 	if ($ul){
 		$respnav = $nav;
 		$p = strpos($respnav,$ul);
-		$respnav = substr_replace($respnav,'<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>'."\n".'<div class="nav-collapse collapse">',$p,0);
+		$respnav = substr_replace($respnav,
+			'<a class="btn btn-navbar" data-toggle="collapse" data-target=".' . $class_collapse . '">' .
+				'<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>' .
+				"\n".'<div class="nav-collapse ' . $class_collapse . ' collapse">',$p,0);
 		$l=strlen($respnav);$p=$l-1;
 		while ($n--){
 			$p = strrpos($respnav,"</ul>",$p-$l);
@@ -58,10 +62,10 @@ function filtre_lien_ou_expose_dist($url,$libelle=NULL,$on=false,$class="",$titl
 	} else {
 		$bal = 'a';
 		$att = "href='$url'"
-	  	.($title?" title='".attribut_html($title)."'":'')
-	  	.($class?" class='".attribut_html($class)."'":'')
-	  	.($rel?" rel='".attribut_html($rel)."'":'')
-		.$evt;
+			.($title?" title='".attribut_html($title)."'":'')
+			.($class?" class='".attribut_html($class)."'":'')
+			.($rel?" rel='".attribut_html($rel)."'":'')
+			.$evt;
 	}
 	if ($libelle === NULL)
 		$libelle = $url;
@@ -101,10 +105,10 @@ function bootstrap_affichage_final($flux){
 function filtre_bouton_action_dist($libelle, $url, $class="", $confirm="", $title="", $callback=""){
 	if ($confirm) {
 		$confirm = "confirm(\"" . attribut_html($confirm) . "\")";
-	  if ($callback)
-		  $callback = "$confirm?($callback):false";
-	  else
-		  $callback = $confirm;
+		if ($callback)
+			$callback = "$confirm?($callback):false";
+		else
+			$callback = $confirm;
 	}
 	$ajax = explode(" ",$class);
 	if (in_array("ajax",$ajax))
