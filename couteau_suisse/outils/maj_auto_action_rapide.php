@@ -142,6 +142,7 @@ function maj_auto_action_rapide() {
 	.caps {font-variant:small-caps;}
 	.redb {color:red; font-weight:bold;}
 	.interb {font-weight:bold;}
+	.cfg_link {float: right;}
 </style>'	
 	// verification des mises a jour de SPIP >= 2.0
 		. info_maj_spip2();
@@ -189,7 +190,10 @@ function maj_auto_action_rapide() {
 			$maj_lib = _T('couteau:maj_rev_ko', array('url'=>$infos['url_origine']));
 		// eventuels liens morts
 		$maj_lib = preg_replace(',\[([^[]+)->\],', '$1', $maj_lib);
-		$nom = preg_replace(",[\n\r]+,",' ',$infos['nom']). '&nbsp;(v' .$infos['version'] . ')' . ($maj_lib?"\n_ {{".$maj_lib.'}}':'');
+		$nom = preg_replace(",[\n\r]+,", ' ', $infos['nom']);
+		$nom = ($actif||$extension?recuperer_fond('prive/squelettes/inclure/cfg',
+				array('script'=>'configurer_'.strtolower($infos['prefix']),'nom'=>': '.$nom)):'')
+			. $nom . '&nbsp;(v' . $infos['version'] . ')' . ($maj_lib?"\n_ {{".$maj_lib.'}}':'');
 		$rev = $infos['rev_local']?_T('couteau:maj_rev', array('revision' => $infos['rev_local'])):'';
 		if(strlen($infos['commit'])) $rev .= (strlen($rev)?'<br/>':'') . cs_date_court($infos['commit']);
 		if($infos['svn']) $rev .= '<br/><span class="caps">svn</span>';
