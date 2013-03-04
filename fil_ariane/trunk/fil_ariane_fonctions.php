@@ -153,7 +153,8 @@ function fil_ariane_article_dist($id_article) {
 	$item = sql_fetsel('id_rubrique, titre', 'spip_articles', "id_article = " . sql_quote($id_article));
 
 	// récupère la hierarchie de la rubrique parent seulement si id_rubrique non nul (cas des pages uniques);
-	if($item['id_rubrique'] > 0) {
+	$fil = array();
+	if ($item['id_rubrique'] > 0) {
 		$fil_ariane_rubrique = charger_fonction('rubrique', 'fil_ariane');
 		$fil = $fil_ariane_rubrique($item['id_rubrique']);
 	}
