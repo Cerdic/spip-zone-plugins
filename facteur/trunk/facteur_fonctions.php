@@ -24,6 +24,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function facteur_email_wrap_to_html($texte_ou_html){
 	$texte_ou_html = trim($texte_ou_html);
+	// attention : si pas de contenu on renvoi du vide aussi (mail vide = mail vide)
+	if (!strlen(trim($texte_ou_html)))
+		return $texte_ou_html;
 
 	$contexte = array("sujet"=>"","texte"=>"","intro"=>"");
 
@@ -52,6 +55,10 @@ function facteur_email_wrap_to_html($texte_ou_html){
 		$contexte['sujet'] = trim(array_shift($texte_ou_html));
 		$contexte['texte'] = trim(implode("\n",$texte_ou_html));
 	}
+
+	// attention : si pas de contenu on renvoi du vide aussi (mail vide = mail vide)
+	if (!strlen(trim(implode("",$contexte))))
+		return "";
 
 	return recuperer_fond("emails/texte",$contexte);
 }
