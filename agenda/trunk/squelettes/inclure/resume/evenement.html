@@ -14,7 +14,7 @@
 	</div>
 	<p class="meta-publi">
 		[(#INSCRIPTION|?{' ',''})<span class="inscrits"><span class="sep">|</span> <i class="icon-user" title="#NB_INSCRITS[/(#PLACES) ] <:agenda:inscrits|attribut_html:>"></i> #NB_INSCRITS[/(#PLACES) ]</span>]
-		<B_mots><span class='category'><span class="sep">|</span> <BOUCLE_mots(MOTS){id_evenement}{par num titre,titre}{', '}><span class="label"><i class="icon-tag"></i> #TITRE</span></BOUCLE_mots></span></B_mots>
+		<B_mots><span class="sep">|</span> <BOUCLE_mots(MOTS){id_evenement}{par num titre,titre}{', '}><span class="category"><i class="icon-tag"></i> #TITRE</span></BOUCLE_mots>
 	</p>
 </article>
 </BOUCLE_vevent>
