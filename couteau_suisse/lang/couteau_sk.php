@@ -38,9 +38,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'maj_actu' => 'Nanútiť aktualizáciu na diaľku',
+	'maj_archive_ko' => 'Erreur d\'[archive distante->@zip@]. «svn.revision» incomplet ?', # NEW
 	'maj_liste' => 'Zoznam nájdených zásuvných modulov:',
 	'maj_maj' => 'Aktualizovať vybraný (-é) zásuvný (-é) modul(y)',
 	'maj_ok' => 'Zdá sa, že tento [zásuvný modul->@zip@] je [aktuálny.->@url@]',
+	'maj_poursuivre' => 'Temps serveur écoulé : [poursuivre->#].', # NEW
 	'maj_rev' => 'Ver. @revision@',
 	'maj_rev_ko' => '[Vzdialenú verziu->@url@] sa nepodarilo nájsť.',
 	'maj_rev_ok' => '[K dispozícii->@zip@] je verzia [@revision@.->@url@]',

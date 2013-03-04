@@ -38,9 +38,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'maj_actu' => 'Forzar la actualisación', # MODIF
+	'maj_archive_ko' => 'Erreur d\'[archive distante->@zip@]. «svn.revision» incomplet ?', # NEW
 	'maj_liste' => 'Lista de plugins detectda:', # NEW
 	'maj_maj' => 'Actualice el plugin seleccionado', # NEW
 	'maj_ok' => 'Este [plugin->@zip@] parece [actualizado->@url@].', # NEW
+	'maj_poursuivre' => 'Temps serveur écoulé : [poursuivre->#].', # NEW
 	'maj_rev' => 'Rev. @revision@', # NEW
 	'maj_rev_ko' => 'La [revisión remota->@url@] no se pudo encontrar.', # NEW
 	'maj_rev_ok' => 'La revisión [@revision@->@url@] está [disponible->@zip@].', # NEW

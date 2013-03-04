@@ -38,9 +38,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'maj_actu' => 'Hizivadenn dre heg', # MODIF
+	'maj_archive_ko' => 'Erreur d\'[archive distante->@zip@]. «svn.revision» incomplet ?', # NEW
 	'maj_liste' => 'Roll an adveziantoù kavet :',
 	'maj_maj' => 'Hizivaat an adveziant diuzet', # MODIF
 	'maj_ok' => 'Evit doare eo bet [hizivaet->@url@] an [adveziant-se->@zip@]',
+	'maj_poursuivre' => 'Temps serveur écoulé : [poursuivre->#].', # NEW
 	'maj_rev' => 'Adwel. @revision@',
 	'maj_rev_ko' => 'N\'eus ket bet gallet kavout an [adweladenn a-bell->@url@].',
 	'maj_rev_ok' => 'gallout a reer [kavout->@zip@] an [@revision@->@url@].',

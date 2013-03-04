@@ -38,9 +38,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'maj_actu' => 'فرض التحديث البعيد',
+	'maj_archive_ko' => 'Erreur d\'[archive distante->@zip@]. «svn.revision» incomplet ?', # NEW
 	'maj_liste' => 'لائحة الملحقات التي تم العثور عليها:',
 	'maj_maj' => 'تحديث الملحق المحدد', # MODIF
 	'maj_ok' => 'هذا [الملحق->@zip@] يبدو [حديثاً->@url@].',
+	'maj_poursuivre' => 'Temps serveur écoulé : [poursuivre->#].', # NEW
 	'maj_rev' => 'الإصدار @revision@',
 	'maj_rev_ko' => 'لم يتم العثور على [التحديث البعيد->@url@]. ',
 	'maj_rev_ok' => 'الإصدار [@revision@->@url@] [متوافر->@zip@].',

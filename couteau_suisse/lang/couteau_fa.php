@@ -38,9 +38,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'maj_actu' => 'اعمال روزآمدسازي دور',
+	'maj_archive_ko' => 'Erreur d\'[archive distante->@zip@]. «svn.revision» incomplet ?', # NEW
 	'maj_liste' => 'فهرست پلاگين‌هاي شناسايي شده:',
 	'maj_maj' => 'روزآمدسازي پلاگين انتخابي', # MODIF
 	'maj_ok' => 'به نظر مي‌رسد اين [پلاگين->@zip@] [روز آمد->@url@] باشد.',
+	'maj_poursuivre' => 'Temps serveur écoulé : [poursuivre->#].', # NEW
 	'maj_rev' => 'Rév. @revision@',
 	'maj_rev_ko' => '[نسخه‌‌ي دور->@url@] يافت نمي‌شود.',
 	'maj_rev_ok' => 'نسخه[@revision@->@url@] در [دسترس->@zip@] است.',
