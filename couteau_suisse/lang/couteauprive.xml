@@ -17,8 +17,8 @@
 	</langue>
 	<langue code="fr" />
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=fr_tu">
-		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
+		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 	</langue>
 	<langue code="gl" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=gl">
 		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />

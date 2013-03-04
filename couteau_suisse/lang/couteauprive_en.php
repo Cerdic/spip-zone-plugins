@@ -561,12 +561,15 @@ _ • {By default}: automatic replacement (from SPIP version 2.0).
 	'mailcrypt:nom' => 'MailCrypt',
 	'mailcrypt_balise_email' => 'Also consider the #EMAIL tag of your skeletons',
 	'mailcrypt_fonds' => 'Do not protect the following backgrounds :<br /><q4>{Separate them by two points «~:~» and make sure that these backgrounds remain inaccessible to web robots.}</q4>',
+	'maj_actualise_ok' => 'Le plugin « @plugin@ » n\'a pas officiellement changé de version, mais ses fichiers ont quand même été actualisés afin de bénéficier de la dernière révision de code.', # NEW
 	'maj_auto:description' => 'This tool is used to help you easily manage the updates of your various plugins, specifically by retrieving the version number located in your various local <code>svn.revision</code> files and comparing them with those found on the <code>zone.spip.org</code> site.
 
 The list above offers the possibility of running SPIP\'s automatic update process for each of the plugins already installed in the  <code>plugins/auto/</code> directory. The other plugins located in the  <code>plugins/</code> directory are simply listed for information purposes. If the remote version can not be located, then try to proceed with updating the plugin manually.
 
 Note: since the <code>.zip</code> files are not always instantly reconstructed, you might have to wait a while before you can carry out the total update of a very recently modified plugin.',
 	'maj_auto:nom' => 'Automatic updates',
+	'maj_fichier_ko' => 'Le fichier « @file@ » est introuvable !', # NEW
+	'maj_librairies_ko' => 'Librairies introuvables !', # NEW
 	'masquer:description' => 'This tool is used for hiding specific editorial content (sections or articles) tagged with the keyword specified below from the public site, without requiring any other modifications to your templates. If a section is hidden, then so is its entire sub-branch.[[%mot_masquer%]]
 
 To override and force the display of such hidden content, just add the <code>{tout_voir}</code> (view all) criterion to the loops in your template(s).

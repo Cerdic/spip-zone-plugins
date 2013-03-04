@@ -552,12 +552,15 @@ _ • {predvolený:} automatické nahrádzanie (od verzie 2.0).
 	'mailcrypt:nom' => 'Šifrovanie pošty',
 	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de vos squelettes', # NEW
 	'mailcrypt_fonds' => 'Ne pas protéger les fonds suivants :<br /><q4>{Séparez-les par les deux points «~:~» et vérifiez bien que ces fonds restent totalement inaccessibles aux robots du Net.}</q4>', # NEW
+	'maj_actualise_ok' => 'Le plugin « @plugin@ » n\'a pas officiellement changé de version, mais ses fichiers ont quand même été actualisés afin de bénéficier de la dernière révision de code.', # NEW
 	'maj_auto:description' => 'Tento nástroj vám umožňuje ľahko riadiť aktualizáciu rôznych zásuvných modulov, vrátane zistenia čísla revízie v súbore <code>svn.revision</code> a jeho porovnanie s tým, ktoré sa nachádza na stránke <code>zone.spip.org</code>.
 
 Zoznam, ktorý sa nachádza vyššie, vám ponúka možnosť spustiť automatickú aktualizáciu   každého zásuvného modulu SPIPu, ktorý bol predtým nainštalovaný v priečinku <code>plugins/auto/</code>. Ostatné zásuvné moduly z priečinku <code>plugins/</code> alebo <code>extensions/</code> sú uvedené len pre vašu informáciu. Ak sa nenájde vzdialená revízia, skúste zásuvný modul nainštalovať manuálne.
 
 Poznámka: balíky <code>.zip</code> sa nevytvoria nanovo ihneď; môže sa stať, že predtým, ako budete môcť začať s úplnou aktualizáciou zásuvného modulu, ktorý bol nedávno zmenený, budete musieť nejaký čas počkať.',
 	'maj_auto:nom' => 'Automatické aktualizácie',
+	'maj_fichier_ko' => 'Le fichier « @file@ » est introuvable !', # NEW
+	'maj_librairies_ko' => 'Librairies introuvables !', # NEW
 	'masquer:description' => 'Tento nástroj vám umožňuje schovať na verejnej stránke bez akejkoľvek zmeny svojich šablón obsah (rubriky alebo články), ktorého kľúčové slová sú zadané nižšie. Ak schováte rubriku, bude schovaná aj celá jej vetva.[[%mot_masquer%]]
 
 Ak chcete zobraziť skrytý obsah, stačí, keď do cyklov svojej šablóny pridáte kritérium <code>{tout_voir}</code>.

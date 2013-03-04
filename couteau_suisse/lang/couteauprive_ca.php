@@ -565,12 +565,15 @@ _ • {Par defecte): substitució automàtica d\'origen (a partir de la versió 
 	'mailcrypt:nom' => 'MailCrypt',
 	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de vos squelettes', # NEW
 	'mailcrypt_fonds' => 'Ne pas protéger les fonds suivants :<br /><q4>{Séparez-les par les deux points «~:~» et vérifiez bien que ces fonds restent totalement inaccessibles aux robots du Net.}</q4>', # NEW
+	'maj_actualise_ok' => 'Le plugin « @plugin@ » n\'a pas officiellement changé de version, mais ses fichiers ont quand même été actualisés afin de bénéficier de la dernière révision de code.', # NEW
 	'maj_auto:description' => 'Aquesta eina us permet gestionar fàcilment l\'actualització dels vostres connectors (plugins), recuperant sobretot el número de revisió que conté el fitxer <code>svn.revision</code> i comparant-lo amb el trobat a <code>zone.spip.org</code>.
 
 La llista de més amunt ofereix la possibilitat de llançar el procés d\'actualització automàtic d\'SPIP a cadascun dels connectors (plugins) instal·lats prèviament a la carpeta <code>plugins/auto/</code>. El altres plugins que es troben a dins de la carpeta <code>plugins/</code> només es llisten com a mera informació. Si la revisió a distància no s\'ha trobat, proveu llavors de fer l\'actualització del connector manualment.
 
 Nota: com que els paquets <code>.zip</code> no es poden reconstruir instantàniament, es probable que estigueu obligat a esperar un cert temps abans de poder efectuar l\'actualització total d\'un connector recentment modificat.',
 	'maj_auto:nom' => 'Actualitzacions automàtiques',
+	'maj_fichier_ko' => 'Le fichier « @file@ » est introuvable !', # NEW
+	'maj_librairies_ko' => 'Librairies introuvables !', # NEW
 	'masquer:description' => 'Aquesta eina permet amagar al lloc públic, i sense modificar els vostres esquelets, els continguts (seccions o articles) que tinguin la paraula clau definida més avall. Si una secció està amagada, també ho estarà tota la branca. [[%mot_masquer%]]
 
 Per forçar la publicació de continguts amagats, n\'hi ha prou afegint el criteri <code>{tout_voir}</code> als bucles de la vostra plantilla.', # MODIF

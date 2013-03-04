@@ -549,12 +549,15 @@ _ • {Predefinido} : substitución automática de orixe (a partir da version 2.
 	'mailcrypt:nom' => 'MailCrypt',
 	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de vos squelettes', # NEW
 	'mailcrypt_fonds' => 'Ne pas protéger les fonds suivants :<br /><q4>{Séparez-les par les deux points «~:~» et vérifiez bien que ces fonds restent totalement inaccessibles aux robots du Net.}</q4>', # NEW
+	'maj_actualise_ok' => 'Le plugin « @plugin@ » n\'a pas officiellement changé de version, mais ses fichiers ont quand même été actualisés afin de bénéficier de la dernière révision de code.', # NEW
 	'maj_auto:description' => 'Esta ferramenta permítelle xestionarfacilmente a actualización dos seus diferentes módulos, recuperando especialmente o número de revisión contido no ficheiro <code>svn.revision</code> e comparando aquel encontrado en <code>zone.spip.org</code>.
 
 A lista seguinte ofrece a posibilidade de lanzar o proceso de actualización automática de SPIP sobre cada un dos módulos previamente instalados no cartafol <code>plugins/auto/</code>. Os outros códulos encóntranse no cartafol <code>plugins/</code> e lístanse simplemente a título informativo. Se a revisión remota non se pode encontrar, intente proceder manualmente coa actualización do módulo.
 
 Nota : os paquetes <code>.zip</code> non son reconstruídos instantaneamente, pode ser que teña que esperar un certo atraso antes de poder efectuar a total actualización dun complemento que fose recentemente modificado.', # MODIF
 	'maj_auto:nom' => 'Actualizacións automáticas',
+	'maj_fichier_ko' => 'Le fichier « @file@ » est introuvable !', # NEW
+	'maj_librairies_ko' => 'Librairies introuvables !', # NEW
 	'masquer:description' => 'Cet outil permet de masquer sur le site public et sans modification particulière de vos squelettes, les contenus (rubriques ou articles) qui ont le mot-clé défini ci-dessous. Si une rubrique est masquée, toute sa branche l\'est aussi.[[%mot_masquer%]]
 
 Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère <code>{tout_voir}</code> aux boucles de votre squelette.', # NEW

@@ -562,12 +562,15 @@ _ • {Par défaut} : remplacement automatique d\'origine (à partir de la versi
 	'mailcrypt:nom' => 'MailCrypt',
 	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de tes squelettes',
 	'mailcrypt_fonds' => 'Ne pas protéger les fonds suivants :<br /><q4>{Sépare-les par les deux points «~:~» et vérifie bien que ces fonds restent totalement inaccessibles aux robots du Net.}</q4>',
+	'maj_actualise_ok' => 'Le plugin « @plugin@ » n\'a pas officiellement changé de version, mais ses fichiers ont quand même été actualisés afin de bénéficier de la dernière révision de code.', # NEW
 	'maj_auto:description' => 'Cet outil te permet de gérer facilement la mise à jour de tes différents plugins, récupérant notamment le numéro de révision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouvé sur <code>zone.spip.org</code>.
 
 La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> ou <code>extensions/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tente de procéder manuellement à la mise à jour du plugin.
 
 Note : les paquets <code>.zip</code> n\'étant pas reconstruits instantanément, il se peut que tu sois obligé d\'attendre un certain délai avant de pouvoir effectuer la totale mise à jour d\'un plugin tout récemment modifié.',
 	'maj_auto:nom' => 'Mises à jour automatiques',
+	'maj_fichier_ko' => 'Le fichier « @file@ » est introuvable !', # NEW
+	'maj_librairies_ko' => 'Librairies introuvables !', # NEW
 	'masquer:description' => 'Cet outil permet de masquer sur le site public et sans modification particulière de tes squelettes, les contenus (rubriques ou articles) qui ont le mot-clé défini ci-dessous. Si une rubrique est masquée, toute sa branche l\'est aussi.[[%mot_masquer%]]
 
 Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère <code>{tout_voir}</code> aux boucles de ton squelette.
