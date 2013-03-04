@@ -9,28 +9,34 @@
  */
 
 // Si cette constante est vraie le fil d'Ariane commence par "accueil"
-if (!defined('_FIL_ARIANE_ACCUEIL')) define('_FIL_ARIANE_ACCUEIL',true);
+if (!defined('_FIL_ARIANE_ACCUEIL')) define('_FIL_ARIANE_ACCUEIL', true);
 #defined('_FIL_ARIANE_ACCUEIL') || define('_FIL_ARIANE_ACCUEIL',true);
 
 // Si cette constante est vraie le fil d'Ariane se termine par un lien
-if (!defined('_FIL_ARIANE_LIEN')) define('_FIL_ARIANE_LIEN',false);
+if (!defined('_FIL_ARIANE_LIEN')) define('_FIL_ARIANE_LIEN', false);
 
 // Cette constante définit le nom de la classe CSS attribué au conteneur du fil
-if (!defined('_FIL_ARIANE_STYLE')) define('_FIL_ARIANE_STYLE','fil_ariane hierarchie breadcrumb');
+if (!defined('_FIL_ARIANE_STYLE')) define('_FIL_ARIANE_STYLE', 'fil_ariane hierarchie breadcrumb');
 
 // Cette constante définit le caractère séparateur entre chaque élément du fil (les espaces comptent !)
-if (!defined('_FIL_ARIANE_SEP')) define('_FIL_ARIANE_SEP',' &gt; ');
+if (!defined('_FIL_ARIANE_SEP')) define('_FIL_ARIANE_SEP', ' &gt; ');
 
-/***
+/**
  * Balise #FIL_ARIANE
  * Récupère l'objet depuis le contexte
  * et construit un fil d'Ariane.
  */
-function balise_FIL_ARIANE_dist($p){
+function balise_FIL_ARIANE_dist($p) {
 
-	// il est possible qu'il y ait un tableau des valeurs souhaitées pour le fil d'Ariane
+	// il est possible qu'il y ait un tableau des valeurs souhaitées pour  le fil d'Ariane
 	// il s'agit dans ce cas du 1er paramètre passé avec la balise "fil_ariane"
-	$fil = interprete_argument_balise(1, $p);
+	if ($fil = interprete_argument_balise(1, $p)) {
+		// si un id_objet est passé à la balise
+		if ($id_objet = interprete_argument_balise(2, $p)) {
+			$p->code = "calcule_hierarchie_objet($fil, $id_objet)";
+			return $p;
+		}
+	}
 
 	if (!$fil) {
 		// On appele la fonction qui construit le fil d'Ariane
@@ -73,6 +79,7 @@ function calcule_hierarchie_objet($objet, $id_objet) {
 	return construire_FIL_ARIANE($fil);
 
 }
+
 /**
  * Construit le fil d'Ariane
  */
@@ -123,7 +130,7 @@ function construire_FIL_ARIANE($fil) {
  * @return array
  *    couples titre => url
  */
-function fil_ariane_objet_dist($objet,$id_objet) {
+function fil_ariane_objet_dist($objet, $id_objet) {
 
 	$url = generer_url_entite($id_objet, $objet);
 	$titre = generer_info_entite($id_objet, $objet, 'titre');
@@ -191,7 +198,7 @@ function fil_ariane_mot_dist($id_mot) {
 }
 
 
-function fil_ariane_hierarchie_objet($objet, $id_objet, $col_titre, $col_parent){
+function fil_ariane_hierarchie_objet($objet, $id_objet, $col_titre, $col_parent) {
 	$fil = array();
 
 	// trouver le nom du champ contenant la clé primaire de l'objet
