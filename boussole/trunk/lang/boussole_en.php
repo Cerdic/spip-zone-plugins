@@ -63,6 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_site_boussoles' => 'This website belongs to the compasses :',
 
 	// L
+	'label_1_boussole' => '@nb@ boussole', # NEW
 	'label_1_site' => '@nb@ websites',
 	'label_a_class' => 'Class of the anchor including the logo',
 	'label_actualise_le' => 'Updated on',
@@ -86,6 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mode_standard' => '« @boussole@ », official compass of SPIP websites',
 	'label_mode_url_perso' => 'Personnal compass',
 	'label_modele' => 'Display model',
+	'label_n_boussoles' => '@nb@ boussoles', # NEW
 	'label_n_sites' => '@nb@ websites',
 	'label_nom' => 'Name',
 	'label_p_class' => 'Paragraph class including the description',
@@ -107,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_nok_boussole_inconnue' => 'No compass correspond to the alias « @alias@ »',
 	'message_nok_champ_obligatoire' => 'Mandatory field',
-	'message_nok_ecriture_bdd' => 'Database writing error',
+	'message_nok_ecriture_bdd' => 'Database writing error', # MODIF
 	'message_nok_xml_introuvable' => 'The file « @fichier@ » cannot be found',
 	'message_nok_xml_invalide' => 'The XML description file « @fichier@ » of the compass is not conform to the DTD',
 	'message_ok_boussole_actualisee' => 'The compass « @fichier@ » has been updated.',

@@ -63,6 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_site_boussoles' => 'Táto stránka je súčasťou kompasov:',
 
 	// L
+	'label_1_boussole' => '@nb@ boussole', # NEW
 	'label_1_site' => '@nb@ stránka',
 	'label_a_class' => 'Trieda so záložkou (kotvou) loga',
 	'label_actualise_le' => 'Aktualizovaný',
@@ -86,6 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mode_standard' => '"@boussole@" – oficiálny kompas stránok SPIPu',
 	'label_mode_url_perso' => 'Vlastný kompas',
 	'label_modele' => 'Spôsob zobrazenia',
+	'label_n_boussoles' => '@nb@ boussoles', # NEW
 	'label_n_sites' => '@nb@ stránok',
 	'label_nom' => 'Názov',
 	'label_p_class' => 'Trieda odseku s popisom',
@@ -107,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_nok_boussole_inconnue' => 'Žiaden kompas nemá prezývku "@alias@"',
 	'message_nok_champ_obligatoire' => 'Toto pole je povinné',
-	'message_nok_ecriture_bdd' => 'Chyba pri zápise do databázy',
+	'message_nok_ecriture_bdd' => 'Chyba pri zápise do databázy', # MODIF
 	'message_nok_xml_introuvable' => 'Súbor "@fichier@" sa nenašiel',
 	'message_nok_xml_invalide' => 'Súbor XML "@fichier@" s popisom kompasu nevyhovuje štandardu DTD',
 	'message_ok_boussole_actualisee' => 'Kompas "@fichier@" bol aktualizovaný.',
