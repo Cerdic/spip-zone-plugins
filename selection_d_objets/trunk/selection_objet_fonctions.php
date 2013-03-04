@@ -43,7 +43,7 @@ function titre_objet_sel($objet,$contexte){
             $f=explode('/',$contexte['fichier']);
             $titre=$f[1];
             }
-        else $titre=$objet.'_'.$id_objet;
+        elseif($objet) $titre=$objet.'_'.$id_objet;
     
     }
     return $titre;
@@ -54,29 +54,32 @@ function info_objet($objet,$id_objet='',$champs='*',$where=array()){
 	include_spip('inc/filtres');
 
     //Les tables non conforme
-    $exceptions=charger_fonction('exceptions','inc');
-    $exception_objet=$exceptions('objet');
-    if($exception_objet[$objet]){
-         $objet=$exception_objet[$objet];
-          $table='spip_'.$objet;
-    }
-    else $table='spip_'.$objet.'s';
-
-    
-    if($id_objet){
-        if(!$where)$where=array('id_'.$objet.'='.$id_objet);  
-    	if($champs=='*')$data=sql_fetsel($champs,$table,$where);
-        else $data=sql_getfetsel($champs,$table,$where);
-        $data=filtrer_champ($data);
+    if($objet){
+        $exceptions=charger_fonction('exceptions','inc');
+        $exception_objet=$exceptions('objet');
+        if($exception_objet[$objet]){
+             $objet=$exception_objet[$objet];
+              $table='spip_'.$objet;
         }
-    else{
-        $data=array();
-        $sql=sql_select($champs,$table,$where);
-        while($d = sql_fetch($sql)){
-            
-            if($d)$data[$d['id_'.$objet]]=filtrer_champ($d);
+        else $table='spip_'.$objet.'s';
+    
+        
+        if($id_objet){
+            if(!$where)$where=array('id_'.$objet.'='.$id_objet);  
+        	if($champs=='*')$data=sql_fetsel($champs,$table,$where);
+            else $data=sql_getfetsel($champs,$table,$where);
+            $data=filtrer_champ($data);
+            }
+        else{
+            $data=array();
+            $sql=sql_select($champs,$table,$where);
+            while($d = sql_fetch($sql)){
+                
+                if($d)$data[$d['id_'.$objet]]=filtrer_champ($d);
+                }
             }
         }
+    else $data=array();
 	return $data;
     
 }

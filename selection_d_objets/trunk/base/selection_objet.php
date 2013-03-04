@@ -41,6 +41,7 @@ function selection_objet_declarer_tables_objets_sql($tables) {
 			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", 
 			"statut"             => "varchar(20)  DEFAULT '0' NOT NULL", 
 			"lang"               => "VARCHAR(10) NOT NULL DEFAULT ''",
+            "langue_choisie"     => "VARCHAR(3) DEFAULT 'non'", 			
 			"type_lien"          => "VARCHAR(100) NOT NULL DEFAULT ''",			
 			"maj"                => "TIMESTAMP"
 		),
@@ -51,7 +52,7 @@ function selection_objet_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "titre AS titre, lang AS lang",
 		'date' => "date",
-		'champs_editables'  => array('titre', 'descriptif', 'url','type_lien'),
+		'champs_editables'  => array('titre', 'descriptif', 'url','type_lien','id_objet_dest','objet_dest','objet','id_objet','lang'),
 		'champs_versionnes' => array('titre', 'descriptif', 'url'),
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array(),

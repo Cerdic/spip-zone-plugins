@@ -17,8 +17,7 @@
 
 [<div class="champ contenu_id_objet[ (#ID_OBJET*|strlen|?{'',vide})]">
 	<label><:selection_objet:objet_lie_a:> : </label>
-	<a href="#URL_ECRIRE{#GET{exception_page}|table_valeur{#OBJET}|sinon{#OBJET},id_#OBJET=#ID_OBJET}">
-	    (#OBJET|titre_objet_sel{#OBJET|info_objet{#ID_OBJET}}|supprimer_tags)
+	<a href="#URL_ECRIRE{#GET{exception_page}|table_valeur{#OBJET}|sinon{#OBJET},id_#OBJET=#ID_OBJET}">(#OBJET|titre_objet_sel{#OBJET|info_objet{#ID_OBJET}}|supprimer_tags)
 	    </a>
 </div>]
 
