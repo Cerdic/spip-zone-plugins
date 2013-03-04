@@ -5,6 +5,7 @@
 	<title>[(#ENV{sujet})]</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<style type="text/css">
+		[(#SET{siteColor,[#(#LOGO_SITE_SPIP|couleur_extraire|couleur_eclaircir_si_foncee{168}|sinon{BBB})]})]
 		#outlook a {padding: 0;}
 		body {width: 100% !important;}
 		body {margin: 0;padding: 0;}
@@ -14,8 +15,8 @@
 		#templateContainer {border: 1px solid #CCCCCC;max-width: 600px !important;}
 		h1,.h1,h2,.h2,h3,.h3,h4,.h4 {color: #202020;display: block;font-family: Verdana, Geneva, sans-serif;;margin-bottom: 0.5em;text-align: left;}
 		#templateHeader {background-color: #FFFFFF;border-bottom: 0;}
-		#templateContainer, .bodyContent {background-color: #FFFFFF;margin-top: 20px;}
-		.bodyContent {border-top:10px solid [#(#LOGO_SITE_SPIP|couleur_extraire|couleur_eclaircir_si_foncee{168}|sinon{BBB})];border-bottom:10px solid [#(#LOGO_SITE_SPIP|couleur_extraire|couleur_eclaircir_si_foncee{168}|sinon{BBB})];}
+		#templateContainer, .bodyContent {background-color: #FFFFFF;margin-top: 40px;}
+		.bodyContent {padding:30px;border-bottom:10px solid #GET{siteColor};}
 		.bodyContent div {color: #222222;font-family: Verdana, Geneva, sans-serif;;line-height: 150%;text-align: left;}
 		.bodyContent div a:link, .bodyContent div a:visited {color: #336699;font-weight: normal;text-decoration: underline;}
 		.bodyContent img {display: inline;margin-bottom: 10px;}
@@ -24,15 +25,16 @@
 		.coloration_code ol {list-style: none;}
 		.spip_logos {float: right;margin-left: 10px;}
 		.text {word-wrap:break-word;}
-		.header,.footer {padding: 20px;margin-left: -20px;margin-right: -20px;}
-		.text > .header:first-child {margin-top: -20px;}
+		.header,.footer {padding: 20px 40px;margin-left: -40px;margin-right: -40px;}
+		.text > .header:first-child {margin-top: -40px;}
 		.header {background: #e9e9e9;}
-		.footer {border-top:2px solid #e9e9e9;margin-top: 20px;}
+		.footer {border-top:2px solid #e9e9e9;margin-top: 40px;}
 		.header hr,.footer hr {display: none}
 		@media only screen and (max-width: 600px) {
 			html,body {width: 100% !important;}
 			body, .backgroundTable {background-color: #ffffff !important;}
 			.bodyContent {padding:0 0 10px !important;border-top:0;border-bottom:0;}
+			#templateHead {display: none}
 			#templateContainer {width: 100% !important;border: 0 !important;margin-top: 0}
 			#templateBody {width: 100% !important;}
 			.padding {padding-left:0 !important;padding-right:0 !important;}
@@ -62,12 +64,15 @@
 				<!-- // End Template Preheader \\ -->
 				<table border="0" cellpadding="0" cellspacing="0" width="600" id="templateContainer"
 							 style="border: 1px solid #CCCCCC;background-color: #FFFFFF;max-width: 600px !important;">
+					<tr id="templateHead">
+						<td class="headContent" style="padding:10px 40px;background: #GET{siteColor};"><strong style="color:#fff;text-transform:uppercase">#NOM_SITE_SPIP</strong></td>
+					</tr>
 					<tr>
 						<td align="center" valign="top">
 							<!-- // Begin Template Body \\ -->
 							<table border="0" cellpadding="0" cellspacing="0" width="600" id="templateBody">
 								<tr>
-									<td valign="top" class="bodyContent" style="background-color: #FFFFFF;padding:10px;">
+									<td valign="top" class="bodyContent" style="background-color: #FFFFFF;padding:30px;">
 
 										<!-- // Begin Module: Standard Content \\ -->
 										<table border="0" cellpadding="10" cellspacing="0" width="100%">
