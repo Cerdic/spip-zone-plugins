@@ -116,7 +116,6 @@ function selection_objet_formulaire_charger($flux){
     return $flux;    
 }
 
-
 function selection_objet_formulaire_traiter($flux){
     // Si on est sur le formulaire client qui est sur la page identification
     $form=$flux['args']['form'];

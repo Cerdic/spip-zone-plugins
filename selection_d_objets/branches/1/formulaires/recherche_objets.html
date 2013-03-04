@@ -3,7 +3,7 @@
             #ACTION_FORMULAIRE{#ENV{action}}
         <ul>
             [(#SAISIE{input,objet_sel,
-                    label=#ENV{label_objet}
+                    label=#ENV{label_objet}})]
                     
            [(#ENV{types_lien}|count|>{0}|oui)      
             [(#SAISIE{selection,type_lien,
