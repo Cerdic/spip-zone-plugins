@@ -11,7 +11,6 @@ function formulaires_recherche_objets_charger_dist($objet_dest='rubrique',$id_ob
      else $choisies=lire_config('selection_objet/selection_'.$objet_dest.'_dest',array());
     
     
-    
     //Quelques objets ne sont pas conforme, on adapte
     $exceptions=charger_fonction('exceptions','inc');
     $exception_objet=$exceptions('objet');
@@ -44,7 +43,9 @@ function formulaires_recherche_objets_charger_dist($objet_dest='rubrique',$id_ob
         "id_objet_dest"=>$id_objet_dest,
         'types_lien' =>$types_lien, 
         'type_lien' =>'',         
-        'objet_sel' =>'',              	 		
+        'objet_sel' =>'', 
+        'label_objet' =>_T('selection_objet:ajouter_objet'), 
+        'label_lien' =>_T('selection_objet:selection_type_lien'),                            	 		
         );
 
     return $valeurs;

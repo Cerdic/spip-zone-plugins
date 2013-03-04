@@ -3,11 +3,11 @@
             #ACTION_FORMULAIRE{#ENV{action}}
         <ul>
             [(#SAISIE{input,objet_sel,
-                    label=<:selection_objet:ajouter_objet:> [(#GET{objets}|table_valeur{#VALEUR})]})]
+                    label=#ENV{label_objet}
                     
            [(#ENV{types_lien}|count|>{0}|oui)      
             [(#SAISIE{selection,type_lien,
-                    label=<:selection_objet:selection_type_lien:> [(#GET{objets}|table_valeur{#VALEUR})],
+                    label=ENV{label_lien},
                     datas=#ENV{types_lien}})]
                 ]
         </ul>
