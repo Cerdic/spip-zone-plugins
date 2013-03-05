@@ -169,7 +169,7 @@ function maj_auto_action_rapide() {
 		$actif = in_array($p, $plugins_actifs, true);
 		$extension = in_array($p, $plugins_extensions, true);
 		$auto = strncmp($p, 'auto/', 5)==0;
-		$infos = plugin_get_infos_maj($p, $stop=time()-$time>$timeout, $extension?_DIR_PLUGINS_DIST:_DIR_PLUGINS);
+		$infos = plugin_get_infos_maj($p, $stop=time()-$time>$timeout, $dir=$extension?_DIR_PLUGINS_DIST:_DIR_PLUGINS);
 		if(!defined('_SPIP30000') && strtoupper($infos['necessite'][0]['id'])=='SPIP') array_shift($infos['necessite']);
 		$maj_lib = $checked = '';
 		if($stop)
@@ -191,8 +191,10 @@ function maj_auto_action_rapide() {
 		// eventuels liens morts
 		$maj_lib = preg_replace(',\[([^[]+)->\],', '$1', $maj_lib);
 		$nom = preg_replace(",[\n\r]+,", ' ', $infos['nom']);
-		$nom = ($actif||$extension?recuperer_fond('prive/squelettes/inclure/cfg',
-				array('script'=>'configurer_'.strtolower($infos['prefix']),'nom'=>': '.$nom)):'')
+		if($actif||$extension) $nom = ( defined('_SPIP30000')
+			?recuperer_fond('prive/squelettes/inclure/cfg',
+				array('script'=>'configurer_'.strtolower($infos['prefix']),'nom'=>': '.$nom))
+			:(include_spip('plugins/afficher_plugin') && function_exists('plugin_bouton_config')?plugin_bouton_config($p, $infos, $dir):'') )
 			. $nom . '&nbsp;(v' . $infos['version'] . ')' . ($maj_lib?"\n_ {{".$maj_lib.'}}':'');
 		$rev = $infos['rev_local']?_T('couteau:maj_rev', array('revision' => $infos['rev_local'])):'';
 		if(strlen($infos['commit'])) $rev .= (strlen($rev)?'<br/>':'') . cs_date_court($infos['commit']);
