@@ -68,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'unsubscribe_sujet_email' => '[@nom_site_spip@] Désinscription de la Newsletter',
 	'unsubscribe_titre_email' => 'Désinscription de la Newsletter',
+	'unsubscribe_texte_confirmer_email_1' => 'Veuillez confirmer la désincription de l\'adresse email @email@ en cliquant sur le bouton : ',
 	'unsubscribe_texte_email_1' => 'L\'adresse email @email@ a bien été retiré de notre liste de diffusion.',
 	'unsubscribe_deja_texte' => 'L\'adresse email @email@ n\'est pas dans notre liste de diffusion.',
 	'unsubscribe_texte_email_2' => 'Nous espérons vous revoir bientôt sur [@nom_site_spip@](@url_site_spip@).',
