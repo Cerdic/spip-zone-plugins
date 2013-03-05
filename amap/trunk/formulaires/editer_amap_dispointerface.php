@@ -21,7 +21,7 @@ function formulaires_editer_amap_dispointerface_traiter_dist() {
 	// La date de distribution 
 	$date_distribution = _request('date_distribution');
 	$date_distribution2 = _request('date_distribution2');
-	sql_replace("spip_amap_paniers", array("id_amap_panier" => $id_amap_panier, "id_auteur" => $id_auteur, "id_producteur" => $id_producteur, "date_distribution" => $date_distribution2, "dispo" => 1));
+	sql_replace("spip_amap_paniers", array("id_amap_panier" => $id_amap_panier, "id_auteur" => $id_auteur, "id_producteur" => $id_producteur, "date_distribution" => $date_distribution2, "dispo" => oui));
 
 	// Valeurs de retours
 	$message['message_ok'] = _T('amap:confirmation_envoi', array('date_distribution'=>$date_distribution));

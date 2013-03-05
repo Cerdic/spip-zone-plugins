@@ -11,6 +11,8 @@
 *
 **/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function amap_affiche_gauche($flux){
 	include_spip('inc/presentation');
 	if ($flux['args']['exec'] == 'infos_perso'){

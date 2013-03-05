@@ -8,11 +8,9 @@
 
 ]
 #CACHE{0}
-<p style="text-align: justify;">
-	<BOUCLE_responsables1(AMAP_RESPONSABLES) {id_auteur} />
-		[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:vous_etes_responsable_distribution, amap:vous_etes_responsable_distributions, nb})]
-	<//B_responsables1>
-</p>
+<BOUCLE_responsables1(AMAP_RESPONSABLES) {id_auteur} />
+	[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:vous_etes_responsable_distribution, amap:vous_etes_responsable_distributions})]
+<//B_responsables1>
 
 <B_responsables>
 [<p class='pagination'>(#PAGINATION{prive})</p>]

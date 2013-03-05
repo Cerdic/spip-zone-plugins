@@ -42,7 +42,7 @@ function formulaires_editer_amap_recuperemail_traiter_dist($id_amap_panier,$id_a
 	// La date de distribution
 	$date_distribution = _request('date_distribution');
 
-	sql_replace("spip_amap_paniers", array("id_amap_panier" => $id_amap_panier, "id_auteur" => $id_auteur, "id_producteur" => $id_producteur, "date_distribution" => $date_distribution, "dispo" => "0"));
+	sql_replace("spip_amap_paniers", array("id_amap_panier" => $id_amap_panier, "id_auteur" => $id_auteur, "id_producteur" => $id_producteur, "date_distribution" => $date_distribution, "dispo" => "non"));
 	spip_log("Le $id_amap_panier a bien été récupéré par l'adhérent $id_auteur, panier produit par $id_producteur pour la livraison du $date_distribution", "amap_installation");
 
 	// L'envoie des mails.

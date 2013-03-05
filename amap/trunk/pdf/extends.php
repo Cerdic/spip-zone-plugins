@@ -64,7 +64,7 @@ var $titre;
 	/* le code reprend donc l'integralite du code de Query mais ajoute un merge_array sur chaque ligne de donnees retournee par le fetch */
 	/* le parametre data doit donc etre un tableau de la forme: valeur_champ_jointure => array(champs1=>valeur, champs2=>valeur, ..)  afin d'inserer */
 	/* dans le resultat de la requete les champs champs1 et champ2 en jointure = sur le champs fourni dans l'autre parametre */
-	function Query_extended($res, $prop=array(), $data, $champ_jointure) {
+	function Query_extended($res, $prop=array(), $data=array(), $champ_jointure) {
 		//Traite les proprietes
 		if(!isset($prop['width']))
 			$prop['width']=0;

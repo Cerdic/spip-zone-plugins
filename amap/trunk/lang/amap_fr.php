@@ -4,7 +4,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
+	
 	// A
 	'action' => 'Action ?',
 	'action_modifier' => 'Modifier',
@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_distribution' => 'Date de la distribution',
 	'date_livraison' => 'Date de la livraison',
 	'depuis_le' => 'depuis le',
+	'disponible' => 'Disponible',
 	'distribution_paniers' => 'Distribution des paniers du @nb@',
 	'distribution_paniers_mois' => 'Distribution des paniers du @date_debut@ au @date_fin@',
 
@@ -66,17 +67,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'information_amap' => 'Information AMAP',
 
 	// L
+	'la_responsabilite' => 'La responsabilité de',
+	'le_panier' => 'Le panier de',
+	'le_panier_vendu' => 'Le panier vendu par',
 	'les_livraisons' => 'Les livraisons',
 	'les_livraisons_effectuees' => 'Les livraisons déjà effectuées',
-	'les_paniers' => 'Les paniers de @nom@',
+	'les_paniers' => 'Les @nb@ paniers de',
+	'les_paniers_vendu' => 'Les @nb@ paniers vendu par',
 	'les_paniers_dispo' => 'Les paniers disponible de @nom@',
-	'les_responsabilites' => 'Les responsabilités de @nom@',
+	'les_responsabilites' => 'Les @nb@ responsabilités de',
 	'liste_amapiens' => 'Liste des amapiens',
 	'liste_amapiens_enregistres' => 'Liste des amapiens enregistrés',
 	'liste_livraisons' => 'Liste des livraisons',
 	'liste_paniers' => 'Liste des paniers',
 	'liste_paniers_distribuer_le' => 'Liste des paniers à distribuer le',
-	'liste_paniers_vendu_par' => 'Liste des paniers produit par @nom@',
+	'liste_paniers_vendu' => 'Liste des paniers vendu',
 	'liste_responsables' => 'Liste des responsables',
 	'livraison' => 'Livraison',
 	'livraison_enregistre_explication' => 'Vous devez avoir déjà distribuer des paniers pour pouvoir enregistré via ce formulaire des contenus de livraison.',
@@ -92,6 +97,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nom' => 'NOM',
+	'non' => 'Non',
+
+	//O
+	'oui' => 'Oui',
 
 	// P
 	'panier' => 'Panier',

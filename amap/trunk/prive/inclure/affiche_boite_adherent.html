@@ -9,8 +9,12 @@
 ]
 <!-- adherent -->
 <BOUCLE_panier(AMAP_PANIERS){id_auteur=#SESSION{id_auteur}}{tous}{age<0}{0,1}>
-	<BOUCLE_aut(AUTEURS){id_auteur}{tous}><a href="[(#URL_ECRIRE{panier_adherent}|parametre_url{id_auteur,#ID_AUTEUR})]"><:amap:les_paniers{nom=#NOM}:></a>
-		(<BOUCLE_totalpanier_dispo0(AMAP_PANIERS){id_auteur}{age<0} />#TOTAL_BOUCLE<//B_totalpanier_dispo0>)
+	<BOUCLE_aut(AUTEURS){id_auteur}{tous}>
+		<BOUCLE_totalpanier_dispo(AMAP_PANIERS auteurs){id_auteur}{age<0} />
+			<a href="[(#URL_ECRIRE{panier_adherent}|parametre_url{id_auteur,#ID_AUTEUR})]">
+				[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:le_panier, amap:les_paniers}) ]#NOM
+			</a>
+		<//B_totalpanier_dispo>
 	</BOUCLE_aut>
 </BOUCLE_panier>
 	<BOUCLE_aut1(AUTEURS){id_auteur}{tous}>
@@ -22,8 +26,12 @@
 <B_responsable>
 <br />
 <BOUCLE_responsable(AMAP_RESPONSABLES){id_auteur=#SESSION{id_auteur}}{tous}{age<0}{0,1}>
-	<BOUCLE_aut2(AUTEURS){id_auteur}{tous}><a href="[(#URL_ECRIRE{panier_adherent}|parametre_url{id_auteur,#ID_AUTEUR})]"><:amap:les_responsabilites{nom=#NOM}:></a>
-		(<BOUCLE_totalpanier_respo(AMAP_RESPONSABLES){id_auteur}{age<0} />#TOTAL_BOUCLE<//B_totalpanier_respo>)
+	<BOUCLE_aut2(AUTEURS){id_auteur}{tous}>
+		<BOUCLE_totalpanier_respo(AMAP_RESPONSABLES auteurs){id_auteur}{age<0} />
+			<a href="[(#URL_ECRIRE{panier_adherent}|parametre_url{id_auteur,#ID_AUTEUR})]">
+				[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:la_responsabilite, amap:les_responsabilites}) ]#NOM
+			</a>
+		<//B_totalpanier_respo>
 	</BOUCLE_aut2>
 </BOUCLE_responsable>
 	<BOUCLE_aut3(AUTEURS){id_auteur}{tous}>

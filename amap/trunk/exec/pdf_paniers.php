@@ -27,6 +27,7 @@ function exec_pdf_paniers(){
 	$pdf->Open();
 	$pdf->AddPage();
 
+	//Colorier les tableaux
 	$prop=array(
 		'HeaderColor'=>array(255,150,100),
 		'color1'=>array(224,235,255),
@@ -54,13 +55,13 @@ function exec_pdf_paniers(){
 		}
     }
 	/* recupere la disponibilite et l'id_auteur associe 
-    if ($dispo_auteurs = sql_select('id_auteur, dispo', 'spip_auteurs')) {
+    if ($dispo_auteurs = sql_select('id_auteur, dispo', 'spip_amap_paniers')) {
 		while ($row = sql_fetch($dispo_auteurs)) {
-			$dispo_auteurs[$row['id_auteur']] = array("dispo" => _T('amap:'.$row['dispo']));
+			$dispo_extension[$row['id_auteur']] = array("dispo" => _T('amap:'.$row['dispo']));
 		}
     }*/
-//	$pdf->Query_extended(sql_select("*, a.nom as nom, b.date_distribution as date_distribution, a.id_auteur as id_auteur", "spip_amap_paniers b LEFT JOIN spip_auteurs a ON a.id_auteur=b.id_auteur", "date_distribution=".sql_quote($date_distribution),"" , "nom"), $prop, $type_panier_extension, $dispo_auteurs, "id_auteur");
 	$pdf->Query_extended(sql_select("*, a.nom as nom, b.date_distribution as date_distribution, a.id_auteur as id_auteur", "spip_amap_paniers b LEFT JOIN spip_auteurs a ON a.id_auteur=b.id_auteur", "date_distribution=".sql_quote($date_distribution),"" , "nom"), $prop, $type_panier_extension, "id_auteur");
+//	$pdf->Query_extended(sql_select("*, a.nom as nom, b.date_distribution as date_distribution, a.id_auteur as id_auteur", "spip_amap_paniers b LEFT JOIN spip_auteurs a ON a.id_auteur=b.id_auteur", "date_distribution=".sql_quote($date_distribution),"" , "nom"), $prop, $data=array($type_panier_extension, $dispo_extension, "id_auteur");
 	$pdf->Output();
 	}
 }

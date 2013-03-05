@@ -11,6 +11,8 @@
 *
 **/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('base/amap_tables');
 include_spip('amap_fonctions');
 include_spip('inc/meta');
@@ -22,6 +24,9 @@ function amap_upgrade($nom_meta_base_version, $version_cible){
 	$maj['create'] = array(
 			array('maj_tables', array('spip_amap_disponibles','spip_amap_livraisons','spip_amap_paniers','spip_amap_responsables')),
 			array('amap_rubriques'),
+	);
+	$maj['1.2.1'] = array(
+			array('maj_tables', array('spip_amap_paniers')),
 	);
 	cextras_api_upgrade(amap_declarer_champs_extras(), $maj['create']);
 	include_spip('base/upgrade');

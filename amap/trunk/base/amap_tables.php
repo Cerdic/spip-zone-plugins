@@ -67,7 +67,7 @@ function amap_declarer_tables_principales($tables_principales){
 		'id_auteur'  		=> 'bigint(21) NOT NULL',
 		'id_producteur' 	=> 'bigint(21) NOT NULL',
 		'date_distribution' => 'datetime DEFAULT "0000-00-00 00:00:00" NOT NULL',
-		'dispo'  			=> 'bigint(21) DEFAULT "0" NOT NULL',
+		'dispo'  			=> 'varchar(3) DEFAULT "non"',
 		);
 	$spip_amap_paniers_key = array(
 		'PRIMARY KEY'   => 'id_amap_panier'

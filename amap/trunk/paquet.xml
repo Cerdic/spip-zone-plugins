@@ -1,11 +1,11 @@
 <paquet
 	prefix="amap"
 	categorie="divers"
-	version="3.0.1"
+	version="3.0.2"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/amapconfig-64.png"
-	schema="1.2.0"
+	schema="1.2.1"
 	documentation="http://contrib.spip.net/4331"
 >	
 

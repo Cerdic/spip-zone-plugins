@@ -21,7 +21,7 @@
 
 <h1 class="grostitre"><:amap:gestion_amap:></h1>
 
-#BOITE_OUVRIR{#CHEMIN_IMAGE{tabledata.gif}|balise_img{'',cadre-icone}|concat{#VAL{<BOUCLE_aut(AUTEURS){id_auteur=#ID_PRODUCTEUR}{tous}><:amap:liste_paniers_vendu_par{nom=#NOM}:></BOUCLE_aut>}|_T}|wrap{'<h3>'},'simple','titrem'}
+#BOITE_OUVRIR{#CHEMIN_IMAGE{tabledata.gif}|balise_img{'',cadre-icone}|concat{#VAL{amap:liste_paniers_vendu}|_T}|wrap{'<h3>'},'simple','titrem'}
 		<INCLURE{fond=prive/inclure/liste_panier_producteur,env}>
 		<INCLURE{fond=prive/inclure/liste_responsable,env}{id_auteur=#ID_PRODUCTEUR}>
 #BOITE_FERMER

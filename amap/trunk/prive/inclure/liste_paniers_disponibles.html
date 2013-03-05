@@ -10,7 +10,7 @@
 <div class="cadre_padding">
 	<p>
 		#SET{total,0}
-		<BOUCLE_totalpanier(AMAP_PANIERS){age<0}{dispo=1} />
+		<BOUCLE_totalpanier(AMAP_PANIERS){age<0}{dispo=oui} />
 			[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:panier_disposition, amap:paniers_disposition, nb})]
 			#SET{total,#TOTAL_BOUCLE}
 		<//B_totalpanier>
@@ -34,7 +34,7 @@
 	</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_paniers(AMAP_PANIERS) {pagination 20} {par date_distribution}{age<0}{dispo=1}>
+	<BOUCLE_paniers(AMAP_PANIERS) {pagination 20} {par date_distribution}{age<0}{dispo=oui}>
 	<tr>
 		<td><BOUCLE_adherent(AUTEURS){tous}{id_auteur}>#NOM</BOUCLE_adherent></td>
 		<td><BOUCLE_producteur(AUTEURS){tous}{id_auteur=#ID_PRODUCTEUR}>#NOM</BOUCLE_producteur></td>
