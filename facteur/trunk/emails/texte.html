@@ -13,16 +13,16 @@
 		#backgroundTable {height: 100% !important;margin: 0;padding: 0;width: 100% !important;}
 		body, .backgroundTable {background-color: #DDDDDD;}
 		#templateContainer {border: 1px solid #CCCCCC;max-width: 600px !important;}
-		h1,.h1,h2,.h2,h3,.h3,h4,.h4 {color: #202020;display: block;font-family: Verdana, Geneva, sans-serif;;margin-bottom: 0.5em;text-align: left;}
+		h1,.h1,h2,.h2,h3,.h3,h4,.h4 {color: #202020;display: block;font-family: Verdana, Geneva, sans-serif;margin-bottom: 0.5em;text-align: left;}
 		#templateHeader {background-color: #FFFFFF;border-bottom: 0;}
 		#templateContainer, .bodyContent {background-color: #FFFFFF;margin-top: 40px;}
 		.bodyContent {padding:30px;border-bottom:10px solid #GET{siteColor};}
-		.bodyContent div {color: #222222;font-family: Verdana, Geneva, sans-serif;;line-height: 150%;text-align: left;}
+		.bodyContent div {color: #222222;font-family: Verdana, Geneva, sans-serif;line-height: 150%;text-align: left;}
 		.bodyContent div a:link, .bodyContent div a:visited {color: #336699;font-weight: normal;text-decoration: underline;}
 		.bodyContent img {display: inline;margin-bottom: 10px;}
 		.bodyContent img.puce {display: inline;margin-bottom: 0;}
 		hr { height: 1px; margin: 1.5em 0; border: 0; background: #222222; color: #222222; }
-		.spip_code, .spip_cadre {color: #606060;font-family: Courier,"Courier New",monospace;font-size: 1em;}
+		.spip_code, .spip_cadre {color: #606060;font-family: Courier,"Courier New",monospace;font-size: 1em;word-wrap:break-word;max-width: 100%;overflow: auto;}
 		.coloration_code ol {list-style: none;}
 		.spip_logos {float: right;margin-left: 10px;}
 		.text {word-wrap:break-word;}
@@ -79,7 +79,7 @@
 										<table border="0" cellpadding="10" cellspacing="0" width="100%">
 											<tr>
 												<td valign="top">
-													<div class='text' style="color:#222222;font-family: Verdana, Geneva, sans-serif;;font-size:100%;line-height:150%;text-align:left;word-wrap:break-word;">
+													<div class='text' style="color:#222222;font-family: Verdana, Geneva, sans-serif;font-size:100%;line-height:150%;text-align:left;word-wrap:break-word;">
 														[(#ENV*{html,#ENV*{texte}|replace{'<','&lt;'}|facteur_nl2br_si_pas_autobr|propre|replace{'<br />\s*<br />(\s*<br />)+?','<br /> <br />'}|concat{'<br /> <br />'}})]
 													</div>
 												</td>
