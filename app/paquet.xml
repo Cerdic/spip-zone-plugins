@@ -2,7 +2,6 @@
 	prefix="app"
 	categorie="outil"
 	version="0.1.0"
-	schema="0.1.0"
 	etat="dev"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="app.png"
