@@ -128,7 +128,10 @@ function generer_url_publier($id=null,$objet='article',$id_secteur=0,$forcer=tru
 	
 	$type_objet = sql_getfetsel('type','spip_diogenes','id_secteur='.$id_secteur.' AND '.sql_in("objet",$objets));
 	if($type_objet){
-		$url = generer_url_public('publier','type_objet='.$type_objet,'',true);
+		$page_publier = 'publier';
+		if(defined('_PAGE_PUBLIER'))
+			$page_publier = _PAGE_PUBLIER;
+		$url = generer_url_public($page_publier,'type_objet='.$type_objet,'',true);
 		if(is_numeric($id)){
 			$url = parametre_url($url,$id_table_objet,intval($id));
 		}
