@@ -55,6 +55,7 @@ function coordonnees_declarer_tables_objets_sql($tables) {
 		'champs_versionnes' => array(),
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array('spip_adresses_liens'),
+		'texte_objets' => "coordonnees:adresses"
 
 
 	);
@@ -78,6 +79,7 @@ function coordonnees_declarer_tables_objets_sql($tables) {
 		'champs_versionnes' => array(),
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array('spip_numeros_liens'),
+		'texte_objets' => "coordonnees:numeros"
 
 
 	);
@@ -101,6 +103,7 @@ function coordonnees_declarer_tables_objets_sql($tables) {
 		'champs_versionnes' => array(),
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array('spip_emails_liens'),
+		'texte_objets' => "coordonnees:emails"
 
 
 	);
