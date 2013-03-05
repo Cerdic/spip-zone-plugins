@@ -1,7 +1,7 @@
 <paquet
 	prefix="icalendar"
 	categorie="date"
-	version="0.2.3"
+	version="0.3.0"
 	etat="dev"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="icalendar.png"

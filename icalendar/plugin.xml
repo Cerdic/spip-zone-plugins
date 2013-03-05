@@ -2,7 +2,7 @@
 	<nom>iCalendar</nom>
 	<auteur>Fil</auteur>
 	<licence>GNU/GPL - (c) 2010-2011</licence>
-	<version>0.2.3</version>
+	<version>0.3.0</version>
 	<etat>dev</etat>
 	<description>Faire des boucles iCalendar (format ics)</description>
 	<prefix>icalendar</prefix>
