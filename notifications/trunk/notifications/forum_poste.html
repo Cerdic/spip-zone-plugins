@@ -32,6 +32,7 @@ Mail HTML simplifie mis en forme complete par le filtre |facteur_email_wrap_to_h
 		(#STATUT|=={spam}|oui)<:notifications:message_spam_a_confirmer:>][
 		<a href="(#ENV{url}|url_absolue)">[(#ENV{url}|url_absolue)]</a>]
 		<br />
+		<br />
 		</p>
 
 		[(#ENV{url_moderer_publie}|ou{#ENV{url_moderer_off}}|ou{#ENV{url_moderer_spam}})
