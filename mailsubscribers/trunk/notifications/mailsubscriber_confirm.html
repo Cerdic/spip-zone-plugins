@@ -1,17 +1,23 @@
-[(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
 <BOUCLE_susc(MAILSUBSCRIBERS){id_mailsubscriber}{statut?}{tout}>
-[(#VAL{mailsubscriber:confirmsubscribe_sujet_email}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]
+<title>[(#VAL{mailsubscriber:confirmsubscribe_sujet_email}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]</title>
+<body>
+<div class="header">
+	<p><:mailsubscriber:confirmsubscribe_titre_email:></p>
+</div>
+<p>Bonjour[ (#NOM)],</p>
 
-# <:mailsubscriber:confirmsubscribe_titre_email:>
+[(#SET{email,<b>#EMAIL</b>})]
+[(#SET{nom_site_spip,[<a href="[(#URL_SITE_SPIP|url_absolue)]">(#NOM_SITE_SPIP)</a>]})]
+<p><:mailsubscriber:confirmsubscribe_texte_email_1{email=#GET{email},nom_site_spip=#GET{nom_site_spip}}:></p>
 
-Bonjour[ (#NOM)],
+[(#SET{url,[<br><center>(#INCLURE{fond=emails/inc-button,url=[(#EMAIL|mailsubscriber_url_confirm{#JETON}|url_absolue)],label=<:newsletter:bouton_subscribe:>,width=250px})</center><br>]})]
+<p><:mailsubscriber:confirmsubscribe_texte_email_2{url_confirmsubscribe=#GET{url}}:></p>
 
-<:mailsubscriber:confirmsubscribe_texte_email_1{email=#EMAIL,nom_site_spip=#NOM_SITE_SPIP,url_site_spip=#URL_SITE_SPIP}:>
+<br />
+<br />
+<p><small><:mailsubscriber:confirmsubscribe_texte_email_3{nom_site_spip=#GET{nom_site_spip}}:></small></p>
 
-#SET{url,#EMAIL|mailsubscriber_url_confirm{#JETON}|url_absolue}
-<:mailsubscriber:confirmsubscribe_texte_email_2{url_confirmsubscribe=#GET{url}}:>
 
-
-<:mailsubscriber:confirmsubscribe_texte_email_3{nom_site_spip=#NOM_SITE_SPIP,url_site_spip=#URL_SITE_SPIP}:>
+</body>
 </BOUCLE_susc>
-#FILTRE{supprimer_tags|filtrer_entites|trim}
+#FILTRE{facteur_email_wrap_to_html}

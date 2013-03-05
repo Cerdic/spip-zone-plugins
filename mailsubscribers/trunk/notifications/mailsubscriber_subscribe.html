@@ -1,16 +1,20 @@
-[(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
 <BOUCLE_susc(MAILSUBSCRIBERS){id_mailsubscriber}{statut?}{tout}>
-[(#VAL{mailsubscriber:subscribe_sujet_email}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]
+<title>[(#VAL{mailsubscriber:subscribe_sujet_email}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]</title>
+<body>
+<div class="header">
+	<p><:mailsubscriber:subscribe_titre_email:></p>
+</div>
+<p>Bonjour[ (#NOM)],</p>
 
-# <:mailsubscriber:subscribe_titre_email:>
+[(#SET{email,<b>#EMAIL</b>})]
+<p><:mailsubscriber:subscribe_texte_email_1{email=#GET{email}}:></p>
+[(#SET{nom_site_spip,[<a href="[(#URL_SITE_SPIP|url_absolue)]">(#NOM_SITE_SPIP)</a>]})]
+<p><:mailsubscriber:subscribe_texte_email_2{nom_site_spip=#GET{nom_site_spip}}:></p>
 
-Bonjour[ (#NOM)],
-
-<:mailsubscriber:subscribe_texte_email_1{email=#EMAIL}:>
-<:mailsubscriber:subscribe_texte_email_2{nom_site_spip=#NOM_SITE_SPIP,url_site_spip=#URL_SITE_SPIP}:>
-
-
-#SET{url,#EMAIL|mailsubscriber_url_unsubscribe{#JETON}|url_absolue}
-<:mailsubscriber:subscribe_texte_email_3{url_unsubscribe=#GET{url}}:>
+<br />
+<br />
+[(#SET{url,[<br><center>(#INCLURE{fond=emails/inc-button,url=[(#EMAIL|mailsubscriber_url_unsubscribe{#JETON}|url_absolue)],label=<:newsletter:bouton_unsubscribe:>,width=250px,bgcolor=#aaaaaa,bordercolor=#888888})</center>]})]
+<p><small><:mailsubscriber:subscribe_texte_email_3{url_unsubscribe=#GET{url}}:></small></p>
+</body>
 </BOUCLE_susc>
-#FILTRE{supprimer_tags|filtrer_entites|trim}
+#FILTRE{facteur_email_wrap_to_html}

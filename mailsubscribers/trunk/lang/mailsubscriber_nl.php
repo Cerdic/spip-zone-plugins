@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	"confirmsubscribe_sujet_email" => "[@nom_site_spip@] bevestiging van de inschrijving op de nieuwsbrief",
 	"confirmsubscribe_titre_email" => "Bevestiging van de inschrijving op de nieuwsbrief",
-	"confirmsubscribe_texte_email_1" => "Je vroeg in te schrijven op de nieuwsbrief [@nom_site_spip@](@url_site_spip@) met het adres @e-mail@.",
+	"confirmsubscribe_texte_email_1" => "Je vroeg in te schrijven op de nieuwsbrief @nom_site_spip@ met het adres @e-mail@.",
 	"confirmsubscribe_texte_email_2" => "Om uw registratie te bevestigen , dank u klikt op de volgende link :
 @url_confirmsubscribe@",
 	"confirmsubscribe_texte_email_3" => "Als er een fout van onze kant of als u van mening veranderde, dan kunt u dit e-mail : Dit verzoek zal automatisch worden geannuleerd.",
@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"subscribe_titre_email" => "Abonneren op de nieuwsbrief",
 	"subscribe_texte_email_1" => "We hebben rekening gehouden met uw registratie voor onze nieuwsbrief met het e-mailadres @e-mail@ .",
 	"subscribe_deja_texte" => "Het e-mailadres @email@ is al in onze mailinglist",
-	"subscribe_texte_email_2" => "Dank u voor de interesse die u toont in [@nom_site_spip@](@url_site_spip@).",
+	"subscribe_texte_email_2" => "Dank u voor de interesse die u toont in @nom_site_spip@.",
 	"subscribe_texte_email_3" => "En cas d'erreur de notre part, ou si vous changez d'avis, vous pouvez vous désinscrire à tout moment au moyen du lien suivant :
 @url_unsubscribe@",
 
@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"unsubscribe_titre_email" => "Afmelden Nieuwsbrief",
 	"unsubscribe_texte_email_1" => "Het e-mailadres @email@ is verwijderd uit onze mailinglijst.",
 	"unsubscribe_deja_texte" => "Het e-mailadres @email@ is niet in onze mailinglijst.",
-	"unsubscribe_texte_email_2" => "We hopen u snel te zien op [@nom_site_spip@](@url_site_spip@).",
+	"unsubscribe_texte_email_2" => "We hopen u snel te zien op @nom_site_spip@.",
 	"unsubscribe_texte_email_3" => "In geval van een fout van onze kant, of als u van gedachten verandert, kunt u zich opnieuw inschrijven op elk gewenst moment via de volgende link:
 @url_subscribe@",
 

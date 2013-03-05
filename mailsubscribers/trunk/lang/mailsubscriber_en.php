@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	"confirmsubscribe_sujet_email" => "[@NOM_SITE_SPIP@] Confirmation of registration to the Newsletter",
 	"confirmsubscribe_titre_email" => "Confirmation of registration to the Newsletter",
-	"confirmsubscribe_texte_email_1" => "You asked to subscribe to the newsletter [@nom_site_spip@] (@url_site_spip@) with the address @email@.",
+	"confirmsubscribe_texte_email_1" => "You asked to subscribe to the newsletter @nom_site_spip@ with the address @email@.",
 	"confirmsubscribe_texte_email_2" => " To confirm your registration , thank you click on the following link: 
 @url_confirmsubscribe@",
 	"confirmsubscribe_texte_email_3" => "If there is an error on our part or if you have changed your mind , you can ignore this email&nbsp;: This request will automatically be canceled.",
@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"subscribe_titre_email" => "Subscribe to Newsletter",
 	"subscribe_texte_email_1" => "We have taken into account your signing up for our newsletter with the email address @email@.",
 	"subscribe_deja_texte" => "The email address @email@ is already in our mailing list",
-	"subscribe_texte_email_2" => "Thank you for the interest you have shown in [@nom_site_spip@] (@url_site_spip@).",
+	"subscribe_texte_email_2" => "Thank you for the interest you have shown in @nom_site_spip@.",
 	"subscribe_texte_email_3" => "En cas d'erreur de notre part, ou si vous changez d'avis, vous pouvez vous désinscrire à tout moment au moyen du lien suivant :
 @url_unsubscribe@",
 
@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"unsubscribe_titre_email" => "Unsubscribe from Newsletter",
 	"unsubscribe_texte_email_1" => "The email address @email@ has been removed from our mailing list.",
 	"unsubscribe_deja_texte" => "The email address @email@ is not in our mailing list.",
-	"unsubscribe_texte_email_2" => "We hope to see you soon on [@nom_site_spip@](@url_site_spip@).",
+	"unsubscribe_texte_email_2" => "We hope to see you soon on @nom_site_spip@.",
 	"unsubscribe_texte_email_3" => " In case of an error on our part, or if you change your mind, you can re-enroll at any time using the following link :
 @url_subscribe@",
 

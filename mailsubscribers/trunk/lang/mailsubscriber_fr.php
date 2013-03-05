@@ -13,8 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'confirmsubscribe_sujet_email' => '[@nom_site_spip@] Confirmation d\'inscription à la Newsletter',
 	'confirmsubscribe_titre_email' => 'Confirmation d\'inscription à la Newsletter',
-	'confirmsubscribe_texte_email_1' => 'Vous avez demandé à vous inscrire à la Newsletter de [@nom_site_spip@](@url_site_spip@) avec l\'adresse email @email@.',
-	'confirmsubscribe_texte_email_2' => 'Pour confirmer votre inscription, merci de cliquer sur le lien suivant :
+	'confirmsubscribe_texte_email_1' => 'Vous avez demandé à vous inscrire à la Newsletter de @nom_site_spip@ avec l\'adresse email @email@.',
+	'confirmsubscribe_texte_email_2' => 'Pour confirmer votre inscription, merci de cliquer sur le lien suivant :
 @url_confirmsubscribe@',
 	'confirmsubscribe_texte_email_3' => 'Si il s\'agit d\'une erreur de notre part ou si vous avez changé d\'avis, vous pouvez ignorer ce mail&nbsp;: cette demande sera automatiquement annulée.',
 	'confirmsubscribe_texte_email_envoye' => 'Un email a été envoyé à cette adresse pour confirmation.',
@@ -61,23 +61,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'subscribe_titre_email' => 'Inscription à la Newsletter',
 	'subscribe_texte_email_1' => 'Nous avons bien pris en compte votre inscription à notre Newsletter avec l\'adresse email @email@.',
 	'subscribe_deja_texte' => 'L\'adresse email @email@ est déjà dans notre liste de diffusion',
-	'subscribe_texte_email_2' => 'Nous vous remercions de l\'intérêt que vous portez à [@nom_site_spip@](@url_site_spip@).',
-	'subscribe_texte_email_3' => 'En cas d\'erreur de notre part, ou si vous changez d\'avis, vous pouvez vous désinscrire à tout moment au moyen du lien suivant :
+	'subscribe_texte_email_2' => 'Nous vous remercions de l\'intérêt que vous portez à @nom_site_spip@.',
+	'subscribe_texte_email_3' => 'En cas d\'erreur de notre part, ou si vous changez d\'avis, vous pouvez vous désinscrire à tout moment au moyen du lien suivant :
 @url_unsubscribe@',
 
 	// U
 	'unsubscribe_sujet_email' => '[@nom_site_spip@] Désinscription de la Newsletter',
 	'unsubscribe_titre_email' => 'Désinscription de la Newsletter',
-	'unsubscribe_texte_confirmer_email_1' => 'Veuillez confirmer la désincription de l\'adresse email @email@ en cliquant sur le bouton : ',
+	'unsubscribe_texte_confirmer_email_1' => 'Veuillez confirmer la désincription de l\'adresse email @email@ en cliquant sur le bouton : ',
 	'unsubscribe_texte_email_1' => 'L\'adresse email @email@ a bien été retiré de notre liste de diffusion.',
 	'unsubscribe_deja_texte' => 'L\'adresse email @email@ n\'est pas dans notre liste de diffusion.',
-	'unsubscribe_texte_email_2' => 'Nous espérons vous revoir bientôt sur [@nom_site_spip@](@url_site_spip@).',
-	'unsubscribe_texte_email_3' => 'En cas d\'erreur de notre part, ou si vous changez d\'avis, vous pouvez vous réinscrire à tout moment au moyen du lien suivant :
+	'unsubscribe_texte_email_2' => 'Nous espérons vous revoir bientôt sur @nom_site_spip@.',
+	'unsubscribe_texte_email_3' => 'En cas d\'erreur de notre part, ou si vous changez d\'avis, vous pouvez vous réinscrire à tout moment au moyen du lien suivant :
 @url_subscribe@',
 
 	// T
 	'texte_ajouter_mailsubscriber' => 'Ajouter un inscrit à la newsletter',
-	'texte_avertissement_import' => 'Une colonne <tt>statut</tt> est fournie : les données seront importées telles quelles, en ecrasant celles qui peuvent déjà exister pour certains email.',
+	'texte_avertissement_import' => 'Une colonne <tt>statut</tt> est fournie : les données seront importées telles quelles, en ecrasant celles qui peuvent déjà exister pour certains email.',
 	'texte_changer_statut_mailsubscriber' => 'Cet inscrit à la newsletter est :',
 	'titre_langue_mailsubscriber' => 'Langue de cet inscrit',
 	'titre_logo_mailsubscriber' => 'Logo de cet inscrit',
