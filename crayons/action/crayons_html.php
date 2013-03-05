@@ -106,9 +106,20 @@ function controleur_dist($regs, $c=null) {
 	} else { // ligne, hauteur naturelle
 		$options['hauteurMaxi'] = 0;
 		$option['inmode'] = 'ligne';
+		// c'est un nombre entier
 		if ($sqltype['long']) {
-			$inputAttrs['maxlength'] = is_array($sqltype['long']) ?
-					$sqltype['long'][0] : $sqltype['long'];
+			// si long est [4,3] sa longueur maxi est 8 (1234,123)
+			if (is_array($sqltype['long'])) {
+				if (count($sqltype['long']) == 2) {
+					$inputAttrs['maxlength'] = $sqltype['long'][0] + 1 + $sqltype['long'][1];
+				}
+				// on ne sait pas ce que c'est !
+				else {
+					$inputAttrs['maxlength'] = $sqltype['long'][0];
+				}
+			} else {
+				$inputAttrs['maxlength'] = $sqltype['long'];
+			} 
 		}
 	}
 
