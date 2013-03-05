@@ -9,12 +9,11 @@
 	<p class="soustitre">&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</p>
 </div>]
 
-
 [(#ENV{recherche}
 	|ou{#ENV{look}}
 	|ou{#ENV{categorie}}
 	|ou{#ENV{typedoc}}|oui)
-		[(#INCLURE{fond=inclure/inc-pmb-recherche-catalogue}{env}{ajax}{rechercher=#ENV{recherche}})]
+		[(#INCLURE{fond=inclure/inc-pmb-recherche-catalogue, env, ajax, rechercher=#ENV{recherche}})]
 ]
 
 <INCLURE{fond=inclure/inc-pmb-recherche-formulaire}{recherche}{env}>

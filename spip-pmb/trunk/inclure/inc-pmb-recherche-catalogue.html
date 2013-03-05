@@ -1,12 +1,13 @@
 <a id="resultats_recherche"></a>
+
 <div class="liste articles avec_resume pmb">
 	<B_recherche>
 	<h2 class="h2"><:pmb:resultats_dans_catalogue:></h2>
 
 	#PMB_NOMBRE_RESULTATS
-	
+
 	[<p class="pagination">(#PAGINATION)</p>]
-	
+
 	<ul class="liste-items items">
 	<BOUCLE_recherche(PMB:NOTICES){rechercher}
 			{id_section ?}{id_location_memo ?}{id_section_memo ?}{look ?}{pagination 5}>
@@ -16,7 +17,7 @@
 	</ul>
 
 	[<p class="pagination">(#PAGINATION)</p>]
-	
+
 	</B_recherche>
 		<:pmb:pas_d_ouvrages_trouves:>
 	<//B_recherche>

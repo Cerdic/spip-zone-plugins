@@ -1,9 +1,9 @@
 <paquet
 	prefix="pmb"
 	categorie="divers"
-	version="2.0.0-beta1"
+	version="2.0.0-beta2"
 	etat="test"
-	compatibilite="[3.0.0-beta2;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="img/logo-spip-pmb.png"
 	documentation="http://www.spip-contrib.net/Portail-Web-pour-PMB"
 	schema="1.0.0"

@@ -52,6 +52,7 @@ function iterateur_PMB_dist($b, $type) {
 		'field' => array(
 			'cle' => 'STRING',
 			'valeur' => 'STRING',
+			'rechercher' => 'STRING',
 			'*' => 'ALL' // Champ joker *
 		)
 	);
@@ -272,7 +273,6 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
 	// on peut fournir une liste l'id
 	// ou egalement un critere id=x
 	$ids = array();
-	
 
 	// depuis une liste
 	if (is_array($command['liste']) and count($command['liste'])) {
@@ -337,11 +337,13 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
 		// valeur cherchee (env)
 		if (!$recherche) {
 			$recherche = pmb_critere_valeur($criteres, 'rechercher');
+
 			// le premier trouve...
 			if ($recherche) {
 				$recherche = array_shift($recherche);
 			}
 		}
+
 		if (!$recherche) {
 			$recherche = '';
 		}
@@ -383,7 +385,7 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
 				// on ajoute le premier venu...
 				// sauf pour look, où on veut toutes les valeurs...
 				if ($nom == 'look') {
-					$demande[$requete] = $valeur;
+					$demande[$requete] = $valeurs;
 				} else {
 					$demande[$requete] = array_shift($valeurs);
 				}
@@ -878,7 +880,7 @@ function critere_SYNDIC_ARTICLES_pmb_notices($idb, &$boucles, $crit) {
  * Balise #URL_PMB_NOTICE et #URL_PMB_NOTICE{18}
 **/
 function balise_URL_PMB_NOTICE_dist($p) {
-	return pbm_balise_url($p, 'id_notice', 'pmb_notice');
+	return pmb_balise_url($p, 'id_notice', 'pmb_notice');
 }
 
 
@@ -886,7 +888,7 @@ function balise_URL_PMB_NOTICE_dist($p) {
  * Balise #URL_PMB_COLLECTION et #URL_PMB_COLLECTION{18}
 **/
 function balise_URL_PMB_COLLECTION_dist($p) {
-	return pbm_balise_url($p, 'id_collection', 'pmb_collection');
+	return pmb_balise_url($p, 'id_collection', 'pmb_collection');
 }
 
 
@@ -894,14 +896,14 @@ function balise_URL_PMB_COLLECTION_dist($p) {
  * Balise #URL_PMB_EDITEUR et #URL_PMB_EDITEUR{18}
 **/
 function balise_URL_PMB_EDITEUR_dist($p) {
-	return pbm_balise_url($p, 'id_editeur', 'pmb_editeur');
+	return pmb_balise_url($p, 'id_editeur', 'pmb_editeur');
 }
 
 /**
  * Balise #URL_PMB_AUTEUR et #URL_PMB_AUTEUR{18}
 **/
 function balise_URL_PMB_AUTEUR_dist($p) {
-	return pbm_balise_url($p, 'id_auteur', 'pmb_auteur');
+	return pmb_balise_url($p, 'id_auteur', 'pmb_auteur');
 }
 
 /**
@@ -952,7 +954,7 @@ function balise_URL_PMB_CATALOGUE_dist($p) {
 
 
 
-function pbm_balise_url($p, $champ, $page) {
+function pmb_balise_url($p, $champ, $page) {
 	if (!$id = interprete_argument_balise(1, $p)) {
 		$id = champ_sql($champ, $p);
 	}
