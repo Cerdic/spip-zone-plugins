@@ -11,4 +11,6 @@
 	<div class='label'><:info_texte:></div>
 	<div dir='#LANG_DIR' class='#EDIT{texte} texte'>[(#TEXTE|image_reduire{500,0})]</div>
 </div>
+[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{
+	args,[(#ARRAY{type,produit,id_objet,#ID_PRODUIT,contexte,[(#ENV**|unserialize)]})],data,''})]})]
 </BOUCLE_afficher_contenu>
