@@ -190,12 +190,12 @@ function maj_auto_action_rapide() {
 			$maj_lib = _T('couteau:maj_rev_ko', array('url'=>$infos['url_origine']));
 		// eventuels liens morts
 		$maj_lib = preg_replace(',\[([^[]+)->\],', '$1', $maj_lib);
-		$nom = preg_replace(",[\n\r]+,", ' ', $infos['nom']);
 		if($actif||$extension) $nom = ( defined('_SPIP30000')
 			?recuperer_fond('prive/squelettes/inclure/cfg',
-				array('script'=>'configurer_'.strtolower($infos['prefix']),'nom'=>': '.$nom))
+				array('script'=>'configurer_'.strtolower($infos['prefix']),'nom'=>': '.$infos['nom']))
 			:(include_spip('plugins/afficher_plugin') && function_exists('plugin_bouton_config')?plugin_bouton_config($p, $infos, $dir):'') )
-			. $nom . '&nbsp;(v' . $infos['version'] . ')' . ($maj_lib?"\n_ {{".$maj_lib.'}}':'');
+			. $infos['nom'] . '&nbsp;(v' . $infos['version'] . ')' . ($maj_lib?"<br /> {{".$maj_lib.'}}':'');
+		$nom = preg_replace(",[\n\r]+,", ' ', $nom); // Pour éviter les auto_br de SPIP...
 		$rev = $infos['rev_local']?_T('couteau:maj_rev', array('revision' => $infos['rev_local'])):'';
 		if(strlen($infos['commit'])) $rev .= (strlen($rev)?'<br/>':'') . cs_date_court($infos['commit']);
 		if($infos['svn']) $rev .= '<br/><span class="caps">svn</span>';
