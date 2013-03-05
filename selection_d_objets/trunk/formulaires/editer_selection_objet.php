@@ -23,13 +23,17 @@ function formulaires_editer_selection_objet_identifier_dist($id_selection_objet=
 function formulaires_editer_selection_objet_charger_dist($id_selection_objet='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('selection_objet',$id_selection_objet,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
     
-    if(!$valeurs['objet_dest'])$valeurs['objet_dest']=_request('objet_dest');
-    if(!$valeurs['id_objet_dest']) $valeurs['id_objet_dest']=_request('id_objet_dest'); 
-    if(!$valeurs['objet'])$valeurs['objet_dest']=_request('objet');
-    if(!$valeurs['id_objet']) $valeurs['id_objet_dest']=_request('id_objet');       
-    if(!$valeurs['titre']) $valeurs['titre']=_request('titre');
-    if(!$valeurs['statut']) $valeurs['statut']=_request('statut');
-    if(!$valeurs['lang']) $valeurs['lang']=_request('lang');      
+    $contexte=array(
+    'objet_dest'=>_request('objet_dest'),
+    'id_objet_dest'=>_request('id_objet_dest'),
+    'objet'=>_request('objet'), 
+    'id_objet'=>_request('id_objet'),   
+    'titre'=>_request('titre'), 
+    'statut'=>_request('statut'), 
+    'lang'=>_request('lang'),                      
+    );
+
+    $valeurs=array_merge($contexte,$valeurs);   
     
     $valeurs['_hidden'].='<input type="hidden" name="lang" value="'.$valeurs['lang'].'">';              
     $valeurs['_hidden'].='<input type="hidden" name="objet_dest" value="'.$valeurs['objet_dest'].'">';
