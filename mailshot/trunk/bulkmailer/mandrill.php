@@ -10,6 +10,7 @@ include_spip("inc/config");
 include_spip("inc/json"); // compat avec les PHP sans json_truc
 include_spip("classes/facteur");
 include_spip("lib/mandrill-api-php/src/Mandrill");
+include_spip("inc/distant");
 
 /**
  * @param array $to_send
@@ -95,13 +96,9 @@ function bulkmailer_mandrill_webhook_dist($arg){
  */
 function bulkmailer_mandrill_init_dist($id_mailshot=0){
 	$api_key = lire_config("mailshot/mandrill_api_key");
-	$mandrill = new Mandrill($api_key);
+	$mandrill = new SpipMandrill($api_key);
 
 	spip_log("bulkmailer_mandrill_init_dist $id_mailshot","mailshot");
-
-	//WARNING: this would prevent curl from detecting a 'man in the middle' attack
-	curl_setopt($mandrill->ch, CURLOPT_SSL_VERIFYHOST, 0);
-	curl_setopt($mandrill->ch, CURLOPT_SSL_VERIFYPEER, 0);
 
 	// recuperer les webhooks existants
 	try {
@@ -162,6 +159,41 @@ function bulkmailer_mandrill_init_dist($id_mailshot=0){
 	return true;
 }
 
+/**
+ * Prise en charge par recuperer_page quand curl pas dispo ou pas complet
+ */
+class SpipMandrill extends Mandrill {
+	public function __construct($apikey=null) {
+		parent::__construct($apikey);
+		//WARNING: this would prevent curl from detecting a 'man in the middle' attack
+		curl_setopt($this->ch, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, 0);
+ }
+
+	public function call($url, $params) {
+		$params['key'] = $this->apikey;
+		$paramsjson = json_encode($params);
+		$response_body = "";
+		if (!function_exists('curl_init')
+		  OR @ini_get("safe_mode")=="On"
+		  OR @ini_get("open_basedir")){
+			spip_log("Appel de Mandrill par recuperer_page","mailshot");
+			// essayer avec les fonctions natives de SPIP
+			// mais ne supportent pas forcement https si pas openssl
+			$response_body = recuperer_page($this->root . $url . '.json',false,false,null,$paramsjson);
+			if (!$response_body)
+				spip_log("Echec Appel de Mandrill par recuperer_page","mailshot"._LOG_ERREUR);
+		}
+
+		if (!$response_body)
+			return parent::call($url, $params);
+
+		$result = json_decode($response_body, true);
+		if($result === null) throw new Mandrill_Error('We were unable to decode the JSON response from the Mandrill API: ' . $response_body);
+
+		return $result;
+	}
+}
 
 class FacteurMandrill extends Facteur {
 
@@ -316,11 +348,7 @@ class FacteurMandrill extends Facteur {
 			$this->message['tags'][] = protocole_implicite($GLOBALS['meta']['adresse_site'])."/#".$options['tracking_id'];
 		}
 
-		$mandrill = new Mandrill($api_key);
-
-		//WARNING: this would prevent curl from detecting a 'man in the middle' attack
-		curl_setopt($mandrill->ch, CURLOPT_SSL_VERIFYHOST, 0);
-		curl_setopt($mandrill->ch, CURLOPT_SSL_VERIFYPEER, 0);
+		$mandrill = new SpipMandrill($api_key);
 
 		try {
 			$res = $mandrill->messages->send($this->message, false);
