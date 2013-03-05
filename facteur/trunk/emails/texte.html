@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>[(#ENV{sujet})]</title>
+	<title>[(#ENV*{sujet})]</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<style type="text/css">
 		[(#SET{siteColor,[#(#LOGO_SITE_SPIP|couleur_extraire|couleur_eclaircir_si_foncee{168}|sinon{BBB})]})]
