@@ -89,12 +89,11 @@ var map[(#GET{id})];
 			maxZoom: (#ENV{maxZoom})]
 		});
 
-		// Appeler l'éventuelle fonction de callback
-		if (callback && typeof(callback) === "function") {
-			map[(#GET{id})].on('load',function(e){
-				callback(e.target);
-			});
-		}
+		// Appeler l'éventuelle fonction de callback et trigger "load"
+		map[(#GET{id})].on('load',function(e){
+			if (callback && typeof(callback) === "function") {callback(e.target);}
+			$("#map[(#GET{id})]").trigger('load',e.target);
+		});
 
 		// Déterminer la position initiale de la carte
 		[(#GET{utiliser_bb}|non)
@@ -224,6 +223,15 @@ var map[(#GET{id})];
 		}
 		<//B_fonction_analyse_json>
 
+		// ajouter la fonction pour le monde exterieur (compat GIS 3)
+		map[(#GET{id})].addJSON = function(data){parseGeoJson(data,mapagenda);}
+		map[(#GET{id})].removeAllMarkers = function(){
+			for(l in this._layers)
+			if (this._layers[l]._layers){
+			 this.removeLayer(this._layers[l]);
+			}
+		}
+
 
 		<BOUCLE_definir_les_points_de_la_carte(CONDITION){si #ENV{point}|!={non}}>
 		[(#REM)
@@ -299,6 +307,7 @@ var map[(#GET{id})];
 		[(#ENV{localize_visitor,#ENV{localiser_visiteur}}|oui)
 		map[(#GET{id})].locate({setView: true, maxZoom: [(#ENV{zoom,#CONFIG{gis/zoom,0}})]});]
 
+		$("#map[(#GET{id})]").trigger('ready',map[(#GET{id})]);
 	}
 
 
