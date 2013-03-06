@@ -11,7 +11,7 @@ function action_ranger_dist($arg=null){
 	include_spip("inc/autoriser");
 	include_spip("inc/config");
 
-	list($action,$lang,$id_objet,$objet,$objet_dest,$id_objet_dest,$load,$nouvel_ordre)=explode('-',$arg);
+	list($action,$lang,$id_selection_objet,$objet_dest,$id_objet_dest,$load,$nouvel_ordre)=explode('-',$arg);
 
     switch($action){
         case 'supprimer_ordre' :
@@ -25,11 +25,7 @@ function action_ranger_dist($arg=null){
                 foreach ($langues as $key => $langue){
                 
                     $where=array(
-                        'id_objet='.$id_objet,
-                        'objet="'.$objet.'"',
-                        'lang="'.$langue.'"',   
-                        'id_objet_dest="'.$id_objet_dest.'"',
-                        'objet_dest="'.$objet_dest.'"',                                               
+                        'id_selection_objet='.$id_selection_objet,                                             
                         );
                                 
                     sql_delete("spip_selection_objets",$where);
@@ -49,10 +45,7 @@ function action_ranger_dist($arg=null){
             
             spip_log('eliminer 1','selection');
                 $where=array(
-                    'id_objet='.$id_objet,
-                    'objet='.sql_quote($objet),
-                    'id_objet_dest='.$id_objet_dest,
-                    'objet_dest='.sql_quote($objet_dest),
+                    'id_selection_objet='.$id_selection_objet,
                     );
                                             
                 sql_delete("spip_selection_objets",$where);
@@ -78,23 +71,17 @@ function action_ranger_dist($arg=null){
             $result = sql_select("*", "spip_selection_objets", $where, "ordre");
             
             while ($row = sql_fetch($result)) {
-                $id_objet_row = $row["id_objet"];
-                $objet_row = $row["objet"];         
+                $id_selection_objet_row = $row["id_selection_objet"];        
                 $ordre_row = $row["ordre"];
                 $lang_row = $row["lang"];       
-                if ($id_objet  == $id_objet_row AND $objet_row == $objet) break;
+                if ($id_selection_objet  == $id_selection_objet_row) break;
                 $ordre_new = $ordre_row;
-                $id_objet_prec = $id_objet_row;
-                $objet_prec = $objet_row;           
+                $id_selection_objet_prec = $id_selection_objet_row;       
             
             }
 
             $where = array(             
-                    "lang='$lang'",
-                    "objet_dest='$objet_dest'",
-                    "id_objet_dest='$id_objet_dest'",
-                    "id_objet='$id_objet'", 
-                    "objet='$objet'",       
+                    "id_selection_objet='$id_selection_objet'",      
                     );
                     
     
@@ -103,11 +90,7 @@ function action_ranger_dist($arg=null){
             sql_updateq("spip_selection_objets", array("ordre" => $ordre_new), $where);
             
             $where = array(             
-                    "lang='$lang'",
-                    "objet_dest='$objet_dest'",
-                    "id_objet_dest='$id_objet_dest'",
-                    "id_objet='$id_objet_prec'",    
-                    "objet='$objet_prec'",      
+                    "id_selection_objet='$id_selection_objet_prec'",       
                     );      
                     
             spip_log('action '.$action.serialize($where).$ordre_row,'selecion_objet');  

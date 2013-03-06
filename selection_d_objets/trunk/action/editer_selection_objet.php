@@ -1,6 +1,9 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('action/editer_objet');
+
+
 // http://doc.spip.org/@action_editer_selection_objet_dist
 function action_editer_selection_objet_dist($arg=null) {
 
@@ -48,8 +51,8 @@ function selection_objet_inserer($id_objet,$objet) {
     
 
     $champs = array(
-        'id_objet'=>$id_objet,
-        'objet'=>$objet,                   
+        'objet_dest'=>$objet_dest, 
+        'id_objet_dest'=>$id_objet_dest,                                   
         'lang' => $lang,
         'langue_choisie' => 'non');
     
@@ -89,6 +92,9 @@ function selection_objet_inserer($id_objet,$objet) {
 function selection_objet_modifier ($id_selection_objet, $set=null) {
 
     include_spip('inc/modifier');
+    
+
+    
     $c = collecter_requests(
         // white list
         array('titre', 'descriptif','id_objet_dest','objet_dest'),
@@ -99,14 +105,24 @@ function selection_objet_modifier ($id_selection_objet, $set=null) {
     );
 
     // Si la selection_objet est publiee, invalider les caches et demander sa reindexation
-    $t = sql_fetsel("statut,lang", "spip_selection_objets", "id_selection_objet=$id_selection_objet");
+    $t = sql_fetsel("statut,lang,id_objet_dest,objet_dest", "spip_selection_objets", "id_selection_objet=$id_selection_objet");
     if ($t['statut'] == 'publie') {
         $invalideur = "id='selection_objet/$id_selection_objet'";
         $indexation = true;
     }
-
+    
+    //verifier l'ordre
+    $where = array(
+        'id_objet_dest='.$t['id_objet_dest'],
+        'objet_dest='.sql_quote($t['objet_dest']),
+        'lang='.sql_quote($t['lang']),
+        );
+    $verifier_ordre=charger_fonction('verifier_ordre','inc');
+    $ordre=$verifier_ordre($where);
+    
     if(!$id_objet=_request('id_objet')){
-        $c['id_objet']=$id_selection_objet;
+        $c['ordre']=$ordre+1;
+
     }
     else $objet=_request('objet');
     if ($err = objet_modifier_champs('selection_objet', $id_selection_objet,
@@ -118,13 +134,6 @@ function selection_objet_modifier ($id_selection_objet, $set=null) {
             'indexation' => $indexation,
         ),
         $c)){
-            $where = array(
-                    'id_objet_dest='.$c['id_objet_dest'],
-                    'objet_dest='.sql_quote($c['objet_dest']),
-                    'lang'=>$t['lang'],
-                    );
-                $verifier_ordre=charger_fonction('verifier_ordre','inc');
-                $ordre=$verifier_ordre($where);
         return $err;    
         }
         
