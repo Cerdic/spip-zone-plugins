@@ -32,3 +32,14 @@
 [(#VAL{bing_aerial}|in_array{#GET{layers}}|oui)
 [(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_GIS})plugins/layer/tile/Bing.js]})]})]
 ]
+
+[(#REM)
+Lib clustering si besoin
+]
+[(#ENV{cluster}|=={oui}|oui)
+#INCLURE{javascript/leafclusterer.js}
+]
+
+[(#CONFIG{auto_compress_js}|=={oui})
+#FILTRE{compacte}
+]

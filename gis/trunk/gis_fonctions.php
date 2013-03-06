@@ -258,4 +258,52 @@ function gis_layer_defaut(){
 	}
 }
 
+/**
+ * Recuperer les cles primaires du env pour l'appel a l'url json des points
+ * @param $env
+ * @return array
+ */
+function gis_modele_url_json_env($env){
+	$contexte = array();
+	if (is_string($env))
+		$env = unserialize($env);
+	if ($env){
+		// d'abord toutes les cles primaires connues
+		$tables_sql = lister_tables_objets_sql();
+		foreach (array_keys($tables_sql) as $table){
+			$primary = id_table_objet($table);
+			if (isset($env[$primary]))
+				$contexte[$primary] = $env[$primary];
+		}
+		// puis cas particuliers
+		$keys = array("id_objet","id_secteur","id_parent","media","recherche","mots");
+		foreach ($keys as $key){
+			if (isset($env[$key]))
+				$contexte[$key] = $env[$key];
+		}
+	}
+	return $contexte;
+}
+
+/**
+ * Transformer le tableau de kml en tableau d'urls :
+ *   si numerique c'est un id de document
+ *   si chaine c'est une url qu'on rapatrie en local
+ * @param array $kml
+ * @return array
+ */
+function gis_kml_to_urls($kml){
+	if ($kml AND count($kml)){
+		include_spip("inc/filtres_mini");
+		include_spip("inc/distant");
+		foreach($kml as $k=>$v){
+			if (is_numeric($v)){
+				$kml[$k] = url_absolue(generer_url_entite($v,"document"));
+			}
+			else
+				$kml[$k] = _DIR_RACINE.copie_locale($kml[$k]);
+		}
+	}
+	return $kml;
+}
 ?>
