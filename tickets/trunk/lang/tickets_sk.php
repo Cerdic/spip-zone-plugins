@@ -141,6 +141,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_paginer_par' => 'Stránkovať od:',
 	'lien_filtrer' => 'Rozriediť lístky',
+	'lien_reponse_ticket' => 'Réponse au ticket', # NEW
 	'lien_supprimer_filtres' => 'Odstrániť všetky filtre',
 
 	// M

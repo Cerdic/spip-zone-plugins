@@ -141,6 +141,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_paginer_par' => 'تصفح حسب:',
 	'lien_filtrer' => 'ترشيح التذاكر',
+	'lien_reponse_ticket' => 'Réponse au ticket', # NEW
 	'lien_supprimer_filtres' => 'حذف كل المرشحات',
 
 	// M
