@@ -44,12 +44,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'produit_statut' => 'Modifier le statut :',
 	'produits_titre' => 'Produits',
 
-
 	// S
 	'secteurs_autorises' => 'Choisir une rubrique dans un des secteurs autorisés : @secteurs@',
 
 	// T
-	'tous_les_produits' => 'Tous les produits',
+	'tous_les_produits' => 'Tous les produits'
 );
 
 ?>

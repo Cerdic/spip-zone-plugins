@@ -47,7 +47,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'produits_titre' => 'Výrobky',
 
 	// S
-	'secteurs_autorises' => 'Vyberte rubriku v povolených sektoroch: @secteurs@'
+	'secteurs_autorises' => 'Vyberte rubriku v povolených sektoroch: @secteurs@',
+
+	// T
+	'tous_les_produits' => 'Tous les produits' # NEW
 );
 
 ?>

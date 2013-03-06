@@ -47,7 +47,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'produits_titre' => 'كالاها',
 
 	// S
-	'secteurs_autorises' => 'Choisir une rubrique dans un des secteurs autorisés : @secteurs@' # NEW
+	'secteurs_autorises' => 'Choisir une rubrique dans un des secteurs autorisés : @secteurs@', # NEW
+
+	// T
+	'tous_les_produits' => 'Tous les produits' # NEW
 );
 
 ?>

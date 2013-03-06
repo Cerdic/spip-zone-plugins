@@ -47,7 +47,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'produits_titre' => 'Products',
 
 	// S
-	'secteurs_autorises' => 'Choose a section from one of the authorized areas: @secteurs@'
+	'secteurs_autorises' => 'Choose a section from one of the authorized areas: @secteurs@',
+
+	// T
+	'tous_les_produits' => 'Tous les produits' # NEW
 );
 
 ?>
