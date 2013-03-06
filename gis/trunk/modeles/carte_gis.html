@@ -104,8 +104,8 @@ map_cfg["[(#GET{id})]"] = {
 "clusterStyles":[(#ENV*{clusterStyles,#ARRAY}|json_encode)],
 "affiche_points":[(#ENV{point,''}|=={non}|?{false,true})],
 "json_points":{
-	"url":"[(#URL_PAGE{gis_json}|url_absolue)]",
-	"objets":"(#ENV{objets,#ENV{class}}|trim)",
+	"url":"[(#URL_PAGE{gis_json}|url_absolue)]"[,
+	"objets":"(#ENV{objets,#ENV{class}}|trim)"],
 	"limit":[(#ENV{limit,#ENV{limite,500}}|trim)],
 	"env":[(#ENV{args,#ENV}|gis_modele_url_json_env|json_encode)][,
 	"titre" : (#ENV{titre}|json_encode)][,
