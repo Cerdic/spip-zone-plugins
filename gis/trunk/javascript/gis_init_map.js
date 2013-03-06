@@ -128,6 +128,9 @@ var gis_init_map = function(mapcfg) {
 				map.fitBounds(geojson.getBounds());
 			if (mapcfg['open_id'].length)
 				gis_focus_marker(mapcfg['open_id'],map_container);
+
+			if (typeof map.geojsons=="undefined") map.geojsons = [];
+			map.geojsons.push(geojson);
 		}
 	}
 	else {
@@ -161,10 +164,12 @@ var gis_init_map = function(mapcfg) {
 	// API Compat Gis3 : addJSON et removeAllMarkers
 	map.addJSON = map.parseGeoJson
 	map.removeAllMarkers = function(){
-		for(l in this._layers)
-		if (this._layers[l]._layers){
-		 this.removeLayer(this._layers[l]);
+		if (typeof map.geojsons=="undefined") map.geojsons = [];
+		for(i in map.geojsons){
+			map.geojsons[i].clearLayers();
+			map.removeLayer(map.geojsons[i]);
 		}
+		map.geojsons = [];
 	}
 
 	if (mapcfg['affiche_points'] && mapcfg['json_points'].length){
