@@ -75,7 +75,7 @@ Clustering (regroupement de points proches) :
 
 <script type="text/javascript">/*<!\[CDATA\[*/
 var map[(#GET{id})];
-var map_cfg = {
+var map_cfg_[(#GET{id})] = {
 "mapid":"map[(#GET{id})]",
 "scrollWheelZoom": [(#ENV{zoom_molette,#ENV{zoom_wheel}}|=={non}|?{false,true})],
 "zoomControl": [(#ENV{no_control,#ENV{aucun_controle}}|!={oui}|?{true,false})][,
@@ -116,14 +116,14 @@ var map_cfg = {
 "gpx":[(#ENV{gpx,''}|?{[(#ENV{gpx}|is_array|?{#ENV{gpx},#LISTE{#ENV{gpx}}}|gis_kml_to_urls|json_encode)],false})]
 };
 if (typeof(callback_map[(#GET{id})]) === "function") {
-	map_cfg['callback']=callback_map[(#GET{id})];
+	map_cfg_[(#GET{id})]['callback']=callback_map[(#GET{id})];
 }
 
 (function($){
 	// Charger le javascript de GIS et initialiser la carte
 	$(function(){
 		jQuery.getScript('[(#PRODUIRE{fond=javascript/gis.js,cluster=#ENV{cluster,non}})]',function(){
-			gis_init_map(map_cfg);
+			gis_init_map(map_cfg_[(#GET{id})]);
 		});
 	});
 
