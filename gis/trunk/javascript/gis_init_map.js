@@ -172,18 +172,29 @@ var gis_init_map = function(mapcfg) {
 		map.geojsons = [];
 	}
 
-	if (mapcfg['affiche_points'] && mapcfg['json_points'].length){
+	if (mapcfg['affiche_points']
+		&& typeof(mapcfg['json_points'])!=="undefined"
+		&& mapcfg['json_points']['url'].length){
 		// Récupération des points à mettre sur la carte, via json externe
-		var args = mapcfg['json_points']['env'];
-		args["objets"] = mapcfg['json_points']['objets'];
-		args["limit"] = mapcfg['json_points']['limit'];
-		if (args["objets"]=="point_libre"){
-			args["lat"]=mapcfg['lat'];
-			args["lon"]=mapcfg['lon'];
-			args["titre"]=mapcfg['json_points']['titre'];
-			args["description"]=mapcfg['json_points']['description'];
-			args["icone"]=mapcfg['json_points']['icone'];
+		var args = {};
+		if (typeof mapcfg['json_points']['env']!=="undefined")
+			for(var k in mapcfg['json_points']['env'])
+				args[k] = mapcfg['json_points']['env'][k];
+		if (typeof mapcfg['json_points']['objets']!=="undefined"){
+			args["objets"] = mapcfg['json_points']['objets'];
+			if (args["objets"]=="point_libre"){
+				args["lat"]=mapcfg['lat'];
+				args["lon"]=mapcfg['lon'];
+				if (typeof mapcfg['json_points']['titre']!=="undefined")
+					args["titre"]= mapcfg['json_points']['titre'];
+				if (typeof mapcfg['json_points']['description']!=="undefined")
+					args["description"]=mapcfg['json_points']['description'];
+				if (typeof mapcfg['json_points']['icone']!=="undefined")
+					args["icone"]=mapcfg['json_points']['icone'];
+			}
 		}
+		if (typeof mapcfg['json_points']['limits']!=="undefined")
+			args["limit"] = mapcfg['json_points']['limit'];
 		jQuery.getJSON(mapcfg['json_points']['url'],args,
 			function(data) {
 				if (data){
