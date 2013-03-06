@@ -20,7 +20,7 @@ LOCATION:#GET{titre_gis}[\, (#GET{adresse})][\, [(#GET{code_postal}) ](#GET{vill
 LOCATION:(#LIEU|PtoBR|textebrut|filtrer_ical)]][(#GET{lat}|et{#GET{lon}}|oui)
 GEO:#GET{lat};#GET{lon}][
 DESCRIPTION:(#DESCRIPTIF|supprimer_tags|textebrut|filtrer_ical)]
-CATEGORIES:<BOUCLE_article(ARTICLES) {id_article=#ID_ARTICLE}>[(#TITRE|textebrut|filtrer_ical)]</BOUCLE_article><B_mots>, <BOUCLE_mots(MOTS?){id_evenement=#ID_EVENEMENT}{", "}>[(#TITRE|textebrut|filtrer_ical)]</BOUCLE_mots>
+CATEGORIES:<BOUCLE_article(ARTICLES) {id_article=#ID_ARTICLE}>[(#TITRE|textebrut|filtrer_ical)]</BOUCLE_article><B_mots>\, <BOUCLE_mots(MOTS?){id_evenement=#ID_EVENEMENT}{"\, "}>[(#TITRE|textebrut|filtrer_ical)]</BOUCLE_mots>
 URL:[(#URL_EVENEMENT{#ID_EVENEMENT}|url_absolue|filtrer_ical)]
 STATUS:CONFIRMED
 END:VEVENT
