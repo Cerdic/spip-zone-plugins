@@ -9,9 +9,10 @@
 
     <BOUCLE_selection(SELECTION_OBJETS){par ordre,lang}{lang ?=#ENV{l}}{statut ?}{id_objet_dest ?} {objet_dest ?}>
     
-    [<tr class="tr_liste" id='#ID_OBJET'>(#ID_OBJET|generer_modele{#OBJET,modeles_so/selection_interface_tr,#ARRAY{
+    [<tr class="tr_liste" id='#ID_SELECTION_OBJET'>(#ID_OBJET|generer_modele{#OBJET,modeles_so/selection_interface_tr,#ARRAY{
+        ordre,#ORDRE,
         id_selection_objet,#ID_SELECTION_OBJET,
-        langue,#ENV{lang},
+        langue,#ENV{l},
         objet_dest,#OBJET_DEST,
         id_objet_dest,#ID_OBJET_DEST,
         total_boucle,#TOTAL_BOUCLE,
@@ -25,7 +26,6 @@
     </table>
     </div>
 </B_selection>
-
 <script type="text/javascript">
     $(function() {
         [(#REM)action rangement]
@@ -33,12 +33,5 @@
           $('#selection_objets[_(#ENV{l,no_lang})]').load($(this).attr("href"));
            return false;
         });  
-        [(#REM)drag and drop]     
-        $( "#selection_objets[_(#ENV{l,no_lang})]" ).sortable({items:"tr.tr_liste"});
-        $( "#selection_objets[_(#ENV{l,no_lang})]" ).bind("sortupdate", function(event, ui) {
-            var ordre = $(this).sortable('toArray').toString();
-            $('#selection_objets[_(#ENV{l,no_lang})]').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre-#ENV{l}-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]-load}|replace{&amp;,&})]&nouvel_ordre='+ordre);
-        });
     });
-    </script>
-  
+</script>

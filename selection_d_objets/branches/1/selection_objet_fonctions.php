@@ -34,6 +34,7 @@ function filtrer_champ($data){
 
 /*Etablit le titre de l'objet*/
 function titre_objet_sel($objet,$contexte){
+
     $exceptions=charger_fonction('exceptions','inc');
     $exception_titre=$exceptions('titre');
     //Les exceptions du titre
@@ -43,7 +44,14 @@ function titre_objet_sel($objet,$contexte){
             $f=explode('/',$contexte['fichier']);
             $titre=$f[1];
             }
-        elseif($objet) $titre=$objet.'_'.$id_objet;
+        elseif($objet){
+            $table_sql = table_objet_sql($objet);
+            $tables=lister_tables_objets_sql();
+            $titre_objet=_T($tables[$table_sql]['texte_objet']);
+            $id=$contexte['id_objet'];
+            if($objet='selection_objet')$id=$contexte['id_selection_objet'];
+           $titre=$titre_objet.' '.$id; 
+        } 
     
     }
     return $titre;
@@ -136,16 +144,19 @@ function generer_modele($id_objet,$objet='article',$fichier='modeles_selection_o
     $exceptions=charger_fonction('exceptions','inc');
     $exception_objet=$exceptions();
     
-
-    if($exception_objet['objet'][$objet]){
+    if($objet){
+          if($exception_objet['objet'][$objet]){
          $objet=$exception_objet['objet'][$objet];
           $table='spip_'.$objet;
-    }
-    else $table='spip_'.$objet.'s';
-    if(!$where)$where='id_'.$objet.'='.$id_objet;
-    
-    if(!$contexte=sql_fetsel('*',$table,$where))$contexte=array();
-    
+        }
+        else $table='spip_'.$objet.'s';
+        if(!$where)$where='id_'.$objet.'='.$id_objet;
+        
+        if(!$contexte=sql_fetsel('*',$table,$where))$contexte=array();
+          
+        }
+    else $contexte=array();
+
     //Filtrer les champs vides
     foreach($env as $k=>$v){
         if(!$v)unset($env[$k]);

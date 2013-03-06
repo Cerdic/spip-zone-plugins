@@ -16,9 +16,7 @@ function action_ranger_dist($arg=null){
 
     switch($action){
         case 'supprimer_ordre' :
-
             include_spip('formulaires/bouton_article');
-
             spip_log('eliminer 1','selection');
                 $where=array(
                     'id_selection_objet='.$id_selection_objet,
@@ -75,7 +73,6 @@ function action_ranger_dist($arg=null){
 
             $result = sql_select("*", "spip_selection_objets", $where,'', "ordre",2);
             
-            
             while ($row = sql_fetch($result)) {
                 if($id_selection_objet==$row["id_selection_objet"]){
                     $o =$ordre+1;
@@ -85,12 +82,12 @@ function action_ranger_dist($arg=null){
                 }
             sql_updateq("spip_selection_objets", array("ordre" =>$o),'id_selection_objet='.$row['id_selection_objet']); 
             }
-                 $where = array(
-                    'id_objet_dest='.$id_objet_dest,
-                    'objet_dest='.sql_quote($objet_dest),
-                    'lang='.sql_quote($lang)    
-                    );            
-        $ordre=$verifier_ordre($where);  
+            $where = array(
+                'id_objet_dest='.$id_objet_dest,
+                'objet_dest='.sql_quote($objet_dest),
+                'lang='.sql_quote($lang)    
+                );            
+            $ordre=$verifier_ordre($where);  
             break;
         //drag&drop
         case 'nouvel_ordre':
