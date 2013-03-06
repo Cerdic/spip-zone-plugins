@@ -2,15 +2,24 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function SelecteurGenerique_jqueryui_forcer($plugins){
+/*function SelecteurGenerique_jqueryui_forcer($plugins){
 	if (defined('DESACTIVER_SELECTEUR_GENERIQUE')
 	AND DESACTIVER_SELECTEUR_GENERIQUE)
 		return $plugins;
 	
 	$plugins[] = 'jquery.ui.autocomplete';
 	return $plugins;
+}*/
+
+
+
+// Pour spip2
+function SelecteurGenerique_jqueryui_forcer($array){
+	$array[] ='jquery.ui.autocomplete';
+	return $array;	
 }
 
+// Pour Spip3
 function SelecteurGenerique_jquery_plugins($plugins){
 	if (defined('DESACTIVER_SELECTEUR_GENERIQUE')
 	AND DESACTIVER_SELECTEUR_GENERIQUE)
