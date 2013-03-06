@@ -4,7 +4,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	
+
 	// A
 	'action' => 'Action ?',
 	'action_modifier' => 'Modifier',
@@ -73,8 +73,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'les_livraisons' => 'Les livraisons',
 	'les_livraisons_effectuees' => 'Les livraisons déjà effectuées',
 	'les_paniers' => 'Les @nb@ paniers de',
-	'les_paniers_vendu' => 'Les @nb@ paniers vendu par',
 	'les_paniers_dispo' => 'Les paniers disponible de @nom@',
+	'les_paniers_vendu' => 'Les @nb@ paniers vendu par',
 	'les_responsabilites' => 'Les @nb@ responsabilités de',
 	'liste_amapiens' => 'Liste des amapiens',
 	'liste_amapiens_enregistres' => 'Liste des amapiens enregistrés',
@@ -99,7 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom' => 'NOM',
 	'non' => 'Non',
 
-	//O
+	// O
 	'oui' => 'Oui',
 
 	// P

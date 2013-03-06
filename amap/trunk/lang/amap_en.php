@@ -44,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_distribution' => 'Giving date',
 	'date_livraison' => 'Delivery date',
 	'depuis_le' => 'since',
+	'disponible' => 'Disponible', # NEW
 	'distribution_paniers' => 'Basket delivery of @nb@',
 	'distribution_paniers_mois' => 'Distribution of the baskets from @date_debut@ to @date_fin@',
 
@@ -70,17 +71,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'information_amap' => 'CSA information',
 
 	// L
+	'la_responsabilite' => 'La responsabilité de', # NEW
+	'le_panier' => 'Le panier de', # NEW
+	'le_panier_vendu' => 'Le panier vendu par', # NEW
 	'les_livraisons' => 'Deliveries',
 	'les_livraisons_effectuees' => 'Past deliveries',
-	'les_paniers' => 'The basket of @nom@',
+	'les_paniers' => 'The basket of @nom@', # MODIF
 	'les_paniers_dispo' => 'Available baskets of @nom@',
-	'les_responsabilites' => 'Responsibilities of @nom@',
+	'les_paniers_vendu' => 'Les @nb@ paniers vendu par', # NEW
+	'les_responsabilites' => 'Responsibilities of @nom@', # MODIF
 	'liste_amapiens' => 'CSA members list',
 	'liste_amapiens_enregistres' => 'registered CSA members list',
 	'liste_livraisons' => 'Deliveries list',
 	'liste_paniers' => 'Baskets list',
 	'liste_paniers_distribuer_le' => 'Basket list to deliver on',
-	'liste_paniers_vendu_par' => 'Baskets list produced by @nom@',
+	'liste_paniers_vendu' => 'Liste des paniers vendu', # NEW
 	'liste_responsables' => 'People in charge list',
 	'livraison' => 'Delivery',
 	'livraison_enregistre_explication' => 'Vous devez avoir déjà distribuer des paniers pour pouvoir enregistré via ce formulaire des contenus de livraison.', # NEW
@@ -96,6 +101,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nom' => 'NAME',
+	'non' => 'Non', # NEW
+
+	// O
+	'oui' => 'Oui', # NEW
 
 	// P
 	'panier' => 'Basket',
