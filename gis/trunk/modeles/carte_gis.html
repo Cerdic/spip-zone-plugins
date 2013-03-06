@@ -75,7 +75,8 @@ Clustering (regroupement de points proches) :
 
 <script type="text/javascript">/*<!\[CDATA\[*/
 var map[(#GET{id})];
-var map_cfg_[(#GET{id})] = {
+if (typeof map_cfg=="undefined") var map_cfg = {};
+map_cfg["[(#GET{id})]"] = {
 "mapid":"map[(#GET{id})]",
 "scrollWheelZoom": [(#ENV{zoom_molette,#ENV{zoom_wheel}}|=={non}|?{false,true})],
 "zoomControl": [(#ENV{no_control,#ENV{aucun_controle}}|!={oui}|?{true,false})][,
@@ -116,13 +117,13 @@ var map_cfg_[(#GET{id})] = {
 "gpx":[(#ENV{gpx,''}|?{[(#ENV{gpx}|is_array|?{#ENV{gpx},#LISTE{#ENV{gpx}}}|gis_kml_to_urls|json_encode)],false})]
 };
 if (typeof(callback_map[(#GET{id})]) === "function") {
-	map_cfg_[(#GET{id})]['callback']=callback_map[(#GET{id})];
+	map_cfg["[(#GET{id})]"]['callback']=callback_map[(#GET{id})];
 }
 
 // Charger le javascript de GIS et initialiser la carte (des que DOM ready)
 jQuery.getScript('[(#PRODUIRE{fond=javascript/gis.js,cluster=#ENV{cluster,non}})]',function(){
 	jQuery(function(){
-	gis_init_map(map_cfg_[(#GET{id})]);
+	gis_init_map(map_cfg["[(#GET{id})]"]);
 	});
 });
 /*\]\]>*/
