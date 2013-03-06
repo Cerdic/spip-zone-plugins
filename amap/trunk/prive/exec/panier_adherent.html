@@ -27,7 +27,7 @@
 <h1 class="grostitre"><:amap:gestion_amap:></h1>
 
 #BOITE_OUVRIR{#CHEMIN_IMAGE{tabledata.gif}|balise_img{'',cadre-icone}|concat{#VAL{amap:vos_paniers}|_T}|wrap{'<h3>'},'simple','titrem'}
-		<INCLURE{fond=prive/inclure/liste_panier_adherent,dispo=0,env}>
-		<INCLURE{fond=prive/inclure/liste_panier_adherent,dispo=1,env}>
+		<INCLURE{fond=prive/inclure/liste_panier_adherent,dispo=non,env}>
+		<INCLURE{fond=prive/inclure/liste_panier_adherent,dispo=oui,env}>
 		<INCLURE{fond=prive/inclure/liste_responsable,env}>
 #BOITE_FERMER

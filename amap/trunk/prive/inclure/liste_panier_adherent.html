@@ -4,15 +4,15 @@
   (c) 2011 - 2013 Amap
   Distribue sous licence GPL
   
-  Appeler depuis ????
+  Appeler depuis ?exec=panier_adherent
 
 ]
 <div class="cadre_padding">
 	<p>
 		#SET{total,0}
-		<BOUCLE_totalpanier(AMAP_PANIERS){id_auteur}{age<0}{dispo=#ENV{dispo,0}} />
-			[(#ENV{dispo,0}|=={0}|oui)[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:reste_panier_recuperer, amap:reste_paniers_recuperer, nb})]]
-			[(#ENV{dispo}|=={1}|oui)[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:panier_disposition, amap:paniers_disposition, nb})]]
+		<BOUCLE_totalpanier(AMAP_PANIERS){id_auteur}{age<0}{dispo=#ENV{dispo,non}} />
+			[(#ENV{dispo,non}|=={non}|oui)[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:reste_panier_recuperer, amap:reste_paniers_recuperer, nb})]]
+			[(#ENV{dispo}|=={oui}|oui)[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:panier_disposition, amap:paniers_disposition, nb})]]
 			#SET{total,#TOTAL_BOUCLE}
 		<//B_totalpanier>
 		<BOUCLE_test(CONDITION){si #GET{total}|!={0}}>
@@ -35,11 +35,11 @@
 	</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_paniers(AMAP_PANIERS) {pagination 20} {par date_distribution}{age<0}{id_auteur}{dispo=#ENV{dispo,0}}>
+	<BOUCLE_paniers(AMAP_PANIERS) {pagination 20} {par date_distribution}{age<0}{id_auteur}{dispo=#ENV{dispo,non}}>
 	<tr>
 		<td class='nom'><BOUCLE_producteur(AUTEURS){tous}{id_auteur=#ID_PRODUCTEUR}>#NOM</BOUCLE_producteur></td>
 		<td class='date_production'>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
-		[(#ENV{dispo,0}|=={0}|oui)[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
+		[(#ENV{dispo,non}|=={non}|oui)[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
 			[(#CONFIG{amap/email}|=={oui}|oui)<!-- envoie par mail d'un panier dispo -->
 			<td class='panier_dispo'><a href='[(#URL_PAGE{panier_dispo}
 				|parametre_url{nom_adherent,#NOM}
