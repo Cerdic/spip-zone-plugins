@@ -385,7 +385,7 @@ Valeur détectée : ',
 	'utiliser_html2spip_descriptif' => 'Il existe 3 modes de conversion :
 -* {{aucune}} : aucune conversion n\'est faite, le code produit par CKEditor est stocké; tel quel dans la base de données,
 -* {{partielle}} : les tags HTML qui peuvent être traduits directement, ainsi que les images sont traduits en typographie SPIP,
--* {{complête}} : aucun tag HTML n\'est préservé. Tout est traduit en typographie SPIP. Cette option utilise la librairie HTML2SPIP pour reconvertir le HTML en typographie SPIP. En activant cette option, vous pouvez utiliser ckeditor tout en préservant l\'usage de la typographie SPIP dans vos articles.',
+-* {{complète}} : aucun tag HTML n\'est préservé. Tout est traduit en typographie SPIP. Cette option utilise la librairie HTML2SPIP pour reconvertir le HTML en typographie SPIP. En activant cette option, vous pouvez utiliser ckeditor tout en préservant l\'usage de la typographie SPIP dans vos articles.',
 	'utiliser_une_vignette_pour_les_images' => 'Utiliser des vignettes de :',
 	'utilise_fontkit' => 'Utiliser les kits de polices Font Squirrel.',
 	'utilise_upload' => 'Autoriser le téléchargement depuis les dialogues de CKEDITOR.',

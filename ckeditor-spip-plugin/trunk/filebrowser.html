@@ -77,17 +77,17 @@
 			case 'flash':
 				define ('_FILEBROWSER_FILETYPE_REGEX', '#('.preg_replace(
 					'~\s*;\s*~', '|', $extauth = ckeditor_lire_config('flash_extensions_autorisees', _CKE_FLASH_EXT_DEF)
-				).')#e') ;
+				).')#ei') ;
 				break ;
 			case 'files':
 				define ('_FILEBROWSER_FILETYPE_REGEX', '#('.preg_replace(
 					'~\s*;\s*~', '|', $extauth = ckeditor_lire_config('files_extensions_autorisees', _CKE_FILES_EXT_DEF)
-				).')#e') ;
+				).')#ei') ;
 				break ;
 			default:
 				define ('_FILEBROWSER_FILETYPE_REGEX', '#('.preg_replace(
 					'~\s*;\s*~', '|', $extauth = ckeditor_lire_config('images_extensions_autorisees', _CKE_IMAGES_EXT_DEF)
-				).')#e') ;
+				).')#ei') ;
 				break ;
 		}
 		if (_request('mode') == 'direct') {

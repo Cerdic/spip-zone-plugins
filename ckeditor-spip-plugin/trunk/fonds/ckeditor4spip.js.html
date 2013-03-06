@@ -122,7 +122,13 @@ function SpipEditor2CKEditor(editor_id){
 	EdConfig.toolbar='Spip'+stack[editor_id].tb;
 	HideSpipUI(editor_id);
 	try {	// fix les problèmes des instances de ckeditor répertoriées, mais non visibles/accessibles du fait du rechargement via ajax
-		CKEDITOR.remove(CKEDITOR.instances[stack[editor_id].editor]) ;
+		if (stack[editor_id].editor) {
+			var instance = CKEDITOR.instances[stack[editor_id].editor] ;
+			if (instance) {
+				exit;
+				CKEDITOR.remove(instance) ;
+			}
+		}
 	} catch (E) { 
 		/* rien */
 	}
