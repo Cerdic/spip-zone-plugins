@@ -177,9 +177,7 @@ var gis_init_map = function(mapcfg) {
 		&& mapcfg['json_points']['url'].length){
 		// Récupération des points à mettre sur la carte, via json externe
 		var args = {};
-		if (typeof mapcfg['json_points']['env']!=="undefined")
-			for(var k in mapcfg['json_points']['env'])
-				args[k] = mapcfg['json_points']['env'][k];
+		jQuery.extend(true, args, mapcfg['json_points']['env']);
 		if (typeof mapcfg['json_points']['objets']!=="undefined"){
 			args["objets"] = mapcfg['json_points']['objets'];
 			if (args["objets"]=="point_libre"){
@@ -193,7 +191,7 @@ var gis_init_map = function(mapcfg) {
 					args["icone"]=mapcfg['json_points']['icone'];
 			}
 		}
-		if (typeof mapcfg['json_points']['limits']!=="undefined")
+		if (typeof mapcfg['json_points']['limit']!=="undefined")
 			args["limit"] = mapcfg['json_points']['limit'];
 		jQuery.getJSON(mapcfg['json_points']['url'],args,
 			function(data) {
