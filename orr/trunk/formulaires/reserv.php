@@ -49,8 +49,8 @@ function formulaires_reserv_verifier_dist($idressource,$date_deb,$date_f,$nom,$i
     // date de fin anterieur à la date de debut
     list($heured,$minuted,$seconded) = explode(':',$tempsd);
     list($heuref,$minutef,$secondef) = explode(':',$tempsf);
-    $timestampd = mktime($heured,$minuted,$seconded,$jourd,$moisd,$anneed);
-    $timestampf = mktime($heuref,$minutef,$secondef,$jourf,$moisf,$anneef);
+    $timestampd = mktime($heured,$minuted,$seconded,$moisd,$jourd,$anneed);
+    $timestampf = mktime($heuref,$minutef,$secondef,$moisf,$jourf,$anneef);
     if ($timestampd>=$timestampf){
         $erreurs['date_fin'] = "date de fin antérieur  ou égale à la date de début";
     }
