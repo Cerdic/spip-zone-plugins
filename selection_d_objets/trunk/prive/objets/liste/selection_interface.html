@@ -11,9 +11,41 @@
     [(#GET{n_langues}|>{1}|oui)<h4 class="titrem">[(#VALEUR|traduire_nom_langue)]</h4>]
     <INCLURE{fond=prive/objets/liste/inc-selection_interface,l=#VALEUR,env,ajax=tableau_so}/>
     #FORMULAIRE_RECHERCHE_OBJETS{#OBJET_DEST,#ID_OBJET_DEST,#VALEUR}  
+    
+<script type="text/javascript">
+    $(function() {
+        [(#REM)action rangement]
+        $('#selection_objets_#VALEUR .tr_liste a.select').click(function(){
+          $('#selection_objets_#VALEUR').load($(this).attr("href"));
+           return false;
+        });  
+        [(#REM)drag and drop]     
+        $( "#selection_objets_#VALEUR" ).sortable({items:"tr.tr_liste"});
+        $( "#selection_objets_#VALEUR" ).bind("sortupdate", function(event, ui) {
+            var ordre = $(this).sortable('toArray').toString();
+            $('#selection_objets_#VALEUR').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre-#VALEUR-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]}|parametre_url{load,prive/objets/liste/inc-selection_interface}|replace{&amp;,&})]&nouvel_ordre='+ordre);
+        });
+    });
+    </script>
 </BOUCLE_langues>
     <INCLURE{fond=prive/objets/liste/inc-selection_interface,env,ajax=tableau_so,l='',langue=''}/>
     #FORMULAIRE_RECHERCHE_OBJETS{#OBJET_DEST,#ID_OBJET_DEST}  
+    
+    <script type="text/javascript">
+    $(function() {
+        [(#REM)action rangement]
+        $('#selection_objets_no_lang .tr_liste a.select').click(function(){
+          $('#selection_objets_no_lang').load($(this).attr("href"));
+           return false;
+        });  
+        [(#REM)drag and drop]     
+        $( "#selection_objets_no_lang" ).sortable({items:"tr.tr_liste"});
+        $( "#selection_objets_no_lang" ).bind("sortupdate", function(event, ui) {
+            var ordre = $(this).sortable('toArray').toString();
+            $('#selection_objets_no_lang').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre-#VALEUR-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]}|parametre_url{load,prive/objets/liste/inc-selection_interface}|replace{&amp;,&})]&nouvel_ordre='+ordre);
+        });
+    });
+    </script>
 <//B_langues>
 #BOITE_FERMER
 </div>

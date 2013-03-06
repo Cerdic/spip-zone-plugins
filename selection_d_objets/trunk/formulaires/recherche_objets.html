@@ -7,7 +7,7 @@
                     
            [(#ENV{types_lien}|count|>{0}|oui)      
             [(#SAISIE{selection,type_lien,
-                    label=ENV{label_lien},
+                    label=#ENV{label_lien},
                     datas=#ENV{types_lien}})]
                 ]
         </ul>
