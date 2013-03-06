@@ -116,14 +116,14 @@ map_cfg["[(#GET{id})]"] = {
 "kml":[(#ENV{kml,''}|?{[(#ENV{kml}|is_array|?{#ENV{kml},#LISTE{#ENV{kml}}}|gis_kml_to_urls|json_encode)],false})],
 "gpx":[(#ENV{gpx,''}|?{[(#ENV{gpx}|is_array|?{#ENV{gpx},#LISTE{#ENV{gpx}}}|gis_kml_to_urls|json_encode)],false})]
 };
-if (typeof(callback_map[(#GET{id})]) === "function") {
-	map_cfg["[(#GET{id})]"]['callback']=callback_map[(#GET{id})];
-}
 
 // Charger le javascript de GIS et initialiser la carte (des que DOM ready)
 jQuery.getScript('[(#PRODUIRE{fond=javascript/gis.js,cluster=#ENV{cluster,non}})]',function(){
 	jQuery(function(){
-	gis_init_map(map_cfg["[(#GET{id})]"]);
+		if (typeof(callback_map[(#GET{id})]) === "function") {
+			map_cfg["[(#GET{id})]"]['callback']=callback_map[(#GET{id})];
+		}
+		gis_init_map(map_cfg["[(#GET{id})]"]);
 	});
 });
 /*\]\]>*/
