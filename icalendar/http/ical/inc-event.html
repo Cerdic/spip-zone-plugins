@@ -1,0 +1,27 @@
+<BOUCLE_evenement(EVENEMENTS){id_evenement}>
+[(#REM) Mise en mémoire des infos géo si présentes ]
+<BOUCLE_geo(GIS?){id_evenement}{0,1}>
+#SET{lat,#LAT}
+#SET{lon,#LON}
+#SET{titre_gis,#TITRE|filtrer_ical}
+#SET{adresse,#ADRESSE|supprimer_tags|textebrut|filtrer_ical}
+#SET{ville,#VILLE|filtrer_ical}
+#SET{code_postal,#CODE_POSTAL|filtrer_ical}
+</BOUCLE_geo>
+BEGIN:VEVENT
+SUMMARY:[(#TITRE|textebrut|filtrer_ical)]
+UID:evenement#ID_EVENEMENT @ [(#URL_SITE_SPIP|filtrer_ical)][
+DTSTAMP:(#DATE_DEBUT|date_ical)][(#HORAIRE|=={oui}|?{[
+DTSTART:(#DATE_DEBUT|date_ical)][
+DTEND:(#DATE_FIN|date_ical)],[
+DTSTART;VALUE=DATE:(#DATE_DEBUT|affdate{Ymd})][
+DTEND;VALUE=DATE:(#DATE_FIN|agenda_jourdecal{1,Ymd})]})][(#GET{titre_gis}|oui)
+LOCATION:#GET{titre_gis}[\, (#GET{adresse})][\, [(#GET{code_postal}) ](#GET{ville})]][(#GET{titre_gis}|non)[
+LOCATION:(#LIEU|PtoBR|textebrut|filtrer_ical)]][(#GET{lat}|et{#GET{lon}}|oui)
+GEO:#GET{lat};#GET{lon}][
+DESCRIPTION:(#DESCRIPTIF|supprimer_tags|textebrut|filtrer_ical)]
+CATEGORIES:<BOUCLE_article(ARTICLES) {id_article=#ID_ARTICLE}>[(#TITRE|textebrut|filtrer_ical)]</BOUCLE_article><B_mots>, <BOUCLE_mots(MOTS?){id_evenement=#ID_EVENEMENT}{", "}>[(#TITRE|textebrut|filtrer_ical)]</BOUCLE_mots>
+URL:[(#URL_EVENEMENT{#ID_EVENEMENT}|url_absolue|filtrer_ical)]
+STATUS:CONFIRMED
+END:VEVENT
+</BOUCLE_evenement>
