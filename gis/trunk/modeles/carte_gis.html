@@ -107,7 +107,7 @@ map_cfg["[(#GET{id})]"] = {
 	"url":"[(#URL_PAGE{gis_json}|url_absolue)]"[,
 	"objets":"(#ENV{objets,#ENV{class}}|trim)"],
 	"limit":[(#ENV{limit,#ENV{limite,500}}|trim)],
-	"env":[(#ENV{args,#ENV}|gis_modele_url_json_env|json_encode)][,
+	"env":[(#ENV*{args,#ENV*}|gis_modele_url_json_env|json_encode)][,
 	"titre" : (#ENV{titre}|json_encode)][,
 	"description" : (#ENV{description}|json_encode)][,
 	"icone" : (#ENV{icone}|json_encode)]
