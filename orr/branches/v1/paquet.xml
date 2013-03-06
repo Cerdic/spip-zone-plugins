@@ -1,7 +1,7 @@
 <paquet
 	prefix="oresource"
 	categorie="divers"
-	version="1.0.1"
+	version="1.0.2"
 	etat="dev"
 	compatibilite="[3.0.1;3.0.*]"
 	logo="img/calendrier-50.png"
