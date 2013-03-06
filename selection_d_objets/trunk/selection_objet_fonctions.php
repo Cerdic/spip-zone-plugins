@@ -34,6 +34,7 @@ function filtrer_champ($data){
 
 /*Etablit le titre de l'objet*/
 function titre_objet_sel($objet,$contexte){
+
     $exceptions=charger_fonction('exceptions','inc');
     $exception_titre=$exceptions('titre');
     //Les exceptions du titre
@@ -43,7 +44,14 @@ function titre_objet_sel($objet,$contexte){
             $f=explode('/',$contexte['fichier']);
             $titre=$f[1];
             }
-        elseif($objet) $titre=$objet.'_'.$id_objet;
+        elseif($objet){
+            $table_sql = table_objet_sql($objet);
+            $tables=lister_tables_objets_sql();
+            $titre_objet=_T($tables[$table_sql]['texte_objet']);
+            $id=$contexte['id_objet'];
+            if($objet='selection_objet')$id=$contexte['id_selection_objet'];
+           $titre=$titre_objet.' '.$id; 
+        } 
     
     }
     return $titre;
