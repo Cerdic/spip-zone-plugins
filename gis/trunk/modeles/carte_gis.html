@@ -119,14 +119,11 @@ if (typeof(callback_map[(#GET{id})]) === "function") {
 	map_cfg_[(#GET{id})]['callback']=callback_map[(#GET{id})];
 }
 
-(function($){
-	// Charger le javascript de GIS et initialiser la carte
-	$(function(){
-		jQuery.getScript('[(#PRODUIRE{fond=javascript/gis.js,cluster=#ENV{cluster,non}})]',function(){
-			gis_init_map(map_cfg_[(#GET{id})]);
-		});
+// Charger le javascript de GIS et initialiser la carte (des que DOM ready)
+jQuery.getScript('[(#PRODUIRE{fond=javascript/gis.js,cluster=#ENV{cluster,non}})]',function(){
+	jQuery(function(){
+	gis_init_map(map_cfg_[(#GET{id})]);
 	});
-
-})(jQuery);
+});
 /*\]\]>*/
 </script>
