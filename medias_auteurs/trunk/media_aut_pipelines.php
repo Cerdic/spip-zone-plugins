@@ -10,13 +10,13 @@
  **/
 function media_aut_affiche_gauche($flux){
 	include_spip('inc/presentation');
-	if ($flux['args']['exec'] == 'documents_edit'){
+	if ($flux['args']['exec'] == 'document_edit'){
 		$flux['data'] .= 
 		debut_cadre_relief('',true,'', _T('media_aut:lie_doc_a_auteur')) .
 		recuperer_fond('inclure/document_auteur', array('id_document' => _request('id_document'))) .
 		fin_cadre_relief(true);
 	}
-	if ($flux['args']['exec'] == 'auteur_infos'){
+	if ($flux['args']['exec'] == 'auteur'){
 		$flux['data'] .= 
 		debut_cadre_relief('',true,'', _T('media_aut:liaisons_auteurs_doc')) .
 		recuperer_fond('inclure/page_auteur_mgauche', array('id_auteur' => _request('id_auteur'))) .
