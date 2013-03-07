@@ -37,19 +37,6 @@ function coordonnees_afficher_fiche_objet($flux) {
 
 
 /**
- * Ajout de l'objet 'adresse'
- * à la liste des objets pouvant recevoir des champs extras
-**/
-function coordonnees_objets_extensibles($objets){
-	return array_merge($objets, array(
-		'adresse' => _T('coordonnees:adresses'),
-		'numero' => _T('coordonnees:numeros'),
-		'email' => _T('coordonnees:emails'),
-	));
-}
-
-
-/**
  * Optimiser la base de donnees en supprimant les liens orphelins
  * de l'objet vers quelqu'un et de quelqu'un vers l'objet.
  *
