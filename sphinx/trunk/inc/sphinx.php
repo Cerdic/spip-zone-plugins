@@ -45,6 +45,9 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 	// les trucs demandés
 	$recherche = trim($env['recherche']);  # recherche fulltext
 
+	# bizarre le ? plante ; est-ce du a "extended wildcards"?
+ 	$recherche = str_replace('?', ' ', $recherche);
+ 
 	// appel par une page mot :
 	//   (ou limiter aux mots-clés)
 	// ou par l'url &mots=italie ; &mots[]=italie&mots[]=economie
