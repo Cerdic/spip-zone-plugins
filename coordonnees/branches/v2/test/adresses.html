@@ -1,0 +1,15 @@
+
+<BOUCLE_auteur(AUTEURS){id_auteur?}{par id_auteur}{0,10}>
+- #NOM<br/>
+<BOUCLE_adresses(ADRESSES){id_auteur}>
+-- #VILLE<br/>
+</BOUCLE_adresses>
+</BOUCLE_auteur>
+
+<br />
+<BOUCLE_adresses2(ADRESSES)>
+- #VILLE<br/>
+<BOUCLE_auteur2(AUTEURS){id_adresse}>
+-- #NOM<br/>
+</BOUCLE_auteur2>
+</BOUCLE_adresses2>

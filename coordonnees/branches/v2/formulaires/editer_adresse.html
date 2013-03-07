@@ -1,0 +1,37 @@
+<div class='formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id_adresse,nouveau}'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable}|oui)
+		<form method='post' action='[(#ENV{action})]'><div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<input type='hidden' name='id_adresse' value='#ENV{id_adresse}' />
+			<input type='hidden' name='objet' value='#ENV{objet}' />
+			<input type='hidden' name='id_objet' value='#ENV{id_objet}' />
+			<ul>
+				[(#SAISIE{input, titre,	label=<:coordonnees:label_titre:>})]
+			[(#ENV{id_objet}|oui)
+				[(#SAISIE{selection, type, label=<:coordonnees:label_type_adresse:>, defaut=#ENV{type}, datas=#ARRAY{work,<:coordonnees:type_adr_work:>, home,<:coordonnees:type_adr_home:>, pref,<:coordonnees:type_adr_pref:>, postal,<:coordonnees:type_adr_postal:>, dom,<:coordonnees:type_adr_dom:>, intl,<:coordonnees:type_adr_intl:>, parcel,<:coordonnees:type_adr_parcel:> } })]
+			]
+				[(#SAISIE{input, voie, label=<:coordonnees:label_voie:>})]
+				[(#SAISIE{input, complement, label=<:coordonnees:label_complement:>})]
+				[(#SAISIE{input, boite_postale, label=<:coordonnees:label_boite_postale:>})]
+				[(#SAISIE{input, code_postal, label=<:coordonnees:label_code_postal:>})]
+				[(#SAISIE{input, ville, label=<:coordonnees:label_ville:>})]
+				[(#SAISIE{input, region, label=<:coordonnees:label_region:>})]
+			[(#PLUGIN{pays}|?{
+				[(#SAISIE{pays, pays, code_pays=oui, label=<:coordonnees:label_pays:>, defaut=FR})]
+			,
+				[(#SAISIE{input, pays, label=<:coordonnees:label_pays:>, defaut=FR, maxlength=3, size=2, explication=<coordonnees:code_ISO_3166:> })]
+			})]
+			</ul>
+			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+			<!--extra-->
+			<p class='boutons'>
+				<input type='submit' class='submit' name='enregistrer' value='<:bouton_enregistrer:>' />
+			</p>
+
+		</div></form>
+	]
+</div>
