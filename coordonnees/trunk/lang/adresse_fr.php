@@ -6,9 +6,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// E
-	'erreur_code_boite_postal' => 'Veuillez indiquer soit le code postal,soit la boîte postale',
-
 	// I
 	'icone_creer_adresse' => 'Créer une adresse',
 	'icone_modifier_adresse' => 'Modifier cette adresse',
