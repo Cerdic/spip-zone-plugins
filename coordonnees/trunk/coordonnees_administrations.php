@@ -1,14 +1,25 @@
 <?php
 /**
- * Plugin Coordonnees
- * Licence GPL (c) 2010 - Marcimat / Ateliers CYM
+ * Fichier gérant l'installation et désinstallation du plugin Coordonnees
+ *
+ * @plugin     Coordonnees
+ * @copyright  2013
+ * @author     Marcimat / Ateliers CYM
+ * @licence    GNU/GPL
+ * @package    SPIP\Coordonnees\Installation
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
- * Fonction d'installation du plugin et de mise à jour.
+ * Fonction d'installation et de mise à jour du plugin Coordonnees
+ *
+ * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @param string $version_cible
+ *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
+ * @return void
 **/
 function coordonnees_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
@@ -95,7 +106,11 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible) {
 
 
 /**
- * Fonction de désinstallation du plugin.
+ * Fonction de désinstallation du plugin Coordonnees
+ *
+ * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @return void
 **/
 function coordonnees_vider_tables($nom_meta_base_version) {
 
@@ -112,7 +127,8 @@ function coordonnees_vider_tables($nom_meta_base_version) {
 
 
 /**
- * Fonction mise a jour vers 1.3
+ * Fonction mise a jour du plugin Coordonnees vers 1.3
+ * @return void
 **/
 function coordonnees_upgrade_1_3() {
 	// On parcourt les adresses pour remplir le code du pays
@@ -130,8 +146,9 @@ function coordonnees_upgrade_1_3() {
 
 
 /**
- * Fonction mise a jour vers 1.8.2
+ * Fonction mise a jour du plugin Coordonnees vers 1.8.2
  * Metas : conversion des objets «coordonnables» : on utilise les noms des tables (auteur -> spip_auteurs)
+ * @return void
 **/
 function coordonnees_upgrade_1_8_2() {
 	include_spip('inc/config');

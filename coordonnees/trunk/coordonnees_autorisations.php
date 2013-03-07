@@ -1,16 +1,26 @@
 <?php
 /**
- * Plugin Coordonnees
- * Licence GPL (c) 2010 - Marcimat / Ateliers CYM
+ * Définit les autorisations du plugin Coordonnees
+ *
+ * @plugin     Coordonnees
+ * @copyright  2013
+ * @author     Marcimat / Ateliers CYM
+ * @licence    GNU/GPL
+ * @package    SPIP\Coordonnees\Autorisations
  */
+
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// declaration vide pour ce pipeline.
-function cerise_coordonnees_autoriser(){}
+/**
+ * Fonction d'appel pour le pipeline
+ * @pipeline autoriser */
+function coordonnees_autoriser(){}
 
 
-// Objet adresses
+// --------------
+// Objet Adresses
+
 // creer
 function autoriser_adresse_creer_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite')); 
@@ -37,7 +47,9 @@ function autoriser_associeradresses_dist($faire, $type, $id, $qui, $opt) {
 }
 
 
+// --------------
 // Objet numeros
+
 // creer
 function autoriser_numero_creer_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite')); 
@@ -64,8 +76,9 @@ function autoriser_associernumeros_dist($faire, $type, $id, $qui, $opt) {
 }
 
 
-
+// ------------
 // Objet emails
+
 // creer
 function autoriser_email_creer_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite')); 

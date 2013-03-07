@@ -2,65 +2,65 @@
   saisie:			'input'
   options:
     nom:			'titre'
-    label:			<:coordonnees:label_titre:>
-    explication:		<:coordonnees:explication_titre_adresse:>
+    label:			<:adresse:label_titre:>
+    explication:		<:adresse:explication_titre_adresse:>
     obligatoire:		'oui'
 -
   saisie:			'selection'
   options:
     nom:			'type'
-    label:			<:coordonnees:label_type_adresse:>
+    label:			<:adresse:label_type_adresse:>
     obligatoire:		'oui'
     datas:
-      home:			<:coordonnees:type_adr_home:>
-      work:			<:coordonnees:type_adr_work:>
-      dom:			<:coordonnees:type_adr_dom:>
-      pref:			<:coordonnees:type_adr_pref:>
-      postal:			<:coordonnees:type_adr_postal:>
-      intl:			<:coordonnees:type_adr_intl:>
-      parcel:			<:coordonnees:type_adr_parcel:>
+      home:			<:adresse:type_adr_home:>
+      work:			<:adresse:type_adr_work:>
+      dom:			<:adresse:type_adr_dom:>
+      pref:			<:adresse:type_adr_pref:>
+      postal:			<:adresse:type_adr_postal:>
+      intl:			<:adresse:type_adr_intl:>
+      parcel:			<:adresse:type_adr_parcel:>
 -
   saisie:			'input'
   options:
     nom:			'voie'
-    label:			<:coordonnees:label_voie:>
+    label:			<:adresse:label_voie:>
     obligatoire:		'oui'
 -
   saisie:			'input'
   options:
     nom:			'complement'
-    label:			<:coordonnees:label_complement:>
-    placeholder:		<:coordonnees:explication_complement:>
+    label:			<:adresse:label_complement:>
+    placeholder:		<:adresse:explication_complement:>
 -
   saisie:			'input'
   options:
     nom:			'boite_postale'
-    label:			<:coordonnees:label_boite_postale:>
+    label:			<:adresse:label_boite_postale:>
     verifier:
       type:			'code_postal'
 -
   saisie:			'input'
   options:
     nom:			'code_postal'
-    label:			<:coordonnees:label_code_postal:>
+    label:			<:adresse:label_code_postal:>
     verifier:
       type:			'code_postal'
 -
   saisie:			'input'
   options:
     nom:			'region'
-    label:			<:coordonnees:label_region:>
+    label:			<:adresse:label_region:>
 -
   saisie:			'input'
   options:
     nom:			'ville'
-    label:			<:coordonnees:label_ville:>
+    label:			<:adresse:label_ville:>
     obligatoire:		'oui'
 -
   saisie:			'pays'
   options:
     nom:			'pays'
-    label:			<:coordonnees:label_pays:>
+    label:			<:adresse:label_pays:>
     code_pays:			'oui'
     defaut:			'FR'
     obligatoire:		'oui'

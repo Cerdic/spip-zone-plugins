@@ -19,15 +19,15 @@
 			[(#TYPE|match{x400}|non)<a href="mailto:#EMAIL">]#EMAIL[(#TYPE|match{x400}|non)</a>]
 		</td>
 		<td class='action'>
-			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'email', id_coordonnee:'[(#ID_EMAIL)]'}});" href="#coordonnees" title="<:coordonnees:modifier_email:>">
-			[(#CHEMIN_IMAGE{edit-12.png}|balise_img{'coordonnees:modifier_email'})]
+			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'email', id_coordonnee:'[(#ID_EMAIL)]'}});" href="#coordonnees" title="<:email:icone_modifier_email:>">
+			[(#CHEMIN_IMAGE{edit-12.png}|balise_img{'email:icone_modifier_email'})]
 			</a>
 			[(#BOUTON_ACTION{
-				[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'coordonnees:supprimer_email'})],
+				[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'email:icone_supprimer_email'})],
 				#URL_ACTION_AUTEUR{dissocier_supprimer_coordonnee,email/#ID_EMAIL/#OBJET/#ID_OBJET,#SELF},
 				'button link ajax',
-				'',
-				<:coordonnees:supprimer_email:>}
+				<:email:texte_confirmer_supprimer_email:>,
+				<:email:icone_supprimer_email:>}
 			)]
 		</td>
 	</tr>

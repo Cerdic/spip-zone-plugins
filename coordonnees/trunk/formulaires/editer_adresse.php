@@ -48,7 +48,7 @@ function formulaires_editer_adresse_verifier_dist($id_adresse='new', $retour='',
 
 	// verifier qu'il y a au moins le code ou la boite postale
 	if ( strlen(_request('code_postal')==0) AND strlen(_request('boite_postale'))==0 ) {
-		$erreurs['boite_postale'] = _T('coordonnees:erreur_code_boite_postal');
+		$erreurs['boite_postale'] = _T('adresse:erreur_code_boite_postal');
 		$erreurs['code_postal'] = '&nbsp;';
 	}
 

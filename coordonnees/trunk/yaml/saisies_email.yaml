@@ -2,23 +2,23 @@
   saisie:			'input'
   options:
     nom:			'titre'
-    label:			<:coordonnees:label_titre:>
-    explication:		<:coordonnees:explication_titre_email:>
+    label:			<:email:label_titre:>
+    explication:		<:email:explication_titre_email:>
     obligatoire:		'oui'
 -
   saisie:			'selection'
   options:
     nom:			'type'
-    label:			<:coordonnees:label_type_email:>
+    label:			<:email:label_type_email:>
     obligatoire:		'oui'
     datas:
-      home:			<:coordonnees:type_mel_home:>
-      work:			<:coordonnees:type_mel_work:>
+      home:			<:email:type_mel_home:>
+      work:			<:email:type_mel_work:>
 -
   saisie:			'input'
   options:
     nom:			'email'
-    label:			<:coordonnees:label_email:>
+    label:			<:email:label_email:>
     obligatoire:		'oui'
     verifier:
       type:			'email'

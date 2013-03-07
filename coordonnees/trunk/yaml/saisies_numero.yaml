@@ -2,36 +2,36 @@
   saisie:			'input'
   options:
     nom:			'titre'
-    label:			<:coordonnees:label_titre:>
-    explication:		<:coordonnees:explication_titre_numero:>
+    label:			<:numero:label_titre:>
+    explication:		<:numero:explication_titre_numero:>
     obligatoire:		'oui'
 -
   saisie:			'selection'
   options:
     nom:			'type'
-    label:			<:coordonnees:label_type_numero:>
+    label:			<:numero:label_type_numero:>
     obligatoire:		'oui'
     datas:
-      home:			<:coordonnees:type_tel_home:>
-      work:			<:coordonnees:type_tel_work:>
-      cell:			<:coordonnees:type_tel_cell:>
-      pref:			<:coordonnees:type_tel_pref:>
-      voice:			<:coordonnees:type_tel_voice:>
-      msg:			<:coordonnees:type_tel_msg:>
-      fax:			<:coordonnees:type_tel_fax:>
-      dsl:			<:coordonnees:type_tel_dsl:>
-      video:			<:coordonnees:type_tel_video:>
-      pager:			<:coordonnees:type_tel_pager:>
-      bbs:			<:coordonnees:type_tel_bbs:>
-      modem:			<:coordonnees:type_tel_modem:>
-      car:			<:coordonnees:type_tel_car:>
-      isdn:			<:coordonnees:type_tel_isdn:>
-      pcs:			<:coordonnees:type_tel_pcs:>
+      home:			<:numero:type_tel_home:>
+      work:			<:numero:type_tel_work:>
+      cell:			<:numero:type_tel_cell:>
+      pref:			<:numero:type_tel_pref:>
+      voice:			<:numero:type_tel_voice:>
+      msg:			<:numero:type_tel_msg:>
+      fax:			<:numero:type_tel_fax:>
+      dsl:			<:numero:type_tel_dsl:>
+      video:			<:numero:type_tel_video:>
+      pager:			<:numero:type_tel_pager:>
+      bbs:			<:numero:type_tel_bbs:>
+      modem:			<:numero:type_tel_modem:>
+      car:			<:numero:type_tel_car:>
+      isdn:			<:numero:type_tel_isdn:>
+      pcs:			<:numero:type_tel_pcs:>
 -
   saisie:			'input'
   options:
     nom:			'numero'
-    label:			<:coordonnees:label_numero:>
+    label:			<:numero:label_numero:>
     obligatoire:		'oui'
     verifier:
       type:			'telephone'

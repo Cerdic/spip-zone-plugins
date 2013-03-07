@@ -17,8 +17,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function logo_type_($id='', $val='') {
 	include_spip('inc/utils');
 	global $formats_logos;
+	switch ($id) {
+		case "adr"; $prefix_lang = "adresse"; break;
+		case "tel"; $prefix_lang = "numero"; break;
+		case "email"; $prefix_lang = "email"; break;
+		case "mel"; $prefix_lang = "email"; break;
+	} 
 	$type = strtolower($val);
-	$lang = _T( ($id ? ('coordonnees:type_'. $id) : 'perso:type' )  . '_'.$type ); // les types libres sont traites par le fichier de langue perso
+	$lang = _T( ($id ? ($prefix_lang.':type_'. $id) : 'perso:type' )  . '_'.$type ); // les types libres sont traites par le fichier de langue perso
 	foreach ($formats_logos as $format) { // inspiration source: ecrire/inc/chercher_logo.php
 		$fichier = 'type'. ($id ? ('_' . $id) : '') . ($type ? ('_' . $type) : '') . '.' . $format;
 		if ( $chemin = chemin_image($fichier) )
