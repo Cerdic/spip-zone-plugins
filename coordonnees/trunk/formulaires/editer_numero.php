@@ -9,6 +9,61 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/actions');
 include_spip('inc/editer');
 
+
+/**
+ * Definition des saisies du formulaire
+ */
+function formulaires_editer_numero_saisies_dist(){
+	$saisies = array (
+		array (
+			'saisie' => 'input',
+			'options' => array (
+				'nom' => 'titre',
+				'label' => _T('numero:label_titre'),
+				'placeholder' => _T('numero:placeholder_titre'),
+				'obligatoire' => 'oui'
+			)
+		),
+		array (
+			'saisie' => 'selection',
+			'options' => array (
+				'nom' => 'type',
+				'label' => _T('numero:label_type'),
+				'obligatoire' => 'oui',
+				'datas' => array (
+					'home' => _T('numero:type_tel_home'),
+					'work' => _T('numero:type_tel_work'),
+					'cell' => _T('numero:type_tel_cell'),
+					'pref' => _T('numero:type_tel_pref'),
+					'voice' => _T('numero:type_tel_voice'),
+					'msg' => _T('numero:type_tel_msg'),
+					'fax' => _T('numero:type_tel_fax'),
+					'dsl' => _T('numero:type_tel_dsl'),
+					'video' => _T('numero:type_tel_video'),
+					'pager' => _T('numero:type_tel_pager'),
+					'bbs' => _T('numero:type_tel_bbs'),
+					'modem' => _T('numero:type_tel_modem'),
+					'car' => _T('numero:type_tel_car'),
+					'isdn' => _T('numero:type_tel_isdn'),
+					'pcs' => _T('numero:type_tel_pcs')
+				)
+			)
+		),
+		array (
+			'saisie' => 'input',
+			'options' => array (
+				'nom' => 'numero',
+				'label' => _T('numero:label_numero'),
+				'obligatoire' => 'oui',
+				'verifier' => array (
+					'type' => 'telephone'
+				)
+			)
+		),
+	);
+	return $saisies;
+}
+
 /**
  * Identifier le formulaire en faisant abstraction des parametres qui ne representent pas l'objet edite
  */
@@ -22,9 +77,6 @@ function formulaires_editer_numero_identifier_dist($id_numero='new', $retour='',
 function formulaires_editer_numero_charger_dist($id_numero='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('numero',$id_numero,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 
-	// importer les saisies yaml
-	include_spip('inc/yaml');
-	$valeurs['_saisies_numero'] = _T_ou_typo(yaml_decode_file(find_in_path('yaml/saisies_numero.yaml')));
 	// valeur de la saisie "type" dans la table de liens
 	if ( $associer_objet ) {
 		list($objet, $id_objet) = explode('|', $associer_objet);
@@ -40,11 +92,6 @@ function formulaires_editer_numero_charger_dist($id_numero='new', $retour='', $a
 function formulaires_editer_numero_verifier_dist($id_numero='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	// verification generique
 	$erreurs = formulaires_editer_objet_verifier('numero',$id_numero);
-
-	// verification des saisies yaml
-	include_spip('inc/yaml');
-	include_spip('inc/saisies');
-	$erreurs = saisies_verifier(yaml_decode_file(find_in_path('yaml/saisies_numero.yaml')));
 
 	return $erreurs;
 }

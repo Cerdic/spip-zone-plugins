@@ -7,8 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'explication_titre_adresse' => 'Un nom pour identifier l\'adresse',
-	'explication_complement' => 'étage, n° du bâtiment...',
 	'erreur_code_boite_postal' => 'Veuillez indiquer soit le code postal,soit la boîte postale',
 
 	// I
@@ -22,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_adresse' => 'Adresse',
 	'label_titre' => 'Titre',
-	'label_type_adresse' => 'Type d\'adresse',
+	'label_type' => 'Type d\'adresse',
 	'label_voie' => 'N<sup>o</sup> & voie',
 	'label_complement' => 'Complément',
 	'label_region' => 'Région',
@@ -30,6 +28,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_code_postal' => 'Code Postal',
 	'label_ville' => 'Ville',
 	'label_pays' => 'Pays',
+
+	// P
+	'placeholder_titre' => 'Un nom pour identifier l\'adresse',
+	'placeholder_complement' => 'étage, n° du bâtiment...',
 
 	// T
 	'texte_ajouter_adresse' => 'Ajouter une adresse',

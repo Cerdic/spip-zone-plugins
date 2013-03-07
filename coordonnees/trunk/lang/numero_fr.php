@@ -6,9 +6,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// E
-	'explication_titre_numero' => 'Un nom pour identifier le numéro',
-
 	// I
 	'icone_creer_numero' => 'Créer une numéro',
 	'icone_modifier_numero' => 'Modifier ce numéro',
@@ -21,7 +18,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_numero' => 'Numéro de téléphone',
 	'label_telephone' => 'Téléphone',
 	'label_titre' => 'Titre',
-	'label_type_numero' => 'Type de numéro',
+	'label_type' => 'Type de numéro',
+
+	// P
+	'placeholder_titre' => 'Un nom pour identifier le numéro',
 
 	// T
 	'texte_ajouter_numero' => 'Ajouter un numéro',

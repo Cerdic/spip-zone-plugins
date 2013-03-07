@@ -10,6 +10,101 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 /**
+ * Definition des saisies du formulaire
+ */
+function formulaires_editer_adresse_saisies_dist(){
+	$saisies = array (
+		array (
+			'saisie' => 'input',
+			'options' => array (
+				'nom' => 'titre',
+				'label' => _T('adresse:label_titre'),
+				'placeholder' => _T('adresse:placeholder_titre'),
+				'obligatoire' => 'oui'
+			)
+		),
+		array (
+			'saisie' => 'selection',
+			'options' => array (
+				'nom' => 'type',
+				'label' => _T('adresse:label_type'),
+				'obligatoire' => 'oui',
+				'datas' => array (
+					'home' => _T('adresse:type_adr_home'),
+					'work' => _T('adresse:type_adr_work'),
+					'dom'=> _T('adresse:type_adr_dom'),
+					'pref' => _T('adresse:type_adr_pref'),
+					'postal' => _T('adresse:type_adr_postal'),
+					'intl' => _T('adresse:type_adr_intl'),
+					'parcel' => _T('adresse:type_adr_parcel')
+				)
+			)
+		),
+		array (
+			'saisie' => 'input',
+			'options' => array (
+				'nom' => 'voie',
+				'label' => _T('adresse:label_voie'),
+				'obligatoire' => 'oui'
+			)
+		),
+		array (
+			'saisie' => 'input',
+			'options' => array (
+				'nom' => 'complement',
+				'label' => _T('adresse:label_complement'),
+				'placeholder' => _T('adresse:placeholder_complement')
+			)
+		),
+		array (
+			'saisie' => 'input',
+			'options' => array (
+				'nom' => 'boite_postale',
+				'label' => _T('adresse:label_boite_postale'),
+			)
+		),
+		array (
+			'saisie' => 'input',
+			'options' => array (
+				'nom' => 'code_postal',
+				'label' => _T('adresse:label_code_postal'),
+				'obligatoire' => 'oui',
+				'verifier' => array (
+					'type' => 'code_postal'
+				)
+			)
+		),
+		array (
+			'saisie' => 'input',
+			'options' => array (
+				'nom' => 'region',
+				'label' => _T('adresse:label_region')
+			)
+		),
+		array (
+			'saisie' => 'input',
+			'options' => array (
+				'nom' => 'ville',
+				'label' => _T('adresse:label_ville'),
+				'obligatoire' => 'oui',
+			)
+		),
+		array (
+			'saisie' => 'pays',
+			'options' => array (
+				'nom' => 'pays',
+				'label' => _T('adresse:label_pays'),
+				'obligatoire' => 'oui',
+				'class' => 'chosen',
+				'defaut' => 'FR',
+				'code_pays' => 'oui'
+			)
+		),
+	);
+	return $saisies;
+}
+
+/**
  * Identifier le formulaire en faisant abstraction des parametres qui ne representent pas l'objet edite
  */
 function formulaires_editer_adresse_identifier_dist($id_adresse='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
@@ -22,9 +117,6 @@ function formulaires_editer_adresse_identifier_dist($id_adresse='new', $retour='
 function formulaires_editer_adresse_charger_dist($id_adresse='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('adresse',$id_adresse,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 
-	// importer les saisies yaml
-	include_spip('inc/yaml');
-	$valeurs['_saisies_adresse'] = _T_ou_typo(yaml_decode_file(find_in_path('yaml/saisies_adresse.yaml')));
 	// valeur de la saisie "type" dans la table de liens
 	if ( $associer_objet ) {
 		list($objet, $id_objet) = explode('|', $associer_objet);
@@ -40,11 +132,6 @@ function formulaires_editer_adresse_charger_dist($id_adresse='new', $retour='', 
 function formulaires_editer_adresse_verifier_dist($id_adresse='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	// verification generique
 	$erreurs = formulaires_editer_objet_verifier('adresse',$id_adresse);
-
-	// verification des saisies yaml
-	include_spip('inc/yaml');
-	include_spip('inc/saisies');
-	$erreurs = saisies_verifier(yaml_decode_file(find_in_path('yaml/saisies_adresse.yaml')));
 
 	// verifier qu'il y a au moins le code ou la boite postale
 	if ( strlen(_request('code_postal')==0) AND strlen(_request('boite_postale'))==0 ) {

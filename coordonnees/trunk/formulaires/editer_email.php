@@ -9,6 +9,53 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/actions');
 include_spip('inc/editer');
 
+
+/**
+ * Definition des saisies du formulaire
+ */
+function formulaires_editer_email_saisies_dist(){
+	$saisies = array (
+		array (
+			'saisie' => 'input',
+			'options' => array (
+				'nom' => 'titre',
+				'label' => _T('email:label_titre'),
+				'placeholder' => _T('email:placeholder_titre'),
+				'obligatoire' => 'oui'
+			)
+		),
+		array (
+			'saisie' => 'selection',
+			'options' => array (
+				'nom' => 'type',
+				'label' => _T('email:label_type'),
+				'obligatoire' => 'oui',
+				'datas' => array (
+					'home' => _T('email:type_mel_home'),
+					'work' => _T('email:type_mel_work')
+				)
+			)
+		),
+		array (
+			'saisie' => 'input',
+			'options' => array (
+				'nom' => 'email',
+				'label' => _T('email:label_email'),
+				'placeholder' => _T('email:placeholder_email'),
+				'obligatoire' => 'oui',
+				'verifier' => array (
+					'type' => 'email',
+					'options' => array (
+						'mode' => 'normal'
+					)
+				)
+			)
+		),
+	);
+	return $saisies;
+}
+
+
 /**
  * Identifier le formulaire en faisant abstraction des parametres qui ne representent pas l'objet edite
  */
@@ -22,9 +69,6 @@ function formulaires_editer_email_identifier_dist($id_email='new', $retour='', $
 function formulaires_editer_email_charger_dist($id_email='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('email',$id_email,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 
-	// importer les saisies yaml
-	include_spip('inc/yaml');
-	$valeurs['_saisies_email'] = _T_ou_typo(yaml_decode_file(find_in_path('yaml/saisies_email.yaml')));
 	// valeur de la saisie "type" dans la table de liens
 	if ( $associer_objet ) {
 		list($objet, $id_objet) = explode('|', $associer_objet);
@@ -40,11 +84,6 @@ function formulaires_editer_email_charger_dist($id_email='new', $retour='', $ass
 function formulaires_editer_email_verifier_dist($id_email='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	// verification generique
 	$erreurs = formulaires_editer_objet_verifier('email',$id_email);
-
-	// verification des saisies yaml
-	include_spip('inc/yaml');
-	include_spip('inc/saisies');
-	$erreurs = saisies_verifier(yaml_decode_file(find_in_path('yaml/saisies_email.yaml')));
 
 	return $erreurs;
 }

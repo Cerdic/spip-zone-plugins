@@ -7,8 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'explication_titre_email' => 'Un nom pour identifier le courriel',
-	'explication_type_email' => 'Le type peut être \'perso\' ou \'pro\'.',
+	'explication_type' => 'Le type peut être \'perso\' ou \'pro\'.',
 
 	// I
 	'icone_creer_email' => 'Créer un courriel',
@@ -21,7 +20,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_email' => 'Courriel',
 	'label_titre' => 'Titre',
-	'label_type_email' => 'Type de courriel',
+	'label_type' => 'Type de courriel',
+
+	// P
+	'placeholder_titre' => 'Un nom pour identifier le courriel',
+	'placeholder_email' => 'email@site.com',
 
 	// T
 	'texte_ajouter_email' => 'Ajouter un courriel',
