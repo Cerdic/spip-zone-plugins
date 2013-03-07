@@ -11,6 +11,8 @@
 	- sw_lon = lon - 10°            	longitude du sud-ouest de la bounding box
 	- ne_lat = lat + 10°            	latitude du nord-est de la bounding box
 	- ne_lon = lon + 10°            	longitude du nord-est de la bounding box
+	- largeur = 100%
+	- hauteur = 350px
 	- nodraw = oui						permet de désactiver la barre d'édition pour revenir au comportement par défaut
 	- noimport = oui					permet de masquer le champ d'import de fichier GPX/KML
 	- boutons = #ARRAY{marker,non}		permet de spécifier les boutons à ne pas afficher dans la barre d'édition
@@ -34,7 +36,7 @@
 
 <li class="pleine_largeur editer editer_[(#ENV{nom})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]"[ data-id="(#ENV{id_saisie})"]>
 #ENV*{inserer_debut}
-<div id="map_[(#ENV{nom})]" name="formMap" class="formMap" style="width: 100%; height: 350px"></div>
+<div id="map_[(#ENV{nom})]" name="formMap" class="formMap" style="width: #ENV{largeur,100%}; height: #ENV{hauteur,350px}"></div>
 <script type="text/javascript">
 <!--
 var form_map;
@@ -170,7 +172,8 @@ var geocoder;]
 						#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
 						["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
 						"icon_size": \[#GET{icon_w},#GET{icon_h}\],
-						"icon_anchor": \[[(#GET{icon_w}|div{2})],[(#GET{icon_h})]\]]
+						"icon_anchor": \[[(#GET{icon_w}|div{2})],[(#GET{icon_h})]\],
+						"popup_anchor": \[1,[-(#GET{icon_h}|div{1.2})]\]]
 					}
 				}]
 		}
@@ -301,7 +304,7 @@ var geocoder;]
 #ENV*{inserer_fin}
 </li>
 [(#GET{geocoder}|oui)
-<li class="rechercher_adresse">
+<li class="rechercher_adresse editer_[(#ENV{nom})]">
 	<label for="champ_#ENV{nom}_geocoder"><:gis:label_rechercher_address:></label>
 	<input type="text" class="text" name="champ_#ENV{nom}_geocoder" id="champ_#ENV{nom}_geocoder" value="" />
 	<a id="#ENV{nom}_rechercher_geocodage"><:info_rechercher:></a>
