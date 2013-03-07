@@ -1,0 +1,27 @@
+<plugin>
+	<nom>Media auteurs</nom>
+	<auteur>Yohann Prigent</auteur>
+	<licence>GPL v3</licence>
+	<version>1.0</version>
+	<etat>stable</etat>
+	<description>
+		Liez vos documents à des auteurs
+	</description>
+	<prefix>media_aut</prefix>
+	<icon>img/medias_aut-32.png</icon>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>media_aut_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>media_aut_pipelines.php</inclure>
+	</pipeline>
+
+	<fonctions>media_aut_pipelines.php</fonctions>
+	<categorie>multimedia</categorie>
+	<necessite id="SPIP" version="[2.0.9;]" />
+	<necessite id="spip_bonux" version="[1.8.10;]" />
+	<necessite id="saisies" version="[1.13.0;]" />
+	<necessite id="medias" version="[1.3.0;]" />
+</plugin>

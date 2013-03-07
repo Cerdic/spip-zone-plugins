@@ -1,0 +1,3 @@
+.formulaire_spip_compact select.not, #navigation .formulaire_spip select.not, #extra .formulaire_spip select.not {width:170px;}
+table.presentation_liaison_docaut {width:170px;}
+table.presentation_liaison_docaut tr td.nom_auteur_docaut {text-align:right;}
