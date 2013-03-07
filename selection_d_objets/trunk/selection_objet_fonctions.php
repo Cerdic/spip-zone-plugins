@@ -38,7 +38,7 @@ function titre_objet_sel($objet,$contexte){
     $exceptions=charger_fonction('exceptions','inc');
     $exception_titre=$exceptions('titre');
     //Les exceptions du titre
-    if(!$titre=$contexte[$exception_titre[$objet]])$titre=$contexte['titre'];
+    if(!isset($contexte[$exception_titre[$objet]]) and isset($contexte['titre']))$titre=$contexte['titre'];
     if(!$titre){
         if($objet=='document'){
             $f=explode('/',$contexte['fichier']);
@@ -48,8 +48,8 @@ function titre_objet_sel($objet,$contexte){
             $table_sql = table_objet_sql($objet);
             $tables=lister_tables_objets_sql();
             $titre_objet=_T($tables[$table_sql]['texte_objet']);
-            $id=$contexte['id_objet'];
-            if($objet='selection_objet')$id=$contexte['id_selection_objet'];
+            if(isset($contexte['id_objet']))$id=$contexte['id_objet'];
+            if($objet='selection_objet' AND isset($contexte['id_selection_objet']))$id=$contexte['id_selection_objet'];
            $titre=$titre_objet.' '.$id; 
         } 
     

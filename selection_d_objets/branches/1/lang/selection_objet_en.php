@@ -67,6 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_creer_asselection_objetcier_objet' => 'Create and link an object',
 	'titre_langue_objet' => 'Language of this Selected Object', # MODIF
 	'titre_logo_selection_objet' => 'Logo of this Selected Object', # MODIF
+	'titre_selection_objet' => 'Objet Sélectionné', # NEW
 	'titre_selection_objets' => 'Selected Object', # MODIF
 	'titre_selection_objets_rubrique' => 'Selected Objects of the section', # MODIF
 	'type_liens_defaut' => 'link types by default, can be overloaded below',

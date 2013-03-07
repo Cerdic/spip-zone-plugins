@@ -13,6 +13,7 @@ function action_ranger_dist($arg=null){
 
 	list($action,$lang,$id_selection_objet,$ordre,$objet_dest,$id_objet_dest,$load)=explode('-',$arg);
     $load=_request('load');
+    $id=_request('id');
 
     switch($action){
         case 'supprimer_ordre' :
@@ -103,7 +104,10 @@ function action_ranger_dist($arg=null){
         }
 
     if($load){
-        $contexte = array('id_objet_dest'=>$id_objet_dest,'objet_dest'=>$objet_dest,'l'=>$lang);
+        include_spip('public/assembler');
+        $cont=calculer_contexte();
+        $contexte = array('id_objet_dest'=>$id_objet_dest,'objet_dest'=>$objet_dest,'l'=>$lang,'id'=>$id);
+        $contexte=array_merge($cont,$contexte);
         echo recuperer_fond($load,$contexte);
     } 
 return $return;
