@@ -110,7 +110,7 @@ function selection_objet_modifier ($id_selection_objet, $set=null) {
     
     $c = collecter_requests(
         // white list
-        array('titre', 'descriptif','id_objet_dest','objet_dest'),
+        array('titre', 'descriptif','id_objet_dest','objet_dest','url'),
         // black list
         array('statut'),
         // donnees eventuellement fournies
