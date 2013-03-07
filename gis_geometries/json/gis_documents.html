@@ -1,4 +1,4 @@
-		<BOUCLE_mots(MOTS){gis}{id_mot ?}{id_groupe ?}{id_article ?}{id_rubrique ?}{id_breve ?}{id_syndic ?}{id_forum ?}{recherche ?}{0, #ENV{limit}}{","}>
+		<BOUCLE_doc(DOCUMENTS){gis}{id_article ?}{id_rubrique ?}{id_secteur ?}{id_mot ?}{recherche ?}{media ?}{0, #ENV{limit}}{","}>
 		{"type": "Feature",
 		["geometry": (#GEOMETRY|wkt_to_json),]
 		"id":"#ID_GIS",
@@ -18,4 +18,4 @@
 			"icon_size": \[[(#GET{icon_w})],[(#GET{icon_h})]\],
 			"icon_anchor": \[[(#GET{icon_w}|div{2})],[(#GET{icon_h})]\],
 			"popup_anchor": \[1,[-(#GET{icon_h}|div{1.2})]\]]
-		}}</BOUCLE_mots>
+		}}</BOUCLE_doc>
