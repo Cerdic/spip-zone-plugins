@@ -1,12 +1,16 @@
 <?php
 /**
- * Plugin Coordonnees pour Spip 3
+ * Plugin Coordonnees
  * Licence GPL (c) 2010 - Marcimat / Ateliers CYM
  */
 
-function coordonnees_upgrade($nom_meta_base_version, $version_cible){
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
+/**
+ * Fonction d'installation du plugin et de mise à jour.
+**/
+function coordonnees_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 	$maj['create'] = array(
 		array('maj_tables', array('spip_adresses')),
@@ -15,7 +19,7 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		array('maj_tables', array('spip_numeros_liens')),
 		array('maj_tables', array('spip_emails')),
 		array('maj_tables', array('spip_emails_liens')),
-		array('ecrire_meta', 'coordonnees', serialize(array('objets'=>array('auteur'))))
+		array('ecrire_meta', 'coordonnees', serialize(array('objets'=>array('spip_auteurs'))))
 	);
 	$maj['1.1'] = array(
 		array('sql_update', array(array("voie" => "CONCAT(numero, ' ', voie)"),array("numero IS NOT NULL", "numero <> ''"))),
@@ -36,7 +40,7 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_alter', 'TABLE spip_adresses CHANGE pays_code pays varchar(2) not null default ""'),
 	);
 
-	// On avait supprimer les types, mais ils reviennent en force mais dans les LIENS
+	// On avait supprime les types, mais ils reviennent en force mais dans les LIENS
 	$maj['1.4'] = array(
 			array('sql_alter', 'TABLE spip_adresses_liens ADD type varchar(25) not null default ""'),
 			array('sql_alter', 'TABLE spip_adresses_liens DROP PRIMARY KEY'),
@@ -51,7 +55,7 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 			);
 	// mettre les auteurs par defaut comme objet «coordonnable»
 	$maj['1.5'] = array(
-		array('ecrire_meta','coordonnees', serialize(array('objets'=>array('auteur'))))
+		array('ecrire_meta','coordonnees', serialize(array('objets'=>array('auteur')))),
 	);
 
 	// ajout du champs region a la table adresses
@@ -71,7 +75,7 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_updateq', "spip_numeros_liens", array('type'=>'cell'), "LOWER(type) LIKE 'mob%'"),
 	);
 
-  // Definition des tables principales par declarer_tables_objets_sql au lieu de declarer_tables_principales
+	// Definition des tables principales par declarer_tables_objets_sql au lieu de declarer_tables_principales
 	$maj['1.8'] = array(
 		array('maj_tables', array('spip_adresses', 'spip_adresses_liens', 'spip_numeros', 'spip_numeros_liens', 'spip_emails', 'spip_emails_liens')),
 	);
@@ -80,28 +84,19 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		array('maj_tables', array('spip_adresses_liens', 'spip_numeros_liens', 'spip_emails_liens')),
 	);
 
+	// Metas : conversion des objets «coordonnables» : on utilise les noms des tables (auteur -> spip_auteurs)
+	$maj['1.8.2']= array(
+		array('coordonnees_upgrade_1_8_2'),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 
-function coordonnees_upgrade_1_3()
-{
-			// On parcourt les adresses pour remplir le code du pays
-		$adresses = sql_allfetsel('id_adresse,pays', 'spip_adresses');
-		if ($adresses and is_array($adresses)){
-			foreach ($adresses as $adresse){
-				$ok &= sql_update(
-					'spip_adresses',
-					array('pays_code' => '(SELECT code FROM spip_pays WHERE id_pays='.intval($adresse['pays']).')'),
-					'id_adresse='.intval($adresse['id_adresse'])
-				);
-			}
-		}
-}
-
-
+/**
+ * Fonction de désinstallation du plugin.
+**/
 function coordonnees_vider_tables($nom_meta_base_version) {
 
 	sql_drop_table("spip_adresses");
@@ -113,6 +108,38 @@ function coordonnees_vider_tables($nom_meta_base_version) {
 
 	effacer_meta('coordonnees');
 	effacer_meta($nom_meta_base_version);
+}
+
+
+/**
+ * Fonction mise a jour vers 1.3
+**/
+function coordonnees_upgrade_1_3() {
+	// On parcourt les adresses pour remplir le code du pays
+	$adresses = sql_allfetsel('id_adresse,pays', 'spip_adresses');
+	if ($adresses and is_array($adresses)){
+		foreach ($adresses as $adresse){
+			$ok &= sql_update(
+				'spip_adresses',
+				array('pays_code' => '(SELECT code FROM spip_pays WHERE id_pays='.intval($adresse['pays']).')'),
+				'id_adresse='.intval($adresse['id_adresse'])
+			);
+		}
+	}
+}
+
+
+/**
+ * Fonction mise a jour vers 1.8.2
+ * Metas : conversion des objets «coordonnables» : on utilise les noms des tables (auteur -> spip_auteurs)
+**/
+function coordonnees_upgrade_1_8_2() {
+	include_spip('inc/config');
+	if ( $objets = lire_config('coordonnees/objets', null, true) AND is_array($objets) AND count($objets) > 0 ) {
+		foreach ($objets as $objet) $objets_sql[] = table_objet_sql($objet);
+		effacer_config('coordonnees/objets');
+		ecrire_config('coordonnees/objets', $objets_sql);
+	}
 }
 
 ?>

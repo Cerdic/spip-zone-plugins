@@ -1,0 +1,43 @@
+[(#SET{defaut_tri,#ARRAY{
+	numero,1, 
+	id_numero,1,
+	points,-1
+}})]
+#SET{id_numero_exclu, #ENV{coordonnee}|=={numero}|?{#ENV{id_coordonnee}}}
+<B_liste_numeros>
+#ANCRE_PAGINATION
+<div class="liste-objets numeros coordonnees">
+<table class='spip liste'>
+	<tbody>
+	<BOUCLE_liste_numeros(NUMEROS liens){id_numero != #GET{id_numero_exclu}}{id_mot?}{objet?}{id_objet?}{where?}{recherche?}{tri #ENV{par,numero},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+		[(#COMPTEUR_BOUCLE|=={1}|oui) <td class='picto' rowspan='#TOTAL_BOUCLE'></td> ]
+		<td class='#EDIT{titre} titre principale'>
+			[(#TYPE|logo_type_tel) ]#TITRE
+		</td>
+		<td class='#EDIT{numero} numero'>
+			#NUMERO
+			[(#REM) Un coup pour les champs extras ]
+			[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,numero,id_objet,#ID_NUMERO,contexte,[(#ENV**|unserialize)]})],data,''})]})]
+		</td>
+		<td class='action'>
+			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'numero', id_coordonnee:'[(#ID_NUMERO)]'}});" href="#coordonnees" title="<:coordonnees:modifier_numero:>">
+			[(#CHEMIN_IMAGE{edit-12.png}|balise_img{'coordonnees:modifier_numero'})]
+			</a>
+			[(#BOUTON_ACTION{
+				[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'coordonnees:supprimer_numero'})],
+				#URL_ACTION_AUTEUR{dissocier_supprimer_coordonnee,numero/#ID_NUMERO/#OBJET/#ID_OBJET,#SELF},
+				'button link ajax',
+				'',
+				<:coordonnees:supprimer_numero:>}
+			)]
+		</td>
+	</tr>
+	</BOUCLE_liste_numeros>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_numeros>[
+<div class="liste-objets coordonnees numeros caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_numeros>

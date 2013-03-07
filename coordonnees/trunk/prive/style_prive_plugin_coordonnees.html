@@ -1,21 +1,46 @@
-[(#REM)
-
-	Ce squelette definit les styles de l'espace prive
-
-	Note: l'entete "Vary:" sert a repousser l'entete par
-	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
-	genant en cas de "rotation du cookie de session" apres
-	un changement d'IP (effet de clignotement).
-
-	ATTENTION: il faut absolument le charset sinon Firefox croit que
-	c'est du text/html !
-]
-#CACHE{3600*100,cache-client}
+#CACHE{0}
+[(#REM)<style>]
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-.liste-elements.adresses .type_adresse,			
-.liste-elements.numeros .type_numero,			
-.liste-elements.emails .type_email {
-	width:20px;
-}		
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+
+/*========================================================
+  === BOITE OBJET ASSOCIES A UN AUTRE DANS FICHE OBJET ===
+  ========================================================*/
+
+/* icones ajouter */
+.icones-ajouter 		{ position: absolute; right: .4em; top: .2em; }
+.coordonnee.icone.ajouter.right { clear: none; padding-right: 0; }
+.coordonnee.icone.ajouter.right a img {
+				position: static;
+				float: #ENV{left};
+				margin-top: auto;
+				margin-#ENV{left}: .7em;
+				margin-#ENV{right}: .3em;
+				}
+
+/* formulaire creation */
+.coordonnees .creer .formulaire_spip { margin: 0; }
+.coordonnees .bouton_fermer	{ display: block; text-align: #ENV{right}; }
+
+/* listes */
+.liste-objets.coordonnees	{ margin: .7em 0 0; }
+.liste-objets.coordonnees img	{ vertical-align: middle; }
+.liste-objets.coordonnees .liste tr:first-child td{ border-top: 0; }
+.liste-objets.coordonnees .liste tr:last-child td{ border-bottom: 0; }
+.liste-objets.coordonnees .picto{ width: 30px;
+				border-bottom: 0;
+				border-right: 1px solid #ddd;
+				background-color: #eee;
+				background-color:rgba(0,0,0,.05);
+				background-position: center center;
+				background-repeat: no-repeat;
+				}
+.numeros .liste .picto		{ background-image: url([(#CHEMIN_IMAGE{numero-24.png})]); }
+.adresses .liste .picto		{ background-image: url([(#CHEMIN_IMAGE{adresse-24.png})]); }
+.emails .liste .picto		{ background-image: url([(#CHEMIN_IMAGE{email-24.png})]); }
+.liste-objets.coordonnees .titre{ width: 35%; }
+
+

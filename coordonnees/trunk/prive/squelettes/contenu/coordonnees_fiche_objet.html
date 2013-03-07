@@ -1,0 +1,32 @@
+[(#REM)
+	Affiche les coordonnées liées à un objet, permet d'en créer & associer de nouvelles.
+][(#REM)
+	Appelé par le pipeline 'afficher_fiche_objet'
+]
+
+[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{coordonnees-24.png}|balise_img{<:coordonnees:titre_coordonnees:>,cadre-icone}) ]<:coordonnees:titre_coordonnees:>,'simple coordonnees'})]
+<a name='coordonnees'></a>
+
+[(#REM)  ICONES AJOUTER ]
+[(#ENV{coordonnee}|non)
+<div class="icones-ajouter">
+	[(#SELF|parametre_url{coordonnee,adresse}|ancre_url{coordonnees}|icone_horizontale{<:coordonnees:ajouter_adresse_court:>,adresse,new,'coordonnee ajouter ajax right'})]
+	[(#SELF|parametre_url{coordonnee,email}|ancre_url{coordonnees}|icone_horizontale{<:coordonnees:ajouter_email_court:>,email,new,'coordonnee ajouter ajax right'})]
+	[(#SELF|parametre_url{coordonnee,numero}|ancre_url{coordonnees}|icone_horizontale{<:coordonnees:ajouter_telephone_court:>,numero,new,'coordonnee ajouter ajax right'})]
+</div>
+]
+
+[(#REM) FORMULAIRE CREATION ]
+[(#ENV{coordonnee}|oui)
+	[<a href="[(#SELF|parametre_url{coordonnee,''}|parametre_url{id_coordonnee,''}|ancre_url{coordonnees})]" class="ajax bouton_fermer preload">(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{title,<:bouton_fermer:>})</a>]
+	<div class='creer ajax'>
+	[(#FORMULAIRE_{[editer_(#ENV{coordonnee})],#ENV{id_coordonnee,oui},'',#OBJET|concat{'|',#ID_OBJET}})]
+	</div>
+]
+
+[(#REM) LISTES DES COORDONNEES LIEES ]
+<BOUCLE_listes(DATA){liste adresse,numero,email}>
+[(#INCLURE{fond=prive/objets/liste/#VALEURs_lies, env, ajax})]
+</BOUCLE_listes>
+
+#BOITE_FERMER

@@ -1,0 +1,49 @@
+[(#SET{defaut_tri,#ARRAY{
+	pays,1, 
+	ville,1,
+	id_adresse,1,
+	points,-1
+}})]
+#SET{id_adresse_exclue, #ENV{coordonnee}|=={adresse}|?{#ENV{id_coordonnee}}}
+<B_liste_adresses>
+#ANCRE_PAGINATION
+<div class="liste-objets adresses coordonnees">
+<table class='spip liste'>
+	<tbody>
+	<BOUCLE_liste_adresses(ADRESSES liens){id_adresse != #GET{id_adresse_exclus}}{id_mot?}{objet?}{id_objet?}{where?}{recherche?}{tri #ENV{par,pays},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+		[(#COMPTEUR_BOUCLE|=={1}|oui) <td class='picto' rowspan='#TOTAL_BOUCLE'></td> ]
+		<td class='#EDIT{titre} titre principale'>
+			[(#TYPE|logo_type_adr) ]#TITRE
+		</td>
+		<td class='adresse'>
+			[<div class='voie'>(#VOIE)</div>]
+			[<div class='complement'>(#COMPLEMENT)</div>]
+			[<div class='boite_postale'>(#BOITE_POSTALE)</div>]
+			[<div class='region'>(#REGION)</div>]
+			[<div class='code_postal'>#CODE_POSTAL (#VILLE)</div>]
+			<B_pays><div class='pays nom_pays'><BOUCLE_pays(PAYS ?){code=#PAYS}>#NOM</BOUCLE_pays></div></B_pays>[<div class='pays code_pays'>(#NOM)</div>]<//B_pays>
+			[(#REM) Un coup pour les champs extras ]
+			[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,adresse,id_objet,#ID_ADRESSE,contexte,[(#ENV**|unserialize)]})],data,''})]})]
+		</td>
+		<td class='action'>
+			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'adresse', id_coordonnee:'[(#ID_ADRESSE)]'}});" href="#coordonnees" title="<:coordonnees:modifier_adresse:>">
+			[(#CHEMIN_IMAGE{edit-12.png}|balise_img{'coordonnees:modifier_adresse'})]
+			</a>
+			[(#BOUTON_ACTION{
+				[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'coordonnees:supprimer_adresse'})],
+				#URL_ACTION_AUTEUR{dissocier_supprimer_coordonnee,adresse/#ID_ADRESSE/#OBJET/#ID_OBJET,#SELF},
+				'button link ajax',
+				'',
+				<:coordonnees:supprimer_adresse:>}
+			)]
+		</td>
+	</tr>
+	</BOUCLE_liste_adresses>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_adresses>[
+<div class="liste-objets adresses coordonnees caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_adresses>

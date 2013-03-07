@@ -12,22 +12,42 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_adresse' => 'Ajouter une adresse',
 	'ajouter_email' => 'Ajouter un email',
 	'ajouter_telephone' => 'Ajouter un numéro',
+	'ajouter_adresse_court' => 'Ajouter adresse',
+	'ajouter_email_court' => 'Ajouter email',
+	'ajouter_telephone_court' => 'Ajouter téléphone',
 
 	// C
 	'configuration_coordonnees' => 'Configuration des coordonnées',
 	'confirmer_suppression_adresse' => 'Voulez-vous vraiment supprimer cette adresse ?',
 	'confirmer_suppression_email' => 'Voulez-vous vraiment supprimer ce courriel ?',
 	'confirmer_suppression_numero' => 'Voulez-vous vraiment supprimer ce numéro ?',
+	'creer_adresse' => 'Créer une nouvelle adresse',
+	'creer_email' => 'Créer un nouvel email',
+	'creer_numero' => 'Créer un nouveau numéro de téléphone',
 
 	// E
 	'editer_adresse' => 'Éditer une adresse',
 	'editer_email' => 'Éditer un courriel',
 	'editer_numero' => 'Éditer un numéro',
 	'emails' => 'Courriels',
+	'erreur_code_boite_postal' => 'Veuillez indiquer soit le code postal,soit la boîte postale',
+	'explication_complement' => 'Etage, bâtiment...',
 	'explication_objets_actifs' => 'Sur quels objets éditoriaux proposer les coordonnées ?',
 	'explication_type_email' => 'Le type peut être \'perso\' ou \'pro\'.',
+	'explication_titre_adresse' => 'Un nom pour identifier l\'adresse',
+	'explication_titre_numero' => 'Un nom pour identifier le numéro',
+	'explication_titre_email' => 'Un nom pour identifier l\'email',
 
 	// I
+	'info_aucun_adresse' => 'Aucune adresse',
+	'info_aucun_email' => 'Aucun email',
+	'info_aucun_numero' => 'Aucun numéro de téléphone',
+	'info_1_adresse' => '1 adresse',
+	'info_1_email' => '1 email',
+	'info_1_numero' => '1 numéro de téléphone',
+	'info_nb_adresse' => '@nb@ adresses',
+	'info_nb_email' => '@nb@ emails',
+	'info_nb_numero' => '@nb@ numéros de téléphone',
 	'info_adresse_utilisee_par' => 'Adresse utilisée par :',
 	'info_email_utilise_par' => 'Courriel utilisé par :',
 	'info_gauche_numero_adresse' => 'N° Adresse',
@@ -39,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_nouvelle_adresse' => 'Nouvelle adresse',
 
 	// L
+	'label_adresse' => 'Adresse',
 	'label_boite_postale' => 'Boîte Postale',
 	'label_code_postal' => 'Code Postal',
 	'label_complement' => 'Complément',
@@ -72,6 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer_numero' => 'Supprimer ce numéro',
 
 	// T
+	'texte_retour' => 'Retour',
 	'titre_coordonnees' => 'Coordonnées',
 	'type_adr_dom' => 'Résidentielle',
 	'type_adr_home' => 'Personnelle',

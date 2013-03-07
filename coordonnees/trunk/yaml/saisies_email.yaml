@@ -1,0 +1,27 @@
+-
+  saisie:			'input'
+  options:
+    nom:			'titre'
+    label:			<:coordonnees:label_titre:>
+    explication:		<:coordonnees:explication_titre_email:>
+    obligatoire:		'oui'
+-
+  saisie:			'selection'
+  options:
+    nom:			'type'
+    label:			<:coordonnees:label_type_email:>
+    obligatoire:		'oui'
+    datas:
+      home:			<:coordonnees:type_mel_home:>
+      work:			<:coordonnees:type_mel_work:>
+-
+  saisie:			'input'
+  options:
+    nom:			'email'
+    label:			<:coordonnees:label_email:>
+    obligatoire:		'oui'
+    verifier:
+      type:			'email'
+      options:
+        mode:			'normal'
+        disponible:		'oui'

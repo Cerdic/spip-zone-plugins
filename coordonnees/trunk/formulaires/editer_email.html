@@ -1,28 +1,21 @@
-
-<div class='formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id_email,nouveau}'>
-
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_email,nouveau}'>
+	[(#CHEMIN_IMAGE{email-24.png}|balise_img{<:coordonnees:emails:>,cadre-icone})]
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-	[(#ENV{editable}|oui)
-		<form method='post' action='[(#ENV{action})]'><div>
-			#ACTION_FORMULAIRE{#ENV{action}}
-			<input type='hidden' name='id_email' value='#ENV{id_email}' />
-			<input type='hidden' name='objet' value='#ENV{objet}' />
-			<input type='hidden' name='id_objet' value='#ENV{id_objet}' />
-			<ul>
-			[(#ENV{id_objet}|oui)
-				[(#SAISIE{selection, type, label=<:coordonnees:label_type_email:>, defaut=#ENV{type}, datas=#ARRAY{work,<:coordonnees:type_mel_work:>, home,<:coordonnees:type_mel_home:> } })]
-			]
-				[(#SAISIE{input, titre,	label=<:coordonnees:label_titre:>})]
-				[(#SAISIE{input, email, label=<:coordonnees:label_email:>})]
-			</ul>
-			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
-			<!--extra-->
-			<p class='boutons'>
-				<input type='submit' name='enregistrer' value='<:bouton_enregistrer:>' />
-			</p>
-
-		</div></form>
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_email' value='#ENV{id_email}' />
+		<ul>
+			#GENERER_SAISIES{#ENV{_saisies_email}}
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
 	]
 </div>
+[(#ENV**{message_ok}|oui)
+<script type="text/javascript">jQuery(document).ready(function($) { ajaxReload('coordonnees', {args:{coordonnee:'', id_coordonnee:''}}); });</script>
+]

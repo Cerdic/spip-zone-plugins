@@ -1,44 +1,36 @@
 <paquet
 	prefix="coordonnees"
 	categorie="auteur"
-	version="2.0.18"
-	schema="1.8.1"
+	version="2.1.0"
+	schema="1.8.2"
 	etat="test"
-	compatibilite="[3.0.5;["
-	logo="images/addressbook-128.png"
+	compatibilite="[3.0.5;3.0.*]"
+	logo="prive/themes/spip/images/addressbook-128.png"
 	documentation="http://www.spip-contrib.net/Plugin-Coordonnees"
 >
 
-	<nom>Coordonn&eacute;es</nom>
-
+	<nom>Coordonnées</nom>
 	<auteur>Matthieu Marcillaud</auteur>
 	<auteur lien="http://www.cym.fr">Cyril MARION</auteur>
-
 	<licence>GNU/GPL</licence>
 	<traduire gestionnaire="salvatore" module="coordonnees" reference="fr" />
 
-
-
-
-
+	<necessite nom="saisies"	compatibilite="[1.24.0;]" />
+	<necessite nom="pays"		compatibilite="[1.0.5;]" />
+	<necessite nom="verifier"	compatibilite="[0.1.15;]" />
+	<necessite nom="yaml"		compatibilite="[1.5.0;]" />
 
 	<!-- Declaration des tables -->
-	<pipeline nom="declarer_tables_objets_sql" inclure="base/coordonnees.php" />
-	<pipeline nom="declarer_tables_interfaces" inclure="base/coordonnees.php" />
-	<pipeline nom="declarer_tables_auxiliaires" inclure="base/coordonnees.php" />
-
+	<pipeline nom="declarer_tables_objets_sql"	inclure="base/coordonnees.php" /> 
+	<pipeline nom="declarer_tables_interfaces"	inclure="base/coordonnees.php" /> 
+	<pipeline nom="declarer_tables_auxiliaires"	inclure="base/coordonnees.php" />
 	<!-- Autorisations -->
-	<pipeline nom="autoriser" inclure="coordonnees_autorisations.php" />
-
+	<pipeline nom="autoriser"			inclure="coordonnees_autorisations.php" />
 	<!-- Éléments d'interface -->
-	<pipeline nom="affiche_milieu" inclure="coordonnees_pipelines.php" />
-
+	<pipeline nom="afficher_fiche_objet"		inclure="coordonnees_pipelines.php" />
 	<!-- avec plugin champs extras 2 -->
-	<pipeline nom="objets_extensibles" inclure="coordonnees_pipelines.php" />
-
-
-
-	<necessite nom="saisies" compatibilite="[1.14.0;]" />
-	<necessite nom="pays" compatibilite="[1.0.5;]" />
+	<pipeline nom="objets_extensibles"		inclure="coordonnees_pipelines.php" />
+	<!-- optimiser liens -->
+	<pipeline nom="optimiser_base_disparus"		inclure="coordonnees_pipelines.php" /> 
 
 </paquet>
