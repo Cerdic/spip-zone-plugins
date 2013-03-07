@@ -47,14 +47,27 @@ function selection_objet_inserer($id_objet,$objet) {
         if($desc['lang'])$lang=sql_getfetsel('lang',$table_sql,'id_'.$objet_table.'='.$id_objet);
         else $lang=$GLOBALS['visiteur_session']['lang'];
         }
+    
+    // Verifier l'ordre
 
+    $where = array(
+        'id_objet_dest='.$id_objet_dest,
+        'objet_dest='.sql_quote($objet_dest),
+        'lang='.sql_quote($lang),
+        );
+    $verifier_ordre=charger_fonction('verifier_ordre','inc');
+    
+    //le nombre de résultats
+    $ordre=$verifier_ordre($where);
     
 
     $champs = array(
         'objet_dest'=>$objet_dest, 
         'id_objet_dest'=>$id_objet_dest,                                   
-        'lang' => $lang,
-        'langue_choisie' => 'non');
+        'lang' => $lang,     
+        'langue_choisie' => 'non',
+        'ordre' => $ordre+1,    //    
+        );
     
     // Envoyer aux plugins
     $champs = pipeline('pre_insertion',
@@ -105,30 +118,18 @@ function selection_objet_modifier ($id_selection_objet, $set=null) {
     );
 
     // Si la selection_objet est publiee, invalider les caches et demander sa reindexation
-    $t = sql_fetsel("statut,lang,id_objet_dest,objet_dest", "spip_selection_objets", "id_selection_objet=$id_selection_objet");
+    $t = sql_fetsel("statut,lang,id_objet_dest,objet_dest,ordre", "spip_selection_objets", "id_selection_objet=$id_selection_objet");
     if ($t['statut'] == 'publie') {
         $invalideur = "id='selection_objet/$id_selection_objet'";
         $indexation = true;
     }
     
-    //verifier l'ordre
-    $where = array(
-        'id_objet_dest='.$t['id_objet_dest'],
-        'objet_dest='.sql_quote($t['objet_dest']),
-        'lang='.sql_quote($t['lang']),
-        );
-    $verifier_ordre=charger_fonction('verifier_ordre','inc');
-    $ordre=$verifier_ordre($where);
-    
-    if(!$id_objet=_request('id_objet')){
-        $c['ordre']=$ordre+1;
 
-    }
-    else $objet=_request('objet');
+
     if ($err = objet_modifier_champs('selection_objet', $id_selection_objet,
         array(
             'nonvide' => array(
-                'titre' => _T('selection_objets:titre_nouvelle_selection_objet')." "._T('info_numero_abbreviation').$id_selection_objet,            
+         
                 ),                
             'invalideur' => $invalideur,
             'indexation' => $indexation,
