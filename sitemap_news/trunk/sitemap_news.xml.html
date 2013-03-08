@@ -5,7 +5,7 @@
 	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
 	xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
 >
-	<BOUCLE_derniers_articles(ARTICLES){age<=2}{id_rubrique?}{id_mot?}>
+	<BOUCLE_derniers_articles(ARTICLES){age<=2}{!par date}{0,1000}{id_rubrique?}{id_mot?}>
 	<url>
 		<loc>[(#URL_ARTICLE|url_absolue)]</loc>
 		<news:news>
