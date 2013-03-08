@@ -1,8 +1,0 @@
-#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
-<div class="nettoyeur"></div>
-
-<INCLURE{fond=prive/objets/liste/orr_ressources, par=orr_ressource_nom, env, ajax, sinon=<:orr_ressource:info_aucun_orr_ressource:>}>
-
-[(#AUTORISER{creer,orr_ressource})
-	[(#URL_ECRIRE{orr_ressource_edit,new=oui}|icone_verticale{<:orr_ressource:icone_creer_orr_ressource:>,orr_ressource,new,right})]
-]
