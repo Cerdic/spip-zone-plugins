@@ -54,10 +54,10 @@ function formulaires_editer_numero_saisies_dist(){
 			'options' => array (
 				'nom' => 'numero',
 				'label' => _T('numero:label_numero'),
-				'obligatoire' => 'oui',
-				'verifier' => array (
-					'type' => 'telephone'
-				)
+				'obligatoire' => 'oui'
+			),
+			'verifier' => array (
+				'type' => 'telephone'
 			)
 		),
 	);

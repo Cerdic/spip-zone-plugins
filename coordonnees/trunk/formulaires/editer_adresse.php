@@ -69,9 +69,9 @@ function formulaires_editer_adresse_saisies_dist(){
 				'nom' => 'code_postal',
 				'label' => _T('adresse:label_code_postal'),
 				'obligatoire' => 'oui',
-				'verifier' => array (
-					'type' => 'code_postal'
-				)
+			),
+			'verifier' => array (
+				'type' => 'code_postal'
 			)
 		),
 		array (

@@ -42,12 +42,12 @@ function formulaires_editer_email_saisies_dist(){
 				'nom' => 'email',
 				'label' => _T('email:label_email'),
 				'placeholder' => _T('email:placeholder_email'),
-				'obligatoire' => 'oui',
-				'verifier' => array (
-					'type' => 'email',
-					'options' => array (
-						'mode' => 'normal'
-					)
+				'obligatoire' => 'oui'
+			),
+			'verifier' => array (
+				'type' => 'email',
+				'options' => array (
+					'mode' => 'normal'
 				)
 			)
 		),
