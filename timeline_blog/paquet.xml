@@ -1,0 +1,23 @@
+<paquet
+	prefix="timeline"
+	categorie="squelette"
+	version="0.2"
+	etat="test"
+	compatibilite="[3.0.0-beta;3.0.99]"
+	logo="clock-spiral.jpg"
+	documentation="http://contrib.spip.net/"
+>	
+
+	<nom>TimeLine</nom>
+	<!-- squelette de blog avec affichage d'articles et commentaires -->
+	<!-- photo de vignette : centralasian, Creative Commons Attribution 2.0 License -->
+
+	<auteur lien="http://contrib.spip.net/ydikoi">ydikoi</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<necessite nom="Z" compatibilite="[1.7.0;1.99.99]" />
+
+	<utilise nom="menus" />
+
+</paquet>
