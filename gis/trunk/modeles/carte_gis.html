@@ -95,6 +95,7 @@ map_cfg["[(#GET{id})]"] = {
 "control_type":[(#ENV{control_type,#ENV{controle_type}}|=={non}|?{false,true})],
 "no_control":[(#ENV{no_control,#ENV{aucun_controle}}|=={oui}|?{true,false})],
 "scale":[(#ENV{scale}|=={oui}|?{true,false})],
+"overview":[(#ENV{overview}|=={oui}|?{true,false})],
 "fullscreen":[(#ENV{fullscreen}|=={oui}|?{true,false})],
 "cluster":[(#ENV{cluster}|=={oui}|?{true,false})],
 "clusterMaxZoom":[(#ENV{clusterMaxZoom, #ENV{maxZoom}|?{#ENV{maxZoom}|moins{2},0}})],
