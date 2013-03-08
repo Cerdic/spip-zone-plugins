@@ -1,0 +1,20 @@
+<paquet
+	prefix="sitemap_news"
+	categorie="maintenance"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo=""
+	documentation="http://contrib.spip.net/4340"
+>
+
+	<nom>Sitemap d’actualités</nom>
+	<!-- Gestion des forums privés et publics dans SPIP -->
+
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<auteur lien="http://www.latribunedelart.com">La Tribune de l’Art</auteur>
+	<copyright>2013</copyright>
+	<licence>GPL v3</licence>
+
+	<traduire module="paquet-sitemap_news" reference="fr" gestionnaire="salvatore" />
+</paquet>

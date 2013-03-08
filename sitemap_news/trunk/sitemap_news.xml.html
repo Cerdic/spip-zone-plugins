@@ -1,0 +1,23 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/xml; charset=utf-8}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+	xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+>
+	<BOUCLE_derniers_articles(ARTICLES){age<=2}{id_rubrique?}{id_mot?}>
+	<url>
+		<loc>[(#URL_ARTICLE|url_absolue)]</loc>
+		<news:news>
+			<news:publication>
+				<news:name>#NOM_SITE_SPIP</news:name>
+				<news:language>fr</news:language>
+			</news:publication>
+			<news:genres>OpEd</news:genres>
+			<news:publication_date>[(#DATE|affdate{Y-m-d})]</news:publication_date>
+			<news:title>#TITRE</news:title>
+			<B_mots><news:keywords><BOUCLE_mots(MOTS?){id_article}{","}>#TITRE</BOUCLE_mots></news:keywords></B_mots>
+		</news:news>
+	</url>
+	</BOUCLE_derniers_articles>
+</urlset>
