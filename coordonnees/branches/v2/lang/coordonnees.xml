@@ -1,4 +1,4 @@
-<traduction module="coordonnees" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/coordonnees/trunk/lang/" reference="fr">
+<traduction module="coordonnees" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/coordonnees/branches/v2/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.net/tradlang_module/coordonnees?lang_cible=en">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
