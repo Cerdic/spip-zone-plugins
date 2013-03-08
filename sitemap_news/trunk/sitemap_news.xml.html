@@ -10,13 +10,13 @@
 		<loc>[(#URL_ARTICLE|url_absolue)]</loc>
 		<news:news>
 			<news:publication>
-				<news:name>#NOM_SITE_SPIP</news:name>
-				<news:language>fr</news:language>
+				<news:name>[(#NOM_SITE_SPIP|texte_backend)]</news:name>
+				<news:language>#LANG</news:language>
 			</news:publication>
 			<news:genres>OpEd</news:genres>
 			<news:publication_date>[(#DATE|affdate{Y-m-d})]</news:publication_date>
-			<news:title>#TITRE</news:title>
-			<B_mots><news:keywords><BOUCLE_mots(MOTS?){id_article}{","}>#TITRE</BOUCLE_mots></news:keywords></B_mots>
+			<news:title>[(#TITRE|texte_backend)]</news:title>
+			<B_mots><news:keywords><BOUCLE_mots(MOTS?){id_article}{","}>[(#TITRE|texte_backend)]</BOUCLE_mots></news:keywords></B_mots>
 		</news:news>
 	</url>
 	</BOUCLE_derniers_articles>
