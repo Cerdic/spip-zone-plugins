@@ -1,8 +1,8 @@
 <paquet
 	prefix="facteur"
 	categorie="communication"
-	version="2.4.5"
-	etat="stable"
+	version="3.0.0"
+	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/facteur-32.png"
 	schema="1.1"

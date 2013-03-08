@@ -63,7 +63,39 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 			$message_html	= $corps;
 		}
 		else {
-			$message_texte	= nettoyer_caracteres_mail($corps);
+			// Autodetection : tester si le mail est en HTML
+			if (strpos($headers,"Content-Type:")===false
+				AND strpos($corps,"<")!==false // eviter les tests suivants si possible
+				AND $ttrim = trim($corps)
+				AND substr($ttrim,0,1)=="<"
+			  AND substr($ttrim,-1,1)==">"
+			  AND stripos($ttrim,"</html>")!==false){
+
+				if(!strlen($sujet)){
+					// dans ce cas on ruse un peu : extraire le sujet du title
+					if (preg_match(",<title>(.*)</title>,Uims",$corps,$m))
+						$sujet = $m[1];
+					else {
+						// fallback, on prend le body si on le trouve
+						if (preg_match(",<body[^>]*>(.*)</body>,Uims",$corps,$m))
+							$ttrim = $m[1];
+
+						// et on extrait la premiere ligne de vrai texte...
+						// nettoyer le html et les retours chariots
+						$ttrim = textebrut($ttrim);
+						$ttrim = str_replace("\r\n", "\r", $ttrim);
+						$ttrim = str_replace("\r", "\n", $ttrim);
+						// decouper
+						$ttrim = explode("\n",trim($ttrim));
+						// extraire la premiere ligne de texte brut
+						$sujet = array_shift($ttrim);
+					}
+				}
+				$message_html	= $corps;
+			}
+			// c'est vraiment un message texte
+			else
+				$message_texte	= nettoyer_caracteres_mail($corps);
 		}
 		$headers = array_map('trim',explode("\n",$headers));
 	}
@@ -73,6 +105,10 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	// pour garder le texte brut, il suffit de faire un modele qui renvoie uniquement #ENV*{texte}
 	if ($message_texte AND ! $message_html){
 		$message_html = recuperer_fond("emails/texte",array('texte'=>$message_texte,'sujet'=>$sujet));
+	}
+	// si le mail est en HTML sans alternative, la generer
+	if ($message_html AND !$message_texte){
+		$message_texte = facteur_mail_html2text($message_html);
 	}
 
 	// mode TEST : forcer l'email
