@@ -114,23 +114,25 @@ var gis_init_map = function(mapcfg) {
 	if (!mapcfg['cluster']){
 		// Analyse des points et déclaration (sans regroupement des points en cluster)
 		map.parseGeoJson = function(data) {
-			var geojson = new L.geoJson('', {
-				style: mapcfg['path_styles'],
-				onEachFeature: function (feature, layer) {
-					// Déclarer l'icone du point
-					map.setGeoJsonFeatureIcon(feature, layer);
-					// Déclarer le contenu de la popup s'il y en a
-					map.setGeoJsonFeaturePopup(feature, layer);
-				}
-			}).addTo(map);
-			geojson.addData(data);
-			if (mapcfg['autocenterandzoom'])
-				map.fitBounds(geojson.getBounds());
-			if (mapcfg['open_id'].length)
-				gis_focus_marker(mapcfg['open_id'],map_container);
+			if (data.features.length > 0) {
+				var geojson = new L.geoJson('', {
+					style: mapcfg['path_styles'],
+					onEachFeature: function (feature, layer) {
+						// Déclarer l'icone du point
+						map.setGeoJsonFeatureIcon(feature, layer);
+						// Déclarer le contenu de la popup s'il y en a
+						map.setGeoJsonFeaturePopup(feature, layer);
+					}
+				}).addTo(map);
+				geojson.addData(data);
+				if (mapcfg['autocenterandzoom'])
+					map.fitBounds(geojson.getBounds());
+				if (mapcfg['open_id'].length)
+					gis_focus_marker(mapcfg['open_id'],map_container);
 
-			if (typeof map.geojsons=="undefined") map.geojsons = [];
-			map.geojsons.push(geojson);
+				if (typeof map.geojsons=="undefined") map.geojsons = [];
+				map.geojsons.push(geojson);
+			}
 		}
 	}
 	else {
