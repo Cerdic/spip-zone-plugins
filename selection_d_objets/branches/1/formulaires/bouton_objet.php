@@ -21,15 +21,14 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
     
     if($exception_objet[$objet_dest]){
          $objet_dest=$exception_objet[$objet_dest];
-          $table_dest='spip_'.$objet_dest;
     }
-    else $table_dest='spip_'.$objet_dest.'s';
     
     if($exception_objet[$objet]){
          $objet=$exception_objet[$objet];
         }
     
     // Les information des objets destinataires
+    $table_dest = table_objet_sql($objet_dest);
     $tables=lister_tables_objets_sql();
     $titre_objet_dest=_T($tables[$table_dest]['texte_objet']);
     
