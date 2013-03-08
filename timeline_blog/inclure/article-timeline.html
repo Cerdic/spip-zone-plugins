@@ -1,0 +1,60 @@
+<BOUCLE_articles(ARTICLES) {id_article} {statut?}>
+<li class="item hentry">
+	[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+	<h3 class="h3 entry-title"><a href="#URL_ARTICLE" rel="bookmark">[(#LOGO_ARTICLE_RUBRIQUE||image_reduire{150,100})]#TITRE</a></h3>
+	[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+
+<div class="surlignable">
+	[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</div>]
+	[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{500,0})</div>]
+</div>
+
+	[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+
+	[<div class="ps">
+		<h2 class="h2"><:info_ps:></h2>
+		<div class="#EDIT{ps} surlignable">(#PS|image_reduire{500,0})</div>
+	</div>]
+</li>
+
+	[(#REM) Gestion du portfolio et des documents ]
+	[(#INCLURE{fond=inclure/documents}{id_article})]
+	
+	
+	[(#REM) Petition :
+	La petition ayant une PAGINATION il faut absolument {env}
+	et pourquoi pas ajax
+	][(#PETITION|oui)<INCLURE{fond=inclure/petition}{id_article}{env}{ajax}>]
+	
+	<br class="nettoyeur" />
+	<button id="#ID_ARTICLE"><:repondre_article:>
+	<BOUCLE_nb_commentaires(FORUMS) {id_article}{plat} />	[(#TOTAL_BOUCLE|oui)
+		| [(#TOTAL_BOUCLE)]&nbsp;[(#TOTAL_BOUCLE|=={1}|?{<:commentaire:>,<:commentaires:>})]
+		]
+	<//B_nb_commentaires>
+	</button>
+	
+	  <div id="formulaire#ID_ARTICLE">
+		[(#REM) Forum de l'article ]
+		<div class="postmeta">
+			<a href="#forum" name="forum" id="forum"></a>
+			<INCLURE{fond=inclure/forum}{id_article} />
+			#FORMULAIRE_FORUM
+		</div>
+
+	
+	</div>
+
+	<script>
+	$("#formulaire#ID_ARTICLE").css("display", "none");
+	    $("##ID_ARTICLE").click(function () {
+	      $("#formulaire#ID_ARTICLE").slideToggle("slow");
+	    });
+	</script>
+
+
+
+
+</BOUCLE_articles>
+
+
