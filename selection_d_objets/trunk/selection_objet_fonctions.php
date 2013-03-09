@@ -38,7 +38,7 @@ function titre_objet_sel($objet,$contexte){
     $exceptions=charger_fonction('exceptions','inc');
     $exception_titre=$exceptions('titre');
     //Les exceptions du titre
-    if(!isset($contexte[$exception_titre[$objet]]) and isset($contexte['titre']))$titre=$contexte['titre'];
+    if(!$titre=$contexte[$exception_titre[$objet]] and isset($contexte['titre']))$titre=$contexte['titre'];
     if(!$titre){
         if($objet=='document'){
             $f=explode('/',$contexte['fichier']);
