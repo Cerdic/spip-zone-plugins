@@ -37,8 +37,6 @@ function seo_upgrade($nom_meta_version_base, $version_cible){
 			// On change le nom de la table initialement mal choisi
 			$prefixe = $GLOBALS['table_prefix'];
 			sql_query("RENAME TABLE seo_meta_tags TO $prefixe"."_seo");
-			
-			echo "Mise à jour du plugin SEO vers ses nouvelles tables<br/>";
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}
 		if (version_compare($version_actuelle,'1.1.0','<')){

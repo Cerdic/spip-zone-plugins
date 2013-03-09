@@ -1,6 +1,8 @@
 <?php
 
-    include_spip('inc/texte');
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_spip('inc/texte');
 
 /**
  * Renvoyer la balise <link> pour URL CANONIQUES
@@ -121,6 +123,7 @@ function calculer_meta_tags(){
 }
 
 function generer_meta_tags($meta_tags = null) {
+	$flux = '';
     //Set meta list if not provided
     if (!is_array($meta_tags))
         $meta_tags = calculer_meta_tags();
@@ -129,9 +132,9 @@ function generer_meta_tags($meta_tags = null) {
 	foreach ($meta_tags as $name => $content) {
 		if ($content != '')
 			if ($name=='title')
-				$flux .= '<title>'. htmlspecialchars(supprimer_numero(textebrut(propre($content)))) .'</title>'."\n";
+				$flux .= '<title>'. trim(htmlspecialchars(supprimer_numero(textebrut(propre($content))))) .'</title>'."\n";
 			else
-				$flux .= '<meta name="'. $name .'" content="'. htmlspecialchars(textebrut(propre($content))) .'" />'."\n";
+				$flux .= '<meta name="'. $name .'" content="'. trim(htmlspecialchars(textebrut(propre($content)))) .'" />'."\n";
 
 	}
 	return $flux;
@@ -160,12 +163,9 @@ function generer_webmaster_tools(){
 	/* CONFIG */
 	$config = unserialize($GLOBALS['meta']['seo']);
 
-	if($config['webmaster_tools']['id']){
-		$flux .= '<meta name="google-site-verification" content="'. $config['webmaster_tools']['id'] .'" />
+	if($config['webmaster_tools']['id'])
+		return '<meta name="google-site-verification" content="'. $config['webmaster_tools']['id'] .'" />
 		';
-	}
-	
-	return $flux;
 }
 
 
@@ -177,12 +177,9 @@ function generer_bing(){
 	/* CONFIG */
 	$config = unserialize($GLOBALS['meta']['seo']);
 
-	if($config['bing']['id']){
-		$flux .= '<meta name="msvalidate.01" content="'. $config['bing']['id'] .'" />
+	if($config['bing']['id'])
+		return '<meta name="msvalidate.01" content="'. $config['bing']['id'] .'" />
 		';
-	}
-	
-	return $flux;
 }
 
 /**
@@ -193,11 +190,8 @@ function generer_alexa(){
 	/* CONFIG */
 	$config = unserialize($GLOBALS['meta']['seo']);
 
-	if($config['alexa']['id']){
-		$flux .= '<meta name="alexaVerifyID" content="'. $config['alexa']['id'] .'"/>';
-	}
-	
-	return $flux;
+	if($config['alexa']['id'])
+		return '<meta name="alexaVerifyID" content="'. $config['alexa']['id'] .'"/>';
 }
 
 /**
@@ -266,6 +260,7 @@ function balise_SEO_GWT($p){
     $p->code = "calculer_balise_SEO_GWT()";
     return $p;
 }
+
 function calculer_balise_SEO_GWT(){
     $flux = generer_webmaster_tools();
     return $flux;
