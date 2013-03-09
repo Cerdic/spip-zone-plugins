@@ -1,5 +1,5 @@
 <paquet
-	prefix="timeline"
+	prefix="timeline_blog"
 	categorie="squelette"
 	version="0.2"
 	etat="test"
@@ -8,7 +8,7 @@
 	documentation="http://contrib.spip.net/article4341"
 >	
 
-	<nom>TimeLine</nom>
+	<nom>timeline_blog</nom>
 	<!-- squelette de blog avec affichage d'articles et commentaires -->
 	<!-- photo de vignette : centralasian, Creative Commons Attribution 2.0 License -->
 
