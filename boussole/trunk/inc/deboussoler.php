@@ -18,7 +18,15 @@ function boussole_ajouter($boussole, $serveur='spip') {
 
 	// On initialise le message de sortie
 	$message = '';
-	
+
+	// Vérification de l'existence de la table spip_boussoles_extras pour éviter une erreur liée à l'activation
+	// du CRON d'actualisation avant que la migration de schéma ait été effectuée
+	$trouver = charger_fonction('trouver_table', 'base');
+	if (!$desc = $trouver('spip_boussoles_extras')) {
+		$message = '';
+		return array(false, $message);
+	};
+
 	// On recupere les infos du fichier xml de description de la boussole
 	$infos = phraser_xml_boussole($boussole, $serveur);
 	if (!$infos OR !$infos['boussole']['alias']){
@@ -87,7 +95,7 @@ function boussole_ajouter($boussole, $serveur='spip') {
  *
  * @api
  *
- * @param int $aka_boussole	alias de la boussole
+ * @param string $aka_boussole	alias de la boussole
  * @return boolean
  */
 function boussole_supprimer($aka_boussole) {

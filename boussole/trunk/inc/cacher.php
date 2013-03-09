@@ -43,6 +43,39 @@ function boussole_cacher($alias, $prefixe_plugin='') {
 
 
 /**
+ * Teste la validite du fichier xml de la boussole en fonction de la DTD boussole.dtd
+ *
+ * @api
+ *
+ * @param string $url
+ * @param array &$erreur
+ * @return boolean
+ */
+
+// $url	=> url absolue du fichier xml de description de la boussole
+// $erreur	=> tableau des erreurs collectees suite a la validation xml
+function boussole_valider_xml($url, &$erreur) {
+	include_spip('inc/distant');
+
+	$ok = true;
+
+	// On verifie la validite du contenu en fonction de la dtd
+	$valider_xml = charger_fonction('valider', 'xml');
+	$retour = $valider_xml(recuperer_page($url));
+	$erreurs = is_array($retour) ? $retour[1] : $retour->err;
+	if ($erreurs === false) {
+		$ok = false;
+	}
+	else if ($erreurs) {
+		$erreur['detail'] = $erreurs;
+		$ok = false;
+	}
+
+	return $ok;
+}
+
+
+/**
  * Lecture du xml non traduit (donc issu d'un plugin) et génération du xml traduit et incluant les logos
  *
  * @param string	$fichier_xml
