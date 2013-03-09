@@ -12,10 +12,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function seo_insert_head($flux) {
-	
 	/* CONFIG */
 	$config = unserialize($GLOBALS['meta']['seo']);
-	if ($config['insert_head']['activate'] == 'yes') {
+	if (isset($config['insert_head']) && $config['insert_head']['activate'] == 'yes') {
 		$contexte = $GLOBALS['contexte'];
 		unset($contexte['lang']);
 		unset($contexte['date']);
@@ -33,33 +32,33 @@ function seo_insert_head($flux) {
 			$objet = 'rubrique';
 		}
 		/* META TAGS */
-		if ($config['meta_tags']['activate'] == 'yes') {
+		if (isset($config['meta_tags']) && $config['meta_tags']['activate'] == 'yes') {
 		    if (!defined('_SEO_FORCER_SQUELETTE')) {
 		        $meta_tags = calculer_meta_tags();
 			    $flux .= generer_meta_tags($meta_tags);
 			 }
 		}
 		/* META GOOGLE WEBMASTER TOOLS */
-		if ($config['webmaster_tools']['activate'] == 'yes' && $objet == 'sommaire') {
+		if (isset($config['webmaster_tools']) &&  $config['webmaster_tools']['activate'] == 'yes' && $objet == 'sommaire') {
 			$flux .= generer_webmaster_tools();
 		}
 
-		if ($config['bing']['activate'] == 'yes' && $objet == 'sommaire') {
+		if (isset($config['bing']) && $config['bing']['activate'] == 'yes' && $objet == 'sommaire') {
 			$flux .= generer_bing();
 		}
 	
 		/* CANONICAL URL */
-		if ($config['canonical_url']['activate'] == 'yes') {
+		if (isset($config['canonical_url']) && $config['canonical_url']['activate'] == 'yes') {
 			$flux .= generer_urls_canoniques();
 		}
 	
 		/* GOOGLE ANALYTICS */
-		if ($config['analytics']['activate'] == 'yes') {
+		if (isset($config['analytics']) && $config['analytics']['activate'] == 'yes') {
 			$flux .= generer_google_analytics();
 		}
 
 		/* ALEXA */
-		if ($config['alexa']['activate'] == 'yes' && $objet == 'sommaire') {
+		if (isset($config['alexa']) &&  $config['alexa']['activate'] == 'yes' && $objet == 'sommaire') {
 			$flux .= generer_alexa();
 		}
 	}
