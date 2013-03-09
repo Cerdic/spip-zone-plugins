@@ -4,8 +4,8 @@
 	version="0.2"
 	etat="test"
 	compatibilite="[3.0.0-beta;3.0.99]"
-	logo="clock-spiral.jpg"
-	documentation="http://contrib.spip.net/"
+	logo="vignette.jpg"
+	documentation="http://contrib.spip.net/article4341"
 >	
 
 	<nom>TimeLine</nom>
