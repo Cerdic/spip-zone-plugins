@@ -92,7 +92,7 @@ function verifier_date_dist($valeur, $options=array(), &$valeur_normalisee=null)
 	if ($options['normaliser'] and $options['normaliser'] == 'datetime') {
 		$valeur_normalisee = normaliser_date_datetime_dist($valeur, $options, $ok);
 	}
-	
+
 	return $ok;
 }
 
