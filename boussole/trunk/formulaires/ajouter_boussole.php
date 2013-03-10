@@ -43,7 +43,7 @@ function formulaires_ajouter_boussole_traiter_dist(){
 
 /**
  * Chargement des boussoles pouvant être ajoutées sur le client à partir de la liste des serveur configurés.
- * On distingue la boussole spip des autres boussoles.
+ * On distingue la boussole spip des autres boussoles en la placant en premier dans le tableau retourné.
  *
  * @return array
  */
@@ -54,7 +54,7 @@ function charger_boussoles() {
 	// On boucle sur tous les serveurs configurés pour le site client
 	// -- pour chacun on acquiert la liste des boussoles disponibles
 	$liste = array();
-	$spip = array();
+	$index = 1;
 	foreach($GLOBALS['client_serveurs_disponibles'] as $_serveur => $_infos) {
 		$action = str_replace(
 					array('[action]','[arguments]'),
@@ -69,19 +69,22 @@ function charger_boussoles() {
 		AND ($tableau['name'] == 'boussoles')) {
 			if (isset($tableau['children']['boussole'])) {
 				foreach ($tableau['children']['boussole'] as $_boussole) {
-					$alias = $_boussole['attributes']['alias'];
+					$infos_boussole = array('serveur' => $_serveur);
+					$infos_boussole['alias'] = $_boussole['attributes']['alias'];
 					if (isset($_boussole['children']['nom']))
-						$nom = '<multi>' . $_boussole['children']['nom'][0]['children']['multi'][0]['text'] . '</multi>';
-					if ($alias == 'spip')
-						$spip[] = array('alias' => $alias, 'nom' => $nom, 'serveur' => $_serveur);
-					else
-						$liste[] = array('alias' => $alias, 'nom' => $nom, 'serveur' => $_serveur);
+						$infos_boussole['nom'] = '<multi>' . $_boussole['children']['nom'][0]['children']['multi'][0]['text'] . '</multi>';
+					if ($infos_boussole['alias'] == 'spip')
+						$liste[0] = $infos_boussole;
+					else {
+						$liste[$index] = $infos_boussole;
+						$index += 1;
+					}
 				}
 			}
 		}
 	}
 
-	return array_merge($spip, $liste);
+	return $liste;
 }
 
 ?>

@@ -17,7 +17,7 @@
 		<B_autres_boussoles>
 			<li class="editer_mode[(#ENV{erreurs}|table_valeur{mode}|oui) erreur]">
 				<label><:boussole:label_mode:></label>
-		<BOUCLE_autres_boussoles(DATA) {source table, #ENV{_boussoles}}>
+		<BOUCLE_autres_boussoles(DATA) {source table, #ENV{_boussoles}}{par cle}>
 				#SET{alias, #VALEUR|table_valeur{alias}}
 				#SET{serveur, #VALEUR|table_valeur{serveur}}
 				#SET{infos, #GET{alias}|concat{:}|concat{#GET{serveur}}}
