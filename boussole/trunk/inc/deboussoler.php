@@ -120,7 +120,6 @@ function boussole_supprimer($aka_boussole) {
  * @return array()
  */
 function phraser_xml_boussole($boussole, $serveur='spip') {
-	global $client_serveurs_disponibles;
 
 	$infos = array();
 
@@ -129,7 +128,7 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 	$action = str_replace(
 				array('[action]','[arguments]'),
 				array('serveur_informer_boussole', "&arg=${boussole}"),
-				$client_serveurs_disponibles[$serveur]['api']);
+				$GLOBALS['client_serveurs_disponibles'][$serveur]['api']);
 	$page = recuperer_page($action);
 
 	$convertir = charger_fonction('simplexml_to_array', 'inc');

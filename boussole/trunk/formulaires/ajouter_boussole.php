@@ -2,9 +2,12 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_ajouter_boussole_charger_dist(){
-	return array('mode' => _request('mode'),
-				'url_boussole' => _request('url_boussole'));
+function formulaires_ajouter_boussole_charger_dist() {
+
+	$boussoles = charger_boussoles();
+	return array(
+			'boussole' => _request('boussole'),
+			'_boussoles' => $boussoles);
 }
 
 
@@ -16,18 +19,9 @@ function formulaires_ajouter_boussole_verifier_dist(){
 
 function formulaires_ajouter_boussole_traiter_dist(){
 	$retour = array();
-	$mode = _request('mode');
-	$xml = _request('url_boussole');
 
-	// Cas de la boussole SPIP
-	if ($mode == 'standard') {
-		$boussole = 'spip';
-		$serveur = 'spip';
-	}
-	else {
-		$boussole = 'spip';
-		$serveur = 'spip';
-	}
+	$choix = _request('boussole');
+	list($boussole, $serveur) = explode(':', $choix);
 
 	// On insere la boussole dans la base
 	include_spip('inc/deboussoler');
@@ -46,4 +40,48 @@ function formulaires_ajouter_boussole_traiter_dist(){
 
 	return $retour;
 }
+
+/**
+ * Chargement des boussoles pouvant être ajoutées sur le client à partir de la liste des serveur configurés.
+ * On distingue la boussole spip des autres boussoles.
+ *
+ * @return array
+ */
+function charger_boussoles() {
+
+	include_spip('inc/distant');
+
+	// On boucle sur tous les serveurs configurés pour le site client
+	// -- pour chacun on acquiert la liste des boussoles disponibles
+	$liste = array();
+	$spip = array();
+	foreach($GLOBALS['client_serveurs_disponibles'] as $_serveur => $_infos) {
+		$action = str_replace(
+					array('[action]','[arguments]'),
+					array('serveur_lister_boussoles', ""),
+					$_infos['api']);
+		$page = recuperer_page($action);
+
+		$convertir = charger_fonction('simplexml_to_array', 'inc');
+		$tableau = $convertir(simplexml_load_string($page), false);
+
+		if (isset($tableau['name'])
+		AND ($tableau['name'] == 'boussoles')) {
+			if (isset($tableau['children']['boussole'])) {
+				foreach ($tableau['children']['boussole'] as $_boussole) {
+					$alias = $_boussole['attributes']['alias'];
+					if (isset($_boussole['children']['nom']))
+						$nom = '<multi>' . $_boussole['children']['nom'][0]['children']['multi'][0]['text'] . '</multi>';
+					if ($alias == 'spip')
+						$spip[] = array('alias' => $alias, 'nom' => $nom, 'serveur' => $_serveur);
+					else
+						$liste[] = array('alias' => $alias, 'nom' => $nom, 'serveur' => $_serveur);
+				}
+			}
+		}
+	}
+
+	return array_merge($spip, $liste);
+}
+
 ?>

@@ -7,54 +7,39 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	<!-- <br class='bugajaxie' /> -->
-	[(#ENV{editable})
+	<BOUCLE_editable(CONDITION) {si #ENV{editable}}>
 	<form method="post" action="#ENV{action}"><div>
 		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action --> ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		[(#SET{boussole_spip, [(#VAL{spip}|boussole_traduire{nom_boussole})]})]
 		<p class="explication"><:boussole:info_ajouter_boussole:></p>
 		<ul>
+		<B_autres_boussoles>
 			<li class="editer_mode[(#ENV{erreurs}|table_valeur{mode}|oui) erreur]">
 				<label><:boussole:label_mode:></label>
+		<BOUCLE_autres_boussoles(DATA) {source table, #ENV{_boussoles}}>
+				#SET{alias, #VALEUR|table_valeur{alias}}
+				#SET{serveur, #VALEUR|table_valeur{serveur}}
+				#SET{infos, #GET{alias}|concat{:}|concat{#GET{serveur}}}
+
+				#SET{nom, #VALEUR|table_valeur{nom}|extraire_multi}
+				[(#GET{alias}|=={spip}|oui)
+					#SET{nom, #VAL{boussole:label_mode_standard}|_T{#ARRAY{boussole, #GET{nom}}}}
+				]
 				<div class="choix">
-					<input type="radio" value="standard" id="mode_standard" class="radio" name="mode" [(#ENV{mode, standard}|=={standard}|oui) checked="checked"] />
-					<label for="mode_standard"><:boussole:label_mode_standard{boussole=#GET{boussole_spip}}:></label>
+					<input type="radio" value="#GET{infos}" id="boussole_#GET{alias}" class="radio" name="boussole" [(#ENV{boussole, spip:spip}|=={#GET{infos}}|oui) checked="checked"] />
+					<label for="boussole_#GET{alias}">[(#GET{nom}|sinon{#GET{alias}})]</label>
 				</div>
-				<div class="choix">
-					<input type="radio" value="url_perso" id="mode_url_perso" class="radio" name="mode" [(#ENV{mode, standard}|=={url_perso}|oui) checked="checked"] />
-					<label for="mode_url_perso"><:boussole:label_mode_url_perso:></label>
-				</div>
+		</BOUCLE_autres_boussoles>
 			</li>
-			<li class="editer_url_boussole obligatoire[(#ENV{erreurs}|table_valeur{url_boussole}|oui) erreur]" id="option_url_perso">
-				<p class="explication"><:boussole:info_fichier_boussole:></p>
-				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{url_boussole})</span>]
-				<input type="text" name="url_boussole" id="url_boussole" value="" class="text" />
-			</li>
+		</B_autres_boussoles>
+			Aucune boussole disponible
+		<//B_autres_boussoles>
 		</ul>
 
 		<p class="boutons">
 			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
 		</p>
 	</div></form>
-	]
+	</BOUCLE_editable>
 </div>
-
-<script type="text/javascript">
-//<![CDATA[
-	jQuery(document).ready(function() {
-		[(#ENV{mode, standard}|=={url_perso}|non)
-			jQuery("#option_url_perso").hide();
-		]
-		jQuery("input[name='mode']").change(function() {
-			if (jQuery("input[name='mode']:checked").val() == 'standard') {
-				jQuery("#option_url_perso").hide();
-			}
-			else {
-				jQuery("#option_url_perso").show();
-			}
-			jQuery(this).blur();
-		});	
-	});
-//]]>
-</script>
