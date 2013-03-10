@@ -1,4 +1,4 @@
-<div class="formulaire_spip">
+<div class="formulaire_spip formulaire_#FORM">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
@@ -11,7 +11,7 @@
 					<a href="#" onclick="jQuery('input.checkbox:not(:checked)').attr('checked', 'checked');return false;"><:tradlang:lien_check_all:></a>
 					<a href="#" onclick="jQuery('input.checkbox:checked').attr('checked', '');return false;"><:tradlang:lien_check_none:></a>
 				</li>
-				<BOUCLE_modifs(POUR){tableau #ENV*{_modifs}}>
+				<BOUCLE_modifs(DATA){source tableau, #ENV*{_modifs}}>
 				<li class="fieldset">
 					<fieldset>
 						<legend>##COMPTEUR_BOUCLE <:tradlang:label_valeur_id:> #CLE</legend>

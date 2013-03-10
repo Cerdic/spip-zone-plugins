@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function formulaires_tradlang_importer_langue_charger_dist($id_tradlang_module,$lang,$lang_orig) {
 	$valeurs['_etapes'] = 2;
 	$valeurs['lang_orig'] = $lang_orig;
@@ -9,28 +12,33 @@ function formulaires_tradlang_importer_langue_charger_dist($id_tradlang_module,$
 		if(_request('_etape') == '2'){
 			$module = sql_getfetsel('module','spip_tradlang_modules','id_tradlang_module='.intval($id_tradlang_module));
 			$fichier_module = $module.'_'.$lang.'.php';
+			$fichier_module_po = $module.'_'.$lang.'.po';
 			$dir_lang = sous_repertoire (_DIR_VAR, 'cache-tradlang');
 			$dest = $dir_lang.$fichier_module;
-			if(file_exists($dest)){
-				$memtrad = $GLOBALS['idx_lang'] = 'i18n_'.crc32($module).'_tmp';
-				include $dest;
-				$str_lang = $GLOBALS[$memtrad];  // on a vu certains fichiers faire des betises et modifier idx_lang
-	
-				if (is_null($str_lang)) {
-					spip_log("Erreur, fichier $module mal forme",'test');
-				}
-				// verifie si c'est un fichier langue
-				if (!is_array($str_lang))
-					$erreurs['fichier_langue'] = _T('tradlang:erreur_upload_fichier_php_array',array('fichier'=>$file['name']));
-				else{
-					$langues_base = sql_select('*','spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($lang));
-					$modifs = array();
-					while($strings = sql_fetch($langues_base)){
-						$str_lang[$strings['id']] = preg_replace(',^(<(MODIF|NEW|PLUS_UTILISE)>)+,US', '', $str_lang[$strings['id']]);
-						if($strings['str'] != $str_lang[$strings['id']]){
-							$modifs[$strings['id']] = array('orig'=>$strings['str'],'new'=>$str_lang[$strings['id']]);
+			$dest_po = $dir_lang.$fichier_module_po;
+			if(file_exists($dest) || file_exists($dest_po)){
+				if(file_exists($dest)){
+					$memtrad = $GLOBALS['idx_lang'] = 'i18n_'.crc32($module).'_tmp';
+					include $dest;
+					$str_lang = $GLOBALS[$memtrad];  // on a vu certains fichiers faire des betises et modifier idx_lang
+		
+					if (is_null($str_lang)) {
+						spip_log("Erreur, fichier $module mal forme",'test');
+					}
+					// verifie si c'est un fichier langue
+					if (!is_array($str_lang))
+						$erreurs['fichier_langue'] = _T('tradlang:erreur_upload_fichier_php_array',array('fichier'=>$file['name']));
+					else{
+						$langues_base = sql_select('*','spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($lang));
+						$modifs = array();
+						while($strings = sql_fetch($langues_base)){
+							$str_lang[$strings['id']] = preg_replace(',^(<(MODIF|NEW|PLUS_UTILISE)>)+,US', '', $str_lang[$strings['id']]);
+							if($strings['str'] != $str_lang[$strings['id']]){
+								$modifs[$strings['id']] = array('orig'=>$strings['str'],'new'=>$str_lang[$strings['id']]);
+							}
 						}
 					}
+					//spip_unlink($dest);
 				}
 			}
 			$valeurs['_modifs'] = $modifs;
@@ -42,7 +50,8 @@ function formulaires_tradlang_importer_langue_charger_dist($id_tradlang_module,$
 function formulaires_tradlang_importer_langue_verifier_1_dist($id_tradlang_module,$lang) {
 	if(_request('_etape')==1){
 		$module = sql_getfetsel('module','spip_tradlang_modules','id_tradlang_module='.intval($id_tradlang_module));
-		$fichier_module = $module.'_'.$lang.'.php';
+		$fichiers_module[] = $module.'_'.$lang.'.php';
+		$fichiers_module[] = $module.'_'.$lang.'.po';
 		$post = isset($_FILES) ? $_FILES : $GLOBALS['HTTP_POST_FILES'];
 		$files = array();
 		include_spip('inc/joindre_document');
@@ -50,15 +59,17 @@ function formulaires_tradlang_importer_langue_verifier_1_dist($id_tradlang_modul
 			foreach ($post as $file) {
 			  	//UPLOAD_ERR_NO_FILE
 				if (!($file['error'] == 4)){
-					if ($file['name'] != $fichier_module){
+					if (!in_array($file['name'],$fichiers_module)){
 						$erreurs['fichier_langue'] =  _T('tradlang:erreur_upload_fichier_php',array('fichier'=>$file['name'],'fichier_attendu'=>$fichier_module));  
 					}
 					
 					if(!$erreurs['fichier_langue']){
 						$dir_lang = sous_repertoire (_DIR_VAR, 'cache-tradlang');
-						$dest = $dir_lang.$fichier_module;
+						$dest = $dir_lang.$file['name'];
 						@move_uploaded_file($file['tmp_name'],$dest);
-						
+						if(!file_exists($dest)){
+							$erreurs['message_erreur'] = 'Fichier temporaire non créé';
+						}
 						$memtrad = $GLOBALS['idx_lang'] = 'i18n_'.crc32($module).'_tmp';
 						include $dest;
 						$str_lang = $GLOBALS[$memtrad];
@@ -116,6 +127,8 @@ function formulaires_tradlang_importer_langue_verifier_2_dist($id_tradlang_modul
 				$modifs[] = $strings['id'];
 			}
 		}
+	}else{
+		$erreurs['message_erreur'] = "Le fichier temporaire $dest n'a pas été créé";
 	}
 	if(!count($modifs)){
 		$erreurs['message_erreur'] = _T('tradlang:erreur_upload_choisir_une');
@@ -137,7 +150,7 @@ function formulaires_tradlang_importer_langue_traiter_dist($id_tradlang_module,$
 		$str_lang = $GLOBALS[$memtrad];  // on a vu certains fichiers faire des betises et modifier idx_lang
 
 		if (is_null($str_lang)) {
-			spip_log("Erreur, fichier $module mal forme",'test');
+			spip_log("Erreur, fichier $module mal forme",'tradlang');
 		}
 		
 		$langues_base = sql_select('*','spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($lang));
@@ -150,7 +163,6 @@ function formulaires_tradlang_importer_langue_traiter_dist($id_tradlang_module,$
 				$set = array('str'=>$set_new,'statut'=>'OK');
 				tradlang_set($strings['id_tradlang'],$set);
 				$count++;
-				spip_log($count,'test');
 			}
 		}
 	}

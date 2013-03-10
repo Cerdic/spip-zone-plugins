@@ -15,22 +15,24 @@
 				<option value="">--</option>]
 				<B_module_langue_dispo_pref>
 				<optgroup label="<:tradlang:info_langues_preferees|attribut_html:>">
-				<BOUCLE_module_langue_dispo_pref(TRADLANGS tradlang_modules){module?}{id_tradlang_module?}{lang != #ENV{lang_exclue}}{langues_preferees}{fusion lang}{par lang}>
+				<BOUCLE_module_langue_dispo_pref(TRADLANGS tradlang_modules){module?}{id_tradlang_module?}{langues_preferees}{fusion lang}{par lang}>
+				[(#LANG|=={#ENV{lang_exclue}}|non)
 					[(#ENV{multiple}|non)
 					<option value="#LANG"[(#LANG|=={#ENV{#ENV{name}}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)]</option>]
 					[(#ENV{multiple}|oui)
-					<option value="#LANG"[(#LANG|in_array{#ENV{#ENV{name},#ARRAY}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)]</option>]
+					<option value="#LANG"[(#LANG|in_array{#ENV{#ENV{name},#ARRAY}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)]</option>]]
 				</BOUCLE_module_langue_dispo_pref>
 				[(#SET{optgroup,'oui'})]
 				</optgroup>
 				</B_module_langue_dispo_pref>
 				<B_module_langue_dispo>
 				[(#GET{optgroup}|=={oui})<optgroup label="<:tradlang:info_langues_non_preferees|attribut_html:>">]
-				<BOUCLE_module_langue_dispo(TRADLANGS tradlang_modules){module?}{id_tradlang_module?}{lang != #ENV{lang_exclue}}{!langues_preferees}{fusion lang}{par lang}{tout}>
+				<BOUCLE_module_langue_dispo(TRADLANGS tradlang_modules){module?}{id_tradlang_module?}{!langues_preferees}{fusion lang}{par lang}>
+				[(#LANG|=={#ENV{lang_exclue}}|non)
 					[(#ENV{multiple}|non)
 					<option value="#LANG"[(#LANG|=={#ENV{#ENV{name}}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)]</option>]
 					[(#ENV{multiple}|oui)
-					<option value="#LANG"[(#LANG|in_array{#ENV{#ENV{name},#ARRAY}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)]</option>]
+					<option value="#LANG"[(#LANG|in_array{#ENV{#ENV{name},#ARRAY}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)]</option>]]
 				</BOUCLE_module_langue_dispo>
 				[(#GET{optgroup}|=={oui})</optgroup>]
 				</B_module_langue_dispo>
