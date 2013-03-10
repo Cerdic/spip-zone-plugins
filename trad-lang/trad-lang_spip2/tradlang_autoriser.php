@@ -1,14 +1,19 @@
 <?php
 /**
+ * Trad-lang v2
+ * Plugin SPIP de traduction de fichiers de langue
+ * © Florent Jugla, Fil, kent1
  * 
- * Autorisations spécifiques à Tradlang
+ * Fichier des autorisations spécifiques du plugin
  * 
+ * @package SPIP\Tradlang\Autorisations
  */
+
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Fonction pour le pipeline,n'a rien a effectuer
+ * Fonction pour le pipeline, n'a rien a effectuer
  *
  * @return
  */
@@ -17,9 +22,10 @@ function tradlang_autoriser(){}
 /**
  * Renvoie la liste des auteurs ou des statuts autorises pour une action donnee
  * 
- * @param string $action L'action que l'on souhaite faire
+ * @param string $action 
+ * 		L'action que l'on souhaite faire
  * @param boolean $utiliser_defaut [optional]
- * @return 
+ * @return array, boolean
  */ 
 function definir_autorisations_tradlang($action,$utiliser_defaut=true){
 	$aut = null;
@@ -60,12 +66,12 @@ function definir_autorisations_tradlang($action,$utiliser_defaut=true){
  * - synchroniser les fichiers de langue avec la base
  * - traduire des locutions
  * 
- * @param object $faire
- * @param object $type
- * @param object $id
- * @param object $qui
- * @param object $opt
- * @return 
+ * @param string $faire
+ * @param string $type
+ * @param int $id
+ * @param array $qui
+ * @param array $opt
+ * @return boolean
  */
 function autoriser_tradlang_configurer_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
@@ -124,12 +130,12 @@ function autoriser_tradlang_configurer_dist($faire, $type, $id, $qui, $opt){
 /**
  * Autorisation de modification des locution dans tradlang
  * 
- * @param object $faire
- * @param object $type
- * @param object $id
- * @param object $qui
- * @param object $opt
- * @return 
+ * @param string $faire
+ * @param string $type
+ * @param int $id
+ * @param array $qui
+ * @param array $opt
+ * @return boolean
  */ 
 function autoriser_tradlang_modifier_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
@@ -192,12 +198,12 @@ function autoriser_tradlang_modifier_dist($faire, $type, $id, $qui, $opt){
 /**
  * Autorisation de voir l'interface de tradlang
  * 
- * @param object $faire
- * @param object $type
- * @param object $id
- * @param object $qui
- * @param object $opt
- * @return 
+ * @param string $faire
+ * @param string $type
+ * @param int $id
+ * @param array $qui
+ * @param array $opt
+ * @return boolean
  */
 function autoriser_tradlang_voir_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
@@ -257,12 +263,14 @@ function autoriser_tradlang_voir_dist($faire, $type, $id, $qui, $opt){
 
 /**
  * Autorisation à créer un module de langue
- * Renvoit false
- * @param unknown_type $faire
- * @param unknown_type $type
- * @param unknown_type $id
- * @param unknown_type $qui
- * @param unknown_type $opt
+ * Renvoit false, pour l'instant on force l'usage de salvatore
+ * 
+ * @param string $faire
+ * @param string $type
+ * @param int $id
+ * @param array $qui
+ * @param array $opt
+ * @return boolean false
  */
 function autoriser_tradlangmodule_creer_dist($faire, $type, $id, $qui, $opt){
 	return false;
@@ -270,12 +278,14 @@ function autoriser_tradlangmodule_creer_dist($faire, $type, $id, $qui, $opt){
 
 /**
  * Autorisation à créer une chaine de langue
- * Renvoit false
- * @param unknown_type $faire
- * @param unknown_type $type
- * @param unknown_type $id
- * @param unknown_type $qui
- * @param unknown_type $opt
+ * Renvoit false, pour l'instant on force l'usage de salvatore
+ * 
+ * @param string $faire
+ * @param string $type
+ * @param int $id
+ * @param array $qui
+ * @param array $opt
+ * @return boolean false
  */
 function autoriser_tradlang_creer_dist($faire, $type, $id, $qui, $opt){
 	return false;
