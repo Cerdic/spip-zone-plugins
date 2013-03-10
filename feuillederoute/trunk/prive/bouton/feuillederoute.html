@@ -2,7 +2,7 @@
 
 [(#AUTORISER{lire,feuillederoute}|oui)
 [(#PLUGIN{minibando}|oui)[(#REM|test_espace_prive|non)<li id="minibando_bouton_feuillederoute">]]
-<a[ href="(#URL_PAGE{feuillederoute})"] class="spip-admin-boutons" id="btn_feuillederoute"[(#PLUGIN{minibando}|oui)[(#REM|test_espace_prive|non) style="text-indent:0;font-size:10px;text-align:center;line-height:24px;"]]>[(#PLUGIN{minibando}|oui)[(#REM|test_espace_prive|non)FdR][(#REM|test_espace_prive|oui)<:feuillederoute:feuillederoute:>]][(#PLUGIN{minibando}|non)<:feuillederoute:feuillederoute:>]</a>
+<a[ href="(#URL_PAGE{feuillederoute})"] class="spip-admin-boutons" id="btn_feuillederoute"[(#PLUGIN{minibando}|oui)[(#REM|test_espace_prive|non) style="text-indent:0;font-size:10px;text-align:center;line-height:24px;"]]>[(#PLUGIN{minibando}|oui)[(#REM|test_espace_prive|non)FdR][(#REM|test_espace_prive|oui)[(#CONFIG{feuillederoute/titre}|?{#CONFIG{feuillederoute/titre},<:feuillederoute:feuillederoute:>})]]][(#PLUGIN{minibando}|non)[(#CONFIG{feuillederoute/titre}|?{#CONFIG{feuillederoute/titre},<:feuillederoute:feuillederoute:>})]]</a>
 <script type="text/javascript">
 $(document).ready(function(){
 	// preparer le chargement ajax
@@ -22,7 +22,7 @@ $(document).ready(function(){
 [(#AUTORISER{lire,feuillederoute}|non)
 [(#AUTORISER{modifier,feuillederoute}|oui)
 [(#PLUGIN{minibando}|oui)<li id="minibando_bouton_feuillederoute">]
-<a[ href="(#URL_PAGE{feuillederoute})"] class="spip-admin-boutons" id="btn_feuillederoute"[(#PLUGIN{minibando}|oui)[(#REM|test_espace_prive|non) style="text-indent:0;font-size:10px;text-align:center;line-height:24px;"]]>[(#PLUGIN{minibando}|oui) [(#REM|test_espace_prive|non)FdR][(#REM|test_espace_prive|oui)<:feuillederoute:feuillederoute:>]][(#PLUGIN{minibando}|non)<:feuillederoute:feuillederoute:>]</a>
+<a[ href="(#URL_PAGE{feuillederoute})"] class="spip-admin-boutons" id="btn_feuillederoute"[(#PLUGIN{minibando}|oui)[(#REM|test_espace_prive|non) style="text-indent:0;font-size:10px;text-align:center;line-height:24px;"]]>[(#PLUGIN{minibando}|oui) [(#REM|test_espace_prive|non)FdR][(#REM|test_espace_prive|oui)[(#CONFIG{feuillederoute/titre}|?{#CONFIG{feuillederoute/titre},<:feuillederoute:feuillederoute:>})]]][(#PLUGIN{minibando}|non)[(#CONFIG{feuillederoute/titre}|?{#CONFIG{feuillederoute/titre},<:feuillederoute:feuillederoute:>})]]</a>
 <script type="text/javascript">
 $(document).ready(function(){
 	// preparer le chargement ajax
@@ -37,7 +37,7 @@ $(document).ready(function(){
 	});
 });
 </script>
-[(#PLUGIN{minibando}|oui)[(#REM|test_espace_prive|non)<span></span><ul><li><p><:feuillederoute:feuillederoute:></p></li></ul></li>]]
+[(#PLUGIN{minibando}|oui)[(#REM|test_espace_prive|non)<span></span><ul><li><p>[(#CONFIG{feuillederoute/titre}|?{#CONFIG{feuillederoute/titre},<:feuillederoute:feuillederoute:>})]</p></li></ul></li>]]
 ]
 ]
 [(#REM|test_espace_prive|oui)

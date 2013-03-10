@@ -3,13 +3,14 @@
 <div class="feuillederoute">
 	<a class="fermer_feuillederoute" href="#">fermer</a>
 	<div class="contenu_feuillederoute">
-		<h2><:feuillederoute:feuillederoute:></h2>
+		<h2>[(#CONFIG{feuillederoute/titre}|?{#CONFIG{feuillederoute/titre},<:feuillederoute:feuillederoute:>})]</h2>
 		<div class="ajax">
 			#FORMULAIRE_EDITER_FEUILLEDEROUTE
 		</div>
 	</div>
 </div>
 <style type="text/css">
+/* ouverture et blocs generaux */
 .charger_feuillederoute, .tiroir_feuillederoute { display:none; position:relative; z-index:100001; /* au-dessus du minibando */  }
 .fond_feuillederoute { 
 	position:fixed; right:0; top:0; width:50%; min-width:460px;  height:100%; 
@@ -22,21 +23,53 @@
 	z-index:100001;
 	font-size:.95em; color:#333;
 }
-a.fermer_feuillederoute { 
-	position:fixed; right:12px; top:0; opacity:.8; 
-	margin: 0; padding: 0.4em 1em 0.4em; 
-	border: 0 none; -moz-border-radius: 0 0 0 0.3em; -webkit-border-radius: 0 0 0 0.3em; border-radius: 0 0 0 0.3em;
+a.fermer_feuillederoute { position:fixed; float:right;  right:0; top:0; 
+	opacity:.8; margin: 0; padding: 0.4em 1em 0.4em; 
+	border: 0 none; -moz-border-radius: 0 0 0 4px; -webkit-border-radius: 0 0 0 4px; border-radius: 0 0 0 4px;
 	font-weight: bold; color:#fff; background:#666666;
- }
+}
 a.fermer_feuillederoute:hover { opacity:1; color:#fff; }
+
+/* contenu_feuillederoute */
 .contenu_feuillederoute { padding:1em 1em 3em; }
 .contenu_feuillederoute a { color:#75507B; }
 .contenu_feuillederoute a:hover { color:#000; text-decoration:underline; }
-.contenu_feuillederoute .todolist th a { color:#333; }
-.contenu_feuillederoute .todolist th a:hover { color:#000; }
 
-.formulaire_feuillederoute { padding:.5em; }
+/* gestion des intertitres pour fermeture/ouverture de blocs de contenu, cf plugin manuel du site */
+.contenu_feuillederoute h3.spip,
+.contenu_feuillederoute h4.spip,
+.contenu_feuillederoute h3,
+.contenu_feuillederoute h4{
+	font-size:14px;
+	font-weight:700;
+	line-height:20px;
+	color:#000;
+	clear:both;
+	text-align:left;
+	cursor: pointer;
+	padding-left:15px;
+	margin: 0.5em 0 0.25em;
+	background:url([/(#CHEMIN{images/plus.png})]) left 4px no-repeat transparent;
+	border:none;
+}
+.contenu_feuillederoute h4.spip, .contenu_feuillederoute h4 { font-size:12px; }
+.contenu_feuillederoute h3.open,
+.contenu_feuillederoute h4.open{
+	background:url([/(#CHEMIN{images/moins.png})]) left 4px no-repeat transparent;
+}
+
+/* formulaire edition */
+.formulaire_feuillederoute { padding:.5em; clear:both; }
 .charger_feuillederoute table { width:100%; }
+/* ouverture du formulaire */
+a.poignee_feuillederoute { float:right; clear:both; 
+	opacity:.8; margin: 2em -1em 1em 0; padding: 0.4em;  color:#fff;
+	border: 0 none; -moz-border-radius: 4px 0 0 4px; -webkit-border-radius: 4px 0 0 4px; border-radius: 4px 0 0 4px;
+	font-weight: bold; color:#fff; background:#666666;
+ }
+ a.poignee_feuillederoute:hover { opacity:1; color:#fff; }
+
+/* petits ecrans */
 @media (max-width:600px) {
 
 	.fond_feuillederoute, .feuillederoute { min-width:98%; width:98%; }

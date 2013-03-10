@@ -45,3 +45,24 @@
 	</script>
 	
 ][(#REM) fin autorisation]
+
+	<script type="text/javascript">
+	$(document).ready(function(){		
+		// code scrupuleusement tire du manuel du site
+		// Traiter les h3 et h4
+		$.each( ['h3','h4'], function(i,hi){
+			$( ".affichage_feuillederoute" ).find(hi).each(function(index) {
+				// Creer un div apres le h3 et y placer tout ce qui se trouve apres et jusqu'au hi suivant
+				$(this).after("<div class=\"bloc_sous_h\"></div>").next().append($(this).next().nextUntil(hi));
+				// Deplier le contenu du hi
+				$(this).next().hide();
+				$(this).click(function(){
+						$(this).next().slideToggle();
+						$(this).toggleClass('open');
+						return false;
+					});
+			});
+		});
+		
+	});
+	</script>
