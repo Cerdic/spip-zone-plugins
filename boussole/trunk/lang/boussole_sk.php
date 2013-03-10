@@ -54,7 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_page_boussole' => 'Stránka s podrobnými údajmi o kompase',
 
 	// I
-	'info_ajouter_boussole' => 'Pridaním kompasov do svojej databázy budete mať možnosť využívať šablóny na zobrazenie verejne prístupných stránok.<br />Kompas opisuje súbor XML, ktorý obsahuje údaje o kompase a jeho stránkach.<br /><br />Ak už kompas existuje, tento formulár ho aktualizuje s tým, že nastavenia zobrazenia ponechá bezo zmeny.',
+	'info_ajouter_boussole' => 'Pridaním kompasov do svojej databázy budete mať možnosť využívať šablóny na zobrazenie verejne prístupných stránok.<br />Kompas opisuje súbor XML, ktorý obsahuje údaje o kompase a jeho stránkach.<br /><br />Ak už kompas existuje, tento formulár ho aktualizuje s tým, že nastavenia zobrazenia ponechá bezo zmeny.', # MODIF
 	'info_boite_boussoles_gerer' => '<strong>Táto stránka je prístupná iba pre manažérov webu.</strong><p>Umožňuje pridávať, aktualizovať a mazať kompasy. Môžete navštíviť aj stránku s nastaveniami zobrazenia každého kompasu.</p>',
 	'info_configurer_boussole' => 'Tento formulár vám umožňuje nastaviť zobrazenie kompasu tak, že si vyberiete, v akom poradí a v akej skupine sa stránky majú alebo nemajú zobraziť. Stránky, ktoré sa nezobrazia, budú označené tieňom a sivým písmom.',
 	'info_fichier_boussole' => 'Zadajte adresu súboru s popisom svojho kompasu',
@@ -84,7 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_max_articles' => 'Maximálny počet zobrazených článkov na stránku',
 	'label_max_sites' => 'Maximálny počet stránok',
 	'label_mode' => 'Vyberte si kompas',
-	'label_mode_standard' => '"@boussole@" – oficiálny kompas stránok SPIPu',
+	'label_mode_standard' => '"@boussole@" – oficiálny kompas stránok SPIPu', # MODIF
 	'label_mode_url_perso' => 'Vlastný kompas',
 	'label_modele' => 'Spôsob zobrazenia',
 	'label_n_boussoles' => '@nb@ boussoles', # NEW

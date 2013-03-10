@@ -54,7 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_page_boussole' => 'Page of a compass detailled information.',
 
 	// I
-	'info_ajouter_boussole' => 'By adding compasses to your database, you can use available models to display in your public pages.<br />A compass is described by an XML file containing informations on the compass and the websites.<br /><br />If the compass already exist, the form allow to update it while keeping the same display configuration.',
+	'info_ajouter_boussole' => 'By adding compasses to your database, you can use available models to display in your public pages.<br />A compass is described by an XML file containing informations on the compass and the websites.<br /><br />If the compass already exist, the form allow to update it while keeping the same display configuration.', # MODIF
 	'info_boite_boussoles_gerer' => '<strong>This page can be accessed by webmasters only.</strong><p>There, you can add, update and delate compasses. You can also go to the configuration page of each compass display.</p>',
 	'info_configurer_boussole' => 'This form allow you to configure the compass display by choosing the websites you want to display or not and their order in a group. The non-displayed websites have hatched background and grey fonts.',
 	'info_fichier_boussole' => 'Enter the url of your compass description file.',
@@ -84,7 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_max_articles' => 'Maximum number of articles displayed by website',
 	'label_max_sites' => 'Maximum number of websites',
 	'label_mode' => 'Choose a compass',
-	'label_mode_standard' => '« @boussole@ », official compass of SPIP websites',
+	'label_mode_standard' => '« @boussole@ », official compass of SPIP websites', # MODIF
 	'label_mode_url_perso' => 'Personnal compass',
 	'label_modele' => 'Display model',
 	'label_n_boussoles' => '@nb@ boussoles', # NEW
