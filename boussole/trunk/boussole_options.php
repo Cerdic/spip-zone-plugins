@@ -12,5 +12,7 @@ $GLOBALS['client_serveurs_disponibles'] = array(
 );
 
 // Liste des boussoles "manuelles" (non fournies sous forme de plugin) disponibles sur le serveur
-$GLOBALS['serveur_boussoles_disponibles'] ? $GLOBALS['serveur_boussoles_disponibles'] : array();
+isset($GLOBALS['serveur_boussoles_disponibles']) AND $GLOBALS['serveur_boussoles_disponibles']
+	? $GLOBALS['serveur_boussoles_disponibles']
+	: array();
 ?>
