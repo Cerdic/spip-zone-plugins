@@ -1,0 +1,39 @@
+<BOUCLE_adresse(ADRESSES liens){id_adresse}{statut?}>
+
+[<div class="champ contenu_type[ (#TYPE*|strlen|?{'',vide})]">
+	<span dir='#LANG_DIR' class='type'>[(#TYPE|logo_type_adr)](#VAL{adresse:type_adr_#TYPE}_T)</span>
+</div>]
+
+[<div class="champ contenu_voie[ (#VOIE*|strlen|?{'',vide})]">
+	<span dir='#LANG_DIR' class='#EDIT{voie} voie'>(#VOIE)</span>
+</div>]
+
+[<div class="champ contenu_complement[ (#COMPLEMENT*|strlen|?{'',vide})]">
+	<span dir='#LANG_DIR' class='#EDIT{complement} complement'>(#COMPLEMENT)</span>
+</div>]
+
+[<div class="champ contenu_boite_postale[ (#BOITE_POSTALE*|strlen|?{'',vide})]">
+	<span dir='#LANG_DIR' class='#EDIT{boite_postale} boite_postale'>(#BOITE_POSTALE)</span>
+</div>]
+
+[<div class="champ contenu_region[ (#REGION*|strlen|?{'',vide})]">
+	<span dir='#LANG_DIR' class='#EDIT{region} region'>(#REGION)</span>
+</div>]
+
+[<div class="champ contenu_code_postal[ (#CODE_POSTAL*|strlen|?{'',vide})]">
+	<span dir='#LANG_DIR' class='#EDIT{code_postal} code_postal'>(#CODE_POSTAL)</span>
+</div>]
+
+[<div class="champ contenu_ville[ (#VILLE*|strlen|?{'',vide})]">
+	<span dir='#LANG_DIR' class='#EDIT{ville} ville'>(#VILLE)</span>
+</div>]
+
+<B_pays>
+<div class="champ contenu_pays">
+<BOUCLE_pays(PAYS ?){code=#PAYS}><span dir='#LANG_DIR' class='pays'>#NOM</span></BOUCLE_pays>
+</div>
+</B_pays>
+[<div class="champ contenu_pays"><span dir='#LANG_DIR' class='pays'>(#NOM)</span></div>]
+<//B_pays>
+
+</BOUCLE_adresse>

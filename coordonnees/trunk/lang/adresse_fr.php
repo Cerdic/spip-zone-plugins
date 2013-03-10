@@ -13,6 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_adresse' => 'Une adresse',
 	'info_aucun_adresse' => 'Aucune adresse',
 	'info_nb_adresses' => '@nb@ adresses',
+	'info_utilisation' => 'Utilisée par:',
+	'info_numero' => 'Adresse numéro:',
 
 	// L
 	'label_adresse' => 'Adresse',

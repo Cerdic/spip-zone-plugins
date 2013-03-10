@@ -13,6 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_numero' => 'Un numéro',
 	'info_aucun_numero' => 'Aucun numéro',
 	'info_nb_numeros' => '@nb@ numéros',
+	'info_utilisation' => 'Utilisé par:',
+	'info_numero' => 'Téléphone numéro:',
 
 	// L
 	'label_numero' => 'Numéro de téléphone',
@@ -21,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type' => 'Type de numéro',
 
 	// P
-	'placeholder_titre' => 'Un nom pour identifier le numéro',
+	'placeholder_titre' => 'Un nom pour identifier le numéro de téléphone',
 
 	// T
 	'texte_ajouter_numero' => 'Ajouter un numéro',

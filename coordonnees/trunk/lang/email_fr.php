@@ -16,6 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_email' => 'Un courriel',
 	'info_aucun_email' => 'Aucun courriel',
 	'info_nb_emails' => '@nb@ courriels',
+	'info_utilisation' => 'Utilisé par:',
+	'info_numero' => 'Email numéro:',
 
 	// L
 	'label_email' => 'Courriel',
