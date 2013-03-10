@@ -1,7 +1,7 @@
 <paquet
-	prefix="timeline_blog"
+	prefix="timelineblog"
 	categorie="squelette"
-	version="0.2"
+	version="0.2.1"
 	etat="test"
 	compatibilite="[2.0.0;3.0.99]"
 	logo="vignette.jpg"
@@ -19,5 +19,7 @@
 	<necessite nom="Z" compatibilite="[1.7.0;1.99.99]" />
 
 	<utilise nom="menus" />
+
+	<pipeline nom="insert_head_css" inclure="timelineblog_pipelines.php" />
 
 </paquet>
