@@ -1,7 +1,7 @@
 <paquet
 	prefix="tradlang"
 	categorie="outil"
-	version="2.0.8"
+	version="2.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/spip_lang.png"
@@ -14,16 +14,14 @@
 	
 	<pipeline nom="declarer_tables_interfaces" inclure="base/tradlang.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/tradlang.php" />
-	<pipeline nom="declarer_tables_objets_surnoms" inclure="tradlang_pipelines.php" />
-	<pipeline nom="affiche_milieu" inclure="tradlang_pipelines.php" />
-	<pipeline nom="revisions_liste_objets" inclure="tradlang_pipelines.php" />
+	<pipeline nom="pre_edition" inclure="tradlang_pipelines.php" />
 	<pipeline nom="post_edition" inclure="tradlang_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="tradlang_pipelines.php" />
 	<pipeline nom="insert_head" inclure="tradlang_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="tradlang_pipelines.php" />
 	<pipeline nom="pre_boucle" inclure="tradlang_pipelines.php" />
 	<pipeline nom="editer_contenu_objet" inclure="tradlang_pipelines.php" />
 	<pipeline nom="formulaire_charger" inclure="tradlang_pipelines.php" />
-	<pipeline nom="pre_edition" inclure="tradlang_pipelines.php" />
 	<pipeline nom="autoriser" inclure="tradlang_autoriser.php" />
 	<pipeline nom="forum_objets_depuis_env" inclure="tradlang_autoriser.php" />
 

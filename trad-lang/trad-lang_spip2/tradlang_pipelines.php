@@ -1,54 +1,51 @@
 <?php
 /**
- * 
  * Trad-lang v2
  * Plugin SPIP de traduction de fichiers de langue
  * © Florent Jugla, Fil, kent1
  * 
+ * Fichier des pipelines utilisés par le plugin
+ * 
+ * @package SPIP\Tradlang\Pipelines
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Insertion dans le pipeline declarer_tables_objets_surnoms (base/connect_sql.php)
- * La table spip_tradlangs est une table ancienne, et n'a pas de S final ...
- * Pour éviter les problèmes liés à cela, on surnomme les objets
+ * Insertion dans le pipeline pre_edition (SPIP)
  * 
- * @param array $flux La liste des surnoms
- * @return array Le $flux complété
+ * Ajouter les langues_preferees soumises lors de la soumission du formulaire CVT editer_auteur
+ * Si quelque chose est sélectionné, on le serialize pour le mettre en base, sinon on serialize un array 
+ * pour toujours avoir quelquechose
+ * 
+ * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte du pipeline auquel on a ajouté ce que l'on souhaite
  */
-function tradlang_declarer_tables_objets_surnoms($flux){
-	//$flux['tradlang'] = 'tradlang';
+function tradlang_pre_edition($flux){
+	if ($flux['args']['table'] == 'spip_auteurs') {
+		if (is_array($langues_preferees = _request('langues_preferees')))
+			$flux['data']['langues_preferees'] = serialize($langues_preferees);
+		else
+			$flux['data']['langues_preferees'] = serialize(array());
+	}
 	return $flux;
 }
 
 /**
- * Insertion dans le pipeline revisions_liste_objets du plugin revisions (2.3)
- * Definir la liste des tables possibles
- * @param array $array
- * @return
- */
-function tradlang_revisions_liste_objets($array){
-	$array['tradlang'] = 'tradlang:chaines_langue';
-	return $array;
-}
-
-/**
- * Insertion dans le pipeline forum_objets_depuis_env (Plugin Forum)
- * On ajoute la possibilité d'avoir des forums sur les chaines de langue
- * @param array $array
- */
-function tradlang_forum_objets_depuis_env($array){
-	$array['tradlang'] = id_table_objet('tradlang');
-	return $array;
-}
-
-/**
- * Insertion dans le pipeline post_edition
- * Si configuré comme tel on regénère les fichiers à chaque modification de chaine de langue
+ * Insertion dans le pipeline post_edition (SPIP)
  * 
- * @param object $flux
- * @return
+ * Si configuré comme tel on regénère les fichiers à chaque modification de chaine de langue
+ * On n'agit que sur les conditions suivantes :
+ * -* on modifier la table spip_tradlangs
+ * -* on a activé la sauvegarde locale
+ * -* on a activé la sauvegarde locale au moment de la post-edition
+ * 
+ * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte du pipeline qui n'est jamais modifié
  */
 function tradlang_post_edition($flux){
 	if($flux['args']['table'] == "spip_tradlangs"){
@@ -59,7 +56,7 @@ function tradlang_post_edition($flux){
 		if(($config['sauvegarde_locale'] == 'on') && ($config['sauvegarde_post_edition'] == 'on')){
 			include_spip('tradlang_fonctions');
 			if($dir_lang = tradlang_dir_lang()){
-				$infos = sql_fetsel('*',$flux['args']['table'],'id_tradlang='.intval($flux['args']['id_objet']));
+				$infos = sql_fetsel('lang,module',$flux['args']['table'],'id_tradlang='.intval($flux['args']['id_objet']));
 				$module = sql_fetsel('*','spip_tradlang_modules','module='.sql_quote($infos['module']));
 				$sauvegarder_module = charger_fonction('tradlang_sauvegarde_module','inc');
 				$sauvegarder_module($module['module'],$infos['lang'],$dir_lang);
@@ -70,20 +67,35 @@ function tradlang_post_edition($flux){
 }
 
 /**
- * Insertion dans le pipeline insert_head
- * On ajoute les javascript dans le head
+ * Insertion dans le pipeline insert_head (SPIP)
+ * 
+ * On ajoute les javascript dans le head :
+ * - javascript/tradlang.js
+ * - javascript/tradlang_tooltip.js si le plugin tooltip est activé
+ * 
+ * @param string $flux 
+ * 		Le contenu de la balise #INSERT_HEAD
+ * @return string $flux
+ * 		Le contenu de la balise modifié
  */
 function tradlang_insert_head($flux){
 	$flux .= '<script type="text/javascript" src="'.find_in_path('javascript/tradlang.js').'" ></script>'."\n";
-	if(defined('_DIR_PLUGIN_TOOLTIP')){
+	if(defined('_DIR_PLUGIN_TOOLTIP'))
 		$flux .= '<script type="text/javascript" src="'.find_in_path('javascript/tradlang_tooltip.js').'" ></script>'."\n";
-	}
 	return $flux;
 }
 
 /**
- * Insertion dans le pipeline insert_head_css
- * On ajoute les deux feuilles de style dans le head
+ * Insertion dans le pipeline insert_head_css (SPIP)
+ * 
+ * On ajoute les deux feuilles de style dans le head :
+ * - La statique css/tradlang.css
+ * - la calculée spip.php?page=tradlang.css
+ * 
+ * @param string $flux
+ * 		Le contenu de la balise #INSERT_HEAD_CSS
+ * @return string $flux
+ * 		Le contenu de la balise modifié
  */
 function tradlang_insert_head_css($flux){
 	static $done = false;
@@ -96,9 +108,13 @@ function tradlang_insert_head_css($flux){
 }
 
 /**
- * Insertion dans le pipeline pre_boucle
- * Si on est dans la fonction calculer_langues_utilisees, on ne renvoit pas les langues des tradlang
- * pour éviter de bloquer ces langues dans la configuration du multilinguisme
+ * Insertion dans le pipeline pre_boucle (SPIP)
+ * 
+ * Si on est dans la boucle calculer_langues_utilisees (utilisée dans un formulaire de configuration de l'espace privé), 
+ * on ne renvoit pas les langues des tradlangs pour éviter de bloquer ces langues dans la configuration du multilinguisme
+ * 
+ * @param object $boucle
+ * @return object $boucle
  */
 function tradlang_pre_boucle($boucle){
 	if(isset($boucle->nom) && ($boucle->nom == 'calculer_langues_utilisees') && ($boucle->id_boucle == 'tradlangs'))
@@ -107,8 +123,14 @@ function tradlang_pre_boucle($boucle){
 }
 
 /**
- * Insertion dans le pipeline affiche_milieu
+ * Insertion dans le pipeline affiche_milieu (SPIP)
+ * 
  * Sur la fiche des auteurs, on ajoute la liste des révisions de chaines de l'auteur
+ * 
+ * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte modifié si besoin
  */
 function tradlang_affiche_milieu($flux){
 	if (($flux['args']['exec'] == 'auteur') && (intval($flux['args']['id_auteur']) > 0)){
@@ -125,7 +147,9 @@ function tradlang_affiche_milieu($flux){
 }
 
 /**
- * ajouter un champ langues préférées sur le formulaire CVT editer_auteur
+ * Insertion dans le pipeline editer_contenu_objet (SPIP)
+ * 
+ * Ajouter un champ langues préférées sur le formulaire CVT editer_auteur
  *
  * @param array $flux
  * @return array
@@ -145,31 +169,22 @@ function tradlang_editer_contenu_objet($flux){
  */
 function tradlang_formulaire_charger($flux){
 	// si le charger a renvoye false ou une chaine, ne rien faire
-	if (is_array($flux['data'])){
-		if ($flux['args']['form']=='editer_auteur'){
-			$flux['data']['langues_preferees'] = '';
-			if ($id_auteur = intval($flux['data']['id_auteur'])){
-				$flux['data']['langues_preferees'] = sql_getfetsel('langues_preferees','spip_auteurs','id_auteur='.intval($id_auteur));
-			}
+	if (is_array($flux['data']) && ($flux['args']['form']=='editer_auteur')){
+		$flux['data']['langues_preferees'] = '';
+		if ($id_auteur = intval($flux['data']['id_auteur'])){
+			$flux['data']['langues_preferees'] = sql_getfetsel('langues_preferees','spip_auteurs','id_auteur='.intval($id_auteur));
 		}
 	}
 	return $flux;
 }
 
 /**
- * ajouter les langues_preferees soumises lors de la soumission du formulaire CVT editer_auteur
- * 
- * @param array $flux
- * @return array
+ * Insertion dans le pipeline forum_objets_depuis_env (Plugin Forum)
+ * On ajoute la possibilité d'avoir des forums sur les chaines de langue
+ * @param array $array
  */
-function tradlang_pre_edition($flux){
-	if ($flux['args']['table']=='spip_auteurs') {
-		if (is_array($langues_preferees = _request('langues_preferees'))) {
-			$flux['data']['langues_preferees'] = serialize($langues_preferees);
-		}else{
-			$flux['data']['langues_preferees'] = serialize(array());
-		}
-	}
-	return $flux;
+function tradlang_forum_objets_depuis_env($array){
+	$array['tradlang'] = id_table_objet('tradlang');
+	return $array;
 }
 ?>
