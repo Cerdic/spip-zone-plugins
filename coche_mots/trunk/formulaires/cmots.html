@@ -1,0 +1,25 @@
+<div class="formulaire_spip formulaire_editer formulaire_cmots">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<B_mots>
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<ul><li>
+		<BOUCLE_mots(MOTS){id_groupe}{par multi titre}{si #AUTORISER{associermots,#ENV{objet},#ENV{id_objet},'',#ARRAY{id_groupe,#ENV{id_groupe}}}}>
+			<div class="choix choix_#ID_MOT">
+				<input type="checkbox" name="mots[]" class="checkbox" id="champ_mot_#ID_MOT"[(#ID_MOT|in_array{#ENV{mots}}|oui)checked="checked"] value="#ID_MOT" />
+				<label for="champ_mot_#ID_MOT">#TITRE</label>
+			</div>
+		</BOUCLE_mots>
+		</li></ul>
+		
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	</B_mots>
+</div>

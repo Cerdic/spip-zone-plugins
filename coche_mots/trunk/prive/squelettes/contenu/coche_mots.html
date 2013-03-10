@@ -1,0 +1,20 @@
+[(#AUTORISER{associermots,#ENV{objet},#ENV{id_objet},'',#ARRAY{id_groupe,#ENV{id_groupe}}}|sinon_interdire_acces)]
+
+<div class='cadre-formulaire-editer cadre-cmots[(#ENV{popin,''}|oui)cadre-cmots-popin]'>
+<div class="entete-formulaire">
+	[(#ENV{popin}|non)
+		[(#ENV{retour}|icone_verticale{<:spip:retour:>,[(#ENV{objet})-24],'',left retour})]
+	]
+	<:cmots:cocher_groupe:>
+	<h1>#INFO_TITRE{groupe_mots,#ENV{id_groupe}}</h1>
+	<:cmots:pour_objet:> <a href="#INFO_URL{#ENV{objet},#ENV{id_objet}}">#INFO_TITRE{#ENV{objet},#ENV{id_objet}}</a>
+</div>
+
+#SET{redirect,#ENV{retour}}
+[(#ENV{popin,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) {$.modalboxclose(); jQuery(".formulaire_editer_liens-mots").ajaxReload();}'}
+]
+
+<div class="ajax">#FORMULAIRE_CMOTS{#ENV{id_groupe},#ENV{objet},#ENV{id_objet},#GET{redirect}}</div>
+
+</div>
