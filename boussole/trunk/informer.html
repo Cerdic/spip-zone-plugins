@@ -1,4 +1,0 @@
-#CACHE{0}
-[(#SET{contenu, #INCLURE{#ENV{xml}|copie_locale{modif}}})
-][(#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET})
-]#GET{contenu}
