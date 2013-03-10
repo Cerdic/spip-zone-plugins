@@ -9,7 +9,7 @@
 </BOUCLE_10_langues>
 </BOUCLE_si_pas_langues>
 #SET{langues_preferees,#ENV{langues_choisies,#GET{langues_preferees_auteur,#GET{langues_utilisees}}}}
-<BOUCLE_langues_sort(TRADLANGS){fusion lang}{lang == ^((#GET{langues_preferees}|implode{|}|sinon{.*}))$}>
+<BOUCLE_langues_sort(TRADLANGS){fusion lang}{lang IN #GET{langues_preferees}|sinon{.*}}>
 <BOUCLE_strings_ok(TRADLANGS){lang=#LANG}{statut=OK}> </BOUCLE_strings_ok>
 [(#TOTAL_BOUCLE|>{2}|oui)
 #SET{langues,#GET{langues}|array_merge{#ARRAY{#LANG,#TOTAL_BOUCLE}}}]
