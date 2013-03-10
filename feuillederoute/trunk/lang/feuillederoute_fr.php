@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lgd_autorisation_modifier' => 'Modifier la Feuille de route',
 	'cfg_explication_autorisations' => 'Les profils autorisés à modifier la Feuille de Route seront automatiquement autorisés à la lire.',
 	'cfg_form_feuillederoute_titre' => 'Le titre de votre Feuille de Route',
-	'cfg_explication_titre' => 'Vous pouvez choisir le titre qui sera afficher dans le bouton d\'ouverture et dans la feuille elle-même.',
+	'cfg_explication_titre' => 'Vous pouvez choisir le titre qui sera utilisé dans le bouton d\'ouverture et dans la feuille elle-même.',
 	
 	// F
 	'feuillederoute' => 'Feuille de Route',
