@@ -12,11 +12,11 @@
 	<BOUCLE_liste_numeros(NUMEROS liens){id_numero != #GET{id_numero_exclu}}{id_mot?}{objet?}{id_objet?}{where?}{recherche?}{tri #ENV{par,numero},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 	<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 		[(#COMPTEUR_BOUCLE|=={1}|oui) <td class='picto' rowspan='#TOTAL_BOUCLE'></td> ]
-		<td class='#EDIT{titre} titre principale'>
-			[(#TYPE|logo_type_tel) ]#TITRE
+		<td class='principale titre'>
+			[(#TYPE|logo_type_tel) ][<span class="#EDIT{titre}">(#TITRE)</span>]
 		</td>
-		<td class='#EDIT{numero} numero'>
-			#NUMERO
+		<td class='numero'>
+			[<span class="#EDIT{numero}">(#NUMERO)</span>]
 			[(#REM) Un coup pour les champs extras ]
 			[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,numero,id_objet,#ID_NUMERO,contexte,[(#ENV**|unserialize)]})],data,''})]})]
 		</td>

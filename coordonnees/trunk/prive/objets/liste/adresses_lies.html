@@ -13,15 +13,18 @@
 	<BOUCLE_liste_adresses(ADRESSES liens){id_adresse != #GET{id_adresse_exclus}}{id_mot?}{objet?}{id_objet?}{where?}{recherche?}{tri #ENV{par,pays},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 	<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 		[(#COMPTEUR_BOUCLE|=={1}|oui) <td class='picto' rowspan='#TOTAL_BOUCLE'></td> ]
-		<td class='#EDIT{titre} titre principale'>
-			[(#TYPE|logo_type_adr) ]#TITRE
+		<td class='titre principale'>
+			[(#TYPE|logo_type_adr) ][<span class="#EDIT{titre}">(#TITRE)</span>]
 		</td>
 		<td class='adresse'>
-			[<div class='voie'>(#VOIE)</div>]
-			[<div class='complement'>(#COMPLEMENT)</div>]
-			[<div class='boite_postale'>(#BOITE_POSTALE)</div>]
-			[<div class='region'>(#REGION)</div>]
-			[<div class='code_postal'>#CODE_POSTAL (#VILLE)</div>]
+			[<div class="#EDIT{voie} voie">(#VOIE)</div>]
+			[<div class="#EDIT{complement} complement">(#COMPLEMENT)</div>]
+			[<div class="#EDIT{boite_postale} boite_postale">(#BOITE_POSTALE)</div>]
+			[<div class="#EDIT{region} region">(#REGION)</div>]
+			<div>
+				[<span class="#EDIT{code_postal} code_postal">(#CODE_POSTAL)</span>]
+				[<span class="#EDIT{ville} ville">(#VILLE)</span>]
+			</div>
 			<B_pays><div class='pays nom_pays'><BOUCLE_pays(PAYS ?){code=#PAYS}>#NOM</BOUCLE_pays></div></B_pays>[<div class='pays code_pays'>(#NOM)</div>]<//B_pays>
 			[(#REM) Un coup pour les champs extras ]
 			[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,adresse,id_objet,#ID_ADRESSE,contexte,[(#ENV**|unserialize)]})],data,''})]})]

@@ -12,11 +12,15 @@
 	<BOUCLE_liste_emails(EMAILS liens){id_email != #GET{id_email_exclu}}{id_mot?}{objet?}{id_objet?}{where?}{recherche?}{tri #ENV{par,email},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 	<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 		[(#COMPTEUR_BOUCLE|=={1}|oui) <td class='picto' rowspan='#TOTAL_BOUCLE'></td> ]
-		<td class='#EDIT{titre} titre principale'>
-			[(#TYPE|logo_type_mel) ]#TITRE
+		<td class='titre principale'>
+			[(#TYPE|logo_type_mel) ][<span class="#EDIT{titre}">(#TITRE)</span>]
 		</td>
-		<td class='#EDIT{email} email'>
-			[(#TYPE|match{x400}|non)<a href="mailto:#EMAIL">]#EMAIL[(#TYPE|match{x400}|non)</a>]
+		<td>
+			[(#TYPE|match{x400}|non)<a href="mailto:#EMAIL">]
+			[<span class="#EDIT{email} email">(#EMAIL)</span>]
+			[(#TYPE|match{x400}|non)</a>]
+			[(#REM) Un coup pour les champs extras ]
+			[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,email,id_objet,#ID_EMAIL,contexte,[(#ENV**|unserialize)]})],data,''})]})]
 		</td>
 		<td class='action'>
 			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'email', id_coordonnee:'[(#ID_EMAIL)]'}});" href="#coordonnees" title="<:email:icone_modifier_email:>">
