@@ -13,7 +13,6 @@ var tradlang_switchers = function(){
 			});
 		}
 	});
-	
 }
 
 $(document).ready(function(){
