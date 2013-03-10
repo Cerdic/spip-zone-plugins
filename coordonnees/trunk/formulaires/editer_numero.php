@@ -53,7 +53,12 @@ function formulaires_editer_numero_saisies_dist(){
 				'nom' => 'numero',
 				'label' => _T('numero:label_numero'),
 				'obligatoire' => 'oui'
-			)
+			),
+			// decommenter ces lignes quand les numeros
+			// internationaux seront pris en compte par 'verifier'
+			/*'verifier' => array ( 
+				'type' => 'telephone'
+			)*/
 		),
 	);
 	return $saisies;

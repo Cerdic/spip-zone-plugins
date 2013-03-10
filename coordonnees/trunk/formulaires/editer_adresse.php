@@ -65,7 +65,12 @@ function formulaires_editer_adresse_saisies_dist(){
 			'options' => array (
 				'nom' => 'code_postal',
 				'label' => _T('adresse:label_code_postal')
-			)
+			),
+			// decommenter ces lignes quand les codes postaux
+			// internationaux seront pris en compte par 'verifier'
+			/*'verifier' => array ( 
+				'type' => 'code_postal'
+			)*/
 		),
 		array (
 			'saisie' => 'input',
