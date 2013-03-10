@@ -80,6 +80,7 @@ $spip_geoservices = array(
 					"maxzoom"		=> "int(11) default '15'", 
 					"opacity"		=> "double NOT NULL default '1'", 
 					"visibility"	=> "TINYINT(1) default '0'",
+					"selection"		=> "TINYINT(1) default '0'",
 					"zone"			=> "varchar(3) NOT NULL default 'WLD'", 
 					"logo"			=> "VARCHAR(20) NOT NULL default ''",
 					"link"			=> "TEXT NOT NULL default ''",

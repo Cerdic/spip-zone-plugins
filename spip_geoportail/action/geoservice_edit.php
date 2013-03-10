@@ -45,6 +45,7 @@ function action_geoservice_edit_dist()
 		$opacity = _request('opacity');
 		$zone = _request('zone');
 		$visibility = isset($_POST['visibility']);
+		$select = isset($_POST['select']);
 		//$logo = eregi_replace("[^a-z0-9]",'_',_request('logo'));
 		$logo = translitteration(_request('logo'));
 		$logo = eregi_replace("[^a-z0-9]",'_',$logo);
@@ -57,7 +58,7 @@ function action_geoservice_edit_dist()
 		if ($id_geoservice)
 		{	if (autoriser('modifier','geoservice',$id_geoservice, NULL, array('id_rubrique'=>$id_rubrique)))
 			{	spip_query("UPDATE spip_geoservices SET "
-					."id_rubrique='$id_rubrique',type='$type',titre='$titre',descriptif='$descriptif',url_geoservice='$url',zone='$zone',map='$map',layers='$layers',format='$format',niveau='$niveau',maxextent='$maxextent',minzoom='$minzoom',maxzoom='$maxzoom',opacity='$opacity',visibility='$visibility',logo='$logo',link='$link' "
+					."id_rubrique='$id_rubrique',type='$type',titre='$titre',descriptif='$descriptif',url_geoservice='$url',zone='$zone',map='$map',layers='$layers',format='$format',niveau='$niveau',maxextent='$maxextent',minzoom='$minzoom',maxzoom='$maxzoom',opacity='$opacity',visibility='$visibility',selection='$select',logo='$logo',link='$link' "
 					."WHERE id_geoservice=$id_geoservice");
 			}
 		}

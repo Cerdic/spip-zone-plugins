@@ -49,10 +49,11 @@ $(document).ready(changeTypeService);
 <span class="param wms wfs kml wms-c">
 <:geoportail:geoservice_url:> :
 <input class="formo" name="url" id="url" style="width:100%" value="[(#ENV{url_geoservice}|entites_html)]" />
+<span class="param kml" style='font-style:italic; font-weight:bold; display:block; color:#F80; padding:5px;'><:geoportail:kml_info:><br /></span>
 <br/></span>
 
-<span class="param wfs kml wms-c" style="color:red; font-weight:bold; display:none;">
-Fonctionnalit&eacute; non impl&eacute;ment&eacute;e...<br/></span>
+<span class="param wfs wms-c" style="color:red; font-weight:bold; display:none;">
+Fonctionnalit&eacute; non impl&eacute;ment&eacute;e...<br/><br /></span>
 
 <span class="param wms">
 <:geoportail:geoservice_map:> :
@@ -67,9 +68,17 @@ Fonctionnalit&eacute; non impl&eacute;ment&eacute;e...<br/></span>
 </select>
 <br/>
 <br/></span>
-<:geoportail:niveau:> :
-<input class=formo style="display:inline; width:60px;"  type=text name=niveau value="[(#NIVEAU)]"  />
 <br/>
+
+<div class='cadre-e-noir inner'>
+<div style="position: relative;"><div style="position: absolute; top: -15px; left: 10px;"><img alt="" src="#CHEMIN{img/globe1.png}"/></div></div>
+<div class=cadre-e style="padding:0.5em 1em;">
+<label ><:geoportail:niveau:> : </label><input class=formo style="display:inline; width:60px;"  type=text name='niveau' value="[(#NIVEAU)]"  />
+<br />
+<input type=checkbox name='select' id="select" [(#SELECTION|=={1}|?{CHECKED})] />
+<label for='select' ><:geoportail:selectionnable:></label>
+</div>
+</div>
 <br/>
 <br/>
 

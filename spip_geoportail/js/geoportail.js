@@ -13,7 +13,7 @@
 
 
 /** Gestion de l'initialisation des Maps */
-jQuery.geoportail =
+var spipGeoportail = jQuery.geoportail =
 {	// La liste des cartes
 	cartes: new Array(),
 	// Liste des fonctions d'initialisation (chargees par onload)
@@ -112,16 +112,17 @@ jQuery.geoportail =
 		// OK !
 		for (i = 0; i < this.cartes.length; i++)
 		{	var carte = this.cartes[i];
-			// Charger
-			carte.geoportalLoadmap();
-
 			// La carte geoportail
 			var map = carte.map;
 			var id = carte.id;
-			// Ajouter une fonction d'export
-			map.downloadData = geoportail_loadData;
 			// Ajouter une fonction de selection de layer
 			map.selectionnable = geoportail_selectionnable;
+			// Ajouter une fonction d'export
+			map.downloadData = geoportail_loadData;
+			
+			// Charger
+			carte.geoportalLoadmap();
+
 			// Recherche du placement dans l'adresse
 			var lon = Number(this.getParam("lon"));
 			var lat = Number(this.getParam("lat"));
@@ -436,75 +437,98 @@ jQuery.geoportail =
 		}
 	},
 	
+	/** Fonctions de chargement d'un service
+	*/
+	geoserviceLoad: 
+	{	// Originator (logo ign par defaut)
+		originator: function (service, options)
+		{	var orig = { logo: (options.logo ? options.logo:'ign') };
+			if (options.picture) 
+			{	if (!options.logo) orig.logo = 'logo'+service.id_geoservice;
+				orig.pictureUrl = options.picture;
+				orig.url = options.link;
+			}
+			return orig;
+		},
+		// Chargment d'un layer geoportail
+		GeoPortail: function (map, type, titre, desc, service, options)
+		{	var tab, couches, i, j;
+			tab = new Array();
+			couches = service.layers.split(/,/g);
+			for (i=0; i<map.getMap().layers.length; i++)
+			{	if (map.getMap().layers[i].territory == map.territory) 
+				{	for(j=0; j<couches.length; j++)
+					{	if (map.getMap().layers[i].name == couches[j]) 
+						{	tab[tab.length] = map.getMap().layers[i];
+							map.getMap().layers[i].setOpacity(options.opacity);
+							map.getMap().layers[i].setVisibility(false);
+						}
+					}
+				}
+			}
+			// Aggreger les couches
+			if (tab.length>0)
+			{	var l = new Geoportal.Layer.Aggregate (titre, tab, 
+				{	opacity:options.opacity, 
+					visibility:options.visibility, 
+					description: desc,
+					metadataURL: options.link,
+					displayInLayerSwitcher:true 
+				});
+				map.getMap().addLayer ( l );
+			}
+		}, 
+		// Chargment d'un layer WMS
+		WMS: function (map, type, titre, desc, service, options)
+		{	map.getMap().addLayer(
+				type, titre, service.url,
+				{	//map: (service.map ? service.map : null),
+					layers:	service.layers,
+					format: service.format,
+					transparent:'true'
+				},
+				{	singleTile:true,
+					projection: 'EPSG:4326',
+					srs:{'EPSG:4326':'EPSG:4326', 'EPSG:3785':'EPSG:3785'},//some supported SRS from capabilities
+					units:'degrees',
+					// maxExtent expressed in EPSG:4326 :
+					maxExtent: options.maxextent,
+					minZoomLevel: options.minzoom,
+					maxZoomLevel: options.maxzoom,
+					opacity: options.opacity,
+					isBaseLayer: false,
+					description: desc,
+					metadataURL: options.link,
+					visibility: options.visibility,
+					originators: [ spipGeoportail.geoserviceLoad.originator(service, options) ]
+				}
+			);
+		},
+		// Chargment d'un layer KML
+		KML: function (map, type, titre, desc, service, options)
+		{	var n = Number(map.nameInstance.replace('map',''));
+			spipGeoportail.addLayer ( spipGeoportail.getCarte(n), type, 0, titre, service.url, true,  
+				{	maxExtent: options.maxextent,
+					minZoomLevel: options.minzoom,
+					maxZoomLevel: options.maxzoom,
+					select: false,
+					description: desc,
+					metadataURL: options.link,
+					opacity: options.opacity,
+					visibility: options.visibility,
+					select: options.select,
+					originators: [ spipGeoportail.geoserviceLoad.originator(service, options) ]
+				});
+		}
+	},
+	
 	/** Ajouter un geoservice a la carte
 	*/
 	addGeoservice: function (map, type, titre, desc, service, options)
-	{	// Originator (logo ign par defaut)
-		var orig = { logo: (options.logo ? options.logo:'ign') };
-		if (options.picture) 
-		{	if (!options.logo) orig.logo = 'logo'+service.id_geoservice;
-			orig.pictureUrl = options.picture;
-			orig.url = options.link;
-		}
-		// Creer le layer
-		switch (type)
-		{	case "GeoPortail":
-				{	var tab, couches, i, j;
-					tab = new Array();
-					couches = service.layers.split(/,/g);
-					for (i=0; i<map.getMap().layers.length; i++)
-					{	if (map.getMap().layers[i].territory == map.territory) 
-						{	for(j=0; j<couches.length; j++)
-							{	if (map.getMap().layers[i].name == couches[j]) 
-								{	tab[tab.length] = map.getMap().layers[i];
-									map.getMap().layers[i].setOpacity(options.opacity);
-									map.getMap().layers[i].setVisibility(false);
-								}
-							}
-						}
-					}
-					if (tab.length>0)
-					{	var l = new Geoportal.Layer.Aggregate (titre, tab, 
-						{	opacity:options.opacity, 
-							visibility:options.visibility, 
-							description: desc,
-							metadataURL: options.link,
-							displayInLayerSwitcher:true 
-						});
-						map.getMap().addLayer ( l );
-					}
-				}
-				break;
-			case "WMS":
-				map.getMap().addLayer(
-					type, titre, service.url,
-					{	//map: (service.map ? service.map : null),
-						layers:	service.layers,
-						format: service.format,
-						transparent:'true'
-					},
-					{	singleTile:true,
-						projection: 'EPSG:4326',
-						srs:{'EPSG:4326':'EPSG:4326', 'EPSG:3785':'EPSG:3785'},//some supported SRS from capabilities
-						units:'degrees',
-						// maxExtent expressed in EPSG:4326 :
-						maxExtent: options.maxextent,
-						minZoomLevel: options.minzoom,
-						maxZoomLevel: options.maxzoom,
-						opacity: options.opacity,
-						isBaseLayer: false,
-						description: desc,
-						metadataURL: options.link,
-						visibility: options.visibility,
-						originators: [ orig ]
-					}
-				);
-				break;
-			case "WMS-C":
-			case "WFS":
-			case "KML":
-			default: break;
-		}
+	{	// Chargeur de service
+		var loader = spipGeoportail.geoserviceLoad[type];
+		if (loader) loader (map, type, titre, desc, service, options);
+		return;
 	},
 	
 	/** Ajouter un fichier GPX,KML,GXT
@@ -550,7 +574,7 @@ jQuery.geoportail =
 			setStyle(l.styleMap.styles['select'], 'geoportailSelectStyle');
 			
 			// Permettre la selection du layer
-			map.selectionnable (l);
+			if (typeof(opts.select)=='undefined' || opts.select) map.selectionnable (l);
 		
 			// Sauvegarder l'id du document
 			l.id_document = id_document;

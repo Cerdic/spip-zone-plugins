@@ -134,6 +134,21 @@ function geoportail_defaut ($mode)
 	return $mode;
 }
 
+/** Recherche d'un document ou renvoie l'url
+*/
+function geoservice_url ($url)
+{	if (preg_match('/^doc(\d+)/',$url,$match)) 
+	{	$id = intval($match[1]);
+	/*
+		$row = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document=$id LIMIT 0,1"));
+		return _DIR_IMG.$row['fichier'];
+	*/
+		include_spip('urls/standard');
+		return (generer_url_document($id));
+	}
+	else return $url;
+}
+
 /** Transformation degre/minute/seconde
 */
 function geoportail_dms($l, $short=false)

@@ -36,6 +36,7 @@ function exec_geoservice_edit()
 			'maxzoom' => '15',
 			'opacity' => '1',
 			'visibility' => '0',
+			'selection' => '0',
 			'maxextent' => '-180,-90,180,90'
 		);
 	}

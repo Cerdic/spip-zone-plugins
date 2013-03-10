@@ -145,6 +145,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'link'			=> 'Lien vers le service',
 'geoservice_descriptif'	=> 'Descritif du service',
 'icone_ajouter_service'	=> 'Ajouter un nouveau service',
+'selectionnable'	=> 'couche s&eacute;lectionnable <i>(lorsque le service le permet)</i>.',
+'kml_info'			=> 'Attention : l\'affichage de fichiers distants n&eacute;cessite l\'utilisation d\'un proxy et la d&eacute;claration du site au plugin.',
 
 'dans_rubrique'		=> 'dans la rubrique',
 'toutes_rubriques'	=> 'dans tout le site',
