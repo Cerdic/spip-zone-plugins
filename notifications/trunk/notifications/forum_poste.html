@@ -22,7 +22,17 @@ Mail HTML simplifie mis en forme complete par le filtre |facteur_email_wrap_to_h
 	[
 	(#TEXTE|safehtml)
 	]
-
+	<B_doc>
+		<h4>[(#TOTAL_BOUCLE|singulier_ou_pluriel{medias:un_document,medias:des_documents})]</h4>
+		<ul>
+		<BOUCLE_doc(DOCUMENTS){id_forum}>
+			<li>
+				<a href="[(#URL_DOCUMENT|url_absolue)]">#URL_DOCUMENT</a>
+				<br /><small>([<abbr title="<:info_document:> #TYPE_DOCUMENT" class="ext">(#EXTENSION|strtoupper)</abbr> - ][<span>(#TAILLE|taille_en_octets)</span>])</small>
+			</li>
+		</BOUCLE_doc>
+		</ul>
+	</B_doc>
 
 	<div class="footer">
 		<hr/>
