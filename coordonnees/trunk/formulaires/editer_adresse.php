@@ -19,8 +19,7 @@ function formulaires_editer_adresse_saisies_dist(){
 			'options' => array (
 				'nom' => 'titre',
 				'label' => _T('adresse:label_titre'),
-				'placeholder' => _T('adresse:placeholder_titre'),
-				'obligatoire' => 'oui'
+				'placeholder' => _T('adresse:placeholder_titre')
 			)
 		),
 		array (
@@ -28,7 +27,6 @@ function formulaires_editer_adresse_saisies_dist(){
 			'options' => array (
 				'nom' => 'type',
 				'label' => _T('adresse:label_type'),
-				'obligatoire' => 'oui',
 				'datas' => array (
 					'home' => _T('adresse:type_adr_home'),
 					'work' => _T('adresse:type_adr_work'),
@@ -44,8 +42,7 @@ function formulaires_editer_adresse_saisies_dist(){
 			'saisie' => 'input',
 			'options' => array (
 				'nom' => 'voie',
-				'label' => _T('adresse:label_voie'),
-				'obligatoire' => 'oui'
+				'label' => _T('adresse:label_voie')
 			)
 		),
 		array (
@@ -67,11 +64,7 @@ function formulaires_editer_adresse_saisies_dist(){
 			'saisie' => 'input',
 			'options' => array (
 				'nom' => 'code_postal',
-				'label' => _T('adresse:label_code_postal'),
-				'obligatoire' => 'oui',
-			),
-			'verifier' => array (
-				'type' => 'code_postal'
+				'label' => _T('adresse:label_code_postal')
 			)
 		),
 		array (
@@ -85,8 +78,7 @@ function formulaires_editer_adresse_saisies_dist(){
 			'saisie' => 'input',
 			'options' => array (
 				'nom' => 'ville',
-				'label' => _T('adresse:label_ville'),
-				'obligatoire' => 'oui',
+				'label' => _T('adresse:label_ville')
 			)
 		),
 		array (

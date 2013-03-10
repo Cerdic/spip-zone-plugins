@@ -20,8 +20,7 @@ function formulaires_editer_email_saisies_dist(){
 			'options' => array (
 				'nom' => 'titre',
 				'label' => _T('email:label_titre'),
-				'placeholder' => _T('email:placeholder_titre'),
-				'obligatoire' => 'oui'
+				'placeholder' => _T('email:placeholder_titre')
 			)
 		),
 		array (
@@ -29,7 +28,6 @@ function formulaires_editer_email_saisies_dist(){
 			'options' => array (
 				'nom' => 'type',
 				'label' => _T('email:label_type'),
-				'obligatoire' => 'oui',
 				'datas' => array (
 					'home' => _T('email:type_mel_home'),
 					'work' => _T('email:type_mel_work')

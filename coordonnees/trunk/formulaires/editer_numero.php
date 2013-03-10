@@ -20,8 +20,7 @@ function formulaires_editer_numero_saisies_dist(){
 			'options' => array (
 				'nom' => 'titre',
 				'label' => _T('numero:label_titre'),
-				'placeholder' => _T('numero:placeholder_titre'),
-				'obligatoire' => 'oui'
+				'placeholder' => _T('numero:placeholder_titre')
 			)
 		),
 		array (
@@ -29,7 +28,6 @@ function formulaires_editer_numero_saisies_dist(){
 			'options' => array (
 				'nom' => 'type',
 				'label' => _T('numero:label_type'),
-				'obligatoire' => 'oui',
 				'datas' => array (
 					'home' => _T('numero:type_tel_home'),
 					'work' => _T('numero:type_tel_work'),
@@ -55,9 +53,6 @@ function formulaires_editer_numero_saisies_dist(){
 				'nom' => 'numero',
 				'label' => _T('numero:label_numero'),
 				'obligatoire' => 'oui'
-			),
-			'verifier' => array (
-				'type' => 'telephone'
 			)
 		),
 	);
