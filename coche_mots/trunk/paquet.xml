@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/coche_mots-32.png"
-	documentation="http://contrib.spip.net/"
+	documentation="http://contrib.spip.net/?article4342"
 >
 
 	<nom>Coche Mots</nom>
