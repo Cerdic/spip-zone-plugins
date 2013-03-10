@@ -3,7 +3,7 @@
 	categorie="squelette"
 	version="0.2"
 	etat="test"
-	compatibilite="[3.0.0-beta;3.0.99]"
+	compatibilite="[2.0.0;3.0.99]"
 	logo="vignette.jpg"
 	documentation="http://contrib.spip.net/article4341"
 >	
