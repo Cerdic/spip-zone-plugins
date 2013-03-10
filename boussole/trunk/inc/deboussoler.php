@@ -3,8 +3,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-// ----------------------- Traitements des boussoles ---------------------------------
-
 /**
  * Ajout de la boussole dans la base de donnees
  *
@@ -76,7 +74,6 @@ function boussole_ajouter($boussole, $serveur='spip') {
 	}
 	// -- consignation des informations de mise a jour de cette boussole dans la table spip_meta
 	$infos['boussole']['nbr_sites'] = count($infos['sites']);
-	$infos['boussole']['serveur'] = $serveur;
 	$infos['boussole']['maj'] = date('Y-m-d H:i:s');
 	ecrire_meta($meta_boussole, serialize($infos['boussole']));
 
@@ -131,7 +128,7 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 	include_spip('inc/distant');
 	$action = str_replace(
 				array('[action]','[arguments]'),
-				array('serveur_informer_boussole', $boussole),
+				array('serveur_informer_boussole', "&arg=${boussole}"),
 				$client_serveurs_disponibles[$serveur]['api']);
 	$page = recuperer_page($action);
 

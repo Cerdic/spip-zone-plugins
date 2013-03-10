@@ -5,15 +5,19 @@ function genie_boussole_actualiser_serveur_dist($last) {
 
 	include_spip('inc/cacher');
 
-	// Acquisition de la liste des boussoles disponibles sur le serveur
-	$boussoles = array();
+	// Acquisition de la liste des boussoles disponibles sur le serveur.
+	// (on sait déjà que le mode serveur est actif)
+	$boussoles = $GLOBALS['serveur_boussoles_disponibles'];
 	$boussoles = pipeline('declarer_boussoles', $boussoles);
 
-	// Regénération du cache de chaque boussole disponible
 	if ($boussoles) {
+		// Génération du cache de chaque boussole disponible pour l'action serveur_informer_boussole
 		foreach($boussoles as $_alias => $_infos) {
 			boussole_cacher($_alias, $_infos['prefixe']);
 		}
+
+		// Génération du cache de la liste des boussoles disponibles pour l'action serveur_lister_boussoles
+		boussole_lister($boussoles);
 	}
 
 	return 1;

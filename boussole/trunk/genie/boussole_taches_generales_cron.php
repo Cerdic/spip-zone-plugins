@@ -7,13 +7,13 @@ function boussole_taches_generales_cron($taches_generales) {
 	// - des boussoles disponibles pour le serveur
 	// - des boussoles ajoutés pour le client
 
-	// -- Pour le CRON serveur on vérifie qu'une boussole est déclarée
-	$boussoles = array();
-	$boussoles = pipeline('declarer_boussoles', $boussoles);
-	if ($boussoles)
+	// -- Pour le CRON serveur on vérifie que le mode serveur est actif
+	//    (l'existence d'une boussole disponible est vérifiée dans la tache elle-même)
+	if (_BOUSSOLE_ALIAS_SERVEUR) {
 		$taches_generales['boussole_actualiser_serveur'] = 24*3600;
+	}
 
-	// -- Pour le CRON client la vérification est faite dans la tache elle-même
+	// -- Pour le CRON client la vérification d'une boussole ajoutée est faite dans la tache elle-même
 	$taches_generales['boussole_actualiser_client'] = 24*3600;
 
 	return $taches_generales;

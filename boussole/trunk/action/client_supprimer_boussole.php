@@ -1,14 +1,14 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Action de suppression en base de donnees de la boussole
  *
  */
-
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
 function action_client_supprimer_boussole_dist(){
 
-	// Securisation: argument attendu est l'alias de la boussole
+	// Securisation car action auteur: argument attendu est l'alias de la boussole
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$alias = $securiser_action();
 

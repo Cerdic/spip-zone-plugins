@@ -2,9 +2,12 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+if (!defined('_BOUSSOLE_PATTERN_SHA'))
+	define('_BOUSSOLE_PATTERN_SHA', '%sha_contenu%');
 
 /**
- * Génération du cache xml de la boussole contruit soit à partir de xml non traduit soit à parti d'un xml déjà traduit
+ * Génération du cache xml de la boussole contruit soit à partir de xml non traduit soit à parti d'un xml déjà traduit.
+ * Ce cache est renvoyé sur l'action serveur_informer_boussole
  *
  * @api
  *
@@ -19,17 +22,17 @@ function boussole_cacher($alias, $prefixe_plugin='') {
 		- fichier XML contenant une boussole déjà traduite (pas de DTD possible)
 		- fichier XML contenant une boussole source non traduite (conforme à boussole.dtd)
 	*/
-	if ($xml = find_in_path("boussole_traduite-${alias}.xml")) {
+	if ($fichier_xml = find_in_path("boussole_traduite-${alias}.xml")) {
 		// TODO : compléter le cas où du XML boussole déja traduit
 	}
-	elseif ($xml = find_in_path("boussole-${alias}.xml")) {
+	elseif ($fichier_xml = find_in_path("boussole-${alias}.xml")) {
 		// Validation du fichier XML source (boussole.dtd)
 		include_spip('inc/deboussoler');
-		if (!boussole_valider_xml($xml, $erreur))
+		if (!boussole_valider_xml($fichier_xml, $erreur))
 			spip_log("XML source non conforme (alias = $alias) : " . var_export($erreur['detail'], true), 'boussole' . _LOG_ERREUR);
 
 		// Création du cache à partir du fichier XML source
-		elseif (!xml_to_cache($xml, $alias, $prefixe_plugin))
+		elseif (!xml_to_cache($fichier_xml, $alias, $prefixe_plugin))
 			spip_log("Cache XML non créé (alias = $alias)", 'boussole' . _LOG_ERREUR);
 
 		else
@@ -37,6 +40,64 @@ function boussole_cacher($alias, $prefixe_plugin='') {
 	}
 	else
 		spip_log("XML source introuvable (alias = $alias)", 'boussole' . _LOG_ERREUR);
+
+	return $retour;
+}
+
+
+/**
+ * Génération du cache de la liste des boussoles disponibles
+ * Ce cache est renvoyé sur l'action serveur_lister_boussoles
+ *
+ * @api
+ *
+ * @param array $boussoles
+ */
+function boussole_lister($boussoles) {
+	$retour = false;
+
+	if ($boussoles) {
+		$cache = '';
+		foreach($boussoles as $_alias => $_infos) {
+			$fichier_xml = _DIR_VAR . "cache-boussoles/boussole-${_alias}.xml";
+			if (file_exists($fichier_xml)) {
+				// Extraction des seules informations de la boussole pour créer le cache (pas de groupe ni site)
+				lire_fichier($fichier_xml, $xml);
+				$convertir = charger_fonction('simplexml_to_array', 'inc');
+				$tableau = $convertir(simplexml_load_string($xml), false);
+
+				if  (isset($tableau['name'])
+				AND ($tableau['name'] == 'boussole')) {
+					$cache .= inserer_balise('ouvrante', $tableau['name'], $tableau['attributes'], 1);
+					if (isset($tableau['children']['nom'])) {
+						$cache .= inserer_balise('ouvrante', 'nom', '', 2)
+								. inserer_balise('ouvrante', 'multi', '', 3)
+								. indenter(3) . $tableau['children']['nom'][0]['children']['multi'][0]['text'] . "\n"
+								. inserer_balise('fermante', 'multi', '', 3)
+								. inserer_balise('fermante', 'nom', '', 2);
+					}
+					$cache .= inserer_balise('fermante', $tableau['name'], '', 1);
+				}
+			}
+		}
+
+		if ($cache) {
+			$cache = inserer_balise('ouvrante', 'boussoles', array('sha' => _BOUSSOLE_PATTERN_SHA))
+				   . $cache
+				   . inserer_balise('fermante', 'boussoles', '');
+			$sha = sha1($cache);
+			$cache = str_replace(_BOUSSOLE_PATTERN_SHA, $sha, $cache);
+
+			$dir = sous_repertoire(_DIR_VAR, 'cache-boussoles');
+			$fichier_cache = $dir . 'boussoles.xml';
+			ecrire_fichier($fichier_cache, $cache);
+
+			$fichier_sha = $fichier_cache . '.sha';
+			ecrire_fichier($fichier_sha, sha1_file($fichier_cache));
+
+			$retour = true;
+		}
+	}
 
 	return $retour;
 }
@@ -92,7 +153,8 @@ function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin) {
 	$convertir = charger_fonction('simplexml_to_array', 'inc');
 	$tableau = $convertir(simplexml_load_string($xml), false);
 
-	if ($tableau['name'] == 'boussole') {
+	if  (isset($tableau['name'])
+	AND ($tableau['name'] == 'boussole')) {
 		include_spip('inc/filtres');
 		include_spip('inc/filtres_mini');
 
@@ -102,6 +164,10 @@ function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin) {
 		// -- insertion de la version du plugin comme version du xml
 		$versionner = charger_filtre('info_plugin');
 		$att_boussole['version'] = $versionner(strtoupper($prefixe_plugin), 'version');
+		// -- insertion de l'alias du serveur
+		$att_boussole['serveur'] = _BOUSSOLE_ALIAS_SERVEUR;
+		// -- insertion du pattern pour le sha1 du contenu
+		$att_boussole['sha'] = _BOUSSOLE_PATTERN_SHA;
 		// -- merge de tous les attributs
 		$att_boussole = array_merge($att_boussole, $tableau['attributes']);
 		$cache .= inserer_balise('ouvrante', $tableau['name'], $att_boussole);
@@ -137,14 +203,19 @@ function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin) {
 
 		// Création du cache et du sha1 associé
 		if ($cache) {
+			// insertion du sha comme attribut du fichier
+			$sha = sha1($cache);
+			$cache = str_replace(_BOUSSOLE_PATTERN_SHA, $sha, $cache);
+
 			$dir = sous_repertoire(_DIR_VAR, 'cache-boussoles');
 			$fichier_cache = $dir . basename($fichier_xml);
 			ecrire_fichier($fichier_cache, $cache);
 
 			$fichier_sha = $fichier_cache . '.sha';
 			ecrire_fichier($fichier_sha, sha1_file($fichier_cache));
+
+			$retour = true;
 		}
-		$retour = true;
 	}
 
 	return $retour;

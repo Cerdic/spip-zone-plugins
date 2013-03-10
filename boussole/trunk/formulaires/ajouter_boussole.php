@@ -2,8 +2,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/deboussoler');
-
 function formulaires_ajouter_boussole_charger_dist(){
 	return array('mode' => _request('mode'),
 				'url_boussole' => _request('url_boussole'));
@@ -12,16 +10,6 @@ function formulaires_ajouter_boussole_charger_dist(){
 
 function formulaires_ajouter_boussole_verifier_dist(){
 	$erreurs = array();
-	$mode = _request('mode');
-
-	if ($mode == 'url_perso') {
-		// Pour le mode perso uniquement on verifie que le fichier a bien ete saisi
-		$url = _request('url_boussole');
-		if (!$url)
-			// L'url est obligatoire
-			$erreurs['url_boussole'] = _T('boussole:message_nok_champ_obligatoire');
-	}
-	
 	return $erreurs;
 }
 
@@ -42,6 +30,7 @@ function formulaires_ajouter_boussole_traiter_dist(){
 	}
 
 	// On insere la boussole dans la base
+	include_spip('inc/deboussoler');
 	list($ok, $message) = boussole_ajouter($boussole, $serveur);
 		
 	// Determination des messages de retour
