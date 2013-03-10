@@ -69,7 +69,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut' => 'Statut de l\'auteur',
 	'signoff' => 'Signoff',
 	'subscribe' => 'Subscribe',
-
+	'soapsympa_nom' => 'Spip ML SYMPA',
+	'soapsympa_slogan' =>'Gérer vos listes SYMPA depuis l\'espace privé de SPIP',
 	// T
 	'votre_email' => 'Saisissez courriel',
 	'voir_abonnes' => 'Voir les abonnés'

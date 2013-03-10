@@ -2,13 +2,14 @@
 	prefix="soapsympa"
 	categorie="communication"
 	version="0.1.4"
-	etat="test"
-	compatibilite="[2.1;3.0.*]"
+	etat="stable"
+	compatibilite="[3.0.*]"
 	logo="prive/themes/spip/images/soapsympa-128.png"
-	schema="0.1.4"
+	schema="0.1.5"
 	documentation="http://www.spip-contrib.net/Spip-ML-SYMPA"
->
-	<nom>Spip ML Soap</nom>
+	
+	<nom>soapsympa_nom</nom>
+	<slogan>soapsympa_slogan</slogan>
 	<auteur>Thomas Weiss</auteur>	
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
@@ -27,3 +28,4 @@
 	<menu nom="configurer_soapsympa" titre="soapsympa:configurer_soapsympa" parent="menu_configuration" icone="images/soapsympa-16.png" action="configurer_soapsympa" />
 
 </paquet>
+
