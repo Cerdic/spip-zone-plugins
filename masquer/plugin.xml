@@ -3,7 +3,7 @@
 	<slogan>Cacher des contenus sur le site public</slogan>
 	<auteur>Nicolas Hoizey, [St&#233;phanie Caron de Clever Age->http://www.clever-age.com/], Patrice Vanneufville</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.5.0</version>
+	<version>0.5.1</version>
 	<description>Ce plugin permet de masquer sur le site public les contenus qui ont un mot cl&#233; dont le titre est &#171; masquer &#187;. Si une rubrique est masqu&#233;e, toute sa branche l'est aussi. Seuls les rubriques et articles sont g&#233;r&#233;s dans un premier temps. Il suffit d'ajouter le crit&#232;re <code>{tout_voir}</code> aux boucles pour forcer l'affichage des contenus masqu&#233;s.  
 	</description>
 	<etat>test</etat>

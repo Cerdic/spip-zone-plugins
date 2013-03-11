@@ -59,7 +59,7 @@ function masquer_liste_articles($publie=false){
 	include_spip('base/abstract_sql');
 	$tmp = sql_allfetsel('id_article', 'spip_articles as ma', ($publie?"ma.statut='publie' AND ":'') . sql_in('ma.id_rubrique', masquer_liste_rubriques($publie)));
 	if (!count($tmp))
-		return $liste_articles[$publie] = array();
+		return $liste_articles[$publie] = masquer_liste_objets_direct('article');
 	$tmp = array_map('reset', $tmp);
 	$tmp = array_unique(array_merge($tmp, masquer_liste_objets_direct('article')));
 	return $liste_articles[$publie] = $tmp;
