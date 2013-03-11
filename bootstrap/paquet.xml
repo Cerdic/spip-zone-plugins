@@ -1,7 +1,7 @@
 <paquet
 	prefix="bootstrap"
 	categorie="outil"
-	version="1.4.3"
+	version="1.5.0"
 	etat="test"
 	compatibilite="[3.0.2;3.0.*]"
 	logo="img/bootstrap-32.png"
@@ -12,7 +12,7 @@
 
 	<auteur lien='http://www.nursit.com'>Cedric Morin</auteur>
 	<auteur lien='http://www.studiomaiis.net'>Pierre Basson</auteur>
-	<credit lien='http://twitter.github.com/bootstrap/'>twitter/bootstrap v2.2.2</credit>
+	<credit lien='http://twitter.github.com/bootstrap/'>twitter/bootstrap v2.3.1</credit>
 	<credit lien='http://hashgrid.com/'>dotjay/hashgrid</credit>
 
 	<licence>GNU/GPL</licence>
@@ -20,7 +20,7 @@
 	<pipeline nom="affichage_final" inclure="bootstrap_fonctions.php" />
 
 	<necessite nom="SPIP" compatibilite="[3.0.0;]" />
-	<necessite nom="lesscss" compatibilite="[0.7.0;]" />
+	<necessite nom="lesscss" compatibilite="[0.7.2;]" />
 
 	<chemin path="bootstrap" type="public" />
 	<chemin path="bootstrap2spip" type="public" />
