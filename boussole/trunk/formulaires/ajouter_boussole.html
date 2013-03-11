@@ -13,8 +13,8 @@
 		parametre : url d'action --> ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<p class="explication"><:boussole:info_ajouter_boussole:></p>
-		<ul>
 		<B_autres_boussoles>
+		<ul>
 			<li class="editer_mode[(#ENV{erreurs}|table_valeur{mode}|oui) erreur]">
 				<label><:boussole:label_mode:></label>
 		<BOUCLE_autres_boussoles(DATA) {source table, #ENV{_boussoles}}{par cle}>
@@ -32,14 +32,13 @@
 				</div>
 		</BOUCLE_autres_boussoles>
 			</li>
-		</B_autres_boussoles>
-			Aucune boussole disponible
-		<//B_autres_boussoles>
 		</ul>
-
-		<p class="boutons">
-			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
-		</p>
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+		</B_autres_boussoles>
+			#BOITE_OUVRIR{'', notice}
+				<:boussole:message_aucune_boussole_a_ajouter:>
+			#BOITE_FERMER
+		<//B_autres_boussoles>
 	</div></form>
 	</BOUCLE_editable>
 </div>
