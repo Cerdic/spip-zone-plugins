@@ -1233,7 +1233,7 @@ add_variables( array(
 	'nom' => 'fonds_demailcrypt2',
 	'format' => _format_CHAINE,
 	'lignes' => 4,
-	'defaut' => '"saisies-vues/_base:\notifications/formulaire_email:\nnotifications/formulaire_accuse"',
+	'defaut' => '"saisies-vues/_base:\nnotifications/formulaire_email:\nnotifications/formulaire_accuse"',
 	'code' => "if(%%fonds_demailcrypt%%) define('_MAILCRYPT_FONDS_DEMAILCRYPT', %s);",
 ));
 add_outil( array(
