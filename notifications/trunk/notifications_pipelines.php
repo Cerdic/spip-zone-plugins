@@ -40,7 +40,7 @@ function notifications_post_edition($x){
 	#spip_log($x,'notifications');
 	if (isset($x['args']['table'])
 		AND $quoi = $GLOBALS['notifications_post_edition'][$x['args']['table']]
-	) {
+	){
 		// repasser par l'entree principale
 		$notifications = charger_fonction('notifications', 'inc');
 		$notifications($quoi, $x['args']['id_objet'], array());
@@ -61,19 +61,19 @@ function notifications_notifications_destinataires($flux){
 	$options = $flux['args']['options'];
 
 	// proposition d'article prevenir les admins restreints
-	if ($quoi == 'instituerarticle' AND $GLOBALS['notifications']['prevenir_admins_restreints']
-		AND $options['statut'] == 'prop' AND $options['statut_ancien'] != 'publie' // ligne a commenter si vous voulez prevenir de la publication
-	) {
+	if ($quoi=='instituerarticle' AND $GLOBALS['notifications']['prevenir_admins_restreints']
+		AND $options['statut']=='prop' AND $options['statut_ancien']!='publie' // ligne a commenter si vous voulez prevenir de la publication
+	){
 
 		$id_article = $flux['args']['id'];
 		include_spip('base/abstract_sql');
 		$t = sql_fetsel("id_rubrique", "spip_articles", "id_article=" . intval($id_article));
 		$id_rubrique = $t['id_rubrique'];
 
-		while ($id_rubrique) {
+		while ($id_rubrique){
 			$hierarchie[] = $id_rubrique;
 			$res = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=" . intval($id_rubrique));
-			if (!$res) { // rubrique inexistante
+			if (!$res){ // rubrique inexistante
 				$id_rubrique = 0;
 				break;
 			}
@@ -86,9 +86,9 @@ function notifications_notifications_destinataires($flux){
 		$result_email = sql_select(
 			"auteurs.email,auteurs.id_auteur,lien.id_objet as id_rubrique",
 			"spip_auteurs AS auteurs JOIN spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur ",
-			"lien.objet='rubrique' AND " . sql_in('lien.id_objet', sql_quote($hierarchie)) . " AND auteurs.statut='0minirezo'");
+			"lien.objet='rubrique' AND ".sql_in('lien.id_objet',sql_quote($hierarchie))." AND auteurs.statut='0minirezo'");
 
-		while ($qui = sql_fetch($result_email)) {
+		while ($qui = sql_fetch($result_email)){
 			spip_log($options['statut'] . " article > admin restreint " . $qui['id_auteur'] . " de la rubrique" . $qui['id_rubrique'] . " prevenu", 'notifications');
 			$flux['data'][] = $qui['email'];
 		}
@@ -96,13 +96,9 @@ function notifications_notifications_destinataires($flux){
 	}
 
 	// publication d'article : prevenir les auteurs
-	// mars 2013 : PROPOSTION d'article prévenir les auteurs
-	if (
-		($quoi == 'instituerarticle' AND $GLOBALS['notifications']['prevenir_auteurs_articles']) or
-		($quoi == 'instituerarticle' AND $GLOBALS['notifications']['prevenir_auteurs_articles_proposes']
-		AND $options['statut'] == 'prop' AND $options['statut_ancien'] != 'publie')
-
-	) {
+	if ($quoi=='instituerarticle'
+		AND $GLOBALS['notifications']['prevenir_auteurs_articles']
+	){
 		$id_article = $flux['args']['id'];
 
 
@@ -112,37 +108,36 @@ function notifications_notifications_destinataires($flux){
 		$result_email = sql_select(
 			"auteurs.email",
 			"spip_auteurs AS auteurs JOIN spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur",
-			"lien.id_objet=" . intval($id_article) . " AND lien.objet='article'");
+			"lien.id_objet=".intval($id_article)." AND lien.objet='article'");
 
-		while ($qui = sql_fetch($result_email)) {
+		while ($qui = sql_fetch($result_email)){
 			$flux['data'][] = $qui['email'];
-			spip_log("Article statut : " . $options['statut'] . " envoyé à  " . $qui['email'], 'notifications');
 		}
 
 	}
 
 	// forum valide ou prive : prevenir les autres contributeurs du thread
-	if (($quoi == 'forumprive' AND $GLOBALS['notifications']['thread_forum_prive'])
-		OR ($quoi == 'forumvalide' AND $GLOBALS['notifications']['thread_forum'])
-	) {
+	if (($quoi=='forumprive' AND $GLOBALS['notifications']['thread_forum_prive'])
+		OR ($quoi=='forumvalide' AND $GLOBALS['notifications']['thread_forum'])
+	){
 
 		$id_forum = $flux['args']['id'];
 
 		if ($t = $options['forum']
 			OR $t = sql_fetsel("*", "spip_forum", "id_forum=" . intval($id_forum))
-		) {
+		){
 
 			// Tous les participants a ce *thread*, abonnes
 			// on prend les emails parmi notification_email (prioritaire si rempli) email_auteur ou email de l'auteur qd id_auteur connu
 			$s = sql_select("F.email_auteur, F.notification_email, A.email",
 				"spip_forum AS F LEFT JOIN spip_auteurs AS A ON F.id_auteur=A.id_auteur",
 				"notification=1 AND id_thread=" . intval($t['id_thread']) . " AND (email_auteur != '' OR notification_email != '' OR A.email IS NOT NULL )");
-			while ($r = sql_fetch($s)) {
+			while ($r = sql_fetch($s)){
 				if ($r['notification_email'])
 					$flux['data'][] = $r['notification_email'];
-				elseif ($r['email_auteur'])
+				elseif($r['email_auteur'])
 					$flux['data'][] = $r['email_auteur'];
-				elseif ($r['email'])
+				elseif($r['email'])
 					$flux['data'][] = $r['email'];
 			}
 
@@ -163,8 +158,8 @@ function notifications_notifications_destinataires($flux){
 	}
 
 	// Les moderateurs de forums public
-	if ($quoi == 'forumposte' AND $GLOBALS['notifications']['moderateurs_forum']) {
-		foreach (explode(',', $GLOBALS['notifications']['moderateurs_forum']) as $m) {
+	if ($quoi=='forumposte' AND $GLOBALS['notifications']['moderateurs_forum']){
+		foreach (explode(',', $GLOBALS['notifications']['moderateurs_forum']) as $m){
 			$flux['data'][] = $m;
 		}
 	}
@@ -172,8 +167,8 @@ function notifications_notifications_destinataires($flux){
 	// noter les envois de ce forum pour ne pas doublonner
 	if (in_array($quoi, array('forumposte', 'forumvalide', 'forumprive'))
 		AND $id = $flux['args']['id']
-	) {
-		if (isset($sent[$id])) {
+	){
+		if (isset($sent[$id])){
 			$flux['data'] = array_diff($flux['data'], $sent[$id]);
 		} else {
 			$sent[$id] = array();
@@ -234,10 +229,10 @@ function notifications_url_suivi($email){
 function notifications_creer_auteur($email){
 
 	include_spip('base/abstract_sql');
-	if (!$a = sql_fetsel('*', 'spip_auteurs', 'email=' . sql_quote($email))) {
-		if ($GLOBALS['visiteur_session']['session_email'] === $email
+	if (!$a = sql_fetsel('*', 'spip_auteurs', 'email=' . sql_quote($email))){
+		if ($GLOBALS['visiteur_session']['session_email']===$email
 			AND isset($GLOBALS['visiteur_session']['session_nom'])
-		) {
+		){
 			$nom = $GLOBALS['visiteur_session']['session_nom'];
 		} else {
 			if ($b = sql_fetsel('auteur', 'spip_forum',
@@ -247,27 +242,27 @@ function notifications_creer_auteur($email){
 				array('date_heure DESC'),
 				/* limit */
 				'1')
-			) {
+			){
 				$nom = $b['auteur'];
 			} else {
 				$nom = $email;
 			}
 		}
 		// charger message_inscription()
-		if ($traiter = charger_fonction('traiter', 'formulaires/inscription', true)) {
+		if ($traiter = charger_fonction('traiter', 'formulaires/inscription', true)){
 			// "pirater" les globals
 			$_GET['nom_inscription'] = $nom;
 			$_GET['email_inscription'] = $email;
 			$a = $traiter('6forum', null);
 		}
-		if (!is_array($a)) {
+		if (!is_array($a)){
 			spip_log("erreur sur la creation d'auteur: $a", 'notifications');
 			next;
 		}
 	}
 
 	// lui donner un cookie_oubli s'il n'en a pas deja un
-	if (!isset($a['cookie_oubli'])) {
+	if (!isset($a['cookie_oubli'])){
 		include_spip('inc/acces'); # pour creer_uniqid
 		$a['cookie_oubli'] = creer_uniqid();
 		sql_updateq('spip_auteurs',
@@ -290,18 +285,17 @@ function notifications_envoyer_mails_texte_ou_html($email, $texte_ou_html){
 	$texte_ou_html = trim($texte_ou_html);
 
 	// tester si le mail est deja en html
-	if (substr($texte_ou_html, 0, 1) == "<"
-		AND substr($texte_ou_html, -1, 1) == ">"
-			AND stripos($texte_ou_html, "</html>") !== false
-	) {
+	if (substr($texte_ou_html,0,1)=="<"
+	  AND substr($texte_ou_html,-1,1)==">"
+	  AND stripos($texte_ou_html,"</html>")!==false){
 
 		// dans ce cas on ruse un peu : extraire le sujet du title
 		$sujet = "";
-		if (preg_match(",<title>(.*)</title>,Uims", $texte_ou_html, $m))
+		if (preg_match(",<title>(.*)</title>,Uims",$texte_ou_html,$m))
 			$sujet = $m[1];
 
 		// et envoyer un content-type pour envoyer_mail
-		return notifications_envoyer_mails($email, $texte_ou_html, $sujet, "", "Content-Type: text/html\n");
+		return notifications_envoyer_mails($email, $texte_ou_html, $sujet, "","Content-Type: text/html\n");
 	}
 	else
 		// texte brut, on passe
