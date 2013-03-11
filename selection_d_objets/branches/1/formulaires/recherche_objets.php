@@ -35,6 +35,9 @@ function formulaires_recherche_objets_charger_dist($objet_dest='rubrique',$id_ob
     foreach($types as $cle => $valeur){
         if($valeur)$types_lien[$cle]=_T($valeur);
         }
+    
+    $url_recherche=generer_url_public('recherche_objet','lang='.$lang.'&objet_dest='.$objet_dest.'&id_objet_dest='.$id_objet_dest,true);
+
     $valeurs = array(
     	"id_objet"	=> $id_objet,
     	"objet"	=> $objet,	
@@ -45,7 +48,8 @@ function formulaires_recherche_objets_charger_dist($objet_dest='rubrique',$id_ob
         'type_lien' =>'',         
         'objet_sel' =>'', 
         'label_objet' =>_T('selection_objet:ajouter_objet'), 
-        'label_lien' =>_T('selection_objet:selection_type_lien'),                            	 		
+        'label_lien' =>_T('selection_objet:selection_type_lien'),
+        'url_recherche'=>$url_recherche                           	 		
         );
 
     return $valeurs;
