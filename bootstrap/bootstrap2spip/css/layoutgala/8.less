@@ -24,6 +24,7 @@ div#navigation{float:left;width:150px;margin-left:-150px}
 div#extra{float:left;width:150px;margin-left:-700px}
 div#footer{clear:left;width:100%}
 */
+@import "css/layoutgala/mixins";
 
 // The Layout
 #layoutgala8 {
@@ -32,6 +33,7 @@ div#footer{clear:left;width:100%}
 
     #container{margin:0 auto}
     #wrapper{float:left;width:100%;margin-left: 0;}
+    #content,#aside,#extra,#footer {.box-sizing(border-box);}
     #content{
       float: inherit;
       margin:0;

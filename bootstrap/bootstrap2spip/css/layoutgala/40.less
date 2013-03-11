@@ -24,7 +24,9 @@ div#footer a{display:inline;padding:0;color: #C6D5FD}
 div#container{width:700px;margin:0 auto}
 div#navigation{float:right;width:350px}
 div#extra{float:left;width:350px}
-div#footer{clear:both;width:100%}*/
+div#footer{clear:both;width:100%}
+*/
+@import "css/layoutgala/mixins";
 
 // The Layout
 #layoutgala40 {
@@ -33,6 +35,7 @@ div#footer{clear:both;width:100%}*/
 
     #container{margin:0 auto}
     #wrapper {float: none;}
+    #content,#aside,#extra,#footer {.box-sizing(border-box);}
     #content{
       float: none;
       width:(@gridColumnWidth * @NcolContent) + (@gridGutterWidth * (@NcolContent - 1));

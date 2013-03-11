@@ -24,6 +24,7 @@ div#navigation{float:left;width:50%}
 div#extra{float:left;width:49.9%}
 div#footer{clear:left;width:100%}
 */
+@import "css/layoutgala/mixins";
 
 // The Layout
 #layoutgala27 {
@@ -32,6 +33,7 @@ div#footer{clear:left;width:100%}
 
     #container{margin:0 auto}
     #wrapper {float: none;}
+    #content,#aside,#extra,#footer {.box-sizing(border-box);}
     #content{
       float: none;
       width: @WcolContent;

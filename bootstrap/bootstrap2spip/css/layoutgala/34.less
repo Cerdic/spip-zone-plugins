@@ -24,6 +24,7 @@ div#navigation{float:left;width:200px}
 div#extra{float:left;clear:left;width:200px}
 div#footer{clear:both;width:100%}
 */
+@import "css/layoutgala/mixins";
 
 // The Layout
 #layoutgala34 {
@@ -32,6 +33,7 @@ div#footer{clear:both;width:100%}
 
     #container{margin:0 auto}
     #wrapper{float:none;width:100%;margin-left: 0;}
+    #content,#aside,#extra,#footer {.box-sizing(border-box);}
     #content{
       float:right;
       width:(@gridColumnWidth * @NcolContent) + (@gridGutterWidth * (@NcolContent - 1));
