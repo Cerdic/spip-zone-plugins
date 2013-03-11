@@ -7,7 +7,7 @@ function rainette_insert_head_css($flux){
 	static $done = false;
 	if (!$done) {
 		$done = true;
-		$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_RAINETTE.'rainette.css" type="text/css" media="all" />';
+		$flux .= '<link rel="stylesheet" href="' . find_in_path('rainette.css') . '" type="text/css" media="all" />';
 	}
 	return $flux;
 }
