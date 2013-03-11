@@ -85,7 +85,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_max_sites' => 'Maximum number of websites',
 	'label_mode' => 'Choose a compass',
 	'label_mode_standard' => '« @boussole@ », official compass of SPIP websites', # MODIF
-	'label_mode_url_perso' => 'Personnal compass',
 	'label_modele' => 'Display model',
 	'label_n_boussoles' => '@nb@ boussoles', # NEW
 	'label_n_sites' => '@nb@ websites',

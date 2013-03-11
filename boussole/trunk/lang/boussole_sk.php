@@ -85,7 +85,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_max_sites' => 'Maximálny počet stránok',
 	'label_mode' => 'Vyberte si kompas',
 	'label_mode_standard' => '"@boussole@" – oficiálny kompas stránok SPIPu', # MODIF
-	'label_mode_url_perso' => 'Vlastný kompas',
 	'label_modele' => 'Spôsob zobrazenia',
 	'label_n_boussoles' => '@nb@ boussoles', # NEW
 	'label_n_sites' => '@nb@ stránok',
