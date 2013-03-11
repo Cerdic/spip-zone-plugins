@@ -220,6 +220,11 @@ function agenda_action_update_repetitions($id_evenement, $repetitions){
 						$c,
 						'id_evenement = '.$id_evenement_new
 					);
+					
+					// Pour les créations il ne faut pas oublier de dupliquer les liens
+					// En effet, sinon les documents insérés avant la création (0-id_auteur) ne seront pas dupliqués
+					include_spip('action/editer_liens');
+					objet_dupliquer_liens('evenement', $id_evenement, $id_evenement_new);
 				}
 			}
 		}
