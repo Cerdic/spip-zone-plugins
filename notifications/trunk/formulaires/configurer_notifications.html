@@ -10,6 +10,12 @@
 				<fieldset>
 					<h3 class="legend"><:notifications:article_prive:></h3>
 					<ul>
+						<li class="editer editer_prevenir_auteurs_articles_proposes">
+							<div class="choix">
+								<input type="checkbox" name="prevenir_auteurs_articles_proposes"[(#ENV{prevenir_auteurs_articles_proposes}|=={on}|oui)checked="checked"] id="prevenir_auteurs_articles_proposes" class="checkbox" />
+								<label for="prevenir_auteurs_articles_proposes"><:notifications:article_proposes_prive_auteurs:></label>
+							</div>
+						</li>
 						<li class="editer editer_prevenir_auteurs_articles">
 							<div class="choix">
 								<input type="checkbox" name="prevenir_auteurs_articles"[(#ENV{prevenir_auteurs_articles}|=={on}|oui)checked="checked"] id="prevenir_auteurs_articles" class="checkbox" />
