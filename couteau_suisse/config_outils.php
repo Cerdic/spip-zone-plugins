@@ -311,7 +311,7 @@ add_outil( array(
 	'auteur' => 'Nicolas Hoizey, St&eacute;phanie Caron',
 	'pipeline:pre_boucle' => 'masquer_pre_boucle',
 	// fichier distant pour le pipeline
-	'distant_pipelines' => 'http://zone.spip.org/trac/spip-zone/export/62063/_plugins_/masquer/masquer_pipelines.php',
+	'distant_pipelines' => 'http://zone.spip.org/trac/spip-zone/export/70583/_plugins_/masquer/masquer_pipelines.php',
 	'code:options' => "%%mot_masquer%%",
 	'code:fonctions' => 'if (!function_exists("critere_tout_voir_dist")){
   function critere_tout_voir_dist($idb, &$boucles, $crit) {

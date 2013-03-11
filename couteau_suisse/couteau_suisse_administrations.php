@@ -103,12 +103,12 @@ if(defined('_LOG_CS')) cs_log("cout_upgrade : $nom_meta_base_version => $version
 		if (cs_le_test($current_version, $tmp, '1.7')){
 			effacer_meta('tweaks_contribs');
 			// MAJ forcee de tous les fichiers distants
-			cs_maj_forcee(array('ecran_securite', 'masquer', 'jcorner', 'previsualisation'));
+			cs_maj_forcee(array('ecran_securite', 'jcorner', 'previsualisation'));
 			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
 		}
-		if (cs_le_test($current_version, $tmp, '1.8')){
+		if (cs_le_test($current_version, $tmp, '1.9')){
 			// MAJ pour rajeunissement
-			cs_maj_forcee(array('maj_auto'));
+			cs_maj_forcee(array('maj_auto', 'masquer'));
 			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
 		}
 		ecrire_metas(); # Pour SPIP 1.92

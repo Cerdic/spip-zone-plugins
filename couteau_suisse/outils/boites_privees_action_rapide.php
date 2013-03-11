@@ -11,11 +11,13 @@ if(defined('_SPIP20100')) {
 	// Nouveaute SPIP 2.1 : se baser sur un nouveau champ 'ordre' de la table spip_auteurs_liens
 	// Fonction qui affiche le formulaire CVT triant les auteurs d'un article : 
 	function action_rapide_tri_auteurs($id_article=0) {
+		$f = trim(recuperer_fond('fonds/tri_auteurs2', array('id_objet'=>$id_article, 'objet'=>'article')));
+		// pas de cadre si un seul auteur...
+		if(strpos($f, '<table ')===false) return "";
 		return cadre_depliable(find_in_path('img/couteau-24.gif'),
 			cs_div_configuration().'<b>'._T('couteau:tri_auteurs').'</b>',
 			false,	// true = deplie
-			recuperer_fond('fonds/tri_auteurs2', array('id_objet'=>$id_article, 'objet'=>'article')),
-			'bp_tri_auteurs2');
+			$f, 'bp_tri_auteurs2');
 	}
 
 } else {
