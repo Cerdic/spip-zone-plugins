@@ -106,7 +106,7 @@
 	right:0px;
 }
 
-[(#CONFIG{nivoslider/controlNavThumbs}|=={'false'}|?{' ',''})
+[(#CONFIG{nivoslider/controlNavThumbs}|=={'false'}|?{' ',''})]
 
 /* Control nav styles (e.g. 1,2,3...) */
 .nivo-controlNav a {
@@ -115,7 +115,7 @@
 	cursor:pointer;
 	width:22px;
 	height:22px;
-	background:url( #CHEMIN{css/img/bullets.png} ) no-repeat;
+	background:url(#CHEMIN{css/img/bullets.png}) no-repeat;
 	text-indent:-9999px;
 	border:0;
 	margin-right:3px;
@@ -126,7 +126,6 @@
 	font-weight:bold;
 	background-position:0 -22px;
 }
-]
 
 .nivo-directionNav a {
 	display:block;
