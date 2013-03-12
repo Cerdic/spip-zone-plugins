@@ -451,7 +451,7 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 			OR (isset($images['paquet']['logo'][0]['fichier']) and $i = $images['paquet']['logo'][0]['fichier'])) {
 				$i_precedent = $i; // privilegier l'image juste plus grande que la precedente
 				fabriquer_miniature($prefixe, $i, $obj, $taille);
-				if ($data['objets'][$c]['logo_variantes']) {
+				if ($data['objets'][$c]['logo_variantes'] && $taille >= 16) {
 					fabriquer_miniature($prefixe, $i, $obj, $taille, 'new');
 					fabriquer_miniature($prefixe, $i, $obj, $taille, 'add');
 					fabriquer_miniature($prefixe, $i, $obj, $taille, 'del');
