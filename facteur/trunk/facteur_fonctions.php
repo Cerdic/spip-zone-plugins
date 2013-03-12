@@ -299,7 +299,11 @@ function facteur_mail_html2text($html){
 	$html = preg_replace(",</(td|th)>,Uims","<br/>",$html);
 	$html = preg_replace(",</(table)>,Uims","@@@hr@@@",$html);
 	$html = preg_replace(",</?(html|body|table|td|th|tbody|thead|center|article|section|span)[^>]*>,Uims","\n\n",$html);
+
+	// commentaires html et conditionnels
 	$html = preg_replace(",<!--.*-->,Uims","\n",$html);
+	$html = preg_replace(",<!\[.*\]>,Uims","\n",$html);
+
 	$html = preg_replace(",<(/?)(div|tr|caption)([^>]*>),Uims","<\\1p>",$html);
 	$html = preg_replace(",(<p>\s*)+,ims","<p>",$html);
 	$html = preg_replace(",<br/?>\s*</p>,ims","</p>",$html);
@@ -326,8 +330,8 @@ function facteur_mail_html2text($html){
 	$prelinks = $postlinks = array();
 	foreach ($matches as $k => $match){
 		$link = "@@@link$k@@@";
-		$url = str_replace("&amp;","&",$matches[1]);
-		if ($match[2]==$matches[1] OR $match[2]==$url){
+		$url = str_replace("&amp;","&",$match[1]);
+		if ($match[2]==$match[1] OR $match[2]==$url){
 			// si le texte est l'url :
 			$prelinks[$match[0]] = "$link";
 		}
@@ -366,6 +370,10 @@ function facteur_mail_html2text($html){
 	$texte = preg_replace(",(@@@hr@@@\s*\n)+,ims","\n\n\n".str_pad("-",75,"-")."\n\n\n",$texte);
 	$texte = preg_replace(",(\n#+\s),ims","\n\n\\1",$texte);
 	$texte = preg_replace(",(\n\s*)(\n\s*)+(\n)+,ims","\n\n\n",$texte);
+
+
+	// <p> et </p> restants
+	$texte = str_replace(array("<p>","</p>"),array("",""),$texte);
 
 	// entites restantes ? (dans du code...)
 	include_spip('inc/charsets');
