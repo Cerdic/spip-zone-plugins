@@ -1,0 +1,64 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem">[(#CHEMIN_IMAGE{urls_pages-24.png}|balise_img{'',cadre-icone})]<:urls_pages:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok}) <:urls_pages:message_ok_code:></p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<p><:urls_pages:explication_formulaire_1:></p>
+
+		<fieldset><legend><:urls_pages:label_rewritebase:></legend>
+			<ul>
+				[(#SAISIE{input, rewritebase,
+					label=<:urls_pages:label_rewritebase:>,
+					explication=<:urls_pages:explication_rewritebase:>})]
+			</ul>
+		</fieldset>
+
+		<fieldset><legend><:urls_pages:label_liste_pages:></legend>
+			<B_pages>
+			<ul>
+			<li><span class='explication'><:urls_pages:explication_ecriture_url{url_site=#URL_SITE_SPIP}:></span></li>
+			[(#REM) cle=page, valeur=répertoire ]
+			<BOUCLE_pages(DATA){source table, #ENV**{pages}}{!par valeur, cle}>
+			[(#REM) [ <li><span class='explication' title='<:urls_pages:explication_dossier:>'>(#VALEUR|unique)/</span></li> ] ]
+			[(#SAISIE{input, #CLE,
+				label=[<a href='#URL_PAGE{#CLE}'>(#CONFIG{urls_pages/#CLE}|?{[<strong title='[(#URL_PAGE{#CLE}|url_absolue)]'>(#CLE)</strong>],#CLE})</a>],
+				placeholder=#URL_PAGE{#CLE}})]
+			</BOUCLE_pages>
+			</ul>
+			</B_pages>
+			<:urls_pages:info_aucun_squelette:>
+			<//B_pages>
+			<!-- pages obsolètes -->
+			<B_obsoletes>
+			<ul>
+			<li class='erreur'>Les pages suivantes sont enregistrées en configuration mais ne sont plus actives. Il est recommandé de vider ces champs.</li>
+			<BOUCLE_obsoletes(DATA){source table, #ENV**{obsoletes}}{!par valeur, cle}>
+			[(#SAISIE{input, #VALEUR,
+				label=#VALEUR,
+				li_class=erreur})]
+			</BOUCLE_obsoletes>
+			</ul>
+			</B_obsoletes>
+		</fieldset>
+
+		<B_code>
+		<fieldset><legend><:urls_pages:label_code_htaccess:></legend>
+		<p><:urls_pages:explication_code_htacess:></p>
+		#BOITE_OUVRIR{'',simple info}<small><tt>
+		<BOUCLE_code(DATA){source table, #CONFIG{urls_pages}|unserialize}{!cle = rewritebase}{valeur != ''}{"<br>"}>
+		RewriteRule ^#VALEUR(\.html)?$    spip.php?page=#VALEUR [QSA,E=url_propre:$0,L]
+		</BOUCLE_code>
+		</small></tt>#BOITE_FERMER
+		</B_code>
+		</fieldset>
+
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

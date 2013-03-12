@@ -1,0 +1,24 @@
+<paquet
+	prefix="urls_pages"
+	categorie="statistique"
+	version="0.1.0"
+	etat="experimental"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/urls_pages.png"
+>
+
+	<nom>URLs Pages étendues</nom>
+	<!-- Gestion des variantes d'URL des pages (squelettes ne correspondant à aucun objet éditorial) -->
+
+	<auteur>Charles Razack</auteur>
+
+	<credit lien="http://www.openstudio.fr/Pages-personnalisees-et-reecriture.html">OpenStudio pour le tutoriel d'origine</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="urls" compatibilite="[1.4.0;]" />
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/urls_pages.php" /><!-- traitement balise #URL_PAGE -->
+	<pipeline nom="affiche_milieu" inclure="urls_pages_pipelines.php" /><!-- formulaire page configurer_urls -->
+
+</paquet>
