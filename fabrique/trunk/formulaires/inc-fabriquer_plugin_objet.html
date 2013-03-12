@@ -63,7 +63,7 @@
 		<legend class='legend'><:fabrique:legend_logo_specifiques:></legend>
 		<p class='explication'><:fabrique:legend_logo_specifiques_explication:></p>
 		<ul>
-		<BOUCLE_logos(DATA){liste 32,24,16}>
+		<BOUCLE_logos(DATA){liste 32,24,16,12}>
 			[(#REM) valeur vide pour eviter une notice car sinon, la valeur recue est un tableau ]
 			[(#SAISIE{input, objets/#_objet:CLE/logo/#VALEUR, label=<:fabrique:label_logo_taille{taille=#VALEUR}:>, type=file, valeur=''})]
 			[(#ENV{[objets/#_objet:CLE/logo/(#VALEUR)/fichier]}|oui)
