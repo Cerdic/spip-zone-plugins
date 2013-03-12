@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'alt_logo_conf' => 'Logo del plugin Notificaciones',
 	'article_prive' => 'Publicación de artículos',
 	'article_prive_admins_restreints' => '<strong>Administradores</strong>: Los administradores -limitados- reciben notificaciones cuando llegan propuestas de artículos a su sección',
-	'article_prive_auteurs' => '<strong>Autores</strong>: los autores reciben notificaciones cuando su(s) artículo(s) son publicados',
+	'article_prive_auteurs' => '<strong>Autores</strong>: los autores reciben notificaciones cuando su(s) artículo(s) son publicados', # MODIF
 	'article_propose_detail' => 'El artículo "@titre@" ha sido propuesto para publicación
 	desde',
 	'article_propose_sujet' => '[@nom_site_spip@] Propone: @titre@',
