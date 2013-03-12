@@ -3,6 +3,7 @@
 [(#REM)
 /** Valeurs par défaut **/
 ]
+[(#SET{responsive_defaut,oui})]
 [(#SET{hauteur_defaut,315})]
 [(#SET{largeur_defaut,560})]
 [(#SET{titre_descriptif_defaut,non})]
@@ -19,6 +20,11 @@
 			<li class="fieldset">
 				<h3 class="legend"><:videos:cfg_titre_configurations_communes:></h3>
 				<ul>
+					<li>
+						<label for="responsive"><:videos:cfg_label_responsive:></label>
+						<p class='explication'><:videos:cfg_explication_responsive:></p>
+						<input type="checkbox"[ (#ENV{responsive}|=={oui}|oui|ou{#ENV{responsive}|non})checked="checked"] name="responsive" value="[(#ENV{responsive,#GET{responsive_defaut}})]" id="responsive" class="text" />
+					</li>
 					<li>
 						<label for="largeur"><:videos:cfg_label_largeur:></label>
 						<p class='explication'><:videos:cfg_explication_largeur:></p>

@@ -4,6 +4,7 @@
 #SET{document,#ENV{document}|sinon{#ID}}
 #SET{titre_descriptif,#ENV{titre_descriptif,#CONFIG{videos/titre_descriptif,'non'}}}
 #SET{wmode,#ENV{wmode,#CONFIG{videos/wmode,'opaque'}}}
+#SET{responsive,#ENV{responsive,#CONFIG{videos/responsive,'oui'}}}
 #SET{liste_definition,#ENV{liste_definition,#CONFIG{videos/liste_definition,'non'}}}
 
 [(#REM) "Extensions" gérées ou rajoutées par le plugin
@@ -64,14 +65,19 @@
 ]
 	[(#EXTENSION|=={dist_daily}|oui)
 		#SET{videosLiees,#ENV{videosLiees,#CONFIG{videos/videosLiees,'0'}}}
-		<iframe frameborder="0" width="#GET{largeur}" height="#GET{hauteur}" src="http://www.dailymotion.com/embed/video/#GET{fichier}?width=#GET{largeur}&amp;theme=none&amp;foreground=%23F7FFFD&amp;highlight=%23FFC300&amp;background=%23171D1B&amp;start=[&amp;animatedTitle=(#TITRE|urlencode)]&amp;iframe=1&amp;additionalInfos=0&amp;autoPlay=0&amp;hideInfos=0&amp;wmode=#GET{wmode}"></iframe>
+
+		[(#GET{responsive}|=={oui}|oui)<div class="capsule-video"><div class="mini_capsule-video">]
+			<iframe frameborder="0" width="#GET{largeur}" height="#GET{hauteur}" src="http://www.dailymotion.com/embed/video/#GET{fichier}?width=#GET{largeur}&amp;theme=none&amp;foreground=%23F7FFFD&amp;highlight=%23FFC300&amp;background=%23171D1B&amp;start=[&amp;animatedTitle=(#TITRE|urlencode)]&amp;iframe=1&amp;additionalInfos=0&amp;autoPlay=0&amp;hideInfos=0&amp;wmode=#GET{wmode}"></iframe>
+		[(#GET{responsive}|=={oui}|oui)</div></div> <!-- .capsule-video .mini_capsule-video -->]
 	]
 [(#REM)
 /** Traiter Vimeo **/
 	http://vimeo.com/api
 ]
 	[(#EXTENSION|=={dist_vimeo}|oui)
-	<iframe src="http://player.vimeo.com/video/#GET{fichier}?byline=0" width="#GET{largeur}" height="#GET{hauteur}" frameborder="0"></iframe>
+		[(#GET{responsive}|=={oui}|oui)<div class="capsule-video"><div class="mini_capsule-video">]
+			<iframe src="http://player.vimeo.com/video/#GET{fichier}?byline=0" width="#GET{largeur}" height="#GET{hauteur}" frameborder="0"></iframe>
+		[(#GET{responsive}|=={oui}|oui)</div></div> <!-- .capsule-video .mini_capsule-video -->]
 	]
 	
 
@@ -101,7 +107,9 @@
 	- cc_load_policy	|| Values: 1. Default is based on user preference. Setting to 1 will cause closed captions to be shown by default, even if the user has turned captions off.
 ]
 	[(#EXTENSION|=={dist_youtu}|oui)
-	<iframe width="#GET{largeur}" height="#GET{hauteur}" src="http://www.youtube.com/embed/#GET{fichier}?hd=1&amp;wmode=#GET{wmode}" frameborder="0" allowfullscreen class="youtube-player"></iframe>
+		[(#GET{responsive}|=={oui}|oui)<div class="capsule-video"><div class="mini_capsule-video">]
+			<iframe width="#GET{largeur}" height="#GET{hauteur}" src="http://www.youtube.com/embed/#GET{fichier}?hd=1&amp;wmode=#GET{wmode}" frameborder="0" allowfullscreen class="youtube-player"></iframe>
+		[(#GET{responsive}|=={oui}|oui)</div></div> <!-- .capsule-video .mini_capsule-video -->]
 	]
 
 
