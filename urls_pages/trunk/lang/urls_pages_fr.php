@@ -20,6 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_ecriture_url' => 'N\'indiquez que la partie figurant après la racine du site :<br>
 	<tt>@url_site@/<ins>url personnalisée</ins></tt>',
 	'explication_dossier' => 'Dossier contenant les squelettes',
+	'erreur_url_non_libre' => 'Cette url est déjà utilisée',
+	'erreur_url_doublon' => 'Une url doit être unique',
 
 	// I
 	'info_aucun_squelette' => 'Aucun squelette n\'a été trouvé',
