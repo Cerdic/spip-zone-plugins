@@ -418,7 +418,7 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 		// on prend en priorite la taille desiree,
 		// sinon la plus proche, avant,
 		// sinon le logo de l'objet, sinon le logo du plugin.
-		foreach (array(32, 24, 16) as $taille) {
+		foreach (array(32, 24, 16, 12) as $taille) {
 			if ((isset($image['logo'][$taille]) AND $i = $image['logo'][$taille]['fichier'])
 			OR ($i = $i_precedent)
 			OR (isset($image['logo'][0]['fichier']) and $i = $image['logo'][0]['fichier']) 
@@ -711,7 +711,7 @@ function fabrique_completer_contexte_images($data) {
 	}
 	// logo des objets
 	foreach ($images['objets'] as $c=>$image) {
-		foreach (array(0, 32, 24, 16) as $taille) {
+		foreach (array(0, 32, 24, 16, 12) as $taille) {
 			if (isset($image['logo'][$taille]['fichier']) and $f = $image['logo'][$taille]['fichier']) {
 				$data['objets'][$c]['logo'][$taille]['fichier'] = $f;
 			}
