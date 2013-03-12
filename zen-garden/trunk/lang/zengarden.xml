@@ -1,6 +1,8 @@
 <traduction module="zengarden" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/zen-garden/trunk/lang/" reference="fr">
 	<langue code="de" />
-	<langue code="en" />
+	<langue code="en" url="http://trad.spip.net/tradlang_module/zengarden?lang_cible=en">
+		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
+	</langue>
 	<langue code="es" />
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/zengarden?lang_cible=fa">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />

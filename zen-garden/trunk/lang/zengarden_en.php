@@ -21,8 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'desactiver_ce_theme' => 'Deactivate and return to default style',
 
 	// I
-	'info_page' => 'You can choose one of the suggested theme or just see his rendering without changing the display to your visitors',
-	'intitule_compatiblite_squelette' => 'Compatible only with the skeletons',
+	'info_page' => 'You can choose one of the suggested theme or just see its rendering without changing the display for your visitors',
+	'intitule_compatiblite_squelette' => 'Compatible only with the templates',
 	'intitule_version' => 'version',
 
 	// S
