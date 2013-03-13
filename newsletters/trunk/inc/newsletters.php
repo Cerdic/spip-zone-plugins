@@ -102,8 +102,8 @@ function newsletters_html2text($html){
 	$prelinks = $postlinks = array();
 	foreach ($matches as $k => $match){
 		$link = "@@@link$k@@@";
-		$url = str_replace("&amp;","&",$matches[1]);
-		if ($match[2]==$matches[1] OR $match[2]==$url){
+		$url = str_replace("&amp;","&",$match[1]);
+		if ($match[2]==$match[1] OR $match[2]==$url){
 			// si le texte est l'url :
 			$prelinks[$match[0]] = "$link";
 		}
