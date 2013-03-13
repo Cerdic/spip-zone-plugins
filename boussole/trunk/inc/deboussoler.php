@@ -20,7 +20,7 @@ function boussole_ajouter($boussole, $serveur='spip') {
 	// Vérification de l'existence de la table spip_boussoles_extras pour éviter une erreur liée à l'activation
 	// du CRON d'actualisation avant que la migration de schéma ait été effectuée
 	$trouver = charger_fonction('trouver_table', 'base');
-	if (!$desc = $trouver('spip_boussoles_extras')) {
+	if (!$trouver('spip_boussoles_extras')) {
 		$message = '';
 		return array(false, $message);
 	};
@@ -104,7 +104,9 @@ function boussole_supprimer($aka_boussole) {
 	// On supprime les sites de cette boussole
 	sql_delete('spip_boussoles','aka_boussole='.sql_quote($aka_boussole));
 	// On supprime les extras de cette boussole
-	sql_delete('spip_boussoles_extras','aka_boussole='.sql_quote($aka_boussole));
+	$trouver = charger_fonction('trouver_table', 'base');
+	if ($trouver('spip_boussoles_extras'))
+		sql_delete('spip_boussoles_extras','aka_boussole='.sql_quote($aka_boussole));
 	// On supprime ensuite la meta consignant la derniere mise a jour de cette boussole
 	effacer_meta('boussole_infos_' . $aka_boussole);
 
