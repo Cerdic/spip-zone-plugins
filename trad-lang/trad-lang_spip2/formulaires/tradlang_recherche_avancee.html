@@ -7,10 +7,31 @@
 			<label for="recherche"><:info_rechercher_02:></label>
 			<input[ (#HTML5|?{type="search" class="search text",type="text" class="text"})] size="10" name="recherche" id="recherche"[ value="(#ENV{recherche})"] accesskey="4" />
 		</li>
+		<B_tradlangs_lang>
 		<li>
 			<label for="lang_string"><:tradlang:item_langue_cible:></label>
-			<INCLURE{fond=formulaires/tradlang_selecteur_langue_module_dispo,env,name=lang_string,option_vide=oui}>
+			<select name="lang_string" id="lang_string">
+				<option value="">--</option>
+			<BOUCLE_tradlangs_lang(TRADLANGS){fusion lang}{par lang}{0,1}>
+			<B_module_langue_dispo_pref>
+				<optgroup label="<:tradlang:info_langues_preferees|attribut_html:>">
+				<BOUCLE_module_langue_dispo_pref(TRADLANGS){langues_preferees}{statut IN 'OK','MODIF'}{fusion lang}{par lang}>
+					<option value="#LANG"[(#LANG|=={#ENV{lang_string}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option>
+				</BOUCLE_module_langue_dispo_pref>
+				[(#SET{optgroup,'oui'})]
+				</optgroup>
+				</B_module_langue_dispo_pref>
+				<B_module_langue_dispo>
+				[(#GET{optgroup}|=={oui})<optgroup label="<:tradlang:info_langues_non_preferees|attribut_html:>">]
+				<BOUCLE_module_langue_dispo(TRADLANGS){!langues_preferees}{statut IN 'OK','MODIF'}{fusion lang}{par lang}>
+					<option value="#LANG"[(#LANG|=={#ENV{lang_string}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option>
+				</BOUCLE_module_langue_dispo>
+				[(#GET{optgroup}|=={oui})</optgroup>]
+				</B_module_langue_dispo>
+			</BOUCLE_tradlangs_lang>
+			</select>
 		</li>
+		</B_tradlangs_lang>
 		<li>
 			<label for="statut"><:tradlang:label_recherche_status:></label>
 			<select name="statut" id="statut">
