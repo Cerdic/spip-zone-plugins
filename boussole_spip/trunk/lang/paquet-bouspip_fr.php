@@ -5,7 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouspip_description' => 'Ce plugin fournit l\'ensemble des informations sur les sites de la Galaxie SPIP. Combiné au plugin Boussole il permet de créer un serveur des sites de la Galaxie accessibles par tous les sites utilisateur.',
+	'bouspip_description' => 'Ce plugin fournit le nom, l\'url et la description de tous les sites de la Galaxie SPIP. Il doit être utilisé avec le plugin Boussole en mode serveur afin de fournir, via un service web, ses informations à tous les sites souhaitant afficher la boussole SPIP.',
 	'bouspip_nom' => 'Boussole SPIP',
 	'bouspip_slogan' => 'Les bonnes adresses de la galaxie SPIP !'
 );

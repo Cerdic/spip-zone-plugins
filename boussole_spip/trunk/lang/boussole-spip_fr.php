@@ -63,7 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_site_spip_zone' => 'SPIP Zone',
 
 	// S
-	'slogan_boussole_spip' => 'Les bonnes adresses de la galaxie SPIP !',
+	'slogan_boussole_spip' => 'Perdu dans la Galaxie SPIP ?',
 	'slogan_site_spip_blog' => 'Du logiciel libre et de la tendresse',
 	'slogan_site_spip_contrib' => 'L\'espace des contributions à SPIP',
 	'slogan_site_spip_core' => 'L\'espace de développement des versions de SPIP',
