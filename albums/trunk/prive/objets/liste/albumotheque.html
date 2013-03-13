@@ -38,7 +38,7 @@
 
 [<div class='pagination'>(#PAGINATION{prive})</div>]
 
-<BOUCLE_liste_albums(ALBUMS){contenu?}{orphelins?}{auteurs_liens.id_auteur?}{id_mot?}{objet?}{statut == #ENV{statut,.*}}{vu?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+<BOUCLE_liste_albums(ALBUMS){contenu?}{orphelins?}{auteurs_liens.id_auteur?}{id_mot?}{objet?}{statut == #ENV{statut,publie|prepa}}{vu?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 #SET{contenu, #ID_ALBUM|album_contenu|?{oui,''}}
 #SET{alt, #VAL{album:titre_album}|_T|concat{' n°'}|concat{#ID_ALBUM}|attribut_html}
 #SET{ajouter, #ENV{ajout_doc_album}|=={#ID_ALBUM}|?{oui,''}}
