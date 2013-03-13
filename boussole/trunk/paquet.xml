@@ -1,8 +1,8 @@
 <paquet
 	prefix="boussole"
 	categorie="navigation"
-	version="2.0.0"
-	etat="dev"
+	version="2.0.1"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="boussole_logo-64.png"
 	schema="0.2"
