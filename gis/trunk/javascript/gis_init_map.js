@@ -81,12 +81,17 @@ var gis_init_map = function(mapcfg) {
 	map.setGeoJsonFeatureIcon = function (feature, layer) {
 		// Déclarer l'icone du points, si défini
 		if (feature.properties && feature.properties.icon){
-			layer.setIcon(new L.Icon({
-				iconUrl: feature.properties.icon,
-				iconSize: new L.Point( feature.properties.icon_size[0], feature.properties.icon_size[1] ),
-				iconAnchor: new L.Point( feature.properties.icon_anchor[0], feature.properties.icon_anchor[1] ),
-				popupAnchor: new L.Point( feature.properties.popup_anchor[0], feature.properties.popup_anchor[1] )
-			}));
+			icon_options = {
+				'iconUrl': feature.properties.icon,
+				'iconSize': new L.Point( feature.properties.icon_size[0], feature.properties.icon_size[1] ),
+				'iconAnchor': new L.Point( feature.properties.icon_anchor[0], feature.properties.icon_anchor[1] ),
+				'popupAnchor': new L.Point( feature.properties.popup_anchor[0], feature.properties.popup_anchor[1] )
+			};
+			if (feature.properties.shadow)
+				icon_options.shadowUrl = feature.properties.shadow;
+			if (feature.properties.shadow_size)
+				icon_options.shadowSize = new L.Point( feature.properties.shadow_size[0], feature.properties.shadow_size[1] );
+			layer.setIcon(new L.Icon(icon_options));
 		}
 	}
 
