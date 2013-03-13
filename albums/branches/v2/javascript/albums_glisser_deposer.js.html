@@ -1,0 +1,343 @@
+#HTTP_HEADER{Content-Type: text/javascript; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{conteneur_album, '#albums .liste_docs'}
+#SET{conteneur_portfolio, '#portfolios .liste_items'}
+#SET{portfolios, #ENV{objet}|et{#ENV{id_objet}}|?{oui,''}}
+#SET{conteneurs, #GET{portfolios}|?{#GET{conteneur_album}|concat{',',#GET{conteneur_portfolio}},#GET{conteneur_album}}}
+
+<script type="text/javascript">
+/*<![CDATA[*/
+
+/*
+ * Fonctionnement :
+ * On a des conteneurs (albums ou portfolios) qui contiennent des documents.
+ * Chaque conteneur possede une data 'documents' qui liste ses documents.
+ * A chaque deplacement qui modifie l'arbre DOM, on cree une liste des documents retires ou ajoutes
+ * pour chaque conteneur impacte, et on envoie cette liste dans le champ cache 'deplacements' du formulaire.
+ *
+ * Arbre DOM :
+ * #albums .album
+ *	ul.liste_docs						conteneur documents
+ *		li.doc						documents
+ * #portfolios
+ *	[#portfolio/#illustrations/#documents].liste_items	conteneur documents
+ *		#docXX.item					documents
+ */
+
+jQuery(document).ready(function($) {
+
+	$( init );
+	if (window.jQuery) jQuery( function(){ onAjaxLoad( init ); } ); // recharger le script en cas de ajaxload
+	var poste = [(#ENV{poste}|?{true,false})];
+	if (poste === true) {ajaxReload('documents');}; // recharger les documents apres validation
+
+	/* 
+	 * Initialisation 
+	**/
+	function init() {
+		$( affichageFormulaire ); // afficher ou non le formulaire
+		[(#GET{portfolios}|oui)
+			$( placeholderPortfolios ); // creer un conteneur #portfolios en amont si absent
+			$( dataPortfolios ); // attribuer les datas aux items des portfolios
+		]
+		$("[(#GET{conteneurs})]").sortable({
+			connectWith: "[(#GET{conteneurs})]",
+			placeholder: "placeholder-album",
+			//containment: ".fiche_objet",
+			start: traiterDebut,
+			over: traiterDessus,
+			stop: traiterFin,
+			receive: traiterMaj,
+			cursor: "move",
+			scroll: true,
+			zIndex: 9999
+		});
+	}
+
+	/* 
+	 * Traitements au debut du deplacement
+	 * indications visuelles (bordure etc.)
+	**/
+	function traiterDebut (event,ui) {
+		var document = ui.item;
+		document.addClass("drag");
+		$("[(#GET{conteneurs})]").each(function(){
+			var objet = $(this);
+			var conteneur = (objet.data("objet") == "album") ? objet.parents(".album") : objet.parents("#portfolios");
+			if ( autoriserDeplacement(document,objet) === true ) {
+				conteneur.addClass("cible-album");
+			}
+			if (objet.data("objet") != "album") { // objet venant du portfolio
+				document.css('opacity','0.5');
+			}
+		});
+	}
+
+	/* 
+	 * Traitements rollover
+	**/
+	function traiterDessus (event,ui) {
+		var document = ui.item;
+		var objet = $(this);
+		if ( autoriserDeplacement(document,objet) === false ) {
+			ui.placeholder.hide();
+		} else {
+			ui.placeholder.show();
+		}
+	}
+
+	/* 
+	 * Traitements a la fin du deplacement
+	 * Lance dans tous les cas, meme en absence de changement du DOM
+	**/
+	function traiterFin (event,ui) {
+		var document = ui.item;
+		document.removeClass("drag");
+		$("[(#GET{conteneurs})]").each(function(){
+			var objet = $(this);
+			var conteneur = (objet.data("objet") == "album") ? objet.parents(".album") : objet.parents("#portfolios");
+			conteneur.removeClass("cible-album");
+			if (objet.data("objet") != "album") {
+				document.css('opacity','1');
+			}
+		});
+	}
+
+	/* 
+	 * Traitements lorsqu un doc est depose dans un nouvel objet
+	 * Lance uniquement si changement du DOM
+	**/
+	function traiterMaj (event,ui) {
+		var document = ui.item;
+		var objet = $(this);
+		var id_document = parseInt(document.data("id_document"));
+		var objet_origine = document.data("objet");
+		var id_objet_origine = parseInt(document.data("id_objet"));
+		var objet_destination = objet.data("objet");
+		var id_objet_destination = parseInt(objet.data("id_objet"));
+		//
+		// annuler le deplacement si pas autorise (cf. description fonction)
+		if (autoriserDeplacement(document,objet) === false) {
+			$(ui.sender).sortable("cancel");
+		//
+		// sinon effectuer les traitements
+		} else {
+			//
+			// au premier deplacement, stocker les etats initiaux pour comparaison ulterieure
+			// => objet_initial pour le document deplace
+			if (!document.data("objet_initial")) {
+				document.data("objet_initial",objet_origine);
+				document.data("id_objet_initial",id_objet_origine);
+			}
+			var objet_initial = document.data("objet_initial");
+			var id_objet_initial = parseInt(document.data("id_objet_initial"));
+			// => liste des documents initiaux pour l objet receveur
+			if (!objet.data("documents_initiaux")) {
+				var documents_initiaux = objet.data("documents").concat(); // .concat pour creer une copie distincte
+				objet.data("documents_initiaux",documents_initiaux);
+			}
+			// => liste des documents initiaux pour l objet envoyeur
+			if (!ui.sender.data("documents_initiaux")) {
+				var documents_initiaux = ui.sender.data("documents").concat(); // .concat pour creer une copie distincte
+				ui.sender.data("documents_initiaux",documents_initiaux);
+			}
+			//
+			// indiquer changement
+			ui.sender.data("changement",true);
+			objet.data("changement",true);
+			//
+			// docs portfolio <=> album
+			// n afficher que la vignette du document deplace
+			if (objet_initial != "album") {
+				objet_origine = objet_initial;
+				id_objet_origine = id_objet_initial;
+				// sens portfolio -> album
+				if (objet_destination != objet_initial) {
+					document.addClass("doc");
+					document.children().not("a").hide(); // cacher tout sauf la la vignette
+				// sens album -> portfolio
+				} else {
+					document.removeClass("doc");
+					document.children().not("a").fadeIn('1000'); // reafficher le reste
+				}
+			}
+			//
+			// stockage des nouvelles infos pour les deplacements suivants
+			// => objet et id_objet sur document
+			document.data("objet", objet_destination);
+			document.data("id_objet", id_objet_destination);
+			// => mise a jour de la liste des documents pour les objets envoyeur et receveur
+			objet.data("documents").push(id_document); // ajouter a l objet qui recoit
+			var index_sender = ui.sender.data("documents").indexOf(id_document);
+			ui.sender.data("documents").splice(index_sender,1); // retirer de l objet qui envoit
+			//
+			// creation de la liste des changements pour chaque objet
+			var liste_actions = {};
+			var liste_objets_changes = [];
+			$("[(#GET{conteneurs})]").each( function(){
+				var objet = $(this);
+				// verifier si l objet a change et completer la liste des changements
+				// on compare la liste des documents actuels a la liste des documents initiaux
+				if (
+					objet.data("changement") === true
+					&& ( $(objet.data("documents")).not(objet.data("documents_initiaux")).length != 0
+					|| $(objet.data("documents_initiaux")).not(objet.data("documents")).length != 0 )
+				) {
+					var objet_alias = objet.data("objet") + "_" + objet.data("id_objet");
+					var associer = $.makeArray($(objet.data("documents")).not(objet.data("documents_initiaux")));
+					var dissocier = $.makeArray($(objet.data("documents_initiaux")).not(objet.data("documents")));
+					liste_actions[objet_alias] = { 'associer' : associer, 'dissocier' : dissocier};
+					liste_objets_changes.push(objet.data("objet")+objet.data("id_objet"));
+				}
+				// sinon, indiquer que l objet est revenu a son etat initial
+				if (
+					 $(objet.data("documents")).not(objet.data("documents_initiaux")).length == 0
+					&& $(objet.data("documents_initiaux")).not(objet.data("documents")).length == 0
+				) {
+					objet.data("changement",false);
+				}
+			});
+			// envoi les deplacements dans le champ du formulaire
+			remplirChamp(liste_actions, liste_objets_changes);
+		}
+	}
+
+	/*
+	 * Remplir le champ du formulaire avec les deplacements a effectuer
+	 * liste_actions: $object	tableau des changements pour chaque objet
+	 * 				objetX { associer: [w,x,...] , dissocier: [y,z,...] }
+	 * liste_objets_changes: array
+	**/
+	function remplirChamp(liste_actions, liste_objets_changes) {
+		// conversion en chaine
+		var chaine = JSON.stringify(liste_actions, null, 2);
+		// placer la chaine finale dans le champ
+		$("#champ_deplacements").val(chaine);
+		// afficher/cacher le formulaire
+		affichageFormulaire(liste_objets_changes.length);
+	}
+
+	/*
+	 * Afficher ou non le formulaire
+	 * nb: number		nombre objets modifies
+	**/
+	function affichageFormulaire(nb) {
+		var formulaire = $(".formulaire_albums_deplacer_documents");
+		var messages = formulaire.children(".reponse_formulaire");
+		var ok = formulaire.children(".reponse_formulaire_ok");
+		var erreur = formulaire.children(".reponse_formulaire_erreur");
+		var boutons = $(".formulaire_albums_deplacer_documents .boutons");
+		var valider = $(".formulaire_albums_deplacer_documents input[name='valider']");
+		var annuler = $(".formulaire_albums_deplacer_documents input[name='annuler']");
+
+		// en cas de changement
+		if (typeof(nb) == 'number') {
+			if (nb > 0) {
+				if (formulaire.is(":visible") === false) {
+					messages.hide();
+					formulaire.fadeIn(500);
+				}
+				if (boutons.is(":visible") === false) boutons.slideDown(250);
+				if (messages.is(":visible") === true) messages.slideUp(250);
+			} else {
+				if (formulaire.is(":visible") === true) formulaire.fadeOut(500);
+			}
+		// si pas de changement
+		} else {
+			if (messages.length === 0) formulaire.hide(); // cacher le formulaire
+			else if (ok.length > 0) $("#champ_deplacements").val(''); // vider le champ si deja poste avec succes
+			if (poste === true) boutons.hide();
+		}
+	}
+
+	/* 
+	 * tester si un document est contenu dans un objet
+	 * document: $object/string/number
+	 * objet: $object
+	**/
+	function testContenu (document, objet) {
+		if (typeof(document) == "object") {
+			var id_document = parseInt(document.data("id_document"));
+		} else {
+			var id_document = parseInt(document);
+		}
+		var documents = objet.data("documents"); // documents de l objet
+		if ($.inArray(id_document, documents) > -1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/* 
+	 * tester si un document peut etre deplace dans un objet
+	 * document: $object
+	 * objet: $object
+	**/
+	function autoriserDeplacement (document, objet) {
+		var id_document = parseInt(document.data("id_document"));
+		var id_objet_document = parseInt(document.data('id_objet'));
+		var id_objet_initial = (document.data("id_objet_initial") === undefined) ? id_objet_document : parseInt(document.data("id_objet_initial"));
+		var id_objet = parseInt(objet.data('id_objet'));
+		var dejaPresent = testContenu(document, objet); // doc deja present dans objet ?
+		var dejaDeplace = (id_objet_document !== id_objet_initial) ? true : false; // doc deja deplace ds autre objet ?
+		if (
+			// exclure l objet actuel
+			id_objet !== id_objet_document 
+			// 1er deplacement : exclure les objets contenant deja le document
+			&& ((dejaDeplace === false && dejaPresent === false)
+			// deplacements suivants : idem, mais le doc peut revenir au bercail (sauf si doc deja present)
+			|| (dejaDeplace === true && (dejaPresent === false || (id_objet === id_objet_initial && dejaPresent === false))))
+		) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	<BOUCLE_portfolios(CONDITION){si #GET{portfolios}}>
+	/*
+	 * Creer un placeholder pour les portfolios en cas d absence
+	**/
+	function placeholderPortfolios() {
+		// pas de #portfolios ?
+		if ($("body").find("#portfolios").length < 1) {
+			$("#albums").before("<div id='portfolios'></div>");
+		}
+		// pas de .liste_items ?
+		if ($("body").find("#portfolios .liste_items").length < 1) {
+			$("#portfolios").append("<div class='liste_items placeholder'></div>");
+		}
+	}
+
+	/*
+	 * Attribuer les datas (objet, id_objet etc.) aux portfolios
+	**/
+	function dataPortfolios() {
+		// liste des documents sur conteneur
+		var documents_portfolio = [];
+		$("#portfolios .item").each( function(){
+			var document = $(this);
+			documents_portfolio.push(parseInt(document.attr("id").replace("doc","")));
+		});
+		$("#portfolios .liste_items").data("documents",documents_portfolio);
+		$("#portfolios .liste_items").data("documents_initiaux",documents_portfolio.concat()); // .concat pour creer une copie distincte
+		// objet et id_objet sur conteneur + .item
+		$("#portfolios .liste_items, #portfolios .item").each( function(){
+			$(this).data("objet","[(#OBJET)]");
+			$(this).data("id_objet",[(#ID_OBJET)]);
+		});
+		// id_document sur les .item
+		$("#portfolios .item").each( function(){
+			var document = $(this);
+			var id_document = document.attr("id").replace("doc","");
+			document.data("id_document",id_document)
+		});
+	}
+	</BOUCLE_portfolios>
+
+});
+
+/*]]>*/
+</script>

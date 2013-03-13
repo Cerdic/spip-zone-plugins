@@ -1,0 +1,43 @@
+[(#REM)
+	Modèle 'album' : vue par défaut en vignettes
+	- Depuis le texte d'un objet : <albumXX>
+	- Dans un squelette #MODELE{album}{id_album=XX}
+	Paramètres :
+		titre:		titre personnalisé ('non' pour ne pas afficher le titre)
+		hauteur:	hauteur maximale des images, défaut:85
+		largeur:	largeur maximale des images, défaut:0
+		align:		left,right,center -> alignement du bloc, défaut:''
+		statut:		statut de l'album, défaut:publie 
+]
+
+<B_album>
+[(#REM|test_espace_prive|oui)
+	[(#INCLURE{fond=prive/squelettes/inclure/albums_modele_infos_prive, id_album})]
+]
+<BOUCLE_album(ALBUMS){id_album}{statut == #REM|test_espace_prive|?{.*,#ENV{statut,publie}}}>
+<B_documents_joints>
+<div class="album vignettes clearfix p #ENV{align}">
+
+	[<h2>(#ENV{titre}|!={non}|oui)#ENV{titre,#_album:TITRE}</h2>]
+
+	<ul>
+		<BOUCLE_documents_joints(DOCUMENTS){id_album}{media?}{tout}>
+		#SET{titre, #TITRE|sinon{#FICHIER|basename}|attribut_html}
+		<li>
+		<[(#HTML5|?{figure,div}) ]class="figure">
+		<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="album#ID_ALBUM"[ class="(#EXPOSER)"] title="#GET{titre}">
+		[(#LOGO_DOCUMENT
+			|image_reduire{#ENV{largeur,0},#ENV{hauteur,85}}
+			|inserer_attribut{class,spip_logos}
+			|inserer_attribut{alt,#GET{titre}|couper{60}}
+			|inserer_attribut{title,#GET{titre}|couper{60}}
+		)]
+		</a>
+		</[(#HTML5|?{figure,div})]>
+		</li>
+		</BOUCLE_documents_joints>
+	</ul>
+
+</div>
+</B_documents_joints>
+</BOUCLE_album>

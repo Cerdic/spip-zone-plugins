@@ -1,0 +1,10 @@
+[(#REM)
+	Informations sur un album : contenu et liaison
+][(#REM)
+	inclus dans le squelette /prive/squelettes/objets/liste/albumotheque.html
+	Paramètres :
+		id_album	obligatoire
+]
+
+[(#ID_ALBUM|album_contenu{nombre}|singulier_ou_pluriel{medias:un_document,medias:des_documents})]
+[&nbsp;/&nbsp;(#ID_ALBUM|album_liaison{nombre}|singulier_ou_pluriel{album:info_1_objet_lie,album:info_nb_objets_lies})]

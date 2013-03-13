@@ -1,0 +1,47 @@
+[(#REM)
+	Formulaire de configuration des albums.
+][(#REM)
+	Inclus dans /prive/squelettes/contenu/configurer_albums.html
+]
+
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{album-24.png}" class="cadre-icone" /><:album:titre_albums:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#REM) message affiché si l'ajout de document aux albums n'est pas activé ]
+	[(#VAL{spip_albums}|in_array{#CONFIG{documents_objets}|explode{','}}|non)
+	<p class="reponse_formulaire reponse_formulaire_erreur"><a href='[(#URL_ECRIRE{configurer_contenu})]'><:album:info_documents_joints_albums:></a></p>
+	]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<ul>
+
+		[(#REM) choix des objets ]
+		[(#SAISIE{choisir_objets, objets,
+			label=<:album:label_activer_album_objets:>,
+			exclus=#LISTE{spip_albums,spip_documents}
+		})]
+
+		[(#REM) choix des champs d'édition ]
+		[(#SAISIE{case, utiliser_titre_defaut,
+			label=<:album:label_utiliser_titre_defaut:>,
+			label_case=<:album:label_case_utiliser_titre_defaut:>,
+			defaut=#CONFIG{albums/utiliser_titre_defaut}
+		})]
+
+		</ul>
+
+
+	[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	<!--extra-->
+	<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+
+</div>

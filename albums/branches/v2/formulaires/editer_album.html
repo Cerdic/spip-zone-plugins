@@ -1,0 +1,40 @@
+[(#REM)
+	Formulaire de création/édition d'un album
+][(#REM)
+	Inclus dans /prive/squelettes/contenu/albums_complement_objet.html
+	Inclus dans /prive/squelettes/contenu/albums_complement_objet.html
+]
+
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_album,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' name='formulaire_editer_album' id='formulaire_editer_album'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_album' value='#ENV{id_album}' />
+		[<input type='hidden' name='statut' value='(#ENV{statut})' />]
+		<ul>
+			#SET{name,titre}#SET{obli,'obligatoire'}#SET{defaut,#ENV{titre_defaut,''}}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:info_titre:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" placeholder="<:album:info_nouvel_album|attribut_html:>" />
+			</li>
+
+			[(#REM) Descriptif ]
+			[(#SAISIE{textarea, descriptif, 
+			label=<:texte_descriptif_rapide:>,
+			rows=4,
+			inserer_barre=''})]
+
+		</ul>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'[ style="direction: (#LANG_DIR|=={ltr}|?{rtl,ltr})"]>
+			<input class='submit' type='submit' name='enregistrer' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form>
+	]
+</div>

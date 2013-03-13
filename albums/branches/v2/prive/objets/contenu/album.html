@@ -1,0 +1,8 @@
+<BOUCLE_afficher_contenu(ALBUMS){id_album=#ENV{id}}{statut?}>
+
+<div class="champ contenu_presentation[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+<div class='label'><:album:label_descriptif:></div>
+<div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>#DESCRIPTIF</div>
+</div>
+
+</BOUCLE_afficher_contenu>

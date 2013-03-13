@@ -1,0 +1,50 @@
+[(#REM)
+	Variante de modèle 'album' : vue par défaut en liste
+	- Depuis le texte d'un objet : <albumXX|liste>
+	- Dans un squelette #MODELE{album_liste}{id_album=XX}
+	Paramètres :
+		titre:		titre personnalisé ('non' pour ne pas afficher le titre)
+		align:		left,right,center -> alignement du bloc, défaut:''
+		statut:		statut de l'album, défaut:publie 
+]
+
+<B_album>
+[(#REM|test_espace_prive|oui)
+	[(#INCLURE{fond=prive/squelettes/inclure/albums_modele_infos_prive, id_album})]
+]
+<BOUCLE_album(ALBUMS){id_album}{statut == #REM|test_espace_prive|?{.*,#ENV{statut,publie}}}>
+<B_documents_joints>
+<div class="album liste clearfix p #ENV{align}">
+
+	[<h2>(#ENV{titre}|!={non}|oui)#ENV{titre,#_album:TITRE}</h2>]
+
+	<table><tbody>
+	<BOUCLE_documents_joints(DOCUMENTS){id_album}{media?}>
+	#SET{titre, #TITRE|sinon{#FICHIER|basename}|attribut_html}
+	<tr>
+		<td>
+			<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="album#ID_ALBUM" class="spip_doc[ (#EXTENSION|attribut_html)][ (#EXPOSER)]"  title="#GET{titre}">
+			[(#LOGO_DOCUMENT{icone}
+				|image_reduire{32}
+				|inserer_attribut{alt,#GET{titre}}
+				|inserer_attribut{title,#GET{titre}}
+			)]
+			[<strong class="titre">(#GET{titre})</strong>]
+			</a>
+		</td>
+		<td>
+			<small>
+			[<abbr class="ext mimetype" title="#TYPE_DOCUMENT">(#EXTENSION|strtoupper)</abbr>]
+			[<span class="poids">(#TAILLE|taille_en_octets)</span>]
+			[(#MEDIA|=={image}|oui)
+			[<span class="dimensions">(#LARGEUR)x][(#HAUTEUR)&nbsp;pixels</span>]
+			]
+			</small>
+		</td>
+	</tr>
+	</BOUCLE_documents_joints>
+	</tbody></table>
+
+</div>
+</B_documents_joints>
+</BOUCLE_album>

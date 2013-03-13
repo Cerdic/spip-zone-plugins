@@ -1,0 +1,19 @@
+[(#REM)
+	Gestion du portfolio d'un album : page pour bouton d'action
+	Paramètres d'inclusion :
+		id_album	obligatoire
+]
+[(#ID_OBJET|oui)
+	[(#AUTORISER{modifier,album,#ID_ALBUM}|sinon_interdire_acces)]
+][(#ID_OBJET|non)
+	#SET{id_rubrique,#ENV{id_rubrique,#ENV{id_parent}}|trouver_rubrique_creer_objet{albums}}
+	[(#GET{id_rubrique}|non|sinon_interdire_acces)]
+]
+
+[(#REM) Formulaire edition album ]
+<div class='cadre-formulaire-editer ajax'>
+[(#FORMULAIRE_EDITER_ALBUM{#ENV{id_album,oui}, #GET{id_rubrique}, #SELF, ''})]
+</div>
+
+[(#REM) Formulaire edition portfolio ]
+[(#INCLURE{fond=prive/squelettes/inclure/portfolio-documents, objet=album, id_objet=#ID_ALBUM, id_unique=#VAL{album}|concat{#ID_ALBUM}, env, ajax=documents})]

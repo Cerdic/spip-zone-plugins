@@ -1,0 +1,83 @@
+[(#REM)
+	Affiche la liste des albums liés à un objet.
+	Paramètres d'inclusion :
+		statut (texte)		prepa|publie|poubelle
+		nb (texte)		nombre pagination
+][(#REM)
+	inclus dans :
+		prive/squelettes/contenu/albums_afficher_complement_objet.html
+]
+
+<B_liste_album>
+#ANCRE_PAGINATION
+<BOUCLE_liste_album(ALBUMS liens){objet}{id_objet}{statut ?== #ENV{statut}}{!par date, vu, titre}{pagination #ENV{nb,10}}>
+#SET{contenu, #ID_ALBUM|album_contenu|?{oui,''}}
+#SET{alt, #VAL{album:titre_album}|_T|concat{' n°'}|concat{#ID_ALBUM}|attribut_html}
+#SET{ajouter, #ENV{ajout_doc_album}|=={#ID_ALBUM}|?{oui,''}}
+
+[(#REM) classe .item : pour beneficier du ajaxreload quand edition du portfolio dans une modalbox ]
+[(#BOITE_OUVRIR{'','simple album item'})]
+
+	[(#REM) TITRE + infos ]
+	<div class='header'>
+		<div class='id'>
+			[(#STATUT|puce_statut{album,#ID_ALBUM})]
+			[<a class='numero' href="[(#ID_ALBUM|generer_url_entite{album})]">N°(#ID_ALBUM)</a>]
+			[(#VU|=={oui}|oui) [(#CHEMIN_IMAGE{vu-16.png}|balise_img{<:medias:document_vu:>,vu}|inserer_attribut{title,<:medias:document_vu:>})] ]
+		</div>
+		[<div class='titre'><h4 class='#EDIT{titre}'>(#TITRE|couper{80}|sinon{<:info_sans_titre:>})</h4></div>]
+	</div>
+
+	[(#REM) CONTENU : vignettes ]
+	[(#INCLURE{fond=prive/squelettes/inclure/albums_contenu, id_album, hauteur=60, ajax=documents})]
+
+	[(#REM) Formulaire ajout document ]
+	[(#GET{ajouter}|oui)
+	<a href="[(#SELF|parametre_url{ajout_doc_album,''}|parametre_url{id_album_ajoute,''})]" class='ajax bouton_fermer'>
+		[(#CHEMIN_IMAGE{fermer-16.png}|balise_img)]
+	</a>
+	<div class='ajax'>
+		#FORMULAIRE_JOINDRE_DOCUMENT{new,#ID_ALBUM,album}
+	</div>
+	]
+
+#BOITE_PIED
+
+	[(#GET{ajouter}|non)
+	<div class='footer actions'>
+
+		[(#REM) BOUTON : dissocier ]
+		[(#INCLURE{fond=prive/squelettes/inclure/albums_boutons_actions,
+			bouton=dissocier,
+			id_album,
+			objet,
+			id_objet,
+			vu,
+			afficher=#LISTE{label},
+			label=<:medias:bouton_enlever_document:>,
+			class='button reveal'}
+		)<span class='reveal'> | </span>]
+
+		[(#REM) BOUTON : modifier ]
+		[(#INCLURE{fond=prive/squelettes/inclure/albums_boutons_actions,
+			bouton=portfolio,
+			id_album=#ID_ALBUM,
+			retour=#SELF|ancre_url{albums},
+			afficher=#LISTE{label},
+			class=reveal}
+		)<span class='reveal'> | </span>]
+
+		[(#REM) BOUTON : Ajouter document ]
+		<a href="[(#SELF|parametre_url{ajout_doc_album,#ID_ALBUM}|parametre_url{ajouter,''})]" class='ajax ajouter'>
+			[(#CHEMIN_IMAGE{ajouter-12.png}|balise_img)]<:medias:bouton_ajouter_document:>
+		</a>
+
+	</div>
+	]
+
+#BOITE_FERMER
+
+
+</BOUCLE_liste_album>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</B_liste_album>
