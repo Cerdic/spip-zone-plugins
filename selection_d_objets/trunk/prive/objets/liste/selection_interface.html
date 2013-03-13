@@ -32,7 +32,7 @@
     <script type="text/javascript">
         $(function() {
             [(#REM)drag and drop]     
-            $( "#[(#GET{id})]" ).sortable({items:"tr.tr_liste"});
+            $( "#[(#GET{id})]").sortable({items:"tr.tr_liste"});
             $( "#[(#GET{id})]").bind("sortupdate", function(event, ui) {
                 var ordre = $(this).sortable('toArray').toString();
                 $('#[(#GET{id})]').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre-#VALEUR-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]}|parametre_url{load,prive/objets/liste/inc-selection_interface}|parametre_url{id,#GET{id}}|replace{&amp;,&})]&nouvel_ordre='+ordre);
