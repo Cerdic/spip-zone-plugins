@@ -9,12 +9,14 @@
    [(#VAL{inc/presentation}|include_spip|oui)]
    [(#VAL{inc/layer}|include_spip|oui)]   
 [(#SET{identifiant,[(#VAL{sel_objet_#ENV{objet_dest}_#ENV{id_objet}})]})] 
-  [(#VAL{e}|debut_cadre{'','',[(#VAL{#TITRE_OBJET_DEST}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})]})]  
+  [(#VAL{e}|debut_cadre{'','',[(#VAL{#TITRE_OBJET_DEST}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})]})] 
+
     <B_affichage>
 
     <strong><:selection_objet:selectione:></strong>
     <ul>   
     #SET{nom_id_dest,id_#OBJET_DEST}    
+
     <BOUCLE_affichage(SELECTION_OBJETS){id_objet}{statut ?}{objet}{objet_dest}>
         #SET{info_objet,#ENV{objets_choisies}|table_valeur{#ID_OBJET_DEST}}
         #SET{exclude,#GET{exclude}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_OBJET_DEST}}}

@@ -4,29 +4,28 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function selection_objet_affiche_gauche($flux) {
     include_spip('inc/config');
-    $objet = $flux["args"]["exec"];
+    $exec = $flux["args"]["exec"];
+
     /*Desactivé car il y a u problème  avec les cadres et block_depliables dans l'inclure
      * //Exception pour les documents
     if($objet=='document_edit')$objet='document' ;    */
     $args=$flux['args'];
-    
+
     $objets_selection=lire_config('selection_objet/selection_rubrique_objet',array());
-    $exceptions=charger_fonction('exceptions','inc');
-    $exception_objet=$exceptions('objet');
-    $objet_ancien=$objet;
-    if($exception_objet[$objet]){
-         $objet=$exception_objet[$objet];
-         $table='spip_'.$objet;
-        }
-    else $table='spip_'.$objet.'s';
-    
-    $contexte['id_objet']=$flux["args"]['id_'.$objet]?$flux["args"]['id_'.$objet]:_request('id_'.$objet); 
-    if(in_array($objet_ancien,$objets_selection)){
+
+
+    if(in_array($exec,$objets_selection)){
+        $e = trouver_objet_exec($exec);
+        $objet=$e['type']?$e['type']:$flux['args']['exec'];
+        $id_table_objet=$e['id_table_objet'];
+        $table = table_objet_sql($objet);
+        $contexte['id_objet']=$flux["args"][$id_table_objet]?$flux["args"][$id_table_objet]:_request($id_table_objet);         
         $contexte['objet']=$objet;
         $objets_cibles=lire_config('selection_objet/objets_cible',array());
+        
         if($objet=='rubrique' OR $objet=='article'){         
-            $contexte['langue']=sql_getfetsel('lang',$table,'id_'.$objet.'='.$contexte['id_objet']);
-            $contexte['lang'] = $contexte['langue'];
+            $contexte['langue']=sql_getfetsel('lang',$table,$id_table_objet.'='.$contexte['id_objet']);
+            //$contexte['lang'] = $contexte['langue'];
             }
         if($objet=='rubrique'){
             if (!$trad_rub=test_plugin_actif('tradrub')) $contexte['langue']=lire_config('langues_multilingue');
@@ -34,8 +33,7 @@ function selection_objet_affiche_gauche($flux) {
                 if(!$trad_rub=test_plugin_actif('tradrub')) $contexte['langue']=lire_config('langues_multilingue');
                 } 
             }
-        $contexte['objet_dest']=$objet_dest;
-        $contexte['objets_cibles']=$objets_cibles;                
+        $contexte['objets_cibles']=$objets_cibles;           
         $flux["data"].= recuperer_fond("prive/squelettes/navigation/affiche_gauche", $contexte);
         }
       
@@ -44,25 +42,23 @@ function selection_objet_affiche_gauche($flux) {
 
 function selection_objet_affiche_milieu ($flux="") {
     include_spip('inc/config');
-    $objet = $flux["args"]["exec"];
+    $exec = $flux["args"]["exec"];
     //Exception pour les documents
-    if($objet=='document_edit')$objet='document' ;    
-    $args=$flux["args"];
+    if($exec=='document_edit')$exec='document' ;    
     $objets_cibles=lire_config('selection_objet/objets_cible',array());
+
     
 
 
-    if(in_array($objet,$objets_cibles)){
-        //Les tables non conforme
-        $exceptions=charger_fonction('exceptions','inc');
-        $exception_objet=$exceptions();
-        if($exception_objet['objet'][$objet]){
-             $objet=$exception_objet['objet'][$objet];
-             $table='spip_'.$objet;
-            } 
-       else $table='spip_'.$objet.'s';  
-       if(!$champ_titre=$exception_objet['titre'][$objet]) $champ_titre='titre'; 
-                
+    if(in_array($exec,$objets_cibles)){
+        $e = trouver_objet_exec($exec);
+        $objet=$e['type'];
+        $id_table_objet=$e['id_table_objet'];
+        $table = table_objet_sql($objet);    
+        $args=$flux["args"];
+        
+        $tables=lister_tables_objets_sql();
+
         $id_objet=$args['id_'.$objet];
         if($objet=='site')$id_objet=$args['id_syndic'];
         $data = $flux["data"];
@@ -71,8 +67,8 @@ function selection_objet_affiche_milieu ($flux="") {
         else $choisies=lire_config('selection_objet/selection_'.$objet.'_dest',array());
         
         if(in_array($id_objet,$choisies) OR !$choisies){
-           $contexte = array('id_objet_dest'=>$id_objet,'objet_dest'=>$objet,'champ_titre'=>$champ_titre);
-            $tables=lister_tables_objets_sql();
+           $contexte = array('id_objet_dest'=>$id_objet,'objet_dest'=>$objet);
+            
            if($tables[$table]['field']['lang']) $contexte['langue']=array(sql_getfetsel('lang',$table,'id_'.$objet.'='.$id_objet));
            elseif($objet!='document') $contexte['langue']=array($args['lang']);
            else $contexte['langue']=array();

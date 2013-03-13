@@ -22,7 +22,7 @@
 <script type="text/javascript" >
     $(function() {
         $("#formulaire_bouton_objet[_(#ENV{lang,''}) ] #champ_objet_sel" ).autocomplete({
-                source: "#ENV{url_recherche}",
+                source: "[(#ENV{url_recherche}|replace{&amp;,&})]",
                 dataType: 'json',
                 minLength: 2,
                 autoFocus: true,

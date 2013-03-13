@@ -14,6 +14,8 @@ function action_instituer_objet_selectionne_dist($arg=null){
     $verifier_ordre=charger_fonction('verifier_ordre','inc');
 
 	list($id_objet,$objet,$langue,$lang,$objet_dest,$id_objet_dest,$type_lien)=explode('-',$arg);
+    
+    $table = table_objet_sql($objet_dest);
 
     if($langue)$langue=explode(',',$langue);
     else{
@@ -21,8 +23,7 @@ function action_instituer_objet_selectionne_dist($arg=null){
         if($tables[$table]['field']['lang'])$langue=array(sql_getfetsel('lang','spip_'.$objet_dest.'s','id_'.$objet_dest.'='.$id_objet_dest));
         else $langue=array();
         }
-
-
+;
         // si l'objet n'est pas définit par langue on l'enregistre pour chaque langue du site
         if(count($langue)>1){
         

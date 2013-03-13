@@ -11,6 +11,7 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
      else $choisies=lire_config('selection_objet/selection_'.$objet_dest.'_dest',array());
     
     $lang=$langue?explode(',',$langue):'';
+
     
     //Quelques objets ne sont pas conforme, on adapte
     $exceptions=charger_fonction('exceptions','inc');
@@ -18,15 +19,11 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
     
     //On grade l'objet original pour la détection des données de l'objet
     $objet_dest_original=$objet_dest;
-    
+
     if($exception_objet[$objet_dest]){
          $objet_dest=$exception_objet[$objet_dest];
     }
-    
-    if($exception_objet[$objet]){
-         $objet=$exception_objet[$objet];
-        }
-    
+
     // Les information des objets destinataires
     $table_dest = table_objet_sql($objet_dest);
     $tables=lister_tables_objets_sql();
@@ -47,11 +44,11 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
     //Les types liens pour l'objet concerné
     if(!$types=lire_config('selection_objet/type_liens_'.$objet_dest_original,array()))$types=lire_config('selection_objet/type_liens',array());
     
-    
     $types_lien=array();
     foreach($types as $cle => $valeur){
         if($valeur)$types_lien[$cle]=_T($valeur);
         }
+
     $valeurs = array(
     	"id_objet"	=> $id_objet,
     	"objet"	=> $objet,	

@@ -18,11 +18,12 @@ function formulaires_recherche_objets_charger_dist($objet_dest='rubrique',$id_ob
     //On garde l'objet original pour la détection des données de l'objet
     $objet_dest_original=$objet_dest;
     
-    if($exception_objet[$objet_dest]){
-         $objet_dest=$exception_objet[$objet_dest];
-          $table_dest='spip_'.$objet_dest;
-    }
-    else $table_dest='spip_'.$objet_dest.'s';
+   //Déterminer le bon objet
+   $e = trouver_objet_exec($objet_dest);
+   $objet_dest=$e['type'];
+   $id_table_objet_dest=$e['id_table_objet'];
+   $table_dest = table_objet_sql($objet);   
+    
     
     if($exception_objet[$objet]){
          $objet=$exception_objet[$objet];
@@ -35,9 +36,9 @@ function formulaires_recherche_objets_charger_dist($objet_dest='rubrique',$id_ob
     foreach($types as $cle => $valeur){
         if($valeur)$types_lien[$cle]=_T($valeur);
         }
-    
-    $url_recherche=generer_url_public('recherche_objet','lang='.$lang.'&objet_dest='.$objet_dest.'&id_objet_dest='.$id_objet_dest,true);
 
+    $url_recherche=generer_url_public('recherche_objet','langue='.$lang.'&objet_dest='.$objet_dest.'&id_objet_dest='.$id_objet_dest,true);
+    
     $valeurs = array(
     	"id_objet"	=> $id_objet,
     	"objet"	=> $objet,	
