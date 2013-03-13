@@ -46,7 +46,7 @@
 
 /*= ENTETE =*/
 .albums .entete_ajouter		{
-				padding: 1.5em .5em;
+				padding: 1em .5em;
 				background-color: #GET{foncee}; border-top: none;
 				}
 .albums .entete_ajouter h4	{
@@ -140,12 +140,17 @@
 				vertical-align: middle;
 				text-align: center;
 				}
+.album .doc a 			{ display: block; }
 .album .doc a img 		{ vertical-align: middle; }
+.album .doc figcaption 		{ 
+				margin-top: .25em;
+				font-size: x-small; color: #888; line-height: 1;
+				}
 .placeholder-album		{ background-color:#GET{claire}; box-shadow:-1px 1px 1px #GET{foncee}; } /* hauteur et largeur dans squelette */
 /* boutons */
 .album .actions,
   .album .actions button	{ font-size: x-small; }
-.album .actions a		{ font-weight: bold; }
+.album .actions a		{ /*font-weight: bold;*/ }
 .album .actions img		{ vertical-align: middle; }
 .album .reveal			{ opacity: .1; }
 .album .inner:hover .reveal	{ opacity: 1; visibility: visible; }
@@ -169,11 +174,6 @@
 .formulaire_albums_deplacer_documents .fermer { float: #ENV{right}; cursor: pointer; }
 .cible-album			{ outline: 2px dashed #GET{foncee}; }
 .album .doc.drag:hover .retirer	{display: none;} /* cacher bouton retirer pendant deplacement */
-/* vignette du portfolio dans album */
-.albums .liste-items .item	{ 
-				padding: 0;
-				border: 0;
-				}
 /* placeholder quand portfolio vide */
 .liste_items.placeholder	{
 				height: 2em;
@@ -280,16 +280,14 @@
 /*==============
   === MODELE ===
   ==============*/
-.album.center			{ display: table; }
-/* vue en vignettes */
-.album.vignettes li		{ float: left; margin: 0 10px 10px 0; }
-.album.vignettes li .spip_logos	{ float: none; margin: 0; }
+.album.vignettes li			{ display: inline-block; margin: 0 10px 10px 0; }
+.album.vignettes li .spip_logos		{ float: none; margin: 0; }
+/* styles pour que le label ne dépasse pas */
 .album.vignettes figure,
-  .album.vignettes .figure	{ display: table; width: 1px; } /* width : pour empecher le titre de dépasser */
-.album.vignettes a,
-  .album.vignettes figcaption,
+  .album.vignettes .figure		{ display: table; width: 1px; text-align: center; }
+.album.vignettes figcaption,
   .album.vignettes .figcaption,
-  .album.vignettes img 		{ display: table-row; }
+  .album.vignettes img 			{ display: table-row; }
 
 /* notice espace privé */
 .album.publier			{ opacity:.3 }

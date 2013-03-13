@@ -1,8 +1,8 @@
 <paquet
 	prefix="Albums"
 	categorie="multimedia"
-	version="2.2.1"
-	etat="test"
+	version="2.2.2"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/albums-128.png"
 	schema="0.0.3"
@@ -13,8 +13,7 @@
 
 	<auteur lien="http://romy.tetue.net">romy.tetue.net</auteur>
 	<auteur lien="http://razack.wordpress.com">Charles Razack</auteur>
-	<credit lien="http://tiheum.deviantart.com/art/Faenza-Icons-173323228">Matthieu James (icone inspirée du thème "Faenza")</credit>
-	<licence>GPL - 2011</licence>
+	<licence>GPL</licence>
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/albums.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/albums.php" />
@@ -22,13 +21,12 @@
 
 	<pipeline nom="afficher_complement_objet" inclure="albums_pipelines.php" /><!-- ajout d'albums sur la page d un objet -->
 	<pipeline nom="affiche_milieu" inclure="albums_pipelines.php" /><!-- objets lies sur la page d'un album -->
-	<pipeline nom="compagnon_messages" inclure="albums_pipelines.php" /><!-- le compagnon -->
 	<pipeline nom="autoriser" inclure="albums_autorisations.php" />
 	<pipeline nom="insert_head_css" inclure="albums_pipelines.php" /> <!-- css pages publiques -->
 	<pipeline nom="post_edition" inclure="albums_pipelines.php" /> <!-- mise a jour des liens albums apres edition d'un objet -->
 	<pipeline nom="objet_compte_enfants" inclure="albums_pipelines.php" /> <!-- compter nb albums dans un objet -->
 	<pipeline nom="boite_infos" inclure="albums_pipelines.php" /> <!-- nb albums dans une rubrique -->
-	<pipeline nom="jqueryui_plugins" inclure="albums_pipelines.php" /> <!-- drag n drop -->
+	<pipeline nom="jqueryui_plugins" inclure="albums_pipelines.php" /> <!-- glisser-deposer -->
 	<pipeline nom="optimiser_base_disparus" inclure="albums_pipelines.php" /> <!-- suppression liens morts -->
 
 	<necessite nom="saisies" compatibilite="[1.21.0;]" />
