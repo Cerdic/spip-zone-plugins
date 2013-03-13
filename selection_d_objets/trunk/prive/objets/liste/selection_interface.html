@@ -11,20 +11,17 @@
 <BOUCLE_langues(POUR){tableau #ENV**{langue}}>
     #SET{id,selection_objets_#VALEUR}
     [(#GET{n_langues}|>{1}|oui)<h4 class="titrem">[(#VALEUR|traduire_nom_langue)]</h4>]
-    <div id="[(#GET{id})]">
     <INCLURE{fond=prive/objets/liste/inc-selection_interface,l=#VALEUR,env,ajax=tableau_so,id=#GET{id}}/>
-    </div>
     <script type="text/javascript">
-    $(function() {
-
-        [(#REM)drag and drop]     
-        $( "#[(#GET{id})]" ).sortable({items:"tr.tr_liste"});
-        $( "#[(#GET{id})]").bind("sortupdate", function(event, ui) {
-            var ordre = $(this).sortable('toArray').toString();
-            $('#[(#GET{id})]').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre-#VALEUR-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]}|parametre_url{load,prive/objets/liste/inc-selection_interface}|parametre_url{id,#GET{id}}|replace{&amp;,&})]&nouvel_ordre='+ordre);
+        $(function() {
+            [(#REM)drag and drop]     
+            $( "#[(#GET{id})]" ).sortable({items:"tr.tr_liste"});
+            $( "#[(#GET{id})]").bind("sortupdate", function(event, ui) {
+                var ordre = $(this).sortable('toArray').toString();
+                $('#[(#GET{id})]').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre-#VALEUR-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]}|parametre_url{load,prive/objets/liste/inc-selection_interface}|parametre_url{id,#GET{id}}|replace{&amp;,&})]&nouvel_ordre='+ordre);
+            });
         });
-    });
-</script>
+    </script>
 
     #FORMULAIRE_RECHERCHE_OBJETS{#OBJET_DEST,#ID_OBJET_DEST,#VALEUR}  
     
@@ -32,17 +29,16 @@
 </BOUCLE_langues>
     #SET{id,selection_objets_no_lang}
     <INCLURE{fond=prive/objets/liste/inc-selection_interface,env,l='',langue='',ajax=tableau_so}/>
-        <script type="text/javascript">
-    $(function() {
-
-        [(#REM)drag and drop]     
-        $( "#[(#GET{id})]" ).sortable({items:"tr.tr_liste"});
-        $( "#[(#GET{id})]").bind("sortupdate", function(event, ui) {
-            var ordre = $(this).sortable('toArray').toString();
-            $('#[(#GET{id})]').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre-#VALEUR-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]}|parametre_url{load,prive/objets/liste/inc-selection_interface}|parametre_url{id,#GET{id}}|replace{&amp;,&})]&nouvel_ordre='+ordre);
+    <script type="text/javascript">
+        $(function() {
+            [(#REM)drag and drop]     
+            $( "#[(#GET{id})]" ).sortable({items:"tr.tr_liste"});
+            $( "#[(#GET{id})]").bind("sortupdate", function(event, ui) {
+                var ordre = $(this).sortable('toArray').toString();
+                $('#[(#GET{id})]').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre-#VALEUR-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]}|parametre_url{load,prive/objets/liste/inc-selection_interface}|parametre_url{id,#GET{id}}|replace{&amp;,&})]&nouvel_ordre='+ordre);
+            });
         });
-    });
-</script>
+    </script>
     #FORMULAIRE_RECHERCHE_OBJETS{#OBJET_DEST,#ID_OBJET_DEST}  
 
 <//B_langues>
