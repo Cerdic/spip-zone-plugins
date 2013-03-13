@@ -30,6 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_valide_url' => 'Mientras tanto, se halla disponible en esta dirección temporal:',
 
 	// B
+	'bouton_changer_pass' => 'Changer mon mot de passe', # NEW
+	'bouton_finir_inscription' => 'Finir mon inscription', # NEW
 	'breve_propose_detail' => 'El breve "@titre@" ha sido propuesto para publicación
 	desde',
 	'breve_propose_sujet' => '[@nom_site_spip@] Propone: @titre@',
@@ -45,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_notification' => 'Los siguientes eventos pueden conllevar notificación por correo electrónico.',
 
 	// F
+	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, cliquez sur le bouton ci-dessous : ', # NEW
 	'forum_prives_auteur' => '<strong>Autores</strong>: los autores reciben notificaciones de los foros derivados de sus artículos o de sus mensajes en el sitio privado. ',
 	'forum_prives_moderateur' => 'Indique a continuación el correo electrónico del moderador de los foros privados (si son varios, separe con comas).',
 	'forum_prives_thread' => '<strong>Hilo de discusión</strong>: los participantes de un mismo hilo de discusión reciben notificaciones de los foros (privados).',
@@ -87,6 +90,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'notifications' => 'Notificaciones',
+
+	// P
+	'pass_mail_passcookie_1' => 'Pour retrouver votre accès au site @nom_site_spip@, cliquez sur le bouton : ', # NEW
+	'pass_mail_passcookie_2' => 'Vous pourrez alors entrer un nouveau mot de passe et vous reconnecter au site.', # NEW
 
 	// S
 	'signature_petition' => 'Firmas de petición',

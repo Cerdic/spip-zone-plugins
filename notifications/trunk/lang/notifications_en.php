@@ -30,6 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_valide_url' => 'Meanwhile, it is visible at this temporary address :',
 
 	// B
+	'bouton_changer_pass' => 'Changer mon mot de passe', # NEW
+	'bouton_finir_inscription' => 'Finir mon inscription', # NEW
 	'breve_propose_detail' => 'The news item "@titre@" is proposed for publication since',
 	'breve_propose_sujet' => '[@nom_site_spip@] Proposed: @titre@',
 	'breve_propose_titre' => 'Proposed news item
@@ -45,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_notification' => 'Following events may generate email notifications.',
 
 	// F
+	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, cliquez sur le bouton ci-dessous : ', # NEW
 	'forum_prives_auteur' => '<strong>Authors</strong>: Authors get notified when comments are posted to their article(s) or comment(s) on the private area.',
 	'forum_prives_moderateur' => 'Please write here moderators\' email adress for private forums, coma separated.',
 	'forum_prives_thread' => '<strong>Forum thread</strong>: Posters to the same thread get notified when a new comment is posted to the (private) thread.',
@@ -87,6 +90,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'notifications' => 'Notifications',
+
+	// P
+	'pass_mail_passcookie_1' => 'Pour retrouver votre accès au site @nom_site_spip@, cliquez sur le bouton : ', # NEW
+	'pass_mail_passcookie_2' => 'Vous pourrez alors entrer un nouveau mot de passe et vous reconnecter au site.', # NEW
 
 	// S
 	'signature_petition' => 'Petition signatures',

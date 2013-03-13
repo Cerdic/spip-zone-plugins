@@ -30,6 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_valide_url' => 'Zatiaľ je zobrazený na tejto dočasnej adrese:',
 
 	// B
+	'bouton_changer_pass' => 'Changer mon mot de passe', # NEW
+	'bouton_finir_inscription' => 'Finir mon inscription', # NEW
 	'breve_propose_detail' => 'Novinka "@titre@" sa posiela na publikovanie
 	z(o)',
 	'breve_propose_sujet' => '[@nom_site_spip@] Odoslaný: @titre@',
@@ -45,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_notification' => 'Ďalšie udalosti môžu vyvolať odoslanie oznamu e-mailom.',
 
 	// F
+	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, cliquez sur le bouton ci-dessous : ', # NEW
 	'forum_prives_auteur' => '<strong>Autori:</strong> autori dostávajú oznamy odoslané z diskusných fór pod ich článkami alebo správami v súkromnej zóne.',
 	'forum_prives_moderateur' => 'Zadajte e-mailovú adresu moderátora súkromných diskusných fór (alebo viac, oddelených čiarkami).',
 	'forum_prives_thread' => '<strong>Téma:</strong> diskutujúci v rovnakom vlánke dostávajú oznami z (verejných) diskusných fór.',
@@ -87,6 +90,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'notifications' => 'Oznamy',
+
+	// P
+	'pass_mail_passcookie_1' => 'Pour retrouver votre accès au site @nom_site_spip@, cliquez sur le bouton : ', # NEW
+	'pass_mail_passcookie_2' => 'Vous pourrez alors entrer un nouveau mot de passe et vous reconnecter au site.', # NEW
 
 	// S
 	'signature_petition' => 'Podpisy pod petíciu',

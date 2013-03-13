@@ -29,8 +29,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_valide_url' => 'En attendant, il est visible à cette adresse temporaire :',
 
 	// B
-	'bouton_finir_inscription' => 'Finir mon inscription',
 	'bouton_changer_pass' => 'Changer mon mot de passe',
+	'bouton_finir_inscription' => 'Finir mon inscription',
 	'breve_propose_detail' => 'La brève "@titre@" est proposée à la publication
 	depuis',
 	'breve_propose_sujet' => '[@nom_site_spip@] Propose : @titre@',
