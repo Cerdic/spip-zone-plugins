@@ -4,7 +4,6 @@
         <ul>
             [(#SAISIE{input,objet_sel,
                     label=#ENV{label_objet}})]
-                    
            [(#ENV{types_lien}|count|>{0}|oui)      
             [(#SAISIE{selection,type_lien,
                     label=#ENV{label_lien},
@@ -40,7 +39,7 @@
     jQuery(document).ready(function(){
     $('#formulaire_bouton_objet[_(#ENV{lang})] #champ_objet_sel').val('');
     [(#ENV{message_ok}|oui)
-        ajaxReload('tableau_so', {});
+        ajaxReload('tableau_so', {type_lien:'2'});
         ]         
         });
   </script>  
