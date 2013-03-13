@@ -49,10 +49,10 @@ function balise_PRIX_dist($p) {
  * @param float $prix Valeur du prix à formater
  * @return string Retourne une chaine contenant le prix formaté avec une devise (par défaut l'euro)
  */
-
-function prix_formater($prix){
-	$fonction_formater = charger_fonction('prix_formater', 'filtres/');
-	return $fonction_formater($prix);
+ 
+function prix_formater($prix){ 
+	$fonction_formater = charger_fonction('prix_formater', 'filtres/'); 
+	return $fonction_formater($prix); 
 }
 
 /*
@@ -64,22 +64,22 @@ function filtres_prix_formater_dist($prix){
 
 	// Pouvoir débrayer la devise de référence
 	if (! defined('PRIX_DEVISE')) {
-	  define('PRIX_DEVISE','fr_FR.UTF-8');
+	  define('PRIX_DEVISE','fr_FR.utf8');
 	}
-
-	setlocale(LC_MONETARY, PRIX_DEVISE);
-
+	
+	setlocale(LC_MONETARY, PRIX_DEVISE); 
+	
 	if(function_exists(money_format)) {
 		$prix = floatval($prix);
-		$prix = money_format('%i', $prix);
+		$prix = money_format('%i', $prix); 
 		// Afficher la devise € si celle ci n'est pas remontée par la fonction money
 		if ((strlen(money_format('%#1.0n', 0)) < 2) || ((money_format('%#1.0n', 0) == 0) AND (strlen(money_format('%#1.0n', 0)) == 3)))
-		  $prix .= '&nbsp;&euro;';
+		  $prix .= '&nbsp;&euro;'; 
 	} else {
-		 $prix .= '&nbsp;&euro;';
+		 $prix .= '&nbsp;&euro;'; 
 	}
-
-
+	
+	
 	return $prix;
 }
 
