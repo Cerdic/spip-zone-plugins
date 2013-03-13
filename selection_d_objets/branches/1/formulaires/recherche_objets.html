@@ -41,9 +41,7 @@
     $('#formulaire_bouton_objet[_(#ENV{lang})] #champ_objet_sel').val('');
      #SET{id,selection_objets_#ENV{lang}}
     [(#ENV{message_ok}|oui)
-   
        $('#[(#GET{id})]').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre-[(#ENV{lang})]-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]}|parametre_url{load,prive/objets/liste/inc-selection_interface}|parametre_url{id,#GET{id}}|replace{&amp;,&})]');
-           
         ]         
         });
   </script>  
