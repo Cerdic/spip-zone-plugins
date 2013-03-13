@@ -14,21 +14,21 @@
 					    <li class='editer choisir_module obligatoire[ (#ENV**{erreurs}|table_valeur{module}|oui)erreur]'>
 							<label for='id_tradlang_module'><:tradlang:texte_module_traduire:></label>[
 							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{module})</span>
-							]<INCLURE{fond=formulaires/tradlang_selecteur_module}{env}>
+							]<INCLURE{fond=formulaires/tradlang_selecteur_module,env}>
 					    </li>
 					    <li class='editer choisir_lang_orig[ (#ENV**{erreurs}|table_valeur{lang_orig}|oui)erreur]'>
 							<label for='lang_orig'><:tradlang:item_langue_origine:></label>
 							<p class="explication"><:tradlang:explication_langue_origine:></p>[
 							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lang_orig})</span>
-							]<INCLURE{fond=formulaires/tradlang_selecteur_langue_module_dispo_complete}{env}{lang_select=#ENV{lang_orig}}{name=lang_orig}>
+							]<INCLURE{fond=formulaires/tradlang_selecteur_langue_module_dispo_complete,lang_select=#ENV{lang_orig},name=lang_orig,id_tradlang_module,module}>
 					    </li>
 					    <li class='editer choisir_lang_cible[ (#ENV**{erreurs}|table_valeur{lang_cible}|oui)erreur]'>
 							<label for='lang_cible'><:tradlang:item_langue_cible:></label>
 							<p class="explication"><:tradlang:explication_langue_cible:></p>[
 							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lang_cible})</span>
-							]<INCLURE{fond=formulaires/tradlang_selecteur_langue_module_dispo}{env}{lang_select=#ENV{lang_cible}}{lang_exclue=#ENV{lang_mere}}{name=lang_cible}>
+							]<INCLURE{fond=formulaires/tradlang_selecteur_langue_module_dispo,id_tradlang_module,module,lang_select=#ENV{lang_cible},lang_exclue=#ENV{lang_mere},name=lang_cible}>
 					    </li>
-						[(#AUTORISER{modifier,tradlang}|oui)<INCLURE{fond=formulaires/tradlang_selecteur_langue_possible_creation}{env}>]
+						[(#AUTORISER{modifier,tradlang}|oui)<INCLURE{fond=formulaires/tradlang_selecteur_langue_possible_creation,env}>]
 				</ul>
 				</fieldset>
 			</li>
@@ -41,7 +41,7 @@
 </div>
 <script type='text/javascript'>
 	jQuery(document).ready(function(){
-		jQuery('.formulaire_choisir_module select#id_tradlang_module').change(function(){
+		jQuery('.formulaire_#FORM #id_tradlang_module').change(function(){
 			jQuery(this).parents('.tradlang_choisir_module').addClass('module_changed');
 			jQuery(this).parents('form').submit();	
 		});
