@@ -183,7 +183,7 @@ function multilang_inserer_head($config=array()){
  * @return string $flux Le contenu de la page modifiée 
  */
 function multilang_affichage_final($flux){
-	if($_REQUEST['page'] == 'crayons.js'){
+	if(isset($_REQUEST['page']) && $_REQUEST['page'] == 'crayons.js'){
 		$root = '' ;
 		include_spip('inc/config');
 		$config = lire_config('multilang',array());
