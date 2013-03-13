@@ -1,7 +1,6 @@
 <traduction module="boussole" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/boussole/trunk/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.net/tradlang_module/boussole?lang_cible=en">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
-		<traducteur nom="_Eric_" lien="http://trad.spip.net/auteur/_eric_" />
 	</langue>
 	<langue code="fr" />
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/boussole?lang_cible=sk">
