@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_site_spip_demo' => 'DEMO.SPIP.org is a test website which is reset every night. There you can test the last stable SPIP  version (as an administrator or as an editor), in one click, without having to install it.',
 	'descriptif_site_spip_doc' => 'DOC.SPIP.org is where every fonction from the SPIP source code is detailled, analysed and comment (name, place, parameters, meaning and use).',
 	'descriptif_site_spip_edgard' => 'Edgard is the faithfull and tireless companion of SPIP IRC where he shares his knowledge, with tenderness and humor. From his home EDGARD.SPIP.org bring advices on IRC, answers and happiness. Additionally, Edgard is a robot (but it doesn\'t seem to know about it...)',
-	'descriptif_site_spip_forum' => 'FORUM.SPIP.org is the palce to exchange and help between SPIP users. This site, translated in 10 languages, has four main sections : installation and update, private area use, administration, management, website configuration, skeletons creation.',
+	'descriptif_site_spip_forum' => '<MODIF>FORUM.SPIP.org is the palce to exchange and help between SPIP users. This site, translated in 10 languages, has four main sections : installation and update, private area use, administration, management, website configuration, skeletons creation.',
 	'descriptif_site_spip_herbier' => 'SPIP herbarium is not just a link directory. No. It\'s a<strong>memory album</strong> of websites made with SPIP, at one moment of their existence. It tells a web story , the one of SPIP, since 2001. This herbarium gathers websites we wanted to show, because their content was interresting and their design were too, fonctions skilfully implemented, or just nice designs. Websites we remember, where we came back, which were some kind of references to their time in one way or another.',
 	'descriptif_site_spip_info' => 'On a few pages, SPIP-INFO.net answers to the onewho wander if SPIP has the ability to be used for a specific website project. Peers, NGOs, companies will find informations to make their own choice.',
 	'descriptif_site_spip_irc' => 'The SPIP Community never sleeps ! We have an IRC canal open, to everybody : http://webchat.freenode.net/?channels=#spip',
@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_site_spip_zone' => 'SPIP Zone',
 
 	// S
-	'slogan_boussole_spip' => 'The best links of the SPIP Galaxy !',
+	'slogan_boussole_spip' => '<MODIF>The best links of the SPIP Galaxy !',
 	'slogan_site_spip_blog' => 'Free software and tenderness',
 	'slogan_site_spip_contrib' => 'SPIP contribution area',
 	'slogan_site_spip_core' => 'SPIP versions development area ',
