@@ -1,46 +1,53 @@
 [(#REM)
-	Variante de modèle 'album' : vue par défaut en liste
+	Variante de modèle 'album' : vue en liste
 	- Depuis le texte d'un objet : <albumXX|liste>
 	- Dans un squelette #MODELE{album_liste}{id_album=XX}
 	Paramètres :
-		titre:		titre personnalisé ('non' pour ne pas afficher le titre)
-		align:		left,right,center -> alignement du bloc, défaut:''
-		statut:		statut de l'album, défaut:publie 
-]
+		titre		titre personnalisé
+				'non' pour ne pas afficher le titre
+		align		alignement du bloc conteneur (div.album)
+				left/right/center, défaut: ''
+		statut		statut de l'album
+				publie/prepa/poubelle, défaut: publie
+		infos		liste des infos complémentaire à afficher, séparées par des virgules
+				extension,taille,dimensions, défaut:toutes, 'non' pour ne pas les afficher
+		icone		dimension maximale des icônes (hauteur & largeur) sans l'unité
+				défaut: 32
+		par		tri des documents
+				titre/media/fichier/mode,extension/taille, défaut: media,titre,fichier
+		media		restreindre à un type de document
+				image/file/audio/video, défaut: ''
 
-<B_album>
-[(#REM|test_espace_prive|oui)
-	[(#INCLURE{fond=prive/squelettes/inclure/albums_modele_infos_prive, id_album})]
-]
-<BOUCLE_album(ALBUMS){id_album}{statut == #REM|test_espace_prive|?{.*,#ENV{statut,publie}}}>
+]<B_album>[
+(#REM|test_espace_prive|oui)
+[(#INCLURE{fond=prive/squelettes/inclure/albums_modele_infos_prive, id_album})]
+]<BOUCLE_album(ALBUMS){id_album}{statut == #REM|test_espace_prive|?{.*,#ENV{statut,publie}}}>
 <B_documents_joints>
-<div class="album liste clearfix p #ENV{align}">
+<div class="album liste p #ENV{align}" id="album#ID_ALBUM">
 
 	[<h2>(#ENV{titre}|!={non}|oui)#ENV{titre,#_album:TITRE}</h2>]
 
 	<table><tbody>
-	<BOUCLE_documents_joints(DOCUMENTS){id_album}{media?}>
-	#SET{titre, #TITRE|sinon{#FICHIER|basename}|attribut_html}
-	<tr>
+	<BOUCLE_documents_joints(DOCUMENTS){id_album}{media?}{par #ENV{par,media}, titre, fichier}{tout}>
+	#SET{titre, #TITRE|sinon{#FICHIER|basename}|couper{80}|attribut_html}
+	#SET{extension, #EXTENSION|strtoupper|wrap{<abbr>}|inserer_attribut{title,#VAL{medias:info_document}|_T|concat{' ',#TYPE_DOCUMENT}|attribut_html}}
+	#SET{taille, #TAILLE|taille_en_octets|wrap{<span>}|inserer_attribut{class,taille}}
+	#SET{dimensions, #MEDIA|=={image}|?{#LARGEUR|concat{'x',#HAUTEUR,'px'}|wrap{<span>}|inserer_attribut{class,dimensions}}}
+	#SET{infos, #ENV{infos}|!={non}|?{#ENV{infos,'extension,taille,dimensions'}|explode{','}}}
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 		<td>
-			<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="album#ID_ALBUM" class="spip_doc[ (#EXTENSION|attribut_html)][ (#EXPOSER)]"  title="#GET{titre}">
+			<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="album#ID_ALBUM" class="spip_doc[ (#EXTENSION|attribut_html)]" title="#GET{titre}">
 			[(#LOGO_DOCUMENT{icone}
-				|image_reduire{32}
-				|inserer_attribut{alt,#GET{titre}}
-				|inserer_attribut{title,#GET{titre}}
-			)]
-			[<strong class="titre">(#GET{titre})</strong>]
+				|image_reduire{#ENV{icone,32}}
+				|inserer_attribut{alt,#GET{titre}})
+			][<strong class="titre">(#GET{titre})</strong>]
 			</a>
 		</td>
-		<td>
-			<small>
-			[<abbr class="ext mimetype" title="#TYPE_DOCUMENT">(#EXTENSION|strtoupper)</abbr>]
-			[<span class="poids">(#TAILLE|taille_en_octets)</span>]
-			[(#MEDIA|=={image}|oui)
-			[<span class="dimensions">(#LARGEUR)x][(#HAUTEUR)&nbsp;pixels</span>]
-			]
-			</small>
-		</td>
+		<B_infos><td>
+			<small><tt><BOUCLE_infos(DATA){source table, #GET{infos}}{'<span class="sep"> - </span>'}{si #GET{infos}}>[
+			(#GET{#VALEUR})
+			]</BOUCLE_infos></tt></small>
+		</td></B_infos>
 	</tr>
 	</BOUCLE_documents_joints>
 	</tbody></table>

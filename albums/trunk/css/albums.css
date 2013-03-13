@@ -6,27 +6,14 @@
 
 -------------------------------------------------------------- */
 
-/*===================
-  === ALIGNEMENTS ===
-  ===================*/
-.album					{}
-.album.center				{}
-.album.left				{}
-.album.right				{}
-
 /*=================
   === VIGNETTES ===
   =================*/
-.album.vignettes li			{float: left; margin: 0 10px 10px 0;}
-.album.vignettes li .spip_logos		{float: none; margin: 0;}
+.album.vignettes li			{ display: inline-block; margin: 0 10px 10px 0; }
+.album.vignettes li .spip_logos		{ float: none; margin: 0; }
+/* styles pour que le label ne dépasse pas */
 .album.vignettes figure,
-  .album.vignettes .figure		{display: table; width: 1px;} /* width : pour empecher le titre de dépasser */
-.album.vignettes a,
-  .album.vignettes figcaption,
+  .album.vignettes .figure		{ display: table; width: 1px; text-align: center; }
+.album.vignettes figcaption,
   .album.vignettes .figcaption,
-  .album.vignettes img 			{display: table-row;}
-
-/*=============
-  === LISTE ===
-  =============*/
-.album.liste 				{}
+  .album.vignettes img 			{ display: table-row; }

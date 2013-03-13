@@ -1,0 +1,10 @@
+[(#REM) 
+	Surcharge du portfolio des squelettes de la dist
+][
+(#REM) Portfolio traditionnel
+]<INCLURE{fond=squelettes-dist/inclure/documents, env}>
+[
+(#REM) Albums liés à l'article et non insérés dans le texte
+]<BOUCLE_albums(ALBUMS){id_article}{vu=non}>
+[(#MODELE{album}{id_album})]
+</BOUCLE_albums>
