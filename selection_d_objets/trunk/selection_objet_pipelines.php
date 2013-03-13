@@ -16,8 +16,12 @@ function selection_objet_affiche_gauche($flux) {
 
     if(in_array($exec,$objets_selection)){
         $e = trouver_objet_exec($exec);
-        $objet=$e['type']?$e['type']:$flux['args']['exec'];
+        $objet=$e['type'];
         $id_table_objet=$e['id_table_objet'];
+        if(!$objet){
+            $objet=$exec;
+            $id_table_objet='id_'.objet;
+        }
         $table = table_objet_sql($objet);
         $contexte['id_objet']=$flux["args"][$id_table_objet]?$flux["args"][$id_table_objet]:_request($id_table_objet);         
         $contexte['objet']=$objet;
@@ -54,6 +58,10 @@ function selection_objet_affiche_milieu ($flux="") {
         $e = trouver_objet_exec($exec);
         $objet=$e['type'];
         $id_table_objet=$e['id_table_objet'];
+        if(!$objet){
+            $objet=$exec;
+            $id_table_objet='id_'.objet;
+        }
         $table = table_objet_sql($objet);    
         $args=$flux["args"];
         

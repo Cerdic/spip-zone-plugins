@@ -13,22 +13,14 @@ function formulaires_recherche_objets_charger_dist($objet_dest='rubrique',$id_ob
     
     //Quelques objets ne sont pas conforme, on adapte
     $exceptions=charger_fonction('exceptions','inc');
-    $exception_objet=$exceptions('objet');
-    
+
     //On garde l'objet original pour la détection des données de l'objet
     $objet_dest_original=$objet_dest;
     
    //Déterminer le bon objet
-   $e = trouver_objet_exec($objet_dest);
-   $objet_dest=$e['type'];
-   $id_table_objet_dest=$e['id_table_objet'];
-   $table_dest = table_objet_sql($objet);   
-    
-    
-    if($exception_objet[$objet]){
-         $objet=$exception_objet[$objet];
-        }
-
+   $e = trouver_objet_exec($objet);
+   $objet=$e['type']?$e['type']:$objet;
+  
     //Les types liens pour l'objet concerné
     if(!$types=lire_config('selection_objet/type_liens_'.$objet_dest_original,array()))$types=lire_config('selection_objet/type_liens',array());
 

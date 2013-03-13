@@ -22,7 +22,12 @@
         #SET{exclude,#GET{exclude}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_OBJET_DEST}}}
         #SET{objet_dest,#OBJET_DEST}
         [(#OBJET_DEST|=={document}|oui)#SET{objet_dest,document_edit}]
-        <li><a href="#URL_ECRIRE{#GET{objet_dest},id_#OBJET_DEST=#ID_OBJET_DEST}#selection_objets">
+        [(#SET{id,id_#OBJET_DEST})]        
+        [(#OBJET_DEST|=={site}|oui)
+        #SET{id,id_syndic}
+        ]
+
+        <li><a href="#URL_ECRIRE{#GET{objet_dest},#GET{id}=#ID_OBJET_DEST}#selection_objets">
             [(#GET{info_objet}|table_valeur{titre})] [((#TYPE_LIEN|nom_type{#OBJET_DEST}))]
             </a>
              <a href="[(#URL_ACTION_AUTEUR{ranger,supprimer_ordre-[(#ENV{langue})]-[(#ID_SELECTION_OBJET)]-#ORDRE-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})],[(#SELF)]})]" class="ajax">
