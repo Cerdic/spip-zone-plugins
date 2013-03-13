@@ -1,0 +1,132 @@
+<div class="formulaire_spip formulaire_config formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset">
+				<h3 class="legend">[(#CHEMIN{img_pack/meta_tags-24.png}|image_reduire{0,24})] <:seo:meta_tags:></h3>
+				<ul>
+					<li class="editer editer_meta_tags_activate">
+						<label for="meta_tags_activate"><:seo:meta_tags_activate:></label>
+						<input type="checkbox" value="yes" name="activate" id="meta_tags_activate"[(#ENV{activate}|=={yes}|oui)checked="checked"] onChange="active_metas(jQuery(this), jQuery('#fieldset_activate_editing,#fieldset_sommaire,#fieldset_default'))"/>
+					</li>
+					<li class="fieldset" id="fieldset_activate_editing">
+						<h3 class="legend"><:seo:meta_tags_editing:></h3>
+						<ul>
+							<li class="editer editer_meta_tags_activate_editing">
+								<div class="choix">
+								<input type="checkbox" value="yes" name="activate_editing" id="meta_tags_activate_editing"[(#ENV{activate_editing}|=={yes}|oui)checked="checked"] />
+								<label for="meta_tags_activate_editing"><:seo:meta_tags_edit_activate:></label>
+								</div>
+							</li>
+						</ul>
+					</li>
+					<li class="fieldset" id="fieldset_sommaire">
+						<h3 class="legend"><:seo:meta_tags_sommaire:></h3>
+						<ul>
+							<li class="editer editer_sommaire_title">
+								<label for="title"><:seo:meta_title:></label>
+								<input type="text" name="title" value="#ENV{title}" id="title" class="text" />
+							</li>
+							<li class="editer editer_sommaire_description">
+								<label for="description"><:seo:meta_description:></label>
+								<textarea name="description" id="description" type="text" class="text" rows="5">#ENV{description}</textarea>
+							</li>
+							<li class="editer editer_sommaire_keywords">
+								<label for="keywords"><:seo:meta_keywords:></label>
+								<input type="text" name="keywords" value="#ENV{keywords}" id="keywords" class="text" />
+							</li>
+							<li class="editer editer_sommaire_copyright">
+								<label for="copyright"><:seo:meta_copyright:></label>
+								<input type="text" name="copyright" value="#ENV{copyright}" id="copyright" class="text" />
+							</li>
+							<li class="editer editer_sommaire_auteur">
+								<label for="author"><:seo:meta_author:></label>
+								<input type="text" name="author" value="#ENV{author}" id="author" class="text" />
+							</li>
+							<li class="editer editer_sommaire_robots">
+								<label for="robots"><:seo:meta_robots:></label>
+								<select name="robots" id="robots" class="text">
+									<option #ENV{robots}|=={''}|oui)selected="selected"] value=""></option>
+									<option #ENV{robots}|=={'INDEX, FOLLOW'}|oui)selected="selected"] value="INDEX, FOLLOW">INDEX, FOLLOW</option>
+									<option #ENV{robots}|=={'INDEX, NOFOLLOW'}|oui)selected="selected"] value="INDEX, NOFOLLOW">INDEX, NOFOLLOW</option>
+									<option #ENV{robots}|=={'NOINDEX, FOLLOW'}|oui)selected="selected"] value="NOINDEX, FOLLOW">NOINDEX, FOLLOW</option>
+									<option #ENV{robots}|=={'NOINDEX, NOFOLLOW'}|oui)selected="selected"] value="NOINDEX, NOFOLLOW">NOINDEX, NOFOLLOW</option>
+									<option #ENV{robots}|=={'INDEX, FOLLOW, NOARCHIVE'}|oui)selected="selected"] value="INDEX, FOLLOW, NOARCHIVE">INDEX, FOLLOW, NOARCHIVE</option>
+									<option #ENV{robots}|=={'INDEX, NOFOLLOW, NOARCHIVE'}|oui)selected="selected"] value="INDEX, NOFOLLOW, NOARCHIVE">INDEX, NOFOLLOW, NOARCHIVE</option>
+									<option #ENV{robots}|=={'NOINDEX, NOFOLLOW, NOARCHIVE'}|oui)selected="selected"] value="NOINDEX, NOFOLLOW, NOARCHIVE">NOINDEX, NOFOLLOW, NOARCHIVE</option>
+								</select>
+							</li>
+						</ul>
+					</li>
+					<li class="fieldset" id="fieldset_default">
+						<h3 class="legend"><:seo:meta_tags_default:></h3>
+						<ul>
+							<li class="editer editer_default_title">
+								<label for="default_title"><:seo:meta_title:></label>
+								<select name="default_title" id="default_title" class="text">
+									<option[(#ENV{default_title}|=={''}|oui)selected="selected"] value=""></option>'
+									<option[(#ENV{default_title}|=={'page'}|oui)selected="selected"] value="page"><:seo:meta_page_title_value:></option>
+									<option[(#ENV{default_title}|=={'sommaire'}|oui)selected="selected"] value="sommaire"><:seo:meta_sommaire_value:></option>
+									<option[(#ENV{default_title}|=={'page_sommaire'}|oui)selected="selected"] value="page_sommaire"><:seo:meta_page_title_sommaire_value:></option>
+								</select>
+							</li>
+							<li class="editer editer_default_description">
+								<label for="default_description"><:seo:meta_description:></label>
+								<select name="default_description" id="default_description" class="text">
+									<option[(#ENV{default_description}|=={''}|oui)selected="selected"] value=""></option>'
+									<option[(#ENV{default_description}|=={'page'}|oui)selected="selected"] value="page"><:seo:meta_page_description_value:></option>
+									<option[(#ENV{default_description}|=={'sommaire'}|oui)selected="selected"] value="sommaire"><:seo:meta_sommaire_value:></option>
+									<option[(#ENV{default_description}|=={'page_sommaire'}|oui)selected="selected"] value="page_sommaire"><:seo:meta_page_description_sommaire_value:></option>
+								</select>
+							</li>
+							<li class="editer editer_default_keywords">
+								<label for="default_keywords"><:seo:meta_keywords:></label>
+								<select name="default_keywords" id="default_keywords" class="text">
+									<option[(#ENV{default_keywords}|=={''}|oui)selected="selected"] value=""></option>'
+									<option[(#ENV{default_keywords}|=={'sommaire'}|oui)selected="selected"] value="sommaire"><:seo:meta_sommaire_value:></option>
+								</select>
+							</li>
+							<li class="editer editer_default_copyright">
+								<label for="default_copyright"><:seo:meta_copyright:></label>
+								<select name="default_copyright" id="default_copyright" class="text">
+									<option[(#ENV{default_copyright}|=={''}|oui)selected="selected"] value=""></option>
+									<option[(#ENV{default_copyright}|=={'sommaire'}|oui)selected="selected"] value="sommaire"><:seo:meta_sommaire_value:></option>
+								</select>
+							</li>
+							<li class="editer editer_default_author">
+								<label for="default_author"><:seo:meta_author:></label>
+								<select name="default_author" id="default_author" class="text">
+									<option[(#ENV{default_author}|=={''}|oui)selected="selected"] value=""></option>
+									<option[(#ENV{default_author}|=={'sommaire'}|oui)selected="selected"] value="sommaire"><:seo:meta_sommaire_value:></option>
+								</select>
+							</li>
+							<li class="editer editer_default_robots">
+								<label for="default_robots"><:seo:meta_robots:></label>
+								<select name="default_robots" id="default_robots" class="text">
+									<option[(#ENV{default_robots}|=={''}|oui)selected="selected"] value=""></option>
+									<option[(#ENV{default_robots}|=={'sommaire'}|oui)selected="selected"] value="sommaire"><:seo:meta_sommaire_value:></option>
+								</select>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" value="<:bouton_valider:>" class="submit" />
+		</p>
+	</div>
+</form>
+<script type="text/javascript">
+	function active_metas(checkbox, form) {
+		checkbox.is(':checked') ? form.slideDown()  : form.slideUp();
+	}
+	[(#ENV{activate}|=={yes}|non)
+	jQuery('#fieldset_activate_editing,#fieldset_sommaire,#fieldset_default').hide();]
+</script>
+</div>

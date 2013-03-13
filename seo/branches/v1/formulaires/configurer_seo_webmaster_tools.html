@@ -1,0 +1,36 @@
+<div class="formulaire_spip formulaire_config formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset">
+				<h3 class="legend">[(#CHEMIN{img_pack/google_webmaster-24.png}|image_reduire{0,24})] <:seo:google_webmaster_tools:></h3>
+				<ul>
+					<li class="editer editer_webmaster_tools_activate">
+						<label for="webmaster_tools_activate"><:seo:google_webmaster_tools_activate:></label>
+						<input type="checkbox" value="yes" name="activate" id="webmaster_tools_activate"[(#ENV{activate}|=={yes}|oui)checked="checked"] onChange="active_webmaster_tools(jQuery(this), jQuery('.editer_webmaster_tools_id'))"/>
+					</li>
+					<li class="editer editer_webmaster_tools_id">
+						<label for="webmaster_tools_id"><:seo:google_webmaster_tools_id:></label>
+						<input type="text" name="webmaster_tools_id" value="#ENV{webmaster_tools_id}" id="webmaster_tools_id" class="text" />
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" value="<:bouton_valider:>" class="submit" />
+		</p>
+	</div>
+</form>
+<script type="text/javascript">
+	function active_webmaster_tools(checkbox, form) {
+		checkbox.is(':checked') ? form.slideDown()  : form.slideUp();
+	}
+	[(#ENV{activate}|=={yes}|non)
+	jQuery('.editer_webmaster_tools_id').hide();]
+</script>
+</div>

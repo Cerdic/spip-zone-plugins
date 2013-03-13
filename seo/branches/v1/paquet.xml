@@ -1,0 +1,30 @@
+<paquet
+	prefix="seo"
+	categorie="statistique"
+	version="1.8.1"
+	etat="test"
+	compatibilite="[2.0.0;3.0.99]"
+	logo="seo.png"
+	schema="1.1.1"
+	documentation="http://www.spip-contrib.net/?rubrique1248"
+>	
+
+	<nom>SEO</nom>
+	<!-- Search Engine Optimisation -->
+
+	<auteur mail="p.rousset@gmail.com">Pierre ROUSSET</auteur>
+
+	<copyright>2009-2012</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-2.0.html">GPL 2</licence>
+
+	<pipeline nom="declarer_tables_principales" inclure="base/seo_tables.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/seo_tables.php" />
+	<pipeline nom="insert_head" action="insert_head" inclure="pipelines/seo_insert_head.php" />
+	<pipeline nom="affichage_final" action="affichage_final" inclure="pipelines/seo_affichage_final.php" />
+	<pipeline nom="affiche_milieu" action="affiche_milieu" inclure="pipelines/seo_affiche_milieu.php" />
+	<pipeline nom="ajouter_onglets" action="ajouter_onglets" inclure="pipelines/seo_ajouter_onglets.php" />
+	<pipeline nom="autoriser" inclure="pipelines/seo_autoriser.php" />
+
+	<menu nom="seo" titre="seo:seo" parent="menu_configuration" icone="images/seo-16.png" action="configurer_seo" />
+</paquet>

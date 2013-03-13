@@ -1,0 +1,36 @@
+<div class="formulaire_spip formulaire_config formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset">
+				<h3 class="legend">[(#CHEMIN{img_pack/alexa-24.png}|image_reduire{0,24})] <:seo:alexa:></h3>
+				<ul>
+					<li class="editer editer_alexa_activate">
+						<label for="alexa_activate"><:seo:alexa_activate:></label>
+						<input type="checkbox" value="yes" name="activate" id="alexa_activate"[(#ENV{activate}|=={yes}|oui)checked="checked"] onChange="active_alexa(jQuery(this), jQuery('.editer_alexa_id'))"/>
+					</li>
+					<li class="editer editer_alexa_id">
+						<label for="alexa_id"><:seo:alexa_id:></label>
+						<input type="text" name="alexa_id" value="#ENV{alexa_id}" id="alexa_id" class="text" />
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" value="<:bouton_valider:>" class="submit" />
+		</p>
+	</div>
+</form>
+<script type="text/javascript">
+	function active_alexa(checkbox, form) {
+		checkbox.is(':checked') ? form.slideDown()  : form.slideUp();
+	}
+	[(#ENV{activate}|=={yes}|non)
+	jQuery('.editer_alexa_id').hide();]
+</script>
+</div>

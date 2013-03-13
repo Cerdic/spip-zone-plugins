@@ -1,0 +1,61 @@
+<plugin>
+	<nom><multi>[fr]SEO[en]SEO</multi></nom>
+	<slogan>Search Engine Optimisation</slogan>
+	<auteur>[Pierre ROUSSET->p.rousset@gmail.com] for [Bouncing Orange->http://www.bouncingorange.com/]</auteur>
+	<prefix>seo</prefix>
+	<icon>seo.png</icon>
+	<description>
+		<multi>
+			[fr]SEO est un plugin qui ajoute la possibilit&#233; d'ins&#233;rer dans la partie head de votre site web : meta tags, URL canonique, Google webmaster tools Meta Code et Google Analytics javascript. Il est configurable dans la page de configuration de SPIP ainsi que dans chaque rubrique et article pour les meta tags.
+			[en]SEO is a plugin who add the possibility to insert in the head of your website: meta tags, canoical URL, Google webmaster tools Meta Code and Google Analytics javascript code. It is fully configurable in the SPIP configuration page and in each article or rubrique page for meta tags.
+		</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/?rubrique1248</lien>
+	<licence>(c) 2009-2012 GPL v2</licence>
+	<etat>test</etat>
+	
+	<version>1.8.1</version>
+	<version_base>1.1.1</version_base>
+
+	<install>seo_administrations.php</install>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/seo_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/seo_tables.php</inclure>
+	</pipeline>
+
+	<fonctions>seo_fonctions.php</fonctions>
+
+	<pipeline>
+        <nom>insert_head</nom>
+		<action>insert_head</action>
+        <inclure>pipelines/seo_insert_head.php</inclure>
+    </pipeline>
+	<pipeline>
+        <nom>affiche_milieu</nom>
+		<action>affiche_milieu</action>
+        <inclure>pipelines/seo_affiche_milieu.php</inclure>
+    </pipeline>
+   	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<action>ajouter_onglets</action>
+        <inclure>pipelines/seo_ajouter_onglets.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>pipelines/seo_autoriser.php</inclure>
+	</pipeline>
+
+	<bouton id="seo" parent="bando_configuration">
+		<icone>img_pack/seo-24.png</icone>
+		<titre>seo:seo</titre>	
+		<url>seo_config</url>	
+	</bouton>
+	
+	<chemin dir='' />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+	<categorie>statistique</categorie>
+</plugin>
