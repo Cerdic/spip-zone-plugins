@@ -1,0 +1,7 @@
+<traduction module="boussole-spip" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/boussole_spip/trunk/lang/" reference="fr">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=en">
+		<traducteur nom="_Eric_" lien="http://trad.spip.net/auteur/_eric_" />
+	</langue>
+	<langue code="fr" />
+	<langue code="sk" />
+</traduction>
