@@ -1,12 +1,15 @@
 <?php
-
-// Sécurité
+/**
+ * Plugin Manuel du site
+ *
+ * Formulaire de configuration du plugin
+ * 
+ */
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('inc/config');
-
 function formulaires_configurer_manuelsite_saisies_dist(){
-	$config = lire_config('manuelsite',array());
+	include_spip('inc/config');
+	$config = lire_config('manuelsite',array('id_article'=>null,'cacher_public'=>'','intro'=>'','email'=>'','afficher_bord_gauche'=>'','largeur'=>'300','background_color'=>''));
 	
 	return array(
 		array(
