@@ -21,12 +21,13 @@ function generer_urls_canoniques(){
 		$objet = 'rubrique';
 	}
 
+	$flux = "";
 	switch ($objet) {
 		case 'sommaire':
 			$flux .= '<link rel="canonical" href="' . url_de_base() . '" />';
 			break;
 		default:
-			$flux .= '<link rel="canonical" href="' . url_de_base() . generer_url_entite($id_objet, $objet) . '" />';
+			$flux .= '<link rel="canonical" href="' . generer_url_entite_absolue($id_objet, $objet) . '" />';
 			break;
 	}
 
@@ -38,15 +39,16 @@ function generer_urls_canoniques(){
  * @return string $flux
  */
 function generer_google_analytics(){
-	/* CONFIG */
-	$config = unserialize($GLOBALS['meta']['seo']);
+	include_spip('inc/config');
 
 	/* GOOGLE ANALYTICS */
-	if ($config['analytics']['id']){
+	$flux = "";
+	if ($id=lire_config('seo/analytics/id')){
+		$id = texte_script($id);
 		// Nouvelle balise : http://www.google.com/support/analytics/bin/answer.py?hl=fr_FR&answer=174090&utm_id=ad
-		$flux .= "<script type=\"text/javascript\">
+		return "<script type=\"text/javascript\">
 	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', '" . $config['analytics']['id'] . "']);
+	_gaq.push(['_setAccount', '$id']);
 	_gaq.push(['_trackPageview']);
 	(function() {
 		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
@@ -57,7 +59,7 @@ function generer_google_analytics(){
 ";
 	}
 
-	return $flux;
+	return "";
 }
 
 /**
@@ -66,9 +68,10 @@ function generer_google_analytics(){
  * @return string $flux
  */
 function calculer_meta_tags(){
+	include_spip('inc/config');
 
 	/* CONFIG */
-	$config = unserialize($GLOBALS['meta']['seo']);
+	$config = lire_config('seo/');
 
 	if (isset($GLOBALS['contexte']['id_article'])){
 		$id_objet = $GLOBALS['contexte']['id_article'];
@@ -87,7 +90,7 @@ function calculer_meta_tags(){
 
 	switch ($objet) {
 		case 'sommaire':
-			$meta_tags = $config['meta_tags']['tag'];
+			$meta_tags = isset($config['meta_tags']['tag'])?$config['meta_tags']['tag']:array();
 			break;
 		default:
 			$table = table_objet_sql($objet);
@@ -96,20 +99,24 @@ function calculer_meta_tags(){
 			$requete = sql_allfetsel("descriptif,texte", $table, "$id_table_objet = " . intval($id_objet));
 			if ($requete) $description = couper(implode(" ", $requete[0]), 150, '');
 			// Get the value set by default
-			foreach ($config['meta_tags']['default'] as $name => $option){
-				if ($option=='sommaire'){
-					$meta_tags[$name] = $config['meta_tags']['tag'][$name];
-				} elseif ($option=='page') {
-					if ($name=='title') $meta_tags['title'] = $title;
-					if ($name=='description') $meta_tags['description'] = $description;
-				} elseif ($option=='page_sommaire') {
-					if ($name=='title') $meta_tags['title'] = $title . (($title!='') ? ' - ' : '') . $config['meta_tags']['tag'][$name];
-					if ($name=='description') $meta_tags['description'] = $description . (($description!='') ? ' - ' : '') . $config['meta_tags']['tag'][$name];
+			if (isset($config['meta_tags']['default'])){
+				foreach ($config['meta_tags']['default'] as $name => $option){
+					if ($option=='sommaire'){
+						$meta_tags[$name] = $config['meta_tags']['tag'][$name];
+					} elseif ($option=='page') {
+						if ($name=='title') $meta_tags['title'] = $title;
+						if ($name=='description') $meta_tags['description'] = $description;
+					} elseif ($option=='page_sommaire') {
+						if ($name=='title') $meta_tags['title'] = $title . (($title!='') ? ' - ' : '') . $config['meta_tags']['tag'][$name];
+						if ($name=='description') $meta_tags['description'] = $description . (($description!='') ? ' - ' : '') . $config['meta_tags']['tag'][$name];
+					}
 				}
 			}
 
 			// If the meta tags rubrique and articles editing is activate (should overwrite other setting)
-			if ($config['meta_tags']['activate_editing']=='yes' && ($objet=='article' || $objet=='rubrique')){
+			if (isset($config['meta_tags']['activate_editing'])
+				AND $config['meta_tags']['activate_editing']=='yes'
+				AND ($objet=='article' || $objet=='rubrique')){
 				$result = sql_select("*", "spip_seo", "id_objet = " . intval($id_objet) . " AND objet = " . sql_quote($objet));
 				while ($r = sql_fetch($result)){
 					if ($r['meta_content']!='')
@@ -132,9 +139,9 @@ function generer_meta_tags($meta_tags = null){
 	foreach ($meta_tags as $name => $content){
 		if ($content!='')
 			if ($name=='title')
-				$flux .= '<title>' . trim(htmlspecialchars(supprimer_numero(textebrut(propre($content))))) . '</title>' . "\n";
+				$flux .= '<title>' . trim(entites_html(supprimer_numero(textebrut(propre($content))))) . '</title>' . "\n";
 			else
-				$flux .= '<meta name="' . $name . '" content="' . trim(htmlspecialchars(textebrut(propre($content)))) . '" />' . "\n";
+				$flux .= '<meta name="' . $name . '" content="' . trim(attribut_html(textebrut(propre($content)))) . '" />' . "\n";
 
 	}
 	return $flux;
@@ -146,14 +153,8 @@ function generer_meta_tags($meta_tags = null){
  * @return string|bool
  */
 function generer_meta_brute($nom){
-	$config = unserialize($GLOBALS['meta']['seo']);
-	$nom = strtolower($nom);
-
-	if ($config['meta_tags']['tag'][$nom]){
-		return $config['meta_tags']['tag'][$nom];
-	}
-
-	return false;
+	include_spip('inc/config');
+	return lire_config("seo/meta_tags/tag/$nom","");
 }
 
 /**
@@ -161,12 +162,9 @@ function generer_meta_brute($nom){
  * @return string $flux
  */
 function generer_webmaster_tools(){
-	/* CONFIG */
-	$config = unserialize($GLOBALS['meta']['seo']);
-
-	if ($config['webmaster_tools']['id'])
-		return '<meta name="google-site-verification" content="' . $config['webmaster_tools']['id'] . '" />
-		';
+	include_spip('inc/config');
+	if ($id=lire_config('seo/webmaster_tools/id'))
+		return '<meta name="google-site-verification" content="' . texte_script($id) . '" />'."\n";
 }
 
 
@@ -175,12 +173,9 @@ function generer_webmaster_tools(){
  * @return string $flux
  */
 function generer_bing(){
-	/* CONFIG */
-	$config = unserialize($GLOBALS['meta']['seo']);
-
-	if ($config['bing']['id'])
-		return '<meta name="msvalidate.01" content="' . $config['bing']['id'] . '" />
-		';
+	include_spip('inc/config');
+	if ($id=lire_config('seo/bing/id'))
+		return '<meta name="msvalidate.01" content="' . texte_script($id) . '" />'."\n";
 }
 
 /**
@@ -188,11 +183,9 @@ function generer_bing(){
  * @return string $flux
  */
 function generer_alexa(){
-	/* CONFIG */
-	$config = unserialize($GLOBALS['meta']['seo']);
-
-	if ($config['alexa']['id'])
-		return '<meta name="alexaVerifyID" content="' . $config['alexa']['id'] . '"/>';
+	include_spip('inc/config');
+	if ($id=lire_config('seo/alexa/id'))
+		return '<meta name="alexaVerifyID" content="' . texte_script($id) . '"/>'."\n";
 }
 
 /**
@@ -200,13 +193,9 @@ function generer_alexa(){
  * Renvoyer la balise <link> pour URL CANONIQUES
  */
 function balise_SEO_URL($p){
-	$p->code = "calculer_balise_SEO_URL()";
+	$p->code = "generer_urls_canoniques()";
+	$p->interdire_scripts = false;
 	return $p;
-}
-
-function calculer_balise_SEO_URL(){
-	$flux = generer_urls_canoniques();
-	return $flux;
 }
 
 /**
@@ -214,13 +203,9 @@ function calculer_balise_SEO_URL(){
  * Renvoyer la balise SCRIPT de Google Analytics
  */
 function balise_SEO_GA($p){
-	$p->code = "calculer_balise_SEO_GA()";
+	$p->code = "generer_google_analytics()";
+	$p->interdire_scripts = false;
 	return $p;
-}
-
-function calculer_balise_SEO_GA(){
-	$flux = generer_google_analytics();
-	return $flux;
 }
 
 /**
@@ -229,13 +214,9 @@ function calculer_balise_SEO_GA(){
  * - Meta Titre / Description / etc.
  */
 function balise_SEO_META_TAGS($p){
-	$p->code = "calculer_balise_SEO_META_TAGS()";
+	$p->code = "generer_meta_tags()";
+	$p->interdire_scripts = false;
 	return $p;
-}
-
-function calculer_balise_SEO_META_TAGS(){
-	$flux = generer_meta_tags();
-	return $flux;
 }
 
 /**
@@ -244,17 +225,9 @@ function calculer_balise_SEO_META_TAGS(){
  */
 function balise_SEO_META_BRUTE($p){
 	$_nom = str_replace("'", "", interprete_argument_balise(1, $p));
-	$p->code = "calculer_balise_META_BRUTE($_nom)";
+	$p->code = "table_valeur(calculer_meta_tags(),$_nom,'')";
 	$p->interdire_scripts = false;
 	return $p;
-}
-
-function calculer_balise_META_BRUTE($_nom){
-	$metas = calculer_meta_tags();
-	$meta = $metas[$_nom];
-	if (!$meta)
-		return "";
-	return $meta;
 }
 
 /**
@@ -262,12 +235,8 @@ function calculer_balise_META_BRUTE($_nom){
  * Renvoyer la META GOOGLE WEBMASTER TOOLS
  */
 function balise_SEO_GWT($p){
-	$p->code = "calculer_balise_SEO_GWT()";
+	$p->code = "generer_webmaster_tools()";
+	$p->interdire_scripts = false;
 	return $p;
-}
-
-function calculer_balise_SEO_GWT(){
-	$flux = generer_webmaster_tools();
-	return $flux;
 }
 
