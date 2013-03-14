@@ -1,0 +1,392 @@
+<div class="formulaire_spip formulaire_config formulaire_#FORM" xmlns="http://www.w3.org/1999/html">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<!-- Insert Head -->
+			<fieldset>
+				<legend><:seo:insert_head:></legend>
+				<ul>
+					#SET{name,insert_head/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<p class="explication"><:seo:insert_head_descriptif:></p>
+							#SET{val_non,no}
+							#SET{val,yes}
+							<div class="choix">[
+								(#REM) Valeur envoyee si case non cochee]
+								<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
+								<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+								<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:insert_head_activate:></label>
+							</div>
+					</li>
+					#SET{name,forcer_squelette}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<p class="explication"><:seo:forcer_squelette_descriptif:></p>
+							#SET{val_non,no}
+							#SET{val,yes}
+							<div class="choix">[
+								(#REM) Valeur envoyee si case non cochee]
+								<input type="hidden" name="#GET{name}" value="#GET{val_non}" />
+								<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+								<label for="#GET{name}_#GET{val}"><:seo:forcer_squelette_label:></label>
+							</div>
+					</li>
+				</ul>
+			</fieldset>
+
+			<!-- Meta tags -->
+			<fieldset>
+				<legend>[(#CHEMIN{img_pack/meta_tags-24.png}|balise_img)] <:seo:meta_tags:></legend>
+				<ul>
+					#SET{name,meta_tags/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]
+							#SET{val_non,no}
+							#SET{val,yes}
+							<div class="choix">[
+								(#REM) Valeur envoyee si case non cochee]
+								<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
+								<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+								<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:meta_tags_activate:></label>
+							</div>
+					</li>
+					<li class="fieldset suite">
+						<fieldset>
+							<legend><:seo:meta_tags_editing:></legend>
+							<ul>
+								#SET{name,meta_tags/activate_editing}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+								<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+										<span class='erreur_message'>(#GET{erreurs})</span>
+										]
+										#SET{val_non,no}
+										#SET{val,yes}
+										<div class="choix">[
+											(#REM) Valeur envoyee si case non cochee]
+											<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
+											<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+											<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:meta_tags_edit_activate:></label>
+										</div>
+								</li>
+							</ul>
+						</fieldset>
+						<fieldset>
+							<legend><:seo:meta_tags_sommaire:></legend>
+							<ul>
+								#SET{name,meta_tags/tag/title}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="[(#GET{name}|cfgname_to_id)]"><:seo:meta_title:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<input type="text" name="[(#GET{name}|cfgname_to_inputname)]" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="[(#GET{name}|cfgname_to_id)]" [(#HTML5|et{#GET{obli}})required='required']/>
+								</li>
+								#SET{name,meta_tags/tag/description}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="[(#GET{name}|cfgname_to_id)]"><:seo:meta_description:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<textarea name="[(#GET{name}|cfgname_to_inputname)]" class="textarea" id="[(#GET{name}|cfgname_to_id)]">
+#ENV*{#GET{name},#GET{defaut}}</textarea>
+								</li>
+								#SET{name,meta_tags/tag/keywords}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="[(#GET{name}|cfgname_to_id)]"><:seo:meta_keywords:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<input type="text" name="[(#GET{name}|cfgname_to_inputname)]" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="[(#GET{name}|cfgname_to_id)]" [(#HTML5|et{#GET{obli}})required='required']/>
+								</li>
+								#SET{name,meta_tags/tag/copyright}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="[(#GET{name}|cfgname_to_id)]"><:seo:meta_copyright:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<input type="text" name="[(#GET{name}|cfgname_to_inputname)]" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="[(#GET{name}|cfgname_to_id)]" [(#HTML5|et{#GET{obli}})required='required']/>
+								</li>
+								#SET{name,meta_tags/tag/author}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="[(#GET{name}|cfgname_to_id)]"><:seo:meta_author:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<input type="text" name="[(#GET{name}|cfgname_to_inputname)]" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="[(#GET{name}|cfgname_to_id)]" [(#HTML5|et{#GET{obli}})required='required']/>
+								</li>
+								#SET{name,meta_tags/tag/robots}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="[(#GET{name}|cfgname_to_id)]"><:seo:meta_robots:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<select name="[(#GET{name}|cfgname_to_inputname)]" class="select" id="[(#GET{name}|cfgname_to_id)]">
+										#SET{val,''}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+										#SET{val,'INDEX, FOLLOW'}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+										#SET{val,'INDEX, NOFOLLOW'}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+										#SET{val,'NOINDEX, FOLLOW'}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+										#SET{val,'NOINDEX, NOFOLLOW'}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+										#SET{val,'INDEX, FOLLOW, NOARCHIVE'}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+										#SET{val,'INDEX, NOFOLLOW, NOARCHIVE'}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+										#SET{val,'NOINDEX, NOFOLLOW, NOARCHIVE'}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+									</select>
+								</li>
+							</ul>
+						</fieldset>
+						<fieldset>
+							<legend><:seo:meta_tags_default:></legend>
+							<ul>
+								#SET{name,meta_tags/default/title}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="[(#GET{name}|cfgname_to_id)]"><:seo:meta_title:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<select name="[(#GET{name}|cfgname_to_inputname)]" class="select" id="[(#GET{name}|cfgname_to_id)]">
+										#SET{val,''}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+										#SET{val,'page'}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]><:seo:meta_page_title_value:></option>
+										#SET{val,'sommaire'}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]><:seo:meta_sommaire_value:></option>
+										#SET{val,'page_sommaire'}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]><:seo:meta_page_title_sommaire_value:></option>
+									</select>
+								</li>
+								#SET{name,meta_tags/default/description}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="[(#GET{name}|cfgname_to_id)]"><:seo:meta_description:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<select name="[(#GET{name}|cfgname_to_inputname)]" class="select" id="[(#GET{name}|cfgname_to_id)]">
+										#SET{val,''}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+										#SET{val,'page'}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]><:seo:meta_page_description_value:></option>
+										#SET{val,'sommaire'}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]><:seo:meta_sommaire_value:></option>
+										#SET{val,'page_sommaire'}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]><:seo:meta_page_description_sommaire_value:></option>
+									</select>
+								</li>
+								#SET{name,meta_tags/default/keywords}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="[(#GET{name}|cfgname_to_id)]"><:seo:meta_keywords:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<select name="[(#GET{name}|cfgname_to_inputname)]" class="select" id="[(#GET{name}|cfgname_to_id)]">
+										#SET{val,''}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+										#SET{val,'sommaire'}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]><:seo:meta_sommaire_value:></option>
+									</select>
+								</li>
+								#SET{name,meta_tags/default/copyright}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="[(#GET{name}|cfgname_to_id)]"><:seo:meta_copyright:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<select name="[(#GET{name}|cfgname_to_inputname)]" class="select" id="[(#GET{name}|cfgname_to_id)]">
+										#SET{val,''}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+										#SET{val,'sommaire'}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]><:seo:meta_sommaire_value:></option>
+									</select>
+								</li>
+								#SET{name,meta_tags/default/author}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="[(#GET{name}|cfgname_to_id)]"><:seo:meta_author:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<select name="[(#GET{name}|cfgname_to_inputname)]" class="select" id="[(#GET{name}|cfgname_to_id)]">
+										#SET{val,''}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+										#SET{val,'sommaire'}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]><:seo:meta_sommaire_value:></option>
+									</select>
+								</li>
+								#SET{name,meta_tags/default/robots}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="[(#GET{name}|cfgname_to_id)]"><:seo:meta_robots:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<select name="[(#GET{name}|cfgname_to_inputname)]" class="select" id="[(#GET{name}|cfgname_to_id)]">
+										#SET{val,''}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+										#SET{val,'sommaire'}
+										<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]><:seo:meta_sommaire_value:></option>
+									</select>
+								</li>
+							</ul>
+						</fieldset>
+					</li>
+				</ul>
+			</fieldset>
+
+			<!-- Urls Canoniques -->
+			<fieldset>
+				<legend>[(#CHEMIN{img_pack/canonical_url-24.png}|balise_img)] <:seo:canonical_url:></legend>
+				<ul>
+					#SET{name,canonical_url/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]
+							#SET{val_non,no}
+							#SET{val,yes}
+							<div class="choix">[
+								(#REM) Valeur envoyee si case non cochee]
+								<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
+								<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+								<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:canonical_url_activate:></label>
+							</div>
+					</li>
+				</ul>
+			</fieldset>
+
+			<!-- Google Webmatser Tools -->
+			<fieldset>
+				<legend>[(#CHEMIN{img_pack/google_webmaster-24.png}|balise_img)] <:seo:google_webmaster_tools:></legend>
+				<ul>
+					#SET{name,webmaster_tools/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]
+							#SET{val_non,no}
+							#SET{val,yes}
+							<div class="choix">[
+								(#REM) Valeur envoyee si case non cochee]
+								<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
+								<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+								<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:google_webmaster_tools_activate:></label>
+							</div>
+					</li>
+					<li	class="fieldset suite">
+						<fieldset>
+							<ul>
+								#SET{name,webmaster_tools/id}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="[(#GET{name}|cfgname_to_id)]"><:seo:google_webmaster_tools_id:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<input type="text" name="[(#GET{name}|cfgname_to_inputname)]" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="[(#GET{name}|cfgname_to_id)]" [(#HTML5|et{#GET{obli}})required='required']/>
+								</li>
+							</ul>
+						</fieldset>
+					</li>
+				</ul>
+			</fieldset>
+
+			<!-- Bing Webmatser Tools -->
+			<fieldset>
+				<legend>[(#CHEMIN{img_pack/bing-24.png}|balise_img)] <:seo:bing_webmaster:></legend>
+				<ul>
+					#SET{name,bing/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]
+							#SET{val_non,no}
+							#SET{val,yes}
+							<div class="choix">[
+								(#REM) Valeur envoyee si case non cochee]
+								<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
+								<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+								<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:bing_webmaster_activate:></label>
+							</div>
+					</li>
+					<li	class="fieldset suite">
+						<fieldset>
+							<ul>
+								#SET{name,bing/id}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="[(#GET{name}|cfgname_to_id)]"><:seo:bing_webmaster_id:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<input type="text" name="[(#GET{name}|cfgname_to_inputname)]" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="[(#GET{name}|cfgname_to_id)]" [(#HTML5|et{#GET{obli}})required='required']/>
+								</li>
+							</ul>
+						</fieldset>
+					</li>
+				</ul>
+			</fieldset>
+
+			<!-- Google Analytics -->
+			<fieldset>
+				<legend>[(#CHEMIN{img_pack/google_analytics-24.png}|balise_img)] <:seo:google_analytics:></legend>
+				<ul>
+					#SET{name,analytics/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]
+							#SET{val_non,no}
+							#SET{val,yes}
+							<div class="choix">[
+								(#REM) Valeur envoyee si case non cochee]
+								<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
+								<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+								<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:google_analytics_activate:></label>
+							</div>
+					</li>
+					<li	class="fieldset suite">
+						<fieldset>
+							<ul>
+								#SET{name,analytics/id}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="[(#GET{name}|cfgname_to_id)]"><:seo:google_analytics_id:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<input type="text" name="[(#GET{name}|cfgname_to_inputname)]" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="[(#GET{name}|cfgname_to_id)]" [(#HTML5|et{#GET{obli}})required='required']/>
+								</li>
+							</ul>
+						</fieldset>
+					</li>
+				</ul>
+			</fieldset>
+
+			<!-- Alexa -->
+			<fieldset>
+				<legend>[(#CHEMIN{img_pack/alexa-24.png}|balise_img)] <:seo:alexa:></legend>
+				<ul>
+					#SET{name,alexa/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]
+							#SET{val_non,no}
+							#SET{val,yes}
+							<div class="choix">[
+								(#REM) Valeur envoyee si case non cochee]
+								<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
+								<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+								<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:alexa_activate:></label>
+							</div>
+					</li>
+					<li	class="fieldset suite">
+						<fieldset>
+							<ul>
+								#SET{name,alexa/id}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="[(#GET{name}|cfgname_to_id)]"><:seo:alexa_id:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<input type="text" name="[(#GET{name}|cfgname_to_inputname)]" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="[(#GET{name}|cfgname_to_id)]" [(#HTML5|et{#GET{obli}})required='required']/>
+								</li>
+							</ul>
+						</fieldset>
+					</li>
+				</ul>
+			</fieldset>
+
+			<p class="boutons">
+				<input type="submit" value="<:bouton_valider:>" class="submit" />
+			</p>
+		</div>
+	</form>
+</div>
+<style type="text/css">
+	.muted {opacity: 0.6;}
+	.suite {margin-left: 40px;}
+</style>
+<script type="text/javascript">
+jQuery(function(){
+	jQuery('.suite').each(function(){
+		var me = jQuery(this);
+		var input = me.prev('.editer').find('input.checkbox');
+		if (jQuery.prop) { /* spip 3 */
+			if (!input.prop('checked')) jQuery(this).hide();
+			input.change(function(){if (jQuery(this).prop('checked')) me.show('fast'); else me.hide('fast');});
+		} else {
+			if (!input.attr('checked')) jQuery(this).hide();
+			input.change(function(){if (jQuery(this).attr('checked')) me.show('fast'); else me.hide('fast');});
+		}
+	})
+});
+</script>
