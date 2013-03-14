@@ -28,7 +28,7 @@
 
 </BOUCLE_langues>
     #SET{id,selection_objets_no_lang}
-    <INCLURE{fond=prive/objets/liste/inc-selection_interface,env,l='',langue='',ajax=tableau_so}/>
+    <INCLURE{fond=prive/objets/liste/inc-selection_interface,env,l='',langue='',ajax=tableau_so,id=#GET{id}}/>
     <script type="text/javascript">
         $(function() {
             [(#REM)drag and drop]     

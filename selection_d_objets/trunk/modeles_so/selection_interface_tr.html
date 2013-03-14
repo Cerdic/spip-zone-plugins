@@ -11,14 +11,22 @@
         </td>
         <td class='statut'>[(#STATUT|puce_statut{selection_objet,#ID_SELECTION_OBJET})]</td> 
         <td class="titre">
+            #OBJET
            #SET{objet,#OBJET}
             [(#OBJET|=={document}|oui)#SET{objet,document_edit}]
-           [<a class="select"  href="[(#URL_ECRIRE{#GET{objet}}|parametre_url{id_#OBJET,#ID_OBJET})]">(#ENV{logo_objet}|image_reduire{25}|sinon{#ENV{logo_objet}|image_reduire{25}|inserer_attribut{class,spip_logos}}) </a>]
-            <a href="[(#URL_ECRIRE{#GET{objet}}|parametre_url{id_#OBJET,#ID_OBJET})]">[(#TITRE|sinon{#OBJET|info_objet{#ID_OBJET,#ENV{champ_titre}}})]</a>
-            [((#TYPE_LIEN|nom_type{#OBJET_DEST}))]
+            [(#SET{id,id_#OBJET})]        
+            [(#OBJET|=={site}|oui)
+            #SET{id,id_syndic}
+            ]
+           [<a class="select"  href="[(#URL_ECRIRE{#GET{objet}}|parametre_url{#GET{id},#ID_OBJET})]">(#ENV{logo_objet}|image_reduire{25}|sinon{#ENV{logo_objet}|image_reduire{25}|inserer_attribut{class,spip_logos}}) </a>]
+            <a href="[(#URL_ECRIRE{#GET{objet}}|parametre_url{#GET{id},#ID_OBJET})]">[(#TITRE|sinon{#OBJET|info_objet{#ID_OBJET,#ENV{champ_titre}}})]</a>
+            #SET{table,#OBJET|table_objet_sql}
+            #SET{tables,#VAL|lister_tables_objets_sql}
+            [<div>((#GET{tables}|table_valeur{#GET{table}}|table_valeur{texte_objet}|_T))</div>]
         </td>
-        <td class="arial1">[(#DATE|affdate)]</td>
-        <td class="arial1"><b style="white-space: nowrap;">N°#ID_OBJET</b></td>
+        <td class="type_lien">[(#TYPE_LIEN|nom_type{#OBJET_DEST})]</td>
+        <td class="date">[(#DATE|affdate)]</td>
+        <td class="id_objet"><b style="white-space: nowrap;">N°[(#ID_OBJET|>{0}|?{#ID_OBJET,#ID_SELECTION_OBJET})]</b></td>
         <td>
             [(#AUTORISER{modifier,selection_objet,#ID_SELECTION_OBJET})
                 [(#ID_SELECTION_OBJET|afficher_qui_edite{selection_objet}|non)

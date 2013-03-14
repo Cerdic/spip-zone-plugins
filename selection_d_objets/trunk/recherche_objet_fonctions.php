@@ -37,8 +37,6 @@ function tableau_recherche_objet($objet,$exclus,$lang=''){
    if($objet=='auteur') $where[]='statut !='.sql_quote('5poubelle');
     if(isset($tables[$table_dest]['field']['lang']) AND $lang) $where[]='lang IN ("'.implode('","',$lang).'")';
     $d=info_objet($objet,'',$champ_titre.','.$id_table_objet,$where);
-   
-   
 
     $data=array();
     if(is_array($d)){
