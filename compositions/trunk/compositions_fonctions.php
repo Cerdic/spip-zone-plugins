@@ -248,7 +248,7 @@ function compositions_recuperer_heritage($type=NULL){
 		// verifier que table et champs existent...
 		$trouver_table = charger_fonction('trouver_table', 'base');
 		if (!$type_parent
-			OR !$desc = $trouver_table($table_parent,$serveur)
+			OR !$desc = $trouver_table($table_parent)
 			OR !isset($desc['field']['composition'])
 			OR !isset($desc['field'][$nom_id_parent]))
 			return '';
