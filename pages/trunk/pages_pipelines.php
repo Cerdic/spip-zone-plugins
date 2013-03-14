@@ -1,11 +1,12 @@
 <?php
-#---------------------------------------------------#
-#  Plugin  : Pages                                  #
-#  Auteur  : RastaPopoulos                          #
-#  Licence : GPL                                    #
-#--------------------------------------------------------------- -#
-#  Documentation : http://www.spip-contrib.net/Plugin-Pages       #
-#-----------------------------------------------------------------#
+/**
+ * Plugin Pages
+ * 
+ * @author Rastapopoulos
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @link http://www.spip-contrib.net/Plugin-Pages Documentation
+ * @package SPIP\Pages\Pipelines
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -71,29 +72,33 @@ function pages_formulaire_charger($flux){
 
 // Vérifier que la page n'est pas vide
 function pages_formulaire_verifier($flux){
-
 	// Si on est dans l'édition d'un article
 	if (is_array($flux) and $flux['args']['form'] == 'editer_article'){
-	
 		// Si on est dans un article de type page mais que le champ "page" est vide
 		if (_request('modele') == 'page' and !_request('champ_page'))
 			$flux['data']['champ_page'] .= _T('info_obligatoire');
-	
 	}
-
 	return $flux;
 
 }
 
-
-// Ajouter le champ page dans le formulaire d'édition d'article
+/**
+ * Insertion dans le pipeline editer_contenu_objet (SPIP)
+ * 
+ * Sur les articles considérés comme pages uniques, on remplace l'élément de choix de rubriques par :
+ * -* un input hidden id_rubrique et id_parent avec pour valeur -1
+ * -* un input hidden modele avec comme valeur "page"
+ * -* un champ d'édition de l'identifiant de la page unique
+ * 
+ * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte du pipeline modifié
+ */
 function pages_editer_contenu_objet($flux){
-
 	$args = $flux['args'];
-	$erreurs = $args['contexte']['erreurs'];
-	
-	if ($args['type'] == 'article' and $args['contexte']['modele'] == 'page'){
-	
+	if ($args['type'] == 'article' && isset($args['contexte']['modele']) && $args['contexte']['modele'] == 'page'){
+		$erreurs = $args['contexte']['erreurs'];
 		// On cherche et remplace l'édition de la rubrique
 		$cherche = "/<li[^>]*class=('|\")editer editer_parent.*?<\/li>/is";
 		$remplace = '<li class="editer editer_page obligatoire'.($erreurs['champ_page'] ? ' erreur' : '').'">';
@@ -108,13 +113,9 @@ function pages_editer_contenu_objet($flux){
     	$remplace .= '</li>';
 		$flux['data'] = preg_replace($cherche, $remplace, $flux['data'],1);
 		$flux['data'] = preg_replace($cherche, '', $flux['data']);
-	
 	}
-	
 	return $flux;
-
 }
-
 
 /**
  * Insertion dans le pipeline pre_edition (SPIP)
@@ -151,22 +152,22 @@ function pages_pre_edition_ajouter_page($flux){
 }
 
 /**
- * Insertion dans le pipeline boite_infos
+ * Insertion dans le pipeline boite_infos (SPIP)
  * 
  * Ajouter un lien pour transformer une article normal en page inversement
  * 
- * @param array $flux Le contexte du pipeline
- * @return array $flux Le contexte modifié
+ * @param array $flux 
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte modifié
  */
 function pages_boite_infos($flux){
 	if ($flux['args']['type'] == 'article' and autoriser('modifier', 'article', $flux['args']['id'])){
 		include_spip('inc/presentation');
-		if (sql_getfetsel('page', 'spip_articles', 'id_article='. $flux['args']['id']) == ''){
+		if (sql_getfetsel('page', 'spip_articles', 'id_article='. $flux['args']['id']) == '')
 			$flux['data'] .= icone_horizontale(_T('pages:convertir_page'), parametre_url(parametre_url(generer_url_ecrire('article_edit'), 'id_article', $flux['args']['id']), 'modele', 'page'), 'page', $fonction="", $dummy="", $javascript="");
-		}
-		else{
+		else
 			$flux['data'] .= icone_horizontale(_T('pages:convertir_article'), parametre_url(parametre_url(generer_url_ecrire('article_edit'), 'id_article', $flux['args']['id']), 'modele', 'article'), 'article', $fonction="", $dummy="", $javascript="");
-		}
 	}
 	return $flux;
 }
