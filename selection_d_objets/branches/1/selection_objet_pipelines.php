@@ -62,6 +62,7 @@ function selection_objet_affiche_milieu ($flux="") {
             $objet=$exec;
             $id_table_objet='id_'.objet;
         }
+
         $table = table_objet_sql($objet);    
         $args=$flux["args"];
         

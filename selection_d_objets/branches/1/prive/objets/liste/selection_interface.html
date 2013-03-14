@@ -3,6 +3,7 @@
 <br class="nettoyeur"/>
 <div class="liste-elements selection_objets" id="selection_objets">#ENV**{type_lien}
 #SET{n_langues,#ENV**{langue}|count}
+#SET{tables,#VAL|lister_tables_objets_sql}
 [(#VAL)]
 [(#BOITE_OUVRIR{
     [(#CHEMIN_IMAGE{selection_objet-64.png}|image_reduire{32}|extraire_attribut{src}|balise_img{selection_objet,cadre-icone})]
@@ -11,7 +12,7 @@
 <BOUCLE_langues(POUR){tableau #ENV**{langue}}>
     #SET{id,selection_objets_#VALEUR}
     [(#GET{n_langues}|>{1}|oui)<h4 class="titrem">[(#VALEUR|traduire_nom_langue)]</h4>]
-    <INCLURE{fond=prive/objets/liste/inc-selection_interface,l=#VALEUR,env,ajax=tableau_so,id=#GET{id}}/>
+    <INCLURE{fond=prive/objets/liste/inc-selection_interface,l=#VALEUR,env,ajax=tableau_so,id=#GET{id},tables=#GET{tables}}/>
     <script type="text/javascript">
         $(function() {
             [(#REM)drag and drop]     
@@ -28,7 +29,7 @@
 
 </BOUCLE_langues>
     #SET{id,selection_objets_no_lang}
-    <INCLURE{fond=prive/objets/liste/inc-selection_interface,env,l='',langue='',ajax=tableau_so}/>
+    <INCLURE{fond=prive/objets/liste/inc-selection_interface,env,l='',langue='',ajax=tableau_so,id=#GET{id},tables=#GET{tables}}/>
     <script type="text/javascript">
         $(function() {
             [(#REM)drag and drop]     

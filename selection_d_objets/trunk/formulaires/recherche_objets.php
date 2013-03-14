@@ -16,6 +16,9 @@ function formulaires_recherche_objets_charger_dist($objet_dest='rubrique',$id_ob
 
     //On garde l'objet original pour la détection des données de l'objet
     $objet_dest_original=$objet_dest;
+    $e = trouver_objet_exec($objet_dest);
+    $objet_dest=$e['type']?$e['type']:$objet_dest;
+  
     
    //Déterminer le bon objet
    $e = trouver_objet_exec($objet);

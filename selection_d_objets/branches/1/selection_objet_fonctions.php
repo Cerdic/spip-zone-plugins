@@ -63,17 +63,20 @@ function info_objet($objet,$id_objet='',$champs='*',$where=array()){
 
     //Les tables non conforme
     if($objet){
-        $exceptions=charger_fonction('exceptions','inc');
-        $exception_objet=$exceptions('objet');
-        if($exception_objet[$objet]){
-             $objet=$exception_objet[$objet];
-              $table='spip_'.$objet;
-        }
-        else $table='spip_'.$objet.'s';
+        $ancien_objet=$objet;
+        $e = trouver_objet_exec($objet);
+        $objet=$e['type'];
+        $id_table_objet=$e['id_table_objet'];
+        // Pour les récalcitrants
+        if(!$objet){
+               $objet=$ancien_objet;
+               $id_table_objet='id_'.$objet;
+            }
+        $table = table_objet_sql($objet);  
     
         
         if($id_objet){
-            if(!$where)$where=array('id_'.$objet.'='.$id_objet);  
+            if(!$where)$where=array($id_table_objet.'='.$id_objet);  
         	if($champs=='*')$data=sql_fetsel($champs,$table,$where);
             else $data=sql_getfetsel($champs,$table,$where);
             $data=filtrer_champ($data);
@@ -145,13 +148,18 @@ function generer_modele($id_objet,$objet='article',$fichier='modeles_selection_o
     $exception_objet=$exceptions();
     
     if($objet){
-          if($exception_objet['objet'][$objet]){
-         $objet=$exception_objet['objet'][$objet];
-          $table='spip_'.$objet;
-        }
-        else $table='spip_'.$objet.'s';
-        if(!$where)$where='id_'.$objet.'='.$id_objet;
-        
+        $ancien_objet=$objet;
+        $e = trouver_objet_exec($objet);
+        $objet=$e['type'];
+        $id_table_objet=$e['id_table_objet'];
+        // Pour les récalcitrants
+        if(!$objet){
+               $objet=$ancien_objet;
+               $id_table_objet='id_'.$objet;
+            }
+        $table = table_objet_sql($objet);  
+
+        if(!$where)$where=$id_table_objet.'='.$id_objet;
         if(!$contexte=sql_fetsel('*',$table,$where))$contexte=array();
           
         }
@@ -167,6 +175,8 @@ function generer_modele($id_objet,$objet='article',$fichier='modeles_selection_o
 
     $contexte['objet']=$objet;
     $contexte['id_objet']=$id_objet;
+    
+    
     
      //déterminer le titre
     if(!$contexte['titre'])$contexte['titre']=titre_objet_sel($objet,$contexte);

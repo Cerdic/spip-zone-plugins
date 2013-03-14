@@ -63,6 +63,7 @@ function info_objet($objet,$id_objet='',$champs='*',$where=array()){
 
     //Les tables non conforme
     if($objet){
+        $ancien_objet=$objet;
         $e = trouver_objet_exec($objet);
         $objet=$e['type'];
         $id_table_objet=$e['id_table_objet'];
