@@ -13,7 +13,7 @@
 	</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.9.0</version>
+	<version>0.9.1</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<description>
@@ -64,7 +64,6 @@
 		<titre>manuelsite:titre_menu</titre>
 		<url>configurer_manuelsite</url>
 	</bouton>
-	<fonctions>manuelsite_fonctions.php</fonctions>
 	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<necessite id="saisies" version="[1.9.0;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
