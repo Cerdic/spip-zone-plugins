@@ -9,7 +9,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define("_DIR_SIMPLECAL_IMG_PACK", _DIR_PLUGIN_SIMPLECAL."img_pack/");
 define("_DIR_SIMPLECAL_PRIVE", _DIR_PLUGIN_SIMPLECAL."prive/");
 
 include_spip('inc/simplecal_classement'); // pour la page evenements !

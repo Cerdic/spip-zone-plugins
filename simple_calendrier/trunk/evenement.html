@@ -28,12 +28,18 @@
 	
 			<div class="cartouche">
 				<h1 class="#EDIT{titre}">[(#LOGO_EVENEMENT_RUBRIQUE|image_reduire{40,*}) ]#TITRE</h1>
-				<p class="info-publi"><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr></p>
+				<p class="info-publi">
+                    <abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>
+                    [ &mdash; (#LIEU)]
+                </p>
 			</div>
 			
 			[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
-			[<hr /><p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-			[<div class="notes"><hr />(#NOTES)</div>]
+            [(#LIEN_URL|oui)
+                <hr /><p class="hyperlien"><:voir_en_ligne:> : <a href='#LIEN_URL'>[(#LIEN_TITRE|?{#LIEN_TITRE,#LIEN_URL})]</a></p>
+            ]
+            
+            [<div class="notes"><hr />(#NOTES)</div>]
 			
             [(#REM) Forum de l'évènement
 			NB : pour desactiver les forums de l'évènement, supprimez simplement les lignes ci-dessous ]

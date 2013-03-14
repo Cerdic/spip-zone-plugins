@@ -7,37 +7,6 @@
  * cf. paquet.xml pour plus d'infos.
  */
 
-//
-// <BOUCLE(EVENEMENTS)>
-//
-function boucle_EVENEMENTS_dist($id_boucle, &$boucles) {
-	$boucle = &$boucles[$id_boucle];
-	$id_table = $boucle->id_table;
-	$mstatut = $id_table.'.statut';
-	
-	if (!isset($boucle->modificateur['criteres']['statut'])) {
-		// On n'est pas en mode pre-visualisation
-		if (!$GLOBALS['var_preview']) {
-			// Le critere {tout} est absent de la boucle
-			if (!isset($boucle->modificateur['tout'])) {
-				// on rajoute la condition "statut = publie"
-				array_unshift($boucle->where, array("'='", "'$mstatut'", "'\\'publie\\''"));
-			}
-		} 
-		
-		// On est en mode pre-visualisation
-		else {
-			array_unshift($boucle->where,array("'IN'", "'$mstatut'", "'(\\'publie\\',\\'prop\\')'"));
-		}
-	}
-	return calculer_boucle($id_boucle, $boucles); 
-}
-
-// Notes :
-// - Pre-visualisation = previsu autorisee dans la config + url suffixee par "&var_mode=preview"
-// - {tout} => permet de ne pas appliquer de filtre de statut
-
-
 // --------------------------------------
 //  COMPATIBILITE PLUGIN ACCES RESTREINT
 // --------------------------------------

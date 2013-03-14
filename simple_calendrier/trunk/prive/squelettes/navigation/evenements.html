@@ -15,3 +15,9 @@
 [#BOITE_OUVRIR{'',basic}
 	(#VAL{#ENV{annee}}|simplecal_classement{#ENV{mois},#ENV{mode},#ENV{id_rubrique}}) 
 #BOITE_FERMER]
+
+[(#AUTORISER{demo,simplecal})
+    #BOITE_OUVRIR{'',raccourcis}
+        [(#URL_ECRIRE{simplecal_demo}|icone_horizontale{<:simplecal:raccourcis_demo:>,evenement,''})]
+    #BOITE_FERMER
+]

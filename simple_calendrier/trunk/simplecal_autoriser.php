@@ -29,6 +29,10 @@ function autoriser_bt_simplecal_accueil($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
+function autoriser_simplecal_demo($faire, $type, $id, $qui, $opt) {
+	return in_array($qui['statut'], array('0minirezo'));
+}
+
 
 // Remarque : Cette fonction est aussi appelee au niveau du core (API des listings - cf. inc/afficher_objets.php)
 // Le plugin "Acces restreint 3" la declare egalement mais ne l'utilise pas (surement pour le plugin Agenda 2).
@@ -123,8 +127,6 @@ function autoriser_evenement_iconifier($faire,$quoi,$id,$qui,$opts){
 	return $droit;
 }
 
-function autoriser_evenement_demo($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo'));
-}
+
 
 ?>

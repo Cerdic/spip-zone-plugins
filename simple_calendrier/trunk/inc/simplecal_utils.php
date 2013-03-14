@@ -137,35 +137,6 @@ function simplecal_get_url_refobj($type, $id_objet){
 	return $url;
 }
 
-// Portlet de gestion des evenements de la rubrique
-function simplecal_get_portlet_rubrique($id_rubrique){
-	
-	$bloc = "";
-	$bloc .= debut_cadre_enfonce(_DIR_SIMPLECAL_IMG_PACK."simplecal-logo-24.png", $return=true, $fonction='', $titre=_T('simplecal:titre_boite_rubrique'));
-	
-	
-	$nb = sql_countsel("spip_evenements as e", "e.id_rubrique=".$id_rubrique);
-	if ($nb == 1){
-		$phrase = '<strong>'.$nb.'</strong> '._T('simplecal:terme_evenement');
-	} else if ($nb > 1){
-		$phrase = '<strong>'.$nb.'</strong> '._T('simplecal:terme_evenements');
-	} else {
-		$phrase = '<strong>aucun</strong> '._T('simplecal:terme_evenement');
-	}
-	
-	$phrase = '<div class="simplecal-nbinrub">'.$phrase.'</div>';
-	
-	$bloc.=$phrase;
-	
-	$bloc .= icone_horizontale(_T('simplecal:raccourcis_liste_evenements_rubrique'), generer_url_ecrire("evenements", "id_rubrique=$id_rubrique"), _DIR_SIMPLECAL_IMG_PACK."simplecal-logo-24.png", "", false);
-	if (autoriser('creer', 'evenement', null)){
-		$bloc .= icone_horizontale(_T('simplecal:raccourcis_ecrire_evenement'), generer_url_ecrire("evenements_edit", "new=oui&retour=rubrique&id_rubrique=$id_rubrique"), _DIR_SIMPLECAL_IMG_PACK."simplecal-logo-24.png", "creer.gif", false);
-	}
-	$bloc .= fin_cadre_enfonce(true);
-	
-	return $bloc;
-}
-
 
 // Plugin Acces restreint : 
 // retourne la liste des rubriques interdites pour l'auteur connecte

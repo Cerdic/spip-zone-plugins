@@ -1,6 +1,7 @@
 evenement-24.png : 
 - pour l'echafaudage du evenement_edit.html
 - pour l'icone des listes (css automatique dans /prive/themes/spip/lists.css.html)
+- pour l'icone des blocs raccourcis (dans /prive/squelettes/navigation/simplecal_demo.html)
 
 evenement-new-16.png :
 - pour l'icone de creation rapide (ref. dans paquet.xml)
