@@ -1,9 +1,10 @@
 <?php
-/*
+/**
  * Plugin Compositions
- * (c) 2007-2009 Cedric Morin
+ * (c) 2007-2013 Cedric Morin
  * Distribue sous licence GPL
- *
+ * 
+ * @package SPIP\Compositions\Fonctions
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -19,7 +20,7 @@ function compositions_objets_actives(){
 	static $config=null;
 	if (is_null($config)){
 		// lister les objets dont on a active la composition dans la configuration
-		$config = unserialize($GLOBALS['meta']['compositions']);
+		$config = isset($GLOBALS['meta']['compositions']) ? unserialize($GLOBALS['meta']['compositions']) : array();
 		$config = (isset($config['objets'])?$config['objets']:array('spip_articles','spip_rubriques'));
 		$config = array_map('objet_type',$config);
 	}
