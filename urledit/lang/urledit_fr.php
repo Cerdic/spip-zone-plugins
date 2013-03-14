@@ -14,6 +14,7 @@
 		'titre_urledit' => 'GESTION DES URLS',
 		'urls_editables' => 'URLS &eacute;ditables',
 		'version_patchee' => 'Titre-de-l-article -Rubrique- (version patch&eacute;e urledit)',
+    'version_patchee_arbo' => '/article/titre (version patch&eacute;e urledit)',
 		
 	);
 

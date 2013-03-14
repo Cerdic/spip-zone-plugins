@@ -1,6 +1,4 @@
 <?php
-
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
@@ -12,16 +10,26 @@ function action_urledit_ajouter_dist() {
 	$arg = $securiser_action();
 	list($type_objet, $id_objet) = preg_split('/\W/', $arg);
 	$id_objet = intval($id_objet);
-	/*$url = pipeline('creer_chaine_url',
+  
+  if ($GLOBALS['meta']['type_urls']=="arbo") {
+      $pipeline = "arbo_creer_chaine_url"; 
+      include_spip("urls/arbo");
+  } else {
+      $pipeline = "propres_creer_chaine_url";
+      include_spip("urls/propres"); 
+  }
+  
+	$url = pipeline($pipeline,
 			array(
-				'data' => _request('urlpropre'),  // le vieux url_propre
-				'objet' => array('type' => $type, 'id_objet' => $id_objet, 'titre'=>_request('urlpropre'))
+				'data' => _request('urlpropre'),  // le vieux url_propre        
+				'objet' => array('type' => $type_objet, 'id_objet' => $id_objet, 'titre'=>trim(_request('urlpropre')))
 			)
 		);
-		*/
-	$url =  _request('urlpropre');
 
-  // nettoyage URLs   (chargement param de cgf)
+  // nettoyage URLs   (chargement param de cgf)   
+  /*  le code est deporté dans les urls/...       
+  // section a effacer dans   les futurs commits
+  //$url =  _request('urlpropre');
   $longueur_min = (int) lire_config('urledit/longueur_min'); 
   if ($longueur_min<3)    $longueur_min = 3;
   if ($longueur_min>250)  $longueur_min = 250;    
@@ -44,7 +52,7 @@ function action_urledit_ajouter_dist() {
 	include_spip('action/editer_url');
 	if (!$url = url_nettoyer($url,$longueur_max,$longueur_min,$separateur,$filtre))  
 		return;
-
+  */
 	
 	$set = array('url' => $url, 'type' => $type_objet, 'id_objet' => $id_objet, 'date' => 'NOW()');
   $c = @sql_insertq('spip_urls', $set);  

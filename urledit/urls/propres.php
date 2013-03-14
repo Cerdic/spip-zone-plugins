@@ -99,8 +99,27 @@ function urls_propres_creer_chaine_url($x) {
 	if (!defined('_URLS_PROPRES_MIN')) define('_URLS_PROPRES_MIN', 3);
 
 	include_spip('action/editer_url');
-	if (!$url = url_nettoyer($objet['titre'],_URLS_PROPRES_MAX,_URLS_PROPRES_MIN,'-',_url_minuscules?'strtolower':''))
-		$url = $objet['type'].$objet['id_objet'];
+  /*-- urledit config --*/
+  $longueur_min = (int) lire_config('urledit/longueur_min'); 
+  if ($longueur_min<3)    $longueur_min = 3;
+  if ($longueur_min>250)  $longueur_min = 250;    
+  $longueur_max = (int) lire_config('urledit/longueur_max'); 
+  if ($longueur_max<35)    $longueur_max = 35;
+  if ($longueur_max>255)  $longueur_max = 255;
+  if  ($longueur_min>$longueur_max)
+                              $longueur_max = $longueur_min+10;
+  
+  $separateur = "-";
+  if (lire_config('urledit/separateur')!="")
+                          $separateur = lire_config('urledit/separateur');    
+  $filtre = "";                        
+  if (lire_config('urledit/filtre')!=""  AND function_exists(lire_config('urledit/filtre')))
+                          $filtre = lire_config('urledit/filtre');
+  /*-- urledit config --*/
+  
+	//if (!$url = url_nettoyer($objet['titre'],_URLS_PROPRES_MAX,_URLS_PROPRES_MIN,'-',_url_minuscules?'strtolower':''))
+	if (!$url = url_nettoyer($objet['titre'],$longueur_max,$longueur_min,$separateur,$filtre))
+  	$url = $objet['type'].$objet['id_objet'];
 
 	$x['data'] = $url;
 

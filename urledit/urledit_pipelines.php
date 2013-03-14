@@ -35,6 +35,7 @@ function urledit_affiche_milieu($flux){
 	if (in_array($type_objet,array('article','rubrique','breve','auteur','mot','syndic','evenement'))) {
 		include_spip('inc/urledit');
 		include_spip('urls/propres');
+    include_spip('urls/arbo');
 		include_spip('inc/autoriser');  
 		if (autoriser($type_objet,'urledit',$id_objet)){
 			$redirect = self();
