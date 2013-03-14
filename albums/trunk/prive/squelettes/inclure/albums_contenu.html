@@ -3,10 +3,12 @@
 ][(#REM)
 	inclus dans le squelette /prive/squelettes/objets/liste/albums_lies.html
 	inclus dans le squelette /prive/squelettes/objets/liste/albumotheque.html
-	Paramètres :
-		id_album	obligatoire
-		largeur:	largeur des vignettes
-		hauteur:	hauteur des vignettes
+	Paramètres obligatoire:
+		id_album
+	Paramètres optionnels:
+		largeur			largeur des vignettes
+		hauteur			hauteur des vignettes
+		redirect_retirer	adresse de redirection après avoir dissocier un document
 ]
 #SET{largeur, #ENV{largeur,0}}
 #SET{hauteur, #ENV{hauteur,52}}
@@ -22,22 +24,26 @@
 	#ANCRE_PAGINATION
 	<BOUCLE_contenu(DOCUMENTS){id_album}{!par media, date}{tout}{pagination #ENV{nb,30}}>
 	#SET{titre, #VAL{N° }|concat{#ID_DOCUMENT,' - '}|concat{#EXTENSION|strtoupper}|concat{' - ',#TAILLE|taille_en_octets}|concat{' - ',#TITRE|couper{20}|sinon{#FICHIER|basename}}|attribut_html}
-	[<li class='doc' style="#GET{style}" data-id_document="#ID_DOCUMENT" data-objet="album" data-id_objet="#ID_ALBUM">
-		<a href="#URL_DOCUMENT" rel="album#ID_ALBUM" type="#MIME_TYPE" title="#GET{titre}"[ alt="(#DESCRIPTIF|couper{100}|attribut_html)"]>
+	[<li class='doc'[(#REM) style="#GET{style}" ]data-id_document="#ID_DOCUMENT" data-objet="album" data-id_objet="#ID_ALBUM">
+		<figure>
+		<a href="#URL_DOCUMENT" rel="album#ID_ALBUM" type="#MIME_TYPE" title="#GET{titre}"[ alt="(#DESCRIPTIF|couper{100}|attribut_html)" ] style="#GET{style}">
 		(#LOGO_DOCUMENT|image_reduire{#GET{largeur},#GET{hauteur}})
 		</a>
+		<figcaption>N°#ID_DOCUMENT - #EXTENSION</figcaption>
+		</figure>
 		[(#REM) Bouton pour retirer le document ]
 		[(#AUTORISER{modifier,album, #ID_ALBUM}|oui)
 		[(#BOUTON_ACTION{
 			'',
 			#URL_ACTION_AUTEUR{
 				dissocier_document,
-				#ID_ALBUM-album-#ID_DOCUMENT--safe,#SELF},
+				#ID_ALBUM-album-#ID_DOCUMENT--safe,#ENV{redirect_retirer,#SELF}},
 			'ajax retirer link',
 			'',
 			<:medias:bouton_enlever_document:>}
 		)]
 		]
+
 	</li>]
 	</BOUCLE_contenu>
 	[<li class='pagination actions reveal'>(#PAGINATION{prive})</li>]
