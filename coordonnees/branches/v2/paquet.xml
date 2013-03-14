@@ -33,9 +33,6 @@
 	<!-- Éléments d'interface -->
 	<pipeline nom="affiche_milieu" inclure="coordonnees_pipelines.php" />
 
-	<!-- avec plugin champs extras 2 -->
-	<pipeline nom="objets_extensibles" inclure="coordonnees_pipelines.php" />
-
 
 
 	<necessite nom="saisies" compatibilite="[1.14.0;]" />
