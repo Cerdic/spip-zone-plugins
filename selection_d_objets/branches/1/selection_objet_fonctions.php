@@ -63,6 +63,7 @@ function info_objet($objet,$id_objet='',$champs='*',$where=array()){
 
     //Les tables non conforme
     if($objet){
+        include_spip('inc/pipelines_ecrire');
         $ancien_objet=$objet;
         $e = trouver_objet_exec($objet);
         $objet=$e['type'];
@@ -141,6 +142,7 @@ function tableau_objet($objet,$id_objet='',$champs='*',$where=array(),$filtrer=a
 }
 /* Assemble les données entre un objet sélectioné et son objet d'origine pour injection dans un modele choisit*/
 function generer_modele($id_objet,$objet='article',$fichier='modeles_selection_objet/defaut',$env=array(),$where=''){
+    include_spip('inc/pipelines_ecrire');
     include_spip('inc/utils');
     
     //Quelques objets ne sont pas conforme, on adapte
