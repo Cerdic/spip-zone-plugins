@@ -27,6 +27,14 @@
 
 jQuery(document).ready(function($) {
 
+	// rustine : créer un conteneur #portfolios en amont si absent
+	// normalement, c'est fait dans la fonction init() qui appelle placeholderPortfolios(),
+	// mais pour une raison mystérieuse, le div créé est ignoré par "connectWith" donc on le fait ici.
+	[(#GET{portfolios}|oui)
+	if ($("body").find("#portfolios .liste_items").length < 1)
+		$("#portfolios").append("<div class='liste_items placeholder'></div>");
+	]
+
 	$( init );
 	if (window.jQuery) jQuery( function(){ onAjaxLoad( init ); } ); // recharger le script en cas de ajaxload
 	var poste = [(#ENV{poste}|?{true,false})];
@@ -44,14 +52,14 @@ jQuery(document).ready(function($) {
 		$("[(#GET{conteneurs})]").sortable({
 			connectWith: "[(#GET{conteneurs})]",
 			placeholder: "placeholder-album",
-			//containment: ".fiche_objet",
 			start: traiterDebut,
 			over: traiterDessus,
 			stop: traiterFin,
 			receive: traiterMaj,
 			cursor: "move",
 			scroll: true,
-			zIndex: 9999
+			zIndex: 9999,
+			dropOnEmpty: true
 		});
 	}
 

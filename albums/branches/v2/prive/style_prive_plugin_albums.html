@@ -136,16 +136,17 @@
 				}
 .album .doc,
   .placeholder-album		{ 
-				float: left; position: relative; margin: 0 .5em .5em 0;
+				display: inline-block; position: relative; margin: 0 .5em .5em 0;
 				text-align: center;
 				}
+.album .doc.item		{ vertical-align: top; } /* document du portfolio dans album */
 .album .doc a 			{ display: block; }
 .album .doc a img 		{ vertical-align: middle; }
 .album .doc figcaption 		{ 
 				margin-top: .25em;
 				font-size: x-small; color: #888; line-height: 1;
 				}
-.placeholder-album		{ background-color:#GET{claire}; box-shadow:-1px 1px 1px #GET{foncee}; } /* hauteur et largeur dans squelette */
+.placeholder-album		{ background-color:#GET{claire}; box-shadow:-1px 1px 1px #GET{foncee};}
 /* boutons */
 .album .actions,
   .album .actions button	{ font-size: x-small; }
@@ -174,11 +175,8 @@
 .cible-album			{ outline: 2px dashed #GET{foncee}; }
 .album .doc.drag:hover .retirer	{display: none;} /* cacher bouton retirer pendant deplacement */
 /* placeholder quand portfolio vide */
-.liste_items.placeholder	{
-				height: 2em;
-				border-top: 0 none;
-				}
-
+.liste_items.placeholder	{ margin-bottom: 0; border-top: 0 none; }
+#portfolios.cible-album .liste_items { padding-top: 1em; padding-bottom: 1em; }
 
 
 /*============

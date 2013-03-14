@@ -27,6 +27,14 @@
 
 jQuery(document).ready(function($) {
 
+	// rustine : créer un conteneur #portfolios en amont si absent
+	// normalement, c'est fait dans la fonction init() qui appelle placeholderPortfolios(),
+	// mais pour une raison mystérieuse, le div créé est ignoré par "connectWith" donc on le fait ici.
+	[(#GET{portfolios}|oui)
+	if ($("body").find("#portfolios .liste_items").length < 1)
+		$("#portfolios").append("<div class='liste_items placeholder'></div>");
+	]
+
 	$( init );
 	if (window.jQuery) jQuery( function(){ onAjaxLoad( init ); } ); // recharger le script en cas de ajaxload
 	var poste = [(#ENV{poste}|?{true,false})];
@@ -147,20 +155,20 @@ jQuery(document).ready(function($) {
 			ui.sender.data("changement",true);
 			objet.data("changement",true);
 			//
-			// docs portfolio <=> album
-			// n afficher que la vignette du document deplace
+			// portfolio => album
 			if (objet_initial != "album") {
-				objet_origine = objet_initial;
-				id_objet_origine = id_objet_initial;
-				// sens portfolio -> album
-				if (objet_destination != objet_initial) {
+				if (objet_destination == "album") {
 					document.addClass("doc");
 					document.children().not("a").hide(); // cacher tout sauf la la vignette
-				// sens album -> portfolio
 				} else {
 					document.removeClass("doc");
 					document.children().not("a").fadeIn('1000'); // reafficher le reste
 				}
+			}
+			// album => portfolio
+			if (objet_initial == "album") {
+				if (objet_destination != "album") document.addClass("item");
+				else document.removeClass("item");
 			}
 			//
 			// stockage des nouvelles infos pour les deplacements suivants
