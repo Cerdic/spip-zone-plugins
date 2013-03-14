@@ -1,18 +1,24 @@
 <?php
-/*
+/**
  * Plugin Article Accueil
  * (c) 2011 Cedric Morin, Joseph
  * Distribue sous licence GPL
  *
+ * @package SPIP\Article_accueil\Pipelines 
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
+ * Insertion dans le pipeline affiche_milieu (SPIP)
+ * 
  * Affichage du formulaire de selection de l'article d'accueil
+ * dans la partie centrale de la page
  *
  * @param array $flux
- * @return array
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le flux modifié
  */
 function article_accueil_affiche_milieu($flux){
 	$exec = $flux['args']['exec'];
@@ -23,8 +29,8 @@ function article_accueil_affiche_milieu($flux){
 				$texte = recuperer_fond(
 					'prive/editer/article_accueil',
 					array(
-						'type'=>$type,
-						'id_rubrique'=>$id,
+						//'type'=>$type, # Non défini
+						'id_rubrique'=>$id
 					)
 				);
 				if (($p = strpos($flux['data'],'<!--affiche_milieu-->'))!==false)
@@ -34,7 +40,6 @@ function article_accueil_affiche_milieu($flux){
 			}
 		}
 	}
-
 	return $flux;
 }
 
