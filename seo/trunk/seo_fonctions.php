@@ -5,6 +5,50 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/texte');
 
 /**
+ * Remplace les meta du head par celles calculees par le plugin
+ * utilise par le squelette inclure/seo-head
+ *
+ * @param string $head
+ * @param array $contexte
+ * @return string
+ */
+function seo_remplace_metas($head,$contexte){
+	$meta_tags = generer_meta_tags(null,$contexte);
+	$append = "";
+
+	foreach ($meta_tags as $key => $meta){
+		$preg = '';
+		/**
+		 * Si le tag est <title>
+		 */
+		if ($key=='title')
+			$preg = "/(<{$key}[^>]*>.*<\/{$key}[^>]*>)/Uims";
+		/**
+		 * Le tag est une <meta>
+		 */
+		else
+			$preg = "/(<meta\s+name=['\"]{$key}['\"][^>]*>)/Uims";
+
+		// remplacer la meta si on la trouve
+		if (preg_match($preg,$head,$match)){
+			$head = str_replace($match[0],$meta,$head);
+		}
+		else
+			$append .= "$meta\n";
+	}
+
+	if ($append){
+		// sinon ajouter en fin de </head>
+		if ($p=stripos($head,"</head>",$head))
+			$head = substr_replace($head,$append,$p,0);
+		else
+			$head .= $append;
+	}
+
+	return $head;
+}
+
+/**
  * Renvoyer la balise <link> pour URL CANONIQUES
  * @return string $flux
  */
@@ -65,20 +109,26 @@ function generer_google_analytics(){
 /**
  * Renvoyer les META Classiques
  * - Meta Titre / Description / etc.
+ * @param null|array $contexte
  * @return string $flux
  */
-function calculer_meta_tags(){
+function calculer_meta_tags($contexte=null){
 	include_spip('inc/config');
-
-	/* CONFIG */
 	$config = lire_config('seo/');
 
-	if (isset($GLOBALS['contexte']['id_article'])){
-		$id_objet = $GLOBALS['contexte']['id_article'];
+	if (is_null($contexte))
+		$contexte = $GLOBALS['contexte'];
+
+	if (isset($contexte['id_article'])){
+		$id_objet = $contexte['id_article'];
 		$objet = 'article';
-	} elseif (isset($GLOBALS['contexte']['id_rubrique'])) {
-		$id_objet = $GLOBALS['contexte']['id_rubrique'];
+		$table = "spip_articles";
+		$id_table_objet = "id_article";
+	} elseif (isset($contexte['id_rubrique'])) {
+		$id_objet = $contexte['id_rubrique'];
 		$objet = 'rubrique';
+		$table = "spip_rubriques";
+		$id_table_objet = "id_rubrique";
 	} else {
 		$objet = 'sommaire';
 	}
@@ -93,31 +143,36 @@ function calculer_meta_tags(){
 			$meta_tags = isset($config['meta_tags']['tag'])?$config['meta_tags']['tag']:array();
 			break;
 		default:
-			$table = table_objet_sql($objet);
-			$id_table_objet = id_table_objet($objet);
-			$title = couper(sql_getfetsel("titre", $table, "$id_table_objet = " . intval($id_objet)), 64);
-			$requete = sql_allfetsel("descriptif,texte", $table, "$id_table_objet = " . intval($id_objet));
-			if ($requete) $description = couper(implode(" ", $requete[0]), 150, '');
+			if (!$table){
+				$table = table_objet_sql($objet);
+				$id_table_objet = id_table_objet($objet);
+			}
+			$row = sql_fetsel("titre,descriptif,texte", $table, "$id_table_objet=" . intval($id_objet));
+			$tag = array();
+			$tag['title'] = couper($row['titre'], 64);
+			unset($row['titre']);
+			if (count($row)) $tag['description'] = couper(implode(" ", $row), 150, '');
 			// Get the value set by default
 			if (isset($config['meta_tags']['default'])){
 				foreach ($config['meta_tags']['default'] as $name => $option){
-					if ($option=='sommaire'){
-						$meta_tags[$name] = $config['meta_tags']['tag'][$name];
-					} elseif ($option=='page') {
-						if ($name=='title') $meta_tags['title'] = $title;
-						if ($name=='description') $meta_tags['description'] = $description;
-					} elseif ($option=='page_sommaire') {
-						if ($name=='title') $meta_tags['title'] = $title . (($title!='') ? ' - ' : '') . $config['meta_tags']['tag'][$name];
-						if ($name=='description') $meta_tags['description'] = $description . (($description!='') ? ' - ' : '') . $config['meta_tags']['tag'][$name];
+					$meta_tags[$name] = array();
+					if (in_array($option,array('page','page_sommaire'))){
+						if (isset($tag[$name]))
+							$meta_tags[$name][] = $tag[$name];
 					}
+					if (in_array($option,array('sommaire','page_sommaire'))){
+						if (isset($config['meta_tags']['tag'][$name]))
+							$meta_tags[$name][] = $config['meta_tags']['tag'][$name];
+					}
+					$meta_tags[$name] = implode(" - ",$meta_tags[$name]);
 				}
 			}
 
 			// If the meta tags rubrique and articles editing is activate (should overwrite other setting)
 			if (isset($config['meta_tags']['activate_editing'])
 				AND $config['meta_tags']['activate_editing']=='yes'
-				AND ($objet=='article' || $objet=='rubrique')){
-				$result = sql_select("*", "spip_seo", "id_objet = " . intval($id_objet) . " AND objet = " . sql_quote($objet));
+				AND in_array($objet,array('article','rubrique'))){
+				$result = sql_select("*", "spip_seo", "id_objet=" . intval($id_objet) . " AND objet=" . sql_quote($objet));
 				while ($r = sql_fetch($result)){
 					if ($r['meta_content']!='')
 						$meta_tags[$r['meta_name']] = $r['meta_content'];
@@ -129,22 +184,26 @@ function calculer_meta_tags(){
 	return $meta_tags;
 }
 
-function generer_meta_tags($meta_tags = null){
-	$flux = '';
+/**
+ * @param null|array $contexte
+ * @param null|array $meta_tags
+ * @return array
+ */
+function generer_meta_tags($meta_tags = null, $contexte = null){
+	$tags = array();
 	//Set meta list if not provided
 	if (!is_array($meta_tags))
-		$meta_tags = calculer_meta_tags();
+		$meta_tags = calculer_meta_tags($contexte);
 
 	// Print the result on the page
 	foreach ($meta_tags as $name => $content){
 		if ($content!='')
 			if ($name=='title')
-				$flux .= '<title>' . trim(entites_html(supprimer_numero(textebrut(propre($content))))) . '</title>' . "\n";
+				$tags[$name] = '<title>' . trim(entites_html(supprimer_numero(textebrut(propre($content))))) . '</title>';
 			else
-				$flux .= '<meta name="' . $name . '" content="' . trim(attribut_html(textebrut(propre($content)))) . '" />' . "\n";
-
+				$tags[$name] = '<meta name="' . $name . '" content="' . trim(attribut_html(textebrut(propre($content)))) . '" />';
 	}
-	return $flux;
+	return $tags;
 }
 
 /**

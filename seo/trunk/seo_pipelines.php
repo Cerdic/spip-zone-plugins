@@ -33,52 +33,23 @@ function autoriser_seo_bouton_dist($faire, $type, $id, $qui, $opt){
  *     Le contenu de la page modifié
  */
 function seo_affichage_final($flux){
-	preg_match('/<head>(.*)<\/head>/mis', $flux, $head);
-	$head = isset($head[1]) ? $head[1] : false;
 
+	#$t = spip_timer();
 	/**
 	 * On n'agit que si on a un head
 	 * sinon c'est tout et n'importe quoi
 	 */
-	if ($head){
-		/**
-		 * Pour lire_config
-		 */
-		include_spip('inc/config');
+	if ($GLOBALS['html']
+		AND stripos($flux,'<head>')!==false
+	  AND include_spip('inc/config')
+		AND lire_config('seo/forcer_squelette', 'no')=="yes"
+		AND preg_match('/<head>(.*)<\/head>/Uims', $flux, $head)){
+		$head = $head[1];
 
-		$forcer_squelette = lire_config('seo/forcer_squelette', 'no');
-		if ($forcer_squelette!='yes')
-			return $flux;
-
-		include_spip('seo_fonctions');
-
-		$meta_tags = calculer_meta_tags();
-
-		foreach ($meta_tags as $key => $value){
-			$meta = generer_meta_tags(array($key => $value));
-			$flux_meta = '';
-			/**
-			 * Si le tag est <title>
-			 */
-			if ($key=='title')
-				$flux_meta = preg_replace("/(<\s*$key.*?>.*?<\/\s*$key.*?>)/mi", $meta, $flux, 1);
-			/**
-			 * Le tag est une <meta>
-			 */
-			else
-				$flux_meta = preg_replace("/(<\s*meta\s*name=\"$key\"\s*content=\".*?\".*?>)/mi", $meta, $flux, 1);
-
-			/**
-			 * Si $flux == $flux_meta
-			 * C'est que _SEO_FORCER_SQUELETTE est placé
-			 * On ajoute les metas juste avant </head>
-			 */
-			if ($flux==$flux_meta)
-				$flux_meta = str_replace('</head>', "\n" . $meta . "</head>", $flux);
-
-			$flux = $flux_meta;
-		}
+		$head_new = recuperer_fond("inclure/seo-head",array("head"=>$head,"contexte"=>$GLOBALS['contexte']));
+		$flux = str_replace($head,$head_new,$flux);
 	}
+	#var_dump(spip_timer());
 	return $flux;
 }
 
@@ -113,7 +84,7 @@ function seo_insert_head($flux){
 		if (isset($config['meta_tags']) && $config['meta_tags']['activate']=='yes'){
 			if (!defined('_SEO_FORCER_SQUELETTE')){
 				$meta_tags = calculer_meta_tags();
-				$flux .= generer_meta_tags($meta_tags);
+				$flux .= implode("\n",generer_meta_tags($meta_tags));
 			}
 		}
 		/* META GOOGLE WEBMASTER TOOLS */
