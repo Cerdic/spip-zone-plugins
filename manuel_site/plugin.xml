@@ -26,6 +26,7 @@
 	<lien>http://www.spip-contrib.net/Manuel-de-redaction-du-site</lien>
 	<prefix>manuelsite</prefix>
 	<install>base/manuelsite_install.php</install>
+	<fonctions>manuelsite_fonctions.php</fonctions>
 	<pipeline>
 		<nom>pre_boucle</nom>
 		<inclure>manuelsite_pipelines.php</inclure>
