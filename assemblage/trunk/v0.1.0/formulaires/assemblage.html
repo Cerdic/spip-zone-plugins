@@ -1,0 +1,65 @@
+<div class="formulaire_spip formulaire_#FORM">
+	<h3 class="titrem"><:assemblage:titre_assemblage:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{base}}
+			<li class="editer_base obligatoire[ (#GET{erreurs}|oui)erreur]">
+				<label for="base"><:assemblage:base:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<select name="base" id="base">
+					<option value=""></option>
+					<BOUCLE_bases(DATA){source tableau,#ENV{bases}}>
+					<option value="#CLE" [(#ENV{base}|=={#CLE}|oui)selected="selected"] >#VALEUR</option>
+					</BOUCLE_bases>
+				</select>
+				<p><:assemblage:base_desc:></p>
+			</li>
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{img_dir}}
+			<li class="editer_img_dir [ (#GET{erreurs}|oui)erreur]">
+				<label for="img_dir"><:assemblage:img_dir:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type="text" name="img_dir" class="text" id="img_dir" value="#ENV{img_dir}" />
+				<p><:assemblage:img_dir_desc:></p>
+			</li>
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{secteur}}
+			<li class="editer_secteur [ (#GET{erreurs}|oui)erreur]">
+				<label for="secteur"><:assemblage:secteur:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<select name="secteur" id="secteur">
+					<option value=""></option>
+					<BOUCLE_secteurs(RUBRIQUES){racine} {par titre} {tout}>
+					<option value="#ID_RUBRIQUE" [(#ENV{secteur}|=={#ID_RUBRIQUE}|oui)selected="selected"] >#TITRE</option>
+					</BOUCLE_secteurs>
+				</select>
+				<p><:assemblage:secteur_desc:></p>
+			</li>
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{stats}}
+			<li class="editer_stats [ (#GET{erreurs}|oui)erreur]">
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type="checkbox" name="stats" id="stats" [(#ENV{stats}|=={on}|oui) checked="checked" ] />
+				<label for="stats"><:assemblage:stats:></label>
+			</li>
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{referers}}
+			<li class="editer_referers [ (#GET{erreurs}|oui)erreur]">
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type="checkbox" name="referers" id="referers" [(#ENV{referers}|=={on}|oui) checked="checked" ] />
+				<label for="referers"><:assemblage:referers:></label>
+			</li>
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{versions}}
+			<li class="editer_versions [ (#GET{erreurs}|oui)erreur]">
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type="checkbox" name="versions" id="versions" [(#ENV{versions}|=={on}|oui) checked="checked" ] />
+				<label for="referers"><:assemblage:versions:></label>
+			</li>
+		</ul>
+
+		<p class='boutons'>
+			<input type='submit' class='submit' value='<:assemblage:bouton_importer:>' />
+		</p>
+	</div></form>
+</div>
