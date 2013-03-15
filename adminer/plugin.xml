@@ -8,7 +8,7 @@
 	<description>
 		Utiliser Adminer sur la base SPIP
 	</description>
-	<lien></lien>
+	<lien>http://contrib.spip.net/Adminer</lien>
 	<licence>GNU/GPL</licence>
 	<icon>adminer-80.png</icon>
 	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
