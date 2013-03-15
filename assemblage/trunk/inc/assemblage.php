@@ -238,6 +238,8 @@ function assemblage_inserer_table_auxiliaire($nom_table, $shema, $cles_primaires
 				$res_visites = sql_fetsel('*', 'spip_visites', 'date='._q($obj_import['date']));
 				if ($res_visites['date']) {
 					sql_updateq('spip_visites', array('visites', $res_visites['visites'] + $obj_import['visites']), 'date='._q($obj_import['date']));
+				} else {
+					sql_insertq($nom_table, $obj_import);
 				}
 			} else {
 				sql_insertq($nom_table, $obj_import);
