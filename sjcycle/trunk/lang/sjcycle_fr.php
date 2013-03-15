@@ -27,6 +27,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_timeout'=>'Exprime le temps en millisecondes entre 2 transitions (0 désactive le défilement automatique)',
 	'explication_tooltip'=>'Au survol, affiche une infobulle contenant titre et descriptif de l’image. Utilisation du plugin tooltip de jquery',
 	'explication_tooltip_carac'=>'Afficher les caractéristiques de l\'image originale dans l\'infobulle : largeur, hauteur et poids',
+	'explication_next' => 'Voulez-vous utiliser le bouton pour aller à l\'image suivante ?',
+	'explication_prev' => 'Voulez-vous utiliser le bouton pour aller à l\'image précédente ?',
+	'explication_text_next' => 'Changez le libelle du bouton suivant.',
+	'explication_text_prev' => 'Changez le libelle du bouton précédent.',
 
 	// L
 	'label_afficher_aide' => 'Afficher la boite d\'aide',
@@ -44,6 +48,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_random' => 'Défilement aléatoire',
 	'label_speed' => 'Vitesse de transition',
 	'label_sync' => 'Synchronisation',
+	'label_next' => 'Bouton suivant',
+	'label_prev' => 'Bouton précédent',
+	'label_text_next' => 'Libelle du bouton',
+	'label_text_prev' => 'Libelle du bouton',
 	'label_timeout' => 'Temps d\'affichage',
 	'label_tooltip' => 'Afficher les infobulles',
 	'label_tooltip_carac' => 'Caractéristiques de l\'originale',
@@ -54,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_tooltip_box' => 'Paramètres tooltip et mediabox',	
 	
 	// N
+	'next' => 'suivant',
 	'noisette_alea_description' => 'Affiche un diaporama aléatoire jcycle des images du site',
 	'noisette_alea_nom_noisette' => 'Diaporama aléatoire',
 	'noisette_description' => 'Affiche un diaporama jcycle des images d\'un article',
@@ -71,6 +80,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_alea_defaut' => 'Au Hasard',
 	'noisette_titre_noisette' => 'Titre :',
 	'noisette_titre_sites_defaut' => 'Liens',
+	
+	// P
+	'prev' => 'précédent',
 
 	// T
 	'titre_menu' => 'jQuery Cycle',
