@@ -38,6 +38,7 @@ function selection_objet_declarer_tables_objets_sql($tables) {
 			"objet"              => "varchar(100) NOT NULL",
 			"objet_dest"         => "varchar(100) NOT NULL",
 			"ordre"              => "bigint(21) NOT NULL",
+			"ordre_objet"         => "bigint(21) NOT NULL",			
 			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", 
 			"statut"             => "varchar(20)  DEFAULT '0' NOT NULL", 
 			"lang"               => "VARCHAR(10) NOT NULL DEFAULT ''",

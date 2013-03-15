@@ -39,7 +39,7 @@
         #SET{id,id_syndic}
         ]
 
-        <li class="liste_sortable" id="#ID_SELECTION_OBJET"><img src="#CHEMIN{images/formulaire-deplacer-16.png}" alt="move"/><a href="#URL_ECRIRE{#GET{objet_dest},#GET{id}=#ID_OBJET_DEST}#selection_objets">
+        <li class="liste_sortable" id="#ID_SELECTION_OBJET">[(#TOTAL_BOUCLE|>{1}|oui)<img src="#CHEMIN{images/formulaire-deplacer-16.png}" alt="move"/>]<a href="#URL_ECRIRE{#GET{objet_dest},#GET{id}=#ID_OBJET_DEST}#selection_objets">
             [(#GET{info_objet}|table_valeur{titre})] [((#TYPE_LIEN|nom_type{#OBJET_DEST}))]
             </a>
              <a href="[(#URL_ACTION_AUTEUR{ranger,supprimer_ordre-[(#ENV{langue})]-[(#ID_SELECTION_OBJET)]-#ORDRE-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})],[(#SELF)]})]" class="ajax">
@@ -63,6 +63,7 @@
             (#INCLURE{fond=formulaires/inc-boutons_objet,env,exclure=#GET{exclude},langue})
             
             [(#REM) Les types e lien]
+            
             [(#ENV{types_lien}|count|>{0}|oui)
                 [(#SAISIE{selection,type_lien,
                     label=<:selection_objet:selection_type_lien:> [(#GET{objets}|table_valeur{#VALEUR})],

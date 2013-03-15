@@ -90,7 +90,7 @@ function action_ranger_dist($arg=null){
                 );            
             $ordre=$verifier_ordre($where);  
             break;
-        //drag&drop
+        //ranger avec drag and drop - liste des objets séléctionné sur la page de l'objet cible
         case 'nouvel_ordre':
             $nouvel_ordre=explode(',',_request('nouvel_ordre'));
             $ordre=0;
@@ -101,6 +101,19 @@ function action_ranger_dist($arg=null){
                 suivre_invalideur("id='selection_objet/$id_selection_objet'");    
             }
             break;
+            
+        //ranger avec drag and drop - liste des objets séléctionné sur la page de l'objet
+        case 'nouvel_ordre_objet':
+            $nouvel_ordre=explode(',',_request('nouvel_ordre'));
+            $ordre=0;
+            foreach($nouvel_ordre AS $id_selection_objet){
+                $ordre++;
+                sql_updateq("spip_selection_objets", array("ordre_objet" => $ordre),'id_selection_objet='.$id_selection_objet);
+                include_spip('inc/invalideur');
+                suivre_invalideur("id='selection_objet/$id_selection_objet'");    
+            }
+            break;
+            
         }
 
     if($load){
