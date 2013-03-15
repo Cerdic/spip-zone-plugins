@@ -1,6 +1,19 @@
 #SET{exclude,#ARRAY}
+    #SET{id,selection_objet_dest_#OBJET_DEST}
+
 <B_test>
+
 <div class="ajax">
+        <script type="text/javascript">
+        $(function() {
+            [(#REM)drag and drop]     
+            $( "#[(#GET{id})]" ).sortable({items:"li.liste_sortable"});
+            $( "#[(#GET{id})]").bind("sortupdate", function(event, ui) {
+                var ordre = $(this).sortable('toArray').toString();
+                $('#[(#GET{id})]').load('[(#URL_ACTION_AUTEUR{ranger,nouvel_ordre_objet-#VALEUR-0-0-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})]}|parametre_url{load,formulaires/inc-bouton_objet_selection}|parametre_url{id_objet,#ID_OBJET}|parametre_url{objet,#OBJET}|replace{&amp;,&})]&nouvel_ordre='+ordre);
+            });
+        });
+    </script> 
 [(#SET{plie,0})]    
 [(#ENV{message_ok}|ou{#ENV{message_erreur}}|oui)
     [(#SET{plie,1})]
@@ -10,14 +23,13 @@
    [(#VAL{inc/layer}|include_spip|oui)]   
 [(#SET{identifiant,[(#VAL{sel_objet_#ENV{objet_dest}_#ENV{id_objet}})]})] 
   [(#VAL{e}|debut_cadre{'','',[(#VAL{#TITRE_OBJET_DEST}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})]})] 
-
+<div id="#GET{id}">
     <B_affichage>
 
     <strong><:selection_objet:selectione:></strong>
     <ul>   
     #SET{nom_id_dest,id_#OBJET_DEST}    
-
-    <BOUCLE_affichage(SELECTION_OBJETS){id_objet}{statut ?}{objet}{objet_dest}>
+    <BOUCLE_affichage(SELECTION_OBJETS){id_objet}{statut ?}{objet}{objet_dest}{par ordre_objet}>
         #SET{info_objet,#ENV{objets_choisies}|table_valeur{#ID_OBJET_DEST}}
         #SET{exclude,#GET{exclude}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_OBJET_DEST}}}
         #SET{objet_dest,#OBJET_DEST}
@@ -27,7 +39,7 @@
         #SET{id,id_syndic}
         ]
 
-        <li><a href="#URL_ECRIRE{#GET{objet_dest},#GET{id}=#ID_OBJET_DEST}#selection_objets">
+        <li class="liste_sortable" id="#ID_SELECTION_OBJET"><img src="#CHEMIN{images/formulaire-deplacer-16.png}" alt="move"/><a href="#URL_ECRIRE{#GET{objet_dest},#GET{id}=#ID_OBJET_DEST}#selection_objets">
             [(#GET{info_objet}|table_valeur{titre})] [((#TYPE_LIEN|nom_type{#OBJET_DEST}))]
             </a>
              <a href="[(#URL_ACTION_AUTEUR{ranger,supprimer_ordre-[(#ENV{langue})]-[(#ID_SELECTION_OBJET)]-#ORDRE-[(#OBJET_DEST)]-[(#ENV{id_objet_dest})],[(#SELF)]})]" class="ajax">
@@ -35,9 +47,8 @@
         </BOUCLE_rub>
     </BOUCLE_affichage>
     </ul>
-    #SET{nombre,#TOTAL_BOUCLE}
-
-    </B_affichage>
+    </B_affichage>   
+</div>
 <BOUCLE_test(POUR){tableau #ENV{objets_choisies}}>
 #SET{id_objet,#VALEUR}
 </BOUCLE_test>
@@ -65,6 +76,8 @@
         </div></form>
     </div>]
 [(#GET{plie}|fin_block)]
+
 [(#VAL{e}|fin_cadre)]
+
 </div>   
 </B_test>
