@@ -1,6 +1,6 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if(!defined("_ECRIRE_INC_VERSION")) return;
 
 // pour l'appel à bases_referencees()
 include_spip('inc/install');
@@ -135,10 +135,10 @@ function formulaires_assemblage_traiter_dist() {
 		}
 
 		// mise à jour des liens internes [...->...]
-		assemblage_maj_liens_internes($connect);
+		assemblage_maj_liens_internes($principales, $auxiliaires, $connect);
 
 		// mise à jour des modèles <docXX> <imgXX> <embXX> ...
-		assemblage_maj_modeles($connect);
+		assemblage_maj_modeles($principales, $auxiliaires, $connect);
 
 		// déclarer les url uniques importées avec "perma=1"
 		assemblage_maj_perma_urls($connect);

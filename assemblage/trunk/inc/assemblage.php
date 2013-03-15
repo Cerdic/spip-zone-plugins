@@ -232,8 +232,6 @@ function assemblage_inserer_table_auxiliaire($nom_table, $shema, $cles_primaires
 		}
 
 		if (!$skip_import_objet) {
-			// @todo: cas particulier pour la table spip_visites
-			// Duplicate entry '2009-11-15' for key 'PRIMARY' - INSERT INTO spip_visites (date,visites,maj) VALUES ('2009-11-15',459,'2009-11-16 00:25:16')
 			sql_insertq($nom_table, $obj_import);
 		}
 
@@ -505,30 +503,31 @@ function assemblage_import_documents($img_dir, $connect) {
 
 /** Mise à jour des liens internes [...->...]
  *
+ * @param array $principales tables principales
+ * @param array $auxiliaires tables auxiliaires
  * @param string $connect base source
  */
-function assemblage_maj_liens_internes($connect) {
+function assemblage_maj_liens_internes($principales, $auxiliaires, $connect) {
 	$time_start = microtime(true);
 	$objets_mis_a_jour = 0;
 
-	// objets et champs dans lequels chercher les liens
-	$objets_sources = array(
-		'article' => array(
-			'descriptif',
-			'chapo',
-			'texte',
-			'ps'
-		),
-		'rubrique' => array(
-			'descriptif',
-			'texte',
-		),
-	);
+	$objets_sources = assemblage_determiner_champs_texte(array_merge($principales, $auxiliaires));
 
 	// liens possibles et objets auxquels ils se rapportent
 	$objets_liens = array(
 		'rub' => 'rubrique',
 		'rubrique' => 'rubrique',
+		'aut' => 'auteur',
+		'auteur' => 'auteur',
+		'br' => 'breve',
+		'breve' => 'breve',
+		'brève' => 'breve',
+		'doc' => 'document',
+		'im' => 'document',
+		'img' => 'document',
+		'image' => 'document',
+		'emb' => 'document',
+		'document' => 'document',
 		'art' => 'article',
 		'article' => 'article',
 		'' => 'article',
@@ -593,35 +592,25 @@ function assemblage_maj_liens_internes($connect) {
 
 /** Mise à jour des modèles <docXX> <imgXX> <embXX> ...
  *
+ * @param array $principales tables principales
+ * @param array $auxiliaires tables auxiliaires
  * @param string $connect base source
  */
-function assemblage_maj_modeles($connect) {
+function assemblage_maj_modeles($principales, $auxiliaires, $connect) {
 	$time_start = microtime(true);
 	$objets_mis_a_jour = 0;
 
-	// objets et champs dans lequels chercher les liens
-	$objets_sources = array(
-		'article' => array(
-			'descriptif',
-			'chapo',
-			'texte',
-			'ps'
-		),
-		'rubrique' => array(
-			'descriptif',
-			'texte',
-		),
-	);
+	$objets_sources = assemblage_determiner_champs_texte(array_merge($principales, $auxiliaires));
 
-	// modèles liés à des documents
-	$modeles = array(
-		'emb',
-		'doc',
-		'img',
-	);
-	// @todo: attention modeles spécifiques à certains sites utilisant un id_document
-	// exemple : <videoXXX>
-	// ajouter un champ dans le formulaire pour saisir les modèles supplémentaires à traiter ?
+	if (function_exists('medias_declarer_tables_objets_sql')) {
+		// obtenir la liste des modeles dans la table spip_documents
+		$spip_documents = medias_declarer_tables_objets_sql($principales);
+	}
+	if ($spip_documents['modeles']) {
+		$modeles = $spip_documents['modeles'];
+	} else {
+		$modeles = array('document', 'doc', 'img', 'emb', 'image', 'video', 'text', 'audio', 'application');
+	}
 
 
 	// pour tous les objets importés pouvant contenir des modèles
@@ -674,4 +663,28 @@ function assemblage_maj_modeles($connect) {
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
 	spip_log('Modèles mis à jour ('.$objets_mis_a_jour.' objets) : '.number_format($time, 2).' secondes)', 'assemblage_'.$connect);
+}
+
+/**
+ * Retourne un tableau de tous les objets contenant des champs texte avec les noms des champs pour chaque objet
+ *
+ * @param array $tables liste des tables à examiner
+ * @return array
+ */
+function assemblage_determiner_champs_texte($tables) {
+	$objets = array();
+	foreach ($tables as $nom_table => $shema_table) {
+		$champs = array();
+		foreach ($shema_table['field'] as $champ => $desc) {
+			if (strpos($desc, 'text')!==false && strpos($desc, 'tinytext')===false
+				&& strpos($champ, 'email')===false && strpos($champ, 'site')===false && strpos($champ, 'url')===false
+			){
+				$champs[] = $champ;
+			}
+		}
+		if ($champs) {
+			$objets[objet_type($nom_table)] = $champs;
+		}
+	}
+	return $objets;
 }
