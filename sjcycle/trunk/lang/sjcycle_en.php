@@ -27,6 +27,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_timeout'=>'Milliseconds between slide transitions (0 to disable auto advance)',
 	'explication_tooltip'=>'On hover, display a tooltip with image title and description. Use the jQuery tooltip plugin',
 	'explication_tooltip_carac'=>'Display the characteristics of the original image in the tooltip: width, heigth and size',
+	'explication_next' => 'Do you want to use the button to go to the following image?',
+	'explication_prev' => 'Do you want to use the button to go to the previous image?',
+	'explication_text_next' => 'Change the caption of the following button.',
+	'explication_text_prev' => 'Change the caption of the previous button.',
 
 	// L
 	'label_afficher_aide' => 'Display the help box',
@@ -40,10 +44,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_img_position' => 'Positioning',
 	'label_img_width' => 'Width',
 	'label_mediabox' => 'Mediabox',
+	'label_next' => 'Following button',
 	'label_pause' => 'Pause on hover',
+	'label_prev' => 'Previous button',
 	'label_random' => 'Random slideshow',
 	'label_speed' => 'speed of the transition',
 	'label_sync' => 'Synchronisation',
+	'label_text_next' => 'Caption of the button',
+	'label_text_prev' => 'Caption of the button',
 	'label_timeout' => 'Display time',
 	'label_tooltip' => 'Display tooltips',
 	'label_tooltip_carac' => 'Characteristics of the original image',
@@ -54,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_tooltip_box' => 'Tooltip & mediabox Parameters',
 
 	// N
+	'next' => 'next',
 	'noisette_alea_description' => 'Display a random slideshow',
 	'noisette_alea_nom_noisette' => 'Random slideshow',
 	'noisette_description' => 'Display a slideshow with the images of an article',
@@ -71,6 +80,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_alea_defaut' => 'Randomly',
 	'noisette_titre_noisette' => 'Title&nbsp;:',
 	'noisette_titre_sites_defaut' => 'Links',
+	
+	// P
+	'prev' => 'previous',
 
 	// T
 	'titre_menu' => 'jQuery Cycle',
