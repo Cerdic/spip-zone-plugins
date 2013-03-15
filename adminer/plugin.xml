@@ -1,0 +1,16 @@
+<plugin>
+	<nom>Adminer</nom>
+	<slogan>Utiliser Adminer pour explorer la base MySQL</slogan>
+	<auteur>Jakub Vr‡na, mis en plugin par Fil</auteur>
+	<version>3.6.3</version>
+	<etat>test</etat>
+	<prefix>adminer</prefix>
+	<description>
+		Utiliser Adminer sur la base SPIP
+	</description>
+	<lien></lien>
+	<licence>GNU/GPL</licence>
+	<icon>adminer-80.png</icon>
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+	<categorie>outils</categorie>
+</plugin>
