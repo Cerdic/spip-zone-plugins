@@ -17,8 +17,6 @@
 [(#SET{liens_individuels,  [(#ENV{liens_individuels,	0})]})]
 [(#REM) largeur div = largeur image + 2*bordure ]
 [(#SET{div_width,  #GET{img_bordure}|mult{2}|plus{#GET{img_width}} })]
-[(#SET{prev,        		[(#ENV{prev,        		''})]})]
-[(#SET{next,        		[(#ENV{next,        		''})]})]
 
 [(#REM) Si un lien est demande vers un article, on cherche eventuellement l'id de l'article traduit
 			- Si l'article n'existe pas dans la langue courante on met ou pas un lien
