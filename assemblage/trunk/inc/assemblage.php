@@ -566,7 +566,7 @@ function assemblage_maj_liens_internes($principales, $auxiliaires, $connect) {
 						$type_lien = preg_replace('#[0-9]*#', '', $lien_trouve[4]);
 						$objet_lien = $objets_liens[$type_lien];
 						$nouveau_id = sql_fetsel('id_final', 'spip_assemblage', 'id_origine='._q($id_origine_lien).' and objet="'.$objet_lien.'" and site_origine="'.$connect.'"');
-						if( $nouveau_id['id_final'] ){
+						if ($nouveau_id['id_final']) {
 							$pattern_cherche = '#\[([^][]*?([[]\w*[]][^][]*)*)->'.$type_lien.$id_origine_lien.'\]#';
 							// ajouter une signature pour éviter les remplacements en cascade
 							$pattern_remplace = '[$1->__final__'.$type_lien.$nouveau_id['id_final'].']';
@@ -577,7 +577,7 @@ function assemblage_maj_liens_internes($principales, $auxiliaires, $connect) {
 					$update_array[$champ] = $obj_import[$champ];
 				}
 			}
-			if($update_array){
+			if ($update_array) {
 				sql_updateq($table, $update_array, $cle_primaire.'='._q($obj_import[$cle_primaire]));
 				$objets_mis_a_jour++;
 			}
@@ -644,7 +644,7 @@ function assemblage_maj_modeles($principales, $auxiliaires, $connect) {
 						$id_origine_lien = $lien_trouve[2];
 						$modele = $lien_trouve[1];
 						$nouveau_id = sql_fetsel('id_final', 'spip_assemblage', 'id_origine='._q($id_origine_lien).' and objet="document" and site_origine="'.$connect.'"');
-						if( $nouveau_id['id_final'] ){
+						if ($nouveau_id['id_final']) {
 							$pattern_cherche = '#<'.$modele.$id_origine_lien.'#';
 							$pattern_remplace = '<'.$modele.$nouveau_id['id_final'];
 							$obj_import[$champ] = preg_replace($pattern_cherche, $pattern_remplace, $obj_import[$champ]);
@@ -653,7 +653,7 @@ function assemblage_maj_modeles($principales, $auxiliaires, $connect) {
 					$update_array[$champ] = $obj_import[$champ];
 				}
 			}
-			if($update_array){
+			if ($update_array) {
 				sql_updateq($table, $update_array, $cle_primaire.'='._q($obj_import[$cle_primaire]));
 				$objets_mis_a_jour++;
 			}
@@ -676,9 +676,9 @@ function assemblage_determiner_champs_texte($tables) {
 	foreach ($tables as $nom_table => $shema_table) {
 		$champs = array();
 		foreach ($shema_table['field'] as $champ => $desc) {
-			if (strpos($desc, 'text')!==false && strpos($desc, 'tinytext')===false
-				&& strpos($champ, 'email')===false && strpos($champ, 'site')===false && strpos($champ, 'url')===false
-			){
+			if (strpos($desc, 'text') !== false && strpos($desc, 'tinytext') === false
+				&& strpos($champ, 'email') === false && strpos($champ, 'site') === false && strpos($champ, 'url') === false
+			) {
 				$champs[] = $champ;
 			}
 		}

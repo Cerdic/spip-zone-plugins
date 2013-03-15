@@ -1,7 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function assemblage_upgrade($nom_meta_base_version, $version_cible){
+function assemblage_upgrade($nom_meta_base_version, $version_cible) {
 
 	$maj = array();
 	$maj['create'] = array(

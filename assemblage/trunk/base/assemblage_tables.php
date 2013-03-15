@@ -26,10 +26,10 @@ function assemblage_declarer_tables_principales($tables) {
 		),
 		'key' => array(
 			'PRIMARY KEY' => 'id_assemblage',
-			'KEY site_origine'	=> 'site_origine',
-			'KEY id_origine'	=> 'id_origine',
-			'KEY id_final'	=> 'id_final',
-			'KEY objet'	=> 'objet',
+			'KEY site_origine' => 'site_origine',
+			'KEY id_origine' => 'id_origine',
+			'KEY id_final' => 'id_final',
+			'KEY objet' => 'objet',
 		),
 	);
 
