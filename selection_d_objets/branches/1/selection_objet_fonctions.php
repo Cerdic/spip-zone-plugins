@@ -66,6 +66,7 @@ function info_objet($objet,$id_objet='',$champs='*',$where=array()){
         include_spip('inc/pipelines_ecrire');
         $ancien_objet=$objet;
         $e = trouver_objet_exec($objet);
+
         $objet=$e['type'];
         $id_table_objet=$e['id_table_objet'];
         // Pour les récalcitrants
@@ -87,7 +88,7 @@ function info_objet($objet,$id_objet='',$champs='*',$where=array()){
             $sql=sql_select($champs,$table,$where);
             while($d = sql_fetch($sql)){
                 
-                if($d)$data[$d['id_'.$objet]]=filtrer_champ($d);
+                if($d)$data[$d[$id_table_objet]]=filtrer_champ($d);
                 }
             }
         }
@@ -115,7 +116,9 @@ function url_objet($id_objet,$objet,$titre='',$url=''){
 
 /*Fournit un tableau avec id_objet=>donnees_objet*/
 function tableau_objet($objet,$id_objet='',$champs='*',$where=array(),$filtrer=array(),$array_donnes=true){
+    
     $d=info_objet($objet,$id_objet,$champs,$where);
+    
     //Les tables non conforme, faudrait inclure une pipeline
     $exceptions=charger_fonction('exceptions','inc');
     $exception_objet=$exceptions('objet');

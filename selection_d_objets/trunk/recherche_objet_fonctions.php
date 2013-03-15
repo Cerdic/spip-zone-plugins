@@ -23,6 +23,8 @@ function tableau_recherche_objet($objet,$exclus,$lang=''){
     $table = table_objet_sql($objet);      
 
     $tables=lister_tables_objets_sql();
+    
+    $traduction_nom_objet=_T($tables[$table]['texte_objet']);
 
    
     $where=array($champ_titre.' LIKE '.sql_quote('%'._request('term').'%'));
@@ -41,10 +43,8 @@ function tableau_recherche_objet($objet,$exclus,$lang=''){
     $data=array();
     if(is_array($d)){
         foreach($d as $r){
-            if(!$r['titre']){
-                $r['titre']=titre_objet_sel($objet,$r);
-            }
-            if(!isset($exclus[$r[$id_table_objet].'-'.$objet]))$data[]=array('label'=>$r[titre].' ('.$objet.')','value'=>$r[$id_table_objet].'-'.$objet);
+            if(!$r['titre']) $r['titre']=titre_objet_sel($objet,$r);
+            if(!isset($exclus[$r[$id_table_objet].'-'.$objet]))$data[]=array('label'=>$r[titre].' ('.$traduction_nom_objet.')','value'=>$r[$id_table_objet].'-'.$objet);
         }
     }
     return $data;

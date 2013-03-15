@@ -34,7 +34,8 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
         if($objet_dest!='rubrique')$where[l]='lang IN ('.sql_quote($lang).')';
         elseif(test_plugin_actif('tradrub'))$where[l]='lang IN ('.sql_quote($lang).')';
         }
-    $objets_choisies=tableau_objet($objet_dest_original,'','*',$where,array('titre','id_'.$objet_dest,true));
+
+    $objets_choisies=tableau_objet($objet_dest_original,'','*',$where);
     
     //Les types liens pour l'objet concerné
     if(!$types=lire_config('selection_objet/type_liens_'.$objet_dest_original,array()))$types=lire_config('selection_objet/type_liens',array());
