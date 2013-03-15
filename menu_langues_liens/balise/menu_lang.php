@@ -50,7 +50,8 @@ function balise_MENU_LANG_dyn($objet,$id_objet,$id_table_objet) {
 
 	return array('formulaires/menu_lang',
 		3600,
-		array('nom' => $nom,
+		array(
+			//'nom' => $nom,
 			'lang' => $GLOBALS['spip_lang'],
 			'url' => $post,
 			$id_table_objet => $id_objet
