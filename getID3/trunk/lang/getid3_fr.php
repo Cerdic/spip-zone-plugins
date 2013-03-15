@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_formats_ecriture_impossible' => 'L\'écriture de tags sur les formats suivants est impossible :',
 	'erreur_logiciels_indisponibles' => 'Vous ne pouvez écrire les tags sur tous les formats possibles. Certains logiciels sont indisponibles.',
 	'erreur_necessite' => 'nécessite @soft@',
-	'explication_cover_defaut' => 'À la mise en ligne de fichiers sonores, une vignette par défaut (URL à mettre ci-dessous) est associée au fichier son. Si l\'option de réécriture des tags à la modification du logoest activée, la pochette des tags id3 sera également mise à jour.',
+	'explication_cover_defaut' => 'À la mise en ligne de fichiers sonores, une vignette par défaut (URL à mettre ci-dessous) est associée au fichier son. Si l\'option de réécriture des tags à la modification du logo est activée, la pochette des tags id3 sera également mise à jour.',
 
 	// F
 	'formulaire_modifier_id3' => 'Modifier les métadonnées de :',
