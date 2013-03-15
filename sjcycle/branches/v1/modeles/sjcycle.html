@@ -17,6 +17,8 @@
 [(#SET{liens_individuels,  [(#ENV{liens_individuels,	0})]})]
 [(#REM) largeur div = largeur image + 2*bordure ]
 [(#SET{div_width,  #GET{img_bordure}|mult{2}|plus{#GET{img_width}} })]
+[(#SET{prev,        		[(#ENV{prev,        		''})]})]
+[(#SET{next,        		[(#ENV{next,        		''})]})]
 
 [(#REM) Si un lien est demande vers un article, on cherche eventuellement l'id de l'article traduit
 			- Si l'article n'existe pas dans la langue courante on met ou pas un lien
@@ -56,11 +58,6 @@
 					left: 5
 			});
 		]
-		[(#CONFIG{sjcycle/fancy}|=={on}|oui)
-			$("a.#GET{cssbox}").fancybox({
-				'hideOnContentClick': false
-			});
-		]
 		[(#CONFIG{sjcycle/mediabox}|=={on}|oui)
 			$("a.#GET{cssbox}").mediabox(box_settings);
 		]
@@ -70,9 +67,11 @@
 			 speed:		"#CONFIG{sjcycle/speed}",
 			 sync:		"#CONFIG{sjcycle/sync}",
 			 pause:		"#CONFIG{sjcycle/pause}",
-			 random:		"#CONFIG{sjcycle/random}",
+			 random:		"#CONFIG{sjcycle/random}"[,
+			 prev:		"#prev"(#CONFIG{sjcycle/prev}|=={on}|oui)][,
+			 next:		"#next"(#CONFIG{sjcycle/next}|=={on}|oui)],
 			 cleartype: 1
-			 [,(#ENV{opt}|replace{';',','}|html_entity_decode)]
+			 [,(#ENV*{opt}|replace{';',','}|html_entity_decode)]
 			 });
 	});
 
@@ -84,7 +83,7 @@
 
 	[(#REM) Solution de denisb pour eviter de dupliquer le code Cf http://article.gmane.org/gmane.comp.web.spip.zone/18622 ]
 
-	<BOUCLE_img(DOCUMENTS){id_article=#GET{id_objet}}{extension==jpg|png|gif}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{par num titre, date}{doublons}>
+	<BOUCLE_img(DOCUMENTS){id_article=#GET{id_objet}}{extension==jpg|png|gif}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{par #ENV{par}}{par num titre, date}{doublons}{0,#ENV{limite,100000000}}>
    	<div>
    		[(#REM) Les effets de type turnLeft ne fonctionnent pas si ce div est en place. En attendant de corriger
          rajout dans la doc de l'incompatibilite entre infobulles et ces effets. Du coup la bordure autour de l'image
@@ -121,7 +120,7 @@
          [(#GET{id_article_a_lier}|oui)
             <a href="#URL_ARTICLE{#GET{id_article_a_lier}}" title="#GET{titre_article_a_lier}">
             #SET{fermer_a,oui}]
-         [(#GET{fermer_a}|=={oui}|non|et{#CONFIG{sjcycle/fancy}|=={on}|ou{#CONFIG{sjcycle/mediabox}|=={on}}|oui})
+         [(#GET{fermer_a}|=={oui}|non|et{#CONFIG{sjcycle/mediabox}|=={on}|oui})
             <a href="[(#URL_DOCUMENT)]" type="#MIME_TYPE"
                                          class="#GET{cssbox}"
                                          rel="#GET{cssbox}"
@@ -129,7 +128,7 @@
                                          style="display:block;padding:0px;margin:0px;">
             #SET{fermer_a,oui}]
          [(#GET{img_background}|=={'transparent'}|oui)
-            [(#FICHIER|image_passe_partout{#GET{img_width},
+            [(#FICHIER|image_passe_partout{ #GET{img_width},
                                       #GET{img_height}}
                       |image_alpha{0}
                       |image_recadre{ #GET{img_width},
@@ -173,5 +172,8 @@
          [(#REM) La legende est cree a partir du texte fourni ]
          [<div class="sjcycle_legende"  style='#GET{style}'>(#GET{legende})</div>]
    ]
-
+	[(#CONFIG{sjcycle/prev}|=={on}|oui)<span id="prev">[(#CONFIG{sjcycle/text_prev}|sinon{<:sjcycle:prev:>})]</span>]
+	[(#CONFIG{sjcycle/prev}|=={on}|?{ [(#CONFIG{sjcycle/next}|=={on}|oui) / ],''})]
+	[(#CONFIG{sjcycle/next}|=={on}|oui)<span id="next">[(#CONFIG{sjcycle/text_next}|sinon{<:sjcycle:next:>})]</span>]
+	
 </B_img>

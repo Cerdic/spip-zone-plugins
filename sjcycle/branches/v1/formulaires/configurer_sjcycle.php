@@ -102,6 +102,42 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 						'explication' => _T('sjcycle:explication_random'),
 						'defaut' => $config['random']
 					)
+				),
+				array(
+					'saisie' => 'oui_non',
+					'options' => array(
+						'nom' => 'prev',
+						'label' => _T('sjcycle:label_prev'),
+						'explication' => _T('sjcycle:explication_prev'),
+						'defaut' => $config['prev']
+					)
+				),
+				array(
+					'saisie' => 'input',
+					'options' => array(
+						'nom' => 'text_prev',
+						'label' => _T('sjcycle:label_text_prev'),
+						'explication' => _T('sjcycle:explication_text_prev'),
+						'defaut' => $config['text_prev']
+					)
+				),
+				array(
+					'saisie' => 'oui_non',
+					'options' => array(
+						'nom' => 'next',
+						'label' => _T('sjcycle:label_next'),
+						'explication' => _T('sjcycle:explication_next'),
+						'defaut' => $config['next']
+					)
+				),
+				array(
+					'saisie' => 'input',
+					'options' => array(
+						'nom' => 'text_next',
+						'label' => _T('sjcycle:label_text_next'),
+						'explication' => _T('sjcycle:explication_text_next'),
+						'defaut' => $config['text_next']
+					)
 				)
 			)
 		),

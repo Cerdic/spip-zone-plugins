@@ -1,7 +1,7 @@
 <paquet
 	prefix="sjcycle"
 	categorie="multimedia"
-	version="2.2.4"
+	version="2.2.5"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/sjcycle-32.png"
