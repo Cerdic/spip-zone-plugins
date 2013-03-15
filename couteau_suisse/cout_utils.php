@@ -213,6 +213,17 @@ function cs_basename($file, $suffix=null) {
 	return basename($reg[0], $suffix);
 }
 
+// fonction ecrire_fichier() tres prudente
+function cs_ecrire_fichier($file, $contenu) {
+	$inf = pathinfo($file);
+	if(!ecrire_fichier($test = $inf['dirname'].'/test_'.$inf['basename'], $contenu)) 
+		return false;
+	$old = $inf['dirname'].'/'.$inf['basename'].'.old';
+	// le fichier actuel, s'il existe, remplace la sauvegarde eventuelle
+	if(@is_readable($file)) { @spip_unlink($old); @rename($file, $old); }
+	return @rename($test, $file); // le fichier test est promu
+}
+
 // est-ce que $pipe est un pipeline ?
 function is_pipeline_outil($pipe, &$set_pipe) {
 	if($ok=(strncmp('pipeline:', $pipe, 9)==0)) $set_pipe = trim(substr($pipe, 9));

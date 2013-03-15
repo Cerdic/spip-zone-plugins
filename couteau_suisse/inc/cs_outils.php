@@ -2,7 +2,7 @@
 #-----------------------------------------------------#
 #  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2007               #
-#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
+#  Contact : patriceÂ¡.!vanneufvilleÂ¡@!laposteÂ¡.!net   #
 #  Infos : http://www.spip-contrib.net/?article2166   #
 #-----------------------------------------------------#
 #  Fichier contenant les fonctions concernant la      #
@@ -319,21 +319,24 @@ function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 				// 2e appel : envoi du texte
 				$distant = pipeline('fichier_distant', array('outil'=>$outil['id'], 'fichier_local'=>$file, 
 						'fichier_distant'=>$outil[$i], 'message'=>'', 'texte'=>$distant, 'actif'=>$actif));
-				$file = $distant['fichier_local'];
-				$message = $distant['message'] . "\n_ " . couteauprive_T('copie_vers', array('dir'=>cs_root_canonicalize(dirname($distant['fichier_local']).'/')));
+				$dir = dirname($file = $distant['fichier_local']);
+				$message = $distant['message'] . "\n_ " . couteauprive_T('copie_vers', array('dir'=>cs_root_canonicalize($dir.'/')));
 				$distant = $distant['texte'];
 				if(preg_match(',\.php\d?$,', $file)) {
 					$test = preg_replace(',^.*?\<\?php|\?\>.*?$,', '', $distant);
 					if(!@eval("return true; ". preg_replace(',function\s+\w+,','\\0_zz',$test))) $distant = false;
-					else $distant = ecrire_fichier($file, '<'."?php\n\n".trim($test)."\n\n?".'>');
+					else $distant = cs_ecrire_fichier($file, '<'."?php\n\n".trim($test)."\n\n?".'>');
 				} else
-					$distant = ecrire_fichier($file, $distant);
+					$distant = cs_ecrire_fichier($file, $distant);
 			}
 			if($distant) { $statut = '<span style="color:green">'.couteauprive_T('distant_charge').'</span>'; $reload = true; }
 			else $erreur = $statut = '<span style="color:red">'.couteauprive_T('distant_echoue').'</span>';
 		} else $erreur = $statut = couteauprive_T('distant_inactif');
+		if($erreur) {
+			$outil['erreurs']['fichiers_distants'][$outil[$i]] = -1;
+			$message .= "\n_ " . couteauprive_T('local_ko', array('file'=>cs_root_canonicalize($file)));
+		}
 		$a[] = '[{'.basename($file)."}->{$outil[$i]}]\n_ ".$statut.$message;
-		if($erreur) $outil['erreurs']['fichiers_distants'][$outil[$i]] = -1;
 	}
 	if($tester) return $a;
 	if($reload) $reload = "<input class='cs_sobre' type='submit' value=\" [" 

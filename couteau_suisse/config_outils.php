@@ -1332,8 +1332,8 @@ add_outil( array(
 	'code:options' => "%%jcorner_classes%%",
 	// fichier distant pour le plugin jQuery : http://github.com/malsup/corner/commits/
 	'distant' => defined('_SPIP20100')
-		// version 2.12 (23-MAY-2011), jQuery v1.3.2 mini 
-		?'http://github.com/malsup/corner/raw/7ebb1bfc911faaa029d0b229303187f6c5cc5c07/jquery.corner.js'
+		// version 2.13 (19-FEB-2013), jQuery v1.3.2 mini 
+		?'http://raw.github.com/malsup/corner/82114d5699feea4c66bf093a9a615387857eca02/jquery.corner.js'
 		// version 2.03 (05-DEC-2009) 
 		:'http://github.com/malsup/corner/raw/46bbbc8706853c879c9224b7ebf5f284f726314d/jquery.corner.js',
 	'pipelinecode:insert_head' => 'if(%%jcorner_plugin%%) {$flux.=\'<script src="\'.find_in_path("lib/jcorner/distant_jquery.corner.js").\'" type="text/javascript"></script>\'."\n";}',

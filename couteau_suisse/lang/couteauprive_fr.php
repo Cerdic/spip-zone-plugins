@@ -5,6 +5,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+'local_ko'=> "La mise à jour automatique du fichier local «@file@» a échoué. Si l'outil dysfonctionne, tentez une mise à jour manuelle.",
+
 	// 2
 	'2pts_non' => ' : non',
 	'2pts_oui' => ' : oui',
@@ -420,7 +422,7 @@ _ Voyez le résultat sur cette page : [->http://www.malsup.com/jquery/corner/].
 
 Listez ci-dessous les objets de votre squelette à arrondir en utilisant la syntaxe CSS (.class, #id, etc. ). Utilisez le le signe « = » pour spécifier la commande jQuery à utiliser et un double slash (« // ») pour les commentaires. En absence du signe égal, des coins ronds seront appliqués (équivalent à : <code>.ma_classe = .corner()</code>).[[%jcorner_classes%]]
 
-Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corners}. Le Couteau Suisse peut l\'installer directement si vous cochez la case suivante. [[%jcorner_plugin%]]',
+Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : «{Round Corners}». Si le fichier distant est correctement installé et si vous cochez la case suivante, le Couteau Suisse peut l\'activer automatiquement. [[%jcorner_plugin%]]',
 	'jcorner:nom' => 'Jolis Coins',
 	'jcorner_plugin' => '« Round Corners plugin »',
 	'jq_localScroll' => 'jQuery.LocalScroll ([démo->http://demos.flesler.com/jquery/localScroll/])',

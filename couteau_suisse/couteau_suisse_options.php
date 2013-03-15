@@ -289,24 +289,25 @@ function cs_nettoie(&$flux) {
 }
 
 if(defined('_SPIP30000')) {
-// Utilise par maj_auto et le CS lui-meme pour mettre a jour les plugins (ou les paquets de SVP)
-function action_charger_plugin() {
-#	include_spip('inc/minipres'); die(minipres('Partie en d&eacute;veloppement.<br/>Mettre &agrave; jour votre plugin prochainement.'));
-	if(is_array($ids_paquet = _request('ids_paquet'))) {
-		// il s'agit d'une liste de paquets, on donne la main a SVP (SPIP >= 3.0)
-		include_spip('outils/maj_auto_action_rapide');
-		maj_auto_svp_maj_plugin($ids_paquet);
+	// Utilise par maj_auto et le CS lui-meme pour mettre a jour les plugins (ou les paquets de SVP)
+	function action_charger_plugin() {
+	#	include_spip('inc/minipres'); die(minipres('Partie en d&eacute;veloppement.<br/>Mettre &agrave; jour votre plugin prochainement.'));
+		if(is_array($ids_paquet = _request('ids_paquet'))) {
+			// il s'agit d'une liste de paquets, on donne la main a SVP (SPIP >= 3.0)
+			include_spip('outils/maj_auto_action_rapide');
+			maj_auto_svp_maj_plugin($ids_paquet);
+		}
+		elseif(intval($id_paquet = _request('url_zip_plugin2'))) {
+			// il s'agit d'un paquet, on donne la main a SVP (SPIP >= 3.0)
+			include_spip('outils/maj_auto_action_rapide');
+			maj_auto_svp_maj_plugin(array($id_paquet));
+		}
+		// methode traditionnelle SPIP2, fonctionne egalement sous SPIP3 grace aux 2 lib distantes
+		// lancement de la maj (prise en compte de fichiers fantomes restes apres mise à jour de SPIP)
+		if((include_spip('action/charger_plugin') OR include_spip('lib/maj_auto/distant_action_charger_plugin'))
+			&& (include_spip('inc/charger_plugin') OR include_spip('lib/maj_auto/distant_inc_charger_plugin')))
+			action_charger_plugin_dist();
 	}
-	elseif(intval($id_paquet = _request('url_zip_plugin2'))) {
-		// il s'agit d'un paquet, on donne la main a SVP (SPIP >= 3.0)
-		include_spip('outils/maj_auto_action_rapide');
-		maj_auto_svp_maj_plugin(array($id_paquet));
-	}
-	// methode traditionnelle SPIP2, fonctionne egalement sous SPIP3 grace aux 2 lib distantes
-	// lancement de la maj (prise en compte de fichiers fantomes restes apres mise à jour de SPIP)
-	if((include_spip('action/charger_plugin') OR include_spip('lib/maj_auto/distant_action_charger_plugin'))
-		&& (include_spip('inc/charger_plugin') OR include_spip('lib/maj_auto/distant_inc_charger_plugin')))
-		action_charger_plugin_dist();
-}}
+}
 
 ?>
