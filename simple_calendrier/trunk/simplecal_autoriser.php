@@ -23,9 +23,17 @@ $type  = 'evenement'
 */
 
 
+// bouton du bandeau
+function autoriser_evenements_menu_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
+}
+function autoriser_evenementcreer_menu_dist($faire, $type, $id, $qui, $opt){
+	$whos = simplecal_profils_autorises_a_creer();
+	return in_array($qui['statut'], $whos);
+}
 
-// Bouton defini dans plugin.xml
-function autoriser_bt_simplecal_accueil($faire, $type, $id, $qui, $opt) {
+
+function autoriser_simplecal_lister($faire, $type, $id, $qui, $opt){
 	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
@@ -71,6 +79,16 @@ function simplecal_profils_autorises_a_creer(){
 	return $whos;
 }
 
+// Propriétaire de l'évènement ?
+function simplecal_auteur_evenement($id, $id_auteur){
+	$b = false;
+	$nb = sql_countsel('spip_auteurs_liens as lien', "lien.objet='evenement' and lien.id_objet=".$id." and lien.id_auteur = ".$id_auteur);
+	if ($nb>0){
+		$b = true;
+	}
+	return $b;
+}
+
 // Creer un evenement
 function autoriser_evenement_creer($faire, $type, $id, $qui, $opt) {
 	$whos = simplecal_profils_autorises_a_creer();
@@ -78,7 +96,37 @@ function autoriser_evenement_creer($faire, $type, $id, $qui, $opt) {
 }
 
 // Modifier l'evenement $id
+// Redacteur : Comme pour les articles : on ne peut plus le modifier une fois publié
 function autoriser_evenement_modifier($faire, $type, $id, $qui, $opt) {
+	$autorise = false;
+
+	// Administrateur ?
+	if ($qui['statut'] == '0minirezo'){
+		$autorise = true;
+	} else {
+		// Redacteur ? (+ si config l'autorise)
+		if ($qui['statut'] == '1comite' && $GLOBALS['meta']['simplecal_autorisation_redac'] == 'oui'){
+			
+			// Si l'autorisation n'est pas fonction d'un statut, ou que ce statut n'est pas 'publie'
+			if (!isset($opt['statut']) OR $opt['statut']!=='publie') {
+				// Le statut de l'objet n'est pas publie
+				$row = sql_fetsel("statut", "spip_evenements", "id_evenement=$id");
+				if (in_array($row['statut'], array('prop','prepa', 'poubelle'))){
+					// Auteur = propriétaire de l'objet.
+					if (simplecal_auteur_evenement($id, $qui['id_auteur'])){
+						$autorise = true;
+					}
+				}
+			} else {
+				// l'autorisation est fonction d'un statut (cf. autoriser:instituer_objet).
+				// ET ce statut est publie
+				// => False
+			}
+		}
+	}
+	return $autorise;
+}
+function autoriser_evenement_modifier_bkp($faire, $type, $id, $qui, $opt) {
 	$autorise = false;
 	
 	// Administrateur ?
@@ -96,7 +144,7 @@ function autoriser_evenement_modifier($faire, $type, $id, $qui, $opt) {
 				if ($nb>0){
 					$autorise = true;
 				}
-			}            
+			}
 		}
 	}
 	return $autorise;

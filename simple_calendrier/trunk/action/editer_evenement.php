@@ -153,10 +153,12 @@ function evenement_instituer($id_evenement, $c) {
 	$langue_old = $row['lang'];
 	$langue_choisie_old = $row['langue_choisie'];
 
-	if ($c['statut']
-	AND $c['statut'] != $statut
-	AND autoriser('publierdans', 'rubrique', $id_rubrique)) {
-		$statut = $champs['statut'] = $c['statut'];
+	if ($c['statut'] AND $c['statut'] != $statut){
+		if (autoriser('publierdans', 'rubrique', $id_rubrique)) {
+			$statut = $champs['statut'] = $c['statut'];
+		} else if (autoriser('modifier', 'evenement', $id_evenement) AND $statut != 'publie') {
+			$statut = $champs['statut'] = $c['statut'];
+		}
 	}
 
 	// Changer de rubrique ?

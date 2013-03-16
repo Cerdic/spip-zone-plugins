@@ -125,7 +125,6 @@ function simplecal_vider_tables($nom_meta_base_version) {
 	effacer_meta('simplecal_autorisation_redac');
 	effacer_meta('simplecal_rubrique');
 	effacer_meta('simplecal_refobj');
-	effacer_meta('simplecal_themeprive');
 	effacer_meta('simplecal_themepublic');
 	effacer_meta('simplecal_descriptif');
 	effacer_meta('simplecal_texte');

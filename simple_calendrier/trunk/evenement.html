@@ -29,7 +29,7 @@
 			<div class="cartouche">
 				<h1 class="#EDIT{titre}">[(#LOGO_EVENEMENT_RUBRIQUE|image_reduire{40,*}) ]#TITRE</h1>
 				<p class="info-publi">
-                    <abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>
+                    <abbr class="published">[(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})]</abbr>
                     [ &mdash; (#LIEU)]
                 </p>
 			</div>
@@ -58,10 +58,11 @@
 			[(#REM) Evenements dans la meme rubrique ]
 			<B_evenements>
 			<div class="menu menu_breves">
-				<h2><:autres_breves:></h2>
+				<h2><:simplecal:autres_evenements:></h2>
+                #SIMPLE_CALENDRIER
 				<ul>
-					<BOUCLE_evenements(EVENEMENTS) {id_rubrique} {!par date} {0,10}>
-					<li>[(#DATE|affdate_jourcourt) &ndash; ]<a href="#URL_EVENEMENT"[ class="(#EXPOSE)"]>#TITRE</a></li>
+					<BOUCLE_evenements(EVENEMENTS) {id_rubrique} {a_venir} {par date_debut} {0,10}>
+					<li>[(#DATE_DEBUT|simplecal_affdates{#DATE_FIN}) &ndash; ]<a href="#URL_EVENEMENT"[ class="(#EXPOSE)"]>#TITRE</a></li>
 					</BOUCLE_evenements>
 				</ul>
 			</div>

@@ -2,12 +2,12 @@
 
 <p>
     <:simplecal:demo_description:>
-    <br /><:simplecal:demo_voir:> /plugins/simple-calendrier/prive/contenu/simplecal-demo.html
+    <br /><:simplecal:demo_voir:> /plugins/simple_calendrier/prive/contenu/simplecal_demo.html
 </p>
 
 #SIMPLE_CALENDRIER
 
-
+#BOITE_OUVRIR{'',simple}
 <h2><:simplecal:demo_les_evenements_critere:> {du_mois}</h2>
 <B_evta>
 <ul>
@@ -20,9 +20,10 @@
 </B_evta>
 <:simplecal:demo_aucun:>
 <//B_evta>
+#BOITE_FERMER
 
 
-
+#BOITE_OUVRIR{'',simple}
 <h2><:simplecal:demo_les_evenements_critere:> {du_mois}{a_venir}</h2>
 <B_evtb>
 <ul>
@@ -35,7 +36,10 @@
 </B_evtb>
 <:simplecal:demo_aucun:>
 <//B_evtb>
+#BOITE_FERMER
 
+
+#BOITE_OUVRIR{'',simple}
 <h2><:simplecal:demo_les_evenements_critere:> {du_mois}{!a_venir}</h2>
 <B_evtc>
 <ul>
@@ -48,9 +52,10 @@
 </B_evtc>
 <:simplecal:demo_aucun:>
 <//B_evtc>
+#BOITE_FERMER
 
 
-
+#BOITE_OUVRIR{'',simple}
 <h2><:simplecal:demo_les_evenements_critere:> {a_venir}</h2>
 <B_evtd>
 <ul>
@@ -64,4 +69,5 @@
 </B_evtd>
 <:simplecal:demo_aucun:>
 <//B_evtd>
+#BOITE_FERMER
 

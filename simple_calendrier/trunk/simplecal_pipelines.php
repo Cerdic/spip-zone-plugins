@@ -17,30 +17,15 @@ include_spip('inc/simplecal_utils');
 // Pipeline. Entete des pages de l'espace prive
 function simplecal_header_prive($flux){
 	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'simplecal_style_prive.css" />';
-	
-	//  CSS DatePicker : voir dans 'prive/css/datepicker/' - plus de themes : http://jqueryui.com/themeroller/
-	$theme_prive = $GLOBALS['meta']['simplecal_themeprive'];
-	// ---
-	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_prive.'/ui.theme.css" />';
-	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_prive.'/ui.core.css" />';
-	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_prive.'/ui.datepicker.css" />';
-	// ---    
-	
-	return $flux;
+    return $flux;
 }
 
 // Pipeline. Entete des pages de l'espace public
-function simplecal_insert_head($flux) {
-	
-	//  CSS DatePicker : voir dans 'prive/css/datepicker/' - plus de themes : http://jqueryui.com/themeroller/
-	$theme_public = $GLOBALS['meta']['simplecal_themepublic'];
-	// ---
-	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_public.'/ui.theme.css" />';
-	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_public.'/ui.core.css" />';
-	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_public.'/ui.datepicker.css" />';
-	// ---    
-	
-	return $flux;
+function simplecal_insert_head_css($flux) {
+	// Thèmes basé sur : http://jqueryui.com/themeroller/
+    $theme_public = $GLOBALS['meta']['simplecal_themepublic'];
+    $flux .= "\n".'<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_SIMPLECAL.'css/datepicker/'.$theme_public.'.css" />';
+    return $flux;
 }
 
 
@@ -55,6 +40,7 @@ function simplecal_accueil_encours($flux) {
 
 	return $flux;
 }
+
 
 // Pipeline : elements 'en cours' d'une rubrique
 function simplecal_rubrique_encours($flux) {
@@ -168,7 +154,7 @@ function simplecal_boite_infos($flux){
 	if (in_array($type, array("auteur", "rubrique"))){
 		if (($pos = strpos($flux['data'],'<!--nb_elements-->'))!==FALSE) {
 			if ($n_evt > 0){
-				$aff = '<div>'.singulier_ou_pluriel($n_evt, 'simplecal:info_1_evenement', 'simplecal:info_n_evenements').'</div>';
+				$aff = '<div>'.singulier_ou_pluriel($n_evt, 'simplecal:info_1_evenement', 'simplecal:info_nb_evenements').'</div>';
 			}
 			$flux['data'] = substr($flux['data'],0,$pos).$aff.substr($flux['data'],$pos);
 		}
@@ -227,7 +213,7 @@ function simplecal_affiche_gauche($flux) {
 function simplecal_compter_contributions_auteur($flux){
 	$id_auteur = intval($flux['args']['id_auteur']);
 	if ($cpt = sql_countsel("spip_auteurs_liens AS lien", "lien.objet='evenement' and lien.id_auteur=".intval($flux['args']['id_auteur']))){
-		$contributions = singulier_ou_pluriel($cpt,'simplecal:info_1_evenement','simplecal:info_n_evenements');
+		$contributions = singulier_ou_pluriel($cpt,'simplecal:info_1_evenement','simplecal:info_nb_evenements');
 		$flux['data'][] = $contributions;
 	}
 	return $flux;

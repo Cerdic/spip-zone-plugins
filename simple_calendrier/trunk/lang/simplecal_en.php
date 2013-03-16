@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur_msg_ajout' => 'Author added !',
 	'auteur_msg_retrait' => 'Author removed !',
 	'alt_img_logo' => 'Simple-Calendrier',
+    'autres_evenements' => 'Other events',
 	
 
 // B
@@ -124,7 +125,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inconnu' => 'unknown',
 	'info_evenements_liees_mot' => 'Events associated with this keyword',
 	'info_1_evenement' => '1&nbsp;event',
-	'info_n_evenements' => '@nb@ events',
+	'info_nb_evenements' => '@nb@ events',
 	'info_evenement' => 'event',
 	'icone_nouvel_evenement' => 'Write a new event',
 	'icone_evenements' => 'Events',

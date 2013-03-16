@@ -1,7 +1,7 @@
 <paquet
 	prefix="simplecal"
 	categorie="date"
-	version="2.0.3"
+	version="2.0.4"
 	etat="dev"
 	compatibilite="[3.0.0-dev;["
 	logo="prive/themes/spip/images/evenement-32.png"
@@ -17,9 +17,9 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/simplecal.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/simplecal.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="configurer_liste_metas" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
-	<pipeline nom="autoriser" inclure="simplecal_autoriser.php" />
+	<pipeline nom="autoriser" inclure="simplecal_autoriser.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="header_prive" inclure="simplecal_pipelines.php" />    
-	<pipeline nom="insert_head" inclure="simplecal_pipelines.php" />
+    <pipeline nom="insert_head_css" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="boite_infos" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="affiche_milieu" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="affiche_gauche" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->

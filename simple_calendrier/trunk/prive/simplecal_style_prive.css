@@ -17,8 +17,5 @@
 
 .simplecal-nbinrub { margin-bottom:0.5em; padding:0 0.5em 0.5em; border-bottom:1px dotted #000000; }
 
-/* datepicker */
-#ui-datepicker-div { font-size:0.7em; }
-
 ul.simplecal-portlet { list-style-type:disc; }
 ul.simplecal-portlet li { margin-left:20px; }
