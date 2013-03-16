@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_formats_ecriture_impossible' => 'Zápis značiek do týchto formátov sa nedá vykonať:',
 	'erreur_logiciels_indisponibles' => 'Momentálne nemôžete zapisovať značky do všetkých dostupných formátov.  Niektoré programy nie sú totiž k dispozícii.',
 	'erreur_necessite' => 'vyžaduje si @soft@',
-	'explication_cover_defaut' => 'V súboroch so zvukmi na internete je predvolená miniatúra (URL nastavte nižšie) priradená k súboru so zvukom. Ak je aktivovaná možnosť prepisovania značiek úpravy log, obal so značkami id3 bude aktualizovaný tiež.',
+	'explication_cover_defaut' => 'V súboroch so zvukmi na internete je predvolená miniatúra (URL nastavte nižšie) priradená k súboru so zvukom. Ak je aktivovaná možnosť prepisovania značiek úpravy log, obal so značkami id3 bude aktualizovaný tiež.', # MODIF
 
 	// F
 	'formulaire_modifier_id3' => 'Upraviť metadata súboru:',
