@@ -1,7 +1,7 @@
 <paquet
 	prefix="skeleditor"
 	categorie="outil"
-	version="2.7.3"
+	version="2.7.4"
 	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="images/skeleditor-32.png"
