@@ -1,4 +1,4 @@
-<traduction module="paquet-seo" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/seo/lang/" reference="fr">
+<traduction module="paquet-seo" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/seo/trunk/lang/" reference="fr">
 	<langue code="en" />
 	<langue code="fr" />
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/paquet-seo?lang_cible=ru">
