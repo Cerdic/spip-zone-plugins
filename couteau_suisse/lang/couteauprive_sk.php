@@ -412,7 +412,7 @@ _ Príklady nájdete na tejto stránke: [->http://www.malsup.com/jquery/corner/]
 
 Vytvorte zoznam objektov v svojich šablónach, ktoré majú byť zaoblené. Použite syntax CSS  (.class, #id, atď.). Na použitie  príkazu jQuery použite znak " = "  a na komentáre dve lomky (" // "). Ak nezadáte žiaden znak rovná sa, použije sa ekvivalent k zaobleným rohom  <code>.ma_classe = .corner().</code> [[%jcorner_classes%]]
 
-Pozor! Na to, aby fungoval, tento nástroj potrebuje  zásuvný modul {Zaoblené rohy} typu jQuery. Ak zaškrtnete toto pole, modul Vreckový nožík ho môže nainštalovať automaticky.[[%jcorner_plugin%]]',
+Pozor! Na to, aby fungoval, tento nástroj potrebuje  zásuvný modul {Zaoblené rohy} typu jQuery. Ak zaškrtnete toto pole, modul Vreckový nožík ho môže nainštalovať automaticky.[[%jcorner_plugin%]]', # MODIF
 	'jcorner:nom' => 'Pekné rohy',
 	'jcorner_plugin' => '" Round Corners plugin "',
 	'jq_localScroll' => 'jQuery.LocalScroll ([demo->http://demos.flesler.com/jquery/localScroll/])',
@@ -544,6 +544,7 @@ _ • {predvolený:} automatické nahrádzanie (od verzie 2.0).
 [[%liens_orphelins%]]',
 	'liens_orphelins:description1' => '[[Ak má internetová adresa viac ako %long_url% znakov, SPIP ju zmenší na %coupe_url% znakov]].',
 	'liens_orphelins:nom' => 'Pekné www adresy',
+	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tentez une mise à jour manuelle.', # NEW
 	'log_brut' => 'Údaje zapísané ako neformátovaný text (nie ako HTML)',
 	'log_fileline' => 'Doplňujúce údaje o ladení',
 

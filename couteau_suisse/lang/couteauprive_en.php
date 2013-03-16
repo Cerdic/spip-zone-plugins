@@ -421,7 +421,7 @@ _ See this page for examples: [->http://www.malsup.com/jquery/corner/].
 
 Make a list below of the elements in your templates which are to be rounded by using the CSS syntax (.class, #id, etc. ). Use the sign " = " to specify the jQuery command to apply, and a double slash (" // ") for any comments. If no equals sign is provided, rounded corners equivalent to <code>.my_class = .corner()</code> will be applied.[[%jcorner_classes%]]
 
-N.B. This tool requires the {Round Corners} jQuery plugin in order to function. The Swiss Army Knife plugin can install it for you automatically if you check this box. [[%jcorner_plugin%]]',
+N.B. This tool requires the {Round Corners} jQuery plugin in order to function. The Swiss Army Knife plugin can install it for you automatically if you check this box. [[%jcorner_plugin%]]', # MODIF
 	'jcorner:nom' => 'Pretty Corners',
 	'jcorner_plugin' => '" Round Corners plugin "',
 	'jq_localScroll' => 'jQuery.LocalScroll ([demo->http://demos.flesler.com/jquery/localScroll/])',
@@ -553,6 +553,7 @@ _ • {By default}: automatic replacement (from SPIP version 2.0).
 [[%liens_orphelins%]]',
 	'liens_orphelins:description1' => '[[If the URL is more than %long_url% characters long, SPIP will reduce it to %coupe_url% characters]].',
 	'liens_orphelins:nom' => 'Fine URLs',
+	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tentez une mise à jour manuelle.', # NEW
 	'log_brut' => 'Data written in raw format (no HTML)',
 	'log_fileline' => 'Extra debug information',
 

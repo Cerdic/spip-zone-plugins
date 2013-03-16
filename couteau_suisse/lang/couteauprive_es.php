@@ -538,6 +538,7 @@ _ • {Extendido}: se reemplazan además los enlaces del tipo {<html>yo@spip.net
 [[%liens_orphelins%]]', # MODIF
 	'liens_orphelins:description1' => '[[Si l\'URL rencontrée dépasse les %long_url% caractères, alors SPIP la réduit à %coupe_url% caractères]].', # NEW
 	'liens_orphelins:nom' => 'Buenas URLs',
+	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tentez une mise à jour manuelle.', # NEW
 	'log_brut' => 'Données écrites en format brut (non HTML)', # NEW
 	'log_fileline' => 'Informations supplémentaires de débogage', # NEW
 

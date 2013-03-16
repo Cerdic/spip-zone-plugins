@@ -5,8 +5,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'local_ko'=> "La mise à jour automatique du fichier local «@file@» a échoué. Si l'outil dysfonctionne, tentez une mise à jour manuelle.",
-
 	// 2
 	'2pts_non' => ' : non',
 	'2pts_oui' => ' : oui',
@@ -554,6 +552,7 @@ _ • {Par défaut} : remplacement automatique d\'origine (à partir de la versi
 [[%liens_orphelins%]]',
 	'liens_orphelins:description1' => '[[Si l\'URL rencontrée dépasse les %long_url% caractères, alors SPIP la réduit à %coupe_url% caractères]].',
 	'liens_orphelins:nom' => 'Belles URLs',
+	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tentez une mise à jour manuelle.',
 	'log_brut' => 'Données écrites en format brut (non HTML)',
 	'log_fileline' => 'Informations supplémentaires de débogage',
 

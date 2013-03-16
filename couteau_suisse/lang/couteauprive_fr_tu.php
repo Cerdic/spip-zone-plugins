@@ -422,7 +422,7 @@ _ Regarde le résultat sur cette page : [->http://www.malsup.com/jquery/corner/]
 
 Liste ci-dessous les objets de ton squelette à arrondir en utilisant la syntaxe CSS (.class, #id, etc. ). Utilise le le signe « = » pour spécifier la commande jQuery à utiliser et un double slash (« // ») pour les commentaires. En absence du signe égal, des coins ronds seront appliqués (équivalent à : <code>.ma_classe = .corner()</code>).[[%jcorner_classes%]]
 
-Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corners}. Le Couteau Suisse peut l\'installer directement si tu coches la case suivante. [[%jcorner_plugin%]]',
+Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corners}. Le Couteau Suisse peut l\'installer directement si tu coches la case suivante. [[%jcorner_plugin%]]', # MODIF
 	'jcorner:nom' => 'Jolis Coins',
 	'jcorner_plugin' => '« Round Corners plugin »',
 	'jq_localScroll' => 'jQuery.LocalScroll ([démo->http://demos.flesler.com/jquery/localScroll/])',
@@ -554,6 +554,7 @@ _ • {Par défaut} : remplacement automatique d\'origine (à partir de la versi
 [[%liens_orphelins%]]',
 	'liens_orphelins:description1' => '[[Si l\'URL rencontrée dépasse les %long_url% caractères, alors SPIP la réduit à %coupe_url% caractères]].',
 	'liens_orphelins:nom' => 'Belles URLs',
+	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tentez une mise à jour manuelle.', # NEW
 	'log_brut' => 'Données écrites en format brut (non HTML)',
 	'log_fileline' => 'Informations supplémentaires de débogage',
 

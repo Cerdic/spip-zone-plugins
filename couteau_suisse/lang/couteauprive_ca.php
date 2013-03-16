@@ -425,7 +425,7 @@ _ Podeu veure\'n el resultat a la pàgina següent: [->http://www.malsup.com/jqu
 
 Llisteu més avall els objectes del vostre esquelet que cal arrodonir utilitzant la sintaxi CSS (.class, #id, etc. ). Feu servir el signe « = » per especificar el comandament jQuery que s\'ha de fer servir i una doble barra inclinada (« // ») pels comentaris. En absència del signe igual, s\'aplicaran les cantonades rodones (equivalent a: <code>.ma_classe = .corner()</code>).[[%jcorner_classes%]]
 
-Atenció, aquesta eina necessita per funcionar el plugin {jQuery}: {Round Corners}. El Ganivet Suís es pot instal·lar directament si marqueu amb una creu la casella següent. [[%jcorner_plugin%]]',
+Atenció, aquesta eina necessita per funcionar el plugin {jQuery}: {Round Corners}. El Ganivet Suís es pot instal·lar directament si marqueu amb una creu la casella següent. [[%jcorner_plugin%]]', # MODIF
 	'jcorner:nom' => 'Jolis Coins',
 	'jcorner_plugin' => '« Round Corners plugin »',
 	'jq_localScroll' => 'jQuery.LocalScroll ([demo->http://demos.flesler.com/jquery/localScroll/])',
@@ -557,6 +557,7 @@ _ • {Par defecte): substitució automàtica d\'origen (a partir de la versió 
 [[%liens_orphelins%]]',
 	'liens_orphelins:description1' => '[[Si l\'URL trobat sobrepassa els %long_url% caràcters, SPIP el redueix llavors a %coupe_url% caràcters]].',
 	'liens_orphelins:nom' => 'URLs bonics',
+	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tentez une mise à jour manuelle.', # NEW
 	'log_brut' => 'Données écrites en format brut (non HTML)', # NEW
 	'log_fileline' => 'Informations supplémentaires de débogage', # NEW
 
