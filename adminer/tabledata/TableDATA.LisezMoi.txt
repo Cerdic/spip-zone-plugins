@@ -1,0 +1,160 @@
+//=====================================================================
+// TABLE DATA v2 (PLUGIN)                    Contribution pour SPIP 2.0
+//
+// fichier : tabledata/LisezMoi.txt
+// version : 2.2.1
+// Dernière mise à jour : le 25 mai 2009
+//
+//                                      Christophe BOUTIN - Opalys.info
+//                                mon mél :  christophe A T cboutin.net
+// ====================================================================
+
+
+- amélioration de la gestion des clés définies pour la table
+- gestion clé primaire multiple
+
+Précédemment :
+
+- Portage pour SPIP 2
+- suppression des fonctions spécifique mysql
+  et remplacement par les fonction sql_...
+  afin d'assurer la portabilité et l'utilisation avec d'autres bases
+- Ajout de la fonction effacer enregistrement
+
+// ====================================================================
+
+L’objet de cette contrib est de visualiser, ajouter, modifier
+et supprimer le contenu de tables extra.
+
+Ce plugin est dynamique, il s’adapte à la strucutre de la table que
+vous avez créée. Les fonctions sont activées suivant la structure de la
+table (notamment la clé primaire).
+
+Sécurités et information utilisateur :
+
+   * S'il n'y a pas de clé primaire : La modification est à vos risques et périls.
+     (Si un 2nd enregistrement a les mêmes valeurs que l'enregistremetn pointé pour modif.
+     , ils seront tous affectés par la modification! )
+
+   * S'il y a plus d'un champ dans la clé primaire :
+     L'ajout n'était pas autorisées, il l'est maintenant.
+     La clé primaire veillera à éviter les doublons.
+
+   * Si il a une clé primaire sans auto-incrément
+     La modification est autorisée et l'ajout l'est également maintenant
+     Idem la clé primaire veillera à éviter les doublons.
+
+   * Si il a une clé primaire avec auto-incrément
+     La modification et l'ajout sont autorisées
+
+
+PRINCIPE DE FONCTIONNEMENT
+==========================
+
+Lancement du script :
+---------------------
+Il suffit de pointer l’icone "configuration" puis de cliquer sur l’icone
+"gestion table Sql". Une liste des tables extra (n’ayant pas le préfixe
+des tables spip) est affichée. Il suffit de choisir la table sur
+laquelle on souhaite travailler.
+
+Le script retourne une nouvelle page avec :
+- la liste des enregistrements (par groupe s’ils sont nombreux)
+- avec au dessous un formulaire d’ajout.
+
+Modifier les valeurs
+--------------------
+Pour modifier les valeurs d’un enregistrement, il suffit de
+double-cliquer dessus, alors un formulaire d’édition s’affiche avec les
+valeurs actuelles.
+
+Effacer une ligne de valeurs (un enregistrement)
+----------------------------
+Pour effacerun enregistrement, il suffit de
+cliquer sur la croix rouge. Alors un formulaire de confirmation s'affiche avec les
+valeurs actuelles.
+
+
+En tapant l'url
+---------------
+On peut également le lancer en ligne de commande : Pour gérer le contenu
+d’une table ’magasin’, il suffit de taper l’url suivante :
+
+url = .../spip/ecrire/ ?exec=tabledata&table=magasin
+
+
+
+INSTALLATION
+============
+
+Il suffit tout simplement de décompresser le ZIP dans le répertoire
+/plugin/ Puis de l’activer par le menu
+’configuration’/’gestion des plugins’
+
+
+Pour la petite histoire
+=======================
+En fait, une contrib de Déesse A., ’La gestion de tables SQL
+supplémentaires’ (http://www.spip-contrib.net/La-gestion-de-tables-SQL),
+m’a beaucoup plu tout en me laissant sur ma fin... On ne pouvait
+que AJOUTER...
+Alors je me suis lancé pour ajouter les fonction de visualisation
+des données existante et leur modification.
+
+Et cette année, j'ai lu un article de contrib
+où Marc VALLETEAU de MOULLIAC expliquait utiliser ce plugin.
+Ce commentaire m'a motivé pour l'adapter à SPIP 2. ;-)
+
+
+Espérant que vous apprécirez ce plugin.
+Bien à vous.
+
+
+Et Merci à Déesse A.
+
+
+
+==================================================================================
+En détail : Dernières modifications :
+==================================================================================
+
+v.2.2.1 - 25 mai 2009 -------------------------------
+- Correction affichage tableau avec overflow
+
+v.2.2.0 - 24 mai 2009 -------------------------------
+- Gestion pour les clés multiples ...
+  (Fonctionne si une clé simple est définie sur la table)
+  Testé sur les tables spip_document_liens et spip_auteurs_articles
+
+v.2.1.0 - 7 mai 2009 -------------------------------
+- remplacer $table_prefix par $GLOBALS["connexions"][0]["prefixe"]
+- Ajout de 'utf8_decode' pour l'affichage des données de la base.
+- Ajout d'une lien voir toutes les tables en haut à gauche
+
+Et le gros plus de cette version :
+- Gestion de modif et effacement sur clé multiple
+  (reste un pb si il y a des caractère accentués dans la clé...
+   cas rare, à priori...)
+
+v.2.0.7 - 22 avril 2009 ---------------------------
+- Rassemblement de toutes les fiches en une seule
+  Ainsi la def des champ input n'est écrite qu'une fois (éviter erreur code)
+- Remise en forme code partie ShowTable
+- Correction de la fermeture de page (pb <DIV>)
+- Modif taille des champs <TEXTAREA> pour un meilleur affichage
+- Correction d'un bug dans l'ajout d'enregistrements
+
+v2.0.6 - 21 avril 2009 ----------------------------
+- Mise en conformité avec les fonctions sql_...
+  Afin d'assurer un portage facile et compatilité ave postgreSQL et LiteSQL...
+
+v2.05 - 19 avril 2009 -----------------------------
+- Ajout de la fonction supprimer
+- Renommage des fonction suivant tabledata_...
+- Complément d'info dans le bandeau latéral
+
+v2.0.0 à 2.0.4 - 14-18 avril 2009 -----------------------------
+- Portage vers SPIP v2
+- Correction des caractères accentués (code ISO)
+- Intégration des modif proposées par JFM
+- Correction de b

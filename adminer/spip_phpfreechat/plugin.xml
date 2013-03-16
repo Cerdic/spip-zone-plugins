@@ -1,0 +1,15 @@
+<plugin>
+	<nom>SPIP PhpFreeChat - phpFreeChat avec spip</nom>
+	<auteur>Frank</auteur>
+	<licence>GNU/GLP</licence>
+	<version>0.1</version>
+	<description>
+	SPIP PhpFreeChat est un plugin d'integration du script de chat phpFreeChat &agrave; SPIP. Il suffit d'inserer la balise #SPIP_PFC dans un squelette pour voir apparaitre la fen&ecirc;tre de chat.
+	
+  Une fois le plugin activ&#233;, [consulter la page d&#233;monstration->../spip.php?page=demo_spip_phpfreechat&var_mode=recalcul]
+	</description>
+	<etat>dev</etat>
+	<prefix>spip_phpfreechat</prefix>
+  <necessite id="lib:phpfreechat-1.3" src="http://sourceforge.net/projects/phpfreechat/files/branch%201.x%20%28stable%29/1.3/phpfreechat-1.3.zip/download" />
+  <fonctions>spip_phpfreechat_fonctions.php</fonctions>
+</plugin>

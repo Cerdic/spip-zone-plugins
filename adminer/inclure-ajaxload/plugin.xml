@@ -1,0 +1,40 @@
+<plugin>
+	<nom>AjaxLoad pour #INCLURE</nom>
+	<auteur>
+	Fil &amp; ARNO* &#169; 2009 - GNU/GPL
+	</auteur>
+	<version>
+	1.1
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+	Ajoute une option <code>{ajaxload}</code> &agrave; la balise <code>#INCLURE</code>. 
+	La noisette n'est alors pas incluse, mais charg&eacute;e dynamiquement en Ajax au chargement de la page.
+
+	Autre m&eacute;thode: <code>{ajaxload=html}</code> fabrique une noisette statique (en HTML non dynamique) 
+	dans <code>/local/cache-ajaxload</code>, son appel se faisant ainsi hors SPIP. 
+	Le cache n'est donc plus g&eacute;r&eacute; par le <code>#CACHE</code> de SPIP; il est par d&eacute;faut de 2 heures, on peut le forcer
+	en ajoutant le crit&egrave;re <code>{ttl_ajaxload=60*60*24}</code>.
+
+	Pour g&eacute;rer les chargements Ajax &laquo;&nbsp;&agrave; la main&nbsp;&raquo;, on peut r&eacute;cup&eacute;rer l'URL des noisettes en
+	modifiant le crit&egrave;re:
+-- <code>{ajaxload=url}</code> retourne l'URL de la noisette dynamique;
+-- <code>{ajaxload=url_html}</code> retourne l'URL du fichier HTML statique.
+
+	</description>
+	<prefix>
+	INCLUREAJAXLOAD
+	</prefix>
+	<options>inclure-ajaxload.php</options>
+	<pipeline>
+		<nom>affichage_final</nom>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+	</pipeline>
+	<chemin dir='' />
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<categorie>outil</categorie>
+</plugin>
