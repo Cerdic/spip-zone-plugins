@@ -12,102 +12,15 @@
 					<p class="explication"><:thumbsites:cfg_inf_choix_serveur:></p>
 					<label for="serveur"><:thumbsites:cfg_lbl_serveur:></label>
 					<select name="serveur" id="serveur">
-						<option value="thumbshots"[ (#ENV{serveur, thumbshots}|=={thumbshots}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_thumbshots:></option>
-						<option value="thumbshots_de"[ (#ENV{serveur, thumbshots}|=={thumbshots_de}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_thumbshots_de:></option>
-						<option value="websnapr"[ (#ENV{serveur, thumbshots}|=={websnapr}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_websnapr:></option>
-						<option value="robothumb"[ (#ENV{serveur, thumbshots}|=={robothumb}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_robothumb:></option>
-						<option value="miwim"[ (#ENV{serveur, thumbshots}|=={miwim}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_miwim:></option>
-						<option value="apercite"[ (#ENV{serveur, thumbshots}|=={apercite}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_apercite:></option>
+						<option value="apercite"[ (#ENV{serveur, apercite}|=={apercite}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_apercite:></option>
+						<option value="websnapr"[ (#ENV{serveur, apercite}|=={websnapr}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_websnapr:></option>
+						<option value="robothumb"[ (#ENV{serveur, apercite}|=={robothumb}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_robothumb:></option>
+						<option value="miwim"[ (#ENV{serveur, apercite}|=={miwim}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_miwim:></option>
 					</select>
 				</li>
             </ul>
 
-            <ul id="thumbshots" class="conf_serveur[ (#ENV{serveur, thumbshots}|=={thumbshots}|?{actif})]">
-                <li>
-                    <label><:thumbsites:cfg_lbl_usage:></label>
-                    <p class="explication"><:thumbsites:cfg_inf_thumbshots_presentation:></p>
-                </li>
-                <li>
-                    <label><:thumbsites:cfg_lbl_taille_vignette:></label>
-                    <p><:thumbsites:cfg_itm_taille_vignette{taille=120x90}:></p>
-                </li>
-            </ul>
-
-            <ul id="thumbshots_de" class="conf_serveur[ (#ENV{serveur, thumbshots}|=={thumbshots_de}|?{actif})]">
-                <li>
-                    <label><:thumbsites:cfg_lbl_usage:></label>
-                    <p class="explication"><:thumbsites:cfg_inf_thumbshots_de_presentation:></p>
-                </li>
-                <li>
-                    <label><:thumbsites:cfg_lbl_taille_vignette:></label>
-                    <p><:thumbsites:cfg_itm_taille_vignette{taille=120x90}:></p>
-                </li>
-            </ul>
-
-            <ul id="websnapr" class="conf_serveur [(#ENV{serveur, thumbshots}|=={'websnapr'}|?{'actif'})]">
-                <li>
-                    <label><:thumbsites:cfg_lbl_usage:></label>
-                    <p class="explication"><:thumbsites:cfg_inf_websnapr_presentation:></p>
-                </li>
-                <li>
-                    <label for="websnapr_clef"><:thumbsites:cfg_lbl_cle:></label>
-                    <input type="text" name="websnapr_clef" id="websnapr_clef" [value="(#ENV{websnapr_clef})"]>
-                </li>
-                <li>
-                    <label for="websnapr_taille"><:thumbsites:cfg_lbl_taille_vignette:></label>
-                    <select name="websnapr_taille" id="websnapr_taille">
-                        <option value="T" [(#ENV{websnapr_taille, T}|=={T}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=92x70}:></option>
-                        <option value="S" [(#ENV{websnapr_taille, T}|=={S}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=202x152}:></option>
-                        <option value="M" [(#ENV{websnapr_taille, T}|=={M}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=400x300}:></option>
-                        <option value="L" [(#ENV{websnapr_taille, T}|=={L}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=640x480}:></option>
-                    </select>
-                </li>
-            </ul>
-
-			<ul id="robothumb" class="conf_serveur [(#ENV{serveur, thumbshots}|=={'robothumb'}|?{'actif'})]">
-				<li>
-					<label><:thumbsites:cfg_lbl_usage:></label>
-					<p class="explication"><:thumbsites:cfg_inf_rotothumb_presentation:></p>
-				</li>
-				<li>
-					<label for="robothumb_taille"><:thumbsites:cfg_lbl_taille_vignette:></label>
-					<select name="robothumb_taille" id="robothumb_taille">
-						<option value="100x75" [(#ENV{robothumb_taille, 120x90}|=={100x75}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=100x75}:></option>
-						<option value="120x90" [(#ENV{robothumb_taille, 120x90}|=={120x90}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=120x90}:></option>
-						<option value="160x120" [(#ENV{robothumb_taille, 120x90}|=={160x120}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=160x120}:></option>
-						<option value="180x135" [(#ENV{robothumb_taille, 120x90}|=={180x135}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=180x135}:></option>
-						<option value="240x180" [(#ENV{robothumb_taille, 120x90}|=={240x180}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=240x180}:></option>
-						<option value="320x240" [(#ENV{robothumb_taille, 120x90}|=={320x240}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=320x240}:></option>
-						<option value="560x420" [(#ENV{robothumb_taille, 120x90}|=={560x420}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=560x420}:></option>
-						<option value="640x480" [(#ENV{robothumb_taille, 120x90}|=={640x480}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=640x480}:></option>
-						<option value="800x600" [(#ENV{robothumb_taille, 120x90}|=={800x600}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=800x600}:></option>
-					</select>
-				</li>
-			</ul>
-
-			<ul id="miwim" class="conf_serveur [(#ENV{serveur, thumbshots}|=={'miwim'}|?{'actif'})]">
-				<li>
-					<label><:thumbsites:cfg_lbl_usage:></label>
-					<p class="explication"><:thumbsites:cfg_inf_miwim_presentation:></p>
-				</li>
-				<li>
-					<label for="miwim_taille"><:thumbsites:cfg_lbl_taille_vignette:></label>
-					<select name="miwim_taille" id="miwim_taille">
-						<option value="80X60" [(#ENV{miwim_taille, 120x90}|=={80X60}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=80X60}:></option>
-						<option value="100x75" [(#ENV{miwim_taille, 120x90}|=={100x75}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=100x75}:></option>
-						<option value="120x90" [(#ENV{miwim_taille, 120x90}|=={120x90}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=120x90}:></option>
-						<option value="160x120" [(#ENV{miwim_taille,120x90}|=={160x120}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=160x120}:></option>
-						<option value="180x135" [(#ENV{miwim_taille,120x90}|=={180x135}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=180x135}:></option>
-						<option value="240x180" [(#ENV{miwim_taille,120x90}|=={240x180}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=240x180}:></option>
-						<option value="320x240" [(#ENV{miwim_taille,120x90}|=={320x240}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=320x240}:></option>
-						<option value="560x420" [(#ENV{miwim_taille,120x90}|=={560x420}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=560x420}:></option>
-						<option value="640x480" [(#ENV{miwim_taille,120x90}|=={640x480}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=640x480}:></option>
-						<option value="800x600" [(#ENV{miwim_taille,120x90}|=={800x600}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=800x600}:></option>
-					</select>
-				</li>
-			</ul>
-
-			<ul id="apercite" class="conf_serveur [(#ENV{serveur, thumbshots}|=={'apercite'}|?{'actif'})]">
+			<ul id="apercite" class="conf_serveur [(#ENV{serveur, apercite}|=={'apercite'}|?{'actif'})]">
 				<li>
 					<label><:thumbsites:cfg_lbl_usage:></label>
 					<p class="explication"><:thumbsites:cfg_inf_apercite_presentation:></p>
@@ -137,6 +50,69 @@
 					</select>
 				</li>
 			</ul>
+
+            <ul id="websnapr" class="conf_serveur [(#ENV{serveur, apercite}|=={'websnapr'}|?{'actif'})]">
+                <li>
+                    <label><:thumbsites:cfg_lbl_usage:></label>
+                    <p class="explication"><:thumbsites:cfg_inf_websnapr_presentation:></p>
+                </li>
+                <li>
+                    <label for="websnapr_clef"><:thumbsites:cfg_lbl_cle:></label>
+                    <input type="text" name="websnapr_clef" id="websnapr_clef" [value="(#ENV{websnapr_clef})"]>
+                </li>
+                <li>
+                    <label for="websnapr_taille"><:thumbsites:cfg_lbl_taille_vignette:></label>
+                    <select name="websnapr_taille" id="websnapr_taille">
+                        <option value="T" [(#ENV{websnapr_taille, T}|=={T}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=92x70}:></option>
+                        <option value="S" [(#ENV{websnapr_taille, T}|=={S}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=202x152}:></option>
+                        <option value="M" [(#ENV{websnapr_taille, T}|=={M}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=400x300}:></option>
+                        <option value="L" [(#ENV{websnapr_taille, T}|=={L}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=640x480}:></option>
+                    </select>
+                </li>
+            </ul>
+
+			<ul id="robothumb" class="conf_serveur [(#ENV{serveur, apercite}|=={'robothumb'}|?{'actif'})]">
+				<li>
+					<label><:thumbsites:cfg_lbl_usage:></label>
+					<p class="explication"><:thumbsites:cfg_inf_rotothumb_presentation:></p>
+				</li>
+				<li>
+					<label for="robothumb_taille"><:thumbsites:cfg_lbl_taille_vignette:></label>
+					<select name="robothumb_taille" id="robothumb_taille">
+						<option value="100x75" [(#ENV{robothumb_taille, 120x90}|=={100x75}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=100x75}:></option>
+						<option value="120x90" [(#ENV{robothumb_taille, 120x90}|=={120x90}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=120x90}:></option>
+						<option value="160x120" [(#ENV{robothumb_taille, 120x90}|=={160x120}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=160x120}:></option>
+						<option value="180x135" [(#ENV{robothumb_taille, 120x90}|=={180x135}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=180x135}:></option>
+						<option value="240x180" [(#ENV{robothumb_taille, 120x90}|=={240x180}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=240x180}:></option>
+						<option value="320x240" [(#ENV{robothumb_taille, 120x90}|=={320x240}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=320x240}:></option>
+						<option value="560x420" [(#ENV{robothumb_taille, 120x90}|=={560x420}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=560x420}:></option>
+						<option value="640x480" [(#ENV{robothumb_taille, 120x90}|=={640x480}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=640x480}:></option>
+						<option value="800x600" [(#ENV{robothumb_taille, 120x90}|=={800x600}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=800x600}:></option>
+					</select>
+				</li>
+			</ul>
+
+			<ul id="miwim" class="conf_serveur [(#ENV{serveur, apercite}|=={'miwim'}|?{'actif'})]">
+				<li>
+					<label><:thumbsites:cfg_lbl_usage:></label>
+					<p class="explication"><:thumbsites:cfg_inf_miwim_presentation:></p>
+				</li>
+				<li>
+					<label for="miwim_taille"><:thumbsites:cfg_lbl_taille_vignette:></label>
+					<select name="miwim_taille" id="miwim_taille">
+						<option value="80X60" [(#ENV{miwim_taille, 120x90}|=={80X60}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=80X60}:></option>
+						<option value="100x75" [(#ENV{miwim_taille, 120x90}|=={100x75}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=100x75}:></option>
+						<option value="120x90" [(#ENV{miwim_taille, 120x90}|=={120x90}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=120x90}:></option>
+						<option value="160x120" [(#ENV{miwim_taille,120x90}|=={160x120}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=160x120}:></option>
+						<option value="180x135" [(#ENV{miwim_taille,120x90}|=={180x135}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=180x135}:></option>
+						<option value="240x180" [(#ENV{miwim_taille,120x90}|=={240x180}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=240x180}:></option>
+						<option value="320x240" [(#ENV{miwim_taille,120x90}|=={320x240}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=320x240}:></option>
+						<option value="560x420" [(#ENV{miwim_taille,120x90}|=={560x420}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=560x420}:></option>
+						<option value="640x480" [(#ENV{miwim_taille,120x90}|=={640x480}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=640x480}:></option>
+						<option value="800x600" [(#ENV{miwim_taille,120x90}|=={800x600}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=800x600}:></option>
+					</select>
+				</li>
+			</ul>
 		</fieldset>
 
 
@@ -154,8 +130,8 @@
 		<script type="text/javascript">/*<![CDATA[*/
 			//on cache les configuration serveur excepte de celui actif
 			$('.conf_serveur:not(.actif)').hide();
-			[(#ENV{serveur, thumbshots}|non)
-				$('#thumbshots').show();
+			[(#ENV{serveur, apercite}|non)
+				$('#apercite').show();
 			]
 
 			$('#serveur')
