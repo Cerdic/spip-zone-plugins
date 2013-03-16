@@ -175,8 +175,8 @@
          [(#REM) La legende est cree a partir du texte fourni ]
          [<div class="sjcycle_legende"  style='#GET{style}'>(#GET{legende})</div>]
    ]
-	[(#CONFIG{sjcycle/prev}|=={on}|oui)<span id="prev">[(#CONFIG{sjcycle/text_prev}|sinon{<:sjcycle:prev:>})]</span>]
+	[(#CONFIG{sjcycle/prev}|=={on}|oui)<a href="#" class="dsjcycle_prev">[(#CONFIG{sjcycle/text_prev}|sinon{<:sjcycle:prev:>})]</a>]
 	[(#CONFIG{sjcycle/prev}|=={on}|?{ [(#CONFIG{sjcycle/next}|=={on}|oui)<span class="sep"> / </span>] , '' })]
-	[(#CONFIG{sjcycle/next}|=={on}|oui)<span id="next">[(#CONFIG{sjcycle/text_next}|sinon{<:sjcycle:next:>})]</span>]
+	[(#CONFIG{sjcycle/next}|=={on}|oui)<a href="#" class="dsjcycle_next">[(#CONFIG{sjcycle/text_next}|sinon{<:sjcycle:next:>})]</a>]
 	
 </B_img>
