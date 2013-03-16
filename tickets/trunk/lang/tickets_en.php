@@ -141,7 +141,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_paginer_par' => 'Paginate by:',
 	'lien_filtrer' => 'Filter the bug reports',
-	'lien_reponse_ticket' => 'Réponse au ticket', # NEW
+	'lien_reponse_ticket' => 'Answer to the bug report',
 	'lien_supprimer_filtres' => 'Remove all filters',
 
 	// M

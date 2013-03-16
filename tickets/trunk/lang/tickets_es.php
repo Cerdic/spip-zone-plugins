@@ -141,7 +141,7 @@ Indique en particular si se ha producido sistemáticamente u ocasionalmente.',
 	// L
 	'label_paginer_par' => 'Paginar por:',
 	'lien_filtrer' => 'Filtrar los tickets',
-	'lien_reponse_ticket' => 'Réponse au ticket', # NEW
+	'lien_reponse_ticket' => 'Respuesta al ticket',
 	'lien_supprimer_filtres' => 'Quitar todos los filtros',
 
 	// M
