@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'alt_logo_conf' => 'Logo del plugin Notificaciones',
 	'article_prive' => 'Publicación de artículos',
 	'article_prive_admins_restreints' => '<strong>Administradores</strong>: Los administradores -limitados- reciben notificaciones cuando llegan propuestas de artículos a su sección',
-	'article_prive_auteurs' => '<strong>Autores</strong>: los autores reciben notificaciones cuando su(s) artículo(s) son publicados', # MODIF
+	'article_prive_auteurs' => '<strong>Autores</strong>: los autores reciben notificaciones cuando su(s) artículo(s) son propuestos, publicados o eliminados',
 	'article_propose_detail' => 'El artículo "@titre@" ha sido propuesto para publicación
 	desde',
 	'article_propose_sujet' => '[@nom_site_spip@] Propone: @titre@',
@@ -30,8 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_valide_url' => 'Mientras tanto, se halla disponible en esta dirección temporal:',
 
 	// B
-	'bouton_changer_pass' => 'Changer mon mot de passe', # NEW
-	'bouton_finir_inscription' => 'Finir mon inscription', # NEW
+	'bouton_changer_pass' => 'Cambiar mi contraseña',
+	'bouton_finir_inscription' => 'Terminar mi registro',
 	'breve_propose_detail' => 'El breve "@titre@" ha sido propuesto para publicación
 	desde',
 	'breve_propose_sujet' => '[@nom_site_spip@] Propone: @titre@',
@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_notification' => 'Los siguientes eventos pueden conllevar notificación por correo electrónico.',
 
 	// F
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, cliquez sur le bouton ci-dessous : ', # NEW
+	'form_forum_confirmer_email' => 'Para confirmar su dirección de correo electrónico, haga click en el siguiente botón: ',
 	'forum_prives_auteur' => '<strong>Autores</strong>: los autores reciben notificaciones de los foros derivados de sus artículos o de sus mensajes en el sitio privado. ',
 	'forum_prives_moderateur' => 'Indique a continuación el correo electrónico del moderador de los foros privados (si son varios, separe con comas).',
 	'forum_prives_thread' => '<strong>Hilo de discusión</strong>: los participantes de un mismo hilo de discusión reciben notificaciones de los foros (privados).',
@@ -69,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_moderation_interdite' => 'Usted no dispone de derecho de moderación de este mensaje',
 	'info_moderation_lien_titre' => 'Moderar este mensaje desde el espacio privado',
 	'info_moderation_url_perimee' => 'Este enlace de moderación ya no es válido.',
-	'info_nouveau_commentaire' => 'Nouveau commentaire', # NEW
+	'info_nouveau_commentaire' => 'Nuevo comentario',
 	'inscription' => 'Registro de los redactores',
 	'inscription_admins' => 'Administradores',
 	'inscription_explication' => '¿Qué autores reciben notificación con el registro de nuevos redactores?',
@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_a_valider' => 'Mensaje para aprobar:',
-	'message_spam_a_confirmer' => 'SPAM à confirmer : ', # NEW
+	'message_spam_a_confirmer' => 'Confirmar SPAM: ',
 	'message_voir_configuration' => 'Ver la configuración de las notificaciones',
 	'messagerie_interne' => 'Mensajería interna',
 	'messagerie_interne_signaler' => '<strong>Marcar nuevos mensajes privados</strong>: activar esta opción para que el sitio envíe una notificación cuando un redactor no haya advertido un nuevo mensaje en su mensajería. El sistema espera 20 minutos antes de notificarle al redactor, por lo que no se envía SPAM a un redactor ya en línea en el espacio privado.',
@@ -92,8 +92,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications' => 'Notificaciones',
 
 	// P
-	'pass_mail_passcookie_1' => 'Pour retrouver votre accès au site @nom_site_spip@, cliquez sur le bouton : ', # NEW
-	'pass_mail_passcookie_2' => 'Vous pourrez alors entrer un nouveau mot de passe et vous reconnecter au site.', # NEW
+	'pass_mail_passcookie_1' => 'Para recuperar el acceso al sitio @nom_site_spip@, haga click sobre el botón: ',
+	'pass_mail_passcookie_2' => 'A continuación puede introducir una nueva contraseña y volver a conectar con el sitio.',
 
 	// S
 	'signature_petition' => 'Firmas de petición',
