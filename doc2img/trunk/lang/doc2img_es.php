@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_label_agrandissements' => 'Autorizar ampliaciones',
 	'cfg_label_compression' => 'Calidad de compresión',
 	'cfg_label_conversion_auto' => 'Conversión automática cuando se adjunta un documento',
-	'cfg_label_format' => 'Extensiones de archivos para procesar (pdf, tiff...)', # MODIF
+	'cfg_label_format' => 'Extensiones de archivos para procesar (pdf, tiff...)',
 	'cfg_label_format_sortie' => 'Formato de salida por defecto',
 	'cfg_label_hauteur' => 'Altura por defecto',
 	'cfg_label_largeur' => 'Anchura por defecto',
@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_alt_image' => '@titre@, página @page@',
-	'info_desc_page' => 'Este documento se compone de una página.', # MODIF
+	'info_desc_page' => 'Este documento se compone de una página.',
 	'info_desc_pages' => 'Este documento se compone de @nb@ páginas.',
 	'info_nb_pages' => 'Número de páginas:',
 	'info_nb_pages_converties' => '@nb@ páginas convertidas relacionadas',
