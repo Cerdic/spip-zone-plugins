@@ -71,8 +71,8 @@
 			 sync:		"#CONFIG{sjcycle/sync}",
 			 pause:		"#CONFIG{sjcycle/pause}",
 			 random:		"#CONFIG{sjcycle/random}"[,
-			 prev:		"#prev"(#CONFIG{sjcycle/prev}|=={on}|oui)][,
-			 next:		"#next"(#CONFIG{sjcycle/next}|=={on}|oui)],
+			 prev:		".dsjcycle_prev"(#CONFIG{sjcycle/prev}|=={on}|oui)][,
+			 next:		".dsjcycle_next"(#CONFIG{sjcycle/next}|=={on}|oui)],
 			 cleartype: 1
 			 [,(#ENV{opt}|replace{';',','}|html_entity_decode)]
 			 });
