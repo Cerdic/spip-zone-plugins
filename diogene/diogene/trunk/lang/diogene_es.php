@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_diogene_explication' => 'Diógenes permite modificar los fumularios de edición clásicos quitando o añadiendo ciertos campos.',
 	'editer_diogenes_titre' => 'Las plantillas de formularios',
 	'erreur' => 'Error',
-	'erreur_autorisation_login_publier' => 'Debe estar identificado para publicar aquí.', # MODIF
+	'erreur_autorisation_login_publier' => 'Debe <a href="@url@" class="spip_in">estar identificado para publicar aquí</a>.',
 	'erreur_autorisation_modifier_site' => 'Su estatus no le autoriza para modificar este sitio',
 	'erreur_autorisation_statut_publier' => 'Su estatus no le autoriza para publicar aquí. ',
 	'erreur_autorisation_statut_publier_limite' => 'Ha alcanzado el límite de objetos que pueden estar <a href="@url@">pendiente de publicación</a> (@nb@)',
@@ -110,10 +110,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_diogene_update' => 'La plantilla de formulario ha sido actualizada',
 	'message_erreur_general' => 'El formulario contiene errores, verifique por favor el contenido.',
 	'message_id_parent_unique' => 'Este objeto no puede ser creado más que en la sección «@rubrique@»',
-	'message_objet_cree' => '"@titre@" a été créé.', # NEW
-	'message_objet_mis_a_jour' => '"@titre@" a été mis à jour.', # NEW
-	'message_objet_mis_a_jour_lien' => 'Vous pouvez le consulter en suivant <a href="@url@" class="spip_in">ce lien</a>.', # NEW
-	'message_objet_supprime' => '"@titre@" a été supprimé.', # NEW
+	'message_objet_cree' => '"@titre@" ha sido creado.',
+	'message_objet_mis_a_jour' => '"@titre@" ha sido actualizado.',
+	'message_objet_mis_a_jour_lien' => 'Puede consultarlo a continuación <a href="@url@" class="spip_in">ce lien</a>.',
+	'message_objet_supprime' => '"@titre@" ha sido eliminado.',
 	'message_pas_auteur' => 'Atención. No está identificado como autor de este objeto.',
 	'message_valider_action' => '¿Está seguro?',
 	'message_valider_suppression' => '¿Está seguro de querer eliminar esta plantilla?',
@@ -136,7 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_en_cours_poubelle_normal' => 'Dejar su artículo en la papelera',
 	'texte_statut_en_cours_poubelle_site' => 'Dejar este sitio en la papelera',
 	'texte_statut_en_cours_prop_normal' => 'Dejar su artículo propuesto para publicación',
-	'texte_statut_en_cours_prop_site' => 'Dejar este sitio propuesto para publicación', # MODIF
+	'texte_statut_en_cours_prop_site' => 'Dejar este sitio propuesto para publicación',
 	'texte_statut_en_cours_publie_normal' => 'Dejar su artículo publicado',
 	'texte_statut_en_cours_publie_site' => 'Dejar este sitio publicado',
 	'texte_statut_en_cours_redaction' => 'Dejar su artículo en curso de redacción',
@@ -149,8 +149,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_publie_site' => 'Publicar definitivamente este sitio',
 	'texte_statut_redaction' => 'Poner su artículo en curso de redacción',
 	'texte_statut_redaction_sans_statut' => 'Poner su artículo en curso de redacción',
-	'title_page_publier' => 'Publier', # NEW
-	'title_page_publier_titre' => 'Publier : @titre@', # NEW
+	'title_page_publier' => 'Publicar',
+	'title_page_publier_titre' => 'Publicar: @titre@',
 	'titre_lien_publier' => 'Publicar',
 	'titre_modification_article' => 'Modificación del artículo: @titre@',
 	'titre_modification_rubrique' => 'Modificación de la sección: @titre@',
