@@ -6,17 +6,17 @@
 		<li class="editer editer_statut">
 			<label for="statut"><:diogene:label_change_statut_normal:></label>
 			<select id="statut" name="statut">
-				[(#ENV{statut}|=={publie}|ou{#AUTORISER{instituer,article,#ENV{id_article},'',#ARRAY{statut,publie}}|oui}|oui)
+				[(#ENV{statut}|=={publie}|ou{#AUTORISER{instituer,article,#ENV{id_article},'',#ARRAY{statut,publie}}|oui}|ou{#AUTORISER{publierdans,diogene,#ENV{id_diogene}}|oui}|oui)
 				<option value="publie"[(#ENV{statut}|=={publie}|oui) selected="selected"]>
 					[(#ENV{statut}|=={publie}|oui)<:diogene:texte_statut_en_cours_publie_normal:>]
 					[(#ENV{statut}|=={publie}|non)<:diogene:texte_statut_publie_normal:>]
 				</option>]]
-				[(#ENV{statut}|=={prop}|ou{#AUTORISER{instituer,article,#ENV{id_article},'',#ARRAY{statut,prop}}|oui}|oui)
+				[(#ENV{statut}|=={prop}|ou{#ENV{statut}|=={''}|oui}|ou{#AUTORISER{instituer,article,#ENV{id_article},'',#ARRAY{statut,prop}}|oui}|ou{#AUTORISER{publierdans,diogene,#ENV{id_diogene}}|oui}|oui)
 				<option value="prop"[(#ENV{statut}|=={prop}|oui) selected="selected"]>
 					[(#ENV{statut}|=={prop}|oui)<:diogene:texte_statut_en_cours_prop_normal:>]
 					[(#ENV{statut}|=={prop}|non)<:diogene:texte_statut_prop_normal:>]
 				</option>]
-				[(#ENV{statut}|=={prepa}|ou{#AUTORISER{instituer,article,#ENV{id_article},'',#ARRAY{statut,prepa}}|oui}|oui)
+				[(#ENV{statut}|=={prepa}|ou{#ENV{statut}|=={''}|oui}|ou{#AUTORISER{instituer,article,#ENV{id_article},'',#ARRAY{statut,prepa}}|oui}|oui)
 				<option value="prepa"[(#ENV{statut}|=={prepa}|ou{#ENV{statut}|non}|oui) selected="selected"]>
 					[(#ENV{statut}|=={prepa}|oui)<:diogene:texte_statut_en_cours_redaction:>]
 					[(#ENV{statut}|=={prepa}|non)
