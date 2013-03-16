@@ -16,10 +16,12 @@ if (!isset($_COOKIE['adminer_sid'])) {
 
 	// forcer un login sur les valeurs du site
 	function adminer_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $prefixe='', $auth='') {
-		if($type !== 'mysql') die ('MySQL seulement');
+		$drivers = array('mysql' => 'server', 'sqlite3' => 'sqlite', 'sqlite2' => 'sqlite2');
+		if($type !== 'mysql') {$db = '../../'._NOM_PERMANENTS_INACCESSIBLES . 'bases/' . $db . '.sqlite';}
+		if(!isset($drivers[$type])) die ('Type de base de donn&eacute;es '.$type.' non reconnu');
 		if ($port) $host.=':'.$port;
 		$_POST['auth'] = array(
-			"driver" => "server",
+			"driver" => $drivers[$type],
 			"server"=> $host,
 			"username"=> $login,
 			"password"=>$pass,
@@ -31,5 +33,5 @@ if (!isset($_COOKIE['adminer_sid'])) {
 	eval('?'.'>'.$connect);
 }
 
+chdir ('plugins/adminer/');
 require_once 'adminer.php';
-
