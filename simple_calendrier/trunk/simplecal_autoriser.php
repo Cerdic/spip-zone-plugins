@@ -12,16 +12,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function simplecal_autoriser(){} 
 
-/*
-autoriser('creer', 'evenement', null);
-=> à la recherche des fonctions suivantes 
-1 - autoriser_$type_$faire
-2 - autoriser_$type
-3 - autoriser_$faire
-
-$type  = 'evenement'
-*/
-
 
 // bouton du bandeau
 function autoriser_evenements_menu_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
@@ -79,7 +69,7 @@ function simplecal_profils_autorises_a_creer(){
 	return $whos;
 }
 
-// Propriétaire de l'évènement ?
+// Proprietaire de l'evenement ?
 function simplecal_auteur_evenement($id, $id_auteur){
 	$b = false;
 	$nb = sql_countsel('spip_auteurs_liens as lien', "lien.objet='evenement' and lien.id_objet=".$id." and lien.id_auteur = ".$id_auteur);
@@ -96,7 +86,7 @@ function autoriser_evenement_creer($faire, $type, $id, $qui, $opt) {
 }
 
 // Modifier l'evenement $id
-// Redacteur : Comme pour les articles : on ne peut plus le modifier une fois publié
+// Redacteur : Comme pour les articles : on ne peut plus le modifier une fois publie
 function autoriser_evenement_modifier($faire, $type, $id, $qui, $opt) {
 	$autorise = false;
 
@@ -112,7 +102,7 @@ function autoriser_evenement_modifier($faire, $type, $id, $qui, $opt) {
 				// Le statut de l'objet n'est pas publie
 				$row = sql_fetsel("statut", "spip_evenements", "id_evenement=$id");
 				if (in_array($row['statut'], array('prop','prepa', 'poubelle'))){
-					// Auteur = propriétaire de l'objet.
+					// Auteur = proprietaire de l'objet.
 					if (simplecal_auteur_evenement($id, $qui['id_auteur'])){
 						$autorise = true;
 					}
@@ -121,29 +111,6 @@ function autoriser_evenement_modifier($faire, $type, $id, $qui, $opt) {
 				// l'autorisation est fonction d'un statut (cf. autoriser:instituer_objet).
 				// ET ce statut est publie
 				// => False
-			}
-		}
-	}
-	return $autorise;
-}
-function autoriser_evenement_modifier_bkp($faire, $type, $id, $qui, $opt) {
-	$autorise = false;
-	
-	// Administrateur ?
-	if ($qui['statut'] == '0minirezo'){
-		$autorise = true;
-	} else {
-		// Redacteur ? (+ si config l'autorise)
-		if ($qui['statut'] == '1comite' && $GLOBALS['meta']['simplecal_autorisation_redac'] == 'oui'){
-			
-			// si l'evenement n'est pas publie
-			$row = sql_fetsel("statut", "spip_evenements", "id_evenement=$id");
-			if ($row['statut'] != 'publie') {
-				// Proprietaire ?
-				$nb = sql_countsel('spip_auteurs_liens as lien', "lien.objet='evenement' and lien.id_objet=".$id." and lien.id_auteur = ".$qui['id_auteur']);
-				if ($nb>0){
-					$autorise = true;
-				}
 			}
 		}
 	}

@@ -17,15 +17,15 @@ include_spip('inc/simplecal_utils');
 // Pipeline. Entete des pages de l'espace prive
 function simplecal_header_prive($flux){
 	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'simplecal_style_prive.css" />';
-    return $flux;
+	return $flux;
 }
 
 // Pipeline. Entete des pages de l'espace public
 function simplecal_insert_head_css($flux) {
-	// Thèmes basé sur : http://jqueryui.com/themeroller/
-    $theme_public = $GLOBALS['meta']['simplecal_themepublic'];
-    $flux .= "\n".'<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_SIMPLECAL.'css/datepicker/'.$theme_public.'.css" />';
-    return $flux;
+	// Thèmes base sur : http://jqueryui.com/themeroller/
+	$theme_public = $GLOBALS['meta']['simplecal_themepublic'];
+	$flux .= "\n".'<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_SIMPLECAL.'css/datepicker/'.$theme_public.'.css" />';
+	return $flux;
 }
 
 

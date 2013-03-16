@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur_msg_ajout' => 'Author added !',
 	'auteur_msg_retrait' => 'Author removed !',
 	'alt_img_logo' => 'Simple-Calendrier',
-    'autres_evenements' => 'Other events',
+	'autres_evenements' => 'Other events',
 	
 
 // B

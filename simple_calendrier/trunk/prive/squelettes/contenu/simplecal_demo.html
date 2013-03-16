@@ -1,8 +1,8 @@
 <h1>simple-calendrier : D&eacute;mo</h1>
 
 <p>
-    <:simplecal:demo_description:>
-    <br /><:simplecal:demo_voir:> /plugins/simple_calendrier/prive/contenu/simplecal_demo.html
+	<:simplecal:demo_description:>
+	<br /><:simplecal:demo_voir:> /plugins/simple_calendrier/prive/contenu/simplecal_demo.html
 </p>
 
 #SIMPLE_CALENDRIER
@@ -12,9 +12,9 @@
 <B_evta>
 <ul>
 <BOUCLE_evta(EVENEMENTS) {du_mois} {par date_debut}>
-    <li>
-        [(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
-    </li>
+	<li>
+		[(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
+	</li>
 </BOUCLE_evta>
 </ul>
 </B_evta>
@@ -28,9 +28,9 @@
 <B_evtb>
 <ul>
 <BOUCLE_evtb(EVENEMENTS) {du_mois}{a_venir} {par date_debut}>
-    <li>
-        [(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
-    </li>
+	<li>
+		[(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
+	</li>
 </BOUCLE_evtb>
 </ul>
 </B_evtb>
@@ -44,9 +44,9 @@
 <B_evtc>
 <ul>
 <BOUCLE_evtc(EVENEMENTS) {du_mois}{!a_venir} {par date_debut}>
-    <li>
-        [(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
-    </li>
+	<li>
+		[(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
+	</li>
 </BOUCLE_evtc>
 </ul>
 </B_evtc>
@@ -60,10 +60,10 @@
 <B_evtd>
 <ul>
 <BOUCLE_evtd(EVENEMENTS) {a_venir} {par date_debut} {0,10}>
-    <li>
-        [(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
-        #LOGO
-    </li>
+	<li>
+		[(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
+		#LOGO
+	</li>
 </BOUCLE_evtd>
 </ul>
 </B_evtd>

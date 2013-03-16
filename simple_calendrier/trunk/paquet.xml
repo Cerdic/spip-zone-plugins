@@ -18,8 +18,8 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/simplecal.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="configurer_liste_metas" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="autoriser" inclure="simplecal_autoriser.php" /> <!-- OK SPIP3 -->
-	<pipeline nom="header_prive" inclure="simplecal_pipelines.php" />    
-    <pipeline nom="insert_head_css" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
+	<pipeline nom="header_prive" inclure="simplecal_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="boite_infos" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="affiche_milieu" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="affiche_gauche" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->

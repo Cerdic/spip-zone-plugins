@@ -76,7 +76,7 @@ function simplecal_get_tuple_from_ref($ref){
 	$tab = array();
 	if (preg_match("/^(article|breve)([0-9]*)$/i", $ref, $matches)){
 		$tab['type'] = $matches[1];
-		$tab['id_objet'] = $matches[2];        
+		$tab['id_objet'] = $matches[2];
 	}
 	
 	return $tab;
@@ -94,7 +94,7 @@ function simplecal_get_titre_from_obj($type, $id_objet){
 	
 	if (preg_match("/^([0-9]*)$/i", $id_objet, $matches)){
 		$id = $matches[0];
-	}    
+	}
 	
 	$titre = '';
 	if ($le_type && $id){

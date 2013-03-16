@@ -45,8 +45,8 @@ function simplecal_declarer_tables_objets_sql($tables){
 		"lieu"              => "varchar(255) NOT NULL",
 		"descriptif"        => "text NOT NULL",
 		"texte"             => "text NOT NULL",
-        "lien_titre"        => "varchar(255) NOT NULL",
-        "lien_url"          => "varchar(255) NOT NULL",
+		"lien_titre"        => "varchar(255) NOT NULL",
+		"lien_url"          => "varchar(255) NOT NULL",
 		"date"              => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", // creation ou publication (selon statut) 
 		"statut"            => "varchar(8) NOT NULL",
 		"lang"              => "varchar(10) NOT NULL DEFAULT ''",

@@ -129,7 +129,7 @@ function simplecal_vider_tables($nom_meta_base_version) {
 	effacer_meta('simplecal_descriptif');
 	effacer_meta('simplecal_texte');
 	effacer_meta('simplecal_lieu');
-	effacer_meta('simplecal_lien');    
+	effacer_meta('simplecal_lien');
 	
 	effacer_meta($nom_meta_base_version);
 }

@@ -25,26 +25,26 @@
 		<div class="wrapper">
 		<div class="content" id="content">
 			<p class="arbo"><a href="#URL_SITE_SPIP/" ><:accueil_site:></a><BOUCLE_ariane(RUBRIQUES){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
-	
+
 			<div class="cartouche">
 				<h1 class="#EDIT{titre}">[(#LOGO_EVENEMENT_RUBRIQUE|image_reduire{40,*}) ]#TITRE</h1>
 				<p class="info-publi">
-                    <abbr class="published">[(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})]</abbr>
-                    [ &mdash; (#LIEU)]
-                </p>
+					<abbr class="published">[(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})]</abbr>
+					[ &mdash; (#LIEU)]
+				</p>
 			</div>
 			
 			[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
-            [(#LIEN_URL|oui)
-                <hr /><p class="hyperlien"><:voir_en_ligne:> : <a href='#LIEN_URL'>[(#LIEN_TITRE|?{#LIEN_TITRE,#LIEN_URL})]</a></p>
-            ]
-            
-            [<div class="notes"><hr />(#NOTES)</div>]
+			[(#LIEN_URL|oui)
+				<hr /><p class="hyperlien"><:voir_en_ligne:> : <a href='#LIEN_URL'>[(#LIEN_TITRE|?{#LIEN_TITRE,#LIEN_URL})]</a></p>
+			]
 			
-            [(#REM) Forum de l'évènement
+			[<div class="notes"><hr />(#NOTES)</div>]
+			
+			[(#REM) Forum de l'évènement
 			NB : pour desactiver les forums de l'évènement, supprimez simplement les lignes ci-dessous ]
 			<a href="#forum" name="forum" id="forum"></a>
-            <INCLURE{fond=inc-forum-evenement, id_evenement} />
+			<INCLURE{fond=inc-forum-evenement, id_evenement} />
 			[<h2><:forum:form_pet_message_commentaire:></h2>
 			(#FORMULAIRE_FORUM)]
 				
@@ -59,7 +59,7 @@
 			<B_evenements>
 			<div class="menu menu_breves">
 				<h2><:simplecal:autres_evenements:></h2>
-                #SIMPLE_CALENDRIER
+				#SIMPLE_CALENDRIER
 				<ul>
 					<BOUCLE_evenements(EVENEMENTS) {id_rubrique} {a_venir} {par date_debut} {0,10}>
 					<li>[(#DATE_DEBUT|simplecal_affdates{#DATE_FIN}) &ndash; ]<a href="#URL_EVENEMENT"[ class="(#EXPOSE)"]>#TITRE</a></li>

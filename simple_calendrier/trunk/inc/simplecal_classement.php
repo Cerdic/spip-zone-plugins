@@ -128,7 +128,7 @@ function simplecal_classement($param_annee, $param_mois, $param_mode, $param_idr
 				}
 				$filtre .= "</ul>";
 			}
-			//---            
+			//---
 			$filtre .= '</li>';
 		}
 		$filtre .= "</ul>";
@@ -213,7 +213,7 @@ function simplecal_get_liste_annees($id_rubrique){
 					$annees[] = $a;
 				}
 			}
-		}        
+		}
 	}
 	
 	rsort($annees);
