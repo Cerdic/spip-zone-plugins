@@ -1,4 +1,4 @@
-<traduction module="seo" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/seo/lang/" reference="fr">
+<traduction module="seo" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/seo/trunk/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.net/tradlang_module/seo?lang_cible=en">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
