@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'automatique_desription' => 'Desactive esta opción si indica usted mismo la etiqueta <code>#TABLE_MATIERES</code> en sus esqueletos.',
 
 	// E
-	'explication_longueur' => 'Definido el número de caracteres máximo que constituirá cada anclaje.', # MODIF
+	'explication_longueur' => 'Definido el número de caracteres máximo que constituirá cada anclaje.',
 	'explication_min' => 'Definido el número mínimo de epígrafes de un texto a partir del cual un sumario se mostrará.',
 	'explication_separateur' => 'Definido el carácter que se intercalará entre cada palabra para remplazar los espacios.',
 
