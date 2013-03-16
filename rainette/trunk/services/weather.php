@@ -102,8 +102,6 @@ function weather_flux2previsions($flux, $lieu) {
 		}
 		// On stocke en fin de tableau la date de derniere mise a jour
 		$tableau[$index]['derniere_maj'] = date('Y-m-d H:i:s',$date_maj);
-		// trier par date
-		ksort($tableau);
 	}
 
 	// Traitement des erreurs de flux

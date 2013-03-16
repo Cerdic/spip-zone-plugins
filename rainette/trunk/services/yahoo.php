@@ -56,49 +56,55 @@ function yahoo_url2flux($url) {
  */
 function yahoo_flux2previsions($flux, $lieu) {
 	$tableau = array();
+	$index = 0;
 
 	if (isset($flux['children']['channel'][0]['children']['item'][0]['children']['yweather:forecast'])) {
 		$previsions = $flux['children']['channel'][0]['children']['item'][0]['children']['yweather:forecast'];
 
-		foreach ($previsions as $index => $attributes) {
-			$prevision = $attributes['attributes'];
+		foreach ($previsions as $attributes) {
+			if (isset($attributes['attributes'])) {
+				$prevision = $attributes['attributes'];
 
-			// 1- Identifiants du jour : index dans le tableau et la date
-			$tableau[$index]['index'] = $index;
-			$date_jour = (isset($prevision['date'])) ? strtotime($prevision['date']) : '';
-			$tableau[$index]['date'] = date('Y-m-d', $date_jour);
+				// 1- Identifiants du jour : index dans le tableau et la date
+				$tableau[$index]['index'] = $index;
+				$date_jour = (isset($prevision['date'])) ? strtotime($prevision['date']) : '';
+				$tableau[$index]['date'] = date('Y-m-d', $date_jour);
 
-			// 2 Données astronomiques
-			$tableau[$index]['lever_soleil'] = '';
-			$tableau[$index]['coucher_soleil'] = '';
+				// 2 Données astronomiques
+				$tableau[$index]['lever_soleil'] = '';
+				$tableau[$index]['coucher_soleil'] = '';
 
-			// 3- Prévisions pour le jour
-			$tableau[$index]['temperature_jour'] = (isset($prevision['high'])) ? intval($prevision['high']) : '';
-			$tableau[$index]['code_icone_jour'] = (isset($prevision['code'])) ? intval($prevision['code']) : '';
-			$tableau[$index]['vitesse_vent_jour'] = '';
-			$tableau[$index]['angle_vent_jour'] = '';
-			$tableau[$index]['direction_vent_jour'] = '';
-			$tableau[$index]['risque_precipitation_jour'] = '';
-			$tableau[$index]['humidite_jour'] = '';
+				// 3- Prévisions pour le jour
+				$tableau[$index]['temperature_jour'] = (isset($prevision['high'])) ? intval($prevision['high']) : '';
+				$tableau[$index]['code_icone_jour'] = (isset($prevision['code'])) ? intval($prevision['code']) : '';
+				$tableau[$index]['vitesse_vent_jour'] = '';
+				$tableau[$index]['angle_vent_jour'] = '';
+				$tableau[$index]['direction_vent_jour'] = '';
+				$tableau[$index]['risque_precipitation_jour'] = '';
+				$tableau[$index]['humidite_jour'] = '';
 
-			// 4- Prévisions pour la nuit
-			$tableau[$index]['temperature_nuit'] = (isset($prevision['low'])) ? intval($prevision['low']) : '';
-			$tableau[$index]['code_icone_nuit'] = '';
-			$tableau[$index]['vitesse_vent_nuit'] = '';
-			$tableau[$index]['angle_vent_nuit'] = '';
-			$tableau[$index]['direction_vent_nuit'] = '';
-			$tableau[$index]['risque_precipitation_nuit'] = '';
-			$tableau[$index]['humidite_nuit'] = '';
+				// 4- Prévisions pour la nuit
+				$tableau[$index]['temperature_nuit'] = (isset($prevision['low'])) ? intval($prevision['low']) : '';
+				$tableau[$index]['code_icone_nuit'] = '';
+				$tableau[$index]['vitesse_vent_nuit'] = '';
+				$tableau[$index]['angle_vent_nuit'] = '';
+				$tableau[$index]['direction_vent_nuit'] = '';
+				$tableau[$index]['risque_precipitation_nuit'] = '';
+				$tableau[$index]['humidite_nuit'] = '';
+
+				$index += 1;
+			}
 		}
 
 		// Date de la mise à jour des prévisions
 		// -- comme toutes les informations communes elles sont stockées dans un index supplémentaire en fin de tableau
-		$index += 1;
-		if (isset($flux['children']['channel'][0]['children']['lastbuilddate'][0]['text'])) {
-			$date_maj = isset($flux['children']['channel'][0]['children']['lastbuilddate'][0]['text'])
-					  ? strtotime($flux['children']['channel'][0]['children']['lastbuilddate'][0]['text'])
-					  : '';
-			$tableau[$index]['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
+		if ($tableau) {
+			if (isset($flux['children']['channel'][0]['children']['lastbuilddate'][0]['text'])) {
+				$date_maj = isset($flux['children']['channel'][0]['children']['lastbuilddate'][0]['text'])
+						  ? strtotime($flux['children']['channel'][0]['children']['lastbuilddate'][0]['text'])
+						  : '';
+				$tableau[$index]['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
+			}
 		}
 	}
 
@@ -197,18 +203,18 @@ function yahoo_flux2infos($flux, $lieu){
 		$tableau['ville'] = $infos['city'];
 		$tableau['ville'] .= (isset($infos['country'])) ? ', ' . $infos['country'] : '';
 		$tableau['region'] = (isset($infos['region'])) ? $infos['region'] : '';
-	}
 
-	if (isset($flux['children']['channel'][0]['children']['item'][0]['children'])) {
-		$infos = $flux['children']['channel'][0]['children']['item'][0]['children'];
+		if (isset($flux['children']['channel'][0]['children']['item'][0]['children'])) {
+			$infos = $flux['children']['channel'][0]['children']['item'][0]['children'];
 
-		// 2- Informations géographiques sur le lieu
-		// --- la population et la zone DVD ne sont pas fournies par ce service
-		$tableau['longitude'] = (isset($infos['geo:long'])) ? floatval($infos['geo:long'][0]['text']) : '';
-		$tableau['latitude'] = (isset($infos['geo:lat'])) ? floatval($infos['geo:lat'][0]['text']) : '';
+			// 2- Informations géographiques sur le lieu
+			// --- la population et la zone DVD ne sont pas fournies par ce service
+			$tableau['longitude'] = (isset($infos['geo:long'])) ? floatval($infos['geo:long'][0]['text']) : '';
+			$tableau['latitude'] = (isset($infos['geo:lat'])) ? floatval($infos['geo:lat'][0]['text']) : '';
 
-		$tableau['population'] = '';
-		$tableau['zone'] = '';
+			$tableau['population'] = '';
+			$tableau['zone'] = '';
+		}
 	}
 
 	// Traitement des erreurs de flux
