@@ -1,5 +1,8 @@
 <traduction module="paquet-boussole" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/boussole/trunk/lang/" reference="fr">
 	<langue code="en" />
+	<langue code="eo" url="http://trad.spip.net/tradlang_module/paquet-boussole?lang_cible=eo">
+		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
+	</langue>
 	<langue code="fr" />
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-boussole?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
