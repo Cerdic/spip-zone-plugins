@@ -5,7 +5,7 @@
 <!-- Cellule de gauche: 
 	- si aujourd'hui alors donnees du matin si l'heure est < 14:00 ou du soir sinon
 	- si autre jour alors donnees du matin -->
-[(#ENV{index}|=={0}|?{'',' '})
+[(#ENV{index}|=={0}|non)
 	[(#SET{titre_max, <:rainette:temperature_max:>})]
 	[(#SET{code_icone, #ENV{code_icone_jour}})]
 	[(#SET{temperature_max, #ENV{temperature_jour}|rainette_afficher_unite{temperature}})]
@@ -13,8 +13,8 @@
 	[(#SET{vitesse_vent, #ENV{vitesse_vent_jour}})]
 	[(#SET{risque_precipitation, #ENV{risque_precipitation_jour}})]
 ]
-[(#ENV{index}|=={0}|?{' '})
-	[(#ENV{temperature_jour}|=={N/D}|?{'',' '})
+[(#ENV{index}|=={0}|oui)
+	[(#ENV{temperature_jour}|=={N/D}|non)
 		[(#SET{titre_max, <:rainette:temperature_max:>})]
 		[(#SET{code_icone, #ENV{code_icone_jour}})]
 		[(#SET{temperature_max, #ENV{temperature_jour}|rainette_afficher_unite{temperature}})]
@@ -22,7 +22,7 @@
 		[(#SET{vitesse_vent, #ENV{vitesse_vent_jour}})]
 		[(#SET{risque_precipitation, #ENV{risque_precipitation_jour}})]
 	]
-	[(#ENV{temperature_jour}|=={N/D}|?{' '})
+	[(#ENV{temperature_jour}|=={N/D}|oui)
 		[(#SET{titre_max, <:rainette:nuit:>})]
 		[(#SET{code_icone, #ENV{code_icone_nuit}})]
 		[(#SET{temperature_max, ''})]

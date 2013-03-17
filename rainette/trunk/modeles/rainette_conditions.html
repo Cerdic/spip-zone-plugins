@@ -1,8 +1,8 @@
 [(#REM)<!-- 
 	Afficher les donnees meteo temps reel
-	- pour le code #ENV{code}
-	- avec le sous-modele #ENV{sou_modele}
-	- en utilisant le service #ENV{service}
+	- code : le lieu pour lequel on affiche les données méteo
+	- sous_modele : le sous-modele Rainette ou personnalisé
+	- service : le service méteo utilisé (weather, wwo, wunderground, yahoo, owm)
  -->]
 [(#ENV{code}|rainette_coasse_conditions{
 				#ENV{sous_modele,conditions_tempsreel},

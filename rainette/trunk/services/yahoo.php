@@ -2,8 +2,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_RAINETTE_YAHOO_URL_BASE', 'http://weather.yahooapis.com/forecastrss');
-define('_RAINETTE_YAHOO_JOURS_PREVISION', 2);
+if (!defined('_RAINETTE_YAHOO_URL_BASE'))
+	define('_RAINETTE_YAHOO_URL_BASE', 'http://weather.yahooapis.com/forecastrss');
+if (!defined('_RAINETTE_YAHOO_JOURS_PREVISION'))
+	define('_RAINETTE_YAHOO_JOURS_PREVISION', 2);
 
 
 function yahoo_service2cache($lieu, $mode) {
@@ -213,7 +215,6 @@ function yahoo_flux2infos($flux, $lieu){
 			$tableau['latitude'] = (isset($infos['geo:lat'])) ? floatval($infos['geo:lat'][0]['text']) : '';
 
 			$tableau['population'] = '';
-			$tableau['zone'] = '';
 		}
 	}
 

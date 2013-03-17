@@ -2,8 +2,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_RAINETTE_WWO_URL_BASE', 'http://free.worldweatheronline.com/feed/weather.ashx');
-define('_RAINETTE_WWO_JOURS_PREVISIONS', 5);
+if (!defined('_RAINETTE_WWO_URL_BASE'))
+	define('_RAINETTE_WWO_URL_BASE', 'http://free.worldweatheronline.com/feed/weather.ashx');
+if (!defined('_RAINETTE_WWO_JOURS_PREVISIONS'))
+	define('_RAINETTE_WWO_JOURS_PREVISIONS', 5);
 
 /**
  * @param string	$lieu
@@ -195,7 +197,6 @@ function wwo_flux2infos($flux, $lieu){
 		$tableau['latitude'] = (isset($infos['latitude'])) ? floatval($infos['latitude'][0]['text']) : '';
 
 		$tableau['population'] = (isset($infos['population'])) ? intval($infos['population'][0]['text']) : '';
-		$tableau['zone'] = '';
 	}
 
 	// Traitement des erreurs de flux

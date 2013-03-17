@@ -2,8 +2,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_RAINETTE_WEATHER_URL_BASE', 'http://xml.weather.com/weather/local/');
-define('_RAINETTE_WEATHER_JOURS_PREVISION', 10);
+if (!defined('_RAINETTE_WEATHER_URL_BASE'))
+	define('_RAINETTE_WEATHER_URL_BASE', 'http://xml.weather.com/weather/local/');
+if (!defined('_RAINETTE_WEATHER_JOURS_PREVISION'))
+	define('_RAINETTE_WEATHER_JOURS_PREVISION', 10);
 
 function weather_service2cache($lieu, $mode) {
 
@@ -178,7 +180,6 @@ function weather_flux2infos($flux, $lieu){
 		$tableau['latitude'] = floatval($infos['lat'][0]);
 
 		$tableau['population'] = '';
-		$tableau['zone'] = intval($infos['zone'][0]);
 	}
 
 	// Traitement des erreurs de flux

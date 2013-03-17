@@ -2,7 +2,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define ('_RAINETTE_ICONES_PATH','rainette/');
+if (!defined('_RAINETTE_ICONES_PATH'))
+	define ('_RAINETTE_ICONES_PATH','rainette/');
 
 // Balises du plugin utilisables dans les squelettes et modeles
 function balise_RAINETTE_INFOS($p) {
@@ -169,7 +170,7 @@ function rainette_afficher_unite($valeur, $type_valeur='', $precision=-1) {
  * @param int $nb_jours_affiche
  * @return string
  */
-function rainette_coasse_previsions($lieu, $type='x_jours', $jour=0, $modele='previsions_24h', $service='weather'){
+function rainette_coasse_previsions($lieu, $type='1_jour', $jour=0, $modele='previsions_2x12h', $service='weather'){
 
 	// Recuperation du tableau des prévisions pour tous les jours disponibles
 	$charger = charger_fonction('charger_meteo', 'inc');

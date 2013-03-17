@@ -10,7 +10,7 @@
 	]
 	[(#ENV{credits/logo}|non)
 		[(#ENV{texte, info}|=={info}|oui)<:rainette:info_credits{service=#GET{nom_service}}:>]
-		[(#ENV{texte}|=={service}|oui)#GET{nom_service}]
+		[(#ENV{texte, info}|=={service}|oui)#GET{nom_service}]
 	]
 	</a>]
 </div>

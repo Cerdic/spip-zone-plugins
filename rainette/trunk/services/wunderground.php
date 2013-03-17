@@ -2,12 +2,19 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_RAINETTE_WUNDERGROUND_URL_BASE_REQUETE', 'http://api.wunderground.com/api');
-define('_RAINETTE_WUNDERGROUND_URL_BASE_ICONE', 'http://icons.wxug.com/i/c');
-define('_RAINETTE_WUNDERGROUND_JOURS_PREVISIONS', 4);
-define('_RAINETTE_WUNDERGROUND_SUFFIXE_METRIQUE', 'c:mb:km:kph');
-define('_RAINETTE_WUNDERGROUND_SUFFIXE_STANDARD', 'f:in:mi:mph');
-define('_RAINETTE_WUNDERGROUND_LANGUE_DEFAUT', 'FR');
+if (!defined('_RAINETTE_WUNDERGROUND_URL_BASE_REQUETE'))
+	define('_RAINETTE_WUNDERGROUND_URL_BASE_REQUETE', 'http://api.wunderground.com/api');
+if (!defined('_RAINETTE_WUNDERGROUND_URL_BASE_ICONE'))
+	define('_RAINETTE_WUNDERGROUND_URL_BASE_ICONE', 'http://icons.wxug.com/i/c');
+if (!defined('_RAINETTE_WUNDERGROUND_JOURS_PREVISIONS'))
+	define('_RAINETTE_WUNDERGROUND_JOURS_PREVISIONS', 4);
+if (!defined('_RAINETTE_WUNDERGROUND_SUFFIXE_METRIQUE'))
+	define('_RAINETTE_WUNDERGROUND_SUFFIXE_METRIQUE', 'c:mb:km:kph');
+if (!defined('_RAINETTE_WUNDERGROUND_SUFFIXE_STANDARD'))
+	define('_RAINETTE_WUNDERGROUND_SUFFIXE_STANDARD', 'f:in:mi:mph');
+if (!defined('_RAINETTE_WUNDERGROUND_LANGUE_DEFAUT'))
+	define('_RAINETTE_WUNDERGROUND_LANGUE_DEFAUT', 'FR');
+
 
 function wunderground_service2cache($lieu, $mode) {
 
@@ -208,7 +215,6 @@ function wunderground_flux2infos($flux, $lieu) {
 		$tableau['latitude'] = (isset($infos['lat'])) ? floatval($infos['lat'][0]['text']) : '';
 
 		$tableau['population'] = '';
-		$tableau['zone'] = '';
 	}
 
 	// Traitement des erreurs de flux

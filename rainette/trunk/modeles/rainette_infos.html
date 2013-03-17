@@ -1,8 +1,8 @@
 [(#REM)<!-- 
 	Afficher les informations generales
-	- du lieu de code #ENV{code}
-	- avec le sous-modele #ENV{sous_modele}
-	- en utilisant le service #ENV{service}
+	- code : le lieu pour lequel on affiche les données méteo
+	- sous_modele : le sous-modele Rainette ou personnalisé
+	- service : le service méteo utilisé (weather, wwo, wunderground, yahoo, owm)
  -->]
 [(#ENV{code}|rainette_coasse_infos{
 				#ENV{sous_modele, infos_ville},
