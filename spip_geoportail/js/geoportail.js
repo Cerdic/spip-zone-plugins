@@ -558,14 +558,15 @@ var spipGeoportail = jQuery.geoportail =
 		// Ajouter la couche
 		var l;
 		if (!opts) opts = {};
-		opts = jQuery.extend ({opacity:1, visibility:true, originators:jQuery.geoportail.originators, view:{ zoomToExtent:1 }}, opts);
+		opts2 = jQuery.extend ({opacity:1, visibility:true, originators:jQuery.geoportail.originators, view:{ zoomToExtent:1 }}, opts);
+		opts2.opacity = 1;	// => BUG opacity
 		if (type == "GXT") 
-		{	l = new OpenLayers.Layer.GXT(name, url, opts);
+		{	l = new OpenLayers.Layer.GXT(name, url, opts2);
 			map.getMap().addLayer(l);
 		}
 		else 
 		{	opts.preFeatureInsert = Geoportal.Popup.setPointerCursorForFeature;
-			l = map.getMap().addLayer(type, name, url, opts, { formatOptions :{extractStyles : true}, preventDefaultBehavior : true });
+			l = map.getMap().addLayer(type, name, url, opts2, { formatOptions :{extractStyles : true}, preventDefaultBehavior : true });
 			l.spipType = type;
 		}
 		if (l) 
@@ -578,6 +579,8 @@ var spipGeoportail = jQuery.geoportail =
 		
 			// Sauvegarder l'id du document
 			l.id_document = id_document;
+			
+			if (opts.opacity) l.setOpacity (opts.opacity);	// => BUG opacity
 
 			// Faire quelque chose quand le calque est charge
 			if (!nozoom && !carte.fixe) {	// Calcul et zoom sur l'extension (une fois charge)
