@@ -69,8 +69,25 @@
 	service=wwo})]
 <br class="nettoyeur"/>
 
+<h2 class="h2"><:rainette:meteo_previsions_n_jours{nbj=5}|ucfirst:></h2>
+[(#MODELE{rainette_previsions,
+	code=#GET{code},
+	type=x_jours,
+	jour=5,
+	sous_modele=previsions_24h,
+	service=wwo})]
+<br class="nettoyeur"/>
+[(#MODELE{rainette_previsions,
+	code=#GET{code},
+	type=1_jour,
+	jour=0,
+	sous_modele=previsions_2x12h,
+	service=wwo})]
+<br class="nettoyeur"/>
+
 [(#GET{code}|rainette_debug{infos, wwo})]
 [(#GET{code}|rainette_debug{conditions, wwo})]
+[(#GET{code}|rainette_debug{previsions, wwo})]
 
 <br />
 <hr />
@@ -95,8 +112,25 @@
 	service=wunderground})]
 <br class="nettoyeur"/>
 
+<h2 class="h2"><:rainette:meteo_previsions_n_jours{nbj=4}|ucfirst:></h2>
+[(#MODELE{rainette_previsions,
+	code=#GET{code},
+	type=x_jours,
+	jour=4,
+	sous_modele=previsions_24h,
+	service=wunderground})]
+<br class="nettoyeur"/>
+[(#MODELE{rainette_previsions,
+	code=#GET{code},
+	type=1_jour,
+	jour=0,
+	sous_modele=previsions_2x12h,
+	service=wunderground})]
+<br class="nettoyeur"/>
+
 [(#GET{code}|rainette_debug{infos, wunderground})]
 [(#GET{code}|rainette_debug{conditions, wunderground})]
+[(#GET{code}|rainette_debug{previsions, wunderground})]
 
 <br />
 <hr />
@@ -104,7 +138,7 @@
 
 
 [(#REM) <!--Les informations d'une ville - yahoo--> ]
-#SET{code, #ENV{ville,2502265}}
+#SET{code, #ENV{ville,615702}}
 <div class="cartouche">
 	<h1 class="h1">Yahoo Weather</h1>
 	[(#MODELE{rainette_infos,

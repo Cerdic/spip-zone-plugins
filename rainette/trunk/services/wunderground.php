@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_RAINETTE_WUNDERGROUND_URL_BASE_REQUETE', 'http://api.wunderground.com/api');
 define('_RAINETTE_WUNDERGROUND_URL_BASE_ICONE', 'http://icons.wxug.com/i/c');
-define('_RAINETTE_WUNDERGROUND_JOURS_PREVISIONS', 3);
+define('_RAINETTE_WUNDERGROUND_JOURS_PREVISIONS', 4);
 define('_RAINETTE_WUNDERGROUND_SUFFIXE_METRIQUE', 'c:mb:km:kph');
 define('_RAINETTE_WUNDERGROUND_SUFFIXE_STANDARD', 'f:in:mi:mph');
 define('_RAINETTE_WUNDERGROUND_LANGUE_DEFAUT', 'FR');
@@ -93,6 +93,7 @@ function wunderground_url2flux($url) {
  */
 function wunderground_flux2previsions($flux, $lieu) {
 	$tableau = array();
+	$index = 0;
 
 	// Traitement des erreurs de flux
 	$tableau['erreur'] = (!$tableau) ? true : false;
