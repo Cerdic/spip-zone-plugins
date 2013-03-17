@@ -1,4 +1,4 @@
-<traduction module="langonet" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/langonet/lang/" reference="fr">
+<traduction module="langonet" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/langonet/branches/v0/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.net/tradlang_module/langonet?lang_cible=en">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Martin McCaffery" lien="http://trad.spip.net/auteur/martin-mccaffery" />
