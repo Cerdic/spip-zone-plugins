@@ -1,6 +1,10 @@
 /* Styles generaux  */
-.rainette_titre {margin: 5px 0 5px 10px; 	padding:0 0 0 0;}
-.rainette_credits {float: left; margin: 10px 0 0 10px; clear:both; font-size: 10px;}
+.rainette_titre {margin: 5px 0 5px 10px; padding:0 0 0 0;}
+.rainette_credits {margin: 0; text-align: center; clear:both; font-size: 10px;}
+.rainette_credits.infos {float: left; margin-left: 10px; margin-top: 10px;}
+.rainette_credits.condtr {padding-top: 10px;}
+.rainette_credits.prev24h {}
+.rainette_credits.prev2x12h {}
 
 /* INFOS: Styles utilises par le modele rainette_infos */
 .rainette_infos {

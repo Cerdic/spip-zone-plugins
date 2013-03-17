@@ -3,13 +3,14 @@
  -->
 ]
 #SET{nom_service, #VAL{rainette:titre_service_}|concat{#ENV{service}}|_T}
-<div class="rainette_credits">
+<div class="rainette_credits[ (#ENV{classe_div})]">
 	[<a href="(#ENV{credits/lien})"[ title=(#ENV{credits/titre})][ class=(#ENV{classe})] target="_blank">
 	[(#ENV{credits/logo}|oui)
 		[(#CHEMIN_IMAGE{#ENV{credits/logo}}|balise_img{'logo service'})]
 	]
 	[(#ENV{credits/logo}|non)
-		<:rainette:info_credits{service=#GET{nom_service}}:>
+		[(#ENV{texte, info}|=={info}|oui)<:rainette:info_credits{service=#GET{nom_service}}:>]
+		[(#ENV{texte}|=={service}|oui)#GET{nom_service}]
 	]
 	</a>]
 </div>

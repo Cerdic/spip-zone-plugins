@@ -151,5 +151,8 @@
 	<div class="maj">
 		<:rainette:derniere_maj|ucfirst:>&nbsp;:
 		[&nbsp;(#ENV{derniere_maj}|nom_jour)][&nbsp;(#ENV{derniere_maj}|affdate_heure)]
+		#INCLURE{fond=modeles/inc-credits,
+			classe_div=prev2x12h,
+			env}
 	</div>
 </div>
