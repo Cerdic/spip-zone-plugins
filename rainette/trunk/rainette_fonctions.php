@@ -170,7 +170,7 @@ function rainette_afficher_unite($valeur, $type_valeur='', $precision=-1) {
  * @param int $nb_jours_affiche
  * @return string
  */
-function rainette_coasse_previsions($lieu, $type='1_jour', $jour=0, $modele='previsions_2x12h', $service='weather'){
+function rainette_coasser_previsions($lieu, $type='1_jour', $jour=0, $modele='previsions_2x12h', $service='weather'){
 
 	// Recuperation du tableau des prévisions pour tous les jours disponibles
 	$charger = charger_fonction('charger_meteo', 'inc');
@@ -229,7 +229,7 @@ function rainette_coasse_previsions($lieu, $type='1_jour', $jour=0, $modele='pre
 	return $texte;
 }
 
-function rainette_coasse_conditions($lieu, $modele='conditions_tempsreel', $service='weather'){
+function rainette_coasser_conditions($lieu, $modele='conditions_tempsreel', $service='weather'){
 
 	// Recuperation du tableau des conditions courantes
 	$charger = charger_fonction('charger_meteo', 'inc');
@@ -250,7 +250,7 @@ function rainette_coasse_conditions($lieu, $modele='conditions_tempsreel', $serv
 	return $texte;
 }
 
-function rainette_coasse_infos($lieu, $modele='infos_ville', $service='weather'){
+function rainette_coasser_infos($lieu, $modele='infos_ville', $service='weather'){
 
 	// Recuperation du tableau des conditions courantes
 	$charger = charger_fonction('charger_meteo', 'inc');
