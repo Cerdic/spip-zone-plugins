@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_alt_image' => '@titre@, page @page@', # NEW
-	'info_desc_page' => 'This document is composed by one unique sheet.', # MODIF
+	'info_desc_page' => 'This document is composed by one sheet.',
 	'info_desc_pages' => 'This document is composed by @nb@ sheets.',
 	'info_nb_pages' => 'Number of pages:',
 	'info_nb_pages_converties' => '@nb@ pages converties liées', # NEW
