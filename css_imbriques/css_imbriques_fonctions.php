@@ -40,7 +40,7 @@ function css_inserer_tab($def) {
 function css_contruire($css, $niveau, $chemin, $classe, $enfants, $definition) {
 
 	$intitule = trim($classe[$niveau]);
-
+	$ret = '';
 
 	if (substr($intitule, 0, 2) == ". ") {
 		$intitule = substr($intitule, 2, strlen($intitule));
@@ -79,7 +79,7 @@ function css_contruire($css, $niveau, $chemin, $classe, $enfants, $definition) {
 			$ret .= $intitule." { $def_keyframes }";
 		}
 	}
-	else if ($enfants[$niveau]) {
+	else if (isset($enfants[$niveau]) and $enfants[$niveau]) {
 		foreach($enfants[$niveau] as $num) {
 			$ret .= css_contruire($css, $num, $chemin, $classe, $enfants, $definition);
 	
