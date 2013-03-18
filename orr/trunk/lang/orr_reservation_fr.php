@@ -8,8 +8,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_lien_orr_reservation' => 'Ajouter cette reservation',
+	
+	// D
+	'date_de_debut' => 'Date de début',    
+	'date_de_fin' => 'Date de fin',    	
 
 	// E
+	'erreur_reservation_date_fin_debut'=>'date de fin antérieur  ou égale à la date de début',	
+	'erreur_reservation_date_occupe'=>'Vos dates de réservations ne sont pas libres !',
+	'erreur_reservation_format_date'=>'Ce format de data n\'est pas reconnu.',	
 	'explication_orr_date_debut' => 'Date de début de la réservation',
 	'explication_orr_date_fin' => 'Date de fin de la réservation',
 	'explication_orr_reservation_nom' => 'Nom de votre réservation (ex : réunion CA)',
@@ -26,6 +33,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_orr_date_debut' => 'Date de début',
 	'label_orr_date_fin' => 'Date de fin',
 	'label_orr_reservation_nom' => 'Nom de la ressource',
+	
+    //N
+    'nom_de_la_reservation'=>'Nom de la Réservation',
 
 	// R
 	'retirer_lien_orr_reservation' => 'Retirer cette reservation',

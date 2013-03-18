@@ -27,7 +27,7 @@ function formulaires_reserv_verifier_dist($idressource,$date_deb,$date_f,$nom,$i
     //champs obligatoire
     foreach (array ('nom_reservation','date_debut','date_fin') as $obligatoire) {
         if (!_request($obligatoire)) {
-            $erreurs[$obligatoire] = 'Ce champs est obligatoire';
+            $erreurs[$obligatoire] = _T("info_obligatoire");
         }
     }
     //format de date correct
@@ -35,14 +35,14 @@ function formulaires_reserv_verifier_dist($idressource,$date_deb,$date_f,$nom,$i
         list ($dated,$tempsd) = explode(' ',$date_debut);
         list ($jourd,$moisd,$anneed) = explode('/',$dated);
         if (!intval($jourd)or!intval($moisd)or!intval($anneed)or!preg_match("#^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$#", $tempsd)) {
-            $erreurs['date_debut'] = "Ce format de data n'est pas reconnu.";
+            $erreurs['date_debut'] = _T('orr_reservation:erreur_reservation_format_date');
         }
     }
     if (!isset($erreurs['date_fin'])){
         list ($datef,$tempsf) = explode(' ',$date_fin);
         list ($jourf,$moisf,$anneef) = explode('/',$datef);
         if (!intval($jourf)or!intval($moisf)or!intval($anneef)or!preg_match("#^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$#", $tempsf)) {
-            $erreurs['date_fin'] = "Ce format de data n'est pas reconnu.";
+            $erreurs['date_fin'] = _T('orr_reservation:erreur_reservation_format_date');
         }
     }
 
@@ -52,7 +52,7 @@ function formulaires_reserv_verifier_dist($idressource,$date_deb,$date_f,$nom,$i
     $timestampd = mktime($heured,$minuted,$seconded,$moisd,$jourd,$anneed);
     $timestampf = mktime($heuref,$minutef,$secondef,$moisf,$jourf,$anneef);
     if ($timestampd>=$timestampf){
-        $erreurs['date_fin'] = "date de fin antérieur  ou égale à la date de début";
+        $erreurs['date_fin'] =_T('orr_reservation:erreur_reservation_date_fin_debut');
     }
 
     // les dates choisies sont libres
@@ -61,8 +61,8 @@ function formulaires_reserv_verifier_dist($idressource,$date_deb,$date_f,$nom,$i
     $date_fin   = date("Y-m-d H:i:s", mktime ($heuref,$minutef,0, $moisf, $jourf, $anneef));
     $resultat=compare_date($date_debut,$date_fin,$idressource,$idresa);
 	if ($resultat == "1"){
-		$erreurs['date_debut'] = 'Vos dates de réservations ne sont pas libres !';
-		$erreurs['date_fin'] = 'Vos dates de réservations ne sont pas libres !';
+		$erreurs['date_debut'] =_T('orr_reservation:erreur_reservation_date_occupe');
+		$erreurs['date_fin'] =_T('orr_reservation:erreur_reservation_date_occupe');
 	}
     return $erreurs;
 }
