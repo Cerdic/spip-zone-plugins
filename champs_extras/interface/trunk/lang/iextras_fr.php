@@ -107,7 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_pour_traitements' => 'Appliquer automatiquement un traitement
 		pour la balise #NOM_DU_CHAMP résultante :',
 	'precisions_pour_versionner' => 'Le versionnage s\'appliquera uniquement si le plugin
-		«révisions» est actif et que l\'objet éditorial du champs extra est lui-même versionné',
+		«révisions» est actif et que l\'objet éditorial du champ extra est lui-même versionné',
 
 	// R
 	'radio_restrictions_auteur_admin' => 'Seulement les administrateurs',
