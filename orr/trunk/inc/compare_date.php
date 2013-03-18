@@ -2,6 +2,7 @@
 	if (!defined("_ECRIRE_INC_VERSION")) return;
 
 		function compare_date($date_debut,$date_fin,$idressource,$idresa){
+		include_spip('base/abstract_sql');
 		if($idresa>"0"){
 			if ($result = sql_select(
 									array(
