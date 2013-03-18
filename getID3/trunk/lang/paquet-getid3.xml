@@ -1,5 +1,8 @@
 <traduction module="paquet-getid3" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/getID3/trunk/lang/" reference="fr">
 	<langue code="en" />
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-getid3?lang_cible=es">
+		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
+	</langue>
 	<langue code="fr" />
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-getid3?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
