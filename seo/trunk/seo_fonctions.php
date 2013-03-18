@@ -12,29 +12,72 @@ include_spip('inc/texte');
  * @param array $contexte
  * @return string
  */
-function seo_remplace_metas($head,$contexte){
-	$meta_tags = generer_meta_tags(null,$contexte);
+function seo_insere_remplace_metas($head,$contexte){
 	$append = "";
+	include_spip('inc/config');
+	$config = lire_config('seo/');
+	$is_sommaire = (
+	  (isset($contexte['type-page']) AND $contexte['type-page']=='sommaire')
+	  OR (!isset($contexte['id_article']) AND !isset($contexte['id_rubrique']))
+	);
 
-	foreach ($meta_tags as $key => $meta){
-		$preg = '';
-		/**
-		 * Si le tag est <title>
-		 */
-		if ($key=='title')
-			$preg = "/(<{$key}[^>]*>.*<\/{$key}[^>]*>)/Uims";
-		/**
-		 * Le tag est une <meta>
-		 */
-		else
-			$preg = "/(<meta\s+name=['\"]{$key}['\"][^>]*>)/Uims";
+	if (isset($config['meta_tags']['activate']) AND $config['meta_tags']['activate']=='yes'){
+		/* d'abord les meta tags */
+		$meta_tags = seo_generer_meta_tags(null,$contexte);
 
-		// remplacer la meta si on la trouve
-		if (preg_match($preg,$head,$match)){
-			$head = str_replace($match[0],$meta,$head);
+		foreach ($meta_tags as $key => $meta){
+			$preg = '';
+			/**
+			 * Si le tag est <title>
+			 */
+			if ($key=='title')
+				$preg = "/(<{$key}[^>]*>.*<\/{$key}[^>]*>)/Uims";
+			/**
+			 * Le tag est une <meta>
+			 */
+			else
+				$preg = "/(<meta\s+name=['\"]{$key}['\"][^>]*>)/Uims";
+
+			// remplacer la meta si on la trouve
+			if (preg_match($preg,$head,$match)){
+				$head = str_replace($match[0],$meta,$head);
+			}
+			else
+				$append .= "$meta\n";
 		}
-		else
-			$append .= "$meta\n";
+	}
+	/* META GOOGLE WEBMASTER TOOLS */
+	if (isset($config['webmaster_tools'])
+	  AND $config['webmaster_tools']['activate']=='yes'
+	  AND $is_sommaire){
+		$append .= seo_generer_webmaster_tools();
+	}
+
+	if (isset($config['bing'])
+	  AND $config['bing']['activate']=='yes'
+	  AND $is_sommaire){
+		$append .= seo_generer_bing();
+	}
+
+	/* CANONICAL URL */
+	if (isset($config['canonical_url'])
+	  AND $config['canonical_url']['activate']=='yes'
+	  AND $is_sommaire){
+		$append .= seo_generer_urls_canoniques();
+	}
+
+	/* GOOGLE ANALYTICS */
+	if (isset($config['analytics'])
+		AND $config['analytics']['activate']=='yes'
+	  AND $is_sommaire){
+		$append .= seo_generer_google_analytics();
+	}
+
+	/* ALEXA */
+	if (isset($config['alexa'])
+	  AND $config['alexa']['activate']=='yes'
+	  AND $is_sommaire){
+		$append .= seo_generer_alexa();
 	}
 
 	if ($append){
@@ -52,7 +95,7 @@ function seo_remplace_metas($head,$contexte){
  * Renvoyer la balise <link> pour URL CANONIQUES
  * @return string $flux
  */
-function generer_urls_canoniques(){
+function seo_generer_urls_canoniques(){
 	include_spip('balise/url_');
 
 	if (count($GLOBALS['contexte'])==0){
@@ -82,7 +125,7 @@ function generer_urls_canoniques(){
  * Renvoyer la balise SCRIPT de Google Analytics
  * @return string $flux
  */
-function generer_google_analytics(){
+function seo_generer_google_analytics(){
 	include_spip('inc/config');
 
 	/* GOOGLE ANALYTICS */
@@ -112,7 +155,7 @@ function generer_google_analytics(){
  * @param null|array $contexte
  * @return string $flux
  */
-function calculer_meta_tags($contexte=null){
+function seo_calculer_meta_tags($contexte=null){
 	include_spip('inc/config');
 	$config = lire_config('seo/');
 
@@ -189,11 +232,11 @@ function calculer_meta_tags($contexte=null){
  * @param null|array $meta_tags
  * @return array
  */
-function generer_meta_tags($meta_tags = null, $contexte = null){
+function seo_generer_meta_tags($meta_tags = null, $contexte = null){
 	$tags = array();
 	//Set meta list if not provided
 	if (!is_array($meta_tags))
-		$meta_tags = calculer_meta_tags($contexte);
+		$meta_tags = seo_calculer_meta_tags($contexte);
 
 	// Print the result on the page
 	foreach ($meta_tags as $name => $content){
@@ -211,7 +254,7 @@ function generer_meta_tags($meta_tags = null, $contexte = null){
  * @param string $nom
  * @return string|bool
  */
-function generer_meta_brute($nom){
+function seo_generer_meta_brute($nom){
 	include_spip('inc/config');
 	return lire_config("seo/meta_tags/tag/$nom","");
 }
@@ -220,7 +263,7 @@ function generer_meta_brute($nom){
  * Renvoyer la META GOOGLE WEBMASTER TOOLS
  * @return string $flux
  */
-function generer_webmaster_tools(){
+function seo_generer_webmaster_tools(){
 	include_spip('inc/config');
 	if ($id=lire_config('seo/webmaster_tools/id'))
 		return '<meta name="google-site-verification" content="' . texte_script($id) . '" />'."\n";
@@ -231,7 +274,7 @@ function generer_webmaster_tools(){
  * Renvoyer la META BING TOOLS
  * @return string $flux
  */
-function generer_bing(){
+function seo_generer_bing(){
 	include_spip('inc/config');
 	if ($id=lire_config('seo/bing/id'))
 		return '<meta name="msvalidate.01" content="' . texte_script($id) . '" />'."\n";
@@ -241,7 +284,7 @@ function generer_bing(){
  * Renvoyer la META ALEXA
  * @return string $flux
  */
-function generer_alexa(){
+function seo_generer_alexa(){
 	include_spip('inc/config');
 	if ($id=lire_config('seo/alexa/id'))
 		return '<meta name="alexaVerifyID" content="' . texte_script($id) . '"/>'."\n";
@@ -252,7 +295,7 @@ function generer_alexa(){
  * Renvoyer la balise <link> pour URL CANONIQUES
  */
 function balise_SEO_URL($p){
-	$p->code = "generer_urls_canoniques()";
+	$p->code = "seo_generer_urls_canoniques()";
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -262,7 +305,7 @@ function balise_SEO_URL($p){
  * Renvoyer la balise SCRIPT de Google Analytics
  */
 function balise_SEO_GA($p){
-	$p->code = "generer_google_analytics()";
+	$p->code = "seo_generer_google_analytics()";
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -273,7 +316,7 @@ function balise_SEO_GA($p){
  * - Meta Titre / Description / etc.
  */
 function balise_SEO_META_TAGS($p){
-	$p->code = "generer_meta_tags()";
+	$p->code = "seo_generer_meta_tags(null,\$Pile[0])";
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -284,7 +327,7 @@ function balise_SEO_META_TAGS($p){
  */
 function balise_SEO_META_BRUTE($p){
 	$_nom = str_replace("'", "", interprete_argument_balise(1, $p));
-	$p->code = "table_valeur(calculer_meta_tags(),$_nom,'')";
+	$p->code = "table_valeur(seo_calculer_meta_tags(),$_nom,'')";
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -294,7 +337,7 @@ function balise_SEO_META_BRUTE($p){
  * Renvoyer la META GOOGLE WEBMASTER TOOLS
  */
 function balise_SEO_GWT($p){
-	$p->code = "generer_webmaster_tools()";
+	$p->code = "seo_generer_webmaster_tools()";
 	$p->interdire_scripts = false;
 	return $p;
 }
