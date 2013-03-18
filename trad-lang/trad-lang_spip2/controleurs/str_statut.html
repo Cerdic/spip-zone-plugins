@@ -56,9 +56,8 @@
 		var newstatut = cQuery(id).find('#statut_#ID_TRADLANG').val();
 		var new_contenu = cQuery(id).find('#str_#ID_TRADLANG').val().replace(/\n/g,'_').replace(/\r/g,'').replace(/\t/g,'');
 		if((new_contenu != contenu_orig) && ((statut_orig != 'OK') && (newstatut == statut_orig)))
-			if(!window.confirm('<:tradlang:crayon_changer_statut|filtrer_entites|texte_script:>')){
+			if(!window.confirm('<:tradlang:crayon_changer_statut|filtrer_entites|texte_script:>'))
 				veto.veto = true;
-			}
 	});
 </script>
 </BOUCLE_a>
