@@ -8,27 +8,35 @@
 			<h3 class="titrem"><:tradlang:titre_form_import_step_2:></h3>
 			<ul>
 				<li>
-					<a href="#" onclick="jQuery('input.checkbox:not(:checked)').attr('checked', 'checked');return false;"><:tradlang:lien_check_all:></a>
-					<a href="#" onclick="jQuery('input.checkbox:checked').attr('checked', '');return false;"><:tradlang:lien_check_none:></a>
+					<a href="#" onclick="jQuery('input.checkbox:not(:checked)').attr('checked', 'checked');return false;" class="btn"><:tradlang:lien_check_all:></a>
+					<a href="#" onclick="jQuery('input.checkbox:checked').attr('checked',null);return false;" class="btn"><:tradlang:lien_check_none:></a>
 				</li>
-				<BOUCLE_modifs(DATA){source tableau, #ENV*{_modifs}}>
+				<BOUCLE_modifs(DATA){source tableau, #ENV*{_modifs}}>#SET{statut,''}
 				<li class="fieldset">
 					<fieldset>
 						<legend>##COMPTEUR_BOUCLE <:tradlang:label_valeur_id:> #CLE</legend>
 						<BOUCLE_tradlang_lang(TRADLANGS){id=#CLE}{lang=#ENV{lang_orig}}>
-						<li class="editer">
+						<li class="editer editer_version_originale_choisie">
 							<label><:tradlang:label_version_originale_choisie{lang=#LANG}:></label>
 							<textarea readonly="readonly" class="readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
 						</li>
 						</BOUCLE_tradlang_lang>
-						<li class="editer">
+						<BOUCLE_tradlang_langcible(TRADLANGS){id=#CLE}{lang=#ENV{lang_cible}}>
+						#SET{statut,#STATUT}
+						<li class="editer editer_valeur_originale">
 							<label><:tradlang:label_valeur_originale:></label>
 							<textarea readonly="readonly" class="readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#VALEUR|table_valeur{orig}|tradlang_utf8|entites_html)]</textarea>
 						</li>
-						<li class="editer">
+						</BOUCLE_tradlang_langcible>
+						<li class="editer editer_valeur_fichier">
 							<label><:tradlang:label_valeur_fichier:></label>
 							<textarea readonly="readonly" class="readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#VALEUR|table_valeur{new}|tradlang_utf8|entites_html)]</textarea>
 						</li>
+						[(#GET{statut}|!={[(#VALEUR|table_valeur{statut})]}|oui)
+						#SET{statut_new,#VALEUR|table_valeur{statut}}
+						<li class="editer editer_statut notice">
+							<p><:tradlang:message_changement_statut{statut_old=#GET{statut},statut_new=#GET{statut_new}}:></p>
+						</li>]
 						<li class="editer">
 							<div class="choix">
 								<input type="checkbox" class="checkbox" name="#CLE" id="#CLE" value="oui" />
@@ -39,8 +47,8 @@
 				</li>
 				</BOUCLE_modifs>
 				<li>
-					<a href="#" onclick="jQuery('input.checkbox:not(:checked)').attr('checked', 'checked');return false;"><:tradlang:lien_check_all:></a>
-					<a href="#" onclick="jQuery('input.checkbox:checked').attr('checked', '');return false;"><:tradlang:lien_check_none:></a>
+					<a href="#" onclick="jQuery('input.checkbox:not(:checked)').attr('checked', 'checked');return false;" class="btn"><:tradlang:lien_check_all:></a>
+					<a href="#" onclick="jQuery('input.checkbox:checked').attr('checked',null);return false;" class="btn"><:tradlang:lien_check_none:></a>
 				</li>
 			</ul>
 			<p class="boutons">
