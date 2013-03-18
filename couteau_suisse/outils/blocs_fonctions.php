@@ -129,7 +129,7 @@ function blocs_balises($type, $args=array()) {
 		$distant = 10;
 	case 'titre':
 		foreach($args as $a) {	
-			if(is_numeric($a=trim($a))) $numero = ' cs_bloc'.$a;	
+			if(is_numeric($a=trim($a))) $numero = ' cs_bloc'.$a.'" id="deplier_num'.$a;	
 			elseif($a=='visible') $replie = -1;
 			elseif($a=='invisible') $replie = 1;
 			elseif(strlen($a)) $fragment = $a;

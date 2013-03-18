@@ -44,7 +44,7 @@ function blocs_callback($matches) {
 	}
 
 	// blocs numerotes
-	$b = strlen($matches[2])?" cs_bloc$matches[2]":''; 
+	$b = strlen($matches[2])?" cs_bloc$matches[2]' id='deplier_num$matches[2]":''; 
 	// title
 	$title = function_exists('blocs_title')
 		?"<div class='blocs_title blocs_invisible'>".join(_BLOC_TITLE_SEP, blocs_title($titre, $corps, $matches[2], $h<>'')).'</div>'

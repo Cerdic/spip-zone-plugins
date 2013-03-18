@@ -1,3 +1,7 @@
+// variable modifiable afin d'initialiser l'ouverture d'un bloc (simple ou numerote)
+if(typeof(bloc_actif)=='undefined') var bloc_actif = '';
+if(typeof(bloc_actif_num)=='undefined') var bloc_actif_num = '';
+
 // fonction surchargeable : gestion du slide jQuery
 jQuery.fn.blocs_toggle_slide_dist = function( selector ) {
 	this.toggleClass('blocs_slide');
@@ -84,6 +88,12 @@ function blocs_init() {
 		// annulation du clic
 		return false;
 	   });
+	// activation de blocs numerotes grace a l'url
+	var blocs = blocs_get_blocs(window.location, true);
+	if(blocs && (this==document)) blocs_clic_blocs(blocs, true);
+	// activation de blocs simples grace a l'url
+	blocs = blocs_get_blocs(window.location);
+	if(blocs && (this==document)) blocs_clic_blocs(blocs);
 	// clic vers une note dans un bloc
 	jQuery('.spip_note['+cs_sel_jQuery+'name^=nb], .spip_note['+cs_sel_jQuery+'id^=nb]').each(function(i) {
 		jQuery(this).click(function(e){
@@ -147,11 +157,27 @@ function blocs_deplies() {
 	return deplies.length?deplies:null;
 }
 
+// clic sur les blocs (Niemes blocs en base zero pour les blocs simples)
+function blocs_clic_blocs(liste, numerote) {
+	var blocs = liste.split(',');
+	for (var i=0; i<blocs.length; i++)
+		(numerote)
+			?jQuery('div.cs_bloc' + blocs[i] + ' .blocs_titre').eq(0).click()
+			:jQuery('div.cs_blocs .blocs_titre').eq(blocs[i]).click();
+}
+
+// examen des parametes url (blocs simples ou numerotes)
+function blocs_get_blocs(url, numerote) {
+	tab = numerote
+		?url.search.match(/[?&]deplier_num=([0-9,]*)/) || url.hash.match(/#deplier_num([0-9,]*)/)
+		:url.search.match(/[?&]deplier=([0-9,]*)/) || url.hash.match(/#deplier([0-9,]*)/);
+	return tab==null?(numerote?bloc_actif_num:bloc_actif):tab[1];
+}
+
 // une fonction et une variable pour reperer une pagination
 function blocs_get_pagination(url) {
-	tab=url.match(/#pagination([0-9]+)/);
-	if (tab==null) return false;
-	return tab[1];
+	tab = url.match(/#pagination([0-9]+)/);
+	return tab==null?bloc_actif:tab[1];
 }
 
 var blocs_pagination = blocs_get_pagination(window.location.hash);
