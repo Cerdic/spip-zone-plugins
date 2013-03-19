@@ -21,6 +21,7 @@
 	<pipeline nom="declarer_tables_principales" inclure="base/seo_tables.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/seo_tables.php" />
 
+	<pipeline nom="recuperer_fond" action="recuperer_fond" inclure="seo_pipelines.php" />
 	<pipeline nom="affichage_final" action="affichage_final" inclure="seo_pipelines.php" />
 	<pipeline nom="autoriser" inclure="seo_pipelines.php" />
 

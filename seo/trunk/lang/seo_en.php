@@ -30,16 +30,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// G
 	'google_analytics' => 'Google Analytics',
-	'google_analytics_activate' => 'Activate Analytics',
+	'google_analytics_activate' => 'Activate Google Analytics',
 	'google_analytics_id' => 'Google Analytics web property ID',
 	'google_webmaster_tools' => 'Google Webmaster Tools',
-	'google_webmaster_tools_activate' => 'Activate Webmaster Tools',
+	'google_webmaster_tools_activate' => 'Activate Google Webmaster Tools',
 	'google_webmaster_tools_id' => 'Meta Code verification',
 
 	// I
 	'insert_head' => 'Automatic insertion in #INSERT_HEAD',
 	'insert_head_activate' => 'Activate automatic insertion',
-	'insert_head_descriptif' => 'Automatic insertion of SEO configuration in &lt;header&gt;',
+	'insert_head_descriptif' => 'Automatic insertion of SEO configuration in &lt;head&gt;',
 
 	// M
 	'meta_author' => 'Author:',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meta_robots' => 'Robots:',
 	'meta_sommaire_value' => 'Home Page Meta Value',
 	'meta_tags' => 'Meta Tags',
-	'meta_tags_activate' => 'Activate meta tags',
+	'meta_tags_activate' => 'Activate editorial meta tags',
 	'meta_tags_default' => 'Defaults Meta Tag (for Articles and Sections)',
 	'meta_tags_edit_activate' => 'Activate meta tags editing in sections and articles',
 	'meta_tags_editing' => 'Meta Tags Editing',

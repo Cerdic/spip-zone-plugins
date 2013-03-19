@@ -42,6 +42,7 @@
 			<fieldset>
 				<legend>[(#CHEMIN{img_pack/meta_tags-24.png}|balise_img)] <:seo:meta_tags:></legend>
 				<ul>
+					<!-- descriptions and others -->
 					#SET{name,meta_tags/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 							<span class='erreur_message'>(#GET{erreurs})</span>
@@ -213,13 +214,8 @@
 							</ul>
 						</fieldset>
 					</li>
-				</ul>
-			</fieldset>
 
-			<!-- Urls Canoniques -->
-			<fieldset>
-				<legend>[(#CHEMIN{img_pack/canonical_url-24.png}|balise_img)] <:seo:canonical_url:></legend>
-				<ul>
+					<!-- Urls Canoniques -->
 					#SET{name,canonical_url/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 							<span class='erreur_message'>(#GET{erreurs})</span>
@@ -233,13 +229,8 @@
 								<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:canonical_url_activate:></label>
 							</div>
 					</li>
-				</ul>
-			</fieldset>
 
-			<!-- Google Webmatser Tools -->
-			<fieldset>
-				<legend>[(#CHEMIN{img_pack/google_webmaster-24.png}|balise_img)] <:seo:google_webmaster_tools:></legend>
-				<ul>
+					<!-- Google Webmatser Tools -->
 					#SET{name,webmaster_tools/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 							<span class='erreur_message'>(#GET{erreurs})</span>
@@ -265,13 +256,8 @@
 							</ul>
 						</fieldset>
 					</li>
-				</ul>
-			</fieldset>
 
-			<!-- Bing Webmatser Tools -->
-			<fieldset>
-				<legend>[(#CHEMIN{img_pack/bing-24.png}|balise_img)] <:seo:bing_webmaster:></legend>
-				<ul>
+					<!-- Bing Webmatser Tools -->
 					#SET{name,bing/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 							<span class='erreur_message'>(#GET{erreurs})</span>
@@ -297,9 +283,35 @@
 							</ul>
 						</fieldset>
 					</li>
+
+					<!-- Alexa -->
+					#SET{name,alexa/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]
+							#SET{val_non,no}
+							#SET{val,yes}
+							<div class="choix">[
+								(#REM) Valeur envoyee si case non cochee]
+								<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
+								<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+								<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:alexa_activate:></label>
+							</div>
+					</li>
+					<li	class="fieldset suite">
+						<fieldset>
+							<ul>
+								#SET{name,alexa/id}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="[(#GET{name}|cfgname_to_id)]"><:seo:alexa_id:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<input type="text" name="[(#GET{name}|cfgname_to_inputname)]" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="[(#GET{name}|cfgname_to_id)]" [(#HTML5|et{#GET{obli}})required='required']/>
+								</li>
+							</ul>
+						</fieldset>
+					</li>
 				</ul>
 			</fieldset>
-
 			<!-- Google Analytics -->
 			<fieldset>
 				<legend>[(#CHEMIN{img_pack/google_analytics-24.png}|balise_img)] <:seo:google_analytics:></legend>
@@ -332,37 +344,6 @@
 				</ul>
 			</fieldset>
 
-			<!-- Alexa -->
-			<fieldset>
-				<legend>[(#CHEMIN{img_pack/alexa-24.png}|balise_img)] <:seo:alexa:></legend>
-				<ul>
-					#SET{name,alexa/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
-							<span class='erreur_message'>(#GET{erreurs})</span>
-							]
-							#SET{val_non,no}
-							#SET{val,yes}
-							<div class="choix">[
-								(#REM) Valeur envoyee si case non cochee]
-								<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
-								<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
-								<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:alexa_activate:></label>
-							</div>
-					</li>
-					<li	class="fieldset suite">
-						<fieldset>
-							<ul>
-								#SET{name,alexa/id}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
-								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-									<label for="[(#GET{name}|cfgname_to_id)]"><:seo:alexa_id:></label>[
-									<span class='erreur_message'>(#GET{erreurs})</span>
-									]<input type="text" name="[(#GET{name}|cfgname_to_inputname)]" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="[(#GET{name}|cfgname_to_id)]" [(#HTML5|et{#GET{obli}})required='required']/>
-								</li>
-							</ul>
-						</fieldset>
-					</li>
-				</ul>
-			</fieldset>
 
 			<p class="boutons">
 				<input type="submit" value="<:bouton_valider:>" class="submit" />

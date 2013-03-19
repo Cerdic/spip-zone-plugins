@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'canonical_url' => 'URL Canoniques',
-	'canonical_url_activate' => 'Activer les URL Canoniques',
+	'canonical_url_activate' => 'Activer la meta d\'URL Canoniques',
 
 	// F
 	'forcer_squelette_descriptif' => 'Les metas SEO sont prioritaires aux meta générées par les squelettes',
@@ -28,16 +28,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// G
 	'google_analytics' => 'Google Analytics',
-	'google_analytics_activate' => 'Activer Analytics',
+	'google_analytics_activate' => 'Activer Google Analytics',
 	'google_analytics_id' => 'Google Analytics web property ID',
 	'google_webmaster_tools' => 'Google Webmaster Tools',
-	'google_webmaster_tools_activate' => 'Activer Webmaster Tools',
+	'google_webmaster_tools_activate' => 'Activer Google Webmaster Tools',
 	'google_webmaster_tools_id' => 'Meta code de vérification',
 
 	// I
 	'insert_head' => 'Insertion automatique dans #INSERT_HEAD',
 	'insert_head_activate' => 'Activer l\'insertion automatique',
-	'insert_head_descriptif' => 'Insertion automatique de la configuration SEO dans le &lt;header&gt;',
+	'insert_head_descriptif' => 'Insertion automatique de la configuration SEO dans le &lt;head&gt;',
 
 	// M
 	'meta_author' => 'Auteur :',
@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meta_robots' => 'Robots :',
 	'meta_sommaire_value' => 'Valeur de la Meta du Sommaire',
 	'meta_tags' => 'Meta Tags',
-	'meta_tags_activate' => 'Activer les meta tags',
+	'meta_tags_activate' => 'Activer les meta tags éditoriales',
 	'meta_tags_default' => 'Valeur des Meta Tags par Défaut (pour les Articles et les Rubriques)',
 	'meta_tags_edit_activate' => 'Activer l\'édition des meta tags dans les rubriques et les articles',
 	'meta_tags_editing' => 'Edition des Meta Tags',

@@ -33,13 +33,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'google_analytics_activate' => 'Aktivovať Google Analytics',
 	'google_analytics_id' => 'ID webového objektu Google Analytics ',
 	'google_webmaster_tools' => 'Nástroje Google Webmaster Tools',
-	'google_webmaster_tools_activate' => 'Aktivovať Nástroje pre webmastera',
+	'google_webmaster_tools_activate' => 'Aktivovať Google Webmaster Tools',
 	'google_webmaster_tools_id' => 'Kontrolný kód',
 
 	// I
 	'insert_head' => 'Automatické vkladanie do #INSERT_HEAD',
 	'insert_head_activate' => 'Aktivovať automatické vkladanie',
-	'insert_head_descriptif' => 'Automatické vkladanie nastavenia SEO do &lt;hlavičky&gt;',
+	'insert_head_descriptif' => 'Automatické vkladanie nastavenia SEO do &lt;head&gt;',
 
 	// M
 	'meta_author' => 'Autor(ka):',

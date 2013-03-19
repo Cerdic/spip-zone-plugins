@@ -30,16 +30,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// G
 	'google_analytics' => 'Google Analytics',
-	'google_analytics_activate' => 'Включить Analytics',
+	'google_analytics_activate' => 'Включить Google Analytics',
 	'google_analytics_id' => 'Google Analytics ID',
 	'google_webmaster_tools' => 'Google Webmaster Tools',
-	'google_webmaster_tools_activate' => 'Включить Webmaster Tools',
+	'google_webmaster_tools_activate' => 'Включить Google Webmaster Tools',
 	'google_webmaster_tools_id' => 'Проверка Meta code ',
 
 	// I
 	'insert_head' => 'Подключать автоматически в #INSERT_HEAD',
 	'insert_head_activate' => 'Включить',
-	'insert_head_descriptif' => 'Автоматическая вставка мета-тегов в &lt;header&gt;',
+	'insert_head_descriptif' => 'Автоматическая вставка мета-тегов в &lt;head&gt;',
 
 	// M
 	'meta_author' => 'Автор :',

@@ -299,7 +299,7 @@ function seo_generer_alexa(){
  * #SEO_URL
  * Renvoyer la balise <link> pour URL CANONIQUES
  */
-function balise_SEO_URL($p){
+function balise_SEO_URL_dist($p){
 	$p->code = "seo_generer_urls_canoniques()";
 	$p->interdire_scripts = false;
 	return $p;
@@ -309,7 +309,7 @@ function balise_SEO_URL($p){
  * #SEO_GA
  * Renvoyer la balise SCRIPT de Google Analytics
  */
-function balise_SEO_GA($p){
+function balise_SEO_GA_dist($p){
 	$p->code = "seo_generer_google_analytics()";
 	$p->interdire_scripts = false;
 	return $p;
@@ -317,10 +317,10 @@ function balise_SEO_GA($p){
 
 /**
  * #SEO_META_TAGS
- * Renvoyer les META Classiques
+ * Renvoyer les META editoriales
  * - Meta Titre / Description / etc.
  */
-function balise_SEO_META_TAGS($p){
+function balise_SEO_META_TAGS_dist($p){
 	$p->code = "seo_generer_meta_tags(null,\$Pile[0])";
 	$p->interdire_scripts = false;
 	return $p;
@@ -330,7 +330,7 @@ function balise_SEO_META_TAGS($p){
  * #SEO_META_BRUTE{nom_de_la_meta}
  * Renvoyer la valeur de la meta appelée (sans balise)
  */
-function balise_SEO_META_BRUTE($p){
+function balise_SEO_META_BRUTE_dist($p){
 	$_nom = str_replace("'", "", interprete_argument_balise(1, $p));
 	$p->code = "table_valeur(seo_calculer_meta_tags(),$_nom,'')";
 	$p->interdire_scripts = false;
@@ -341,9 +341,19 @@ function balise_SEO_META_BRUTE($p){
  * #SEO_GWT
  * Renvoyer la META GOOGLE WEBMASTER TOOLS
  */
-function balise_SEO_GWT($p){
+function balise_SEO_GWT_dist($p){
 	$p->code = "seo_generer_webmaster_tools()";
 	$p->interdire_scripts = false;
 	return $p;
 }
 
+/**
+ * #SEO : insere toutes les meta d'un coup, a l'endroit indique
+ * @param $p
+ * @return mixed
+ */
+function balise_SEO_dist($p){
+	$p->code = "seo_insere_remplace_metas('',\$Pile[0])";
+	$p->interdire_scripts = false;
+	return $p;
+}

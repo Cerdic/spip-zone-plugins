@@ -22,6 +22,17 @@ function autoriser_seo_bouton_dist($faire, $type, $id, $qui, $opt){
 }
 
 
+function seo_recuperer_fond($flux){
+	if (strncmp($flux['args']['fond'],"head/",5)==0
+	  AND strpos($flux['data']['texte'],"<!--seo_insere-->")===false
+	  AND include_spip('inc/config')
+	  AND lire_config('seo/insert_head/activate', 'no')=="yes"
+	){
+		$flux['data']['texte'] = recuperer_fond("inclure/seo-head",array("head"=>$flux['data']['texte'],"contexte"=>$flux['args']['contexte']));
+	}
+	return $flux;
+}
+
 /**
  * Insertion dans le pipeline affichage_final (SPIP)
  * Remplacement des métas et title dans le <head>
@@ -41,13 +52,12 @@ function seo_affichage_final($flux){
 	 */
 	if ($GLOBALS['html']
 		AND stripos($flux,'<head>')!==false
+		AND strpos($flux,"<!--seo_insere-->")===false
 	  AND include_spip('inc/config')
 		AND lire_config('seo/insert_head/activate', 'no')=="yes"
 		AND preg_match('/<head>(.*)<\/head>/Uims', $flux, $head)){
-		$head = $head[1];
-
-		$head_new = recuperer_fond("inclure/seo-head",array("head"=>$head,"contexte"=>$GLOBALS['contexte']));
-		$flux = str_replace($head,$head_new,$flux);
+		$head_new = recuperer_fond("inclure/seo-head",array("head"=>$head[1],"contexte"=>$GLOBALS['contexte']));
+		$flux = str_replace($head[1],$head_new,$flux);
 	}
 	#var_dump(spip_timer());
 	return $flux;
