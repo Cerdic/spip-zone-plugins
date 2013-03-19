@@ -73,6 +73,10 @@
 											<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:meta_tags_edit_activate:></label>
 										</div>
 								</li>
+								<li class="suite">
+									#SET{name,meta_tags/editable_tables}
+									<INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name}|cfgname_to_inputname{},id=#GET{name}|cfgname_to_id{},selected=#ENV{#GET{name},#LISTE{spip_articles,spip_rubriques}}} />
+								</li>
 							</ul>
 						</fieldset>
 						<fieldset>

@@ -2,7 +2,7 @@
 	prefix="seo"
 	categorie="statistique"
 	version="2.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="seo.png"
 	schema="1.1.1"

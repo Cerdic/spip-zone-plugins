@@ -11,6 +11,14 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function seo_metas_editable($objet){
+	include_spip("inc/config");
+	$table_sql = table_objet_sql($objet);
+	if (in_array($table_sql,lire_config("seo/meta_tags/editable_tables",array("spip_articles","spip_rubriques")))){
+		return true;
+	}
+	return false;
+}
 /**
  * Afficher les meta-tags en bas du contenu de l'objet
  * @param array $flux
@@ -28,7 +36,8 @@ function seo_afficher_contenu_objet($flux){
  */
 function seo_formulaire_charger($flux){
 	if (strncmp($flux['args']['form'],"editer_",7)==0
-		AND $objet = substr($flux['args']['form'],7)){
+		AND $objet = substr($flux['args']['form'],7)
+	  AND seo_metas_editable($objet)){
 		$valeurs = array(
 			'meta_title'=>'',
 			'meta_description'=>'',
@@ -85,7 +94,8 @@ function seo_formulaire_fond($flux){
 
 	if (isset($flux['args']['args']['type'])
 		AND $objet = $flux['args']['args']['type']
-		AND $flux['args']['form']=="editer_$objet"){
+		AND $flux['args']['form']=="editer_$objet"
+	  AND seo_metas_editable($objet)){
 
 		$ins = recuperer_fond("formulaires/inc-editer-seo",$flux['args']['contexte']);
 		if ($p=strpos($flux['data'],$i='<!--extra-->')
