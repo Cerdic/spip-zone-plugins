@@ -140,13 +140,25 @@ function autoriser_tradlang_configurer_dist($faire, $type, $id, $qui, $opt){
 function autoriser_tradlang_modifier_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 	$utiliser_defaut = true;
-	if(autoriser_tradlang_configurer_dist($faire, $type, $id, $qui, $opt)){
-		return autoriser_tradlang_configurer_dist($faire, $type, $id, $qui, $opt);
+	
+	/**
+	 * Retourner false si c'est une chaîne de la langue mère
+	 */
+	if(intval($id) > 0){		
+		$infos_chaine = sql_fetsel('lang,module','spip_tradlangs','id_tradlang='.intval($id));
+		$lang_mere = sql_getfetsel('lang_mere','spip_tradlang_modules','module='.sql_quote($infos_chaine['module']));
+		if($infos_chaine['lang'] == $lang_mere)
+			return false;
 	}
 	
-	if(!function_exists('lire_config')){
-		include_spip('inc/config');	
-	}
+	/**
+	 * Si on est autoriser à configurer tradlang, on est autorisé à modifier la chaîne
+	 */
+	if(autoriser_tradlang_configurer_dist($faire, $type, $id, $qui, $opt))
+		return autoriser_tradlang_configurer_dist($faire, $type, $id, $qui, $opt);
+	
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
 	
 	$type = lire_config('tradlang/modifier_type');
 	if($type){
@@ -168,12 +180,12 @@ function autoriser_tradlang_modifier_dist($faire, $type, $id, $qui, $opt){
 				$autorise = in_array($qui['id_auteur'], lire_config('tradlang/modifier_auteurs',array()));
 				break;
 		}
-		if($autorise == true){
+		if($autorise == true)
 			return $autorise;
-		}
 	
 		$utiliser_defaut = false;
 	}
+	
 	// Si $utiliser_defaut = true, on utilisera les valeurs par défaut
 	// Sinon on ajoute la possibilité de régler par define
 	$liste = definir_autorisations_tradlang('modifier',$utiliser_defaut);
@@ -182,17 +194,6 @@ function autoriser_tradlang_modifier_dist($faire, $type, $id, $qui, $opt){
 	else if ($liste['auteur'])
 		$autorise = in_array($qui['id_auteur'], $liste['auteur']);
 	return $autorise;
-	
-	/**
-	 * Pour plus tard ... 
-	 */
-	//if(intval($id) > 0){		
-	//	$infos_chaine = sql_fetsel('*','spip_tradlangs','id_tradlang='.$id);
-	//	$lang_mere = sql_getfetsel('lang_mere','spip_tradlang_modules','module='.sql_quote($infos_chaine['module']));
-	//	if($infos_chaine['lang'] == $lang_mere){
-	//		return false;
-	//	}
-	//}
 }
 
 /**
@@ -237,9 +238,9 @@ function autoriser_tradlang_voir_dist($faire, $type, $id, $qui, $opt){
 				$autorise = in_array($qui['id_auteur'], lire_config('tradlang/voir_auteurs',array()));
 				break;
 		}
-		if($autorise == true){
+		if($autorise == true)
 			return $autorise;
-		}
+		
 		$utiliser_defaut = false;
 	}
 	
@@ -256,9 +257,8 @@ function autoriser_tradlang_voir_dist($faire, $type, $id, $qui, $opt){
 	/**
 	 * Si vraiment on n'a rien, on utilise une fonction par défaut
 	 */
-	else{
+	else
 		return autoriser('voir','lang');
-	}
 }
 
 /**
