@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'caracteres_autorises_champ' => 'Possible characters: letters without accents, numerals, - and _',
-	'caracteres_interdits' => 'Some characters used are inappropriate for this field.',
+	'caracteres_interdits' => 'Some characters used are inappropriate for this field.', # MODIF
 	'champ_deja_existant' => 'A field with the same name already exists for this table.',
 	'champ_sauvegarde' => 'Extra field saved!',
 	'champs_extras' => 'Extra Fields',
@@ -108,7 +108,7 @@ The default coefficient applied to the extras fields is 2. To give you an idea, 
 	'precisions_pour_saisie' => 'Disply a form entry of type:',
 	'precisions_pour_traitements' => 'Automatically apply a process
 		for the resulting #FIELD_NAME field:',
-	'precisions_pour_versionner' => 'The versioning would be apply only if the plugin "revisions" is active and that the editorial object of the extra fields itself is versioned.',
+	'precisions_pour_versionner' => 'The versioning would be apply only if the plugin "revisions" is active and that the editorial object of the extra fields itself is versioned.', # MODIF
 
 	// R
 	'radio_restrictions_auteur_admin' => 'Only the administrators',

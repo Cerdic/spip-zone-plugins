@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'caracteres_autorises_champ' => 'Caratteri possibili: lettere senza accento, cifre, - e _',
-	'caracteres_interdits' => 'Alcuni caratteri utilizzati non sono compatibili con questo campo.',
+	'caracteres_interdits' => 'Alcuni caratteri utilizzati non sono compatibili con questo campo.', # MODIF
 	'champ_deja_existant' => 'Un campo con lo stesso nome già esiste per questa tabella.',
 	'champ_sauvegarde' => 'Campo extra salvato!',
 	'champs_extras' => 'Campi Extra',

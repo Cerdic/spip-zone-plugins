@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'caracteres_autorises_champ' => 'Možné znaky: písmená bez diaktritiky, číslice, - a _',
-	'caracteres_interdits' => 'Niektoré znaky, ktoré ste použili, nie sú vhodné pre toto pole.',
+	'caracteres_interdits' => 'Niektoré znaky, ktoré ste použili, nie sú vhodné pre toto pole.', # MODIF
 	'champ_deja_existant' => 'Rovnaké pole v tejto tabuľke už existuje.',
 	'champ_sauvegarde' => 'Doplnkové pole bolo uložené!',
 	'champs_extras' => 'Doplnkové polia',
@@ -107,7 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_pour_restrictions_secteurs' => 'Identifikátory sektorov, ktoré sa majú obmedziť (oddeľovač ":")',
 	'precisions_pour_saisie' => 'Zobraziť vstup typu:',
 	'precisions_pour_traitements' => 'Automaticky spracovať výsledok tagu #NOM_DU_CHAMP:',
-	'precisions_pour_versionner' => 'Vytváranie verzií sa použije, iba ak je aktivovaný zásuvný modul "Opravy" ak sa vytvárajú verzie z redakčného objektu ďalšieho poľa',
+	'precisions_pour_versionner' => 'Vytváranie verzií sa použije, iba ak je aktivovaný zásuvný modul "Opravy" ak sa vytvárajú verzie z redakčného objektu ďalšieho poľa', # MODIF
 
 	// R
 	'radio_restrictions_auteur_admin' => 'Iba administrátori',
