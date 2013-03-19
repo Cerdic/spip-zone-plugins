@@ -39,7 +39,7 @@ function export_lang_po_dist($module,$langue,$dir_lang){
 	 * Les informations du module
 	 */	
 	$info_module = sql_fetsel('*','spip_tradlang_modules','module='.sql_quote($module));
-	$url_trad = url_absolue(generer_url_entite($info_module['id_tradlang_module'],'tradlang_module'));
+	$url_trad = url_absolue(parametre_url(generer_url_entite($info_module['id_tradlang_module'],'tradlang_module'),'lang_cible',$langue));
 	
 	/**
 	 * Gestion des auteurs
