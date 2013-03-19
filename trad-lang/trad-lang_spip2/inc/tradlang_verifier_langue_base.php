@@ -1,7 +1,22 @@
 <?php
-
+/**
+ * Trad-lang v2
+ * Plugin SPIP de traduction de fichiers de langue
+ * © Florent Jugla, Fil, kent1
+ * 
+ * @package SPIP\Tradlang\
+ */
+ 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Fonction de vérification de la concordance d'une langue x par rapport à la langue mère
+ * 
+ * @param string $module
+ * 		Le nom du module
+ * @param string $langue
+ * 		La langue à comparer 
+ */
 function inc_tradlang_verifier_langue_base_dist($module,$langue){
 	/**
 	 * Quelle est la langue mère
@@ -52,7 +67,7 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 
 		foreach($diff2 as $key => $id){
 			$array['id'] = $module.'_'.$id;
-			$array['module'] = 'attic';
+			$array['module'] = 'attic%'.$module;
 			$id_tradlang = sql_getfetsel('id_tradlang','spip_tradlangs','id='.sql_quote($id)." AND module=".sql_quote($module)." AND lang=".sql_quote($langue));
 			sql_updateq('spip_tradlangs',$array,'id_tradlang='.intval($id_tradlang));
 			$supprimees++;
