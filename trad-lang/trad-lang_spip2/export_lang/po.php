@@ -5,13 +5,16 @@
  * Plugin SPIP de traduction de fichiers de langue
  * © Florent Jugla, Fil, kent1
  * 
- * Fichier des fonctions spécifiques du plugin
+ * Fichier d'export d'un module de langue en .po (Gettext)
  */
  
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Fonction d'export d'une langue d'un module en .po
+ * 
+ * Les chaînes avec un statut NEW sont vidées
+ * Les chaînes avec un statut MODIF sont mises en "fuzzy"
  * 
  * @param string $module 
  * 		Le module à exporter (le champ "module" dans la base)
@@ -23,60 +26,35 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		Le fichier final
  */
 function export_lang_po_dist($module,$langue,$dir_lang){
+	$x=$tous=array();
+	$contenu = '';
+	
 	/**
 	 * Le fichier final
 	 * local/cache-lang/module_lang.po
 	 */
 	$fichier = $dir_lang."/".$module."_".$langue.".po";
 
-	$tab = "\t";
-	
+	/**
+	 * Les informations du module
+	 */	
 	$info_module = sql_fetsel('*','spip_tradlang_modules','module='.sql_quote($module));
-	$res=sql_select("id,str,comm,statut","spip_tradlangs","module=".sql_quote($module)." AND lang=".sql_quote($langue),"id");
-	$x=array();
-	$tous = $lorigine; // on part de l'origine comme ca on a tout meme si c'est pas dans la base de donnees (import de salvatore/lecteur.php)
-	while ($row=sql_fetch($res)) {
-		$tous[$row['id']] = $row;
-	}
-	ksort($tous);
-	foreach ($tous as $row) {
-		if (trim($row['comm'])) $row['comm']=" # ".trim($row['comm']); // on rajoute les commentaires ?
-
-		$str = $row['str'];
-
-		$oldmd5 = md5($str);
-		$str = unicode_to_utf_8(
-			html_entity_decode(
-				preg_replace('/&([lg]t;)/S', '&amp;\1', $str),
-				ENT_NOQUOTES, 'utf-8')
-		);
-		$newmd5 = md5($str);
-
-		if ($oldmd5 !== $newmd5) sql_updateq("spip_tradlangs",array('md5'=>$newmd5), "md5=".sql_quote($oldmd5)." AND module=".sql_quote($module));
-		$str_original = sql_getfetsel('str','spip_tradlangs','id ='.sql_quote($row['id']).' AND module='.sql_quote($module).' AND lang='.sql_quote($info_module['lang_mere']));
-
-		$x[]=($row['comm'] ? "#".$row['comm']."\n" : "").
-"
-#, ".(($row['statut'] == 'MODIF') ? "fuzzy, php-format" : "php-format")."
-#| msgid \"".$row['id']."\"
-msgid \"".str_replace('"','\"',$str_original)."\"
-msgstr \"".(($row['statut'] == 'NEW') ? '' : str_replace('"','\"',$str))."\"\n";
-	}
-
 	$url_trad = url_absolue(generer_url_entite($info_module['id_tradlang_module'],'tradlang_module'));
 	
-	$fd = fopen($fichier, 'w');
-
-	$contenu = join("\n",$x);
-	
+	/**
+	 * Gestion des auteurs
+	 * 
+	 * On ajoute une liste de traducteurs en entête de fichier (non obligatoire)
+	 * On ajoute également l'item "Last-Translator : user <email>" dans les métas ($last_auteur)
+	 */
 	$last_auteur = array();
 	if($langue != $info_module['lang_mere']){
 		$traducteur = sql_fetsel('id_tradlang,traducteur','spip_tradlangs',"module=".sql_quote($module)." AND lang=".sql_quote($langue),"",'maj DESC','0,1');
-		if(is_numeric($traducteur['traducteur'])){
+		if(is_numeric($traducteur['traducteur']))
 			$id_auteur = $traducteur['traducteur'];
-		}else{
+		else
 			$id_auteur = sql_select('id_auteur','spip_versions','objet="tradlang" AND id_objet='.intval($traducteur['id_tradlang']),"",'id_version DESC','0,1');
-		}
+		
 		$last_auteur = sql_fetsel('nom,email','spip_auteurs','id_auteur='.intval($id_auteur));
 		
 		$traducteurs[$lang] = array();
@@ -109,12 +87,11 @@ msgstr \"".(($row['statut'] == 'NEW') ? '' : str_replace('"','\"',$str))."\"\n";
 			}
 		}
 	}
-	
+
 	/**
-	 * Ecriture du fichier
+	 * Création de l'entête du fichier généré
 	 */
-	fwrite($fd,
-	'# This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+	$contenu .= '# This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 # extrait automatiquement de '.$url_trad.'
 '
 . (isset($trad_texte) ? $trad_texte : '')
@@ -134,13 +111,51 @@ msgstr ""
 . (isset($last_auteur['nom'])?'"Last-Translator: '.extraire_multi($last_auteur['nom']).' <'.$last_auteur['email'].'>\n"
 ' : '')
 .'"Language-Team: SPIP-trad <spip-trad@rezo.net>\n"
-'
-. str_replace("\r\n", "\n", $contenu)
-	);
+';
 
-	fclose($fd);
-	@chmod($fichier, 0666);
+	/**
+	 * Les chaines
+	 * 
+	 * On crée un bloc pour chaque chaînes sous la forme
+	 * 
+	 * #, php-format
+	 * #| msgid "id_dans_la_base" 
+	 * msgid "Item dans la langue originale"
+	 * msgstr "Item dans la langue actuelle (traduit), si non traduit, vide"
+	 */
+	$res=sql_select("id,str,comm,statut","spip_tradlangs","module=".sql_quote($module)." AND lang=".sql_quote($langue),"id");
+	while ($row=sql_fetch($res)) {
+		$tous[$row['id']] = $row;
+	}
+	ksort($tous);
+	
+	foreach ($tous as $row) {
+		if (trim($row['comm'])) $row['comm']=" # ".trim($row['comm']); // on rajoute les commentaires ?
 
+		$str = $row['str'];
+
+		$oldmd5 = md5($str);
+		$str = unicode_to_utf_8(
+			html_entity_decode(
+				preg_replace('/&([lg]t;)/S', '&amp;\1', $str),
+				ENT_NOQUOTES, 'utf-8')
+		);
+		$newmd5 = md5($str);
+
+		if ($oldmd5 !== $newmd5) sql_updateq("spip_tradlangs",array('md5'=>$newmd5), "md5=".sql_quote($oldmd5)." AND module=".sql_quote($module));
+		$str_original = sql_getfetsel('str','spip_tradlangs','id ='.sql_quote($row['id']).' AND module='.sql_quote($module).' AND lang='.sql_quote($info_module['lang_mere']));
+
+		$x[]=($row['comm'] ? "#".$row['comm']."\n" : "").
+"
+#, ".(($row['statut'] == 'MODIF') ? "fuzzy, php-format" : "php-format")."
+#| msgid \"".$row['id']."\"
+msgid \"".str_replace('"','\"',$str_original)."\"
+msgstr \"".(($row['statut'] == 'NEW') ? '' : str_replace('"','\"',$str))."\"";
+	}
+
+	$contenu .= str_replace("\r\n", "\n", join("\n",$x));
+	
+	ecrire_fichier($fichier,$contenu);
 	return $fichier;
 }
 ?>
