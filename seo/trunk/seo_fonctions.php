@@ -23,7 +23,12 @@ function seo_interprete_contexte($contexte){
 	}
 	// d'abord les rubriques
 	if (isset($contexte['id_rubrique'])){
-		$infos[$s] = array('objet'=>'rubrique','id_objet'=>$contexte['id_rubrique'],'primary'=>'id_rubrique','table_sql'=>'spip_rubriques');
+		$infos[$s] = array(
+			'objet'=>'rubrique',
+			'id_objet'=>$contexte['id_rubrique'],
+			'primary'=>'id_rubrique',
+			'table_sql'=>'spip_rubriques'
+		);
 	}
 	// puis voyons si on trouve un objet plus precis
 	$tables = lister_tables_objets_sql();
@@ -84,7 +89,7 @@ function seo_insere_remplace_metas($head,$contexte){
 				$preg = "/(<meta\s+name=['\"]{$key}['\"][^>]*>)/Uims";
 
 			// remplacer la meta si on la trouve
-			if (preg_match($preg,$head,$match)){
+			if ($preg AND preg_match($preg,$head,$match)){
 				$head = str_replace($match[0],$meta,$head);
 			}
 			else
@@ -108,7 +113,7 @@ function seo_insere_remplace_metas($head,$contexte){
 	if (isset($config['canonical_url'])
 	  AND $config['canonical_url']['activate']=='yes'
 	  AND $is_sommaire){
-		$append .= "\n" . seo_generer_urls_canoniques();
+		$append .= "\n" . seo_generer_urls_canoniques($contexte);
 	}
 
 	/* GOOGLE ANALYTICS */
@@ -139,37 +144,25 @@ function seo_insere_remplace_metas($head,$contexte){
 
 /**
  * Renvoyer la balise <link> pour URL CANONIQUES
- * @return string $flux
+ * @param array $contexte
+ * @return string
  */
-function seo_generer_urls_canoniques(){
-	include_spip('balise/url_');
+function seo_generer_urls_canoniques($contexte){
+	include_spip('inc/urls');
+	$i = seo_interprete_contexte($contexte);
 
-	if (count($GLOBALS['contexte'])==0){
-		$objet = 'sommaire';
-	} elseif (isset($GLOBALS['contexte']['id_article'])) {
-		$id_objet = $GLOBALS['contexte']['id_article'];
-		$objet = 'article';
-	} elseif (isset($GLOBALS['contexte']['id_rubrique'])) {
-		$id_objet = $GLOBALS['contexte']['id_rubrique'];
-		$objet = 'rubrique';
+	if (isset($i['id_objet'])){
+		return '<link rel="canonical" href="' . generer_url_entite_absolue($i['id_objet'], $i['objet']) . '" />';
 	}
+	elseif($i['objet']=='sommaire')
+		return '<link rel="canonical" href="' . url_de_base() . '" />';
 
-	$flux = "";
-	switch ($objet) {
-		case 'sommaire':
-			$flux .= '<link rel="canonical" href="' . url_de_base() . '" />';
-			break;
-		default:
-			$flux .= '<link rel="canonical" href="' . generer_url_entite_absolue($id_objet, $objet) . '" />';
-			break;
-	}
-
-	return $flux;
+	return '';
 }
 
 /**
  * Renvoyer la balise SCRIPT de Google Analytics
- * @return string $flux
+ * @return string
  */
 function seo_generer_google_analytics(){
 	include_spip('inc/config');
@@ -199,7 +192,7 @@ function seo_generer_google_analytics(){
  * Renvoyer les META Classiques
  * - Meta Titre / Description / etc.
  * @param null|array $contexte
- * @return string $flux
+ * @return array
  */
 function seo_calculer_meta_tags($contexte=null){
 	include_spip('inc/config');
@@ -214,43 +207,65 @@ function seo_calculer_meta_tags($contexte=null){
 	// If the meta tags configuration is activate
 	$meta_tags = array();
 
-	switch ($i['objet']) {
-		case 'sommaire':
-			$meta_tags = isset($config['meta_tags']['tag'])?$config['meta_tags']['tag']:array();
-			break;
-		default:
-			// TODO : definir les champs utile pour cette table
-			$row = sql_fetsel("titre,descriptif,texte", $i['table_sql'], $i['primary']."=" . intval($i['id_objet']));
-			$tag = array();
-			$tag['title'] = couper($row['titre'], 64);
-			unset($row['titre']);
-			if (count($row)) $tag['description'] = couper(implode(" ", $row), 150, '');
-			// Get the value set by default
-			if (isset($config['meta_tags']['default'])){
-				foreach ($config['meta_tags']['default'] as $name => $option){
-					$meta_tags[$name] = array();
-					if (in_array($option,array('page','page_sommaire'))){
-						if (isset($tag[$name]))
-							$meta_tags[$name][] = $tag[$name];
-					}
-					if (in_array($option,array('sommaire','page_sommaire'))){
-						if (isset($config['meta_tags']['tag'][$name]))
-							$meta_tags[$name][] = $config['meta_tags']['tag'][$name];
-					}
-					$meta_tags[$name] = implode(" - ",$meta_tags[$name]);
-				}
-			}
+	if (isset($i['id_objet'])){
+		$trouver_table = charger_fonction("trouver_table","base");
+		$desc = $trouver_table($i['table_sql']);
+		$select = array();
+		if (isset($desc['titre']))
+			$select[] = $desc['titre'];
+		elseif(isset($desc['field']['titre']))
+			$select[] = "titre";
+		if (isset($desc['field']['descriptif']))
+			$select[] = "descriptif";
+		if (isset($desc['field']['chapo']))
+			$select[] = "chapo";
+		if (isset($desc['field']['texte']))
+			$select[] = "texte";
 
-			// If the meta tags rubrique and articles editing is activate (should overwrite other setting)
-			if (isset($config['meta_tags']['activate_editing'])
-				AND $config['meta_tags']['activate_editing']=='yes'){
-				$result = sql_select("*", "spip_seo", "id_objet=" . intval($i['id_objet']) . " AND objet=" . sql_quote($i['objet']));
-				while ($r = sql_fetch($result)){
-					if ($r['meta_content']!='')
-						$meta_tags[$r['meta_name']] = $r['meta_content'];
-				}
+		$tag = array();
+		if (count($select)){
+			$select = implode(",",$select);
+			$row = sql_fetsel($select, $i['table_sql'], $i['primary']."=" . intval($i['id_objet']));
+			if (isset($row['titre'])){
+				$tag['title'] = couper($row['titre'], 64);
+				unset($row['titre']);
 			}
-			break;
+			if (isset($row['lang']))
+				unset($row['lang']);
+			if (count($row))
+				$tag['description'] = couper(implode(" ", $row), 150, '');
+		}
+		// Get the value set by default
+		if (isset($config['meta_tags']['default']) AND is_array($config['meta_tags']['default'])){
+			foreach ($config['meta_tags']['default'] as $name => $option){
+				$meta_tags[$name] = array();
+				if (in_array($option,array('page','page_sommaire'))){
+					if (isset($tag[$name]))
+						$meta_tags[$name][] = $tag[$name];
+				}
+				if (in_array($option,array('sommaire','page_sommaire'))){
+					if (isset($config['meta_tags']['tag'][$name]))
+						$meta_tags[$name][] = $config['meta_tags']['tag'][$name];
+				}
+				if (count($meta_tags[$name]))
+					$meta_tags[$name] = implode(" - ",$meta_tags[$name]);
+				else
+					unset($meta_tags[$name]);
+			}
+		}
+
+		// If the meta tags rubrique and articles editing is activate (should overwrite other setting)
+		if (isset($config['meta_tags']['activate_editing'])
+			AND $config['meta_tags']['activate_editing']=='yes'){
+			$result = sql_select("*", "spip_seo", "id_objet=" . intval($i['id_objet']) . " AND objet=" . sql_quote($i['objet']));
+			while ($r = sql_fetch($result)){
+				if ($r['meta_content']!='')
+					$meta_tags[$r['meta_name']] = $r['meta_content'];
+			}
+		}
+	}
+	elseif($i['objet']=="sommaire") {
+		$meta_tags = isset($config['meta_tags']['tag'])?$config['meta_tags']['tag']:array();
 	}
 
 	return $meta_tags;
@@ -281,7 +296,7 @@ function seo_generer_meta_tags($meta_tags = null, $contexte = null){
 /**
  * Renvoyer une META toute seule (hors balise)
  * @param string $nom
- * @return string|bool
+ * @return string
  */
 function seo_generer_meta_brute($nom){
 	include_spip('inc/config');
@@ -290,7 +305,7 @@ function seo_generer_meta_brute($nom){
 
 /**
  * Renvoyer la META GOOGLE WEBMASTER TOOLS
- * @return string $flux
+ * @return string
  */
 function seo_generer_webmaster_tools(){
 	include_spip('inc/config');
@@ -301,7 +316,7 @@ function seo_generer_webmaster_tools(){
 
 /**
  * Renvoyer la META BING TOOLS
- * @return string $flux
+ * @return string
  */
 function seo_generer_bing(){
 	include_spip('inc/config');
@@ -311,7 +326,7 @@ function seo_generer_bing(){
 
 /**
  * Renvoyer la META ALEXA
- * @return string $flux
+ * @return string
  */
 function seo_generer_alexa(){
 	include_spip('inc/config');
@@ -322,9 +337,10 @@ function seo_generer_alexa(){
 /**
  * #SEO_URL
  * Renvoyer la balise <link> pour URL CANONIQUES
+ * @param $p
  */
 function balise_SEO_URL_dist($p){
-	$p->code = "seo_generer_urls_canoniques()";
+	$p->code = "seo_generer_urls_canoniques(\$Pile[0])";
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -332,6 +348,7 @@ function balise_SEO_URL_dist($p){
 /**
  * #SEO_GA
  * Renvoyer la balise SCRIPT de Google Analytics
+ * @param $p
  */
 function balise_SEO_GA_dist($p){
 	$p->code = "seo_generer_google_analytics()";
@@ -343,6 +360,7 @@ function balise_SEO_GA_dist($p){
  * #SEO_META_TAGS
  * Renvoyer les META editoriales
  * - Meta Titre / Description / etc.
+ * @param $p
  */
 function balise_SEO_META_TAGS_dist($p){
 	$p->code = "seo_generer_meta_tags(null,\$Pile[0])";
@@ -353,6 +371,7 @@ function balise_SEO_META_TAGS_dist($p){
 /**
  * #SEO_META_BRUTE{nom_de_la_meta}
  * Renvoyer la valeur de la meta appelée (sans balise)
+ * @param $p
  */
 function balise_SEO_META_BRUTE_dist($p){
 	$_nom = str_replace("'", "", interprete_argument_balise(1, $p));
@@ -364,6 +383,7 @@ function balise_SEO_META_BRUTE_dist($p){
 /**
  * #SEO_GWT
  * Renvoyer la META GOOGLE WEBMASTER TOOLS
+ * @param $p
  */
 function balise_SEO_GWT_dist($p){
 	$p->code = "seo_generer_webmaster_tools()";
@@ -374,7 +394,6 @@ function balise_SEO_GWT_dist($p){
 /**
  * #SEO : insere toutes les meta d'un coup, a l'endroit indique
  * @param $p
- * @return mixed
  */
 function balise_SEO_dist($p){
 	$p->code = "seo_insere_remplace_metas('',\$Pile[0])";
