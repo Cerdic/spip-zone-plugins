@@ -12,6 +12,22 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
+ * Insertion dans le pipelines taches_generales_cron (SPIP)
+ * 
+ * On ajoute une tache cron toutes les 4 minutes afin de créer les premières révisions des 
+ * tradlang pour éviter de perdre du temps par la suite.
+ * 
+ * @param array $taches_generales
+ * 		Le tableau des taches à réaliser
+ * @return array $taches_generales
+ * 		Le tableau des taches complété
+ */
+function tradlang_taches_generales_cron($taches_generales) {
+	$taches_generales['tradlang_verifier_versions'] = 240;
+	
+	return $taches_generales;
+}
+/**
  * Insertion dans le pipeline pre_edition (SPIP)
  * 
  * Ajouter les langues_preferees soumises lors de la soumission du formulaire CVT editer_auteur

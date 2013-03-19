@@ -1,0 +1,6 @@
+#BOITE_OUVRIR
+<BOUCLE_data_sans_version(DATA){source sql,SELECT a.id_tradlang FROM spip_tradlangs AS a LEFT JOIN spip_versions AS b ON (b.id_objet = a.id_tradlang AND b.objet='tradlang') WHERE b.id_objet IS NULL}> </BOUCLE_data_sans_version>
+#SET{total,#GRAND_TOTAL}
+<:tradlang:info_tradlangs_sans_version{nb=#GET{total}}:>
+</B_data_sans_version>
+#BOITE_FERMER

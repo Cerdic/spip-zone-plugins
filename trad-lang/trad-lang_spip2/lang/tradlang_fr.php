@@ -121,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_revisions_stats' => 'Révisions',
 	'info_status_ok' => 'OK',
 	'info_str' => 'Texte de la chaine de langue',
+	'info_tradlangs_sans_version' => '@nb@ chaînes de langue n\'ont pas de première révision créée (ces premières révisions sont créées par CRON).',
 	'info_traduire_module_lang' => 'Traduire le module "@module@" en @langue_longue@ (@lang@)',
 	'infos_trad_module' => 'Informations sur les traductions',
 	'item_creer_langue_cible' => 'Créer une nouvelle langue cible',
@@ -132,7 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'items_modif' => 'Items modifiés :',
 	'items_new' => 'Nouveaux items :',
 	'items_total_nb' => 'Nombre total d\'items :',
-
+	
 	// L
 	'label_fichier_langue' => 'Fichier de langue à mettre en ligne',
 	'label_id_tradlang' => 'Identifiant de la chaîne',

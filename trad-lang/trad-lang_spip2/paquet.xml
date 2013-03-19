@@ -1,7 +1,7 @@
 <paquet
 	prefix="tradlang"
 	categorie="outil"
-	version="2.1.0"
+	version="2.1.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/spip_lang.png"
@@ -24,7 +24,8 @@
 	<pipeline nom="formulaire_charger" inclure="tradlang_pipelines.php" />
 	<pipeline nom="autoriser" inclure="tradlang_autoriser.php" />
 	<pipeline nom="forum_objets_depuis_env" inclure="tradlang_autoriser.php" />
-
+	<pipeline nom="taches_generales_cron" inclure="tradlang_pipelines.php" />
+	
 	<necessite nom="revisions" compatibilite="[1.4.1;[" />
 	<necessite nom="saisies" compatibilite="[1.9.1;[" />
 	<necessite nom="crayons" compatibilite="[1.13.3;[" />
