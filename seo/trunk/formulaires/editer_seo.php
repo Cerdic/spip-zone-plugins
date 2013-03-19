@@ -32,10 +32,13 @@ function formulaires_editer_seo_verifier($objet, $id_objet, $retour=''){
 
 function formulaires_editer_seo_traiter($objet, $id_objet, $retour=''){
 	$editer_seo = charger_fonction('editer_seo','action');
-	$editer_seo();
-	
-	return;
-	//return formulaires_editer_objet_traiter('seo',$id_objet,$objet,$lier_trad,$retour,$config_fonc,$row,$hidden);
+
+	$err = $editer_seo($objet, $id_objet);
+
+	if (!$err)
+		return array('message_ok'=>_L('Meta tags mis a jour'));
+	else
+		return array('message_erreur'=>_L('Vous n\'avez pas le droit de modifier ces meta-tags : '.$err));
 }
 
 ?>

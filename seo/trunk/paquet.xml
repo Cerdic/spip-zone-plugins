@@ -26,7 +26,10 @@
 	<pipeline nom="autoriser" inclure="seo_pipelines.php" />
 
 	<pipeline nom="affiche_milieu" action="affiche_milieu" inclure="seo_pipelines_ecrire.php" />
-	<pipeline nom="ajouter_onglets" action="ajouter_onglets" inclure="seo_pipelines_ecrire.php" />
+	<pipeline nom="afficher_contenu_objet" action="afficher_contenu_objet" inclure="seo_pipelines_ecrire.php" />
+	<pipeline nom="formulaire_fond" action="formulaire_fond" inclure="seo_pipelines_ecrire.php" />
+	<pipeline nom="formulaire_charger" action="formulaire_charger" inclure="seo_pipelines_ecrire.php" />
+	<pipeline nom="formulaire_traiter" action="formulaire_traiter" inclure="seo_pipelines_ecrire.php" />
 
-	<menu nom="seo" titre="seo:seo" parent="menu_configuration" icone="images/seo-16.png" action="configurer_seo" />
+	<menu nom="seo" titre="seo:seo" parent="menu_squelette" icone="images/seo-16.png" action="configurer_seo" />
 </paquet>

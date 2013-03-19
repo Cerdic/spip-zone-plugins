@@ -1,0 +1,37 @@
+<fieldset class="meta-tags">
+	<legend>[(#CHEMIN{img_pack/meta_tags-24.png}|balise_img)] <:seo:meta_tags:></legend>
+	<input type="hidden" name="seo_metas" value="1" />
+	<ul>
+		 #SET{name,meta_title}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<label for="#GET{name}"><:seo:meta_title:></label>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+		</li>
+		 #SET{name,meta_description}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<label for="#GET{name}"><:seo:meta_description:></label>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]<textarea name="#GET{name}" class="textarea">
+#ENV*{#GET{name},#GET{defaut}}</textarea>
+		</li>
+		 #SET{name,meta_keywords}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<label for="#GET{name}"><:seo:meta_keywords:></label>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+		</li>
+		 #SET{name,meta_copyright}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<label for="#GET{name}"><:seo:meta_copyright:></label>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+		</li>
+		 #SET{name,meta_author}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<label for="#GET{name}"><:seo:meta_author:></label>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+		</li>
+	</ul>
+</fieldset>

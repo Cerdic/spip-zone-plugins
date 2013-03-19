@@ -12,64 +12,90 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Afficher le formulaire de config des meta dans l'admin
- * @param array $vars
+ * Afficher les meta-tags en bas du contenu de l'objet
+ * @param array $flux
  * @return array
  */
-function seo_affiche_milieu($vars){
-	include_spip('inc/autoriser');
-	include_spip('inc/presentation');
-	$config = unserialize($GLOBALS['meta']['seo']);
-
-	// Rubrique
-	if (in_array($vars["args"]["exec"], array('naviguer', 'rubrique')) && $vars["args"]["id_rubrique"]!=''){
-		$objet = 'rubrique';
-		$id_objet = $vars["args"]["id_rubrique"];
-		// Article
-	} elseif (in_array($vars["args"]["exec"], array('articles', 'article')) && $vars["args"]["id_article"]!='') {
-		$objet = 'article';
-		$id_objet = $vars["args"]["id_article"];
-		// Other case we quit
-	} else {
-		return $vars;
-	}
-
-	// If meta tags are activates
-	if ($config['meta_tags']['activate']!='yes' || $config['meta_tags']['activate_editing']!='yes'){
-		return $vars;
-	}
-
-	$ret = '';
-
-	$bouton = bouton_block_depliable(_T('seo:meta_tags'), false, "SEO");
-	$ret .= debut_block_depliable(false, "SEO");
-
-	// List		
-	$ret .= recuperer_fond('prive/squelettes/inclure/seo_metas', array('objet' => $objet, 'id_objet' => $id_objet));
-
-	$ret .= fin_block();
-
-	// Create the border with the content
-	$ret = '<div class="nettoyeur"></div>' . debut_cadre_enfonce(_DIR_PLUGIN_SEO . 'img_pack/meta_tags-24.png', true, "", $bouton) . $ret . fin_cadre_enfonce(true);
-
-	$vars["data"] .= $ret;
-
-	return $vars;
+function seo_afficher_contenu_objet($flux){
+	$flux['data'] .= recuperer_fond('prive/objets/seo-metas',array('objet'=>$flux['args']['type'],'id_objet'=>$flux['args']['id_objet']));
+	return $flux;
 }
 
+/**
+ * Charger les valeurs des meta-tags pour la saisie dans l'objet
+ * @param array $flux
+ * @return array
+ */
+function seo_formulaire_charger($flux){
+	if (strncmp($flux['args']['form'],"editer_",7)==0
+		AND $objet = substr($flux['args']['form'],7)){
+		$valeurs = array(
+			'meta_title'=>'',
+			'meta_description'=>'',
+			'meta_keywords'=>'',
+			'meta_copyright'=>'',
+			'meta_author'=>'',
+		);
+		if ($id_objet=intval($flux['args']['args'][0])){
+			$metas = sql_select("*", "spip_seo", "id_objet =".intval($id_objet)." AND objet =".sql_quote($objet));
+			while($meta = sql_fetch($metas)){
+				$valeurs["meta_".$meta['meta_name']] = $meta['meta_content'];
+			}
+		}
+		$flux['data'] = array_merge($flux['data'],$valeurs);
+	}
+	return $flux;
+}
 
-function seo_ajouter_onglets($flux){
+/**
+ * Enregistrer les valeurs des meta-tags apres la saisie dans l'objet
+ * @param array $flux
+ * @return array
+ */
+function seo_formulaire_traiter($flux){
+	if (strncmp($flux['args']['form'],"editer_",7)==0
+		AND $objet = substr($flux['args']['form'],7)
+		AND _request('seo_metas')
+	  AND $id_table_objet=id_table_objet($objet)
+	  AND isset($flux['data'][$id_table_objet])
+	  AND $id_objet=$flux['data'][$id_table_objet]){
 
-	global $connect_statut, $connect_toutes_rubriques;
+		$editer_seo = charger_fonction('editer_seo','action');
+			$err = $editer_seo($objet, $id_objet, "meta_");
 
-	// seul les administrateurs globaux ont acces au bouton de configuration
-	if ($connect_statut && $connect_toutes_rubriques){
-		if ($flux['args']=='configuration'){
-			$flux['data']['seo'] = new Bouton(_DIR_PLUGIN_SEO . "img_pack/seo-24.png", _T("seo:seo"), generer_url_ecrire('seo_config'));
+		if ($err){
+			if (!isset($flux['data']['message_erreur']))
+				$flux['data']['message_erreur'] = "";
+			$flux['data']['message_erreur'] .= " " ._L('Vous n\'avez pas le droit de modifier les meta-tags : '.$err);
+			if (isset($flux['data']['redirect']))
+				unset($flux['data']['redirect']);
 		}
 	}
 
-	return ($flux);
+	return $flux;
 }
+
+
+/**
+ * Ajouter la saisie des meta-tags dans le form de saisie de l'objet
+ * @param array $flux
+ * @return array
+ */
+function seo_formulaire_fond($flux){
+
+	if (isset($flux['args']['args']['type'])
+		AND $objet = $flux['args']['args']['type']
+		AND $flux['args']['form']=="editer_$objet"){
+
+		$ins = recuperer_fond("formulaires/inc-editer-seo",$flux['args']['contexte']);
+		if ($p=strpos($flux['data'],$i='<!--extra-->')
+		 OR $p=strrpos($flux['data'],$i="</ul>")){
+			$p = $p + strlen($i);
+			$flux['data'] = substr_replace($flux['data'],$ins,$p,0);
+		}
+	}
+	return $flux;
+}
+
 
 ?>

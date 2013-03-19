@@ -1,0 +1,10 @@
+<B_metas>
+[(#BOITE_OUVRIR{[(#CHEMIN{img_pack/meta_tags-24.png}|balise_img{'',cadre-icone})]Metas-tags,simple seo-metas})]
+<BOUCLE_metas(SEO){objet}{id_objet}{meta_name IN title,description,keywords,copyright,author}>
+<div class="champ contenu_meta_#META_NAME[ (#META_CONTENT|strlen|?{'',vide})]">
+<div class='label'>[(#VAL{seo:meta_}|concat{#META_NAME}|_T)]</div>
+<div class='valeur #META_NAME'>#META_CONTENT</div>
+</div>
+</BOUCLE_metas>
+#BOITE_FERMER
+</B_metas>
