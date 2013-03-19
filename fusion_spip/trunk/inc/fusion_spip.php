@@ -396,6 +396,11 @@ function fusion_spip_maj_perma_urls($connect) {
 	}
 }
 
+/**
+ * Mettre à jour les liens entre les documents et leurs vignettes
+ * 
+ * @param string $connect base source
+ */
 function fusion_spip_vignettes_documents($connect) {
 	$time_start = microtime(true);
 
